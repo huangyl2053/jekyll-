@@ -4,6 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dba.business;
 
+import jp.co.ndensan.reams.db.dba.definition.HihokenshaKubun;
+import jp.co.ndensan.reams.db.dba.definition.ShikakuIdoKubun;
 import jp.co.ndensan.reams.ur.urf.business.HokenShubetsu;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoShikaku;
 import jp.co.ndensan.reams.ur.urf.business._KaigoShikaku;
@@ -11,6 +13,7 @@ import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -27,18 +30,25 @@ import static org.mockito.Mockito.*;
 @RunWith(Enclosed.class)
 public class HihokenshaTest {
 
+    private static ShikakuIdoKubun 資格異動区分 = ShikakuIdoKubun.資格取得;
+    private static HihokenshaKubun 被保険者区分 = HihokenshaKubun.第1号被保険者;
+
     public HihokenshaTest() {
     }
 
-    public static class IKigoShikaku関係のテスト {
+    public static IKaigoShikaku create介護保険資格() {
+        return mock(_KaigoShikaku.class);
+    }
+
+    public static class コンストラクタ引数_IKigoShikaku関係のテスト {
 
         private Hihokensha sut;
         private IKaigoShikaku shikaku;
 
         @Before
         public void setUp() {
-            shikaku = mock(_KaigoShikaku.class);
-            sut = new Hihokensha(shikaku);
+            shikaku = create介護保険資格();
+            sut = new Hihokensha(shikaku, 資格異動区分, 被保険者区分);
         }
 
         @Test
@@ -123,6 +133,50 @@ public class HihokenshaTest {
             Boolean is資格あり = true;
             when(shikaku.is資格あり(testDate)).thenReturn(is資格あり);
             assertThat(sut.is資格あり(testDate), is(is資格あり));
+        }
+    }
+
+    public static class コンストラクタのテスト {
+
+        private IKaigoShikaku 介護保険資格 = create介護保険資格();
+
+        @Test(expected = NullPointerException.class)
+        public void コンストラクタのIKaigoShikakuにnullを指定した時_NullPointerExceptionを返す() {
+            Hihokensha sut = new Hihokensha(null, 資格異動区分, 被保険者区分);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void コンストラクタのShikakuIdoKubunにnullを指定した時_NullPointerExceptionを返す() {
+            Hihokensha sut = new Hihokensha(介護保険資格, null, 被保険者区分);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void コンストラクタのHihokenshaKubunにnullを指定した時_NullPointerExceptionを返す() {
+            Hihokensha sut = new Hihokensha(介護保険資格, 資格異動区分, null);
+        }
+    }
+
+    public static class その他のコンストラクタ引数に関するテスト {
+
+        private Hihokensha sut;
+        private IKaigoShikaku shikaku;
+        private ShikakuIdoKubun 資格異動区分 = ShikakuIdoKubun.資格取得;
+        private HihokenshaKubun 被保険者区分 = HihokenshaKubun.第1号被保険者;
+
+        @Before
+        public void setUp() {
+            shikaku = create介護保険資格();
+            sut = new Hihokensha(shikaku, 資格異動区分, 被保険者区分);
+        }
+
+        @Test
+        public void get資格異動区分は_コンストラクタ引数の_資格異動区分を返す() {
+            assertThat(sut.get資格異動区分(), is(資格異動区分));
+        }
+
+        @Test
+        public void get被保険者区分は_コンストラクタ引数の_被保険者区分を返す() {
+            assertThat(sut.get被保険者区分(), is(被保険者区分));
         }
     }
 }
