@@ -9,12 +9,12 @@ import jp.co.ndensan.reams.db.dba.definition.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dba.definition.ShikakuIdoKubun;
 import jp.co.ndensan.reams.ur.urf.business.HokenShubetsu;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoShikaku;
-import jp.co.ndensan.reams.ur.urz.business.IJusho;
 import jp.co.ndensan.reams.ur.urz.business.ILocalGovernmentCode;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 介護保険の被保険者を扱うクラスです。
@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class Hihokensha implements IKaigoShikaku {
 
     private final IKaigoShikaku 介護保険資格;
+    private final ILocalGovernmentCode 地方公共団体コード;
     private final ShikakuIdoKubun 資格異動区分;
     private final HihokenshaKubun 被保険者区分;
     private final ShikakuHenkoJiyu 資格変更事由;
@@ -41,7 +42,7 @@ public class Hihokensha implements IKaigoShikaku {
     private final boolean 再交付有無;
     private final SaikofuJiyu 再交付事由;
 
-    public Hihokensha(IKaigoShikaku 介護保険資格, ShikakuIdoKubun 資格異動区分, HihokenshaKubun 被保険者区分,
+    public Hihokensha(IKaigoShikaku 介護保険資格, ILocalGovernmentCode 地方公共団体コード, ShikakuIdoKubun 資格異動区分, HihokenshaKubun 被保険者区分,
             ShikakuHenkoJiyu 資格変更事由, RDate 資格変更届出年月日, RDate 資格変更年月日,
             JushochitokureiTekiyoJiyu 住所地特例適用事由, RDate 住所地特例適用届出年月日, RDate 住所地特例適用年月日,
             ILocalGovernmentCode 住所地特例措置元_地方公共団体コード, JushochitokureiKaijoJiyu 住所地特例解除事由, RDate 住所地特例解除届出年月日, RDate 住所地特例解除年月日,
@@ -50,6 +51,7 @@ public class Hihokensha implements IKaigoShikaku {
         String className = "被保険者";
 
         this.介護保険資格 = Objects.requireNonNull(介護保険資格, Messages.E00003.replace("共通の介護保険資格情報", className).getMessage());
+        this.地方公共団体コード = Objects.requireNonNull(地方公共団体コード, Messages.E00003.replace("地方公共団体コード", className).getMessage());
         this.資格異動区分 = Objects.requireNonNull(資格異動区分, Messages.E00003.replace("資格異動区分", className).getMessage());
         this.被保険者区分 = Objects.requireNonNull(被保険者区分, Messages.E00003.replace("被保険者区分", className).getMessage());
         this.資格変更事由 = 資格変更事由;
@@ -62,16 +64,41 @@ public class Hihokensha implements IKaigoShikaku {
         this.住所地特例解除事由 = 住所地特例解除事由;
         this.住所地特例解除届出年月日 = 住所地特例解除届出年月日;
         this.住所地特例解除年月日 = 住所地特例解除年月日;
-
         this.住所地特例有無 = 住所地特例有無;
         this.広域内_住所地特例有無 = 広域内_住所地特例有無;
         this.再交付有無 = 再交付有無;
         this.再交付事由 = 再交付事由;
     }
 
-//    public RString get市町村コード(){
-//        return null;
-//    }
+    /**
+     * 市町村コードを返します。 </br>
+     * ここでいう市町村コードとは、地方公共団体コード中の、都道府県コード(2桁)+市区町村コード(3桁)を、順に結合したものです。
+     *
+     * @return 市町村コード
+     */
+    public RString get市町村コード() {
+        //TODO N3327 三浦凌 5桁のコードを取得するメソッドがILocalGovernmentCodeに作成されたら、そのメソッドに委譲する。　期限:未定
+        return make市町村コード(地方公共団体コード.get都道府県コード(), 地方公共団体コード.get市区町村コード());
+    }
+
+    /**
+     * 住所地特例措置元の市町村コードを返します。 </br>
+     * ここでいう市町村コードとは、地方公共団体コード中の、都道府県コード(2桁)+市区町村コード(3桁)を、順に結合したものです。
+     *
+     * @return 市町村コード
+     */
+    public RString get住所地特例措置元_市町村コード() {
+        //TODO N3327 三浦凌 5桁のコードを取得するメソッドがILocalGovernmentCodeに作成されたら、そのメソッドに委譲する。　期限:未定
+        return make市町村コード(住所地特例措置元_地方公共団体コード.get都道府県コード(), 住所地特例措置元_地方公共団体コード.get市区町村コード());
+    }
+
+    private RString make市町村コード(final RString 都道府県コード, final RString 市区町村コード) {
+        RStringBuilder 市町村コード = new RStringBuilder();
+        市町村コード.append(都道府県コード);
+        市町村コード.append(市区町村コード);
+        return 市町村コード.toRString();
+    }
+
     /**
      * 再交付事由を取得します。
      *
