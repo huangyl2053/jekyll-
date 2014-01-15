@@ -6,18 +6,15 @@ package jp.co.ndensan.reams.db.dba.business;
 
 import jp.co.ndensan.reams.db.dba.definition.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dba.definition.ShikakuIdoKubun;
+import jp.co.ndensan.reams.db.dbz.business.ShichosonCode;
 import jp.co.ndensan.reams.ur.urf.business.HokenShubetsu;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoShikaku;
 import jp.co.ndensan.reams.ur.urf.business._KaigoShikaku;
-import jp.co.ndensan.reams.ur.urz.business.ILocalGovernmentCode;
-import jp.co.ndensan.reams.ur.urz.business._LocalGovernmentCode;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
-
-import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.is;
@@ -34,19 +31,20 @@ import static org.mockito.Mockito.*;
 public class HihokenshaTest extends TestBase {
 
     private static IKaigoShikaku 介護保険資格 = create介護保険資格();
-    private static ILocalGovernmentCode 地方公共団体コード = create地方公共団体コード();
+    private static ShichosonCode 市町村コード = new ShichosonCode(new RString("11111"));
     private static ShikakuHenkoJiyu 資格変更事由 = create資格変更事由();
     private static RDate 資格変更届出年月日 = new RDate("20120112");
     private static RDate 資格変更年月日 = new RDate("20120113");
     private static JushochitokureiTekiyoJiyu 住所地特例適用事由 = create住所地特例適用事由();
     private static RDate 住所地特例適用届出年月日 = new RDate("20121212");
     private static RDate 住所地特例適用年月日 = new RDate("20121213");
-    private static ILocalGovernmentCode 住所地特例措置元_地方公共団体コード = create地方公共団体コード();
+    private static ShichosonCode 住所地特例措置元_市町村コード = new ShichosonCode(new RString("11111"));
     private static JushochitokureiKaijoJiyu 住所地特例解除事由 = create住所地特例解除事由();
     private static RDate 住所地特例解除届出年月日 = new RDate("20130112");
     private static RDate 住所地特例解除年月日 = new RDate("20130113");
     private static boolean 住所地特例有無 = false;
     private static boolean 広域内_住所地特例有無 = false;
+    private static ShichosonCode 広域内住所地特例措置元_市町村コード = new ShichosonCode(new RString("11111"));
     private static boolean 再交付有無 = false;
     private static SaikofuJiyu 再交付事由 = create再交付事由();
     private static ShikakuIdoKubun 資格異動区分 = ShikakuIdoKubun.資格取得;
@@ -55,11 +53,49 @@ public class HihokenshaTest extends TestBase {
     public HihokenshaTest() {
     }
 
+    public static class コンストラクタのテスト extends TestBase {
+
+        @Test(expected = NullPointerException.class)
+        public void コンストラクタ引数の介護保険資格にnullを指定した時_NullPointerExceptionを返す() {
+            Hihokensha sut = new Hihokensha(null, 市町村コード, 資格異動区分, 被保険者区分,
+                    null, null, null,
+                    null, null, null,
+                    null, null, null, null,
+                    false, false, null, false, null);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void コンストラクタ引数の市町村コードにnullを指定した時_NullPointerExceptionを返す() {
+            Hihokensha sut = new Hihokensha(介護保険資格, null, 資格異動区分, 被保険者区分,
+                    null, null, null,
+                    null, null, null,
+                    null, null, null, null,
+                    false, false, null, false, null);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void コンストラクタ引数の資格異動区分にnullを指定した時_NullPointerExceptionを返す() {
+            Hihokensha sut = new Hihokensha(介護保険資格, 市町村コード, null, 被保険者区分,
+                    null, null, null,
+                    null, null, null,
+                    null, null, null, null,
+                    false, false, null, false, null);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void コンストラクタ引数の被保険者区分にnullを指定した時_NullPointerExceptionを返す() {
+            Hihokensha sut = new Hihokensha(介護保険資格, 市町村コード, 資格異動区分, null,
+                    null, null, null,
+                    null, null, null,
+                    null, null, null, null,
+                    false, false, null, false, null);
+        }
+    }
+
     public static class コンストラクタ引数_介護保険資格_関係のテスト extends TestBase {
 
         private Hihokensha sut;
 
-        @Before
         @Override
         public void setUp() {
             sut = create被保険者();
@@ -150,53 +186,10 @@ public class HihokenshaTest extends TestBase {
         }
     }
 
-    public static class コンストラクタのテスト extends TestBase {
-
-        private IKaigoShikaku 介護保険資格 = create介護保険資格();
-        private ILocalGovernmentCode 地方公共団体コード = create地方公共団体コード();
-
-        @Test(expected = NullPointerException.class)
-        public void コンストラクタ引数の介護保険資格にnullを指定した時_NullPointerExceptionを返す() {
-            Hihokensha sut = new Hihokensha(null, 地方公共団体コード, 資格異動区分, 被保険者区分,
-                    null, null, null,
-                    null, null, null,
-                    null, null, null, null,
-                    false, false, false, null);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void コンストラクタ引数の地方公共団体コードにnullを指定した時_NullPointerExceptionを返す() {
-            Hihokensha sut = new Hihokensha(介護保険資格, null, 資格異動区分, 被保険者区分,
-                    null, null, null,
-                    null, null, null,
-                    null, null, null, null,
-                    false, false, false, null);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void コンストラクタ引数の資格異動区分にnullを指定した時_NullPointerExceptionを返す() {
-            Hihokensha sut = new Hihokensha(介護保険資格, 地方公共団体コード, null, 被保険者区分,
-                    null, null, null,
-                    null, null, null,
-                    null, null, null, null,
-                    false, false, false, null);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void コンストラクタ引数の被保険者区分にnullを指定した時_NullPointerExceptionを返す() {
-            Hihokensha sut = new Hihokensha(介護保険資格, 地方公共団体コード, 資格異動区分, null,
-                    null, null, null,
-                    null, null, null,
-                    null, null, null, null,
-                    false, false, false, null);
-        }
-    }
-
     public static class その他のコンストラクタ引数に関するテスト extends TestBase {
 
         private Hihokensha sut;
 
-        @Before
         @Override
         public void setUp() {
             sut = create被保険者();
@@ -238,6 +231,11 @@ public class HihokenshaTest extends TestBase {
         }
 
         @Test
+        public void get住所地特例適用年月日は_コンストラクタ引数の_住所地特例適用年月日を返す() {
+            assertThat(sut.get住所地特例適用年月日(), is(住所地特例適用年月日));
+        }
+
+        @Test
         public void get住所地特例解除事由は_コンストラクタ引数の_住所地特例解除事由を返す() {
             assertThat(sut.get住所地特例解除事由(), is(住所地特例解除事由));
         }
@@ -271,51 +269,33 @@ public class HihokenshaTest extends TestBase {
         public void get再交付事由は_コンストラクタ引数の_再交付事由を返す() {
             assertThat(sut.get再交付事由(), is(再交付事由));
         }
-    }
 
-    public static class 市町村コード_関係のテスト extends TestBase {
-
-        private Hihokensha sut;
-
-        @Before
-        @Override
-        public void setUp() {
-            sut = create被保険者();
+        @Test
+        public void get市町村コードは_コンストラクタ引数の_市町村コードを返す() {
+            assertThat(sut.get市町村コード(), is(市町村コード));
         }
 
         @Test
-        public void get市町村コードは_地方公共団体コードの_都道府県コードと市区町村コードの値を結合したものと同値を返す() {
-            String 都道府県コード = "01";
-            String 市区町村コード = "012";
-            when(地方公共団体コード.get都道府県コード()).thenReturn(new RString(都道府県コード));
-            when(地方公共団体コード.get市区町村コード()).thenReturn(new RString(市区町村コード));
-            assertThat(sut.get市町村コード(), is(new RString(都道府県コード + 市区町村コード)));
+        public void get住所地特例措置元_市町村コードは_コンストラクタ引数の_住所地特例措置元_市町村コードを返す() {
+            assertThat(sut.get住所地特例措置元_市町村コード(), is(住所地特例措置元_市町村コード));
         }
 
         @Test
-        public void get住所地特例措置元_市町村コードは_住所地特例措置元_地方公共団体コードの_都道府県コードと市区町村コードの値を結合したものと同値を返す() {
-            String 都道府県コード = "22";
-            String 市区町村コード = "222";
-            when(住所地特例措置元_地方公共団体コード.get都道府県コード()).thenReturn(new RString(都道府県コード));
-            when(住所地特例措置元_地方公共団体コード.get市区町村コード()).thenReturn(new RString(市区町村コード));
-            assertThat(sut.get住所地特例措置元_市町村コード(), is(new RString(都道府県コード + 市区町村コード)));
+        public void get広域内住所地特例措置元_市町村コードは_コンストラクタ引数の_広域内住所地特例措置元_市町村コードを返す() {
+            assertThat(sut.get広域内住所地特例措置元_市町村コード(), is(広域内住所地特例措置元_市町村コード));
         }
     }
 
     private static Hihokensha create被保険者() {
-        return new Hihokensha(介護保険資格, 地方公共団体コード, 資格異動区分, 被保険者区分,
+        return new Hihokensha(介護保険資格, 市町村コード, 資格異動区分, 被保険者区分,
                 資格変更事由, 資格変更届出年月日, 資格変更年月日,
                 住所地特例適用事由, 住所地特例適用届出年月日, 住所地特例適用年月日,
-                住所地特例措置元_地方公共団体コード, 住所地特例解除事由, 住所地特例解除届出年月日, 住所地特例解除年月日,
-                住所地特例有無, 広域内_住所地特例有無, 再交付有無, 再交付事由);
+                住所地特例措置元_市町村コード, 住所地特例解除事由, 住所地特例解除届出年月日, 住所地特例解除年月日,
+                住所地特例有無, 広域内_住所地特例有無, 広域内住所地特例措置元_市町村コード, 再交付有無, 再交付事由);
     }
 
     private static IKaigoShikaku create介護保険資格() {
         return mock(_KaigoShikaku.class);
-    }
-
-    private static ILocalGovernmentCode create地方公共団体コード() {
-        return mock(_LocalGovernmentCode.class);
     }
 
     private static ShikakuHenkoJiyu create資格変更事由() {
