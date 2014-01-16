@@ -19,10 +19,16 @@ public class ShikakuShutokuJiyu implements IShikakuShutokuJiyu {
     private final RString code;
     private final RString name;
 
+    /**
+     * コンストラクタ
+     *
+     * @param code コード
+     * @param name 名称
+     */
     public ShikakuShutokuJiyu(RString code, RString name) {
-        String className = "資格取得事由";
-        this.code = Objects.requireNonNull(code, Messages.E00003.replace("コード", className).getMessage());
-        this.name = Objects.requireNonNull(name, Messages.E00003.replace("名称", className).getMessage());
+        RString className = new RString("資格取得事由");
+        this.code = Objects.requireNonNull(code, Messages.E00003.replace("コード", className.toString()).getMessage());
+        this.name = Objects.requireNonNull(name, Messages.E00003.replace("名称", className.toString()).getMessage());
     }
 
     @Override

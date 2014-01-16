@@ -4,11 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dba.business;
 
+import jp.co.ndensan.reams.db.dba.business.helper.HihokenshaKubunMock;
 import jp.co.ndensan.reams.db.dba.business.helper.JushochitokureiKaijoJiyuMock;
 import jp.co.ndensan.reams.db.dba.business.helper.JushochitokureiTekiyoJiyuMock;
 import jp.co.ndensan.reams.db.dba.business.helper.SaikofuJiyuMock;
 import jp.co.ndensan.reams.db.dba.business.helper.ShikakuHenkoJiyuMock;
-import jp.co.ndensan.reams.db.dba.definition.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dba.definition.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dbz.business.ShichosonCode;
 import jp.co.ndensan.reams.ur.urf.business.HokenShubetsu;
@@ -42,7 +42,6 @@ public class HihokenshaTest extends TestBase {
     private static JushochitokureiTekiyoJiyu 住所地特例適用事由 = JushochitokureiTekiyoJiyuMock.getSpiedInstance();
     private static RDate 住所地特例適用届出年月日 = new RDate("20121212");
     private static RDate 住所地特例適用年月日 = new RDate("20121213");
-    private static ShichosonCode 住所地特例措置元_市町村コード = new ShichosonCode(new RString("11111"));
     private static JushochitokureiKaijoJiyu 住所地特例解除事由 = JushochitokureiKaijoJiyuMock.getSpiedInstance();
     private static RDate 住所地特例解除届出年月日 = new RDate("20130112");
     private static RDate 住所地特例解除年月日 = new RDate("20130113");
@@ -52,7 +51,7 @@ public class HihokenshaTest extends TestBase {
     private static boolean 再交付有無 = false;
     private static SaikofuJiyu 再交付事由 = SaikofuJiyuMock.getSpiedInstance();
     private static ShikakuIdoKubun 資格異動区分 = ShikakuIdoKubun.資格取得;
-    private static HihokenshaKubun 被保険者区分 = HihokenshaKubun.第1号被保険者;
+    private static HihokenshaKubun 被保険者区分 = HihokenshaKubunMock.getSpiedInstance();
 
     public HihokenshaTest() {
     }
@@ -64,7 +63,7 @@ public class HihokenshaTest extends TestBase {
             Hihokensha sut = new Hihokensha(null, 市町村コード, 資格異動区分, 被保険者区分,
                     null, null, null,
                     null, null, null,
-                    null, null, null, null,
+                    null, null, null,
                     false, false, null, false, null);
         }
 
@@ -73,7 +72,7 @@ public class HihokenshaTest extends TestBase {
             Hihokensha sut = new Hihokensha(介護保険資格, null, 資格異動区分, 被保険者区分,
                     null, null, null,
                     null, null, null,
-                    null, null, null, null,
+                    null, null, null,
                     false, false, null, false, null);
         }
 
@@ -82,7 +81,7 @@ public class HihokenshaTest extends TestBase {
             Hihokensha sut = new Hihokensha(介護保険資格, 市町村コード, null, 被保険者区分,
                     null, null, null,
                     null, null, null,
-                    null, null, null, null,
+                    null, null, null,
                     false, false, null, false, null);
         }
 
@@ -91,7 +90,7 @@ public class HihokenshaTest extends TestBase {
             Hihokensha sut = new Hihokensha(介護保険資格, 市町村コード, 資格異動区分, null,
                     null, null, null,
                     null, null, null,
-                    null, null, null, null,
+                    null, null, null,
                     false, false, null, false, null);
         }
     }
@@ -280,11 +279,6 @@ public class HihokenshaTest extends TestBase {
         }
 
         @Test
-        public void get住所地特例措置元_市町村コードは_コンストラクタ引数の_住所地特例措置元_市町村コードを返す() {
-            assertThat(sut.get住所地特例措置元_市町村コード(), is(住所地特例措置元_市町村コード));
-        }
-
-        @Test
         public void get広域内住所地特例措置元_市町村コードは_コンストラクタ引数の_広域内住所地特例措置元_市町村コードを返す() {
             assertThat(sut.get広域内住所地特例措置元_市町村コード(), is(広域内住所地特例措置元_市町村コード));
         }
@@ -294,7 +288,7 @@ public class HihokenshaTest extends TestBase {
         return new Hihokensha(介護保険資格, 市町村コード, 資格異動区分, 被保険者区分,
                 資格変更事由, 資格変更届出年月日, 資格変更年月日,
                 住所地特例適用事由, 住所地特例適用届出年月日, 住所地特例適用年月日,
-                住所地特例措置元_市町村コード, 住所地特例解除事由, 住所地特例解除届出年月日, 住所地特例解除年月日,
+                住所地特例解除事由, 住所地特例解除届出年月日, 住所地特例解除年月日,
                 住所地特例有無, 広域内_住所地特例有無, 広域内住所地特例措置元_市町村コード, 再交付有無, 再交付事由);
     }
 

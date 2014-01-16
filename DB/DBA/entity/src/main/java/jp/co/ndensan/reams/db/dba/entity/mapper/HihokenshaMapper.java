@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dba.business.JushochitokureiKaijoJiyu;
 import jp.co.ndensan.reams.db.dba.business.JushochitokureiTekiyoJiyu;
 import jp.co.ndensan.reams.db.dba.business.SaikofuJiyu;
 import jp.co.ndensan.reams.db.dba.business.ShikakuHenkoJiyu;
-import jp.co.ndensan.reams.db.dba.definition.HihokenshaKubun;
+import jp.co.ndensan.reams.db.dba.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dba.definition.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dba.entity.T1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.business.ShichosonCode;
@@ -24,17 +24,23 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3327 三浦 凌
  */
-public class HihokenshaMapper {
+public final class HihokenshaMapper {
 
     private HihokenshaMapper() {
     }
 
+    /**
+     * T1001HihokenshaDaichoEntityをHihokensyaへ変換します。
+     *
+     * @param entity T1001HihokenshaDaichoEntity
+     * @return Hihokensya
+     */
     public static Hihokensha toHihokensha(final T1001HihokenshaDaichoEntity entity) {
         IKaigoShikaku 介護保険資格 = toKaigoShikaku(entity);
         ShichosonCode 市町村コード = new ShichosonCode(entity.getShichosonCd());
+        HihokenshaKubun 被保険者区分 = to被保険者区分(entity.getHihokennshaKubunCode());
         ShikakuHenkoJiyu 資格変更事由 = to資格変更事由(entity.getShikakuHenkoJiyuCode());
         JushochitokureiTekiyoJiyu 住所地特例適用事由 = to住所地特例適用事由(entity.getJushochiTokureiTekiyoJiyuCode());
-        ShichosonCode 住所地特例措置元_市町村コード = new ShichosonCode(entity.getJushochiTokureiSochiShichosonCd());
         JushochitokureiKaijoJiyu 住所地特例解除事由 = to住所地特例解除事由(entity.getJushochiTokureikaijoJiyuCode());
         ShichosonCode 広域内住所地特例措置元_市町村コード = new ShichosonCode(entity.getKoikinaiTokureiSochimotoShichosonCd());
         SaikofuJiyu 再交付事由 = to再交付事由(entity.getSaikofuJiyuCode());
@@ -47,7 +53,7 @@ public class HihokenshaMapper {
                 // 資格異動区分
                 ShikakuIdoKubun.toValue(entity.getShikakuIdouKubunCode()),
                 // 被保険者区分
-                HihokenshaKubun.toValue(entity.getHihokennshaKubunCode()),
+                被保険者区分,
                 // 資格変更事由
                 資格変更事由,
                 // 資格変更届出年月日
@@ -60,8 +66,6 @@ public class HihokenshaMapper {
                 entity.getTekiyoTodokedeDate(),
                 // 住所地特例適用年月日
                 entity.getTekiyoDate(),
-                // 住所地特例措置元_市町村コード
-                住所地特例措置元_市町村コード,
                 // 住所地特例解除事由
                 住所地特例解除事由,
                 // 住所地特例解除届出年月日
@@ -107,19 +111,23 @@ public class HihokenshaMapper {
         };
     }
 
+    private static HihokenshaKubun to被保険者区分(final RString code) {
+        return new HihokenshaKubun(code, new RString("仮"));
+    }
+
     private static ShikakuHenkoJiyu to資格変更事由(final RString code) {
-        return new ShikakuHenkoJiyu(code, new RString("仮名称"));
+        return new ShikakuHenkoJiyu(code, new RString("仮"));
     }
 
     private static JushochitokureiTekiyoJiyu to住所地特例適用事由(final RString code) {
-        return new JushochitokureiTekiyoJiyu(code, new RString("仮名称"));
+        return new JushochitokureiTekiyoJiyu(code, new RString("仮"));
     }
 
     private static JushochitokureiKaijoJiyu to住所地特例解除事由(final RString code) {
-        return new JushochitokureiKaijoJiyu(code, new RString("仮名称"));
+        return new JushochitokureiKaijoJiyu(code, new RString("仮"));
     }
 
     private static SaikofuJiyu to再交付事由(final RString code) {
-        return new SaikofuJiyu(code, new RString("仮名称"));
+        return new SaikofuJiyu(code, new RString("仮"));
     }
 }

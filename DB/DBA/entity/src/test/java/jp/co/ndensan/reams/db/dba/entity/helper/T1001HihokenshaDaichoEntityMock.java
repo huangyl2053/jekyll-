@@ -38,7 +38,6 @@ public class T1001HihokenshaDaichoEntityMock {
         entity.setJushochiTokureiTekiyoJiyuCode(RString.EMPTY);
         entity.setTekiyoTodokedeDate(RDate.MAX);
         entity.setTekiyoDate(RDate.MAX);
-        entity.setJushochiTokureiSochiShichosonCd(RString.EMPTY);
         entity.setJushochiTokureikaijoJiyuCode(RString.EMPTY);
         entity.setKaijoTodokedeDate(RDate.MAX);
         entity.setKaijoDate(RDate.MAX);
