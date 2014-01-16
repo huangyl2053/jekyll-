@@ -38,7 +38,7 @@ public final class HihokenshaMapper {
     public static Hihokensha toHihokensha(final T1001HihokenshaDaichoEntity entity) {
         IKaigoShikaku 介護保険資格 = toKaigoShikaku(entity);
         ShichosonCode 市町村コード = new ShichosonCode(entity.getShichosonCd());
-        HihokenshaKubun 被保険者区分 = to被保険者区分(entity.getHihokennshaKubunCode());
+        HihokenshaKubun 被保険者区分 = to被保険者区分(entity.getHihokenshaKubunCode());
         ShikakuHenkoJiyu 資格変更事由 = to資格変更事由(entity.getShikakuHenkoJiyuCode());
         JushochitokureiTekiyoJiyu 住所地特例適用事由 = to住所地特例適用事由(entity.getJushochiTokureiTekiyoJiyuCode());
         JushochitokureiKaijoJiyu 住所地特例解除事由 = to住所地特例解除事由(entity.getJushochiTokureikaijoJiyuCode());
