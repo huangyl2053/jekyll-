@@ -10,11 +10,11 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 被保険者証の再交付事由のクラスです。
+ * 被保険者区分のクラスです。
  *
  * @author N3327 三浦 凌
  */
-public class SaikofuJiyu implements ICodeAssignedItem {
+public class HihokenshaKubun implements ICodeAssignedItem {
 
     private final RString code;
     private final RString name;
@@ -25,8 +25,8 @@ public class SaikofuJiyu implements ICodeAssignedItem {
      * @param code コード
      * @param name 名称
      */
-    public SaikofuJiyu(RString code, RString name) {
-        RString className = new RString("再交付事由");
+    public HihokenshaKubun(RString code, RString name) {
+        RString className = new RString("被保険者区分");
         this.code = Objects.requireNonNull(code, Messages.E00003.replace("コード", className.toString()).getMessage());
         this.name = Objects.requireNonNull(name, Messages.E00003.replace("名称", className.toString()).getMessage());
     }

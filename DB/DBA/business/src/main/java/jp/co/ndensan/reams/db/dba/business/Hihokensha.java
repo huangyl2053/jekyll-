@@ -5,7 +5,6 @@
 package jp.co.ndensan.reams.db.dba.business;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dba.definition.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dba.definition.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dbz.business.ShichosonCode;
 import jp.co.ndensan.reams.ur.urf.business.HokenShubetsu;
@@ -32,7 +31,6 @@ public class Hihokensha implements IKaigoShikaku {
     private final JushochitokureiTekiyoJiyu 住所地特例適用事由;
     private final RDate 住所地特例適用届出年月日;
     private final RDate 住所地特例適用年月日;
-    private final ShichosonCode 住所地特例措置元_市町村コード;
     private final JushochitokureiKaijoJiyu 住所地特例解除事由;
     private final RDate 住所地特例解除届出年月日;
     private final RDate 住所地特例解除年月日;
@@ -42,25 +40,46 @@ public class Hihokensha implements IKaigoShikaku {
     private final boolean 再交付有無;
     private final SaikofuJiyu 再交付事由;
 
+    /**
+     * コンストラクタ
+     *
+     * @param 介護保険資格 介護保険資格(共通)
+     * @param 市町村コード 市町村コード
+     * @param 資格異動区分 資格異動区分
+     * @param 被保険者区分 被保険者区分
+     * @param 資格変更事由 資格変更事由
+     * @param 資格変更届出年月日 資格変更届出年月日
+     * @param 資格変更年月日 資格変更年月日
+     * @param 住所地特例適用事由 住所地特例適用事由
+     * @param 住所地特例適用届出年月日 住所地特例届出年月日
+     * @param 住所地特例適用年月日 住所地特例適用年月日
+     * @param 住所地特例解除事由 住所地特例解除事由
+     * @param 住所地特例解除届出年月日 住所地特例解除届出年月日
+     * @param 住所地特例解除年月日 住所地特例解除年月日
+     * @param 住所地特例有無 住所地特例かどうか
+     * @param 広域内_住所地特例有無 広域内の住所地特例かどうか
+     * @param 広域内住所地特例措置元_市町村コード 広域内住所地特例措置元の市町村コード
+     * @param 再交付有無 被保険者証が再交付かどうか
+     * @param 再交付事由 被保険者証の再交付事由
+     */
     public Hihokensha(IKaigoShikaku 介護保険資格, ShichosonCode 市町村コード, ShikakuIdoKubun 資格異動区分, HihokenshaKubun 被保険者区分,
             ShikakuHenkoJiyu 資格変更事由, RDate 資格変更届出年月日, RDate 資格変更年月日,
             JushochitokureiTekiyoJiyu 住所地特例適用事由, RDate 住所地特例適用届出年月日, RDate 住所地特例適用年月日,
-            ShichosonCode 住所地特例措置元_市町村コード, JushochitokureiKaijoJiyu 住所地特例解除事由, RDate 住所地特例解除届出年月日, RDate 住所地特例解除年月日,
+            JushochitokureiKaijoJiyu 住所地特例解除事由, RDate 住所地特例解除届出年月日, RDate 住所地特例解除年月日,
             boolean 住所地特例有無, boolean 広域内_住所地特例有無, ShichosonCode 広域内住所地特例措置元_市町村コード, boolean 再交付有無, SaikofuJiyu 再交付事由) {
 
-        String className = "被保険者";
+        RString className = new RString("被保険者");
 
-        this.介護保険資格 = Objects.requireNonNull(介護保険資格, Messages.E00003.replace("共通の介護保険資格情報", className).getMessage());
-        this.市町村コード = Objects.requireNonNull(市町村コード, Messages.E00003.replace("地方公共団体コード", className).getMessage());
-        this.資格異動区分 = Objects.requireNonNull(資格異動区分, Messages.E00003.replace("資格異動区分", className).getMessage());
-        this.被保険者区分 = Objects.requireNonNull(被保険者区分, Messages.E00003.replace("被保険者区分", className).getMessage());
+        this.介護保険資格 = Objects.requireNonNull(介護保険資格, Messages.E00003.replace("共通の介護保険資格情報", className.toString()).getMessage());
+        this.市町村コード = Objects.requireNonNull(市町村コード, Messages.E00003.replace("地方公共団体コード", className.toString()).getMessage());
+        this.資格異動区分 = Objects.requireNonNull(資格異動区分, Messages.E00003.replace("資格異動区分", className.toString()).getMessage());
+        this.被保険者区分 = Objects.requireNonNull(被保険者区分, Messages.E00003.replace("被保険者区分", className.toString()).getMessage());
         this.資格変更事由 = 資格変更事由;
         this.資格変更届出年月日 = 資格変更届出年月日;
         this.資格変更年月日 = 資格変更年月日;
         this.住所地特例適用事由 = 住所地特例適用事由;
         this.住所地特例適用届出年月日 = 住所地特例適用届出年月日;
         this.住所地特例適用年月日 = 住所地特例適用年月日;
-        this.住所地特例措置元_市町村コード = 住所地特例措置元_市町村コード;
         this.住所地特例解除事由 = 住所地特例解除事由;
         this.住所地特例解除届出年月日 = 住所地特例解除届出年月日;
         this.住所地特例解除年月日 = 住所地特例解除年月日;
@@ -81,16 +100,7 @@ public class Hihokensha implements IKaigoShikaku {
     }
 
     /**
-     * 住所地特例措置元の市町村コードを返します。
-     *
-     * @return 住所地特例措置元の市町村コード
-     */
-    public ShichosonCode get住所地特例措置元_市町村コード() {
-        return 住所地特例措置元_市町村コード;
-    }
-
-    /**
-     * 広域内住所地特例措置元の市町村コードを返します。</br>
+     * 広域内住所地特例措置元の市町村コードを返します。
      * ここでいう市町村コードとは、地方公共団体コード中の、都道府県コード(2桁)+市区町村コード(3桁)を、順に結合したものです。
      *
      * @return 市町村コード

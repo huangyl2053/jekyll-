@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 public class T1001HihokenshaDaichoEntity implements IDbAccessable {
 
     @TableName
-    public final static RString TABLE_BANE = new RString("T1001HihokennshaDaicho");
+    public static final RString TABLE_BANE = new RString("T1001HihokennshaDaicho");
     @PrimaryKey
     private RString shichosonCd;
     @PrimaryKey
@@ -40,7 +40,6 @@ public class T1001HihokenshaDaichoEntity implements IDbAccessable {
     private RString jushochiTokureiTekiyoJiyuCode;
     private RDate tekiyoTodokedeDate;
     private RDate tekiyoDate;
-    private RString jushochiTokureiSochiShichosonCd;
     private RString jushochiTokureikaijoJiyuCode;
     private RDate kaijoTodokedeDate;
     private RDate kaijoDate;
@@ -174,13 +173,6 @@ public class T1001HihokenshaDaichoEntity implements IDbAccessable {
      */
     public RDate getTekiyoDate() {
         return tekiyoDate;
-    }
-
-    /**
-     * @return 住所地特例措置市町村コード
-     */
-    public RString getJushochiTokureiSochiShichosonCd() {
-        return jushochiTokureiSochiShichosonCd;
     }
 
     /**
@@ -364,13 +356,6 @@ public class T1001HihokenshaDaichoEntity implements IDbAccessable {
      */
     public void setTekiyoDate(RDate tekiyoDate) {
         this.tekiyoDate = tekiyoDate;
-    }
-
-    /**
-     * @param jushochiTokureiSochiShichosonCd 住所地特例措置市町村コード
-     */
-    public void setJushochiTokureiSochiShichosonCd(RString jushochiTokureiSochiShichosonCd) {
-        this.jushochiTokureiSochiShichosonCd = jushochiTokureiSochiShichosonCd;
     }
 
     /**
