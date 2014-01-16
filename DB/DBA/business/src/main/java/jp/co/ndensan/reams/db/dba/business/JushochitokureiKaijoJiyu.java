@@ -19,7 +19,7 @@ public class JushochitokureiKaijoJiyu implements ICodeAssignedItem {
     private final RString code;
     private final RString name;
 
-    JushochitokureiKaijoJiyu(RString code, RString name) {
+    public JushochitokureiKaijoJiyu(RString code, RString name) {
         String className = "住所地特例解除事由";
         this.code = Objects.requireNonNull(code, Messages.E00003.replace("コード", className).getMessage());
         this.name = Objects.requireNonNull(name, Messages.E00003.replace("名称", className).getMessage());

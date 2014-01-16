@@ -207,14 +207,14 @@ public class T1001HihokenshaDaichoEntity implements IDbAccessable {
     /**
      * @return 住所地特例フラグ
      */
-    public boolean isJushochiTokureiFlag() {
+    public boolean isJushochiTokurei() {
         return jushochiTokureiFlag;
     }
 
     /**
      * @return 広域内住所地特例フラグ
      */
-    public boolean isKoikinaiJushochiTokureiFlag() {
+    public boolean isKoikinaiJushochiTokurei() {
         return koikinaiJushochiTokureiFlag;
     }
 
@@ -228,7 +228,7 @@ public class T1001HihokenshaDaichoEntity implements IDbAccessable {
     /**
      * @return 再交付区分
      */
-    public boolean isSaikofuKubun() {
+    public boolean hasSaikofu() {
         return saikofuKubun;
     }
 

@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  */
 public enum T1001HihokenshaDaicho implements IColumnDefinition {
 
+    ShichosonCd(5, 0),
     HihokenshaNo(10, 0),
-    ShikibetsuCode(5, 0),
+    ShikibetsuCode(15, 0),
     ShikakuIdouKubunCode(5, 0),
     ShikakuShutokuTodokedeDate(8, 0),
     ShikakuShutokuJiyuCode(3, 0),

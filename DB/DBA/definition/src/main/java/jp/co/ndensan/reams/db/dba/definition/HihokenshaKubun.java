@@ -4,6 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dba.definition;
 
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
 /**
  * 被保険者区分を表す列挙形です。
  *
@@ -22,5 +24,15 @@ public enum HihokenshaKubun {
     /**
      * その他
      */
-    その他
+    その他;
+
+    /**
+     * 名称から該当する被保険者区分を取得します。
+     *
+     * @param 名称
+     * @return 該当する被保険者区分
+     */
+    public static HihokenshaKubun toValue(RString 名称) {
+        return HihokenshaKubun.valueOf(名称.toString());
+    }
 }

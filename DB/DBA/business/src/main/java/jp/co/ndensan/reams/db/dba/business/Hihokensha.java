@@ -42,7 +42,7 @@ public class Hihokensha implements IKaigoShikaku {
     private final boolean 再交付有無;
     private final SaikofuJiyu 再交付事由;
 
-    public Hihokensha(IKaigoShikaku 介護保険資格, ShichosonCode 地方公共団体コード, ShikakuIdoKubun 資格異動区分, HihokenshaKubun 被保険者区分,
+    public Hihokensha(IKaigoShikaku 介護保険資格, ShichosonCode 市町村コード, ShikakuIdoKubun 資格異動区分, HihokenshaKubun 被保険者区分,
             ShikakuHenkoJiyu 資格変更事由, RDate 資格変更届出年月日, RDate 資格変更年月日,
             JushochitokureiTekiyoJiyu 住所地特例適用事由, RDate 住所地特例適用届出年月日, RDate 住所地特例適用年月日,
             ShichosonCode 住所地特例措置元_市町村コード, JushochitokureiKaijoJiyu 住所地特例解除事由, RDate 住所地特例解除届出年月日, RDate 住所地特例解除年月日,
@@ -51,7 +51,7 @@ public class Hihokensha implements IKaigoShikaku {
         String className = "被保険者";
 
         this.介護保険資格 = Objects.requireNonNull(介護保険資格, Messages.E00003.replace("共通の介護保険資格情報", className).getMessage());
-        this.市町村コード = Objects.requireNonNull(地方公共団体コード, Messages.E00003.replace("地方公共団体コード", className).getMessage());
+        this.市町村コード = Objects.requireNonNull(市町村コード, Messages.E00003.replace("地方公共団体コード", className).getMessage());
         this.資格異動区分 = Objects.requireNonNull(資格異動区分, Messages.E00003.replace("資格異動区分", className).getMessage());
         this.被保険者区分 = Objects.requireNonNull(被保険者区分, Messages.E00003.replace("被保険者区分", className).getMessage());
         this.資格変更事由 = 資格変更事由;
