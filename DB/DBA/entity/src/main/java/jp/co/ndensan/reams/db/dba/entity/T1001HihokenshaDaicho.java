@@ -47,7 +47,7 @@ public enum T1001HihokenshaDaicho implements IColumnDefinition {
     /**
      * 被保険者区分コード
      */
-    HihokennshaKubunCode(1, 0),
+    HihokenshaKubunCode(1, 0),
     /**
      * 資格喪失事由コード
      */

@@ -30,7 +30,7 @@ public class T1001HihokenshaDaichoEntity implements IDbAccessable {
     private RString shikakuShutokuJiyuCode;
     private RDate shikakuShutokuDate;
     private RDate ichigoHihokenshaNenreiTotatsuDate;
-    private RString hihokennshaKubunCode;
+    private RString hihokenshaKubunCode;
     private RString shikakuSoshitsuJiyuCode;
     private RDate shikakuSoshitsuTodokedeDate;
     private RDate shikakuSoshitsuDate;
@@ -108,8 +108,8 @@ public class T1001HihokenshaDaichoEntity implements IDbAccessable {
     /**
      * @return 被保険者区分コード
      */
-    public RString getHihokennshaKubunCode() {
-        return hihokennshaKubunCode;
+    public RString getHihokenshaKubunCode() {
+        return hihokenshaKubunCode;
     }
 
     /**
@@ -291,8 +291,8 @@ public class T1001HihokenshaDaichoEntity implements IDbAccessable {
     /**
      * @param hihokennshaKubunCode 被保険者区分コード
      */
-    public void setHihokennshaKubunCode(RString hihokennshaKubunCode) {
-        this.hihokennshaKubunCode = hihokennshaKubunCode;
+    public void setHihokenshaKubunCode(RString hihokennshaKubunCode) {
+        this.hihokenshaKubunCode = hihokennshaKubunCode;
     }
 
     /**
