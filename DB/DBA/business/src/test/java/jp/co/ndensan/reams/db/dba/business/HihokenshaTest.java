@@ -4,6 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dba.business;
 
+import jp.co.ndensan.reams.db.dba.business.helper.JushochitokureiKaijoJiyuMock;
+import jp.co.ndensan.reams.db.dba.business.helper.JushochitokureiTekiyoJiyuMock;
+import jp.co.ndensan.reams.db.dba.business.helper.SaikofuJiyuMock;
+import jp.co.ndensan.reams.db.dba.business.helper.ShikakuHenkoJiyuMock;
 import jp.co.ndensan.reams.db.dba.definition.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dba.definition.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dbz.business.ShichosonCode;
@@ -32,21 +36,21 @@ public class HihokenshaTest extends TestBase {
 
     private static IKaigoShikaku 介護保険資格 = create介護保険資格();
     private static ShichosonCode 市町村コード = new ShichosonCode(new RString("11111"));
-    private static ShikakuHenkoJiyu 資格変更事由 = create資格変更事由();
+    private static ShikakuHenkoJiyu 資格変更事由 = ShikakuHenkoJiyuMock.getSpiedInstance();
     private static RDate 資格変更届出年月日 = new RDate("20120112");
     private static RDate 資格変更年月日 = new RDate("20120113");
-    private static JushochitokureiTekiyoJiyu 住所地特例適用事由 = create住所地特例適用事由();
+    private static JushochitokureiTekiyoJiyu 住所地特例適用事由 = JushochitokureiTekiyoJiyuMock.getSpiedInstance();
     private static RDate 住所地特例適用届出年月日 = new RDate("20121212");
     private static RDate 住所地特例適用年月日 = new RDate("20121213");
     private static ShichosonCode 住所地特例措置元_市町村コード = new ShichosonCode(new RString("11111"));
-    private static JushochitokureiKaijoJiyu 住所地特例解除事由 = create住所地特例解除事由();
+    private static JushochitokureiKaijoJiyu 住所地特例解除事由 = JushochitokureiKaijoJiyuMock.getSpiedInstance();
     private static RDate 住所地特例解除届出年月日 = new RDate("20130112");
     private static RDate 住所地特例解除年月日 = new RDate("20130113");
     private static boolean 住所地特例有無 = false;
     private static boolean 広域内_住所地特例有無 = false;
     private static ShichosonCode 広域内住所地特例措置元_市町村コード = new ShichosonCode(new RString("11111"));
     private static boolean 再交付有無 = false;
-    private static SaikofuJiyu 再交付事由 = create再交付事由();
+    private static SaikofuJiyu 再交付事由 = SaikofuJiyuMock.getSpiedInstance();
     private static ShikakuIdoKubun 資格異動区分 = ShikakuIdoKubun.資格取得;
     private static HihokenshaKubun 被保険者区分 = HihokenshaKubun.第1号被保険者;
 
@@ -296,21 +300,5 @@ public class HihokenshaTest extends TestBase {
 
     private static IKaigoShikaku create介護保険資格() {
         return mock(_KaigoShikaku.class);
-    }
-
-    private static ShikakuHenkoJiyu create資格変更事由() {
-        return mock(ShikakuHenkoJiyu.class);
-    }
-
-    private static JushochitokureiTekiyoJiyu create住所地特例適用事由() {
-        return mock(JushochitokureiTekiyoJiyu.class);
-    }
-
-    private static JushochitokureiKaijoJiyu create住所地特例解除事由() {
-        return mock(JushochitokureiKaijoJiyu.class);
-    }
-
-    private static SaikofuJiyu create再交付事由() {
-        return mock(SaikofuJiyu.class);
     }
 }
