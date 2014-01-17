@@ -4,6 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dba.entity;
 
+import jp.co.ndensan.reams.db.dba.business.Hihokensha;
+import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
@@ -24,7 +26,7 @@ public class T1001HihokenshaDaichoEntity implements IDbAccessable {
     @PrimaryKey
     private RString hihokenshaNo;
     /* その他 */
-    private RString shikibetsuCode;
+    private IShikibetsuCode shikibetsuCode;
     private RString shikakuIdouKubunCode;
     private RDate shikakuShutokuTodokedeDate;
     private RString shikakuShutokuJiyuCode;
@@ -49,6 +51,38 @@ public class T1001HihokenshaDaichoEntity implements IDbAccessable {
     private boolean saikofuKubun;
     private RString saikofuJiyuCode;
 
+    public T1001HihokenshaDaichoEntity() {
+    }
+
+    public T1001HihokenshaDaichoEntity(Hihokensha 被保険者) {
+        this.shichosonCd = 被保険者.get市町村コード().getValue();
+        this.hihokenshaNo = 被保険者.get被保険者番号();
+        this.shikibetsuCode = 被保険者.get識別コード();
+        this.shikakuIdouKubunCode = 被保険者.get資格異動区分().getCode();
+        this.shikakuShutokuTodokedeDate = 被保険者.get資格取得届出年月日();
+        this.shikakuShutokuJiyuCode = 被保険者.get資格取得事由();
+        this.shikakuShutokuDate = 被保険者.get資格取得年月日();
+        this.ichigoHihokenshaNenreiTotatsuDate = 被保険者.get一号該当日();
+        this.hihokenshaKubunCode = 被保険者.get被保険者区分().getCode();
+        this.shikakuSoshitsuJiyuCode = 被保険者.get資格取得事由();
+        this.shikakuSoshitsuTodokedeDate = 被保険者.get資格喪失届出年月日();
+        this.shikakuSoshitsuDate = 被保険者.get資格喪失年月日();
+        this.shikakuHenkoJiyuCode = 被保険者.get資格変更事由().getCode();
+        this.shikakuHenkoTodokedeDate = 被保険者.get資格変更届出年月日();
+        this.shikakuHenkoDate = 被保険者.get資格変更年月日();
+        this.jushochiTokureiTekiyoJiyuCode = 被保険者.get住所地特例適用事由().getCode();
+        this.tekiyoTodokedeDate = 被保険者.get住所地特例適用届出年月日();
+        this.tekiyoDate = 被保険者.get住所地特例適用年月日();
+        this.jushochiTokureikaijoJiyuCode = 被保険者.get住所地特例解除事由().getCode();
+        this.kaijoTodokedeDate = 被保険者.get住所地特例解除届出年月日();
+        this.kaijoDate = 被保険者.get住所地特例解除年月日();
+        this.jushochiTokureiFlag = 被保険者.is住所地特例();
+        this.koikinaiJushochiTokureiFlag = 被保険者.is広域内住所地特例();
+        this.koikinaiTokureiSochimotoShichosonCd = 被保険者.get広域内住所地特例措置元_市町村コード().getValue();
+        this.saikofuKubun = 被保険者.has被保険者証の再交付();
+        this.saikofuJiyuCode = 被保険者.get再交付事由().getCode();
+    }
+
     /**
      * @return 市町村コード
      */
@@ -66,7 +100,7 @@ public class T1001HihokenshaDaichoEntity implements IDbAccessable {
     /**
      * @return 識別コード
      */
-    public RString getShikibetsuCode() {
+    public IShikibetsuCode getShikibetsuCode() {
         return shikibetsuCode;
     }
 
@@ -248,7 +282,7 @@ public class T1001HihokenshaDaichoEntity implements IDbAccessable {
     /**
      * @param shikibetsuCode 識別コード
      */
-    public void setShikibetsuCode(RString shikibetsuCode) {
+    public void setShikibetsuCode(IShikibetsuCode shikibetsuCode) {
         this.shikibetsuCode = shikibetsuCode;
     }
 

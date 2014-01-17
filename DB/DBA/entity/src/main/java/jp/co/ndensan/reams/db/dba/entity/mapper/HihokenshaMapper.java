@@ -4,12 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dba.entity.mapper;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.Hihokensha;
 import jp.co.ndensan.reams.db.dba.business.JushochitokureiKaijoJiyu;
 import jp.co.ndensan.reams.db.dba.business.JushochitokureiTekiyoJiyu;
 import jp.co.ndensan.reams.db.dba.business.SaikofuJiyu;
 import jp.co.ndensan.reams.db.dba.business.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dba.business.HihokenshaKubun;
+import jp.co.ndensan.reams.db.dba.business.HihokenshaList;
 import jp.co.ndensan.reams.db.dba.definition.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dba.entity.T1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.business.ShichosonCode;
@@ -86,8 +89,22 @@ public final class HihokenshaMapper {
         return 被保険者;
     }
 
+    /**
+     * T1001HihokenshaDaichoEntityのリストをHihokenshaListへ変換します。
+     *
+     * @param entities T1001HihokenshaDaichoEntityのリスト
+     * @return HihokenshaList
+     */
+    public static HihokenshaList toHihokenshaList(final List<T1001HihokenshaDaichoEntity> entities) {
+        List<Hihokensha> 被保険者リスト = new ArrayList<>();
+        for (T1001HihokenshaDaichoEntity entity : entities) {
+            被保険者リスト.add(toHihokensha(entity));
+        }
+        return new HihokenshaList(被保険者リスト);
+    }
+
     private static IKaigoShikaku toKaigoShikaku(final T1001HihokenshaDaichoEntity entity) {
-        IShikibetsuCode 識別コード = to識別コード(entity.getShikibetsuCode());
+        IShikibetsuCode 識別コード = entity.getShikibetsuCode();
         IKaigoShikaku 介護保険資格 = KaigoShikakuFactory.createInstance(
                 識別コード, HokenShubetsu.介護保険,
                 entity.getShikakuShutokuTodokedeDate(), entity.getShikakuShutokuDate(), entity.getShikakuShutokuJiyuCode(),
@@ -96,21 +113,7 @@ public final class HihokenshaMapper {
         return 介護保険資格;
     }
 
-    private static IShikibetsuCode to識別コード(final RString shikibetsuCode) {
-        //TODO N3327 三浦凌 IShikibetsuCode型を作成するFactoryクラスができたら、そちらを利用するように修正する。
-        return new IShikibetsuCode() {
-            @Override
-            public RString getValue() {
-                return shikibetsuCode;
-            }
-
-            @Override
-            public int compareTo(IShikibetsuCode o) {
-                return getValue().compareTo(o.getValue());
-            }
-        };
-    }
-
+//TODO N3327 三浦 凌 コードマスタからコードを取得できるならば、以下のコードを修正・削除する。
     private static HihokenshaKubun to被保険者区分(final RString code) {
         return new HihokenshaKubun(code, new RString("仮"));
     }

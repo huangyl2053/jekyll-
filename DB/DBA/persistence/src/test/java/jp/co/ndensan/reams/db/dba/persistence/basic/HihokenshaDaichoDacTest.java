@@ -7,8 +7,9 @@ package jp.co.ndensan.reams.db.dba.persistence.basic;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dba.entity.T1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dba.persistence.basic.helper.ShikibetsuCodeMock;
 import jp.co.ndensan.reams.db.dba.persistence.basic.helper.T1001HihokenshaDaichoEntityMock;
-import jp.co.ndensan.reams.db.dbz.business.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.KaigoHihokenshaNumber;
 import jp.co.ndensan.reams.db.dbz.business.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._ShikibetsuCode;
@@ -167,8 +168,6 @@ public class HihokenshaDaichoDacTest {//extends TestDacBase {
 //    }
 //
 //    private static IShikibetsuCode create識別コード(RString code) {
-//        IShikibetsuCode 識別コード = mock(_ShikibetsuCode.class);
-//        when(識別コード.getValue()).thenReturn(code);
-//        return 識別コード;
+//        return ShikibetsuCodeMock.createInstance(code);
 //    }
 }

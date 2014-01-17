@@ -22,19 +22,19 @@ public class ShikakuIdoKubunTest extends TestBase {
     public static class テスト_toValue extends TestBase {
 
         @Test
-        public void 資格取得のコードで_toValueは資格取得を返す() {
+        public void 資格取得に対応するコードで_toValueは資格取得を返す() {
             RString code = ShikakuIdoKubun.資格取得.getCode();
             assertThat(ShikakuIdoKubun.toValue(code), is(ShikakuIdoKubun.資格取得));
         }
 
         @Test
-        public void 資格喪失のコードで_toValueは資格喪失を返す() {
+        public void 資格喪失に対応するコードで_toValueは資格喪失を返す() {
             RString code = ShikakuIdoKubun.資格喪失.getCode();
             assertThat(ShikakuIdoKubun.toValue(code), is(ShikakuIdoKubun.資格喪失));
         }
 
         @Test
-        public void 資格変更のコードで_toValueは資格変更を返す() {
+        public void 資格変更に対応するコードで_toValueは資格変更を返す() {
             RString code = ShikakuIdoKubun.資格変更.getCode();
             assertThat(ShikakuIdoKubun.toValue(code), is(ShikakuIdoKubun.資格変更));
         }

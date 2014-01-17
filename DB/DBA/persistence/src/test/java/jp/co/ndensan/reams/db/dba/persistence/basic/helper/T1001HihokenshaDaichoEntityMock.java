@@ -6,9 +6,6 @@ package jp.co.ndensan.reams.db.dba.persistence.basic.helper;
 
 import jp.co.ndensan.reams.db.dba.definition.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dba.entity.T1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.business.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.business.ShichosonCode;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.*;
@@ -26,7 +23,7 @@ public class T1001HihokenshaDaichoEntityMock {
 
         entity.setShichosonCd(new RString("12345"));
         entity.setHihokenshaNo(new RString("0123456789"));
-        entity.setShikibetsuCode(new RString("012345678912345"));
+        entity.setShikibetsuCode(ShikibetsuCodeMock.createInstance(new RString("012345678912345")));
         entity.setShikakuIdouKubunCode(ShikakuIdoKubun.資格取得.getCode());
         entity.setShikakuShutokuTodokedeDate(new RDate("20140116"));
         entity.setShikakuShutokuJiyuCode(new RString("年齢到達"));
@@ -58,7 +55,7 @@ public class T1001HihokenshaDaichoEntityMock {
         T1001HihokenshaDaichoEntity entity = getSpiedInstance();
         when(entity.getShichosonCd()).thenReturn(市町村コード);
         when(entity.getHihokenshaNo()).thenReturn(被保険者番号);
-        when(entity.getShikibetsuCode()).thenReturn(識別コード);
-        return null;
+        when(entity.getShikibetsuCode()).thenReturn(ShikibetsuCodeMock.createInstance(識別コード));
+        return entity;
     }
 }
