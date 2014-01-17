@@ -41,7 +41,7 @@ public class ShichosonCodeTest extends TestBase {
         }
     }
 
-    public static class GetCode extends TestBase {
+    public static class GetValue extends TestBase {
 
         @Test
         public void インスタンスが地方公共団体コードから生成されたとき_getCodeは_都道府県コードと市区町村コードの値を結合したものと同値を返す() {
@@ -54,7 +54,67 @@ public class ShichosonCodeTest extends TestBase {
             when(地方公共団体コード.get市区町村コード()).thenReturn(new RString(市区町村コード));
 
             ShichosonCode sut = new ShichosonCode(地方公共団体コード);
-            assertThat(sut.getCode(), is(new RString(都道府県コード + 市区町村コード)));
+            assertThat(sut.getValue(), is(new RString(都道府県コード + 市区町村コード)));
+        }
+    }
+
+    public static class テスト_equals extends TestBase {
+
+        @Test
+        public void 比較対象がnullなら_falseを返す() {
+
+            ShichosonCode sut = new ShichosonCode(new RString("1"));
+            ShichosonCode 比較対象 = null;
+
+            assertThat(sut.equals(比較対象), is(false));
+        }
+
+        @Test
+        public void 比較対象がShichosonCodeのインスタンスでないなら_falseを返す() {
+            RString コード = new RString("1");
+
+            ShichosonCode sut = new ShichosonCode(コード);
+
+            assertThat(sut.equals(コード), is(false));
+        }
+
+        @Test
+        public void 同一の値で生成されたインスタンス同士は_trueを返す() {
+            RString 同じコード = new RString("1");
+
+            ShichosonCode sut = new ShichosonCode(同じコード);
+            ShichosonCode 比較対象 = new ShichosonCode(同じコード);
+
+            assertThat(sut.equals(比較対象), is(true));
+        }
+
+        @Test
+        public void 異なった値で生成されたインスタンス同士は_falseを返す() {
+            ShichosonCode sut = new ShichosonCode(new RString("11"));
+            ShichosonCode 比較対象 = new ShichosonCode(new RString("22"));
+
+            assertThat(sut.equals(比較対象), is(false));
+        }
+    }
+
+    public static class テスト_hashCode extends TestBase {
+
+        @Test
+        public void 同一の値で生成されたインスタンス同士は_同じ値を返す() {
+            RString 同じコード = new RString("1");
+
+            ShichosonCode sut = new ShichosonCode(同じコード);
+            ShichosonCode 比較対象 = new ShichosonCode(同じコード);
+
+            assertThat((sut.hashCode() == 比較対象.hashCode()), is(true));
+        }
+
+        @Test
+        public void 異なった値で生成されたインスタンス同士は_違う値を返す() {
+            ShichosonCode sut = new ShichosonCode(new RString("11"));
+            ShichosonCode 比較対象 = new ShichosonCode(new RString("22"));
+
+            assertThat((sut.hashCode() == 比較対象.hashCode()), is(false));
         }
     }
 

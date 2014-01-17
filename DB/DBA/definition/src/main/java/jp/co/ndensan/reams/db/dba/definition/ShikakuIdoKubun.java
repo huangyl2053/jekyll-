@@ -42,7 +42,7 @@ public enum ShikakuIdoKubun {
     }
 
     /**
-     * 指定したコードの資格異動区分を取得します。
+     * 指定したコードに対応する資格異動区分を取得します。
      *
      * @param コード コード
      * @return 対応する資格異動区分
@@ -53,6 +53,6 @@ public enum ShikakuIdoKubun {
                 return shikakuIdoKubun;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace(コード + "に対応する資格異動区分").getMessage());
+        throw new IllegalArgumentException(Messages.E00006.replace("\"" + コード + "\"に対応する資格異動区分").getMessage());
     }
 }

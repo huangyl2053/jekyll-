@@ -12,16 +12,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3327 三浦 凌
  */
-public class KaigoHihokenshaNo implements Comparable<KaigoHihokenshaNo> {
+public class KaigoHihokenshaNumber implements Comparable<KaigoHihokenshaNumber> {
 
     private final RString 被保険者番号;
 
     /**
-     * コンストラクタ
+     * 指定した値から、被保険者番号を生成します。
      *
      * @param 被保険者番号 被保険者番号に対応する文字列
      */
-    public KaigoHihokenshaNo(RString 被保険者番号) {
+    public KaigoHihokenshaNumber(RString 被保険者番号) {
         this.被保険者番号 = 被保険者番号;
     }
 
@@ -35,14 +35,15 @@ public class KaigoHihokenshaNo implements Comparable<KaigoHihokenshaNo> {
     }
 
     /**
-     * 被保険者番号と比較をします。
+     * 他の被保険者番号と比較をします。<br />
+     * 数字だけの被保険者番号の場合、数値的に小さいものを、小さい番号と判断します。<br />
+     * ‘H’から始まる被保険者番号との比較にも対応しており、数字だけのものと比較した場合は、それらは大きい番号と判断されます。
      *
      * @param 比較対象 比較対象の被保険者番号
-     * @return
-     * 被保険者番号が同じ値のときは0。比較対象のほうが数値的に大きければ、0より小さい値。比較対象のほうが数値的に小さければ、0より大きい値。
+     * @return 被保険者番号が同じ値のときは0。比較対象の方が大きければ、0より小さい値。比較対象の方が小さければ、0より大きい値。
      */
     @Override
-    public int compareTo(KaigoHihokenshaNo 比較対象) {
+    public int compareTo(KaigoHihokenshaNumber 比較対象) {
         return getValue().compareTo(比較対象.getValue());
     }
 
@@ -56,10 +57,10 @@ public class KaigoHihokenshaNo implements Comparable<KaigoHihokenshaNo> {
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof KaigoHihokenshaNo)) {
+        if (!(obj instanceof KaigoHihokenshaNumber)) {
             return false;
         }
-        KaigoHihokenshaNo 比較対象 = (KaigoHihokenshaNo) obj;
+        KaigoHihokenshaNumber 比較対象 = (KaigoHihokenshaNumber) obj;
         return (this.compareTo(比較対象) == 0);
     }
 
