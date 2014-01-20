@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dba.business.SaikofuJiyu;
 import jp.co.ndensan.reams.db.dba.business.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dba.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dba.business.HihokenshaList;
-import jp.co.ndensan.reams.db.dba.definition.ShikakuIdoKubun;
-import jp.co.ndensan.reams.db.dba.entity.T1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
+import jp.co.ndensan.reams.db.dba.entity.basic.T1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.business.ShichosonCode;
 import jp.co.ndensan.reams.ur.urf.business.HokenShubetsu;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoShikaku;
@@ -36,15 +36,15 @@ public final class HihokenshaMapper {
      * T1001HihokenshaDaichoEntityをHihokensyaへ変換します。
      *
      * @param entity T1001HihokenshaDaichoEntity
-     * @return Hihokensya
+     * @return T1001HihokenshaDaichoEntityと同じ値をもったHihokensya
      */
     public static Hihokensha toHihokensha(final T1001HihokenshaDaichoEntity entity) {
         IKaigoShikaku 介護保険資格 = toKaigoShikaku(entity);
         ShichosonCode 市町村コード = new ShichosonCode(entity.getShichosonCd());
         HihokenshaKubun 被保険者区分 = to被保険者区分(entity.getHihokenshaKubunCode());
         ShikakuHenkoJiyu 資格変更事由 = to資格変更事由(entity.getShikakuHenkoJiyuCode());
-        JushochitokureiTekiyoJiyu 住所地特例適用事由 = to住所地特例適用事由(entity.getJushochiTokureiTekiyoJiyuCode());
-        JushochitokureiKaijoJiyu 住所地特例解除事由 = to住所地特例解除事由(entity.getJushochiTokureikaijoJiyuCode());
+        JushochitokureiTekiyoJiyu 住所地特例適用事由 = to住所地特例適用事由(entity.getJushochitokureiTekiyoJiyuCode());
+        JushochitokureiKaijoJiyu 住所地特例解除事由 = to住所地特例解除事由(entity.getJushochitokureiKaijoJiyuCode());
         ShichosonCode 広域内住所地特例措置元_市町村コード = new ShichosonCode(entity.getKoikinaiTokureiSochimotoShichosonCd());
         SaikofuJiyu 再交付事由 = to再交付事由(entity.getSaikofuJiyuCode());
 
@@ -66,19 +66,19 @@ public final class HihokenshaMapper {
                 // 住所地特例適用事由
                 住所地特例適用事由,
                 // 住所地特例適用届出年月日
-                entity.getTekiyoTodokedeDate(),
+                entity.getJushochitokureiTekiyoTodokedeDate(),
                 // 住所地特例適用年月日
-                entity.getTekiyoDate(),
+                entity.getJushochitokureiTekiyoDate(),
                 // 住所地特例解除事由
                 住所地特例解除事由,
                 // 住所地特例解除届出年月日
-                entity.getKaijoTodokedeDate(),
+                entity.getJushochitokureiKaijoTodokedeDate(),
                 // 住所地特例解除年月日
-                entity.getKaijoDate(),
+                entity.getJushochitokureiKaijoDate(),
                 // 住所地特例有無
-                entity.isJushochiTokurei(),
+                entity.isJushochitokurei(),
                 // 広域内_住所地特例有無
-                entity.isKoikinaiJushochiTokurei(),
+                entity.isKoikinaiJushochitokurei(),
                 // 広域内住所地特例措置元_市町村コード
                 広域内住所地特例措置元_市町村コード,
                 // 再交付有無

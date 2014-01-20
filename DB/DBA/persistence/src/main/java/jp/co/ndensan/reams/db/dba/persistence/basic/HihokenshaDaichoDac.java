@@ -6,9 +6,9 @@ package jp.co.ndensan.reams.db.dba.persistence.basic;
 
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.entity.T1001HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dba.entity.basic.T1001HihokenshaDaicho;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
-import jp.co.ndensan.reams.db.dba.entity.T1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dba.entity.basic.T1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.business.KaigoHihokenshaNumber;
 import jp.co.ndensan.reams.db.dbz.business.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;

@@ -20,7 +20,15 @@ public class ShikakuShutokuJiyu implements IShikakuShutokuJiyu {
     private final RString name;
 
     /**
-     * コンストラクタ
+     * 空の資格取得事由を生成します。
+     */
+    public ShikakuShutokuJiyu() {
+        code = RString.EMPTY;
+        name = RString.EMPTY;
+    }
+
+    /**
+     * 指定のコードと名称をもった資格取得事由を生成します。
      *
      * @param code コード
      * @param name 名称

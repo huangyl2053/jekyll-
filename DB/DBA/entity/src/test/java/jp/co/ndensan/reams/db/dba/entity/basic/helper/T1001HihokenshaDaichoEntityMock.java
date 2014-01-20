@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.persistence.basic.helper;
+package jp.co.ndensan.reams.db.dba.entity.basic.helper;
 
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dba.entity.basic.T1001HihokenshaDaichoEntity;

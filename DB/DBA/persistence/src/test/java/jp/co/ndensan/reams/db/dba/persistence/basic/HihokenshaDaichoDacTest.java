@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dba.persistence.basic;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.ShikakuIdoKubun;
-import jp.co.ndensan.reams.db.dba.entity.T1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
+import jp.co.ndensan.reams.db.dba.entity.basic.T1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dba.persistence.basic.helper.ShikibetsuCodeMock;
 import jp.co.ndensan.reams.db.dba.persistence.basic.helper.T1001HihokenshaDaichoEntityMock;
 import jp.co.ndensan.reams.db.dbz.business.KaigoHihokenshaNumber;
