@@ -20,7 +20,15 @@ public class ShikakuHenkoJiyu implements ICodeAssignedItem {
     private final RString name;
 
     /**
-     * コンストラクタ
+     * 空の資格変更事由を生成します。
+     */
+    public ShikakuHenkoJiyu() {
+        code = RString.EMPTY;
+        name = RString.EMPTY;
+    }
+
+    /**
+     * 指定のコードと名称をもった資格変更事由を生成します。
      *
      * @param code コード
      * @param name 名称

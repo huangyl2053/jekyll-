@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.entity;
+package jp.co.ndensan.reams.db.dba.entity.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
@@ -75,35 +75,35 @@ public enum T1001HihokenshaDaicho implements IColumnDefinition {
     /**
      * 住所地特例適用事由コード
      */
-    JushochiTokureiTekiyoJiyuCode(3, 0),
+    JushochitokureiTekiyoJiyuCode(3, 0),
     /**
      * 住所地特例適用届出年月日
      */
-    TekiyoTodokedeDate(8, 0),
+    JushochitokureiTekiyoTodokedeDate(8, 0),
     /**
      * 住所地特例適用年月日
      */
-    TekiyoDate(8, 0),
+    JushochitokureiTekiyoDate(8, 0),
     /**
      * 住所地特例解除事由コード
      */
-    JushochiTokureikaijoJiyuCode(3, 0),
+    JushochitokureiKaijoJiyuCode(3, 0),
     /**
      * 住所地特例解除届出年月日
      */
-    KaijoTodokedeDate(8, 0),
+    JushochitokureiKaijoTodokedeDate(8, 0),
     /**
      * 住所地特例解除年月日
      */
-    KaijoDate(8, 0),
+    JushochitokureiKaijoDate(8, 0),
     /**
      * 住所地特例フラグ
      */
-    JushochiTokureiFlag(1, 0),
+    JushochitokureiFlag(1, 0),
     /**
      * 広域内住所地特例フラグ
      */
-    KoikinaiJushochiTokureiFlag(1, 0),
+    KoikinaiJushochitokureiFlag(1, 0),
     /**
      * 広域内特例措置元市町村コード
      */

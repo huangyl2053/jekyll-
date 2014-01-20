@@ -5,13 +5,17 @@
 package jp.co.ndensan.reams.db.dba.realservice;
 
 import jp.co.ndensan.reams.db.dba.business.Hihokensha;
+import jp.co.ndensan.reams.db.dba.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dba.business.HihokenshaList;
+import jp.co.ndensan.reams.db.dba.business.ShikakuShutokuJiyu;
+import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dba.realservice.helper.HihokenshaDaichoDacMock;
 import jp.co.ndensan.reams.db.dba.realservice.helper.HihokenshaMock;
 import jp.co.ndensan.reams.db.dba.realservice.helper.ShikibetsuCodeMock;
 import jp.co.ndensan.reams.db.dbz.business.KaigoHihokenshaNumber;
 import jp.co.ndensan.reams.db.dbz.business.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
@@ -139,20 +143,73 @@ public class HihokenshaDaichoManagerTest extends TestBase {
         }
     }
 
+    @RunWith(Enclosed.class)
     public static class Save extends TestBase {
 
-        private HihokenshaDaichoManager sut;
+        private static HihokenshaDaichoManager sut;
 
-        @Override
-        protected void setUp() {
-            sut = new HihokenshaDaichoManager(new HihokenshaDaichoDacMock());
+        public static class 新規_被保険者番号なし extends TestBase {
+
+            @Override
+            protected void setUp() {
+                sut = new HihokenshaDaichoManager(new HihokenshaDaichoDacMock());
+            }
+
+            @Test
+            public void 被保険者番号を採番しながらのsaveに成功したとき_trueを返す() {
+
+                ShichosonCode 市町村コード = new ShichosonCode(new RString("11111"));
+                IShikibetsuCode 識別コード = create識別コード(new RString(""));
+                HihokenshaKubun 被保険者区分 = new HihokenshaKubun(new RString("01"), new RString("第1号被保険者"));
+                RDate 資格取得届出年月日 = null;
+                RDate 資格取得年月日 = new RDate("2002-2-2");
+                ShikakuShutokuJiyu 資格取得事由 = new ShikakuShutokuJiyu(RString.EMPTY, RString.EMPTY);
+                RDate 一号年齢到達日 = null;
+
+                boolean result = sut.save(市町村コード, 識別コード, 被保険者区分, 資格取得届出年月日, 資格取得年月日, 資格取得事由, 一号年齢到達日);
+
+                assertThat(result, is(true));
+            }
         }
 
-        @Test
-        public void saveに成功したとき_trueを返す() {
-            Hihokensha 被保険者 = HihokenshaMock.getSpiedInstance();
-            boolean result = sut.save(被保険者);
-            assertThat(result, is(true));
+        public static class 新規_被保険者番号あり extends TestBase {
+
+            @Override
+            protected void setUp() {
+                sut = new HihokenshaDaichoManager(new HihokenshaDaichoDacMock());
+            }
+
+            @Test
+            public void 被保険者番号を採番しないsaveに成功したとき_trueを返す() {
+
+                KaigoHihokenshaNumber 被保険者番号 = new KaigoHihokenshaNumber(HihokenshaDaichoDacMock.検索不可な被保険者番号);
+                ShichosonCode 市町村コード = new ShichosonCode(new RString("11111"));
+                IShikibetsuCode 識別コード = create識別コード(new RString(""));
+                HihokenshaKubun 被保険者区分 = new HihokenshaKubun(new RString("01"), new RString("第1号被保険者"));
+                RDate 資格取得届出年月日 = null;
+                RDate 資格取得年月日 = new RDate("2002-2-2");
+                ShikakuShutokuJiyu 資格取得事由 = new ShikakuShutokuJiyu(RString.EMPTY, RString.EMPTY);
+                RDate 一号年齢到達日 = null;
+
+                boolean result = sut.save(被保険者番号, 市町村コード, 識別コード, 被保険者区分, 資格取得届出年月日, 資格取得年月日, 資格取得事由, 一号年齢到達日);
+
+                assertThat(result, is(true));
+            }
+        }
+
+        public static class 新規or更新_被保険者 extends TestBase {
+
+            @Override
+            protected void setUp() {
+                sut = new HihokenshaDaichoManager(new HihokenshaDaichoDacMock());
+            }
+
+            @Test
+            public void saveに成功したとき_trueを返す() {
+                Hihokensha 被保険者 = HihokenshaMock.getSpiedInstance();
+                boolean result = sut.save(被保険者);
+                assertThat(result, is(true));
+            }
         }
     }
 

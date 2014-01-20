@@ -20,7 +20,15 @@ public class JushochitokureiKaijoJiyu implements ICodeAssignedItem {
     private final RString name;
 
     /**
-     * コンストラクタ
+     * 空の住所地特例解除事由を生成します。
+     */
+    public JushochitokureiKaijoJiyu() {
+        code = RString.EMPTY;
+        name = RString.EMPTY;
+    }
+
+    /**
+     * 指定のコードと名称をもった住所地特例解除事由を生成します。
      *
      * @param code コード
      * @param name 名称

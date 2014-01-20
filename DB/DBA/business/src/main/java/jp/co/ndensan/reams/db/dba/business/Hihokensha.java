@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dba.business;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dba.definition.ShikakuIdoKubun;
+import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dbz.business.ShichosonCode;
 import jp.co.ndensan.reams.ur.urf.business.HokenShubetsu;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoShikaku;
@@ -74,20 +74,25 @@ public class Hihokensha implements IKaigoShikaku {
         this.市町村コード = Objects.requireNonNull(市町村コード, Messages.E00003.replace("地方公共団体コード", className.toString()).getMessage());
         this.資格異動区分 = Objects.requireNonNull(資格異動区分, Messages.E00003.replace("資格異動区分", className.toString()).getMessage());
         this.被保険者区分 = Objects.requireNonNull(被保険者区分, Messages.E00003.replace("被保険者区分", className.toString()).getMessage());
-        this.資格変更事由 = 資格変更事由;
+
+        this.資格変更事由 = isNull(資格変更事由) ? new ShikakuHenkoJiyu() : 資格変更事由;
         this.資格変更届出年月日 = 資格変更届出年月日;
         this.資格変更年月日 = 資格変更年月日;
-        this.住所地特例適用事由 = 住所地特例適用事由;
+        this.住所地特例適用事由 = isNull(住所地特例適用事由) ? new JushochitokureiTekiyoJiyu() : 住所地特例適用事由;
         this.住所地特例適用届出年月日 = 住所地特例適用届出年月日;
         this.住所地特例適用年月日 = 住所地特例適用年月日;
-        this.住所地特例解除事由 = 住所地特例解除事由;
+        this.住所地特例解除事由 = isNull(住所地特例解除事由) ? new JushochitokureiKaijoJiyu() : 住所地特例解除事由;
         this.住所地特例解除届出年月日 = 住所地特例解除届出年月日;
         this.住所地特例解除年月日 = 住所地特例解除年月日;
         this.住所地特例有無 = 住所地特例有無;
         this.広域内_住所地特例有無 = 広域内_住所地特例有無;
-        this.広域内住所地特例措置元_市町村コード = 広域内住所地特例措置元_市町村コード;
+        this.広域内住所地特例措置元_市町村コード = isNull(広域内住所地特例措置元_市町村コード) ? new ShichosonCode(RString.EMPTY) : 広域内住所地特例措置元_市町村コード;
         this.再交付有無 = 再交付有無;
-        this.再交付事由 = 再交付事由;
+        this.再交付事由 = isNull(再交付事由) ? new SaikofuJiyu() : 再交付事由;
+    }
+
+    private <T> boolean isNull(T obj) {
+        return (obj == null);
     }
 
     /**

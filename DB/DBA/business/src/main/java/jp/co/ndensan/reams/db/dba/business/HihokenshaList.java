@@ -20,6 +20,11 @@ public class HihokenshaList implements Iterable {
 
     private final List<Hihokensha> 被保険者リスト;
 
+    /**
+     * 被保険者のlistから、HihokenshaListを生成します。
+     *
+     * @param hihokenshaList 被保険者のlist
+     */
     public HihokenshaList(List<Hihokensha> hihokenshaList) {
         被保険者リスト = Objects.requireNonNull(hihokenshaList,
                 Messages.E00003.replace("リスト", "被保険者リスト").getMessage());
@@ -44,5 +49,14 @@ public class HihokenshaList implements Iterable {
     @Override
     public Iterator iterator() {
         return this.被保険者リスト.iterator();
+    }
+
+    /**
+     * リストの要素数を取得します。
+     *
+     * @return リストの要素数
+     */
+    public int size() {
+        return 被保険者リスト.size();
     }
 }

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.entity;
+package jp.co.ndensan.reams.db.dba.entity.basic;
 
 import jp.co.ndensan.reams.db.dba.business.Hihokensha;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
@@ -39,22 +39,31 @@ public class T1001HihokenshaDaichoEntity implements IDbAccessable {
     private RString shikakuHenkoJiyuCode;
     private RDate shikakuHenkoTodokedeDate;
     private RDate shikakuHenkoDate;
-    private RString jushochiTokureiTekiyoJiyuCode;
-    private RDate tekiyoTodokedeDate;
-    private RDate tekiyoDate;
-    private RString jushochiTokureikaijoJiyuCode;
-    private RDate kaijoTodokedeDate;
-    private RDate kaijoDate;
-    private boolean jushochiTokureiFlag;
-    private boolean koikinaiJushochiTokureiFlag;
+    private RString jushochitokureiTekiyoJiyuCode;
+    private RDate jushochitokureiTekiyoTodokedeDate;
+    private RDate jushochitokureiTekiyoDate;
+    private RString jushochitokureiKaijoJiyuCode;
+    private RDate jushochitokureiKaijoTodokedeDate;
+    private RDate jushochitokureiKaijoDate;
+    private boolean jushochitokureiFlag;
+    private boolean koikinaiJushochitokureiFlag;
     private RString koikinaiTokureiSochimotoShichosonCd;
     private boolean saikofuKubun;
     private RString saikofuJiyuCode;
 
+    /**
+     * 空のコンストラクタを生成します。
+     */
     public T1001HihokenshaDaichoEntity() {
     }
 
-    public T1001HihokenshaDaichoEntity(Hihokensha 被保険者) {
+    /**
+     * 被保険者から被保険者台帳エンティティのコンストラクタを生成します。
+     *
+     * @param 被保険者 被保険者
+     * @throws NullPointerException 被保険者がnullのとき。
+     */
+    public T1001HihokenshaDaichoEntity(Hihokensha 被保険者) throws NullPointerException {
         this.shichosonCd = 被保険者.get市町村コード().getValue();
         this.hihokenshaNo = 被保険者.get被保険者番号();
         this.shikibetsuCode = 被保険者.get識別コード();
@@ -70,14 +79,14 @@ public class T1001HihokenshaDaichoEntity implements IDbAccessable {
         this.shikakuHenkoJiyuCode = 被保険者.get資格変更事由().getCode();
         this.shikakuHenkoTodokedeDate = 被保険者.get資格変更届出年月日();
         this.shikakuHenkoDate = 被保険者.get資格変更年月日();
-        this.jushochiTokureiTekiyoJiyuCode = 被保険者.get住所地特例適用事由().getCode();
-        this.tekiyoTodokedeDate = 被保険者.get住所地特例適用届出年月日();
-        this.tekiyoDate = 被保険者.get住所地特例適用年月日();
-        this.jushochiTokureikaijoJiyuCode = 被保険者.get住所地特例解除事由().getCode();
-        this.kaijoTodokedeDate = 被保険者.get住所地特例解除届出年月日();
-        this.kaijoDate = 被保険者.get住所地特例解除年月日();
-        this.jushochiTokureiFlag = 被保険者.is住所地特例();
-        this.koikinaiJushochiTokureiFlag = 被保険者.is広域内住所地特例();
+        this.jushochitokureiTekiyoJiyuCode = 被保険者.get住所地特例適用事由().getCode();
+        this.jushochitokureiTekiyoTodokedeDate = 被保険者.get住所地特例適用届出年月日();
+        this.jushochitokureiTekiyoDate = 被保険者.get住所地特例適用年月日();
+        this.jushochitokureiKaijoJiyuCode = 被保険者.get住所地特例解除事由().getCode();
+        this.jushochitokureiKaijoTodokedeDate = 被保険者.get住所地特例解除届出年月日();
+        this.jushochitokureiKaijoDate = 被保険者.get住所地特例解除年月日();
+        this.jushochitokureiFlag = 被保険者.is住所地特例();
+        this.koikinaiJushochitokureiFlag = 被保険者.is広域内住所地特例();
         this.koikinaiTokureiSochimotoShichosonCd = 被保険者.get広域内住所地特例措置元_市町村コード().getValue();
         this.saikofuKubun = 被保険者.has被保険者証の再交付();
         this.saikofuJiyuCode = 被保険者.get再交付事由().getCode();
@@ -191,57 +200,57 @@ public class T1001HihokenshaDaichoEntity implements IDbAccessable {
     /**
      * @return 住所地特例適用事由コード
      */
-    public RString getJushochiTokureiTekiyoJiyuCode() {
-        return jushochiTokureiTekiyoJiyuCode;
+    public RString getJushochitokureiTekiyoJiyuCode() {
+        return jushochitokureiTekiyoJiyuCode;
     }
 
     /**
-     * @return 適用届出年月日
+     * @return 住所地特例適用届出年月日
      */
-    public RDate getTekiyoTodokedeDate() {
-        return tekiyoTodokedeDate;
+    public RDate getJushochitokureiTekiyoTodokedeDate() {
+        return jushochitokureiTekiyoTodokedeDate;
     }
 
     /**
-     * @return 適用年月日
+     * @return 住所地特例適用年月日
      */
-    public RDate getTekiyoDate() {
-        return tekiyoDate;
+    public RDate getJushochitokureiTekiyoDate() {
+        return jushochitokureiTekiyoDate;
     }
 
     /**
      * @return 住所地特例解除事由コード
      */
-    public RString getJushochiTokureikaijoJiyuCode() {
-        return jushochiTokureikaijoJiyuCode;
+    public RString getJushochitokureiKaijoJiyuCode() {
+        return jushochitokureiKaijoJiyuCode;
     }
 
     /**
-     * @return 解除届出年月日
+     * @return 住所地特例解除届出年月日
      */
-    public RDate getKaijoTodokedeDate() {
-        return kaijoTodokedeDate;
+    public RDate getJushochitokureiKaijoTodokedeDate() {
+        return jushochitokureiKaijoTodokedeDate;
     }
 
     /**
-     * @return 解除年月日
+     * @return 住所地特例解除年月日
      */
-    public RDate getKaijoDate() {
-        return kaijoDate;
+    public RDate getJushochitokureiKaijoDate() {
+        return jushochitokureiKaijoDate;
     }
 
     /**
      * @return 住所地特例フラグ
      */
-    public boolean isJushochiTokurei() {
-        return jushochiTokureiFlag;
+    public boolean isJushochitokurei() {
+        return jushochitokureiFlag;
     }
 
     /**
      * @return 広域内住所地特例フラグ
      */
-    public boolean isKoikinaiJushochiTokurei() {
-        return koikinaiJushochiTokureiFlag;
+    public boolean isKoikinaiJushochitokurei() {
+        return koikinaiJushochitokureiFlag;
     }
 
     /**
@@ -372,59 +381,59 @@ public class T1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * @param jushochiTokureiTekiyoJiyuCode 住所地特例適用事由コード set
+     * @param jushochitokureiTekiyoJiyuCode 住所地特例適用事由コード set
      */
-    public void setJushochiTokureiTekiyoJiyuCode(RString jushochiTokureiTekiyoJiyuCode) {
-        this.jushochiTokureiTekiyoJiyuCode = jushochiTokureiTekiyoJiyuCode;
+    public void setJushochitokureiTekiyoJiyuCode(RString jushochitokureiTekiyoJiyuCode) {
+        this.jushochitokureiTekiyoJiyuCode = jushochitokureiTekiyoJiyuCode;
     }
 
     /**
-     * @param tekiyoTodokedeDate 適用届出年月日
+     * @param tekiyoTodokedeDate 住所地特例適用届出年月日
      */
-    public void setTekiyoTodokedeDate(RDate tekiyoTodokedeDate) {
-        this.tekiyoTodokedeDate = tekiyoTodokedeDate;
+    public void setJushochitokureiTekiyoTodokedeDate(RDate tekiyoTodokedeDate) {
+        this.jushochitokureiTekiyoTodokedeDate = tekiyoTodokedeDate;
     }
 
     /**
-     * @param tekiyoDate 適用年月日
+     * @param tekiyoDate 住所地特例適用年月日
      */
-    public void setTekiyoDate(RDate tekiyoDate) {
-        this.tekiyoDate = tekiyoDate;
+    public void setJushochitokureiTekiyoDate(RDate tekiyoDate) {
+        this.jushochitokureiTekiyoDate = tekiyoDate;
     }
 
     /**
-     * @param jushochiTokureikaijoJiyuCode 住所地特例解除事由コード
+     * @param jushochitokureiKaijoJiyuCode 住所地特例解除事由コード
      */
-    public void setJushochiTokureikaijoJiyuCode(RString jushochiTokureikaijoJiyuCode) {
-        this.jushochiTokureikaijoJiyuCode = jushochiTokureikaijoJiyuCode;
+    public void setJushochitokureiKaijoJiyuCode(RString jushochitokureiKaijoJiyuCode) {
+        this.jushochitokureiKaijoJiyuCode = jushochitokureiKaijoJiyuCode;
     }
 
     /**
-     * @param kaijoTodokedeDate 解除届出年月日
+     * @param kaijoTodokedeDate 住所地特例解除届出年月日
      */
-    public void setKaijoTodokedeDate(RDate kaijoTodokedeDate) {
-        this.kaijoTodokedeDate = kaijoTodokedeDate;
+    public void setJushochitokureiKaijoTodokedeDate(RDate kaijoTodokedeDate) {
+        this.jushochitokureiKaijoTodokedeDate = kaijoTodokedeDate;
     }
 
     /**
-     * @param kaijoDate 解除年月日
+     * @param kaijoDate 住所地特例解除年月日
      */
-    public void setKaijoDate(RDate kaijoDate) {
-        this.kaijoDate = kaijoDate;
+    public void setJushochitokureiKaijoDate(RDate kaijoDate) {
+        this.jushochitokureiKaijoDate = kaijoDate;
     }
 
     /**
-     * @param jushochiTokureiFlag 住所地特例フラグ
+     * @param jushochitokureiFlag 住所地特例フラグ
      */
-    public void setJushochiTokureiFlag(boolean jushochiTokureiFlag) {
-        this.jushochiTokureiFlag = jushochiTokureiFlag;
+    public void setJushochitokureiFlag(boolean jushochitokureiFlag) {
+        this.jushochitokureiFlag = jushochitokureiFlag;
     }
 
     /**
-     * @param koikinaiJushochiTokureiFlag 広域内住所地特例フラグ
+     * @param koikinaiJushochitokureiFlag 広域内住所地特例フラグ
      */
-    public void setKoikinaiJushochiTokureiFlag(boolean koikinaiJushochiTokureiFlag) {
-        this.koikinaiJushochiTokureiFlag = koikinaiJushochiTokureiFlag;
+    public void setKoikinaiJushochitokureiFlag(boolean koikinaiJushochitokureiFlag) {
+        this.koikinaiJushochitokureiFlag = koikinaiJushochitokureiFlag;
     }
 
     /**

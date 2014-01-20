@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 /**
  *
@@ -39,6 +41,16 @@ public class HihokenshaListTest extends TestBase {
         @Test(expected = IllegalArgumentException.class)
         public void 指定した市町村コードと被保険者番号が見つからなかったとき_IllegalArgumentExceptionを投げる() {
             sut.get被保険者(null, null);
+        }
+    }
+
+    public static class Size extends TestBase {
+
+        @Test
+        public void sizeは_コンストラクタ引数のリストの要素数を返す() {
+            List<Hihokensha> 被保険者リスト = new ArrayList<>(10);
+            HihokenshaList sut = new HihokenshaList(被保険者リスト);
+            assertThat(sut.size(), is(被保険者リスト.size()));
         }
     }
 }

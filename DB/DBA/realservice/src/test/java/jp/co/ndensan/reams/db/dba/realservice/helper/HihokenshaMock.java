@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dba.business.JushochitokureiKaijoJiyu;
 import jp.co.ndensan.reams.db.dba.business.JushochitokureiTekiyoJiyu;
 import jp.co.ndensan.reams.db.dba.business.SaikofuJiyu;
 import jp.co.ndensan.reams.db.dba.business.ShikakuHenkoJiyu;
-import jp.co.ndensan.reams.db.dba.definition.ShikakuIdoKubun;
+import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dbz.business.ShichosonCode;
 import jp.co.ndensan.reams.ur.urf.business.HokenShubetsu;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoShikaku;

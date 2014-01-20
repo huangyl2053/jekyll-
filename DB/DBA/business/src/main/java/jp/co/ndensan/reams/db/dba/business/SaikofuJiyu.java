@@ -20,7 +20,15 @@ public class SaikofuJiyu implements ICodeAssignedItem {
     private final RString name;
 
     /**
-     * コンストラクタ
+     * 空の再交付事由を生成します。
+     */
+    public SaikofuJiyu() {
+        code = RString.EMPTY;
+        name = RString.EMPTY;
+    }
+
+    /**
+     * 指定のコードと名称をもった再交付事由を生成します。
      *
      * @param code コード
      * @param name 名称
