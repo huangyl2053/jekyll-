@@ -24,11 +24,11 @@ public class HihokenshaNumberSaibanService implements IHihokenshaNumberSaibanSer
 
     @Override
     public KaigoHihokenshaNumber createNewNumber() {
-        return new KaigoHihokenshaNumber(new RString("被保険者番号"));
+        return new KaigoHihokenshaNumber(getNewCode(new RString("DB"), RDate.MAX, new RString("新規の被保険者")));
     }
 
     @Override
     public RString getNewCode(RString gyomuCode, RDate nendo, RString yoto) {
-        return new RString("");
+        return new RString("新しい被保険者番号");
     }
 }

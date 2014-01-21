@@ -17,7 +17,7 @@ import static org.hamcrest.CoreMatchers.is;
  * @author N3327 三浦 凌
  */
 @RunWith(Enclosed.class)
-public class KaigoHihokenshaNoTest extends TestBase {
+public class KaigoHihokenshaNumberTest extends TestBase {
 
     public static class テスト_compareTo extends TestBase {
 

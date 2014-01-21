@@ -8,7 +8,6 @@ import jp.co.ndensan.reams.db.dba.business.Hihokensha;
 import jp.co.ndensan.reams.db.dba.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dba.business.HihokenshaList;
 import jp.co.ndensan.reams.db.dba.business.ShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dbz.business.KaigoHihokenshaNumber;
 import jp.co.ndensan.reams.db.dbz.business.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
@@ -68,7 +67,7 @@ public interface IHihokenshaDaichoManager {
      * @param 一号年齢到達日 一号年齢到達日
      * @return 登録が成功したかどうか
      */
-    public boolean save(ShichosonCode 市町村コード, IShikibetsuCode 識別コード, HihokenshaKubun 被保険者区分,
+    boolean save(ShichosonCode 市町村コード, IShikibetsuCode 識別コード, HihokenshaKubun 被保険者区分,
             RDate 資格取得届出年月日, RDate 資格取得年月日, ShikakuShutokuJiyu 資格取得事由, RDate 一号年齢到達日);
 
     /**

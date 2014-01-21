@@ -46,8 +46,9 @@ public enum ShikakuIdoKubun {
      *
      * @param コード コード
      * @return 対応する資格異動区分
+     * @throws IllegalArgumentException 指定された名前を持つ定数を持っていない場合
      */
-    public static ShikakuIdoKubun toValue(RString コード) {
+    public static ShikakuIdoKubun toValue(RString コード) throws IllegalArgumentException {
         for (ShikakuIdoKubun shikakuIdoKubun : ShikakuIdoKubun.values()) {
             if (shikakuIdoKubun.getCode().equals(コード)) {
                 return shikakuIdoKubun;

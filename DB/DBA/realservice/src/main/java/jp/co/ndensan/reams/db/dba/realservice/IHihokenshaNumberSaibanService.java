@@ -19,5 +19,5 @@ public interface IHihokenshaNumberSaibanService extends ISaibanService {
      *
      * @return 介護保険被保険者番号
      */
-    public KaigoHihokenshaNumber createNewNumber();
+    KaigoHihokenshaNumber createNewNumber();
 }
