@@ -29,7 +29,7 @@ public class HatsubanJoho implements IDbColumnMappable {
     /**
      * 発番情報に＋１した値を返します
      *
-     * @return
+     * @return 発番した番号
      */
     @Override
     public RString getColumnValue() {

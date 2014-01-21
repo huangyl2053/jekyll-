@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence;
 
-import jp.co.ndensan.reams.db.dbe.entity.HatsubanKanriJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.basic.T5020HatsubanKanriJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -21,7 +21,7 @@ public interface IHatsubanKanriJohoDac {
      * @param 年度 年度
      * @return 発番管理情報のエンティティ
      */
-    HatsubanKanriJohoEntity select(RString 項目区分, RString 年度);
+    T5020HatsubanKanriJohoEntity select(RString 項目区分, RString 年度);
 
     /**
      * 発番管理情報を更新します
@@ -29,5 +29,5 @@ public interface IHatsubanKanriJohoDac {
      * @param data 発番管理情報エンティティ
      * @return 更新結果
      */
-    int update(HatsubanKanriJohoEntity data);
+    int update(T5020HatsubanKanriJohoEntity data);
 }

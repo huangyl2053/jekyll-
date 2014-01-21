@@ -6,10 +6,11 @@ package jp.co.ndensan.reams.db.dbe.definition;
 
 /**
  * 調査委託先の区分を表すコードです
- * 
+ *
  * @author N1013 松本直樹
  */
 public enum ChosaItakuKubun {
+
     /**
      * 指定なしを示すコードです
      */
@@ -41,5 +42,5 @@ public enum ChosaItakuKubun {
     /**
      * その他を示すコードです
      */
-    その他
+    その他;
 }

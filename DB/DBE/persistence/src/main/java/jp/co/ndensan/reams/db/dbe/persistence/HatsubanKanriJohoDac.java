@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbe.persistence;
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessor;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
-import jp.co.ndensan.reams.db.dbe.entity.HatsubanKanriJoho;
-import jp.co.ndensan.reams.db.dbe.entity.HatsubanKanriJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.basic.T5020HatsubanKanriJoho;
+import jp.co.ndensan.reams.db.dbe.entity.basic.T5020HatsubanKanriJohoEntity;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -35,14 +35,14 @@ public class HatsubanKanriJohoDac implements IHatsubanKanriJohoDac {
      * @return 発番管理情報のエンティティ
      */
     @Override
-    public HatsubanKanriJohoEntity select(RString 項目区分, RString 年度) {
+    public T5020HatsubanKanriJohoEntity select(RString 項目区分, RString 年度) {
 
-        List<HatsubanKanriJohoEntity> list = accessor.select()
-                .table(HatsubanKanriJoho.class)
-                .where(and(eq(HatsubanKanriJoho.KOMOKU_KUBUN, 項目区分),
-                eq(HatsubanKanriJoho.NENDO, 年度)))
-                .order(by(HatsubanKanriJoho.HATSUBAN, Order.DESC))
-                .toList(HatsubanKanriJohoEntity.class);
+        List<T5020HatsubanKanriJohoEntity> list = accessor.select()
+                .table(T5020HatsubanKanriJoho.class)
+                .where(and(eq(T5020HatsubanKanriJoho.KOMOKU_KUBUN, 項目区分),
+                eq(T5020HatsubanKanriJoho.NENDO, 年度)))
+                .order(by(T5020HatsubanKanriJoho.HATSUBAN, Order.DESC))
+                .toList(T5020HatsubanKanriJohoEntity.class);
 
         if (list.isEmpty()) {
             return null;
@@ -58,7 +58,7 @@ public class HatsubanKanriJohoDac implements IHatsubanKanriJohoDac {
      * @return 更新結果
      */
     @Override
-    public int update(HatsubanKanriJohoEntity data) {
+    public int update(T5020HatsubanKanriJohoEntity data) {
         return accessor.update(data).execute();
     }
 }

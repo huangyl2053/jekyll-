@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbe.business.HatsubanJoho;
 import jp.co.ndensan.reams.db.dbe.business.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.business.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
-import jp.co.ndensan.reams.db.dbe.entity.HatsubanKanriJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.NinteichosaItakusakiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.basic.T5020HatsubanKanriJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.basic.T7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.HatsubanJohoMapper;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaItakusakiMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.IHatsubanKanriJohoDac;
@@ -53,19 +53,19 @@ public class NinteichosaItakusakiManager {
     /**
      * 市町村コードと介護事業状況を指定して該当する調査委託先を全件取得するクラスです
      *
-     * @param 市町村コード
-     * @param 介護事業状況
-     * @return
+     * @param 市町村コード 市町村コード
+     * @param 介護事業状況 介護事業状況
+     * @return NinteichosaItakusaki
      */
     public List<NinteichosaItakusaki> get認定調査委託先市町村指定全件(RString 市町村コード, Boolean 介護事業状況) {
         List<NinteichosaItakusaki> list = new ArrayList();
-        List<NinteichosaItakusakiJohoEntity> entityList = dac.selectAll(市町村コード, 介護事業状況);
+        List<T7010NinteichosaItakusakiJohoEntity> entityList = dac.selectAll(市町村コード, 介護事業状況);
 
         if (entityList.isEmpty()) {
             return Collections.EMPTY_LIST;
         }
 
-        for (NinteichosaItakusakiJohoEntity entity : entityList) {
+        for (T7010NinteichosaItakusakiJohoEntity entity : entityList) {
             NinteichosaItakusaki ninteichosaItakusaki = NinteichosaItakusakiMapper.toNinteichosaItakusaki(entity);
             list.add(ninteichosaItakusaki);
         }
@@ -76,18 +76,18 @@ public class NinteichosaItakusakiManager {
     /**
      * 市町村コードを指定して該当する調査委託先を全件取得するクラスです
      *
-     * @param 市町村コード
-     * @return
+     * @param 市町村コード 市町村コード
+     * @return NinteichosaItakusaki
      */
     public List<NinteichosaItakusaki> get認定調査委託先市町村指定全件(RString 市町村コード) {
         List<NinteichosaItakusaki> list = new ArrayList();
-        List<NinteichosaItakusakiJohoEntity> entityList = dac.selectAll(市町村コード);
+        List<T7010NinteichosaItakusakiJohoEntity> entityList = dac.selectAll(市町村コード);
 
         if (entityList.isEmpty()) {
             return Collections.EMPTY_LIST;
         }
 
-        for (NinteichosaItakusakiJohoEntity entity : entityList) {
+        for (T7010NinteichosaItakusakiJohoEntity entity : entityList) {
             NinteichosaItakusaki ninteichosaItakusaki = NinteichosaItakusakiMapper.toNinteichosaItakusaki(entity);
             list.add(ninteichosaItakusaki);
         }
@@ -98,13 +98,13 @@ public class NinteichosaItakusakiManager {
     /**
      * 市町村コード・介護事業者番号・介護事業区分を指定し、認定調査委託先を取得するクラスです
      *
-     * @param 市町村コード
-     * @param 介護事業者番号
-     * @param 介護事業状況
-     * @return
+     * @param 市町村コード 市町村コード
+     * @param 介護事業者番号 介護事業者番号
+     * @param 介護事業状況 介護事業状況
+     * @return NinteichosaItakusaki
      */
     public NinteichosaItakusaki get認定調査委託先介護事業者番号指定(RString 市町村コード, KaigoJigyoshaNo 介護事業者番号, boolean 介護事業状況) {
-        NinteichosaItakusakiJohoEntity entity = dac.select(市町村コード, 介護事業者番号, 介護事業状況);
+        T7010NinteichosaItakusakiJohoEntity entity = dac.select(市町村コード, 介護事業者番号, 介護事業状況);
 
         if (entity == null) {
             return null;
@@ -116,13 +116,13 @@ public class NinteichosaItakusakiManager {
     /**
      * 市町村コード・事業者番号・介護事業区分を指定し、認定調査委託先を取得するクラスです
      *
-     * @param 市町村コード
-     * @param 事業者番号
-     * @param 介護事業状況
-     * @return
+     * @param 市町村コード 市町村コード
+     * @param 事業者番号 事業者番号
+     * @param 介護事業状況 介護事業状況
+     * @return NinteichosaItakusaki
      */
     public NinteichosaItakusaki get認定調査委託先事業者番号指定(RString 市町村コード, JigyoshaNo 事業者番号, boolean 介護事業状況) {
-        NinteichosaItakusakiJohoEntity entity = dac.select(市町村コード, 事業者番号, 介護事業状況);
+        T7010NinteichosaItakusakiJohoEntity entity = dac.select(市町村コード, 事業者番号, 介護事業状況);
 
         if (entity == null) {
             return null;
@@ -134,11 +134,11 @@ public class NinteichosaItakusakiManager {
     /**
      * 調査委託先を追加・更新します
      *
-     * @param ninteichosaitakusaki
+     * @param ninteichosaitakusaki 認定調査委託先
      * @return 追加・更新結果
      */
     public int save(NinteichosaItakusaki ninteichosaitakusaki) {
-        int result = dac.insertOrUpdate(new NinteichosaItakusakiJohoEntity(ninteichosaitakusaki));
+        int result = dac.insertOrUpdate(new T7010NinteichosaItakusakiJohoEntity(ninteichosaitakusaki));
         if (result != 1) {
             throw new ApplicationException(Messages.E00003.replace("認定調査委託先の更新").getMessage());
         }
@@ -153,7 +153,7 @@ public class NinteichosaItakusakiManager {
      * @return 発番情報
      */
     public HatsubanJoho get発番情報(RString 項目区分, RString 年度) {
-        HatsubanKanriJohoEntity entity = hatsubanDac.select(項目区分, 年度);
+        T5020HatsubanKanriJohoEntity entity = hatsubanDac.select(項目区分, 年度);
 
         if (entity == null) {
             return null;
@@ -170,7 +170,7 @@ public class NinteichosaItakusakiManager {
      * @return 更新結果
      */
     public int updateHatsubanJoho(RString 項目区分, HatsubanJoho 発番情報) {
-        HatsubanKanriJohoEntity entity = new HatsubanKanriJohoEntity(項目区分, new RString("0000"), 発番情報.getColumnValue());
+        T5020HatsubanKanriJohoEntity entity = new T5020HatsubanKanriJohoEntity(項目区分, new RString("0000"), 発番情報.getColumnValue());
         int result = hatsubanDac.update(entity);
         return result;
     }
