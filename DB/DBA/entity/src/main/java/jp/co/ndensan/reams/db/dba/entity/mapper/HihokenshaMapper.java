@@ -76,9 +76,9 @@ public final class HihokenshaMapper {
                 // 住所地特例解除年月日
                 entity.getJushochitokureiKaijoDate(),
                 // 住所地特例有無
-                entity.isJushochitokurei(),
+                entity.isJushochitokureisha(),
                 // 広域内_住所地特例有無
-                entity.isKoikinaiJushochitokurei(),
+                entity.isKoikinaiJushochitokureisha(),
                 // 広域内住所地特例措置元_市町村コード
                 広域内住所地特例措置元_市町村コード,
                 // 再交付有無

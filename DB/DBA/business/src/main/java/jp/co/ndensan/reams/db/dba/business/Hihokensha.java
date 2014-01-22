@@ -137,7 +137,7 @@ public class Hihokensha implements IKaigoShikaku {
      *
      * @return 広域内の住所地特例者かどうか
      */
-    public boolean is広域内住所地特例() {
+    public boolean is広域内住所地特者() {
         return 広域内_住所地特例有無;
     }
 
@@ -146,7 +146,7 @@ public class Hihokensha implements IKaigoShikaku {
      *
      * @return 住所地特例かどうか
      */
-    public boolean is住所地特例() {
+    public boolean is住所地特例者() {
         return 住所地特例有無;
     }
 
