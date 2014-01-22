@@ -31,19 +31,23 @@
             <groupId>jp.co.ndensan.reams.ur</groupId>
             <artifactId>business</artifactId>
         </dependency>
+        <!-- 他の業務パッケージへの依存性 -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>definition</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-        </dependency>
+        <!-- 業務共通への依存性 -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>business</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- テスト時の依存性 -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>
