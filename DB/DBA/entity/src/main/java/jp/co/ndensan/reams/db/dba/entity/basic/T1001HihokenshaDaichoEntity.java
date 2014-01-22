@@ -85,8 +85,8 @@ public class T1001HihokenshaDaichoEntity implements IDbAccessable {
         this.jushochitokureiKaijoJiyuCode = 被保険者.get住所地特例解除事由().getCode();
         this.jushochitokureiKaijoTodokedeDate = 被保険者.get住所地特例解除届出年月日();
         this.jushochitokureiKaijoDate = 被保険者.get住所地特例解除年月日();
-        this.jushochitokureiFlag = 被保険者.is住所地特例();
-        this.koikinaiJushochitokureiFlag = 被保険者.is広域内住所地特例();
+        this.jushochitokureiFlag = 被保険者.is住所地特例者();
+        this.koikinaiJushochitokureiFlag = 被保険者.is広域内住所地特者();
         this.koikinaiTokureiSochimotoShichosonCd = 被保険者.get広域内住所地特例措置元_市町村コード().getValue();
         this.saikofuKubun = 被保険者.has被保険者証の再交付();
         this.saikofuJiyuCode = 被保険者.get再交付事由().getCode();
@@ -242,14 +242,14 @@ public class T1001HihokenshaDaichoEntity implements IDbAccessable {
     /**
      * @return 住所地特例フラグ
      */
-    public boolean isJushochitokurei() {
+    public boolean isJushochitokureisha() {
         return jushochitokureiFlag;
     }
 
     /**
      * @return 広域内住所地特例フラグ
      */
-    public boolean isKoikinaiJushochitokurei() {
+    public boolean isKoikinaiJushochitokureisha() {
         return koikinaiJushochitokureiFlag;
     }
 

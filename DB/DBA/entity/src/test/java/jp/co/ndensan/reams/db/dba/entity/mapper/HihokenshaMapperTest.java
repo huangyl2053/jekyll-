@@ -71,14 +71,14 @@ public class HihokenshaMapperTest extends TestBase {
         public void あるEntityから作成した被保険者のis広域内住所地特例は_当該Entityに設定した広域内住所地特例フラグと同じ値を返す() {
             boolean 広域内住所地特例フラグ = true;
             entity.setKoikinaiJushochitokureiFlag(広域内住所地特例フラグ);
-            assertThat(HihokenshaMapper.toHihokensha(entity).is広域内住所地特例(), is(広域内住所地特例フラグ));
+            assertThat(HihokenshaMapper.toHihokensha(entity).is広域内住所地特者(), is(広域内住所地特例フラグ));
         }
 
         @Test
         public void あるEntityから作成した被保険者のis住所地特例は_当該Entityに設定した住所地特例フラグと同じ値を返す() {
             boolean 住所地特例フラグ = true;
             entity.setJushochitokureiFlag(住所地特例フラグ);
-            assertThat(HihokenshaMapper.toHihokensha(entity).is住所地特例(), is(住所地特例フラグ));
+            assertThat(HihokenshaMapper.toHihokensha(entity).is住所地特例者(), is(住所地特例フラグ));
         }
 
         @Test

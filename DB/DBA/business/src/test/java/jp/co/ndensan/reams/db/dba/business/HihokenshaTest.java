@@ -255,12 +255,12 @@ public class HihokenshaTest extends TestBase {
 
         @Test
         public void is住所地特例は_コンストラクタ引数の_住所地特例有無と同値を返す() {
-            assertThat(sut.is住所地特例(), is(住所地特例有無));
+            assertThat(sut.is住所地特例者(), is(住所地特例有無));
         }
 
         @Test
         public void is広域内住所地特例は_コンストラクタ引数の_広域内_住所地特例有無を返す() {
-            assertThat(sut.is広域内住所地特例(), is(広域内_住所地特例有無));
+            assertThat(sut.is広域内住所地特者(), is(広域内_住所地特例有無));
         }
 
         @Test
