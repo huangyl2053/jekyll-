@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.*;
 
 /**
+ * 再交付事由のMockクラスです。
  *
  * @author N3327 三浦 凌
  */

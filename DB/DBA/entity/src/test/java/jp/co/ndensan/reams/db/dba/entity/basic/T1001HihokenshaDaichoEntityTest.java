@@ -11,6 +11,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
+ * T1001被保険者台帳Entityのテストクラスです。
  *
  * @author N3327 三浦 凌
  */

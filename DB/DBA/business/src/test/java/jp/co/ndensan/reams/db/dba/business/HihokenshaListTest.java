@@ -22,6 +22,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
+ * 被保険者リストのテストクラスです。
  *
  * @author N3327 三浦 凌
  */
