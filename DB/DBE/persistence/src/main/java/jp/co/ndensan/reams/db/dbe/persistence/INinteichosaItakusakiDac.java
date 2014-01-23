@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.persistence;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbe.business.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.T7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
