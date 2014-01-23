@@ -41,25 +41,6 @@ public class NinteichosaItakusakiMapperTest extends TestBase {
         }
 
         @Test
-        public void 引数渡した認定調査委託先情報とtoNinteichosaItakusakiの結果は一致する() {
-            List<T7010NinteichosaItakusakiJohoEntity> entity = new ArrayList<>();
-            entity.add(createNinteichosaItakusakiJoho(new RString("20203"), kaigojigyoshaNo,
-                    jigyoshaNo, true, ChosaItakuKubun.介護保険施設, 10, new RString("A"), new RString("B")));
-            NinteichosaItakusaki ninteichosaitakusaki = new NinteichosaItakusaki(new RString("20203"), kaigojigyoshaNo,
-                    jigyoshaNo, true, ChosaItakuKubun.介護保険施設, 10, new RString("A"), new RString("B"));
-            NinteichosaItakusaki result = NinteichosaItakusakiMapper.toNinteichosaItakusaki(entity.get(0));
-            assertThat(result.get市町村コード(), is(ninteichosaitakusaki.get市町村コード()));
-            assertThat(result.getKaigoJigyoshaNo().getColumnValue(), is(ninteichosaitakusaki.getKaigoJigyoshaNo().getColumnValue()));
-            assertThat(result.getJigyoshaNo().getColumnValue(), is(ninteichosaitakusaki.getJigyoshaNo().getColumnValue()));
-            assertThat(result.is有効(), is(ninteichosaitakusaki.is有効()));
-            assertThat(result.getChosaItakuKubun(), is(ninteichosaitakusaki.getChosaItakuKubun()));
-            assertThat(result.getWaritsukeTeiin(), is(ninteichosaitakusaki.getWaritsukeTeiin()));
-            assertThat(result.getWaritsukeChiku(), is(ninteichosaitakusaki.getWaritsukeChiku()));
-            assertThat(result.getKikanKubun(), is(ninteichosaitakusaki.getKikanKubun()));
-
-        }
-
-        @Test
         public void 引き渡した市町村コードとtoNinteichosaItakusakiの結果は一致する() {
             sut.set市町村コード(new RString("20205"));
             NinteichosaItakusaki result = NinteichosaItakusakiMapper.toNinteichosaItakusaki(sut);
