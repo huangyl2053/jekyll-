@@ -16,6 +16,7 @@ import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 
 /**
+ * 市町村コードのテストクラスです。
  *
  * @author N3327 三浦 凌
  */
@@ -55,7 +56,7 @@ public class ShichosonCodeTest extends TestBase {
 //            assertThat(sut.getValue(), is(new RString(都道府県コード + 市区町村コード)));
 //        }
 //    }
-    public static class テスト_equals extends TestBase {
+    public static class Equals extends TestBase {
 
         @Test
         public void 比較対象がnullなら_falseを返す() {
@@ -94,7 +95,7 @@ public class ShichosonCodeTest extends TestBase {
         }
     }
 
-    public static class テスト_hashCode extends TestBase {
+    public static class HashCode extends TestBase {
 
         @Test
         public void 同一の値で生成されたインスタンス同士は_同じ値を返す() {

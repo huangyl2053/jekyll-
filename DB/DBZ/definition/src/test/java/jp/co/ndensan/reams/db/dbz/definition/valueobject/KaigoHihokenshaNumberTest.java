@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.valueobject;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
@@ -14,13 +13,14 @@ import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 
 /**
+ * 介護保険被保険者番号のテストクラスです。
  *
  * @author N3327 三浦 凌
  */
 @RunWith(Enclosed.class)
 public class KaigoHihokenshaNumberTest extends TestBase {
 
-    public static class テスト_compareTo extends TestBase {
+    public static class CompareTo extends TestBase {
 
         @Test
         public void 自身と値が同じものを比較したときは_0を返す() {
@@ -69,7 +69,7 @@ public class KaigoHihokenshaNumberTest extends TestBase {
         }
     }
 
-    public static class テスト_equals extends TestBase {
+    public static class Equals extends TestBase {
 
         @Test
         public void 比較対象がnullなら_falseを返す() {
@@ -108,7 +108,7 @@ public class KaigoHihokenshaNumberTest extends TestBase {
         }
     }
 
-    public static class テスト_hashCode extends TestBase {
+    public static class HashCode extends TestBase {
 
         @Test
         public void 同一の値で生成されたインスタンス同士は_同じ値を返す() {

@@ -24,13 +24,14 @@ import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 
 /**
+ * 被保険者Mapperのテストクラスです。
  *
  * @author N3327 三浦 凌
  */
 @RunWith(Enclosed.class)
 public class HihokenshaMapperTest extends TestBase {
 
-    public static class テスト_toHihokensha extends TestBase {
+    public static class ToHihokensha extends TestBase {
 
         private T1001HihokenshaDaichoEntity entity;
 
@@ -234,7 +235,7 @@ public class HihokenshaMapperTest extends TestBase {
         }
     }
 
-    public static class テスト_toHihokenshaList extends TestBase {
+    public static class ToHihokenshaList extends TestBase {
 
         private List<T1001HihokenshaDaichoEntity> entities;
 
