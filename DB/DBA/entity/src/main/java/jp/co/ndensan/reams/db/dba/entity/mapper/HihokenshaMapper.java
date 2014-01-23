@@ -4,18 +4,18 @@
  */
 package jp.co.ndensan.reams.db.dba.entity.mapper;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 import jp.co.ndensan.reams.db.dba.business.Hihokensha;
-import jp.co.ndensan.reams.db.dba.business.JushochitokureiKaijoJiyu;
-import jp.co.ndensan.reams.db.dba.business.JushochitokureiTekiyoJiyu;
-import jp.co.ndensan.reams.db.dba.business.SaikofuJiyu;
-import jp.co.ndensan.reams.db.dba.business.ShikakuHenkoJiyu;
-import jp.co.ndensan.reams.db.dba.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dba.business.HihokenshaList;
+import jp.co.ndensan.reams.db.dba.definition.valueobject.JushochitokureiKaijoJiyu;
+import jp.co.ndensan.reams.db.dba.definition.valueobject.JushochitokureiTekiyoJiyu;
+import jp.co.ndensan.reams.db.dba.definition.valueobject.SaikofuJiyu;
+import jp.co.ndensan.reams.db.dba.definition.valueobject.ShikakuHenkoJiyu;
+import jp.co.ndensan.reams.db.dba.definition.valueobject.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dba.entity.basic.T1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.business.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urf.business.HokenShubetsu;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoShikaku;
 import jp.co.ndensan.reams.ur.urz.business.KaigoShikakuFactory;
@@ -49,42 +49,12 @@ public final class HihokenshaMapper {
         SaikofuJiyu 再交付事由 = to再交付事由(entity.getSaikofuJiyuCode());
 
         Hihokensha 被保険者 = new Hihokensha(
-                // 介護保険資格
-                介護保険資格,
-                // 市町村コード
-                市町村コード,
-                // 資格異動区分
-                ShikakuIdoKubun.toValue(entity.getShikakuIdouKubunCode()),
-                // 被保険者区分
-                被保険者区分,
-                // 資格変更事由
-                資格変更事由,
-                // 資格変更届出年月日
-                entity.getShikakuHenkoTodokedeDate(),
-                // 資格変更年月日
-                entity.getShikakuHenkoDate(),
-                // 住所地特例適用事由
-                住所地特例適用事由,
-                // 住所地特例適用届出年月日
-                entity.getJushochitokureiTekiyoTodokedeDate(),
-                // 住所地特例適用年月日
-                entity.getJushochitokureiTekiyoDate(),
-                // 住所地特例解除事由
-                住所地特例解除事由,
-                // 住所地特例解除届出年月日
-                entity.getJushochitokureiKaijoTodokedeDate(),
-                // 住所地特例解除年月日
-                entity.getJushochitokureiKaijoDate(),
-                // 住所地特例有無
-                entity.isJushochitokureisha(),
-                // 広域内_住所地特例有無
-                entity.isKoikinaiJushochitokureisha(),
-                // 広域内住所地特例措置元_市町村コード
-                広域内住所地特例措置元_市町村コード,
-                // 再交付有無
-                entity.hasSaikofu(),
-                // 再交付事由
-                再交付事由);
+                介護保険資格, 市町村コード, ShikakuIdoKubun.toValue(entity.getShikakuIdouKubunCode()), 被保険者区分,
+                資格変更事由, entity.getShikakuHenkoTodokedeDate(), entity.getShikakuHenkoDate(),
+                住所地特例適用事由, entity.getJushochitokureiTekiyoTodokedeDate(), entity.getJushochitokureiTekiyoDate(),
+                住所地特例解除事由, entity.getJushochitokureiKaijoTodokedeDate(), entity.getJushochitokureiKaijoDate(),
+                entity.isJushochitokureisha(), entity.isKoikinaiJushochitokureisha(), 広域内住所地特例措置元_市町村コード,
+                entity.hasSaikofu(), 再交付事由);
 
         return 被保険者;
     }
