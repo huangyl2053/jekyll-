@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dba.realservice;
 
-import jp.co.ndensan.reams.db.dbz.business.KaigoHihokenshaNumber;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

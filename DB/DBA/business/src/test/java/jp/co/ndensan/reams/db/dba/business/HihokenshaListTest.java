@@ -4,12 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dba.business;
 
+import jp.co.ndensan.reams.db.dba.definition.valueobject.ShikakuShutokuJiyu;
+import jp.co.ndensan.reams.db.dba.definition.valueobject.HihokenshaKubun;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.helper.ShikibetsuCodeMock;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
-import jp.co.ndensan.reams.db.dbz.business.KaigoHihokenshaNumber;
-import jp.co.ndensan.reams.db.dbz.business.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;

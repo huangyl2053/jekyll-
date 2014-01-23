@@ -4,13 +4,18 @@
  */
 package jp.co.ndensan.reams.db.dba.business;
 
+import jp.co.ndensan.reams.db.dba.definition.valueobject.ShikakuHenkoJiyu;
+import jp.co.ndensan.reams.db.dba.definition.valueobject.JushochitokureiKaijoJiyu;
+import jp.co.ndensan.reams.db.dba.definition.valueobject.JushochitokureiTekiyoJiyu;
+import jp.co.ndensan.reams.db.dba.definition.valueobject.SaikofuJiyu;
+import jp.co.ndensan.reams.db.dba.definition.valueobject.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dba.business.helper.HihokenshaKubunMock;
 import jp.co.ndensan.reams.db.dba.business.helper.JushochitokureiKaijoJiyuMock;
 import jp.co.ndensan.reams.db.dba.business.helper.JushochitokureiTekiyoJiyuMock;
 import jp.co.ndensan.reams.db.dba.business.helper.SaikofuJiyuMock;
 import jp.co.ndensan.reams.db.dba.business.helper.ShikakuHenkoJiyuMock;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
-import jp.co.ndensan.reams.db.dbz.business.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urf.business.HokenShubetsu;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoShikaku;
 import jp.co.ndensan.reams.ur.urf.business._KaigoShikaku;
