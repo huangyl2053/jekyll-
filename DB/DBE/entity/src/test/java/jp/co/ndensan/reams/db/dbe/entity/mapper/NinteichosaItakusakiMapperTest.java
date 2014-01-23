@@ -33,11 +33,11 @@ public class NinteichosaItakusakiMapperTest extends TestBase {
 
         private KaigoJigyoshaNo kaigojigyoshaNo = new KaigoJigyoshaNo(new RString("0000000001"));
         private JigyoshaNo jigyoshaNo = new JigyoshaNo(new RString("2020300001"));
-        private T7010NinteichosaItakusakiJohoEntity testentity;
+        private T7010NinteichosaItakusakiJohoEntity sut;
 
         @Override
         public void setUp() {
-            testentity = MockNinteichosaItakusakiJohoEntity.getSpiedInstance();
+            sut = MockNinteichosaItakusakiJohoEntity.getSpiedInstance();
         }
 
         @Test
@@ -61,59 +61,59 @@ public class NinteichosaItakusakiMapperTest extends TestBase {
 
         @Test
         public void 引き渡した市町村コードとtoNinteichosaItakusakiの結果は一致する() {
-            testentity.set市町村コード(new RString("20205"));
-            NinteichosaItakusaki result = NinteichosaItakusakiMapper.toNinteichosaItakusaki(testentity);
+            sut.set市町村コード(new RString("20205"));
+            NinteichosaItakusaki result = NinteichosaItakusakiMapper.toNinteichosaItakusaki(sut);
             assertThat(result.get市町村コード(), is(new RString("20205")));
         }
 
         @Test
         public void 引き渡した介護事業者番号とtoNinteichosaItakusakiの結果は一致する() {
             kaigojigyoshaNo = new KaigoJigyoshaNo(new RString("1000000001"));
-            testentity.set介護事業者番号(kaigojigyoshaNo);
-            NinteichosaItakusaki result = NinteichosaItakusakiMapper.toNinteichosaItakusaki(testentity);
+            sut.set介護事業者番号(kaigojigyoshaNo);
+            NinteichosaItakusaki result = NinteichosaItakusakiMapper.toNinteichosaItakusaki(sut);
             assertThat(result.getKaigoJigyoshaNo().getColumnValue(), is(kaigojigyoshaNo.getColumnValue()));
         }
 
         @Test
         public void 引き渡した事業者番号とtoNinteichosaItakusakiの結果は一致する() {
             jigyoshaNo = new JigyoshaNo(new RString("2220000001"));
-            testentity.set事業者番号(jigyoshaNo);
-            NinteichosaItakusaki result = NinteichosaItakusakiMapper.toNinteichosaItakusaki(testentity);
+            sut.set事業者番号(jigyoshaNo);
+            NinteichosaItakusaki result = NinteichosaItakusakiMapper.toNinteichosaItakusaki(sut);
             assertThat(result.getJigyoshaNo().getColumnValue(), is(jigyoshaNo.getColumnValue()));
         }
 
         @Test
         public void 引き渡した介護事業者状況とtoNinteichosaItakusakiの結果は一致する() {
-            testentity.set介護事業者状況(false);
-            NinteichosaItakusaki result = NinteichosaItakusakiMapper.toNinteichosaItakusaki(testentity);
+            sut.set介護事業者状況(false);
+            NinteichosaItakusaki result = NinteichosaItakusakiMapper.toNinteichosaItakusaki(sut);
             assertThat(result.is有効(), is(false));
         }
 
         @Test
         public void 引き渡した調査委託区分とtoNinteichosaItakusakiの結果は一致する() {
-            testentity.set調査委託区分(ChosaItakuKubun.介護保険施設);
-            NinteichosaItakusaki result = NinteichosaItakusakiMapper.toNinteichosaItakusaki(testentity);
+            sut.set調査委託区分(ChosaItakuKubun.介護保険施設);
+            NinteichosaItakusaki result = NinteichosaItakusakiMapper.toNinteichosaItakusaki(sut);
             assertThat(result.getChosaItakuKubun(), is(ChosaItakuKubun.介護保険施設));
         }
 
         @Test
         public void 引き渡した割付定員とtoNinteichosaItakusakiの結果は一致する() {
-            testentity.set割付定員(20);
-            NinteichosaItakusaki result = NinteichosaItakusakiMapper.toNinteichosaItakusaki(testentity);
+            sut.set割付定員(20);
+            NinteichosaItakusaki result = NinteichosaItakusakiMapper.toNinteichosaItakusaki(sut);
             assertThat(result.getWaritsukeTeiin(), is(20));
         }
 
         @Test
         public void 引き渡した割付地区とtoNinteichosaItakusakiの結果は一致する() {
-            testentity.set割付地区(new RString("AA"));
-            NinteichosaItakusaki result = NinteichosaItakusakiMapper.toNinteichosaItakusaki(testentity);
+            sut.set割付地区(new RString("AA"));
+            NinteichosaItakusaki result = NinteichosaItakusakiMapper.toNinteichosaItakusaki(sut);
             assertThat(result.getWaritsukeChiku(), is(new RString("AA")));
         }
 
         @Test
         public void 引き渡した機関の区分とtoNinteichosaItakusakiの結果は一致する() {
-            testentity.set機関の区分(new RString("00000001"));
-            NinteichosaItakusaki result = NinteichosaItakusakiMapper.toNinteichosaItakusaki(testentity);
+            sut.set機関の区分(new RString("00000001"));
+            NinteichosaItakusaki result = NinteichosaItakusakiMapper.toNinteichosaItakusaki(sut);
             assertThat(result.getKikanKubun(), is(new RString("00000001")));
         }
 
