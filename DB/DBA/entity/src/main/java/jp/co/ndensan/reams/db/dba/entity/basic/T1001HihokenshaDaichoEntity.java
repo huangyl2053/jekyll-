@@ -19,6 +19,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  */
 public class T1001HihokenshaDaichoEntity implements IDbAccessable {
 
+    /**
+     * テーブル名
+     */
     @TableName
     public static final RString TABLE_BANE = new RString("T1001HihokennshaDaicho");
     @PrimaryKey
