@@ -6,20 +6,20 @@ package jp.co.ndensan.reams.db.dba.persistence.basic;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.entity.basic.T1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.business.KaigoHihokenshaNumber;
-import jp.co.ndensan.reams.db.dbz.business.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.IDeletable;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.IReplaceable;
+//TODO n3327 三浦凌 IShikibetsuCodeがdefinitionへ移動するまでは、ur.businessへの依存性を残す。( pom.xmlも修正の必要あり )
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.IInsertable;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.IDeletable;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.IUpdatable;
 
 /**
  * T1001HihokenshaDaichoのデータアクセス用インタフェースです。
  *
  * @author N3327 三浦 凌
  */
-public interface IHihokenshaDaichoDac extends
-        IInsertable<T1001HihokenshaDaichoEntity>, IDeletable<T1001HihokenshaDaichoEntity>, IUpdatable<T1001HihokenshaDaichoEntity> {
+public interface IHihokenshaDaichoDac
+        extends IReplaceable<T1001HihokenshaDaichoEntity>, IDeletable<T1001HihokenshaDaichoEntity> {
 
     /**
      * 市町村コードと被保険者番号から、被保険者を検索します。<br />
@@ -55,12 +55,4 @@ public interface IHihokenshaDaichoDac extends
      * @return T1001HihokenshaDaichoEntityのリスト
      */
     List<T1001HihokenshaDaichoEntity> select(IShikibetsuCode 識別コード);
-
-    /**
-     * 同一被保険者に対するデータが存在するかどうかをチェックし、存在する場合はupdate、存在しない場合はinsertを行います。
-     *
-     * @param entity 永続化したい被保険者情報
-     * @return 処理を委譲したメソッドの返り値。updateのときはupdate。insertのときはinsert。
-     */
-    int insertOrUpdate(T1001HihokenshaDaichoEntity entity);
 }

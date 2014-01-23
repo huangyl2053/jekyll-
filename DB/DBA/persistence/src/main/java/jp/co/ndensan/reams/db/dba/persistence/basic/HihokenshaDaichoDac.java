@@ -7,15 +7,16 @@ package jp.co.ndensan.reams.db.dba.persistence.basic;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.entity.basic.T1001HihokenshaDaicho;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
 import jp.co.ndensan.reams.db.dba.entity.basic.T1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.business.KaigoHihokenshaNumber;
-import jp.co.ndensan.reams.db.dbz.business.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+//TODO n3327 三浦凌 IShikibetsuCodeがdefinitionへ移動するまでは、ur.businessへの依存性を残す。( pom.xmlも修正の必要あり )
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
-import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.util.db.DbAccessor;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
+import jp.co.ndensan.reams.uz.uza.util.db.DbAccessor;
+import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
 
 /**
  * T1001HihokenshaDaichoのデータアクセス用クラスです。
@@ -55,7 +56,6 @@ public class HihokenshaDaichoDac implements IHihokenshaDaichoDac {
     }
 
     @Override
-    @Transaction
     public List<T1001HihokenshaDaichoEntity> select(ShichosonCode 市町村コード, IShikibetsuCode 識別コード) {
         DbAccessor accessor = new DbAccessor(session);
 
