@@ -51,7 +51,7 @@ public class T1001HihokenshaDaichoEntityMock {
         return spy(entity);
     }
 
-    public static T1001HihokenshaDaichoEntity createInstance(RString 市町村コード, RString 被保険者番号, RString 識別コード) {
+    public static T1001HihokenshaDaichoEntity getSpiedInstance(RString 市町村コード, RString 被保険者番号, RString 識別コード) {
         T1001HihokenshaDaichoEntity entity = getSpiedInstance();
         when(entity.getShichosonCd()).thenReturn(市町村コード);
         when(entity.getHihokenshaNo()).thenReturn(被保険者番号);
