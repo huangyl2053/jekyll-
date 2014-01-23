@@ -32,7 +32,7 @@ import org.junit.runner.RunWith;
 import static org.mockito.Mockito.*;
 
 /**
- * Hihokenshaクラスのテストクラスです。
+ * 被保険者のテストクラスです。
  *
  * @author N3327 三浦 凌
  */

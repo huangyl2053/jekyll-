@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.spy;
 
 /**
+ * 被保険者のMockクラスです。
  *
  * @author N3327 三浦 凌
  */

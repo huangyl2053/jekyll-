@@ -13,6 +13,7 @@ import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 
 /**
+ * 資格異動区分のテストクラスです。
  *
  * @author N3327 三浦 凌
  */

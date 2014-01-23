@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
 
 /**
+ * 被保険者区分のテストクラスです。
  *
  * @author N3327 三浦 凌
  */

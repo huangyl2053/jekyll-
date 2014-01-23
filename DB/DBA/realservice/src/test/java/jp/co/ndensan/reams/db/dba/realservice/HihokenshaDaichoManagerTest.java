@@ -28,6 +28,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.mockito.Mockito.*;
 
 /**
+ * 被保険者台帳Managerのテストクラスです。
  *
  * @author N3327 三浦 凌
  */
