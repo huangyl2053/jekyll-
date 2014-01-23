@@ -29,8 +29,6 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class NinteichosaItakusakiMapperTest extends TestBase {
 
-//    public NinteichosaItakusakiMapperTest() {
-//    }
     public static class toNinteichosaItakusaki extends TestBase {
 
         private KaigoJigyoshaNo kaigojigyoshaNo = new KaigoJigyoshaNo(new RString("0000000001"));
