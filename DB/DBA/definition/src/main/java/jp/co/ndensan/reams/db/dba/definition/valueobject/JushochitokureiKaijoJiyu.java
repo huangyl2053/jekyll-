@@ -2,10 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business;
+package jp.co.ndensan.reams.db.dba.definition.valueobject;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.ur.urz.business.ICodeAssignedItem;
+//TODO n3327 三浦凌 ICodeAssinedItemがdefinitionへ移動されたら、当該インタフェースを実装する。
+//import jp.co.ndensan.reams.ur.urz.business.ICodeAssignedItem;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3327 三浦 凌
  */
-public class JushochitokureiKaijoJiyu implements ICodeAssignedItem {
+public class JushochitokureiKaijoJiyu { //implements ICodeAssignedItem {
 
     private final RString code;
     private final RString name;
@@ -39,12 +40,20 @@ public class JushochitokureiKaijoJiyu implements ICodeAssignedItem {
         this.name = Objects.requireNonNull(name, Messages.E00003.replace("名称", className.toString()).getMessage());
     }
 
-    @Override
+    /**
+     * コードを取得する。
+     *
+     * @return コード
+     */
     public RString getCode() {
         return code;
     }
 
-    @Override
+    /**
+     * 名称を取得する。
+     *
+     * @return 名称
+     */
     public RString getName() {
         return name;
     }
