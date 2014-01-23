@@ -97,13 +97,5 @@ public class NinteichosaItakusakiMapperTest extends TestBase {
             NinteichosaItakusaki result = NinteichosaItakusakiMapper.toNinteichosaItakusaki(sut);
             assertThat(result.getKikanKubun(), is(new RString("00000001")));
         }
-
-        private static T7010NinteichosaItakusakiJohoEntity createNinteichosaItakusakiJoho(RString 市町村コード,
-                KaigoJigyoshaNo 介護事業者番号, JigyoshaNo 事業者番号, boolean 介護事業者状況, ChosaItakuKubun 調査委託区分,
-                int 割付定員, RString 割付地区, RString 機関の区分) {
-
-            return new T7010NinteichosaItakusakiJohoEntity(市町村コード, 介護事業者番号, 事業者番号,
-                    介護事業者状況, 調査委託区分, 割付定員, 割付地区, 機関の区分);
-        }
     }
 }
