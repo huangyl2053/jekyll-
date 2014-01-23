@@ -39,6 +39,7 @@ public class HihokenshaList implements Iterable {
      */
     public Hihokensha get被保険者(ShichosonCode 市町村コード, KaigoHihokenshaNumber 被保険者番号) {
         for (Hihokensha 被保険者 : 被保険者リスト) {
+            // TODO n3327 三浦凌 Hihokenshaのget被保険者番号()の戻り値をKaigoHihokenshaNumberに修正したら、下の条件も直す。
             if (被保険者.get市町村コード().equals(市町村コード) && 被保険者.get被保険者番号().equals(被保険者番号.getValue())) {
                 return 被保険者;
             }
