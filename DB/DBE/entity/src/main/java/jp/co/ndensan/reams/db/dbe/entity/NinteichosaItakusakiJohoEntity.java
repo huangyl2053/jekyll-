@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity;
 
-import jp.co.ndensan.reams.db.dbe.business.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbe.business.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.definition.ChosaItakuKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
