@@ -14,6 +14,7 @@ import static org.mockito.Mockito.*;
  *
  * @author N3327 三浦 凌
  */
+//TODO n3327 三浦凌 識別コードがドメインクラスとして公開されたら修正する。
 public class ShikibetsuCodeMock {
 
     private ShikibetsuCodeMock() {
