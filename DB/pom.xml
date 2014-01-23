@@ -14,13 +14,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <modules>
-        <module>dba</module>
-        <module>dbb</module>
-        <module>dbc</module>
-        <module>dbd</module>
-        <module>dbe</module>
-        <module>dbu</module>
-        <module>dbz</module>
+        <module>DBA</module>
+        <module>DBB</module>
+        <module>DBC</module>
+        <module>DBD</module>
+        <module>DBE</module>
+        <module>DBU</module>
+        <module>DBZ</module>
     </modules>
     <dependencyManagement>
         <dependencies>
