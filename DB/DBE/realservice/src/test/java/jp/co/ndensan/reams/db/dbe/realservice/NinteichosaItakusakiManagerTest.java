@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.HatsubanJoho;
-import jp.co.ndensan.reams.db.dbe.business.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbe.business.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.definition.ChosaItakuKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.T5020HatsubanKanriJohoEntity;
@@ -44,8 +44,6 @@ public class NinteichosaItakusakiManagerTest {
     private static JigyoshaNo jigyoshaNo;
     private static List<T7010NinteichosaItakusakiJohoEntity> list;
     private static List<T7010NinteichosaItakusakiJohoEntity> emptyList;
-//    private static List<NinteichosaItakusaki> itakusakilist;
-//    private static List<NinteichosaItakusaki> emptyList;
     private static NinteichosaItakusakiManager sut;
 
     @BeforeClass
