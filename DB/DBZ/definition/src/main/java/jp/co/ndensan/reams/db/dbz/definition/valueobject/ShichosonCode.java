@@ -2,10 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business;
+package jp.co.ndensan.reams.db.dbz.definition.valueobject;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.ur.urz.business.ILocalGovernmentCode;
+//TODO n3327 三浦凌　ILocalGovernmentCodeがdefinitionに移動したら、アンコメントする。
+//import jp.co.ndensan.reams.ur.urz.business.ILocalGovernmentCode;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -28,20 +29,19 @@ public class ShichosonCode {
         this.市町村コード = Objects.requireNonNull(コード, Messages.E00003.replace("コード", "市町村コード").getMessage());
     }
 
-    /**
-     * 指定の地方公共団体コードから、市町村コードを生成します。
-     *
-     * @param 地方公共団体コード 地方公共団体コード
-     */
-    public ShichosonCode(ILocalGovernmentCode 地方公共団体コード) {
-        Objects.requireNonNull(地方公共団体コード, Messages.E00003.replace("地方公共団体コード", "市町村コード").getMessage());
-
-        //TODO N3327 三浦凌 以下の処理は、5桁のコードを取得するメソッドがILocalGovernmentCodeに作成されたら、そのメソッドに書き直す。
-        RString 都道府県コード = 地方公共団体コード.get都道府県コード();
-        RString 市区町村コード = 地方公共団体コード.get市区町村コード();
-        this.市町村コード = compose市町村コード(都道府県コード, 市区町村コード);
-    }
-
+//    /**
+//     * 指定の地方公共団体コードから、市町村コードを生成します。
+//     *
+//     * @param 地方公共団体コード 地方公共団体コード
+//     */
+//    public ShichosonCode(ILocalGovernmentCode 地方公共団体コード) {
+//        Objects.requireNonNull(地方公共団体コード, Messages.E00003.replace("地方公共団体コード", "市町村コード").getMessage());
+//
+//        //TODO N3327 三浦凌 以下の処理は、5桁のコードを取得するメソッドがILocalGovernmentCodeに作成されたら、そのメソッドに書き直す。
+//        RString 都道府県コード = 地方公共団体コード.get都道府県コード();
+//        RString 市区町村コード = 地方公共団体コード.get市区町村コード();
+//        this.市町村コード = compose市町村コード(都道府県コード, 市区町村コード);
+//    }
     /**
      * コードを取得します。
      *
