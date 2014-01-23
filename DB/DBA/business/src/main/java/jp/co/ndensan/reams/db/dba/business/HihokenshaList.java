@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dba.business;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.business.KaigoHihokenshaNumber;
-import jp.co.ndensan.reams.db.dbz.business.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**

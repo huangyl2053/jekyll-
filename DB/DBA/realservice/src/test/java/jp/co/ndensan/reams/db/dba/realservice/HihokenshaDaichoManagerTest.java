@@ -5,15 +5,15 @@
 package jp.co.ndensan.reams.db.dba.realservice;
 
 import jp.co.ndensan.reams.db.dba.business.Hihokensha;
-import jp.co.ndensan.reams.db.dba.business.HihokenshaKubun;
+import jp.co.ndensan.reams.db.dba.definition.valueobject.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dba.business.HihokenshaList;
-import jp.co.ndensan.reams.db.dba.business.ShikakuShutokuJiyu;
+import jp.co.ndensan.reams.db.dba.definition.valueobject.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dba.realservice.helper.HihokenshaDaichoDacMock;
 import jp.co.ndensan.reams.db.dba.realservice.helper.HihokenshaMock;
 import jp.co.ndensan.reams.db.dba.realservice.helper.ShikibetsuCodeMock;
-import jp.co.ndensan.reams.db.dbz.business.KaigoHihokenshaNumber;
-import jp.co.ndensan.reams.db.dbz.business.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
