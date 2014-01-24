@@ -9,7 +9,7 @@ import java.util.Objects;
 //import jp.co.ndensan.reams.ur.urz.business.ILocalGovernmentCode;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+//import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 介護保険業務で利用する、5桁の市町村コードです。
@@ -74,11 +74,10 @@ public class ShichosonCode {
         hash = 17 * hash + Objects.hashCode(this.getValue());
         return hash;
     }
-
-    private RString compose市町村コード(final RString 都道府県コード, final RString 市区町村コード) {
-        RStringBuilder code = new RStringBuilder();
-        code.append(都道府県コード);
-        code.append(市区町村コード);
-        return code.toRString();
-    }
+//    private RString compose市町村コード(final RString 都道府県コード, final RString 市区町村コード) {
+//        RStringBuilder code = new RStringBuilder();
+//        code.append(都道府県コード);
+//        code.append(市区町村コード);
+//        return code.toRString();
+//    }
 }
