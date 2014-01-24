@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.definition.ChosaItakuKubun;
-import jp.co.ndensan.reams.db.dbe.entity.basic.T7010NinteichosaItakusakiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.MockNinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
@@ -33,7 +33,7 @@ public class NinteichosaItakusakiMapperTest extends TestBase {
 
         private KaigoJigyoshaNo kaigojigyoshaNo = new KaigoJigyoshaNo(new RString("0000000001"));
         private JigyoshaNo jigyoshaNo = new JigyoshaNo(new RString("2020300001"));
-        private T7010NinteichosaItakusakiJohoEntity sut;
+        private DbT7010NinteichosaItakusakiJohoEntity sut;
 
         @Override
         public void setUp() {

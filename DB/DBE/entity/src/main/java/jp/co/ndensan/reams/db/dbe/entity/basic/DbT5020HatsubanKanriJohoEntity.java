@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  *
  * @author N1013 松本直樹
  */
-public class T5020HatsubanKanriJohoEntity implements IDbAccessable {
+public class DbT5020HatsubanKanriJohoEntity implements IDbAccessable {
 //TODO 介護事業者番号の発番については、発番管理は共通の発番クラスを利用するか検討する　2014/02/28期限
 
     /**
@@ -31,7 +31,7 @@ public class T5020HatsubanKanriJohoEntity implements IDbAccessable {
     /**
      * ORマッパーのためのデフォルトコンストラクタです。
      */
-    T5020HatsubanKanriJohoEntity() {
+    DbT5020HatsubanKanriJohoEntity() {
     }
 
     /**
@@ -41,7 +41,7 @@ public class T5020HatsubanKanriJohoEntity implements IDbAccessable {
      * @param 年度
      * @param 発番
      */
-    public T5020HatsubanKanriJohoEntity(RString 項目区分, RString 年度, RString 発番) {
+    public DbT5020HatsubanKanriJohoEntity(RString 項目区分, RString 年度, RString 発番) {
         this.項目区分 = 項目区分;
         this.年度 = 年度;
         this.発番 = 発番;

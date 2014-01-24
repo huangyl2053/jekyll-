@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
-import jp.co.ndensan.reams.db.dbe.entity.basic.T7010NinteichosaItakusakiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**
@@ -29,7 +29,7 @@ public final class NinteichosaItakusakiMapper {
      * @return 認定調査委託先
      * @throws NullPointerException {@code 認定調査委託先Entity}がnullの場合
      */
-    public static NinteichosaItakusaki toNinteichosaItakusaki(T7010NinteichosaItakusakiJohoEntity 認定調査委託先Entity)throws NullPointerException {
+    public static NinteichosaItakusaki toNinteichosaItakusaki(DbT7010NinteichosaItakusakiJohoEntity 認定調査委託先Entity)throws NullPointerException {
         requireNonNull(認定調査委託先Entity, Messages.E00003.replace("認定調査委託先エンティティ", "認定調査委託先").getMessage());
         return new NinteichosaItakusaki(
                 認定調査委託先Entity.get市町村コード(),

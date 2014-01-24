@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.definition.ChosaItakuKubun;
-import jp.co.ndensan.reams.db.dbe.entity.basic.T5020HatsubanKanriJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.basic.T7010NinteichosaItakusakiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5020HatsubanKanriJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.IHatsubanKanriJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.INinteichosaItakusakiDac;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -37,13 +37,13 @@ public class NinteichosaItakusakiManagerTest {
 
     private static INinteichosaItakusakiDac ninteichosaItakusakiDac;
     private static IHatsubanKanriJohoDac hatsubankanrijohoDac;
-    private static T7010NinteichosaItakusakiJohoEntity entity;
-    private static T5020HatsubanKanriJohoEntity hatsubanentity;
+    private static DbT7010NinteichosaItakusakiJohoEntity entity;
+    private static DbT5020HatsubanKanriJohoEntity hatsubanentity;
     private static NinteichosaItakusaki ninteichosaItakusaki;
     private static KaigoJigyoshaNo kaigojigyoshaNo;
     private static JigyoshaNo jigyoshaNo;
-    private static List<T7010NinteichosaItakusakiJohoEntity> list;
-    private static List<T7010NinteichosaItakusakiJohoEntity> emptyList;
+    private static List<DbT7010NinteichosaItakusakiJohoEntity> list;
+    private static List<DbT7010NinteichosaItakusakiJohoEntity> emptyList;
     private static NinteichosaItakusakiManager sut;
 
     @BeforeClass
@@ -53,8 +53,8 @@ public class NinteichosaItakusakiManagerTest {
         ninteichosaItakusaki = mock(NinteichosaItakusaki.class);
         kaigojigyoshaNo = mock(KaigoJigyoshaNo.class);
         jigyoshaNo = mock(JigyoshaNo.class);
-        entity = mock(T7010NinteichosaItakusakiJohoEntity.class);
-        hatsubanentity = mock(T5020HatsubanKanriJohoEntity.class);
+        entity = mock(DbT7010NinteichosaItakusakiJohoEntity.class);
+        hatsubanentity = mock(DbT5020HatsubanKanriJohoEntity.class);
         list = new ArrayList<>();
 //        entity.set市町村コード(new RString("20203"));
         when(entity.get市町村コード()).thenReturn(new RString("20203"));
@@ -187,7 +187,7 @@ public class NinteichosaItakusakiManagerTest {
 
         @Test
         public void get発番情報は指定した項目区分の番号を返却する() {
-            hatsubanentity = mock(T5020HatsubanKanriJohoEntity.class);
+            hatsubanentity = mock(DbT5020HatsubanKanriJohoEntity.class);
             hatsubanentity.set年度(new RString("0000"));
             hatsubanentity.set項目区分(new RString("010"));
             hatsubanentity.set発番(new RString("020"));
