@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urf.business.HokenShubetsu;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoShikaku;
 import jp.co.ndensan.reams.ur.urf.business._KaigoShikaku;
+import jp.co.ndensan.reams.ur.urz.business._ShikakuShutokuJiyu;
+import jp.co.ndensan.reams.ur.urz.business._ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.spy;
@@ -43,7 +45,8 @@ public class HihokenshaMock {
 
     private static IKaigoShikaku create介護保険資格() {
         return new _KaigoShikaku(
-                ShikibetsuCodeMock.createInstance(new RString("識別コード")),
-                HokenShubetsu.介護保険, RDate.MAX, RDate.MAX, RString.EMPTY, RDate.MAX, RDate.MAX, RString.EMPTY, RString.EMPTY, RString.EMPTY, RDate.MAX);
+                ShikibetsuCodeMock.createInstance(new RString("識別コード")), HokenShubetsu.介護保険,
+                RDate.MAX, RDate.MAX, new _ShikakuShutokuJiyu(),
+                RDate.MAX, RDate.MAX, new _ShikakuSoshitsuJiyu(), RString.EMPTY, RString.EMPTY, RDate.MAX);
     }
 }

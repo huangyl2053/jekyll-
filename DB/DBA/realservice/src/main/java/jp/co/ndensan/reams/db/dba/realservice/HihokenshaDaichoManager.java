@@ -10,13 +10,13 @@ import jp.co.ndensan.reams.db.dba.business.Hihokensha;
 import jp.co.ndensan.reams.db.dba.business.HihokenshaFactory;
 import jp.co.ndensan.reams.db.dba.definition.valueobject.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dba.business.HihokenshaList;
-import jp.co.ndensan.reams.db.dba.definition.valueobject.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dba.entity.basic.T1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dba.entity.mapper.HihokenshaMapper;
 import jp.co.ndensan.reams.db.dba.persistence.basic.IHihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
@@ -86,7 +86,7 @@ public class HihokenshaDaichoManager implements IHihokenshaDaichoManager {
 
     @Override
     public boolean save(ShichosonCode 市町村コード, IShikibetsuCode 識別コード, HihokenshaKubun 被保険者区分,
-            RDate 資格取得届出年月日, RDate 資格取得年月日, ShikakuShutokuJiyu 資格取得事由, RDate 一号年齢到達日) {
+            RDate 資格取得届出年月日, RDate 資格取得年月日, IShikakuShutokuJiyu 資格取得事由, RDate 一号年齢到達日) {
 
         KaigoHihokenshaNumber 被保険者番号 = new HihokenshaNumberSaibanService().createNewNumber();
 
@@ -95,7 +95,7 @@ public class HihokenshaDaichoManager implements IHihokenshaDaichoManager {
 
     @Override
     public boolean save(KaigoHihokenshaNumber 被保険者番号, ShichosonCode 市町村コード, IShikibetsuCode 識別コード, HihokenshaKubun 被保険者区分,
-            RDate 資格取得届出年月日, RDate 資格取得年月日, ShikakuShutokuJiyu 資格取得事由, RDate 一号年齢到達日) {
+            RDate 資格取得届出年月日, RDate 資格取得年月日, IShikakuShutokuJiyu 資格取得事由, RDate 一号年齢到達日) {
 
         Hihokensha 登録対象 = HihokenshaFactory.createInstance(
                 被保険者番号, 市町村コード, 識別コード, ShikakuIdoKubun.資格取得, 被保険者区分, 資格取得届出年月日, 資格取得年月日, 資格取得事由, 一号年齢到達日);

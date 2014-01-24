@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dba.realservice;
 import jp.co.ndensan.reams.db.dba.business.Hihokensha;
 import jp.co.ndensan.reams.db.dba.definition.valueobject.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dba.business.HihokenshaList;
-import jp.co.ndensan.reams.db.dba.definition.valueobject.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
@@ -68,7 +68,7 @@ public interface IHihokenshaDaichoManager {
      * @return 登録が成功したかどうか
      */
     boolean save(ShichosonCode 市町村コード, IShikibetsuCode 識別コード, HihokenshaKubun 被保険者区分,
-            RDate 資格取得届出年月日, RDate 資格取得年月日, ShikakuShutokuJiyu 資格取得事由, RDate 一号年齢到達日);
+            RDate 資格取得届出年月日, RDate 資格取得年月日, IShikakuShutokuJiyu 資格取得事由, RDate 一号年齢到達日);
 
     /**
      * 引数から被保険者情報を生成し、新しく登録します。
@@ -84,7 +84,7 @@ public interface IHihokenshaDaichoManager {
      * @return 登録が成功したかどうか
      */
     boolean save(KaigoHihokenshaNumber 被保険者番号, ShichosonCode 市町村コード, IShikibetsuCode 識別コード, HihokenshaKubun 被保険者区分,
-            RDate 資格取得届出年月日, RDate 資格取得年月日, ShikakuShutokuJiyu 資格取得事由, RDate 一号年齢到達日);
+            RDate 資格取得届出年月日, RDate 資格取得年月日, IShikakuShutokuJiyu 資格取得事由, RDate 一号年齢到達日);
 
     /**
      * 被保険者の情報の登録・更新をします。

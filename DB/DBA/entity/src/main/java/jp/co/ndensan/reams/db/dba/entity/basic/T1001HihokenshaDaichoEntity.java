@@ -72,11 +72,11 @@ public class T1001HihokenshaDaichoEntity implements IDbAccessable {
         this.shikibetsuCode = 被保険者.get識別コード();
         this.shikakuIdouKubunCode = 被保険者.get資格異動区分().getCode();
         this.shikakuShutokuTodokedeDate = 被保険者.get資格取得届出年月日();
-        this.shikakuShutokuJiyuCode = 被保険者.get資格取得事由();
+        this.shikakuShutokuJiyuCode = 被保険者.get資格取得事由().getCode();
         this.shikakuShutokuDate = 被保険者.get資格取得年月日();
         this.ichigoHihokenshaNenreiTotatsuDate = 被保険者.get一号該当日();
         this.hihokenshaKubunCode = 被保険者.get被保険者区分().getCode();
-        this.shikakuSoshitsuJiyuCode = 被保険者.get資格取得事由();
+        this.shikakuSoshitsuJiyuCode = 被保険者.get資格取得事由().getCode();
         this.shikakuSoshitsuTodokedeDate = 被保険者.get資格喪失届出年月日();
         this.shikakuSoshitsuDate = 被保険者.get資格喪失年月日();
         this.shikakuHenkoJiyuCode = 被保険者.get資格変更事由().getCode();

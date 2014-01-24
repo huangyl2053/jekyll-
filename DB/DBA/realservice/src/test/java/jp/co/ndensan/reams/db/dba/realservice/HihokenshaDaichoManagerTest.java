@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dba.realservice;
 import jp.co.ndensan.reams.db.dba.business.Hihokensha;
 import jp.co.ndensan.reams.db.dba.definition.valueobject.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dba.business.HihokenshaList;
-import jp.co.ndensan.reams.db.dba.definition.valueobject.ShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dba.realservice.helper.HihokenshaDaichoDacMock;
 import jp.co.ndensan.reams.db.dba.realservice.helper.HihokenshaMock;
+import jp.co.ndensan.reams.db.dba.realservice.helper.ShikakuShutokuJiyuMock;
 import jp.co.ndensan.reams.db.dba.realservice.helper.ShikibetsuCodeMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -164,7 +164,7 @@ public class HihokenshaDaichoManagerTest extends TestBase {
                 HihokenshaKubun 被保険者区分 = new HihokenshaKubun(new RString("01"), new RString("第1号被保険者"));
                 RDate 資格取得届出年月日 = null;
                 RDate 資格取得年月日 = new RDate("2002-2-2");
-                ShikakuShutokuJiyu 資格取得事由 = new ShikakuShutokuJiyu(RString.EMPTY, RString.EMPTY);
+                IShikakuShutokuJiyu 資格取得事由 = create資格取得事由();
                 RDate 一号年齢到達日 = null;
 
                 boolean result = sut.save(市町村コード, 識別コード, 被保険者区分, 資格取得届出年月日, 資格取得年月日, 資格取得事由, 一号年齢到達日);
@@ -189,7 +189,7 @@ public class HihokenshaDaichoManagerTest extends TestBase {
                 HihokenshaKubun 被保険者区分 = new HihokenshaKubun(new RString("01"), new RString("第1号被保険者"));
                 RDate 資格取得届出年月日 = null;
                 RDate 資格取得年月日 = new RDate("2002-2-2");
-                ShikakuShutokuJiyu 資格取得事由 = new ShikakuShutokuJiyu(RString.EMPTY, RString.EMPTY);
+                IShikakuShutokuJiyu 資格取得事由 = create資格取得事由();
                 RDate 一号年齢到達日 = null;
 
                 boolean result = sut.save(被保険者番号, 市町村コード, 識別コード, 被保険者区分, 資格取得届出年月日, 資格取得年月日, 資格取得事由, 一号年齢到達日);
@@ -242,5 +242,9 @@ public class HihokenshaDaichoManagerTest extends TestBase {
 
     private static IShikibetsuCode create識別コード(RString code) {
         return ShikibetsuCodeMock.createInstance(code);
+    }
+
+    private static IShikakuShutokuJiyu create資格取得事由() {
+        return ShikakuShutokuJiyuMock.createInstance();
     }
 }

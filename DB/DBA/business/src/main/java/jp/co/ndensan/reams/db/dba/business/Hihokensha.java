@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urf.business.HokenShubetsu;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoShikaku;
+import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
+import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -330,8 +332,7 @@ public class Hihokensha implements IKaigoShikaku {
      * @return 資格取得事由
      */
     @Override
-    public RString get資格取得事由() {
-        //TODO N3327 三浦凌 資格取得事由のインターフェースを共通へ作成する。 2014/1/31まで
+    public IShikakuShutokuJiyu get資格取得事由() {
         return 介護保険資格.get資格取得事由();
     }
 
@@ -361,8 +362,7 @@ public class Hihokensha implements IKaigoShikaku {
      * @return 資格喪失事由
      */
     @Override
-    public RString get資格喪失事由() {
-        //TODO N3327 三浦凌 資格喪失事由のインターフェースを共通へ作成する。 2014/1/31まで
+    public IShikakuSoshitsuJiyu get資格喪失事由() {
         return 介護保険資格.get資格喪失事由();
     }
 

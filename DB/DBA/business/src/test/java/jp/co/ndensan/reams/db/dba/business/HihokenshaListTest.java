@@ -4,14 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dba.business;
 
-import jp.co.ndensan.reams.db.dba.definition.valueobject.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dba.definition.valueobject.HihokenshaKubun;
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.helper.ShikakuShutokuJiyuMock;
 import jp.co.ndensan.reams.db.dba.business.helper.ShikibetsuCodeMock;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
@@ -98,7 +99,11 @@ public class HihokenshaListTest extends TestBase {
                 被保険者番号, 市町村コード,
                 ShikibetsuCodeMock.createInstance(new RString("")),
                 ShikakuIdoKubun.資格取得, new HihokenshaKubun(RString.EMPTY, RString.EMPTY),
-                RDate.MAX, RDate.MAX, new ShikakuShutokuJiyu(), RDate.MAX);
+                RDate.MAX, RDate.MAX, create資格取得事由(RString.EMPTY, RString.EMPTY), RDate.MAX);
         return 被保険者;
+    }
+
+    private static IShikakuShutokuJiyu create資格取得事由(final RString code, final RString name) {
+        return ShikakuShutokuJiyuMock.createInstance(code, name);
     }
 }

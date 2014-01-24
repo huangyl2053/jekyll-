@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.db.dba.entity.basic.T1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urf.business.HokenShubetsu;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoShikaku;
+import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
+import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.ur.urz.business.KaigoShikakuFactory;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -77,8 +79,10 @@ public final class HihokenshaMapper {
         IShikibetsuCode 識別コード = entity.getShikibetsuCode();
         IKaigoShikaku 介護保険資格 = KaigoShikakuFactory.createInstance(
                 識別コード, HokenShubetsu.介護保険,
-                entity.getShikakuShutokuTodokedeDate(), entity.getShikakuShutokuDate(), entity.getShikakuShutokuJiyuCode(),
-                entity.getShikakuSoshitsuTodokedeDate(), entity.getShikakuSoshitsuDate(), entity.getShikakuSoshitsuJiyuCode(),
+                entity.getShikakuShutokuTodokedeDate(), entity.getShikakuShutokuDate(),
+                to資格取得事由(entity.getShikakuShutokuJiyuCode()),
+                entity.getShikakuSoshitsuTodokedeDate(), entity.getShikakuSoshitsuDate(),
+                to資格喪失事由(entity.getShikakuSoshitsuJiyuCode()),
                 entity.getHihokenshaNo(), entity.getShichosonCd(), entity.getIchigoHihokenshaNenreiTotatsuDate());
         return 介護保険資格;
     }
@@ -102,5 +106,35 @@ public final class HihokenshaMapper {
 
     private static SaikofuJiyu to再交付事由(final RString code) {
         return new SaikofuJiyu(code, new RString("仮"));
+    }
+
+    //TODO n3327 三浦凌 ShikakuShutokuJiyuの修正が完了したら、返り値等を修正する。
+    private static IShikakuShutokuJiyu to資格取得事由(final RString code) {
+        return new IShikakuShutokuJiyu() {
+            @Override
+            public RString getCode() {
+                return code;
+            }
+
+            @Override
+            public RString getName() {
+                return new RString("資格取得事由");
+            }
+        };
+    }
+
+    //TODO n3327 三浦凌 ShikakuSoshitsuJiyuの修正が完了したら、返り値等を修正する。
+    private static IShikakuSoshitsuJiyu to資格喪失事由(final RString code) {
+        return new IShikakuSoshitsuJiyu() {
+            @Override
+            public RString getCode() {
+                return code;
+            }
+
+            @Override
+            public RString getName() {
+                return new RString("資格取得事由");
+            }
+        };
     }
 }

@@ -210,7 +210,7 @@ public class HihokenshaMapperTest extends TestBase {
         public void あるEntityから作成した被保険者のget資格取得事由は_当該Entityに設定した資格取得事由コードと同じ値を返す() {
             RString 資格取得事由コード = new RString("資格取得事由");
             entity.setShikakuShutokuJiyuCode(資格取得事由コード);
-            assertThat(HihokenshaMapper.toHihokensha(entity).get資格取得事由(), is(資格取得事由コード));
+            assertThat(HihokenshaMapper.toHihokensha(entity).get資格取得事由().getCode(), is(資格取得事由コード));
         }
 
         @Test
@@ -231,7 +231,7 @@ public class HihokenshaMapperTest extends TestBase {
         public void あるEntityから作成した被保険者のget資格喪失事由は_当該Entityに設定した資格喪失事由コードと同じ値を返す() {
             RString 資格喪失事由コード = new RString("資格喪失事由");
             entity.setShikakuSoshitsuJiyuCode(資格喪失事由コード);
-            assertThat(HihokenshaMapper.toHihokensha(entity).get資格喪失事由(), is(資格喪失事由コード));
+            assertThat(HihokenshaMapper.toHihokensha(entity).get資格喪失事由().getCode(), is(資格喪失事由コード));
         }
     }
 
