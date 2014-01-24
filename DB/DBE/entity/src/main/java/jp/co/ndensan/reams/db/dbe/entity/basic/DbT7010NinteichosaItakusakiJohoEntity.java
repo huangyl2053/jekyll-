@@ -46,14 +46,14 @@ public class DbT7010NinteichosaItakusakiJohoEntity implements IDbAccessable {
     /**
      * コンストラクタクラスです
      *
-     * @param 市町村コード
-     * @param 介護事業者番号
-     * @param 事業者番号
-     * @param 介護事業者状況
-     * @param 調査委託区分
-     * @param 割付定員
-     * @param 割付地区
-     * @param 機関の区分
+     * @param 市町村コード 市町村コード
+     * @param 介護事業者番号 介護事業者番号
+     * @param 事業者番号 事業者番号
+     * @param 介護事業者状況 介護事業者状況
+     * @param 調査委託区分 調査委託区分
+     * @param 割付定員 割付定員
+     * @param 割付地区 割付地区
+     * @param 機関の区分 機関の区分
      */
     public DbT7010NinteichosaItakusakiJohoEntity(RString 市町村コード, KaigoJigyoshaNo 介護事業者番号,
             JigyoshaNo 事業者番号, boolean 介護事業者状況, ChosaItakuKubun 調査委託区分,
