@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  *
  * @author N3327 三浦 凌
  */
-public enum T1001HihokenshaDaicho implements IColumnDefinition {
+public enum DbT1001HihokenshaDaicho implements IColumnDefinition {
 
     /**
      * 市町村コード
@@ -119,7 +119,7 @@ public enum T1001HihokenshaDaicho implements IColumnDefinition {
     private final int maxLength;
     private final int scale;
 
-    private T1001HihokenshaDaicho(int maxLength, int scale) {
+    private DbT1001HihokenshaDaicho(int maxLength, int scale) {
         this.maxLength = maxLength;
         this.scale = scale;
     }

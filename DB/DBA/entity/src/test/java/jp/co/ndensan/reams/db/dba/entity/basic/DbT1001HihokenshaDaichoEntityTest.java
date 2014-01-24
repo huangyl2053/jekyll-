@@ -16,14 +16,14 @@ import org.junit.runner.RunWith;
  * @author N3327 三浦 凌
  */
 @RunWith(Enclosed.class)
-public class T1001HihokenshaDaichoEntityTest extends TestBase {
+public class DbT1001HihokenshaDaichoEntityTest extends TestBase {
 
     public static class コンストラクタ extends TestBase {
 
         @Test(expected = NullPointerException.class)
         public void 引数のhihokenshaがnullのときは_NullPointerExceptionを投げる() {
             Hihokensha nullな被保険者 = null;
-            T1001HihokenshaDaichoEntity sut = new T1001HihokenshaDaichoEntity(nullな被保険者);
+            DbT1001HihokenshaDaichoEntity sut = new DbT1001HihokenshaDaichoEntity(nullな被保険者);
         }
     }
 }

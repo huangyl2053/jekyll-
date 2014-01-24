@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
-import jp.co.ndensan.reams.db.dba.entity.basic.T1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dba.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dba.persistence.basic.IHihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
@@ -29,9 +29,9 @@ public class HihokenshaDaichoDacMock implements IHihokenshaDaichoDac {
     public static RString 削除可能な市町村コード = new RString("deletable");
     public static RString 削除可能な被保険者番号 = new RString("deletable");
 
-    public static T1001HihokenshaDaichoEntity getSpiedInstance() {
+    public static DbT1001HihokenshaDaichoEntity getSpiedInstance() {
 
-        T1001HihokenshaDaichoEntity entity = new T1001HihokenshaDaichoEntity();
+        DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
 
         entity.setShichosonCd(new RString("12345"));
         entity.setHihokenshaNo(new RString("0123456789"));
@@ -63,8 +63,8 @@ public class HihokenshaDaichoDacMock implements IHihokenshaDaichoDac {
         return spy(entity);
     }
 
-    private T1001HihokenshaDaichoEntity createInstance(RString 市町村コード, RString 被保険者番号, RString 識別コード) {
-        T1001HihokenshaDaichoEntity entity = getSpiedInstance();
+    private DbT1001HihokenshaDaichoEntity createInstance(RString 市町村コード, RString 被保険者番号, RString 識別コード) {
+        DbT1001HihokenshaDaichoEntity entity = getSpiedInstance();
         when(entity.getShichosonCd()).thenReturn(市町村コード);
         when(entity.getHihokenshaNo()).thenReturn(被保険者番号);
         when(entity.getShikibetsuCode()).thenReturn(ShikibetsuCodeMock.createInstance(識別コード));
@@ -72,7 +72,7 @@ public class HihokenshaDaichoDacMock implements IHihokenshaDaichoDac {
     }
 
     @Override
-    public T1001HihokenshaDaichoEntity select(ShichosonCode 市町村コード, KaigoHihokenshaNumber 被保険者番号) {
+    public DbT1001HihokenshaDaichoEntity select(ShichosonCode 市町村コード, KaigoHihokenshaNumber 被保険者番号) {
         if (被保険者番号.getValue().equals(検索不可な被保険者番号)) {
             return null;
         }
@@ -80,42 +80,42 @@ public class HihokenshaDaichoDacMock implements IHihokenshaDaichoDac {
     }
 
     @Override
-    public List<T1001HihokenshaDaichoEntity> select(KaigoHihokenshaNumber 被保険者番号) {
+    public List<DbT1001HihokenshaDaichoEntity> select(KaigoHihokenshaNumber 被保険者番号) {
         if (被保険者番号.getValue().equals(検索不可な被保険者番号)) {
             return Collections.EMPTY_LIST;
         }
-        List<T1001HihokenshaDaichoEntity> entities = new ArrayList<>();
+        List<DbT1001HihokenshaDaichoEntity> entities = new ArrayList<>();
         entities.add(createInstance(new RString("市町村コード"), 被保険者番号.getValue(), new RString("識別コード")));
         return entities;
     }
 
     @Override
-    public List<T1001HihokenshaDaichoEntity> select(ShichosonCode 市町村コード, IShikibetsuCode 識別コード) {
+    public List<DbT1001HihokenshaDaichoEntity> select(ShichosonCode 市町村コード, IShikibetsuCode 識別コード) {
         if (識別コード.getValue().equals(検索不可な識別コード)) {
             return Collections.EMPTY_LIST;
         }
-        List<T1001HihokenshaDaichoEntity> entities = new ArrayList<>();
+        List<DbT1001HihokenshaDaichoEntity> entities = new ArrayList<>();
         entities.add(createInstance(市町村コード.getValue(), new RString("介護保険被保険者番号"), 識別コード.getValue()));
         return entities;
     }
 
     @Override
-    public List<T1001HihokenshaDaichoEntity> select(IShikibetsuCode 識別コード) {
+    public List<DbT1001HihokenshaDaichoEntity> select(IShikibetsuCode 識別コード) {
         if (識別コード.getValue().equals(検索不可な識別コード)) {
             return Collections.EMPTY_LIST;
         }
-        List<T1001HihokenshaDaichoEntity> entities = new ArrayList<>();
+        List<DbT1001HihokenshaDaichoEntity> entities = new ArrayList<>();
         entities.add(createInstance(new RString("市町村コード"), new RString("介護保険被保険者番号"), 識別コード.getValue()));
         return entities;
     }
 
     @Override
-    public int insert(T1001HihokenshaDaichoEntity data) {
+    public int insert(DbT1001HihokenshaDaichoEntity data) {
         return 1;
     }
 
     @Override
-    public int delete(T1001HihokenshaDaichoEntity data) {
+    public int delete(DbT1001HihokenshaDaichoEntity data) {
         if (data.getShichosonCd().equals(削除可能な市町村コード) && data.getHihokenshaNo().equals(削除可能な被保険者番号)) {
             return 1;
         }
@@ -123,12 +123,12 @@ public class HihokenshaDaichoDacMock implements IHihokenshaDaichoDac {
     }
 
     @Override
-    public int update(T1001HihokenshaDaichoEntity data) {
+    public int update(DbT1001HihokenshaDaichoEntity data) {
         return 1;
     }
 
     @Override
-    public int insertOrUpdate(T1001HihokenshaDaichoEntity entity) {
+    public int insertOrUpdate(DbT1001HihokenshaDaichoEntity entity) {
         return 1;
     }
 }

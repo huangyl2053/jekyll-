@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dba.persistence.basic.helper;
 
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
-import jp.co.ndensan.reams.db.dba.entity.basic.T1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dba.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.*;
@@ -15,11 +15,11 @@ import static org.mockito.Mockito.*;
  *
  * @author N3327 三浦 凌
  */
-public class T1001HihokenshaDaichoEntityMock {
+public class DbT1001HihokenshaDaichoEntityMock {
 
-    public static T1001HihokenshaDaichoEntity getSpiedInstance() {
+    public static DbT1001HihokenshaDaichoEntity getSpiedInstance() {
 
-        T1001HihokenshaDaichoEntity entity = new T1001HihokenshaDaichoEntity();
+        DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
 
         entity.setShichosonCd(new RString("12345"));
         entity.setHihokenshaNo(new RString("0123456789"));
@@ -51,8 +51,8 @@ public class T1001HihokenshaDaichoEntityMock {
         return spy(entity);
     }
 
-    public static T1001HihokenshaDaichoEntity getSpiedInstance(RString 市町村コード, RString 被保険者番号, RString 識別コード) {
-        T1001HihokenshaDaichoEntity entity = getSpiedInstance();
+    public static DbT1001HihokenshaDaichoEntity getSpiedInstance(RString 市町村コード, RString 被保険者番号, RString 識別コード) {
+        DbT1001HihokenshaDaichoEntity entity = getSpiedInstance();
         when(entity.getShichosonCd()).thenReturn(市町村コード);
         when(entity.getHihokenshaNo()).thenReturn(被保険者番号);
         when(entity.getShikibetsuCode()).thenReturn(ShikibetsuCodeMock.createInstance(識別コード));
