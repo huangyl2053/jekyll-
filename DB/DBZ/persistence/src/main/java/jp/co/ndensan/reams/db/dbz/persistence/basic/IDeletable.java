@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * テーブルからのデータの削除をするためのインタフェースです。
@@ -20,5 +21,6 @@ public interface IDeletable<T extends IDbAccessable> {
      * @param data 削除したいデータ
      * @return 削除件数
      */
+    @Transaction
     int delete(T data);
 }
