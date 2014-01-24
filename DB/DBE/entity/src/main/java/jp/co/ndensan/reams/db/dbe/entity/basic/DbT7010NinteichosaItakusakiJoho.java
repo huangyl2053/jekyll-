@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  *
  * @author N1013 松本直樹
  */
-public enum T7010NinteichosaItakusakiJoho implements IColumnDefinition {
+public enum DbT7010NinteichosaItakusakiJoho implements IColumnDefinition {
 //TODO 市町村コードはILocalGovernmentCodeを使用するか検討する。 2014/02/14 期限
 
     /**
@@ -49,7 +49,7 @@ public enum T7010NinteichosaItakusakiJoho implements IColumnDefinition {
     private final int maxLength;
     private final int scale;
 
-    private T7010NinteichosaItakusakiJoho(int maxLength, int scale) {
+    private DbT7010NinteichosaItakusakiJoho(int maxLength, int scale) {
         this.maxLength = maxLength;
         this.scale = scale;
     }
