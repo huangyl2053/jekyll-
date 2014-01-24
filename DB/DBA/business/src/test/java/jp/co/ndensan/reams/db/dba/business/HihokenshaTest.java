@@ -14,11 +14,15 @@ import jp.co.ndensan.reams.db.dba.business.helper.JushochitokureiKaijoJiyuMock;
 import jp.co.ndensan.reams.db.dba.business.helper.JushochitokureiTekiyoJiyuMock;
 import jp.co.ndensan.reams.db.dba.business.helper.SaikofuJiyuMock;
 import jp.co.ndensan.reams.db.dba.business.helper.ShikakuHenkoJiyuMock;
+import jp.co.ndensan.reams.db.dba.business.helper.ShikakuShutokuJiyuMock;
+import jp.co.ndensan.reams.db.dba.business.helper.ShikakuSoshitsuJiyuMock;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urf.business.HokenShubetsu;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoShikaku;
 import jp.co.ndensan.reams.ur.urf.business._KaigoShikaku;
+import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
+import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -159,7 +163,7 @@ public class HihokenshaTest extends TestBase {
 
         @Test
         public void get資格取得事由は_コンストラクタ引数のIKaigoShikakuが保持する_資格取得事由を返す() {
-            RString 資格取得事由 = new RString("年齢到達");
+            IShikakuShutokuJiyu 資格取得事由 = create資格取得事由();
             when(介護保険資格.get資格取得事由()).thenReturn(資格取得事由);
             assertThat(sut.get資格取得事由(), is(資格取得事由));
         }
@@ -180,7 +184,7 @@ public class HihokenshaTest extends TestBase {
 
         @Test
         public void get資格喪失事由は_コンストラクタ引数のIKaigoShikakuが保持する_資格喪失事由を返す() {
-            RString 資格喪失事由 = new RString("転出");
+            IShikakuSoshitsuJiyu 資格喪失事由 = create資格喪失事由();
             when(介護保険資格.get資格喪失事由()).thenReturn(資格喪失事由);
             assertThat(sut.get資格喪失事由(), is(資格喪失事由));
         }
@@ -299,5 +303,13 @@ public class HihokenshaTest extends TestBase {
 
     private static IKaigoShikaku create介護保険資格() {
         return mock(_KaigoShikaku.class);
+    }
+
+    private static IShikakuShutokuJiyu create資格取得事由() {
+        return ShikakuShutokuJiyuMock.createInstance();
+    }
+
+    private static IShikakuSoshitsuJiyu create資格喪失事由() {
+        return ShikakuSoshitsuJiyuMock.createInstance();
     }
 }

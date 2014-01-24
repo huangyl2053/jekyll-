@@ -4,13 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dba.business;
 
-import jp.co.ndensan.reams.db.dba.definition.valueobject.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dba.definition.valueobject.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urf.business.HokenShubetsu;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoShikaku;
+import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
+import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.ur.urz.business.KaigoShikakuFactory;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -43,15 +44,29 @@ public final class HihokenshaFactory {
      */
     public static Hihokensha createInstance(KaigoHihokenshaNumber 被保険者番号, ShichosonCode 市町村コード, IShikibetsuCode 識別コード,
             ShikakuIdoKubun 資格異動区分, HihokenshaKubun 被保険者区分,
-            RDate 資格取得届出年月日, RDate 資格取得年月日, ShikakuShutokuJiyu 資格取得事由, RDate 一号年齢到達日) {
+            RDate 資格取得届出年月日, RDate 資格取得年月日, IShikakuShutokuJiyu 資格取得事由, RDate 一号年齢到達日) {
 
         IKaigoShikaku 介護保険資格 = KaigoShikakuFactory.createInstance(
                 識別コード, HokenShubetsu.介護保険,
-                資格取得届出年月日, 資格取得年月日, 資格取得事由.getName(),
-                null, RDate.MAX, RString.EMPTY,
+                資格取得届出年月日, 資格取得年月日, 資格取得事由,
+                null, RDate.MAX, createEmpty資格喪失事由(),
                 被保険者番号.getValue(), 市町村コード.getValue(), null);
 
         return new Hihokensha(介護保険資格, 市町村コード, 資格異動区分, 被保険者区分,
                 null, null, null, null, null, null, null, null, null, false, false, null, false, null);
+    }
+
+    private static IShikakuSoshitsuJiyu createEmpty資格喪失事由() {
+        return new IShikakuSoshitsuJiyu() {
+            @Override
+            public RString getCode() {
+                return RString.EMPTY;
+            }
+
+            @Override
+            public RString getName() {
+                return RString.EMPTY;
+            }
+        };
     }
 }
