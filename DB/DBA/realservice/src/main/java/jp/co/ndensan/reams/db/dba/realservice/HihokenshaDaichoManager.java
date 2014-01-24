@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dba.realservice;
 
-import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.Hihokensha;
 import jp.co.ndensan.reams.db.dba.business.HihokenshaFactory;
@@ -55,19 +54,19 @@ public class HihokenshaDaichoManager implements IHihokenshaDaichoManager {
     @Override
     public HihokenshaList get被保険者台帳(KaigoHihokenshaNumber 被保険者番号) {
         List<T1001HihokenshaDaichoEntity> entities = dac.select(被保険者番号);
-        return makeReturnValueFrom(entities);
+        return HihokenshaMapper.toHihokenshaList(entities);
     }
 
     @Override
     public HihokenshaList get被保険者台帳(ShichosonCode 市町村コード, IShikibetsuCode 識別コード) {
         List<T1001HihokenshaDaichoEntity> entities = dac.select(市町村コード, 識別コード);
-        return makeReturnValueFrom(entities);
+        return HihokenshaMapper.toHihokenshaList(entities);
     }
 
     @Override
     public HihokenshaList get被保険者台帳(IShikibetsuCode 識別コード) {
         List<T1001HihokenshaDaichoEntity> entities = dac.select(識別コード);
-        return makeReturnValueFrom(entities);
+        return HihokenshaMapper.toHihokenshaList(entities);
     }
 
     private Hihokensha makeRetrunValueFrom(final T1001HihokenshaDaichoEntity entity) {
@@ -75,13 +74,6 @@ public class HihokenshaDaichoManager implements IHihokenshaDaichoManager {
             return null;
         }
         return HihokenshaMapper.toHihokensha(entity);
-    }
-
-    private HihokenshaList makeReturnValueFrom(final List<T1001HihokenshaDaichoEntity> selected) {
-        if (selected == Collections.EMPTY_LIST) {
-            return null;
-        }
-        return HihokenshaMapper.toHihokenshaList(selected);
     }
 
     @Override
