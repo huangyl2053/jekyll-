@@ -270,8 +270,11 @@ public class Hihokensha implements IKaigoShikaku {
      * 介護保険広域構成市町村コードを取得します。
      *
      * @return 介護保険広域構成市町村コード
+     * @deprecated {@link #get市町村コード}が同じ値をより便利な形({@link ShichosonCode})で返します。
+     * 介護ではそちらを使用することにします。
      */
     @Override
+    @Deprecated
     public RString get介護保険広域構成市町村コード() {
         return 介護保険資格.get介護保険広域構成市町村コード();
     }
