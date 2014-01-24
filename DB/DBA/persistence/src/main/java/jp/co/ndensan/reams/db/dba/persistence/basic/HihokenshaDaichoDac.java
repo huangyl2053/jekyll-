@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 //TODO n3327 三浦凌 IShikibetsuCodeがdefinitionへ移動するまでは、ur.businessへの依存性を残す。( pom.xmlも修正の必要あり )
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
-import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessor;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
@@ -89,28 +88,24 @@ public class HihokenshaDaichoDac implements IHihokenshaDaichoDac {
     }
 
     @Override
-    @Transaction
     public int insert(DbT1001HihokenshaDaichoEntity entity) {
         DbAccessor accessor = new DbAccessor(session);
         return accessor.insert(entity).execute();
     }
 
     @Override
-    @Transaction
     public int delete(DbT1001HihokenshaDaichoEntity entity) {
         DbAccessor accessor = new DbAccessor(session);
         return accessor.delete(entity).execute();
     }
 
     @Override
-    @Transaction
     public int update(DbT1001HihokenshaDaichoEntity entity) {
         DbAccessor accessor = new DbAccessor(session);
         return accessor.update(entity).execute();
     }
 
     @Override
-    @Transaction
     public int insertOrUpdate(DbT1001HihokenshaDaichoEntity entity) {
         return exists(entity) ? update(entity) : insert(entity);
     }

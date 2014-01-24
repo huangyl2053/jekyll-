@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * テーブルへのデータの挿入または更新をするためのインタフェースです。
@@ -24,5 +25,6 @@ public interface IReplaceable<T extends IDbAccessable> extends IInsertable<T>, I
      * @param data 挿入または更新したいデータ
      * @return 挿入件数または更新件数
      */
+    @Transaction
     int insertOrUpdate(T data);
 }
