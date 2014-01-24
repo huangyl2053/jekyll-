@@ -42,7 +42,7 @@ public class HihokenshaDaichoManager implements IHihokenshaDaichoManager {
      *
      * @param dac テスト用被保険者台帳DAC
      */
-    public HihokenshaDaichoManager(IHihokenshaDaichoDac dac) {
+    HihokenshaDaichoManager(IHihokenshaDaichoDac dac) {
         this.dac = dac;
     }
 
