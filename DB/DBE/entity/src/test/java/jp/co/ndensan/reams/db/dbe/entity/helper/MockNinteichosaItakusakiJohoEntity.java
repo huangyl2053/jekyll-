@@ -4,10 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.helper;
 
-import jp.co.ndensan.reams.db.dbe.business.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbe.business.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.ChosaItakuKubun;
-import jp.co.ndensan.reams.db.dbe.entity.basic.T7010NinteichosaItakusakiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.*;
 
@@ -24,12 +24,12 @@ public class MockNinteichosaItakusakiJohoEntity {
     private MockNinteichosaItakusakiJohoEntity() {
     }
 
-    public static T7010NinteichosaItakusakiJohoEntity getSpiedInstance() {
+    public static DbT7010NinteichosaItakusakiJohoEntity getSpiedInstance() {
         kaigojigyoshaNo = mock(KaigoJigyoshaNo.class);
         jigyoshaNo = mock(JigyoshaNo.class);
         kaigojigyoshaNo = new KaigoJigyoshaNo(new RString("0000000001"));
         jigyoshaNo = new JigyoshaNo(new RString("2020300001"));
-        T7010NinteichosaItakusakiJohoEntity ninteichosaItakusakiJohoEntity = new T7010NinteichosaItakusakiJohoEntity(
+        DbT7010NinteichosaItakusakiJohoEntity ninteichosaItakusakiJohoEntity = new DbT7010NinteichosaItakusakiJohoEntity(
                 new RString("20203"), kaigojigyoshaNo, jigyoshaNo,
                 true, ChosaItakuKubun.指定なし, 10, new RString("A"), new RString("B"));
         return spy(ninteichosaItakusakiJohoEntity);

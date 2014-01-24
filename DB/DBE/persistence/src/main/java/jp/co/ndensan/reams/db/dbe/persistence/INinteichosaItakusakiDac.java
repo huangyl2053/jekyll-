@@ -5,9 +5,9 @@
 package jp.co.ndensan.reams.db.dbe.persistence;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbe.business.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.db.dbe.entity.basic.T7010NinteichosaItakusakiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -25,7 +25,7 @@ public interface INinteichosaItakusakiDac {
      * @param 介護事業状況 介護事業状況
      * @return 認定調査委託先情報エンティティ
      */
-    T7010NinteichosaItakusakiJohoEntity select(RString 市町村コード, KaigoJigyoshaNo 介護事業者番号, boolean 介護事業状況);
+    DbT7010NinteichosaItakusakiJohoEntity select(RString 市町村コード, KaigoJigyoshaNo 介護事業者番号, boolean 介護事業状況);
 
     /**
      * 市町村コード・事業者番号・介護事業状況を指定して認定調査委託先を取得します
@@ -35,7 +35,7 @@ public interface INinteichosaItakusakiDac {
      * @param 介護事業状況 介護事業状況
      * @return 認定調査委託先情報エンティティ
      */
-    T7010NinteichosaItakusakiJohoEntity select(RString 市町村コード, JigyoshaNo 事業者番号, boolean 介護事業状況);
+    DbT7010NinteichosaItakusakiJohoEntity select(RString 市町村コード, JigyoshaNo 事業者番号, boolean 介護事業状況);
 
     /**
      * 指定した市町村コードで有効又は無効の認定調査委託先を取得します
@@ -44,7 +44,7 @@ public interface INinteichosaItakusakiDac {
      * @param 介護事業状況 介護事業状況
      * @return 認定調査委託先情報エンティティ
      */
-    List<T7010NinteichosaItakusakiJohoEntity> selectAll(RString 市町村コード, boolean 介護事業状況);
+    List<DbT7010NinteichosaItakusakiJohoEntity> selectAll(RString 市町村コード, boolean 介護事業状況);
 
     /**
      * 指定した市町村コードで登録されている全ての認定調査委託先を取得します
@@ -52,7 +52,7 @@ public interface INinteichosaItakusakiDac {
      * @param 市町村コード 市町村コード
      * @return 認定調査委託先情報エンティティ
      */
-    List<T7010NinteichosaItakusakiJohoEntity> selectAll(RString 市町村コード);
+    List<DbT7010NinteichosaItakusakiJohoEntity> selectAll(RString 市町村コード);
 
     /**
      * 認定調査委託先情報に対し追加・更新を行います
@@ -60,7 +60,7 @@ public interface INinteichosaItakusakiDac {
      * @param entity 認定調査委託先情報エンティティ
      * @return 更新・追加結果
      */
-    int insertOrUpdate(T7010NinteichosaItakusakiJohoEntity entity);
+    int insertOrUpdate(DbT7010NinteichosaItakusakiJohoEntity entity);
 
     /**
      * 認定調査委託先を削除します
@@ -68,5 +68,5 @@ public interface INinteichosaItakusakiDac {
      * @param data 認定調査委託先情報エンティティ
      * @return 削除結果
      */
-    int delete(T7010NinteichosaItakusakiJohoEntity data);
+    int delete(DbT7010NinteichosaItakusakiJohoEntity data);
 }

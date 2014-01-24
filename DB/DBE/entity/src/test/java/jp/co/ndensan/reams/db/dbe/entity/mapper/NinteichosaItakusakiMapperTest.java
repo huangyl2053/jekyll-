@@ -6,11 +6,11 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbe.business.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.definition.ChosaItakuKubun;
-import jp.co.ndensan.reams.db.dbe.entity.basic.T7010NinteichosaItakusakiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.MockNinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
@@ -29,36 +29,15 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class NinteichosaItakusakiMapperTest extends TestBase {
 
-//    public NinteichosaItakusakiMapperTest() {
-//    }
     public static class toNinteichosaItakusaki extends TestBase {
 
         private KaigoJigyoshaNo kaigojigyoshaNo = new KaigoJigyoshaNo(new RString("0000000001"));
         private JigyoshaNo jigyoshaNo = new JigyoshaNo(new RString("2020300001"));
-        private T7010NinteichosaItakusakiJohoEntity testentity;
+        private DbT7010NinteichosaItakusakiJohoEntity testentity;
 
         @Override
         public void setUp() {
             testentity = MockNinteichosaItakusakiJohoEntity.getSpiedInstance();
-        }
-
-        @Test
-        public void 引数渡した認定調査委託先情報とtoNinteichosaItakusakiの結果は一致する() {
-            List<T7010NinteichosaItakusakiJohoEntity> entity = new ArrayList<>();
-            entity.add(createNinteichosaItakusakiJoho(new RString("20203"), kaigojigyoshaNo,
-                    jigyoshaNo, true, ChosaItakuKubun.介護保険施設, 10, new RString("A"), new RString("B")));
-            NinteichosaItakusaki ninteichosaitakusaki = new NinteichosaItakusaki(new RString("20203"), kaigojigyoshaNo,
-                    jigyoshaNo, true, ChosaItakuKubun.介護保険施設, 10, new RString("A"), new RString("B"));
-            NinteichosaItakusaki result = NinteichosaItakusakiMapper.toNinteichosaItakusaki(entity.get(0));
-            assertThat(result.get市町村コード(), is(ninteichosaitakusaki.get市町村コード()));
-            assertThat(result.getKaigoJigyoshaNo().getColumnValue(), is(ninteichosaitakusaki.getKaigoJigyoshaNo().getColumnValue()));
-            assertThat(result.getJigyoshaNo().getColumnValue(), is(ninteichosaitakusaki.getJigyoshaNo().getColumnValue()));
-            assertThat(result.is有効(), is(ninteichosaitakusaki.is有効()));
-            assertThat(result.getChosaItakuKubun(), is(ninteichosaitakusaki.getChosaItakuKubun()));
-            assertThat(result.getWaritsukeTeiin(), is(ninteichosaitakusaki.getWaritsukeTeiin()));
-            assertThat(result.getWaritsukeChiku(), is(ninteichosaitakusaki.getWaritsukeChiku()));
-            assertThat(result.getKikanKubun(), is(ninteichosaitakusaki.getKikanKubun()));
-
         }
 
         @Test
@@ -117,14 +96,6 @@ public class NinteichosaItakusakiMapperTest extends TestBase {
             testentity.set機関の区分(new RString("00000001"));
             NinteichosaItakusaki result = NinteichosaItakusakiMapper.toNinteichosaItakusaki(testentity);
             assertThat(result.getKikanKubun(), is(new RString("00000001")));
-        }
-
-        private static T7010NinteichosaItakusakiJohoEntity createNinteichosaItakusakiJoho(RString 市町村コード,
-                KaigoJigyoshaNo 介護事業者番号, JigyoshaNo 事業者番号, boolean 介護事業者状況, ChosaItakuKubun 調査委託区分,
-                int 割付定員, RString 割付地区, RString 機関の区分) {
-
-            return new T7010NinteichosaItakusakiJohoEntity(市町村コード, 介護事業者番号, 事業者番号,
-                    介護事業者状況, 調査委託区分, 割付定員, 割付地区, 機関の区分);
         }
     }
 }

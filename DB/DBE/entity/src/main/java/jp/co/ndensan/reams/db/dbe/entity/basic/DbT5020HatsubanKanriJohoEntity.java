@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  *
  * @author N1013 松本直樹
  */
-public class T5020HatsubanKanriJohoEntity implements IDbAccessable {
+public class DbT5020HatsubanKanriJohoEntity implements IDbAccessable {
 //TODO 介護事業者番号の発番については、発番管理は共通の発番クラスを利用するか検討する　2014/02/28期限
 
     /**
@@ -31,17 +31,17 @@ public class T5020HatsubanKanriJohoEntity implements IDbAccessable {
     /**
      * ORマッパーのためのデフォルトコンストラクタです。
      */
-    T5020HatsubanKanriJohoEntity() {
+    DbT5020HatsubanKanriJohoEntity() {
     }
 
     /**
      * コンストラクタクラスです
      *
-     * @param 項目区分
-     * @param 年度
-     * @param 発番
+     * @param 項目区分 項目区分
+     * @param 年度 年度
+     * @param 発番 発番
      */
-    public T5020HatsubanKanriJohoEntity(RString 項目区分, RString 年度, RString 発番) {
+    public DbT5020HatsubanKanriJohoEntity(RString 項目区分, RString 年度, RString 発番) {
         this.項目区分 = 項目区分;
         this.年度 = 年度;
         this.発番 = 発番;
@@ -50,7 +50,7 @@ public class T5020HatsubanKanriJohoEntity implements IDbAccessable {
     /**
      * 項目区分を返します
      *
-     * @return
+     * @return 項目区分
      */
     public RString get項目区分() {
         return 項目区分;
@@ -59,7 +59,7 @@ public class T5020HatsubanKanriJohoEntity implements IDbAccessable {
     /**
      * 年度を返します
      *
-     * @return
+     * @return 年度
      */
     public RString get年度() {
         return 年度;
@@ -68,7 +68,7 @@ public class T5020HatsubanKanriJohoEntity implements IDbAccessable {
     /**
      * 発番を返します
      *
-     * @return
+     * @return 発番
      */
     public RString get発番() {
         return 発番;
@@ -77,7 +77,7 @@ public class T5020HatsubanKanriJohoEntity implements IDbAccessable {
     /**
      * 項目区分を設定します
      *
-     * @param 項目区分
+     * @param 項目区分 項目区分
      */
     public void set項目区分(RString 項目区分) {
         this.項目区分 = 項目区分;
@@ -86,7 +86,7 @@ public class T5020HatsubanKanriJohoEntity implements IDbAccessable {
     /**
      * 年度を設定します
      *
-     * @param 年度
+     * @param 年度 年度
      */
     public void set年度(RString 年度) {
         this.年度 = 年度;
@@ -95,7 +95,7 @@ public class T5020HatsubanKanriJohoEntity implements IDbAccessable {
     /**
      * 発番情報を設定します
      *
-     * @param 発番
+     * @param 発番 発番
      */
     public void set発番(RString 発番) {
         this.発番 = 発番;

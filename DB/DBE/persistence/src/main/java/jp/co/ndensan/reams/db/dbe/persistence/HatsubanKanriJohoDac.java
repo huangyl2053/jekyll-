@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbe.persistence;
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessor;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
-import jp.co.ndensan.reams.db.dbe.entity.basic.T5020HatsubanKanriJoho;
-import jp.co.ndensan.reams.db.dbe.entity.basic.T5020HatsubanKanriJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5020HatsubanKanriJoho;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5020HatsubanKanriJohoEntity;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -35,14 +35,14 @@ public class HatsubanKanriJohoDac implements IHatsubanKanriJohoDac {
      * @return 発番管理情報のエンティティ
      */
     @Override
-    public T5020HatsubanKanriJohoEntity select(RString 項目区分, RString 年度) {
+    public DbT5020HatsubanKanriJohoEntity select(RString 項目区分, RString 年度) {
 
-        List<T5020HatsubanKanriJohoEntity> list = accessor.select()
-                .table(T5020HatsubanKanriJoho.class)
-                .where(and(eq(T5020HatsubanKanriJoho.KOMOKU_KUBUN, 項目区分),
-                eq(T5020HatsubanKanriJoho.NENDO, 年度)))
-                .order(by(T5020HatsubanKanriJoho.HATSUBAN, Order.DESC))
-                .toList(T5020HatsubanKanriJohoEntity.class);
+        List<DbT5020HatsubanKanriJohoEntity> list = accessor.select()
+                .table(DbT5020HatsubanKanriJoho.class)
+                .where(and(eq(DbT5020HatsubanKanriJoho.KOMOKU_KUBUN, 項目区分),
+                eq(DbT5020HatsubanKanriJoho.NENDO, 年度)))
+                .order(by(DbT5020HatsubanKanriJoho.HATSUBAN, Order.DESC))
+                .toList(DbT5020HatsubanKanriJohoEntity.class);
 
         if (list.isEmpty()) {
             return null;
@@ -58,7 +58,7 @@ public class HatsubanKanriJohoDac implements IHatsubanKanriJohoDac {
      * @return 更新結果
      */
     @Override
-    public int update(T5020HatsubanKanriJohoEntity data) {
+    public int update(DbT5020HatsubanKanriJohoEntity data) {
         return accessor.update(data).execute();
     }
 }

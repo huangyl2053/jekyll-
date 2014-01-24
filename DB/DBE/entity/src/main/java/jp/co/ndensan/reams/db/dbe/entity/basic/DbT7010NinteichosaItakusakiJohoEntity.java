@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.basic;
 
-import jp.co.ndensan.reams.db.dbe.business.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbe.business.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.definition.ChosaItakuKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  *
  * @author N1013 松本直樹
  */
-public class T7010NinteichosaItakusakiJohoEntity implements IDbAccessable {
+public class DbT7010NinteichosaItakusakiJohoEntity implements IDbAccessable {
 //TODO 市町村コードはILocalGovernmentCodeを使用するか検討する。 2014/02/14 期限
 
     /**
@@ -40,22 +40,22 @@ public class T7010NinteichosaItakusakiJohoEntity implements IDbAccessable {
     /**
      * ORマッパーのためのデフォルトコンストラクタです。
      */
-    T7010NinteichosaItakusakiJohoEntity() {
+    DbT7010NinteichosaItakusakiJohoEntity() {
     }
 
     /**
      * コンストラクタクラスです
      *
-     * @param 市町村コード
-     * @param 介護事業者番号
-     * @param 事業者番号
-     * @param 介護事業者状況
-     * @param 調査委託区分
-     * @param 割付定員
-     * @param 割付地区
-     * @param 機関の区分
+     * @param 市町村コード 市町村コード
+     * @param 介護事業者番号 介護事業者番号
+     * @param 事業者番号 事業者番号
+     * @param 介護事業者状況 介護事業者状況
+     * @param 調査委託区分 調査委託区分
+     * @param 割付定員 割付定員
+     * @param 割付地区 割付地区
+     * @param 機関の区分 機関の区分
      */
-    public T7010NinteichosaItakusakiJohoEntity(RString 市町村コード, KaigoJigyoshaNo 介護事業者番号,
+    public DbT7010NinteichosaItakusakiJohoEntity(RString 市町村コード, KaigoJigyoshaNo 介護事業者番号,
             JigyoshaNo 事業者番号, boolean 介護事業者状況, ChosaItakuKubun 調査委託区分,
             int 割付定員, RString 割付地区, RString 機関の区分) {
         this.市町村コード = 市町村コード;
@@ -74,7 +74,7 @@ public class T7010NinteichosaItakusakiJohoEntity implements IDbAccessable {
      *
      * @param 認定調査委託先 認定調査委託先
      */
-    public T7010NinteichosaItakusakiJohoEntity(NinteichosaItakusaki 認定調査委託先) {
+    public DbT7010NinteichosaItakusakiJohoEntity(NinteichosaItakusaki 認定調査委託先) {
         this.市町村コード = 認定調査委託先.get市町村コード();
         this.介護事業者番号 = 認定調査委託先.getKaigoJigyoshaNo();
         this.事業者番号 = 認定調査委託先.getJigyoshaNo();

@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  *
  * @author N1013 松本直樹
  */
-public enum T5020HatsubanKanriJoho implements IColumnDefinition {
+public enum DbT5020HatsubanKanriJoho implements IColumnDefinition {
 //TODO 介護事業者番号の発番については、発番管理は共通の発番クラスを利用するか検討する　2014/02/28期限
 
     /**
@@ -29,7 +29,7 @@ public enum T5020HatsubanKanriJoho implements IColumnDefinition {
     private final int maxLength;
     private final int scale;
 
-    private T5020HatsubanKanriJoho(int maxLength, int scale) {
+    private DbT5020HatsubanKanriJoho(int maxLength, int scale) {
         this.maxLength = maxLength;
         this.scale = scale;
     }

@@ -4,6 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.definition.ChosaItakuKubun;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
@@ -15,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @author N1013 松本直樹
  */
 public class NinteichosaItakusaki {
+//TODO 市町村コードは介護で作成したShichosonCodeを使用するようにする　2014/02/14期限
 
     private final RString 市町村コード;
     private final KaigoJigyoshaNo 介護事業者番号;
