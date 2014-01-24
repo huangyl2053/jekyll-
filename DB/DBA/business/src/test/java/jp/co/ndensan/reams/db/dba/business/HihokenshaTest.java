@@ -302,7 +302,7 @@ public class HihokenshaTest extends TestBase {
     }
 
     private static IKaigoShikaku create介護保険資格() {
-        return mock(_KaigoShikaku.class);
+        return mock(IKaigoShikaku.class);
     }
 
     private static IShikakuShutokuJiyu create資格取得事由() {
