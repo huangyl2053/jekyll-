@@ -73,7 +73,6 @@ public class HihokenshaDaichoDac implements IHihokenshaDaichoDac {
     }
 
     @Override
-    @Transaction
     public List<T1001HihokenshaDaichoEntity> select(IShikibetsuCode 識別コード) {
         DbAccessor accessor = new DbAccessor(session);
 
