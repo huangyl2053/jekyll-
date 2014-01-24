@@ -61,7 +61,7 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * 被保険者から被保険者台帳エンティティのコンストラクタを生成します。
+     * 被保険者から被保険者台帳エンティティを生成します。
      *
      * @param 被保険者 被保険者
      * @throws NullPointerException 被保険者がnullのとき。
