@@ -27,6 +27,17 @@
             <groupId>jp.co.ndensan.reams.uz</groupId>
             <artifactId>testhelper</artifactId>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur</groupId>
+            <artifactId>definition</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- 業務共通への依存性 -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>definition</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

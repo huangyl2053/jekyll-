@@ -31,6 +31,7 @@
             <groupId>jp.co.ndensan.reams.ur</groupId>
             <artifactId>realservice</artifactId>
         </dependency>
+        <!-- 他の業務パッケージへの依存性 -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>entity</artifactId>
@@ -45,6 +46,18 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>persistence</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <!-- 業務共通への依存性 -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>realservice</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- テスト時の依存性 -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>
