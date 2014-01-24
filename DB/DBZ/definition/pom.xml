@@ -27,6 +27,18 @@
             <groupId>jp.co.ndensan.reams.uz</groupId>
             <artifactId>testhelper</artifactId>
         </dependency>
+        <!-- urのdefinitionへの依存性 -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur</groupId>
+            <artifactId>definition</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- テスト時の依存性 -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
