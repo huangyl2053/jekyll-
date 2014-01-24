@@ -85,11 +85,11 @@ public class HihokenshaDaichoManagerTest extends TestBase {
             }
 
             @Test
-            public void 指定した被保険者番号から_検索結果が得られないときは_nullを返す() {
+            public void 指定した被保険者番号から_検索結果が得られないときは_返り値のsizeは0() {
                 KaigoHihokenshaNumber 被保険者番号 = new KaigoHihokenshaNumber(HihokenshaDaichoDacMock.検索不可な被保険者番号);
 
                 HihokenshaList selected = sut.get被保険者台帳(被保険者番号);
-                assertThat(selected, nullValue());
+                assertThat(selected.size(), is(0));
             }
         }
 
@@ -110,12 +110,12 @@ public class HihokenshaDaichoManagerTest extends TestBase {
             }
 
             @Test
-            public void 指定した市町村コードと識別コード_検索結果が得られないときは_nullを返す() {
+            public void 指定した市町村コードと識別コードから_検索結果が得られないとき_返り値のsizeは0() {
                 ShichosonCode 市町村コード = new ShichosonCode(new RString("市町村コード"));
                 IShikibetsuCode 識別コード = create識別コード(HihokenshaDaichoDacMock.検索不可な識別コード);
 
                 HihokenshaList selected = sut.get被保険者台帳(市町村コード, 識別コード);
-                assertThat(selected, nullValue());
+                assertThat(selected.size(), is(0));
             }
         }
 
@@ -135,11 +135,11 @@ public class HihokenshaDaichoManagerTest extends TestBase {
             }
 
             @Test
-            public void 指定した識別コード_検索結果が得られないときは_nullを返す() {
+            public void 指定した識別コードから_検索結果が得られないとき_返り値のsizeは0() {
                 IShikibetsuCode 識別コード = create識別コード(HihokenshaDaichoDacMock.検索不可な識別コード);
 
                 HihokenshaList selected = sut.get被保険者台帳(識別コード);
-                assertThat(selected, nullValue());
+                assertThat(selected.size(), is(0));
             }
         }
     }
