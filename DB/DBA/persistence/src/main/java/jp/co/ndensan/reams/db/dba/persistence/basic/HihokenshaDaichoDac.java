@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dba.persistence.basic;
 
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.entity.basic.T1001HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dba.entity.basic.T1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dba.entity.basic.DbT1001HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dba.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 //TODO n3327 三浦凌 IShikibetsuCodeがdefinitionへ移動するまでは、ur.businessへの依存性を残す。( pom.xmlも修正の必要あり )
@@ -29,25 +29,25 @@ public class HihokenshaDaichoDac implements IHihokenshaDaichoDac {
     private SqlSession session;
 
     @Override
-    public T1001HihokenshaDaichoEntity select(ShichosonCode 市町村コード, KaigoHihokenshaNumber 被保険者番号) {
+    public DbT1001HihokenshaDaichoEntity select(ShichosonCode 市町村コード, KaigoHihokenshaNumber 被保険者番号) {
         DbAccessor accessor = new DbAccessor(session);
 
-        return accessor.select().table(T1001HihokenshaDaicho.class).
+        return accessor.select().table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                eq(T1001HihokenshaDaicho.ShichosonCd, 市町村コード.getValue()),
-                eq(T1001HihokenshaDaicho.HihokenshaNo, 被保険者番号.getValue()))).
-                toObject(T1001HihokenshaDaichoEntity.class);
+                eq(DbT1001HihokenshaDaicho.ShichosonCd, 市町村コード.getValue()),
+                eq(DbT1001HihokenshaDaicho.HihokenshaNo, 被保険者番号.getValue()))).
+                toObject(DbT1001HihokenshaDaichoEntity.class);
     }
 
     @Override
-    public List<T1001HihokenshaDaichoEntity> select(KaigoHihokenshaNumber 被保険者番号) {
+    public List<DbT1001HihokenshaDaichoEntity> select(KaigoHihokenshaNumber 被保険者番号) {
         DbAccessor accessor = new DbAccessor(session);
 
-        List<T1001HihokenshaDaichoEntity> entities = accessor.
-                select().table(T1001HihokenshaDaicho.class).
+        List<DbT1001HihokenshaDaichoEntity> entities = accessor.
+                select().table(DbT1001HihokenshaDaicho.class).
                 where(
-                eq(T1001HihokenshaDaicho.HihokenshaNo, 被保険者番号.getValue())).
-                toList(T1001HihokenshaDaichoEntity.class);
+                eq(DbT1001HihokenshaDaicho.HihokenshaNo, 被保険者番号.getValue())).
+                toList(DbT1001HihokenshaDaichoEntity.class);
 
         if (entities.isEmpty()) {
             return Collections.EMPTY_LIST;
@@ -56,15 +56,15 @@ public class HihokenshaDaichoDac implements IHihokenshaDaichoDac {
     }
 
     @Override
-    public List<T1001HihokenshaDaichoEntity> select(ShichosonCode 市町村コード, IShikibetsuCode 識別コード) {
+    public List<DbT1001HihokenshaDaichoEntity> select(ShichosonCode 市町村コード, IShikibetsuCode 識別コード) {
         DbAccessor accessor = new DbAccessor(session);
 
-        List<T1001HihokenshaDaichoEntity> entities = accessor.
-                select().table(T1001HihokenshaDaicho.class).
+        List<DbT1001HihokenshaDaichoEntity> entities = accessor.
+                select().table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                eq(T1001HihokenshaDaicho.ShichosonCd, 市町村コード.getValue()),
-                eq(T1001HihokenshaDaicho.ShikibetsuCode, 識別コード.getValue()))).
-                toList(T1001HihokenshaDaichoEntity.class);
+                eq(DbT1001HihokenshaDaicho.ShichosonCd, 市町村コード.getValue()),
+                eq(DbT1001HihokenshaDaicho.ShikibetsuCode, 識別コード.getValue()))).
+                toList(DbT1001HihokenshaDaichoEntity.class);
 
         if (entities.isEmpty()) {
             return Collections.EMPTY_LIST;
@@ -73,14 +73,14 @@ public class HihokenshaDaichoDac implements IHihokenshaDaichoDac {
     }
 
     @Override
-    public List<T1001HihokenshaDaichoEntity> select(IShikibetsuCode 識別コード) {
+    public List<DbT1001HihokenshaDaichoEntity> select(IShikibetsuCode 識別コード) {
         DbAccessor accessor = new DbAccessor(session);
 
-        List<T1001HihokenshaDaichoEntity> entities = accessor.
-                select().table(T1001HihokenshaDaicho.class).
+        List<DbT1001HihokenshaDaichoEntity> entities = accessor.
+                select().table(DbT1001HihokenshaDaicho.class).
                 where(
-                eq(T1001HihokenshaDaicho.ShikibetsuCode, 識別コード.getValue())).
-                toList(T1001HihokenshaDaichoEntity.class);
+                eq(DbT1001HihokenshaDaicho.ShikibetsuCode, 識別コード.getValue())).
+                toList(DbT1001HihokenshaDaichoEntity.class);
 
         if (entities.isEmpty()) {
             return Collections.EMPTY_LIST;
@@ -90,32 +90,32 @@ public class HihokenshaDaichoDac implements IHihokenshaDaichoDac {
 
     @Override
     @Transaction
-    public int insert(T1001HihokenshaDaichoEntity entity) {
+    public int insert(DbT1001HihokenshaDaichoEntity entity) {
         DbAccessor accessor = new DbAccessor(session);
         return accessor.insert(entity).execute();
     }
 
     @Override
     @Transaction
-    public int delete(T1001HihokenshaDaichoEntity entity) {
+    public int delete(DbT1001HihokenshaDaichoEntity entity) {
         DbAccessor accessor = new DbAccessor(session);
         return accessor.delete(entity).execute();
     }
 
     @Override
     @Transaction
-    public int update(T1001HihokenshaDaichoEntity entity) {
+    public int update(DbT1001HihokenshaDaichoEntity entity) {
         DbAccessor accessor = new DbAccessor(session);
         return accessor.update(entity).execute();
     }
 
     @Override
     @Transaction
-    public int insertOrUpdate(T1001HihokenshaDaichoEntity entity) {
+    public int insertOrUpdate(DbT1001HihokenshaDaichoEntity entity) {
         return exists(entity) ? update(entity) : insert(entity);
     }
 
-    private boolean exists(T1001HihokenshaDaichoEntity entity) {
+    private boolean exists(DbT1001HihokenshaDaichoEntity entity) {
         ShichosonCode 市町村コード = new ShichosonCode(entity.getShichosonCd());
         KaigoHihokenshaNumber 被保険者番号 = new KaigoHihokenshaNumber((entity.getHihokenshaNo()));
         return (select(市町村コード, 被保険者番号) != null);

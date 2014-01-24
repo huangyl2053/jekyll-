@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dba.business.HihokenshaFactory;
 import jp.co.ndensan.reams.db.dba.definition.valueobject.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dba.business.HihokenshaList;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
-import jp.co.ndensan.reams.db.dba.entity.basic.T1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dba.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dba.entity.mapper.HihokenshaMapper;
 import jp.co.ndensan.reams.db.dba.persistence.basic.IHihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
@@ -47,29 +47,29 @@ public class HihokenshaDaichoManager implements IHihokenshaDaichoManager {
 
     @Override
     public Hihokensha get被保険者台帳(ShichosonCode 市町村コード, KaigoHihokenshaNumber 被保険者番号) {
-        T1001HihokenshaDaichoEntity entity = dac.select(市町村コード, 被保険者番号);
+        DbT1001HihokenshaDaichoEntity entity = dac.select(市町村コード, 被保険者番号);
         return makeRetrunValueFrom(entity);
     }
 
     @Override
     public HihokenshaList get被保険者台帳(KaigoHihokenshaNumber 被保険者番号) {
-        List<T1001HihokenshaDaichoEntity> entities = dac.select(被保険者番号);
+        List<DbT1001HihokenshaDaichoEntity> entities = dac.select(被保険者番号);
         return HihokenshaMapper.toHihokenshaList(entities);
     }
 
     @Override
     public HihokenshaList get被保険者台帳(ShichosonCode 市町村コード, IShikibetsuCode 識別コード) {
-        List<T1001HihokenshaDaichoEntity> entities = dac.select(市町村コード, 識別コード);
+        List<DbT1001HihokenshaDaichoEntity> entities = dac.select(市町村コード, 識別コード);
         return HihokenshaMapper.toHihokenshaList(entities);
     }
 
     @Override
     public HihokenshaList get被保険者台帳(IShikibetsuCode 識別コード) {
-        List<T1001HihokenshaDaichoEntity> entities = dac.select(識別コード);
+        List<DbT1001HihokenshaDaichoEntity> entities = dac.select(識別コード);
         return HihokenshaMapper.toHihokenshaList(entities);
     }
 
-    private Hihokensha makeRetrunValueFrom(final T1001HihokenshaDaichoEntity entity) {
+    private Hihokensha makeRetrunValueFrom(final DbT1001HihokenshaDaichoEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -97,13 +97,13 @@ public class HihokenshaDaichoManager implements IHihokenshaDaichoManager {
 
     @Override
     public boolean save(Hihokensha 被保険者) {
-        int result = dac.insertOrUpdate(new T1001HihokenshaDaichoEntity(被保険者));
+        int result = dac.insertOrUpdate(new DbT1001HihokenshaDaichoEntity(被保険者));
         return (result != 0);
     }
 
     @Override
     public boolean remove(Hihokensha 被保険者) {
-        int result = dac.delete(new T1001HihokenshaDaichoEntity(被保険者));
+        int result = dac.delete(new DbT1001HihokenshaDaichoEntity(被保険者));
         return (result != 0);
     }
 }

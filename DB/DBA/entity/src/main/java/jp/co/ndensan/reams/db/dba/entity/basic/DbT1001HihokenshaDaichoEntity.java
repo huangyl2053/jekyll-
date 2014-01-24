@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  *
  * @author N3327 三浦 凌
  */
-public class T1001HihokenshaDaichoEntity implements IDbAccessable {
+public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
 
     /**
      * テーブル名
@@ -57,7 +57,7 @@ public class T1001HihokenshaDaichoEntity implements IDbAccessable {
     /**
      * 空のコンストラクタを生成します。
      */
-    public T1001HihokenshaDaichoEntity() {
+    public DbT1001HihokenshaDaichoEntity() {
     }
 
     /**
@@ -66,7 +66,7 @@ public class T1001HihokenshaDaichoEntity implements IDbAccessable {
      * @param 被保険者 被保険者
      * @throws NullPointerException 被保険者がnullのとき。
      */
-    public T1001HihokenshaDaichoEntity(Hihokensha 被保険者) throws NullPointerException {
+    public DbT1001HihokenshaDaichoEntity(Hihokensha 被保険者) throws NullPointerException {
         this.shichosonCd = 被保険者.get市町村コード().getValue();
         this.hihokenshaNo = 被保険者.get被保険者番号();
         this.shikibetsuCode = 被保険者.get識別コード();

@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dba.entity.mapper;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
-import jp.co.ndensan.reams.db.dba.entity.basic.T1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dba.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dba.entity.basic.helper.ShikibetsuCodeMock;
-import jp.co.ndensan.reams.db.dba.entity.basic.helper.T1001HihokenshaDaichoEntityMock;
+import jp.co.ndensan.reams.db.dba.entity.basic.helper.DbT1001HihokenshaDaichoEntityMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urf.business.HokenShubetsu;
@@ -33,11 +33,11 @@ public class HihokenshaMapperTest extends TestBase {
 
     public static class ToHihokensha extends TestBase {
 
-        private T1001HihokenshaDaichoEntity entity;
+        private DbT1001HihokenshaDaichoEntity entity;
 
         @Override
         protected void setUp() {
-            entity = T1001HihokenshaDaichoEntityMock.getSpiedInstance();
+            entity = DbT1001HihokenshaDaichoEntityMock.getSpiedInstance();
         }
 
         @Test
@@ -237,7 +237,7 @@ public class HihokenshaMapperTest extends TestBase {
 
     public static class ToHihokenshaList extends TestBase {
 
-        private List<T1001HihokenshaDaichoEntity> entities;
+        private List<DbT1001HihokenshaDaichoEntity> entities;
 
         @Override
         protected void setUp() {
@@ -246,8 +246,8 @@ public class HihokenshaMapperTest extends TestBase {
 
         @Test
         public void 引数にするリストのサイズと_変換後の被保険者リストのサイズは一致する() {
-            entities.add(T1001HihokenshaDaichoEntityMock.getSpiedInstance());
-            entities.add(T1001HihokenshaDaichoEntityMock.getSpiedInstance());
+            entities.add(DbT1001HihokenshaDaichoEntityMock.getSpiedInstance());
+            entities.add(DbT1001HihokenshaDaichoEntityMock.getSpiedInstance());
             assertThat(HihokenshaMapper.toHihokenshaList(entities).size(), is(entities.size()));
         }
     }

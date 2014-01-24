@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dba.definition.valueobject.SaikofuJiyu;
 import jp.co.ndensan.reams.db.dba.definition.valueobject.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dba.definition.valueobject.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
-import jp.co.ndensan.reams.db.dba.entity.basic.T1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dba.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urf.business.HokenShubetsu;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoShikaku;
@@ -40,7 +40,7 @@ public final class HihokenshaMapper {
      * @param entity T1001HihokenshaDaichoEntity
      * @return T1001HihokenshaDaichoEntityと同じ値をもったHihokensya
      */
-    public static Hihokensha toHihokensha(final T1001HihokenshaDaichoEntity entity) {
+    public static Hihokensha toHihokensha(final DbT1001HihokenshaDaichoEntity entity) {
         IKaigoShikaku 介護保険資格 = toKaigoShikaku(entity);
         ShichosonCode 市町村コード = new ShichosonCode(entity.getShichosonCd());
         HihokenshaKubun 被保険者区分 = to被保険者区分(entity.getHihokenshaKubunCode());
@@ -67,15 +67,15 @@ public final class HihokenshaMapper {
      * @param entities T1001HihokenshaDaichoEntityのリスト
      * @return HihokenshaList
      */
-    public static HihokenshaList toHihokenshaList(final List<T1001HihokenshaDaichoEntity> entities) {
+    public static HihokenshaList toHihokenshaList(final List<DbT1001HihokenshaDaichoEntity> entities) {
         List<Hihokensha> 被保険者リスト = new ArrayList<>();
-        for (T1001HihokenshaDaichoEntity entity : entities) {
+        for (DbT1001HihokenshaDaichoEntity entity : entities) {
             被保険者リスト.add(toHihokensha(entity));
         }
         return new HihokenshaList(被保険者リスト);
     }
 
-    private static IKaigoShikaku toKaigoShikaku(final T1001HihokenshaDaichoEntity entity) {
+    private static IKaigoShikaku toKaigoShikaku(final DbT1001HihokenshaDaichoEntity entity) {
         IShikibetsuCode 識別コード = entity.getShikibetsuCode();
         IKaigoShikaku 介護保険資格 = KaigoShikakuFactory.createInstance(
                 識別コード, HokenShubetsu.介護保険,
