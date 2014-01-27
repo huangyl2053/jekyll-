@@ -14,16 +14,22 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <modules>
-        <module>DBA</module>
-        <module>DBB</module>
-        <module>DBC</module>
-        <module>DBD</module>
-        <module>DBE</module>
-        <module>DBU</module>
-        <module>DBZ</module>
+        <module>DBA/standard</module>
+        <module>DBB/standard</module>
+        <module>DBC/standard</module>
+        <module>DBD/standard</module>
+        <module>DBE/standard</module>
+        <module>DBU/standard</module>
+        <module>DBZ/standard</module>
     </modules>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>javax</groupId>
+                <artifactId>javaee-web-api</artifactId>
+                <version>7.0</version>
+                <scope>provided</scope>
+            </dependency>
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
@@ -115,8 +121,47 @@
                         </header>
                         <links>
                             <link>http://docs.oracle.com/javase/jp/7/api/</link>
+                            <link>http://zrtechwiki/documents/UZ-master/framework/javadoc/</link>
+                            <link>http://zrtechwiki/documents/UZ-develop/testhelper/javadoc/</link>
+                            <link>http://zrtechwiki/documents/UR-master/business/javadoc/</link>
+                            <link>http://zrtechwiki/documents/UR-master/realservice/javadoc/</link>
+                            <link>http://zrtechwiki/documents/UR-master/entity/javadoc/</link>
+                            <link>http://zrtechwiki/documents/UR-master/definition/javadoc/</link>
                         </links>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>2.3</version>
+                    <configuration>
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>2.6</version>
+                    <executions>
+                        <execution>
+                            <phase>validate</phase>
+                            <goals>
+                                <goal>copy</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${endorsed.dir}</outputDirectory>
+                                <silent>true</silent>
+                                <artifactItems>
+                                    <artifactItem>
+                                        <groupId>javax</groupId>
+                                        <artifactId>javaee-endorsed-api</artifactId>
+                                        <version>7.0</version>
+                                        <type>jar</type>
+                                    </artifactItem>
+                                </artifactItems>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.jacoco</groupId>
