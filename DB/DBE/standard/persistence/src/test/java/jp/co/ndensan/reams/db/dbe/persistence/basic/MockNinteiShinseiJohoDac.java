@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.DbAccessor;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 
 /**
+ * 認定申請情報DACのテスト用モッククラスです。
  *
  * @author n8178 城間篤人
  */

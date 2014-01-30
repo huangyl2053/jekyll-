@@ -23,6 +23,7 @@ import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
 
 /**
+ * 認定申請情報Entityを認定申請取下げ対象者クラスに変換するためのMapperのテストクラスです。
  *
  * @author n8178 城間篤人
  */
