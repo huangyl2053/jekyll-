@@ -16,19 +16,19 @@ public enum TorisageKubun {
     /**
      * 認定申請有効
      */
-    認定申請有効(new RString("認定申請有効")),
+    認定申請有効(new RString("1")),
+    /**
+     * 却下
+     */
+    却下(new RString("2")),
+    /**
+     * 取下げ
+     */
+    取下げ(new RString("3")),
     /**
      * 区分変更却下
      */
-    区分変更却下(new RString("区分変更却下")),
-    /**
-     * 認定申請取下げ
-     */
-    認定申請取下げ(new RString("認定申請取下げ")),
-    /**
-     * 認定申請削除
-     */
-    認定申請削除(new RString("認定申請削除"));
+    区分変更却下(new RString("4"));
     private final RString 取下げ区分コード;
 
     private TorisageKubun(RString 取下げ区分コード) {
