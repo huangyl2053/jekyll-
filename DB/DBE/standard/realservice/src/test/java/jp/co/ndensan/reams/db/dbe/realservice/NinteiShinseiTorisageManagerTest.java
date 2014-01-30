@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisageTaishosha;
+import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisageTaishoshaList;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
@@ -67,7 +68,7 @@ public class NinteiShinseiTorisageManagerTest extends TestBase {
         @Test
         public void 指定した認定申請年月日範囲に合致する認定申請取下げ対象者を_3件持つリストを取得できる() {
             sut = new NinteiShinseiTorisageManager(createMockDac());
-            List<NinteiShinseiTorisageTaishosha> results = sut.get認定申請取下げ対象者全件(市町村Code, 年月日範囲);
+            NinteiShinseiTorisageTaishoshaList results = sut.get認定申請取下げ対象者全件(市町村Code, 年月日範囲);
             assertThat(results.size(), is(3));
         }
     }
@@ -77,7 +78,7 @@ public class NinteiShinseiTorisageManagerTest extends TestBase {
         @Test
         public void 指定した取下げ年月日範囲に合致する認定申請取下げ者を_2件持つリストを取得できる() {
             sut = new NinteiShinseiTorisageManager(createMockDac());
-            List<NinteiShinseiTorisageTaishosha> results = sut.get認定申請取下げ者(市町村Code, 年月日範囲);
+            NinteiShinseiTorisageTaishoshaList results = sut.get認定申請取下げ者(市町村Code, 年月日範囲);
             assertThat(results.size(), is(2));
         }
     }
