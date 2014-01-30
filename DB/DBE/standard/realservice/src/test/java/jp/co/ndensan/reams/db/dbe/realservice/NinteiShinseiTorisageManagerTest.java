@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisageTaishosha;
-import jp.co.ndensan.reams.db.dbe.definition.ShinsaKeizokuKubun;
-import jp.co.ndensan.reams.db.dbe.definition.TorisageKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteishinseiTorisageTaishoshaMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
@@ -122,10 +122,10 @@ public class NinteiShinseiTorisageManagerTest extends TestBase {
         entity.setHihokenshaNo(被保険者No);
         entity.setNinteiShinseiYMD(認定申請年月日);
         entity.setNinteiShinseiShinseijiKubunCode(認定申請区分コード_申請時);
-        entity.setTorisageKubunCode(取下げ区分);
+        entity.setTorisageKubunCode(取下げ区分.get取下げ区分コード());
         entity.setTorisageRiyu(取下げ理由);
         entity.setTorisageYMD(取下げ年月日);
-        entity.setShinsaKeizokuKubun(審査継続区分);
+        entity.setShinsaKeizokuKubun(審査継続区分.is継続());
         return entity;
     }
 

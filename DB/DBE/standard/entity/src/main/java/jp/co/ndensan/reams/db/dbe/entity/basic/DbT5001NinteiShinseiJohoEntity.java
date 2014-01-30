@@ -4,8 +4,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbe.definition.ShinsaKeizokuKubun;
-import jp.co.ndensan.reams.db.dbe.definition.TorisageKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -48,10 +46,10 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     private boolean enkitsuchiDoiUmuKubun;
     private boolean shisetsuNyushoUmuKubun;
     private RString sichosonRenrakuJiko;
-    private TorisageKubun torisageKubunCode;
+    private RString torisageKubunCode;
     private RString torisageRiyu;
     private FlexibleDate torisageYMD;
-    private ShinsaKeizokuKubun shinsaKeizokuKubun;
+    private boolean shinsaKeizokuKubun;
 
     public RString getInsertDantaiCd() {
         return insertDantaiCd;
@@ -285,11 +283,11 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
         this.sichosonRenrakuJiko = sichosonRenrakuJiko;
     }
 
-    public TorisageKubun getTorisageKubunCode() {
+    public RString getTorisageKubunCode() {
         return torisageKubunCode;
     }
 
-    public void setTorisageKubunCode(TorisageKubun torisageKubunCode) {
+    public void setTorisageKubunCode(RString torisageKubunCode) {
         this.torisageKubunCode = torisageKubunCode;
     }
 
@@ -309,11 +307,11 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
         this.torisageYMD = torisageYMD;
     }
 
-    public ShinsaKeizokuKubun getShinsaKeizokuKubun() {
+    public boolean getShinsaKeizokuKubun() {
         return shinsaKeizokuKubun;
     }
 
-    public void setShinsaKeizokuKubun(ShinsaKeizokuKubun shinsaKeizokuKubun) {
+    public void setShinsaKeizokuKubun(boolean shinsaKeizokuKubun) {
         this.shinsaKeizokuKubun = shinsaKeizokuKubun;
     }
 // </editor-fold>
