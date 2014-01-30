@@ -22,6 +22,8 @@ public class NinteiShinseiTorisageTaishosha {
     private final ShichosonCode 市町村コード;
     private final KaigoHihokenshaNo 被保険者番号;
     private final FlexibleDate 認定申請年月日;
+    //TODO n8178 城間篤人
+    //今後、独自クラスとして認定申請区分コード_申請時を作成予定。作成後修正を行う 2014年2月末
     private final RString 認定申請区分コード_申請時;
     private final NinteiShinseiTorisage 認定申請取下げ;
 
