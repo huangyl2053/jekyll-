@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -20,7 +20,7 @@ public class NinteiShinseiTorisageTaishosha {
 
     private final ShinseishoKanriNo 申請書管理No;
     private final ShichosonCode 市町村コード;
-    private final HihokenshaNo 被保険者番号;
+    private final KaigoHihokenshaNo 被保険者番号;
     private final FlexibleDate 認定申請年月日;
     private final RString 認定申請区分コード_申請時;
     private final NinteiShinseiTorisage 認定申請取下げ;
@@ -35,7 +35,7 @@ public class NinteiShinseiTorisageTaishosha {
      * @param 認定申請区分コード_申請時 認定申請区分（申請時）コード
      * @param 認定申請取下げ 認定申請取下げ
      */
-    public NinteiShinseiTorisageTaishosha(ShinseishoKanriNo 申請書管理No, ShichosonCode 市町村コード, HihokenshaNo 被保険者番号,
+    public NinteiShinseiTorisageTaishosha(ShinseishoKanriNo 申請書管理No, ShichosonCode 市町村コード, KaigoHihokenshaNo 被保険者番号,
             FlexibleDate 認定申請年月日, RString 認定申請区分コード_申請時, NinteiShinseiTorisage 認定申請取下げ) {
         requireNonNull(申請書管理No);
         requireNonNull(市町村コード);
@@ -75,7 +75,7 @@ public class NinteiShinseiTorisageTaishosha {
      *
      * @return 被保険者番号
      */
-    public HihokenshaNo get被保険者番号() {
+    public KaigoHihokenshaNo get被保険者番号() {
         return 被保険者番号;
     }
 

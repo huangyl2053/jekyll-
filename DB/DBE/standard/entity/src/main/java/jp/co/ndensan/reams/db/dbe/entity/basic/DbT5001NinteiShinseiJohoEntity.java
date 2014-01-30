@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbe.definition.ShinsaKeizokuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.TorisageKubun;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -30,7 +30,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     private ShinseishoKanriNo shinseishoKanriNo;
     private ShichosonCode shichosonCode;
     private RString shishoCode;
-    private HihokenshaNo hihokenshaNo;
+    private KaigoHihokenshaNo hihokenshaNo;
     private RString shikibetsuCode;
     private FlexibleDate ninteiShinseiYMD;
     private RString ninteiShinseiEdabanCode;
@@ -141,11 +141,11 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
         this.shishoCode = shishoCode;
     }
 
-    public HihokenshaNo getHihokenshaNo() {
+    public KaigoHihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
-    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(KaigoHihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 

@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisage;
 import jp.co.ndensan.reams.db.dbe.definition.ShinsaKeizokuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -189,7 +189,7 @@ public class NinteiShinseiJohoDacTest extends TestDacBase {
 //        entity.setShinseishoKanriNo(申請書管理番号);
 //        entity.setShichosonCode(市町村コード);
 //        entity.setShishoCode(new RString("0001"));
-//        entity.setHihokenshaNo(new HihokenshaNo(new RString("0001")));
+//        entity.setKaigoHihokenshaNo(new KaigoHihokenshaNo(new RString("0001")));
 //        entity.setShikibetsuCode(new RString("0001"));
 //        entity.setNinteiShinseiYMD(認定申請年月日);
 //        entity.setNinteiShinseiEdabanCode(new RString("0001"));

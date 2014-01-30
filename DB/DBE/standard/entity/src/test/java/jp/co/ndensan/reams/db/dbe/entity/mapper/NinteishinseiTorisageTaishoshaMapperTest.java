@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisageTaishosha;
 import jp.co.ndensan.reams.db.dbe.definition.ShinsaKeizokuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -33,7 +33,7 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
 
         private ShinseishoKanriNo 申請書管理No;
         private ShichosonCode 市町村Code;
-        private HihokenshaNo 被保険者No;
+        private KaigoHihokenshaNo 被保険者No;
         private FlexibleDate 認定申請年月日;
         private RString 認定申請区分コード_申請時;
         private TorisageKubun 取下げ区分;
@@ -46,7 +46,7 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
         public void setUp() {
             申請書管理No = new ShinseishoKanriNo(new RString("0123"));
             市町村Code = new ShichosonCode(new RString("A012"));
-            被保険者No = new HihokenshaNo(new RString("DB0001"));
+            被保険者No = new KaigoHihokenshaNo(new RString("DB0001"));
             認定申請年月日 = new FlexibleDate(new RString("20120101"));
             認定申請区分コード_申請時 = new RString("0001");
             取下げ区分 = TorisageKubun.区分変更却下;

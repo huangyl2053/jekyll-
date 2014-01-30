@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -29,7 +29,7 @@ public class NinteiShinseiTorisageTaishoshaTest extends TestBase {
 
         private ShinseishoKanriNo 申請書管理No = mock(ShinseishoKanriNo.class);
         private ShichosonCode 市町村コード = mock(ShichosonCode.class);
-        private HihokenshaNo 被保険者番号 = mock(HihokenshaNo.class);
+        private KaigoHihokenshaNo 被保険者番号 = mock(KaigoHihokenshaNo.class);
         private FlexibleDate 認定申請年月日 = mock(FlexibleDate.class);
         private RString 認定申請区分_申請時コード = new RString("AA01");
         private NinteiShinseiTorisage 認定申請取下げ = mock(NinteiShinseiTorisage.class);

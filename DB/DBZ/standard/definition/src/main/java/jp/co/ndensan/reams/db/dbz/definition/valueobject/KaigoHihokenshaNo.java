@@ -6,13 +6,14 @@ package jp.co.ndensan.reams.db.dbz.definition.valueobject;
 
 import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
  * 介護保険被保険者番号のクラスです。
  *
  * @author N3327 三浦 凌
  */
-public class KaigoHihokenshaNumber implements Comparable<KaigoHihokenshaNumber> {
+public class KaigoHihokenshaNo implements Comparable<KaigoHihokenshaNo>, IDbColumnMappable {
 
     private final RString 被保険者番号;
 
@@ -21,7 +22,7 @@ public class KaigoHihokenshaNumber implements Comparable<KaigoHihokenshaNumber> 
      *
      * @param 被保険者番号 被保険者番号に対応する文字列
      */
-    public KaigoHihokenshaNumber(RString 被保険者番号) {
+    public KaigoHihokenshaNo(RString 被保険者番号) {
         this.被保険者番号 = 被保険者番号;
     }
 
@@ -43,7 +44,7 @@ public class KaigoHihokenshaNumber implements Comparable<KaigoHihokenshaNumber> 
      * @return 被保険者番号が同じ値のときは0。比較対象の方が大きければ、0より小さい値。比較対象の方が小さければ、0より大きい値。
      */
     @Override
-    public int compareTo(KaigoHihokenshaNumber 比較対象) {
+    public int compareTo(KaigoHihokenshaNo 比較対象) {
         return getValue().compareTo(比較対象.getValue());
     }
 
@@ -57,10 +58,10 @@ public class KaigoHihokenshaNumber implements Comparable<KaigoHihokenshaNumber> 
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof KaigoHihokenshaNumber)) {
+        if (!(obj instanceof KaigoHihokenshaNo)) {
             return false;
         }
-        KaigoHihokenshaNumber 比較対象 = (KaigoHihokenshaNumber) obj;
+        KaigoHihokenshaNo 比較対象 = (KaigoHihokenshaNo) obj;
         return (this.compareTo(比較対象) == 0);
     }
 
@@ -69,5 +70,10 @@ public class KaigoHihokenshaNumber implements Comparable<KaigoHihokenshaNumber> 
         int hash = 7;
         hash = 17 * hash + Objects.hashCode(this.getValue());
         return hash;
+    }
+
+    @Override
+    public RString getColumnValue() {
+        return 被保険者番号;
     }
 }

@@ -9,6 +9,7 @@ import java.util.Objects;
 //import jp.co.ndensan.reams.ur.urz.business.ILocalGovernmentCode;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 //import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
@@ -16,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3327 三浦 凌
  */
-public class ShichosonCode {
+public class ShichosonCode implements IDbColumnMappable {
 
     private final RString 市町村コード;
 
@@ -80,4 +81,9 @@ public class ShichosonCode {
 //        code.append(市区町村コード);
 //        return code.toRString();
 //    }
+
+    @Override
+    public RString getColumnValue() {
+        return 市町村コード;
+    }
 }
