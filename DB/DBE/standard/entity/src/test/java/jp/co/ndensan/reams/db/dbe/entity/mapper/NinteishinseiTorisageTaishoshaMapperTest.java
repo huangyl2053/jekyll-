@@ -111,10 +111,10 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
             entity.setHihokenshaNo(被保険者No);
             entity.setNinteiShinseiYMD(認定申請年月日);
             entity.setNinteiShinseiShinseijiKubunCode(認定申請区分コード_申請時);
-            entity.setTorisageKubunCode(取下げ区分);
+            entity.setTorisageKubunCode(取下げ区分.get取下げ区分コード());
             entity.setTorisageRiyu(取下げ理由);
             entity.setTorisageYMD(取下げ年月日);
-            entity.setShinsaKeizokuKubun(審査継続区分);
+            entity.setShinsaKeizokuKubun(審査継続区分.is継続());
             return entity;
         }
     }
@@ -138,7 +138,7 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
 
         @Test
         public void 認定申請情報Entityの取下げ区分コードが_認定申請取下げの取下げ区分と同一になる() {
-            assertThat(sut.getTorisageKubunCode(), is(取下げ区分));
+            assertThat(sut.getTorisageKubunCode(), is(取下げ区分.get取下げ区分コード()));
         }
 
         @Test
@@ -153,7 +153,7 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
 
         @Test
         public void 認定申請情報Entityの審査継続区分が_認定申請取下げの審査継続区分と同一になる() {
-            assertThat(sut.getShinsaKeizokuKubun(), is(審査継続区分));
+            assertThat(sut.getShinsaKeizokuKubun(), is(審査継続区分.is継続()));
         }
 
         private DbT5001NinteiShinseiJohoEntity createMockEntity() {
