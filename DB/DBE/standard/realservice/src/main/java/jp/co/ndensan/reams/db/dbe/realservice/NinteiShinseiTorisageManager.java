@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisage;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisageTaishosha;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
@@ -90,10 +91,10 @@ public class NinteiShinseiTorisageManager {
      * @param 認定申請取下げ対象者 認定申請取下げ対象者
      * @return 更新件数。
      */
-    public int save(NinteiShinseiTorisageTaishosha 認定申請取下げ対象者) {
-        DbT5001NinteiShinseiJohoEntity 更新前entity = shinseiDac.select(認定申請取下げ対象者.get申請書管理No());
+    public boolean save(ShinseishoKanriNo 申請書管理No, NinteiShinseiTorisage 認定申請取下げ情報) {
+        DbT5001NinteiShinseiJohoEntity 更新前entity = shinseiDac.select(申請書管理No);
         DbT5001NinteiShinseiJohoEntity 更新後entity = NinteishinseiTorisageTaishoshaMapper
-                .to認定申請情報Entity(更新前entity, 認定申請取下げ対象者.get認定申請取下げ());
-        return shinseiDac.update(更新後entity);
+                .to認定申請情報Entity(更新前entity, 認定申請取下げ情報);
+        return shinseiDac.update(更新後entity) == 1 ? true : false;
     }
 }

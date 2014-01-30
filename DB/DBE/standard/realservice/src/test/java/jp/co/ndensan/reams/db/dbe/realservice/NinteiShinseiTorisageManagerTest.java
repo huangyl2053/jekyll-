@@ -48,7 +48,7 @@ public class NinteiShinseiTorisageManagerTest extends TestBase {
     private static ShinsaKeizokuKubun 審査継続区分 = ShinsaKeizokuKubun.継続しない;
     private static Range<FlexibleDate> 年月日範囲 = new Range(new FlexibleDate(new RString("20110101")), new FlexibleDate(new RString("20130101")));
     private static NinteiShinseiTorisageTaishosha 認定申請取下げ対象 = create認定申請取下げ対象();
-    private static NinteiShinseiTorisageManager sut = new NinteiShinseiTorisageManager(createMockDac());
+    private static NinteiShinseiTorisageManager sut;
 
     public static class get認定申請取下げ対象者のテスト {
 
@@ -85,9 +85,15 @@ public class NinteiShinseiTorisageManagerTest extends TestBase {
     public static class saveのテスト {
 
         @Test
-        public void 引数から受け取った情報を更新できたとき_saveメソッドから1が返る() {
+        public void 引数から受け取った情報を更新できたとき_saveメソッドからtrueが返る() {
             sut = new NinteiShinseiTorisageManager(createMockDac());
-            assertThat(sut.save(認定申請取下げ対象), is(1));
+            assertThat(sut.save(認定申請取下げ対象.get申請書管理No(), 認定申請取下げ対象.get認定申請取下げ()), is(true));
+        }
+
+        @Test
+        public void 引数から受け取った情報を更新できなかったとき_saveメソッドからfalseが返る() {
+            sut = new NinteiShinseiTorisageManager(createMockDac_更新に失敗した場合());
+            assertThat(sut.save(認定申請取下げ対象.get申請書管理No(), 認定申請取下げ対象.get認定申請取下げ()), is(false));
         }
     }
 
@@ -97,6 +103,15 @@ public class NinteiShinseiTorisageManagerTest extends TestBase {
         when(mockDac.selectAllBy認定申請年月日(any(ShichosonCode.class), any(Range.class))).thenReturn(create認定申請情報EntityList(3));
         when(mockDac.selectAllBy取下げ年月日(any(ShichosonCode.class), any(Range.class))).thenReturn(create認定申請情報EntityList(2));
         when(mockDac.update(any(DbT5001NinteiShinseiJohoEntity.class))).thenReturn(1);
+        return mockDac;
+    }
+
+    private static INinteiShinseiJohoDac createMockDac_更新に失敗した場合() {
+        INinteiShinseiJohoDac mockDac = mock(INinteiShinseiJohoDac.class);
+        when(mockDac.select(any(ShinseishoKanriNo.class))).thenReturn(create認定申請情報Entity());
+        when(mockDac.selectAllBy認定申請年月日(any(ShichosonCode.class), any(Range.class))).thenReturn(create認定申請情報EntityList(3));
+        when(mockDac.selectAllBy取下げ年月日(any(ShichosonCode.class), any(Range.class))).thenReturn(create認定申請情報EntityList(2));
+        when(mockDac.update(any(DbT5001NinteiShinseiJohoEntity.class))).thenReturn(0);
         return mockDac;
     }
 
