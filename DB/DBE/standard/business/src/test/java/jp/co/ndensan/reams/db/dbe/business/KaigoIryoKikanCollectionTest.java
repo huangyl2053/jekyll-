@@ -115,9 +115,21 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
         }
 
         @Test
-        public void 医療機関コードにA001を指定したとき_コレクションのサイズが2になる() {
+        public void 医療機関コードにA001を指定したとき_医療機関コードA001の要素がリストに存在し_isEmptyがfalseを返す() {
             KaigoIryoKikanCollection results = sut.sub介護医療機関Collection(create医療機関区分("A001"));
-            assertThat(results.size(), is(2));
+            assertThat(results.sub介護医療機関Collection(create医療機関区分("A001")).isEmpty(), is(false));
+        }
+
+        @Test
+        public void 医療機関コードにA001を指定したとき_医療機関コードB001の要素がリストに存在せず_isEmptyがtrueを返す() {
+            KaigoIryoKikanCollection results = sut.sub介護医療機関Collection(create医療機関区分("A001"));
+            assertThat(results.sub介護医療機関Collection(create医療機関区分("B001")).isEmpty(), is(true));
+        }
+
+        @Test
+        public void 医療機関コードにA001を指定したとき_医療機関コードC001の要素がリストに存在せず_isEmptyがtrueを返す() {
+            KaigoIryoKikanCollection results = sut.sub介護医療機関Collection(create医療機関区分("A001"));
+            assertThat(results.sub介護医療機関Collection(create医療機関区分("C001")).isEmpty(), is(true));
         }
 
         private List<KaigoIryoKikan> create介護医療機関List() {
@@ -161,9 +173,15 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
         }
 
         @Test
-        public void 医療機関状況に有効を指定したとき_コレクションのサイズが4になる() {
+        public void 医療機関状況に有効を指定したとき_医療機関状況が有効の要素がリストに存在し_isEmptyがfalseを返す() {
             KaigoIryoKikanCollection results = sut.sub介護医療機関Collection(IryoKikanJokyo.有効);
-            assertThat(results.size(), is(4));
+            assertThat(results.sub介護医療機関Collection(IryoKikanJokyo.有効).isEmpty(), is(false));
+        }
+
+        @Test
+        public void 医療機関状況に有効を指定したとき_医療機関状況が無効の要素がリストに存在せず_isEmptyがtrueを返す() {
+            KaigoIryoKikanCollection results = sut.sub介護医療機関Collection(IryoKikanJokyo.有効);
+            assertThat(results.sub介護医療機関Collection(IryoKikanJokyo.無効).isEmpty(), is(true));
         }
 
         private List<KaigoIryoKikan> create介護医療機関List() {

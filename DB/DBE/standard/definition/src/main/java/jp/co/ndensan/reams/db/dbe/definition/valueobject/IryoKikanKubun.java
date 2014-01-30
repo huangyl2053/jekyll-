@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
 import jp.co.ndensan.reams.ur.urz.business.ICodeAssignedItem;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**
  * 病院、診療所、助産所といった、医療機関の区分を表すクラスです。
@@ -25,6 +27,23 @@ public class IryoKikanKubun implements ICodeAssignedItem {
         this.code = RString.EMPTY;
         this.name = RString.EMPTY;
         this.shortName = RString.EMPTY;
+    }
+
+    /**
+     * 引数からメンバを受け取るコンストラクタです。
+     *
+     * @param コード コード
+     * @param 名称 名称
+     * @param 略称 略称
+     */
+    public IryoKikanKubun(RString コード, RString 名称, RString 略称) {
+        requireNonNull(コード, Messages.E00003.replace("コード", getClass().getName()).getMessage());
+        requireNonNull(名称, Messages.E00003.replace("名称", getClass().getName()).getMessage());
+        requireNonNull(略称, Messages.E00003.replace("略称", getClass().getName()).getMessage());
+
+        this.code = コード;
+        this.name = 名称;
+        this.shortName = 略称;
     }
 
     @Override

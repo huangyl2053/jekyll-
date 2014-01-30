@@ -19,11 +19,21 @@ public class KaigoIryoKikanCode implements Comparable<KaigoIryoKikanCode>, IDbCo
 
     private final RString 介護医療機関コード;
 
+    /**
+     * 引数からメンバを受け取るコンストラクタです。
+     *
+     * @param 介護医療機関コード 介護医療機関コード
+     */
     public KaigoIryoKikanCode(RString 介護医療機関コード) {
         this.介護医療機関コード = requireNonNull(介護医療機関コード,
                 Messages.E00003.replace("介護医療機関コード", getClass().getName()).getMessage());
     }
 
+    /**
+     * 介護医療機関コードを返します。
+     *
+     * @return 介護医療機関コード
+     */
     public RString getValue() {
         return 介護医療機関コード;
     }

@@ -30,7 +30,7 @@ public class ShujiiIryoKikanTest extends TestBase {
 
         private static final ShichosonCode 市町村コード = new ShichosonCode(RString.EMPTY);
         private static final KaigoIryoKikanCode 介護医療機関コード = new KaigoIryoKikanCode(RString.EMPTY);
-        private static final IIryoKikanCode get医療機関コード = new _IryoKikanCode(RString.EMPTY);
+        private static final IIryoKikanCode get医療機関コード = new _IryoKikanCode(new RString("000000009"));
         private static final IryoKikanJokyo 医療機関の状況 = IryoKikanJokyo.有効;
         private static final IryoKikanKubun 医療機関の区分 = new IryoKikanKubun();
 

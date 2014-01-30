@@ -7,153 +7,187 @@ import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 
+/**
+ * DbT7011ShujiiIryoKikanJohoの項目定義クラスです
+ *
+ * @author n8178 城間篤人
+ */
 public class DbT7011ShujiiIryoKikanJohoEntity implements IDbAccessable {
 
+    /**
+     * TableName
+     */
     @TableName
-    public final static String TABLE_NAME = "DbT7011ShujiiIryoKikanJoho";
-    private RString insertDantaiCd;
+    public static final RString TABLE_NAME = new RString("DbT7011ShujiiIryoKikanJoho");
+    private RString insertDantaiCd = RString.EMPTY;
     private RDateTime insertTimestamp;
-    private RString insertReamsLoginId;
+    private RString insertReamsLoginId = RString.EMPTY;
     private UUID insertContextId;
-    private boolean isDeleted;
-    private int updateCount;
+    private boolean isDeleted = false;
+    private int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
-    private RString lastUpdateReamsLoginId;
+    private RString lastUpdateReamsLoginId = RString.EMPTY;
     @PrimaryKey
-    private RString shichosonCode;
+    private ShichosonCode shichosonCode;
     @PrimaryKey
-    private RString kaigoIryokikanCode;
+    private KaigoIryoKikanCode kaigoIryokikanCode;
     private RString iryokikanCode;
     private boolean iryokikanJokyo;
     private RString kikanKubunCode;
 
+    /**
+     * getInsertDantaiCd
+     *
+     * @return insertDantaiCd
+     */
     public RString getInsertDantaiCd() {
         return insertDantaiCd;
     }
 
+    /**
+     * setInsertDantaiCd
+     *
+     * @param insertDantaiCd insertDantaiCd
+     */
     public void setInsertDantaiCd(RString insertDantaiCd) {
         this.insertDantaiCd = insertDantaiCd;
     }
 
-    public RDateTime getInsertTimestamp() {
-        return insertTimestamp;
-    }
-
-    public void setInsertTimestamp(RDateTime insertTimestamp) {
-        this.insertTimestamp = insertTimestamp;
-    }
-
-    public RString getInsertReamsLoginId() {
-        return insertReamsLoginId;
-    }
-
-    public void setInsertReamsLoginId(RString insertReamsLoginId) {
-        this.insertReamsLoginId = insertReamsLoginId;
-    }
-
-    public UUID getInsertContextId() {
-        return insertContextId;
-    }
-
-    public void setInsertContextId(UUID insertContextId) {
-        this.insertContextId = insertContextId;
-    }
-
+    /**
+     * getIsDeleted
+     *
+     * @return isDeleted
+     */
     public boolean getIsDeleted() {
         return isDeleted;
     }
 
+    /**
+     * setIsDeleted
+     *
+     * @param isDeleted isDeleted
+     */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-    public int getUpdateCount() {
-        return updateCount;
-    }
-
-    public void setUpdateCount(int updateCount) {
-        this.updateCount = updateCount;
-    }
-
-    public RDateTime getLastUpdateTimestamp() {
-        return lastUpdateTimestamp;
-    }
-
-    public void setLastUpdateTimestamp(RDateTime lastUpdateTimestamp) {
-        this.lastUpdateTimestamp = lastUpdateTimestamp;
-    }
-
-    public RString getLastUpdateReamsLoginId() {
-        return lastUpdateReamsLoginId;
-    }
-
+    /**
+     * setLastUpdateReamsLoginId
+     *
+     * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
+     */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
         this.lastUpdateReamsLoginId = lastUpdateReamsLoginId;
     }
 
-    public RString getShichosonCode() {
+    /**
+     * getShichosonCode
+     *
+     * @return shichosonCode
+     */
+    public ShichosonCode getShichosonCode() {
         return shichosonCode;
     }
 
-    public void setShichosonCode(RString shichosonCode) {
+    /**
+     * setShichosonCode
+     *
+     * @param shichosonCode shichosonCode
+     */
+    public void setShichosonCode(ShichosonCode shichosonCode) {
         this.shichosonCode = shichosonCode;
     }
 
-    public RString getKaigoIryokikanCode() {
+    /**
+     * getKaigoIryokikanCode
+     *
+     * @return kaigoIryokikanCode
+     */
+    public KaigoIryoKikanCode getKaigoIryokikanCode() {
         return kaigoIryokikanCode;
     }
 
-    public void setKaigoIryokikanCode(RString kaigoIryokikanCode) {
+    /**
+     * setKaigoIryokikanCode
+     *
+     * @param kaigoIryokikanCode kaigoIryokikanCode
+     */
+    public void setKaigoIryokikanCode(KaigoIryoKikanCode kaigoIryokikanCode) {
         this.kaigoIryokikanCode = kaigoIryokikanCode;
     }
 
+    /**
+     * getIryokikanCode
+     *
+     * @return iryokikanCode
+     */
     public RString getIryokikanCode() {
         return iryokikanCode;
     }
 
+    /**
+     * setIryokikanCode
+     *
+     * @param iryokikanCode iryokikanCode
+     */
     public void setIryokikanCode(RString iryokikanCode) {
         this.iryokikanCode = iryokikanCode;
     }
 
+    /**
+     * getIryokikanJokyo
+     *
+     * @return iryokikanJokyo
+     */
     public boolean getIryokikanJokyo() {
         return iryokikanJokyo;
     }
 
+    /**
+     * setIryokikanJokyo
+     *
+     * @param iryokikanJokyo iryokikanJokyo
+     */
     public void setIryokikanJokyo(boolean iryokikanJokyo) {
         this.iryokikanJokyo = iryokikanJokyo;
     }
 
+    /**
+     * getKikanKubunCode
+     *
+     * @return kikanKubunCode
+     */
     public RString getKikanKubunCode() {
         return kikanKubunCode;
     }
 
+    /**
+     * setKikanKubunCode
+     *
+     * @param kikanKubunCode kikanKubunCode
+     */
     public void setKikanKubunCode(RString kikanKubunCode) {
         this.kikanKubunCode = kikanKubunCode;
     }
 
     /**
-     * コードマスタから名称を取得する。
+     * コードマスタから機関区分コードに対応した名称を取得します。
      *
-     * @return 医療機関区分コードに対応する名称
+     * @return 名称
      */
-    public RString getIryoKikanKubunMeisho() {
-        //TODO n8178 城間篤人
-        //コード種別に入るべき値を調べて、後日そちらに変更予定。現在は仮の値が入っている。 2014年2月末
-        RString コード種別 = new RString("21");
-        return CodeMaster.getCodeMeisho(コード種別, kikanKubunCode);
+    public RString getKikanKubunCodeMeisho() {
+        return CodeMaster.getCodeMeisho(new RString("DBE"), new RString("35"), kikanKubunCode);
     }
 
     /**
-     * コードマスタから略称を取得する。
+     * コードマスタから機関区分コードに対応した略称を取得します。
      *
-     * @return 医療機関区分コードに対応する略称
+     * @return 略称
      */
-    public RString getIryoKikanKubunRyakusho() {
-        //TODO n8178 城間篤人
-        //略称が必要か否か後日確認 2014年2/4まで
-        //コード種別に入るべき値を調べて、後日そちらに変更予定。現在は仮の値が入っている。 2014年2月末
-        RString コード種別 = new RString("21");
-        return CodeMaster.getCodeRyakusho(コード種別, kikanKubunCode);
+    public RString getKikanKubunCodeRyakusho() {
+        return CodeMaster.getCodeRyakusho(new RString("DBE"), new RString("35"), kikanKubunCode);
     }
 }

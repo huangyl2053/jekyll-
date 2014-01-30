@@ -2,7 +2,13 @@ package jp.co.ndensan.reams.db.dbe.entity.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
+/**
+ * DbT7011ShujiiIryoKikanJohoの項目定義クラスです
+ *
+ * @author n8178 城間篤人
+ */
 public enum DbT7011ShujiiIryoKikanJoho implements IColumnDefinition {
+// <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     insertDantaiCd(2147483647, 0),
     insertTimestamp(29, 0),
@@ -25,11 +31,22 @@ public enum DbT7011ShujiiIryoKikanJoho implements IColumnDefinition {
         this.scale = scale;
     }
 
+    /**
+     * getMaxLength
+     *
+     * @return 項目の最大長
+     */
     public int getMaxLength() {
         return maxLength;
     }
 
+    /**
+     * getScale
+     *
+     * @return 小数点以下の桁数
+     */
     public int getScale() {
         return scale;
     }
+// </editor-fold>
 }

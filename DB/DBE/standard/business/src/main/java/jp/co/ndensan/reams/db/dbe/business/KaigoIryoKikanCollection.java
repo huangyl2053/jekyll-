@@ -58,7 +58,7 @@ public class KaigoIryoKikanCollection implements Iterable {
     }
 
     /**
-     * 引数に医療機関区分を渡し、その医療機関区分に該当する介護医療機関のコレクションを返します。<br/>
+     * 引数に医療機関区分を渡し、その医療機関区分に該当するものを抽出した介護医療機関のコレクションを返します。<br/>
      * 医療機関区分に該当するものがない場合、空のコレクションが返ります。
      *
      * @param 医療機関区分 医療機関区分
@@ -87,10 +87,10 @@ public class KaigoIryoKikanCollection implements Iterable {
     }
 
     /**
-     * 引数に医療機関区分を渡し、その医療機関区分に該当する介護医療機関のコレクションを返します。<br/>
+     * 引数に医療機関状況を渡し、その医療機関状況に該当するものを抽出した介護医療機関のコレクションを返します。<br/>
      * 医療機関区分に該当するものがない場合、空のコレクションが返ります。
      *
-     * @param 医療機関区分 医療機関区分
+     * @param 医療機関状況 医療機関状況
      * @return 指定した医療機関区分を持つ介護医療機関コレクション
      */
     public KaigoIryoKikanCollection sub介護医療機関Collection(IryoKikanJokyo 医療機関状況) {
