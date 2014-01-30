@@ -5,7 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.IInsertable;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.IInsertable;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.IUpdatable;
 
 /**
  * 認定申請情報のテスト用DACのインターフェースです。

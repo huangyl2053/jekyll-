@@ -11,13 +11,14 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.IUpdatable;
 
 /**
  * 認定申請情報テーブルから情報を取得するクラスのインターフェースです。
  *
  * @author n8178 城間篤人
  */
-public interface INinteiShinseiJohoDac {
+public interface INinteiShinseiJohoDac extends IUpdatable<DbT5001NinteiShinseiJohoEntity> {
 
     /**
      * 申請書管理番号で指定された認定申請情報を取得します。
@@ -47,13 +48,4 @@ public interface INinteiShinseiJohoDac {
      */
     @Transaction
     List<DbT5001NinteiShinseiJohoEntity> selectAllBy取下げ年月日(ShichosonCode 市町村コード, Range<FlexibleDate> 取下げ年月日範囲);
-
-    /**
-     * 認定申請情報テーブルを更新します。
-     *
-     * @param entity 更新される情報を持つエンティティ
-     * @return 更新件数
-     */
-    @Transaction
-    int update(DbT5001NinteiShinseiJohoEntity entity);
 }
