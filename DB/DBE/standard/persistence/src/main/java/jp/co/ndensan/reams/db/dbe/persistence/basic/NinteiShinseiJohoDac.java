@@ -61,16 +61,6 @@ public class NinteiShinseiJohoDac implements INinteiShinseiJohoDac {
                 .toList(DbT5001NinteiShinseiJohoEntity.class);
     }
 
-    private List<DbT5001NinteiShinseiJohoEntity> selectAll(ShichosonCode 市町村コード, Range<FlexibleDate> 年月日範囲) {
-        DbAccessor accessor = new DbAccessor(session);
-        return accessor.select()
-                .table(DbT5001NinteiShinseiJoho.class)
-                .where(and(eq(shichosonCode, 市町村コード),
-                leq(年月日範囲.getFrom().toRDate(DateRoundingType.同月の歴上日), ninteiShinseiYMD),
-                leq(ninteiShinseiYMD, 年月日範囲.getTo().toRDate(DateRoundingType.同月の歴上日))))
-                .toList(DbT5001NinteiShinseiJohoEntity.class);
-    }
-
     @Override
     public int update(DbT5001NinteiShinseiJohoEntity entity) {
         DbAccessor accessor = new DbAccessor(session);
