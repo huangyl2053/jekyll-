@@ -89,8 +89,9 @@ public class NinteiShinseiTorisageManager {
     /**
      * 引数から渡された認定申請取下げ対象者の情報を元に、認定申請情報を更新します。
      *
-     * @param 認定申請取下げ対象者 認定申請取下げ対象者
-     * @return 更新件数。
+     * @param 申請書管理No 申請書管理No
+     * @param 認定申請取下げ情報 認定申請取下げ情報
+     * @return 更新が成功すればtrue、しなければfalse
      */
     public boolean save(ShinseishoKanriNo 申請書管理No, NinteiShinseiTorisage 認定申請取下げ情報) {
         DbT5001NinteiShinseiJohoEntity 更新前entity = shinseiDac.select(申請書管理No);

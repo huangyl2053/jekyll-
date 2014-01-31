@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**
  * 要介護認定申請取下げ対象者を表すクラスです。
@@ -39,12 +40,12 @@ public class NinteiShinseiTorisageTaishosha {
      */
     public NinteiShinseiTorisageTaishosha(ShinseishoKanriNo 申請書管理No, ShichosonCode 市町村コード, KaigoHihokenshaNo 被保険者番号,
             FlexibleDate 認定申請年月日, RString 認定申請区分コード_申請時, NinteiShinseiTorisage 認定申請取下げ) {
-        requireNonNull(申請書管理No);
-        requireNonNull(市町村コード);
-        requireNonNull(被保険者番号);
-        requireNonNull(認定申請年月日);
-        requireNonNull(認定申請区分コード_申請時);
-        requireNonNull(認定申請取下げ);
+        requireNonNull(申請書管理No, Messages.E00003.replace("申請書管理No", "要介護認定申請取下げ対象者").getMessage());
+        requireNonNull(市町村コード, Messages.E00003.replace("市町村コード", "要介護認定申請取下げ対象者").getMessage());
+        requireNonNull(被保険者番号, Messages.E00003.replace("被保険者番号", "要介護認定申請取下げ対象者").getMessage());
+        requireNonNull(認定申請年月日, Messages.E00003.replace("認定申請年月日", "要介護認定申請取下げ対象者").getMessage());
+        requireNonNull(認定申請区分コード_申請時, Messages.E00003.replace("認定申請区分コード(申請時)", "要介護認定申請取下げ対象者").getMessage());
+        requireNonNull(認定申請取下げ, Messages.E00003.replace("認定申請取下げ", "要介護認定申請取下げ対象者").getMessage());
 
         this.申請書管理No = 申請書管理No;
         this.市町村コード = 市町村コード;

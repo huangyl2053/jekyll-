@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
-import static org.hamcrest.CoreMatchers.instanceOf;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -37,19 +36,19 @@ public class NinteiShinseiTorisageTaishoshaListTest extends TestBase {
             assertThat(sut.get認定申請取下げ対象者(申請書管理番号).get申請書管理No(), is(申請書管理番号));
         }
 
-        @Test
-        public void 申請書管理番号に存在しない値を指定したとき_nullが返る() {
+        @Test(expected = IllegalArgumentException.class)
+        public void 申請書管理番号に存在しない値を指定したとき_例外が発生する() {
             ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo((new RString("65536")));
             NinteiShinseiTorisageTaishoshaList sut =
                     new NinteiShinseiTorisageTaishoshaList(create認定申請取下げ対象者List());
-            assertThat(sut.get認定申請取下げ対象者(申請書管理番号), nullValue());
+            sut.get認定申請取下げ対象者(申請書管理番号);
         }
 
-        @Test
-        public void 申請書管理番号にnullを指定したとき_nullが返る() {
+        @Test(expected = IllegalArgumentException.class)
+        public void 申請書管理番号にnullを指定したとき_例外が発生する() {
             NinteiShinseiTorisageTaishoshaList sut =
                     new NinteiShinseiTorisageTaishoshaList(create認定申請取下げ対象者List());
-            assertThat(sut.get認定申請取下げ対象者(null), nullValue());
+            sut.get認定申請取下げ対象者(null);
         }
     }
 
