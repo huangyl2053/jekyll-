@@ -5,6 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.IryoKikanKubun;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urc.business.IKoza;
 import jp.co.ndensan.reams.ur.urz.business.IDoctors;
@@ -120,7 +122,7 @@ public class KaigoIryoKikan implements IIryoKikan, IShujiiIryoKikan {
     }
 
     @Override
-    public KaigoIryoKIkanCode get介護医療機関コード() {
+    public KaigoIryoKikanCode get介護医療機関コード() {
         return 主治医医療機関.get介護医療機関コード();
     }
 
@@ -130,7 +132,7 @@ public class KaigoIryoKikan implements IIryoKikan, IShujiiIryoKikan {
     }
 
     @Override
-    public KikanKubun get医療機関区分() {
+    public IryoKikanKubun get医療機関区分() {
         return 主治医医療機関.get医療機関区分();
     }
 }

@@ -4,6 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.IryoKikanKubun;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
 
@@ -26,7 +28,7 @@ public interface IShujiiIryoKikan {
      *
      * @return 介護医療機関コード
      */
-    KaigoIryoKIkanCode get介護医療機関コード();
+    KaigoIryoKikanCode get介護医療機関コード();
 
     /**
      * 医療機関コードを取得する。
@@ -47,5 +49,5 @@ public interface IShujiiIryoKikan {
      *
      * @return 医療機関区分
      */
-    KikanKubun get医療機関区分();
+    IryoKikanKubun get医療機関区分();
 }
