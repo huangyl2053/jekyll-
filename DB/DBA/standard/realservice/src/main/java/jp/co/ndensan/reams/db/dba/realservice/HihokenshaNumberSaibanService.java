@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dba.realservice;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -23,8 +23,8 @@ public class HihokenshaNumberSaibanService implements IHihokenshaNumberSaibanSer
     }
 
     @Override
-    public KaigoHihokenshaNumber createNewNumber() {
-        return new KaigoHihokenshaNumber(getNewCode(new RString("DB"), RDate.MAX, new RString("新規の被保険者")));
+    public KaigoHihokenshaNo createNewNumber() {
+        return new KaigoHihokenshaNo(getNewCode(new RString("DB"), RDate.MAX, new RString("新規の被保険者")));
     }
 
     @Override

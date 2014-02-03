@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dba.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dba.standard.basic.IHihokenshaDaichoDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -72,7 +72,7 @@ public class HihokenshaDaichoDacMock implements IHihokenshaDaichoDac {
     }
 
     @Override
-    public DbT1001HihokenshaDaichoEntity select(ShichosonCode 市町村コード, KaigoHihokenshaNumber 被保険者番号) {
+    public DbT1001HihokenshaDaichoEntity select(ShichosonCode 市町村コード, KaigoHihokenshaNo 被保険者番号) {
         if (被保険者番号.getValue().equals(検索不可な被保険者番号)) {
             return null;
         }
@@ -80,7 +80,7 @@ public class HihokenshaDaichoDacMock implements IHihokenshaDaichoDac {
     }
 
     @Override
-    public List<DbT1001HihokenshaDaichoEntity> select(KaigoHihokenshaNumber 被保険者番号) {
+    public List<DbT1001HihokenshaDaichoEntity> select(KaigoHihokenshaNo 被保険者番号) {
         if (被保険者番号.getValue().equals(検索不可な被保険者番号)) {
             return Collections.EMPTY_LIST;
         }

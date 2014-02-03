@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dba.standard.basic;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.entity.basic.DbT1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.IDeletable;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.IReplaceable;
@@ -31,7 +31,7 @@ public interface IHihokenshaDaichoDac
      * @return T1001HihokenshaDaichoEntity
      */
     @Transaction
-    DbT1001HihokenshaDaichoEntity select(ShichosonCode 市町村コード, KaigoHihokenshaNumber 被保険者番号);
+    DbT1001HihokenshaDaichoEntity select(ShichosonCode 市町村コード, KaigoHihokenshaNo 被保険者番号);
 
     /**
      * 被保険者番号から、被保険者を検索します。
@@ -40,7 +40,7 @@ public interface IHihokenshaDaichoDac
      * @return T1001HihokenshaDaichoEntityのリスト
      */
     @Transaction
-    List<DbT1001HihokenshaDaichoEntity> select(KaigoHihokenshaNumber 被保険者番号);
+    List<DbT1001HihokenshaDaichoEntity> select(KaigoHihokenshaNo 被保険者番号);
 
     /**
      * 市町村コードと識別コードから、被保険者を検索します。

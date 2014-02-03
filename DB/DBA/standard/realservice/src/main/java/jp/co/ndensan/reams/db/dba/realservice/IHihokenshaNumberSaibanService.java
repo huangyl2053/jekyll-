@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dba.realservice;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.realservice.ISaibanService;
 
 /**
@@ -19,5 +19,5 @@ public interface IHihokenshaNumberSaibanService extends ISaibanService {
      *
      * @return 介護保険被保険者番号
      */
-    KaigoHihokenshaNumber createNewNumber();
+    KaigoHihokenshaNo createNewNumber();
 }

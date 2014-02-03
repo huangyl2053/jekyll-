@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dba.realservice.helper.HihokenshaDaichoDacMock;
 import jp.co.ndensan.reams.db.dba.realservice.helper.HihokenshaMock;
 import jp.co.ndensan.reams.db.dba.realservice.helper.ShikakuShutokuJiyuMock;
 import jp.co.ndensan.reams.db.dba.realservice.helper.ShikibetsuCodeMock;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
@@ -51,7 +51,7 @@ public class HihokenshaDaichoManagerTest extends TestBase {
             @Test
             public void 指定した市町村コードと被保険者番号から_検索結果が取得できる() {
                 ShichosonCode 市町村コード = new ShichosonCode(new RString("市町村コード"));
-                KaigoHihokenshaNumber 被保険者番号 = new KaigoHihokenshaNumber(new RString("被保険者番号"));
+                KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(new RString("被保険者番号"));
 
                 Hihokensha selected = sut.get被保険者台帳(市町村コード, 被保険者番号);
 
@@ -63,7 +63,7 @@ public class HihokenshaDaichoManagerTest extends TestBase {
             @Test
             public void 指定した市町村コードと被保険者番号から_検索結果が得られないときは_nullを返す() {
                 ShichosonCode 市町村コード = new ShichosonCode(new RString("市町村コード"));
-                KaigoHihokenshaNumber 被保険者番号 = new KaigoHihokenshaNumber(HihokenshaDaichoDacMock.検索不可な被保険者番号);
+                KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(HihokenshaDaichoDacMock.検索不可な被保険者番号);
 
                 Hihokensha selected = sut.get被保険者台帳(市町村コード, 被保険者番号);
                 assertThat(selected, nullValue());
@@ -79,7 +79,7 @@ public class HihokenshaDaichoManagerTest extends TestBase {
 
             @Test
             public void 指定した被保険者番号から_検索結果が取得できる() {
-                KaigoHihokenshaNumber 被保険者番号 = new KaigoHihokenshaNumber(new RString("被保険者番号"));
+                KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(new RString("被保険者番号"));
 
                 HihokenshaList selected = sut.get被保険者台帳(被保険者番号);
                 assertThat(selected, notNullValue());
@@ -87,7 +87,7 @@ public class HihokenshaDaichoManagerTest extends TestBase {
 
             @Test
             public void 指定した被保険者番号から_検索結果が得られないときは_返り値のsizeは0() {
-                KaigoHihokenshaNumber 被保険者番号 = new KaigoHihokenshaNumber(HihokenshaDaichoDacMock.検索不可な被保険者番号);
+                KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(HihokenshaDaichoDacMock.検索不可な被保険者番号);
 
                 HihokenshaList selected = sut.get被保険者台帳(被保険者番号);
                 assertThat(selected.size(), is(0));
@@ -184,7 +184,7 @@ public class HihokenshaDaichoManagerTest extends TestBase {
             @Test
             public void 被保険者番号を採番しないsaveに成功したとき_trueを返す() {
 
-                KaigoHihokenshaNumber 被保険者番号 = new KaigoHihokenshaNumber(HihokenshaDaichoDacMock.検索不可な被保険者番号);
+                KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(HihokenshaDaichoDacMock.検索不可な被保険者番号);
                 ShichosonCode 市町村コード = new ShichosonCode(new RString("11111"));
                 IShikibetsuCode 識別コード = create識別コード(new RString(""));
                 HihokenshaKubun 被保険者区分 = new HihokenshaKubun(new RString("01"), new RString("第1号被保険者"));

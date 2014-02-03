@@ -13,7 +13,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.helper.ShikakuShutokuJiyuMock;
 import jp.co.ndensan.reams.db.dba.business.helper.ShikibetsuCodeMock;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -59,7 +59,7 @@ public class HihokenshaListTest extends TestBase {
 
         @Test
         public void 被保険者番号と市町村コードから_同じ値をもった被保険者を取得する() {
-            KaigoHihokenshaNumber 被保険者番号 = new KaigoHihokenshaNumber(new RString("0000000001"));
+            KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(new RString("0000000001"));
             ShichosonCode 市町村コード = new ShichosonCode(new RString("12345"));
 
             Hihokensha 被保険者 = create被保険者(市町村コード, 被保険者番号);
@@ -88,7 +88,7 @@ public class HihokenshaListTest extends TestBase {
 
         for (int i = 1; i < 人数; i++) {
             被保険者リスト.add(create被保険者(
-                    new ShichosonCode(new RString("")), new KaigoHihokenshaNumber(new RString(""))));
+                    new ShichosonCode(new RString("")), new KaigoHihokenshaNo(new RString(""))));
         }
         被保険者リスト.add(該当被保険者);
 
@@ -97,7 +97,7 @@ public class HihokenshaListTest extends TestBase {
         return 被保険者リスト;
     }
 
-    private static Hihokensha create被保険者(ShichosonCode 市町村コード, KaigoHihokenshaNumber 被保険者番号) {
+    private static Hihokensha create被保険者(ShichosonCode 市町村コード, KaigoHihokenshaNo 被保険者番号) {
         Hihokensha 被保険者 = HihokenshaFactory.createInstance(
                 被保険者番号, 市町村コード,
                 ShikibetsuCodeMock.createInstance(new RString("")),

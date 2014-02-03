@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.entity.basic.DbT1001HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dba.entity.basic.DbT1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 //TODO n3327 三浦凌 IShikibetsuCodeがdefinitionへ移動するまでは、ur.businessへの依存性を残す。( pom.xmlも修正の必要あり )
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
@@ -28,7 +28,7 @@ public class HihokenshaDaichoDac implements IHihokenshaDaichoDac {
     private SqlSession session;
 
     @Override
-    public DbT1001HihokenshaDaichoEntity select(ShichosonCode 市町村コード, KaigoHihokenshaNumber 被保険者番号) {
+    public DbT1001HihokenshaDaichoEntity select(ShichosonCode 市町村コード, KaigoHihokenshaNo 被保険者番号) {
         DbAccessor accessor = new DbAccessor(session);
 
         return accessor.select().table(DbT1001HihokenshaDaicho.class).
@@ -39,7 +39,7 @@ public class HihokenshaDaichoDac implements IHihokenshaDaichoDac {
     }
 
     @Override
-    public List<DbT1001HihokenshaDaichoEntity> select(KaigoHihokenshaNumber 被保険者番号) {
+    public List<DbT1001HihokenshaDaichoEntity> select(KaigoHihokenshaNo 被保険者番号) {
         DbAccessor accessor = new DbAccessor(session);
 
         List<DbT1001HihokenshaDaichoEntity> entities = accessor.
@@ -112,7 +112,7 @@ public class HihokenshaDaichoDac implements IHihokenshaDaichoDac {
 
     private boolean exists(DbT1001HihokenshaDaichoEntity entity) {
         ShichosonCode 市町村コード = new ShichosonCode(entity.getShichosonCd());
-        KaigoHihokenshaNumber 被保険者番号 = new KaigoHihokenshaNumber((entity.getHihokenshaNo()));
+        KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo((entity.getHihokenshaNo()));
         return (select(市町村コード, 被保険者番号) != null);
     }
 }

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.business;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
@@ -37,9 +37,9 @@ public class HihokenshaList implements Iterable {
      * @param 被保険者番号 被保険者番号
      * @return 該当する被保険者
      */
-    public Hihokensha get被保険者(ShichosonCode 市町村コード, KaigoHihokenshaNumber 被保険者番号) {
+    public Hihokensha get被保険者(ShichosonCode 市町村コード, KaigoHihokenshaNo 被保険者番号) {
         for (Hihokensha 被保険者 : 被保険者リスト) {
-            // TODO n3327 三浦凌 Hihokenshaのget被保険者番号()の戻り値をKaigoHihokenshaNumberに修正したら、下の条件も直す。
+            // TODO n3327 三浦凌 Hihokenshaのget被保険者番号()の戻り値をKaigoHihokenshaNoに修正したら、下の条件も直す。
             if (被保険者.get市町村コード().equals(市町村コード) && 被保険者.get被保険者番号().equals(被保険者番号.getValue())) {
                 return 被保険者;
             }

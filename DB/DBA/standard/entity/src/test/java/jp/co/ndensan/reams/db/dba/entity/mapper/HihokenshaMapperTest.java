@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dba.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dba.entity.basic.helper.ShikibetsuCodeMock;
 import jp.co.ndensan.reams.db.dba.entity.basic.helper.DbT1001HihokenshaDaichoEntityMock;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urf.business.HokenShubetsu;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
@@ -162,7 +162,7 @@ public class HihokenshaMapperTest extends TestBase {
 
         @Test
         public void あるEntityから作成した被保険者のget被保険者番号は_当該Entityに設定した被保険者番号と同じ値を返す() {
-            KaigoHihokenshaNumber 被保険者番号 = new KaigoHihokenshaNumber(new RString("0000000001"));
+            KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(new RString("0000000001"));
             entity.setHihokenshaNo(被保険者番号.getValue());
             assertThat(HihokenshaMapper.toHihokensha(entity).get被保険者番号(), is(被保険者番号.getValue()));
         }
