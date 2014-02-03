@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dba.definition.valueobject.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.ur.urf.business.HokenShubetsu;
+import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.HokenShubetsu;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoShikaku;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
@@ -50,7 +50,7 @@ public final class HihokenshaFactory {
                 識別コード, HokenShubetsu.介護保険,
                 資格取得届出年月日, 資格取得年月日, 資格取得事由,
                 null, RDate.MAX, createEmpty資格喪失事由(),
-                被保険者番号.getValue(), 市町村コード.getValue(), null);
+                被保険者番号.getValue(), 市町村コード.getValue(), null, null, null);
 
         return new Hihokensha(介護保険資格, 市町村コード, 資格異動区分, 被保険者区分,
                 null, null, null, null, null, null, null, null, null, false, false, null, false, null);

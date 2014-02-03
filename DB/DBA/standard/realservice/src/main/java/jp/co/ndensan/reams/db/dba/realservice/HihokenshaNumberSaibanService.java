@@ -27,7 +27,6 @@ public class HihokenshaNumberSaibanService implements IHihokenshaNumberSaibanSer
         return new KaigoHihokenshaNo(getNewCode(new RString("DB"), RDate.MAX, new RString("新規の被保険者")));
     }
 
-    @Override
     public RString getNewCode(RString gyomuCode, RDate nendo, RString yoto) {
         return new RString("新しい被保険者番号");
     }

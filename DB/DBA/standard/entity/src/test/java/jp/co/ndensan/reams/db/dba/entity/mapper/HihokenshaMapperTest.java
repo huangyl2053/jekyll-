@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dba.entity.basic.helper.ShikibetsuCodeMock;
 import jp.co.ndensan.reams.db.dba.entity.basic.helper.DbT1001HihokenshaDaichoEntityMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.ur.urf.business.HokenShubetsu;
+import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.HokenShubetsu;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

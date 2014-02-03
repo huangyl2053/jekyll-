@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dba.definition.valueobject.HihokenshaKubun;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.ur.urf.business.HokenShubetsu;
+import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.HokenShubetsu;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoShikaku;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;

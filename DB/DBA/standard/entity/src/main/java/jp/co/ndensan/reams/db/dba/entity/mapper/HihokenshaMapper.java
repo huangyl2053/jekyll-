@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dba.definition.valueobject.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dba.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.ur.urf.business.HokenShubetsu;
+import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.HokenShubetsu;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoShikaku;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
@@ -76,6 +76,7 @@ public final class HihokenshaMapper {
     }
 
     private static IKaigoShikaku toKaigoShikaku(final DbT1001HihokenshaDaichoEntity entity) {
+        //TODO 資格被保険者区分、住所地特例者区分　の設定について見直しを行う　　　　2014/02/14
         IShikibetsuCode 識別コード = entity.getShikibetsuCode();
         IKaigoShikaku 介護保険資格 = KaigoShikakuFactory.createInstance(
                 識別コード, HokenShubetsu.介護保険,
@@ -83,7 +84,8 @@ public final class HihokenshaMapper {
                 to資格取得事由(entity.getShikakuShutokuJiyuCode()),
                 entity.getShikakuSoshitsuTodokedeDate(), entity.getShikakuSoshitsuDate(),
                 to資格喪失事由(entity.getShikakuSoshitsuJiyuCode()),
-                entity.getHihokenshaNo(), entity.getShichosonCd(), entity.getIchigoHihokenshaNenreiTotatsuDate());
+                entity.getHihokenshaNo(), entity.getShichosonCd(), entity.getIchigoHihokenshaNenreiTotatsuDate(),
+                null, null);
         return 介護保険資格;
     }
 
