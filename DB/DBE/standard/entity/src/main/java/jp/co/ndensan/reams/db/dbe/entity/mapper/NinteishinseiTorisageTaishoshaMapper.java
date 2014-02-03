@@ -62,7 +62,7 @@ public final class NinteishinseiTorisageTaishoshaMapper {
         更新済みEntity.setInsertDantaiCd(entity.getInsertDantaiCd());
         更新済みEntity.setInsertTimestamp(entity.getInsertTimestamp());
         更新済みEntity.setInsertReamsLoginId(entity.getInsertReamsLoginId());
-        //更新済みEntity.setInsertContextId(entity.getInsertContextId());
+        更新済みEntity.setInsertContextId(entity.getInsertContextId());
         更新済みEntity.setIsDeleted(entity.getIsDeleted());
         更新済みEntity.setUpdateCount(entity.getUpdateCount());
         更新済みEntity.setLastUpdateTimestamp(entity.getLastUpdateTimestamp());

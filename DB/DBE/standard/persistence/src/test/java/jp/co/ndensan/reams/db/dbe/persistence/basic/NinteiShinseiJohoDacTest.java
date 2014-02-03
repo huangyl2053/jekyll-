@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisage;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.persistence.basic.helper.INinteiShinseiJohoDacMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
@@ -35,14 +36,14 @@ import org.junit.runner.RunWith;
 public class NinteiShinseiJohoDacTest extends TestDacBase {
 //    //TODO n8178 城間篤人
 //    //業務固有クラス、enumのマッピングが上手くいかないため未実装。
-//    //マッピングができるようになった時点で実装予定 2014年1月末
+//    //マッピングができるようになった時点で実装予定 2014年2月末
 //
-//    private static IMockNinteiShinseiJohoDac inserter;
+//    private static INinteiShinseiJohoDacMock inserter;
 //    private static INinteiShinseiJohoDac sut;
 //
 //    @BeforeClass
 //    public static void setUpClass() {
-//        inserter = InstanceCreator.create(IMockNinteiShinseiJohoDac.class);
+//        inserter = InstanceCreator.create(INinteiShinseiJohoDacMock.class);
 //        sut = InstanceCreator.create(INinteiShinseiJohoDac.class);
 //    }
 //
@@ -130,7 +131,7 @@ public class NinteiShinseiJohoDacTest extends TestDacBase {
 //
 //        @Override
 //        public void setUp() {
-//            取下げ区分 = TorisageKubun.認定申請取下げ;
+//            取下げ区分 = TorisageKubun.区分変更却下;
 //            取下げ理由 = new RString("BBB");
 //            取下げ年月日 = create年月日("20120101");
 //            審査継続区分 = ShinsaKeizokuKubun.継続する;
@@ -145,7 +146,7 @@ public class NinteiShinseiJohoDacTest extends TestDacBase {
 //        @Test
 //        public void 更新後の取下げ区分が_引数から渡した取下げ区分と同一になる() {
 //            int a = sut.update(更新用Entity);
-//            assertThat(sut.select(申請書管理番号).getTorisageKubunCode(), is(取下げ区分));
+//            assertThat(sut.select(申請書管理番号).getTorisageKubunCode(), is(取下げ区分.get取下げ区分コード()));
 //        }
 //
 //        @Test
@@ -163,7 +164,7 @@ public class NinteiShinseiJohoDacTest extends TestDacBase {
 //        @Test
 //        public void 更新後の審査継続区分が_引数から渡した審査継続区分と同一になる() {
 //            int a = sut.update(更新用Entity);
-//            assertThat(sut.select(申請書管理番号).getShinsaKeizokuKubun(), is(審査継続区分));
+//            assertThat(sut.select(申請書管理番号).getShinsaKeizokuKubun(), is(審査継続区分.is継続()));
 //        }
 //    }
 //
@@ -189,7 +190,7 @@ public class NinteiShinseiJohoDacTest extends TestDacBase {
 //        entity.setShinseishoKanriNo(申請書管理番号);
 //        entity.setShichosonCode(市町村コード);
 //        entity.setShishoCode(new RString("0001"));
-//        entity.setKaigoHihokenshaNo(new KaigoHihokenshaNo(new RString("0001")));
+//        entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("0001")));
 //        entity.setShikibetsuCode(new RString("0001"));
 //        entity.setNinteiShinseiYMD(認定申請年月日);
 //        entity.setNinteiShinseiEdabanCode(new RString("0001"));
@@ -207,10 +208,10 @@ public class NinteiShinseiJohoDacTest extends TestDacBase {
 //        entity.setEnkitsuchiDoiUmuKubun(false);
 //        entity.setShisetsuNyushoUmuKubun(false);
 //        entity.setSichosonRenrakuJiko(new RString("0001"));
-//        entity.setTorisageKubunCode(認定申請取下げ情報.get取下げ区分());
+//        entity.setTorisageKubunCode(認定申請取下げ情報.get取下げ区分().get取下げ区分コード());
 //        entity.setTorisageRiyu(認定申請取下げ情報.get取下げ理由());
 //        entity.setTorisageYMD(認定申請取下げ情報.get取下げ年月日());
-//        entity.setShinsaKeizokuKubun(認定申請取下げ情報.get申請継続区分());
+//        entity.setShinsaKeizokuKubun(認定申請取下げ情報.get申請継続区分().is継続());
 //        return entity;
 //    }
 //
