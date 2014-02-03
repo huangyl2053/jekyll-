@@ -14,22 +14,31 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class IryoKikanKubun implements ICodeAssignedItem {
 
+    private final RString code;
+    private final RString name;
+    private final RString shortName;
+
+    /**
+     * 医療機関区分を生成します。
+     */
+    public IryoKikanKubun() {
+        this.code = RString.EMPTY;
+        this.name = RString.EMPTY;
+        this.shortName = RString.EMPTY;
+    }
+
     @Override
     public RString getCode() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return code;
     }
 
     @Override
     public RString getName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return name;
     }
 
-    /**
-     * 略称を返します。
-     *
-     * @return 略称
-     */
+    @Override
     public RString getShortName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return shortName;
     }
 }

@@ -8,15 +8,17 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.ur.urc.business.IKoza;
 import jp.co.ndensan.reams.ur.urz.business.IDoctors;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikan;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
+import jp.co.ndensan.reams.ur.urz.business.IKoza;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
+import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**
  * 介護の主治医医療機関を表すクラスです。
@@ -28,7 +30,18 @@ public class KaigoIryoKikan implements IIryoKikan, IShujiiIryoKikan {
     private IShujiiIryoKikan 主治医医療機関;
     private IIryoKikan 医療機関;
 
+    /**
+     * 引数からメンバを受け取るコンストラクタです。
+     *
+     * @param 医療機関 医療機関
+     * @param 主治医医療機関 主治医医療機関
+     */
     public KaigoIryoKikan(IIryoKikan 医療機関, IShujiiIryoKikan 主治医医療機関) {
+        requireNonNull(医療機関, Messages.E00003.replace("医療機関", getClass().getName()).getMessage());
+        requireNonNull(主治医医療機関, Messages.E00003.replace("主治医医療機関", getClass().getName()).getMessage());
+
+        this.医療機関 = 医療機関;
+        this.主治医医療機関 = 主治医医療機関;
     }
 
     @Override

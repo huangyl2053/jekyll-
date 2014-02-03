@@ -10,6 +10,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**
  * 主治医医療機関を表すクラスです。
@@ -34,10 +35,10 @@ public class ShujiiIryoKikan implements IShujiiIryoKikan {
      * @param 医療機関の区分 医療機関の区分
      */
     public ShujiiIryoKikan(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, IIryoKikanCode get医療機関コード, IryoKikanJokyo 医療機関の状況, IryoKikanKubun 医療機関の区分) {
-        requireNonNull(市町村コード);
-        requireNonNull(介護医療機関コード);
-        requireNonNull(get医療機関コード);
-        requireNonNull(医療機関の状況);
+        requireNonNull(市町村コード, Messages.E00003.replace("市町村コード", getClass().getName()).getMessage());
+        requireNonNull(介護医療機関コード, Messages.E00003.replace("介護医療機関コード", getClass().getName()).getMessage());
+        requireNonNull(get医療機関コード, Messages.E00003.replace("get医療機関コード", getClass().getName()).getMessage());
+        requireNonNull(医療機関の状況, Messages.E00003.replace("医療機関の状況", getClass().getName()).getMessage());
 
         this.市町村コード = 市町村コード;
         this.介護医療機関コード = 介護医療機関コード;

@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**
  * 介護医療機関コードを表すクラスです。
@@ -19,7 +20,8 @@ public class KaigoIryoKikanCode implements Comparable<KaigoIryoKikanCode>, IDbCo
     private final RString 介護医療機関コード;
 
     public KaigoIryoKikanCode(RString 介護医療機関コード) {
-        this.介護医療機関コード = requireNonNull(介護医療機関コード);
+        this.介護医療機関コード = requireNonNull(介護医療機関コード,
+                Messages.E00003.replace("介護医療機関コード", getClass().getName()).getMessage());
     }
 
     public RString getValue() {

@@ -40,7 +40,7 @@ public enum IryoKikanJokyo {
      * @param is有効 医療機関の状況を表すbool値
      * @return 医療機関状況
      */
-    public IryoKikanJokyo toValue(boolean is有効) {
+    public static IryoKikanJokyo toValue(boolean is有効) {
         return is有効 ? IryoKikanJokyo.有効 : IryoKikanJokyo.無効;
     }
 }
