@@ -93,7 +93,7 @@ public class KaigoIryoKikanCodeTest extends TestBase {
 
         @Test
         public void 引数にコード_0121が渡されたとき_0より大きい値が返る() {
-            assertThat(sut.compareTo(create介護医療機関コード("0121")) > 0, is(true));
+            assertThat(0 < sut.compareTo(create介護医療機関コード("0121")), is(true));
         }
     }
 
