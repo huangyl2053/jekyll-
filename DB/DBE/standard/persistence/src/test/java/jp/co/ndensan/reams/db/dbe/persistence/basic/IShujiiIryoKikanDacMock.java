@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 
 /**
- * 主治医医療機関DACのテスト用selecterです。
+ * 主治医医療機関DACのテスト用selecterのインターフェースです。
  *
  * @author n8178 城間篤人
  */

@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
 
 /**
+ * 主治医医療機関DACのテスト用selecterです。
  *
  * @author n8178 城間篤人
  */
