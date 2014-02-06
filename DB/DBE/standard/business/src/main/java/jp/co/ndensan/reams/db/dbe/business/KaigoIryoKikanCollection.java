@@ -27,11 +27,11 @@ public class KaigoIryoKikanCollection implements Iterable {
     /**
      * 引数からコレクションを受け取るコンストラクタです。
      *
-     * @param 介護医療期間List 介護医療機関のリスト
+     * @param 介護医療機関List 介護医療機関のリスト
      */
-    public KaigoIryoKikanCollection(List<KaigoIryoKikan> 介護医療期間List) {
-        this.介護医療機関List = requireNonNull(介護医療期間List,
-                Messages.E00003.replace("介護医療期間のList", getClass().getName()).getMessage());
+    public KaigoIryoKikanCollection(List<KaigoIryoKikan> 介護医療機関List) {
+        this.介護医療機関List = requireNonNull(介護医療機関List,
+                Messages.E00003.replace("介護医療機関List", getClass().getName()).getMessage());
     }
 
     /**
@@ -44,14 +44,14 @@ public class KaigoIryoKikanCollection implements Iterable {
      */
     public KaigoIryoKikan get介護医療機関(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード) {
         for (KaigoIryoKikan kaigoIryoKikan : 介護医療機関List) {
-            if (is市町村コードと介護期間コードが一致(kaigoIryoKikan, 市町村コード, 介護医療機関コード)) {
+            if (is市町村コードと介護機関コードが一致(kaigoIryoKikan, 市町村コード, 介護医療機関コード)) {
                 return kaigoIryoKikan;
             }
         }
         return null;
     }
 
-    private boolean is市町村コードと介護期間コードが一致(KaigoIryoKikan kaigoIryoKikan, ShichosonCode 市町村コード,
+    private boolean is市町村コードと介護機関コードが一致(KaigoIryoKikan kaigoIryoKikan, ShichosonCode 市町村コード,
             KaigoIryoKikanCode 介護医療機関コード) {
         return kaigoIryoKikan.get市町村コード().equals(市町村コード)
                 && kaigoIryoKikan.get介護医療機関コード().equals(介護医療機関コード);
