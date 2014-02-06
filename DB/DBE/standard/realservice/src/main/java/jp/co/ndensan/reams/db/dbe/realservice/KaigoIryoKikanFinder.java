@@ -61,13 +61,13 @@ public class KaigoIryoKikanFinder implements IKaigoIryoKikanFinder {
     }
 
     @Override
-    public KaigoIryoKikanCollection get介護医療機関(ShichosonCode 市町村コード) {
+    public KaigoIryoKikanCollection get介護医療機関Collection(ShichosonCode 市町村コード) {
         List<KaigoIryoKikanEntity> entities = dac.select(市町村コード);
         return new KaigoIryoKikanCollection(create介護医療機関List(entities));
     }
 
     @Override
-    public KaigoIryoKikanCollection get介護医療機関(ShichosonCode 市町村コード, IryoKikanJokyo 医療機関状況) {
+    public KaigoIryoKikanCollection get介護医療機関Collection(ShichosonCode 市町村コード, IryoKikanJokyo 医療機関状況) {
         List<KaigoIryoKikanEntity> entities = dac.select(市町村コード, 医療機関状況);
         return new KaigoIryoKikanCollection(create介護医療機関List(entities));
     }

@@ -62,7 +62,7 @@ public class KaigoIryoKikanFinderTest extends TestBase {
         }
     }
 
-    public static class get介護医療機関_市町村コードと介護医療機関コード_医療機関状況が引数の場合のテスト extends TestBase {
+    public static class get介護医療機関Collection_市町村コードと介護医療機関コード_医療機関状況が引数の場合のテスト extends TestBase {
 
         @Override
         public void setUp() {
@@ -87,12 +87,12 @@ public class KaigoIryoKikanFinderTest extends TestBase {
         @Test
         public void 指定した市町村コードを持つ_介護医療機関を要素として持つCollectionが取得できる() {
             sut = new KaigoIryoKikanFinder(createDac(), createKozaManager());
-            KaigoIryoKikanCollection results = sut.get介護医療機関(市町村コード);
+            KaigoIryoKikanCollection results = sut.get介護医療機関Collection(市町村コード);
             assertThat(results.get介護医療機関(市町村コード, 介護医療機関コード).get市町村コード(), is(市町村コード));
         }
     }
 
-    public static class get介護医療機関_市町村コードと医療機関状況が引数の場合のテスト extends TestBase {
+    public static class get介護医療機関Collection_市町村コードと医療機関状況が引数の場合のテスト extends TestBase {
 
         @Override
         public void setUp() {
@@ -102,7 +102,7 @@ public class KaigoIryoKikanFinderTest extends TestBase {
         @Test
         public void 指定した市町村コードを持つ_介護医療機関を要素として持つCollectionが取得できる() {
             sut = new KaigoIryoKikanFinder(createDac(), createKozaManager());
-            KaigoIryoKikanCollection results = sut.get介護医療機関(市町村コード, IryoKikanJokyo.有効);
+            KaigoIryoKikanCollection results = sut.get介護医療機関Collection(市町村コード, IryoKikanJokyo.有効);
             assertThat(results.get介護医療機関(市町村コード, 介護医療機関コード).get市町村コード(), is(市町村コード));
         }
     }

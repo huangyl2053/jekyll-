@@ -42,7 +42,7 @@ public interface IKaigoIryoKikanFinder {
      * @param 市町村コード 市町村コード
      * @return 介護医療機関情報のリスト
      */
-    KaigoIryoKikanCollection get介護医療機関(ShichosonCode 市町村コード);
+    KaigoIryoKikanCollection get介護医療機関Collection(ShichosonCode 市町村コード);
 
     /**
      * 市町村コードと医療機関情報を指定して、介護医療機関の情報をリストで返します。
@@ -51,5 +51,5 @@ public interface IKaigoIryoKikanFinder {
      * @param 医療機関の状況 医療機関の状況
      * @return 介護医療機関情報のリスト
      */
-    KaigoIryoKikanCollection get介護医療機関(ShichosonCode 市町村コード, IryoKikanJokyo 医療機関の状況);
+    KaigoIryoKikanCollection get介護医療機関Collection(ShichosonCode 市町村コード, IryoKikanJokyo 医療機関の状況);
 }
