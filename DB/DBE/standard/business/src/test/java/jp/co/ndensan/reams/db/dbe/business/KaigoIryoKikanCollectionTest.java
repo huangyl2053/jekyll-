@@ -115,21 +115,21 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
         }
 
         @Test
-        public void 医療機関コードにA001を指定したとき_医療機関コードA001の要素がリストに存在し_isEmptyがfalseを返す() {
+        public void 医療機関コードにA001を指定したとき_sub介護医療機関Collectionは3件の要素を持つコレクションを返す() {
             KaigoIryoKikanCollection results = sut.sub介護医療機関Collection(create医療機関区分("A001"));
-            assertThat(results.sub介護医療機関Collection(create医療機関区分("A001")).isEmpty(), is(false));
+            assertThat(results.size(), is(3));
         }
 
         @Test
-        public void 医療機関コードにA001を指定したとき_医療機関コードB001の要素がリストに存在せず_isEmptyがtrueを返す() {
-            KaigoIryoKikanCollection results = sut.sub介護医療機関Collection(create医療機関区分("A001"));
-            assertThat(results.sub介護医療機関Collection(create医療機関区分("B001")).isEmpty(), is(true));
+        public void 医療機関コードにB001を指定したとき_sub介護医療機関Collectionは2件の要素を持つコレクションを返す() {
+            KaigoIryoKikanCollection results = sut.sub介護医療機関Collection(create医療機関区分("B001"));
+            assertThat(results.size(), is(2));
         }
 
         @Test
-        public void 医療機関コードにA001を指定したとき_医療機関コードC001の要素がリストに存在せず_isEmptyがtrueを返す() {
-            KaigoIryoKikanCollection results = sut.sub介護医療機関Collection(create医療機関区分("A001"));
-            assertThat(results.sub介護医療機関Collection(create医療機関区分("C001")).isEmpty(), is(true));
+        public void 医療機関コードにC001を指定したとき_sub介護医療機関Collectionは1件の要素を持つコレクションを返す() {
+            KaigoIryoKikanCollection results = sut.sub介護医療機関Collection(create医療機関区分("C001"));
+            assertThat(results.size(), is(1));
         }
 
         private List<KaigoIryoKikan> create介護医療機関List() {
@@ -138,8 +138,8 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
             kaigoIryoKikanList.add(iryoKikan_B001);
             kaigoIryoKikanList.add(iryoKikan_C001);
             kaigoIryoKikanList.add(iryoKikan_A001);
+            kaigoIryoKikanList.add(iryoKikan_A001);
             kaigoIryoKikanList.add(iryoKikan_B001);
-            kaigoIryoKikanList.add(iryoKikan_C001);
             return kaigoIryoKikanList;
         }
 
@@ -156,9 +156,7 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
         }
 
         private IryoKikanKubun create医療機関区分(String 医療機関区分コード) {
-            IryoKikanKubun 医療機関区分 = mock(IryoKikanKubun.class);
-            when(医療機関区分.getCode()).thenReturn(new RString(医療機関区分コード));
-            return 医療機関区分;
+            return new IryoKikanKubun(new RString(医療機関区分コード), RString.EMPTY, RString.EMPTY);
         }
     }
 
@@ -173,15 +171,15 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
         }
 
         @Test
-        public void 医療機関状況に有効を指定したとき_医療機関状況が有効の要素がリストに存在し_isEmptyがfalseを返す() {
+        public void 医療機関状況に有効を指定したとき_sub介護医療機関Collectionは4件の要素を持つコレクションを返す() {
             KaigoIryoKikanCollection results = sut.sub介護医療機関Collection(IryoKikanJokyo.有効);
-            assertThat(results.sub介護医療機関Collection(IryoKikanJokyo.有効).isEmpty(), is(false));
+            assertThat(results.size(), is(4));
         }
 
         @Test
-        public void 医療機関状況に有効を指定したとき_医療機関状況が無効の要素がリストに存在せず_isEmptyがtrueを返す() {
-            KaigoIryoKikanCollection results = sut.sub介護医療機関Collection(IryoKikanJokyo.有効);
-            assertThat(results.sub介護医療機関Collection(IryoKikanJokyo.無効).isEmpty(), is(true));
+        public void 医療機関状況に有効を指定したとき_sub介護医療機関Collectionは2件の要素を持つコレクションを返す() {
+            KaigoIryoKikanCollection results = sut.sub介護医療機関Collection(IryoKikanJokyo.無効);
+            assertThat(results.size(), is(2));
         }
 
         private List<KaigoIryoKikan> create介護医療機関List() {
@@ -197,7 +195,7 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
 
         private KaigoIryoKikan create介護医療機関(String 識別コード, IryoKikanJokyo 医療機関状況) {
             IShujiiIryoKikan 主治医医療機関 = mock(KaigoIryoKikan.class);
-            when(主治医医療機関.is有効()).thenReturn(医療機関状況.is有効());
+            when(主治医医療機関.get医療機関状況()).thenReturn(医療機関状況);
 
             IIryoKikan 医療機関 = mock(KaigoIryoKikan.class);
             when(医療機関.get識別コード()).thenReturn(new _ShikibetsuCode(new RString(識別コード)));
