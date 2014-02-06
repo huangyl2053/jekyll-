@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEn
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.testhelper.KaigoIryoKikanTestHelper;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestDacBase;
@@ -29,9 +28,7 @@ import org.junit.runner.RunWith;
  */
 @RunWith(Enclosed.class)
 public class ShujiiIryoKikanDacTest extends TestDacBase {
-    //TODO n8178 城間篤人
-    //業務固有クラス、enumのマッピングが上手くいかないため未実装。
-    //マッピングができるようになった時点で実装予定 2014年2月末
+    //TODO n8178 城間篤人 業務固有クラス、enumのマッピングが上手くいかないため未実装。マッピングができるようになった時点で実装予定 2014年2月末
 //
 //    private static IShuJiiIryoKikanDac sut;
 //    private static IShujiiIryoKikanDacMock selecter;
@@ -48,7 +45,7 @@ public class ShujiiIryoKikanDacTest extends TestDacBase {
 //        private KaigoIryoKikanCode 介護医療機関コード;
 //
 //        static {
-//            setGyomuCD("UZ");
+//            setGyomuCD("DB");
 //        }
 //
 //        @Override
@@ -81,7 +78,7 @@ public class ShujiiIryoKikanDacTest extends TestDacBase {
 //        private KaigoIryoKikanCode 介護医療機関コード;
 //
 //        static {
-//            setGyomuCD("UZ");
+//            setGyomuCD("DB");
 //        }
 //
 //        @Override
@@ -96,6 +93,12 @@ public class ShujiiIryoKikanDacTest extends TestDacBase {
 //        public void 実行することで_データが削除される() {
 //            sut.delete(create主治医医療機関情報Entity(市町村コード, 介護医療機関コード, new RString("001")));
 //            assertThat(selecter.select(市町村コード, 介護医療機関コード).getIryokikanCode(), nullValue());
+//        }
+//
+//        @Test
+//        public void 存在しないデータを削除しようとしたとき_0が返る() {
+//            int 削除件数 = sut.delete(create主治医医療機関情報Entity(市町村コード, 介護医療機関コード, new RString("001")));
+//            assertThat(削除件数, is(0));
 //        }
 //    }
 //
