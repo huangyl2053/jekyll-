@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.IDoctors;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.business.IKoza;
+import jp.co.ndensan.reams.ur.urz.business._Doctors;
 import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
@@ -149,9 +150,11 @@ public class KaigoIryoKikanMapperTest extends TestBase {
             sut.is有効医療機関(new RDate("20211212"));
         }
 
-//        public void 引数から渡された所属医師と_戻り値の介護医療機関クラスの所属医師が同一になる() {
-//            assertThat(sut.get所属医師(), is(Collections.EMPTY_LIST));
-//        }
+        @Test
+        public void 引数から渡された所属医師が空である() {
+            assertThat(sut.get所属医師().iterator().hasNext(), is(false));
+        }
+
         @Test
         public void 引数から渡された口座Listと_戻り値の介護医療機関クラスの口座Listが同一になる() {
             assertThat(sut.get口座(), is(口座));
