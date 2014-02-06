@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoIryoKikanEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 業務共通の医療機関、講座、介護業務独自の主治医医療機関の情報を取得するデータアクセスクラスのインターフェースです。
@@ -24,6 +25,7 @@ public interface IKaigoIryoKikanDac {
      * @param criteria 検索条件
      * @return 介護医療機関情報のリスト
      */
+    @Transaction
     List<KaigoIryoKikanEntity> select(ITrueFalseCriteria criteria);
 
     /**
@@ -33,6 +35,7 @@ public interface IKaigoIryoKikanDac {
      * @param 介護医療機関コード 介護医療機関コード
      * @return 介護医療機関情報のリスト
      */
+    @Transaction
     KaigoIryoKikanEntity select(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード);
 
     /**
@@ -43,6 +46,7 @@ public interface IKaigoIryoKikanDac {
      * @param 医療機関の状況 医療機関の状況
      * @return 介護医療機関情報
      */
+    @Transaction
     KaigoIryoKikanEntity select(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, IryoKikanJokyo 医療機関の状況);
 
     /**
@@ -51,6 +55,7 @@ public interface IKaigoIryoKikanDac {
      * @param 市町村コード 市町村コード
      * @return 介護医療機関情報のリスト
      */
+    @Transaction
     List<KaigoIryoKikanEntity> select(ShichosonCode 市町村コード);
 
     /**
@@ -60,5 +65,6 @@ public interface IKaigoIryoKikanDac {
      * @param 医療機関の状況 医療機関の状況
      * @return 介護医療機関情報のリスト
      */
+    @Transaction
     List<KaigoIryoKikanEntity> select(ShichosonCode 市町村コード, IryoKikanJokyo 医療機関の状況);
 }
