@@ -120,11 +120,11 @@ public class KaigoIryoKikanCollection implements Iterable {
     }
 
     /**
-     * テスト用です。コレクションのサイズを返します。
+     * コレクションのサイズを返します。
      *
      * @return コレクションのサイズ
      */
-    int size() {
+    public int size() {
         return 介護医療機関List.size();
     }
 
