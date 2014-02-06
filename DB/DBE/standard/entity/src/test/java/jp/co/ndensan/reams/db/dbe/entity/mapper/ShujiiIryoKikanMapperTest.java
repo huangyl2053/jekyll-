@@ -44,8 +44,7 @@ public class ShujiiIryoKikanMapperTest extends TestBase {
 
         @Override
         public void setUp() {
-            setGyomuCD("DB");
-            _ControlDataHolder.setControlData(new _ControlData("IAA", "HolidayListTest_User"));
+            setDummyControlData("DB");
             result = ShujiiIryoKikanMapper.toShujiiIryoKikan(KaigoIryoKikanTestHelper.create主治医医療機関Entity());
         }
 
