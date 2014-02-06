@@ -60,8 +60,7 @@ public final class ShujiiIryoKikanMapper {
 
         entity.setShichosonCode(iryoKikan.get市町村コード());
         entity.setKaigoIryokikanCode(iryoKikan.get介護医療機関コード());
-        //TODO n8178 城間篤人
-        //医療機関コードはIDbColumnMappableじゃないけどいい？ 今日中
+        //TODO n8178 城間篤人 IDbColumnMappableじゃないが、共通の医療機関テーブルが確定するまでは、扱いを保留にする 2014年2月末
         entity.setIryokikanCode(iryoKikan.get医療機関コード().getValue());
         entity.setIryokikanJokyo(iryoKikan.is有効());
         entity.setKikanKubunCode(iryoKikan.get医療機関区分().getCode());
