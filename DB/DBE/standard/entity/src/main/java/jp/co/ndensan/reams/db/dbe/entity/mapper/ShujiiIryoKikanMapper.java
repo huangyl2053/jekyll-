@@ -54,8 +54,7 @@ public final class ShujiiIryoKikanMapper {
      * @return 主治医医療機関エンティティ
      */
     public static DbT7011ShujiiIryoKikanJohoEntity toShujiiIryoKikanEntity(IShujiiIryoKikan iryoKikan) {
-        //TODO n8178 城間篤人
-        //共通項目についてどのように扱うか未定 2014年2月末
+        //TODO n8178 城間篤人 共通項目についてどのように扱うか未定 2014年2月末
         DbT7011ShujiiIryoKikanJohoEntity entity = new DbT7011ShujiiIryoKikanJohoEntity();
 
         entity.setShichosonCode(iryoKikan.get市町村コード());
