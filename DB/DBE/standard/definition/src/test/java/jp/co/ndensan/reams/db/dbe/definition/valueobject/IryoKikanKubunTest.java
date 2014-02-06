@@ -20,11 +20,11 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class IryoKikanKubunTest extends TestBase {
 
-    public static class コンストラクタのテスト extends TestBase {
+    private static RString code;
+    private static RString name;
+    private static RString shortName;
 
-        private RString code;
-        private RString name;
-        private RString shortName;
+    public static class コンストラクタのテスト extends TestBase {
 
         @Override
         public void setUp() {
@@ -52,6 +52,47 @@ public class IryoKikanKubunTest extends TestBase {
         @Test(expected = NullPointerException.class)
         public void 略称にnullが渡されたとき_NullPointerExceptionが発生する() {
             IryoKikanKubun sut = new IryoKikanKubun(code, name, null);
+        }
+    }
+
+    public static class equalsのテスト extends TestBase {
+
+        @Override
+        public void setUp() {
+            code = new RString("001");
+            name = new RString("介護病院");
+            shortName = new RString("介護病院");
+        }
+
+        @Test
+        public void codeが同一のとき_equalsはtrueを返す() {
+            IryoKikanKubun sut1 = new IryoKikanKubun(code, name, shortName);
+            IryoKikanKubun sut2 = new IryoKikanKubun(code, name, shortName);
+            assertThat(sut1.equals(sut2), is(true));
+        }
+
+        @Test
+        public void codeが同一でないとき_equalsはfalseを返す() {
+            IryoKikanKubun sut1 = new IryoKikanKubun(code, name, shortName);
+            IryoKikanKubun sut2 = new IryoKikanKubun(new RString("110"), name, shortName);
+            assertThat(sut1.equals(sut2), is(false));
+        }
+    }
+
+    public static class hashCodeのテスト extends TestBase {
+
+        @Override
+        public void setUp() {
+            code = new RString("001");
+            name = new RString("介護病院");
+            shortName = new RString("介護病院");
+        }
+
+        @Test
+        public void codeが同一のとき_hashCodeは同じ数値を返す() {
+            IryoKikanKubun sut1 = new IryoKikanKubun(code, name, shortName);
+            IryoKikanKubun sut2 = new IryoKikanKubun(code, name, shortName);
+            assertThat(sut1.hashCode(), is(sut2.hashCode()));
         }
     }
 }

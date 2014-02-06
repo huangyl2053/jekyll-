@@ -85,7 +85,7 @@ public class KaigoIryoKikanCollection implements Iterable {
     }
 
     private boolean is医療機関区分が一致(KaigoIryoKikan 介護医療機関, IryoKikanKubun 医療機関区分) {
-        return 介護医療機関.get医療機関区分().getCode().equals(医療機関区分.getCode());
+        return 介護医療機関.get医療機関区分().equals(医療機関区分);
     }
 
     private KaigoIryoKikanCollection create介護医療機関Collection(List<KaigoIryoKikan> kaigoIryoKikanList) {

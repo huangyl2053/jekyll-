@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
+import java.util.Objects;
 import jp.co.ndensan.reams.ur.urz.business.ICodeAssignedItem;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
@@ -59,5 +60,23 @@ public class IryoKikanKubun implements ICodeAssignedItem {
     @Override
     public RString getShortName() {
         return shortName;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.code);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object 比較対象) {
+        if (比較対象 == null) {
+            return false;
+        }
+        if (getClass() != 比較対象.getClass()) {
+            return false;
+        }
+        return ((IryoKikanKubun) 比較対象).getCode().equals(code);
     }
 }
