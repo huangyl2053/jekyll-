@@ -55,8 +55,15 @@ public class KaigoIryoKikanCollection implements Iterable {
 
     private boolean is市町村コードと介護機関コードが一致(KaigoIryoKikan kaigoIryoKikan, ShichosonCode 市町村コード,
             KaigoIryoKikanCode 介護医療機関コード) {
-        return kaigoIryoKikan.get市町村コード().equals(市町村コード)
-                && kaigoIryoKikan.get介護医療機関コード().equals(介護医療機関コード);
+        return is市町村コードが一致(kaigoIryoKikan, 市町村コード) && is介護機関コードが一致(kaigoIryoKikan, 介護医療機関コード);
+    }
+
+    private boolean is介護機関コードが一致(KaigoIryoKikan kaigoIryoKikan, KaigoIryoKikanCode 介護医療機関コード) {
+        return kaigoIryoKikan.get介護医療機関コード().equals(介護医療機関コード);
+    }
+
+    private boolean is市町村コードが一致(KaigoIryoKikan kaigoIryoKikan, ShichosonCode 市町村コード) {
+        return kaigoIryoKikan.get市町村コード().equals(市町村コード);
     }
 
     /**
