@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**
@@ -147,5 +148,10 @@ public class KaigoIryoKikan implements IIryoKikan, IShujiiIryoKikan {
     @Override
     public IryoKikanKubun get医療機関区分() {
         return 主治医医療機関.get医療機関区分();
+    }
+
+    @Override
+    public IryoKikanJokyo get医療機関状況() {
+        return 主治医医療機関.get医療機関状況();
     }
 }

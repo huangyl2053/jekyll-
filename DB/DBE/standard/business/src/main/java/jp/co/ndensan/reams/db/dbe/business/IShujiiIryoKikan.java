@@ -38,6 +38,13 @@ public interface IShujiiIryoKikan {
     IIryoKikanCode get医療機関コード();
 
     /**
+     * 医療機関の状況を返します。
+     *
+     * @return 医療機関状況
+     */
+    IryoKikanJokyo get医療機関状況();
+
+    /**
      * 主治医医療機関が有効か否かを返す。
      *
      * @return 主治医医療機関が有効ならtrue、それ以外はfalse

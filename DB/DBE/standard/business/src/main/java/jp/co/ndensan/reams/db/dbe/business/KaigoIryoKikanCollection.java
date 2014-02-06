@@ -114,7 +114,7 @@ public class KaigoIryoKikanCollection implements Iterable {
     }
 
     private boolean is医療機関状況が一致(KaigoIryoKikan 介護医療機関, IryoKikanJokyo 医療機関状況) {
-        return 介護医療機関.is有効() == 医療機関状況.is有効();
+        return 介護医療機関.get医療機関状況() == 医療機関状況;
     }
 
     /**

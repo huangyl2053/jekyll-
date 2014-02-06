@@ -72,4 +72,9 @@ public class ShujiiIryoKikan implements IShujiiIryoKikan {
     public IryoKikanKubun get医療機関区分() {
         return 医療機関の区分;
     }
+
+    @Override
+    public IryoKikanJokyo get医療機関状況() {
+        return 医療機関の状況;
+    }
 }
