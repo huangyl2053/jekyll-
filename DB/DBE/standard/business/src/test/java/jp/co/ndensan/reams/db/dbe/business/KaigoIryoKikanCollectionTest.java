@@ -63,25 +63,25 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
             sut = new KaigoIryoKikanCollection(kaigoIryoKikanList);
         }
 
-        @Test
-        public void 市町村コード_介護医療機関コードともに対応していない場合_nullが返る() {
+        @Test(expected = IllegalArgumentException.class)
+        public void 市町村コード_介護医療機関コードともに対応していない場合_例外が発生する() {
             市町村コード = new ShichosonCode(new RString("0987"));
             介護医療機関コード = new KaigoIryoKikanCode(new RString("0987"));
             assertThat(sut.get介護医療機関(市町村コード, 介護医療機関コード), nullValue());
         }
 
-        @Test
-        public void 市町村コードに対応するものがあっても_介護医療機関コードについて対応していない場合_nullが返る() {
+        @Test(expected = IllegalArgumentException.class)
+        public void 市町村コードに対応するものがあっても_介護医療機関コードについて対応していない場合_例外が発生する() {
             市町村コード = new ShichosonCode(new RString("1234"));
             介護医療機関コード = new KaigoIryoKikanCode(new RString("0987"));
-            assertThat(sut.get介護医療機関(市町村コード, 介護医療機関コード), nullValue());
+            sut.get介護医療機関(市町村コード, 介護医療機関コード);
         }
 
-        @Test
-        public void 介護医療機関コードに対応するものがあっても_市町村コードについて対応していない場合_nullが返る() {
+        @Test(expected = IllegalArgumentException.class)
+        public void 介護医療機関コードに対応するものがあっても_市町村コードについて対応していない場合_例外が発生する() {
             市町村コード = new ShichosonCode(new RString("0987"));
             介護医療機関コード = new KaigoIryoKikanCode(new RString("5678"));
-            assertThat(sut.get介護医療機関(市町村コード, 介護医療機関コード), nullValue());
+            sut.get介護医療機関(市町村コード, 介護医療機関コード);
         }
 
         @Test

@@ -41,14 +41,16 @@ public class KaigoIryoKikanCollection implements Iterable {
      * @param 市町村コード 市町村コード
      * @param 介護医療機関コード 介護医療機関コード
      * @return 対応した介護医療機関
+     * @throws IllegalArgumentException 存在しない対象を指定したとき
      */
-    public KaigoIryoKikan get介護医療機関(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード) {
+    public KaigoIryoKikan get介護医療機関(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード)
+            throws IllegalArgumentException {
         for (KaigoIryoKikan kaigoIryoKikan : 介護医療機関List) {
             if (is市町村コードと介護機関コードが一致(kaigoIryoKikan, 市町村コード, 介護医療機関コード)) {
                 return kaigoIryoKikan;
             }
         }
-        return null;
+        throw new IllegalArgumentException(Messages.E00006.replace("対応する介護医療機関").getMessage());
     }
 
     private boolean is市町村コードと介護機関コードが一致(KaigoIryoKikan kaigoIryoKikan, ShichosonCode 市町村コード,
