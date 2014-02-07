@@ -10,19 +10,12 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikanCollection;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.KaigoIryoKikanMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoIryoKikanEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.IKaigoIryoKikanDac;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.KaigoIryoKikanTestHelper;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
-import jp.co.ndensan.reams.ur.urz.business.IKoza;
-import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
-import jp.co.ndensan.reams.ur.urz.entity.IryoKikanEntity;
 import jp.co.ndensan.reams.ur.urz.realservice.IKozaManager;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -62,12 +55,13 @@ public class KaigoIryoKikanFinderTest extends TestBase {
             assertThat(result.get市町村コード(), is(市町村コード));
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 介護医療機関Entityが取得できなかった場合_nullPointerExceptionが発生する() {
+        @Test
+        public void 介護医療機関Entityが取得できなかった場合_nullが返る() {
             IKaigoIryoKikanDac dac = createDac();
             when(dac.select(市町村コード, 介護医療機関コード)).thenReturn(null);
             sut = new KaigoIryoKikanFinder(dac, createKozaManager());
             KaigoIryoKikan result = sut.get介護医療機関(市町村コード, 介護医療機関コード);
+            assertThat(result, is(nullValue()));
         }
     }
 
@@ -85,12 +79,13 @@ public class KaigoIryoKikanFinderTest extends TestBase {
             assertThat(result.get市町村コード(), is(市町村コード));
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 介護医療機関Entityが取得できなかった場合_nullPointerExceptionが発生する() {
+        @Test
+        public void 介護医療機関Entityが取得できなかった場合_nullが返る() {
             IKaigoIryoKikanDac dac = createDac();
             when(dac.select(市町村コード, 介護医療機関コード, IryoKikanJokyo.有効)).thenReturn(null);
             sut = new KaigoIryoKikanFinder(dac, createKozaManager());
             KaigoIryoKikan result = sut.get介護医療機関(市町村コード, 介護医療機関コード, IryoKikanJokyo.有効);
+            assertThat(result, is(nullValue()));
         }
     }
 

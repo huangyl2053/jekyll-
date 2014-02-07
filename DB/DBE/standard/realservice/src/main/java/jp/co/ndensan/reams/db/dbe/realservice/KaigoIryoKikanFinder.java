@@ -51,12 +51,18 @@ public class KaigoIryoKikanFinder implements IKaigoIryoKikanFinder {
     @Override
     public KaigoIryoKikan get介護医療機関(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード) {
         KaigoIryoKikanEntity entity = dac.select(市町村コード, 介護医療機関コード);
+        if (entity == null) {
+            return null;
+        }
         return create介護医療機関(entity);
     }
 
     @Override
     public KaigoIryoKikan get介護医療機関(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, IryoKikanJokyo 医療機関状況) {
         KaigoIryoKikanEntity entity = dac.select(市町村コード, 介護医療機関コード, 医療機関状況);
+        if (entity == null) {
+            return null;
+        }
         return create介護医療機関(entity);
     }
 
