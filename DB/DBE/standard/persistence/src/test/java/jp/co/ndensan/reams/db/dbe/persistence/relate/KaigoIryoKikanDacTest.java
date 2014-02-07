@@ -55,7 +55,7 @@ public class KaigoIryoKikanDacTest extends TestDacBase {
 //        private KaigoIryoKikanCode 介護医療区分コード;
 //
 //        static {
-//            setGyomuCD("UZ");
+//            setGyomuCD("DB");
 //        }
 //
 //        @Override
@@ -79,7 +79,7 @@ public class KaigoIryoKikanDacTest extends TestDacBase {
 //        private KaigoIryoKikanCode 介護医療区分コード;
 //
 //        static {
-//            setGyomuCD("UZ");
+//            setGyomuCD("DB");
 //        }
 //
 //        @Override
@@ -102,7 +102,7 @@ public class KaigoIryoKikanDacTest extends TestDacBase {
 //        private KaigoIryoKikanCode 介護医療区分コード;
 //
 //        static {
-//            setGyomuCD("UZ");
+//            setGyomuCD("DB");
 //        }
 //
 //        @Override
@@ -127,7 +127,7 @@ public class KaigoIryoKikanDacTest extends TestDacBase {
 //        private KaigoIryoKikanCode 介護医療区分コード;
 //
 //        static {
-//            setGyomuCD("UZ");
+//            setGyomuCD("DB");
 //        }
 //
 //        @Override
@@ -150,7 +150,7 @@ public class KaigoIryoKikanDacTest extends TestDacBase {
 //        private KaigoIryoKikanCode 介護医療区分コード;
 //
 //        static {
-//            setGyomuCD("UZ");
+//            setGyomuCD("DB");
 //        }
 //
 //        @Override
