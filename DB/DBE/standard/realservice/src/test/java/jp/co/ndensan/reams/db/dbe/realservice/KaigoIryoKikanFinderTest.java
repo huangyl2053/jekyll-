@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.realservice;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikanCollection;
@@ -51,7 +52,7 @@ public class KaigoIryoKikanFinderTest extends TestBase {
 
         @Override
         public void setUp() {
-            setDummyControlData("UZ");
+            setDummyControlData("DB");
         }
 
         @Test
@@ -60,13 +61,21 @@ public class KaigoIryoKikanFinderTest extends TestBase {
             KaigoIryoKikan result = sut.get介護医療機関(市町村コード, 介護医療機関コード);
             assertThat(result.get市町村コード(), is(市町村コード));
         }
+
+        @Test(expected = NullPointerException.class)
+        public void 介護医療機関Entityが取得できなかった場合_nullPointerExceptionが発生する() {
+            IKaigoIryoKikanDac dac = createDac();
+            when(dac.select(市町村コード, 介護医療機関コード)).thenReturn(null);
+            sut = new KaigoIryoKikanFinder(dac, createKozaManager());
+            KaigoIryoKikan result = sut.get介護医療機関(市町村コード, 介護医療機関コード);
+        }
     }
 
     public static class get介護医療機関Collection_市町村コードと介護医療機関コード_医療機関状況が引数の場合のテスト extends TestBase {
 
         @Override
         public void setUp() {
-            setDummyControlData("UZ");
+            setDummyControlData("DB");
         }
 
         @Test
@@ -75,13 +84,21 @@ public class KaigoIryoKikanFinderTest extends TestBase {
             KaigoIryoKikan result = sut.get介護医療機関(市町村コード, 介護医療機関コード, IryoKikanJokyo.有効);
             assertThat(result.get市町村コード(), is(市町村コード));
         }
+
+        @Test(expected = NullPointerException.class)
+        public void 介護医療機関Entityが取得できなかった場合_nullPointerExceptionが発生する() {
+            IKaigoIryoKikanDac dac = createDac();
+            when(dac.select(市町村コード, 介護医療機関コード, IryoKikanJokyo.有効)).thenReturn(null);
+            sut = new KaigoIryoKikanFinder(dac, createKozaManager());
+            KaigoIryoKikan result = sut.get介護医療機関(市町村コード, 介護医療機関コード, IryoKikanJokyo.有効);
+        }
     }
 
     public static class get介護医療機関_市町村コードが引数の場合のテスト extends TestBase {
 
         @Override
         public void setUp() {
-            setDummyControlData("UZ");
+            setDummyControlData("DB");
         }
 
         @Test
@@ -90,13 +107,22 @@ public class KaigoIryoKikanFinderTest extends TestBase {
             KaigoIryoKikanCollection results = sut.get介護医療機関Collection(市町村コード);
             assertThat(results.get介護医療機関(市町村コード, 介護医療機関コード).get市町村コード(), is(市町村コード));
         }
+
+        @Test
+        public void 介護医療機関Entityのリストが取得できずEMPTY_LISTが戻り値だった場合_空のCollectionが返る() {
+            IKaigoIryoKikanDac dac = createDac();
+            when(dac.select(市町村コード)).thenReturn(Collections.EMPTY_LIST);
+            sut = new KaigoIryoKikanFinder(dac, createKozaManager());
+            KaigoIryoKikanCollection results = sut.get介護医療機関Collection(市町村コード);
+            assertThat(results.isEmpty(), is(true));
+        }
     }
 
     public static class get介護医療機関Collection_市町村コードと医療機関状況が引数の場合のテスト extends TestBase {
 
         @Override
         public void setUp() {
-            setDummyControlData("UZ");
+            setDummyControlData("DB");
         }
 
         @Test
@@ -104,6 +130,15 @@ public class KaigoIryoKikanFinderTest extends TestBase {
             sut = new KaigoIryoKikanFinder(createDac(), createKozaManager());
             KaigoIryoKikanCollection results = sut.get介護医療機関Collection(市町村コード, IryoKikanJokyo.有効);
             assertThat(results.get介護医療機関(市町村コード, 介護医療機関コード).get市町村コード(), is(市町村コード));
+        }
+
+        @Test
+        public void 介護医療機関Entityのリストが取得できずEMPTY_LISTが戻り値だった場合_空のCollectionが返る() {
+            IKaigoIryoKikanDac dac = createDac();
+            when(dac.select(市町村コード, IryoKikanJokyo.有効)).thenReturn(Collections.EMPTY_LIST);
+            sut = new KaigoIryoKikanFinder(dac, createKozaManager());
+            KaigoIryoKikanCollection results = sut.get介護医療機関Collection(市町村コード, IryoKikanJokyo.有効);
+            assertThat(results.isEmpty(), is(true));
         }
     }
 
