@@ -51,14 +51,14 @@ public class ShujiiIryoKikanManager implements IShujiiIryoKikanManager {
     @Override
     public boolean saveAs有効(IShujiiIryoKikan 主治医医療機関) {
         DbT7011ShujiiIryoKikanJohoEntity entity =
-                ShujiiIryoKikanMapper.toShujiiIryoKikanEntityAnd状況変更(主治医医療機関, IryoKikanJokyo.有効);
+                ShujiiIryoKikanMapper.toShujiiIryoKikanEntity(主治医医療機関, IryoKikanJokyo.有効);
         return is更新成功(dac.insertOrUpdate(entity));
     }
 
     @Override
     public boolean saveAs無効(IShujiiIryoKikan 主治医医療機関) {
         DbT7011ShujiiIryoKikanJohoEntity entity =
-                ShujiiIryoKikanMapper.toShujiiIryoKikanEntityAnd状況変更(主治医医療機関, IryoKikanJokyo.無効);
+                ShujiiIryoKikanMapper.toShujiiIryoKikanEntity(主治医医療機関, IryoKikanJokyo.無効);
         return is更新成功(dac.insertOrUpdate(entity));
     }
 

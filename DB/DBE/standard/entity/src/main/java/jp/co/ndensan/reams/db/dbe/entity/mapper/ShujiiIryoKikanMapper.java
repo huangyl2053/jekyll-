@@ -82,7 +82,7 @@ public final class ShujiiIryoKikanMapper {
      * @param 医療機関状況 医療機関状況
      * @return 主治医医療機関エンティティ ＠throws NullPointerException 引数にNULLが渡された場合
      */
-    public static DbT7011ShujiiIryoKikanJohoEntity toShujiiIryoKikanEntityAnd状況変更(IShujiiIryoKikan iryoKikan, IryoKikanJokyo 医療機関状況)
+    public static DbT7011ShujiiIryoKikanJohoEntity toShujiiIryoKikanEntity(IShujiiIryoKikan iryoKikan, IryoKikanJokyo 医療機関状況)
             throws NullPointerException {
 
         requireNonNull(iryoKikan, Messages.E00003.replace("主治医医療機関", "主治医医療機関エンティティ").getMessage());

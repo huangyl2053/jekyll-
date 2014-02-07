@@ -123,23 +123,23 @@ public class ShujiiIryoKikanMapperTest extends TestBase {
 
         @Test(expected = NullPointerException.class)
         public void 主治医医療機関にnullが渡されたとき_NullPointerExceptionが発生する() {
-            result = ShujiiIryoKikanMapper.toShujiiIryoKikanEntityAnd状況変更(null, IryoKikanJokyo.有効);
+            result = ShujiiIryoKikanMapper.toShujiiIryoKikanEntity(null, IryoKikanJokyo.有効);
         }
 
         @Test(expected = NullPointerException.class)
         public void 医療機関状況にnullが渡されたとき_NullPointerExceptionが発生する() {
-            result = ShujiiIryoKikanMapper.toShujiiIryoKikanEntityAnd状況変更(create主治医医療機関(), null);
+            result = ShujiiIryoKikanMapper.toShujiiIryoKikanEntity(create主治医医療機関(), null);
         }
 
         @Test
         public void 医療機関状況に有効を指定したとき_医療機関状況が有効になっている主治医医療機関エンティティが返る() {
-            result = ShujiiIryoKikanMapper.toShujiiIryoKikanEntityAnd状況変更(create主治医医療機関(), IryoKikanJokyo.有効);
+            result = ShujiiIryoKikanMapper.toShujiiIryoKikanEntity(create主治医医療機関(), IryoKikanJokyo.有効);
             assertThat(result.getIryokikanJokyo(), is(IryoKikanJokyo.有効.is有効()));
         }
 
         @Test
         public void 医療機関状況に無効を指定したとき_医療機関状況が無効になっている主治医医療機関エンティティが返る() {
-            result = ShujiiIryoKikanMapper.toShujiiIryoKikanEntityAnd状況変更(create主治医医療機関(), IryoKikanJokyo.無効);
+            result = ShujiiIryoKikanMapper.toShujiiIryoKikanEntity(create主治医医療機関(), IryoKikanJokyo.無効);
             assertThat(result.getIryokikanJokyo(), is(IryoKikanJokyo.無効.is有効()));
         }
     }
