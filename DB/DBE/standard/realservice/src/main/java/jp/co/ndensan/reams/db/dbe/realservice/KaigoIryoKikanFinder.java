@@ -73,11 +73,17 @@ public class KaigoIryoKikanFinder implements IKaigoIryoKikanFinder {
     }
 
     private KaigoIryoKikan create介護医療機関(KaigoIryoKikanEntity entity) {
-        IShikibetsuCode code = new _ShikibetsuCode(entity.getIryoKikanEntity().getShikibetsuCode());
-        //TODO n8178 城間篤人
-        //基準日をどうするか確認する。また、これ以外のget口座を利用するのかもしれないため、要検討。
-        List<IKoza> kozaList = kozaManager.get口座(RDate.MIN, code);
+        //TODO n8178 城間篤人 基準日をどうするか確認する。また、これ以外のget口座を利用するのかもしれないため、要検討。 2014年2月末
+        List<IKoza> kozaList = kozaManager.get口座(RDate.MIN, create識別コード(entity));
         return KaigoIryoKikanMapper.toKaigoIryoKikan(entity, kozaList);
+    }
+
+    //医療機関Entityが修正され、識別コードを直接とってこれるようになったらこの処理は不要 2014年2月末
+    private IShikibetsuCode create識別コード(KaigoIryoKikanEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        return new _ShikibetsuCode(entity.getIryoKikanEntity().getShikibetsuCode());
     }
 
     private List<KaigoIryoKikan> create介護医療機関List(List<KaigoIryoKikanEntity> entities) {

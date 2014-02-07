@@ -4,36 +4,25 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoIryoKikanEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.KaigoIryoKikanTestHelper;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.ur.urz.business.IDoctors;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.business.IKoza;
-import jp.co.ndensan.reams.ur.urz.business._Doctors;
 import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
-import jp.co.ndensan.reams.ur.urz.entity.IryoKikanEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.mock;
 
 /**
  * 介護医療機関Mapperのテストクラスです。
@@ -69,7 +58,7 @@ public class KaigoIryoKikanMapperTest extends TestBase {
 
         @Override
         public void setUp() {
-            setDummyControlData("DB");
+            setDummyControlData("UZ");
 
             識別コード = new RString("S02B00001");
             医療機関名称 = new RString("介護病院");
@@ -93,6 +82,17 @@ public class KaigoIryoKikanMapperTest extends TestBase {
             口座 = KaigoIryoKikanTestHelper.create口座List(3);
 
             sut = KaigoIryoKikanMapper.toKaigoIryoKikan(create介護医療機関Entity(), 口座);
+        }
+
+        @Test
+        public void 必須項目がそろっている場合_インスタンスが生成される() {
+            sut = KaigoIryoKikanMapper.toKaigoIryoKikan(create介護医療機関Entity(), null);
+            assertThat(sut, instanceOf(KaigoIryoKikan.class));
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 引数の介護医療機関エンティティにnullが渡されたとき_NullPointerExceptionが発生する() {
+            sut = KaigoIryoKikanMapper.toKaigoIryoKikan(null, 口座);
         }
 
         @Test

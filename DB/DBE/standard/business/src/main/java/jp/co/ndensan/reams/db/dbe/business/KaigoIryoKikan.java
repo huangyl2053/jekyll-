@@ -36,8 +36,9 @@ public class KaigoIryoKikan implements IIryoKikan, IShujiiIryoKikan {
      *
      * @param 医療機関 医療機関
      * @param 主治医医療機関 主治医医療機関
+     * @throws NullPointerException 引数にNULLが渡された場合
      */
-    public KaigoIryoKikan(IIryoKikan 医療機関, IShujiiIryoKikan 主治医医療機関) {
+    public KaigoIryoKikan(IIryoKikan 医療機関, IShujiiIryoKikan 主治医医療機関) throws NullPointerException {
         requireNonNull(医療機関, Messages.E00003.replace("医療機関", getClass().getName()).getMessage());
         requireNonNull(主治医医療機関, Messages.E00003.replace("主治医医療機関", getClass().getName()).getMessage());
 

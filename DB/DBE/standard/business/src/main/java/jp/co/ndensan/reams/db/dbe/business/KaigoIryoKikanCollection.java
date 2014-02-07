@@ -28,8 +28,9 @@ public class KaigoIryoKikanCollection implements Iterable {
      * 引数からコレクションを受け取るコンストラクタです。
      *
      * @param 介護医療機関List 介護医療機関のリスト
+     * @throws NullPointerException 引数にNULLが渡された場合
      */
-    public KaigoIryoKikanCollection(List<KaigoIryoKikan> 介護医療機関List) {
+    public KaigoIryoKikanCollection(List<KaigoIryoKikan> 介護医療機関List) throws NullPointerException {
         this.介護医療機関List = requireNonNull(介護医療機関List,
                 Messages.E00003.replace("介護医療機関List", getClass().getName()).getMessage());
     }

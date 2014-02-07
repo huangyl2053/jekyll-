@@ -33,9 +33,10 @@ public class ShujiiIryoKikan implements IShujiiIryoKikan {
      * @param 医療機関コード 医療機関コード
      * @param 医療機関の状況 医療機関の状況
      * @param 医療機関の区分 医療機関の区分
+     * @throws NullPointerException 市町村コード、介護医療機関コード、医療機関コード、医療機関状況にNULLが渡された場合
      */
     public ShujiiIryoKikan(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード,
-            IIryoKikanCode 医療機関コード, IryoKikanJokyo 医療機関の状況, IryoKikanKubun 医療機関の区分) {
+            IIryoKikanCode 医療機関コード, IryoKikanJokyo 医療機関の状況, IryoKikanKubun 医療機関の区分) throws NullPointerException {
         requireNonNull(市町村コード, Messages.E00003.replace("市町村コード", getClass().getName()).getMessage());
         requireNonNull(介護医療機関コード, Messages.E00003.replace("介護医療機関コード", getClass().getName()).getMessage());
         requireNonNull(医療機関コード, Messages.E00003.replace("get医療機関コード", getClass().getName()).getMessage());
