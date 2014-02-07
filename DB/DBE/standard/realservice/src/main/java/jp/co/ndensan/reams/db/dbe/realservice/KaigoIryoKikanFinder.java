@@ -51,18 +51,12 @@ public class KaigoIryoKikanFinder implements IKaigoIryoKikanFinder {
     @Override
     public KaigoIryoKikan get介護医療機関(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード) {
         KaigoIryoKikanEntity entity = dac.select(市町村コード, 介護医療機関コード);
-        if (entity == null) {
-            return null;
-        }
         return create介護医療機関(entity);
     }
 
     @Override
     public KaigoIryoKikan get介護医療機関(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, IryoKikanJokyo 医療機関状況) {
         KaigoIryoKikanEntity entity = dac.select(市町村コード, 介護医療機関コード, 医療機関状況);
-        if (entity == null) {
-            return null;
-        }
         return create介護医療機関(entity);
     }
 
@@ -79,6 +73,10 @@ public class KaigoIryoKikanFinder implements IKaigoIryoKikanFinder {
     }
 
     private KaigoIryoKikan create介護医療機関(KaigoIryoKikanEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+
         //TODO n8178 城間篤人 基準日をどうするか確認する。また、これ以外のget口座を利用するのかもしれないため、要検討。 2014年2月末
         List<IKoza> kozaList = kozaManager.get口座(RDate.MIN, create識別コード(entity));
         return KaigoIryoKikanMapper.toKaigoIryoKikan(entity, kozaList);
