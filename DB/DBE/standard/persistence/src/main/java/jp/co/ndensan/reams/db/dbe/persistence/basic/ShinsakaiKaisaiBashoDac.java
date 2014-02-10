@@ -1,0 +1,113 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbe.persistence.basic;
+
+import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaisaiBashoCode;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJoho;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
+import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.util.db.DbAccessor;
+import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
+
+/**
+ * 審査会開催場所情報テーブルから情報を取得するクラスです
+ *
+ * @author N1013 松本直樹
+ */
+public class ShinsakaiKaisaiBashoDac implements IShinsakaiKaisaiBashoDac {
+
+    @InjectSession
+    private SqlSession session;
+    private final DbAccessor dbAccessor = new DbAccessor(session);
+
+    @Override
+    public DbT5104ShinsakaiKaisaiBashoJohoEntity select(KaisaiBashoCode 審査会開催場所) {
+        DbAccessor accessor = new DbAccessor(session);
+        return accessor.select()
+                .table(DbT5104ShinsakaiKaisaiBashoJoho.class)
+                .where(eq(DbT5104ShinsakaiKaisaiBashoJoho.shinsakaiKaisaiBashoCode, 審査会開催場所))
+                .toObject(DbT5104ShinsakaiKaisaiBashoJohoEntity.class);
+    }
+
+    @Override
+    public DbT5104ShinsakaiKaisaiBashoJohoEntity select(KaisaiBashoCode 審査会開催場所, boolean 開催場所状況) {
+        DbAccessor accessor = new DbAccessor(session);
+        return accessor.select()
+                .table(DbT5104ShinsakaiKaisaiBashoJoho.class)
+                .where(and(eq(DbT5104ShinsakaiKaisaiBashoJoho.shinsakaiKaisaiBashoCode, 審査会開催場所),
+                eq(DbT5104ShinsakaiKaisaiBashoJoho.shinsakaiKaisaiBashoJokyo, 開催場所状況)))
+                .toObject(DbT5104ShinsakaiKaisaiBashoJohoEntity.class);
+    }
+
+    @Override
+    public List<DbT5104ShinsakaiKaisaiBashoJohoEntity> selectAll() {
+        DbAccessor accessor = new DbAccessor(session);
+        return accessor.select()
+                .table(DbT5104ShinsakaiKaisaiBashoJoho.class)
+                .toList(DbT5104ShinsakaiKaisaiBashoJohoEntity.class);
+    }
+
+    @Override
+    public List<DbT5104ShinsakaiKaisaiBashoJohoEntity> selectAll(boolean 開催場所状況) {
+        DbAccessor accessor = new DbAccessor(session);
+        return accessor.select()
+                .table(DbT5104ShinsakaiKaisaiBashoJoho.class)
+                .where(eq(DbT5104ShinsakaiKaisaiBashoJoho.shinsakaiKaisaiBashoJokyo, 開催場所状況))
+                .toList(DbT5104ShinsakaiKaisaiBashoJohoEntity.class);
+    }
+
+    @Override
+    public int insertOrUpdate(DbT5104ShinsakaiKaisaiBashoJohoEntity entity) {
+        if (getMatchRowCount(entity) == 0) {
+            return insert(entity);
+        } else {
+            return update(entity);
+        }
+    }
+
+    /**
+     * 審査会開催場所情報に対し、追加を行います。
+     *
+     * @param entity 審査会開催場所Entity
+     * @return 追加結果
+     */
+    @Override
+    public int insert(DbT5104ShinsakaiKaisaiBashoJohoEntity entity) {
+        return dbAccessor.insert(entity).execute();
+    }
+
+    /**
+     * 審査会開催場所情報に対し、更新を行います。
+     *
+     * @param entity 審査会開催場所Entity
+     * @return 更新結果
+     */
+    @Override
+    public int update(DbT5104ShinsakaiKaisaiBashoJohoEntity entity) {
+        return dbAccessor.update(entity).execute();
+    }
+
+    @Override
+    public int delete(DbT5104ShinsakaiKaisaiBashoJohoEntity entity) {
+        return dbAccessor.delete(entity).execute();
+    }
+
+    /**
+     * 審査会開催場所の件数を取得します
+     *
+     * @param entity 審査会開催場所情報エンティティ
+     * @return 取得件数
+     */
+    private int getMatchRowCount(DbT5104ShinsakaiKaisaiBashoJohoEntity entity) {
+
+        return dbAccessor.
+                select().
+                table(DbT5104ShinsakaiKaisaiBashoJoho.class).
+                where(eq(DbT5104ShinsakaiKaisaiBashoJoho.shinsakaiKaisaiBashoCode, entity.getShinsakaiKaisaiBashoCode())).
+                getCount();
+    }
+}
