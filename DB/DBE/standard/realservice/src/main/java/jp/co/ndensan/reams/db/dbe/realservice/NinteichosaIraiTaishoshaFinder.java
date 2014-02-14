@@ -14,12 +14,13 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaIraiTaishoshaMapper;
-import jp.co.ndensan.reams.db.dbe.persistence.INinteiShinchokuJohoDac;
+import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinchokuJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.INinteichosaItakusakiDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiChosaIraiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbe.persistence.relate.IGetNinteiChosaIraiTaishoshaDac;
 import jp.co.ndensan.reams.ur.urf.entity.basic.ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urf.entity.basic.KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.ur.urf.persistence.basic.IChosainJohoDac;
@@ -40,6 +41,7 @@ public class NinteichosaIraiTaishoshaFinder {
     private final INinteiShinseiJohoDac shinseiJohoDac;
     private final INinteichosaItakusakiDac itakusakiDac;
     private final INinteiChosaIraiJohoDac iraiJohoDac;
+    private final IGetNinteiChosaIraiTaishoshaDac iraiTaishoshaDac;
     private final IKojinDac kojinDac;
     private final IKaigoJigyoshaDac kaigoJigyoshaDac;
     private final IChosainJohoDac chosainJohoDac;
@@ -53,6 +55,7 @@ public class NinteichosaIraiTaishoshaFinder {
         shinseiJohoDac = InstanceCreator.create(INinteiShinseiJohoDac.class);
         itakusakiDac = InstanceCreator.create(INinteichosaItakusakiDac.class);
         iraiJohoDac = InstanceCreator.create(INinteiChosaIraiJohoDac.class);
+        iraiTaishoshaDac = InstanceCreator.create(IGetNinteiChosaIraiTaishoshaDac.class);
         kojinDac = InstanceCreator.create(IKojinDac.class);
         kaigoJigyoshaDac = InstanceCreator.create(IKaigoJigyoshaDac.class);
         chosainJohoDac = InstanceCreator.create(IChosainJohoDac.class);
@@ -74,6 +77,7 @@ public class NinteichosaIraiTaishoshaFinder {
             INinteiShinseiJohoDac shinseiJohoDac,
             INinteichosaItakusakiDac itakusakiDac,
             INinteiChosaIraiJohoDac iraiJohoDac,
+            IGetNinteiChosaIraiTaishoshaDac iraiTaishoshaDac,
             IKojinDac kojinDac,
             IKaigoJigyoshaDac kaigoJigyoshaDac,
             IChosainJohoDac chosainJohoDac) {
@@ -81,6 +85,7 @@ public class NinteichosaIraiTaishoshaFinder {
         this.shinseiJohoDac = shinseiJohoDac;
         this.itakusakiDac = itakusakiDac;
         this.iraiJohoDac = iraiJohoDac;
+        this.iraiTaishoshaDac = iraiTaishoshaDac;
         this.kojinDac = kojinDac;
         this.kaigoJigyoshaDac = kaigoJigyoshaDac;
         this.chosainJohoDac = chosainJohoDac;
@@ -100,7 +105,7 @@ public class NinteichosaIraiTaishoshaFinder {
         DbT5001NinteiShinseiJohoEntity 認定申請情報Entity;
         KojinEntity 個人Enity;
 
-        List<DbT5005NinteiShinchokuJohoEntity> 要介護認定進捗情報EntityList = shinchokuJohoDac.selectChosaIraiTaisho(市町村コード);
+        List<DbT5005NinteiShinchokuJohoEntity> 要介護認定進捗情報EntityList = iraiTaishoshaDac.select(市町村コード);
         if (要介護認定進捗情報EntityList.isEmpty()) {
             return Collections.EMPTY_LIST;
         }
@@ -124,7 +129,7 @@ public class NinteichosaIraiTaishoshaFinder {
         DbT5001NinteiShinseiJohoEntity 認定申請情報Entity;
         KojinEntity 個人Enity;
 
-        List<DbT5005NinteiShinchokuJohoEntity> 要介護認定進捗情報EntityList = shinchokuJohoDac.selectChosaIraiTaisho();
+        List<DbT5005NinteiShinchokuJohoEntity> 要介護認定進捗情報EntityList = shinchokuJohoDac.select認定調査未完了();
         if (要介護認定進捗情報EntityList.isEmpty()) {
             return Collections.EMPTY_LIST;
         }

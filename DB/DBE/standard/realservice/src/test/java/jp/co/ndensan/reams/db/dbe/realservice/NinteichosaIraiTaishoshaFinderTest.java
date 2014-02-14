@@ -11,10 +11,11 @@ import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiTaishosha;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.INinteiShinchokuJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.INinteichosaItakusakiDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiChosaIraiJohoDac;
+import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinchokuJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
+import jp.co.ndensan.reams.db.dbe.persistence.relate.IGetNinteiChosaIraiTaishoshaDac;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.KojinEntityMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
@@ -51,6 +52,7 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
         private INinteiShinseiJohoDac shinseiJohoDac;
         private INinteichosaItakusakiDac itakusakiDac;
         private INinteiChosaIraiJohoDac iraiJohoDac;
+        private IGetNinteiChosaIraiTaishoshaDac iraiTaishoshaDac;
         private IKojinDac kojinDac;
         private IKaigoJigyoshaDac kaigoJigyoshaDac;
         private IChosainJohoDac chosainJohoDac;
@@ -60,10 +62,11 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
 
         @Override
         public void setUp() {
+            iraiTaishoshaDac = mock(IGetNinteiChosaIraiTaishoshaDac.class);
+            when(iraiTaishoshaDac.select(市町村コード_登録なし)).thenReturn(Collections.EMPTY_LIST);
+            when(iraiTaishoshaDac.select(市町村コード_登録あり)).thenReturn(create認定進捗情報Result(市町村コード_登録あり.getValue()));
             shinchokuJohoDac = mock(INinteiShinchokuJohoDac.class);
-            when(shinchokuJohoDac.selectChosaIraiTaisho(市町村コード_登録なし)).thenReturn(Collections.EMPTY_LIST);
-            when(shinchokuJohoDac.selectChosaIraiTaisho(市町村コード_登録あり)).thenReturn(create認定進捗情報Result(市町村コード_登録あり.getValue()));
-            when(shinchokuJohoDac.selectChosaIraiTaisho()).thenReturn(create認定進捗情報市町村指定なしResult());
+            when(shinchokuJohoDac.select認定調査未完了()).thenReturn(create認定進捗情報市町村指定なしResult());
             shinseiJohoDac = mock(INinteiShinseiJohoDac.class);
             when(shinseiJohoDac.select(TestScenarios[0].get市町村コード(), TestScenarios[0].get認定調査依頼履歴番号())).thenReturn(Result認定申請情報[0]);
             when(shinseiJohoDac.select(TestScenarios[1].get市町村コード(), TestScenarios[1].get認定調査依頼履歴番号())).thenReturn(Result認定申請情報[1]);
@@ -90,6 +93,7 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
                     shinseiJohoDac,
                     itakusakiDac,
                     iraiJohoDac,
+                    iraiTaishoshaDac,
                     kojinDac,
                     kaigoJigyoshaDac,
                     chosainJohoDac);
