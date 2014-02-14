@@ -26,13 +26,11 @@ import static org.mockito.Mockito.*;
  */
 public final class KojinEntityMock {
 
-    private static KojinEntity defaultData;
-
     private KojinEntityMock() {
     }
 
     public static KojinEntity getSpiedInstance() {
-        defaultData = new KojinEntity();
+        KojinEntity defaultData = new KojinEntity();
         defaultData.setワークスペース_名称(new RString("ワークスペース_名称"));
         defaultData.setワークスペース_半角カナ名称(new RString("ワークスペース_半角ｶﾅ名称"));
         defaultData.setワークスペース住所_住所コード(new RString("1000000000"));

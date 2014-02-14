@@ -15,13 +15,11 @@ import static org.mockito.Mockito.*;
  */
 public final class ChosainJohoEntityMock {
 
-    private static ChosainJohoEntity chosainJohoEntity;
-
     private ChosainJohoEntityMock() {
     }
 
     public static ChosainJohoEntity getSpiedInstance() {
-        chosainJohoEntity = new ChosainJohoEntity();
+        ChosainJohoEntity chosainJohoEntity = new ChosainJohoEntity();
         chosainJohoEntity.set介護事業者番号(new RString("1000000001"));
         chosainJohoEntity.set介護調査員番号(new RString("00000001"));
         chosainJohoEntity.set調査員氏名(new RString("調査員太郎"));

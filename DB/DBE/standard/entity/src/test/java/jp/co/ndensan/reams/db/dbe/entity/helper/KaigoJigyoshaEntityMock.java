@@ -17,13 +17,11 @@ import static org.mockito.Mockito.*;
  */
 public final class KaigoJigyoshaEntityMock {
 
-    private static KaigoJigyoshaEntity 事業者エンティティ;
-
     private KaigoJigyoshaEntityMock() {
     }
 
     public static KaigoJigyoshaEntity getSpiedInstance() {
-        事業者エンティティ = new KaigoJigyoshaEntity(
+        return spy(new KaigoJigyoshaEntity(
                 new RString("123456"),
                 new RDate("20130101"),
                 new RDate("20140101"),
@@ -42,7 +40,6 @@ public final class KaigoJigyoshaEntityMock {
                 new RDate("20130201"),
                 new RDate("20130301"),
                 new RDate("20130401"),
-                new RDate("20130501"));
-        return spy(事業者エンティティ);
+                new RDate("20130501")));
     }
 }
