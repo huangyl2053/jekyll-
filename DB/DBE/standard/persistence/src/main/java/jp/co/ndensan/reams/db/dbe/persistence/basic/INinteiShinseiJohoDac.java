@@ -4,9 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
@@ -17,21 +16,11 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public interface INinteiShinseiJohoDac {
 
     /**
-     * 市町村コード・申請書管理番号から要介護認定申請情報を取得する。
-     *
-     * @param 市町村コード 市町村コード
-     * @param 申請書管理番号 申請書管理番号
-     * @return 要介護認定申請情報データ
-     */
-    @Transaction
-    DbT5001NinteiShinseiJohoEntity select(ShichosonCode 市町村コード, RString 申請書管理番号);
-
-    /**
      * 申請書管理番号から要介護認定申請情報を取得する。
      *
      * @param 申請書管理番号 申請書管理番号
      * @return 要介護認定申請情報データ
      */
     @Transaction
-    DbT5001NinteiShinseiJohoEntity select申請書管理番号(RString 申請書管理番号);
+    DbT5001NinteiShinseiJohoEntity select(ShinseishoKanriNo 申請書管理番号);
 }
