@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.persistence;
+package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
