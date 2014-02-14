@@ -6,7 +6,6 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiTaishosha;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import static java.util.Objects.requireNonNull;
@@ -47,25 +46,22 @@ public final class NinteichosaIraiTaishoshaMapper {
      * 各エンティティから認定調査対象者への対応付けを行います
      *
      * @param 要介護認定申請情報Entity 要介護認定申請情報Entity
-     * @param 要介護認定進捗情報Entity 要介護認定進捗情報Entity
      * @param 個人Enity 個人Enity
      * @param 認定調査委託先Entity 認定調査委託先Entity
      * @param 介護事業者Entity 介護事業者Entity
      * @param 調査員情報Entity 調査員情報Entity
      * @return 認定調査対象者
      * @throws NullPointerException
-     * {@code 要介護認定申請情報Entity}がnullの場合、{@code 要介護認定進捗情報Entity}がnullの場合、または{@code 個人Enity}がnullの場合
+     * {@code 要介護認定申請情報Entity}がnullの場合、または{@code 個人Enity}がnullの場合
      */
     public static NinteichosaIraiTaishosha toNinteichosaIraiTaishosha(
             DbT5001NinteiShinseiJohoEntity 要介護認定申請情報Entity,
-            DbT5005NinteiShinchokuJohoEntity 要介護認定進捗情報Entity,
             KojinEntity 個人Enity,
             DbT7010NinteichosaItakusakiJohoEntity 認定調査委託先Entity,
             KaigoJigyoshaEntity 介護事業者Entity,
             ChosainJohoEntity 調査員情報Entity) throws NullPointerException {
 
         requireNonNull(要介護認定申請情報Entity, Messages.E00003.replace("要介護認定申請情報Entity", "認定調査対象者").getMessage());
-        requireNonNull(要介護認定進捗情報Entity, Messages.E00003.replace("要介護認定進捗情報Entity", "認定調査対象者").getMessage());
         requireNonNull(個人Enity, Messages.E00003.replace("個人エンティティ", "認定調査対象者").getMessage());
 
         ShinseishoKanriNo 申請書管理番号 = 要介護認定申請情報Entity.getShinseishoKanriNo();
