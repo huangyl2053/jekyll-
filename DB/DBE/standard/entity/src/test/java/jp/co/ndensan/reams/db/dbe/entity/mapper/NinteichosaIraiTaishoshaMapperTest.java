@@ -128,7 +128,7 @@ public class NinteichosaIraiTaishoshaMapperTest extends TestBase {
         public void 引き渡した_要介護認定申請情報の市町村コード_とtoNinteichosaIraiTaishoshaの結果は一致する() {
             sut = NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(要介護認定申請情報Entity,
                     要介護認定進捗情報Entity, 個人Enity, 認定調査委託先Entity, 介護事業者Entity, 調査員情報Entity);
-            assertThat(sut.get市町村コード(), is(要介護認定申請情報Entity.getShichosonCode().getValue()));
+            assertThat(sut.get市町村コード(), is(要介護認定申請情報Entity.getShichosonCode()));
         }
 
         @Test
