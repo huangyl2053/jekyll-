@@ -31,7 +31,7 @@ public class NinteiChosaIraiJohoDac implements INinteiChosaIraiJohoDac {
                 .select()
                 .table(DbT5006NinteichosaIraiJoho.class)
                 .where(and(eq(DbT5006NinteichosaIraiJoho.shinseishoKanriNo, 申請書管理番号),
-                eq(DbT5006NinteichosaIraiJoho.ninteichosaIraiRirekiNo, 認定調査依頼履歴番号.getColumnValue())))
+                eq(DbT5006NinteichosaIraiJoho.ninteichosaIraiRirekiNo, 認定調査依頼履歴番号.value())))
                 .toList(DbT5006NinteichosaIraiJohoEntity.class);
 
         return (!list.isEmpty()) ? list.get(0) : null;

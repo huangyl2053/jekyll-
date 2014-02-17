@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  *
  * @author N8187 久保田 英男
  */
-public class NinteiChosaIraiRirekiNo implements IDbColumnMappable, IValueObject<Object> {
+public class NinteiChosaIraiRirekiNo implements IDbColumnMappable, IValueObject<RString> {
 
     private RString 認定調査依頼履歴番号;
 
@@ -37,7 +37,7 @@ public class NinteiChosaIraiRirekiNo implements IDbColumnMappable, IValueObject<
     }
 
     @Override
-    public Object value() {
-        return this;
+    public RString value() {
+        return 認定調査依頼履歴番号;
     }
 }
