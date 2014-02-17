@@ -46,57 +46,57 @@ public final class NinteichosaIraiTaishoshaMapper {
      * 各エンティティから認定調査対象者への対応付けを行います
      *
      * @param 要介護認定申請情報Entity 要介護認定申請情報Entity
-     * @param 個人Enity 個人Enity
+     * @param 個人Entity 個人Entity
      * @param 認定調査委託先Entity 認定調査委託先Entity
      * @param 介護事業者Entity 介護事業者Entity
      * @param 調査員情報Entity 調査員情報Entity
      * @return 認定調査対象者
      * @throws NullPointerException
-     * {@code 要介護認定申請情報Entity}がnullの場合、または{@code 個人Enity}がnullの場合
+     * {@code 要介護認定申請情報Entity}がnullの場合、または{@code 個人Entity}がnullの場合
      */
     public static NinteichosaIraiTaishosha toNinteichosaIraiTaishosha(
             DbT5001NinteiShinseiJohoEntity 要介護認定申請情報Entity,
-            KojinEntity 個人Enity,
+            KojinEntity 個人Entity,
             DbT7010NinteichosaItakusakiJohoEntity 認定調査委託先Entity,
             KaigoJigyoshaEntity 介護事業者Entity,
             ChosainJohoEntity 調査員情報Entity) throws NullPointerException {
 
         requireNonNull(要介護認定申請情報Entity, Messages.E00003.replace("要介護認定申請情報Entity", "認定調査対象者").getMessage());
-        requireNonNull(個人Enity, Messages.E00003.replace("個人エンティティ", "認定調査対象者").getMessage());
+        requireNonNull(個人Entity, Messages.E00003.replace("個人エンティティ", "認定調査対象者").getMessage());
 
         ShinseishoKanriNo 申請書管理番号 = 要介護認定申請情報Entity.getShinseishoKanriNo();
         ShichosonCode 市町村コード = 要介護認定申請情報Entity.getShichosonCode();
         KaigoHihokenshaNumber 被保険者 = 要介護認定申請情報Entity.getHihokenshaNo();
         FlexibleDate 認定申請年月日 = 要介護認定申請情報Entity.getNinteiShinseiYMD();
         RString 認定申請区分 = 要介護認定申請情報Entity.getNinteiShinseiShinseijiKubunCode();
-        IKojin 個人情報 = IKojinFactory.create(個人Enity);
-        IShikibetsuTaisho 識別対象 = ShikibetsuTaishoFactory.create(個人Enity);
+        IKojin 個人情報 = IKojinFactory.create(個人Entity);
+        IShikibetsuTaisho 識別対象 = ShikibetsuTaishoFactory.create(個人Entity);
         RString 氏名 = 識別対象.get氏名().getName();
         RString 住所 = JushoEditor.editJusho(識別対象.get住所(), JushoEditPattern.町域番地);
-
-        NinteichosaItakusaki 認定調査委託先;
-        IKaigoJigyosha 事業者情報;
-        INinteiChosain 認定調査員情報;
-
-        if (認定調査委託先Entity == null) {
-            認定調査委託先 = null;
-        } else {
-            認定調査委託先 = NinteichosaItakusakiMapper.toNinteichosaItakusaki(認定調査委託先Entity);
-        }
-        if (介護事業者Entity == null) {
-            事業者情報 = null;
-        } else {
-            事業者情報 = KaigoJigyoshaMapper.toKaigoJigyosha(介護事業者Entity);
-        }
-        if (調査員情報Entity == null || 事業者情報 == null) {
-            認定調査員情報 = null;
-        } else {
-            認定調査員情報 = NinteiChosainMapper.toNinteiChosain(調査員情報Entity, 事業者情報);
-        }
+        NinteichosaItakusaki 認定調査委託先 = create認定調査委託先(認定調査委託先Entity);
+        IKaigoJigyosha 事業者情報 = create介護事業者(介護事業者Entity);
+        INinteiChosain 認定調査員情報 = create認定調査員(調査員情報Entity, 事業者情報);
 
         return new NinteichosaIraiTaishosha(
                 申請書管理番号, 市町村コード, 被保険者,
                 認定申請年月日, 認定申請区分, 個人情報, 氏名, 住所,
                 認定調査委託先, 事業者情報, 認定調査員情報);
+    }
+
+    private static NinteichosaItakusaki create認定調査委託先(DbT7010NinteichosaItakusakiJohoEntity entity) {
+        return isNull(entity) ? null : NinteichosaItakusakiMapper.toNinteichosaItakusaki(entity);
+    }
+
+    private static IKaigoJigyosha create介護事業者(KaigoJigyoshaEntity entity) {
+        return isNull(entity) ? null : KaigoJigyoshaMapper.toKaigoJigyosha(entity);
+    }
+
+    private static INinteiChosain create認定調査員(ChosainJohoEntity entity, IKaigoJigyosha 介護事業者) {
+        boolean isUncreatable = isNull(entity) || isNull(介護事業者);
+        return isUncreatable ? null : NinteiChosainMapper.toNinteiChosain(entity, 介護事業者);
+    }
+
+    private static <T> boolean isNull(T object) {
+        return object == null;
     }
 }

@@ -41,7 +41,7 @@ public class NinteichosaIraiTaishoshaMapperTest extends TestBase {
     public static class ConstructorTest extends TestBase {
 
         private DbT5001NinteiShinseiJohoEntity 要介護認定申請情報Entity;
-        private KojinEntity 個人Enity;
+        private KojinEntity 個人Entity;
         private DbT7010NinteichosaItakusakiJohoEntity 認定調査委託先Entity;
         private KaigoJigyoshaEntity 介護事業者Entity;
         private ChosainJohoEntity 調査員情報Entity;
@@ -50,7 +50,7 @@ public class NinteichosaIraiTaishoshaMapperTest extends TestBase {
         @Override
         protected void setUp() {
             要介護認定申請情報Entity = mock(DbT5001NinteiShinseiJohoEntity.class);
-            個人Enity = mock(KojinEntity.class);
+            個人Entity = mock(KojinEntity.class);
             認定調査委託先Entity = mock(DbT7010NinteichosaItakusakiJohoEntity.class);
             介護事業者Entity = mock(KaigoJigyoshaEntity.class);
             調査員情報Entity = mock(ChosainJohoEntity.class);
@@ -60,21 +60,21 @@ public class NinteichosaIraiTaishoshaMapperTest extends TestBase {
         public void コンストラクタの要介護認定申請情報Entityに_Nullを指定した場合_NullPointerExceptionが発生する() {
             要介護認定申請情報Entity = null;
             sut = NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(要介護認定申請情報Entity,
-                    個人Enity, 認定調査委託先Entity, 介護事業者Entity, 調査員情報Entity);
+                    個人Entity, 認定調査委託先Entity, 介護事業者Entity, 調査員情報Entity);
         }
 
         @Test(expected = NullPointerException.class)
-        public void コンストラクタの個人Enityに_Nullを指定した場合_NullPointerExceptionが発生する() {
-            個人Enity = null;
+        public void コンストラクタの個人Entityに_Nullを指定した場合_NullPointerExceptionが発生する() {
+            個人Entity = null;
             sut = NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(要介護認定申請情報Entity,
-                    個人Enity, 認定調査委託先Entity, 介護事業者Entity, 調査員情報Entity);
+                    個人Entity, 認定調査委託先Entity, 介護事業者Entity, 調査員情報Entity);
         }
     }
 
     public static class toNinteichosaIraiTaishoshaTest extends TestBase {
 
         private DbT5001NinteiShinseiJohoEntity 要介護認定申請情報Entity;
-        private KojinEntity 個人Enity;
+        private KojinEntity 個人Entity;
         private DbT7010NinteichosaItakusakiJohoEntity 認定調査委託先Entity;
         private KaigoJigyoshaEntity 介護事業者Entity;
         private ChosainJohoEntity 調査員情報Entity;
@@ -88,7 +88,7 @@ public class NinteichosaIraiTaishoshaMapperTest extends TestBase {
             when(要介護認定申請情報Entity.getHihokenshaNo()).thenReturn(new KaigoHihokenshaNumber(new RString("0002")));
             when(要介護認定申請情報Entity.getNinteiShinseiYMD()).thenReturn(new FlexibleDate(new RString("20140101")));
             when(要介護認定申請情報Entity.getNinteiShinseiShinseijiKubunCode()).thenReturn(new RString("0003"));
-            個人Enity = KojinEntityMock.getSpiedInstance();
+            個人Entity = KojinEntityMock.getSpiedInstance();
             認定調査委託先Entity = mock(DbT7010NinteichosaItakusakiJohoEntity.class);
             when(認定調査委託先Entity.get市町村コード()).thenReturn(new RString("1111市町村コード"));
             when(認定調査委託先Entity.get介護事業者番号()).thenReturn(new KaigoJigyoshaNo(new RString("0001介護事業者番号")));
@@ -105,77 +105,77 @@ public class NinteichosaIraiTaishoshaMapperTest extends TestBase {
         @Test
         public void 引き渡した_要介護認定申請情報の申請書管理番号_とtoNinteichosaIraiTaishoshaの結果は一致する() {
             sut = NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(要介護認定申請情報Entity,
-                    個人Enity, 認定調査委託先Entity, 介護事業者Entity, 調査員情報Entity);
+                    個人Entity, 認定調査委託先Entity, 介護事業者Entity, 調査員情報Entity);
             assertThat(sut.get申請書管理番号(), is(要介護認定申請情報Entity.getShinseishoKanriNo()));
         }
 
         @Test
         public void 引き渡した_要介護認定申請情報の市町村コード_とtoNinteichosaIraiTaishoshaの結果は一致する() {
             sut = NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(要介護認定申請情報Entity,
-                    個人Enity, 認定調査委託先Entity, 介護事業者Entity, 調査員情報Entity);
+                    個人Entity, 認定調査委託先Entity, 介護事業者Entity, 調査員情報Entity);
             assertThat(sut.get市町村コード(), is(要介護認定申請情報Entity.getShichosonCode()));
         }
 
         @Test
         public void 引き渡した_要介護認定申請情報の被保険者番号_とtoNinteichosaIraiTaishoshaの結果は一致する() {
             sut = NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(要介護認定申請情報Entity,
-                    個人Enity, 認定調査委託先Entity, 介護事業者Entity, 調査員情報Entity);
+                    個人Entity, 認定調査委託先Entity, 介護事業者Entity, 調査員情報Entity);
             assertThat(sut.get被保険者番号(), is(要介護認定申請情報Entity.getHihokenshaNo()));
         }
 
         @Test
         public void 引き渡した_要介護認定申請情報の認定申請年月日_とtoNinteichosaIraiTaishoshaの結果は一致する() {
             sut = NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(要介護認定申請情報Entity,
-                    個人Enity, 認定調査委託先Entity, 介護事業者Entity, 調査員情報Entity);
+                    個人Entity, 認定調査委託先Entity, 介護事業者Entity, 調査員情報Entity);
             assertThat(sut.get認定申請年月日(), is(要介護認定申請情報Entity.getNinteiShinseiYMD()));
         }
 
         @Test
         public void 引き渡した_要介護認定申請情報の認定申請区分_とtoNinteichosaIraiTaishoshaの結果は一致する() {
             sut = NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(要介護認定申請情報Entity,
-                    個人Enity, 認定調査委託先Entity, 介護事業者Entity, 調査員情報Entity);
+                    個人Entity, 認定調査委託先Entity, 介護事業者Entity, 調査員情報Entity);
             assertThat(sut.get認定申請区分(), is(要介護認定申請情報Entity.getNinteiShinseiShinseijiKubunCode()));
         }
 
         @Test
-        public void 引き渡した_個人Enityから作成したIKojin_とtoNinteichosaIraiTaishoshaの結果は一致する() {
+        public void 引き渡した_個人Entityから作成したIKojin_とtoNinteichosaIraiTaishoshaの結果は一致する() {
             sut = NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(要介護認定申請情報Entity,
-                    個人Enity, 認定調査委託先Entity, 介護事業者Entity, 調査員情報Entity);
+                    個人Entity, 認定調査委託先Entity, 介護事業者Entity, 調査員情報Entity);
             assertThat(sut.get個人情報(), instanceOf(IKojin.class));
         }
 
         @Test
-        public void 引き渡した_個人Enityの氏名_とtoNinteichosaIraiTaishoshaの結果は一致する() {
+        public void 引き渡した_個人Entityの氏名_とtoNinteichosaIraiTaishoshaの結果は一致する() {
             sut = NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(要介護認定申請情報Entity,
-                    個人Enity, 認定調査委託先Entity, 介護事業者Entity, 調査員情報Entity);
-            assertThat(sut.get氏名(), is(個人Enity.get識別対象_名称()));
+                    個人Entity, 認定調査委託先Entity, 介護事業者Entity, 調査員情報Entity);
+            assertThat(sut.get氏名(), is(個人Entity.get識別対象_名称()));
         }
 
         @Test
-        public void 引き渡した_個人Enityの住所_とtoNinteichosaIraiTaishoshaの結果は一致する() {
+        public void 引き渡した_個人Entityの住所_とtoNinteichosaIraiTaishoshaの結果は一致する() {
             sut = NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(要介護認定申請情報Entity,
-                    個人Enity, 認定調査委託先Entity, 介護事業者Entity, 調査員情報Entity);
+                    個人Entity, 認定調査委託先Entity, 介護事業者Entity, 調査員情報Entity);
             assertThat(sut.get住所(), instanceOf(RString.class));
         }
 
         @Test
         public void 引き渡した_認定調査委託先_とtoNinteichosaIraiTaishoshaの結果は一致する() {
             sut = NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(要介護認定申請情報Entity,
-                    個人Enity, 認定調査委託先Entity, 介護事業者Entity, 調査員情報Entity);
+                    個人Entity, 認定調査委託先Entity, 介護事業者Entity, 調査員情報Entity);
             assertThat(sut.get認定調査委託先().get市町村コード(), is(認定調査委託先Entity.get市町村コード()));
         }
 
         @Test
         public void 引き渡した_事業者情報_とtoNinteichosaIraiTaishoshaの結果は一致する() {
             sut = NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(要介護認定申請情報Entity,
-                    個人Enity, 認定調査委託先Entity, 介護事業者Entity, 調査員情報Entity);
+                    個人Entity, 認定調査委託先Entity, 介護事業者Entity, 調査員情報Entity);
             assertThat(sut.get事業者情報().get法人種別(), is(介護事業者Entity.get法人種別()));
         }
 
         @Test
         public void 引き渡した_認定調査員情報_とtoNinteichosaIraiTaishoshaの結果は一致する() {
             sut = NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(要介護認定申請情報Entity,
-                    個人Enity, 認定調査委託先Entity, 介護事業者Entity, 調査員情報Entity);
+                    個人Entity, 認定調査委託先Entity, 介護事業者Entity, 調査員情報Entity);
             assertThat(sut.get認定調査員情報().get介護調査員番号(), is(調査員情報Entity.get介護調査員番号()));
         }
     }

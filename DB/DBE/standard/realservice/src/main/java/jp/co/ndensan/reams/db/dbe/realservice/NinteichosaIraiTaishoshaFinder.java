@@ -131,7 +131,7 @@ public class NinteichosaIraiTaishoshaFinder {
 
         for (DbT5005NinteiShinchokuJohoEntity entity : 要介護認定進捗情報EntityList) {
             DbT5001NinteiShinseiJohoEntity 認定申請情報Entity = shinseiJohoDac.select(entity.getShinseishoKanriNo());
-            KojinEntity 個人Enity = kojinDac.select最新(認定申請情報Entity.getShichosonCode().getValue());
+            KojinEntity 個人Entity = kojinDac.select最新(認定申請情報Entity.getShichosonCode().getValue());
             DbT5006NinteichosaIraiJohoEntity 認定調査依頼情報Entity = iraiJohoDac.select(
                     認定申請情報Entity.getShinseishoKanriNo().getColumnValue(),
                     認定申請情報Entity.getNinteichosaIraiRirekiNo());
@@ -149,7 +149,7 @@ public class NinteichosaIraiTaishoshaFinder {
                 調査員情報Entity = null;
             }
 
-            list.add(NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(認定申請情報Entity, 個人Enity,
+            list.add(NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(認定申請情報Entity, 個人Entity,
                     認定委託先情報Entity, 介護事業者Entity, 調査員情報Entity));
         }
         return list;
