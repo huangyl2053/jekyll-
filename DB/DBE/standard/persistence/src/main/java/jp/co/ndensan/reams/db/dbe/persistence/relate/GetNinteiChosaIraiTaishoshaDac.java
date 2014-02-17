@@ -6,12 +6,12 @@ package jp.co.ndensan.reams.db.dbe.persistence.relate;
 
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoHokenDefines;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessor;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
@@ -26,7 +26,6 @@ public class GetNinteiChosaIraiTaishoshaDac implements IGetNinteiChosaIraiTaisho
 
     @InjectSession
     private SqlSession session;
-    private final RString 認定調査未完了年月日 = new RString("00000000");
 
     @Override
     public List<DbT5005NinteiShinchokuJohoEntity> select(ShichosonCode 市町村コード) {
@@ -38,7 +37,7 @@ public class GetNinteiChosaIraiTaishoshaDac implements IGetNinteiChosaIraiTaisho
                 .innerJoin(DbT5001NinteiShinseiJoho.class,
                 using(DbT5001NinteiShinseiJoho.shinseishoKanriNo, DbT5005NinteiShinchokuJoho.shinseishoKanriNo))
                 .where(and(eq(DbT5001NinteiShinseiJoho.shichosonCode, 市町村コード),
-                eq(DbT5005NinteiShinchokuJoho.ninteichosaIraiKanryoYMD, 認定調査未完了年月日)))
+                eq(DbT5005NinteiShinchokuJoho.ninteichosaIraiKanryoYMD, KaigoHokenDefines.認定調査未完了年月日)))
                 .order(by(DbT5005NinteiShinchokuJoho.shinseishoKanriNo, Order.ASC))
                 .toList(DbT5005NinteiShinchokuJohoEntity.class);
 

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiTaishosha;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoHokenDefines;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiChosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
@@ -43,7 +44,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @RunWith(Enclosed.class)
 public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
 
-    private static final FlexibleDate 調査未完了年月日 = new FlexibleDate(new RString("00000000"));
     private static final FlexibleDate 調査完了年月日 = new FlexibleDate(new RString("20140101"));
     private static final RString 試験用文字列 = new RString("0001");
 
@@ -123,12 +123,12 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
      */
     private static TestCase[] TestCases = {
         // TestNo, 申請書管理番号, 市町村コード, 認定調査依頼履歴番号, 認定調査完了年月日, 認定調査委託先コード, 調査員番号コード;
-        new TestCase(0, new ShinseishoKanriNo(new RString("0000")), new ShichosonCode(new RString("00000")), new NinteiChosaIraiRirekiNo(new RString("1")), new FlexibleDate(new RString("20140101")), new RString("01"), new RString("001")),
-        new TestCase(1, new ShinseishoKanriNo(new RString("0001")), new ShichosonCode(new RString("12345")), new NinteiChosaIraiRirekiNo(new RString("2")), new FlexibleDate(new RString("00000000")), new RString("01"), new RString("001")),
-        new TestCase(2, new ShinseishoKanriNo(new RString("0002")), new ShichosonCode(new RString("12345")), new NinteiChosaIraiRirekiNo(new RString("1")), new FlexibleDate(new RString("20140101")), new RString("01"), new RString("001")),
-        new TestCase(3, new ShinseishoKanriNo(new RString("0003")), new ShichosonCode(new RString("12345")), new NinteiChosaIraiRirekiNo(new RString("1")), new FlexibleDate(new RString("00000000")), null, null),
-        new TestCase(4, new ShinseishoKanriNo(new RString("0004")), new ShichosonCode(new RString("12345")), new NinteiChosaIraiRirekiNo(new RString("5")), new FlexibleDate(new RString("00000000")), new RString("02"), new RString("002")),
-        new TestCase(5, new ShinseishoKanriNo(new RString("0005")), new ShichosonCode(new RString("22222")), new NinteiChosaIraiRirekiNo(new RString("1")), new FlexibleDate(new RString("00000000")), new RString("04"), new RString("004"))
+        new TestCase(0, new ShinseishoKanriNo(new RString("0000")), new ShichosonCode(new RString("00000")), new NinteiChosaIraiRirekiNo(new RString("1")), 調査完了年月日, new RString("01"), new RString("001")),
+        new TestCase(1, new ShinseishoKanriNo(new RString("0001")), new ShichosonCode(new RString("12345")), new NinteiChosaIraiRirekiNo(new RString("2")), KaigoHokenDefines.認定調査未完了年月日, new RString("01"), new RString("001")),
+        new TestCase(2, new ShinseishoKanriNo(new RString("0002")), new ShichosonCode(new RString("12345")), new NinteiChosaIraiRirekiNo(new RString("1")), 調査完了年月日, new RString("01"), new RString("001")),
+        new TestCase(3, new ShinseishoKanriNo(new RString("0003")), new ShichosonCode(new RString("12345")), new NinteiChosaIraiRirekiNo(new RString("1")), KaigoHokenDefines.認定調査未完了年月日, null, null),
+        new TestCase(4, new ShinseishoKanriNo(new RString("0004")), new ShichosonCode(new RString("12345")), new NinteiChosaIraiRirekiNo(new RString("5")), KaigoHokenDefines.認定調査未完了年月日, new RString("02"), new RString("002")),
+        new TestCase(5, new ShinseishoKanriNo(new RString("0005")), new ShichosonCode(new RString("22222")), new NinteiChosaIraiRirekiNo(new RString("1")), KaigoHokenDefines.認定調査未完了年月日, new RString("04"), new RString("004"))
     };
     private static DbT5001NinteiShinseiJohoEntity[] Result認定申請情報 = {
         create認定申請情報Entity(0),
@@ -160,7 +160,7 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
         for (RString 管理番号 : list申請書管理番号) {
             for (DbT5005NinteiShinchokuJohoEntity entity : Result認定進捗情報) {
                 if (管理番号.equals(entity.getShinseishoKanriNo().getColumnValue())
-                        && 調査未完了年月日.equals(entity.getNinteichosaKanryoYMD())) {
+                        && KaigoHokenDefines.認定調査未完了年月日.equals(entity.getNinteichosaKanryoYMD())) {
                     resultList.add(entity);
                 }
             }
@@ -172,7 +172,7 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
         List<DbT5005NinteiShinchokuJohoEntity> resultList = new ArrayList<>();
 
         for (DbT5005NinteiShinchokuJohoEntity entity : Result認定進捗情報) {
-            if (調査未完了年月日.equals(entity.getNinteichosaKanryoYMD())) {
+            if (KaigoHokenDefines.認定調査未完了年月日.equals(entity.getNinteichosaKanryoYMD())) {
                 resultList.add(entity);
             }
         }
