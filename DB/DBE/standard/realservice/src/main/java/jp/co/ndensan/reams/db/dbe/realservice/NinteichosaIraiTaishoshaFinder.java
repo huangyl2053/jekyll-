@@ -136,7 +136,7 @@ public class NinteichosaIraiTaishoshaFinder {
             個人Enity = kojinDac.select最新(認定申請情報Entity.getShichosonCode().getValue());
 
             DbT5006NinteichosaIraiJohoEntity 認定調査依頼情報Entity = iraiJohoDac.select(
-                    認定申請情報Entity.getShinseishoKanriNo().get申請書管理番号(),
+                    認定申請情報Entity.getShinseishoKanriNo().getColumnValue(),
                     認定申請情報Entity.getNinteichosaIraiRirekiNo());
 
             if (認定調査依頼情報Entity != null) {

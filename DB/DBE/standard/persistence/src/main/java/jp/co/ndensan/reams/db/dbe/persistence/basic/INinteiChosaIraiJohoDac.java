@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiChosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -23,5 +24,5 @@ public interface INinteiChosaIraiJohoDac {
      * @return 認定調査依頼情報
      */
     @Transaction
-    DbT5006NinteichosaIraiJohoEntity select(RString 申請書管理番号, RString 認定調査依頼履歴番号);
+    DbT5006NinteichosaIraiJohoEntity select(RString 申請書管理番号, NinteiChosaIraiRirekiNo 認定調査依頼履歴番号);
 }

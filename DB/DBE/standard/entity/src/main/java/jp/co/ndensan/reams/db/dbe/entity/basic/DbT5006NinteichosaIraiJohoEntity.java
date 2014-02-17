@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.basic;
 
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiChosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -26,7 +27,7 @@ public class DbT5006NinteichosaIraiJohoEntity implements IDbAccessable {
     @PrimaryKey
     private ShinseishoKanriNo 申請書管理番号;
     @PrimaryKey
-    private RString 認定調査依頼履歴番号;
+    private NinteiChosaIraiRirekiNo 認定調査依頼履歴番号;
     private RString 認定調査委託先コード;
     private RString 調査員番号コード;
     private RString 認定調査依頼区分コード;
@@ -68,7 +69,7 @@ public class DbT5006NinteichosaIraiJohoEntity implements IDbAccessable {
      */
     public DbT5006NinteichosaIraiJohoEntity(
             ShinseishoKanriNo 申請書管理番号,
-            RString 認定調査依頼履歴番号,
+            NinteiChosaIraiRirekiNo 認定調査依頼履歴番号,
             RString 認定調査委託先コード,
             RString 調査員番号コード,
             RString 認定調査依頼区分コード,
@@ -113,7 +114,7 @@ public class DbT5006NinteichosaIraiJohoEntity implements IDbAccessable {
      *
      * @return 認定調査依頼履歴番号
      */
-    public RString get認定調査依頼履歴番号() {
+    public NinteiChosaIraiRirekiNo get認定調査依頼履歴番号() {
         return 認定調査依頼履歴番号;
     }
 

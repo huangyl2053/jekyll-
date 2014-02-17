@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.basic;
 
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiChosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
@@ -42,7 +43,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     private RString zenYokaigoKubunCode;
     private int zenYukoKikan;
     private boolean johoteikyoDouiUmuKubun;
-    private RString ninteichosaIraiRirekiNo;
+    private NinteiChosaIraiRirekiNo ninteichosaIraiRirekiNo;
     private RString ikenshoIraiRirekiNo;
     private RString minashiCode;
     private boolean enkitsuchiDoiUmuKubun;
@@ -103,7 +104,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
             RString zenYokaigoKubunCode,
             int zenYukoKikan,
             boolean johoteikyoDouiUmuKubun,
-            RString ninteichosaIraiRirekiNo,
+            NinteiChosaIraiRirekiNo ninteichosaIraiRirekiNo,
             RString ikenshoIraiRirekiNo,
             RString minashiCode,
             boolean enkitsuchiDoiUmuKubun,
@@ -281,7 +282,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
      *
      * @return ninteichosaIraiRirekiNo
      */
-    public RString getNinteichosaIraiRirekiNo() {
+    public NinteiChosaIraiRirekiNo getNinteichosaIraiRirekiNo() {
         return ninteichosaIraiRirekiNo;
     }
 

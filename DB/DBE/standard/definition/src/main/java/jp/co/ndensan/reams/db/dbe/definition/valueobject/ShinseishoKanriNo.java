@@ -5,13 +5,14 @@
 package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
  * 申請書管理番号を表すクラスです
  *
  * @author N8187 久保田 英男
  */
-public class ShinseishoKanriNo {
+public class ShinseishoKanriNo implements IDbColumnMappable {
 
     private RString 申請書管理番号;
 
@@ -29,7 +30,8 @@ public class ShinseishoKanriNo {
      *
      * @return 申請書管理番号
      */
-    public RString get申請書管理番号() {
+    @Override
+    public RString getColumnValue() {
         return 申請書管理番号;
     }
 }
