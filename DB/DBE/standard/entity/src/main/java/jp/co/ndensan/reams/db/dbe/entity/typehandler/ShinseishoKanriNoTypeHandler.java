@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.entity.typehandlers;
+package jp.co.ndensan.reams.db.dbe.entity.typehandler;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -9,27 +9,32 @@ import org.apache.ibatis.type.JdbcType;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
+//TODO n8178 城間篤人　このクラス削除して、dbzに新規で作り直したほうがよい？ 2014年2月末
 public class ShinseishoKanriNoTypeHandler extends BaseTypeHandler<ShinseishoKanriNo> {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, ShinseishoKanriNo parameter, JdbcType jdbcType) throws SQLException {
-        ps.setString(i, parameter.getColumnValue().toString());
+        ps.setString(i, parameter == null ? null : parameter.getColumnValue().toString());
     }
 
     @Override
     public ShinseishoKanriNo getNullableResult(ResultSet rs, String columnName) throws SQLException {
-        return new ShinseishoKanriNo(new RString(rs.getString(columnName)));
+        return new ShinseishoKanriNo(getResultRString(rs.getString(columnName)));
     }
 
     @Override
     public ShinseishoKanriNo getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
-        return new ShinseishoKanriNo(new RString(rs.getString(columnIndex)));
+        return new ShinseishoKanriNo(getResultRString(rs.getString(columnIndex)));
     }
 
     @Override
     public ShinseishoKanriNo getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
-        return new ShinseishoKanriNo(new RString(cs.getString(columnIndex)));
+        return new ShinseishoKanriNo(getResultRString(cs.getString(columnIndex)));
+    }
+
+    private RString getResultRString(String result) {
+        return result == null ? null : new RString(result);
     }
 // </editor-fold>
 }

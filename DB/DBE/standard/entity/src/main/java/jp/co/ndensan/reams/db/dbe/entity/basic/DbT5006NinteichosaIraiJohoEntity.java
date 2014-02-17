@@ -1,0 +1,366 @@
+package jp.co.ndensan.reams.db.dbe.entity.basic;
+
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ChosainBangoCode;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+
+/**
+ * DbT5006NinteichosaIraiJohoの項目定義クラスです
+ *
+ * @author n8718 城間篤人
+ */
+public class DbT5006NinteichosaIraiJohoEntity implements IDbAccessable {
+// <editor-fold defaultstate="collapsed" desc="Generated Code">
+
+    @TableName
+    public static final RString TABLE_NAME = new RString("DbT5006NinteichosaIraiJoho");
+    private RString insertDantaiCd = RString.EMPTY;
+    private RDateTime insertTimestamp;
+    private RString insertReamsLoginId = RString.EMPTY;
+    private UUID insertContextId;
+    private boolean isDeleted = false;
+    private int updateCount = 0;
+    private RDateTime lastUpdateTimestamp;
+    private RString lastUpdateReamsLoginId = RString.EMPTY;
+    @PrimaryKey
+    private ShinseishoKanriNo shinseishoKanriNo;
+    @PrimaryKey
+    private int ninteichosaIraiRirekiNo;
+    private NinteichosaItakusakiCode ninteichosaItakusakiCode;
+    private ChosainBangoCode chousainCode;
+    private Code ninteichousaIraiKubunCode;
+    private int ninteichosaIraiKaisu;
+    private FlexibleDate ninteichosaIraiYMD;
+    private FlexibleDate ninteichosaKigenYMD;
+    private FlexibleDate iraishoShutsuryokuYMD;
+    private FlexibleDate chosahyoTouShutsuryokuYMD;
+    private boolean mobileDataShutsuryokuFlag;
+    private FlexibleDate ninteichosaTokusokuYMD;
+    private Code ninteichosaTokusokuHoho;
+    private int ninteichosaTokusokuKaisu;
+    private RString ninteichosaTokusokuMemo;
+
+    /**
+     * getInsertDantaiCd
+     *
+     * @return insertDantaiCd
+     */
+    public RString getInsertDantaiCd() {
+        return insertDantaiCd;
+    }
+
+    /**
+     * setInsertDantaiCd
+     *
+     * @param insertDantaiCd insertDantaiCd
+     */
+    public void setInsertDantaiCd(RString insertDantaiCd) {
+        this.insertDantaiCd = insertDantaiCd;
+    }
+
+    /**
+     * getIsDeleted
+     *
+     * @return isDeleted
+     */
+    public boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    /**
+     * setIsDeleted
+     *
+     * @param isDeleted isDeleted
+     */
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    /**
+     * setLastUpdateReamsLoginId
+     *
+     * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
+     */
+    public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
+        this.lastUpdateReamsLoginId = lastUpdateReamsLoginId;
+    }
+
+    /**
+     * getShinseishoKanriNo
+     *
+     * @return shinseishoKanriNo
+     */
+    public ShinseishoKanriNo getShinseishoKanriNo() {
+        return shinseishoKanriNo;
+    }
+
+    /**
+     * setShinseishoKanriNo
+     *
+     * @param shinseishoKanriNo shinseishoKanriNo
+     */
+    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
+        this.shinseishoKanriNo = shinseishoKanriNo;
+    }
+
+    /**
+     * getNinteichosaIraiRirekiNo
+     *
+     * @return ninteichosaIraiRirekiNo
+     */
+    public int getNinteichosaIraiRirekiNo() {
+        return ninteichosaIraiRirekiNo;
+    }
+
+    /**
+     * setNinteichosaIraiRirekiNo
+     *
+     * @param ninteichosaIraiRirekiNo ninteichosaIraiRirekiNo
+     */
+    public void setNinteichosaIraiRirekiNo(int ninteichosaIraiRirekiNo) {
+        this.ninteichosaIraiRirekiNo = ninteichosaIraiRirekiNo;
+    }
+
+    /**
+     * getNinteichosaItakusakiCode
+     *
+     * @return ninteichosaItakusakiCode
+     */
+    public NinteichosaItakusakiCode getNinteichosaItakusakiCode() {
+        return ninteichosaItakusakiCode;
+    }
+
+    /**
+     * setNinteichosaItakusakiCode
+     *
+     * @param ninteichosaItakusakiCode ninteichosaItakusakiCode
+     */
+    public void setNinteichosaItakusakiCode(NinteichosaItakusakiCode ninteichosaItakusakiCode) {
+        this.ninteichosaItakusakiCode = ninteichosaItakusakiCode;
+    }
+
+    /**
+     * getChousainCode
+     *
+     * @return chousainCode
+     */
+    public ChosainBangoCode getChousainCode() {
+        return chousainCode;
+    }
+
+    /**
+     * setChousainCode
+     *
+     * @param chousainCode chousainCode
+     */
+    public void setChousainCode(ChosainBangoCode chousainCode) {
+        this.chousainCode = chousainCode;
+    }
+
+    /**
+     * getNinteichousaIraiKubunCode
+     *
+     * @return ninteichousaIraiKubunCode
+     */
+    public Code getNinteichousaIraiKubunCode() {
+        return ninteichousaIraiKubunCode;
+    }
+
+    /**
+     * setNinteichousaIraiKubunCode
+     *
+     * @param ninteichousaIraiKubunCode ninteichousaIraiKubunCode
+     */
+    public void setNinteichousaIraiKubunCode(Code ninteichousaIraiKubunCode) {
+        this.ninteichousaIraiKubunCode = ninteichousaIraiKubunCode;
+    }
+
+    /**
+     * getNinteichosaIraiKaisu
+     *
+     * @return ninteichosaIraiKaisu
+     */
+    public int getNinteichosaIraiKaisu() {
+        return ninteichosaIraiKaisu;
+    }
+
+    /**
+     * setNinteichosaIraiKaisu
+     *
+     * @param ninteichosaIraiKaisu ninteichosaIraiKaisu
+     */
+    public void setNinteichosaIraiKaisu(int ninteichosaIraiKaisu) {
+        this.ninteichosaIraiKaisu = ninteichosaIraiKaisu;
+    }
+
+    /**
+     * getNinteichosaIraiYMD
+     *
+     * @return ninteichosaIraiYMD
+     */
+    public FlexibleDate getNinteichosaIraiYMD() {
+        return ninteichosaIraiYMD;
+    }
+
+    /**
+     * setNinteichosaIraiYMD
+     *
+     * @param ninteichosaIraiYMD ninteichosaIraiYMD
+     */
+    public void setNinteichosaIraiYMD(FlexibleDate ninteichosaIraiYMD) {
+        this.ninteichosaIraiYMD = ninteichosaIraiYMD;
+    }
+
+    /**
+     * getNinteichosaKigenYMD
+     *
+     * @return ninteichosaKigenYMD
+     */
+    public FlexibleDate getNinteichosaKigenYMD() {
+        return ninteichosaKigenYMD;
+    }
+
+    /**
+     * setNinteichosaKigenYMD
+     *
+     * @param ninteichosaKigenYMD ninteichosaKigenYMD
+     */
+    public void setNinteichosaKigenYMD(FlexibleDate ninteichosaKigenYMD) {
+        this.ninteichosaKigenYMD = ninteichosaKigenYMD;
+    }
+
+    /**
+     * getIraishoShutsuryokuYMD
+     *
+     * @return iraishoShutsuryokuYMD
+     */
+    public FlexibleDate getIraishoShutsuryokuYMD() {
+        return iraishoShutsuryokuYMD;
+    }
+
+    /**
+     * setIraishoShutsuryokuYMD
+     *
+     * @param iraishoShutsuryokuYMD iraishoShutsuryokuYMD
+     */
+    public void setIraishoShutsuryokuYMD(FlexibleDate iraishoShutsuryokuYMD) {
+        this.iraishoShutsuryokuYMD = iraishoShutsuryokuYMD;
+    }
+
+    /**
+     * getChosahyoTouShutsuryokuYMD
+     *
+     * @return chosahyoTouShutsuryokuYMD
+     */
+    public FlexibleDate getChosahyoTouShutsuryokuYMD() {
+        return chosahyoTouShutsuryokuYMD;
+    }
+
+    /**
+     * setChosahyoTouShutsuryokuYMD
+     *
+     * @param chosahyoTouShutsuryokuYMD chosahyoTouShutsuryokuYMD
+     */
+    public void setChosahyoTouShutsuryokuYMD(FlexibleDate chosahyoTouShutsuryokuYMD) {
+        this.chosahyoTouShutsuryokuYMD = chosahyoTouShutsuryokuYMD;
+    }
+
+    /**
+     * getMobileDataShutsuryokuFlag
+     *
+     * @return mobileDataShutsuryokuFlag
+     */
+    public boolean getMobileDataShutsuryokuFlag() {
+        return mobileDataShutsuryokuFlag;
+    }
+
+    /**
+     * setMobileDataShutsuryokuFlag
+     *
+     * @param mobileDataShutsuryokuFlag mobileDataShutsuryokuFlag
+     */
+    public void setMobileDataShutsuryokuFlag(boolean mobileDataShutsuryokuFlag) {
+        this.mobileDataShutsuryokuFlag = mobileDataShutsuryokuFlag;
+    }
+
+    /**
+     * getNinteichosaTokusokuYMD
+     *
+     * @return ninteichosaTokusokuYMD
+     */
+    public FlexibleDate getNinteichosaTokusokuYMD() {
+        return ninteichosaTokusokuYMD;
+    }
+
+    /**
+     * setNinteichosaTokusokuYMD
+     *
+     * @param ninteichosaTokusokuYMD ninteichosaTokusokuYMD
+     */
+    public void setNinteichosaTokusokuYMD(FlexibleDate ninteichosaTokusokuYMD) {
+        this.ninteichosaTokusokuYMD = ninteichosaTokusokuYMD;
+    }
+
+    /**
+     * getNinteichosaTokusokuHoho
+     *
+     * @return ninteichosaTokusokuHoho
+     */
+    public Code getNinteichosaTokusokuHoho() {
+        return ninteichosaTokusokuHoho;
+    }
+
+    /**
+     * setNinteichosaTokusokuHoho
+     *
+     * @param ninteichosaTokusokuHoho ninteichosaTokusokuHoho
+     */
+    public void setNinteichosaTokusokuHoho(Code ninteichosaTokusokuHoho) {
+        this.ninteichosaTokusokuHoho = ninteichosaTokusokuHoho;
+    }
+
+    /**
+     * getNinteichosaTokusokuKaisu
+     *
+     * @return ninteichosaTokusokuKaisu
+     */
+    public int getNinteichosaTokusokuKaisu() {
+        return ninteichosaTokusokuKaisu;
+    }
+
+    /**
+     * setNinteichosaTokusokuKaisu
+     *
+     * @param ninteichosaTokusokuKaisu ninteichosaTokusokuKaisu
+     */
+    public void setNinteichosaTokusokuKaisu(int ninteichosaTokusokuKaisu) {
+        this.ninteichosaTokusokuKaisu = ninteichosaTokusokuKaisu;
+    }
+
+    /**
+     * getNinteichosaTokusokuMemo
+     *
+     * @return ninteichosaTokusokuMemo
+     */
+    public RString getNinteichosaTokusokuMemo() {
+        return ninteichosaTokusokuMemo;
+    }
+
+    /**
+     * setNinteichosaTokusokuMemo
+     *
+     * @param ninteichosaTokusokuMemo ninteichosaTokusokuMemo
+     */
+    public void setNinteichosaTokusokuMemo(RString ninteichosaTokusokuMemo) {
+        this.ninteichosaTokusokuMemo = ninteichosaTokusokuMemo;
+    }
+// </editor-fold>
+}

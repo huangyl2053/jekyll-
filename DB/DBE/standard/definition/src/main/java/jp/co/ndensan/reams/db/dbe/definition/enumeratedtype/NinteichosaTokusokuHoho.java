@@ -13,11 +13,24 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8178 城間篤人
  */
+//TODO n8178 城間篤人 項目に見直しが入る可能性があり 2014年2月末
 public enum NinteichosaTokusokuHoho {
 
+    /**
+     * 督促状郵送
+     */
     督促状郵送(new Code(new RString("0"))),
+    /**
+     * 督促状ＦＡＸ
+     */
     督促状ＦＡＸ(new Code(new RString("1"))),
+    /**
+     * 電話
+     */
     電話(new Code(new RString("2"))),
+    /**
+     * その他
+     */
     その他(new Code(new RString("3")));
     private final Code 督促方法コード;
 

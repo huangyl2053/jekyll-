@@ -9,10 +9,9 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.MobileDataShutsuryok
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaTokusokuHoho;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ChosainBangoCode;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItakusakiCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -22,19 +21,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class NinteichosaIraiJoho {
 
-    //TODO n8178 城間篤人 dbeとdbzにそれぞれあるけどなぜ? 2014年2月末
     private final ShinseishoKanriNo 申請書管理番号;
-    private final NinteichosaIraiRirekiNo 認定調査依頼履歴番号;
+    private final int 認定調査依頼履歴番号;
     private final NinteichosaItakusakiCode 認定調査委託先コード;
     private final ChosainBangoCode 調査員番号コード;
     private final NinteichosaIraiKubunCode 認定調査依頼区分コード;
     private final int 認定調査回数;
-    private final FlexibleDate 認定調査依頼年月日;
-    private final FlexibleDate 認定調査期限年月日;
-    private final FlexibleDate 認定調査出力年月日;
-    private final FlexibleDate 調査票等出力年月日;
+    private final RDate 認定調査依頼年月日;
+    private final RDate 認定調査期限年月日;
+    private final RDate 認定調査出力年月日;
+    private final RDate 調査票等出力年月日;
     private final MobileDataShutsuryoku モバイルデータ出力;
-    private final FlexibleDate 認定調査督促年月日;
+    private final RDate 認定調査督促年月日;
     private final NinteichosaTokusokuHoho 認定調査督促方法;
     private final int 認定調査督促回数;
     private final RString 認定調査督促メモ;
@@ -60,11 +58,11 @@ public class NinteichosaIraiJoho {
      * @throws NullPointerException
      * 申請書管理番号、認定調査委依頼履歴番号、認定調査委託先コード、調査員番号コード、認定調査委依頼区分コードにnullが渡されたとき
      */
-    public NinteichosaIraiJoho(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号,
+    public NinteichosaIraiJoho(ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号,
             NinteichosaItakusakiCode 認定調査委託先コード, ChosainBangoCode 調査員番号コード,
-            NinteichosaIraiKubunCode 認定調査依頼区分コード, int 認定調査回数, FlexibleDate 認定調査依頼年月日,
-            FlexibleDate 認定調査期限年月日, FlexibleDate 認定調査出力年月日, FlexibleDate 調査票等出力年月日,
-            MobileDataShutsuryoku モバイルデータ出力, FlexibleDate 認定調査督促年月日,
+            NinteichosaIraiKubunCode 認定調査依頼区分コード, int 認定調査回数, RDate 認定調査依頼年月日,
+            RDate 認定調査期限年月日, RDate 認定調査出力年月日, RDate 調査票等出力年月日,
+            MobileDataShutsuryoku モバイルデータ出力, RDate 認定調査督促年月日,
             NinteichosaTokusokuHoho 認定調査督促方法, int 認定調査督促回数, RString 認定調査督促メモ) throws NullPointerException {
         requireNonNull(申請書管理番号);
         requireNonNull(認定調査依頼履歴番号);
@@ -103,7 +101,7 @@ public class NinteichosaIraiJoho {
      *
      * @return 認定調査依頼履歴番号
      */
-    public NinteichosaIraiRirekiNo get認定調査依頼履歴番号() {
+    public int get認定調査依頼履歴番号() {
         return 認定調査依頼履歴番号;
     }
 
@@ -148,7 +146,7 @@ public class NinteichosaIraiJoho {
      *
      * @return 認定調査依頼年月日
      */
-    public FlexibleDate get認定調査依頼年月日() {
+    public RDate get認定調査依頼年月日() {
         return 認定調査依頼年月日;
     }
 
@@ -157,7 +155,7 @@ public class NinteichosaIraiJoho {
      *
      * @return 認定調査期限年月日
      */
-    public FlexibleDate get認定調査期限年月日() {
+    public RDate get認定調査期限年月日() {
         return 認定調査期限年月日;
     }
 
@@ -166,7 +164,7 @@ public class NinteichosaIraiJoho {
      *
      * @return 認定調査出力年月日
      */
-    public FlexibleDate get認定調査出力年月日() {
+    public RDate get認定調査出力年月日() {
         return 認定調査出力年月日;
     }
 
@@ -175,7 +173,7 @@ public class NinteichosaIraiJoho {
      *
      * @return 調査票等出力年月日
      */
-    public FlexibleDate get調査票等出力年月日() {
+    public RDate get調査票等出力年月日() {
         return 調査票等出力年月日;
     }
 
@@ -193,7 +191,7 @@ public class NinteichosaIraiJoho {
      *
      * @return 出力済みならtrue
      */
-    public boolean is出力済み() {
+    public boolean isモバイルデータ出力済み() {
         return モバイルデータ出力.is出力済();
     }
 
@@ -202,7 +200,7 @@ public class NinteichosaIraiJoho {
      *
      * @return 認定調査督促年月日
      */
-    public FlexibleDate get認定調査督促年月日() {
+    public RDate get認定調査督促年月日() {
         return 認定調査督促年月日;
     }
 

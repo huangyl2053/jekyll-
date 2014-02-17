@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbe.persistence.basic;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.IUpdatable;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
 /**
  * 認定申請情報テーブルから情報を取得するクラスのインターフェースです。
@@ -37,7 +37,7 @@ public interface INinteiShinseiJohoDac extends IUpdatable<DbT5001NinteiShinseiJo
      * @return 認定申請情報エンティティのList
      */
     @Transaction
-    List<DbT5001NinteiShinseiJohoEntity> selectAllBy認定申請年月日(ShichosonCode 市町村コード, Range<FlexibleDate> 認定申請年月日範囲);
+    List<DbT5001NinteiShinseiJohoEntity> selectAllBy認定申請年月日(ShichosonCode 市町村コード, Range<RDate> 認定申請年月日範囲);
 
     /**
      * 市町村コードと取下げ年月日の範囲を指定し、指定された取下げ年月日の範囲で取下げされている認定申請情報をすべて取得します。
@@ -47,5 +47,5 @@ public interface INinteiShinseiJohoDac extends IUpdatable<DbT5001NinteiShinseiJo
      * @return 認定申請情報エンティティのList
      */
     @Transaction
-    List<DbT5001NinteiShinseiJohoEntity> selectAllBy取下げ年月日(ShichosonCode 市町村コード, Range<FlexibleDate> 取下げ年月日範囲);
+    List<DbT5001NinteiShinseiJohoEntity> selectAllBy取下げ年月日(ShichosonCode 市町村コード, Range<RDate> 取下げ年月日範囲);
 }

@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8178 城間篤人
  */
+//TODO n8178 城間篤人 項目に見直しが入る可能性があり 2014年2月末
 public enum NinteichosaIraiKubunCode {
 
     /**
