@@ -106,7 +106,7 @@ public class NinteichosaIraiTaishoshaFinder {
             return Collections.EMPTY_LIST;
         }
 
-        return createList(要介護認定進捗情報EntityList);
+        return create認定調査依頼対象者List(要介護認定進捗情報EntityList);
     }
 
     /**
@@ -120,21 +120,18 @@ public class NinteichosaIraiTaishoshaFinder {
             return Collections.EMPTY_LIST;
         }
 
-        return createList(要介護認定進捗情報EntityList);
+        return create認定調査依頼対象者List(要介護認定進捗情報EntityList);
     }
 
-    private List<NinteichosaIraiTaishosha> createList(List<DbT5005NinteiShinchokuJohoEntity> 要介護認定進捗情報EntityList) throws NullPointerException {
+    private List<NinteichosaIraiTaishosha> create認定調査依頼対象者List(List<DbT5005NinteiShinchokuJohoEntity> 要介護認定進捗情報EntityList) throws NullPointerException {
         List<NinteichosaIraiTaishosha> list = new ArrayList<>();
         DbT7010NinteichosaItakusakiJohoEntity 認定委託先情報Entity;
         KaigoJigyoshaEntity 介護事業者Entity;
         ChosainJohoEntity 調査員情報Entity;
-        DbT5001NinteiShinseiJohoEntity 認定申請情報Entity;
-        KojinEntity 個人Enity;
 
         for (DbT5005NinteiShinchokuJohoEntity entity : 要介護認定進捗情報EntityList) {
-            認定申請情報Entity = shinseiJohoDac.select(entity.getShinseishoKanriNo());
-            個人Enity = kojinDac.select最新(認定申請情報Entity.getShichosonCode().getValue());
-
+            DbT5001NinteiShinseiJohoEntity 認定申請情報Entity = shinseiJohoDac.select(entity.getShinseishoKanriNo());
+            KojinEntity 個人Enity = kojinDac.select最新(認定申請情報Entity.getShichosonCode().getValue());
             DbT5006NinteichosaIraiJohoEntity 認定調査依頼情報Entity = iraiJohoDac.select(
                     認定申請情報Entity.getShinseishoKanriNo().getColumnValue(),
                     認定申請情報Entity.getNinteichosaIraiRirekiNo());
@@ -152,12 +149,8 @@ public class NinteichosaIraiTaishoshaFinder {
                 調査員情報Entity = null;
             }
 
-            list.add(NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(
-                    認定申請情報Entity,
-                    個人Enity,
-                    認定委託先情報Entity,
-                    介護事業者Entity,
-                    調査員情報Entity));
+            list.add(NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(認定申請情報Entity, 個人Enity,
+                    認定委託先情報Entity, 介護事業者Entity, 調査員情報Entity));
         }
         return list;
     }
