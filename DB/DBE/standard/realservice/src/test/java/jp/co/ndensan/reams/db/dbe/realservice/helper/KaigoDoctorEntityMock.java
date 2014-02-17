@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoDoctorEntity;
 import jp.co.ndensan.reams.ur.urz.entity.DoctorEntity;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.spy;
 
@@ -39,7 +40,7 @@ public class KaigoDoctorEntityMock {
     private static DoctorEntity createDoctorEntity() {
         DoctorEntity entity = new DoctorEntity();
         entity.setIshiShikibetsuCode(new RString("医師識別番号"));
-        entity.setDoctorName(new RString("医師氏名"));
+        entity.setDoctorName(new AtenaMeisho(new RString("医師氏名")));
         entity.setIryokikanCode(new RString("所属医療機関コード"));
         entity.setShinryokaCode(new RString("所属診療科"));
         entity.setIshiKbn(new RString("医師区分"));

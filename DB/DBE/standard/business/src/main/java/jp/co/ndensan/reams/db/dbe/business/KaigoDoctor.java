@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.IJusho;
 import jp.co.ndensan.reams.ur.urz.business.IYubinNo;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 
 /**
  * 介護医師の情報を扱うクラスです。
@@ -80,7 +81,7 @@ public class KaigoDoctor {
      *
      * @return 医師氏名
      */
-    public RString get医師氏名() {
+    public AtenaMeisho get医師氏名() {
         return 医師.get医師氏名();
     }
 
