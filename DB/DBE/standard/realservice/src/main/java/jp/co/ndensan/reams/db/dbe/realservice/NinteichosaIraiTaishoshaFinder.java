@@ -72,7 +72,7 @@ public class NinteichosaIraiTaishoshaFinder {
      * @param kaigoJigyoshaDac 介護事業者DAC
      * @param chosainJohoDac 調査員情報DAC
      */
-    public NinteichosaIraiTaishoshaFinder(
+    NinteichosaIraiTaishoshaFinder(
             INinteiShinchokuJohoDac shinchokuJohoDac,
             INinteiShinseiJohoDac shinseiJohoDac,
             INinteichosaItakusakiDac itakusakiDac,
