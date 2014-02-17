@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
- * 認定調査依頼情報のエンティティクラスです
+ * 認定調査依頼情報のエンティティクラスです。
  *
  * @author N8187 久保田 英男
  */

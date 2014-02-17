@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * 認定調査依頼履歴番号を表すクラスです
+ * 認定調査依頼履歴番号を表すクラスです。
  *
  * @author N8187 久保田 英男
  */

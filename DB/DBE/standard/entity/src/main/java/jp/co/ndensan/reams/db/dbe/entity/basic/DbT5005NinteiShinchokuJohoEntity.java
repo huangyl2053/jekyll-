@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
- * 要介護認定進捗情報のエンティティクラスです
+ * 要介護認定進捗情報のエンティティクラスです。
  *
  * @author N8187 久保田 英男
  */

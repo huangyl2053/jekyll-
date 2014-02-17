@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 要介護認定進捗情報を管理するインターフェースです
+ * 要介護認定進捗情報を管理するインターフェースです。
  *
  * @author N8187 久保田 英男
  */

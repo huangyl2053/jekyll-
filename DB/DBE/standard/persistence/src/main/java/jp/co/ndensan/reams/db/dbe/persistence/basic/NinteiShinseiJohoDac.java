@@ -13,7 +13,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 
 /**
- * 要介護認定申請情報を管理するクラスです
+ * 要介護認定申請情報を管理するクラスです。
  *
  * @author N8187 久保田 英男
  */

@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.ur.urz.persistence.basic.IKojinDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
 
 /**
- * 認定調査依頼対象者情報を管理するクラスです
+ * 認定調査依頼対象者情報を管理するクラスです。
  *
  * @author N8187 久保田 英男
  */
@@ -47,7 +47,7 @@ public class NinteichosaIraiTaishoshaFinder {
     private final IChosainJohoDac chosainJohoDac;
 
     /**
-     * コンストラクタクラスです
+     * コンストラクタです。
      *
      */
     public NinteichosaIraiTaishoshaFinder() {
@@ -62,12 +62,13 @@ public class NinteichosaIraiTaishoshaFinder {
     }
 
     /**
-     * テスト用のコンストラクタクラスです
+     * テスト用のコンストラクタです。
      *
      * @param shinchokuJohoDac 進捗情報DAC
      * @param shinseiJohoDac 申請情報DAC
      * @param itakusakiDac 委託先DAC
      * @param iraiJohoDac 依頼情報DAC
+     * @param iraiTaishoshaDac 認定調査依頼対象者を取得するDAC
      * @param kojinDac 個人DAC
      * @param kaigoJigyoshaDac 介護事業者DAC
      * @param chosainJohoDac 調査員情報DAC
@@ -92,7 +93,7 @@ public class NinteichosaIraiTaishoshaFinder {
     }
 
     /**
-     * 市町村コードを指定して、認定調査依頼が未完了の認定調査依頼対象者を取得します
+     * 市町村コードを指定して、認定調査依頼が未完了の認定調査依頼対象者を取得します。
      *
      * @param 市町村コード 市町村コード
      * @return NinteichosaIraiTaishoshaのList
@@ -110,7 +111,7 @@ public class NinteichosaIraiTaishoshaFinder {
     }
 
     /**
-     * 認定調査依頼が未完了の認定調査依頼対象者を取得します
+     * 認定調査依頼が未完了の認定調査依頼対象者を取得します。
      *
      * @return NinteichosaIraiTaishoshaのList
      */

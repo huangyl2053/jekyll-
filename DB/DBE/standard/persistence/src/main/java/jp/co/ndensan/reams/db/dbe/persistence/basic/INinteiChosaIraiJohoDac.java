@@ -10,14 +10,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 認定調査依頼情報を管理するインターフェースです
+ * 認定調査依頼情報を管理するインターフェースです。
  *
  * @author N8187 久保田 英男
  */
 public interface INinteiChosaIraiJohoDac {
 
     /**
-     * 申請書管理番号と認定調査依頼履歴番号から認定調査依頼情報を取得する。
+     * 申請書管理番号と認定調査依頼履歴番号から、認定調査依頼情報を取得する。
      *
      * @param 申請書管理番号 申請書管理番号
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号

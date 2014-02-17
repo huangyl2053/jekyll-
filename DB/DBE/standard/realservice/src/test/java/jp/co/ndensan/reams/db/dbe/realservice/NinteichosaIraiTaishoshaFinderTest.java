@@ -36,7 +36,7 @@ import static org.mockito.Mockito.*;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 認定調査依頼対象者情報を管理するクラスのテストです
+ * 認定調査依頼対象者情報を管理するクラスのテストです。
  *
  * @author N8187 久保田 英男
  */

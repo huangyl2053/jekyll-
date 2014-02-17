@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
 
 /**
- * 認定調査依頼情報を管理するクラスです
+ * 認定調査依頼情報を管理するクラスです。
  *
  * @author N8187 久保田 英男
  */

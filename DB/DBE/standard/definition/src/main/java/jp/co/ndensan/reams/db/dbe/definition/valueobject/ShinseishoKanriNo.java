@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * 申請書管理番号を表すクラスです
+ * 申請書管理番号を表すクラスです。
  *
  * @author N8187 久保田 英男
  */

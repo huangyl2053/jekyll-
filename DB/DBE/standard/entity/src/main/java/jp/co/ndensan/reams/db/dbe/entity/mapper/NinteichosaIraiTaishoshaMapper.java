@@ -30,27 +30,27 @@ import jp.co.ndensan.reams.ur.urz.business.JushoEditor;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushoEditPattern;
 
 /**
- * 認定調査対象者のビジネスクラスとエンティティの変換を行うクラスです
+ * 認定調査対象者のビジネスクラスとエンティティの変換を行うクラスです。
  *
  * @author N8187 久保田 英男
  */
 public final class NinteichosaIraiTaishoshaMapper {
 
     /**
-     * インスタンス化を防ぐためのプライベートコンストラクタです
+     * インスタンス化を防ぐためのプライベートコンストラクタです。
      */
     private NinteichosaIraiTaishoshaMapper() {
     }
 
     /**
-     * 各エンティティから認定調査対象者への対応付けを行います
+     * 各エンティティから認定調査依頼対象者への対応付けを行います。
      *
      * @param 要介護認定申請情報Entity 要介護認定申請情報Entity
      * @param 個人Entity 個人Entity
      * @param 認定調査委託先Entity 認定調査委託先Entity
      * @param 介護事業者Entity 介護事業者Entity
      * @param 調査員情報Entity 調査員情報Entity
-     * @return 認定調査対象者
+     * @return 認定調査依頼対象者
      * @throws NullPointerException
      * {@code 要介護認定申請情報Entity}がnullの場合、または{@code 個人Entity}がnullの場合
      */

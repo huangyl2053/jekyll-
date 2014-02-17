@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.*;
 
 /**
- * KojinEntityを生成するためのMockクラスです
+ * KojinEntityを生成するためのMockクラスです。
  *
  * @author N8187 久保田 英男
  */

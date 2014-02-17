@@ -9,14 +9,14 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 要介護認定申請情報を管理するインターフェースです
+ * 要介護認定申請情報を管理するインターフェースです。
  *
  * @author N8187 久保田 英男
  */
 public interface INinteiShinseiJohoDac {
 
     /**
-     * 申請書管理番号から要介護認定申請情報を取得する。
+     * 申請書管理番号から、要介護認定申請情報を取得する。
      *
      * @param 申請書管理番号 申請書管理番号
      * @return 要介護認定申請情報データ
