@@ -126,33 +126,55 @@ public class NinteichosaIraiTaishoshaFinder {
 
     private List<NinteichosaIraiTaishosha> create認定調査依頼対象者List(List<DbT5005NinteiShinchokuJohoEntity> 要介護認定進捗情報EntityList) throws NullPointerException {
         List<NinteichosaIraiTaishosha> list = new ArrayList<>();
-        DbT7010NinteichosaItakusakiJohoEntity 認定委託先情報Entity;
-        KaigoJigyoshaEntity 介護事業者Entity;
-        ChosainJohoEntity 調査員情報Entity;
 
         for (DbT5005NinteiShinchokuJohoEntity entity : 要介護認定進捗情報EntityList) {
+
             DbT5001NinteiShinseiJohoEntity 認定申請情報Entity = shinseiJohoDac.select(entity.getShinseishoKanriNo());
             KojinEntity 個人Entity = kojinDac.select最新(認定申請情報Entity.getShichosonCode().getValue());
             DbT5006NinteichosaIraiJohoEntity 認定調査依頼情報Entity = iraiJohoDac.select(
                     認定申請情報Entity.getShinseishoKanriNo().getColumnValue(),
                     認定申請情報Entity.getNinteichosaIraiRirekiNo());
+            DbT7010NinteichosaItakusakiJohoEntity 認定委託先情報Entity = create認定調査委託先(認定申請情報Entity, 認定調査依頼情報Entity);
+            KaigoJigyoshaEntity 介護事業者Entity = create介護事業者(認定調査依頼情報Entity);
+            ChosainJohoEntity 調査員情報Entity = create調査員情報(認定申請情報Entity, 認定調査依頼情報Entity);
 
-            if (認定調査依頼情報Entity != null) {
-                認定委託先情報Entity = itakusakiDac.select(認定申請情報Entity.getShichosonCode().getValue(),
-                        new KaigoJigyoshaNo(認定調査依頼情報Entity.get認定調査委託先コード()), true);
-                介護事業者Entity = kaigoJigyoshaDac.select特定の事業者番号の事業者(認定調査依頼情報Entity.get認定調査委託先コード()).get(0);
-                調査員情報Entity = chosainJohoDac.selectByAllKey(認定申請情報Entity.getShichosonCode().getValue(),
-                        認定調査依頼情報Entity.get認定調査委託先コード(),
-                        認定調査依頼情報Entity.get調査員番号コード());
-            } else {
-                認定委託先情報Entity = null;
-                介護事業者Entity = null;
-                調査員情報Entity = null;
-            }
-
-            list.add(NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(認定申請情報Entity, 個人Entity,
+            list.add(NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(
+                    認定申請情報Entity, 個人Entity,
                     認定委託先情報Entity, 介護事業者Entity, 調査員情報Entity));
         }
         return list;
+    }
+
+    private DbT7010NinteichosaItakusakiJohoEntity create認定調査委託先(
+            DbT5001NinteiShinseiJohoEntity shinseiJohoEntity,
+            DbT5006NinteichosaIraiJohoEntity chosaIraiJohoEntity) {
+        boolean isUncreatable = isNull(shinseiJohoEntity) || isNull(chosaIraiJohoEntity);
+        return isUncreatable ? null
+                : itakusakiDac.select(
+                shinseiJohoEntity.getShichosonCode().getValue(),
+                new KaigoJigyoshaNo(chosaIraiJohoEntity.get認定調査委託先コード()),
+                true);
+    }
+
+    private KaigoJigyoshaEntity create介護事業者(
+            DbT5006NinteichosaIraiJohoEntity chosaIraiJohoEntity) {
+        return isNull(chosaIraiJohoEntity) ? null
+                : kaigoJigyoshaDac.select特定の事業者番号の事業者(
+                chosaIraiJohoEntity.get認定調査委託先コード()).get(0);
+    }
+
+    private ChosainJohoEntity create調査員情報(
+            DbT5001NinteiShinseiJohoEntity shinseiJohoEntity,
+            DbT5006NinteichosaIraiJohoEntity chosaIraiJohoEntity) {
+        boolean isUncreatable = isNull(shinseiJohoEntity) || isNull(chosaIraiJohoEntity);
+        return isUncreatable ? null
+                : chosainJohoDac.selectByAllKey(
+                shinseiJohoEntity.getShichosonCode().getValue(),
+                chosaIraiJohoEntity.get認定調査委託先コード(),
+                chosaIraiJohoEntity.get調査員番号コード());
+    }
+
+    private static <T> boolean isNull(T object) {
+        return object == null;
     }
 }
