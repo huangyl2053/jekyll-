@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.realservice;
 
-import jp.co.ndensan.reams.db.dbe.realservice.NinteichosaItakusakiManager;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -57,15 +56,11 @@ public class NinteichosaItakusakiManagerTest {
         entity = mock(DbT7010NinteichosaItakusakiJohoEntity.class);
         hatsubanentity = mock(DbT5020HatsubanKanriJohoEntity.class);
         list = new ArrayList<>();
-//        entity.set市町村コード(new RString("20203"));
         when(entity.get市町村コード()).thenReturn(new RString("20203"));
         kaigojigyoshaNo = new KaigoJigyoshaNo(new RString("0000000001"));
-//        entity.set介護事業者番号(kaigojigyoshaNo);
         when(entity.get介護事業者番号()).thenReturn(kaigojigyoshaNo);
         jigyoshaNo = new JigyoshaNo(new RString("2020300001"));
-//        entity.set事業者番号(jigyoshaNo);
         when(entity.get事業者番号()).thenReturn(jigyoshaNo);
-//        entity.set介護事業者状況(true);
         when(entity.is介護事業者状況()).thenReturn(true);
         entity.set割付地区(new RString("a"));
         entity.set割付定員(10);
@@ -80,15 +75,11 @@ public class NinteichosaItakusakiManagerTest {
         when(ninteichosaItakusakiDac.selectAll(null)).thenReturn(emptyList);
         when(ninteichosaItakusakiDac.selectAll(new RString("20203"), true)).thenReturn(list);
 
-//        entity.set市町村コード(new RString("20203"));
         when(entity.get市町村コード()).thenReturn(new RString("20203"));
         kaigojigyoshaNo = new KaigoJigyoshaNo(new RString("0000000002"));
-//        entity.set介護事業者番号(kaigojigyoshaNo);
         when(entity.get介護事業者番号()).thenReturn(kaigojigyoshaNo);
         jigyoshaNo = new JigyoshaNo(new RString("2020300002"));
-//        entity.set事業者番号(jigyoshaNo);
         when(entity.get事業者番号()).thenReturn(jigyoshaNo);
-//        entity.set介護事業者状況(false);
         when(entity.is介護事業者状況()).thenReturn(false);
         entity.set割付地区(new RString("c"));
         entity.set割付定員(10);
