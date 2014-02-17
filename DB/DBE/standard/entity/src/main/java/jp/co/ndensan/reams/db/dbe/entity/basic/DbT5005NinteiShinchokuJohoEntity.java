@@ -259,4 +259,157 @@ public class DbT5005NinteiShinchokuJohoEntity implements IDbAccessable {
     public FlexibleDate getCenterSoshinYMD() {
         return centerSoshinYMD;
     }
+
+    /**
+     * 申請書管理番号を設定します。
+     *
+     * @param shinseishoKanriNo 申請書管理番号
+     */
+    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
+        this.shinseishoKanriNo = shinseishoKanriNo;
+    }
+
+    /**
+     * 認定申請情報登録年月日を設定します。
+     *
+     * @param ninteiShinseiJohoTorokuYMD 認定申請情報登録年月日
+     */
+    public void setNinteiShinseiJohoTorokuYMD(FlexibleDate ninteiShinseiJohoTorokuYMD) {
+        this.ninteiShinseiJohoTorokuYMD = ninteiShinseiJohoTorokuYMD;
+    }
+
+    /**
+     * 認定延期通知発行に対する同意有無を設定します。
+     *
+     * @param enkitsuchiDoiUmuKubun 認定延期通知発行に対する同意有無
+     */
+    public void setEnkitsuchiDoiUmuKubun(boolean enkitsuchiDoiUmuKubun) {
+        this.enkitsuchiDoiUmuKubun = enkitsuchiDoiUmuKubun;
+    }
+
+    /**
+     * 認定延期通知発行年月日を設定します。
+     *
+     * @param enkitsuchiHakkoYMD 認定延期通知発行年月日
+     */
+    public void setEnkitsuchiHakkoYMD(FlexibleDate enkitsuchiHakkoYMD) {
+        this.enkitsuchiHakkoYMD = enkitsuchiHakkoYMD;
+    }
+
+    /**
+     * 認定延期通知発行回数を設定します。
+     *
+     * @param enkitsuchiHakkoKaisu 認定延期通知発行回数
+     */
+    public void setEnkitsuchiHakkoKaisu(int enkitsuchiHakkoKaisu) {
+        this.enkitsuchiHakkoKaisu = enkitsuchiHakkoKaisu;
+    }
+
+    /**
+     * 要介護認定延期理由を設定します。
+     *
+     * @param ninteiEnkiRuyu 要介護認定延期理由
+     */
+    public void setNinteiEnkiRuyu(RString ninteiEnkiRuyu) {
+        this.ninteiEnkiRuyu = ninteiEnkiRuyu;
+    }
+
+    /**
+     * 要介護認定一次判定情報抽出年月日を設定します。
+     *
+     * @param ichijihanteiChushutsuYMD 要介護認定一次判定情報抽出年月日
+     */
+    public void setIchijihanteiChushutsuYMD(FlexibleDate ichijihanteiChushutsuYMD) {
+        this.ichijihanteiChushutsuYMD = ichijihanteiChushutsuYMD;
+    }
+
+    /**
+     * 依頼情報データ送信年月日を設定します。
+     *
+     * @param iraiJohoSoshinYMD 依頼情報データ送信年月日
+     */
+    public void setIraiJohoSoshinYMD(FlexibleDate iraiJohoSoshinYMD) {
+        this.iraiJohoSoshinYMD = iraiJohoSoshinYMD;
+    }
+
+    /**
+     * 認定調査依頼完了年月日を設定します。
+     *
+     * @param ninteichosaIraiKanryoYMD 認定調査依頼完了年月日
+     */
+    public void setNinteichosaIraiKanryoYMD(FlexibleDate ninteichosaIraiKanryoYMD) {
+        this.ninteichosaIraiKanryoYMD = ninteichosaIraiKanryoYMD;
+    }
+
+    /**
+     * 認定調査完了年月日を設定します。
+     *
+     * @param ninteichosaKanryoYMD 認定調査完了年月日
+     */
+    public void setNinteichosaKanryoYMD(FlexibleDate ninteichosaKanryoYMD) {
+        this.ninteichosaKanryoYMD = ninteichosaKanryoYMD;
+    }
+
+    /**
+     * 主治医意見書作成依頼完了年月日を設定します。
+     *
+     * @param ikenshoSakuseiIraiKanryoYMD 主治医意見書作成依頼完了年月日
+     */
+    public void setIkenshoSakuseiIraiKanryoYMD(FlexibleDate ikenshoSakuseiIraiKanryoYMD) {
+        this.ikenshoSakuseiIraiKanryoYMD = ikenshoSakuseiIraiKanryoYMD;
+    }
+
+    /**
+     * 主治医意見書登録完了年月日を設定します。
+     *
+     * @param ikenshoTorokuKanryoYMD 主治医意見書登録完了年月日
+     */
+    public void setIkenshoTorokuKanryoYMD(FlexibleDate ikenshoTorokuKanryoYMD) {
+        this.ikenshoTorokuKanryoYMD = ikenshoTorokuKanryoYMD;
+    }
+
+    /**
+     * 要介護認定一次判定完了年月日を設定します。
+     *
+     * @param ichijiHanteiKanryoYMD 要介護認定一次判定完了年月日
+     */
+    public void setIchijiHanteiKanryoYMD(FlexibleDate ichijiHanteiKanryoYMD) {
+        this.ichijiHanteiKanryoYMD = ichijiHanteiKanryoYMD;
+    }
+
+    /**
+     * 要介護認定1.5次判定完了年月日を設定します。
+     *
+     * @param ichiGoHanteiKanryoYMD 要介護認定1.5次判定完了年月日
+     */
+    public void setIchiGoHanteiKanryoYMD(FlexibleDate ichiGoHanteiKanryoYMD) {
+        this.ichiGoHanteiKanryoYMD = ichiGoHanteiKanryoYMD;
+    }
+
+    /**
+     * 認定審査会割当完了年月日を設定します。
+     *
+     * @param ninteiShinsakaiWariateKanryoYMD 認定審査会割当完了年月日
+     */
+    public void setNinteiShinsakaiWariateKanryoYMD(FlexibleDate ninteiShinsakaiWariateKanryoYMD) {
+        this.ninteiShinsakaiWariateKanryoYMD = ninteiShinsakaiWariateKanryoYMD;
+    }
+
+    /**
+     * 認定審査会完了年月日を設定します。
+     *
+     * @param ninteiShinsakaiKanryoYMD 認定審査会完了年月日
+     */
+    public void setNinteiShinsakaiKanryoYMD(FlexibleDate ninteiShinsakaiKanryoYMD) {
+        this.ninteiShinsakaiKanryoYMD = ninteiShinsakaiKanryoYMD;
+    }
+
+    /**
+     * センター送信年月日を設定します。
+     *
+     * @param centerSoshinYMD センター送信年月日
+     */
+    public void setCenterSoshinYMD(FlexibleDate centerSoshinYMD) {
+        this.centerSoshinYMD = centerSoshinYMD;
+    }
 }

@@ -366,4 +366,229 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     public boolean isShinsaKeizokuKubun() {
         return shinsaKeizokuKubun;
     }
+
+    /**
+     * 申請書管理番号を設定します。
+     *
+     * @param shinseishoKanriNo 申請書管理番号
+     */
+    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
+        this.shinseishoKanriNo = shinseishoKanriNo;
+    }
+
+    /**
+     * 市町村コードを設定します。
+     *
+     * @param shichosonCode 市町村コード
+     */
+    public void setShichosonCode(ShichosonCode shichosonCode) {
+        this.shichosonCode = shichosonCode;
+    }
+
+    /**
+     * 支所コードを設定します。
+     *
+     * @param shishoCode 支所コード
+     */
+    public void setShishoCode(RString shishoCode) {
+        this.shishoCode = shishoCode;
+    }
+
+    /**
+     * 被保険者番号を設定します。
+     *
+     * @param hihokenshaNo 被保険者番号
+     */
+    public void setHihokenshaNo(KaigoHihokenshaNumber hihokenshaNo) {
+        this.hihokenshaNo = hihokenshaNo;
+    }
+
+    /**
+     * 識別コードを設定します。
+     *
+     * @param shikibetsuCode 識別コード
+     */
+    public void setShikibetsuCode(IShikibetsuCode shikibetsuCode) {
+        this.shikibetsuCode = shikibetsuCode;
+    }
+
+    /**
+     * 認定申請年月日を設定します。
+     *
+     * @param ninteiShinseiYMD 認定申請年月日
+     */
+    public void setNinteiShinseiYMD(FlexibleDate ninteiShinseiYMD) {
+        this.ninteiShinseiYMD = ninteiShinseiYMD;
+    }
+
+    /**
+     * 認定申請枝番コードを設定します。
+     *
+     * @param ninteiShinseiEdabanCode 認定申請枝番コード
+     */
+    public void setNinteiShinseiEdabanCode(RString ninteiShinseiEdabanCode) {
+        this.ninteiShinseiEdabanCode = ninteiShinseiEdabanCode;
+    }
+
+    /**
+     * 認定申請区分（申請時）コードを設定します。
+     *
+     * @param ninteiShinseiShinseijiKubunCode 認定申請区分（申請時）コード
+     */
+    public void setNinteiShinseiShinseijiKubunCode(RString ninteiShinseiShinseijiKubunCode) {
+        this.ninteiShinseiShinseijiKubunCode = ninteiShinseiShinseijiKubunCode;
+    }
+
+    /**
+     * 認定申請区分（法令）コードを設定します。
+     *
+     * @param ninteiShinseiHoreiKubunCode 認定申請区分（法令）コード
+     */
+    public void setNinteiShinseiHoreiKubunCode(RString ninteiShinseiHoreiKubunCode) {
+        this.ninteiShinseiHoreiKubunCode = ninteiShinseiHoreiKubunCode;
+    }
+
+    /**
+     * 認定申請有効区分を設定します。
+     *
+     * @param ninteiShinseiYukoKubunCode 認定申請有効区分
+     */
+    public void setNinteiShinseiYukoKubunCode(RString ninteiShinseiYukoKubunCode) {
+        this.ninteiShinseiYukoKubunCode = ninteiShinseiYukoKubunCode;
+    }
+
+    /**
+     * 要介護申請・要支援申請の区分を設定します。
+     *
+     * @param shienShinseiKubun 要介護申請・要支援申請の区分
+     */
+    public void setShienShinseiKubun(RString shienShinseiKubun) {
+        this.shienShinseiKubun = shienShinseiKubun;
+    }
+
+    /**
+     * 認定申請理由を設定します。
+     *
+     * @param shinseiRiyu 認定申請理由
+     */
+    public void setShinseiRiyu(RString shinseiRiyu) {
+        this.shinseiRiyu = shinseiRiyu;
+    }
+
+    /**
+     * 前回要介護状態区分コードを設定します。
+     *
+     * @param zenYokaigoKubunCode 前回要介護状態区分コード
+     */
+    public void setZenYokaigoKubunCode(RString zenYokaigoKubunCode) {
+        this.zenYokaigoKubunCode = zenYokaigoKubunCode;
+    }
+
+    /**
+     * 前回認定有効期間を設定します。
+     *
+     * @param zenYukoKikan 前回認定有効期間
+     */
+    public void setZenYukoKikan(int zenYukoKikan) {
+        this.zenYukoKikan = zenYukoKikan;
+    }
+
+    /**
+     * 情報提供への同意有無を設定します。
+     *
+     * @param johoteikyoDouiUmuKubun 情報提供への同意有無
+     */
+    public void setJohoteikyoDouiUmuKubun(boolean johoteikyoDouiUmuKubun) {
+        this.johoteikyoDouiUmuKubun = johoteikyoDouiUmuKubun;
+    }
+
+    /**
+     * 認定調査依頼履歴番号を設定します。
+     *
+     * @param ninteichosaIraiRirekiNo 認定調査依頼履歴番号
+     */
+    public void setNinteichosaIraiRirekiNo(NinteiChosaIraiRirekiNo ninteichosaIraiRirekiNo) {
+        this.ninteichosaIraiRirekiNo = ninteichosaIraiRirekiNo;
+    }
+
+    /**
+     * 主治医意見書作成依頼履歴番号を設定します。
+     *
+     * @param ikenshoIraiRirekiNo 主治医意見書作成依頼履歴番号
+     */
+    public void setIkenshoIraiRirekiNo(RString ikenshoIraiRirekiNo) {
+        this.ikenshoIraiRirekiNo = ikenshoIraiRirekiNo;
+    }
+
+    /**
+     * みなし要介護区分コードを設定します。
+     *
+     * @param minashiCode みなし要介護区分コード
+     */
+    public void setMinashiCode(RString minashiCode) {
+        this.minashiCode = minashiCode;
+    }
+
+    /**
+     * 認定延期通知発行に対する同意有無を設定します。
+     *
+     * @param enkitsuchiDoiUmuKubun 認定延期通知発行に対する同意有無
+     */
+    public void setEnkitsuchiDoiUmuKubun(boolean enkitsuchiDoiUmuKubun) {
+        this.enkitsuchiDoiUmuKubun = enkitsuchiDoiUmuKubun;
+    }
+
+    /**
+     * 施設入所の有無を設定します。
+     *
+     * @param shisetsuNyushoUmuKubun 施設入所の有無
+     */
+    public void setShisetsuNyushoUmuKubun(boolean shisetsuNyushoUmuKubun) {
+        this.shisetsuNyushoUmuKubun = shisetsuNyushoUmuKubun;
+    }
+
+    /**
+     * 市町村連絡事項を設定します。
+     *
+     * @param sichosonRenrakuJiko 市町村連絡事項
+     */
+    public void setSichosonRenrakuJiko(RString sichosonRenrakuJiko) {
+        this.sichosonRenrakuJiko = sichosonRenrakuJiko;
+    }
+
+    /**
+     * 取下げ区分コードを設定します。
+     *
+     * @param torisageKubunCode 取下げ区分コード
+     */
+    public void setTorisageKubunCode(RString torisageKubunCode) {
+        this.torisageKubunCode = torisageKubunCode;
+    }
+
+    /**
+     * 取下げ理由を設定します。
+     *
+     * @param torisageRiyu 取下げ理由
+     */
+    public void setTorisageRiyu(RString torisageRiyu) {
+        this.torisageRiyu = torisageRiyu;
+    }
+
+    /**
+     * 取下げ年月日を設定します。
+     *
+     * @param torisageYMD 取下げ年月日
+     */
+    public void setTorisageYMD(FlexibleDate torisageYMD) {
+        this.torisageYMD = torisageYMD;
+    }
+
+    /**
+     * 審査継続区分を設定します。
+     *
+     * @param shinsaKeizokuKubun 審査継続区分
+     */
+    public void setShinsaKeizokuKubun(boolean shinsaKeizokuKubun) {
+        this.shinsaKeizokuKubun = shinsaKeizokuKubun;
+    }
 }
