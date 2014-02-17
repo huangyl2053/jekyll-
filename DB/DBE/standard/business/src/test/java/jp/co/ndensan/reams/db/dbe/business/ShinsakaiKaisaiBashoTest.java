@@ -56,5 +56,19 @@ public class ShinsakaiKaisaiBashoTest extends TestBase {
                     開催場所地区コード, 開催場所住所, 開催場所電話番号, 開催場所状況);
 
         }
+
+        @Test(expected = NullPointerException.class)
+        public void 開催場所名称にnullが渡されたとき_NullPointerExceptionが発生する() {
+            sut = new ShinsakaiKaisaiBasho(開催場所コード, null,
+                    開催場所地区コード, 開催場所住所, 開催場所電話番号, 開催場所状況);
+
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 開催場所状況にnullが渡されたとき_NullPointerExceptionが発生する() {
+            sut = new ShinsakaiKaisaiBasho(開催場所コード, 開催場所名称,
+                    開催場所地区コード, 開催場所住所, 開催場所電話番号, null);
+
+        }
     }
 }

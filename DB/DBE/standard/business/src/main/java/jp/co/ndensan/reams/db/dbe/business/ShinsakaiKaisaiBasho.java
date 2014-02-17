@@ -42,6 +42,8 @@ public class ShinsakaiKaisaiBasho {
             RString 開催場所電話番号,
             ShinsakaiKaisaiBashoJokyo 開催場所状況) {
         Objects.requireNonNull(開催場所コード, Messages.E00003.replace("開催場所コード", "審査会開催場所").getMessage());
+        Objects.requireNonNull(開催場所名称, Messages.E00003.replace("開催場所名称", "審査会開催場所").getMessage());
+        Objects.requireNonNull(開催場所状況, Messages.E00003.replace("開催場所状況", "審査会開催場所").getMessage());
         this.開催場所コード = 開催場所コード;
         this.開催場所名称 = 開催場所名称;
         this.開催場所地区コード = 開催場所地区コード;
