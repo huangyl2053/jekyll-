@@ -170,18 +170,10 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
 
     private static List<DbT5005NinteiShinchokuJohoEntity> create認定進捗情報市町村指定なしResult() {
         List<DbT5005NinteiShinchokuJohoEntity> resultList = new ArrayList<>();
-        List<RString> list申請書管理番号 = new ArrayList<>();
 
-        for (DbT5001NinteiShinseiJohoEntity entity : Result認定申請情報) {
-            list申請書管理番号.add(entity.getShinseishoKanriNo().getColumnValue());
-        }
-
-        for (RString 管理番号 : list申請書管理番号) {
-            for (DbT5005NinteiShinchokuJohoEntity entity : Result認定進捗情報) {
-                if (管理番号.equals(entity.getShinseishoKanriNo().getColumnValue())
-                        && 調査未完了年月日.equals(entity.getNinteichosaKanryoYMD())) {
-                    resultList.add(entity);
-                }
+        for (DbT5005NinteiShinchokuJohoEntity entity : Result認定進捗情報) {
+            if (調査未完了年月日.equals(entity.getNinteichosaKanryoYMD())) {
+                resultList.add(entity);
             }
         }
         return resultList;
