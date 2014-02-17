@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ChosainJohoEntityMock;
+import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5001NinteiShinseiJohoEntityMock;
+import jp.co.ndensan.reams.db.dbe.entity.helper.DbT7010NinteichosaItakusakiJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.KaigoJigyoshaEntityMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.KojinEntityMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
@@ -82,22 +84,22 @@ public class NinteichosaIraiTaishoshaMapperTest extends TestBase {
 
         @Override
         protected void setUp() {
-            要介護認定申請情報Entity = mock(DbT5001NinteiShinseiJohoEntity.class);
-            when(要介護認定申請情報Entity.getShinseishoKanriNo()).thenReturn(new ShinseishoKanriNo(new RString("0001")));
-            when(要介護認定申請情報Entity.getShichosonCode()).thenReturn(new ShichosonCode(new RString("1111")));
-            when(要介護認定申請情報Entity.getHihokenshaNo()).thenReturn(new KaigoHihokenshaNumber(new RString("0002")));
-            when(要介護認定申請情報Entity.getNinteiShinseiYMD()).thenReturn(new FlexibleDate(new RString("20140101")));
-            when(要介護認定申請情報Entity.getNinteiShinseiShinseijiKubunCode()).thenReturn(new RString("0003"));
+            要介護認定申請情報Entity = DbT5001NinteiShinseiJohoEntityMock.getSpiedInstance();
+            要介護認定申請情報Entity.setShinseishoKanriNo(new ShinseishoKanriNo(new RString("0001")));
+            要介護認定申請情報Entity.setShichosonCode(new ShichosonCode(new RString("1111")));
+            要介護認定申請情報Entity.setHihokenshaNo(new KaigoHihokenshaNumber(new RString("0002")));
+            要介護認定申請情報Entity.setNinteiShinseiYMD(new FlexibleDate(new RString("20140101")));
+            要介護認定申請情報Entity.setNinteiShinseiShinseijiKubunCode(new RString("0003"));
             個人Entity = KojinEntityMock.getSpiedInstance();
-            認定調査委託先Entity = mock(DbT7010NinteichosaItakusakiJohoEntity.class);
-            when(認定調査委託先Entity.get市町村コード()).thenReturn(new RString("1111市町村コード"));
-            when(認定調査委託先Entity.get介護事業者番号()).thenReturn(new KaigoJigyoshaNo(new RString("0001介護事業者番号")));
-            when(認定調査委託先Entity.get事業者番号()).thenReturn(new JigyoshaNo(new RString("0002事業者番号")));
-            when(認定調査委託先Entity.is介護事業者状況()).thenReturn(true);
-            when(認定調査委託先Entity.get調査委託区分()).thenReturn(ChosaItakuKubun.指定なし);
-            when(認定調査委託先Entity.get割付定員()).thenReturn(3);
-            when(認定調査委託先Entity.get割付地区()).thenReturn(new RString("1114"));
-            when(認定調査委託先Entity.get機関の区分()).thenReturn(new RString("1115"));
+            認定調査委託先Entity = DbT7010NinteichosaItakusakiJohoEntityMock.getSpiedInstance();
+            認定調査委託先Entity.set市町村コード(new RString("1111市町村コード"));
+            認定調査委託先Entity.set介護事業者番号(new KaigoJigyoshaNo(new RString("0001介護事業者番号")));
+            認定調査委託先Entity.set事業者番号(new JigyoshaNo(new RString("0002事業者番号")));
+            認定調査委託先Entity.set介護事業者状況(true);
+            認定調査委託先Entity.set調査委託区分(ChosaItakuKubun.指定なし);
+            認定調査委託先Entity.set割付定員(3);
+            認定調査委託先Entity.set割付地区(new RString("1114"));
+            認定調査委託先Entity.set機関の区分(new RString("1115"));
             介護事業者Entity = KaigoJigyoshaEntityMock.getSpiedInstance();
             調査員情報Entity = ChosainJohoEntityMock.getSpiedInstance();
         }
