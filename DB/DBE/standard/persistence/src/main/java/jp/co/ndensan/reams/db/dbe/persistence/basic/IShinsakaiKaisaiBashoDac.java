@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBashoJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.IDeletable;
@@ -36,7 +37,7 @@ public interface IShinsakaiKaisaiBashoDac
      * @return 審査会開催場所Entity
      */
     @Transaction
-    DbT5104ShinsakaiKaisaiBashoJohoEntity select(ShinsakaiKaisaiBashoCode 審査会開催場所, boolean 開催場所状況);
+    DbT5104ShinsakaiKaisaiBashoJohoEntity select(ShinsakaiKaisaiBashoCode 審査会開催場所, ShinsakaiKaisaiBashoJokyo 開催場所状況);
 
     /**
      * 審査会開催場所テーブルにある全件を取得します
@@ -53,7 +54,7 @@ public interface IShinsakaiKaisaiBashoDac
      * @return 審査会開催場所Entityリスト
      */
     @Transaction
-    List<DbT5104ShinsakaiKaisaiBashoJohoEntity> selectAll(boolean 開催場所状況);
+    List<DbT5104ShinsakaiKaisaiBashoJohoEntity> selectAll(ShinsakaiKaisaiBashoJokyo 開催場所状況);
 
     /**
      * 審査会開催場所情報に対し、追加・更新を行います。

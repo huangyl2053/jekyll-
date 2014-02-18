@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBashoJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
@@ -22,7 +23,7 @@ public class ShinsakaiKaisaiBashoDac implements IShinsakaiKaisaiBashoDac {
 
     @InjectSession
     private SqlSession session;
-    private final DbAccessor dbAccessor = new DbAccessor(session);
+//    private final DbAccessorNormalType dbAccessor = new DbAccessorNormalType(session);
 
     @Override
     public DbT5104ShinsakaiKaisaiBashoJohoEntity select(ShinsakaiKaisaiBashoCode 審査会開催場所) {
@@ -34,7 +35,7 @@ public class ShinsakaiKaisaiBashoDac implements IShinsakaiKaisaiBashoDac {
     }
 
     @Override
-    public DbT5104ShinsakaiKaisaiBashoJohoEntity select(ShinsakaiKaisaiBashoCode 審査会開催場所, boolean 開催場所状況) {
+    public DbT5104ShinsakaiKaisaiBashoJohoEntity select(ShinsakaiKaisaiBashoCode 審査会開催場所, ShinsakaiKaisaiBashoJokyo 開催場所状況) {
         DbAccessor accessor = new DbAccessor(session);
         return accessor.select()
                 .table(DbT5104ShinsakaiKaisaiBashoJoho.class)
@@ -52,7 +53,7 @@ public class ShinsakaiKaisaiBashoDac implements IShinsakaiKaisaiBashoDac {
     }
 
     @Override
-    public List<DbT5104ShinsakaiKaisaiBashoJohoEntity> selectAll(boolean 開催場所状況) {
+    public List<DbT5104ShinsakaiKaisaiBashoJohoEntity> selectAll(ShinsakaiKaisaiBashoJokyo 開催場所状況) {
         DbAccessor accessor = new DbAccessor(session);
         return accessor.select()
                 .table(DbT5104ShinsakaiKaisaiBashoJoho.class)
@@ -77,6 +78,7 @@ public class ShinsakaiKaisaiBashoDac implements IShinsakaiKaisaiBashoDac {
      */
     @Override
     public int insert(DbT5104ShinsakaiKaisaiBashoJohoEntity entity) {
+        DbAccessor dbAccessor = new DbAccessor(session);
         return dbAccessor.insert(entity).execute();
     }
 
@@ -88,11 +90,13 @@ public class ShinsakaiKaisaiBashoDac implements IShinsakaiKaisaiBashoDac {
      */
     @Override
     public int update(DbT5104ShinsakaiKaisaiBashoJohoEntity entity) {
+        DbAccessor dbAccessor = new DbAccessor(session);
         return dbAccessor.update(entity).execute();
     }
 
     @Override
     public int delete(DbT5104ShinsakaiKaisaiBashoJohoEntity entity) {
+        DbAccessor dbAccessor = new DbAccessor(session);
         return dbAccessor.delete(entity).execute();
     }
 
@@ -103,6 +107,7 @@ public class ShinsakaiKaisaiBashoDac implements IShinsakaiKaisaiBashoDac {
      * @return 取得件数
      */
     private int getMatchRowCount(DbT5104ShinsakaiKaisaiBashoJohoEntity entity) {
+        DbAccessor dbAccessor = new DbAccessor(session);
 
         return dbAccessor.
                 select().
