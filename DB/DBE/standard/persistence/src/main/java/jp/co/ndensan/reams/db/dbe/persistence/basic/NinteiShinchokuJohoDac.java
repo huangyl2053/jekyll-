@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoHokenDefines;
+import jp.co.ndensan.reams.db.dbe.definition.YokaigoninteiDateConstants;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -30,7 +30,7 @@ public class NinteiShinchokuJohoDac implements INinteiShinchokuJohoDac {
         List<DbT5005NinteiShinchokuJohoEntity> list = accessor
                 .select()
                 .table(DbT5005NinteiShinchokuJoho.class)
-                .where(eq(DbT5005NinteiShinchokuJoho.ninteichosaIraiKanryoYMD, KaigoHokenDefines.認定調査未完了年月日))
+                .where(eq(DbT5005NinteiShinchokuJoho.ninteichosaIraiKanryoYMD, YokaigoninteiDateConstants.認定調査未完了年月日))
                 .toList(DbT5005NinteiShinchokuJohoEntity.class);
 
         return (!list.isEmpty()) ? list : Collections.EMPTY_LIST;

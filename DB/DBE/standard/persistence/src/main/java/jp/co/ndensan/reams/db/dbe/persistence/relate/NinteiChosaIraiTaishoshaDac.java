@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.relate;
 
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoHokenDefines;
+import jp.co.ndensan.reams.db.dbe.definition.YokaigoninteiDateConstants;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
@@ -37,7 +37,7 @@ public class NinteiChosaIraiTaishoshaDac implements INinteiChosaIraiTaishoshaDac
                 .innerJoin(DbT5001NinteiShinseiJoho.class,
                 using(DbT5001NinteiShinseiJoho.shinseishoKanriNo, DbT5005NinteiShinchokuJoho.shinseishoKanriNo))
                 .where(and(eq(DbT5001NinteiShinseiJoho.shichosonCode, 市町村コード),
-                eq(DbT5005NinteiShinchokuJoho.ninteichosaIraiKanryoYMD, KaigoHokenDefines.認定調査未完了年月日)))
+                eq(DbT5005NinteiShinchokuJoho.ninteichosaIraiKanryoYMD, YokaigoninteiDateConstants.認定調査未完了年月日)))
                 .order(by(DbT5005NinteiShinchokuJoho.shinseishoKanriNo, Order.ASC))
                 .toList(DbT5005NinteiShinchokuJohoEntity.class);
 
