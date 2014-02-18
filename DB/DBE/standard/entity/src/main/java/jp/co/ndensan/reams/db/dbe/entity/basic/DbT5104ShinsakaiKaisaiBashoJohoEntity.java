@@ -5,7 +5,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoChikuCode;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaisaiBashoCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -29,7 +29,7 @@ public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId = RString.EMPTY;
     @PrimaryKey
-    private KaisaiBashoCode shinsakaiKaisaiBashoCode;
+    private ShinsakaiKaisaiBashoCode shinsakaiKaisaiBashoCode;
     private RString shinsakaiKaisaiBashoMei;
     private ShinsakaiKaisaiBashoChikuCode shinsakaiKaisaiChikuCode;
     private RString shinsakaiKaisaiBashoJusho;
@@ -86,7 +86,7 @@ public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
      *
      * @return shinsakaiKaisaiBashoCode
      */
-    public KaisaiBashoCode getShinsakaiKaisaiBashoCode() {
+    public ShinsakaiKaisaiBashoCode getShinsakaiKaisaiBashoCode() {
         return shinsakaiKaisaiBashoCode;
     }
 
@@ -95,7 +95,7 @@ public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
      *
      * @param shinsakaiKaisaiBashoCode shinsakaiKaisaiBashoCode
      */
-    public void setShinsakaiKaisaiBashoCode(KaisaiBashoCode shinsakaiKaisaiBashoCode) {
+    public void setShinsakaiKaisaiBashoCode(ShinsakaiKaisaiBashoCode shinsakaiKaisaiBashoCode) {
         this.shinsakaiKaisaiBashoCode = shinsakaiKaisaiBashoCode;
     }
 

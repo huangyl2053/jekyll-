@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoChikuCode;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaisaiBashoCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.helper.IShinsakaiKaisaiBashoDacMock;
 import jp.co.ndensan.reams.db.dbztesthelper.DbeTestDacBase;
@@ -47,7 +47,7 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
 //
 //        @Override
 //        public void setUp() {
-//            KaisaiBashoCode 開催場所コード = new KaisaiBashoCode(new RString("00001"));
+//            ShinsakaiKaisaiBashoCode 開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
 //            ShinsakaiKaisaiBashoChikuCode 開催場所地区コード = new ShinsakaiKaisaiBashoChikuCode(new RString("00001"));
 //            inserter.insert(create審査会開催場所情報Entity(開催場所コード, new RString("開催場所名"),
 //                    開催場所地区コード, new RString("開催場所住所"), new RString("開催場所電話番号"), true));
@@ -55,14 +55,14 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
 //
 //        @Test
 //        public void 審査会開催場所コードが00001の情報を取得できる() {
-//            KaisaiBashoCode 開催場所コード = new KaisaiBashoCode(new RString("00001"));
+//            ShinsakaiKaisaiBashoCode 開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
 //            DbT5104ShinsakaiKaisaiBashoJohoEntity result = sut.select(開催場所コード);
 //            assertThat(result.getShinsakaiKaisaiBashoCode(), is(開催場所コード));
 //        }
 //
 //        @Test
 //        public void 審査会開催場所コードが00001で、有効な開催場所の情報を取得できる() {
-//            KaisaiBashoCode 開催場所コード = new KaisaiBashoCode(new RString("00001"));
+//            ShinsakaiKaisaiBashoCode 開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
 //            DbT5104ShinsakaiKaisaiBashoJohoEntity result = sut.select(開催場所コード, true);
 //            assertThat(result.getShinsakaiKaisaiBashoCode(), is(開催場所コード));
 //        }
@@ -76,17 +76,17 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
 //
 //        @Override
 //        public void setUp() {
-//            KaisaiBashoCode 開催場所コード = new KaisaiBashoCode(new RString("00001"));
+//            ShinsakaiKaisaiBashoCode 開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
 //            ShinsakaiKaisaiBashoChikuCode 開催場所地区コード = new ShinsakaiKaisaiBashoChikuCode(new RString("00001"));
 //            inserter.insert(create審査会開催場所情報Entity(開催場所コード, new RString("開催場所名１"),
 //                    開催場所地区コード, new RString("開催場所住所１"), new RString("開催場所電話番号１"), true));
-//            開催場所コード = new KaisaiBashoCode(new RString("00002"));
+//            開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00002"));
 //            inserter.insert(create審査会開催場所情報Entity(開催場所コード, new RString("開催場所名２"),
 //                    開催場所地区コード, new RString("開催場所住所２"), new RString("開催場所電話番号２"), false));
-//            開催場所コード = new KaisaiBashoCode(new RString("00003"));
+//            開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00003"));
 //            inserter.insert(create審査会開催場所情報Entity(開催場所コード, new RString("開催場所名３"),
 //                    開催場所地区コード, new RString("開催場所住所３"), new RString("開催場所電話番号３"), true));
-//            開催場所コード = new KaisaiBashoCode(new RString("00004"));
+//            開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00004"));
 //            inserter.insert(create審査会開催場所情報Entity(開催場所コード, new RString("開催場所名４"),
 //                    開催場所地区コード, new RString("開催場所住所４"), new RString("開催場所電話番号４"), false));
 //        }
@@ -106,7 +106,7 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
 //
 //    public static class updateのテスト extends DbeTestDacBase {
 //
-//        private KaisaiBashoCode 開催場所コード;
+//        private ShinsakaiKaisaiBashoCode 開催場所コード;
 //        private RString 開催場所名称;
 //        private ShinsakaiKaisaiBashoChikuCode 開催場所地区コード;
 //        private RString 開催場所住所;
@@ -120,7 +120,7 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
 //
 //        @Override
 //        public void setUp() {
-//            開催場所コード = new KaisaiBashoCode(new RString("00001"));
+//            開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
 //            開催場所地区コード = new ShinsakaiKaisaiBashoChikuCode(new RString("00001"));
 //            inserter.insert(create審査会開催場所情報Entity(開催場所コード, new RString("開催場所名"), 開催場所地区コード,
 //                    new RString("開催場所住所"), new RString("開催場所電話番号"), false));
@@ -169,7 +169,7 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
 //
 //    public static class insertのテスト extends DbeTestDacBase {
 //
-//        private KaisaiBashoCode 開催場所コード;
+//        private ShinsakaiKaisaiBashoCode 開催場所コード;
 //        private RString 開催場所名称;
 //        private ShinsakaiKaisaiBashoChikuCode 開催場所地区コード;
 //        private RString 開催場所住所;
@@ -183,7 +183,7 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
 //
 //        @Override
 //        public void setUp() {
-//            開催場所コード = new KaisaiBashoCode(new RString("00001"));
+//            開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
 //            開催場所名称 = new RString("市役所会議室");
 //            開催場所地区コード = new ShinsakaiKaisaiBashoChikuCode(new RString("00002"));
 //            開催場所住所 = new RString("長野市鶴賀");
@@ -228,7 +228,7 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
 //
 //    public static class deleteのテスト extends DbeTestDacBase {
 //
-//        private KaisaiBashoCode 開催場所コード;
+//        private ShinsakaiKaisaiBashoCode 開催場所コード;
 //        private RString 開催場所名称;
 //        private ShinsakaiKaisaiBashoChikuCode 開催場所地区コード;
 //        private RString 開催場所住所;
@@ -243,7 +243,7 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
 //        @Override
 //        public void setUp() {
 //            開催場所地区コード = new ShinsakaiKaisaiBashoChikuCode(new RString("00001"));
-//            開催場所コード = new KaisaiBashoCode(new RString("00001"));
+//            開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
 //            inserter.insert(create審査会開催場所情報Entity(開催場所コード, new RString("開催場所名"), 開催場所地区コード,
 //                    new RString("開催場所住所"), new RString("開催場所電話番号"), false));
 //
@@ -284,7 +284,7 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
 //        }
 //    }
 //
-//    private static DbT5104ShinsakaiKaisaiBashoJohoEntity create審査会開催場所情報Entity(KaisaiBashoCode 開催場所コード, RString 開催場所名称,
+//    private static DbT5104ShinsakaiKaisaiBashoJohoEntity create審査会開催場所情報Entity(ShinsakaiKaisaiBashoCode 開催場所コード, RString 開催場所名称,
 //            ShinsakaiKaisaiBashoChikuCode 開催場所地区コード, RString 開催場所住所,
 //            RString 開催場所電話番号, boolean 開催場所状況) {
 //        DbT5104ShinsakaiKaisaiBashoJohoEntity entity = new DbT5104ShinsakaiKaisaiBashoJohoEntity();

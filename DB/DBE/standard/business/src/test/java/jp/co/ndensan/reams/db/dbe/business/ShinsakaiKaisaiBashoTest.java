@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBashoJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoChikuCode;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaisaiBashoCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
@@ -26,7 +26,7 @@ public class ShinsakaiKaisaiBashoTest extends TestBase {
     public static class ConstructorTest extends TestBase {
 
         private ShinsakaiKaisaiBasho sut;
-        private KaisaiBashoCode 開催場所コード;
+        private ShinsakaiKaisaiBashoCode 開催場所コード;
         private RString 開催場所名称;
         private ShinsakaiKaisaiBashoChikuCode 開催場所地区コード;
         private RString 開催場所住所;
@@ -35,7 +35,7 @@ public class ShinsakaiKaisaiBashoTest extends TestBase {
 
         @Override
         public void setUp() {
-            開催場所コード = new KaisaiBashoCode(new RString("000001"));
+            開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("000001"));
             開催場所名称 = new RString("市役所会議室");
             開催場所地区コード = new ShinsakaiKaisaiBashoChikuCode(new RString("0001"));
             開催場所住所 = new RString("長野市鶴賀");

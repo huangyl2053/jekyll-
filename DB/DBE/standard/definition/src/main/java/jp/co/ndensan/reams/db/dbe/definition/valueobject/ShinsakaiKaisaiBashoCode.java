@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
+import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
@@ -12,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  *
  * @author N1013 松本直樹
  */
-public class KaisaiBashoCode implements IDbColumnMappable {
+public class ShinsakaiKaisaiBashoCode implements IDbColumnMappable, IValueObject {
 
     private final RString 開催場所コード;
 
@@ -21,17 +22,27 @@ public class KaisaiBashoCode implements IDbColumnMappable {
      *
      * @param 開催場所コード 開催場所コード
      */
-    public KaisaiBashoCode(RString 開催場所コード) {
+    public ShinsakaiKaisaiBashoCode(RString 開催場所コード) {
         this.開催場所コード = 開催場所コード;
     }
 
     /**
-     * 事業者番号を取得します
+     * 開催場所コードを取得します
      *
      * @return 開催場所コード
      */
     @Override
     public RString getColumnValue() {
+        return 開催場所コード;
+    }
+
+    /**
+     * 開催場所コードを返します
+     *
+     * @return 開催場所コード
+     */
+    @Override
+    public RString value() {
         return 開催場所コード;
     }
 }

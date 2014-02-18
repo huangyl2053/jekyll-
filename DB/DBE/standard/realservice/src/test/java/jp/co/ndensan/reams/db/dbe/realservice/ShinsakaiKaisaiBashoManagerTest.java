@@ -8,7 +8,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBashoJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoChikuCode;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaisaiBashoCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.ShinsakaiKaisaiBashoDacMock;
 import jp.co.ndensan.reams.db.dbztesthelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -38,28 +38,28 @@ public class ShinsakaiKaisaiBashoManagerTest extends DbeTestBase {
 
         @Test
         public void 引数の指定した開催場所コードを持つ開催場所が取得できる() {
-            KaisaiBashoCode 開催場所コード = new KaisaiBashoCode(new RString("00001"));
+            ShinsakaiKaisaiBashoCode 開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
             ShinsakaiKaisaiBasho result = sut.get審査会開催場所(開催場所コード);
             assertThat(result.get開催場所コード().getColumnValue(), is(開催場所コード.getColumnValue()));
         }
 
         @Test
         public void 引数の指定した開催場所コードから開催場所がみつから無い場合にはnullを返す() {
-            KaisaiBashoCode 開催場所コード = new KaisaiBashoCode(ShinsakaiKaisaiBashoDacMock.検索不可な開催場所コード);
+            ShinsakaiKaisaiBashoCode 開催場所コード = new ShinsakaiKaisaiBashoCode(ShinsakaiKaisaiBashoDacMock.検索不可な開催場所コード);
             ShinsakaiKaisaiBasho result = sut.get審査会開催場所(開催場所コード);
             assertThat(result, nullValue());
         }
 
         @Test
         public void 引数の指定した開催場所コードと開催場所状況を持つ開催場所を取得できる() {
-            KaisaiBashoCode 開催場所コード = new KaisaiBashoCode(new RString("00001"));
+            ShinsakaiKaisaiBashoCode 開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
             ShinsakaiKaisaiBasho result = sut.get審査会開催場所(開催場所コード, true);
             assertThat(result.get開催場所コード().getColumnValue(), is(開催場所コード.getColumnValue()));
         }
 
         @Test
         public void 引数の指定した開催場所コードと開催場所状況から開催場所がみつから無い場合にはnullを返す() {
-            KaisaiBashoCode 開催場所コード = new KaisaiBashoCode(ShinsakaiKaisaiBashoDacMock.検索不可な開催場所コード);
+            ShinsakaiKaisaiBashoCode 開催場所コード = new ShinsakaiKaisaiBashoCode(ShinsakaiKaisaiBashoDacMock.検索不可な開催場所コード);
             ShinsakaiKaisaiBasho result = sut.get審査会開催場所(開催場所コード, true);
             assertThat(result, nullValue());
         }
@@ -98,7 +98,7 @@ public class ShinsakaiKaisaiBashoManagerTest extends DbeTestBase {
 
         @Test
         public void 引数で渡した情報を更新する() {
-            KaisaiBashoCode 開催場所コード = new KaisaiBashoCode(new RString("00001"));
+            ShinsakaiKaisaiBashoCode 開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
             ShinsakaiKaisaiBashoChikuCode 開催場所地区コード = new ShinsakaiKaisaiBashoChikuCode(new RString("00001"));
             ShinsakaiKaisaiBashoJokyo 審査会開催場所状況 = ShinsakaiKaisaiBashoJokyo.有効;
             ShinsakaiKaisaiBasho 審査会開催場所 = new ShinsakaiKaisaiBasho(開催場所コード,
@@ -122,7 +122,7 @@ public class ShinsakaiKaisaiBashoManagerTest extends DbeTestBase {
 
         @Test
         public void 引数で渡した情報を削除する() {
-            KaisaiBashoCode 開催場所コード = new KaisaiBashoCode(new RString("00001"));
+            ShinsakaiKaisaiBashoCode 開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
             ShinsakaiKaisaiBashoChikuCode 開催場所地区コード = new ShinsakaiKaisaiBashoChikuCode(new RString("00001"));
             ShinsakaiKaisaiBashoJokyo 審査会開催場所状況 = ShinsakaiKaisaiBashoJokyo.有効;
             ShinsakaiKaisaiBasho 審査会開催場所 = new ShinsakaiKaisaiBasho(開催場所コード,

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBashoJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoChikuCode;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaisaiBashoCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
 import jp.co.ndensan.reams.db.dbztesthelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -27,7 +27,7 @@ public class ShinsakaiKaisaiBashoJohoMapperTest extends DbeTestBase {
 
     public static class toShinsakaiKaisaiBashoのテスト extends DbeTestBase {
 
-        private KaisaiBashoCode 開催場所コード;
+        private ShinsakaiKaisaiBashoCode 開催場所コード;
         private RString 開催場所名称;
         private ShinsakaiKaisaiBashoChikuCode 開催場所地区コード;
         private RString 開催場所住所;
@@ -37,7 +37,7 @@ public class ShinsakaiKaisaiBashoJohoMapperTest extends DbeTestBase {
 
         @Override
         public void setUp() {
-            開催場所コード = new KaisaiBashoCode(new RString("00001"));
+            開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
             開催場所名称 = new RString("市役所会議室");
             開催場所地区コード = new ShinsakaiKaisaiBashoChikuCode(new RString("00001"));
             開催場所住所 = new RString("長野市鶴賀");

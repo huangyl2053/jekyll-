@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaisaiBashoCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.ShinsakaiKaisaiBashoJohoMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IShinsakaiKaisaiBashoDac;
@@ -44,7 +44,7 @@ public class ShinsakaiKaisaiBashoManager {
      * @param 審査会開催場所コード 審査会開催場所コード
      * @return 審査会開催場所
      */
-    public ShinsakaiKaisaiBasho get審査会開催場所(KaisaiBashoCode 審査会開催場所コード) {
+    public ShinsakaiKaisaiBasho get審査会開催場所(ShinsakaiKaisaiBashoCode 審査会開催場所コード) {
         DbT5104ShinsakaiKaisaiBashoJohoEntity entity = dac.select(審査会開催場所コード);
 
         if (entity == null) {
@@ -61,7 +61,7 @@ public class ShinsakaiKaisaiBashoManager {
      * @param 開催場所状況 開催場所状況（True:有効 False:無効）
      * @return 審査会開催場所
      */
-    public ShinsakaiKaisaiBasho get審査会開催場所(KaisaiBashoCode 審査会開催場所コード, boolean 開催場所状況) {
+    public ShinsakaiKaisaiBasho get審査会開催場所(ShinsakaiKaisaiBashoCode 審査会開催場所コード, boolean 開催場所状況) {
         DbT5104ShinsakaiKaisaiBashoJohoEntity entity = dac.select(審査会開催場所コード, 開催場所状況);
 
         if (entity == null) {

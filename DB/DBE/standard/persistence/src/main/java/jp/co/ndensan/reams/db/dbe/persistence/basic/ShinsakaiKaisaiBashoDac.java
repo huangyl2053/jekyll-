@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaisaiBashoCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -25,7 +25,7 @@ public class ShinsakaiKaisaiBashoDac implements IShinsakaiKaisaiBashoDac {
     private final DbAccessor dbAccessor = new DbAccessor(session);
 
     @Override
-    public DbT5104ShinsakaiKaisaiBashoJohoEntity select(KaisaiBashoCode 審査会開催場所) {
+    public DbT5104ShinsakaiKaisaiBashoJohoEntity select(ShinsakaiKaisaiBashoCode 審査会開催場所) {
         DbAccessor accessor = new DbAccessor(session);
         return accessor.select()
                 .table(DbT5104ShinsakaiKaisaiBashoJoho.class)
@@ -34,7 +34,7 @@ public class ShinsakaiKaisaiBashoDac implements IShinsakaiKaisaiBashoDac {
     }
 
     @Override
-    public DbT5104ShinsakaiKaisaiBashoJohoEntity select(KaisaiBashoCode 審査会開催場所, boolean 開催場所状況) {
+    public DbT5104ShinsakaiKaisaiBashoJohoEntity select(ShinsakaiKaisaiBashoCode 審査会開催場所, boolean 開催場所状況) {
         DbAccessor accessor = new DbAccessor(session);
         return accessor.select()
                 .table(DbT5104ShinsakaiKaisaiBashoJoho.class)

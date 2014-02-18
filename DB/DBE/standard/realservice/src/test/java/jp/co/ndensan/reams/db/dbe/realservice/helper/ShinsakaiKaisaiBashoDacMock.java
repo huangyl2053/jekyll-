@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.realservice.helper;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoChikuCode;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaisaiBashoCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IShinsakaiKaisaiBashoDac;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -21,14 +21,14 @@ import static org.mockito.Mockito.*;
 public class ShinsakaiKaisaiBashoDacMock implements IShinsakaiKaisaiBashoDac {
 
     public static RString 検索不可な開催場所コード = new RString("検索不可");
-    private static KaisaiBashoCode kaisaiBashoCode;
+    private static ShinsakaiKaisaiBashoCode kaisaiBashoCode;
     private static ShinsakaiKaisaiBashoChikuCode kaisaiBashoChikuCode;
 
     public static DbT5104ShinsakaiKaisaiBashoJohoEntity getSpiedInstance() {
 
         DbT5104ShinsakaiKaisaiBashoJohoEntity entity = new DbT5104ShinsakaiKaisaiBashoJohoEntity();
-        kaisaiBashoCode = mock(KaisaiBashoCode.class);
-        kaisaiBashoCode = new KaisaiBashoCode(new RString("00001"));
+        kaisaiBashoCode = mock(ShinsakaiKaisaiBashoCode.class);
+        kaisaiBashoCode = new ShinsakaiKaisaiBashoCode(new RString("00001"));
         kaisaiBashoChikuCode = mock(ShinsakaiKaisaiBashoChikuCode.class);
         kaisaiBashoChikuCode = new ShinsakaiKaisaiBashoChikuCode(new RString("00001"));
 
@@ -48,7 +48,7 @@ public class ShinsakaiKaisaiBashoDacMock implements IShinsakaiKaisaiBashoDac {
     }
 
     @Override
-    public DbT5104ShinsakaiKaisaiBashoJohoEntity select(KaisaiBashoCode 審査会開催場所) {
+    public DbT5104ShinsakaiKaisaiBashoJohoEntity select(ShinsakaiKaisaiBashoCode 審査会開催場所) {
         if (審査会開催場所.getColumnValue().equals(検索不可な開催場所コード)) {
             return null;
         }
@@ -56,7 +56,7 @@ public class ShinsakaiKaisaiBashoDacMock implements IShinsakaiKaisaiBashoDac {
     }
 
     @Override
-    public DbT5104ShinsakaiKaisaiBashoJohoEntity select(KaisaiBashoCode 審査会開催場所, boolean 開催場所状況) {
+    public DbT5104ShinsakaiKaisaiBashoJohoEntity select(ShinsakaiKaisaiBashoCode 審査会開催場所, boolean 開催場所状況) {
         if (審査会開催場所.getColumnValue().equals(検索不可な開催場所コード)) {
             return null;
         }
