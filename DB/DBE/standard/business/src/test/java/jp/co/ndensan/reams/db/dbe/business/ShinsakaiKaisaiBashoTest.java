@@ -26,18 +26,20 @@ public class ShinsakaiKaisaiBashoTest extends TestBase {
     public static class ConstructorTest extends TestBase {
 
         private ShinsakaiKaisaiBasho sut;
-        private ShinsakaiKaisaiBashoCode 開催場所コード;
+//        private ShinsakaiKaisaiBashoCode 開催場所コード;
+//        private ShinsakaiKaisaiBashoChikuCode 開催場所地区コード;
+        private RString 開催場所コード;
         private RString 開催場所名称;
-        private ShinsakaiKaisaiBashoChikuCode 開催場所地区コード;
+        private RString 開催場所地区コード;
         private RString 開催場所住所;
         private RString 開催場所電話番号;
         private ShinsakaiKaisaiBashoJokyo 開催場所状況;
 
         @Override
         public void setUp() {
-            開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("000001"));
+            開催場所コード = new RString("000001");
             開催場所名称 = new RString("市役所会議室");
-            開催場所地区コード = new ShinsakaiKaisaiBashoChikuCode(new RString("0001"));
+            開催場所地区コード = new RString("0001");
             開催場所住所 = new RString("長野市鶴賀");
             開催場所電話番号 = new RString("026-233-9999");
             開催場所状況 = 開催場所状況.有効;
