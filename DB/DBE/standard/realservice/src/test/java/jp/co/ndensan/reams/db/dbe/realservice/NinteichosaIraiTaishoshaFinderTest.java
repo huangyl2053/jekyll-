@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.INinteichosaItakusakiDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiChosaIraiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinchokuJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.relate.IGetNinteiChosaIraiTaishoshaDac;
+import jp.co.ndensan.reams.db.dbe.persistence.relate.INinteiChosaIraiTaishoshaDac;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.KojinEntityMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
@@ -53,7 +53,7 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
         private INinteiShinseiJohoDac shinseiJohoDac;
         private INinteichosaItakusakiDac itakusakiDac;
         private INinteiChosaIraiJohoDac iraiJohoDac;
-        private IGetNinteiChosaIraiTaishoshaDac iraiTaishoshaDac;
+        private INinteiChosaIraiTaishoshaDac iraiTaishoshaDac;
         private IKojinDac kojinDac;
         private IKaigoJigyoshaDac kaigoJigyoshaDac;
         private IChosainJohoDac chosainJohoDac;
@@ -63,7 +63,7 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
 
         @Override
         public void setUp() {
-            iraiTaishoshaDac = mock(IGetNinteiChosaIraiTaishoshaDac.class);
+            iraiTaishoshaDac = mock(INinteiChosaIraiTaishoshaDac.class);
             when(iraiTaishoshaDac.select(市町村コード_登録なし)).thenReturn(Collections.EMPTY_LIST);
             when(iraiTaishoshaDac.select(市町村コード_登録あり)).thenReturn(create認定進捗情報Result(市町村コード_登録あり.getValue()));
             shinchokuJohoDac = mock(INinteiShinchokuJohoDac.class);

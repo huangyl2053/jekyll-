@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
  *
  * @author N8187 久保田 英男
  */
-public class GetNinteiChosaIraiTaishoshaDac implements IGetNinteiChosaIraiTaishoshaDac {
+public class NinteiChosaIraiTaishoshaDac implements INinteiChosaIraiTaishoshaDac {
 
     @InjectSession
     private SqlSession session;

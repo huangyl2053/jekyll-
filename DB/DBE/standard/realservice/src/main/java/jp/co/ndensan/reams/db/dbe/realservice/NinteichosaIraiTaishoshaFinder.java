@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiChosaIraiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.db.dbe.persistence.relate.IGetNinteiChosaIraiTaishoshaDac;
+import jp.co.ndensan.reams.db.dbe.persistence.relate.INinteiChosaIraiTaishoshaDac;
 import jp.co.ndensan.reams.ur.urf.entity.basic.ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urf.entity.basic.KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.ur.urf.persistence.basic.IChosainJohoDac;
@@ -41,7 +41,7 @@ public class NinteichosaIraiTaishoshaFinder {
     private final INinteiShinseiJohoDac shinseiJohoDac;
     private final INinteichosaItakusakiDac itakusakiDac;
     private final INinteiChosaIraiJohoDac iraiJohoDac;
-    private final IGetNinteiChosaIraiTaishoshaDac iraiTaishoshaDac;
+    private final INinteiChosaIraiTaishoshaDac iraiTaishoshaDac;
     private final IKojinDac kojinDac;
     private final IKaigoJigyoshaDac kaigoJigyoshaDac;
     private final IChosainJohoDac chosainJohoDac;
@@ -55,7 +55,7 @@ public class NinteichosaIraiTaishoshaFinder {
         shinseiJohoDac = InstanceCreator.create(INinteiShinseiJohoDac.class);
         itakusakiDac = InstanceCreator.create(INinteichosaItakusakiDac.class);
         iraiJohoDac = InstanceCreator.create(INinteiChosaIraiJohoDac.class);
-        iraiTaishoshaDac = InstanceCreator.create(IGetNinteiChosaIraiTaishoshaDac.class);
+        iraiTaishoshaDac = InstanceCreator.create(INinteiChosaIraiTaishoshaDac.class);
         kojinDac = InstanceCreator.create(IKojinDac.class);
         kaigoJigyoshaDac = InstanceCreator.create(IKaigoJigyoshaDac.class);
         chosainJohoDac = InstanceCreator.create(IChosainJohoDac.class);
@@ -78,7 +78,7 @@ public class NinteichosaIraiTaishoshaFinder {
             INinteiShinseiJohoDac shinseiJohoDac,
             INinteichosaItakusakiDac itakusakiDac,
             INinteiChosaIraiJohoDac iraiJohoDac,
-            IGetNinteiChosaIraiTaishoshaDac iraiTaishoshaDac,
+            INinteiChosaIraiTaishoshaDac iraiTaishoshaDac,
             IKojinDac kojinDac,
             IKaigoJigyoshaDac kaigoJigyoshaDac,
             IChosainJohoDac chosainJohoDac) {
