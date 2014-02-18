@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5010NinteichosaTokkijikoEntity
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5010NinteichosaTokkijiko;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5010NinteichosaTokkijiko.*;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.util.db.DbAccessor;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
@@ -24,7 +23,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
 public class NinteichosaTokkijikoDac implements INinteichosaTokkijikoDac {
 
     @InjectSession
-    SqlSession session;
+    private SqlSession session;
 
     @Override
     public DbT5010NinteichosaTokkijikoEntity select(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号) {

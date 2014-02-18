@@ -37,7 +37,7 @@ public class NinteichosaIraiRirekiNo implements IValueObject<Integer>, IDbColumn
         if (比較対象 == null || getClass() != 比較対象.getClass()) {
             return false;
         }
-        return this.value() == ((NinteichosaIraiRirekiNo) 比較対象).value();
+        return ((NinteichosaIraiRirekiNo) 比較対象).value().equals(this.value());
     }
 
     @Override
