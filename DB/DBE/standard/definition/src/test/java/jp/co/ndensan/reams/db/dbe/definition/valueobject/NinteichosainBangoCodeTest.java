@@ -18,15 +18,15 @@ import org.junit.runner.RunWith;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class ChosainBangoCodeTest extends TestBase {
+public class NinteichosainBangoCodeTest extends TestBase {
 
-    private static ChosainBangoCode sut;
+    private static NinteichosainBangoCode sut;
 
     public static class コンストラクタのテスト {
 
         @Test(expected = NullPointerException.class)
         public void nullが渡されたとき_NullPinterExceptionが発生する() {
-            sut = new ChosainBangoCode(null);
+            sut = new NinteichosainBangoCode(null);
         }
     }
 
@@ -34,28 +34,28 @@ public class ChosainBangoCodeTest extends TestBase {
 
         @Test
         public void 引数にnullを渡すと_falseが返る() {
-            sut = new ChosainBangoCode(new RString("A001"));
+            sut = new NinteichosainBangoCode(new RString("A001"));
             assertThat(sut.equals(null), is(false));
         }
 
         @Test
         public void 引数にChosainBangoCode以外の型を渡すと_falseが返る() {
-            sut = new ChosainBangoCode(new RString("A001"));
+            sut = new NinteichosainBangoCode(new RString("A001"));
             RString 比較対象 = new RString("A001");
             assertThat(sut.equals(比較対象), is(false));
         }
 
         @Test
         public void メンバの内容が同一の_ChosainBangoCode型のクラスを渡したとき_trueが返る() {
-            sut = new ChosainBangoCode(new RString("A001"));
-            ChosainBangoCode 比較対象 = new ChosainBangoCode(new RString("A001"));
+            sut = new NinteichosainBangoCode(new RString("A001"));
+            NinteichosainBangoCode 比較対象 = new NinteichosainBangoCode(new RString("A001"));
             assertThat(sut.equals(比較対象), is(true));
         }
 
         @Test
         public void メンバの内容が違う_ChosainBangoCode型のクラスを渡したとき_falseが返る() {
-            sut = new ChosainBangoCode(new RString("A001"));
-            ChosainBangoCode 比較対象 = new ChosainBangoCode(new RString("B001"));
+            sut = new NinteichosainBangoCode(new RString("A001"));
+            NinteichosainBangoCode 比較対象 = new NinteichosainBangoCode(new RString("B001"));
             assertThat(sut.equals(比較対象), is(false));
         }
     }
@@ -64,8 +64,8 @@ public class ChosainBangoCodeTest extends TestBase {
 
         @Test
         public void メンバの内容が同一の_ChosainBangoCode型のクラスを渡したとき_hashCodeの値が同じになる() {
-            sut = new ChosainBangoCode(new RString("A001"));
-            ChosainBangoCode 比較対象 = new ChosainBangoCode(new RString("A001"));
+            sut = new NinteichosainBangoCode(new RString("A001"));
+            NinteichosainBangoCode 比較対象 = new NinteichosainBangoCode(new RString("A001"));
             assertThat(sut.hashCode(), is(比較対象.hashCode()));
         }
     }

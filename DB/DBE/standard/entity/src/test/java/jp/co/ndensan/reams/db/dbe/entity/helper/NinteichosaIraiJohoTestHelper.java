@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiJoho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.MobileDataShutsuryoku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaTokusokuHoho;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ChosainBangoCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosainBangoCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
@@ -26,7 +26,7 @@ public class NinteichosaIraiJohoTestHelper {
     public static ShinseishoKanriNo shinseishoKanriNo = new ShinseishoKanriNo(new RString("0001"));
     public static int ninteichosaIraiRirekiNo = 1;
     public static NinteichosaItakusakiCode ninteichosaItakusakiCode = new NinteichosaItakusakiCode(new RString("2001"));
-    public static ChosainBangoCode chousainCode = new ChosainBangoCode(new RString("3001"));
+    public static NinteichosainBangoCode chousainCode = new NinteichosainBangoCode(new RString("3001"));
     public static Code ninteichousaIraiKubunCode = new Code(new RString("0"));
     public static int ninteichosaIraiKaisu = 1;
     public static FlexibleDate ninteichosaIraiYMD = new FlexibleDate("19991212");

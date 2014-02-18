@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ChosainBangoCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosainBangoCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItakusakiCode;
 import static jp.co.ndensan.reams.db.dbe.persistence.basic.helper.NinteichosaIraiJohoTestHelper.*;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
@@ -198,8 +198,8 @@ public class NinteichosaIraiJohoDacTest extends TestDacBase {
 //            return new NinteichosaItakusakiCode(new RString(str));
 //        }
 //
-//        private ChosainBangoCode create調査員番号コード(String str) {
-//            return new ChosainBangoCode(new RString(str));
+//        private NinteichosainBangoCode create調査員番号コード(String str) {
+//            return new NinteichosainBangoCode(new RString(str));
 //        }
 //    }
 //

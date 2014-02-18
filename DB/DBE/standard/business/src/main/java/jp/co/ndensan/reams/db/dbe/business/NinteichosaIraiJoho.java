@@ -8,7 +8,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.MobileDataShutsuryoku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaTokusokuHoho;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ChosainBangoCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosainBangoCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
@@ -25,7 +25,7 @@ public class NinteichosaIraiJoho {
     private final ShinseishoKanriNo 申請書管理番号;
     private final int 認定調査依頼履歴番号;
     private final NinteichosaItakusakiCode 認定調査委託先コード;
-    private final ChosainBangoCode 調査員番号コード;
+    private final NinteichosainBangoCode 調査員番号コード;
     private final NinteichosaIraiKubunCode 認定調査依頼区分コード;
     private final int 認定調査回数;
     private final RDate 認定調査依頼年月日;
@@ -60,7 +60,7 @@ public class NinteichosaIraiJoho {
      * 申請書管理番号、認定調査委依頼履歴番号、認定調査委託先コード、調査員番号コード、認定調査委依頼区分コードにnullが渡されたとき
      */
     public NinteichosaIraiJoho(ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号,
-            NinteichosaItakusakiCode 認定調査委託先コード, ChosainBangoCode 調査員番号コード,
+            NinteichosaItakusakiCode 認定調査委託先コード, NinteichosainBangoCode 調査員番号コード,
             NinteichosaIraiKubunCode 認定調査依頼区分コード, int 認定調査回数, RDate 認定調査依頼年月日,
             RDate 認定調査期限年月日, RDate 認定調査出力年月日, RDate 調査票等出力年月日,
             MobileDataShutsuryoku モバイルデータ出力, RDate 認定調査督促年月日,
@@ -120,7 +120,7 @@ public class NinteichosaIraiJoho {
      *
      * @return 調査員番号コード
      */
-    public ChosainBangoCode get調査員番号コード() {
+    public NinteichosainBangoCode get調査員番号コード() {
         return 調査員番号コード;
     }
 

@@ -15,7 +15,7 @@ import static java.util.Objects.requireNonNull;
  *
  * @author n8178 城間篤人
  */
-public class ChosainBangoCode implements IDbColumnMappable, IValueObject {
+public class NinteichosainBangoCode implements IDbColumnMappable, IValueObject {
 
     private final RString 調査員番号コード;
 
@@ -25,7 +25,7 @@ public class ChosainBangoCode implements IDbColumnMappable, IValueObject {
      * @param 調査員番号コード 調査員番号コード
      * @throws NullPointerException 引数にnullが渡されたとき
      */
-    public ChosainBangoCode(RString 調査員番号コード) throws NullPointerException {
+    public NinteichosainBangoCode(RString 調査員番号コード) throws NullPointerException {
         this.調査員番号コード = requireNonNull(調査員番号コード);
     }
 
@@ -41,7 +41,7 @@ public class ChosainBangoCode implements IDbColumnMappable, IValueObject {
         if (比較対象 == null || getClass() != 比較対象.getClass()) {
             return false;
         }
-        return ((ChosainBangoCode) 比較対象).getColumnValue().equals(調査員番号コード);
+        return ((NinteichosainBangoCode) 比較対象).getColumnValue().equals(調査員番号コード);
     }
 
     @Override

@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItakusakiCode;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ChosainBangoCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosainBangoCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
@@ -35,7 +35,7 @@ public class DbT5006NinteichosaIraiJohoEntity implements IDbAccessable {
     @PrimaryKey
     private int ninteichosaIraiRirekiNo;
     private NinteichosaItakusakiCode ninteichosaItakusakiCode;
-    private ChosainBangoCode chousainCode;
+    private NinteichosainBangoCode chousainCode;
     private Code ninteichousaIraiKubunCode;
     private int ninteichosaIraiKaisu;
     private FlexibleDate ninteichosaIraiYMD;
@@ -152,7 +152,7 @@ public class DbT5006NinteichosaIraiJohoEntity implements IDbAccessable {
      *
      * @return chousainCode
      */
-    public ChosainBangoCode getChousainCode() {
+    public NinteichosainBangoCode getChousainCode() {
         return chousainCode;
     }
 
@@ -161,7 +161,7 @@ public class DbT5006NinteichosaIraiJohoEntity implements IDbAccessable {
      *
      * @param chousainCode chousainCode
      */
-    public void setChousainCode(ChosainBangoCode chousainCode) {
+    public void setChousainCode(NinteichosainBangoCode chousainCode) {
         this.chousainCode = chousainCode;
     }
 
