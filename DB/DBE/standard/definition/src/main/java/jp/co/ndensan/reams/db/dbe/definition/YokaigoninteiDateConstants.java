@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 介護保険の定数クラスです。
+ * 要介護認定関係の日付定数を扱うクラスです。
  *
  * @author N8187 久保田 英男
  */
