@@ -57,14 +57,14 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
         }
 
         @Test
-        public void 審査会開催場所コードが00001の情報を取得できる() {
+        public void 審査会開催場所コードに00001を指定したとき＿検索結果が得られ＿その審査会開催場所コードは00001となる() {
             ShinsakaiKaisaiBashoCode 開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
             DbT5104ShinsakaiKaisaiBashoJohoEntity result = sut.select(開催場所コード);
             assertThat(result.getShinsakaiKaisaiBashoCode(), is(開催場所コード));
         }
 
         @Test
-        public void 審査会開催場所コードが00001で有効な開催場所の情報を取得できる() {
+        public void 審査会開催場所コードに00001を指定し且つ現在有効審査会開催場所の取得指示をしたとき＿検索結果が得られ＿その審査会開催場所はコードが00001で有効な情報である() {
             ShinsakaiKaisaiBashoCode 開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
             DbT5104ShinsakaiKaisaiBashoJohoEntity result = sut.select(開催場所コード, ShinsakaiKaisaiBashoJokyo.有効);
             assertThat(result.getShinsakaiKaisaiBashoCode(), is(開催場所コード));
@@ -96,13 +96,13 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
         }
 
         @Test
-        public void 開催場所情報が_4件取得できる() {
+        public void 開催場所情報が_全件取得できる() {
             List<DbT5104ShinsakaiKaisaiBashoJohoEntity> results = sut.selectAll();
             assertThat(results.size(), is(4));
         }
 
         @Test
-        public void 有効な開催場所情報が_2件取得できる() {
+        public void 有効な開催場所情報が_全件取得できる() {
             List<DbT5104ShinsakaiKaisaiBashoJohoEntity> results = sut.selectAll(ShinsakaiKaisaiBashoJokyo.有効);
             assertThat(results.size(), is(2));
         }
