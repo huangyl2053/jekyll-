@@ -58,6 +58,10 @@
             <version>1.9.5</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>testhelper</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
