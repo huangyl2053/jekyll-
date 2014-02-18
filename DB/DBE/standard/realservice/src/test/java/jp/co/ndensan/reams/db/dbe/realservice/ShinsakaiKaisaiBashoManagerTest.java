@@ -137,5 +137,19 @@ public class ShinsakaiKaisaiBashoManagerTest extends DbeTestBase {
             boolean result = sut.remove(審査会開催場所);
             assertThat(result, is(true));
         }
+
+        @Test
+        public void 引数で渡した情報を削除しようとした際に対象が無いとfalseが返る() {
+            ShinsakaiKaisaiBashoCode 開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
+            ShinsakaiKaisaiBashoChikuCode 開催場所地区コード = new ShinsakaiKaisaiBashoChikuCode(new RString("00001"));
+            ShinsakaiKaisaiBashoJokyo 審査会開催場所状況 = ShinsakaiKaisaiBashoJokyo.有効;
+            ShinsakaiKaisaiBasho 審査会開催場所 = new ShinsakaiKaisaiBasho(new RString("検索不可"),
+                    new RString("開催場所名"),
+                    new RString("00001"),
+                    new RString("開催場所住所"),
+                    new RString("開催場所電話番号"), 審査会開催場所状況);
+            boolean result = sut.remove(審査会開催場所);
+            assertThat(result, is(false));
+        }
     }
 }

@@ -87,7 +87,11 @@ public class ShinsakaiKaisaiBashoDacMock implements IShinsakaiKaisaiBashoDac {
 
     @Override
     public int delete(DbT5104ShinsakaiKaisaiBashoJohoEntity entity) {
-        return 1;
+        if (entity.getShinsakaiKaisaiBashoCode().equals(検索不可な開催場所コード)) {
+            return 0;
+        } else {
+            return 1;
+        }
     }
 
     @Override
