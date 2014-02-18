@@ -262,30 +262,6 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
             int count = sut.delete(更新用entity);
             assertThat(count, is(0));
         }
-
-        @Test
-        public void 更新後の開催場所住所が_引数から渡した開催場所住所と同一になる() {
-            int a = sut.insertOrUpdate(更新用entity);
-            assertThat(sut.select(開催場所コード).getShinsakaiKaisaiBashoJusho(), is(開催場所住所));
-        }
-
-        @Test
-        public void 更新後の開催場所地区コードが_引数から渡した開催場所地区コードと同一になる() {
-            int a = sut.insertOrUpdate(更新用entity);
-            assertThat(sut.select(開催場所コード).getShinsakaiKaisaiChikuCode(), is(開催場所地区コード));
-        }
-
-        @Test
-        public void 更新後の開催場所電話番号が_引数から渡した開催場所電話番号と同一になる() {
-            int a = sut.insertOrUpdate(更新用entity);
-            assertThat(sut.select(開催場所コード).getShinsakaiKaisaiBashoTelNo(), is(開催場所電話番号));
-        }
-
-        @Test
-        public void 更新後の開催場所状況が_引数から渡した開催場所状況と同一になる() {
-            int a = sut.insertOrUpdate(更新用entity);
-            assertThat(sut.select(開催場所コード).getShinsakaiKaisaiBashoJokyo(), is(開催場所状況));
-        }
     }
 
     private static DbT5104ShinsakaiKaisaiBashoJohoEntity create審査会開催場所情報Entity(ShinsakaiKaisaiBashoCode 開催場所コード, RString 開催場所名称,
