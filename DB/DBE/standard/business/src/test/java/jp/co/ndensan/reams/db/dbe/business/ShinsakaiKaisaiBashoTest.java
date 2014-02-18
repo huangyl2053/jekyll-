@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBasho
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoChikuCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
+import jp.co.ndensan.reams.db.dbztesthelper.DbeTestBase;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -21,9 +21,9 @@ import org.junit.runner.RunWith;
  * @author N1013 松本直樹
  */
 @RunWith(Enclosed.class)
-public class ShinsakaiKaisaiBashoTest extends TestBase {
+public class ShinsakaiKaisaiBashoTest extends DbeTestBase {
 
-    public static class ConstructorTest extends TestBase {
+    public static class ConstructorTest extends DbeTestBase {
 
         private ShinsakaiKaisaiBasho sut;
 //        private ShinsakaiKaisaiBashoCode 開催場所コード;
