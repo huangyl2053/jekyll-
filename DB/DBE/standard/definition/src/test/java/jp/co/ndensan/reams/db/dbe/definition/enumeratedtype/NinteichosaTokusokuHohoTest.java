@@ -52,7 +52,7 @@ public class NinteichosaTokusokuHohoTest extends TestBase {
         @Test(expected = IllegalArgumentException.class)
         public void 引数に対応しない値が渡されたとき_例外が発生する() {
             督促方法コード = new Code(new RString("4"));
-            assertThat(NinteichosaTokusokuHoho.toValue(督促方法コード), is(NinteichosaTokusokuHoho.その他));
+            NinteichosaTokusokuHoho.toValue(督促方法コード);
         }
     }
 }

@@ -46,7 +46,7 @@ public class NinteichosaIraiKubunCodeTest extends TestBase {
         @Test(expected = IllegalArgumentException.class)
         public void 引数に対応しない値が渡されたとき_例外が発生する() {
             区分コード = new Code(new RString("4"));
-            assertThat(NinteichosaIraiKubunCode.toValue(区分コード), is(NinteichosaIraiKubunCode.初回));
+            NinteichosaIraiKubunCode.toValue(区分コード);
         }
     }
 }
