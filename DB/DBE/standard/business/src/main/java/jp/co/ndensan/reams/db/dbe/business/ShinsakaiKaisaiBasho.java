@@ -105,4 +105,13 @@ public class ShinsakaiKaisaiBasho {
     public ShinsakaiKaisaiBashoJokyo get開催場所状況() {
         return 開催場所状況;
     }
+
+    /**
+     * 開催場所状況の有効・無効判定を行います
+     *
+     * @return 有効・無効の判定結果
+     */
+    public boolean is有効() {
+        return 開催場所状況.is有効();
+    }
 }
