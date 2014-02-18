@@ -33,7 +33,7 @@ public class NinteichosaTokkijikoTest extends TestBase {
         @Override
         public void setUp() {
             申請書管理番号 = new ShinseishoKanriNo(new RString("A001"));
-            認定調査依頼履歴番号 = new NinteichosaIraiRirekiNo(1);
+            認定調査依頼履歴番号 = new NinteichosaIraiRirekiNo(new RString("1"));
             認定調査特記事項番号 = new RString("B001");
             特記事項 = new RString("特記するぜ");
         }
