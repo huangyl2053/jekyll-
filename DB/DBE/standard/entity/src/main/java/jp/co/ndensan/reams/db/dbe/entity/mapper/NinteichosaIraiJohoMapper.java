@@ -51,7 +51,7 @@ public final class NinteichosaIraiJohoMapper {
 
     /**
      * 認定調査依頼情報のリストを受け取り、認定調査依頼情報コレクションに変換して返します。<br />
-     * 引数にnullや空のリストが渡されたときは、殻のコレクションを返します。
+     * 引数にnullや空のリストが渡されたときは、空のコレクションを返します。
      *
      * @param entities 認定調査依頼情報Entityのリスト
      * @return 認定調査依頼情報コレクション
