@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.IInsertable;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.IReplaceable;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.IUpdatable;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 認定調査依頼情報を取得するデータアクセスクラスのインターフェースです。
@@ -27,6 +28,7 @@ public interface INinteichosaIraiJohoDac extends IInsertable<DbT5006NinteichosaI
      * @param 認定調査委依頼履歴番号 認定調査委依頼履歴番号
      * @return 認定調査依頼情報Entity
      */
+    @Transaction
     DbT5006NinteichosaIraiJohoEntity select(ShinseishoKanriNo 申請書管理番号, int 認定調査委依頼履歴番号);
 
     /**
@@ -35,5 +37,6 @@ public interface INinteichosaIraiJohoDac extends IInsertable<DbT5006NinteichosaI
      * @param 申請書管理番号 申請書管理番号
      * @return 認定調査依頼情報のリスト
      */
+    @Transaction
     List<DbT5006NinteichosaIraiJohoEntity> select(ShinseishoKanriNo 申請書管理番号);
 }
