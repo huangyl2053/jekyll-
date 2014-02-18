@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaTokusokuH
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ChosainBangoCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -64,11 +65,11 @@ public class NinteichosaIraiJoho {
             RDate 認定調査期限年月日, RDate 認定調査出力年月日, RDate 調査票等出力年月日,
             MobileDataShutsuryoku モバイルデータ出力, RDate 認定調査督促年月日,
             NinteichosaTokusokuHoho 認定調査督促方法, int 認定調査督促回数, RString 認定調査督促メモ) throws NullPointerException {
-        requireNonNull(申請書管理番号);
-        requireNonNull(認定調査依頼履歴番号);
-        requireNonNull(認定調査委託先コード);
-        requireNonNull(調査員番号コード);
-        requireNonNull(認定調査依頼区分コード);
+        requireNonNull(申請書管理番号, Messages.E00003.replace("申請書管理番号", getClass().getName()).getMessage());
+        requireNonNull(認定調査依頼履歴番号, Messages.E00003.replace("認定調査依頼履歴番号", getClass().getName()).getMessage());
+        requireNonNull(認定調査委託先コード, Messages.E00003.replace("認定調査委託先コード", getClass().getName()).getMessage());
+        requireNonNull(調査員番号コード, Messages.E00003.replace("調査員番号コード", getClass().getName()).getMessage());
+        requireNonNull(認定調査依頼区分コード, Messages.E00003.replace("認定調査依頼区分コード", getClass().getName()).getMessage());
 
         this.申請書管理番号 = 申請書管理番号;
         this.認定調査依頼履歴番号 = 認定調査依頼履歴番号;
