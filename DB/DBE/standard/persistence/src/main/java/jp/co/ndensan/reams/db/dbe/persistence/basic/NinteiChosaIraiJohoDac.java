@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbAccessor;
+import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
 
@@ -26,7 +26,7 @@ public class NinteiChosaIraiJohoDac implements INinteiChosaIraiJohoDac {
 
     @Override
     public DbT5006NinteichosaIraiJohoEntity select(RString 申請書管理番号, NinteiChosaIraiRirekiNo 認定調査依頼履歴番号) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT5006NinteichosaIraiJohoEntity> list = accessor
                 .select()
                 .table(DbT5006NinteichosaIraiJoho.class)

@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.util.db.DbAccessor;
+import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -29,7 +29,7 @@ public class GetNinteiChosaIraiTaishoshaDac implements IGetNinteiChosaIraiTaisho
 
     @Override
     public List<DbT5005NinteiShinchokuJohoEntity> select(ShichosonCode 市町村コード) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         List<DbT5005NinteiShinchokuJohoEntity> list = accessor
                 .select()
