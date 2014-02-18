@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBashoJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaisaiBashoChikuCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoChikuCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaisaiBashoCode;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -20,7 +20,7 @@ public class ShinsakaiKaisaiBasho {
 
     private final KaisaiBashoCode 開催場所コード;
     private final RString 開催場所名称;
-    private final KaisaiBashoChikuCode 開催場所地区コード;
+    private final ShinsakaiKaisaiBashoChikuCode 開催場所地区コード;
     private final RString 開催場所住所;
     private final RString 開催場所電話番号;
     private final ShinsakaiKaisaiBashoJokyo 開催場所状況;
@@ -37,7 +37,7 @@ public class ShinsakaiKaisaiBasho {
      */
     public ShinsakaiKaisaiBasho(KaisaiBashoCode 開催場所コード,
             RString 開催場所名称,
-            KaisaiBashoChikuCode 開催場所地区コード,
+            ShinsakaiKaisaiBashoChikuCode 開催場所地区コード,
             RString 開催場所住所,
             RString 開催場所電話番号,
             ShinsakaiKaisaiBashoJokyo 開催場所状況) {
@@ -75,7 +75,7 @@ public class ShinsakaiKaisaiBasho {
      *
      * @return 開催場所地区コード
      */
-    public KaisaiBashoChikuCode get開催場所地区コード() {
+    public ShinsakaiKaisaiBashoChikuCode get開催場所地区コード() {
         return 開催場所地区コード;
     }
 

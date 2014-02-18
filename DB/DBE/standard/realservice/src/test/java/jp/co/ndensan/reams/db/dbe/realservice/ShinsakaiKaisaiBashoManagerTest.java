@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBashoJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaisaiBashoChikuCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoChikuCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.ShinsakaiKaisaiBashoDacMock;
 import jp.co.ndensan.reams.db.dbztesthelper.DbeTestBase;
@@ -99,7 +99,7 @@ public class ShinsakaiKaisaiBashoManagerTest extends DbeTestBase {
         @Test
         public void 引数で渡した情報を更新する() {
             KaisaiBashoCode 開催場所コード = new KaisaiBashoCode(new RString("00001"));
-            KaisaiBashoChikuCode 開催場所地区コード = new KaisaiBashoChikuCode(new RString("00001"));
+            ShinsakaiKaisaiBashoChikuCode 開催場所地区コード = new ShinsakaiKaisaiBashoChikuCode(new RString("00001"));
             ShinsakaiKaisaiBashoJokyo 審査会開催場所状況 = ShinsakaiKaisaiBashoJokyo.有効;
             ShinsakaiKaisaiBasho 審査会開催場所 = new ShinsakaiKaisaiBasho(開催場所コード,
                     new RString("開催場所名"),
@@ -123,7 +123,7 @@ public class ShinsakaiKaisaiBashoManagerTest extends DbeTestBase {
         @Test
         public void 引数で渡した情報を削除する() {
             KaisaiBashoCode 開催場所コード = new KaisaiBashoCode(new RString("00001"));
-            KaisaiBashoChikuCode 開催場所地区コード = new KaisaiBashoChikuCode(new RString("00001"));
+            ShinsakaiKaisaiBashoChikuCode 開催場所地区コード = new ShinsakaiKaisaiBashoChikuCode(new RString("00001"));
             ShinsakaiKaisaiBashoJokyo 審査会開催場所状況 = ShinsakaiKaisaiBashoJokyo.有効;
             ShinsakaiKaisaiBasho 審査会開催場所 = new ShinsakaiKaisaiBasho(開催場所コード,
                     new RString("開催場所名"),

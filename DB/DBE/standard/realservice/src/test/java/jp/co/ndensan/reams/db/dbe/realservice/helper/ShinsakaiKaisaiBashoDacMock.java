@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.realservice.helper;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaisaiBashoChikuCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoChikuCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IShinsakaiKaisaiBashoDac;
@@ -22,15 +22,15 @@ public class ShinsakaiKaisaiBashoDacMock implements IShinsakaiKaisaiBashoDac {
 
     public static RString 検索不可な開催場所コード = new RString("検索不可");
     private static KaisaiBashoCode kaisaiBashoCode;
-    private static KaisaiBashoChikuCode kaisaiBashoChikuCode;
+    private static ShinsakaiKaisaiBashoChikuCode kaisaiBashoChikuCode;
 
     public static DbT5104ShinsakaiKaisaiBashoJohoEntity getSpiedInstance() {
 
         DbT5104ShinsakaiKaisaiBashoJohoEntity entity = new DbT5104ShinsakaiKaisaiBashoJohoEntity();
         kaisaiBashoCode = mock(KaisaiBashoCode.class);
         kaisaiBashoCode = new KaisaiBashoCode(new RString("00001"));
-        kaisaiBashoChikuCode = mock(KaisaiBashoChikuCode.class);
-        kaisaiBashoChikuCode = new KaisaiBashoChikuCode(new RString("00001"));
+        kaisaiBashoChikuCode = mock(ShinsakaiKaisaiBashoChikuCode.class);
+        kaisaiBashoChikuCode = new ShinsakaiKaisaiBashoChikuCode(new RString("00001"));
 
         entity.setShinsakaiKaisaiBashoCode(kaisaiBashoCode);
         entity.setShinsakaiKaisaiBashoMei(new RString("市役所会議室"));
