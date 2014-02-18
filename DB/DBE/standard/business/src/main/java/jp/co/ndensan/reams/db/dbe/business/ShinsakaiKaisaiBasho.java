@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 審査会開催場所のクラスです
+ * 審査会開催場所のクラスです。
  *
  * @author N1013 松本直樹
  */
@@ -29,7 +29,7 @@ public class ShinsakaiKaisaiBasho {
     private final ShinsakaiKaisaiBashoJokyo 開催場所状況;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param 開催場所コード 開催場所コード
      * @param 開催場所名称 開催場所名称
@@ -56,7 +56,7 @@ public class ShinsakaiKaisaiBasho {
     }
 
     /**
-     * 開催場所コードを取得します
+     * 開催場所コードを取得します。
      *
      * @return 開催場所コード
      */
@@ -66,7 +66,7 @@ public class ShinsakaiKaisaiBasho {
     }
 
     /**
-     * 開催場所名称を取得します
+     * 開催場所名称を取得します。
      *
      * @return 開催場所名称
      */
@@ -75,7 +75,7 @@ public class ShinsakaiKaisaiBasho {
     }
 
     /**
-     * 開催場所地区コードを取得します
+     * 開催場所地区コードを取得します。
      *
      * @return 開催場所地区コード
      */
@@ -85,7 +85,7 @@ public class ShinsakaiKaisaiBasho {
     }
 
     /**
-     * 開催場所住所を取得します
+     * 開催場所住所を取得します。
      *
      * @return 開催場所住所
      */
@@ -94,7 +94,7 @@ public class ShinsakaiKaisaiBasho {
     }
 
     /**
-     * 開催場所電話番号を取得します
+     * 開催場所電話番号を取得します。
      *
      * @return 開催場所電話番号
      */
@@ -103,7 +103,7 @@ public class ShinsakaiKaisaiBasho {
     }
 
     /**
-     * 開催場所の状況を判定します
+     * 開催場所の状況を判定します。
      *
      * @return 開催場所状況
      */
@@ -112,7 +112,7 @@ public class ShinsakaiKaisaiBasho {
     }
 
     /**
-     * 開催場所状況の有効・無効判定を行います
+     * 開催場所状況の有効・無効判定を行います。
      *
      * @return 有効・無効の判定結果
      */
