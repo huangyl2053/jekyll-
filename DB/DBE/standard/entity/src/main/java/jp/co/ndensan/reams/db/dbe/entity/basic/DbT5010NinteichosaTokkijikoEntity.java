@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo
  *
  * @author n8178 城間篤人
  */
-public class DbT5010NinteiChosaTokkijikoEntity implements IDbAccessable {
+public class DbT5010NinteichosaTokkijikoEntity implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     @TableName

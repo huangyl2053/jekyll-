@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  *
  * @author n8178 城間篤人
  */
-public enum DbT5010NinteiChosaTokkijiko implements IColumnDefinition {
+public enum DbT5010NinteichosaTokkijiko implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     insertDantaiCd(2147483647, 0),
@@ -25,7 +25,7 @@ public enum DbT5010NinteiChosaTokkijiko implements IColumnDefinition {
     private final int maxLength;
     private final int scale;
 
-    private DbT5010NinteiChosaTokkijiko(int maxLength, int scale) {
+    private DbT5010NinteichosaTokkijiko(int maxLength, int scale) {
         this.maxLength = maxLength;
         this.scale = scale;
     }
