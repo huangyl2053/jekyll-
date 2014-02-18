@@ -4,7 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaTokkijiko;
+import jp.co.ndensan.reams.db.dbe.business.NinteichosaTokkijikoCollection;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5010NinteichosaTokkijikoEntity;
@@ -62,6 +66,37 @@ public class NinteichosaTokkijikoMapperTest extends TestBase {
         @Test
         public void 引数のEntityが持つ特記事項と_戻り値の認定調査特記事項が持つ特記事項が同一になる() {
             assertThat(sut.get特記事項(), is(特記事項));
+        }
+    }
+
+    public static class to認定調査特記事項Collectionのテスト {
+
+        private NinteichosaTokkijikoCollection sut;
+
+        @Test
+        public void nullが渡された場合_空のコレクションが返る() {
+            sut = NinteichosaTokkijikoMapper.to認定調査特記事項Collection(null);
+            assertThat(sut.isEmpty(), is(true));
+        }
+
+        @Test
+        public void 空のリストが渡された場合_空のコレクションが返る() {
+            sut = NinteichosaTokkijikoMapper.to認定調査特記事項Collection(Collections.EMPTY_LIST);
+            assertThat(sut.isEmpty(), is(true));
+        }
+
+        @Test
+        public void Entityを3件持つListが渡された場合_3件の要素を持つコレクションが返る() {
+            sut = NinteichosaTokkijikoMapper.to認定調査特記事項Collection(createEntityList(3));
+            assertThat(sut.size(), is(3));
+        }
+
+        private List<DbT5010NinteichosaTokkijikoEntity> createEntityList(int 件数) {
+            List<DbT5010NinteichosaTokkijikoEntity> list = new ArrayList<>();
+            for (int i = 0; i < 件数; i++) {
+                list.add(create認定調査特記事項Entity());
+            }
+            return list;
         }
     }
 

@@ -4,7 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaTokkijiko;
+import jp.co.ndensan.reams.db.dbe.business.NinteichosaTokkijikoCollection;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5010NinteichosaTokkijikoEntity;
 
 /**
@@ -33,6 +37,26 @@ public final class NinteichosaTokkijikoMapper {
         }
         return new NinteichosaTokkijiko(entity.getShinseishoKanriNo(), entity.getNinteichosaRirekiNo(),
                 entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijiko());
+    }
+
+    /**
+     * 認定調査特記事項Entityのリストを受け取り、認定調査特記事項Collectionを返します。<br/>
+     * 引数にnullや空のリストが渡された場合は、空のコレクションを返します。
+     *
+     * @param entities 認定調査特記事項Entityのリスト
+     * @return 認定調査特記事項Collection
+     */
+    public static NinteichosaTokkijikoCollection to認定調査特記事項Collection(List<DbT5010NinteichosaTokkijikoEntity> entities) {
+        if (entities == null || entities.isEmpty()) {
+            return new NinteichosaTokkijikoCollection(Collections.EMPTY_LIST);
+        }
+
+        List<NinteichosaTokkijiko> 認定調査特記事項List = new ArrayList<>();
+        for (DbT5010NinteichosaTokkijikoEntity entity : entities) {
+            認定調査特記事項List.add(to認定調査特記事項(entity));
+        }
+        return new NinteichosaTokkijikoCollection(認定調査特記事項List);
+
     }
 
     /**
