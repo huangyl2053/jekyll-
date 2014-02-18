@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCod
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.util.db.DbAccessor;
+import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
 
@@ -27,7 +27,7 @@ public class ShinsakaiKaisaiBashoDac implements IShinsakaiKaisaiBashoDac {
 
     @Override
     public DbT5104ShinsakaiKaisaiBashoJohoEntity select(ShinsakaiKaisaiBashoCode 審査会開催場所) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT5104ShinsakaiKaisaiBashoJoho.class)
                 .where(eq(DbT5104ShinsakaiKaisaiBashoJoho.shinsakaiKaisaiBashoCode, 審査会開催場所))
@@ -36,7 +36,7 @@ public class ShinsakaiKaisaiBashoDac implements IShinsakaiKaisaiBashoDac {
 
     @Override
     public DbT5104ShinsakaiKaisaiBashoJohoEntity select(ShinsakaiKaisaiBashoCode 審査会開催場所, ShinsakaiKaisaiBashoJokyo 開催場所状況) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT5104ShinsakaiKaisaiBashoJoho.class)
                 .where(and(eq(DbT5104ShinsakaiKaisaiBashoJoho.shinsakaiKaisaiBashoCode, 審査会開催場所),
@@ -46,7 +46,7 @@ public class ShinsakaiKaisaiBashoDac implements IShinsakaiKaisaiBashoDac {
 
     @Override
     public List<DbT5104ShinsakaiKaisaiBashoJohoEntity> selectAll() {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT5104ShinsakaiKaisaiBashoJoho.class)
                 .toList(DbT5104ShinsakaiKaisaiBashoJohoEntity.class);
@@ -54,7 +54,7 @@ public class ShinsakaiKaisaiBashoDac implements IShinsakaiKaisaiBashoDac {
 
     @Override
     public List<DbT5104ShinsakaiKaisaiBashoJohoEntity> selectAll(ShinsakaiKaisaiBashoJokyo 開催場所状況) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT5104ShinsakaiKaisaiBashoJoho.class)
                 .where(eq(DbT5104ShinsakaiKaisaiBashoJoho.shinsakaiKaisaiBashoJokyo, 開催場所状況))
@@ -78,7 +78,7 @@ public class ShinsakaiKaisaiBashoDac implements IShinsakaiKaisaiBashoDac {
      */
     @Override
     public int insert(DbT5104ShinsakaiKaisaiBashoJohoEntity entity) {
-        DbAccessor dbAccessor = new DbAccessor(session);
+        DbAccessorNormalType dbAccessor = new DbAccessorNormalType(session);
         return dbAccessor.insert(entity).execute();
     }
 
@@ -90,13 +90,13 @@ public class ShinsakaiKaisaiBashoDac implements IShinsakaiKaisaiBashoDac {
      */
     @Override
     public int update(DbT5104ShinsakaiKaisaiBashoJohoEntity entity) {
-        DbAccessor dbAccessor = new DbAccessor(session);
+        DbAccessorNormalType dbAccessor = new DbAccessorNormalType(session);
         return dbAccessor.update(entity).execute();
     }
 
     @Override
     public int delete(DbT5104ShinsakaiKaisaiBashoJohoEntity entity) {
-        DbAccessor dbAccessor = new DbAccessor(session);
+        DbAccessorNormalType dbAccessor = new DbAccessorNormalType(session);
         return dbAccessor.delete(entity).execute();
     }
 
@@ -107,7 +107,7 @@ public class ShinsakaiKaisaiBashoDac implements IShinsakaiKaisaiBashoDac {
      * @return 取得件数
      */
     private int getMatchRowCount(DbT5104ShinsakaiKaisaiBashoJohoEntity entity) {
-        DbAccessor dbAccessor = new DbAccessor(session);
+        DbAccessorNormalType dbAccessor = new DbAccessorNormalType(session);
 
         return dbAccessor.
                 select().

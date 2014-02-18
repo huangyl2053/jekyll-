@@ -3,17 +3,16 @@ package jp.co.ndensan.reams.db.dbe.entity.basic;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoChikuCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
  * DbT5104ShinsakaiKaisaiBashoJohoの項目定義クラスです
  *
- * @author N1013 松本直樹
  */
 public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

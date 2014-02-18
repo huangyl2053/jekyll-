@@ -15,34 +15,34 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  */
 public class ShinsakaiKaisaiBashoChikuCode implements IDbColumnMappable, IValueObject {
 
-    private final RString 開催場所地区コード;
+    private final RString shinsakaiKaisaiBashoChikuCode;
 
     /**
      * コンストラクタです
      *
-     * @param 開催場所地区コード 開催場所地区コード
+     * @param shinsakaiKaisaiBashoChikuCode shinsakaiKaisaiBashoChikuCode
      */
     public ShinsakaiKaisaiBashoChikuCode(RString 開催場所地区コード) {
-        this.開催場所地区コード = 開催場所地区コード;
+        this.shinsakaiKaisaiBashoChikuCode = 開催場所地区コード;
     }
 
     /**
      * 開催場所地区コードを取得します
      *
-     * @return 開催場所地区コード
+     * @return shinsakaiKaisaiBashoChikuCode
      */
     @Override
     public RString getColumnValue() {
-        return 開催場所地区コード;
+        return shinsakaiKaisaiBashoChikuCode;
     }
 
     /**
      * 開催場所地区コードを取得します
      *
-     * @return 開催場所地区コード
+     * @return shinsakaiKaisaiBashoChikuCode
      */
     @Override
     public RString value() {
-        return 開催場所地区コード;
+        return shinsakaiKaisaiBashoChikuCode;
     }
 }
