@@ -26,7 +26,8 @@ public class NinteichosaIraiJohoCollection implements Iterable {
      * @throws NullPointerException 引数にnullが渡されたとき
      */
     public NinteichosaIraiJohoCollection(List<NinteichosaIraiJoho> 認定調査依頼情報List) throws NullPointerException {
-        this.認定調査依頼情報List = requireNonNull(認定調査依頼情報List);
+        requireNonNull(認定調査依頼情報List, Messages.E00003.replace("認定調査依頼情報List", getClass().getName()).getMessage());
+        this.認定調査依頼情報List = 認定調査依頼情報List;
     }
 
     /**
