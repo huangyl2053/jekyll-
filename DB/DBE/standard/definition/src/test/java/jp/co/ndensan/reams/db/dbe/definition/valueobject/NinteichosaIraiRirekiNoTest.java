@@ -61,4 +61,30 @@ public class NinteichosaIraiRirekiNoTest extends TestBase {
             assertThat(sut.hashCode(), is(比較対象.hashCode()));
         }
     }
+
+    public static class compareToのテスト extends TestBase {
+
+        @Override
+        public void setUp() {
+            sut = new NinteichosaIraiRirekiNo(23);
+        }
+
+        @Test
+        public void メンバの数値が比較対象より小さいとき_0より小さい値が返る() {
+            NinteichosaIraiRirekiNo 比較対象 = new NinteichosaIraiRirekiNo(45);
+            assertThat(sut.compareTo(比較対象) < 0, is(true));
+        }
+
+        @Test
+        public void メンバの数値が比較対象と同値であるとき_0が返る() {
+            NinteichosaIraiRirekiNo 比較対象 = new NinteichosaIraiRirekiNo(23);
+            assertThat(sut.compareTo(比較対象) == 0, is(true));
+        }
+
+        @Test
+        public void メンバの数値が比較対象より大きいとき_0より大きい値が返る() {
+            NinteichosaIraiRirekiNo 比較対象 = new NinteichosaIraiRirekiNo(12);
+            assertThat(0 < sut.compareTo(比較対象), is(true));
+        }
+    }
 }

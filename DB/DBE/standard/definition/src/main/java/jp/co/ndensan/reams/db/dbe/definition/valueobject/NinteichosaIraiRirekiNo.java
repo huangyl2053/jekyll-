@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  *
  * @author n8178 城間篤人
  */
-public class NinteichosaIraiRirekiNo implements IValueObject<Integer>, IDbColumnMappable {
+public class NinteichosaIraiRirekiNo implements IValueObject<Integer>, IDbColumnMappable, Comparable<NinteichosaIraiRirekiNo> {
 
     private final int 認定調査依頼履歴番号;
 
@@ -37,7 +37,7 @@ public class NinteichosaIraiRirekiNo implements IValueObject<Integer>, IDbColumn
         if (比較対象 == null || getClass() != 比較対象.getClass()) {
             return false;
         }
-        return this.value() == ((NinteichosaIraiRirekiNo) 比較対象).value();
+        return ((NinteichosaIraiRirekiNo) 比較対象).value().equals(this.value());
     }
 
     @Override
@@ -48,5 +48,10 @@ public class NinteichosaIraiRirekiNo implements IValueObject<Integer>, IDbColumn
     @Override
     public Integer value() {
         return 認定調査依頼履歴番号;
+    }
+
+    @Override
+    public int compareTo(NinteichosaIraiRirekiNo 比較対象) {
+        return 認定調査依頼履歴番号 - 比較対象.value();
     }
 }
