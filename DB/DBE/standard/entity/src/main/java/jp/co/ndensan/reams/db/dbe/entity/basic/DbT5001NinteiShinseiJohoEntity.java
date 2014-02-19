@@ -53,8 +53,8 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     private RString zenYokaigoKubunCode;
     private int zenYukoKikan;
     private boolean johoteikyoDouiUmuKubun;
-    private int ninteichosaIraiRirekiNo;
-    private NinteiChosaIraiRirekiNo ikenshoIraiRirekiNo;
+    private NinteiChosaIraiRirekiNo ninteichosaIraiRirekiNo;
+    private int ikenshoIraiRirekiNo;
     private RString minashiCode;
     private boolean enkitsuchiDoiUmuKubun;
     private boolean shisetsuNyushoUmuKubun;

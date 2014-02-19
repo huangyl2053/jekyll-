@@ -260,7 +260,7 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
                 zenYokaigoKubunCode,
                 zenYukoKikan,
                 johoteikyoDouiUmuKubun,
-                Integer.parseInt(ninteichosaIraiRirekiNo.value().toString()),
+                ninteichosaIraiRirekiNo,
                 Integer.parseInt(ikenshoIraiRirekiNo.toString()),
                 minashiCode,
                 enkitsuchiDoiUmuKubun,

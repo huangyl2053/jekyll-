@@ -42,7 +42,7 @@ public class DbT5001NinteiShinseiJohoEntityMock {
                 試験用文字列,
                 1,
                 true,
-                Integer.parseInt(new NinteiChosaIraiRirekiNo(試験用文字列).value().toString()),
+                new NinteiChosaIraiRirekiNo(試験用文字列),
                 Integer.parseInt(試験用文字列.toString()),
                 試験用文字列,
                 true,
