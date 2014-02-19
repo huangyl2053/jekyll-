@@ -108,11 +108,11 @@ public class NinteichosaIraiJohoDacTest extends TestDacBase {
 //        }
 //
 //        @Test
-//        public void 申請書管理番号_1のデータを取得できる() {
+//        public void 申請書管理番号_1_認定調査依頼履歴番号_4を指定したとき_申請書管理番号に1を持つ認定調査依頼情報が取得できる() {
 //            assertThat(sut.select(申請書管理番号, 認定調査依頼履歴番号).getShinseishoKanriNo(), is(申請書管理番号));
 //        }
 //
-//        public void 認定調査依頼履歴番号_4のデータを取得できる() {
+//        public void 申請書管理番号_1_認定調査依頼履歴番号_4を指定したとき_認定調査依頼履歴番号に4を持つ認定調査依頼情報が取得できる() {
 //            assertThat(sut.select(申請書管理番号, 認定調査依頼履歴番号).getNinteichosaIraiRirekiNo(), is(認定調査依頼履歴番号));
 //        }
 //
