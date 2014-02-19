@@ -49,6 +49,7 @@ public class NinteichosaIraiManager {
      */
     public NinteichosaIrai get認定調査依頼情報(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号) {
         DbT5006NinteichosaIraiJohoEntity entity = dac.select(申請書管理番号, 認定調査依頼履歴番号);
+        //TODO n8178 城間篤人 認定調査委託先と調査員を表すクラスと、それらの取得方法が実装された後に、ここに取得処理を追加 2014年2月末
         return NinteichosaIraiMapper.to認定調査依頼情報(entity);
     }
 
@@ -61,6 +62,7 @@ public class NinteichosaIraiManager {
      */
     public NinteichosaIraiCollection get認定調査依頼情報履歴(ShinseishoKanriNo 申請書管理番号) {
         List<DbT5006NinteichosaIraiJohoEntity> entities = dac.select(申請書管理番号);
+        //TODO n8178 城間篤人 認定調査委託先と調査員を表すクラスと、それらの取得方法が実装された後に、ここに取得処理を追加 2014年2月末
         return NinteichosaIraiMapper.to認定調査依頼情報Collection(entities);
     }
 
