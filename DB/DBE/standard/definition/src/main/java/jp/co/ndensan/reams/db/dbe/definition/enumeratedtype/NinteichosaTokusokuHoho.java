@@ -5,7 +5,6 @@
 package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
 
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -19,22 +18,22 @@ public enum NinteichosaTokusokuHoho {
     /**
      * 督促状郵送
      */
-    督促状郵送(new Code(new RString("0"))),
+    督促状郵送(new RString("0")),
     /**
      * 督促状ＦＡＸ
      */
-    督促状ＦＡＸ(new Code(new RString("1"))),
+    督促状ＦＡＸ(new RString("1")),
     /**
      * 電話
      */
-    電話(new Code(new RString("2"))),
+    電話(new RString("2")),
     /**
      * その他
      */
-    その他(new Code(new RString("3")));
-    private final Code 督促方法コード;
+    その他(new RString("3"));
+    private final RString 督促方法コード;
 
-    private NinteichosaTokusokuHoho(Code 督促方法コード) {
+    private NinteichosaTokusokuHoho(RString 督促方法コード) {
         this.督促方法コード = 督促方法コード;
     }
 
@@ -43,7 +42,7 @@ public enum NinteichosaTokusokuHoho {
      *
      * @return 督促方法コード
      */
-    public Code getCode() {
+    public RString getCode() {
         return 督促方法コード;
     }
 
@@ -54,7 +53,7 @@ public enum NinteichosaTokusokuHoho {
      * @return 対応した認定調査督促方法
      * @throws IllegalArgumentException 対応する認定調査督促方法が存在しなかったとき
      */
-    public static NinteichosaTokusokuHoho toValue(Code 督促方法コード) throws IllegalArgumentException {
+    public static NinteichosaTokusokuHoho toValue(RString 督促方法コード) throws IllegalArgumentException {
         for (NinteichosaTokusokuHoho hoho : values()) {
             if (hoho.getCode().equals(督促方法コード)) {
                 return hoho;
