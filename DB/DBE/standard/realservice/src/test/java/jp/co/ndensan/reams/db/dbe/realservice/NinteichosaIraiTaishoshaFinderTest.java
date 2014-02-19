@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinchokuJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.INinteiChosaIraiTaishoshaDac;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.KojinEntityMock;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urf.persistence.basic.IChosainJohoDac;
 import jp.co.ndensan.reams.ur.urf.persistence.basic.IKaigoJigyoshaDac;
@@ -223,7 +223,7 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
         ShinseishoKanriNo shinseishoKanriNo = TestCases[テストパターン].get申請書管理番号();
         ShichosonCode shichosonCode = TestCases[テストパターン].get市町村コード();
         RString shishoCode = new RString("1");
-        KaigoHihokenshaNumber hihokenshaNo = new KaigoHihokenshaNumber(試験用文字列);
+        KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(試験用文字列);
         IShikibetsuCode shikibetsuCode = new _ShikibetsuCode(試験用文字列);
         FlexibleDate ninteiShinseiYMD = 調査完了年月日;
         RString ninteiShinseiEdabanCode = 試験用文字列;
@@ -249,7 +249,7 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
                 shichosonCode,
                 shishoCode,
                 hihokenshaNo,
-                shikibetsuCode,
+                shikibetsuCode.getValue(),
                 ninteiShinseiYMD,
                 ninteiShinseiEdabanCode,
                 ninteiShinseiShinseijiKubunCode,
@@ -260,8 +260,8 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
                 zenYokaigoKubunCode,
                 zenYukoKikan,
                 johoteikyoDouiUmuKubun,
-                ninteichosaIraiRirekiNo,
-                ikenshoIraiRirekiNo,
+                Integer.parseInt(ninteichosaIraiRirekiNo.value().toString()),
+                Integer.parseInt(ikenshoIraiRirekiNo.toString()),
                 minashiCode,
                 enkitsuchiDoiUmuKubun,
                 shisetsuNyushoUmuKubun,

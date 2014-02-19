@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.entity.helper;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiChosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -30,8 +30,8 @@ public class DbT5001NinteiShinseiJohoEntityMock {
                 new ShinseishoKanriNo(試験用文字列),
                 new ShichosonCode(試験用文字列),
                 試験用文字列,
-                new KaigoHihokenshaNumber(試験用文字列),
-                new _ShikibetsuCode(試験用文字列),
+                new KaigoHihokenshaNo(試験用文字列),
+                試験用文字列,
                 new FlexibleDate(new RString("20140101")),
                 試験用文字列,
                 試験用文字列,
@@ -42,8 +42,8 @@ public class DbT5001NinteiShinseiJohoEntityMock {
                 試験用文字列,
                 1,
                 true,
-                new NinteiChosaIraiRirekiNo(試験用文字列),
-                試験用文字列,
+                Integer.parseInt(new NinteiChosaIraiRirekiNo(試験用文字列).value().toString()),
+                Integer.parseInt(試験用文字列.toString()),
                 試験用文字列,
                 true,
                 true,

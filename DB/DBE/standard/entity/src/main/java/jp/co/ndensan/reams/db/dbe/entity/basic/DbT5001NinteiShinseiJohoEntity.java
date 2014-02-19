@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiChosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -53,7 +54,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     private int zenYukoKikan;
     private boolean johoteikyoDouiUmuKubun;
     private int ninteichosaIraiRirekiNo;
-    private int ikenshoIraiRirekiNo;
+    private NinteiChosaIraiRirekiNo ikenshoIraiRirekiNo;
     private RString minashiCode;
     private boolean enkitsuchiDoiUmuKubun;
     private boolean shisetsuNyushoUmuKubun;
@@ -113,7 +114,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
             RString zenYokaigoKubunCode,
             int zenYukoKikan,
             boolean johoteikyoDouiUmuKubun,
-            int ninteichosaIraiRirekiNo,
+            NinteiChosaIraiRirekiNo ninteichosaIraiRirekiNo,
             int ikenshoIraiRirekiNo,
             RString minashiCode,
             boolean enkitsuchiDoiUmuKubun,
@@ -490,7 +491,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
      *
      * @return ninteichosaIraiRirekiNo
      */
-    public int getNinteichosaIraiRirekiNo() {
+    public NinteiChosaIraiRirekiNo getNinteichosaIraiRirekiNo() {
         return ninteichosaIraiRirekiNo;
     }
 
@@ -499,7 +500,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
      *
      * @param ninteichosaIraiRirekiNo 認定調査依頼履歴番号
      */
-    public void setNinteichosaIraiRirekiNo(int ninteichosaIraiRirekiNo) {
+    public void setNinteichosaIraiRirekiNo(NinteiChosaIraiRirekiNo ninteichosaIraiRirekiNo) {
         this.ninteichosaIraiRirekiNo = ninteichosaIraiRirekiNo;
     }
 
