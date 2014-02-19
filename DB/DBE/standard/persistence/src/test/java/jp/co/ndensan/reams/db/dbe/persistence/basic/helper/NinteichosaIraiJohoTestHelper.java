@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.basic.helper;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.MobileDataShutsuryoku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaTokusokuHoho;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosainBangoCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
@@ -24,10 +25,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class NinteichosaIraiJohoTestHelper {
 
     public static ShinseishoKanriNo shinseishoKanriNo = new ShinseishoKanriNo(new RString("0001"));
-    public static int ninteichosaIraiRirekiNo = 1;
+    public static NinteichosaIraiRirekiNo ninteichosaIraiRirekiNo = new NinteichosaIraiRirekiNo(1);
     public static NinteichosaItakusakiCode ninteichosaItakusakiCode = new NinteichosaItakusakiCode(new RString("2001"));
     public static NinteichosainBangoCode chousainCode = new NinteichosainBangoCode(new RString("3001"));
-    public static Code ninteichousaIraiKubunCode = new Code(new RString("0"));
+    public static RString ninteichousaIraiKubunCode = new RString("0");
     public static int ninteichosaIraiKaisu = 1;
     public static FlexibleDate ninteichosaIraiYMD = new FlexibleDate("19991212");
     public static FlexibleDate ninteichosaKigenYMD = new FlexibleDate("20001212");
@@ -35,7 +36,7 @@ public class NinteichosaIraiJohoTestHelper {
     public static FlexibleDate chosahyoTouShutsuryokuYMD = new FlexibleDate("20021212");
     public static boolean mobileDataShutsuryokuFlag = false;
     public static FlexibleDate ninteichosaTokusokuYMD = new FlexibleDate("20031212");
-    public static Code ninteichosaTokusokuHoho = new Code(new RString("1"));
+    public static RString ninteichosaTokusokuHoho = new RString("1");
     public static int ninteichosaTokusokuKaisu = 2;
     public static RString ninteichosaTokusokuMemo = new RString("督促");
 
@@ -71,7 +72,8 @@ public class NinteichosaIraiJohoTestHelper {
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
      * @return 認定調査依頼情報Entity
      */
-    public static DbT5006NinteichosaIraiJohoEntity create認定調査依頼情報Entity(ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号) {
+    public static DbT5006NinteichosaIraiJohoEntity create認定調査依頼情報Entity(ShinseishoKanriNo 申請書管理番号,
+            NinteichosaIraiRirekiNo 認定調査依頼履歴番号) {
         DbT5006NinteichosaIraiJohoEntity entity = create認定調査依頼情報Entity();
         entity.setShinseishoKanriNo(申請書管理番号);
         entity.setNinteichosaIraiRirekiNo(認定調査依頼履歴番号);
@@ -87,7 +89,7 @@ public class NinteichosaIraiJohoTestHelper {
      * @return 認定調査依頼情報Entity
      */
     public static DbT5006NinteichosaIraiJohoEntity create認定調査依頼情報Entity(ShinseishoKanriNo 申請書管理番号,
-            int 認定調査依頼履歴番号, RDate 督促年月日) {
+            NinteichosaIraiRirekiNo 認定調査依頼履歴番号, RDate 督促年月日) {
         DbT5006NinteichosaIraiJohoEntity entity = create認定調査依頼情報Entity();
         entity.setShinseishoKanriNo(申請書管理番号);
         entity.setNinteichosaIraiRirekiNo(認定調査依頼履歴番号);
@@ -96,7 +98,7 @@ public class NinteichosaIraiJohoTestHelper {
     }
 
     public static DbT5006NinteichosaIraiJohoEntity create認定調査依頼情報Entity(ShinseishoKanriNo 申請書管理番号,
-            int 認定調査依頼履歴番号, NinteichosaItakusakiCode get認定調査委託先コード, NinteichosainBangoCode get調査員番号コード) {
+            NinteichosaIraiRirekiNo 認定調査依頼履歴番号, NinteichosaItakusakiCode get認定調査委託先コード, NinteichosainBangoCode get調査員番号コード) {
         DbT5006NinteichosaIraiJohoEntity entity = create認定調査依頼情報Entity();
         entity.setShinseishoKanriNo(申請書管理番号);
         entity.setNinteichosaIraiRirekiNo(認定調査依頼履歴番号);

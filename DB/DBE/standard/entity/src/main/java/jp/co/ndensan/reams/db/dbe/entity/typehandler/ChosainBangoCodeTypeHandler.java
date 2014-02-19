@@ -9,8 +9,14 @@ import org.apache.ibatis.type.JdbcType;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosainBangoCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
+/**
+ * 調査員番号コードのTypeHandlerです。
+ *
+ * @author n8178 城間篤人
+ */
 public class ChosainBangoCodeTypeHandler extends BaseTypeHandler<NinteichosainBangoCode> {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
+
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, NinteichosainBangoCode parameter, JdbcType jdbcType) throws SQLException {
         ps.setString(i, parameter == null ? null : parameter.getColumnValue().toString());
@@ -34,6 +40,5 @@ public class ChosainBangoCodeTypeHandler extends BaseTypeHandler<NinteichosainBa
     private RString getResultRString(String result) {
         return result == null ? null : new RString(result);
     }
-
 // </editor-fold>
 }

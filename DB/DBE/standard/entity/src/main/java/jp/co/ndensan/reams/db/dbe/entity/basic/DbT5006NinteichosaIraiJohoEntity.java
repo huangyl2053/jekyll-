@@ -7,15 +7,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosainBangoCode;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * DbT5006NinteichosaIraiJohoの項目定義クラスです
  *
- * @author n8718 城間篤人
+ * @author n8178 城間篤人
  */
 public class DbT5006NinteichosaIraiJohoEntity implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
@@ -33,10 +33,10 @@ public class DbT5006NinteichosaIraiJohoEntity implements IDbAccessable {
     @PrimaryKey
     private ShinseishoKanriNo shinseishoKanriNo;
     @PrimaryKey
-    private int ninteichosaIraiRirekiNo;
+    private NinteichosaIraiRirekiNo ninteichosaIraiRirekiNo;
     private NinteichosaItakusakiCode ninteichosaItakusakiCode;
     private NinteichosainBangoCode chousainCode;
-    private Code ninteichousaIraiKubunCode;
+    private RString ninteichousaIraiKubunCode;
     private int ninteichosaIraiKaisu;
     private FlexibleDate ninteichosaIraiYMD;
     private FlexibleDate ninteichosaKigenYMD;
@@ -44,7 +44,7 @@ public class DbT5006NinteichosaIraiJohoEntity implements IDbAccessable {
     private FlexibleDate chosahyoTouShutsuryokuYMD;
     private boolean mobileDataShutsuryokuFlag;
     private FlexibleDate ninteichosaTokusokuYMD;
-    private Code ninteichosaTokusokuHoho;
+    private RString ninteichosaTokusokuHoho;
     private int ninteichosaTokusokuKaisu;
     private RString ninteichosaTokusokuMemo;
 
@@ -116,7 +116,7 @@ public class DbT5006NinteichosaIraiJohoEntity implements IDbAccessable {
      *
      * @return ninteichosaIraiRirekiNo
      */
-    public int getNinteichosaIraiRirekiNo() {
+    public NinteichosaIraiRirekiNo getNinteichosaIraiRirekiNo() {
         return ninteichosaIraiRirekiNo;
     }
 
@@ -125,7 +125,7 @@ public class DbT5006NinteichosaIraiJohoEntity implements IDbAccessable {
      *
      * @param ninteichosaIraiRirekiNo ninteichosaIraiRirekiNo
      */
-    public void setNinteichosaIraiRirekiNo(int ninteichosaIraiRirekiNo) {
+    public void setNinteichosaIraiRirekiNo(NinteichosaIraiRirekiNo ninteichosaIraiRirekiNo) {
         this.ninteichosaIraiRirekiNo = ninteichosaIraiRirekiNo;
     }
 
@@ -170,7 +170,7 @@ public class DbT5006NinteichosaIraiJohoEntity implements IDbAccessable {
      *
      * @return ninteichousaIraiKubunCode
      */
-    public Code getNinteichousaIraiKubunCode() {
+    public RString getNinteichousaIraiKubunCode() {
         return ninteichousaIraiKubunCode;
     }
 
@@ -179,7 +179,7 @@ public class DbT5006NinteichosaIraiJohoEntity implements IDbAccessable {
      *
      * @param ninteichousaIraiKubunCode ninteichousaIraiKubunCode
      */
-    public void setNinteichousaIraiKubunCode(Code ninteichousaIraiKubunCode) {
+    public void setNinteichousaIraiKubunCode(RString ninteichousaIraiKubunCode) {
         this.ninteichousaIraiKubunCode = ninteichousaIraiKubunCode;
     }
 
@@ -314,7 +314,7 @@ public class DbT5006NinteichosaIraiJohoEntity implements IDbAccessable {
      *
      * @return ninteichosaTokusokuHoho
      */
-    public Code getNinteichosaTokusokuHoho() {
+    public RString getNinteichosaTokusokuHoho() {
         return ninteichosaTokusokuHoho;
     }
 
@@ -323,7 +323,7 @@ public class DbT5006NinteichosaIraiJohoEntity implements IDbAccessable {
      *
      * @param ninteichosaTokusokuHoho ninteichosaTokusokuHoho
      */
-    public void setNinteichosaTokusokuHoho(Code ninteichosaTokusokuHoho) {
+    public void setNinteichosaTokusokuHoho(RString ninteichosaTokusokuHoho) {
         this.ninteichosaTokusokuHoho = ninteichosaTokusokuHoho;
     }
 

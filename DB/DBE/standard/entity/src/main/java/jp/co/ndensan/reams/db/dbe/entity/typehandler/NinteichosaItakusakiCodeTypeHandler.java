@@ -9,8 +9,14 @@ import org.apache.ibatis.type.JdbcType;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItakusakiCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
+/**
+ * 認定調査委託先コードのTypeHandlerです。
+ *
+ * @author n8178 城間篤人
+ */
 public class NinteichosaItakusakiCodeTypeHandler extends BaseTypeHandler<NinteichosaItakusakiCode> {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
+
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, NinteichosaItakusakiCode parameter, JdbcType jdbcType) throws SQLException {
         ps.setString(i, parameter == null ? null : parameter.getColumnValue().toString());
@@ -34,6 +40,5 @@ public class NinteichosaItakusakiCodeTypeHandler extends BaseTypeHandler<Ninteic
     private RString getResultRString(String result) {
         return result == null ? null : new RString(result);
     }
-
 // </editor-fold>
 }

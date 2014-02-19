@@ -9,7 +9,11 @@ import org.apache.ibatis.type.JdbcType;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
-//TODO n8178 城間篤人　このクラス削除して、dbzに新規で作り直したほうがよい？ 2014年2月末
+/**
+ * 申請書管理番号のTypeHandlerです。
+ *
+ * @author n8178 城間篤人
+ */
 public class ShinseishoKanriNoTypeHandler extends BaseTypeHandler<ShinseishoKanriNo> {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
