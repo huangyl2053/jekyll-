@@ -8,6 +8,11 @@ import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 
+/**
+ * 認定調査依頼履歴番号のTypeHandlerです。
+ *
+ * @author n8178 城間篤人
+ */
 public class NinteichosaIraiRirekiNoTypeHandler extends BaseTypeHandler<NinteichosaIraiRirekiNo> {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
