@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5010NinteichosaTokkijiko;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5010NinteichosaTokkijiko.*;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
 
@@ -38,6 +39,7 @@ public class NinteichosaTokkijikoDac implements INinteichosaTokkijikoDac {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5010NinteichosaTokkijiko.class)
                 .where(eq(shinseishoKanriNo, 申請書管理番号))
+                .order(by(shinseishoKanriNo, Order.ASC), by(ninteichosaRirekiNo, Order.DESC), by(ninteichosaTokkijikoNo, Order.ASC))
                 .toList(DbT5010NinteichosaTokkijikoEntity.class);
     }
 
