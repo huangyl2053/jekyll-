@@ -8,12 +8,13 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiChosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 
 /**
  * 要介護認定申請情報のエンティティクラスです。
@@ -52,7 +53,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     private RString zenYokaigoKubunCode;
     private int zenYukoKikan;
     private boolean johoteikyoDouiUmuKubun;
-    private int ninteichosaIraiRirekiNo;
+    private NinteiChosaIraiRirekiNo ninteichosaIraiRirekiNo;
     private int ikenshoIraiRirekiNo;
     private RString minashiCode;
     private boolean enkitsuchiDoiUmuKubun;
@@ -66,7 +67,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     /**
      * ORマッパーのためのデフォルトコンストラクタです。
      */
-    DbT5001NinteiShinseiJohoEntity() {
+    public DbT5001NinteiShinseiJohoEntity() {
     }
 
     /**
@@ -113,7 +114,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
             RString zenYokaigoKubunCode,
             int zenYukoKikan,
             boolean johoteikyoDouiUmuKubun,
-            int ninteichosaIraiRirekiNo,
+            NinteiChosaIraiRirekiNo ninteichosaIraiRirekiNo,
             int ikenshoIraiRirekiNo,
             RString minashiCode,
             boolean enkitsuchiDoiUmuKubun,
@@ -472,7 +473,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
      *
      * @return {@code true}:有効、{@code false}:無効
      */
-    public boolean isJohoteikyoDouiUmuKubun() {
+    public boolean getJohoteikyoDouiUmuKubun() {
         return johoteikyoDouiUmuKubun;
     }
 
@@ -490,7 +491,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
      *
      * @return ninteichosaIraiRirekiNo
      */
-    public int getNinteichosaIraiRirekiNo() {
+    public NinteiChosaIraiRirekiNo getNinteichosaIraiRirekiNo() {
         return ninteichosaIraiRirekiNo;
     }
 
@@ -499,7 +500,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
      *
      * @param ninteichosaIraiRirekiNo 認定調査依頼履歴番号
      */
-    public void setNinteichosaIraiRirekiNo(int ninteichosaIraiRirekiNo) {
+    public void setNinteichosaIraiRirekiNo(NinteiChosaIraiRirekiNo ninteichosaIraiRirekiNo) {
         this.ninteichosaIraiRirekiNo = ninteichosaIraiRirekiNo;
     }
 
@@ -544,7 +545,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
      *
      * @return {@code true}:有効、{@code false}:無効
      */
-    public boolean isEnkitsuchiDoiUmuKubun() {
+    public boolean getEnkitsuchiDoiUmuKubun() {
         return enkitsuchiDoiUmuKubun;
     }
 
@@ -562,7 +563,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
      *
      * @return {@code true}:有効、{@code false}:無効
      */
-    public boolean isShisetsuNyushoUmuKubun() {
+    public boolean getShisetsuNyushoUmuKubun() {
         return shisetsuNyushoUmuKubun;
     }
 
@@ -652,7 +653,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
      *
      * @return {@code true}:有効、{@code false}:無効
      */
-    public boolean isShinsaKeizokuKubun() {
+    public boolean getShinsaKeizokuKubun() {
         return shinsaKeizokuKubun;
     }
 

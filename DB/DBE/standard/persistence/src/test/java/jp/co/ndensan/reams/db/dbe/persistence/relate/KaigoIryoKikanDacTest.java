@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.basic.IShujiiIryoKikanDacMock;
 import jp.co.ndensan.reams.db.dbe.persistence.testhelper.KaigoIryoKikanTestHelper;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.HokenShubetsu;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.IIryoKikanDac;
+//import jp.co.ndensan.reams.ur.urz.persistence.basic.IIryoKikanDac;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestDacBase;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;

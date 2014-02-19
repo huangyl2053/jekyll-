@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.db.dba.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.HokenShubetsu;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoShikaku;
+import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.JushochiTokureishaKubun;
+import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.ShikakuHihokenshaKubun;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.ur.urz.business.KaigoShikakuFactory;
@@ -41,7 +43,10 @@ public final class HihokenshaMapper {
      * @return T1001HihokenshaDaichoEntityと同じ値をもったHihokensya
      */
     public static Hihokensha toHihokensha(final DbT1001HihokenshaDaichoEntity entity) {
-        IKaigoShikaku 介護保険資格 = toKaigoShikaku(entity);
+        if (entity == null) {
+            return null;
+        }
+
         ShichosonCode 市町村コード = new ShichosonCode(entity.getShichosonCd());
         HihokenshaKubun 被保険者区分 = to被保険者区分(entity.getHihokenshaKubunCode());
         ShikakuHenkoJiyu 資格変更事由 = to資格変更事由(entity.getShikakuHenkoJiyuCode());
@@ -49,6 +54,7 @@ public final class HihokenshaMapper {
         JushochitokureiKaijoJiyu 住所地特例解除事由 = to住所地特例解除事由(entity.getJushochitokureiKaijoJiyuCode());
         ShichosonCode 広域内住所地特例措置元_市町村コード = new ShichosonCode(entity.getKoikinaiTokureiSochimotoShichosonCd());
         SaikofuJiyu 再交付事由 = to再交付事由(entity.getSaikofuJiyuCode());
+        IKaigoShikaku 介護保険資格 = toKaigoShikaku(entity);
 
         Hihokensha 被保険者 = new Hihokensha(
                 介護保険資格, 市町村コード, ShikakuIdoKubun.toValue(entity.getShikakuIdouKubunCode()), 被保険者区分,
@@ -76,7 +82,10 @@ public final class HihokenshaMapper {
     }
 
     private static IKaigoShikaku toKaigoShikaku(final DbT1001HihokenshaDaichoEntity entity) {
-        //TODO 資格被保険者区分、住所地特例者区分　の設定について見直しを行う　　　　2014/02/14
+        //TODO n3327 三浦凌 資格被保険者区分、住所地特例者区分　の設定について見直しを行う　　　　2014/03/14
+        ShikakuHihokenshaKubun 資格被保険者区分 = toShiakuHihokenshaKubun(to被保険者区分(entity.getHihokenshaKubunCode()));
+        JushochiTokureishaKubun 住所地特例者区分 = toJushochiTokureishaKubun(entity.isJushochitokureisha());
+
         IShikibetsuCode 識別コード = entity.getShikibetsuCode();
         IKaigoShikaku 介護保険資格 = KaigoShikakuFactory.createInstance(
                 識別コード, HokenShubetsu.介護保険,
@@ -85,8 +94,17 @@ public final class HihokenshaMapper {
                 entity.getShikakuSoshitsuTodokedeDate(), entity.getShikakuSoshitsuDate(),
                 to資格喪失事由(entity.getShikakuSoshitsuJiyuCode()),
                 entity.getHihokenshaNo(), entity.getShichosonCd(), entity.getIchigoHihokenshaNenreiTotatsuDate(),
-                null, null);
+                資格被保険者区分, 住所地特例者区分);
         return 介護保険資格;
+    }
+
+    //TODO n3327 三浦 凌 ShikakuHihokenshaKubunとHihokenshaKubunの変換が複数箇所であるので、リファクタリングする。現状は仮実装。
+    private static ShikakuHihokenshaKubun toShiakuHihokenshaKubun(final HihokenshaKubun 被保険者区分) {
+        return ShikakuHihokenshaKubun.第１号被保険者;
+    }
+
+    private static JushochiTokureishaKubun toJushochiTokureishaKubun(boolean is住所地特例) {
+        return is住所地特例 ? JushochiTokureishaKubun.住所地特例者 : JushochiTokureishaKubun.通常資格者;
     }
 
 //TODO N3327 三浦 凌 コードマスタからコードを取得できるならば、以下のコードを修正・削除する。

@@ -9,9 +9,10 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJoho;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJoho.*;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.DateRoundingType;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDateOld;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessor;
@@ -38,7 +39,7 @@ public class NinteiShinseiJohoDac implements INinteiShinseiJohoDac {
     }
 
     @Override
-    public List<DbT5001NinteiShinseiJohoEntity> selectAllBy認定申請年月日(ShichosonCode 市町村コード, Range<FlexibleDate> 認定申請年月日範囲) {
+    public List<DbT5001NinteiShinseiJohoEntity> selectAllBy認定申請年月日(ShichosonCode 市町村コード, Range<FlexibleDateOld> 認定申請年月日範囲) {
         DbAccessor accessor = new DbAccessor(session);
         return accessor.select()
                 .table(DbT5001NinteiShinseiJoho.class)
@@ -50,7 +51,7 @@ public class NinteiShinseiJohoDac implements INinteiShinseiJohoDac {
     }
 
     @Override
-    public List<DbT5001NinteiShinseiJohoEntity> selectAllBy取下げ年月日(ShichosonCode 市町村コード, Range<FlexibleDate> 取下げ年月日範囲) {
+    public List<DbT5001NinteiShinseiJohoEntity> selectAllBy取下げ年月日(ShichosonCode 市町村コード, Range<FlexibleDateOld> 取下げ年月日範囲) {
         DbAccessor accessor = new DbAccessor(session);
         return accessor.select()
                 .table(DbT5001NinteiShinseiJoho.class)

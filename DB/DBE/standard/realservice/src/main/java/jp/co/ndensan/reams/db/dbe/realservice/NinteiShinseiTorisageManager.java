@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisage;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisageTaishosha;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisageTaishoshaList;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteishinseiTorisageTaishoshaMa
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDateOld;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
 
@@ -61,7 +62,7 @@ public class NinteiShinseiTorisageManager {
      * @param 認定申請年月日範囲 認定申請年月日範囲
      * @return 指定した条件に合致する、取り下げされていない認定申請情報のリスト
      */
-    public NinteiShinseiTorisageTaishoshaList get認定申請取下げ対象者全件(ShichosonCode 市町村コード, Range<FlexibleDate> 認定申請年月日範囲) {
+    public NinteiShinseiTorisageTaishoshaList get認定申請取下げ対象者全件(ShichosonCode 市町村コード, Range<FlexibleDateOld> 認定申請年月日範囲) {
         List<DbT5001NinteiShinseiJohoEntity> entities = shinseiDac.selectAllBy認定申請年月日(市町村コード, 認定申請年月日範囲);
         return create認定申請取下げList(entities);
     }
@@ -73,7 +74,7 @@ public class NinteiShinseiTorisageManager {
      * @param 取下げ年月日範囲 取下げ年月日範囲
      * @return 指定した条件に合致する、取り下げされている認定申請情報のリスト
      */
-    public NinteiShinseiTorisageTaishoshaList get認定申請取下げ者(ShichosonCode 市町村コード, Range<FlexibleDate> 取下げ年月日範囲) {
+    public NinteiShinseiTorisageTaishoshaList get認定申請取下げ者(ShichosonCode 市町村コード, Range<FlexibleDateOld> 取下げ年月日範囲) {
         List<DbT5001NinteiShinseiJohoEntity> entities = shinseiDac.selectAllBy取下げ年月日(市町村コード, 取下げ年月日範囲);
         return create認定申請取下げList(entities);
     }

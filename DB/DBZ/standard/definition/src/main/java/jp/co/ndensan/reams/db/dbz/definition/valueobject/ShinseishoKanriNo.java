@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  *
  * @author n8178 城間篤人
  */
+@Deprecated
 public class ShinseishoKanriNo implements IDbColumnMappable {
 
     private final RString 申請書管理番号;

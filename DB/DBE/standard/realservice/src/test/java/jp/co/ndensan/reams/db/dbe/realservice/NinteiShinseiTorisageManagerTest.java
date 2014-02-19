@@ -16,8 +16,9 @@ import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteishinseiTorisageTaishoshaMa
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDateOld;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
@@ -47,7 +48,7 @@ public class NinteiShinseiTorisageManagerTest extends TestBase {
     private static RString 取下げ理由 = new RString("とりさげ");
     private static FlexibleDate 取下げ年月日 = new FlexibleDate(new RString("20120101"));
     private static ShinsaKeizokuKubun 審査継続区分 = ShinsaKeizokuKubun.継続しない;
-    private static Range<FlexibleDate> 年月日範囲 = new Range(new FlexibleDate(new RString("20110101")), new FlexibleDate(new RString("20130101")));
+    private static Range<FlexibleDateOld> 年月日範囲 = new Range(new FlexibleDateOld(new RString("20110101")), new FlexibleDateOld(new RString("20130101")));
     private static NinteiShinseiTorisageTaishosha 認定申請取下げ対象 = create認定申請取下げ対象();
     private static NinteiShinseiTorisageManager sut;
 

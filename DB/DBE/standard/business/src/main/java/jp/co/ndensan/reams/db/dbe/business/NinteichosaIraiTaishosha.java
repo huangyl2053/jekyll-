@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNumber;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
 import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
@@ -24,7 +24,7 @@ public class NinteichosaIraiTaishosha {
 
     private ShinseishoKanriNo 申請書管理番号;
     private ShichosonCode 市町村コード;
-    private KaigoHihokenshaNumber 被保険者番号;
+    private KaigoHihokenshaNo 被保険者番号;
     private FlexibleDate 認定申請年月日;
     private RString 認定申請区分;
     private IKojin 個人情報;
@@ -52,7 +52,7 @@ public class NinteichosaIraiTaishosha {
      * {@code 申請書管理番号}がnullの場合、{@code 市町村コード}がnullの場合、{@code 被保険者}がnullの場合、
      * {@code 認定申請年月日}がnullの場合、{@code 認定申請区分}がnullの場合、{@code 個人情報}がnullの場合、{@code 氏名}がnullの場合、または{@code 住所}がnullの場合
      */
-    public NinteichosaIraiTaishosha(ShinseishoKanriNo 申請書管理番号, ShichosonCode 市町村コード, KaigoHihokenshaNumber 被保険者番号,
+    public NinteichosaIraiTaishosha(ShinseishoKanriNo 申請書管理番号, ShichosonCode 市町村コード, KaigoHihokenshaNo 被保険者番号,
             FlexibleDate 認定申請年月日, RString 認定申請区分, IKojin 個人情報, RString 氏名, RString 住所,
             NinteichosaItakusaki 認定調査委託先, IKaigoJigyosha 事業者情報, INinteiChosain 認定調査員情報) throws NullPointerException {
 
@@ -101,7 +101,7 @@ public class NinteichosaIraiTaishosha {
      *
      * @return 被保険者番号
      */
-    public KaigoHihokenshaNumber get被保険者番号() {
+    public KaigoHihokenshaNo get被保険者番号() {
         return 被保険者番号;
     }
 

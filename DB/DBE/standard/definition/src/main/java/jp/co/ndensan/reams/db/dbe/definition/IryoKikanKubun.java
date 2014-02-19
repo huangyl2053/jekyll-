@@ -5,7 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.definition;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.ur.urz.business.ICodeAssignedItem;
+//TODO n3327 三浦凌　ICodeAssignedItemが参照でいないのでコメントアウト。方針が決まったら、修正する。
+//import jp.co.ndensan.reams.ur.urz.business.ICodeAssignedItem;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
  *
  * @author n8178 城間篤人
  */
-public class IryoKikanKubun implements ICodeAssignedItem {
+public class IryoKikanKubun {//implements ICodeAssignedItem {
 
     private final RString code;
     private final RString name;
@@ -47,17 +48,17 @@ public class IryoKikanKubun implements ICodeAssignedItem {
         this.shortName = 略称;
     }
 
-    @Override
+    //@Override
     public RString getCode() {
         return code;
     }
 
-    @Override
+    //@Override
     public RString getName() {
         return name;
     }
 
-    @Override
+    //@Override
     public RString getShortName() {
         return shortName;
     }
