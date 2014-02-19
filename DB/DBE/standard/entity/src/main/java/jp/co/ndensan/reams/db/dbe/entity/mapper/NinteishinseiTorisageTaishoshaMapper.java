@@ -37,7 +37,7 @@ public final class NinteishinseiTorisageTaishoshaMapper {
     private static NinteiShinseiTorisage create認定申請取下げ(DbT5001NinteiShinseiJohoEntity entity) {
         return new NinteiShinseiTorisage(TorisageKubun.toValue(entity.getTorisageKubunCode()),
                 entity.getTorisageRiyu(), entity.getTorisageYMD(),
-                ShinsaKeizokuKubun.toValue(entity.getShinsaKeizokuKubun()));
+                ShinsaKeizokuKubun.toValue(entity.isShinsaKeizokuKubun()));
     }
 
     /**
@@ -81,17 +81,17 @@ public final class NinteishinseiTorisageTaishoshaMapper {
         更新済みEntity.setShinseiRiyu(entity.getShinseiRiyu());
         更新済みEntity.setZenYokaigoKubunCode(entity.getZenYokaigoKubunCode());
         更新済みEntity.setZenYukoKikan(entity.getZenYukoKikan());
-        更新済みEntity.setJohoteikyoDouiUmuKubun(entity.getJohoteikyoDouiUmuKubun());
+        更新済みEntity.setJohoteikyoDouiUmuKubun(entity.isJohoteikyoDouiUmuKubun());
         更新済みEntity.setNinteichosaIraiRirekiNo(entity.getNinteichosaIraiRirekiNo());
         更新済みEntity.setIkenshoIraiRirekiNo(entity.getIkenshoIraiRirekiNo());
         更新済みEntity.setMinashiCode(entity.getMinashiCode());
-        更新済みEntity.setEnkitsuchiDoiUmuKubun(entity.getEnkitsuchiDoiUmuKubun());
-        更新済みEntity.setShisetsuNyushoUmuKubun(entity.getShisetsuNyushoUmuKubun());
+        更新済みEntity.setEnkitsuchiDoiUmuKubun(entity.isEnkitsuchiDoiUmuKubun());
+        更新済みEntity.setShisetsuNyushoUmuKubun(entity.isShisetsuNyushoUmuKubun());
         更新済みEntity.setSichosonRenrakuJiko(entity.getSichosonRenrakuJiko());
         更新済みEntity.setTorisageKubunCode(entity.getTorisageKubunCode());
         更新済みEntity.setTorisageRiyu(entity.getTorisageRiyu());
         更新済みEntity.setTorisageYMD(entity.getTorisageYMD());
-        更新済みEntity.setShinsaKeizokuKubun(entity.getShinsaKeizokuKubun());
+        更新済みEntity.setShinsaKeizokuKubun(entity.isShinsaKeizokuKubun());
         return 更新済みEntity;
     }
 }
