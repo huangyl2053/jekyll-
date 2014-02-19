@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubun
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaTokusokuHoho;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosainBangoCode;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -26,7 +26,7 @@ public class NinteichosaIraiJohoTestHelper {
 
     public static ShinseishoKanriNo shinseishoKanriNo = new ShinseishoKanriNo(new RString("0001"));
     public static NinteichosaIraiRirekiNo ninteichosaIraiRirekiNo = new NinteichosaIraiRirekiNo(1);
-    public static NinteichosaItakusakiCode ninteichosaItakusakiCode = new NinteichosaItakusakiCode(new RString("2001"));
+    public static KaigoJigyoshaNo ninteichosaItakusakiCode = new KaigoJigyoshaNo(new RString("2001"));
     public static NinteichosainBangoCode chousainCode = new NinteichosainBangoCode(new RString("3001"));
     public static RString ninteichousaIraiKubunCode = new RString("0");
     public static int ninteichosaIraiKaisu = 1;
@@ -98,7 +98,7 @@ public class NinteichosaIraiJohoTestHelper {
     }
 
     public static DbT5006NinteichosaIraiJohoEntity create認定調査依頼情報Entity(ShinseishoKanriNo 申請書管理番号,
-            NinteichosaIraiRirekiNo 認定調査依頼履歴番号, NinteichosaItakusakiCode get認定調査委託先コード, NinteichosainBangoCode get調査員番号コード) {
+            NinteichosaIraiRirekiNo 認定調査依頼履歴番号, KaigoJigyoshaNo get認定調査委託先コード, NinteichosainBangoCode get調査員番号コード) {
         DbT5006NinteichosaIraiJohoEntity entity = create認定調査依頼情報Entity();
         entity.setShinseishoKanriNo(申請書管理番号);
         entity.setNinteichosaIraiRirekiNo(認定調査依頼履歴番号);

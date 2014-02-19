@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosainBangoCode;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
 import static jp.co.ndensan.reams.db.dbe.persistence.basic.helper.NinteichosaIraiJohoTestHelper.*;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -194,8 +194,8 @@ public class NinteichosaIraiJohoDacTest extends TestDacBase {
 //            assertThat(sut.select(create認定調査委託先コード("99"), create調査員番号コード("999")), is(Collections.EMPTY_LIST));
 //        }
 //
-//        private NinteichosaItakusakiCode create認定調査委託先コード(String str) {
-//            return new NinteichosaItakusakiCode(new RString(str));
+//        private KaigoJigyoshaNo create認定調査委託先コード(String str) {
+//            return new KaigoJigyoshaNo(new RString(str));
 //        }
 //
 //        private NinteichosainBangoCode create調査員番号コード(String str) {

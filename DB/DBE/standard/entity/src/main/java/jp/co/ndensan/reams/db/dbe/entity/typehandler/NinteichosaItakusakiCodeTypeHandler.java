@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -14,27 +14,27 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8178 城間篤人
  */
-public class NinteichosaItakusakiCodeTypeHandler extends BaseTypeHandler<NinteichosaItakusakiCode> {
+public class NinteichosaItakusakiCodeTypeHandler extends BaseTypeHandler<KaigoJigyoshaNo> {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     @Override
-    public void setNonNullParameter(PreparedStatement ps, int i, NinteichosaItakusakiCode parameter, JdbcType jdbcType) throws SQLException {
+    public void setNonNullParameter(PreparedStatement ps, int i, KaigoJigyoshaNo parameter, JdbcType jdbcType) throws SQLException {
         ps.setString(i, parameter == null ? null : parameter.getColumnValue().toString());
     }
 
     @Override
-    public NinteichosaItakusakiCode getNullableResult(ResultSet rs, String columnName) throws SQLException {
-        return new NinteichosaItakusakiCode(getResultRString(rs.getString(columnName)));
+    public KaigoJigyoshaNo getNullableResult(ResultSet rs, String columnName) throws SQLException {
+        return new KaigoJigyoshaNo(getResultRString(rs.getString(columnName)));
     }
 
     @Override
-    public NinteichosaItakusakiCode getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
-        return new NinteichosaItakusakiCode(getResultRString(rs.getString(columnIndex)));
+    public KaigoJigyoshaNo getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
+        return new KaigoJigyoshaNo(getResultRString(rs.getString(columnIndex)));
     }
 
     @Override
-    public NinteichosaItakusakiCode getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
-        return new NinteichosaItakusakiCode(getResultRString(cs.getString(columnIndex)));
+    public KaigoJigyoshaNo getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
+        return new KaigoJigyoshaNo(getResultRString(cs.getString(columnIndex)));
     }
 
     private RString getResultRString(String result) {

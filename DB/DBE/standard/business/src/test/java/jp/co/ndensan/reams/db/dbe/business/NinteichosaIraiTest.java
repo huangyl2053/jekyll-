@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.MobileDataShutsuryok
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaTokusokuHoho;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosainBangoCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -34,7 +34,7 @@ public class NinteichosaIraiTest extends TestBase {
 
         private ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(new RString("0001"));
         private NinteichosaIraiRirekiNo 認定調査依頼履歴番号 = new NinteichosaIraiRirekiNo(1);
-        private NinteichosaItakusakiCode 認定調査委託先コード = new NinteichosaItakusakiCode(new RString("2001"));
+        private KaigoJigyoshaNo 認定調査委託先コード = new KaigoJigyoshaNo(new RString("2001"));
         private NinteichosainBangoCode 調査員番号コード = new NinteichosainBangoCode(new RString("3001"));
         private NinteichosaIraiKubunCode 認定調査依頼区分コード = NinteichosaIraiKubunCode.初回;
         private int 認定調査回数 = 1;

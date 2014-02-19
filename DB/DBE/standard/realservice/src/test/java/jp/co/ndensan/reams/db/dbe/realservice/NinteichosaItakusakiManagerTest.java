@@ -141,7 +141,7 @@ public class NinteichosaItakusakiManagerTest {
 
         @Test
         public void 引数の指定がない場合get認定調査委託先介護事業者番号指定はNullを返却する() {
-            kaigojigyoshaNo = new KaigoJigyoshaNo(null);
+            kaigojigyoshaNo = new KaigoJigyoshaNo(new RString("001"));
             when(ninteichosaItakusakiDac.select(null, kaigojigyoshaNo, true)).thenReturn(null);
             NinteichosaItakusaki result = sut.get認定調査委託先介護事業者番号指定(null, kaigojigyoshaNo, true);
             assertThat(result, nullValue());
