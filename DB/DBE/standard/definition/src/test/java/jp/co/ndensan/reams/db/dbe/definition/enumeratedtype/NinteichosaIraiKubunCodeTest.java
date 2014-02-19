@@ -23,29 +23,29 @@ public class NinteichosaIraiKubunCodeTest extends TestBase {
 
     public static class toValueのテスト {
 
-        private Code 区分コード;
+        private RString 区分コード;
 
         @Test
         public void 引数に0が渡されたとき_初回が返る() {
-            区分コード = new Code(new RString("0"));
+            区分コード = new RString("0");
             assertThat(NinteichosaIraiKubunCode.toValue(区分コード), is(NinteichosaIraiKubunCode.初回));
         }
 
         @Test
         public void 引数に1が渡されたとき_再依頼が返る() {
-            区分コード = new Code(new RString("1"));
+            区分コード = new RString("1");
             assertThat(NinteichosaIraiKubunCode.toValue(区分コード), is(NinteichosaIraiKubunCode.再依頼));
         }
 
         @Test
         public void 引数に2が渡されたとき_再調査が返る() {
-            区分コード = new Code(new RString("2"));
+            区分コード = new RString("2");
             assertThat(NinteichosaIraiKubunCode.toValue(区分コード), is(NinteichosaIraiKubunCode.再調査));
         }
 
         @Test(expected = IllegalArgumentException.class)
         public void 引数に対応しない値が渡されたとき_例外が発生する() {
-            区分コード = new Code(new RString("4"));
+            区分コード = new RString("4");
             NinteichosaIraiKubunCode.toValue(区分コード);
         }
     }

@@ -5,7 +5,6 @@
 package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
 
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -19,18 +18,18 @@ public enum NinteichosaIraiKubunCode {
     /**
      * 初回であることを表します。
      */
-    初回(new Code(new RString("0"))),
+    初回(new RString("0")),
     /**
      * 再依頼であることを表します。
      */
-    再依頼(new Code(new RString("1"))),
+    再依頼(new RString("1")),
     /**
      * 再調査であることを表します。
      */
-    再調査(new Code(new RString("2")));
-    private final Code 区分コード;
+    再調査(new RString("2"));
+    private final RString 区分コード;
 
-    private NinteichosaIraiKubunCode(Code 区分コード) {
+    private NinteichosaIraiKubunCode(RString 区分コード) {
         this.区分コード = 区分コード;
     }
 
@@ -39,7 +38,7 @@ public enum NinteichosaIraiKubunCode {
      *
      * @return コード
      */
-    public Code getCode() {
+    public RString getCode() {
         return 区分コード;
     }
 
@@ -50,7 +49,7 @@ public enum NinteichosaIraiKubunCode {
      * @return 認定調査依頼区分コード
      * @throws IllegalArgumentException 対応する認定調査委依頼区分コードが存在しないとき
      */
-    public static NinteichosaIraiKubunCode toValue(Code 区分コード) throws IllegalArgumentException {
+    public static NinteichosaIraiKubunCode toValue(RString 区分コード) throws IllegalArgumentException {
         for (NinteichosaIraiKubunCode code : values()) {
             if (code.getCode().equals(区分コード)) {
                 return code;
