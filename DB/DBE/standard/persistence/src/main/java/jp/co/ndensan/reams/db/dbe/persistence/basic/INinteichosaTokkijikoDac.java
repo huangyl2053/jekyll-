@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.basic.IDeletable;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.IInsertable;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.IUpdatable;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.IReplaceable;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 認定調査特記事項テーブルの情報を取得するDACのインターフェースです。
@@ -29,6 +30,7 @@ public interface INinteichosaTokkijikoDac extends IInsertable<DbT5010Ninteichosa
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
      * @return 認定調査特記事項Entity
      */
+    @Transaction
     DbT5010NinteichosaTokkijikoEntity select(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号);
 
     /**
@@ -37,5 +39,6 @@ public interface INinteichosaTokkijikoDac extends IInsertable<DbT5010Ninteichosa
      * @param 申請書管理番号 申請書管理番号
      * @return 認定調査特記事項Entityのリスト
      */
+    @Transaction
     List<DbT5010NinteichosaTokkijikoEntity> select(ShinseishoKanriNo 申請書管理番号);
 }

@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**
  * 申請書管理番号を表すドメインです。
@@ -26,7 +27,7 @@ public class ShinseishoKanriNo implements IDbColumnMappable, IValueObject {
      * @throws NullPointerException 引数にnullが渡されたとき
      */
     public ShinseishoKanriNo(RString 申請書管理番号) throws NullPointerException {
-        this.申請書管理番号 = requireNonNull(申請書管理番号);
+        this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00003.replace("認定調査特記事項番号", getClass().getName()).getMessage());
     }
 
     @Override
