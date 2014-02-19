@@ -5,11 +5,12 @@
 package jp.co.ndensan.reams.db.dbe.realservice;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiJoho;
-import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiJohoCollection;
+import jp.co.ndensan.reams.db.dbe.business.NinteichosaIrai;
+import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiCollection;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaIraiJohoMapper;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteichosaIraiJohoDac;
+import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaIraiMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteichosaIraiDac;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
 
@@ -18,15 +19,15 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
  *
  * @author n8178 城間篤人
  */
-public class NinteichosaIraiJohoManager {
+public class NinteichosaIraiManager {
 
-    private INinteichosaIraiJohoDac dac;
+    private INinteichosaIraiDac dac;
 
     /**
      * デフォルトコンストラクタです。
      */
-    public NinteichosaIraiJohoManager() {
-        dac = InstanceCreator.create(INinteichosaIraiJohoDac.class);
+    public NinteichosaIraiManager() {
+        dac = InstanceCreator.create(INinteichosaIraiDac.class);
     }
 
     /**
@@ -34,7 +35,7 @@ public class NinteichosaIraiJohoManager {
      *
      * @param dac テスト用Dac
      */
-    NinteichosaIraiJohoManager(INinteichosaIraiJohoDac dac) {
+    NinteichosaIraiManager(INinteichosaIraiDac dac) {
         this.dac = dac;
     }
 
@@ -46,9 +47,9 @@ public class NinteichosaIraiJohoManager {
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
      * @return 認定調査依頼情報
      */
-    public NinteichosaIraiJoho get認定調査依頼情報(ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号) {
+    public NinteichosaIrai get認定調査依頼情報(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号) {
         DbT5006NinteichosaIraiJohoEntity entity = dac.select(申請書管理番号, 認定調査依頼履歴番号);
-        return NinteichosaIraiJohoMapper.to認定調査依頼情報(entity);
+        return NinteichosaIraiMapper.to認定調査依頼情報(entity);
     }
 
     /**
@@ -58,9 +59,9 @@ public class NinteichosaIraiJohoManager {
      * @param 申請書管理番号 申請書管理番号
      * @return 認定調査依頼情報Collection
      */
-    public NinteichosaIraiJohoCollection get認定調査依頼情報履歴(ShinseishoKanriNo 申請書管理番号) {
+    public NinteichosaIraiCollection get認定調査依頼情報履歴(ShinseishoKanriNo 申請書管理番号) {
         List<DbT5006NinteichosaIraiJohoEntity> entities = dac.select(申請書管理番号);
-        return NinteichosaIraiJohoMapper.to認定調査依頼情報Collection(entities);
+        return NinteichosaIraiMapper.to認定調査依頼情報Collection(entities);
     }
 
     /**
@@ -69,8 +70,8 @@ public class NinteichosaIraiJohoManager {
      * @param 認定調査依頼情報 認定調査依頼情報
      * @return 保存できた場合true
      */
-    public boolean save(NinteichosaIraiJoho 認定調査依頼情報) {
-        int 件数 = dac.insertOrUpdate(NinteichosaIraiJohoMapper.to認定調査依頼情報Entity(認定調査依頼情報));
+    public boolean save(NinteichosaIrai 認定調査依頼情報) {
+        int 件数 = dac.insertOrUpdate(NinteichosaIraiMapper.to認定調査依頼情報Entity(認定調査依頼情報));
         return 件数 == 1 ? true : false;
     }
 }

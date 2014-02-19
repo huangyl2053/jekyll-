@@ -11,20 +11,20 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.MobileDataShutsuryoku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaTokusokuHoho;
-import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiJoho;
-import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiJohoCollection;
+import jp.co.ndensan.reams.db.dbe.business.NinteichosaIrai;
+import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiCollection;
 
 /**
  * 認定調査依頼情報のMapperクラスです。
  *
  * @author n8178 城間篤人
  */
-public final class NinteichosaIraiJohoMapper {
+public final class NinteichosaIraiMapper {
 
     /**
      * インスタンス化防止のためのプライベートコンストラクタです。
      */
-    private NinteichosaIraiJohoMapper() {
+    private NinteichosaIraiMapper() {
     }
 
     /**
@@ -34,12 +34,12 @@ public final class NinteichosaIraiJohoMapper {
      * @param entity 認定調査依頼情報Entity
      * @return 認定調査依頼情報
      */
-    public static NinteichosaIraiJoho to認定調査依頼情報(DbT5006NinteichosaIraiJohoEntity entity) {
+    public static NinteichosaIrai to認定調査依頼情報(DbT5006NinteichosaIraiJohoEntity entity) {
         if (entity == null) {
             return null;
         }
 
-        return new NinteichosaIraiJoho(entity.getShinseishoKanriNo(), entity.getNinteichosaIraiRirekiNo(),
+        return new NinteichosaIrai(entity.getShinseishoKanriNo(), entity.getNinteichosaIraiRirekiNo(),
                 entity.getNinteichosaItakusakiCode(), entity.getChousainCode(),
                 NinteichosaIraiKubunCode.toValue(entity.getNinteichousaIraiKubunCode()), entity.getNinteichosaIraiKaisu(),
                 entity.getNinteichosaIraiYMD().toRDate(), entity.getNinteichosaKigenYMD().toRDate(),
@@ -56,16 +56,16 @@ public final class NinteichosaIraiJohoMapper {
      * @param entities 認定調査依頼情報Entityのリスト
      * @return 認定調査依頼情報コレクション
      */
-    public static NinteichosaIraiJohoCollection to認定調査依頼情報Collection(List<DbT5006NinteichosaIraiJohoEntity> entities) {
+    public static NinteichosaIraiCollection to認定調査依頼情報Collection(List<DbT5006NinteichosaIraiJohoEntity> entities) {
         if (entities == null || entities.isEmpty()) {
-            return new NinteichosaIraiJohoCollection(Collections.EMPTY_LIST);
+            return new NinteichosaIraiCollection(Collections.EMPTY_LIST);
         }
 
-        List<NinteichosaIraiJoho> iraiJohoList = new ArrayList<>();
+        List<NinteichosaIrai> iraiJohoList = new ArrayList<>();
         for (DbT5006NinteichosaIraiJohoEntity entity : entities) {
             iraiJohoList.add(to認定調査依頼情報(entity));
         }
-        return new NinteichosaIraiJohoCollection(iraiJohoList);
+        return new NinteichosaIraiCollection(iraiJohoList);
     }
 
     /**
@@ -74,7 +74,7 @@ public final class NinteichosaIraiJohoMapper {
      * @param iraiJoho 認定調査依頼情報
      * @return 認定調査依頼情報Entity
      */
-    public static DbT5006NinteichosaIraiJohoEntity to認定調査依頼情報Entity(NinteichosaIraiJoho iraiJoho) {
+    public static DbT5006NinteichosaIraiJohoEntity to認定調査依頼情報Entity(NinteichosaIrai iraiJoho) {
         if (iraiJoho == null) {
             return null;
         }

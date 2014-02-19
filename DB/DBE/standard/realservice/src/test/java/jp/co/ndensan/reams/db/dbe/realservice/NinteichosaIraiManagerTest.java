@@ -7,7 +7,8 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteichosaIraiJohoDac;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
+import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteichosaIraiDac;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
 import static jp.co.ndensan.reams.db.dbe.realservice.helper.NinteichosaIraiJohoTestHelper.*;
@@ -28,18 +29,18 @@ import static org.mockito.Mockito.any;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class NinteichosaIraiJohoManagerTest extends TestBase {
+public class NinteichosaIraiManagerTest extends TestBase {
 
-    private static NinteichosaIraiJohoManager sut;
+    private static NinteichosaIraiManager sut;
 
     public static class get認定調査依頼情報のテスト extends TestBase {
 
         private ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(new RString("004"));
-        private int 認定調査依頼履歴番号 = 8;
+        private NinteichosaIraiRirekiNo 認定調査依頼履歴番号 = new NinteichosaIraiRirekiNo(8);
 
         @Override
         public void setUp() {
-            sut = new NinteichosaIraiJohoManager(createDac(申請書管理番号, 認定調査依頼履歴番号));
+            sut = new NinteichosaIraiManager(createDac(申請書管理番号, 認定調査依頼履歴番号));
         }
 
         @Test
@@ -54,14 +55,14 @@ public class NinteichosaIraiJohoManagerTest extends TestBase {
 
         @Test
         public void 検索した結果_該当する項目が存在しなかった場合_nullが返る() {
-            INinteichosaIraiJohoDac dac = mock(INinteichosaIraiJohoDac.class);
+            INinteichosaIraiDac dac = mock(INinteichosaIraiDac.class);
             when(dac.select(申請書管理番号, 認定調査依頼履歴番号)).thenReturn(null);
-            sut = new NinteichosaIraiJohoManager(dac);
+            sut = new NinteichosaIraiManager(dac);
             assertThat(sut.get認定調査依頼情報(申請書管理番号, 認定調査依頼履歴番号), is(nullValue()));
         }
 
-        private INinteichosaIraiJohoDac createDac(ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号) {
-            INinteichosaIraiJohoDac dac = mock(INinteichosaIraiJohoDac.class);
+        private INinteichosaIraiDac createDac(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号) {
+            INinteichosaIraiDac dac = mock(INinteichosaIraiDac.class);
             when(dac.select(申請書管理番号, 認定調査依頼履歴番号)).thenReturn(create認定調査依頼情報Entity(申請書管理番号, 認定調査依頼履歴番号));
             return dac;
         }
@@ -73,7 +74,7 @@ public class NinteichosaIraiJohoManagerTest extends TestBase {
 
         @Override
         public void setUp() {
-            sut = new NinteichosaIraiJohoManager(createDac(4, 申請書管理番号));
+            sut = new NinteichosaIraiManager(createDac(4, 申請書管理番号));
         }
 
         @Test
@@ -83,22 +84,22 @@ public class NinteichosaIraiJohoManagerTest extends TestBase {
 
         @Test
         public void Dacからnullが返ってきたとき_空のコレクションが返る() {
-            INinteichosaIraiJohoDac dac = mock(INinteichosaIraiJohoDac.class);
+            INinteichosaIraiDac dac = mock(INinteichosaIraiDac.class);
             when(dac.select(申請書管理番号)).thenReturn(null);
-            sut = new NinteichosaIraiJohoManager(dac);
+            sut = new NinteichosaIraiManager(dac);
             assertThat(sut.get認定調査依頼情報履歴(申請書管理番号).isEmpty(), is(true));
         }
 
         @Test
         public void Dacから空のリストが返ってきたとき_空のコレクションが返る() {
-            INinteichosaIraiJohoDac dac = mock(INinteichosaIraiJohoDac.class);
+            INinteichosaIraiDac dac = mock(INinteichosaIraiDac.class);
             when(dac.select(申請書管理番号)).thenReturn(Collections.EMPTY_LIST);
-            sut = new NinteichosaIraiJohoManager(dac);
+            sut = new NinteichosaIraiManager(dac);
             assertThat(sut.get認定調査依頼情報履歴(申請書管理番号).isEmpty(), is(true));
         }
 
-        private INinteichosaIraiJohoDac createDac(int 要素数, ShinseishoKanriNo 申請書管理番号) {
-            INinteichosaIraiJohoDac dac = mock(INinteichosaIraiJohoDac.class);
+        private INinteichosaIraiDac createDac(int 要素数, ShinseishoKanriNo 申請書管理番号) {
+            INinteichosaIraiDac dac = mock(INinteichosaIraiDac.class);
             when(dac.select(申請書管理番号)).thenReturn(createList(要素数, 申請書管理番号));
             return dac;
         }
@@ -106,7 +107,7 @@ public class NinteichosaIraiJohoManagerTest extends TestBase {
         private List<DbT5006NinteichosaIraiJohoEntity> createList(int 要素数, ShinseishoKanriNo 申請書管理番号) {
             List<DbT5006NinteichosaIraiJohoEntity> list = new ArrayList<>();
             for (int i = 0; i < 要素数; i++) {
-                list.add(create認定調査依頼情報Entity(申請書管理番号, i));
+                list.add(create認定調査依頼情報Entity(申請書管理番号, new NinteichosaIraiRirekiNo(i)));
             }
             return list;
         }
@@ -116,23 +117,23 @@ public class NinteichosaIraiJohoManagerTest extends TestBase {
 
         @Override
         public void setUp() {
-            sut = new NinteichosaIraiJohoManager(createDac(1));
+            sut = new NinteichosaIraiManager(createDac(1));
         }
 
         @Test
         public void saveに成功したとき_trueが返る() {
-            sut = new NinteichosaIraiJohoManager(createDac(1));
+            sut = new NinteichosaIraiManager(createDac(1));
             assertThat(sut.save(create認定調査依頼情報()), is(true));
         }
 
         @Test
         public void saveに失敗したとき_trueが返る() {
-            sut = new NinteichosaIraiJohoManager(createDac(0));
+            sut = new NinteichosaIraiManager(createDac(0));
             assertThat(sut.save(create認定調査依頼情報()), is(false));
         }
 
-        private INinteichosaIraiJohoDac createDac(int 件数) {
-            INinteichosaIraiJohoDac dac = mock(INinteichosaIraiJohoDac.class);
+        private INinteichosaIraiDac createDac(int 件数) {
+            INinteichosaIraiDac dac = mock(INinteichosaIraiDac.class);
             when(dac.insertOrUpdate(any(DbT5006NinteichosaIraiJohoEntity.class))).thenReturn(件数);
             return dac;
         }

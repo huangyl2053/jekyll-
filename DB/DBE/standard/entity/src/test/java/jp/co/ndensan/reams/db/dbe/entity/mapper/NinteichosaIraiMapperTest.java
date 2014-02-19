@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiJoho;
+import jp.co.ndensan.reams.db.dbe.business.NinteichosaIrai;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
 import static jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaIraiJohoTestHelper.*;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
@@ -23,20 +23,20 @@ import org.junit.runner.RunWith;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class NinteichosaIraiJohoMapperTest extends TestBase {
+public class NinteichosaIraiMapperTest extends TestBase {
 
     public static class to認定調査依頼情報のテスト extends TestBase {
 
-        NinteichosaIraiJoho sut;
+        NinteichosaIrai sut;
 
         @Override
         public void setUp() {
-            sut = NinteichosaIraiJohoMapper.to認定調査依頼情報(create認定調査依頼情報Entity());
+            sut = NinteichosaIraiMapper.to認定調査依頼情報(create認定調査依頼情報Entity());
         }
 
         @Test
         public void 引数にnullがわたったとき_戻り値はnullになる() {
-            sut = NinteichosaIraiJohoMapper.to認定調査依頼情報(null);
+            sut = NinteichosaIraiMapper.to認定調査依頼情報(null);
             assertThat(sut, is(nullValue()));
         }
 
@@ -120,22 +120,22 @@ public class NinteichosaIraiJohoMapperTest extends TestBase {
 
         @Test
         public void 引数にNullが渡されたとき_空のコレクションが返る() {
-            assertThat(NinteichosaIraiJohoMapper.to認定調査依頼情報Collection(null).isEmpty(), is(true));
+            assertThat(NinteichosaIraiMapper.to認定調査依頼情報Collection(null).isEmpty(), is(true));
         }
 
         @Test
         public void 引数に一つも要素を持たないリストが渡されたとき_空のコレクションが返る() {
-            assertThat(NinteichosaIraiJohoMapper.to認定調査依頼情報Collection(createList(0)).isEmpty(), is(true));
+            assertThat(NinteichosaIraiMapper.to認定調査依頼情報Collection(createList(0)).isEmpty(), is(true));
         }
 
         @Test
         public void 引数に一つも空のリストが渡されたとき_空のコレクションが返る() {
-            assertThat(NinteichosaIraiJohoMapper.to認定調査依頼情報Collection(Collections.EMPTY_LIST).isEmpty(), is(true));
+            assertThat(NinteichosaIraiMapper.to認定調査依頼情報Collection(Collections.EMPTY_LIST).isEmpty(), is(true));
         }
 
         @Test
         public void 引数に4件のEntityを持つリストが渡されたとき_4件の認定調査依頼情報を持ったコレクションを返す() {
-            assertThat(NinteichosaIraiJohoMapper.to認定調査依頼情報Collection(createList(4)).size(), is(4));
+            assertThat(NinteichosaIraiMapper.to認定調査依頼情報Collection(createList(4)).size(), is(4));
         }
 
         private List<DbT5006NinteichosaIraiJohoEntity> createList(int 要素数) {
@@ -153,12 +153,12 @@ public class NinteichosaIraiJohoMapperTest extends TestBase {
 
         @Override
         public void setUp() {
-            sut = NinteichosaIraiJohoMapper.to認定調査依頼情報Entity(create認定調査依頼情報());
+            sut = NinteichosaIraiMapper.to認定調査依頼情報Entity(create認定調査依頼情報());
         }
 
         @Test
         public void 引数にnullがわたったとき_戻り値はnullになる() {
-            sut = NinteichosaIraiJohoMapper.to認定調査依頼情報Entity(null);
+            sut = NinteichosaIraiMapper.to認定調査依頼情報Entity(null);
             assertThat(sut, is(nullValue()));
         }
 

@@ -8,6 +8,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.MobileDataShutsuryoku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaTokusokuHoho;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosainBangoCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
@@ -20,10 +21,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8178 城間篤人
  */
-public class NinteichosaIraiJoho {
+public class NinteichosaIrai {
 
     private final ShinseishoKanriNo 申請書管理番号;
-    private final int 認定調査依頼履歴番号;
+    private final NinteichosaIraiRirekiNo 認定調査依頼履歴番号;
     private final NinteichosaItakusakiCode 認定調査委託先コード;
     private final NinteichosainBangoCode 調査員番号コード;
     private final NinteichosaIraiKubunCode 認定調査依頼区分コード;
@@ -59,7 +60,7 @@ public class NinteichosaIraiJoho {
      * @throws NullPointerException
      * 申請書管理番号、認定調査委依頼履歴番号、認定調査委託先コード、調査員番号コード、認定調査委依頼区分コードにnullが渡されたとき
      */
-    public NinteichosaIraiJoho(ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号,
+    public NinteichosaIrai(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号,
             NinteichosaItakusakiCode 認定調査委託先コード, NinteichosainBangoCode 調査員番号コード,
             NinteichosaIraiKubunCode 認定調査依頼区分コード, int 認定調査回数, RDate 認定調査依頼年月日,
             RDate 認定調査期限年月日, RDate 認定調査出力年月日, RDate 調査票等出力年月日,
@@ -102,7 +103,7 @@ public class NinteichosaIraiJoho {
      *
      * @return 認定調査依頼履歴番号
      */
-    public int get認定調査依頼履歴番号() {
+    public NinteichosaIraiRirekiNo get認定調査依頼履歴番号() {
         return 認定調査依頼履歴番号;
     }
 

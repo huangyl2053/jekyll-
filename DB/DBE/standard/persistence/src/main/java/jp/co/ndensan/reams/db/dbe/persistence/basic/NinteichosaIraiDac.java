@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJoho;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJoho.*;
@@ -19,13 +20,13 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
  *
  * @author n8178 城間篤人
  */
-public class NinteichosaIraiJohoDac implements INinteichosaIraiJohoDac {
+public class NinteichosaIraiDac implements INinteichosaIraiDac {
 
     @InjectSession
     private SqlSession session;
 
     @Override
-    public DbT5006NinteichosaIraiJohoEntity select(ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号) {
+    public DbT5006NinteichosaIraiJohoEntity select(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5006NinteichosaIraiJoho.class)
                 .where(and(eq(shinseishoKanriNo, 申請書管理番号.getColumnValue()), eq(ninteichosaIraiRirekiNo, 認定調査依頼履歴番号)))

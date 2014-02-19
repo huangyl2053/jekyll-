@@ -9,15 +9,16 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 
 /**
  * 認定申請情報のリストを扱うクラスです。
  *
  * @author n8178 城間篤人
  */
-public class NinteichosaIraiJohoCollection implements Iterable {
+public class NinteichosaIraiCollection implements Iterable {
 
-    private final List<NinteichosaIraiJoho> 認定調査依頼情報List;
+    private final List<NinteichosaIrai> 認定調査依頼情報List;
 
     /**
      * コンストラクタです。引数からメンバとなるリストを受け取ります。
@@ -25,7 +26,7 @@ public class NinteichosaIraiJohoCollection implements Iterable {
      * @param 認定調査依頼情報List 認定調査依頼情報のリスト
      * @throws NullPointerException 引数にnullが渡されたとき
      */
-    public NinteichosaIraiJohoCollection(List<NinteichosaIraiJoho> 認定調査依頼情報List) throws NullPointerException {
+    public NinteichosaIraiCollection(List<NinteichosaIrai> 認定調査依頼情報List) throws NullPointerException {
         requireNonNull(認定調査依頼情報List, Messages.E00003.replace("認定調査依頼情報List", getClass().getName()).getMessage());
         this.認定調査依頼情報List = 認定調査依頼情報List;
     }
@@ -38,9 +39,9 @@ public class NinteichosaIraiJohoCollection implements Iterable {
      * @return 認定申請情報
      * @throws IllegalArgumentException 指定した引数に対応した認定申請情報がCollection内に存在しないとき
      */
-    public NinteichosaIraiJoho get認定申請情報(ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号)
+    public NinteichosaIrai get認定申請情報(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号)
             throws IllegalArgumentException {
-        for (NinteichosaIraiJoho 認定調査依頼情報 : 認定調査依頼情報List) {
+        for (NinteichosaIrai 認定調査依頼情報 : 認定調査依頼情報List) {
             if (is申請書管理番号と認定調査依頼履歴番号が一致(認定調査依頼情報, 申請書管理番号, 認定調査依頼履歴番号)) {
                 return 認定調査依頼情報;
             }
@@ -48,17 +49,17 @@ public class NinteichosaIraiJohoCollection implements Iterable {
         throw new IllegalArgumentException(Messages.E00006.replace("対応する認定申請情報").getMessage());
     }
 
-    private boolean is申請書管理番号と認定調査依頼履歴番号が一致(NinteichosaIraiJoho 認定調査依頼情報, ShinseishoKanriNo 申請書管理番号,
-            int 認定調査依頼履歴番号) {
+    private boolean is申請書管理番号と認定調査依頼履歴番号が一致(NinteichosaIrai 認定調査依頼情報, ShinseishoKanriNo 申請書管理番号,
+            NinteichosaIraiRirekiNo 認定調査依頼履歴番号) {
         return is申請書管理番号が一致(認定調査依頼情報, 申請書管理番号) && is認定調査依頼履歴番号が一致(認定調査依頼情報, 認定調査依頼履歴番号);
     }
 
-    private boolean is申請書管理番号が一致(NinteichosaIraiJoho 認定調査依頼情報, ShinseishoKanriNo 申請書管理番号) {
+    private boolean is申請書管理番号が一致(NinteichosaIrai 認定調査依頼情報, ShinseishoKanriNo 申請書管理番号) {
         return 認定調査依頼情報.get申請書管理番号().equals(申請書管理番号);
     }
 
-    private boolean is認定調査依頼履歴番号が一致(NinteichosaIraiJoho 認定調査依頼情報, int 認定調査依頼履歴番号) {
-        return 認定調査依頼情報.get認定調査依頼履歴番号() == 認定調査依頼履歴番号;
+    private boolean is認定調査依頼履歴番号が一致(NinteichosaIrai 認定調査依頼情報, NinteichosaIraiRirekiNo 認定調査依頼履歴番号) {
+        return 認定調査依頼情報.get認定調査依頼履歴番号().equals(認定調査依頼履歴番号);
     }
 
     /**
