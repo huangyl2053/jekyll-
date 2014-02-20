@@ -4,12 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 認定調査特記事項のコレクションを扱うクラスです。
@@ -32,34 +33,66 @@ public class NinteichosaTokkijikoList implements Iterable<NinteichosaTokkijiko> 
     }
 
     /**
-     * 申請書管理番号と認定調査依頼履歴番号を指定し、対応した認定調査特記事項をCollection内から取得します。<br/>
-     * 指定した引数に対応する認定調査特記事項が存在しない場合、IllegalArgumentExceptionが発生します。
+     * List内から、指定した認定調査依頼履歴番号に該当する認定調査特記事項を取得します。
      *
-     * @param 申請書管理番号 申請書管理番号
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @return 認定調査特記事項List
+     */
+    public NinteichosaTokkijikoList get認定調査特記事項(NinteichosaIraiRirekiNo 認定調査依頼履歴番号) {
+        List<NinteichosaTokkijiko> retList = new ArrayList<>();
+        for (NinteichosaTokkijiko 認定調査特記事項 : 認定調査特記事項List) {
+            if (is依頼履歴番号が一致(認定調査特記事項, 認定調査依頼履歴番号)) {
+                retList.add(認定調査特記事項);
+            }
+        }
+        return new NinteichosaTokkijikoList(retList);
+    }
+
+    private boolean is依頼履歴番号が一致(NinteichosaTokkijiko 認定調査特記事項, NinteichosaIraiRirekiNo 依頼履歴番号) {
+        return 認定調査特記事項.get認定調査依頼履歴番号().equals(依頼履歴番号);
+    }
+
+    /**
+     * List内から、指定した認定調査特記事項番号に該当する認定調査特記事項を取得します。
+     *
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return 認定調査特記事項List
+     */
+    public NinteichosaTokkijikoList get認定調査特記事項(RString 認定調査特記事項番号) {
+        List<NinteichosaTokkijiko> retList = new ArrayList<>();
+        for (NinteichosaTokkijiko 認定調査特記事項 : 認定調査特記事項List) {
+            if (is特記事項番号が一致(認定調査特記事項, 認定調査特記事項番号)) {
+                retList.add(認定調査特記事項);
+            }
+        }
+        return new NinteichosaTokkijikoList(retList);
+    }
+
+    private boolean is特記事項番号が一致(NinteichosaTokkijiko 認定調査特記事項, RString 特記事項番号) {
+        return 認定調査特記事項.get認定調査特記事項番号().equals(特記事項番号);
+    }
+
+    /**
+     * 認定調査依頼履歴番号と認定調査特記事項番号を指定し、List内から認定調査特記事項を1件取得します。
+     *
+     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @param 認定調査特記事項番号 認定調査特記事項番号
      * @return 認定調査特記事項
      * @throws IllegalArgumentException 対応する認定調査特記事項が存在しないとき
      */
-    public NinteichosaTokkijiko get認定調査特記事項(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号)
+    public NinteichosaTokkijiko get認定調査特記事項(NinteichosaIraiRirekiNo 認定調査依頼履歴番号, RString 認定調査特記事項番号)
             throws IllegalArgumentException {
         for (NinteichosaTokkijiko 認定調査特記事項 : 認定調査特記事項List) {
-            if (is申請書管理番号と認定調査依頼履歴番号が一致(認定調査特記事項, 申請書管理番号, 認定調査依頼履歴番号)) {
+            if (is特記事項番号と依頼履歴番号が一致(認定調査特記事項, 認定調査依頼履歴番号, 認定調査特記事項番号)) {
                 return 認定調査特記事項;
             }
         }
         throw new IllegalArgumentException(Messages.E00006.replace("対応する認定調査特記事項").getMessage());
     }
 
-    private boolean is申請書管理番号と認定調査依頼履歴番号が一致(NinteichosaTokkijiko 認定調査特記事項, ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号) {
-        return is申請書管理番号が一致(認定調査特記事項, 申請書管理番号) && is認定調査依頼履歴番号が一致(認定調査特記事項, 認定調査依頼履歴番号);
-    }
-
-    private boolean is申請書管理番号が一致(NinteichosaTokkijiko 認定調査特記事項, ShinseishoKanriNo 申請書管理番号) {
-        return 認定調査特記事項.get申請書管理番号().equals(申請書管理番号);
-    }
-
-    private boolean is認定調査依頼履歴番号が一致(NinteichosaTokkijiko 認定調査特記事項, NinteichosaIraiRirekiNo 認定調査依頼履歴番号) {
-        return 認定調査特記事項.get認定調査依頼履歴番号().equals(認定調査依頼履歴番号);
+    private boolean is特記事項番号と依頼履歴番号が一致(NinteichosaTokkijiko 認定調査特記事項, NinteichosaIraiRirekiNo 依頼履歴番号,
+            RString 特記事項番号) {
+        return is特記事項番号が一致(認定調査特記事項, 特記事項番号) && is依頼履歴番号が一致(認定調査特記事項, 依頼履歴番号);
     }
 
     /**
