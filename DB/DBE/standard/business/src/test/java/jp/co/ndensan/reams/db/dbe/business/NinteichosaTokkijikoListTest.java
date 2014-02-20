@@ -23,15 +23,15 @@ import org.junit.runner.RunWith;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class NinteichosaTokkijikoCollectionTest extends TestBase {
+public class NinteichosaTokkijikoListTest extends TestBase {
 
-    private static NinteichosaTokkijikoCollection sut;
+    private static NinteichosaTokkijikoList sut;
 
     public static class コンストラクタのテスト {
 
         @Test(expected = NullPointerException.class)
         public void 引数にnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut = new NinteichosaTokkijikoCollection(null);
+            sut = new NinteichosaTokkijikoList(null);
         }
     }
 
@@ -47,7 +47,7 @@ public class NinteichosaTokkijikoCollectionTest extends TestBase {
             list.add(create認定調査特記事項("A001", 2, "特記その2"));
             list.add(create認定調査特記事項("A002", 1, "特記その3"));
             list.add(create認定調査特記事項("A003", 1, "特記その4"));
-            sut = new NinteichosaTokkijikoCollection(list);
+            sut = new NinteichosaTokkijikoList(list);
         }
 
         @Test
@@ -69,13 +69,13 @@ public class NinteichosaTokkijikoCollectionTest extends TestBase {
 
         @Test
         public void Collectionが空のとき_trueを返す() {
-            sut = new NinteichosaTokkijikoCollection(Collections.EMPTY_LIST);
+            sut = new NinteichosaTokkijikoList(Collections.EMPTY_LIST);
             assertThat(sut.isEmpty(), is(true));
         }
 
         @Test
         public void Collectionが空でないとき_falseを返す() {
-            sut = new NinteichosaTokkijikoCollection(create3件のリスト());
+            sut = new NinteichosaTokkijikoList(create3件のリスト());
             assertThat(sut.isEmpty(), is(false));
         }
     }
@@ -84,7 +84,7 @@ public class NinteichosaTokkijikoCollectionTest extends TestBase {
 
         @Test
         public void 要素を3件持つCollectionの場合_3を返す() {
-            sut = new NinteichosaTokkijikoCollection(create3件のリスト());
+            sut = new NinteichosaTokkijikoList(create3件のリスト());
             assertThat(sut.size(), is(3));
         }
     }

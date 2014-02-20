@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaTokkijiko;
-import jp.co.ndensan.reams.db.dbe.business.NinteichosaTokkijikoCollection;
+import jp.co.ndensan.reams.db.dbe.business.NinteichosaTokkijikoList;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5010NinteichosaTokkijikoEntity;
@@ -71,7 +71,7 @@ public class NinteichosaTokkijikoMapperTest extends TestBase {
 
     public static class to認定調査特記事項Collectionのテスト {
 
-        private NinteichosaTokkijikoCollection sut;
+        private NinteichosaTokkijikoList sut;
 
         @Test
         public void nullが渡された場合_空のコレクションが返る() {

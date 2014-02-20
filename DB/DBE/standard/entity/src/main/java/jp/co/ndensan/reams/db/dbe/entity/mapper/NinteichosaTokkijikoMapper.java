@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaTokkijiko;
-import jp.co.ndensan.reams.db.dbe.business.NinteichosaTokkijikoCollection;
+import jp.co.ndensan.reams.db.dbe.business.NinteichosaTokkijikoList;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5010NinteichosaTokkijikoEntity;
 
 /**
@@ -46,16 +46,16 @@ public final class NinteichosaTokkijikoMapper {
      * @param entities 認定調査特記事項Entityのリスト
      * @return 認定調査特記事項Collection
      */
-    public static NinteichosaTokkijikoCollection to認定調査特記事項Collection(List<DbT5010NinteichosaTokkijikoEntity> entities) {
+    public static NinteichosaTokkijikoList to認定調査特記事項Collection(List<DbT5010NinteichosaTokkijikoEntity> entities) {
         if (entities == null || entities.isEmpty()) {
-            return new NinteichosaTokkijikoCollection(Collections.EMPTY_LIST);
+            return new NinteichosaTokkijikoList(Collections.EMPTY_LIST);
         }
 
         List<NinteichosaTokkijiko> 認定調査特記事項List = new ArrayList<>();
         for (DbT5010NinteichosaTokkijikoEntity entity : entities) {
             認定調査特記事項List.add(to認定調査特記事項(entity));
         }
-        return new NinteichosaTokkijikoCollection(認定調査特記事項List);
+        return new NinteichosaTokkijikoList(認定調査特記事項List);
 
     }
 

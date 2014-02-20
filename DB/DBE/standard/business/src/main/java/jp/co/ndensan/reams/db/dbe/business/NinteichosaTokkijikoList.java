@@ -16,7 +16,7 @@ import static java.util.Objects.requireNonNull;
  *
  * @author n8178 城間篤人
  */
-public class NinteichosaTokkijikoCollection implements Iterable {
+public class NinteichosaTokkijikoList implements Iterable<NinteichosaTokkijiko> {
 
     private final List<NinteichosaTokkijiko> 認定調査特記事項List;
 
@@ -26,7 +26,7 @@ public class NinteichosaTokkijikoCollection implements Iterable {
      * @param 認定調査特記事項List 認定調査特記事項List
      * @throws NullPointerException 引数にnullが渡されたとき
      */
-    public NinteichosaTokkijikoCollection(List<NinteichosaTokkijiko> 認定調査特記事項List) throws NullPointerException {
+    public NinteichosaTokkijikoList(List<NinteichosaTokkijiko> 認定調査特記事項List) throws NullPointerException {
         requireNonNull(認定調査特記事項List, Messages.E00003.replace("認定調査特記事項のリスト", getClass().getName()).getMessage());
         this.認定調査特記事項List = 認定調査特記事項List;
     }

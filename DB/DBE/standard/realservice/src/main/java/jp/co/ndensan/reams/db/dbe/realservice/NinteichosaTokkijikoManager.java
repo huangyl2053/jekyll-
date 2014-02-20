@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaTokkijiko;
-import jp.co.ndensan.reams.db.dbe.business.NinteichosaTokkijikoCollection;
+import jp.co.ndensan.reams.db.dbe.business.NinteichosaTokkijikoList;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5010NinteichosaTokkijikoEntity;
@@ -57,7 +57,7 @@ public class NinteichosaTokkijikoManager {
      * @param 申請書管理番号 申請書管理番号
      * @return 認定調査特記事項Collection
      */
-    public NinteichosaTokkijikoCollection get認定調査特記事項Collection(ShinseishoKanriNo 申請書管理番号) {
+    public NinteichosaTokkijikoList get認定調査特記事項Collection(ShinseishoKanriNo 申請書管理番号) {
         List<DbT5010NinteichosaTokkijikoEntity> entities = dac.select(申請書管理番号);
         return NinteichosaTokkijikoMapper.to認定調査特記事項Collection(entities);
     }
