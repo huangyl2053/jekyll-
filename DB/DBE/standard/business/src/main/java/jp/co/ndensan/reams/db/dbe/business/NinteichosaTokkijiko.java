@@ -19,6 +19,7 @@ public class NinteichosaTokkijiko {
 
     private final ShinseishoKanriNo 申請書管理番号;
     private final NinteichosaIraiRirekiNo 認定調査依頼履歴番号;
+    //TODO n8178 城間篤人 認定調査項目を表すクラスが実装された後、それと置き換え予定 2014年2月末
     private final RString 認定調査特記事項番号;
     private final RString 特記事項;
 
