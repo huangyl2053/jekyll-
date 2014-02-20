@@ -39,7 +39,7 @@ public class NinteichosaTokkijikoDac implements INinteichosaTokkijikoDac {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5010NinteichosaTokkijiko.class)
                 .where(eq(shinseishoKanriNo, 申請書管理番号))
-                .order(by(shinseishoKanriNo, Order.ASC), by(ninteichosaRirekiNo, Order.DESC), by(ninteichosaTokkijikoNo, Order.ASC))
+                .order(by(ninteichosaRirekiNo, Order.DESC), by(ninteichosaTokkijikoNo, Order.ASC))
                 .toList(DbT5010NinteichosaTokkijikoEntity.class);
     }
 
