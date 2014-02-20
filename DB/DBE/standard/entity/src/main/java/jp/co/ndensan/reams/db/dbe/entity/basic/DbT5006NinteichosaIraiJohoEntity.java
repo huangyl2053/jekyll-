@@ -22,14 +22,14 @@ public class DbT5006NinteichosaIraiJohoEntity implements IDbAccessable {
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5006NinteichosaIraiJoho");
-    private RString insertDantaiCd = RString.EMPTY;
+    private RString insertDantaiCd;
     private RDateTime insertTimestamp;
-    private RString insertReamsLoginId = RString.EMPTY;
+    private RString insertReamsLoginId;
     private UUID insertContextId;
-    private boolean isDeleted = false;
-    private int updateCount = 0;
+    private boolean isDeleted;
+    private int updateCount;
     private RDateTime lastUpdateTimestamp;
-    private RString lastUpdateReamsLoginId = RString.EMPTY;
+    private RString lastUpdateReamsLoginId;
     @PrimaryKey
     private ShinseishoKanriNo shinseishoKanriNo;
     @PrimaryKey

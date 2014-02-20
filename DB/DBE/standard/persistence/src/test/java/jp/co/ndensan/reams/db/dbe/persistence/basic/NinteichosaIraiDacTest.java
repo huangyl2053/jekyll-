@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.basic;
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosainBangoCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
-import static jp.co.ndensan.reams.db.dbe.persistence.basic.helper.NinteichosaIraiJohoTestHelper.*;
+import static jp.co.ndensan.reams.db.dbe.persistence.basic.helper.NinteichosaIraiTestHelper.*;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -26,7 +26,7 @@ import org.junit.runner.RunWith;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class NinteichosaIraiJohoDacTest extends TestDacBase {
+public class NinteichosaIraiDacTest extends TestDacBase {
     //TODO n8178 城間篤人 ドメイン化対応後に修正 2014年2月末
 //
 //    private static INinteichosaIraiJohoDac sut;

@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIrai;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
-import static jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaIraiJohoTestHelper.*;
+import static jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaIraiTestHelper.*;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
 import static org.junit.Assert.*;

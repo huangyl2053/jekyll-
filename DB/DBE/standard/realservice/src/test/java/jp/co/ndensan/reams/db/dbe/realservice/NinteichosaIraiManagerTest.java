@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteichosaIraiDac;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
-import static jp.co.ndensan.reams.db.dbe.realservice.helper.NinteichosaIraiJohoTestHelper.*;
+import static jp.co.ndensan.reams.db.dbe.realservice.helper.NinteichosaIraiTestHelper.*;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
