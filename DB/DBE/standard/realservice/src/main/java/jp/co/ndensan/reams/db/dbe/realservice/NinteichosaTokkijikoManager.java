@@ -46,9 +46,9 @@ public class NinteichosaTokkijikoManager {
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
      * @return 認定調査依頼履歴番号
      */
-    public NinteichosaTokkijiko get認定調査特記事項(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号) {
-        DbT5010NinteichosaTokkijikoEntity entity = dac.select(申請書管理番号, 認定調査依頼履歴番号);
-        return NinteichosaTokkijikoMapper.to認定調査特記事項(entity);
+    public NinteichosaTokkijikoList get認定調査特記事項(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号) {
+        List<DbT5010NinteichosaTokkijikoEntity> entities = dac.select(申請書管理番号, 認定調査依頼履歴番号);
+        return NinteichosaTokkijikoMapper.to認定調査特記事項List(entities);
     }
 
     /**
@@ -57,9 +57,9 @@ public class NinteichosaTokkijikoManager {
      * @param 申請書管理番号 申請書管理番号
      * @return 認定調査特記事項Collection
      */
-    public NinteichosaTokkijikoList get認定調査特記事項Collection(ShinseishoKanriNo 申請書管理番号) {
+    public NinteichosaTokkijikoList get認定調査特記事項履歴(ShinseishoKanriNo 申請書管理番号) {
         List<DbT5010NinteichosaTokkijikoEntity> entities = dac.select(申請書管理番号);
-        return NinteichosaTokkijikoMapper.to認定調査特記事項Collection(entities);
+        return NinteichosaTokkijikoMapper.to認定調査特記事項List(entities);
     }
 
     /**

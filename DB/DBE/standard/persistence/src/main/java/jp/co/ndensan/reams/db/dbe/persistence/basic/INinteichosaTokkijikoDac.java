@@ -31,7 +31,7 @@ public interface INinteichosaTokkijikoDac extends IInsertable<DbT5010Ninteichosa
      * @return 認定調査特記事項Entity
      */
     @Transaction
-    DbT5010NinteichosaTokkijikoEntity select(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号);
+    List<DbT5010NinteichosaTokkijikoEntity> select(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号);
 
     /**
      * 申請書管理番号を指定して、認定調査特記事項Entityのリストを取得します。

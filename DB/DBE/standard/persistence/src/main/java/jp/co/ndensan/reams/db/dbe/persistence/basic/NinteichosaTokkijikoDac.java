@@ -27,11 +27,11 @@ public class NinteichosaTokkijikoDac implements INinteichosaTokkijikoDac {
     private SqlSession session;
 
     @Override
-    public DbT5010NinteichosaTokkijikoEntity select(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号) {
+    public List<DbT5010NinteichosaTokkijikoEntity> select(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5010NinteichosaTokkijiko.class)
                 .where(and(eq(shinseishoKanriNo, 申請書管理番号), eq(ninteichosaRirekiNo, 認定調査依頼履歴番号)))
-                .toObject(DbT5010NinteichosaTokkijikoEntity.class);
+                .toList(DbT5010NinteichosaTokkijikoEntity.class);
     }
 
     @Override

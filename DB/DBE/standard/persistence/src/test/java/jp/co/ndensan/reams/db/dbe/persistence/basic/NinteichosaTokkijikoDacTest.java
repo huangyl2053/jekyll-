@@ -26,6 +26,7 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class NinteichosaTokkijikoDacTest extends TestDacBase {
     //TODO n8178 城間篤人 業務独自ドメインができた後に改めて実装予定 2014年2月末
+//
 //    private static INinteichosaTokkijikoDac sut;
 //
 //    @BeforeClass
@@ -35,33 +36,30 @@ public class NinteichosaTokkijikoDacTest extends TestDacBase {
 //
 //    public static class select_申請書管理番号と認定調査依頼履歴番号が引数の場合のテスト extends TestDacBase {
 //
-//        private ShinseishoKanriNo 申請書管理番号_A001;
-//        private NinteichosaIraiRirekiNo 認定調査依頼履歴番号_1;
-//
 //        static {
 //            setGyomuCD("DB");
 //        }
 //
 //        @Override
 //        public void setUp() {
-//            申請書管理番号_A001 = create申請書管理番号("A001");
-//            認定調査依頼履歴番号_1 = create認定調査依頼履歴番号(1);
 //
-//            sut.insert(create認定調査特記事項Entity(申請書管理番号_A001, 認定調査依頼履歴番号_1));
-//            sut.insert(create認定調査特記事項Entity(create申請書管理番号("A002"), create認定調査依頼履歴番号(1)));
-//            sut.insert(create認定調査特記事項Entity(create申請書管理番号("A001"), create認定調査依頼履歴番号(2)));
+//            sut.insert(create認定調査特記事項Entity(create申請書管理番号("A002"), create認定調査依頼履歴番号(1), "Op01"));
+//            sut.insert(create認定調査特記事項Entity(create申請書管理番号("A001"), create認定調査依頼履歴番号(1), "Op02"));
+//            sut.insert(create認定調査特記事項Entity(create申請書管理番号("A002"), create認定調査依頼履歴番号(1), "Op03"));
+//            sut.insert(create認定調査特記事項Entity(create申請書管理番号("A001"), create認定調査依頼履歴番号(2), "Op04"));
+//            sut.insert(create認定調査特記事項Entity(create申請書管理番号("A002"), create認定調査依頼履歴番号(2), "Op05"));
 //        }
 //
 //        @Test
-//        public void 申請書管理番号_A001_認定調査依頼履歴番号_1_を指定したとき_申請書管理番号にA001を持つEntityが返る() {
-//            DbT5010NinteichosaTokkijikoEntity result = sut.select(申請書管理番号_A001, 認定調査依頼履歴番号_1);
-//            assertThat(result.getShinseishoKanriNo(), is(申請書管理番号_A001));
+//        public void 申請書管理番号_A001_認定調査依頼履歴番号_1_を指定したとき_1件のリストが返る() {
+//            List<DbT5010NinteichosaTokkijikoEntity> result = sut.select(create申請書管理番号("A001"), create認定調査依頼履歴番号(1));
+//            assertThat(result.size(), is(2));
 //        }
 //
 //        @Test
-//        public void 申請書管理番号_A001_認定調査依頼履歴番号_1_を指定したとき_認定調査依頼履歴番号に1を持つEntityが返る() {
-//            DbT5010NinteichosaTokkijikoEntity result = sut.select(申請書管理番号_A001, 認定調査依頼履歴番号_1);
-//            assertThat(result.getNinteichosaRirekiNo(), is(認定調査依頼履歴番号_1));
+//        public void 申請書管理番号_A002_認定調査依頼履歴番号_1_を指定したとき_2件のリストが返る() {
+//            List<DbT5010NinteichosaTokkijikoEntity> result = sut.select(create申請書管理番号("A002"), create認定調査依頼履歴番号(1));
+//            assertThat(result.size(), is(1));
 //        }
 //    }
 //
@@ -180,13 +178,18 @@ public class NinteichosaTokkijikoDacTest extends TestDacBase {
 //    }
 //
 //    private static DbT5010NinteichosaTokkijikoEntity create認定調査特記事項Entity(ShinseishoKanriNo 申請書管理番号,
-//            NinteichosaIraiRirekiNo 認定調査依頼履歴番号) {
+//            NinteichosaIraiRirekiNo 認定調査依頼履歴番号, String 特記事項番号) {
 //        DbT5010NinteichosaTokkijikoEntity entity = new DbT5010NinteichosaTokkijikoEntity();
 //        entity.setShinseishoKanriNo(申請書管理番号);
 //        entity.setNinteichosaRirekiNo(認定調査依頼履歴番号);
-//        entity.setNinteichosaTokkijikoNo(new RString("B001"));
+//        entity.setNinteichosaTokkijikoNo(new RString(特記事項番号));
 //        entity.setNinteichosaTokkijiko(new RString("特記"));
 //        return entity;
+//    }
+//
+//    private static DbT5010NinteichosaTokkijikoEntity create認定調査特記事項Entity(ShinseishoKanriNo 申請書管理番号,
+//            NinteichosaIraiRirekiNo 認定調査依頼履歴番号) {
+//        return create認定調査特記事項Entity(申請書管理番号, 認定調査依頼履歴番号, "B001");
 //    }
 //
 //    private static DbT5010NinteichosaTokkijikoEntity create認定調査特記事項Entity() {
@@ -200,5 +203,4 @@ public class NinteichosaTokkijikoDacTest extends TestDacBase {
 //    private static NinteichosaIraiRirekiNo create認定調査依頼履歴番号(int i) {
 //        return new NinteichosaIraiRirekiNo(i);
 //    }
-//
 }

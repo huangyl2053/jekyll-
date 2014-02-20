@@ -36,23 +36,31 @@ public class NinteichosaTokkijikoManagerTest extends TestBase {
     public static class get認定調査特記事項のテスト extends TestBase {
 
         @Test
-        public void 申請書管理番号_A001_認定調査依頼履歴番号_1を指定したとき_特記事項としてAAAを持つ認定調査特記事項が取得できる() {
-            DbT5010NinteichosaTokkijikoEntity entity = create認定調査特記事項Entity("A001", 1, "AAA");
-            sut = new NinteichosaTokkijikoManager(createMockDac(entity));
+        public void 申請書管理番号_A001_認定調査依頼履歴番号_1を指定したとき_4件の要素を持つ認定調査特記事項Listが返る() {
+
+            sut = new NinteichosaTokkijikoManager(createMockDac(create件数分のList(4)));
 
             ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(new RString("A001"));
             NinteichosaIraiRirekiNo 認定調査依頼履歴番号 = new NinteichosaIraiRirekiNo(1);
-            assertThat(sut.get認定調査特記事項(申請書管理番号, 認定調査依頼履歴番号).get特記事項(), is(new RString("AAA")));
+            assertThat(sut.get認定調査特記事項(申請書管理番号, 認定調査依頼履歴番号).size(), is(4));
         }
 
-        private INinteichosaTokkijikoDac createMockDac(DbT5010NinteichosaTokkijikoEntity entity) {
+        private INinteichosaTokkijikoDac createMockDac(List<DbT5010NinteichosaTokkijikoEntity> list) {
             INinteichosaTokkijikoDac dac = mock(INinteichosaTokkijikoDac.class);
-            when(dac.select(any(ShinseishoKanriNo.class), any(NinteichosaIraiRirekiNo.class))).thenReturn(entity);
+            when(dac.select(any(ShinseishoKanriNo.class), any(NinteichosaIraiRirekiNo.class))).thenReturn(list);
             return dac;
+        }
+
+        private List<DbT5010NinteichosaTokkijikoEntity> create件数分のList(int 件数) {
+            List<DbT5010NinteichosaTokkijikoEntity> list = new ArrayList<>();
+            for (int i = 0; i < 件数; i++) {
+                list.add(create認定調査特記事項Entity("A001", 1, "特記事項" + i));
+            }
+            return list;
         }
     }
 
-    public static class get認定調査特記事項Collectionのテスト extends TestBase {
+    public static class get認定調査特記事項履歴のテスト extends TestBase {
 
         private ShinseishoKanriNo 申請書管理番号;
 
@@ -64,13 +72,13 @@ public class NinteichosaTokkijikoManagerTest extends TestBase {
         @Test
         public void DBからデータを3件取得した場合_3件の要素を持つ認定調査特記事項Collectionを返す() {
             sut = new NinteichosaTokkijikoManager(createMockDac(create件数分のList(3)));
-            assertThat(sut.get認定調査特記事項Collection(申請書管理番号).size(), is(3));
+            assertThat(sut.get認定調査特記事項履歴(申請書管理番号).size(), is(3));
         }
 
         @Test
         public void DBからデータを取得できなかった場合_空の認定調査特記事項Collectionを返す() {
             sut = new NinteichosaTokkijikoManager(createMockDac(Collections.EMPTY_LIST));
-            assertThat(sut.get認定調査特記事項Collection(申請書管理番号).isEmpty(), is(true));
+            assertThat(sut.get認定調査特記事項履歴(申請書管理番号).isEmpty(), is(true));
         }
 
         private INinteichosaTokkijikoDac createMockDac(List<DbT5010NinteichosaTokkijikoEntity> entities) {

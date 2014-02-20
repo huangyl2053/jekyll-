@@ -46,7 +46,7 @@ public final class NinteichosaTokkijikoMapper {
      * @param entities 認定調査特記事項Entityのリスト
      * @return 認定調査特記事項Collection
      */
-    public static NinteichosaTokkijikoList to認定調査特記事項Collection(List<DbT5010NinteichosaTokkijikoEntity> entities) {
+    public static NinteichosaTokkijikoList to認定調査特記事項List(List<DbT5010NinteichosaTokkijikoEntity> entities) {
         if (entities == null || entities.isEmpty()) {
             return new NinteichosaTokkijikoList(Collections.EMPTY_LIST);
         }

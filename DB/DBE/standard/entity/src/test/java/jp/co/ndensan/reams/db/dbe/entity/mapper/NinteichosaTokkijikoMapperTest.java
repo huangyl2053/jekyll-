@@ -75,19 +75,19 @@ public class NinteichosaTokkijikoMapperTest extends TestBase {
 
         @Test
         public void nullが渡された場合_空のコレクションが返る() {
-            sut = NinteichosaTokkijikoMapper.to認定調査特記事項Collection(null);
+            sut = NinteichosaTokkijikoMapper.to認定調査特記事項List(null);
             assertThat(sut.isEmpty(), is(true));
         }
 
         @Test
         public void 空のリストが渡された場合_空のコレクションが返る() {
-            sut = NinteichosaTokkijikoMapper.to認定調査特記事項Collection(Collections.EMPTY_LIST);
+            sut = NinteichosaTokkijikoMapper.to認定調査特記事項List(Collections.EMPTY_LIST);
             assertThat(sut.isEmpty(), is(true));
         }
 
         @Test
         public void Entityを3件持つListが渡された場合_3件の要素を持つコレクションが返る() {
-            sut = NinteichosaTokkijikoMapper.to認定調査特記事項Collection(createEntityList(3));
+            sut = NinteichosaTokkijikoMapper.to認定調査特記事項List(createEntityList(3));
             assertThat(sut.size(), is(3));
         }
 
