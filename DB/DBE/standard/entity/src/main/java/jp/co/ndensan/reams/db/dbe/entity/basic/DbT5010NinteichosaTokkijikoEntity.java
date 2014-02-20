@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 
 /**
- * DbT5010NinteiChosaTokkijikoの項目定義クラスです
+ * DbT5010NinteichosaTokkijikoの項目定義クラスです
  *
  * @author n8178 城間篤人
  */
@@ -18,19 +18,20 @@ public class DbT5010NinteichosaTokkijikoEntity implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     @TableName
-    public static final RString TABLE_NAME = new RString("DbT5010NinteiChosaTokkijiko");
-    private RString insertDantaiCd = RString.EMPTY;
+    public static final RString TABLE_NAME = new RString("DbT5010NinteichosaTokkijiko");
+    private RString insertDantaiCd;
     private RDateTime insertTimestamp;
-    private RString insertReamsLoginId = RString.EMPTY;
+    private RString insertReamsLoginId;
     private UUID insertContextId;
     private boolean isDeleted = false;
     private int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
-    private RString lastUpdateReamsLoginId = RString.EMPTY;
+    private RString lastUpdateReamsLoginId;
     @PrimaryKey
     private ShinseishoKanriNo shinseishoKanriNo;
     @PrimaryKey
     private NinteichosaIraiRirekiNo ninteichosaRirekiNo;
+    @PrimaryKey
     private RString ninteichosaTokkijikoNo;
     private RString ninteichosaTokkijiko;
 

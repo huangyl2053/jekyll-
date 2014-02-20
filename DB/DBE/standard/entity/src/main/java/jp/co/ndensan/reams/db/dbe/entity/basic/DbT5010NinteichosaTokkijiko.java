@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.entity.basic;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * DbT5010NinteiChosaTokkijikoの項目定義クラスです
+ * DbT5010NinteichosaTokkijikoの項目定義クラスです
  *
  * @author n8178 城間篤人
  */
