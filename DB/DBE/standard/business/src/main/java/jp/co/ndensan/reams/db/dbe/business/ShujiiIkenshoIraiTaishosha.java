@@ -9,10 +9,10 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiShinseiDate;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -26,7 +26,7 @@ public class ShujiiIkenshoIraiTaishosha {
     private final ShichosonCode 市町村コード;
     private final KaigoHihokenshaNo 被保険者番号;
     private final NinteiShinseiDate 認定申請年月日;
-    private final RString 認定申請区分;
+    private final NinteiShinseiKubunShinsei 認定申請区分;
     private final IKojin 個人情報;
     private final RString 氏名;
     private final RString 住所;
@@ -56,7 +56,7 @@ public class ShujiiIkenshoIraiTaishosha {
             ShichosonCode 市町村コード,
             KaigoHihokenshaNo 被保険者番号,
             NinteiShinseiDate 認定申請年月日,
-            RString 認定申請区分,
+            NinteiShinseiKubunShinsei 認定申請区分,
             IKojin 個人情報,
             RString 氏名,
             RString 住所,
@@ -125,7 +125,7 @@ public class ShujiiIkenshoIraiTaishosha {
      *
      * @return 認定申請区分
      */
-    public RString get認定申請区分() {
+    public NinteiShinseiKubunShinsei get認定申請区分() {
         return 認定申請区分;
     }
 

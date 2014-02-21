@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.*;
@@ -34,9 +35,9 @@ public class DbT5001NinteiShinseiJohoEntityMock {
                 試験用文字列,
                 new NinteiShinseiDate(new FlexibleDate(new RString("20140101"))),
                 試験用文字列,
-                試験用文字列,
-                試験用文字列,
-                試験用文字列,
+                NinteiShinseiKubunShinsei.新規申請,
+                NinteiShinseiKubunShinsei.新規申請,
+                NinteiShinseiKubunShinsei.新規申請,
                 試験用文字列,
                 試験用文字列,
                 試験用文字列,

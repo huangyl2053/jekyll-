@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiShinseiDate;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -33,7 +34,7 @@ public class ShujiiIkenshoIraiTaishoshaTest extends TestBase {
         private ShichosonCode 市町村コード;
         private KaigoHihokenshaNo 被保険者番号;
         private NinteiShinseiDate 認定申請年月日;
-        private RString 認定申請区分;
+        private NinteiShinseiKubunShinsei 認定申請区分;
         private IKojin 個人情報;
         private RString 氏名;
         private RString 住所;
@@ -46,7 +47,7 @@ public class ShujiiIkenshoIraiTaishoshaTest extends TestBase {
             市町村コード = new ShichosonCode(new RString("0001"));
             被保険者番号 = new KaigoHihokenshaNo(new RString("0001"));
             認定申請年月日 = new NinteiShinseiDate(new FlexibleDate("20140101"));
-            認定申請区分 = new RString("0001");
+            認定申請区分 = NinteiShinseiKubunShinsei.新規申請;
             個人情報 = mock(IKojin.class);
             氏名 = new RString("あああ");
             住所 = new RString("長野市AAAAAAAA");

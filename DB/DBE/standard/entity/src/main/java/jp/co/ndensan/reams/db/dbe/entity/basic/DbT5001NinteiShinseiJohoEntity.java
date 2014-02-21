@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 
 /**
  * 要介護認定申請情報のエンティティクラスです。
@@ -46,9 +47,9 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     private RString shikibetsuCode;
     private NinteiShinseiDate ninteiShinseiYMD;
     private RString ninteiShinseiEdabanCode;
-    private RString ninteiShinseiShinseijiKubunCode;
-    private RString ninteiShinseiHoreiKubunCode;
-    private RString ninteiShinseiYukoKubunCode;
+    private NinteiShinseiKubunShinsei ninteiShinseiShinseijiKubunCode;
+    private NinteiShinseiKubunShinsei ninteiShinseiHoreiKubunCode;
+    private NinteiShinseiKubunShinsei ninteiShinseiYukoKubunCode;
     private RString shienShinseiKubun;
     private RString shinseiRiyu;
     private RString zenYokaigoKubunCode;
@@ -107,9 +108,9 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
             RString shikibetsuCode,
             NinteiShinseiDate ninteiShinseiYMD,
             RString ninteiShinseiEdabanCode,
-            RString ninteiShinseiShinseijiKubunCode,
-            RString ninteiShinseiHoreiKubunCode,
-            RString ninteiShinseiYukoKubunCode,
+            NinteiShinseiKubunShinsei ninteiShinseiShinseijiKubunCode,
+            NinteiShinseiKubunShinsei ninteiShinseiHoreiKubunCode,
+            NinteiShinseiKubunShinsei ninteiShinseiYukoKubunCode,
             RString shienShinseiKubun,
             RString shinseiRiyu,
             RString zenYokaigoKubunCode,
@@ -348,7 +349,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
      *
      * @return ninteiShinseiShinseijiKubunCode
      */
-    public RString getNinteiShinseiShinseijiKubunCode() {
+    public NinteiShinseiKubunShinsei getNinteiShinseiShinseijiKubunCode() {
         return ninteiShinseiShinseijiKubunCode;
     }
 
@@ -357,7 +358,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
      *
      * @param ninteiShinseiShinseijiKubunCode 認定申請区分（申請時）コード
      */
-    public void setNinteiShinseiShinseijiKubunCode(RString ninteiShinseiShinseijiKubunCode) {
+    public void setNinteiShinseiShinseijiKubunCode(NinteiShinseiKubunShinsei ninteiShinseiShinseijiKubunCode) {
         this.ninteiShinseiShinseijiKubunCode = ninteiShinseiShinseijiKubunCode;
     }
 
@@ -366,7 +367,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
      *
      * @return ninteiShinseiHoreiKubunCode
      */
-    public RString getNinteiShinseiHoreiKubunCode() {
+    public NinteiShinseiKubunShinsei getNinteiShinseiHoreiKubunCode() {
         return ninteiShinseiHoreiKubunCode;
     }
 
@@ -375,7 +376,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
      *
      * @param ninteiShinseiHoreiKubunCode 認定申請区分（法令）コード
      */
-    public void setNinteiShinseiHoreiKubunCode(RString ninteiShinseiHoreiKubunCode) {
+    public void setNinteiShinseiHoreiKubunCode(NinteiShinseiKubunShinsei ninteiShinseiHoreiKubunCode) {
         this.ninteiShinseiHoreiKubunCode = ninteiShinseiHoreiKubunCode;
     }
 
@@ -384,7 +385,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
      *
      * @return ninteiShinseiYukoKubunCode
      */
-    public RString getNinteiShinseiYukoKubunCode() {
+    public NinteiShinseiKubunShinsei getNinteiShinseiYukoKubunCode() {
         return ninteiShinseiYukoKubunCode;
     }
 
@@ -393,7 +394,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
      *
      * @param ninteiShinseiYukoKubunCode 認定申請有効区分
      */
-    public void setNinteiShinseiYukoKubunCode(RString ninteiShinseiYukoKubunCode) {
+    public void setNinteiShinseiYukoKubunCode(NinteiShinseiKubunShinsei ninteiShinseiYukoKubunCode) {
         this.ninteiShinseiYukoKubunCode = ninteiShinseiYukoKubunCode;
     }
 

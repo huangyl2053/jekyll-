@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
@@ -43,7 +44,7 @@ public class NinteiShinseiTorisageManagerTest extends TestBase {
     private static ShichosonCode 市町村Code = new ShichosonCode(new RString("A012"));
     private static KaigoHihokenshaNo 被保険者No = new KaigoHihokenshaNo(new RString("DB0001"));
     private static NinteiShinseiDate 認定申請年月日 = new NinteiShinseiDate(new FlexibleDate(new RString("20120101")));
-    private static RString 認定申請区分コード_申請時 = new RString("0001");
+    private static NinteiShinseiKubunShinsei 認定申請区分コード_申請時 = NinteiShinseiKubunShinsei.新規申請;
     private static TorisageKubun 取下げ区分 = TorisageKubun.区分変更却下;
     private static RString 取下げ理由 = new RString("とりさげ");
     private static FlexibleDate 取下げ年月日 = new FlexibleDate(new RString("20120101"));

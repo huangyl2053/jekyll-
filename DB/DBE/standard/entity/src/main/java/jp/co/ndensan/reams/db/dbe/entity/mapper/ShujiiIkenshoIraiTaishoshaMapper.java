@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
@@ -56,7 +57,7 @@ public final class ShujiiIkenshoIraiTaishoshaMapper {
         ShichosonCode 市町村コード = 認定申請情報Entity.getShichosonCode();
         KaigoHihokenshaNo 被保険者番号 = 認定申請情報Entity.getHihokenshaNo();
         NinteiShinseiDate 認定申請年月日 = 認定申請情報Entity.getNinteiShinseiYMD();
-        RString 認定申請区分 = 認定申請情報Entity.getNinteiShinseiShinseijiKubunCode();
+        NinteiShinseiKubunShinsei 認定申請区分 = 認定申請情報Entity.getNinteiShinseiShinseijiKubunCode();
 
         return new ShujiiIkenshoIraiTaishosha(
                 申請書管理番号,

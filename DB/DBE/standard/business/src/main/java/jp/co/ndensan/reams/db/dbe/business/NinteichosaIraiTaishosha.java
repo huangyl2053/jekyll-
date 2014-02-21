@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
 import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
+import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -26,7 +27,7 @@ public class NinteichosaIraiTaishosha {
     private ShichosonCode 市町村コード;
     private KaigoHihokenshaNo 被保険者番号;
     private NinteiShinseiDate 認定申請年月日;
-    private RString 認定申請区分;
+    private NinteiShinseiKubunShinsei 認定申請区分;
     private IKojin 個人情報;
     private RString 氏名;
     private RString 住所;
@@ -53,7 +54,7 @@ public class NinteichosaIraiTaishosha {
      * {@code 認定申請年月日}がnullの場合、{@code 認定申請区分}がnullの場合、{@code 個人情報}がnullの場合、{@code 氏名}がnullの場合、または{@code 住所}がnullの場合
      */
     public NinteichosaIraiTaishosha(ShinseishoKanriNo 申請書管理番号, ShichosonCode 市町村コード, KaigoHihokenshaNo 被保険者番号,
-            NinteiShinseiDate 認定申請年月日, RString 認定申請区分, IKojin 個人情報, RString 氏名, RString 住所,
+            NinteiShinseiDate 認定申請年月日, NinteiShinseiKubunShinsei 認定申請区分, IKojin 個人情報, RString 氏名, RString 住所,
             NinteichosaItakusaki 認定調査委託先, IKaigoJigyosha 事業者情報, INinteiChosain 認定調査員情報) throws NullPointerException {
 
         requireNonNull(申請書管理番号, Messages.E00003.replace("申請書管理番号", "認定調査依頼対象者").getMessage());
@@ -119,7 +120,7 @@ public class NinteichosaIraiTaishosha {
      *
      * @return 認定申請区分
      */
-    public RString get認定申請区分() {
+    public NinteiShinseiKubunShinsei get認定申請区分() {
         return 認定申請区分;
     }
 

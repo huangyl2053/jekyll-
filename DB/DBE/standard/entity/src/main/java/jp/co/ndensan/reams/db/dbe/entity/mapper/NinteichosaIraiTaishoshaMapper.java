@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
 import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
+import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ur.urf.entity.basic.ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urf.entity.basic.KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.ur.urf.entity.mapper.KaigoJigyoshaMapper;
@@ -68,7 +69,7 @@ public final class NinteichosaIraiTaishoshaMapper {
         ShichosonCode 市町村コード = 要介護認定申請情報Entity.getShichosonCode();
         KaigoHihokenshaNo 被保険者 = 要介護認定申請情報Entity.getHihokenshaNo();
         NinteiShinseiDate 認定申請年月日 = 要介護認定申請情報Entity.getNinteiShinseiYMD();
-        RString 認定申請区分 = 要介護認定申請情報Entity.getNinteiShinseiShinseijiKubunCode();
+        NinteiShinseiKubunShinsei 認定申請区分 = 要介護認定申請情報Entity.getNinteiShinseiShinseijiKubunCode();
         IKojin 個人情報 = IKojinFactory.create(個人Entity);
         IShikibetsuTaisho 識別対象 = ShikibetsuTaishoFactory.create(個人Entity);
         RString 氏名 = 識別対象.get氏名().getName();

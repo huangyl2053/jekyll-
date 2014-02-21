@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.relate.INinteiChosaIraiTaishoshaDa
 import jp.co.ndensan.reams.db.dbe.realservice.helper.KojinEntityMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ur.urf.persistence.basic.IChosainJohoDac;
 import jp.co.ndensan.reams.ur.urf.persistence.basic.IKaigoJigyoshaDac;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
@@ -228,9 +229,9 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
         IShikibetsuCode shikibetsuCode = new _ShikibetsuCode(試験用文字列);
         NinteiShinseiDate ninteiShinseiYMD = new NinteiShinseiDate(調査完了年月日);
         RString ninteiShinseiEdabanCode = 試験用文字列;
-        RString ninteiShinseiShinseijiKubunCode = 試験用文字列;
-        RString ninteiShinseiHoreiKubunCode = 試験用文字列;
-        RString ninteiShinseiYukoKubunCode = 試験用文字列;
+        NinteiShinseiKubunShinsei ninteiShinseiShinseijiKubunCode = NinteiShinseiKubunShinsei.新規申請;
+        NinteiShinseiKubunShinsei ninteiShinseiHoreiKubunCode = NinteiShinseiKubunShinsei.新規申請;
+        NinteiShinseiKubunShinsei ninteiShinseiYukoKubunCode = NinteiShinseiKubunShinsei.新規申請;
         RString shienShinseiKubun = 試験用文字列;
         RString shinseiRiyu = 試験用文字列;
         RString zenYokaigoKubunCode = 試験用文字列;
