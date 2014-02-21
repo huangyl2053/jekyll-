@@ -25,47 +25,54 @@ import static org.mockito.Mockito.*;
 @RunWith(Enclosed.class)
 public class ShujiiTest {
 
+    private static final int AS_市町村コードがNULL = 0;
+    private static final int AS_介護医療機関コードがNULL = 1;
+    private static final int AS_介護医師コードがNULL = 2;
+    private static final int AS_医療機関コードがNULL = 3;
+    private static final int AS_医師識別番号がNULL = 4;
+    private static final int AS_医師の状況がNULL = 5;
+
     public static class コンストラクタ {
 
         @Test(expected = NullPointerException.class)
         public void 市町村コードがNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createShujii(0);
+            createShujii(AS_市町村コードがNULL);
         }
 
         @Test(expected = NullPointerException.class)
         public void 介護医療機関コードがNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createShujii(1);
+            createShujii(AS_介護医療機関コードがNULL);
         }
 
         @Test(expected = NullPointerException.class)
         public void 介護医師コードがNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createShujii(2);
+            createShujii(AS_介護医師コードがNULL);
         }
 
         @Test(expected = NullPointerException.class)
         public void 医療機関コードがNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createShujii(3);
+            createShujii(AS_医療機関コードがNULL);
         }
 
         @Test(expected = NullPointerException.class)
         public void 医師識別番号がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createShujii(4);
+            createShujii(AS_医師識別番号がNULL);
         }
 
         @Test(expected = NullPointerException.class)
         public void 医師の状況がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createShujii(5);
+            createShujii(AS_医師の状況がNULL);
         }
     }
 
     private static IShujii createShujii(int flg) {
         return new Shujii(
-                flg != 0 ? any(ShichosonCode.class) : null,
-                flg != 1 ? any(KaigoIryoKikanCode.class) : null,
-                flg != 2 ? any(KaigoDoctorCode.class) : null,
-                flg != 3 ? any(IIryoKikanCode.class) : null,
-                flg != 4 ? any(RString.class) : null,
-                flg != 5 ? any(IshiJokyo.class) : null,
+                flg != AS_市町村コードがNULL ? any(ShichosonCode.class) : null,
+                flg != AS_介護医療機関コードがNULL ? any(KaigoIryoKikanCode.class) : null,
+                flg != AS_介護医師コードがNULL ? any(KaigoDoctorCode.class) : null,
+                flg != AS_医療機関コードがNULL ? any(IIryoKikanCode.class) : null,
+                flg != AS_医師識別番号がNULL ? any(RString.class) : null,
+                flg != AS_医師の状況がNULL ? any(IshiJokyo.class) : null,
                 any(IYubinNo.class), any(IJusho.class), any(RString.class), any(RString.class));
     }
 }
