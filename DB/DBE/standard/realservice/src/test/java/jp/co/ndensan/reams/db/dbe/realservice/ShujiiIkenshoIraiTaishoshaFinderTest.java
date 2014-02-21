@@ -32,7 +32,7 @@ public class ShujiiIkenshoIraiTaishoshaFinderTest extends TestBase {
 
     private static ShujiiIkenshoIraiTaishoshaFinder sut;
 
-    public static class get主治医意見書作成依頼対象者_市町村コードあり_のテスト extends TestBase {
+    public static class get主治医意見書作成依頼対象者_市町村コードあり extends TestBase {
 
         private INinteiShinchokuJohoDac ninteiShinchokuJohoDac;
         private IShujiiIkenshoIraiTaishoshaDac shujiiIkenshoIraiTaishoshaDac;
@@ -57,7 +57,7 @@ public class ShujiiIkenshoIraiTaishoshaFinderTest extends TestBase {
         }
     }
 
-    public static class get主治医意見書作成依頼対象者_市町村コードなし_のテスト extends TestBase {
+    public static class get主治医意見書作成依頼対象者_市町村コードなし extends TestBase {
 
         private INinteiShinchokuJohoDac ninteiShinchokuJohoDac;
         private IShujiiIkenshoIraiTaishoshaDac shujiiIkenshoIraiTaishoshaDac;
