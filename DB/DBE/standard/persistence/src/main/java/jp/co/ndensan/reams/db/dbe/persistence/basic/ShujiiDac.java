@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.util.db.DbAccessor;
+import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJoho.*;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
@@ -29,7 +29,7 @@ public class ShujiiDac implements IShujiiDac {
     @Override
     public DbT7012ShujiiJohoEntity select(
             ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT7012ShujiiJohoEntity> list = accessor.select()
                 .table(DbT7012ShujiiJoho.class)
                 .where(and(
@@ -47,24 +47,24 @@ public class ShujiiDac implements IShujiiDac {
 
     @Override
     public int insert(DbT7012ShujiiJohoEntity entity) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.insert(entity).execute();
     }
 
     @Override
     public int update(DbT7012ShujiiJohoEntity entity) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.update(entity).execute();
     }
 
     @Override
     public int delete(DbT7012ShujiiJohoEntity entity) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.delete(entity).execute();
     }
 
     private int getMatchRowCount(DbT7012ShujiiJohoEntity entity) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT7012ShujiiJoho.class)
                 .where(and(

@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoDoctorEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.entity.Doctor;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.util.db.DbAccessor;
+import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJoho.*;
@@ -31,7 +31,7 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
 
     @Override
     public List<KaigoDoctorEntity> select(ITrueFalseCriteria criteria) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT7012ShujiiJoho.class)
                 .leftJoin(Doctor.class, using(DbT7012ShujiiJoho.kaigoIshiCode))
@@ -41,7 +41,7 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
 
     @Override
     public KaigoDoctorEntity select(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<KaigoDoctorEntity> list = accessor.select()
                 .table(DbT7012ShujiiJoho.class)
                 .leftJoin(Doctor.class, using(DbT7012ShujiiJoho.kaigoIshiCode))
@@ -56,7 +56,7 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
     @Override
     public KaigoDoctorEntity select(
             ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード, IshiJokyo 医師の状況) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<KaigoDoctorEntity> list = accessor.select()
                 .table(DbT7012ShujiiJoho.class)
                 .leftJoin(Doctor.class, using(DbT7012ShujiiJoho.kaigoIshiCode))
@@ -71,7 +71,7 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
 
     @Override
     public List<KaigoDoctorEntity> select(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT7012ShujiiJoho.class)
                 .leftJoin(Doctor.class, using(DbT7012ShujiiJoho.kaigoIshiCode))
@@ -83,7 +83,7 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
 
     @Override
     public List<KaigoDoctorEntity> select(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, IshiJokyo 医師の状況) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT7012ShujiiJoho.class)
                 .leftJoin(Doctor.class, using(DbT7012ShujiiJoho.kaigoIshiCode))
@@ -96,7 +96,7 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
 
     @Override
     public List<KaigoDoctorEntity> select(ShichosonCode 市町村コード) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT7012ShujiiJoho.class)
                 .leftJoin(Doctor.class, using(DbT7012ShujiiJoho.kaigoIshiCode))
@@ -106,7 +106,7 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
 
     @Override
     public List<KaigoDoctorEntity> select(ShichosonCode 市町村コード, IshiJokyo 医師の状況) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT7012ShujiiJoho.class)
                 .leftJoin(Doctor.class, using(DbT7012ShujiiJoho.kaigoIshiCode))
