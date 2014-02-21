@@ -38,7 +38,7 @@ public class ShujiiMapperTest {
 
         @Test
         public void 介護医師コードの設定がある時_toShujii_get介護医師コードは_設定値を返す() {
-            assertThat(createShujii().get介護医師コード().getValue(), is(new RString("介護医師コード")));
+            assertThat(createShujii().get介護医師コード().value(), is(new RString("介護医師コード")));
         }
 
         @Test

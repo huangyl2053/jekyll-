@@ -8,6 +8,7 @@ import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -15,7 +16,7 @@ import static java.util.Objects.requireNonNull;
  *
  * @author N8156 宮本 康
  */
-public class KaigoDoctorCode implements IDbColumnMappable, Comparable<KaigoDoctorCode> {
+public class KaigoDoctorCode implements Comparable<KaigoDoctorCode>, IDbColumnMappable, IValueObject {
 
     private final RString 介護医師コード;
 
@@ -28,12 +29,8 @@ public class KaigoDoctorCode implements IDbColumnMappable, Comparable<KaigoDocto
         this.介護医師コード = requireNonNull(介護医師コード, Messages.E00001.replace("介護医師コード").getMessage());
     }
 
-    /**
-     * 介護医師コードを返します。
-     *
-     * @return 介護医師コード
-     */
-    public RString getValue() {
+    @Override
+    public RString value() {
         return 介護医師コード;
     }
 
@@ -42,7 +39,7 @@ public class KaigoDoctorCode implements IDbColumnMappable, Comparable<KaigoDocto
         if (比較対象 == null || !(比較対象 instanceof KaigoDoctorCode)) {
             return false;
         }
-        return ((KaigoDoctorCode) 比較対象).getValue().equals(介護医師コード);
+        return ((KaigoDoctorCode) 比較対象).value().equals(介護医師コード);
     }
 
     @Override
@@ -54,7 +51,7 @@ public class KaigoDoctorCode implements IDbColumnMappable, Comparable<KaigoDocto
 
     @Override
     public int compareTo(KaigoDoctorCode 比較対象) {
-        return 介護医師コード.compareTo(比較対象.getValue());
+        return 介護医師コード.compareTo(比較対象.value());
     }
 
     @Override

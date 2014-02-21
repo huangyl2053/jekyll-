@@ -58,7 +58,7 @@ public final class ShujiiMapper {
         DbT7012ShujiiJohoEntity entity = new DbT7012ShujiiJohoEntity();
         entity.setShichosonCode(shujii.get市町村コード().getValue());
         entity.setKaigoIryokikanCode(shujii.get介護医療機関コード().getValue());
-        entity.setKaigoIshiCode(shujii.get介護医師コード().getValue());
+        entity.setKaigoIshiCode(shujii.get介護医師コード().value());
         entity.setIryokikanCode(shujii.get医療機関コード().getValue());
         entity.setShujiiCode(shujii.get医師識別番号());
         entity.setShujiiJokyo(shujii.is有効());

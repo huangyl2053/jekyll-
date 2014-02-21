@@ -43,7 +43,7 @@ public class KaigoDoctorCollectionTest {
         @Test
         public void 介護医師情報が存在する時_get介護医師は_該当の介護医師情報を返す() {
             KaigoDoctorCollection sut = createKaigoDoctorList();
-            assertThat(sut.get介護医師(createShichosonCode("S002"), createKaigoIryoKikanCode("K00A"), createKaigoDoctorCode("I0A2")).get介護医師コード().getValue(), is(new RString("I0A2")));
+            assertThat(sut.get介護医師(createShichosonCode("S002"), createKaigoIryoKikanCode("K00A"), createKaigoDoctorCode("I0A2")).get介護医師コード().value(), is(new RString("I0A2")));
         }
 
         @Test(expected = IllegalArgumentException.class)
