@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoDoctorEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護医師情報のデータアクセスインターフェースです。
@@ -25,6 +26,7 @@ public interface IKaigoDoctorDac {
      * @param searchCondition 検索条件
      * @return 介護医師情報エンティティリスト
      */
+    @Transaction
     List<KaigoDoctorEntity> select(ITrueFalseCriteria searchCondition);
 
     /**
@@ -35,6 +37,7 @@ public interface IKaigoDoctorDac {
      * @param 介護医師コード 介護医師コード
      * @return 介護医師情報エンティティ
      */
+    @Transaction
     KaigoDoctorEntity select(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード);
 
     /**
@@ -46,6 +49,7 @@ public interface IKaigoDoctorDac {
      * @param 医師の状況 医師の状況
      * @return 介護医師情報エンティティ
      */
+    @Transaction
     KaigoDoctorEntity select(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード, IshiJokyo 医師の状況);
 
     /**
@@ -55,6 +59,7 @@ public interface IKaigoDoctorDac {
      * @param 介護医療機関コード 介護医療機関コード
      * @return 介護医師情報エンティティリスト
      */
+    @Transaction
     List<KaigoDoctorEntity> select(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード);
 
     /**
@@ -65,6 +70,7 @@ public interface IKaigoDoctorDac {
      * @param 医師の状況 医師の状況
      * @return 介護医師情報エンティティリスト
      */
+    @Transaction
     List<KaigoDoctorEntity> select(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, IshiJokyo 医師の状況);
 
     /**
@@ -73,6 +79,7 @@ public interface IKaigoDoctorDac {
      * @param 市町村コード 市町村コード
      * @return 介護医師情報エンティティリスト
      */
+    @Transaction
     List<KaigoDoctorEntity> select(ShichosonCode 市町村コード);
 
     /**
@@ -82,5 +89,6 @@ public interface IKaigoDoctorDac {
      * @param 医師の状況 医師の状況
      * @return 介護医師情報エンティティリスト
      */
+    @Transaction
     List<KaigoDoctorEntity> select(ShichosonCode 市町村コード, IshiJokyo 医師の状況);
 }
