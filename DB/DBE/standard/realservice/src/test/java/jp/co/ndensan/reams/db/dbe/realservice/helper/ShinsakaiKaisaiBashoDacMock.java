@@ -43,22 +43,22 @@ public class ShinsakaiKaisaiBashoDacMock implements IShinsakaiKaisaiBashoDac {
         return spy(entity);
     }
 
-    private DbT5104ShinsakaiKaisaiBashoJohoEntity createInstance(RString 開催場所コード, RString 開催場所名称) {
+    private DbT5104ShinsakaiKaisaiBashoJohoEntity createInstance(ShinsakaiKaisaiBashoCode 開催場所コード, RString 開催場所名称) {
         DbT5104ShinsakaiKaisaiBashoJohoEntity entity = getSpiedInstance();
         return entity;
     }
 
     @Override
-    public DbT5104ShinsakaiKaisaiBashoJohoEntity select(RString 審査会開催場所) {
-        if (審査会開催場所.equals(検索不可な開催場所コード)) {
+    public DbT5104ShinsakaiKaisaiBashoJohoEntity select(ShinsakaiKaisaiBashoCode 審査会開催場所) {
+        if (審査会開催場所.value().equals(検索不可な開催場所コード)) {
             return null;
         }
         return createInstance(審査会開催場所, new RString("開催場所名称"));
     }
 
     @Override
-    public DbT5104ShinsakaiKaisaiBashoJohoEntity select(RString 審査会開催場所, ShinsakaiKaisaiBashoJokyo 開催場所状況) {
-        if (審査会開催場所.equals(検索不可な開催場所コード)) {
+    public DbT5104ShinsakaiKaisaiBashoJohoEntity select(ShinsakaiKaisaiBashoCode 審査会開催場所, ShinsakaiKaisaiBashoJokyo 開催場所状況) {
+        if (審査会開催場所.value().equals(検索不可な開催場所コード)) {
             return null;
         }
         return createInstance(審査会開催場所, new RString("開催場所名称"));
@@ -68,15 +68,15 @@ public class ShinsakaiKaisaiBashoDacMock implements IShinsakaiKaisaiBashoDac {
     @Override
     public List<DbT5104ShinsakaiKaisaiBashoJohoEntity> selectAll() {
         List<DbT5104ShinsakaiKaisaiBashoJohoEntity> entities = new ArrayList<>();
-        entities.add(createInstance(new RString("00001"), new RString("開催場所名称")));
-        entities.add(createInstance(new RString("00002"), new RString("開催場所名称")));
+        entities.add(createInstance(new ShinsakaiKaisaiBashoCode(new RString("00001")), new RString("開催場所名称")));
+        entities.add(createInstance(new ShinsakaiKaisaiBashoCode(new RString("00002")), new RString("開催場所名称")));
         return entities;
     }
 
     @Override
     public List<DbT5104ShinsakaiKaisaiBashoJohoEntity> selectAll(ShinsakaiKaisaiBashoJokyo 開催場所状況) {
         List<DbT5104ShinsakaiKaisaiBashoJohoEntity> entities = new ArrayList<>();
-        entities.add(createInstance(new RString("00001"), new RString("開催場所名称")));
+        entities.add(createInstance(new ShinsakaiKaisaiBashoCode(new RString("00001")), new RString("開催場所名称")));
         return entities;
     }
 

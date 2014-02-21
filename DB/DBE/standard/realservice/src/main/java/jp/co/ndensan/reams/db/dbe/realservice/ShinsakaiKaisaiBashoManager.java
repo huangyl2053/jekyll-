@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCod
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.ShinsakaiKaisaiBashoJohoMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IShinsakaiKaisaiBashoDac;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
 
 /**
@@ -21,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
  * @author N1013 松本直樹
  */
 public class ShinsakaiKaisaiBashoManager {
-//TODO 審査会開催場所をValueObjectからはずす。詳細が決まってから正式対応。　2014/02/28
 
     private final IShinsakaiKaisaiBashoDac dac;
 
@@ -47,8 +45,7 @@ public class ShinsakaiKaisaiBashoManager {
      * @param 審査会開催場所コード 審査会開催場所コード
      * @return 審査会開催場所
      */
-//    public ShinsakaiKaisaiBasho get審査会開催場所(ShinsakaiKaisaiBashoCode 審査会開催場所コード) {
-    public ShinsakaiKaisaiBasho get審査会開催場所(RString 審査会開催場所コード) {
+    public ShinsakaiKaisaiBasho get審査会開催場所(ShinsakaiKaisaiBashoCode 審査会開催場所コード) {
         DbT5104ShinsakaiKaisaiBashoJohoEntity entity = dac.select(審査会開催場所コード);
 
         if (entity == null) {
@@ -65,8 +62,7 @@ public class ShinsakaiKaisaiBashoManager {
      * @param 開催場所状況 開催場所状況（True:有効 False:無効）
      * @return 審査会開催場所
      */
-//    public ShinsakaiKaisaiBasho get審査会開催場所(ShinsakaiKaisaiBashoCode 審査会開催場所コード, boolean 開催場所状況) {
-    public ShinsakaiKaisaiBasho get審査会開催場所(RString 審査会開催場所コード, ShinsakaiKaisaiBashoJokyo 開催場所状況) {
+    public ShinsakaiKaisaiBasho get審査会開催場所(ShinsakaiKaisaiBashoCode 審査会開催場所コード, ShinsakaiKaisaiBashoJokyo 開催場所状況) {
         DbT5104ShinsakaiKaisaiBashoJohoEntity entity = dac.select(審査会開催場所コード, 開催場所状況);
 
         if (entity == null) {

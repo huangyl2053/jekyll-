@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCod
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
@@ -24,25 +23,22 @@ public class ShinsakaiKaisaiBashoDac implements IShinsakaiKaisaiBashoDac {
 
     @InjectSession
     private SqlSession session;
-//    private final DbAccessorNormalType dbAccessor = new DbAccessorNormalType(session);
 
     @Override
-    public DbT5104ShinsakaiKaisaiBashoJohoEntity select(RString 審査会開催場所) {
-//    public DbT5104ShinsakaiKaisaiBashoJohoEntity select(ShinsakaiKaisaiBashoCode 審査会開催場所) {
+    public DbT5104ShinsakaiKaisaiBashoJohoEntity select(ShinsakaiKaisaiBashoCode 審査会開催場所) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT5104ShinsakaiKaisaiBashoJoho.class)
-                .where(eq(DbT5104ShinsakaiKaisaiBashoJoho.shinsakaiKaisaiBashoCode, 審査会開催場所))
+                .where(eq(DbT5104ShinsakaiKaisaiBashoJoho.shinsakaiKaisaiBashoCode, 審査会開催場所.value()))
                 .toObject(DbT5104ShinsakaiKaisaiBashoJohoEntity.class);
     }
 
     @Override
-    public DbT5104ShinsakaiKaisaiBashoJohoEntity select(RString 審査会開催場所, ShinsakaiKaisaiBashoJokyo 開催場所状況) {
-//    public DbT5104ShinsakaiKaisaiBashoJohoEntity select(ShinsakaiKaisaiBashoCode 審査会開催場所, ShinsakaiKaisaiBashoJokyo 開催場所状況) {
+    public DbT5104ShinsakaiKaisaiBashoJohoEntity select(ShinsakaiKaisaiBashoCode 審査会開催場所, ShinsakaiKaisaiBashoJokyo 開催場所状況) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT5104ShinsakaiKaisaiBashoJoho.class)
-                .where(and(eq(DbT5104ShinsakaiKaisaiBashoJoho.shinsakaiKaisaiBashoCode, 審査会開催場所),
+                .where(and(eq(DbT5104ShinsakaiKaisaiBashoJoho.shinsakaiKaisaiBashoCode, 審査会開催場所.value()),
                 eq(DbT5104ShinsakaiKaisaiBashoJoho.shinsakaiKaisaiBashoJokyo, 開催場所状況.is有効())))
                 .toObject(DbT5104ShinsakaiKaisaiBashoJohoEntity.class);
     }

@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCod
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.IDeletable;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.IReplaceable;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
@@ -28,8 +27,7 @@ public interface IShinsakaiKaisaiBashoDac
      * @return 審査会開催場所Entity
      */
     @Transaction
-    DbT5104ShinsakaiKaisaiBashoJohoEntity select(RString 審査会開催場所);
-//    DbT5104ShinsakaiKaisaiBashoJohoEntity select(ShinsakaiKaisaiBashoCode 審査会開催場所);
+    DbT5104ShinsakaiKaisaiBashoJohoEntity select(ShinsakaiKaisaiBashoCode 審査会開催場所);
 
     /**
      * 審査会開催場所コード、開催場所状況を指定して、審査会開催場所情報を取得します。
@@ -39,8 +37,7 @@ public interface IShinsakaiKaisaiBashoDac
      * @return 審査会開催場所Entity
      */
     @Transaction
-    DbT5104ShinsakaiKaisaiBashoJohoEntity select(RString 審査会開催場所, ShinsakaiKaisaiBashoJokyo 開催場所状況);
-//    DbT5104ShinsakaiKaisaiBashoJohoEntity select(ShinsakaiKaisaiBashoCode 審査会開催場所, ShinsakaiKaisaiBashoJokyo 開催場所状況);
+    DbT5104ShinsakaiKaisaiBashoJohoEntity select(ShinsakaiKaisaiBashoCode 審査会開催場所, ShinsakaiKaisaiBashoJokyo 開催場所状況);
 
     /**
      * 審査会開催場所テーブルにある全件を取得します。
