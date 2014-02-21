@@ -22,6 +22,7 @@ public interface IShujiiIkenshoIraiJohoDac {
      * @param 主治医意見書作成依頼履歴番号 主治医意見書作成依頼履歴番号
      * @return 主治医意見書作成依頼情報エンティティ
      */
+    // TODO N8187 久保田英男 主治医意見書作成依頼履歴番号は業務クラスとして作成予定。クラスが作成されたら修正を行う。 2014/3月末まで
     @Transaction
     DbT5011ShujiiIkenshoIraiJohoEntity select(ShinseishoKanriNo 申請書管理番号, int 主治医意見書作成依頼履歴番号);
 }
