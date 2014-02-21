@@ -29,5 +29,5 @@ public interface INinteiShinchokuJohoDac {
      * @return 要介護認定進捗情報データのリスト
      */
     @Transaction
-    List<DbT5005NinteiShinchokuJohoEntity> selectIkenshoIraiTaisho();
+    List<DbT5005NinteiShinchokuJohoEntity> select主治医意見書作成依頼未完了();
 }

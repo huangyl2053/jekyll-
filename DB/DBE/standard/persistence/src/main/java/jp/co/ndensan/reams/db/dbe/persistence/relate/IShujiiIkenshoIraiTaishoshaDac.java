@@ -23,5 +23,5 @@ public interface IShujiiIkenshoIraiTaishoshaDac {
      * @return
      */
     @Transaction
-    List<DbT5005NinteiShinchokuJohoEntity> selectIkenshoIraiTaisho(ShichosonCode 市町村コード);
+    List<DbT5005NinteiShinchokuJohoEntity> select主治医意見書作成依頼対象者(ShichosonCode 市町村コード);
 }

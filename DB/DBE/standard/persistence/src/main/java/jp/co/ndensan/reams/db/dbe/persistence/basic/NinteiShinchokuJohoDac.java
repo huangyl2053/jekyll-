@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
-import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.YokaigoninteiDateConstants;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJoho;
@@ -27,24 +26,20 @@ public class NinteiShinchokuJohoDac implements INinteiShinchokuJohoDac {
     @Override
     public List<DbT5005NinteiShinchokuJohoEntity> select認定調査未完了() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        List<DbT5005NinteiShinchokuJohoEntity> list = accessor
+        return accessor
                 .select()
                 .table(DbT5005NinteiShinchokuJoho.class)
                 .where(eq(DbT5005NinteiShinchokuJoho.ninteichosaIraiKanryoYMD, YokaigoninteiDateConstants.認定調査未完了年月日))
                 .toList(DbT5005NinteiShinchokuJohoEntity.class);
-
-        return (!list.isEmpty()) ? list : Collections.EMPTY_LIST;
     }
 
     @Override
-    public List<DbT5005NinteiShinchokuJohoEntity> selectIkenshoIraiTaisho() {
+    public List<DbT5005NinteiShinchokuJohoEntity> select主治医意見書作成依頼未完了() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        List<DbT5005NinteiShinchokuJohoEntity> list = accessor
+        return accessor
                 .select()
                 .table(DbT5005NinteiShinchokuJoho.class)
                 .where(eq(DbT5005NinteiShinchokuJoho.ikenshoTorokuKanryoYMD, YokaigoninteiDateConstants.主治医意見書登録未完了年月日))
                 .toList(DbT5005NinteiShinchokuJohoEntity.class);
-
-        return (!list.isEmpty()) ? list : Collections.EMPTY_LIST;
     }
 }

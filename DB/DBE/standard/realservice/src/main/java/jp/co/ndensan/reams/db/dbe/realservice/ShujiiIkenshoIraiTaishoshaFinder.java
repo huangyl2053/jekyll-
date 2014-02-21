@@ -86,7 +86,7 @@ public class ShujiiIkenshoIraiTaishoshaFinder {
      * @return ShujiiIkenshoIraiTaishoshaのList
      */
     public List<ShujiiIkenshoIraiTaishosha> get主治医意見書作成依頼対象者() {
-        List<DbT5005NinteiShinchokuJohoEntity> 認定進捗情報EntityList = ninteiShinchokuJohoDac.selectIkenshoIraiTaisho();
+        List<DbT5005NinteiShinchokuJohoEntity> 認定進捗情報EntityList = ninteiShinchokuJohoDac.select主治医意見書作成依頼未完了();
         return create主治医意見書作成依頼対象者List(認定進捗情報EntityList);
     }
 
@@ -100,7 +100,7 @@ public class ShujiiIkenshoIraiTaishoshaFinder {
     public List<ShujiiIkenshoIraiTaishosha> get主治医意見書作成依頼対象者(ShichosonCode 市町村コード) throws NullPointerException {
         requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
 
-        List<DbT5005NinteiShinchokuJohoEntity> 認定進捗情報EntityList = shujiiIkenshoIraiTaishoshaDac.selectIkenshoIraiTaisho(市町村コード);
+        List<DbT5005NinteiShinchokuJohoEntity> 認定進捗情報EntityList = shujiiIkenshoIraiTaishoshaDac.select主治医意見書作成依頼対象者(市町村コード);
         return create主治医意見書作成依頼対象者List(認定進捗情報EntityList);
     }
 

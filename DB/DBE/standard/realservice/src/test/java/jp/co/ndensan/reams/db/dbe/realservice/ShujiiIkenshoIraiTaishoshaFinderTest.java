@@ -45,7 +45,7 @@ public class ShujiiIkenshoIraiTaishoshaFinderTest extends TestBase {
             ShichosonCode 市町村コード = new ShichosonCode(new RString("0001"));
 
             shujiiIkenshoIraiTaishoshaDac = mock(IShujiiIkenshoIraiTaishoshaDac.class);
-            when(shujiiIkenshoIraiTaishoshaDac.selectIkenshoIraiTaisho(any(ShichosonCode.class))).thenReturn(Collections.EMPTY_LIST);
+            when(shujiiIkenshoIraiTaishoshaDac.select主治医意見書作成依頼対象者(any(ShichosonCode.class))).thenReturn(Collections.EMPTY_LIST);
             sut = new ShujiiIkenshoIraiTaishoshaFinder(
                     ninteiShinchokuJohoDac,
                     shujiiIkenshoIraiTaishoshaDac,
@@ -68,7 +68,7 @@ public class ShujiiIkenshoIraiTaishoshaFinderTest extends TestBase {
         @Test
         public void 主治医意見書作成依頼が未完了の対象者が_存在しない場合_EMPTY_LISTが返されること() {
             ninteiShinchokuJohoDac = mock(INinteiShinchokuJohoDac.class);
-            when(ninteiShinchokuJohoDac.selectIkenshoIraiTaisho()).thenReturn(Collections.EMPTY_LIST);
+            when(ninteiShinchokuJohoDac.select主治医意見書作成依頼未完了()).thenReturn(Collections.EMPTY_LIST);
             sut = new ShujiiIkenshoIraiTaishoshaFinder(
                     ninteiShinchokuJohoDac,
                     shujiiIkenshoIraiTaishoshaDac,

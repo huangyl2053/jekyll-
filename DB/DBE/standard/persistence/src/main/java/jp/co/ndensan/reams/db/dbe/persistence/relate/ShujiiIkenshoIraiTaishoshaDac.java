@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.relate;
 
-import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.YokaigoninteiDateConstants;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJoho;
@@ -28,10 +27,10 @@ public class ShujiiIkenshoIraiTaishoshaDac implements IShujiiIkenshoIraiTaishosh
     private SqlSession session;
 
     @Override
-    public List<DbT5005NinteiShinchokuJohoEntity> selectIkenshoIraiTaisho(ShichosonCode 市町村コード) {
+    public List<DbT5005NinteiShinchokuJohoEntity> select主治医意見書作成依頼対象者(ShichosonCode 市町村コード) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        List<DbT5005NinteiShinchokuJohoEntity> list = accessor
+        return accessor
                 .select()
                 .table(DbT5005NinteiShinchokuJoho.class)
                 .innerJoin(DbT5001NinteiShinseiJoho.class,
@@ -40,7 +39,5 @@ public class ShujiiIkenshoIraiTaishoshaDac implements IShujiiIkenshoIraiTaishosh
                 eq(DbT5005NinteiShinchokuJoho.ikenshoTorokuKanryoYMD, YokaigoninteiDateConstants.主治医意見書登録未完了年月日)))
                 .order(by(DbT5005NinteiShinchokuJoho.shinseishoKanriNo, Order.ASC))
                 .toList(DbT5005NinteiShinchokuJohoEntity.class);
-
-        return (!list.isEmpty()) ? list : Collections.EMPTY_LIST;
     }
 }
