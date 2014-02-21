@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiShinseiDate;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**
@@ -22,7 +23,7 @@ public class NinteiShinseiTorisageTaishosha {
     private final ShinseishoKanriNo 申請書管理No;
     private final ShichosonCode 市町村コード;
     private final KaigoHihokenshaNo 被保険者番号;
-    private final FlexibleDate 認定申請年月日;
+    private final NinteiShinseiDate 認定申請年月日;
     //TODO n8178 城間篤人
     //今後、独自クラスとして認定申請区分コード_申請時を作成予定。作成後修正を行う 2014年2月末
     private final RString 認定申請区分コード_申請時;
@@ -39,7 +40,7 @@ public class NinteiShinseiTorisageTaishosha {
      * @param 認定申請取下げ 認定申請取下げ
      */
     public NinteiShinseiTorisageTaishosha(ShinseishoKanriNo 申請書管理No, ShichosonCode 市町村コード, KaigoHihokenshaNo 被保険者番号,
-            FlexibleDate 認定申請年月日, RString 認定申請区分コード_申請時, NinteiShinseiTorisage 認定申請取下げ) {
+            NinteiShinseiDate 認定申請年月日, RString 認定申請区分コード_申請時, NinteiShinseiTorisage 認定申請取下げ) {
         requireNonNull(申請書管理No, Messages.E00003.replace("申請書管理No", "要介護認定申請取下げ対象者").getMessage());
         requireNonNull(市町村コード, Messages.E00003.replace("市町村コード", "要介護認定申請取下げ対象者").getMessage());
         requireNonNull(被保険者番号, Messages.E00003.replace("被保険者番号", "要介護認定申請取下げ対象者").getMessage());
@@ -87,7 +88,7 @@ public class NinteiShinseiTorisageTaishosha {
      *
      * @return 認定申請年月日
      */
-    public FlexibleDate get認定申請年月日() {
+    public NinteiShinseiDate get認定申請年月日() {
         return 認定申請年月日;
     }
 

@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiTaishosha;
 import jp.co.ndensan.reams.db.dbe.definition.YokaigoninteiDateConstants;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiChosaIraiRirekiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiShinseiDate;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
@@ -225,7 +226,7 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
         RString shishoCode = new RString("1");
         KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(試験用文字列);
         IShikibetsuCode shikibetsuCode = new _ShikibetsuCode(試験用文字列);
-        FlexibleDate ninteiShinseiYMD = 調査完了年月日;
+        NinteiShinseiDate ninteiShinseiYMD = new NinteiShinseiDate(調査完了年月日);
         RString ninteiShinseiEdabanCode = 試験用文字列;
         RString ninteiShinseiShinseijiKubunCode = 試験用文字列;
         RString ninteiShinseiHoreiKubunCode = 試験用文字列;

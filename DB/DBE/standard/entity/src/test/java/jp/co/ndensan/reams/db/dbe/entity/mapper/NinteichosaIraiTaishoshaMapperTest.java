@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiTaishosha;
 import jp.co.ndensan.reams.db.dbe.definition.ChosaItakuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiShinseiDate;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
@@ -88,7 +89,7 @@ public class NinteichosaIraiTaishoshaMapperTest extends TestBase {
             要介護認定申請情報Entity.setShinseishoKanriNo(new ShinseishoKanriNo(new RString("0001")));
             要介護認定申請情報Entity.setShichosonCode(new ShichosonCode(new RString("1111")));
             要介護認定申請情報Entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("0002")));
-            要介護認定申請情報Entity.setNinteiShinseiYMD(new FlexibleDate(new RString("20140101")));
+            要介護認定申請情報Entity.setNinteiShinseiYMD(new NinteiShinseiDate(new FlexibleDate(new RString("20140101"))));
             要介護認定申請情報Entity.setNinteiShinseiShinseijiKubunCode(new RString("0003"));
             個人Entity = KojinEntityMock.getSpiedInstance();
             認定調査委託先Entity = DbT7010NinteichosaItakusakiJohoEntityMock.getSpiedInstance();

@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoIraiTaishosha;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiShinseiDate;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5001NinteiShinseiJohoEntityMock;
@@ -74,7 +75,7 @@ public class ShujiiIkenshoIraiTaishoshaMapperTest extends TestBase {
             認定申請情報Entity.setShinseishoKanriNo(new ShinseishoKanriNo(new RString("0001")));
             認定申請情報Entity.setShichosonCode(new ShichosonCode(new RString("1111")));
             認定申請情報Entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("0002")));
-            認定申請情報Entity.setNinteiShinseiYMD(new FlexibleDate(new RString("20140101")));
+            認定申請情報Entity.setNinteiShinseiYMD(new NinteiShinseiDate(new FlexibleDate(new RString("20140101"))));
             認定申請情報Entity.setNinteiShinseiShinseijiKubunCode(new RString("0003"));
             個人 = mock(IKojin.class);
             氏名 = new RString("あああ");

@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiShinseiDate;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
@@ -24,7 +25,7 @@ public class ShujiiIkenshoIraiTaishosha {
     private final ShinseishoKanriNo 申請書管理番号;
     private final ShichosonCode 市町村コード;
     private final KaigoHihokenshaNo 被保険者番号;
-    private final FlexibleDate 認定申請年月日;
+    private final NinteiShinseiDate 認定申請年月日;
     private final RString 認定申請区分;
     private final IKojin 個人情報;
     private final RString 氏名;
@@ -54,7 +55,7 @@ public class ShujiiIkenshoIraiTaishosha {
             ShinseishoKanriNo 申請書管理番号,
             ShichosonCode 市町村コード,
             KaigoHihokenshaNo 被保険者番号,
-            FlexibleDate 認定申請年月日,
+            NinteiShinseiDate 認定申請年月日,
             RString 認定申請区分,
             IKojin 個人情報,
             RString 氏名,
@@ -115,7 +116,7 @@ public class ShujiiIkenshoIraiTaishosha {
      *
      * @return 認定申請年月日
      */
-    public FlexibleDate get認定申請年月日() {
+    public NinteiShinseiDate get認定申請年月日() {
         return 認定申請年月日;
     }
 

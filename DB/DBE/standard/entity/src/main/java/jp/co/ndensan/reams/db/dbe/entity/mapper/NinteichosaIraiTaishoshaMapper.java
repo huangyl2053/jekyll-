@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEn
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiShinseiDate;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
@@ -24,7 +25,6 @@ import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ur.urz.entity.basic.KojinEntity;
 import jp.co.ndensan.reams.ur.urz.entity.mapper.helper.IKojinFactory;
 import jp.co.ndensan.reams.ur.urz.entity.mapper.helper.ShikibetsuTaishoFactory;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.ur.urz.business.JushoEditor;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushoEditPattern;
@@ -67,7 +67,7 @@ public final class NinteichosaIraiTaishoshaMapper {
         ShinseishoKanriNo 申請書管理番号 = 要介護認定申請情報Entity.getShinseishoKanriNo();
         ShichosonCode 市町村コード = 要介護認定申請情報Entity.getShichosonCode();
         KaigoHihokenshaNo 被保険者 = 要介護認定申請情報Entity.getHihokenshaNo();
-        FlexibleDate 認定申請年月日 = 要介護認定申請情報Entity.getNinteiShinseiYMD();
+        NinteiShinseiDate 認定申請年月日 = 要介護認定申請情報Entity.getNinteiShinseiYMD();
         RString 認定申請区分 = 要介護認定申請情報Entity.getNinteiShinseiShinseijiKubunCode();
         IKojin 個人情報 = IKojinFactory.create(個人Entity);
         IShikibetsuTaisho 識別対象 = ShikibetsuTaishoFactory.create(個人Entity);

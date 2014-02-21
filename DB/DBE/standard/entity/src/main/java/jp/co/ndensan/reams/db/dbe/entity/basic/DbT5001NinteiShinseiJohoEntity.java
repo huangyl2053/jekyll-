@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiChosaIraiRirekiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiShinseiDate;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -43,7 +44,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     private RString shishoCode;
     private KaigoHihokenshaNo hihokenshaNo;
     private RString shikibetsuCode;
-    private FlexibleDate ninteiShinseiYMD;
+    private NinteiShinseiDate ninteiShinseiYMD;
     private RString ninteiShinseiEdabanCode;
     private RString ninteiShinseiShinseijiKubunCode;
     private RString ninteiShinseiHoreiKubunCode;
@@ -104,7 +105,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
             RString shishoCode,
             KaigoHihokenshaNo hihokenshaNo,
             RString shikibetsuCode,
-            FlexibleDate ninteiShinseiYMD,
+            NinteiShinseiDate ninteiShinseiYMD,
             RString ninteiShinseiEdabanCode,
             RString ninteiShinseiShinseijiKubunCode,
             RString ninteiShinseiHoreiKubunCode,
@@ -311,7 +312,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
      *
      * @return ninteiShinseiYMD
      */
-    public FlexibleDate getNinteiShinseiYMD() {
+    public NinteiShinseiDate getNinteiShinseiYMD() {
         return ninteiShinseiYMD;
     }
 
@@ -320,7 +321,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
      *
      * @param ninteiShinseiYMD 認定申請年月日
      */
-    public void setNinteiShinseiYMD(FlexibleDate ninteiShinseiYMD) {
+    public void setNinteiShinseiYMD(NinteiShinseiDate ninteiShinseiYMD) {
         this.ninteiShinseiYMD = ninteiShinseiYMD;
     }
 

@@ -5,11 +5,11 @@
 package jp.co.ndensan.reams.db.dbe.entity.helper;
 
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiChosaIraiRirekiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiShinseiDate;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.*;
@@ -32,7 +32,7 @@ public class DbT5001NinteiShinseiJohoEntityMock {
                 試験用文字列,
                 new KaigoHihokenshaNo(試験用文字列),
                 試験用文字列,
-                new FlexibleDate(new RString("20140101")),
+                new NinteiShinseiDate(new FlexibleDate(new RString("20140101"))),
                 試験用文字列,
                 試験用文字列,
                 試験用文字列,

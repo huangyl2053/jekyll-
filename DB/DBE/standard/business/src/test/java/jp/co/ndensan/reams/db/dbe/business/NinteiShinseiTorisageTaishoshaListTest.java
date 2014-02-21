@@ -6,10 +6,10 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiShinseiDate;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
@@ -76,7 +76,7 @@ public class NinteiShinseiTorisageTaishoshaListTest extends TestBase {
     private static NinteiShinseiTorisageTaishosha create認定申請取下げ対象者(ShinseishoKanriNo 申請書管理番号) {
         ShichosonCode 市町村コード = mock(ShichosonCode.class);
         KaigoHihokenshaNo 被保険者番号 = mock(KaigoHihokenshaNo.class);
-        FlexibleDate 認定申請年月日 = mock(FlexibleDate.class);
+        NinteiShinseiDate 認定申請年月日 = mock(NinteiShinseiDate.class);
         RString 認定申請区分_申請時コード = new RString("AA01");
         NinteiShinseiTorisage 認定申請取下げ = mock(NinteiShinseiTorisage.class);
 

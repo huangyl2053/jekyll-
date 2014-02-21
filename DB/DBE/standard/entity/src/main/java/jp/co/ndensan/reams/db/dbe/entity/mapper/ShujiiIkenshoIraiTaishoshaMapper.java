@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoIraiTaishosha;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiShinseiDate;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
@@ -14,7 +15,6 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -55,7 +55,7 @@ public final class ShujiiIkenshoIraiTaishoshaMapper {
         ShinseishoKanriNo 申請書管理番号 = 認定申請情報Entity.getShinseishoKanriNo();
         ShichosonCode 市町村コード = 認定申請情報Entity.getShichosonCode();
         KaigoHihokenshaNo 被保険者番号 = 認定申請情報Entity.getHihokenshaNo();
-        FlexibleDate 認定申請年月日 = 認定申請情報Entity.getNinteiShinseiYMD();
+        NinteiShinseiDate 認定申請年月日 = 認定申請情報Entity.getNinteiShinseiYMD();
         RString 認定申請区分 = 認定申請情報Entity.getNinteiShinseiShinseijiKubunCode();
 
         return new ShujiiIkenshoIraiTaishosha(
