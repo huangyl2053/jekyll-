@@ -65,9 +65,9 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     private boolean shinsaKeizokuKubun;
 
     /**
-     * ORマッパーのためのデフォルトコンストラクタです。
+     * デフォルトコンストラクタです。
      */
-    DbT5001NinteiShinseiJohoEntity() {
+    public DbT5001NinteiShinseiJohoEntity() {
     }
 
     /**

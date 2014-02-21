@@ -43,9 +43,9 @@ public class DbT5005NinteiShinchokuJohoEntity implements IDbAccessable {
     private FlexibleDate centerSoshinYMD;
 
     /**
-     * ORマッパーのためのデフォルトコンストラクタです。
+     * デフォルトコンストラクタです。
      */
-    DbT5005NinteiShinchokuJohoEntity() {
+    public DbT5005NinteiShinchokuJohoEntity() {
     }
 
     /**

@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class YokaigoninteiDateConstants {
 
     public static final FlexibleDate 認定調査未完了年月日;
+    public static final FlexibleDate 主治医意見書登録未完了年月日;
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -24,5 +25,6 @@ public final class YokaigoninteiDateConstants {
 
     static {
         認定調査未完了年月日 = new FlexibleDate(new RString("00000000"));
+        主治医意見書登録未完了年月日 = new FlexibleDate(new RString("00000000"));
     }
 }
