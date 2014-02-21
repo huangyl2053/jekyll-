@@ -4,8 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import java.util.Map;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.ChosaKomoku;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -18,7 +21,7 @@ public class NinteichosaKekka {
     private final ShinseishoKanriNo 申請書管理番号;
     private final int 要介護認定調査履歴番号;
     private final ChosaKekkaGaikyo 概況情報;
-    private final ChosaKekkaKihon 基本情報;
+    private final Map<ChosaKomoku, RString> 基本情報;
 
     /**
      * インスタンスを生成します。
@@ -32,7 +35,7 @@ public class NinteichosaKekka {
             ShinseishoKanriNo 申請書管理番号,
             int 要介護認定調査履歴番号,
             ChosaKekkaGaikyo 概況情報,
-            ChosaKekkaKihon 基本情報) {
+            Map<ChosaKomoku, RString> 基本情報) {
         this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00001.replace("申請書管理番号").getMessage());
         this.要介護認定調査履歴番号 = 要介護認定調査履歴番号;
         this.概況情報 = requireNonNull(概況情報, Messages.E00001.replace("概況情報").getMessage());
@@ -71,7 +74,7 @@ public class NinteichosaKekka {
      *
      * @return 基本情報
      */
-    public ChosaKekkaKihon get基本情報() {
+    public Map<ChosaKomoku, RString> get基本情報() {
         return 基本情報;
     }
 }
