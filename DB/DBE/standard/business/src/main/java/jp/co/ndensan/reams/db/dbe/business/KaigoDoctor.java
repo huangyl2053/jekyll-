@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
  *
  * @author N8156 宮本 康
  */
-public class KaigoDoctor {
+public class KaigoDoctor implements IShujii, IDoctor {
 
     private final IDoctor 医師;
     private final IShujii 主治医;
@@ -72,6 +72,7 @@ public class KaigoDoctor {
      *
      * @return 医師識別番号
      */
+    @Override
     public RString get医師識別番号() {
         return 医師.get医師識別番号();
     }
@@ -81,6 +82,7 @@ public class KaigoDoctor {
      *
      * @return 医師氏名
      */
+    @Override
     public AtenaMeisho get医師氏名() {
         return 医師.get医師氏名();
     }
@@ -90,6 +92,7 @@ public class KaigoDoctor {
      *
      * @return 所属医療機関コード
      */
+    @Override
     public IIryoKikanCode get所属医療機関コード() {
         return 医師.get所属医療機関コード();
     }
@@ -99,6 +102,7 @@ public class KaigoDoctor {
      *
      * @return 医師区分
      */
+    @Override
     public RString get医師区分() {
         return 医師.get医師区分();
     }
@@ -108,6 +112,7 @@ public class KaigoDoctor {
      *
      * @return 所属診療科
      */
+    @Override
     public RString get所属診療科() {
         return 医師.get所属診療科();
     }
@@ -117,6 +122,7 @@ public class KaigoDoctor {
      *
      * @return true:主治医 false:主治医ではない
      */
+    @Override
     public boolean is主治医() {
         return 医師.is主治医();
     }
@@ -126,6 +132,7 @@ public class KaigoDoctor {
      *
      * @return true:指定医 false:指定医ではない
      */
+    @Override
     public boolean is指定医() {
         return 医師.is指定医();
     }
@@ -135,6 +142,7 @@ public class KaigoDoctor {
      *
      * @return true:学校医 false:学校医ではない
      */
+    @Override
     public boolean is学校医() {
         return 医師.is学校医();
     }
@@ -144,6 +152,7 @@ public class KaigoDoctor {
      *
      * @return 市町村コード
      */
+    @Override
     public ShichosonCode get市町村コード() {
         return 主治医.get市町村コード();
     }
@@ -153,6 +162,7 @@ public class KaigoDoctor {
      *
      * @return 介護医療機関コード
      */
+    @Override
     public KaigoIryoKikanCode get介護医療機関コード() {
         return 主治医.get介護医療機関コード();
     }
@@ -162,6 +172,7 @@ public class KaigoDoctor {
      *
      * @return 介護医師コード
      */
+    @Override
     public KaigoDoctorCode get介護医師コード() {
         return 主治医.get介護医師コード();
     }
@@ -171,6 +182,7 @@ public class KaigoDoctor {
      *
      * @return 医療機関コード
      */
+    @Override
     public IIryoKikanCode get医療機関コード() {
         return 主治医.get医療機関コード();
     }
@@ -180,6 +192,7 @@ public class KaigoDoctor {
      *
      * @return 有効の場合はtrueを返します。
      */
+    @Override
     public boolean is有効() {
         return 主治医.is有効();
     }
@@ -189,6 +202,7 @@ public class KaigoDoctor {
      *
      * @return 郵便番号
      */
+    @Override
     public IYubinNo get郵便番号() {
         return 主治医.get郵便番号();
     }
@@ -198,6 +212,7 @@ public class KaigoDoctor {
      *
      * @return 住所
      */
+    @Override
     public IJusho get住所() {
         return 主治医.get住所();
     }
@@ -207,6 +222,7 @@ public class KaigoDoctor {
      *
      * @return 電話番号
      */
+    @Override
     public RString get電話番号() {
         return 主治医.get電話番号();
     }
@@ -216,6 +232,7 @@ public class KaigoDoctor {
      *
      * @return FAX番号
      */
+    @Override
     public RString getFAX番号() {
         return 主治医.getFAX番号();
     }
