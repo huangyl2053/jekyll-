@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJoho;
@@ -30,14 +29,13 @@ public class ShujiiDac implements IShujiiDac {
     public DbT7012ShujiiJohoEntity select(
             ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        List<DbT7012ShujiiJohoEntity> list = accessor.select()
+        return accessor.select()
                 .table(DbT7012ShujiiJoho.class)
                 .where(and(
                 eq(shichosonCode, 市町村コード),
                 eq(kaigoIryokikanCode, 介護医療機関コード),
                 eq(kaigoIshiCode, 介護医師コード)))
-                .toList(DbT7012ShujiiJohoEntity.class);
-        return !list.isEmpty() ? list.get(0) : null;
+                .toObject(DbT7012ShujiiJohoEntity.class);
     }
 
     @Override

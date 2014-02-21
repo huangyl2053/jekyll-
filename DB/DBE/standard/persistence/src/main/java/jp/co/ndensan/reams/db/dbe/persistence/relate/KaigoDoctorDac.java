@@ -42,22 +42,21 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
     @Override
     public KaigoDoctorEntity select(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        List<KaigoDoctorEntity> list = accessor.select()
+        return accessor.select()
                 .table(DbT7012ShujiiJoho.class)
                 .leftJoin(Doctor.class, using(DbT7012ShujiiJoho.kaigoIshiCode))
                 .where(and(
                 eq(shichosonCode, 市町村コード),
                 eq(kaigoIryokikanCode, 介護医療機関コード),
                 eq(kaigoIshiCode, 介護医師コード)))
-                .toList(KaigoDoctorEntity.class);
-        return !list.isEmpty() ? list.get(0) : null;
+                .toObject(KaigoDoctorEntity.class);
     }
 
     @Override
     public KaigoDoctorEntity select(
             ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード, IshiJokyo 医師の状況) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        List<KaigoDoctorEntity> list = accessor.select()
+        return accessor.select()
                 .table(DbT7012ShujiiJoho.class)
                 .leftJoin(Doctor.class, using(DbT7012ShujiiJoho.kaigoIshiCode))
                 .where(and(
@@ -65,8 +64,7 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
                 eq(kaigoIryokikanCode, 介護医療機関コード),
                 eq(kaigoIshiCode, 介護医師コード),
                 eq(shujiiJokyo, 医師の状況.is有効())))
-                .toList(KaigoDoctorEntity.class);
-        return !list.isEmpty() ? list.get(0) : null;
+                .toObject(KaigoDoctorEntity.class);
     }
 
     @Override
