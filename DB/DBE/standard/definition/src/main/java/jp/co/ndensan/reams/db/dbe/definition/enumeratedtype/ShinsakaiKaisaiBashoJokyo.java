@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
 
 /**
- * 審査会開催場所の状況を表す列挙形です
+ * 審査会開催場所の状況を表す列挙形です。
  *
  * @author N1013 松本直樹
  */
@@ -26,7 +26,7 @@ public enum ShinsakaiKaisaiBashoJokyo {
     }
 
     /**
-     * 有効か無効かBoolean値で返します
+     * 有効か無効かBoolean値で返します。
      *
      * @return 有効・無効の区分を表すBoolean値
      */

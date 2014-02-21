@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 審査会開催情報テーブルから情報を取得するクラスのインターフェースです
+ * 審査会開催情報テーブルから情報を取得するクラスのインターフェースです。
  *
  * @author N1013 松本直樹
  */
@@ -43,7 +43,7 @@ public interface IShinsakaiKaisaiBashoDac
 //    DbT5104ShinsakaiKaisaiBashoJohoEntity select(ShinsakaiKaisaiBashoCode 審査会開催場所, ShinsakaiKaisaiBashoJokyo 開催場所状況);
 
     /**
-     * 審査会開催場所テーブルにある全件を取得します
+     * 審査会開催場所テーブルにある全件を取得します。
      *
      * @return 審査会開催場所Entityリスト
      */
@@ -51,7 +51,7 @@ public interface IShinsakaiKaisaiBashoDac
     List<DbT5104ShinsakaiKaisaiBashoJohoEntity> selectAll();
 
     /**
-     * 審査会開催場所テーブルにある有効な開催場所を全件取得します
+     * 審査会開催場所テーブルにある有効な開催場所を全件取得します。
      *
      * @param 開催場所状況 開催場所状況
      * @return 審査会開催場所Entityリスト

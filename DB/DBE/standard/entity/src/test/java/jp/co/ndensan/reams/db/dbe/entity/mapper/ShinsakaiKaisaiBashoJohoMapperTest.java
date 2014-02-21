@@ -18,7 +18,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * ShinsakaiKaisaiBashoJohoMapperのテストクラスです
+ * ShinsakaiKaisaiBashoJohoMapperのテストクラスです。
  *
  * @author N1013 松本直樹
  */

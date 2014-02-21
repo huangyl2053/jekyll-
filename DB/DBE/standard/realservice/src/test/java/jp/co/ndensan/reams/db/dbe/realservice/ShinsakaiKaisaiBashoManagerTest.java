@@ -20,7 +20,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * 審査会開催場所Managerのテストクラスです
+ * 審査会開催場所Managerのテストクラスです。
  *
  * @author N1013 松本直樹
  */

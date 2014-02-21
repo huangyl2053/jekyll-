@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
 
 /**
- * 審査会開催場所情報テーブルから情報を取得するクラスです
+ * 審査会開催場所情報テーブルから情報を取得するクラスです。
  *
  * @author N1013 松本直樹
  */
@@ -104,7 +104,7 @@ public class ShinsakaiKaisaiBashoDac implements IShinsakaiKaisaiBashoDac {
     }
 
     /**
-     * 審査会開催場所の件数を取得します
+     * 審査会開催場所の件数を取得します。
      *
      * @param entity 審査会開催場所情報エンティティ
      * @return 取得件数

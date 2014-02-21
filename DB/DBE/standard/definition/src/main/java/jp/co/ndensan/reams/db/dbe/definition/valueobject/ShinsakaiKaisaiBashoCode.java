@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * 開催場所コードを表すクラスです
+ * 開催場所コードを表すクラスです。
  *
  * @author N1013 松本直樹
  */
@@ -18,7 +18,7 @@ public class ShinsakaiKaisaiBashoCode implements IDbColumnMappable, IValueObject
     private final RString 開催場所コード;
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param 開催場所コード 開催場所コード
      */
@@ -27,7 +27,7 @@ public class ShinsakaiKaisaiBashoCode implements IDbColumnMappable, IValueObject
     }
 
     /**
-     * 開催場所コードを取得します
+     * 開催場所コードを取得します。
      *
      * @return 開催場所コード
      */
@@ -37,7 +37,7 @@ public class ShinsakaiKaisaiBashoCode implements IDbColumnMappable, IValueObject
     }
 
     /**
-     * 開催場所コードを返します
+     * 開催場所コードを返します。
      *
      * @return 開催場所コード
      */

@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoChi
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
- * DbT5104ShinsakaiKaisaiBashoJohoの項目定義クラスです
+ * DbT5104ShinsakaiKaisaiBashoJohoの項目定義クラスです。
  *
  */
 public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {

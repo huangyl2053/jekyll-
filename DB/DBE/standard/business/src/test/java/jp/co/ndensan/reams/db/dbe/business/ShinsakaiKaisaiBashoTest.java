@@ -16,7 +16,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * ShinsakaiKaisaiBashoのテストクラスです
+ * ShinsakaiKaisaiBashoのテストクラスです。
  *
  * @author N1013 松本直樹
  */
