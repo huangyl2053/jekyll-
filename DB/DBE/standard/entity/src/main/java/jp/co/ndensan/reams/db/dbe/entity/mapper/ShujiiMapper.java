@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
-import jp.co.ndensan.reams.ur.urz.business._Jusho;
-import jp.co.ndensan.reams.ur.urz.business._YubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 
 /**
  * 主治医情報を変換するMapperクラスです。
@@ -42,9 +43,9 @@ public final class ShujiiMapper {
                 new _IryoKikanCode(entity.getIryokikanCode()),
                 entity.getShujiiCode(),
                 IshiJokyo.toValue(entity.getShujiiJokyo()),
-                new _YubinNo(entity.getYubinNo()),
-                new _Jusho(entity.getJusho(), new _YubinNo(entity.getYubinNo()), entity.getJusho()),
-                entity.getTelNo(),
+                new YubinNo(entity.getYubinNo()),
+                new AtenaJusho(entity.getJusho()),
+                new TelNo(entity.getTelNo()),
                 entity.getFaxNo());
     }
 
@@ -62,9 +63,9 @@ public final class ShujiiMapper {
         entity.setIryokikanCode(shujii.get医療機関コード().getValue());
         entity.setShujiiCode(shujii.get医師識別番号());
         entity.setShujiiJokyo(shujii.is有効());
-        entity.setYubinNo(shujii.get郵便番号().getYubinNo());
-        entity.setJusho(shujii.get住所().getJushoCd());
-        entity.setTelNo(shujii.get電話番号());
+        entity.setYubinNo(shujii.get郵便番号().value());
+        entity.setJusho(shujii.get住所().value());
+        entity.setTelNo(shujii.get電話番号().value());
         entity.setFaxNo(shujii.getFAX番号());
         return entity;
     }

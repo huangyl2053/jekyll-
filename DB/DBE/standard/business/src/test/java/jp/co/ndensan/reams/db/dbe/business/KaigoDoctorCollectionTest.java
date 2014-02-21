@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
-import jp.co.ndensan.reams.ur.urz.business.IJusho;
-import jp.co.ndensan.reams.ur.urz.business.IYubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -111,7 +112,7 @@ public class KaigoDoctorCollectionTest {
                 createKaigoIryoKikanCode(介護医療機関コード),
                 createKaigoDoctorCode(介護医師コード),
                 mock(IIryoKikanCode.class), new RString("1234"), IshiJokyo.有効,
-                mock(IYubinNo.class), mock(IJusho.class), new RString("0123456789"), new RString("0123456789")),
+                mock(YubinNo.class), mock(AtenaJusho.class), mock(TelNo.class), new RString("0123456789")),
                 mock(KaigoIryoKikan.class));
     }
 

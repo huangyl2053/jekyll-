@@ -8,8 +8,9 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
-import jp.co.ndensan.reams.ur.urz.business.IJusho;
-import jp.co.ndensan.reams.ur.urz.business.IYubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -66,21 +67,21 @@ public interface IShujii {
      *
      * @return 郵便番号
      */
-    IYubinNo get郵便番号();
+    YubinNo get郵便番号();
 
     /**
      * 住所を返します。
      *
      * @return 住所
      */
-    IJusho get住所();
+    AtenaJusho get住所();
 
     /**
      * 電話番号を返します。
      *
      * @return 電話番号
      */
-    RString get電話番号();
+    TelNo get電話番号();
 
     /**
      * FAX番号を返します。

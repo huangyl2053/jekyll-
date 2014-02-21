@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
-import jp.co.ndensan.reams.ur.urz.business.IJusho;
-import jp.co.ndensan.reams.ur.urz.business.IYubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -73,6 +74,6 @@ public class ShujiiTest {
                 flg != AS_医療機関コードがNULL ? any(IIryoKikanCode.class) : null,
                 flg != AS_医師識別番号がNULL ? any(RString.class) : null,
                 flg != AS_医師の状況がNULL ? any(IshiJokyo.class) : null,
-                any(IYubinNo.class), any(IJusho.class), any(RString.class), any(RString.class));
+                any(YubinNo.class), any(AtenaJusho.class), any(TelNo.class), any(RString.class));
     }
 }

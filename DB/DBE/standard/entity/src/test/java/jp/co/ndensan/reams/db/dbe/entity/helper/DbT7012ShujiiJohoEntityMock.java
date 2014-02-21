@@ -36,7 +36,7 @@ public class DbT7012ShujiiJohoEntityMock {
         entity.setShujiiCode(new RString("医師識別番号"));
         entity.setShujiiJokyo(IshiJokyo.有効.is有効());
         entity.setYubinNo(new RString("1234567"));
-        entity.setJusho(new RString("住所コード"));
+        entity.setJusho(new RString("住所"));
         entity.setTelNo(new RString("電話番号"));
         entity.setFaxNo(new RString("FAX番号"));
         return spy(entity);

@@ -5,14 +5,15 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.ur.urz.business.IYubinNo;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
-import jp.co.ndensan.reams.ur.urz.business.IJusho;
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -28,9 +29,9 @@ public class Shujii implements IShujii {
     private final IIryoKikanCode 医療機関コード;
     private final RString 医師識別番号;
     private final IshiJokyo 医師の状況;
-    private final IYubinNo 郵便番号;
-    private final IJusho 住所;
-    private final RString 電話番号;
+    private final YubinNo 郵便番号;
+    private final AtenaJusho 住所;
+    private final TelNo 電話番号;
     private final RString FAX番号;
 
     /**
@@ -49,13 +50,13 @@ public class Shujii implements IShujii {
      */
     public Shujii(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード,
             IIryoKikanCode 医療機関コード, RString 医師識別番号, IshiJokyo 医師の状況,
-            IYubinNo 郵便番号, IJusho 住所, RString 電話番号, RString FAX番号) {
-        this.市町村コード = requireNonNull(市町村コード, Messages.E00001.replace("麻痺左上肢").getMessage());
-        this.介護医療機関コード = requireNonNull(介護医療機関コード, Messages.E00001.replace("麻痺左上肢").getMessage());
-        this.介護医師コード = requireNonNull(介護医師コード, Messages.E00001.replace("麻痺左上肢").getMessage());
-        this.医療機関コード = requireNonNull(医療機関コード, Messages.E00001.replace("麻痺左上肢").getMessage());
-        this.医師識別番号 = requireNonNull(医師識別番号, Messages.E00001.replace("麻痺左上肢").getMessage());
-        this.医師の状況 = requireNonNull(医師の状況, Messages.E00001.replace("麻痺左上肢").getMessage());
+            YubinNo 郵便番号, AtenaJusho 住所, TelNo 電話番号, RString FAX番号) {
+        this.市町村コード = requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
+        this.介護医療機関コード = requireNonNull(介護医療機関コード, Messages.E00001.replace("介護医療機関コード").getMessage());
+        this.介護医師コード = requireNonNull(介護医師コード, Messages.E00001.replace("介護医師コード").getMessage());
+        this.医療機関コード = requireNonNull(医療機関コード, Messages.E00001.replace("医療機関コード").getMessage());
+        this.医師識別番号 = requireNonNull(医師識別番号, Messages.E00001.replace("医師識別番号").getMessage());
+        this.医師の状況 = requireNonNull(医師の状況, Messages.E00001.replace("医師の状況").getMessage());
         this.郵便番号 = 郵便番号;
         this.住所 = 住所;
         this.電話番号 = 電話番号;
@@ -93,17 +94,17 @@ public class Shujii implements IShujii {
     }
 
     @Override
-    public IYubinNo get郵便番号() {
+    public YubinNo get郵便番号() {
         return 郵便番号;
     }
 
     @Override
-    public IJusho get住所() {
+    public AtenaJusho get住所() {
         return 住所;
     }
 
     @Override
-    public RString get電話番号() {
+    public TelNo get電話番号() {
         return 電話番号;
     }
 

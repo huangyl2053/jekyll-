@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
-import jp.co.ndensan.reams.ur.urz.business._Jusho;
-import jp.co.ndensan.reams.ur.urz.business._YubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.spy;
 
@@ -42,9 +43,9 @@ public class ShujiiMock {
                 new _IryoKikanCode(new RString("1234567890")),
                 new RString("医師識別番号"),
                 IshiJokyo.有効,
-                new _YubinNo(new RString("1234567")),
-                new _Jusho(new RString("住所コード"), new _YubinNo(new RString("1234567")), new RString("町域")),
-                new RString("電話番号"),
+                new YubinNo(new RString("1234567")),
+                new AtenaJusho(new RString("住所")),
+                new TelNo("電話番号"),
                 new RString("FAX番号")));
     }
 }

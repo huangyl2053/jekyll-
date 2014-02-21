@@ -4,17 +4,18 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.ur.urz.business.IDoctor;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
-import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.ur.urz.business.IJusho;
-import jp.co.ndensan.reams.ur.urz.business.IYubinNo;
-import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.ur.urz.business.IDoctor;
+import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import static java.util.Objects.requireNonNull;
 
 /**
  * 介護医師の情報を扱うクラスです。
@@ -203,7 +204,7 @@ public class KaigoDoctor implements IShujii, IDoctor {
      * @return 郵便番号
      */
     @Override
-    public IYubinNo get郵便番号() {
+    public YubinNo get郵便番号() {
         return 主治医.get郵便番号();
     }
 
@@ -213,7 +214,7 @@ public class KaigoDoctor implements IShujii, IDoctor {
      * @return 住所
      */
     @Override
-    public IJusho get住所() {
+    public AtenaJusho get住所() {
         return 主治医.get住所();
     }
 
@@ -223,7 +224,7 @@ public class KaigoDoctor implements IShujii, IDoctor {
      * @return 電話番号
      */
     @Override
-    public RString get電話番号() {
+    public TelNo get電話番号() {
         return 主治医.get電話番号();
     }
 

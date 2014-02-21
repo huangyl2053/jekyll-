@@ -58,17 +58,17 @@ public class ShujiiMapperTest {
 
         @Test
         public void 郵便番号の設定がある時_toShujii_get郵便番号は_設定値を返す() {
-            assertThat(createShujii().get郵便番号().getYubinNo(), is(new RString("1234567")));
+            assertThat(createShujii().get郵便番号().value(), is(new RString("123-4567")));
         }
 
         @Test
         public void 住所の設定がある時_toShujii_get住所は_設定値を返す() {
-            assertThat(createShujii().get住所().getJushoCd(), is(new RString("住所コード")));
+            assertThat(createShujii().get住所().value(), is(new RString("住所")));
         }
 
         @Test
         public void 電話番号の設定がある時_toShujii_get電話番号は_設定値を返す() {
-            assertThat(createShujii().get電話番号(), is(new RString("電話番号")));
+            assertThat(createShujii().get電話番号().value(), is(new RString("電話番号")));
         }
 
         @Test
@@ -111,12 +111,12 @@ public class ShujiiMapperTest {
 
         @Test
         public void 郵便番号の設定がある時_toShujiiEntity_getYubinNoは_設定値を返す() {
-            assertThat(createShujiiEntity().getYubinNo(), is(new RString("1234567")));
+            assertThat(createShujiiEntity().getYubinNo(), is(new RString("123-4567")));
         }
 
         @Test
         public void 住所の設定がある時_toShujiiEntity_getJushoは_設定値を返す() {
-            assertThat(createShujiiEntity().getJusho(), is(new RString("住所コード")));
+            assertThat(createShujiiEntity().getJusho(), is(new RString("住所")));
         }
 
         @Test
