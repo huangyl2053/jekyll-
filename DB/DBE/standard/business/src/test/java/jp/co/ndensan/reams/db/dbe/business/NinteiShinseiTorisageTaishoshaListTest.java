@@ -29,13 +29,14 @@ public class NinteiShinseiTorisageTaishoshaListTest extends TestBase {
 
     public static class get認定申請取下げ対象者のテスト {
 
-//        @Test
-//        public void 申請書管理番号に10を指定したとき_申請書管理番号に10を持つ認定申請取下げ対象者が返る() {
-//            ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo((new RString("10")));
-//            NinteiShinseiTorisageTaishoshaList sut =
-//                    new NinteiShinseiTorisageTaishoshaList(create認定申請取下げ対象者List());
-//            assertThat(sut.get認定申請取下げ対象者(申請書管理番号).get申請書管理No(), is(申請書管理番号));
-//        }
+        @Test
+        public void 申請書管理番号に10を指定したとき_申請書管理番号に10を持つ認定申請取下げ対象者が返る() {
+            ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo((new RString("10")));
+            NinteiShinseiTorisageTaishoshaList sut =
+                    new NinteiShinseiTorisageTaishoshaList(create認定申請取下げ対象者List());
+            assertThat(sut.get認定申請取下げ対象者(申請書管理番号).get申請書管理No(), is(申請書管理番号));
+        }
+
         @Test(expected = IllegalArgumentException.class)
         public void 申請書管理番号に存在しない値を指定したとき_例外が発生する() {
             ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo((new RString("65536")));
