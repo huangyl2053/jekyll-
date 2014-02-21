@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.testhelper.TestDacBase;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -37,6 +38,70 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
     public static void setUpClass() {
         inserter = InstanceCreator.create(IShinsakaiKaisaiBashoDacMock.class);
         sut = InstanceCreator.create(IShinsakaiKaisaiBashoDac.class);
+    }
+
+    public static class insertのテスト extends DbeTestDacBase {
+
+        private RString 開催場所コード;
+        private RString 開催場所名称;
+        private RString 開催場所地区コード;
+        private RString 開催場所住所;
+        private RString 開催場所電話番号;
+        private boolean 開催場所状況;
+        private DbT5104ShinsakaiKaisaiBashoJohoEntity 更新用entity;
+
+        static {
+            setGyomuCD("DB");
+        }
+
+        @Override
+        public void setUp() {
+            開催場所コード = new RString("00001");
+            開催場所名称 = new RString("市役所会議室");
+            開催場所地区コード = new RString("00002");
+            開催場所住所 = new RString("長野市鶴賀");
+            開催場所電話番号 = new RString("026-263-5555");
+            開催場所状況 = true;
+
+            更新用entity = create審査会開催場所情報Entity(開催場所コード, 開催場所名称, 開催場所地区コード,
+                    開催場所住所, 開催場所電話番号, 開催場所状況);
+
+        }
+
+        @Test
+        public void データ追加後の開催場所名が_引数から渡した開催場所名と同一になる() {
+            int count = sut.delete(更新用entity);
+            int a = sut.insertOrUpdate(更新用entity);
+            assertThat(sut.select(開催場所コード).getShinsakaiKaisaiBashoMei(), is(開催場所名称));
+        }
+
+        @Test
+        public void データ追加後の開催場所住所が_引数から渡した開催場所住所と同一になる() {
+            int count = sut.delete(更新用entity);
+            int a = sut.insertOrUpdate(更新用entity);
+            assertThat(sut.select(開催場所コード).getShinsakaiKaisaiBashoJusho(), is(開催場所住所));
+        }
+
+        @Test
+        public void データ追加後の開催場所地区コードが_引数から渡した開催場所地区コードと同一になる() {
+            int count = sut.delete(更新用entity);
+            int a = sut.insertOrUpdate(更新用entity);
+            assertThat(sut.select(開催場所コード).getShinsakaiKaisaiChikuCode(), is(開催場所地区コード));
+        }
+
+        @Test
+        public void データ追加後の開催場所電話番号が_引数から渡した開催場所電話番号と同一になる() {
+            int count = sut.delete(更新用entity);
+            int a = sut.insertOrUpdate(更新用entity);
+            assertThat(sut.select(開催場所コード).getShinsakaiKaisaiBashoTelNo(), is(開催場所電話番号));
+        }
+
+        @Test
+        public void データ追加後の開催場所状況が_引数から渡した開催場所状況と同一になる() {
+            int count = sut.delete(更新用entity);
+            int a = sut.insertOrUpdate(更新用entity);
+            assertThat(sut.select(開催場所コード).getShinsakaiKaisaiBashoJokyo(), is(開催場所状況));
+        }
     }
 
     public static class selectのテスト extends DbeTestDacBase {
@@ -150,65 +215,6 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
 
         @Test
         public void 更新後の開催場所状況が_引数から渡した開催場所状況と同一になる() {
-            int a = sut.insertOrUpdate(更新用entity);
-            assertThat(sut.select(開催場所コード).getShinsakaiKaisaiBashoJokyo(), is(開催場所状況));
-        }
-    }
-
-    public static class insertのテスト extends DbeTestDacBase {
-
-        private RString 開催場所コード;
-        private RString 開催場所名称;
-        private RString 開催場所地区コード;
-        private RString 開催場所住所;
-        private RString 開催場所電話番号;
-        private boolean 開催場所状況;
-        private DbT5104ShinsakaiKaisaiBashoJohoEntity 更新用entity;
-
-        static {
-            setGyomuCD("DB");
-        }
-
-        @Override
-        public void setUp() {
-            開催場所コード = new RString("00001");
-            開催場所名称 = new RString("市役所会議室");
-            開催場所地区コード = new RString("00002");
-            開催場所住所 = new RString("長野市鶴賀");
-            開催場所電話番号 = new RString("026-263-5555");
-            開催場所状況 = true;
-
-            更新用entity = create審査会開催場所情報Entity(開催場所コード, 開催場所名称, 開催場所地区コード,
-                    開催場所住所, 開催場所電話番号, 開催場所状況);
-
-        }
-
-        @Test
-        public void データ追加後の開催場所名が_引数から渡した開催場所名と同一になる() {
-            int a = sut.insertOrUpdate(更新用entity);
-            assertThat(sut.select(開催場所コード).getShinsakaiKaisaiBashoMei(), is(開催場所名称));
-        }
-
-        @Test
-        public void データ追加後の開催場所住所が_引数から渡した開催場所住所と同一になる() {
-            int a = sut.insertOrUpdate(更新用entity);
-            assertThat(sut.select(開催場所コード).getShinsakaiKaisaiBashoJusho(), is(開催場所住所));
-        }
-
-        @Test
-        public void データ追加後の開催場所地区コードが_引数から渡した開催場所地区コードと同一になる() {
-            int a = sut.insertOrUpdate(更新用entity);
-            assertThat(sut.select(開催場所コード).getShinsakaiKaisaiChikuCode(), is(開催場所地区コード));
-        }
-
-        @Test
-        public void データ追加後の開催場所電話番号が_引数から渡した開催場所電話番号と同一になる() {
-            int a = sut.insertOrUpdate(更新用entity);
-            assertThat(sut.select(開催場所コード).getShinsakaiKaisaiBashoTelNo(), is(開催場所電話番号));
-        }
-
-        @Test
-        public void データ追加後の開催場所状況が_引数から渡した開催場所状況と同一になる() {
             int a = sut.insertOrUpdate(更新用entity);
             assertThat(sut.select(開催場所コード).getShinsakaiKaisaiBashoJokyo(), is(開催場所状況));
         }
