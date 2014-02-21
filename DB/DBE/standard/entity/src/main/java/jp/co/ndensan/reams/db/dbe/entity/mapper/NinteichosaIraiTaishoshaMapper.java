@@ -68,7 +68,7 @@ public final class NinteichosaIraiTaishoshaMapper {
         ShichosonCode 市町村コード = 要介護認定申請情報Entity.getShichosonCode();
         KaigoHihokenshaNo 被保険者 = 要介護認定申請情報Entity.getHihokenshaNo();
         FlexibleDate 認定申請年月日 = 要介護認定申請情報Entity.getNinteiShinseiYMD();
-        RString 認定申請区分 = 要介護認定申請情報Entity.getNinteiShinseiShinseijiKubunCode();
+        RString 認定申請区分 = 要介護認定申請情報Entity.getNinteiShinseiShinseijiKubunCode().getColumnValue();
         IKojin 個人情報 = IKojinFactory.create(個人Entity);
         IShikibetsuTaisho 識別対象 = ShikibetsuTaishoFactory.create(個人Entity);
         RString 氏名 = 識別対象.get氏名().getName();

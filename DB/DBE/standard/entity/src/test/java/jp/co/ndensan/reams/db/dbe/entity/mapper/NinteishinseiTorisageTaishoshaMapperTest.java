@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
@@ -76,12 +77,12 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
 
         @Test
         public void get認定申請区分コード_申請時の結果が_Entityの認定申請区分コード_申請時と同一になる() {
-            assertThat(sut.get認定申請区分コード_申請時(), is(認定申請区分コード_申請時));
+            assertThat(sut.get認定申請区分コード_申請時().getColumnValue(), is(認定申請区分コード_申請時));
         }
 
         @Test
         public void get認定申請年月日の結果が_Entityの認定申請年月日と同一になる() {
-            assertThat(sut.get認定申請年月日(), is(認定申請年月日));
+            assertThat(sut.get認定申請年月日().toFlexibleDate(), is(認定申請年月日));
         }
 
         @Test
@@ -96,7 +97,7 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
 
         @Test
         public void 認定取下げ情報のget取下げ年月日が_Entityの取下げ年月日と同一になる() {
-            assertThat(sut.get認定申請取下げ().get取下げ年月日(), is(取下げ年月日));
+            assertThat(sut.get認定申請取下げ().get取下げ年月日().toFlexibleDate(), is(取下げ年月日));
         }
 
         @Test
@@ -110,7 +111,7 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
             entity.setShichosonCode(市町村Code);
             entity.setHihokenshaNo(被保険者No);
             entity.setNinteiShinseiYMD(認定申請年月日);
-            entity.setNinteiShinseiShinseijiKubunCode(認定申請区分コード_申請時);
+            entity.setNinteiShinseiShinseijiKubunCode(new Code(認定申請区分コード_申請時));
             entity.setTorisageKubunCode(取下げ区分.get取下げ区分コード());
             entity.setTorisageRiyu(取下げ理由);
             entity.setTorisageYMD(取下げ年月日);
@@ -161,7 +162,7 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
         }
 
         private NinteiShinseiTorisage create認定申請取下げ() {
-            return new NinteiShinseiTorisage(取下げ区分, 取下げ理由, 取下げ年月日, 審査継続区分);
+            return new NinteiShinseiTorisage(取下げ区分, 取下げ理由, 取下げ年月日.toRDate(), 審査継続区分);
         }
     }
 }

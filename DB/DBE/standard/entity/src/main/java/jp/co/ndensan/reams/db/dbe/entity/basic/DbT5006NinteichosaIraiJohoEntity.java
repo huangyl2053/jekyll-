@@ -1,372 +1,366 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package jp.co.ndensan.reams.db.dbe.entity.basic;
 
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiChosaIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosainBangoCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
- * 認定調査依頼情報のエンティティクラスです。
+ * DbT5006NinteichosaIraiJohoの項目定義クラスです
  *
- * @author N8187 久保田 英男
+ * @author n8178 城間篤人
  */
 public class DbT5006NinteichosaIraiJohoEntity implements IDbAccessable {
+// <editor-fold defaultstate="collapsed" desc="Generated Code">
 
-    /**
-     * 認定調査依頼情報テーブル
-     */
     @TableName
-    public static final RString TABLE_NAME = new RString("T5006NinteichosaIraiJoho");
+    public static final RString TABLE_NAME = new RString("DbT5006NinteichosaIraiJoho");
+    private RString insertDantaiCd;
+    private RDateTime insertTimestamp;
+    private RString insertReamsLoginId;
+    private UUID insertContextId;
+    private boolean isDeleted;
+    private int updateCount;
+    private RDateTime lastUpdateTimestamp;
+    private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private ShinseishoKanriNo 申請書管理番号;
+    private ShinseishoKanriNo shinseishoKanriNo;
     @PrimaryKey
-    private NinteiChosaIraiRirekiNo 認定調査依頼履歴番号;
-    private RString 認定調査委託先コード;
-    private RString 調査員番号コード;
-    private RString 認定調査依頼区分コード;
-    private int 認定調査回数;
-    private FlexibleDate 認定調査依頼年月日;
-    private FlexibleDate 認定調査期限年月日;
-    private FlexibleDate 依頼書出力年月日;
-    private FlexibleDate 調査票等出力年月日;
-    private boolean モバイルデータ出力フラグ;
-    private FlexibleDate 認定調査督促年月日;
-    private RString 認定調査督促方法;
-    private int 認定調査督促回数;
-    private RString 認定調査督促メモ;
+    private NinteichosaIraiRirekiNo ninteichosaIraiRirekiNo;
+    private KaigoJigyoshaNo ninteichosaItakusakiCode;
+    private NinteichosainBangoCode chousainCode;
+    private RString ninteichousaIraiKubunCode;
+    private int ninteichosaIraiKaisu;
+    private FlexibleDate ninteichosaIraiYMD;
+    private FlexibleDate ninteichosaKigenYMD;
+    private FlexibleDate iraishoShutsuryokuYMD;
+    private FlexibleDate chosahyoTouShutsuryokuYMD;
+    private boolean mobileDataShutsuryokuFlag;
+    private FlexibleDate ninteichosaTokusokuYMD;
+    private RString ninteichosaTokusokuHoho;
+    private int ninteichosaTokusokuKaisu;
+    private RString ninteichosaTokusokuMemo;
 
     /**
-     * ORマッパーのためのデフォルトコンストラクタです。
-     */
-    DbT5006NinteichosaIraiJohoEntity() {
-    }
-
-    /**
-     * コンストラクタです。
+     * getInsertDantaiCd
      *
-     * @param 申請書管理番号 申請書管理番号
-     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
-     * @param 認定調査委託先コード 認定調査委託先コード
-     * @param 調査員番号コード 調査員番号コード
-     * @param 認定調査依頼区分コード 認定調査依頼区分コード
-     * @param 認定調査回数 認定調査回数
-     * @param 認定調査依頼年月日 認定調査依頼年月日
-     * @param 認定調査期限年月日 認定調査期限年月日
-     * @param 依頼書出力年月日 依頼書出力年月日
-     * @param 調査票等出力年月日 調査票等出力年月日
-     * @param モバイルデータ出力フラグ モバイルデータ出力フラグ
-     * @param 認定調査督促年月日 認定調査督促年月日
-     * @param 認定調査督促方法 認定調査督促方法
-     * @param 認定調査督促回数 認定調査督促回数
-     * @param 認定調査督促メモ 認定調査督促メモ
+     * @return insertDantaiCd
      */
-    public DbT5006NinteichosaIraiJohoEntity(
-            ShinseishoKanriNo 申請書管理番号,
-            NinteiChosaIraiRirekiNo 認定調査依頼履歴番号,
-            RString 認定調査委託先コード,
-            RString 調査員番号コード,
-            RString 認定調査依頼区分コード,
-            int 認定調査回数,
-            FlexibleDate 認定調査依頼年月日,
-            FlexibleDate 認定調査期限年月日,
-            FlexibleDate 依頼書出力年月日,
-            FlexibleDate 調査票等出力年月日,
-            boolean モバイルデータ出力フラグ,
-            FlexibleDate 認定調査督促年月日,
-            RString 認定調査督促方法,
-            int 認定調査督促回数,
-            RString 認定調査督促メモ) {
-        this.申請書管理番号 = 申請書管理番号;
-        this.認定調査依頼履歴番号 = 認定調査依頼履歴番号;
-        this.認定調査委託先コード = 認定調査委託先コード;
-        this.調査員番号コード = 調査員番号コード;
-        this.認定調査依頼区分コード = 認定調査依頼区分コード;
-        this.認定調査回数 = 認定調査回数;
-        this.認定調査依頼年月日 = 認定調査依頼年月日;
-        this.認定調査期限年月日 = 認定調査期限年月日;
-        this.依頼書出力年月日 = 依頼書出力年月日;
-        this.調査票等出力年月日 = 調査票等出力年月日;
-        this.モバイルデータ出力フラグ = モバイルデータ出力フラグ;
-        this.認定調査督促年月日 = 認定調査督促年月日;
-        this.認定調査督促方法 = 認定調査督促方法;
-        this.認定調査督促回数 = 認定調査督促回数;
-        this.認定調査督促メモ = 認定調査督促メモ;
+    public RString getInsertDantaiCd() {
+        return insertDantaiCd;
     }
 
     /**
-     * 申請書管理番号を返します。
+     * setInsertDantaiCd
      *
-     * @return 申請書管理番号
+     * @param insertDantaiCd insertDantaiCd
      */
-    public ShinseishoKanriNo get申請書管理番号() {
-        return 申請書管理番号;
+    public void setInsertDantaiCd(RString insertDantaiCd) {
+        this.insertDantaiCd = insertDantaiCd;
     }
 
     /**
-     * 認定調査依頼履歴番号を返します。
+     * getIsDeleted
      *
-     * @return 認定調査依頼履歴番号
+     * @return isDeleted
      */
-    public NinteiChosaIraiRirekiNo get認定調査依頼履歴番号() {
-        return 認定調査依頼履歴番号;
+    public boolean getIsDeleted() {
+        return isDeleted;
     }
 
     /**
-     * 認定調査委託先コードを返します。
+     * setIsDeleted
      *
-     * @return 認定調査委託先コード
+     * @param isDeleted isDeleted
      */
-    public RString get認定調査委託先コード() {
-        return 認定調査委託先コード;
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     /**
-     * 調査員番号コードを返します。
+     * setLastUpdateReamsLoginId
      *
-     * @return 調査員番号コード
+     * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
-    public RString get調査員番号コード() {
-        return 調査員番号コード;
+    public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
+        this.lastUpdateReamsLoginId = lastUpdateReamsLoginId;
     }
 
     /**
-     * 認定調査依頼区分コードを返します。
+     * getShinseishoKanriNo
      *
-     * @return 認定調査依頼区分コード
+     * @return shinseishoKanriNo
      */
-    public RString get認定調査依頼区分コード() {
-        return 認定調査依頼区分コード;
+    public ShinseishoKanriNo getShinseishoKanriNo() {
+        return shinseishoKanriNo;
     }
 
     /**
-     * 認定調査回数を返します。
+     * setShinseishoKanriNo
      *
-     * @return 認定調査回数
+     * @param shinseishoKanriNo shinseishoKanriNo
      */
-    public int get認定調査回数() {
-        return 認定調査回数;
+    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
+        this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
     /**
-     * 認定調査依頼年月日を返します。
+     * getNinteichosaIraiRirekiNo
      *
-     * @return 認定調査依頼年月日
+     * @return ninteichosaIraiRirekiNo
      */
-    public FlexibleDate get認定調査依頼年月日() {
-        return 認定調査依頼年月日;
+    public NinteichosaIraiRirekiNo getNinteichosaIraiRirekiNo() {
+        return ninteichosaIraiRirekiNo;
     }
 
     /**
-     * 認定調査期限年月日を返します。
+     * setNinteichosaIraiRirekiNo
      *
-     * @return 認定調査期限年月日
+     * @param ninteichosaIraiRirekiNo ninteichosaIraiRirekiNo
      */
-    public FlexibleDate get認定調査期限年月日() {
-        return 認定調査期限年月日;
+    public void setNinteichosaIraiRirekiNo(NinteichosaIraiRirekiNo ninteichosaIraiRirekiNo) {
+        this.ninteichosaIraiRirekiNo = ninteichosaIraiRirekiNo;
     }
 
     /**
-     * 依頼書出力年月日を返します。
+     * getNinteichosaItakusakiCode
      *
-     * @return 依頼書出力年月日
+     * @return ninteichosaItakusakiCode
      */
-    public FlexibleDate get依頼書出力年月日() {
-        return 依頼書出力年月日;
+    public KaigoJigyoshaNo getNinteichosaItakusakiCode() {
+        return ninteichosaItakusakiCode;
     }
 
     /**
-     * 調査票等出力年月日を返します。
+     * setNinteichosaItakusakiCode
      *
-     * @return 調査票等出力年月日
+     * @param ninteichosaItakusakiCode ninteichosaItakusakiCode
      */
-    public FlexibleDate get調査票等出力年月日() {
-        return 調査票等出力年月日;
+    public void setNinteichosaItakusakiCode(KaigoJigyoshaNo ninteichosaItakusakiCode) {
+        this.ninteichosaItakusakiCode = ninteichosaItakusakiCode;
     }
 
     /**
-     * モバイルデータ出力フラグを返します。
+     * getChousainCode
      *
-     * @return モバイルデータ出力フラグ
+     * @return chousainCode
      */
-    public boolean isモバイルデータ出力フラグ() {
-        return モバイルデータ出力フラグ;
+    public NinteichosainBangoCode getChousainCode() {
+        return chousainCode;
     }
 
     /**
-     * 認定調査督促年月日を返します。
+     * setChousainCode
      *
-     * @return 認定調査督促年月日
+     * @param chousainCode chousainCode
      */
-    public FlexibleDate get認定調査督促年月日() {
-        return 認定調査督促年月日;
+    public void setChousainCode(NinteichosainBangoCode chousainCode) {
+        this.chousainCode = chousainCode;
     }
 
     /**
-     * 認定調査督促方法を返します。
+     * getNinteichousaIraiKubunCode
      *
-     * @return 認定調査督促方法
+     * @return ninteichousaIraiKubunCode
      */
-    public RString get認定調査督促方法() {
-        return 認定調査督促方法;
+    public RString getNinteichousaIraiKubunCode() {
+        return ninteichousaIraiKubunCode;
     }
 
     /**
-     * 認定調査督促回数を返します。
+     * setNinteichousaIraiKubunCode
      *
-     * @return 認定調査督促回数
+     * @param ninteichousaIraiKubunCode ninteichousaIraiKubunCode
      */
-    public int get認定調査督促回数() {
-        return 認定調査督促回数;
+    public void setNinteichousaIraiKubunCode(RString ninteichousaIraiKubunCode) {
+        this.ninteichousaIraiKubunCode = ninteichousaIraiKubunCode;
     }
 
     /**
-     * 認定調査督促メモを返します。
+     * getNinteichosaIraiKaisu
      *
-     * @return 認定調査督促メモ
+     * @return ninteichosaIraiKaisu
      */
-    public RString get認定調査督促メモ() {
-        return 認定調査督促メモ;
+    public int getNinteichosaIraiKaisu() {
+        return ninteichosaIraiKaisu;
     }
 
     /**
-     * 申請書管理番号を設定します。
+     * setNinteichosaIraiKaisu
      *
-     * @param 申請書管理番号 申請書管理番号
+     * @param ninteichosaIraiKaisu ninteichosaIraiKaisu
      */
-    public void set申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
-        this.申請書管理番号 = 申請書管理番号;
+    public void setNinteichosaIraiKaisu(int ninteichosaIraiKaisu) {
+        this.ninteichosaIraiKaisu = ninteichosaIraiKaisu;
     }
 
     /**
-     * 認定調査依頼履歴番号を設定します。
+     * getNinteichosaIraiYMD
      *
-     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @return ninteichosaIraiYMD
      */
-    public void set認定調査依頼履歴番号(NinteiChosaIraiRirekiNo 認定調査依頼履歴番号) {
-        this.認定調査依頼履歴番号 = 認定調査依頼履歴番号;
+    public FlexibleDate getNinteichosaIraiYMD() {
+        return ninteichosaIraiYMD;
     }
 
     /**
-     * 認定調査委託先コードを設定します。
+     * setNinteichosaIraiYMD
      *
-     * @param 認定調査委託先コード 認定調査委託先コード
+     * @param ninteichosaIraiYMD ninteichosaIraiYMD
      */
-    public void set認定調査委託先コード(RString 認定調査委託先コード) {
-        this.認定調査委託先コード = 認定調査委託先コード;
+    public void setNinteichosaIraiYMD(FlexibleDate ninteichosaIraiYMD) {
+        this.ninteichosaIraiYMD = ninteichosaIraiYMD;
     }
 
     /**
-     * 調査員番号コードを設定します。
+     * getNinteichosaKigenYMD
      *
-     * @param 調査員番号コード 調査員番号コード
+     * @return ninteichosaKigenYMD
      */
-    public void set調査員番号コード(RString 調査員番号コード) {
-        this.調査員番号コード = 調査員番号コード;
+    public FlexibleDate getNinteichosaKigenYMD() {
+        return ninteichosaKigenYMD;
     }
 
     /**
-     * 認定調査依頼区分コードを設定します。
+     * setNinteichosaKigenYMD
      *
-     * @param 認定調査依頼区分コード 認定調査依頼区分コード
+     * @param ninteichosaKigenYMD ninteichosaKigenYMD
      */
-    public void set認定調査依頼区分コード(RString 認定調査依頼区分コード) {
-        this.認定調査依頼区分コード = 認定調査依頼区分コード;
+    public void setNinteichosaKigenYMD(FlexibleDate ninteichosaKigenYMD) {
+        this.ninteichosaKigenYMD = ninteichosaKigenYMD;
     }
 
     /**
-     * 認定調査回数を設定します。
+     * getIraishoShutsuryokuYMD
      *
-     * @param 認定調査回数 認定調査回数
+     * @return iraishoShutsuryokuYMD
      */
-    public void set認定調査回数(int 認定調査回数) {
-        this.認定調査回数 = 認定調査回数;
+    public FlexibleDate getIraishoShutsuryokuYMD() {
+        return iraishoShutsuryokuYMD;
     }
 
     /**
-     * 認定調査依頼年月日を設定します。
+     * setIraishoShutsuryokuYMD
      *
-     * @param 認定調査依頼年月日 認定調査依頼年月日
+     * @param iraishoShutsuryokuYMD iraishoShutsuryokuYMD
      */
-    public void set認定調査依頼年月日(FlexibleDate 認定調査依頼年月日) {
-        this.認定調査依頼年月日 = 認定調査依頼年月日;
+    public void setIraishoShutsuryokuYMD(FlexibleDate iraishoShutsuryokuYMD) {
+        this.iraishoShutsuryokuYMD = iraishoShutsuryokuYMD;
     }
 
     /**
-     * 認定調査期限年月日を設定します。
+     * getChosahyoTouShutsuryokuYMD
      *
-     * @param 認定調査期限年月日 認定調査期限年月日
+     * @return chosahyoTouShutsuryokuYMD
      */
-    public void set認定調査期限年月日(FlexibleDate 認定調査期限年月日) {
-        this.認定調査期限年月日 = 認定調査期限年月日;
+    public FlexibleDate getChosahyoTouShutsuryokuYMD() {
+        return chosahyoTouShutsuryokuYMD;
     }
 
     /**
-     * 依頼書出力年月日を設定します。
+     * setChosahyoTouShutsuryokuYMD
      *
-     * @param 依頼書出力年月日 依頼書出力年月日
+     * @param chosahyoTouShutsuryokuYMD chosahyoTouShutsuryokuYMD
      */
-    public void set依頼書出力年月日(FlexibleDate 依頼書出力年月日) {
-        this.依頼書出力年月日 = 依頼書出力年月日;
+    public void setChosahyoTouShutsuryokuYMD(FlexibleDate chosahyoTouShutsuryokuYMD) {
+        this.chosahyoTouShutsuryokuYMD = chosahyoTouShutsuryokuYMD;
     }
 
     /**
-     * 調査票等出力年月日を設定します。
+     * getMobileDataShutsuryokuFlag
      *
-     * @param 調査票等出力年月日 調査票等出力年月日
+     * @return mobileDataShutsuryokuFlag
      */
-    public void set調査票等出力年月日(FlexibleDate 調査票等出力年月日) {
-        this.調査票等出力年月日 = 調査票等出力年月日;
+    public boolean getMobileDataShutsuryokuFlag() {
+        return mobileDataShutsuryokuFlag;
     }
 
     /**
-     * モバイルデータ出力フラグを設定します。
+     * setMobileDataShutsuryokuFlag
      *
-     * @param モバイルデータ出力フラグ モバイルデータ出力フラグ
+     * @param mobileDataShutsuryokuFlag mobileDataShutsuryokuFlag
      */
-    public void setモバイルデータ出力フラグ(boolean モバイルデータ出力フラグ) {
-        this.モバイルデータ出力フラグ = モバイルデータ出力フラグ;
+    public void setMobileDataShutsuryokuFlag(boolean mobileDataShutsuryokuFlag) {
+        this.mobileDataShutsuryokuFlag = mobileDataShutsuryokuFlag;
     }
 
     /**
-     * 認定調査督促年月日を設定します。
+     * getNinteichosaTokusokuYMD
      *
-     * @param 認定調査督促年月日 認定調査督促年月日
+     * @return ninteichosaTokusokuYMD
      */
-    public void set認定調査督促年月日(FlexibleDate 認定調査督促年月日) {
-        this.認定調査督促年月日 = 認定調査督促年月日;
+    public FlexibleDate getNinteichosaTokusokuYMD() {
+        return ninteichosaTokusokuYMD;
     }
 
     /**
-     * 認定調査督促方法を設定します。
+     * setNinteichosaTokusokuYMD
      *
-     * @param 認定調査督促方法 認定調査督促方法
+     * @param ninteichosaTokusokuYMD ninteichosaTokusokuYMD
      */
-    public void set認定調査督促方法(RString 認定調査督促方法) {
-        this.認定調査督促方法 = 認定調査督促方法;
+    public void setNinteichosaTokusokuYMD(FlexibleDate ninteichosaTokusokuYMD) {
+        this.ninteichosaTokusokuYMD = ninteichosaTokusokuYMD;
     }
 
     /**
-     * 認定調査督促回数を設定します。
+     * getNinteichosaTokusokuHoho
      *
-     * @param 認定調査督促回数 認定調査督促回数
+     * @return ninteichosaTokusokuHoho
      */
-    public void set認定調査督促回数(int 認定調査督促回数) {
-        this.認定調査督促回数 = 認定調査督促回数;
+    public RString getNinteichosaTokusokuHoho() {
+        return ninteichosaTokusokuHoho;
     }
 
     /**
-     * 認定調査督促メモを設定します。
+     * setNinteichosaTokusokuHoho
      *
-     * @param 認定調査督促メモ 認定調査督促メモ
+     * @param ninteichosaTokusokuHoho ninteichosaTokusokuHoho
      */
-    public void set認定調査督促メモ(RString 認定調査督促メモ) {
-        this.認定調査督促メモ = 認定調査督促メモ;
+    public void setNinteichosaTokusokuHoho(RString ninteichosaTokusokuHoho) {
+        this.ninteichosaTokusokuHoho = ninteichosaTokusokuHoho;
     }
+
+    /**
+     * getNinteichosaTokusokuKaisu
+     *
+     * @return ninteichosaTokusokuKaisu
+     */
+    public int getNinteichosaTokusokuKaisu() {
+        return ninteichosaTokusokuKaisu;
+    }
+
+    /**
+     * setNinteichosaTokusokuKaisu
+     *
+     * @param ninteichosaTokusokuKaisu ninteichosaTokusokuKaisu
+     */
+    public void setNinteichosaTokusokuKaisu(int ninteichosaTokusokuKaisu) {
+        this.ninteichosaTokusokuKaisu = ninteichosaTokusokuKaisu;
+    }
+
+    /**
+     * getNinteichosaTokusokuMemo
+     *
+     * @return ninteichosaTokusokuMemo
+     */
+    public RString getNinteichosaTokusokuMemo() {
+        return ninteichosaTokusokuMemo;
+    }
+
+    /**
+     * setNinteichosaTokusokuMemo
+     *
+     * @param ninteichosaTokusokuMemo ninteichosaTokusokuMemo
+     */
+    public void setNinteichosaTokusokuMemo(RString ninteichosaTokusokuMemo) {
+        this.ninteichosaTokusokuMemo = ninteichosaTokusokuMemo;
+    }
+// </editor-fold>
 }

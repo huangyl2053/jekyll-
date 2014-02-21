@@ -4,11 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.helper;
 
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiChosaIraiRirekiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.*;
@@ -31,24 +34,24 @@ public class DbT5001NinteiShinseiJohoEntityMock {
                 new ShichosonCode(試験用文字列),
                 試験用文字列,
                 new KaigoHihokenshaNo(試験用文字列),
-                試験用文字列,
+                new ShikibetsuCode(試験用文字列),
                 new FlexibleDate(new RString("20140101")),
+                new EdabanCode(new RString("01")),
+                new Code(試験用文字列),
+                new Code(試験用文字列),
+                new Code(試験用文字列),
                 試験用文字列,
                 試験用文字列,
-                試験用文字列,
-                試験用文字列,
-                試験用文字列,
-                試験用文字列,
-                試験用文字列,
+                new Code(試験用文字列),
                 1,
                 true,
-                new NinteiChosaIraiRirekiNo(new RString("1")),
+                new NinteichosaIraiRirekiNo(1),
                 1,
                 試験用文字列,
                 true,
                 true,
                 試験用文字列,
-                試験用文字列,
+                new Code(試験用文字列),
                 試験用文字列,
                 new FlexibleDate(new RString("20140101")),
                 true));

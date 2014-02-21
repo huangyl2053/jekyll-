@@ -31,12 +31,12 @@ public final class NinteishinseiTorisageTaishoshaMapper {
      */
     public static NinteiShinseiTorisageTaishosha to認定申請取下げ対象者(DbT5001NinteiShinseiJohoEntity entity) {
         return new NinteiShinseiTorisageTaishosha(entity.getShinseishoKanriNo(), entity.getShichosonCode(), entity.getHihokenshaNo(),
-                entity.getNinteiShinseiYMD(), entity.getNinteiShinseiShinseijiKubunCode(), create認定申請取下げ(entity));
+                entity.getNinteiShinseiYMD().toRDate(), entity.getNinteiShinseiShinseijiKubunCode(), create認定申請取下げ(entity));
     }
 
     private static NinteiShinseiTorisage create認定申請取下げ(DbT5001NinteiShinseiJohoEntity entity) {
         return new NinteiShinseiTorisage(TorisageKubun.toValue(entity.getTorisageKubunCode()),
-                entity.getTorisageRiyu(), entity.getTorisageYMD(),
+                entity.getTorisageRiyu(), entity.getTorisageYMD().toRDate(),
                 ShinsaKeizokuKubun.toValue(entity.getShinsaKeizokuKubun()));
     }
 
@@ -52,7 +52,7 @@ public final class NinteishinseiTorisageTaishoshaMapper {
         DbT5001NinteiShinseiJohoEntity 更新済みEntity = cloneEntity(entity);
         更新済みEntity.setTorisageKubunCode(認定申請取下げ情報.get取下げ区分().get取下げ区分コード());
         更新済みEntity.setTorisageRiyu(認定申請取下げ情報.get取下げ理由());
-        更新済みEntity.setTorisageYMD(認定申請取下げ情報.get取下げ年月日());
+        更新済みEntity.setTorisageYMD(認定申請取下げ情報.get取下げ年月日().toFlexibleDate());
         更新済みEntity.setShinsaKeizokuKubun(認定申請取下げ情報.get申請継続区分().is継続());
         return 更新済みEntity;
     }
@@ -60,13 +60,6 @@ public final class NinteishinseiTorisageTaishoshaMapper {
     private static DbT5001NinteiShinseiJohoEntity cloneEntity(DbT5001NinteiShinseiJohoEntity entity) {
         DbT5001NinteiShinseiJohoEntity 更新済みEntity = new DbT5001NinteiShinseiJohoEntity();
         更新済みEntity.setInsertDantaiCd(entity.getInsertDantaiCd());
-        更新済みEntity.setInsertTimestamp(entity.getInsertTimestamp());
-        更新済みEntity.setInsertReamsLoginId(entity.getInsertReamsLoginId());
-        更新済みEntity.setInsertContextId(entity.getInsertContextId());
-        更新済みEntity.setIsDeleted(entity.getIsDeleted());
-        更新済みEntity.setUpdateCount(entity.getUpdateCount());
-        更新済みEntity.setLastUpdateTimestamp(entity.getLastUpdateTimestamp());
-        更新済みEntity.setLastUpdateReamsLoginId(entity.getLastUpdateReamsLoginId());
         更新済みEntity.setShinseishoKanriNo(entity.getShinseishoKanriNo());
         更新済みEntity.setShichosonCode(entity.getShichosonCode());
         更新済みEntity.setShishoCode(entity.getShishoCode());

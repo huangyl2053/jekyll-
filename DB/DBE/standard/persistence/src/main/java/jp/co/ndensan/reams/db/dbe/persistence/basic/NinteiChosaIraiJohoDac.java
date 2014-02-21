@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiChosaIraiRirekiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -25,7 +25,7 @@ public class NinteiChosaIraiJohoDac implements INinteiChosaIraiJohoDac {
     private SqlSession session;
 
     @Override
-    public DbT5006NinteichosaIraiJohoEntity select(RString 申請書管理番号, NinteiChosaIraiRirekiNo 認定調査依頼履歴番号) {
+    public DbT5006NinteichosaIraiJohoEntity select(RString 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT5006NinteichosaIraiJohoEntity> list = accessor
                 .select()

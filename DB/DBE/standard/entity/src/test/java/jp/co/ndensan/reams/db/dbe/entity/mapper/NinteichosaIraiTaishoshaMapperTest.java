@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.ur.urf.entity.basic.ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urf.entity.basic.KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.entity.basic.KojinEntity;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
@@ -89,7 +90,7 @@ public class NinteichosaIraiTaishoshaMapperTest extends TestBase {
             要介護認定申請情報Entity.setShichosonCode(new ShichosonCode(new RString("1111")));
             要介護認定申請情報Entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("0002")));
             要介護認定申請情報Entity.setNinteiShinseiYMD(new FlexibleDate(new RString("20140101")));
-            要介護認定申請情報Entity.setNinteiShinseiShinseijiKubunCode(new RString("0003"));
+            要介護認定申請情報Entity.setNinteiShinseiShinseijiKubunCode(new Code(new RString("0003")));
             個人Entity = KojinEntityMock.getSpiedInstance();
             認定調査委託先Entity = DbT7010NinteichosaItakusakiJohoEntityMock.getSpiedInstance();
             認定調査委託先Entity.set市町村コード(new RString("1111市町村コード"));
@@ -136,7 +137,7 @@ public class NinteichosaIraiTaishoshaMapperTest extends TestBase {
         public void 引き渡した_要介護認定申請情報の認定申請区分_とtoNinteichosaIraiTaishoshaの結果は一致する() {
             sut = NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(要介護認定申請情報Entity,
                     個人Entity, 認定調査委託先Entity, 介護事業者Entity, 調査員情報Entity);
-            assertThat(sut.get認定申請区分(), is(要介護認定申請情報Entity.getNinteiShinseiShinseijiKubunCode()));
+            assertThat(sut.get認定申請区分(), is(要介護認定申請情報Entity.getNinteiShinseiShinseijiKubunCode().getColumnValue()));
         }
 
         @Test

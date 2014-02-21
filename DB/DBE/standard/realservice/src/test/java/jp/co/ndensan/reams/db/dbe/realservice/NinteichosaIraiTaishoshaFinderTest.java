@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiTaishosha;
 import jp.co.ndensan.reams.db.dbe.definition.YokaigoninteiDateConstants;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiChosaIraiRirekiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
@@ -26,6 +26,9 @@ import jp.co.ndensan.reams.ur.urf.persistence.basic.IKaigoJigyoshaDac;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._ShikibetsuCode;
 import jp.co.ndensan.reams.ur.urz.persistence.basic.IKojinDac;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import static org.hamcrest.CoreMatchers.is;
@@ -77,7 +80,7 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
             when(shinseiJohoDac.select(TestCases[5].get申請書管理番号())).thenReturn(Result認定申請情報[5]);
             itakusakiDac = mock(INinteichosaItakusakiDac.class);
             iraiJohoDac = mock(INinteiChosaIraiJohoDac.class);
-            when(iraiJohoDac.select(any(RString.class), any(NinteiChosaIraiRirekiNo.class))).thenReturn(null);
+            when(iraiJohoDac.select(any(RString.class), any(NinteichosaIraiRirekiNo.class))).thenReturn(null);
             kojinDac = mock(IKojinDac.class);
             when(kojinDac.select最新(any(RString.class))).thenReturn(KojinEntityMock.getSpiedInstance());
             kaigoJigyoshaDac = mock(IKaigoJigyoshaDac.class);
@@ -123,12 +126,12 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
      */
     private static TestCase[] TestCases = {
         // TestNo, 申請書管理番号, 市町村コード, 認定調査依頼履歴番号, 認定調査完了年月日, 認定調査委託先コード, 調査員番号コード;
-        new TestCase(0, new ShinseishoKanriNo(new RString("0000")), new ShichosonCode(new RString("00000")), new NinteiChosaIraiRirekiNo(new RString("1")), 調査完了年月日, new RString("01"), new RString("001")),
-        new TestCase(1, new ShinseishoKanriNo(new RString("0001")), new ShichosonCode(new RString("12345")), new NinteiChosaIraiRirekiNo(new RString("2")), YokaigoninteiDateConstants.認定調査未完了年月日, new RString("01"), new RString("001")),
-        new TestCase(2, new ShinseishoKanriNo(new RString("0002")), new ShichosonCode(new RString("12345")), new NinteiChosaIraiRirekiNo(new RString("1")), 調査完了年月日, new RString("01"), new RString("001")),
-        new TestCase(3, new ShinseishoKanriNo(new RString("0003")), new ShichosonCode(new RString("12345")), new NinteiChosaIraiRirekiNo(new RString("1")), YokaigoninteiDateConstants.認定調査未完了年月日, null, null),
-        new TestCase(4, new ShinseishoKanriNo(new RString("0004")), new ShichosonCode(new RString("12345")), new NinteiChosaIraiRirekiNo(new RString("5")), YokaigoninteiDateConstants.認定調査未完了年月日, new RString("02"), new RString("002")),
-        new TestCase(5, new ShinseishoKanriNo(new RString("0005")), new ShichosonCode(new RString("22222")), new NinteiChosaIraiRirekiNo(new RString("1")), YokaigoninteiDateConstants.認定調査未完了年月日, new RString("04"), new RString("004"))
+        new TestCase(0, new ShinseishoKanriNo(new RString("0000")), new ShichosonCode(new RString("00000")), new NinteichosaIraiRirekiNo(1), 調査完了年月日, new RString("01"), new RString("001")),
+        new TestCase(1, new ShinseishoKanriNo(new RString("0001")), new ShichosonCode(new RString("12345")), new NinteichosaIraiRirekiNo(2), YokaigoninteiDateConstants.認定調査未完了年月日, new RString("01"), new RString("001")),
+        new TestCase(2, new ShinseishoKanriNo(new RString("0002")), new ShichosonCode(new RString("12345")), new NinteichosaIraiRirekiNo(1), 調査完了年月日, new RString("01"), new RString("001")),
+        new TestCase(3, new ShinseishoKanriNo(new RString("0003")), new ShichosonCode(new RString("12345")), new NinteichosaIraiRirekiNo(1), YokaigoninteiDateConstants.認定調査未完了年月日, null, null),
+        new TestCase(4, new ShinseishoKanriNo(new RString("0004")), new ShichosonCode(new RString("12345")), new NinteichosaIraiRirekiNo(5), YokaigoninteiDateConstants.認定調査未完了年月日, new RString("02"), new RString("002")),
+        new TestCase(5, new ShinseishoKanriNo(new RString("0005")), new ShichosonCode(new RString("22222")), new NinteichosaIraiRirekiNo(1), YokaigoninteiDateConstants.認定調査未完了年月日, new RString("04"), new RString("004"))
     };
     private static DbT5001NinteiShinseiJohoEntity[] Result認定申請情報 = {
         create認定申請情報Entity(0),
@@ -224,24 +227,24 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
         ShichosonCode shichosonCode = TestCases[テストパターン].get市町村コード();
         RString shishoCode = new RString("1");
         KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(試験用文字列);
-        RString shikibetsuCode = 試験用文字列;
+        ShikibetsuCode shikibetsuCode = new ShikibetsuCode(試験用文字列);
         FlexibleDate ninteiShinseiYMD = 調査完了年月日;
-        RString ninteiShinseiEdabanCode = 試験用文字列;
-        RString ninteiShinseiShinseijiKubunCode = 試験用文字列;
-        RString ninteiShinseiHoreiKubunCode = 試験用文字列;
-        RString ninteiShinseiYukoKubunCode = 試験用文字列;
+        EdabanCode ninteiShinseiEdabanCode = new EdabanCode(new RString("01"));
+        Code ninteiShinseiShinseijiKubunCode = new Code(試験用文字列);
+        Code ninteiShinseiHoreiKubunCode = new Code(試験用文字列);
+        Code ninteiShinseiYukoKubunCode = new Code(試験用文字列);
         RString shienShinseiKubun = 試験用文字列;
         RString shinseiRiyu = 試験用文字列;
-        RString zenYokaigoKubunCode = 試験用文字列;
+        Code zenYokaigoKubunCode = new Code(試験用文字列);
         int zenYukoKikan = 1;
         boolean johoteikyoDouiUmuKubun = true;
-        NinteiChosaIraiRirekiNo ninteichosaIraiRirekiNo = TestCases[テストパターン].get認定調査依頼履歴番号();
+        NinteichosaIraiRirekiNo ninteichosaIraiRirekiNo = TestCases[テストパターン].get認定調査依頼履歴番号();
         int ikenshoIraiRirekiNo = 1;
         RString minashiCode = 試験用文字列;
         boolean enkitsuchiDoiUmuKubun = true;
         boolean shisetsuNyushoUmuKubun = true;
         RString sichosonRenrakuJiko = 試験用文字列;
-        RString torisageKubunCode = 試験用文字列;
+        Code torisageKubunCode = new Code(試験用文字列);
         RString torisageRiyu = 試験用文字列;
         FlexibleDate torisageYMD = 調査完了年月日;
         boolean shinsaKeizokuKubun = true;
@@ -282,7 +285,7 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
         private int TestNo;
         private ShinseishoKanriNo 申請書管理番号;
         private ShichosonCode 市町村コード;
-        private NinteiChosaIraiRirekiNo 認定調査依頼履歴番号;
+        private NinteichosaIraiRirekiNo 認定調査依頼履歴番号;
         private FlexibleDate 認定調査完了年月日;
         private RString 認定調査委託先コード;
         private RString 調査員番号コード;
@@ -290,7 +293,7 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
         public TestCase(int TestNo,
                 ShinseishoKanriNo 申請書管理番号,
                 ShichosonCode 市町村コード,
-                NinteiChosaIraiRirekiNo 認定調査依頼履歴番号,
+                NinteichosaIraiRirekiNo 認定調査依頼履歴番号,
                 FlexibleDate 認定調査完了年月日,
                 RString 認定調査委託先コード,
                 RString 調査員番号コード) {
@@ -327,7 +330,7 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
         /**
          * @return 認定調査依頼履歴番号
          */
-        public NinteiChosaIraiRirekiNo get認定調査依頼履歴番号() {
+        public NinteichosaIraiRirekiNo get認定調査依頼履歴番号() {
             return 認定調査依頼履歴番号;
         }
 

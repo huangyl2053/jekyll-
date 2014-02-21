@@ -13,51 +13,60 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * 申請書管理番号クラスのテストです。
+ * 申請書管理番号を表すクラスのテストです。
  *
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
 public class ShinseishoKanriNoTest extends TestBase {
 
+    private static ShinseishoKanriNo sut;
+
     public static class コンストラクタのテスト {
 
-        @Test
-        public void 必要な値が渡されたとき_インスタンスが生成される() {
-            ShinseishoKanriNo sut = new ShinseishoKanriNo(new RString("test001"));
-            assertThat(sut, instanceOf(ShinseishoKanriNo.class));
-        }
-
         @Test(expected = NullPointerException.class)
-        public void 申請書管理番号にnullが渡されたとき_NullPointerExceptionが発生する() {
-            ShinseishoKanriNo sut = new ShinseishoKanriNo(null);
-        }
-    }
-
-    public static class hashCodeのテスト {
-
-        @Test
-        public void 申請書管理番号が同じ文字列とき_hashCodeも同じになる() {
-            ShinseishoKanriNo sut1 = new ShinseishoKanriNo(new RString("test001"));
-            ShinseishoKanriNo sut2 = new ShinseishoKanriNo(new RString("test001"));
-            assertThat(sut1.hashCode(), is(sut2.hashCode()));
+        public void nullが渡されたとき_NullPointerExceptionが発生する() {
+            sut = new ShinseishoKanriNo(null);
         }
     }
 
     public static class equalsのテスト {
 
         @Test
-        public void 申請書管理番号が同じ文字列のとき_trueを返す() {
-            ShinseishoKanriNo sut1 = new ShinseishoKanriNo(new RString("test001"));
-            ShinseishoKanriNo sut2 = new ShinseishoKanriNo(new RString("test001"));
-            assertThat(sut1.equals(sut2), is(true));
+        public void 引数にnullを渡すと_falseが返る() {
+            sut = new ShinseishoKanriNo(new RString("A001"));
+            assertThat(sut.equals(null), is(false));
         }
 
         @Test
-        public void 申請書管理番号が違う文字列のとき_falseを返す() {
-            ShinseishoKanriNo sut1 = new ShinseishoKanriNo(new RString("test001"));
-            ShinseishoKanriNo sut2 = new ShinseishoKanriNo(new RString("test002"));
-            assertThat(sut1.equals(sut2), is(false));
+        public void 引数にShinseishoKanriNo以外の型を渡すと_falseが返る() {
+            sut = new ShinseishoKanriNo(new RString("A001"));
+            RString 比較対象 = new RString("A001");
+            assertThat(sut.equals(比較対象), is(false));
+        }
+
+        @Test
+        public void メンバの内容が同一の_ShinseishoKanriNo型のクラスを渡したとき_trueが返る() {
+            sut = new ShinseishoKanriNo(new RString("A001"));
+            ShinseishoKanriNo 比較対象 = new ShinseishoKanriNo(new RString("A001"));
+            assertThat(sut.equals(比較対象), is(true));
+        }
+
+        @Test
+        public void メンバの内容が違う_ShinseishoKanriNo型のクラスを渡したとき_falseが返る() {
+            sut = new ShinseishoKanriNo(new RString("A001"));
+            ShinseishoKanriNo 比較対象 = new ShinseishoKanriNo(new RString("B001"));
+            assertThat(sut.equals(比較対象), is(false));
+        }
+    }
+
+    public static class hashCodeのテスト {
+
+        @Test
+        public void メンバの内容が同一の_ShinseishoKanriNo型のクラスを渡したとき_hashCodeの値が同じになる() {
+            sut = new ShinseishoKanriNo(new RString("A001"));
+            ShinseishoKanriNo 比較対象 = new ShinseishoKanriNo(new RString("A001"));
+            assertThat(sut.hashCode(), is(比較対象.hashCode()));
         }
     }
 }

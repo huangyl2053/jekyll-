@@ -11,9 +11,8 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.lang.DateRoundingType;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDateOld;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessor;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -39,26 +38,26 @@ public class NinteiShinseiJohoDac implements INinteiShinseiJohoDac {
     }
 
     @Override
-    public List<DbT5001NinteiShinseiJohoEntity> selectAllBy認定申請年月日(ShichosonCode 市町村コード, Range<FlexibleDateOld> 認定申請年月日範囲) {
+    public List<DbT5001NinteiShinseiJohoEntity> selectAllBy認定申請年月日(ShichosonCode 市町村コード, Range<RDate> 認定申請年月日範囲) {
         DbAccessor accessor = new DbAccessor(session);
         return accessor.select()
                 .table(DbT5001NinteiShinseiJoho.class)
                 .where(and(eq(shichosonCode, 市町村コード),
                 eq(torisageYMD, FlexibleDate.MIN),
-                leq(認定申請年月日範囲.getFrom().toRDate(DateRoundingType.同月の歴上日), ninteiShinseiYMD),
-                leq(ninteiShinseiYMD, 認定申請年月日範囲.getTo().toRDate(DateRoundingType.同月の歴上日))))
+                leq(認定申請年月日範囲.getFrom().toDateString(), ninteiShinseiYMD),
+                leq(ninteiShinseiYMD, 認定申請年月日範囲.getTo().toDateString())))
                 .toList(DbT5001NinteiShinseiJohoEntity.class);
     }
 
     @Override
-    public List<DbT5001NinteiShinseiJohoEntity> selectAllBy取下げ年月日(ShichosonCode 市町村コード, Range<FlexibleDateOld> 取下げ年月日範囲) {
+    public List<DbT5001NinteiShinseiJohoEntity> selectAllBy取下げ年月日(ShichosonCode 市町村コード, Range<RDate> 取下げ年月日範囲) {
         DbAccessor accessor = new DbAccessor(session);
         return accessor.select()
                 .table(DbT5001NinteiShinseiJoho.class)
                 .where(and(eq(shichosonCode, 市町村コード),
                 not(eq(torisageYMD, FlexibleDate.MIN)),
-                leq(取下げ年月日範囲.getFrom().toRDate(DateRoundingType.同月の歴上日), torisageYMD),
-                leq(torisageYMD, 取下げ年月日範囲.getTo().toRDate(DateRoundingType.同月の歴上日))))
+                leq(取下げ年月日範囲.getFrom().toDateString(), torisageYMD),
+                leq(torisageYMD, 取下げ年月日範囲.getTo().toDateString())))
                 .toList(DbT5001NinteiShinseiJohoEntity.class);
     }
 
