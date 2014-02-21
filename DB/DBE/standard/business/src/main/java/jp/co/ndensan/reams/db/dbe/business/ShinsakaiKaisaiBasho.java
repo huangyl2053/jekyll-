@@ -17,13 +17,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @author N1013 松本直樹
  */
 public class ShinsakaiKaisaiBasho {
-//TODO ShinsakaiKaisaiBashoCode及びShinsakaiKaisaiBashoChikuCodeの使用方法がわかってから再テスト　2014/02/28
-//    private final ShinsakaiKaisaiBashoCode 開催場所コード;
-//    private final ShinsakaiKaisaiBashoChikuCode 開催場所地区コード;
 
-    private final RString 開催場所コード;
+    private final ShinsakaiKaisaiBashoCode 開催場所コード;
     private final RString 開催場所名称;
-    private final RString 開催場所地区コード;
+    private final ShinsakaiKaisaiBashoChikuCode 開催場所地区コード;
     private final RString 開催場所住所;
     private final RString 開催場所電話番号;
     private final ShinsakaiKaisaiBashoJokyo 開催場所状況;
@@ -38,9 +35,9 @@ public class ShinsakaiKaisaiBasho {
      * @param 開催場所電話番号 開催場所電話番号
      * @param 開催場所状況 開催場所状況
      */
-    public ShinsakaiKaisaiBasho(RString 開催場所コード,
+    public ShinsakaiKaisaiBasho(ShinsakaiKaisaiBashoCode 開催場所コード,
             RString 開催場所名称,
-            RString 開催場所地区コード,
+            ShinsakaiKaisaiBashoChikuCode 開催場所地区コード,
             RString 開催場所住所,
             RString 開催場所電話番号,
             ShinsakaiKaisaiBashoJokyo 開催場所状況) {
@@ -60,8 +57,7 @@ public class ShinsakaiKaisaiBasho {
      *
      * @return 開催場所コード
      */
-//    public ShinsakaiKaisaiBashoCode get開催場所コード() {
-    public RString get開催場所コード() {
+    public ShinsakaiKaisaiBashoCode get開催場所コード() {
         return 開催場所コード;
     }
 
@@ -79,8 +75,7 @@ public class ShinsakaiKaisaiBasho {
      *
      * @return 開催場所地区コード
      */
-//    public ShinsakaiKaisaiBashoChikuCode get開催場所地区コード() {
-    public RString get開催場所地区コード() {
+    public ShinsakaiKaisaiBashoChikuCode get開催場所地区コード() {
         return 開催場所地区コード;
     }
 

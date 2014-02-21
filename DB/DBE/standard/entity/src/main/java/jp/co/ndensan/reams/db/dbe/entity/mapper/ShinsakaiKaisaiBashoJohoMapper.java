@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBashoJokyo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoChikuCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
 
 /**
@@ -29,9 +31,11 @@ public final class ShinsakaiKaisaiBashoJohoMapper {
      */
     public static ShinsakaiKaisaiBasho to審査会開催場所(DbT5104ShinsakaiKaisaiBashoJohoEntity entity) {
         ShinsakaiKaisaiBashoJokyo 審査会開催場所状況 = ShinsakaiKaisaiBashoJokyo.toValue(entity.getShinsakaiKaisaiBashoJokyo());
+        ShinsakaiKaisaiBashoCode 審査会開催場所コード = new ShinsakaiKaisaiBashoCode(entity.getShinsakaiKaisaiBashoCode());
+        ShinsakaiKaisaiBashoChikuCode 審査会開催場所地区コード = new ShinsakaiKaisaiBashoChikuCode(entity.getShinsakaiKaisaiChikuCode());
 
-        return new ShinsakaiKaisaiBasho(entity.getShinsakaiKaisaiBashoCode(), entity.getShinsakaiKaisaiBashoMei(),
-                entity.getShinsakaiKaisaiChikuCode(), entity.getShinsakaiKaisaiBashoJusho(),
+        return new ShinsakaiKaisaiBasho(審査会開催場所コード, entity.getShinsakaiKaisaiBashoMei(),
+                審査会開催場所地区コード, entity.getShinsakaiKaisaiBashoJusho(),
                 entity.getShinsakaiKaisaiBashoTelNo(), 審査会開催場所状況);
     }
 }

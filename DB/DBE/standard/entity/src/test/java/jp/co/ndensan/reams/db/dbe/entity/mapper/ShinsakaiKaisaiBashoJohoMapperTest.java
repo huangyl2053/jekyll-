@@ -27,11 +27,9 @@ public class ShinsakaiKaisaiBashoJohoMapperTest extends DbeTestBase {
 
     public static class toShinsakaiKaisaiBashoのテスト extends DbeTestBase {
 
-//        private ShinsakaiKaisaiBashoCode 開催場所コード;
-//        private ShinsakaiKaisaiBashoChikuCode 開催場所地区コード;
-        private RString 開催場所コード;
+        private ShinsakaiKaisaiBashoCode 開催場所コード;
+        private ShinsakaiKaisaiBashoChikuCode 開催場所地区コード;
         private RString 開催場所名称;
-        private RString 開催場所地区コード;
         private RString 開催場所住所;
         private RString 開催場所電話番号;
         private ShinsakaiKaisaiBashoJokyo 開催場所状況;
@@ -39,11 +37,9 @@ public class ShinsakaiKaisaiBashoJohoMapperTest extends DbeTestBase {
 
         @Override
         public void setUp() {
-//            開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
-//            開催場所地区コード = new ShinsakaiKaisaiBashoChikuCode(new RString("00001"));
-            開催場所コード = new RString("00001");
+            開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
+            開催場所地区コード = new ShinsakaiKaisaiBashoChikuCode(new RString("00001"));
             開催場所名称 = new RString("市役所会議室");
-            開催場所地区コード = new RString("00001");
             開催場所住所 = new RString("長野市鶴賀");
             開催場所電話番号 = new RString("0262362222");
             開催場所状況 = 開催場所状況.有効;
@@ -83,9 +79,9 @@ public class ShinsakaiKaisaiBashoJohoMapperTest extends DbeTestBase {
 
         private DbT5104ShinsakaiKaisaiBashoJohoEntity create審査会開催場所情報Entity() {
             DbT5104ShinsakaiKaisaiBashoJohoEntity entity = new DbT5104ShinsakaiKaisaiBashoJohoEntity();
-            entity.setShinsakaiKaisaiBashoCode(開催場所コード);
+            entity.setShinsakaiKaisaiBashoCode(開催場所コード.value());
             entity.setShinsakaiKaisaiBashoMei(開催場所名称);
-            entity.setShinsakaiKaisaiChikuCode(開催場所地区コード);
+            entity.setShinsakaiKaisaiChikuCode(開催場所地区コード.value());
             entity.setShinsakaiKaisaiBashoJusho(開催場所住所);
             entity.setShinsakaiKaisaiBashoTelNo(開催場所電話番号);
             entity.setShinsakaiKaisaiBashoJokyo(true);
