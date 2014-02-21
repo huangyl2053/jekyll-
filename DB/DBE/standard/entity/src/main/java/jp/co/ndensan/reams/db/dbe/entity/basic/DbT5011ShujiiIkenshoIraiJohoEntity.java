@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbe.entity.basic;
 
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
@@ -31,7 +32,7 @@ public class DbT5011ShujiiIkenshoIraiJohoEntity implements IDbAccessable {
     private RString shinseishoKanriNo;
     @PrimaryKey
     private int ikenshoIraiRirekiNo;
-    private RString shujiiIryoKikanCode;
+    private KaigoIryoKikanCode shujiiIryoKikanCode;
     private RString ishiShikibetsuNo;
     private RString ikenshoIraiKubun;
     private int ikenshoIraiKaisu;
@@ -133,7 +134,7 @@ public class DbT5011ShujiiIkenshoIraiJohoEntity implements IDbAccessable {
      *
      * @return shujiiIryoKikanCode
      */
-    public RString getShujiiIryoKikanCode() {
+    public KaigoIryoKikanCode getShujiiIryoKikanCode() {
         return shujiiIryoKikanCode;
     }
 
@@ -142,7 +143,7 @@ public class DbT5011ShujiiIkenshoIraiJohoEntity implements IDbAccessable {
      *
      * @param shujiiIryoKikanCode shujiiIryoKikanCode
      */
-    public void setShujiiIryoKikanCode(RString shujiiIryoKikanCode) {
+    public void setShujiiIryoKikanCode(KaigoIryoKikanCode shujiiIryoKikanCode) {
         this.shujiiIryoKikanCode = shujiiIryoKikanCode;
     }
 

@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbe.entity.basic;
 
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
@@ -29,7 +30,7 @@ public class DbT7012ShujiiJohoEntity implements IDbAccessable {
     @PrimaryKey
     private RString shichosonCode;
     @PrimaryKey
-    private RString kaigoIryokikanCode;
+    private KaigoIryoKikanCode kaigoIryokikanCode;
     @PrimaryKey
     private RString kaigoIshiCode;
     private RString iryokikanCode;
@@ -108,7 +109,7 @@ public class DbT7012ShujiiJohoEntity implements IDbAccessable {
      *
      * @return kaigoIryokikanCode
      */
-    public RString getKaigoIryokikanCode() {
+    public KaigoIryoKikanCode getKaigoIryokikanCode() {
         return kaigoIryokikanCode;
     }
 
@@ -117,7 +118,7 @@ public class DbT7012ShujiiJohoEntity implements IDbAccessable {
      *
      * @param kaigoIryokikanCode kaigoIryokikanCode
      */
-    public void setKaigoIryokikanCode(RString kaigoIryokikanCode) {
+    public void setKaigoIryokikanCode(KaigoIryoKikanCode kaigoIryokikanCode) {
         this.kaigoIryokikanCode = kaigoIryokikanCode;
     }
 
