@@ -39,7 +39,8 @@
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
-            <artifactId>testhelper</artifactId>
+            <artifactId>DbzTestHelper</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

@@ -10,11 +10,13 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBasho
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoChikuCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.ShinsakaiKaisaiBashoDacMock;
-import jp.co.ndensan.reams.db.dbztesthelper.DbeTestBase;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
+import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.nullValue;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -31,7 +33,7 @@ public class ShinsakaiKaisaiBashoManagerTest extends DbeTestBase {
 
         private static ShinsakaiKaisaiBashoManager sut;
 
-        @Override
+        @Before
         public void setUp() {
             sut = new ShinsakaiKaisaiBashoManager(new ShinsakaiKaisaiBashoDacMock());
         }
@@ -69,7 +71,7 @@ public class ShinsakaiKaisaiBashoManagerTest extends DbeTestBase {
 
         private static ShinsakaiKaisaiBashoManager sut;
 
-        @Override
+        @Before
         public void setUp() {
             sut = new ShinsakaiKaisaiBashoManager(new ShinsakaiKaisaiBashoDacMock());
         }
@@ -91,7 +93,7 @@ public class ShinsakaiKaisaiBashoManagerTest extends DbeTestBase {
 
         private static ShinsakaiKaisaiBashoManager sut;
 
-        @Override
+        @Before
         public void setUp() {
             sut = new ShinsakaiKaisaiBashoManager(new ShinsakaiKaisaiBashoDacMock());
         }
@@ -115,7 +117,7 @@ public class ShinsakaiKaisaiBashoManagerTest extends DbeTestBase {
 
         private static ShinsakaiKaisaiBashoManager sut;
 
-        @Override
+        @Before
         public void setUp() {
             sut = new ShinsakaiKaisaiBashoManager(new ShinsakaiKaisaiBashoDacMock());
         }

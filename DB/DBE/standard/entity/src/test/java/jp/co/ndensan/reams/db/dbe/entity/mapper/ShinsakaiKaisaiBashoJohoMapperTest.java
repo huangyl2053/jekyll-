@@ -9,10 +9,11 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBasho
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoChikuCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
-import jp.co.ndensan.reams.db.dbztesthelper.DbeTestBase;
+import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -23,9 +24,9 @@ import org.junit.runner.RunWith;
  * @author N1013 松本直樹
  */
 @RunWith(Enclosed.class)
-public class ShinsakaiKaisaiBashoJohoMapperTest extends DbeTestBase {
+public class ShinsakaiKaisaiBashoJohoMapperTest extends TestBase {
 
-    public static class toShinsakaiKaisaiBashoのテスト extends DbeTestBase {
+    public static class toShinsakaiKaisaiBashoのテスト extends TestBase {
 
         private ShinsakaiKaisaiBashoCode 開催場所コード;
         private ShinsakaiKaisaiBashoChikuCode 開催場所地区コード;
@@ -35,7 +36,6 @@ public class ShinsakaiKaisaiBashoJohoMapperTest extends DbeTestBase {
         private ShinsakaiKaisaiBashoJokyo 開催場所状況;
         private ShinsakaiKaisaiBasho sut;
 
-        @Override
         public void setUp() {
             開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
             開催場所地区コード = new ShinsakaiKaisaiBashoChikuCode(new RString("00001"));

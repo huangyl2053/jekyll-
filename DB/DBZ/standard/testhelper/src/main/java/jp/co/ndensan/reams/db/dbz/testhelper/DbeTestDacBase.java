@@ -17,7 +17,7 @@ import org.junit.AfterClass;
 public class DbeTestDacBase extends TestDacBase3 {
 
     @BeforeClass
-    public void setUpClass() {
+    public static void setUpClass() {
         setDummyControlData(new RString("DBE"));
         openMainSession();
     }

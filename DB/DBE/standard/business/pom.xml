@@ -30,10 +30,5 @@
             <artifactId>DbzBusiness</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>ip.co.ndensan.reams.db.dbz</groupId>
-            <artifactId>DbeTestHelper</artifactId>
-            <version>${project.version}</version>
-        </dependency>
     </dependencies>
 </project>
