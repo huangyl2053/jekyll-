@@ -26,6 +26,7 @@ import org.junit.runner.RunWith;
 import static org.hamcrest.CoreMatchers.*;
 
 /**
+ * 主治医意見書作成依頼対象者のビジネスクラスとエンティティの変換を行うMapperのテストクラスです。
  *
  * @author N8187 久保田 英男
  */
