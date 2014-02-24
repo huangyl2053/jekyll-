@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public interface INinteiShinchokuJohoDac {
 
     /**
-     * 要介護認定進捗情報から、認定調査完了年月日が”00000000”のデータを取得する。
+     * 要介護認定進捗情報から、認定調査完了年月日が”00000000”のデータを取得します。
      *
      * @return 要介護認定進捗情報データのリスト
      */
@@ -24,7 +24,7 @@ public interface INinteiShinchokuJohoDac {
     List<DbT5005NinteiShinchokuJohoEntity> select認定調査未完了();
 
     /**
-     * 要介護認定進捗情報から、主治医意見書登録完了年月日が”00000000”のデータを取得する。
+     * 要介護認定進捗情報から、主治医意見書登録完了年月日が”00000000”のデータを取得します。
      *
      * @return 要介護認定進捗情報データのリスト
      */

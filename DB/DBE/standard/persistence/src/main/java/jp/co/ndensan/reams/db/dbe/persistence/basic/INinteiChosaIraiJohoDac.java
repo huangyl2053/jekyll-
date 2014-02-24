@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public interface INinteiChosaIraiJohoDac {
 
     /**
-     * 申請書管理番号と認定調査依頼履歴番号から、認定調査依頼情報を取得する。
+     * 申請書管理番号と認定調査依頼履歴番号から、認定調査依頼情報を取得します。
      *
      * @param 申請書管理番号 申請書管理番号
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
