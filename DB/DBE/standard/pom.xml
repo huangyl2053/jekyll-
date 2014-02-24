@@ -23,4 +23,14 @@
         <module>realservice</module>
         <module>divcontroller</module>
     </modules>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>jp.ndensan.reams.db.dbz</groupId>
+                <artifactId>DbeTestHelper</artifactId>
+                <version>${jp.co.ndensan.reams.dbzVersion}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
