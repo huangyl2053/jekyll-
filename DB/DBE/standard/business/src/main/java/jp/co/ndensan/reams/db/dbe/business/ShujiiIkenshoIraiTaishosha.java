@@ -31,6 +31,7 @@ public class ShujiiIkenshoIraiTaishosha {
     private final RString 氏名;
     private final RString 住所;
     private final KaigoIryoKikan 主治医医療機関;
+    // TODO N8187 久保田英男 主治医は業務クラス(KaigoDoctor)を作成するか検討する。クラスが作成されたら修正を行う。 2014/3月末まで
     private final IDoctor 主治医;
 
     /**
