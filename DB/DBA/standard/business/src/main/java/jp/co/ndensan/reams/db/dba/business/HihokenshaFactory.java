@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.HokenShubetsu;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoShikaku;
+import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.JushochiTokureishaKubun;
+import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.ShikakuHihokenshaKubun;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.ur.urz.business.KaigoShikakuFactory;
@@ -50,10 +52,22 @@ public final class HihokenshaFactory {
                 識別コード, HokenShubetsu.介護保険,
                 資格取得届出年月日, 資格取得年月日, 資格取得事由,
                 null, RDate.MAX, createEmpty資格喪失事由(),
-                被保険者番号.getValue(), 市町村コード.getValue(), null, null, null);
+                被保険者番号.getValue(), 市町村コード.getValue(), null,
+                to資格被保険者区分(被保険者区分), JushochiTokureishaKubun.通常資格者);
 
         return new Hihokensha(介護保険資格, 市町村コード, 資格異動区分, 被保険者区分,
                 null, null, null, null, null, null, null, null, null, false, false, null, false, null);
+    }
+
+    /**
+     * HihokenshaKubunを共通のShikakuHihokenshaKubunへ変換します。
+     *
+     * @param 被保険者区分 被保険者区分
+     * @return HihokenshaKubunに対応するShikakuHihokenshaKubun
+     */
+    //TODO n3327 三浦凌 このメソッドは、コードマスタの内容が確定したら実装する。
+    private static ShikakuHihokenshaKubun to資格被保険者区分(HihokenshaKubun 被保険者区分) {
+        return ShikakuHihokenshaKubun.第１号被保険者;
     }
 
     private static IShikakuSoshitsuJiyu createEmpty資格喪失事由() {

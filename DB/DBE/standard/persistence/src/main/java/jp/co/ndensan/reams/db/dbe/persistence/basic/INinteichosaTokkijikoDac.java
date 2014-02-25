@@ -4,39 +4,41 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5010NinteiChosaTokkijikoEntity;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.IDeletable;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.IInsertable;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.IUpdatable;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5010NinteichosaTokkijikoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.IDeletable;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.IInsertable;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.IUpdatable;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.IReplaceable;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 要介護認定調査特記情報のデータアクセスインターフェースです。
+ * 認定調査特記事項テーブルの情報を取得するDACのインターフェースです。
  *
- * @author N8156 宮本 康
+ * @author n8178 城間篤人
  */
-public interface INinteichosaTokkijikoDac extends
-        IInsertable<DbT5010NinteiChosaTokkijikoEntity>,
-        IUpdatable<DbT5010NinteiChosaTokkijikoEntity>,
-        IDeletable<DbT5010NinteiChosaTokkijikoEntity> {
+public interface INinteichosaTokkijikoDac extends IInsertable<DbT5010NinteichosaTokkijikoEntity>,
+        IUpdatable<DbT5010NinteichosaTokkijikoEntity>, IDeletable<DbT5010NinteichosaTokkijikoEntity>,
+        IReplaceable<DbT5010NinteichosaTokkijikoEntity> {
 
     /**
-     * 引数の条件に該当する要介護認定調査特記情報エンティティを取得します。
+     * 申請書管理番号と認定調査依頼履歴番号を指定して、認定調査特記事項の情報を取得します。
      *
      * @param 申請書管理番号 申請書管理番号
-     * @param 認定調査履歴番号 認定調査履歴番号
-     * @return 要介護認定調査特記情報エンティティ
+     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @return 認定調査特記事項Entity
      */
     @Transaction
-    DbT5010NinteiChosaTokkijikoEntity select(RString 申請書管理番号, int 認定調査履歴番号);
+    List<DbT5010NinteichosaTokkijikoEntity> select(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号);
 
     /**
-     * 引数の要介護認定調査特記情報エンティティを追加、または更新します。
+     * 申請書管理番号を指定して、認定調査特記事項Entityのリストを取得します。
      *
-     * @param entity 要介護認定調査特記情報エンティティ
-     * @return 追加、または更新結果
+     * @param 申請書管理番号 申請書管理番号
+     * @return 認定調査特記事項Entityのリスト
      */
     @Transaction
-    int insertOrUpdate(DbT5010NinteiChosaTokkijikoEntity entity);
+    List<DbT5010NinteichosaTokkijikoEntity> select(ShinseishoKanriNo 申請書管理番号);
 }

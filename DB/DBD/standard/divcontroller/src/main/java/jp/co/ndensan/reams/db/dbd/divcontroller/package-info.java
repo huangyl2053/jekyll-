@@ -1,5 +1,5 @@
 /**
- * DIVコントローラクラスのパッケージです。
+ * Divコントローラクラスのパッケージです。
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller;
 /**

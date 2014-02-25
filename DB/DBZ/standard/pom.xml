@@ -6,17 +6,17 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>DBZ</name>
+
     <parent>
         <groupId>jp.co.ndensan.reams.db</groupId>
         <artifactId>db</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../../</relativePath>
     </parent>
+
     <properties>
-        <jp.co.ndensan.reams.uzVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.uzVersion>
-        <jp.co.ndensan.reams.urVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.urVersion>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
     <modules>
         <module>entity</module>
         <module>business</module>
@@ -25,5 +25,7 @@
         <module>persistence</module>
         <module>realservice</module>
         <module>divcontroller</module>
+        <module>testhelper</module>
     </modules>
+
 </project>

@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.db.dba.entity.mapper.HihokenshaMapper;
 import jp.co.ndensan.reams.db.dba.standard.basic.IHihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.JushochiTokureishaKubun;
+import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.ShikakuHihokenshaKubun;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -48,7 +50,7 @@ public class HihokenshaDaichoManager implements IHihokenshaDaichoManager {
     @Override
     public Hihokensha get被保険者台帳(ShichosonCode 市町村コード, KaigoHihokenshaNo 被保険者番号) {
         DbT1001HihokenshaDaichoEntity entity = dac.select(市町村コード, 被保険者番号);
-        return makeRetrunValueFrom(entity);
+        return HihokenshaMapper.toHihokensha(entity);
     }
 
     @Override
@@ -69,13 +71,7 @@ public class HihokenshaDaichoManager implements IHihokenshaDaichoManager {
         return HihokenshaMapper.toHihokenshaList(entities);
     }
 
-    private Hihokensha makeRetrunValueFrom(final DbT1001HihokenshaDaichoEntity entity) {
-        if (entity == null) {
-            return null;
-        }
-        return HihokenshaMapper.toHihokensha(entity);
-    }
-
+    //TODO n3327 三浦凌　資格被保険者区分、住所地特例者区分 について見直す。
     @Override
     public boolean save(ShichosonCode 市町村コード, IShikibetsuCode 識別コード, HihokenshaKubun 被保険者区分,
             RDate 資格取得届出年月日, RDate 資格取得年月日, IShikakuShutokuJiyu 資格取得事由, RDate 一号年齢到達日) {
