@@ -1,0 +1,169 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbe.business;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoChosainNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
+import static org.hamcrest.CoreMatchers.is;
+import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
+import static org.junit.Assert.assertThat;
+
+/**
+ * 介護認定調査員のコレクションを扱うクラスのテストです。
+ *
+ * @author N8187 久保田 英男
+ */
+@RunWith(Enclosed.class)
+public class KaigoNinteiChosainCollectionTest extends TestBase {
+
+    private static KaigoNinteiChosainCollection sut;
+
+    public static class ConstructorTest extends TestBase {
+
+        @Test(expected = NullPointerException.class)
+        public void 介護認定調査員リストがNullの場合_コンストラクタは_NullPointerExceptionを投げる() {
+            sut = new KaigoNinteiChosainCollection(null);
+        }
+    }
+
+    public static class get介護認定調査員 extends TestBase {
+
+        @Test
+        public void 介護認定調査員が存在する時_get介護認定調査員は_該当の介護医師情報を返す() {
+            sut = createKaigoNinteiChosainList();
+            assertThat(sut.get介護認定調査員(new KaigoJigyoshaNo(new RString("S001")), new KaigoChosainNo(new RString("K00A")))
+                    .get介護事業者番号().value(), is(new RString("S001")));
+        }
+
+        @Test(expected = IllegalArgumentException.class)
+        public void 介護事業者番号が該当しない時_get介護認定調査員は_IllegalArgumentExceptionを投げる() {
+            sut = createKaigoNinteiChosainList();
+            sut.get介護認定調査員(new KaigoJigyoshaNo(new RString("S999")), new KaigoChosainNo(new RString("K00A")));
+        }
+
+        @Test(expected = IllegalArgumentException.class)
+        public void 介護調査員番号が該当しない時_get介護認定調査員は_IllegalArgumentExceptionを投げる() {
+            sut = createKaigoNinteiChosainList();
+            sut.get介護認定調査員(new KaigoJigyoshaNo(new RString("S001")), new KaigoChosainNo(new RString("K999")));
+        }
+    }
+
+    public static class sub介護認定調査員Listで介護事業者番号を指定した場合 extends TestBase {
+
+        @Test
+        public void 介護認定調査員が存在する時_sub介護認定調査員Listは_該当の介護認定調査員を返す() {
+            sut = createKaigoNinteiChosainList();
+            assertThat(sut.sub介護認定調査員List(new KaigoJigyoshaNo(new RString("S001"))).size(), is(1));
+        }
+
+        @Test
+        public void 介護認定調査員が存在しない時_sub介護認定調査員Listは_空のListを返す() {
+            sut = createKaigoNinteiChosainList();
+            assertThat(sut.sub介護認定調査員List(new KaigoJigyoshaNo(new RString("S999"))).size(), is(0));
+        }
+    }
+
+    public static class sub介護認定調査員Listで市町村コードを指定した場合 extends TestBase {
+
+        @Test
+        public void 介護認定調査員が存在する時_sub介護認定調査員Listは_該当の介護認定調査員を返す() {
+            sut = createKaigoNinteiChosainList();
+            assertThat(sut.sub介護認定調査員List(new ShichosonCode(new RString("0001"))).size(), is(3));
+        }
+
+        @Test
+        public void 介護認定調査員が存在しない時_sub介護認定調査員Listは_空のListを返す() {
+            sut = createKaigoNinteiChosainList();
+            assertThat(sut.sub介護認定調査員List(new ShichosonCode(new RString("9999"))).size(), is(0));
+        }
+    }
+
+    public static class sub介護認定調査員Listで市町村コードと介護事業者番号を指定した場合 extends TestBase {
+
+        @Test
+        public void 該当する介護認定調査員が存在する時_sub介護認定調査員Listは_該当の介護認定調査員を返す() {
+            sut = createKaigoNinteiChosainList();
+            assertThat(sut.sub介護認定調査員List(new ShichosonCode(new RString("0001")), new KaigoJigyoshaNo(new RString("S001"))).size(), is(1));
+        }
+
+        @Test
+        public void 該当する介護認定調査員が存在しない時_sub介護認定調査員Listは_空のListを返す() {
+            sut = createKaigoNinteiChosainList();
+            assertThat(sut.sub介護認定調査員List(new ShichosonCode(new RString("9999")), new KaigoJigyoshaNo(new RString("S999"))).size(), is(0));
+        }
+    }
+
+    public static class isEmpty {
+
+        @Test
+        public void 介護認定調査員が存在する時_isEmptyは_FALSEを返す() {
+            sut = createKaigoNinteiChosainList();
+            assertThat(sut.isEmpty(), is(false));
+        }
+
+        @Test
+        public void 介護医師情報が存在しない時_isEmptyは_TRUEを返す() {
+            sut = new KaigoNinteiChosainCollection(new ArrayList<KaigoNinteiChosain>());
+            assertThat(sut.isEmpty(), is(true));
+        }
+    }
+
+    public static class size {
+
+        @Test
+        public void コンストラクタから長さ3のリストを渡されたとき_sizeは3を返す() {
+            sut = createKaigoNinteiChosainList();
+            assertThat(sut.size(), is(3));
+        }
+
+        @Test
+        public void コンストラクタから空のリストを渡されたとき_sizeは0を返す() {
+            sut = new KaigoNinteiChosainCollection(Collections.EMPTY_LIST);
+            assertThat(sut.size(), is(0));
+        }
+    }
+
+    private static KaigoNinteiChosainCollection createKaigoNinteiChosainList() {
+        List<KaigoNinteiChosain> list = new ArrayList<>();
+        list.add(createKaigoNinteiChosain("S001", "K00A"));
+        list.add(createKaigoNinteiChosain("S002", "K00A"));
+        list.add(createKaigoNinteiChosain("S003", "K00B"));
+        return new KaigoNinteiChosainCollection(list);
+    }
+
+    private static KaigoNinteiChosain createKaigoNinteiChosain(String 介護事業者番号, String 介護調査員番号) {
+        return new KaigoNinteiChosain(
+                new ShichosonCode(new RString("0001")),
+                new KaigoJigyoshaNo(new RString(介護事業者番号)),
+                new KaigoChosainNo(new RString(介護調査員番号)),
+                new JigyoshaNo(new RString("0001")),
+                true,
+                new AtenaMeisho(new RString("0001")),
+                new AtenaKanaMeisho(new RString("0001")),
+                Gender.MALE,
+                new Code(new RString("0001")),
+                new ChikuCode(new RString("0001")),
+                new YubinNo(new RString("001")),
+                new AtenaJusho(new RString("0001")),
+                new TelNo(new RString("0001")));
+    }
+}
