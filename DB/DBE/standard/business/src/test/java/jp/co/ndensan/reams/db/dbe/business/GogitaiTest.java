@@ -9,9 +9,8 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummy;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzai;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiMeisho;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
@@ -35,13 +34,13 @@ public class GogitaiTest extends TestBase {
 
         private GogitaiNo 合議体番号;
         private GogitaiMeisho 合議体名称;
-        private Range<RDate> 有効期間;
-        private Range<RTime> 開始終了予定時刻;
+        private Range<FlexibleDate> 有効期間;
+        private Range<RString> 開始終了予定時刻;
         private ShinsakaiKaisaiBasho 審査会開催場所;
         private int 審査会予定定員;
         private int 審査会自動割当定員;
         private int 審査会委員定員;
-        private List<GogitaiWariateIin> 合議体割当審査会委員List;
+        private GogitaiWariateIinList 合議体割当審査会委員List;
         private GogitaiSeishinkaIshiSonzai 精神科医師存在;
         private GogitaiDummy 合議体ダミー;
 
@@ -55,7 +54,7 @@ public class GogitaiTest extends TestBase {
             審査会予定定員 = 5;
             審査会自動割当定員 = 4;
             審査会委員定員 = 6;
-            合議体割当審査会委員List = mock(List.class);
+            合議体割当審査会委員List = mock(GogitaiWariateIinList.class);
             精神科医師存在 = GogitaiSeishinkaIshiSonzai.在籍;
             合議体ダミー = GogitaiDummy.notダミー;
         }

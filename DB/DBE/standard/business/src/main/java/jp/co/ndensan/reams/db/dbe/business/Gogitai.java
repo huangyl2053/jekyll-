@@ -4,16 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummy;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzai;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiMeisho;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 合議体を表すクラスです。
@@ -24,13 +23,13 @@ public class Gogitai {
 
     private final GogitaiNo 合議体番号;
     private final GogitaiMeisho 合議体名称;
-    private final Range<RDate> 有効期間;
-    private final Range<RTime> 開始終了予定時刻;
+    private final Range<FlexibleDate> 有効期間;
+    private final Range<RString> 開始終了予定時刻;
     private final ShinsakaiKaisaiBasho 審査会開催場所;
     private final int 審査会予定定員;
     private final int 審査会自動割当定員;
     private final int 審査会委員定員;
-    private final List<GogitaiWariateIin> 合議体割当審査会委員List;
+    private final GogitaiWariateIinList 合議体割当審査会委員List;
     private final GogitaiSeishinkaIshiSonzai 精神科医師存在;
     private final GogitaiDummy 合議体ダミー;
 
@@ -51,9 +50,9 @@ public class Gogitai {
      * @throws NullPointerException
      * 合議体番号、合議体名称、有効期間、開始終了予定時刻、審査会開催場所のいずれかにnullが渡されたとき
      */
-    public Gogitai(GogitaiNo 合議体番号, GogitaiMeisho 合議体名称, Range<RDate> 有効期間, Range<RTime> 開始終了予定時刻,
+    public Gogitai(GogitaiNo 合議体番号, GogitaiMeisho 合議体名称, Range<FlexibleDate> 有効期間, Range<RString> 開始終了予定時刻,
             ShinsakaiKaisaiBasho 審査会開催場所, int 審査会予定定員, int 審査会自動割当定員, int 審査会委員定員,
-            List<GogitaiWariateIin> 合議体割当審査会委員List, GogitaiSeishinkaIshiSonzai 精神科医存在,
+            GogitaiWariateIinList 合議体割当審査会委員List, GogitaiSeishinkaIshiSonzai 精神科医存在,
             GogitaiDummy 合議体ダミー) throws NullPointerException {
         requireNonNull(合議体番号, Messages.E00003.replace("合議体番号", getClass().getName()).getMessage());
         requireNonNull(合議体名称, Messages.E00003.replace("合議体名称", getClass().getName()).getMessage());
@@ -97,7 +96,7 @@ public class Gogitai {
      *
      * @return 有効期間
      */
-    public Range<RDate> get有効期間() {
+    public Range<FlexibleDate> get有効期間() {
         return 有効期間;
     }
 
@@ -106,7 +105,7 @@ public class Gogitai {
      *
      * @return 開始終了予定時刻
      */
-    public Range<RTime> get開始終了予定時刻() {
+    public Range<RString> get開始終了予定時刻() {
         return 開始終了予定時刻;
     }
 
@@ -151,7 +150,7 @@ public class Gogitai {
      *
      * @return 合議体割当審査会委員List
      */
-    public List<GogitaiWariateIin> get合議体割当審査会委員List() {
+    public GogitaiWariateIinList get合議体割当審査会委員List() {
         return 合議体割当審査会委員List;
     }
 

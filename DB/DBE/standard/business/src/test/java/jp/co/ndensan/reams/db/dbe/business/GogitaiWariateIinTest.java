@@ -23,13 +23,13 @@ public class GogitaiWariateIinTest extends TestBase {
     public static class コンストラクタのテスト extends TestBase {
 
         ShinsakaiIin 委員情報;
-        NinteiChosainKubun 認定調査員区分;
+        ShinsainKubun 認定調査員区分;
         GogitaichoKubun 合議体長区分;
 
         @Override
         public void setUp() {
             委員情報 = mock(ShinsakaiIin.class);
-            認定調査員区分 = mock(NinteiChosainKubun.class);
+            認定調査員区分 = mock(ShinsainKubun.class);
             合議体長区分 = mock(GogitaichoKubun.class);
         }
 

@@ -10,11 +10,11 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**
- * 合議体長区分を表すクラスです。
+ * 審査会開催地区を表すクラスです。
  *
  * @author n8178 城間篤人
  */
-public class GogitaichoKubun implements ICodeAssignedItem {
+public class ShinsakaiKaisaiChiku implements ICodeAssignedItem {
 
     private final RString code;
     private final RString name;
@@ -23,7 +23,7 @@ public class GogitaichoKubun implements ICodeAssignedItem {
     /**
      * デフォルトコンストラクタです。
      */
-    public GogitaichoKubun() {
+    public ShinsakaiKaisaiChiku() {
         this.code = RString.EMPTY;
         this.name = RString.EMPTY;
         this.shortName = RString.EMPTY;
@@ -34,9 +34,9 @@ public class GogitaichoKubun implements ICodeAssignedItem {
      *
      * @param code コード
      * @param name 名称
-     * @throws NullPointerException 引数のいずれかにnullが渡されたとき
+     * @throws NullPointerException 引数のいずれかにNullが渡されたとき
      */
-    public GogitaichoKubun(RString code, RString name) throws NullPointerException {
+    public ShinsakaiKaisaiChiku(RString code, RString name) throws NullPointerException {
         this.code = requireNonNull(code, Messages.E00003.replace("コード", getClass().getName()).getMessage());
         this.name = requireNonNull(name, Messages.E00003.replace("名称", getClass().getName()).getMessage());
         this.shortName = RString.EMPTY;

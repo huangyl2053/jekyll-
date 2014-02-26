@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
 public class GogitaiWariateIin {
 
     private final ShinsakaiIin 委員情報;
-    private final NinteiChosainKubun 認定調査員区分;
+    private final ShinsainKubun 認定調査員区分;
     private final GogitaichoKubun 合議体長区分;
 
     /**
@@ -26,7 +26,7 @@ public class GogitaiWariateIin {
      * @param 合議体長区分 合議体長区分
      * @throws NullPointerException 委員情報にnullが渡されたとき
      */
-    public GogitaiWariateIin(ShinsakaiIin 委員情報, NinteiChosainKubun 認定調査員区分, GogitaichoKubun 合議体長区分)
+    public GogitaiWariateIin(ShinsakaiIin 委員情報, ShinsainKubun 認定調査員区分, GogitaichoKubun 合議体長区分)
             throws NullPointerException {
         requireNonNull(委員情報, Messages.E00003.replace("委員情報", getClass().getName()).getMessage());
 
@@ -49,7 +49,7 @@ public class GogitaiWariateIin {
      *
      * @return 認定調査員区分
      */
-    public NinteiChosainKubun get認定調査員区分() {
+    public ShinsainKubun get認定調査員区分() {
         return 認定調査員区分;
     }
 

@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class NinteiChosainKubunTest extends TestBase {
+public class ShinsainKubunTest extends TestBase {
 
     public static class コンストラクタのテスト extends TestBase {
 
@@ -31,12 +31,12 @@ public class NinteiChosainKubunTest extends TestBase {
 
         @Test(expected = NullPointerException.class)
         public void コードにnullが渡されたとき_NullPointerExceptionが発生する() {
-            NinteiChosainKubun sut = new NinteiChosainKubun(null, name);
+            ShinsainKubun sut = new ShinsainKubun(null, name);
         }
 
         @Test(expected = NullPointerException.class)
         public void 名称にnullが渡されたとき_NullPointerExceptionが発生する() {
-            NinteiChosainKubun sut = new NinteiChosainKubun(code, null);
+            ShinsainKubun sut = new ShinsainKubun(code, null);
         }
     }
 }
