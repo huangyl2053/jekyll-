@@ -17,10 +17,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public interface IShujiiIkenshoIraiTaishoshaDac {
 
     /**
-     * 指定した市町村コードに該当する、主治医意見書登録完了年月日が”00000000”のデータを取得する
+     * 指定した市町村コードに該当する、主治医意見書登録完了年月日が”00000000”のデータを取得します。
      *
      * @param 市町村コード 市町村コード
-     * @return
+     * @return 介護認定進捗情報エンティティ
      */
     @Transaction
     List<DbT5005NinteiShinchokuJohoEntity> select主治医意見書作成依頼対象者(ShichosonCode 市町村コード);

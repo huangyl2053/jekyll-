@@ -38,15 +38,15 @@ public class ShujiiIkenshoIraiTaishosha {
      * コンストラクタです。
      *
      * @param 申請書管理番号 申請書管理番号
-     * @param 市町村コード
-     * @param 被保険者番号
-     * @param 認定申請年月日
-     * @param 認定申請区分
-     * @param 個人情報
-     * @param 氏名
-     * @param 住所
-     * @param 主治医医療機関
-     * @param 主治医
+     * @param 市町村コード 市町村コード
+     * @param 被保険者番号 被保険者番号
+     * @param 認定申請年月日 認定申請年月日
+     * @param 認定申請区分 認定申請区分
+     * @param 個人情報 個人情報
+     * @param 氏名 氏名
+     * @param 住所 住所
+     * @param 主治医医療機関 主治医医療機関
+     * @param 主治医 主治医
      * @throws NullPointerException
      * {@code 申請書管理番号}がnullの場合、{@code 市町村コード}がnullの場合、{@code 被保険者番号}がnullの場合、
      * {@code 認定申請年月日}がnullの場合、{@code 認定申請区分}がnullの場合、{@code 個人情報}がnullの場合、{@code 氏名}がnullの場合

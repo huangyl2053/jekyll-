@@ -22,7 +22,7 @@ public class NinteiShinseiDate implements IDbColumnMappable, IValueObject<Flexib
     /**
      * コンストラクタです。
      *
-     * @param 認定申請年月日
+     * @param 認定申請年月日 認定申請年月日
      */
     public NinteiShinseiDate(FlexibleDate 認定申請年月日) {
         this.認定申請年月日 = requireNonNull(認定申請年月日,

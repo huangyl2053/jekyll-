@@ -23,7 +23,7 @@ public interface IShujiiJohoDac {
      * @param 市町村コード 市町村コード
      * @param 介護医療機関コード 介護医療機関コード
      * @param 医師コード 医師コード
-     * @return　主治医情報エンティティ
+     * @return 主治医情報エンティティ
      */
     @Transaction
     DbT7012ShujiiJohoEntity select(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, IShikibetsuCode 医師コード);
