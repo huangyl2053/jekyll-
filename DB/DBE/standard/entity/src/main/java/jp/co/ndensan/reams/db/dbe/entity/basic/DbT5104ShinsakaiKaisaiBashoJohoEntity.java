@@ -6,14 +6,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
  * DbT5104ShinsakaiKaisaiBashoJohoの項目定義クラスです
  *
- * @author n8178 城間篤人
  */
 public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
@@ -33,7 +31,7 @@ public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
     private RString shinsakaiKaisaiBashoMei;
     private Code shinsakaiKaisaiChikuCode;
     private AtenaJusho shinsakaiKaisaiBashoJusho;
-    private TelNo shinsakaiKaisaiBashoTelNo;
+    private RString shinsakaiKaisaiBashoTelNo;
     private boolean shinsakaiKaisaiBashoJokyo;
 
     /**
@@ -135,6 +133,18 @@ public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
         this.shinsakaiKaisaiChikuCode = shinsakaiKaisaiChikuCode;
     }
 
+    public RString getShinsakaiKaisaiChikuCodeMeisho() {
+        //TODO n8178 城間篤人 コードマスタが作成された後に実装予定
+        //return CodeMaster.getCodeMeisho(new RString("DB"), new RString("100"), shinsakaiKaisaiChikuCode);
+        return new RString("meisho");
+    }
+
+    public RString getShinsakaiKaisaiChikuCodeRyakusho() {
+        //TODO n8178 城間篤人 コードマスタが作成された後に実装予定
+        //return CodeMaster.getCodeRyakusho(new RString("DB"), new RString("100"), shinsakaiKaisaiChikuCode);
+        return new RString("ryakusho");
+    }
+
     /**
      * getShinsakaiKaisaiBashoJusho
      *
@@ -158,7 +168,7 @@ public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
      *
      * @return shinsakaiKaisaiBashoTelNo
      */
-    public TelNo getShinsakaiKaisaiBashoTelNo() {
+    public RString getShinsakaiKaisaiBashoTelNo() {
         return shinsakaiKaisaiBashoTelNo;
     }
 
@@ -167,7 +177,7 @@ public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
      *
      * @param shinsakaiKaisaiBashoTelNo shinsakaiKaisaiBashoTelNo
      */
-    public void setShinsakaiKaisaiBashoTelNo(TelNo shinsakaiKaisaiBashoTelNo) {
+    public void setShinsakaiKaisaiBashoTelNo(RString shinsakaiKaisaiBashoTelNo) {
         this.shinsakaiKaisaiBashoTelNo = shinsakaiKaisaiBashoTelNo;
     }
 
@@ -189,15 +199,4 @@ public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
         this.shinsakaiKaisaiBashoJokyo = shinsakaiKaisaiBashoJokyo;
     }
 // </editor-fold>
-
-    /**
-     * 審査会開催地区の名称をコードマスタから取得します。
-     *
-     * @return 審査会開催地区の名称
-     */
-    public RString getShinsakaiKaisaiChikuName() {
-        //TODO n8178 城間篤人 コードマスタが用意されてから実装予定 2014年3月末
-        //return CodeMaster.getCodeMeisho(new RString("db03"), shinsakaiKaisaiChikuCode.getColumnValue());
-        return new RString("審査会開催地区");
-    }
 }
