@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5008NinteichosaKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5008NinteichosaKekkaJohoEntity;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbAccessor;
+import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5008NinteichosaKekkaJoho.*;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
@@ -26,7 +26,7 @@ public class NinteichosaKekkaJohoDac implements INinteichosaKekkaJohoDac {
 
     @Override
     public DbT5008NinteichosaKekkaJohoEntity select(RString 申請書管理番号, int 認定調査履歴番号) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT5008NinteichosaKekkaJohoEntity> list = accessor.select()
                 .table(DbT5008NinteichosaKekkaJoho.class)
                 .where(and(
@@ -43,24 +43,24 @@ public class NinteichosaKekkaJohoDac implements INinteichosaKekkaJohoDac {
 
     @Override
     public int insert(DbT5008NinteichosaKekkaJohoEntity entity) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.insert(entity).execute();
     }
 
     @Override
     public int update(DbT5008NinteichosaKekkaJohoEntity entity) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.update(entity).execute();
     }
 
     @Override
     public int delete(DbT5008NinteichosaKekkaJohoEntity entity) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.delete(entity).execute();
     }
 
     private int getMatchRowCount(DbT5008NinteichosaKekkaJohoEntity entity) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT5008NinteichosaKekkaJoho.class)
                 .where(and(
