@@ -4,14 +4,17 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosahyoTeigi;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.ChosahyoRegulation;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.ChosahyoItemGroup;
 
 /**
- * 要介護認定調査票の情報を扱うクラスのファクトリークラスです。
+ * 要介護認定調査の調査票情報を扱うクラスのファクトリークラスです。
  *
  * @author N8156 宮本 康
  */
 public final class NinteichosahyoFactory {
+
+    private static final int NENDO_2006 = 2006;
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -20,12 +23,17 @@ public final class NinteichosahyoFactory {
     }
 
     /**
-     * 要介護認定調査票の情報を扱うクラスのインスタンスを生成します。
+     * 要介護認定調査の調査票情報を扱うクラスのインスタンスを生成します。
      *
-     * @param 改定年度 改定年度
-     * @return 要介護認定調査票の情報を扱うクラスのインスタンス
+     * @param 調査票改定年度 調査票改定年度
+     * @return 要介護認定調査の調査票情報を扱うクラスのインスタンス
      */
-    public static Ninteichosahyo createInstance(int 改定年度) {
-        return new Ninteichosahyo(NinteichosahyoTeigi.get調査票定義(改定年度));
+    public static Ninteichosahyo createInstance(int 調査票改定年度) {
+        switch (調査票改定年度) {
+            case NENDO_2006:
+                return new Ninteichosahyo(new ChosahyoRegulation.Of2006().get調査票定義(), ChosahyoItemGroup.Of2006.values());
+            default:
+                return null;
+        }
     }
 }

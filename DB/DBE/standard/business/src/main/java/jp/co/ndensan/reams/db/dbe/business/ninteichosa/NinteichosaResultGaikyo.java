@@ -2,44 +2,38 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business;
+package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 
-import java.util.Map;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.ChosaKomoku;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import static java.util.Objects.requireNonNull;
 
 /**
- * 要介護認定調査結果の情報を保持するクラスです。
+ * 要介護認定調査の調査結果情報（概況調査）を保持するクラスです。
  *
  * @author N8156 宮本 康
  */
-public class NinteichosaKekka {
+public class NinteichosaResultGaikyo {
 
     private final ShinseishoKanriNo 申請書管理番号;
     private final int 要介護認定調査履歴番号;
-    private final ChosaKekkaGaikyo 概況情報;
-    private final Map<ChosaKomoku, RString> 基本情報;
+    private final NinteichosaResultGaikyoKihon 基本情報;
+    private final NinteichosaResultGaikyoService サービス状況;
 
     /**
      * インスタンスを生成します。
      *
      * @param 申請書管理番号 申請書管理番号
      * @param 要介護認定調査履歴番号 要介護認定調査履歴番号
-     * @param 概況情報 概況情報
      * @param 基本情報 基本情報
+     * @param サービス状況 サービス状況
      */
-    public NinteichosaKekka(
-            ShinseishoKanriNo 申請書管理番号,
-            int 要介護認定調査履歴番号,
-            ChosaKekkaGaikyo 概況情報,
-            Map<ChosaKomoku, RString> 基本情報) {
+    public NinteichosaResultGaikyo(
+            ShinseishoKanriNo 申請書管理番号, int 要介護認定調査履歴番号, NinteichosaResultGaikyoKihon 基本情報, NinteichosaResultGaikyoService サービス状況) {
         this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00001.replace("申請書管理番号").getMessage());
         this.要介護認定調査履歴番号 = 要介護認定調査履歴番号;
-        this.概況情報 = requireNonNull(概況情報, Messages.E00001.replace("概況情報").getMessage());
         this.基本情報 = requireNonNull(基本情報, Messages.E00001.replace("基本情報").getMessage());
+        this.サービス状況 = requireNonNull(サービス状況, Messages.E00001.replace("サービス状況").getMessage());
     }
 
     /**
@@ -61,20 +55,20 @@ public class NinteichosaKekka {
     }
 
     /**
-     * 要介護認定調査の概況調査情報を返します。
-     *
-     * @return 概況情報
-     */
-    public ChosaKekkaGaikyo get概況情報() {
-        return 概況情報;
-    }
-
-    /**
-     * 要介護認定調査の基本調査情報を返します。
+     * 要介護認定調査（概況調査）の基本情報を返します。
      *
      * @return 基本情報
      */
-    public Map<ChosaKomoku, RString> get基本情報() {
+    public NinteichosaResultGaikyoKihon get基本情報() {
         return 基本情報;
+    }
+
+    /**
+     * 要介護認定調査（概況調査）のサービス状況に関する情報を返します。
+     *
+     * @return サービス状況
+     */
+    public NinteichosaResultGaikyoService getサービス状況() {
+        return サービス状況;
     }
 }

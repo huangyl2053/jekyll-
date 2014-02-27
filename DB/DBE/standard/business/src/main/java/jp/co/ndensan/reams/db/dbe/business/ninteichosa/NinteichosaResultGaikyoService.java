@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business;
+package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -11,11 +11,11 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ServiceKubun;
 import static java.util.Objects.requireNonNull;
 
 /**
- * 要介護認定調査結果（概況調査サービス状況）の情報を保持するクラスです。
+ * 要介護認定調査の調査結果情報（概況調査サービス状況）を保持するクラスです。
  *
  * @author N8156 宮本 康
  */
-public class ChosaKekkaGaikyoService {
+public class NinteichosaResultGaikyoService {
 
     private final ServiceKubun サービス区分;
     private final int 訪問介護;
@@ -72,7 +72,7 @@ public class ChosaKekkaGaikyoService {
      * @param 市町村特別給付 市町村特別給付
      * @param 介護保険給付以外の在宅サービス 介護保険給付以外の在宅サービス
      */
-    public ChosaKekkaGaikyoService(
+    public NinteichosaResultGaikyoService(
             ServiceKubun サービス区分,
             int 訪問介護,
             int 訪問入浴介護,
