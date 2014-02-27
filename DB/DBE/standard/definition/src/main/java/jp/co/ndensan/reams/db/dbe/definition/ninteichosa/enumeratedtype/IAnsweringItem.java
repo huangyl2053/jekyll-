@@ -7,21 +7,21 @@ package jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 要介護認定調査の調査項目に対する選択肢を扱うインターフェースです。
+ * 回答項目を扱うインターフェースです。
  *
  * @author N8156 宮本 康
  */
-public interface ISentakushi {
+public interface IAnsweringItem {
 
     /**
-     * 選択肢のコードを返します。
+     * 回答項目のコードを返します。
      *
      * @return コード
      */
     RString getCode();
 
     /**
-     * 選択肢の名称を返します。
+     * 回答項目の名称を返します。
      *
      * @return 名称
      */

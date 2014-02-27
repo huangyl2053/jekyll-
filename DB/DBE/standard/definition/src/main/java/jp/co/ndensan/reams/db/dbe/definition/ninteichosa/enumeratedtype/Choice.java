@@ -7,16 +7,16 @@ package jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 要介護認定調査の調査項目に対する選択肢を扱うクラスです。
+ * 要介護認定調査の調査票項目に対する選択肢を扱うクラスです。
  *
  * @author N8156 宮本 康
  */
-public class Sentakushi {
+public class Choice {
 
     /**
      * 「ない／ある」の選択肢を表す列挙型です。
      */
-    public enum NaiAru implements ISentakushi {
+    public enum NaiAru implements IAnsweringItem {
 
         /**
          * 選択肢が「ない」であることを表します。
@@ -34,19 +34,19 @@ public class Sentakushi {
 
         @Override
         public RString getCode() {
-            return new RString(Integer.toString(this.code));
+            return new RString(Integer.toString(code));
         }
 
         @Override
         public RString getName() {
-            return new RString(this.name());
+            return new RString(name());
         }
     }
 
     /**
      * 「ない／ある」の選択肢を表す列挙型です。
      */
-    public enum NaiAru2 implements ISentakushi {
+    public enum NaiAru2 implements IAnsweringItem {
 
         /**
          * 選択肢が「ない」であることを表します。
@@ -68,19 +68,19 @@ public class Sentakushi {
 
         @Override
         public RString getCode() {
-            return new RString(Integer.toString(this.code));
+            return new RString(Integer.toString(code));
         }
 
         @Override
         public RString getName() {
-            return new RString(this.name());
+            return new RString(name());
         }
     }
 
     /**
      * 「できる／できない」の選択肢を表す列挙型です。
      */
-    public enum DekiruDekinai implements ISentakushi {
+    public enum DekiruDekinai implements IAnsweringItem {
 
         /**
          * 選択肢が「できる」であることを表します。
@@ -98,19 +98,19 @@ public class Sentakushi {
 
         @Override
         public RString getCode() {
-            return new RString(Integer.toString(this.code));
+            return new RString(Integer.toString(code));
         }
 
         @Override
         public RString getName() {
-            return new RString(this.name());
+            return new RString(name());
         }
     }
 
     /**
      * 「できる／できない」の選択肢を表す列挙型です。
      */
-    public enum DekiruDekinai2 implements ISentakushi {
+    public enum DekiruDekinai2 implements IAnsweringItem {
 
         /**
          * 選択肢が「できる」であることを表します。
@@ -136,19 +136,19 @@ public class Sentakushi {
 
         @Override
         public RString getCode() {
-            return new RString(Integer.toString(this.code));
+            return new RString(Integer.toString(code));
         }
 
         @Override
         public RString getName() {
-            return new RString(this.name());
+            return new RString(name());
         }
     }
 
     /**
      * 「できる／できない」の選択肢を表す列挙型です。
      */
-    public enum DekiruDekinai3 implements ISentakushi {
+    public enum DekiruDekinai3 implements IAnsweringItem {
 
         /**
          * 選択肢が「できる」であることを表します。
@@ -170,19 +170,19 @@ public class Sentakushi {
 
         @Override
         public RString getCode() {
-            return new RString(Integer.toString(this.code));
+            return new RString(Integer.toString(code));
         }
 
         @Override
         public RString getName() {
-            return new RString(this.name());
+            return new RString(name());
         }
     }
 
     /**
      * 「できる／できない」の選択肢を表す列挙型です。
      */
-    public enum DekiruDekinai4 implements ISentakushi {
+    public enum DekiruDekinai4 implements IAnsweringItem {
 
         /**
          * 選択肢が「できる」であることを表します。
@@ -204,19 +204,19 @@ public class Sentakushi {
 
         @Override
         public RString getCode() {
-            return new RString(Integer.toString(this.code));
+            return new RString(Integer.toString(code));
         }
 
         @Override
         public RString getName() {
-            return new RString(this.name());
+            return new RString(name());
         }
     }
 
     /**
      * 「できる／できない」の選択肢を表す列挙型です。
      */
-    public enum DekiruDekinai5 implements ISentakushi {
+    public enum DekiruDekinai5 implements IAnsweringItem {
 
         /**
          * 選択肢が「できる」であることを表します。
@@ -238,19 +238,19 @@ public class Sentakushi {
 
         @Override
         public RString getCode() {
-            return new RString(Integer.toString(this.code));
+            return new RString(Integer.toString(code));
         }
 
         @Override
         public RString getName() {
-            return new RString(this.name());
+            return new RString(name());
         }
     }
 
     /**
      * 「できる／できない」の選択肢を表す列挙型です。
      */
-    public enum DekiruDekinai6 implements ISentakushi {
+    public enum DekiruDekinai6 implements IAnsweringItem {
 
         /**
          * 選択肢が「できる」であることを表します。
@@ -276,19 +276,19 @@ public class Sentakushi {
 
         @Override
         public RString getCode() {
-            return new RString(Integer.toString(this.code));
+            return new RString(Integer.toString(code));
         }
 
         @Override
         public RString getName() {
-            return new RString(this.name());
+            return new RString(name());
         }
     }
 
     /**
      * 「できる／できない」の選択肢を表す列挙型です。
      */
-    public enum DekiruDekinai7 implements ISentakushi {
+    public enum DekiruDekinai7 implements IAnsweringItem {
 
         /**
          * 選択肢が「できる」であることを表します。
@@ -314,19 +314,19 @@ public class Sentakushi {
 
         @Override
         public RString getCode() {
-            return new RString(Integer.toString(this.code));
+            return new RString(Integer.toString(code));
         }
 
         @Override
         public RString getName() {
-            return new RString(this.name());
+            return new RString(name());
         }
     }
 
     /**
      * 「介助」の選択肢を表す列挙型です。
      */
-    public enum Kaijo implements ISentakushi {
+    public enum Kaijo implements IAnsweringItem {
 
         /**
          * 選択肢が「自立」であることを表します。
@@ -348,19 +348,19 @@ public class Sentakushi {
 
         @Override
         public RString getCode() {
-            return new RString(Integer.toString(this.code));
+            return new RString(Integer.toString(code));
         }
 
         @Override
         public RString getName() {
-            return new RString(this.name());
+            return new RString(name());
         }
     }
 
     /**
      * 「介助」の選択肢を表す列挙型です。
      */
-    public enum Kaijo2 implements ISentakushi {
+    public enum Kaijo2 implements IAnsweringItem {
 
         /**
          * 選択肢が「自立」であることを表します。
@@ -386,19 +386,19 @@ public class Sentakushi {
 
         @Override
         public RString getCode() {
-            return new RString(Integer.toString(this.code));
+            return new RString(Integer.toString(code));
         }
 
         @Override
         public RString getName() {
-            return new RString(this.name());
+            return new RString(name());
         }
     }
 
     /**
      * 「介助」の選択肢を表す列挙型です。
      */
-    public enum Kaijo3 implements ISentakushi {
+    public enum Kaijo3 implements IAnsweringItem {
 
         /**
          * 選択肢が「自立」であることを表します。
@@ -424,19 +424,19 @@ public class Sentakushi {
 
         @Override
         public RString getCode() {
-            return new RString(Integer.toString(this.code));
+            return new RString(Integer.toString(code));
         }
 
         @Override
         public RString getName() {
-            return new RString(this.name());
+            return new RString(name());
         }
     }
 
     /**
      * 「視力」の選択肢を表す列挙型です。
      */
-    public enum Shiryoku implements ISentakushi {
+    public enum Shiryoku implements IAnsweringItem {
 
         /**
          * 選択肢が「普通」であることを表します。
@@ -466,19 +466,19 @@ public class Sentakushi {
 
         @Override
         public RString getCode() {
-            return new RString(Integer.toString(this.code));
+            return new RString(Integer.toString(code));
         }
 
         @Override
         public RString getName() {
-            return new RString(this.name());
+            return new RString(name());
         }
     }
 
     /**
      * 「聴力」の選択肢を表す列挙型です。
      */
-    public enum Choryoku implements ISentakushi {
+    public enum Choryoku implements IAnsweringItem {
 
         /**
          * 選択肢が「普通」であることを表します。
@@ -508,19 +508,19 @@ public class Sentakushi {
 
         @Override
         public RString getCode() {
-            return new RString(Integer.toString(this.code));
+            return new RString(Integer.toString(code));
         }
 
         @Override
         public RString getName() {
-            return new RString(this.name());
+            return new RString(name());
         }
     }
 
     /**
      * 「外出頻度」の選択肢を表す列挙型です。
      */
-    public enum Gaishutsu implements ISentakushi {
+    public enum Gaishutsu implements IAnsweringItem {
 
         /**
          * 選択肢が「週１回以上」であることを表します。
@@ -542,19 +542,19 @@ public class Sentakushi {
 
         @Override
         public RString getCode() {
-            return new RString(Integer.toString(this.code));
+            return new RString(Integer.toString(code));
         }
 
         @Override
         public RString getName() {
-            return new RString(this.name());
+            return new RString(name());
         }
     }
 
     /**
      * 「障害高齢者の日常生活自立度」の調査結果を表す列挙型です。
      */
-    public enum ShogaiKoreishaJiritsu implements ISentakushi {
+    public enum ShogaiKoreishaJiritsu implements IAnsweringItem {
 
         /**
          * 選択肢が「自立」であることを表します。
@@ -600,19 +600,19 @@ public class Sentakushi {
 
         @Override
         public RString getCode() {
-            return new RString(Integer.toString(this.code));
+            return new RString(Integer.toString(code));
         }
 
         @Override
         public RString getName() {
-            return new RString(this.name());
+            return new RString(name());
         }
     }
 
     /**
      * 「認知症高齢者の日常生活自立度」の選択肢を表す列挙型です。
      */
-    public enum NinchishoKoreishaJiritsu implements ISentakushi {
+    public enum NinchishoKoreishaJiritsu implements IAnsweringItem {
 
         /**
          * 選択肢が「自立」であることを表します。
@@ -658,12 +658,12 @@ public class Sentakushi {
 
         @Override
         public RString getCode() {
-            return new RString(Integer.toString(this.code));
+            return new RString(Integer.toString(code));
         }
 
         @Override
         public RString getName() {
-            return new RString(this.name());
+            return new RString(name());
         }
     }
 }
