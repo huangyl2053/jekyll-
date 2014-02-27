@@ -11,10 +11,9 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ServiceKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5008NinteichosaKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5009NinteichosahyoJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5010NinteiChosaTokkijikoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import static jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Sentakushi.*;
+import static jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice.*;
 import static org.mockito.Mockito.spy;
 
 /**
@@ -159,20 +158,6 @@ public class NinteichosaKekkaEntityMock {
         entity.setCk_monitorSokutei(NaiAru.ある.getCode());
         entity.setCk_jokusoShochi(NaiAru.ない.getCode());
         entity.setCk_catheter(NaiAru.ある.getCode());
-        return spy(entity);
-    }
-
-    /**
-     * DbT5010NinteiChosaTokkijikoEntityを生成して返します。
-     *
-     * @return DbT5010NinteiChosaTokkijikoEntity
-     */
-    public static DbT5010NinteiChosaTokkijikoEntity getSpiedDbT5010NinteiChosaTokkijikoEntityInstance() {
-        DbT5010NinteiChosaTokkijikoEntity entity = new DbT5010NinteiChosaTokkijikoEntity();
-        entity.setShinseishoKanriNo(new RString("1234567890"));
-        entity.setNinteichosaRirekiNo(0);
-        entity.setNinteichosaTokkijikoNo(new RString("特記事項番号"));
-        entity.setNinteichosaTokkijiko(new RString("特記事項"));
         return spy(entity);
     }
 }
