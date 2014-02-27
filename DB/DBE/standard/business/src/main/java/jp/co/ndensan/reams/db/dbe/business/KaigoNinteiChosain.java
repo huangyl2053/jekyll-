@@ -26,19 +26,19 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
  */
 public class KaigoNinteiChosain {
 
-    private ShichosonCode 市町村コード;
-    private KaigoJigyoshaNo 介護事業者番号;
-    private KaigoChosainNo 介護調査員番号;
-    private JigyoshaNo 事業者番号;
-    private boolean 調査員状況;
-    private AtenaMeisho 調査員氏名;
-    private AtenaKanaMeisho 調査員氏名カナ;
-    private Gender 性別;
-    private Code 調査員資格コード;
-    private ChikuCode 地区コード;
-    private YubinNo 郵便番号;
-    private AtenaJusho 住所;
-    private TelNo 電話番号;
+    private final ShichosonCode 市町村コード;
+    private final KaigoJigyoshaNo 介護事業者番号;
+    private final KaigoChosainNo 介護調査員番号;
+    private final JigyoshaNo 事業者番号;
+    private final boolean 調査員状況;
+    private final AtenaMeisho 調査員氏名;
+    private final AtenaKanaMeisho 調査員氏名カナ;
+    private final Gender 性別;
+    private final Code 調査員資格コード;
+    private final ChikuCode 地区コード;
+    private final YubinNo 郵便番号;
+    private final AtenaJusho 住所;
+    private final TelNo 電話番号;
 
     /**
      * コンストラクタです。
@@ -56,7 +56,7 @@ public class KaigoNinteiChosain {
      * @param 郵便番号 郵便番号
      * @param 住所 住所
      * @param 電話番号 電話番号
-     * @throws NullPointerException 引数にNULLが渡された場合
+     * @throws NullPointerException 調査員状況および性別以外の引数にNULLが渡された場合
      */
     public KaigoNinteiChosain(ShichosonCode 市町村コード,
             KaigoJigyoshaNo 介護事業者番号,

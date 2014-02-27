@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
  */
 public class KaigoNinteiChosainCollection implements Iterable {
 
-    List<KaigoNinteiChosain> 介護認定調査員List;
+    private final List<KaigoNinteiChosain> 介護認定調査員List;
 
     /**
      * コンストラクタです。

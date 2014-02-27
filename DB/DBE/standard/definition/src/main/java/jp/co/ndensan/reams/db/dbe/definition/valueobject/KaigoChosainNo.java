@@ -24,8 +24,9 @@ public class KaigoChosainNo implements IDbColumnMappable, Comparable<KaigoChosai
      * コンストラクタです。
      *
      * @param 介護調査員番号 介護調査員番号
+     * @throws NullPointerException 引数にnullが渡されたとき
      */
-    public KaigoChosainNo(RString 介護調査員番号) {
+    public KaigoChosainNo(RString 介護調査員番号) throws NullPointerException {
         this.介護調査員番号 = requireNonNull(介護調査員番号, Messages.E00001.replace("介護調査員番号").getMessage());
     }
 

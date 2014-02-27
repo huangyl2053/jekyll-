@@ -27,8 +27,9 @@ public final class KaigoNinteiChosainMapper {
      *
      * @param entity 介護認定調査員Entity
      * @return 介護認定調査員クラス
+     * @throws NullPointerException 引数にNULLが渡された場合
      */
-    public static KaigoNinteiChosain toKaigoNinteiChosain(DbT7013ChosainJohoEntity entity) {
+    public static KaigoNinteiChosain toKaigoNinteiChosain(DbT7013ChosainJohoEntity entity) throws NullPointerException {
         requireNonNull(entity, Messages.E00003.replace("介護認定調査員エンティティ", "介護認定調査員").getMessage());
 
         return new KaigoNinteiChosain(
@@ -52,8 +53,10 @@ public final class KaigoNinteiChosainMapper {
      *
      * @param 介護認定調査員 介護認定調査員クラス
      * @return 介護認定調査員Entity
+     * @throws NullPointerException 引数にNULLが渡された場合
      */
-    public static DbT7013ChosainJohoEntity toKaigoNinteiChosainEntity(KaigoNinteiChosain 介護認定調査員) {
+    public static DbT7013ChosainJohoEntity toKaigoNinteiChosainEntity(KaigoNinteiChosain 介護認定調査員) throws NullPointerException {
+        requireNonNull(介護認定調査員, Messages.E00003.replace("介護認定調査員", "介護認定調査員エンティティ").getMessage());
         DbT7013ChosainJohoEntity entity = new DbT7013ChosainJohoEntity();
         entity.setShichosonCode(介護認定調査員.get市町村コード());
         entity.setKaigoJigyoshaNo(介護認定調査員.get介護事業者番号());
