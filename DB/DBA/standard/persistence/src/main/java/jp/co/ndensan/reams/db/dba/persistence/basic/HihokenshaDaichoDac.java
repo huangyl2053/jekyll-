@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.standard.basic;
+package jp.co.ndensan.reams.db.dba.persistence.basic;
 
 import java.util.Collections;
 import java.util.List;

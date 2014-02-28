@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJoho;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoDoctorEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.ur.urz.entity.Doctor;
+import jp.co.ndensan.reams.ur.urz.entity.basic.UrT0517Ishi;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
@@ -34,7 +34,7 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT7012ShujiiJoho.class)
-                .leftJoin(Doctor.class, using(DbT7012ShujiiJoho.kaigoIshiCode))
+                .leftJoin(UrT0517Ishi.class, using(DbT7012ShujiiJoho.kaigoIshiCode))
                 .where(criteria)
                 .toList(KaigoDoctorEntity.class);
     }
@@ -44,7 +44,7 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT7012ShujiiJoho.class)
-                .leftJoin(Doctor.class, using(DbT7012ShujiiJoho.kaigoIshiCode))
+                .leftJoin(UrT0517Ishi.class, using(DbT7012ShujiiJoho.kaigoIshiCode))
                 .where(and(
                 eq(shichosonCode, 市町村コード),
                 eq(kaigoIryokikanCode, 介護医療機関コード),
@@ -58,7 +58,7 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT7012ShujiiJoho.class)
-                .leftJoin(Doctor.class, using(DbT7012ShujiiJoho.kaigoIshiCode))
+                .leftJoin(UrT0517Ishi.class, using(DbT7012ShujiiJoho.kaigoIshiCode))
                 .where(and(
                 eq(shichosonCode, 市町村コード),
                 eq(kaigoIryokikanCode, 介護医療機関コード),
@@ -72,7 +72,7 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT7012ShujiiJoho.class)
-                .leftJoin(Doctor.class, using(DbT7012ShujiiJoho.kaigoIshiCode))
+                .leftJoin(UrT0517Ishi.class, using(DbT7012ShujiiJoho.kaigoIshiCode))
                 .where(and(
                 eq(shichosonCode, 市町村コード),
                 eq(kaigoIryokikanCode, 介護医療機関コード)))
@@ -84,7 +84,7 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT7012ShujiiJoho.class)
-                .leftJoin(Doctor.class, using(DbT7012ShujiiJoho.kaigoIshiCode))
+                .leftJoin(UrT0517Ishi.class, using(DbT7012ShujiiJoho.kaigoIshiCode))
                 .where(and(
                 eq(shichosonCode, 市町村コード),
                 eq(kaigoIryokikanCode, 介護医療機関コード),
@@ -97,7 +97,7 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT7012ShujiiJoho.class)
-                .leftJoin(Doctor.class, using(DbT7012ShujiiJoho.kaigoIshiCode))
+                .leftJoin(UrT0517Ishi.class, using(DbT7012ShujiiJoho.kaigoIshiCode))
                 .where(eq(shichosonCode, 市町村コード))
                 .toList(KaigoDoctorEntity.class);
     }
@@ -107,7 +107,7 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT7012ShujiiJoho.class)
-                .leftJoin(Doctor.class, using(DbT7012ShujiiJoho.kaigoIshiCode))
+                .leftJoin(UrT0517Ishi.class, using(DbT7012ShujiiJoho.kaigoIshiCode))
                 .where(and(
                 eq(shichosonCode, 市町村コード),
                 eq(shujiiJokyo, 医師の状況.is有効())))

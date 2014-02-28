@@ -8,8 +8,8 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.IDeletable;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.IReplaceable;
+import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
+import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
