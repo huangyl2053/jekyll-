@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCod
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.ShinsakaiKaisaiBashoJohoMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IShinsakaiKaisaiBashoDac;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
 
 /**
@@ -146,7 +147,7 @@ public class ShinsakaiKaisaiBashoManager {
         DbT5104ShinsakaiKaisaiBashoJohoEntity entity = new DbT5104ShinsakaiKaisaiBashoJohoEntity();
         entity.setShinsakaiKaisaiBashoCode(shinsakaiKaisaiBasho.get開催場所コード().getColumnValue());
         entity.setShinsakaiKaisaiBashoMei(shinsakaiKaisaiBasho.get開催場所名称());
-        entity.setShinsakaiKaisaiChikuCode(shinsakaiKaisaiBasho.get開催場所地区コード().getColumnValue());
+        entity.setShinsakaiKaisaiChikuCode(new Code(shinsakaiKaisaiBasho.get開催地区().get地区コード().getColumnValue()));
         entity.setShinsakaiKaisaiBashoJusho(shinsakaiKaisaiBasho.get開催場所住所());
         entity.setShinsakaiKaisaiBashoTelNo(shinsakaiKaisaiBasho.get開催場所電話番号());
         entity.setShinsakaiKaisaiBashoJokyo(shinsakaiKaisaiBasho.get開催場所状況().is有効());

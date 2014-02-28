@@ -7,10 +7,13 @@ package jp.co.ndensan.reams.db.dbe.realservice.helper;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBashoJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoChikuCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiChikuCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IShinsakaiKaisaiBashoDac;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.*;
 
@@ -23,21 +26,21 @@ public class ShinsakaiKaisaiBashoDacMock implements IShinsakaiKaisaiBashoDac {
 
     public static RString 検索不可な開催場所コード = new RString("検索不可");
     private static ShinsakaiKaisaiBashoCode kaisaiBashoCode;
-    private static ShinsakaiKaisaiBashoChikuCode kaisaiBashoChikuCode;
+    private static ShinsakaiKaisaiChikuCode kaisaiBashoChikuCode;
 
     public static DbT5104ShinsakaiKaisaiBashoJohoEntity getSpiedInstance() {
 
         DbT5104ShinsakaiKaisaiBashoJohoEntity entity = new DbT5104ShinsakaiKaisaiBashoJohoEntity();
         kaisaiBashoCode = mock(ShinsakaiKaisaiBashoCode.class);
         kaisaiBashoCode = new ShinsakaiKaisaiBashoCode(new RString("00001"));
-        kaisaiBashoChikuCode = mock(ShinsakaiKaisaiBashoChikuCode.class);
-        kaisaiBashoChikuCode = new ShinsakaiKaisaiBashoChikuCode(new RString("00001"));
+        kaisaiBashoChikuCode = mock(ShinsakaiKaisaiChikuCode.class);
+        kaisaiBashoChikuCode = new ShinsakaiKaisaiChikuCode(new RString("00001"));
 
         entity.setShinsakaiKaisaiBashoCode(new RString("00001"));
         entity.setShinsakaiKaisaiBashoMei(new RString("市役所会議室"));
-        entity.setShinsakaiKaisaiChikuCode(new RString("00001"));
-        entity.setShinsakaiKaisaiBashoJusho(new RString("長野市鶴賀"));
-        entity.setShinsakaiKaisaiBashoTelNo(new RString("026-222-3333"));
+        entity.setShinsakaiKaisaiChikuCode(new Code(new RString("00001")));
+        entity.setShinsakaiKaisaiBashoJusho(new AtenaJusho(new RString("長野市鶴賀")));
+        entity.setShinsakaiKaisaiBashoTelNo(new TelNo(new RString("026-222-3333")));
         entity.setShinsakaiKaisaiBashoJokyo(true);
 
         return spy(entity);
