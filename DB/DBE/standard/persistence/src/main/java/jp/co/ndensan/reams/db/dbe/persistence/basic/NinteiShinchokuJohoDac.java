@@ -39,7 +39,7 @@ public class NinteiShinchokuJohoDac implements INinteiShinchokuJohoDac {
         return accessor
                 .select()
                 .table(DbT5005NinteiShinchokuJoho.class)
-                .where(eq(DbT5005NinteiShinchokuJoho.ikenshoTorokuKanryoYMD, YokaigoninteiDateConstants.主治医意見書登録未完了年月日))
+                .where(eq(DbT5005NinteiShinchokuJoho.ikenshoSakuseiIraiKanryoYMD, YokaigoninteiDateConstants.主治医意見書作成依頼未完了年月日))
                 .toList(DbT5005NinteiShinchokuJohoEntity.class);
     }
 }

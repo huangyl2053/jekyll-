@@ -36,7 +36,7 @@ public class ShujiiIkenshoIraiTaishoshaDac implements IShujiiIkenshoIraiTaishosh
                 .innerJoin(DbT5001NinteiShinseiJoho.class,
                 using(DbT5001NinteiShinseiJoho.shinseishoKanriNo, DbT5005NinteiShinchokuJoho.shinseishoKanriNo))
                 .where(and(eq(DbT5001NinteiShinseiJoho.shichosonCode, 市町村コード),
-                eq(DbT5005NinteiShinchokuJoho.ikenshoTorokuKanryoYMD, YokaigoninteiDateConstants.主治医意見書登録未完了年月日)))
+                eq(DbT5005NinteiShinchokuJoho.ikenshoSakuseiIraiKanryoYMD, YokaigoninteiDateConstants.主治医意見書作成依頼未完了年月日)))
                 .order(by(DbT5005NinteiShinchokuJoho.shinseishoKanriNo, Order.ASC))
                 .toList(DbT5005NinteiShinchokuJohoEntity.class);
     }
