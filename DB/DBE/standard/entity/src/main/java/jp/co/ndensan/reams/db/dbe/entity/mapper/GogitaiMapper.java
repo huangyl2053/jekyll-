@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshi
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiMeisho;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 
 /**
@@ -62,7 +61,7 @@ public final class GogitaiMapper {
      * @param 合議体Entities 合議体Entities
      * @param 開催場所List 開催場所Entities
      * @param 合議体割当委員Lists 合議体割当委員Lists
-     * @return
+     * @return 合議体List
      */
     public static GogitaiList to合議体List(List<DbT5103GogitaiJohoEntity> 合議体Entities,
             List<ShinsakaiKaisaiBasho> 開催場所List, List<GogitaiWariateIinList> 合議体割当委員Lists) {
