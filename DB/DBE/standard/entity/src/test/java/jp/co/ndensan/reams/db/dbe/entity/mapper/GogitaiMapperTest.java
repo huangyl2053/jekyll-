@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiMeisho;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
@@ -36,7 +37,7 @@ import static org.mockito.Mockito.when;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class GogitaiMapperTest extends TestBase {
+public class GogitaiMapperTest {
 
     private static GogitaiNo 合議体番号_1 = new GogitaiNo(1);
     private static GogitaiMeisho 合議体名称_合議体1 = new GogitaiMeisho(new RString("合議体1"));
@@ -50,7 +51,7 @@ public class GogitaiMapperTest extends TestBase {
     private static GogitaiSeishinkaIshiSonzai 精神科医師存在_在籍 = GogitaiSeishinkaIshiSonzai.在籍;
     private static GogitaiDummy 合議体ダミー_notダミー = GogitaiDummy.notダミー;
 
-    public static class to合議体のテスト {
+    public static class to合議体のテスト extends DbeTestBase {
 
         @Test
         public void 引数の合議体Entityにnullが渡されたとき_戻り値はnullになる() {
@@ -149,7 +150,7 @@ public class GogitaiMapperTest extends TestBase {
         }
     }
 
-    public static class to合議体Listのテスト {
+    public static class to合議体Listのテスト extends DbeTestBase {
 
         @Test
         public void 引数の合議体Entitiesにnullが渡されたとき_戻り値はnullになる() {
@@ -177,7 +178,7 @@ public class GogitaiMapperTest extends TestBase {
         }
     }
 
-    public static class to合議体Entityのテスト {
+    public static class to合議体Entityのテスト extends DbeTestBase {
 
         private DbT5103GogitaiJohoEntity sut;
 

@@ -4,8 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -16,14 +17,14 @@ import org.junit.runner.RunWith;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class ShinsainKubunTest extends TestBase {
+public class ShinsainKubunTest {
 
-    public static class コンストラクタのテスト extends TestBase {
+    public static class コンストラクタのテスト extends DbeTestBase {
 
         private RString code;
         private RString name;
 
-        @Override
+        @Before
         public void setUp() {
             code = new RString("0001");
             name = new RString("name");

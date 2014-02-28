@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5102ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5107GogitaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.relate.GogitaiWariateShinsakaiIinEntity;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -30,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -44,7 +44,7 @@ import static org.mockito.Mockito.when;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class GogitaiWariateMapperTest extends TestBase {
+public class GogitaiWariateMapperTest {
 
     private static GogitaiNo 合議体番号_1 = new GogitaiNo(1);
     private static ShinsakaiIinCode 委員コード_iin01 = new ShinsakaiIinCode(new RString("iin01"));
@@ -53,7 +53,7 @@ public class GogitaiWariateMapperTest extends TestBase {
     private static ShinsainKubun 認定調査員区分_iinCode_iinName = new ShinsainKubun(new RString("iinCode"), new RString("iinName"));
     private static GogitaichoKubun 合議体長区分_taichoCode_taichoName = new GogitaichoKubun(new RString("taichoCode"), new RString("taichoName"));
 
-    public static class to合議体割当委員Listのテスト {
+    public static class to合議体割当委員Listのテスト extends DbeTestBase {
 
         private GogitaiWariateIinList sut;
 
@@ -78,7 +78,7 @@ public class GogitaiWariateMapperTest extends TestBase {
         }
     }
 
-    public static class to合議体割当委員のテスト {
+    public static class to合議体割当委員のテスト extends DbeTestBase {
 
         private GogitaiWariateIin sut;
 
@@ -107,7 +107,7 @@ public class GogitaiWariateMapperTest extends TestBase {
         }
     }
 
-    public static class to合議体割当EntityListのテスト {
+    public static class to合議体割当EntityListのテスト extends DbeTestBase {
 
         private List<DbT5107GogitaiWariateIinJohoEntity> sut;
 
@@ -124,7 +124,7 @@ public class GogitaiWariateMapperTest extends TestBase {
         }
     }
 
-    public static class to合議体割当Entityのテスト {
+    public static class to合議体割当Entityのテスト extends DbeTestBase {
 
         private DbT5107GogitaiWariateIinJohoEntity sut;
 

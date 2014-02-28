@@ -10,11 +10,11 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBasho
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiChikuCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -22,11 +22,12 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
+ * 審査会開催場所情報Mapperのテストです。
  *
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class ShinsakaiKaisaiBashoJohoMapperTest extends TestBase {
+public class ShinsakaiKaisaiBashoJohoMapperTest {
 
     private static ShinsakaiKaisaiBashoCode 開催場所コード_A001 = new ShinsakaiKaisaiBashoCode(new RString("A001"));
     private static RString 開催場所名_山田家 = new RString("山田家");
@@ -36,7 +37,7 @@ public class ShinsakaiKaisaiBashoJohoMapperTest extends TestBase {
     private static TelNo 電話番号_0981234567 = new TelNo("0981234567");
     private static ShinsakaiKaisaiBashoJokyo 開催場所状況_有効 = ShinsakaiKaisaiBashoJokyo.有効;
 
-    public static class to審査会開催場所のテスト {
+    public static class to審査会開催場所のテスト extends DbeTestBase {
 
         private ShinsakaiKaisaiBasho sut;
 
@@ -83,7 +84,7 @@ public class ShinsakaiKaisaiBashoJohoMapperTest extends TestBase {
         }
     }
 
-    public static class to審査会開催場所Entityのテスト {
+    public static class to審査会開催場所Entityのテスト extends DbeTestBase {
 
         private DbT5104ShinsakaiKaisaiBashoJohoEntity sut;
 

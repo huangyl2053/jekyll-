@@ -4,10 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+import org.junit.Before;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
@@ -18,15 +19,15 @@ import static org.mockito.Mockito.mock;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class GogitaiWariateIinTest extends TestBase {
+public class GogitaiWariateIinTest {
 
-    public static class コンストラクタのテスト extends TestBase {
+    public static class コンストラクタのテスト extends DbeTestBase {
 
         ShinsakaiIin 委員情報;
         ShinsainKubun 認定調査員区分;
         GogitaichoKubun 合議体長区分;
 
-        @Override
+        @Before
         public void setUp() {
             委員情報 = mock(ShinsakaiIin.class);
             認定調査員区分 = mock(ShinsainKubun.class);

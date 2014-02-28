@@ -4,18 +4,18 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummy;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzai;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiMeisho;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+import org.junit.Before;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
@@ -26,11 +26,11 @@ import static org.mockito.Mockito.mock;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class GogitaiTest extends TestBase {
+public class GogitaiTest {
 
     private static Gogitai sut;
 
-    public static class コンストラクタのテスト extends TestBase {
+    public static class コンストラクタのテスト extends DbeTestBase {
 
         private GogitaiNo 合議体番号;
         private GogitaiMeisho 合議体名称;
@@ -44,7 +44,7 @@ public class GogitaiTest extends TestBase {
         private GogitaiSeishinkaIshiSonzai 精神科医師存在;
         private GogitaiDummy 合議体ダミー;
 
-        @Override
+        @Before
         public void setUp() {
             合議体番号 = new GogitaiNo(1);
             合議体名称 = new GogitaiMeisho(RString.EMPTY);

@@ -4,11 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+import org.junit.Before;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -18,12 +19,12 @@ import org.junit.runner.RunWith;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class GogitaiMeishoTest extends TestBase {
+public class GogitaiMeishoTest {
 
     private static GogitaiMeisho sut1;
     private static GogitaiMeisho sut2;
 
-    public static class コンストラクタのテスト {
+    public static class コンストラクタのテスト extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 引数にnullが渡されたとき_NullPointerExceptionが発生する() {
@@ -31,7 +32,7 @@ public class GogitaiMeishoTest extends TestBase {
         }
     }
 
-    public static class hashCodeのテスト {
+    public static class hashCodeのテスト extends DbeTestBase {
 
         @Test
         public void 同一の合議体名称を持つとき_ハッシュコードが同値になる() {
@@ -41,9 +42,9 @@ public class GogitaiMeishoTest extends TestBase {
         }
     }
 
-    public static class equalsのテスト extends TestBase {
+    public static class equalsのテスト extends DbeTestBase {
 
-        @Override
+        @Before
         public void setUp() {
             sut1 = createGogitaiMeisho("合議体1");
         }

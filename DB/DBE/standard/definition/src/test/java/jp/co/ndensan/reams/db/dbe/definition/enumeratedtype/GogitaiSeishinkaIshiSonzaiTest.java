@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
 
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -17,9 +17,9 @@ import org.junit.runner.RunWith;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class GogitaiSeishinkaIshiSonzaiTest extends TestBase {
+public class GogitaiSeishinkaIshiSonzaiTest {
 
-    public static class toValueのテスト {
+    public static class toValueのテスト extends DbeTestBase {
 
         @Test
         public void 引数にtrueを渡したとき_在籍が返る() {

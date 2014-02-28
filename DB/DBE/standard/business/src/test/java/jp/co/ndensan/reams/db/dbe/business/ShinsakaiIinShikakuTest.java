@@ -4,11 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -18,9 +16,9 @@ import org.junit.runner.RunWith;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class ShinsakaiIinShikakuTest extends TestBase {
+public class ShinsakaiIinShikakuTest {
 
-    public static class コンストラクタのテスト {
+    public static class コンストラクタのテスト extends DbeTestBase {
 
         private static RString code = new RString("code");
         private static RString name = new RString("name");

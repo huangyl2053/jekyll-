@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbe.business;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+import org.junit.Before;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class GogitaiListTest extends TestBase {
+public class GogitaiListTest {
 
     private static GogitaiList sut;
 
@@ -36,9 +36,9 @@ public class GogitaiListTest extends TestBase {
         }
     }
 
-    public static class GogitaiListのテスト extends TestBase {
+    public static class GogitaiListのテスト extends DbeTestBase {
 
-        @Override
+        @Before
         public void setUp() {
             sut = new GogitaiList(createList());
         }
@@ -72,7 +72,7 @@ public class GogitaiListTest extends TestBase {
         }
     }
 
-    public static class isEmptyのテスト {
+    public static class isEmptyのテスト extends DbeTestBase {
 
         @Test
         public void 合議体Listが空であるとき_trueが返る() {
@@ -87,7 +87,7 @@ public class GogitaiListTest extends TestBase {
         }
     }
 
-    public static class sizeのテスト {
+    public static class sizeのテスト extends DbeTestBase {
 
         @Test
         public void 合議体Listが3件の情報を持っている場合_3が返る() {

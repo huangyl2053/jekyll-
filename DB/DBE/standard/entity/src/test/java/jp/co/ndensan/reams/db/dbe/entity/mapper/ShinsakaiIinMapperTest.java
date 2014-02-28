@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5102ShinsakaiIinJohoEntity;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -22,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -34,7 +34,7 @@ import org.junit.runner.RunWith;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class ShinsakaiIinMapperTest extends TestBase {
+public class ShinsakaiIinMapperTest {
 
     private static ShinsakaiIinCode 委員コード_iin01 = new ShinsakaiIinCode(new RString("iin01"));
     private static Range<FlexibleDate> 委員着任期間_19991212_20101212 = new Range(new FlexibleDate("19991212"), new FlexibleDate("20101212"));
@@ -55,7 +55,7 @@ public class ShinsakaiIinMapperTest extends TestBase {
     private static RString 口座名義人カナ_ジロウ = new RString("ジロウ");
     private static RString 口座番号_1237890 = new RString("1237890");
 
-    public static class to審査会委員のテスト {
+    public static class to審査会委員のテスト extends DbeTestBase {
 
         private ShinsakaiIin sut;
 
@@ -180,7 +180,7 @@ public class ShinsakaiIinMapperTest extends TestBase {
         }
     }
 
-    public static class to審査会委員Entityのテスト {
+    public static class to審査会委員Entityのテスト extends DbeTestBase {
 
         private DbT5102ShinsakaiIinJohoEntity sut;
 

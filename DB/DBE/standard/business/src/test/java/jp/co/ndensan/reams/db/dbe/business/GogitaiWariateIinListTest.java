@@ -8,11 +8,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+import org.junit.Before;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
@@ -24,11 +25,11 @@ import static org.mockito.Mockito.when;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class GogitaiWariateIinListTest extends TestBase {
+public class GogitaiWariateIinListTest {
 
     private static GogitaiWariateIinList sut;
 
-    public static class コンストラクタのテスト {
+    public static class コンストラクタのテスト extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 引数にNullが渡されたとき_NullPointerExceptionが発生する() {
@@ -36,9 +37,9 @@ public class GogitaiWariateIinListTest extends TestBase {
         }
     }
 
-    public static class get合議体割当委員のテスト extends TestBase {
+    public static class get合議体割当委員のテスト extends DbeTestBase {
 
-        @Override
+        @Before
         public void setUp() {
             List<GogitaiWariateIin> 合議体割当委員List = new ArrayList<>();
             合議体割当委員List.add(create合議体割当委員("0001"));

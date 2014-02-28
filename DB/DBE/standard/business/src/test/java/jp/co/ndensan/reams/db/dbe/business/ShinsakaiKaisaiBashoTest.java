@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiChikuCod
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import org.junit.Test;
 import static org.junit.Assert.*;

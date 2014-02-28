@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -22,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+import org.junit.Before;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
@@ -32,9 +34,9 @@ import static org.mockito.Mockito.mock;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class ShinsakaiIinTest extends TestBase {
+public class ShinsakaiIinTest {
 
-    public static class コンストラクタのテスト extends TestBase {
+    public static class コンストラクタのテスト extends DbeTestBase {
 
         private ShinsakaiIinCode 委員コード;
         private Range<FlexibleDate> 委員着任期間;
@@ -56,7 +58,7 @@ public class ShinsakaiIinTest extends TestBase {
         private RString 口座番号;
         private ShinsakaiIin sut;
 
-        @Override
+        @Before
         public void setUp() {
             委員コード = new ShinsakaiIinCode(RString.EMPTY);
             委員着任期間 = mock(Range.class);
