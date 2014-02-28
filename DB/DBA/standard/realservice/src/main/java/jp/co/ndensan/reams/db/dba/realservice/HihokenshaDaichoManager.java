@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dba.business.HihokenshaList;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dba.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dba.entity.mapper.HihokenshaMapper;
-import jp.co.ndensan.reams.db.dba.standard.basic.IHihokenshaDaichoDac;
+import jp.co.ndensan.reams.db.dba.persistence.basic.IHihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.JushochiTokureishaKubun;

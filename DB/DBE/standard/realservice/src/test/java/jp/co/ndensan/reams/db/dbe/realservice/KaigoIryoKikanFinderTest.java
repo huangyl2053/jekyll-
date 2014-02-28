@@ -139,10 +139,16 @@ public class KaigoIryoKikanFinderTest extends TestBase {
 
     private static IKaigoIryoKikanDac createDac() {
         IKaigoIryoKikanDac dac = mock(IKaigoIryoKikanDac.class);
-        when(dac.select(any(ShichosonCode.class), any(KaigoIryoKikanCode.class))).thenReturn(create介護医療機関Entity());
-        when(dac.select(any(ShichosonCode.class), any(KaigoIryoKikanCode.class), any(IryoKikanJokyo.class))).thenReturn(create介護医療機関Entity());
-        when(dac.select(any(ShichosonCode.class))).thenReturn(create介護医療機関EntityList(2));
-        when(dac.select(any(ShichosonCode.class), any(IryoKikanJokyo.class))).thenReturn(create介護医療機関EntityList(3));
+
+        KaigoIryoKikanEntity entity = create介護医療機関Entity();
+        when(dac.select(any(ShichosonCode.class), any(KaigoIryoKikanCode.class))).thenReturn(entity);
+        when(dac.select(any(ShichosonCode.class), any(KaigoIryoKikanCode.class), any(IryoKikanJokyo.class))).thenReturn(entity);
+
+        List<KaigoIryoKikanEntity> 介護医療機関リスト_2件 = create介護医療機関EntityList(2);
+        when(dac.select(any(ShichosonCode.class))).thenReturn(介護医療機関リスト_2件);
+
+        List<KaigoIryoKikanEntity> 介護医療機関リスト_3件 = create介護医療機関EntityList(3);
+        when(dac.select(any(ShichosonCode.class), any(IryoKikanJokyo.class))).thenReturn(介護医療機関リスト_3件);
         return dac;
     }
 
