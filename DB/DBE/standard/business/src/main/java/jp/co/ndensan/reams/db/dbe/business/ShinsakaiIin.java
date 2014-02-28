@@ -190,7 +190,7 @@ public class ShinsakaiIin {
     /**
      * 審査委員郵送区分を返します。
      *
-     * @return
+     * @return 審査委員郵送区分
      */
     public RString get審査委員郵送区分() {
         return 審査委員郵送区分;

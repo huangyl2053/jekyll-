@@ -29,6 +29,12 @@ public class GogitaiWariateIinList implements Iterable<GogitaiWariateIin> {
                 Messages.E00003.replace("合議体割当委員List", getClass().getName()).getMessage());
     }
 
+    /**
+     * 審査員コードを指定し、合議体Listから審査会委員を取得します。
+     *
+     * @param 審査会委員コード
+     * @return 合議体に割り当てられた審査会委員
+     */
     public GogitaiWariateIin get合議体割当委員(ShinsakaiIinCode 審査会委員コード) {
         for (GogitaiWariateIin 合議体割当委員 : 合議体割当委員List) {
             if (審査会委員コード.equals(合議体割当委員.get委員情報().get委員コード())) {
