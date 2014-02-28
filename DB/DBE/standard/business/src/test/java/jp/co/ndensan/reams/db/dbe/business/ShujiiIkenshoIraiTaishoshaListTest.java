@@ -31,7 +31,7 @@ import static org.mockito.Mockito.mock;
 @RunWith(Enclosed.class)
 public class ShujiiIkenshoIraiTaishoshaListTest extends TestBase {
 
-    public static class get主治医意見書作成依頼処理対象者_申請書管理番号 extends TestBase {
+    public static class get主治医意見書作成依頼処理対象者 extends TestBase {
 
         @Test
         public void 申請書管理番号に10を指定したとき_申請書管理番号に10を持つ主治医意見書作成依頼対象者が返る() {
@@ -57,14 +57,14 @@ public class ShujiiIkenshoIraiTaishoshaListTest extends TestBase {
         }
     }
 
-    public static class get主治医意見書作成依頼処理対象者_市町村コード extends TestBase {
+    public static class get主治医意見書作成依頼処理対象者List extends TestBase {
 
         @Test
         public void 市町村コードに0001を指定したとき_市町村コードに0001を持つ主治医意見書作成依頼対象者がすべて返る() {
             ShichosonCode 市町村コード = new ShichosonCode((new RString("0001")));
             ShujiiIkenshoIraiTaishoshaList sut =
                     new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
-            assertThat(sut.get主治医意見書作成依頼処理対象者(市町村コード).size(), is(6));
+            assertThat(sut.get主治医意見書作成依頼処理対象者List(市町村コード).size(), is(6));
         }
 
         @Test
@@ -72,14 +72,14 @@ public class ShujiiIkenshoIraiTaishoshaListTest extends TestBase {
             ShichosonCode 市町村コード = new ShichosonCode((new RString("9999")));
             ShujiiIkenshoIraiTaishoshaList sut =
                     new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
-            assertThat(sut.get主治医意見書作成依頼処理対象者(市町村コード).size(), is(0));
+            assertThat(sut.get主治医意見書作成依頼処理対象者List(市町村コード).size(), is(0));
         }
 
         @Test(expected = NullPointerException.class)
         public void 市町村コードにnullを指定したとき_例外が発生する() {
             ShujiiIkenshoIraiTaishoshaList sut =
                     new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
-            sut.get主治医意見書作成依頼処理対象者((ShichosonCode.class).cast(null));
+            sut.get主治医意見書作成依頼処理対象者List((ShichosonCode.class).cast(null));
         }
     }
 
