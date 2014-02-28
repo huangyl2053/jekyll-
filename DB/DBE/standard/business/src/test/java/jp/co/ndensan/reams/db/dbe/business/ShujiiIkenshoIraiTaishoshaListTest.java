@@ -57,14 +57,14 @@ public class ShujiiIkenshoIraiTaishoshaListTest extends TestBase {
         }
     }
 
-    public static class get主治医意見書作成依頼処理対象者List extends TestBase {
+    public static class sub主治医意見書作成依頼処理対象者List extends TestBase {
 
         @Test
         public void 市町村コードに0001を指定したとき_市町村コードに0001を持つ主治医意見書作成依頼対象者がすべて返る() {
             ShichosonCode 市町村コード = new ShichosonCode((new RString("0001")));
             ShujiiIkenshoIraiTaishoshaList sut =
                     new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
-            assertThat(sut.get主治医意見書作成依頼処理対象者List(市町村コード).size(), is(6));
+            assertThat(sut.sub主治医意見書作成依頼処理対象者List(市町村コード).size(), is(6));
         }
 
         @Test
@@ -72,14 +72,14 @@ public class ShujiiIkenshoIraiTaishoshaListTest extends TestBase {
             ShichosonCode 市町村コード = new ShichosonCode((new RString("9999")));
             ShujiiIkenshoIraiTaishoshaList sut =
                     new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
-            assertThat(sut.get主治医意見書作成依頼処理対象者List(市町村コード).size(), is(0));
+            assertThat(sut.sub主治医意見書作成依頼処理対象者List(市町村コード).size(), is(0));
         }
 
         @Test(expected = NullPointerException.class)
         public void 市町村コードにnullを指定したとき_例外が発生する() {
             ShujiiIkenshoIraiTaishoshaList sut =
                     new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
-            sut.get主治医意見書作成依頼処理対象者List((ShichosonCode.class).cast(null));
+            sut.sub主治医意見書作成依頼処理対象者List((ShichosonCode.class).cast(null));
         }
     }
 

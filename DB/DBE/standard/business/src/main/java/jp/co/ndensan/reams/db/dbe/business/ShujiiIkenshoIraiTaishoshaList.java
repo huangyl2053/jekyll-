@@ -58,7 +58,7 @@ public class ShujiiIkenshoIraiTaishoshaList implements Iterable {
      * @return 主治医意見書作成依頼対象者のリスト
      * @throws NullPointerException 引数がNULLのとき
      */
-    public ShujiiIkenshoIraiTaishoshaList get主治医意見書作成依頼処理対象者List(ShichosonCode 市町村コード)
+    public ShujiiIkenshoIraiTaishoshaList sub主治医意見書作成依頼処理対象者List(ShichosonCode 市町村コード)
             throws NullPointerException {
         requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
         List<ShujiiIkenshoIraiTaishosha> list = new ArrayList<>();
