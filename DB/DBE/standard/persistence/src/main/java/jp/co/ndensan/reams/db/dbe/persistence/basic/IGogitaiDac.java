@@ -11,7 +11,8 @@ import jp.co.ndensan.reams.db.dbz.persistence.basic.IDeletable;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.IInsertable;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.IReplaceable;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.IUpdatable;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 合議体情報テーブルのデータを扱うクラスのインターフェースです。
@@ -27,6 +28,7 @@ public interface IGogitaiDac extends IReplaceable<DbT5103GogitaiJohoEntity>, IDe
      * @param 合議体番号 合議体番号
      * @return 合議体EntityのList
      */
+    @Transaction
     List<DbT5103GogitaiJohoEntity> select(GogitaiNo 合議体番号);
 
     /**
@@ -35,5 +37,6 @@ public interface IGogitaiDac extends IReplaceable<DbT5103GogitaiJohoEntity>, IDe
      * @param 年月日 年月日
      * @return 合議体EntityのList
      */
-    List<DbT5103GogitaiJohoEntity> select(RDate 年月日);
+    @Transaction
+    List<DbT5103GogitaiJohoEntity> select(FlexibleDate 年月日);
 }

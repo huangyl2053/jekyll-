@@ -55,22 +55,4 @@ public interface IShinsakaiKaisaiBashoDac
      */
     @Transaction
     List<DbT5104ShinsakaiKaisaiBashoJohoEntity> selectAll(ShinsakaiKaisaiBashoJokyo 開催場所状況);
-
-    /**
-     * 審査会開催場所情報に対し、追加・更新を行います。
-     *
-     * @param entity 審査会開催場所Entity
-     * @return 追加・更新結果
-     */
-    @Transaction
-    int insertOrUpdate(DbT5104ShinsakaiKaisaiBashoJohoEntity entity);
-
-    /**
-     * 指定した審査会開催場所情報の削除を行います。
-     *
-     * @param entity 審査会開催場所Entity
-     * @return 削除結果
-     */
-    @Transaction
-    int delete(DbT5104ShinsakaiKaisaiBashoJohoEntity entity);
 }

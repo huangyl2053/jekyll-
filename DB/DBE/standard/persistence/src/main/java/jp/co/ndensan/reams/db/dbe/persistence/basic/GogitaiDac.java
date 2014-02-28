@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJoho;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJoho.*;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
@@ -23,7 +23,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
 public class GogitaiDac implements IGogitaiDac {
 
     @InjectSession
-    SqlSession session;
+    private SqlSession session;
 
     @Override
     public List<DbT5103GogitaiJohoEntity> select(GogitaiNo 合議体番号) {
@@ -34,7 +34,7 @@ public class GogitaiDac implements IGogitaiDac {
     }
 
     @Override
-    public List<DbT5103GogitaiJohoEntity> select(RDate 年月日) {
+    public List<DbT5103GogitaiJohoEntity> select(FlexibleDate 年月日) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5103GogitaiJoho.class).
                 where(and(leq(gogitaiYukoKikanKaishiYMD, 年月日), leq(年月日, gogitaiYukoKikanShuryoYMD))).
@@ -43,7 +43,6 @@ public class GogitaiDac implements IGogitaiDac {
 
     @Override
     public int insertOrUpdate(DbT5103GogitaiJohoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         //TODO n8178 城間篤人 updateCountから更新か新規か判断できるまで保留 2014年3月
         int updateCount = 1;
         return updateCount == 0 ? insert(entity) : update(entity);

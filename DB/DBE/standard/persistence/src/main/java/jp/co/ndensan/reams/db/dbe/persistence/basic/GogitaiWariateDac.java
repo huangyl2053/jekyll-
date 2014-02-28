@@ -17,11 +17,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 public class GogitaiWariateDac implements IGogitaiWariateDac {
 
     @InjectSession
-    SqlSession session;
+    private SqlSession session;
 
     @Override
     public int insertOrUpdate(DbT5107GogitaiWariateIinJohoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         //TODO n8178 城間篤人 updateCountを扱えるようになってから改めて実装 2014年3月
         int updateCount = 1;
         return updateCount == 0 ? insert(entity) : update(entity);
