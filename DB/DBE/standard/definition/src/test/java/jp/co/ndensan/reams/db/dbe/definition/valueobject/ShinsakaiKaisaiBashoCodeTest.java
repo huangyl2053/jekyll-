@@ -23,14 +23,6 @@ public class ShinsakaiKaisaiBashoCodeTest extends TestBase {
     private static ShinsakaiKaisaiBashoCode sut1;
     private static ShinsakaiKaisaiBashoCode sut2;
 
-    public static class コンストラクタのテスト {
-
-        @Test(expected = NullPointerException.class)
-        public void 引数にnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut1 = new ShinsakaiKaisaiBashoCode(null);
-        }
-    }
-
     public static class hashCodeのテスト {
 
         @Test

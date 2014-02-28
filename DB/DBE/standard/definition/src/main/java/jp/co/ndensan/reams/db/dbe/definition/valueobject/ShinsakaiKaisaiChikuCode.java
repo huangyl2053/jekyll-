@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  *
  * @author N1013 松本直樹
  */
-public class ShinsakaiKaisaiBashoChikuCode implements Comparable<ShinsakaiKaisaiBashoChikuCode>, IDbColumnMappable, IValueObject {
+public class ShinsakaiKaisaiChikuCode implements Comparable<ShinsakaiKaisaiChikuCode>, IDbColumnMappable, IValueObject {
 
     private final RString 審査会開催場所地区コード;
 
@@ -23,7 +23,7 @@ public class ShinsakaiKaisaiBashoChikuCode implements Comparable<ShinsakaiKaisai
      *
      * @param 開催場所地区コード 審査会開催場所地区コード
      */
-    public ShinsakaiKaisaiBashoChikuCode(RString 開催場所地区コード) {
+    public ShinsakaiKaisaiChikuCode(RString 開催場所地区コード) {
         this.審査会開催場所地区コード = 開催場所地区コード;
     }
 
@@ -54,7 +54,7 @@ public class ShinsakaiKaisaiBashoChikuCode implements Comparable<ShinsakaiKaisai
      * @return 被保険者番号が同じ値のときは0。比較対象の方が大きければ、0より小さい値。比較対象の方が小さければ、0より大きい値。
      */
     @Override
-    public int compareTo(ShinsakaiKaisaiBashoChikuCode 比較対象) {
+    public int compareTo(ShinsakaiKaisaiChikuCode 比較対象) {
         return getValue().compareTo(比較対象.getValue());
     }
 
@@ -67,10 +67,10 @@ public class ShinsakaiKaisaiBashoChikuCode implements Comparable<ShinsakaiKaisai
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof ShinsakaiKaisaiBashoChikuCode)) {
+        if (!(obj instanceof ShinsakaiKaisaiChikuCode)) {
             return false;
         }
-        ShinsakaiKaisaiBashoChikuCode 比較対象 = (ShinsakaiKaisaiBashoChikuCode) obj;
+        ShinsakaiKaisaiChikuCode 比較対象 = (ShinsakaiKaisaiChikuCode) obj;
         return (this.compareTo(比較対象) == 0);
     }
 
