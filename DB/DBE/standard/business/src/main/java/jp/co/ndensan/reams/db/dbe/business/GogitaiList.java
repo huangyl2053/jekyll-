@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  *
  * @author n8178 城間篤人
  */
-public class GogitaiList implements Iterable {
+public class GogitaiList implements Iterable<Gogitai> {
 
     private final List<Gogitai> 合議体List;
 
