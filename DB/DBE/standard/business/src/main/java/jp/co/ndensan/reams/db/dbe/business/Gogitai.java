@@ -186,7 +186,7 @@ public class Gogitai {
      *
      * @return ダミーならtrue
      */
-    public boolean isダミー() {
+    public boolean isDummy() {
         return 合議体ダミー.isダミー();
     }
 }
