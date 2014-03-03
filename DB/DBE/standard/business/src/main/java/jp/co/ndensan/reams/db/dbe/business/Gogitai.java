@@ -177,7 +177,7 @@ public class Gogitai {
      *
      * @return 精神科医が存在するならtrue
      */
-    public boolean is精神科医存在() {
+    public boolean has精神科医存在() {
         return 精神科医師存在.is存在();
     }
 
