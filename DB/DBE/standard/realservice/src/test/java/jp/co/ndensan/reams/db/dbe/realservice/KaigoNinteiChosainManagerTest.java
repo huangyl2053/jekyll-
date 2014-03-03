@@ -9,7 +9,9 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosainJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoChosainNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
+import jp.co.ndensan.reams.db.dbe.persistence.INinteichosaItakusakiDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IKaigoNinteiChosainDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,6 +21,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.*;
 import static jp.co.ndensan.reams.db.dbe.realservice.helper.KaigoNinteiChosainTestHelper.*;
+import jp.co.ndensan.reams.db.dbe.realservice.helper.MockNinteichosaItakusakiJohoEntity;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -47,19 +50,19 @@ public class KaigoNinteiChosainManagerTest extends TestBase {
 
         @Test
         public void 引数に該当する介護認定調査員が登録されているとき_市町村コードに001を持つ認定調査員情報が返る() {
-            sut = new KaigoNinteiChosainManager(createMockDac());
+            sut = new KaigoNinteiChosainManager(createMockChosainDac(), createMockItakusakiDac());
             assertThat(sut.get介護認定調査員(市町村コード, 介護事業者番号, 介護調査員番号).get市町村コード().getValue(), is(市町村コード.getValue()));
         }
 
         @Test
         public void 引数に該当する介護認定調査員が登録されているとき_介護事業者番号に002を持つ認定調査員情報が返る() {
-            sut = new KaigoNinteiChosainManager(createMockDac());
+            sut = new KaigoNinteiChosainManager(createMockChosainDac(), createMockItakusakiDac());
             assertThat(sut.get介護認定調査員(市町村コード, 介護事業者番号, 介護調査員番号).get介護事業者番号().value(), is(介護事業者番号.value()));
         }
 
         @Test
         public void 引数に該当する介護認定調査員が登録されているとき_介護調査員番号に003を持つ認定調査員情報が返る() {
-            sut = new KaigoNinteiChosainManager(createMockDac());
+            sut = new KaigoNinteiChosainManager(createMockChosainDac(), createMockItakusakiDac());
             assertThat(sut.get介護認定調査員(市町村コード, 介護事業者番号, 介護調査員番号).get介護調査員番号().value(), is(介護調査員番号.value()));
         }
     }
@@ -76,25 +79,25 @@ public class KaigoNinteiChosainManagerTest extends TestBase {
 
         @Test
         public void 引数に該当する介護認定調査員が登録されているとき_市町村コードに001を持つ認定調査員情報が返る() {
-            sut = new KaigoNinteiChosainManager(createMockDac());
+            sut = new KaigoNinteiChosainManager(createMockChosainDac(), createMockItakusakiDac());
             assertThat(sut.get介護認定調査員(市町村コード, 介護事業者番号, 介護調査員番号, 調査員の状況).get市町村コード().getValue(), is(市町村コード.getValue()));
         }
 
         @Test
         public void 引数に該当する介護認定調査員が登録されているとき_介護事業者番号に002を持つ認定調査員情報が返る() {
-            sut = new KaigoNinteiChosainManager(createMockDac());
+            sut = new KaigoNinteiChosainManager(createMockChosainDac(), createMockItakusakiDac());
             assertThat(sut.get介護認定調査員(市町村コード, 介護事業者番号, 介護調査員番号, 調査員の状況).get介護事業者番号().value(), is(介護事業者番号.value()));
         }
 
         @Test
         public void 引数に該当する介護認定調査員が登録されているとき_介護調査員番号に003を持つ認定調査員情報が返る() {
-            sut = new KaigoNinteiChosainManager(createMockDac());
+            sut = new KaigoNinteiChosainManager(createMockChosainDac(), createMockItakusakiDac());
             assertThat(sut.get介護認定調査員(市町村コード, 介護事業者番号, 介護調査員番号, 調査員の状況).get介護調査員番号().value(), is(介護調査員番号.value()));
         }
 
         @Test
         public void 引数に該当する介護認定調査員が登録されているとき_調査員の状況が有効の認定調査員情報が返る() {
-            sut = new KaigoNinteiChosainManager(createMockDac());
+            sut = new KaigoNinteiChosainManager(createMockChosainDac(), createMockItakusakiDac());
             assertThat(sut.get介護認定調査員(市町村コード, 介護事業者番号, 介護調査員番号, 調査員の状況).get介護調査員番号().value(), is(介護調査員番号.value()));
         }
     }
@@ -109,19 +112,19 @@ public class KaigoNinteiChosainManagerTest extends TestBase {
 
         @Test
         public void 引数に該当する介護認定調査員が登録されていないとき_0件の認定調査員情報Listが返る() {
-            sut = new KaigoNinteiChosainManager(createMockDac(0));
+            sut = new KaigoNinteiChosainManager(createMockChosainDac(0), createMockItakusakiDac());
             assertThat(sut.get介護認定調査員List(市町村コード, 介護事業者番号).isEmpty(), is(true));
         }
 
         @Test
         public void 引数に該当する介護認定調査員が1件登録されているとき_1件の認定調査員情報Listが返る() {
-            sut = new KaigoNinteiChosainManager(createMockDac(1));
+            sut = new KaigoNinteiChosainManager(createMockChosainDac(1), createMockItakusakiDac());
             assertThat(sut.get介護認定調査員List(市町村コード, 介護事業者番号).size(), is(1));
         }
 
         @Test
         public void 引数に該当する介護認定調査員が3件登録されているとき_3件の認定調査員情報Listが返る() {
-            sut = new KaigoNinteiChosainManager(createMockDac(3));
+            sut = new KaigoNinteiChosainManager(createMockChosainDac(3), createMockItakusakiDac());
             assertThat(sut.get介護認定調査員List(市町村コード, 介護事業者番号).size(), is(3));
         }
     }
@@ -137,19 +140,19 @@ public class KaigoNinteiChosainManagerTest extends TestBase {
 
         @Test
         public void 引数に該当する介護認定調査員が登録されていないとき_0件の認定調査員情報Listが返る() {
-            sut = new KaigoNinteiChosainManager(createMockDac(0));
+            sut = new KaigoNinteiChosainManager(createMockChosainDac(0), createMockItakusakiDac());
             assertThat(sut.get介護認定調査員List(市町村コード, 介護事業者番号, 調査員の状況).isEmpty(), is(true));
         }
 
         @Test
         public void 引数に該当する介護認定調査員が1件登録されているとき_1件の認定調査員情報Listが返る() {
-            sut = new KaigoNinteiChosainManager(createMockDac(1));
+            sut = new KaigoNinteiChosainManager(createMockChosainDac(1), createMockItakusakiDac());
             assertThat(sut.get介護認定調査員List(市町村コード, 介護事業者番号, 調査員の状況).size(), is(1));
         }
 
         @Test
         public void 引数に該当する介護認定調査員が3件登録されているとき_3件の認定調査員情報Listが返る() {
-            sut = new KaigoNinteiChosainManager(createMockDac(3));
+            sut = new KaigoNinteiChosainManager(createMockChosainDac(3), createMockItakusakiDac());
             assertThat(sut.get介護認定調査員List(市町村コード, 介護事業者番号, 調査員の状況).size(), is(3));
         }
     }
@@ -164,19 +167,19 @@ public class KaigoNinteiChosainManagerTest extends TestBase {
 
         @Test
         public void 引数に該当する介護認定調査員が登録されていないとき_0件の認定調査員情報Listが返る() {
-            sut = new KaigoNinteiChosainManager(createMockDac(0));
+            sut = new KaigoNinteiChosainManager(createMockChosainDac(0), createMockItakusakiDac());
             assertThat(sut.get介護認定調査員List(市町村コード, 調査員の状況).isEmpty(), is(true));
         }
 
         @Test
         public void 引数に該当する介護認定調査員が1件登録されているとき_1件の認定調査員情報Listが返る() {
-            sut = new KaigoNinteiChosainManager(createMockDac(1));
+            sut = new KaigoNinteiChosainManager(createMockChosainDac(1), createMockItakusakiDac());
             assertThat(sut.get介護認定調査員List(市町村コード, 調査員の状況).size(), is(1));
         }
 
         @Test
         public void 引数に該当する介護認定調査員が3件登録されているとき_3件の認定調査員情報Listが返る() {
-            sut = new KaigoNinteiChosainManager(createMockDac(3));
+            sut = new KaigoNinteiChosainManager(createMockChosainDac(3), createMockItakusakiDac());
             assertThat(sut.get介護認定調査員List(市町村コード, 調査員の状況).size(), is(3));
         }
     }
@@ -190,19 +193,19 @@ public class KaigoNinteiChosainManagerTest extends TestBase {
 
         @Test
         public void 引数に該当する介護認定調査員が登録されていないとき_0件の認定調査員情報Listが返る() {
-            sut = new KaigoNinteiChosainManager(createMockDac(0));
+            sut = new KaigoNinteiChosainManager(createMockChosainDac(0), createMockItakusakiDac());
             assertThat(sut.get介護認定調査員List(市町村コード).isEmpty(), is(true));
         }
 
         @Test
         public void 引数に該当する介護認定調査員が1件登録されているとき_1件の認定調査員情報Listが返る() {
-            sut = new KaigoNinteiChosainManager(createMockDac(1));
+            sut = new KaigoNinteiChosainManager(createMockChosainDac(1), createMockItakusakiDac());
             assertThat(sut.get介護認定調査員List(市町村コード).size(), is(1));
         }
 
         @Test
         public void 引数に該当する介護認定調査員が3件登録されているとき_3件の認定調査員情報Listが返る() {
-            sut = new KaigoNinteiChosainManager(createMockDac(3));
+            sut = new KaigoNinteiChosainManager(createMockChosainDac(3), createMockItakusakiDac());
             assertThat(sut.get介護認定調査員List(市町村コード).size(), is(3));
         }
     }
@@ -211,13 +214,13 @@ public class KaigoNinteiChosainManagerTest extends TestBase {
 
         @Test
         public void saveに成功した場合_trueを返す() {
-            sut = new KaigoNinteiChosainManager(createMockSaveDac(1));
+            sut = new KaigoNinteiChosainManager(createMockSaveDac(1), createMockItakusakiDac());
             assertThat(sut.save(create認定調査員()), is(true));
         }
 
         @Test
         public void saveに失敗した場合_falseを返す() {
-            sut = new KaigoNinteiChosainManager(createMockSaveDac(0));
+            sut = new KaigoNinteiChosainManager(createMockSaveDac(0), createMockItakusakiDac());
             assertThat(sut.save(create認定調査員()), is(false));
         }
 
@@ -232,13 +235,13 @@ public class KaigoNinteiChosainManagerTest extends TestBase {
 
         @Test
         public void removeに成功した場合_trueを返す() {
-            sut = new KaigoNinteiChosainManager(createMockRemoveDac(1));
+            sut = new KaigoNinteiChosainManager(createMockRemoveDac(1), createMockItakusakiDac());
             assertThat(sut.remove(create認定調査員()), is(true));
         }
 
         @Test
         public void removeに失敗した場合_falseを返す() {
-            sut = new KaigoNinteiChosainManager(createMockRemoveDac(0));
+            sut = new KaigoNinteiChosainManager(createMockRemoveDac(0), createMockItakusakiDac());
             assertThat(sut.remove(create認定調査員()), is(false));
         }
 
@@ -249,14 +252,14 @@ public class KaigoNinteiChosainManagerTest extends TestBase {
         }
     }
 
-    private static IKaigoNinteiChosainDac createMockDac() {
+    private static IKaigoNinteiChosainDac createMockChosainDac() {
         IKaigoNinteiChosainDac dac = mock(IKaigoNinteiChosainDac.class);
-        when(dac.select(市町村コード, 介護事業者番号, 介護調査員番号)).thenReturn(createEntity(市町村コード, 介護事業者番号, 介護調査員番号));
-        when(dac.select(市町村コード, 介護事業者番号, 介護調査員番号, 調査員の状況)).thenReturn(createEntity(市町村コード, 介護事業者番号, 介護調査員番号, 調査員の状況));
+        when(dac.select(市町村コード, 介護事業者番号, 介護調査員番号)).thenReturn(createChosainEntity(市町村コード, 介護事業者番号, 介護調査員番号));
+        when(dac.select(市町村コード, 介護事業者番号, 介護調査員番号, 調査員の状況)).thenReturn(createChosainEntity(市町村コード, 介護事業者番号, 介護調査員番号, 調査員の状況));
         return dac;
     }
 
-    private static DbT7013ChosainJohoEntity createEntity(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoChosainNo 介護調査員番号) {
+    private static DbT7013ChosainJohoEntity createChosainEntity(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoChosainNo 介護調査員番号) {
         DbT7013ChosainJohoEntity entity = create認定調査員Entity();
         entity.setShichosonCode(市町村コード);
         entity.setKaigoJigyoshaNo(介護事業者番号);
@@ -264,7 +267,7 @@ public class KaigoNinteiChosainManagerTest extends TestBase {
         return entity;
     }
 
-    private static DbT7013ChosainJohoEntity createEntity(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoChosainNo 介護調査員番号, ChosainJokyo 調査員の状況) {
+    private static DbT7013ChosainJohoEntity createChosainEntity(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoChosainNo 介護調査員番号, ChosainJokyo 調査員の状況) {
         DbT7013ChosainJohoEntity entity = create認定調査員Entity();
         entity.setShichosonCode(市町村コード);
         entity.setKaigoJigyoshaNo(介護事業者番号);
@@ -273,20 +276,31 @@ public class KaigoNinteiChosainManagerTest extends TestBase {
         return entity;
     }
 
-    private static IKaigoNinteiChosainDac createMockDac(int 要素数) {
+    private static IKaigoNinteiChosainDac createMockChosainDac(int 要素数) {
         IKaigoNinteiChosainDac dac = mock(IKaigoNinteiChosainDac.class);
-        when(dac.selectAll(any(ShichosonCode.class), any(KaigoJigyoshaNo.class))).thenReturn(createEntity(要素数));
-        when(dac.selectAll(any(ShichosonCode.class), any(KaigoJigyoshaNo.class), any(ChosainJokyo.class))).thenReturn(createEntity(要素数));
-        when(dac.selectAll(any(ShichosonCode.class), any(ChosainJokyo.class))).thenReturn(createEntity(要素数));
-        when(dac.selectAll(any(ShichosonCode.class))).thenReturn(createEntity(要素数));
+        when(dac.selectAll(any(ShichosonCode.class), any(KaigoJigyoshaNo.class))).thenReturn(createChosainEntity(要素数));
+        when(dac.selectAll(any(ShichosonCode.class), any(KaigoJigyoshaNo.class), any(ChosainJokyo.class))).thenReturn(createChosainEntity(要素数));
+        when(dac.selectAll(any(ShichosonCode.class), any(ChosainJokyo.class))).thenReturn(createChosainEntity(要素数));
+        when(dac.selectAll(any(ShichosonCode.class))).thenReturn(createChosainEntity(要素数));
         return dac;
     }
 
-    private static List<DbT7013ChosainJohoEntity> createEntity(int 要素数) {
+    private static List<DbT7013ChosainJohoEntity> createChosainEntity(int 要素数) {
         List<DbT7013ChosainJohoEntity> list = new ArrayList<>();
         for (int i = 0; i < 要素数; i++) {
             list.add(create認定調査員Entity());
         }
         return list;
+    }
+
+    private static INinteichosaItakusakiDac createMockItakusakiDac() {
+        INinteichosaItakusakiDac dac = mock(INinteichosaItakusakiDac.class);
+        when(dac.select(any(RString.class), any(KaigoJigyoshaNo.class), any(boolean.class))).thenReturn(createItakusakiEntity());
+        return dac;
+    }
+
+    private static DbT7010NinteichosaItakusakiJohoEntity createItakusakiEntity() {
+        DbT7010NinteichosaItakusakiJohoEntity entity = MockNinteichosaItakusakiJohoEntity.getSpiedInstance();
+        return entity;
     }
 }

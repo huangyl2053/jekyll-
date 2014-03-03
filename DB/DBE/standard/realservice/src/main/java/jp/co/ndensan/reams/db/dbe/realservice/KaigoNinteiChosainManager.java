@@ -8,11 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.KaigoNinteiChosain;
 import jp.co.ndensan.reams.db.dbe.business.KaigoNinteiChosainCollection;
+import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosainJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoChosainNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.KaigoNinteiChosainMapper;
+import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaItakusakiMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.INinteichosaItakusakiDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IKaigoNinteiChosainDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
@@ -24,13 +28,15 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
  */
 public class KaigoNinteiChosainManager implements IKaigoNinteiChosainManager {
 
-    private final IKaigoNinteiChosainDac dac;
+    private final IKaigoNinteiChosainDac chosainDac;
+    private final INinteichosaItakusakiDac itakusakiDac;
 
     /**
      * デフォルトコンストラクタです。
      */
     public KaigoNinteiChosainManager() {
-        dac = InstanceCreator.create(IKaigoNinteiChosainDac.class);
+        chosainDac = InstanceCreator.create(IKaigoNinteiChosainDac.class);
+        itakusakiDac = InstanceCreator.create(INinteichosaItakusakiDac.class);
     }
 
     /**
@@ -38,64 +44,71 @@ public class KaigoNinteiChosainManager implements IKaigoNinteiChosainManager {
      *
      * @param dac テスト用DAC
      */
-    KaigoNinteiChosainManager(IKaigoNinteiChosainDac dac) {
-        this.dac = dac;
+    KaigoNinteiChosainManager(IKaigoNinteiChosainDac chosainDac, INinteichosaItakusakiDac itakusakiDac) {
+        this.chosainDac = chosainDac;
+        this.itakusakiDac = itakusakiDac;
     }
 
     @Override
     public KaigoNinteiChosain get介護認定調査員(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoChosainNo 介護調査員番号) {
-        DbT7013ChosainJohoEntity entity = dac.select(市町村コード, 介護事業者番号, 介護調査員番号);
-        return KaigoNinteiChosainMapper.toKaigoNinteiChosain(entity);
+        DbT7013ChosainJohoEntity chosainJohoEntity = chosainDac.select(市町村コード, 介護事業者番号, 介護調査員番号);
+        return KaigoNinteiChosainMapper.toKaigoNinteiChosain(chosainJohoEntity);
     }
 
     @Override
     public KaigoNinteiChosain get介護認定調査員(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoChosainNo 介護調査員番号, ChosainJokyo 調査員の状況) {
-        DbT7013ChosainJohoEntity entity = dac.select(市町村コード, 介護事業者番号, 介護調査員番号, 調査員の状況);
-        return KaigoNinteiChosainMapper.toKaigoNinteiChosain(entity);
+        DbT7013ChosainJohoEntity chosainJohoEntity = chosainDac.select(市町村コード, 介護事業者番号, 介護調査員番号, 調査員の状況);
+        return KaigoNinteiChosainMapper.toKaigoNinteiChosain(chosainJohoEntity);
     }
 
     @Override
     public KaigoNinteiChosainCollection get介護認定調査員List(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号) {
-        List<DbT7013ChosainJohoEntity> entityList = dac.selectAll(市町村コード, 介護事業者番号);
+        List<DbT7013ChosainJohoEntity> entityList = chosainDac.selectAll(市町村コード, 介護事業者番号);
         return create介護認定調査員List(entityList);
     }
 
     @Override
     public KaigoNinteiChosainCollection get介護認定調査員List(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, ChosainJokyo 調査員の状況) {
-        List<DbT7013ChosainJohoEntity> entityList = dac.selectAll(市町村コード, 介護事業者番号, 調査員の状況);
+        List<DbT7013ChosainJohoEntity> entityList = chosainDac.selectAll(市町村コード, 介護事業者番号, 調査員の状況);
         return create介護認定調査員List(entityList);
     }
 
     @Override
     public KaigoNinteiChosainCollection get介護認定調査員List(ShichosonCode 市町村コード, ChosainJokyo 調査員の状況) {
-        List<DbT7013ChosainJohoEntity> entityList = dac.selectAll(市町村コード, 調査員の状況);
+        List<DbT7013ChosainJohoEntity> entityList = chosainDac.selectAll(市町村コード, 調査員の状況);
         return create介護認定調査員List(entityList);
     }
 
     @Override
     public KaigoNinteiChosainCollection get介護認定調査員List(ShichosonCode 市町村コード) {
-        List<DbT7013ChosainJohoEntity> entityList = dac.selectAll(市町村コード);
+        List<DbT7013ChosainJohoEntity> entityList = chosainDac.selectAll(市町村コード);
         return create介護認定調査員List(entityList);
     }
 
     @Override
     public boolean save(KaigoNinteiChosain 介護認定調査員情報) {
         DbT7013ChosainJohoEntity entity = KaigoNinteiChosainMapper.toKaigoNinteiChosainEntity(介護認定調査員情報);
-        return is更新成功(dac.insertOrUpdate(entity));
+        return is更新成功(chosainDac.insertOrUpdate(entity));
     }
 
     @Override
     public boolean remove(KaigoNinteiChosain 介護認定調査員情報) {
         DbT7013ChosainJohoEntity entity = KaigoNinteiChosainMapper.toKaigoNinteiChosainEntity(介護認定調査員情報);
-        return is更新成功(dac.delete(entity));
+        return is更新成功(chosainDac.delete(entity));
     }
 
     private KaigoNinteiChosainCollection create介護認定調査員List(List<DbT7013ChosainJohoEntity> entityList) {
         List<KaigoNinteiChosain> chosainList = new ArrayList<>();
-        for (DbT7013ChosainJohoEntity entity : entityList) {
-            chosainList.add(KaigoNinteiChosainMapper.toKaigoNinteiChosain(entity));
+        List<NinteichosaItakusaki> itakusakiList = new ArrayList<>();
+
+        for (DbT7013ChosainJohoEntity chosainEntity : entityList) {
+            DbT7010NinteichosaItakusakiJohoEntity itakusakiEntity =
+                    itakusakiDac.select(chosainEntity.getShichosonCode().getValue(), chosainEntity.getKaigoJigyoshaNo(), true);
+            chosainList.add(KaigoNinteiChosainMapper.toKaigoNinteiChosain(chosainEntity));
+            itakusakiList.add(NinteichosaItakusakiMapper.toNinteichosaItakusaki(itakusakiEntity));
         }
-        return new KaigoNinteiChosainCollection(chosainList);
+
+        return new KaigoNinteiChosainCollection(chosainList, itakusakiList);
     }
 
     private boolean is更新成功(int 更新件数) {
