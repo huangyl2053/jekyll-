@@ -21,7 +21,7 @@ public class ShinsainKubun implements ICodeAssignedItem {
     private final RString shortName;
 
     /**
-     * デフォルトコンストラクタです。
+     * 空の審査員区分を生成します。
      */
     public ShinsainKubun() {
         this.code = RString.EMPTY;
@@ -30,7 +30,7 @@ public class ShinsainKubun implements ICodeAssignedItem {
     }
 
     /**
-     * 引数からコードと名称を受け取るコンストラクタです。
+     * コードと名称を持つ審査員区分を生成します。
      *
      * @param code コード
      * @param name 名称

@@ -21,7 +21,7 @@ public class ShinsakaiIinShikaku implements ICodeAssignedItem {
     private final RString shortName;
 
     /**
-     * デフォルトコンストラクタです。
+     * 空の審査会委員資格を生成します。
      */
     public ShinsakaiIinShikaku() {
         this.code = RString.EMPTY;
@@ -30,7 +30,7 @@ public class ShinsakaiIinShikaku implements ICodeAssignedItem {
     }
 
     /**
-     * 引数からコードと名称を受け取るコンストラクタです。
+     * コードと名称を持つ審査会委員資格を取得します。
      *
      * @param code コード
      * @param name 名称

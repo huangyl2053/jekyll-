@@ -21,7 +21,7 @@ public class GogitaichoKubun implements ICodeAssignedItem {
     private final RString shortName;
 
     /**
-     * デフォルトコンストラクタです。
+     * 空の合議体長区分を取得します。
      */
     public GogitaichoKubun() {
         this.code = RString.EMPTY;
@@ -30,7 +30,7 @@ public class GogitaichoKubun implements ICodeAssignedItem {
     }
 
     /**
-     * 引数からコードと名称を受け取るコンストラクタです。
+     * コードと名称を持つ合議体長区分を生成します。
      *
      * @param code コード
      * @param name 名称
