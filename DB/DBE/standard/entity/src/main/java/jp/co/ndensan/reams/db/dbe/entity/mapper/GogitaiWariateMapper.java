@@ -40,11 +40,11 @@ public final class GogitaiWariateMapper {
             return null;
         }
 
-        List<GogitaiWariateIin> retList = new ArrayList<>();
+        List<GogitaiWariateIin> 合議体割当委員list = new ArrayList<>();
         for (GogitaiWariateShinsakaiIinEntity 合議体割当委員Entity : 合議体割当委員EntityList) {
-            retList.add(to合議体割当委員(合議体割当委員Entity));
+            合議体割当委員list.add(to合議体割当委員(合議体割当委員Entity));
         }
-        return new GogitaiWariateIinList(retList);
+        return new GogitaiWariateIinList(合議体割当委員list);
     }
 
     /**
@@ -78,11 +78,11 @@ public final class GogitaiWariateMapper {
             return null;
         }
 
-        List<DbT5107GogitaiWariateIinJohoEntity> retList = new ArrayList<>();
+        List<DbT5107GogitaiWariateIinJohoEntity> 合議体割当委員情報EntityList = new ArrayList<>();
         for (GogitaiWariateIin 合議体割当委員 : 合議体.get合議体割当審査会委員List()) {
-            retList.add(to合議体割当Entity(合議体, 合議体割当委員));
+            合議体割当委員情報EntityList.add(to合議体割当Entity(合議体, 合議体割当委員));
         }
-        return retList;
+        return 合議体割当委員情報EntityList;
     }
 
     /**
