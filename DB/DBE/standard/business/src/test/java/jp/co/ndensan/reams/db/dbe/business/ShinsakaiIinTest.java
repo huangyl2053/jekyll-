@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsainYusoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
@@ -19,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -46,7 +46,7 @@ public class ShinsakaiIinTest {
         private AtenaKanaMeisho カナ氏名;
         private Gender 性別;
         private ShinsakaiIinShikaku 審査会委員資格;
-        private RString 審査委員郵送区分;
+        private ShinsainYusoKubun 審査委員郵送区分;
         private YubinNo 郵便番号;
         private AtenaJusho 住所;
         private TelNo 電話番号;
@@ -68,7 +68,7 @@ public class ShinsakaiIinTest {
             カナ氏名 = new AtenaKanaMeisho(RString.EMPTY);
             性別 = Gender.MALE;
             審査会委員資格 = new ShinsakaiIinShikaku();
-            審査委員郵送区分 = RString.EMPTY;
+            審査委員郵送区分 = ShinsainYusoKubun.所属機関;
             郵便番号 = new YubinNo(new RString("123-1234"));
             住所 = new AtenaJusho(RString.EMPTY);
             電話番号 = new TelNo(RString.EMPTY);

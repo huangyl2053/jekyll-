@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinShikaku;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsainYusoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
@@ -44,7 +45,7 @@ public class ShinsakaiIinMapperTest {
     private static AtenaKanaMeisho カナ氏名_タロウ = new AtenaKanaMeisho(new RString("タロウ"));
     private static Gender 性別_MALE = Gender.MALE;
     private static ShinsakaiIinShikaku 審査会委員資格_code_name = new ShinsakaiIinShikaku(new RString("code"), new RString("name"));
-    private static RString 審査委員郵送区分_郵送 = new RString("郵送");
+    private static ShinsainYusoKubun 審査委員郵送区分_自宅 = ShinsainYusoKubun.自宅;
     private static YubinNo 郵便番号_1231234 = new YubinNo("1231234");
     private static AtenaJusho 住所_山田市 = new AtenaJusho(new RString("山田市"));
     private static TelNo 電話番号_0981234567 = new TelNo("0981234567");
@@ -120,9 +121,9 @@ public class ShinsakaiIinMapperTest {
         }
 
         @Test
-        public void 審査委員郵送区分に郵送を持つEntityが渡されたとき_審査委員郵送区分に郵送を持つ審査会委員が返る() {
+        public void 審査委員郵送区分に自宅を持つEntityが渡されたとき_審査委員郵送区分に自宅を持つ審査会委員が返る() {
             sut = ShinsakaiIinMapper.to審査会委員(createEntity());
-            assertThat(sut.get審査委員郵送区分(), is(審査委員郵送区分_郵送));
+            assertThat(sut.get審査委員郵送区分(), is(審査委員郵送区分_自宅));
         }
 
         @Test
@@ -245,9 +246,9 @@ public class ShinsakaiIinMapperTest {
         }
 
         @Test
-        public void 審査委員郵送区分に郵送を持つ審査会委員が渡されたとき_審査委員郵送区分に郵送を持つEntityが返す() {
+        public void 審査委員郵送区分に自宅を持つ審査会委員が渡されたとき_審査委員郵送区分に自宅を持つEntityが返す() {
             sut = ShinsakaiIinMapper.to審査会委員Entity(createShinsakaiIin());
-            assertThat(sut.getShinsainYusoKubun(), is(審査委員郵送区分_郵送));
+            assertThat(sut.getShinsainYusoKubun(), is(審査委員郵送区分_自宅.get郵送区分()));
         }
 
         @Test
@@ -308,7 +309,7 @@ public class ShinsakaiIinMapperTest {
     private static ShinsakaiIin createShinsakaiIin() {
         return new ShinsakaiIin(委員コード_iin01, 委員着任期間_19991212_20101212, 審査会委員状況_有効,
                 事業者番号_jigyo01, 氏名_太郎, カナ氏名_タロウ, 性別_MALE, 審査会委員資格_code_name,
-                審査委員郵送区分_郵送, 郵便番号_1231234, 住所_山田市, 電話番号_0981234567, 金融機関コード_01,
+                審査委員郵送区分_自宅, 郵便番号_1231234, 住所_山田市, 電話番号_0981234567, 金融機関コード_01,
                 金融機関支店コード_011, 口座種別_普通, 口座名義人_次郎, 口座名義人カナ_ジロウ, 口座番号_1237890);
     }
 
@@ -323,7 +324,7 @@ public class ShinsakaiIinMapperTest {
         委員Entity.setShinsakaiIinKanaShimei(カナ氏名_タロウ);
         委員Entity.setSeibetsu(性別_MALE.getCode());
         委員Entity.setShinsakaiIinShikakuCode(new Code(審査会委員資格_code_name.getCode()));
-        委員Entity.setShinsainYusoKubun(審査委員郵送区分_郵送);
+        委員Entity.setShinsainYusoKubun(審査委員郵送区分_自宅.get郵送区分());
         委員Entity.setYubinNo(郵便番号_1231234);
         委員Entity.setJusho(住所_山田市);
         委員Entity.setTelNo(電話番号_0981234567);

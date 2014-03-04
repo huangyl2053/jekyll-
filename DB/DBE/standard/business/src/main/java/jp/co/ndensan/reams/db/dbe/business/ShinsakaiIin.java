@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsainYusoKubun;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 
@@ -37,7 +38,7 @@ public class ShinsakaiIin {
     private final AtenaKanaMeisho カナ氏名;
     private final Gender 性別;
     private final ShinsakaiIinShikaku 審査会委員資格;
-    private final RString 審査委員郵送区分;
+    private final ShinsainYusoKubun 審査委員郵送区分;
     private final YubinNo 郵便番号;
     private final AtenaJusho 住所;
     private final TelNo 電話番号;
@@ -73,7 +74,7 @@ public class ShinsakaiIin {
      */
     public ShinsakaiIin(ShinsakaiIinCode 委員コード, Range<FlexibleDate> 委員着任期間, ShinsakaiIinJokyo 審査会委員状況,
             JigyoshaNo 事業者番号, AtenaMeisho 氏名, AtenaKanaMeisho カナ氏名, Gender 性別, ShinsakaiIinShikaku 審査会委員資格,
-            RString 審査委員郵送区分, YubinNo 郵便番号, AtenaJusho 住所, TelNo 電話番号, KinyuKikanCode 金融機関コード,
+            ShinsainYusoKubun 審査委員郵送区分, YubinNo 郵便番号, AtenaJusho 住所, TelNo 電話番号, KinyuKikanCode 金融機関コード,
             KinyuKikanShitenCode 金融機関支店コード, RString 口座種別, RString 口座名義人, RString 口座名義人カナ, RString 口座番号)
             throws NullPointerException {
         requireNonNull(委員コード, Messages.E00003.replace("委員コード", getClass().getName()).getMessage());
@@ -192,7 +193,7 @@ public class ShinsakaiIin {
      *
      * @return 審査委員郵送区分
      */
-    public RString get審査委員郵送区分() {
+    public ShinsainYusoKubun get審査委員郵送区分() {
         return 審査委員郵送区分;
     }
 

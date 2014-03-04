@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIinList;
 import jp.co.ndensan.reams.db.dbe.business.GogitaichoKubun;
 import jp.co.ndensan.reams.db.dbe.business.ShinsainKubun;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIin;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsainYusoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
@@ -216,7 +217,7 @@ public class GogitaiWariateMapperTest {
         委員Entity.setShinsakaiIinKanaShimei(new AtenaKanaMeisho(RString.EMPTY));
         委員Entity.setSeibetsu(Gender.FEMALE.getCode());
         委員Entity.setShinsakaiIinShikakuCode(new Code(RString.EMPTY));
-        委員Entity.setShinsainYusoKubun(RString.EMPTY);
+        委員Entity.setShinsainYusoKubun(ShinsainYusoKubun.自宅.get郵送区分());
         委員Entity.setYubinNo(new YubinNo(new RString("123-1234")));
         委員Entity.setJusho(new AtenaJusho(RString.EMPTY));
         委員Entity.setTelNo(new TelNo(RString.EMPTY));

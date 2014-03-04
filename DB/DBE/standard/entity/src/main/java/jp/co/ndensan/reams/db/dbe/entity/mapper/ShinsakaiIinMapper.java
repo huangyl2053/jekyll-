@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinShikaku;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsainYusoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5102ShinsakaiIinJohoEntity;
@@ -45,9 +46,9 @@ public final class ShinsakaiIinMapper {
                 委員Entity.getJigyoushaNo(), 委員Entity.getShinsakaiIinShimei(), 委員Entity.getShinsakaiIinKanaShimei(),
                 Gender.toValue(委員Entity.getSeibetsu()),
                 new ShinsakaiIinShikaku(委員Entity.getShinsakaiIinShikakuCode().getColumnValue(), 委員Entity.getShinsakaiIinShikakuName()),
-                委員Entity.getShinsainYusoKubun(), 委員Entity.getYubinNo(), 委員Entity.getJusho(), 委員Entity.getTelNo(),
-                委員Entity.getKinyuKikanCode(), 委員Entity.getKinyuKikanShitenCode(), 委員Entity.getKozaShubetsu(),
-                委員Entity.getKozaMeigi(), 委員Entity.getKozaMeigiKana(), 委員Entity.getKozaNo());
+                ShinsainYusoKubun.toValue(委員Entity.getShinsainYusoKubun()), 委員Entity.getYubinNo(), 委員Entity.getJusho(),
+                委員Entity.getTelNo(), 委員Entity.getKinyuKikanCode(), 委員Entity.getKinyuKikanShitenCode(),
+                委員Entity.getKozaShubetsu(), 委員Entity.getKozaMeigi(), 委員Entity.getKozaMeigiKana(), 委員Entity.getKozaNo());
     }
 
     /**
@@ -72,7 +73,7 @@ public final class ShinsakaiIinMapper {
         委員Entity.setShinsakaiIinKanaShimei(審査会委員.getカナ氏名());
         委員Entity.setSeibetsu(審査会委員.get性別().getCommonName());
         委員Entity.setShinsakaiIinShikakuCode(new Code(審査会委員.get審査会委員資格().getCode()));
-        委員Entity.setShinsainYusoKubun(審査会委員.get審査委員郵送区分());
+        委員Entity.setShinsainYusoKubun(審査会委員.get審査委員郵送区分().get郵送区分());
         委員Entity.setYubinNo(審査会委員.get郵便番号());
         委員Entity.setJusho(審査会委員.get住所());
         委員Entity.setTelNo(審査会委員.get電話番号());
