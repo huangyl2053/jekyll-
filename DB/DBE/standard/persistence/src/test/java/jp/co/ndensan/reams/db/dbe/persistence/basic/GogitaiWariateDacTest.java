@@ -52,12 +52,6 @@ public class GogitaiWariateDacTest {
             int result = sut.update(create合議体割当Entity(1, "A0001", "19990101", "20010101"));
             assertThat(result, is(1));
         }
-
-        @Test
-        public void updateしようとした項目が存在しない場合_失敗し0が返る() {
-            int result = sut.update(create合議体割当Entity(1, "A0001", "19990101", "20010101"));
-            assertThat(result, is(0));
-        }
     }
 
     public static class deleteのテスト extends DbeTestDacBase {
@@ -67,12 +61,6 @@ public class GogitaiWariateDacTest {
             sut.insert(create合議体割当Entity(1, "A0001", "19990101", "99999999"));
             int result = sut.delete(create合議体割当Entity(1, "A0001", "19990101", "99999999"));
             assertThat(result, is(1));
-        }
-
-        @Test
-        public void deleteしようとした項目が存在しない場合_失敗し0が返る() {
-            int result = sut.delete(create合議体割当Entity(1, "A0001", "19990101", "99999999"));
-            assertThat(result, is(0));
         }
     }
 

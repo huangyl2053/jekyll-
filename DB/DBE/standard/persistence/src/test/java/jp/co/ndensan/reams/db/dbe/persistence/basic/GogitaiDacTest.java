@@ -104,9 +104,10 @@ public class GogitaiDacTest {
         }
 
         @Test
-        public void updateしようとした項目が存在しない場合_失敗し0が返る() {
-            int result = sut.update(create合議体Entity(1, "19990101", "20010101", "合議体01"));
-            assertThat(result, is(0));
+        public void updateに成功し_selectで取得した合議体の終了年月日が_20010101に変更される() {
+            sut.insert(create合議体Entity(1, "19990101", "99999999", "合議体01"));
+            sut.update(create合議体Entity(1, "19990101", "20010101", "合議体01"));
+            assertThat(sut.select(new GogitaiNo(1)).get(0).getGogitaiYukoKikanShuryoYMD(), is(new FlexibleDate("20010101")));
         }
     }
 
@@ -120,16 +121,10 @@ public class GogitaiDacTest {
         }
 
         @Test
-        public void deleteに成功した場合_挿入したデータの論理削除フラグがtrueになる() {
+        public void deleteに成功した場合_selectで取得できない() {
             sut.insert(create合議体Entity(1, "19990101", "99999999", "合議体01"));
             sut.delete(create合議体Entity(1, "19990101", "99999999", "合議体01"));
-            assertThat(sut.select(new GogitaiNo(1)).get(0).getIsDeleted(), is(true));
-        }
-
-        @Test
-        public void deleteしようとした項目が存在しない場合_失敗し0が返る() {
-            int result = sut.delete(create合議体Entity(1, "19990101", "99999999", "合議体01"));
-            assertThat(result, is(0));
+            assertThat(sut.select(new GogitaiNo(1)).size(), is(0));
         }
     }
 
