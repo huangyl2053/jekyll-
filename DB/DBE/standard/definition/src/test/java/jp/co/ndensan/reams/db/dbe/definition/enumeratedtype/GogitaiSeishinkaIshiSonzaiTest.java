@@ -22,8 +22,8 @@ public class GogitaiSeishinkaIshiSonzaiTest {
     public static class toValueのテスト extends DbeTestBase {
 
         @Test
-        public void 引数にtrueを渡したとき_在籍が返る() {
-            assertThat(GogitaiSeishinkaIshiSonzai.toValue(true), is(GogitaiSeishinkaIshiSonzai.在籍));
+        public void 引数にtrueを渡したとき_存在が返る() {
+            assertThat(GogitaiSeishinkaIshiSonzai.toValue(true), is(GogitaiSeishinkaIshiSonzai.存在));
         }
 
         @Test

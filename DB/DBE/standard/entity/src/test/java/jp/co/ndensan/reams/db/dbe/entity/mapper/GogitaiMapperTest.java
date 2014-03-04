@@ -48,7 +48,7 @@ public class GogitaiMapperTest {
     private static int 審査会自動割当定員_6 = 6;
     private static int 審査会委員定員_7 = 7;
     private static GogitaiWariateIinList 合議体割当審査会委員List_3件 = create合議体割当委員ListMock(3);
-    private static GogitaiSeishinkaIshiSonzai 精神科医師存在_在籍 = GogitaiSeishinkaIshiSonzai.在籍;
+    private static GogitaiSeishinkaIshiSonzai 精神科医師存在_存在 = GogitaiSeishinkaIshiSonzai.存在;
     private static GogitaiDummyKubun 合議体ダミー_notダミー = GogitaiDummyKubun.notダミー;
 
     public static class to合議体のテスト extends DbeTestBase {
@@ -138,13 +138,13 @@ public class GogitaiMapperTest {
         }
 
         @Test
-        public void 精神科医師存在の在籍を持つEntityを引数に指定した場合_精神科医師存在の在籍を持つ合議体が返る() {
+        public void 精神科医師が存在するEntityを引数に指定した場合_精神科医師が存在する合議体が返る() {
             Gogitai sut = GogitaiMapper.to合議体(createEntity(), 審査会開催場所_山田家001, 合議体割当審査会委員List_3件);
-            assertThat(sut.get精神科医師存在(), is(精神科医師存在_在籍));
+            assertThat(sut.get精神科医師存在(), is(精神科医師存在_存在));
         }
 
         @Test
-        public void 合議体ダミーのnotダミーを持つEntityを引数に指定した場合_合議体ダミーのnotダミーを持つ合議体が返る() {
+        public void 合議体がダミーで無いことを示すEntityを引数に指定した場合_ダミーではない合議体が返る() {
             Gogitai sut = GogitaiMapper.to合議体(createEntity(), 審査会開催場所_山田家001, 合議体割当審査会委員List_3件);
             assertThat(sut.get合議体ダミー(), is(合議体ダミー_notダミー));
         }
@@ -249,13 +249,13 @@ public class GogitaiMapperTest {
         }
 
         @Test
-        public void 精神科医師存在の在籍を持つ合議体を引数に指定した場合_精神科医師存在の在籍を持つ合議体Entityが返る() {
+        public void 精神科医師が存在する合議体を引数に指定した場合_精神科医師が存在することを示す合議体Entityが返る() {
             sut = GogitaiMapper.to合議体Entity(createGogitai());
-            assertThat(sut.getGogitaiSeishinkaSonzaiFlag(), is(精神科医師存在_在籍.is存在()));
+            assertThat(sut.getGogitaiSeishinkaSonzaiFlag(), is(精神科医師存在_存在.is存在()));
         }
 
         @Test
-        public void 合議体ダミーのnotダミーを持つ合議体を引数に指定した場合_合議体ダミーのnotダミーを持つ合議体Entityが返る() {
+        public void ダミーではない合議体を引数に指定した場合_合議体がダミーではないことを示す合議体Entityが返る() {
             sut = GogitaiMapper.to合議体Entity(createGogitai());
             assertThat(sut.getGogitaiDummyFlag(), is(合議体ダミー_notダミー.isダミー()));
         }
@@ -273,7 +273,7 @@ public class GogitaiMapperTest {
         entity.setShinsakaiYoteiTeiin(審査会予定定員_5);
         entity.setShinsakaiJidoWariateTeiin(審査会自動割当定員_6);
         entity.setShinsakaiIinTeiin(審査会委員定員_7);
-        entity.setGogitaiSeishinkaSonzaiFlag(精神科医師存在_在籍.is存在());
+        entity.setGogitaiSeishinkaSonzaiFlag(精神科医師存在_存在.is存在());
         entity.setGogitaiDummyFlag(合議体ダミー_notダミー.isダミー());
         return entity;
     }
@@ -281,7 +281,7 @@ public class GogitaiMapperTest {
     private static Gogitai createGogitai() {
         return new Gogitai(合議体番号_1, 合議体名称_合議体1, 有効期間_19991212_20101212, 開始終了予定時刻_0830_1720,
                 審査会開催場所_山田家001, 審査会予定定員_5, 審査会自動割当定員_6, 審査会委員定員_7,
-                合議体割当審査会委員List_3件, 精神科医師存在_在籍, 合議体ダミー_notダミー);
+                合議体割当審査会委員List_3件, 精神科医師存在_存在, 合議体ダミー_notダミー);
     }
 
     private static List<DbT5103GogitaiJohoEntity> createEntities(int 件数) {

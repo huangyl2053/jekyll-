@@ -55,7 +55,7 @@ public class GogitaiTest {
             審査会自動割当定員 = 4;
             審査会委員定員 = 6;
             合議体割当審査会委員List = mock(GogitaiWariateIinList.class);
-            精神科医師存在 = GogitaiSeishinkaIshiSonzai.在籍;
+            精神科医師存在 = GogitaiSeishinkaIshiSonzai.存在;
             合議体ダミー = GogitaiDummyKubun.notダミー;
         }
 

@@ -12,17 +12,17 @@ package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
 public enum GogitaiSeishinkaIshiSonzai {
 
     /**
-     * 精神科医が在籍していることを表します。
+     * 精神科医が存在していることを表します。
      */
-    在籍(true),
+    存在(true),
     /**
      * 精神科医が不在であることを表します。
      */
     不在(false);
-    private final boolean 在籍フラグ;
+    private final boolean 存在フラグ;
 
-    private GogitaiSeishinkaIshiSonzai(boolean 在籍フラグ) {
-        this.在籍フラグ = 在籍フラグ;
+    private GogitaiSeishinkaIshiSonzai(boolean 存在フラグ) {
+        this.存在フラグ = 存在フラグ;
     }
 
     /**
@@ -31,18 +31,18 @@ public enum GogitaiSeishinkaIshiSonzai {
      * @return 在籍しているならtrue
      */
     public boolean is存在() {
-        return 在籍フラグ;
+        return 存在フラグ;
     }
 
     /**
      * 引数に指定した真理値に対応するGogitaiSehishinkaIshiSonzaiを返します。
      *
-     * @param 在籍フラグ 在籍フラグ
+     * @param 存在フラグ 存在フラグ
      * @return 対応した合議体精神科医師存在
      */
-    public static GogitaiSeishinkaIshiSonzai toValue(boolean 在籍フラグ) {
-        if (在籍フラグ) {
-            return 在籍;
+    public static GogitaiSeishinkaIshiSonzai toValue(boolean 存在フラグ) {
+        if (存在フラグ) {
+            return 存在;
         }
         return 不在;
     }
