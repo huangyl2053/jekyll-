@@ -6,26 +6,27 @@ package jp.co.ndensan.reams.db.dbe.realservice.helper;
 
 import java.util.EnumMap;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbe.business.ninteichosa.Ninteichosahyo;
+import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosahyoFactory;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaItemResult;
+import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResult;
+import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultChosahyo;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultGaikyo;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultGaikyoKihon;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultGaikyoService;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResult;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultChosahyo;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.Ninteichosahyo;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosahyoFactory;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GenzaiJokyoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ServiceKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKubun;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosaItem;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.ChosahyoItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.ChosahyoItems;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosaItem;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import static jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.ChosahyoItems.*;
 import static jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice.*;
+import static jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.ChosahyoItems.*;
 import static org.mockito.Mockito.spy;
 
 /**
@@ -136,7 +137,8 @@ public class NinteichosaResultMock {
         setResultMap(resultMap, chosahyo, カテーテル, NaiAru.ある.getCode());
         setResultMap(resultMap, chosahyo, 障害高齢者の日常生活自立度, ShogaiKoreishaJiritsu.Ａ１.getCode());
         setResultMap(resultMap, chosahyo, 認知症高齢者の日常生活自立度, NinchishoKoreishaJiritsu.Ⅱａ.getCode());
-        return new NinteichosaResultChosahyo(new ShinseishoKanriNo(new RString("1234567890")), 0, NENDO_2006, resultMap);
+        return new NinteichosaResultChosahyo(new ShinseishoKanriNo(new RString("1234567890")), 0, NENDO_2006,
+                new Ninteichosahyo(resultMap, ChosahyoItemGroup.Of2006.values()));
     }
 
     private static void setResultMap(

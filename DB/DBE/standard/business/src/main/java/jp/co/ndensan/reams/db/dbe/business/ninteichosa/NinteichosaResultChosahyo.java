@@ -4,8 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 
-import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.ChosahyoItems;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import static java.util.Objects.requireNonNull;
@@ -20,7 +18,7 @@ public class NinteichosaResultChosahyo {
     private final ShinseishoKanriNo 申請書管理番号;
     private final int 要介護認定調査履歴番号;
     private final int 調査票改定年度;
-    private final Map<ChosahyoItems, NinteichosaItemResult> 調査票結果;
+    private final Ninteichosahyo<NinteichosaItemResult> 調査票結果;
 
     /**
      * インスタンスを生成します。
@@ -31,7 +29,7 @@ public class NinteichosaResultChosahyo {
      * @param 調査票結果 調査票結果
      */
     public NinteichosaResultChosahyo(
-            ShinseishoKanriNo 申請書管理番号, int 要介護認定調査履歴番号, int 調査票改定年度, Map<ChosahyoItems, NinteichosaItemResult> 調査票結果) {
+            ShinseishoKanriNo 申請書管理番号, int 要介護認定調査履歴番号, int 調査票改定年度, Ninteichosahyo<NinteichosaItemResult> 調査票結果) {
         this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00001.replace("申請書管理番号").getMessage());
         this.要介護認定調査履歴番号 = 要介護認定調査履歴番号;
         this.調査票改定年度 = 調査票改定年度;
@@ -70,7 +68,7 @@ public class NinteichosaResultChosahyo {
      *
      * @return 調査票結果
      */
-    public Map<ChosahyoItems, NinteichosaItemResult> get調査票結果() {
+    public Ninteichosahyo<NinteichosaItemResult> get調査票結果() {
         return 調査票結果;
     }
 }

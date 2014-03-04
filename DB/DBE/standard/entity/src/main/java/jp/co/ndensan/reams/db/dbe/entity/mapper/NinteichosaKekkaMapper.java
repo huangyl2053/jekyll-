@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GenzaiJokyoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ServiceKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosaItem;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.ChosahyoItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.ChosahyoItems;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5008NinteichosaKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5009NinteichosahyoJohoEntity;
@@ -65,7 +66,7 @@ public final class NinteichosaKekkaMapper {
 
         NinteichosaResultGaikyoKihon kihon = ninteichosaKekka.get概況調査結果().get基本情報();
         NinteichosaResultGaikyoService service = ninteichosaKekka.get概況調査結果().getサービス状況();
-        Map<ChosahyoItems, NinteichosaItemResult> map = ninteichosaKekka.get調査票結果().get調査票結果();
+        Ninteichosahyo<NinteichosaItemResult> rslt = ninteichosaKekka.get調査票結果().get調査票結果();
 
         DbT5008NinteichosaKekkaJohoEntity entity = new DbT5008NinteichosaKekkaJohoEntity();
         entity.setShinseishoKanriNo(ninteichosaKekka.get概況調査結果().get申請書管理番号().value());
@@ -102,8 +103,8 @@ public final class NinteichosaKekkaMapper {
         entity.setKaigohokenKyufuIgaiNoZaitakuService(service.get介護保険給付以外の在宅サービス());
         entity.setGaikyochosaTokkijiko(kihon.get概況特記事項());
         entity.setShinsakaiYusenWaritsukeKubunCode(kihon.get審査会優先振分区分().getCode());
-        entity.setShogaiNichijoSeikatsuJiritsudoCode(map.get(ChosahyoItems.障害高齢者の日常生活自立度).get調査結果コード());
-        entity.setNinchishoNichijoSeikatsuJiritsudoCode(map.get(ChosahyoItems.認知症高齢者の日常生活自立度).get調査結果コード());
+        entity.setShogaiNichijoSeikatsuJiritsudoCode(rslt.get調査項目(ChosahyoItems.障害高齢者の日常生活自立度).get調査結果コード());
+        entity.setNinchishoNichijoSeikatsuJiritsudoCode(rslt.get調査項目(ChosahyoItems.認知症高齢者の日常生活自立度).get調査結果コード());
 
         return entity;
     }
@@ -116,85 +117,85 @@ public final class NinteichosaKekkaMapper {
      */
     public static DbT5009NinteichosahyoJohoEntity toDbT5009NinteichosahyoJohoEntity(NinteichosaResult ninteichosaKekka) {
 
-        Map<ChosahyoItems, NinteichosaItemResult> map = ninteichosaKekka.get調査票結果().get調査票結果();
+        Ninteichosahyo<NinteichosaItemResult> rslt = ninteichosaKekka.get調査票結果().get調査票結果();
 
         DbT5009NinteichosahyoJohoEntity entity = new DbT5009NinteichosahyoJohoEntity();
         entity.setShinseishoKanriNo(ninteichosaKekka.get調査票結果().get申請書管理番号().value());
         entity.setNinteichosaRirekiNo(ninteichosaKekka.get調査票結果().get要介護認定調査履歴番号());
-        entity.setCk_mahiHidariJoshi(map.get(ChosahyoItems.麻痺等の有無_左上肢).get調査結果コード());
-        entity.setCk_mahiMigiJoshi(map.get(ChosahyoItems.麻痺等の有無_右上肢).get調査結果コード());
-        entity.setCk_mahiHidariKashi(map.get(ChosahyoItems.麻痺等の有無_左下肢).get調査結果コード());
-        entity.setCk_mahiMigiKashi(map.get(ChosahyoItems.麻痺等の有無_右下肢).get調査結果コード());
-        entity.setCk_mahiSonota(map.get(ChosahyoItems.麻痺等の有無_その他).get調査結果コード());
-        entity.setCk_koshukuKata(map.get(ChosahyoItems.関節の動く範囲の制限_肩関節).get調査結果コード());
-        entity.setCk_koshukuMata(map.get(ChosahyoItems.関節の動く範囲の制限_股関節).get調査結果コード());
-        entity.setCk_koshukuHiza(map.get(ChosahyoItems.関節の動く範囲の制限_膝関節).get調査結果コード());
-        entity.setCk_koshukuSonota(map.get(ChosahyoItems.関節の動く範囲の制限_その他).get調査結果コード());
-        entity.setCk_negaeri(map.get(ChosahyoItems.寝返り).get調査結果コード());
-        entity.setCk_okiagari(map.get(ChosahyoItems.起き上がり).get調査結果コード());
-        entity.setCk_zaihoji(map.get(ChosahyoItems.座位保持).get調査結果コード());
-        entity.setCk_ryoashiRitsui(map.get(ChosahyoItems.両足での立位).get調査結果コード());
-        entity.setCk_hoko(map.get(ChosahyoItems.歩行).get調査結果コード());
-        entity.setCk_tachiagari(map.get(ChosahyoItems.立ち上がり).get調査結果コード());
-        entity.setCk_kataashiRitsui(map.get(ChosahyoItems.片足での立位).get調査結果コード());
-        entity.setCk_senshin(map.get(ChosahyoItems.洗身).get調査結果コード());
-        entity.setCk_tumekiri(map.get(ChosahyoItems.つめ切り).get調査結果コード());
-        entity.setCk_shiryoku(map.get(ChosahyoItems.視力).get調査結果コード());
-        entity.setCk_choryoku(map.get(ChosahyoItems.聴力).get調査結果コード());
-        entity.setCk_ijo(map.get(ChosahyoItems.移乗).get調査結果コード());
-        entity.setCk_ido(map.get(ChosahyoItems.移動).get調査結果コード());
-        entity.setCk_enge(map.get(ChosahyoItems.嚥下).get調査結果コード());
-        entity.setCk_shokujiSesshu(map.get(ChosahyoItems.食事摂取).get調査結果コード());
-        entity.setCk_hainyo(map.get(ChosahyoItems.排尿).get調査結果コード());
-        entity.setCk_haiben(map.get(ChosahyoItems.排便).get調査結果コード());
-        entity.setCk_kokoSeiketsu(map.get(ChosahyoItems.口腔清潔).get調査結果コード());
-        entity.setCk_sengan(map.get(ChosahyoItems.洗顔).get調査結果コード());
-        entity.setCk_seihatsu(map.get(ChosahyoItems.整髪).get調査結果コード());
-        entity.setCk_joiChakudatsu(map.get(ChosahyoItems.上衣の着脱).get調査結果コード());
-        entity.setCk_zubonChakudatsu(map.get(ChosahyoItems.ズボン等の着脱).get調査結果コード());
-        entity.setCk_gaishutsuHindo(map.get(ChosahyoItems.外出頻度).get調査結果コード());
-        entity.setCk_ishiDentatsu(map.get(ChosahyoItems.意思の伝達).get調査結果コード());
-        entity.setCk_nikka(map.get(ChosahyoItems.毎日の日課を理解).get調査結果コード());
-        entity.setCk_seinengappi(map.get(ChosahyoItems.生年月日をいう).get調査結果コード());
-        entity.setCk_tankiKioku(map.get(ChosahyoItems.短期記憶).get調査結果コード());
-        entity.setCk_namae(map.get(ChosahyoItems.自分の名前をいう).get調査結果コード());
-        entity.setCk_kisetsu(map.get(ChosahyoItems.今の季節を理解).get調査結果コード());
-        entity.setCk_basho(map.get(ChosahyoItems.場所の理解).get調査結果コード());
-        entity.setCk_haikai(map.get(ChosahyoItems.常時の徘徊).get調査結果コード());
-        entity.setCk_gaishutsu(map.get(ChosahyoItems.外出して戻れない).get調査結果コード());
-        entity.setCk_higaiteki(map.get(ChosahyoItems.被害的).get調査結果コード());
-        entity.setCk_sakuwa(map.get(ChosahyoItems.作話).get調査結果コード());
-        entity.setCk_kanjoHuantei(map.get(ChosahyoItems.感情が不安定).get調査結果コード());
-        entity.setCk_chuyaGyakuten(map.get(ChosahyoItems.昼夜逆転).get調査結果コード());
-        entity.setCk_onajiHanashi(map.get(ChosahyoItems.同じ話をする).get調査結果コード());
-        entity.setCk_ogoe(map.get(ChosahyoItems.大声を出す).get調査結果コード());
-        entity.setCk_kaigoNiTeiko(map.get(ChosahyoItems.介護に抵抗).get調査結果コード());
-        entity.setCk_ochitsuki(map.get(ChosahyoItems.落ち着きなし).get調査結果コード());
-        entity.setCk_hitoriDeDetagaru(map.get(ChosahyoItems.一人で出たがる).get調査結果コード());
-        entity.setCk_shushuheki(map.get(ChosahyoItems.収集癖).get調査結果コード());
-        entity.setCk_monoYaIruiWoKowasu(map.get(ChosahyoItems.物や衣類を壊す).get調査結果コード());
-        entity.setCk_hidoiMonowasure(map.get(ChosahyoItems.ひどい物忘れ).get調査結果コード());
-        entity.setCk_hitorigotoHitoriwarai(map.get(ChosahyoItems.独り言_独り笑).get調査結果コード());
-        entity.setCk_jibunKatte(map.get(ChosahyoItems.自分勝手に行動する).get調査結果コード());
-        entity.setCk_hanashiGaMatomaranai(map.get(ChosahyoItems.話がまとまらない).get調査結果コード());
-        entity.setCk_kusuri(map.get(ChosahyoItems.薬の内服).get調査結果コード());
-        entity.setCk_kinsenKanri(map.get(ChosahyoItems.金銭の管理).get調査結果コード());
-        entity.setCk_ishiKettei(map.get(ChosahyoItems.日常の意思決定).get調査結果コード());
-        entity.setCk_shudanHutekio(map.get(ChosahyoItems.集団への不適応).get調査結果コード());
-        entity.setCk_kaimono(map.get(ChosahyoItems.買い物).get調査結果コード());
-        entity.setCk_chori(map.get(ChosahyoItems.簡単な調理).get調査結果コード());
-        entity.setCk_tenteki(map.get(ChosahyoItems.点滴の管理).get調査結果コード());
-        entity.setCk_chushinJomyakuEiyo(map.get(ChosahyoItems.中心静脈栄養).get調査結果コード());
-        entity.setCk_toseki(map.get(ChosahyoItems.透析).get調査結果コード());
-        entity.setCk_stomaShochi(map.get(ChosahyoItems.ストーマの処置).get調査結果コード());
-        entity.setCk_sansoRyoho(map.get(ChosahyoItems.酸素療法).get調査結果コード());
-        entity.setCk_respirator(map.get(ChosahyoItems.レスピレーター).get調査結果コード());
-        entity.setCk_kikanSekkai(map.get(ChosahyoItems.気管切開).get調査結果コード());
-        entity.setCk_totsuKango(map.get(ChosahyoItems.疼痛の看護).get調査結果コード());
-        entity.setCk_keikanEiyo(map.get(ChosahyoItems.経管栄養).get調査結果コード());
-        entity.setCk_monitorSokutei(map.get(ChosahyoItems.モニター測定).get調査結果コード());
-        entity.setCk_jokusoShochi(map.get(ChosahyoItems.じょくそうの処置).get調査結果コード());
-        entity.setCk_catheter(map.get(ChosahyoItems.カテーテル).get調査結果コード());
+        entity.setCk_mahiHidariJoshi(rslt.get調査項目(ChosahyoItems.麻痺等の有無_左上肢).get調査結果コード());
+        entity.setCk_mahiMigiJoshi(rslt.get調査項目(ChosahyoItems.麻痺等の有無_右上肢).get調査結果コード());
+        entity.setCk_mahiHidariKashi(rslt.get調査項目(ChosahyoItems.麻痺等の有無_左下肢).get調査結果コード());
+        entity.setCk_mahiMigiKashi(rslt.get調査項目(ChosahyoItems.麻痺等の有無_右下肢).get調査結果コード());
+        entity.setCk_mahiSonota(rslt.get調査項目(ChosahyoItems.麻痺等の有無_その他).get調査結果コード());
+        entity.setCk_koshukuKata(rslt.get調査項目(ChosahyoItems.関節の動く範囲の制限_肩関節).get調査結果コード());
+        entity.setCk_koshukuMata(rslt.get調査項目(ChosahyoItems.関節の動く範囲の制限_股関節).get調査結果コード());
+        entity.setCk_koshukuHiza(rslt.get調査項目(ChosahyoItems.関節の動く範囲の制限_膝関節).get調査結果コード());
+        entity.setCk_koshukuSonota(rslt.get調査項目(ChosahyoItems.関節の動く範囲の制限_その他).get調査結果コード());
+        entity.setCk_negaeri(rslt.get調査項目(ChosahyoItems.寝返り).get調査結果コード());
+        entity.setCk_okiagari(rslt.get調査項目(ChosahyoItems.起き上がり).get調査結果コード());
+        entity.setCk_zaihoji(rslt.get調査項目(ChosahyoItems.座位保持).get調査結果コード());
+        entity.setCk_ryoashiRitsui(rslt.get調査項目(ChosahyoItems.両足での立位).get調査結果コード());
+        entity.setCk_hoko(rslt.get調査項目(ChosahyoItems.歩行).get調査結果コード());
+        entity.setCk_tachiagari(rslt.get調査項目(ChosahyoItems.立ち上がり).get調査結果コード());
+        entity.setCk_kataashiRitsui(rslt.get調査項目(ChosahyoItems.片足での立位).get調査結果コード());
+        entity.setCk_senshin(rslt.get調査項目(ChosahyoItems.洗身).get調査結果コード());
+        entity.setCk_tumekiri(rslt.get調査項目(ChosahyoItems.つめ切り).get調査結果コード());
+        entity.setCk_shiryoku(rslt.get調査項目(ChosahyoItems.視力).get調査結果コード());
+        entity.setCk_choryoku(rslt.get調査項目(ChosahyoItems.聴力).get調査結果コード());
+        entity.setCk_ijo(rslt.get調査項目(ChosahyoItems.移乗).get調査結果コード());
+        entity.setCk_ido(rslt.get調査項目(ChosahyoItems.移動).get調査結果コード());
+        entity.setCk_enge(rslt.get調査項目(ChosahyoItems.嚥下).get調査結果コード());
+        entity.setCk_shokujiSesshu(rslt.get調査項目(ChosahyoItems.食事摂取).get調査結果コード());
+        entity.setCk_hainyo(rslt.get調査項目(ChosahyoItems.排尿).get調査結果コード());
+        entity.setCk_haiben(rslt.get調査項目(ChosahyoItems.排便).get調査結果コード());
+        entity.setCk_kokoSeiketsu(rslt.get調査項目(ChosahyoItems.口腔清潔).get調査結果コード());
+        entity.setCk_sengan(rslt.get調査項目(ChosahyoItems.洗顔).get調査結果コード());
+        entity.setCk_seihatsu(rslt.get調査項目(ChosahyoItems.整髪).get調査結果コード());
+        entity.setCk_joiChakudatsu(rslt.get調査項目(ChosahyoItems.上衣の着脱).get調査結果コード());
+        entity.setCk_zubonChakudatsu(rslt.get調査項目(ChosahyoItems.ズボン等の着脱).get調査結果コード());
+        entity.setCk_gaishutsuHindo(rslt.get調査項目(ChosahyoItems.外出頻度).get調査結果コード());
+        entity.setCk_ishiDentatsu(rslt.get調査項目(ChosahyoItems.意思の伝達).get調査結果コード());
+        entity.setCk_nikka(rslt.get調査項目(ChosahyoItems.毎日の日課を理解).get調査結果コード());
+        entity.setCk_seinengappi(rslt.get調査項目(ChosahyoItems.生年月日をいう).get調査結果コード());
+        entity.setCk_tankiKioku(rslt.get調査項目(ChosahyoItems.短期記憶).get調査結果コード());
+        entity.setCk_namae(rslt.get調査項目(ChosahyoItems.自分の名前をいう).get調査結果コード());
+        entity.setCk_kisetsu(rslt.get調査項目(ChosahyoItems.今の季節を理解).get調査結果コード());
+        entity.setCk_basho(rslt.get調査項目(ChosahyoItems.場所の理解).get調査結果コード());
+        entity.setCk_haikai(rslt.get調査項目(ChosahyoItems.常時の徘徊).get調査結果コード());
+        entity.setCk_gaishutsu(rslt.get調査項目(ChosahyoItems.外出して戻れない).get調査結果コード());
+        entity.setCk_higaiteki(rslt.get調査項目(ChosahyoItems.被害的).get調査結果コード());
+        entity.setCk_sakuwa(rslt.get調査項目(ChosahyoItems.作話).get調査結果コード());
+        entity.setCk_kanjoHuantei(rslt.get調査項目(ChosahyoItems.感情が不安定).get調査結果コード());
+        entity.setCk_chuyaGyakuten(rslt.get調査項目(ChosahyoItems.昼夜逆転).get調査結果コード());
+        entity.setCk_onajiHanashi(rslt.get調査項目(ChosahyoItems.同じ話をする).get調査結果コード());
+        entity.setCk_ogoe(rslt.get調査項目(ChosahyoItems.大声を出す).get調査結果コード());
+        entity.setCk_kaigoNiTeiko(rslt.get調査項目(ChosahyoItems.介護に抵抗).get調査結果コード());
+        entity.setCk_ochitsuki(rslt.get調査項目(ChosahyoItems.落ち着きなし).get調査結果コード());
+        entity.setCk_hitoriDeDetagaru(rslt.get調査項目(ChosahyoItems.一人で出たがる).get調査結果コード());
+        entity.setCk_shushuheki(rslt.get調査項目(ChosahyoItems.収集癖).get調査結果コード());
+        entity.setCk_monoYaIruiWoKowasu(rslt.get調査項目(ChosahyoItems.物や衣類を壊す).get調査結果コード());
+        entity.setCk_hidoiMonowasure(rslt.get調査項目(ChosahyoItems.ひどい物忘れ).get調査結果コード());
+        entity.setCk_hitorigotoHitoriwarai(rslt.get調査項目(ChosahyoItems.独り言_独り笑).get調査結果コード());
+        entity.setCk_jibunKatte(rslt.get調査項目(ChosahyoItems.自分勝手に行動する).get調査結果コード());
+        entity.setCk_hanashiGaMatomaranai(rslt.get調査項目(ChosahyoItems.話がまとまらない).get調査結果コード());
+        entity.setCk_kusuri(rslt.get調査項目(ChosahyoItems.薬の内服).get調査結果コード());
+        entity.setCk_kinsenKanri(rslt.get調査項目(ChosahyoItems.金銭の管理).get調査結果コード());
+        entity.setCk_ishiKettei(rslt.get調査項目(ChosahyoItems.日常の意思決定).get調査結果コード());
+        entity.setCk_shudanHutekio(rslt.get調査項目(ChosahyoItems.集団への不適応).get調査結果コード());
+        entity.setCk_kaimono(rslt.get調査項目(ChosahyoItems.買い物).get調査結果コード());
+        entity.setCk_chori(rslt.get調査項目(ChosahyoItems.簡単な調理).get調査結果コード());
+        entity.setCk_tenteki(rslt.get調査項目(ChosahyoItems.点滴の管理).get調査結果コード());
+        entity.setCk_chushinJomyakuEiyo(rslt.get調査項目(ChosahyoItems.中心静脈栄養).get調査結果コード());
+        entity.setCk_toseki(rslt.get調査項目(ChosahyoItems.透析).get調査結果コード());
+        entity.setCk_stomaShochi(rslt.get調査項目(ChosahyoItems.ストーマの処置).get調査結果コード());
+        entity.setCk_sansoRyoho(rslt.get調査項目(ChosahyoItems.酸素療法).get調査結果コード());
+        entity.setCk_respirator(rslt.get調査項目(ChosahyoItems.レスピレーター).get調査結果コード());
+        entity.setCk_kikanSekkai(rslt.get調査項目(ChosahyoItems.気管切開).get調査結果コード());
+        entity.setCk_totsuKango(rslt.get調査項目(ChosahyoItems.疼痛の看護).get調査結果コード());
+        entity.setCk_keikanEiyo(rslt.get調査項目(ChosahyoItems.経管栄養).get調査結果コード());
+        entity.setCk_monitorSokutei(rslt.get調査項目(ChosahyoItems.モニター測定).get調査結果コード());
+        entity.setCk_jokusoShochi(rslt.get調査項目(ChosahyoItems.じょくそうの処置).get調査結果コード());
+        entity.setCk_catheter(rslt.get調査項目(ChosahyoItems.カテーテル).get調査結果コード());
 
         return entity;
     }
@@ -280,7 +281,8 @@ public final class NinteichosaKekkaMapper {
         setResultMap(resultMap, chosahyo, ChosahyoItems.障害高齢者の日常生活自立度, chosaKekkaEntity.getShogaiNichijoSeikatsuJiritsudoCode());
         setResultMap(resultMap, chosahyo, ChosahyoItems.認知症高齢者の日常生活自立度, chosaKekkaEntity.getNinchishoNichijoSeikatsuJiritsudoCode());
         return new NinteichosaResultChosahyo(
-                new ShinseishoKanriNo(chosahyoEntity.getShinseishoKanriNo()), chosahyoEntity.getNinteichosaRirekiNo(), NENDO_2006, resultMap);
+                new ShinseishoKanriNo(chosahyoEntity.getShinseishoKanriNo()), chosahyoEntity.getNinteichosaRirekiNo(),
+                NENDO_2006, new Ninteichosahyo(resultMap, ChosahyoItemGroup.Of2006.values()));
     }
 
     private static void setResultMap(

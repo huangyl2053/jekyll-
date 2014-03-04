@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -38,6 +37,6 @@ public class NinteichosaResultChosahyoTest {
     private static NinteichosaResultChosahyo createNinteichosaResultChosahyo(int flg) {
         return new NinteichosaResultChosahyo(
                 flg == AS_申請書管理番号がNULL ? null : any(ShinseishoKanriNo.class), 0, 2006,
-                flg == AS_調査票結果がNULL ? null : any(Map.class));
+                flg == AS_調査票結果がNULL ? null : any(Ninteichosahyo.class));
     }
 }
