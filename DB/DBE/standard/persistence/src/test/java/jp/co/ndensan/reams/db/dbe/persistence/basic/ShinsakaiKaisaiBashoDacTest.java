@@ -14,8 +14,10 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestDacBase;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -39,8 +41,6 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
     public static void setUpClass() {
         inserter = InstanceCreator.create(IShinsakaiKaisaiBashoDacMock.class);
         sut = InstanceCreator.create(IShinsakaiKaisaiBashoDac.class);
-        setDummyControlData(new RString("DBE"));
-        openMainSession();
     }
 
     public static class insertのテスト extends DbeTestDacBase {
@@ -65,6 +65,8 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
             更新用entity = create審査会開催場所情報Entity(開催場所コード.value(), 開催場所名称, 開催場所地区コード.value(),
                     開催場所住所, 開催場所電話番号, 開催場所状況);
 
+            setDummyControlData(new RString("DBE"));
+            openMainSession();
         }
 
         @Test
@@ -100,6 +102,11 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
             sut.delete(更新用entity);
             sut.insertOrUpdate(更新用entity);
             assertThat(sut.select(開催場所コード).getShinsakaiKaisaiBashoJokyo(), is(開催場所状況));
+        }
+
+        @After
+        public void tearDownClassTest() {
+            rollBackAndCloseSession();
         }
     }
 

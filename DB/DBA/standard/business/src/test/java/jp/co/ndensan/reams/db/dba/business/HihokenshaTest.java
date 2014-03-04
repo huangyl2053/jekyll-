@@ -19,13 +19,12 @@ import jp.co.ndensan.reams.db.dba.business.helper.ShikakuShutokuJiyuMock;
 import jp.co.ndensan.reams.db.dba.business.helper.ShikakuSoshitsuJiyuMock;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.HokenShubetsu;
-import jp.co.ndensan.reams.ur.urf.business.IKaigoShikaku;
-import jp.co.ndensan.reams.ur.urf.business._KaigoShikaku;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.HokenShubetsu;
+import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
+import jp.co.ndensan.reams.ur.urz.business._KaigoShikaku;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
@@ -137,7 +136,7 @@ public class HihokenshaTest extends TestBase {
 
         @Test
         public void get識別コードは_コンストラクタ引数のIKaigoShikakuが保持する_識別コードを返す() {
-            IShikibetsuCode 識別コード = mock(_ShikibetsuCode.class);
+            ShikibetsuCode 識別コード = mock(ShikibetsuCode.class);
             when(介護保険資格.get識別コード()).thenReturn(識別コード);
             assertThat(sut.get識別コード(), is(識別コード));
         }

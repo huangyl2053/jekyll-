@@ -12,11 +12,11 @@ import jp.co.ndensan.reams.db.dba.definition.valueobject.SaikofuJiyu;
 import jp.co.ndensan.reams.db.dba.definition.valueobject.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.HokenShubetsu;
-import jp.co.ndensan.reams.ur.urf.business.IKaigoShikaku;
-import jp.co.ndensan.reams.ur.urf.business._KaigoShikaku;
-import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.JushochiTokureishaKubun;
-import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.ShikakuHihokenshaKubun;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.HokenShubetsu;
+import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
+import jp.co.ndensan.reams.ur.urz.business._KaigoShikaku;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ShikakuHihokenshaKubun;
 import jp.co.ndensan.reams.ur.urz.business._ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.ur.urz.business._ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -47,7 +47,7 @@ public class HihokenshaMock {
 
     private static IKaigoShikaku create介護保険資格() {
         return new _KaigoShikaku(
-                ShikibetsuCodeMock.createInstance(new RString("識別コード")), HokenShubetsu.介護保険,
+                ShikibetsuCodeMock.createInstance(new RString("000000000000001")), HokenShubetsu.介護保険,
                 RDate.MAX, RDate.MAX, new _ShikakuShutokuJiyu(),
                 RDate.MAX, RDate.MAX, new _ShikakuSoshitsuJiyu(), RString.EMPTY, RString.EMPTY, RDate.MAX, ShikakuHihokenshaKubun.第１号被保険者,
                 JushochiTokureishaKubun.通常資格者);

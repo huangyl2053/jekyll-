@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.basic.helper;
 
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.IInsertable;
+import jp.co.ndensan.reams.db.dbz.persistence.IInsertable;
 
 /**
  * 審査会開催場所情報のテスト用DACのインターフェースです。

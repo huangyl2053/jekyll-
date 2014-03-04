@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.IUpdatable;
+import jp.co.ndensan.reams.db.dbz.persistence.IUpdatable;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
 /**

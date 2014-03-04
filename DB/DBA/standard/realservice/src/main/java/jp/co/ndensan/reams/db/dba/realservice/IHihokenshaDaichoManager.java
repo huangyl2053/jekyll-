@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dba.business.HihokenshaList;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
 /**
@@ -44,7 +44,7 @@ public interface IHihokenshaDaichoManager {
      * @param 識別コード 識別コード
      * @return 条件に該当する被保険者
      */
-    HihokenshaList get被保険者台帳(ShichosonCode 市町村コード, IShikibetsuCode 識別コード);
+    HihokenshaList get被保険者台帳(ShichosonCode 市町村コード, ShikibetsuCode 識別コード);
 
     /**
      * 識別コードから、被保険者を取得します。
@@ -52,7 +52,7 @@ public interface IHihokenshaDaichoManager {
      * @param 識別コード 識別コード
      * @return 条件に該当する被保険者
      */
-    HihokenshaList get被保険者台帳(IShikibetsuCode 識別コード);
+    HihokenshaList get被保険者台帳(ShikibetsuCode 識別コード);
 
     /**
      * 引数から被保険者情報を生成し、新しく登録します。<br />
@@ -67,7 +67,7 @@ public interface IHihokenshaDaichoManager {
      * @param 一号年齢到達日 一号年齢到達日
      * @return 登録が成功したかどうか
      */
-    boolean save(ShichosonCode 市町村コード, IShikibetsuCode 識別コード, HihokenshaKubun 被保険者区分,
+    boolean save(ShichosonCode 市町村コード, ShikibetsuCode 識別コード, HihokenshaKubun 被保険者区分,
             RDate 資格取得届出年月日, RDate 資格取得年月日, IShikakuShutokuJiyu 資格取得事由, RDate 一号年齢到達日);
 
     /**
@@ -83,7 +83,7 @@ public interface IHihokenshaDaichoManager {
      * @param 一号年齢到達日 一号年齢到達日
      * @return 登録が成功したかどうか
      */
-    boolean save(KaigoHihokenshaNo 被保険者番号, ShichosonCode 市町村コード, IShikibetsuCode 識別コード, HihokenshaKubun 被保険者区分,
+    boolean save(KaigoHihokenshaNo 被保険者番号, ShichosonCode 市町村コード, ShikibetsuCode 識別コード, HihokenshaKubun 被保険者区分,
             RDate 資格取得届出年月日, RDate 資格取得年月日, IShikakuShutokuJiyu 資格取得事由, RDate 一号年齢到達日);
 
     /**

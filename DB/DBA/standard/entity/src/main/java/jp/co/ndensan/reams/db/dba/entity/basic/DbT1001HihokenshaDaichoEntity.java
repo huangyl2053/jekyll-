@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dba.entity.basic;
 
 import jp.co.ndensan.reams.db.dba.business.Hihokensha;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
@@ -29,7 +29,7 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
     @PrimaryKey
     private RString hihokenshaNo;
     /* その他 */
-    private IShikibetsuCode shikibetsuCode;
+    private ShikibetsuCode shikibetsuCode;
     private RString shikakuIdouKubunCode;
     private RDate shikakuShutokuTodokedeDate;
     private RString shikakuShutokuJiyuCode;
@@ -112,7 +112,7 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
     /**
      * @return 識別コード
      */
-    public IShikibetsuCode getShikibetsuCode() {
+    public ShikibetsuCode getShikibetsuCode() {
         return shikibetsuCode;
     }
 
@@ -294,7 +294,7 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
     /**
      * @param shikibetsuCode 識別コード
      */
-    public void setShikibetsuCode(IShikibetsuCode shikibetsuCode) {
+    public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
         this.shikibetsuCode = shikibetsuCode;
     }
 

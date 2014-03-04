@@ -60,7 +60,7 @@ public class KaigoIryoKikanMapperTest extends TestBase {
         public void setUp() {
             setDummyControlData("UZ");
 
-            識別コード = new RString("S02B00001");
+            識別コード = new RString("000000001");
             医療機関名称 = new RString("介護病院");
             医療機関略称 = new RString("介護病院");
             医療機関カナ略称 = new RString("カイゴビョウイン");
@@ -102,7 +102,7 @@ public class KaigoIryoKikanMapperTest extends TestBase {
 
         @Test
         public void 引数から渡された識別コードと_戻り値の介護医療機関クラスの識別コードが同一になる() {
-            assertThat(sut.get識別コード().getValue(), is(識別コード));
+            assertThat(sut.get識別コード().getColumnValue(), is(識別コード));
         }
 
         @Test

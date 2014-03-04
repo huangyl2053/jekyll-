@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.standard.basic;
+package jp.co.ndensan.reams.db.dba.persistence.basic;
 
 import java.util.Collections;
 import java.util.List;
@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.db.dba.entity.basic.DbT1001HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dba.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 //TODO n3327 三浦凌 IShikibetsuCodeがdefinitionへ移動するまでは、ur.businessへの依存性を残す。( pom.xmlも修正の必要あり )
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessor;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -33,8 +33,8 @@ public class HihokenshaDaichoDac implements IHihokenshaDaichoDac {
 
         return accessor.select().table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                eq(DbT1001HihokenshaDaicho.ShichosonCd, 市町村コード.getValue()),
-                eq(DbT1001HihokenshaDaicho.HihokenshaNo, 被保険者番号.getValue()))).
+                                eq(DbT1001HihokenshaDaicho.ShichosonCd, 市町村コード.getValue()),
+                                eq(DbT1001HihokenshaDaicho.HihokenshaNo, 被保険者番号.getValue()))).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
     }
 
@@ -45,7 +45,7 @@ public class HihokenshaDaichoDac implements IHihokenshaDaichoDac {
         List<DbT1001HihokenshaDaichoEntity> entities = accessor.
                 select().table(DbT1001HihokenshaDaicho.class).
                 where(
-                eq(DbT1001HihokenshaDaicho.HihokenshaNo, 被保険者番号.getValue())).
+                        eq(DbT1001HihokenshaDaicho.HihokenshaNo, 被保険者番号.getValue())).
                 toList(DbT1001HihokenshaDaichoEntity.class);
 
         if (entities.isEmpty()) {
@@ -55,14 +55,14 @@ public class HihokenshaDaichoDac implements IHihokenshaDaichoDac {
     }
 
     @Override
-    public List<DbT1001HihokenshaDaichoEntity> select(ShichosonCode 市町村コード, IShikibetsuCode 識別コード) {
+    public List<DbT1001HihokenshaDaichoEntity> select(ShichosonCode 市町村コード, ShikibetsuCode 識別コード) {
         DbAccessor accessor = new DbAccessor(session);
 
         List<DbT1001HihokenshaDaichoEntity> entities = accessor.
                 select().table(DbT1001HihokenshaDaicho.class).
                 where(and(
-                eq(DbT1001HihokenshaDaicho.ShichosonCd, 市町村コード.getValue()),
-                eq(DbT1001HihokenshaDaicho.ShikibetsuCode, 識別コード.getValue()))).
+                                eq(DbT1001HihokenshaDaicho.ShichosonCd, 市町村コード.getValue()),
+                                eq(DbT1001HihokenshaDaicho.ShikibetsuCode, 識別コード.getColumnValue()))).
                 toList(DbT1001HihokenshaDaichoEntity.class);
 
         if (entities.isEmpty()) {
@@ -72,13 +72,13 @@ public class HihokenshaDaichoDac implements IHihokenshaDaichoDac {
     }
 
     @Override
-    public List<DbT1001HihokenshaDaichoEntity> select(IShikibetsuCode 識別コード) {
+    public List<DbT1001HihokenshaDaichoEntity> select(ShikibetsuCode 識別コード) {
         DbAccessor accessor = new DbAccessor(session);
 
         List<DbT1001HihokenshaDaichoEntity> entities = accessor.
                 select().table(DbT1001HihokenshaDaicho.class).
                 where(
-                eq(DbT1001HihokenshaDaicho.ShikibetsuCode, 識別コード.getValue())).
+                        eq(DbT1001HihokenshaDaicho.ShikibetsuCode, 識別コード.getColumnValue())).
                 toList(DbT1001HihokenshaDaichoEntity.class);
 
         if (entities.isEmpty()) {
