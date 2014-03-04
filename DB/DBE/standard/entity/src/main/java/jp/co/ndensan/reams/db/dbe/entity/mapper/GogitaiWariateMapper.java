@@ -60,10 +60,17 @@ public final class GogitaiWariateMapper {
         }
 
         return new GogitaiWariateIin(ShinsakaiIinMapper.to審査会委員(合議体割当委員Entity.get審査会委員Entity()),
-                new ShinsainKubun(合議体割当委員Entity.get合議体割当Entity().getShinsainKubunCode().value(),
-                合議体割当委員Entity.get合議体割当Entity().getShinsainKubunName()),
-                new GogitaichoKubun(合議体割当委員Entity.get合議体割当Entity().getGogitaichoKubunCode().value(),
-                合議体割当委員Entity.get合議体割当Entity().getGogitaichoKubunName()));
+                create審査員区分(合議体割当委員Entity), create合議体長区分(合議体割当委員Entity));
+    }
+
+    private static ShinsainKubun create審査員区分(GogitaiWariateShinsakaiIinEntity 合議体割当委員Entity) {
+        return new ShinsainKubun(合議体割当委員Entity.get合議体割当Entity().getShinsainKubunCode().value(),
+                合議体割当委員Entity.get合議体割当Entity().getShinsainKubunName());
+    }
+
+    private static GogitaichoKubun create合議体長区分(GogitaiWariateShinsakaiIinEntity 合議体割当委員Entity) {
+        return new GogitaichoKubun(合議体割当委員Entity.get合議体割当Entity().getGogitaichoKubunCode().value(),
+                合議体割当委員Entity.get合議体割当Entity().getGogitaichoKubunName());
     }
 
     /**
