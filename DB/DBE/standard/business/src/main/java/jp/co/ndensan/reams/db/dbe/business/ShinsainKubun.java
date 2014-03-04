@@ -10,7 +10,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**
- * 介護認定審査員区分を表すクラスです。
+ * 介護認定審査員の、審査会での委員の区分を表すクラスです。
  *
  * @author n8178 城間篤人
  */

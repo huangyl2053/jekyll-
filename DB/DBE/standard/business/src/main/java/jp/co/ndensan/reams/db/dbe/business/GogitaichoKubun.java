@@ -10,7 +10,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**
- * 合議体長区分を表すクラスです。
+ * 合議体（介護認定審査会）の長や長代理、委員などの区分を表すクラスです。
  *
  * @author n8178 城間篤人
  */
