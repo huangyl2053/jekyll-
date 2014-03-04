@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshi
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiMeisho;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 
 /**
@@ -56,17 +57,26 @@ public final class GogitaiMapper {
 
     /**
      * 引数で指定した情報を元に、合議体のリストを生成して返します。<br/>
-     * 引数のいずれかがnullであるとき、戻り値はnullが返ります。
+     * 引数のいずれかがnullであるとき、戻り値はnullが返ります。<br/>
+     * <br/>
+     * 合議体の一つひとつに対して、開催場所のコードと割り当てられた委員Listが存在するため、
+     * このメソッドの引数に渡されるリストは、サイズが一致していることが前提です。<br/>
+     * そのため、メソッドの引数にサイズの違うリストが渡された場合は例外が発生します。
      *
      * @param 合議体Entities 合議体Entities
-     * @param 開催場所List 開催場所Entities
+     * @param 開催場所List 開催場所List
      * @param 合議体割当委員Lists 合議体割当委員Lists
      * @return 合議体List
+     * @throws IllegalArgumentException 引数に渡されたリストサイズが不一致のとき
      */
-    public static GogitaiList to合議体List(List<DbT5103GogitaiJohoEntity> 合議体Entities,
-            List<ShinsakaiKaisaiBasho> 開催場所List, List<GogitaiWariateIinList> 合議体割当委員Lists) {
+    public static GogitaiList to合議体List(List<DbT5103GogitaiJohoEntity> 合議体Entities, List<ShinsakaiKaisaiBasho> 開催場所List,
+            List<GogitaiWariateIinList> 合議体割当委員Lists) throws IllegalArgumentException {
         if (合議体Entities == null || 開催場所List == null || 合議体割当委員Lists == null) {
             return null;
+        }
+
+        if (!isリストサイズが一致(合議体Entities, 開催場所List, 合議体割当委員Lists)) {
+            throw new IllegalArgumentException(Messages.E00009.replace("引数に渡されたリストのサイズ").getMessage());
         }
 
         List<Gogitai> retList = new ArrayList<>();
@@ -74,6 +84,11 @@ public final class GogitaiMapper {
             retList.add(to合議体(合議体Entities.get(i), 開催場所List.get(i), 合議体割当委員Lists.get(i)));
         }
         return new GogitaiList(retList);
+    }
+
+    private static boolean isリストサイズが一致(List<DbT5103GogitaiJohoEntity> 合議体Entities,
+            List<ShinsakaiKaisaiBasho> 開催場所List, List<GogitaiWariateIinList> 合議体割当委員Lists) {
+        return 合議体Entities.size() == 開催場所List.size() || 開催場所List.size() == 合議体割当委員Lists.size();
     }
 
     /**

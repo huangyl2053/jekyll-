@@ -152,27 +152,34 @@ public class GogitaiMapperTest {
 
     public static class to合議体Listのテスト extends DbeTestBase {
 
+        private GogitaiList sut;
+
         @Test
         public void 引数の合議体Entitiesにnullが渡されたとき_戻り値はnullになる() {
-            GogitaiList sut = GogitaiMapper.to合議体List(null, create審査会開催場所ListMock(3), create合議体割当委員ListsMock(3));
+            sut = GogitaiMapper.to合議体List(null, create審査会開催場所ListMock(3), create合議体割当委員ListsMock(3));
             assertThat(sut, is(nullValue()));
         }
 
         @Test
         public void 引数の審査会開催場所Listにnullが渡されたとき_戻り値はnullになる() {
-            GogitaiList sut = GogitaiMapper.to合議体List(createEntities(3), null, create合議体割当委員ListsMock(3));
+            sut = GogitaiMapper.to合議体List(createEntities(3), null, create合議体割当委員ListsMock(3));
             assertThat(sut, is(nullValue()));
         }
 
         @Test
         public void 引数の合議体割当委員Listsにnullが渡されたとき_戻り値はnullになる() {
-            GogitaiList sut = GogitaiMapper.to合議体List(createEntities(3), create審査会開催場所ListMock(3), null);
+            sut = GogitaiMapper.to合議体List(createEntities(3), create審査会開催場所ListMock(3), null);
             assertThat(sut, is(nullValue()));
+        }
+
+        @Test(expected = IllegalArgumentException.class)
+        public void 引数に渡されたリストのサイズが違う場合_例外が発生する() {
+            sut = GogitaiMapper.to合議体List(createEntities(4), create審査会開催場所ListMock(2), create合議体割当委員ListsMock(3));
         }
 
         @Test
         public void 引数の合議体Entitiesに3件のEntityを持つリストが渡されたとき_3件の合議体を持つリストが返る() {
-            GogitaiList sut = GogitaiMapper.to合議体List(createEntities(3), create審査会開催場所ListMock(3), create合議体割当委員ListsMock(3));
+            sut = GogitaiMapper.to合議体List(createEntities(3), create審査会開催場所ListMock(3), create合議体割当委員ListsMock(3));
             assertThat(sut.size(), is(3));
 
         }
