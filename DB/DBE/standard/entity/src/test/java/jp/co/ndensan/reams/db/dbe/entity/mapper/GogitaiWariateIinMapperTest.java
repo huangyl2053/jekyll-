@@ -45,7 +45,7 @@ import static org.mockito.Mockito.when;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class GogitaiWariateMapperTest {
+public class GogitaiWariateIinMapperTest {
 
     private static GogitaiNo 合議体番号_1 = new GogitaiNo(1);
     private static ShinsakaiIinCode 委員コード_iin01 = new ShinsakaiIinCode(new RString("iin01"));
@@ -60,13 +60,13 @@ public class GogitaiWariateMapperTest {
 
         @Test
         public void 引数にnullを渡したとき_nullが返る() {
-            sut = GogitaiWariateMapper.to合議体割当委員List(null);
+            sut = GogitaiWariateIinMapper.to合議体割当委員List(null);
             assertThat(sut, is(nullValue()));
         }
 
         @Test
         public void 要素数が3の合議体割当委員EntityListを渡したとき_要素数が3の合議体割当委員Listが返る() {
-            sut = GogitaiWariateMapper.to合議体割当委員List(create合議体割当委員EntityList(3));
+            sut = GogitaiWariateIinMapper.to合議体割当委員List(create合議体割当委員EntityList(3));
             assertThat(sut.size(), is(3));
         }
 
@@ -85,25 +85,25 @@ public class GogitaiWariateMapperTest {
 
         @Test
         public void 引数にnullが渡されたとき_nullが返る() {
-            sut = GogitaiWariateMapper.to合議体割当委員(null);
+            sut = GogitaiWariateIinMapper.to合議体割当委員(null);
             assertThat(sut, is(nullValue()));
         }
 
         @Test
         public void 認定審査員コードにiin01を持つ合議体割当審査会委員Entityが渡されたとき_認定審査員コードにiin01を持つ合議体割当委員が返る() {
-            sut = GogitaiWariateMapper.to合議体割当委員(create合議体割当審査会委員Entity());
+            sut = GogitaiWariateIinMapper.to合議体割当委員(create合議体割当審査会委員Entity());
             assertThat(sut.get委員情報().get委員コード(), is(委員コード_iin01));
         }
 
         @Test
         public void 認定調査員区分コードにiinCodeを持つ合議体割当審査会委員Entityが渡されたとき_認定調査員区分コードにiinCodeを持つ合議体割当委員が返る() {
-            sut = GogitaiWariateMapper.to合議体割当委員(create合議体割当審査会委員Entity());
+            sut = GogitaiWariateIinMapper.to合議体割当委員(create合議体割当審査会委員Entity());
             assertThat(sut.get認定調査員区分().getCode(), is(認定調査員区分_iinCode_iinName.getCode()));
         }
 
         @Test
         public void 合議体長区分にtaichoCodeを持つ合議体割当審査会委員Entityが渡されたとき_合議体長区分にtaichoCodeを持つ合議体割当委員が返る() {
-            sut = GogitaiWariateMapper.to合議体割当委員(create合議体割当審査会委員Entity());
+            sut = GogitaiWariateIinMapper.to合議体割当委員(create合議体割当審査会委員Entity());
             assertThat(sut.get合議体長区分().getCode(), is(合議体長区分_taichoCode_taichoName.getCode()));
         }
     }
@@ -114,13 +114,13 @@ public class GogitaiWariateMapperTest {
 
         @Test
         public void 引数にnullが渡されたとき_nullが返る() {
-            sut = GogitaiWariateMapper.to合議体割当EntityList(null);
+            sut = GogitaiWariateIinMapper.to合議体割当EntityList(null);
             assertThat(sut, is(nullValue()));
         }
 
         @Test
         public void 要素数3の割当審査会委員Listを持つ_合議体が引数として渡されたとき_要素数3の合議体割当Entityが返る() {
-            sut = GogitaiWariateMapper.to合議体割当EntityList(create合議体Mock());
+            sut = GogitaiWariateIinMapper.to合議体割当EntityList(create合議体Mock());
             assertThat(sut.size(), is(3));
         }
     }
@@ -131,49 +131,49 @@ public class GogitaiWariateMapperTest {
 
         @Test
         public void 引数の合議体にnullを渡したとき_nullが返る() {
-            sut = GogitaiWariateMapper.to合議体割当Entity(null, createGogitaiWariateIin());
+            sut = GogitaiWariateIinMapper.to合議体割当Entity(null, createGogitaiWariateIin());
             assertThat(sut, is(nullValue()));
         }
 
         @Test
         public void 引数の合議体割当委員にnullを渡したとき_nullが返る() {
-            sut = GogitaiWariateMapper.to合議体割当Entity(create合議体Mock(), null);
+            sut = GogitaiWariateIinMapper.to合議体割当Entity(create合議体Mock(), null);
             assertThat(sut, is(nullValue()));
         }
 
         @Test
         public void 合議体番号に1を持つ合議体を渡したとき_合議体番号に1を持つ合議体割当Entityが返る() {
-            sut = GogitaiWariateMapper.to合議体割当Entity(create合議体Mock(), createGogitaiWariateIin());
+            sut = GogitaiWariateIinMapper.to合議体割当Entity(create合議体Mock(), createGogitaiWariateIin());
             assertThat(sut.getGogitaiNo(), is(合議体番号_1.value()));
         }
 
         @Test
         public void 合議体有効開始年月日に19991212を持つ合議体を渡したとき_合議体有効開始年月日に19991212を持つ合議体割当Entityが返る() {
-            sut = GogitaiWariateMapper.to合議体割当Entity(create合議体Mock(), createGogitaiWariateIin());
+            sut = GogitaiWariateIinMapper.to合議体割当Entity(create合議体Mock(), createGogitaiWariateIin());
             assertThat(sut.getGogitaiYukoKikanKaishiYMD(), is(有効期間_19991212_20101212.getFrom()));
         }
 
         @Test
         public void 合議体有効終了年月日に20101212を持つ合議体を渡したとき_合議体有効終了年月日に20101212を持つ合議体割当Entityが返る() {
-            sut = GogitaiWariateMapper.to合議体割当Entity(create合議体Mock(), createGogitaiWariateIin());
+            sut = GogitaiWariateIinMapper.to合議体割当Entity(create合議体Mock(), createGogitaiWariateIin());
             assertThat(sut.getGogitaiYukoKikanShuryoYMD(), is(有効期間_19991212_20101212.getTo()));
         }
 
         @Test
         public void 委員コードにiin01を持つ合議体割当委員を渡したとき_委員コードにiin01を持つ合議体割当Entityが返る() {
-            sut = GogitaiWariateMapper.to合議体割当Entity(create合議体Mock(), createGogitaiWariateIin());
+            sut = GogitaiWariateIinMapper.to合議体割当Entity(create合議体Mock(), createGogitaiWariateIin());
             assertThat(sut.getShinsakaiIinCode(), is(委員情報_iin01.get委員コード().value()));
         }
 
         @Test
         public void 認定調査員区分コードにiinCodeを持つ合議体割当委員を渡したとき_認定調査員区分コードにiinCodeを持つ合議体割当Entityが返る() {
-            sut = GogitaiWariateMapper.to合議体割当Entity(create合議体Mock(), createGogitaiWariateIin());
+            sut = GogitaiWariateIinMapper.to合議体割当Entity(create合議体Mock(), createGogitaiWariateIin());
             assertThat(sut.getShinsainKubunCode(), is(new Code(認定調査員区分_iinCode_iinName.getCode())));
         }
 
         @Test
         public void 合議体長区分コードにtaichoCodeを持つ合議体割当委員を渡したとき_合議体長区分コードにtaichoCodeを持つ合議体割当Entityが返る() {
-            sut = GogitaiWariateMapper.to合議体割当Entity(create合議体Mock(), createGogitaiWariateIin());
+            sut = GogitaiWariateIinMapper.to合議体割当Entity(create合議体Mock(), createGogitaiWariateIin());
             assertThat(sut.getGogitaichoKubunCode(), is(new Code(合議体長区分_taichoCode_taichoName.getCode())));
         }
     }

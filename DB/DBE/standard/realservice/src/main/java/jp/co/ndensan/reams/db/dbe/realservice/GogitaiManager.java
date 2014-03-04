@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCod
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5107GogitaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.GogitaiMapper;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.GogitaiWariateMapper;
+import jp.co.ndensan.reams.db.dbe.entity.mapper.GogitaiWariateIinMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IGogitaiDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IGogitaiWariateDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.IGogitaiWariateShinsakaiIinDac;
@@ -86,7 +86,7 @@ public class GogitaiManager {
         List<GogitaiWariateIinList> 合議体割当委員List = new ArrayList<>();
         List<ShinsakaiKaisaiBasho> 開催場所List = new ArrayList<>();
         for (DbT5103GogitaiJohoEntity 合議体Entity : 合議体Entities) {
-            GogitaiWariateIinList list = GogitaiWariateMapper.to合議体割当委員List(
+            GogitaiWariateIinList list = GogitaiWariateIinMapper.to合議体割当委員List(
                     wariateIinDac.select(new GogitaiNo(合議体Entity.getGogitaiNo()), 合議体Entity.getGogitaiYukoKikanKaishiYMD()));
             合議体割当委員List.add(list);
             開催場所List.add(kaisaiBashoManager.get審査会開催場所(new ShinsakaiKaisaiBashoCode(合議体Entity.getShinsakaiKaisaiBashoCode())));
@@ -102,7 +102,7 @@ public class GogitaiManager {
      */
     public boolean save(Gogitai 合議体) {
         DbT5103GogitaiJohoEntity 合議体Entity = GogitaiMapper.to合議体Entity(合議体);
-        List<DbT5107GogitaiWariateIinJohoEntity> 合議体割当Entities = GogitaiWariateMapper.to合議体割当EntityList(合議体);
+        List<DbT5107GogitaiWariateIinJohoEntity> 合議体割当Entities = GogitaiWariateIinMapper.to合議体割当EntityList(合議体);
 
         int 合議体更新件数;
         合議体更新件数 = gogitaiDac.insertOrUpdate(合議体Entity);
@@ -128,7 +128,7 @@ public class GogitaiManager {
      */
     public boolean remove(Gogitai 合議体) {
         DbT5103GogitaiJohoEntity 合議体Entity = GogitaiMapper.to合議体Entity(合議体);
-        List<DbT5107GogitaiWariateIinJohoEntity> 合議体割当Entities = GogitaiWariateMapper.to合議体割当EntityList(合議体);
+        List<DbT5107GogitaiWariateIinJohoEntity> 合議体割当Entities = GogitaiWariateIinMapper.to合議体割当EntityList(合議体);
 
         int 合議体更新件数;
         合議体更新件数 = gogitaiDac.delete(合議体Entity);

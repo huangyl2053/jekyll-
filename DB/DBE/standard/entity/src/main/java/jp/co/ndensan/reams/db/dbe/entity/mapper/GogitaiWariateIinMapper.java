@@ -20,12 +20,12 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
  *
  * @author n8178 城間篤人
  */
-public final class GogitaiWariateMapper {
+public final class GogitaiWariateIinMapper {
 
     /**
      * インスタンス化防止のためのプライベートコンストラクタです。
      */
-    private GogitaiWariateMapper() {
+    private GogitaiWariateIinMapper() {
     }
 
     /**
