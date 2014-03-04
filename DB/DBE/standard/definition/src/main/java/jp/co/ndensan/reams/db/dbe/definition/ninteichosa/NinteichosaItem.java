@@ -22,7 +22,7 @@ public class NinteichosaItem implements INinteichosaItem {
     private final NinteichosaItemNo 調査項目番号;
     private final ChosahyoItems 調査票項目;
     private final RString 表示名称;
-    private final IAnsweringItems 選択肢List;
+    private final IAnsweringItems 選択肢グループ;
 
     /**
      * インスタンスを生成します。
@@ -31,15 +31,15 @@ public class NinteichosaItem implements INinteichosaItem {
      * @param 調査項目番号 調査項目番号
      * @param 調査票項目 調査票項目
      * @param 表示名称 表示名称
-     * @param 選択肢List 選択肢List
+     * @param 選択肢グループ 選択肢グループ
      */
     public NinteichosaItem(
-            IChosahyoItemGroup 調査票項目分類, NinteichosaItemNo 調査項目番号, ChosahyoItems 調査票項目, RString 表示名称, IAnsweringItems 選択肢List) {
+            IChosahyoItemGroup 調査票項目分類, NinteichosaItemNo 調査項目番号, ChosahyoItems 調査票項目, RString 表示名称, IAnsweringItems 選択肢グループ) {
         this.調査票項目分類 = requireNonNull(調査票項目分類, Messages.E00001.replace("調査票項目分類").getMessage());
         this.調査項目番号 = requireNonNull(調査項目番号, Messages.E00001.replace("調査項目番号").getMessage());
         this.調査票項目 = requireNonNull(調査票項目, Messages.E00001.replace("調査票項目").getMessage());
         this.表示名称 = requireNonNull(表示名称, Messages.E00001.replace("表示名称").getMessage());
-        this.選択肢List = requireNonNull(選択肢List, Messages.E00001.replace("選択肢List").getMessage());
+        this.選択肢グループ = requireNonNull(選択肢グループ, Messages.E00001.replace("選択肢List").getMessage());
     }
 
     @Override
@@ -64,6 +64,6 @@ public class NinteichosaItem implements INinteichosaItem {
 
     @Override
     public IAnsweringItems get選択肢List() {
-        return 選択肢List;
+        return 選択肢グループ;
     }
 }
