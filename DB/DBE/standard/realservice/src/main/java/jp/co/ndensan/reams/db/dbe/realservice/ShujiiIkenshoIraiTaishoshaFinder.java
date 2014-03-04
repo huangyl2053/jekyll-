@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushoEditPattern;
 import jp.co.ndensan.reams.ur.urz.realservice.DoctorManagerFactory;
 import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
 import jp.co.ndensan.reams.ur.urz.realservice.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
 
@@ -103,6 +104,22 @@ public class ShujiiIkenshoIraiTaishoshaFinder {
         return create主治医意見書作成依頼対象者List(認定進捗情報EntityList);
     }
 
+    /**
+     * 市町村コード、支所コードを指定して、主治医意見書作成が未完了の主治医意見書作成依頼対象者を取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 支所コード 支所コード
+     * @return ShujiiIkenshoIraiTaishoshaのList
+     * @throws NullPointerException 引数がnullの場合
+     */
+    public List<ShujiiIkenshoIraiTaishosha> get主治医意見書作成依頼対象者(ShichosonCode 市町村コード, RString 支所コード) throws NullPointerException {
+        requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
+        requireNonNull(支所コード, Messages.E00001.replace("支所コード").getMessage());
+
+        List<DbT5005NinteiShinchokuJohoEntity> 認定進捗情報EntityList = shujiiIkenshoIraiTaishoshaDac.select主治医意見書作成依頼対象者(市町村コード, 支所コード);
+        return create主治医意見書作成依頼対象者List(認定進捗情報EntityList);
+    }
+
     private List<ShujiiIkenshoIraiTaishosha> create主治医意見書作成依頼対象者List(List<DbT5005NinteiShinchokuJohoEntity> 認定進捗情報EntityList) {
 
         if (認定進捗情報EntityList.isEmpty()) {
@@ -147,12 +164,12 @@ public class ShujiiIkenshoIraiTaishoshaFinder {
         return shujiiJohoDac.select(
                 認定申請情報Entity.getShichosonCode(),
                 主治医意見書作成依頼情報Entity.getShujiiIryoKikanCode(),
-                new _ShikibetsuCode(主治医意見書作成依頼情報Entity.getIshiShikibetsuNo()));
+                new ShikibetsuCode(主治医意見書作成依頼情報Entity.getIshiShikibetsuNo()));
     }
 
     private IKojin create個人(DbT5001NinteiShinseiJohoEntity 認定申請情報Entity) {
         return KojinService.createKojinFinder().get個人(
-                new _ShikibetsuCode(認定申請情報Entity.getShikibetsuCode()));
+                new ShikibetsuCode(認定申請情報Entity.getShikibetsuCode()));
     }
 
     private IShikibetsuTaisho create識別対象(DbT5001NinteiShinseiJohoEntity 認定申請情報Entity) {

@@ -32,7 +32,30 @@ public class ShujiiIkenshoIraiTaishoshaFinderTest extends TestBase {
 
     private static ShujiiIkenshoIraiTaishoshaFinder sut;
 
-    public static class get主治医意見書作成依頼対象者_市町村コードあり extends TestBase {
+    public static class get主治医意見書作成依頼対象者_引数なし extends TestBase {
+
+        private INinteiShinchokuJohoDac ninteiShinchokuJohoDac;
+        private IShujiiIkenshoIraiTaishoshaDac shujiiIkenshoIraiTaishoshaDac;
+        private INinteiShinseiJohoDac ninteiShinseiJohoDac;
+        private IShujiiJohoDac shujiiJohoDac;
+        private IShujiiIkenshoIraiJohoDac shujiiIkenshoIraiJohoDac;
+
+        @Test
+        public void 主治医意見書作成依頼が未完了の対象者が_存在しない場合_EMPTY_LISTが返されること() {
+            ninteiShinchokuJohoDac = mock(INinteiShinchokuJohoDac.class);
+            when(ninteiShinchokuJohoDac.select主治医意見書作成依頼未完了()).thenReturn(Collections.EMPTY_LIST);
+            sut = new ShujiiIkenshoIraiTaishoshaFinder(
+                    ninteiShinchokuJohoDac,
+                    shujiiIkenshoIraiTaishoshaDac,
+                    ninteiShinseiJohoDac,
+                    shujiiJohoDac,
+                    shujiiIkenshoIraiJohoDac);
+            List<ShujiiIkenshoIraiTaishosha> resultList = sut.get主治医意見書作成依頼対象者();
+            assertThat(resultList, is(Collections.EMPTY_LIST));
+        }
+    }
+
+    public static class get主治医意見書作成依頼対象者_市町村コード extends TestBase {
 
         private INinteiShinchokuJohoDac ninteiShinchokuJohoDac;
         private IShujiiIkenshoIraiTaishoshaDac shujiiIkenshoIraiTaishoshaDac;
@@ -57,7 +80,7 @@ public class ShujiiIkenshoIraiTaishoshaFinderTest extends TestBase {
         }
     }
 
-    public static class get主治医意見書作成依頼対象者_市町村コードなし extends TestBase {
+    public static class get主治医意見書作成依頼対象者_市町村コード_支所コード extends TestBase {
 
         private INinteiShinchokuJohoDac ninteiShinchokuJohoDac;
         private IShujiiIkenshoIraiTaishoshaDac shujiiIkenshoIraiTaishoshaDac;
@@ -67,15 +90,18 @@ public class ShujiiIkenshoIraiTaishoshaFinderTest extends TestBase {
 
         @Test
         public void 主治医意見書作成依頼が未完了の対象者が_存在しない場合_EMPTY_LISTが返されること() {
-            ninteiShinchokuJohoDac = mock(INinteiShinchokuJohoDac.class);
-            when(ninteiShinchokuJohoDac.select主治医意見書作成依頼未完了()).thenReturn(Collections.EMPTY_LIST);
+            ShichosonCode 市町村コード = new ShichosonCode(new RString("0001"));
+            RString 支所コード = new RString("0002");
+
+            shujiiIkenshoIraiTaishoshaDac = mock(IShujiiIkenshoIraiTaishoshaDac.class);
+            when(shujiiIkenshoIraiTaishoshaDac.select主治医意見書作成依頼対象者(any(ShichosonCode.class), any(RString.class))).thenReturn(Collections.EMPTY_LIST);
             sut = new ShujiiIkenshoIraiTaishoshaFinder(
                     ninteiShinchokuJohoDac,
                     shujiiIkenshoIraiTaishoshaDac,
                     ninteiShinseiJohoDac,
                     shujiiJohoDac,
                     shujiiIkenshoIraiJohoDac);
-            List<ShujiiIkenshoIraiTaishosha> resultList = sut.get主治医意見書作成依頼対象者();
+            List<ShujiiIkenshoIraiTaishosha> resultList = sut.get主治医意見書作成依頼対象者(市町村コード, 支所コード);
             assertThat(resultList, is(Collections.EMPTY_LIST));
         }
     }

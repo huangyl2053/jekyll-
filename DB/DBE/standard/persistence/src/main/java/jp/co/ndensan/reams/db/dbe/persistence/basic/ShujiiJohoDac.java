@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
@@ -25,7 +25,7 @@ public class ShujiiJohoDac implements IShujiiJohoDac {
     private SqlSession session;
 
     @Override
-    public DbT7012ShujiiJohoEntity select(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, IShikibetsuCode 医師コード) {
+    public DbT7012ShujiiJohoEntity select(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, ShikibetsuCode 医師コード) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor
                 .select()
