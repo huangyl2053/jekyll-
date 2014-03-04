@@ -14,11 +14,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ChosaKubun {
 
     /**
-     * 調査区分が「新規調査」であることを表します。
+     * 調査区分が「新規調査」であることを表します。<br />
+     * コード : 0
      */
     新規調査(0),
     /**
-     * 調査区分が「再調査」であることを表します。
+     * 調査区分が「再調査」であることを表します。<br />
+     * コード : 1
      */
     再調査(1);
     private final int code;
