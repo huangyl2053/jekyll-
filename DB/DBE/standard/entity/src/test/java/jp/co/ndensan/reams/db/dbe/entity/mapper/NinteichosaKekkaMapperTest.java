@@ -41,7 +41,7 @@ public class NinteichosaKekkaMapperTest {
 
         @Test
         public void 要介護認定調査履歴番号の設定がある時_toNinteichosaResult_get要介護認定調査履歴番号は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get要介護認定調査履歴番号(), is(0));
+            assertThat(toNinteichosaResult().get調査票結果().get認定調査依頼履歴番号().value().intValue(), is(0));
         }
     }
 

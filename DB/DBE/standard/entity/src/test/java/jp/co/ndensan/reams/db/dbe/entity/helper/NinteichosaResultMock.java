@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKub
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.ChosahyoItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.ChosahyoItems;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosaItem;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -137,7 +138,7 @@ public class NinteichosaResultMock {
         setResultMap(resultMap, chosahyo, カテーテル, NaiAru.ある.getCode());
         setResultMap(resultMap, chosahyo, 障害高齢者の日常生活自立度, ShogaiKoreishaJiritsu.Ａ１.getCode());
         setResultMap(resultMap, chosahyo, 認知症高齢者の日常生活自立度, NinchishoKoreishaJiritsu.Ⅱａ.getCode());
-        return new NinteichosaResultChosahyo(new ShinseishoKanriNo(new RString("1234567890")), 0,
+        return new NinteichosaResultChosahyo(new ShinseishoKanriNo(new RString("1234567890")), new NinteichosaIraiRirekiNo(0),
                 NENDO_2006, new Ninteichosahyo(resultMap, ChosahyoItemGroup.Of2006.values()));
     }
 
@@ -152,7 +153,7 @@ public class NinteichosaResultMock {
      * @return NinteichosaResultGaikyo
      */
     public static NinteichosaResultGaikyo getSpiedNinteichosaResultGaikyoInstance() {
-        return spy(new NinteichosaResultGaikyo(new ShinseishoKanriNo(new RString("1234567890")), 0,
+        return spy(new NinteichosaResultGaikyo(new ShinseishoKanriNo(new RString("1234567890")), new NinteichosaIraiRirekiNo(0),
                 getSpiedNinteichosaResultGaikyoKihonInstance(), getSpiedNinteichosaResultGaikyoServiceInstance()));
     }
 

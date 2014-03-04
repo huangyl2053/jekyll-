@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import static java.util.Objects.requireNonNull;
@@ -16,7 +17,7 @@ import static java.util.Objects.requireNonNull;
 public class NinteichosaResultChosahyo {
 
     private final ShinseishoKanriNo 申請書管理番号;
-    private final int 要介護認定調査履歴番号;
+    private final NinteichosaIraiRirekiNo 認定調査依頼履歴番号;
     private final int 調査票改定年度;
     private final Ninteichosahyo<NinteichosaItemResult> 調査票結果;
 
@@ -24,14 +25,14 @@ public class NinteichosaResultChosahyo {
      * インスタンスを生成します。
      *
      * @param 申請書管理番号 申請書管理番号
-     * @param 要介護認定調査履歴番号 要介護認定調査履歴番号
+     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
      * @param 調査票改定年度 調査票改定年度
      * @param 調査票結果 調査票結果
      */
-    public NinteichosaResultChosahyo(
-            ShinseishoKanriNo 申請書管理番号, int 要介護認定調査履歴番号, int 調査票改定年度, Ninteichosahyo<NinteichosaItemResult> 調査票結果) {
+    public NinteichosaResultChosahyo(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号,
+            int 調査票改定年度, Ninteichosahyo<NinteichosaItemResult> 調査票結果) {
         this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00001.replace("申請書管理番号").getMessage());
-        this.要介護認定調査履歴番号 = 要介護認定調査履歴番号;
+        this.認定調査依頼履歴番号 = requireNonNull(認定調査依頼履歴番号, Messages.E00001.replace("認定調査依頼履歴番号").getMessage());
         this.調査票改定年度 = 調査票改定年度;
         this.調査票結果 = requireNonNull(調査票結果, Messages.E00001.replace("調査票結果").getMessage());
     }
@@ -46,12 +47,12 @@ public class NinteichosaResultChosahyo {
     }
 
     /**
-     * 要介護認定調査履歴番号を返します。
+     * 認定調査依頼履歴番号を返します。
      *
-     * @return 要介護認定調査履歴番号
+     * @return 認定調査依頼履歴番号
      */
-    public int get要介護認定調査履歴番号() {
-        return 要介護認定調査履歴番号;
+    public NinteichosaIraiRirekiNo get認定調査依頼履歴番号() {
+        return 認定調査依頼履歴番号;
     }
 
     /**

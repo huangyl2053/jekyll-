@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -19,14 +20,20 @@ import static org.mockito.Mockito.*;
 public class NinteichosaResultGaikyoTest {
 
     private static final int AS_申請書管理番号がNULL = 1;
-    private static final int AS_基本情報がNULL = 2;
-    private static final int AS_サービス状況がNULL = 3;
+    private static final int AS_認定調査依頼履歴番号がNULL = 2;
+    private static final int AS_基本情報がNULL = 3;
+    private static final int AS_サービス状況がNULL = 4;
 
     public static class コンストラクタ {
 
         @Test(expected = NullPointerException.class)
         public void 申請書管理番号がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
             createNinteichosaResultGaikyo(AS_申請書管理番号がNULL);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 認定調査依頼履歴番号がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
+            createNinteichosaResultGaikyo(AS_認定調査依頼履歴番号がNULL);
         }
 
         @Test(expected = NullPointerException.class)
@@ -42,7 +49,8 @@ public class NinteichosaResultGaikyoTest {
 
     private static NinteichosaResultGaikyo createNinteichosaResultGaikyo(int flg) {
         return new NinteichosaResultGaikyo(
-                flg == AS_申請書管理番号がNULL ? null : any(ShinseishoKanriNo.class), 0,
+                flg == AS_申請書管理番号がNULL ? null : any(ShinseishoKanriNo.class),
+                flg == AS_認定調査依頼履歴番号がNULL ? null : any(NinteichosaIraiRirekiNo.class),
                 flg == AS_基本情報がNULL ? null : any(NinteichosaResultGaikyoKihon.class),
                 flg == AS_サービス状況がNULL ? null : any(NinteichosaResultGaikyoService.class));
     }

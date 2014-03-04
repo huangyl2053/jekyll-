@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKub
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosaItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.ChosahyoItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.ChosahyoItems;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5008NinteichosaKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5009NinteichosahyoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
@@ -70,7 +71,7 @@ public final class NinteichosaKekkaMapper {
 
         DbT5008NinteichosaKekkaJohoEntity entity = new DbT5008NinteichosaKekkaJohoEntity();
         entity.setShinseishoKanriNo(ninteichosaKekka.get概況調査結果().get申請書管理番号().value());
-        entity.setNinteichosaRirekiNo(ninteichosaKekka.get概況調査結果().get要介護認定調査履歴番号());
+        entity.setNinteichosaRirekiNo(ninteichosaKekka.get概況調査結果().get認定調査依頼履歴番号().value().intValue());
         entity.setNinteichousaIraiKubunCode(kihon.get認定調査依頼区分().getCode());
         entity.setNinteichosaJisshiYMD(kihon.get認定調査実施年月日());
         entity.setNinteiChosaKubunCode(kihon.get認定調査区分().getCode());
@@ -121,7 +122,7 @@ public final class NinteichosaKekkaMapper {
 
         DbT5009NinteichosahyoJohoEntity entity = new DbT5009NinteichosahyoJohoEntity();
         entity.setShinseishoKanriNo(ninteichosaKekka.get調査票結果().get申請書管理番号().value());
-        entity.setNinteichosaRirekiNo(ninteichosaKekka.get調査票結果().get要介護認定調査履歴番号());
+        entity.setNinteichosaRirekiNo(ninteichosaKekka.get調査票結果().get認定調査依頼履歴番号().value().intValue());
         entity.setCk_mahiHidariJoshi(rslt.get調査項目(ChosahyoItems.麻痺等の有無_左上肢).get調査結果コード());
         entity.setCk_mahiMigiJoshi(rslt.get調査項目(ChosahyoItems.麻痺等の有無_右上肢).get調査結果コード());
         entity.setCk_mahiHidariKashi(rslt.get調査項目(ChosahyoItems.麻痺等の有無_左下肢).get調査結果コード());
@@ -281,7 +282,7 @@ public final class NinteichosaKekkaMapper {
         setResultMap(resultMap, chosahyo, ChosahyoItems.障害高齢者の日常生活自立度, chosaKekkaEntity.getShogaiNichijoSeikatsuJiritsudoCode());
         setResultMap(resultMap, chosahyo, ChosahyoItems.認知症高齢者の日常生活自立度, chosaKekkaEntity.getNinchishoNichijoSeikatsuJiritsudoCode());
         return new NinteichosaResultChosahyo(
-                new ShinseishoKanriNo(chosahyoEntity.getShinseishoKanriNo()), chosahyoEntity.getNinteichosaRirekiNo(),
+                new ShinseishoKanriNo(chosahyoEntity.getShinseishoKanriNo()), new NinteichosaIraiRirekiNo(chosahyoEntity.getNinteichosaRirekiNo()),
                 NENDO_2006, new Ninteichosahyo(resultMap, ChosahyoItemGroup.Of2006.values()));
     }
 
@@ -293,7 +294,7 @@ public final class NinteichosaKekkaMapper {
     private static NinteichosaResultGaikyo toNinteichosaResultGaikyo(DbT5008NinteichosaKekkaJohoEntity entity) {
         return new NinteichosaResultGaikyo(
                 new ShinseishoKanriNo(entity.getShinseishoKanriNo()),
-                entity.getNinteichosaRirekiNo(),
+                new NinteichosaIraiRirekiNo(entity.getNinteichosaRirekiNo()),
                 toNinteichosaResultGaikyoKihon(entity),
                 toNinteichosaResultGaikyoService(entity));
     }
