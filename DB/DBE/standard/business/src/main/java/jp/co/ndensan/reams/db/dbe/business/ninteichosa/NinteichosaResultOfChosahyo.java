@@ -14,7 +14,7 @@ import static java.util.Objects.requireNonNull;
  *
  * @author N8156 宮本 康
  */
-public class NinteichosaResultChosahyo {
+public class NinteichosaResultOfChosahyo {
 
     private final ShinseishoKanriNo 申請書管理番号;
     private final NinteichosaIraiRirekiNo 認定調査依頼履歴番号;
@@ -29,7 +29,7 @@ public class NinteichosaResultChosahyo {
      * @param 調査票改定年度 調査票改定年度
      * @param 調査票結果 調査票結果
      */
-    public NinteichosaResultChosahyo(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号,
+    public NinteichosaResultOfChosahyo(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号,
             int 調査票改定年度, Ninteichosahyo<NinteichosaItemResult> 調査票結果) {
         this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00001.replace("申請書管理番号").getMessage());
         this.認定調査依頼履歴番号 = requireNonNull(認定調査依頼履歴番号, Messages.E00001.replace("認定調査依頼履歴番号").getMessage());

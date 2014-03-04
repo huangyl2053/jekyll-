@@ -10,10 +10,10 @@ import jp.co.ndensan.reams.db.dbe.business.ninteichosa.Ninteichosahyo;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosahyoFactory;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaItemResult;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResult;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultChosahyo;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultGaikyo;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultGaikyoKihon;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultGaikyoService;
+import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfChosahyo;
+import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyo;
+import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyoKihon;
+import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyoService;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GenzaiJokyoKubun;
@@ -57,9 +57,9 @@ public class NinteichosaResultMock {
     /**
      * NinteichosaResultChosahyoを生成して返します。
      *
-     * @return NinteichosaResultChosahyo
+     * @return NinteichosaResultOfChosahyo
      */
-    public static NinteichosaResultChosahyo getSpiedNinteichosaResultChosahyoInstance() {
+    public static NinteichosaResultOfChosahyo getSpiedNinteichosaResultChosahyoInstance() {
         Map<ChosahyoItems, NinteichosaItemResult> resultMap = new EnumMap<>(ChosahyoItems.class);
         Ninteichosahyo chosahyo = NinteichosahyoFactory.createInstance(NENDO_2006);
         setResultMap(resultMap, chosahyo, 麻痺等の有無_左上肢, NaiAru.ない.getCode());
@@ -138,7 +138,7 @@ public class NinteichosaResultMock {
         setResultMap(resultMap, chosahyo, カテーテル, NaiAru.ある.getCode());
         setResultMap(resultMap, chosahyo, 障害高齢者の日常生活自立度, ShogaiKoreishaJiritsu.Ａ１.getCode());
         setResultMap(resultMap, chosahyo, 認知症高齢者の日常生活自立度, NinchishoKoreishaJiritsu.Ⅱａ.getCode());
-        return new NinteichosaResultChosahyo(new ShinseishoKanriNo(new RString("1234567890")), new NinteichosaIraiRirekiNo(0), NENDO_2006,
+        return new NinteichosaResultOfChosahyo(new ShinseishoKanriNo(new RString("1234567890")), new NinteichosaIraiRirekiNo(0), NENDO_2006,
                 new Ninteichosahyo(resultMap, ChosahyoItemGroup.Of2006.values()));
     }
 
@@ -150,20 +150,20 @@ public class NinteichosaResultMock {
     /**
      * NinteichosaResultGaikyoを生成して返します。
      *
-     * @return NinteichosaResultGaikyo
+     * @return NinteichosaResultOfGaikyo
      */
-    public static NinteichosaResultGaikyo getSpiedNinteichosaResultGaikyoInstance() {
-        return spy(new NinteichosaResultGaikyo(new ShinseishoKanriNo(new RString("1234567890")), new NinteichosaIraiRirekiNo(0),
+    public static NinteichosaResultOfGaikyo getSpiedNinteichosaResultGaikyoInstance() {
+        return spy(new NinteichosaResultOfGaikyo(new ShinseishoKanriNo(new RString("1234567890")), new NinteichosaIraiRirekiNo(0),
                 getSpiedNinteichosaResultGaikyoKihonInstance(), getSpiedNinteichosaResultGaikyoServiceInstance()));
     }
 
     /**
      * NinteichosaResultGaikyoKihonを生成して返します。
      *
-     * @return NinteichosaResultGaikyoKihon
+     * @return NinteichosaResultOfGaikyoKihon
      */
-    public static NinteichosaResultGaikyoKihon getSpiedNinteichosaResultGaikyoKihonInstance() {
-        return spy(new NinteichosaResultGaikyoKihon(
+    public static NinteichosaResultOfGaikyoKihon getSpiedNinteichosaResultGaikyoKihonInstance() {
+        return spy(new NinteichosaResultOfGaikyoKihon(
                 new FlexibleDate("20140101"),
                 ChosaIraiKubun.初回,
                 new RString("12345678"),
@@ -176,10 +176,10 @@ public class NinteichosaResultMock {
     /**
      * NinteichosaResultGaikyoServiceを生成して返します。
      *
-     * @return NinteichosaResultGaikyoService
+     * @return NinteichosaResultOfGaikyoService
      */
-    public static NinteichosaResultGaikyoService getSpiedNinteichosaResultGaikyoServiceInstance() {
-        return spy(new NinteichosaResultGaikyoService(
+    public static NinteichosaResultOfGaikyoService getSpiedNinteichosaResultGaikyoServiceInstance() {
+        return spy(new NinteichosaResultOfGaikyoService(
                 ServiceKubun.介護給付サービス,
                 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0,
                 GenzaiJokyoKubun.指定介護療養型医療施設,

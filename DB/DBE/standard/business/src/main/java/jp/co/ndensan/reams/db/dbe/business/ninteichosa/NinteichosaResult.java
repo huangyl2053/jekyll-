@@ -14,8 +14,8 @@ import static java.util.Objects.requireNonNull;
  */
 public class NinteichosaResult {
 
-    private final NinteichosaResultChosahyo 調査票結果;
-    private final NinteichosaResultGaikyo 概況調査結果;
+    private final NinteichosaResultOfChosahyo 調査票結果;
+    private final NinteichosaResultOfGaikyo 概況調査結果;
 
     /**
      * インスタンスを生成します。
@@ -23,7 +23,7 @@ public class NinteichosaResult {
      * @param 調査票結果 調査票結果
      * @param 概況調査結果 概況調査結果
      */
-    public NinteichosaResult(NinteichosaResultChosahyo 調査票結果, NinteichosaResultGaikyo 概況調査結果) {
+    public NinteichosaResult(NinteichosaResultOfChosahyo 調査票結果, NinteichosaResultOfGaikyo 概況調査結果) {
         this.調査票結果 = requireNonNull(調査票結果, Messages.E00001.replace("調査票結果").getMessage());
         this.概況調査結果 = requireNonNull(概況調査結果, Messages.E00001.replace("概況調査結果").getMessage());
     }
@@ -33,7 +33,7 @@ public class NinteichosaResult {
      *
      * @return 調査票結果
      */
-    public NinteichosaResultChosahyo get調査票結果() {
+    public NinteichosaResultOfChosahyo get調査票結果() {
         return 調査票結果;
     }
 
@@ -42,7 +42,7 @@ public class NinteichosaResult {
      *
      * @return 概況調査結果
      */
-    public NinteichosaResultGaikyo get概況調査結果() {
+    public NinteichosaResultOfGaikyo get概況調査結果() {
         return 概況調査結果;
     }
 }

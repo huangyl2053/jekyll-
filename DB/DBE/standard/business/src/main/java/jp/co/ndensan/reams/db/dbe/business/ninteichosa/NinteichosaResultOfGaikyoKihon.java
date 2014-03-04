@@ -17,7 +17,7 @@ import static java.util.Objects.requireNonNull;
  *
  * @author N8156 宮本 康
  */
-public class NinteichosaResultGaikyoKihon {
+public class NinteichosaResultOfGaikyoKihon {
 
     private final FlexibleDate 認定調査実施年月日;
     private final ChosaIraiKubun 認定調査依頼区分;
@@ -40,7 +40,7 @@ public class NinteichosaResultGaikyoKihon {
      * @param 概況特記事項 概況特記事項
      * @param 審査会優先振分区分 審査会優先振分区分
      */
-    public NinteichosaResultGaikyoKihon(
+    public NinteichosaResultOfGaikyoKihon(
             FlexibleDate 認定調査実施年月日,
             ChosaIraiKubun 認定調査依頼区分,
             RString 認定調査実施場所コード,

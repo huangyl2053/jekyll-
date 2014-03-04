@@ -15,7 +15,7 @@ import static java.util.Objects.requireNonNull;
  *
  * @author N8156 宮本 康
  */
-public class NinteichosaResultGaikyoService {
+public class NinteichosaResultOfGaikyoService {
 
     private final ServiceKubun サービス区分;
     private final int 訪問介護;
@@ -72,7 +72,7 @@ public class NinteichosaResultGaikyoService {
      * @param 市町村特別給付 市町村特別給付
      * @param 介護保険給付以外の在宅サービス 介護保険給付以外の在宅サービス
      */
-    public NinteichosaResultGaikyoService(
+    public NinteichosaResultOfGaikyoService(
             ServiceKubun サービス区分,
             int 訪問介護,
             int 訪問入浴介護,

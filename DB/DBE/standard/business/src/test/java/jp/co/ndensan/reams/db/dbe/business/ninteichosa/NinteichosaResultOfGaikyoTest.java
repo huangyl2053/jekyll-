@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class NinteichosaResultGaikyoTest {
+public class NinteichosaResultOfGaikyoTest {
 
     private static final int AS_申請書管理番号がNULL = 1;
     private static final int AS_認定調査依頼履歴番号がNULL = 2;
@@ -47,11 +47,11 @@ public class NinteichosaResultGaikyoTest {
         }
     }
 
-    private static NinteichosaResultGaikyo createNinteichosaResultGaikyo(int flg) {
-        return new NinteichosaResultGaikyo(
+    private static NinteichosaResultOfGaikyo createNinteichosaResultGaikyo(int flg) {
+        return new NinteichosaResultOfGaikyo(
                 flg == AS_申請書管理番号がNULL ? null : any(ShinseishoKanriNo.class),
                 flg == AS_認定調査依頼履歴番号がNULL ? null : any(NinteichosaIraiRirekiNo.class),
-                flg == AS_基本情報がNULL ? null : any(NinteichosaResultGaikyoKihon.class),
-                flg == AS_サービス状況がNULL ? null : any(NinteichosaResultGaikyoService.class));
+                flg == AS_基本情報がNULL ? null : any(NinteichosaResultOfGaikyoKihon.class),
+                flg == AS_サービス状況がNULL ? null : any(NinteichosaResultOfGaikyoService.class));
     }
 }

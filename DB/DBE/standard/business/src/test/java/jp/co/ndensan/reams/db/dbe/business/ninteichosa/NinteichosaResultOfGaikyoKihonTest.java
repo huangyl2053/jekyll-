@@ -20,7 +20,7 @@ import static org.mockito.Mockito.*;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class NinteichosaResultGaikyoKihonTest {
+public class NinteichosaResultOfGaikyoKihonTest {
 
     private static final int AS_認定調査実施年月日がNULL = 1;
     private static final int AS_認定調査依頼区分がNULL = 2;
@@ -68,8 +68,8 @@ public class NinteichosaResultGaikyoKihonTest {
         }
     }
 
-    private static NinteichosaResultGaikyoKihon createNinteichosaResultGaikyoKihon(int flg) {
-        return new NinteichosaResultGaikyoKihon(
+    private static NinteichosaResultOfGaikyoKihon createNinteichosaResultGaikyoKihon(int flg) {
+        return new NinteichosaResultOfGaikyoKihon(
                 flg == AS_認定調査実施年月日がNULL ? null : any(FlexibleDate.class),
                 flg == AS_認定調査依頼区分がNULL ? null : any(ChosaIraiKubun.class),
                 flg == AS_認定調査実施場所コードがNULL ? null : any(RString.class),

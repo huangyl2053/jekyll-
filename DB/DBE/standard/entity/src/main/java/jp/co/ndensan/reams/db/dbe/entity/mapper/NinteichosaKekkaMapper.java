@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 import java.util.EnumMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaItemResult;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultGaikyo;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultGaikyoKihon;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultGaikyoService;
+import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyo;
+import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyoKihon;
+import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyoService;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResult;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultChosahyo;
+import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfChosahyo;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.Ninteichosahyo;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosahyoFactory;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosaIraiKubun;
@@ -65,8 +65,8 @@ public final class NinteichosaKekkaMapper {
      */
     public static DbT5008NinteichosaKekkaJohoEntity toDbT5008NinteichosaKekkaJohoEntity(NinteichosaResult ninteichosaKekka) {
 
-        NinteichosaResultGaikyoKihon kihon = ninteichosaKekka.get概況調査結果().get基本情報();
-        NinteichosaResultGaikyoService service = ninteichosaKekka.get概況調査結果().getサービス状況();
+        NinteichosaResultOfGaikyoKihon kihon = ninteichosaKekka.get概況調査結果().get基本情報();
+        NinteichosaResultOfGaikyoService service = ninteichosaKekka.get概況調査結果().getサービス状況();
         Ninteichosahyo<NinteichosaItemResult> rslt = ninteichosaKekka.get調査票結果().get調査票結果();
 
         DbT5008NinteichosaKekkaJohoEntity entity = new DbT5008NinteichosaKekkaJohoEntity();
@@ -201,7 +201,7 @@ public final class NinteichosaKekkaMapper {
         return entity;
     }
 
-    private static NinteichosaResultChosahyo toNinteichosaResultChosahyo(
+    private static NinteichosaResultOfChosahyo toNinteichosaResultChosahyo(
             DbT5008NinteichosaKekkaJohoEntity chosaKekkaEntity, DbT5009NinteichosahyoJohoEntity chosahyoEntity) {
         Map<ChosahyoItems, NinteichosaItemResult> resultMap = new EnumMap<>(ChosahyoItems.class);
         Ninteichosahyo chosahyo = NinteichosahyoFactory.createInstance(NENDO_2006);
@@ -281,7 +281,7 @@ public final class NinteichosaKekkaMapper {
         setResultMap(resultMap, chosahyo, ChosahyoItems.カテーテル, chosahyoEntity.getCk_catheter());
         setResultMap(resultMap, chosahyo, ChosahyoItems.障害高齢者の日常生活自立度, chosaKekkaEntity.getShogaiNichijoSeikatsuJiritsudoCode());
         setResultMap(resultMap, chosahyo, ChosahyoItems.認知症高齢者の日常生活自立度, chosaKekkaEntity.getNinchishoNichijoSeikatsuJiritsudoCode());
-        return new NinteichosaResultChosahyo(
+        return new NinteichosaResultOfChosahyo(
                 new ShinseishoKanriNo(chosahyoEntity.getShinseishoKanriNo()), new NinteichosaIraiRirekiNo(chosahyoEntity.getNinteichosaRirekiNo()),
                 NENDO_2006, new Ninteichosahyo(resultMap, ChosahyoItemGroup.Of2006.values()));
     }
@@ -291,16 +291,16 @@ public final class NinteichosaKekkaMapper {
         調査結果Map.put(調査票項目, new NinteichosaItemResult((NinteichosaItem) 調査票.get調査項目(調査票項目), 調査結果));
     }
 
-    private static NinteichosaResultGaikyo toNinteichosaResultGaikyo(DbT5008NinteichosaKekkaJohoEntity entity) {
-        return new NinteichosaResultGaikyo(
+    private static NinteichosaResultOfGaikyo toNinteichosaResultGaikyo(DbT5008NinteichosaKekkaJohoEntity entity) {
+        return new NinteichosaResultOfGaikyo(
                 new ShinseishoKanriNo(entity.getShinseishoKanriNo()),
                 new NinteichosaIraiRirekiNo(entity.getNinteichosaRirekiNo()),
                 toNinteichosaResultGaikyoKihon(entity),
                 toNinteichosaResultGaikyoService(entity));
     }
 
-    private static NinteichosaResultGaikyoKihon toNinteichosaResultGaikyoKihon(DbT5008NinteichosaKekkaJohoEntity entity) {
-        return new NinteichosaResultGaikyoKihon(
+    private static NinteichosaResultOfGaikyoKihon toNinteichosaResultGaikyoKihon(DbT5008NinteichosaKekkaJohoEntity entity) {
+        return new NinteichosaResultOfGaikyoKihon(
                 entity.getNinteichosaJisshiYMD(),
                 ChosaIraiKubun.toValue(entity.getNinteichousaIraiKubunCode()),
                 entity.getChosaJisshiBashoCode(),
@@ -310,8 +310,8 @@ public final class NinteichosaKekkaMapper {
                 ShinsakaiFuriwakeKubun.toValue(entity.getShinsakaiYusenWaritsukeKubunCode()));
     }
 
-    private static NinteichosaResultGaikyoService toNinteichosaResultGaikyoService(DbT5008NinteichosaKekkaJohoEntity entity) {
-        return new NinteichosaResultGaikyoService(
+    private static NinteichosaResultOfGaikyoService toNinteichosaResultGaikyoService(DbT5008NinteichosaKekkaJohoEntity entity) {
+        return new NinteichosaResultOfGaikyoService(
                 ServiceKubun.toValue(entity.getServiceKubunCode()),
                 entity.getHomonKaigo(),
                 entity.getHomonNyuyokuKaigo(),

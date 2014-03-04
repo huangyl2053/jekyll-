@@ -18,7 +18,7 @@ import static org.mockito.Mockito.*;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class NinteichosaResultGaikyoServiceTest {
+public class NinteichosaResultOfGaikyoServiceTest {
 
     private static final int AS_サービス区分がNULL = 1;
     private static final int AS_現在の状況がNULL = 2;
@@ -48,8 +48,8 @@ public class NinteichosaResultGaikyoServiceTest {
         }
     }
 
-    private static NinteichosaResultGaikyoService createNinteichosaResultGaikyoService(int flg) {
-        return new NinteichosaResultGaikyoService(
+    private static NinteichosaResultOfGaikyoService createNinteichosaResultGaikyoService(int flg) {
+        return new NinteichosaResultOfGaikyoService(
                 flg == AS_サービス区分がNULL ? null : any(ServiceKubun.class),
                 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0,
                 flg == AS_現在の状況がNULL ? null : any(GenzaiJokyoKubun.class),

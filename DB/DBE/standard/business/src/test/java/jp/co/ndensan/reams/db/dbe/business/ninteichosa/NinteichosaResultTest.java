@@ -35,7 +35,7 @@ public class NinteichosaResultTest {
 
     private static NinteichosaResult createNinteichosaResult(int flg) {
         return new NinteichosaResult(
-                flg == AS_調査票結果がNULL ? null : any(NinteichosaResultChosahyo.class),
-                flg == AS_概況調査結果がNULL ? null : any(NinteichosaResultGaikyo.class));
+                flg == AS_調査票結果がNULL ? null : any(NinteichosaResultOfChosahyo.class),
+                flg == AS_概況調査結果がNULL ? null : any(NinteichosaResultOfGaikyo.class));
     }
 }
