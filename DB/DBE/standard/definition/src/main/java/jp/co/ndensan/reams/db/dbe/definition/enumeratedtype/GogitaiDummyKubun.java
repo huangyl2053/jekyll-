@@ -35,7 +35,7 @@ public enum GogitaiDummyKubun {
     }
 
     /**
-     * 引数に真理値を指定し、対応したGogitaiDummyを返します。
+     * 引数に真理値を指定し、対応した合議体ダミー区分を返します。
      *
      * @param ダミーフラグ ダミーフラグ
      * @return 対応した合議体ダミー区分
