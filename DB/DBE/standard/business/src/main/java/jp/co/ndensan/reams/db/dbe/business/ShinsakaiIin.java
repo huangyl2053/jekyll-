@@ -42,12 +42,7 @@ public class ShinsakaiIin {
     private final YubinNo 郵便番号;
     private final AtenaJusho 住所;
     private final TelNo 電話番号;
-    private final KinyuKikanCode 金融機関コード;
-    private final KinyuKikanShitenCode 金融機関支店コード;
-    private final RString 口座種別;
-    private final RString 口座名義人;
-    private final RString 口座名義人カナ;
-    private final RString 口座番号;
+    private final ShinsakaiIinKozaJoho 口座情報;
 
     /**
      * 引数からメンバを受け取るコンストラクタです。
@@ -64,18 +59,12 @@ public class ShinsakaiIin {
      * @param 郵便番号 郵便番号
      * @param 住所 住所
      * @param 電話番号 電話番号
-     * @param 金融機関コード 金融機関コード
-     * @param 金融機関支店コード 金融機関支店コード
-     * @param 口座種別 口座種別
-     * @param 口座名義人 口座名義人
-     * @param 口座名義人カナ 口座名義人カナ
-     * @param 口座番号 口座番号
+     * @param 口座情報 口座情報
      * @throws NullPointerException 引数のいずれかにNullが渡されたとき
      */
     public ShinsakaiIin(ShinsakaiIinCode 委員コード, Range<FlexibleDate> 委員着任期間, ShinsakaiIinJokyo 審査会委員状況,
             JigyoshaNo 事業者番号, AtenaMeisho 氏名, AtenaKanaMeisho カナ氏名, Gender 性別, ShinsakaiIinShikaku 審査会委員資格,
-            ShinsainYusoKubun 審査委員郵送区分, YubinNo 郵便番号, AtenaJusho 住所, TelNo 電話番号, KinyuKikanCode 金融機関コード,
-            KinyuKikanShitenCode 金融機関支店コード, RString 口座種別, RString 口座名義人, RString 口座名義人カナ, RString 口座番号)
+            ShinsainYusoKubun 審査委員郵送区分, YubinNo 郵便番号, AtenaJusho 住所, TelNo 電話番号, ShinsakaiIinKozaJoho 口座情報)
             throws NullPointerException {
         requireNonNull(委員コード, Messages.E00003.replace("委員コード", getClass().getName()).getMessage());
         requireNonNull(委員着任期間, Messages.E00003.replace("委員着任期間", getClass().getName()).getMessage());
@@ -89,12 +78,7 @@ public class ShinsakaiIin {
         requireNonNull(郵便番号, Messages.E00003.replace("郵便番号", getClass().getName()).getMessage());
         requireNonNull(住所, Messages.E00003.replace("住所", getClass().getName()).getMessage());
         requireNonNull(電話番号, Messages.E00003.replace("電話番号", getClass().getName()).getMessage());
-        requireNonNull(金融機関コード, Messages.E00003.replace("金融機関コード", getClass().getName()).getMessage());
-        requireNonNull(金融機関支店コード, Messages.E00003.replace("金融機関支店コード", getClass().getName()).getMessage());
-        requireNonNull(口座種別, Messages.E00003.replace("口座種別", getClass().getName()).getMessage());
-        requireNonNull(口座名義人, Messages.E00003.replace("口座名義人", getClass().getName()).getMessage());
-        requireNonNull(口座名義人カナ, Messages.E00003.replace("口座名義人カナ", getClass().getName()).getMessage());
-        requireNonNull(口座番号, Messages.E00003.replace("口座番号", getClass().getName()).getMessage());
+        requireNonNull(口座情報, Messages.E00003.replace("口座情報", getClass().getName()).getMessage());
 
         this.委員コード = 委員コード;
         this.委員着任期間 = 委員着任期間;
@@ -108,12 +92,7 @@ public class ShinsakaiIin {
         this.郵便番号 = 郵便番号;
         this.住所 = 住所;
         this.電話番号 = 電話番号;
-        this.金融機関コード = 金融機関コード;
-        this.金融機関支店コード = 金融機関支店コード;
-        this.口座種別 = 口座種別;
-        this.口座名義人 = 口座名義人;
-        this.口座名義人カナ = 口座名義人カナ;
-        this.口座番号 = 口座番号;
+        this.口座情報 = 口座情報;
     }
 
     /**
@@ -225,56 +204,11 @@ public class ShinsakaiIin {
     }
 
     /**
-     * 金融機関コードを返します。
+     * 審査会委員の口座情報を取得します。
      *
-     * @return 金融機関コード
+     * @return 口座情報
      */
-    public KinyuKikanCode get金融機関コード() {
-        return 金融機関コード;
-    }
-
-    /**
-     * 金融機関支店コードを返します。
-     *
-     * @return 金融機関支店コード
-     */
-    public KinyuKikanShitenCode get金融機関支店コード() {
-        return 金融機関支店コード;
-    }
-
-    /**
-     * 口座種別を返します。
-     *
-     * @return 口座種別
-     */
-    public RString get口座種別() {
-        return 口座種別;
-    }
-
-    /**
-     * 口座名義人の氏名を返します。
-     *
-     * @return 口座名義人氏名
-     */
-    public RString get口座名義人() {
-        return 口座名義人;
-    }
-
-    /**
-     * 口座名義人カナ氏名を返します。
-     *
-     * @return 口座名義人カナ氏名
-     */
-    public RString get口座名義人カナ() {
-        return 口座名義人カナ;
-    }
-
-    /**
-     * 口座番号を返します。
-     *
-     * @return 口座番号
-     */
-    public RString get口座番号() {
-        return 口座番号;
+    public ShinsakaiIinKozaJoho get口座情報() {
+        return 口座情報;
     }
 }

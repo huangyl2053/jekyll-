@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIin;
+import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinKozaJoho;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinShikaku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsainYusoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinJokyo;
@@ -47,7 +48,11 @@ public final class ShinsakaiIinMapper {
                 Gender.toValue(委員Entity.getSeibetsu()),
                 new ShinsakaiIinShikaku(委員Entity.getShinsakaiIinShikakuCode().getColumnValue(), 委員Entity.getShinsakaiIinShikakuName()),
                 ShinsainYusoKubun.toValue(委員Entity.getShinsainYusoKubun()), 委員Entity.getYubinNo(), 委員Entity.getJusho(),
-                委員Entity.getTelNo(), 委員Entity.getKinyuKikanCode(), 委員Entity.getKinyuKikanShitenCode(),
+                委員Entity.getTelNo(), create審査会委員口座情報(委員Entity));
+    }
+
+    private static ShinsakaiIinKozaJoho create審査会委員口座情報(DbT5102ShinsakaiIinJohoEntity 委員Entity) {
+        return new ShinsakaiIinKozaJoho(委員Entity.getKinyuKikanCode(), 委員Entity.getKinyuKikanShitenCode(),
                 委員Entity.getKozaShubetsu(), 委員Entity.getKozaMeigi(), 委員Entity.getKozaMeigiKana(), 委員Entity.getKozaNo());
     }
 
@@ -77,12 +82,12 @@ public final class ShinsakaiIinMapper {
         委員Entity.setYubinNo(審査会委員.get郵便番号());
         委員Entity.setJusho(審査会委員.get住所());
         委員Entity.setTelNo(審査会委員.get電話番号());
-        委員Entity.setKinyuKikanCode(審査会委員.get金融機関コード());
-        委員Entity.setKinyuKikanShitenCode(審査会委員.get金融機関支店コード());
-        委員Entity.setKozaShubetsu(審査会委員.get口座種別());
-        委員Entity.setKozaMeigi(審査会委員.get口座名義人());
-        委員Entity.setKozaMeigiKana(審査会委員.get口座名義人カナ());
-        委員Entity.setKozaNo(審査会委員.get口座番号());
+        委員Entity.setKinyuKikanCode(審査会委員.get口座情報().get金融機関コード());
+        委員Entity.setKinyuKikanShitenCode(審査会委員.get口座情報().get金融機関支店コード());
+        委員Entity.setKozaShubetsu(審査会委員.get口座情報().get口座種別());
+        委員Entity.setKozaMeigi(審査会委員.get口座情報().get口座名義人());
+        委員Entity.setKozaMeigiKana(審査会委員.get口座情報().get口座名義人カナ());
+        委員Entity.setKozaNo(審査会委員.get口座情報().get口座番号());
         return 委員Entity;
     }
 }

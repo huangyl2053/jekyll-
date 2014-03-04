@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIin;
+import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinKozaJoho;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinShikaku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsainYusoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinJokyo;
@@ -147,37 +148,37 @@ public class ShinsakaiIinMapperTest {
         @Test
         public void 金融機関コードに01を持つEntityが渡されたとき_金融機関コードに01を持つ審査会委員が返る() {
             sut = ShinsakaiIinMapper.to審査会委員(createEntity());
-            assertThat(sut.get金融機関コード(), is(金融機関コード_01));
+            assertThat(sut.get口座情報().get金融機関コード(), is(金融機関コード_01));
         }
 
         @Test
         public void 金融機関支店コードに011を持つEntityが渡されたとき_金融機関支店コードに011を持つ審査会委員が返る() {
             sut = ShinsakaiIinMapper.to審査会委員(createEntity());
-            assertThat(sut.get金融機関支店コード(), is(金融機関支店コード_011));
+            assertThat(sut.get口座情報().get金融機関支店コード(), is(金融機関支店コード_011));
         }
 
         @Test
         public void 口座種別に普通を持つEntityが渡されたとき_口座種別に普通を持つ審査会委員が返る() {
             sut = ShinsakaiIinMapper.to審査会委員(createEntity());
-            assertThat(sut.get口座種別(), is(口座種別_普通));
+            assertThat(sut.get口座情報().get口座種別(), is(口座種別_普通));
         }
 
         @Test
         public void 口座名義人に次郎を持つEntityが渡されたとき_口座名義人に次郎を持つ審査会委員が返る() {
             sut = ShinsakaiIinMapper.to審査会委員(createEntity());
-            assertThat(sut.get口座名義人(), is(口座名義人_次郎));
+            assertThat(sut.get口座情報().get口座名義人(), is(口座名義人_次郎));
         }
 
         @Test
         public void 口座名義人カナにジロウを持つEntityが渡されたとき_口座名義人カナにジロウを持つ審査会委員が返る() {
             sut = ShinsakaiIinMapper.to審査会委員(createEntity());
-            assertThat(sut.get口座名義人カナ(), is(口座名義人カナ_ジロウ));
+            assertThat(sut.get口座情報().get口座名義人カナ(), is(口座名義人カナ_ジロウ));
         }
 
         @Test
         public void 口座番号に1237890を持つEntityが渡されたとき_口座番号に1237890を持つ審査会委員が返る() {
             sut = ShinsakaiIinMapper.to審査会委員(createEntity());
-            assertThat(sut.get口座番号(), is(口座番号_1237890));
+            assertThat(sut.get口座情報().get口座番号(), is(口座番号_1237890));
         }
     }
 
@@ -307,10 +308,12 @@ public class ShinsakaiIinMapperTest {
     }
 
     private static ShinsakaiIin createShinsakaiIin() {
+        ShinsakaiIinKozaJoho kozaJoho = new ShinsakaiIinKozaJoho(金融機関コード_01,
+                金融機関支店コード_011, 口座種別_普通, 口座名義人_次郎, 口座名義人カナ_ジロウ, 口座番号_1237890);
+
         return new ShinsakaiIin(委員コード_iin01, 委員着任期間_19991212_20101212, 審査会委員状況_有効,
                 事業者番号_jigyo01, 氏名_太郎, カナ氏名_タロウ, 性別_MALE, 審査会委員資格_code_name,
-                審査委員郵送区分_自宅, 郵便番号_1231234, 住所_山田市, 電話番号_0981234567, 金融機関コード_01,
-                金融機関支店コード_011, 口座種別_普通, 口座名義人_次郎, 口座名義人カナ_ジロウ, 口座番号_1237890);
+                審査委員郵送区分_自宅, 郵便番号_1231234, 住所_山田市, 電話番号_0981234567, kozaJoho);
     }
 
     private static DbT5102ShinsakaiIinJohoEntity createEntity() {

@@ -50,12 +50,7 @@ public class ShinsakaiIinTest {
         private YubinNo 郵便番号;
         private AtenaJusho 住所;
         private TelNo 電話番号;
-        private KinyuKikanCode 金融機関コード;
-        private KinyuKikanShitenCode 金融機関支店コード;
-        private RString 口座種別;
-        private RString 口座名義人;
-        private RString 口座名義人カナ;
-        private RString 口座番号;
+        private ShinsakaiIinKozaJoho 口座情報;
         private ShinsakaiIin sut;
 
         @Before
@@ -72,146 +67,92 @@ public class ShinsakaiIinTest {
             郵便番号 = new YubinNo(new RString("123-1234"));
             住所 = new AtenaJusho(RString.EMPTY);
             電話番号 = new TelNo(RString.EMPTY);
-            金融機関コード = new KinyuKikanCode(RString.EMPTY);
-            金融機関支店コード = new KinyuKikanShitenCode(RString.EMPTY);
-            口座種別 = RString.EMPTY;
-            口座名義人 = RString.EMPTY;
-            口座名義人カナ = RString.EMPTY;
-            口座番号 = RString.EMPTY;
+            口座情報 = mock(ShinsakaiIinKozaJoho.class);
         }
 
         @Test
         public void 必須項目がそろっているとき_インスタンスが生成される() {
             sut = new ShinsakaiIin(委員コード, 委員着任期間, 審査会委員状況, 事業者番号, 氏名, カナ氏名,
-                    性別, 審査会委員資格, 審査委員郵送区分, 郵便番号, 住所, 電話番号, 金融機関コード, 金融機関支店コード,
-                    口座種別, 口座名義人, 口座名義人カナ, 口座番号);
+                    性別, 審査会委員資格, 審査委員郵送区分, 郵便番号, 住所, 電話番号, 口座情報);
             assertThat(sut, is(instanceOf(ShinsakaiIin.class)));
         }
 
         @Test(expected = NullPointerException.class)
         public void 委員コードにnullが渡されたとき_NullPointerExceptionが発生する() {
             sut = new ShinsakaiIin(null, 委員着任期間, 審査会委員状況, 事業者番号, 氏名, カナ氏名,
-                    性別, 審査会委員資格, 審査委員郵送区分, 郵便番号, 住所, 電話番号, 金融機関コード, 金融機関支店コード,
-                    口座種別, 口座名義人, 口座名義人カナ, 口座番号);
+                    性別, 審査会委員資格, 審査委員郵送区分, 郵便番号, 住所, 電話番号, 口座情報);
         }
 
         @Test(expected = NullPointerException.class)
         public void 委員着任期間にnullが渡されたとき_NullPointerExceptionが発生する() {
             sut = new ShinsakaiIin(委員コード, null, 審査会委員状況, 事業者番号, 氏名, カナ氏名,
-                    性別, 審査会委員資格, 審査委員郵送区分, 郵便番号, 住所, 電話番号, 金融機関コード, 金融機関支店コード,
-                    口座種別, 口座名義人, 口座名義人カナ, 口座番号);
+                    性別, 審査会委員資格, 審査委員郵送区分, 郵便番号, 住所, 電話番号, 口座情報);
         }
 
         @Test(expected = NullPointerException.class)
         public void 審査会委員状況にnullが渡されたとき_NullPointerExceptionが発生する() {
             sut = new ShinsakaiIin(委員コード, 委員着任期間, null, 事業者番号, 氏名, カナ氏名,
-                    性別, 審査会委員資格, 審査委員郵送区分, 郵便番号, 住所, 電話番号, 金融機関コード, 金融機関支店コード,
-                    口座種別, 口座名義人, 口座名義人カナ, 口座番号);
+                    性別, 審査会委員資格, 審査委員郵送区分, 郵便番号, 住所, 電話番号, 口座情報);
         }
 
         @Test(expected = NullPointerException.class)
         public void 事業者番号にnullが渡されたとき_NullPointerExceptionが発生する() {
             sut = new ShinsakaiIin(委員コード, 委員着任期間, 審査会委員状況, null, 氏名, カナ氏名,
-                    性別, 審査会委員資格, 審査委員郵送区分, 郵便番号, 住所, 電話番号, 金融機関コード, 金融機関支店コード,
-                    口座種別, 口座名義人, 口座名義人カナ, 口座番号);
+                    性別, 審査会委員資格, 審査委員郵送区分, 郵便番号, 住所, 電話番号, 口座情報);
         }
 
         @Test(expected = NullPointerException.class)
         public void 氏名にnullが渡されたとき_NullPointerExceptionが発生する() {
             sut = new ShinsakaiIin(委員コード, 委員着任期間, 審査会委員状況, 事業者番号, null, カナ氏名,
-                    性別, 審査会委員資格, 審査委員郵送区分, 郵便番号, 住所, 電話番号, 金融機関コード, 金融機関支店コード,
-                    口座種別, 口座名義人, 口座名義人カナ, 口座番号);
+                    性別, 審査会委員資格, 審査委員郵送区分, 郵便番号, 住所, 電話番号, 口座情報);
         }
 
         @Test(expected = NullPointerException.class)
         public void カナ氏名にnullが渡されたとき_NullPointerExceptionが発生する() {
             sut = new ShinsakaiIin(委員コード, 委員着任期間, 審査会委員状況, 事業者番号, 氏名, null,
-                    性別, 審査会委員資格, 審査委員郵送区分, 郵便番号, 住所, 電話番号, 金融機関コード, 金融機関支店コード,
-                    口座種別, 口座名義人, 口座名義人カナ, 口座番号);
+                    性別, 審査会委員資格, 審査委員郵送区分, 郵便番号, 住所, 電話番号, 口座情報);
         }
 
         @Test(expected = NullPointerException.class)
         public void 性別にnullが渡されたとき_NullPointerExceptionが発生する() {
             sut = new ShinsakaiIin(委員コード, 委員着任期間, 審査会委員状況, 事業者番号, 氏名, カナ氏名,
-                    null, 審査会委員資格, 審査委員郵送区分, 郵便番号, 住所, 電話番号, 金融機関コード, 金融機関支店コード,
-                    口座種別, 口座名義人, 口座名義人カナ, 口座番号);
+                    null, 審査会委員資格, 審査委員郵送区分, 郵便番号, 住所, 電話番号, 口座情報);
         }
 
         @Test(expected = NullPointerException.class)
         public void 審査会委員資格にnullが渡されたとき_NullPointerExceptionが発生する() {
             sut = new ShinsakaiIin(委員コード, 委員着任期間, 審査会委員状況, 事業者番号, 氏名, カナ氏名,
-                    性別, null, 審査委員郵送区分, 郵便番号, 住所, 電話番号, 金融機関コード, 金融機関支店コード,
-                    口座種別, 口座名義人, 口座名義人カナ, 口座番号);
+                    性別, null, 審査委員郵送区分, 郵便番号, 住所, 電話番号, 口座情報);
         }
 
         @Test(expected = NullPointerException.class)
         public void 審査委員郵送区分にnullが渡されたとき_NullPointerExceptionが発生する() {
             sut = new ShinsakaiIin(委員コード, 委員着任期間, 審査会委員状況, 事業者番号, 氏名, カナ氏名,
-                    性別, 審査会委員資格, null, 郵便番号, 住所, 電話番号, 金融機関コード, 金融機関支店コード,
-                    口座種別, 口座名義人, 口座名義人カナ, 口座番号);
+                    性別, 審査会委員資格, null, 郵便番号, 住所, 電話番号, 口座情報);
         }
 
         @Test(expected = NullPointerException.class)
         public void 郵便番号にnullが渡されたとき_NullPointerExceptionが発生する() {
             sut = new ShinsakaiIin(委員コード, 委員着任期間, 審査会委員状況, 事業者番号, 氏名, カナ氏名,
-                    性別, 審査会委員資格, 審査委員郵送区分, null, 住所, 電話番号, 金融機関コード, 金融機関支店コード,
-                    口座種別, 口座名義人, 口座名義人カナ, 口座番号);
+                    性別, 審査会委員資格, 審査委員郵送区分, null, 住所, 電話番号, 口座情報);
         }
 
         @Test(expected = NullPointerException.class)
         public void 住所にnullが渡されたとき_NullPointerExceptionが発生する() {
             sut = new ShinsakaiIin(委員コード, 委員着任期間, 審査会委員状況, 事業者番号, 氏名, カナ氏名,
-                    性別, 審査会委員資格, 審査委員郵送区分, 郵便番号, null, 電話番号, 金融機関コード, 金融機関支店コード,
-                    口座種別, 口座名義人, 口座名義人カナ, 口座番号);
+                    性別, 審査会委員資格, 審査委員郵送区分, 郵便番号, null, 電話番号, 口座情報);
         }
 
         @Test(expected = NullPointerException.class)
         public void 電話番号にnullが渡されたとき_NullPointerExceptionが発生する() {
             sut = new ShinsakaiIin(委員コード, 委員着任期間, 審査会委員状況, 事業者番号, 氏名, カナ氏名,
-                    性別, 審査会委員資格, 審査委員郵送区分, 郵便番号, 住所, null, 金融機関コード, 金融機関支店コード,
-                    口座種別, 口座名義人, 口座名義人カナ, 口座番号);
+                    性別, 審査会委員資格, 審査委員郵送区分, 郵便番号, 住所, null, 口座情報);
         }
 
         @Test(expected = NullPointerException.class)
         public void 金融機関コードにnullが渡されたとき_NullPointerExceptionが発生する() {
             sut = new ShinsakaiIin(委員コード, 委員着任期間, 審査会委員状況, 事業者番号, 氏名, カナ氏名,
-                    性別, 審査会委員資格, 審査委員郵送区分, 郵便番号, 住所, 電話番号, null, 金融機関支店コード,
-                    口座種別, 口座名義人, 口座名義人カナ, 口座番号);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 金融機関支店コードにnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut = new ShinsakaiIin(委員コード, 委員着任期間, 審査会委員状況, 事業者番号, 氏名, カナ氏名,
-                    性別, 審査会委員資格, 審査委員郵送区分, 郵便番号, 住所, 電話番号, 金融機関コード, null,
-                    口座種別, 口座名義人, 口座名義人カナ, 口座番号);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 口座種別にnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut = new ShinsakaiIin(委員コード, 委員着任期間, 審査会委員状況, 事業者番号, 氏名, カナ氏名,
-                    性別, 審査会委員資格, 審査委員郵送区分, 郵便番号, 住所, 電話番号, 金融機関コード, 金融機関支店コード,
-                    null, 口座名義人, 口座名義人カナ, 口座番号);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 口座名義人にnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut = new ShinsakaiIin(委員コード, 委員着任期間, 審査会委員状況, 事業者番号, 氏名, カナ氏名,
-                    性別, 審査会委員資格, 審査委員郵送区分, 郵便番号, 住所, 電話番号, 金融機関コード, 金融機関支店コード,
-                    口座種別, null, 口座名義人カナ, 口座番号);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 口座名義人カナにnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut = new ShinsakaiIin(委員コード, 委員着任期間, 審査会委員状況, 事業者番号, 氏名, カナ氏名,
-                    性別, 審査会委員資格, 審査委員郵送区分, 郵便番号, 住所, 電話番号, 金融機関コード, 金融機関支店コード,
-                    口座種別, 口座名義人, null, 口座番号);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 口座番号にnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut = new ShinsakaiIin(委員コード, 委員着任期間, 審査会委員状況, 事業者番号, 氏名, カナ氏名,
-                    性別, 審査会委員資格, 審査委員郵送区分, 郵便番号, 住所, 電話番号, 金融機関コード, 金融機関支店コード,
-                    口座種別, 口座名義人, 口座名義人カナ, null);
+                    性別, 審査会委員資格, 審査委員郵送区分, 郵便番号, 住所, 電話番号, null);
         }
     }
 }
