@@ -9,7 +9,7 @@ package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
  *
  * @author n8178 城間篤人
  */
-public enum GogitaiDummy {
+public enum GogitaiDummyKubun {
 
     /**
      * ダミーであることを表します。
@@ -21,7 +21,7 @@ public enum GogitaiDummy {
     notダミー(false);
     private boolean ダミーフラグ;
 
-    private GogitaiDummy(boolean ダミーフラグ) {
+    private GogitaiDummyKubun(boolean ダミーフラグ) {
         this.ダミーフラグ = ダミーフラグ;
     }
 
@@ -40,7 +40,7 @@ public enum GogitaiDummy {
      * @param ダミーフラグ ダミーフラグ
      * @return 対応した合議体ダミー
      */
-    public static GogitaiDummy toValue(boolean ダミーフラグ) {
+    public static GogitaiDummyKubun toValue(boolean ダミーフラグ) {
         if (ダミーフラグ) {
             return ダミー;
         }

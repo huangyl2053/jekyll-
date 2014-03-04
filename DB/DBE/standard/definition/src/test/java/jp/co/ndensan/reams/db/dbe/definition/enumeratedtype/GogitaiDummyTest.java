@@ -23,12 +23,12 @@ public class GogitaiDummyTest {
 
         @Test
         public void 引数にtrueを渡したとき_ダミーが返る() {
-            assertThat(GogitaiDummy.toValue(true), is(GogitaiDummy.ダミー));
+            assertThat(GogitaiDummyKubun.toValue(true), is(GogitaiDummyKubun.ダミー));
         }
 
         @Test
         public void 引数にfalseを渡したとき_notダミーが返る() {
-            assertThat(GogitaiDummy.toValue(false), is(GogitaiDummy.notダミー));
+            assertThat(GogitaiDummyKubun.toValue(false), is(GogitaiDummyKubun.notダミー));
         }
     }
 }

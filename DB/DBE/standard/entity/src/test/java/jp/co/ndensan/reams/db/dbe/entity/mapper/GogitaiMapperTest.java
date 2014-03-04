@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.GogitaiList;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIin;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIinList;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummy;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzai;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiMeisho;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
@@ -49,7 +49,7 @@ public class GogitaiMapperTest {
     private static int 審査会委員定員_7 = 7;
     private static GogitaiWariateIinList 合議体割当審査会委員List_3件 = create合議体割当委員ListMock(3);
     private static GogitaiSeishinkaIshiSonzai 精神科医師存在_在籍 = GogitaiSeishinkaIshiSonzai.在籍;
-    private static GogitaiDummy 合議体ダミー_notダミー = GogitaiDummy.notダミー;
+    private static GogitaiDummyKubun 合議体ダミー_notダミー = GogitaiDummyKubun.notダミー;
 
     public static class to合議体のテスト extends DbeTestBase {
 

@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.business.Gogitai;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiList;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIinList;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummy;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzai;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiMeisho;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
@@ -51,7 +51,7 @@ public final class GogitaiMapper {
                 開催場所, 合議体Entity.getShinsakaiYoteiTeiin(), 合議体Entity.getShinsakaiJidoWariateTeiin(),
                 合議体Entity.getShinsakaiIinTeiin(), 合議体割当委員List,
                 GogitaiSeishinkaIshiSonzai.toValue(合議体Entity.getGogitaiSeishinkaSonzaiFlag()),
-                GogitaiDummy.toValue(合議体Entity.getGogitaiDummyFlag()));
+                GogitaiDummyKubun.toValue(合議体Entity.getGogitaiDummyFlag()));
     }
 
     /**

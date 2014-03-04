@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummy;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzai;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiMeisho;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
@@ -31,7 +31,7 @@ public class Gogitai {
     private final int 審査会委員定員;
     private final GogitaiWariateIinList 合議体割当審査会委員List;
     private final GogitaiSeishinkaIshiSonzai 精神科医師存在;
-    private final GogitaiDummy 合議体ダミー;
+    private final GogitaiDummyKubun 合議体ダミー;
 
     /**
      * 引数からメンバを受け取るコンストラクタです。
@@ -53,7 +53,7 @@ public class Gogitai {
     public Gogitai(GogitaiNo 合議体番号, GogitaiMeisho 合議体名称, Range<FlexibleDate> 有効期間, Range<RString> 開始終了予定時刻,
             ShinsakaiKaisaiBasho 審査会開催場所, int 審査会予定定員, int 審査会自動割当定員, int 審査会委員定員,
             GogitaiWariateIinList 合議体割当審査会委員List, GogitaiSeishinkaIshiSonzai 精神科医存在,
-            GogitaiDummy 合議体ダミー) throws NullPointerException {
+            GogitaiDummyKubun 合議体ダミー) throws NullPointerException {
         requireNonNull(合議体番号, Messages.E00003.replace("合議体番号", getClass().getName()).getMessage());
         requireNonNull(合議体名称, Messages.E00003.replace("合議体名称", getClass().getName()).getMessage());
         requireNonNull(有効期間, Messages.E00003.replace("有効期間", getClass().getName()).getMessage());
@@ -168,7 +168,7 @@ public class Gogitai {
      *
      * @return 合議体ダミー
      */
-    public GogitaiDummy get合議体ダミー() {
+    public GogitaiDummyKubun get合議体ダミー() {
         return 合議体ダミー;
     }
 
