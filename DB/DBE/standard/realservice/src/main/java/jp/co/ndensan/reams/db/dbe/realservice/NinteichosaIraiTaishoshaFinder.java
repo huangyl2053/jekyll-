@@ -26,9 +26,12 @@ import jp.co.ndensan.reams.ur.urf.entity.basic.ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urf.entity.basic.KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.ur.urf.persistence.basic.IChosainJohoDac;
 import jp.co.ndensan.reams.ur.urf.persistence.basic.IKaigoJigyoshaDac;
+import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.ur.urz.entity.basic.KojinEntity;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.IKojinDac;
+import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
+//import jp.co.ndensan.reams.ur.urz.persistence.basic.IKojinDac;
+//import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
 
 /**
@@ -43,7 +46,8 @@ public class NinteichosaIraiTaishoshaFinder {
     private final INinteichosaItakusakiDac itakusakiDac;
     private final INinteiChosaIraiJohoDac iraiJohoDac;
     private final INinteiChosaIraiTaishoshaDac iraiTaishoshaDac;
-    private final IKojinDac kojinDac;
+//    private final IKojinDac kojinDac;
+//    private final KojinService kojinService;
     private final IKaigoJigyoshaDac kaigoJigyoshaDac;
     private final IChosainJohoDac chosainJohoDac;
 
@@ -57,7 +61,7 @@ public class NinteichosaIraiTaishoshaFinder {
         itakusakiDac = InstanceCreator.create(INinteichosaItakusakiDac.class);
         iraiJohoDac = InstanceCreator.create(INinteiChosaIraiJohoDac.class);
         iraiTaishoshaDac = InstanceCreator.create(INinteiChosaIraiTaishoshaDac.class);
-        kojinDac = InstanceCreator.create(IKojinDac.class);
+//        kojinDac = InstanceCreator.create(IKojinDac.class);
         kaigoJigyoshaDac = InstanceCreator.create(IKaigoJigyoshaDac.class);
         chosainJohoDac = InstanceCreator.create(IChosainJohoDac.class);
     }
@@ -80,7 +84,7 @@ public class NinteichosaIraiTaishoshaFinder {
             INinteichosaItakusakiDac itakusakiDac,
             INinteiChosaIraiJohoDac iraiJohoDac,
             INinteiChosaIraiTaishoshaDac iraiTaishoshaDac,
-            IKojinDac kojinDac,
+            //            IKojinDac kojinDac,
             IKaigoJigyoshaDac kaigoJigyoshaDac,
             IChosainJohoDac chosainJohoDac) {
         this.shinchokuJohoDac = shinchokuJohoDac;
@@ -88,7 +92,7 @@ public class NinteichosaIraiTaishoshaFinder {
         this.itakusakiDac = itakusakiDac;
         this.iraiJohoDac = iraiJohoDac;
         this.iraiTaishoshaDac = iraiTaishoshaDac;
-        this.kojinDac = kojinDac;
+//        this.kojinDac = kojinDac;
         this.kaigoJigyoshaDac = kaigoJigyoshaDac;
         this.chosainJohoDac = chosainJohoDac;
     }
@@ -131,7 +135,9 @@ public class NinteichosaIraiTaishoshaFinder {
         for (DbT5005NinteiShinchokuJohoEntity entity : 要介護認定進捗情報EntityList) {
 
             DbT5001NinteiShinseiJohoEntity 認定申請情報Entity = shinseiJohoDac.select(entity.getShinseishoKanriNo());
-            KojinEntity 個人Entity = kojinDac.select最新(認定申請情報Entity.getShichosonCode().getValue());
+//            KojinEntity 個人Entity = kojinDac.select最新(認定申請情報Entity.getShichosonCode().getValue());
+//            KojinEntity 個人Entity = KojinService.createKojinFinder().get個人(認定申請情報Entity.getShikibetsuCode());
+            IKojin 個人 = KojinService.createKojinFinder().get個人(認定申請情報Entity.getShikibetsuCode());
             NinteichosaIraiRirekiNo ninteichosaIraiRirekiNo = new NinteichosaIraiRirekiNo(認定申請情報Entity.getNinteichosaIraiRirekiNo());
             DbT5006NinteichosaIraiJohoEntity 認定調査依頼情報Entity = iraiJohoDac.select(
                     認定申請情報Entity.getShinseishoKanriNo().getColumnValue(),
@@ -141,7 +147,7 @@ public class NinteichosaIraiTaishoshaFinder {
             ChosainJohoEntity 調査員情報Entity = create調査員情報(認定申請情報Entity, 認定調査依頼情報Entity);
 
             list.add(NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(
-                    認定申請情報Entity, 個人Entity,
+                    認定申請情報Entity, 個人,
                     認定委託先情報Entity, 介護事業者Entity, 調査員情報Entity));
         }
         return list;
@@ -153,16 +159,16 @@ public class NinteichosaIraiTaishoshaFinder {
         boolean isUncreatable = isNull(shinseiJohoEntity) || isNull(chosaIraiJohoEntity);
         return isUncreatable ? null
                 : itakusakiDac.select(
-                shinseiJohoEntity.getShichosonCode().getValue(),
-                new KaigoJigyoshaNo(chosaIraiJohoEntity.getNinteichosaItakusakiCode().getColumnValue()),
-                true);
+                        shinseiJohoEntity.getShichosonCode().getValue(),
+                        new KaigoJigyoshaNo(chosaIraiJohoEntity.getNinteichosaItakusakiCode().getColumnValue()),
+                        true);
     }
 
     private KaigoJigyoshaEntity create介護事業者(
             DbT5006NinteichosaIraiJohoEntity chosaIraiJohoEntity) {
         return isNull(chosaIraiJohoEntity) ? null
                 : kaigoJigyoshaDac.select特定の事業者番号の事業者(
-                chosaIraiJohoEntity.getNinteichosaItakusakiCode().getColumnValue()).get(0);
+                        chosaIraiJohoEntity.getNinteichosaItakusakiCode().getColumnValue()).get(0);
     }
 
     private ChosainJohoEntity create調査員情報(
@@ -171,9 +177,9 @@ public class NinteichosaIraiTaishoshaFinder {
         boolean isUncreatable = isNull(shinseiJohoEntity) || isNull(chosaIraiJohoEntity);
         return isUncreatable ? null
                 : chosainJohoDac.selectByAllKey(
-                shinseiJohoEntity.getShichosonCode().getValue(),
-                chosaIraiJohoEntity.getNinteichosaItakusakiCode().getColumnValue(),
-                chosaIraiJohoEntity.getChousainCode().getColumnValue());
+                        shinseiJohoEntity.getShichosonCode().getValue(),
+                        chosaIraiJohoEntity.getNinteichosaItakusakiCode().getColumnValue(),
+                        chosaIraiJohoEntity.getChousainCode().getColumnValue());
     }
 
     private static <T> boolean isNull(T object) {

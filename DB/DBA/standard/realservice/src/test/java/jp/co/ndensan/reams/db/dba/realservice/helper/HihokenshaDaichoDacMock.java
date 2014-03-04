@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dba.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dba.persistence.basic.IHihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.*;
@@ -25,7 +25,7 @@ import static org.mockito.Mockito.*;
 public class HihokenshaDaichoDacMock implements IHihokenshaDaichoDac {
 
     public static RString 検索不可な被保険者番号 = new RString("検索不可");
-    public static RString 検索不可な識別コード = new RString("検索不可");
+    public static RString 検索不可な識別コード = new RString("000000000000000");
     public static RString 削除可能な市町村コード = new RString("deletable");
     public static RString 削除可能な被保険者番号 = new RString("deletable");
 
@@ -76,7 +76,7 @@ public class HihokenshaDaichoDacMock implements IHihokenshaDaichoDac {
         if (被保険者番号.getValue().equals(検索不可な被保険者番号)) {
             return null;
         }
-        return createInstance(市町村コード.getValue(), 被保険者番号.getValue(), new RString("識別コード"));
+        return createInstance(市町村コード.getValue(), 被保険者番号.getValue(), new RString("000000000000001"));
     }
 
     @Override
@@ -85,27 +85,27 @@ public class HihokenshaDaichoDacMock implements IHihokenshaDaichoDac {
             return Collections.EMPTY_LIST;
         }
         List<DbT1001HihokenshaDaichoEntity> entities = new ArrayList<>();
-        entities.add(createInstance(new RString("市町村コード"), 被保険者番号.getValue(), new RString("識別コード")));
+        entities.add(createInstance(new RString("市町村コード"), 被保険者番号.getValue(), new RString("000000000000001")));
         return entities;
     }
 
     @Override
-    public List<DbT1001HihokenshaDaichoEntity> select(ShichosonCode 市町村コード, IShikibetsuCode 識別コード) {
-        if (識別コード.getValue().equals(検索不可な識別コード)) {
+    public List<DbT1001HihokenshaDaichoEntity> select(ShichosonCode 市町村コード, ShikibetsuCode 識別コード) {
+        if (識別コード.getColumnValue().equals(検索不可な識別コード)) {
             return Collections.EMPTY_LIST;
         }
         List<DbT1001HihokenshaDaichoEntity> entities = new ArrayList<>();
-        entities.add(createInstance(市町村コード.getValue(), new RString("介護保険被保険者番号"), 識別コード.getValue()));
+        entities.add(createInstance(市町村コード.getValue(), new RString("介護保険被保険者番号"), 識別コード.getColumnValue()));
         return entities;
     }
 
     @Override
-    public List<DbT1001HihokenshaDaichoEntity> select(IShikibetsuCode 識別コード) {
-        if (識別コード.getValue().equals(検索不可な識別コード)) {
+    public List<DbT1001HihokenshaDaichoEntity> select(ShikibetsuCode 識別コード) {
+        if (識別コード.getColumnValue().equals(検索不可な識別コード)) {
             return Collections.EMPTY_LIST;
         }
         List<DbT1001HihokenshaDaichoEntity> entities = new ArrayList<>();
-        entities.add(createInstance(new RString("市町村コード"), new RString("介護保険被保険者番号"), 識別コード.getValue()));
+        entities.add(createInstance(new RString("市町村コード"), new RString("介護保険被保険者番号"), 識別コード.getColumnValue()));
         return entities;
     }
 

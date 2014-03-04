@@ -15,8 +15,8 @@ import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoIryoKikanEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.IKaigoIryoKikanDac;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.KaigoIryoKikanTestHelper;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
 import jp.co.ndensan.reams.ur.urz.realservice.IKozaManager;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
@@ -154,7 +154,7 @@ public class KaigoIryoKikanFinderTest extends TestBase {
 
     private static IKozaManager createKozaManager() {
         IKozaManager manager = mock(IKozaManager.class);
-        when(manager.get口座(any(RDate.class), any(IShikibetsuCode.class))).thenReturn(KaigoIryoKikanTestHelper.create口座List(3));
+        when(manager.get口座(any(RDate.class), any(ShikibetsuCode.class))).thenReturn(KaigoIryoKikanTestHelper.create口座List(3));
         return manager;
     }
 

@@ -17,8 +17,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>jp.co.ndensan.reams.ur</groupId>
-            <artifactId>business</artifactId>
+            <groupId>jp.co.ndensan.reams.ur.urd</groupId>
+            <artifactId>UrdBusiness</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzBusiness</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>

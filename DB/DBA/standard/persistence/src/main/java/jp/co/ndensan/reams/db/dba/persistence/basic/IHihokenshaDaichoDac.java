@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
 import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 //TODO n3327 三浦凌 IShikibetsuCodeがdefinitionへ移動するまでは、ur.businessへの依存性を残す。( pom.xmlも修正の必要あり )
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
@@ -50,7 +50,7 @@ public interface IHihokenshaDaichoDac
      * @return T1001HihokenshaDaichoEntityのリスト
      */
     @Transaction
-    List<DbT1001HihokenshaDaichoEntity> select(ShichosonCode 市町村コード, IShikibetsuCode 識別コード);
+    List<DbT1001HihokenshaDaichoEntity> select(ShichosonCode 市町村コード, ShikibetsuCode 識別コード);
 
     /**
      * 識別コードから、被保険者を検索します。
@@ -59,5 +59,5 @@ public interface IHihokenshaDaichoDac
      * @return T1001HihokenshaDaichoEntityのリスト
      */
     @Transaction
-    List<DbT1001HihokenshaDaichoEntity> select(IShikibetsuCode 識別コード);
+    List<DbT1001HihokenshaDaichoEntity> select(ShikibetsuCode 識別コード);
 }

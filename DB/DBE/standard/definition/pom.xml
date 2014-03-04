@@ -17,8 +17,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>jp.co.ndensan.reams.ur</groupId>
-            <artifactId>definition</artifactId>
+            <groupId>jp.co.ndensan.reams.ur.urd</groupId>
+            <artifactId>UrdDefinition</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzDefinition</artifactId>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>

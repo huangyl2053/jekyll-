@@ -17,9 +17,9 @@ import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.business.IKoza;
 import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
 import jp.co.ndensan.reams.ur.urz.entity.basic.UrT0516IryokikanEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -33,7 +33,7 @@ import static org.mockito.Mockito.*;
  */
 public final class KaigoIryoKikanTestHelper {
 
-    public static RString 識別コード = new RString("S02B00001");
+    public static RString 識別コード = new RString("000000001");
     public static RString 医療機関名称 = new RString("介護病院");
     public static RString 医療機関カナ名称 = new RString("カイゴビョウイン");
     public static RString 医療機関略称 = new RString("介護病院");
@@ -86,7 +86,7 @@ public final class KaigoIryoKikanTestHelper {
             }
 
             @Override
-            public IShikibetsuCode get識別コード() {
+            public ShikibetsuCode get識別コード() {
                 return createShikibetsuCode(識別コード);
             }
 
@@ -186,9 +186,9 @@ public final class KaigoIryoKikanTestHelper {
         return kozaList;
     }
 
-    private static IShikibetsuCode createShikibetsuCode(RString 識別コード) {
-        IShikibetsuCode shikibetsuCode = mock(IShikibetsuCode.class);
-        when(shikibetsuCode.getValue()).thenReturn(識別コード);
+    private static ShikibetsuCode createShikibetsuCode(RString 識別コード) {
+        ShikibetsuCode shikibetsuCode = mock(ShikibetsuCode.class);
+        when(shikibetsuCode.getColumnValue()).thenReturn(識別コード);
         return shikibetsuCode;
     }
 
