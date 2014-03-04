@@ -35,10 +35,10 @@ public enum GogitaiDummyKubun {
     }
 
     /**
-     * 引数に真理値を指定し、祖霊に対応したGogitaiDummyを返します。
+     * 引数に真理値を指定し、対応したGogitaiDummyを返します。
      *
      * @param ダミーフラグ ダミーフラグ
-     * @return 対応した合議体ダミー
+     * @return 対応した合議体ダミー区分
      */
     public static GogitaiDummyKubun toValue(boolean ダミーフラグ) {
         if (ダミーフラグ) {
