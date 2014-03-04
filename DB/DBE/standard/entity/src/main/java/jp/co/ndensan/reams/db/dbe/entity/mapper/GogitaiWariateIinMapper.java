@@ -80,14 +80,14 @@ public final class GogitaiWariateIinMapper {
      * @param 合議体 合議体
      * @return 合議体割当EntityList
      */
-    public static List<DbT5107GogitaiWariateIinJohoEntity> to合議体割当EntityList(Gogitai 合議体) {
+    public static List<DbT5107GogitaiWariateIinJohoEntity> to合議体割当委員EntityList(Gogitai 合議体) {
         if (合議体 == null) {
             return null;
         }
 
         List<DbT5107GogitaiWariateIinJohoEntity> 合議体割当委員情報EntityList = new ArrayList<>();
         for (GogitaiWariateIin 合議体割当委員 : 合議体.get合議体割当審査会委員List()) {
-            合議体割当委員情報EntityList.add(to合議体割当Entity(合議体, 合議体割当委員));
+            合議体割当委員情報EntityList.add(to合議体割当委員Entity(合議体, 合議体割当委員));
         }
         return 合議体割当委員情報EntityList;
     }
@@ -100,7 +100,7 @@ public final class GogitaiWariateIinMapper {
      * @param 合議体割当委員 合議体割当委員
      * @return 合議体割当Entity
      */
-    public static DbT5107GogitaiWariateIinJohoEntity to合議体割当Entity(Gogitai 合議体, GogitaiWariateIin 合議体割当委員) {
+    public static DbT5107GogitaiWariateIinJohoEntity to合議体割当委員Entity(Gogitai 合議体, GogitaiWariateIin 合議体割当委員) {
         if (合議体 == null || 合議体割当委員 == null) {
             return null;
         }

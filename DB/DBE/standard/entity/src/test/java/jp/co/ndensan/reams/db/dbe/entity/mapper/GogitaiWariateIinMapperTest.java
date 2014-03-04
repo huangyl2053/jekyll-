@@ -114,13 +114,13 @@ public class GogitaiWariateIinMapperTest {
 
         @Test
         public void 引数にnullが渡されたとき_nullが返る() {
-            sut = GogitaiWariateIinMapper.to合議体割当EntityList(null);
+            sut = GogitaiWariateIinMapper.to合議体割当委員EntityList(null);
             assertThat(sut, is(nullValue()));
         }
 
         @Test
         public void 要素数3の割当審査会委員Listを持つ_合議体が引数として渡されたとき_要素数3の合議体割当Entityが返る() {
-            sut = GogitaiWariateIinMapper.to合議体割当EntityList(create合議体Mock());
+            sut = GogitaiWariateIinMapper.to合議体割当委員EntityList(create合議体Mock());
             assertThat(sut.size(), is(3));
         }
     }
@@ -131,49 +131,49 @@ public class GogitaiWariateIinMapperTest {
 
         @Test
         public void 引数の合議体にnullを渡したとき_nullが返る() {
-            sut = GogitaiWariateIinMapper.to合議体割当Entity(null, createGogitaiWariateIin());
+            sut = GogitaiWariateIinMapper.to合議体割当委員Entity(null, createGogitaiWariateIin());
             assertThat(sut, is(nullValue()));
         }
 
         @Test
         public void 引数の合議体割当委員にnullを渡したとき_nullが返る() {
-            sut = GogitaiWariateIinMapper.to合議体割当Entity(create合議体Mock(), null);
+            sut = GogitaiWariateIinMapper.to合議体割当委員Entity(create合議体Mock(), null);
             assertThat(sut, is(nullValue()));
         }
 
         @Test
         public void 合議体番号に1を持つ合議体を渡したとき_合議体番号に1を持つ合議体割当Entityが返る() {
-            sut = GogitaiWariateIinMapper.to合議体割当Entity(create合議体Mock(), createGogitaiWariateIin());
+            sut = GogitaiWariateIinMapper.to合議体割当委員Entity(create合議体Mock(), createGogitaiWariateIin());
             assertThat(sut.getGogitaiNo(), is(合議体番号_1.value()));
         }
 
         @Test
         public void 合議体有効開始年月日に19991212を持つ合議体を渡したとき_合議体有効開始年月日に19991212を持つ合議体割当Entityが返る() {
-            sut = GogitaiWariateIinMapper.to合議体割当Entity(create合議体Mock(), createGogitaiWariateIin());
+            sut = GogitaiWariateIinMapper.to合議体割当委員Entity(create合議体Mock(), createGogitaiWariateIin());
             assertThat(sut.getGogitaiYukoKikanKaishiYMD(), is(有効期間_19991212_20101212.getFrom()));
         }
 
         @Test
         public void 合議体有効終了年月日に20101212を持つ合議体を渡したとき_合議体有効終了年月日に20101212を持つ合議体割当Entityが返る() {
-            sut = GogitaiWariateIinMapper.to合議体割当Entity(create合議体Mock(), createGogitaiWariateIin());
+            sut = GogitaiWariateIinMapper.to合議体割当委員Entity(create合議体Mock(), createGogitaiWariateIin());
             assertThat(sut.getGogitaiYukoKikanShuryoYMD(), is(有効期間_19991212_20101212.getTo()));
         }
 
         @Test
         public void 委員コードにiin01を持つ合議体割当委員を渡したとき_委員コードにiin01を持つ合議体割当Entityが返る() {
-            sut = GogitaiWariateIinMapper.to合議体割当Entity(create合議体Mock(), createGogitaiWariateIin());
+            sut = GogitaiWariateIinMapper.to合議体割当委員Entity(create合議体Mock(), createGogitaiWariateIin());
             assertThat(sut.getShinsakaiIinCode(), is(委員情報_iin01.get委員コード().value()));
         }
 
         @Test
         public void 認定調査員区分コードにiinCodeを持つ合議体割当委員を渡したとき_認定調査員区分コードにiinCodeを持つ合議体割当Entityが返る() {
-            sut = GogitaiWariateIinMapper.to合議体割当Entity(create合議体Mock(), createGogitaiWariateIin());
+            sut = GogitaiWariateIinMapper.to合議体割当委員Entity(create合議体Mock(), createGogitaiWariateIin());
             assertThat(sut.getShinsainKubunCode(), is(new Code(認定調査員区分_iinCode_iinName.getCode())));
         }
 
         @Test
         public void 合議体長区分コードにtaichoCodeを持つ合議体割当委員を渡したとき_合議体長区分コードにtaichoCodeを持つ合議体割当Entityが返る() {
-            sut = GogitaiWariateIinMapper.to合議体割当Entity(create合議体Mock(), createGogitaiWariateIin());
+            sut = GogitaiWariateIinMapper.to合議体割当委員Entity(create合議体Mock(), createGogitaiWariateIin());
             assertThat(sut.getGogitaichoKubunCode(), is(new Code(合議体長区分_taichoCode_taichoName.getCode())));
         }
     }

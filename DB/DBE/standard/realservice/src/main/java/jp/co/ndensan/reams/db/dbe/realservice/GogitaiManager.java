@@ -102,7 +102,7 @@ public class GogitaiManager {
      */
     public boolean save(Gogitai 合議体) {
         DbT5103GogitaiJohoEntity 合議体Entity = GogitaiMapper.to合議体Entity(合議体);
-        List<DbT5107GogitaiWariateIinJohoEntity> 合議体割当Entities = GogitaiWariateIinMapper.to合議体割当EntityList(合議体);
+        List<DbT5107GogitaiWariateIinJohoEntity> 合議体割当委員Entities = GogitaiWariateIinMapper.to合議体割当委員EntityList(合議体);
 
         int 合議体更新件数;
         合議体更新件数 = gogitaiDac.insertOrUpdate(合議体Entity);
@@ -111,8 +111,8 @@ public class GogitaiManager {
         }
 
         int 合議体割当更新件数;
-        for (DbT5107GogitaiWariateIinJohoEntity 合議体割当Entity : 合議体割当Entities) {
-            合議体割当更新件数 = gogitaiWariateDac.insertOrUpdate(合議体割当Entity);
+        for (DbT5107GogitaiWariateIinJohoEntity 合議体割当委員Entity : 合議体割当委員Entities) {
+            合議体割当更新件数 = gogitaiWariateDac.insertOrUpdate(合議体割当委員Entity);
             if (合議体割当更新件数 == 0) {
                 return false;
             }
@@ -128,7 +128,7 @@ public class GogitaiManager {
      */
     public boolean remove(Gogitai 合議体) {
         DbT5103GogitaiJohoEntity 合議体Entity = GogitaiMapper.to合議体Entity(合議体);
-        List<DbT5107GogitaiWariateIinJohoEntity> 合議体割当Entities = GogitaiWariateIinMapper.to合議体割当EntityList(合議体);
+        List<DbT5107GogitaiWariateIinJohoEntity> 合議体割当Entities = GogitaiWariateIinMapper.to合議体割当委員EntityList(合議体);
 
         int 合議体更新件数;
         合議体更新件数 = gogitaiDac.delete(合議体Entity);
