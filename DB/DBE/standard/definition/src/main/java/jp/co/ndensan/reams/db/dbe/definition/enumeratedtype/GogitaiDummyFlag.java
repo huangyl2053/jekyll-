@@ -9,19 +9,19 @@ package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
  *
  * @author n8178 城間篤人
  */
-public enum GogitaiDummyKubun {
+public enum GogitaiDummyFlag {
 
     /**
      * ダミーであることを表します。
      */
-    ダミー(true),
+    YES(true),
     /**
      * ダミーではないことを表します。
      */
-    notダミー(false);
+    NO(false);
     private boolean ダミーフラグ;
 
-    private GogitaiDummyKubun(boolean ダミーフラグ) {
+    private GogitaiDummyFlag(boolean ダミーフラグ) {
         this.ダミーフラグ = ダミーフラグ;
     }
 
@@ -30,7 +30,7 @@ public enum GogitaiDummyKubun {
      *
      * @return ダミーであるならtrue
      */
-    public boolean isダミー() {
+    public boolean isDummy() {
         return ダミーフラグ;
     }
 
@@ -40,10 +40,10 @@ public enum GogitaiDummyKubun {
      * @param ダミーフラグ ダミーフラグ
      * @return 対応した合議体ダミー区分
      */
-    public static GogitaiDummyKubun toValue(boolean ダミーフラグ) {
+    public static GogitaiDummyFlag toValue(boolean ダミーフラグ) {
         if (ダミーフラグ) {
-            return ダミー;
+            return YES;
         }
-        return notダミー;
+        return NO;
     }
 }

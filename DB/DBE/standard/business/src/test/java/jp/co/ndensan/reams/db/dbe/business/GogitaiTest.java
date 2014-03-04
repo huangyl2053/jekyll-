@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyFlag;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzai;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiMeisho;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
@@ -42,7 +42,7 @@ public class GogitaiTest {
         private int 審査会委員定員;
         private GogitaiWariateIinList 合議体割当審査会委員List;
         private GogitaiSeishinkaIshiSonzai 精神科医師存在;
-        private GogitaiDummyKubun 合議体ダミー;
+        private GogitaiDummyFlag 合議体ダミー;
 
         @Before
         public void setUp() {
@@ -56,7 +56,7 @@ public class GogitaiTest {
             審査会委員定員 = 6;
             合議体割当審査会委員List = mock(GogitaiWariateIinList.class);
             精神科医師存在 = GogitaiSeishinkaIshiSonzai.存在;
-            合議体ダミー = GogitaiDummyKubun.notダミー;
+            合議体ダミー = GogitaiDummyFlag.NO;
         }
 
         @Test

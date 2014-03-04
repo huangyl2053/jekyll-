@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.GogitaiList;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIin;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIinList;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyFlag;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzai;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiMeisho;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
@@ -49,7 +49,7 @@ public class GogitaiMapperTest {
     private static int 審査会委員定員_7 = 7;
     private static GogitaiWariateIinList 合議体割当審査会委員List_3件 = create合議体割当委員ListMock(3);
     private static GogitaiSeishinkaIshiSonzai 精神科医師存在_存在 = GogitaiSeishinkaIshiSonzai.存在;
-    private static GogitaiDummyKubun 合議体ダミー_notダミー = GogitaiDummyKubun.notダミー;
+    private static GogitaiDummyFlag 合議体ダミー_notダミー = GogitaiDummyFlag.NO;
 
     public static class to合議体のテスト extends DbeTestBase {
 
@@ -264,7 +264,7 @@ public class GogitaiMapperTest {
         @Test
         public void ダミーではない合議体を引数に指定した場合_合議体がダミーではないことを示す合議体Entityが返る() {
             sut = GogitaiMapper.to合議体Entity(createGogitai());
-            assertThat(sut.getGogitaiDummyFlag(), is(合議体ダミー_notダミー.isダミー()));
+            assertThat(sut.getGogitaiDummyFlag(), is(合議体ダミー_notダミー.isDummy()));
         }
     }
 
@@ -281,7 +281,7 @@ public class GogitaiMapperTest {
         entity.setShinsakaiJidoWariateTeiin(審査会自動割当定員_6);
         entity.setShinsakaiIinTeiin(審査会委員定員_7);
         entity.setGogitaiSeishinkaSonzaiFlag(精神科医師存在_存在.is存在());
-        entity.setGogitaiDummyFlag(合議体ダミー_notダミー.isダミー());
+        entity.setGogitaiDummyFlag(合議体ダミー_notダミー.isDummy());
         return entity;
     }
 
