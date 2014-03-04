@@ -86,12 +86,21 @@ public class GogitaiManager {
         List<GogitaiWariateIinList> 合議体割当委員List = new ArrayList<>();
         List<ShinsakaiKaisaiBasho> 開催場所List = new ArrayList<>();
         for (DbT5103GogitaiJohoEntity 合議体Entity : 合議体Entities) {
-            GogitaiWariateIinList list = GogitaiWariateIinMapper.to合議体割当委員List(
-                    wariateIinDac.select(new GogitaiNo(合議体Entity.getGogitaiNo()), 合議体Entity.getGogitaiYukoKikanKaishiYMD()));
-            合議体割当委員List.add(list);
-            開催場所List.add(kaisaiBashoManager.get審査会開催場所(new ShinsakaiKaisaiBashoCode(合議体Entity.getShinsakaiKaisaiBashoCode())));
+            合議体割当委員List.add(create合議体割当委員List(合議体Entity));
+            開催場所List.add(create審査会開催場所(合議体Entity));
         }
         return GogitaiMapper.to合議体List(合議体Entities, 開催場所List, 合議体割当委員List);
+    }
+
+    private GogitaiWariateIinList create合議体割当委員List(DbT5103GogitaiJohoEntity 合議体Entity) {
+        return GogitaiWariateIinMapper.to合議体割当委員List(
+                wariateIinDac.select(new GogitaiNo(合議体Entity.getGogitaiNo()),
+                合議体Entity.getGogitaiYukoKikanKaishiYMD()));
+
+    }
+
+    private ShinsakaiKaisaiBasho create審査会開催場所(DbT5103GogitaiJohoEntity 合議体Entity) {
+        return kaisaiBashoManager.get審査会開催場所(new ShinsakaiKaisaiBashoCode(合議体Entity.getShinsakaiKaisaiBashoCode()));
     }
 
     /**
