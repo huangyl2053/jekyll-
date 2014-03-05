@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.ChosahyoItems;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.IAnsweringItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.IChosahyoItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.IChosahyoItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.IAnsweringItems;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.INinteichosaItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosaItem;
@@ -37,8 +38,18 @@ public class NinteichosaItemResult implements INinteichosaItem {
     }
 
     @Override
-    public IChosahyoItemGroup get調査票項目分類() {
-        return 調査項目.get調査票項目分類();
+    public IChosahyoItemGroup get調査票項目グループ() {
+        return 調査項目.get調査票項目グループ();
+    }
+
+    @Override
+    public IChosahyoItemSubGroup get調査票項目サブグループ() {
+        return 調査項目.get調査票項目サブグループ();
+    }
+
+    @Override
+    public int get調査票項目サブグループ内番号() {
+        return 調査項目.get調査票項目サブグループ内番号();
     }
 
     @Override

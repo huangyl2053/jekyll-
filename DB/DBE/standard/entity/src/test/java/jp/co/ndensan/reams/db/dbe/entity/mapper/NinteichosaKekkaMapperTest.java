@@ -419,12 +419,12 @@ public class NinteichosaKekkaMapperTest {
 
         @Test
         public void 障害高齢者の日常生活自立度の設定がある時_toNinteichosaResult_get障害高齢者の日常生活自立度は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(障害高齢者の日常生活自立度).get調査結果コード(), is(ShogaiKoreishaJiritsu.Ａ１.getCode()));
+            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(障害高齢者の日常生活自立度).get調査結果コード(), is(ShogaiJiritsu.Ａ１.getCode()));
         }
 
         @Test
         public void 認知症高齢者の日常生活自立度の設定がある時_toNinteichosaResult_get認知症高齢者の日常生活自立度は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(認知症高齢者の日常生活自立度).get調査結果コード(), is(NinchishoKoreishaJiritsu.Ⅱａ.getCode()));
+            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(認知症高齢者の日常生活自立度).get調査結果コード(), is(NinchishoJiritsu.Ⅱａ.getCode()));
         }
     }
 
@@ -763,12 +763,12 @@ public class NinteichosaKekkaMapperTest {
 
         @Test
         public void 障害高齢者の日常生活自立度の設定がある時_toDbT5008NinteichosaKekkaJohoEntity_getShogaiNichijoSeikatsuJiritsudoCodeは_設定値を返す() {
-            assertThat(toDbT5008NinteichosaKekkaJohoEntity().getShogaiNichijoSeikatsuJiritsudoCode(), is(ShogaiKoreishaJiritsu.Ａ１.getCode()));
+            assertThat(toDbT5008NinteichosaKekkaJohoEntity().getShogaiNichijoSeikatsuJiritsudoCode(), is(ShogaiJiritsu.Ａ１.getCode()));
         }
 
         @Test
         public void 認知症高齢者の日常生活自立度の設定がある時_toDbT5008NinteichosaKekkaJohoEntity_getNinchishoNichijoSeikatsuJiritsudoCodeは_設定値を返す() {
-            assertThat(toDbT5008NinteichosaKekkaJohoEntity().getNinchishoNichijoSeikatsuJiritsudoCode(), is(NinchishoKoreishaJiritsu.Ⅱａ.getCode()));
+            assertThat(toDbT5008NinteichosaKekkaJohoEntity().getNinchishoNichijoSeikatsuJiritsudoCode(), is(NinchishoJiritsu.Ⅱａ.getCode()));
         }
 
         @Test

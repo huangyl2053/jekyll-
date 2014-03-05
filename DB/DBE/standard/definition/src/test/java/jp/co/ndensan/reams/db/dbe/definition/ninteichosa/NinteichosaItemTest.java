@@ -4,15 +4,17 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.ninteichosa;
 
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.ChosahyoItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.ChosahyoItems;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.ChosahyoItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.IChosahyoItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.IChosahyoItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItemNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -25,17 +27,23 @@ import static org.junit.Assert.assertThat;
 public class NinteichosaItemTest {
 
     private static final int AS_NULL項目無し = 0;
-    private static final int AS_調査票項目分類がNULL = 1;
-    private static final int AS_調査項目番号がNULL = 2;
-    private static final int AS_調査票項目がNULL = 3;
-    private static final int AS_表示名称がNULL = 4;
-    private static final int AS_選択肢グループがNULL = 5;
+    private static final int AS_調査票項目グループがNULL = 1;
+    private static final int AS_調査票項目サブグループがNULL = 2;
+    private static final int AS_調査項目番号がNULL = 3;
+    private static final int AS_調査票項目がNULL = 4;
+    private static final int AS_表示名称がNULL = 5;
+    private static final int AS_選択肢グループがNULL = 6;
 
     public static class コンストラクタ {
 
         @Test(expected = NullPointerException.class)
-        public void 調査票項目分類がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createNinteichosaItem(AS_調査票項目分類がNULL);
+        public void 調査票項目グループがNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
+            createNinteichosaItem(AS_調査票項目グループがNULL);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 調査票項目サブグループがNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
+            createNinteichosaItem(AS_調査票項目サブグループがNULL);
         }
 
         @Test(expected = NullPointerException.class)
@@ -59,11 +67,27 @@ public class NinteichosaItemTest {
         }
     }
 
-    public static class get調査票項目分類 {
+    public static class get調査票項目グループ {
 
         @Test
-        public void 調査票項目分類の設定がある時_get調査票項目分類は_設置値を返す() {
-            assertThat(createNinteichosaItem().get調査票項目分類(), is((IChosahyoItemGroup) ChosahyoItemGroup.Of2006.第１群));
+        public void 調査票項目グループの設定がある時_get調査票項目グループは_設置値を返す() {
+            assertThat(createNinteichosaItem().get調査票項目グループ(), is((IChosahyoItemGroup) ChosahyoItemGroup.Of2006.第１群));
+        }
+    }
+
+    public static class get調査票項目サブグループ {
+
+        @Test
+        public void 調査票項目サブグループの設定がある時_get調査票項目サブグループは_設置値を返す() {
+            assertThat(createNinteichosaItem().get調査票項目サブグループ(), is((IChosahyoItemSubGroup) ChosahyoItemSubGroup.Of2006.麻痺等の有無));
+        }
+    }
+
+    public static class get調査票項目サブグループ内番号 {
+
+        @Test
+        public void 調査票項目サブグループ内番号の設定がある時_get調査票項目サブグループ内番号は_設定値を返す() {
+            assertThat(createNinteichosaItem().get調査票項目サブグループ内番号(), is(1));
         }
     }
 
@@ -71,7 +95,7 @@ public class NinteichosaItemTest {
 
         @Test
         public void 調査項目番号の設定がある時_get調査項目番号は_設定値を返す() {
-            assertThat(createNinteichosaItem().get調査項目番号().value(), is(new RString("101")));
+            assertThat(createNinteichosaItem().get調査項目番号().value(), is(new RString("1-1")));
         }
     }
 
@@ -83,11 +107,11 @@ public class NinteichosaItemTest {
         }
     }
 
-    public static class get表示項目 {
+    public static class get表示名称 {
 
         @Test
         public void 表示名称の設定がある時_get表示名称は_設定値を返す() {
-            assertThat(createNinteichosaItem().get表示名称(), is(new RString("麻痺等の有無 右上肢")));
+            assertThat(createNinteichosaItem().get表示名称(), is(new RString("右上肢")));
         }
     }
 
@@ -110,10 +134,11 @@ public class NinteichosaItemTest {
 
     private static NinteichosaItem createNinteichosaItem(int flg) {
         return new NinteichosaItem(
-                flg == AS_調査票項目分類がNULL ? null : ChosahyoItemGroup.Of2006.第１群,
-                flg == AS_調査項目番号がNULL ? null : new NinteichosaItemNo(new RString("101")),
+                flg == AS_調査票項目グループがNULL ? null : ChosahyoItemGroup.Of2006.第１群,
+                flg == AS_調査票項目サブグループがNULL ? null : ChosahyoItemSubGroup.Of2006.麻痺等の有無, 1,
+                flg == AS_調査項目番号がNULL ? null : new NinteichosaItemNo(new RString("1-1")),
                 flg == AS_調査票項目がNULL ? null : ChosahyoItems.麻痺等の有無_右上肢,
-                flg == AS_表示名称がNULL ? null : new RString("麻痺等の有無 右上肢"),
+                flg == AS_表示名称がNULL ? null : new RString("右上肢"),
                 flg == AS_選択肢グループがNULL ? null : new Choices(Choice.NaiAru.values()));
     }
 }

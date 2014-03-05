@@ -8,9 +8,11 @@ import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.Choices;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosaItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.ChosahyoItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.ChosahyoItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.ChosahyoItems;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.IAnsweringItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.IChosahyoItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.IChosahyoItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItemNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
@@ -44,11 +46,27 @@ public class NinteichosaItemResultTest {
         }
     }
 
-    public static class get調査票項目分類 {
+    public static class get調査票項目グループ {
 
         @Test
-        public void 調査票項目分類の設定がある時_get調査票項目分類は_設置値を返す() {
-            assertThat(createNinteichosaItemResult().get調査票項目分類(), is((IChosahyoItemGroup) ChosahyoItemGroup.Of2006.第１群));
+        public void 調査票項目グループの設定がある時_get調査票項目グループは_設置値を返す() {
+            assertThat(createNinteichosaItemResult().get調査票項目グループ(), is((IChosahyoItemGroup) ChosahyoItemGroup.Of2006.第１群));
+        }
+    }
+
+    public static class get調査票項目サブグループ {
+
+        @Test
+        public void 調査票項目サブグループの設定がある時_get調査票項目サブグループは_設置値を返す() {
+            assertThat(createNinteichosaItemResult().get調査票項目サブグループ(), is((IChosahyoItemSubGroup) ChosahyoItemSubGroup.Of2006.麻痺等の有無));
+        }
+    }
+
+    public static class get調査票項目サブグループ内番号 {
+
+        @Test
+        public void 調査票項目サブグループ内番号の設定がある時_get調査票項目サブグループ内番号は_設置値を返す() {
+            assertThat(createNinteichosaItemResult().get調査票項目サブグループ内番号(), is(1));
         }
     }
 
@@ -56,7 +74,7 @@ public class NinteichosaItemResultTest {
 
         @Test
         public void 調査項目番号の設定がある時_get調査項目番号は_設定値を返す() {
-            assertThat(createNinteichosaItemResult().get調査項目番号().value(), is(new RString("101")));
+            assertThat(createNinteichosaItemResult().get調査項目番号().value(), is(new RString("1-1")));
         }
     }
 
@@ -72,7 +90,7 @@ public class NinteichosaItemResultTest {
 
         @Test
         public void 表示名称の設定がある時_get表示名称は_設定値を返す() {
-            assertThat(createNinteichosaItemResult().get表示名称(), is(new RString("麻痺等の有無 右上肢")));
+            assertThat(createNinteichosaItemResult().get表示名称(), is(new RString("右上肢")));
         }
     }
 
@@ -118,9 +136,10 @@ public class NinteichosaItemResultTest {
     private static NinteichosaItem createNinteichosaItem() {
         return new NinteichosaItem(
                 ChosahyoItemGroup.Of2006.第１群,
-                new NinteichosaItemNo(new RString("101")),
+                ChosahyoItemSubGroup.Of2006.麻痺等の有無, 1,
+                new NinteichosaItemNo(new RString("1-1")),
                 ChosahyoItems.麻痺等の有無_右上肢,
-                new RString("麻痺等の有無 右上肢"),
+                new RString("右上肢"),
                 new Choices(Choice.NaiAru.values()));
     }
 }

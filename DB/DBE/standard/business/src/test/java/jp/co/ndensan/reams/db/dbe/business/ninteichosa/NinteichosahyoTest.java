@@ -31,7 +31,7 @@ public class NinteichosahyoTest {
         }
 
         @Test(expected = NullPointerException.class)
-        public void 調査分類がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
+        public void 調査票項目グループがNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
             new Ninteichosahyo(new ChosahyoRegulation.Of2006().get調査票定義(), null);
         }
     }
@@ -40,7 +40,7 @@ public class NinteichosahyoTest {
 
         @Test
         public void 調査項目の指定がある時_get調査項目は_該当の調査項目情報を返す() {
-            assertThat(NinteichosahyoFactory.createInstance(2006).get調査項目(ChosahyoItems.麻痺等の有無_左上肢).get表示名称(), is(new RString("麻痺等の有無 左上肢")));
+            assertThat(NinteichosahyoFactory.createInstance(2006).get調査項目(ChosahyoItems.麻痺等の有無_左上肢).get表示名称(), is(new RString("左上肢")));
         }
 
         @Test
@@ -52,12 +52,12 @@ public class NinteichosahyoTest {
     public static class get調査項目List {
 
         @Test
-        public void 調査分類の指定がある時_get調査項目Listは_該当の調査項目情報を返す() {
-            assertThat(NinteichosahyoFactory.createInstance(2006).get調査項目List(ChosahyoItemGroup.Of2006.第１群).size(), is(20));
+        public void 調査票項目グループの指定がある時_get調査項目Listは_該当の調査項目情報を返す() {
+            assertThat(NinteichosahyoFactory.createInstance(2006).get調査項目List(ChosahyoItemGroup.Of2006.第１群).size(), is(22));
         }
 
         @Test
-        public void 調査分類がNULLの時_get調査項目Listは_0件の調査項目情報を返す() {
+        public void 調査票項目グループがNULLの時_get調査項目Listは_0件の調査項目情報を返す() {
             assertThat(NinteichosahyoFactory.createInstance(2006).get調査項目List(null).size(), is(0));
         }
     }
@@ -65,8 +65,8 @@ public class NinteichosahyoTest {
     public static class get調査項目ListAll {
 
         @Test
-        public void 調査分類の指定がある時_get調査項目ListAllは_該当の調査項目情報を返す() {
-            assertThat(NinteichosahyoFactory.createInstance(2006).get調査項目ListAll().size(), is(76));
+        public void 調査票項目グループの指定がある時_get調査項目ListAllは_該当の調査項目情報を返す() {
+            assertThat(NinteichosahyoFactory.createInstance(2006).get調査項目ListAll().size(), is(78));
         }
     }
 }

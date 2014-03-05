@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.definition.ninteichosa;
 
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.ChosahyoItems;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.IChosahyoItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.IChosahyoItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItemNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -17,11 +18,25 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public interface INinteichosaItem {
 
     /**
-     * 調査票項目分類を返します。
+     * 調査票項目グループを返します。
      *
-     * @return 調査票項目分類
+     * @return 調査票項目グループ
      */
-    IChosahyoItemGroup get調査票項目分類();
+    IChosahyoItemGroup get調査票項目グループ();
+
+    /**
+     * 調査票項目サブグループを返します。
+     *
+     * @return 調査票項目サブグループ
+     */
+    IChosahyoItemSubGroup get調査票項目サブグループ();
+
+    /**
+     * 調査票項目サブグループ内番号を返します。
+     *
+     * @return 調査票項目サブグループ内番号
+     */
+    int get調査票項目サブグループ内番号();
 
     /**
      * 調査項目番号を返します。

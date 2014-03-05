@@ -22,17 +22,17 @@ import static java.util.Objects.requireNonNull;
 public class Ninteichosahyo<T extends INinteichosaItem> {
 
     private final Map<ChosahyoItems, T> 調査票項目Map;
-    private final IChosahyoItemGroup[] 調査票項目分類;
+    private final IChosahyoItemGroup[] 調査票項目グループ;
 
     /**
      * インスタンスを生成します。
      *
      * @param 調査票項目Map 調査票項目Map
-     * @param 調査票項目分類 調査票項目分類
+     * @param 調査票項目グループ 調査票項目グループ
      */
-    public Ninteichosahyo(Map<ChosahyoItems, T> 調査票項目Map, IChosahyoItemGroup[] 調査票項目分類) {
+    public Ninteichosahyo(Map<ChosahyoItems, T> 調査票項目Map, IChosahyoItemGroup[] 調査票項目グループ) {
         this.調査票項目Map = requireNonNull(調査票項目Map, Messages.E00001.replace("調査票項目Map").getMessage());
-        this.調査票項目分類 = requireNonNull(調査票項目分類, Messages.E00001.replace("調査票項目分類").getMessage());
+        this.調査票項目グループ = requireNonNull(調査票項目グループ, Messages.E00001.replace("調査票項目グループ").getMessage());
     }
 
     /**
@@ -46,15 +46,15 @@ public class Ninteichosahyo<T extends INinteichosaItem> {
     }
 
     /**
-     * 引数の調査票項目分類に該当する調査項目情報リストを返します。
+     * 引数の調査票項目グループに該当する調査項目情報リストを返します。
      *
-     * @param 調査票項目分類 調査票項目分類
+     * @param 調査票項目グループ 調査票項目グループ
      * @return 調査項目情報リスト
      */
-    public List<T> get調査項目List(IChosahyoItemGroup 調査票項目分類) {
+    public List<T> get調査項目List(IChosahyoItemGroup 調査票項目グループ) {
         List<T> list = new ArrayList<>();
         for (T 調査項目 : 調査票項目Map.values()) {
-            if (調査項目.get調査票項目分類().equals(調査票項目分類)) {
+            if (調査項目.get調査票項目グループ().equals(調査票項目グループ)) {
                 list.add(調査項目);
             }
         }
@@ -75,11 +75,11 @@ public class Ninteichosahyo<T extends INinteichosaItem> {
     }
 
     /**
-     * 調査票項目分類を返します。
+     * 調査票項目グループを返します。
      *
-     * @return 調査票項目分類
+     * @return 調査票項目グループ
      */
-    public IChosahyoItemGroup[] get調査票項目分類() {
-        return 調査票項目分類.clone();
+    public IChosahyoItemGroup[] get調査票項目グループ() {
+        return 調査票項目グループ.clone();
     }
 }

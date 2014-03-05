@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5008NinteichosaKekkaJohoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.IDeletable;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.IReplaceable;
+import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
+import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 

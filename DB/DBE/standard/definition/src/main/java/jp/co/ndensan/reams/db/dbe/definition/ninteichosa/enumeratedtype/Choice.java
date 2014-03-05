@@ -14,6 +14,39 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class Choice {
 
     /**
+     * 「OFF／ON」の選択肢を表す列挙型です。<br />
+     * 単純に調査票項目の有無結果（チェック有無）だけを指定したい場合に使用します。
+     */
+    public enum OffOn implements IAnsweringItem {
+
+        /**
+         * 選択肢が「OFF（チェック無し）」であることを表します。<br />
+         * コード : 1
+         */
+        OFF(1),
+        /**
+         * 選択肢が「ON（チェック有り）」であることを表します。<br />
+         * コード : 2
+         */
+        ON(2);
+        private int code;
+
+        private OffOn(int code) {
+            this.code = code;
+        }
+
+        @Override
+        public RString getCode() {
+            return new RString(Integer.toString(code));
+        }
+
+        @Override
+        public RString getName() {
+            return new RString(name());
+        }
+    }
+
+    /**
      * 「ない／ある」の選択肢を表す列挙型です。
      */
     public enum NaiAru implements IAnsweringItem {
@@ -606,7 +639,7 @@ public class Choice {
     /**
      * 「障害高齢者の日常生活自立度」の調査結果を表す列挙型です。
      */
-    public enum ShogaiKoreishaJiritsu implements IAnsweringItem {
+    public enum ShogaiJiritsu implements IAnsweringItem {
 
         /**
          * 選択肢が「自立」であることを表します。<br />
@@ -655,7 +688,7 @@ public class Choice {
         Ｃ２(9);
         private int code;
 
-        private ShogaiKoreishaJiritsu(int code) {
+        private ShogaiJiritsu(int code) {
             this.code = code;
         }
 
@@ -673,7 +706,7 @@ public class Choice {
     /**
      * 「認知症高齢者の日常生活自立度」の選択肢を表す列挙型です。
      */
-    public enum NinchishoKoreishaJiritsu implements IAnsweringItem {
+    public enum NinchishoJiritsu implements IAnsweringItem {
 
         /**
          * 選択肢が「自立」であることを表します。<br />
@@ -722,7 +755,7 @@ public class Choice {
         記載なし(9);
         private int code;
 
-        private NinchishoKoreishaJiritsu(int code) {
+        private NinchishoJiritsu(int code) {
             this.code = code;
         }
 

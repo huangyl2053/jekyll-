@@ -5,9 +5,9 @@
 package jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype;
 
 /**
- * 要介護認定調査の調査票項目グループを扱うインターフェースです。
+ * 要介護認定調査の調査票項目サブグループを扱うインターフェースです。
  *
  * @author N8156 宮本 康
  */
-public interface IChosahyoItemGroup {
+public interface IChosahyoItemSubGroup {
 }

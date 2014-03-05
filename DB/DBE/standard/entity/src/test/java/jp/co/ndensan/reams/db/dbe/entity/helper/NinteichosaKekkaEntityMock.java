@@ -69,8 +69,8 @@ public class NinteichosaKekkaEntityMock {
         entity.setShichosonTokubetsuKyufu(new RString("市町村特別給付"));
         entity.setKaigohokenKyufuIgaiNoZaitakuService(new RString("介護保険給付以外の在宅サービス"));
         entity.setGaikyochosaTokkijiko(new RString("概況特記事項"));
-        entity.setShogaiNichijoSeikatsuJiritsudoCode(ShogaiKoreishaJiritsu.Ａ１.getCode());
-        entity.setNinchishoNichijoSeikatsuJiritsudoCode(NinchishoKoreishaJiritsu.Ⅱａ.getCode());
+        entity.setShogaiNichijoSeikatsuJiritsudoCode(ShogaiJiritsu.Ａ１.getCode());
+        entity.setNinchishoNichijoSeikatsuJiritsudoCode(NinchishoJiritsu.Ⅱａ.getCode());
         entity.setShinsakaiYusenWaritsukeKubunCode(ShinsakaiFuriwakeKubun.希望無し.getCode());
         return spy(entity);
     }

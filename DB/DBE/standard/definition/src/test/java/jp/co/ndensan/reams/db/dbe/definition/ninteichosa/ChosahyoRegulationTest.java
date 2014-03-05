@@ -22,7 +22,7 @@ public class ChosahyoRegulationTest {
 
         @Test
         public void 調査票定義に設定がある時_get調査票定義は_該当の調査票定義を返す() {
-            assertThat(new ChosahyoRegulation.Of2006().get調査票定義().size(), is(76));
+            assertThat(new ChosahyoRegulation.Of2006().get調査票定義().size(), is(78));
         }
     }
 }

@@ -136,8 +136,8 @@ public class NinteichosaResultMock {
         setResultMap(resultMap, chosahyo, モニター測定, NaiAru.ある.getCode());
         setResultMap(resultMap, chosahyo, じょくそうの処置, NaiAru.ない.getCode());
         setResultMap(resultMap, chosahyo, カテーテル, NaiAru.ある.getCode());
-        setResultMap(resultMap, chosahyo, 障害高齢者の日常生活自立度, ShogaiKoreishaJiritsu.Ａ１.getCode());
-        setResultMap(resultMap, chosahyo, 認知症高齢者の日常生活自立度, NinchishoKoreishaJiritsu.Ⅱａ.getCode());
+        setResultMap(resultMap, chosahyo, 障害高齢者の日常生活自立度, ShogaiJiritsu.Ａ１.getCode());
+        setResultMap(resultMap, chosahyo, 認知症高齢者の日常生活自立度, NinchishoJiritsu.Ⅱａ.getCode());
         return new NinteichosaResultOfChosahyo(new ShinseishoKanriNo(new RString("1234567890")), new NinteichosaIraiRirekiNo(0),
                 NENDO_2006, new Ninteichosahyo(resultMap, ChosahyoItemGroup.Of2006.values()));
     }
