@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.business.GogitaiList;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIinList;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyFlag;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzai;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiFlag;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiMeisho;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
@@ -51,7 +51,7 @@ public final class GogitaiMapper {
                 new Range(合議体Entity.getGogitaiKaishiYoteiTime(), 合議体Entity.getGogitaiShuryoYoteiTime()),
                 開催場所, 合議体Entity.getShinsakaiYoteiTeiin(), 合議体Entity.getShinsakaiJidoWariateTeiin(),
                 合議体Entity.getShinsakaiIinTeiin(), 合議体割当委員List,
-                GogitaiSeishinkaIshiSonzai.toValue(合議体Entity.getGogitaiSeishinkaSonzaiFlag()),
+                GogitaiSeishinkaIshiSonzaiFlag.toValue(合議体Entity.getGogitaiSeishinkaSonzaiFlag()),
                 GogitaiDummyFlag.toValue(合議体Entity.getGogitaiDummyFlag()));
     }
 

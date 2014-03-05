@@ -17,18 +17,18 @@ import org.junit.runner.RunWith;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class GogitaiSeishinkaIshiSonzaiTest {
+public class GogitaiSeishinkaIshiSonzaiFlagTest {
 
     public static class toValueのテスト extends DbeTestBase {
 
         @Test
         public void 引数にtrueを渡したとき_存在が返る() {
-            assertThat(GogitaiSeishinkaIshiSonzai.toValue(true), is(GogitaiSeishinkaIshiSonzai.存在));
+            assertThat(GogitaiSeishinkaIshiSonzaiFlag.toValue(true), is(GogitaiSeishinkaIshiSonzaiFlag.存在));
         }
 
         @Test
         public void 引数にfalseを渡したとき_不在が返る() {
-            assertThat(GogitaiSeishinkaIshiSonzai.toValue(false), is(GogitaiSeishinkaIshiSonzai.不在));
+            assertThat(GogitaiSeishinkaIshiSonzaiFlag.toValue(false), is(GogitaiSeishinkaIshiSonzaiFlag.不在));
         }
     }
 }

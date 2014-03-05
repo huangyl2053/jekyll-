@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyFlag;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzai;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiFlag;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiMeisho;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
@@ -30,7 +30,7 @@ public class Gogitai {
     private final int 審査会自動割当定員;
     private final int 審査会委員定員;
     private final GogitaiWariateIinList 合議体割当審査会委員List;
-    private final GogitaiSeishinkaIshiSonzai 精神科医師存在;
+    private final GogitaiSeishinkaIshiSonzaiFlag 精神科医師存在;
     private final GogitaiDummyFlag 合議体ダミー;
 
     /**
@@ -52,7 +52,7 @@ public class Gogitai {
      */
     public Gogitai(GogitaiNo 合議体番号, GogitaiMeisho 合議体名称, Range<FlexibleDate> 有効期間, Range<RString> 開始終了予定時刻,
             ShinsakaiKaisaiBasho 審査会開催場所, int 審査会予定定員, int 審査会自動割当定員, int 審査会委員定員,
-            GogitaiWariateIinList 合議体割当審査会委員List, GogitaiSeishinkaIshiSonzai 精神科医存在,
+            GogitaiWariateIinList 合議体割当審査会委員List, GogitaiSeishinkaIshiSonzaiFlag 精神科医存在,
             GogitaiDummyFlag 合議体ダミー) throws NullPointerException {
         requireNonNull(合議体番号, Messages.E00003.replace("合議体番号", getClass().getName()).getMessage());
         requireNonNull(合議体名称, Messages.E00003.replace("合議体名称", getClass().getName()).getMessage());
@@ -159,7 +159,7 @@ public class Gogitai {
      *
      * @return 精神科医師存在
      */
-    public GogitaiSeishinkaIshiSonzai get精神科医師存在() {
+    public GogitaiSeishinkaIshiSonzaiFlag get精神科医師存在() {
         return 精神科医師存在;
     }
 
