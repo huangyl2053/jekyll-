@@ -45,9 +45,9 @@ public interface INinteichosaItem {
     RString get表示名称();
 
     /**
-     * 調査票項目の選択肢リストを返します。
+     * 調査票項目の選択肢グループを返します。
      *
-     * @return 選択肢リスト
+     * @return 選択肢グループ
      */
-    IAnsweringItems get選択肢List();
+    IAnsweringItems get選択肢グループ();
 }

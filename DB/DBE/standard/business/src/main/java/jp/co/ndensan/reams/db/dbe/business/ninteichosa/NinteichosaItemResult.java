@@ -57,8 +57,8 @@ public class NinteichosaItemResult implements INinteichosaItem {
     }
 
     @Override
-    public IAnsweringItems get選択肢List() {
-        return 調査項目.get選択肢List();
+    public IAnsweringItems get選択肢グループ() {
+        return 調査項目.get選択肢グループ();
     }
 
     /**
@@ -76,6 +76,6 @@ public class NinteichosaItemResult implements INinteichosaItem {
      * @return 調査結果
      */
     public IAnsweringItem get調査結果() {
-        return 調査項目.get選択肢List().toValue(調査結果コード);
+        return 調査項目.get選択肢グループ().toValue(調査結果コード);
     }
 }

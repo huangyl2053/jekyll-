@@ -76,16 +76,16 @@ public class NinteichosaItemResultTest {
         }
     }
 
-    public static class get選択肢List {
+    public static class get選択肢グループ {
 
         @Test
-        public void 選択肢が2択の時_get選択肢Listは_2件の選択肢を返す() {
-            assertThat(createNinteichosaItemResult().get選択肢List().asList().size(), is(2));
+        public void 選択肢グループが2択の時_get選択肢グループは_2件の選択肢を返す() {
+            assertThat(createNinteichosaItemResult().get選択肢グループ().asList().size(), is(2));
         }
 
         @Test
-        public void 選択肢の設定がある時_get選択肢Listは_設定値を返す() {
-            assertThat(createNinteichosaItemResult().get選択肢List().asList().get(0).getName(), is(new RString("ない")));
+        public void 選択肢グループの設定がある時_get選択肢グループは_設定値を返す() {
+            assertThat(createNinteichosaItemResult().get選択肢グループ().asList().get(0).getName(), is(new RString("ない")));
         }
     }
 

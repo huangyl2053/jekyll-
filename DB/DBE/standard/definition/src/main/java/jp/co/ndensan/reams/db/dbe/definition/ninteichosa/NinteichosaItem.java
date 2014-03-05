@@ -39,7 +39,7 @@ public class NinteichosaItem implements INinteichosaItem {
         this.調査項目番号 = requireNonNull(調査項目番号, Messages.E00001.replace("調査項目番号").getMessage());
         this.調査票項目 = requireNonNull(調査票項目, Messages.E00001.replace("調査票項目").getMessage());
         this.表示名称 = requireNonNull(表示名称, Messages.E00001.replace("表示名称").getMessage());
-        this.選択肢グループ = requireNonNull(選択肢グループ, Messages.E00001.replace("選択肢List").getMessage());
+        this.選択肢グループ = requireNonNull(選択肢グループ, Messages.E00001.replace("選択肢グループ").getMessage());
     }
 
     @Override
@@ -63,7 +63,7 @@ public class NinteichosaItem implements INinteichosaItem {
     }
 
     @Override
-    public IAnsweringItems get選択肢List() {
+    public IAnsweringItems get選択肢グループ() {
         return 選択肢グループ;
     }
 }

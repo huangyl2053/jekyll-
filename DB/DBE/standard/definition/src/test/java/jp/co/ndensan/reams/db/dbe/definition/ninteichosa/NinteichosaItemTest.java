@@ -29,7 +29,7 @@ public class NinteichosaItemTest {
     private static final int AS_調査項目番号がNULL = 2;
     private static final int AS_調査票項目がNULL = 3;
     private static final int AS_表示名称がNULL = 4;
-    private static final int AS_選択肢がNULL = 5;
+    private static final int AS_選択肢グループがNULL = 5;
 
     public static class コンストラクタ {
 
@@ -54,8 +54,8 @@ public class NinteichosaItemTest {
         }
 
         @Test(expected = NullPointerException.class)
-        public void 選択肢がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createNinteichosaItem(AS_選択肢がNULL);
+        public void 選択肢グループがNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
+            createNinteichosaItem(AS_選択肢グループがNULL);
         }
     }
 
@@ -91,16 +91,16 @@ public class NinteichosaItemTest {
         }
     }
 
-    public static class get選択肢List {
+    public static class get選択肢グループ {
 
         @Test
-        public void 選択肢が2択の時_get選択肢Listは_2件の選択肢を返す() {
-            assertThat(createNinteichosaItem().get選択肢List().asList().size(), is(2));
+        public void 選択肢グループが2択の時_get選択肢グループは_2件の選択肢を返す() {
+            assertThat(createNinteichosaItem().get選択肢グループ().asList().size(), is(2));
         }
 
         @Test
-        public void 選択肢の設定がある時_get選択肢Listは_設定値を返す() {
-            assertThat(createNinteichosaItem().get選択肢List().asList().get(0).getName(), is(new RString("ない")));
+        public void 選択肢グループの設定がある時_get選択肢グループは_設定値を返す() {
+            assertThat(createNinteichosaItem().get選択肢グループ().asList().get(0).getName(), is(new RString("ない")));
         }
     }
 
@@ -114,6 +114,6 @@ public class NinteichosaItemTest {
                 flg == AS_調査項目番号がNULL ? null : new NinteichosaItemNo(new RString("101")),
                 flg == AS_調査票項目がNULL ? null : ChosahyoItems.麻痺等の有無_右上肢,
                 flg == AS_表示名称がNULL ? null : new RString("麻痺等の有無 右上肢"),
-                flg == AS_選択肢がNULL ? null : new Choices(Choice.NaiAru.values()));
+                flg == AS_選択肢グループがNULL ? null : new Choices(Choice.NaiAru.values()));
     }
 }
