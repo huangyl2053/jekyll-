@@ -5,7 +5,6 @@
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.Gogitai;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiList;
@@ -22,7 +21,6 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;

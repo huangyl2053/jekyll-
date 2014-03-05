@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
+ * 審査会委員口座情報のテストです。
  *
  * @author n8178 城間篤人
  */

@@ -32,7 +32,7 @@ public class GogitaiWariateIinList implements Iterable<GogitaiWariateIin> {
     /**
      * 審査員コードを指定し、合議体Listから審査会委員を取得します。
      *
-     * @param 審査会委員コード
+     * @param 審査会委員コード 審査会委員コード
      * @return 合議体に割り当てられた審査会委員
      */
     public GogitaiWariateIin get合議体割当委員(ShinsakaiIinCode 審査会委員コード) {

@@ -32,6 +32,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
+ * 審査会委員Mapperのテストです。
  *
  * @author n8178 城間篤人
  */

@@ -41,6 +41,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
+ * 合議体割当委員Mapperのテストです。
  *
  * @author n8178 城間篤人
  */
