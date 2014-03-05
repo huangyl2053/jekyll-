@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.basic.IGogitaiWariateDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.IGogitaiWariateShinsakaiIinDac;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.db.dbe.persistence.relate.IGogitaiAndGogitaiWariateIinDac;
 
 /**
  * 合議体の情報を管理するクラスです。
@@ -30,17 +31,17 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
 public class GogitaiManager {
 
     private final IGogitaiDac gogitaiDac;
-    private final IGogitaiWariateDac gogitaiWariateDac;
     private final IGogitaiWariateShinsakaiIinDac wariateIinDac;
     private final ShinsakaiKaisaiBashoManager kaisaiBashoManager;
+    private final IGogitaiAndGogitaiWariateIinDac gogitaiAndWariateIinDac;
 
     /**
      * デフォルトコンストラクタです。
      */
     public GogitaiManager() {
         gogitaiDac = InstanceCreator.create(IGogitaiDac.class);
-        gogitaiWariateDac = InstanceCreator.create(IGogitaiWariateDac.class);
         wariateIinDac = InstanceCreator.create(IGogitaiWariateShinsakaiIinDac.class);
+        gogitaiAndWariateIinDac = InstanceCreator.create(IGogitaiAndGogitaiWariateIinDac.class);
         kaisaiBashoManager = new ShinsakaiKaisaiBashoManager();
     }
 
@@ -52,11 +53,11 @@ public class GogitaiManager {
      * @param wariateIinDac 合議体割当審査会委員Dac
      * @param kaisaiBashoManager 開催場所マネージャ
      */
-    public GogitaiManager(IGogitaiDac gogitaiDac, IGogitaiWariateDac gogitaiWariateDac,
-            IGogitaiWariateShinsakaiIinDac wariateIinDac, ShinsakaiKaisaiBashoManager kaisaiBashoManager) {
+    public GogitaiManager(IGogitaiDac gogitaiDac, IGogitaiWariateShinsakaiIinDac wariateIinDac,
+            IGogitaiAndGogitaiWariateIinDac gogitaiAndWariateIinDac, ShinsakaiKaisaiBashoManager kaisaiBashoManager) {
         this.gogitaiDac = gogitaiDac;
-        this.gogitaiWariateDac = gogitaiWariateDac;
         this.wariateIinDac = wariateIinDac;
+        this.gogitaiAndWariateIinDac = gogitaiAndWariateIinDac;
         this.kaisaiBashoManager = kaisaiBashoManager;
     }
 
@@ -113,20 +114,8 @@ public class GogitaiManager {
         DbT5103GogitaiJohoEntity 合議体Entity = GogitaiMapper.to合議体Entity(合議体);
         List<DbT5107GogitaiWariateIinJohoEntity> 合議体割当委員Entities = GogitaiWariateIinMapper.to合議体割当委員EntityList(合議体);
 
-        int 合議体更新件数;
-        合議体更新件数 = gogitaiDac.insertOrUpdate(合議体Entity);
-        if (合議体更新件数 == 0) {
-            return false;
-        }
-
-        int 合議体割当更新件数;
-        for (DbT5107GogitaiWariateIinJohoEntity 合議体割当委員Entity : 合議体割当委員Entities) {
-            合議体割当更新件数 = gogitaiWariateDac.insertOrUpdate(合議体割当委員Entity);
-            if (合議体割当更新件数 == 0) {
-                return false;
-            }
-        }
-        return true;
+        int 更新件数 = gogitaiAndWariateIinDac.insertOrUpdate合議体割当審査会委員情報(合議体Entity, 合議体割当委員Entities);
+        return 更新件数 > 0 ? true : false;
     }
 
     /**
@@ -137,21 +126,9 @@ public class GogitaiManager {
      */
     public boolean remove(Gogitai 合議体) {
         DbT5103GogitaiJohoEntity 合議体Entity = GogitaiMapper.to合議体Entity(合議体);
-        List<DbT5107GogitaiWariateIinJohoEntity> 合議体割当Entities = GogitaiWariateIinMapper.to合議体割当委員EntityList(合議体);
+        List<DbT5107GogitaiWariateIinJohoEntity> 合議体割当委員Entities = GogitaiWariateIinMapper.to合議体割当委員EntityList(合議体);
 
-        int 合議体更新件数;
-        合議体更新件数 = gogitaiDac.delete(合議体Entity);
-        if (合議体更新件数 == 0) {
-            return false;
-        }
-
-        int 合議体割当更新件数;
-        for (DbT5107GogitaiWariateIinJohoEntity 合議体割当Entity : 合議体割当Entities) {
-            合議体割当更新件数 = gogitaiWariateDac.delete(合議体割当Entity);
-            if (合議体割当更新件数 == 0) {
-                return false;
-            }
-        }
-        return true;
+        int 更新件数 = gogitaiAndWariateIinDac.delete合議体割当審査会委員情報(合議体Entity, 合議体割当委員Entities);
+        return 更新件数 > 0 ? true : false;
     }
 }

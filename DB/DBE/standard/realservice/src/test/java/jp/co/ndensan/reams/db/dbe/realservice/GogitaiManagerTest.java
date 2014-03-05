@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5107GogitaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IGogitaiDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IGogitaiWariateDac;
+import jp.co.ndensan.reams.db.dbe.persistence.relate.IGogitaiAndGogitaiWariateIinDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.IGogitaiWariateShinsakaiIinDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -51,7 +52,7 @@ public class GogitaiManagerTest {
 
         @Test
         public void Dacから3件の合議体エンティティを取得できたとき_3件の要素を持つ合議体Listが返る() {
-            sut = new GogitaiManager(createGogitaiDacMock(3), null, createGogitaiWariateIinDacMock(), createKaisaiBashoManagerMock());
+            sut = new GogitaiManager(createGogitaiDacMock(3), createGogitaiWariateIinDacMock(), null, createKaisaiBashoManagerMock());
             GogitaiList result = sut.get合議体履歴List(new GogitaiNo(1));
             assertThat(result.size(), is(3));
         }
@@ -80,7 +81,7 @@ public class GogitaiManagerTest {
 
         @Test
         public void Dacから2件の有効な合議体エンティティを取得できたとき_2件の要素を持つ合議体Listが返る() {
-            sut = new GogitaiManager(createGogitaiDacMock(2), null, createGogitaiWariateIinDacMock(), createKaisaiBashoManagerMock());
+            sut = new GogitaiManager(createGogitaiDacMock(2), createGogitaiWariateIinDacMock(), null, createKaisaiBashoManagerMock());
             GogitaiList result = sut.get有効合議体List(new FlexibleDate("19991212"));
             assertThat(result.size(), is(2));
         }
@@ -109,31 +110,19 @@ public class GogitaiManagerTest {
 
         @Test
         public void saveに成功したとき_trueが返る() {
-            sut = new GogitaiManager(createGogitaiDacMock(1), createGogitaiWariateDacMock(1), null, null);
+            sut = new GogitaiManager(null, null, createGogitaiAndGogitaiWariateIinDacMock(4), null);
             assertThat(sut.save(create合議体Mock(1, "19991212", "0001")), is(true));
         }
 
         @Test
-        public void 合議体情報をsaveに失敗したとき_falseが返る() {
-            sut = new GogitaiManager(createGogitaiDacMock(0), createGogitaiWariateDacMock(1), null, null);
+        public void saveに失敗したとき_falseが返る() {
+            sut = new GogitaiManager(null, null, createGogitaiAndGogitaiWariateIinDacMock(0), null);
             assertThat(sut.save(create合議体Mock(1, "19991212", "0001")), is(false));
         }
 
-        @Test
-        public void 合議体割当委員情報のsaveに失敗したとき_falseが返る() {
-            sut = new GogitaiManager(createGogitaiDacMock(1), createGogitaiWariateDacMock(0), null, null);
-            assertThat(sut.save(create合議体Mock(1, "19991212", "0001")), is(false));
-        }
-
-        private IGogitaiDac createGogitaiDacMock(int 件数) {
-            IGogitaiDac dac = mock(IGogitaiDac.class);
-            when(dac.insertOrUpdate(any(DbT5103GogitaiJohoEntity.class))).thenReturn(件数);
-            return dac;
-        }
-
-        private IGogitaiWariateDac createGogitaiWariateDacMock(int 件数) {
-            IGogitaiWariateDac dac = mock(IGogitaiWariateDac.class);
-            when(dac.insertOrUpdate(any(DbT5107GogitaiWariateIinJohoEntity.class))).thenReturn(件数);
+        private IGogitaiAndGogitaiWariateIinDac createGogitaiAndGogitaiWariateIinDacMock(int 件数) {
+            IGogitaiAndGogitaiWariateIinDac dac = mock(IGogitaiAndGogitaiWariateIinDac.class);
+            when(dac.insertOrUpdate合議体割当審査会委員情報(any(DbT5103GogitaiJohoEntity.class), any(List.class))).thenReturn(件数);
             return dac;
         }
     }
@@ -142,31 +131,19 @@ public class GogitaiManagerTest {
 
         @Test
         public void removeに成功したとき_trueが返る() {
-            sut = new GogitaiManager(createGogitaiDacMock(1), createGogitaiWariateDacMock(1), null, null);
+            sut = new GogitaiManager(null, null, createGogitaiAndGogitaiWariateIinDacMock(4), null);
             assertThat(sut.remove(create合議体Mock(1, "19991212", "0001")), is(true));
         }
 
         @Test
-        public void 合議体情報のremoveに失敗したとき_falseが返る() {
-            sut = new GogitaiManager(createGogitaiDacMock(0), createGogitaiWariateDacMock(1), null, null);
-            assertThat(sut.remove(create合議体Mock(1, "19991212", "0001")), is(false));
-        }
-
-        @Test
         public void 合議体割当委員情報のremoveに失敗したとき_falseが返る() {
-            sut = new GogitaiManager(createGogitaiDacMock(1), createGogitaiWariateDacMock(0), null, null);
+            sut = new GogitaiManager(null, null, createGogitaiAndGogitaiWariateIinDacMock(0), null);
             assertThat(sut.remove(create合議体Mock(1, "19991212", "0001")), is(false));
         }
 
-        private IGogitaiDac createGogitaiDacMock(int 件数) {
-            IGogitaiDac dac = mock(IGogitaiDac.class);
-            when(dac.delete(any(DbT5103GogitaiJohoEntity.class))).thenReturn(件数);
-            return dac;
-        }
-
-        private IGogitaiWariateDac createGogitaiWariateDacMock(int 件数) {
-            IGogitaiWariateDac dac = mock(IGogitaiWariateDac.class);
-            when(dac.delete(any(DbT5107GogitaiWariateIinJohoEntity.class))).thenReturn(件数);
+        private IGogitaiAndGogitaiWariateIinDac createGogitaiAndGogitaiWariateIinDacMock(int 件数) {
+            IGogitaiAndGogitaiWariateIinDac dac = mock(IGogitaiAndGogitaiWariateIinDac.class);
+            when(dac.delete合議体割当審査会委員情報(any(DbT5103GogitaiJohoEntity.class), any(List.class))).thenReturn(件数);
             return dac;
         }
     }

@@ -44,7 +44,7 @@ public class GogitaiDac implements IGogitaiDac {
     @Override
     public int insertOrUpdate(DbT5103GogitaiJohoEntity entity) {
         //TODO n8178 城間篤人 updateCountから更新か新規か判断できるまで保留 2014年3月
-        int updateCount = 1;
+        int updateCount = 0;
         return updateCount == 0 ? insert(entity) : update(entity);
     }
 

@@ -22,7 +22,7 @@ public class GogitaiWariateDac implements IGogitaiWariateDac {
     @Override
     public int insertOrUpdate(DbT5107GogitaiWariateIinJohoEntity entity) {
         //TODO n8178 城間篤人 updateCountを扱えるようになってから改めて実装 2014年3月
-        int updateCount = 1;
+        int updateCount = 0;
         return updateCount == 0 ? insert(entity) : update(entity);
     }
 
