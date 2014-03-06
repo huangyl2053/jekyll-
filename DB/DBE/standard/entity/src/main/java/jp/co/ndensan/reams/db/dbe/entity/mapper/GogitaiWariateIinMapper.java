@@ -108,8 +108,8 @@ public final class GogitaiWariateIinMapper {
         DbT5107GogitaiWariateIinJohoEntity entity = new DbT5107GogitaiWariateIinJohoEntity();
         entity.setGogitaiNo(合議体.get合議体番号().value());
         entity.setShinsakaiIinCode(合議体割当委員.get委員情報().get委員コード().value());
-        entity.setGogitaiYukoKikanKaishiYMD(合議体.get有効期間().getFrom());
-        entity.setGogitaiYukoKikanShuryoYMD(合議体.get有効期間().getTo());
+        entity.setGogitaiYukoKikanKaishiYMD(合議体.get有効期間開始年月日().value());
+        entity.setGogitaiYukoKikanShuryoYMD(合議体.get有効期間終了年月日());
         entity.setGogitaichoKubunCode(new Code(合議体割当委員.get合議体長区分().getCode()));
         entity.setShinsainKubunCode(new Code(合議体割当委員.get認定調査員区分().getCode()));
         return entity;

@@ -13,9 +13,10 @@ import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIinList;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyFlag;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiFlag;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiMeisho;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -38,9 +39,10 @@ import static org.mockito.Mockito.when;
 public class GogitaiMapperTest {
 
     private static GogitaiNo 合議体番号_1 = new GogitaiNo(1);
-    private static GogitaiMeisho 合議体名称_合議体1 = new GogitaiMeisho(new RString("合議体1"));
-    private static Range<FlexibleDate> 有効期間_19991212_20101212 = new Range(new FlexibleDate("19991212"), new FlexibleDate("20101212"));
-    private static Range<RString> 開始終了予定時刻_0830_1720 = new Range(new RString("0830"), new RString("1720"));
+    private static RString 合議体名称_合議体1 = new RString("合議体1");
+    private static GogitaiYukoKikanKaishiYMD 開始年月日_19991212 = new GogitaiYukoKikanKaishiYMD("19991212");
+    private static FlexibleDate 終了年月日_20101212 = new FlexibleDate("20101212");
+    private static Range<TimeString> 開始終了予定時刻_0830_1720 = new Range(new TimeString("0830"), new TimeString("1720"));
     private static ShinsakaiKaisaiBasho 審査会開催場所_山田家001 = create審査会開催場所Mock("山田家001");
     private static int 審査会予定定員_5 = 5;
     private static int 審査会自動割当定員_6 = 6;
@@ -84,13 +86,13 @@ public class GogitaiMapperTest {
         @Test
         public void 有効期間開始年月日として19991212を持つEntityを引数に指定した場合_有効期間開始年月日に19991212を持つ合議体が返る() {
             Gogitai sut = GogitaiMapper.to合議体(createEntity(), 審査会開催場所_山田家001, 合議体割当審査会委員List_3件);
-            assertThat(sut.get有効期間().getFrom(), is(有効期間_19991212_20101212.getFrom()));
+            assertThat(sut.get有効期間開始年月日(), is(開始年月日_19991212));
         }
 
         @Test
         public void 有効期間終了年月日として20101212を持つEntityを引数に指定した場合_有効期間終了年月日に20101212を持つ合議体が返る() {
             Gogitai sut = GogitaiMapper.to合議体(createEntity(), 審査会開催場所_山田家001, 合議体割当審査会委員List_3件);
-            assertThat(sut.get有効期間().getTo(), is(有効期間_19991212_20101212.getTo()));
+            assertThat(sut.get有効期間終了年月日(), is(終了年月日_20101212));
         }
 
         @Test
@@ -102,7 +104,7 @@ public class GogitaiMapperTest {
         @Test
         public void 終了予定時刻として1720を持つEntityを引数に指定した場合_終了予定時刻に1720を持つ合議体が返る() {
             Gogitai sut = GogitaiMapper.to合議体(createEntity(), 審査会開催場所_山田家001, 合議体割当審査会委員List_3件);
-            assertThat(sut.get開始終了予定時刻().getTo(), is(開始終了予定時刻_0830_1720.getTo()));
+            assertThat(sut.get開始終了予定時刻().getTo().value(), is(開始終了予定時刻_0830_1720.getTo().value()));
         }
 
         @Test
@@ -202,31 +204,31 @@ public class GogitaiMapperTest {
         @Test
         public void 合議体名称に合議体1を持つ合議体を引数に指定した場合_合議体名称に合議体1を持つ合議体Entityが返る() {
             sut = GogitaiMapper.to合議体Entity(createGogitai());
-            assertThat(sut.getGogitaiMei(), is(合議体名称_合議体1.value()));
+            assertThat(sut.getGogitaiMei(), is(合議体名称_合議体1));
         }
 
         @Test
         public void 有効期間開始年月日に19991212を持つ合議体を引数に指定した場合_有効期間開始年月日に19991212を持つ合議体Entityが返る() {
             sut = GogitaiMapper.to合議体Entity(createGogitai());
-            assertThat(sut.getGogitaiYukoKikanKaishiYMD(), is(有効期間_19991212_20101212.getFrom()));
+            assertThat(sut.getGogitaiYukoKikanKaishiYMD(), is(開始年月日_19991212.value()));
         }
 
         @Test
         public void 有効期間終了年月日に20101212を持つ合議体を引数に指定した場合_有効期間終了年月日に20101212を持つ合議体Entityが返る() {
             sut = GogitaiMapper.to合議体Entity(createGogitai());
-            assertThat(sut.getGogitaiYukoKikanShuryoYMD(), is(有効期間_19991212_20101212.getTo()));
+            assertThat(sut.getGogitaiYukoKikanShuryoYMD(), is(終了年月日_20101212));
         }
 
         @Test
         public void 開始予定時刻に0830を持つ合議体を引数に指定した場合_開始予定時刻に0830を持つ合議体Entityが返る() {
             sut = GogitaiMapper.to合議体Entity(createGogitai());
-            assertThat(sut.getGogitaiKaishiYoteiTime(), is(開始終了予定時刻_0830_1720.getFrom()));
+            assertThat(sut.getGogitaiKaishiYoteiTime(), is(開始終了予定時刻_0830_1720.getFrom().value()));
         }
 
         @Test
         public void 終了予定時刻に1720を持つ合議体を引数に指定した場合_終了予定時刻に1720を持つ合議体Entityが返る() {
             sut = GogitaiMapper.to合議体Entity(createGogitai());
-            assertThat(sut.getGogitaiShuryoYoteiTime(), is(開始終了予定時刻_0830_1720.getTo()));
+            assertThat(sut.getGogitaiShuryoYoteiTime(), is(開始終了予定時刻_0830_1720.getTo().value()));
         }
 
         @Test
@@ -269,11 +271,11 @@ public class GogitaiMapperTest {
     private static DbT5103GogitaiJohoEntity createEntity() {
         DbT5103GogitaiJohoEntity entity = new DbT5103GogitaiJohoEntity();
         entity.setGogitaiNo(合議体番号_1.value());
-        entity.setGogitaiMei(合議体名称_合議体1.value());
-        entity.setGogitaiYukoKikanKaishiYMD(有効期間_19991212_20101212.getFrom());
-        entity.setGogitaiYukoKikanShuryoYMD(有効期間_19991212_20101212.getTo());
-        entity.setGogitaiKaishiYoteiTime(開始終了予定時刻_0830_1720.getFrom());
-        entity.setGogitaiShuryoYoteiTime(開始終了予定時刻_0830_1720.getTo());
+        entity.setGogitaiMei(合議体名称_合議体1);
+        entity.setGogitaiYukoKikanKaishiYMD(開始年月日_19991212.value());
+        entity.setGogitaiYukoKikanShuryoYMD(終了年月日_20101212);
+        entity.setGogitaiKaishiYoteiTime(開始終了予定時刻_0830_1720.getFrom().value());
+        entity.setGogitaiShuryoYoteiTime(開始終了予定時刻_0830_1720.getTo().value());
         entity.setShinsakaiKaisaiBashoCode(審査会開催場所_山田家001.get開催場所コード().value());
         entity.setShinsakaiYoteiTeiin(審査会予定定員_5);
         entity.setShinsakaiJidoWariateTeiin(審査会自動割当定員_6);
@@ -284,7 +286,7 @@ public class GogitaiMapperTest {
     }
 
     private static Gogitai createGogitai() {
-        return new Gogitai(合議体番号_1, 合議体名称_合議体1, 有効期間_19991212_20101212, 開始終了予定時刻_0830_1720,
+        return new Gogitai(合議体番号_1, 合議体名称_合議体1, 開始年月日_19991212, 終了年月日_20101212, 開始終了予定時刻_0830_1720,
                 審査会開催場所_山田家001, 審査会予定定員_5, 審査会自動割当定員_6, 審査会委員定員_7,
                 合議体割当審査会委員List_3件, 精神科医師存在_存在, 合議体ダミー_notダミー);
     }

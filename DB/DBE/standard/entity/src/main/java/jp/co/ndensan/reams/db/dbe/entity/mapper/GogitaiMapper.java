@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIinList;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyFlag;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiFlag;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiMeisho;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
@@ -46,13 +47,17 @@ public final class GogitaiMapper {
             return null;
         }
 
-        return new Gogitai(new GogitaiNo(合議体Entity.getGogitaiNo()), new GogitaiMeisho(合議体Entity.getGogitaiMei()),
-                new Range(合議体Entity.getGogitaiYukoKikanKaishiYMD(), 合議体Entity.getGogitaiYukoKikanShuryoYMD()),
-                new Range(合議体Entity.getGogitaiKaishiYoteiTime(), 合議体Entity.getGogitaiShuryoYoteiTime()),
+        return new Gogitai(new GogitaiNo(合議体Entity.getGogitaiNo()), 合議体Entity.getGogitaiMei(),
+                new GogitaiYukoKikanKaishiYMD(合議体Entity.getGogitaiYukoKikanKaishiYMD()), 合議体Entity.getGogitaiYukoKikanShuryoYMD(),
+                create開始終了時間(合議体Entity),
                 開催場所, 合議体Entity.getShinsakaiYoteiTeiin(), 合議体Entity.getShinsakaiJidoWariateTeiin(),
                 合議体Entity.getShinsakaiIinTeiin(), 合議体割当委員List,
                 GogitaiSeishinkaIshiSonzaiFlag.toValue(合議体Entity.getGogitaiSeishinkaSonzaiFlag()),
                 GogitaiDummyFlag.toValue(合議体Entity.getGogitaiDummyFlag()));
+    }
+
+    private static Range<TimeString> create開始終了時間(DbT5103GogitaiJohoEntity 合議体Entity) {
+        return new Range(new TimeString(合議体Entity.getGogitaiKaishiYoteiTime()), new TimeString(合議体Entity.getGogitaiShuryoYoteiTime()));
     }
 
     /**
@@ -105,11 +110,11 @@ public final class GogitaiMapper {
 
         DbT5103GogitaiJohoEntity entity = new DbT5103GogitaiJohoEntity();
         entity.setGogitaiNo(合議体.get合議体番号().value());
-        entity.setGogitaiMei(合議体.get合議体名称().value());
-        entity.setGogitaiYukoKikanKaishiYMD(合議体.get有効期間().getFrom());
-        entity.setGogitaiYukoKikanShuryoYMD(合議体.get有効期間().getTo());
-        entity.setGogitaiKaishiYoteiTime(合議体.get開始終了予定時刻().getFrom());
-        entity.setGogitaiShuryoYoteiTime(合議体.get開始終了予定時刻().getTo());
+        entity.setGogitaiMei(合議体.get合議体名称());
+        entity.setGogitaiYukoKikanKaishiYMD(合議体.get有効期間開始年月日().value());
+        entity.setGogitaiYukoKikanShuryoYMD(合議体.get有効期間終了年月日());
+        entity.setGogitaiKaishiYoteiTime(合議体.get開始終了予定時刻().getFrom().value());
+        entity.setGogitaiShuryoYoteiTime(合議体.get開始終了予定時刻().getTo().value());
         entity.setShinsakaiKaisaiBashoCode(合議体.get審査会開催場所().get開催場所コード().value());
         entity.setShinsakaiYoteiTeiin(合議体.get審査会予定定員());
         entity.setShinsakaiJidoWariateTeiin(合議体.get審査会自動割当定員());

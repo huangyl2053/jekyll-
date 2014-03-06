@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbe.business;
 import java.util.Iterator;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * 合議体のリストを扱うクラスです。
@@ -36,9 +36,9 @@ public class GogitaiList implements Iterable<Gogitai> {
      * @return 合議体
      * @throws IllegalArgumentException 合致する合議体が存在しないとき
      */
-    public Gogitai get合議体(FlexibleDate 有効期間開始年月日) throws IllegalArgumentException {
+    public Gogitai get合議体(GogitaiYukoKikanKaishiYMD 有効期間開始年月日) throws IllegalArgumentException {
         for (Gogitai 合議体 : 合議体List) {
-            if (合議体.get有効期間().getFrom().equals(有効期間開始年月日)) {
+            if (合議体.get有効期間開始年月日().equals(有効期間開始年月日)) {
                 return 合議体;
             }
         }

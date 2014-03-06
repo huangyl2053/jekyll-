@@ -11,13 +11,13 @@ import jp.co.ndensan.reams.db.dbe.business.GogitaiList;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIinList;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5107GogitaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.GogitaiMapper;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.GogitaiWariateIinMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IGogitaiDac;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.IGogitaiWariateDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.IGogitaiWariateShinsakaiIinDac;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
@@ -78,8 +78,8 @@ public class GogitaiManager {
      * @param 基準年月日 基準年月日
      * @return 現時点で有効な合議体のリスト
      */
-    public GogitaiList get有効合議体List(FlexibleDate 基準年月日) {
-        List<DbT5103GogitaiJohoEntity> 合議体Entities = gogitaiDac.select(基準年月日);
+    public GogitaiList get有効合議体List(GogitaiYukoKikanKaishiYMD 基準年月日) {
+        List<DbT5103GogitaiJohoEntity> 合議体Entities = gogitaiDac.select(基準年月日.value());
         return create合議体List(合議体Entities);
     }
 

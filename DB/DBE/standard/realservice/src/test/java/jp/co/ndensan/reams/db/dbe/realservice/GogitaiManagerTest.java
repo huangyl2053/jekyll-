@@ -15,14 +15,13 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsainKubun;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBashoJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiMeisho;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5107GogitaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IGogitaiDac;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.IGogitaiWariateDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.IGogitaiAndGogitaiWariateIinDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.IGogitaiWariateShinsakaiIinDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
@@ -82,7 +81,7 @@ public class GogitaiManagerTest {
         @Test
         public void Dacから2件の有効な合議体エンティティを取得できたとき_2件の要素を持つ合議体Listが返る() {
             sut = new GogitaiManager(createGogitaiDacMock(2), createGogitaiWariateIinDacMock(), null, createKaisaiBashoManagerMock());
-            GogitaiList result = sut.get有効合議体List(new FlexibleDate("19991212"));
+            GogitaiList result = sut.get有効合議体List(new GogitaiYukoKikanKaishiYMD("19991212"));
             assertThat(result.size(), is(2));
         }
 
@@ -151,9 +150,10 @@ public class GogitaiManagerTest {
     private static Gogitai create合議体Mock(int 合議体番号, String 有効期間開始年月日, String 開催場所コード) {
         Gogitai gogitai = mock(Gogitai.class);
         when(gogitai.get合議体番号()).thenReturn(new GogitaiNo(合議体番号));
-        when(gogitai.get合議体名称()).thenReturn(new GogitaiMeisho(RString.EMPTY));
-        when(gogitai.get有効期間()).thenReturn(new Range(new FlexibleDate(有効期間開始年月日), FlexibleDate.MAX));
-        when(gogitai.get開始終了予定時刻()).thenReturn(new Range(new RString("0830"), new RString("1720")));
+        when(gogitai.get合議体名称()).thenReturn(RString.EMPTY);
+        when(gogitai.get有効期間開始年月日()).thenReturn(new GogitaiYukoKikanKaishiYMD(有効期間開始年月日));
+        when(gogitai.get有効期間終了年月日()).thenReturn(FlexibleDate.MAX);
+        when(gogitai.get開始終了予定時刻()).thenReturn(new Range(new TimeString("0830"), new TimeString("1720")));
         when(gogitai.get審査会開催場所()).thenReturn(create開催場所Mock(開催場所コード, "田島家", ShinsakaiKaisaiBashoJokyo.有効));
         GogitaiWariateIinList list = create合議体割当委員ListMock(3);
         when(gogitai.get合議体割当審査会委員List()).thenReturn(list);
