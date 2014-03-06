@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
  *
  * @author N8187 久保田 英男
  */
-public class KaigoNinteiChosainManager implements IKaigoNinteiChosainManager {
+public class KaigoNinteiChosainManager {
 
     private final IKaigoNinteiChosainDac chosainDac;
     private final INinteichosaItakusakiDac itakusakiDac;
@@ -47,51 +47,100 @@ public class KaigoNinteiChosainManager implements IKaigoNinteiChosainManager {
         this.itakusakiDac = itakusakiDac;
     }
 
-    @Override
+    /**
+     * 引数の条件に該当する介護認定調査員情報を取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 介護事業者番号 介護事業者番号
+     * @param 介護調査員番号 介護調査員番号
+     * @return 介護認定調査員
+     */
     public KaigoNinteiChosain get介護認定調査員(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoChosainNo 介護調査員番号) {
         DbT7013ChosainJohoEntity chosainJohoEntity = chosainDac.select(市町村コード, 介護事業者番号, 介護調査員番号);
         DbT7010NinteichosaItakusakiJohoEntity itakusakiEntity = itakusakiDac.select(市町村コード.getValue(), 介護事業者番号, true);
         return KaigoNinteiChosainMapper.toKaigoNinteiChosain(chosainJohoEntity, itakusakiEntity);
     }
 
-    @Override
+    /**
+     * 引数の条件に該当する介護認定調査員情報を取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 介護事業者番号 介護事業者番号
+     * @param 介護調査員番号 介護調査員番号
+     * @param 調査員の状況 調査員の状況
+     * @return 介護認定調査員
+     */
     public KaigoNinteiChosain get介護認定調査員(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoChosainNo 介護調査員番号, ChosainJokyo 調査員の状況) {
         DbT7013ChosainJohoEntity chosainJohoEntity = chosainDac.select(市町村コード, 介護事業者番号, 介護調査員番号, 調査員の状況);
         DbT7010NinteichosaItakusakiJohoEntity itakusakiEntity = itakusakiDac.select(市町村コード.getValue(), 介護事業者番号, true);
         return KaigoNinteiChosainMapper.toKaigoNinteiChosain(chosainJohoEntity, itakusakiEntity);
     }
 
-    @Override
+    /**
+     * 引数の条件に該当する介護認定調査員情報のコレクションクラスを取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 介護事業者番号 介護事業者番号
+     * @return 介護認定調査員のコレクションクラス
+     */
     public KaigoNinteiChosainCollection get介護認定調査員List(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号) {
         List<DbT7013ChosainJohoEntity> entityList = chosainDac.selectAll(市町村コード, 介護事業者番号);
         return create介護認定調査員List(entityList);
     }
 
-    @Override
+    /**
+     * 引数の条件に該当する介護認定調査員情報のコレクションクラスを取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 介護事業者番号 介護事業者番号
+     * @param 調査員の状況 調査員の状況
+     * @return 介護認定調査員のコレクションクラス
+     */
     public KaigoNinteiChosainCollection get介護認定調査員List(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, ChosainJokyo 調査員の状況) {
         List<DbT7013ChosainJohoEntity> entityList = chosainDac.selectAll(市町村コード, 介護事業者番号, 調査員の状況);
         return create介護認定調査員List(entityList);
     }
 
-    @Override
+    /**
+     * 引数の条件に該当する介護認定調査員情報のコレクションクラスを取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 調査員の状況 調査員の状況
+     * @return 介護認定調査員のコレクションクラス
+     */
     public KaigoNinteiChosainCollection get介護認定調査員List(ShichosonCode 市町村コード, ChosainJokyo 調査員の状況) {
         List<DbT7013ChosainJohoEntity> entityList = chosainDac.selectAll(市町村コード, 調査員の状況);
         return create介護認定調査員List(entityList);
     }
 
-    @Override
+    /**
+     * 引数の条件に該当する介護認定調査員情報のコレクションクラスを取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @return 介護認定調査員のコレクションクラス
+     */
     public KaigoNinteiChosainCollection get介護認定調査員List(ShichosonCode 市町村コード) {
         List<DbT7013ChosainJohoEntity> entityList = chosainDac.selectAll(市町村コード);
         return create介護認定調査員List(entityList);
     }
 
-    @Override
+    /**
+     * 引数の介護認定調査員情報を新規登録、または更新します。
+     *
+     * @param 介護認定調査員情報 介護認定調査員情報
+     * @return 新規登録、または更新が成功した場合はtrueを返します。
+     */
     public boolean save(KaigoNinteiChosain 介護認定調査員情報) {
         DbT7013ChosainJohoEntity entity = KaigoNinteiChosainMapper.toKaigoNinteiChosainEntity(介護認定調査員情報);
         return is更新成功(chosainDac.insertOrUpdate(entity));
     }
 
-    @Override
+    /**
+     * 引数の介護認定調査員情報を削除します。
+     *
+     * @param 介護認定調査員情報 介護認定調査員情報
+     * @return 削除が成功した場合はtrueを返します。
+     */
     public boolean remove(KaigoNinteiChosain 介護認定調査員情報) {
         DbT7013ChosainJohoEntity entity = KaigoNinteiChosainMapper.toKaigoNinteiChosainEntity(介護認定調査員情報);
         return is更新成功(chosainDac.delete(entity));
