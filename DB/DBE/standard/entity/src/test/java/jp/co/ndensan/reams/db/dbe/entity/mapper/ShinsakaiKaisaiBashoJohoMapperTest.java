@@ -5,10 +5,9 @@
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
-import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiChiku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBashoJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiChikuCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiChiku;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -31,8 +30,7 @@ public class ShinsakaiKaisaiBashoJohoMapperTest {
 
     private static ShinsakaiKaisaiBashoCode 開催場所コード_A001 = new ShinsakaiKaisaiBashoCode(new RString("A001"));
     private static RString 開催場所名_山田家 = new RString("山田家");
-    private static ShinsakaiKaisaiChiku 開催地区_chiku01_name01 =
-            new ShinsakaiKaisaiChiku(new ShinsakaiKaisaiChikuCode(new RString("chiku01")), new RString("name01"));
+    private static ShinsakaiKaisaiChiku 開催地区_chiku01_name01 = new ShinsakaiKaisaiChiku(new RString("chiku01"), new RString("name01"));
     private static AtenaJusho 開催場所住所_山田市 = new AtenaJusho(new RString("山田市"));
     private static TelNo 電話番号_0981234567 = new TelNo("0981234567");
     private static ShinsakaiKaisaiBashoJokyo 開催場所状況_有効 = ShinsakaiKaisaiBashoJokyo.有効;
@@ -62,7 +60,7 @@ public class ShinsakaiKaisaiBashoJohoMapperTest {
         @Test
         public void 開催地区コードにchiku01を持つEntityが渡されたとき_開催地区にchiku01を持つ審査会開催場所が返る() {
             sut = ShinsakaiKaisaiBashoJohoMapper.to審査会開催場所(createEntity());
-            assertThat(sut.get開催地区().get地区コード(), is(開催地区_chiku01_name01.get地区コード()));
+            assertThat(sut.get開催地区().getCode(), is(開催地区_chiku01_name01.getCode()));
         }
 
         @Test
@@ -109,7 +107,7 @@ public class ShinsakaiKaisaiBashoJohoMapperTest {
         @Test
         public void 開催地区コードにchiku01を持つ審査会開催場所が渡されたとき_開催地区コードにchiku01を持つEntityが返る() {
             sut = ShinsakaiKaisaiBashoJohoMapper.to審査会開催場所Entity(createKaisaiBasho());
-            assertThat(sut.getShinsakaiKaisaiChikuCode(), is(new Code(開催地区_chiku01_name01.get地区コード().value())));
+            assertThat(sut.getShinsakaiKaisaiChikuCode(), is((Code) 開催地区_chiku01_name01));
         }
 
         @Test
@@ -136,7 +134,7 @@ public class ShinsakaiKaisaiBashoJohoMapperTest {
         DbT5104ShinsakaiKaisaiBashoJohoEntity 審査会開催場所Entity = new DbT5104ShinsakaiKaisaiBashoJohoEntity();
         審査会開催場所Entity.setShinsakaiKaisaiBashoCode(開催場所コード_A001.value());
         審査会開催場所Entity.setShinsakaiKaisaiBashoMei(開催場所名_山田家);
-        審査会開催場所Entity.setShinsakaiKaisaiChikuCode(new Code(開催地区_chiku01_name01.get地区コード().value()));
+        審査会開催場所Entity.setShinsakaiKaisaiChikuCode(開催地区_chiku01_name01);
         審査会開催場所Entity.setShinsakaiKaisaiBashoJusho(開催場所住所_山田市);
         審査会開催場所Entity.setShinsakaiKaisaiBashoTelNo(電話番号_0981234567);
         審査会開催場所Entity.setShinsakaiKaisaiBashoJokyo(開催場所状況_有効.is有効());

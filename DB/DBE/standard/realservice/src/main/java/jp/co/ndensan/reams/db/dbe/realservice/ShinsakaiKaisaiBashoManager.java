@@ -147,7 +147,7 @@ public class ShinsakaiKaisaiBashoManager {
         DbT5104ShinsakaiKaisaiBashoJohoEntity entity = new DbT5104ShinsakaiKaisaiBashoJohoEntity();
         entity.setShinsakaiKaisaiBashoCode(shinsakaiKaisaiBasho.get開催場所コード().getColumnValue());
         entity.setShinsakaiKaisaiBashoMei(shinsakaiKaisaiBasho.get開催場所名称());
-        entity.setShinsakaiKaisaiChikuCode(new Code(shinsakaiKaisaiBasho.get開催地区().get地区コード().getColumnValue()));
+        entity.setShinsakaiKaisaiChikuCode(shinsakaiKaisaiBasho.get開催地区());
         entity.setShinsakaiKaisaiBashoJusho(shinsakaiKaisaiBasho.get開催場所住所());
         entity.setShinsakaiKaisaiBashoTelNo(shinsakaiKaisaiBasho.get開催場所電話番号());
         entity.setShinsakaiKaisaiBashoJokyo(shinsakaiKaisaiBasho.get開催場所状況().is有効());

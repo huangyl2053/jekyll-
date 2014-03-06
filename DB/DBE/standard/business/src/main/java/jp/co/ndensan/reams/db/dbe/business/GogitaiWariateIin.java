@@ -4,6 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsainKubun;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaichoKubun;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 

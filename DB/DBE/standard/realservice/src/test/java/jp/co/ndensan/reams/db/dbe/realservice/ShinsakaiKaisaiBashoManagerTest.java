@@ -6,15 +6,13 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
-import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiChiku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBashoJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiChikuCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiChiku;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.ShinsakaiKaisaiBashoDacMock;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
@@ -104,7 +102,7 @@ public class ShinsakaiKaisaiBashoManagerTest extends DbeTestBase {
         @Test
         public void 引数で渡した情報を更新する() {
             ShinsakaiKaisaiBashoCode 開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
-            ShinsakaiKaisaiChikuCode 開催場所地区コード = new ShinsakaiKaisaiChikuCode(new RString("00001"));
+            ShinsakaiKaisaiChiku 開催場所地区コード = new ShinsakaiKaisaiChiku(new RString("00001"), new RString("地区名称"));
             ShinsakaiKaisaiBashoJokyo 審査会開催場所状況 = ShinsakaiKaisaiBashoJokyo.有効;
             ShinsakaiKaisaiBasho 審査会開催場所 = create審査会開催場所(開催場所コード,
                     開催場所地区コード, 審査会開催場所状況);
@@ -125,7 +123,7 @@ public class ShinsakaiKaisaiBashoManagerTest extends DbeTestBase {
         @Test
         public void 引数で渡した情報を削除する() {
             ShinsakaiKaisaiBashoCode 開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
-            ShinsakaiKaisaiChikuCode 開催場所地区コード = new ShinsakaiKaisaiChikuCode(new RString("00001"));
+            ShinsakaiKaisaiChiku 開催場所地区コード = new ShinsakaiKaisaiChiku(new RString("00001"), new RString("地区名称"));
             ShinsakaiKaisaiBashoJokyo 審査会開催場所状況 = ShinsakaiKaisaiBashoJokyo.有効;
             ShinsakaiKaisaiBasho 審査会開催場所 = create審査会開催場所(開催場所コード,
                     開催場所地区コード, 審査会開催場所状況);
@@ -136,7 +134,7 @@ public class ShinsakaiKaisaiBashoManagerTest extends DbeTestBase {
         @Test
         public void 引数で渡した情報を削除しようとした際に対象が無いとfalseが返る() {
             ShinsakaiKaisaiBashoCode 開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("検索不可"));
-            ShinsakaiKaisaiChikuCode 開催場所地区コード = new ShinsakaiKaisaiChikuCode(new RString("00001"));
+            ShinsakaiKaisaiChiku 開催場所地区コード = new ShinsakaiKaisaiChiku(new RString("00001"), new RString("地区名称"));
             ShinsakaiKaisaiBashoJokyo 審査会開催場所状況 = ShinsakaiKaisaiBashoJokyo.有効;
             ShinsakaiKaisaiBasho 審査会開催場所 = create審査会開催場所(開催場所コード,
                     開催場所地区コード, 審査会開催場所状況);
@@ -145,7 +143,7 @@ public class ShinsakaiKaisaiBashoManagerTest extends DbeTestBase {
         }
     }
 
-    private static ShinsakaiKaisaiBasho create審査会開催場所(ShinsakaiKaisaiBashoCode 開催場所コード, ShinsakaiKaisaiChikuCode 開催場所地区コード,
+    private static ShinsakaiKaisaiBasho create審査会開催場所(ShinsakaiKaisaiBashoCode 開催場所コード, ShinsakaiKaisaiChiku 開催場所地区コード,
             ShinsakaiKaisaiBashoJokyo 審査会開催場所状況) {
         return new ShinsakaiKaisaiBasho(開催場所コード,
                 new RString("開催場所名"),

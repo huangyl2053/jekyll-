@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.db.dbe.business.Gogitai;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiList;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIin;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIinList;
-import jp.co.ndensan.reams.db.dbe.business.GogitaichoKubun;
-import jp.co.ndensan.reams.db.dbe.business.ShinsainKubun;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaichoKubun;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsainKubun;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBashoJokyo;
@@ -169,7 +169,8 @@ public class GogitaiManagerTest {
     }
 
     private static GogitaiWariateIin create合議体割当委員Mock() {
-        return new GogitaiWariateIin(create審査会委員Mock(), new ShinsainKubun(), new GogitaichoKubun());
+        return new GogitaiWariateIin(create審査会委員Mock(), new ShinsainKubun(new RString("0001"), new RString("審査員区分")),
+                new GogitaichoKubun(new RString("0001"), new RString("合議体調区分")));
     }
 
     private static ShinsakaiIin create審査会委員Mock() {

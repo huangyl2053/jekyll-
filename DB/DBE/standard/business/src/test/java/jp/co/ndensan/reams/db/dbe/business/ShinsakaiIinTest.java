@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinShikaku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsainYusoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
@@ -60,7 +61,7 @@ public class ShinsakaiIinTest {
             氏名 = new AtenaMeisho(RString.EMPTY);
             カナ氏名 = new AtenaKanaMeisho(RString.EMPTY);
             性別 = Gender.MALE;
-            審査会委員資格 = new ShinsakaiIinShikaku();
+            審査会委員資格 = new ShinsakaiIinShikaku(new RString("A001"), new RString("資格of資格"));
             審査委員郵送区分 = ShinsainYusoKubun.所属機関;
             郵便番号 = new YubinNo(new RString("123-1234"));
             住所 = new AtenaJusho(RString.EMPTY);
