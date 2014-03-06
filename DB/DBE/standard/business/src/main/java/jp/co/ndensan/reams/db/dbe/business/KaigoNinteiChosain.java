@@ -39,6 +39,7 @@ public class KaigoNinteiChosain {
     private final YubinNo 郵便番号;
     private final AtenaJusho 住所;
     private final TelNo 電話番号;
+    private final NinteichosaItakusaki 認定調査委託先;
 
     /**
      * コンストラクタです。
@@ -56,6 +57,7 @@ public class KaigoNinteiChosain {
      * @param 郵便番号 郵便番号
      * @param 住所 住所
      * @param 電話番号 電話番号
+     * @param 認定調査委託先 認定調査委託先
      * @throws NullPointerException 調査員状況および性別以外の引数にNULLが渡された場合
      */
     public KaigoNinteiChosain(ShichosonCode 市町村コード,
@@ -70,7 +72,8 @@ public class KaigoNinteiChosain {
             ChikuCode 地区コード,
             YubinNo 郵便番号,
             AtenaJusho 住所,
-            TelNo 電話番号) throws NullPointerException {
+            TelNo 電話番号,
+            NinteichosaItakusaki 認定調査委託先) throws NullPointerException {
 
         this.市町村コード = requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
         this.介護事業者番号 = requireNonNull(介護事業者番号, Messages.E00001.replace("介護事業者番号").getMessage());
@@ -85,6 +88,7 @@ public class KaigoNinteiChosain {
         this.郵便番号 = requireNonNull(郵便番号, Messages.E00001.replace("郵便番号").getMessage());
         this.住所 = requireNonNull(住所, Messages.E00001.replace("住所").getMessage());
         this.電話番号 = requireNonNull(電話番号, Messages.E00001.replace("電話番号").getMessage());
+        this.認定調査委託先 = requireNonNull(認定調査委託先, Messages.E00001.replace("認定調査委託先").getMessage());
     }
 
     /**
@@ -202,5 +206,14 @@ public class KaigoNinteiChosain {
      */
     public TelNo get電話番号() {
         return 電話番号;
+    }
+
+    /**
+     * 認定調査委託先を返します。
+     *
+     * @return 認定調査委託先
+     */
+    public NinteichosaItakusaki get認定調査委託先() {
+        return 認定調査委託先;
     }
 }

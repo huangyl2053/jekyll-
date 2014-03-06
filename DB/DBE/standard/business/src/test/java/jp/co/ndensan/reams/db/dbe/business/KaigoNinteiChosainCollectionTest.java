@@ -245,7 +245,8 @@ public class KaigoNinteiChosainCollectionTest extends TestBase {
                 new ChikuCode(new RString("0001")),
                 new YubinNo(new RString("001")),
                 new AtenaJusho(new RString("0001")),
-                new TelNo(new RString("0001")));
+                new TelNo(new RString("0001")),
+                createNinteichosaItakusaki(介護事業者番号));
     }
 
     private static NinteichosaItakusaki createNinteichosaItakusaki(String 介護事業者番号) {
