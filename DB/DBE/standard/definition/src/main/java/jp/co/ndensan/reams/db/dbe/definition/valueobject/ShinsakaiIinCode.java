@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
@@ -16,7 +15,7 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
  *
  * @author n8178 城間篤人
  */
-public class ShinsakaiIinCode implements IValueObject<RString>, IDbColumnMappable {
+public class ShinsakaiIinCode implements IValueObject<RString>, Comparable<ShinsakaiIinCode> {
 
     private final RString 審査会委員コード;
 
@@ -52,7 +51,7 @@ public class ShinsakaiIinCode implements IValueObject<RString>, IDbColumnMappabl
     }
 
     @Override
-    public RString getColumnValue() {
-        return 審査会委員コード;
+    public int compareTo(ShinsakaiIinCode 比較対象) {
+        return 審査会委員コード.compareTo(比較対象.value());
     }
 }

@@ -6,14 +6,13 @@ package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
 import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
  * 合議体番号を表すクラスです。
  *
  * @author n8178 城間篤人
  */
-public class GogitaiNo implements IValueObject<Integer>, IDbColumnMappable {
+public class GogitaiNo implements IValueObject<Integer>, Comparable<GogitaiNo> {
 
     private final int 合議体番号;
 
@@ -47,7 +46,7 @@ public class GogitaiNo implements IValueObject<Integer>, IDbColumnMappable {
     }
 
     @Override
-    public Integer getColumnValue() {
-        return 合議体番号;
+    public int compareTo(GogitaiNo 比較対象) {
+        return 合議体番号 - 比較対象.value();
     }
 }

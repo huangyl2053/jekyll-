@@ -60,15 +60,41 @@ public class ShinsakaiIinCodeTest {
         }
 
         @Test
-        public void 引数に_同値でない値を持っている合議体名称を渡したとき_falseが返る() {
+        public void 引数に_同値でない値を持っている審査会委員コードを渡したとき_falseが返る() {
             sut2 = createShinsakaiIinCode("B001");
             assertThat(sut1.equals(sut2), is(false));
         }
 
         @Test
-        public void 引数に_同値を持つ合議体名称を渡したとき_trueが返る() {
+        public void 引数に_同値を持つ審査会委員コードを渡したとき_trueが返る() {
             sut2 = createShinsakaiIinCode("A001");
             assertThat(sut1.equals(sut2), is(true));
+        }
+    }
+
+    public static class compareToのテスト extends DbeTestBase {
+
+        @Before
+        public void setUp() {
+            sut1 = createShinsakaiIinCode("A001");
+        }
+
+        @Test
+        public void A001を持つ審査会委員コードを_B001を持つ審査会委員コードと比較したとき_0より小さい値が返る() {
+            sut2 = createShinsakaiIinCode("B001");
+            assertThat(sut1.compareTo(sut2) < 0, is(true));
+        }
+
+        @Test
+        public void A001を持つ審査会委員コードを_0001を持つ審査会委員コードと比較したとき_0より大きい値が返る() {
+            sut2 = createShinsakaiIinCode("0001");
+            assertThat(0 < sut1.compareTo(sut2), is(true));
+        }
+
+        @Test
+        public void A001を持つ審査会委員コードを_同値A001を持つ審査会委員コードと比較したとき_0が返る() {
+            sut2 = createShinsakaiIinCode("A001");
+            assertThat(sut1.compareTo(sut2) == 0, is(true));
         }
     }
 

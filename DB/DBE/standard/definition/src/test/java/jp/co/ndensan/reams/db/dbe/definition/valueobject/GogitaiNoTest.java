@@ -64,6 +64,32 @@ public class GogitaiNoTest {
         }
     }
 
+    public static class compareToのテスト extends DbeTestBase {
+
+        @Before
+        public void setUp() {
+            sut1 = createGogitaiNo(123);
+        }
+
+        @Test
+        public void 合議体番号123を_12を持つ合議体番号と比較したとき_0より大きい値が返る() {
+            sut2 = createGogitaiNo(12);
+            assertThat(0 < sut1.compareTo(sut2), is(true));
+        }
+
+        @Test
+        public void 合議体番号123を_234を持つ合議体番号と比較したとき_0より小さい値が返る() {
+            sut2 = createGogitaiNo(234);
+            assertThat(sut1.compareTo(sut2) < 0, is(true));
+        }
+
+        @Test
+        public void 合議体番号123を_同値123を持つ合議体番号と比較したとき_0が返る() {
+            sut2 = createGogitaiNo(123);
+            assertThat(sut1.compareTo(sut2) == 0, is(true));
+        }
+    }
+
     private static GogitaiNo createGogitaiNo(int num) {
         return new GogitaiNo(num);
     }
