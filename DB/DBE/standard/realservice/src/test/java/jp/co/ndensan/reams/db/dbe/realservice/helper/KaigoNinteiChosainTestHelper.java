@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoChosainNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaItakusakiMapper;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -74,6 +75,7 @@ public class KaigoNinteiChosainTestHelper {
                 地区コード,
                 郵便番号,
                 住所,
-                電話番号);
+                電話番号,
+                NinteichosaItakusakiMapper.toNinteichosaItakusaki(MockNinteichosaItakusakiJohoEntity.getSpiedInstance()));
     }
 }

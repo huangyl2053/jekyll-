@@ -8,14 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.KaigoNinteiChosain;
 import jp.co.ndensan.reams.db.dbe.business.KaigoNinteiChosainCollection;
-import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosainJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoChosainNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.KaigoNinteiChosainMapper;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaItakusakiMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.INinteichosaItakusakiDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IKaigoNinteiChosainDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
@@ -52,13 +50,15 @@ public class KaigoNinteiChosainManager implements IKaigoNinteiChosainManager {
     @Override
     public KaigoNinteiChosain get介護認定調査員(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoChosainNo 介護調査員番号) {
         DbT7013ChosainJohoEntity chosainJohoEntity = chosainDac.select(市町村コード, 介護事業者番号, 介護調査員番号);
-        return KaigoNinteiChosainMapper.toKaigoNinteiChosain(chosainJohoEntity);
+        DbT7010NinteichosaItakusakiJohoEntity itakusakiEntity = itakusakiDac.select(市町村コード.getValue(), 介護事業者番号, true);
+        return KaigoNinteiChosainMapper.toKaigoNinteiChosain(chosainJohoEntity, itakusakiEntity);
     }
 
     @Override
     public KaigoNinteiChosain get介護認定調査員(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoChosainNo 介護調査員番号, ChosainJokyo 調査員の状況) {
         DbT7013ChosainJohoEntity chosainJohoEntity = chosainDac.select(市町村コード, 介護事業者番号, 介護調査員番号, 調査員の状況);
-        return KaigoNinteiChosainMapper.toKaigoNinteiChosain(chosainJohoEntity);
+        DbT7010NinteichosaItakusakiJohoEntity itakusakiEntity = itakusakiDac.select(市町村コード.getValue(), 介護事業者番号, true);
+        return KaigoNinteiChosainMapper.toKaigoNinteiChosain(chosainJohoEntity, itakusakiEntity);
     }
 
     @Override
@@ -99,16 +99,14 @@ public class KaigoNinteiChosainManager implements IKaigoNinteiChosainManager {
 
     private KaigoNinteiChosainCollection create介護認定調査員List(List<DbT7013ChosainJohoEntity> entityList) {
         List<KaigoNinteiChosain> chosainList = new ArrayList<>();
-        List<NinteichosaItakusaki> itakusakiList = new ArrayList<>();
 
         for (DbT7013ChosainJohoEntity chosainEntity : entityList) {
             DbT7010NinteichosaItakusakiJohoEntity itakusakiEntity =
                     itakusakiDac.select(chosainEntity.getShichosonCode().getValue(), chosainEntity.getKaigoJigyoshaNo(), true);
-            chosainList.add(KaigoNinteiChosainMapper.toKaigoNinteiChosain(chosainEntity));
-            itakusakiList.add(NinteichosaItakusakiMapper.toNinteichosaItakusaki(itakusakiEntity));
+            chosainList.add(KaigoNinteiChosainMapper.toKaigoNinteiChosain(chosainEntity, itakusakiEntity));
         }
 
-        return new KaigoNinteiChosainCollection(chosainList, itakusakiList);
+        return new KaigoNinteiChosainCollection(chosainList);
     }
 
     private boolean is更新成功(int 更新件数) {

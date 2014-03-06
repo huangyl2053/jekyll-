@@ -22,16 +22,14 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
 public class KaigoNinteiChosainCollection implements Iterable {
 
     private final List<KaigoNinteiChosain> 介護認定調査員List;
-    private final List<NinteichosaItakusaki> 認定調査委託先List;
 
     /**
      * コンストラクタです。
      *
      * @param 介護認定調査員List 介護認定調査員リスト
      */
-    public KaigoNinteiChosainCollection(List<KaigoNinteiChosain> 介護認定調査員List, List<NinteichosaItakusaki> 認定調査委託先List) {
+    public KaigoNinteiChosainCollection(List<KaigoNinteiChosain> 介護認定調査員List) {
         this.介護認定調査員List = requireNonNull(介護認定調査員List, Messages.E00001.replace("介護認定調査員リスト").getMessage());
-        this.認定調査委託先List = requireNonNull(認定調査委託先List, Messages.E00001.replace("認定調査委託先リスト").getMessage());
     }
 
     /**
@@ -70,14 +68,12 @@ public class KaigoNinteiChosainCollection implements Iterable {
     public NinteichosaItakusaki get認定調査委託先(
             ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoChosainNo 介護調査員番号)
             throws IllegalArgumentException {
-        int index = 0;
         for (KaigoNinteiChosain 介護認定調査員 : 介護認定調査員List) {
             if (介護認定調査員.get市町村コード().equals(市町村コード)
                     && 介護認定調査員.get介護事業者番号().equals(介護事業者番号)
                     && 介護認定調査員.get介護調査員番号().equals(介護調査員番号)) {
-                return 認定調査委託先List.get(index);
+                return 介護認定調査員.get認定調査委託先();
             }
-            index++;
         }
         throw new IllegalArgumentException(Messages.E00006.replace("認定調査委託先").getMessage());
     }
@@ -91,16 +87,12 @@ public class KaigoNinteiChosainCollection implements Iterable {
      */
     public KaigoNinteiChosainCollection sub介護認定調査員List(KaigoJigyoshaNo 介護事業者番号) {
         List<KaigoNinteiChosain> sub介護認定調査員List = new ArrayList<>();
-        List<NinteichosaItakusaki> sub認定調査委託先List = new ArrayList<>();
-        int index = 0;
         for (KaigoNinteiChosain 介護認定調査員 : 介護認定調査員List) {
             if (介護認定調査員.get介護事業者番号().equals(介護事業者番号)) {
                 sub介護認定調査員List.add(介護認定調査員);
-                sub認定調査委託先List.add(認定調査委託先List.get(index));
             }
-            index++;
         }
-        return create介護認定調査員Collection(sub介護認定調査員List, sub認定調査委託先List);
+        return create介護認定調査員Collection(sub介護認定調査員List);
     }
 
     /**
@@ -112,48 +104,38 @@ public class KaigoNinteiChosainCollection implements Iterable {
      */
     public KaigoNinteiChosainCollection sub介護認定調査員List(ShichosonCode 市町村コード) {
         List<KaigoNinteiChosain> sub介護認定調査員List = new ArrayList<>();
-        List<NinteichosaItakusaki> sub認定調査委託先List = new ArrayList<>();
-        int index = 0;
         for (KaigoNinteiChosain 介護認定調査員 : 介護認定調査員List) {
             if (介護認定調査員.get市町村コード().equals(市町村コード)) {
                 sub介護認定調査員List.add(介護認定調査員);
-                sub認定調査委託先List.add(認定調査委託先List.get(index));
             }
-            index++;
         }
-        return create介護認定調査員Collection(sub介護認定調査員List, sub認定調査委託先List);
+        return create介護認定調査員Collection(sub介護認定調査員List);
     }
 
     /**
      * 引数の条件に該当する介護認定調査員のコレクションを返します。<br />
      * 該当するものがない場合、空のコレクションが返ります。
      *
+     * @param 市町村コード 市町村コード
      * @param 介護調査員番号 介護調査員番号
      * @return 介護認定調査員のコレクション
      */
     public KaigoNinteiChosainCollection sub介護認定調査員List(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号) {
         List<KaigoNinteiChosain> sub介護認定調査員List = new ArrayList<>();
-        List<NinteichosaItakusaki> sub認定調査委託先List = new ArrayList<>();
-        int index = 0;
         for (KaigoNinteiChosain 介護認定調査員 : 介護認定調査員List) {
             if (介護認定調査員.get市町村コード().equals(市町村コード)
                     && 介護認定調査員.get介護事業者番号().equals(介護事業者番号)) {
                 sub介護認定調査員List.add(介護認定調査員);
-                sub認定調査委託先List.add(認定調査委託先List.get(index));
             }
-            index++;
         }
-        return create介護認定調査員Collection(sub介護認定調査員List, sub認定調査委託先List);
+        return create介護認定調査員Collection(sub介護認定調査員List);
     }
 
-    private KaigoNinteiChosainCollection create介護認定調査員Collection(
-            List<KaigoNinteiChosain> sub介護認定調査員List,
-            List<NinteichosaItakusaki> sub認定調査委託先List) {
-        if (sub介護認定調査員List.isEmpty()
-                || sub認定調査委託先List.isEmpty()) {
-            return new KaigoNinteiChosainCollection(Collections.EMPTY_LIST, Collections.EMPTY_LIST);
+    private KaigoNinteiChosainCollection create介護認定調査員Collection(List<KaigoNinteiChosain> sub介護認定調査員List) {
+        if (sub介護認定調査員List.isEmpty()) {
+            return new KaigoNinteiChosainCollection(Collections.EMPTY_LIST);
         }
-        return new KaigoNinteiChosainCollection(sub介護認定調査員List, sub認定調査委託先List);
+        return new KaigoNinteiChosainCollection(sub介護認定調査員List);
     }
 
     /**

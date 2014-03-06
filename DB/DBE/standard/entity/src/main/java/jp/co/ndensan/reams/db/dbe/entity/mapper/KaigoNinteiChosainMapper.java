@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.KaigoNinteiChosain;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
@@ -23,29 +24,34 @@ public final class KaigoNinteiChosainMapper {
     }
 
     /**
-     * 介護認定調査員Entityを介護認定調査員クラスに変換します。
+     * 認定調査員Entity、認定調査委託先Entityを介護認定調査員クラスに変換します。
      *
-     * @param entity 介護認定調査員Entity
+     * @param chosainJohoEntity 認定調査員Entity
+     * @param itakusakiJohoEntity 認定調査委託先Entity
      * @return 介護認定調査員クラス
      * @throws NullPointerException 引数にNULLが渡された場合
      */
-    public static KaigoNinteiChosain toKaigoNinteiChosain(DbT7013ChosainJohoEntity entity) throws NullPointerException {
-        requireNonNull(entity, Messages.E00003.replace("介護認定調査員エンティティ", "介護認定調査員").getMessage());
+    public static KaigoNinteiChosain toKaigoNinteiChosain(
+            DbT7013ChosainJohoEntity chosainJohoEntity,
+            DbT7010NinteichosaItakusakiJohoEntity itakusakiJohoEntity) throws NullPointerException {
+        requireNonNull(chosainJohoEntity, Messages.E00003.replace("認定調査員エンティティ", "介護認定調査員").getMessage());
+        requireNonNull(itakusakiJohoEntity, Messages.E00003.replace("認定調査委託先エンティティ", "介護認定調査員").getMessage());
 
         return new KaigoNinteiChosain(
-                entity.getShichosonCode(),
-                entity.getKaigoJigyoshaNo(),
-                entity.getKaigoChosainNo(),
-                entity.getJigyoshaNo(),
-                entity.getKaigoChosainJokyo(),
-                entity.getChosainShimei(),
-                entity.getChosainKanaShimei(),
-                entity.getSeibetsu(),
-                entity.getChosainShikakuCode(),
-                entity.getChikuCode(),
-                entity.getYubinNo(),
-                entity.getJusho(),
-                entity.getTelNo());
+                chosainJohoEntity.getShichosonCode(),
+                chosainJohoEntity.getKaigoJigyoshaNo(),
+                chosainJohoEntity.getKaigoChosainNo(),
+                chosainJohoEntity.getJigyoshaNo(),
+                chosainJohoEntity.getKaigoChosainJokyo(),
+                chosainJohoEntity.getChosainShimei(),
+                chosainJohoEntity.getChosainKanaShimei(),
+                chosainJohoEntity.getSeibetsu(),
+                chosainJohoEntity.getChosainShikakuCode(),
+                chosainJohoEntity.getChikuCode(),
+                chosainJohoEntity.getYubinNo(),
+                chosainJohoEntity.getJusho(),
+                chosainJohoEntity.getTelNo(),
+                NinteichosaItakusakiMapper.toNinteichosaItakusaki(itakusakiJohoEntity));
     }
 
     /**
