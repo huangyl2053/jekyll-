@@ -30,7 +30,7 @@ public class KaigoNinteiChosainTestHelper {
 
     public static final ShichosonCode 市町村コード = new ShichosonCode(new RString("0001"));
     public static final KaigoJigyoshaNo 介護事業者番号 = new KaigoJigyoshaNo(new RString("0002"));
-    public static final KaigoChosainNo 介護調査員番号 = new KaigoChosainNo(new RString("0003"));
+    public static final RString 介護調査員番号 = new RString("0003");
     public static final JigyoshaNo 事業者番号 = new JigyoshaNo(new RString("0004"));
     public static final boolean 調査員状況 = false;
     public static final AtenaMeisho 調査員氏名 = new AtenaMeisho(new RString("長野"));
@@ -65,7 +65,7 @@ public class KaigoNinteiChosainTestHelper {
         return new KaigoNinteiChosain(
                 市町村コード,
                 介護事業者番号,
-                介護調査員番号,
+                new KaigoChosainNo(介護調査員番号),
                 事業者番号,
                 調査員状況,
                 調査員氏名,

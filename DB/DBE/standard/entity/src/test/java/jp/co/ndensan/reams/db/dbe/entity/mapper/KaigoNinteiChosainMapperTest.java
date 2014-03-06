@@ -55,7 +55,7 @@ public class KaigoNinteiChosainMapperTest extends TestBase {
 
         @Test
         public void 認定調査員entityから渡された介護調査員番号と_Mapping後の認定調査員が返す介護調査員番号が_同一になる() {
-            assertThat(sut.get介護調査員番号(), is(介護調査員番号));
+            assertThat(sut.get介護調査員番号().getValue(), is(介護調査員番号));
         }
 
         @Test

@@ -7,7 +7,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoChosainNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
@@ -41,7 +40,7 @@ public class DbT7013ChosainJohoEntity implements IDbAccessable {
     @PrimaryKey
     private KaigoJigyoshaNo kaigoJigyoshaNo;
     @PrimaryKey
-    private KaigoChosainNo kaigoChosainNo;
+    private RString kaigoChosainNo;
     private JigyoshaNo jigyoshaNo;
     private boolean kaigoChosainJokyo;
     private AtenaMeisho chosainShimei;
@@ -139,7 +138,7 @@ public class DbT7013ChosainJohoEntity implements IDbAccessable {
      *
      * @return kaigoChosainNo
      */
-    public KaigoChosainNo getKaigoChosainNo() {
+    public RString getKaigoChosainNo() {
         return kaigoChosainNo;
     }
 
@@ -148,7 +147,7 @@ public class DbT7013ChosainJohoEntity implements IDbAccessable {
      *
      * @param kaigoChosainNo kaigoChosainNo
      */
-    public void setKaigoChosainNo(KaigoChosainNo kaigoChosainNo) {
+    public void setKaigoChosainNo(RString kaigoChosainNo) {
         this.kaigoChosainNo = kaigoChosainNo;
     }
 

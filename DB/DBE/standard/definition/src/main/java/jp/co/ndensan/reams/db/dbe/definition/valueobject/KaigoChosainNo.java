@@ -9,14 +9,13 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
  * 介護独自の認定調査員番号を表すクラスです。
  *
  * @author N8187 久保田 英男
  */
-public class KaigoChosainNo implements IDbColumnMappable, Comparable<KaigoChosainNo>, IValueObject {
+public class KaigoChosainNo implements Comparable<KaigoChosainNo>, IValueObject {
 
     private final RString 介護調査員番号;
 
@@ -52,11 +51,6 @@ public class KaigoChosainNo implements IDbColumnMappable, Comparable<KaigoChosai
             return false;
         }
         return ((KaigoChosainNo) 比較対象).getValue().equals(介護調査員番号);
-    }
-
-    @Override
-    public RString getColumnValue() {
-        return 介護調査員番号;
     }
 
     @Override

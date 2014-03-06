@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.KaigoNinteiChosain;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoChosainNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
@@ -40,7 +41,7 @@ public final class KaigoNinteiChosainMapper {
         return new KaigoNinteiChosain(
                 chosainJohoEntity.getShichosonCode(),
                 chosainJohoEntity.getKaigoJigyoshaNo(),
-                chosainJohoEntity.getKaigoChosainNo(),
+                new KaigoChosainNo(chosainJohoEntity.getKaigoChosainNo()),
                 chosainJohoEntity.getJigyoshaNo(),
                 chosainJohoEntity.getKaigoChosainJokyo(),
                 chosainJohoEntity.getChosainShimei(),
@@ -66,7 +67,7 @@ public final class KaigoNinteiChosainMapper {
         DbT7013ChosainJohoEntity entity = new DbT7013ChosainJohoEntity();
         entity.setShichosonCode(介護認定調査員.get市町村コード());
         entity.setKaigoJigyoshaNo(介護認定調査員.get介護事業者番号());
-        entity.setKaigoChosainNo(介護認定調査員.get介護調査員番号());
+        entity.setKaigoChosainNo(介護認定調査員.get介護調査員番号().getValue());
         entity.setJigyoshaNo(介護認定調査員.get事業者番号());
         entity.setKaigoChosainJokyo(介護認定調査員.is調査員状況());
         entity.setChosainShimei(介護認定調査員.get調査員氏名());
