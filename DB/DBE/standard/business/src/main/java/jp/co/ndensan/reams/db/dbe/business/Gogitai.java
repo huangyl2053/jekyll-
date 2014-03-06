@@ -53,13 +53,16 @@ public class Gogitai {
     public Gogitai(GogitaiNo 合議体番号, GogitaiMeisho 合議体名称, Range<FlexibleDate> 有効期間, Range<RString> 開始終了予定時刻,
             ShinsakaiKaisaiBasho 審査会開催場所, int 審査会予定定員, int 審査会自動割当定員, int 審査会委員定員,
             GogitaiWariateIinList 合議体割当審査会委員List, GogitaiSeishinkaIshiSonzaiFlag 精神科医師存在フラグ,
-            GogitaiDummyFlag ダミーフラグ) throws NullPointerException {
+            GogitaiDummyFlag ダミーフラグ) throws NullPointerException, IllegalArgumentException {
         requireNonNull(合議体番号, Messages.E00003.replace("合議体番号", getClass().getName()).getMessage());
         requireNonNull(合議体名称, Messages.E00003.replace("合議体名称", getClass().getName()).getMessage());
         requireNonNull(有効期間, Messages.E00003.replace("有効期間", getClass().getName()).getMessage());
         requireNonNull(開始終了予定時刻, Messages.E00003.replace("開始終了予定時刻", getClass().getName()).getMessage());
         requireNonNull(審査会開催場所, Messages.E00003.replace("審査会開催場所", getClass().getName()).getMessage());
 
+        if (checkゼロ以下(審査会予定定員, 審査会自動割当定員, 審査会委員定員)) {
+            throw new IllegalArgumentException(Messages.E00009.replace("人数を表す項目の内容", getClass().getName()).getMessage());
+        }
         this.合議体番号 = 合議体番号;
         this.合議体名称 = 合議体名称;
         this.有効期間 = 有効期間;
@@ -71,6 +74,15 @@ public class Gogitai {
         this.合議体割当審査会委員List = 合議体割当審査会委員List;
         this.精神科医師存在フラグ = 精神科医師存在フラグ;
         this.ダミーフラグ = ダミーフラグ;
+    }
+
+    private boolean checkゼロ以下(int... check対象s) {
+        for (int check対象 : check対象s) {
+            if (check対象 < 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

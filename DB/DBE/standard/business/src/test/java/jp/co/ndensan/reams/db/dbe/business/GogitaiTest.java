@@ -100,5 +100,34 @@ public class GogitaiTest {
                     審査会予定定員, 審査会自動割当定員, 審査会委員定員, 合議体割当審査会委員List,
                     精神科医師存在, 合議体ダミー);
         }
+
+        @Test(expected = IllegalArgumentException.class)
+        public void 審査会予定定員に0より小さい値が渡されたとき_IllegalArgumentExceptionが発生する() {
+            sut = new Gogitai(合議体番号, 合議体名称, 有効期間, 開始終了予定時刻, 審査会開催場所,
+                    -1, 審査会自動割当定員, 審査会委員定員, 合議体割当審査会委員List,
+                    精神科医師存在, 合議体ダミー);
+        }
+
+        @Test(expected = IllegalArgumentException.class)
+        public void 審査会自動割当定員に0より小さい値が渡されたとき_IllegalArgumentExceptionが発生する() {
+            sut = new Gogitai(合議体番号, 合議体名称, 有効期間, 開始終了予定時刻, 審査会開催場所,
+                    審査会予定定員, -1, 審査会委員定員, 合議体割当審査会委員List,
+                    精神科医師存在, 合議体ダミー);
+        }
+
+        @Test(expected = IllegalArgumentException.class)
+        public void 審査会委員定員に0より小さい値が渡されたとき_IllegalArgumentExceptionが発生する() {
+            sut = new Gogitai(合議体番号, 合議体名称, 有効期間, 開始終了予定時刻, 審査会開催場所,
+                    審査会予定定員, 審査会自動割当定員, -1, 合議体割当審査会委員List,
+                    精神科医師存在, 合議体ダミー);
+        }
+
+        @Test
+        public void 審査会予定定_審査会自動割当定員員_審査会委員定員それぞれに_0以上の値が渡されたとき_インスタンスが生成される() {
+            sut = new Gogitai(合議体番号, 合議体名称, 有効期間, 開始終了予定時刻, 審査会開催場所,
+                    0, 0, 0, 合議体割当審査会委員List,
+                    精神科医師存在, 合議体ダミー);
+            assertThat(sut, is(instanceOf(Gogitai.class)));
+        }
     }
 }
