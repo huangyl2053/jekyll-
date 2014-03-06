@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -18,7 +19,7 @@ public class NinteiShinseiTorisage {
 
     private final TorisageKubun 取下げ区分;
     private final RString 取下げ理由;
-    private final RDate 取下げ年月日;
+    private final FlexibleDate 取下げ年月日;
     private final ShinsaKeizokuKubun 審査継続区分;
 
     /**
@@ -29,7 +30,7 @@ public class NinteiShinseiTorisage {
      * @param 取下げ年月日 取下げ年月日
      * @param 審査継続区分 審査継続区分
      */
-    public NinteiShinseiTorisage(TorisageKubun 取下げ区分, RString 取下げ理由, RDate 取下げ年月日, ShinsaKeizokuKubun 審査継続区分) {
+    public NinteiShinseiTorisage(TorisageKubun 取下げ区分, RString 取下げ理由, FlexibleDate 取下げ年月日, ShinsaKeizokuKubun 審査継続区分) {
 
         this.取下げ区分 = 取下げ区分;
         this.取下げ理由 = 取下げ理由;
@@ -60,7 +61,7 @@ public class NinteiShinseiTorisage {
      *
      * @return 取下げ年月日
      */
-    public RDate get取下げ年月日() {
+    public FlexibleDate get取下げ年月日() {
         return 取下げ年月日;
     }
 

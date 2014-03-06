@@ -9,10 +9,11 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiShinseiDate;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.NinteiShinseiKubunShinsei;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -25,7 +26,7 @@ public class ShujiiIkenshoIraiTaishosha {
     private final ShinseishoKanriNo 申請書管理番号;
     private final ShichosonCode 市町村コード;
     private final KaigoHihokenshaNo 被保険者番号;
-    private final NinteiShinseiDate 認定申請年月日;
+    private final FlexibleDate 認定申請年月日;
     private final NinteiShinseiKubunShinsei 認定申請区分;
     private final IKojin 個人情報;
     private final RString 氏名;
@@ -56,7 +57,7 @@ public class ShujiiIkenshoIraiTaishosha {
             ShinseishoKanriNo 申請書管理番号,
             ShichosonCode 市町村コード,
             KaigoHihokenshaNo 被保険者番号,
-            NinteiShinseiDate 認定申請年月日,
+            FlexibleDate 認定申請年月日,
             NinteiShinseiKubunShinsei 認定申請区分,
             IKojin 個人情報,
             RString 氏名,
@@ -117,7 +118,7 @@ public class ShujiiIkenshoIraiTaishosha {
      *
      * @return 認定申請年月日
      */
-    public NinteiShinseiDate get認定申請年月日() {
+    public FlexibleDate get認定申請年月日() {
         return 認定申請年月日;
     }
 

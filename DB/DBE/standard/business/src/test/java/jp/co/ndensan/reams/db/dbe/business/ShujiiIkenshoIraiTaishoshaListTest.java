@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiShinseiDate;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.NinteiShinseiKubunShinsei;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -36,23 +36,23 @@ public class ShujiiIkenshoIraiTaishoshaListTest extends TestBase {
         @Test
         public void 申請書管理番号に10を指定したとき_申請書管理番号に10を持つ主治医意見書作成依頼対象者が返る() {
             ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo((new RString("10")));
-            ShujiiIkenshoIraiTaishoshaList sut =
-                    new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
+            ShujiiIkenshoIraiTaishoshaList sut
+                    = new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
             assertThat(sut.get主治医意見書作成依頼処理対象者(申請書管理番号).get申請書管理番号().value(), is(申請書管理番号.value()));
         }
 
         @Test(expected = IllegalArgumentException.class)
         public void 申請書管理番号に存在しない値を指定したとき_例外が発生する() {
             ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo((new RString("65536")));
-            ShujiiIkenshoIraiTaishoshaList sut =
-                    new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
+            ShujiiIkenshoIraiTaishoshaList sut
+                    = new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
             sut.get主治医意見書作成依頼処理対象者(申請書管理番号);
         }
 
         @Test(expected = NullPointerException.class)
         public void 申請書管理番号にnullを指定したとき_例外が発生する() {
-            ShujiiIkenshoIraiTaishoshaList sut =
-                    new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
+            ShujiiIkenshoIraiTaishoshaList sut
+                    = new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
             sut.get主治医意見書作成依頼処理対象者((ShinseishoKanriNo.class).cast(null));
         }
     }
@@ -62,23 +62,23 @@ public class ShujiiIkenshoIraiTaishoshaListTest extends TestBase {
         @Test
         public void 市町村コードに0001を指定したとき_市町村コードに0001を持つ主治医意見書作成依頼対象者がすべて返る() {
             ShichosonCode 市町村コード = new ShichosonCode((new RString("0001")));
-            ShujiiIkenshoIraiTaishoshaList sut =
-                    new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
+            ShujiiIkenshoIraiTaishoshaList sut
+                    = new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
             assertThat(sut.sub主治医意見書作成依頼処理対象者List(市町村コード).size(), is(6));
         }
 
         @Test
         public void 市町村コードに存在しない値を指定したとき_空のリストが返る() {
             ShichosonCode 市町村コード = new ShichosonCode((new RString("9999")));
-            ShujiiIkenshoIraiTaishoshaList sut =
-                    new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
+            ShujiiIkenshoIraiTaishoshaList sut
+                    = new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
             assertThat(sut.sub主治医意見書作成依頼処理対象者List(市町村コード).size(), is(0));
         }
 
         @Test(expected = NullPointerException.class)
         public void 市町村コードにnullを指定したとき_例外が発生する() {
-            ShujiiIkenshoIraiTaishoshaList sut =
-                    new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
+            ShujiiIkenshoIraiTaishoshaList sut
+                    = new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
             sut.sub主治医意見書作成依頼処理対象者List((ShichosonCode.class).cast(null));
         }
     }
@@ -98,7 +98,7 @@ public class ShujiiIkenshoIraiTaishoshaListTest extends TestBase {
 
         ShichosonCode 市町村コード = new ShichosonCode(new RString("0001"));
         KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(new RString("0002"));
-        NinteiShinseiDate 認定申請年月日 = new NinteiShinseiDate(new FlexibleDate(new RString("20140101")));
+        FlexibleDate 認定申請年月日 = new FlexibleDate(new RString("20140101"));
         NinteiShinseiKubunShinsei 認定申請区分 = NinteiShinseiKubunShinsei.新規申請;
         IKojin 個人情報 = mock(IKojin.class);
         RString 氏名 = new RString("あああ");

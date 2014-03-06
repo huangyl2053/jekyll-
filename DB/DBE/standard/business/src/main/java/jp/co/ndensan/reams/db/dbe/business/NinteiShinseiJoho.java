@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -29,7 +30,7 @@ public class NinteiShinseiJoho {
     private ShikibetsuCode 識別コード;
     private RDate 認定申請年月日;
     private EdabanCode 枝番コード;
-    private Code 認定申請区分_申請時;
+    private NinteiShinseiKubunShinsei 認定申請区分_申請時;
     private Code 認定申請区分_法令;
     private Code 認定申請有効区分;
     private Code 要支援申請区分;
@@ -73,7 +74,7 @@ public class NinteiShinseiJoho {
      */
     public NinteiShinseiJoho(ShinseishoKanriNo 申請書管理番号, ShichosonCode 市町村コード, RString 支所コード,
             KaigoHihokenshaNo 介護被保険者番号, ShikibetsuCode 識別コード, RDate 認定申請年月日, EdabanCode 枝番コード,
-            Code 認定申請区分_申請時, Code 認定申請区分_法令, Code 認定申請有効区分, Code 要支援申請区分, RString 認定申請理由,
+            NinteiShinseiKubunShinsei 認定申請区分_申請時, Code 認定申請区分_法令, Code 認定申請有効区分, Code 要支援申請区分, RString 認定申請理由,
             Code 前回要介護状態区分コード, int 前回申請有効期間, boolean 情報提供への同意有無, int 認定調査依頼履歴番号,
             int 意見書依頼履歴番号, Code みなし要介護区分コード, boolean is延期通知有無同意, boolean is施設入所,
             RString 市町村連絡事項, NinteiShinseiTorisage 認定申請取下げ) {
@@ -178,7 +179,7 @@ public class NinteiShinseiJoho {
      *
      * @return 申請時の認定申請区分
      */
-    public Code get認定申請区分_申請時() {
+    public NinteiShinseiKubunShinsei get認定申請区分_申請時() {
         return 認定申請区分_申請時;
     }
 

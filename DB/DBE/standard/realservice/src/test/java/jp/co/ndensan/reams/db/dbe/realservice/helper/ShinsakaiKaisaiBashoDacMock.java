@@ -33,9 +33,9 @@ public class ShinsakaiKaisaiBashoDacMock implements IShinsakaiKaisaiBashoDac {
         kaisaiBashoChikuCode = mock(ShinsakaiKaisaiBashoChikuCode.class);
         kaisaiBashoChikuCode = new ShinsakaiKaisaiBashoChikuCode(new RString("00001"));
 
-        entity.setShinsakaiKaisaiBashoCode(new RString("00001"));
+        entity.setShinsakaiKaisaiBashoCode(kaisaiBashoCode);
         entity.setShinsakaiKaisaiBashoMei(new RString("市役所会議室"));
-        entity.setShinsakaiKaisaiChikuCode(new RString("00001"));
+        entity.setShinsakaiKaisaiChikuCode(kaisaiBashoChikuCode);
         entity.setShinsakaiKaisaiBashoJusho(new RString("長野市鶴賀"));
         entity.setShinsakaiKaisaiBashoTelNo(new RString("026-222-3333"));
         entity.setShinsakaiKaisaiBashoJokyo(true);
@@ -87,7 +87,7 @@ public class ShinsakaiKaisaiBashoDacMock implements IShinsakaiKaisaiBashoDac {
 
     @Override
     public int delete(DbT5104ShinsakaiKaisaiBashoJohoEntity entity) {
-        if (entity.getShinsakaiKaisaiBashoCode().equals(検索不可な開催場所コード)) {
+        if (entity.getShinsakaiKaisaiBashoCode().value().equals(検索不可な開催場所コード)) {
             return 0;
         } else {
             return 1;

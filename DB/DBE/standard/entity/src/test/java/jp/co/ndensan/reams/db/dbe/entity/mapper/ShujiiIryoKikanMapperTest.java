@@ -34,7 +34,7 @@ public class ShujiiIryoKikanMapperTest extends TestBase {
     private static final KaigoIryoKikanCode 介護医療機関コード_B001 = new KaigoIryoKikanCode(new RString("B001"));
     private static final IIryoKikanCode 医療機関コード_C00000001 = new _IryoKikanCode(new RString("C00000001"));
     private static final IryoKikanJokyo 医療機関状況_有効 = IryoKikanJokyo.有効;
-    private static final IryoKikanKubun 医療機関区分_ABC = new IryoKikanKubun(new RString("ABC"), new RString("名称"), new RString("略称"));
+    private static final IryoKikanKubun 医療機関区分_100 = new IryoKikanKubun(new RString("100"), new RString("名称"), new RString("略称"));
 
     public static class toShujiiIryoKikanのテスト extends TestBase {
 
@@ -73,7 +73,7 @@ public class ShujiiIryoKikanMapperTest extends TestBase {
 
         @Test
         public void 医療機関区分コードがABCの主治医医療機関エンティティを渡すと_医療機関区分コードがABCの主治医医療機関クラスが作成される() {
-            assertThat(result.get医療機関区分().getCode(), is(医療機関区分_ABC.getCode()));
+            assertThat(result.get医療機関区分().getCode(), is(医療機関区分_100.getCode()));
         }
     }
 
@@ -113,7 +113,7 @@ public class ShujiiIryoKikanMapperTest extends TestBase {
 
         @Test
         public void 医療機関区分コードがABCの主治医医療機関クラスを渡すと_医療機関区分コードがABCの主治医医療機関エンティティが作成される() {
-            assertThat(result.getKikanKubunCode(), is(医療機関区分_ABC.getCode()));
+            assertThat(result.getKikanKubunCode(), is(医療機関区分_100.getCode()));
         }
     }
 
@@ -145,6 +145,6 @@ public class ShujiiIryoKikanMapperTest extends TestBase {
     }
 
     private static IShujiiIryoKikan create主治医医療機関() {
-        return new ShujiiIryoKikan(市町村コード_A001, 介護医療機関コード_B001, 医療機関コード_C00000001, 医療機関状況_有効, 医療機関区分_ABC);
+        return new ShujiiIryoKikan(市町村コード_A001, 介護医療機関コード_B001, 医療機関コード_C00000001, 医療機関状況_有効, 医療機関区分_100);
     }
 }

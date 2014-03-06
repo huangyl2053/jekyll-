@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoIryoKikanEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.KaigoIryoKikanTestHelper;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
@@ -18,11 +19,13 @@ import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import static org.mockito.Mockito.*;
 
 /**
  * 介護医療機関Mapperのテストクラスです。
@@ -58,7 +61,7 @@ public class KaigoIryoKikanMapperTest extends TestBase {
 
         @Override
         public void setUp() {
-            setDummyControlData("UZ");
+            setDummyControlData("DB");
 
             識別コード = new RString("000000001");
             医療機関名称 = new RString("介護病院");
@@ -78,7 +81,7 @@ public class KaigoIryoKikanMapperTest extends TestBase {
             介護医療機関コード = new KaigoIryoKikanCode(new RString("B001"));
             医療機関コード = new _IryoKikanCode(new RString("C00000001"));
             医療機関状況 = IryoKikanJokyo.有効;
-            医療機関区分 = new IryoKikanKubun(new RString("ABC"), new RString("名称"), new RString("略称"));
+            医療機関区分 = new IryoKikanKubun(new RString("100"), new RString("名称"), new RString("略称"));
             口座 = KaigoIryoKikanTestHelper.create口座List(3);
 
             sut = KaigoIryoKikanMapper.toKaigoIryoKikan(create介護医療機関Entity(), 口座);

@@ -38,14 +38,14 @@ public final class ShujiiMapper {
     public static IShujii toShujii(DbT7012ShujiiJohoEntity entity) {
         return new Shujii(
                 new ShichosonCode(entity.getShichosonCode()),
-                new KaigoIryoKikanCode(entity.getKaigoIryokikanCode()),
+                entity.getKaigoIryokikanCode(),
                 new KaigoDoctorCode(entity.getKaigoIshiCode()),
                 new _IryoKikanCode(entity.getIryokikanCode()),
                 entity.getShujiiCode(),
                 IshiJokyo.toValue(entity.getShujiiJokyo()),
-                new YubinNo(entity.getYubinNo()),
+                entity.getYubinNo(),
                 new AtenaJusho(entity.getJusho()),
-                new TelNo(entity.getTelNo()),
+                entity.getTelNo(),
                 entity.getFaxNo());
     }
 
@@ -58,14 +58,14 @@ public final class ShujiiMapper {
     public static DbT7012ShujiiJohoEntity toEntity(IShujii shujii) {
         DbT7012ShujiiJohoEntity entity = new DbT7012ShujiiJohoEntity();
         entity.setShichosonCode(shujii.get市町村コード().getValue());
-        entity.setKaigoIryokikanCode(shujii.get介護医療機関コード().getValue());
+        entity.setKaigoIryokikanCode(shujii.get介護医療機関コード());
         entity.setKaigoIshiCode(shujii.get介護医師コード().value());
         entity.setIryokikanCode(shujii.get医療機関コード().getValue());
         entity.setShujiiCode(shujii.get医師識別番号());
         entity.setShujiiJokyo(shujii.is有効());
-        entity.setYubinNo(shujii.get郵便番号().value());
+        entity.setYubinNo(shujii.get郵便番号());
         entity.setJusho(shujii.get住所().value());
-        entity.setTelNo(shujii.get電話番号().value());
+        entity.setTelNo(shujii.get電話番号());
         entity.setFaxNo(shujii.getFAX番号());
         return entity;
     }

@@ -31,8 +31,8 @@ public final class ShinsakaiKaisaiBashoJohoMapper {
      */
     public static ShinsakaiKaisaiBasho to審査会開催場所(DbT5104ShinsakaiKaisaiBashoJohoEntity entity) {
         ShinsakaiKaisaiBashoJokyo 審査会開催場所状況 = ShinsakaiKaisaiBashoJokyo.toValue(entity.getShinsakaiKaisaiBashoJokyo());
-        ShinsakaiKaisaiBashoCode 審査会開催場所コード = new ShinsakaiKaisaiBashoCode(entity.getShinsakaiKaisaiBashoCode());
-        ShinsakaiKaisaiBashoChikuCode 審査会開催場所地区コード = new ShinsakaiKaisaiBashoChikuCode(entity.getShinsakaiKaisaiChikuCode());
+        ShinsakaiKaisaiBashoCode 審査会開催場所コード = new ShinsakaiKaisaiBashoCode(entity.getShinsakaiKaisaiBashoCode().value());
+        ShinsakaiKaisaiBashoChikuCode 審査会開催場所地区コード = new ShinsakaiKaisaiBashoChikuCode(entity.getShinsakaiKaisaiChikuCode().value());
 
         return new ShinsakaiKaisaiBasho(審査会開催場所コード, entity.getShinsakaiKaisaiBashoMei(),
                 審査会開催場所地区コード, entity.getShinsakaiKaisaiBashoJusho(),

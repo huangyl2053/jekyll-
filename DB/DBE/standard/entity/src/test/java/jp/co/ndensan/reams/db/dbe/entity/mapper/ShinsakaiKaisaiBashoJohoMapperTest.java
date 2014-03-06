@@ -79,9 +79,9 @@ public class ShinsakaiKaisaiBashoJohoMapperTest extends TestBase {
 
         private DbT5104ShinsakaiKaisaiBashoJohoEntity create審査会開催場所情報Entity() {
             DbT5104ShinsakaiKaisaiBashoJohoEntity entity = new DbT5104ShinsakaiKaisaiBashoJohoEntity();
-            entity.setShinsakaiKaisaiBashoCode(開催場所コード.value());
+            entity.setShinsakaiKaisaiBashoCode(開催場所コード);
             entity.setShinsakaiKaisaiBashoMei(開催場所名称);
-            entity.setShinsakaiKaisaiChikuCode(開催場所地区コード.value());
+            entity.setShinsakaiKaisaiChikuCode(開催場所地区コード);
             entity.setShinsakaiKaisaiBashoJusho(開催場所住所);
             entity.setShinsakaiKaisaiBashoTelNo(開催場所電話番号);
             entity.setShinsakaiKaisaiBashoJokyo(true);

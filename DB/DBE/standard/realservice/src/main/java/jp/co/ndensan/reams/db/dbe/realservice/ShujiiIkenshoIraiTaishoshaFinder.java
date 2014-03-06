@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.business.JushoEditor;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuTaisho;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._ShikibetsuCode;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushoEditPattern;
 import jp.co.ndensan.reams.ur.urz.realservice.DoctorManagerFactory;
@@ -169,12 +168,12 @@ public class ShujiiIkenshoIraiTaishoshaFinder {
 
     private IKojin create個人(DbT5001NinteiShinseiJohoEntity 認定申請情報Entity) {
         return KojinService.createKojinFinder().get個人(
-                new ShikibetsuCode(認定申請情報Entity.getShikibetsuCode()));
+                new ShikibetsuCode(認定申請情報Entity.getShikibetsuCode().getColumnValue()));
     }
 
     private IShikibetsuTaisho create識別対象(DbT5001NinteiShinseiJohoEntity 認定申請情報Entity) {
         return ShikibetsuTaishoService.getShikibetsuTaishoFinder().get識別対象(
-                new _ShikibetsuCode(認定申請情報Entity.getShikibetsuCode()));
+                new ShikibetsuCode(認定申請情報Entity.getShikibetsuCode().getColumnValue()));
     }
 
     private RString create氏名(IShikibetsuTaisho 識別対象) {

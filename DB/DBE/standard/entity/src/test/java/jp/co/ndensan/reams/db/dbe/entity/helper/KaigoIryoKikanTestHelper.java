@@ -52,7 +52,7 @@ public final class KaigoIryoKikanTestHelper {
     public static KaigoIryoKikanCode 介護医療機関コード = new KaigoIryoKikanCode(new RString("B001"));
     public static IIryoKikanCode 医療機関コード = new _IryoKikanCode(new RString("C00000001"));
     public static IryoKikanJokyo 医療機関状況 = IryoKikanJokyo.有効;
-    public static IryoKikanKubun 医療機関区分 = new IryoKikanKubun(new RString("ABC"), new RString("名称"), new RString("略称"));
+    public static IryoKikanKubun 医療機関区分 = new IryoKikanKubun(new RString("100"), new RString("名称"), new RString("略称"));
 
     private KaigoIryoKikanTestHelper() {
     }
