@@ -34,6 +34,7 @@ public class KaigoNinteiChosain {
     private final AtenaMeisho 調査員氏名;
     private final AtenaKanaMeisho 調査員氏名カナ;
     private final Gender 性別;
+    // TODO N8187 久保田英男 調査員資格コードはコードマスタで管理する項目なのでクラス化する予定 実装方針が決まったら対応する。
     private final Code 調査員資格コード;
     private final ChikuCode 地区コード;
     private final YubinNo 郵便番号;
