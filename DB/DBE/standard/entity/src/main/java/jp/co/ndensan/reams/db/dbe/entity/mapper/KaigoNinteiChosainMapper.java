@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.KaigoNinteiChosain;
+import jp.co.ndensan.reams.db.dbe.business.KaigoNinteichosain;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoChosainNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
@@ -16,12 +16,12 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
  *
  * @author N8187 久保田 英男
  */
-public final class KaigoNinteiChosainMapper {
+public final class KaigoNinteichosainMapper {
 
     /**
      * インスタンス化防止のためのプライベートコンストラクタです。
      */
-    private KaigoNinteiChosainMapper() {
+    private KaigoNinteichosainMapper() {
     }
 
     /**
@@ -32,13 +32,13 @@ public final class KaigoNinteiChosainMapper {
      * @return 介護認定調査員クラス
      * @throws NullPointerException 引数にNULLが渡された場合
      */
-    public static KaigoNinteiChosain toKaigoNinteiChosain(
+    public static KaigoNinteichosain toKaigoNinteichosain(
             DbT7013ChosainJohoEntity chosainJohoEntity,
             DbT7010NinteichosaItakusakiJohoEntity itakusakiJohoEntity) throws NullPointerException {
         requireNonNull(chosainJohoEntity, Messages.E00003.replace("認定調査員エンティティ", "介護認定調査員").getMessage());
         requireNonNull(itakusakiJohoEntity, Messages.E00003.replace("認定調査委託先エンティティ", "介護認定調査員").getMessage());
 
-        return new KaigoNinteiChosain(
+        return new KaigoNinteichosain(
                 chosainJohoEntity.getShichosonCode(),
                 chosainJohoEntity.getKaigoJigyoshaNo(),
                 new KaigoChosainNo(chosainJohoEntity.getKaigoChosainNo()),
@@ -62,7 +62,7 @@ public final class KaigoNinteiChosainMapper {
      * @return 介護認定調査員Entity
      * @throws NullPointerException 引数にNULLが渡された場合
      */
-    public static DbT7013ChosainJohoEntity toKaigoNinteiChosainEntity(KaigoNinteiChosain 介護認定調査員) throws NullPointerException {
+    public static DbT7013ChosainJohoEntity toKaigoNinteichosainEntity(KaigoNinteichosain 介護認定調査員) throws NullPointerException {
         requireNonNull(介護認定調査員, Messages.E00003.replace("介護認定調査員", "介護認定調査員エンティティ").getMessage());
         DbT7013ChosainJohoEntity entity = new DbT7013ChosainJohoEntity();
         entity.setShichosonCode(介護認定調査員.get市町村コード());

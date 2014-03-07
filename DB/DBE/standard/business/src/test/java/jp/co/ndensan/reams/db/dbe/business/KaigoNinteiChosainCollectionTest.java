@@ -34,24 +34,24 @@ import static org.junit.Assert.assertThat;
  * @author N8187 久保田 英男
  */
 @RunWith(Enclosed.class)
-public class KaigoNinteiChosainCollectionTest extends TestBase {
+public class KaigoNinteichosainCollectionTest extends TestBase {
 
-    private static KaigoNinteiChosainCollection sut;
+    private static KaigoNinteichosainCollection sut;
 
     public static class ConstructorTest extends TestBase {
 
-        private List<KaigoNinteiChosain> 介護認定調査員リスト;
+        private List<KaigoNinteichosain> 介護認定調査員リスト;
 
         @Override
         protected void setUp() {
             介護認定調査員リスト = new ArrayList<>();
-            介護認定調査員リスト.add(createKaigoNinteiChosain("S001", "K00A"));
+            介護認定調査員リスト.add(createKaigoNinteichosain("S001", "K00A"));
         }
 
         @Test(expected = NullPointerException.class)
         public void 介護認定調査員リストがNullの場合_コンストラクタは_NullPointerExceptionを投げる() {
             介護認定調査員リスト = null;
-            sut = new KaigoNinteiChosainCollection(介護認定調査員リスト);
+            sut = new KaigoNinteichosainCollection(介護認定調査員リスト);
         }
     }
 
@@ -59,7 +59,7 @@ public class KaigoNinteiChosainCollectionTest extends TestBase {
 
         @Test
         public void 介護認定調査員が存在する時_get介護認定調査員は_該当の認定調査員情報を返す() {
-            sut = createKaigoNinteiChosainList();
+            sut = createKaigoNinteichosainList();
             assertThat(sut.get介護認定調査員(
                     new ShichosonCode(new RString("0001")),
                     new KaigoJigyoshaNo(new RString("S001")),
@@ -69,7 +69,7 @@ public class KaigoNinteiChosainCollectionTest extends TestBase {
 
         @Test(expected = IllegalArgumentException.class)
         public void 市町村コードが該当しない時_get介護認定調査員は_IllegalArgumentExceptionを投げる() {
-            sut = createKaigoNinteiChosainList();
+            sut = createKaigoNinteichosainList();
             sut.get介護認定調査員(
                     new ShichosonCode(new RString("9999")),
                     new KaigoJigyoshaNo(new RString("S001")),
@@ -78,7 +78,7 @@ public class KaigoNinteiChosainCollectionTest extends TestBase {
 
         @Test(expected = IllegalArgumentException.class)
         public void 介護事業者番号が該当しない時_get介護認定調査員は_IllegalArgumentExceptionを投げる() {
-            sut = createKaigoNinteiChosainList();
+            sut = createKaigoNinteichosainList();
             sut.get介護認定調査員(
                     new ShichosonCode(new RString("0001")),
                     new KaigoJigyoshaNo(new RString("S999")),
@@ -87,7 +87,7 @@ public class KaigoNinteiChosainCollectionTest extends TestBase {
 
         @Test(expected = IllegalArgumentException.class)
         public void 介護調査員番号が該当しない時_get介護認定調査員は_IllegalArgumentExceptionを投げる() {
-            sut = createKaigoNinteiChosainList();
+            sut = createKaigoNinteichosainList();
             sut.get介護認定調査員(
                     new ShichosonCode(new RString("0001")),
                     new KaigoJigyoshaNo(new RString("S001")),
@@ -99,13 +99,13 @@ public class KaigoNinteiChosainCollectionTest extends TestBase {
 
         @Test
         public void 介護認定調査員が存在する時_sub介護認定調査員Collectionは_該当の介護認定調査員を返す() {
-            sut = createKaigoNinteiChosainList();
+            sut = createKaigoNinteichosainList();
             assertThat(sut.sub介護認定調査員Collection(new KaigoJigyoshaNo(new RString("S001"))).size(), is(1));
         }
 
         @Test
         public void 介護認定調査員が存在しない時_sub介護認定調査員Collectionは_空のListを返す() {
-            sut = createKaigoNinteiChosainList();
+            sut = createKaigoNinteichosainList();
             assertThat(sut.sub介護認定調査員Collection(new KaigoJigyoshaNo(new RString("S999"))).size(), is(0));
         }
     }
@@ -114,13 +114,13 @@ public class KaigoNinteiChosainCollectionTest extends TestBase {
 
         @Test
         public void 介護認定調査員が存在する時_sub介護認定調査員Collectionは_該当の介護認定調査員を返す() {
-            sut = createKaigoNinteiChosainList();
+            sut = createKaigoNinteichosainList();
             assertThat(sut.sub介護認定調査員Collection(new ShichosonCode(new RString("0001"))).size(), is(3));
         }
 
         @Test
         public void 介護認定調査員が存在しない時_sub介護認定調査員Collectionは_空のListを返す() {
-            sut = createKaigoNinteiChosainList();
+            sut = createKaigoNinteichosainList();
             assertThat(sut.sub介護認定調査員Collection(new ShichosonCode(new RString("9999"))).size(), is(0));
         }
     }
@@ -129,13 +129,13 @@ public class KaigoNinteiChosainCollectionTest extends TestBase {
 
         @Test
         public void 該当する介護認定調査員が存在する時_sub介護認定調査員Collectionは_該当の介護認定調査員を返す() {
-            sut = createKaigoNinteiChosainList();
+            sut = createKaigoNinteichosainList();
             assertThat(sut.sub介護認定調査員Collection(new ShichosonCode(new RString("0001")), new KaigoJigyoshaNo(new RString("S001"))).size(), is(1));
         }
 
         @Test
         public void 該当する介護認定調査員が存在しない時_sub介護認定調査員Collectionは_空のListを返す() {
-            sut = createKaigoNinteiChosainList();
+            sut = createKaigoNinteichosainList();
             assertThat(sut.sub介護認定調査員Collection(new ShichosonCode(new RString("9999")), new KaigoJigyoshaNo(new RString("S999"))).size(), is(0));
         }
     }
@@ -144,13 +144,13 @@ public class KaigoNinteiChosainCollectionTest extends TestBase {
 
         @Test
         public void 介護認定調査員が存在する時_isEmptyは_FALSEを返す() {
-            sut = createKaigoNinteiChosainList();
+            sut = createKaigoNinteichosainList();
             assertThat(sut.isEmpty(), is(false));
         }
 
         @Test
         public void 介護認定調査員が存在しない時_isEmptyは_TRUEを返す() {
-            sut = new KaigoNinteiChosainCollection(new ArrayList<KaigoNinteiChosain>());
+            sut = new KaigoNinteichosainCollection(new ArrayList<KaigoNinteichosain>());
             assertThat(sut.isEmpty(), is(true));
         }
     }
@@ -159,27 +159,27 @@ public class KaigoNinteiChosainCollectionTest extends TestBase {
 
         @Test
         public void コンストラクタから長さ3のリストを渡されたとき_sizeは3を返す() {
-            sut = createKaigoNinteiChosainList();
+            sut = createKaigoNinteichosainList();
             assertThat(sut.size(), is(3));
         }
 
         @Test
         public void コンストラクタから空のリストを渡されたとき_sizeは0を返す() {
-            sut = new KaigoNinteiChosainCollection(Collections.EMPTY_LIST);
+            sut = new KaigoNinteichosainCollection(Collections.EMPTY_LIST);
             assertThat(sut.size(), is(0));
         }
     }
 
-    private static KaigoNinteiChosainCollection createKaigoNinteiChosainList() {
-        List<KaigoNinteiChosain> chosainlist = new ArrayList<>();
-        chosainlist.add(createKaigoNinteiChosain("S001", "K00A"));
-        chosainlist.add(createKaigoNinteiChosain("S002", "K00A"));
-        chosainlist.add(createKaigoNinteiChosain("S003", "K00B"));
-        return new KaigoNinteiChosainCollection(chosainlist);
+    private static KaigoNinteichosainCollection createKaigoNinteichosainList() {
+        List<KaigoNinteichosain> chosainlist = new ArrayList<>();
+        chosainlist.add(createKaigoNinteichosain("S001", "K00A"));
+        chosainlist.add(createKaigoNinteichosain("S002", "K00A"));
+        chosainlist.add(createKaigoNinteichosain("S003", "K00B"));
+        return new KaigoNinteichosainCollection(chosainlist);
     }
 
-    private static KaigoNinteiChosain createKaigoNinteiChosain(String 介護事業者番号, String 介護調査員番号) {
-        return new KaigoNinteiChosain(
+    private static KaigoNinteichosain createKaigoNinteichosain(String 介護事業者番号, String 介護調査員番号) {
+        return new KaigoNinteichosain(
                 new ShichosonCode(new RString("0001")),
                 new KaigoJigyoshaNo(new RString(介護事業者番号)),
                 new KaigoChosainNo(new RString(介護調査員番号)),

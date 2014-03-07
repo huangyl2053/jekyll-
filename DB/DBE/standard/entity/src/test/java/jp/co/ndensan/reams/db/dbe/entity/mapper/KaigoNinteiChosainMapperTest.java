@@ -4,9 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.KaigoNinteiChosain;
+import jp.co.ndensan.reams.db.dbe.business.KaigoNinteichosain;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
-import static jp.co.ndensan.reams.db.dbe.entity.helper.KaigoNinteiChosainTestHelper.*;
+import static jp.co.ndensan.reams.db.dbe.entity.helper.KaigoNinteichosainTestHelper.*;
 import jp.co.ndensan.reams.db.dbe.entity.helper.MockNinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
@@ -22,25 +22,25 @@ import static org.hamcrest.CoreMatchers.is;
  * @author N8187 久保田 英男
  */
 @RunWith(Enclosed.class)
-public class KaigoNinteiChosainMapperTest extends TestBase {
+public class KaigoNinteichosainMapperTest extends TestBase {
 
-    public static class toKaigoNinteiChosain extends TestBase {
+    public static class toKaigoNinteichosain extends TestBase {
 
-        KaigoNinteiChosain sut;
+        KaigoNinteichosain sut;
 
         @Override
         public void setUp() {
-            sut = KaigoNinteiChosainMapper.toKaigoNinteiChosain(create認定調査員Entity(), MockNinteichosaItakusakiJohoEntity.getSpiedInstance());
+            sut = KaigoNinteichosainMapper.toKaigoNinteichosain(create認定調査員Entity(), MockNinteichosaItakusakiJohoEntity.getSpiedInstance());
         }
 
         @Test(expected = NullPointerException.class)
         public void 認定調査員entityにnullがわたったとき_NullpointerExceptionが発生する() {
-            sut = KaigoNinteiChosainMapper.toKaigoNinteiChosain(null, MockNinteichosaItakusakiJohoEntity.getSpiedInstance());
+            sut = KaigoNinteichosainMapper.toKaigoNinteichosain(null, MockNinteichosaItakusakiJohoEntity.getSpiedInstance());
         }
 
         @Test(expected = NullPointerException.class)
         public void 認定調査委託先entityにnullがわたったとき_NullpointerExceptionが発生する() {
-            sut = KaigoNinteiChosainMapper.toKaigoNinteiChosain(create認定調査員Entity(), null);
+            sut = KaigoNinteichosainMapper.toKaigoNinteichosain(create認定調査員Entity(), null);
         }
 
         @Test
@@ -114,18 +114,18 @@ public class KaigoNinteiChosainMapperTest extends TestBase {
         }
     }
 
-    public static class toKaigoNinteiChosainEntity extends TestBase {
+    public static class toKaigoNinteichosainEntity extends TestBase {
 
         DbT7013ChosainJohoEntity sut;
 
         @Override
         public void setUp() {
-            sut = KaigoNinteiChosainMapper.toKaigoNinteiChosainEntity(create認定調査員());
+            sut = KaigoNinteichosainMapper.toKaigoNinteichosainEntity(create認定調査員());
         }
 
         @Test(expected = NullPointerException.class)
         public void 認定調査員クラスにnullがわたったとき_NullpointerExceptionが発生する() {
-            sut = KaigoNinteiChosainMapper.toKaigoNinteiChosainEntity(null);
+            sut = KaigoNinteichosainMapper.toKaigoNinteichosainEntity(null);
         }
 
         @Test

@@ -14,6 +14,6 @@ import org.junit.runner.RunWith;
  * @author N8187 久保田 英男
  */
 @RunWith(Enclosed.class)
-public class KaigoNinteiChosainDacTest extends TestDacBase {
+public class KaigoNinteichosainDacTest extends TestDacBase {
 // TODO N8187 久保田英男 テスト実施可能になり次第対応する。
 }

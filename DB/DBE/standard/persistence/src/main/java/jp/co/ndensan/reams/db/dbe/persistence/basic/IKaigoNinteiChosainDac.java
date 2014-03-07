@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author N8187 久保田 英男
  */
-public interface IKaigoNinteiChosainDac extends IReplaceable<DbT7013ChosainJohoEntity>,
+public interface IKaigoNinteichosainDac extends IReplaceable<DbT7013ChosainJohoEntity>,
         IInsertable<DbT7013ChosainJohoEntity>, IUpdatable<DbT7013ChosainJohoEntity>, IDeletable<DbT7013ChosainJohoEntity> {
 
     /**

@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.realservice.helper;
 
-import jp.co.ndensan.reams.db.dbe.business.KaigoNinteiChosain;
+import jp.co.ndensan.reams.db.dbe.business.KaigoNinteichosain;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoChosainNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N8187 久保田 英男
  */
-public class KaigoNinteiChosainTestHelper {
+public class KaigoNinteichosainTestHelper {
 
     public static final ShichosonCode 市町村コード = new ShichosonCode(new RString("0001"));
     public static final KaigoJigyoshaNo 介護事業者番号 = new KaigoJigyoshaNo(new RString("0002"));
@@ -61,8 +61,8 @@ public class KaigoNinteiChosainTestHelper {
         return entity;
     }
 
-    public static KaigoNinteiChosain create認定調査員() {
-        return new KaigoNinteiChosain(
+    public static KaigoNinteichosain create認定調査員() {
+        return new KaigoNinteichosain(
                 市町村コード,
                 介護事業者番号,
                 new KaigoChosainNo(介護調査員番号),

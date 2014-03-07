@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
  *
  * @author N8187 久保田 英男
  */
-public class KaigoNinteiChosain {
+public class KaigoNinteichosain {
 
     private final ShichosonCode 市町村コード;
     private final KaigoJigyoshaNo 介護事業者番号;
@@ -61,7 +61,7 @@ public class KaigoNinteiChosain {
      * @param 認定調査委託先 認定調査委託先
      * @throws NullPointerException 調査員状況および性別以外の引数にNULLが渡された場合
      */
-    public KaigoNinteiChosain(ShichosonCode 市町村コード,
+    public KaigoNinteichosain(ShichosonCode 市町村コード,
             KaigoJigyoshaNo 介護事業者番号,
             KaigoChosainNo 介護調査員番号,
             JigyoshaNo 事業者番号,

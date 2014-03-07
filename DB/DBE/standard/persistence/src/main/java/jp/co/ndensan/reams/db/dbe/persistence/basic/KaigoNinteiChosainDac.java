@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
  *
  * @author N8187 久保田 英男
  */
-public class KaigoNinteiChosainDac implements IKaigoNinteiChosainDac {
+public class KaigoNinteichosainDac implements IKaigoNinteichosainDac {
 
     @InjectSession
     private SqlSession session;
