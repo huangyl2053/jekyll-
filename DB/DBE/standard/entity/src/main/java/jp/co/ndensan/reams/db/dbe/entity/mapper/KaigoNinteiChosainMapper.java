@@ -67,7 +67,7 @@ public final class KaigoNinteiChosainMapper {
         DbT7013ChosainJohoEntity entity = new DbT7013ChosainJohoEntity();
         entity.setShichosonCode(介護認定調査員.get市町村コード());
         entity.setKaigoJigyoshaNo(介護認定調査員.get介護事業者番号());
-        entity.setKaigoChosainNo(介護認定調査員.get介護調査員番号().getValue());
+        entity.setKaigoChosainNo(介護認定調査員.get介護調査員番号().value());
         entity.setJigyoshaNo(介護認定調査員.get事業者番号());
         entity.setKaigoChosainJokyo(介護認定調査員.is調査員状況());
         entity.setChosainShimei(介護認定調査員.get調査員氏名());

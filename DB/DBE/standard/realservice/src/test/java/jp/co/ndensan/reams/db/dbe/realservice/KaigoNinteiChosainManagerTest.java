@@ -263,7 +263,7 @@ public class KaigoNinteiChosainManagerTest extends TestBase {
         DbT7013ChosainJohoEntity entity = create認定調査員Entity();
         entity.setShichosonCode(市町村コード);
         entity.setKaigoJigyoshaNo(介護事業者番号);
-        entity.setKaigoChosainNo(介護調査員番号.getValue());
+        entity.setKaigoChosainNo(介護調査員番号.value());
         return entity;
     }
 
@@ -271,7 +271,7 @@ public class KaigoNinteiChosainManagerTest extends TestBase {
         DbT7013ChosainJohoEntity entity = create認定調査員Entity();
         entity.setShichosonCode(市町村コード);
         entity.setKaigoJigyoshaNo(介護事業者番号);
-        entity.setKaigoChosainNo(介護調査員番号.getValue());
+        entity.setKaigoChosainNo(介護調査員番号.value());
         entity.setKaigoChosainJokyo(調査員の状況.is有効());
         return entity;
     }

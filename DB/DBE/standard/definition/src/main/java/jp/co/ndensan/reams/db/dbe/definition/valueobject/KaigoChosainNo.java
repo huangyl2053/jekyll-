@@ -29,15 +29,6 @@ public class KaigoChosainNo implements Comparable<KaigoChosainNo>, IValueObject 
         this.介護調査員番号 = requireNonNull(介護調査員番号, Messages.E00001.replace("介護調査員番号").getMessage());
     }
 
-    /**
-     * 介護調査員番号を返します。
-     *
-     * @return 介護調査員番号
-     */
-    public RString getValue() {
-        return 介護調査員番号;
-    }
-
     @Override
     public int hashCode() {
         int hash = 13;
@@ -50,7 +41,7 @@ public class KaigoChosainNo implements Comparable<KaigoChosainNo>, IValueObject 
         if (比較対象 == null || getClass() != 比較対象.getClass()) {
             return false;
         }
-        return ((KaigoChosainNo) 比較対象).getValue().equals(介護調査員番号);
+        return ((KaigoChosainNo) 比較対象).value().equals(介護調査員番号);
     }
 
     @Override
