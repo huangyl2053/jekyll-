@@ -9,7 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.KaigoNinteichosain;
 import jp.co.ndensan.reams.db.dbe.business.KaigoNinteichosainCollection;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosainJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoChosainNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
@@ -55,7 +55,7 @@ public class KaigoNinteichosainManager {
      * @param 介護調査員番号 介護調査員番号
      * @return 介護認定調査員
      */
-    public KaigoNinteichosain get介護認定調査員(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoChosainNo 介護調査員番号) {
+    public KaigoNinteichosain get介護認定調査員(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoNinteichosainNo 介護調査員番号) {
         DbT7013ChosainJohoEntity chosainJohoEntity = chosainDac.select(市町村コード, 介護事業者番号, 介護調査員番号);
         DbT7010NinteichosaItakusakiJohoEntity itakusakiEntity = itakusakiDac.select(市町村コード.getValue(), 介護事業者番号, true);
         return KaigoNinteichosainMapper.toKaigoNinteichosain(chosainJohoEntity, itakusakiEntity);
@@ -70,7 +70,7 @@ public class KaigoNinteichosainManager {
      * @param 調査員の状況 調査員の状況
      * @return 介護認定調査員
      */
-    public KaigoNinteichosain get介護認定調査員(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoChosainNo 介護調査員番号, ChosainJokyo 調査員の状況) {
+    public KaigoNinteichosain get介護認定調査員(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoNinteichosainNo 介護調査員番号, ChosainJokyo 調査員の状況) {
         DbT7013ChosainJohoEntity chosainJohoEntity = chosainDac.select(市町村コード, 介護事業者番号, 介護調査員番号, 調査員の状況);
         DbT7010NinteichosaItakusakiJohoEntity itakusakiEntity = itakusakiDac.select(市町村コード.getValue(), 介護事業者番号, true);
         return KaigoNinteichosainMapper.toKaigoNinteichosain(chosainJohoEntity, itakusakiEntity);

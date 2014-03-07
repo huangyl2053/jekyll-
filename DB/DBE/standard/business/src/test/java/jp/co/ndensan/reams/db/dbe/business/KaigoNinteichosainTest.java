@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.definition.ChosaItakuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoChosainNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
@@ -36,7 +36,7 @@ public class KaigoNinteichosainTest extends TestBase {
         private KaigoNinteichosain sut;
         private ShichosonCode 市町村コード;
         private KaigoJigyoshaNo 介護事業者番号;
-        private KaigoChosainNo 介護調査員番号;
+        private KaigoNinteichosainNo 介護調査員番号;
         private JigyoshaNo 事業者番号;
         private boolean 調査員状況;
         private AtenaMeisho 調査員氏名;
@@ -54,7 +54,7 @@ public class KaigoNinteichosainTest extends TestBase {
 
             市町村コード = new ShichosonCode(new RString("0001"));
             介護事業者番号 = new KaigoJigyoshaNo(new RString("0001"));
-            介護調査員番号 = new KaigoChosainNo(new RString("0001"));
+            介護調査員番号 = new KaigoNinteichosainNo(new RString("0001"));
             事業者番号 = new JigyoshaNo(new RString("0001"));
             調査員状況 = true;
             調査員氏名 = new AtenaMeisho(new RString("山田"));

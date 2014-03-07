@@ -20,15 +20,15 @@ import static org.junit.Assert.assertThat;
  * @author N8187 久保田 英男
  */
 @RunWith(Enclosed.class)
-public class KaigoChosainNoTest extends TestBase {
+public class KaigoNinteichosainNoTest extends TestBase {
 
-    private static KaigoChosainNo sut;
+    private static KaigoNinteichosainNo sut;
 
     public static class コンストラクタ extends TestBase {
 
         @Test(expected = NullPointerException.class)
         public void 引数がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            sut = new KaigoChosainNo(null);
+            sut = new KaigoNinteichosainNo(null);
         }
     }
 
@@ -101,7 +101,7 @@ public class KaigoChosainNoTest extends TestBase {
         }
     }
 
-    private static KaigoChosainNo createKaigoChosainNo(String code) {
-        return new KaigoChosainNo(new RString(code));
+    private static KaigoNinteichosainNo createKaigoChosainNo(String code) {
+        return new KaigoNinteichosainNo(new RString(code));
     }
 }

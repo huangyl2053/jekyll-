@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosainJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoChosainNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
@@ -28,7 +28,7 @@ public class KaigoNinteichosainDac implements IKaigoNinteichosainDac {
     private SqlSession session;
 
     @Override
-    public DbT7013ChosainJohoEntity select(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoChosainNo 介護調査員番号) {
+    public DbT7013ChosainJohoEntity select(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoNinteichosainNo 介護調査員番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT7013ChosainJoho.class)
@@ -40,7 +40,7 @@ public class KaigoNinteichosainDac implements IKaigoNinteichosainDac {
     }
 
     @Override
-    public DbT7013ChosainJohoEntity select(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoChosainNo 介護調査員番号, ChosainJokyo 調査員の状況) {
+    public DbT7013ChosainJohoEntity select(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoNinteichosainNo 介護調査員番号, ChosainJokyo 調査員の状況) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT7013ChosainJoho.class)

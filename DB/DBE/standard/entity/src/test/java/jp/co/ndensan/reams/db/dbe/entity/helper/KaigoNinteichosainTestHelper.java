@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.entity.helper;
 
 import jp.co.ndensan.reams.db.dbe.business.KaigoNinteichosain;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoChosainNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaItakusakiMapper;
@@ -65,7 +65,7 @@ public class KaigoNinteichosainTestHelper {
         return new KaigoNinteichosain(
                 市町村コード,
                 介護事業者番号,
-                new KaigoChosainNo(介護調査員番号),
+                new KaigoNinteichosainNo(介護調査員番号),
                 事業者番号,
                 調査員状況,
                 調査員氏名,

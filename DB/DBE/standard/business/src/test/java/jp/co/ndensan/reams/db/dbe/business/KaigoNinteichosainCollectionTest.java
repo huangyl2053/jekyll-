@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.ChosaItakuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoChosainNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
@@ -63,7 +63,7 @@ public class KaigoNinteichosainCollectionTest extends TestBase {
             assertThat(sut.get介護認定調査員(
                     new ShichosonCode(new RString("0001")),
                     new KaigoJigyoshaNo(new RString("S001")),
-                    new KaigoChosainNo(new RString("K00A")))
+                    new KaigoNinteichosainNo(new RString("K00A")))
                     .get介護事業者番号().value(), is(new RString("S001")));
         }
 
@@ -73,7 +73,7 @@ public class KaigoNinteichosainCollectionTest extends TestBase {
             sut.get介護認定調査員(
                     new ShichosonCode(new RString("9999")),
                     new KaigoJigyoshaNo(new RString("S001")),
-                    new KaigoChosainNo(new RString("K00A")));
+                    new KaigoNinteichosainNo(new RString("K00A")));
         }
 
         @Test(expected = IllegalArgumentException.class)
@@ -82,7 +82,7 @@ public class KaigoNinteichosainCollectionTest extends TestBase {
             sut.get介護認定調査員(
                     new ShichosonCode(new RString("0001")),
                     new KaigoJigyoshaNo(new RString("S999")),
-                    new KaigoChosainNo(new RString("K00A")));
+                    new KaigoNinteichosainNo(new RString("K00A")));
         }
 
         @Test(expected = IllegalArgumentException.class)
@@ -91,7 +91,7 @@ public class KaigoNinteichosainCollectionTest extends TestBase {
             sut.get介護認定調査員(
                     new ShichosonCode(new RString("0001")),
                     new KaigoJigyoshaNo(new RString("S001")),
-                    new KaigoChosainNo(new RString("K999")));
+                    new KaigoNinteichosainNo(new RString("K999")));
         }
     }
 
@@ -182,7 +182,7 @@ public class KaigoNinteichosainCollectionTest extends TestBase {
         return new KaigoNinteichosain(
                 new ShichosonCode(new RString("0001")),
                 new KaigoJigyoshaNo(new RString(介護事業者番号)),
-                new KaigoChosainNo(new RString(介護調査員番号)),
+                new KaigoNinteichosainNo(new RString(介護調査員番号)),
                 new JigyoshaNo(new RString("0001")),
                 true,
                 new AtenaMeisho(new RString("0001")),

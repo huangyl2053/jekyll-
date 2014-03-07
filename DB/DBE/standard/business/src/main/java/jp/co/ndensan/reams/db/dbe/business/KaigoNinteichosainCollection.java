@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoChosainNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
@@ -43,7 +43,7 @@ public class KaigoNinteichosainCollection implements Iterable {
      * @throws IllegalArgumentException 存在しない対象を指定したとき
      */
     public KaigoNinteichosain get介護認定調査員(
-            ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoChosainNo 介護調査員番号)
+            ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoNinteichosainNo 介護調査員番号)
             throws IllegalArgumentException {
         for (KaigoNinteichosain 介護認定調査員 : 介護認定調査員List) {
             if (is市町村コードが一致(介護認定調査員, 市町村コード)
@@ -146,7 +146,7 @@ public class KaigoNinteichosainCollection implements Iterable {
         return 介護認定調査員.get市町村コード().equals(市町村コード);
     }
 
-    private boolean is介護調査員番号が一致(KaigoNinteichosain 介護認定調査員, KaigoChosainNo 介護調査員番号) {
+    private boolean is介護調査員番号が一致(KaigoNinteichosain 介護認定調査員, KaigoNinteichosainNo 介護調査員番号) {
         return 介護認定調査員.get介護調査員番号().equals(介護調査員番号);
     }
 }

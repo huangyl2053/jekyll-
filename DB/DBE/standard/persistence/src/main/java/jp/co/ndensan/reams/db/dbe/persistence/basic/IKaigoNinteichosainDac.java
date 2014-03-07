@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosainJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoChosainNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
@@ -33,7 +33,7 @@ public interface IKaigoNinteichosainDac extends IReplaceable<DbT7013ChosainJohoE
      * @return 調査員情報エンティティ
      */
     @Transaction
-    DbT7013ChosainJohoEntity select(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoChosainNo 介護調査員番号);
+    DbT7013ChosainJohoEntity select(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoNinteichosainNo 介護調査員番号);
 
     /**
      * 引数の条件に該当する調査員情報エンティティを取得します。
@@ -45,7 +45,7 @@ public interface IKaigoNinteichosainDac extends IReplaceable<DbT7013ChosainJohoE
      * @return 調査員情報エンティティ
      */
     @Transaction
-    DbT7013ChosainJohoEntity select(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoChosainNo 介護調査員番号, ChosainJokyo 調査員の状況);
+    DbT7013ChosainJohoEntity select(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoNinteichosainNo 介護調査員番号, ChosainJokyo 調査員の状況);
 
     /**
      * 引数の条件に該当する調査員情報エンティティをリストで取得します。

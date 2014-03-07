@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N8187 久保田 英男
  */
-public class KaigoChosainNo implements Comparable<KaigoChosainNo>, IValueObject {
+public class KaigoNinteichosainNo implements Comparable<KaigoNinteichosainNo>, IValueObject {
 
     private final RString 介護調査員番号;
 
@@ -25,7 +25,7 @@ public class KaigoChosainNo implements Comparable<KaigoChosainNo>, IValueObject 
      * @param 介護調査員番号 介護調査員番号
      * @throws NullPointerException 引数にnullが渡されたとき
      */
-    public KaigoChosainNo(RString 介護調査員番号) throws NullPointerException {
+    public KaigoNinteichosainNo(RString 介護調査員番号) throws NullPointerException {
         this.介護調査員番号 = requireNonNull(介護調査員番号, Messages.E00001.replace("介護調査員番号").getMessage());
     }
 
@@ -41,11 +41,11 @@ public class KaigoChosainNo implements Comparable<KaigoChosainNo>, IValueObject 
         if (比較対象 == null || getClass() != 比較対象.getClass()) {
             return false;
         }
-        return ((KaigoChosainNo) 比較対象).value().equals(介護調査員番号);
+        return ((KaigoNinteichosainNo) 比較対象).value().equals(介護調査員番号);
     }
 
     @Override
-    public int compareTo(KaigoChosainNo 比較対象) {
+    public int compareTo(KaigoNinteichosainNo 比較対象) {
         return 介護調査員番号.compareTo(比較対象.value());
     }
 

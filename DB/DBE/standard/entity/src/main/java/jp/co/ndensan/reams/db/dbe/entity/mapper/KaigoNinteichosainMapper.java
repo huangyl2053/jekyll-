@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.KaigoNinteichosain;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoChosainNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
@@ -41,7 +41,7 @@ public final class KaigoNinteichosainMapper {
         return new KaigoNinteichosain(
                 chosainJohoEntity.getShichosonCode(),
                 chosainJohoEntity.getKaigoJigyoshaNo(),
-                new KaigoChosainNo(chosainJohoEntity.getKaigoChosainNo()),
+                new KaigoNinteichosainNo(chosainJohoEntity.getKaigoChosainNo()),
                 chosainJohoEntity.getJigyoshaNo(),
                 chosainJohoEntity.getKaigoChosainJokyo(),
                 chosainJohoEntity.getChosainShimei(),

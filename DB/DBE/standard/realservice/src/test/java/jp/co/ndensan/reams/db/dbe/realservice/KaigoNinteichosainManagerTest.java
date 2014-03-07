@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosainJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoChosainNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
@@ -36,7 +36,7 @@ public class KaigoNinteichosainManagerTest extends TestBase {
     private static KaigoNinteichosainManager sut;
     private static ShichosonCode 市町村コード;
     private static KaigoJigyoshaNo 介護事業者番号;
-    private static KaigoChosainNo 介護調査員番号;
+    private static KaigoNinteichosainNo 介護調査員番号;
     private static ChosainJokyo 調査員の状況;
 
     public static class get介護認定調査員_引数が_市町村コード_介護事業者番号_介護調査員番号 extends TestBase {
@@ -45,7 +45,7 @@ public class KaigoNinteichosainManagerTest extends TestBase {
         protected void setUp() {
             市町村コード = new ShichosonCode(new RString("001"));
             介護事業者番号 = new KaigoJigyoshaNo(new RString("002"));
-            介護調査員番号 = new KaigoChosainNo(new RString("003"));
+            介護調査員番号 = new KaigoNinteichosainNo(new RString("003"));
         }
 
         @Test
@@ -73,7 +73,7 @@ public class KaigoNinteichosainManagerTest extends TestBase {
         protected void setUp() {
             市町村コード = new ShichosonCode(new RString("001"));
             介護事業者番号 = new KaigoJigyoshaNo(new RString("002"));
-            介護調査員番号 = new KaigoChosainNo(new RString("003"));
+            介護調査員番号 = new KaigoNinteichosainNo(new RString("003"));
             調査員の状況 = ChosainJokyo.有効;
         }
 
@@ -259,7 +259,7 @@ public class KaigoNinteichosainManagerTest extends TestBase {
         return dac;
     }
 
-    private static DbT7013ChosainJohoEntity createChosainEntity(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoChosainNo 介護調査員番号) {
+    private static DbT7013ChosainJohoEntity createChosainEntity(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoNinteichosainNo 介護調査員番号) {
         DbT7013ChosainJohoEntity entity = create認定調査員Entity();
         entity.setShichosonCode(市町村コード);
         entity.setKaigoJigyoshaNo(介護事業者番号);
@@ -267,7 +267,7 @@ public class KaigoNinteichosainManagerTest extends TestBase {
         return entity;
     }
 
-    private static DbT7013ChosainJohoEntity createChosainEntity(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoChosainNo 介護調査員番号, ChosainJokyo 調査員の状況) {
+    private static DbT7013ChosainJohoEntity createChosainEntity(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoNinteichosainNo 介護調査員番号, ChosainJokyo 調査員の状況) {
         DbT7013ChosainJohoEntity entity = create認定調査員Entity();
         entity.setShichosonCode(市町村コード);
         entity.setKaigoJigyoshaNo(介護事業者番号);

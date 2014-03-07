@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoChosainNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
@@ -28,7 +28,7 @@ public class KaigoNinteichosain {
 
     private final ShichosonCode 市町村コード;
     private final KaigoJigyoshaNo 介護事業者番号;
-    private final KaigoChosainNo 介護調査員番号;
+    private final KaigoNinteichosainNo 介護調査員番号;
     private final JigyoshaNo 事業者番号;
     private final boolean 調査員状況;
     private final AtenaMeisho 調査員氏名;
@@ -63,7 +63,7 @@ public class KaigoNinteichosain {
      */
     public KaigoNinteichosain(ShichosonCode 市町村コード,
             KaigoJigyoshaNo 介護事業者番号,
-            KaigoChosainNo 介護調査員番号,
+            KaigoNinteichosainNo 介護調査員番号,
             JigyoshaNo 事業者番号,
             boolean 調査員状況,
             AtenaMeisho 調査員氏名,
@@ -115,7 +115,7 @@ public class KaigoNinteichosain {
      *
      * @return 介護調査員番号
      */
-    public KaigoChosainNo get介護調査員番号() {
+    public KaigoNinteichosainNo get介護調査員番号() {
         return 介護調査員番号;
     }
 
