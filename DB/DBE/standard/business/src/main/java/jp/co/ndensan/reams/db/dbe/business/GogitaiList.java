@@ -64,7 +64,7 @@ public class GogitaiList implements Iterable<Gogitai> {
     }
 
     @Override
-    public Iterator iterator() {
+    public Iterator<Gogitai> iterator() {
         return 合議体List.iterator();
     }
 }
