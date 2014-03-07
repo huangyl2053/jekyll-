@@ -203,7 +203,7 @@ public class Gogitai {
      *
      * @return 精神科医が存在するならtrue
      */
-    public boolean has精神科医存在() {
+    public boolean has精神科医() {
         return 精神科医師存在フラグ.is存在();
     }
 

@@ -119,7 +119,7 @@ public final class GogitaiMapper {
         entity.setShinsakaiYoteiTeiin(合議体.get審査会予定定員());
         entity.setShinsakaiJidoWariateTeiin(合議体.get審査会自動割当定員());
         entity.setShinsakaiIinTeiin(合議体.get審査会委員定員());
-        entity.setGogitaiSeishinkaSonzaiFlag(合議体.has精神科医存在());
+        entity.setGogitaiSeishinkaSonzaiFlag(合議体.has精神科医());
         entity.setGogitaiDummyFlag(合議体.isDummy());
         return entity;
     }
