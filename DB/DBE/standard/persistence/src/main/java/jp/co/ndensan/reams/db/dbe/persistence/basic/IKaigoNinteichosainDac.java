@@ -11,9 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.IDeletable;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.IInsertable;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.IReplaceable;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.IUpdatable;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
@@ -21,8 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author N8187 久保田 英男
  */
-public interface IKaigoNinteichosainDac extends IReplaceable<DbT7013ChosainJohoEntity>,
-        IInsertable<DbT7013ChosainJohoEntity>, IUpdatable<DbT7013ChosainJohoEntity>, IDeletable<DbT7013ChosainJohoEntity> {
+public interface IKaigoNinteichosainDac extends IReplaceable<DbT7013ChosainJohoEntity>, IDeletable<DbT7013ChosainJohoEntity> {
 
     /**
      * 引数の条件に該当する調査員情報エンティティを取得します。
