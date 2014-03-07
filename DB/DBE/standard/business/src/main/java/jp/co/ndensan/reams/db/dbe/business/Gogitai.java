@@ -64,9 +64,9 @@ public class Gogitai {
         requireNonNull(予定開催時間, Messages.E00003.replace("予定開催時間", getClass().getName()).getMessage());
         requireNonNull(審査会開催場所, Messages.E00003.replace("審査会開催場所", getClass().getName()).getMessage());
 
-        if (checkゼロ以下(審査会予定定員, 審査会自動割当定員, 審査会委員定員)) {
-            throw new IllegalArgumentException(Messages.E00009.replace("人数を表す項目の内容").getMessage());
-        }
+        checkゼロ以下(審査会予定定員, Messages.E00013.replace("審査会予定定員", "0以上").getMessage());
+        checkゼロ以下(審査会自動割当定員, Messages.E00013.replace("審査会自動割当定員", "0以上").getMessage());
+        checkゼロ以下(審査会委員定員, Messages.E00013.replace("審査会委員定員", "0以上").getMessage());
 
         this.合議体番号 = 合議体番号;
         this.合議体名称 = 合議体名称;
@@ -82,13 +82,11 @@ public class Gogitai {
         this.ダミー区分 = ダミー区分;
     }
 
-    private boolean checkゼロ以下(int... check対象s) {
-        for (int check対象 : check対象s) {
-            if (check対象 < 0) {
-                return true;
-            }
+    private int checkゼロ以下(int check対象, String message) throws IllegalArgumentException {
+        if (check対象 < 0) {
+            throw new IllegalArgumentException(message);
         }
-        return false;
+        return check対象;
     }
 
     /**
