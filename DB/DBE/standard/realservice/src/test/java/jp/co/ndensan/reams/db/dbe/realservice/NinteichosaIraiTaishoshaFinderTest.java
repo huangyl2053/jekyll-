@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunSh
 import jp.co.ndensan.reams.ur.urf.persistence.basic.IChosainJohoDac;
 import jp.co.ndensan.reams.ur.urf.persistence.basic.IKaigoJigyoshaDac;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.IKojinDac;
+import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
@@ -58,7 +58,7 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
         private INinteichosaItakusakiDac itakusakiDac;
         private INinteiChosaIraiJohoDac iraiJohoDac;
         private INinteiChosaIraiTaishoshaDac iraiTaishoshaDac;
-        private IKojinDac kojinDac;
+        private IKojin kojin;
         private IKaigoJigyoshaDac kaigoJigyoshaDac;
         private IChosainJohoDac chosainJohoDac;
         private NinteichosaIraiTaishoshaFinder sut;
@@ -82,8 +82,8 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
             itakusakiDac = mock(INinteichosaItakusakiDac.class);
             iraiJohoDac = mock(INinteiChosaIraiJohoDac.class);
             when(iraiJohoDac.select(any(RString.class), any(NinteichosaIraiRirekiNo.class))).thenReturn(null);
-            kojinDac = mock(IKojinDac.class);
-            when(kojinDac.select最新(any(RString.class))).thenReturn(KojinEntityMock.getSpiedInstance());
+            kojin = mock(IKojin.class);
+            //when(kojinDac.select最新(any(RString.class))).thenReturn(KojinEntityMock.getSpiedInstance());
             kaigoJigyoshaDac = mock(IKaigoJigyoshaDac.class);
             chosainJohoDac = mock(IChosainJohoDac.class);
             sut = new NinteichosaIraiTaishoshaFinder(

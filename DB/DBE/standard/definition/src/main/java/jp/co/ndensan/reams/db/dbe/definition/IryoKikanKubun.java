@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
  *
  * @author n8178 城間篤人
  */
-public class IryoKikanKubun {//implements ICodeAssignedItem {
+public class IryoKikanKubun { //implements ICodeAssignedItem {
 
     private final RString code;
     private final RString name;
@@ -48,16 +48,31 @@ public class IryoKikanKubun {//implements ICodeAssignedItem {
         this.shortName = 略称;
     }
 
+    /**
+     * コードを返します。
+     *
+     * @return コード
+     */
     //@Override
     public RString getCode() {
         return code;
     }
 
+    /**
+     * 名称を返します。
+     *
+     * @return 名称
+     */
     //@Override
     public RString getName() {
         return name;
     }
 
+    /**
+     * 略称を返します。
+     *
+     * @return 略称
+     */
     //@Override
     public RString getShortName() {
         return shortName;

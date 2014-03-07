@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBasho
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoChikuCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.junit.Assert.*;
@@ -31,8 +33,8 @@ public class ShinsakaiKaisaiBashoJohoMapperTest extends TestBase {
         private ShinsakaiKaisaiBashoCode 開催場所コード;
         private ShinsakaiKaisaiBashoChikuCode 開催場所地区コード;
         private RString 開催場所名称;
-        private RString 開催場所住所;
-        private RString 開催場所電話番号;
+        private AtenaJusho 開催場所住所;
+        private TelNo 開催場所電話番号;
         private ShinsakaiKaisaiBashoJokyo 開催場所状況;
         private ShinsakaiKaisaiBasho sut;
 
@@ -40,8 +42,8 @@ public class ShinsakaiKaisaiBashoJohoMapperTest extends TestBase {
             開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
             開催場所地区コード = new ShinsakaiKaisaiBashoChikuCode(new RString("00001"));
             開催場所名称 = new RString("市役所会議室");
-            開催場所住所 = new RString("長野市鶴賀");
-            開催場所電話番号 = new RString("0262362222");
+            開催場所住所 = new AtenaJusho(new RString("長野市鶴賀"));
+            開催場所電話番号 = new TelNo(new RString("0262362222"));
             開催場所状況 = 開催場所状況.有効;
             sut = ShinsakaiKaisaiBashoJohoMapper.to審査会開催場所(create審査会開催場所情報Entity());
 

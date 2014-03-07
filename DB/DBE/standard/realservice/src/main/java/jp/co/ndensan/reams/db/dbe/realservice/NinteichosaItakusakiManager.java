@@ -171,7 +171,6 @@ public class NinteichosaItakusakiManager {
      */
     public int updateHatsubanJoho(RString 項目区分, HatsubanJoho 発番情報) {
         DbT5020HatsubanKanriJohoEntity entity = new DbT5020HatsubanKanriJohoEntity(項目区分, new RString("0000"), 発番情報.getColumnValue());
-        int result = hatsubanDac.update(entity);
-        return result;
+        return hatsubanDac.update(entity);
     }
 }

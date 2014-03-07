@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCod
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.helper.IShinsakaiKaisaiBashoDacMock;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestDacBase;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
@@ -48,8 +50,8 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
         private ShinsakaiKaisaiBashoCode 開催場所コード;
         private RString 開催場所名称;
         private ShinsakaiKaisaiBashoChikuCode 開催場所地区コード;
-        private RString 開催場所住所;
-        private RString 開催場所電話番号;
+        private AtenaJusho 開催場所住所;
+        private TelNo 開催場所電話番号;
         private boolean 開催場所状況;
         private DbT5104ShinsakaiKaisaiBashoJohoEntity 更新用entity;
 
@@ -58,8 +60,8 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
             開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
             開催場所名称 = new RString("市役所会議室");
             開催場所地区コード = new ShinsakaiKaisaiBashoChikuCode(new RString("00002"));
-            開催場所住所 = new RString("長野市鶴賀");
-            開催場所電話番号 = new RString("026-263-5555");
+            開催場所住所 = new AtenaJusho(new RString("長野市鶴賀"));
+            開催場所電話番号 = new TelNo(new RString("026-263-5555"));
             開催場所状況 = true;
 
             更新用entity = create審査会開催場所情報Entity(開催場所コード, 開催場所名称, 開催場所地区コード,
@@ -115,8 +117,8 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
         private ShinsakaiKaisaiBashoCode 開催場所コード;
         private RString 開催場所名称;
         private ShinsakaiKaisaiBashoChikuCode 開催場所地区コード;
-        private RString 開催場所住所;
-        private RString 開催場所電話番号;
+        private AtenaJusho 開催場所住所;
+        private TelNo 開催場所電話番号;
         private boolean 開催場所状況;
         private DbT5104ShinsakaiKaisaiBashoJohoEntity 更新用entity;
 
@@ -125,8 +127,8 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
             開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
             開催場所名称 = new RString("市役所会議室");
             開催場所地区コード = new ShinsakaiKaisaiBashoChikuCode(new RString("00002"));
-            開催場所住所 = new RString("長野市鶴賀");
-            開催場所電話番号 = new RString("026-263-5555");
+            開催場所住所 = new AtenaJusho(new RString("長野市鶴賀"));
+            開催場所電話番号 = new TelNo(new RString("026-263-5555"));
             開催場所状況 = true;
 
             更新用entity = create審査会開催場所情報Entity(開催場所コード, 開催場所名称, 開催場所地区コード,
@@ -165,13 +167,13 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
             開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00002"));
             開催場所地区コード = new ShinsakaiKaisaiBashoChikuCode(new RString("00001"));
             inserter.insert(create審査会開催場所情報Entity(開催場所コード, new RString("開催場所名２"),
-                    開催場所地区コード, new RString("開催場所住所２"), new RString("開催場所電話番号２"), false));
+                    開催場所地区コード, new AtenaJusho(new RString("開催場所住所２")), new TelNo(new RString("開催場所電話番号２")), false));
             開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00003"));
             inserter.insert(create審査会開催場所情報Entity(開催場所コード, new RString("開催場所名３"),
-                    開催場所地区コード, new RString("開催場所住所３"), new RString("開催場所電話番号３"), true));
+                    開催場所地区コード, new AtenaJusho(new RString("開催場所住所３")), new TelNo(new RString("開催場所電話番号３")), true));
             開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00004"));
             inserter.insert(create審査会開催場所情報Entity(開催場所コード, new RString("開催場所名４"),
-                    開催場所地区コード, new RString("開催場所住所４"), new RString("開催場所電話番号４"), false));
+                    開催場所地区コード, new AtenaJusho(new RString("開催場所住所４")), new TelNo(new RString("開催場所電話番号４")), false));
             List<DbT5104ShinsakaiKaisaiBashoJohoEntity> results = sut.selectAll();
             assertThat(results.size(), is(3));
         }
@@ -188,8 +190,8 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
         private ShinsakaiKaisaiBashoCode 開催場所コード;
         private RString 開催場所名称;
         private ShinsakaiKaisaiBashoChikuCode 開催場所地区コード;
-        private RString 開催場所住所;
-        private RString 開催場所電話番号;
+        private AtenaJusho 開催場所住所;
+        private TelNo 開催場所電話番号;
         private boolean 開催場所状況;
         private DbT5104ShinsakaiKaisaiBashoJohoEntity 更新用entity;
 
@@ -200,8 +202,8 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
 
             開催場所名称 = new RString("市役所会議室");
             開催場所地区コード = new ShinsakaiKaisaiBashoChikuCode(new RString("00002"));
-            開催場所住所 = new RString("長野市鶴賀");
-            開催場所電話番号 = new RString("026-263-5555");
+            開催場所住所 = new AtenaJusho(new RString("長野市鶴賀"));
+            開催場所電話番号 = new TelNo(new RString("026-263-5555"));
             開催場所状況 = true;
 
             更新用entity = create審査会開催場所情報Entity(開催場所コード, 開催場所名称, 開催場所地区コード,
@@ -252,8 +254,8 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
         private ShinsakaiKaisaiBashoCode 開催場所コード;
         private RString 開催場所名称;
         private ShinsakaiKaisaiBashoChikuCode 開催場所地区コード;
-        private RString 開催場所住所;
-        private RString 開催場所電話番号;
+        private AtenaJusho 開催場所住所;
+        private TelNo 開催場所電話番号;
         private boolean 開催場所状況;
         private DbT5104ShinsakaiKaisaiBashoJohoEntity 更新用entity;
 
@@ -262,10 +264,10 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
             開催場所地区コード = new ShinsakaiKaisaiBashoChikuCode(new RString("00001"));
             開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
             inserter.insert(create審査会開催場所情報Entity(開催場所コード, new RString("開催場所名"), 開催場所地区コード,
-                    new RString("開催場所住所"), new RString("開催場所電話番号"), false));
+                    new AtenaJusho(new RString("開催場所住所")), new TelNo(new RString("開催場所電話番号")), false));
 
             更新用entity = create審査会開催場所情報Entity(開催場所コード, new RString("開催場所名"), 開催場所地区コード,
-                    new RString("開催場所住所"), new RString("開催場所電話番号"), false);
+                    new AtenaJusho(new RString("開催場所住所")), new TelNo(new RString("開催場所電話番号")), false);
 
         }
 
@@ -277,10 +279,10 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
     }
 
     private static DbT5104ShinsakaiKaisaiBashoJohoEntity create審査会開催場所情報Entity(ShinsakaiKaisaiBashoCode 開催場所コード, RString 開催場所名称,
-            ShinsakaiKaisaiBashoChikuCode 開催場所地区コード, RString 開催場所住所,
-            RString 開催場所電話番号, boolean 開催場所状況) {
+            ShinsakaiKaisaiBashoChikuCode 開催場所地区コード, AtenaJusho 開催場所住所,
+            TelNo 開催場所電話番号, boolean 開催場所状況) {
         DbT5104ShinsakaiKaisaiBashoJohoEntity entity = new DbT5104ShinsakaiKaisaiBashoJohoEntity();
-        entity.setInsertDantaiCd(new RString("0001"));
+        entity.setInsertDantaiCd(new RString("000000001"));
         entity.setIsDeleted(false);
         entity.setLastUpdateReamsLoginId(new RString("0001"));
         entity.setShinsakaiKaisaiBashoCode(開催場所コード);

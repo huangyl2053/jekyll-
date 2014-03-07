@@ -28,7 +28,6 @@ import jp.co.ndensan.reams.ur.urf.persistence.basic.IChosainJohoDac;
 import jp.co.ndensan.reams.ur.urf.persistence.basic.IKaigoJigyoshaDac;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
-import jp.co.ndensan.reams.ur.urz.entity.basic.KojinEntity;
 import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
 //import jp.co.ndensan.reams.ur.urz.persistence.basic.IKojinDac;
 //import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
@@ -129,7 +128,8 @@ public class NinteichosaIraiTaishoshaFinder {
         return create認定調査依頼対象者List(要介護認定進捗情報EntityList);
     }
 
-    private List<NinteichosaIraiTaishosha> create認定調査依頼対象者List(List<DbT5005NinteiShinchokuJohoEntity> 要介護認定進捗情報EntityList) throws NullPointerException {
+    private List<NinteichosaIraiTaishosha> create認定調査依頼対象者List(List<DbT5005NinteiShinchokuJohoEntity> 要介護認定進捗情報EntityList)
+            throws NullPointerException {
         List<NinteichosaIraiTaishosha> list = new ArrayList<>();
 
         for (DbT5005NinteiShinchokuJohoEntity entity : 要介護認定進捗情報EntityList) {

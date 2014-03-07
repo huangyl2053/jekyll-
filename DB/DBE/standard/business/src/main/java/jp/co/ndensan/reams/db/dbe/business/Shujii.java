@@ -32,7 +32,7 @@ public class Shujii implements IShujii {
     private final YubinNo 郵便番号;
     private final AtenaJusho 住所;
     private final TelNo 電話番号;
-    private final RString FAX番号;
+    private final RString ＦＡＸ番号;
 
     /**
      * インスタンスを生成します。
@@ -46,11 +46,11 @@ public class Shujii implements IShujii {
      * @param 郵便番号 郵便番号
      * @param 住所 住所
      * @param 電話番号 電話番号
-     * @param FAX番号 FAX番号
+     * @param ＦＡＸ番号 ＦＡＸ番号
      */
     public Shujii(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード,
             IIryoKikanCode 医療機関コード, RString 医師識別番号, IshiJokyo 医師の状況,
-            YubinNo 郵便番号, AtenaJusho 住所, TelNo 電話番号, RString FAX番号) {
+            YubinNo 郵便番号, AtenaJusho 住所, TelNo 電話番号, RString ＦＡＸ番号) {
         this.市町村コード = requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
         this.介護医療機関コード = requireNonNull(介護医療機関コード, Messages.E00001.replace("介護医療機関コード").getMessage());
         this.介護医師コード = requireNonNull(介護医師コード, Messages.E00001.replace("介護医師コード").getMessage());
@@ -60,7 +60,7 @@ public class Shujii implements IShujii {
         this.郵便番号 = 郵便番号;
         this.住所 = 住所;
         this.電話番号 = 電話番号;
-        this.FAX番号 = FAX番号;
+        this.ＦＡＸ番号 = ＦＡＸ番号;
     }
 
     @Override
@@ -110,6 +110,6 @@ public class Shujii implements IShujii {
 
     @Override
     public RString getFAX番号() {
-        return FAX番号;
+        return ＦＡＸ番号;
     }
 }

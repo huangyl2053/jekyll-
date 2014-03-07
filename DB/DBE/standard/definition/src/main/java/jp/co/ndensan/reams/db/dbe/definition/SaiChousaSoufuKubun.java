@@ -48,7 +48,7 @@ public enum SaiChousaSoufuKubun implements IRStringConvertable {
      * @throws IllegalArgumentException {@code code}が実在しない再調査送付区分の場合
      */
     public static SaiChousaSoufuKubun toValue(RString code) throws NullPointerException, IllegalArgumentException {
-        RString requireNonNull = Objects.requireNonNull(code, Messages.E00001.replace("再調査送付区分").getMessage());
+        Objects.requireNonNull(code, Messages.E00001.replace("再調査送付区分").getMessage());
 
         for (SaiChousaSoufuKubun item : SaiChousaSoufuKubun.values()) {
             if (item.コード.equals(code)) {

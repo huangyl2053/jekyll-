@@ -14,7 +14,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public final class YokaigoninteiDateConstants {
 
+    /**
+     * 認定調査完了年月日の初期状態の日付を表します。
+     */
     public static final FlexibleDate 認定調査未完了年月日;
+    /**
+     * 主治医意見書作成以来完了年月日の初期状態の日付を表します。
+     */
     public static final FlexibleDate 主治医意見書作成依頼未完了年月日;
 
     /**

@@ -8,12 +8,9 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiShinseiDate;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
 /**
  * 要介護認定申請取下げ対象者を表すクラスです。
@@ -43,6 +40,7 @@ public class NinteiShinseiTorisageTaishosha {
      */
     public NinteiShinseiTorisageTaishosha(ShinseishoKanriNo 申請書管理No, ShichosonCode 市町村コード, KaigoHihokenshaNo 被保険者番号,
             FlexibleDate 認定申請年月日, NinteiShinseiKubunShinsei 認定申請区分コード_申請時, NinteiShinseiTorisage 認定申請取下げ) {
+
         requireNonNull(申請書管理No, Messages.E00003.replace("申請書管理No", "要介護認定申請取下げ対象者").getMessage());
         requireNonNull(市町村コード, Messages.E00003.replace("市町村コード", "要介護認定申請取下げ対象者").getMessage());
         requireNonNull(被保険者番号, Messages.E00003.replace("被保険者番号", "要介護認定申請取下げ対象者").getMessage());

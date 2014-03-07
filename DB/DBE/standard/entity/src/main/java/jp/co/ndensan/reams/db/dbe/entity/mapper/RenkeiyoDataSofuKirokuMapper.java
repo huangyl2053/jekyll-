@@ -32,7 +32,7 @@ public final class RenkeiyoDataSofuKirokuMapper {
     /**
      * 連携用データ送付記録エンティティから連携用データ送付記録への対応付けを行います。
      *
-     * @param 連携用データ送付記録Entity entity
+     * @param entity 連携用データ送付記録Entity
      * @return 連携用データ送付記録
      * @throws NullPointerException {@code 連携用データ送付記録Entity}がnullの場合
      */

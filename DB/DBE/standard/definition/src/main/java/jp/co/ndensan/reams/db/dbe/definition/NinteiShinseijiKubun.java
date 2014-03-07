@@ -56,7 +56,7 @@ public enum NinteiShinseijiKubun implements IRStringConvertable {
      * @throws IllegalArgumentException {@code code}が実在しない認定申請区分（申請時）の場合
      */
     public static NinteiShinseijiKubun toValue(RString code) throws NullPointerException, IllegalArgumentException {
-        RString requireNonNull = Objects.requireNonNull(code, Messages.E00001.replace("認定申請区分（申請時）").getMessage());
+        Objects.requireNonNull(code, Messages.E00001.replace("認定申請区分（申請時）").getMessage());
 
         for (NinteiShinseijiKubun item : NinteiShinseijiKubun.values()) {
             if (item.コード.equals(code)) {

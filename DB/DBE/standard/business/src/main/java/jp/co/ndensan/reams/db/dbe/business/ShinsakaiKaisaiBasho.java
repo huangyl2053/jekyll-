@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBasho
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoChikuCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -21,8 +23,8 @@ public class ShinsakaiKaisaiBasho {
     private final ShinsakaiKaisaiBashoCode 開催場所コード;
     private final RString 開催場所名称;
     private final ShinsakaiKaisaiBashoChikuCode 開催場所地区コード;
-    private final RString 開催場所住所;
-    private final RString 開催場所電話番号;
+    private final AtenaJusho 開催場所住所;
+    private final TelNo 開催場所電話番号;
     private final ShinsakaiKaisaiBashoJokyo 開催場所状況;
 
     /**
@@ -38,8 +40,8 @@ public class ShinsakaiKaisaiBasho {
     public ShinsakaiKaisaiBasho(ShinsakaiKaisaiBashoCode 開催場所コード,
             RString 開催場所名称,
             ShinsakaiKaisaiBashoChikuCode 開催場所地区コード,
-            RString 開催場所住所,
-            RString 開催場所電話番号,
+            AtenaJusho 開催場所住所,
+            TelNo 開催場所電話番号,
             ShinsakaiKaisaiBashoJokyo 開催場所状況) {
         Objects.requireNonNull(開催場所コード, Messages.E00003.replace("開催場所コード", "審査会開催場所").getMessage());
         Objects.requireNonNull(開催場所名称, Messages.E00003.replace("開催場所名称", "審査会開催場所").getMessage());
@@ -84,7 +86,7 @@ public class ShinsakaiKaisaiBasho {
      *
      * @return 開催場所住所
      */
-    public RString get開催場所住所() {
+    public AtenaJusho get開催場所住所() {
         return 開催場所住所;
     }
 
@@ -93,7 +95,7 @@ public class ShinsakaiKaisaiBasho {
      *
      * @return 開催場所電話番号
      */
-    public RString get開催場所電話番号() {
+    public TelNo get開催場所電話番号() {
         return 開催場所電話番号;
     }
 
