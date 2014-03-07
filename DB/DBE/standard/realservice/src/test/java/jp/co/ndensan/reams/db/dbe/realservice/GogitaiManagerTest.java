@@ -153,7 +153,7 @@ public class GogitaiManagerTest {
         when(gogitai.get合議体名称()).thenReturn(RString.EMPTY);
         when(gogitai.get有効期間開始年月日()).thenReturn(new GogitaiYukoKikanKaishiYMD(有効期間開始年月日));
         when(gogitai.get有効期間終了年月日()).thenReturn(FlexibleDate.MAX);
-        when(gogitai.get開始終了予定時刻()).thenReturn(new Range(new TimeString("0830"), new TimeString("1720")));
+        when(gogitai.get予定開催時間()).thenReturn(new Range(new TimeString("0830"), new TimeString("1720")));
         when(gogitai.get審査会開催場所()).thenReturn(create開催場所Mock(開催場所コード, "田島家", ShinsakaiKaisaiBashoJokyo.有効));
         GogitaiWariateIinList list = create合議体割当委員ListMock(3);
         when(gogitai.get合議体割当審査会委員List()).thenReturn(list);

@@ -26,7 +26,7 @@ public class Gogitai {
     private final RString 合議体名称;
     private final GogitaiYukoKikanKaishiYMD 有効期間開始年月日;
     private final FlexibleDate 有効期間終了年月日;
-    private final Range<TimeString> 開始終了予定時刻;
+    private final Range<TimeString> 予定開催時間;
     private final ShinsakaiKaisaiBasho 審査会開催場所;
     private final int 審査会予定定員;
     private final int 審査会自動割当定員;
@@ -41,7 +41,7 @@ public class Gogitai {
      * @param 合議体番号 合議体番号
      * @param 合議体名称 合議体名称
      * @param 有効期間 有効期間
-     * @param 開始終了予定時刻 開始終了予定時刻
+     * @param 予定開催時間 予定開催時間
      * @param 審査会開催場所 審査会開催場所
      * @param 審査会予定定員 審査会予定定員
      * @param 審査会自動割当定員 審査会自動割当定員
@@ -53,7 +53,7 @@ public class Gogitai {
      * 合議体番号、合議体名称、有効期間、開始終了予定時刻、審査会開催場所のいずれかにnullが渡されたとき
      */
     public Gogitai(GogitaiNo 合議体番号, RString 合議体名称, GogitaiYukoKikanKaishiYMD 有効期間開始年月日,
-            FlexibleDate 有効期間終了年月日, Range<TimeString> 開始終了予定時刻, ShinsakaiKaisaiBasho 審査会開催場所,
+            FlexibleDate 有効期間終了年月日, Range<TimeString> 予定開催時間, ShinsakaiKaisaiBasho 審査会開催場所,
             int 審査会予定定員, int 審査会自動割当定員, int 審査会委員定員, GogitaiWariateIinList 合議体割当審査会委員List,
             GogitaiSeishinkaIshiSonzaiKubun 精神科医師存在区分, GogitaiDummyKubun ダミー区分)
             throws NullPointerException, IllegalArgumentException {
@@ -61,17 +61,18 @@ public class Gogitai {
         requireNonNull(合議体名称, Messages.E00003.replace("合議体名称", getClass().getName()).getMessage());
         requireNonNull(有効期間開始年月日, Messages.E00003.replace("有効期間開始年月日", getClass().getName()).getMessage());
         requireNonNull(有効期間終了年月日, Messages.E00003.replace("有効期間終了年月日", getClass().getName()).getMessage());
-        requireNonNull(開始終了予定時刻, Messages.E00003.replace("開始終了予定時刻", getClass().getName()).getMessage());
+        requireNonNull(予定開催時間, Messages.E00003.replace("予定開催時間", getClass().getName()).getMessage());
         requireNonNull(審査会開催場所, Messages.E00003.replace("審査会開催場所", getClass().getName()).getMessage());
 
         if (checkゼロ以下(審査会予定定員, 審査会自動割当定員, 審査会委員定員)) {
             throw new IllegalArgumentException(Messages.E00009.replace("人数を表す項目の内容").getMessage());
         }
+
         this.合議体番号 = 合議体番号;
         this.合議体名称 = 合議体名称;
         this.有効期間開始年月日 = 有効期間開始年月日;
         this.有効期間終了年月日 = 有効期間終了年月日;
-        this.開始終了予定時刻 = 開始終了予定時刻;
+        this.予定開催時間 = 予定開催時間;
         this.審査会開催場所 = 審査会開催場所;
         this.審査会予定定員 = 審査会予定定員;
         this.審査会自動割当定員 = 審査会自動割当定員;
@@ -127,12 +128,30 @@ public class Gogitai {
     }
 
     /**
-     * 開始終了予定時刻を返します。
+     * 予定されている開催時間を返します。
      *
-     * @return 開始終了予定時刻
+     * @return 予定開催時間
      */
-    public Range<TimeString> get開始終了予定時刻() {
-        return 開始終了予定時刻;
+    public Range<TimeString> get予定開催時間() {
+        return 予定開催時間;
+    }
+
+    /**
+     * 開始予定時刻を取得します。
+     *
+     * @return 開始予定時刻
+     */
+    public TimeString get開始予定時刻() {
+        return 予定開催時間.getFrom();
+    }
+
+    /**
+     * 終了予定時刻を取得します。
+     *
+     * @return 終了予定時刻
+     */
+    public TimeString get終了予定時刻() {
+        return 予定開催時間.getTo();
     }
 
     /**

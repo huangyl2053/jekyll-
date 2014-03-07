@@ -113,8 +113,8 @@ public final class GogitaiMapper {
         entity.setGogitaiMei(合議体.get合議体名称());
         entity.setGogitaiYukoKikanKaishiYMD(合議体.get有効期間開始年月日().value());
         entity.setGogitaiYukoKikanShuryoYMD(合議体.get有効期間終了年月日());
-        entity.setGogitaiKaishiYoteiTime(合議体.get開始終了予定時刻().getFrom().value());
-        entity.setGogitaiShuryoYoteiTime(合議体.get開始終了予定時刻().getTo().value());
+        entity.setGogitaiKaishiYoteiTime(合議体.get予定開催時間().getFrom().value());
+        entity.setGogitaiShuryoYoteiTime(合議体.get予定開催時間().getTo().value());
         entity.setShinsakaiKaisaiBashoCode(合議体.get審査会開催場所().get開催場所コード().value());
         entity.setShinsakaiYoteiTeiin(合議体.get審査会予定定員());
         entity.setShinsakaiJidoWariateTeiin(合議体.get審査会自動割当定員());

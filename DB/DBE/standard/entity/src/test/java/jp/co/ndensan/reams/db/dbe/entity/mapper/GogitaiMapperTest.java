@@ -98,13 +98,13 @@ public class GogitaiMapperTest {
         @Test
         public void 開始予定時刻として0830を持つEntityを引数に指定した場合_開始予定時刻に0830を持つ合議体が返る() {
             Gogitai sut = GogitaiMapper.to合議体(createEntity(), 審査会開催場所_山田家001, 合議体割当審査会委員List_3件);
-            assertThat(sut.get開始終了予定時刻().getFrom(), is(開始終了予定時刻_0830_1720.getFrom()));
+            assertThat(sut.get予定開催時間().getFrom(), is(開始終了予定時刻_0830_1720.getFrom()));
         }
 
         @Test
         public void 終了予定時刻として1720を持つEntityを引数に指定した場合_終了予定時刻に1720を持つ合議体が返る() {
             Gogitai sut = GogitaiMapper.to合議体(createEntity(), 審査会開催場所_山田家001, 合議体割当審査会委員List_3件);
-            assertThat(sut.get開始終了予定時刻().getTo().value(), is(開始終了予定時刻_0830_1720.getTo().value()));
+            assertThat(sut.get予定開催時間().getTo().value(), is(開始終了予定時刻_0830_1720.getTo().value()));
         }
 
         @Test
