@@ -56,29 +56,6 @@ public class KaigoNinteiChosainCollection implements Iterable {
     }
 
     /**
-     * 引数の条件に該当する認定調査委託先を返します。<br />
-     * 対応した認定調査委託先が存在しない場合はnullが返ります。
-     *
-     * @param 市町村コード 市町村コード
-     * @param 介護事業者番号 介護事業者番号
-     * @param 介護調査員番号 介護調査員番号
-     * @return 認定調査委託先
-     * @throws IllegalArgumentException 存在しない対象を指定したとき
-     */
-    public NinteichosaItakusaki get認定調査委託先(
-            ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoChosainNo 介護調査員番号)
-            throws IllegalArgumentException {
-        for (KaigoNinteiChosain 介護認定調査員 : 介護認定調査員List) {
-            if (介護認定調査員.get市町村コード().equals(市町村コード)
-                    && 介護認定調査員.get介護事業者番号().equals(介護事業者番号)
-                    && 介護認定調査員.get介護調査員番号().equals(介護調査員番号)) {
-                return 介護認定調査員.get認定調査委託先();
-            }
-        }
-        throw new IllegalArgumentException(Messages.E00006.replace("認定調査委託先").getMessage());
-    }
-
-    /**
      * 引数の条件に該当する介護認定調査員のコレクションを返します。<br />
      * 該当するものがない場合、空のコレクションが返ります。
      *
