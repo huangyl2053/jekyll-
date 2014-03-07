@@ -62,7 +62,7 @@ public class KaigoNinteiChosainCollection implements Iterable {
      * @param 介護事業者番号 介護事業者番号
      * @return 介護認定調査員のコレクション
      */
-    public KaigoNinteiChosainCollection sub介護認定調査員List(KaigoJigyoshaNo 介護事業者番号) {
+    public KaigoNinteiChosainCollection sub介護認定調査員Collection(KaigoJigyoshaNo 介護事業者番号) {
         List<KaigoNinteiChosain> sub介護認定調査員List = new ArrayList<>();
         for (KaigoNinteiChosain 介護認定調査員 : 介護認定調査員List) {
             if (介護認定調査員.get介護事業者番号().equals(介護事業者番号)) {
@@ -79,7 +79,7 @@ public class KaigoNinteiChosainCollection implements Iterable {
      * @param 市町村コード 市町村コード
      * @return 介護認定調査員のコレクション
      */
-    public KaigoNinteiChosainCollection sub介護認定調査員List(ShichosonCode 市町村コード) {
+    public KaigoNinteiChosainCollection sub介護認定調査員Collection(ShichosonCode 市町村コード) {
         List<KaigoNinteiChosain> sub介護認定調査員List = new ArrayList<>();
         for (KaigoNinteiChosain 介護認定調査員 : 介護認定調査員List) {
             if (介護認定調査員.get市町村コード().equals(市町村コード)) {
@@ -97,7 +97,7 @@ public class KaigoNinteiChosainCollection implements Iterable {
      * @param 介護調査員番号 介護調査員番号
      * @return 介護認定調査員のコレクション
      */
-    public KaigoNinteiChosainCollection sub介護認定調査員List(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号) {
+    public KaigoNinteiChosainCollection sub介護認定調査員Collection(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号) {
         List<KaigoNinteiChosain> sub介護認定調査員List = new ArrayList<>();
         for (KaigoNinteiChosain 介護認定調査員 : 介護認定調査員List) {
             if (介護認定調査員.get市町村コード().equals(市町村コード)

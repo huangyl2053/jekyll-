@@ -95,48 +95,48 @@ public class KaigoNinteiChosainCollectionTest extends TestBase {
         }
     }
 
-    public static class sub介護認定調査員Listで介護事業者番号を指定した場合 extends TestBase {
+    public static class sub介護認定調査員Collectionで介護事業者番号を指定した場合 extends TestBase {
 
         @Test
-        public void 介護認定調査員が存在する時_sub介護認定調査員Listは_該当の介護認定調査員を返す() {
+        public void 介護認定調査員が存在する時_sub介護認定調査員Collectionは_該当の介護認定調査員を返す() {
             sut = createKaigoNinteiChosainList();
-            assertThat(sut.sub介護認定調査員List(new KaigoJigyoshaNo(new RString("S001"))).size(), is(1));
+            assertThat(sut.sub介護認定調査員Collection(new KaigoJigyoshaNo(new RString("S001"))).size(), is(1));
         }
 
         @Test
-        public void 介護認定調査員が存在しない時_sub介護認定調査員Listは_空のListを返す() {
+        public void 介護認定調査員が存在しない時_sub介護認定調査員Collectionは_空のListを返す() {
             sut = createKaigoNinteiChosainList();
-            assertThat(sut.sub介護認定調査員List(new KaigoJigyoshaNo(new RString("S999"))).size(), is(0));
-        }
-    }
-
-    public static class sub介護認定調査員Listで市町村コードを指定した場合 extends TestBase {
-
-        @Test
-        public void 介護認定調査員が存在する時_sub介護認定調査員Listは_該当の介護認定調査員を返す() {
-            sut = createKaigoNinteiChosainList();
-            assertThat(sut.sub介護認定調査員List(new ShichosonCode(new RString("0001"))).size(), is(3));
-        }
-
-        @Test
-        public void 介護認定調査員が存在しない時_sub介護認定調査員Listは_空のListを返す() {
-            sut = createKaigoNinteiChosainList();
-            assertThat(sut.sub介護認定調査員List(new ShichosonCode(new RString("9999"))).size(), is(0));
+            assertThat(sut.sub介護認定調査員Collection(new KaigoJigyoshaNo(new RString("S999"))).size(), is(0));
         }
     }
 
-    public static class sub介護認定調査員Listで市町村コードと介護事業者番号を指定した場合 extends TestBase {
+    public static class sub介護認定調査員Collectionで市町村コードを指定した場合 extends TestBase {
 
         @Test
-        public void 該当する介護認定調査員が存在する時_sub介護認定調査員Listは_該当の介護認定調査員を返す() {
+        public void 介護認定調査員が存在する時_sub介護認定調査員Collectionは_該当の介護認定調査員を返す() {
             sut = createKaigoNinteiChosainList();
-            assertThat(sut.sub介護認定調査員List(new ShichosonCode(new RString("0001")), new KaigoJigyoshaNo(new RString("S001"))).size(), is(1));
+            assertThat(sut.sub介護認定調査員Collection(new ShichosonCode(new RString("0001"))).size(), is(3));
         }
 
         @Test
-        public void 該当する介護認定調査員が存在しない時_sub介護認定調査員Listは_空のListを返す() {
+        public void 介護認定調査員が存在しない時_sub介護認定調査員Collectionは_空のListを返す() {
             sut = createKaigoNinteiChosainList();
-            assertThat(sut.sub介護認定調査員List(new ShichosonCode(new RString("9999")), new KaigoJigyoshaNo(new RString("S999"))).size(), is(0));
+            assertThat(sut.sub介護認定調査員Collection(new ShichosonCode(new RString("9999"))).size(), is(0));
+        }
+    }
+
+    public static class sub介護認定調査員Collectionで市町村コードと介護事業者番号を指定した場合 extends TestBase {
+
+        @Test
+        public void 該当する介護認定調査員が存在する時_sub介護認定調査員Collectionは_該当の介護認定調査員を返す() {
+            sut = createKaigoNinteiChosainList();
+            assertThat(sut.sub介護認定調査員Collection(new ShichosonCode(new RString("0001")), new KaigoJigyoshaNo(new RString("S001"))).size(), is(1));
+        }
+
+        @Test
+        public void 該当する介護認定調査員が存在しない時_sub介護認定調査員Collectionは_空のListを返す() {
+            sut = createKaigoNinteiChosainList();
+            assertThat(sut.sub介護認定調査員Collection(new ShichosonCode(new RString("9999")), new KaigoJigyoshaNo(new RString("S999"))).size(), is(0));
         }
     }
 
