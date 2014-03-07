@@ -84,19 +84,15 @@ public interface IKaigoNinteichosainDac extends IReplaceable<DbT7013ChosainJohoE
     @Transaction
     List<DbT7013ChosainJohoEntity> selectAll(ShichosonCode 市町村コード);
 
-    @Transaction
     @Override
     int insertOrUpdate(DbT7013ChosainJohoEntity entity);
 
-    @Transaction
     @Override
     int insert(DbT7013ChosainJohoEntity entity);
 
-    @Transaction
     @Override
     int update(DbT7013ChosainJohoEntity entity);
 
-    @Transaction
     @Override
     int delete(DbT7013ChosainJohoEntity entity);
 }
