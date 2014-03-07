@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8178 城間篤人
  */
-public class ShinsakaiIinKozaJoho {
+public class ShinsakaiIinKoza {
 
     private final KinyuKikanCode 金融機関コード;
     private final KinyuKikanShitenCode 金融機関支店コード;
@@ -35,7 +35,7 @@ public class ShinsakaiIinKozaJoho {
      * @param 口座番号 口座番号
      * @throws NullPointerException 引数のいずれかにnullが渡されたとき
      */
-    public ShinsakaiIinKozaJoho(KinyuKikanCode 金融機関コード, KinyuKikanShitenCode 金融機関支店コード, RString 口座種別,
+    public ShinsakaiIinKoza(KinyuKikanCode 金融機関コード, KinyuKikanShitenCode 金融機関支店コード, RString 口座種別,
             RString 口座名義人, RString 口座名義人カナ, RString 口座番号) throws NullPointerException {
         requireNonNull(金融機関コード, Messages.E00003.replace("金融機関コード", getClass().getName()).getMessage());
         requireNonNull(金融機関支店コード, Messages.E00003.replace("金融機関支店コード", getClass().getName()).getMessage());

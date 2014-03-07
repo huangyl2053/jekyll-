@@ -40,7 +40,7 @@ public class ShinsakaiIin {
     private final YubinNo 郵便番号;
     private final AtenaJusho 住所;
     private final TelNo 電話番号;
-    private final ShinsakaiIinKozaJoho 口座情報;
+    private final ShinsakaiIinKoza 口座情報;
 
     /**
      * 引数からメンバを受け取るコンストラクタです。
@@ -62,7 +62,7 @@ public class ShinsakaiIin {
      */
     public ShinsakaiIin(ShinsakaiIinCode 委員コード, Range<FlexibleDate> 委員着任期間, ShinsakaiIinJokyo 審査会委員状況,
             JigyoshaNo 事業者番号, AtenaMeisho 氏名, AtenaKanaMeisho カナ氏名, Gender 性別, ShinsakaiIinShikaku 審査会委員資格,
-            ShinsainYusoKubun 審査委員郵送区分, YubinNo 郵便番号, AtenaJusho 住所, TelNo 電話番号, ShinsakaiIinKozaJoho 口座情報)
+            ShinsainYusoKubun 審査委員郵送区分, YubinNo 郵便番号, AtenaJusho 住所, TelNo 電話番号, ShinsakaiIinKoza 口座情報)
             throws NullPointerException {
         requireNonNull(委員コード, Messages.E00003.replace("委員コード", getClass().getName()).getMessage());
         requireNonNull(委員着任期間, Messages.E00003.replace("委員着任期間", getClass().getName()).getMessage());
@@ -206,7 +206,7 @@ public class ShinsakaiIin {
      *
      * @return 口座情報
      */
-    public ShinsakaiIinKozaJoho get口座情報() {
+    public ShinsakaiIinKoza get口座情報() {
         return 口座情報;
     }
 }

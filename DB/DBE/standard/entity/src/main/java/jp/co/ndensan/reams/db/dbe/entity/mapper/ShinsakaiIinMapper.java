@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIin;
-import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinKozaJoho;
+import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinKoza;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinShikaku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsainYusoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinJokyo;
@@ -51,8 +51,8 @@ public final class ShinsakaiIinMapper {
                 委員Entity.getTelNo(), create審査会委員口座情報(委員Entity));
     }
 
-    private static ShinsakaiIinKozaJoho create審査会委員口座情報(DbT5102ShinsakaiIinJohoEntity 委員Entity) {
-        return new ShinsakaiIinKozaJoho(委員Entity.getKinyuKikanCode(), 委員Entity.getKinyuKikanShitenCode(),
+    private static ShinsakaiIinKoza create審査会委員口座情報(DbT5102ShinsakaiIinJohoEntity 委員Entity) {
+        return new ShinsakaiIinKoza(委員Entity.getKinyuKikanCode(), 委員Entity.getKinyuKikanShitenCode(),
                 委員Entity.getKozaShubetsu(), 委員Entity.getKozaMeigi(), 委員Entity.getKozaMeigiKana(), 委員Entity.getKozaNo());
     }
 

@@ -39,32 +39,32 @@ public class ShinsakaiIinKozaJohoTest {
 
         @Test(expected = NullPointerException.class)
         public void 金融機関コードにnullが渡されたとき_NullPointerExceptionが返る() {
-            new ShinsakaiIinKozaJoho(null, 金融機関支店コード, 口座種別, 口座名義人, 口座名義人カナ, 口座番号);
+            new ShinsakaiIinKoza(null, 金融機関支店コード, 口座種別, 口座名義人, 口座名義人カナ, 口座番号);
         }
 
         @Test(expected = NullPointerException.class)
         public void 金融機関支店コードにnullが渡されたとき_NullPointerExceptionが返る() {
-            new ShinsakaiIinKozaJoho(金融機関コード, null, 口座種別, 口座名義人, 口座名義人カナ, 口座番号);
+            new ShinsakaiIinKoza(金融機関コード, null, 口座種別, 口座名義人, 口座名義人カナ, 口座番号);
         }
 
         @Test(expected = NullPointerException.class)
         public void 口座種別にnullが渡されたとき_NullPointerExceptionが返る() {
-            new ShinsakaiIinKozaJoho(金融機関コード, 金融機関支店コード, null, 口座名義人, 口座名義人カナ, 口座番号);
+            new ShinsakaiIinKoza(金融機関コード, 金融機関支店コード, null, 口座名義人, 口座名義人カナ, 口座番号);
         }
 
         @Test(expected = NullPointerException.class)
         public void 口座名義人にnullが渡されたとき_NullPointerExceptionが返る() {
-            new ShinsakaiIinKozaJoho(金融機関コード, 金融機関支店コード, 口座種別, null, 口座名義人カナ, 口座番号);
+            new ShinsakaiIinKoza(金融機関コード, 金融機関支店コード, 口座種別, null, 口座名義人カナ, 口座番号);
         }
 
         @Test(expected = NullPointerException.class)
         public void 口座名義人カナにnullが渡されたとき_NullPointerExceptionが返る() {
-            new ShinsakaiIinKozaJoho(金融機関コード, 金融機関支店コード, 口座種別, 口座名義人, null, 口座番号);
+            new ShinsakaiIinKoza(金融機関コード, 金融機関支店コード, 口座種別, 口座名義人, null, 口座番号);
         }
 
         @Test(expected = NullPointerException.class)
         public void 口座番号にnullが渡されたとき_NullPointerExceptionが返る() {
-            new ShinsakaiIinKozaJoho(金融機関コード, 金融機関支店コード, 口座種別, 口座名義人, 口座名義人カナ, null);
+            new ShinsakaiIinKoza(金融機関コード, 金融機関支店コード, 口座種別, 口座名義人, 口座名義人カナ, null);
         }
     }
 }

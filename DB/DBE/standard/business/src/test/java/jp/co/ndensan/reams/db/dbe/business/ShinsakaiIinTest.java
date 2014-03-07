@@ -49,7 +49,7 @@ public class ShinsakaiIinTest {
         private YubinNo 郵便番号;
         private AtenaJusho 住所;
         private TelNo 電話番号;
-        private ShinsakaiIinKozaJoho 口座情報;
+        private ShinsakaiIinKoza 口座情報;
         private ShinsakaiIin sut;
 
         @Before
@@ -66,7 +66,7 @@ public class ShinsakaiIinTest {
             郵便番号 = new YubinNo(new RString("123-1234"));
             住所 = new AtenaJusho(RString.EMPTY);
             電話番号 = new TelNo(RString.EMPTY);
-            口座情報 = mock(ShinsakaiIinKozaJoho.class);
+            口座情報 = mock(ShinsakaiIinKoza.class);
         }
 
         @Test

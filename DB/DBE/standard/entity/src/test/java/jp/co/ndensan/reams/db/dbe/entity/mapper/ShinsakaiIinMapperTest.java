@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIin;
-import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinKozaJoho;
+import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinKoza;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinShikaku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsainYusoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinJokyo;
@@ -309,7 +309,7 @@ public class ShinsakaiIinMapperTest {
     }
 
     private static ShinsakaiIin createShinsakaiIin() {
-        ShinsakaiIinKozaJoho kozaJoho = new ShinsakaiIinKozaJoho(金融機関コード_01,
+        ShinsakaiIinKoza kozaJoho = new ShinsakaiIinKoza(金融機関コード_01,
                 金融機関支店コード_011, 口座種別_普通, 口座名義人_次郎, 口座名義人カナ_ジロウ, 口座番号_1237890);
 
         return new ShinsakaiIin(委員コード_iin01, 委員着任期間_19991212_20101212, 審査会委員状況_有効,
