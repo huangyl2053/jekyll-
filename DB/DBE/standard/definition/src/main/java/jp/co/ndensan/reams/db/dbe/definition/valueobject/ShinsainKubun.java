@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
- * 介護認定審査員の、審査会での委員の区分を表すクラスです。
+ * 介護認定審査会での、委員としての役割（委員長、副委員長など）を表すクラスです。
  *
  * @author n8178 城間篤人
  */
