@@ -7,8 +7,6 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResult;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosaKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GenzaiJokyoKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ServiceKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5008NinteichosaKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5009NinteichosahyoJohoEntity;
@@ -19,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.ChosahyoItems.*;
+import static jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubun.*;
 import static jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -36,399 +34,16 @@ public class NinteichosaKekkaMapperTest {
 
         @Test
         public void 申請書管理番号の設定がある時_toNinteichosaResult_get申請書管理番号は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get申請書管理番号().value(), is(new RString("1234567890")));
+            assertThat(toNinteichosaResult().get基本調査結果().get申請書管理番号().value(), is(new RString("1234567890")));
         }
 
         @Test
         public void 要介護認定調査履歴番号の設定がある時_toNinteichosaResult_get要介護認定調査履歴番号は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get認定調査依頼履歴番号().value().intValue(), is(0));
+            assertThat(toNinteichosaResult().get基本調査結果().get認定調査依頼履歴番号().value().intValue(), is(0));
         }
     }
 
-    public static class toNinteichosaResult_調査票結果 {
-
-        @Test
-        public void 麻痺左上肢の設定がある時_toNinteichosaResult_get麻痺左上肢は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(麻痺等の有無_左上肢).get調査結果コード(), is(NaiAru.ない.getCode()));
-        }
-
-        @Test
-        public void 麻痺右上肢の設定がある時_toNinteichosaResult_get麻痺右上肢は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(麻痺等の有無_右上肢).get調査結果コード(), is(NaiAru.ある.getCode()));
-        }
-
-        @Test
-        public void 麻痺左下肢の設定がある時_toNinteichosaResult_get麻痺左下肢は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(麻痺等の有無_左下肢).get調査結果コード(), is(NaiAru.ない.getCode()));
-        }
-
-        @Test
-        public void 麻痺右下肢の設定がある時_toNinteichosaResult_get麻痺右下肢は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(麻痺等の有無_右下肢).get調査結果コード(), is(NaiAru.ある.getCode()));
-        }
-
-        @Test
-        public void 麻痺その他の設定がある時_toNinteichosaResult_get麻痺その他は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(麻痺等の有無_その他).get調査結果コード(), is(NaiAru.ない.getCode()));
-        }
-
-        @Test
-        public void 拘縮肩関節の設定がある時_toNinteichosaResult_get拘縮肩関節は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(関節の動く範囲の制限_肩関節).get調査結果コード(), is(NaiAru.ない.getCode()));
-        }
-
-        @Test
-        public void 拘縮股関節の設定がある時_toNinteichosaResult_get拘縮股関節は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(関節の動く範囲の制限_股関節).get調査結果コード(), is(NaiAru.ある.getCode()));
-        }
-
-        @Test
-        public void 拘縮膝関節の設定がある時_toNinteichosaResult_get拘縮膝関節は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(関節の動く範囲の制限_膝関節).get調査結果コード(), is(NaiAru.ない.getCode()));
-        }
-
-        @Test
-        public void 拘縮その他の設定がある時_toNinteichosaResult_get拘縮その他は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(関節の動く範囲の制限_その他).get調査結果コード(), is(NaiAru.ある.getCode()));
-        }
-
-        @Test
-        public void 寝返りの設定がある時_toNinteichosaResult_get寝返りは_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(寝返り).get調査結果コード(), is(DekiruDekinai3.できる.getCode()));
-        }
-
-        @Test
-        public void 起き上がりの設定がある時_toNinteichosaResult_get起き上がりは_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(起き上がり).get調査結果コード(), is(DekiruDekinai3.できない.getCode()));
-        }
-
-        @Test
-        public void 座位保持の設定がある時_toNinteichosaResult_get座位保持は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(座位保持).get調査結果コード(), is(DekiruDekinai6.できる.getCode()));
-        }
-
-        @Test
-        public void 両足での立位の設定がある時_toNinteichosaResult_get両足での立位は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(両足での立位).get調査結果コード(), is(DekiruDekinai5.できない.getCode()));
-        }
-
-        @Test
-        public void 歩行の設定がある時_toNinteichosaResult_get歩行は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(歩行).get調査結果コード(), is(DekiruDekinai3.できる.getCode()));
-        }
-
-        @Test
-        public void 立ち上がりの設定がある時_toNinteichosaResult_get立ち上がりは_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(立ち上がり).get調査結果コード(), is(DekiruDekinai3.できない.getCode()));
-        }
-
-        @Test
-        public void 片足での立位の設定がある時_toNinteichosaResult_get片足での立位は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(片足での立位).get調査結果コード(), is(DekiruDekinai5.できる.getCode()));
-        }
-
-        @Test
-        public void 洗身の設定がある時_toNinteichosaResult_get洗身は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(洗身).get調査結果コード(), is(Kaijo2.自立.getCode()));
-        }
-
-        @Test
-        public void つめ切りの設定がある時_toNinteichosaResult_getつめ切りは_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(つめ切り).get調査結果コード(), is(Kaijo.全介助.getCode()));
-        }
-
-        @Test
-        public void 視力の設定がある時_toNinteichosaResult_get視力は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(視力).get調査結果コード(), is(Shiryoku.普通.getCode()));
-        }
-
-        @Test
-        public void 聴力の設定がある時_toNinteichosaResult_get聴力は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(聴力).get調査結果コード(), is(Choryoku.判断不能.getCode()));
-        }
-
-        @Test
-        public void 移乗の設定がある時_toNinteichosaResult_get移乗は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(移乗).get調査結果コード(), is(Kaijo3.自立.getCode()));
-        }
-
-        @Test
-        public void 移動の設定がある時_toNinteichosaResult_get移動は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(移動).get調査結果コード(), is(Kaijo3.全介助.getCode()));
-        }
-
-        @Test
-        public void 嚥下の設定がある時_toNinteichosaResult_get嚥下_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(嚥下).get調査結果コード(), is(DekiruDekinai4.できる.getCode()));
-        }
-
-        @Test
-        public void 食事摂取の設定がある時_toNinteichosaResult_get食事摂取は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(食事摂取).get調査結果コード(), is(Kaijo3.自立.getCode()));
-        }
-
-        @Test
-        public void 排尿の設定がある時_toNinteichosaResult_get排尿は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(排尿).get調査結果コード(), is(Kaijo3.全介助.getCode()));
-        }
-
-        @Test
-        public void 排便の設定がある時_toNinteichosaResult_get排便は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(排便).get調査結果コード(), is(Kaijo3.自立.getCode()));
-        }
-
-        @Test
-        public void 口腔清潔の設定がある時_toNinteichosaResult_get口腔清潔は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(口腔清潔).get調査結果コード(), is(Kaijo.全介助.getCode()));
-        }
-
-        @Test
-        public void 洗顔の設定がある時_toNinteichosaResult_get洗顔は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(洗顔).get調査結果コード(), is(Kaijo.自立.getCode()));
-        }
-
-        @Test
-        public void 整髪の設定がある時_toNinteichosaResult_get整髪は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(整髪).get調査結果コード(), is(Kaijo.全介助.getCode()));
-        }
-
-        @Test
-        public void 上衣の着脱の設定がある時_toNinteichosaResult_get上衣の着脱は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(上衣の着脱).get調査結果コード(), is(Kaijo3.自立.getCode()));
-        }
-
-        @Test
-        public void ズボン等の着脱の設定がある時_toNinteichosaResult_getズボン等の着脱は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(ズボン等の着脱).get調査結果コード(), is(Kaijo3.全介助.getCode()));
-        }
-
-        @Test
-        public void 外出頻度の設定がある時_toNinteichosaResult_get整髪外出頻度_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(外出頻度).get調査結果コード(), is(Gaishutsu.月１回以上.getCode()));
-        }
-
-        @Test
-        public void 意思の伝達の設定がある時_toNinteichosaResult_get意思の伝達は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(意思の伝達).get調査結果コード(), is(DekiruDekinai2.できる.getCode()));
-        }
-
-        @Test
-        public void 毎日の日課を理解の設定がある時_toNinteichosaResult_get毎日の日課を理解は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(毎日の日課を理解).get調査結果コード(), is(DekiruDekinai.できない.getCode()));
-        }
-
-        @Test
-        public void 生年月日をいうの設定がある時_toNinteichosaResult_get生年月日をいうは_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(生年月日をいう).get調査結果コード(), is(DekiruDekinai.できる.getCode()));
-        }
-
-        @Test
-        public void 短期記憶の設定がある時_toNinteichosaResult_get短期記憶は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(短期記憶).get調査結果コード(), is(DekiruDekinai.できない.getCode()));
-        }
-
-        @Test
-        public void 自分の名前をいうの設定がある時_toNinteichosaResult_get自分の名前をいうは_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(自分の名前をいう).get調査結果コード(), is(DekiruDekinai.できる.getCode()));
-        }
-
-        @Test
-        public void 今の季節を理解の設定がある時_toNinteichosaResult_get今の季節を理解は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(今の季節を理解).get調査結果コード(), is(DekiruDekinai.できない.getCode()));
-        }
-
-        @Test
-        public void 場所の理解の設定がある時_toNinteichosaResult_get場所の理解は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(場所の理解).get調査結果コード(), is(DekiruDekinai.できる.getCode()));
-        }
-
-        @Test
-        public void 徘徊の設定がある時_toNinteichosaResult_get徘徊は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(常時の徘徊).get調査結果コード(), is(NaiAru2.ない.getCode()));
-        }
-
-        @Test
-        public void 外出して戻れないの設定がある時_toNinteichosaResult_get外出して戻れないは_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(外出して戻れない).get調査結果コード(), is(NaiAru2.ある.getCode()));
-        }
-
-        @Test
-        public void 被害的の設定がある時_toNinteichosaResult_get被害的は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(被害的).get調査結果コード(), is(NaiAru2.ない.getCode()));
-        }
-
-        @Test
-        public void 作話の設定がある時_toNinteichosaResult_get作話は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(作話).get調査結果コード(), is(NaiAru2.ある.getCode()));
-        }
-
-        @Test
-        public void 感情が不安定の設定がある時_toNinteichosaResult_get感情が不安定は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(感情が不安定).get調査結果コード(), is(NaiAru2.ない.getCode()));
-        }
-
-        @Test
-        public void 昼夜逆転の設定がある時_toNinteichosaResult_get昼夜逆転は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(昼夜逆転).get調査結果コード(), is(NaiAru2.ある.getCode()));
-        }
-
-        @Test
-        public void 同じ話をするの設定がある時_toNinteichosaResult_get同じ話をするは_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(同じ話をする).get調査結果コード(), is(NaiAru2.ない.getCode()));
-        }
-
-        @Test
-        public void 大声を出すの設定がある時_toNinteichosaResult_get大声を出すは_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(大声を出す).get調査結果コード(), is(NaiAru2.ある.getCode()));
-        }
-
-        @Test
-        public void 介護に抵抗の設定がある時_toNinteichosaResult_get介護に抵抗は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(介護に抵抗).get調査結果コード(), is(NaiAru2.ない.getCode()));
-        }
-
-        @Test
-        public void 落ち着きなしの設定がある時_toNinteichosaResult_get落ち着きなしは_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(落ち着きなし).get調査結果コード(), is(NaiAru2.ある.getCode()));
-        }
-
-        @Test
-        public void 一人で出たがるの設定がある時_toNinteichosaResult_get一人で出たがるは_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(一人で出たがる).get調査結果コード(), is(NaiAru2.ない.getCode()));
-        }
-
-        @Test
-        public void 収集癖の設定がある時_toNinteichosaResult_get収集癖は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(収集癖).get調査結果コード(), is(NaiAru2.ある.getCode()));
-        }
-
-        @Test
-        public void 物や衣類を壊すの設定がある時_toNinteichosaResult_get物や衣類を壊すは_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(物や衣類を壊す).get調査結果コード(), is(NaiAru2.ない.getCode()));
-        }
-
-        @Test
-        public void ひどい物忘れの設定がある時_toNinteichosaResult_getひどい物忘れは_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(ひどい物忘れ).get調査結果コード(), is(NaiAru2.ある.getCode()));
-        }
-
-        @Test
-        public void 独り言独り笑いの設定がある時_toNinteichosaResult_get独り言独り笑いは_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(独り言_独り笑).get調査結果コード(), is(NaiAru2.ない.getCode()));
-        }
-
-        @Test
-        public void 自分勝手に行動するの設定がある時_toNinteichosaResult_get自分勝手に行動するは_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(自分勝手に行動する).get調査結果コード(), is(NaiAru2.ある.getCode()));
-        }
-
-        @Test
-        public void 話がまとまらないの設定がある時_toNinteichosaResult_get話がまとまらないは_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(話がまとまらない).get調査結果コード(), is(NaiAru2.ない.getCode()));
-        }
-
-        @Test
-        public void 薬の内服の設定がある時_toNinteichosaResult_get薬の内服は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(薬の内服).get調査結果コード(), is(Kaijo.自立.getCode()));
-        }
-
-        @Test
-        public void 金銭の管理の設定がある時_toNinteichosaResult_get金銭の管理は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(金銭の管理).get調査結果コード(), is(Kaijo.全介助.getCode()));
-        }
-
-        @Test
-        public void 日常の意思決定の設定がある時_toNinteichosaResult_get日常の意思決定は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(日常の意思決定).get調査結果コード(), is(DekiruDekinai7.できる.getCode()));
-        }
-
-        @Test
-        public void 集団への不適応の設定がある時_toNinteichosaResult_get集団への不適応は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(集団への不適応).get調査結果コード(), is(NaiAru2.ない.getCode()));
-        }
-
-        @Test
-        public void 買い物の設定がある時_toNinteichosaResult_get買い物は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(買い物).get調査結果コード(), is(Kaijo3.自立.getCode()));
-        }
-
-        @Test
-        public void 簡単な調理の設定がある時_toNinteichosaResult_get簡単な調理は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(簡単な調理).get調査結果コード(), is(Kaijo3.全介助.getCode()));
-        }
-
-        @Test
-        public void 点滴の管理の設定がある時_toNinteichosaResult_get点滴の管理は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(点滴の管理).get調査結果コード(), is(NaiAru.ない.getCode()));
-        }
-
-        @Test
-        public void 中心静脈栄養の設定がある時_toNinteichosaResult_get中心静脈栄養は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(中心静脈栄養).get調査結果コード(), is(NaiAru.ある.getCode()));
-        }
-
-        @Test
-        public void 透析の設定がある時_toNinteichosaResult_get透析は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(透析).get調査結果コード(), is(NaiAru.ない.getCode()));
-        }
-
-        @Test
-        public void ストーマの処置の設定がある時_toNinteichosaResult_getストーマの処置は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(ストーマの処置).get調査結果コード(), is(NaiAru.ある.getCode()));
-        }
-
-        @Test
-        public void 酸素療法の設定がある時_toNinteichosaResult_get酸素療法は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(酸素療法).get調査結果コード(), is(NaiAru.ない.getCode()));
-        }
-
-        @Test
-        public void レスピレーターの設定がある時_toNinteichosaResult_getレスピレーターは_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(レスピレーター).get調査結果コード(), is(NaiAru.ある.getCode()));
-        }
-
-        @Test
-        public void 気管切開の処置の設定がある時_toNinteichosaResult_get気管切開の処置は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(気管切開).get調査結果コード(), is(NaiAru.ない.getCode()));
-        }
-
-        @Test
-        public void 疼痛の看護の設定がある時_toNinteichosaResult_get疼痛の看護は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(疼痛の看護).get調査結果コード(), is(NaiAru.ある.getCode()));
-        }
-
-        @Test
-        public void 経管栄養の設定がある時_toNinteichosaResult_get経管栄養は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(経管栄養).get調査結果コード(), is(NaiAru.ない.getCode()));
-        }
-
-        @Test
-        public void モニター測定の設定がある時_toNinteichosaResult_getモニター測定は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(モニター測定).get調査結果コード(), is(NaiAru.ある.getCode()));
-        }
-
-        @Test
-        public void じょくそうの処置の設定がある時_toNinteichosaResult_getじょくそうの処置は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(じょくそうの処置).get調査結果コード(), is(NaiAru.ない.getCode()));
-        }
-
-        @Test
-        public void カテーテルの設定がある時_toNinteichosaResult_getカテーテルは_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(カテーテル).get調査結果コード(), is(NaiAru.ある.getCode()));
-        }
-
-        @Test
-        public void 障害高齢者の日常生活自立度の設定がある時_toNinteichosaResult_get障害高齢者の日常生活自立度は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(障害高齢者の日常生活自立度).get調査結果コード(), is(ShogaiJiritsu.Ａ１.getCode()));
-        }
-
-        @Test
-        public void 認知症高齢者の日常生活自立度の設定がある時_toNinteichosaResult_get認知症高齢者の日常生活自立度は_設定値を返す() {
-            assertThat(toNinteichosaResult().get調査票結果().get調査票結果().get調査項目(認知症高齢者の日常生活自立度).get調査結果コード(), is(NinchishoJiritsu.Ⅱａ.getCode()));
-        }
-    }
-
-    public static class toNinteichosaKekka_概況調査結果基本情報 {
+    public static class toNinteichosaKekka_概況調査結果 {
 
         @Test
         public void 認定調査実施年月日の設定がある時_toNinteichosaResult_get認定調査実施年月日は_設定値を返す() {
@@ -456,141 +71,531 @@ public class NinteichosaKekkaMapperTest {
         }
 
         @Test
-        public void 概況特記事項の設定がある時_toNinteichosaResult_get概況特記事項は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().get基本情報().get概況特記事項(), is(new RString("概況特記事項")));
-        }
-
-        @Test
         public void 審査会優先振分区分の設定がある時_toNinteichosaResult_get審査会優先振分区分は_設定値を返す() {
             assertThat(toNinteichosaResult().get概況調査結果().get基本情報().get審査会優先振分区分(), is(ShinsakaiFuriwakeKubun.希望無し));
         }
-    }
-
-    public static class toNinteichosaKekka_get概況調査結果サービス状況 {
 
         @Test
         public void サービス区分の設定がある時_toNinteichosaResult_getサービス区分は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().getサービス区分(), is(ServiceKubun.介護給付サービス));
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(サービス区分コード).get調査結果(), is(ServiceKubun.介護.getCode()));
         }
 
         @Test
         public void 訪問介護の設定がある時_toNinteichosaResult_get訪問介護は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get訪問介護(), is(0));
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(訪問介護).get調査結果(), is(new RString("0")));
         }
 
         @Test
         public void 訪問入浴介護の設定がある時_toNinteichosaResult_get訪問入浴介護は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get訪問入浴介護(), is(1));
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(訪問入浴介護).get調査結果(), is(new RString("1")));
         }
 
         @Test
         public void 訪問看護の設定がある時_toNinteichosaResult_get訪問看護は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get訪問看護(), is(2));
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(訪問看護).get調査結果(), is(new RString("2")));
         }
 
         @Test
         public void 訪問リハビリの設定がある時_toNinteichosaResult_get訪問リハビリは_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get訪問リハビリ(), is(3));
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(訪問リハビリ).get調査結果(), is(new RString("3")));
         }
 
         @Test
         public void 居宅療養管理指導の設定がある時_toNinteichosaResult_get居宅療養管理指導は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get居宅療養管理指導(), is(4));
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(居宅療養管理指導).get調査結果(), is(new RString("4")));
         }
 
         @Test
         public void 通所介護の設定がある時_toNinteichosaResult_get通所介護は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get通所介護(), is(5));
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(通所介護).get調査結果(), is(new RString("5")));
         }
 
         @Test
         public void 通所リハビリテーションの設定がある時_toNinteichosaResult_get通所リハビリテーションは_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get通所リハビリテーション(), is(6));
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(通所リハビリテーション).get調査結果(), is(new RString("6")));
         }
 
         @Test
         public void 短期入所生活介護の設定がある時_toNinteichosaResult_get短期入所生活介護は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get短期入所生活介護(), is(7));
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(短期入所生活介護).get調査結果(), is(new RString("7")));
         }
 
         @Test
         public void 短期入所療養介護の設定がある時_toNinteichosaResult_get短期入所療養介護は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get短期入所療養介護(), is(8));
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(短期入所療養介護).get調査結果(), is(new RString("8")));
         }
 
         @Test
         public void 特定施設入居者生活介護の設定がある時_toNinteichosaResult_get特定施設入居者生活介護は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get特定施設入居者生活介護(), is(9));
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(特定施設入居者生活介護).get調査結果(), is(new RString("9")));
         }
 
         @Test
         public void 福祉用具貸与の設定がある時_toNinteichosaResult_get福祉用具貸与は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get福祉用具貸与(), is(0));
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(福祉用具貸与).get調査結果(), is(new RString("0")));
         }
 
         @Test
         public void 特定福祉用具販売の設定がある時_toNinteichosaResult_get特定福祉用具販売は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get特定福祉用具販売(), is(1));
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(特定福祉用具販売).get調査結果(), is(new RString("1")));
         }
 
         @Test
         public void 住宅改修の設定がある時_toNinteichosaResult_get住宅改修は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get住宅改修(), is(2));
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(住宅改修).get調査結果(), is(new RString("2")));
         }
 
         @Test
         public void 夜間対応型訪問介護の設定がある時_toNinteichosaResult_get夜間対応型訪問介護は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get夜間対応型訪問介護(), is(3));
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(夜間対応型訪問介護).get調査結果(), is(new RString("3")));
         }
 
         @Test
         public void 認知症対応型通所介護の設定がある時_toNinteichosaResult_get認知症対応型通所介護は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get認知症対応型通所介護(), is(4));
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(認知症対応型通所介護).get調査結果(), is(new RString("4")));
         }
 
         @Test
         public void 小規模多機能型居宅介護の設定がある時_toNinteichosaResult_get小規模多機能型居宅介護は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get小規模多機能型居宅介護(), is(5));
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(小規模多機能型居宅介護).get調査結果(), is(new RString("5")));
         }
 
         @Test
         public void 認知症対応型共同生活介護の設定がある時_toNinteichosaResult_get認知症対応型共同生活介護は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get認知症対応型共同生活介護(), is(6));
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(認知症対応型共同生活介護).get調査結果(), is(new RString("6")));
         }
 
         @Test
         public void 地域密着型特定施設入居者生活介護の設定がある時_toNinteichosaResult_get地域密着型特定施設入居者生活介護は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get地域密着型特定施設入居者生活介護(), is(7));
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(地域密着型特定施設入居者生活介護).get調査結果(), is(new RString("7")));
         }
 
         @Test
         public void 地域密着型介護老人福祉施設入所者生活介護の設定がある時_toNinteichosaResult_get地域密着型介護老人福祉施設入所者生活介護は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get地域密着型介護老人福祉施設入所者生活介護(), is(8));
-        }
-
-        @Test
-        public void 定期巡回随時対応型訪問介護看護の設定がある時_toNinteichosaResult_get定期巡回随時対応型訪問介護看護は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get定期巡回随時対応型訪問介護看護(), is(9));
-        }
-
-        @Test
-        public void 複合型サービスの設定がある時_toNinteichosaResult_get複合型サービスは_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get複合型サービス(), is(0));
-        }
-
-        @Test
-        public void 現在の状況の設定がある時_toNinteichosaResult_get現在の状況は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get現在の状況(), is(GenzaiJokyoKubun.指定介護療養型医療施設));
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(地域密着型介護老人福祉施設入所者生活介護).get調査結果(), is(new RString("8")));
         }
 
         @Test
         public void 市町村特別給付の設定がある時_toNinteichosaResult_get市町村特別給付は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get市町村特別給付(), is(new RString("市町村特別給付")));
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(市町村特別給付).get調査結果(), is(new RString("市町村特別給付")));
         }
 
         @Test
         public void 介護保険給付以外の在宅サービスの設定がある時_toNinteichosaResult_get介護保険給付以外の在宅サービスは_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get介護保険給付以外の在宅サービス(), is(new RString("介護保険給付以外の在宅サービス")));
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(介護保険給付以外の在宅サービス).get調査結果(), is(new RString("介護保険給付以外の在宅サービス")));
+        }
+
+        @Test
+        public void 利用施設コードの設定がある時_toNinteichosaResult_get利用施設コードは_設定値を返す() {
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(利用施設コード).get調査結果(), is(new RString("利用施設コード")));
+        }
+
+        @Test
+        public void 利用施設名の設定がある時_toNinteichosaResult_get利用施設名は_設定値を返す() {
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(利用施設名).get調査結果(), is(new RString("利用施設名")));
+        }
+
+        @Test
+        public void 利用施設住所の設定がある時_toNinteichosaResult_get利用施設住所は_設定値を返す() {
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(利用施設住所).get調査結果(), is(new RString("利用施設住所")));
+        }
+
+        @Test
+        public void 利用施設電話番号の設定がある時_toNinteichosaResult_get利用施設電話番号は_設定値を返す() {
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(利用施設電話番号).get調査結果(), is(new RString("利用施設電話番号")));
+        }
+
+        @Test
+        public void 利用施設郵便番号の設定がある時_toNinteichosaResult_get利用施設郵便番号は_設定値を返す() {
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(利用施設郵便番号).get調査結果(), is(new RString("利用施設郵便番号")));
+        }
+
+        @Test
+        public void 概況特記事項の設定がある時_toNinteichosaResult_get概況特記事項は_設定値を返す() {
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(概況特記事項).get調査結果(), is(new RString("概況特記事項")));
+        }
+    }
+
+    public static class toNinteichosaResult_調査票結果 {
+
+        @Test
+        public void 麻痺左上肢の設定がある時_toNinteichosaResult_get麻痺左上肢は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(麻痺等の有無_左上肢).get調査結果(), is(NaiAru.ない.getCode()));
+        }
+
+        @Test
+        public void 麻痺右上肢の設定がある時_toNinteichosaResult_get麻痺右上肢は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(麻痺等の有無_右上肢).get調査結果(), is(NaiAru.ある.getCode()));
+        }
+
+        @Test
+        public void 麻痺左下肢の設定がある時_toNinteichosaResult_get麻痺左下肢は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(麻痺等の有無_左下肢).get調査結果(), is(NaiAru.ない.getCode()));
+        }
+
+        @Test
+        public void 麻痺右下肢の設定がある時_toNinteichosaResult_get麻痺右下肢は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(麻痺等の有無_右下肢).get調査結果(), is(NaiAru.ある.getCode()));
+        }
+
+        @Test
+        public void 麻痺その他の設定がある時_toNinteichosaResult_get麻痺その他は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(麻痺等の有無_その他).get調査結果(), is(NaiAru.ない.getCode()));
+        }
+
+        @Test
+        public void 拘縮肩関節の設定がある時_toNinteichosaResult_get拘縮肩関節は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(関節の動く範囲の制限_肩関節).get調査結果(), is(NaiAru.ない.getCode()));
+        }
+
+        @Test
+        public void 拘縮股関節の設定がある時_toNinteichosaResult_get拘縮股関節は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(関節の動く範囲の制限_股関節).get調査結果(), is(NaiAru.ある.getCode()));
+        }
+
+        @Test
+        public void 拘縮膝関節の設定がある時_toNinteichosaResult_get拘縮膝関節は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(関節の動く範囲の制限_膝関節).get調査結果(), is(NaiAru.ない.getCode()));
+        }
+
+        @Test
+        public void 拘縮その他の設定がある時_toNinteichosaResult_get拘縮その他は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(関節の動く範囲の制限_その他).get調査結果(), is(NaiAru.ある.getCode()));
+        }
+
+        @Test
+        public void 寝返りの設定がある時_toNinteichosaResult_get寝返りは_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(寝返り).get調査結果(), is(DekiruDekinai3.できる.getCode()));
+        }
+
+        @Test
+        public void 起き上がりの設定がある時_toNinteichosaResult_get起き上がりは_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(起き上がり).get調査結果(), is(DekiruDekinai3.できない.getCode()));
+        }
+
+        @Test
+        public void 座位保持の設定がある時_toNinteichosaResult_get座位保持は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(座位保持).get調査結果(), is(DekiruDekinai6.できる.getCode()));
+        }
+
+        @Test
+        public void 両足での立位の設定がある時_toNinteichosaResult_get両足での立位は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(両足での立位).get調査結果(), is(DekiruDekinai5.できない.getCode()));
+        }
+
+        @Test
+        public void 歩行の設定がある時_toNinteichosaResult_get歩行は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(歩行).get調査結果(), is(DekiruDekinai3.できる.getCode()));
+        }
+
+        @Test
+        public void 立ち上がりの設定がある時_toNinteichosaResult_get立ち上がりは_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(立ち上がり).get調査結果(), is(DekiruDekinai3.できない.getCode()));
+        }
+
+        @Test
+        public void 片足での立位の設定がある時_toNinteichosaResult_get片足での立位は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(片足での立位).get調査結果(), is(DekiruDekinai5.できる.getCode()));
+        }
+
+        @Test
+        public void 洗身の設定がある時_toNinteichosaResult_get洗身は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(洗身).get調査結果(), is(Kaijo2.自立.getCode()));
+        }
+
+        @Test
+        public void つめ切りの設定がある時_toNinteichosaResult_getつめ切りは_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(つめ切り).get調査結果(), is(Kaijo.全介助.getCode()));
+        }
+
+        @Test
+        public void 視力の設定がある時_toNinteichosaResult_get視力は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(視力).get調査結果(), is(Shiryoku.普通.getCode()));
+        }
+
+        @Test
+        public void 聴力の設定がある時_toNinteichosaResult_get聴力は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(聴力).get調査結果(), is(Choryoku.判断不能.getCode()));
+        }
+
+        @Test
+        public void 移乗の設定がある時_toNinteichosaResult_get移乗は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(移乗).get調査結果(), is(Kaijo3.自立.getCode()));
+        }
+
+        @Test
+        public void 移動の設定がある時_toNinteichosaResult_get移動は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(移動).get調査結果(), is(Kaijo3.全介助.getCode()));
+        }
+
+        @Test
+        public void 嚥下の設定がある時_toNinteichosaResult_get嚥下_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(嚥下).get調査結果(), is(DekiruDekinai4.できる.getCode()));
+        }
+
+        @Test
+        public void 食事摂取の設定がある時_toNinteichosaResult_get食事摂取は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(食事摂取).get調査結果(), is(Kaijo3.自立.getCode()));
+        }
+
+        @Test
+        public void 排尿の設定がある時_toNinteichosaResult_get排尿は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(排尿).get調査結果(), is(Kaijo3.全介助.getCode()));
+        }
+
+        @Test
+        public void 排便の設定がある時_toNinteichosaResult_get排便は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(排便).get調査結果(), is(Kaijo3.自立.getCode()));
+        }
+
+        @Test
+        public void 口腔清潔の設定がある時_toNinteichosaResult_get口腔清潔は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(口腔清潔).get調査結果(), is(Kaijo.全介助.getCode()));
+        }
+
+        @Test
+        public void 洗顔の設定がある時_toNinteichosaResult_get洗顔は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(洗顔).get調査結果(), is(Kaijo.自立.getCode()));
+        }
+
+        @Test
+        public void 整髪の設定がある時_toNinteichosaResult_get整髪は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(整髪).get調査結果(), is(Kaijo.全介助.getCode()));
+        }
+
+        @Test
+        public void 上衣の着脱の設定がある時_toNinteichosaResult_get上衣の着脱は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(上衣の着脱).get調査結果(), is(Kaijo3.自立.getCode()));
+        }
+
+        @Test
+        public void ズボン等の着脱の設定がある時_toNinteichosaResult_getズボン等の着脱は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(ズボン等の着脱).get調査結果(), is(Kaijo3.全介助.getCode()));
+        }
+
+        @Test
+        public void 外出頻度の設定がある時_toNinteichosaResult_get整髪外出頻度_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(外出頻度).get調査結果(), is(Gaishutsu.月１回以上.getCode()));
+        }
+
+        @Test
+        public void 意思の伝達の設定がある時_toNinteichosaResult_get意思の伝達は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(意思の伝達).get調査結果(), is(DekiruDekinai2.できる.getCode()));
+        }
+
+        @Test
+        public void 毎日の日課を理解の設定がある時_toNinteichosaResult_get毎日の日課を理解は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(毎日の日課を理解).get調査結果(), is(DekiruDekinai.できない.getCode()));
+        }
+
+        @Test
+        public void 生年月日をいうの設定がある時_toNinteichosaResult_get生年月日をいうは_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(生年月日をいう).get調査結果(), is(DekiruDekinai.できる.getCode()));
+        }
+
+        @Test
+        public void 短期記憶の設定がある時_toNinteichosaResult_get短期記憶は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(短期記憶).get調査結果(), is(DekiruDekinai.できない.getCode()));
+        }
+
+        @Test
+        public void 自分の名前をいうの設定がある時_toNinteichosaResult_get自分の名前をいうは_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(自分の名前をいう).get調査結果(), is(DekiruDekinai.できる.getCode()));
+        }
+
+        @Test
+        public void 今の季節を理解の設定がある時_toNinteichosaResult_get今の季節を理解は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(今の季節を理解).get調査結果(), is(DekiruDekinai.できない.getCode()));
+        }
+
+        @Test
+        public void 場所の理解の設定がある時_toNinteichosaResult_get場所の理解は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(場所の理解).get調査結果(), is(DekiruDekinai.できる.getCode()));
+        }
+
+        @Test
+        public void 徘徊の設定がある時_toNinteichosaResult_get徘徊は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(常時の徘徊).get調査結果(), is(NaiAru2.ない.getCode()));
+        }
+
+        @Test
+        public void 外出して戻れないの設定がある時_toNinteichosaResult_get外出して戻れないは_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(外出して戻れない).get調査結果(), is(NaiAru2.ある.getCode()));
+        }
+
+        @Test
+        public void 被害的の設定がある時_toNinteichosaResult_get被害的は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(被害的).get調査結果(), is(NaiAru2.ない.getCode()));
+        }
+
+        @Test
+        public void 作話の設定がある時_toNinteichosaResult_get作話は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(作話).get調査結果(), is(NaiAru2.ある.getCode()));
+        }
+
+        @Test
+        public void 感情が不安定の設定がある時_toNinteichosaResult_get感情が不安定は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(感情が不安定).get調査結果(), is(NaiAru2.ない.getCode()));
+        }
+
+        @Test
+        public void 昼夜逆転の設定がある時_toNinteichosaResult_get昼夜逆転は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(昼夜逆転).get調査結果(), is(NaiAru2.ある.getCode()));
+        }
+
+        @Test
+        public void 同じ話をするの設定がある時_toNinteichosaResult_get同じ話をするは_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(同じ話をする).get調査結果(), is(NaiAru2.ない.getCode()));
+        }
+
+        @Test
+        public void 大声を出すの設定がある時_toNinteichosaResult_get大声を出すは_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(大声を出す).get調査結果(), is(NaiAru2.ある.getCode()));
+        }
+
+        @Test
+        public void 介護に抵抗の設定がある時_toNinteichosaResult_get介護に抵抗は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(介護に抵抗).get調査結果(), is(NaiAru2.ない.getCode()));
+        }
+
+        @Test
+        public void 落ち着きなしの設定がある時_toNinteichosaResult_get落ち着きなしは_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(落ち着きなし).get調査結果(), is(NaiAru2.ある.getCode()));
+        }
+
+        @Test
+        public void 一人で出たがるの設定がある時_toNinteichosaResult_get一人で出たがるは_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(一人で出たがる).get調査結果(), is(NaiAru2.ない.getCode()));
+        }
+
+        @Test
+        public void 収集癖の設定がある時_toNinteichosaResult_get収集癖は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(収集癖).get調査結果(), is(NaiAru2.ある.getCode()));
+        }
+
+        @Test
+        public void 物や衣類を壊すの設定がある時_toNinteichosaResult_get物や衣類を壊すは_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(物や衣類を壊す).get調査結果(), is(NaiAru2.ない.getCode()));
+        }
+
+        @Test
+        public void ひどい物忘れの設定がある時_toNinteichosaResult_getひどい物忘れは_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(ひどい物忘れ).get調査結果(), is(NaiAru2.ある.getCode()));
+        }
+
+        @Test
+        public void 独り言独り笑いの設定がある時_toNinteichosaResult_get独り言独り笑いは_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(独り言_独り笑).get調査結果(), is(NaiAru2.ない.getCode()));
+        }
+
+        @Test
+        public void 自分勝手に行動するの設定がある時_toNinteichosaResult_get自分勝手に行動するは_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(自分勝手に行動する).get調査結果(), is(NaiAru2.ある.getCode()));
+        }
+
+        @Test
+        public void 話がまとまらないの設定がある時_toNinteichosaResult_get話がまとまらないは_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(話がまとまらない).get調査結果(), is(NaiAru2.ない.getCode()));
+        }
+
+        @Test
+        public void 薬の内服の設定がある時_toNinteichosaResult_get薬の内服は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(薬の内服).get調査結果(), is(Kaijo.自立.getCode()));
+        }
+
+        @Test
+        public void 金銭の管理の設定がある時_toNinteichosaResult_get金銭の管理は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(金銭の管理).get調査結果(), is(Kaijo.全介助.getCode()));
+        }
+
+        @Test
+        public void 日常の意思決定の設定がある時_toNinteichosaResult_get日常の意思決定は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(日常の意思決定).get調査結果(), is(DekiruDekinai7.できる.getCode()));
+        }
+
+        @Test
+        public void 集団への不適応の設定がある時_toNinteichosaResult_get集団への不適応は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(集団への不適応).get調査結果(), is(NaiAru2.ない.getCode()));
+        }
+
+        @Test
+        public void 買い物の設定がある時_toNinteichosaResult_get買い物は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(買い物).get調査結果(), is(Kaijo3.自立.getCode()));
+        }
+
+        @Test
+        public void 簡単な調理の設定がある時_toNinteichosaResult_get簡単な調理は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(簡単な調理).get調査結果(), is(Kaijo3.全介助.getCode()));
+        }
+
+        @Test
+        public void 点滴の管理の設定がある時_toNinteichosaResult_get点滴の管理は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(点滴の管理).get調査結果(), is(NaiAru.ない.getCode()));
+        }
+
+        @Test
+        public void 中心静脈栄養の設定がある時_toNinteichosaResult_get中心静脈栄養は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(中心静脈栄養).get調査結果(), is(NaiAru.ある.getCode()));
+        }
+
+        @Test
+        public void 透析の設定がある時_toNinteichosaResult_get透析は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(透析).get調査結果(), is(NaiAru.ない.getCode()));
+        }
+
+        @Test
+        public void ストーマの処置の設定がある時_toNinteichosaResult_getストーマの処置は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(ストーマの処置).get調査結果(), is(NaiAru.ある.getCode()));
+        }
+
+        @Test
+        public void 酸素療法の設定がある時_toNinteichosaResult_get酸素療法は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(酸素療法).get調査結果(), is(NaiAru.ない.getCode()));
+        }
+
+        @Test
+        public void レスピレーターの設定がある時_toNinteichosaResult_getレスピレーターは_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(レスピレーター).get調査結果(), is(NaiAru.ある.getCode()));
+        }
+
+        @Test
+        public void 気管切開の処置の設定がある時_toNinteichosaResult_get気管切開の処置は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(気管切開).get調査結果(), is(NaiAru.ない.getCode()));
+        }
+
+        @Test
+        public void 疼痛の看護の設定がある時_toNinteichosaResult_get疼痛の看護は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(疼痛の看護).get調査結果(), is(NaiAru.ある.getCode()));
+        }
+
+        @Test
+        public void 経管栄養の設定がある時_toNinteichosaResult_get経管栄養は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(経管栄養).get調査結果(), is(NaiAru.ない.getCode()));
+        }
+
+        @Test
+        public void モニター測定の設定がある時_toNinteichosaResult_getモニター測定は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(モニター測定).get調査結果(), is(NaiAru.ある.getCode()));
+        }
+
+        @Test
+        public void じょくそうの処置の設定がある時_toNinteichosaResult_getじょくそうの処置は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(じょくそうの処置).get調査結果(), is(NaiAru.ない.getCode()));
+        }
+
+        @Test
+        public void カテーテルの設定がある時_toNinteichosaResult_getカテーテルは_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(カテーテル).get調査結果(), is(NaiAru.ある.getCode()));
+        }
+
+        @Test
+        public void 障害高齢者の日常生活自立度の設定がある時_toNinteichosaResult_get障害高齢者の日常生活自立度は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(障害高齢者の日常生活自立度).get調査結果(), is(ShogaiJiritsu.Ａ１.getCode()));
+        }
+
+        @Test
+        public void 認知症高齢者の日常生活自立度の設定がある時_toNinteichosaResult_get認知症高齢者の日常生活自立度は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get基本情報().get調査項目(認知症高齢者の日常生活自立度).get調査結果(), is(NinchishoJiritsu.Ⅱａ.getCode()));
         }
     }
 
@@ -632,13 +637,8 @@ public class NinteichosaKekkaMapperTest {
         }
 
         @Test
-        public void 現在の状況の設定がある時_toDbT5008NinteichosaKekkaJohoEntity_getGenzainoJokyoCodeは_設定値を返す() {
-            assertThat(toDbT5008NinteichosaKekkaJohoEntity().getGenzainoJokyoCode(), is(GenzaiJokyoKubun.指定介護療養型医療施設.getCode()));
-        }
-
-        @Test
         public void サービス区分の設定がある時_toDbT5008NinteichosaKekkaJohoEntity_getServiceKubunCodeは_設定値を返す() {
-            assertThat(toDbT5008NinteichosaKekkaJohoEntity().getServiceKubunCode(), is(ServiceKubun.介護給付サービス.getCode()));
+            assertThat(toDbT5008NinteichosaKekkaJohoEntity().getServiceKubunCode(), is(ServiceKubun.介護.getCode()));
         }
 
         @Test
@@ -737,16 +737,6 @@ public class NinteichosaKekkaMapperTest {
         }
 
         @Test
-        public void 定期巡回随時対応型訪問介護看護の設定がある時_toDbT5008NinteichosaKekkaJohoEntity_getTeikijunkaiZuijiTaiogataHomonKaigoKangoは_設定値を返す() {
-            assertThat(toDbT5008NinteichosaKekkaJohoEntity().getTeikijunkaiZuijiTaiogataHomonKaigoKango(), is(9));
-        }
-
-        @Test
-        public void 複合型サービスの設定がある時_toDbT5008NinteichosaKekkaJohoEntity_getHukugogataServiceは_設定値を返す() {
-            assertThat(toDbT5008NinteichosaKekkaJohoEntity().getHukugogataService(), is(0));
-        }
-
-        @Test
         public void 市町村特別給付の設定がある時_toDbT5008NinteichosaKekkaJohoEntity_getShichosonTokubetsuKyufuは_設定値を返す() {
             assertThat(toDbT5008NinteichosaKekkaJohoEntity().getShichosonTokubetsuKyufu(), is(new RString("市町村特別給付")));
         }
@@ -754,6 +744,31 @@ public class NinteichosaKekkaMapperTest {
         @Test
         public void 介護保険給付以外の在宅サービスの設定がある時_toDbT5008NinteichosaKekkaJohoEntity_getKaigohokenKyufuIgaiNoZaitakuServiceは_設定値を返す() {
             assertThat(toDbT5008NinteichosaKekkaJohoEntity().getKaigohokenKyufuIgaiNoZaitakuService(), is(new RString("介護保険給付以外の在宅サービス")));
+        }
+
+        @Test
+        public void 利用施設コードの設定がある時_toDbT5008NinteichosaKekkaJohoEntity_getRiyoShisetsuCodeは_設定値を返す() {
+            assertThat(toDbT5008NinteichosaKekkaJohoEntity().getRiyoShisetsuCode(), is(new RString("利用施設コード")));
+        }
+
+        @Test
+        public void 利用施設名の設定がある時_toDbT5008NinteichosaKekkaJohoEntity_getRiyoShisetsuShimeiは_設定値を返す() {
+            assertThat(toDbT5008NinteichosaKekkaJohoEntity().getRiyoShisetsuShimei(), is(new RString("利用施設名")));
+        }
+
+        @Test
+        public void 利用施設住所の設定がある時_toDbT5008NinteichosaKekkaJohoEntity_getRiyoShisetsuJushoは_設定値を返す() {
+            assertThat(toDbT5008NinteichosaKekkaJohoEntity().getRiyoShisetsuJusho(), is(new RString("利用施設住所")));
+        }
+
+        @Test
+        public void 利用施設電話番号の設定がある時_toDbT5008NinteichosaKekkaJohoEntity_getRiyoShisetsuTelNoは_設定値を返す() {
+            assertThat(toDbT5008NinteichosaKekkaJohoEntity().getRiyoShisetsuTelNo(), is(new RString("利用施設電話番号")));
+        }
+
+        @Test
+        public void 利用施設郵便番号の設定がある時_toDbT5008NinteichosaKekkaJohoEntity_getRiyoShisetsuYubinNoは_設定値を返す() {
+            assertThat(toDbT5008NinteichosaKekkaJohoEntity().getRiyoShisetsuYubinNo(), is(new RString("利用施設郵便番号")));
         }
 
         @Test

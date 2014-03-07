@@ -22,7 +22,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
 /**
- * 要介護認定調査の調査結果情報を管理するクラスのテストクラスです。
+ * 要介護認定調査の調査結果を管理するクラスのテストクラスです。
  *
  * @author N8156 宮本 康
  */
@@ -45,8 +45,8 @@ public class NinteichosaResultManagerTest {
     public static class get認定調査結果 {
 
         @Test
-        public void 調査結果情報あり_調査票情報ありの時_get認定調査結果は_該当の認定調査結果情報を返す() {
-            assertThat(createNinteichosaResultManager(AS_調査結果情報あり, AS_調査票情報あり).get認定調査結果(createShinseishoKanriNo(), 0).get調査票結果().get申請書管理番号().value(), is(new RString("1234567890")));
+        public void 調査結果情報あり_調査票情報ありの時_get認定調査結果は_該当の認定調査結果を返す() {
+            assertThat(createNinteichosaResultManager(AS_調査結果情報あり, AS_調査票情報あり).get認定調査結果(createShinseishoKanriNo(), 0).get基本調査結果().get申請書管理番号().value(), is(new RString("1234567890")));
         }
 
         @Test

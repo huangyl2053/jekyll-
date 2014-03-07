@@ -15,7 +15,7 @@ import org.junit.runner.RunWith;
 import static org.mockito.Mockito.*;
 
 /**
- * 要介護認定調査の調査結果情報（概況調査基本）を保持するクラスのテストクラスです。
+ * 要介護認定調査の調査結果（概況調査基本）を扱うクラスのテストクラスです。
  *
  * @author N8156 宮本 康
  */
@@ -27,8 +27,7 @@ public class NinteichosaResultOfGaikyoKihonTest {
     private static final int AS_認定調査実施場所コードがNULL = 3;
     private static final int AS_認定調査実施場所名称がNULL = 4;
     private static final int AS_認定調査区分がNULL = 5;
-    private static final int AS_概況特記事項がNULL = 6;
-    private static final int AS_審査会優先振分区分がNULL = 7;
+    private static final int AS_審査会優先振分区分がNULL = 6;
 
     public static class コンストラクタ {
 
@@ -58,11 +57,6 @@ public class NinteichosaResultOfGaikyoKihonTest {
         }
 
         @Test(expected = NullPointerException.class)
-        public void 概況特記事項がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createNinteichosaResultGaikyoKihon(AS_概況特記事項がNULL);
-        }
-
-        @Test(expected = NullPointerException.class)
         public void 審査会優先振分区分がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
             createNinteichosaResultGaikyoKihon(AS_審査会優先振分区分がNULL);
         }
@@ -75,7 +69,6 @@ public class NinteichosaResultOfGaikyoKihonTest {
                 flg == AS_認定調査実施場所コードがNULL ? null : any(RString.class),
                 flg == AS_認定調査実施場所名称がNULL ? null : any(RString.class),
                 flg == AS_認定調査区分がNULL ? null : any(ChosaKubun.class),
-                flg == AS_概況特記事項がNULL ? null : any(RString.class),
                 flg == AS_審査会優先振分区分がNULL ? null : any(ShinsakaiFuriwakeKubun.class));
     }
 }

@@ -4,39 +4,39 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.ninteichosa;
 
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.ChosahyoItems;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.IChosahyoItemGroup;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.IChosahyoItemSubGroup;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubun;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItemNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 要介護認定調査の調査項目情報を扱うインターフェースです。
+ * 要介護認定調査の調査項目を扱うインターフェースです。
  *
  * @author N8156 宮本 康
  */
 public interface INinteichosaItem {
 
     /**
-     * 調査票項目グループを返します。
+     * 調査項目グループを返します。
      *
-     * @return 調査票項目グループ
+     * @return 調査項目グループ
      */
-    IChosahyoItemGroup get調査票項目グループ();
+    INinteichosaItemGroup get調査項目グループ();
 
     /**
-     * 調査票項目サブグループを返します。
+     * 調査項目サブグループを返します。
      *
-     * @return 調査票項目サブグループ
+     * @return 調査項目サブグループ
      */
-    IChosahyoItemSubGroup get調査票項目サブグループ();
+    INinteichosaItemSubGroup get調査項目サブグループ();
 
     /**
-     * 調査票項目サブグループ内番号を返します。
+     * 調査項目グループ内番号を返します。
      *
-     * @return 調査票項目サブグループ内番号
+     * @return 調査項目グループ内番号
      */
-    int get調査票項目サブグループ内番号();
+    int get調査項目グループ内番号();
 
     /**
      * 調査項目番号を返します。
@@ -46,11 +46,11 @@ public interface INinteichosaItem {
     NinteichosaItemNo get調査項目番号();
 
     /**
-     * 調査票項目を返します。
+     * 調査項目区分を返します。
      *
-     * @return 調査票項目
+     * @return 調査項目区分
      */
-    ChosahyoItems get調査票項目();
+    NinteichosaItemKubun get調査項目区分();
 
     /**
      * 表示名称を返します。
@@ -60,9 +60,9 @@ public interface INinteichosaItem {
     RString get表示名称();
 
     /**
-     * 調査票項目の選択肢グループを返します。
+     * 調査項目の選択肢を返します。
      *
-     * @return 選択肢グループ
+     * @return 選択肢
      */
-    IAnsweringItems get選択肢グループ();
+    IAnsweringItems get選択肢();
 }

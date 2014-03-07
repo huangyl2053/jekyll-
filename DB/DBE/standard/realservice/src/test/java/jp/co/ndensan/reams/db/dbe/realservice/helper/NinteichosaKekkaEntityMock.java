@@ -6,15 +6,11 @@ package jp.co.ndensan.reams.db.dbe.realservice.helper;
 
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosaKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GenzaiJokyoKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ServiceKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5008NinteichosaKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5009NinteichosahyoJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import static jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice.*;
 import static org.mockito.Mockito.spy;
 
@@ -45,8 +41,8 @@ public class NinteichosaKekkaEntityMock {
         entity.setNinteiChosaKubunCode(ChosaKubun.新規調査.getCode());
         entity.setChosaJisshiBashoCode(new RString("12345678"));
         entity.setChosaJisshiBashoMeisho(new RString("認定調査実施場所名称"));
-        entity.setGenzainoJokyoCode(GenzaiJokyoKubun.指定介護療養型医療施設.getCode());
-        entity.setServiceKubunCode(ServiceKubun.介護給付サービス.getCode());
+        entity.setGenzainoJokyoCode(new RString("3"));
+        entity.setServiceKubunCode(new RString("2"));
         entity.setHomonKaigo(0);
         entity.setHomonNyuyokuKaigo(1);
         entity.setHomonKango(2);
@@ -70,6 +66,11 @@ public class NinteichosaKekkaEntityMock {
         entity.setHukugogataService(0);
         entity.setShichosonTokubetsuKyufu(new RString("市町村特別給付"));
         entity.setKaigohokenKyufuIgaiNoZaitakuService(new RString("介護保険給付以外の在宅サービス"));
+        entity.setRiyoShisetsuCode(new RString("利用施設コード"));
+        entity.setRiyoShisetsuShimei(new RString("利用施設名"));
+        entity.setRiyoShisetsuJusho(new RString("利用施設住所"));
+        entity.setRiyoShisetsuTelNo(new RString("利用施設電話番号"));
+        entity.setRiyoShisetsuYubinNo(new RString("利用施設郵便番号"));
         entity.setGaikyochosaTokkijiko(new RString("概況特記事項"));
         entity.setShogaiNichijoSeikatsuJiritsudoCode(ShogaiJiritsu.Ａ１.getCode());
         entity.setNinchishoNichijoSeikatsuJiritsudoCode(NinchishoJiritsu.Ⅱａ.getCode());

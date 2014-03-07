@@ -7,31 +7,59 @@ package jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 要介護認定調査の調査票項目に対する選択肢を扱うクラスです。
+ * 要介護認定調査の調査項目に対する選択肢を扱うクラスです。
  *
  * @author N8156 宮本 康
  */
 public class Choice {
 
     /**
-     * 「OFF／ON」の選択肢を表す列挙型です。<br />
-     * 単純に調査票項目の有無結果（チェック有無）だけを指定したい場合に使用します。
+     * 「自由入力」を表す列挙型です。<br />
+     * 調査結果を直接入力する場合に使用します。
      */
-    public enum OffOn implements IAnsweringItem {
+    public enum FreeInput implements IAnsweringItem {
 
         /**
-         * 選択肢が「OFF（チェック無し）」であることを表します。<br />
+         * 「自由入力」であることを表します。<br />
          * コード : 1
          */
-        OFF(1),
-        /**
-         * 選択肢が「ON（チェック有り）」であることを表します。<br />
-         * コード : 2
-         */
-        ON(2);
+        自由入力(1);
         private int code;
 
-        private OffOn(int code) {
+        private FreeInput(int code) {
+            this.code = code;
+        }
+
+        @Override
+        public RString getCode() {
+            return new RString(Integer.toString(code));
+        }
+
+        @Override
+        public RString getName() {
+            return new RString(name());
+        }
+    }
+
+    /**
+     * 「チェック有無」を表す列挙型です。<br />
+     * 単純に調査結果の有無だけを指定する場合に使用します。
+     */
+    public enum Checked implements IAnsweringItem {
+
+        /**
+         * 「Disable（チェック無し）」であることを表します。<br />
+         * コード : 1
+         */
+        Disable(1),
+        /**
+         * 「Enable（チェック有り）」であることを表します。<br />
+         * コード : 2
+         */
+        Enable(2);
+        private int code;
+
+        private Checked(int code) {
             this.code = code;
         }
 
@@ -637,6 +665,43 @@ public class Choice {
     }
 
     /**
+     * 「指示」の選択肢を表す列挙型です。
+     */
+    public enum Shiji implements IAnsweringItem {
+
+        /**
+         * 選択肢が「指示が通じる」であることを表します。<br />
+         * コード : 1
+         */
+        指示が通じる(1),
+        /**
+         * 選択肢が「ときどき通じる」であることを表します。<br />
+         * コード : 2
+         */
+        ときどき通じる(2),
+        /**
+         * 選択肢が「指示が通じない」であることを表します。<br />
+         * コード : 3
+         */
+        指示が通じない(3);
+        private int code;
+
+        private Shiji(int code) {
+            this.code = code;
+        }
+
+        @Override
+        public RString getCode() {
+            return new RString(Integer.toString(code));
+        }
+
+        @Override
+        public RString getName() {
+            return new RString(name());
+        }
+    }
+
+    /**
      * 「障害高齢者の日常生活自立度」の調査結果を表す列挙型です。
      */
     public enum ShogaiJiritsu implements IAnsweringItem {
@@ -756,6 +821,105 @@ public class Choice {
         private int code;
 
         private NinchishoJiritsu(int code) {
+            this.code = code;
+        }
+
+        @Override
+        public RString getCode() {
+            return new RString(Integer.toString(code));
+        }
+
+        @Override
+        public RString getName() {
+            return new RString(name());
+        }
+    }
+
+    /**
+     * 「サービス区分」の選択肢を表す列挙型です。
+     */
+    public enum ServiceKubun implements IAnsweringItem {
+
+        /**
+         * 選択肢が「予防」であることを表します。<br />
+         * コード : 1
+         */
+        予防(1),
+        /**
+         * 選択肢が「介護」であることを表します。<br />
+         * コード : 2
+         */
+        介護(2),
+        /**
+         * 選択肢が「なし」であることを表します。<br />
+         * コード : 9
+         */
+        なし(9);
+        private int code;
+
+        private ServiceKubun(int code) {
+            this.code = code;
+        }
+
+        @Override
+        public RString getCode() {
+            return new RString(Integer.toString(code));
+        }
+
+        @Override
+        public RString getName() {
+            return new RString(name());
+        }
+    }
+
+    /**
+     * 「施設利用」の選択肢を表す列挙型です。
+     */
+    public enum ShisetsuRiyo implements IAnsweringItem {
+
+        /**
+         * 選択肢が「介護老人福祉施設」であることを表します。<br />
+         * コード : 1
+         */
+        介護老人福祉施設(1),
+        /**
+         * 選択肢が「介護老人保健施設」であることを表します。<br />
+         * コード : 2
+         */
+        介護老人保健施設(2),
+        /**
+         * 選択肢が「介護療養型医療施設」であることを表します。<br />
+         * コード : 3
+         */
+        介護療養型医療施設(3),
+        /**
+         * 選択肢が「認知症対応型共同生活介護適用施設」であることを表します。<br />
+         * コード : 4
+         */
+        認知症対応型共同生活介護適用施設(4),
+        /**
+         * 選択肢が「特定施設入居者生活介護適用施設」であることを表します。<br />
+         * コード : 5
+         */
+        特定施設入居者生活介護適用施設(5),
+        /**
+         * 選択肢が「医療機関_医療保険適用療養病床」であることを表します。<br />
+         * コード : 6
+         */
+        医療機関_医療保険適用療養病床(6),
+        /**
+         * 選択肢が「医療機関_医療保険適用療養病床」であることを表します。<br />
+         * コード : 7
+         */
+        医療機関_療養病床以外(7),
+        /**
+         * 選択肢が「その他の施設」であることを表します。<br />
+         * コード : 8
+         */
+        その他の施設(8);
+        private int code;
+
+        private ShisetsuRiyo(int code) {
             this.code = code;
         }
 

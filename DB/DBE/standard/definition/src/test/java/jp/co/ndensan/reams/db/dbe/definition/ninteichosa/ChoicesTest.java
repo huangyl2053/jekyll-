@@ -15,7 +15,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 /**
- * 要介護認定調査の調査票項目に対する選択肢のリストを扱うクラスのテストクラスです。
+ * 要介護認定調査の調査項目に対する選択肢のリストを扱うクラスのテストクラスです。
  *
  * @author N8156 宮本 康
  */

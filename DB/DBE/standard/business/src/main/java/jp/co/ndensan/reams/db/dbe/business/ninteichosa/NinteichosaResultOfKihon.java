@@ -10,16 +10,16 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import static java.util.Objects.requireNonNull;
 
 /**
- * 要介護認定調査の調査結果情報（調査票）を保持するクラスです。
+ * 要介護認定調査の調査結果（基本調査）を扱うクラスです。
  *
  * @author N8156 宮本 康
  */
-public class NinteichosaResultOfChosahyo {
+public class NinteichosaResultOfKihon {
 
     private final ShinseishoKanriNo 申請書管理番号;
     private final NinteichosaIraiRirekiNo 認定調査依頼履歴番号;
     private final int 調査票改定年度;
-    private final Ninteichosahyo<NinteichosaItemResult> 調査票結果;
+    private final Ninteichosahyo<NinteichosaResultOfItem> 基本情報;
 
     /**
      * インスタンスを生成します。
@@ -27,14 +27,14 @@ public class NinteichosaResultOfChosahyo {
      * @param 申請書管理番号 申請書管理番号
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
      * @param 調査票改定年度 調査票改定年度
-     * @param 調査票結果 調査票結果
+     * @param 基本情報 基本情報
      */
-    public NinteichosaResultOfChosahyo(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号,
-            int 調査票改定年度, Ninteichosahyo<NinteichosaItemResult> 調査票結果) {
+    public NinteichosaResultOfKihon(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号,
+            int 調査票改定年度, Ninteichosahyo<NinteichosaResultOfItem> 基本情報) {
         this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00001.replace("申請書管理番号").getMessage());
         this.認定調査依頼履歴番号 = requireNonNull(認定調査依頼履歴番号, Messages.E00001.replace("認定調査依頼履歴番号").getMessage());
         this.調査票改定年度 = 調査票改定年度;
-        this.調査票結果 = requireNonNull(調査票結果, Messages.E00001.replace("調査票結果").getMessage());
+        this.基本情報 = requireNonNull(基本情報, Messages.E00001.replace("基本情報").getMessage());
     }
 
     /**
@@ -65,11 +65,11 @@ public class NinteichosaResultOfChosahyo {
     }
 
     /**
-     * 調査票結果を返します。
+     * 調査結果（基本情報）を返します。
      *
-     * @return 調査票結果
+     * @return 調査結果（基本情報）
      */
-    public Ninteichosahyo<NinteichosaItemResult> get調査票結果() {
-        return 調査票結果;
+    public Ninteichosahyo<NinteichosaResultOfItem> get基本情報() {
+        return 基本情報;
     }
 }

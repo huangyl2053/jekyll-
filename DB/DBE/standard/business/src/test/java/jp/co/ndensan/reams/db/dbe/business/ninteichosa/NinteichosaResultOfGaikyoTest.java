@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
 import static org.mockito.Mockito.*;
 
 /**
- * 要介護認定調査の調査結果情報（概況調査）を保持するクラスのテストクラスです。
+ * 要介護認定調査の調査結果（概況調査）を扱うクラスのテストクラスです。
  *
  * @author N8156 宮本 康
  */
@@ -50,8 +50,8 @@ public class NinteichosaResultOfGaikyoTest {
     private static NinteichosaResultOfGaikyo createNinteichosaResultGaikyo(int flg) {
         return new NinteichosaResultOfGaikyo(
                 flg == AS_申請書管理番号がNULL ? null : any(ShinseishoKanriNo.class),
-                flg == AS_認定調査依頼履歴番号がNULL ? null : any(NinteichosaIraiRirekiNo.class),
+                flg == AS_認定調査依頼履歴番号がNULL ? null : any(NinteichosaIraiRirekiNo.class), 2009,
                 flg == AS_基本情報がNULL ? null : any(NinteichosaResultOfGaikyoKihon.class),
-                flg == AS_サービス状況がNULL ? null : any(NinteichosaResultOfGaikyoService.class));
+                flg == AS_サービス状況がNULL ? null : any(Ninteichosahyo.class));
     }
 }
