@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyFlag;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiFlag;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import static java.util.Objects.requireNonNull;
@@ -32,8 +32,8 @@ public class Gogitai {
     private final int 審査会自動割当定員;
     private final int 審査会委員定員;
     private final GogitaiWariateIinList 合議体割当審査会委員List;
-    private final GogitaiSeishinkaIshiSonzaiFlag 精神科医師存在フラグ;
-    private final GogitaiDummyFlag ダミーフラグ;
+    private final GogitaiSeishinkaIshiSonzaiKubun 精神科医師存在区分;
+    private final GogitaiDummyKubun ダミー区分;
 
     /**
      * 引数からメンバを受け取るコンストラクタです。
@@ -47,15 +47,15 @@ public class Gogitai {
      * @param 審査会自動割当定員 審査会自動割当定員
      * @param 審査会委員定員 審査会委員定員
      * @param 合議体割当審査会委員List 合議体割当審査会委員List
-     * @param 精神科医師存在フラグ 精神科医師存在フラグ
-     * @param ダミーフラグ ダミーフラグ
+     * @param 精神科医師存在区分 精神科医師存在区分
+     * @param ダミー区分 ダミー区分
      * @throws NullPointerException
      * 合議体番号、合議体名称、有効期間、開始終了予定時刻、審査会開催場所のいずれかにnullが渡されたとき
      */
     public Gogitai(GogitaiNo 合議体番号, RString 合議体名称, GogitaiYukoKikanKaishiYMD 有効期間開始年月日,
             FlexibleDate 有効期間終了年月日, Range<TimeString> 開始終了予定時刻, ShinsakaiKaisaiBasho 審査会開催場所,
             int 審査会予定定員, int 審査会自動割当定員, int 審査会委員定員, GogitaiWariateIinList 合議体割当審査会委員List,
-            GogitaiSeishinkaIshiSonzaiFlag 精神科医師存在フラグ, GogitaiDummyFlag ダミーフラグ)
+            GogitaiSeishinkaIshiSonzaiKubun 精神科医師存在区分, GogitaiDummyKubun ダミー区分)
             throws NullPointerException, IllegalArgumentException {
         requireNonNull(合議体番号, Messages.E00003.replace("合議体番号", getClass().getName()).getMessage());
         requireNonNull(合議体名称, Messages.E00003.replace("合議体名称", getClass().getName()).getMessage());
@@ -77,8 +77,8 @@ public class Gogitai {
         this.審査会自動割当定員 = 審査会自動割当定員;
         this.審査会委員定員 = 審査会委員定員;
         this.合議体割当審査会委員List = 合議体割当審査会委員List;
-        this.精神科医師存在フラグ = 精神科医師存在フラグ;
-        this.ダミーフラグ = ダミーフラグ;
+        this.精神科医師存在区分 = 精神科医師存在区分;
+        this.ダミー区分 = ダミー区分;
     }
 
     private boolean checkゼロ以下(int... check対象s) {
@@ -185,17 +185,17 @@ public class Gogitai {
      *
      * @return 精神科医師存在
      */
-    public GogitaiSeishinkaIshiSonzaiFlag get精神科医師存在() {
-        return 精神科医師存在フラグ;
+    public GogitaiSeishinkaIshiSonzaiKubun get精神科医師存在() {
+        return 精神科医師存在区分;
     }
 
     /**
      * 合議体がダミーであるか否かを表す要素を返します。
      *
-     * @return 合議体ダミー
+     * @return ダミー区分
      */
-    public GogitaiDummyFlag get合議体ダミー() {
-        return ダミーフラグ;
+    public GogitaiDummyKubun getダミー区分() {
+        return ダミー区分;
     }
 
     /**
@@ -204,7 +204,7 @@ public class Gogitai {
      * @return 精神科医が存在するならtrue
      */
     public boolean has精神科医() {
-        return 精神科医師存在フラグ.is存在();
+        return 精神科医師存在区分.is存在();
     }
 
     /**
@@ -213,6 +213,6 @@ public class Gogitai {
      * @return ダミーならtrue
      */
     public boolean isDummy() {
-        return ダミーフラグ.isDummy();
+        return ダミー区分.isダミー();
     }
 }

@@ -9,7 +9,7 @@ package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
  *
  * @author n8178 城間篤人
  */
-public enum GogitaiSeishinkaIshiSonzaiFlag {
+public enum GogitaiSeishinkaIshiSonzaiKubun {
 
     /**
      * 精神科医が存在していることを表します。
@@ -21,7 +21,7 @@ public enum GogitaiSeishinkaIshiSonzaiFlag {
     不在(false);
     private final boolean 存在フラグ;
 
-    private GogitaiSeishinkaIshiSonzaiFlag(boolean 存在フラグ) {
+    private GogitaiSeishinkaIshiSonzaiKubun(boolean 存在フラグ) {
         this.存在フラグ = 存在フラグ;
     }
 
@@ -40,7 +40,7 @@ public enum GogitaiSeishinkaIshiSonzaiFlag {
      * @param 存在フラグ 存在フラグ
      * @return 対応した合議体精神科医師存在
      */
-    public static GogitaiSeishinkaIshiSonzaiFlag toValue(boolean 存在フラグ) {
+    public static GogitaiSeishinkaIshiSonzaiKubun toValue(boolean 存在フラグ) {
         if (存在フラグ) {
             return 存在;
         }

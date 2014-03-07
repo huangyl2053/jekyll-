@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyFlag;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiFlag;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
@@ -43,8 +43,8 @@ public class GogitaiTest {
         private int 審査会自動割当定員;
         private int 審査会委員定員;
         private GogitaiWariateIinList 合議体割当審査会委員List;
-        private GogitaiSeishinkaIshiSonzaiFlag 精神科医師存在;
-        private GogitaiDummyFlag 合議体ダミー;
+        private GogitaiSeishinkaIshiSonzaiKubun 精神科医師存在;
+        private GogitaiDummyKubun 合議体ダミー;
 
         @Before
         public void setUp() {
@@ -58,8 +58,8 @@ public class GogitaiTest {
             審査会自動割当定員 = 4;
             審査会委員定員 = 6;
             合議体割当審査会委員List = mock(GogitaiWariateIinList.class);
-            精神科医師存在 = GogitaiSeishinkaIshiSonzaiFlag.存在;
-            合議体ダミー = GogitaiDummyFlag.NO;
+            精神科医師存在 = GogitaiSeishinkaIshiSonzaiKubun.存在;
+            合議体ダミー = GogitaiDummyKubun.正規;
         }
 
         @Test

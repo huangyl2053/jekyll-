@@ -17,18 +17,18 @@ import org.junit.runner.RunWith;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class GogitaiDummyFlagTest {
+public class GogitaiDummyKubunTest {
 
     public static class toValueのテスト extends DbeTestBase {
 
         @Test
-        public void 引数にtrueを渡したとき_YESが返る() {
-            assertThat(GogitaiDummyFlag.toValue(true), is(GogitaiDummyFlag.YES));
+        public void 引数にtrueを渡したとき_ダミーが返る() {
+            assertThat(GogitaiDummyKubun.toValue(true), is(GogitaiDummyKubun.ダミー));
         }
 
         @Test
-        public void 引数にfalseを渡したとき_NOが返る() {
-            assertThat(GogitaiDummyFlag.toValue(false), is(GogitaiDummyFlag.NO));
+        public void 引数にfalseを渡したとき_正規が返る() {
+            assertThat(GogitaiDummyKubun.toValue(false), is(GogitaiDummyKubun.正規));
         }
     }
 }

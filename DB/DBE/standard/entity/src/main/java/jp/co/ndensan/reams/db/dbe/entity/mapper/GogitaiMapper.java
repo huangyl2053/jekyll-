@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.db.dbe.business.Gogitai;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiList;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIinList;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyFlag;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiFlag;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
@@ -52,8 +52,8 @@ public final class GogitaiMapper {
                 create開始終了時間(合議体Entity),
                 開催場所, 合議体Entity.getShinsakaiYoteiTeiin(), 合議体Entity.getShinsakaiJidoWariateTeiin(),
                 合議体Entity.getShinsakaiIinTeiin(), 合議体割当委員List,
-                GogitaiSeishinkaIshiSonzaiFlag.toValue(合議体Entity.getGogitaiSeishinkaSonzaiFlag()),
-                GogitaiDummyFlag.toValue(合議体Entity.getGogitaiDummyFlag()));
+                GogitaiSeishinkaIshiSonzaiKubun.toValue(合議体Entity.getGogitaiSeishinkaSonzaiFlag()),
+                GogitaiDummyKubun.toValue(合議体Entity.getGogitaiDummyFlag()));
     }
 
     private static Range<TimeString> create開始終了時間(DbT5103GogitaiJohoEntity 合議体Entity) {
