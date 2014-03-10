@@ -183,7 +183,6 @@ public class KaigoNinteichosainCollectionTest extends TestBase {
                 new ShichosonCode(new RString("0001")),
                 new KaigoJigyoshaNo(new RString(介護事業者番号)),
                 new KaigoNinteichosainNo(new RString(介護調査員番号)),
-                new JigyoshaNo(new RString("0001")),
                 true,
                 new AtenaMeisho(new RString("0001")),
                 new AtenaKanaMeisho(new RString("0001")),

@@ -59,11 +59,6 @@ public class KaigoNinteichosainMapperTest extends TestBase {
         }
 
         @Test
-        public void 認定調査員entityから渡された事業者番号と_Mapping後の認定調査員が返す事業者番号が_同一になる() {
-            assertThat(sut.get事業者番号(), is(事業者番号));
-        }
-
-        @Test
         public void 認定調査員entityから渡された調査員状況と_Mapping後の認定調査員が返す調査員状況が_同一になる() {
             assertThat(sut.is調査員状況(), is(調査員状況));
         }
@@ -145,7 +140,7 @@ public class KaigoNinteichosainMapperTest extends TestBase {
 
         @Test
         public void 渡された認定調査員クラスの事業者番号と_認定調査員エンティティの事業者番号が_同一になる() {
-            assertThat(sut.getJigyoshaNo(), is(事業者番号));
+            assertThat(sut.getJigyoshaNo().getColumnValue(), is(事業者番号.getColumnValue()));
         }
 
         @Test

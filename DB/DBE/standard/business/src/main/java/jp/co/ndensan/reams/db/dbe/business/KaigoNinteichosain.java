@@ -5,7 +5,6 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
@@ -29,7 +28,6 @@ public class KaigoNinteichosain {
     private final ShichosonCode 市町村コード;
     private final KaigoJigyoshaNo 介護事業者番号;
     private final KaigoNinteichosainNo 介護調査員番号;
-    private final JigyoshaNo 事業者番号;
     private final boolean 調査員状況;
     private final AtenaMeisho 調査員氏名;
     private final AtenaKanaMeisho 調査員氏名カナ;
@@ -48,7 +46,6 @@ public class KaigoNinteichosain {
      * @param 市町村コード 市町村コード
      * @param 介護事業者番号 介護事業者番号
      * @param 介護調査員番号 介護調査員番号
-     * @param 事業者番号 事業者番号
      * @param 調査員状況 調査員状況
      * @param 調査員氏名 調査員氏名
      * @param 調査員氏名カナ 調査員氏名カナ
@@ -64,7 +61,6 @@ public class KaigoNinteichosain {
     public KaigoNinteichosain(ShichosonCode 市町村コード,
             KaigoJigyoshaNo 介護事業者番号,
             KaigoNinteichosainNo 介護調査員番号,
-            JigyoshaNo 事業者番号,
             boolean 調査員状況,
             AtenaMeisho 調査員氏名,
             AtenaKanaMeisho 調査員氏名カナ,
@@ -79,7 +75,6 @@ public class KaigoNinteichosain {
         this.市町村コード = requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
         this.介護事業者番号 = requireNonNull(介護事業者番号, Messages.E00001.replace("介護事業者番号").getMessage());
         this.介護調査員番号 = requireNonNull(介護調査員番号, Messages.E00001.replace("介護調査員番号").getMessage());
-        this.事業者番号 = requireNonNull(事業者番号, Messages.E00001.replace("事業者番号").getMessage());
         this.調査員状況 = 調査員状況;
         this.調査員氏名 = requireNonNull(調査員氏名, Messages.E00001.replace("調査員氏名").getMessage());
         this.調査員氏名カナ = requireNonNull(調査員氏名カナ, Messages.E00001.replace("調査員氏名カナ").getMessage());
@@ -117,15 +112,6 @@ public class KaigoNinteichosain {
      */
     public KaigoNinteichosainNo get介護調査員番号() {
         return 介護調査員番号;
-    }
-
-    /**
-     * 事業者番号を返します。
-     *
-     * @return 事業者番号
-     */
-    public JigyoshaNo get事業者番号() {
-        return 事業者番号;
     }
 
     /**

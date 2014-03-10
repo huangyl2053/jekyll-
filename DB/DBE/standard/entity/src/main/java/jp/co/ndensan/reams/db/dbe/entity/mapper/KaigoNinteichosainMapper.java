@@ -42,7 +42,6 @@ public final class KaigoNinteichosainMapper {
                 chosainJohoEntity.getShichosonCode(),
                 chosainJohoEntity.getKaigoJigyoshaNo(),
                 new KaigoNinteichosainNo(chosainJohoEntity.getKaigoChosainNo()),
-                chosainJohoEntity.getJigyoshaNo(),
                 chosainJohoEntity.getKaigoChosainJokyo(),
                 chosainJohoEntity.getChosainShimei(),
                 chosainJohoEntity.getChosainKanaShimei(),
@@ -68,7 +67,7 @@ public final class KaigoNinteichosainMapper {
         entity.setShichosonCode(介護認定調査員.get市町村コード());
         entity.setKaigoJigyoshaNo(介護認定調査員.get介護事業者番号());
         entity.setKaigoChosainNo(介護認定調査員.get介護調査員番号().value());
-        entity.setJigyoshaNo(介護認定調査員.get事業者番号());
+        entity.setJigyoshaNo(介護認定調査員.get認定調査委託先().getJigyoshaNo());
         entity.setKaigoChosainJokyo(介護認定調査員.is調査員状況());
         entity.setChosainShimei(介護認定調査員.get調査員氏名());
         entity.setChosainKanaShimei(介護認定調査員.get調査員氏名カナ());
