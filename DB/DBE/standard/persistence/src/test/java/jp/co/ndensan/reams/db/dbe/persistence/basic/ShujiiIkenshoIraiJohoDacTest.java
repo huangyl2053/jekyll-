@@ -5,7 +5,10 @@
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import java.util.Collections;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5011ShujiiIkenshoIraiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -45,17 +48,17 @@ public class ShujiiIkenshoIraiJohoDacTest extends TestDacBase {
 
         @Override
         public void setUp() {
-            setUpEntity();
+            initializeEntityData();
         }
 
         @Test
         public void 該当の主治医意見書作成依頼情報が存在しない時_selectは_NULLを返す() {
-            assertThat(sut.select(createKanriNo("SKN9999999"), 99), nullValue());
+            assertThat(sut.select(createKanriNo("SKN9999999"), createIkenshosakuseiIraiRirekiNo(99)), nullValue());
         }
 
         @Test
         public void 該当の主治医意見書作成依頼情報が存在する時_selectは_該当の情報を返す() {
-            assertThat(sut.select(createKanriNo("SKN0000002"), 1).getShinseishoKanriNo(), is(createKanriNo("SKN0000002")));
+            assertThat(sut.select(createKanriNo("SKN0000002"), createIkenshosakuseiIraiRirekiNo(1)).getShinseishoKanriNo(), is(createKanriNo("SKN0000002")));
         }
     }
 
@@ -67,7 +70,7 @@ public class ShujiiIkenshoIraiJohoDacTest extends TestDacBase {
 
         @Override
         public void setUp() {
-            setUpEntity();
+            initializeEntityData();
         }
 
         @Test
@@ -94,7 +97,7 @@ public class ShujiiIkenshoIraiJohoDacTest extends TestDacBase {
 
         @Override
         public void setUp() {
-            setUpEntity();
+            initializeEntityData();
         }
 
         @Test
@@ -121,22 +124,22 @@ public class ShujiiIkenshoIraiJohoDacTest extends TestDacBase {
 
         @Override
         public void setUp() {
-            setUpEntity();
+            initializeEntityData();
         }
 
         @Test
         public void 該当の主治医意見書作成依頼情報が0件の時_selectBy主治医情報は_EMPTYを返す() {
-            assertThat(sut.selectBy主治医情報(new RString("SIKC999999"), new RString("ISN99999")), is(Collections.EMPTY_LIST));
+            assertThat(sut.selectBy主治医情報(createKaigoIryoKikanCode("SIKC999999"), createKaigoDoctorCode("ISN99999")), is(Collections.EMPTY_LIST));
         }
 
         @Test
         public void 該当の主治医意見書作成依頼情報が1件の時_selectBy主治医情報は_1件の情報を返す() {
-            assertThat(sut.selectBy主治医情報(new RString("SIKC000011"), new RString("ISN01101")).size(), is(1));
+            assertThat(sut.selectBy主治医情報(createKaigoIryoKikanCode("SIKC000011"), createKaigoDoctorCode("ISN01101")).size(), is(1));
         }
 
         @Test
         public void 該当の主治医意見書作成依頼情報が2件の時_selectBy主治医情報は_2件の情報を返す() {
-            assertThat(sut.selectBy主治医情報(new RString("SIKC000022"), new RString("ISN02202")).size(), is(2));
+            assertThat(sut.selectBy主治医情報(createKaigoIryoKikanCode("SIKC000022"), createKaigoDoctorCode("ISN02202")).size(), is(2));
         }
     }
 
@@ -148,7 +151,7 @@ public class ShujiiIkenshoIraiJohoDacTest extends TestDacBase {
 
         @Override
         public void setUp() {
-            setUpEntity();
+            initializeEntityData();
         }
 
         @Test
@@ -175,19 +178,19 @@ public class ShujiiIkenshoIraiJohoDacTest extends TestDacBase {
 
         @Override
         public void setUp() {
-            setUpEntity();
+            initializeEntityData();
         }
 
         @Test
         public void 指定した主治医意見書作成依頼情報が存在しない時_insertOrUpdateは_指定した情報を追加する() {
             sut.insertOrUpdate(createEntity("SKN0000003", 3, "20140303", "SIKC000033", "ISN03303", "20140606"));
-            assertThat(sut.select(createKanriNo("SKN0000003"), 3).getShinseishoKanriNo(), is(createKanriNo("SKN0000003")));
+            assertThat(sut.select(createKanriNo("SKN0000003"), createIkenshosakuseiIraiRirekiNo(3)).getShinseishoKanriNo(), is(createKanriNo("SKN0000003")));
         }
 
         @Test
         public void 指定した主治医意見書作成依頼情報が存在する時_insertOrUpdateは_該当の情報を更新する() {
             sut.insertOrUpdate(createEntity("SKN0000001", 0, "20140101", "SIKC000011", "ISN01101", "20141231"));
-            assertThat(sut.select(createKanriNo("SKN0000001"), 0).getIkenshoSakuseiTokusokuYMD(), is(new FlexibleDate("20141231")));
+            assertThat(sut.select(createKanriNo("SKN0000001"), createIkenshosakuseiIraiRirekiNo(0)).getIkenshoSakuseiTokusokuYMD(), is(new FlexibleDate("20141231")));
         }
     }
 
@@ -199,7 +202,7 @@ public class ShujiiIkenshoIraiJohoDacTest extends TestDacBase {
 
         @Override
         public void setUp() {
-            setUpEntity();
+            initializeEntityData();
         }
 
         @Test
@@ -210,7 +213,7 @@ public class ShujiiIkenshoIraiJohoDacTest extends TestDacBase {
         @Test
         public void 指定した主治医意見書作成依頼情報が存在しない時_insertは_指定した情報を追加する() {
             sut.insert(createEntity("SKN0000003", 3, "20140303", "SIKC000033", "ISN03303", "20140606"));
-            assertThat(sut.select(createKanriNo("SKN0000003"), 3).getShinseishoKanriNo(), is(createKanriNo("SKN0000003")));
+            assertThat(sut.select(createKanriNo("SKN0000003"), createIkenshosakuseiIraiRirekiNo(3)).getShinseishoKanriNo(), is(createKanriNo("SKN0000003")));
         }
 
         @Test(expected = SystemException.class)
@@ -227,7 +230,7 @@ public class ShujiiIkenshoIraiJohoDacTest extends TestDacBase {
 
         @Override
         public void setUp() {
-            setUpEntity();
+            initializeEntityData();
         }
 
         @Test
@@ -238,7 +241,7 @@ public class ShujiiIkenshoIraiJohoDacTest extends TestDacBase {
         @Test
         public void 指定した主治医意見書作成依頼情報が存在する時_updateは_該当の情報を更新する() {
             sut.update(createEntity("SKN0000001", 0, "20140101", "SIKC000011", "ISN01101", "20141231"));
-            assertThat(sut.select(createKanriNo("SKN0000001"), 0).getIkenshoSakuseiTokusokuYMD(), is(new FlexibleDate("20141231")));
+            assertThat(sut.select(createKanriNo("SKN0000001"), createIkenshosakuseiIraiRirekiNo(0)).getIkenshoSakuseiTokusokuYMD(), is(new FlexibleDate("20141231")));
         }
 
         @Test(expected = _SQLOptimisticLockFaildException.class)
@@ -255,7 +258,7 @@ public class ShujiiIkenshoIraiJohoDacTest extends TestDacBase {
 
         @Override
         public void setUp() {
-            setUpEntity();
+            initializeEntityData();
         }
 
         @Test
@@ -266,7 +269,7 @@ public class ShujiiIkenshoIraiJohoDacTest extends TestDacBase {
         @Test
         public void 指定した主治医意見書作成依頼情報が存在する時_deleteは_該当の情報を削除する() {
             sut.delete(createEntity("SKN0000001", 0, "20140101", "SIKC000011", "ISN01101", "20140404"));
-            assertThat(sut.select(createKanriNo("SKN0000001"), 0), nullValue());
+            assertThat(sut.select(createKanriNo("SKN0000001"), createIkenshosakuseiIraiRirekiNo(0)), nullValue());
         }
 
         @Test(expected = _SQLOptimisticLockFaildException.class)
@@ -275,7 +278,7 @@ public class ShujiiIkenshoIraiJohoDacTest extends TestDacBase {
         }
     }
 
-    private static void setUpEntity() {
+    private static void initializeEntityData() {
         sut.insert(createEntity("SKN0000001", 0, "20140101", "SIKC000011", "ISN01101", "20140404"));
         sut.insert(createEntity("SKN0000002", 0, "20140202", "SIKC000022", "ISN02202", "20140505"));
         sut.insert(createEntity("SKN0000002", 1, "20140202", "SIKC000022", "ISN02202", "20140505"));
@@ -304,5 +307,17 @@ public class ShujiiIkenshoIraiJohoDacTest extends TestDacBase {
 
     private static ShinseishoKanriNo createKanriNo(String no) {
         return new ShinseishoKanriNo(new RString(no));
+    }
+
+    private static IkenshosakuseiIraiRirekiNo createIkenshosakuseiIraiRirekiNo(int no) {
+        return new IkenshosakuseiIraiRirekiNo(no);
+    }
+
+    private static KaigoIryoKikanCode createKaigoIryoKikanCode(String code) {
+        return new KaigoIryoKikanCode(new RString(code));
+    }
+
+    private static KaigoDoctorCode createKaigoDoctorCode(String code) {
+        return new KaigoDoctorCode(new RString(code));
     }
 }

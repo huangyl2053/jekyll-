@@ -63,7 +63,7 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
      * @return 主治医意見書作成依頼情報
      */
     public ShujiiIkenshoSakuseiIrai get主治医意見書作成依頼情報(ShinseishoKanriNo 申請書管理番号, IkenshosakuseiIraiRirekiNo 意見書作成依頼履歴番号) {
-        return getShujiiIkenshoSakuseiIrai(iraiDac.select(申請書管理番号, 意見書作成依頼履歴番号.value().intValue()));
+        return getShujiiIkenshoSakuseiIrai(iraiDac.select(申請書管理番号, 意見書作成依頼履歴番号));
     }
 
     /**
@@ -94,7 +94,7 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
      * @return 主治医意見書作成依頼情報
      */
     public List<ShujiiIkenshoSakuseiIrai> get主治医意見書作成依頼情報By主治医情報(KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード) {
-        return getShujiiIkenshoSakuseiIraiList(iraiDac.selectBy主治医情報(介護医療機関コード.getValue(), 介護医師コード.value()));
+        return getShujiiIkenshoSakuseiIraiList(iraiDac.selectBy主治医情報(介護医療機関コード, 介護医師コード));
     }
 
     /**

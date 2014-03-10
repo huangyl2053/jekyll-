@@ -177,10 +177,10 @@ public class ShujiiIkenshoSakuseiIraiKirokuManagerTest {
 
     private static IShujiiIkenshoIraiJohoDac createIraiDac(int flg) {
         IShujiiIkenshoIraiJohoDac dac = mock(IShujiiIkenshoIraiJohoDac.class);
-        when(dac.select(any(ShinseishoKanriNo.class), any(int.class))).thenReturn(createIraiEntity(flg));
+        when(dac.select(any(ShinseishoKanriNo.class), any(IkenshosakuseiIraiRirekiNo.class))).thenReturn(createIraiEntity(flg));
         when(dac.selectBy申請書管理番号(any(ShinseishoKanriNo.class))).thenReturn(createIraiEntityList(flg));
         when(dac.selectBy依頼年月日(any(FlexibleDate.class))).thenReturn(createIraiEntityList(flg));
-        when(dac.selectBy主治医情報(any(RString.class), any(RString.class))).thenReturn(createIraiEntityList(flg));
+        when(dac.selectBy主治医情報(any(KaigoIryoKikanCode.class), any(KaigoDoctorCode.class))).thenReturn(createIraiEntityList(flg));
         when(dac.selectBy督促年月日(any(FlexibleDate.class))).thenReturn(createIraiEntityList(flg));
         when(dac.insertOrUpdate(any(DbT5011ShujiiIkenshoIraiJohoEntity.class))).thenReturn(flg);
         when(dac.insert(any(DbT5011ShujiiIkenshoIraiJohoEntity.class))).thenReturn(flg);

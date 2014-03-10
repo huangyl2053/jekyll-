@@ -5,12 +5,14 @@
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5011ShujiiIkenshoIraiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
 import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
@@ -29,7 +31,7 @@ public interface IShujiiIkenshoIraiJohoDac
      * @return 主治医意見書作成依頼情報エンティティ
      */
     @Transaction
-    DbT5011ShujiiIkenshoIraiJohoEntity select(ShinseishoKanriNo 申請書管理番号, int 意見書作成依頼履歴番号);
+    DbT5011ShujiiIkenshoIraiJohoEntity select(ShinseishoKanriNo 申請書管理番号, IkenshosakuseiIraiRirekiNo 意見書作成依頼履歴番号);
 
     /**
      * 引数の条件に該当する主治医意見書作成依頼情報エンティティを取得します。
@@ -57,7 +59,7 @@ public interface IShujiiIkenshoIraiJohoDac
      * @return 主治医意見書作成依頼情報エンティティ
      */
     @Transaction
-    List<DbT5011ShujiiIkenshoIraiJohoEntity> selectBy主治医情報(RString 介護医療機関コード, RString 介護医師コード);
+    List<DbT5011ShujiiIkenshoIraiJohoEntity> selectBy主治医情報(KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード);
 
     /**
      * 引数の条件に該当する主治医意見書作成依頼情報エンティティを取得します。

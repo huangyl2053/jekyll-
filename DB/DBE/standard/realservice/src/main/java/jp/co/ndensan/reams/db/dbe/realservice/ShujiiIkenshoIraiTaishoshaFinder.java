@@ -10,6 +10,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoIraiTaishosha;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5011ShujiiIkenshoIraiJohoEntity;
@@ -157,7 +158,7 @@ public class ShujiiIkenshoIraiTaishoshaFinder {
     private DbT5011ShujiiIkenshoIraiJohoEntity create主治医意見書作成依頼情報Entity(DbT5001NinteiShinseiJohoEntity 認定申請情報Entity) {
         return shujiiIkenshoIraiJohoDac.select(
                 認定申請情報Entity.getShinseishoKanriNo(),
-                認定申請情報Entity.getIkenshoIraiRirekiNo());
+                new IkenshosakuseiIraiRirekiNo(認定申請情報Entity.getIkenshoIraiRirekiNo()));
     }
 
     private DbT7012ShujiiJohoEntity create主治医情報Entity(DbT5001NinteiShinseiJohoEntity 認定申請情報Entity,
