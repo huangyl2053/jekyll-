@@ -16,14 +16,14 @@ import jp.co.ndensan.reams.db.dba.definition.valueobject.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dba.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.HokenShubetsu;
-import jp.co.ndensan.reams.ur.urf.business.IKaigoShikaku;
-import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.JushochiTokureishaKubun;
-import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.ShikakuHihokenshaKubun;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.HokenShubetsu;
+import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ShikakuHihokenshaKubun;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.ur.urz.business.KaigoShikakuFactory;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -86,7 +86,7 @@ public final class HihokenshaMapper {
         ShikakuHihokenshaKubun 資格被保険者区分 = toShiakuHihokenshaKubun(to被保険者区分(entity.getHihokenshaKubunCode()));
         JushochiTokureishaKubun 住所地特例者区分 = toJushochiTokureishaKubun(entity.isJushochitokureisha());
 
-        IShikibetsuCode 識別コード = entity.getShikibetsuCode();
+        ShikibetsuCode 識別コード = entity.getShikibetsuCode();
         IKaigoShikaku 介護保険資格 = KaigoShikakuFactory.createInstance(
                 識別コード, HokenShubetsu.介護保険,
                 entity.getShikakuShutokuTodokedeDate(), entity.getShikakuShutokuDate(),

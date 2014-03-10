@@ -4,8 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dba.realservice.helper;
 
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.*;
 
@@ -20,12 +19,12 @@ public class ShikibetsuCodeMock {
     private ShikibetsuCodeMock() {
     }
 
-    public static IShikibetsuCode getSpiedInstance() {
-        IShikibetsuCode 識別コード = new _ShikibetsuCode(new RString("識別コード"));
+    public static ShikibetsuCode getSpiedInstance() {
+        ShikibetsuCode 識別コード = new ShikibetsuCode(new RString("識別コード"));
         return spy(識別コード);
     }
 
-    public static IShikibetsuCode createInstance(RString code) {
-        return new _ShikibetsuCode(code);
+    public static ShikibetsuCode createInstance(RString code) {
+        return new ShikibetsuCode(code);
     }
 }

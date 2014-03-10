@@ -4,10 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.realservice.helper;
 
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -42,7 +43,7 @@ public class DbT5001NinteiShinseiJohoEntityMock {
         entity.setShikibetsuCode(new ShikibetsuCode(new RString("123456")));
         entity.setNinteiShinseiYMD(FlexibleDate.MIN);
         entity.setNinteiShinseiEdabanCode(new EdabanCode(new RString("01")));
-        entity.setNinteiShinseiShinseijiKubunCode(new Code(new RString("認定申請区分（申請時）コード")));
+        entity.setNinteiShinseiShinseijiKubunCode(NinteiShinseiKubunShinsei.新規申請);
         entity.setNinteiShinseiHoreiKubunCode(new Code(new RString("認定申請区分（法令）コード")));
         entity.setNinteiShinseiYukoKubunCode(new Code(new RString("認定申請有効区分")));
         entity.setShienShinseiKubun(new RString("要介護申請・要支援申請の区分"));

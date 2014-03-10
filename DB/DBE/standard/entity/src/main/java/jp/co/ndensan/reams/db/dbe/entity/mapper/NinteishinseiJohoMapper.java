@@ -47,16 +47,16 @@ public final class NinteishinseiJohoMapper {
                 entity.getShinseiRiyu(),
                 entity.getZenYokaigoKubunCode(),
                 entity.getZenYukoKikan(),
-                entity.getJohoteikyoDouiUmuKubun(),
+                entity.isJohoteikyoDouiUmuKubun(),
                 entity.getNinteichosaIraiRirekiNo(),
                 entity.getIkenshoIraiRirekiNo(),
                 new Code(entity.getMinashiCode()),
-                entity.getEnkitsuchiDoiUmuKubun(),
-                entity.getShisetsuNyushoUmuKubun(),
+                entity.isEnkitsuchiDoiUmuKubun(),
+                entity.isShisetsuNyushoUmuKubun(),
                 entity.getSichosonRenrakuJiko(),
                 new NinteiShinseiTorisage(TorisageKubun.toValue(entity.getTorisageKubunCode()),
-                entity.getTorisageRiyu(), entity.getTorisageYMD().toRDate(),
-                ShinsaKeizokuKubun.toValue(entity.getShinsaKeizokuKubun())));
+                entity.getTorisageRiyu(), entity.getTorisageYMD(),
+                ShinsaKeizokuKubun.toValue(entity.isShinsaKeizokuKubun())));
     }
 
     /**
@@ -91,7 +91,7 @@ public final class NinteishinseiJohoMapper {
         更新済みEntity.setSichosonRenrakuJiko(認定申請情報.get市町村連絡事項());
         更新済みEntity.setTorisageKubunCode(認定申請情報.get認定申請取下げ().get取下げ区分().get取下げ区分コード());
         更新済みEntity.setTorisageRiyu(認定申請情報.get認定申請取下げ().get取下げ理由());
-        更新済みEntity.setTorisageYMD(認定申請情報.get認定申請取下げ().get取下げ年月日().toFlexibleDate());
+        更新済みEntity.setTorisageYMD(認定申請情報.get認定申請取下げ().get取下げ年月日());
         更新済みEntity.setShinsaKeizokuKubun(認定申請情報.get認定申請取下げ().get申請継続区分().is継続());
         return 更新済みEntity;
     }

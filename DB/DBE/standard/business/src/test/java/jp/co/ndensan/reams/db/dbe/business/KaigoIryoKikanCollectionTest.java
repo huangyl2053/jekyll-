@@ -9,10 +9,10 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikan;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
@@ -88,7 +88,7 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
         public void 両方に対応しているものが存在するとき_対応した介護医療機関が返る() {
             市町村コード = new ShichosonCode(new RString("1234"));
             介護医療機関コード = new KaigoIryoKikanCode(new RString("5678"));
-            assertThat(sut.get介護医療機関(市町村コード, 介護医療機関コード).get識別コード().getValue(), is(new RString("0001")));
+            assertThat(sut.get介護医療機関(市町村コード, 介護医療機関コード).get識別コード().getColumnValue(), is(new RString("0001")));
         }
 
         private KaigoIryoKikan create介護医療機関(String 識別コード, String 市町村コード, String 介護医療機関コード) {
@@ -97,7 +97,7 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
             when(主治医医療機関.get介護医療機関コード()).thenReturn(create介護医療機関コード(介護医療機関コード));
 
             IIryoKikan 医療機関 = mock(KaigoIryoKikan.class);
-            when(医療機関.get識別コード()).thenReturn(new _ShikibetsuCode(new RString(識別コード)));
+            when(医療機関.get識別コード()).thenReturn(new ShikibetsuCode(new RString(識別コード)));
 
             return new KaigoIryoKikan(医療機関, 主治医医療機関);
         }
@@ -196,9 +196,8 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
             when(主治医医療機関.get市町村コード()).thenReturn(create市町村コード(市町村コード));
             when(主治医医療機関.get介護医療機関コード()).thenReturn(create介護医療機関コード(介護医療機関コード));
 
-
             IIryoKikan 医療機関 = mock(KaigoIryoKikan.class);
-            when(医療機関.get識別コード()).thenReturn(new _ShikibetsuCode(new RString(識別コード)));
+            when(医療機関.get識別コード()).thenReturn(new ShikibetsuCode(new RString(識別コード)));
 
             return new KaigoIryoKikan(医療機関, 主治医医療機関);
         }
@@ -267,7 +266,7 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
             when(主治医医療機関.get介護医療機関コード()).thenReturn(create介護医療機関コード(介護医療機関コード));
 
             IIryoKikan 医療機関 = mock(KaigoIryoKikan.class);
-            when(医療機関.get識別コード()).thenReturn(new _ShikibetsuCode(new RString(識別コード)));
+            when(医療機関.get識別コード()).thenReturn(new ShikibetsuCode(new RString(識別コード)));
 
             return new KaigoIryoKikan(医療機関, 主治医医療機関);
         }

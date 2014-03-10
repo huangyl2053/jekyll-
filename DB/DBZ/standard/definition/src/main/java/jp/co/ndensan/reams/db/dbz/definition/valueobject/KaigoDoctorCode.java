@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.valueobject;
+package jp.co.ndensan.reams.db.dbz.definition.valueobject;
 
 import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

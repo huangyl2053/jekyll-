@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.relate;
 
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJohoEntity;
-import jp.co.ndensan.reams.ur.urz.entity.DoctorEntity;
+import jp.co.ndensan.reams.ur.urz.entity.basic.UrT0517IshiEntity;
 
 /**
  * 介護医師のエンティティクラスです。
@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.ur.urz.entity.DoctorEntity;
 public class KaigoDoctorEntity {
 
     private DbT7012ShujiiJohoEntity dbT7012ShujiiJohoEntity = null;
-    private DoctorEntity doctorEntity = null;
+    private UrT0517IshiEntity doctorEntity = null;
 
     /**
      * インスタンスを生成します。
@@ -46,7 +46,7 @@ public class KaigoDoctorEntity {
      *
      * @return 医師情報エンティティ
      */
-    public DoctorEntity getDoctorEntity() {
+    public UrT0517IshiEntity getDoctorEntity() {
         return doctorEntity;
     }
 
@@ -55,7 +55,7 @@ public class KaigoDoctorEntity {
      *
      * @param entity 医師情報エンティティ
      */
-    public void setDoctorEntity(DoctorEntity entity) {
+    public void setDoctorEntity(UrT0517IshiEntity entity) {
         this.doctorEntity = entity;
     }
 }

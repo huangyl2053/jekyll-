@@ -8,12 +8,14 @@ import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisage;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.spy;
@@ -45,7 +47,7 @@ public class NinteiShinseiJohoMock {
                 new ShikibetsuCode(new RString("123456")),
                 RDate.MIN,
                 new EdabanCode(new RString("01")),
-                new Code(new RString("認定申請区分_申請時")),
+                NinteiShinseiKubunShinsei.新規申請,
                 new Code(new RString("認定申請区分_法令")),
                 new Code(new RString("認定申請有効区分")),
                 new Code(new RString("要支援申請区分")),
@@ -59,6 +61,6 @@ public class NinteiShinseiJohoMock {
                 false,
                 true,
                 new RString("市町村連絡事項"),
-                new NinteiShinseiTorisage(TorisageKubun.取下げ, new RString("取下げ理由"), RDate.MAX, ShinsaKeizokuKubun.継続する)));
+                new NinteiShinseiTorisage(TorisageKubun.取下げ, new RString("取下げ理由"), FlexibleDate.MAX, ShinsaKeizokuKubun.継続する)));
     }
 }

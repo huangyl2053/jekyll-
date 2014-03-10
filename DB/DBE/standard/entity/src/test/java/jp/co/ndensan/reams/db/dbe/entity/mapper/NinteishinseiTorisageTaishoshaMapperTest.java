@@ -8,11 +8,12 @@ import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisage;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisageTaishosha;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiShinseiDate;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
@@ -37,7 +38,7 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
         private ShichosonCode 市町村Code;
         private KaigoHihokenshaNo 被保険者No;
         private FlexibleDate 認定申請年月日;
-        private RString 認定申請区分コード_申請時;
+        private NinteiShinseiKubunShinsei 認定申請区分コード_申請時;
         private TorisageKubun 取下げ区分;
         private RString 取下げ理由;
         private FlexibleDate 取下げ年月日;
@@ -50,7 +51,7 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
             市町村Code = new ShichosonCode(new RString("A012"));
             被保険者No = new KaigoHihokenshaNo(new RString("DB0001"));
             認定申請年月日 = new FlexibleDate(new RString("20120101"));
-            認定申請区分コード_申請時 = new RString("0001");
+            認定申請区分コード_申請時 = NinteiShinseiKubunShinsei.新規申請;
             取下げ区分 = TorisageKubun.区分変更却下;
             取下げ理由 = new RString("とりさげ");
             取下げ年月日 = new FlexibleDate(new RString("20120101"));
@@ -77,12 +78,12 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
 
         @Test
         public void get認定申請区分コード_申請時の結果が_Entityの認定申請区分コード_申請時と同一になる() {
-            assertThat(sut.get認定申請区分コード_申請時().getColumnValue(), is(認定申請区分コード_申請時));
+            assertThat(sut.get認定申請区分コード_申請時(), is(認定申請区分コード_申請時));
         }
 
         @Test
         public void get認定申請年月日の結果が_Entityの認定申請年月日と同一になる() {
-            assertThat(sut.get認定申請年月日().toFlexibleDate(), is(認定申請年月日));
+            assertThat(sut.get認定申請年月日(), is(認定申請年月日));
         }
 
         @Test
@@ -97,7 +98,7 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
 
         @Test
         public void 認定取下げ情報のget取下げ年月日が_Entityの取下げ年月日と同一になる() {
-            assertThat(sut.get認定申請取下げ().get取下げ年月日().toFlexibleDate(), is(取下げ年月日));
+            assertThat(sut.get認定申請取下げ().get取下げ年月日(), is(取下げ年月日));
         }
 
         @Test
@@ -111,7 +112,7 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
             entity.setShichosonCode(市町村Code);
             entity.setHihokenshaNo(被保険者No);
             entity.setNinteiShinseiYMD(認定申請年月日);
-            entity.setNinteiShinseiShinseijiKubunCode(new Code(認定申請区分コード_申請時));
+            entity.setNinteiShinseiShinseijiKubunCode(認定申請区分コード_申請時);
             entity.setTorisageKubunCode(取下げ区分.get取下げ区分コード());
             entity.setTorisageRiyu(取下げ理由);
             entity.setTorisageYMD(取下げ年月日);
@@ -154,7 +155,7 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
 
         @Test
         public void 認定申請情報Entityの審査継続区分が_認定申請取下げの審査継続区分と同一になる() {
-            assertThat(sut.getShinsaKeizokuKubun(), is(審査継続区分.is継続()));
+            assertThat(sut.isShinsaKeizokuKubun(), is(審査継続区分.is継続()));
         }
 
         private DbT5001NinteiShinseiJohoEntity createMockEntity() {
@@ -162,7 +163,7 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
         }
 
         private NinteiShinseiTorisage create認定申請取下げ() {
-            return new NinteiShinseiTorisage(取下げ区分, 取下げ理由, 取下げ年月日.toRDate(), 審査継続区分);
+            return new NinteiShinseiTorisage(取下げ区分, 取下げ理由, 取下げ年月日, 審査継続区分);
         }
     }
 }

@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoChikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
@@ -21,22 +23,20 @@ public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5104ShinsakaiKaisaiBashoJoho");
-    private RString insertDantaiCd = RString.EMPTY;
+    private RString insertDantaiCd;
     private RDateTime insertTimestamp;
-    private RString insertReamsLoginId = RString.EMPTY;
+    private RString insertReamsLoginId;
     private UUID insertContextId;
     private boolean isDeleted = false;
     private int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
-    private RString lastUpdateReamsLoginId = RString.EMPTY;
+    private RString lastUpdateReamsLoginId;
     @PrimaryKey
-//    private ShinsakaiKaisaiBashoCode shinsakaiKaisaiBashoCode;
-    private RString shinsakaiKaisaiBashoCode;
+    private ShinsakaiKaisaiBashoCode shinsakaiKaisaiBashoCode;
     private RString shinsakaiKaisaiBashoMei;
-//    private ShinsakaiKaisaiBashoChikuCode shinsakaiKaisaiChikuCode
-    private RString shinsakaiKaisaiChikuCode;
-    private RString shinsakaiKaisaiBashoJusho;
-    private RString shinsakaiKaisaiBashoTelNo;
+    private ShinsakaiKaisaiBashoChikuCode shinsakaiKaisaiChikuCode;
+    private AtenaJusho shinsakaiKaisaiBashoJusho;
+    private TelNo shinsakaiKaisaiBashoTelNo;
     private boolean shinsakaiKaisaiBashoJokyo;
 
     /**
@@ -89,8 +89,8 @@ public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
      *
      * @return shinsakaiKaisaiBashoCode
      */
-//    public ShinsakaiKaisaiBashoCode getShinsakaiKaisaiBashoCode() {
-    public RString getShinsakaiKaisaiBashoCode() {
+    public ShinsakaiKaisaiBashoCode getShinsakaiKaisaiBashoCode() {
+//    public RString getShinsakaiKaisaiBashoCode() {
         return shinsakaiKaisaiBashoCode;
     }
 
@@ -99,8 +99,8 @@ public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
      *
      * @param shinsakaiKaisaiBashoCode shinsakaiKaisaiBashoCode
      */
-//    public void setShinsakaiKaisaiBashoCode(ShinsakaiKaisaiBashoCode shinsakaiKaisaiBashoCode) {
-    public void setShinsakaiKaisaiBashoCode(RString shinsakaiKaisaiBashoCode) {
+    public void setShinsakaiKaisaiBashoCode(ShinsakaiKaisaiBashoCode shinsakaiKaisaiBashoCode) {
+//    public void setShinsakaiKaisaiBashoCode(RString shinsakaiKaisaiBashoCode) {
         this.shinsakaiKaisaiBashoCode = shinsakaiKaisaiBashoCode;
     }
 
@@ -127,8 +127,8 @@ public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
      *
      * @return shinsakaiKaisaiChikuCode
      */
-//    public ShinsakaiKaisaiBashoChikuCode getShinsakaiKaisaiChikuCode() {
-    public RString getShinsakaiKaisaiChikuCode() {
+    public ShinsakaiKaisaiBashoChikuCode getShinsakaiKaisaiChikuCode() {
+//    public RString getShinsakaiKaisaiChikuCode() {
         return shinsakaiKaisaiChikuCode;
     }
 
@@ -137,11 +137,11 @@ public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
      *
      * @param shinsakaiKaisaiChikuCode shinsakaiKaisaiChikuCode
      */
-//    public void setShinsakaiKaisaiChikuCode(ShinsakaiKaisaiBashoChikuCode shinsakaiKaisaiChikuCode) {
-    public void setShinsakaiKaisaiChikuCode(RString shinsakaiKaisaiChikuCode) {
+    public void setShinsakaiKaisaiChikuCode(ShinsakaiKaisaiBashoChikuCode shinsakaiKaisaiChikuCode) {
+//    public void setShinsakaiKaisaiChikuCode(RString shinsakaiKaisaiChikuCode) {
         this.shinsakaiKaisaiChikuCode = shinsakaiKaisaiChikuCode;
     }
-
+//TODO n1013 コードマスタの使用方法が固まってからテストを行う
 //    public RString getShinsakaiKaisaiChikuCodeMeisho() {
 //        return CodeMaster.getCodeMeisho(new RString("DB"), new RString("100"), shinsakaiKaisaiChikuCode.getColumnValue());
 //    }
@@ -149,12 +149,13 @@ public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
 //    public RString getShinsakaiKaisaiChikuCodeRyakusho() {
 //        return CodeMaster.getCodeRyakusho(new RString("DB"), new RString("100"), shinsakaiKaisaiChikuCode.getColumnValue());
 //    }
+
     /**
      * getShinsakaiKaisaiBashoJusho
      *
      * @return shinsakaiKaisaiBashoJusho
      */
-    public RString getShinsakaiKaisaiBashoJusho() {
+    public AtenaJusho getShinsakaiKaisaiBashoJusho() {
         return shinsakaiKaisaiBashoJusho;
     }
 
@@ -163,7 +164,7 @@ public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
      *
      * @param shinsakaiKaisaiBashoJusho shinsakaiKaisaiBashoJusho
      */
-    public void setShinsakaiKaisaiBashoJusho(RString shinsakaiKaisaiBashoJusho) {
+    public void setShinsakaiKaisaiBashoJusho(AtenaJusho shinsakaiKaisaiBashoJusho) {
         this.shinsakaiKaisaiBashoJusho = shinsakaiKaisaiBashoJusho;
     }
 
@@ -172,7 +173,7 @@ public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
      *
      * @return shinsakaiKaisaiBashoTelNo
      */
-    public RString getShinsakaiKaisaiBashoTelNo() {
+    public TelNo getShinsakaiKaisaiBashoTelNo() {
         return shinsakaiKaisaiBashoTelNo;
     }
 
@@ -181,7 +182,7 @@ public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
      *
      * @param shinsakaiKaisaiBashoTelNo shinsakaiKaisaiBashoTelNo
      */
-    public void setShinsakaiKaisaiBashoTelNo(RString shinsakaiKaisaiBashoTelNo) {
+    public void setShinsakaiKaisaiBashoTelNo(TelNo shinsakaiKaisaiBashoTelNo) {
         this.shinsakaiKaisaiBashoTelNo = shinsakaiKaisaiBashoTelNo;
     }
 

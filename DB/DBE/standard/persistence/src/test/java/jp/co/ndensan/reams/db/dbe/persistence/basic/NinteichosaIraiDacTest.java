@@ -6,9 +6,9 @@ package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosainBangoCode;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import static jp.co.ndensan.reams.db.dbe.persistence.basic.helper.NinteichosaIraiTestHelper.*;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestDacBase;

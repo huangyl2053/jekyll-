@@ -4,7 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -18,21 +20,32 @@ import static org.mockito.Mockito.*;
 @RunWith(Enclosed.class)
 public class KaigoDoctorTest {
 
-    public static class コンストラクタ {
+    public static class コンストラクタ extends DbeTestBase {
+
+        private static IDoctor doctor;
+        private static IShujii shujii;
+        private static KaigoIryoKikan facility;
+
+        @Before
+        public void setUp() {
+            doctor = mock(IDoctor.class);
+            shujii = mock(IShujii.class);
+            facility = mock(KaigoIryoKikan.class);
+        }
 
         @Test(expected = NullPointerException.class)
         public void 医師がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            new KaigoDoctor(null, any(IShujii.class), any(KaigoIryoKikan.class));
+            KaigoDoctor sut = new KaigoDoctor(null, shujii, facility);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主治医がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            new KaigoDoctor(any(IDoctor.class), null, any(KaigoIryoKikan.class));
+            KaigoDoctor sut = new KaigoDoctor(doctor, null, facility);
         }
 
         @Test(expected = NullPointerException.class)
         public void 介護医療機関がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            new KaigoDoctor(any(IDoctor.class), any(IShujii.class), null);
+            KaigoDoctor sut = new KaigoDoctor(doctor, shujii, null);
         }
     }
 }

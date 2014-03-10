@@ -11,11 +11,14 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoChi
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.ShinsakaiKaisaiBashoDacMock;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.nullValue;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -106,8 +109,8 @@ public class ShinsakaiKaisaiBashoManagerTest extends DbeTestBase {
             ShinsakaiKaisaiBasho 審査会開催場所 = new ShinsakaiKaisaiBasho(開催場所コード,
                     new RString("開催場所名"),
                     開催場所地区コード,
-                    new RString("開催場所住所"),
-                    new RString("開催場所電話番号"), 審査会開催場所状況);
+                    new AtenaJusho(new RString("開催場所住所")),
+                    new TelNo(new RString("開催場所電話番号")), 審査会開催場所状況);
             boolean result = sut.save(審査会開催場所);
             assertThat(result, is(true));
         }
@@ -130,8 +133,8 @@ public class ShinsakaiKaisaiBashoManagerTest extends DbeTestBase {
             ShinsakaiKaisaiBasho 審査会開催場所 = new ShinsakaiKaisaiBasho(開催場所コード,
                     new RString("開催場所名"),
                     開催場所地区コード,
-                    new RString("開催場所住所"),
-                    new RString("開催場所電話番号"), 審査会開催場所状況);
+                    new AtenaJusho(new RString("開催場所住所")),
+                    new TelNo(new RString("開催場所電話番号")), 審査会開催場所状況);
             boolean result = sut.remove(審査会開催場所);
             assertThat(result, is(true));
         }
@@ -144,10 +147,11 @@ public class ShinsakaiKaisaiBashoManagerTest extends DbeTestBase {
             ShinsakaiKaisaiBasho 審査会開催場所 = new ShinsakaiKaisaiBasho(開催場所コード,
                     new RString("開催場所名"),
                     開催場所地区コード,
-                    new RString("開催場所住所"),
-                    new RString("開催場所電話番号"), 審査会開催場所状況);
+                    new AtenaJusho(new RString("開催場所住所")),
+                    new TelNo(new RString("開催場所電話番号")), 審査会開催場所状況);
             boolean result = sut.remove(審査会開催場所);
             assertThat(result, is(false));
         }
+
     }
 }

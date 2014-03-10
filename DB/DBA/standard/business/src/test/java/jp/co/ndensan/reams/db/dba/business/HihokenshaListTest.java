@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
@@ -24,6 +25,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
 
 /**
  * 被保険者リストのテストクラスです。
@@ -98,9 +100,11 @@ public class HihokenshaListTest extends TestBase {
     }
 
     private static Hihokensha create被保険者(ShichosonCode 市町村コード, KaigoHihokenshaNo 被保険者番号) {
+        ShikibetsuCode skCode = mock(ShikibetsuCode.class);
         Hihokensha 被保険者 = HihokenshaFactory.createInstance(
                 被保険者番号, 市町村コード,
-                ShikibetsuCodeMock.createInstance(new RString("")),
+                //                ShikibetsuCodeMock.createInstance(new RString("")),
+                skCode,
                 ShikakuIdoKubun.資格取得, new HihokenshaKubun(RString.EMPTY, RString.EMPTY),
                 RDate.MAX, RDate.MAX, create資格取得事由(RString.EMPTY, RString.EMPTY), RDate.MAX);
         return 被保険者;

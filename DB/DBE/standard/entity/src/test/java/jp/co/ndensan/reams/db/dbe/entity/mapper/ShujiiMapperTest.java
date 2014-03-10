@@ -6,9 +6,12 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.IShujii;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT7012ShujiiJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShujiiMock;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -86,7 +89,8 @@ public class ShujiiMapperTest {
 
         @Test
         public void 介護医療機関コードの設定がある時_toShujiiEntity_getKaigoIryokikanCodeは_設定値を返す() {
-            assertThat(createShujiiEntity().getKaigoIryokikanCode(), is(new RString("介護医療機関コード")));
+            KaigoIryoKikanCode kaigoIryoKikanCode = new KaigoIryoKikanCode(new RString("介護医療機関コード"));
+            assertThat(createShujiiEntity().getKaigoIryokikanCode(), is(kaigoIryoKikanCode));
         }
 
         @Test
@@ -111,7 +115,8 @@ public class ShujiiMapperTest {
 
         @Test
         public void 郵便番号の設定がある時_toShujiiEntity_getYubinNoは_設定値を返す() {
-            assertThat(createShujiiEntity().getYubinNo(), is(new RString("123-4567")));
+            YubinNo yubinNo = new YubinNo(new RString("123-4567"));
+            assertThat(createShujiiEntity().getYubinNo(), is(yubinNo));
         }
 
         @Test
@@ -121,7 +126,8 @@ public class ShujiiMapperTest {
 
         @Test
         public void 電話番号の設定がある時_toShujiiEntity_getTelNoは_設定値を返す() {
-            assertThat(createShujiiEntity().getTelNo(), is(new RString("電話番号")));
+            TelNo telNo = new TelNo(new RString("電話番号"));
+            assertThat(createShujiiEntity().getTelNo(), is(telNo));
         }
 
         @Test

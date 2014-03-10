@@ -7,7 +7,7 @@ import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 
 /**
@@ -173,13 +173,15 @@ public class DbT7011ShujiiIryoKikanJohoEntity implements IDbAccessable {
         this.kikanKubunCode = kikanKubunCode;
     }
 
+    //TODO n1013 コードマスタの利用方法が明確になってから再テスト　2014/03/31
     /**
      * コードマスタから機関区分コードに対応した名称を取得します。
      *
      * @return 名称
      */
     public RString getKikanKubunCodeMeisho() {
-        return CodeMaster.getCodeMeisho(new RString("DBE"), new RString("35"), kikanKubunCode);
+//        return CodeMaster.getCodeMeisho(new RString("DBE"), new RString("35"), kikanKubunCode);
+        return new RString("機関名称");
     }
 
     /**
@@ -188,6 +190,7 @@ public class DbT7011ShujiiIryoKikanJohoEntity implements IDbAccessable {
      * @return 略称
      */
     public RString getKikanKubunCodeRyakusho() {
-        return CodeMaster.getCodeRyakusho(new RString("DBE"), new RString("35"), kikanKubunCode);
+//        return CodeMaster.getCodeRyakusho(new RString("DBE"), new RString("35"), kikanKubunCode);
+        return new RString("機関略称");
     }
 }

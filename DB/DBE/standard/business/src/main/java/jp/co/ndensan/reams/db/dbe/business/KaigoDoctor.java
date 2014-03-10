@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoDoctorCode;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
  * 介護医師の情報を扱うクラスです。
@@ -104,7 +105,7 @@ public class KaigoDoctor implements IShujii, IDoctor {
      * @return 医師区分
      */
     @Override
-    public RString get医師区分() {
+    public Code get医師区分() {
         return 医師.get医師区分();
     }
 
@@ -114,7 +115,7 @@ public class KaigoDoctor implements IShujii, IDoctor {
      * @return 所属診療科
      */
     @Override
-    public RString get所属診療科() {
+    public Code get所属診療科() {
         return 医師.get所属診療科();
     }
 

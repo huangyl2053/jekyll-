@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.KaigoDoctorCollection;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoDoctorCode;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
 

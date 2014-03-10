@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.realservice;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBashoJokyo;
@@ -47,11 +48,6 @@ public class ShinsakaiKaisaiBashoManager {
      */
     public ShinsakaiKaisaiBasho get審査会開催場所(ShinsakaiKaisaiBashoCode 審査会開催場所コード) {
         DbT5104ShinsakaiKaisaiBashoJohoEntity entity = dac.select(審査会開催場所コード);
-
-        if (entity == null) {
-            return null;
-        }
-
         return ShinsakaiKaisaiBashoJohoMapper.to審査会開催場所(entity);
     }
 
@@ -64,11 +60,6 @@ public class ShinsakaiKaisaiBashoManager {
      */
     public ShinsakaiKaisaiBasho get審査会開催場所(ShinsakaiKaisaiBashoCode 審査会開催場所コード, ShinsakaiKaisaiBashoJokyo 開催場所状況) {
         DbT5104ShinsakaiKaisaiBashoJohoEntity entity = dac.select(審査会開催場所コード, 開催場所状況);
-
-        if (entity == null) {
-            return null;
-        }
-
         return ShinsakaiKaisaiBashoJohoMapper.to審査会開催場所(entity);
     }
 
@@ -78,11 +69,8 @@ public class ShinsakaiKaisaiBashoManager {
      * @return 審査会開催場所のリスト
      */
     public List<ShinsakaiKaisaiBasho> get審査会開催場所List() {
-        List<ShinsakaiKaisaiBasho> list = new ArrayList();
         List<DbT5104ShinsakaiKaisaiBashoJohoEntity> entityList = dac.selectAll();
-        make審査会開催場所List(entityList, list);
-
-        return list;
+        return to審査会開催場所List(entityList);
     }
 
     /**
@@ -92,11 +80,8 @@ public class ShinsakaiKaisaiBashoManager {
      * @return 審査会開催場所のリスト
      */
     public List<ShinsakaiKaisaiBasho> get審査会開催場所List(ShinsakaiKaisaiBashoJokyo 開催場所状況) {
-        List<ShinsakaiKaisaiBasho> list = new ArrayList();
         List<DbT5104ShinsakaiKaisaiBashoJohoEntity> entityList = dac.selectAll(開催場所状況);
-        make審査会開催場所List(entityList, list);
-
-        return list;
+        return to審査会開催場所List(entityList);
     }
 
     /**
@@ -106,7 +91,7 @@ public class ShinsakaiKaisaiBashoManager {
      * @return 追加又は更新が成功した場合にtrueを返します
      */
     public boolean save(ShinsakaiKaisaiBasho shinsakaiKaisaiBasho) {
-        DbT5104ShinsakaiKaisaiBashoJohoEntity entity = toDbT5104ShinsakaiKaisaiBashoJohoEntity(shinsakaiKaisaiBasho);
+        DbT5104ShinsakaiKaisaiBashoJohoEntity entity = ShinsakaiKaisaiBashoJohoMapper.toDbT5104ShinsakaiKaisaiBashoJohoEntity(shinsakaiKaisaiBasho);
         int result = dac.insertOrUpdate(entity);
         return (result != 0);
     }
@@ -118,7 +103,7 @@ public class ShinsakaiKaisaiBashoManager {
      * @return 削除が成功した場合にTrueを返します
      */
     public boolean remove(ShinsakaiKaisaiBasho shinsakaiKaisaiBasho) {
-        DbT5104ShinsakaiKaisaiBashoJohoEntity entity = toDbT5104ShinsakaiKaisaiBashoJohoEntity(shinsakaiKaisaiBasho);
+        DbT5104ShinsakaiKaisaiBashoJohoEntity entity = ShinsakaiKaisaiBashoJohoMapper.toDbT5104ShinsakaiKaisaiBashoJohoEntity(shinsakaiKaisaiBasho);
         int result = dac.delete(entity);
         return (result != 0);
     }
@@ -129,27 +114,16 @@ public class ShinsakaiKaisaiBashoManager {
      * @param entityList 抽出された審査会開催場所情報エンティティ
      * @param list 審査会開催場所のリスト
      */
-    private void make審査会開催場所List(List<DbT5104ShinsakaiKaisaiBashoJohoEntity> entityList, List<ShinsakaiKaisaiBasho> list) {
+    private List<ShinsakaiKaisaiBasho> to審査会開催場所List(List<DbT5104ShinsakaiKaisaiBashoJohoEntity> entityList) {
+        return entityList.isEmpty() ? Collections.EMPTY_LIST : make審査会開催場所List(entityList);
+    }
+
+    private List<ShinsakaiKaisaiBasho> make審査会開催場所List(List<DbT5104ShinsakaiKaisaiBashoJohoEntity> entityList) {
+        List<ShinsakaiKaisaiBasho> list = new ArrayList<>();
         for (DbT5104ShinsakaiKaisaiBashoJohoEntity entity : entityList) {
             ShinsakaiKaisaiBasho shinsakaiKaisaiBasho = ShinsakaiKaisaiBashoJohoMapper.to審査会開催場所(entity);
             list.add(shinsakaiKaisaiBasho);
         }
-    }
-
-    /**
-     * 審査会開催場所情報エンティティを編集します。
-     *
-     * @param shinsakaiKaisaiBasho 審査会開催場所情報
-     * @return 審査会開催場所情報エンティティ
-     */
-    private DbT5104ShinsakaiKaisaiBashoJohoEntity toDbT5104ShinsakaiKaisaiBashoJohoEntity(ShinsakaiKaisaiBasho shinsakaiKaisaiBasho) {
-        DbT5104ShinsakaiKaisaiBashoJohoEntity entity = new DbT5104ShinsakaiKaisaiBashoJohoEntity();
-        entity.setShinsakaiKaisaiBashoCode(shinsakaiKaisaiBasho.get開催場所コード().getColumnValue());
-        entity.setShinsakaiKaisaiBashoMei(shinsakaiKaisaiBasho.get開催場所名称());
-        entity.setShinsakaiKaisaiChikuCode(shinsakaiKaisaiBasho.get開催場所地区コード().getColumnValue());
-        entity.setShinsakaiKaisaiBashoJusho(shinsakaiKaisaiBasho.get開催場所住所());
-        entity.setShinsakaiKaisaiBashoTelNo(shinsakaiKaisaiBasho.get開催場所電話番号());
-        entity.setShinsakaiKaisaiBashoJokyo(shinsakaiKaisaiBasho.get開催場所状況().is有効());
-        return entity;
+        return list;
     }
 }
