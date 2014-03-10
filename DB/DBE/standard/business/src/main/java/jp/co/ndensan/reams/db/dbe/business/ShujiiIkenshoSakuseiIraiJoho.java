@@ -9,8 +9,8 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IkenshoSakuseiTokuso
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.SakuseiryoSeikyuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.IshiShikibetsuNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShujiiIryoKikanCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -26,8 +26,8 @@ public class ShujiiIkenshoSakuseiIraiJoho {
 
     private final ShinseishoKanriNo 申請書管理番号;
     private final IkenshosakuseiIraiRirekiNo 意見書作成依頼履歴番号;
-    private final ShujiiIryoKikanCode 主治医医療機関コード;
-    private final IshiShikibetsuNo 医師識別番号;
+    private final KaigoIryoKikanCode 介護医療機関コード;
+    private final KaigoDoctorCode 介護医師コード;
     private final IkenshoIraiKubun 意見書作成依頼区分;
     private final int 意見書作成回数;
     private final IshiKubun 医師区分;
@@ -46,8 +46,8 @@ public class ShujiiIkenshoSakuseiIraiJoho {
      *
      * @param 申請書管理番号 申請書管理番号
      * @param 意見書作成依頼履歴番号 意見書作成依頼履歴番号
-     * @param 主治医医療機関コード 主治医医療機関コード
-     * @param 医師識別番号 医師識別番号
+     * @param 介護医療機関コード 介護医療機関コード
+     * @param 介護医師コード 介護医師コード
      * @param 意見書作成依頼区分 意見書作成依頼区分
      * @param 意見書作成回数 意見書作成回数
      * @param 医師区分 医師区分
@@ -64,8 +64,8 @@ public class ShujiiIkenshoSakuseiIraiJoho {
     public ShujiiIkenshoSakuseiIraiJoho(
             ShinseishoKanriNo 申請書管理番号,
             IkenshosakuseiIraiRirekiNo 意見書作成依頼履歴番号,
-            ShujiiIryoKikanCode 主治医医療機関コード,
-            IshiShikibetsuNo 医師識別番号,
+            KaigoIryoKikanCode 介護医療機関コード,
+            KaigoDoctorCode 介護医師コード,
             IkenshoIraiKubun 意見書作成依頼区分,
             int 意見書作成回数,
             IshiKubun 医師区分,
@@ -80,8 +80,8 @@ public class ShujiiIkenshoSakuseiIraiJoho {
             RString 意見書作成督促メモ) {
         this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00001.replace("申請書管理番号").getMessage());
         this.意見書作成依頼履歴番号 = requireNonNull(意見書作成依頼履歴番号, Messages.E00001.replace("意見書作成依頼履歴番号").getMessage());
-        this.主治医医療機関コード = requireNonNull(主治医医療機関コード, Messages.E00001.replace("主治医医療機関コード").getMessage());
-        this.医師識別番号 = requireNonNull(医師識別番号, Messages.E00001.replace("医師識別番号").getMessage());
+        this.介護医療機関コード = requireNonNull(介護医療機関コード, Messages.E00001.replace("介護医療機関コード").getMessage());
+        this.介護医師コード = requireNonNull(介護医師コード, Messages.E00001.replace("介護医師コード").getMessage());
         this.意見書作成依頼区分 = requireNonNull(意見書作成依頼区分, Messages.E00001.replace("意見書作成依頼区分").getMessage());
         this.意見書作成回数 = 意見書作成回数;
         this.医師区分 = requireNonNull(医師区分, Messages.E00001.replace("医師区分").getMessage());
@@ -115,21 +115,21 @@ public class ShujiiIkenshoSakuseiIraiJoho {
     }
 
     /**
-     * 主治医医療機関コードを返します。
+     * 介護医療機関コードを返します。
      *
-     * @return 主治医医療機関コード
+     * @return 介護医療機関コード
      */
-    public ShujiiIryoKikanCode get主治医医療機関コード() {
-        return 主治医医療機関コード;
+    public KaigoIryoKikanCode get介護医療機関コード() {
+        return 介護医療機関コード;
     }
 
     /**
-     * 医師識別番号を返します。
+     * 介護医師コードを返します。
      *
-     * @return 医師識別番号
+     * @return 介護医師コード
      */
-    public IshiShikibetsuNo get医師識別番号() {
-        return 医師識別番号;
+    public KaigoDoctorCode get介護医師コード() {
+        return 介護医師コード;
     }
 
     /**

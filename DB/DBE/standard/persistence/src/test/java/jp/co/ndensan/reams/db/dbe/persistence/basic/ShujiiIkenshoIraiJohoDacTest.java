@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestDacBase;
+import jp.co.ndensan.reams.uz.uza.util.db._SQLOptimisticLockFaildException;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -240,7 +241,7 @@ public class ShujiiIkenshoIraiJohoDacTest extends TestDacBase {
             assertThat(sut.select(createKanriNo("SKN0000001"), 0).getIkenshoSakuseiTokusokuYMD(), is(new FlexibleDate("20141231")));
         }
 
-        @Test
+        @Test(expected = _SQLOptimisticLockFaildException.class)
         public void 指定した主治医意見書作成依頼情報が存在しない時_updateは_失敗する() {
             assertThat(sut.update(createEntity("SKN0000003", 3, "20140303", "SIKC000033", "ISN03303", "20141231")), is(0));
         }
@@ -268,7 +269,7 @@ public class ShujiiIkenshoIraiJohoDacTest extends TestDacBase {
             assertThat(sut.select(createKanriNo("SKN0000001"), 0), nullValue());
         }
 
-        @Test
+        @Test(expected = _SQLOptimisticLockFaildException.class)
         public void 指定した主治医意見書作成依頼情報が存在しない時_deleteは_失敗する() {
             assertThat(sut.delete(createEntity("SKN0000003", 3, "20140303", "SIKC000033", "ISN03303", "20140606")), is(0));
         }
@@ -280,12 +281,12 @@ public class ShujiiIkenshoIraiJohoDacTest extends TestDacBase {
         sut.insert(createEntity("SKN0000002", 1, "20140202", "SIKC000022", "ISN02202", "20140505"));
     }
 
-    private static DbT5011ShujiiIkenshoIraiJohoEntity createEntity(String 申請書管理番号, int 意見書依頼履歴番号, String 意見書作成依頼年月日, String 主治医医療機関コード, String 医師識別番号, String 意見書作成督促年月日) {
+    private static DbT5011ShujiiIkenshoIraiJohoEntity createEntity(String 申請書管理番号, int 意見書依頼履歴番号, String 意見書作成依頼年月日, String 介護医療機関コード, String 介護医師コード, String 意見書作成督促年月日) {
         DbT5011ShujiiIkenshoIraiJohoEntity entity = new DbT5011ShujiiIkenshoIraiJohoEntity();
         entity.setShinseishoKanriNo(createKanriNo(申請書管理番号));
         entity.setIkenshoIraiRirekiNo(意見書依頼履歴番号);
-        entity.setShujiiIryoKikanCode(new RString(主治医医療機関コード));
-        entity.setIshiShikibetsuNo(new RString(医師識別番号));
+        entity.setKaigoIryokikanCode(new RString(介護医療機関コード));
+        entity.setKaigoIshiCode(new RString(介護医師コード));
         entity.setIkenshoIraiKubun(new RString("1"));
         entity.setIkenshoIraiKaisu(1);
         entity.setIshiKubunCode(new Code(new RString("2")));

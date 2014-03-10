@@ -59,13 +59,13 @@ public class ShujiiIkenshoIraiJohoDac implements IShujiiIkenshoIraiJohoDac {
     }
 
     @Override
-    public List<DbT5011ShujiiIkenshoIraiJohoEntity> selectBy主治医情報(RString 主治医医療機関コード, RString 医師識別番号) {
+    public List<DbT5011ShujiiIkenshoIraiJohoEntity> selectBy主治医情報(RString 介護医療機関コード, RString 介護医師コード) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT5011ShujiiIkenshoIraiJoho.class)
                 .where(and(
-                eq(shujiiIryoKikanCode, 主治医医療機関コード),
-                eq(ishiShikibetsuNo, 医師識別番号)))
+                eq(kaigoIryokikanCode, 介護医療機関コード),
+                eq(kaigoIshiCode, 介護医師コード)))
                 .order(by(shinseishoKanriNo, Order.ASC), by(ikenshoIraiRirekiNo, Order.DESC))
                 .toList(DbT5011ShujiiIkenshoIraiJohoEntity.class);
     }

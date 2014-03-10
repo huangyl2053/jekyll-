@@ -12,11 +12,11 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IkenshoSakuseiTokuso
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.SakuseiryoSeikyuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.IshiShikibetsuNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShujiiIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5011ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5011ShujiiIkenshoIraiJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShujiiIkenshoSakuseiIraiJohoMock;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -48,13 +48,13 @@ public class ShujiiIkenshoSakuseiIraiJohoMapperTest {
         }
 
         @Test
-        public void 主治医医療機関コードの設定がある時_toShujiiIkenshoSakuseiIraiJoho_get主治医医療機関コードは_設定値を返す() {
-            assertThat(toShujiiIkenshoSakuseiIraiJoho().get主治医医療機関コード(), is(new ShujiiIryoKikanCode(new RString("主治医医療機関コード"))));
+        public void 介護医療機関コードの設定がある時_toShujiiIkenshoSakuseiIraiJoho_get介護医療機関コードは_設定値を返す() {
+            assertThat(toShujiiIkenshoSakuseiIraiJoho().get介護医療機関コード(), is(new KaigoIryoKikanCode(new RString("介護医療機関コード"))));
         }
 
         @Test
-        public void 医師識別番号の設定がある時_toShujiiIkenshoSakuseiIraiJoho_get医師識別番号は_設定値を返す() {
-            assertThat(toShujiiIkenshoSakuseiIraiJoho().get医師識別番号(), is(new IshiShikibetsuNo(new RString("医師識別番号"))));
+        public void 介護医師コードの設定がある時_toShujiiIkenshoSakuseiIraiJoho_get介護医師コードは_設定値を返す() {
+            assertThat(toShujiiIkenshoSakuseiIraiJoho().get介護医師コード(), is(new KaigoDoctorCode(new RString("介護医師コード"))));
         }
 
         @Test
@@ -139,13 +139,13 @@ public class ShujiiIkenshoSakuseiIraiJohoMapperTest {
         }
 
         @Test
-        public void 主治医医療機関コードの設定がある時_toDbT5011ShujiiIkenshoIraiJohoEntity_getShujiiIryoKikanCodeは_設定値を返す() {
-            assertThat(toDbT5011ShujiiIkenshoIraiJohoEntity().getShujiiIryoKikanCode(), is(new RString("主治医医療機関コード")));
+        public void 介護医療機関コードの設定がある時_toDbT5011ShujiiIkenshoIraiJohoEntity_getKaigoIryokikanCodeは_設定値を返す() {
+            assertThat(toDbT5011ShujiiIkenshoIraiJohoEntity().getKaigoIryokikanCode(), is(new RString("介護医療機関コード")));
         }
 
         @Test
-        public void 医師識別番号の設定がある時_toDbT5011ShujiiIkenshoIraiJohoEntity_getIshiShikibetsuNoは_設定値を返す() {
-            assertThat(toDbT5011ShujiiIkenshoIraiJohoEntity().getIshiShikibetsuNo(), is(new RString("医師識別番号")));
+        public void 介護医師コードの設定がある時_toDbT5011ShujiiIkenshoIraiJohoEntity_getKaigoIshiCodeは_設定値を返す() {
+            assertThat(toDbT5011ShujiiIkenshoIraiJohoEntity().getKaigoIshiCode(), is(new RString("介護医師コード")));
         }
 
         @Test

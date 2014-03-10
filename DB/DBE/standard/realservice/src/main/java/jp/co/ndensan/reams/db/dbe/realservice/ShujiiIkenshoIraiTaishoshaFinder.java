@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IShujiiIkenshoIraiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IShujiiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.IShujiiIkenshoIraiTaishoshaDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.business.JushoEditor;
@@ -162,8 +164,8 @@ public class ShujiiIkenshoIraiTaishoshaFinder {
             DbT5011ShujiiIkenshoIraiJohoEntity 主治医意見書作成依頼情報Entity) {
         return shujiiJohoDac.select(
                 認定申請情報Entity.getShichosonCode(),
-                主治医意見書作成依頼情報Entity.getShujiiIryoKikanCode(),
-                new ShikibetsuCode(主治医意見書作成依頼情報Entity.getIshiShikibetsuNo()));
+                new KaigoIryoKikanCode(主治医意見書作成依頼情報Entity.getKaigoIryokikanCode()),
+                new KaigoDoctorCode(主治医意見書作成依頼情報Entity.getKaigoIshiCode()));
     }
 
     private IKojin create個人(DbT5001NinteiShinseiJohoEntity 認定申請情報Entity) {

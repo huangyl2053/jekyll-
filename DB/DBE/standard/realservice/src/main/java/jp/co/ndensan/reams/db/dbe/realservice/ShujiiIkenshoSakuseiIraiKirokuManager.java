@@ -8,14 +8,14 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoSakuseiIraiJoho;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.IshiShikibetsuNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShujiiIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5011ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteishinseiJohoMapper;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.ShujiiIkenshoSakuseiIraiJohoMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IShujiiIkenshoIraiJohoDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
@@ -84,12 +84,12 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
     /**
      * 引数の条件に該当する主治医意見書作成依頼情報を取得します。
      *
-     * @param 主治医医療機関コード 主治医医療機関コード
-     * @param 医師識別番号 医師識別番号
+     * @param 介護医療機関コード 介護医療機関コード
+     * @param 介護医師コード 介護医師コード
      * @return 主治医意見書作成依頼情報
      */
-    public List<ShujiiIkenshoSakuseiIraiJoho> get主治医意見書作成依頼情報By主治医情報(ShujiiIryoKikanCode 主治医医療機関コード, IshiShikibetsuNo 医師識別番号) {
-        return ShujiiIkenshoSakuseiIraiJohoMapper.toShujiiIkenshoSakuseiIraiJohoList(iraiDac.selectBy主治医情報(主治医医療機関コード.value(), 医師識別番号.value()));
+    public List<ShujiiIkenshoSakuseiIraiJoho> get主治医意見書作成依頼情報By主治医情報(KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード) {
+        return ShujiiIkenshoSakuseiIraiJohoMapper.toShujiiIkenshoSakuseiIraiJohoList(iraiDac.selectBy主治医情報(介護医療機関コード.getValue(), 介護医師コード.value()));
     }
 
     /**

@@ -12,9 +12,9 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IkenshoSakuseiTokuso
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.SakuseiryoSeikyuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.IshiShikibetsuNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShujiiIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5011ShujiiIkenshoIraiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
@@ -40,8 +40,8 @@ public final class ShujiiIkenshoSakuseiIraiJohoMapper {
         return new ShujiiIkenshoSakuseiIraiJoho(
                 entity.getShinseishoKanriNo(),
                 new IkenshosakuseiIraiRirekiNo(entity.getIkenshoIraiRirekiNo()),
-                new ShujiiIryoKikanCode(entity.getShujiiIryoKikanCode()),
-                new IshiShikibetsuNo(entity.getIshiShikibetsuNo()),
+                new KaigoIryoKikanCode(entity.getKaigoIryokikanCode()),
+                new KaigoDoctorCode(entity.getKaigoIshiCode()),
                 IkenshoIraiKubun.toValue(entity.getIkenshoIraiKubun()),
                 entity.getIkenshoIraiKaisu(),
                 IshiKubun.toValue(entity.getIshiKubunCode().value()),
@@ -80,8 +80,8 @@ public final class ShujiiIkenshoSakuseiIraiJohoMapper {
         DbT5011ShujiiIkenshoIraiJohoEntity entity = new DbT5011ShujiiIkenshoIraiJohoEntity();
         entity.setShinseishoKanriNo(iraiJoho.get申請書管理番号());
         entity.setIkenshoIraiRirekiNo(iraiJoho.get意見書作成依頼履歴番号().value().intValue());
-        entity.setShujiiIryoKikanCode(iraiJoho.get主治医医療機関コード().value());
-        entity.setIshiShikibetsuNo(iraiJoho.get医師識別番号().value());
+        entity.setKaigoIryokikanCode(iraiJoho.get介護医療機関コード().getValue());
+        entity.setKaigoIshiCode(iraiJoho.get介護医師コード().value());
         entity.setIkenshoIraiKubun(iraiJoho.get意見書作成依頼区分().getCode());
         entity.setIkenshoIraiKaisu(iraiJoho.get意見書作成回数());
         entity.setIshiKubunCode(new Code(iraiJoho.get医師区分().getCode()));

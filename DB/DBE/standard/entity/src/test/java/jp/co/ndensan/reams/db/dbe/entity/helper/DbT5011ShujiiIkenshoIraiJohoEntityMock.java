@@ -33,8 +33,8 @@ public class DbT5011ShujiiIkenshoIraiJohoEntityMock {
         DbT5011ShujiiIkenshoIraiJohoEntity entity = new DbT5011ShujiiIkenshoIraiJohoEntity();
         entity.setShinseishoKanriNo(new ShinseishoKanriNo(new RString("申請書管理番号")));
         entity.setIkenshoIraiRirekiNo(0);
-        entity.setShujiiIryoKikanCode(new RString("主治医医療機関コード"));
-        entity.setIshiShikibetsuNo(new RString("医師識別番号"));
+        entity.setKaigoIryokikanCode(new RString("介護医療機関コード"));
+        entity.setKaigoIshiCode(new RString("介護医師コード"));
         entity.setIkenshoIraiKubun(new RString("1"));
         entity.setIkenshoIraiKaisu(1);
         entity.setIshiKubunCode(new Code(new RString("2")));

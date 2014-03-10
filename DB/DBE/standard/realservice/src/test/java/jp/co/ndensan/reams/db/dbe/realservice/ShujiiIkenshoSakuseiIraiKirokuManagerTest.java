@@ -10,8 +10,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoSakuseiIraiJoho;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.IshiShikibetsuNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShujiiIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5011ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
@@ -20,6 +18,8 @@ import jp.co.ndensan.reams.db.dbe.realservice.helper.DbT5001NinteiShinseiJohoEnt
 import jp.co.ndensan.reams.db.dbe.realservice.helper.DbT5011ShujiiIkenshoIraiJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.NinteiShinseiJohoMock;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.ShujiiIkenshoSakuseiIraiJohoMock;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -98,17 +98,17 @@ public class ShujiiIkenshoSakuseiIraiKirokuManagerTest {
 
         @Test
         public void 該当の主治医意見書作成依頼情報が0件の時_get主治医意見書作成依頼情報By主治医情報は_EMPTYを返す() {
-            assertThat(createManager(AS_情報0件).get主治医意見書作成依頼情報By主治医情報(createIryoKikanCode(), createShikibetsuNo()), is(Collections.EMPTY_LIST));
+            assertThat(createManager(AS_情報0件).get主治医意見書作成依頼情報By主治医情報(createKaigoIryoKikanCode(), createKaigoDoctorCode()), is(Collections.EMPTY_LIST));
         }
 
         @Test
         public void 該当の主治医意見書作成依頼情報が1件の時_get主治医意見書作成依頼情報By主治医情報は_1件の情報を返す() {
-            assertThat(createManager(AS_情報1件).get主治医意見書作成依頼情報By主治医情報(createIryoKikanCode(), createShikibetsuNo()).size(), is(1));
+            assertThat(createManager(AS_情報1件).get主治医意見書作成依頼情報By主治医情報(createKaigoIryoKikanCode(), createKaigoDoctorCode()).size(), is(1));
         }
 
         @Test
         public void 該当の主治医意見書作成依頼情報が2件の時_get主治医意見書作成依頼情報By主治医情報は_2件の情報を返す() {
-            assertThat(createManager(AS_情報2件).get主治医意見書作成依頼情報By主治医情報(createIryoKikanCode(), createShikibetsuNo()).size(), is(2));
+            assertThat(createManager(AS_情報2件).get主治医意見書作成依頼情報By主治医情報(createKaigoIryoKikanCode(), createKaigoDoctorCode()).size(), is(2));
         }
     }
 
@@ -225,11 +225,11 @@ public class ShujiiIkenshoSakuseiIraiKirokuManagerTest {
         return new IkenshosakuseiIraiRirekiNo(0);
     }
 
-    private static ShujiiIryoKikanCode createIryoKikanCode() {
-        return new ShujiiIryoKikanCode(new RString("主治医医療機関コード"));
+    private static KaigoIryoKikanCode createKaigoIryoKikanCode() {
+        return new KaigoIryoKikanCode(new RString("介護医療機関コード"));
     }
 
-    private static IshiShikibetsuNo createShikibetsuNo() {
-        return new IshiShikibetsuNo(new RString("医師識別番号"));
+    private static KaigoDoctorCode createKaigoDoctorCode() {
+        return new KaigoDoctorCode(new RString("介護医師コード"));
     }
 }

@@ -32,8 +32,8 @@ public class DbT5011ShujiiIkenshoIraiJohoEntity implements IDbAccessable {
     private ShinseishoKanriNo shinseishoKanriNo;
     @PrimaryKey
     private int ikenshoIraiRirekiNo;
-    private RString shujiiIryoKikanCode;
-    private RString ishiShikibetsuNo;
+    private RString kaigoIryokikanCode;
+    private RString kaigoIshiCode;
     private RString ikenshoIraiKubun;
     private int ikenshoIraiKaisu;
     private Code ishiKubunCode;
@@ -130,39 +130,39 @@ public class DbT5011ShujiiIkenshoIraiJohoEntity implements IDbAccessable {
     }
 
     /**
-     * getShujiiIryoKikanCode
+     * getKaigoIryokikanCode
      *
-     * @return shujiiIryoKikanCode
+     * @return kaigoIryokikanCode
      */
-    public RString getShujiiIryoKikanCode() {
-        return shujiiIryoKikanCode;
+    public RString getKaigoIryokikanCode() {
+        return kaigoIryokikanCode;
     }
 
     /**
-     * setShujiiIryoKikanCode
+     * setKaigoIryokikanCode
      *
-     * @param shujiiIryoKikanCode shujiiIryoKikanCode
+     * @param kaigoIryokikanCode kaigoIryokikanCode
      */
-    public void setShujiiIryoKikanCode(RString shujiiIryoKikanCode) {
-        this.shujiiIryoKikanCode = shujiiIryoKikanCode;
+    public void setKaigoIryokikanCode(RString kaigoIryokikanCode) {
+        this.kaigoIryokikanCode = kaigoIryokikanCode;
     }
 
     /**
-     * getIshiShikibetsuNo
+     * getKaigoIshiCode
      *
-     * @return ishiShikibetsuNo
+     * @return kaigoIshiCode
      */
-    public RString getIshiShikibetsuNo() {
-        return ishiShikibetsuNo;
+    public RString getKaigoIshiCode() {
+        return kaigoIshiCode;
     }
 
     /**
-     * setIshiShikibetsuNo
+     * setKaigoIshiCode
      *
-     * @param ishiShikibetsuNo ishiShikibetsuNo
+     * @param kaigoIshiCode kaigoIshiCode
      */
-    public void setIshiShikibetsuNo(RString ishiShikibetsuNo) {
-        this.ishiShikibetsuNo = ishiShikibetsuNo;
+    public void setKaigoIshiCode(RString kaigoIshiCode) {
+        this.kaigoIshiCode = kaigoIshiCode;
     }
 
     /**

@@ -52,12 +52,12 @@ public interface IShujiiIkenshoIraiJohoDac
     /**
      * 引数の条件に該当する主治医意見書作成依頼情報エンティティを取得します。
      *
-     * @param 主治医医療機関コード 主治医医療機関コード
-     * @param 医師識別番号 医師識別番号
+     * @param 介護医療機関コード 介護医療機関コード
+     * @param 介護医師コード 介護医師コード
      * @return 主治医意見書作成依頼情報エンティティ
      */
     @Transaction
-    List<DbT5011ShujiiIkenshoIraiJohoEntity> selectBy主治医情報(RString 主治医医療機関コード, RString 医師識別番号);
+    List<DbT5011ShujiiIkenshoIraiJohoEntity> selectBy主治医情報(RString 介護医療機関コード, RString 介護医師コード);
 
     /**
      * 引数の条件に該当する主治医意見書作成依頼情報エンティティを取得します。
