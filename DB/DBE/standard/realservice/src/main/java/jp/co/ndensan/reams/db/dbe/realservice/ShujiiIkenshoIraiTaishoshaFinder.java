@@ -188,7 +188,7 @@ public class ShujiiIkenshoIraiTaishoshaFinder {
     }
 
     private IDoctor create主治医(DbT7012ShujiiJohoEntity 主治医情報Entity) {
-        return DoctorManagerFactory.createInstance().get医師(主治医情報Entity.getShujiiCode());
+        return DoctorManagerFactory.createInstance().get医師(主治医情報Entity.getIshiShikibetsuNo());
     }
 
     private KaigoIryoKikan create主治医医療機関情報(DbT5001NinteiShinseiJohoEntity 認定申請情報Entity, DbT7012ShujiiJohoEntity 主治医情報Entity) {

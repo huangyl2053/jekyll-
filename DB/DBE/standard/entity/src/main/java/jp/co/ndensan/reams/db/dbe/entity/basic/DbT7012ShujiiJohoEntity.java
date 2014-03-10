@@ -1,19 +1,22 @@
 package jp.co.ndensan.reams.db.dbe.entity.basic;
 
+import java.util.UUID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang._UUID;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 
 /**
  * DbT7012ShujiiJohoの項目定義クラスです
  *
  * @author N8156 宮本 康
+ *
  */
 public class DbT7012ShujiiJohoEntity implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
@@ -23,22 +26,22 @@ public class DbT7012ShujiiJohoEntity implements IDbAccessable {
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;
     private RString insertReamsLoginId;
-    private _UUID insertContextId;
+    private UUID insertContextId;
     private boolean isDeleted = false;
     private int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private RString shichosonCode;
+    private ShichosonCode shichosonCode;
     @PrimaryKey
     private KaigoIryoKikanCode kaigoIryokikanCode;
     @PrimaryKey
     private RString kaigoIshiCode;
     private RString iryokikanCode;
-    private RString shujiiCode;
+    private RString ishiShikibetsuNo;
     private boolean shujiiJokyo;
     private YubinNo yubinNo;
-    private RString jusho;
+    private AtenaJusho jusho;
     private TelNo telNo;
     private RString faxNo;
 
@@ -92,7 +95,7 @@ public class DbT7012ShujiiJohoEntity implements IDbAccessable {
      *
      * @return shichosonCode
      */
-    public RString getShichosonCode() {
+    public ShichosonCode getShichosonCode() {
         return shichosonCode;
     }
 
@@ -101,7 +104,7 @@ public class DbT7012ShujiiJohoEntity implements IDbAccessable {
      *
      * @param shichosonCode shichosonCode
      */
-    public void setShichosonCode(RString shichosonCode) {
+    public void setShichosonCode(ShichosonCode shichosonCode) {
         this.shichosonCode = shichosonCode;
     }
 
@@ -160,21 +163,21 @@ public class DbT7012ShujiiJohoEntity implements IDbAccessable {
     }
 
     /**
-     * getShujiiCode
+     * getIshiShikibetsuNo
      *
-     * @return shujiiCode
+     * @return ishiShikibetsuNo
      */
-    public RString getShujiiCode() {
-        return shujiiCode;
+    public RString getIshiShikibetsuNo() {
+        return ishiShikibetsuNo;
     }
 
     /**
-     * setShujiiCode
+     * setIshiShikibetsuNo
      *
-     * @param shujiiCode shujiiCode
+     * @param ishiShikibetsuNo ishiShikibetsuNo
      */
-    public void setShujiiCode(RString shujiiCode) {
-        this.shujiiCode = shujiiCode;
+    public void setIshiShikibetsuNo(RString ishiShikibetsuNo) {
+        this.ishiShikibetsuNo = ishiShikibetsuNo;
     }
 
     /**
@@ -218,7 +221,7 @@ public class DbT7012ShujiiJohoEntity implements IDbAccessable {
      *
      * @return jusho
      */
-    public RString getJusho() {
+    public AtenaJusho getJusho() {
         return jusho;
     }
 
@@ -227,7 +230,7 @@ public class DbT7012ShujiiJohoEntity implements IDbAccessable {
      *
      * @param jusho jusho
      */
-    public void setJusho(RString jusho) {
+    public void setJusho(AtenaJusho jusho) {
         this.jusho = jusho;
     }
 

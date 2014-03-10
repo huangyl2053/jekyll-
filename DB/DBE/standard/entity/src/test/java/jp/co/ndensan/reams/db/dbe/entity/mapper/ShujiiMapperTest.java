@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT7012ShujiiJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShujiiMock;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -84,7 +86,7 @@ public class ShujiiMapperTest {
 
         @Test
         public void 市町村コードの設定がある時_toShujiiEntity_getShichosonCodeは_設定値を返す() {
-            assertThat(createShujiiEntity().getShichosonCode(), is(new RString("市町村コード")));
+            assertThat(createShujiiEntity().getShichosonCode(), is(new ShichosonCode(new RString("市町村コード"))));
         }
 
         @Test
@@ -105,7 +107,7 @@ public class ShujiiMapperTest {
 
         @Test
         public void 医師識別番号の設定がある時_toShujiiEntity_getShujiiCodeは_設定値を返す() {
-            assertThat(createShujiiEntity().getShujiiCode(), is(new RString("医師識別番号")));
+            assertThat(createShujiiEntity().getIshiShikibetsuNo(), is(new RString("医師識別番号")));
         }
 
         @Test
@@ -121,7 +123,7 @@ public class ShujiiMapperTest {
 
         @Test
         public void 住所の設定がある時_toShujiiEntity_getJushoは_設定値を返す() {
-            assertThat(createShujiiEntity().getJusho(), is(new RString("住所")));
+            assertThat(createShujiiEntity().getJusho(), is(new AtenaJusho(new RString("住所"))));
         }
 
         @Test
