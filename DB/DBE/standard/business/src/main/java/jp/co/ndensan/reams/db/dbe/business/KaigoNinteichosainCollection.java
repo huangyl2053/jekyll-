@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
  *
  * @author N8187 久保田 英男
  */
-public class KaigoNinteichosainCollection implements Iterable {
+public class KaigoNinteichosainCollection implements Iterable<KaigoNinteichosain> {
 
     private final List<KaigoNinteichosain> 介護認定調査員List;
 
@@ -134,7 +134,7 @@ public class KaigoNinteichosainCollection implements Iterable {
     }
 
     @Override
-    public Iterator iterator() {
+    public Iterator<KaigoNinteichosain> iterator() {
         return 介護認定調査員List.iterator();
     }
 
