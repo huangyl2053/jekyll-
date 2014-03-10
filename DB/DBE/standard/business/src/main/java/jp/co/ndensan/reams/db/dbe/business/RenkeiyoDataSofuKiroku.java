@@ -49,12 +49,12 @@ public class RenkeiyoDataSofuKiroku {
             HikiwatashiKubun 引渡し区分, RDateTime 引渡し日時,
             SaiSoufuKubun 再送付区分, SaiChousaSoufuKubun 再調査送付区分,
             SaiIkenshoSoufuKubun 再意見書送付区分) throws NullPointerException {
-        Objects.requireNonNull(申請書管理番号, Messages.E00003.replace("申請書管理番号", "連携用データ送付記録").getMessage());
-        Objects.requireNonNull(被保険者番号, Messages.E00003.replace("被保険者番号", "連携用データ送付記録").getMessage());
-        Objects.requireNonNull(認定申請時区分, Messages.E00003.replace("認定申請時区分", "連携用データ送付記録").getMessage());
-        Objects.requireNonNull(引渡し区分, Messages.E00003.replace("引渡し区分", "連携用データ送付記録").getMessage());
-        Objects.requireNonNull(引渡し日時, Messages.E00003.replace("引渡し日時", "連携用データ送付記録").getMessage());
-        Objects.requireNonNull(再送付区分, Messages.E00003.replace("再送付区分", "連携用データ送付記録").getMessage());
+        Objects.requireNonNull(申請書管理番号, Messages.E00003.replace("申請書管理番号", getClass().getName()).getMessage());
+        Objects.requireNonNull(被保険者番号, Messages.E00003.replace("被保険者番号", getClass().getName()).getMessage());
+        Objects.requireNonNull(認定申請時区分, Messages.E00003.replace("認定申請時区分", getClass().getName()).getMessage());
+        Objects.requireNonNull(引渡し区分, Messages.E00003.replace("引渡し区分", getClass().getName()).getMessage());
+        Objects.requireNonNull(引渡し日時, Messages.E00003.replace("引渡し日時", getClass().getName()).getMessage());
+        Objects.requireNonNull(再送付区分, Messages.E00003.replace("再送付区分", getClass().getName()).getMessage());
 
         this.申請書管理番号 = 申請書管理番号;
         this.被保険者番号 = 被保険者番号;

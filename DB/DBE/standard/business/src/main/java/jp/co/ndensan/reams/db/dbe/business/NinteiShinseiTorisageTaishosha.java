@@ -41,12 +41,12 @@ public class NinteiShinseiTorisageTaishosha {
     public NinteiShinseiTorisageTaishosha(ShinseishoKanriNo 申請書管理No, ShichosonCode 市町村コード, KaigoHihokenshaNo 被保険者番号,
             FlexibleDate 認定申請年月日, NinteiShinseiKubunShinsei 認定申請区分コード_申請時, NinteiShinseiTorisage 認定申請取下げ) {
 
-        requireNonNull(申請書管理No, Messages.E00003.replace("申請書管理No", "要介護認定申請取下げ対象者").getMessage());
-        requireNonNull(市町村コード, Messages.E00003.replace("市町村コード", "要介護認定申請取下げ対象者").getMessage());
-        requireNonNull(被保険者番号, Messages.E00003.replace("被保険者番号", "要介護認定申請取下げ対象者").getMessage());
-        requireNonNull(認定申請年月日, Messages.E00003.replace("認定申請年月日", "要介護認定申請取下げ対象者").getMessage());
-        requireNonNull(認定申請区分コード_申請時, Messages.E00003.replace("認定申請区分コード(申請時)", "要介護認定申請取下げ対象者").getMessage());
-        requireNonNull(認定申請取下げ, Messages.E00003.replace("認定申請取下げ", "要介護認定申請取下げ対象者").getMessage());
+        requireNonNull(申請書管理No, Messages.E00003.replace("申請書管理No", getClass().getName()).getMessage());
+        requireNonNull(市町村コード, Messages.E00003.replace("市町村コード", getClass().getName()).getMessage());
+        requireNonNull(被保険者番号, Messages.E00003.replace("被保険者番号", getClass().getName()).getMessage());
+        requireNonNull(認定申請年月日, Messages.E00003.replace("認定申請年月日", getClass().getName()).getMessage());
+        requireNonNull(認定申請区分コード_申請時, Messages.E00003.replace("認定申請区分コード(申請時)", getClass().getName()).getMessage());
+        requireNonNull(認定申請取下げ, Messages.E00003.replace("認定申請取下げ", getClass().getName()).getMessage());
 
         this.申請書管理No = 申請書管理No;
         this.市町村コード = 市町村コード;

@@ -57,14 +57,14 @@ public class NinteichosaIraiTaishosha {
             FlexibleDate 認定申請年月日, NinteiShinseiKubunShinsei 認定申請区分, IKojin 個人情報, RString 氏名, RString 住所,
             NinteichosaItakusaki 認定調査委託先, IKaigoJigyosha 事業者情報, INinteiChosain 認定調査員情報) throws NullPointerException {
 
-        requireNonNull(申請書管理番号, Messages.E00003.replace("申請書管理番号", "認定調査依頼対象者").getMessage());
-        requireNonNull(市町村コード, Messages.E00003.replace("市町村コード", "認定調査依頼対象者").getMessage());
-        requireNonNull(被保険者番号, Messages.E00003.replace("被保険者", "認定調査依頼対象者").getMessage());
-        requireNonNull(認定申請年月日, Messages.E00003.replace("認定申請年月日", "認定調査依頼対象者").getMessage());
-        requireNonNull(認定申請区分, Messages.E00003.replace("認定申請区分", "認定調査依頼対象者").getMessage());
-        requireNonNull(個人情報, Messages.E00003.replace("個人情報", "認定調査依頼対象者").getMessage());
-        requireNonNull(氏名, Messages.E00003.replace("氏名", "認定調査依頼対象者").getMessage());
-        requireNonNull(住所, Messages.E00003.replace("住所", "認定調査依頼対象者").getMessage());
+        requireNonNull(申請書管理番号, Messages.E00003.replace("申請書管理番号", getClass().getName()).getMessage());
+        requireNonNull(市町村コード, Messages.E00003.replace("市町村コード", getClass().getName()).getMessage());
+        requireNonNull(被保険者番号, Messages.E00003.replace("被保険者", getClass().getName()).getMessage());
+        requireNonNull(認定申請年月日, Messages.E00003.replace("認定申請年月日", getClass().getName()).getMessage());
+        requireNonNull(認定申請区分, Messages.E00003.replace("認定申請区分", getClass().getName()).getMessage());
+        requireNonNull(個人情報, Messages.E00003.replace("個人情報", getClass().getName()).getMessage());
+        requireNonNull(氏名, Messages.E00003.replace("氏名", getClass().getName()).getMessage());
+        requireNonNull(住所, Messages.E00003.replace("住所", getClass().getName()).getMessage());
 
         this.申請書管理番号 = 申請書管理番号;
         this.市町村コード = 市町村コード;

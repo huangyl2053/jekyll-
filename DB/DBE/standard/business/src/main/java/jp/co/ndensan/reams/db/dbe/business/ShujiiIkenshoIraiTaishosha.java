@@ -64,14 +64,14 @@ public class ShujiiIkenshoIraiTaishosha {
             KaigoIryoKikan 主治医医療機関,
             IDoctor 主治医) throws NullPointerException {
 
-        requireNonNull(申請書管理番号, Messages.E00003.replace("申請書管理番号", "主治医意見書作成依頼対象者").getMessage());
-        requireNonNull(市町村コード, Messages.E00003.replace("市町村コード", "主治医意見書作成依頼対象者").getMessage());
-        requireNonNull(被保険者番号, Messages.E00003.replace("被保険者番号", "主治医意見書作成依頼対象者").getMessage());
-        requireNonNull(認定申請年月日, Messages.E00003.replace("認定申請年月日", "主治医意見書作成依頼対象者").getMessage());
-        requireNonNull(認定申請区分, Messages.E00003.replace("認定申請区分", "主治医意見書作成依頼対象者").getMessage());
-        requireNonNull(個人情報, Messages.E00003.replace("個人情報", "主治医意見書作成依頼対象者").getMessage());
-        requireNonNull(氏名, Messages.E00003.replace("氏名", "主治医意見書作成依頼対象者").getMessage());
-        requireNonNull(住所, Messages.E00003.replace("住所", "主治医意見書作成依頼対象者").getMessage());
+        requireNonNull(申請書管理番号, Messages.E00003.replace("申請書管理番号", getClass().getName()).getMessage());
+        requireNonNull(市町村コード, Messages.E00003.replace("市町村コード", getClass().getName()).getMessage());
+        requireNonNull(被保険者番号, Messages.E00003.replace("被保険者番号", getClass().getName()).getMessage());
+        requireNonNull(認定申請年月日, Messages.E00003.replace("認定申請年月日", getClass().getName()).getMessage());
+        requireNonNull(認定申請区分, Messages.E00003.replace("認定申請区分", getClass().getName()).getMessage());
+        requireNonNull(個人情報, Messages.E00003.replace("個人情報", getClass().getName()).getMessage());
+        requireNonNull(氏名, Messages.E00003.replace("氏名", getClass().getName()).getMessage());
+        requireNonNull(住所, Messages.E00003.replace("住所", getClass().getName()).getMessage());
 
         this.申請書管理番号 = 申請書管理番号;
         this.市町村コード = 市町村コード;
