@@ -94,7 +94,7 @@ public class KaigoNinteichosainCollection implements Iterable<KaigoNinteichosain
      * 該当するものがない場合、空のコレクションが返ります。
      *
      * @param 市町村コード 市町村コード
-     * @param 介護調査員番号 介護調査員番号
+     * @param 介護事業者番号 介護事業者番号
      * @return 介護認定調査員のコレクション
      */
     public KaigoNinteichosainCollection sub介護認定調査員Collection(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号) {
