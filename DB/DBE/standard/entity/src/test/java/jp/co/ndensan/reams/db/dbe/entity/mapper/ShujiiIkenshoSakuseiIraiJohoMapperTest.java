@@ -4,8 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoSakuseiIrai;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IkenshoSakuseiTokusokuHoho;
@@ -14,9 +12,9 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.SakuseiryoSeikyuKubu
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5011ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5011ShujiiIkenshoIraiJohoEntityMock;
+import jp.co.ndensan.reams.db.dbe.entity.helper.KaigoDoctorMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShujiiIkenshoSakuseiIraiMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -48,13 +46,8 @@ public class ShujiiIkenshoSakuseiIraiJohoMapperTest {
         }
 
         @Test
-        public void 介護医療機関コードの設定がある時_toShujiiIkenshoSakuseiIrai_get介護医療機関コードは_設定値を返す() {
-            assertThat(toShujiiIkenshoSakuseiIrai().get介護医療機関コード(), is(new KaigoIryoKikanCode(new RString("介護医療機関コード"))));
-        }
-
-        @Test
-        public void 介護医師コードの設定がある時_toShujiiIkenshoSakuseiIrai_get介護医師コードは_設定値を返す() {
-            assertThat(toShujiiIkenshoSakuseiIrai().get介護医師コード(), is(new KaigoDoctorCode(new RString("介護医師コード"))));
+        public void 介護医師の設定がある時_toShujiiIkenshoSakuseiIrai_get介護医師は_設定値を返す() {
+            assertThat(toShujiiIkenshoSakuseiIrai().get介護医師().get介護医師コード(), is(new KaigoDoctorCode(new RString("介護医師コード"))));
         }
 
         @Test
@@ -115,14 +108,6 @@ public class ShujiiIkenshoSakuseiIraiJohoMapperTest {
         @Test
         public void 意見書作成督促メモの設定がある時_toShujiiIkenshoSakuseiIrai_get意見書作成督促メモは_設定値を返す() {
             assertThat(toShujiiIkenshoSakuseiIrai().get意見書作成督促メモ(), is(new RString("意見書作成督促メモ")));
-        }
-    }
-
-    public static class toShujiiIkenshoSakuseiIraiList {
-
-        @Test
-        public void 主治医意見書作成依頼情報エンティティが10件の時_toShujiiIkenshoSakuseiIraiListは_10件の主治医意見書作成依頼情報を返す() {
-            assertThat(ShujiiIkenshoSakuseiIraiJohoMapper.toShujiiIkenshoSakuseiIraiList(createDbT5011ShujiiIkenshoIraiJohoEntityList(10)).size(), is(10));
         }
     }
 
@@ -210,18 +195,10 @@ public class ShujiiIkenshoSakuseiIraiJohoMapperTest {
     }
 
     private static ShujiiIkenshoSakuseiIrai toShujiiIkenshoSakuseiIrai() {
-        return ShujiiIkenshoSakuseiIraiJohoMapper.toShujiiIkenshoSakuseiIrai(DbT5011ShujiiIkenshoIraiJohoEntityMock.getSpiedInstance());
+        return ShujiiIkenshoSakuseiIraiJohoMapper.toShujiiIkenshoSakuseiIrai(DbT5011ShujiiIkenshoIraiJohoEntityMock.getSpiedInstance(), KaigoDoctorMock.getSpiedInstance());
     }
 
     private static DbT5011ShujiiIkenshoIraiJohoEntity toDbT5011ShujiiIkenshoIraiEntity() {
         return ShujiiIkenshoSakuseiIraiJohoMapper.toDbT5011ShujiiIkenshoIraiJohoEntity(ShujiiIkenshoSakuseiIraiMock.getSpiedInstance());
-    }
-
-    private static List<DbT5011ShujiiIkenshoIraiJohoEntity> createDbT5011ShujiiIkenshoIraiJohoEntityList(int size) {
-        List<DbT5011ShujiiIkenshoIraiJohoEntity> list = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            list.add(DbT5011ShujiiIkenshoIraiJohoEntityMock.getSpiedInstance());
-        }
-        return list;
     }
 }

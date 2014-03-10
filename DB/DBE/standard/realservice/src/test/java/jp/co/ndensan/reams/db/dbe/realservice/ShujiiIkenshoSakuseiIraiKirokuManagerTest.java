@@ -16,10 +16,12 @@ import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IShujiiIkenshoIraiJohoDac;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.DbT5001NinteiShinseiJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.DbT5011ShujiiIkenshoIraiJohoEntityMock;
+import jp.co.ndensan.reams.db.dbe.realservice.helper.KaigoDoctorMock;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.NinteiShinseiJohoMock;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.ShujiiIkenshoSakuseiIraiMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -170,7 +172,7 @@ public class ShujiiIkenshoSakuseiIraiKirokuManagerTest {
     }
 
     private static ShujiiIkenshoSakuseiIraiKirokuManager createManager(int flg) {
-        return new ShujiiIkenshoSakuseiIraiKirokuManager(createIraiDac(flg), createShinseiDac(flg));
+        return new ShujiiIkenshoSakuseiIraiKirokuManager(createIraiDac(flg), createShinseiDac(flg), createKaigoDoctorManager());
     }
 
     private static IShujiiIkenshoIraiJohoDac createIraiDac(int flg) {
@@ -191,6 +193,12 @@ public class ShujiiIkenshoSakuseiIraiKirokuManagerTest {
         when(dac.select(any(ShinseishoKanriNo.class))).thenReturn(createShinseiEntity(flg));
         when(dac.update(any(DbT5001NinteiShinseiJohoEntity.class))).thenReturn(flg);
         return dac;
+    }
+
+    private static KaigoDoctorManager createKaigoDoctorManager() {
+        KaigoDoctorManager manager = mock(KaigoDoctorManager.class);
+        when(manager.get介護医師(any(ShichosonCode.class), any(KaigoIryoKikanCode.class), any(KaigoDoctorCode.class))).thenReturn(KaigoDoctorMock.getSpiedInstance());
+        return manager;
     }
 
     private static ShujiiIkenshoSakuseiIrai createIraiJoho() {

@@ -10,8 +10,6 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IkenshoSakuseiTokuso
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.SakuseiryoSeikyuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -39,8 +37,7 @@ public class ShujiiIkenshoSakuseiIraiMock {
         return spy(new ShujiiIkenshoSakuseiIrai(
                 new ShinseishoKanriNo(new RString("申請書管理番号")),
                 new IkenshosakuseiIraiRirekiNo(0),
-                new KaigoIryoKikanCode(new RString("介護医療機関コード")),
-                new KaigoDoctorCode(new RString("介護医師コード")),
+                KaigoDoctorMock.getSpiedInstance(),
                 IkenshoIraiKubun.初回依頼,
                 1,
                 IshiKubun.指定医,

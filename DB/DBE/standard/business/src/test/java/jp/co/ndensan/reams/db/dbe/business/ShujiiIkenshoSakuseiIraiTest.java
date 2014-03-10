@@ -9,8 +9,6 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IkenshoSakuseiTokuso
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.SakuseiryoSeikyuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -26,10 +24,9 @@ public class ShujiiIkenshoSakuseiIraiTest {
 
     private static final int AS_申請書管理番号がNULL = 1;
     private static final int AS_意見書作成依頼履歴番号がNULL = 2;
-    private static final int AS_介護医療機関コードがNULL = 3;
-    private static final int AS_介護医師コードがNULL = 4;
-    private static final int AS_意見書作成依頼区分がNULL = 5;
-    private static final int AS_医師区分がNULL = 6;
+    private static final int AS_介護医師がNULL = 3;
+    private static final int AS_意見書作成依頼区分がNULL = 4;
+    private static final int AS_医師区分がNULL = 5;
 
     public static class コンストラクタ {
 
@@ -44,13 +41,8 @@ public class ShujiiIkenshoSakuseiIraiTest {
         }
 
         @Test(expected = NullPointerException.class)
-        public void 介護医療機関コードがNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createShujiiIkenshoSakuseiIrai(AS_介護医療機関コードがNULL);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 介護医師コードがNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createShujiiIkenshoSakuseiIrai(AS_介護医師コードがNULL);
+        public void 介護医師がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
+            createShujiiIkenshoSakuseiIrai(AS_介護医師がNULL);
         }
 
         @Test(expected = NullPointerException.class)
@@ -68,8 +60,7 @@ public class ShujiiIkenshoSakuseiIraiTest {
         return new ShujiiIkenshoSakuseiIrai(
                 flg == AS_申請書管理番号がNULL ? null : any(ShinseishoKanriNo.class),
                 flg == AS_意見書作成依頼履歴番号がNULL ? null : any(IkenshosakuseiIraiRirekiNo.class),
-                flg == AS_介護医療機関コードがNULL ? null : any(KaigoIryoKikanCode.class),
-                flg == AS_介護医師コードがNULL ? null : any(KaigoDoctorCode.class),
+                flg == AS_介護医師がNULL ? null : any(KaigoDoctor.class),
                 flg == AS_意見書作成依頼区分がNULL ? null : any(IkenshoIraiKubun.class), 0,
                 flg == AS_医師区分がNULL ? null : any(IshiKubun.class),
                 any(FlexibleDate.class),

@@ -4,7 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.realservice;
 
+import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoSakuseiIrai;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
@@ -29,6 +31,7 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
 
     private final IShujiiIkenshoIraiJohoDac iraiDac;
     private final INinteiShinseiJohoDac shinseiDac;
+    private final KaigoDoctorManager kaigoDoctorManager;
 
     /**
      * InstanceCreatorを用いてDacのインスタンスを生成し、メンバ変数に保持します。
@@ -36,6 +39,7 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
     public ShujiiIkenshoSakuseiIraiKirokuManager() {
         iraiDac = InstanceCreator.create(IShujiiIkenshoIraiJohoDac.class);
         shinseiDac = InstanceCreator.create(INinteiShinseiJohoDac.class);
+        kaigoDoctorManager = new KaigoDoctorManager();
     }
 
     /**
@@ -44,9 +48,11 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
      * @param iraiDac 主治医意見書作成依頼情報Dac
      * @param shinseiDac 認定申請情報Dac
      */
-    ShujiiIkenshoSakuseiIraiKirokuManager(IShujiiIkenshoIraiJohoDac iraiDac, INinteiShinseiJohoDac shinseiDac) {
+    ShujiiIkenshoSakuseiIraiKirokuManager(
+            IShujiiIkenshoIraiJohoDac iraiDac, INinteiShinseiJohoDac shinseiDac, KaigoDoctorManager kaigoDoctorManager) {
         this.iraiDac = iraiDac;
         this.shinseiDac = shinseiDac;
+        this.kaigoDoctorManager = kaigoDoctorManager;
     }
 
     /**
@@ -57,8 +63,7 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
      * @return 主治医意見書作成依頼情報
      */
     public ShujiiIkenshoSakuseiIrai get主治医意見書作成依頼情報(ShinseishoKanriNo 申請書管理番号, IkenshosakuseiIraiRirekiNo 意見書作成依頼履歴番号) {
-        DbT5011ShujiiIkenshoIraiJohoEntity entity = iraiDac.select(申請書管理番号, 意見書作成依頼履歴番号.value().intValue());
-        return entity == null ? null : ShujiiIkenshoSakuseiIraiJohoMapper.toShujiiIkenshoSakuseiIrai(entity);
+        return getShujiiIkenshoSakuseiIrai(iraiDac.select(申請書管理番号, 意見書作成依頼履歴番号.value().intValue()));
     }
 
     /**
@@ -68,7 +73,7 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
      * @return 主治医意見書作成依頼情報
      */
     public List<ShujiiIkenshoSakuseiIrai> get主治医意見書作成依頼情報By申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
-        return ShujiiIkenshoSakuseiIraiJohoMapper.toShujiiIkenshoSakuseiIraiList(iraiDac.selectBy申請書管理番号(申請書管理番号));
+        return getShujiiIkenshoSakuseiIraiList(iraiDac.selectBy申請書管理番号(申請書管理番号));
     }
 
     /**
@@ -78,7 +83,7 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
      * @return 主治医意見書作成依頼情報
      */
     public List<ShujiiIkenshoSakuseiIrai> get主治医意見書作成依頼情報By依頼年月日(FlexibleDate 意見書作成依頼年月日) {
-        return ShujiiIkenshoSakuseiIraiJohoMapper.toShujiiIkenshoSakuseiIraiList(iraiDac.selectBy依頼年月日(意見書作成依頼年月日));
+        return getShujiiIkenshoSakuseiIraiList(iraiDac.selectBy依頼年月日(意見書作成依頼年月日));
     }
 
     /**
@@ -89,7 +94,7 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
      * @return 主治医意見書作成依頼情報
      */
     public List<ShujiiIkenshoSakuseiIrai> get主治医意見書作成依頼情報By主治医情報(KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード) {
-        return ShujiiIkenshoSakuseiIraiJohoMapper.toShujiiIkenshoSakuseiIraiList(iraiDac.selectBy主治医情報(介護医療機関コード.getValue(), 介護医師コード.value()));
+        return getShujiiIkenshoSakuseiIraiList(iraiDac.selectBy主治医情報(介護医療機関コード.getValue(), 介護医師コード.value()));
     }
 
     /**
@@ -99,7 +104,7 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
      * @return 主治医意見書作成依頼情報
      */
     public List<ShujiiIkenshoSakuseiIrai> get主治医意見書作成依頼情報By督促年月日(FlexibleDate 意見書作成督促年月日) {
-        return ShujiiIkenshoSakuseiIraiJohoMapper.toShujiiIkenshoSakuseiIraiList(iraiDac.selectBy督促年月日(意見書作成督促年月日));
+        return getShujiiIkenshoSakuseiIraiList(iraiDac.selectBy督促年月日(意見書作成督促年月日));
     }
 
     /**
@@ -131,5 +136,26 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
      */
     public boolean save(NinteiShinseiJoho 認定申請情報) {
         return shinseiDac.update(NinteishinseiJohoMapper.to認定申請情報Entity(認定申請情報)) != 0;
+    }
+
+    private ShujiiIkenshoSakuseiIrai getShujiiIkenshoSakuseiIrai(DbT5011ShujiiIkenshoIraiJohoEntity iraiEntity) {
+        if (iraiEntity == null) {
+            return null;
+        }
+        DbT5001NinteiShinseiJohoEntity shinseiEntity = shinseiDac.select(iraiEntity.getShinseishoKanriNo());
+        if (shinseiEntity == null) {
+            return null;
+        }
+        KaigoDoctor kaigoDoctor = kaigoDoctorManager.get介護医師(shinseiEntity.getShichosonCode(),
+                new KaigoIryoKikanCode(iraiEntity.getKaigoIryokikanCode()), new KaigoDoctorCode(iraiEntity.getKaigoIshiCode()));
+        return ShujiiIkenshoSakuseiIraiJohoMapper.toShujiiIkenshoSakuseiIrai(iraiEntity, kaigoDoctor);
+    }
+
+    private List<ShujiiIkenshoSakuseiIrai> getShujiiIkenshoSakuseiIraiList(List<DbT5011ShujiiIkenshoIraiJohoEntity> iraiEntityList) {
+        List<ShujiiIkenshoSakuseiIrai> list = new ArrayList<>();
+        for (DbT5011ShujiiIkenshoIraiJohoEntity entity : iraiEntityList) {
+            list.add(getShujiiIkenshoSakuseiIrai(entity));
+        }
+        return list;
     }
 }
