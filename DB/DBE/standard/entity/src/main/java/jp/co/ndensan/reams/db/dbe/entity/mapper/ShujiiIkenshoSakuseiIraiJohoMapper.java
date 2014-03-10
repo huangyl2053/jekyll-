@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoSakuseiIraiJoho;
+import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoSakuseiIrai;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IkenshoSakuseiTokusokuHoho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiKubun;
@@ -36,8 +36,8 @@ public final class ShujiiIkenshoSakuseiIraiJohoMapper {
      * @param entity 主治医意見書作成依頼情報エンティティ
      * @return 主治医意見書作成依頼情報
      */
-    public static ShujiiIkenshoSakuseiIraiJoho toShujiiIkenshoSakuseiIraiJoho(DbT5011ShujiiIkenshoIraiJohoEntity entity) {
-        return new ShujiiIkenshoSakuseiIraiJoho(
+    public static ShujiiIkenshoSakuseiIrai toShujiiIkenshoSakuseiIrai(DbT5011ShujiiIkenshoIraiJohoEntity entity) {
+        return new ShujiiIkenshoSakuseiIrai(
                 entity.getShinseishoKanriNo(),
                 new IkenshosakuseiIraiRirekiNo(entity.getIkenshoIraiRirekiNo()),
                 new KaigoIryoKikanCode(entity.getKaigoIryokikanCode()),
@@ -62,10 +62,10 @@ public final class ShujiiIkenshoSakuseiIraiJohoMapper {
      * @param entityList 主治医意見書作成依頼情報エンティティリスト
      * @return 主治医意見書作成依頼情報リスト
      */
-    public static List<ShujiiIkenshoSakuseiIraiJoho> toShujiiIkenshoSakuseiIraiJohoList(List<DbT5011ShujiiIkenshoIraiJohoEntity> entityList) {
-        List<ShujiiIkenshoSakuseiIraiJoho> list = new ArrayList<>();
+    public static List<ShujiiIkenshoSakuseiIrai> toShujiiIkenshoSakuseiIraiList(List<DbT5011ShujiiIkenshoIraiJohoEntity> entityList) {
+        List<ShujiiIkenshoSakuseiIrai> list = new ArrayList<>();
         for (DbT5011ShujiiIkenshoIraiJohoEntity entity : entityList) {
-            list.add(toShujiiIkenshoSakuseiIraiJoho(entity));
+            list.add(toShujiiIkenshoSakuseiIrai(entity));
         }
         return list;
     }
@@ -76,7 +76,7 @@ public final class ShujiiIkenshoSakuseiIraiJohoMapper {
      * @param iraiJoho 主治医意見書作成依頼情報
      * @return 主治医意見書作成依頼情報エンティティ
      */
-    public static DbT5011ShujiiIkenshoIraiJohoEntity toDbT5011ShujiiIkenshoIraiJohoEntity(ShujiiIkenshoSakuseiIraiJoho iraiJoho) {
+    public static DbT5011ShujiiIkenshoIraiJohoEntity toDbT5011ShujiiIkenshoIraiJohoEntity(ShujiiIkenshoSakuseiIrai iraiJoho) {
         DbT5011ShujiiIkenshoIraiJohoEntity entity = new DbT5011ShujiiIkenshoIraiJohoEntity();
         entity.setShinseishoKanriNo(iraiJoho.get申請書管理番号());
         entity.setIkenshoIraiRirekiNo(iraiJoho.get意見書作成依頼履歴番号().value().intValue());

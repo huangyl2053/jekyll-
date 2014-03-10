@@ -22,7 +22,7 @@ import static java.util.Objects.requireNonNull;
  *
  * @author N8156 宮本 康
  */
-public class ShujiiIkenshoSakuseiIraiJoho {
+public class ShujiiIkenshoSakuseiIrai {
 
     private final ShinseishoKanriNo 申請書管理番号;
     private final IkenshosakuseiIraiRirekiNo 意見書作成依頼履歴番号;
@@ -61,7 +61,7 @@ public class ShujiiIkenshoSakuseiIraiJoho {
      * @param 意見書作成督促回数 意見書作成督促回数
      * @param 意見書作成督促メモ 意見書作成督促メモ
      */
-    public ShujiiIkenshoSakuseiIraiJoho(
+    public ShujiiIkenshoSakuseiIrai(
             ShinseishoKanriNo 申請書管理番号,
             IkenshosakuseiIraiRirekiNo 意見書作成依頼履歴番号,
             KaigoIryoKikanCode 介護医療機関コード,

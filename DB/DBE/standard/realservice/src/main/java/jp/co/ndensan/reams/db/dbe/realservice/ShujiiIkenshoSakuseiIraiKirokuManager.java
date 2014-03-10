@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
-import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoSakuseiIraiJoho;
+import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoSakuseiIrai;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5011ShujiiIkenshoIraiJohoEntity;
@@ -56,9 +56,9 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
      * @param 意見書作成依頼履歴番号 意見書作成依頼履歴番号
      * @return 主治医意見書作成依頼情報
      */
-    public ShujiiIkenshoSakuseiIraiJoho get主治医意見書作成依頼情報(ShinseishoKanriNo 申請書管理番号, IkenshosakuseiIraiRirekiNo 意見書作成依頼履歴番号) {
+    public ShujiiIkenshoSakuseiIrai get主治医意見書作成依頼情報(ShinseishoKanriNo 申請書管理番号, IkenshosakuseiIraiRirekiNo 意見書作成依頼履歴番号) {
         DbT5011ShujiiIkenshoIraiJohoEntity entity = iraiDac.select(申請書管理番号, 意見書作成依頼履歴番号.value().intValue());
-        return entity == null ? null : ShujiiIkenshoSakuseiIraiJohoMapper.toShujiiIkenshoSakuseiIraiJoho(entity);
+        return entity == null ? null : ShujiiIkenshoSakuseiIraiJohoMapper.toShujiiIkenshoSakuseiIrai(entity);
     }
 
     /**
@@ -67,8 +67,8 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
      * @param 申請書管理番号 申請書管理番号
      * @return 主治医意見書作成依頼情報
      */
-    public List<ShujiiIkenshoSakuseiIraiJoho> get主治医意見書作成依頼情報By申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
-        return ShujiiIkenshoSakuseiIraiJohoMapper.toShujiiIkenshoSakuseiIraiJohoList(iraiDac.selectBy申請書管理番号(申請書管理番号));
+    public List<ShujiiIkenshoSakuseiIrai> get主治医意見書作成依頼情報By申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
+        return ShujiiIkenshoSakuseiIraiJohoMapper.toShujiiIkenshoSakuseiIraiList(iraiDac.selectBy申請書管理番号(申請書管理番号));
     }
 
     /**
@@ -77,8 +77,8 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
      * @param 意見書作成依頼年月日 意見書作成依頼年月日
      * @return 主治医意見書作成依頼情報
      */
-    public List<ShujiiIkenshoSakuseiIraiJoho> get主治医意見書作成依頼情報By依頼年月日(FlexibleDate 意見書作成依頼年月日) {
-        return ShujiiIkenshoSakuseiIraiJohoMapper.toShujiiIkenshoSakuseiIraiJohoList(iraiDac.selectBy依頼年月日(意見書作成依頼年月日));
+    public List<ShujiiIkenshoSakuseiIrai> get主治医意見書作成依頼情報By依頼年月日(FlexibleDate 意見書作成依頼年月日) {
+        return ShujiiIkenshoSakuseiIraiJohoMapper.toShujiiIkenshoSakuseiIraiList(iraiDac.selectBy依頼年月日(意見書作成依頼年月日));
     }
 
     /**
@@ -88,8 +88,8 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
      * @param 介護医師コード 介護医師コード
      * @return 主治医意見書作成依頼情報
      */
-    public List<ShujiiIkenshoSakuseiIraiJoho> get主治医意見書作成依頼情報By主治医情報(KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード) {
-        return ShujiiIkenshoSakuseiIraiJohoMapper.toShujiiIkenshoSakuseiIraiJohoList(iraiDac.selectBy主治医情報(介護医療機関コード.getValue(), 介護医師コード.value()));
+    public List<ShujiiIkenshoSakuseiIrai> get主治医意見書作成依頼情報By主治医情報(KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード) {
+        return ShujiiIkenshoSakuseiIraiJohoMapper.toShujiiIkenshoSakuseiIraiList(iraiDac.selectBy主治医情報(介護医療機関コード.getValue(), 介護医師コード.value()));
     }
 
     /**
@@ -98,8 +98,8 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
      * @param 意見書作成督促年月日 意見書作成督促年月日
      * @return 主治医意見書作成依頼情報
      */
-    public List<ShujiiIkenshoSakuseiIraiJoho> get主治医意見書作成依頼情報By督促年月日(FlexibleDate 意見書作成督促年月日) {
-        return ShujiiIkenshoSakuseiIraiJohoMapper.toShujiiIkenshoSakuseiIraiJohoList(iraiDac.selectBy督促年月日(意見書作成督促年月日));
+    public List<ShujiiIkenshoSakuseiIrai> get主治医意見書作成依頼情報By督促年月日(FlexibleDate 意見書作成督促年月日) {
+        return ShujiiIkenshoSakuseiIraiJohoMapper.toShujiiIkenshoSakuseiIraiList(iraiDac.selectBy督促年月日(意見書作成督促年月日));
     }
 
     /**
@@ -108,7 +108,7 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
      * @param 主治医意見書作成依頼情報 主治医意見書作成依頼情報
      * @return 追加、または更新が成功した場合はtrueを返します。
      */
-    public boolean save(ShujiiIkenshoSakuseiIraiJoho 主治医意見書作成依頼情報) {
+    public boolean save(ShujiiIkenshoSakuseiIrai 主治医意見書作成依頼情報) {
         return iraiDac.insertOrUpdate(ShujiiIkenshoSakuseiIraiJohoMapper.toDbT5011ShujiiIkenshoIraiJohoEntity(主治医意見書作成依頼情報)) != 0;
     }
 
