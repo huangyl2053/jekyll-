@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKubun;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosaIraiKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosaKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import static java.util.Objects.requireNonNull;
@@ -20,7 +20,7 @@ import static java.util.Objects.requireNonNull;
 public class NinteichosaResultOfGaikyoKihon {
 
     private final FlexibleDate 認定調査実施年月日;
-    private final ChosaIraiKubun 認定調査依頼区分;
+    private final NinteichosaIraiKubunCode 認定調査依頼区分;
     private final RString 認定調査実施場所コード;
     private final RString 認定調査実施場所名称;
 // TODO N8156 宮本 康 認定調査依頼担当者のチケット完了後に対応
@@ -40,7 +40,7 @@ public class NinteichosaResultOfGaikyoKihon {
      */
     public NinteichosaResultOfGaikyoKihon(
             FlexibleDate 認定調査実施年月日,
-            ChosaIraiKubun 認定調査依頼区分,
+            NinteichosaIraiKubunCode 認定調査依頼区分,
             RString 認定調査実施場所コード,
             RString 認定調査実施場所名称,
             ChosaKubun 認定調査区分,
@@ -67,7 +67,7 @@ public class NinteichosaResultOfGaikyoKihon {
      *
      * @return 認定調査依頼区分
      */
-    public ChosaIraiKubun get認定調査依頼区分() {
+    public NinteichosaIraiKubunCode get認定調査依頼区分() {
         return 認定調査依頼区分;
     }
 

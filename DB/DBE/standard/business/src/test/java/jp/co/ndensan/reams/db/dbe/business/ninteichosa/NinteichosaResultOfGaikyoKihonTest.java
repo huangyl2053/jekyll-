@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosaIraiKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -65,7 +65,7 @@ public class NinteichosaResultOfGaikyoKihonTest {
     private static NinteichosaResultOfGaikyoKihon createNinteichosaResultGaikyoKihon(int flg) {
         return new NinteichosaResultOfGaikyoKihon(
                 flg == AS_認定調査実施年月日がNULL ? null : any(FlexibleDate.class),
-                flg == AS_認定調査依頼区分がNULL ? null : any(ChosaIraiKubun.class),
+                flg == AS_認定調査依頼区分がNULL ? null : any(NinteichosaIraiKubunCode.class),
                 flg == AS_認定調査実施場所コードがNULL ? null : any(RString.class),
                 flg == AS_認定調査実施場所名称がNULL ? null : any(RString.class),
                 flg == AS_認定調査区分がNULL ? null : any(ChosaKubun.class),

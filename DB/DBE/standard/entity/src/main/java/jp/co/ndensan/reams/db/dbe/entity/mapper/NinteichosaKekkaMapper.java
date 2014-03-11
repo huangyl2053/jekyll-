@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResult;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfKihon;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.Ninteichosahyo;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosahyoFactory;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosaIraiKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosaItem;
@@ -245,7 +245,7 @@ public final class NinteichosaKekkaMapper {
                 KOROSHO_SHIKIBETSU_KUBUN,
                 new NinteichosaResultOfGaikyoKihon(
                 entity.getNinteichosaJisshiYMD(),
-                ChosaIraiKubun.toValue(entity.getNinteichousaIraiKubunCode()),
+                NinteichosaIraiKubunCode.toValue(entity.getNinteichousaIraiKubunCode()),
                 entity.getChosaJisshiBashoCode(),
                 entity.getChosaJisshiBashoMeisho(),
                 ChosaKubun.toValue(entity.getNinteiChosaKubunCode()),

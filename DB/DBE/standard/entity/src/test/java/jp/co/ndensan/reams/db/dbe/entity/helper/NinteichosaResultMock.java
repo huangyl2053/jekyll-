@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyo
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyoKihon;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaItemForResult;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfKihon;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosaIraiKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
@@ -94,7 +94,7 @@ public class NinteichosaResultMock {
                 KoroshoIFKubun.V09A,
                 new NinteichosaResultOfGaikyoKihon(
                 new FlexibleDate("20140101"),
-                ChosaIraiKubun.初回,
+                NinteichosaIraiKubunCode.初回,
                 new RString("12345678"),
                 new RString("認定調査実施場所名称"),
                 ChosaKubun.新規調査,
