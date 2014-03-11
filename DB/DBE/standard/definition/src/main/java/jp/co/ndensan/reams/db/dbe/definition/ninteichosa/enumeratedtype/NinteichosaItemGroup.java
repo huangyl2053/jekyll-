@@ -21,7 +21,7 @@ public class NinteichosaItemGroup {
         /**
          * 調査項目グループが「なし」であることを表します。
          */
-        なし("なし");
+        なし("");
         private RString name;
 
         private OfCommon(String name) {
