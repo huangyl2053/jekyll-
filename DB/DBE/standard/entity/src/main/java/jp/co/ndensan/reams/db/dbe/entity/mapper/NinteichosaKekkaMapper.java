@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosaItem;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
@@ -33,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class NinteichosaKekkaMapper {
 
     // TODO N8156 宮本 康 テーブルから取得する
-    private static final int NENDO_2009 = 2009;
+    private static final KoroshoIFKubun KOROSHO_SHIKIBETSU_KUBUN = KoroshoIFKubun.V09A;
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -206,7 +207,7 @@ public final class NinteichosaKekkaMapper {
 
     private static NinteichosaResultOfGaikyo toNinteichosaResultGaikyo(DbT5008NinteichosaKekkaJohoEntity entity) {
         Map<NinteichosaItemKubun, NinteichosaResultOfItem> map = new EnumMap<>(NinteichosaItemKubun.class);
-        Ninteichosahyo chosahyo = NinteichosahyoFactory.createサービス状況Instance(NENDO_2009);
+        Ninteichosahyo chosahyo = NinteichosahyoFactory.createサービス状況Instance(KOROSHO_SHIKIBETSU_KUBUN);
         setMap(map, chosahyo, NinteichosaItemKubun.現在の状況コード, entity.getGenzainoJokyoCode());
         setMap(map, chosahyo, NinteichosaItemKubun.サービス区分コード, entity.getServiceKubunCode());
         setMap(map, chosahyo, NinteichosaItemKubun.訪問介護, entity.getHomonKaigo());
@@ -241,7 +242,7 @@ public final class NinteichosaKekkaMapper {
         return new NinteichosaResultOfGaikyo(
                 new ShinseishoKanriNo(entity.getShinseishoKanriNo()),
                 new NinteichosaIraiRirekiNo(entity.getNinteichosaRirekiNo()),
-                NENDO_2009,
+                KOROSHO_SHIKIBETSU_KUBUN,
                 new NinteichosaResultOfGaikyoKihon(
                 entity.getNinteichosaJisshiYMD(),
                 ChosaIraiKubun.toValue(entity.getNinteichousaIraiKubunCode()),
@@ -255,7 +256,7 @@ public final class NinteichosaKekkaMapper {
     private static NinteichosaResultOfKihon toNinteichosaResultKihon(
             DbT5008NinteichosaKekkaJohoEntity chosaKekkaEntity, DbT5009NinteichosahyoJohoEntity chosahyoEntity) {
         Map<NinteichosaItemKubun, NinteichosaResultOfItem> map = new EnumMap<>(NinteichosaItemKubun.class);
-        Ninteichosahyo chosahyo = NinteichosahyoFactory.create基本情報Instance(NENDO_2009);
+        Ninteichosahyo chosahyo = NinteichosahyoFactory.create基本情報Instance(KOROSHO_SHIKIBETSU_KUBUN);
         setMap(map, chosahyo, NinteichosaItemKubun.麻痺等の有無_左上肢, chosahyoEntity.getCk_mahiHidariJoshi());
         setMap(map, chosahyo, NinteichosaItemKubun.麻痺等の有無_右上肢, chosahyoEntity.getCk_mahiMigiJoshi());
         setMap(map, chosahyo, NinteichosaItemKubun.麻痺等の有無_左下肢, chosahyoEntity.getCk_mahiHidariKashi());
@@ -334,7 +335,7 @@ public final class NinteichosaKekkaMapper {
         setMap(map, chosahyo, NinteichosaItemKubun.認知症高齢者の日常生活自立度, chosaKekkaEntity.getNinchishoNichijoSeikatsuJiritsudoCode());
         return new NinteichosaResultOfKihon(
                 new ShinseishoKanriNo(chosahyoEntity.getShinseishoKanriNo()), new NinteichosaIraiRirekiNo(chosahyoEntity.getNinteichosaRirekiNo()),
-                NENDO_2009, new Ninteichosahyo(map, NinteichosaItemGroup.Of2009.values()));
+                KOROSHO_SHIKIBETSU_KUBUN, new Ninteichosahyo(map, NinteichosaItemGroup.Of2009.values()));
     }
 
     private static RString getString(Ninteichosahyo<NinteichosaResultOfItem> chosahyo, NinteichosaItemKubun key) {

@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import org.junit.Test;
@@ -21,7 +22,8 @@ public class NinteichosaResultOfKihonTest {
 
     private static final int AS_申請書管理番号がNULL = 1;
     private static final int AS_認定調査依頼履歴番号がNULL = 2;
-    private static final int AS_調査結果がNULL = 3;
+    private static final int AS_厚労省IF識別区分がNULL = 3;
+    private static final int AS_調査結果がNULL = 4;
 
     public static class コンストラクタ {
 
@@ -36,6 +38,11 @@ public class NinteichosaResultOfKihonTest {
         }
 
         @Test(expected = NullPointerException.class)
+        public void 厚労省IF識別区分がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
+            createNinteichosaResultOfKihon(AS_厚労省IF識別区分がNULL);
+        }
+
+        @Test(expected = NullPointerException.class)
         public void 調査結果がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
             createNinteichosaResultOfKihon(AS_調査結果がNULL);
         }
@@ -44,7 +51,8 @@ public class NinteichosaResultOfKihonTest {
     private static NinteichosaResultOfKihon createNinteichosaResultOfKihon(int flg) {
         return new NinteichosaResultOfKihon(
                 flg == AS_申請書管理番号がNULL ? null : any(ShinseishoKanriNo.class),
-                flg == AS_認定調査依頼履歴番号がNULL ? null : any(NinteichosaIraiRirekiNo.class), 2009,
+                flg == AS_認定調査依頼履歴番号がNULL ? null : any(NinteichosaIraiRirekiNo.class),
+                flg == AS_厚労省IF識別区分がNULL ? null : any(KoroshoIFKubun.class),
                 flg == AS_調査結果がNULL ? null : any(Ninteichosahyo.class));
     }
 }

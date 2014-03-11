@@ -8,14 +8,15 @@ import java.util.EnumMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.Ninteichosahyo;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosahyoFactory;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfItem;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResult;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfKihon;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyo;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyoKihon;
+import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfItem;
+import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfKihon;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKubun;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosaItem;
@@ -33,8 +34,6 @@ import static org.mockito.Mockito.spy;
  * @author N8156 宮本 康
  */
 public class NinteichosaResultMock {
-
-    private static final int NENDO_2009 = 2009;
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -58,7 +57,7 @@ public class NinteichosaResultMock {
      */
     public static NinteichosaResultOfGaikyo getSpiedNinteichosaResultGaikyoInstance() {
         Map<NinteichosaItemKubun, NinteichosaResultOfItem> map = new EnumMap<>(NinteichosaItemKubun.class);
-        Ninteichosahyo chosahyo = NinteichosahyoFactory.createサービス状況Instance(NENDO_2009);
+        Ninteichosahyo chosahyo = NinteichosahyoFactory.createサービス状況Instance(KoroshoIFKubun.V09A);
         setMap(map, chosahyo, NinteichosaItemKubun.サービス区分コード, ServiceKubun.介護.getCode());
         setMap(map, chosahyo, NinteichosaItemKubun.訪問介護, 0);
         setMap(map, chosahyo, NinteichosaItemKubun.訪問入浴介護, 1);
@@ -92,7 +91,7 @@ public class NinteichosaResultMock {
         return spy(new NinteichosaResultOfGaikyo(
                 new ShinseishoKanriNo(new RString("1234567890")),
                 new NinteichosaIraiRirekiNo(0),
-                NENDO_2009,
+                KoroshoIFKubun.V09A,
                 new NinteichosaResultOfGaikyoKihon(
                 new FlexibleDate("20140101"),
                 ChosaIraiKubun.初回,
@@ -110,7 +109,7 @@ public class NinteichosaResultMock {
      */
     public static NinteichosaResultOfKihon getSpiedNinteichosaResultKihonInstance() {
         Map<NinteichosaItemKubun, NinteichosaResultOfItem> map = new EnumMap<>(NinteichosaItemKubun.class);
-        Ninteichosahyo chosahyo = NinteichosahyoFactory.create基本情報Instance(NENDO_2009);
+        Ninteichosahyo chosahyo = NinteichosahyoFactory.create基本情報Instance(KoroshoIFKubun.V09A);
         setMap(map, chosahyo, 麻痺等の有無_左上肢, NaiAru.ない.getCode());
         setMap(map, chosahyo, 麻痺等の有無_右上肢, NaiAru.ある.getCode());
         setMap(map, chosahyo, 麻痺等の有無_左下肢, NaiAru.ない.getCode());
@@ -188,7 +187,7 @@ public class NinteichosaResultMock {
         setMap(map, chosahyo, 障害高齢者の日常生活自立度, ShogaiJiritsu.Ａ１.getCode());
         setMap(map, chosahyo, 認知症高齢者の日常生活自立度, NinchishoJiritsu.Ⅱａ.getCode());
         return new NinteichosaResultOfKihon(new ShinseishoKanriNo(new RString("1234567890")), new NinteichosaIraiRirekiNo(0),
-                NENDO_2009, new Ninteichosahyo(map, NinteichosaItemGroup.Of2009.values()));
+                KoroshoIFKubun.V09A, new Ninteichosahyo(map, NinteichosaItemGroup.Of2009.values()));
     }
 
     private static void setMap(Map<NinteichosaItemKubun, NinteichosaResultOfItem> map, Ninteichosahyo 調査票,

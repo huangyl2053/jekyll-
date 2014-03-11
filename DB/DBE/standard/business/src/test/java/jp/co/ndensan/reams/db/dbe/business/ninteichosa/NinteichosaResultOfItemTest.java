@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Ninteich
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.IAnsweringItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemSubGroup;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -145,7 +146,7 @@ public class NinteichosaResultOfItemTest {
     }
 
     private static NinteichosaItem createNinteichosaItem(NinteichosaItemKubun itemKubun) {
-        NinteichosaItem item = (NinteichosaItem) NinteichosahyoFactory.createサービス状況Instance(2009).get調査項目(itemKubun);
-        return item == null ? (NinteichosaItem) NinteichosahyoFactory.create基本情報Instance(2009).get調査項目(itemKubun) : item;
+        NinteichosaItem item = (NinteichosaItem) NinteichosahyoFactory.createサービス状況Instance(KoroshoIFKubun.V09A).get調査項目(itemKubun);
+        return item == null ? (NinteichosaItem) NinteichosahyoFactory.create基本情報Instance(KoroshoIFKubun.V09A).get調査項目(itemKubun) : item;
     }
 }
