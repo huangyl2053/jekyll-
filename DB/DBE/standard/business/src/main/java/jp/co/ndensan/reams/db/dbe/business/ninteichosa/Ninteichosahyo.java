@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubun;
@@ -67,11 +68,7 @@ public class Ninteichosahyo<T extends INinteichosaItem> {
      * @return 調査項目リスト
      */
     public List<T> get調査項目ListAll() {
-        List<T> list = new ArrayList<>();
-        for (T 調査項目 : 調査票定義.values()) {
-            list.add(調査項目);
-        }
-        return list;
+        return (List) Arrays.asList(調査票定義.values().toArray());
     }
 
     /**
