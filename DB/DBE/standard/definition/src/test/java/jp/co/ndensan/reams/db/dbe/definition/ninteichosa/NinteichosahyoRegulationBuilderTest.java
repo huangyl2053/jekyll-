@@ -20,18 +20,18 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * 要介護認定調査の調査票定義を扱うUtilityクラスのテストクラスです。
+ * 要介護認定調査の調査票定義を扱うBuilderクラスのテストクラスです。
  *
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class NinteichosahyoRegulationUtilTest {
+public class NinteichosahyoRegulationBuilderTest {
 
     public static class コンストラクタ {
 
         @Test(expected = NullPointerException.class)
         public void 調査票定義がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            new NinteichosahyoRegulationUtil(null);
+            new NinteichosahyoRegulationBuilder(null);
         }
     }
 
@@ -68,7 +68,7 @@ public class NinteichosahyoRegulationUtilTest {
 
     private static Map<NinteichosaItemKubun, INinteichosaItem> create調査票定義() {
         Map<NinteichosaItemKubun, INinteichosaItem> 調査票定義 = new EnumMap<>(NinteichosaItemKubun.class);
-        NinteichosahyoRegulationUtil util = new NinteichosahyoRegulationUtil(調査票定義);
+        NinteichosahyoRegulationBuilder util = new NinteichosahyoRegulationBuilder(調査票定義);
         util.set調査項目グループ(NinteichosaItemGroup.Of2009.第１群, NinteichosaItemSubGroup.Of2009.麻痺等の有無);
         util.set調査項目("1-1", NinteichosaItemKubun.麻痺等の有無_左上肢, "左上肢", Choice.Checked.values());
         util.set調査項目("1-1", NinteichosaItemKubun.麻痺等の有無_右上肢, "右上肢", Choice.Checked.values());
