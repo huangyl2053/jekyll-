@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResult;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosaKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5008NinteichosaKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5009NinteichosahyoJohoEntity;
@@ -67,7 +67,7 @@ public class NinteichosaKekkaMapperTest {
 
         @Test
         public void 認定調査区分の設定がある時_toNinteichosaResult_get認定調査区分は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().get基本情報().get認定調査区分(), is(ChosaKubun.新規調査));
+            assertThat(toNinteichosaResult().get概況調査結果().get基本情報().get認定調査区分(), is(NinteichosaKubun.新規調査));
         }
 
         @Test
@@ -623,7 +623,7 @@ public class NinteichosaKekkaMapperTest {
 
         @Test
         public void 認定調査区分の設定がある時_toDbT5008NinteichosaKekkaJohoEntity_getNinteiChosaKubunCodeは_設定値を返す() {
-            assertThat(toDbT5008NinteichosaKekkaJohoEntity().getNinteiChosaKubunCode(), is(ChosaKubun.新規調査.getCode()));
+            assertThat(toDbT5008NinteichosaKekkaJohoEntity().getNinteiChosaKubunCode(), is(NinteichosaKubun.新規調査.getCode()));
         }
 
         @Test

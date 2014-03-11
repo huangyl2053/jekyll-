@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyo
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaItemForResult;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfKihon;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosaKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroup;
@@ -97,7 +97,7 @@ public class NinteichosaResultMock {
                 NinteichosaIraiKubunCode.初回,
                 new RString("12345678"),
                 new RString("認定調査実施場所名称"),
-                ChosaKubun.新規調査,
+                NinteichosaKubun.新規調査,
                 ShinsakaiFuriwakeKubun.希望無し),
                 new Ninteichosahyo(map, NinteichosaItemGroup.Of2009.values())));
     }

@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosaKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -68,7 +68,7 @@ public class NinteichosaResultOfGaikyoKihonTest {
                 flg == AS_認定調査依頼区分がNULL ? null : any(NinteichosaIraiKubunCode.class),
                 flg == AS_認定調査実施場所コードがNULL ? null : any(RString.class),
                 flg == AS_認定調査実施場所名称がNULL ? null : any(RString.class),
-                flg == AS_認定調査区分がNULL ? null : any(ChosaKubun.class),
+                flg == AS_認定調査区分がNULL ? null : any(NinteichosaKubun.class),
                 flg == AS_審査会優先振分区分がNULL ? null : any(ShinsakaiFuriwakeKubun.class));
     }
 }

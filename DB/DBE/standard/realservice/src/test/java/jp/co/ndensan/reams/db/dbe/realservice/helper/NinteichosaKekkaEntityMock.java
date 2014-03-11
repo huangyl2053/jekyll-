@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.realservice.helper;
 
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosaKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5008NinteichosaKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5009NinteichosahyoJohoEntity;
@@ -38,7 +38,7 @@ public class NinteichosaKekkaEntityMock {
         entity.setNinteichosaRirekiNo(0);
         entity.setNinteichousaIraiKubunCode(NinteichosaIraiKubunCode.初回.getCode());
         entity.setNinteichosaJisshiYMD(new FlexibleDate("20140101"));
-        entity.setNinteiChosaKubunCode(ChosaKubun.新規調査.getCode());
+        entity.setNinteiChosaKubunCode(NinteichosaKubun.新規調査.getCode());
         entity.setChosaJisshiBashoCode(new RString("12345678"));
         entity.setChosaJisshiBashoMeisho(new RString("認定調査実施場所名称"));
         entity.setGenzainoJokyoCode(new RString("3"));

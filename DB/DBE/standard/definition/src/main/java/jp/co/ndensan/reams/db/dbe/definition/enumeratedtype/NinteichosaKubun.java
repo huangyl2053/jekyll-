@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N8156 宮本 康
  */
-public enum ChosaKubun {
+public enum NinteichosaKubun {
 
     /**
      * 調査区分が「新規調査」であることを表します。<br />
@@ -19,13 +19,13 @@ public enum ChosaKubun {
      */
     新規調査(0),
     /**
-     * 調査区分が「再調査」であることを表します。<br />
+     * 調査区分が「継続調査」であることを表します。<br />
      * コード : 1
      */
-    再調査(1);
+    継続調査(1);
     private final int code;
 
-    private ChosaKubun(int code) {
+    private NinteichosaKubun(int code) {
         this.code = code;
     }
 
@@ -44,8 +44,8 @@ public enum ChosaKubun {
      * @param code コード
      * @return 列挙型
      */
-    public static ChosaKubun toValue(RString code) {
-        for (ChosaKubun data : ChosaKubun.values()) {
+    public static NinteichosaKubun toValue(RString code) {
+        for (NinteichosaKubun data : NinteichosaKubun.values()) {
             if (data.getCode().equals(code)) {
                 return data;
             }
