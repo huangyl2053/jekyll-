@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice;
  *
  * @author N8156 宮本 康
  */
-public class NinteichosaResultOfItem implements INinteichosaItem {
+public class NinteichosaItemForResult implements INinteichosaItem {
 
     private final NinteichosaItem 調査項目;
     private final RString 調査結果;
@@ -33,7 +33,7 @@ public class NinteichosaResultOfItem implements INinteichosaItem {
      * @param 調査項目 調査項目
      * @param 調査結果 調査結果
      */
-    public NinteichosaResultOfItem(NinteichosaItem 調査項目, RString 調査結果) {
+    public NinteichosaItemForResult(NinteichosaItem 調査項目, RString 調査結果) {
         this.調査項目 = requireNonNull(調査項目, Messages.E00001.replace("調査項目").getMessage());
         this.調査結果 = requireNonNull(調査結果, Messages.E00001.replace("調査結果").getMessage());
     }

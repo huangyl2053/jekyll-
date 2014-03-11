@@ -20,7 +20,7 @@ public class NinteichosaResultOfKihon {
     private final ShinseishoKanriNo 申請書管理番号;
     private final NinteichosaIraiRirekiNo 認定調査依頼履歴番号;
     private final KoroshoIFKubun 厚労省IF識別区分;
-    private final Ninteichosahyo<NinteichosaResultOfItem> 基本情報;
+    private final Ninteichosahyo<NinteichosaItemForResult> 基本情報;
 
     /**
      * インスタンスを生成します。
@@ -31,7 +31,7 @@ public class NinteichosaResultOfKihon {
      * @param 基本情報 基本情報
      */
     public NinteichosaResultOfKihon(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号,
-            KoroshoIFKubun 厚労省IF識別区分, Ninteichosahyo<NinteichosaResultOfItem> 基本情報) {
+            KoroshoIFKubun 厚労省IF識別区分, Ninteichosahyo<NinteichosaItemForResult> 基本情報) {
         this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00001.replace("申請書管理番号").getMessage());
         this.認定調査依頼履歴番号 = requireNonNull(認定調査依頼履歴番号, Messages.E00001.replace("認定調査依頼履歴番号").getMessage());
         this.厚労省IF識別区分 = requireNonNull(厚労省IF識別区分, Messages.E00001.replace("厚労省IF識別区分").getMessage());
@@ -70,7 +70,7 @@ public class NinteichosaResultOfKihon {
      *
      * @return 調査結果（基本情報）
      */
-    public Ninteichosahyo<NinteichosaResultOfItem> get基本情報() {
+    public Ninteichosahyo<NinteichosaItemForResult> get基本情報() {
         return 基本情報;
     }
 }

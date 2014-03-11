@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosahyoFactory;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResult;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyo;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyoKihon;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfItem;
+import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaItemForResult;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfKihon;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosaKubun;
@@ -56,7 +56,7 @@ public class NinteichosaResultMock {
      * @return NinteichosaResultOfGaikyo
      */
     public static NinteichosaResultOfGaikyo getSpiedNinteichosaResultGaikyoInstance() {
-        Map<NinteichosaItemKubun, NinteichosaResultOfItem> map = new EnumMap<>(NinteichosaItemKubun.class);
+        Map<NinteichosaItemKubun, NinteichosaItemForResult> map = new EnumMap<>(NinteichosaItemKubun.class);
         Ninteichosahyo chosahyo = NinteichosahyoFactory.createサービス状況Instance(KoroshoIFKubun.V09A);
         setMap(map, chosahyo, NinteichosaItemKubun.サービス区分コード, ServiceKubun.介護.getCode());
         setMap(map, chosahyo, NinteichosaItemKubun.訪問介護, 0);
@@ -108,7 +108,7 @@ public class NinteichosaResultMock {
      * @return NinteichosaResultOfKihon
      */
     public static NinteichosaResultOfKihon getSpiedNinteichosaResultKihonInstance() {
-        Map<NinteichosaItemKubun, NinteichosaResultOfItem> map = new EnumMap<>(NinteichosaItemKubun.class);
+        Map<NinteichosaItemKubun, NinteichosaItemForResult> map = new EnumMap<>(NinteichosaItemKubun.class);
         Ninteichosahyo chosahyo = NinteichosahyoFactory.create基本情報Instance(KoroshoIFKubun.V09A);
         setMap(map, chosahyo, 麻痺等の有無_左上肢, NaiAru.ない.getCode());
         setMap(map, chosahyo, 麻痺等の有無_右上肢, NaiAru.ある.getCode());
@@ -190,15 +190,15 @@ public class NinteichosaResultMock {
                 KoroshoIFKubun.V09A, new Ninteichosahyo(map, NinteichosaItemGroup.Of2009.values()));
     }
 
-    private static void setMap(Map<NinteichosaItemKubun, NinteichosaResultOfItem> map, Ninteichosahyo 調査票,
+    private static void setMap(Map<NinteichosaItemKubun, NinteichosaItemForResult> map, Ninteichosahyo 調査票,
             NinteichosaItemKubun 調査項目区分, RString 調査結果) {
         NinteichosaItem item = (NinteichosaItem) 調査票.get調査項目(調査項目区分);
         if (item != null) {
-            map.put(調査項目区分, new NinteichosaResultOfItem(item, 調査結果));
+            map.put(調査項目区分, new NinteichosaItemForResult(item, 調査結果));
         }
     }
 
-    private static void setMap(Map<NinteichosaItemKubun, NinteichosaResultOfItem> map, Ninteichosahyo 調査票,
+    private static void setMap(Map<NinteichosaItemKubun, NinteichosaItemForResult> map, Ninteichosahyo 調査票,
             NinteichosaItemKubun 調査項目区分, int 調査結果) {
         setMap(map, 調査票, 調査項目区分, new RString(String.valueOf(調査結果)));
     }

@@ -21,7 +21,7 @@ public class NinteichosaResultOfGaikyo {
     private final NinteichosaIraiRirekiNo 認定調査依頼履歴番号;
     private final KoroshoIFKubun 厚労省IF識別区分;
     private final NinteichosaResultOfGaikyoKihon 基本情報;
-    private final Ninteichosahyo<NinteichosaResultOfItem> サービス状況;
+    private final Ninteichosahyo<NinteichosaItemForResult> サービス状況;
 
     /**
      * インスタンスを生成します。
@@ -33,7 +33,7 @@ public class NinteichosaResultOfGaikyo {
      * @param サービス状況 サービス状況
      */
     public NinteichosaResultOfGaikyo(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号,
-            KoroshoIFKubun 厚労省IF識別区分, NinteichosaResultOfGaikyoKihon 基本情報, Ninteichosahyo<NinteichosaResultOfItem> サービス状況) {
+            KoroshoIFKubun 厚労省IF識別区分, NinteichosaResultOfGaikyoKihon 基本情報, Ninteichosahyo<NinteichosaItemForResult> サービス状況) {
         this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00001.replace("申請書管理番号").getMessage());
         this.認定調査依頼履歴番号 = requireNonNull(認定調査依頼履歴番号, Messages.E00001.replace("認定調査依頼履歴番号").getMessage());
         this.厚労省IF識別区分 = requireNonNull(厚労省IF識別区分, Messages.E00001.replace("厚労省IF識別区分").getMessage());
@@ -82,7 +82,7 @@ public class NinteichosaResultOfGaikyo {
      *
      * @return 調査結果（サービス状況）
      */
-    public Ninteichosahyo<NinteichosaResultOfItem> getサービス状況() {
+    public Ninteichosahyo<NinteichosaItemForResult> getサービス状況() {
         return サービス状況;
     }
 }

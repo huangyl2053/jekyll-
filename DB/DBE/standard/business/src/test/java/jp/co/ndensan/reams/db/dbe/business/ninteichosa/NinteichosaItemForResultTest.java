@@ -26,7 +26,7 @@ import static org.junit.Assert.assertThat;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class NinteichosaResultOfItemTest {
+public class NinteichosaItemForResultTest {
 
     private static final int AS_NULL項目無し = 0;
     private static final int AS_調査項目がNULL = 1;
@@ -127,20 +127,20 @@ public class NinteichosaResultOfItemTest {
         }
     }
 
-    private static NinteichosaResultOfItem createNinteichosaItemResult() {
+    private static NinteichosaItemForResult createNinteichosaItemResult() {
         return createNinteichosaItemResult(AS_NULL項目無し);
     }
 
-    private static NinteichosaResultOfItem createNinteichosaItemResult(int flg) {
+    private static NinteichosaItemForResult createNinteichosaItemResult(int flg) {
         return createNinteichosaItemResult(flg, NinteichosaItemKubun.麻痺等の有無_右上肢);
     }
 
-    private static NinteichosaResultOfItem createNinteichosaItemResult(NinteichosaItemKubun itemKubun) {
+    private static NinteichosaItemForResult createNinteichosaItemResult(NinteichosaItemKubun itemKubun) {
         return createNinteichosaItemResult(AS_NULL項目無し, itemKubun);
     }
 
-    private static NinteichosaResultOfItem createNinteichosaItemResult(int flg, NinteichosaItemKubun itemKubun) {
-        return new NinteichosaResultOfItem(
+    private static NinteichosaItemForResult createNinteichosaItemResult(int flg, NinteichosaItemKubun itemKubun) {
+        return new NinteichosaItemForResult(
                 flg == AS_調査項目がNULL ? null : createNinteichosaItem(itemKubun),
                 flg == AS_調査結果がNULL ? null : new RString("1"));
     }

@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import java.util.EnumMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfItem;
+import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaItemForResult;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyo;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyoKihon;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResult;
@@ -65,8 +65,8 @@ public final class NinteichosaKekkaMapper {
     public static DbT5008NinteichosaKekkaJohoEntity toDbT5008NinteichosaKekkaJohoEntity(NinteichosaResult ninteichosaKekka) {
 
         NinteichosaResultOfGaikyoKihon rsltKihon = ninteichosaKekka.get概況調査結果().get基本情報();
-        Ninteichosahyo<NinteichosaResultOfItem> rsltGaikyoService = ninteichosaKekka.get概況調査結果().getサービス状況();
-        Ninteichosahyo<NinteichosaResultOfItem> rsltGaikyoKihon = ninteichosaKekka.get基本調査結果().get基本情報();
+        Ninteichosahyo<NinteichosaItemForResult> rsltGaikyoService = ninteichosaKekka.get概況調査結果().getサービス状況();
+        Ninteichosahyo<NinteichosaItemForResult> rsltGaikyoKihon = ninteichosaKekka.get基本調査結果().get基本情報();
 
         DbT5008NinteichosaKekkaJohoEntity entity = new DbT5008NinteichosaKekkaJohoEntity();
         entity.setShinseishoKanriNo(ninteichosaKekka.get概況調査結果().get申請書管理番号().value());
@@ -122,7 +122,7 @@ public final class NinteichosaKekkaMapper {
      */
     public static DbT5009NinteichosahyoJohoEntity toDbT5009NinteichosahyoJohoEntity(NinteichosaResult ninteichosaKekka) {
 
-        Ninteichosahyo<NinteichosaResultOfItem> rsltKihon = ninteichosaKekka.get基本調査結果().get基本情報();
+        Ninteichosahyo<NinteichosaItemForResult> rsltKihon = ninteichosaKekka.get基本調査結果().get基本情報();
 
         DbT5009NinteichosahyoJohoEntity entity = new DbT5009NinteichosahyoJohoEntity();
         entity.setShinseishoKanriNo(ninteichosaKekka.get基本調査結果().get申請書管理番号().value());
@@ -206,7 +206,7 @@ public final class NinteichosaKekkaMapper {
     }
 
     private static NinteichosaResultOfGaikyo toNinteichosaResultGaikyo(DbT5008NinteichosaKekkaJohoEntity entity) {
-        Map<NinteichosaItemKubun, NinteichosaResultOfItem> map = new EnumMap<>(NinteichosaItemKubun.class);
+        Map<NinteichosaItemKubun, NinteichosaItemForResult> map = new EnumMap<>(NinteichosaItemKubun.class);
         Ninteichosahyo chosahyo = NinteichosahyoFactory.createサービス状況Instance(KOROSHO_SHIKIBETSU_KUBUN);
         setMap(map, chosahyo, NinteichosaItemKubun.現在の状況コード, entity.getGenzainoJokyoCode());
         setMap(map, chosahyo, NinteichosaItemKubun.サービス区分コード, entity.getServiceKubunCode());
@@ -255,7 +255,7 @@ public final class NinteichosaKekkaMapper {
 
     private static NinteichosaResultOfKihon toNinteichosaResultKihon(
             DbT5008NinteichosaKekkaJohoEntity chosaKekkaEntity, DbT5009NinteichosahyoJohoEntity chosahyoEntity) {
-        Map<NinteichosaItemKubun, NinteichosaResultOfItem> map = new EnumMap<>(NinteichosaItemKubun.class);
+        Map<NinteichosaItemKubun, NinteichosaItemForResult> map = new EnumMap<>(NinteichosaItemKubun.class);
         Ninteichosahyo chosahyo = NinteichosahyoFactory.create基本情報Instance(KOROSHO_SHIKIBETSU_KUBUN);
         setMap(map, chosahyo, NinteichosaItemKubun.麻痺等の有無_左上肢, chosahyoEntity.getCk_mahiHidariJoshi());
         setMap(map, chosahyo, NinteichosaItemKubun.麻痺等の有無_右上肢, chosahyoEntity.getCk_mahiMigiJoshi());
@@ -338,25 +338,25 @@ public final class NinteichosaKekkaMapper {
                 KOROSHO_SHIKIBETSU_KUBUN, new Ninteichosahyo(map, NinteichosaItemGroup.Of2009.values()));
     }
 
-    private static RString getString(Ninteichosahyo<NinteichosaResultOfItem> chosahyo, NinteichosaItemKubun key) {
-        NinteichosaResultOfItem rslt = chosahyo.get調査項目(key);
+    private static RString getString(Ninteichosahyo<NinteichosaItemForResult> chosahyo, NinteichosaItemKubun key) {
+        NinteichosaItemForResult rslt = chosahyo.get調査項目(key);
         return rslt == null ? null : rslt.get調査結果();
     }
 
-    private static int getInt(Ninteichosahyo<NinteichosaResultOfItem> chosahyo, NinteichosaItemKubun key) {
-        NinteichosaResultOfItem rslt = chosahyo.get調査項目(key);
+    private static int getInt(Ninteichosahyo<NinteichosaItemForResult> chosahyo, NinteichosaItemKubun key) {
+        NinteichosaItemForResult rslt = chosahyo.get調査項目(key);
         return rslt == null ? 0 : Integer.parseInt(rslt.get調査結果().toString());
     }
 
-    private static void setMap(Map<NinteichosaItemKubun, NinteichosaResultOfItem> map, Ninteichosahyo 調査票,
+    private static void setMap(Map<NinteichosaItemKubun, NinteichosaItemForResult> map, Ninteichosahyo 調査票,
             NinteichosaItemKubun 調査項目区分, RString 調査結果) {
         NinteichosaItem item = (NinteichosaItem) 調査票.get調査項目(調査項目区分);
         if (item != null) {
-            map.put(調査項目区分, new NinteichosaResultOfItem(item, 調査結果));
+            map.put(調査項目区分, new NinteichosaItemForResult(item, 調査結果));
         }
     }
 
-    private static void setMap(Map<NinteichosaItemKubun, NinteichosaResultOfItem> map, Ninteichosahyo 調査票,
+    private static void setMap(Map<NinteichosaItemKubun, NinteichosaItemForResult> map, Ninteichosahyo 調査票,
             NinteichosaItemKubun 調査項目区分, int 調査結果) {
         setMap(map, 調査票, 調査項目区分, new RString(String.valueOf(調査結果)));
     }
