@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosaItem;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.INinteichosaItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemSubGroup;
@@ -145,8 +145,8 @@ public class NinteichosaItemForResultTest {
                 flg == AS_調査結果がNULL ? null : new RString("1"));
     }
 
-    private static NinteichosaItem createNinteichosaItem(NinteichosaItemKubun itemKubun) {
-        NinteichosaItem item = (NinteichosaItem) NinteichosahyoFactory.createサービス状況Instance(KoroshoIFKubun.V09A).get調査項目(itemKubun);
-        return item == null ? (NinteichosaItem) NinteichosahyoFactory.create基本情報Instance(KoroshoIFKubun.V09A).get調査項目(itemKubun) : item;
+    private static INinteichosaItem createNinteichosaItem(NinteichosaItemKubun itemKubun) {
+        INinteichosaItem item = NinteichosahyoFactory.createサービス状況Instance(KoroshoIFKubun.V09A).get調査項目(itemKubun);
+        return item == null ? NinteichosahyoFactory.create基本情報Instance(KoroshoIFKubun.V09A).get調査項目(itemKubun) : item;
     }
 }

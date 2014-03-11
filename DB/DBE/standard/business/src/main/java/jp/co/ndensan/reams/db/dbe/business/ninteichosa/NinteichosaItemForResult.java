@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteic
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.IAnsweringItems;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.INinteichosaItem;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosaItem;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItemNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -24,7 +23,7 @@ import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice;
  */
 public class NinteichosaItemForResult implements INinteichosaItem {
 
-    private final NinteichosaItem 調査項目;
+    private final INinteichosaItem 調査項目;
     private final RString 調査結果;
 
     /**
@@ -33,7 +32,7 @@ public class NinteichosaItemForResult implements INinteichosaItem {
      * @param 調査項目 調査項目
      * @param 調査結果 調査結果
      */
-    public NinteichosaItemForResult(NinteichosaItem 調査項目, RString 調査結果) {
+    public NinteichosaItemForResult(INinteichosaItem 調査項目, RString 調査結果) {
         this.調査項目 = requireNonNull(調査項目, Messages.E00001.replace("調査項目").getMessage());
         this.調査結果 = requireNonNull(調査結果, Messages.E00001.replace("調査結果").getMessage());
     }

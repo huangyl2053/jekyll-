@@ -4,7 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaItemForResult;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyo;
@@ -16,7 +18,7 @@ import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosahyoFactory;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKubun;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosaItem;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.INinteichosaItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubun;
@@ -206,39 +208,48 @@ public final class NinteichosaKekkaMapper {
     }
 
     private static NinteichosaResultOfGaikyo toNinteichosaResultGaikyo(DbT5008NinteichosaKekkaJohoEntity entity) {
-        Map<NinteichosaItemKubun, NinteichosaItemForResult> map = new EnumMap<>(NinteichosaItemKubun.class);
         Ninteichosahyo chosahyo = NinteichosahyoFactory.createサービス状況Instance(KOROSHO_SHIKIBETSU_KUBUN);
-        setMap(map, chosahyo, NinteichosaItemKubun.現在の状況コード, entity.getGenzainoJokyoCode());
-        setMap(map, chosahyo, NinteichosaItemKubun.サービス区分コード, entity.getServiceKubunCode());
-        setMap(map, chosahyo, NinteichosaItemKubun.訪問介護, entity.getHomonKaigo());
-        setMap(map, chosahyo, NinteichosaItemKubun.訪問入浴介護, entity.getHomonNyuyokuKaigo());
-        setMap(map, chosahyo, NinteichosaItemKubun.訪問看護, entity.getHomonKango());
-        setMap(map, chosahyo, NinteichosaItemKubun.訪問リハビリ, entity.getHomonRehabilitation());
-        setMap(map, chosahyo, NinteichosaItemKubun.居宅療養管理指導, entity.getKyotakuRyoyoKanriShido());
-        setMap(map, chosahyo, NinteichosaItemKubun.通所介護, entity.getTushoKaigo());
-        setMap(map, chosahyo, NinteichosaItemKubun.通所リハビリテーション, entity.getTushoRehabilitation());
-        setMap(map, chosahyo, NinteichosaItemKubun.短期入所生活介護, entity.getTankiNyushoSeikatsuKaigo());
-        setMap(map, chosahyo, NinteichosaItemKubun.短期入所療養介護, entity.getTankiNyushoRyoyoKaigo());
-        setMap(map, chosahyo, NinteichosaItemKubun.特定施設入居者生活介護, entity.getTokuteiShisetsuNyushoshaSeikatsuKaigo());
-        setMap(map, chosahyo, NinteichosaItemKubun.福祉用具貸与, entity.getHukushiYoguTaiyo());
-        setMap(map, chosahyo, NinteichosaItemKubun.特定福祉用具販売, entity.getTokuteiHukushiYoguHanbai());
-        setMap(map, chosahyo, NinteichosaItemKubun.住宅改修, entity.getJutakuKaishu());
-        setMap(map, chosahyo, NinteichosaItemKubun.夜間対応型訪問介護, entity.getYakanTaiogataHomonKaigo());
-        setMap(map, chosahyo, NinteichosaItemKubun.認知症対応型通所介護, entity.getNinchishoTaiogataTushoKaigo());
-        setMap(map, chosahyo, NinteichosaItemKubun.小規模多機能型居宅介護, entity.getShokiboTakinogataKyotakuKaigo());
-        setMap(map, chosahyo, NinteichosaItemKubun.認知症対応型共同生活介護, entity.getNinchishoTaiogataKyodoSeikatsuKaigo());
-        setMap(map, chosahyo, NinteichosaItemKubun.地域密着型特定施設入居者生活介護, entity.getChiikiMitchakugataTokuteiShisetsuNyushoshaSeikatsuKaigo());
-        setMap(map, chosahyo, NinteichosaItemKubun.地域密着型介護老人福祉施設入所者生活介護, entity.getChiikiMitchakugataKaigoRojinHukushiNyushoshaSeikatsuKaigo());
-        setMap(map, chosahyo, NinteichosaItemKubun.定期巡回_随時対応型訪問介護看護, entity.getTeikijunkaiZuijiTaiogataHomonKaigoKango());
-        setMap(map, chosahyo, NinteichosaItemKubun.複合型サービス, entity.getHukugogataService());
-        setMap(map, chosahyo, NinteichosaItemKubun.市町村特別給付, entity.getShichosonTokubetsuKyufu());
-        setMap(map, chosahyo, NinteichosaItemKubun.介護保険給付以外の在宅サービス, entity.getKaigohokenKyufuIgaiNoZaitakuService());
-        setMap(map, chosahyo, NinteichosaItemKubun.利用施設コード, entity.getRiyoShisetsuCode());
-        setMap(map, chosahyo, NinteichosaItemKubun.利用施設名, entity.getRiyoShisetsuShimei());
-        setMap(map, chosahyo, NinteichosaItemKubun.利用施設住所, entity.getRiyoShisetsuJusho());
-        setMap(map, chosahyo, NinteichosaItemKubun.利用施設電話番号, entity.getRiyoShisetsuTelNo());
-        setMap(map, chosahyo, NinteichosaItemKubun.利用施設郵便番号, entity.getRiyoShisetsuYubinNo());
-        setMap(map, chosahyo, NinteichosaItemKubun.概況特記事項, entity.getGaikyochosaTokkijiko());
+
+        List<NinteichosaItemForResult> list = new ArrayList<>();
+        list.add(createResult(chosahyo, NinteichosaItemKubun.現在の状況コード, entity.getGenzainoJokyoCode()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.サービス区分コード, entity.getServiceKubunCode()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.訪問介護, entity.getHomonKaigo()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.訪問入浴介護, entity.getHomonNyuyokuKaigo()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.訪問看護, entity.getHomonKango()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.訪問リハビリ, entity.getHomonRehabilitation()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.居宅療養管理指導, entity.getKyotakuRyoyoKanriShido()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.通所介護, entity.getTushoKaigo()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.通所リハビリテーション, entity.getTushoRehabilitation()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.短期入所生活介護, entity.getTankiNyushoSeikatsuKaigo()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.短期入所療養介護, entity.getTankiNyushoRyoyoKaigo()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.特定施設入居者生活介護, entity.getTokuteiShisetsuNyushoshaSeikatsuKaigo()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.福祉用具貸与, entity.getHukushiYoguTaiyo()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.特定福祉用具販売, entity.getTokuteiHukushiYoguHanbai()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.住宅改修, entity.getJutakuKaishu()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.夜間対応型訪問介護, entity.getYakanTaiogataHomonKaigo()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.認知症対応型通所介護, entity.getNinchishoTaiogataTushoKaigo()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.小規模多機能型居宅介護, entity.getShokiboTakinogataKyotakuKaigo()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.認知症対応型共同生活介護, entity.getNinchishoTaiogataKyodoSeikatsuKaigo()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.地域密着型特定施設入居者生活介護, entity.getChiikiMitchakugataTokuteiShisetsuNyushoshaSeikatsuKaigo()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.地域密着型介護老人福祉施設入所者生活介護, entity.getChiikiMitchakugataKaigoRojinHukushiNyushoshaSeikatsuKaigo()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.定期巡回_随時対応型訪問介護看護, entity.getTeikijunkaiZuijiTaiogataHomonKaigoKango()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.複合型サービス, entity.getHukugogataService()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.市町村特別給付, entity.getShichosonTokubetsuKyufu()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.介護保険給付以外の在宅サービス, entity.getKaigohokenKyufuIgaiNoZaitakuService()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.利用施設コード, entity.getRiyoShisetsuCode()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.利用施設名, entity.getRiyoShisetsuShimei()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.利用施設住所, entity.getRiyoShisetsuJusho()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.利用施設電話番号, entity.getRiyoShisetsuTelNo()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.利用施設郵便番号, entity.getRiyoShisetsuYubinNo()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.概況特記事項, entity.getGaikyochosaTokkijiko()));
+
+        Map<NinteichosaItemKubun, NinteichosaItemForResult> map = new EnumMap<>(NinteichosaItemKubun.class);
+        for (NinteichosaItemForResult data : list) {
+            if (data != null) {
+                map.put(data.get調査項目区分(), data);
+            }
+        }
+
         return new NinteichosaResultOfGaikyo(
                 new ShinseishoKanriNo(entity.getShinseishoKanriNo()),
                 new NinteichosaIraiRirekiNo(entity.getNinteichosaRirekiNo()),
@@ -255,84 +266,93 @@ public final class NinteichosaKekkaMapper {
 
     private static NinteichosaResultOfKihon toNinteichosaResultKihon(
             DbT5008NinteichosaKekkaJohoEntity chosaKekkaEntity, DbT5009NinteichosahyoJohoEntity chosahyoEntity) {
-        Map<NinteichosaItemKubun, NinteichosaItemForResult> map = new EnumMap<>(NinteichosaItemKubun.class);
         Ninteichosahyo chosahyo = NinteichosahyoFactory.create基本情報Instance(KOROSHO_SHIKIBETSU_KUBUN);
-        setMap(map, chosahyo, NinteichosaItemKubun.麻痺等の有無_左上肢, chosahyoEntity.getCk_mahiHidariJoshi());
-        setMap(map, chosahyo, NinteichosaItemKubun.麻痺等の有無_右上肢, chosahyoEntity.getCk_mahiMigiJoshi());
-        setMap(map, chosahyo, NinteichosaItemKubun.麻痺等の有無_左下肢, chosahyoEntity.getCk_mahiHidariKashi());
-        setMap(map, chosahyo, NinteichosaItemKubun.麻痺等の有無_右下肢, chosahyoEntity.getCk_mahiMigiKashi());
-        setMap(map, chosahyo, NinteichosaItemKubun.麻痺等の有無_その他, chosahyoEntity.getCk_mahiSonota());
-        setMap(map, chosahyo, NinteichosaItemKubun.関節の動く範囲の制限_肩関節, chosahyoEntity.getCk_koshukuKata());
-        setMap(map, chosahyo, NinteichosaItemKubun.関節の動く範囲の制限_股関節, chosahyoEntity.getCk_koshukuMata());
-        setMap(map, chosahyo, NinteichosaItemKubun.関節の動く範囲の制限_膝関節, chosahyoEntity.getCk_koshukuHiza());
-        setMap(map, chosahyo, NinteichosaItemKubun.関節の動く範囲の制限_その他, chosahyoEntity.getCk_koshukuSonota());
-        setMap(map, chosahyo, NinteichosaItemKubun.寝返り, chosahyoEntity.getCk_negaeri());
-        setMap(map, chosahyo, NinteichosaItemKubun.起き上がり, chosahyoEntity.getCk_okiagari());
-        setMap(map, chosahyo, NinteichosaItemKubun.座位保持, chosahyoEntity.getCk_zaihoji());
-        setMap(map, chosahyo, NinteichosaItemKubun.両足での立位, chosahyoEntity.getCk_ryoashiRitsui());
-        setMap(map, chosahyo, NinteichosaItemKubun.歩行, chosahyoEntity.getCk_hoko());
-        setMap(map, chosahyo, NinteichosaItemKubun.立ち上がり, chosahyoEntity.getCk_tachiagari());
-        setMap(map, chosahyo, NinteichosaItemKubun.片足での立位, chosahyoEntity.getCk_kataashiRitsui());
-        setMap(map, chosahyo, NinteichosaItemKubun.洗身, chosahyoEntity.getCk_senshin());
-        setMap(map, chosahyo, NinteichosaItemKubun.つめ切り, chosahyoEntity.getCk_tumekiri());
-        setMap(map, chosahyo, NinteichosaItemKubun.視力, chosahyoEntity.getCk_shiryoku());
-        setMap(map, chosahyo, NinteichosaItemKubun.聴力, chosahyoEntity.getCk_choryoku());
-        setMap(map, chosahyo, NinteichosaItemKubun.移乗, chosahyoEntity.getCk_ijo());
-        setMap(map, chosahyo, NinteichosaItemKubun.移動, chosahyoEntity.getCk_ido());
-        setMap(map, chosahyo, NinteichosaItemKubun.嚥下, chosahyoEntity.getCk_enge());
-        setMap(map, chosahyo, NinteichosaItemKubun.食事摂取, chosahyoEntity.getCk_shokujiSesshu());
-        setMap(map, chosahyo, NinteichosaItemKubun.排尿, chosahyoEntity.getCk_hainyo());
-        setMap(map, chosahyo, NinteichosaItemKubun.排便, chosahyoEntity.getCk_haiben());
-        setMap(map, chosahyo, NinteichosaItemKubun.口腔清潔, chosahyoEntity.getCk_kokoSeiketsu());
-        setMap(map, chosahyo, NinteichosaItemKubun.洗顔, chosahyoEntity.getCk_sengan());
-        setMap(map, chosahyo, NinteichosaItemKubun.整髪, chosahyoEntity.getCk_seihatsu());
-        setMap(map, chosahyo, NinteichosaItemKubun.上衣の着脱, chosahyoEntity.getCk_joiChakudatsu());
-        setMap(map, chosahyo, NinteichosaItemKubun.ズボン等の着脱, chosahyoEntity.getCk_zubonChakudatsu());
-        setMap(map, chosahyo, NinteichosaItemKubun.外出頻度, chosahyoEntity.getCk_gaishutsuHindo());
-        setMap(map, chosahyo, NinteichosaItemKubun.意思の伝達, chosahyoEntity.getCk_ishiDentatsu());
-        setMap(map, chosahyo, NinteichosaItemKubun.毎日の日課を理解, chosahyoEntity.getCk_nikka());
-        setMap(map, chosahyo, NinteichosaItemKubun.生年月日をいう, chosahyoEntity.getCk_seinengappi());
-        setMap(map, chosahyo, NinteichosaItemKubun.短期記憶, chosahyoEntity.getCk_tankiKioku());
-        setMap(map, chosahyo, NinteichosaItemKubun.自分の名前をいう, chosahyoEntity.getCk_namae());
-        setMap(map, chosahyo, NinteichosaItemKubun.今の季節を理解, chosahyoEntity.getCk_kisetsu());
-        setMap(map, chosahyo, NinteichosaItemKubun.場所の理解, chosahyoEntity.getCk_basho());
-        setMap(map, chosahyo, NinteichosaItemKubun.常時の徘徊, chosahyoEntity.getCk_haikai());
-        setMap(map, chosahyo, NinteichosaItemKubun.外出して戻れない, chosahyoEntity.getCk_gaishutsu());
-        setMap(map, chosahyo, NinteichosaItemKubun.被害的, chosahyoEntity.getCk_higaiteki());
-        setMap(map, chosahyo, NinteichosaItemKubun.作話, chosahyoEntity.getCk_sakuwa());
-        setMap(map, chosahyo, NinteichosaItemKubun.感情が不安定, chosahyoEntity.getCk_kanjoHuantei());
-        setMap(map, chosahyo, NinteichosaItemKubun.昼夜逆転, chosahyoEntity.getCk_chuyaGyakuten());
-        setMap(map, chosahyo, NinteichosaItemKubun.同じ話をする, chosahyoEntity.getCk_onajiHanashi());
-        setMap(map, chosahyo, NinteichosaItemKubun.大声を出す, chosahyoEntity.getCk_ogoe());
-        setMap(map, chosahyo, NinteichosaItemKubun.介護に抵抗, chosahyoEntity.getCk_kaigoNiTeiko());
-        setMap(map, chosahyo, NinteichosaItemKubun.落ち着きなし, chosahyoEntity.getCk_ochitsuki());
-        setMap(map, chosahyo, NinteichosaItemKubun.一人で出たがる, chosahyoEntity.getCk_hitoriDeDetagaru());
-        setMap(map, chosahyo, NinteichosaItemKubun.収集癖, chosahyoEntity.getCk_shushuheki());
-        setMap(map, chosahyo, NinteichosaItemKubun.物や衣類を壊す, chosahyoEntity.getCk_monoYaIruiWoKowasu());
-        setMap(map, chosahyo, NinteichosaItemKubun.ひどい物忘れ, chosahyoEntity.getCk_hidoiMonowasure());
-        setMap(map, chosahyo, NinteichosaItemKubun.独り言_独り笑, chosahyoEntity.getCk_hitorigotoHitoriwarai());
-        setMap(map, chosahyo, NinteichosaItemKubun.自分勝手に行動する, chosahyoEntity.getCk_jibunKatte());
-        setMap(map, chosahyo, NinteichosaItemKubun.話がまとまらない, chosahyoEntity.getCk_hanashiGaMatomaranai());
-        setMap(map, chosahyo, NinteichosaItemKubun.薬の内服, chosahyoEntity.getCk_kusuri());
-        setMap(map, chosahyo, NinteichosaItemKubun.金銭の管理, chosahyoEntity.getCk_kinsenKanri());
-        setMap(map, chosahyo, NinteichosaItemKubun.日常の意思決定, chosahyoEntity.getCk_ishiKettei());
-        setMap(map, chosahyo, NinteichosaItemKubun.集団への不適応, chosahyoEntity.getCk_shudanHutekio());
-        setMap(map, chosahyo, NinteichosaItemKubun.買い物, chosahyoEntity.getCk_kaimono());
-        setMap(map, chosahyo, NinteichosaItemKubun.簡単な調理, chosahyoEntity.getCk_chori());
-        setMap(map, chosahyo, NinteichosaItemKubun.点滴の管理, chosahyoEntity.getCk_tenteki());
-        setMap(map, chosahyo, NinteichosaItemKubun.中心静脈栄養, chosahyoEntity.getCk_chushinJomyakuEiyo());
-        setMap(map, chosahyo, NinteichosaItemKubun.透析, chosahyoEntity.getCk_toseki());
-        setMap(map, chosahyo, NinteichosaItemKubun.ストーマの処置, chosahyoEntity.getCk_stomaShochi());
-        setMap(map, chosahyo, NinteichosaItemKubun.酸素療法, chosahyoEntity.getCk_sansoRyoho());
-        setMap(map, chosahyo, NinteichosaItemKubun.レスピレーター, chosahyoEntity.getCk_respirator());
-        setMap(map, chosahyo, NinteichosaItemKubun.気管切開, chosahyoEntity.getCk_kikanSekkai());
-        setMap(map, chosahyo, NinteichosaItemKubun.疼痛の看護, chosahyoEntity.getCk_totsuKango());
-        setMap(map, chosahyo, NinteichosaItemKubun.経管栄養, chosahyoEntity.getCk_keikanEiyo());
-        setMap(map, chosahyo, NinteichosaItemKubun.モニター測定, chosahyoEntity.getCk_monitorSokutei());
-        setMap(map, chosahyo, NinteichosaItemKubun.じょくそうの処置, chosahyoEntity.getCk_jokusoShochi());
-        setMap(map, chosahyo, NinteichosaItemKubun.カテーテル, chosahyoEntity.getCk_catheter());
-        setMap(map, chosahyo, NinteichosaItemKubun.障害高齢者の日常生活自立度, chosaKekkaEntity.getShogaiNichijoSeikatsuJiritsudoCode());
-        setMap(map, chosahyo, NinteichosaItemKubun.認知症高齢者の日常生活自立度, chosaKekkaEntity.getNinchishoNichijoSeikatsuJiritsudoCode());
+
+        List<NinteichosaItemForResult> list = new ArrayList<>();
+        list.add(createResult(chosahyo, NinteichosaItemKubun.麻痺等の有無_左上肢, chosahyoEntity.getCk_mahiHidariJoshi()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.麻痺等の有無_右上肢, chosahyoEntity.getCk_mahiMigiJoshi()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.麻痺等の有無_左下肢, chosahyoEntity.getCk_mahiHidariKashi()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.麻痺等の有無_右下肢, chosahyoEntity.getCk_mahiMigiKashi()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.麻痺等の有無_その他, chosahyoEntity.getCk_mahiSonota()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.関節の動く範囲の制限_肩関節, chosahyoEntity.getCk_koshukuKata()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.関節の動く範囲の制限_股関節, chosahyoEntity.getCk_koshukuMata()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.関節の動く範囲の制限_膝関節, chosahyoEntity.getCk_koshukuHiza()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.関節の動く範囲の制限_その他, chosahyoEntity.getCk_koshukuSonota()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.寝返り, chosahyoEntity.getCk_negaeri()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.起き上がり, chosahyoEntity.getCk_okiagari()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.座位保持, chosahyoEntity.getCk_zaihoji()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.両足での立位, chosahyoEntity.getCk_ryoashiRitsui()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.歩行, chosahyoEntity.getCk_hoko()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.立ち上がり, chosahyoEntity.getCk_tachiagari()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.片足での立位, chosahyoEntity.getCk_kataashiRitsui()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.洗身, chosahyoEntity.getCk_senshin()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.つめ切り, chosahyoEntity.getCk_tumekiri()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.視力, chosahyoEntity.getCk_shiryoku()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.聴力, chosahyoEntity.getCk_choryoku()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.移乗, chosahyoEntity.getCk_ijo()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.移動, chosahyoEntity.getCk_ido()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.嚥下, chosahyoEntity.getCk_enge()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.食事摂取, chosahyoEntity.getCk_shokujiSesshu()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.排尿, chosahyoEntity.getCk_hainyo()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.排便, chosahyoEntity.getCk_haiben()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.口腔清潔, chosahyoEntity.getCk_kokoSeiketsu()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.洗顔, chosahyoEntity.getCk_sengan()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.整髪, chosahyoEntity.getCk_seihatsu()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.上衣の着脱, chosahyoEntity.getCk_joiChakudatsu()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.ズボン等の着脱, chosahyoEntity.getCk_zubonChakudatsu()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.外出頻度, chosahyoEntity.getCk_gaishutsuHindo()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.意思の伝達, chosahyoEntity.getCk_ishiDentatsu()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.毎日の日課を理解, chosahyoEntity.getCk_nikka()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.生年月日をいう, chosahyoEntity.getCk_seinengappi()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.短期記憶, chosahyoEntity.getCk_tankiKioku()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.自分の名前をいう, chosahyoEntity.getCk_namae()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.今の季節を理解, chosahyoEntity.getCk_kisetsu()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.場所の理解, chosahyoEntity.getCk_basho()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.常時の徘徊, chosahyoEntity.getCk_haikai()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.外出して戻れない, chosahyoEntity.getCk_gaishutsu()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.被害的, chosahyoEntity.getCk_higaiteki()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.作話, chosahyoEntity.getCk_sakuwa()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.感情が不安定, chosahyoEntity.getCk_kanjoHuantei()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.昼夜逆転, chosahyoEntity.getCk_chuyaGyakuten()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.同じ話をする, chosahyoEntity.getCk_onajiHanashi()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.大声を出す, chosahyoEntity.getCk_ogoe()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.介護に抵抗, chosahyoEntity.getCk_kaigoNiTeiko()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.落ち着きなし, chosahyoEntity.getCk_ochitsuki()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.一人で出たがる, chosahyoEntity.getCk_hitoriDeDetagaru()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.収集癖, chosahyoEntity.getCk_shushuheki()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.物や衣類を壊す, chosahyoEntity.getCk_monoYaIruiWoKowasu()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.ひどい物忘れ, chosahyoEntity.getCk_hidoiMonowasure()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.独り言_独り笑, chosahyoEntity.getCk_hitorigotoHitoriwarai()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.自分勝手に行動する, chosahyoEntity.getCk_jibunKatte()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.話がまとまらない, chosahyoEntity.getCk_hanashiGaMatomaranai()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.薬の内服, chosahyoEntity.getCk_kusuri()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.金銭の管理, chosahyoEntity.getCk_kinsenKanri()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.日常の意思決定, chosahyoEntity.getCk_ishiKettei()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.集団への不適応, chosahyoEntity.getCk_shudanHutekio()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.買い物, chosahyoEntity.getCk_kaimono()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.簡単な調理, chosahyoEntity.getCk_chori()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.点滴の管理, chosahyoEntity.getCk_tenteki()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.中心静脈栄養, chosahyoEntity.getCk_chushinJomyakuEiyo()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.透析, chosahyoEntity.getCk_toseki()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.ストーマの処置, chosahyoEntity.getCk_stomaShochi()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.酸素療法, chosahyoEntity.getCk_sansoRyoho()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.レスピレーター, chosahyoEntity.getCk_respirator()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.気管切開, chosahyoEntity.getCk_kikanSekkai()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.疼痛の看護, chosahyoEntity.getCk_totsuKango()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.経管栄養, chosahyoEntity.getCk_keikanEiyo()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.モニター測定, chosahyoEntity.getCk_monitorSokutei()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.じょくそうの処置, chosahyoEntity.getCk_jokusoShochi()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.カテーテル, chosahyoEntity.getCk_catheter()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.障害高齢者の日常生活自立度, chosaKekkaEntity.getShogaiNichijoSeikatsuJiritsudoCode()));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.認知症高齢者の日常生活自立度, chosaKekkaEntity.getNinchishoNichijoSeikatsuJiritsudoCode()));
+
+        Map<NinteichosaItemKubun, NinteichosaItemForResult> map = new EnumMap<>(NinteichosaItemKubun.class);
+        for (NinteichosaItemForResult data : list) {
+            if (data != null) {
+                map.put(data.get調査項目区分(), data);
+            }
+        }
+
         return new NinteichosaResultOfKihon(
                 new ShinseishoKanriNo(chosahyoEntity.getShinseishoKanriNo()), new NinteichosaIraiRirekiNo(chosahyoEntity.getNinteichosaRirekiNo()),
                 KOROSHO_SHIKIBETSU_KUBUN, new Ninteichosahyo(map, NinteichosaItemGroup.Of2009.values()));
@@ -348,16 +368,12 @@ public final class NinteichosaKekkaMapper {
         return rslt == null ? 0 : Integer.parseInt(rslt.get調査結果().toString());
     }
 
-    private static void setMap(Map<NinteichosaItemKubun, NinteichosaItemForResult> map, Ninteichosahyo 調査票,
-            NinteichosaItemKubun 調査項目区分, RString 調査結果) {
-        NinteichosaItem item = (NinteichosaItem) 調査票.get調査項目(調査項目区分);
-        if (item != null) {
-            map.put(調査項目区分, new NinteichosaItemForResult(item, 調査結果));
-        }
+    private static NinteichosaItemForResult createResult(Ninteichosahyo 調査票, NinteichosaItemKubun 調査項目区分, RString 調査結果) {
+        INinteichosaItem item = 調査票.get調査項目(調査項目区分);
+        return item == null ? null : new NinteichosaItemForResult(item, 調査結果);
     }
 
-    private static void setMap(Map<NinteichosaItemKubun, NinteichosaItemForResult> map, Ninteichosahyo 調査票,
-            NinteichosaItemKubun 調査項目区分, int 調査結果) {
-        setMap(map, 調査票, 調査項目区分, new RString(String.valueOf(調査結果)));
+    private static NinteichosaItemForResult createResult(Ninteichosahyo 調査票, NinteichosaItemKubun 調査項目区分, int 調査結果) {
+        return createResult(調査票, 調査項目区分, new RString(String.valueOf(調査結果)));
     }
 }
