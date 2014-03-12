@@ -18,6 +18,7 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -122,8 +123,8 @@ public class NinteichosaItemForResultTest {
         }
 
         @Test
-        public void 調査項目が入力形式の時_get選択結果は_自由入力を返す() {
-            assertThat(createNinteichosaItemResult(NinteichosaItemKubun.市町村特別給付).get選択結果(), is((IAnsweringItem) Choice.FreeInput.自由入力));
+        public void 調査項目が入力形式の時_get選択結果は_NULLを返す() {
+            assertThat(createNinteichosaItemResult(NinteichosaItemKubun.市町村特別給付).get選択結果(), nullValue());
         }
     }
 

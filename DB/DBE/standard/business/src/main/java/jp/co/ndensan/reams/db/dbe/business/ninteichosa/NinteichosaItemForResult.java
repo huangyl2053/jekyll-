@@ -83,14 +83,14 @@ public class NinteichosaItemForResult implements INinteichosaItem {
 
     /**
      * 調査結果に対応する選択肢を返します。<br />
-     * 選択肢ではなく調査結果を直接入力する調査項目の場合は「自由入力」を返します。
+     * 選択肢ではなく調査結果を直接入力する調査項目の場合はnullを返します。
      *
      * @return 選択結果
      */
     public IAnsweringItem get選択結果() {
         for (IAnsweringItem data : 調査項目.get選択肢().asList()) {
             if (data.getName().equals(Choice.FreeInput.自由入力.getName())) {
-                return Choice.FreeInput.自由入力;
+                return null;
             }
         }
         return 調査項目.get選択肢().toValue(調査結果);
