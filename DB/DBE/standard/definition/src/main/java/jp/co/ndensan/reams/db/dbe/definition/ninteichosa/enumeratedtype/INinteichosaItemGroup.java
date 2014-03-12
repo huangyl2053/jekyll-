@@ -14,9 +14,30 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public interface INinteichosaItemGroup {
 
     /**
+     * 調査項目グループの番号を返します。
+     *
+     * @return 番号
+     */
+    RString getNo();
+
+    /**
      * 調査項目グループの表示名称を返します。
      *
      * @return 表示名称
      */
     RString getName();
+
+    /**
+     * 調査項目グループの省略名称を返します。
+     *
+     * @return 省略名称
+     */
+    RString getShortName();
+
+    /**
+     * 基本調査の調査項目グループかどうか判定します。
+     *
+     * @return 基本調査の場合はtrueを返します。
+     */
+    boolean isKihonChosaGroup();
 }
