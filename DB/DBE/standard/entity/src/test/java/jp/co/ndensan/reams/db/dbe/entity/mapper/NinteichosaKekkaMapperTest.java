@@ -45,16 +45,35 @@ public class NinteichosaKekkaMapperTest {
     public static class toNinteichosaKekka_概況調査結果 {
 
         @Test
-        public void 認定調査実施年月日の設定がある時_toNinteichosaResult_get認定調査実施年月日は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().get基本情報().get認定調査実施年月日(), is(new FlexibleDate("20140101")));
-        }
-
-        @Test
         public void 認定調査依頼区分の設定がある時_toNinteichosaResult_get認定調査依頼区分は_設定値を返す() {
             assertThat(toNinteichosaResult().get概況調査結果().get基本情報().get認定調査依頼区分(), is(NinteichosaIraiKubunCode.初回));
         }
 
         @Test
+        public void 認定調査回数の設定がある時_toNinteichosaResult_get認定調査回数は_設定値を返す() {
+            assertThat(toNinteichosaResult().get概況調査結果().get基本情報().get認定調査回数(), is(1));
+        }
+
+        @Test
+        public void 認定調査実施年月日の設定がある時_toNinteichosaResult_get認定調査実施年月日は_設定値を返す() {
+            assertThat(toNinteichosaResult().get概況調査結果().get基本情報().get認定調査実施年月日(), is(new FlexibleDate("20140101")));
+        }
+
+        @Test
+        public void 認定調査受領年月日の設定がある時_toNinteichosaResult_get認定調査受領年月日は_設定値を返す() {
+            assertThat(toNinteichosaResult().get概況調査結果().get基本情報().get認定調査受領年月日(), is(new FlexibleDate("20140202")));
+        }
+
+        @Test
+        public void 認定調査区分の設定がある時_toNinteichosaResult_get認定調査区分は_設定値を返す() {
+            assertThat(toNinteichosaResult().get概況調査結果().get基本情報().get認定調査区分(), is(NinteichosaKubun.新規調査));
+        }
+
+        @Test
+        public void 認定調査員コードの設定がある時_toNinteichosaResult_get介護調査員番号は_設定値を返す() {
+            assertThat(toNinteichosaResult().get概況調査結果().get基本情報().get認定調査員().get介護調査員番号(), is(new RString("12345678")));
+        }
+
         public void 認定調査実施場所コードの設定がある時_toNinteichosaResult_get認定調査実施場所区分_getCodeは_設定値を返す() {
             assertThat(toNinteichosaResult().get概況調査結果().get基本情報().get認定調査実施場所区分().getCode().value(), is(new RString("12345678")));
         }
@@ -62,11 +81,6 @@ public class NinteichosaKekkaMapperTest {
         @Test
         public void 認定調査実施場所名称の設定がある時_toNinteichosaResult_get認定調査実施場所区分_getNameは_設定値を返す() {
             assertThat(toNinteichosaResult().get概況調査結果().get基本情報().get認定調査実施場所区分().getName(), is(new RString("認定調査実施場所名称")));
-        }
-
-        @Test
-        public void 認定調査区分の設定がある時_toNinteichosaResult_get認定調査区分は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().get基本情報().get認定調査区分(), is(NinteichosaKubun.新規調査));
         }
 
         @Test
@@ -616,13 +630,28 @@ public class NinteichosaKekkaMapperTest {
         }
 
         @Test
-        public void 認定調査実施年月日の設定がある時_toNinteichosaKekkaEntity_get認定調査実施年月日は_設定値を返す() {
+        public void 認定調査回数の設定がある時_toNinteichosaKekkaEntity_getNinteichosaIraiKaisuは_設定値を返す() {
+            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getNinteichosaIraiKaisu(), is(1));
+        }
+
+        @Test
+        public void 認定調査実施年月日の設定がある時_toNinteichosaKekkaEntity_getNinteichosaJisshiYMDは_設定値を返す() {
             assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getNinteichosaJisshiYMD(), is(new FlexibleDate("20140101")));
+        }
+
+        @Test
+        public void 認定調査受領年月日の設定がある時_toNinteichosaKekkaEntity_getNinteichosaJuryoYMDは_設定値を返す() {
+            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getNinteichosaJuryoYMD(), is(new FlexibleDate("20140202")));
         }
 
         @Test
         public void 認定調査区分の設定がある時_toNinteichosaKekkaEntity_getNinteiChosaKubunCodeは_設定値を返す() {
             assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getNinteiChosaKubunCode(), is(NinteichosaKubun.新規調査.getCode()));
+        }
+
+        @Test
+        public void 認定調査員コードの設定がある時_toNinteichosaKekkaEntity_getChosainCodeは_設定値を返す() {
+            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getChosainCode(), is(new RString("12345678")));
         }
 
         @Test
@@ -1175,7 +1204,7 @@ public class NinteichosaKekkaMapperTest {
     }
 
     private static NinteichosaResult toNinteichosaResult() {
-        return NinteichosaKekkaMapper.toNinteichosaResult(NinteichosaKekkaEntityMock.getSpiedNinteichosaKekkaEntityInstance());
+        return NinteichosaKekkaMapper.toNinteichosaResult(NinteichosaKekkaEntityMock.getSpiedNinteichosaKekkaEntityInstance(), NinteichosaResultMock.getSpiedNinteichosaResultGaikyoInstance().get基本情報().get認定調査員());
     }
 
     private static NinteichosaKekkaEntity toNinteichosaKekkaEntity() {

@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5008NinteichosaKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5009NinteichosahyoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaEntity;
+import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -51,10 +52,11 @@ public final class NinteichosaKekkaMapper {
      * 引数の認定調査結果エンティティから認定調査結果情報を作成して返します。
      *
      * @param ninteichosaKekkaEntity 認定調査結果エンティティ
+     * @param chosain 認定調査員情報
      * @return 認定調査結果情報
      */
-    public static NinteichosaResult toNinteichosaResult(NinteichosaKekkaEntity ninteichosaKekkaEntity) {
-        return new NinteichosaResult(toNinteichosaResultGaikyo(ninteichosaKekkaEntity), toNinteichosaResultKihon(ninteichosaKekkaEntity));
+    public static NinteichosaResult toNinteichosaResult(NinteichosaKekkaEntity ninteichosaKekkaEntity, INinteiChosain chosain) {
+        return new NinteichosaResult(toNinteichosaResultGaikyo(ninteichosaKekkaEntity, chosain), toNinteichosaResultKihon(ninteichosaKekkaEntity));
     }
 
     /**
@@ -80,8 +82,11 @@ public final class NinteichosaKekkaMapper {
         entity.setShinseishoKanriNo(ninteichosaKekka.get概況調査結果().get申請書管理番号().value());
         entity.setNinteichosaRirekiNo(ninteichosaKekka.get概況調査結果().get認定調査依頼履歴番号().value().intValue());
         entity.setNinteichousaIraiKubunCode(rsltKihon.get認定調査依頼区分().getCode());
+        entity.setNinteichosaIraiKaisu(rsltKihon.get認定調査回数());
         entity.setNinteichosaJisshiYMD(rsltKihon.get認定調査実施年月日());
+        entity.setNinteichosaJuryoYMD(rsltKihon.get認定調査受領年月日());
         entity.setNinteiChosaKubunCode(rsltKihon.get認定調査区分().getCode());
+        entity.setChosainCode(rsltKihon.get認定調査員().get介護調査員番号());
         entity.setChosaJisshiBashoCode(rsltKihon.get認定調査実施場所区分().getCode().value());
         entity.setChosaJisshiBashoMeisho(rsltKihon.get認定調査実施場所区分().getName());
         entity.setGenzainoJokyoCode(getString(rsltGaikyoService, NinteichosaItemKubun.現在の状況コード));
@@ -207,7 +212,7 @@ public final class NinteichosaKekkaMapper {
         return entity;
     }
 
-    private static NinteichosaResultOfGaikyo toNinteichosaResultGaikyo(NinteichosaKekkaEntity ninteichosaKekkaEntity) {
+    private static NinteichosaResultOfGaikyo toNinteichosaResultGaikyo(NinteichosaKekkaEntity ninteichosaKekkaEntity, INinteiChosain chosain) {
         DbT5008NinteichosaKekkaJohoEntity entity = ninteichosaKekkaEntity.getDbT5008NinteichosaKekkaJohoEntity();
         Ninteichosahyo chosahyo = NinteichosahyoFactory.createサービス状況Instance(KOROSHO_SHIKIBETSU_KUBUN);
 
@@ -256,11 +261,14 @@ public final class NinteichosaKekkaMapper {
                 new NinteichosaIraiRirekiNo(entity.getNinteichosaRirekiNo()),
                 KOROSHO_SHIKIBETSU_KUBUN,
                 new NinteichosaResultOfGaikyoKihon(
-                entity.getNinteichosaJisshiYMD(),
                 NinteichosaIraiKubunCode.toValue(entity.getNinteichousaIraiKubunCode()),
+                entity.getNinteichosaIraiKaisu(),
+                entity.getNinteichosaJisshiYMD(),
+                entity.getNinteichosaJuryoYMD(),
+                NinteichosaKubun.toValue(entity.getNinteiChosaKubunCode()),
+                chosain,
                 new NinteichosaJisshibashoKubun(
                 new NinteichosaJisshibashoKubunCode(entity.getChosaJisshiBashoCode()), entity.getChosaJisshiBashoMeisho(), RString.EMPTY),
-                NinteichosaKubun.toValue(entity.getNinteiChosaKubunCode()),
                 ShinsakaiFuriwakeKubun.toValue(entity.getShinsakaiYusenWaritsukeKubunCode())),
                 new Ninteichosahyo(map, NinteichosaItemGroup.Of2009.values()));
     }

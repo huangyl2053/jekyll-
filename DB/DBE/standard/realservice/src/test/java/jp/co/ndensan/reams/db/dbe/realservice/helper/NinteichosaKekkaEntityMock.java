@@ -50,8 +50,11 @@ public class NinteichosaKekkaEntityMock {
         entity.setShinseishoKanriNo(new RString("1234567890"));
         entity.setNinteichosaRirekiNo(0);
         entity.setNinteichousaIraiKubunCode(NinteichosaIraiKubunCode.初回.getCode());
+        entity.setNinteichosaIraiKaisu(1);
         entity.setNinteichosaJisshiYMD(new FlexibleDate("20140101"));
+        entity.setNinteichosaJuryoYMD(new FlexibleDate("20140202"));
         entity.setNinteiChosaKubunCode(NinteichosaKubun.新規調査.getCode());
+        entity.setChosainCode(new RString("12345678"));
         entity.setChosaJisshiBashoCode(new RString("12345678"));
         entity.setChosaJisshiBashoMeisho(new RString("認定調査実施場所名称"));
         entity.setGenzainoJokyoCode(new RString("3"));

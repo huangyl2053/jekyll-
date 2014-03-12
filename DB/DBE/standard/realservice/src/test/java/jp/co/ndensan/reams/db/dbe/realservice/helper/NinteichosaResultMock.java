@@ -10,23 +10,30 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.Ninteichosahyo;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosahyoFactory;
+import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaItemForResult;
+import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaJisshibashoKubun;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResult;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyo;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyoKihon;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaItemForResult;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaJisshibashoKubun;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfKihon;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKubun;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.INinteichosaItem;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosaJisshibashoKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubun;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.INinteichosaItem;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosaJisshibashoKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.ur.urf.business._KaigoJigyosha;
+import jp.co.ndensan.reams.ur.urf.business._NinteiChosain;
+import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
+import jp.co.ndensan.reams.ur.urf.definition.KaigoJigyoshaShubetsu;
+import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._Name;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice.*;
 import static jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubun.*;
@@ -106,13 +113,25 @@ public class NinteichosaResultMock {
                 new NinteichosaIraiRirekiNo(0),
                 KoroshoIFKubun.V09A,
                 new NinteichosaResultOfGaikyoKihon(
-                new FlexibleDate("20140101"),
                 NinteichosaIraiKubunCode.初回,
+                1,
+                new FlexibleDate("20140101"),
+                new FlexibleDate("20140202"),
+                NinteichosaKubun.新規調査,
+                new _NinteiChosain(new RString("12345678"), new _Name(new RString("氏名"), RString.EMPTY), createKaigoJigyosha()),
                 new NinteichosaJisshibashoKubun(
                 new NinteichosaJisshibashoKubunCode(new RString("12345678")), new RString("認定調査実施場所名称"), RString.EMPTY),
-                NinteichosaKubun.新規調査,
                 ShinsakaiFuriwakeKubun.希望無し),
                 new Ninteichosahyo(map, NinteichosaItemGroup.Of2009.values())));
+    }
+
+    private static IKaigoJigyosha createKaigoJigyosha() {
+        return new _KaigoJigyosha(
+                new RString("事業者番号"), KaigoJigyoshaShubetsu.介護保険施設, RDate.MIN, RDate.MAX,
+                new ShikibetsuCode(new RString("1234567890")), new RString("事業者略称"), new RString("事業者略称カナ"),
+                new RString("事業者住所カナ"), new RString("異動事由"), RDate.MIN, new RString("社会福祉法人軽減対象区分"),
+                new RString("地域差区分"), new RString("受領委任区分"), new RString("生活保護指定区分"), new RString("法人種別"),
+                RDate.MAX, RDate.MIN, RDate.MAX, RDate.MIN);
     }
 
     /**

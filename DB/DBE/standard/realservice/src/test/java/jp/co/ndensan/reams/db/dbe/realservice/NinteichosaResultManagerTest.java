@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbe.realservice.helper.NinteichosaResultMock;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.INinteichosaKekkaDac;
+import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
+import jp.co.ndensan.reams.ur.urf.realservice.INinteiChosainFinder;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -74,7 +76,7 @@ public class NinteichosaResultManagerTest {
     }
 
     private static NinteichosaResultManager createNinteichosaResultManager(boolean flg) {
-        return new NinteichosaResultManager(createNinteichosaKekkaDac(flg));
+        return new NinteichosaResultManager(createNinteichosaKekkaDac(flg), createNinteiChosainFinder());
     }
 
     private static INinteichosaKekkaDac createNinteichosaKekkaDac(boolean flg) {
@@ -85,6 +87,13 @@ public class NinteichosaResultManagerTest {
         when(dac.update(any(NinteichosaKekkaEntity.class))).thenReturn(flg);
         when(dac.delete(any(NinteichosaKekkaEntity.class))).thenReturn(flg);
         return dac;
+    }
+
+    private static INinteiChosainFinder createNinteiChosainFinder() {
+        INinteiChosainFinder finder = mock(INinteiChosainFinder.class);
+        INinteiChosain chosain = NinteichosaResultMock.getSpiedNinteichosaResultGaikyoInstance().get基本情報().get認定調査員();
+        when(finder.get認定調査員(any(RString.class))).thenReturn(chosain);
+        return finder;
     }
 
     private static ShinseishoKanriNo createShinseishoKanriNo() {
