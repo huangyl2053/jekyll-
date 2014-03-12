@@ -30,31 +30,31 @@ public class NinteichosaResultOfGaikyoTest {
 
         @Test(expected = NullPointerException.class)
         public void 申請書管理番号がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createNinteichosaResultGaikyo(AS_申請書管理番号がNULL);
+            createNinteichosaResultOfGaikyo(AS_申請書管理番号がNULL);
         }
 
         @Test(expected = NullPointerException.class)
         public void 認定調査依頼履歴番号がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createNinteichosaResultGaikyo(AS_認定調査依頼履歴番号がNULL);
+            createNinteichosaResultOfGaikyo(AS_認定調査依頼履歴番号がNULL);
         }
 
         @Test(expected = NullPointerException.class)
         public void 厚労省IF識別区分がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createNinteichosaResultGaikyo(AS_厚労省IF識別区分がNULL);
+            createNinteichosaResultOfGaikyo(AS_厚労省IF識別区分がNULL);
         }
 
         @Test(expected = NullPointerException.class)
         public void 基本情報がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createNinteichosaResultGaikyo(AS_基本情報がNULL);
+            createNinteichosaResultOfGaikyo(AS_基本情報がNULL);
         }
 
         @Test(expected = NullPointerException.class)
         public void サービス状況がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createNinteichosaResultGaikyo(AS_サービス状況がNULL);
+            createNinteichosaResultOfGaikyo(AS_サービス状況がNULL);
         }
     }
 
-    private static NinteichosaResultOfGaikyo createNinteichosaResultGaikyo(int flg) {
+    private static NinteichosaResultOfGaikyo createNinteichosaResultOfGaikyo(int flg) {
         return new NinteichosaResultOfGaikyo(
                 flg == AS_申請書管理番号がNULL ? null : any(ShinseishoKanriNo.class),
                 flg == AS_認定調査依頼履歴番号がNULL ? null : any(NinteichosaIraiRirekiNo.class),

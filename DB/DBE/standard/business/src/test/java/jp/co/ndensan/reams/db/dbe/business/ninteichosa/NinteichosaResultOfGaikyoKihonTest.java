@@ -34,41 +34,41 @@ public class NinteichosaResultOfGaikyoKihonTest {
 
         @Test(expected = NullPointerException.class)
         public void 認定調査依頼区分がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createNinteichosaResultGaikyoKihon(AS_認定調査依頼区分がNULL);
+            createNinteichosaResultOfGaikyoKihon(AS_認定調査依頼区分がNULL);
         }
 
         @Test(expected = NullPointerException.class)
         public void 認定調査実施年月日がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createNinteichosaResultGaikyoKihon(AS_認定調査実施年月日がNULL);
+            createNinteichosaResultOfGaikyoKihon(AS_認定調査実施年月日がNULL);
         }
 
         @Test(expected = NullPointerException.class)
         public void 認定調査受領年月日がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createNinteichosaResultGaikyoKihon(AS_認定調査受領年月日がNULL);
+            createNinteichosaResultOfGaikyoKihon(AS_認定調査受領年月日がNULL);
         }
 
         @Test(expected = NullPointerException.class)
         public void 認定調査区分がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createNinteichosaResultGaikyoKihon(AS_認定調査区分がNULL);
+            createNinteichosaResultOfGaikyoKihon(AS_認定調査区分がNULL);
         }
 
         @Test(expected = NullPointerException.class)
         public void 認定調査員がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createNinteichosaResultGaikyoKihon(AS_認定調査員がNULL);
+            createNinteichosaResultOfGaikyoKihon(AS_認定調査員がNULL);
         }
 
         @Test(expected = NullPointerException.class)
         public void 認定調査実施場所区分がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createNinteichosaResultGaikyoKihon(AS_認定調査実施場所区分がNULL);
+            createNinteichosaResultOfGaikyoKihon(AS_認定調査実施場所区分がNULL);
         }
 
         @Test(expected = NullPointerException.class)
         public void 審査会優先振分区分がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createNinteichosaResultGaikyoKihon(AS_審査会優先振分区分がNULL);
+            createNinteichosaResultOfGaikyoKihon(AS_審査会優先振分区分がNULL);
         }
     }
 
-    private static NinteichosaResultOfGaikyoKihon createNinteichosaResultGaikyoKihon(int flg) {
+    private static NinteichosaResultOfGaikyoKihon createNinteichosaResultOfGaikyoKihon(int flg) {
         return new NinteichosaResultOfGaikyoKihon(
                 flg == AS_認定調査依頼区分がNULL ? null : any(NinteichosaIraiKubunCode.class), 1,
                 flg == AS_認定調査実施年月日がNULL ? null : any(FlexibleDate.class),

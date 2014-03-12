@@ -37,12 +37,12 @@ public class NinteichosaItemForResultTest {
 
         @Test(expected = NullPointerException.class)
         public void 調査項目がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createNinteichosaItemResult(AS_調査項目がNULL);
+            createNinteichosaItemForResult(AS_調査項目がNULL);
         }
 
         @Test(expected = NullPointerException.class)
         public void 調査結果がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createNinteichosaItemResult(AS_調査結果がNULL);
+            createNinteichosaItemForResult(AS_調査結果がNULL);
         }
     }
 
@@ -50,7 +50,7 @@ public class NinteichosaItemForResultTest {
 
         @Test
         public void 調査項目グループの設定がある時_get調査項目グループは_設置値を返す() {
-            assertThat(createNinteichosaItemResult().get調査項目グループ(), is((INinteichosaItemGroup) NinteichosaItemGroup.Of2009.第１群));
+            assertThat(createNinteichosaItemForResult().get調査項目グループ(), is((INinteichosaItemGroup) NinteichosaItemGroup.Of2009.第１群));
         }
     }
 
@@ -58,7 +58,7 @@ public class NinteichosaItemForResultTest {
 
         @Test
         public void 調査項目サブグループの設定がある時_get調査項目サブグループは_設置値を返す() {
-            assertThat(createNinteichosaItemResult().get調査項目サブグループ(), is((INinteichosaItemSubGroup) NinteichosaItemSubGroup.Of2009.麻痺等の有無));
+            assertThat(createNinteichosaItemForResult().get調査項目サブグループ(), is((INinteichosaItemSubGroup) NinteichosaItemSubGroup.Of2009.麻痺等の有無));
         }
     }
 
@@ -66,7 +66,7 @@ public class NinteichosaItemForResultTest {
 
         @Test
         public void 調査項目グループ内番号の設定がある時_get調査項目グループ内番号は_設置値を返す() {
-            assertThat(createNinteichosaItemResult().get調査項目グループ内番号(), is(3));
+            assertThat(createNinteichosaItemForResult().get調査項目グループ内番号(), is(3));
         }
     }
 
@@ -74,7 +74,7 @@ public class NinteichosaItemForResultTest {
 
         @Test
         public void 調査項目番号の設定がある時_get調査項目番号は_設定値を返す() {
-            assertThat(createNinteichosaItemResult().get調査項目番号().value(), is(new RString("1-1")));
+            assertThat(createNinteichosaItemForResult().get調査項目番号().value(), is(new RString("1-1")));
         }
     }
 
@@ -82,7 +82,7 @@ public class NinteichosaItemForResultTest {
 
         @Test
         public void 調査項目区分の設定がある時_get調査項目区分は_設定値を返す() {
-            assertThat(createNinteichosaItemResult().get調査項目区分(), is(NinteichosaItemKubun.麻痺等の有無_右上肢));
+            assertThat(createNinteichosaItemForResult().get調査項目区分(), is(NinteichosaItemKubun.麻痺等の有無_右上肢));
         }
     }
 
@@ -90,7 +90,7 @@ public class NinteichosaItemForResultTest {
 
         @Test
         public void 表示名称の設定がある時_get表示名称は_設定値を返す() {
-            assertThat(createNinteichosaItemResult().get表示名称(), is(new RString("右上肢")));
+            assertThat(createNinteichosaItemForResult().get表示名称(), is(new RString("右上肢")));
         }
     }
 
@@ -98,12 +98,12 @@ public class NinteichosaItemForResultTest {
 
         @Test
         public void 選択肢が2択の時_get選択肢は_2件の選択肢を返す() {
-            assertThat(createNinteichosaItemResult().get選択肢().asList().size(), is(2));
+            assertThat(createNinteichosaItemForResult().get選択肢().asList().size(), is(2));
         }
 
         @Test
         public void 選択肢の設定がある時_get選択肢は_設定値を返す() {
-            assertThat(createNinteichosaItemResult().get選択肢().asList().get(0), is((IAnsweringItem) Choice.Checked.Disable));
+            assertThat(createNinteichosaItemForResult().get選択肢().asList().get(0), is((IAnsweringItem) Choice.Checked.Disable));
         }
     }
 
@@ -111,7 +111,7 @@ public class NinteichosaItemForResultTest {
 
         @Test
         public void 調査結果の設定がある時_get調査結果は_設定値を返す() {
-            assertThat(createNinteichosaItemResult().get調査結果(), is(new RString("1")));
+            assertThat(createNinteichosaItemForResult().get調査結果(), is(new RString("1")));
         }
     }
 
@@ -119,28 +119,28 @@ public class NinteichosaItemForResultTest {
 
         @Test
         public void 調査項目が選択形式の時_get選択結果は_該当の選択肢を返す() {
-            assertThat(createNinteichosaItemResult(NinteichosaItemKubun.寝返り).get選択結果(), is((IAnsweringItem) Choice.DekiruDekinai3.できる));
+            assertThat(createNinteichosaItemForResult(NinteichosaItemKubun.寝返り).get選択結果(), is((IAnsweringItem) Choice.DekiruDekinai3.できる));
         }
 
         @Test
         public void 調査項目が入力形式の時_get選択結果は_NULLを返す() {
-            assertThat(createNinteichosaItemResult(NinteichosaItemKubun.市町村特別給付).get選択結果(), nullValue());
+            assertThat(createNinteichosaItemForResult(NinteichosaItemKubun.市町村特別給付).get選択結果(), nullValue());
         }
     }
 
-    private static NinteichosaItemForResult createNinteichosaItemResult() {
-        return createNinteichosaItemResult(AS_NULL項目無し);
+    private static NinteichosaItemForResult createNinteichosaItemForResult() {
+        return createNinteichosaItemForResult(AS_NULL項目無し);
     }
 
-    private static NinteichosaItemForResult createNinteichosaItemResult(int flg) {
-        return createNinteichosaItemResult(flg, NinteichosaItemKubun.麻痺等の有無_右上肢);
+    private static NinteichosaItemForResult createNinteichosaItemForResult(int flg) {
+        return createNinteichosaItemForResult(flg, NinteichosaItemKubun.麻痺等の有無_右上肢);
     }
 
-    private static NinteichosaItemForResult createNinteichosaItemResult(NinteichosaItemKubun itemKubun) {
-        return createNinteichosaItemResult(AS_NULL項目無し, itemKubun);
+    private static NinteichosaItemForResult createNinteichosaItemForResult(NinteichosaItemKubun itemKubun) {
+        return createNinteichosaItemForResult(AS_NULL項目無し, itemKubun);
     }
 
-    private static NinteichosaItemForResult createNinteichosaItemResult(int flg, NinteichosaItemKubun itemKubun) {
+    private static NinteichosaItemForResult createNinteichosaItemForResult(int flg, NinteichosaItemKubun itemKubun) {
         return new NinteichosaItemForResult(
                 flg == AS_調査項目がNULL ? null : createNinteichosaItem(itemKubun),
                 flg == AS_調査結果がNULL ? null : new RString("1"));
