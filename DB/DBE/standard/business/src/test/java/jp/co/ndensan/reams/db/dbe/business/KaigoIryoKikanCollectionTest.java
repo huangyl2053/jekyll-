@@ -282,7 +282,8 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
 
         @Test
         public void コレクションに一つ以上の要素がある場合_falseが返る() {
-            kaigoIryoKikanList = new ArrayList<>();
+            List<KaigoIryoKikan> kaigoIryoKikanList = new ArrayList<>();
+//            kaigoIryoKikanList = new ArrayList<>();
             kaigoIryoKikanList.add(mock(KaigoIryoKikan.class));
             sut = new KaigoIryoKikanCollection(kaigoIryoKikanList);
             assertThat(sut.isEmpty(), is(false));
