@@ -11,7 +11,8 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.assertThat;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.instanceOf;
 
 /**
  * RenrakusakiKubunNoのテストクラスです。
@@ -43,7 +44,7 @@ public class RenrakusakiKubunNoTest extends DbeTestBase {
         public static class Implement extends DbeTestBase {
 
             @Test
-            public void RenrakusakiKubunNoは_IKaigoValueObjectのインスタンスである() {
+            public void RenrakusakiKubunNoは_IKaigoValueObjectを実装している() {
                 RenrakusakiKubunNo sut = new RenrakusakiKubunNo(n0000000);
                 assertThat(sut, is(instanceOf(IKaigoValueObject.class)));
             }
@@ -52,7 +53,7 @@ public class RenrakusakiKubunNoTest extends DbeTestBase {
         public static class Value extends DbeTestBase {
 
             @Test
-            public void valueは_コンストラクタの引数に指定したものと_同じ値を返す() {
+            public void valueは_コンストラクタの引数に指定したRStringと_同じ値を返す() {
                 RString value = n0000000;
                 RenrakusakiKubunNo sut = new RenrakusakiKubunNo(value);
                 assertThat(sut.value(), is(value));

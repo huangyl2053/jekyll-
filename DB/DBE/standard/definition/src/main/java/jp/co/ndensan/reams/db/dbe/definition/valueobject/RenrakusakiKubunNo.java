@@ -11,7 +11,8 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**
- * 連絡先区分番号のクラスです。
+ * 連絡先区分番号のクラスです。<br />
+ * ひとりの被保険者に対して複数件連絡の情報がある場合に、その中からひとつを特定するための番号です。
  *
  * @author N3327 三浦 凌
  */
@@ -46,10 +47,10 @@ public class RenrakusakiKubunNo implements IKaigoValueObject<RString, Renrakusak
 
     @Override
     public boolean equals(Object target) {
-        if ((target == null) || (target.getClass() != getClass())) {
+        if (isNull(target) || isNotSameClass(target.getClass())) {
             return false;
         }
-        return ((RenrakusakiKubunNo) target).value().equals(this.連絡先区分番号);
+        return hasSameValue((RenrakusakiKubunNo) target);
     }
 
     @Override
@@ -63,5 +64,17 @@ public class RenrakusakiKubunNo implements IKaigoValueObject<RString, Renrakusak
         if (value.length() != PERMISSIBLE_LENGTH) {
             throw new IllegalArgumentException(Messages.E00013.replace(name.toString(), PERMISSIBLE_LENGTH + "桁").getMessage());
         }
+    }
+
+    private boolean isNull(Object target) {
+        return target == null;
+    }
+
+    private boolean isNotSameClass(Class clazz) {
+        return clazz != this.getClass();
+    }
+
+    private boolean hasSameValue(RenrakusakiKubunNo target) {
+        return target.value().equals(this.連絡先区分番号);
     }
 }
