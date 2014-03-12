@@ -4,12 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKubun;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKubun;
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -21,8 +21,7 @@ public class NinteichosaResultOfGaikyoKihon {
 
     private final FlexibleDate 認定調査実施年月日;
     private final NinteichosaIraiKubunCode 認定調査依頼区分;
-    private final RString 認定調査実施場所コード;
-    private final RString 認定調査実施場所名称;
+    private final NinteichosaJisshibashoKubun 認定調査実施場所区分;
 // TODO N8156 宮本 康 認定調査依頼担当者のチケット完了後に対応
 //    private final NinteichosaIraiTaishosha 認定調査依頼対象者情報;
     private final NinteichosaKubun 認定調査区分;
@@ -33,22 +32,19 @@ public class NinteichosaResultOfGaikyoKihon {
      *
      * @param 認定調査実施年月日 認定調査実施年月日
      * @param 認定調査依頼区分 認定調査依頼区分
-     * @param 認定調査実施場所コード 認定調査実施場所コード
-     * @param 認定調査実施場所名称 認定調査実施場所名称
+     * @param 認定調査実施場所区分 認定調査実施場所区分
      * @param 認定調査区分 認定調査区分
      * @param 審査会優先振分区分 審査会優先振分区分
      */
     public NinteichosaResultOfGaikyoKihon(
             FlexibleDate 認定調査実施年月日,
             NinteichosaIraiKubunCode 認定調査依頼区分,
-            RString 認定調査実施場所コード,
-            RString 認定調査実施場所名称,
+            NinteichosaJisshibashoKubun 認定調査実施場所区分,
             NinteichosaKubun 認定調査区分,
             ShinsakaiFuriwakeKubun 審査会優先振分区分) {
         this.認定調査実施年月日 = requireNonNull(認定調査実施年月日, Messages.E00001.replace("認定調査実施年月日").getMessage());
         this.認定調査依頼区分 = requireNonNull(認定調査依頼区分, Messages.E00001.replace("認定調査依頼区分").getMessage());
-        this.認定調査実施場所コード = requireNonNull(認定調査実施場所コード, Messages.E00001.replace("認定調査実施場所コード").getMessage());
-        this.認定調査実施場所名称 = requireNonNull(認定調査実施場所名称, Messages.E00001.replace("認定調査実施場所名称").getMessage());
+        this.認定調査実施場所区分 = requireNonNull(認定調査実施場所区分, Messages.E00001.replace("認定調査実施場所区分").getMessage());
         this.認定調査区分 = requireNonNull(認定調査区分, Messages.E00001.replace("認定調査区分").getMessage());
         this.審査会優先振分区分 = requireNonNull(審査会優先振分区分, Messages.E00001.replace("審査会優先振分区分").getMessage());
     }
@@ -72,21 +68,12 @@ public class NinteichosaResultOfGaikyoKihon {
     }
 
     /**
-     * 認定調査実施場所コードを返します。
+     * 認定調査実施場所区分を返します。
      *
-     * @return 認定調査実施場所コード
+     * @return 認定調査実施場所区分
      */
-    public RString get認定調査実施場所コード() {
-        return 認定調査実施場所コード;
-    }
-
-    /**
-     * 認定調査実施場所名称を返します。
-     *
-     * @return 認定調査実施場所名称
-     */
-    public RString get認定調査実施場所名称() {
-        return 認定調査実施場所名称;
+    public NinteichosaJisshibashoKubun get認定調査実施場所区分() {
+        return 認定調査実施場所区分;
     }
 
     /**

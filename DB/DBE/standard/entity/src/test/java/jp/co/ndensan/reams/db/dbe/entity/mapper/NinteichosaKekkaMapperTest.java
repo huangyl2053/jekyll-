@@ -55,13 +55,13 @@ public class NinteichosaKekkaMapperTest {
         }
 
         @Test
-        public void 認定調査実施場所コードの設定がある時_toNinteichosaResult_get認定調査実施場所コードは_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().get基本情報().get認定調査実施場所コード(), is(new RString("12345678")));
+        public void 認定調査実施場所コードの設定がある時_toNinteichosaResult_get認定調査実施場所区分_getCodeは_設定値を返す() {
+            assertThat(toNinteichosaResult().get概況調査結果().get基本情報().get認定調査実施場所区分().getCode().value(), is(new RString("12345678")));
         }
 
         @Test
-        public void 認定調査実施場所名称の設定がある時_toNinteichosaResult_get認定調査実施場所名称は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().get基本情報().get認定調査実施場所名称(), is(new RString("認定調査実施場所名称")));
+        public void 認定調査実施場所名称の設定がある時_toNinteichosaResult_get認定調査実施場所区分_getNameは_設定値を返す() {
+            assertThat(toNinteichosaResult().get概況調査結果().get基本情報().get認定調査実施場所区分().getName(), is(new RString("認定調査実施場所名称")));
         }
 
         @Test

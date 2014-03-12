@@ -11,6 +11,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.Ninteichosahyo;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosahyoFactory;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaItemForResult;
+import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaJisshibashoKubun;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResult;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyo;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyoKihon;
@@ -22,6 +23,7 @@ import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoI
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.INinteichosaItem;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosaJisshibashoKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5008NinteichosaKekkaJohoEntity;
@@ -80,8 +82,8 @@ public final class NinteichosaKekkaMapper {
         entity.setNinteichousaIraiKubunCode(rsltKihon.get認定調査依頼区分().getCode());
         entity.setNinteichosaJisshiYMD(rsltKihon.get認定調査実施年月日());
         entity.setNinteiChosaKubunCode(rsltKihon.get認定調査区分().getCode());
-        entity.setChosaJisshiBashoCode(rsltKihon.get認定調査実施場所コード());
-        entity.setChosaJisshiBashoMeisho(rsltKihon.get認定調査実施場所名称());
+        entity.setChosaJisshiBashoCode(rsltKihon.get認定調査実施場所区分().getCode().value());
+        entity.setChosaJisshiBashoMeisho(rsltKihon.get認定調査実施場所区分().getName());
         entity.setGenzainoJokyoCode(getString(rsltGaikyoService, NinteichosaItemKubun.現在の状況コード));
         entity.setServiceKubunCode(getString(rsltGaikyoService, NinteichosaItemKubun.サービス区分コード));
         entity.setHomonKaigo(getInt(rsltGaikyoService, NinteichosaItemKubun.訪問介護));
@@ -256,8 +258,8 @@ public final class NinteichosaKekkaMapper {
                 new NinteichosaResultOfGaikyoKihon(
                 entity.getNinteichosaJisshiYMD(),
                 NinteichosaIraiKubunCode.toValue(entity.getNinteichousaIraiKubunCode()),
-                entity.getChosaJisshiBashoCode(),
-                entity.getChosaJisshiBashoMeisho(),
+                new NinteichosaJisshibashoKubun(
+                new NinteichosaJisshibashoKubunCode(entity.getChosaJisshiBashoCode()), entity.getChosaJisshiBashoMeisho(), RString.EMPTY),
                 NinteichosaKubun.toValue(entity.getNinteiChosaKubunCode()),
                 ShinsakaiFuriwakeKubun.toValue(entity.getShinsakaiYusenWaritsukeKubunCode())),
                 new Ninteichosahyo(map, NinteichosaItemGroup.Of2009.values()));

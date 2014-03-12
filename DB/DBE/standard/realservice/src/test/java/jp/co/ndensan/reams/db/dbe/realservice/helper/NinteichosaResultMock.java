@@ -14,11 +14,13 @@ import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResult;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyo;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyoKihon;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaItemForResult;
+import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaJisshibashoKubun;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfKihon;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.INinteichosaItem;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosaJisshibashoKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubun;
@@ -106,8 +108,8 @@ public class NinteichosaResultMock {
                 new NinteichosaResultOfGaikyoKihon(
                 new FlexibleDate("20140101"),
                 NinteichosaIraiKubunCode.初回,
-                new RString("12345678"),
-                new RString("認定調査実施場所名称"),
+                new NinteichosaJisshibashoKubun(
+                new NinteichosaJisshibashoKubunCode(new RString("12345678")), new RString("認定調査実施場所名称"), RString.EMPTY),
                 NinteichosaKubun.新規調査,
                 ShinsakaiFuriwakeKubun.希望無し),
                 new Ninteichosahyo(map, NinteichosaItemGroup.Of2009.values())));

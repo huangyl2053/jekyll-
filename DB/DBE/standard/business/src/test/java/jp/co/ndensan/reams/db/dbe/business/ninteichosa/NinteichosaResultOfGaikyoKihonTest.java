@@ -8,7 +8,6 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubun
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -24,10 +23,9 @@ public class NinteichosaResultOfGaikyoKihonTest {
 
     private static final int AS_認定調査実施年月日がNULL = 1;
     private static final int AS_認定調査依頼区分がNULL = 2;
-    private static final int AS_認定調査実施場所コードがNULL = 3;
-    private static final int AS_認定調査実施場所名称がNULL = 4;
-    private static final int AS_認定調査区分がNULL = 5;
-    private static final int AS_審査会優先振分区分がNULL = 6;
+    private static final int AS_認定調査実施場所区分がNULL = 3;
+    private static final int AS_認定調査区分がNULL = 4;
+    private static final int AS_審査会優先振分区分がNULL = 5;
 
     public static class コンストラクタ {
 
@@ -42,13 +40,8 @@ public class NinteichosaResultOfGaikyoKihonTest {
         }
 
         @Test(expected = NullPointerException.class)
-        public void 認定調査実施場所コードがNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createNinteichosaResultGaikyoKihon(AS_認定調査実施場所コードがNULL);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 認定調査実施場所名称がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createNinteichosaResultGaikyoKihon(AS_認定調査実施場所名称がNULL);
+        public void 認定調査実施場所区分がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
+            createNinteichosaResultGaikyoKihon(AS_認定調査実施場所区分がNULL);
         }
 
         @Test(expected = NullPointerException.class)
@@ -66,8 +59,7 @@ public class NinteichosaResultOfGaikyoKihonTest {
         return new NinteichosaResultOfGaikyoKihon(
                 flg == AS_認定調査実施年月日がNULL ? null : any(FlexibleDate.class),
                 flg == AS_認定調査依頼区分がNULL ? null : any(NinteichosaIraiKubunCode.class),
-                flg == AS_認定調査実施場所コードがNULL ? null : any(RString.class),
-                flg == AS_認定調査実施場所名称がNULL ? null : any(RString.class),
+                flg == AS_認定調査実施場所区分がNULL ? null : any(NinteichosaJisshibashoKubun.class),
                 flg == AS_認定調査区分がNULL ? null : any(NinteichosaKubun.class),
                 flg == AS_審査会優先振分区分がNULL ? null : any(ShinsakaiFuriwakeKubun.class));
     }
