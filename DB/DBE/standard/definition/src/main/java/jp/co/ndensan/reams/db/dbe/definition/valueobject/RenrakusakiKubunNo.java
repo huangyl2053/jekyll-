@@ -5,20 +5,19 @@
 package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.IKaigoValueObject;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.IKaigoValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**
- * 連絡先区分番号のクラスです。<br />
+ * 連絡先区分番号です。<br />
  * ひとりの被保険者に対して複数件連絡の情報がある場合に、その中からひとつを特定するための番号です。
  *
  * @author N3327 三浦 凌
  */
 public class RenrakusakiKubunNo implements IKaigoValueObject<RString, RenrakusakiKubunNo> {
 
-    private static RString name = new RString("連絡先区分番号");
     private static final int PERMISSIBLE_LENGTH = 8;
     private final RString 連絡先区分番号;
 
@@ -30,7 +29,7 @@ public class RenrakusakiKubunNo implements IKaigoValueObject<RString, Renrakusak
      * @throws IllegalArgumentException 指定のRStringが8桁でないとき
      */
     public RenrakusakiKubunNo(RString value) throws NullPointerException, IllegalArgumentException {
-        requireNonNull(value, Messages.E00003.replace(name.toString(), getClass().getName()).getMessage());
+        requireNonNull(value, Messages.E00003.replace("value", getClass().getName()).getMessage());
         validate(value);
         this.連絡先区分番号 = value;
     }
@@ -62,7 +61,7 @@ public class RenrakusakiKubunNo implements IKaigoValueObject<RString, Renrakusak
 
     private void validate(RString value) throws IllegalArgumentException {
         if (value.length() != PERMISSIBLE_LENGTH) {
-            throw new IllegalArgumentException(Messages.E00013.replace(name.toString(), PERMISSIBLE_LENGTH + "桁").getMessage());
+            throw new IllegalArgumentException(Messages.E00013.replace("連絡先区分番号", PERMISSIBLE_LENGTH + "桁").getMessage());
         }
     }
 

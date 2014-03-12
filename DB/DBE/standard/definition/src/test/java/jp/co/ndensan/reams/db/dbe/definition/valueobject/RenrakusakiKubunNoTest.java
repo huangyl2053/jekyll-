@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
-import jp.co.ndensan.reams.db.dbz.definition.IKaigoValueObject;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.IKaigoValueObject;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;

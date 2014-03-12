@@ -6,20 +6,18 @@ package jp.co.ndensan.reams.db.dbz.definition.valueobject;
 
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.IKaigoValueObject;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * 証記載保険者番号のクラスです。<db />
+ * 証記載保険者番号です。<db />
  * 被保険者証等に記載される、保険者の番号です。 DBの列に対してマッピング可能な業務ドメイン型です。
  *
  * @author N3327 三浦 凌
  */
 public class ShoKisaiHokenshaNo implements IKaigoValueObject<RString, ShoKisaiHokenshaNo>, IDbColumnMappable {
 
-    private static RString name = new RString("証記載保険者番号");
     private static final int PERMISSIBLE_LENGTH = 6;
     private final RString 証記載保険者番号;
 
@@ -31,7 +29,7 @@ public class ShoKisaiHokenshaNo implements IKaigoValueObject<RString, ShoKisaiHo
      * @throws IllegalArgumentException 指定のRStringが6桁でないとき
      */
     public ShoKisaiHokenshaNo(RString value) throws NullPointerException, IllegalArgumentException {
-        requireNonNull(value, Messages.E00003.replace(name.toString(), getClass().getName()).getMessage());
+        requireNonNull(value, Messages.E00003.replace("value", getClass().getName()).getMessage());
         validate(value);
         this.証記載保険者番号 = value;
     }
@@ -68,7 +66,7 @@ public class ShoKisaiHokenshaNo implements IKaigoValueObject<RString, ShoKisaiHo
 
     private void validate(RString value) throws IllegalArgumentException {
         if (value.length() != PERMISSIBLE_LENGTH) {
-            throw new IllegalArgumentException(Messages.E00013.replace(name.toString(), PERMISSIBLE_LENGTH + "桁").getMessage());
+            throw new IllegalArgumentException(Messages.E00013.replace("証記載保険者番号", PERMISSIBLE_LENGTH + "桁").getMessage());
         }
     }
 
