@@ -6,10 +6,15 @@ package jp.co.ndensan.reams.db.dbe.entity.helper;
 
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKubun;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5008NinteichosaKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5009NinteichosahyoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaEntity;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice.*;
@@ -47,18 +52,19 @@ public class NinteichosaKekkaEntityMock {
      */
     public static DbT5008NinteichosaKekkaJohoEntity getSpiedDbT5008NinteichosaKekkaJohoEntityInstance() {
         DbT5008NinteichosaKekkaJohoEntity entity = new DbT5008NinteichosaKekkaJohoEntity();
-        entity.setShinseishoKanriNo(new RString("1234567890"));
+        entity.setShinseishoKanriNo(new ShinseishoKanriNo(new RString("1234567890")));
         entity.setNinteichosaRirekiNo(0);
-        entity.setNinteichousaIraiKubunCode(NinteichosaIraiKubunCode.初回.getCode());
+        entity.setKoroshoIfShikibetsuCode(new RString("09A"));
+        entity.setNinteichousaIraiKubunCode(new Code(NinteichosaIraiKubunCode.初回.getCode()));
         entity.setNinteichosaIraiKaisu(1);
         entity.setNinteichosaJisshiYMD(new FlexibleDate("20140101"));
         entity.setNinteichosaJuryoYMD(new FlexibleDate("20140202"));
-        entity.setNinteiChosaKubunCode(NinteichosaKubun.新規調査.getCode());
+        entity.setNinteiChosaKubunCode(new Code(NinteichosaKubun.新規調査.getCode()));
         entity.setChosainCode(new RString("12345678"));
-        entity.setChosaJisshiBashoCode(new RString("12345678"));
+        entity.setChosaJisshiBashoCode(new Code(new RString("12345678")));
         entity.setChosaJisshiBashoMeisho(new RString("認定調査実施場所名称"));
-        entity.setGenzainoJokyoCode(new RString("3"));
-        entity.setServiceKubunCode(new RString("2"));
+        entity.setGenzainoJokyoCode(new Code(new RString("3")));
+        entity.setServiceKubunCode(new Code(new RString("2")));
         entity.setHomonKaigo(0);
         entity.setHomonNyuyokuKaigo(1);
         entity.setHomonKango(2);
@@ -82,15 +88,12 @@ public class NinteichosaKekkaEntityMock {
         entity.setHukugogataService(0);
         entity.setShichosonTokubetsuKyufu(new RString("市町村特別給付"));
         entity.setKaigohokenKyufuIgaiNoZaitakuService(new RString("介護保険給付以外の在宅サービス"));
-        entity.setRiyoShisetsuCode(new RString("利用施設コード"));
+        entity.setRiyoShisetsuCode(new JigyoshaNo(new RString("利用施設コード")));
         entity.setRiyoShisetsuShimei(new RString("利用施設名"));
-        entity.setRiyoShisetsuJusho(new RString("利用施設住所"));
-        entity.setRiyoShisetsuTelNo(new RString("利用施設電話番号"));
-        entity.setRiyoShisetsuYubinNo(new RString("利用施設郵便番号"));
+        entity.setRiyoShisetsuJusho(new AtenaJusho(new RString("利用施設住所")));
+        entity.setRiyoShisetsuTelNo(new TelNo(new RString("利用施設電話番号")));
+        entity.setRiyoShisetsuYubinNo(new YubinNo(new RString("1234567")));
         entity.setGaikyochosaTokkijiko(new RString("概況特記事項"));
-        entity.setShogaiNichijoSeikatsuJiritsudoCode(ShogaiJiritsu.Ａ１.getCode());
-        entity.setNinchishoNichijoSeikatsuJiritsudoCode(NinchishoJiritsu.Ⅱａ.getCode());
-        entity.setShinsakaiYusenWaritsukeKubunCode(ShinsakaiFuriwakeKubun.希望無し.getCode());
         return spy(entity);
     }
 
@@ -101,8 +104,9 @@ public class NinteichosaKekkaEntityMock {
      */
     public static DbT5009NinteichosahyoJohoEntity getSpiedDbT5009NinteichosahyoJohoEntityInstance() {
         DbT5009NinteichosahyoJohoEntity entity = new DbT5009NinteichosahyoJohoEntity();
-        entity.setShinseishoKanriNo(new RString("1234567890"));
+        entity.setShinseishoKanriNo(new ShinseishoKanriNo(new RString("1234567890")));
         entity.setNinteichosaRirekiNo(0);
+        entity.setKoroshoIfShikibetsuCode(new RString("09A"));
         entity.setCk_mahiHidariJoshi(NaiAru.ない.getCode());
         entity.setCk_mahiMigiJoshi(NaiAru.ある.getCode());
         entity.setCk_mahiHidariKashi(NaiAru.ない.getCode());
@@ -177,6 +181,8 @@ public class NinteichosaKekkaEntityMock {
         entity.setCk_monitorSokutei(NaiAru.ある.getCode());
         entity.setCk_jokusoShochi(NaiAru.ない.getCode());
         entity.setCk_catheter(NaiAru.ある.getCode());
+        entity.setShogaiNichijoSeikatsuJiritsudoCode(new Code(ShogaiJiritsu.Ａ１.getCode()));
+        entity.setNinchishoNichijoSeikatsuJiritsudoCode(new Code(NinchishoJiritsu.Ⅱａ.getCode()));
         return spy(entity);
     }
 }

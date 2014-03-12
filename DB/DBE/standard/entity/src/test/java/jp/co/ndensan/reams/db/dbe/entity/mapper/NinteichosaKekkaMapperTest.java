@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResult;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKubun;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaKekkaEntityMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaResultMock;
 import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaEntity;
@@ -17,6 +16,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.junit.Test;
 import static jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice.*;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
 import static jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubun.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -43,6 +43,11 @@ public class NinteichosaKekkaMapperTest {
     }
 
     public static class toNinteichosaKekka_概況調査結果 {
+
+        @Test
+        public void 厚労省IF識別区分の設定がある時_toNinteichosaResult_get厚労省IF識別区分は_設定値を返す() {
+            assertThat(toNinteichosaResult().get概況調査結果().get厚労省IF識別区分(), is(KoroshoIFKubun.V09A));
+        }
 
         @Test
         public void 認定調査依頼区分の設定がある時_toNinteichosaResult_get認定調査依頼区分は_設定値を返す() {
@@ -81,11 +86,6 @@ public class NinteichosaKekkaMapperTest {
         @Test
         public void 認定調査実施場所名称の設定がある時_toNinteichosaResult_get認定調査実施場所区分_getNameは_設定値を返す() {
             assertThat(toNinteichosaResult().get概況調査結果().get基本情報().get認定調査実施場所区分().getName(), is(new RString("認定調査実施場所名称")));
-        }
-
-        @Test
-        public void 審査会優先振分区分の設定がある時_toNinteichosaResult_get審査会優先振分区分は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().get基本情報().get審査会優先振分区分(), is(ShinsakaiFuriwakeKubun.希望無し));
         }
 
         @Test
@@ -220,7 +220,7 @@ public class NinteichosaKekkaMapperTest {
 
         @Test
         public void 利用施設郵便番号の設定がある時_toNinteichosaResult_get利用施設郵便番号は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(利用施設郵便番号).get調査結果(), is(new RString("利用施設郵便番号")));
+            assertThat(toNinteichosaResult().get概況調査結果().getサービス状況().get調査項目(利用施設郵便番号).get調査結果(), is(new RString("123-4567")));
         }
 
         @Test
@@ -230,6 +230,11 @@ public class NinteichosaKekkaMapperTest {
     }
 
     public static class toNinteichosaResult_調査票結果 {
+
+        @Test
+        public void 厚労省IF識別区分の設定がある時_toNinteichosaResult_get厚労省IF識別区分は_設定値を返す() {
+            assertThat(toNinteichosaResult().get基本調査結果().get厚労省IF識別区分(), is(KoroshoIFKubun.V09A));
+        }
 
         @Test
         public void 麻痺左上肢の設定がある時_toNinteichosaResult_get麻痺左上肢は_設定値を返す() {
@@ -616,7 +621,7 @@ public class NinteichosaKekkaMapperTest {
 
         @Test
         public void 申請書管理番号の設定がある時_toNinteichosaKekkaEntity_getShinseishoKanriNoは_設定値を返す() {
-            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getShinseishoKanriNo(), is(new RString("1234567890")));
+            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getShinseishoKanriNo().value(), is(new RString("1234567890")));
         }
 
         @Test
@@ -625,8 +630,13 @@ public class NinteichosaKekkaMapperTest {
         }
 
         @Test
+        public void 厚労省IF識別区分の設定がある時_toNinteichosaKekkaEntity_getKoroshoIfShikibetsuCodeは_設定値を返す() {
+            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getKoroshoIfShikibetsuCode(), is(new RString("09A")));
+        }
+
+        @Test
         public void 認定調査依頼区分の設定がある時_toNinteichosaKekkaEntity_getNinteichousaIraiKubunCodeは_設定値を返す() {
-            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getNinteichousaIraiKubunCode(), is(NinteichosaIraiKubunCode.初回.getCode()));
+            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getNinteichousaIraiKubunCode().value(), is(NinteichosaIraiKubunCode.初回.getCode()));
         }
 
         @Test
@@ -646,7 +656,7 @@ public class NinteichosaKekkaMapperTest {
 
         @Test
         public void 認定調査区分の設定がある時_toNinteichosaKekkaEntity_getNinteiChosaKubunCodeは_設定値を返す() {
-            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getNinteiChosaKubunCode(), is(NinteichosaKubun.新規調査.getCode()));
+            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getNinteiChosaKubunCode().value(), is(NinteichosaKubun.新規調査.getCode()));
         }
 
         @Test
@@ -656,7 +666,7 @@ public class NinteichosaKekkaMapperTest {
 
         @Test
         public void 認定調査実施場所コードの設定がある時_toNinteichosaKekkaEntity_getChosaJisshiBashoCodeは_設定値を返す() {
-            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getChosaJisshiBashoCode(), is(new RString("12345678")));
+            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getChosaJisshiBashoCode().value(), is(new RString("12345678")));
         }
 
         @Test
@@ -666,7 +676,7 @@ public class NinteichosaKekkaMapperTest {
 
         @Test
         public void サービス区分の設定がある時_toNinteichosaKekkaEntity_getServiceKubunCodeは_設定値を返す() {
-            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getServiceKubunCode(), is(ServiceKubun.介護.getCode()));
+            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getServiceKubunCode().value(), is(ServiceKubun.介護.getCode()));
         }
 
         @Test
@@ -776,7 +786,7 @@ public class NinteichosaKekkaMapperTest {
 
         @Test
         public void 利用施設コードの設定がある時_toNinteichosaKekkaEntity_getRiyoShisetsuCodeは_設定値を返す() {
-            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getRiyoShisetsuCode(), is(new RString("利用施設コード")));
+            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getRiyoShisetsuCode().getColumnValue(), is(new RString("利用施設コード")));
         }
 
         @Test
@@ -786,37 +796,22 @@ public class NinteichosaKekkaMapperTest {
 
         @Test
         public void 利用施設住所の設定がある時_toNinteichosaKekkaEntity_getRiyoShisetsuJushoは_設定値を返す() {
-            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getRiyoShisetsuJusho(), is(new RString("利用施設住所")));
+            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getRiyoShisetsuJusho().value(), is(new RString("利用施設住所")));
         }
 
         @Test
         public void 利用施設電話番号の設定がある時_toNinteichosaKekkaEntity_getRiyoShisetsuTelNoは_設定値を返す() {
-            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getRiyoShisetsuTelNo(), is(new RString("利用施設電話番号")));
+            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getRiyoShisetsuTelNo().value(), is(new RString("利用施設電話番号")));
         }
 
         @Test
         public void 利用施設郵便番号の設定がある時_toNinteichosaKekkaEntity_getRiyoShisetsuYubinNoは_設定値を返す() {
-            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getRiyoShisetsuYubinNo(), is(new RString("利用施設郵便番号")));
+            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getRiyoShisetsuYubinNo().value(), is(new RString("123-4567")));
         }
 
         @Test
         public void 概況特記事項の設定がある時_toNinteichosaKekkaEntity_getGaikyochosaTokkijikoは_設定値を返す() {
             assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getGaikyochosaTokkijiko(), is(new RString("概況特記事項")));
-        }
-
-        @Test
-        public void 障害高齢者の日常生活自立度の設定がある時_toNinteichosaKekkaEntity_getShogaiNichijoSeikatsuJiritsudoCodeは_設定値を返す() {
-            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getShogaiNichijoSeikatsuJiritsudoCode(), is(ShogaiJiritsu.Ａ１.getCode()));
-        }
-
-        @Test
-        public void 認知症高齢者の日常生活自立度の設定がある時_toNinteichosaKekkaEntity_getNinchishoNichijoSeikatsuJiritsudoCodeは_設定値を返す() {
-            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getNinchishoNichijoSeikatsuJiritsudoCode(), is(NinchishoJiritsu.Ⅱａ.getCode()));
-        }
-
-        @Test
-        public void 審査会優先振分区分の設定がある時_toNinteichosaKekkaEntity_getShinsakaiYusenWaritsukeKubunCodeは_設定値を返す() {
-            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getShinsakaiYusenWaritsukeKubunCode(), is(ShinsakaiFuriwakeKubun.希望無し.getCode()));
         }
     }
 
@@ -824,12 +819,17 @@ public class NinteichosaKekkaMapperTest {
 
         @Test
         public void 申請書管理番号の設定がある時_toNinteichosaKekkaEntity_getShinseishoKanriNoは_設定値を返す() {
-            assertThat(toNinteichosaKekkaEntity().getDbT5009NinteichosahyoJohoEntity().getShinseishoKanriNo(), is(new RString("1234567890")));
+            assertThat(toNinteichosaKekkaEntity().getDbT5009NinteichosahyoJohoEntity().getShinseishoKanriNo().value(), is(new RString("1234567890")));
         }
 
         @Test
         public void 要介護認定調査履歴番号の設定がある時_toNinteichosaKekkaEntity_getNinteichosaRirekiNoは_設定値を返す() {
             assertThat(toNinteichosaKekkaEntity().getDbT5009NinteichosahyoJohoEntity().getNinteichosaRirekiNo(), is(0));
+        }
+
+        @Test
+        public void 厚労省IF識別区分の設定がある時_toNinteichosaKekkaEntity_getKoroshoIfShikibetsuCodeは_設定値を返す() {
+            assertThat(toNinteichosaKekkaEntity().getDbT5009NinteichosahyoJohoEntity().getKoroshoIfShikibetsuCode(), is(new RString("09A")));
         }
 
         @Test
@@ -1200,6 +1200,16 @@ public class NinteichosaKekkaMapperTest {
         @Test
         public void カテーテルの設定がある時_toNinteichosaKekkaEntity_getCk_catheterは_設定値を返す() {
             assertThat(toNinteichosaKekkaEntity().getDbT5009NinteichosahyoJohoEntity().getCk_catheter(), is(NaiAru.ある.getCode()));
+        }
+
+        @Test
+        public void 障害高齢者の日常生活自立度の設定がある時_toNinteichosaKekkaEntity_getShogaiNichijoSeikatsuJiritsudoCodeは_設定値を返す() {
+            assertThat(toNinteichosaKekkaEntity().getDbT5009NinteichosahyoJohoEntity().getShogaiNichijoSeikatsuJiritsudoCode().value(), is(ShogaiJiritsu.Ａ１.getCode()));
+        }
+
+        @Test
+        public void 認知症高齢者の日常生活自立度の設定がある時_toNinteichosaKekkaEntity_getNinchishoNichijoSeikatsuJiritsudoCodeは_設定値を返す() {
+            assertThat(toNinteichosaKekkaEntity().getDbT5009NinteichosahyoJohoEntity().getNinchishoNichijoSeikatsuJiritsudoCode().value(), is(NinchishoJiritsu.Ⅱａ.getCode()));
         }
     }
 

@@ -10,20 +10,29 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 public enum DbT5008NinteichosaKekkaJoho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
-    shinseishoKanriNo(10, 0),
-    ninteichousaIraiKubunCode(8, 0),
-    ninteichosaIraiKaisu(5, 0),
+    insertDantaiCd(2147483647, 0),
+    insertTimestamp(29, 0),
+    insertReamsLoginId(2147483647, 0),
+    insertContextId(2147483647, 0),
+    isDeleted(1, 0),
+    updateCount(10, 0),
+    lastUpdateTimestamp(29, 0),
+    lastUpdateReamsLoginId(2147483647, 0),
+    shinseishoKanriNo(2147483647, 0),
     ninteichosaRirekiNo(5, 0),
-    ninteichosaJisshiYMD(8, 0),
-    ninteichosaJuryoYMD(8, 0),
-    chosaItakuKubunCode(8, 0),
-    ninteiChosaKubunCode(8, 0),
-    chosaItakusakiCode(10, 0),
+    koroshoIfShikibetsuCode(3, 0),
+    ninteichousaIraiKubunCode(2147483647, 0),
+    ninteichosaIraiKaisu(5, 0),
+    ninteichosaJisshiYMD(2147483647, 0),
+    ninteichosaJuryoYMD(2147483647, 0),
+    chosaItakuKubunCode(2147483647, 0),
+    ninteiChosaKubunCode(2147483647, 0),
+    chosaItakusakiCode(2147483647, 0),
     chosainCode(8, 0),
-    chosaJisshiBashoCode(8, 0),
+    chosaJisshiBashoCode(2147483647, 0),
     chosaJisshiBashoMeisho(32, 0),
-    genzainoJokyoCode(8, 0),
-    serviceKubunCode(8, 0),
+    genzainoJokyoCode(2147483647, 0),
+    serviceKubunCode(2147483647, 0),
     homonKaigo(5, 0),
     homonNyuyokuKaigo(5, 0),
     homonKango(5, 0),
@@ -63,17 +72,14 @@ public enum DbT5008NinteichosaKekkaJoho implements IColumnDefinition {
     kaigoyoboNinchishoTaiogataKyodoSeikatsuKaigo(5, 0),
     shichosonTokubetsuKyufu(60, 0),
     kaigohokenKyufuIgaiNoZaitakuService(60, 0),
-    riyoShisetsuCode(10, 0),
+    riyoShisetsuCode(2147483647, 0),
     riyoShisetsuShimei(80, 0),
-    riyoShisetsuJusho(50, 0),
-    riyoShisetsuTelNo(14, 0),
-    riyoShisetsuYubinNo(7, 0),
-    gaikyochosaTokkijiko(512, 0),
-    ninchishoNichijoSeikatsuJiritsudoCode(8, 0),
-    shogaiNichijoSeikatsuJiritsudoCode(8, 0),
-    shinsakaiYusenWaritsukeKubunCode(8, 0),
-    tokkijikoUketsukeYMD(8, 0),
-    tokkijikoJuryoYMD(8, 0);
+    riyoShisetsuJusho(2147483647, 0),
+    riyoShisetsuTelNo(2147483647, 0),
+    riyoShisetsuYubinNo(2147483647, 0),
+    gaikyochosaTokkijiko(2147483647, 0),
+    tokkijikoUketsukeYMD(2147483647, 0),
+    tokkijikoJuryoYMD(2147483647, 0);
     private final int maxLength;
     private final int scale;
 
@@ -82,10 +88,20 @@ public enum DbT5008NinteichosaKekkaJoho implements IColumnDefinition {
         this.scale = scale;
     }
 
+    /**
+     * getMaxLength
+     *
+     * @return 項目の最大長
+     */
     public int getMaxLength() {
         return maxLength;
     }
 
+    /**
+     * getScale
+     *
+     * @return 小数点以下の桁数
+     */
     public int getScale() {
         return scale;
     }

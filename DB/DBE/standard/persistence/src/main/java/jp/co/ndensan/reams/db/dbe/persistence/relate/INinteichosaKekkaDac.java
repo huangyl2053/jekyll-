@@ -28,6 +28,7 @@ public interface INinteichosaKekkaDac {
     /**
      * 指定した要介護認定調査結果エンティティを追加、または更新します。
      *
+     * @param entity 要介護認定調査結果エンティティ
      * @return 追加、または更新が成功した場合はtrueを返します。
      */
     @Transaction
@@ -36,6 +37,7 @@ public interface INinteichosaKekkaDac {
     /**
      * 指定した要介護認定調査結果エンティティを追加します。
      *
+     * @param entity 要介護認定調査結果エンティティ
      * @return 追加が成功した場合はtrueを返します。
      */
     @Transaction
@@ -44,6 +46,7 @@ public interface INinteichosaKekkaDac {
     /**
      * 指定した要介護認定調査結果エンティティを更新します。
      *
+     * @param entity 要介護認定調査結果エンティティ
      * @return 更新が成功した場合はtrueを返します。
      */
     @Transaction
@@ -52,6 +55,7 @@ public interface INinteichosaKekkaDac {
     /**
      * 指定した要介護認定調査結果エンティティを削除します。
      *
+     * @param entity 要介護認定調査結果エンティティ
      * @return 削除が成功した場合はtrueを返します。
      */
     @Transaction

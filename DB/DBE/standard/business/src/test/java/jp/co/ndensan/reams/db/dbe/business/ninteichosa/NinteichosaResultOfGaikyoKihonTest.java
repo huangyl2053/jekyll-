@@ -6,7 +6,6 @@ package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKubun;
 import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import org.junit.Test;
@@ -28,7 +27,6 @@ public class NinteichosaResultOfGaikyoKihonTest {
     private static final int AS_認定調査区分がNULL = 4;
     private static final int AS_認定調査員がNULL = 5;
     private static final int AS_認定調査実施場所区分がNULL = 6;
-    private static final int AS_審査会優先振分区分がNULL = 7;
 
     public static class コンストラクタ {
 
@@ -61,11 +59,6 @@ public class NinteichosaResultOfGaikyoKihonTest {
         public void 認定調査実施場所区分がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
             createNinteichosaResultOfGaikyoKihon(AS_認定調査実施場所区分がNULL);
         }
-
-        @Test(expected = NullPointerException.class)
-        public void 審査会優先振分区分がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createNinteichosaResultOfGaikyoKihon(AS_審査会優先振分区分がNULL);
-        }
     }
 
     private static NinteichosaResultOfGaikyoKihon createNinteichosaResultOfGaikyoKihon(int flg) {
@@ -75,7 +68,6 @@ public class NinteichosaResultOfGaikyoKihonTest {
                 flg == AS_認定調査受領年月日がNULL ? null : any(FlexibleDate.class),
                 flg == AS_認定調査区分がNULL ? null : any(NinteichosaKubun.class),
                 flg == AS_認定調査員がNULL ? null : any(INinteiChosain.class),
-                flg == AS_認定調査実施場所区分がNULL ? null : any(NinteichosaJisshibashoKubun.class),
-                flg == AS_審査会優先振分区分がNULL ? null : any(ShinsakaiFuriwakeKubun.class));
+                flg == AS_認定調査実施場所区分がNULL ? null : any(NinteichosaJisshibashoKubun.class));
     }
 }

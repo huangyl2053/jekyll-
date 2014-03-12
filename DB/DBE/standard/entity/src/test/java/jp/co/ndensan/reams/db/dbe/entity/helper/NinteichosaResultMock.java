@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyo
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfKihon;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubun;
@@ -98,7 +97,7 @@ public class NinteichosaResultMock {
         list.add(createResult(chosahyo, NinteichosaItemKubun.利用施設名, new RString("利用施設名")));
         list.add(createResult(chosahyo, NinteichosaItemKubun.利用施設住所, new RString("利用施設住所")));
         list.add(createResult(chosahyo, NinteichosaItemKubun.利用施設電話番号, new RString("利用施設電話番号")));
-        list.add(createResult(chosahyo, NinteichosaItemKubun.利用施設郵便番号, new RString("利用施設郵便番号")));
+        list.add(createResult(chosahyo, NinteichosaItemKubun.利用施設郵便番号, new RString("1234567")));
         list.add(createResult(chosahyo, NinteichosaItemKubun.概況特記事項, new RString("概況特記事項")));
 
         Map<NinteichosaItemKubun, NinteichosaItemForResult> map = new EnumMap<>(NinteichosaItemKubun.class);
@@ -120,8 +119,7 @@ public class NinteichosaResultMock {
                 NinteichosaKubun.新規調査,
                 new _NinteiChosain(new RString("12345678"), new _Name(new RString("氏名"), RString.EMPTY), createKaigoJigyosha()),
                 new NinteichosaJisshibashoKubun(
-                new NinteichosaJisshibashoKubunCode(new RString("12345678")), new RString("認定調査実施場所名称"), RString.EMPTY),
-                ShinsakaiFuriwakeKubun.希望無し),
+                new NinteichosaJisshibashoKubunCode(new RString("12345678")), new RString("認定調査実施場所名称"), RString.EMPTY)),
                 new Ninteichosahyo(map, NinteichosaItemGroup.Of2009.values())));
     }
 

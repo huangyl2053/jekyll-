@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype;
 
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -39,7 +40,27 @@ public enum KoroshoIFKubun {
         this.code = new RString(code);
     }
 
+    /**
+     * コードを返します。
+     *
+     * @return コード
+     */
     public RString getCode() {
         return code;
+    }
+
+    /**
+     * 引数のコードに該当する区分を返します。
+     *
+     * @param code コード
+     * @return 区分
+     */
+    public static KoroshoIFKubun toValue(RString code) {
+        for (KoroshoIFKubun data : values()) {
+            if (data.getCode().equals(code)) {
+                return data;
+            }
+        }
+        throw new IllegalArgumentException(Messages.E00006.replace("対応する区分").getMessage());
     }
 }
