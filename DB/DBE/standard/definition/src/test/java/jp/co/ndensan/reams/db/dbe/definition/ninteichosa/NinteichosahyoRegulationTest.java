@@ -22,7 +22,7 @@ public class NinteichosahyoRegulationTest {
 
         @Test
         public void サービス状況調査定義に設定がある時_getサービス状況調査定義は_該当の概況調査定義を返す() {
-            assertThat(new NinteichosahyoRegulation.Of2009().getサービス状況調査定義().size(), is(28));
+            assertThat(new NinteichosahyoRegulationOf2009().getサービス状況調査定義().size(), is(28));
         }
     }
 
@@ -30,7 +30,7 @@ public class NinteichosahyoRegulationTest {
 
         @Test
         public void 基本調査定義に設定がある時_get基本調査定義は_該当の基本調査定義を返す() {
-            assertThat(new NinteichosahyoRegulation.Of2009().get基本調査定義().size(), is(78));
+            assertThat(new NinteichosahyoRegulationOf2009().get基本調査定義().size(), is(78));
         }
     }
 }

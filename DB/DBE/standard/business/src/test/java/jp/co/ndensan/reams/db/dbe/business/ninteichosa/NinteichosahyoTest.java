@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosahyoRegulation;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosahyoRegulationOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubun;
@@ -33,7 +33,7 @@ public class NinteichosahyoTest {
 
         @Test(expected = NullPointerException.class)
         public void 調査項目グループがNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            new Ninteichosahyo(new NinteichosahyoRegulation.Of2009().get基本調査定義(), null);
+            new Ninteichosahyo(new NinteichosahyoRegulationOf2009().get基本調査定義(), null);
         }
     }
 
