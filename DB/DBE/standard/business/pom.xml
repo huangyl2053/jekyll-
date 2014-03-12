@@ -22,7 +22,7 @@
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urf</groupId>
-            <artifactId>UrfDefinition</artifactId>
+            <artifactId>UrfBusiness</artifactId>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
