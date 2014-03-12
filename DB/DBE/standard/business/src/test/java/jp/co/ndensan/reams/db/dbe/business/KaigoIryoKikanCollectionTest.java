@@ -274,6 +274,8 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
 
     public static class isEmptyのテスト {
 
+        private KaigoIryoKikan iryoKikan = create介護医療機関("0001", IryoKikanJokyo.有効, "市町村コード1", "介護医療機関コード1");
+
         @Test
         public void コレクションが空の場合_trueが返る() {
             sut = new KaigoIryoKikanCollection(Collections.EMPTY_LIST);
@@ -283,7 +285,7 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
         @Test
         public void コレクションに一つ以上の要素がある場合_falseが返る() {
             kaigoIryoKikanList = new ArrayList<>();
-            kaigoIryoKikanList.add(create介護医療機関("0001", IryoKikanJokyo.有効, "市町村コード1", "介護医療機関コード1"));
+            kaigoIryoKikanList.add(iryoKikan);
             sut = new KaigoIryoKikanCollection(kaigoIryoKikanList);
             assertThat(sut.isEmpty(), is(false));
         }
