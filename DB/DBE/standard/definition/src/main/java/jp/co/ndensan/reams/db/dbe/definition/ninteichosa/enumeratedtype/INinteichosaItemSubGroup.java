@@ -14,9 +14,30 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public interface INinteichosaItemSubGroup {
 
     /**
+     * 調査項目サブグループの番号を返します。
+     *
+     * @return 番号
+     */
+    RString getNo();
+
+    /**
      * 調査項目サブグループの表示名称を返します。
      *
      * @return 表示名称
      */
     RString getName();
+
+    /**
+     * 調査項目サブグループの省略名称を返します。
+     *
+     * @return 省略名称
+     */
+    RString getShortName();
+
+    /**
+     * 調査項目サブグループ内で複数選択が可能かどうか判定します。
+     *
+     * @return 省略名称
+     */
+    boolean isMultiSelectable();
 }
