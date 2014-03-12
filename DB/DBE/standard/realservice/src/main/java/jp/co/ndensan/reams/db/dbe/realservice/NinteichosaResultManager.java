@@ -5,10 +5,10 @@
 package jp.co.ndensan.reams.db.dbe.realservice;
 
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResult;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaKekkaMapper;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteichosaKekkaJohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteichosahyoJohoDac;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaKekkaMapper;
+import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaEntity;
+import jp.co.ndensan.reams.db.dbe.persistence.relate.INinteichosaKekkaDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
 
 /**
@@ -18,26 +18,22 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
  */
 public class NinteichosaResultManager {
 
-    private final INinteichosaKekkaJohoDac ninteichosaKekkaJohoDac;
-    private final INinteichosahyoJohoDac ninteichosahyoJohoDac;
+    private final INinteichosaKekkaDac dac;
 
     /**
      * InstanceCreatorを用いてDacのインスタンスを生成し、メンバ変数に保持します。
      */
     public NinteichosaResultManager() {
-        ninteichosaKekkaJohoDac = InstanceCreator.create(INinteichosaKekkaJohoDac.class);
-        ninteichosahyoJohoDac = InstanceCreator.create(INinteichosahyoJohoDac.class);
+        dac = InstanceCreator.create(INinteichosaKekkaDac.class);
     }
 
     /**
      * モックを使用するテスト用コンストラクタです。
      *
-     * @param ninteichosaKekkaJohoDac 要介護認定調査結果情報Dac
-     * @param ninteichosahyoJohoDac 要介護認定調査票情報Dac
+     * @param dac 要介護認定調査結果Dac
      */
-    NinteichosaResultManager(INinteichosaKekkaJohoDac ninteichosaKekkaJohoDac, INinteichosahyoJohoDac ninteichosahyoJohoDac) {
-        this.ninteichosaKekkaJohoDac = ninteichosaKekkaJohoDac;
-        this.ninteichosahyoJohoDac = ninteichosahyoJohoDac;
+    NinteichosaResultManager(INinteichosaKekkaDac dac) {
+        this.dac = dac;
     }
 
     /**
@@ -48,9 +44,8 @@ public class NinteichosaResultManager {
      * @return 認定調査結果
      */
     public NinteichosaResult get認定調査結果(ShinseishoKanriNo 申請書管理番号, int 認定調査履歴番号) {
-        return NinteichosaKekkaMapper.toNinteichosaResult(
-                ninteichosaKekkaJohoDac.select(申請書管理番号.value(), 認定調査履歴番号),
-                ninteichosahyoJohoDac.select(申請書管理番号.value(), 認定調査履歴番号));
+        NinteichosaKekkaEntity entity = dac.select(申請書管理番号.value(), 認定調査履歴番号);
+        return entity != null ? NinteichosaKekkaMapper.toNinteichosaResult(entity) : null;
     }
 
     /**
@@ -60,8 +55,7 @@ public class NinteichosaResultManager {
      * @return 追加、または更新が成功した場合はtrueを返します。
      */
     public boolean save認定調査結果(NinteichosaResult 認定調査結果) {
-        return ninteichosaKekkaJohoDac.insertOrUpdate(NinteichosaKekkaMapper.toDbT5008NinteichosaKekkaJohoEntity(認定調査結果)) != 0
-                && ninteichosahyoJohoDac.insertOrUpdate(NinteichosaKekkaMapper.toDbT5009NinteichosahyoJohoEntity(認定調査結果)) != 0;
+        return dac.insertOrUpdate(NinteichosaKekkaMapper.toNinteichosaKekkaEntity(認定調査結果));
     }
 
     /**
@@ -71,7 +65,6 @@ public class NinteichosaResultManager {
      * @return 削除が成功した場合はtrueを返します。
      */
     public boolean remove認定調査結果(NinteichosaResult 認定調査結果) {
-        return ninteichosaKekkaJohoDac.delete(NinteichosaKekkaMapper.toDbT5008NinteichosaKekkaJohoEntity(認定調査結果)) != 0
-                && ninteichosahyoJohoDac.delete(NinteichosaKekkaMapper.toDbT5009NinteichosahyoJohoEntity(認定調査結果)) != 0;
+        return dac.delete(NinteichosaKekkaMapper.toNinteichosaKekkaEntity(認定調査結果));
     }
 }

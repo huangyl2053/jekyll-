@@ -8,24 +8,25 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaItemForResult;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyo;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyoKihon;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResult;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfKihon;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.Ninteichosahyo;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosahyoFactory;
+import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaItemForResult;
+import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResult;
+import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyo;
+import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyoKihon;
+import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfKihon;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKubun;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.INinteichosaItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubun;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.INinteichosaItem;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5008NinteichosaKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5009NinteichosahyoJohoEntity;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -45,26 +46,29 @@ public final class NinteichosaKekkaMapper {
     }
 
     /**
-     * 引数のエンティティ情報から認定調査結果情報を作成して返します。
+     * 引数の認定調査結果エンティティから認定調査結果情報を作成して返します。
      *
-     * @param chosaKekkaEntity 認定調査結果情報エンティティ
-     * @param chosahyoEntity 認定調査票情報エンティティ
+     * @param ninteichosaKekkaEntity 認定調査結果エンティティ
      * @return 認定調査結果情報
      */
-    public static NinteichosaResult toNinteichosaResult(
-            DbT5008NinteichosaKekkaJohoEntity chosaKekkaEntity, DbT5009NinteichosahyoJohoEntity chosahyoEntity) {
-        return chosaKekkaEntity != null && chosahyoEntity != null
-                ? new NinteichosaResult(
-                toNinteichosaResultGaikyo(chosaKekkaEntity), toNinteichosaResultKihon(chosaKekkaEntity, chosahyoEntity)) : null;
+    public static NinteichosaResult toNinteichosaResult(NinteichosaKekkaEntity ninteichosaKekkaEntity) {
+        return new NinteichosaResult(toNinteichosaResultGaikyo(ninteichosaKekkaEntity), toNinteichosaResultKihon(ninteichosaKekkaEntity));
     }
 
     /**
-     * 引数の認定調査結果情報から認定調査結果情報エンティティを作成して返します。
+     * 引数の認定調査結果情報から認定調査結果エンティティを作成して返します。
      *
-     * @param ninteichosaKekka 認定調査結果情報
-     * @return 認定調査結果情報エンティティ
+     * @param ninteichosaKekkaEntity 認定調査結果情報
+     * @return 認定調査結果エンティティ
      */
-    public static DbT5008NinteichosaKekkaJohoEntity toDbT5008NinteichosaKekkaJohoEntity(NinteichosaResult ninteichosaKekka) {
+    public static NinteichosaKekkaEntity toNinteichosaKekkaEntity(NinteichosaResult ninteichosaResult) {
+        NinteichosaKekkaEntity ninteichosaKekkaEntity = new NinteichosaKekkaEntity();
+        ninteichosaKekkaEntity.setDbT5008NinteichosaKekkaJohoEntity(toDbT5008NinteichosaKekkaJohoEntity(ninteichosaResult));
+        ninteichosaKekkaEntity.setDbT5009NinteichosahyoJohoEntity(toDbT5009NinteichosahyoJohoEntity(ninteichosaResult));
+        return ninteichosaKekkaEntity;
+    }
+
+    private static DbT5008NinteichosaKekkaJohoEntity toDbT5008NinteichosaKekkaJohoEntity(NinteichosaResult ninteichosaKekka) {
 
         NinteichosaResultOfGaikyoKihon rsltKihon = ninteichosaKekka.get概況調査結果().get基本情報();
         Ninteichosahyo<NinteichosaItemForResult> rsltGaikyoService = ninteichosaKekka.get概況調査結果().getサービス状況();
@@ -116,13 +120,7 @@ public final class NinteichosaKekkaMapper {
         return entity;
     }
 
-    /**
-     * 引数の認定調査結果情報から認定調査票情報エンティティを作成して返します。
-     *
-     * @param ninteichosaKekka 認定調査結果情報
-     * @return 認定調査票情報エンティティ
-     */
-    public static DbT5009NinteichosahyoJohoEntity toDbT5009NinteichosahyoJohoEntity(NinteichosaResult ninteichosaKekka) {
+    private static DbT5009NinteichosahyoJohoEntity toDbT5009NinteichosahyoJohoEntity(NinteichosaResult ninteichosaKekka) {
 
         Ninteichosahyo<NinteichosaItemForResult> rsltKihon = ninteichosaKekka.get基本調査結果().get基本情報();
 
@@ -207,7 +205,8 @@ public final class NinteichosaKekkaMapper {
         return entity;
     }
 
-    private static NinteichosaResultOfGaikyo toNinteichosaResultGaikyo(DbT5008NinteichosaKekkaJohoEntity entity) {
+    private static NinteichosaResultOfGaikyo toNinteichosaResultGaikyo(NinteichosaKekkaEntity ninteichosaKekkaEntity) {
+        DbT5008NinteichosaKekkaJohoEntity entity = ninteichosaKekkaEntity.getDbT5008NinteichosaKekkaJohoEntity();
         Ninteichosahyo chosahyo = NinteichosahyoFactory.createサービス状況Instance(KOROSHO_SHIKIBETSU_KUBUN);
 
         List<NinteichosaItemForResult> list = new ArrayList<>();
@@ -264,8 +263,9 @@ public final class NinteichosaKekkaMapper {
                 new Ninteichosahyo(map, NinteichosaItemGroup.Of2009.values()));
     }
 
-    private static NinteichosaResultOfKihon toNinteichosaResultKihon(
-            DbT5008NinteichosaKekkaJohoEntity chosaKekkaEntity, DbT5009NinteichosahyoJohoEntity chosahyoEntity) {
+    private static NinteichosaResultOfKihon toNinteichosaResultKihon(NinteichosaKekkaEntity ninteichosaKekkaEntity) {
+        DbT5008NinteichosaKekkaJohoEntity chosaKekkaEntity = ninteichosaKekkaEntity.getDbT5008NinteichosaKekkaJohoEntity();
+        DbT5009NinteichosahyoJohoEntity chosahyoEntity = ninteichosaKekkaEntity.getDbT5009NinteichosahyoJohoEntity();
         Ninteichosahyo chosahyo = NinteichosahyoFactory.create基本情報Instance(KOROSHO_SHIKIBETSU_KUBUN);
 
         List<NinteichosaItemForResult> list = new ArrayList<>();

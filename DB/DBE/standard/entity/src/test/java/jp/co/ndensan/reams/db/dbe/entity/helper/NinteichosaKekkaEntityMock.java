@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiFuriwakeKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5008NinteichosaKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5009NinteichosahyoJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice.*;
@@ -25,6 +26,18 @@ public class NinteichosaKekkaEntityMock {
      * インスタンス化を防ぐためのプライベートコンストラクタです。
      */
     private NinteichosaKekkaEntityMock() {
+    }
+
+    /**
+     * NinteichosaKekkaEntityを生成して返します。
+     *
+     * @return NinteichosaKekkaEntity
+     */
+    public static NinteichosaKekkaEntity getSpiedNinteichosaKekkaEntityInstance() {
+        NinteichosaKekkaEntity entity = new NinteichosaKekkaEntity();
+        entity.setDbT5008NinteichosaKekkaJohoEntity(getSpiedDbT5008NinteichosaKekkaJohoEntityInstance());
+        entity.setDbT5009NinteichosahyoJohoEntity(getSpiedDbT5009NinteichosahyoJohoEntityInstance());
+        return spy(entity);
     }
 
     /**
