@@ -21,8 +21,8 @@
             <artifactId>UrdEntity</artifactId>
         </dependency>
         <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
-            <artifactId>UrzEntity</artifactId>
+            <groupId>jp.co.ndensan.reams.ur.urf</groupId>
+            <artifactId>UrfEntity</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>

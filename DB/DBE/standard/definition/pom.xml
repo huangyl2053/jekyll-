@@ -30,16 +30,9 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>jp.co.ndensan.reams.ur</groupId>
-            <artifactId>business</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.ur</groupId>
-            <artifactId>business</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <type>jar</type>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzTestHelper</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>
