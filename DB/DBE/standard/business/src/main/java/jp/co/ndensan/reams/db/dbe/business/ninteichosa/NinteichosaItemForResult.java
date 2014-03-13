@@ -53,6 +53,11 @@ public class NinteichosaItemForResult implements INinteichosaItem {
     }
 
     @Override
+    public int get調査項目サブグループ内番号() {
+        return 調査項目.get調査項目サブグループ内番号();
+    }
+
+    @Override
     public NinteichosaItemNo get調査項目番号() {
         return 調査項目.get調査項目番号();
     }

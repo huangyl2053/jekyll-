@@ -66,7 +66,15 @@ public class NinteichosaItemForResultTest {
 
         @Test
         public void 調査項目グループ内番号の設定がある時_get調査項目グループ内番号は_設置値を返す() {
-            assertThat(createNinteichosaItemForResult().get調査項目グループ内番号(), is(3));
+            assertThat(createNinteichosaItemForResult().get調査項目グループ内番号(), is(1));
+        }
+    }
+
+    public static class get調査項目サブグループ内番号 {
+
+        @Test
+        public void 調査項目サブグループ内番号の設定がある時_get調査項目サブグループ内番号は_設置値を返す() {
+            assertThat(createNinteichosaItemForResult().get調査項目サブグループ内番号(), is(3));
         }
     }
 

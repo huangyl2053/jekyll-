@@ -27,6 +27,7 @@ class NinteichosahyoRegulationBuilder {
     private INinteichosaItemGroup 調査項目グループ = NinteichosaItemGroup.OfCommon.なし;
     private INinteichosaItemSubGroup 調査項目サブグループ = NinteichosaItemSubGroup.OfCommon.なし;
     private int 調査項目グループ内番号 = 1;
+    private int 調査項目サブグループ内番号 = 1;
 
     /**
      * インスタンスを生成します。
@@ -44,9 +45,14 @@ class NinteichosahyoRegulationBuilder {
      * @param 調査項目サブグループ 調査項目サブグループ
      */
     void set調査項目グループ(INinteichosaItemGroup 調査項目グループ, INinteichosaItemSubGroup 調査項目サブグループ) {
+        if (this.調査項目グループ != 調査項目グループ) {
+            this.調査項目グループ内番号 = 1;
+        }
+        if (this.調査項目グループ != 調査項目グループ || this.調査項目サブグループ != 調査項目サブグループ) {
+            this.調査項目サブグループ内番号 = 1;
+        }
         this.調査項目グループ = 調査項目グループ;
         this.調査項目サブグループ = 調査項目サブグループ;
-        this.調査項目グループ内番号 = 1;
     }
 
     /**
@@ -59,7 +65,9 @@ class NinteichosahyoRegulationBuilder {
      */
     void set調査項目(String 調査項目番号, NinteichosaItemKubun 調査項目区分, String 表示名称, IAnsweringItem[] 選択肢) {
         調査票定義.put(調査項目区分,
-                new NinteichosaItem(調査項目グループ, 調査項目サブグループ, 調査項目グループ内番号++,
+                new NinteichosaItem(調査項目グループ, 調査項目サブグループ,
+                this.調査項目サブグループ == NinteichosaItemSubGroup.OfCommon.なし ? 調査項目グループ内番号++ : 調査項目グループ内番号,
+                this.調査項目サブグループ != NinteichosaItemSubGroup.OfCommon.なし ? 調査項目サブグループ内番号++ : 調査項目サブグループ内番号,
                 new NinteichosaItemNo(new RString(調査項目番号)), 調査項目区分, new RString(表示名称), new Choices(選択肢)));
     }
 }

@@ -85,6 +85,14 @@ public class NinteichosaItemTest {
         }
     }
 
+    public static class get調査項目サブグループ内番号 {
+
+        @Test
+        public void 調査項目サブグループ内番号の設定がある時_get調査項目サブグループ内番号は_設定値を返す() {
+            assertThat(createNinteichosaItem().get調査項目サブグループ内番号(), is(1));
+        }
+    }
+
     public static class get調査項目番号 {
 
         @Test
@@ -129,7 +137,7 @@ public class NinteichosaItemTest {
     private static NinteichosaItem createNinteichosaItem(int flg) {
         return new NinteichosaItem(
                 flg == AS_調査項目グループがNULL ? null : NinteichosaItemGroup.Of2009.第１群,
-                flg == AS_調査項目サブグループがNULL ? null : NinteichosaItemSubGroup.Of2009.麻痺等の有無, 1,
+                flg == AS_調査項目サブグループがNULL ? null : NinteichosaItemSubGroup.Of2009.麻痺等の有無, 1, 1,
                 flg == AS_調査項目番号がNULL ? null : new NinteichosaItemNo(new RString("1-1")),
                 flg == AS_調査項目区分がNULL ? null : NinteichosaItemKubun.麻痺等の有無_右上肢,
                 flg == AS_表示名称がNULL ? null : new RString("右上肢"),
