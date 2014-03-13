@@ -157,7 +157,10 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
     private List<ShujiiIkenshoSakuseiIrai> getShujiiIkenshoSakuseiIraiList(List<DbT5011ShujiiIkenshoIraiJohoEntity> iraiEntityList) {
         List<ShujiiIkenshoSakuseiIrai> list = new ArrayList<>();
         for (DbT5011ShujiiIkenshoIraiJohoEntity entity : iraiEntityList) {
-            list.add(getShujiiIkenshoSakuseiIrai(entity));
+            ShujiiIkenshoSakuseiIrai sakuseiIrai = getShujiiIkenshoSakuseiIrai(entity);
+            if (sakuseiIrai != null) {
+                list.add(sakuseiIrai);
+            }
         }
         return list;
     }
