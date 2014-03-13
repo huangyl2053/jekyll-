@@ -148,6 +148,9 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
         }
         KaigoDoctor kaigoDoctor = kaigoDoctorManager.get介護医師(shinseiEntity.getShichosonCode(),
                 new KaigoIryoKikanCode(iraiEntity.getKaigoIryokikanCode()), new KaigoDoctorCode(iraiEntity.getKaigoIshiCode()));
+        if (kaigoDoctor == null) {
+            return null;
+        }
         return ShujiiIkenshoSakuseiIraiJohoMapper.toShujiiIkenshoSakuseiIrai(iraiEntity, kaigoDoctor);
     }
 
