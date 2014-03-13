@@ -284,7 +284,10 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
         public void コレクションに一つ以上の要素がある場合_falseが返る() {
             List<KaigoIryoKikan> kaigoIryoKikanList = new ArrayList<>();
 //            kaigoIryoKikanList = new ArrayList<>();
-            kaigoIryoKikanList.add(mock(KaigoIryoKikan.class));
+            IShujiiIryoKikan 主治医医療機関 = mock(ShujiiIryoKikan.class);
+            IIryoKikan 医療機関 = mock(IIryoKikan.class);
+            KaigoIryoKikan kaigoIryoKikan = new KaigoIryoKikan(医療機関, 主治医医療機関);
+            kaigoIryoKikanList.add(kaigoIryoKikan);
             sut = new KaigoIryoKikanCollection(kaigoIryoKikanList);
             assertThat(sut.isEmpty(), is(false));
         }
