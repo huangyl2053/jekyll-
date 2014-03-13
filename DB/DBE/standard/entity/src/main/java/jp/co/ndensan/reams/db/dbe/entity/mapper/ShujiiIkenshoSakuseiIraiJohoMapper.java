@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoSakuseiIrai;
+import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoSakuseiTokusoku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IkenshoSakuseiTokusokuHoho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiKubun;
@@ -46,10 +47,11 @@ public final class ShujiiIkenshoSakuseiIraiJohoMapper {
                 entity.getIkenshoShutsuryokuYMD(),
                 entity.getSeikyushoShutsuryokuYMD(),
                 SakuseiryoSeikyuKubun.toValue(entity.getSakuseiryoSeikyuKubun().value()),
+                new ShujiiIkenshoSakuseiTokusoku(
                 entity.getIkenshoSakuseiTokusokuYMD(),
                 IkenshoSakuseiTokusokuHoho.toValue(entity.getIkenshoSakuseiTokusokuHoho()),
                 entity.getIkenshoTokusokuKaisu(),
-                entity.getIkenshoTokusokuMemo());
+                entity.getIkenshoTokusokuMemo()));
     }
 
     /**
@@ -72,10 +74,10 @@ public final class ShujiiIkenshoSakuseiIraiJohoMapper {
         entity.setIkenshoShutsuryokuYMD(iraiJoho.get意見書出力年月日());
         entity.setSeikyushoShutsuryokuYMD(iraiJoho.get請求書出力年月日());
         entity.setSakuseiryoSeikyuKubun(new Code(iraiJoho.get作成料請求区分().getCode()));
-        entity.setIkenshoSakuseiTokusokuYMD(iraiJoho.get意見書作成督促年月日());
-        entity.setIkenshoSakuseiTokusokuHoho(iraiJoho.get意見書作成督促方法().getCode());
-        entity.setIkenshoTokusokuKaisu(iraiJoho.get意見書作成督促回数());
-        entity.setIkenshoTokusokuMemo(iraiJoho.get意見書作成督促メモ());
+        entity.setIkenshoSakuseiTokusokuYMD(iraiJoho.get意見書作成督促情報().get意見書作成督促年月日());
+        entity.setIkenshoSakuseiTokusokuHoho(iraiJoho.get意見書作成督促情報().get意見書作成督促方法().getCode());
+        entity.setIkenshoTokusokuKaisu(iraiJoho.get意見書作成督促情報().get意見書作成督促回数());
+        entity.setIkenshoTokusokuMemo(iraiJoho.get意見書作成督促情報().get意見書作成督促メモ());
         return entity;
     }
 }

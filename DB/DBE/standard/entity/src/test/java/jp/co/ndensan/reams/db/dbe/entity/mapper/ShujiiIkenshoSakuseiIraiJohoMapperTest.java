@@ -92,22 +92,22 @@ public class ShujiiIkenshoSakuseiIraiJohoMapperTest {
 
         @Test
         public void 意見書作成督促年月日の設定がある時_toShujiiIkenshoSakuseiIrai_get意見書作成督促年月日は_設定値を返す() {
-            assertThat(toShujiiIkenshoSakuseiIrai().get意見書作成督促年月日(), is(FlexibleDate.MIN));
+            assertThat(toShujiiIkenshoSakuseiIrai().get意見書作成督促情報().get意見書作成督促年月日(), is(FlexibleDate.MIN));
         }
 
         @Test
         public void 意見書作成督促方法の設定がある時_toShujiiIkenshoSakuseiIrai_get意見書作成督促方法は_設定値を返す() {
-            assertThat(toShujiiIkenshoSakuseiIrai().get意見書作成督促方法(), is(IkenshoSakuseiTokusokuHoho.電話));
+            assertThat(toShujiiIkenshoSakuseiIrai().get意見書作成督促情報().get意見書作成督促方法(), is(IkenshoSakuseiTokusokuHoho.電話));
         }
 
         @Test
         public void 意見書作成督促回数の設定がある時_toShujiiIkenshoSakuseiIrai_get意見書作成督促回数は_設定値を返す() {
-            assertThat(toShujiiIkenshoSakuseiIrai().get意見書作成督促回数(), is(2));
+            assertThat(toShujiiIkenshoSakuseiIrai().get意見書作成督促情報().get意見書作成督促回数(), is(2));
         }
 
         @Test
         public void 意見書作成督促メモの設定がある時_toShujiiIkenshoSakuseiIrai_get意見書作成督促メモは_設定値を返す() {
-            assertThat(toShujiiIkenshoSakuseiIrai().get意見書作成督促メモ(), is(new RString("意見書作成督促メモ")));
+            assertThat(toShujiiIkenshoSakuseiIrai().get意見書作成督促情報().get意見書作成督促メモ(), is(new RString("意見書作成督促メモ")));
         }
     }
 

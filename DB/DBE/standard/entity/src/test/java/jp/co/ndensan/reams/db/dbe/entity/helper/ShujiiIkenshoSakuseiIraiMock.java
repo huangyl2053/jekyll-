@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.helper;
 
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoSakuseiIrai;
+import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoSakuseiTokusoku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IkenshoSakuseiTokusokuHoho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiKubun;
@@ -46,9 +47,10 @@ public class ShujiiIkenshoSakuseiIraiMock {
                 FlexibleDate.MIN,
                 FlexibleDate.MAX,
                 SakuseiryoSeikyuKubun.在宅継続,
+                new ShujiiIkenshoSakuseiTokusoku(
                 FlexibleDate.MIN,
                 IkenshoSakuseiTokusokuHoho.電話,
                 2,
-                new RString("意見書作成督促メモ")));
+                new RString("意見書作成督促メモ"))));
     }
 }
