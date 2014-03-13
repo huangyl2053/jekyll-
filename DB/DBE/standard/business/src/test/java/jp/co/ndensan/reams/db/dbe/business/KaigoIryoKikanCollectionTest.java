@@ -20,8 +20,7 @@ import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * 介護医療機関コレクションクラスのテストです。
@@ -260,7 +259,7 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
         }
 
         private KaigoIryoKikan create介護医療機関(String 識別コード, IryoKikanJokyo 医療機関状況, String 市町村コード, String 介護医療機関コード) {
-            IShujiiIryoKikan 主治医医療機関 = mock(IShujiiIryoKikan.class);
+            IShujiiIryoKikan 主治医医療機関 = mock(KaigoIryoKikan.class);
             when(主治医医療機関.get医療機関状況()).thenReturn(医療機関状況);
             when(主治医医療機関.get市町村コード()).thenReturn(create市町村コード(市町村コード));
             when(主治医医療機関.get介護医療機関コード()).thenReturn(create介護医療機関コード(介護医療機関コード));
