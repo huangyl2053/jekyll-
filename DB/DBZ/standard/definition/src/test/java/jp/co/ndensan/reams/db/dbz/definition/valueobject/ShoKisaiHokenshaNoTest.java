@@ -15,6 +15,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.instanceOf;
 
 /**
+ * ShoKisaiHokenshaNoのテストです。
  *
  * @author N3327 三浦 凌
  */

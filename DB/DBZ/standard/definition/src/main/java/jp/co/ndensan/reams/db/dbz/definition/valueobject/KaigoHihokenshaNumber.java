@@ -11,7 +11,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 介護保険被保険者番号のクラスです。
  *
  * @author N3327 三浦 凌
+ * @deprecated {@link KaigoHihokenshaNo KaigoHihokenshaNo}を利用してください。
  */
+@Deprecated
 public class KaigoHihokenshaNumber implements Comparable<KaigoHihokenshaNumber> {
 
     private final RString 被保険者番号;
