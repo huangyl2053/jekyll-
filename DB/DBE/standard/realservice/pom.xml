@@ -45,7 +45,7 @@
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
-            <artifactId>DbzRealservice</artifactId>
+            <artifactId>DbzRealService</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
