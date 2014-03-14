@@ -29,7 +29,7 @@ public class DbT5005NinteiShinchokuJohoEntity implements IDbAccessable {
     private boolean enkitsuchiDoiUmuKubun;
     private FlexibleDate enkitsuchiHakkoYMD;
     private int enkitsuchiHakkoKaisu;
-    private RString ninteiEnkiRuyu;
+    private RString ninteiEnkiRiyu;
     private FlexibleDate ichijihanteiChushutsuYMD;
     private FlexibleDate iraiJohoSoshinYMD;
     private FlexibleDate ninteichosaIraiKanryoYMD;
@@ -43,9 +43,9 @@ public class DbT5005NinteiShinchokuJohoEntity implements IDbAccessable {
     private FlexibleDate centerSoshinYMD;
 
     /**
-     * ORマッパーのためのデフォルトコンストラクタです。
+     * デフォルトコンストラクタです。
      */
-    DbT5005NinteiShinchokuJohoEntity() {
+    public DbT5005NinteiShinchokuJohoEntity() {
     }
 
     /**
@@ -56,7 +56,7 @@ public class DbT5005NinteiShinchokuJohoEntity implements IDbAccessable {
      * @param enkitsuchiDoiUmuKubun 認定延期通知発行に対する同意有無
      * @param enkitsuchiHakkoYMD 認定延期通知発行年月日
      * @param enkitsuchiHakkoKaisu 認定延期通知発行回数
-     * @param ninteiEnkiRuyu 要介護認定延期理由
+     * @param ninteiEnkiRiyu 要介護認定延期理由
      * @param ichijihanteiChushutsuYMD 要介護認定一次判定情報抽出年月日
      * @param iraiJohoSoshinYMD 依頼情報データ送信年月日
      * @param ninteichosaIraiKanryoYMD 認定調査依頼完了年月日
@@ -75,7 +75,7 @@ public class DbT5005NinteiShinchokuJohoEntity implements IDbAccessable {
             boolean enkitsuchiDoiUmuKubun,
             FlexibleDate enkitsuchiHakkoYMD,
             int enkitsuchiHakkoKaisu,
-            RString ninteiEnkiRuyu,
+            RString ninteiEnkiRiyu,
             FlexibleDate ichijihanteiChushutsuYMD,
             FlexibleDate iraiJohoSoshinYMD,
             FlexibleDate ninteichosaIraiKanryoYMD,
@@ -93,7 +93,7 @@ public class DbT5005NinteiShinchokuJohoEntity implements IDbAccessable {
         this.enkitsuchiDoiUmuKubun = enkitsuchiDoiUmuKubun;
         this.enkitsuchiHakkoYMD = enkitsuchiHakkoYMD;
         this.enkitsuchiHakkoKaisu = enkitsuchiHakkoKaisu;
-        this.ninteiEnkiRuyu = ninteiEnkiRuyu;
+        this.ninteiEnkiRiyu = ninteiEnkiRiyu;
         this.ichijihanteiChushutsuYMD = ichijihanteiChushutsuYMD;
         this.iraiJohoSoshinYMD = iraiJohoSoshinYMD;
         this.ninteichosaIraiKanryoYMD = ninteichosaIraiKanryoYMD;
@@ -157,8 +157,8 @@ public class DbT5005NinteiShinchokuJohoEntity implements IDbAccessable {
      *
      * @return ninteiEnkiRuyu
      */
-    public RString getNinteiEnkiRuyu() {
-        return ninteiEnkiRuyu;
+    public RString getNinteiEnkiRiyu() {
+        return ninteiEnkiRiyu;
     }
 
     /**
@@ -308,10 +308,10 @@ public class DbT5005NinteiShinchokuJohoEntity implements IDbAccessable {
     /**
      * 要介護認定延期理由を設定します。
      *
-     * @param ninteiEnkiRuyu 要介護認定延期理由
+     * @param ninteiEnkiRiyu 要介護認定延期理由
      */
-    public void setNinteiEnkiRuyu(RString ninteiEnkiRuyu) {
-        this.ninteiEnkiRuyu = ninteiEnkiRuyu;
+    public void setNinteiEnkiRiyu(RString ninteiEnkiRiyu) {
+        this.ninteiEnkiRiyu = ninteiEnkiRiyu;
     }
 
     /**

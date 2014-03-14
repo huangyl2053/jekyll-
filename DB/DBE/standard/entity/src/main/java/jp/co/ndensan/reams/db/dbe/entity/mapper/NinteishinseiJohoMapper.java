@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisageTaishosha;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
 /**
  * 認定申請情報のMapperです。
@@ -45,7 +47,6 @@ public final class NinteishinseiJohoMapper {
     /**
      * 認定申請情報を、認定申請情報EntityにMappingします。
      *
-     * @param entity 認定申請情報Entity
      * @param 認定申請情報 認定申請情報
      * @return 申請の取下げに関しての情報を更新した認定申請情報Entity
      */
@@ -78,5 +79,42 @@ public final class NinteishinseiJohoMapper {
         更新済みEntity.setTorisageYMD(認定申請情報.get認定申請取下げ().get取下げ年月日().toFlexibleDate());
         更新済みEntity.setShinsaKeizokuKubun(認定申請情報.get認定申請取下げ().get申請継続区分().is継続());
         return 更新済みEntity;
+    }
+
+    /**
+     * 認定申請情報Entityを、認定申請情報にMappingします。
+     *
+     * @param entity 認定申請情報Entity
+     * @return 認定申請情報
+     */
+    public static NinteiShinseiJoho to認定申請情報(DbT5001NinteiShinseiJohoEntity entity) {
+        NinteiShinseiJoho shinseiJoho = new NinteiShinseiJoho(
+                entity.getShinseishoKanriNo(),
+                entity.getShichosonCode(),
+                entity.getShishoCode(),
+                entity.getHihokenshaNo(),
+                entity.getShikibetsuCode(),
+                new RDate(entity.getNinteiShinseiYMD().toString()),
+                entity.getNinteiShinseiEdabanCode(),
+                entity.getNinteiShinseiShinseijiKubunCode(),
+                entity.getNinteiShinseiHoreiKubunCode(),
+                entity.getNinteiShinseiYukoKubunCode(),
+                new Code(entity.getShienShinseiKubun()),
+                entity.getShinseiRiyu(),
+                entity.getZenYokaigoKubunCode(),
+                entity.getZenYukoKikan(),
+                entity.getJohoteikyoDouiUmuKubun(),
+                entity.getNinteichosaIraiRirekiNo(),
+                entity.getIkenshoIraiRirekiNo(),
+                new Code(entity.getMinashiCode()),
+                entity.getEnkitsuchiDoiUmuKubun(),
+                entity.getShisetsuNyushoUmuKubun(),
+                entity.getSichosonRenrakuJiko(),
+                new NinteiShinseiTorisage(
+                TorisageKubun.toValue(entity.getTorisageKubunCode()),
+                entity.getTorisageRiyu(),
+                new RDate(entity.getTorisageYMD().toString()),
+                ShinsaKeizokuKubun.toValue(entity.getShinsaKeizokuKubun())));
+        return shinseiJoho;
     }
 }
