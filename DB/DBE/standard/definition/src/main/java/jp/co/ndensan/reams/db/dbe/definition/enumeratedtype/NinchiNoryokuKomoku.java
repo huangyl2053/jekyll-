@@ -32,7 +32,7 @@ public enum NinchiNoryokuKomoku {
     /**
      * 記載が無いことを表します。
      */
-    記載無し("0");
+    記載無し("9");
     private final RString 項目コード;
 
     private NinchiNoryokuKomoku(String 項目コード) {

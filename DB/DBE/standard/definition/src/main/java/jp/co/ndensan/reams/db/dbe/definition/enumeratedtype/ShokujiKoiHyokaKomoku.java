@@ -24,7 +24,7 @@ public enum ShokujiKoiHyokaKomoku {
     /**
      * 記載が無いことを示す項目です。
      */
-    記載無し("0");
+    記載無し("9");
     private final RString 項目コード;
 
     private ShokujiKoiHyokaKomoku(String 項目コード) {

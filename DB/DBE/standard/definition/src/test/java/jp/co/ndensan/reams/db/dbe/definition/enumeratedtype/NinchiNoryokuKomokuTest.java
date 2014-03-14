@@ -43,8 +43,8 @@ public class NinchiNoryokuKomokuTest {
         }
 
         @Test
-        public void 引数に0を渡したとき_記載無しが返る() {
-            assertThat(NinchiNoryokuKomoku.toValue(new RString("0")), is(NinchiNoryokuKomoku.記載無し));
+        public void 引数に9を渡したとき_記載無しが返る() {
+            assertThat(NinchiNoryokuKomoku.toValue(new RString("9")), is(NinchiNoryokuKomoku.記載無し));
         }
 
         @Test(expected = IllegalArgumentException.class)

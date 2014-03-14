@@ -33,8 +33,8 @@ public class ShokujiKoiHyokaKomokuTest {
         }
 
         @Test
-        public void 引数に0を渡したとき_記載無しが返る() {
-            assertThat(ShokujiKoiHyokaKomoku.toValue(new RString("0")), is(ShokujiKoiHyokaKomoku.記載無し));
+        public void 引数に9を渡したとき_記載無しが返る() {
+            assertThat(ShokujiKoiHyokaKomoku.toValue(new RString("9")), is(ShokujiKoiHyokaKomoku.記載無し));
         }
 
         @Test(expected = IllegalArgumentException.class)
