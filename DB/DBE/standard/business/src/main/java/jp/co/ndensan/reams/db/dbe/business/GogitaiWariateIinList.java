@@ -9,6 +9,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
 
 /**
  * 合議体割当委員のリストを扱うクラスです。
@@ -35,13 +37,28 @@ public class GogitaiWariateIinList implements Iterable<GogitaiWariateIin> {
      * @param 審査会委員コード 審査会委員コード
      * @return 合議体に割り当てられた審査会委員
      */
-    public GogitaiWariateIin get合議体割当委員(ShinsakaiIinCode 審査会委員コード) {
+    public GogitaiWariateIin get合議体割当委員(GogitaiNo 合議体番号,
+            GogitaiYukoKikanKaishiYMD 合議体有効期間開始年月日, ShinsakaiIinCode 審査会委員コード) {
         for (GogitaiWariateIin 合議体割当委員 : 合議体割当委員List) {
-            if (審査会委員コード.equals(合議体割当委員.get委員情報().get委員コード())) {
+            if (isキー項目が一致(合議体割当委員, 合議体番号, 合議体有効期間開始年月日, 審査会委員コード)) {
                 return 合議体割当委員;
             }
         }
         throw new IllegalArgumentException(Messages.E00006.replace("対応する合議体割当委員").getMessage());
+    }
+
+    private boolean isキー項目が一致(GogitaiWariateIin 割当委員, GogitaiNo 合議体番号,
+            GogitaiYukoKikanKaishiYMD 合議体有効期間開始年月日, ShinsakaiIinCode 審査会委員コード) {
+        if (!審査会委員コード.equals(割当委員.get委員情報().get委員コード())) {
+            return false;
+        }
+        if (!合議体番号.equals(割当委員.get合議体情報().get合議体番号())) {
+            return false;
+        }
+        if (!合議体有効期間開始年月日.equals(割当委員.get合議体情報().get有効期間開始年月日())) {
+            return false;
+        }
+        return true;
     }
 
     /**

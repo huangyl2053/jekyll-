@@ -6,9 +6,10 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.Gogitai;
+import jp.co.ndensan.reams.db.dbe.business.GogitaiJoho;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIin;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIinList;
+import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaichoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsainKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5107GogitaiWariateIinJohoEntity;
@@ -59,8 +60,15 @@ public final class GogitaiWariateIinMapper {
             return null;
         }
 
-        return new GogitaiWariateIin(ShinsakaiIinMapper.to審査会委員(合議体割当委員Entity.get審査会委員Entity()),
-                create審査員区分(合議体割当委員Entity), create合議体長区分(合議体割当委員Entity));
+        return new GogitaiWariateIin(
+                create審査会委員(合議体割当委員Entity),
+                create審査員区分(合議体割当委員Entity),
+                create合議体長区分(合議体割当委員Entity),
+                create合議体情報(合議体割当委員Entity));
+    }
+
+    private static ShinsakaiIin create審査会委員(GogitaiWariateShinsakaiIinEntity 合議体割当委員Entity) {
+        return ShinsakaiIinMapper.to審査会委員(合議体割当委員Entity.get審査会委員Entity());
     }
 
     private static ShinsainKubun create審査員区分(GogitaiWariateShinsakaiIinEntity 合議体割当委員Entity) {
@@ -73,43 +81,47 @@ public final class GogitaiWariateIinMapper {
                 合議体割当委員Entity.get合議体割当Entity().getGogitaichoKubunName());
     }
 
+    private static GogitaiJoho create合議体情報(GogitaiWariateShinsakaiIinEntity 合議体割当委員Entity) {
+        return GogitaiJohoMapper.to合議体情報(合議体割当委員Entity.get合議体情報Entity(),
+                ShinsakaiKaisaiBashoJohoMapper.to審査会開催場所(合議体割当委員Entity.get開催場所Entity()));
+    }
+
     /**
      * 合議体の情報を元にマッピングを行い、合議体割当Entityのリストを返します。<br/>
      * 引数にnullが渡された場合は、nullを返します。
      *
-     * @param 合議体 合議体
+     * @param 合議体割当委員List 合議体
      * @return 合議体割当EntityList
      */
-    public static List<DbT5107GogitaiWariateIinJohoEntity> to合議体割当委員EntityList(Gogitai 合議体) {
-        if (合議体 == null) {
+    public static List<DbT5107GogitaiWariateIinJohoEntity> to合議体割当委員EntityList(GogitaiWariateIinList 合議体割当委員List) {
+        if (合議体割当委員List == null) {
             return null;
         }
 
         List<DbT5107GogitaiWariateIinJohoEntity> 合議体割当委員情報EntityList = new ArrayList<>();
-        for (GogitaiWariateIin 合議体割当委員 : 合議体.get合議体割当審査会委員List()) {
-            合議体割当委員情報EntityList.add(to合議体割当委員Entity(合議体, 合議体割当委員));
+        for (GogitaiWariateIin 合議体割当委員 : 合議体割当委員List) {
+            合議体割当委員情報EntityList.add(to合議体割当委員Entity(合議体割当委員));
         }
         return 合議体割当委員情報EntityList;
     }
 
     /**
-     * 合議体と合議体割当の情報を、合議体割当Entityにマッピングします。<br/>
-     * 引数のどちらかにnullが渡されたとき、nullを返します。
+     * 合議体割当の情報を、合議体割当Entityにマッピングします。<br/>
+     * 引数にnullが渡されたとき、nullを返します。
      *
-     * @param 合議体 合議体
      * @param 合議体割当委員 合議体割当委員
      * @return 合議体割当Entity
      */
-    public static DbT5107GogitaiWariateIinJohoEntity to合議体割当委員Entity(Gogitai 合議体, GogitaiWariateIin 合議体割当委員) {
-        if (合議体 == null || 合議体割当委員 == null) {
+    public static DbT5107GogitaiWariateIinJohoEntity to合議体割当委員Entity(GogitaiWariateIin 合議体割当委員) {
+        if (合議体割当委員 == null) {
             return null;
         }
 
         DbT5107GogitaiWariateIinJohoEntity entity = new DbT5107GogitaiWariateIinJohoEntity();
-        entity.setGogitaiNo(合議体.get合議体番号().value());
+        entity.setGogitaiNo(合議体割当委員.get合議体情報().get合議体番号().value());
         entity.setShinsakaiIinCode(合議体割当委員.get委員情報().get委員コード().value());
-        entity.setGogitaiYukoKikanKaishiYMD(合議体.get有効期間開始年月日().value());
-        entity.setGogitaiYukoKikanShuryoYMD(合議体.get有効期間終了年月日());
+        entity.setGogitaiYukoKikanKaishiYMD(合議体割当委員.get合議体情報().get有効期間開始年月日().value());
+        entity.setGogitaiYukoKikanShuryoYMD(合議体割当委員.get合議体情報().get有効期間終了年月日());
         entity.setGogitaichoKubunCode(new Code(合議体割当委員.get合議体長区分().getCode()));
         entity.setShinsainKubunCode(new Code(合議体割当委員.get認定調査員区分().getCode()));
         return entity;

@@ -8,27 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.Gogitai;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiList;
-import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIin;
-import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIinList;
-import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.helper.GogitaiMockEntityCreator;
+import jp.co.ndensan.reams.db.dbe.entity.relate.GogitaiWariateShinsakaiIinEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.Range;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+import org.junit.Before;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * 合議体Mapperのテストです。
@@ -38,294 +29,66 @@ import static org.mockito.Mockito.when;
 @RunWith(Enclosed.class)
 public class GogitaiMapperTest {
 
-    private static GogitaiNo 合議体番号_1 = new GogitaiNo(1);
-    private static RString 合議体名称_合議体1 = new RString("合議体1");
-    private static GogitaiYukoKikanKaishiYMD 開始年月日_19991212 = new GogitaiYukoKikanKaishiYMD("19991212");
-    private static FlexibleDate 終了年月日_20101212 = new FlexibleDate("20101212");
-    private static Range<TimeString> 開始終了予定時刻_0830_1720 = new Range(new TimeString("0830"), new TimeString("1720"));
-    private static ShinsakaiKaisaiBasho 審査会開催場所_山田家001 = create審査会開催場所Mock("山田家001");
-    private static int 審査会予定定員_5 = 5;
-    private static int 審査会自動割当定員_6 = 6;
-    private static int 審査会委員定員_7 = 7;
-    private static GogitaiWariateIinList 合議体割当審査会委員List_3件 = create合議体割当委員ListMock(3);
-    private static GogitaiSeishinkaIshiSonzaiKubun 精神科医師存在_存在 = GogitaiSeishinkaIshiSonzaiKubun.存在;
-    private static GogitaiDummyKubun 合議体ダミー_notダミー = GogitaiDummyKubun.正規;
-
-    public static class to合議体のテスト extends DbeTestBase {
-
-        @Test
-        public void 引数の合議体Entityにnullが渡されたとき_戻り値はnullになる() {
-            Gogitai sut = GogitaiMapper.to合議体(null, 審査会開催場所_山田家001, 合議体割当審査会委員List_3件);
-            assertThat(sut, is(nullValue()));
-        }
-
-        @Test
-        public void 引数の審査会開催場所にnullが渡されたとき_戻り値はnullになる() {
-            Gogitai sut = GogitaiMapper.to合議体(createEntity(), null, 合議体割当審査会委員List_3件);
-            assertThat(sut, is(nullValue()));
-        }
-
-        @Test
-        public void 引数の合議体割当審査会委員Listにnullが渡されたとき_戻り値はnullになる() {
-            Gogitai sut = GogitaiMapper.to合議体(createEntity(), 審査会開催場所_山田家001, null);
-            assertThat(sut, is(nullValue()));
-        }
-
-        @Test
-        public void 合議体番号に1を持つEntityを引数に指定した場合_合議体番号に1を持つ合議体が返る() {
-            Gogitai sut = GogitaiMapper.to合議体(createEntity(), 審査会開催場所_山田家001, 合議体割当審査会委員List_3件);
-            assertThat(sut.get合議体番号(), is(合議体番号_1));
-        }
-
-        @Test
-        public void 合議体名称として合議体1を持つEntityを引数に指定した場合_合議体名称に合議体1を持つ合議体が返る() {
-            Gogitai sut = GogitaiMapper.to合議体(createEntity(), 審査会開催場所_山田家001, 合議体割当審査会委員List_3件);
-            assertThat(sut.get合議体名称(), is(合議体名称_合議体1));
-        }
-
-        @Test
-        public void 有効期間開始年月日として19991212を持つEntityを引数に指定した場合_有効期間開始年月日に19991212を持つ合議体が返る() {
-            Gogitai sut = GogitaiMapper.to合議体(createEntity(), 審査会開催場所_山田家001, 合議体割当審査会委員List_3件);
-            assertThat(sut.get有効期間開始年月日(), is(開始年月日_19991212));
-        }
-
-        @Test
-        public void 有効期間終了年月日として20101212を持つEntityを引数に指定した場合_有効期間終了年月日に20101212を持つ合議体が返る() {
-            Gogitai sut = GogitaiMapper.to合議体(createEntity(), 審査会開催場所_山田家001, 合議体割当審査会委員List_3件);
-            assertThat(sut.get有効期間終了年月日(), is(終了年月日_20101212));
-        }
-
-        @Test
-        public void 開始予定時刻として0830を持つEntityを引数に指定した場合_開始予定時刻に0830を持つ合議体が返る() {
-            Gogitai sut = GogitaiMapper.to合議体(createEntity(), 審査会開催場所_山田家001, 合議体割当審査会委員List_3件);
-            assertThat(sut.get予定開催時間().getFrom(), is(開始終了予定時刻_0830_1720.getFrom()));
-        }
-
-        @Test
-        public void 終了予定時刻として1720を持つEntityを引数に指定した場合_終了予定時刻に1720を持つ合議体が返る() {
-            Gogitai sut = GogitaiMapper.to合議体(createEntity(), 審査会開催場所_山田家001, 合議体割当審査会委員List_3件);
-            assertThat(sut.get予定開催時間().getTo().value(), is(開始終了予定時刻_0830_1720.getTo().value()));
-        }
-
-        @Test
-        public void 審査会開催場所コードに山田家001を持つ審査会開催場所クラスを引数に指定した場合_審査会開催場所コードに山田家001を持つ合議体が返る() {
-            Gogitai sut = GogitaiMapper.to合議体(createEntity(), 審査会開催場所_山田家001, 合議体割当審査会委員List_3件);
-            assertThat(sut.get審査会開催場所().get開催場所コード(), is(審査会開催場所_山田家001.get開催場所コード()));
-        }
-
-        @Test
-        public void 審査会予定定員に5を持つEntityを引数に指定した場合_審査会予定定員に5を持つ合議体が返る() {
-            Gogitai sut = GogitaiMapper.to合議体(createEntity(), 審査会開催場所_山田家001, 合議体割当審査会委員List_3件);
-            assertThat(sut.get審査会予定定員(), is(審査会予定定員_5));
-        }
-
-        @Test
-        public void 審査会自動割当定員に6を持つEntityを引数に指定した場合_審査会自動割当定員に6を持つ合議体が返る() {
-            Gogitai sut = GogitaiMapper.to合議体(createEntity(), 審査会開催場所_山田家001, 合議体割当審査会委員List_3件);
-            assertThat(sut.get審査会自動割当定員(), is(審査会自動割当定員_6));
-        }
-
-        @Test
-        public void 審査会委員定員に7を持つEntityを引数に指定した場合_審査会委員定員に7を持つ合議体が返る() {
-            Gogitai sut = GogitaiMapper.to合議体(createEntity(), 審査会開催場所_山田家001, 合議体割当審査会委員List_3件);
-            assertThat(sut.get審査会委員定員(), is(審査会委員定員_7));
-        }
-
-        @Test
-        public void 引数に指定した合議体割当審査会委員Listと_同一のリストを持つ合議体が返る() {
-            Gogitai sut = GogitaiMapper.to合議体(createEntity(), 審査会開催場所_山田家001, 合議体割当審査会委員List_3件);
-            assertThat(sut.get合議体割当審査会委員List(), is(合議体割当審査会委員List_3件));
-        }
-
-        @Test
-        public void 精神科医師が存在するEntityを引数に指定した場合_精神科医師が存在する合議体が返る() {
-            Gogitai sut = GogitaiMapper.to合議体(createEntity(), 審査会開催場所_山田家001, 合議体割当審査会委員List_3件);
-            assertThat(sut.get精神科医師存在(), is(精神科医師存在_存在));
-        }
-
-        @Test
-        public void 合議体がダミーで無いことを示すEntityを引数に指定した場合_ダミーではない合議体が返る() {
-            Gogitai sut = GogitaiMapper.to合議体(createEntity(), 審査会開催場所_山田家001, 合議体割当審査会委員List_3件);
-            assertThat(sut.getダミー区分(), is(合議体ダミー_notダミー));
-        }
-    }
-
     public static class to合議体Listのテスト extends DbeTestBase {
 
-        private GogitaiList sut;
+        private GogitaiList result;
 
-        @Test
-        public void 引数の合議体Entitiesにnullが渡されたとき_戻り値はnullになる() {
-            sut = GogitaiMapper.to合議体List(null, create審査会開催場所ListMock(3), create合議体割当委員ListsMock(3));
-            assertThat(sut, is(nullValue()));
+        @Before
+        public void setUp() {
+            result = GogitaiMapper.to合議体List(create合議体割当委員EntityList());
         }
 
         @Test
-        public void 引数の審査会開催場所Listにnullが渡されたとき_戻り値はnullになる() {
-            sut = GogitaiMapper.to合議体List(createEntities(3), null, create合議体割当委員ListsMock(3));
-            assertThat(sut, is(nullValue()));
+        public void 合議体番号1_有効期間開始年月日19990101の合議体は_割当委員を3件持つ() {
+            Gogitai 合議体 = result.get合議体(new GogitaiNo(1), new GogitaiYukoKikanKaishiYMD("19990101"));
+            assertThat(合議体.get割当委員List().size(), is(3));
         }
 
         @Test
-        public void 引数の合議体割当委員Listsにnullが渡されたとき_戻り値はnullになる() {
-            sut = GogitaiMapper.to合議体List(createEntities(3), create審査会開催場所ListMock(3), null);
-            assertThat(sut, is(nullValue()));
-        }
-
-        @Test(expected = IllegalArgumentException.class)
-        public void 引数に渡されたリストのサイズが違う場合_例外が発生する() {
-            sut = GogitaiMapper.to合議体List(createEntities(4), create審査会開催場所ListMock(2), create合議体割当委員ListsMock(3));
+        public void 合議体番号1_有効期間開始年月日20010101の合議体は_割当委員を2件持つ() {
+            Gogitai 合議体 = result.get合議体(new GogitaiNo(1), new GogitaiYukoKikanKaishiYMD("20010101"));
+            assertThat(合議体.get割当委員List().size(), is(2));
         }
 
         @Test
-        public void 引数の合議体Entitiesに3件のEntityを持つリストが渡されたとき_3件の合議体を持つリストが返る() {
-            sut = GogitaiMapper.to合議体List(createEntities(3), create審査会開催場所ListMock(3), create合議体割当委員ListsMock(3));
-            assertThat(sut.size(), is(3));
+        public void 合議体番号2_有効期間開始年月日19990101の合議体は_割当委員を3件持つ() {
+            Gogitai 合議体 = result.get合議体(new GogitaiNo(2), new GogitaiYukoKikanKaishiYMD("19990101"));
+            assertThat(合議体.get割当委員List().size(), is(3));
+        }
 
+        @Test
+        public void 合議体番号3_有効期間開始年月日20080101の合議体は_割当委員を1件持つ() {
+            Gogitai 合議体 = result.get合議体(new GogitaiNo(3), new GogitaiYukoKikanKaishiYMD("20080101"));
+            assertThat(合議体.get割当委員List().size(), is(1));
         }
     }
 
-    public static class to合議体Entityのテスト extends DbeTestBase {
+    private static List<GogitaiWariateShinsakaiIinEntity> create合議体割当委員EntityList() {
+        List<GogitaiWariateShinsakaiIinEntity> list = new ArrayList<>();
+        list.add(create合議体割当委員Entity(1, "19990101", "19991231", "iin01", "19800101", "basho01"));
+        list.add(create合議体割当委員Entity(1, "19990101", "19991231", "iin02", "19800102", "basho01"));
+        list.add(create合議体割当委員Entity(1, "19990101", "19991231", "iin03", "19800103", "basho01"));
 
-        private DbT5103GogitaiJohoEntity sut;
+        list.add(create合議体割当委員Entity(1, "20010101", "20011231", "iin01", "19800101", "basho02"));
+        list.add(create合議体割当委員Entity(1, "20010101", "20011231", "iin02", "19800102", "basho02"));
 
-        @Test
-        public void 引数にnullを渡したとき_nullが返る() {
-            sut = GogitaiMapper.to合議体Entity(null);
-            assertThat(sut, is(nullValue()));
-        }
+        list.add(create合議体割当委員Entity(2, "19990101", "19991231", "iin04", "19800104", "basho01"));
+        list.add(create合議体割当委員Entity(2, "19990101", "19991231", "iin05", "19800105", "basho01"));
+        list.add(create合議体割当委員Entity(2, "19990101", "19991231", "iin06", "19800106", "basho01"));
 
-        @Test
-        public void 合議体番号に1を持つ合議体を引数に指定した場合_合議体番号に1を持つ合議体Entityが返る() {
-            sut = GogitaiMapper.to合議体Entity(createGogitai());
-            assertThat(sut.getGogitaiNo(), is(合議体番号_1.value()));
-        }
-
-        @Test
-        public void 合議体名称に合議体1を持つ合議体を引数に指定した場合_合議体名称に合議体1を持つ合議体Entityが返る() {
-            sut = GogitaiMapper.to合議体Entity(createGogitai());
-            assertThat(sut.getGogitaiMei(), is(合議体名称_合議体1));
-        }
-
-        @Test
-        public void 有効期間開始年月日に19991212を持つ合議体を引数に指定した場合_有効期間開始年月日に19991212を持つ合議体Entityが返る() {
-            sut = GogitaiMapper.to合議体Entity(createGogitai());
-            assertThat(sut.getGogitaiYukoKikanKaishiYMD(), is(開始年月日_19991212.value()));
-        }
-
-        @Test
-        public void 有効期間終了年月日に20101212を持つ合議体を引数に指定した場合_有効期間終了年月日に20101212を持つ合議体Entityが返る() {
-            sut = GogitaiMapper.to合議体Entity(createGogitai());
-            assertThat(sut.getGogitaiYukoKikanShuryoYMD(), is(終了年月日_20101212));
-        }
-
-        @Test
-        public void 開始予定時刻に0830を持つ合議体を引数に指定した場合_開始予定時刻に0830を持つ合議体Entityが返る() {
-            sut = GogitaiMapper.to合議体Entity(createGogitai());
-            assertThat(sut.getGogitaiKaishiYoteiTime(), is(開始終了予定時刻_0830_1720.getFrom().value()));
-        }
-
-        @Test
-        public void 終了予定時刻に1720を持つ合議体を引数に指定した場合_終了予定時刻に1720を持つ合議体Entityが返る() {
-            sut = GogitaiMapper.to合議体Entity(createGogitai());
-            assertThat(sut.getGogitaiShuryoYoteiTime(), is(開始終了予定時刻_0830_1720.getTo().value()));
-        }
-
-        @Test
-        public void 審査会開催場所コードに山田家001を持つ合議体を引数に指定した場合_審査会開催場所コードに山田家001を持つ合議体Entityが返る() {
-            sut = GogitaiMapper.to合議体Entity(createGogitai());
-            assertThat(sut.getShinsakaiKaisaiBashoCode(), is(審査会開催場所_山田家001.get開催場所コード().value()));
-        }
-
-        @Test
-        public void 審査会予定定員に5を持つ合議体を引数に指定した場合_審査会予定定員に5を持つ合議体Entityが返る() {
-            sut = GogitaiMapper.to合議体Entity(createGogitai());
-            assertThat(sut.getShinsakaiYoteiTeiin(), is(審査会予定定員_5));
-        }
-
-        @Test
-        public void 審査会自動割当定員に6を持つ合議体を引数に指定した場合_審査会自動割当定員に6を持つ合議体Entityが返る() {
-            sut = GogitaiMapper.to合議体Entity(createGogitai());
-            assertThat(sut.getShinsakaiJidoWariateTeiin(), is(審査会自動割当定員_6));
-        }
-
-        @Test
-        public void 審査会委員定員に7を持つ合議体を引数に指定した場合_審査会委員定員に7を持つ合議体Entityが返る() {
-            sut = GogitaiMapper.to合議体Entity(createGogitai());
-            assertThat(sut.getShinsakaiIinTeiin(), is(審査会委員定員_7));
-        }
-
-        @Test
-        public void 精神科医師が存在する合議体を引数に指定した場合_精神科医師が存在することを示す合議体Entityが返る() {
-            sut = GogitaiMapper.to合議体Entity(createGogitai());
-            assertThat(sut.getGogitaiSeishinkaSonzaiFlag(), is(精神科医師存在_存在.is存在()));
-        }
-
-        @Test
-        public void ダミーではない合議体を引数に指定した場合_合議体がダミーではないことを示す合議体Entityが返る() {
-            sut = GogitaiMapper.to合議体Entity(createGogitai());
-            assertThat(sut.getGogitaiDummyFlag(), is(合議体ダミー_notダミー.isダミー()));
-        }
+        list.add(create合議体割当委員Entity(3, "20080101", "20081231", "iin01", "19800101", "basho02"));
+        return list;
     }
 
-    private static DbT5103GogitaiJohoEntity createEntity() {
-        DbT5103GogitaiJohoEntity entity = new DbT5103GogitaiJohoEntity();
-        entity.setGogitaiNo(合議体番号_1.value());
-        entity.setGogitaiMei(合議体名称_合議体1);
-        entity.setGogitaiYukoKikanKaishiYMD(開始年月日_19991212.value());
-        entity.setGogitaiYukoKikanShuryoYMD(終了年月日_20101212);
-        entity.setGogitaiKaishiYoteiTime(開始終了予定時刻_0830_1720.getFrom().value());
-        entity.setGogitaiShuryoYoteiTime(開始終了予定時刻_0830_1720.getTo().value());
-        entity.setShinsakaiKaisaiBashoCode(審査会開催場所_山田家001.get開催場所コード().value());
-        entity.setShinsakaiYoteiTeiin(審査会予定定員_5);
-        entity.setShinsakaiJidoWariateTeiin(審査会自動割当定員_6);
-        entity.setShinsakaiIinTeiin(審査会委員定員_7);
-        entity.setGogitaiSeishinkaSonzaiFlag(精神科医師存在_存在.is存在());
-        entity.setGogitaiDummyFlag(合議体ダミー_notダミー.isダミー());
+    private static GogitaiWariateShinsakaiIinEntity create合議体割当委員Entity(int 合議体番号, String 合議体有効期間開始年月日,
+            String 合議体有効期間終了年月日, String 委員コード, String 委員開始年月日, String 場所コード) {
+        GogitaiWariateShinsakaiIinEntity entity = new GogitaiWariateShinsakaiIinEntity();
+        entity.set割当Entity(GogitaiMockEntityCreator.create合議体割当Entity(合議体番号, 委員コード,
+                合議体有効期間開始年月日, 合議体有効期間終了年月日));
+        entity.set合議体情報Entity(GogitaiMockEntityCreator.create合議体情報Entity(合議体番号, 合議体有効期間開始年月日,
+                合議体有効期間終了年月日, 場所コード));
+        entity.set委員Entity(GogitaiMockEntityCreator.create審査会委員Entity(委員コード, 委員開始年月日));
+        entity.set開催場所Entity(GogitaiMockEntityCreator.create開催場所Entity(場所コード));
         return entity;
-    }
-
-    private static Gogitai createGogitai() {
-        return new Gogitai(合議体番号_1, 合議体名称_合議体1, 開始年月日_19991212, 終了年月日_20101212, 開始終了予定時刻_0830_1720,
-                審査会開催場所_山田家001, 審査会予定定員_5, 審査会自動割当定員_6, 審査会委員定員_7,
-                合議体割当審査会委員List_3件, 精神科医師存在_存在, 合議体ダミー_notダミー);
-    }
-
-    private static List<DbT5103GogitaiJohoEntity> createEntities(int 件数) {
-        List<DbT5103GogitaiJohoEntity> list = new ArrayList<>();
-        for (int i = 0; i < 件数; i++) {
-            list.add(createEntity());
-        }
-        return list;
-    }
-
-    private static ShinsakaiKaisaiBasho create審査会開催場所Mock(String str) {
-        ShinsakaiKaisaiBasho 審査会開催場所mock = mock(ShinsakaiKaisaiBasho.class);
-        when(審査会開催場所mock.get開催場所コード()).thenReturn(new ShinsakaiKaisaiBashoCode(new RString(str)));
-        return 審査会開催場所mock;
-    }
-
-    private static List<ShinsakaiKaisaiBasho> create審査会開催場所ListMock(int 件数) {
-        List<ShinsakaiKaisaiBasho> list = new ArrayList<>();
-        for (int i = 0; i < 件数; i++) {
-            list.add(create審査会開催場所Mock("test" + i));
-        }
-        return list;
-    }
-
-    private static GogitaiWariateIinList create合議体割当委員ListMock(int 件数) {
-        List<GogitaiWariateIin> list = new ArrayList<>();
-        for (int i = 0; i < 件数; i++) {
-            list.add(mock(GogitaiWariateIin.class));
-        }
-        return new GogitaiWariateIinList(list);
-    }
-
-    private static List<GogitaiWariateIinList> create合議体割当委員ListsMock(int 件数) {
-        List<GogitaiWariateIinList> list = new ArrayList<>();
-        for (int i = 0; i < 件数; i++) {
-            list.add(create合議体割当委員ListMock(i));
-        }
-        return list;
     }
 }

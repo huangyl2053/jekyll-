@@ -64,14 +64,6 @@ public class GogitaiWariateDacTest {
         }
     }
 
-    //TODO n8178 城間篤人 openSessionで落ちてしまうため、一時的にダミーを追加。後日削除予定 2014年3月末
-    public static class dummy extends DbeTestDacBase {
-
-        @Test
-        public void dummy() {
-        }
-    }
-
     private static DbT5107GogitaiWariateIinJohoEntity create合議体割当Entity(int 合議体番号, String 割当委員コード, String 開始年月日, String 終了年月日) {
         DbT5107GogitaiWariateIinJohoEntity entity = new DbT5107GogitaiWariateIinJohoEntity();
         entity.setGogitaiNo(合議体番号);

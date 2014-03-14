@@ -9,7 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5107GogitaiWariateIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.IGogitaiDac;
+import jp.co.ndensan.reams.db.dbe.persistence.basic.IGogitaiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IGogitaiWariateDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.helper.IGogitaiWariateSelector;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
@@ -35,13 +35,13 @@ import org.junit.runner.RunWith;
 public class GogitaiAndGogitaiWariateIinDacTest {
 
     private static IGogitaiAndGogitaiWariateIinDac sut;
-    private static IGogitaiDac gogitaiDac;
+    private static IGogitaiJohoDac gogitaiDac;
     private static IGogitaiWariateSelector gogitaiWariateSelecter;
 
     @BeforeClass
     public static void setUpClass() {
         sut = InstanceCreator.create(IGogitaiAndGogitaiWariateIinDac.class);
-        gogitaiDac = InstanceCreator.create(IGogitaiDac.class);
+        gogitaiDac = InstanceCreator.create(IGogitaiJohoDac.class);
         gogitaiWariateSelecter = InstanceCreator.create(IGogitaiWariateSelector.class);
     }
 
@@ -107,14 +107,6 @@ public class GogitaiAndGogitaiWariateIinDacTest {
         public void 割当委員を3件持つ合議体の情報を引数に渡したとき_割当委員の情報が削除され_selectで取得できない() {
             sut.delete合議体割当審査会委員情報(合議体Entity, 割当委員Entities);
             assertThat(gogitaiWariateSelecter.select(new GogitaiNo(1), new FlexibleDate("19990101")).size(), is(0));
-        }
-    }
-
-    //TODO n8178 城間篤人 openSessionで落ちてしまうため、一時的にダミーを追加。後日削除予定 2014年3月末
-    public static class dummy extends DbeTestDacBase {
-
-        @Test
-        public void dummy() {
         }
     }
 

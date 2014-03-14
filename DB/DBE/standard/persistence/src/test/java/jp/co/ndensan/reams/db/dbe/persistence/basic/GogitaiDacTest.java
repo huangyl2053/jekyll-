@@ -26,11 +26,11 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class GogitaiDacTest {
 
-    private static IGogitaiDac sut;
+    private static IGogitaiJohoDac sut;
 
     @BeforeClass
     public static void setUpClass() {
-        sut = InstanceCreator.create(IGogitaiDac.class);
+        sut = InstanceCreator.create(IGogitaiJohoDac.class);
     }
 
     public static class select_合議体を渡したときのテスト extends DbeTestDacBase {
@@ -125,14 +125,6 @@ public class GogitaiDacTest {
             sut.insert(create合議体Entity(1, "19990101", "99999999", "合議体01"));
             sut.delete(create合議体Entity(1, "19990101", "99999999", "合議体01"));
             assertThat(sut.select(new GogitaiNo(1)).size(), is(0));
-        }
-    }
-
-    //TODO n8178 城間篤人 openSessionで落ちてしまうため、一時的にダミーを追加。後日削除予定 2014年3月末
-    public static class dummy extends DbeTestDacBase {
-
-        @Test
-        public void dummy() {
         }
     }
 

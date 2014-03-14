@@ -20,7 +20,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
  *
  * @author n8178 城間篤人
  */
-public class GogitaiDac implements IGogitaiDac {
+public class GogitaiJohoDac implements IGogitaiJohoDac {
 
     @InjectSession
     private SqlSession session;
@@ -29,7 +29,7 @@ public class GogitaiDac implements IGogitaiDac {
     public List<DbT5103GogitaiJohoEntity> select(GogitaiNo 合議体番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5103GogitaiJoho.class).
-                where(eq(gogitaiNo, 合議体番号)).
+                where(eq(gogitaiNo, 合議体番号.value())).
                 toList(DbT5103GogitaiJohoEntity.class);
     }
 

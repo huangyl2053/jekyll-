@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author n8178 城間篤人
  */
-public interface IGogitaiDac extends IReplaceable<DbT5103GogitaiJohoEntity>, IDeletable<DbT5103GogitaiJohoEntity> {
+public interface IGogitaiJohoDac extends IReplaceable<DbT5103GogitaiJohoEntity>, IDeletable<DbT5103GogitaiJohoEntity> {
 
     /**
      * 指定した合議体番号に該当する合議体Entityのリストを取得します。

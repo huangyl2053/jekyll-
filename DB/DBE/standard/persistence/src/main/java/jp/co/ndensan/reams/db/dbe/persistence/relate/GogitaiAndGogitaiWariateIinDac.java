@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.relate;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5107GogitaiWariateIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.IGogitaiDac;
+import jp.co.ndensan.reams.db.dbe.persistence.basic.IGogitaiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IGogitaiWariateDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
 
@@ -21,7 +21,7 @@ public class GogitaiAndGogitaiWariateIinDac implements IGogitaiAndGogitaiWariate
     @Override
     public int insertOrUpdate合議体割当審査会委員情報(DbT5103GogitaiJohoEntity 合議体Entity, List<DbT5107GogitaiWariateIinJohoEntity> 合議体割当委員Entities) {
 
-        IGogitaiDac gogitaiDac = InstanceCreator.create(IGogitaiDac.class);
+        IGogitaiJohoDac gogitaiDac = InstanceCreator.create(IGogitaiJohoDac.class);
         IGogitaiWariateDac gogitaiWariateDac = InstanceCreator.create(IGogitaiWariateDac.class);
 
         int 総更新件数 = 0;
@@ -36,7 +36,7 @@ public class GogitaiAndGogitaiWariateIinDac implements IGogitaiAndGogitaiWariate
     @Override
     public int delete合議体割当審査会委員情報(DbT5103GogitaiJohoEntity 合議体Entity, List<DbT5107GogitaiWariateIinJohoEntity> 合議体割当委員Entities) {
 
-        IGogitaiDac gogitaiDac = InstanceCreator.create(IGogitaiDac.class);
+        IGogitaiJohoDac gogitaiDac = InstanceCreator.create(IGogitaiJohoDac.class);
         IGogitaiWariateDac gogitaiWariateDac = InstanceCreator.create(IGogitaiWariateDac.class);
 
         int 総更新件数 = 0;

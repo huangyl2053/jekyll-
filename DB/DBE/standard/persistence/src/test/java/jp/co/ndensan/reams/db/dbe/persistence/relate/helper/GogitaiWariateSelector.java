@@ -29,7 +29,7 @@ public class GogitaiWariateSelector implements IGogitaiWariateSelector {
     public List<DbT5107GogitaiWariateIinJohoEntity> select(GogitaiNo 合議体番号, FlexibleDate 合議体有効開始年月日) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5107GogitaiWariateIinJoho.class)
-                .where(and(eq(gogitaiNo, 合議体番号), eq(gogitaiYukoKikanKaishiYMD, 合議体有効開始年月日)))
+                .where(and(eq(gogitaiNo, 合議体番号.value()), eq(gogitaiYukoKikanKaishiYMD, 合議体有効開始年月日)))
                 .toList(DbT5107GogitaiWariateIinJohoEntity.class);
     }
 }

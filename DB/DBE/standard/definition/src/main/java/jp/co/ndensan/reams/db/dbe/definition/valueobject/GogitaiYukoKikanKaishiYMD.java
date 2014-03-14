@@ -75,7 +75,7 @@ public class GogitaiYukoKikanKaishiYMD implements IValueObject<FlexibleDate>, Co
         if (比較対象 == null || getClass() != 比較対象.getClass()) {
             return false;
         }
-        return ((GogitaiYukoKikanKaishiYMD) 比較対象).value().equals(開始年月日);
+        return ((GogitaiYukoKikanKaishiYMD) 比較対象).value().equals(this.value());
     }
 
     @Override

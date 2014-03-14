@@ -7,120 +7,78 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.Gogitai;
+import jp.co.ndensan.reams.db.dbe.business.GogitaiJoho;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiList;
+import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIin;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIinList;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
-import jp.co.ndensan.reams.uz.uza.lang.Range;
+import jp.co.ndensan.reams.db.dbe.entity.relate.GogitaiWariateShinsakaiIinEntity;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
- * 合議体のマッピングを行うクラスです。
+ * 合議体割当委員の情報を元に、合議体クラスを作成するMapperです。
  *
  * @author n8178 城間篤人
  */
 public final class GogitaiMapper {
 
     /**
-     * インスタンス化防止のためのプライベートコンストラクタです。
+     * インスタンス化防止のプライベートコンストラクタです。
      */
     private GogitaiMapper() {
     }
 
     /**
-     * 引数で指定した情報を元に、合議体クラスを生成します。<br/>
-     * 引数のいずれかがnullであるとき、戻り値はnullが返ります。
+     * 合議体割当委員Entityのリストを元に、合議体Listの情報を作成します。<br/>
+     * このメソッドは、引数の合議体割当委員Entitiesがキー項目でソートされている前提のため、
+     * ソートされていないListを渡すと予期しない値が返ります。
      *
-     * @param 合議体Entity 合議体Entity
-     * @param 開催場所 開催場所Entity
-     * @param 合議体割当委員List 合議体割当委員List
-     * @return 合議体
-     */
-    public static Gogitai to合議体(DbT5103GogitaiJohoEntity 合議体Entity, ShinsakaiKaisaiBasho 開催場所,
-            GogitaiWariateIinList 合議体割当委員List) {
-        if (合議体Entity == null || 開催場所 == null || 合議体割当委員List == null) {
-            return null;
-        }
-
-        return new Gogitai(new GogitaiNo(合議体Entity.getGogitaiNo()), 合議体Entity.getGogitaiMei(),
-                new GogitaiYukoKikanKaishiYMD(合議体Entity.getGogitaiYukoKikanKaishiYMD()), 合議体Entity.getGogitaiYukoKikanShuryoYMD(),
-                create開始終了時間(合議体Entity),
-                開催場所, 合議体Entity.getShinsakaiYoteiTeiin(), 合議体Entity.getShinsakaiJidoWariateTeiin(),
-                合議体Entity.getShinsakaiIinTeiin(), 合議体割当委員List,
-                GogitaiSeishinkaIshiSonzaiKubun.toValue(合議体Entity.getGogitaiSeishinkaSonzaiFlag()),
-                GogitaiDummyKubun.toValue(合議体Entity.getGogitaiDummyFlag()));
-    }
-
-    private static Range<TimeString> create開始終了時間(DbT5103GogitaiJohoEntity 合議体Entity) {
-        return new Range(new TimeString(合議体Entity.getGogitaiKaishiYoteiTime()), new TimeString(合議体Entity.getGogitaiShuryoYoteiTime()));
-    }
-
-    /**
-     * 引数で指定した情報を元に、合議体のリストを生成して返します。<br/>
-     * 引数のいずれかがnullであるとき、戻り値はnullが返ります。<br/>
-     * <br/>
-     * 合議体の一つひとつに対して、開催場所のコードと割り当てられた委員Listが存在するため、
-     * このメソッドの引数に渡されるリストは、サイズが一致していることが前提です。<br/>
-     * そのため、メソッドの引数にサイズの違うリストが渡された場合は例外が発生します。
-     *
-     * @param 合議体Entities 合議体Entities
-     * @param 開催場所List 開催場所List
-     * @param 合議体割当委員Lists 合議体割当委員Lists
+     * @param 合議体割当委員Entities 合議体割当委員Entities
      * @return 合議体List
-     * @throws IllegalArgumentException 引数に渡されたリストサイズが不一致のとき
      */
-    public static GogitaiList to合議体List(List<DbT5103GogitaiJohoEntity> 合議体Entities, List<ShinsakaiKaisaiBasho> 開催場所List,
-            List<GogitaiWariateIinList> 合議体割当委員Lists) throws IllegalArgumentException {
-        if (合議体Entities == null || 開催場所List == null || 合議体割当委員Lists == null) {
-            return null;
+    public static GogitaiList to合議体List(List<GogitaiWariateShinsakaiIinEntity> 合議体割当委員Entities) {
+        List<Gogitai> 合議体List = new ArrayList<>();
+        List<GogitaiWariateShinsakaiIinEntity> 各合議体割当委員Entities = new ArrayList<>();
+        GogitaiWariateShinsakaiIinEntity check用割当委員Entity = 合議体割当委員Entities.get(0);
+
+        for (GogitaiWariateShinsakaiIinEntity 割当委員Entity : 合議体割当委員Entities) {
+            if (!isキー項目が一致(check用割当委員Entity, 割当委員Entity)) {
+                合議体List.add(to合議体(各合議体割当委員Entities));
+                各合議体割当委員Entities = new ArrayList<>();
+                check用割当委員Entity = 割当委員Entity;
+            }
+            各合議体割当委員Entities.add(割当委員Entity);
         }
 
-        if (!isリストサイズが一致(合議体Entities, 開催場所List, 合議体割当委員Lists)) {
-            throw new IllegalArgumentException(Messages.E00009.replace("引数に渡されたリストのサイズ").getMessage());
-        }
+        合議体List.add(to合議体(各合議体割当委員Entities));
 
-        List<Gogitai> retList = new ArrayList<>();
-        for (int i = 0; i < 合議体Entities.size(); i++) {
-            retList.add(to合議体(合議体Entities.get(i), 開催場所List.get(i), 合議体割当委員Lists.get(i)));
-        }
-        return new GogitaiList(retList);
+        return new GogitaiList(合議体List);
     }
 
-    private static boolean isリストサイズが一致(List<DbT5103GogitaiJohoEntity> 合議体Entities,
-            List<ShinsakaiKaisaiBasho> 開催場所List, List<GogitaiWariateIinList> 合議体割当委員Lists) {
-        return 合議体Entities.size() == 開催場所List.size() || 開催場所List.size() == 合議体割当委員Lists.size();
+    private static Gogitai to合議体(List<GogitaiWariateShinsakaiIinEntity> 合議体割当委員Entities) {
+        GogitaiJoho 合議体情報 = create合議体情報(合議体割当委員Entities.get(0));
+        GogitaiWariateIinList 合議体割当委員List = GogitaiWariateIinMapper.to合議体割当委員List(合議体割当委員Entities);
+
+        return new Gogitai(合議体情報, 合議体割当委員List);
     }
 
-    /**
-     * 引数から渡された合議体の情報を元に、合議体Entityを生成して返します。<br/>
-     * 引数にnullが渡された場合、nullが返ります。
-     *
-     * @param 合議体 合議体
-     * @return 合議体Entity
-     */
-    public static DbT5103GogitaiJohoEntity to合議体Entity(Gogitai 合議体) {
-        if (合議体 == null) {
-            return null;
-        }
+    private static GogitaiJoho create合議体情報(GogitaiWariateShinsakaiIinEntity 合議体割当委員Entity) {
+        return GogitaiJohoMapper.to合議体情報(合議体割当委員Entity.get合議体情報Entity(),
+                ShinsakaiKaisaiBashoJohoMapper.to審査会開催場所(合議体割当委員Entity.get開催場所Entity()));
+    }
 
-        DbT5103GogitaiJohoEntity entity = new DbT5103GogitaiJohoEntity();
-        entity.setGogitaiNo(合議体.get合議体番号().value());
-        entity.setGogitaiMei(合議体.get合議体名称());
-        entity.setGogitaiYukoKikanKaishiYMD(合議体.get有効期間開始年月日().value());
-        entity.setGogitaiYukoKikanShuryoYMD(合議体.get有効期間終了年月日());
-        entity.setGogitaiKaishiYoteiTime(合議体.get予定開催時間().getFrom().value());
-        entity.setGogitaiShuryoYoteiTime(合議体.get予定開催時間().getTo().value());
-        entity.setShinsakaiKaisaiBashoCode(合議体.get審査会開催場所().get開催場所コード().value());
-        entity.setShinsakaiYoteiTeiin(合議体.get審査会予定定員());
-        entity.setShinsakaiJidoWariateTeiin(合議体.get審査会自動割当定員());
-        entity.setShinsakaiIinTeiin(合議体.get審査会委員定員());
-        entity.setGogitaiSeishinkaSonzaiFlag(合議体.has精神科医());
-        entity.setGogitaiDummyFlag(合議体.isDummy());
-        return entity;
+    private static boolean isキー項目が一致(GogitaiWariateShinsakaiIinEntity check用割当委員Entity, GogitaiWariateShinsakaiIinEntity 割当委員Entity) {
+        boolean is合議体番号一致 = get合議体番号(check用割当委員Entity) == get合議体番号(割当委員Entity);
+        boolean is開始年月日一致 = get開始年月日(check用割当委員Entity).equals(get開始年月日(割当委員Entity));
+
+        return is合議体番号一致 && is開始年月日一致;
+    }
+
+    private static int get合議体番号(GogitaiWariateShinsakaiIinEntity 合議体割当委員Entity) {
+        return 合議体割当委員Entity.get合議体情報Entity().getGogitaiNo();
+    }
+
+    private static FlexibleDate get開始年月日(GogitaiWariateShinsakaiIinEntity 合議体割当委員Entity) {
+        return 合議体割当委員Entity.get合議体情報Entity().getGogitaiYukoKikanKaishiYMD();
     }
 }
