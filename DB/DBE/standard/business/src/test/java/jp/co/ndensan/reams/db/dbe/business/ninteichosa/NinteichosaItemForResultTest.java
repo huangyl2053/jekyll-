@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.INinteichosaItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemSubGroup;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubun;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubunOfGaikyo;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.IAnsweringItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemSubGroup;
@@ -49,23 +49,23 @@ public class NinteichosaItemForResultTest {
     public static class get調査項目グループ {
 
         @Test
-        public void 調査項目グループの設定がある時_get調査項目グループは_設置値を返す() {
-            assertThat(createNinteichosaItemForResult().get調査項目グループ(), is((INinteichosaItemGroup) NinteichosaItemGroup.Of2009.第１群));
+        public void 調査項目グループの設定がある時_get調査項目グループは_設定値を返す() {
+            assertThat(createNinteichosaItemForResult().get調査項目グループ(), is((INinteichosaItemGroup) NinteichosaItemGroup.Of2009.サービス状況));
         }
     }
 
     public static class get調査項目サブグループ {
 
         @Test
-        public void 調査項目サブグループの設定がある時_get調査項目サブグループは_設置値を返す() {
-            assertThat(createNinteichosaItemForResult().get調査項目サブグループ(), is((INinteichosaItemSubGroup) NinteichosaItemSubGroup.Of2009.麻痺等の有無));
+        public void 調査項目サブグループの設定がある時_get調査項目サブグループは_設定値を返す() {
+            assertThat(createNinteichosaItemForResult().get調査項目サブグループ(), is((INinteichosaItemSubGroup) NinteichosaItemSubGroup.OfCommon.なし));
         }
     }
 
     public static class get調査項目グループ内番号 {
 
         @Test
-        public void 調査項目グループ内番号の設定がある時_get調査項目グループ内番号は_設置値を返す() {
+        public void 調査項目グループ内番号の設定がある時_get調査項目グループ内番号は_設定値を返す() {
             assertThat(createNinteichosaItemForResult().get調査項目グループ内番号(), is(1));
         }
     }
@@ -73,8 +73,8 @@ public class NinteichosaItemForResultTest {
     public static class get調査項目サブグループ内番号 {
 
         @Test
-        public void 調査項目サブグループ内番号の設定がある時_get調査項目サブグループ内番号は_設置値を返す() {
-            assertThat(createNinteichosaItemForResult().get調査項目サブグループ内番号(), is(3));
+        public void 調査項目サブグループ内番号の設定がある時_get調査項目サブグループ内番号は_設定値を返す() {
+            assertThat(createNinteichosaItemForResult().get調査項目サブグループ内番号(), is(1));
         }
     }
 
@@ -82,7 +82,7 @@ public class NinteichosaItemForResultTest {
 
         @Test
         public void 調査項目番号の設定がある時_get調査項目番号は_設定値を返す() {
-            assertThat(createNinteichosaItemForResult().get調査項目番号().value(), is(new RString("1-1")));
+            assertThat(createNinteichosaItemForResult().get調査項目番号().value(), is(new RString("")));
         }
     }
 
@@ -90,7 +90,7 @@ public class NinteichosaItemForResultTest {
 
         @Test
         public void 調査項目区分の設定がある時_get調査項目区分は_設定値を返す() {
-            assertThat(createNinteichosaItemForResult().get調査項目区分(), is(NinteichosaItemKubun.麻痺等の有無_右上肢));
+            assertThat((NinteichosaItemKubunOfGaikyo) createNinteichosaItemForResult().get調査項目区分(), is(NinteichosaItemKubunOfGaikyo.サービス区分コード));
         }
     }
 
@@ -98,20 +98,20 @@ public class NinteichosaItemForResultTest {
 
         @Test
         public void 表示名称の設定がある時_get表示名称は_設定値を返す() {
-            assertThat(createNinteichosaItemForResult().get表示名称(), is(new RString("右上肢")));
+            assertThat(createNinteichosaItemForResult().get表示名称(), is(new RString("現在のサービス区分")));
         }
     }
 
     public static class get選択肢 {
 
         @Test
-        public void 選択肢が2択の時_get選択肢は_2件の選択肢を返す() {
-            assertThat(createNinteichosaItemForResult().get選択肢().asList().size(), is(2));
+        public void 選択肢が3択の時_get選択肢は_3件の選択肢を返す() {
+            assertThat(createNinteichosaItemForResult().get選択肢().asList().size(), is(3));
         }
 
         @Test
         public void 選択肢の設定がある時_get選択肢は_設定値を返す() {
-            assertThat(createNinteichosaItemForResult().get選択肢().asList().get(0), is((IAnsweringItem) Choice.Checked.Disable));
+            assertThat(createNinteichosaItemForResult().get選択肢().asList().get(0), is((IAnsweringItem) Choice.ServiceKubun.予防));
         }
     }
 
@@ -127,12 +127,12 @@ public class NinteichosaItemForResultTest {
 
         @Test
         public void 調査項目が選択形式の時_get選択結果は_該当の選択肢を返す() {
-            assertThat(createNinteichosaItemForResult(NinteichosaItemKubun.寝返り).get選択結果(), is((IAnsweringItem) Choice.DekiruDekinai3.できる));
+            assertThat(createNinteichosaItemForResult(NinteichosaItemKubunOfGaikyo.サービス区分コード).get選択結果(), is((IAnsweringItem) Choice.ServiceKubun.予防));
         }
 
         @Test
         public void 調査項目が入力形式の時_get選択結果は_NULLを返す() {
-            assertThat(createNinteichosaItemForResult(NinteichosaItemKubun.市町村特別給付).get選択結果(), nullValue());
+            assertThat(createNinteichosaItemForResult(NinteichosaItemKubunOfGaikyo.市町村特別給付).get選択結果(), nullValue());
         }
     }
 
@@ -141,21 +141,20 @@ public class NinteichosaItemForResultTest {
     }
 
     private static NinteichosaItemForResult createNinteichosaItemForResult(int flg) {
-        return createNinteichosaItemForResult(flg, NinteichosaItemKubun.麻痺等の有無_右上肢);
+        return createNinteichosaItemForResult(flg, NinteichosaItemKubunOfGaikyo.サービス区分コード);
     }
 
-    private static NinteichosaItemForResult createNinteichosaItemForResult(NinteichosaItemKubun itemKubun) {
+    private static NinteichosaItemForResult createNinteichosaItemForResult(NinteichosaItemKubunOfGaikyo itemKubun) {
         return createNinteichosaItemForResult(AS_NULL項目無し, itemKubun);
     }
 
-    private static NinteichosaItemForResult createNinteichosaItemForResult(int flg, NinteichosaItemKubun itemKubun) {
+    private static NinteichosaItemForResult createNinteichosaItemForResult(int flg, NinteichosaItemKubunOfGaikyo itemKubun) {
         return new NinteichosaItemForResult(
                 flg == AS_調査項目がNULL ? null : createNinteichosaItem(itemKubun),
                 flg == AS_調査結果がNULL ? null : new RString("1"));
     }
 
-    private static INinteichosaItem createNinteichosaItem(NinteichosaItemKubun itemKubun) {
-        INinteichosaItem item = NinteichosahyoFactory.createサービス状況Instance(KoroshoIFKubun.V09A).get調査項目(itemKubun);
-        return item == null ? NinteichosahyoFactory.create基本情報Instance(KoroshoIFKubun.V09A).get調査項目(itemKubun) : item;
+    private static INinteichosaItem createNinteichosaItem(NinteichosaItemKubunOfGaikyo itemKubun) {
+        return NinteichosahyoFactory.createサービス状況Instance(KoroshoIFKubun.V09A).get調査項目(itemKubun);
     }
 }

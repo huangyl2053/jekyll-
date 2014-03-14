@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.definition.ninteichosa;
 
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroup;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubun;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubunOfKihon;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemSubGroup;
@@ -105,7 +105,7 @@ public class NinteichosaItemTest {
 
         @Test
         public void 調査項目区分の設定がある時_get調査項目区分は_設定値を返す() {
-            assertThat(createNinteichosaItem().get調査項目区分(), is(NinteichosaItemKubun.麻痺等の有無_右上肢));
+            assertThat((NinteichosaItemKubunOfKihon) createNinteichosaItem().get調査項目区分(), is(NinteichosaItemKubunOfKihon.麻痺等の有無_右上肢));
         }
     }
 
@@ -139,7 +139,7 @@ public class NinteichosaItemTest {
                 flg == AS_調査項目グループがNULL ? null : NinteichosaItemGroup.Of2009.第１群,
                 flg == AS_調査項目サブグループがNULL ? null : NinteichosaItemSubGroup.Of2009.麻痺等の有無, 1, 1,
                 flg == AS_調査項目番号がNULL ? null : new NinteichosaItemNo(new RString("1-1")),
-                flg == AS_調査項目区分がNULL ? null : NinteichosaItemKubun.麻痺等の有無_右上肢,
+                flg == AS_調査項目区分がNULL ? null : NinteichosaItemKubunOfKihon.麻痺等の有無_右上肢,
                 flg == AS_表示名称がNULL ? null : new RString("右上肢"),
                 new Choices(Choice.NaiAru.values()));
     }

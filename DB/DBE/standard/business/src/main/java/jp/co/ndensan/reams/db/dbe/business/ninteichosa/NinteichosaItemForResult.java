@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubun;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.IAnsweringItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemSubGroup;
@@ -14,14 +14,14 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItemNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice;
 
 /**
  * 要介護認定調査の調査結果（調査項目単位）を扱うクラスです。
  *
  * @author N8156 宮本 康
+ * @param <E> Enum
  */
-public class NinteichosaItemForResult implements INinteichosaItem {
+public class NinteichosaItemForResult<E extends Enum> implements INinteichosaItem {
 
     private final INinteichosaItem 調査項目;
     private final RString 調査結果;
@@ -63,8 +63,8 @@ public class NinteichosaItemForResult implements INinteichosaItem {
     }
 
     @Override
-    public NinteichosaItemKubun get調査項目区分() {
-        return 調査項目.get調査項目区分();
+    public E get調査項目区分() {
+        return (E) 調査項目.get調査項目区分();
     }
 
     @Override

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosahyoRegulationOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroup;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubun;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubunOfKihon;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -41,7 +41,7 @@ public class NinteichosahyoTest {
 
         @Test
         public void 調査項目区分の指定がある時_get調査項目は_該当の調査項目を返す() {
-            assertThat(NinteichosahyoFactory.create基本情報Instance(KoroshoIFKubun.V09A).get調査項目(NinteichosaItemKubun.麻痺等の有無_左上肢).get表示名称(), is(new RString("左上肢")));
+            assertThat(NinteichosahyoFactory.create基本情報Instance(KoroshoIFKubun.V09A).get調査項目(NinteichosaItemKubunOfKihon.麻痺等の有無_左上肢).get表示名称(), is(new RString("左上肢")));
         }
 
         @Test

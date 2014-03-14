@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.ninteichosa;
 
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItemNo;
@@ -16,15 +15,16 @@ import static java.util.Objects.requireNonNull;
  * 要介護認定調査の調査項目を扱うクラスです。
  *
  * @author N8156 宮本 康
+ * @param <E> Enum
  */
-public class NinteichosaItem implements INinteichosaItem {
+public class NinteichosaItem<E extends Enum> implements INinteichosaItem {
 
     private final INinteichosaItemGroup 調査項目グループ;
     private final INinteichosaItemSubGroup 調査項目サブグループ;
     private final int 調査項目グループ内番号;
     private final int 調査項目サブグループ内番号;
     private final NinteichosaItemNo 調査項目番号;
-    private final NinteichosaItemKubun 調査項目区分;
+    private final E 調査項目区分;
     private final RString 表示名称;
     private final IAnsweringItems 選択肢;
 
@@ -42,7 +42,7 @@ public class NinteichosaItem implements INinteichosaItem {
      */
     public NinteichosaItem(INinteichosaItemGroup 調査項目グループ, INinteichosaItemSubGroup 調査項目サブグループ,
             int 調査項目グループ内番号, int 調査項目サブグループ内番号, NinteichosaItemNo 調査項目番号,
-            NinteichosaItemKubun 調査項目区分, RString 表示名称, IAnsweringItems 選択肢) {
+            E 調査項目区分, RString 表示名称, IAnsweringItems 選択肢) {
         this.調査項目グループ = requireNonNull(調査項目グループ, Messages.E00001.replace("調査項目グループ").getMessage());
         this.調査項目サブグループ = requireNonNull(調査項目サブグループ, Messages.E00001.replace("調査項目サブグループ").getMessage());
         this.調査項目グループ内番号 = 調査項目グループ内番号;
@@ -79,7 +79,7 @@ public class NinteichosaItem implements INinteichosaItem {
     }
 
     @Override
-    public NinteichosaItemKubun get調査項目区分() {
+    public E get調査項目区分() {
         return 調査項目区分;
     }
 
