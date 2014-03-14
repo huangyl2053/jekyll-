@@ -34,7 +34,7 @@ public class HatsubanJoho implements IDbColumnMappable {
     @Override
     public RString getColumnValue() {
         発番番号 = Integer.parseInt(発番.toString()) + 1;
-        発番 = new RString(発番番号 + "");
+        発番 = new RString(String.valueOf(発番番号));
         return 発番;
     }
 }

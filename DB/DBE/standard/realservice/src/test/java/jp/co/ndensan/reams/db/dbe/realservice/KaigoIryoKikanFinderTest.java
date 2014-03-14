@@ -10,13 +10,13 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikanCollection;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoIryoKikanEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.IKaigoIryoKikanDac;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.KaigoIryoKikanTestHelper;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
 import jp.co.ndensan.reams.ur.urz.realservice.IKozaManager;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
@@ -139,16 +139,22 @@ public class KaigoIryoKikanFinderTest extends TestBase {
 
     private static IKaigoIryoKikanDac createDac() {
         IKaigoIryoKikanDac dac = mock(IKaigoIryoKikanDac.class);
-        when(dac.select(any(ShichosonCode.class), any(KaigoIryoKikanCode.class))).thenReturn(create介護医療機関Entity());
-        when(dac.select(any(ShichosonCode.class), any(KaigoIryoKikanCode.class), any(IryoKikanJokyo.class))).thenReturn(create介護医療機関Entity());
-        when(dac.select(any(ShichosonCode.class))).thenReturn(create介護医療機関EntityList(2));
-        when(dac.select(any(ShichosonCode.class), any(IryoKikanJokyo.class))).thenReturn(create介護医療機関EntityList(3));
+
+        KaigoIryoKikanEntity entity = create介護医療機関Entity();
+        when(dac.select(any(ShichosonCode.class), any(KaigoIryoKikanCode.class))).thenReturn(entity);
+        when(dac.select(any(ShichosonCode.class), any(KaigoIryoKikanCode.class), any(IryoKikanJokyo.class))).thenReturn(entity);
+
+        List<KaigoIryoKikanEntity> 介護医療機関リスト_2件 = create介護医療機関EntityList(2);
+        when(dac.select(any(ShichosonCode.class))).thenReturn(介護医療機関リスト_2件);
+
+        List<KaigoIryoKikanEntity> 介護医療機関リスト_3件 = create介護医療機関EntityList(3);
+        when(dac.select(any(ShichosonCode.class), any(IryoKikanJokyo.class))).thenReturn(介護医療機関リスト_3件);
         return dac;
     }
 
     private static IKozaManager createKozaManager() {
         IKozaManager manager = mock(IKozaManager.class);
-        when(manager.get口座(any(RDate.class), any(IShikibetsuCode.class))).thenReturn(KaigoIryoKikanTestHelper.create口座List(3));
+        when(manager.get口座(any(RDate.class), any(ShikibetsuCode.class))).thenReturn(KaigoIryoKikanTestHelper.create口座List(3));
         return manager;
     }
 

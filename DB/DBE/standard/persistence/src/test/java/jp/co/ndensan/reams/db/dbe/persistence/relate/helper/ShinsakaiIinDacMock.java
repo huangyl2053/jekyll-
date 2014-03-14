@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
  *
  * @author n8178 城間篤人
  */
-public class ShinsakaiIInDacMock implements IShinsakaiIInDacMock {
+public class ShinsakaiIinDacMock implements IShinsakaiIinDacMock {
 
     @InjectSession
     SqlSession session;

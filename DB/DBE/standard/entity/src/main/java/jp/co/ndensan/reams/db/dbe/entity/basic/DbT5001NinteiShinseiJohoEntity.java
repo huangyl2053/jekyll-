@@ -7,9 +7,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang._UUID;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
@@ -41,7 +42,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     private ShikibetsuCode shikibetsuCode;
     private FlexibleDate ninteiShinseiYMD;
     private EdabanCode ninteiShinseiEdabanCode;
-    private Code ninteiShinseiShinseijiKubunCode;
+    private NinteiShinseiKubunShinsei ninteiShinseiShinseijiKubunCode;
     private Code ninteiShinseiHoreiKubunCode;
     private Code ninteiShinseiYukoKubunCode;
     private RString shienShinseiKubun;
@@ -102,7 +103,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
             ShikibetsuCode shikibetsuCode,
             FlexibleDate ninteiShinseiYMD,
             EdabanCode ninteiShinseiEdabanCode,
-            Code ninteiShinseiShinseijiKubunCode,
+            NinteiShinseiKubunShinsei ninteiShinseiShinseijiKubunCode,
             Code ninteiShinseiHoreiKubunCode,
             Code ninteiShinseiYukoKubunCode,
             RString shienShinseiKubun,
@@ -324,7 +325,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
      *
      * @return ninteiShinseiShinseijiKubunCode
      */
-    public Code getNinteiShinseiShinseijiKubunCode() {
+    public NinteiShinseiKubunShinsei getNinteiShinseiShinseijiKubunCode() {
         return ninteiShinseiShinseijiKubunCode;
     }
 
@@ -333,7 +334,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
      *
      * @param ninteiShinseiShinseijiKubunCode ninteiShinseiShinseijiKubunCode
      */
-    public void setNinteiShinseiShinseijiKubunCode(Code ninteiShinseiShinseijiKubunCode) {
+    public void setNinteiShinseiShinseijiKubunCode(NinteiShinseiKubunShinsei ninteiShinseiShinseijiKubunCode) {
         this.ninteiShinseiShinseijiKubunCode = ninteiShinseiShinseijiKubunCode;
     }
 
@@ -446,11 +447,11 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     }
 
     /**
-     * getJohoteikyoDouiUmuKubun
+     * 情報提供への同意有無が有効かどうかを返します。
      *
-     * @return johoteikyoDouiUmuKubun
+     * @return {@code true}:有効、{@code false}:無効
      */
-    public boolean getJohoteikyoDouiUmuKubun() {
+    public boolean isJohoteikyoDouiUmuKubun() {
         return johoteikyoDouiUmuKubun;
     }
 
@@ -518,11 +519,11 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     }
 
     /**
-     * getEnkitsuchiDoiUmuKubun
+     * 認定延期通知発行に対する同意有無が有効かどうかを返します。
      *
-     * @return enkitsuchiDoiUmuKubun
+     * @return {@code true}:有効、{@code false}:無効
      */
-    public boolean getEnkitsuchiDoiUmuKubun() {
+    public boolean isEnkitsuchiDoiUmuKubun() {
         return enkitsuchiDoiUmuKubun;
     }
 
@@ -536,11 +537,11 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     }
 
     /**
-     * getShisetsuNyushoUmuKubun
+     * 施設入所の有無が有効かどうかを返します。
      *
-     * @return shisetsuNyushoUmuKubun
+     * @return {@code true}:有効、{@code false}:無効
      */
-    public boolean getShisetsuNyushoUmuKubun() {
+    public boolean isShisetsuNyushoUmuKubun() {
         return shisetsuNyushoUmuKubun;
     }
 
@@ -617,27 +618,27 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     }
 
     /**
-     * setTorisageYMD
+     * 取下げ年月日を設定します。
      *
-     * @param torisageYMD torisageYMD
+     * @param torisageYMD 取下げ年月日
      */
     public void setTorisageYMD(FlexibleDate torisageYMD) {
         this.torisageYMD = torisageYMD;
     }
 
     /**
-     * getShinsaKeizokuKubun
+     * 審査継続区分が有効かどうかを返します。
      *
-     * @return shinsaKeizokuKubun
+     * @return {@code true}:有効、{@code false}:無効
      */
-    public boolean getShinsaKeizokuKubun() {
+    public boolean isShinsaKeizokuKubun() {
         return shinsaKeizokuKubun;
     }
 
     /**
-     * setShinsaKeizokuKubun
+     * 審査継続区分を設定します。
      *
-     * @param shinsaKeizokuKubun shinsaKeizokuKubun
+     * @param shinsaKeizokuKubun 審査継続区分
      */
     public void setShinsaKeizokuKubun(boolean shinsaKeizokuKubun) {
         this.shinsaKeizokuKubun = shinsaKeizokuKubun;

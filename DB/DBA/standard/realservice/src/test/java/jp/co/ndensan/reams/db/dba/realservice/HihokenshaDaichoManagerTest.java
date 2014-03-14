@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dba.realservice.helper.ShikibetsuCodeMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
@@ -79,7 +79,7 @@ public class HihokenshaDaichoManagerTest extends TestBase {
 
             @Test
             public void 指定した被保険者番号から_検索結果が取得できる() {
-                KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(new RString("被保険者番号"));
+                KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(new RString("00000001"));
 
                 HihokenshaList selected = sut.get被保険者台帳(被保険者番号);
                 assertThat(selected, notNullValue());
@@ -104,7 +104,7 @@ public class HihokenshaDaichoManagerTest extends TestBase {
             @Test
             public void 指定した市町村コードと識別コードから_検索結果が取得できる() {
                 ShichosonCode 市町村コード = new ShichosonCode(new RString("市町村コード"));
-                IShikibetsuCode 識別コード = create識別コード(new RString("識別コード"));
+                ShikibetsuCode 識別コード = create識別コード(new RString("000000000000001"));
 
                 HihokenshaList selected = sut.get被保険者台帳(市町村コード, 識別コード);
                 assertThat(selected, notNullValue());
@@ -113,7 +113,7 @@ public class HihokenshaDaichoManagerTest extends TestBase {
             @Test
             public void 指定した市町村コードと識別コードから_検索結果が得られないとき_返り値のsizeは0() {
                 ShichosonCode 市町村コード = new ShichosonCode(new RString("市町村コード"));
-                IShikibetsuCode 識別コード = create識別コード(HihokenshaDaichoDacMock.検索不可な識別コード);
+                ShikibetsuCode 識別コード = create識別コード(HihokenshaDaichoDacMock.検索不可な識別コード);
 
                 HihokenshaList selected = sut.get被保険者台帳(市町村コード, 識別コード);
                 assertThat(selected.size(), is(0));
@@ -129,7 +129,7 @@ public class HihokenshaDaichoManagerTest extends TestBase {
 
             @Test
             public void 指定した識別コードから_検索結果が取得できる() {
-                IShikibetsuCode 識別コード = create識別コード(new RString("識別コード"));
+                ShikibetsuCode 識別コード = create識別コード(new RString("000000000000001"));
 
                 HihokenshaList selected = sut.get被保険者台帳(識別コード);
                 assertThat(selected, notNullValue());
@@ -137,7 +137,7 @@ public class HihokenshaDaichoManagerTest extends TestBase {
 
             @Test
             public void 指定した識別コードから_検索結果が得られないとき_返り値のsizeは0() {
-                IShikibetsuCode 識別コード = create識別コード(HihokenshaDaichoDacMock.検索不可な識別コード);
+                ShikibetsuCode 識別コード = create識別コード(HihokenshaDaichoDacMock.検索不可な識別コード);
 
                 HihokenshaList selected = sut.get被保険者台帳(識別コード);
                 assertThat(selected.size(), is(0));
@@ -161,7 +161,7 @@ public class HihokenshaDaichoManagerTest extends TestBase {
             public void 被保険者番号を採番しながらのsaveに成功したとき_trueを返す() {
 
                 ShichosonCode 市町村コード = new ShichosonCode(new RString("11111"));
-                IShikibetsuCode 識別コード = create識別コード(new RString(""));
+                ShikibetsuCode 識別コード = create識別コード(new RString("000000000000001"));
                 HihokenshaKubun 被保険者区分 = new HihokenshaKubun(new RString("01"), new RString("第1号被保険者"));
                 RDate 資格取得届出年月日 = null;
                 RDate 資格取得年月日 = new RDate("2002-2-2");
@@ -186,7 +186,7 @@ public class HihokenshaDaichoManagerTest extends TestBase {
 
                 KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(HihokenshaDaichoDacMock.検索不可な被保険者番号);
                 ShichosonCode 市町村コード = new ShichosonCode(new RString("11111"));
-                IShikibetsuCode 識別コード = create識別コード(new RString(""));
+                ShikibetsuCode 識別コード = create識別コード(new RString("000000000000001"));
                 HihokenshaKubun 被保険者区分 = new HihokenshaKubun(new RString("01"), new RString("第1号被保険者"));
                 RDate 資格取得届出年月日 = null;
                 RDate 資格取得年月日 = new RDate("2002-2-2");
@@ -241,7 +241,7 @@ public class HihokenshaDaichoManagerTest extends TestBase {
         }
     }
 
-    private static IShikibetsuCode create識別コード(RString code) {
+    private static ShikibetsuCode create識別コード(RString code) {
         return ShikibetsuCodeMock.createInstance(code);
     }
 

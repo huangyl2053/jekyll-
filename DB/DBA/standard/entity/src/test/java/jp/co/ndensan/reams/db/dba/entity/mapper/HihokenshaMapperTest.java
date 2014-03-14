@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dba.entity.basic.helper.ShikibetsuCodeMock;
 import jp.co.ndensan.reams.db.dba.entity.basic.helper.DbT1001HihokenshaDaichoEntityMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.HokenShubetsu;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.HokenShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
@@ -23,6 +23,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
+import static org.mockito.Mockito.mock;
 
 /**
  * 被保険者Mapperのテストクラスです。
@@ -183,7 +184,7 @@ public class HihokenshaMapperTest extends TestBase {
 
         @Test
         public void あるEntityから作成した被保険者のget識別コードは_当該Entityに設定したと同じ値を返す() {
-            IShikibetsuCode 識別コード = ShikibetsuCodeMock.createInstance(new RString("識別コード"));
+            ShikibetsuCode 識別コード = ShikibetsuCodeMock.createInstance(new RString("0000001"));
             entity.setShikibetsuCode(識別コード);
             assertThat(HihokenshaMapper.toHihokensha(entity).get識別コード(), is(識別コード));
         }

@@ -9,16 +9,15 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikanCollection;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoIryoKikanCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.KaigoIryoKikanMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoIryoKikanEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.IKaigoIryoKikanDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.IKoza;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuCode;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._ShikibetsuCode;
 import jp.co.ndensan.reams.ur.urz.realservice.IKozaManager;
 import jp.co.ndensan.reams.ur.urz.realservice.KozaService;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
 
@@ -83,11 +82,11 @@ public class KaigoIryoKikanFinder implements IKaigoIryoKikanFinder {
     }
 
     //医療機関Entityが修正され、識別コードを直接とってこれるようになったらこの処理は不要 2014年2月末
-    private IShikibetsuCode create識別コード(KaigoIryoKikanEntity entity) {
+    private ShikibetsuCode create識別コード(KaigoIryoKikanEntity entity) {
         if (entity == null) {
             return null;
         }
-        return new _ShikibetsuCode(entity.getIryoKikanEntity().getShikibetsuCode());
+        return new ShikibetsuCode(entity.getIryoKikanEntity().getShikibetsuCode());
     }
 
     private List<KaigoIryoKikan> create介護医療機関List(List<KaigoIryoKikanEntity> entities) {

@@ -10,24 +10,21 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEn
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
+// TODO N8187 久保田英男 URのNinteiChosainのキャメルケースをNinteichosainに修正する。URを修正するタイミングで対応する。
 import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
 import jp.co.ndensan.reams.ur.urf.entity.basic.ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urf.entity.basic.KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.ur.urf.entity.mapper.KaigoJigyoshaMapper;
+// TODO N8187 久保田英男 URのNinteiChosainのキャメルケースをNinteichosainに修正する。URを修正するタイミングで対応する。
 import jp.co.ndensan.reams.ur.urf.entity.mapper.NinteiChosainMapper;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuTaisho;
-import jp.co.ndensan.reams.ur.urz.entity.basic.KojinEntity;
-import jp.co.ndensan.reams.ur.urz.entity.mapper.helper.IKojinFactory;
-import jp.co.ndensan.reams.ur.urz.entity.mapper.helper.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.ur.urz.business.JushoEditor;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushoEditPattern;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 
 /**
  * 認定調査対象者のビジネスクラスとエンティティの変換を行うクラスです。
@@ -46,7 +43,7 @@ public final class NinteichosaIraiTaishoshaMapper {
      * 各エンティティから認定調査依頼対象者への対応付けを行います。
      *
      * @param 要介護認定申請情報Entity 要介護認定申請情報Entity
-     * @param 個人Entity 個人Entity
+     * @param 個人 個人情報
      * @param 認定調査委託先Entity 認定調査委託先Entity
      * @param 介護事業者Entity 介護事業者Entity
      * @param 調査員情報Entity 調査員情報Entity
@@ -56,23 +53,23 @@ public final class NinteichosaIraiTaishoshaMapper {
      */
     public static NinteichosaIraiTaishosha toNinteichosaIraiTaishosha(
             DbT5001NinteiShinseiJohoEntity 要介護認定申請情報Entity,
-            KojinEntity 個人Entity,
+            IKojin 個人,
             DbT7010NinteichosaItakusakiJohoEntity 認定調査委託先Entity,
             KaigoJigyoshaEntity 介護事業者Entity,
             ChosainJohoEntity 調査員情報Entity) throws NullPointerException {
 
         requireNonNull(要介護認定申請情報Entity, Messages.E00003.replace("要介護認定申請情報Entity", "認定調査対象者").getMessage());
-        requireNonNull(個人Entity, Messages.E00003.replace("個人エンティティ", "認定調査対象者").getMessage());
+        requireNonNull(個人, Messages.E00003.replace("個人", "認定調査対象者").getMessage());
 
         ShinseishoKanriNo 申請書管理番号 = 要介護認定申請情報Entity.getShinseishoKanriNo();
         ShichosonCode 市町村コード = 要介護認定申請情報Entity.getShichosonCode();
         KaigoHihokenshaNo 被保険者 = 要介護認定申請情報Entity.getHihokenshaNo();
         FlexibleDate 認定申請年月日 = 要介護認定申請情報Entity.getNinteiShinseiYMD();
-        RString 認定申請区分 = 要介護認定申請情報Entity.getNinteiShinseiShinseijiKubunCode().getColumnValue();
-        IKojin 個人情報 = IKojinFactory.create(個人Entity);
-        IShikibetsuTaisho 識別対象 = ShikibetsuTaishoFactory.create(個人Entity);
-        RString 氏名 = 識別対象.get氏名().getName();
-        RString 住所 = JushoEditor.editJusho(識別対象.get住所(), JushoEditPattern.町域番地);
+        NinteiShinseiKubunShinsei 認定申請区分 = 要介護認定申請情報Entity.getNinteiShinseiShinseijiKubunCode();
+        IKojin 個人情報 = 個人;
+//        IShikibetsuTaisho 識別対象 = ShikibetsuTaishoFactory.create(個人Entity);
+        RString 氏名 = 個人.get氏名().getName();
+        RString 住所 = 個人.get住所().getValue();
         NinteichosaItakusaki 認定調査委託先 = create認定調査委託先(認定調査委託先Entity);
         IKaigoJigyosha 事業者情報 = create介護事業者(介護事業者Entity);
         INinteiChosain 認定調査員情報 = create認定調査員(調査員情報Entity, 事業者情報);

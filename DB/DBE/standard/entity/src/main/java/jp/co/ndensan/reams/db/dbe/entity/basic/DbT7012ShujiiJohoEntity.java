@@ -1,12 +1,17 @@
 package jp.co.ndensan.reams.db.dbe.entity.basic;
 
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang._UUID;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 
 /**
- * 主治医情報のエンティティクラスです。
+ * DbT7012ShujiiJohoの項目定義クラスです
  *
  * @author N8156 宮本 康
  */
@@ -15,19 +20,72 @@ public class DbT7012ShujiiJohoEntity implements IDbAccessable {
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7012ShujiiJoho");
+    private RString insertDantaiCd;
+    private RDateTime insertTimestamp;
+    private RString insertReamsLoginId;
+    private _UUID insertContextId;
+    private boolean isDeleted = false;
+    private int updateCount = 0;
+    private RDateTime lastUpdateTimestamp;
+    private RString lastUpdateReamsLoginId;
     @PrimaryKey
     private RString shichosonCode;
     @PrimaryKey
-    private RString kaigoIryokikanCode;
+    private KaigoIryoKikanCode kaigoIryokikanCode;
     @PrimaryKey
     private RString kaigoIshiCode;
     private RString iryokikanCode;
     private RString shujiiCode;
     private boolean shujiiJokyo;
-    private RString yubinNo;
+    private YubinNo yubinNo;
     private RString jusho;
-    private RString telNo;
+    private TelNo telNo;
     private RString faxNo;
+
+    /**
+     * getInsertDantaiCd
+     *
+     * @return insertDantaiCd
+     */
+    public RString getInsertDantaiCd() {
+        return insertDantaiCd;
+    }
+
+    /**
+     * setInsertDantaiCd
+     *
+     * @param insertDantaiCd insertDantaiCd
+     */
+    public void setInsertDantaiCd(RString insertDantaiCd) {
+        this.insertDantaiCd = insertDantaiCd;
+    }
+
+    /**
+     * getIsDeleted
+     *
+     * @return isDeleted
+     */
+    public boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    /**
+     * setIsDeleted
+     *
+     * @param isDeleted isDeleted
+     */
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    /**
+     * setLastUpdateReamsLoginId
+     *
+     * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
+     */
+    public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
+        this.lastUpdateReamsLoginId = lastUpdateReamsLoginId;
+    }
 
     /**
      * getShichosonCode
@@ -52,7 +110,7 @@ public class DbT7012ShujiiJohoEntity implements IDbAccessable {
      *
      * @return kaigoIryokikanCode
      */
-    public RString getKaigoIryokikanCode() {
+    public KaigoIryoKikanCode getKaigoIryokikanCode() {
         return kaigoIryokikanCode;
     }
 
@@ -61,7 +119,7 @@ public class DbT7012ShujiiJohoEntity implements IDbAccessable {
      *
      * @param kaigoIryokikanCode kaigoIryokikanCode
      */
-    public void setKaigoIryokikanCode(RString kaigoIryokikanCode) {
+    public void setKaigoIryokikanCode(KaigoIryoKikanCode kaigoIryokikanCode) {
         this.kaigoIryokikanCode = kaigoIryokikanCode;
     }
 
@@ -142,7 +200,7 @@ public class DbT7012ShujiiJohoEntity implements IDbAccessable {
      *
      * @return yubinNo
      */
-    public RString getYubinNo() {
+    public YubinNo getYubinNo() {
         return yubinNo;
     }
 
@@ -151,7 +209,7 @@ public class DbT7012ShujiiJohoEntity implements IDbAccessable {
      *
      * @param yubinNo yubinNo
      */
-    public void setYubinNo(RString yubinNo) {
+    public void setYubinNo(YubinNo yubinNo) {
         this.yubinNo = yubinNo;
     }
 
@@ -178,7 +236,7 @@ public class DbT7012ShujiiJohoEntity implements IDbAccessable {
      *
      * @return telNo
      */
-    public RString getTelNo() {
+    public TelNo getTelNo() {
         return telNo;
     }
 
@@ -187,7 +245,7 @@ public class DbT7012ShujiiJohoEntity implements IDbAccessable {
      *
      * @param telNo telNo
      */
-    public void setTelNo(RString telNo) {
+    public void setTelNo(TelNo telNo) {
         this.telNo = telNo;
     }
 

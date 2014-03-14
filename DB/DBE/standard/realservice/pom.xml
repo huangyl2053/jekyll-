@@ -17,8 +17,16 @@
 
     <dependencies>
         <dependency>
-            <groupId>jp.co.ndensan.reams.ur</groupId>
-            <artifactId>realservice</artifactId>
+            <groupId>jp.co.ndensan.reams.ur.urd</groupId>
+            <artifactId>UrdRealService</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urf</groupId>
+            <artifactId>UrfPersistence</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzRealService</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -36,13 +44,8 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>Persistence</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
-            <artifactId>DbzRealservice</artifactId>
+            <artifactId>DbzRealService</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

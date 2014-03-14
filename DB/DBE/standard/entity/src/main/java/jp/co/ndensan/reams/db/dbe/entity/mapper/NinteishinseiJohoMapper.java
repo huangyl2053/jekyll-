@@ -5,10 +5,6 @@
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
-import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisage;
-import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisageTaishosha;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 
 /**
@@ -25,27 +21,26 @@ public final class NinteishinseiJohoMapper {
     private NinteishinseiJohoMapper() {
     }
 
-    /**
-     * 認定申請情報Entityを認定申請情報クラスに変換します。
-     *
-     * @param entity 認定申請情報Entity
-     * @return 認定申請情報クラス
-     */
-    public static NinteiShinseiTorisageTaishosha to認定申請取下げ対象者(DbT5001NinteiShinseiJohoEntity entity) {
-        return new NinteiShinseiTorisageTaishosha(entity.getShinseishoKanriNo(), entity.getShichosonCode(), entity.getHihokenshaNo(),
-                entity.getNinteiShinseiYMD().toRDate(), entity.getNinteiShinseiShinseijiKubunCode(), create認定申請取下げ(entity));
-    }
-
-    private static NinteiShinseiTorisage create認定申請取下げ(DbT5001NinteiShinseiJohoEntity entity) {
-        return new NinteiShinseiTorisage(TorisageKubun.toValue(entity.getTorisageKubunCode()),
-                entity.getTorisageRiyu(), entity.getTorisageYMD().toRDate(),
-                ShinsaKeizokuKubun.toValue(entity.getShinsaKeizokuKubun()));
-    }
-
+//    /**
+//     * 認定申請情報Entityを認定申請情報クラスに変換します。
+//     *
+//     * @param entity 認定申請情報Entity
+//     * @return 認定申請情報クラス
+//     */
+//    public static NinteiShinseiTorisageTaishosha to認定申請取下げ対象者(DbT5001NinteiShinseiJohoEntity entity) {
+//        return new NinteiShinseiTorisageTaishosha(entity.getShinseishoKanriNo(), entity.getShichosonCode(), entity.getHihokenshaNo(),
+//                entity.getNinteiShinseiYMD(), entity.getNinteiShinseiShinseijiKubunCode(), create認定申請取下げ(entity));
+//    }
+//
+//    private static NinteiShinseiTorisage create認定申請取下げ(DbT5001NinteiShinseiJohoEntity entity) {
+//        return new NinteiShinseiTorisage(TorisageKubun.toValue(entity.getTorisageKubunCode()),
+//                entity.getTorisageRiyu(), entity.getTorisageYMD(),
+//                ShinsaKeizokuKubun.toValue(entity.isShinsaKeizokuKubun()));
+//    }
+//
     /**
      * 認定申請情報を、認定申請情報EntityにMappingします。
      *
-     * @param entity 認定申請情報Entity
      * @param 認定申請情報 認定申請情報
      * @return 申請の取下げに関しての情報を更新した認定申請情報Entity
      */
@@ -75,7 +70,7 @@ public final class NinteishinseiJohoMapper {
         更新済みEntity.setSichosonRenrakuJiko(認定申請情報.get市町村連絡事項());
         更新済みEntity.setTorisageKubunCode(認定申請情報.get認定申請取下げ().get取下げ区分().get取下げ区分コード());
         更新済みEntity.setTorisageRiyu(認定申請情報.get認定申請取下げ().get取下げ理由());
-        更新済みEntity.setTorisageYMD(認定申請情報.get認定申請取下げ().get取下げ年月日().toFlexibleDate());
+        更新済みEntity.setTorisageYMD(認定申請情報.get認定申請取下げ().get取下げ年月日());
         更新済みEntity.setShinsaKeizokuKubun(認定申請情報.get認定申請取下げ().get申請継続区分().is継続());
         return 更新済みEntity;
     }

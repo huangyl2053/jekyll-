@@ -36,7 +36,7 @@ public class ShinsakaiKaisaiBashoDacMock implements IShinsakaiKaisaiBashoDac {
         kaisaiBashoChikuCode = mock(ShinsakaiKaisaiChiku.class);
         kaisaiBashoChikuCode = new ShinsakaiKaisaiChiku(new RString("00001"), new RString("地区名称"));
 
-        entity.setShinsakaiKaisaiBashoCode(new RString("00001"));
+        entity.setShinsakaiKaisaiBashoCode(kaisaiBashoCode.value());
         entity.setShinsakaiKaisaiBashoMei(new RString("市役所会議室"));
         entity.setShinsakaiKaisaiChikuCode(new Code(new RString("00001")));
         entity.setShinsakaiKaisaiBashoJusho(new AtenaJusho(new RString("長野市鶴賀")));

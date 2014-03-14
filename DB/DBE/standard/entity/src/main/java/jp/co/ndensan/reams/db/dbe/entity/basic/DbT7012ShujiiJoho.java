@@ -10,6 +10,14 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 public enum DbT7012ShujiiJoho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
+    insertDantaiCd(2147483647, 0),
+    insertTimestamp(29, 0),
+    insertReamsLoginId(2147483647, 0),
+    insertContextId(2147483647, 0),
+    isDeleted(1, 0),
+    updateCount(10, 0),
+    lastUpdateTimestamp(29, 0),
+    lastUpdateReamsLoginId(2147483647, 0),
     shichosonCode(5, 0),
     kaigoIryokikanCode(10, 0),
     kaigoIshiCode(8, 0),

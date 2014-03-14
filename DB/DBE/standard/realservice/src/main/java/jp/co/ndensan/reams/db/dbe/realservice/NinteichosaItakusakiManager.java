@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.HatsubanJoho;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5020HatsubanKanriJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
@@ -171,7 +171,6 @@ public class NinteichosaItakusakiManager {
      */
     public int updateHatsubanJoho(RString 項目区分, HatsubanJoho 発番情報) {
         DbT5020HatsubanKanriJohoEntity entity = new DbT5020HatsubanKanriJohoEntity(項目区分, new RString("0000"), 発番情報.getColumnValue());
-        int result = hatsubanDac.update(entity);
-        return result;
+        return hatsubanDac.update(entity);
     }
 }

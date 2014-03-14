@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.basic;
 
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
@@ -43,9 +43,9 @@ public class DbT5005NinteiShinchokuJohoEntity implements IDbAccessable {
     private FlexibleDate centerSoshinYMD;
 
     /**
-     * ORマッパーのためのデフォルトコンストラクタです。
+     * デフォルトコンストラクタです。
      */
-    DbT5005NinteiShinchokuJohoEntity() {
+    public DbT5005NinteiShinchokuJohoEntity() {
     }
 
     /**

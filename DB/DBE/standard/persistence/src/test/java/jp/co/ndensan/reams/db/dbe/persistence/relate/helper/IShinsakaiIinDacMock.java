@@ -12,5 +12,5 @@ import jp.co.ndensan.reams.db.dbz.persistence.basic.IInsertable;
  *
  * @author n8178 城間篤人
  */
-public interface IShinsakaiIInDacMock extends IInsertable<DbT5102ShinsakaiIinJohoEntity> {
+public interface IShinsakaiIinDacMock extends IInsertable<DbT5102ShinsakaiIinJohoEntity> {
 }

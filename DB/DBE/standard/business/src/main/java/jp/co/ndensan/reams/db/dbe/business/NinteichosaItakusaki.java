@@ -4,9 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
-import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.ChosaItakuKubun;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -44,10 +44,11 @@ public class NinteichosaItakusaki {
     public NinteichosaItakusaki(RString 市町村コード, KaigoJigyoshaNo 介護事業者番号, JigyoshaNo 事業者番号,
             boolean 有効区分, ChosaItakuKubun 調査委託区分,
             int 割付定員, RString 割付地区, RString 機関の区分) throws NullPointerException {
-        Objects.requireNonNull(市町村コード, Messages.E00003.replace("市町村コード", "認定調査委託先").getMessage());
-        Objects.requireNonNull(事業者番号, Messages.E00003.replace("事業者番号", "認定調査委託先").getMessage());
-        Objects.requireNonNull(介護事業者番号, Messages.E00003.replace("介護事業者番号", "認定調査委託先").getMessage());
-        Objects.requireNonNull(有効区分, Messages.E00003.replace("介護保険事業者の状況", "認定調査委託先").getMessage());
+
+        requireNonNull(市町村コード, Messages.E00003.replace("市町村コード", getClass().getName()).getMessage());
+        requireNonNull(事業者番号, Messages.E00003.replace("事業者番号", getClass().getName()).getMessage());
+        requireNonNull(介護事業者番号, Messages.E00003.replace("介護事業者番号", getClass().getName()).getMessage());
+        requireNonNull(有効区分, Messages.E00003.replace("介護保険事業者の状況", getClass().getName()).getMessage());
 
         this.市町村コード = 市町村コード;
         this.事業者番号 = 事業者番号;

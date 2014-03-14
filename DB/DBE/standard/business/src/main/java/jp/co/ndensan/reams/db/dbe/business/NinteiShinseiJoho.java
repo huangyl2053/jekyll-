@@ -6,7 +6,8 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -29,7 +30,7 @@ public class NinteiShinseiJoho {
     private ShikibetsuCode 識別コード;
     private RDate 認定申請年月日;
     private EdabanCode 枝番コード;
-    private Code 認定申請区分_申請時;
+    private NinteiShinseiKubunShinsei 認定申請区分_申請時;
     private Code 認定申請区分_法令;
     private Code 認定申請有効区分;
     private Code 要支援申請区分;
@@ -40,8 +41,8 @@ public class NinteiShinseiJoho {
     private int 認定調査依頼履歴番号;
     private int 意見書依頼履歴番号;
     private Code みなし要介護区分コード;
-    private boolean is延期通知有無同意;
-    private boolean is施設入所;
+    private boolean 延期通知有無同意;
+    private boolean 施設入所;
     private RString 市町村連絡事項;
     private NinteiShinseiTorisage 認定申請取下げ;
 
@@ -66,14 +67,14 @@ public class NinteiShinseiJoho {
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
      * @param 意見書依頼履歴番号 意見書依頼履歴番号
      * @param みなし要介護区分コード みなし要介護区分コード
-     * @param is延期通知有無同意 is延期通知有無同意
-     * @param is施設入所 is施設入所
+     * @param is延期通知有無同意 延期通知有無同意
+     * @param is施設入所 施設入所
      * @param 市町村連絡事項 市町村連絡事項
      * @param 認定申請取下げ 認定申請取下げ
      */
     public NinteiShinseiJoho(ShinseishoKanriNo 申請書管理番号, ShichosonCode 市町村コード, RString 支所コード,
             KaigoHihokenshaNo 介護被保険者番号, ShikibetsuCode 識別コード, RDate 認定申請年月日, EdabanCode 枝番コード,
-            Code 認定申請区分_申請時, Code 認定申請区分_法令, Code 認定申請有効区分, Code 要支援申請区分, RString 認定申請理由,
+            NinteiShinseiKubunShinsei 認定申請区分_申請時, Code 認定申請区分_法令, Code 認定申請有効区分, Code 要支援申請区分, RString 認定申請理由,
             Code 前回要介護状態区分コード, int 前回申請有効期間, boolean 情報提供への同意有無, int 認定調査依頼履歴番号,
             int 意見書依頼履歴番号, Code みなし要介護区分コード, boolean is延期通知有無同意, boolean is施設入所,
             RString 市町村連絡事項, NinteiShinseiTorisage 認定申請取下げ) {
@@ -95,8 +96,8 @@ public class NinteiShinseiJoho {
         this.認定調査依頼履歴番号 = 認定調査依頼履歴番号;
         this.意見書依頼履歴番号 = 意見書依頼履歴番号;
         this.みなし要介護区分コード = みなし要介護区分コード;
-        this.is延期通知有無同意 = is延期通知有無同意;
-        this.is施設入所 = is施設入所;
+        this.延期通知有無同意 = is延期通知有無同意;
+        this.施設入所 = is施設入所;
         this.市町村連絡事項 = 市町村連絡事項;
         this.認定申請取下げ = 認定申請取下げ;
     }
@@ -178,7 +179,7 @@ public class NinteiShinseiJoho {
      *
      * @return 申請時の認定申請区分
      */
-    public Code get認定申請区分_申請時() {
+    public NinteiShinseiKubunShinsei get認定申請区分_申請時() {
         return 認定申請区分_申請時;
     }
 
@@ -236,6 +237,11 @@ public class NinteiShinseiJoho {
         return 前回申請有効期間;
     }
 
+    /**
+     * 情報提供に対する同意の有無を判定します。
+     *
+     * @return 情報提供への同意有無
+     */
     public boolean is情報提供への同意有無() {
         return 情報提供への同意有無;
     }
@@ -264,7 +270,7 @@ public class NinteiShinseiJoho {
      * @return 同意があるならtrue
      */
     public boolean is延期通知有無同意() {
-        return is延期通知有無同意;
+        return 延期通知有無同意;
     }
 
     /**
@@ -273,7 +279,7 @@ public class NinteiShinseiJoho {
      * @return 施設に入所していたならtrue
      */
     public boolean is施設入所() {
-        return is施設入所;
+        return 施設入所;
     }
 
     /**

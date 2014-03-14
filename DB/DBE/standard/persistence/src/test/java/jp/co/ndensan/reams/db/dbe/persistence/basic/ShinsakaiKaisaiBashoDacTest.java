@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import org.junit.Before;
@@ -59,7 +60,6 @@ public class ShinsakaiKaisaiBashoDacTest {
             開催場所住所 = new AtenaJusho(new RString("長野市鶴賀"));
             開催場所電話番号 = new TelNo(new RString("026-263-5555"));
             開催場所状況 = true;
-
             更新用entity = create審査会開催場所情報Entity(開催場所コード.value(), 開催場所名称, 開催場所地区コード,
                     開催場所住所, 開催場所電話番号, 開催場所状況);
 
@@ -68,7 +68,6 @@ public class ShinsakaiKaisaiBashoDacTest {
 
         @Test
         public void データ追加後の開催場所名が_引数から渡した開催場所名と同一になる() {
-            sut.delete(更新用entity);
             assertThat(sut.select(開催場所コード).getShinsakaiKaisaiBashoMei(), is(開催場所名称));
         }
 
@@ -112,7 +111,6 @@ public class ShinsakaiKaisaiBashoDacTest {
             開催場所住所 = new AtenaJusho(new RString("長野市鶴賀"));
             開催場所電話番号 = new TelNo(new RString("026-263-5555"));
             開催場所状況 = true;
-
             更新用entity = create審査会開催場所情報Entity(開催場所コード.value(), 開催場所名称, 開催場所地区コード,
                     開催場所住所, 開催場所電話番号, 開催場所状況);
             sut.insertOrUpdate(更新用entity);
@@ -136,6 +134,9 @@ public class ShinsakaiKaisaiBashoDacTest {
     }
 
     public static class selectAllのテスト extends DbeTestDacBase {
+
+        private ShinsakaiKaisaiBashoCode 開催場所コード;
+        private Code 開催場所地区コード;
 
         @Before
         public void setUp() {
@@ -182,6 +183,8 @@ public class ShinsakaiKaisaiBashoDacTest {
             更新用entity = create審査会開催場所情報Entity(開催場所コード.value(), 開催場所名称, 開催場所地区コード,
                     開催場所住所, 開催場所電話番号, 開催場所状況);
 
+            setDummyControlData(new RString("DBE"));
+            openMainSession();
         }
 
         @Test
@@ -229,7 +232,6 @@ public class ShinsakaiKaisaiBashoDacTest {
         public void setUp() {
             開催場所地区コード = new Code(new RString("00001"));
             開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
-
             更新用entity = create審査会開催場所情報Entity(開催場所コード.value(), new RString("開催場所名"), 開催場所地区コード,
                     createAtenaJusho("開催場所住所"), createTelNo("開催場所電話番号"), false);
 
@@ -240,14 +242,6 @@ public class ShinsakaiKaisaiBashoDacTest {
             inserter.insert(更新用entity);
             int count = sut.delete(更新用entity);
             assertThat(count, is(1));
-        }
-    }
-
-    //TODO n8178 城間篤人 openSessionで落ちてしまうため、一時的にダミーを追加。後日削除予定 2014年3月末
-    public static class dummyTest extends DbeTestDacBase {
-
-        @Test
-        public void dummy() {
         }
     }
 

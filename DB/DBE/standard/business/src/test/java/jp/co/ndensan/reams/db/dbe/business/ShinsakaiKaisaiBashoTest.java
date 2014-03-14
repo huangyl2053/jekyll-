@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiChiku;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -41,7 +40,7 @@ public class ShinsakaiKaisaiBashoTest extends DbeTestBase {
         public void setUp() {
             開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("000001"));
             開催場所名称 = new RString("市役所会議室");
-            開催地区 = new ShinsakaiKaisaiChiku(new Code("0001"), new RString("山田家"));
+            開催地区 = new ShinsakaiKaisaiChiku(new RString("0001"), new RString("山田市"));
             開催場所住所 = new AtenaJusho(new RString("長野市鶴賀"));
             開催場所電話番号 = new TelNo(new RString("026-233-9999"));
             開催場所状況 = 開催場所状況.有効;
@@ -49,6 +48,13 @@ public class ShinsakaiKaisaiBashoTest extends DbeTestBase {
 
         @Test
         public void 必須項目が渡されたとき_インスタンスが生成される() {
+            開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("000001"));
+            開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("000001"));
+            開催場所名称 = new RString("市役所会議室");
+            開催地区 = new ShinsakaiKaisaiChiku(new RString("0001"), new RString("山田市"));
+            開催場所住所 = new AtenaJusho(new RString("長野市鶴賀"));
+            開催場所電話番号 = new TelNo(new RString("026-233-9999"));
+            開催場所状況 = 開催場所状況.有効;
             sut = new ShinsakaiKaisaiBasho(開催場所コード, 開催場所名称,
                     開催地区, 開催場所住所, 開催場所電話番号, 開催場所状況);
             assertThat(sut, instanceOf(ShinsakaiKaisaiBasho.class));

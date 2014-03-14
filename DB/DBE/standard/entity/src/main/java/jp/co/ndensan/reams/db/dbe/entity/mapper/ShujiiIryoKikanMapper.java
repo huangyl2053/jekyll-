@@ -30,18 +30,18 @@ public final class ShujiiIryoKikanMapper {
     /**
      * 引数から渡されたエンティティを、主治医医療機関クラスにマッピングして返します。
      *
-     * @param entity 主治医医療機関エンティティ
+     * @param shujiiIryokikanEntity 主治医医療機関エンティティ
      * @return 主治医医療機関
      * @throws NullPointerException 引数にNULLが渡された場合
      */
-    public static IShujiiIryoKikan toShujiiIryoKikan(DbT7011ShujiiIryoKikanJohoEntity entity) throws NullPointerException {
-        requireNonNull(entity, Messages.E00003.replace("主治医医療機関エンティティ", "主治医医療機関").getMessage());
+    public static IShujiiIryoKikan toShujiiIryoKikan(DbT7011ShujiiIryoKikanJohoEntity shujiiIryokikanEntity) throws NullPointerException {
+        requireNonNull(shujiiIryokikanEntity, Messages.E00003.replace("主治医医療機関エンティティ", "主治医医療機関").getMessage());
 
-        return new ShujiiIryoKikan(entity.getShichosonCode(),
-                entity.getKaigoIryokikanCode(),
-                create医療機関コード(entity),
-                IryoKikanJokyo.toValue(entity.getIryokikanJokyo()),
-                create医療機関区分(entity));
+        return new ShujiiIryoKikan(shujiiIryokikanEntity.getShichosonCode(),
+                shujiiIryokikanEntity.getKaigoIryokikanCode(),
+                create医療機関コード(shujiiIryokikanEntity),
+                IryoKikanJokyo.toValue(shujiiIryokikanEntity.getIryokikanJokyo()),
+                create医療機関区分(shujiiIryokikanEntity));
     }
 
     private static IIryoKikanCode create医療機関コード(DbT7011ShujiiIryoKikanJohoEntity entity) {
@@ -80,7 +80,8 @@ public final class ShujiiIryoKikanMapper {
      *
      * @param iryoKikan 主治医医療機関クラス
      * @param 医療機関状況 医療機関状況
-     * @return 主治医医療機関エンティティ ＠throws NullPointerException 引数にNULLが渡された場合
+     * @return 主治医医療機関エンティティ
+     * @throws NullPointerException 引数にNULLが渡された場合
      */
     public static DbT7011ShujiiIryoKikanJohoEntity toShujiiIryoKikanEntity(IShujiiIryoKikan iryoKikan, IryoKikanJokyo 医療機関状況)
             throws NullPointerException {
