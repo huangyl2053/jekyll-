@@ -48,15 +48,15 @@ public class Choice {
     public enum Checked implements IAnsweringItem {
 
         /**
-         * 「Disable（チェック無し）」であることを表します。<br />
+         * 「チェック無し」であることを表します。<br />
          * コード : 1
          */
-        Disable(1),
+        無し(1),
         /**
-         * 「Enable（チェック有り）」であることを表します。<br />
+         * 「チェック有り」であることを表します。<br />
          * コード : 2
          */
-        Enable(2);
+        有り(2);
         private int code;
 
         private Checked(int code) {
