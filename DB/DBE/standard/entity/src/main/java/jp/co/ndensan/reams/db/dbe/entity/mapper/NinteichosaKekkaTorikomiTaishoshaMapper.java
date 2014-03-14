@@ -38,6 +38,7 @@ public final class NinteichosaKekkaTorikomiTaishoshaMapper {
      * 認定調査結果取込対象者Entityと個人Entityを、認定調査結果取込対象者にMappingします。
      *
      * @param 認定調査結果取込対象者Entity 認定調査結果取込対象者Entity
+     * @param 介護事業者Entity 介護事業者Entity
      * @param 個人Entity 個人Entity
      * @return 認定調査結果取込対象者
      */
@@ -66,7 +67,9 @@ public final class NinteichosaKekkaTorikomiTaishoshaMapper {
     private static List<KaigoNinteichosain> create介護認定調査員Collection(List<KaigoNinteichosainEntity> entityList) {
         List<KaigoNinteichosain> list = new ArrayList<>();
         for (KaigoNinteichosainEntity entity : entityList) {
-            list.add(KaigoNinteichosainMapper.toKaigoNinteichosain(entity.getDbT7013ChosainJohoEntity(), entity.getDbT7010NinteichosaItakusakiJohoEntity()));
+            list.add(KaigoNinteichosainMapper.toKaigoNinteichosain(
+                    entity.getDbT7013ChosainJohoEntity(),
+                    entity.getDbT7010NinteichosaItakusakiJohoEntity()));
         }
         return list;
     }

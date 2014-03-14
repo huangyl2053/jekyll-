@@ -23,6 +23,16 @@ public class NinteichosaKekkaTorikomiTaishosha {
     private IKaigoJigyosha 介護事業者情報;
     private IKojin 個人;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param 要介護認定進捗情報 要介護認定進捗情報
+     * @param 認定申請情報 認定申請情報
+     * @param 認定調査依頼情報 認定調査依頼情報
+     * @param 介護認定調査員Collection 介護認定調査員Collection
+     * @param 介護事業者情報 介護事業者情報
+     * @param 個人 個人
+     */
     public NinteichosaKekkaTorikomiTaishosha(
             YokaigoninteiProgress 要介護認定進捗情報,
             NinteiShinseiJoho 認定申請情報,

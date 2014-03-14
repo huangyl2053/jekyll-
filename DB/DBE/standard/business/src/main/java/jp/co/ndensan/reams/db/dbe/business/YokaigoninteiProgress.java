@@ -36,6 +36,27 @@ public class YokaigoninteiProgress {
     private final FlexibleDate 認定審査会完了年月日;
     private final FlexibleDate センター送信年月日;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 認定申請情報登録年月日 認定申請情報登録年月日
+     * @param 認定延期通知発行に対する同意有無 認定延期通知発行に対する同意有無
+     * @param 認定延期通知発行年月日 認定延期通知発行年月日
+     * @param 認定延期通知発行回数 認定延期通知発行回数
+     * @param 要介護認定延期理由 要介護認定延期理由
+     * @param 要介護認定一次判定情報抽出年月日 要介護認定一次判定情報抽出年月日
+     * @param 依頼情報データ送信年月日 依頼情報データ送信年月日
+     * @param 認定調査依頼完了年月日 認定調査依頼完了年月日
+     * @param 認定調査完了年月日 認定調査完了年月日
+     * @param 主治医意見書作成依頼完了年月日 主治医意見書作成依頼完了年月日
+     * @param 主治医意見書登録完了年月日 主治医意見書登録完了年月日
+     * @param 要介護認定一次判定完了年月日 要介護認定一次判定完了年月日
+     * @param 要介護認定1_5次判定完了年月日 要介護認定1_5次判定完了年月日
+     * @param 認定審査会割当完了年月日 認定審査会割当完了年月日
+     * @param 認定審査会完了年月日 認定審査会完了年月日
+     * @param センター送信年月日 センター送信年月日
+     */
     public YokaigoninteiProgress(ShinseishoKanriNo 申請書管理番号,
             FlexibleDate 認定申請情報登録年月日,
             ConsentToEnkitsuchiHakko 認定延期通知発行に対する同意有無,

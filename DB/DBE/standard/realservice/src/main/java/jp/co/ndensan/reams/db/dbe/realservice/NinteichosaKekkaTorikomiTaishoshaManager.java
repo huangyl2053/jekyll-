@@ -85,17 +85,19 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
     /**
      * 認定調査結果取込対象者を全件取得します。
      *
+     * @param 支所コード 支所コード
      * @return 認定調査結果取込対象者全件
      */
     public List<NinteichosaKekkaTorikomiTaishosha> get認定調査結果取込対象者全件(RString 支所コード) {
 
         List<DbT5005NinteiShinchokuJohoEntity> shinchokuJohoEntityList = shinchokuJohoDac.select依頼済認定調査未完了();
-        List<NinteichosaKekkaTorikomiTaishoshaEntity> TaishosyaEntityList = create認定調査結果取込対象者EntityList(shinchokuJohoEntityList, 支所コード);
+        List<NinteichosaKekkaTorikomiTaishoshaEntity> taishosyaEntityList = create認定調査結果取込対象者EntityList(shinchokuJohoEntityList, 支所コード);
 
-        return create認定調査結果取込対象者List(TaishosyaEntityList);
+        return create認定調査結果取込対象者List(taishosyaEntityList);
     }
 
-    private List<NinteichosaKekkaTorikomiTaishoshaEntity> create認定調査結果取込対象者EntityList(List<DbT5005NinteiShinchokuJohoEntity> shinchokuJohoEntityList, RString 支所コード) {
+    private List<NinteichosaKekkaTorikomiTaishoshaEntity> create認定調査結果取込対象者EntityList(
+            List<DbT5005NinteiShinchokuJohoEntity> shinchokuJohoEntityList, RString 支所コード) {
         List<NinteichosaKekkaTorikomiTaishoshaEntity> list = new ArrayList<>();
 
         for (DbT5005NinteiShinchokuJohoEntity shinchokuJohoEntity : shinchokuJohoEntityList) {
@@ -106,7 +108,9 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
             DbT5006NinteichosaIraiJohoEntity iraiJohoEntity = chosaIraiJohoDac.select(
                     shinchokuJohoEntity.getShinseishoKanriNo().value(),
                     new NinteichosaIraiRirekiNo(shinseiJohoEntity.getNinteichosaIraiRirekiNo()));
-            List<DbT7013ChosainJohoEntity> chosainEntityList = ninteichosainDac.selectAll(shinseiJohoEntity.getShichosonCode(), iraiJohoEntity.getNinteichosaItakusakiCode());
+            List<DbT7013ChosainJohoEntity> chosainEntityList = ninteichosainDac.selectAll(
+                    shinseiJohoEntity.getShichosonCode(),
+                    iraiJohoEntity.getNinteichosaItakusakiCode());
 
             NinteichosaKekkaTorikomiTaishoshaEntity entity = new NinteichosaKekkaTorikomiTaishoshaEntity();
             entity.setNinteiShinseiJohoEntity(shinseiJohoEntity);
@@ -139,7 +143,9 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
         List<KaigoNinteichosainEntity> list = new ArrayList<>();
 
         for (DbT7013ChosainJohoEntity chosainJohoEntity : chosainEntityList) {
-            DbT7010NinteichosaItakusakiJohoEntity itakusakiJohoEntity = ninteichosaItakusakiDac.select(chosainJohoEntity.getShichosonCode().getValue(), chosainJohoEntity.getKaigoJigyoshaNo(), true);
+            DbT7010NinteichosaItakusakiJohoEntity itakusakiJohoEntity = ninteichosaItakusakiDac.select(
+                    chosainJohoEntity.getShichosonCode().getValue(),
+                    chosainJohoEntity.getKaigoJigyoshaNo(), true);
             KaigoNinteichosainEntity ninteichosainEntity = new KaigoNinteichosainEntity();
             ninteichosainEntity.setDbT7013ChosainJohoEntity(chosainJohoEntity);
             ninteichosainEntity.setDbT7010NinteichosaItakusakiJohoEntity(itakusakiJohoEntity);
