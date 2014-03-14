@@ -164,7 +164,7 @@ public class NinteiShinchokuJohoMapperTest extends TestBase {
 
         @Test
         public void 渡された認定進捗情報と_Mapping後の認定進捗情報エンティティの_要介護認定延期理由が_同一になる() {
-            assertThat(sut.getNinteiEnkiRiyu(), is(要介護認定延期理由));
+            assertThat(sut.getNinteiEnkiRuyu(), is(要介護認定延期理由));
         }
 
         @Test

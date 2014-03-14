@@ -37,7 +37,7 @@ public final class NinteiShinchokuJohoMapper {
                 ConsentToEnkitsuchiHakko.toValue(entity.isEnkitsuchiDoiUmuKubun()),
                 entity.getEnkitsuchiHakkoYMD(),
                 entity.getEnkitsuchiHakkoKaisu(),
-                entity.getNinteiEnkiRiyu(),
+                entity.getNinteiEnkiRuyu(),
                 entity.getIchijihanteiChushutsuYMD(),
                 entity.getIraiJohoSoshinYMD(),
                 entity.getNinteichosaIraiKanryoYMD(),
@@ -66,7 +66,7 @@ public final class NinteiShinchokuJohoMapper {
         entity.setEnkitsuchiDoiUmuKubun(yokaigoninteiProgress.has認定延期通知発行に対する同意有無().is同意());
         entity.setEnkitsuchiHakkoYMD(yokaigoninteiProgress.get認定延期通知発行年月日());
         entity.setEnkitsuchiHakkoKaisu(yokaigoninteiProgress.get認定延期通知発行回数());
-        entity.setNinteiEnkiRiyu(yokaigoninteiProgress.get要介護認定延期理由());
+        entity.setNinteiEnkiRuyu(yokaigoninteiProgress.get要介護認定延期理由());
         entity.setIchijihanteiChushutsuYMD(yokaigoninteiProgress.get要介護認定一次判定情報抽出年月日());
         entity.setIraiJohoSoshinYMD(yokaigoninteiProgress.get依頼情報データ送信年月日());
         entity.setNinteichosaIraiKanryoYMD(yokaigoninteiProgress.get認定調査依頼完了年月日());

@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
 
 /**
- * 要介護認定進捗情報を管理するクラスです。
+ * 要介護認定進捗情報のデータアクセスクラスです。
  *
  * @author N8187 久保田 英男
  */

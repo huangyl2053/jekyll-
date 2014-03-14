@@ -49,7 +49,7 @@ public class NinteiShinchokuJohoMock {
         entity.setEnkitsuchiDoiUmuKubun(認定延期通知発行に対する同意有無);
         entity.setEnkitsuchiHakkoYMD(認定延期通知発行年月日);
         entity.setEnkitsuchiHakkoKaisu(認定延期通知発行回数);
-        entity.setNinteiEnkiRiyu(要介護認定延期理由);
+        entity.setNinteiEnkiRuyu(要介護認定延期理由);
         entity.setIchijihanteiChushutsuYMD(要介護認定一次判定情報抽出年月日);
         entity.setIraiJohoSoshinYMD(依頼情報データ送信年月日);
         entity.setNinteichosaIraiKanryoYMD(認定調査依頼完了年月日);
