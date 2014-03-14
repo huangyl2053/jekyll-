@@ -14,11 +14,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public interface IAnsweringItem {
 
     /**
-     * 回答項目のコードを返します。
+     * 回答項目の値を返します。
      *
-     * @return コード
+     * @return 値
      */
-    RString getCode();
+    RString getValue();
 
     /**
      * 回答項目の名称を返します。

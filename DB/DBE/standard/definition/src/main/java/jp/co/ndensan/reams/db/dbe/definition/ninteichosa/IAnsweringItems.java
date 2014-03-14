@@ -16,12 +16,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public interface IAnsweringItems {
 
     /**
-     * 引数のコードに該当する回答項目を返します。
+     * 引数の値に該当する回答項目を返します。
      *
-     * @param コード コード
+     * @param 値 値
      * @return 回答項目
      */
-    IAnsweringItem toValue(RString コード);
+    IAnsweringItem toValue(RString 値);
 
     /**
      * 回答項目のリストを返します。

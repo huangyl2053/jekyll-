@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.IAnsweringItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemSubGroup;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.FreeInputItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.IAnsweringItems;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.INinteichosaItem;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItemNo;
@@ -87,15 +88,14 @@ public class NinteichosaItemForResult<E extends Enum> implements INinteichosaIte
     }
 
     /**
-     * 調査結果に対応する選択肢を返します。<br />
-     * 選択肢ではなく調査結果を直接入力する調査項目の場合は「自由入力」を返します。
+     * 回答結果を返します。
      *
-     * @return 選択結果
+     * @return 回答結果
      */
-    public IAnsweringItem get選択結果() {
+    public IAnsweringItem get回答結果() {
         for (IAnsweringItem data : 調査項目.get選択肢().asList()) {
             if (data.getName().equals(Choice.FreeInput.自由入力.getName())) {
-                return Choice.FreeInput.自由入力;
+                return new FreeInputItem(調査結果);
             }
         }
         return 調査項目.get選択肢().toValue(調査結果);

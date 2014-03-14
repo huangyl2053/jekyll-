@@ -18,7 +18,6 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -32,6 +31,8 @@ public class NinteichosaItemForResultTest {
     private static final int AS_NULL項目無し = 0;
     private static final int AS_調査項目がNULL = 1;
     private static final int AS_調査結果がNULL = 2;
+    private static final boolean AS_選択項目 = true;
+    private static final boolean AS_入力項目 = false;
 
     public static class コンストラクタ {
 
@@ -123,35 +124,40 @@ public class NinteichosaItemForResultTest {
         }
     }
 
-    public static class get選択結果 {
+    public static class get回答結果 {
 
         @Test
-        public void 調査項目が選択形式の時_get選択結果は_該当の選択肢を返す() {
-            assertThat(createNinteichosaItemForResult(NinteichosaItemKubunOfGaikyo.サービス区分コード).get選択結果(), is((IAnsweringItem) Choice.ServiceKubun.予防));
+        public void 調査項目が選択形式の時_get回答結果は_該当の選択肢を返す() {
+            assertThat(createNinteichosaItemForResult(AS_選択項目).get回答結果(), is((IAnsweringItem) Choice.ServiceKubun.予防));
         }
 
         @Test
-        public void 調査項目が入力形式の時_get選択結果は_自由入力を返す() {
-            assertThat(createNinteichosaItemForResult(NinteichosaItemKubunOfGaikyo.市町村特別給付).get選択結果(), is((IAnsweringItem) Choice.FreeInput.自由入力));
+        public void 調査項目が選択形式の時_get回答結果は_該当の選択値を返す() {
+            assertThat(createNinteichosaItemForResult(AS_選択項目).get回答結果().getValue(), is(new RString("1")));
+        }
+
+        @Test
+        public void 調査項目が入力形式の時_get回答結果は_入力値を返す() {
+            assertThat(createNinteichosaItemForResult(AS_入力項目).get回答結果().getValue(), is(new RString("自由入力")));
         }
     }
 
     private static NinteichosaItemForResult createNinteichosaItemForResult() {
-        return createNinteichosaItemForResult(AS_NULL項目無し);
+        return createNinteichosaItemForResult(AS_NULL項目無し, AS_選択項目);
     }
 
     private static NinteichosaItemForResult createNinteichosaItemForResult(int flg) {
-        return createNinteichosaItemForResult(flg, NinteichosaItemKubunOfGaikyo.サービス区分コード);
+        return createNinteichosaItemForResult(flg, AS_選択項目);
     }
 
-    private static NinteichosaItemForResult createNinteichosaItemForResult(NinteichosaItemKubunOfGaikyo itemKubun) {
-        return createNinteichosaItemForResult(AS_NULL項目無し, itemKubun);
+    private static NinteichosaItemForResult createNinteichosaItemForResult(boolean choice) {
+        return createNinteichosaItemForResult(AS_NULL項目無し, choice);
     }
 
-    private static NinteichosaItemForResult createNinteichosaItemForResult(int flg, NinteichosaItemKubunOfGaikyo itemKubun) {
+    private static NinteichosaItemForResult createNinteichosaItemForResult(int flg, boolean choice) {
         return new NinteichosaItemForResult(
-                flg == AS_調査項目がNULL ? null : createNinteichosaItem(itemKubun),
-                flg == AS_調査結果がNULL ? null : new RString("1"));
+                flg == AS_調査項目がNULL ? null : createNinteichosaItem(choice ? NinteichosaItemKubunOfGaikyo.サービス区分コード : NinteichosaItemKubunOfGaikyo.市町村特別給付),
+                flg == AS_調査結果がNULL ? null : new RString(choice ? "1" : "自由入力"));
     }
 
     private static INinteichosaItem createNinteichosaItem(NinteichosaItemKubunOfGaikyo itemKubun) {

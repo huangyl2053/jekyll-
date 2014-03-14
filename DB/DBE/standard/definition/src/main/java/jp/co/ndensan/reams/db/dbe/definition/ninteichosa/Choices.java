@@ -30,9 +30,9 @@ public class Choices implements IAnsweringItems {
     }
 
     @Override
-    public IAnsweringItem toValue(RString コード) {
+    public IAnsweringItem toValue(RString 値) {
         for (IAnsweringItem data : 選択肢) {
-            if (data.getCode().equals(コード)) {
+            if (data.getValue().equals(値)) {
                 return data;
             }
         }
