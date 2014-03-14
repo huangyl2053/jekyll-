@@ -131,8 +131,8 @@ public class NinteichosaItemForResultTest {
         }
 
         @Test
-        public void 調査項目が入力形式の時_get選択結果は_NULLを返す() {
-            assertThat(createNinteichosaItemForResult(NinteichosaItemKubunOfGaikyo.市町村特別給付).get選択結果(), nullValue());
+        public void 調査項目が入力形式の時_get選択結果は_自由入力を返す() {
+            assertThat(createNinteichosaItemForResult(NinteichosaItemKubunOfGaikyo.市町村特別給付).get選択結果(), is((IAnsweringItem) Choice.FreeInput.自由入力));
         }
     }
 
