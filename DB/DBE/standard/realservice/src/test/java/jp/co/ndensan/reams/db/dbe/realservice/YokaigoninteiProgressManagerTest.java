@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinchokuJohoDac;
-import jp.co.ndensan.reams.db.dbe.realservice.helper.NinteiShinchokuJohoMock;
+import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
