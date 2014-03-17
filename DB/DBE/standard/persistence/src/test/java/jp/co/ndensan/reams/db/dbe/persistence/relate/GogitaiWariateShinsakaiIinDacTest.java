@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.basic.IGogitaiWariateDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IShinsakaiKaisaiBashoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.helper.IShinsakaiIinDacMock;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
-import static jp.co.ndensan.reams.db.dbe.persistence.basic.helper.GogitaiMockEntityCreator.*;
+import static jp.co.ndensan.reams.db.dbe.entity.helper.GogitaiMockEntityCreator.*;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
 import org.junit.Test;
