@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbe.entity.mapper.GogitaiJohoMapper;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.GogitaiMapper;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.GogitaiWariateIinMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.GogitaiWariateShinsakaiIinEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.IGogitaiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.IGogitaiWariateShinsakaiIinDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.IGogitaiAndGogitaiWariateIinDac;
@@ -41,9 +40,8 @@ public class GogitaiManager {
     /**
      * 引数からDacを受け取る、テスト用コンストラクタです。
      *
-     * @param gogitaiDac 合議体Dac
-     * @param gogitaiWariateDac 合議体割当Dac
      * @param wariateIinDac 合議体割当審査会委員Dac
+     * @param gogitaiAndWariateIinDac 合議体割当Dac
      */
     public GogitaiManager(IGogitaiWariateShinsakaiIinDac wariateIinDac,
             IGogitaiAndGogitaiWariateIinDac gogitaiAndWariateIinDac) {

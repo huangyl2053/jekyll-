@@ -33,7 +33,6 @@ public final class GogitaiJohoMapper {
      *
      * @param 合議体Entity 合議体Entity
      * @param 開催場所 開催場所Entity
-     * @param 合議体割当委員List 合議体割当委員List
      * @return 合議体
      */
     public static GogitaiJoho to合議体情報(DbT5103GogitaiJohoEntity 合議体Entity, ShinsakaiKaisaiBasho 開催場所) {

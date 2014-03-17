@@ -26,11 +26,10 @@ public class TimeString implements IValueObject<RString>, Comparable<TimeString>
      * @param timeStr 時間を表す、hhmmの形式に対応した文字列
      * @throws NullPointerException 引数にnullが渡されたとき
      * @throws IllegalArgumentException 引数が4桁の文字でないとき、引数が数字以外で構成されているとき
-     * @throws RuntimeException 引数に渡された時間が、0000から2359以内ではないとき
      */
-    public TimeString(RString timeStr) throws NullPointerException, IllegalArgumentException, RuntimeException {
+    public TimeString(RString timeStr) throws NullPointerException, IllegalArgumentException {
         requireNonNull(timeStr, Messages.E00003.replace("時間を表す文字列", getClass().getName()).getMessage());
-        if (!checkLength(timeStr, 4)) {
+        if (!checkLength(timeStr)) {
             throw new IllegalArgumentException(Messages.E00013.replace("時間を表す文字列", "4桁").getMessage());
         }
 
@@ -52,14 +51,13 @@ public class TimeString implements IValueObject<RString>, Comparable<TimeString>
      * @param timeStr 時間を表す、hhmmの形式に対応した文字列
      * @throws NullPointerException 引数にnullが渡されたとき
      * @throws IllegalArgumentException 引数が4桁の文字でないとき、引数が数字以外で構成されているとき
-     * @throws RuntimeException 引数に渡された時間が、0000～2359以内ではないとき
      */
     public TimeString(String timeStr) throws NullPointerException, IllegalArgumentException {
         this(new RString(timeStr));
     }
 
-    private boolean checkLength(RString timeStr, int 長さ) {
-        return timeStr.length() == 長さ;
+    private boolean checkLength(RString timeStr) {
+        return timeStr.length() == 4;
     }
 
     @Override

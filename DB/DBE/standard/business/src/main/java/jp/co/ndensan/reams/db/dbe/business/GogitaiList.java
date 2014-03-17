@@ -33,7 +33,8 @@ public class GogitaiList implements Iterable<Gogitai> {
     /**
      * 合議体情報を指定して、該当する合議体をリスト内から取得します。
      *
-     * @param 合議体情報 合議体情報
+     * @param 合議体番号 合議体番号
+     * @param 合議体有効期間開始年月日 合議体有効期間開始年月日
      * @return 合議体
      * @throws IllegalArgumentException 合致する合議体が存在しないとき
      */

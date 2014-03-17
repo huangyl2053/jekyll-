@@ -40,7 +40,8 @@ public class GogitaiJoho {
      *
      * @param 合議体番号 合議体番号
      * @param 合議体名称 合議体名称
-     * @param 有効期間 有効期間
+     * @param 有効期間開始年月日 有効期間開始年月日
+     * @param 有効期間終了年月日 有効期間終了年月日
      * @param 予定開催時間 予定開催時間
      * @param 審査会開催場所 審査会開催場所
      * @param 審査会予定定員 審査会予定定員
@@ -50,6 +51,8 @@ public class GogitaiJoho {
      * @param ダミー区分 ダミー区分
      * @throws NullPointerException
      * 合議体番号、合議体名称、有効期間、開始終了予定時刻、審査会開催場所のいずれかにnullが渡されたとき
+     * @throws IllegalArgumentException
+     * 審査会予定定員、審査会自動割当定員、審査会委員定員のいずれかに0より小さい値が渡されたとき
      */
     public GogitaiJoho(GogitaiNo 合議体番号, RString 合議体名称, GogitaiYukoKikanKaishiYMD 有効期間開始年月日,
             FlexibleDate 有効期間終了年月日, Range<TimeString> 予定開催時間, ShinsakaiKaisaiBasho 審査会開催場所,

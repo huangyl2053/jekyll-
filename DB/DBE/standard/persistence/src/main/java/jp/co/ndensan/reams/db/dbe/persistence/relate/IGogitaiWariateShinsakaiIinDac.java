@@ -37,7 +37,7 @@ public interface IGogitaiWariateShinsakaiIinDac {
     /**
      * 合議体有効期間開始年月日を指定し、指定した日付時点で有効な合議体と、それぞれに割り当てられている審査会委員の情報を取得します。
      *
-     * @param 合議体番号 合議体番号
+     * @param 合議体有効期間開始年月日 合議体有効期間開始年月日
      * @return 合議体割当委員のList
      */
     @Transaction

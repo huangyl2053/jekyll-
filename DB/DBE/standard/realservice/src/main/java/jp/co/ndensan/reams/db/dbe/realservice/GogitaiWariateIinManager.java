@@ -38,11 +38,11 @@ public class GogitaiWariateIinManager {
      * 引数からDACを受け取る、テスト用コンストラクタです。
      *
      * @param gogitaiWariateIinDac 合議体割当審査会委員Dac
-     * @param WariateDac 合議体割当Dac
+     * @param wariateDac 合議体割当Dac
      */
-    GogitaiWariateIinManager(IGogitaiWariateShinsakaiIinDac gogitaiWariateIinDac, IGogitaiWariateDac WariateDac) {
+    GogitaiWariateIinManager(IGogitaiWariateShinsakaiIinDac gogitaiWariateIinDac, IGogitaiWariateDac wariateDac) {
         this.gogitaiWariateIinDac = gogitaiWariateIinDac;
-        this.wariateDac = WariateDac;
+        this.wariateDac = wariateDac;
     }
 
     /**

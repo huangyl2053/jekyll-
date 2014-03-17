@@ -20,7 +20,7 @@ public interface IGogitaiAndGogitaiWariateIinDac {
      * 合議体と合議体に割り当てられた委員の情報に対して、insertかupdateのどちらかを状況に合わせて行います。
      *
      * @param 合議体Entity 合議体Entity
-     * @param 合議体割当Entities 合議体割当Entities
+     * @param 合議体割当委員Entities 合議体割当委員Entities
      * @return 件数
      */
     @Transaction
@@ -31,7 +31,7 @@ public interface IGogitaiAndGogitaiWariateIinDac {
      * 合議体と合議体に割り当てられた委員の情報をデータベースから削除します。
      *
      * @param 合議体Entity 合議体Entity
-     * @param 合議体割当Entities 合議体割当Entities
+     * @param 合議体割当委員Entities 合議体割当委員Entities
      * @return 件数
      */
     @Transaction

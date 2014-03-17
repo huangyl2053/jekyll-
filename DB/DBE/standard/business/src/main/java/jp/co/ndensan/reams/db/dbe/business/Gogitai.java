@@ -17,6 +17,14 @@ public class Gogitai {
     private final GogitaiJoho 合議体情報;
     private final GogitaiWariateIinList 割当委員List;
 
+    /**
+     * 合議体情報と、合議体に割り当てられた審査会委員の情報を元にインスタンスを生成します。
+     *
+     * @param 合議体情報 合議体情報
+     * @param 割当委員List 割当委員List
+     * @throws NullPointerException 引数のいずれかにnullが渡されたとき
+     * @throws IllegalArgumentException 引数からわたされた合議体情報と、割当委員がそれぞれ持つ合議体情報が一致しないとき
+     */
     public Gogitai(GogitaiJoho 合議体情報, GogitaiWariateIinList 割当委員List) throws NullPointerException, IllegalArgumentException {
         requireNonNull(合議体情報, Messages.E00003.replace("合議体情報", getClass().getName().toString()).getMessage());
         requireNonNull(割当委員List, Messages.E00003.replace("割当委員List", getClass().getName().toString()).getMessage());
