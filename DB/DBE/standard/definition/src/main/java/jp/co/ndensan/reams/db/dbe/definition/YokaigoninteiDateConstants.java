@@ -14,7 +14,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public final class YokaigoninteiDateConstants {
 
+    /**
+     * 認定調査未完了年月日
+     */
     public static final FlexibleDate 認定調査未完了年月日;
+    /**
+     * 認定調査依頼未完了年月日
+     */
     public static final FlexibleDate 認定調査依頼未完了年月日;
 
     /**

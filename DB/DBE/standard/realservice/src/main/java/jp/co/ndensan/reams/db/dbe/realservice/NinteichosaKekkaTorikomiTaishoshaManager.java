@@ -22,10 +22,11 @@ import jp.co.ndensan.reams.db.dbe.persistence.basic.IKaigoNinteichosainDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiChosaIraiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinchokuJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
-import jp.co.ndensan.reams.ur.urf.entity.basic.KaigoJigyoshaEntity;
-import jp.co.ndensan.reams.ur.urf.persistence.basic.IKaigoJigyoshaDac;
-import jp.co.ndensan.reams.ur.urz.entity.basic.KojinEntity;
-import jp.co.ndensan.reams.ur.urz.persistence.basic.IKojinDac;
+import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
+import jp.co.ndensan.reams.ur.urf.definition.KaigoJigyoshaShubetsu;
+import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
+import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
+import jp.co.ndensan.reams.ur.urf.realservice.KaigoJigyoshaFinderFactory;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -41,8 +42,6 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
     private final INinteiChosaIraiJohoDac chosaIraiJohoDac;
     private final IKaigoNinteichosainDac ninteichosainDac;
     private final INinteichosaItakusakiDac ninteichosaItakusakiDac;
-    private final IKaigoJigyoshaDac kaigoJigyoshaDac;
-    private final IKojinDac kojinDac;
 
     /**
      * デフォルトコンストラクタです。
@@ -53,8 +52,6 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
         chosaIraiJohoDac = InstanceProvider.create(INinteiChosaIraiJohoDac.class);
         ninteichosainDac = InstanceProvider.create(IKaigoNinteichosainDac.class);
         ninteichosaItakusakiDac = InstanceProvider.create(INinteichosaItakusakiDac.class);
-        kaigoJigyoshaDac = InstanceProvider.create(IKaigoJigyoshaDac.class);
-        kojinDac = InstanceProvider.create(IKojinDac.class);
     }
 
     /**
@@ -63,23 +60,18 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
      * @param shinchokuJohoDac shinchokuJohoDac
      * @param shinseiJohoDac shinseiJohoDac
      * @param chosaIraiJohoDac chosaIraiJohoDac
-     * @param kojinDac kojinDac
      */
     NinteichosaKekkaTorikomiTaishoshaManager(
             INinteiShinchokuJohoDac shinchokuJohoDac,
             INinteiShinseiJohoDac shinseiJohoDac,
             INinteiChosaIraiJohoDac chosaIraiJohoDac,
             IKaigoNinteichosainDac ninteichosainDac,
-            INinteichosaItakusakiDac ninteichosaItakusakiDac,
-            IKaigoJigyoshaDac kaigoJigyoshaDac,
-            IKojinDac kojinDac) {
+            INinteichosaItakusakiDac ninteichosaItakusakiDac) {
         this.shinchokuJohoDac = shinchokuJohoDac;
         this.shinseiJohoDac = shinseiJohoDac;
         this.chosaIraiJohoDac = chosaIraiJohoDac;
         this.ninteichosainDac = ninteichosainDac;
         this.ninteichosaItakusakiDac = ninteichosaItakusakiDac;
-        this.kaigoJigyoshaDac = kaigoJigyoshaDac;
-        this.kojinDac = kojinDac;
     }
 
     /**
@@ -127,8 +119,10 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
         List<NinteichosaKekkaTorikomiTaishosha> list = new ArrayList<>();
 
         for (NinteichosaKekkaTorikomiTaishoshaEntity entity : entityList) {
-            KojinEntity kojin = kojinDac.select最新(entity.getNinteiShinseiJohoEntity().getShikibetsuCode().value());
-            KaigoJigyoshaEntity kaigoJigyosha = create介護事業者Entity(entity.getNinteichosaIraiJohoEntity());
+            IKojin kojin = KojinService.createKojinFinder().get個人(entity.getNinteiShinseiJohoEntity().getShikibetsuCode());
+            IKaigoJigyosha kaigoJigyosha = KaigoJigyoshaFinderFactory.getInstance().get特定の事業者種別かつ事業者番号の介護事業者(
+                    KaigoJigyoshaShubetsu.サービス事業者,
+                    entity.getNinteichosaIraiJohoEntity().getNinteichosaItakusakiCode().value());
             list.add(NinteichosaKekkaTorikomiTaishoshaMapper.toNinteichosaKekkaTorikomiTaishosha(entity, kaigoJigyosha, kojin));
         }
 
@@ -153,15 +147,5 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
         }
 
         return list;
-    }
-
-    private KaigoJigyoshaEntity create介護事業者Entity(DbT5006NinteichosaIraiJohoEntity iraiJohoEntity) {
-        List<KaigoJigyoshaEntity> entityList = kaigoJigyoshaDac.select特定の事業者番号の事業者(iraiJohoEntity.getNinteichosaItakusakiCode().value());
-
-        if (entityList.isEmpty()) {
-            return null;
-        }
-
-        return entityList.get(0);
     }
 }
