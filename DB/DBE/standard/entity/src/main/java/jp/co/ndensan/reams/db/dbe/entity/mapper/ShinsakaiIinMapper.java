@@ -6,13 +6,13 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinKoza;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinShikaku;
+import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinShikaku;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinShikakuCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsainYusoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5102ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 
 /**
@@ -21,8 +21,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Range;
  * @author n8178 城間篤人
  */
 public final class ShinsakaiIinMapper {
-    //TODO n8178 城間篤人 他チケットで実装予定の箇所のため、後に改修が入る可能性があり 2014年3月末
 
+    //TODO n8178 城間篤人 他チケットで実装予定の箇所のため、後に改修が入る可能性があり 2014年3月末
     /**
      * インスタンス化防止のためのプライベートコンストラクタです。
      */
@@ -46,9 +46,14 @@ public final class ShinsakaiIinMapper {
                 ShinsakaiIinJokyo.toValue(委員Entity.getShinsakaiIinJokyo()),
                 委員Entity.getJigyoushaNo(), 委員Entity.getShinsakaiIinShimei(), 委員Entity.getShinsakaiIinKanaShimei(),
                 Gender.toValue(委員Entity.getSeibetsu()),
-                new ShinsakaiIinShikaku(委員Entity.getShinsakaiIinShikakuCode().getColumnValue(), 委員Entity.getShinsakaiIinShikakuName()),
+                create審査員区分(委員Entity),
                 ShinsainYusoKubun.toValue(委員Entity.getShinsainYusoKubun()), 委員Entity.getYubinNo(), 委員Entity.getJusho(),
                 委員Entity.getTelNo(), create審査会委員口座情報(委員Entity));
+    }
+
+    private static ShinsakaiIinShikaku create審査員区分(DbT5102ShinsakaiIinJohoEntity 委員Entity) {
+        return new ShinsakaiIinShikaku(new ShinsakaiIinShikakuCode(委員Entity.getShinsakaiIinShikakuCode().getColumnValue()),
+                委員Entity.getShinsakaiIinShikakuName());
     }
 
     private static ShinsakaiIinKoza create審査会委員口座情報(DbT5102ShinsakaiIinJohoEntity 委員Entity) {
@@ -77,7 +82,7 @@ public final class ShinsakaiIinMapper {
         委員Entity.setShinsakaiIinShimei(審査会委員.get氏名());
         委員Entity.setShinsakaiIinKanaShimei(審査会委員.getカナ氏名());
         委員Entity.setSeibetsu(審査会委員.get性別().getCommonName());
-        委員Entity.setShinsakaiIinShikakuCode(new Code(審査会委員.get審査会委員資格().getCode()));
+        委員Entity.setShinsakaiIinShikakuCode(審査会委員.get審査会委員資格().get区分コード());
         委員Entity.setShinsainYusoKubun(審査会委員.get審査委員郵送区分().get郵送区分());
         委員Entity.setYubinNo(審査会委員.get郵便番号());
         委員Entity.setJusho(審査会委員.get住所());

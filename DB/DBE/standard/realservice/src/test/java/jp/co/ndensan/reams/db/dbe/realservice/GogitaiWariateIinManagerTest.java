@@ -8,16 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiJoho;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIin;
+import jp.co.ndensan.reams.db.dbe.business.GogitaichoKubun;
+import jp.co.ndensan.reams.db.dbe.business.ShinsainKubun;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsainYusoKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaichoKubun;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsainKubun;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaichoKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsainKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5107GogitaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.relate.GogitaiWariateShinsakaiIinEntity;
@@ -135,8 +135,10 @@ public class GogitaiWariateIinManagerTest {
     }
 
     private static GogitaiWariateIin create合議体割当委員(int 合議体番号, String 合議体有効期間開始年月日, String 委員コード) {
-        return new GogitaiWariateIin(create審査会委員(委員コード), new ShinsainKubun(new RString("001"), new RString("審査員")),
-                new GogitaichoKubun(new RString("001"), new RString("体長")), create合議体情報(1, 合議体有効期間開始年月日));
+        return new GogitaiWariateIin(create審査会委員(委員コード),
+                new ShinsainKubun(new ShinsainKubunCode(new RString("001")), new RString("審査員")),
+                new GogitaichoKubun(new GogitaichoKubunCode(new RString("001")), new RString("体長")),
+                create合議体情報(1, 合議体有効期間開始年月日));
     }
 
     private static GogitaiJoho create合議体情報(int 合議体番号, String 開始年月日) {

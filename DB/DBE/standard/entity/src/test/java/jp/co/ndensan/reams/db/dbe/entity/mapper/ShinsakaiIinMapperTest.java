@@ -6,7 +6,8 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinKoza;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinShikaku;
+import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinShikaku;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinShikakuCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsainYusoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
@@ -46,7 +47,8 @@ public class ShinsakaiIinMapperTest {
     private static AtenaMeisho 氏名_太郎 = new AtenaMeisho(new RString("太郎"));
     private static AtenaKanaMeisho カナ氏名_タロウ = new AtenaKanaMeisho(new RString("タロウ"));
     private static Gender 性別_MALE = Gender.MALE;
-    private static ShinsakaiIinShikaku 審査会委員資格_code_name = new ShinsakaiIinShikaku(new RString("code"), new RString("name"));
+    private static ShinsakaiIinShikaku 審査会委員資格_code_name =
+            new ShinsakaiIinShikaku(new ShinsakaiIinShikakuCode(new RString("code")), new RString("name"));
     private static ShinsainYusoKubun 審査委員郵送区分_自宅 = ShinsainYusoKubun.自宅;
     private static YubinNo 郵便番号_1231234 = new YubinNo("1231234");
     private static AtenaJusho 住所_山田市 = new AtenaJusho(new RString("山田市"));
@@ -119,7 +121,7 @@ public class ShinsakaiIinMapperTest {
         @Test
         public void 審査会委員資格にcodeを持つEntityが渡されたとき_審査会委員資格にcodeを持つ審査会委員が返る() {
             sut = ShinsakaiIinMapper.to審査会委員(createEntity());
-            assertThat(sut.get審査会委員資格().getCode(), is(審査会委員資格_code_name.getCode()));
+            assertThat(sut.get審査会委員資格().get区分コード(), is(審査会委員資格_code_name.get区分コード()));
         }
 
         @Test
@@ -244,7 +246,7 @@ public class ShinsakaiIinMapperTest {
         @Test
         public void 審査会委員資格コードにcodeを持つ審査会委員が渡されたとき_審査会委員資格コードにcodeを持つEntityが返す() {
             sut = ShinsakaiIinMapper.to審査会委員Entity(createShinsakaiIin());
-            assertThat(sut.getShinsakaiIinShikakuCode(), is(new Code(審査会委員資格_code_name.getCode())));
+            assertThat(sut.getShinsakaiIinShikakuCode(), is((Code) 審査会委員資格_code_name.get区分コード()));
         }
 
         @Test
@@ -327,7 +329,7 @@ public class ShinsakaiIinMapperTest {
         委員Entity.setShinsakaiIinShimei(氏名_太郎);
         委員Entity.setShinsakaiIinKanaShimei(カナ氏名_タロウ);
         委員Entity.setSeibetsu(性別_MALE.getCode());
-        委員Entity.setShinsakaiIinShikakuCode(new Code(審査会委員資格_code_name.getCode()));
+        委員Entity.setShinsakaiIinShikakuCode(審査会委員資格_code_name.get区分コード());
         委員Entity.setShinsainYusoKubun(審査委員郵送区分_自宅.get郵送区分());
         委員Entity.setYubinNo(郵便番号_1231234);
         委員Entity.setJusho(住所_山田市);
