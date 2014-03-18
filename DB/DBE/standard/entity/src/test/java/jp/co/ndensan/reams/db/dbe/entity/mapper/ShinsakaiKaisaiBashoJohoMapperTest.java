@@ -41,43 +41,43 @@ public class ShinsakaiKaisaiBashoJohoMapperTest {
 
         @Test
         public void 引数にnullが渡されたとき_nullが返る() {
-            sut = ShinsakaiKaisaiBashoJohoMapper.to審査会開催場所(null);
+            sut = ShinsakaiKaisaiBashoMapper.to審査会開催場所(null);
             assertThat(sut, is(nullValue()));
         }
 
         @Test
         public void 開催場所コードにA001を持つEntityが渡されたとき_開催場所コードにA001を持つ審査会開催場所が返る() {
-            sut = ShinsakaiKaisaiBashoJohoMapper.to審査会開催場所(createEntity());
+            sut = ShinsakaiKaisaiBashoMapper.to審査会開催場所(createEntity());
             assertThat(sut.get開催場所コード(), is(開催場所コード_A001));
         }
 
         @Test
         public void 開催場所名に山田家を持つEntityが渡されたとき_開催場所名に山田家を持つ審査会開催場所が返る() {
-            sut = ShinsakaiKaisaiBashoJohoMapper.to審査会開催場所(createEntity());
+            sut = ShinsakaiKaisaiBashoMapper.to審査会開催場所(createEntity());
             assertThat(sut.get開催場所名称(), is(開催場所名_山田家));
         }
 
         @Test
         public void 開催地区コードにchiku01を持つEntityが渡されたとき_開催地区にchiku01を持つ審査会開催場所が返る() {
-            sut = ShinsakaiKaisaiBashoJohoMapper.to審査会開催場所(createEntity());
+            sut = ShinsakaiKaisaiBashoMapper.to審査会開催場所(createEntity());
             assertThat(sut.get開催地区().getCode(), is(開催地区_chiku01_name01.getCode()));
         }
 
         @Test
         public void 開催場所住所に山田市を持つEntityが渡されたとき_開催場所住所に山田市を持つ審査会開催場所が返る() {
-            sut = ShinsakaiKaisaiBashoJohoMapper.to審査会開催場所(createEntity());
+            sut = ShinsakaiKaisaiBashoMapper.to審査会開催場所(createEntity());
             assertThat(sut.get開催場所住所(), is(開催場所住所_山田市));
         }
 
         @Test
         public void 電話番号に0981234567を持つEntityが渡されたとき_電話番号に0981234567を持つ審査会開催場所が返る() {
-            sut = ShinsakaiKaisaiBashoJohoMapper.to審査会開催場所(createEntity());
+            sut = ShinsakaiKaisaiBashoMapper.to審査会開催場所(createEntity());
             assertThat(sut.get開催場所電話番号(), is(電話番号_0981234567));
         }
 
         @Test
         public void 開催場所状況に有効を持つEntityが渡されたとき_開催場所状況に有効を持つ審査会開催場所が返る() {
-            sut = ShinsakaiKaisaiBashoJohoMapper.to審査会開催場所(createEntity());
+            sut = ShinsakaiKaisaiBashoMapper.to審査会開催場所(createEntity());
             assertThat(sut.get開催場所状況(), is(開催場所状況_有効));
         }
     }
@@ -88,43 +88,43 @@ public class ShinsakaiKaisaiBashoJohoMapperTest {
 
         @Test
         public void 引数にnullが渡されたとき_nullが返る() {
-            sut = ShinsakaiKaisaiBashoJohoMapper.to審査会開催場所Entity(null);
+            sut = ShinsakaiKaisaiBashoMapper.to審査会開催場所Entity(null);
             assertThat(sut, is(nullValue()));
         }
 
         @Test
         public void 開催場所コードにA001を持つ審査会開催場所が渡されたとき_開催場所コードにA001を持つEntityが返る() {
-            sut = ShinsakaiKaisaiBashoJohoMapper.to審査会開催場所Entity(createKaisaiBasho());
+            sut = ShinsakaiKaisaiBashoMapper.to審査会開催場所Entity(createKaisaiBasho());
             assertThat(sut.getShinsakaiKaisaiBashoCode(), is(開催場所コード_A001.value()));
         }
 
         @Test
         public void 開催場所名に山田家を持つ審査会開催場所が渡されたとき_開催場所名に山田家を持つEntityが返る() {
-            sut = ShinsakaiKaisaiBashoJohoMapper.to審査会開催場所Entity(createKaisaiBasho());
+            sut = ShinsakaiKaisaiBashoMapper.to審査会開催場所Entity(createKaisaiBasho());
             assertThat(sut.getShinsakaiKaisaiBashoMei(), is(開催場所名_山田家));
         }
 
         @Test
         public void 開催地区コードにchiku01を持つ審査会開催場所が渡されたとき_開催地区コードにchiku01を持つEntityが返る() {
-            sut = ShinsakaiKaisaiBashoJohoMapper.to審査会開催場所Entity(createKaisaiBasho());
+            sut = ShinsakaiKaisaiBashoMapper.to審査会開催場所Entity(createKaisaiBasho());
             assertThat(sut.getShinsakaiKaisaiChikuCode(), is((Code) 開催地区_chiku01_name01));
         }
 
         @Test
         public void 開催場所住所に山田市を持つ審査会開催場所が渡されたとき_開催場所住所に山田市を持つEntityが返る() {
-            sut = ShinsakaiKaisaiBashoJohoMapper.to審査会開催場所Entity(createKaisaiBasho());
+            sut = ShinsakaiKaisaiBashoMapper.to審査会開催場所Entity(createKaisaiBasho());
             assertThat(sut.getShinsakaiKaisaiBashoJusho(), is(開催場所住所_山田市));
         }
 
         @Test
         public void 電話番号に0981234567を持つ審査会開催場所が渡されたとき_電話番号に0981234567を持つEntityが返る() {
-            sut = ShinsakaiKaisaiBashoJohoMapper.to審査会開催場所Entity(createKaisaiBasho());
+            sut = ShinsakaiKaisaiBashoMapper.to審査会開催場所Entity(createKaisaiBasho());
             assertThat(sut.getShinsakaiKaisaiBashoTelNo(), is(電話番号_0981234567));
         }
 
         @Test
         public void 開催場所状況に有効を持つ審査会開催場所が渡されたとき_開催場所状況に有効を持つEntityが返る() {
-            sut = ShinsakaiKaisaiBashoJohoMapper.to審査会開催場所Entity(createKaisaiBasho());
+            sut = ShinsakaiKaisaiBashoMapper.to審査会開催場所Entity(createKaisaiBasho());
             assertThat(sut.getShinsakaiKaisaiBashoJokyo(), is(開催場所状況_有効.is有効()));
         }
     }

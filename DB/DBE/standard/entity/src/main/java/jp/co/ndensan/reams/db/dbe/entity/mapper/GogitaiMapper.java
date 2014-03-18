@@ -62,7 +62,7 @@ public final class GogitaiMapper {
 
     private static GogitaiJoho create合議体情報(GogitaiWariateShinsakaiIinEntity 合議体割当委員Entity) {
         return GogitaiJohoMapper.to合議体情報(合議体割当委員Entity.get合議体情報Entity(),
-                ShinsakaiKaisaiBashoJohoMapper.to審査会開催場所(合議体割当委員Entity.get開催場所Entity()));
+                ShinsakaiKaisaiBashoMapper.to審査会開催場所(合議体割当委員Entity.get開催場所Entity()));
     }
 
     private static boolean isキー項目が一致(GogitaiWariateShinsakaiIinEntity check用割当委員Entity, GogitaiWariateShinsakaiIinEntity 割当委員Entity) {

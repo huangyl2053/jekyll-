@@ -15,13 +15,12 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEn
  *
  * @author n8178 城間篤人
  */
-public final class ShinsakaiKaisaiBashoJohoMapper {
-    //TODO n8178 城間篤人 他チケットで実装予定の箇所のため、後に改修が入る可能性があり 2014年3月末
+public final class ShinsakaiKaisaiBashoMapper {
 
     /**
      * インスタンス化防止のためのプライベートコンストラクタです。
      */
-    private ShinsakaiKaisaiBashoJohoMapper() {
+    private ShinsakaiKaisaiBashoMapper() {
     }
 
     /**
