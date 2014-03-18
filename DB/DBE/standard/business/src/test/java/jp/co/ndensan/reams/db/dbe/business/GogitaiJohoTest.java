@@ -243,7 +243,7 @@ public class GogitaiJohoTest {
         }
 
         @Test
-        public void 合議体番号と合議体有効期間開始年月日が同値であるとき_trueを返す() {
+        public void すべての項目が同値であるとき_trueを返す() {
             sut2 = new GogitaiJoho(合議体番号_1, 合議体名称_ABC, 有効期間開始年月日_19990101, 有効期間終了年月日_20100101, 開始終了予定時刻_0930_1730, 審査会開催場所_A001,
                     審査会予定定員_5, 審査会自動割当定員_4, 審査会委員定員_6, 精神科医師存在_存在, 合議体ダミー_正規);
             assertThat(sut1.equals(sut2), is(true));
