@@ -25,11 +25,13 @@ public class TimeString implements IValueObject<RString>, Comparable<TimeString>
      *
      * @param timeStr 時間を表す、hhmmの形式に対応した文字列
      * @throws NullPointerException 引数にnullが渡されたとき
-     * @throws IllegalArgumentException 引数が4桁の文字でないとき、引数が数字以外で構成されているとき
+     * @throws IllegalArgumentException 引数が4桁の文字でないとき<br/>
+     * 引数が数字以外で構成されているとき<br/>
+     * 引数が0000～2359の範囲に収まっておらず、時間として判定できないとき
      */
     public TimeString(RString timeStr) throws NullPointerException, IllegalArgumentException {
         requireNonNull(timeStr, Messages.E00003.replace("時間を表す文字列", getClass().getName()).getMessage());
-        if (!checkLength(timeStr)) {
+        if (!checkLength(timeStr, 4)) {
             throw new IllegalArgumentException(Messages.E00013.replace("時間を表す文字列", "4桁").getMessage());
         }
 
@@ -38,10 +40,14 @@ public class TimeString implements IValueObject<RString>, Comparable<TimeString>
             hour = Integer.parseInt(timeStr.substring(0, 2).toString());
             minute = Integer.parseInt(timeStr.substring(2, 4).toString());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(Messages.E00013.replace("時間を表す文字列が数字").getMessage());
+            throw new IllegalArgumentException(Messages.E00013.replace("時間を表す文字列", "数字").getMessage());
         }
 
-        time = RTime.of(hour, minute);
+        try {
+            time = RTime.of(hour, minute);
+        } catch (RuntimeException e) {
+            throw new IllegalArgumentException(Messages.E00013.replace("時間を表す文字列", "0000～2359の間").getMessage());
+        }
     }
 
     /**
@@ -56,8 +62,8 @@ public class TimeString implements IValueObject<RString>, Comparable<TimeString>
         this(new RString(timeStr));
     }
 
-    private boolean checkLength(RString timeStr) {
-        return timeStr.length() == 4;
+    private boolean checkLength(RString timeStr, int length) {
+        return timeStr.length() == length;
     }
 
     @Override
