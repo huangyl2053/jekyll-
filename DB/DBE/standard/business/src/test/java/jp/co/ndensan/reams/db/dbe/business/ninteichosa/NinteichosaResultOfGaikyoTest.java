@@ -24,7 +24,7 @@ public class NinteichosaResultOfGaikyoTest {
     private static final int AS_認定調査依頼履歴番号がNULL = 2;
     private static final int AS_基本情報がNULL = 3;
     private static final int AS_厚労省IF識別区分がNULL = 4;
-    private static final int AS_サービス状況がNULL = 5;
+    private static final int AS_認定調査票がNULL = 5;
 
     public static class コンストラクタ {
 
@@ -49,8 +49,8 @@ public class NinteichosaResultOfGaikyoTest {
         }
 
         @Test(expected = NullPointerException.class)
-        public void サービス状況がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createNinteichosaResultOfGaikyo(AS_サービス状況がNULL);
+        public void 認定調査票がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
+            createNinteichosaResultOfGaikyo(AS_認定調査票がNULL);
         }
     }
 
@@ -60,6 +60,6 @@ public class NinteichosaResultOfGaikyoTest {
                 flg == AS_認定調査依頼履歴番号がNULL ? null : any(NinteichosaIraiRirekiNo.class),
                 flg == AS_厚労省IF識別区分がNULL ? null : any(KoroshoIFKubun.class),
                 flg == AS_基本情報がNULL ? null : any(NinteichosaResultOfGaikyoKihon.class),
-                flg == AS_サービス状況がNULL ? null : any(Ninteichosahyo.class));
+                flg == AS_認定調査票がNULL ? null : any(Ninteichosahyo.class));
     }
 }

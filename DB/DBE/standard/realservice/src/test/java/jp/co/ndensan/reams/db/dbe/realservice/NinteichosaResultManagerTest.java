@@ -92,7 +92,7 @@ public class NinteichosaResultManagerTest {
 
     private static INinteiChosainFinder createNinteiChosainFinder() {
         INinteiChosainFinder finder = mock(INinteiChosainFinder.class);
-        INinteiChosain chosain = NinteichosaResultMock.getSpiedNinteichosaResultGaikyoInstance().get概況調査結果基本情報().get認定調査員();
+        INinteiChosain chosain = NinteichosaResultMock.getSpiedNinteichosaResultGaikyoInstance().get基本情報().get認定調査員();
         when(finder.get認定調査員(any(RString.class))).thenReturn(chosain);
         return finder;
     }
