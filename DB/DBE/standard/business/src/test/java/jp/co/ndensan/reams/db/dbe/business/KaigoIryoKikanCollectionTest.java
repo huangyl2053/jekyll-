@@ -92,8 +92,10 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
 
         private KaigoIryoKikan create介護医療機関(String 識別コード, String 市町村コード, String 介護医療機関コード) {
             IShujiiIryoKikan 主治医医療機関 = mock(KaigoIryoKikan.class);
-            when(主治医医療機関.get市町村コード()).thenReturn(create市町村コード(市町村コード));
-            when(主治医医療機関.get介護医療機関コード()).thenReturn(create介護医療機関コード(介護医療機関コード));
+            ShichosonCode sCode = create市町村コード(市町村コード);
+            when(主治医医療機関.get市町村コード()).thenReturn(sCode);
+            KaigoIryoKikanCode kCode = create介護医療機関コード(介護医療機関コード);
+            when(主治医医療機関.get介護医療機関コード()).thenReturn(kCode);
 
             IIryoKikan 医療機関 = mock(KaigoIryoKikan.class);
             when(医療機関.get識別コード()).thenReturn(new ShikibetsuCode(new RString(識別コード)));
@@ -200,9 +202,12 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
 //
 //            return new KaigoIryoKikan(医療機関, 主治医医療機関);
             KaigoIryoKikan 介護医療機関 = mock(KaigoIryoKikan.class);
-            when(介護医療機関.get医療機関区分()).thenReturn(create医療機関区分(医療機関区分コード));
-            when(介護医療機関.get市町村コード()).thenReturn(create市町村コード(市町村コード));
-            when(介護医療機関.get介護医療機関コード()).thenReturn(create介護医療機関コード(介護医療機関コード));
+            IryoKikanKubun iryoKikanKubun = create医療機関区分(医療機関区分コード);
+            when(介護医療機関.get医療機関区分()).thenReturn(iryoKikanKubun);
+            ShichosonCode sCode = create市町村コード(市町村コード);
+            when(介護医療機関.get市町村コード()).thenReturn(sCode);
+            KaigoIryoKikanCode kCode = create介護医療機関コード(介護医療機関コード);
+            when(介護医療機関.get介護医療機関コード()).thenReturn(kCode);
             when(介護医療機関.get識別コード()).thenReturn(new ShikibetsuCode(new RString(識別コード)));
             return 介護医療機関;
         }
@@ -267,8 +272,10 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
         private KaigoIryoKikan create介護医療機関(String 識別コード, IryoKikanJokyo 医療機関状況, String 市町村コード, String 介護医療機関コード) {
             KaigoIryoKikan 介護医療機関 = mock(KaigoIryoKikan.class);
             when(介護医療機関.get医療機関状況()).thenReturn(医療機関状況);
-            when(介護医療機関.get市町村コード()).thenReturn(create市町村コード(市町村コード));
-            when(介護医療機関.get介護医療機関コード()).thenReturn(create介護医療機関コード(介護医療機関コード));
+            ShichosonCode sCode = create市町村コード(市町村コード);
+            when(介護医療機関.get市町村コード()).thenReturn(sCode);
+            KaigoIryoKikanCode kCode = create介護医療機関コード(介護医療機関コード);
+            when(介護医療機関.get介護医療機関コード()).thenReturn(kCode);
 
 //            IIryoKikan 医療機関 = mock(IIryoKikan.class);
             when(介護医療機関.get識別コード()).thenReturn(new ShikibetsuCode(new RString(識別コード)));
