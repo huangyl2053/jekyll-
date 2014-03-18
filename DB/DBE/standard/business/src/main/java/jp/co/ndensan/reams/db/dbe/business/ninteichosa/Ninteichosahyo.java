@@ -12,8 +12,6 @@ import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteic
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.INinteichosaItem;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -92,61 +90,5 @@ public class Ninteichosahyo<E extends INinteichosaItemKubun, T extends INinteich
      */
     public INinteichosaItemGroup[] get調査項目グループ() {
         return 調査項目グループ.clone();
-    }
-
-    /**
-     * 調査結果（調査項目単位）のインスタンスを生成して返します。
-     *
-     * @param 調査項目区分 調査項目区分
-     * @param 調査結果 調査結果（RString型）
-     * @return 調査結果
-     */
-    public NinteichosaItemForResult create調査結果(E 調査項目区分, RString 調査結果) {
-        INinteichosaItem item = get調査項目(調査項目区分);
-        return item == null ? null : new NinteichosaItemForResult(item, 調査結果);
-    }
-
-    /**
-     * 調査結果（調査項目単位）のインスタンスを生成して返します。
-     *
-     * @param 調査項目区分 調査項目区分
-     * @param 調査結果 調査結果（int型）
-     * @return 調査結果
-     */
-    public NinteichosaItemForResult create調査結果(E 調査項目区分, int 調査結果) {
-        return create調査結果(調査項目区分, new RString(String.valueOf(調査結果)));
-    }
-
-    /**
-     * 引数の調査項目区分に該当する調査結果をRString型で返します。
-     *
-     * @param 調査項目区分 調査項目区分
-     * @return 調査項目
-     */
-    public RString get調査結果ByStringValue(E 調査項目区分) {
-        NinteichosaItemForResult result = (NinteichosaItemForResult) get調査項目(調査項目区分);
-        return result == null ? null : result.get調査結果();
-    }
-
-    /**
-     * 引数の調査項目区分に該当する調査結果をint型で返します。
-     *
-     * @param 調査項目区分 調査項目区分
-     * @return 調査項目
-     */
-    public int get調査結果ByIntValue(E 調査項目区分) {
-        RString result = get調査結果ByStringValue(調査項目区分);
-        return result == null ? 0 : Integer.parseInt(result.toString());
-    }
-
-    /**
-     * 引数の調査項目区分に該当する調査結果をCode型で返します。
-     *
-     * @param 調査項目区分 調査項目区分
-     * @return 調査項目
-     */
-    public Code get調査結果ByCodeValue(E 調査項目区分) {
-        RString result = get調査結果ByStringValue(調査項目区分);
-        return result == null ? null : new Code(result);
     }
 }
