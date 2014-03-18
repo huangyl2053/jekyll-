@@ -6,7 +6,6 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBashoJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
@@ -129,7 +128,7 @@ public class GogitaiJohoTest {
     public static class hashCodeのテスト extends DbeTestBase {
 
         @Test
-        public void 合議体番号と合議体有効期間開始年月日が同一であるとき_hashCodeは同値になる() {
+        public void インスタンスが持つすべての要素が同一であるとき_hashCodeは同値になる() {
             sut1 = new GogitaiJoho(合議体番号_1, 合議体名称_ABC, 有効期間開始年月日_19990101, 有効期間終了年月日_20100101,
                     開始終了予定時刻_0930_1730, 審査会開催場所_A001, 審査会予定定員_5, 審査会自動割当定員_4,
                     審査会委員定員_6, 精神科医師存在_存在, 合議体ダミー_正規);
