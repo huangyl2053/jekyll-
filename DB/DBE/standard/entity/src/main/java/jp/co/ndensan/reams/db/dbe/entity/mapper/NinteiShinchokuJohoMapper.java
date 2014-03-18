@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ConsentToEnkitsuchiHakko;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ConsentsToEnkitsuchiHakko;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
@@ -34,7 +34,7 @@ public final class NinteiShinchokuJohoMapper {
         return new YokaigoninteiProgress(
                 entity.getShinseishoKanriNo(),
                 entity.getNinteiShinseiJohoTorokuYMD(),
-                ConsentToEnkitsuchiHakko.toValue(entity.isEnkitsuchiDoiUmuKubun()),
+                ConsentsToEnkitsuchiHakko.toValue(entity.isEnkitsuchiDoiUmuKubun()),
                 entity.getEnkitsuchiHakkoYMD(),
                 entity.getEnkitsuchiHakkoKaisu(),
                 entity.getNinteiEnkiRuyu(),

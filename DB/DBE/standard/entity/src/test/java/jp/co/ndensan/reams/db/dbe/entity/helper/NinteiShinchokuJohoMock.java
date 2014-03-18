@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.helper;
 
 import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ConsentToEnkitsuchiHakko;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ConsentsToEnkitsuchiHakko;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -74,7 +74,7 @@ public class NinteiShinchokuJohoMock {
         return new YokaigoninteiProgress(
                 申請書管理番号,
                 認定申請情報登録年月日,
-                ConsentToEnkitsuchiHakko.toValue(認定延期通知発行に対する同意有無),
+                ConsentsToEnkitsuchiHakko.toValue(認定延期通知発行に対する同意有無),
                 認定延期通知発行年月日,
                 認定延期通知発行回数,
                 要介護認定延期理由,
