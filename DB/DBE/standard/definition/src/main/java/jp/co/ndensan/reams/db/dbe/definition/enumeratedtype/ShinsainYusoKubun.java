@@ -17,15 +17,15 @@ public enum ShinsainYusoKubun {
     /**
      * 自宅に送付することを示す項目です。
      */
-    自宅(new RString("1")),
+    自宅("1"),
     /**
      * 所属機関に送付することを示す項目です。
      */
-    所属機関(new RString("2"));
+    所属機関("2");
     private final RString 郵送区分;
 
-    private ShinsainYusoKubun(RString 郵送区分) {
-        this.郵送区分 = 郵送区分;
+    private ShinsainYusoKubun(String 郵送区分) {
+        this.郵送区分 = new RString(郵送区分);
     }
 
     /**
