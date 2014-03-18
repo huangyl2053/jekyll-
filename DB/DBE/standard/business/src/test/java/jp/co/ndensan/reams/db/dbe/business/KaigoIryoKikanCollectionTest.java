@@ -237,6 +237,12 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
         }
 
         @Test
+        public void 医療機関状況に無効を指定したとき_sub介護医療機関Collectionは1件の要素を持つコレクションを返す() {
+            KaigoIryoKikanCollection results = sut.sub介護医療機関Collection(IryoKikanJokyo.無効);
+            assertThat(results.size(), is(1));
+        }
+
+        @Test
         public void 医療機関状況に有効を指定したとき_sub介護医療機関Collectionは_状況が有効_市町村コード1_介護医療機関コード1の要素を持つ() {
             KaigoIryoKikanCollection results = sut.sub介護医療機関Collection(IryoKikanJokyo.有効);
             KaigoIryoKikan result = results.get介護医療機関(create市町村コード("市町村コード1"), create介護医療機関コード("介護医療機関コード1"));
@@ -244,23 +250,17 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
         }
 
         @Test
-        public void 医療機関状況に有効を指定したとき_sub介護医療機関Collectionは_状況が有効_市町村コード3_介護医療機関コード3の要素を持つ() {
-            KaigoIryoKikanCollection results = sut.sub介護医療機関Collection(IryoKikanJokyo.有効);
-            KaigoIryoKikan result = results.get介護医療機関(create市町村コード("市町村コード3"), create介護医療機関コード("介護医療機関コード3"));
-            assertThat(result.get医療機関状況(), is(IryoKikanJokyo.有効));
-        }
-
-        @Test
-        public void 医療機関状況に無効を指定したとき_sub介護医療機関Collectionは1件の要素を持つコレクションを返す() {
-            KaigoIryoKikanCollection results = sut.sub介護医療機関Collection(IryoKikanJokyo.無効);
-            assertThat(results.size(), is(1));
-        }
-
-        @Test
         public void 医療機関状況に無効を指定したとき_sub介護医療機関Collectionは_状況が無効_市町村コード2_介護医療機関コード2の要素を持つ() {
             KaigoIryoKikanCollection results = sut.sub介護医療機関Collection(IryoKikanJokyo.無効);
             KaigoIryoKikan result = results.get介護医療機関(create市町村コード("市町村コード2"), create介護医療機関コード("介護医療機関コード2"));
             assertThat(result.get医療機関状況(), is(IryoKikanJokyo.無効));
+        }
+
+        @Test
+        public void 医療機関状況に有効を指定したとき_sub介護医療機関Collectionは_状況が有効_市町村コード3_介護医療機関コード3の要素を持つ() {
+            KaigoIryoKikanCollection results = sut.sub介護医療機関Collection(IryoKikanJokyo.有効);
+            KaigoIryoKikan result = results.get介護医療機関(create市町村コード("市町村コード3"), create介護医療機関コード("介護医療機関コード3"));
+            assertThat(result.get医療機関状況(), is(IryoKikanJokyo.有効));
         }
 
         private List<KaigoIryoKikan> create介護医療機関List() {
