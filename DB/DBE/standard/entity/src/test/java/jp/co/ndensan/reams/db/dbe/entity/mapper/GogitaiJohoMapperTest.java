@@ -254,7 +254,8 @@ public class GogitaiJohoMapperTest {
 
     private static ShinsakaiKaisaiBasho create審査会開催場所Mock(String str) {
         ShinsakaiKaisaiBasho 審査会開催場所mock = mock(ShinsakaiKaisaiBasho.class);
-        when(審査会開催場所mock.get開催場所コード()).thenReturn(new ShinsakaiKaisaiBashoCode(new RString(str)));
+        ShinsakaiKaisaiBashoCode bashoCode = new ShinsakaiKaisaiBashoCode(new RString(str));
+        when(審査会開催場所mock.get開催場所コード()).thenReturn(bashoCode);
         return 審査会開催場所mock;
     }
 

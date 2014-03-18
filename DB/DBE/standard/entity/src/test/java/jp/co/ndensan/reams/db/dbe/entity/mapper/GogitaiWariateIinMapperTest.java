@@ -193,8 +193,10 @@ public class GogitaiWariateIinMapperTest {
         GogitaiWariateShinsakaiIinEntity entity = new GogitaiWariateShinsakaiIinEntity();
 
         DbT5107GogitaiWariateIinJohoEntity 割当Entity = GogitaiMockEntityCreator.create合議体割当EntitySpy(1, "iin01", "19991212", "20101212");
-        when(割当Entity.getShinsainKubunCode()).thenReturn(認定調査員区分_iinCode_iinName.get区分コード());
-        when(割当Entity.getGogitaichoKubunCode()).thenReturn(合議体長区分_taichoCode_taichoName.get区分コード());
+        ShinsainKubunCode shinsakaiKubunCode = 認定調査員区分_iinCode_iinName.get区分コード();
+        when(割当Entity.getShinsainKubunCode()).thenReturn(shinsakaiKubunCode);
+        GogitaichoKubunCode gogitaichoKubunCode = 合議体長区分_taichoCode_taichoName.get区分コード();
+        when(割当Entity.getGogitaichoKubunCode()).thenReturn(gogitaichoKubunCode);
         entity.set割当Entity(割当Entity);
 
         entity.set委員Entity(GogitaiMockEntityCreator.create審査会委員Entity("iin01", "19990101"));

@@ -252,7 +252,8 @@ public class GogitaiJohoTest {
 
     private static ShinsakaiKaisaiBasho create審査会開催場所(String 開催場所コード) {
         ShinsakaiKaisaiBasho kaisaiBasho = mock(ShinsakaiKaisaiBasho.class);
-        when(kaisaiBasho.get開催場所コード()).thenReturn(new ShinsakaiKaisaiBashoCode(new RString(開催場所コード)));
+        ShinsakaiKaisaiBashoCode shinsakaiKaisaiBashoCode = new ShinsakaiKaisaiBashoCode(new RString(開催場所コード));
+        when(kaisaiBasho.get開催場所コード()).thenReturn(shinsakaiKaisaiBashoCode);
         return kaisaiBasho;
     }
 }

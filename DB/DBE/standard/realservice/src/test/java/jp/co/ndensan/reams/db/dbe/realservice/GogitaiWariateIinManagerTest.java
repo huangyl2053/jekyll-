@@ -72,7 +72,8 @@ public class GogitaiWariateIinManagerTest {
 
         private IGogitaiWariateShinsakaiIinDac create合議体割当委員DacMock(int 件数) {
             IGogitaiWariateShinsakaiIinDac dac = mock(IGogitaiWariateShinsakaiIinDac.class);
-            when(dac.select(any(GogitaiYukoKikanKaishiYMD.class))).thenReturn(create合議体割当委員EntityList(件数));
+            List<GogitaiWariateShinsakaiIinEntity> 合議体割当委員EntityList = create合議体割当委員EntityList(件数);
+            when(dac.select(any(GogitaiYukoKikanKaishiYMD.class))).thenReturn(合議体割当委員EntityList);
             return dac;
         }
     }
@@ -87,7 +88,8 @@ public class GogitaiWariateIinManagerTest {
 
         private IGogitaiWariateShinsakaiIinDac create合議体割当委員DacMock(int 件数) {
             IGogitaiWariateShinsakaiIinDac dac = mock(IGogitaiWariateShinsakaiIinDac.class);
-            when(dac.select(any(GogitaiNo.class), any(GogitaiYukoKikanKaishiYMD.class))).thenReturn(create合議体割当委員EntityList(件数));
+            List<GogitaiWariateShinsakaiIinEntity> 合議体割当委員EntityList = create合議体割当委員EntityList(件数);
+            when(dac.select(any(GogitaiNo.class), any(GogitaiYukoKikanKaishiYMD.class))).thenReturn(合議体割当委員EntityList);
             return dac;
         }
     }
@@ -149,7 +151,8 @@ public class GogitaiWariateIinManagerTest {
 
     private static ShinsakaiIin create審査会委員(String 委員コード) {
         ShinsakaiIin iin = mock(ShinsakaiIin.class);
-        when(iin.get委員コード()).thenReturn(new ShinsakaiIinCode(new RString(委員コード)));
+        ShinsakaiIinCode shinsakaiIinCode = new ShinsakaiIinCode(new RString(委員コード));
+        when(iin.get委員コード()).thenReturn(shinsakaiIinCode);
         return iin;
     }
 

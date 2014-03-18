@@ -67,7 +67,8 @@ public class GogitaiWariateIinListTest {
 
         private GogitaiWariateIin create合議体割当委員(String str, GogitaiJoho 合議体情報) {
             ShinsakaiIin 審査会委員 = mock(ShinsakaiIin.class);
-            when(審査会委員.get委員コード()).thenReturn(create委員コード(str));
+            ShinsakaiIinCode shinsakaiIinCode = create委員コード(str);
+            when(審査会委員.get委員コード()).thenReturn(shinsakaiIinCode);
 
             GogitaiWariateIin 割当委員 = mock(GogitaiWariateIin.class);
             when(割当委員.get委員情報()).thenReturn(審査会委員);

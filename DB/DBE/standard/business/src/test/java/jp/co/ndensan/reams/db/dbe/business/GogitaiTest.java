@@ -80,7 +80,8 @@ public class GogitaiTest {
         for (int i = 0; i < 3; i++) {
             GogitaiJoho info = create合議体情報(1, "19990101");
             ShinsakaiIin shinsakaiIin = mock(ShinsakaiIin.class);
-            when(shinsakaiIin.get委員コード()).thenReturn(new ShinsakaiIinCode(new RString("01")));
+            ShinsakaiIinCode shinsakaiIinCode = new ShinsakaiIinCode(new RString("01"));
+            when(shinsakaiIin.get委員コード()).thenReturn(shinsakaiIinCode);
 
             GogitaiWariateIin wariateIin = mock(GogitaiWariateIin.class);
             when(wariateIin.get合議体情報()).thenReturn(info);
@@ -96,7 +97,8 @@ public class GogitaiTest {
         for (int i = 0; i < 3; i++) {
             GogitaiJoho info = create合議体情報(i, "19990101");
             ShinsakaiIin shinsakaiIin = mock(ShinsakaiIin.class);
-            when(shinsakaiIin.get委員コード()).thenReturn(new ShinsakaiIinCode(new RString("01")));
+            ShinsakaiIinCode shinsakaiIinCode = new ShinsakaiIinCode(new RString("01"));
+            when(shinsakaiIin.get委員コード()).thenReturn(shinsakaiIinCode);
 
             GogitaiWariateIin wariateIin = mock(GogitaiWariateIin.class);
             when(wariateIin.get合議体情報()).thenReturn(info);

@@ -46,7 +46,8 @@ public class GogitaiManagerTest {
 
         private IGogitaiWariateShinsakaiIinDac createGogitaiWariateIinDacMock(int 件数) {
             IGogitaiWariateShinsakaiIinDac dac = mock(IGogitaiWariateShinsakaiIinDac.class);
-            when(dac.select(any(GogitaiNo.class))).thenReturn(create合議体割当委員EntityList(件数));
+            List<GogitaiWariateShinsakaiIinEntity> 合議体割当委員EntityList = create合議体割当委員EntityList(件数);
+            when(dac.select(any(GogitaiNo.class))).thenReturn(合議体割当委員EntityList);
             return dac;
         }
     }
@@ -62,7 +63,8 @@ public class GogitaiManagerTest {
 
         private IGogitaiWariateShinsakaiIinDac createGogitaiWariateIinDacMock(int 件数) {
             IGogitaiWariateShinsakaiIinDac dac = mock(IGogitaiWariateShinsakaiIinDac.class);
-            when(dac.select(any(GogitaiYukoKikanKaishiYMD.class))).thenReturn(create合議体割当委員EntityList(件数));
+            List<GogitaiWariateShinsakaiIinEntity> 合議体割当委員EntityList = create合議体割当委員EntityList(件数);
+            when(dac.select(any(GogitaiYukoKikanKaishiYMD.class))).thenReturn(合議体割当委員EntityList);
             return dac;
         }
     }
