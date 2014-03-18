@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.relate.helper;
 
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5102ShinsakaiIinJohoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.IInsertable;
+import jp.co.ndensan.reams.db.dbz.persistence.IInsertable;
 
 /**
  * 合議体割当審査会委員Dacテストのための、審査会委員の情報をinsertするクラスのインターフェースです。

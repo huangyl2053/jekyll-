@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbe.persistence.basic;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.IDeletable;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.IReplaceable;
+import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
+import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
