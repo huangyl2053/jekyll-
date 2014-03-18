@@ -82,7 +82,7 @@ public class GogitaiWariateIinList implements Iterable<GogitaiWariateIin> {
     }
 
     @Override
-    public Iterator iterator() {
+    public Iterator<GogitaiWariateIin> iterator() {
         return 合議体割当委員List.iterator();
     }
 }
