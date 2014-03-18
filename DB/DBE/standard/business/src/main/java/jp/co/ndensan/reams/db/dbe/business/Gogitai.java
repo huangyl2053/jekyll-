@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import static java.util.Objects.requireNonNull;
 
 /**
- * 合議体を表すクラスです。自身の情報と、自身を構成している合議体割当委員の情報で構成されています。
+ * 合議体を表すクラスです。自身の詳細な情報と、自身を構成している合議体割当委員の情報で構成されています。
  *
  * @author n8178 城間篤人
  */

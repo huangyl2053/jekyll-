@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 合議体を表すクラスです。
+ * 合議体の詳細な情報を表すクラスです。
  *
  * @author n8178 城間篤人
  */
