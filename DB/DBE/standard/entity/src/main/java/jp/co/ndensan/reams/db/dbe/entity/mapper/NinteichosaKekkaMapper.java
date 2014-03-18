@@ -73,8 +73,8 @@ public final class NinteichosaKekkaMapper {
 
     private static DbT5008NinteichosaKekkaJohoEntity toDbT5008NinteichosaKekkaJohoEntity(NinteichosaResult ninteichosaKekka) {
 
-        NinteichosaResultOfGaikyoKihon rsltKihon = ninteichosaKekka.get概況調査結果().get基本情報();
-        Ninteichosahyo<NinteichosaItemKubunOfGaikyo, NinteichosaItemForResult> rsltGaikyoService = ninteichosaKekka.get概況調査結果().getサービス状況();
+        NinteichosaResultOfGaikyoKihon rsltKihon = ninteichosaKekka.get概況調査結果().get概況調査結果基本情報();
+        Ninteichosahyo<NinteichosaItemKubunOfGaikyo, NinteichosaItemForResult> rsltGaikyoService = ninteichosaKekka.get概況調査結果().get概況調査結果サービス状況();
 
         DbT5008NinteichosaKekkaJohoEntity entity = new DbT5008NinteichosaKekkaJohoEntity();
         entity.setShinseishoKanriNo(ninteichosaKekka.get概況調査結果().get申請書管理番号());
@@ -127,7 +127,7 @@ public final class NinteichosaKekkaMapper {
 
     private static DbT5009NinteichosahyoJohoEntity toDbT5009NinteichosahyoJohoEntity(NinteichosaResult ninteichosaKekka) {
 
-        Ninteichosahyo<NinteichosaItemKubunOfKihon, NinteichosaItemForResult> rsltKihon = ninteichosaKekka.get基本調査結果().get基本情報();
+        Ninteichosahyo<NinteichosaItemKubunOfKihon, NinteichosaItemForResult> rsltKihon = ninteichosaKekka.get基本調査結果().get基本調査結果();
 
         DbT5009NinteichosahyoJohoEntity entity = new DbT5009NinteichosahyoJohoEntity();
         entity.setShinseishoKanriNo(ninteichosaKekka.get基本調査結果().get申請書管理番号());

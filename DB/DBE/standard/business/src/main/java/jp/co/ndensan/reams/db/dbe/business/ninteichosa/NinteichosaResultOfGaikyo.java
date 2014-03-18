@@ -21,8 +21,8 @@ public class NinteichosaResultOfGaikyo {
     private final ShinseishoKanriNo 申請書管理番号;
     private final NinteichosaIraiRirekiNo 認定調査依頼履歴番号;
     private final KoroshoIFKubun 厚労省IF識別区分;
-    private final NinteichosaResultOfGaikyoKihon 基本情報;
-    private final Ninteichosahyo<NinteichosaItemKubunOfGaikyo, NinteichosaItemForResult> サービス状況;
+    private final NinteichosaResultOfGaikyoKihon 概況調査結果基本情報;
+    private final Ninteichosahyo<NinteichosaItemKubunOfGaikyo, NinteichosaItemForResult> 概況調査結果サービス状況;
 
     /**
      * インスタンスを生成します。
@@ -30,17 +30,17 @@ public class NinteichosaResultOfGaikyo {
      * @param 申請書管理番号 申請書管理番号
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
      * @param 厚労省IF識別区分 厚労省IF識別区分
-     * @param 基本情報 基本情報
-     * @param サービス状況 サービス状況
+     * @param 概況調査結果基本情報 概況調査結果基本情報
+     * @param 概況調査結果サービス状況 概況調査結果サービス状況
      */
     public NinteichosaResultOfGaikyo(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号,
-            KoroshoIFKubun 厚労省IF識別区分, NinteichosaResultOfGaikyoKihon 基本情報,
-            Ninteichosahyo<NinteichosaItemKubunOfGaikyo, NinteichosaItemForResult> サービス状況) {
+            KoroshoIFKubun 厚労省IF識別区分, NinteichosaResultOfGaikyoKihon 概況調査結果基本情報,
+            Ninteichosahyo<NinteichosaItemKubunOfGaikyo, NinteichosaItemForResult> 概況調査結果サービス状況) {
         this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00001.replace("申請書管理番号").getMessage());
         this.認定調査依頼履歴番号 = requireNonNull(認定調査依頼履歴番号, Messages.E00001.replace("認定調査依頼履歴番号").getMessage());
         this.厚労省IF識別区分 = requireNonNull(厚労省IF識別区分, Messages.E00001.replace("厚労省IF識別区分").getMessage());
-        this.基本情報 = requireNonNull(基本情報, Messages.E00001.replace("基本情報").getMessage());
-        this.サービス状況 = requireNonNull(サービス状況, Messages.E00001.replace("サービス状況").getMessage());
+        this.概況調査結果基本情報 = requireNonNull(概況調査結果基本情報, Messages.E00001.replace("概況調査結果基本情報").getMessage());
+        this.概況調査結果サービス状況 = requireNonNull(概況調査結果サービス状況, Messages.E00001.replace("概況調査結果サービス状況").getMessage());
     }
 
     /**
@@ -71,20 +71,20 @@ public class NinteichosaResultOfGaikyo {
     }
 
     /**
-     * 調査結果（基本情報）を返します。
+     * 概況調査結果基本情報を返します。
      *
-     * @return 調査結果（基本情報）
+     * @return 概況調査結果基本情報
      */
-    public NinteichosaResultOfGaikyoKihon get基本情報() {
-        return 基本情報;
+    public NinteichosaResultOfGaikyoKihon get概況調査結果基本情報() {
+        return 概況調査結果基本情報;
     }
 
     /**
-     * 調査結果（サービス状況）を返します。
+     * 概況調査結果サービス状況を返します。
      *
-     * @return 調査結果（サービス状況）
+     * @return 概況調査結果サービス状況
      */
-    public Ninteichosahyo<NinteichosaItemKubunOfGaikyo, NinteichosaItemForResult> getサービス状況() {
-        return サービス状況;
+    public Ninteichosahyo<NinteichosaItemKubunOfGaikyo, NinteichosaItemForResult> get概況調査結果サービス状況() {
+        return 概況調査結果サービス状況;
     }
 }

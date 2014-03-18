@@ -21,7 +21,7 @@ public class NinteichosaResultOfKihon {
     private final ShinseishoKanriNo 申請書管理番号;
     private final NinteichosaIraiRirekiNo 認定調査依頼履歴番号;
     private final KoroshoIFKubun 厚労省IF識別区分;
-    private final Ninteichosahyo<NinteichosaItemKubunOfKihon, NinteichosaItemForResult> 基本情報;
+    private final Ninteichosahyo<NinteichosaItemKubunOfKihon, NinteichosaItemForResult> 基本調査結果;
 
     /**
      * インスタンスを生成します。
@@ -29,14 +29,14 @@ public class NinteichosaResultOfKihon {
      * @param 申請書管理番号 申請書管理番号
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
      * @param 厚労省IF識別区分 厚労省IF識別区分
-     * @param 基本情報 基本情報
+     * @param 基本調査結果 基本調査結果
      */
     public NinteichosaResultOfKihon(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号,
-            KoroshoIFKubun 厚労省IF識別区分, Ninteichosahyo<NinteichosaItemKubunOfKihon, NinteichosaItemForResult> 基本情報) {
+            KoroshoIFKubun 厚労省IF識別区分, Ninteichosahyo<NinteichosaItemKubunOfKihon, NinteichosaItemForResult> 基本調査結果) {
         this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00001.replace("申請書管理番号").getMessage());
         this.認定調査依頼履歴番号 = requireNonNull(認定調査依頼履歴番号, Messages.E00001.replace("認定調査依頼履歴番号").getMessage());
         this.厚労省IF識別区分 = requireNonNull(厚労省IF識別区分, Messages.E00001.replace("厚労省IF識別区分").getMessage());
-        this.基本情報 = requireNonNull(基本情報, Messages.E00001.replace("基本情報").getMessage());
+        this.基本調査結果 = requireNonNull(基本調査結果, Messages.E00001.replace("基本調査結果").getMessage());
     }
 
     /**
@@ -67,11 +67,11 @@ public class NinteichosaResultOfKihon {
     }
 
     /**
-     * 調査結果（基本情報）を返します。
+     * 基本調査結果を返します。
      *
-     * @return 調査結果（基本情報）
+     * @return 基本調査結果
      */
-    public Ninteichosahyo<NinteichosaItemKubunOfKihon, NinteichosaItemForResult> get基本情報() {
-        return 基本情報;
+    public Ninteichosahyo<NinteichosaItemKubunOfKihon, NinteichosaItemForResult> get基本調査結果() {
+        return 基本調査結果;
     }
 }
