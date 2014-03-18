@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResult;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaKekkaEntityMock;
@@ -52,7 +52,7 @@ public class NinteichosaKekkaMapperTest {
 
         @Test
         public void 認定調査依頼区分の設定がある時_toNinteichosaResult_get認定調査依頼区分は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().get概況調査結果基本情報().get認定調査依頼区分(), is(NinteichosaIraiKubunCode.初回));
+            assertThat(toNinteichosaResult().get概況調査結果().get概況調査結果基本情報().get認定調査依頼区分(), is(NinteichosaIraiKubun.初回));
         }
 
         @Test
@@ -637,7 +637,7 @@ public class NinteichosaKekkaMapperTest {
 
         @Test
         public void 認定調査依頼区分の設定がある時_toNinteichosaKekkaEntity_getNinteichousaIraiKubunCodeは_設定値を返す() {
-            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getNinteichousaIraiKubunCode().value(), is(NinteichosaIraiKubunCode.初回.getCode()));
+            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getNinteichousaIraiKubunCode().value(), is(NinteichosaIraiKubun.初回.getCode()));
         }
 
         @Test

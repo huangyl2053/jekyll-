@@ -17,21 +17,21 @@ public enum ShinsakaiFuriwakeKubun {
      * 審査会優先振分区分が「直近の審査会への割付希望」であることを表します。<br />
      * コード : 1
      */
-    直近の審査会への割付希望(1),
+    直近の審査会への割付希望("1"),
     /**
      * 審査会優先振分区分が「精神科医のいる審査会への割付希望」であることを表します。<br />
      * コード : 2
      */
-    精神科医のいる審査会への割付希望(2),
+    精神科医のいる審査会への割付希望("2"),
     /**
      * 審査会優先振分区分が「希望無し」であることを表します。<br />
      * コード : 0
      */
-    希望無し(0);
-    private final int code;
+    希望無し("0");
+    private final RString code;
 
-    private ShinsakaiFuriwakeKubun(int code) {
-        this.code = code;
+    private ShinsakaiFuriwakeKubun(String code) {
+        this.code = new RString(code);
     }
 
     /**
@@ -40,7 +40,7 @@ public enum ShinsakaiFuriwakeKubun {
      * @return コード
      */
     public RString getCode() {
-        return new RString(Integer.toString(this.code));
+        return code;
     }
 
     /**

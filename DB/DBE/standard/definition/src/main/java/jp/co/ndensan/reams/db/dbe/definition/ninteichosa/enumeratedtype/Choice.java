@@ -23,16 +23,16 @@ public class Choice {
          * 「自由入力」であることを表します。<br />
          * 値 : 1
          */
-        自由入力(1);
-        private int value;
+        自由入力("1");
+        private RString value;
 
-        private FreeInput(int value) {
-            this.value = value;
+        private FreeInput(String value) {
+            this.value = new RString(value);
         }
 
         @Override
         public RString getValue() {
-            return new RString(Integer.toString(value));
+            return value;
         }
 
         @Override
@@ -51,21 +51,21 @@ public class Choice {
          * 「チェック無し」であることを表します。<br />
          * 値 : 1
          */
-        無し(1),
+        無し("1"),
         /**
          * 「チェック有り」であることを表します。<br />
          * 値 : 2
          */
-        有り(2);
-        private int value;
+        有り("2");
+        private RString value;
 
-        private Checked(int value) {
-            this.value = value;
+        private Checked(String value) {
+            this.value = new RString(value);
         }
 
         @Override
         public RString getValue() {
-            return new RString(Integer.toString(value));
+            return value;
         }
 
         @Override
@@ -83,21 +83,21 @@ public class Choice {
          * 選択肢が「ない」であることを表します。<br />
          * 値 : 1
          */
-        ない(1),
+        ない("1"),
         /**
          * 選択肢が「ある」であることを表します。<br />
          * 値 : 2
          */
-        ある(2);
-        private int value;
+        ある("2");
+        private RString value;
 
-        private NaiAru(int value) {
-            this.value = value;
+        private NaiAru(String value) {
+            this.value = new RString(value);
         }
 
         @Override
         public RString getValue() {
-            return new RString(Integer.toString(value));
+            return value;
         }
 
         @Override
@@ -115,26 +115,26 @@ public class Choice {
          * 選択肢が「ない」であることを表します。<br />
          * 値 : 1
          */
-        ない(1),
+        ない("1"),
         /**
          * 選択肢が「ときどきある」であることを表します。<br />
          * 値 : 2
          */
-        ときどきある(2),
+        ときどきある("2"),
         /**
          * 選択肢が「ある」であることを表します。<br />
          * 値 : 3
          */
-        ある(3);
-        private int value;
+        ある("3");
+        private RString value;
 
-        private NaiAru2(int value) {
-            this.value = value;
+        private NaiAru2(String value) {
+            this.value = new RString(value);
         }
 
         @Override
         public RString getValue() {
-            return new RString(Integer.toString(value));
+            return value;
         }
 
         @Override
@@ -152,21 +152,21 @@ public class Choice {
          * 選択肢が「できる」であることを表します。<br />
          * 値 : 1
          */
-        できる(1),
+        できる("1"),
         /**
          * 選択肢が「できない」であることを表します。<br />
          * 値 : 2
          */
-        できない(2);
-        private int value;
+        できない("2");
+        private RString value;
 
-        private DekiruDekinai(int value) {
-            this.value = value;
+        private DekiruDekinai(String value) {
+            this.value = new RString(value);
         }
 
         @Override
         public RString getValue() {
-            return new RString(Integer.toString(value));
+            return value;
         }
 
         @Override
@@ -184,31 +184,31 @@ public class Choice {
          * 選択肢が「できる」であることを表します。<br />
          * 値 : 1
          */
-        できる(1),
+        できる("1"),
         /**
          * 選択肢が「ときどきできる」であることを表します。<br />
          * 値 : 2
          */
-        ときどきできる(2),
+        ときどきできる("2"),
         /**
          * 選択肢が「ほとんど不可」であることを表します。<br />
          * 値 : 3
          */
-        ほとんど不可(3),
+        ほとんど不可("3"),
         /**
          * 選択肢が「できない」であることを表します。<br />
          * 値 : 4
          */
-        できない(4);
-        private int value;
+        できない("4");
+        private RString value;
 
-        private DekiruDekinai2(int value) {
-            this.value = value;
+        private DekiruDekinai2(String value) {
+            this.value = new RString(value);
         }
 
         @Override
         public RString getValue() {
-            return new RString(Integer.toString(value));
+            return value;
         }
 
         @Override
@@ -226,26 +226,26 @@ public class Choice {
          * 選択肢が「できる」であることを表します。<br />
          * 値 : 1
          */
-        できる(1),
+        できる("1"),
         /**
          * 選択肢が「つかまれば可」であることを表します。<br />
          * 値 : 2
          */
-        つかまれば可(2),
+        つかまれば可("2"),
         /**
          * 選択肢が「できない」であることを表します。<br />
          * 値 : 3
          */
-        できない(3);
-        private int value;
+        できない("3");
+        private RString value;
 
-        private DekiruDekinai3(int value) {
-            this.value = value;
+        private DekiruDekinai3(String value) {
+            this.value = new RString(value);
         }
 
         @Override
         public RString getValue() {
-            return new RString(Integer.toString(value));
+            return value;
         }
 
         @Override
@@ -263,26 +263,26 @@ public class Choice {
          * 選択肢が「できる」であることを表します。<br />
          * 値 : 1
          */
-        できる(1),
+        できる("1"),
         /**
          * 選択肢が「見守り等」であることを表します。<br />
          * 値 : 2
          */
-        見守り等(2),
+        見守り等("2"),
         /**
          * 選択肢が「できない」であることを表します。<br />
          * 値 : 3
          */
-        できない(3);
-        private int value;
+        できない("3");
+        private RString value;
 
-        private DekiruDekinai4(int value) {
-            this.value = value;
+        private DekiruDekinai4(String value) {
+            this.value = new RString(value);
         }
 
         @Override
         public RString getValue() {
-            return new RString(Integer.toString(value));
+            return value;
         }
 
         @Override
@@ -300,26 +300,26 @@ public class Choice {
          * 選択肢が「できる」であることを表します。<br />
          * 値 : 1
          */
-        できる(1),
+        できる("1"),
         /**
          * 選択肢が「支えが必要」であることを表します。<br />
          * 値 : 2
          */
-        支えが必要(2),
+        支えが必要("2"),
         /**
          * 選択肢が「できない」であることを表します。<br />
          * 値 : 3
          */
-        できない(3);
-        private int value;
+        できない("3");
+        private RString value;
 
-        private DekiruDekinai5(int value) {
-            this.value = value;
+        private DekiruDekinai5(String value) {
+            this.value = new RString(value);
         }
 
         @Override
         public RString getValue() {
-            return new RString(Integer.toString(value));
+            return value;
         }
 
         @Override
@@ -337,31 +337,31 @@ public class Choice {
          * 選択肢が「できる」であることを表します。<br />
          * 値 : 1
          */
-        できる(1),
+        できる("1"),
         /**
          * 選択肢が「自分で支えれば可」であることを表します。<br />
          * 値 : 2
          */
-        自分で支えれば可(2),
+        自分で支えれば可("2"),
         /**
          * 選択肢が「支えが必要」であることを表します。<br />
          * 値 : 3
          */
-        支えが必要(3),
+        支えが必要("3"),
         /**
          * 選択肢が「できない」であることを表します。<br />
          * 値 : 4
          */
-        できない(4);
-        private int value;
+        できない("4");
+        private RString value;
 
-        private DekiruDekinai6(int value) {
-            this.value = value;
+        private DekiruDekinai6(String value) {
+            this.value = new RString(value);
         }
 
         @Override
         public RString getValue() {
-            return new RString(Integer.toString(value));
+            return value;
         }
 
         @Override
@@ -379,31 +379,31 @@ public class Choice {
          * 選択肢が「できる」であることを表します。<br />
          * 値 : 1
          */
-        できる(1),
+        できる("1"),
         /**
          * 選択肢が「特別な場合を除いてできる」であることを表します。<br />
          * 値 : 2
          */
-        特別な場合を除いてできる(2),
+        特別な場合を除いてできる("2"),
         /**
          * 選択肢が「日常的に困難」であることを表します。<br />
          * 値 : 3
          */
-        日常的に困難(3),
+        日常的に困難("3"),
         /**
          * 選択肢が「できない」であることを表します。<br />
          * 値 : 4
          */
-        できない(4);
-        private int value;
+        できない("4");
+        private RString value;
 
-        private DekiruDekinai7(int value) {
-            this.value = value;
+        private DekiruDekinai7(String value) {
+            this.value = new RString(value);
         }
 
         @Override
         public RString getValue() {
-            return new RString(Integer.toString(value));
+            return value;
         }
 
         @Override
@@ -421,26 +421,26 @@ public class Choice {
          * 選択肢が「自立」であることを表します。<br />
          * 値 : 1
          */
-        自立(1),
+        自立("1"),
         /**
          * 選択肢が「一部介助」であることを表します。<br />
          * 値 : 2
          */
-        一部介助(2),
+        一部介助("2"),
         /**
          * 選択肢が「全介助」であることを表します。<br />
          * 値 : 3
          */
-        全介助(3);
-        private int value;
+        全介助("3");
+        private RString value;
 
-        private Kaijo(int value) {
-            this.value = value;
+        private Kaijo(String value) {
+            this.value = new RString(value);
         }
 
         @Override
         public RString getValue() {
-            return new RString(Integer.toString(value));
+            return value;
         }
 
         @Override
@@ -458,31 +458,31 @@ public class Choice {
          * 選択肢が「自立」であることを表します。<br />
          * 値 : 1
          */
-        自立(1),
+        自立("1"),
         /**
          * 選択肢が「一部介助」であることを表します。<br />
          * 値 : 2
          */
-        一部介助(2),
+        一部介助("2"),
         /**
          * 選択肢が「全介助」であることを表します。<br />
          * 値 : 3
          */
-        全介助(3),
+        全介助("3"),
         /**
          * 選択肢が「行っていない」であることを表します。<br />
          * 値 : 4
          */
-        行っていない(4);
-        private int value;
+        行っていない("4");
+        private RString value;
 
-        private Kaijo2(int value) {
-            this.value = value;
+        private Kaijo2(String value) {
+            this.value = new RString(value);
         }
 
         @Override
         public RString getValue() {
-            return new RString(Integer.toString(value));
+            return value;
         }
 
         @Override
@@ -500,31 +500,31 @@ public class Choice {
          * 選択肢が「自立」であることを表します。<br />
          * 値 : 1
          */
-        自立(1),
+        自立("1"),
         /**
          * 選択肢が「見守り等」であることを表します。<br />
          * 値 : 2
          */
-        見守り等(2),
+        見守り等("2"),
         /**
          * 選択肢が「一部介助」であることを表します。<br />
          * 値 : 3
          */
-        一部介助(3),
+        一部介助("3"),
         /**
          * 選択肢が「全介助」であることを表します。<br />
          * 値 : 4
          */
-        全介助(4);
-        private int value;
+        全介助("4");
+        private RString value;
 
-        private Kaijo3(int value) {
-            this.value = value;
+        private Kaijo3(String value) {
+            this.value = new RString(value);
         }
 
         @Override
         public RString getValue() {
-            return new RString(Integer.toString(value));
+            return value;
         }
 
         @Override
@@ -542,36 +542,36 @@ public class Choice {
          * 選択肢が「普通」であることを表します。<br />
          * 値 : 1
          */
-        普通(1),
+        普通("1"),
         /**
          * 選択肢が「１ｍ先が見える」であることを表します。<br />
          * 値 : 2
          */
-        一ｍ先が見える(2),
+        一ｍ先が見える("2"),
         /**
          * 選択肢が「目の前が見える」であることを表します。<br />
          * 値 : 3
          */
-        目の前が見える(3),
+        目の前が見える("3"),
         /**
          * 選択肢が「ほとんど見えず」であることを表します。<br />
          * 値 : 4
          */
-        ほとんど見えず(4),
+        ほとんど見えず("4"),
         /**
          * 選択肢が「判断不能」であることを表します。<br />
          * 値 : 5
          */
-        判断不能(5);
-        private int value;
+        判断不能("5");
+        private RString value;
 
-        private Shiryoku(int value) {
-            this.value = value;
+        private Shiryoku(String value) {
+            this.value = new RString(value);
         }
 
         @Override
         public RString getValue() {
-            return new RString(Integer.toString(value));
+            return value;
         }
 
         @Override
@@ -589,36 +589,36 @@ public class Choice {
          * 選択肢が「普通」であることを表します。<br />
          * 値 : 1
          */
-        普通(1),
+        普通("1"),
         /**
          * 選択肢が「やっと聞こえる」であることを表します。<br />
          * 値 : 2
          */
-        やっと聞こえる(2),
+        やっと聞こえる("2"),
         /**
          * 選択肢が「大声が聞こえる」であることを表します。<br />
          * 値 : 3
          */
-        大声が聞こえる(3),
+        大声が聞こえる("3"),
         /**
          * 選択肢が「ほとんど聞こえず」であることを表します。<br />
          * 値 : 4
          */
-        ほとんど聞こえず(4),
+        ほとんど聞こえず("4"),
         /**
          * 選択肢が「判断不能」であることを表します。<br />
          * 値 : 5
          */
-        判断不能(5);
-        private int value;
+        判断不能("5");
+        private RString value;
 
-        private Choryoku(int value) {
-            this.value = value;
+        private Choryoku(String value) {
+            this.value = new RString(value);
         }
 
         @Override
         public RString getValue() {
-            return new RString(Integer.toString(value));
+            return value;
         }
 
         @Override
@@ -636,26 +636,26 @@ public class Choice {
          * 選択肢が「週１回以上」であることを表します。<br />
          * 値 : 1
          */
-        週１回以上(1),
+        週１回以上("1"),
         /**
          * 選択肢が「月１回以上」であることを表します。<br />
          * 値 : 2
          */
-        月１回以上(2),
+        月１回以上("2"),
         /**
          * 選択肢が「月１回未満」であることを表します。<br />
          * 値 : 3
          */
-        月１回未満(3);
-        private int value;
+        月１回未満("3");
+        private RString value;
 
-        private Gaishutsu(int value) {
-            this.value = value;
+        private Gaishutsu(String value) {
+            this.value = new RString(value);
         }
 
         @Override
         public RString getValue() {
-            return new RString(Integer.toString(value));
+            return value;
         }
 
         @Override
@@ -673,26 +673,26 @@ public class Choice {
          * 選択肢が「指示が通じる」であることを表します。<br />
          * 値 : 1
          */
-        指示が通じる(1),
+        指示が通じる("1"),
         /**
          * 選択肢が「ときどき通じる」であることを表します。<br />
          * 値 : 2
          */
-        ときどき通じる(2),
+        ときどき通じる("2"),
         /**
          * 選択肢が「指示が通じない」であることを表します。<br />
          * 値 : 3
          */
-        指示が通じない(3);
-        private int value;
+        指示が通じない("3");
+        private RString value;
 
-        private Shiji(int value) {
-            this.value = value;
+        private Shiji(String value) {
+            this.value = new RString(value);
         }
 
         @Override
         public RString getValue() {
-            return new RString(Integer.toString(value));
+            return value;
         }
 
         @Override
@@ -710,56 +710,56 @@ public class Choice {
          * 選択肢が「自立」であることを表します。<br />
          * 値 : 1
          */
-        自立(1),
+        自立("1"),
         /**
          * 選択肢が「Ｊ１」であることを表します。<br />
          * 値 : 2
          */
-        Ｊ１(2),
+        Ｊ１("2"),
         /**
          * 選択肢が「Ｊ２」であることを表します。<br />
          * 値 : 3
          */
-        Ｊ２(3),
+        Ｊ２("3"),
         /**
          * 選択肢が「Ａ１」であることを表します。<br />
          * 値 : 4
          */
-        Ａ１(4),
+        Ａ１("4"),
         /**
          * 選択肢が「Ａ２」であることを表します。<br />
          * 値 : 5
          */
-        Ａ２(5),
+        Ａ２("5"),
         /**
          * 選択肢が「Ｂ１」であることを表します。<br />
          * 値 : 6
          */
-        Ｂ１(6),
+        Ｂ１("6"),
         /**
          * 選択肢が「Ｂ２」であることを表します。<br />
          * 値 : 7
          */
-        Ｂ２(7),
+        Ｂ２("7"),
         /**
          * 選択肢が「Ｃ１」であることを表します。<br />
          * 値 : 8
          */
-        Ｃ１(8),
+        Ｃ１("8"),
         /**
          * 選択肢が「Ｃ２」であることを表します。<br />
          * 値 : 9
          */
-        Ｃ２(9);
-        private int value;
+        Ｃ２("9");
+        private RString value;
 
-        private ShogaiJiritsu(int value) {
-            this.value = value;
+        private ShogaiJiritsu(String value) {
+            this.value = new RString(value);
         }
 
         @Override
         public RString getValue() {
-            return new RString(Integer.toString(value));
+            return value;
         }
 
         @Override
@@ -777,56 +777,56 @@ public class Choice {
          * 選択肢が「自立」であることを表します。<br />
          * 値 : 1
          */
-        自立(1),
+        自立("1"),
         /**
          * 選択肢が「Ⅰ」であることを表します。<br />
          * 値 : 2
          */
-        Ⅰ(2),
+        Ⅰ("2"),
         /**
          * 選択肢が「Ⅱａ」であることを表します。<br />
          * 値 : 3
          */
-        Ⅱａ(3),
+        Ⅱａ("3"),
         /**
          * 選択肢が「Ⅱｂ」であることを表します。<br />
          * 値 : 4
          */
-        Ⅱｂ(4),
+        Ⅱｂ("4"),
         /**
          * 選択肢が「Ⅲａ」であることを表します。<br />
          * 値 : 5
          */
-        Ⅲａ(5),
+        Ⅲａ("5"),
         /**
          * 選択肢が「Ⅲｂ」であることを表します。<br />
          * 値 : 6
          */
-        Ⅲｂ(6),
+        Ⅲｂ("6"),
         /**
          * 選択肢が「Ⅳ」であることを表します。<br />
          * 値 : 7
          */
-        Ⅳ(7),
+        Ⅳ("7"),
         /**
          * 選択肢が「Ｍ」であることを表します。<br />
          * 値 : 8
          */
-        Ｍ(8),
+        Ｍ("8"),
         /**
          * 選択肢が「記載なし」であることを表します。<br />
          * 値 : 9
          */
-        記載なし(9);
-        private int value;
+        記載なし("9");
+        private RString value;
 
-        private NinchishoJiritsu(int value) {
-            this.value = value;
+        private NinchishoJiritsu(String value) {
+            this.value = new RString(value);
         }
 
         @Override
         public RString getValue() {
-            return new RString(Integer.toString(value));
+            return value;
         }
 
         @Override
@@ -844,26 +844,26 @@ public class Choice {
          * 選択肢が「予防」であることを表します。<br />
          * 値 : 1
          */
-        予防(1),
+        予防("1"),
         /**
          * 選択肢が「介護」であることを表します。<br />
          * 値 : 2
          */
-        介護(2),
+        介護("2"),
         /**
          * 選択肢が「なし」であることを表します。<br />
          * 値 : 9
          */
-        なし(9);
-        private int value;
+        なし("9");
+        private RString value;
 
-        private ServiceKubun(int value) {
-            this.value = value;
+        private ServiceKubun(String value) {
+            this.value = new RString(value);
         }
 
         @Override
         public RString getValue() {
-            return new RString(Integer.toString(value));
+            return value;
         }
 
         @Override
@@ -881,51 +881,51 @@ public class Choice {
          * 選択肢が「介護老人福祉施設」であることを表します。<br />
          * 値 : 1
          */
-        介護老人福祉施設(1),
+        介護老人福祉施設("1"),
         /**
          * 選択肢が「介護老人保健施設」であることを表します。<br />
          * 値 : 2
          */
-        介護老人保健施設(2),
+        介護老人保健施設("2"),
         /**
          * 選択肢が「介護療養型医療施設」であることを表します。<br />
          * 値 : 3
          */
-        介護療養型医療施設(3),
+        介護療養型医療施設("3"),
         /**
          * 選択肢が「認知症対応型共同生活介護適用施設」であることを表します。<br />
          * 値 : 4
          */
-        認知症対応型共同生活介護適用施設(4),
+        認知症対応型共同生活介護適用施設("4"),
         /**
          * 選択肢が「特定施設入居者生活介護適用施設」であることを表します。<br />
          * 値 : 5
          */
-        特定施設入居者生活介護適用施設(5),
+        特定施設入居者生活介護適用施設("5"),
         /**
          * 選択肢が「医療機関_医療保険適用療養病床」であることを表します。<br />
          * 値 : 6
          */
-        医療機関_医療保険適用療養病床(6),
+        医療機関_医療保険適用療養病床("6"),
         /**
          * 選択肢が「医療機関_医療保険適用療養病床」であることを表します。<br />
          * 値 : 7
          */
-        医療機関_療養病床以外(7),
+        医療機関_療養病床以外("7"),
         /**
          * 選択肢が「その他の施設」であることを表します。<br />
          * 値 : 8
          */
-        その他の施設(8);
-        private int value;
+        その他の施設("8");
+        private RString value;
 
-        private ShisetsuRiyo(int value) {
-            this.value = value;
+        private ShisetsuRiyo(String value) {
+            this.value = new RString(value);
         }
 
         @Override
         public RString getValue() {
-            return new RString(Integer.toString(value));
+            return value;
         }
 
         @Override

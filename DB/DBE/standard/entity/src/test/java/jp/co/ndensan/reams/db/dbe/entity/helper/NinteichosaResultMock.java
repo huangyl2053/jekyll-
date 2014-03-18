@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResult;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyo;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyoKihon;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfKihon;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroup;
@@ -104,7 +104,7 @@ public class NinteichosaResultMock {
                 new NinteichosaIraiRirekiNo(0),
                 KoroshoIFKubun.V09A,
                 new NinteichosaResultOfGaikyoKihon(
-                NinteichosaIraiKubunCode.初回,
+                NinteichosaIraiKubun.初回,
                 1,
                 new FlexibleDate("20140101"),
                 new FlexibleDate("20140202"),

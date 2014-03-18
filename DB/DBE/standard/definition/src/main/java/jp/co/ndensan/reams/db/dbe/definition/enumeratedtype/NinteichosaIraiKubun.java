@@ -8,29 +8,29 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 認定調査依頼区分コードを表す列挙型です。
+ * 認定調査依頼区分を表す列挙型です。
  *
  * @author n8178 城間篤人
  */
 //TODO n8178 城間篤人 項目に見直しが入る可能性があり 2014年2月末
-public enum NinteichosaIraiKubunCode {
+public enum NinteichosaIraiKubun {
 
     /**
      * 初回であることを表します。
      */
-    初回(new RString("0")),
+    初回("0"),
     /**
      * 再依頼であることを表します。
      */
-    再依頼(new RString("1")),
+    再依頼("1"),
     /**
      * 再調査であることを表します。
      */
-    再調査(new RString("2"));
+    再調査("2");
     private final RString 区分コード;
 
-    private NinteichosaIraiKubunCode(RString 区分コード) {
-        this.区分コード = 区分コード;
+    private NinteichosaIraiKubun(String 区分コード) {
+        this.区分コード = new RString(区分コード);
     }
 
     /**
@@ -43,18 +43,18 @@ public enum NinteichosaIraiKubunCode {
     }
 
     /**
-     * 引数から渡されたコードに対応した、認定調査依頼区分コードを返します。
+     * 引数から渡されたコードに対応した、認定調査依頼区分を返します。
      *
      * @param 区分コード 区分コード
-     * @return 認定調査依頼区分コード
+     * @return 認定調査依頼区分
      * @throws IllegalArgumentException 対応する認定調査委依頼区分コードが存在しないとき
      */
-    public static NinteichosaIraiKubunCode toValue(RString 区分コード) throws IllegalArgumentException {
-        for (NinteichosaIraiKubunCode code : values()) {
+    public static NinteichosaIraiKubun toValue(RString 区分コード) throws IllegalArgumentException {
+        for (NinteichosaIraiKubun code : values()) {
             if (code.getCode().equals(区分コード)) {
                 return code;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("対応する認定調査依頼区分コード").getMessage());
+        throw new IllegalArgumentException(Messages.E00006.replace("対応する認定調査依頼区分").getMessage());
     }
 }

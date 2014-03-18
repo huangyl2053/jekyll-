@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.realservice.helper;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
@@ -55,7 +55,7 @@ public class NinteichosaKekkaEntityMock {
         entity.setShinseishoKanriNo(new ShinseishoKanriNo(new RString("1234567890")));
         entity.setNinteichosaRirekiNo(0);
         entity.setKoroshoIfShikibetsuCode(new RString("09A"));
-        entity.setNinteichousaIraiKubunCode(new Code(NinteichosaIraiKubunCode.初回.getCode()));
+        entity.setNinteichousaIraiKubunCode(new Code(NinteichosaIraiKubun.初回.getCode()));
         entity.setNinteichosaIraiKaisu(1);
         entity.setNinteichosaJisshiYMD(new FlexibleDate("20140101"));
         entity.setNinteichosaJuryoYMD(new FlexibleDate("20140202"));

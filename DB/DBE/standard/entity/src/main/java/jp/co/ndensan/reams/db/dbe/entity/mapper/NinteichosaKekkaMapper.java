@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResult;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyo;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyoKihon;
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfKihon;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroup;
@@ -258,7 +258,7 @@ public final class NinteichosaKekkaMapper {
                 new NinteichosaIraiRirekiNo(entity.getNinteichosaRirekiNo()),
                 koroshoIFKubun,
                 new NinteichosaResultOfGaikyoKihon(
-                NinteichosaIraiKubunCode.toValue(entity.getNinteichousaIraiKubunCode().value()),
+                NinteichosaIraiKubun.toValue(entity.getNinteichousaIraiKubunCode().value()),
                 entity.getNinteichosaIraiKaisu(),
                 entity.getNinteichosaJisshiYMD(),
                 entity.getNinteichosaJuryoYMD(),

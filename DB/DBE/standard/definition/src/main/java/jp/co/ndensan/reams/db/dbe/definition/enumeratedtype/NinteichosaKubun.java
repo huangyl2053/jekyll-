@@ -17,16 +17,16 @@ public enum NinteichosaKubun {
      * 調査区分が「新規調査」であることを表します。<br />
      * コード : 0
      */
-    新規調査(0),
+    新規調査("0"),
     /**
      * 調査区分が「継続調査」であることを表します。<br />
      * コード : 1
      */
-    継続調査(1);
-    private final int code;
+    継続調査("1");
+    private final RString code;
 
-    private NinteichosaKubun(int code) {
-        this.code = code;
+    private NinteichosaKubun(String code) {
+        this.code = new RString(code);
     }
 
     /**
@@ -35,7 +35,7 @@ public enum NinteichosaKubun {
      * @return コード
      */
     public RString getCode() {
-        return new RString(Integer.toString(this.code));
+        return code;
     }
 
     /**

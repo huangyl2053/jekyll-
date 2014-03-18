@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
 import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
@@ -18,7 +18,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class NinteichosaResultOfGaikyoKihon {
 
-    private final NinteichosaIraiKubunCode 認定調査依頼区分;
+    private final NinteichosaIraiKubun 認定調査依頼区分;
     private final int 認定調査回数;
     private final FlexibleDate 認定調査実施年月日;
     private final FlexibleDate 認定調査受領年月日;
@@ -38,7 +38,7 @@ public class NinteichosaResultOfGaikyoKihon {
      * @param 認定調査実施場所区分 認定調査実施場所区分
      */
     public NinteichosaResultOfGaikyoKihon(
-            NinteichosaIraiKubunCode 認定調査依頼区分,
+            NinteichosaIraiKubun 認定調査依頼区分,
             int 認定調査回数,
             FlexibleDate 認定調査実施年月日,
             FlexibleDate 認定調査受領年月日,
@@ -59,7 +59,7 @@ public class NinteichosaResultOfGaikyoKihon {
      *
      * @return 認定調査依頼区分
      */
-    public NinteichosaIraiKubunCode get認定調査依頼区分() {
+    public NinteichosaIraiKubun get認定調査依頼区分() {
         return 認定調査依頼区分;
     }
 
