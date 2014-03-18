@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ConsentToEnkitsuchiHakko;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ConsentsToEnkitsuchiHakko;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -20,7 +20,7 @@ public class YokaigoninteiProgress {
 
     private final ShinseishoKanriNo 申請書管理番号;
     private final FlexibleDate 認定申請情報登録年月日;
-    private final ConsentToEnkitsuchiHakko 認定延期通知発行に対する同意有無;
+    private final ConsentsToEnkitsuchiHakko 認定延期通知発行に対する同意有無;
     private final FlexibleDate 認定延期通知発行年月日;
     private final int 認定延期通知発行回数;
     private final RString 要介護認定延期理由;
@@ -59,7 +59,7 @@ public class YokaigoninteiProgress {
      */
     public YokaigoninteiProgress(ShinseishoKanriNo 申請書管理番号,
             FlexibleDate 認定申請情報登録年月日,
-            ConsentToEnkitsuchiHakko 認定延期通知発行に対する同意有無,
+            ConsentsToEnkitsuchiHakko 認定延期通知発行に対する同意有無,
             FlexibleDate 認定延期通知発行年月日,
             int 認定延期通知発行回数,
             RString 要介護認定延期理由,
@@ -116,7 +116,7 @@ public class YokaigoninteiProgress {
      *
      * @return 認定延期通知発行に対する同意有無
      */
-    public ConsentToEnkitsuchiHakko has認定延期通知発行に対する同意有無() {
+    public ConsentsToEnkitsuchiHakko has認定延期通知発行に対する同意有無() {
         return 認定延期通知発行に対する同意有無;
     }
 

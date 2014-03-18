@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ConsentToEnkitsuchiHakko;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ConsentsToEnkitsuchiHakko;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
@@ -49,7 +49,7 @@ public class NinteiShinchokuJohoMapperTest extends TestBase {
 
         @Test
         public void 渡されたentityと_Mapping後の認定進捗情報の_認定延期通知発行に対する同意有無が_同一になる() {
-            assertThat(sut.has認定延期通知発行に対する同意有無(), is(ConsentToEnkitsuchiHakko.toValue(認定延期通知発行に対する同意有無)));
+            assertThat(sut.has認定延期通知発行に対する同意有無(), is(ConsentsToEnkitsuchiHakko.toValue(認定延期通知発行に対する同意有無)));
         }
 
         @Test

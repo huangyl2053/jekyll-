@@ -9,7 +9,7 @@ package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
  *
  * @author N8187 久保田 英男
  */
-public enum ConsentToEnkitsuchiHakko {
+public enum ConsentsToEnkitsuchiHakko {
 
     /**
      * 延期通知発行に同意することを表します。
@@ -21,7 +21,7 @@ public enum ConsentToEnkitsuchiHakko {
     不同意(false);
     private final boolean is同意;
 
-    private ConsentToEnkitsuchiHakko(boolean is同意) {
+    private ConsentsToEnkitsuchiHakko(boolean is同意) {
         this.is同意 = is同意;
     }
 
@@ -40,7 +40,7 @@ public enum ConsentToEnkitsuchiHakko {
      * @param is同意 同意有無 (boolean型)
      * @return 同意有無 (列挙型)
      */
-    public static ConsentToEnkitsuchiHakko toValue(boolean is同意) {
+    public static ConsentsToEnkitsuchiHakko toValue(boolean is同意) {
         return is同意 ? 同意 : 不同意;
     }
 }

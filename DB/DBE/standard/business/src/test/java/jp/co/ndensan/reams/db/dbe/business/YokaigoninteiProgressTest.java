@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ConsentToEnkitsuchiHakko;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ConsentsToEnkitsuchiHakko;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -26,7 +26,7 @@ public class YokaigoninteiProgressTest extends TestBase {
         private static YokaigoninteiProgress sut;
         private ShinseishoKanriNo 申請書管理番号;
         private FlexibleDate 認定申請情報登録年月日;
-        private ConsentToEnkitsuchiHakko 認定延期通知発行に対する同意有無;
+        private ConsentsToEnkitsuchiHakko 認定延期通知発行に対する同意有無;
         private FlexibleDate 認定延期通知発行年月日;
         private int 認定延期通知発行回数;
         private RString 要介護認定延期理由;
@@ -46,7 +46,7 @@ public class YokaigoninteiProgressTest extends TestBase {
         public void setUp() {
             申請書管理番号 = new ShinseishoKanriNo(new RString("0001"));
             認定申請情報登録年月日 = new FlexibleDate(new RString("20140303"));
-            認定延期通知発行に対する同意有無 = ConsentToEnkitsuchiHakko.同意;
+            認定延期通知発行に対する同意有無 = ConsentsToEnkitsuchiHakko.同意;
             認定延期通知発行年月日 = new FlexibleDate(new RString("20140303"));
             認定延期通知発行回数 = 1;
             要介護認定延期理由 = new RString("延期");

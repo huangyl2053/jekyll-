@@ -17,18 +17,18 @@ import static org.junit.Assert.assertThat;
  * @author N8187 久保田 英男
  */
 @RunWith(Enclosed.class)
-public class ConsentToEnkitsuchiHakkoTest extends TestBase {
+public class ConsentsToEnkitsuchiHakkoTest extends TestBase {
 
     public static class toValueのテスト {
 
         @Test
         public void 引数にtrueを指定したとき_有効が返る() {
-            assertThat(ConsentToEnkitsuchiHakko.toValue(true), is(ConsentToEnkitsuchiHakko.同意));
+            assertThat(ConsentsToEnkitsuchiHakko.toValue(true), is(ConsentsToEnkitsuchiHakko.同意));
         }
 
         @Test
         public void 引数にfalseを指定したとき_無効が返る() {
-            assertThat(ConsentToEnkitsuchiHakko.toValue(false), is(ConsentToEnkitsuchiHakko.不同意));
+            assertThat(ConsentsToEnkitsuchiHakko.toValue(false), is(ConsentsToEnkitsuchiHakko.不同意));
         }
     }
 }
