@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinchokuJohoDac;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -22,9 +22,9 @@ import static org.mockito.Mockito.*;
  * @author N8187 久保田 英男
  */
 @RunWith(Enclosed.class)
-public class YokaigoninteiProgressManagerTest extends TestBase {
+public class YokaigoninteiProgressManagerTest extends DbeTestBase {
 
-    public static class save extends TestBase {
+    public static class save extends DbeTestBase {
 
         private static YokaigoninteiProgressManager sut;
 

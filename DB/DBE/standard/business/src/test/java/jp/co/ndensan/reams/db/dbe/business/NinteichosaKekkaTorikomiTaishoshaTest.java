@@ -4,12 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -21,9 +22,9 @@ import static org.mockito.Mockito.mock;
  * @author N8187 久保田 英男
  */
 @RunWith(Enclosed.class)
-public class NinteichosaKekkaTorikomiTaishoshaTest extends TestBase {
+public class NinteichosaKekkaTorikomiTaishoshaTest extends DbeTestBase {
 
-    public static class コンストラクタ extends TestBase {
+    public static class コンストラクタ extends DbeTestBase {
 
         private NinteichosaKekkaTorikomiTaishosha sut;
         private NinteiShinseiJoho 認定申請情報;
@@ -32,7 +33,7 @@ public class NinteichosaKekkaTorikomiTaishoshaTest extends TestBase {
         private IKaigoJigyosha 介護事業者情報;
         private IKojin 個人;
 
-        @Override
+        @Before
         public void setUp() {
             認定申請情報 = mock(NinteiShinseiJoho.class);
             認定調査依頼情報 = mock(NinteichosaIrai.class);

@@ -18,14 +18,15 @@ import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinchokuJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinseiJohoMock;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.assertThat;
+import org.junit.Before;
 import static org.mockito.Mockito.*;
 
 /**
@@ -34,7 +35,7 @@ import static org.mockito.Mockito.*;
  * @author N8187 久保田 英男
  */
 @RunWith(Enclosed.class)
-public class NinteichosaKekkaTorikomiTaishoshaManagerTest extends TestBase {
+public class NinteichosaKekkaTorikomiTaishoshaManagerTest extends DbeTestBase {
 
     private static NinteichosaKekkaTorikomiTaishoshaManager sut;
     private static INinteiShinchokuJohoDac shinchokuJohoDac;
@@ -46,10 +47,10 @@ public class NinteichosaKekkaTorikomiTaishoshaManagerTest extends TestBase {
     private static RString 初期支所コード = new RString("0");
     private static List<NinteichosaKekkaTorikomiTaishosha> resultList;
 
-    public static class get認定調査結果取込対象者全件 extends TestBase {
+    public static class get認定調査結果取込対象者全件 extends DbeTestBase {
 
-        @Override
-        protected void setUp() {
+        @Before
+        public void setUp() {
             shinchokuJohoDac = mock(INinteiShinchokuJohoDac.class);
             shinseiJohoDac = mock(INinteiShinseiJohoDac.class);
             chosaIraiJohoDac = mock(INinteiChosaIraiJohoDac.class);

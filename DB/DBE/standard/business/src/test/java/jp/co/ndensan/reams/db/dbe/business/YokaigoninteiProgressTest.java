@@ -6,9 +6,10 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ConsentsToEnkitsuchiHakko;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -19,9 +20,9 @@ import org.junit.runner.RunWith;
  * @author N8187 久保田 英男
  */
 @RunWith(Enclosed.class)
-public class YokaigoninteiProgressTest extends TestBase {
+public class YokaigoninteiProgressTest extends DbeTestBase {
 
-    public static class コンストラクタ extends TestBase {
+    public static class コンストラクタ extends DbeTestBase {
 
         private static YokaigoninteiProgress sut;
         private ShinseishoKanriNo 申請書管理番号;
@@ -42,7 +43,7 @@ public class YokaigoninteiProgressTest extends TestBase {
         private FlexibleDate 認定審査会完了年月日;
         private FlexibleDate センター送信年月日;
 
-        @Override
+        @Before
         public void setUp() {
             申請書管理番号 = new ShinseishoKanriNo(new RString("0001"));
             認定申請情報登録年月日 = new FlexibleDate(new RString("20140303"));

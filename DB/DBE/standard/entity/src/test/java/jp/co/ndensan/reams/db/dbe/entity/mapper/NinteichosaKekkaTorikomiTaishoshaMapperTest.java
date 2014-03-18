@@ -15,16 +15,17 @@ import jp.co.ndensan.reams.db.dbe.entity.helper.KojinEntityMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaIraiTestHelper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteichosainEntity;
 import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaTorikomiTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
 import jp.co.ndensan.reams.ur.urf.entity.mapper.KaigoJigyoshaMapper;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.entity.mapper.KojinMapper;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+import org.junit.Before;
 
 /**
  * 認定調査結果取込対象者を変換するMapperクラスのテストです。
@@ -32,17 +33,17 @@ import static org.hamcrest.CoreMatchers.*;
  * @author N8187 久保田 英男
  */
 @RunWith(Enclosed.class)
-public class NinteichosaKekkaTorikomiTaishoshaMapperTest extends TestBase {
+public class NinteichosaKekkaTorikomiTaishoshaMapperTest extends DbeTestBase {
 
     private static NinteichosaKekkaTorikomiTaishosha sut;
     private static NinteichosaKekkaTorikomiTaishoshaEntity 認定調査結果取込対象者Entity;
     private static IKaigoJigyosha 介護事業者;
     private static IKojin 個人;
 
-    public static class toNinteichosaKekkaTorikomiTaishosha extends TestBase {
+    public static class toNinteichosaKekkaTorikomiTaishosha extends DbeTestBase {
 
-        @Override
-        protected void setUp() {
+        @Before
+        public void setUp() {
             認定調査結果取込対象者Entity = new NinteichosaKekkaTorikomiTaishoshaEntity();
             認定調査結果取込対象者Entity.setNinteiShinseiJohoEntity(DbT5001NinteiShinseiJohoEntityMock.getSpiedInstance());
             認定調査結果取込対象者Entity.setNinteichosaIraiJohoEntity(NinteichosaIraiTestHelper.create認定調査依頼情報Entity());
