@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
 public class GogitaiAndGogitaiWariateIinDac implements IGogitaiAndGogitaiWariateIinDac {
 
     @Override
-    public int insertOrUpdate合議体割当審査会委員情報(DbT5103GogitaiJohoEntity 合議体Entity, List<DbT5107GogitaiWariateIinJohoEntity> 合議体割当委員Entities) {
+    public int insertOrUpdate(DbT5103GogitaiJohoEntity 合議体Entity, List<DbT5107GogitaiWariateIinJohoEntity> 合議体割当委員Entities) {
 
         IGogitaiJohoDac gogitaiDac = InstanceCreator.create(IGogitaiJohoDac.class);
         IGogitaiWariateDac gogitaiWariateDac = InstanceCreator.create(IGogitaiWariateDac.class);
@@ -34,7 +34,7 @@ public class GogitaiAndGogitaiWariateIinDac implements IGogitaiAndGogitaiWariate
     }
 
     @Override
-    public int delete合議体割当審査会委員情報(DbT5103GogitaiJohoEntity 合議体Entity, List<DbT5107GogitaiWariateIinJohoEntity> 合議体割当委員Entities) {
+    public int delete(DbT5103GogitaiJohoEntity 合議体Entity, List<DbT5107GogitaiWariateIinJohoEntity> 合議体割当委員Entities) {
 
         IGogitaiJohoDac gogitaiDac = InstanceCreator.create(IGogitaiJohoDac.class);
         IGogitaiWariateDac gogitaiWariateDac = InstanceCreator.create(IGogitaiWariateDac.class);

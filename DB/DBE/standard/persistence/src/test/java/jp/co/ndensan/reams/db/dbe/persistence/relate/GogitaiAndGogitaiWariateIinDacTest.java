@@ -59,18 +59,18 @@ public class GogitaiAndGogitaiWariateIinDacTest {
 
         @Test
         public void 割当委員を3件持つ合議体の情報を引数に渡したとき_合計更新件数として4が返る() {
-            assertThat(sut.insertOrUpdate合議体割当審査会委員情報(合議体Entity, 割当委員Entities), is(4));
+            assertThat(sut.insertOrUpdate(合議体Entity, 割当委員Entities), is(4));
         }
 
         @Test
         public void 割当委員を3件持つ合議体の情報を引数に渡したとき_合議体の情報が1件挿入される() {
-            sut.insertOrUpdate合議体割当審査会委員情報(合議体Entity, 割当委員Entities);
+            sut.insertOrUpdate(合議体Entity, 割当委員Entities);
             assertThat(gogitaiDac.select(new GogitaiNo(1)).size(), is(1));
         }
 
         @Test
         public void 割当委員を3件持つ合議体の情報を引数に渡したとき_合議体に割り当てられた委員の情報が3件挿入される() {
-            sut.insertOrUpdate合議体割当審査会委員情報(合議体Entity, 割当委員Entities);
+            sut.insertOrUpdate(合議体Entity, 割当委員Entities);
             assertThat(gogitaiWariateSelecter.select(new GogitaiNo(1), new FlexibleDate("19990101")).size(), is(3));
         }
     }
@@ -87,23 +87,23 @@ public class GogitaiAndGogitaiWariateIinDacTest {
             割当委員Entities.add(create合議体割当Entity(1, "A001", "19990101", "20010101"));
             割当委員Entities.add(create合議体割当Entity(1, "A002", "19990101", "20010101"));
             割当委員Entities.add(create合議体割当Entity(1, "A003", "19990101", "20010101"));
-            sut.insertOrUpdate合議体割当審査会委員情報(合議体Entity, 割当委員Entities);
+            sut.insertOrUpdate(合議体Entity, 割当委員Entities);
         }
 
         @Test
         public void 割当委員を3件持つ合議体の情報を引数に渡したとき_合計削除件数として4が返る() {
-            assertThat(sut.delete合議体割当審査会委員情報(合議体Entity, 割当委員Entities), is(4));
+            assertThat(sut.delete(合議体Entity, 割当委員Entities), is(4));
         }
 
         @Test
         public void 割当委員を3件持つ合議体の情報を引数に渡したとき_合議体の削除され_selectで取得できない() {
-            sut.delete合議体割当審査会委員情報(合議体Entity, 割当委員Entities);
+            sut.delete(合議体Entity, 割当委員Entities);
             assertThat(gogitaiDac.select(new GogitaiNo(1)).size(), is(0));
         }
 
         @Test
         public void 割当委員を3件持つ合議体の情報を引数に渡したとき_割当委員の情報が削除され_selectで取得できない() {
-            sut.delete合議体割当審査会委員情報(合議体Entity, 割当委員Entities);
+            sut.delete(合議体Entity, 割当委員Entities);
             assertThat(gogitaiWariateSelecter.select(new GogitaiNo(1), new FlexibleDate("19990101")).size(), is(0));
         }
     }

@@ -24,7 +24,7 @@ public interface IGogitaiAndGogitaiWariateIinDac {
      * @return 件数
      */
     @Transaction
-    int insertOrUpdate合議体割当審査会委員情報(DbT5103GogitaiJohoEntity 合議体Entity,
+    int insertOrUpdate(DbT5103GogitaiJohoEntity 合議体Entity,
             List<DbT5107GogitaiWariateIinJohoEntity> 合議体割当委員Entities);
 
     /**
@@ -35,6 +35,6 @@ public interface IGogitaiAndGogitaiWariateIinDac {
      * @return 件数
      */
     @Transaction
-    int delete合議体割当審査会委員情報(DbT5103GogitaiJohoEntity 合議体Entity,
+    int delete(DbT5103GogitaiJohoEntity 合議体Entity,
             List<DbT5107GogitaiWariateIinJohoEntity> 合議体割当委員Entities);
 }

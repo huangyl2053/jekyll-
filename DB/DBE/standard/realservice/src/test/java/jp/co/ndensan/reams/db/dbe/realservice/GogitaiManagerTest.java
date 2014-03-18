@@ -83,7 +83,7 @@ public class GogitaiManagerTest {
 
         private IGogitaiAndGogitaiWariateIinDac createGogitaiAndGogitaiWariateIinDacMock(int 件数) {
             IGogitaiAndGogitaiWariateIinDac dac = mock(IGogitaiAndGogitaiWariateIinDac.class);
-            when(dac.insertOrUpdate合議体割当審査会委員情報(any(DbT5103GogitaiJohoEntity.class), any(List.class))).thenReturn(件数);
+            when(dac.insertOrUpdate(any(DbT5103GogitaiJohoEntity.class), any(List.class))).thenReturn(件数);
             return dac;
         }
     }
@@ -104,7 +104,7 @@ public class GogitaiManagerTest {
 
         private IGogitaiAndGogitaiWariateIinDac createGogitaiAndGogitaiWariateIinDacMock(int 件数) {
             IGogitaiAndGogitaiWariateIinDac dac = mock(IGogitaiAndGogitaiWariateIinDac.class);
-            when(dac.delete合議体割当審査会委員情報(any(DbT5103GogitaiJohoEntity.class), any(List.class))).thenReturn(件数);
+            when(dac.delete(any(DbT5103GogitaiJohoEntity.class), any(List.class))).thenReturn(件数);
             return dac;
         }
     }

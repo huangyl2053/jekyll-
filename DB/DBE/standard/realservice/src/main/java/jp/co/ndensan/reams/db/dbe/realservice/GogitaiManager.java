@@ -82,7 +82,7 @@ public class GogitaiManager {
         List<DbT5107GogitaiWariateIinJohoEntity> 合議体割当委員Entities =
                 GogitaiWariateIinMapper.to合議体割当委員EntityList(合議体.get割当委員List());
 
-        int 更新件数 = gogitaiAndWariateIinDac.insertOrUpdate合議体割当審査会委員情報(合議体Entity, 合議体割当委員Entities);
+        int 更新件数 = gogitaiAndWariateIinDac.insertOrUpdate(合議体Entity, 合議体割当委員Entities);
         return 0 < 更新件数 ? true : false;
     }
 
@@ -97,7 +97,7 @@ public class GogitaiManager {
         List<DbT5107GogitaiWariateIinJohoEntity> 合議体割当委員Entities =
                 GogitaiWariateIinMapper.to合議体割当委員EntityList(合議体.get割当委員List());
 
-        int 更新件数 = gogitaiAndWariateIinDac.delete合議体割当審査会委員情報(合議体Entity, 合議体割当委員Entities);
+        int 更新件数 = gogitaiAndWariateIinDac.delete(合議体Entity, 合議体割当委員Entities);
         return 0 < 更新件数 ? true : false;
     }
 }
