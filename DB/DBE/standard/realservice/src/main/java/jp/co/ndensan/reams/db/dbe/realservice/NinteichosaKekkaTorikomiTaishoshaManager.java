@@ -94,7 +94,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
 
         for (DbT5005NinteiShinchokuJohoEntity shinchokuJohoEntity : shinchokuJohoEntityList) {
             DbT5001NinteiShinseiJohoEntity shinseiJohoEntity = shinseiJohoDac.select(shinchokuJohoEntity.getShinseishoKanriNo());
-            if (shinseiJohoEntity.getShishoCode().compareTo(支所コード) != 0) {
+            if (!shinseiJohoEntity.getShishoCode().equals(支所コード)) {
                 continue;
             }
             DbT5006NinteichosaIraiJohoEntity iraiJohoEntity = chosaIraiJohoDac.select(
