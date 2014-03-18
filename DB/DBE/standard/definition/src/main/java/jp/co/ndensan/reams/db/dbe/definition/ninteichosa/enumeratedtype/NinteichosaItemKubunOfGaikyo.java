@@ -9,7 +9,7 @@ package jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype;
  *
  * @author N8156 宮本 康
  */
-public enum NinteichosaItemKubunOfGaikyo {
+public enum NinteichosaItemKubunOfGaikyo implements INinteichosaItemKubun {
 
     /**
      * 調査項目区分が「現在の状況コード」であることを表します。

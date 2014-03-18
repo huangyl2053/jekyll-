@@ -9,7 +9,7 @@ package jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype;
  *
  * @author N8156 宮本 康
  */
-public enum NinteichosaItemKubunOfKihon {
+public enum NinteichosaItemKubunOfKihon implements INinteichosaItemKubun {
 
     /**
      * 調査項目区分が「麻痺等の有無_ない」であることを表します。

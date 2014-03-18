@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.definition.ninteichosa;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.IAnsweringItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemSubGroup;
@@ -19,9 +20,9 @@ import static java.util.Objects.requireNonNull;
  * 要介護認定調査の調査票定義を扱うBuilderクラスです。
  *
  * @author N8156 宮本 康
- * @param <E> Enum
+ * @param <E> INinteichosaItemKubun
  */
-class NinteichosahyoRegulationBuilder<E extends Enum> {
+class NinteichosahyoRegulationBuilder<E extends INinteichosaItemKubun> {
 
     private Map<E, INinteichosaItem> 調査票定義;
     private INinteichosaItemGroup 調査項目グループ = NinteichosaItemGroup.OfCommon.なし;

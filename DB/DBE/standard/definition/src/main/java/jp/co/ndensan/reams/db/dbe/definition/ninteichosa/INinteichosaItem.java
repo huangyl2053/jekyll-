@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.ninteichosa;
 
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItemNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -13,9 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 要介護認定調査の調査項目を扱うインターフェースです。
  *
  * @author N8156 宮本 康
- * @param <E> Enum
  */
-public interface INinteichosaItem<E extends Enum> {
+public interface INinteichosaItem {
 
     /**
      * 調査項目グループを返します。
@@ -59,7 +59,7 @@ public interface INinteichosaItem<E extends Enum> {
      *
      * @return 調査項目区分
      */
-    E get調査項目区分();
+    INinteichosaItemKubun get調査項目区分();
 
     /**
      * 表示名称を返します。

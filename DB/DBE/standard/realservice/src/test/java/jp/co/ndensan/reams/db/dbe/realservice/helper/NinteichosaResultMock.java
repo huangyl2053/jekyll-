@@ -26,6 +26,8 @@ import jp.co.ndensan.reams.ur.urf.business._NinteiChosain;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
 import jp.co.ndensan.reams.ur.urf.definition.KaigoJigyoshaShubetsu;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._Name;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -107,7 +109,7 @@ public class NinteichosaResultMock {
                 new FlexibleDate("20140101"),
                 new FlexibleDate("20140202"),
                 NinteichosaKubun.新規調査,
-                new _NinteiChosain(new RString("12345678"), new _Name(new RString("氏名"), RString.EMPTY), createKaigoJigyosha()),
+                new _NinteiChosain(new RString("12345678"), new _Name(new AtenaMeisho("氏名"), new AtenaKanaMeisho("")), createKaigoJigyosha()),
                 new NinteichosaJisshibashoKubun(
                 new NinteichosaJisshibashoKubunCode(new RString("12345678")), new RString("認定調査実施場所名称"), RString.EMPTY)),
                 result));

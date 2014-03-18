@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.INinteichosaItem;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -19,10 +20,10 @@ import static java.util.Objects.requireNonNull;
  * 要介護認定調査の調査票を扱うクラスです。
  *
  * @author N8156 宮本 康
- * @param <E> Enum
+ * @param <E> INinteichosaItemKubun
  * @param <T> INinteichosaItem
  */
-public class Ninteichosahyo<E extends Enum, T extends INinteichosaItem> {
+public class Ninteichosahyo<E extends INinteichosaItemKubun, T extends INinteichosaItem> {
 
     private final Map<E, T> 調査票定義;
     private final INinteichosaItemGroup[] 調査項目グループ;
