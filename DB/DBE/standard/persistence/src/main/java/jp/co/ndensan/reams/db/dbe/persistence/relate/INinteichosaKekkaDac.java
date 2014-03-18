@@ -4,8 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.relate;
 
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaEntity;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
@@ -23,7 +24,7 @@ public interface INinteichosaKekkaDac {
      * @return 要介護認定調査結果エンティティ
      */
     @Transaction
-    NinteichosaKekkaEntity select(RString 申請書管理番号, int 認定調査履歴番号);
+    NinteichosaKekkaEntity select(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査履歴番号);
 
     /**
      * 指定した要介護認定調査結果エンティティを追加、または更新します。

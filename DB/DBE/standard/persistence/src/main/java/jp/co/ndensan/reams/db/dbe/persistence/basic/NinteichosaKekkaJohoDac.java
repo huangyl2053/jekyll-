@@ -5,10 +5,11 @@
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5008NinteichosaKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5008NinteichosaKekkaJohoEntity;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5008NinteichosaKekkaJoho.*;
@@ -25,13 +26,13 @@ public class NinteichosaKekkaJohoDac implements INinteichosaKekkaJohoDac {
     private SqlSession session;
 
     @Override
-    public DbT5008NinteichosaKekkaJohoEntity select(RString 申請書管理番号, int 認定調査履歴番号) {
+    public DbT5008NinteichosaKekkaJohoEntity select(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査履歴番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT5008NinteichosaKekkaJohoEntity> list = accessor.select()
                 .table(DbT5008NinteichosaKekkaJoho.class)
                 .where(and(
                 eq(shinseishoKanriNo, 申請書管理番号),
-                eq(ninteichosaRirekiNo, 認定調査履歴番号)))
+                eq(ninteichosaRirekiNo, 認定調査履歴番号.value().intValue())))
                 .toList(DbT5008NinteichosaKekkaJohoEntity.class);
         return !list.isEmpty() ? list.get(0) : null;
     }

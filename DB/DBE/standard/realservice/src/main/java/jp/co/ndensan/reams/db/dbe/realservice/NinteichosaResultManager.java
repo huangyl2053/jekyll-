@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.realservice;
 
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResult;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaKekkaMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaEntity;
@@ -50,8 +51,8 @@ public class NinteichosaResultManager {
      * @param 認定調査履歴番号 認定調査履歴番号
      * @return 認定調査結果
      */
-    public NinteichosaResult get認定調査結果(ShinseishoKanriNo 申請書管理番号, int 認定調査履歴番号) {
-        NinteichosaKekkaEntity entity = dac.select(申請書管理番号.value(), 認定調査履歴番号);
+    public NinteichosaResult get認定調査結果(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査履歴番号) {
+        NinteichosaKekkaEntity entity = dac.select(申請書管理番号, 認定調査履歴番号);
         if (entity == null) {
             return null;
         }

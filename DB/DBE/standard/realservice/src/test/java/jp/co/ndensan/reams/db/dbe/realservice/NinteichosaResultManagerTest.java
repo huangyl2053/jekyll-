@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.realservice;
 
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResult;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.NinteichosaKekkaEntityMock;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.NinteichosaResultMock;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
@@ -40,12 +41,12 @@ public class NinteichosaResultManagerTest {
 
         @Test
         public void 調査結果ありの時_get認定調査結果は_該当の認定調査結果を返す() {
-            assertThat(createNinteichosaResultManager(AS_調査結果あり).get認定調査結果(createShinseishoKanriNo(), 0).get基本調査結果().get申請書管理番号().value(), is(new RString("1234567890")));
+            assertThat(createNinteichosaResultManager(AS_調査結果あり).get認定調査結果(createShinseishoKanriNo(), createNinteichosaIraiRirekiNo()).get基本調査結果().get申請書管理番号().value(), is(new RString("1234567890")));
         }
 
         @Test
         public void 調査結果なしの時_get認定調査結果は_NULLを返す() {
-            assertThat(createNinteichosaResultManager(AS_調査結果なし).get認定調査結果(createShinseishoKanriNo(), 0), nullValue());
+            assertThat(createNinteichosaResultManager(AS_調査結果なし).get認定調査結果(createShinseishoKanriNo(), createNinteichosaIraiRirekiNo()), nullValue());
         }
     }
 
@@ -81,7 +82,7 @@ public class NinteichosaResultManagerTest {
 
     private static INinteichosaKekkaDac createNinteichosaKekkaDac(boolean flg) {
         INinteichosaKekkaDac dac = mock(INinteichosaKekkaDac.class);
-        when(dac.select(any(RString.class), any(int.class))).thenReturn(createNinteichosaKekkaEntity(flg));
+        when(dac.select(any(ShinseishoKanriNo.class), any(NinteichosaIraiRirekiNo.class))).thenReturn(createNinteichosaKekkaEntity(flg));
         when(dac.insertOrUpdate(any(NinteichosaKekkaEntity.class))).thenReturn(flg);
         when(dac.insert(any(NinteichosaKekkaEntity.class))).thenReturn(flg);
         when(dac.update(any(NinteichosaKekkaEntity.class))).thenReturn(flg);
@@ -98,6 +99,10 @@ public class NinteichosaResultManagerTest {
 
     private static ShinseishoKanriNo createShinseishoKanriNo() {
         return new ShinseishoKanriNo(new RString("1234567890"));
+    }
+
+    private static NinteichosaIraiRirekiNo createNinteichosaIraiRirekiNo() {
+        return new NinteichosaIraiRirekiNo(0);
     }
 
     private static NinteichosaResult createNinteichosaResult() {

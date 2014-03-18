@@ -4,10 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.relate;
 
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteichosaKekkaJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteichosahyoJohoDac;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
 
 /**
@@ -21,7 +22,7 @@ public class NinteichosaKekkaDac implements INinteichosaKekkaDac {
     private final INinteichosahyoJohoDac chosahyoDac = InstanceCreator.create(INinteichosahyoJohoDac.class);
 
     @Override
-    public NinteichosaKekkaEntity select(RString 申請書管理番号, int 認定調査履歴番号) {
+    public NinteichosaKekkaEntity select(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査履歴番号) {
         NinteichosaKekkaEntity entity = new NinteichosaKekkaEntity();
         entity.setDbT5008NinteichosaKekkaJohoEntity(chosaKekkaDac.select(申請書管理番号, 認定調査履歴番号));
         entity.setDbT5009NinteichosahyoJohoEntity(chosahyoDac.select(申請書管理番号, 認定調査履歴番号));
