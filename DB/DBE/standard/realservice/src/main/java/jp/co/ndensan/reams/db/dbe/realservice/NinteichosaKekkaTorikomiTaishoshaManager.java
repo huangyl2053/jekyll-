@@ -106,7 +106,6 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
 
             NinteichosaKekkaTorikomiTaishoshaEntity entity = new NinteichosaKekkaTorikomiTaishoshaEntity();
             entity.setNinteiShinseiJohoEntity(shinseiJohoEntity);
-            entity.setNinteiShinchokuJohoEntity(shinchokuJohoEntity);
             entity.setNinteichosaIraiJohoEntity(iraiJohoEntity);
             entity.setNinteichosainEntityList(create介護認定調査員EntityList(chosainEntityList));
             list.add(entity);

@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbe.entity.helper.DbT7010NinteichosaItakusakiJohoE
 import jp.co.ndensan.reams.db.dbe.entity.helper.KaigoJigyoshaEntityMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.KaigoNinteichosainTestHelper;
 import jp.co.ndensan.reams.db.dbe.entity.helper.KojinEntityMock;
-import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaIraiTestHelper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteichosainEntity;
 import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaTorikomiTaishoshaEntity;
@@ -45,7 +44,6 @@ public class NinteichosaKekkaTorikomiTaishoshaMapperTest extends TestBase {
         @Override
         protected void setUp() {
             認定調査結果取込対象者Entity = new NinteichosaKekkaTorikomiTaishoshaEntity();
-            認定調査結果取込対象者Entity.setNinteiShinchokuJohoEntity(NinteiShinchokuJohoMock.create認定進捗情報Entity());
             認定調査結果取込対象者Entity.setNinteiShinseiJohoEntity(DbT5001NinteiShinseiJohoEntityMock.getSpiedInstance());
             認定調査結果取込対象者Entity.setNinteichosaIraiJohoEntity(NinteichosaIraiTestHelper.create認定調査依頼情報Entity());
             認定調査結果取込対象者Entity.setNinteichosainEntityList(create認定調査員EntityList(3));

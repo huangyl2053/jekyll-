@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
  */
 public class NinteichosaKekkaTorikomiTaishosha {
 
-    private YokaigoninteiProgress 要介護認定進捗情報;
     private NinteiShinseiJoho 認定申請情報;
     private NinteichosaIrai 認定調査依頼情報;
     private KaigoNinteichosainCollection 介護認定調査員Collection;
@@ -26,7 +25,6 @@ public class NinteichosaKekkaTorikomiTaishosha {
     /**
      * コンストラクタです。
      *
-     * @param 要介護認定進捗情報 要介護認定進捗情報
      * @param 認定申請情報 認定申請情報
      * @param 認定調査依頼情報 認定調査依頼情報
      * @param 介護認定調査員Collection 介護認定調査員Collection
@@ -34,27 +32,16 @@ public class NinteichosaKekkaTorikomiTaishosha {
      * @param 個人 個人
      */
     public NinteichosaKekkaTorikomiTaishosha(
-            YokaigoninteiProgress 要介護認定進捗情報,
             NinteiShinseiJoho 認定申請情報,
             NinteichosaIrai 認定調査依頼情報,
             KaigoNinteichosainCollection 介護認定調査員Collection,
             IKaigoJigyosha 介護事業者情報,
             IKojin 個人) {
-        this.要介護認定進捗情報 = requireNonNull(要介護認定進捗情報, Messages.E00003.replace("要介護認定進捗情報", "認定調査結果取込対象者").getMessage());
         this.認定申請情報 = requireNonNull(認定申請情報, Messages.E00003.replace("認定申請情報", "認定調査結果取込対象者").getMessage());
         this.認定調査依頼情報 = requireNonNull(認定調査依頼情報, Messages.E00003.replace("認定調査依頼情報", "認定調査結果取込対象者").getMessage());
         this.介護認定調査員Collection = requireNonNull(介護認定調査員Collection, Messages.E00003.replace("介護認定調査員Collection", "認定調査結果取込対象者").getMessage());
         this.介護事業者情報 = requireNonNull(介護事業者情報, Messages.E00003.replace("介護事業者情報", "認定調査結果取込対象者").getMessage());
         this.個人 = requireNonNull(個人, Messages.E00003.replace("個人", "認定調査結果取込対象者").getMessage());
-    }
-
-    /**
-     * 要介護認定進捗情報を返します。
-     *
-     * @return 要介護認定進捗情報
-     */
-    public YokaigoninteiProgress get要介護認定進捗情報() {
-        return 要介護認定進捗情報;
     }
 
     /**

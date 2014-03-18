@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbe.business.KaigoNinteichosainCollection;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIrai;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaKekkaTorikomiTaishosha;
-import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteichosainEntity;
 import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaTorikomiTaishoshaEntity;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
@@ -43,14 +42,12 @@ public final class NinteichosaKekkaTorikomiTaishoshaMapper {
             IKaigoJigyosha 介護事業者,
             IKojin 個人) {
 
-        YokaigoninteiProgress 要介護認定進捗情報 = NinteiShinchokuJohoMapper.toNinteiShinchokuJoho(認定調査結果取込対象者Entity.getNinteiShinchokuJohoEntity());
         NinteiShinseiJoho 認定申請情報 = NinteishinseiJohoMapper.to認定申請情報(認定調査結果取込対象者Entity.getNinteiShinseiJohoEntity());
         NinteichosaIrai 認定調査依頼情報 = NinteichosaIraiMapper.to認定調査依頼情報(認定調査結果取込対象者Entity.getNinteichosaIraiJohoEntity());
         KaigoNinteichosainCollection 介護認定調査員Collection = new KaigoNinteichosainCollection(
                 create介護認定調査員Collection(認定調査結果取込対象者Entity.getNinteichosainEntityList()));
 
         return new NinteichosaKekkaTorikomiTaishosha(
-                要介護認定進捗情報,
                 認定申請情報,
                 認定調査依頼情報,
                 介護認定調査員Collection,

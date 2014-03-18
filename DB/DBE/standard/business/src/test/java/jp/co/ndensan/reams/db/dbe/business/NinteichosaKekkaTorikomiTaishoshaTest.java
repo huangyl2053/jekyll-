@@ -26,7 +26,6 @@ public class NinteichosaKekkaTorikomiTaishoshaTest extends TestBase {
     public static class コンストラクタ extends TestBase {
 
         private NinteichosaKekkaTorikomiTaishosha sut;
-        private YokaigoninteiProgress 要介護認定進捗情報;
         private NinteiShinseiJoho 認定申請情報;
         private NinteichosaIrai 認定調査依頼情報;
         private KaigoNinteichosainCollection 介護認定調査員Collection;
@@ -35,7 +34,6 @@ public class NinteichosaKekkaTorikomiTaishoshaTest extends TestBase {
 
         @Override
         public void setUp() {
-            要介護認定進捗情報 = mock(YokaigoninteiProgress.class);
             認定申請情報 = mock(NinteiShinseiJoho.class);
             認定調査依頼情報 = mock(NinteichosaIrai.class);
             介護認定調査員Collection = mock(KaigoNinteichosainCollection.class);
@@ -44,44 +42,37 @@ public class NinteichosaKekkaTorikomiTaishoshaTest extends TestBase {
         }
 
         @Test(expected = NullPointerException.class)
-        public void 要介護認定進捗情報にnullが渡されたとき_NullPointerException発生() {
-            要介護認定進捗情報 = null;
-            sut = new NinteichosaKekkaTorikomiTaishosha(要介護認定進捗情報, 認定申請情報, 認定調査依頼情報, 介護認定調査員Collection, 介護事業者情報, 個人);
-            assertThat(sut, is(instanceOf(NinteichosaKekkaTorikomiTaishosha.class)));
-        }
-
-        @Test(expected = NullPointerException.class)
         public void 認定申請情報にnullが渡されたとき_NullPointerException発生() {
             認定申請情報 = null;
-            sut = new NinteichosaKekkaTorikomiTaishosha(要介護認定進捗情報, 認定申請情報, 認定調査依頼情報, 介護認定調査員Collection, 介護事業者情報, 個人);
+            sut = new NinteichosaKekkaTorikomiTaishosha(認定申請情報, 認定調査依頼情報, 介護認定調査員Collection, 介護事業者情報, 個人);
             assertThat(sut, is(instanceOf(NinteichosaKekkaTorikomiTaishosha.class)));
         }
 
         @Test(expected = NullPointerException.class)
         public void 認定調査依頼情報にnullが渡されたとき_NullPointerException発生() {
             認定調査依頼情報 = null;
-            sut = new NinteichosaKekkaTorikomiTaishosha(要介護認定進捗情報, 認定申請情報, 認定調査依頼情報, 介護認定調査員Collection, 介護事業者情報, 個人);
+            sut = new NinteichosaKekkaTorikomiTaishosha(認定申請情報, 認定調査依頼情報, 介護認定調査員Collection, 介護事業者情報, 個人);
             assertThat(sut, is(instanceOf(NinteichosaKekkaTorikomiTaishosha.class)));
         }
 
         @Test(expected = NullPointerException.class)
         public void 介護認定調査員Collectionにnullが渡されたとき_NullPointerException発生() {
             介護認定調査員Collection = null;
-            sut = new NinteichosaKekkaTorikomiTaishosha(要介護認定進捗情報, 認定申請情報, 認定調査依頼情報, 介護認定調査員Collection, 介護事業者情報, 個人);
+            sut = new NinteichosaKekkaTorikomiTaishosha(認定申請情報, 認定調査依頼情報, 介護認定調査員Collection, 介護事業者情報, 個人);
             assertThat(sut, is(instanceOf(NinteichosaKekkaTorikomiTaishosha.class)));
         }
 
         @Test(expected = NullPointerException.class)
         public void 介護事業者情報にnullが渡されたとき_NullPointerException発生() {
             介護事業者情報 = null;
-            sut = new NinteichosaKekkaTorikomiTaishosha(要介護認定進捗情報, 認定申請情報, 認定調査依頼情報, 介護認定調査員Collection, 介護事業者情報, 個人);
+            sut = new NinteichosaKekkaTorikomiTaishosha(認定申請情報, 認定調査依頼情報, 介護認定調査員Collection, 介護事業者情報, 個人);
             assertThat(sut, is(instanceOf(NinteichosaKekkaTorikomiTaishosha.class)));
         }
 
         @Test(expected = NullPointerException.class)
         public void 個人にnullが渡されたとき_NullPointerException発生() {
             個人 = null;
-            sut = new NinteichosaKekkaTorikomiTaishosha(要介護認定進捗情報, 認定申請情報, 認定調査依頼情報, 介護認定調査員Collection, 介護事業者情報, 個人);
+            sut = new NinteichosaKekkaTorikomiTaishosha(認定申請情報, 認定調査依頼情報, 介護認定調査員Collection, 介護事業者情報, 個人);
             assertThat(sut, is(instanceOf(NinteichosaKekkaTorikomiTaishosha.class)));
         }
     }

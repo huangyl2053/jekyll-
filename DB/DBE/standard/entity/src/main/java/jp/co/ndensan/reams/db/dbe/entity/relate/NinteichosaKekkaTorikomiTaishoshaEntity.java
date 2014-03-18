@@ -6,7 +6,6 @@ package jp.co.ndensan.reams.db.dbe.entity.relate;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
 
 /**
@@ -16,28 +15,9 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
  */
 public class NinteichosaKekkaTorikomiTaishoshaEntity {
 
-    private DbT5005NinteiShinchokuJohoEntity ninteiShinchokuJohoEntity;
     private DbT5001NinteiShinseiJohoEntity ninteiShinseiJohoEntity;
     private DbT5006NinteichosaIraiJohoEntity ninteichosaIraiJohoEntity;
     private List<KaigoNinteichosainEntity> ninteichosainEntityList;
-
-    /**
-     * 認定進捗情報エンティティを取得します。
-     *
-     * @return ninteiShinchokuJohoEntity 認定進捗情報エンティティ
-     */
-    public DbT5005NinteiShinchokuJohoEntity getNinteiShinchokuJohoEntity() {
-        return ninteiShinchokuJohoEntity;
-    }
-
-    /**
-     * 認定進捗情報エンティティを設定します。
-     *
-     * @param ninteiShinchokuJohoEntity 認定進捗情報エンティティ
-     */
-    public void setNinteiShinchokuJohoEntity(DbT5005NinteiShinchokuJohoEntity ninteiShinchokuJohoEntity) {
-        this.ninteiShinchokuJohoEntity = ninteiShinchokuJohoEntity;
-    }
 
     /**
      * 認定申請情報エンティティを取得します。
