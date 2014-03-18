@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 public class TimeString implements IValueObject<RString>, Comparable<TimeString> {
 
     private final RTime time;
+    private final int timeStringLength = 4;
 
     /**
      * 引数から時間を表す文字列を受け取り、インスタンスを生成します。<br/>
@@ -31,14 +32,15 @@ public class TimeString implements IValueObject<RString>, Comparable<TimeString>
      */
     public TimeString(RString timeStr) throws NullPointerException, IllegalArgumentException {
         requireNonNull(timeStr, Messages.E00003.replace("時間を表す文字列", getClass().getName()).getMessage());
-        if (!checkLength(timeStr, 4)) {
+        if (!checkLength(timeStr)) {
             throw new IllegalArgumentException(Messages.E00013.replace("時間を表す文字列", "4桁").getMessage());
         }
 
         int hour, minute;
         try {
-            hour = Integer.parseInt(timeStr.substring(0, 2).toString());
-            minute = Integer.parseInt(timeStr.substring(2, 4).toString());
+            int halfLenght = timeStringLength / 2;
+            hour = Integer.parseInt(timeStr.substring(0, halfLenght).toString());
+            minute = Integer.parseInt(timeStr.substring(halfLenght, timeStringLength).toString());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(Messages.E00013.replace("時間を表す文字列", "数字").getMessage());
         }
@@ -62,8 +64,8 @@ public class TimeString implements IValueObject<RString>, Comparable<TimeString>
         this(new RString(timeStr));
     }
 
-    private boolean checkLength(RString timeStr, int length) {
-        return timeStr.length() == length;
+    private boolean checkLength(RString timeStr) {
+        return timeStr.length() == timeStringLength;
     }
 
     @Override
