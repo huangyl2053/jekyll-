@@ -37,7 +37,7 @@ public interface INinteichosaItemSubGroup {
     /**
      * 調査項目サブグループ内で複数選択が可能かどうか判定します。
      *
-     * @return 省略名称
+     * @return 複数選択が可能な場合はtrueを返します。
      */
     boolean isMultiSelectable();
 }
