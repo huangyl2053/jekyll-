@@ -66,8 +66,16 @@ public class NinteichosahyoTest {
     public static class get調査項目ListAll {
 
         @Test
-        public void 調査項目グループの指定がある時_get調査項目ListAllは_該当の調査項目を返す() {
+        public void 調査項目の設定がある時_get調査項目ListAllは_全調査項目を返す() {
             assertThat(NinteichosahyoFactory.create基本情報Instance(KoroshoIFKubun.V09A).get調査項目ListAll().size(), is(78));
+        }
+    }
+
+    public static class get調査項目グループ {
+
+        @Test
+        public void 調査項目グループの設定がある時_get調査項目グループは_全調査項目グループを返す() {
+            assertThat(NinteichosahyoFactory.create基本情報Instance(KoroshoIFKubun.V09A).get調査項目グループ().length, is(9));
         }
     }
 }
