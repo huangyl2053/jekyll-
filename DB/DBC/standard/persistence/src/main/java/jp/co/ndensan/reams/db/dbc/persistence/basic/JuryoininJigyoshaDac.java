@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorForAddType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 
 /**
+ * 受領委任事業者のデータアクセスクラスです。
  *
  * @author N3317 塚田 萌
  */
@@ -45,7 +46,7 @@ public class JuryoininJigyoshaDac implements IJuryoininJigyoshaDac {
         return entities.get(0);
     }
 
-    //TODO n3317 塚田萌　受領委任チケットにて実装するときに実装する。
+    //TODO n3317 塚田萌　本実装の時に対応する。期限　本実装完了まで
     @Override
     public List<DbT3077JuryoininKeiyakuJigyoshaEntity> select(ITrueFalseCriteria criteria) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

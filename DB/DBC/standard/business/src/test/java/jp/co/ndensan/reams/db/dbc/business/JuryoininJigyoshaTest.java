@@ -46,7 +46,7 @@ public class JuryoininJigyoshaTest extends TestBase {
         protected void setUp() {
             契約番号 = create契約番号();
             契約期間 = create契約期間();
-            処理日時 = RDateTime.of(2014, 1, 10, 11, 12);
+            処理日時 = mock(RDateTime.class);
             届出年月日 = mock(FlexibleDate.class);
             届出者 = mock(Todokedesha.class);
             契約登録年月日 = mock(FlexibleDate.class);
@@ -59,7 +59,7 @@ public class JuryoininJigyoshaTest extends TestBase {
         }
 
         @Test
-        public void 引数に必要な値が渡されたとき_インスタンスが生成される() {
+        public void 引数に必要な値が渡された時_インスタンスが生成される() {
             sut = new JuryoininJigyosha(契約番号, 契約期間, 処理日時, 届出年月日, 届出者,
                     契約登録年月日, 契約事業者, is住宅改修契約, is特定福祉用具販売契約,
                     is償還払給付契約, is高額給付契約, has取扱確約書);

@@ -19,6 +19,7 @@ public class Todokedesha {
     private final RString 代表者氏名;
 
     public Todokedesha(RString 住所, RString 事業者名称, RString 代表者氏名) {
+
         this.住所 = 住所;
         this.事業者名称 = 事業者名称;
         this.代表者氏名 = 代表者氏名;

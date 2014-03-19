@@ -152,13 +152,13 @@ public class JuryoininJigyoshaMapperTest extends TestBase {
 
         @Test
         public void nullが渡された時_空のコレクションが返る() {
-            sut = JuryoininJigyoshaMapper.to受領委任事業者List(null,/* null,*/ null, null);
+            sut = JuryoininJigyoshaMapper.to受領委任事業者List(null, null, null);
             assertThat(sut.isEmpty(), is(true));
         }
 
         @Test
         public void 空のリストが渡された時_空のコレクションが返る() {
-            sut = JuryoininJigyoshaMapper.to受領委任事業者List(Collections.EMPTY_LIST,/* null,*/ null, null);
+            sut = JuryoininJigyoshaMapper.to受領委任事業者List(Collections.EMPTY_LIST, null, null);
             assertThat(sut.isEmpty(), is(true));
         }
 
@@ -166,7 +166,7 @@ public class JuryoininJigyoshaMapperTest extends TestBase {
         public void Entityを3件持つListが渡された場合_3件の要素を持つコレクションが返る() {
             final int LIST_SIZE = 3;
             sut = JuryoininJigyoshaMapper.to受領委任事業者List(
-                    create受領委任事業者EntityList(LIST_SIZE), /*null,*/ createHojinList(LIST_SIZE), createKozaList(LIST_SIZE));
+                    create受領委任事業者EntityList(LIST_SIZE), createHojinList(LIST_SIZE), createKozaList(LIST_SIZE));
             assertThat(sut.size(), is(3));
         }
 
@@ -198,7 +198,7 @@ public class JuryoininJigyoshaMapperTest extends TestBase {
     public static class Test_to受領委任事業者Entity extends TestBase {
 
         private DbT3077JuryoininKeiyakuJigyoshaEntity sut;
-        private JuryoininJigyosha 受領委任事業者 = JuryoininJigyoshaMock.create受領委任事業者();
+        private final JuryoininJigyosha 受領委任事業者 = JuryoininJigyoshaMock.create受領委任事業者();
 
         @Override
         public void setUp() {

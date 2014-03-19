@@ -52,6 +52,7 @@ public class JuryoininJigyosha {
             FlexibleDate 届出年月日, Todokedesha 届出者, FlexibleDate 契約登録年月日, KeiyakuJigyosha 契約事業者,
             boolean is住宅改修契約, boolean is特定福祉用具販売契約, boolean is償還払給付契約,
             boolean is高額給付契約, boolean has取扱確約書) {
+
         this.契約番号 = requireNonNull(契約番号, Messages.E00001.replace("契約番号").getMessage());
         this.契約期間 = requireNonNull(契約期間, Messages.E00001.replace("契約期間").getMessage());
         this.処理日時 = requireNonNull(処理日時, Messages.E00001.replace("処理日時").getMessage());

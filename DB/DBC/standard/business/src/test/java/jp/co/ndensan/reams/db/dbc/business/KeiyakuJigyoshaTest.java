@@ -33,6 +33,7 @@ public class KeiyakuJigyoshaTest extends TestBase {
     private static EigyoKeitai 営業形態;
     private static RString 送付先部署;
     private static IKoza 口座;
+    //TODO n3317塚田萌　ISofusakiは本実装の時に対応する。期限　本実装完了まで
     //private static ISofusaki 送付先;
 
     @Override

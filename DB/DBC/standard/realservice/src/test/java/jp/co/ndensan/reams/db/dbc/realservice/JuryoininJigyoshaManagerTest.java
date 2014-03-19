@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.EigyoKeitai;
 import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.IJuryoininJigyoshaDac;
-import jp.co.ndensan.reams.db.dbc.persistence.basic.JuryoininJigyoshaDac;
 import jp.co.ndensan.reams.db.dbc.realservice.helper.DbT3077JuryoininKeiyakuJigyoshaEntityMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
@@ -36,7 +35,6 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.YokinShubetsu;
 import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.NinkaChienDantai;
 import jp.co.ndensan.reams.ur.urz.realservice.IHojinFinder;
 import jp.co.ndensan.reams.ur.urz.realservice.IKozaManager;
-import jp.co.ndensan.reams.ur.urz.realservice._HojinFinder;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -61,6 +59,7 @@ import static org.mockito.Mockito.*;
 import static org.hamcrest.CoreMatchers.instanceOf;
 
 /**
+ * 受領委任事業者を管理するテストクラスです。
  *
  * @author N3317 塚田 萌
  */
@@ -71,15 +70,14 @@ public class JuryoininJigyoshaManagerTest extends DbcTestBase {
 
     private static final int AS_情報なし = 0;
     private static final int AS_情報あり = 1;
-    private static final int AS_save失敗 = 0;
-    private static final int AS_save成功 = 1;
-    private static final int AS_remove失敗 = 0;
-    private static final int AS_remove成功 = 1;
+    private static final int AS_失敗 = 0;
+    private static final int AS_成功 = 1;
 
     public static class Test_get受領委任事業者 {
 
         @Test
         public void 該当の受領委任事業者情報がない時_get受領委任事業者は_NULLを返す() {
+
             sut = createManager(AS_情報なし);
             JuryoininJigyosha result = sut.get受領委任事業者(createKeiyakuNo(new RString("1234567890")));
             assertThat(result, nullValue());
@@ -87,24 +85,26 @@ public class JuryoininJigyoshaManagerTest extends DbcTestBase {
 
         @Test
         public void 該当の受領委任事業者情報がある時_get受領委任事業者は_受領委任事業者情報を返す() {
+
             sut = createManager(AS_情報あり);
             JuryoininJigyosha result = sut.get受領委任事業者(createKeiyakuNo(new RString("1234567890")));
             assertThat(result, instanceOf(JuryoininJigyosha.class));
         }
-
     }
 
     public static class Test_save {
 
         @Test
         public void saveに失敗した場合_falseを返す() {
-            sut = createManager(AS_save失敗);
+
+            sut = createManager(AS_失敗);
             assertThat(sut.save(create受領委任事業者()), is(false));
         }
 
         @Test
         public void saveに成功した場合_trueを返す() {
-            sut = createManager(AS_save成功);
+
+            sut = createManager(AS_成功);
             assertThat(sut.save(create受領委任事業者()), is(true));
         }
     }
@@ -113,13 +113,15 @@ public class JuryoininJigyoshaManagerTest extends DbcTestBase {
 
         @Test
         public void removeに失敗した場合_falseを返す() {
-            sut = createManager(AS_remove失敗);
+
+            sut = createManager(AS_失敗);
             assertThat(sut.remove(create受領委任事業者()), is(false));
         }
 
         @Test
         public void removeに成功した場合_trueを返す() {
-            sut = createManager(AS_remove成功);
+
+            sut = createManager(AS_成功);
             assertThat(sut.remove(create受領委任事業者()), is(true));
         }
     }
@@ -132,32 +134,36 @@ public class JuryoininJigyoshaManagerTest extends DbcTestBase {
     private static IJuryoininJigyoshaDac createDac(int flg) {
         IJuryoininJigyoshaDac dac = mock(IJuryoininJigyoshaDac.class);
         when(dac.select(any(KeiyakuNo.class))).thenReturn(createEntity(flg));
-        when(dac.insertOrUpdate(any(DbT3077JuryoininKeiyakuJigyoshaEntity.class))).thenReturn(flg);
         when(dac.insert(any(DbT3077JuryoininKeiyakuJigyoshaEntity.class))).thenReturn(flg);
-        when(dac.update(any(DbT3077JuryoininKeiyakuJigyoshaEntity.class))).thenReturn(flg);
         when(dac.delete(any(DbT3077JuryoininKeiyakuJigyoshaEntity.class))).thenReturn(flg);
         return dac;
     }
 
     private static DbT3077JuryoininKeiyakuJigyoshaEntity createEntity(int flg) {
+
         return flg == 0 ? null : DbT3077JuryoininKeiyakuJigyoshaEntityMock.getSpiedInstance();
     }
 
     private static KeiyakuNo createKeiyakuNo(RString no) {
+
         return new KeiyakuNo(no);
     }
 
     private static IKaigoJigyoshaFinder createJigyoshaFinderMock() {
+
         IKaigoJigyoshaFinder JigyoshaFinderMock = mock(IKaigoJigyoshaFinder.class);
-        //TODO get特定の事業者種別かつ事業者番号の介護事業者の修正が完了したらKaigoJigyoshaShubetsuを消す
+        //TODO n3317塚田萌　get特定の事業者種別かつ事業者番号の介護事業者の修正が完了したらKaigoJigyoshaShubetsuを消す
         when(JigyoshaFinderMock.get特定の事業者種別かつ事業者番号の介護事業者(
-                any(KaigoJigyoshaShubetsu.class), any(RString.class))).thenReturn(mock(IKaigoJigyosha.class));
+                any(KaigoJigyoshaShubetsu.class), any(RString.class))).
+                thenReturn(mock(IKaigoJigyosha.class));
+
         return JigyoshaFinderMock;
     }
 
     private static IHojinFinder createHojinFinderMock() {
+
         IHojinFinder HojinFinderMock = mock(IHojinFinder.class);
-        //TODO RDateからFlexibleDateに変更されたらRDateを修正。
+        //TODO n3317塚田萌　RDateからFlexibleDateに変更されたらRDateを修正。
         when(HojinFinderMock.get法人(any(ShikibetsuCode.class), any(RDate.class)))
                 .thenReturn(mock(IHojin.class));
         return HojinFinderMock;
@@ -169,7 +175,7 @@ public class JuryoininJigyoshaManagerTest extends DbcTestBase {
         list.add(mock(IKoza.class));
 
         IKozaManager kozaFinderMock = mock(IKozaManager.class);
-        //TODO RDateからFlexibleDateに変更されたらRDateを修正。
+        //TODO n3317塚田萌　RDateからFlexibleDateに変更されたらRDateを修正。
         when(kozaFinderMock.get口座(any(RDate.class), any(ShikibetsuCode.class),
                 any(RString.class), any(RString.class))).thenReturn(list);
 

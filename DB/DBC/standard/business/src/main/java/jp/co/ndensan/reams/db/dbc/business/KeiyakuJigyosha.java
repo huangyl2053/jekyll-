@@ -27,7 +27,7 @@ public class KeiyakuJigyosha {
     private final EigyoKeitai 営業形態;
     private final RString 送付先部署;
     private final IKoza 口座;
-    //TODO ISofusakiが見つかったら対応
+    //TODO n3317塚田萌　ISofusakiは本実装の時に対応する。期限　本実装完了まで
     //private final ISofusaki 送付先;
 
     /**
@@ -42,6 +42,7 @@ public class KeiyakuJigyosha {
      */
     public KeiyakuJigyosha(JigyoshaNo 事業者番号, IHojin 法人, TelNo 事業者FAX番号,
             EigyoKeitai 営業形態, RString 送付先部署, IKoza 口座) {
+
         this.事業者番号 = 事業者番号;
         this.法人 = requireNonNull(法人, Messages.E00001.replace("法人").getMessage());
         this.事業者FAX番号 = 事業者FAX番号;

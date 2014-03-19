@@ -16,12 +16,10 @@ import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.EigyoKeitai;
 import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
-import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
 import jp.co.ndensan.reams.ur.urz.business.IKoza;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 
@@ -61,7 +59,6 @@ public final class JuryoininJigyoshaMapper {
                 create届出者(entity),
                 entity.getKeiyakuTorokuYMD(),
                 create契約事業者(entity, 法人, 口座),
-                //TODO DBはRString クラス図はboolean→booleanに変更
                 entity.getJutakuKaishuKeiyakuUmu(),
                 entity.getTokuteiFukushiYoguHanbaiKeiyakuUmu(),
                 entity.getShokanbaraiKyufuKeiyakuUmu(),
@@ -74,16 +71,14 @@ public final class JuryoininJigyoshaMapper {
     /**
      * 受領委任事業者EntityListをbusinessの受領委任事業者クラスリストにマッピングします。<br/>
      * 引数にnullや空のリストが渡された場合は、空のコレクションを返します。<br/>
-     * 事業者Listはnullの場合もあります。
      *
      * @param entities 受領委任事業者EntityList
-     * @param 事業者List businessの事業者クラスリスト
      * @param 法人List　businessの法人クラスリスト
      * @param 口座List　businessの口座クラスリスト
      * @return　businessの受領委任事業者リストクラス
      */
     public static JuryoininJigyoshaList to受領委任事業者List(List<DbT3077JuryoininKeiyakuJigyoshaEntity> entities,
-            /*List<IKaigoJigyosha> 事業者List,*/ List<IHojin> 法人List, List<IKoza> 口座List) {
+            List<IHojin> 法人List, List<IKoza> 口座List) {
         if (entities == null || entities.isEmpty()) {
             return new JuryoininJigyoshaList(Collections.EMPTY_LIST);
         }
@@ -91,13 +86,6 @@ public final class JuryoininJigyoshaMapper {
         List<JuryoininJigyosha> 受領委任事業者List = new ArrayList<>();
         for (int i = 0; i < entities.size(); i++) {
             受領委任事業者List.add(to受領委任事業者(entities.get(i), 法人List.get(i), 口座List.get(i)));
-//            if (事業者List == null) {
-//                受領委任事業者List.add(to受領委任事業者(
-//                        entities.get(i), null, 法人List.get(i), 口座List.get(i)));
-//            } else {
-//                受領委任事業者List.add(to受領委任事業者(
-//                        entities.get(i), 事業者List.get(i), 法人List.get(i), 口座List.get(i)));
-//            }
         }
         return new JuryoininJigyoshaList(受領委任事業者List);
     }
@@ -160,8 +148,8 @@ public final class JuryoininJigyoshaMapper {
         return new Todokedesha(address, jigyoshaName, daihyoshaName);
     }
 
-    private static KeiyakuJigyosha create契約事業者(DbT3077JuryoininKeiyakuJigyoshaEntity entity,
-            /*IKaigoJigyosha 事業者,*/ IHojin 法人, IKoza 口座) {
+    private static KeiyakuJigyosha create契約事業者(
+            DbT3077JuryoininKeiyakuJigyoshaEntity entity, IHojin 法人, IKoza 口座) {
 
         JigyoshaNo jigyoshaNo = entity.getKeiyakuJigyoshaNo();
         IHojin hojin = 法人;
@@ -169,9 +157,9 @@ public final class JuryoininJigyoshaMapper {
         EigyoKeitai eigyoKeitai = EigyoKeitai.toValue(entity.getEigyoKeitai());
         RString sofusakiBusho = entity.getSofusakiBusho();
         IKoza koza = 口座;
+        //TODO n3317塚田萌　ISofusakiは本実装の時に対応する。期限　本実装完了まで
 //        ISofusaki sofusaki = 送付先;
 
         return new KeiyakuJigyosha(jigyoshaNo, hojin, jigyoshaFaxNo, eigyoKeitai, sofusakiBusho, koza);
     }
-
 }
