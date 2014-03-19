@@ -50,7 +50,7 @@ public class NinteichosaItem implements INinteichosaItem {
         this.調査項目番号 = requireNonNull(調査項目番号, Messages.E00001.replace("調査項目番号").getMessage());
         this.調査項目区分 = requireNonNull(調査項目区分, Messages.E00001.replace("調査項目区分").getMessage());
         this.表示名称 = requireNonNull(表示名称, Messages.E00001.replace("表示名称").getMessage());
-        this.選択肢 = 選択肢;
+        this.選択肢 = requireNonNull(選択肢, Messages.E00001.replace("選択肢").getMessage());
     }
 
     @Override

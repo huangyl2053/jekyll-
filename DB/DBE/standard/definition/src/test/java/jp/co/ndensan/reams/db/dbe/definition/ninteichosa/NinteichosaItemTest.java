@@ -32,6 +32,7 @@ public class NinteichosaItemTest {
     private static final int AS_調査項目番号がNULL = 3;
     private static final int AS_調査項目区分がNULL = 4;
     private static final int AS_表示名称がNULL = 5;
+    private static final int AS_選択肢がNULL = 6;
 
     public static class コンストラクタ {
 
@@ -58,6 +59,11 @@ public class NinteichosaItemTest {
         @Test(expected = NullPointerException.class)
         public void 表示名称がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
             createNinteichosaItem(AS_表示名称がNULL);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 選択肢がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
+            createNinteichosaItem(AS_選択肢がNULL);
         }
     }
 
@@ -141,6 +147,6 @@ public class NinteichosaItemTest {
                 flg == AS_調査項目番号がNULL ? null : new NinteichosaItemNo(new RString("1-1")),
                 flg == AS_調査項目区分がNULL ? null : NinteichosaItemKubunOfKihon.麻痺等の有無_右上肢,
                 flg == AS_表示名称がNULL ? null : new RString("右上肢"),
-                new Choices(Choice.NaiAru.values()));
+                flg == AS_選択肢がNULL ? null : new Choices(Choice.NaiAru.values()));
     }
 }
