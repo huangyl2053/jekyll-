@@ -41,9 +41,10 @@ public class KaigoIryoKikanMapperTest extends TestBase {
         private RString 医療機関名称;
         private RString 医療機関略称;
         private RString 医療機関カナ略称;
-        private RString 郵便番号;
-        private RString 住所;
-        private RString カナ住所;
+//TODO n1013 UrT0516IryokikanEntityにIIryoKikanの修正に伴う見直し。暫定対応
+//        private RString 郵便番号;
+//        private RString 住所;
+//        private RString カナ住所;
         private RString 会員区分;
         private boolean 指定自立支援医療機関flag;
         private RDate 新設年月日;
@@ -67,9 +68,9 @@ public class KaigoIryoKikanMapperTest extends TestBase {
             医療機関名称 = new RString("介護病院");
             医療機関略称 = new RString("介護病院");
             医療機関カナ略称 = new RString("カイゴビョウイン");
-            郵便番号 = new RString("903-1111");
-            住所 = new RString("A町B1-12-123");
-            カナ住所 = new RString("エーマチ");
+//            郵便番号 = new RString("903-1111");
+//            住所 = new RString("A町B1-12-123");
+//            カナ住所 = new RString("エーマチ");
             会員区分 = new RString("会員");
             指定自立支援医療機関flag = true;
             新設年月日 = new RDate("19991212");
@@ -110,29 +111,29 @@ public class KaigoIryoKikanMapperTest extends TestBase {
 
         @Test
         public void 引数から渡された医療機関名称と_戻り値の介護医療機関クラスの医療機関名称が同一になる() {
-            assertThat(sut.get医療機関名称().getName(), is(医療機関名称));
+            assertThat(sut.get医療機関名称().getName().value(), is(医療機関名称));
         }
 
         @Test
         public void 引数から渡された医療機関略称と_戻り値の介護医療機関クラスの医療機関略称が同一になる() {
-            assertThat(sut.get医療機関略称().getName(), is(医療機関略称));
+            assertThat(sut.get医療機関略称().getName().value(), is(医療機関略称));
         }
 
-        @Test
-        public void 引数から渡された所在地郵便番号と_戻り値の介護医療機関クラスの所在地郵便番号が同一になる() {
-            assertThat(sut.get所在地郵便番号(), is(郵便番号));
-        }
-
-        @Test
-        public void 引数から渡された所在地住所と_戻り値の介護医療機関クラスの所在地住所が同一になる() {
-            assertThat(sut.get所在地住所(), is(住所));
-        }
-
-        @Test
-        public void 引数から渡された所在地カナ住所と_戻り値の介護医療機関クラスの所在地カナ住所が同一になる() {
-            assertThat(sut.get所在地カナ住所(), is(カナ住所));
-        }
-
+//        @Test
+//        public void 引数から渡された所在地郵便番号と_戻り値の介護医療機関クラスの所在地郵便番号が同一になる() {
+//            assertThat(sut.get所在地郵便番号(), is(郵便番号));
+//        }
+//
+//        @Test
+//        public void 引数から渡された所在地住所と_戻り値の介護医療機関クラスの所在地住所が同一になる() {
+//            assertThat(sut.get所在地住所(), is(住所));
+//        }
+//
+//        @Test
+//        public void 引数から渡された所在地カナ住所と_戻り値の介護医療機関クラスの所在地カナ住所が同一になる() {
+//            assertThat(sut.get所在地カナ住所(), is(カナ住所));
+//        }
+//
         @Test
         public void 引数から渡された開設期間の開始と_戻り値の介護医療機関クラスの新設年月日が同一になる() {
             assertThat(sut.get開設期間().getFrom(), is(新設年月日));

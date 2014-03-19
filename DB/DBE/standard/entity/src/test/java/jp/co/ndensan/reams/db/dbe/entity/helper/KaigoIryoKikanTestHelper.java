@@ -33,7 +33,7 @@ import static org.mockito.Mockito.*;
  */
 public final class KaigoIryoKikanTestHelper {
 
-    public static RString 識別コード = new RString("000000001");
+    public static ShikibetsuCode 識別コード = new ShikibetsuCode(new RString("000000001"));
     public static RString 医療機関名称 = new RString("介護病院");
     public static RString 医療機関カナ名称 = new RString("カイゴビョウイン");
     public static RString 医療機関略称 = new RString("介護病院");
@@ -42,6 +42,7 @@ public final class KaigoIryoKikanTestHelper {
     public static RString 住所 = new RString("A町B1-12-123");
     public static RString カナ住所 = new RString("エーマチ");
     public static RString 会員区分 = new RString("会員");
+    public static RString 医師区分 = new RString("医師");
     public static boolean 指定自立支援医療機関flag = true;
     public static RDate 新設年月日 = new RDate("19991212");
     public static RDate 廃止年月日 = new RDate("20091212");
@@ -58,16 +59,19 @@ public final class KaigoIryoKikanTestHelper {
     }
 
     public static UrT0516IryokikanEntity create医療機関Entity() {
-        UrT0516IryokikanEntity entity = new UrT0516IryokikanEntity(createIryoKikan());
+        //TODO n1013 松本直樹 UrT0516IryokikanEntityにIIryoKikanの修正に伴う見直し。暫定対応
+        //UrT0516IryokikanEntity entity = new UrT0516IryokikanEntity(createIryoKikan());
+        UrT0516IryokikanEntity entity = new UrT0516IryokikanEntity();
 
         entity.setIryokikanCd(医療機関コード.getValue());
         entity.setShikibetsuCode(識別コード);
         entity.setIryokikanRyakusho(医療機関略称);
         entity.setIryokikanKanaRyakusho(医療機関カナ略称);
-        entity.setYubinNo(郵便番号);
-        entity.setJusho(住所);
-        entity.setKanaJusho(カナ住所);
+//        entity.setYubinNo(郵便番号);
+//        entity.setJusho(住所);
+//        entity.setKanaJusho(カナ住所);
         entity.setKaiinKubunCode(new Code(会員区分));
+        entity.setDocKubunCode(new Code(医師区分));
         entity.setJiritsushienFlag(指定自立支援医療機関flag);
         entity.setShinsetsuYMD(new FlexibleDate(新設年月日.toDateString()));
         entity.setHaishiYMD(new FlexibleDate(廃止年月日.toDateString()));
@@ -77,97 +81,96 @@ public final class KaigoIryoKikanTestHelper {
         return entity;
     }
 
-    //TODO n3327 三浦凌 UrT0516IryokikanEntityにIIryoKikanを引数にしたコンストラクタしかないことに対する暫定対応。見直しが必要。
-    private static IIryoKikan createIryoKikan() {
-        return new IIryoKikan() {
-            @Override
-            public IIryoKikanCode get医療機関コード() {
-                return 医療機関コード;
-            }
-
-            @Override
-            public ShikibetsuCode get識別コード() {
-                return createShikibetsuCode(識別コード);
-            }
-
-            @Override
-            public IName get医療機関名称() {
-                return createName(医療機関名称, 医療機関カナ名称);
-
-            }
-
-            @Override
-            public IName get医療機関略称() {
-                return createName(医療機関略称, 医療機関カナ略称);
-            }
-
-            @Override
-            public RString get所在地郵便番号() {
-                return 郵便番号;
-            }
-
-            @Override
-            public RString get所在地住所() {
-                return 住所;
-            }
-
-            @Override
-            public RString get所在地カナ住所() {
-                return カナ住所;
-            }
-
-            @Override
-            public Range<RDate> get開設期間() {
-                return new Range<>(新設年月日, 廃止年月日);
-            }
-
-            @Override
-            public IDoctors get所属医師() {
-                return null;
-            }
-
-            @Override
-            public List<IKoza> get口座() {
-                return new ArrayList<>();
-            }
-
-            @Override
-            public RDate get異動年月日() {
-                return 異動年月日;
-            }
-
-            @Override
-            public RString get休止区分() {
-                return 休止区分;
-            }
-
-            @Override
-            public RString get異動事由() {
-                return 異動事由;
-            }
-
-            @Override
-            public RString get会員区分() {
-                return 会員区分;
-            }
-
-            @Override
-            public RString get点数表() {
-                return RString.EMPTY;
-            }
-
-            @Override
-            public boolean is有効医療機関(RDate 基準日) {
-                return true;
-            }
-
-            @Override
-            public boolean is指定自立支援医療機関() {
-                return 指定自立支援医療機関flag;
-            }
-        };
-    }
-
+//    //TODO n3327 三浦凌 UrT0516IryokikanEntityにIIryoKikanを引数にしたコンストラクタしかないことに対する暫定対応。見直しが必要。
+//    private static IIryoKikan createIryoKikan() {
+//        return new IIryoKikan() {
+//            @Override
+//            public IIryoKikanCode get医療機関コード() {
+//                return 医療機関コード;
+//            }
+//
+//            @Override
+//            public ShikibetsuCode get識別コード() {
+//                return createShikibetsuCode(識別コード);
+//            }
+//
+//            @Override
+//            public IName get医療機関名称() {
+//                return createName(医療機関名称, 医療機関カナ名称);
+//
+//            }
+//
+//            @Override
+//            public IName get医療機関略称() {
+//                return createName(医療機関略称, 医療機関カナ略称);
+//            }
+//
+//            @Override
+//            public RString get所在地郵便番号() {
+//                return 郵便番号;
+//            }
+//
+//            @Override
+//            public RString get所在地住所() {
+//                return 住所;
+//            }
+//
+//            @Override
+//            public RString get所在地カナ住所() {
+//                return カナ住所;
+//            }
+//
+//            @Override
+//            public Range<RDate> get開設期間() {
+//                return new Range<>(新設年月日, 廃止年月日);
+//            }
+//
+//            @Override
+//            public IDoctors get所属医師() {
+//                return null;
+//            }
+//
+//            @Override
+//            public List<IKoza> get口座() {
+//                return new ArrayList<>();
+//            }
+//
+//            @Override
+//            public RDate get異動年月日() {
+//                return 異動年月日;
+//            }
+//
+//            @Override
+//            public RString get休止区分() {
+//                return 休止区分;
+//            }
+//
+//            @Override
+//            public RString get異動事由() {
+//                return 異動事由;
+//            }
+//
+//            @Override
+//            public RString get会員区分() {
+//                return 会員区分;
+//            }
+//
+//            @Override
+//            public RString get点数表() {
+//                return RString.EMPTY;
+//            }
+//
+//            @Override
+//            public boolean is有効医療機関(RDate 基準日) {
+//                return true;
+//            }
+//
+//            @Override
+//            public boolean is指定自立支援医療機関() {
+//                return 指定自立支援医療機関flag;
+//            }
+//        }
+//    }
     public static DbT7011ShujiiIryoKikanJohoEntity create主治医医療機関Entity() {
         DbT7011ShujiiIryoKikanJohoEntity entity = new DbT7011ShujiiIryoKikanJohoEntity();
         entity.setShichosonCode(市町村コード_A001);
@@ -194,8 +197,8 @@ public final class KaigoIryoKikanTestHelper {
 
     private static IName createName(RString 名称, RString カナ名称) {
         IName name = mock(IName.class);
-        when(name.getName()).thenReturn(名称);
-        when(name.getKana()).thenReturn(カナ名称);
+        when(name.getName().value()).thenReturn(名称);
+        when(name.getKana().value()).thenReturn(カナ名称);
         return name;
     }
 }

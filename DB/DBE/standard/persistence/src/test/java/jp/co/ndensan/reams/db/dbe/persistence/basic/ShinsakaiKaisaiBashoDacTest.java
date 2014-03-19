@@ -282,7 +282,7 @@ public class ShinsakaiKaisaiBashoDacTest extends DbeTestDacBase {
             ShinsakaiKaisaiBashoChikuCode 開催場所地区コード, AtenaJusho 開催場所住所,
             TelNo 開催場所電話番号, boolean 開催場所状況) {
         DbT5104ShinsakaiKaisaiBashoJohoEntity entity = new DbT5104ShinsakaiKaisaiBashoJohoEntity();
-        entity.setInsertDantaiCd(new RString("000000001"));
+        entity.setInsertDantaiCd(new RString("000001"));
         entity.setIsDeleted(false);
         entity.setLastUpdateReamsLoginId(new RString("0001"));
         entity.setShinsakaiKaisaiBashoCode(開催場所コード);

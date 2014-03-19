@@ -177,7 +177,7 @@ public class ShujiiIkenshoIraiTaishoshaFinder {
     }
 
     private RString create氏名(IShikibetsuTaisho 識別対象) {
-        return 識別対象.get氏名().getName();
+        return 識別対象.get氏名().getName().value();
     }
 
     private RString create住所(IShikibetsuTaisho 識別対象) {

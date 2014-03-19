@@ -77,18 +77,18 @@ public class KaigoIryoKikanFinder implements IKaigoIryoKikanFinder {
         }
 
         //TODO n8178 城間篤人 基準日をどうするか確認する。また、これ以外のget口座を利用するのかもしれないため、要検討。 2014年2月末
-        List<IKoza> kozaList = kozaManager.get口座(RDate.MIN, create識別コード(entity));
+//        List<IKoza> kozaList = kozaManager.get口座(RDate.MIN, create識別コード(entity));
+        List<IKoza> kozaList = kozaManager.get口座(RDate.MIN, entity.getIryoKikanEntity().getShikibetsuCode());
         return KaigoIryoKikanMapper.toKaigoIryoKikan(entity, kozaList);
     }
 
-    //医療機関Entityが修正され、識別コードを直接とってこれるようになったらこの処理は不要 2014年2月末
-    private ShikibetsuCode create識別コード(KaigoIryoKikanEntity entity) {
-        if (entity == null) {
-            return null;
-        }
-        return new ShikibetsuCode(entity.getIryoKikanEntity().getShikibetsuCode());
-    }
-
+//    //医療機関Entityが修正され、識別コードを直接とってこれるようになったらこの処理は不要 2014年2月末
+//    private ShikibetsuCode create識別コード(KaigoIryoKikanEntity entity) {
+//        if (entity == null) {
+//            return null;
+//        }
+//        return new ShikibetsuCode(entity.getIryoKikanEntity().getShikibetsuCode());
+//    }
     private List<KaigoIryoKikan> create介護医療機関List(List<KaigoIryoKikanEntity> entities) {
         List<KaigoIryoKikan> iryoKikanList = new ArrayList<>();
         for (KaigoIryoKikanEntity entity : entities) {

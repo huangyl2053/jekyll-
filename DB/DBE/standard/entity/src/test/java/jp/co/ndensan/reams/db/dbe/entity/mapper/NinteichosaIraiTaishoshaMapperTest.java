@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.ur.urf.entity.basic.KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.ur.urz.business.IJusho;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
@@ -140,7 +142,7 @@ public class NinteichosaIraiTaishoshaMapperTest extends TestBase {
 
         @Test
         public void 引き渡した_個人の氏名_とtoNinteichosaIraiTaishoshaの結果は一致する() {
-            assertThat(sut.get氏名(), is(個人.get氏名().getName()));
+            assertThat(sut.get氏名(), is(個人.get氏名().getName().value()));
         }
 
         @Test
@@ -178,8 +180,10 @@ public class NinteichosaIraiTaishoshaMapperTest extends TestBase {
 
     private static IName toName(String shimei, String kanaShimei) {
         IName name = mock(IName.class);
-        when(name.getName()).thenReturn(new RString(shimei));
-        when(name.getKana()).thenReturn(new RString(kanaShimei));
+        AtenaMeisho atenaMeisho = new AtenaMeisho(shimei);
+        AtenaKanaMeisho atenaKanaMeisho = new AtenaKanaMeisho(kanaShimei);
+        when(name.getName()).thenReturn(atenaMeisho);
+        when(name.getKana()).thenReturn(atenaKanaMeisho);
         return name;
     }
 

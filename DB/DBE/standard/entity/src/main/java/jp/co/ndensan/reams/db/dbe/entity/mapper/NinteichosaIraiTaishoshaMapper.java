@@ -68,7 +68,7 @@ public final class NinteichosaIraiTaishoshaMapper {
         NinteiShinseiKubunShinsei 認定申請区分 = 要介護認定申請情報Entity.getNinteiShinseiShinseijiKubunCode();
         IKojin 個人情報 = 個人;
 //        IShikibetsuTaisho 識別対象 = ShikibetsuTaishoFactory.create(個人Entity);
-        RString 氏名 = 個人.get氏名().getName();
+        RString 氏名 = 個人.get氏名().getName().value();
         RString 住所 = 個人.get住所().getValue();
         NinteichosaItakusaki 認定調査委託先 = create認定調査委託先(認定調査委託先Entity);
         IKaigoJigyosha 事業者情報 = create介護事業者(介護事業者Entity);
