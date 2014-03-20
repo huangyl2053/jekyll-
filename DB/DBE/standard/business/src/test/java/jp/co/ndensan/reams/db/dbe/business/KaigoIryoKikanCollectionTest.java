@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikan;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
+import jp.co.ndensan.reams.ur.urz.business._IryoKikan;
 import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -293,7 +294,7 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
 //            when(介護医療機関.get医療機関状況()).thenReturn(医療機関状況);
 //            when(介護医療機関.get市町村コード()).thenReturn(scode);
 //            when(介護医療機関.get介護医療機関コード()).thenReturn(kcode);
-            IIryoKikan 医療機関 = mock(IIryoKikan.class);
+            IIryoKikan 医療機関 = mock(_IryoKikan.class);
             return new KaigoIryoKikan(医療機関, 主治医医療機関);
 //            return 介護医療機関;
         }
