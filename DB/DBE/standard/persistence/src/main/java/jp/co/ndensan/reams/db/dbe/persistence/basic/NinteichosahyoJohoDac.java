@@ -32,7 +32,7 @@ public class NinteichosahyoJohoDac implements INinteichosahyoJohoDac {
                 .table(DbT5009NinteichosahyoJoho.class)
                 .where(and(
                 eq(shinseishoKanriNo, 申請書管理番号),
-                eq(ninteichosaRirekiNo, 認定調査履歴番号.value().intValue())))
+                eq(ninteichosaRirekiNo, 認定調査履歴番号)))
                 .toList(DbT5009NinteichosahyoJohoEntity.class);
         return !list.isEmpty() ? list.get(0) : null;
     }
