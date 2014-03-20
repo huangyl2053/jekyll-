@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbc.business.JuryoininJigyosha;
 import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.mapper.JuryoininJigyoshaMapper;
-import jp.co.ndensan.reams.db.dbc.persistence.basic.IJuryoininJigyoshaDac;
+import jp.co.ndensan.reams.db.dbc.persistence.basic.JuryoininJigyoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
 import jp.co.ndensan.reams.ur.urf.realservice.IKaigoJigyoshaFinder;
@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class JuryoininJigyoshaManager {
 
-    private final IJuryoininJigyoshaDac dac;
+    private final JuryoininJigyoshaDac dac;
     private IKaigoJigyoshaFinder jigyoshaFinder;
     private final IHojinFinder hojinFinder;
     private final IKozaManager kozaFinder;
@@ -41,7 +41,7 @@ public class JuryoininJigyoshaManager {
      * デフォルトコンストラクタです。
      */
     public JuryoininJigyoshaManager() {
-        dac = InstanceProvider.create(IJuryoininJigyoshaDac.class);
+        dac = InstanceProvider.create(JuryoininJigyoshaDac.class);
 
         //TODO n3317塚田萌 _KaigoJigyoshaFinder() の実装が完了したらgetInstance()を行う。
 //        jigyoshaFinder = KaigoJigyoshaFinderFactory.getInstance();
@@ -54,7 +54,7 @@ public class JuryoininJigyoshaManager {
      *
      * @param dac テスト用Dac
      */
-    JuryoininJigyoshaManager(IJuryoininJigyoshaDac dac, IKaigoJigyoshaFinder jigyoshaFinder, IHojinFinder hojinFinder, IKozaManager kozaFinder) {
+    JuryoininJigyoshaManager(JuryoininJigyoshaDac dac, IKaigoJigyoshaFinder jigyoshaFinder, IHojinFinder hojinFinder, IKozaManager kozaFinder) {
         this.dac = dac;
         this.jigyoshaFinder = jigyoshaFinder;
         this.hojinFinder = hojinFinder;

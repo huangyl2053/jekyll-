@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbc.business.JuryoininJigyosha;
 import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.helper.JuryoininJigyoshaMock;
-import jp.co.ndensan.reams.db.dbc.persistence.basic.IJuryoininJigyoshaDac;
+import jp.co.ndensan.reams.db.dbc.persistence.basic.JuryoininJigyoshaDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
 import jp.co.ndensan.reams.ur.urf.definition.KaigoJigyoshaShubetsu;
@@ -101,8 +101,8 @@ public class JuryoininJigyoshaManagerTest extends DbcTestBase {
                 createJigyoshaFinderMock(), createHojinFinderMock(), createKozaFinderMock());
     }
 
-    private static IJuryoininJigyoshaDac createDac(int flg) {
-        IJuryoininJigyoshaDac dac = mock(IJuryoininJigyoshaDac.class);
+    private static JuryoininJigyoshaDac createDac(int flg) {
+        JuryoininJigyoshaDac dac = mock(JuryoininJigyoshaDac.class);
         when(dac.select(any(KeiyakuNo.class))).thenReturn(createEntity(flg));
         when(dac.insert(any(DbT3077JuryoininKeiyakuJigyoshaEntity.class))).thenReturn(flg);
         when(dac.delete(any(DbT3077JuryoininKeiyakuJigyoshaEntity.class))).thenReturn(flg);

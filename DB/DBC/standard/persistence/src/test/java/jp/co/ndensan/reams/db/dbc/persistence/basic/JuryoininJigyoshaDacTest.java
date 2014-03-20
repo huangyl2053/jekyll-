@@ -33,7 +33,7 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class JuryoininJigyoshaDacTest extends DbcTestDacBase {
 
-    private static IJuryoininJigyoshaDac sut;
+    private static JuryoininJigyoshaDac sut;
     private static final KeiyakuNo 契約番号 = new KeiyakuNo(new RString("1234567890"));
     private static final RString 送付先部署 = new RString("１課");
     private static final int 失敗 = 0;
