@@ -82,7 +82,8 @@ public class NinteichosaResultManagerTest {
 
     private static INinteichosaKekkaDac createNinteichosaKekkaDac(boolean flg) {
         INinteichosaKekkaDac dac = mock(INinteichosaKekkaDac.class);
-        when(dac.select(any(ShinseishoKanriNo.class), any(NinteichosaIraiRirekiNo.class))).thenReturn(createNinteichosaKekkaEntity(flg));
+        NinteichosaKekkaEntity entity = createNinteichosaKekkaEntity(flg);
+        when(dac.select(any(ShinseishoKanriNo.class), any(NinteichosaIraiRirekiNo.class))).thenReturn(entity);
         when(dac.insertOrUpdate(any(NinteichosaKekkaEntity.class))).thenReturn(flg);
         when(dac.insert(any(NinteichosaKekkaEntity.class))).thenReturn(flg);
         when(dac.update(any(NinteichosaKekkaEntity.class))).thenReturn(flg);
