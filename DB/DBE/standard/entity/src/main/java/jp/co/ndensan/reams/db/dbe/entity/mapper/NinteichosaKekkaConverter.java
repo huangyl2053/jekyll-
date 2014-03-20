@@ -18,7 +18,7 @@ import static java.util.Objects.requireNonNull;
  *
  * @author N8156 宮本 康
  */
-public class NinteichosaKekkaConverter {
+class NinteichosaKekkaConverter {
 
     private final Ninteichosahyo 調査票;
 
@@ -27,7 +27,7 @@ public class NinteichosaKekkaConverter {
      *
      * @param 調査票 調査票
      */
-    public NinteichosaKekkaConverter(Ninteichosahyo 調査票) {
+    NinteichosaKekkaConverter(Ninteichosahyo 調査票) {
         this.調査票 = requireNonNull(調査票, Messages.E00001.replace("調査票").getMessage());
     }
 
@@ -38,7 +38,7 @@ public class NinteichosaKekkaConverter {
      * @param 調査結果 調査結果（RString型）
      * @return 調査結果
      */
-    public NinteichosaItemForResult create調査結果(INinteichosaItemKubun 調査項目区分, RString 調査結果) {
+    NinteichosaItemForResult create調査結果(INinteichosaItemKubun 調査項目区分, RString 調査結果) {
         NinteichosaItem item = (NinteichosaItem) 調査票.get調査項目(調査項目区分);
         return item == null ? null : new NinteichosaItemForResult(item, 調査結果);
     }
@@ -50,7 +50,7 @@ public class NinteichosaKekkaConverter {
      * @param 調査結果 調査結果（int型）
      * @return 調査結果
      */
-    public NinteichosaItemForResult create調査結果(INinteichosaItemKubun 調査項目区分, int 調査結果) {
+    NinteichosaItemForResult create調査結果(INinteichosaItemKubun 調査項目区分, int 調査結果) {
         return create調査結果(調査項目区分, new RString(String.valueOf(調査結果)));
     }
 
@@ -60,7 +60,7 @@ public class NinteichosaKekkaConverter {
      * @param 調査項目区分 調査項目区分
      * @return 調査結果
      */
-    public RString get調査結果ByStringValue(INinteichosaItemKubun 調査項目区分) {
+    RString get調査結果ByStringValue(INinteichosaItemKubun 調査項目区分) {
         NinteichosaItemForResult result = (NinteichosaItemForResult) 調査票.get調査項目(調査項目区分);
         return result == null ? null : result.get調査結果();
     }
@@ -71,7 +71,7 @@ public class NinteichosaKekkaConverter {
      * @param 調査項目区分 調査項目区分
      * @return 調査結果
      */
-    public int get調査結果ByIntValue(INinteichosaItemKubun 調査項目区分) {
+    int get調査結果ByIntValue(INinteichosaItemKubun 調査項目区分) {
         RString result = get調査結果ByStringValue(調査項目区分);
         return result == null ? 0 : Integer.parseInt(result.toString());
     }
@@ -82,7 +82,7 @@ public class NinteichosaKekkaConverter {
      * @param 調査項目区分 調査項目区分
      * @return 調査結果
      */
-    public Code get調査結果ByCodeValue(INinteichosaItemKubun 調査項目区分) {
+    Code get調査結果ByCodeValue(INinteichosaItemKubun 調査項目区分) {
         RString result = get調査結果ByStringValue(調査項目区分);
         return result == null ? null : new Code(result);
     }
