@@ -63,24 +63,4 @@ public class JuryoininJigyoshaDac implements IJuryoininJigyoshaDac {
         DbAccessorForAddType accessor = new DbAccessorForAddType(session);
         return accessor.insertDenialRow(data).execute();
     }
-
-//    @Override
-//    public int update(DbT3077JuryoininKeiyakuJigyoshaEntity data) {
-//        DbAccessorForAddType accessor = new DbAccessorForAddType(session);
-//        return accessor.insertDenialRow(data).execute();
-//    }
-//
-//    @Override
-//    public int insertOrUpdate(DbT3077JuryoininKeiyakuJigyoshaEntity data) {
-//        return getMatchRowCount(data) == 0 ? insert(data) : update(data);
-//    }
-//
-//    private int getMatchRowCount(DbT3077JuryoininKeiyakuJigyoshaEntity data) {
-//        DbAccessorForAddType accessor = new DbAccessorForAddType(session);
-//        return accessor.
-//                select().
-//                table(DbT3077JuryoininKeiyakuJigyosha.class).
-//                where(eq(jigyoshaKeiyakuNo, data.getJigyoshaKeiyakuNo())).
-//                getCount();
-//    }
 }

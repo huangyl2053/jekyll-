@@ -86,6 +86,8 @@ public class JuryoininJigyosha {
     }
 
     /**
+     * 処理日時を返します。
+     *
      * @return 処理日時
      */
     public RDateTime get処理日時() {

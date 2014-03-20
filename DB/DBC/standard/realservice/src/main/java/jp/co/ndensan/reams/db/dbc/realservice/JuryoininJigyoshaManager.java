@@ -84,7 +84,7 @@ public class JuryoininJigyoshaManager {
     }
 
     //TODO n3317塚田萌　get受領委任事業者(検索条件)は本実装の時に対応する。期限　本実装完了まで
-//    public List<JuryoininJigyosha> get受領委任事業者(検索条件) {
+//    public List<JuryoininJigyosha> get受領委任事業者(検索条件) {}
     /**
      * 引数の受領委任事業者情報を追加します。
      *

@@ -49,8 +49,8 @@ public class JuryoininJigyoshaMapperTest extends TestBase {
         }
 
         @Test
-        public void 受領委任entityに_nullを設定した時_nullを返す() {
-            sut = JuryoininJigyoshaMapper.to受領委任事業者(null,/* null,*/ null, null);
+        public void 受領委任事業者entityに_nullを設定した時_nullを返す() {
+            sut = JuryoininJigyoshaMapper.to受領委任事業者(null, null, null);
             assertThat(sut, is(nullValue()));
         }
 
