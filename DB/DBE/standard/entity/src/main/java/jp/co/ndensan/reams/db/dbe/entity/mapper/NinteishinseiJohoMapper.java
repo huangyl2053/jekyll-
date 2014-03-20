@@ -5,7 +5,11 @@
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisage;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
  * 認定申請情報のMapperです。
@@ -21,23 +25,40 @@ public final class NinteishinseiJohoMapper {
     private NinteishinseiJohoMapper() {
     }
 
-//    /**
-//     * 認定申請情報Entityを認定申請情報クラスに変換します。
-//     *
-//     * @param entity 認定申請情報Entity
-//     * @return 認定申請情報クラス
-//     */
-//    public static NinteiShinseiTorisageTaishosha to認定申請取下げ対象者(DbT5001NinteiShinseiJohoEntity entity) {
-//        return new NinteiShinseiTorisageTaishosha(entity.getShinseishoKanriNo(), entity.getShichosonCode(), entity.getHihokenshaNo(),
-//                entity.getNinteiShinseiYMD(), entity.getNinteiShinseiShinseijiKubunCode(), create認定申請取下げ(entity));
-//    }
-//
-//    private static NinteiShinseiTorisage create認定申請取下げ(DbT5001NinteiShinseiJohoEntity entity) {
-//        return new NinteiShinseiTorisage(TorisageKubun.toValue(entity.getTorisageKubunCode()),
-//                entity.getTorisageRiyu(), entity.getTorisageYMD(),
-//                ShinsaKeizokuKubun.toValue(entity.isShinsaKeizokuKubun()));
-//    }
-//
+    /**
+     * 認定申請情報Entityを認定申請情報クラスに変換します。
+     *
+     * @param entity 認定申請情報Entity
+     * @return 認定申請情報クラス
+     */
+    public static NinteiShinseiJoho to認定申請情報(DbT5001NinteiShinseiJohoEntity entity) {
+        return new NinteiShinseiJoho(
+                entity.getShinseishoKanriNo(),
+                entity.getShichosonCode(),
+                entity.getShishoCode(),
+                entity.getHihokenshaNo(),
+                entity.getShikibetsuCode(),
+                entity.getNinteiShinseiYMD().toRDate(),
+                entity.getNinteiShinseiEdabanCode(),
+                entity.getNinteiShinseiShinseijiKubunCode(),
+                entity.getNinteiShinseiHoreiKubunCode(),
+                entity.getNinteiShinseiYukoKubunCode(),
+                new Code(entity.getShienShinseiKubun()),
+                entity.getShinseiRiyu(),
+                entity.getZenYokaigoKubunCode(),
+                entity.getZenYukoKikan(),
+                entity.isJohoteikyoDouiUmuKubun(),
+                entity.getNinteichosaIraiRirekiNo(),
+                entity.getIkenshoIraiRirekiNo(),
+                new Code(entity.getMinashiCode()),
+                entity.isEnkitsuchiDoiUmuKubun(),
+                entity.isShisetsuNyushoUmuKubun(),
+                entity.getSichosonRenrakuJiko(),
+                new NinteiShinseiTorisage(TorisageKubun.toValue(entity.getTorisageKubunCode()),
+                entity.getTorisageRiyu(), entity.getTorisageYMD(),
+                ShinsaKeizokuKubun.toValue(entity.isShinsaKeizokuKubun())));
+    }
+
     /**
      * 認定申請情報を、認定申請情報EntityにMappingします。
      *

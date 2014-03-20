@@ -3,9 +3,9 @@ package jp.co.ndensan.reams.db.dbe.entity.basic;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * DbT5011ShujiiIkenshoIraiJohoの項目定義クラスです
+ * 主治医意見書作成依頼情報を表す列挙型です。
  *
- * @author N8187 久保田 英男
+ * @author N8156 宮本 康
  */
 public enum DbT5011ShujiiIkenshoIraiJoho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
@@ -18,10 +18,10 @@ public enum DbT5011ShujiiIkenshoIraiJoho implements IColumnDefinition {
     updateCount(10, 0),
     lastUpdateTimestamp(29, 0),
     lastUpdateReamsLoginId(2147483647, 0),
-    shinseishoKanriNo(10, 0),
+    shinseishoKanriNo(2147483647, 0),
     ikenshoIraiRirekiNo(5, 0),
-    shujiiIryoKikanCode(10, 0),
-    ishiShikibetsuNo(8, 0),
+    kaigoIryokikanCode(10, 0),
+    kaigoIshiCode(8, 0),
     ikenshoIraiKubun(1, 0),
     ikenshoIraiKaisu(5, 0),
     ishiKubunCode(2147483647, 0),

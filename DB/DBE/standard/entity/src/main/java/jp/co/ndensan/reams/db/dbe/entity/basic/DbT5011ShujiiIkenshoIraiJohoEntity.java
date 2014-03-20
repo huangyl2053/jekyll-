@@ -1,19 +1,19 @@
 package jp.co.ndensan.reams.db.dbe.entity.basic;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang._UUID;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
- * DbT5011ShujiiIkenshoIraiJohoの項目定義クラスです
+ * 主治医意見書作成依頼情報のエンティティクラスです。
  *
- * @author N8187 久保田 英男
+ * @author N8156 宮本 康
  */
 public class DbT5011ShujiiIkenshoIraiJohoEntity implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
@@ -23,17 +23,17 @@ public class DbT5011ShujiiIkenshoIraiJohoEntity implements IDbAccessable {
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;
     private RString insertReamsLoginId;
-    private _UUID insertContextId;
+    private UUID insertContextId;
     private boolean isDeleted = false;
     private int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private RString shinseishoKanriNo;
+    private ShinseishoKanriNo shinseishoKanriNo;
     @PrimaryKey
     private int ikenshoIraiRirekiNo;
-    private KaigoIryoKikanCode shujiiIryoKikanCode;
-    private RString ishiShikibetsuNo;
+    private RString kaigoIryokikanCode;
+    private RString kaigoIshiCode;
     private RString ikenshoIraiKubun;
     private int ikenshoIraiKaisu;
     private Code ishiKubunCode;
@@ -98,7 +98,7 @@ public class DbT5011ShujiiIkenshoIraiJohoEntity implements IDbAccessable {
      *
      * @return shinseishoKanriNo
      */
-    public RString getShinseishoKanriNo() {
+    public ShinseishoKanriNo getShinseishoKanriNo() {
         return shinseishoKanriNo;
     }
 
@@ -107,7 +107,7 @@ public class DbT5011ShujiiIkenshoIraiJohoEntity implements IDbAccessable {
      *
      * @param shinseishoKanriNo shinseishoKanriNo
      */
-    public void setShinseishoKanriNo(RString shinseishoKanriNo) {
+    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
@@ -130,39 +130,39 @@ public class DbT5011ShujiiIkenshoIraiJohoEntity implements IDbAccessable {
     }
 
     /**
-     * getShujiiIryoKikanCode
+     * getKaigoIryokikanCode
      *
-     * @return shujiiIryoKikanCode
+     * @return kaigoIryokikanCode
      */
-    public KaigoIryoKikanCode getShujiiIryoKikanCode() {
-        return shujiiIryoKikanCode;
+    public RString getKaigoIryokikanCode() {
+        return kaigoIryokikanCode;
     }
 
     /**
-     * setShujiiIryoKikanCode
+     * setKaigoIryokikanCode
      *
-     * @param shujiiIryoKikanCode shujiiIryoKikanCode
+     * @param kaigoIryokikanCode kaigoIryokikanCode
      */
-    public void setShujiiIryoKikanCode(KaigoIryoKikanCode shujiiIryoKikanCode) {
-        this.shujiiIryoKikanCode = shujiiIryoKikanCode;
+    public void setKaigoIryokikanCode(RString kaigoIryokikanCode) {
+        this.kaigoIryokikanCode = kaigoIryokikanCode;
     }
 
     /**
-     * getIshiShikibetsuNo
+     * getKaigoIshiCode
      *
-     * @return ishiShikibetsuNo
+     * @return kaigoIshiCode
      */
-    public RString getIshiShikibetsuNo() {
-        return ishiShikibetsuNo;
+    public RString getKaigoIshiCode() {
+        return kaigoIshiCode;
     }
 
     /**
-     * setIshiShikibetsuNo
+     * setKaigoIshiCode
      *
-     * @param ishiShikibetsuNo ishiShikibetsuNo
+     * @param kaigoIshiCode kaigoIshiCode
      */
-    public void setIshiShikibetsuNo(RString ishiShikibetsuNo) {
-        this.ishiShikibetsuNo = ishiShikibetsuNo;
+    public void setKaigoIshiCode(RString kaigoIshiCode) {
+        this.kaigoIshiCode = kaigoIshiCode;
     }
 
     /**

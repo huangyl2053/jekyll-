@@ -1,0 +1,17 @@
+﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,ShinseishoKanriNo,,,,,A
+ikenshoIraiRirekiNo,int2,int,,,,,A
+kaigoIryokikanCode,varchar,RString,,,,,A
+kaigoIshiCode,varchar,RString,,,,,A
+ikenshoIraiKubun,bpchar,RString,,,,,A
+ikenshoIraiKaisu,int2,int,,,,,A
+ishiKubunCode,UDD035Code,Code,,,,,A
+ikenshoSakuseiIraiYMD,UDD015YMD,FlexibleDate,,,,,A
+ikenshoSakuseiKigenYMD,UDD015YMD,FlexibleDate,,,,,A
+iraishoShutsuryokuYMD,UDD015YMD,FlexibleDate,,,,,A
+ikenshoShutsuryokuYMD,UDD015YMD,FlexibleDate,,,,,A
+seikyushoShutsuryokuYMD,UDD015YMD,FlexibleDate,,,,,A
+sakuseiryoSeikyuKubun,UDD035Code,Code,,,,,A
+ikenshoSakuseiTokusokuYMD,UDD015YMD,FlexibleDate,,,,,A
+ikenshoSakuseiTokusokuHoho,bpchar,RString,,,,,A
+ikenshoTokusokuKaisu,int2,int,,,,,A
+ikenshoTokusokuMemo,text,RString,,,,,A
