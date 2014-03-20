@@ -9,23 +9,32 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJoho;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJoho.*;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
+import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 合議体情報テーブルのデータを扱うクラスです。
  *
  * @author n8178 城間篤人
  */
-public class GogitaiJohoDac implements IGogitaiJohoDac {
+public class GogitaiJohoDac implements IReplaceable<DbT5103GogitaiJohoEntity>, IDeletable<DbT5103GogitaiJohoEntity> {
 
     @InjectSession
     private SqlSession session;
 
-    @Override
+    /**
+     * 指定した合議体番号に該当する合議体Entityのリストを取得します。
+     *
+     * @param 合議体番号 合議体番号
+     * @return 合議体EntityのList
+     */
+    @Transaction
     public List<DbT5103GogitaiJohoEntity> select(GogitaiNo 合議体番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5103GogitaiJoho.class).
@@ -33,7 +42,13 @@ public class GogitaiJohoDac implements IGogitaiJohoDac {
                 toList(DbT5103GogitaiJohoEntity.class);
     }
 
-    @Override
+    /**
+     * 指定した日付時点で有効な合議体の情報を取得します。
+     *
+     * @param 年月日 年月日
+     * @return 合議体EntityのList
+     */
+    @Transaction
     public List<DbT5103GogitaiJohoEntity> select(FlexibleDate 年月日) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5103GogitaiJoho.class).

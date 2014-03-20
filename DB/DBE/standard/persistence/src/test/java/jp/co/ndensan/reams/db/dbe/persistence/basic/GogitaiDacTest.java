@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -26,11 +26,11 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class GogitaiDacTest {
 
-    private static IGogitaiJohoDac sut;
+    private static GogitaiJohoDac sut;
 
     @BeforeClass
     public static void setUpClass() {
-        sut = InstanceCreator.create(IGogitaiJohoDac.class);
+        sut = InstanceProvider.create(GogitaiJohoDac.class);
     }
 
     public static class select_合議体を渡したときのテスト extends DbeTestDacBase {

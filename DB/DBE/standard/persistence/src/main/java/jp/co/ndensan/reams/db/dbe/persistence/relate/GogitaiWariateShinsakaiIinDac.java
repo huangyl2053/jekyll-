@@ -18,18 +18,24 @@ import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
 import static jp.co.ndensan.reams.uz.uza.util.db.Order.*;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 合議体割当情報と、それに割り当てられている審査会委員の情報を取得するDacです。
  *
  * @author n8178 城間篤人
  */
-public class GogitaiWariateShinsakaiIinDac implements IGogitaiWariateShinsakaiIinDac {
+public class GogitaiWariateShinsakaiIinDac {
 
     @InjectSession
     private SqlSession session;
 
-    @Override
+    /**
+     * すべての合議体の情報と、それぞれに割り当てられている審査会委員をすべて取得します。
+     *
+     * @return 合議体割当委員のList
+     */
+    @Transaction
     public List<GogitaiWariateShinsakaiIinEntity> select() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5107GogitaiWariateIinJoho.class)
@@ -41,7 +47,13 @@ public class GogitaiWariateShinsakaiIinDac implements IGogitaiWariateShinsakaiIi
                 .toList(GogitaiWariateShinsakaiIinEntity.class);
     }
 
-    @Override
+    /**
+     * 合議体番号を指定し、合議体の履歴と、それぞれに割り当てられた審査会委員の情報を取得します。
+     *
+     * @param 合議体番号 合議体番号
+     * @return 合議体割当委員のList
+     */
+    @Transaction
     public List<GogitaiWariateShinsakaiIinEntity> select(GogitaiNo 合議体番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5107GogitaiWariateIinJoho.class)
@@ -54,7 +66,13 @@ public class GogitaiWariateShinsakaiIinDac implements IGogitaiWariateShinsakaiIi
                 .toList(GogitaiWariateShinsakaiIinEntity.class);
     }
 
-    @Override
+    /**
+     * 合議体有効期間開始年月日を指定し、指定した日付時点で有効な合議体と、それぞれに割り当てられている審査会委員の情報を取得します。
+     *
+     * @param 合議体有効期間開始年月日 合議体有効期間開始年月日
+     * @return 合議体割当委員のList
+     */
+    @Transaction
     public List<GogitaiWariateShinsakaiIinEntity> select(GogitaiYukoKikanKaishiYMD 合議体有効期間開始年月日) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5107GogitaiWariateIinJoho.class)
@@ -67,7 +85,14 @@ public class GogitaiWariateShinsakaiIinDac implements IGogitaiWariateShinsakaiIi
                 .toList(GogitaiWariateShinsakaiIinEntity.class);
     }
 
-    @Override
+    /**
+     * 合議体番号と合議体有効期間開始年月日を指定し、1つの合議体情報と、それに割り当てられた審査会委員の情報を取得します。
+     *
+     * @param 合議体番号 合議体番号
+     * @param 合議体有効期間開始年月日 合議体有効期間開始年月日
+     * @return 合議体割当委員のList
+     */
+    @Transaction
     public List<GogitaiWariateShinsakaiIinEntity> select(GogitaiNo 合議体番号, GogitaiYukoKikanKaishiYMD 合議体有効期間開始年月日) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5107GogitaiWariateIinJoho.class)

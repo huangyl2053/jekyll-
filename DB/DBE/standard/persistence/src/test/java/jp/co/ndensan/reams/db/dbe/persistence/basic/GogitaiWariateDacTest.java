@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -25,11 +25,11 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class GogitaiWariateDacTest {
 
-    private static IGogitaiWariateDac sut;
+    private static GogitaiWariateDac sut;
 
     @BeforeClass
     public static void setUpClass() {
-        sut = InstanceCreator.create(IGogitaiWariateDac.class);
+        sut = InstanceProvider.create(GogitaiWariateDac.class);
     }
 
     //TODO n8178 城間篤人 insertOrUpdate実装が完了後に改めてテスト 2014年3月末

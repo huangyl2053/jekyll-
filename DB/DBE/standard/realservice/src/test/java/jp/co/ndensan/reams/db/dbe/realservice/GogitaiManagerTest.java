@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.relate.GogitaiWariateShinsakaiIinEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.relate.IGogitaiAndGogitaiWariateIinDac;
-import jp.co.ndensan.reams.db.dbe.persistence.relate.IGogitaiWariateShinsakaiIinDac;
+import jp.co.ndensan.reams.db.dbe.persistence.relate.GogitaiAndGogitaiWariateIinDac;
+import jp.co.ndensan.reams.db.dbe.persistence.relate.GogitaiWariateShinsakaiIinDac;
 import jp.co.ndensan.reams.db.dbe.entity.helper.GogitaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import org.junit.Test;
@@ -44,8 +44,8 @@ public class GogitaiManagerTest {
             assertThat(result.size(), is(3));
         }
 
-        private IGogitaiWariateShinsakaiIinDac createGogitaiWariateIinDacMock(int 件数) {
-            IGogitaiWariateShinsakaiIinDac dac = mock(IGogitaiWariateShinsakaiIinDac.class);
+        private GogitaiWariateShinsakaiIinDac createGogitaiWariateIinDacMock(int 件数) {
+            GogitaiWariateShinsakaiIinDac dac = mock(GogitaiWariateShinsakaiIinDac.class);
             List<GogitaiWariateShinsakaiIinEntity> 合議体割当委員EntityList = create合議体割当委員EntityList(件数);
             when(dac.select(any(GogitaiNo.class))).thenReturn(合議体割当委員EntityList);
             return dac;
@@ -61,8 +61,8 @@ public class GogitaiManagerTest {
             assertThat(result.size(), is(2));
         }
 
-        private IGogitaiWariateShinsakaiIinDac createGogitaiWariateIinDacMock(int 件数) {
-            IGogitaiWariateShinsakaiIinDac dac = mock(IGogitaiWariateShinsakaiIinDac.class);
+        private GogitaiWariateShinsakaiIinDac createGogitaiWariateIinDacMock(int 件数) {
+            GogitaiWariateShinsakaiIinDac dac = mock(GogitaiWariateShinsakaiIinDac.class);
             List<GogitaiWariateShinsakaiIinEntity> 合議体割当委員EntityList = create合議体割当委員EntityList(件数);
             when(dac.select(any(GogitaiYukoKikanKaishiYMD.class))).thenReturn(合議体割当委員EntityList);
             return dac;
@@ -83,8 +83,8 @@ public class GogitaiManagerTest {
             assertThat(sut.save(create合議体Mock()), is(false));
         }
 
-        private IGogitaiAndGogitaiWariateIinDac createGogitaiAndGogitaiWariateIinDacMock(int 件数) {
-            IGogitaiAndGogitaiWariateIinDac dac = mock(IGogitaiAndGogitaiWariateIinDac.class);
+        private GogitaiAndGogitaiWariateIinDac createGogitaiAndGogitaiWariateIinDacMock(int 件数) {
+            GogitaiAndGogitaiWariateIinDac dac = mock(GogitaiAndGogitaiWariateIinDac.class);
             when(dac.insertOrUpdate(any(DbT5103GogitaiJohoEntity.class), any(List.class))).thenReturn(件数);
             return dac;
         }
@@ -104,8 +104,8 @@ public class GogitaiManagerTest {
             assertThat(sut.remove(create合議体Mock()), is(false));
         }
 
-        private IGogitaiAndGogitaiWariateIinDac createGogitaiAndGogitaiWariateIinDacMock(int 件数) {
-            IGogitaiAndGogitaiWariateIinDac dac = mock(IGogitaiAndGogitaiWariateIinDac.class);
+        private GogitaiAndGogitaiWariateIinDac createGogitaiAndGogitaiWariateIinDacMock(int 件数) {
+            GogitaiAndGogitaiWariateIinDac dac = mock(GogitaiAndGogitaiWariateIinDac.class);
             when(dac.delete(any(DbT5103GogitaiJohoEntity.class), any(List.class))).thenReturn(件数);
             return dac;
         }

@@ -5,6 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5107GogitaiWariateIinJohoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
+import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -14,7 +16,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
  *
  * @author n8178 城間篤人
  */
-public class GogitaiWariateDac implements IGogitaiWariateDac {
+public class GogitaiWariateDac implements IReplaceable<DbT5107GogitaiWariateIinJohoEntity>,
+        IDeletable<DbT5107GogitaiWariateIinJohoEntity> {
 
     @InjectSession
     private SqlSession session;

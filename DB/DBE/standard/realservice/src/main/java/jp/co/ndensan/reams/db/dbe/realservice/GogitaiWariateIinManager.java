@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiY
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5107GogitaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.GogitaiWariateIinMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.GogitaiWariateShinsakaiIinEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.IGogitaiWariateDac;
-import jp.co.ndensan.reams.db.dbe.persistence.relate.IGogitaiWariateShinsakaiIinDac;
+import jp.co.ndensan.reams.db.dbe.persistence.basic.GogitaiWariateDac;
+import jp.co.ndensan.reams.db.dbe.persistence.relate.GogitaiWariateShinsakaiIinDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -23,15 +23,15 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class GogitaiWariateIinManager {
 
-    private final IGogitaiWariateShinsakaiIinDac gogitaiWariateIinDac;
-    private final IGogitaiWariateDac wariateDac;
+    private final GogitaiWariateShinsakaiIinDac gogitaiWariateIinDac;
+    private final GogitaiWariateDac wariateDac;
 
     /**
      * デフォルトコンストラクタです。
      */
     public GogitaiWariateIinManager() {
-        this.gogitaiWariateIinDac = InstanceProvider.createWithCustomize(IGogitaiWariateShinsakaiIinDac.class);
-        this.wariateDac = InstanceProvider.createWithCustomize(IGogitaiWariateDac.class);
+        this.gogitaiWariateIinDac = InstanceProvider.create(GogitaiWariateShinsakaiIinDac.class);
+        this.wariateDac = InstanceProvider.create(GogitaiWariateDac.class);
     }
 
     /**
@@ -40,7 +40,7 @@ public class GogitaiWariateIinManager {
      * @param gogitaiWariateIinDac 合議体割当審査会委員Dac
      * @param wariateDac 合議体割当Dac
      */
-    GogitaiWariateIinManager(IGogitaiWariateShinsakaiIinDac gogitaiWariateIinDac, IGogitaiWariateDac wariateDac) {
+    GogitaiWariateIinManager(GogitaiWariateShinsakaiIinDac gogitaiWariateIinDac, GogitaiWariateDac wariateDac) {
         this.gogitaiWariateIinDac = gogitaiWariateIinDac;
         this.wariateDac = wariateDac;
     }

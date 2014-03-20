@@ -8,14 +8,14 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
 import jp.co.ndensan.reams.db.dbe.entity.relate.GogitaiWariateShinsakaiIinEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.IGogitaiJohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.IGogitaiWariateDac;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.IShinsakaiKaisaiBashoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.relate.helper.IShinsakaiIinDacMock;
+import jp.co.ndensan.reams.db.dbe.persistence.basic.GogitaiJohoDac;
+import jp.co.ndensan.reams.db.dbe.persistence.basic.GogitaiWariateDac;
+import jp.co.ndensan.reams.db.dbe.persistence.basic.ShinsakaiKaisaiBashoDac;
+import jp.co.ndensan.reams.db.dbe.persistence.relate.helper.ShinsakaiIinDacMock;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import static jp.co.ndensan.reams.db.dbe.entity.helper.GogitaiMockEntityCreator.*;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -32,19 +32,19 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class GogitaiWariateShinsakaiIinDacTest {
 
-    private static IGogitaiWariateShinsakaiIinDac sut;
-    private static IShinsakaiIinDacMock shinsakaiInserter;
-    private static IGogitaiWariateDac wariateInserter;
-    private static IGogitaiJohoDac gogitaiJohoInserter;
-    private static IShinsakaiKaisaiBashoDac kaisaiBashoInserter;
+    private static GogitaiWariateShinsakaiIinDac sut;
+    private static ShinsakaiIinDacMock shinsakaiInserter;
+    private static GogitaiWariateDac wariateInserter;
+    private static GogitaiJohoDac gogitaiJohoInserter;
+    private static ShinsakaiKaisaiBashoDac kaisaiBashoInserter;
 
     @BeforeClass
     public static void setUpClass() {
-        sut = InstanceCreator.create(IGogitaiWariateShinsakaiIinDac.class);
-        shinsakaiInserter = InstanceCreator.create(IShinsakaiIinDacMock.class);
-        wariateInserter = InstanceCreator.create(IGogitaiWariateDac.class);
-        gogitaiJohoInserter = InstanceCreator.create(IGogitaiJohoDac.class);
-        kaisaiBashoInserter = InstanceCreator.create(IShinsakaiKaisaiBashoDac.class);
+        sut = InstanceProvider.create(GogitaiWariateShinsakaiIinDac.class);
+        shinsakaiInserter = InstanceProvider.create(ShinsakaiIinDacMock.class);
+        wariateInserter = InstanceProvider.create(GogitaiWariateDac.class);
+        gogitaiJohoInserter = InstanceProvider.create(GogitaiJohoDac.class);
+        kaisaiBashoInserter = InstanceProvider.create(ShinsakaiKaisaiBashoDac.class);
     }
 
     public static class relateしたエンティティを取得できているかのテスト extends DbeTestDacBase {

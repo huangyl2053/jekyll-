@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBasho
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiChiku;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.IShinsakaiKaisaiBashoDac;
+import jp.co.ndensan.reams.db.dbe.persistence.basic.ShinsakaiKaisaiBashoDac;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -22,7 +22,7 @@ import static org.mockito.Mockito.*;
  *
  * @author N1013 松本直樹
  */
-public class ShinsakaiKaisaiBashoDacMock implements IShinsakaiKaisaiBashoDac {
+public class ShinsakaiKaisaiBashoDacMock extends ShinsakaiKaisaiBashoDac {
 
     public static RString 検索不可な開催場所コード = new RString("検索不可");
     private static ShinsakaiKaisaiBashoCode kaisaiBashoCode;

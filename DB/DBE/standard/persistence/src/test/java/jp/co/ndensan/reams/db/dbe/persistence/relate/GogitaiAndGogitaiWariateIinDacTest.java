@@ -9,13 +9,13 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5107GogitaiWariateIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.IGogitaiJohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.relate.helper.IGogitaiWariateSelector;
+import jp.co.ndensan.reams.db.dbe.persistence.basic.GogitaiJohoDac;
+import jp.co.ndensan.reams.db.dbe.persistence.relate.helper.GogitaiWariateSelector;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -32,15 +32,15 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class GogitaiAndGogitaiWariateIinDacTest {
 
-    private static IGogitaiAndGogitaiWariateIinDac sut;
-    private static IGogitaiJohoDac gogitaiDac;
-    private static IGogitaiWariateSelector gogitaiWariateSelecter;
+    private static GogitaiAndGogitaiWariateIinDac sut;
+    private static GogitaiJohoDac gogitaiDac;
+    private static GogitaiWariateSelector gogitaiWariateSelecter;
 
     @BeforeClass
     public static void setUpClass() {
-        sut = InstanceCreator.create(IGogitaiAndGogitaiWariateIinDac.class);
-        gogitaiDac = InstanceCreator.create(IGogitaiJohoDac.class);
-        gogitaiWariateSelecter = InstanceCreator.create(IGogitaiWariateSelector.class);
+        sut = InstanceProvider.create(GogitaiAndGogitaiWariateIinDac.class);
+        gogitaiDac = InstanceProvider.create(GogitaiJohoDac.class);
+        gogitaiWariateSelecter = InstanceProvider.create(GogitaiWariateSelector.class);
     }
 
     public static class insertOrUpdateのテスト extends DbeTestDacBase {

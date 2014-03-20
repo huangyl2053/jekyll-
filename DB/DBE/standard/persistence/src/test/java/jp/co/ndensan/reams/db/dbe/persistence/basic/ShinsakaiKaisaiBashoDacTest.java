@@ -8,13 +8,13 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBashoJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.helper.IShinsakaiKaisaiBashoDacMock;
+import jp.co.ndensan.reams.db.dbe.persistence.basic.helper.ShinsakaiKaisaiBashoDacMock;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import org.junit.Before;
@@ -31,14 +31,14 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class ShinsakaiKaisaiBashoDacTest {
 
-    private static IShinsakaiKaisaiBashoDacMock inserter;
-    private static IShinsakaiKaisaiBashoDac sut;
+    private static ShinsakaiKaisaiBashoDacMock inserter;
+    private static ShinsakaiKaisaiBashoDac sut;
     private static ShinsakaiKaisaiBashoJokyo ShinsakaiKaisaiBashoJokyo;
 
     @BeforeClass
     public static void setUpClass() {
-        inserter = InstanceCreator.create(IShinsakaiKaisaiBashoDacMock.class);
-        sut = InstanceCreator.create(IShinsakaiKaisaiBashoDac.class);
+        inserter = InstanceProvider.create(ShinsakaiKaisaiBashoDacMock.class);
+        sut = InstanceProvider.create(ShinsakaiKaisaiBashoDac.class);
     }
 
     public static class insertのテスト extends DbeTestDacBase {

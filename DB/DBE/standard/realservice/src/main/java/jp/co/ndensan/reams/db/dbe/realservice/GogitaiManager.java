@@ -15,9 +15,9 @@ import jp.co.ndensan.reams.db.dbe.entity.mapper.GogitaiJohoMapper;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.GogitaiMapper;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.GogitaiWariateIinMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.GogitaiWariateShinsakaiIinEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.relate.IGogitaiWariateShinsakaiIinDac;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
-import jp.co.ndensan.reams.db.dbe.persistence.relate.IGogitaiAndGogitaiWariateIinDac;
+import jp.co.ndensan.reams.db.dbe.persistence.relate.GogitaiWariateShinsakaiIinDac;
+import jp.co.ndensan.reams.db.dbe.persistence.relate.GogitaiAndGogitaiWariateIinDac;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 合議体の情報を管理するクラスです。
@@ -26,15 +26,15 @@ import jp.co.ndensan.reams.db.dbe.persistence.relate.IGogitaiAndGogitaiWariateIi
  */
 public class GogitaiManager {
 
-    private final IGogitaiWariateShinsakaiIinDac gogitaiWariateIinDac;
-    private final IGogitaiAndGogitaiWariateIinDac gogitaiAndWariateIinDac;
+    private final GogitaiWariateShinsakaiIinDac gogitaiWariateIinDac;
+    private final GogitaiAndGogitaiWariateIinDac gogitaiAndWariateIinDac;
 
     /**
      * デフォルトコンストラクタです。
      */
     public GogitaiManager() {
-        gogitaiWariateIinDac = InstanceCreator.create(IGogitaiWariateShinsakaiIinDac.class);
-        gogitaiAndWariateIinDac = InstanceCreator.create(IGogitaiAndGogitaiWariateIinDac.class);
+        gogitaiWariateIinDac = InstanceProvider.create(GogitaiWariateShinsakaiIinDac.class);
+        gogitaiAndWariateIinDac = InstanceProvider.create(GogitaiAndGogitaiWariateIinDac.class);
     }
 
     /**
@@ -43,8 +43,8 @@ public class GogitaiManager {
      * @param wariateIinDac 合議体割当審査会委員Dac
      * @param gogitaiAndWariateIinDac 合議体割当Dac
      */
-    public GogitaiManager(IGogitaiWariateShinsakaiIinDac wariateIinDac,
-            IGogitaiAndGogitaiWariateIinDac gogitaiAndWariateIinDac) {
+    public GogitaiManager(GogitaiWariateShinsakaiIinDac wariateIinDac,
+            GogitaiAndGogitaiWariateIinDac gogitaiAndWariateIinDac) {
         this.gogitaiWariateIinDac = wariateIinDac;
         this.gogitaiAndWariateIinDac = gogitaiAndWariateIinDac;
     }

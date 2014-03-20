@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBasho
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.ShinsakaiKaisaiBashoMapper;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.IShinsakaiKaisaiBashoDac;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.db.dbe.persistence.basic.ShinsakaiKaisaiBashoDac;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 審査会開催場所の情報を管理するクラスです。
@@ -22,13 +22,13 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
  */
 public class ShinsakaiKaisaiBashoManager {
 
-    private final IShinsakaiKaisaiBashoDac dac;
+    private final ShinsakaiKaisaiBashoDac dac;
 
     /**
      * デフォルトコンストラクタです。
      */
     public ShinsakaiKaisaiBashoManager() {
-        dac = InstanceCreator.create(IShinsakaiKaisaiBashoDac.class);
+        dac = InstanceProvider.create(ShinsakaiKaisaiBashoDac.class);
     }
 
     /**
@@ -36,7 +36,7 @@ public class ShinsakaiKaisaiBashoManager {
      *
      * @param shinsakaiKaisaiBashoDac テスト用MockDac
      */
-    ShinsakaiKaisaiBashoManager(IShinsakaiKaisaiBashoDac shinsakaiKaisaiBashoDac) {
+    ShinsakaiKaisaiBashoManager(ShinsakaiKaisaiBashoDac shinsakaiKaisaiBashoDac) {
         this.dac = shinsakaiKaisaiBashoDac;
     }
 
