@@ -10,10 +10,12 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.JuryoininJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.JuryoininJigyoshaList;
+import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.helper.JuryoininJigyoshaMock;
 import jp.co.ndensan.reams.ur.urz.business.IKoza;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -29,10 +31,13 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class JuryoininJigyoshaMapperTest extends TestBase {
 
+    private static final KeiyakuNo 契約番号 = new KeiyakuNo(new RString("1234567890"));
+    private static final RString 送付先部署 = new RString("１課");
+
     public static class Test_to受領委任事業者 extends TestBase {
 
         private final DbT3077JuryoininKeiyakuJigyoshaEntity JuryoininJigyoshaEntity
-                = JuryoininJigyoshaMock.create受領委任事業者Entity();
+                = JuryoininJigyoshaMock.create受領委任事業者Entity(契約番号, 送付先部署);
         private JuryoininJigyosha sut;
 
         @Override
@@ -173,7 +178,7 @@ public class JuryoininJigyoshaMapperTest extends TestBase {
         private List<DbT3077JuryoininKeiyakuJigyoshaEntity> create受領委任事業者EntityList(int listSize) {
             List<DbT3077JuryoininKeiyakuJigyoshaEntity> list = new ArrayList<>();
             for (int i = 0; i < listSize; i++) {
-                list.add(JuryoininJigyoshaMock.create受領委任事業者Entity());
+                list.add(JuryoininJigyoshaMock.create受領委任事業者Entity(契約番号, 送付先部署));
             }
             return list;
         }

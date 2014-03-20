@@ -42,16 +42,17 @@ import jp.co.ndensan.reams.uz.uza.lang.Range;
 import static org.mockito.Mockito.mock;
 
 /**
- * 受領委任事業者のテストヘルパーです。<br />
- * entityを作成します。
+ * 受領委任事業者のテストヘルパーです。
  *
  * @author N3317 塚田 萌
  */
 public class JuryoininJigyoshaMock {
 
-    public static DbT3077JuryoininKeiyakuJigyoshaEntity create受領委任事業者Entity() {
+    public static DbT3077JuryoininKeiyakuJigyoshaEntity create受領委任事業者Entity(
+            KeiyakuNo 契約番号, RString 送付先部署) {
+
         DbT3077JuryoininKeiyakuJigyoshaEntity entity = new DbT3077JuryoininKeiyakuJigyoshaEntity();
-        entity.setJigyoshaKeiyakuNo(new RString("1234567890"));
+        entity.setJigyoshaKeiyakuNo(契約番号.value());
         entity.setKaishiYMD(new FlexibleDate("20110303"));
         entity.setShoriTimestamp(RDateTime.of(2014, 1, 10, 11, 12));
         entity.setShuryoYMD(new FlexibleDate("20130303"));
@@ -62,7 +63,7 @@ public class JuryoininJigyoshaMock {
         entity.setShikibetsuCode(new ShikibetsuCode(new RString("0000000001")));
         entity.setJigyoshaFaxNo(new TelNo(new RString("0262222222")));
         entity.setKeiyakuTorokuYMD(new FlexibleDate("20110208"));
-        entity.setSofusakiBusho(new RString("担当課"));
+        entity.setSofusakiBusho(送付先部署);
         entity.setEigyoKeitai(EigyoKeitai.法人.getCode());
         entity.setJutakuKaishuKeiyakuUmu(true);
         entity.setTokuteiFukushiYoguHanbaiKeiyakuUmu(true);
