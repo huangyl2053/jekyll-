@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikan;
+import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
+import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
@@ -214,9 +216,6 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
 //            return 介護医療機関;
         }
 
-        private IryoKikanKubun create医療機関区分(String 医療機関区分コード) {
-            return new IryoKikanKubun(new RString(医療機関区分コード), RString.EMPTY, RString.EMPTY);
-        }
     }
 
     public static class sub介護医療機関Collection_医療機関状況を引数に渡した場合のテスト extends TestBase {
@@ -286,13 +285,17 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
 //            when(医療機関.get識別コード()).thenReturn(new ShikibetsuCode(new RString(識別コード)));
 //
 //            return new KaigoIryoKikan(医療機関, 主治医医療機関);
-            KaigoIryoKikan 介護医療機関 = mock(KaigoIryoKikan.class);
-            when(介護医療機関.get医療機関状況()).thenReturn(医療機関状況);
-            ShichosonCode scode = create市町村コード(市町村コード);
-            when(介護医療機関.get市町村コード()).thenReturn(scode);
-            KaigoIryoKikanCode kcode = create介護医療機関コード(介護医療機関コード);
-            when(介護医療機関.get介護医療機関コード()).thenReturn(kcode);
-            return 介護医療機関;
+            KaigoIryoKikanCode kaigoIryoKikanCode = create介護医療機関コード(介護医療機関コード);
+            ShichosonCode shichosonCode = create市町村コード(市町村コード);
+            IIryoKikanCode iryoKikanCode = create医療機関コード(介護医療機関コード);
+            IShujiiIryoKikan 主治医医療機関 = new ShujiiIryoKikan(shichosonCode, kaigoIryoKikanCode, iryoKikanCode, 医療機関状況, create医療機関区分("A001"));
+//            KaigoIryoKikan 介護医療機関 = mock(KaigoIryoKikan.class);
+//            when(介護医療機関.get医療機関状況()).thenReturn(医療機関状況);
+//            when(介護医療機関.get市町村コード()).thenReturn(scode);
+//            when(介護医療機関.get介護医療機関コード()).thenReturn(kcode);
+            IIryoKikan 医療機関 = mock(IIryoKikan.class);
+            return new KaigoIryoKikan(医療機関, 主治医医療機関);
+//            return 介護医療機関;
         }
     }
 
@@ -322,5 +325,13 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
 
     private static KaigoIryoKikanCode create介護医療機関コード(String str) {
         return new KaigoIryoKikanCode(new RString(str));
+    }
+
+    private static IIryoKikanCode create医療機関コード(String str) {
+        return new _IryoKikanCode(new RString(str));
+    }
+
+    private static IryoKikanKubun create医療機関区分(String 医療機関区分コード) {
+        return new IryoKikanKubun(new RString(医療機関区分コード), RString.EMPTY, RString.EMPTY);
     }
 }
