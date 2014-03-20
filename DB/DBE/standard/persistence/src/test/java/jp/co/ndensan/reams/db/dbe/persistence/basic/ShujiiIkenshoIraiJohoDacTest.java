@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestDacBase;
 import jp.co.ndensan.reams.uz.uza.util.db._SQLOptimisticLockFaildException;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -38,7 +38,7 @@ public class ShujiiIkenshoIraiJohoDacTest extends DbeTestDacBase {
 
     @BeforeClass
     public static void setUpClass() {
-        sut = InstanceCreator.create(IShujiiIkenshoIraiJohoDac.class);
+        sut = InstanceProvider.create(ShujiiIkenshoIraiJohoDac.class);
     }
 
     public static class select extends TestDacBase {

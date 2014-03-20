@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.ur.urz.business._IryoKikan;
 import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._Name;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -89,8 +90,8 @@ public class KaigoDoctorMock {
         return new _IryoKikan(
                 new _IryoKikanCode(new RString("1234567890")),
                 new ShikibetsuCode(new RString("123456")),
-                new _Name(new RString("医療機関名称"), RString.EMPTY),
-                new _Name(new RString("医療機関略称"), RString.EMPTY),
+                new _Name(new AtenaMeisho(new RString("医療機関名称")), new AtenaKanaMeisho(new RString("イリョウキカンカナメイショウ"))),
+                new _Name(new AtenaMeisho(new RString("医療機関略称")), new AtenaKanaMeisho(new RString("イリョウキカンカナメリャクショウ"))),
                 new RString("所在地郵便番号"),
                 new RString("所在地住所"),
                 new RString("所在地カナ住所"),
