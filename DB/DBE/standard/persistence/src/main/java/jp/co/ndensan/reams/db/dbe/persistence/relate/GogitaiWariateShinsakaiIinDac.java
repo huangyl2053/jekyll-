@@ -37,7 +37,7 @@ public class GogitaiWariateShinsakaiIinDac implements IGogitaiWariateShinsakaiIi
                 .leftJoin(DbT5103GogitaiJoho.class,
                 using(DbT5107GogitaiWariateIinJoho.gogitaiNo, DbT5107GogitaiWariateIinJoho.gogitaiYukoKikanKaishiYMD))
                 .leftJoin(DbT5104ShinsakaiKaisaiBashoJoho.class, using(DbT5103GogitaiJoho.shinsakaiKaisaiBashoCode))
-                .order(by(gogitaiNo, DESC), by(gogitaiYukoKikanKaishiYMD, ASC))
+                .order(by(gogitaiNo, ASC), by(gogitaiYukoKikanKaishiYMD, DESC))
                 .toList(GogitaiWariateShinsakaiIinEntity.class);
     }
 
@@ -50,7 +50,7 @@ public class GogitaiWariateShinsakaiIinDac implements IGogitaiWariateShinsakaiIi
                 using(DbT5107GogitaiWariateIinJoho.gogitaiNo, DbT5107GogitaiWariateIinJoho.gogitaiYukoKikanKaishiYMD))
                 .leftJoin(DbT5104ShinsakaiKaisaiBashoJoho.class, using(DbT5103GogitaiJoho.shinsakaiKaisaiBashoCode))
                 .where(eq(gogitaiNo, 合議体番号.value()))
-                .order(by(gogitaiYukoKikanKaishiYMD, ASC))
+                .order(by(gogitaiYukoKikanKaishiYMD, DESC))
                 .toList(GogitaiWariateShinsakaiIinEntity.class);
     }
 
@@ -63,7 +63,7 @@ public class GogitaiWariateShinsakaiIinDac implements IGogitaiWariateShinsakaiIi
                 using(DbT5107GogitaiWariateIinJoho.gogitaiNo, DbT5107GogitaiWariateIinJoho.gogitaiYukoKikanKaishiYMD))
                 .leftJoin(DbT5104ShinsakaiKaisaiBashoJoho.class, using(DbT5103GogitaiJoho.shinsakaiKaisaiBashoCode))
                 .where(and(leq(gogitaiYukoKikanKaishiYMD, 合議体有効期間開始年月日.value()), leq(合議体有効期間開始年月日.value(), gogitaiYukoKikanShuryoYMD)))
-                .order(by(gogitaiNo, DESC))
+                .order(by(gogitaiNo, ASC))
                 .toList(GogitaiWariateShinsakaiIinEntity.class);
     }
 
