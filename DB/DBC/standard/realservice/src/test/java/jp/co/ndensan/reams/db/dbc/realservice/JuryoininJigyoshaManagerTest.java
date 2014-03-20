@@ -77,7 +77,6 @@ public class JuryoininJigyoshaManagerTest extends DbcTestBase {
 
         @Test
         public void 該当の受領委任事業者情報がない時_get受領委任事業者は_NULLを返す() {
-
             sut = createManager(AS_情報なし);
             JuryoininJigyosha result = sut.get受領委任事業者(createKeiyakuNo(new RString("1234567890")));
             assertThat(result, nullValue());
@@ -85,7 +84,6 @@ public class JuryoininJigyoshaManagerTest extends DbcTestBase {
 
         @Test
         public void 該当の受領委任事業者情報がある時_get受領委任事業者は_受領委任事業者情報を返す() {
-
             sut = createManager(AS_情報あり);
             JuryoininJigyosha result = sut.get受領委任事業者(createKeiyakuNo(new RString("1234567890")));
             assertThat(result, instanceOf(JuryoininJigyosha.class));
@@ -96,14 +94,12 @@ public class JuryoininJigyoshaManagerTest extends DbcTestBase {
 
         @Test
         public void saveに失敗した場合_falseを返す() {
-
             sut = createManager(AS_失敗);
             assertThat(sut.save(create受領委任事業者()), is(false));
         }
 
         @Test
         public void saveに成功した場合_trueを返す() {
-
             sut = createManager(AS_成功);
             assertThat(sut.save(create受領委任事業者()), is(true));
         }
@@ -113,14 +109,12 @@ public class JuryoininJigyoshaManagerTest extends DbcTestBase {
 
         @Test
         public void removeに失敗した場合_falseを返す() {
-
             sut = createManager(AS_失敗);
             assertThat(sut.remove(create受領委任事業者()), is(false));
         }
 
         @Test
         public void removeに成功した場合_trueを返す() {
-
             sut = createManager(AS_成功);
             assertThat(sut.remove(create受領委任事業者()), is(true));
         }
@@ -140,17 +134,14 @@ public class JuryoininJigyoshaManagerTest extends DbcTestBase {
     }
 
     private static DbT3077JuryoininKeiyakuJigyoshaEntity createEntity(int flg) {
-
         return flg == 0 ? null : DbT3077JuryoininKeiyakuJigyoshaEntityMock.getSpiedInstance();
     }
 
     private static KeiyakuNo createKeiyakuNo(RString no) {
-
         return new KeiyakuNo(no);
     }
 
     private static IKaigoJigyoshaFinder createJigyoshaFinderMock() {
-
         IKaigoJigyoshaFinder JigyoshaFinderMock = mock(IKaigoJigyoshaFinder.class);
         //TODO n3317塚田萌　get特定の事業者種別かつ事業者番号の介護事業者の修正が完了したらKaigoJigyoshaShubetsuを消す
         when(JigyoshaFinderMock.get特定の事業者種別かつ事業者番号の介護事業者(
@@ -161,7 +152,6 @@ public class JuryoininJigyoshaManagerTest extends DbcTestBase {
     }
 
     private static IHojinFinder createHojinFinderMock() {
-
         IHojinFinder HojinFinderMock = mock(IHojinFinder.class);
         //TODO n3317塚田萌　RDateからFlexibleDateに変更されたらRDateを修正。
         when(HojinFinderMock.get法人(any(ShikibetsuCode.class), any(RDate.class)))
@@ -170,7 +160,6 @@ public class JuryoininJigyoshaManagerTest extends DbcTestBase {
     }
 
     private static IKozaManager createKozaFinderMock() {
-
         List<IKoza> list = new ArrayList<>();
         list.add(mock(IKoza.class));
 
@@ -235,7 +224,6 @@ public class JuryoininJigyoshaManagerTest extends DbcTestBase {
     }
 
     private static IHojin createHojin() {
-
         //IShikibetsuTaishoだけnon-null
         IShikibetsuTaisho 識別対象 = createShikibetsuTaisho();
         RString 法人形態 = new RString("有限会社");
@@ -247,13 +235,11 @@ public class JuryoininJigyoshaManagerTest extends DbcTestBase {
     }
 
     private static IShikibetsuTaisho createShikibetsuTaisho() {
-
         return new _ShikibetsuTaisho(
                 new ShikibetsuCode(new RString("0000000001")),
                 null, 1, null, null, null, null, null, null, null, null,
                 null, null, null, null, 1
         );
-
     }
 
     private static IKoza createKoza() {

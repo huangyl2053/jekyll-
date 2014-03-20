@@ -55,7 +55,6 @@ public class JuryoininJigyoshaManager {
      * @param dac テスト用Dac
      */
     JuryoininJigyoshaManager(IJuryoininJigyoshaDac dac, IKaigoJigyoshaFinder jigyoshaFinder, IHojinFinder hojinFinder, IKozaManager kozaFinder) {
-
         this.dac = dac;
         this.jigyoshaFinder = jigyoshaFinder;
         this.hojinFinder = hojinFinder;
@@ -66,17 +65,15 @@ public class JuryoininJigyoshaManager {
      * 契約番号に該当する受領委任事業者の情報を取得します。<br/>
      * 契約事業者番号がある時は、識別コードがないので契約事業者番号を使って識別コードを取得します。
      *
-     * @param 契約番号
+     * @param 契約番号 契約番号
      * @return 契約番号に該当する受領委任事業者情報
      */
     public JuryoininJigyosha get受領委任事業者(KeiyakuNo 契約番号) {
-
         DbT3077JuryoininKeiyakuJigyoshaEntity entity = dac.select(契約番号);
 
         if (entity == null) {
             return null;
         }
-
         if (entity.getKeiyakuJigyoshaNo() != null) {
             set識別コード(entity);
         }
@@ -87,12 +84,25 @@ public class JuryoininJigyoshaManager {
     }
 
     //TODO n3317塚田萌　get受領委任事業者(検索条件)は本実装の時に対応する。期限　本実装完了まで
+//    public List<JuryoininJigyosha> get受領委任事業者(検索条件) {
+    /**
+     * 引数の受領委任事業者情報を追加します。
+     *
+     * @param 受領委任事業者 追加する受領委任事業者
+     * @return 更新に成功した場合はtrue、失敗した場合はfalseを返します。
+     */
     public boolean save(JuryoininJigyosha 受領委任事業者) {
         DbT3077JuryoininKeiyakuJigyoshaEntity entity
                 = JuryoininJigyoshaMapper.to受領委任事業者Entity(受領委任事業者);
         return is更新成功(dac.insert(entity));
     }
 
+    /**
+     * 引数の受領委任事業者情報を論理削除します。
+     *
+     * @param 受領委任事業者 論理削除する受領委任事業者
+     * @return 更新に成功した場合はtrue、失敗した場合はfalseを返します。
+     */
     public boolean remove(JuryoininJigyosha 受領委任事業者) {
         DbT3077JuryoininKeiyakuJigyoshaEntity entity
                 = JuryoininJigyoshaMapper.to受領委任事業者Entity(受領委任事業者);
@@ -100,27 +110,23 @@ public class JuryoininJigyoshaManager {
     }
 
     private void set識別コード(DbT3077JuryoininKeiyakuJigyoshaEntity entity) {
-
         IKaigoJigyosha 介護事業者;
         介護事業者 = find介護事業者(entity.getKeiyakuJigyoshaNo());
         entity.setShikibetsuCode(介護事業者.get識別コード());
     }
 
     private IKaigoJigyosha find介護事業者(JigyoshaNo 事業者番号) {
-
         //TODO n3317塚田萌 IKaigoJigyoshaFinderの修正が完了したら引数(KaigoJigyoshaShubetsu.サービス事業者)を削除する。
         return jigyoshaFinder.get特定の事業者種別かつ事業者番号の介護事業者(
                 KaigoJigyoshaShubetsu.サービス事業者, 事業者番号.value());
     }
 
     private IHojin find法人(ShikibetsuCode 識別コード, FlexibleDate 契約開始日) {
-
         //TODO n3317塚田萌　RDateからFlexibleDateに変更されたら.toRDate()を外す。
         return hojinFinder.get法人(識別コード, 契約開始日.toRDate());
     }
 
     private IKoza find口座(ShikibetsuCode 識別コード, FlexibleDate 契約開始日) {
-
         //TODO n3317塚田萌　RDateからFlexibleDateに変更されたら.toRDate()を外す。
         //TODO n3317塚田萌　kozaFinderの修正が完了した時に対応する。
         RString 業務コード = new RString("業務コード");

@@ -50,7 +50,6 @@ import static org.mockito.Mockito.mock;
 public class JuryoininJigyoshaMock {
 
     public static DbT3077JuryoininKeiyakuJigyoshaEntity create受領委任事業者Entity() {
-
         DbT3077JuryoininKeiyakuJigyoshaEntity entity = new DbT3077JuryoininKeiyakuJigyoshaEntity();
         entity.setJigyoshaKeiyakuNo(new RString("1234567890"));
         entity.setKaishiYMD(new FlexibleDate("20110303"));
@@ -102,7 +101,6 @@ public class JuryoininJigyoshaMock {
     }
 
     public static IHojin createHojin() {
-
         IShikibetsuTaisho 識別対象 = createShikibetsuTaisho();
         RString 法人形態 = new RString("有限会社");
         IKojin 法人代表者 = null;
@@ -113,7 +111,6 @@ public class JuryoininJigyoshaMock {
     }
 
     private static IShikibetsuTaisho createShikibetsuTaisho() {
-
         return new _ShikibetsuTaisho(
                 new ShikibetsuCode(new RString("0000000001")),
                 null, 1, null, null, null, null, null, null, null, null,
@@ -121,7 +118,6 @@ public class JuryoininJigyoshaMock {
     }
 
     public static IKoza createKoza() {
-
         return new _Koza(new GyomuCode(new RString("URZ")),
                 new KamokuCode(new RString("01")),
                 new KinyuKikanShitenCode(new RString("101")),
@@ -147,13 +143,11 @@ public class JuryoininJigyoshaMock {
     }
 
     private static IKinyuKikan create金融機関() {
-
         return new _KinyuKikan(new KinyuKikanCode(new RString("0123")), new RString("金融機関名称"), new RString("金融機関カナ名称"),
                 new Range(new RDate("2014/01/10"), new RDate("2014/01/20")), 1);
     }
 
     private static IKinyuKikanBranch create金融機関支店() {
-
         return new _KinyuKikanBranch(new RString("0123"), new RString("支店コード"), new RString("支店名称"), new RString("金融機関カナ名称"),
                 new Range(new RDate("2014/01/10"), new RDate("2014/01/20")), 1);
     }

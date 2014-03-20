@@ -26,32 +26,32 @@ public class JuryoininJigyosha {
     private final Todokedesha 届出者;
     private final FlexibleDate 契約登録年月日;
     private final KeiyakuJigyosha 契約事業者;
-    private final boolean is住宅改修契約;
-    private final boolean is特定福祉用具販売契約;
-    private final boolean is償還払給付契約;
-    private final boolean is高額給付契約;
-    private final boolean has取扱確約書;
+    private final boolean 住宅改修契約有無;
+    private final boolean 特定福祉用具販売契約有無;
+    private final boolean 償還払給付契約有無;
+    private final boolean 高額給付契約有無;
+    private final boolean 取扱確約書有無;
 
     /**
      * コンストラクタです。
      *
-     * @param 契約番号 受領委任契約番号
-     * @param 契約期間 受領委任契約期間
+     * @param 契約番号 契約番号
+     * @param 契約期間 契約期間
      * @param 処理日時 処理日時
      * @param 届出年月日 届出年月日
      * @param 届出者 届出者
      * @param 契約登録年月日 契約登録年月日
      * @param 契約事業者 契約事業者
-     * @param is住宅改修契約 住宅改修契約であるか否か
-     * @param is特定福祉用具販売契約 特定福祉用具販売契約であるか否か
-     * @param is償還払給付契約 償還払給付契約であるか否か
-     * @param is高額給付契約 高額給付契約であるか否か
-     * @param has取扱確約書 取扱確約書を持っているか否か
+     * @param 住宅改修契約有無 住宅改修契約であるか否か
+     * @param 特定福祉用具販売契約有無 特定福祉用具販売契約であるか否か
+     * @param 償還払給付契約有無 償還払給付契約であるか否か
+     * @param 高額給付契約有無 高額給付契約であるか否か
+     * @param 取扱確約書有無 取扱確約書を持っているか否か
      */
     public JuryoininJigyosha(KeiyakuNo 契約番号, Range<FlexibleDate> 契約期間, RDateTime 処理日時,
             FlexibleDate 届出年月日, Todokedesha 届出者, FlexibleDate 契約登録年月日, KeiyakuJigyosha 契約事業者,
-            boolean is住宅改修契約, boolean is特定福祉用具販売契約, boolean is償還払給付契約,
-            boolean is高額給付契約, boolean has取扱確約書) {
+            boolean 住宅改修契約有無, boolean 特定福祉用具販売契約有無, boolean 償還払給付契約有無,
+            boolean 高額給付契約有無, boolean 取扱確約書有無) {
 
         this.契約番号 = requireNonNull(契約番号, Messages.E00001.replace("契約番号").getMessage());
         this.契約期間 = requireNonNull(契約期間, Messages.E00001.replace("契約期間").getMessage());
@@ -60,15 +60,15 @@ public class JuryoininJigyosha {
         this.届出者 = 届出者;
         this.契約登録年月日 = 契約登録年月日;
         this.契約事業者 = 契約事業者;
-        this.is住宅改修契約 = is住宅改修契約;
-        this.is特定福祉用具販売契約 = is特定福祉用具販売契約;
-        this.is償還払給付契約 = is償還払給付契約;
-        this.is高額給付契約 = is高額給付契約;
-        this.has取扱確約書 = has取扱確約書;
+        this.住宅改修契約有無 = 住宅改修契約有無;
+        this.特定福祉用具販売契約有無 = 特定福祉用具販売契約有無;
+        this.償還払給付契約有無 = 償還払給付契約有無;
+        this.高額給付契約有無 = 高額給付契約有無;
+        this.取扱確約書有無 = 取扱確約書有無;
     }
 
     /**
-     * 受領委任契約番号を返します。
+     * 契約番号を返します。
      *
      * @return 契約番号
      */
@@ -77,7 +77,7 @@ public class JuryoininJigyosha {
     }
 
     /**
-     * 受領委任契約期間を返します。
+     * 契約期間を返します。
      *
      * @return 契約期間
      */
@@ -134,7 +134,7 @@ public class JuryoininJigyosha {
      * @return is住宅改修契約
      */
     public boolean is住宅改修契約() {
-        return is住宅改修契約;
+        return 住宅改修契約有無;
     }
 
     /**
@@ -143,7 +143,7 @@ public class JuryoininJigyosha {
      * @return is特定福祉用具販売契約
      */
     public boolean is特定福祉用具販売契約() {
-        return is特定福祉用具販売契約;
+        return 特定福祉用具販売契約有無;
     }
 
     /**
@@ -152,7 +152,7 @@ public class JuryoininJigyosha {
      * @return is償還払給付契約
      */
     public boolean is償還払給付契約() {
-        return is償還払給付契約;
+        return 償還払給付契約有無;
     }
 
     /**
@@ -161,7 +161,7 @@ public class JuryoininJigyosha {
      * @return is高額給付契約
      */
     public boolean is高額給付契約() {
-        return is高額給付契約;
+        return 高額給付契約有無;
     }
 
     /**
@@ -170,6 +170,6 @@ public class JuryoininJigyosha {
      * @return has取扱確約書
      */
     public boolean has取扱確約書() {
-        return has取扱確約書;
+        return 取扱確約書有無;
     }
 }

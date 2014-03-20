@@ -18,8 +18,14 @@ public class Todokedesha {
     private final RString 事業者名称;
     private final RString 代表者氏名;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param 住所 住所
+     * @param 事業者名称 事業者名称
+     * @param 代表者氏名 事業者名称
+     */
     public Todokedesha(RString 住所, RString 事業者名称, RString 代表者氏名) {
-
         this.住所 = 住所;
         this.事業者名称 = 事業者名称;
         this.代表者氏名 = 代表者氏名;

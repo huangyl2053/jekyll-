@@ -16,12 +16,19 @@ import org.junit.AfterClass;
  */
 public class DbcTestDacBase extends TestDacBase3 {
 
+    /**
+     * ダミーのControlDataを作成します。<br/>
+     * DBセッションを開き、sqlSessionオブジェクトにDBセッションを代入します。
+     */
     @BeforeClass
     public static void setUpClass() {
         setDummyControlData(new RString("DBC"));
         openMainSession();
     }
 
+    /**
+     * ロールバックし、DBセッションを閉じます。
+     */
     @AfterClass
     public static void tearDownClass() {
         rollBackAndCloseSession();

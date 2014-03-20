@@ -41,9 +41,9 @@ public final class JuryoininJigyoshaMapper {
      * 引数にnullが渡されたときは、nullを返します。
      *
      * @param entity 受領委任事業者Entity
-     * @param 法人　businessの法人クラス
-     * @param 口座　businessの口座クラス
-     * @return　businessの受領委任事業者クラス
+     * @param 法人 businessの法人クラス
+     * @param 口座 businessの口座クラス
+     * @return businessの受領委任事業者クラス
      */
     public static JuryoininJigyosha to受領委任事業者(DbT3077JuryoininKeiyakuJigyoshaEntity entity,
             IHojin 法人, IKoza 口座) {
@@ -73,17 +73,19 @@ public final class JuryoininJigyoshaMapper {
      * 引数にnullや空のリストが渡された場合は、空のコレクションを返します。<br/>
      *
      * @param entities 受領委任事業者EntityList
-     * @param 法人List　businessの法人クラスリスト
-     * @param 口座List　businessの口座クラスリスト
-     * @return　businessの受領委任事業者リストクラス
+     * @param 法人List businessの法人クラスリスト
+     * @param 口座List businessの口座クラスリスト
+     * @return businessの受領委任事業者リストクラス
      */
     public static JuryoininJigyoshaList to受領委任事業者List(List<DbT3077JuryoininKeiyakuJigyoshaEntity> entities,
             List<IHojin> 法人List, List<IKoza> 口座List) {
+
         if (entities == null || entities.isEmpty()) {
             return new JuryoininJigyoshaList(Collections.EMPTY_LIST);
         }
 
         List<JuryoininJigyosha> 受領委任事業者List = new ArrayList<>();
+
         for (int i = 0; i < entities.size(); i++) {
             受領委任事業者List.add(to受領委任事業者(entities.get(i), 法人List.get(i), 口座List.get(i)));
         }
@@ -94,8 +96,8 @@ public final class JuryoininJigyoshaMapper {
      * businessの受領委任事業者クラスを受領委任事業者Entityにマッピングします。<br/>
      * 引数にnullが渡されたときは、nullを返します。
      *
-     * @param 受領委任事業者
-     * @return　受領委任事業者Entity
+     * @param 受領委任事業者 受領委任事業者
+     * @return 受領委任事業者Entity
      */
     public static DbT3077JuryoininKeiyakuJigyoshaEntity to受領委任事業者Entity(JuryoininJigyosha 受領委任事業者) {
 
@@ -131,7 +133,6 @@ public final class JuryoininJigyoshaMapper {
     }
 
     private static Range<FlexibleDate> create契約期間(DbT3077JuryoininKeiyakuJigyoshaEntity entity) {
-
         FlexibleDate start = entity.getKaishiYMD();
         FlexibleDate end = entity.getShuryoYMD();
         Range 契約期間 = new Range(start, end);
@@ -140,7 +141,6 @@ public final class JuryoininJigyoshaMapper {
     }
 
     private static Todokedesha create届出者(DbT3077JuryoininKeiyakuJigyoshaEntity entity) {
-
         RString address = entity.getTodokedeAddress();
         RString jigyoshaName = entity.getTodokedeJigyoshaName();
         RString daihyoshaName = entity.getTodokedeDaihyoshaName();

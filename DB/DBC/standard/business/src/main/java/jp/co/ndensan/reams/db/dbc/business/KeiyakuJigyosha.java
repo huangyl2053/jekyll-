@@ -33,12 +33,12 @@ public class KeiyakuJigyosha {
     /**
      * コンストラクタです。
      *
-     * @param 事業者番号
-     * @param 法人
-     * @param 事業者FAX番号
-     * @param 営業形態
-     * @param 送付先部署
-     * @param 口座
+     * @param 事業者番号 事業者番号
+     * @param 法人 法人
+     * @param 事業者FAX番号 事業者FAX番号
+     * @param 営業形態 営業形態
+     * @param 送付先部署 送付先部署
+     * @param 口座 口座
      */
     public KeiyakuJigyosha(JigyoshaNo 事業者番号, IHojin 法人, TelNo 事業者FAX番号,
             EigyoKeitai 営業形態, RString 送付先部署, IKoza 口座) {
