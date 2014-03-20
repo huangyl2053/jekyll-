@@ -69,21 +69,4 @@ public final class ShinsakaiKaisaiBashoMapper {
         審査会開催場所Entity.setShinsakaiKaisaiBashoJokyo(審査会開催場所.get開催場所状況().is有効());
         return 審査会開催場所Entity;
     }
-
-    /**
-     * 審査会開催場所情報エンティティを編集します。
-     *
-     * @param shinsakaiKaisaiBasho 審査会開催場所情報
-     * @return 審査会開催場所情報エンティティ
-     */
-    public static DbT5104ShinsakaiKaisaiBashoJohoEntity toDbT5104ShinsakaiKaisaiBashoJohoEntity(ShinsakaiKaisaiBasho shinsakaiKaisaiBasho) {
-        DbT5104ShinsakaiKaisaiBashoJohoEntity entity = new DbT5104ShinsakaiKaisaiBashoJohoEntity();
-        entity.setShinsakaiKaisaiBashoCode(shinsakaiKaisaiBasho.get開催場所コード().value());
-        entity.setShinsakaiKaisaiBashoMei(shinsakaiKaisaiBasho.get開催場所名称());
-        entity.setShinsakaiKaisaiChikuCode(shinsakaiKaisaiBasho.get開催地区());
-        entity.setShinsakaiKaisaiBashoJusho(shinsakaiKaisaiBasho.get開催場所住所());
-        entity.setShinsakaiKaisaiBashoTelNo(shinsakaiKaisaiBasho.get開催場所電話番号());
-        entity.setShinsakaiKaisaiBashoJokyo(shinsakaiKaisaiBasho.get開催場所状況().is有効());
-        return entity;
-    }
 }

@@ -91,7 +91,7 @@ public class ShinsakaiKaisaiBashoManager {
      * @return 追加又は更新が成功した場合にtrueを返します
      */
     public boolean save(ShinsakaiKaisaiBasho shinsakaiKaisaiBasho) {
-        DbT5104ShinsakaiKaisaiBashoJohoEntity entity = ShinsakaiKaisaiBashoMapper.toDbT5104ShinsakaiKaisaiBashoJohoEntity(shinsakaiKaisaiBasho);
+        DbT5104ShinsakaiKaisaiBashoJohoEntity entity = ShinsakaiKaisaiBashoMapper.to審査会開催場所Entity(shinsakaiKaisaiBasho);
         int result = dac.insertOrUpdate(entity);
         return (result != 0);
     }
@@ -103,7 +103,7 @@ public class ShinsakaiKaisaiBashoManager {
      * @return 削除が成功した場合にTrueを返します
      */
     public boolean remove(ShinsakaiKaisaiBasho shinsakaiKaisaiBasho) {
-        DbT5104ShinsakaiKaisaiBashoJohoEntity entity = ShinsakaiKaisaiBashoMapper.toDbT5104ShinsakaiKaisaiBashoJohoEntity(shinsakaiKaisaiBasho);
+        DbT5104ShinsakaiKaisaiBashoJohoEntity entity = ShinsakaiKaisaiBashoMapper.to審査会開催場所Entity(shinsakaiKaisaiBasho);
         int result = dac.delete(entity);
         return (result != 0);
     }
@@ -125,22 +125,5 @@ public class ShinsakaiKaisaiBashoManager {
             list.add(shinsakaiKaisaiBasho);
         }
         return list;
-    }
-
-    /**
-     * 審査会開催場所情報エンティティを編集します。
-     *
-     * @param shinsakaiKaisaiBasho 審査会開催場所情報
-     * @return 審査会開催場所情報エンティティ
-     */
-    private DbT5104ShinsakaiKaisaiBashoJohoEntity toDbT5104ShinsakaiKaisaiBashoJohoEntity(ShinsakaiKaisaiBasho shinsakaiKaisaiBasho) {
-        DbT5104ShinsakaiKaisaiBashoJohoEntity entity = new DbT5104ShinsakaiKaisaiBashoJohoEntity();
-        entity.setShinsakaiKaisaiBashoCode(shinsakaiKaisaiBasho.get開催場所コード().getColumnValue());
-        entity.setShinsakaiKaisaiBashoMei(shinsakaiKaisaiBasho.get開催場所名称());
-        entity.setShinsakaiKaisaiChikuCode(shinsakaiKaisaiBasho.get開催地区());
-        entity.setShinsakaiKaisaiBashoJusho(shinsakaiKaisaiBasho.get開催場所住所());
-        entity.setShinsakaiKaisaiBashoTelNo(shinsakaiKaisaiBasho.get開催場所電話番号());
-        entity.setShinsakaiKaisaiBashoJokyo(shinsakaiKaisaiBasho.get開催場所状況().is有効());
-        return entity;
     }
 }
