@@ -5,6 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.Gogitai;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiJoho;
@@ -27,14 +29,14 @@ public final class GogitaiMapper {
     }
 
     /**
-     * 合議体割当委員Entityのリストを元に、合議体Listの情報を作成します。<br/>
-     * このメソッドは、引数の合議体割当委員Entitiesがキー項目でソートされている前提のため、
-     * ソートされていないListを渡すと予期しない値が返ります。
+     * 合議体割当委員Entityのリストを元に、合議体Listの情報を作成します。
      *
      * @param 合議体割当委員Entities 合議体割当委員Entities
      * @return 合議体List
      */
     public static GogitaiList to合議体List(List<GogitaiWariateShinsakaiIinEntity> 合議体割当委員Entities) {
+        Collections.sort(合議体割当委員Entities, new EntityComparator());
+
         List<Gogitai> 合議体List = new ArrayList<>();
         List<GogitaiWariateShinsakaiIinEntity> 各合議体割当委員Entities = new ArrayList<>();
         GogitaiWariateShinsakaiIinEntity check用割当委員Entity = 合議体割当委員Entities.get(0);
@@ -78,5 +80,25 @@ public final class GogitaiMapper {
 
     private static FlexibleDate get開始年月日(GogitaiWariateShinsakaiIinEntity 合議体割当委員Entity) {
         return 合議体割当委員Entity.get合議体情報Entity().getGogitaiYukoKikanKaishiYMD();
+    }
+
+    private static class EntityComparator implements Comparator<GogitaiWariateShinsakaiIinEntity> {
+
+        @Override
+        public int compare(GogitaiWariateShinsakaiIinEntity entity1, GogitaiWariateShinsakaiIinEntity entity2) {
+            int 比較結果 = get合議体番号(entity1) - get合議体番号(entity2);
+            if (比較結果 == 0) {
+                比較結果 = -1 * get有効期間開始年月日(entity1).compareTo(get有効期間開始年月日(entity2));
+            }
+            return 比較結果;
+        }
+
+        private int get合議体番号(GogitaiWariateShinsakaiIinEntity entity) {
+            return entity.get合議体情報Entity().getGogitaiNo();
+        }
+
+        private FlexibleDate get有効期間開始年月日(GogitaiWariateShinsakaiIinEntity entity) {
+            return entity.get合議体情報Entity().getGogitaiYukoKikanKaishiYMD();
+        }
     }
 }
