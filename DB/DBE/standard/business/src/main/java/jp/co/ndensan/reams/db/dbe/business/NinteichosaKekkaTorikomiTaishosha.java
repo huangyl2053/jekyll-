@@ -5,7 +5,6 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
@@ -18,8 +17,7 @@ public class NinteichosaKekkaTorikomiTaishosha {
 
     private NinteiShinseiJoho 認定申請情報;
     private NinteichosaIrai 認定調査依頼情報;
-    private KaigoNinteichosainCollection 介護認定調査員Collection;
-    private IKaigoJigyosha 介護事業者情報;
+    private KaigoNinteichosain 介護認定調査員;
     private IKojin 個人;
 
     /**
@@ -27,20 +25,17 @@ public class NinteichosaKekkaTorikomiTaishosha {
      *
      * @param 認定申請情報 認定申請情報
      * @param 認定調査依頼情報 認定調査依頼情報
-     * @param 介護認定調査員Collection 介護認定調査員Collection
-     * @param 介護事業者情報 介護事業者情報
+     * @param 介護認定調査員 介護認定調査員
      * @param 個人 個人
      */
     public NinteichosaKekkaTorikomiTaishosha(
             NinteiShinseiJoho 認定申請情報,
             NinteichosaIrai 認定調査依頼情報,
-            KaigoNinteichosainCollection 介護認定調査員Collection,
-            IKaigoJigyosha 介護事業者情報,
+            KaigoNinteichosain 介護認定調査員,
             IKojin 個人) {
         this.認定申請情報 = requireNonNull(認定申請情報, Messages.E00003.replace("認定申請情報", "認定調査結果取込対象者").getMessage());
         this.認定調査依頼情報 = requireNonNull(認定調査依頼情報, Messages.E00003.replace("認定調査依頼情報", "認定調査結果取込対象者").getMessage());
-        this.介護認定調査員Collection = requireNonNull(介護認定調査員Collection, Messages.E00003.replace("介護認定調査員Collection", "認定調査結果取込対象者").getMessage());
-        this.介護事業者情報 = requireNonNull(介護事業者情報, Messages.E00003.replace("介護事業者情報", "認定調査結果取込対象者").getMessage());
+        this.介護認定調査員 = requireNonNull(介護認定調査員, Messages.E00003.replace("介護認定調査員", "認定調査結果取込対象者").getMessage());
         this.個人 = requireNonNull(個人, Messages.E00003.replace("個人", "認定調査結果取込対象者").getMessage());
     }
 
@@ -63,21 +58,12 @@ public class NinteichosaKekkaTorikomiTaishosha {
     }
 
     /**
-     * 介護認定調査員Collectionを返します。
+     * 介護認定調査員を返します。
      *
-     * @return 介護認定調査員Collection
+     * @return 介護認定調査員
      */
-    public KaigoNinteichosainCollection get介護認定調査員Collection() {
-        return 介護認定調査員Collection;
-    }
-
-    /**
-     * 介護事業者情報を返します。
-     *
-     * @return 介護事業者情報
-     */
-    public IKaigoJigyosha get介護事業者情報() {
-        return 介護事業者情報;
+    public KaigoNinteichosain get介護認定調査員() {
+        return 介護認定調査員;
     }
 
     /**

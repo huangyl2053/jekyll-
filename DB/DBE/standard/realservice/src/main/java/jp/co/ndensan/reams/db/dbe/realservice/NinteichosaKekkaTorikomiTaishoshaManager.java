@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaKekkaTorikomiTaishosha;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
@@ -15,18 +16,13 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaKekkaTorikomiTaishoshaMapper;
-import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteichosainEntity;
-import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaTorikomiTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.INinteichosaItakusakiDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IKaigoNinteichosainDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiChosaIraiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinchokuJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
-import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
-import jp.co.ndensan.reams.ur.urf.definition.KaigoJigyoshaShubetsu;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
-import jp.co.ndensan.reams.ur.urf.realservice.KaigoJigyoshaFinderFactory;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -83,46 +79,30 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
     public List<NinteichosaKekkaTorikomiTaishosha> get認定調査結果取込対象者全件(RString 支所コード) {
 
         List<DbT5005NinteiShinchokuJohoEntity> shinchokuJohoEntityList = shinchokuJohoDac.select依頼済認定調査未完了();
-        List<NinteichosaKekkaTorikomiTaishoshaEntity> taishosyaEntityList = create認定調査結果取込対象者EntityList(shinchokuJohoEntityList, 支所コード);
 
-        return create認定調査結果取込対象者List(taishosyaEntityList);
+        return create認定調査結果取込対象者List(shinchokuJohoEntityList, 支所コード);
     }
 
-    private List<NinteichosaKekkaTorikomiTaishoshaEntity> create認定調査結果取込対象者EntityList(
-            List<DbT5005NinteiShinchokuJohoEntity> shinchokuJohoEntityList, RString 支所コード) {
-        List<NinteichosaKekkaTorikomiTaishoshaEntity> list = new ArrayList<>();
+    private List<NinteichosaKekkaTorikomiTaishosha> create認定調査結果取込対象者List(
+            List<DbT5005NinteiShinchokuJohoEntity> entityList, RString 支所コード) {
+        List<NinteichosaKekkaTorikomiTaishosha> list = new ArrayList<>();
 
-        for (DbT5005NinteiShinchokuJohoEntity shinchokuJohoEntity : shinchokuJohoEntityList) {
+        for (DbT5005NinteiShinchokuJohoEntity shinchokuJohoEntity : entityList) {
             DbT5001NinteiShinseiJohoEntity shinseiJohoEntity = shinseiJohoDac.select(shinchokuJohoEntity.getShinseishoKanriNo());
             if (!shinseiJohoEntity.getShishoCode().equals(支所コード)) {
                 continue;
             }
-            DbT5006NinteichosaIraiJohoEntity iraiJohoEntity = chosaIraiJohoDac.select(
-                    shinchokuJohoEntity.getShinseishoKanriNo().value(),
-                    new NinteichosaIraiRirekiNo(shinseiJohoEntity.getNinteichosaIraiRirekiNo()));
-            List<DbT7013ChosainJohoEntity> chosainEntityList = ninteichosainDac.selectAll(
-                    shinseiJohoEntity.getShichosonCode(),
-                    iraiJohoEntity.getNinteichosaItakusakiCode());
+            DbT5006NinteichosaIraiJohoEntity iraiJohoEntity = get認定調査依頼情報Entity(shinchokuJohoEntity, shinseiJohoEntity);
+            DbT7013ChosainJohoEntity chosainJohoEntity = get調査員情報Entity(shinseiJohoEntity, iraiJohoEntity);
+            DbT7010NinteichosaItakusakiJohoEntity itakusakiJohoEntity = get認定調査委託先情報Entity(chosainJohoEntity);
+            IKojin kojin = KojinService.createKojinFinder().get個人(shinseiJohoEntity.getShikibetsuCode());
 
-            NinteichosaKekkaTorikomiTaishoshaEntity entity = new NinteichosaKekkaTorikomiTaishoshaEntity();
-            entity.setNinteiShinseiJohoEntity(shinseiJohoEntity);
-            entity.setNinteichosaIraiJohoEntity(iraiJohoEntity);
-            entity.setNinteichosainEntityList(create介護認定調査員EntityList(chosainEntityList));
-            list.add(entity);
-        }
-
-        return list;
-    }
-
-    private List<NinteichosaKekkaTorikomiTaishosha> create認定調査結果取込対象者List(List<NinteichosaKekkaTorikomiTaishoshaEntity> entityList) {
-        List<NinteichosaKekkaTorikomiTaishosha> list = new ArrayList<>();
-
-        for (NinteichosaKekkaTorikomiTaishoshaEntity entity : entityList) {
-            IKojin kojin = KojinService.createKojinFinder().get個人(entity.getNinteiShinseiJohoEntity().getShikibetsuCode());
-            IKaigoJigyosha kaigoJigyosha = KaigoJigyoshaFinderFactory.getInstance().get特定の事業者種別かつ事業者番号の介護事業者(
-                    KaigoJigyoshaShubetsu.サービス事業者,
-                    entity.getNinteichosaIraiJohoEntity().getNinteichosaItakusakiCode().value());
-            list.add(NinteichosaKekkaTorikomiTaishoshaMapper.toNinteichosaKekkaTorikomiTaishosha(entity, kaigoJigyosha, kojin));
+            list.add(NinteichosaKekkaTorikomiTaishoshaMapper.toNinteichosaKekkaTorikomiTaishosha(
+                    shinseiJohoEntity,
+                    iraiJohoEntity,
+                    chosainJohoEntity,
+                    itakusakiJohoEntity,
+                    kojin));
         }
 
         if (list.isEmpty()) {
@@ -132,19 +112,27 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
         return list;
     }
 
-    private List<KaigoNinteichosainEntity> create介護認定調査員EntityList(List<DbT7013ChosainJohoEntity> chosainEntityList) {
-        List<KaigoNinteichosainEntity> list = new ArrayList<>();
+    private DbT5006NinteichosaIraiJohoEntity get認定調査依頼情報Entity(
+            DbT5005NinteiShinchokuJohoEntity shinchokuJohoEntity,
+            DbT5001NinteiShinseiJohoEntity shinseiJohoEntity) {
+        return chosaIraiJohoDac.select(
+                shinchokuJohoEntity.getShinseishoKanriNo().value(),
+                new NinteichosaIraiRirekiNo(shinseiJohoEntity.getNinteichosaIraiRirekiNo()));
+    }
 
-        for (DbT7013ChosainJohoEntity chosainJohoEntity : chosainEntityList) {
-            DbT7010NinteichosaItakusakiJohoEntity itakusakiJohoEntity = ninteichosaItakusakiDac.select(
-                    chosainJohoEntity.getShichosonCode().getValue(),
-                    chosainJohoEntity.getKaigoJigyoshaNo(), true);
-            KaigoNinteichosainEntity ninteichosainEntity = new KaigoNinteichosainEntity();
-            ninteichosainEntity.setDbT7013ChosainJohoEntity(chosainJohoEntity);
-            ninteichosainEntity.setDbT7010NinteichosaItakusakiJohoEntity(itakusakiJohoEntity);
-            list.add(ninteichosainEntity);
-        }
+    private DbT7013ChosainJohoEntity get調査員情報Entity(
+            DbT5001NinteiShinseiJohoEntity shinseiJohoEntity,
+            DbT5006NinteichosaIraiJohoEntity iraiJohoEntity) {
+        return ninteichosainDac.select(
+                shinseiJohoEntity.getShichosonCode(),
+                iraiJohoEntity.getNinteichosaItakusakiCode(),
+                new KaigoNinteichosainNo(iraiJohoEntity.getChousainCode().value()));
+    }
 
-        return list;
+    private DbT7010NinteichosaItakusakiJohoEntity get認定調査委託先情報Entity(
+            DbT7013ChosainJohoEntity chosainJohoEntity) {
+        return ninteichosaItakusakiDac.select(
+                chosainJohoEntity.getShichosonCode().getValue(),
+                chosainJohoEntity.getKaigoJigyoshaNo(), true);
     }
 }
