@@ -20,12 +20,10 @@
             <groupId>jp.co.ndensan.reams.ur.urd</groupId>
             <artifactId>UrdRealService</artifactId>
         </dependency>
-
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urf</groupId>
             <artifactId>UrfRealService</artifactId>
         </dependency>
-
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzRealService</artifactId>
@@ -55,6 +53,13 @@
             <artifactId>mockito-all</artifactId>
             <version>1.9.5</version>
             <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbcEntity</artifactId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
