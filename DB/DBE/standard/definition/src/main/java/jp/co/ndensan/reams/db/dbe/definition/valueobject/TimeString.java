@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 public class TimeString implements IValueObject<RString>, Comparable<TimeString> {
 
     private final RTime time;
-    private final int timeStringLength = 4;
+    private static final int TIME_STRING_LENGTH = 4;
 
     /**
      * 引数から時間を表す文字列を受け取り、インスタンスを生成します。<br/>
@@ -31,24 +31,26 @@ public class TimeString implements IValueObject<RString>, Comparable<TimeString>
      * 引数が0000～2359の範囲に収まっておらず、時間として判定できないとき
      */
     public TimeString(RString timeStr) throws NullPointerException, IllegalArgumentException {
-        requireNonNull(timeStr, Messages.E00003.replace("時間を表す文字列", getClass().getName()).getMessage());
+        RString エラー出力 = new RString("時間を表す文字列");
+
+        requireNonNull(timeStr, Messages.E00003.replace(エラー出力.toString(), getClass().getName()).getMessage());
         if (!checkLength(timeStr)) {
-            throw new IllegalArgumentException(Messages.E00013.replace("時間を表す文字列", "4桁").getMessage());
+            throw new IllegalArgumentException(Messages.E00013.replace(エラー出力.toString(), "4桁").getMessage());
         }
 
         int hour, minute;
         try {
-            int halfLenght = timeStringLength / 2;
+            int halfLenght = TIME_STRING_LENGTH / 2;
             hour = Integer.parseInt(timeStr.substring(0, halfLenght).toString());
-            minute = Integer.parseInt(timeStr.substring(halfLenght, timeStringLength).toString());
+            minute = Integer.parseInt(timeStr.substring(halfLenght, TIME_STRING_LENGTH).toString());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(Messages.E00013.replace("時間を表す文字列", "数字").getMessage());
+            throw new IllegalArgumentException(Messages.E00013.replace(エラー出力.toString(), "数字").getMessage());
         }
 
         try {
             time = RTime.of(hour, minute);
         } catch (RuntimeException e) {
-            throw new IllegalArgumentException(Messages.E00013.replace("時間を表す文字列", "0000～2359の間").getMessage());
+            throw new IllegalArgumentException(Messages.E00013.replace(エラー出力.toString(), "0000～2359の間").getMessage());
         }
     }
 
@@ -65,7 +67,7 @@ public class TimeString implements IValueObject<RString>, Comparable<TimeString>
     }
 
     private boolean checkLength(RString timeStr) {
-        return timeStr.length() == timeStringLength;
+        return timeStr.length() == TIME_STRING_LENGTH;
     }
 
     @Override
