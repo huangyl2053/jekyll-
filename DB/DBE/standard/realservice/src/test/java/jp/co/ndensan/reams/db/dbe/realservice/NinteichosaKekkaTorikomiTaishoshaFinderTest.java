@@ -35,9 +35,9 @@ import static org.mockito.Mockito.*;
  * @author N8187 久保田 英男
  */
 @RunWith(Enclosed.class)
-public class NinteichosaKekkaTorikomiTaishoshaManagerTest extends DbeTestBase {
+public class NinteichosaKekkaTorikomiTaishoshaFinderTest extends DbeTestBase {
 
-    private static NinteichosaKekkaTorikomiTaishoshaManager sut;
+    private static NinteichosaKekkaTorikomiTaishoshaFinder sut;
     private static INinteiShinchokuJohoDac shinchokuJohoDac;
     private static INinteiShinseiJohoDac shinseiJohoDac;
     private static INinteiChosaIraiJohoDac chosaIraiJohoDac;
@@ -61,7 +61,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManagerTest extends DbeTestBase {
         @Test
         public void 認定調査結果取込対象者の取得条件に一致するデータが登録されていないとき_COLLECTIONI_EMPTYを返す() {
             when(shinchokuJohoDac.select依頼済認定調査未完了()).thenReturn(create認定進捗情報EntityList(0));
-            sut = new NinteichosaKekkaTorikomiTaishoshaManager(shinchokuJohoDac, shinseiJohoDac, chosaIraiJohoDac, ninteichosainDac, ninteichosaItakusakiDac);
+            sut = new NinteichosaKekkaTorikomiTaishoshaFinder(shinchokuJohoDac, shinseiJohoDac, chosaIraiJohoDac, ninteichosainDac, ninteichosaItakusakiDac);
             resultList = sut.get認定調査結果取込対象者全件(支所コード);
             assertThat(resultList, is(Collections.EMPTY_LIST));
         }
@@ -70,7 +70,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManagerTest extends DbeTestBase {
         public void 認定調査結果取込対象者の取得条件に一致するデータが登録されているが_支所コードが一致しないとき_COLLECTIONI_EMPTYを返す() {
             when(shinchokuJohoDac.select依頼済認定調査未完了()).thenReturn(create認定進捗情報EntityList(1));
             when(shinseiJohoDac.select(new ShinseishoKanriNo(new RString("1")))).thenReturn(create認定申請情報(1, 初期支所コード));
-            sut = new NinteichosaKekkaTorikomiTaishoshaManager(shinchokuJohoDac, shinseiJohoDac, chosaIraiJohoDac, ninteichosainDac, ninteichosaItakusakiDac);
+            sut = new NinteichosaKekkaTorikomiTaishoshaFinder(shinchokuJohoDac, shinseiJohoDac, chosaIraiJohoDac, ninteichosainDac, ninteichosaItakusakiDac);
             resultList = sut.get認定調査結果取込対象者全件(支所コード);
             assertThat(resultList, is(Collections.EMPTY_LIST));
         }

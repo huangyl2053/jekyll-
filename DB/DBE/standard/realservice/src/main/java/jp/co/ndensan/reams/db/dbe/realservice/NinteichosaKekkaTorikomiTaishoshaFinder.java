@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * @author N8187 久保田 英男
  */
-public class NinteichosaKekkaTorikomiTaishoshaManager {
+public class NinteichosaKekkaTorikomiTaishoshaFinder {
 
     private final INinteiShinchokuJohoDac shinchokuJohoDac;
     private final INinteiShinseiJohoDac shinseiJohoDac;
@@ -42,7 +42,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
     /**
      * デフォルトコンストラクタです。
      */
-    public NinteichosaKekkaTorikomiTaishoshaManager() {
+    public NinteichosaKekkaTorikomiTaishoshaFinder() {
         shinchokuJohoDac = InstanceProvider.create(INinteiShinchokuJohoDac.class);
         shinseiJohoDac = InstanceProvider.create(INinteiShinseiJohoDac.class);
         chosaIraiJohoDac = InstanceProvider.create(INinteiChosaIraiJohoDac.class);
@@ -57,7 +57,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
      * @param shinseiJohoDac shinseiJohoDac
      * @param chosaIraiJohoDac chosaIraiJohoDac
      */
-    NinteichosaKekkaTorikomiTaishoshaManager(
+    NinteichosaKekkaTorikomiTaishoshaFinder(
             INinteiShinchokuJohoDac shinchokuJohoDac,
             INinteiShinseiJohoDac shinseiJohoDac,
             INinteiChosaIraiJohoDac chosaIraiJohoDac,
