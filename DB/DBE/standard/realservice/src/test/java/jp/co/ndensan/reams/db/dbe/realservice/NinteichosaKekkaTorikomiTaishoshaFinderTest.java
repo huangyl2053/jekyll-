@@ -11,8 +11,6 @@ import jp.co.ndensan.reams.db.dbe.business.NinteichosaKekkaTorikomiTaishosha;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.INinteichosaItakusakiDac;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.IKaigoNinteichosainDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiChosaIraiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinchokuJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
@@ -41,8 +39,6 @@ public class NinteichosaKekkaTorikomiTaishoshaFinderTest extends DbeTestBase {
     private static INinteiShinchokuJohoDac shinchokuJohoDac;
     private static INinteiShinseiJohoDac shinseiJohoDac;
     private static INinteiChosaIraiJohoDac chosaIraiJohoDac;
-    private static IKaigoNinteichosainDac ninteichosainDac;
-    private static INinteichosaItakusakiDac ninteichosaItakusakiDac;
     private static RString 支所コード = new RString("0001");
     private static RString 初期支所コード = new RString("0");
     private static List<NinteichosaKekkaTorikomiTaishosha> resultList;
@@ -54,23 +50,21 @@ public class NinteichosaKekkaTorikomiTaishoshaFinderTest extends DbeTestBase {
             shinchokuJohoDac = mock(INinteiShinchokuJohoDac.class);
             shinseiJohoDac = mock(INinteiShinseiJohoDac.class);
             chosaIraiJohoDac = mock(INinteiChosaIraiJohoDac.class);
-            ninteichosainDac = mock(IKaigoNinteichosainDac.class);
-            ninteichosaItakusakiDac = mock(INinteichosaItakusakiDac.class);
         }
 
         @Test
-        public void 認定調査結果取込対象者の取得条件に一致するデータが登録されていないとき_COLLECTIONI_EMPTYを返す() {
+        public void 認定調査結果取込対象者の取得条件に一致するデータが登録されていないとき_COLLECTIONS_EMPTYを返す() {
             when(shinchokuJohoDac.select依頼済認定調査未完了()).thenReturn(create認定進捗情報EntityList(0));
-            sut = new NinteichosaKekkaTorikomiTaishoshaFinder(shinchokuJohoDac, shinseiJohoDac, chosaIraiJohoDac, ninteichosainDac, ninteichosaItakusakiDac);
+            sut = new NinteichosaKekkaTorikomiTaishoshaFinder(shinchokuJohoDac, shinseiJohoDac, chosaIraiJohoDac);
             resultList = sut.get認定調査結果取込対象者全件(支所コード);
             assertThat(resultList, is(Collections.EMPTY_LIST));
         }
 
         @Test
-        public void 認定調査結果取込対象者の取得条件に一致するデータが登録されているが_支所コードが一致しないとき_COLLECTIONI_EMPTYを返す() {
+        public void 認定調査結果取込対象者の取得条件に一致するデータが登録されているが_支所コードが一致しないとき_COLLECTIONS_EMPTYを返す() {
             when(shinchokuJohoDac.select依頼済認定調査未完了()).thenReturn(create認定進捗情報EntityList(1));
             when(shinseiJohoDac.select(new ShinseishoKanriNo(new RString("1")))).thenReturn(create認定申請情報(1, 初期支所コード));
-            sut = new NinteichosaKekkaTorikomiTaishoshaFinder(shinchokuJohoDac, shinseiJohoDac, chosaIraiJohoDac, ninteichosainDac, ninteichosaItakusakiDac);
+            sut = new NinteichosaKekkaTorikomiTaishoshaFinder(shinchokuJohoDac, shinseiJohoDac, chosaIraiJohoDac);
             resultList = sut.get認定調査結果取込対象者全件(支所コード);
             assertThat(resultList, is(Collections.EMPTY_LIST));
         }
