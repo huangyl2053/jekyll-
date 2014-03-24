@@ -11,12 +11,20 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.ur.urz.business.IDoctors;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikan;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
+import jp.co.ndensan.reams.ur.urz.business.IKoza;
 import jp.co.ndensan.reams.ur.urz.business._IryoKikan;
 import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
+import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
+import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._Name;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -275,28 +283,23 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
         }
 
         private KaigoIryoKikan create介護医療機関(String 識別コード, IryoKikanJokyo 医療機関状況, String 市町村コード, String 介護医療機関コード) {
-//            IShujiiIryoKikan 主治医医療機関 = mock(KaigoIryoKikan.class);
-//            when(主治医医療機関.get医療機関状況()).thenReturn(医療機関状況);
-//            ShichosonCode sCode = create市町村コード(市町村コード);
-//            when(主治医医療機関.get市町村コード()).thenReturn(sCode);
-//            KaigoIryoKikanCode kCode = create介護医療機関コード(介護医療機関コード);
-//            when(主治医医療機関.get介護医療機関コード()).thenReturn(kCode);
-//
-//            IIryoKikan 医療機関 = mock(IIryoKikan.class);
-//            when(医療機関.get識別コード()).thenReturn(new ShikibetsuCode(new RString(識別コード)));
-//
-//            return new KaigoIryoKikan(医療機関, 主治医医療機関);
             KaigoIryoKikanCode kaigoIryoKikanCode = create介護医療機関コード(介護医療機関コード);
             ShichosonCode shichosonCode = create市町村コード(市町村コード);
             IIryoKikanCode iryoKikanCode = create医療機関コード(介護医療機関コード);
             IShujiiIryoKikan 主治医医療機関 = new ShujiiIryoKikan(shichosonCode, kaigoIryoKikanCode, iryoKikanCode, 医療機関状況, create医療機関区分("A001"));
-//            KaigoIryoKikan 介護医療機関 = mock(KaigoIryoKikan.class);
-//            when(介護医療機関.get医療機関状況()).thenReturn(医療機関状況);
-//            when(介護医療機関.get市町村コード()).thenReturn(scode);
-//            when(介護医療機関.get介護医療機関コード()).thenReturn(kcode);
-            IIryoKikan 医療機関 = mock(_IryoKikan.class);
+            ShikibetsuCode shikibetsuCode = mock(ShikibetsuCode.class);
+            AtenaMeisho 医療機関名称漢字 = new AtenaMeisho(new RString("医療機関名称漢字"));
+            AtenaKanaMeisho 医療機関名称カナ = new AtenaKanaMeisho(new RString("医療機関名称カナ"));
+            IName 医療機関名称 = new _Name(医療機関名称漢字, 医療機関名称カナ);
+            AtenaMeisho 医療機関略称漢字 = new AtenaMeisho(new RString("医療機関略称漢字"));
+            AtenaKanaMeisho 医療機関略称カナ = new AtenaKanaMeisho(new RString("医療機関略称カナ"));
+            IName 医療機関略称 = new _Name(医療機関略称漢字, 医療機関略称カナ);
+            Range<RDate> 開設期間 = new Range<>(new RDate(20140301), new RDate(20140331));
+            IDoctors 所属医師 = mock(IDoctors.class);
+            List<IKoza> 口座 = new ArrayList<>();
+
+            IIryoKikan 医療機関 = new _IryoKikan(iryoKikanCode, shikibetsuCode, 医療機関名称, 医療機関略称, new RString("所在地郵便番号"), new RString("所在地住所"), new RString("所在地カナ住所"), 開設期間, 所属医師, 口座, new RDate(20140301), new RString("休止区分"), new RString("異動自由"), new RString("会員区分"), true);
             return new KaigoIryoKikan(医療機関, 主治医医療機関);
-//            return 介護医療機関;
         }
     }
 
