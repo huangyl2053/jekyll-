@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResult;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.NinteichosaKekkaEntityMock;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.NinteichosaResultMock;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.INinteichosaKekkaDac;
 import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;

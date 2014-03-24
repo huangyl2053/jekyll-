@@ -20,9 +20,9 @@ import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Ninteich
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubunOfKihon;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosaJisshibashoKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5008NinteichosaKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5009NinteichosahyoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaEntity;
@@ -258,14 +258,14 @@ public final class NinteichosaKekkaMapper {
                 new NinteichosaIraiRirekiNo(entity.getNinteichosaRirekiNo()),
                 koroshoIFKubun,
                 new NinteichosaResultOfGaikyoKihon(
-                NinteichosaIraiKubun.toValue(entity.getNinteichousaIraiKubunCode().value()),
-                entity.getNinteichosaIraiKaisu(),
-                entity.getNinteichosaJisshiYMD(),
-                entity.getNinteichosaJuryoYMD(),
-                NinteichosaKubun.toValue(entity.getNinteiChosaKubunCode().value()),
-                chosain,
-                new NinteichosaJisshibashoKubun(
-                new NinteichosaJisshibashoKubunCode(entity.getChosaJisshiBashoCode()), entity.getChosaJisshiBashoMeisho(), RString.EMPTY)),
+                        NinteichosaIraiKubun.toValue(entity.getNinteichousaIraiKubunCode().value()),
+                        entity.getNinteichosaIraiKaisu(),
+                        entity.getNinteichosaJisshiYMD(),
+                        entity.getNinteichosaJuryoYMD(),
+                        NinteichosaKubun.toValue(entity.getNinteiChosaKubunCode().value()),
+                        chosain,
+                        new NinteichosaJisshibashoKubun(
+                                new NinteichosaJisshibashoKubunCode(entity.getChosaJisshiBashoCode()), entity.getChosaJisshiBashoMeisho(), RString.EMPTY)),
                 result);
     }
 

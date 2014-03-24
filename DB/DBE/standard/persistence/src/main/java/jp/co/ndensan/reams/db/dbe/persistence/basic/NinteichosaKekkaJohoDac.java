@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5008NinteichosaKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5008NinteichosaKekkaJohoEntity;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -31,8 +31,8 @@ public class NinteichosaKekkaJohoDac implements INinteichosaKekkaJohoDac {
         List<DbT5008NinteichosaKekkaJohoEntity> list = accessor.select()
                 .table(DbT5008NinteichosaKekkaJoho.class)
                 .where(and(
-                eq(shinseishoKanriNo, 申請書管理番号),
-                eq(ninteichosaRirekiNo, 認定調査履歴番号)))
+                                eq(shinseishoKanriNo, 申請書管理番号),
+                                eq(ninteichosaRirekiNo, 認定調査履歴番号)))
                 .toList(DbT5008NinteichosaKekkaJohoEntity.class);
         return !list.isEmpty() ? list.get(0) : null;
     }
@@ -65,8 +65,8 @@ public class NinteichosaKekkaJohoDac implements INinteichosaKekkaJohoDac {
         return accessor.select()
                 .table(DbT5008NinteichosaKekkaJoho.class)
                 .where(and(
-                eq(shinseishoKanriNo, entity.getShinseishoKanriNo()),
-                eq(ninteichosaRirekiNo, entity.getNinteichosaRirekiNo())))
+                                eq(shinseishoKanriNo, entity.getShinseishoKanriNo()),
+                                eq(ninteichosaRirekiNo, entity.getNinteichosaRirekiNo())))
                 .getCount();
     }
 }

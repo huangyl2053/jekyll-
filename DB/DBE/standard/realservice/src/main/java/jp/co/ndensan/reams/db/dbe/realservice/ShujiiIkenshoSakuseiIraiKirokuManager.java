@@ -135,7 +135,7 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
      * @return 更新が成功した場合はtrueを返します。
      */
     public boolean save(NinteiShinseiJoho 認定申請情報) {
-        return shinseiDac.update(NinteishinseiJohoMapper.to認定申請情報Entity(認定申請情報)) != 0;
+        return shinseiDac.insert(NinteishinseiJohoMapper.to認定申請情報Entity(認定申請情報)) != 0;
     }
 
     private ShujiiIkenshoSakuseiIrai getShujiiIkenshoSakuseiIrai(DbT5011ShujiiIkenshoIraiJohoEntity iraiEntity) {

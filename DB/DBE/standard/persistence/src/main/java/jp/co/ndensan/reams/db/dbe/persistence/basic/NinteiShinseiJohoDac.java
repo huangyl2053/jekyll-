@@ -66,4 +66,9 @@ public class NinteiShinseiJohoDac implements INinteiShinseiJohoDac {
 //        DbAccessorForAddType accessor = new DbAccessorForAddType(session);
 //        return accessor.update(entity).execute();
 //    }
+    @Override
+    public int insert(DbT5001NinteiShinseiJohoEntity entity) {
+        DbAccessorForAddType accessor = new DbAccessorForAddType(session);
+        return accessor.insert(entity).execute();
+    }
 }

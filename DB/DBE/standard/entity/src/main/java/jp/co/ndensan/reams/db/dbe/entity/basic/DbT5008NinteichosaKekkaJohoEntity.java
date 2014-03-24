@@ -1,8 +1,8 @@
 package jp.co.ndensan.reams.db.dbe.entity.basic;
 
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -586,7 +586,8 @@ public class DbT5008NinteichosaKekkaJohoEntity implements IDbAccessable {
     /**
      * setTokuteiShisetsuNyushoshaSeikatsuKaigo
      *
-     * @param tokuteiShisetsuNyushoshaSeikatsuKaigo tokuteiShisetsuNyushoshaSeikatsuKaigo
+     * @param tokuteiShisetsuNyushoshaSeikatsuKaigo
+     * tokuteiShisetsuNyushoshaSeikatsuKaigo
      */
     public void setTokuteiShisetsuNyushoshaSeikatsuKaigo(int tokuteiShisetsuNyushoshaSeikatsuKaigo) {
         this.tokuteiShisetsuNyushoshaSeikatsuKaigo = tokuteiShisetsuNyushoshaSeikatsuKaigo;
@@ -712,7 +713,8 @@ public class DbT5008NinteichosaKekkaJohoEntity implements IDbAccessable {
     /**
      * setNinchishoTaiogataKyodoSeikatsuKaigo
      *
-     * @param ninchishoTaiogataKyodoSeikatsuKaigo ninchishoTaiogataKyodoSeikatsuKaigo
+     * @param ninchishoTaiogataKyodoSeikatsuKaigo
+     * ninchishoTaiogataKyodoSeikatsuKaigo
      */
     public void setNinchishoTaiogataKyodoSeikatsuKaigo(int ninchishoTaiogataKyodoSeikatsuKaigo) {
         this.ninchishoTaiogataKyodoSeikatsuKaigo = ninchishoTaiogataKyodoSeikatsuKaigo;
@@ -730,7 +732,8 @@ public class DbT5008NinteichosaKekkaJohoEntity implements IDbAccessable {
     /**
      * setChiikiMitchakugataTokuteiShisetsuNyushoshaSeikatsuKaigo
      *
-     * @param chiikiMitchakugataTokuteiShisetsuNyushoshaSeikatsuKaigo chiikiMitchakugataTokuteiShisetsuNyushoshaSeikatsuKaigo
+     * @param chiikiMitchakugataTokuteiShisetsuNyushoshaSeikatsuKaigo
+     * chiikiMitchakugataTokuteiShisetsuNyushoshaSeikatsuKaigo
      */
     public void setChiikiMitchakugataTokuteiShisetsuNyushoshaSeikatsuKaigo(int chiikiMitchakugataTokuteiShisetsuNyushoshaSeikatsuKaigo) {
         this.chiikiMitchakugataTokuteiShisetsuNyushoshaSeikatsuKaigo = chiikiMitchakugataTokuteiShisetsuNyushoshaSeikatsuKaigo;
@@ -748,7 +751,8 @@ public class DbT5008NinteichosaKekkaJohoEntity implements IDbAccessable {
     /**
      * setChiikiMitchakugataKaigoRojinHukushiNyushoshaSeikatsuKaigo
      *
-     * @param chiikiMitchakugataKaigoRojinHukushiNyushoshaSeikatsuKaigo chiikiMitchakugataKaigoRojinHukushiNyushoshaSeikatsuKaigo
+     * @param chiikiMitchakugataKaigoRojinHukushiNyushoshaSeikatsuKaigo
+     * chiikiMitchakugataKaigoRojinHukushiNyushoshaSeikatsuKaigo
      */
     public void setChiikiMitchakugataKaigoRojinHukushiNyushoshaSeikatsuKaigo(int chiikiMitchakugataKaigoRojinHukushiNyushoshaSeikatsuKaigo) {
         this.chiikiMitchakugataKaigoRojinHukushiNyushoshaSeikatsuKaigo = chiikiMitchakugataKaigoRojinHukushiNyushoshaSeikatsuKaigo;
@@ -766,7 +770,8 @@ public class DbT5008NinteichosaKekkaJohoEntity implements IDbAccessable {
     /**
      * setTeikijunkaiZuijiTaiogataHomonKaigoKango
      *
-     * @param teikijunkaiZuijiTaiogataHomonKaigoKango teikijunkaiZuijiTaiogataHomonKaigoKango
+     * @param teikijunkaiZuijiTaiogataHomonKaigoKango
+     * teikijunkaiZuijiTaiogataHomonKaigoKango
      */
     public void setTeikijunkaiZuijiTaiogataHomonKaigoKango(int teikijunkaiZuijiTaiogataHomonKaigoKango) {
         this.teikijunkaiZuijiTaiogataHomonKaigoKango = teikijunkaiZuijiTaiogataHomonKaigoKango;
@@ -928,7 +933,8 @@ public class DbT5008NinteichosaKekkaJohoEntity implements IDbAccessable {
     /**
      * setKaigoyoboTankiNyushoSeikatsuKaigo
      *
-     * @param kaigoyoboTankiNyushoSeikatsuKaigo kaigoyoboTankiNyushoSeikatsuKaigo
+     * @param kaigoyoboTankiNyushoSeikatsuKaigo
+     * kaigoyoboTankiNyushoSeikatsuKaigo
      */
     public void setKaigoyoboTankiNyushoSeikatsuKaigo(int kaigoyoboTankiNyushoSeikatsuKaigo) {
         this.kaigoyoboTankiNyushoSeikatsuKaigo = kaigoyoboTankiNyushoSeikatsuKaigo;
@@ -964,7 +970,8 @@ public class DbT5008NinteichosaKekkaJohoEntity implements IDbAccessable {
     /**
      * setKaigoyoboTokuteiShisetsuNyushoshaSeikatsuKaigo
      *
-     * @param kaigoyoboTokuteiShisetsuNyushoshaSeikatsuKaigo kaigoyoboTokuteiShisetsuNyushoshaSeikatsuKaigo
+     * @param kaigoyoboTokuteiShisetsuNyushoshaSeikatsuKaigo
+     * kaigoyoboTokuteiShisetsuNyushoshaSeikatsuKaigo
      */
     public void setKaigoyoboTokuteiShisetsuNyushoshaSeikatsuKaigo(int kaigoyoboTokuteiShisetsuNyushoshaSeikatsuKaigo) {
         this.kaigoyoboTokuteiShisetsuNyushoshaSeikatsuKaigo = kaigoyoboTokuteiShisetsuNyushoshaSeikatsuKaigo;
@@ -1036,7 +1043,8 @@ public class DbT5008NinteichosaKekkaJohoEntity implements IDbAccessable {
     /**
      * setKaigoyoboNinchishoTaiogataTushoKaigo
      *
-     * @param kaigoyoboNinchishoTaiogataTushoKaigo kaigoyoboNinchishoTaiogataTushoKaigo
+     * @param kaigoyoboNinchishoTaiogataTushoKaigo
+     * kaigoyoboNinchishoTaiogataTushoKaigo
      */
     public void setKaigoyoboNinchishoTaiogataTushoKaigo(int kaigoyoboNinchishoTaiogataTushoKaigo) {
         this.kaigoyoboNinchishoTaiogataTushoKaigo = kaigoyoboNinchishoTaiogataTushoKaigo;
@@ -1054,7 +1062,8 @@ public class DbT5008NinteichosaKekkaJohoEntity implements IDbAccessable {
     /**
      * setKaigoyoboShokiboTakinogataKyotakuKaigo
      *
-     * @param kaigoyoboShokiboTakinogataKyotakuKaigo kaigoyoboShokiboTakinogataKyotakuKaigo
+     * @param kaigoyoboShokiboTakinogataKyotakuKaigo
+     * kaigoyoboShokiboTakinogataKyotakuKaigo
      */
     public void setKaigoyoboShokiboTakinogataKyotakuKaigo(int kaigoyoboShokiboTakinogataKyotakuKaigo) {
         this.kaigoyoboShokiboTakinogataKyotakuKaigo = kaigoyoboShokiboTakinogataKyotakuKaigo;
@@ -1072,7 +1081,8 @@ public class DbT5008NinteichosaKekkaJohoEntity implements IDbAccessable {
     /**
      * setKaigoyoboNinchishoTaiogataKyodoSeikatsuKaigo
      *
-     * @param kaigoyoboNinchishoTaiogataKyodoSeikatsuKaigo kaigoyoboNinchishoTaiogataKyodoSeikatsuKaigo
+     * @param kaigoyoboNinchishoTaiogataKyodoSeikatsuKaigo
+     * kaigoyoboNinchishoTaiogataKyodoSeikatsuKaigo
      */
     public void setKaigoyoboNinchishoTaiogataKyodoSeikatsuKaigo(int kaigoyoboNinchishoTaiogataKyodoSeikatsuKaigo) {
         this.kaigoyoboNinchishoTaiogataKyodoSeikatsuKaigo = kaigoyoboNinchishoTaiogataKyodoSeikatsuKaigo;
@@ -1108,7 +1118,8 @@ public class DbT5008NinteichosaKekkaJohoEntity implements IDbAccessable {
     /**
      * setKaigohokenKyufuIgaiNoZaitakuService
      *
-     * @param kaigohokenKyufuIgaiNoZaitakuService kaigohokenKyufuIgaiNoZaitakuService
+     * @param kaigohokenKyufuIgaiNoZaitakuService
+     * kaigohokenKyufuIgaiNoZaitakuService
      */
     public void setKaigohokenKyufuIgaiNoZaitakuService(RString kaigohokenKyufuIgaiNoZaitakuService) {
         this.kaigohokenKyufuIgaiNoZaitakuService = kaigohokenKyufuIgaiNoZaitakuService;

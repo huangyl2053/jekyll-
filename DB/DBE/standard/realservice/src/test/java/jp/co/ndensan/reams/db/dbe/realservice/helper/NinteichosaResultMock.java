@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Ninteich
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosaItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosaJisshibashoKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urf.business._KaigoJigyosha;
 import jp.co.ndensan.reams.ur.urf.business._NinteiChosain;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
@@ -108,14 +108,14 @@ public class NinteichosaResultMock {
                 new NinteichosaIraiRirekiNo(0),
                 KoroshoIFKubun.V09A,
                 new NinteichosaResultOfGaikyoKihon(
-                NinteichosaIraiKubun.初回,
-                1,
-                new FlexibleDate("20140101"),
-                new FlexibleDate("20140202"),
-                NinteichosaKubun.新規調査,
-                new _NinteiChosain(new RString("12345678"), new _Name(new AtenaMeisho("氏名"), new AtenaKanaMeisho("")), createKaigoJigyosha()),
-                new NinteichosaJisshibashoKubun(
-                new NinteichosaJisshibashoKubunCode(new RString("12345678")), new RString("認定調査実施場所名称"), RString.EMPTY)),
+                        NinteichosaIraiKubun.初回,
+                        1,
+                        new FlexibleDate("20140101"),
+                        new FlexibleDate("20140202"),
+                        NinteichosaKubun.新規調査,
+                        new _NinteiChosain(new RString("12345678"), new _Name(new AtenaMeisho("氏名"), new AtenaKanaMeisho("")), createKaigoJigyosha()),
+                        new NinteichosaJisshibashoKubun(
+                                new NinteichosaJisshibashoKubunCode(new RString("12345678")), new RString("認定調査実施場所名称"), RString.EMPTY)),
                 result));
     }
 

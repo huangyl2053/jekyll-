@@ -10,11 +10,25 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
 import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
+import jp.co.ndensan.reams.ur.urz.business.IJusho;
+import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IIdoRiyu;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
+import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._ShikibetsuTaisho;
+import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._AdministrativeBoundary;
+import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._IdoJiyu;
+import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._IdoRiyu;
+import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.IIdoJiyu;
+import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.JuminShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
+import org.joda.time.LocalDateTime;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -50,12 +64,12 @@ public class NinteichosaIraiTaishoshaTest extends TestBase {
             被保険者 = new KaigoHihokenshaNo(new RString("0001"));
             認定申請年月日 = new FlexibleDate("20140101");
             認定申請区分 = NinteiShinseiKubunShinsei.新規申請;
-            個人情報 = mock(IKojin.class);
+//            個人情報 = mock(IKojin.class);
             氏名 = new RString("あああ");
             住所 = new RString("長野市AAAAAAAA");
-            認定調査委託先 = mock(NinteichosaItakusaki.class);
-            事業者情報 = mock(IKaigoJigyosha.class);
-            認定調査員情報 = mock(INinteiChosain.class);
+//            認定調査委託先 = mock(NinteichosaItakusaki.class);
+//            事業者情報 = mock(IKaigoJigyosha.class);
+//            認定調査員情報 = mock(INinteiChosain.class);
         }
 
         @Test(expected = NullPointerException.class)

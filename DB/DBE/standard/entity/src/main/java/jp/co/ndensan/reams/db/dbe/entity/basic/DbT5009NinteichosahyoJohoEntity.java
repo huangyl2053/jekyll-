@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
@@ -2065,7 +2065,8 @@ public class DbT5009NinteichosahyoJohoEntity implements IDbAccessable {
     /**
      * setNinchishoNichijoSeikatsuJiritsudoCode
      *
-     * @param ninchishoNichijoSeikatsuJiritsudoCode ninchishoNichijoSeikatsuJiritsudoCode
+     * @param ninchishoNichijoSeikatsuJiritsudoCode
+     * ninchishoNichijoSeikatsuJiritsudoCode
      */
     public void setNinchishoNichijoSeikatsuJiritsudoCode(Code ninchishoNichijoSeikatsuJiritsudoCode) {
         this.ninchishoNichijoSeikatsuJiritsudoCode = ninchishoNichijoSeikatsuJiritsudoCode;
@@ -2083,7 +2084,8 @@ public class DbT5009NinteichosahyoJohoEntity implements IDbAccessable {
     /**
      * setShogaiNichijoSeikatsuJiritsudoCode
      *
-     * @param shogaiNichijoSeikatsuJiritsudoCode shogaiNichijoSeikatsuJiritsudoCode
+     * @param shogaiNichijoSeikatsuJiritsudoCode
+     * shogaiNichijoSeikatsuJiritsudoCode
      */
     public void setShogaiNichijoSeikatsuJiritsudoCode(Code shogaiNichijoSeikatsuJiritsudoCode) {
         this.shogaiNichijoSeikatsuJiritsudoCode = shogaiNichijoSeikatsuJiritsudoCode;
