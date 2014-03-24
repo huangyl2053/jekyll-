@@ -23,7 +23,7 @@ public class ShinseishoKanriNo implements IDbColumnMappable, IValueObject {
      * 引数からメンバを受け取るコンストラクタです。
      *
      * @param 申請書管理番号 申請書管理番号
-     * @throws NullPointerException 引数にnullが渡されたとき
+     * @throws NullPointerException 引数にnullが渡されたとき。
      */
     public ShinseishoKanriNo(RString 申請書管理番号) throws NullPointerException {
         this.申請書管理番号 = requireNonNull(申請書管理番号);

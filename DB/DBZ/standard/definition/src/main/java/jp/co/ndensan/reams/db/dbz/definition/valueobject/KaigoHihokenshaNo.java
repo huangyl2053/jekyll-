@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  */
 public class KaigoHihokenshaNo implements IKaigoValueObject<RString, KaigoHihokenshaNo>, IDbColumnMappable {
 
-    private static final int PERMISSIBLE_LENGTH = 10;
+    // private static final int PERMISSIBLE_LENGTH = 10;
     private final RString 被保険者番号;
 
     /**
@@ -97,12 +97,11 @@ public class KaigoHihokenshaNo implements IKaigoValueObject<RString, KaigoHihoke
         return this.被保険者番号;
     }
 
-    private void validate(RString value) throws IllegalArgumentException {
-        if (value.length() != PERMISSIBLE_LENGTH) {
-            throw new IllegalArgumentException(Messages.E00013.replace("被保険者番号", PERMISSIBLE_LENGTH + "桁").getMessage());
-        }
-    }
-
+//    private void validate(RString value) throws IllegalArgumentException {
+//        if (value.length() != PERMISSIBLE_LENGTH) {
+//            throw new IllegalArgumentException(Messages.E00013.replace("被保険者番号", PERMISSIBLE_LENGTH + "桁").getMessage());
+//        }
+//    }
     private boolean isNull(Object target) {
         return target == null;
     }

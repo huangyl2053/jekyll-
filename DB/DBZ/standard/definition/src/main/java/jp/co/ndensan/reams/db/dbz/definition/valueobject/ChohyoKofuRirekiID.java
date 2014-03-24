@@ -8,42 +8,30 @@ import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * 支所コードです。<br />
- * DBの列に対してマッピング可能な業務ドメイン型です。
+ * 帳票交付履歴IDです。
  *
  * @author N3327 三浦 凌
  */
-public class ShishoCode implements IKaigoValueObject<RString, ShishoCode>, IDbColumnMappable {
+public class ChohyoKofuRirekiID implements IKaigoValueObject<RString, ChohyoKofuRirekiID> {
 
-    private final RString 支所コード;
+    private final RString 帳票交付履歴ID;
 
     /**
-     * 指定の値を持った、ShishoCodeを生成します。
+     * 指定の値をもった、ChohyoKofuRirekiIDを生成します。
      *
-     * @param value 支所コードに相当するRString
+     * @param value 帳票交付履歴IDに相当するRString
      * @throws NullPointerException 指定のRStringがnullのとき。
      */
-    public ShishoCode(RString value) throws NullPointerException {
+    public ChohyoKofuRirekiID(RString value) throws NullPointerException {
         requireNonNull(value, Messages.E00003.replace("value", getClass().getName()).getMessage());
-        this.支所コード = value;
+        this.帳票交付履歴ID = value;
     }
 
     @Override
     public RString value() {
-        return this.支所コード;
-    }
-
-    @Override
-    public int compareTo(ShishoCode target) {
-        return this.支所コード.compareTo(target.value());
-    }
-
-    @Override
-    public RString getColumnValue() {
-        return this.支所コード;
+        return this.帳票交付履歴ID;
     }
 
     @Override
@@ -51,14 +39,19 @@ public class ShishoCode implements IKaigoValueObject<RString, ShishoCode>, IDbCo
         if (isNull(target) || isNotSameClass(target.getClass())) {
             return false;
         }
-        return hasSameValue((ShishoCode) target);
+        return hasSameValue((ChohyoKofuRirekiID) target);
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 47 * hash + Objects.hashCode(this.支所コード);
+        int hash = 5;
+        hash = 37 * hash + Objects.hashCode(this.帳票交付履歴ID);
         return hash;
+    }
+
+    @Override
+    public int compareTo(ChohyoKofuRirekiID target) {
+        return this.帳票交付履歴ID.compareTo(target.value());
     }
 
     private boolean isNull(Object target) {
@@ -69,7 +62,7 @@ public class ShishoCode implements IKaigoValueObject<RString, ShishoCode>, IDbCo
         return clazz != this.getClass();
     }
 
-    private boolean hasSameValue(ShishoCode target) {
-        return target.value().equals(this.支所コード);
+    private boolean hasSameValue(ChohyoKofuRirekiID target) {
+        return target.value().equals(this.帳票交付履歴ID);
     }
 }

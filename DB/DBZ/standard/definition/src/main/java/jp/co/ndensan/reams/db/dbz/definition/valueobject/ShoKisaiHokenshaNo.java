@@ -25,8 +25,8 @@ public class ShoKisaiHokenshaNo implements IKaigoValueObject<RString, ShoKisaiHo
      * 指定の値を持った、ShoKisaiHokenshaNoを生成します。
      *
      * @param value 証記載保険者番号に相当するRString
-     * @throws NullPointerException 指定のRStringがnullのとき
-     * @throws IllegalArgumentException 指定のRStringが6桁でないとき
+     * @throws NullPointerException 指定のRStringがnullのとき。
+     * @throws IllegalArgumentException 指定のRStringが6桁でないとき。
      */
     public ShoKisaiHokenshaNo(RString value) throws NullPointerException, IllegalArgumentException {
         requireNonNull(value, Messages.E00003.replace("value", getClass().getName()).getMessage());
