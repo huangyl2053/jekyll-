@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.realservice.helper;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIrai;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.MobileDataShutsuryoku;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaTokusokuHoho;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosainBangoCode;
@@ -49,7 +49,7 @@ public class NinteichosaIraiTestHelper {
 
         return new NinteichosaIrai(shinseishoKanriNo, ninteichosaIraiRirekiNo,
                 ninteichosaItakusakiCode, chousainCode,
-                NinteichosaIraiKubunCode.toValue(ninteichousaIraiKubunCode), ninteichosaIraiKaisu,
+                NinteichosaIraiKubun.toValue(ninteichousaIraiKubunCode), ninteichosaIraiKaisu,
                 ninteichosaIraiYMD.toRDate(), ninteichosaKigenYMD.toRDate(),
                 iraishoShutsuryokuYMD.toRDate(), chosahyoTouShutsuryokuYMD.toRDate(),
                 MobileDataShutsuryoku.toValue(mobileDataShutsuryokuFlag), ninteichosaTokusokuYMD.toRDate(),

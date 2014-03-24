@@ -61,8 +61,8 @@ public class NinteichosaIraiMapperTest extends TestBase {
         }
 
         @Test
-        public void entityから渡された認定調査依頼区分コードと_Mapping後の認定調査依頼情報が返す認定調査依頼区分コードが_同一になる() {
-            assertThat(sut.get認定調査依頼区分コード().getCode(), is(ninteichousaIraiKubunCode));
+        public void entityから渡された認定調査依頼区分と_Mapping後の認定調査依頼情報が返す認定調査依頼区分が_同一になる() {
+            assertThat(sut.get認定調査依頼区分().getCode(), is(ninteichousaIraiKubunCode));
         }
 
         @Test
@@ -183,7 +183,7 @@ public class NinteichosaIraiMapperTest extends TestBase {
         }
 
         @Test
-        public void 引数から渡された認定調査依頼区分コードと_Mapping後のEntityが返す認定調査依頼区分コードが_同一になる() {
+        public void 引数から渡された認定調査依頼区分と_Mapping後のEntityが返す認定調査依頼区分が_同一になる() {
             assertThat(sut.getNinteichousaIraiKubunCode(), is(ninteichousaIraiKubunCode));
         }
 

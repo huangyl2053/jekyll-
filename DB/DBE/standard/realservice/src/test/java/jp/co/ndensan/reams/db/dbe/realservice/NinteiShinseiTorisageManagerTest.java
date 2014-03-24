@@ -106,7 +106,7 @@ public class NinteiShinseiTorisageManagerTest extends TestBase {
         when(mockDac.select(any(ShinseishoKanriNo.class))).thenReturn(create認定申請情報Entity());
         when(mockDac.selectAllBy認定申請年月日(any(ShichosonCode.class), any(Range.class))).thenReturn(create認定申請情報EntityList(3));
         when(mockDac.selectAllBy取下げ年月日(any(ShichosonCode.class), any(Range.class))).thenReturn(create認定申請情報EntityList(2));
-        when(mockDac.update(any(DbT5001NinteiShinseiJohoEntity.class))).thenReturn(1);
+        when(mockDac.insert(any(DbT5001NinteiShinseiJohoEntity.class))).thenReturn(1);
         return mockDac;
     }
 
@@ -115,7 +115,7 @@ public class NinteiShinseiTorisageManagerTest extends TestBase {
         when(mockDac.select(any(ShinseishoKanriNo.class))).thenReturn(create認定申請情報Entity());
         when(mockDac.selectAllBy認定申請年月日(any(ShichosonCode.class), any(Range.class))).thenReturn(create認定申請情報EntityList(3));
         when(mockDac.selectAllBy取下げ年月日(any(ShichosonCode.class), any(Range.class))).thenReturn(create認定申請情報EntityList(2));
-        when(mockDac.update(any(DbT5001NinteiShinseiJohoEntity.class))).thenReturn(0);
+        when(mockDac.insert(any(DbT5001NinteiShinseiJohoEntity.class))).thenReturn(0);
         return mockDac;
     }
 

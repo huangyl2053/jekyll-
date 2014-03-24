@@ -97,6 +97,6 @@ public class NinteiShinseiTorisageManager {
         DbT5001NinteiShinseiJohoEntity 更新前entity = shinseiDac.select(申請書管理No);
         DbT5001NinteiShinseiJohoEntity 更新後entity = NinteishinseiTorisageTaishoshaMapper
                 .to認定申請情報Entity(更新前entity, 認定申請取下げ情報);
-        return shinseiDac.update(更新後entity) == 1 ? true : false;
+        return shinseiDac.insert(更新後entity) == 1 ? true : false;
     }
 }

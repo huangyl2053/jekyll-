@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
  *
  * @author n8178 城間篤人
  */
-public interface INinteiShinseiJohoDac extends IUpdatable<DbT5001NinteiShinseiJohoEntity> {
+public interface INinteiShinseiJohoDac {
 
     /**
      * 申請書管理番号で指定された認定申請情報を取得します。
