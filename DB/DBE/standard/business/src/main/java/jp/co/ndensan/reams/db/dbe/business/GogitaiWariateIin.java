@@ -17,7 +17,7 @@ public class GogitaiWariateIin {
     private final ShinsakaiIin 委員情報;
     private final ShinsainKubun 認定調査員区分;
     private final GogitaichoKubun 合議体長区分;
-    private final GogitaiJoho 合議体情報;
+    private final GogitaiDetail 合議体情報;
 
     /**
      * 引数から値を受け取るコンストラクタです。
@@ -28,7 +28,7 @@ public class GogitaiWariateIin {
      * @param 合議体情報 合議体情報
      * @throws NullPointerException 委員情報にnullが渡されたとき
      */
-    public GogitaiWariateIin(ShinsakaiIin 委員情報, ShinsainKubun 認定調査員区分, GogitaichoKubun 合議体長区分, GogitaiJoho 合議体情報)
+    public GogitaiWariateIin(ShinsakaiIin 委員情報, ShinsainKubun 認定調査員区分, GogitaichoKubun 合議体長区分, GogitaiDetail 合議体情報)
             throws NullPointerException {
         requireNonNull(委員情報, Messages.E00003.replace("委員情報", getClass().getName()).getMessage());
         requireNonNull(合議体情報, Messages.E00003.replace("合議体情報", getClass().getName()).getMessage());
@@ -71,7 +71,7 @@ public class GogitaiWariateIin {
      *
      * @return 合議体情報
      */
-    public GogitaiJoho get合議体情報() {
+    public GogitaiDetail get合議体情報() {
         return 合議体情報;
     }
 }

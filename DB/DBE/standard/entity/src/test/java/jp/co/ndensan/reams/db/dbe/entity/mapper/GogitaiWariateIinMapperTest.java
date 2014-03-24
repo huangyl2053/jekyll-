@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.GogitaiJoho;
+import jp.co.ndensan.reams.db.dbe.business.GogitaiDetail;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIin;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIinList;
 import jp.co.ndensan.reams.db.dbe.business.GogitaichoKubun;
@@ -211,8 +211,8 @@ public class GogitaiWariateIinMapperTest {
         return 委員;
     }
 
-    private static GogitaiJoho create合議体() {
-        return new GogitaiJoho(合議体番号_1, RString.EMPTY, 開始年月日_19991212,
+    private static GogitaiDetail create合議体() {
+        return new GogitaiDetail(合議体番号_1, RString.EMPTY, 開始年月日_19991212,
                 終了年月日_20101212, mock(Range.class), mock(ShinsakaiKaisaiBasho.class), 3, 4, 5,
                 GogitaiSeishinkaIshiSonzaiKubun.存在, GogitaiDummyKubun.ダミー);
     }

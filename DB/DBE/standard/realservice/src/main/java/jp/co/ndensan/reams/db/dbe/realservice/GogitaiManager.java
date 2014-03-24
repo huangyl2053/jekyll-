@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5107GogitaiWariateIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.GogitaiJohoMapper;
+import jp.co.ndensan.reams.db.dbe.entity.mapper.GogitaiDetailMapper;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.GogitaiMapper;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.GogitaiWariateIinMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.GogitaiWariateShinsakaiIinEntity;
@@ -78,7 +78,7 @@ public class GogitaiManager {
      * @return 保存に成功したらtrue
      */
     public boolean save(Gogitai 合議体) {
-        DbT5103GogitaiJohoEntity 合議体Entity = GogitaiJohoMapper.to合議体情報Entity(合議体.get合議体情報());
+        DbT5103GogitaiJohoEntity 合議体Entity = GogitaiDetailMapper.to合議体情報Entity(合議体.get合議体情報());
         List<DbT5107GogitaiWariateIinJohoEntity> 合議体割当委員Entities =
                 GogitaiWariateIinMapper.to合議体割当委員EntityList(合議体.get割当委員List());
 
@@ -93,7 +93,7 @@ public class GogitaiManager {
      * @return 削除に成功したらtrue
      */
     public boolean remove(Gogitai 合議体) {
-        DbT5103GogitaiJohoEntity 合議体Entity = GogitaiJohoMapper.to合議体情報Entity(合議体.get合議体情報());
+        DbT5103GogitaiJohoEntity 合議体Entity = GogitaiDetailMapper.to合議体情報Entity(合議体.get合議体情報());
         List<DbT5107GogitaiWariateIinJohoEntity> 合議体割当委員Entities =
                 GogitaiWariateIinMapper.to合議体割当委員EntityList(合議体.get割当委員List());
 

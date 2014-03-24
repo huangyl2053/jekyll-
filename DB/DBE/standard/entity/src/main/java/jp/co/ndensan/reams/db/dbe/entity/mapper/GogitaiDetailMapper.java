@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.GogitaiJoho;
+import jp.co.ndensan.reams.db.dbe.business.GogitaiDetail;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
@@ -19,12 +19,12 @@ import jp.co.ndensan.reams.uz.uza.lang.Range;
  *
  * @author n8178 城間篤人
  */
-public final class GogitaiJohoMapper {
+public final class GogitaiDetailMapper {
 
     /**
      * インスタンス化防止のためのプライベートコンストラクタです。
      */
-    private GogitaiJohoMapper() {
+    private GogitaiDetailMapper() {
     }
 
     /**
@@ -35,12 +35,12 @@ public final class GogitaiJohoMapper {
      * @param 開催場所 開催場所Entity
      * @return 合議体
      */
-    public static GogitaiJoho to合議体情報(DbT5103GogitaiJohoEntity 合議体Entity, ShinsakaiKaisaiBasho 開催場所) {
+    public static GogitaiDetail to合議体情報(DbT5103GogitaiJohoEntity 合議体Entity, ShinsakaiKaisaiBasho 開催場所) {
         if (合議体Entity == null || 開催場所 == null) {
             return null;
         }
 
-        return new GogitaiJoho(new GogitaiNo(合議体Entity.getGogitaiNo()), 合議体Entity.getGogitaiMei(),
+        return new GogitaiDetail(new GogitaiNo(合議体Entity.getGogitaiNo()), 合議体Entity.getGogitaiMei(),
                 new GogitaiYukoKikanKaishiYMD(合議体Entity.getGogitaiYukoKikanKaishiYMD()), 合議体Entity.getGogitaiYukoKikanShuryoYMD(),
                 create開始終了時間(合議体Entity),
                 開催場所, 合議体Entity.getShinsakaiYoteiTeiin(), 合議体Entity.getShinsakaiJidoWariateTeiin(),
@@ -60,7 +60,7 @@ public final class GogitaiJohoMapper {
      * @param 合議体情報 合議体
      * @return 合議体Entity
      */
-    public static DbT5103GogitaiJohoEntity to合議体情報Entity(GogitaiJoho 合議体情報) {
+    public static DbT5103GogitaiJohoEntity to合議体情報Entity(GogitaiDetail 合議体情報) {
         if (合議体情報 == null) {
             return null;
         }

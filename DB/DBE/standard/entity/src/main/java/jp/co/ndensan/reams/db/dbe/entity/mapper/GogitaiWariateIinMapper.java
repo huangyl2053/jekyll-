@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.GogitaiJoho;
+import jp.co.ndensan.reams.db.dbe.business.GogitaiDetail;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIin;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIinList;
 import jp.co.ndensan.reams.db.dbe.business.GogitaichoKubun;
@@ -82,8 +82,8 @@ public final class GogitaiWariateIinMapper {
                 合議体割当委員Entity.get合議体割当Entity().getGogitaichoKubunName());
     }
 
-    private static GogitaiJoho create合議体情報(GogitaiWariateShinsakaiIinEntity 合議体割当委員Entity) {
-        return GogitaiJohoMapper.to合議体情報(合議体割当委員Entity.get合議体情報Entity(),
+    private static GogitaiDetail create合議体情報(GogitaiWariateShinsakaiIinEntity 合議体割当委員Entity) {
+        return GogitaiDetailMapper.to合議体情報(合議体割当委員Entity.get合議体情報Entity(),
                 ShinsakaiKaisaiBashoMapper.to審査会開催場所(合議体割当委員Entity.get開催場所Entity()));
     }
 

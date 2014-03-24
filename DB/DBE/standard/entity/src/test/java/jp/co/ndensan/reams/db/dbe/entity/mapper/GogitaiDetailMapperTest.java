@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.GogitaiJoho;
+import jp.co.ndensan.reams.db.dbe.business.GogitaiDetail;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiList;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIin;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIinList;
@@ -36,7 +36,7 @@ import static org.mockito.Mockito.when;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class GogitaiJohoMapperTest {
+public class GogitaiDetailMapperTest {
 
     private static GogitaiNo 合議体番号_1 = new GogitaiNo(1);
     private static RString 合議体名称_合議体1 = new RString("合議体1");
@@ -55,85 +55,85 @@ public class GogitaiJohoMapperTest {
 
         @Test
         public void 引数の合議体Entityにnullが渡されたとき_戻り値はnullになる() {
-            GogitaiJoho sut = GogitaiJohoMapper.to合議体情報(null, 審査会開催場所_山田家001);
+            GogitaiDetail sut = GogitaiDetailMapper.to合議体情報(null, 審査会開催場所_山田家001);
             assertThat(sut, is(nullValue()));
         }
 
         @Test
         public void 引数の審査会開催場所にnullが渡されたとき_戻り値はnullになる() {
-            GogitaiJoho sut = GogitaiJohoMapper.to合議体情報(createEntity(), null);
+            GogitaiDetail sut = GogitaiDetailMapper.to合議体情報(createEntity(), null);
             assertThat(sut, is(nullValue()));
         }
 
         @Test
         public void 合議体番号に1を持つEntityを引数に指定した場合_合議体番号に1を持つ合議体が返る() {
-            GogitaiJoho sut = GogitaiJohoMapper.to合議体情報(createEntity(), 審査会開催場所_山田家001);
+            GogitaiDetail sut = GogitaiDetailMapper.to合議体情報(createEntity(), 審査会開催場所_山田家001);
             assertThat(sut.get合議体番号(), is(合議体番号_1));
         }
 
         @Test
         public void 合議体名称として合議体1を持つEntityを引数に指定した場合_合議体名称に合議体1を持つ合議体が返る() {
-            GogitaiJoho sut = GogitaiJohoMapper.to合議体情報(createEntity(), 審査会開催場所_山田家001);
+            GogitaiDetail sut = GogitaiDetailMapper.to合議体情報(createEntity(), 審査会開催場所_山田家001);
             assertThat(sut.get合議体名称(), is(合議体名称_合議体1));
         }
 
         @Test
         public void 有効期間開始年月日として19991212を持つEntityを引数に指定した場合_有効期間開始年月日に19991212を持つ合議体が返る() {
-            GogitaiJoho sut = GogitaiJohoMapper.to合議体情報(createEntity(), 審査会開催場所_山田家001);
+            GogitaiDetail sut = GogitaiDetailMapper.to合議体情報(createEntity(), 審査会開催場所_山田家001);
             assertThat(sut.get有効期間開始年月日(), is(開始年月日_19991212));
         }
 
         @Test
         public void 有効期間終了年月日として20101212を持つEntityを引数に指定した場合_有効期間終了年月日に20101212を持つ合議体が返る() {
-            GogitaiJoho sut = GogitaiJohoMapper.to合議体情報(createEntity(), 審査会開催場所_山田家001);
+            GogitaiDetail sut = GogitaiDetailMapper.to合議体情報(createEntity(), 審査会開催場所_山田家001);
             assertThat(sut.get有効期間終了年月日(), is(終了年月日_20101212));
         }
 
         @Test
         public void 開始予定時刻として0830を持つEntityを引数に指定した場合_開始予定時刻に0830を持つ合議体が返る() {
-            GogitaiJoho sut = GogitaiJohoMapper.to合議体情報(createEntity(), 審査会開催場所_山田家001);
+            GogitaiDetail sut = GogitaiDetailMapper.to合議体情報(createEntity(), 審査会開催場所_山田家001);
             assertThat(sut.get予定開催時間().getFrom(), is(開始終了予定時刻_0830_1720.getFrom()));
         }
 
         @Test
         public void 終了予定時刻として1720を持つEntityを引数に指定した場合_終了予定時刻に1720を持つ合議体が返る() {
-            GogitaiJoho sut = GogitaiJohoMapper.to合議体情報(createEntity(), 審査会開催場所_山田家001);
+            GogitaiDetail sut = GogitaiDetailMapper.to合議体情報(createEntity(), 審査会開催場所_山田家001);
             assertThat(sut.get予定開催時間().getTo().value(), is(開始終了予定時刻_0830_1720.getTo().value()));
         }
 
         @Test
         public void 審査会開催場所コードに山田家001を持つ審査会開催場所クラスを引数に指定した場合_審査会開催場所コードに山田家001を持つ合議体が返る() {
-            GogitaiJoho sut = GogitaiJohoMapper.to合議体情報(createEntity(), 審査会開催場所_山田家001);
+            GogitaiDetail sut = GogitaiDetailMapper.to合議体情報(createEntity(), 審査会開催場所_山田家001);
             assertThat(sut.get審査会開催場所().get開催場所コード(), is(審査会開催場所_山田家001.get開催場所コード()));
         }
 
         @Test
         public void 審査会予定定員に5を持つEntityを引数に指定した場合_審査会予定定員に5を持つ合議体が返る() {
-            GogitaiJoho sut = GogitaiJohoMapper.to合議体情報(createEntity(), 審査会開催場所_山田家001);
+            GogitaiDetail sut = GogitaiDetailMapper.to合議体情報(createEntity(), 審査会開催場所_山田家001);
             assertThat(sut.get審査会予定定員(), is(審査会予定定員_5));
         }
 
         @Test
         public void 審査会自動割当定員に6を持つEntityを引数に指定した場合_審査会自動割当定員に6を持つ合議体が返る() {
-            GogitaiJoho sut = GogitaiJohoMapper.to合議体情報(createEntity(), 審査会開催場所_山田家001);
+            GogitaiDetail sut = GogitaiDetailMapper.to合議体情報(createEntity(), 審査会開催場所_山田家001);
             assertThat(sut.get審査会自動割当定員(), is(審査会自動割当定員_6));
         }
 
         @Test
         public void 審査会委員定員に7を持つEntityを引数に指定した場合_審査会委員定員に7を持つ合議体が返る() {
-            GogitaiJoho sut = GogitaiJohoMapper.to合議体情報(createEntity(), 審査会開催場所_山田家001);
+            GogitaiDetail sut = GogitaiDetailMapper.to合議体情報(createEntity(), 審査会開催場所_山田家001);
             assertThat(sut.get審査会委員定員(), is(審査会委員定員_7));
         }
 
         @Test
         public void 精神科医師が存在するEntityを引数に指定した場合_精神科医師が存在する合議体が返る() {
-            GogitaiJoho sut = GogitaiJohoMapper.to合議体情報(createEntity(), 審査会開催場所_山田家001);
+            GogitaiDetail sut = GogitaiDetailMapper.to合議体情報(createEntity(), 審査会開催場所_山田家001);
             assertThat(sut.get精神科医師存在(), is(精神科医師存在_存在));
         }
 
         @Test
         public void 合議体がダミーで無いことを示すEntityを引数に指定した場合_ダミーではない合議体が返る() {
-            GogitaiJoho sut = GogitaiJohoMapper.to合議体情報(createEntity(), 審査会開催場所_山田家001);
+            GogitaiDetail sut = GogitaiDetailMapper.to合議体情報(createEntity(), 審査会開催場所_山田家001);
             assertThat(sut.getダミー区分(), is(合議体ダミー_notダミー));
         }
     }
@@ -144,79 +144,79 @@ public class GogitaiJohoMapperTest {
 
         @Test
         public void 引数にnullを渡したとき_nullが返る() {
-            sut = GogitaiJohoMapper.to合議体情報Entity(null);
+            sut = GogitaiDetailMapper.to合議体情報Entity(null);
             assertThat(sut, is(nullValue()));
         }
 
         @Test
         public void 合議体番号に1を持つ合議体を引数に指定した場合_合議体番号に1を持つ合議体Entityが返る() {
-            sut = GogitaiJohoMapper.to合議体情報Entity(createGogitai());
+            sut = GogitaiDetailMapper.to合議体情報Entity(createGogitai());
             assertThat(sut.getGogitaiNo(), is(合議体番号_1.value()));
         }
 
         @Test
         public void 合議体名称に合議体1を持つ合議体を引数に指定した場合_合議体名称に合議体1を持つ合議体Entityが返る() {
-            sut = GogitaiJohoMapper.to合議体情報Entity(createGogitai());
+            sut = GogitaiDetailMapper.to合議体情報Entity(createGogitai());
             assertThat(sut.getGogitaiMei(), is(合議体名称_合議体1));
         }
 
         @Test
         public void 有効期間開始年月日に19991212を持つ合議体を引数に指定した場合_有効期間開始年月日に19991212を持つ合議体Entityが返る() {
-            sut = GogitaiJohoMapper.to合議体情報Entity(createGogitai());
+            sut = GogitaiDetailMapper.to合議体情報Entity(createGogitai());
             assertThat(sut.getGogitaiYukoKikanKaishiYMD(), is(開始年月日_19991212.value()));
         }
 
         @Test
         public void 有効期間終了年月日に20101212を持つ合議体を引数に指定した場合_有効期間終了年月日に20101212を持つ合議体Entityが返る() {
-            sut = GogitaiJohoMapper.to合議体情報Entity(createGogitai());
+            sut = GogitaiDetailMapper.to合議体情報Entity(createGogitai());
             assertThat(sut.getGogitaiYukoKikanShuryoYMD(), is(終了年月日_20101212));
         }
 
         @Test
         public void 開始予定時刻に0830を持つ合議体を引数に指定した場合_開始予定時刻に0830を持つ合議体Entityが返る() {
-            sut = GogitaiJohoMapper.to合議体情報Entity(createGogitai());
+            sut = GogitaiDetailMapper.to合議体情報Entity(createGogitai());
             assertThat(sut.getGogitaiKaishiYoteiTime(), is(開始終了予定時刻_0830_1720.getFrom().value()));
         }
 
         @Test
         public void 終了予定時刻に1720を持つ合議体を引数に指定した場合_終了予定時刻に1720を持つ合議体Entityが返る() {
-            sut = GogitaiJohoMapper.to合議体情報Entity(createGogitai());
+            sut = GogitaiDetailMapper.to合議体情報Entity(createGogitai());
             assertThat(sut.getGogitaiShuryoYoteiTime(), is(開始終了予定時刻_0830_1720.getTo().value()));
         }
 
         @Test
         public void 審査会開催場所コードに山田家001を持つ合議体を引数に指定した場合_審査会開催場所コードに山田家001を持つ合議体Entityが返る() {
-            sut = GogitaiJohoMapper.to合議体情報Entity(createGogitai());
+            sut = GogitaiDetailMapper.to合議体情報Entity(createGogitai());
             assertThat(sut.getShinsakaiKaisaiBashoCode(), is(審査会開催場所_山田家001.get開催場所コード().value()));
         }
 
         @Test
         public void 審査会予定定員に5を持つ合議体を引数に指定した場合_審査会予定定員に5を持つ合議体Entityが返る() {
-            sut = GogitaiJohoMapper.to合議体情報Entity(createGogitai());
+            sut = GogitaiDetailMapper.to合議体情報Entity(createGogitai());
             assertThat(sut.getShinsakaiYoteiTeiin(), is(審査会予定定員_5));
         }
 
         @Test
         public void 審査会自動割当定員に6を持つ合議体を引数に指定した場合_審査会自動割当定員に6を持つ合議体Entityが返る() {
-            sut = GogitaiJohoMapper.to合議体情報Entity(createGogitai());
+            sut = GogitaiDetailMapper.to合議体情報Entity(createGogitai());
             assertThat(sut.getShinsakaiJidoWariateTeiin(), is(審査会自動割当定員_6));
         }
 
         @Test
         public void 審査会委員定員に7を持つ合議体を引数に指定した場合_審査会委員定員に7を持つ合議体Entityが返る() {
-            sut = GogitaiJohoMapper.to合議体情報Entity(createGogitai());
+            sut = GogitaiDetailMapper.to合議体情報Entity(createGogitai());
             assertThat(sut.getShinsakaiIinTeiin(), is(審査会委員定員_7));
         }
 
         @Test
         public void 精神科医師が存在する合議体を引数に指定した場合_精神科医師が存在することを示す合議体Entityが返る() {
-            sut = GogitaiJohoMapper.to合議体情報Entity(createGogitai());
+            sut = GogitaiDetailMapper.to合議体情報Entity(createGogitai());
             assertThat(sut.getGogitaiSeishinkaSonzaiFlag(), is(精神科医師存在_存在.is存在()));
         }
 
         @Test
         public void ダミーではない合議体を引数に指定した場合_合議体がダミーではないことを示す合議体Entityが返る() {
-            sut = GogitaiJohoMapper.to合議体情報Entity(createGogitai());
+            sut = GogitaiDetailMapper.to合議体情報Entity(createGogitai());
             assertThat(sut.getGogitaiDummyFlag(), is(合議体ダミー_notダミー.isダミー()));
         }
     }
@@ -238,8 +238,8 @@ public class GogitaiJohoMapperTest {
         return entity;
     }
 
-    private static GogitaiJoho createGogitai() {
-        return new GogitaiJoho(合議体番号_1, 合議体名称_合議体1, 開始年月日_19991212, 終了年月日_20101212,
+    private static GogitaiDetail createGogitai() {
+        return new GogitaiDetail(合議体番号_1, 合議体名称_合議体1, 開始年月日_19991212, 終了年月日_20101212,
                 開始終了予定時刻_0830_1720, 審査会開催場所_山田家001, 審査会予定定員_5, 審査会自動割当定員_6,
                 審査会委員定員_7, 精神科医師存在_存在, 合議体ダミー_notダミー);
     }

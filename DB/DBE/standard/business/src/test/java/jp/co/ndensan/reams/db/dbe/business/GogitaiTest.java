@@ -36,7 +36,7 @@ public class GogitaiTest {
 
     public static class コンストラクタのテスト extends DbeTestBase {
 
-        private GogitaiJoho 合議体情報;
+        private GogitaiDetail 合議体情報;
         private GogitaiWariateIinList 割当委員List;
         private GogitaiWariateIinList 合議体情報不一致割当委員List;
 
@@ -69,8 +69,8 @@ public class GogitaiTest {
         }
     }
 
-    private static GogitaiJoho create合議体情報(int 合議体番号, String 開始年月日) {
-        return new GogitaiJoho(new GogitaiNo(合議体番号), RString.EMPTY, new GogitaiYukoKikanKaishiYMD(開始年月日),
+    private static GogitaiDetail create合議体情報(int 合議体番号, String 開始年月日) {
+        return new GogitaiDetail(new GogitaiNo(合議体番号), RString.EMPTY, new GogitaiYukoKikanKaishiYMD(開始年月日),
                 FlexibleDate.MAX, mock(Range.class), mock(ShinsakaiKaisaiBasho.class), 1, 2, 3,
                 GogitaiSeishinkaIshiSonzaiKubun.存在, GogitaiDummyKubun.ダミー);
     }
@@ -78,7 +78,7 @@ public class GogitaiTest {
     private static GogitaiWariateIinList create割当委員List_合議体情報一致() {
         List<GogitaiWariateIin> wariateIinList = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            GogitaiJoho info = create合議体情報(1, "19990101");
+            GogitaiDetail info = create合議体情報(1, "19990101");
             ShinsakaiIin shinsakaiIin = mock(ShinsakaiIin.class);
             ShinsakaiIinCode shinsakaiIinCode = new ShinsakaiIinCode(new RString("01"));
             when(shinsakaiIin.get委員コード()).thenReturn(shinsakaiIinCode);
@@ -95,7 +95,7 @@ public class GogitaiTest {
     private static GogitaiWariateIinList create割当委員List_合議体情報不一致() {
         List<GogitaiWariateIin> wariateIinList = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            GogitaiJoho info = create合議体情報(i, "19990101");
+            GogitaiDetail info = create合議体情報(i, "19990101");
             ShinsakaiIin shinsakaiIin = mock(ShinsakaiIin.class);
             ShinsakaiIinCode shinsakaiIinCode = new ShinsakaiIinCode(new RString("01"));
             when(shinsakaiIin.get委員コード()).thenReturn(shinsakaiIinCode);

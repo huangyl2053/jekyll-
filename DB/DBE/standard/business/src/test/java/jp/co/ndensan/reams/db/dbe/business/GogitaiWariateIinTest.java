@@ -26,14 +26,14 @@ public class GogitaiWariateIinTest {
         ShinsakaiIin 委員情報;
         ShinsainKubun 認定調査員区分;
         GogitaichoKubun 合議体長区分;
-        GogitaiJoho 所属合議体情報;
+        GogitaiDetail 所属合議体情報;
 
         @Before
         public void setUp() {
             委員情報 = mock(ShinsakaiIin.class);
             認定調査員区分 = mock(ShinsainKubun.class);
             合議体長区分 = mock(GogitaichoKubun.class);
-            所属合議体情報 = mock(GogitaiJoho.class);
+            所属合議体情報 = mock(GogitaiDetail.class);
         }
 
         @Test(expected = NullPointerException.class)

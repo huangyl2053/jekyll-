@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.Gogitai;
-import jp.co.ndensan.reams.db.dbe.business.GogitaiJoho;
+import jp.co.ndensan.reams.db.dbe.business.GogitaiDetail;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiList;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIinList;
 import jp.co.ndensan.reams.db.dbe.entity.relate.GogitaiWariateShinsakaiIinEntity;
@@ -56,14 +56,14 @@ public final class GogitaiMapper {
     }
 
     private static Gogitai to合議体(List<GogitaiWariateShinsakaiIinEntity> 合議体割当委員Entities) {
-        GogitaiJoho 合議体情報 = create合議体情報(合議体割当委員Entities.get(0));
+        GogitaiDetail 合議体情報 = create合議体情報(合議体割当委員Entities.get(0));
         GogitaiWariateIinList 合議体割当委員List = GogitaiWariateIinMapper.to合議体割当委員List(合議体割当委員Entities);
 
         return new Gogitai(合議体情報, 合議体割当委員List);
     }
 
-    private static GogitaiJoho create合議体情報(GogitaiWariateShinsakaiIinEntity 合議体割当委員Entity) {
-        return GogitaiJohoMapper.to合議体情報(合議体割当委員Entity.get合議体情報Entity(),
+    private static GogitaiDetail create合議体情報(GogitaiWariateShinsakaiIinEntity 合議体割当委員Entity) {
+        return GogitaiDetailMapper.to合議体情報(合議体割当委員Entity.get合議体情報Entity(),
                 ShinsakaiKaisaiBashoMapper.to審査会開催場所(合議体割当委員Entity.get開催場所Entity()));
     }
 

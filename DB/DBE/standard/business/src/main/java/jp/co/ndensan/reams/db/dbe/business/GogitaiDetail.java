@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8178 城間篤人
  */
-public class GogitaiJoho {
+public class GogitaiDetail {
 
     private final GogitaiNo 合議体番号;
     private final RString 合議体名称;
@@ -54,7 +54,7 @@ public class GogitaiJoho {
      * @throws IllegalArgumentException
      * 審査会予定定員、審査会自動割当定員、審査会委員定員のいずれかに0より小さい値が渡されたとき
      */
-    public GogitaiJoho(GogitaiNo 合議体番号, RString 合議体名称, GogitaiYukoKikanKaishiYMD 有効期間開始年月日,
+    public GogitaiDetail(GogitaiNo 合議体番号, RString 合議体名称, GogitaiYukoKikanKaishiYMD 有効期間開始年月日,
             FlexibleDate 有効期間終了年月日, Range<TimeString> 予定開催時間, ShinsakaiKaisaiBasho 審査会開催場所,
             int 審査会予定定員, int 審査会自動割当定員, int 審査会委員定員,
             GogitaiSeishinkaIshiSonzaiKubun 精神科医師存在区分, GogitaiDummyKubun ダミー区分)
@@ -249,7 +249,7 @@ public class GogitaiJoho {
             return false;
         }
 
-        final GogitaiJoho other = (GogitaiJoho) 比較対象;
+        final GogitaiDetail other = (GogitaiDetail) 比較対象;
         if (!Objects.equals(this.get合議体番号(), other.get合議体番号())) {
             return false;
         }

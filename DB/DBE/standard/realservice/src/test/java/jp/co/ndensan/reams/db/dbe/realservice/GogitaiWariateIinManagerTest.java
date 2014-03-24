@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.GogitaiJoho;
+import jp.co.ndensan.reams.db.dbe.business.GogitaiDetail;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIin;
 import jp.co.ndensan.reams.db.dbe.business.GogitaichoKubun;
 import jp.co.ndensan.reams.db.dbe.business.ShinsainKubun;
@@ -143,8 +143,8 @@ public class GogitaiWariateIinManagerTest {
                 create合議体情報(1, 合議体有効期間開始年月日));
     }
 
-    private static GogitaiJoho create合議体情報(int 合議体番号, String 開始年月日) {
-        return new GogitaiJoho(new GogitaiNo(合議体番号), RString.EMPTY, new GogitaiYukoKikanKaishiYMD(開始年月日),
+    private static GogitaiDetail create合議体情報(int 合議体番号, String 開始年月日) {
+        return new GogitaiDetail(new GogitaiNo(合議体番号), RString.EMPTY, new GogitaiYukoKikanKaishiYMD(開始年月日),
                 new FlexibleDate("20011231"), mock(Range.class), mock(ShinsakaiKaisaiBasho.class), 3, 4, 5,
                 GogitaiSeishinkaIshiSonzaiKubun.存在, GogitaiDummyKubun.ダミー);
     }

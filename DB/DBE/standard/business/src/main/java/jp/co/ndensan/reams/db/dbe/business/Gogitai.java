@@ -14,7 +14,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class Gogitai {
 
-    private final GogitaiJoho 合議体情報;
+    private final GogitaiDetail 合議体情報;
     private final GogitaiWariateIinList 割当委員List;
 
     /**
@@ -25,7 +25,7 @@ public class Gogitai {
      * @throws NullPointerException 引数のいずれかにnullが渡されたとき
      * @throws IllegalArgumentException 引数からわたされた合議体情報と、割当委員がそれぞれ持つ合議体情報が一致しないとき
      */
-    public Gogitai(GogitaiJoho 合議体情報, GogitaiWariateIinList 割当委員List) throws NullPointerException, IllegalArgumentException {
+    public Gogitai(GogitaiDetail 合議体情報, GogitaiWariateIinList 割当委員List) throws NullPointerException, IllegalArgumentException {
         requireNonNull(合議体情報, Messages.E00003.replace("合議体情報", getClass().getName().toString()).getMessage());
         requireNonNull(割当委員List, Messages.E00003.replace("割当委員List", getClass().getName().toString()).getMessage());
 
@@ -37,7 +37,7 @@ public class Gogitai {
         this.割当委員List = 割当委員List;
     }
 
-    private boolean is割当委員の合議体情報が一致(GogitaiJoho 合議体情報, GogitaiWariateIinList 割当委員List) {
+    private boolean is割当委員の合議体情報が一致(GogitaiDetail 合議体情報, GogitaiWariateIinList 割当委員List) {
         for (GogitaiWariateIin 割当委員 : 割当委員List) {
             if (!割当委員.get合議体情報().equals(合議体情報)) {
                 return false;
@@ -51,7 +51,7 @@ public class Gogitai {
      *
      * @return 合議体の情報
      */
-    public GogitaiJoho get合議体情報() {
+    public GogitaiDetail get合議体情報() {
         return 合議体情報;
     }
 

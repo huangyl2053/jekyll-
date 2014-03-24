@@ -65,7 +65,7 @@ public class GogitaiWariateIinListTest {
             GogitaiWariateIin result = sut.get合議体割当委員(new GogitaiNo(33), new GogitaiYukoKikanKaishiYMD("26641212"), create委員コード("9999"));
         }
 
-        private GogitaiWariateIin create合議体割当委員(String str, GogitaiJoho 合議体情報) {
+        private GogitaiWariateIin create合議体割当委員(String str, GogitaiDetail 合議体情報) {
             ShinsakaiIin 審査会委員 = mock(ShinsakaiIin.class);
             ShinsakaiIinCode shinsakaiIinCode = create委員コード(str);
             when(審査会委員.get委員コード()).thenReturn(shinsakaiIinCode);
@@ -76,8 +76,8 @@ public class GogitaiWariateIinListTest {
             return 割当委員;
         }
 
-        private GogitaiJoho create合議体情報(int 合議体番号, String 開始年月日) {
-            return new GogitaiJoho(new GogitaiNo(合議体番号), RString.EMPTY, new GogitaiYukoKikanKaishiYMD(開始年月日),
+        private GogitaiDetail create合議体情報(int 合議体番号, String 開始年月日) {
+            return new GogitaiDetail(new GogitaiNo(合議体番号), RString.EMPTY, new GogitaiYukoKikanKaishiYMD(開始年月日),
                     FlexibleDate.MAX, mock(Range.class), mock(ShinsakaiKaisaiBasho.class), 1, 2, 3,
                     GogitaiSeishinkaIshiSonzaiKubun.存在, GogitaiDummyKubun.ダミー);
         }

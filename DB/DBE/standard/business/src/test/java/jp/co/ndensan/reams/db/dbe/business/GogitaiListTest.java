@@ -76,14 +76,14 @@ public class GogitaiListTest {
 
         private Gogitai createGogitai(int 合議体番号, String 有効期間開始年月日) {
 
-            GogitaiJoho 合議体情報 = createGogitaiInfo(合議体番号, 有効期間開始年月日);
+            GogitaiDetail 合議体情報 = createGogitaiInfo(合議体番号, 有効期間開始年月日);
             Gogitai 合議体 = mock(Gogitai.class);
             when(合議体.get合議体情報()).thenReturn(合議体情報);
             return 合議体;
         }
 
-        private GogitaiJoho createGogitaiInfo(int 合議体番号, String 有効期間開始年月日) {
-            return new GogitaiJoho(new GogitaiNo(合議体番号), RString.EMPTY, new GogitaiYukoKikanKaishiYMD(有効期間開始年月日),
+        private GogitaiDetail createGogitaiInfo(int 合議体番号, String 有効期間開始年月日) {
+            return new GogitaiDetail(new GogitaiNo(合議体番号), RString.EMPTY, new GogitaiYukoKikanKaishiYMD(有効期間開始年月日),
                     FlexibleDate.MAX, mock(Range.class), mock(ShinsakaiKaisaiBasho.class), 3, 4, 5,
                     GogitaiSeishinkaIshiSonzaiKubun.存在, GogitaiDummyKubun.ダミー);
         }
