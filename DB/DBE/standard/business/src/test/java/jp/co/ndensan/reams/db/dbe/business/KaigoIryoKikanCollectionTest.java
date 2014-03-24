@@ -52,7 +52,8 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
 
         @Test
         public void 必須項目がそろっているとき_インスタンスが生成される() {
-            kaigoIryoKikanList = mock(List.class);
+//            kaigoIryoKikanList = mock(List.class);
+            kaigoIryoKikanList = new ArrayList<>();
             sut = new KaigoIryoKikanCollection(kaigoIryoKikanList);
             assertThat(sut, instanceOf(KaigoIryoKikanCollection.class));
         }
