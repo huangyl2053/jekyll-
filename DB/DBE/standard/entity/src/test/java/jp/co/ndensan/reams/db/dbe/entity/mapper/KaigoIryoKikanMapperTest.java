@@ -62,7 +62,7 @@ public class KaigoIryoKikanMapperTest extends TestBase {
 
         @Override
         public void setUp() {
-            setDummyControlData("DB");
+            setDummyControlData("DBE");
 
             識別コード = new RString("000000001");
             医療機関名称 = new RString("介護病院");
