@@ -11,16 +11,20 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.business.IDoctors;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikan;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.business.IKoza;
+import jp.co.ndensan.reams.ur.urz.business._Doctor;
+import jp.co.ndensan.reams.ur.urz.business._Doctors;
 import jp.co.ndensan.reams.ur.urz.business._IryoKikan;
 import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._Name;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -287,7 +291,7 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
             ShichosonCode shichosonCode = create市町村コード(市町村コード);
             IIryoKikanCode iryoKikanCode = create医療機関コード(介護医療機関コード);
             IShujiiIryoKikan 主治医医療機関 = new ShujiiIryoKikan(shichosonCode, kaigoIryoKikanCode, iryoKikanCode, 医療機関状況, create医療機関区分("A001"));
-            ShikibetsuCode shikibetsuCode = mock(ShikibetsuCode.class);
+            ShikibetsuCode shikibetsuCode = new ShikibetsuCode(new RString("00000000001"));
             AtenaMeisho 医療機関名称漢字 = new AtenaMeisho(new RString("医療機関名称漢字"));
             AtenaKanaMeisho 医療機関名称カナ = new AtenaKanaMeisho(new RString("医療機関名称カナ"));
             IName 医療機関名称 = new _Name(医療機関名称漢字, 医療機関名称カナ);
@@ -295,7 +299,14 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
             AtenaKanaMeisho 医療機関略称カナ = new AtenaKanaMeisho(new RString("医療機関略称カナ"));
             IName 医療機関略称 = new _Name(医療機関略称漢字, 医療機関略称カナ);
             Range<RDate> 開設期間 = new Range<>(new RDate(20140301), new RDate(20140331));
-            IDoctors 所属医師 = mock(IDoctors.class);
+            AtenaMeisho 医師氏名 = new AtenaMeisho(new RString("医師氏名"));
+            Code 所属診療科 = new Code(new RString("000"));
+            Code 医師区分 = new Code(new RString("000"));
+            IDoctor 所属医師Ａ = new _Doctor(new RString("医師識別番号"), 医師氏名, iryoKikanCode,
+                    所属診療科, 医師区分);
+            List<IDoctor> 所属医師リスト = new ArrayList<>();
+            所属医師リスト.add(所属医師Ａ);
+            IDoctors 所属医師 = new _Doctors(所属医師リスト);
             List<IKoza> 口座 = new ArrayList<>();
 
             IIryoKikan 医療機関 = new _IryoKikan(iryoKikanCode, shikibetsuCode, 医療機関名称, 医療機関略称, new RString("所在地郵便番号"), new RString("所在地住所"), new RString("所在地カナ住所"), 開設期間, 所属医師, 口座, new RDate(20140301), new RString("休止区分"), new RString("異動自由"), new RString("会員区分"), true);
