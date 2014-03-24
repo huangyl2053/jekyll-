@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
+import jp.co.ndensan.reams.ur.urz.definition.lib.util.IRStringConvertable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 
@@ -12,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
  *
  * @author n8178 城間篤人
  */
-public class ShinsainKubunCode extends Code {
+public class ShinsainKubunCode extends Code implements IRStringConvertable {
 
     /**
      * 引数からコードを表す文字列を受け取り、インスタンスを生成します。
@@ -36,12 +37,8 @@ public class ShinsainKubunCode extends Code {
         this(code.value());
     }
 
-    /**
-     * 審査員区分のコードを表す文字列を返します。
-     *
-     * @return コードを表す文字列
-     */
-    public RString getCode() {
+    @Override
+    public RString toRString() {
         return super.value();
     }
 }
