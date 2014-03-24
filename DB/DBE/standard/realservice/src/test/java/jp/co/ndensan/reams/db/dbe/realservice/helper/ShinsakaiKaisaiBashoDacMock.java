@@ -7,11 +7,12 @@ package jp.co.ndensan.reams.db.dbe.realservice.helper;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBashoJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoChikuCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiChiku;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.IShinsakaiKaisaiBashoDac;
+import jp.co.ndensan.reams.db.dbe.persistence.basic.ShinsakaiKaisaiBashoDac;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.*;
@@ -21,23 +22,23 @@ import static org.mockito.Mockito.*;
  *
  * @author N1013 松本直樹
  */
-public class ShinsakaiKaisaiBashoDacMock implements IShinsakaiKaisaiBashoDac {
+public class ShinsakaiKaisaiBashoDacMock extends ShinsakaiKaisaiBashoDac {
 
     public static RString 検索不可な開催場所コード = new RString("検索不可");
     private static ShinsakaiKaisaiBashoCode kaisaiBashoCode;
-    private static ShinsakaiKaisaiBashoChikuCode kaisaiBashoChikuCode;
+    private static ShinsakaiKaisaiChiku kaisaiBashoChikuCode;
 
     public static DbT5104ShinsakaiKaisaiBashoJohoEntity getSpiedInstance() {
 
         DbT5104ShinsakaiKaisaiBashoJohoEntity entity = new DbT5104ShinsakaiKaisaiBashoJohoEntity();
         kaisaiBashoCode = mock(ShinsakaiKaisaiBashoCode.class);
         kaisaiBashoCode = new ShinsakaiKaisaiBashoCode(new RString("00001"));
-        kaisaiBashoChikuCode = mock(ShinsakaiKaisaiBashoChikuCode.class);
-        kaisaiBashoChikuCode = new ShinsakaiKaisaiBashoChikuCode(new RString("00001"));
+        kaisaiBashoChikuCode = mock(ShinsakaiKaisaiChiku.class);
+        kaisaiBashoChikuCode = new ShinsakaiKaisaiChiku(new RString("00001"), new RString("地区名称"));
 
-        entity.setShinsakaiKaisaiBashoCode(kaisaiBashoCode);
+        entity.setShinsakaiKaisaiBashoCode(kaisaiBashoCode.value());
         entity.setShinsakaiKaisaiBashoMei(new RString("市役所会議室"));
-        entity.setShinsakaiKaisaiChikuCode(kaisaiBashoChikuCode);
+        entity.setShinsakaiKaisaiChikuCode(new Code(new RString("00001")));
         entity.setShinsakaiKaisaiBashoJusho(new AtenaJusho(new RString("長野市鶴賀")));
         entity.setShinsakaiKaisaiBashoTelNo(new TelNo(new RString("026-222-3333")));
         entity.setShinsakaiKaisaiBashoJokyo(true);
@@ -89,7 +90,7 @@ public class ShinsakaiKaisaiBashoDacMock implements IShinsakaiKaisaiBashoDac {
 
     @Override
     public int delete(DbT5104ShinsakaiKaisaiBashoJohoEntity entity) {
-        if (entity.getShinsakaiKaisaiBashoCode().value().equals(検索不可な開催場所コード)) {
+        if (entity.getShinsakaiKaisaiBashoCode().equals(検索不可な開催場所コード)) {
             return 0;
         } else {
             return 1;
