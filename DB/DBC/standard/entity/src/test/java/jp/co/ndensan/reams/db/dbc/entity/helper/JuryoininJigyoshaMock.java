@@ -9,6 +9,11 @@ import jp.co.ndensan.reams.db.dbc.business.JuryoininJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.KeiyakuJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.Todokedesha;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.EigyoKeitai;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.JutakuKaishuKeiyakuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KogakuKyufuKeiyakuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShokanbaraiKyufuKeiyakuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.TokuteiFukushiYoguHanbaiKeiyakuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ToriatsukaiKakuyakushoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
@@ -84,11 +89,11 @@ public class JuryoininJigyoshaMock {
                 mock(Todokedesha.class),
                 new FlexibleDate("20110208"),
                 create契約事業者(),
-                true,
-                true,
-                true,
-                true,
-                true);
+                JutakuKaishuKeiyakuKubun.契約有り,
+                TokuteiFukushiYoguHanbaiKeiyakuKubun.契約無し,
+                ShokanbaraiKyufuKeiyakuKubun.契約無し,
+                KogakuKyufuKeiyakuKubun.契約無し,
+                ToriatsukaiKakuyakushoKubun.確約書有り);
     }
 
     private static KeiyakuJigyosha create契約事業者() {

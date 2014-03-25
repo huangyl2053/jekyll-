@@ -6,6 +6,11 @@
 package jp.co.ndensan.reams.db.dbc.business;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.JutakuKaishuKeiyakuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KogakuKyufuKeiyakuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShokanbaraiKyufuKeiyakuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.TokuteiFukushiYoguHanbaiKeiyakuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ToriatsukaiKakuyakushoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -26,11 +31,11 @@ public class JuryoininJigyosha {
     private final Todokedesha 届出者;
     private final FlexibleDate 契約登録年月日;
     private final KeiyakuJigyosha 契約事業者;
-    private final boolean 住宅改修契約有無;
-    private final boolean 特定福祉用具販売契約有無;
-    private final boolean 償還払給付契約有無;
-    private final boolean 高額給付契約有無;
-    private final boolean 取扱確約書有無;
+    private final JutakuKaishuKeiyakuKubun 住宅改修契約有無;
+    private final TokuteiFukushiYoguHanbaiKeiyakuKubun 特定福祉用具販売契約有無;
+    private final ShokanbaraiKyufuKeiyakuKubun 償還払給付契約有無;
+    private final KogakuKyufuKeiyakuKubun 高額給付契約有無;
+    private final ToriatsukaiKakuyakushoKubun 取扱確約書有無;
 
     /**
      * コンストラクタです。
@@ -50,8 +55,11 @@ public class JuryoininJigyosha {
      */
     public JuryoininJigyosha(KeiyakuNo 契約番号, Range<FlexibleDate> 契約期間, RDateTime 処理日時,
             FlexibleDate 届出年月日, Todokedesha 届出者, FlexibleDate 契約登録年月日, KeiyakuJigyosha 契約事業者,
-            boolean 住宅改修契約有無, boolean 特定福祉用具販売契約有無, boolean 償還払給付契約有無,
-            boolean 高額給付契約有無, boolean 取扱確約書有無) {
+            JutakuKaishuKeiyakuKubun 住宅改修契約有無,
+            TokuteiFukushiYoguHanbaiKeiyakuKubun 特定福祉用具販売契約有無,
+            ShokanbaraiKyufuKeiyakuKubun 償還払給付契約有無,
+            KogakuKyufuKeiyakuKubun 高額給付契約有無,
+            ToriatsukaiKakuyakushoKubun 取扱確約書有無) {
 
         this.契約番号 = requireNonNull(契約番号, Messages.E00001.replace("契約番号").getMessage());
         this.契約期間 = requireNonNull(契約期間, Messages.E00001.replace("契約期間").getMessage());
@@ -131,47 +139,47 @@ public class JuryoininJigyosha {
     }
 
     /**
-     * 住宅改修契約であればtrueを、異なればfalseを返します。
+     * 住宅改修契約区分を返します。
      *
-     * @return is住宅改修契約
+     * @return 住宅改修契約区分
      */
-    public boolean is住宅改修契約() {
+    public JutakuKaishuKeiyakuKubun get住宅改修契約区分() {
         return 住宅改修契約有無;
     }
 
     /**
-     * 特定福祉用具販売契約であればtrueを、異なればfalseを返します。
+     * 特定福祉用具販売契約区分を返します。
      *
-     * @return is特定福祉用具販売契約
+     * @return 特定福祉用具販売契約有無
      */
-    public boolean is特定福祉用具販売契約() {
+    public TokuteiFukushiYoguHanbaiKeiyakuKubun get特定福祉用具販売契約区分() {
         return 特定福祉用具販売契約有無;
     }
 
     /**
-     * 償還払給付契約であればtrueを、異なればfalseを返します。
+     * 償還払給付契約区分を返します。
      *
-     * @return is償還払給付契約
+     * @return 償還払給付契約有無
      */
-    public boolean is償還払給付契約() {
+    public ShokanbaraiKyufuKeiyakuKubun get償還払給付契約区分() {
         return 償還払給付契約有無;
     }
 
     /**
-     * 高額給付契約であればtrueを、異なればfalseを返します。
+     * 高額給付契約区分を返します。
      *
-     * @return is高額給付契約
+     * @return 高額給付契約有無
      */
-    public boolean is高額給付契約() {
+    public KogakuKyufuKeiyakuKubun get高額給付契約区分() {
         return 高額給付契約有無;
     }
 
     /**
-     * 取扱確約書があればtrueを、なければfalseを返します。
+     * 取扱確約書区分を返します。
      *
-     * @return has取扱確約書
+     * @return 取扱確約書有無
      */
-    public boolean has取扱確約書() {
+    public ToriatsukaiKakuyakushoKubun get取扱確約書区分() {
         return 取扱確約書有無;
     }
 }
