@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.ur.urz.realservice.KozaService;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.ur.urf.definition.KaigoJigyoshaShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -75,7 +76,7 @@ public class JuryoininJigyoshaManager {
             return null;
         }
         if (entity.getKeiyakuJigyoshaNo() != null) {
-            set識別コード(entity);
+            set識別コードAs(entity);
         }
         IHojin 法人 = find法人(entity.getShikibetsuCode(), entity.getKaishiYMD());
         IKoza 口座 = find口座(entity.getShikibetsuCode(), entity.getKaishiYMD());
@@ -109,7 +110,7 @@ public class JuryoininJigyoshaManager {
         return is更新成功(dac.delete(entity));
     }
 
-    private void set識別コード(DbT3077JuryoininKeiyakuJigyoshaEntity entity) {
+    private void set識別コードAs(DbT3077JuryoininKeiyakuJigyoshaEntity entity) {
         IKaigoJigyosha 介護事業者;
         介護事業者 = find介護事業者(entity.getKeiyakuJigyoshaNo());
         entity.setShikibetsuCode(介護事業者.get識別コード());
@@ -130,7 +131,7 @@ public class JuryoininJigyoshaManager {
         //TODO n3317塚田萌　RDateからFlexibleDateに変更されたら.toRDate()を外す。
         //TODO n3317塚田萌　kozaFinderの修正が完了した時に対応する。
         RString 業務コード = new RString("業務コード");
-        RString 科目コード = new RString("科目コード");
+        KamokuCode 科目コード = new KamokuCode(new RString("AA"));
         return kozaFinder.get口座(契約開始日.toRDate(), 識別コード, 業務コード, 科目コード).get(0);
     }
 
