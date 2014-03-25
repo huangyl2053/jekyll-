@@ -22,7 +22,7 @@
             <exclusions>
                 <exclusion>
                     <artifactId>DbcBusiness</artifactId>
-                    <groupId>${project.groupId}</groupId>
+                    <groupId>jp.co.ndensan.reams.db.dba</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
