@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.ur.urz.business.IKoza;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
 import jp.co.ndensan.reams.ur.urz.realservice.IHojinFinder;
 import jp.co.ndensan.reams.ur.urz.realservice.IKozaManager;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -102,8 +103,10 @@ public class JuryoininJigyoshaManagerTest extends DbcTestBase {
     }
 
     private static JuryoininJigyoshaDac createDac(int flg) {
+        DbT3077JuryoininKeiyakuJigyoshaEntity entity = createEntity(flg);
+
         JuryoininJigyoshaDac dac = mock(JuryoininJigyoshaDac.class);
-        when(dac.select(any(KeiyakuNo.class))).thenReturn(createEntity(flg));
+        when(dac.select(any(KeiyakuNo.class))).thenReturn(entity);
         when(dac.insert(any(DbT3077JuryoininKeiyakuJigyoshaEntity.class))).thenReturn(flg);
         when(dac.delete(any(DbT3077JuryoininKeiyakuJigyoshaEntity.class))).thenReturn(flg);
         return dac;
@@ -142,7 +145,7 @@ public class JuryoininJigyoshaManagerTest extends DbcTestBase {
         IKozaManager kozaFinderMock = mock(IKozaManager.class);
         //TODO n3317塚田萌　RDateからFlexibleDateに変更されたらRDateを修正。
         when(kozaFinderMock.get口座(any(RDate.class), any(ShikibetsuCode.class),
-                any(RString.class), any(RString.class))).thenReturn(list);
+                any(RString.class), any(KamokuCode.class))).thenReturn(list);
 
         return kozaFinderMock;
     }

@@ -5,16 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.basic;
 
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.EigyoKeitai;
 import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.helper.JuryoininJigyoshaMock;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -36,7 +30,6 @@ public class JuryoininJigyoshaDacTest extends DbcTestDacBase {
     private static JuryoininJigyoshaDac sut;
     private static final KeiyakuNo 契約番号 = new KeiyakuNo(new RString("1234567890"));
     private static final RString 送付先部署 = new RString("１課");
-    private static final int 失敗 = 0;
     private static final int 成功 = 1;
 
     @BeforeClass
