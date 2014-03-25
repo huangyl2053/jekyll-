@@ -130,7 +130,8 @@ public final class GogitaiMockEntityCreator {
         entity.setShinsakaiIinKaishiYMD(new FlexibleDate(開始年月日));
         entity.setShinsakaiIinShuryoYMD(FlexibleDate.MAX);
         entity.setShinsakaiIinJokyo(Boolean.TRUE);
-        entity.setJigyoushaNo(new JigyoshaNo(new RString("ABCD00021")));
+        entity.setJigyoshaKubun(new RString("1"));
+        entity.setJigyoshaNo(new JigyoshaNo(new RString("ABCD00021")));
         entity.setShinsakaiIinShimei(new AtenaMeisho(RString.EMPTY));
         entity.setShinsakaiIinKanaShimei(new AtenaKanaMeisho(RString.EMPTY));
         entity.setSeibetsu(Gender.FEMALE.getCode());

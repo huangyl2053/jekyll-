@@ -44,7 +44,7 @@ public final class ShinsakaiIinMapper {
         return new ShinsakaiIin(new ShinsakaiIinCode(委員Entity.getShinsakaiIinCode()),
                 new Range(委員Entity.getShinsakaiIinKaishiYMD(), 委員Entity.getShinsakaiIinShuryoYMD()),
                 ShinsakaiIinJokyo.toValue(委員Entity.getShinsakaiIinJokyo()),
-                委員Entity.getJigyoushaNo(), 委員Entity.getShinsakaiIinShimei(), 委員Entity.getShinsakaiIinKanaShimei(),
+                委員Entity.getJigyoshaNo(), 委員Entity.getShinsakaiIinShimei(), 委員Entity.getShinsakaiIinKanaShimei(),
                 Gender.toValue(委員Entity.getSeibetsu()),
                 create審査員区分(委員Entity),
                 ShinsainYusoKubun.toValue(委員Entity.getShinsainYusoKubun()), 委員Entity.getYubinNo(), 委員Entity.getJusho(),
@@ -78,7 +78,7 @@ public final class ShinsakaiIinMapper {
         委員Entity.setShinsakaiIinKaishiYMD(審査会委員.get委員着任期間().getFrom());
         委員Entity.setShinsakaiIinShuryoYMD(審査会委員.get委員着任期間().getTo());
         委員Entity.setShinsakaiIinJokyo(審査会委員.get審査会委員状況().is有効());
-        委員Entity.setJigyoushaNo(審査会委員.get事業者番号());
+        委員Entity.setJigyoshaNo(審査会委員.get事業者番号());
         委員Entity.setShinsakaiIinShimei(審査会委員.get氏名());
         委員Entity.setShinsakaiIinKanaShimei(審査会委員.getカナ氏名());
         委員Entity.setSeibetsu(審査会委員.get性別().getCommonName());

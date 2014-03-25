@@ -159,16 +159,16 @@ public class NinteichosaIraiTaishoshaFinder {
         boolean isUncreatable = isNull(shinseiJohoEntity) || isNull(chosaIraiJohoEntity);
         return isUncreatable ? null
                 : itakusakiDac.select(
-                shinseiJohoEntity.getShichosonCode().getValue(),
-                new KaigoJigyoshaNo(chosaIraiJohoEntity.getNinteichosaItakusakiCode().getColumnValue()),
-                true);
+                        shinseiJohoEntity.getShichosonCode().getValue(),
+                        new KaigoJigyoshaNo(chosaIraiJohoEntity.getNinteichosaItakusakiCode().getColumnValue()),
+                        true);
     }
 
     private KaigoJigyoshaEntity create介護事業者(
             DbT5006NinteichosaIraiJohoEntity chosaIraiJohoEntity) {
         return isNull(chosaIraiJohoEntity) ? null
                 : kaigoJigyoshaDac.select特定の事業者番号の事業者(
-                chosaIraiJohoEntity.getNinteichosaItakusakiCode().getColumnValue());
+                        chosaIraiJohoEntity.getNinteichosaItakusakiCode().getColumnValue()).get(0);
     }
 
     private ChosainJohoEntity create調査員情報(
@@ -177,9 +177,9 @@ public class NinteichosaIraiTaishoshaFinder {
         boolean isUncreatable = isNull(shinseiJohoEntity) || isNull(chosaIraiJohoEntity);
         return isUncreatable ? null
                 : chosainJohoDac.selectByAllKey(
-                shinseiJohoEntity.getShichosonCode().getValue(),
-                chosaIraiJohoEntity.getNinteichosaItakusakiCode().getColumnValue(),
-                chosaIraiJohoEntity.getChousainCode().getColumnValue());
+                        shinseiJohoEntity.getShichosonCode().getValue(),
+                        chosaIraiJohoEntity.getNinteichosaItakusakiCode().getColumnValue(),
+                        chosaIraiJohoEntity.getChousainCode().getColumnValue());
     }
 
     private static <T> boolean isNull(T object) {

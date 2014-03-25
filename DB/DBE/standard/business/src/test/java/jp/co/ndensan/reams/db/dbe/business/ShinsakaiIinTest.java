@@ -14,9 +14,12 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import org.junit.Test;
@@ -55,7 +58,8 @@ public class ShinsakaiIinTest {
         @Before
         public void setUp() {
             委員コード = new ShinsakaiIinCode(RString.EMPTY);
-            委員着任期間 = mock(Range.class);
+//            委員着任期間 = mock(Range.class);
+            委員着任期間 = new Range<>(new FlexibleDate("20140301"), new FlexibleDate("20140331"));
             審査会委員状況 = ShinsakaiIinJokyo.有効;
             事業者番号 = new JigyoshaNo(RString.EMPTY);
             氏名 = new AtenaMeisho(RString.EMPTY);
@@ -66,7 +70,10 @@ public class ShinsakaiIinTest {
             郵便番号 = new YubinNo(new RString("123-1234"));
             住所 = new AtenaJusho(RString.EMPTY);
             電話番号 = new TelNo(RString.EMPTY);
-            口座情報 = mock(ShinsakaiIinKoza.class);
+            KinyuKikanCode 金融機関コード = new KinyuKikanCode(new RString("0000"));
+            KinyuKikanShitenCode 金融機関支店コード = new KinyuKikanShitenCode(new RString("000"));
+            //          口座情報 = mock(ShinsakaiIinKoza.class);
+            口座情報 = new ShinsakaiIinKoza(金融機関コード, 金融機関支店コード, new RString("口座種別"), new RString("口座名義人"), new RString("口座名義人カナ"), new RString("口座番号"));
         }
 
         @Test

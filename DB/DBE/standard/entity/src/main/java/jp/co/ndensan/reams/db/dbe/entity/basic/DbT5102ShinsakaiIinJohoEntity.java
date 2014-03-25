@@ -41,7 +41,8 @@ public class DbT5102ShinsakaiIinJohoEntity implements IDbAccessable {
     private FlexibleDate shinsakaiIinKaishiYMD;
     private FlexibleDate shinsakaiIinShuryoYMD;
     private boolean shinsakaiIinJokyo;
-    private JigyoshaNo jigyoushaNo;
+    private RString jigyoshaKubun;
+    private JigyoshaNo jigyoshaNo;
     private AtenaMeisho shinsakaiIinShimei;
     private AtenaKanaMeisho ShinsakaiIinKanaShimei;
     private RString seibetsu;
@@ -175,21 +176,39 @@ public class DbT5102ShinsakaiIinJohoEntity implements IDbAccessable {
     }
 
     /**
-     * getJigyoushaNo
+     * getJigyoshaKubun
      *
-     * @return jigyoushaNo
+     * @return jigyoshaKubun
      */
-    public JigyoshaNo getJigyoushaNo() {
-        return jigyoushaNo;
+    public RString getJigyoshaKubun() {
+        return jigyoshaKubun;
     }
 
     /**
-     * setJigyoushaNo
+     * setJigyoshaKubun
      *
-     * @param jigyoushaNo jigyoushaNo
+     * @param jigyoushaKubun jigyoshaKubun
      */
-    public void setJigyoushaNo(JigyoshaNo jigyoushaNo) {
-        this.jigyoushaNo = jigyoushaNo;
+    public void setJigyoshaKubun(RString jigyoushaKubun) {
+        this.jigyoshaKubun = jigyoushaKubun;
+    }
+
+    /**
+     * getJigyoshaNo
+     *
+     * @return jigyoshaNo
+     */
+    public JigyoshaNo getJigyoshaNo() {
+        return jigyoshaNo;
+    }
+
+    /**
+     * setJigyoshaNo
+     *
+     * @param jigyoushaNo jigyoshaNo
+     */
+    public void setJigyoshaNo(JigyoshaNo jigyoushaNo) {
+        this.jigyoshaNo = jigyoushaNo;
     }
 
     /**

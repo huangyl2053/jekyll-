@@ -8,6 +8,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  */
 public enum DbT5102ShinsakaiIinJoho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">
+
     insertDantaiCd(2147483647, 0),
     insertTimestamp(29, 0),
     insertReamsLoginId(2147483647, 0),
@@ -20,7 +22,8 @@ public enum DbT5102ShinsakaiIinJoho implements IColumnDefinition {
     shinsakaiIinKaishiYMD(2147483647, 0),
     shinsakaiIinShuryoYMD(2147483647, 0),
     shinsakaiIinJokyo(1, 0),
-    jigyoushaNo(2147483647, 0),
+    jigyoshaKubun(1, 0),
+    jigyoshaNo(2147483647, 0),
     shinsakaiIinShimei(2147483647, 0),
     ShinsakaiIinKanaShimei(2147483647, 0),
     seibetsu(1, 0),
@@ -46,6 +49,7 @@ public enum DbT5102ShinsakaiIinJoho implements IColumnDefinition {
 
     /**
      * getMaxLength
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -54,6 +58,7 @@ public enum DbT5102ShinsakaiIinJoho implements IColumnDefinition {
 
     /**
      * getScale
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

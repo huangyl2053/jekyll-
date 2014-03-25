@@ -24,7 +24,7 @@ public class DbeTestDacBase extends TestDacBase3 {
 
     @BeforeClass
     public static void beforeSetUpClass() {
-        setDummyControlData(new RString("DB"));
+        setDummyControlData(new RString("DBE"));
         openMainSession();
     }
 

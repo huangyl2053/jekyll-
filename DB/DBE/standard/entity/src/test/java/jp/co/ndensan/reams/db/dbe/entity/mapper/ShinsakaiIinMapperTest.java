@@ -222,7 +222,7 @@ public class ShinsakaiIinMapperTest {
         @Test
         public void 事業者番号にjigyo01を持つ審査会委員が渡されたとき_事業者番号にjigyo01を持つEntityが返す() {
             sut = ShinsakaiIinMapper.to審査会委員Entity(createShinsakaiIin());
-            assertThat(sut.getJigyoushaNo(), is(事業者番号_jigyo01));
+            assertThat(sut.getJigyoshaNo(), is(事業者番号_jigyo01));
         }
 
         @Test
@@ -325,7 +325,7 @@ public class ShinsakaiIinMapperTest {
         委員Entity.setShinsakaiIinKaishiYMD(委員着任期間_19991212_20101212.getFrom());
         委員Entity.setShinsakaiIinShuryoYMD(委員着任期間_19991212_20101212.getTo());
         委員Entity.setShinsakaiIinJokyo(審査会委員状況_有効.is有効());
-        委員Entity.setJigyoushaNo(事業者番号_jigyo01);
+        委員Entity.setJigyoshaNo(事業者番号_jigyo01);
         委員Entity.setShinsakaiIinShimei(氏名_太郎);
         委員Entity.setShinsakaiIinKanaShimei(カナ氏名_タロウ);
         委員Entity.setSeibetsu(性別_MALE.getCode());
