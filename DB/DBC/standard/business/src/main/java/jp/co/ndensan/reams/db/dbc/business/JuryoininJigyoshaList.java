@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.business;
 import java.util.Iterator;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
  *
  * @author N3317 塚田 萌
  */
-public class JuryoininJigyoshaList implements Iterable {
+public class JuryoininJigyoshaList implements Iterable<JuryoininJigyosha> {
 
     private final List<JuryoininJigyosha> 受領委任事業者List;
 
@@ -30,12 +31,23 @@ public class JuryoininJigyoshaList implements Iterable {
     }
 
     /**
-     * 受領委任事業者Listを返します。
+     * 受領委任事業者リストから指定した契約番号に該当する情報を返します。
      *
-     * @return 受領委任事業者List
+     * @param 契約番号 契約番号
+     * @return 契約番号に該当する受領委任事業者
+     * @throws IllegalArgumentException 存在しない対象を指定した時
      */
-    public List<JuryoininJigyosha> get受領委任事業者List() {
-        return 受領委任事業者List;
+    public JuryoininJigyosha get受領委任事業者(KeiyakuNo 契約番号) throws IllegalArgumentException {
+        for (JuryoininJigyosha 受領委任事業者 : 受領委任事業者List) {
+            if (is契約番号一致(受領委任事業者, 契約番号)) {
+                return 受領委任事業者;
+            }
+        }
+        throw new IllegalArgumentException(Messages.E00006.replace("対応する受領委任事業者").getMessage());
+    }
+
+    private boolean is契約番号一致(JuryoininJigyosha 受領委任事業者, KeiyakuNo 契約番号) {
+        return 受領委任事業者.get契約番号().equals(契約番号);
     }
 
     /**
@@ -57,7 +69,7 @@ public class JuryoininJigyoshaList implements Iterable {
     }
 
     @Override
-    public Iterator iterator() {
-        return get受領委任事業者List().iterator();
+    public Iterator<JuryoininJigyosha> iterator() {
+        return 受領委任事業者List.iterator();
     }
 }
