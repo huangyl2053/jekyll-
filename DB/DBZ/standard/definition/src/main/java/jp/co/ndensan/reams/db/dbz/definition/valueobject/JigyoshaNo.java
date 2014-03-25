@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 /**
  * 事業者番号を表すクラスです
  *
- * @author N1013 松本直樹
+ * @author N3317 塚田 萌
  */
 public class JigyoshaNo implements IValueObject, IDbColumnMappable, Comparable<JigyoshaNo> {
 
