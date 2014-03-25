@@ -7,11 +7,12 @@ package jp.co.ndensan.reams.db.dbc.business;
 
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.EigyoKeitai;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IKoza;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -23,7 +24,7 @@ import static org.mockito.Mockito.mock;
  * @author N3317 塚田 萌
  */
 @RunWith(Enclosed.class)
-public class KeiyakuJigyoshaTest extends TestBase {
+public class KeiyakuJigyoshaTest extends DbcTestBase {
 
     private static KeiyakuJigyosha sut;
 
@@ -36,7 +37,7 @@ public class KeiyakuJigyoshaTest extends TestBase {
     //TODO n3317塚田萌　ISofusakiは本実装の時に対応する。期限　本実装完了まで
     //private static ISofusaki 送付先;
 
-    @Override
+    @Before
     public void setUp() {
         事業者番号 = mock(JigyoshaNo.class);
         法人 = mock(IHojin.class);

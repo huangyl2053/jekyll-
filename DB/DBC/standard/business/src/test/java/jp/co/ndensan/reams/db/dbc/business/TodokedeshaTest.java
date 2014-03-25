@@ -5,11 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.business;
 
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+import org.junit.Before;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
@@ -20,14 +22,14 @@ import static org.mockito.Mockito.mock;
  * @author N3317 塚田 萌
  */
 @RunWith(Enclosed.class)
-public class TodokedeshaTest extends TestBase {
+public class TodokedeshaTest extends DbcTestBase {
 
     private static Todokedesha sut;
     private static RString 住所;
     private static RString 事業者名称;
     private static RString 代表者氏名;
 
-    @Override
+    @Before
     public void setUp() {
         住所 = mock(RString.class);
         事業者名称 = mock(RString.class);

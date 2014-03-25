@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.valueobject;
 
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -19,7 +19,7 @@ import org.junit.runner.RunWith;
  * @author N3317 塚田 萌
  */
 @RunWith(Enclosed.class)
-public class JigyoshaNoTest extends TestBase {
+public class JigyoshaNoTest extends DbzTestBase {
 
     private static JigyoshaNo sut;
 
