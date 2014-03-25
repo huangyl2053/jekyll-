@@ -170,7 +170,7 @@ public class ShujiiIkenshoSakuseiIraiTest {
         AtenaMeisho 医療機関略称漢字 = new AtenaMeisho(new RString("医療機関略称漢字"));
         AtenaKanaMeisho 医療機関略称カナ = new AtenaKanaMeisho(new RString("医療機関略称カナ"));
         IName 医療機関略称 = new _Name(医療機関略称漢字, 医療機関略称カナ);
-        Range<RDate> 開設期間 = new Range<>(new RDate(20140301), new RDate(20140331));
+        Range<FlexibleDate> 開設期間 = new Range<>(new FlexibleDate("20140301"), new FlexibleDate("20140331"));
         IDoctor 所属医師Ａ = new _Doctor(new RString("医師識別番号"), 医師氏名, iryoKikanCode,
                 所属診療科, 医師区分);
         List<IDoctor> 所属医師リスト = new ArrayList<>();
@@ -180,7 +180,7 @@ public class ShujiiIkenshoSakuseiIraiTest {
         IIryoKikan iryoKikan = new _IryoKikan(iryoKikanCode, shikibetsuCode,
                 医療機関名称, 医療機関略称, new RString("所在地郵便番号"),
                 new RString("所在地住所"), new RString("所在地カナ住所"),
-                開設期間, 所属医師, 口座, new RDate(20140301),
+                開設期間, 所属医師, 口座, new FlexibleDate("20140301"),
                 new RString("休止区分"), new RString("異動自由"),
                 new RString("会員区分"), true);
         KaigoIryoKikanCode 介護医療機関コード = new KaigoIryoKikanCode(new RString("0000000001"));

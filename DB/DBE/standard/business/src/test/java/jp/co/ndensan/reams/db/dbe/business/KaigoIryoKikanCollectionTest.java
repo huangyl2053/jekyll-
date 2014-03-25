@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
@@ -128,7 +129,7 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
             AtenaMeisho 医療機関略称漢字 = new AtenaMeisho(new RString("医療機関略称漢字"));
             AtenaKanaMeisho 医療機関略称カナ = new AtenaKanaMeisho(new RString("医療機関略称カナ"));
             IName 医療機関略称 = new _Name(医療機関略称漢字, 医療機関略称カナ);
-            Range<RDate> 開設期間 = new Range<>(new RDate(20140301), new RDate(20140331));
+            Range<FlexibleDate> 開設期間 = new Range<>(new FlexibleDate("20140301"), new FlexibleDate("20140331"));
             AtenaMeisho 医師氏名 = new AtenaMeisho(new RString("医師氏名"));
             Code 所属診療科 = new Code(new RString("000"));
             Code 医師区分 = new Code(new RString("000"));
@@ -139,7 +140,10 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
             IDoctors 所属医師 = new _Doctors(所属医師リスト);
             List<IKoza> 口座 = new ArrayList<>();
 
-            IIryoKikan 医療機関 = new _IryoKikan(iryoKikanCode, shikibetsuCode, 医療機関名称, 医療機関略称, new RString("所在地郵便番号"), new RString("所在地住所"), new RString("所在地カナ住所"), 開設期間, 所属医師, 口座, new RDate(20140301), new RString("休止区分"), new RString("異動自由"), new RString("会員区分"), true);
+            IIryoKikan 医療機関 = new _IryoKikan(iryoKikanCode, shikibetsuCode, 医療機関名称, 医療機関略称,
+                    new RString("所在地郵便番号"), new RString("所在地住所"), new RString("所在地カナ住所"),
+                    開設期間, 所属医師, 口座, new FlexibleDate("20140301"), new RString("休止区分"),
+                    new RString("異動自由"), new RString("会員区分"), true);
             return new KaigoIryoKikan(医療機関, 主治医医療機関);
         }
     }
@@ -247,7 +251,7 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
             AtenaMeisho 医療機関略称漢字 = new AtenaMeisho(new RString("医療機関略称漢字"));
             AtenaKanaMeisho 医療機関略称カナ = new AtenaKanaMeisho(new RString("医療機関略称カナ"));
             IName 医療機関略称 = new _Name(医療機関略称漢字, 医療機関略称カナ);
-            Range<RDate> 開設期間 = new Range<>(new RDate(20140301), new RDate(20140331));
+            Range<FlexibleDate> 開設期間 = new Range<>(new FlexibleDate("20140301"), new FlexibleDate("20140331"));
             AtenaMeisho 医師氏名 = new AtenaMeisho(new RString("医師氏名"));
             Code 所属診療科 = new Code(new RString("000"));
             Code 医師区分 = new Code(new RString("000"));
@@ -258,7 +262,10 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
             IDoctors 所属医師 = new _Doctors(所属医師リスト);
             List<IKoza> 口座 = new ArrayList<>();
 
-            IIryoKikan 医療機関 = new _IryoKikan(iryoKikanCode, shikibetsuCode, 医療機関名称, 医療機関略称, new RString("所在地郵便番号"), new RString("所在地住所"), new RString("所在地カナ住所"), 開設期間, 所属医師, 口座, new RDate(20140301), new RString("休止区分"), new RString("異動自由"), new RString("会員区分"), true);
+            IIryoKikan 医療機関 = new _IryoKikan(iryoKikanCode, shikibetsuCode, 医療機関名称, 医療機関略称,
+                    new RString("所在地郵便番号"), new RString("所在地住所"), new RString("所在地カナ住所"),
+                    開設期間, 所属医師, 口座, new FlexibleDate("20140301"), new RString("休止区分"),
+                    new RString("異動自由"), new RString("会員区分"), true);
 //            when(医療機関.get識別コード()).thenReturn(new ShikibetsuCode(new RString(識別コード)));
 
             return new KaigoIryoKikan(医療機関, 主治医医療機関);
@@ -333,7 +340,7 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
             AtenaMeisho 医療機関略称漢字 = new AtenaMeisho(new RString("医療機関略称漢字"));
             AtenaKanaMeisho 医療機関略称カナ = new AtenaKanaMeisho(new RString("医療機関略称カナ"));
             IName 医療機関略称 = new _Name(医療機関略称漢字, 医療機関略称カナ);
-            Range<RDate> 開設期間 = new Range<>(new RDate(20140301), new RDate(20140331));
+            Range<FlexibleDate> 開設期間 = new Range<>(new FlexibleDate("20140301"), new FlexibleDate("20140331"));
             AtenaMeisho 医師氏名 = new AtenaMeisho(new RString("医師氏名"));
             Code 所属診療科 = new Code(new RString("000"));
             Code 医師区分 = new Code(new RString("000"));
@@ -344,7 +351,10 @@ public class KaigoIryoKikanCollectionTest extends TestBase {
             IDoctors 所属医師 = new _Doctors(所属医師リスト);
             List<IKoza> 口座 = new ArrayList<>();
 
-            IIryoKikan 医療機関 = new _IryoKikan(iryoKikanCode, shikibetsuCode, 医療機関名称, 医療機関略称, new RString("所在地郵便番号"), new RString("所在地住所"), new RString("所在地カナ住所"), 開設期間, 所属医師, 口座, new RDate(20140301), new RString("休止区分"), new RString("異動自由"), new RString("会員区分"), true);
+            IIryoKikan 医療機関 = new _IryoKikan(iryoKikanCode, shikibetsuCode, 医療機関名称, 医療機関略称,
+                    new RString("所在地郵便番号"), new RString("所在地住所"), new RString("所在地カナ住所"),
+                    開設期間, 所属医師, 口座, new FlexibleDate("20140301"), new RString("休止区分"),
+                    new RString("異動自由"), new RString("会員区分"), true);
             return new KaigoIryoKikan(医療機関, 主治医医療機関);
         }
     }
