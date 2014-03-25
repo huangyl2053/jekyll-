@@ -4,20 +4,18 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.relate;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 
 /**
- * 認定進捗、認定申請、認定調査依頼、介護認定調査員の情報をまとめた認定調査結果取込対象者のエンティティクラスです。
+ * 認定申請情報、認定進捗情報をまとめたエンティティクラスです。
  *
  * @author N8187 久保田 英男
  */
 public class NinteichosaKekkaTorikomiTaishoshaEntity {
 
     private DbT5001NinteiShinseiJohoEntity ninteiShinseiJohoEntity;
-    private DbT5006NinteichosaIraiJohoEntity ninteichosaIraiJohoEntity;
-    private List<KaigoNinteichosainEntity> ninteichosainEntityList;
+    private DbT5005NinteiShinchokuJohoEntity ninteiShinchokuJohoEntity;
 
     /**
      * 認定申請情報エンティティを取得します。
@@ -29,7 +27,7 @@ public class NinteichosaKekkaTorikomiTaishoshaEntity {
     }
 
     /**
-     * 認定進捗情報エンティティを設定します。
+     * 認定申請情報エンティティを設定します。
      *
      * @param ninteiShinseiJohoEntity 認定申請情報エンティティ
      */
@@ -38,38 +36,20 @@ public class NinteichosaKekkaTorikomiTaishoshaEntity {
     }
 
     /**
-     * 認定調査依頼情報エンティティを取得します。
+     * 認定進捗情報エンティティを取得します。
      *
-     * @return ninteichosaIraiJohoEntity 認定調査依頼情報エンティティ
+     * @return ninteiShinchokuJohoEntity 認定進捗情報エンティティ
      */
-    public DbT5006NinteichosaIraiJohoEntity getNinteichosaIraiJohoEntity() {
-        return ninteichosaIraiJohoEntity;
+    public DbT5005NinteiShinchokuJohoEntity getNinteiShinchokuJohoEntity() {
+        return ninteiShinchokuJohoEntity;
     }
 
     /**
-     * 認定調査依頼情報エンティティを設定します。
+     * 認定進捗情報エンティティを設定します。
      *
-     * @param ninteichosaIraiJohoEntity 認定調査依頼情報エンティティ
+     * @param ninteiShinchokuJohoEntity 認定進捗情報エンティティ
      */
-    public void setNinteichosaIraiJohoEntity(DbT5006NinteichosaIraiJohoEntity ninteichosaIraiJohoEntity) {
-        this.ninteichosaIraiJohoEntity = ninteichosaIraiJohoEntity;
-    }
-
-    /**
-     * 認定調査員エンティティのリストを取得します。
-     *
-     * @return ninteichosainEntityList 認定調査員エンティティのリスト
-     */
-    public List<KaigoNinteichosainEntity> getNinteichosainEntityList() {
-        return ninteichosainEntityList;
-    }
-
-    /**
-     * 認定調査員エンティティのリストを設定します。
-     *
-     * @param ninteichosainEntityList 認定調査員エンティティのリスト
-     */
-    public void setNinteichosainEntityList(List<KaigoNinteichosainEntity> ninteichosainEntityList) {
-        this.ninteichosainEntityList = ninteichosainEntityList;
+    public void setNinteiShinchokuJohoEntity(DbT5005NinteiShinchokuJohoEntity ninteiShinchokuJohoEntity) {
+        this.ninteiShinchokuJohoEntity = ninteiShinchokuJohoEntity;
     }
 }

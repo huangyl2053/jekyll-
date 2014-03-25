@@ -30,20 +30,7 @@ public class NinteiShinchokuJohoDac implements INinteiShinchokuJohoDac {
         List<DbT5005NinteiShinchokuJohoEntity> list = accessor
                 .select()
                 .table(DbT5005NinteiShinchokuJoho.class)
-                .where(eq(DbT5005NinteiShinchokuJoho.ninteichosaIraiKanryoYMD, YokaigoninteiDateConstants.認定調査未完了年月日))
-                .toList(DbT5005NinteiShinchokuJohoEntity.class);
-
-        return (!list.isEmpty()) ? list : Collections.EMPTY_LIST;
-    }
-
-    @Override
-    public List<DbT5005NinteiShinchokuJohoEntity> select依頼済認定調査未完了() {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        List<DbT5005NinteiShinchokuJohoEntity> list = accessor
-                .select()
-                .table(DbT5005NinteiShinchokuJoho.class)
-                .where(and(lt(YokaigoninteiDateConstants.認定調査依頼未完了年月日, DbT5005NinteiShinchokuJoho.ninteichosaIraiKanryoYMD),
-                eq(YokaigoninteiDateConstants.認定調査未完了年月日, DbT5005NinteiShinchokuJoho.ninteichosaKanryoYMD)))
+                .where(eq(DbT5005NinteiShinchokuJoho.ninteichosaKanryoYMD, YokaigoninteiDateConstants.認定調査未完了年月日))
                 .toList(DbT5005NinteiShinchokuJohoEntity.class);
 
         return (!list.isEmpty()) ? list : Collections.EMPTY_LIST;

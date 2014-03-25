@@ -15,9 +15,10 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaKekkaTorikomiTaishoshaMapper;
+import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaTorikomiTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiChosaIraiJohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinchokuJohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
+import jp.co.ndensan.reams.db.dbe.persistence.relate.INinteichosaKekkaTorikomiTaishoshaDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -30,60 +31,89 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class NinteichosaKekkaTorikomiTaishoshaFinder {
 
-    private final INinteiShinchokuJohoDac shinchokuJohoDac;
-    private final INinteiShinseiJohoDac shinseiJohoDac;
     private final INinteiChosaIraiJohoDac chosaIraiJohoDac;
+    private final INinteichosaKekkaTorikomiTaishoshaDac torikomiTaishoshaDac;
 
     /**
-     * デフォルトコンストラクタです。
+     * コンストラクタです。
      */
     public NinteichosaKekkaTorikomiTaishoshaFinder() {
-        shinchokuJohoDac = InstanceProvider.create(INinteiShinchokuJohoDac.class);
-        shinseiJohoDac = InstanceProvider.create(INinteiShinseiJohoDac.class);
         chosaIraiJohoDac = InstanceProvider.create(INinteiChosaIraiJohoDac.class);
+        torikomiTaishoshaDac = InstanceProvider.create(INinteichosaKekkaTorikomiTaishoshaDac.class);
     }
 
     /**
      * テスト用プライベートコンストラクタです。
      *
-     * @param shinchokuJohoDac shinchokuJohoDac
-     * @param shinseiJohoDac shinseiJohoDac
      * @param chosaIraiJohoDac chosaIraiJohoDac
+     * @param torikomiTaishoshaDac torikomiTaishoshaDac
      */
     NinteichosaKekkaTorikomiTaishoshaFinder(
-            INinteiShinchokuJohoDac shinchokuJohoDac,
-            INinteiShinseiJohoDac shinseiJohoDac,
-            INinteiChosaIraiJohoDac chosaIraiJohoDac) {
-        this.shinchokuJohoDac = shinchokuJohoDac;
-        this.shinseiJohoDac = shinseiJohoDac;
+            INinteiChosaIraiJohoDac chosaIraiJohoDac,
+            INinteichosaKekkaTorikomiTaishoshaDac torikomiTaishoshaDac) {
         this.chosaIraiJohoDac = chosaIraiJohoDac;
+        this.torikomiTaishoshaDac = torikomiTaishoshaDac;
     }
 
     /**
      * 認定調査結果取込対象者を全件取得します。
      *
+     * @return 認定調査結果取込対象者全件
+     */
+    public List<NinteichosaKekkaTorikomiTaishosha> get認定調査結果取込対象者全件() {
+
+        List<NinteichosaKekkaTorikomiTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.selectAll();
+        return create認定調査結果取込対象者List(torikomiTaishoshaEntityList);
+    }
+
+    /**
+     * 認定調査結果取込対象者を市町村コードを指定して全件取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @return 認定調査結果取込対象者全件
+     */
+    public List<NinteichosaKekkaTorikomiTaishosha> get認定調査結果取込対象者全件(ShichosonCode 市町村コード) {
+        List<NinteichosaKekkaTorikomiTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select市町村コード(市町村コード);
+        return create認定調査結果取込対象者List(torikomiTaishoshaEntityList);
+    }
+
+    /**
+     * 認定調査結果取込対象者を支所コードを指定して全件取得します。
+     *
      * @param 支所コード 支所コード
      * @return 認定調査結果取込対象者全件
      */
     public List<NinteichosaKekkaTorikomiTaishosha> get認定調査結果取込対象者全件(RString 支所コード) {
+        List<NinteichosaKekkaTorikomiTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select支所コード(支所コード);
+        return create認定調査結果取込対象者List(torikomiTaishoshaEntityList);
+    }
 
-        List<DbT5005NinteiShinchokuJohoEntity> shinchokuJohoEntityList = shinchokuJohoDac.select依頼済認定調査未完了();
-
-        return create認定調査結果取込対象者List(shinchokuJohoEntityList, 支所コード);
+    /**
+     * 認定調査結果取込対象者を、市町村コードと支所コードを指定して全件取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 支所コード 支所コード
+     * @return 認定調査結果取込対象者全件
+     */
+    public List<NinteichosaKekkaTorikomiTaishosha> get認定調査結果取込対象者全件(ShichosonCode 市町村コード, RString 支所コード) {
+        List<NinteichosaKekkaTorikomiTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select市町村コード及び支所コード(市町村コード, 支所コード);
+        return create認定調査結果取込対象者List(torikomiTaishoshaEntityList);
     }
 
     private List<NinteichosaKekkaTorikomiTaishosha> create認定調査結果取込対象者List(
-            List<DbT5005NinteiShinchokuJohoEntity> entityList, RString 支所コード) {
+            List<NinteichosaKekkaTorikomiTaishoshaEntity> entityList) {
         List<NinteichosaKekkaTorikomiTaishosha> list = new ArrayList<>();
 
-        for (DbT5005NinteiShinchokuJohoEntity shinchokuJohoEntity : entityList) {
-            DbT5001NinteiShinseiJohoEntity shinseiJohoEntity = shinseiJohoDac.select(shinchokuJohoEntity.getShinseishoKanriNo());
-            if (!shinseiJohoEntity.getShishoCode().equals(支所コード)) {
-                continue;
-            }
-            DbT5006NinteichosaIraiJohoEntity iraiJohoEntity = get認定調査依頼情報Entity(shinchokuJohoEntity, shinseiJohoEntity);
-            KaigoNinteichosain kaigoNinteichosain = get介護認定調査員(shinseiJohoEntity, iraiJohoEntity);
-            IKojin kojin = KojinService.createKojinFinder().get個人(shinseiJohoEntity.getShikibetsuCode());
+        for (NinteichosaKekkaTorikomiTaishoshaEntity entity : entityList) {
+            DbT5001NinteiShinseiJohoEntity shinseiJohoEntity = entity.getNinteiShinseiJohoEntity();
+            DbT5006NinteichosaIraiJohoEntity iraiJohoEntity = get認定調査依頼情報Entity(
+                    entity.getNinteiShinchokuJohoEntity(),
+                    shinseiJohoEntity);
+            KaigoNinteichosain kaigoNinteichosain = get介護認定調査員(
+                    shinseiJohoEntity,
+                    iraiJohoEntity);
+            IKojin kojin = KojinService.createKojinFinder().get個人(
+                    shinseiJohoEntity.getShikibetsuCode());
 
             list.add(NinteichosaKekkaTorikomiTaishoshaMapper.toNinteichosaKekkaTorikomiTaishosha(
                     shinseiJohoEntity,

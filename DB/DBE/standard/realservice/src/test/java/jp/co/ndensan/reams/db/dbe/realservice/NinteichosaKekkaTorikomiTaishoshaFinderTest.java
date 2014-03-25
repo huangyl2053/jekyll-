@@ -4,27 +4,20 @@
  */
 package jp.co.ndensan.reams.db.dbe.realservice;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaKekkaTorikomiTaishosha;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiChosaIraiJohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinchokuJohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
-import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
-import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinseiJohoMock;
+import jp.co.ndensan.reams.db.dbe.persistence.relate.INinteichosaKekkaTorikomiTaishoshaDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.assertThat;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import static org.mockito.Mockito.*;
 
 /**
@@ -36,65 +29,60 @@ import static org.mockito.Mockito.*;
 public class NinteichosaKekkaTorikomiTaishoshaFinderTest extends DbeTestBase {
 
     private static NinteichosaKekkaTorikomiTaishoshaFinder sut;
-    private static INinteiShinchokuJohoDac shinchokuJohoDac;
-    private static INinteiShinseiJohoDac shinseiJohoDac;
     private static INinteiChosaIraiJohoDac chosaIraiJohoDac;
+    private static INinteichosaKekkaTorikomiTaishoshaDac torikomiTaishoshaDac;
+    private static ShichosonCode 市町村コード = new ShichosonCode(new RString("123456"));
     private static RString 支所コード = new RString("0001");
-    private static RString 初期支所コード = new RString("0");
     private static List<NinteichosaKekkaTorikomiTaishosha> resultList;
+
+    @BeforeClass
+    public static void setUpClass() {
+        chosaIraiJohoDac = mock(INinteiChosaIraiJohoDac.class);
+        torikomiTaishoshaDac = mock(INinteichosaKekkaTorikomiTaishoshaDac.class);
+
+    }
 
     public static class get認定調査結果取込対象者全件 extends DbeTestBase {
 
-        @Before
-        public void setUp() {
-            shinchokuJohoDac = mock(INinteiShinchokuJohoDac.class);
-            shinseiJohoDac = mock(INinteiShinseiJohoDac.class);
-            chosaIraiJohoDac = mock(INinteiChosaIraiJohoDac.class);
+        @Test
+        public void 認定調査結果取込対象者の取得条件に一致するデータが登録されていないとき_COLLECTIONS_EMPTYを返す() {
+            when(torikomiTaishoshaDac.selectAll()).thenReturn(Collections.EMPTY_LIST);
+            sut = new NinteichosaKekkaTorikomiTaishoshaFinder(chosaIraiJohoDac, torikomiTaishoshaDac);
+            resultList = sut.get認定調査結果取込対象者全件();
+            assertThat(resultList, is(Collections.EMPTY_LIST));
         }
+    }
+
+    public static class get認定調査結果取込対象者全件_市町村コード extends DbeTestBase {
 
         @Test
         public void 認定調査結果取込対象者の取得条件に一致するデータが登録されていないとき_COLLECTIONS_EMPTYを返す() {
-            when(shinchokuJohoDac.select依頼済認定調査未完了()).thenReturn(create認定進捗情報EntityList(0));
-            sut = new NinteichosaKekkaTorikomiTaishoshaFinder(shinchokuJohoDac, shinseiJohoDac, chosaIraiJohoDac);
-            resultList = sut.get認定調査結果取込対象者全件(支所コード);
+            when(torikomiTaishoshaDac.select市町村コード(市町村コード)).thenReturn(Collections.EMPTY_LIST);
+            sut = new NinteichosaKekkaTorikomiTaishoshaFinder(chosaIraiJohoDac, torikomiTaishoshaDac);
+            resultList = sut.get認定調査結果取込対象者全件(市町村コード);
             assertThat(resultList, is(Collections.EMPTY_LIST));
         }
+    }
+
+    public static class get認定調査結果取込対象者全件_支所コード extends DbeTestBase {
 
         @Test
-        public void 認定調査結果取込対象者の取得条件に一致するデータが登録されているが_支所コードが一致しないとき_COLLECTIONS_EMPTYを返す() {
-            when(shinchokuJohoDac.select依頼済認定調査未完了()).thenReturn(create認定進捗情報EntityList(1));
-            when(shinseiJohoDac.select(new ShinseishoKanriNo(new RString("1")))).thenReturn(create認定申請情報(1, 初期支所コード));
-            sut = new NinteichosaKekkaTorikomiTaishoshaFinder(shinchokuJohoDac, shinseiJohoDac, chosaIraiJohoDac);
+        public void 認定調査結果取込対象者の取得条件に一致するデータが登録されていないとき_COLLECTIONS_EMPTYを返す() {
+            when(torikomiTaishoshaDac.select支所コード(支所コード)).thenReturn(Collections.EMPTY_LIST);
+            sut = new NinteichosaKekkaTorikomiTaishoshaFinder(chosaIraiJohoDac, torikomiTaishoshaDac);
             resultList = sut.get認定調査結果取込対象者全件(支所コード);
             assertThat(resultList, is(Collections.EMPTY_LIST));
         }
     }
 
-    private static List<DbT5005NinteiShinchokuJohoEntity> create認定進捗情報EntityList(int flg) {
-        List<DbT5005NinteiShinchokuJohoEntity> list = new ArrayList<>();
-        if (flg == 0) {
-            list = Collections.EMPTY_LIST;
-        } else {
-            for (int i = 0; i < flg; i++) {
-                list.add(create認定進捗情報(flg));
-            }
+    public static class get認定調査結果取込対象者全件_市町村コード_支所コード extends DbeTestBase {
+
+        @Test
+        public void 認定調査結果取込対象者の取得条件に一致するデータが登録されていないとき_COLLECTIONS_EMPTYを返す() {
+            when(torikomiTaishoshaDac.select市町村コード及び支所コード(市町村コード, 支所コード)).thenReturn(Collections.EMPTY_LIST);
+            sut = new NinteichosaKekkaTorikomiTaishoshaFinder(chosaIraiJohoDac, torikomiTaishoshaDac);
+            resultList = sut.get認定調査結果取込対象者全件(市町村コード, 支所コード);
+            assertThat(resultList, is(Collections.EMPTY_LIST));
         }
-        return list;
-    }
-
-    private static DbT5005NinteiShinchokuJohoEntity create認定進捗情報(int flg) {
-        DbT5005NinteiShinchokuJohoEntity entity = NinteiShinchokuJohoMock.create認定進捗情報Entity();
-        ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(new RString(Integer.toString(flg)));
-        entity.setShinseishoKanriNo(申請書管理番号);
-        return entity;
-    }
-
-    private static DbT5001NinteiShinseiJohoEntity create認定申請情報(int flg, RString 支所コード) {
-        DbT5001NinteiShinseiJohoEntity entity = NinteiShinseiJohoMock.create認定申請情報Entity();
-        ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(new RString(Integer.toString(flg)));
-        entity.setShinseishoKanriNo(申請書管理番号);
-        entity.setShishoCode(支所コード);
-        entity.setShikibetsuCode(new ShikibetsuCode(new RString("0002")));
-        return entity;
     }
 }
