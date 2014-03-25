@@ -6,9 +6,9 @@ package jp.co.ndensan.reams.db.dbe.definition;
 
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemSubGroup;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemSubGroup;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemSubGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.Choices;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShujiiIkenshoItemNo;
@@ -74,7 +74,7 @@ public class ShujiiIkenshoItemTest {
 
         @Test
         public void 意見書項目グループの設定がある時_get意見書項目グループは_設置値を返す() {
-            assertThat(createShujiiIkenshoItem().get意見書項目グループ(), is((IShujiiIkenshoItemGroup) ShujiiIkenshoItemGroup.Of2009.心身状態));
+            assertThat(createShujiiIkenshoItem().get意見書項目グループ(), is((IShujiiIkenshoItemGroup) ShujiiIkenshoItemGroupOf2009.心身状態));
         }
     }
 
@@ -82,7 +82,7 @@ public class ShujiiIkenshoItemTest {
 
         @Test
         public void 意見書項目サブグループの設定がある時_get意見書項目サブグループは_設置値を返す() {
-            assertThat(createShujiiIkenshoItem().get意見書項目サブグループ(), is((IShujiiIkenshoItemSubGroup) ShujiiIkenshoItemSubGroup.Of2009.中核症状));
+            assertThat(createShujiiIkenshoItem().get意見書項目サブグループ(), is((IShujiiIkenshoItemSubGroup) ShujiiIkenshoItemSubGroupOf2009.中核症状));
         }
     }
 
@@ -158,8 +158,8 @@ public class ShujiiIkenshoItemTest {
 
     private static ShujiiIkenshoItem createShujiiIkenshoItem(int flg) {
         return new ShujiiIkenshoItem(
-                flg == AS_意見書項目グループがNULL ? null : ShujiiIkenshoItemGroup.Of2009.心身状態,
-                flg == AS_意見書項目サブグループがNULL ? null : ShujiiIkenshoItemSubGroup.Of2009.中核症状, 1, 1,
+                flg == AS_意見書項目グループがNULL ? null : ShujiiIkenshoItemGroupOf2009.心身状態,
+                flg == AS_意見書項目サブグループがNULL ? null : ShujiiIkenshoItemSubGroupOf2009.中核症状, 1, 1,
                 flg == AS_意見書項目番号がNULL ? null : new ShujiiIkenshoItemNo(new RString("3-2")),
                 flg == AS_意見書項目区分がNULL ? null : ShujiiIkenshoItemKubun.短期記憶,
                 flg == AS_表示名称がNULL ? null : new RString("短期記憶"),

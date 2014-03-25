@@ -9,13 +9,14 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemSubGroup;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubunOfKihon;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemSubGroup;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemSubGroupOf2009;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -39,12 +40,12 @@ public class NinteichosahyoRegulationBuilderTest {
 
         @Test
         public void 調査項目グループの指定がある時_set調査項目グループは_指定した調査項目グループを設定する() {
-            assertThat(create調査票定義().get(NinteichosaItemKubunOfKihon.麻痺等の有無_右上肢).get調査項目グループ(), is((INinteichosaItemGroup) NinteichosaItemGroup.Of2009.第１群));
+            assertThat(create調査票定義().get(NinteichosaItemKubunOfKihon.麻痺等の有無_右上肢).get調査項目グループ(), is((INinteichosaItemGroup) NinteichosaItemGroupOf2009.第１群));
         }
 
         @Test
         public void 調査項目サブグループの指定がある時_set調査項目グループは_指定した調査項目サブグループを設定する() {
-            assertThat(create調査票定義().get(NinteichosaItemKubunOfKihon.麻痺等の有無_右上肢).get調査項目サブグループ(), is((INinteichosaItemSubGroup) NinteichosaItemSubGroup.Of2009.麻痺等の有無));
+            assertThat(create調査票定義().get(NinteichosaItemKubunOfKihon.麻痺等の有無_右上肢).get調査項目サブグループ(), is((INinteichosaItemSubGroup) NinteichosaItemSubGroupOf2009.麻痺等の有無));
         }
 
         @Test
@@ -119,17 +120,17 @@ public class NinteichosahyoRegulationBuilderTest {
     private static Map<NinteichosaItemKubunOfKihon, INinteichosaItem> create調査票定義() {
         Map<NinteichosaItemKubunOfKihon, INinteichosaItem> 調査票定義 = new EnumMap<>(NinteichosaItemKubunOfKihon.class);
         NinteichosahyoRegulationBuilder builder = new NinteichosahyoRegulationBuilder(調査票定義);
-        builder.set調査項目グループ(NinteichosaItemGroup.Of2009.第１群, NinteichosaItemSubGroup.Of2009.麻痺等の有無);
+        builder.set調査項目グループ(NinteichosaItemGroupOf2009.第１群, NinteichosaItemSubGroupOf2009.麻痺等の有無);
         builder.set調査項目("1-1", NinteichosaItemKubunOfKihon.麻痺等の有無_左上肢, "左上肢", Choice.Checked.values());
-        builder.set調査項目グループ(NinteichosaItemGroup.Of2009.第１群, NinteichosaItemSubGroup.Of2009.麻痺等の有無);
+        builder.set調査項目グループ(NinteichosaItemGroupOf2009.第１群, NinteichosaItemSubGroupOf2009.麻痺等の有無);
         builder.set調査項目("1-1", NinteichosaItemKubunOfKihon.麻痺等の有無_右上肢, "右上肢", Choice.Checked.values());
-        builder.set調査項目グループ(NinteichosaItemGroup.Of2009.第１群, NinteichosaItemSubGroup.Of2009.拘縮の有無);
+        builder.set調査項目グループ(NinteichosaItemGroupOf2009.第１群, NinteichosaItemSubGroupOf2009.拘縮の有無);
         builder.set調査項目("1-2", NinteichosaItemKubunOfKihon.関節の動く範囲の制限_肩関節, "肩", Choice.Checked.values());
-        builder.set調査項目グループ(NinteichosaItemGroup.Of2009.第２群, NinteichosaItemSubGroup.OfCommon.なし);
+        builder.set調査項目グループ(NinteichosaItemGroupOf2009.第２群, NinteichosaItemSubGroup.なし);
         builder.set調査項目("2-1", NinteichosaItemKubunOfKihon.移乗, "移乗", Choice.Kaijo3.values());
-        builder.set調査項目グループ(NinteichosaItemGroup.Of2009.第２群, NinteichosaItemSubGroup.OfCommon.なし);
+        builder.set調査項目グループ(NinteichosaItemGroupOf2009.第２群, NinteichosaItemSubGroup.なし);
         builder.set調査項目("2-1", NinteichosaItemKubunOfKihon.移動, "移動", Choice.Kaijo3.values());
-        builder.set調査項目グループ(NinteichosaItemGroup.Of2009.第３群, NinteichosaItemSubGroup.OfCommon.なし);
+        builder.set調査項目グループ(NinteichosaItemGroupOf2009.第３群, NinteichosaItemSubGroup.なし);
         builder.set調査項目("3-1", NinteichosaItemKubunOfKihon.意思の伝達, "意思の伝達", Choice.DekiruDekinai2.values());
         return 調査票定義;
     }

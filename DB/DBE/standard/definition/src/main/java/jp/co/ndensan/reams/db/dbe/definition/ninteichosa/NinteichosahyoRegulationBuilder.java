@@ -25,8 +25,8 @@ import static java.util.Objects.requireNonNull;
 class NinteichosahyoRegulationBuilder<E extends INinteichosaItemKubun> {
 
     private Map<E, INinteichosaItem> 調査票定義;
-    private INinteichosaItemGroup 調査項目グループ = NinteichosaItemGroup.OfCommon.なし;
-    private INinteichosaItemSubGroup 調査項目サブグループ = NinteichosaItemSubGroup.OfCommon.なし;
+    private INinteichosaItemGroup 調査項目グループ = NinteichosaItemGroup.なし;
+    private INinteichosaItemSubGroup 調査項目サブグループ = NinteichosaItemSubGroup.なし;
     private int 調査項目グループ内番号 = 1;
     private int 調査項目サブグループ内番号 = 1;
 
@@ -67,8 +67,8 @@ class NinteichosahyoRegulationBuilder<E extends INinteichosaItemKubun> {
     void set調査項目(String 調査項目番号, E 調査項目区分, String 表示名称, IAnsweringItem[] 選択肢) {
         調査票定義.put(調査項目区分,
                 new NinteichosaItem(調査項目グループ, 調査項目サブグループ,
-                this.調査項目サブグループ == NinteichosaItemSubGroup.OfCommon.なし ? 調査項目グループ内番号++ : 調査項目グループ内番号,
-                this.調査項目サブグループ != NinteichosaItemSubGroup.OfCommon.なし ? 調査項目サブグループ内番号++ : 調査項目サブグループ内番号,
+                this.調査項目サブグループ == NinteichosaItemSubGroup.なし ? 調査項目グループ内番号++ : 調査項目グループ内番号,
+                this.調査項目サブグループ != NinteichosaItemSubGroup.なし ? 調査項目サブグループ内番号++ : 調査項目サブグループ内番号,
                 new NinteichosaItemNo(new RString(調査項目番号)), 調査項目区分, new RString(表示名称), new Choices(選択肢)));
     }
 }

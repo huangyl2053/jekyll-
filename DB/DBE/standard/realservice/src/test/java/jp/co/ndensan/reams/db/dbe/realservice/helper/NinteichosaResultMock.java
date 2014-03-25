@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubun
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubunOfGaikyo;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubunOfKihon;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosaItem;
@@ -71,7 +71,7 @@ public class NinteichosaResultMock {
 
         Ninteichosahyo 調査票 = NinteichosahyoFactory.createサービス状況Instance(KoroshoIFKubun.V09A);
 
-        Ninteichosahyo result = new Ninteichosahyo(new EnumMap<>(NinteichosaItemKubunOfGaikyo.class), NinteichosaItemGroup.Of2009.values());
+        Ninteichosahyo result = new Ninteichosahyo(new EnumMap<>(NinteichosaItemKubunOfGaikyo.class), NinteichosaItemGroupOf2009.values());
         result.set調査項目(create調査結果(調査票, サービス区分コード, ServiceKubun.介護.getCode()));
         result.set調査項目(create調査結果(調査票, 訪問介護, new RString("0")));
         result.set調査項目(create調査結果(調査票, 訪問入浴介護, new RString("1")));
@@ -137,7 +137,7 @@ public class NinteichosaResultMock {
 
         Ninteichosahyo 調査票 = NinteichosahyoFactory.create基本情報Instance(KoroshoIFKubun.V09A);
 
-        Ninteichosahyo result = new Ninteichosahyo(new EnumMap<>(NinteichosaItemKubunOfKihon.class), NinteichosaItemGroup.Of2009.values());
+        Ninteichosahyo result = new Ninteichosahyo(new EnumMap<>(NinteichosaItemKubunOfKihon.class), NinteichosaItemGroupOf2009.values());
         result.set調査項目(create調査結果(調査票, 麻痺等の有無_左上肢, NaiAru.ない.getCode()));
         result.set調査項目(create調査結果(調査票, 麻痺等の有無_右上肢, NaiAru.ある.getCode()));
         result.set調査項目(create調査結果(調査票, 麻痺等の有無_左下肢, NaiAru.ない.getCode()));

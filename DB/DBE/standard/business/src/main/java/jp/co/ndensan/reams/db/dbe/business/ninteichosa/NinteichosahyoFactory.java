@@ -4,10 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroupOf2006;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosahyoRegulationOf2006;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosahyoRegulationOf2009;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroup;
 
 /**
  * 要介護認定調査の調査票を扱うクラスのファクトリークラスです。
@@ -31,9 +32,9 @@ public final class NinteichosahyoFactory {
     public static Ninteichosahyo createサービス状況Instance(KoroshoIFKubun 厚労省IF識別区分) {
         switch (厚労省IF識別区分) {
             case V06A:
-                return new Ninteichosahyo(new NinteichosahyoRegulationOf2006().getサービス状況調査定義(), NinteichosaItemGroup.Of2006.values());
+                return new Ninteichosahyo(new NinteichosahyoRegulationOf2006().getサービス状況調査定義(), NinteichosaItemGroupOf2006.values());
             case V09A:
-                return new Ninteichosahyo(new NinteichosahyoRegulationOf2009().getサービス状況調査定義(), NinteichosaItemGroup.Of2009.values());
+                return new Ninteichosahyo(new NinteichosahyoRegulationOf2009().getサービス状況調査定義(), NinteichosaItemGroupOf2009.values());
             default:
                 return null;
         }
@@ -48,9 +49,9 @@ public final class NinteichosahyoFactory {
     public static Ninteichosahyo create基本情報Instance(KoroshoIFKubun 厚労省IF識別区分) {
         switch (厚労省IF識別区分) {
             case V06A:
-                return new Ninteichosahyo(new NinteichosahyoRegulationOf2006().get基本調査定義(), NinteichosaItemGroup.Of2006.values());
+                return new Ninteichosahyo(new NinteichosahyoRegulationOf2006().get基本調査定義(), NinteichosaItemGroupOf2006.values());
             case V09A:
-                return new Ninteichosahyo(new NinteichosahyoRegulationOf2009().get基本調査定義(), NinteichosaItemGroup.Of2009.values());
+                return new Ninteichosahyo(new NinteichosahyoRegulationOf2009().get基本調査定義(), NinteichosaItemGroupOf2009.values());
             default:
                 return null;
         }

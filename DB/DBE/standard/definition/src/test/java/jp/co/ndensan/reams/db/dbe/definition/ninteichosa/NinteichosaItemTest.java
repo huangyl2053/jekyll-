@@ -5,11 +5,11 @@
 package jp.co.ndensan.reams.db.dbe.definition.ninteichosa;
 
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroup;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubunOfKihon;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemSubGroup;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroupOf2009;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubunOfKihon;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemSubGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItemNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
@@ -71,7 +71,7 @@ public class NinteichosaItemTest {
 
         @Test
         public void 調査項目グループの設定がある時_get調査項目グループは_設置値を返す() {
-            assertThat(createNinteichosaItem().get調査項目グループ(), is((INinteichosaItemGroup) NinteichosaItemGroup.Of2009.第１群));
+            assertThat(createNinteichosaItem().get調査項目グループ(), is((INinteichosaItemGroup) NinteichosaItemGroupOf2009.第１群));
         }
     }
 
@@ -79,7 +79,7 @@ public class NinteichosaItemTest {
 
         @Test
         public void 調査項目サブグループの設定がある時_get調査項目サブグループは_設置値を返す() {
-            assertThat(createNinteichosaItem().get調査項目サブグループ(), is((INinteichosaItemSubGroup) NinteichosaItemSubGroup.Of2009.麻痺等の有無));
+            assertThat(createNinteichosaItem().get調査項目サブグループ(), is((INinteichosaItemSubGroup) NinteichosaItemSubGroupOf2009.麻痺等の有無));
         }
     }
 
@@ -142,8 +142,8 @@ public class NinteichosaItemTest {
 
     private static NinteichosaItem createNinteichosaItem(int flg) {
         return new NinteichosaItem(
-                flg == AS_調査項目グループがNULL ? null : NinteichosaItemGroup.Of2009.第１群,
-                flg == AS_調査項目サブグループがNULL ? null : NinteichosaItemSubGroup.Of2009.麻痺等の有無, 1, 1,
+                flg == AS_調査項目グループがNULL ? null : NinteichosaItemGroupOf2009.第１群,
+                flg == AS_調査項目サブグループがNULL ? null : NinteichosaItemSubGroupOf2009.麻痺等の有無, 1, 1,
                 flg == AS_調査項目番号がNULL ? null : new NinteichosaItemNo(new RString("1-1")),
                 flg == AS_調査項目区分がNULL ? null : NinteichosaItemKubunOfKihon.麻痺等の有無_右上肢,
                 flg == AS_表示名称がNULL ? null : new RString("右上肢"),

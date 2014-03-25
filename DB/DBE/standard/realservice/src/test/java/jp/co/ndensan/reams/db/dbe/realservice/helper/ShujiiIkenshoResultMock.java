@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoIraiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiKaisu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiryoShubetsu;
@@ -148,7 +148,7 @@ public class ShujiiIkenshoResultMock {
 
         ShujiiIkensho 意見書 = ShujiiIkenshoFactory.create主治医意見書Instance(KoroshoIFKubun.V09A);
 
-        ShujiiIkensho result = new ShujiiIkensho(new EnumMap<>(ShujiiIkenshoItemKubun.class), ShujiiIkenshoItemGroup.Of2009.values());
+        ShujiiIkensho result = new ShujiiIkensho(new EnumMap<>(ShujiiIkenshoItemKubun.class), ShujiiIkenshoItemGroupOf2009.values());
         result.set意見書項目(create意見書結果(意見書, 診断名1, new RString("診断名1")));
         result.set意見書項目(create意見書結果(意見書, 発症年月日1, new RString("20140101")));
         result.set意見書項目(create意見書結果(意見書, 診断名2, new RString("診断名2")));

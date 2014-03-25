@@ -4,14 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosahyoRegulationOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubunOfKihon;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosahyoRegulationOf2009;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -28,7 +28,7 @@ public class NinteichosahyoTest {
 
         @Test(expected = NullPointerException.class)
         public void 調査票定義がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            new Ninteichosahyo(null, NinteichosaItemGroup.Of2009.values());
+            new Ninteichosahyo(null, NinteichosaItemGroupOf2009.values());
         }
 
         @Test(expected = NullPointerException.class)
@@ -54,7 +54,7 @@ public class NinteichosahyoTest {
 
         @Test
         public void 調査項目グループの指定がある時_get調査項目Listは_該当の調査項目を返す() {
-            assertThat(NinteichosahyoFactory.create基本情報Instance(KoroshoIFKubun.V09A).get調査項目List(NinteichosaItemGroup.Of2009.第１群).size(), is(22));
+            assertThat(NinteichosahyoFactory.create基本情報Instance(KoroshoIFKubun.V09A).get調査項目List(NinteichosaItemGroupOf2009.第１群).size(), is(22));
         }
 
         @Test

@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoFactory;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoResult;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoIraiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiKaisu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiryoShubetsu;
@@ -395,7 +395,7 @@ public final class ShujiiIkenshoMapper {
     private static IShujiiIkenshoItemGroup[] getShujiiIkenshoItemGroup(KoroshoIFKubun koroshoIFKubun) {
         switch (koroshoIFKubun) {
             case V09A:
-                return ShujiiIkenshoItemGroup.Of2009.values();
+                return ShujiiIkenshoItemGroupOf2009.values();
             default:
                 return null;
         }

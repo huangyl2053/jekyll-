@@ -9,9 +9,7 @@ import jp.co.ndensan.reams.db.dbe.business.Shujii;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 
 /**
  * 主治医情報を変換するMapperクラスです。

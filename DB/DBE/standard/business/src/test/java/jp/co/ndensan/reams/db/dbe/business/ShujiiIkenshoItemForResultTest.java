@@ -6,9 +6,9 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemSubGroup;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemSubGroup;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemSubGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.IShujiiIkenshoItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.IAnsweringItem;
@@ -51,7 +51,7 @@ public class ShujiiIkenshoItemForResultTest {
 
         @Test
         public void 意見書項目グループの設定がある時_get意見書項目グループは_設定値を返す() {
-            assertThat(createShujiiIkenshoItemForResult().get意見書項目グループ(), is((IShujiiIkenshoItemGroup) ShujiiIkenshoItemGroup.Of2009.心身状態));
+            assertThat(createShujiiIkenshoItemForResult().get意見書項目グループ(), is((IShujiiIkenshoItemGroup) ShujiiIkenshoItemGroupOf2009.心身状態));
         }
     }
 
@@ -59,7 +59,7 @@ public class ShujiiIkenshoItemForResultTest {
 
         @Test
         public void 意見書項目サブグループの設定がある時_get意見書項目サブグループは_設定値を返す() {
-            assertThat(createShujiiIkenshoItemForResult().get意見書項目サブグループ(), is((IShujiiIkenshoItemSubGroup) ShujiiIkenshoItemSubGroup.Of2009.身体状態));
+            assertThat(createShujiiIkenshoItemForResult().get意見書項目サブグループ(), is((IShujiiIkenshoItemSubGroup) ShujiiIkenshoItemSubGroupOf2009.身体状態));
         }
     }
 

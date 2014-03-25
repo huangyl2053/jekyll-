@@ -14,18 +14,19 @@ import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyo
 import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfKihon;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroupOf2006;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubunOfGaikyo;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubunOfKihon;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosaJisshibashoKubunCode;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5008NinteichosaKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5009NinteichosahyoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -258,14 +259,14 @@ public final class NinteichosaKekkaMapper {
                 new NinteichosaIraiRirekiNo(entity.getNinteichosaRirekiNo()),
                 koroshoIFKubun,
                 new NinteichosaResultOfGaikyoKihon(
-                        NinteichosaIraiKubun.toValue(entity.getNinteichousaIraiKubunCode().value()),
-                        entity.getNinteichosaIraiKaisu(),
-                        entity.getNinteichosaJisshiYMD(),
-                        entity.getNinteichosaJuryoYMD(),
-                        NinteichosaKubun.toValue(entity.getNinteiChosaKubunCode().value()),
-                        chosain,
-                        new NinteichosaJisshibashoKubun(
-                                new NinteichosaJisshibashoKubunCode(entity.getChosaJisshiBashoCode()), entity.getChosaJisshiBashoMeisho(), RString.EMPTY)),
+                NinteichosaIraiKubun.toValue(entity.getNinteichousaIraiKubunCode().value()),
+                entity.getNinteichosaIraiKaisu(),
+                entity.getNinteichosaJisshiYMD(),
+                entity.getNinteichosaJuryoYMD(),
+                NinteichosaKubun.toValue(entity.getNinteiChosaKubunCode().value()),
+                chosain,
+                new NinteichosaJisshibashoKubun(
+                new NinteichosaJisshibashoKubunCode(entity.getChosaJisshiBashoCode()), entity.getChosaJisshiBashoMeisho(), RString.EMPTY)),
                 result);
     }
 
@@ -360,9 +361,9 @@ public final class NinteichosaKekkaMapper {
     private static INinteichosaItemGroup[] getNinteichosaItemGroup(KoroshoIFKubun koroshoIFKubun) {
         switch (koroshoIFKubun) {
             case V06A:
-                return NinteichosaItemGroup.Of2006.values();
+                return NinteichosaItemGroupOf2006.values();
             case V09A:
-                return NinteichosaItemGroup.Of2009.values();
+                return NinteichosaItemGroupOf2009.values();
             default:
                 return null;
         }

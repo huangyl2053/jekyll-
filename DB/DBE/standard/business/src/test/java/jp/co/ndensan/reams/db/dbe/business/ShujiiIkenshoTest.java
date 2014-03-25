@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ShujiiIkenshoRegulationOf2009;
@@ -28,7 +28,7 @@ public class ShujiiIkenshoTest {
 
         @Test(expected = NullPointerException.class)
         public void 意見書定義がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            new ShujiiIkensho(null, ShujiiIkenshoItemGroup.Of2009.values());
+            new ShujiiIkensho(null, ShujiiIkenshoItemGroupOf2009.values());
         }
 
         @Test(expected = NullPointerException.class)
@@ -54,7 +54,7 @@ public class ShujiiIkenshoTest {
 
         @Test
         public void 意見書項目グループの指定がある時_get意見書項目Listは_該当の意見書項目を返す() {
-            assertThat(ShujiiIkenshoFactory.create主治医意見書Instance(KoroshoIFKubun.V09A).get意見書項目List(ShujiiIkenshoItemGroup.Of2009.傷病).size(), is(9));
+            assertThat(ShujiiIkenshoFactory.create主治医意見書Instance(KoroshoIFKubun.V09A).get意見書項目List(ShujiiIkenshoItemGroupOf2009.傷病).size(), is(9));
         }
 
         @Test

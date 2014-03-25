@@ -4,19 +4,19 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.INinteichosaItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroup;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemSubGroup;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubunOfGaikyo;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.IAnsweringItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroupOf2009;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubunOfGaikyo;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemSubGroup;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.INinteichosaItem;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -51,7 +51,7 @@ public class NinteichosaItemForResultTest {
 
         @Test
         public void 調査項目グループの設定がある時_get調査項目グループは_設定値を返す() {
-            assertThat(createNinteichosaItemForResult().get調査項目グループ(), is((INinteichosaItemGroup) NinteichosaItemGroup.Of2009.サービス状況));
+            assertThat(createNinteichosaItemForResult().get調査項目グループ(), is((INinteichosaItemGroup) NinteichosaItemGroupOf2009.サービス状況));
         }
     }
 
@@ -59,7 +59,7 @@ public class NinteichosaItemForResultTest {
 
         @Test
         public void 調査項目サブグループの設定がある時_get調査項目サブグループは_設定値を返す() {
-            assertThat(createNinteichosaItemForResult().get調査項目サブグループ(), is((INinteichosaItemSubGroup) NinteichosaItemSubGroup.OfCommon.なし));
+            assertThat(createNinteichosaItemForResult().get調査項目サブグループ(), is((INinteichosaItemSubGroup) NinteichosaItemSubGroup.なし));
         }
     }
 
