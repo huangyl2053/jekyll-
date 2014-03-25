@@ -22,7 +22,7 @@
             <exclusions>
                 <exclusion>
                     <artifactId>DbcBusiness</artifactId>
-                    <groupId>jp.co.ndensan.reams.db.dba</groupId>
+                    <groupId>${project.groupId}</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -40,12 +40,6 @@
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
             <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.uz</groupId>
-            <artifactId>framework</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
