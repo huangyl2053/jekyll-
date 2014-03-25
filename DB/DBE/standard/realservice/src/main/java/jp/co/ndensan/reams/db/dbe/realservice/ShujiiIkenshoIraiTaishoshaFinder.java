@@ -10,6 +10,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoIraiTaishosha;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5011ShujiiIkenshoIraiJohoEntity;
@@ -20,6 +21,8 @@ import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IShujiiIkenshoIraiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IShujiiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.IShujiiIkenshoIraiTaishoshaDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.business.JushoEditor;
@@ -155,15 +158,15 @@ public class ShujiiIkenshoIraiTaishoshaFinder {
     private DbT5011ShujiiIkenshoIraiJohoEntity create主治医意見書作成依頼情報Entity(DbT5001NinteiShinseiJohoEntity 認定申請情報Entity) {
         return shujiiIkenshoIraiJohoDac.select(
                 認定申請情報Entity.getShinseishoKanriNo(),
-                認定申請情報Entity.getIkenshoIraiRirekiNo());
+                new IkenshosakuseiIraiRirekiNo(認定申請情報Entity.getIkenshoIraiRirekiNo()));
     }
 
     private DbT7012ShujiiJohoEntity create主治医情報Entity(DbT5001NinteiShinseiJohoEntity 認定申請情報Entity,
             DbT5011ShujiiIkenshoIraiJohoEntity 主治医意見書作成依頼情報Entity) {
         return shujiiJohoDac.select(
                 認定申請情報Entity.getShichosonCode(),
-                主治医意見書作成依頼情報Entity.getShujiiIryoKikanCode(),
-                new ShikibetsuCode(主治医意見書作成依頼情報Entity.getIshiShikibetsuNo()));
+                new KaigoIryoKikanCode(主治医意見書作成依頼情報Entity.getKaigoIryokikanCode()),
+                new KaigoDoctorCode(主治医意見書作成依頼情報Entity.getKaigoIshiCode()));
     }
 
     private IKojin create個人(DbT5001NinteiShinseiJohoEntity 認定申請情報Entity) {
@@ -177,7 +180,7 @@ public class ShujiiIkenshoIraiTaishoshaFinder {
     }
 
     private RString create氏名(IShikibetsuTaisho 識別対象) {
-        return 識別対象.get氏名().getName();
+        return 識別対象.get氏名().getName().value();
     }
 
     private RString create住所(IShikibetsuTaisho 識別対象) {
@@ -185,7 +188,7 @@ public class ShujiiIkenshoIraiTaishoshaFinder {
     }
 
     private IDoctor create主治医(DbT7012ShujiiJohoEntity 主治医情報Entity) {
-        return DoctorManagerFactory.createInstance().get医師(主治医情報Entity.getShujiiCode());
+        return DoctorManagerFactory.createInstance().get医師(主治医情報Entity.getIshiShikibetsuNo());
     }
 
     private KaigoIryoKikan create主治医医療機関情報(DbT5001NinteiShinseiJohoEntity 認定申請情報Entity, DbT7012ShujiiJohoEntity 主治医情報Entity) {

@@ -8,9 +8,9 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.persistence.IInsertable;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
-import jp.co.ndensan.reams.db.dbz.persistence.IUpdatable;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
 /**
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
  *
  * @author n8178 城間篤人
  */
-public interface INinteiShinseiJohoDac extends IUpdatable<DbT5001NinteiShinseiJohoEntity> {
+public interface INinteiShinseiJohoDac extends IInsertable<DbT5001NinteiShinseiJohoEntity> {
 
     /**
      * 申請書管理番号で指定された認定申請情報を取得します。

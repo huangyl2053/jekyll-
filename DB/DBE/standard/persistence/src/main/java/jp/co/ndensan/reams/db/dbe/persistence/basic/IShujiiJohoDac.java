@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
@@ -22,9 +22,9 @@ public interface IShujiiJohoDac {
      *
      * @param 市町村コード 市町村コード
      * @param 介護医療機関コード 介護医療機関コード
-     * @param 医師コード 医師コード
+     * @param 介護医師コード 介護医師コード
      * @return 主治医情報エンティティ
      */
     @Transaction
-    DbT7012ShujiiJohoEntity select(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, ShikibetsuCode 医師コード);
+    DbT7012ShujiiJohoEntity select(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード);
 }

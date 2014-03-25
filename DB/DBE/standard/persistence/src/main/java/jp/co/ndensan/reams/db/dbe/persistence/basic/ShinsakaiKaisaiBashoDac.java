@@ -9,22 +9,32 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBasho
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
+import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 審査会開催場所情報テーブルから情報を取得するクラスです。
  *
  * @author N1013 松本直樹
  */
-public class ShinsakaiKaisaiBashoDac implements IShinsakaiKaisaiBashoDac {
+public class ShinsakaiKaisaiBashoDac implements IReplaceable<DbT5104ShinsakaiKaisaiBashoJohoEntity>,
+        IDeletable<DbT5104ShinsakaiKaisaiBashoJohoEntity> {
 
     @InjectSession
     private SqlSession session;
 
-    @Override
+    /**
+     * 審査会開催場所コードを指定して、審査会開催場所情報を取得します。
+     *
+     * @param 審査会開催場所 審査会開催場所
+     * @return 審査会開催場所Entity
+     */
+    @Transaction
     public DbT5104ShinsakaiKaisaiBashoJohoEntity select(ShinsakaiKaisaiBashoCode 審査会開催場所) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
@@ -33,7 +43,14 @@ public class ShinsakaiKaisaiBashoDac implements IShinsakaiKaisaiBashoDac {
                 .toObject(DbT5104ShinsakaiKaisaiBashoJohoEntity.class);
     }
 
-    @Override
+    /**
+     * 審査会開催場所コード、開催場所状況を指定して、審査会開催場所情報を取得します。
+     *
+     * @param 審査会開催場所 審査会開催場所
+     * @param 開催場所状況 審査会開催場所状況
+     * @return 審査会開催場所Entity
+     */
+    @Transaction
     public DbT5104ShinsakaiKaisaiBashoJohoEntity select(ShinsakaiKaisaiBashoCode 審査会開催場所, ShinsakaiKaisaiBashoJokyo 開催場所状況) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
@@ -43,7 +60,12 @@ public class ShinsakaiKaisaiBashoDac implements IShinsakaiKaisaiBashoDac {
                 .toObject(DbT5104ShinsakaiKaisaiBashoJohoEntity.class);
     }
 
-    @Override
+    /**
+     * 審査会開催場所テーブルにある全件を取得します。
+     *
+     * @return 審査会開催場所Entityリスト
+     */
+    @Transaction
     public List<DbT5104ShinsakaiKaisaiBashoJohoEntity> selectAll() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
@@ -51,7 +73,13 @@ public class ShinsakaiKaisaiBashoDac implements IShinsakaiKaisaiBashoDac {
                 .toList(DbT5104ShinsakaiKaisaiBashoJohoEntity.class);
     }
 
-    @Override
+    /**
+     * 審査会開催場所テーブルにある有効な開催場所を全件取得します。
+     *
+     * @param 開催場所状況 開催場所状況
+     * @return 審査会開催場所Entityリスト
+     */
+    @Transaction
     public List<DbT5104ShinsakaiKaisaiBashoJohoEntity> selectAll(ShinsakaiKaisaiBashoJokyo 開催場所状況) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()

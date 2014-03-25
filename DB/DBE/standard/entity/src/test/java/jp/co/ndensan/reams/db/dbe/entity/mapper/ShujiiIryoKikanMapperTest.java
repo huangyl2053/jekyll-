@@ -42,7 +42,7 @@ public class ShujiiIryoKikanMapperTest extends TestBase {
 
         @Override
         public void setUp() {
-            setDummyControlData("DB");
+            setDummyControlData("DBE");
             result = ShujiiIryoKikanMapper.toShujiiIryoKikan(KaigoIryoKikanTestHelper.create主治医医療機関Entity());
         }
 

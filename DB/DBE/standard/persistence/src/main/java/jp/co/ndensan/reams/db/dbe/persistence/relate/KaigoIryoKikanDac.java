@@ -33,7 +33,7 @@ public class KaigoIryoKikanDac implements IKaigoIryoKikanDac {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT7011ShujiiIryoKikanJoho.class).
-                leftJoin(UrT0516Iryokikan.class, using(DbT7011ShujiiIryoKikanJoho.kaigoIryokikanCode)).
+                leftJoin(UrT0516Iryokikan.class, using(DbT7011ShujiiIryoKikanJoho.iryokikanCode)).
                 where(criteria).
                 toList(KaigoIryoKikanEntity.class);
     }
@@ -43,7 +43,7 @@ public class KaigoIryoKikanDac implements IKaigoIryoKikanDac {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT7011ShujiiIryoKikanJoho.class).
-                leftJoin(UrT0516Iryokikan.class, using(DbT7011ShujiiIryoKikanJoho.kaigoIryokikanCode)).
+                leftJoin(UrT0516Iryokikan.class, using(DbT7011ShujiiIryoKikanJoho.iryokikanCode)).
                 where(and(eq(shichosonCode, 市町村コード), eq(kaigoIryokikanCode, 介護医療機関コード))).
                 toObject(KaigoIryoKikanEntity.class);
     }
@@ -53,7 +53,7 @@ public class KaigoIryoKikanDac implements IKaigoIryoKikanDac {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT7011ShujiiIryoKikanJoho.class).
-                leftJoin(UrT0516Iryokikan.class, using(DbT7011ShujiiIryoKikanJoho.kaigoIryokikanCode)).
+                leftJoin(UrT0516Iryokikan.class, using(DbT7011ShujiiIryoKikanJoho.iryokikanCode)).
                 where(and(eq(shichosonCode, 市町村コード), eq(kaigoIryokikanCode, 介護医療機関コード),
                 eq(iryokikanJokyo, 医療機関状況.is有効()))).
                 toObject(KaigoIryoKikanEntity.class);
@@ -64,7 +64,7 @@ public class KaigoIryoKikanDac implements IKaigoIryoKikanDac {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT7011ShujiiIryoKikanJoho.class).
-                leftJoin(UrT0516Iryokikan.class, using(DbT7011ShujiiIryoKikanJoho.kaigoIryokikanCode)).
+                leftJoin(UrT0516Iryokikan.class, using(DbT7011ShujiiIryoKikanJoho.iryokikanCode)).
                 where(eq(shichosonCode, 市町村コード)).
                 toList(KaigoIryoKikanEntity.class);
     }
@@ -74,7 +74,7 @@ public class KaigoIryoKikanDac implements IKaigoIryoKikanDac {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT7011ShujiiIryoKikanJoho.class).
-                leftJoin(UrT0516Iryokikan.class, using(DbT7011ShujiiIryoKikanJoho.kaigoIryokikanCode)).
+                leftJoin(UrT0516Iryokikan.class, using(DbT7011ShujiiIryoKikanJoho.iryokikanCode)).
                 where(and(eq(shichosonCode, 市町村コード), eq(iryokikanJokyo, 医療機関状況.is有効()))).
                 toList(KaigoIryoKikanEntity.class);
     }

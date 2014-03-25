@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
-import jp.co.ndensan.reams.uz.uza.util.db.DbAccessor;
+import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorForAddType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
 
@@ -30,7 +30,7 @@ public class NinteiShinseiJohoDac implements INinteiShinseiJohoDac {
 
     @Override
     public DbT5001NinteiShinseiJohoEntity select(ShinseishoKanriNo 申請書管理番号) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorForAddType accessor = new DbAccessorForAddType(session);
         return accessor.select()
                 .table(DbT5001NinteiShinseiJoho.class)
                 .where(eq(shinseishoKanriNo, 申請書管理番号))
@@ -39,31 +39,36 @@ public class NinteiShinseiJohoDac implements INinteiShinseiJohoDac {
 
     @Override
     public List<DbT5001NinteiShinseiJohoEntity> selectAllBy認定申請年月日(ShichosonCode 市町村コード, Range<RDate> 認定申請年月日範囲) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorForAddType accessor = new DbAccessorForAddType(session);
         return accessor.select()
                 .table(DbT5001NinteiShinseiJoho.class)
                 .where(and(eq(shichosonCode, 市町村コード),
-                eq(torisageYMD, FlexibleDate.MIN),
-                leq(認定申請年月日範囲.getFrom().toDateString(), ninteiShinseiYMD),
-                leq(ninteiShinseiYMD, 認定申請年月日範囲.getTo().toDateString())))
+                                eq(torisageYMD, FlexibleDate.MIN),
+                                leq(認定申請年月日範囲.getFrom().toDateString(), ninteiShinseiYMD),
+                                leq(ninteiShinseiYMD, 認定申請年月日範囲.getTo().toDateString())))
                 .toList(DbT5001NinteiShinseiJohoEntity.class);
     }
 
     @Override
     public List<DbT5001NinteiShinseiJohoEntity> selectAllBy取下げ年月日(ShichosonCode 市町村コード, Range<RDate> 取下げ年月日範囲) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorForAddType accessor = new DbAccessorForAddType(session);
         return accessor.select()
                 .table(DbT5001NinteiShinseiJoho.class)
                 .where(and(eq(shichosonCode, 市町村コード),
-                not(eq(torisageYMD, FlexibleDate.MIN)),
-                leq(取下げ年月日範囲.getFrom().toDateString(), torisageYMD),
-                leq(torisageYMD, 取下げ年月日範囲.getTo().toDateString())))
+                                not(eq(torisageYMD, FlexibleDate.MIN)),
+                                leq(取下げ年月日範囲.getFrom().toDateString(), torisageYMD),
+                                leq(torisageYMD, 取下げ年月日範囲.getTo().toDateString())))
                 .toList(DbT5001NinteiShinseiJohoEntity.class);
     }
 
+//    @Override
+//    public int update(DbT5001NinteiShinseiJohoEntity entity) {
+//        DbAccessorForAddType accessor = new DbAccessorForAddType(session);
+//        return accessor.update(entity).execute();
+//    }
     @Override
-    public int update(DbT5001NinteiShinseiJohoEntity entity) {
-        DbAccessor accessor = new DbAccessor(session);
-        return accessor.update(entity).execute();
+    public int insert(DbT5001NinteiShinseiJohoEntity entity) {
+        DbAccessorForAddType accessor = new DbAccessorForAddType(session);
+        return accessor.insert(entity).execute();
     }
 }

@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.Sta
 import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.Tsuzukigara;
 import jp.co.ndensan.reams.ur.urz.entity.basic.KojinEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Gyomu;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.*;
@@ -139,7 +140,7 @@ public final class KojinEntityMock {
         defaultData.set転出者_転出確定住所_管内管外区分(KannaiKangai.管内);
         defaultData.set住民_転入前住所_管内管外区分(KannaiKangai.管内);
         defaultData.set識別対象送付先住所_管内管外区分(KannaiKangai.管内);
-        defaultData.set識別対象送付先_業務(Gyomu.グループウェア);
+        defaultData.set識別対象送付先_業務(GyomuCode.UFグループウェア);
         defaultData.set識別対象送付先_有効開始年月日(new RDate("20000903"));
         defaultData.set識別対象送付先_有効終了年月日(new RDate("20000903"));
 

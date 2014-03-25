@@ -11,9 +11,9 @@ import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBashoJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.ShinsakaiKaisaiBashoJohoMapper;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.IShinsakaiKaisaiBashoDac;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.db.dbe.entity.mapper.ShinsakaiKaisaiBashoMapper;
+import jp.co.ndensan.reams.db.dbe.persistence.basic.ShinsakaiKaisaiBashoDac;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 審査会開催場所の情報を管理するクラスです。
@@ -22,13 +22,13 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
  */
 public class ShinsakaiKaisaiBashoManager {
 
-    private final IShinsakaiKaisaiBashoDac dac;
+    private final ShinsakaiKaisaiBashoDac dac;
 
     /**
      * デフォルトコンストラクタです。
      */
     public ShinsakaiKaisaiBashoManager() {
-        dac = InstanceCreator.create(IShinsakaiKaisaiBashoDac.class);
+        dac = InstanceProvider.create(ShinsakaiKaisaiBashoDac.class);
     }
 
     /**
@@ -36,7 +36,7 @@ public class ShinsakaiKaisaiBashoManager {
      *
      * @param shinsakaiKaisaiBashoDac テスト用MockDac
      */
-    ShinsakaiKaisaiBashoManager(IShinsakaiKaisaiBashoDac shinsakaiKaisaiBashoDac) {
+    ShinsakaiKaisaiBashoManager(ShinsakaiKaisaiBashoDac shinsakaiKaisaiBashoDac) {
         this.dac = shinsakaiKaisaiBashoDac;
     }
 
@@ -48,7 +48,7 @@ public class ShinsakaiKaisaiBashoManager {
      */
     public ShinsakaiKaisaiBasho get審査会開催場所(ShinsakaiKaisaiBashoCode 審査会開催場所コード) {
         DbT5104ShinsakaiKaisaiBashoJohoEntity entity = dac.select(審査会開催場所コード);
-        return ShinsakaiKaisaiBashoJohoMapper.to審査会開催場所(entity);
+        return ShinsakaiKaisaiBashoMapper.to審査会開催場所(entity);
     }
 
     /**
@@ -60,7 +60,7 @@ public class ShinsakaiKaisaiBashoManager {
      */
     public ShinsakaiKaisaiBasho get審査会開催場所(ShinsakaiKaisaiBashoCode 審査会開催場所コード, ShinsakaiKaisaiBashoJokyo 開催場所状況) {
         DbT5104ShinsakaiKaisaiBashoJohoEntity entity = dac.select(審査会開催場所コード, 開催場所状況);
-        return ShinsakaiKaisaiBashoJohoMapper.to審査会開催場所(entity);
+        return ShinsakaiKaisaiBashoMapper.to審査会開催場所(entity);
     }
 
     /**
@@ -91,7 +91,7 @@ public class ShinsakaiKaisaiBashoManager {
      * @return 追加又は更新が成功した場合にtrueを返します
      */
     public boolean save(ShinsakaiKaisaiBasho shinsakaiKaisaiBasho) {
-        DbT5104ShinsakaiKaisaiBashoJohoEntity entity = ShinsakaiKaisaiBashoJohoMapper.toDbT5104ShinsakaiKaisaiBashoJohoEntity(shinsakaiKaisaiBasho);
+        DbT5104ShinsakaiKaisaiBashoJohoEntity entity = ShinsakaiKaisaiBashoMapper.to審査会開催場所Entity(shinsakaiKaisaiBasho);
         int result = dac.insertOrUpdate(entity);
         return (result != 0);
     }
@@ -103,7 +103,7 @@ public class ShinsakaiKaisaiBashoManager {
      * @return 削除が成功した場合にTrueを返します
      */
     public boolean remove(ShinsakaiKaisaiBasho shinsakaiKaisaiBasho) {
-        DbT5104ShinsakaiKaisaiBashoJohoEntity entity = ShinsakaiKaisaiBashoJohoMapper.toDbT5104ShinsakaiKaisaiBashoJohoEntity(shinsakaiKaisaiBasho);
+        DbT5104ShinsakaiKaisaiBashoJohoEntity entity = ShinsakaiKaisaiBashoMapper.to審査会開催場所Entity(shinsakaiKaisaiBasho);
         int result = dac.delete(entity);
         return (result != 0);
     }
@@ -121,7 +121,7 @@ public class ShinsakaiKaisaiBashoManager {
     private List<ShinsakaiKaisaiBasho> make審査会開催場所List(List<DbT5104ShinsakaiKaisaiBashoJohoEntity> entityList) {
         List<ShinsakaiKaisaiBasho> list = new ArrayList<>();
         for (DbT5104ShinsakaiKaisaiBashoJohoEntity entity : entityList) {
-            ShinsakaiKaisaiBasho shinsakaiKaisaiBasho = ShinsakaiKaisaiBashoJohoMapper.to審査会開催場所(entity);
+            ShinsakaiKaisaiBasho shinsakaiKaisaiBasho = ShinsakaiKaisaiBashoMapper.to審査会開催場所(entity);
             list.add(shinsakaiKaisaiBasho);
         }
         return list;

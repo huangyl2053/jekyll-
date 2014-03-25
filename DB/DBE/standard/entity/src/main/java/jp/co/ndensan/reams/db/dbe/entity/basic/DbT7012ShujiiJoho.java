@@ -3,9 +3,10 @@ package jp.co.ndensan.reams.db.dbe.entity.basic;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * 主治医情報を表す列挙型です。
+ * DbT7012ShujiiJohoの項目定義クラスです
  *
  * @author N8156 宮本 康
+ *
  */
 public enum DbT7012ShujiiJoho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
@@ -22,7 +23,7 @@ public enum DbT7012ShujiiJoho implements IColumnDefinition {
     kaigoIryokikanCode(10, 0),
     kaigoIshiCode(8, 0),
     iryokikanCode(10, 0),
-    shujiiCode(8, 0),
+    ishiShikibetsuNo(8, 0),
     shujiiJokyo(1, 0),
     yubinNo(7, 0),
     jusho(50, 0),

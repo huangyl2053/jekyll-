@@ -12,11 +12,11 @@ package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
 public enum ShinsakaiKaisaiBashoJokyo {
 
     /**
-     * 有効
+     * 開催場所が有効であることを表します。
      */
     有効(true),
     /**
-     * 無効
+     * 開催場所が無効であることを表します。
      */
     無効(false);
     private final boolean is有効;

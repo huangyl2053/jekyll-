@@ -4,16 +4,17 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbe.business.helper.ShujiiIkenshoResultMock;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiKaisu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiryoShubetsu;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShujiiIkenshoRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.junit.Test;
-import static org.mockito.Mockito.*;
 
 /**
  * 主治医意見書の基本情報を扱うクラスのテストクラスです。
@@ -77,14 +78,14 @@ public class ShujiiIkenshoBaseTest {
 
     private static ShujiiIkenshoBase createShujiiIkenshoBase(int flg) {
         return new ShujiiIkenshoBase(
-                flg == AS_申請書管理番号がNULL ? null : any(ShinseishoKanriNo.class),
-                flg == AS_主治医意見書履歴番号がNULL ? null : any(ShujiiIkenshoRirekiNo.class),
-                flg == AS_意見書依頼区分がNULL ? null : any(ShujiiIkenshoIraiKubun.class),
-                flg == AS_主治医がNULL ? null : any(KaigoDoctor.class),
-                flg == AS_意見書受領年月日がNULL ? null : any(FlexibleDate.class),
-                flg == AS_意見書記入年月日がNULL ? null : any(FlexibleDate.class),
-                flg == AS_意見書作成回数がNULL ? null : any(ShujiiIkenshoSakuseiKaisu.class),
-                flg == AS_意見書作成料種別がNULL ? null : any(ShujiiIkenshoSakuseiryoShubetsu.class),
+                flg == AS_申請書管理番号がNULL ? null : new ShinseishoKanriNo(new RString("1234567890")),
+                flg == AS_主治医意見書履歴番号がNULL ? null : new ShujiiIkenshoRirekiNo(0),
+                flg == AS_意見書依頼区分がNULL ? null : ShujiiIkenshoIraiKubun.初回,
+                flg == AS_主治医がNULL ? null : ShujiiIkenshoResultMock.getSpiedShujiiIkenshoBaseInstance().get主治医(),
+                flg == AS_意見書受領年月日がNULL ? null : FlexibleDate.MIN,
+                flg == AS_意見書記入年月日がNULL ? null : FlexibleDate.MAX,
+                flg == AS_意見書作成回数がNULL ? null : ShujiiIkenshoSakuseiKaisu.初回,
+                flg == AS_意見書作成料種別がNULL ? null : ShujiiIkenshoSakuseiryoShubetsu.施設,
                 true,
                 false);
     }

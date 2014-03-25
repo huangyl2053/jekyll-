@@ -7,10 +7,16 @@ package jp.co.ndensan.reams.db.dbe.business;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.MobileDataShutsuryoku;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaTokusokuHoho;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosainBangoCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -25,7 +31,7 @@ import static org.mockito.Mockito.when;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class NinteichosaIraiCollectionTest extends TestBase {
+public class NinteichosaIraiCollectionTest extends DbeTestBase {
 
     private static NinteichosaIraiCollection sut;
 
@@ -37,9 +43,8 @@ public class NinteichosaIraiCollectionTest extends TestBase {
         }
     }
 
-    public static class get認定申請情報のテスト extends TestBase {
+    public static class get認定申請情報のテスト extends DbeTestBase {
 
-        @Override
         public void setUp() {
         }
 
@@ -96,9 +101,12 @@ public class NinteichosaIraiCollectionTest extends TestBase {
     }
 
     private static NinteichosaIrai create認定調査依頼情報(String 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号) {
-        NinteichosaIrai ninteichosaIraiJoho = mock(NinteichosaIrai.class);
-        when(ninteichosaIraiJoho.get申請書管理番号()).thenReturn(create申請書管理番号(申請書管理番号));
-        when(ninteichosaIraiJoho.get認定調査依頼履歴番号()).thenReturn(認定調査依頼履歴番号);
+        KaigoJigyoshaNo 認定調査委託先コード = new KaigoJigyoshaNo(new RString("000"));
+        NinteichosainBangoCode 調査員番号コード = new NinteichosainBangoCode(new RString("001"));
+        NinteichosaIrai ninteichosaIraiJoho = new NinteichosaIrai(create申請書管理番号(申請書管理番号),
+                認定調査依頼履歴番号, 認定調査委託先コード, 調査員番号コード, NinteichosaIraiKubun.初回, 0, new RDate(20140301), new RDate(20140331), new RDate(20140311), new RDate(20140311), MobileDataShutsuryoku.未出力, new RDate(20140331), NinteichosaTokusokuHoho.その他, 0, new RString("メモ"));
+//        when(ninteichosaIraiJoho.get申請書管理番号()).thenReturn(create申請書管理番号(申請書管理番号));
+//        when(ninteichosaIraiJoho.get認定調査依頼履歴番号()).thenReturn(認定調査依頼履歴番号);
         return ninteichosaIraiJoho;
     }
 

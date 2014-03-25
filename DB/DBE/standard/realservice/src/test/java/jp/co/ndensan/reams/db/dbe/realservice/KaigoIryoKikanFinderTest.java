@@ -45,7 +45,7 @@ public class KaigoIryoKikanFinderTest extends TestBase {
 
         @Override
         public void setUp() {
-            setGyomuCD("DB");
+            setGyomuCD("DBE");
         }
 
         @Test
@@ -69,7 +69,7 @@ public class KaigoIryoKikanFinderTest extends TestBase {
 
         @Override
         public void setUp() {
-            setGyomuCD("DB");
+            setGyomuCD("DBE");
         }
 
         @Test
@@ -93,7 +93,7 @@ public class KaigoIryoKikanFinderTest extends TestBase {
 
         @Override
         public void setUp() {
-            setGyomuCD("DB");
+            setGyomuCD("DBE");
         }
 
         @Test
@@ -117,7 +117,7 @@ public class KaigoIryoKikanFinderTest extends TestBase {
 
         @Override
         public void setUp() {
-            setGyomuCD("DB");
+            setGyomuCD("DBE");
         }
 
         @Test

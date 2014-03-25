@@ -4,10 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbe.business.helper.ShujiiIkenshoResultMock;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.junit.Test;
-import static org.mockito.Mockito.*;
 
 /**
  * 主治医意見書の結果を扱うクラスのテストクラスです。
@@ -35,7 +35,7 @@ public class ShujiiIkenshoResultTest {
 
     private static ShujiiIkenshoResult createShujiiIkenshoResult(int flg) {
         return new ShujiiIkenshoResult(
-                flg == AS_基本情報がNULL ? null : any(ShujiiIkenshoBase.class),
-                flg == AS_詳細情報がNULL ? null : any(ShujiiIkenshoDetails.class));
+                flg == AS_基本情報がNULL ? null : ShujiiIkenshoResultMock.getSpiedShujiiIkenshoBaseInstance(),
+                flg == AS_詳細情報がNULL ? null : ShujiiIkenshoResultMock.getSpiedShujiiIkenshoDetailsInstance());
     }
 }

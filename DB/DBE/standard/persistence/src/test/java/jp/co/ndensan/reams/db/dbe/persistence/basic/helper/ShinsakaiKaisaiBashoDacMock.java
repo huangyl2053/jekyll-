@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.basic.helper;
 
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.IInsertable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
  *
  * @author N1013
  */
-public class ShinsakaiKaisaiBashoDacMock implements IShinsakaiKaisaiBashoDacMock {
+public class ShinsakaiKaisaiBashoDacMock implements IInsertable<DbT5104ShinsakaiKaisaiBashoJohoEntity> {
 
     @InjectSession
     private SqlSession session;

@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.MobileDataShutsuryoku;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaTokusokuHoho;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosainBangoCode;
@@ -27,7 +27,7 @@ public class NinteichosaIrai {
     private final NinteichosaIraiRirekiNo 認定調査依頼履歴番号;
     private final KaigoJigyoshaNo 認定調査委託先コード;
     private final NinteichosainBangoCode 調査員番号コード;
-    private final NinteichosaIraiKubunCode 認定調査依頼区分コード;
+    private final NinteichosaIraiKubun 認定調査依頼区分;
     private final int 認定調査回数;
     private final RDate 認定調査依頼年月日;
     private final RDate 認定調査期限年月日;
@@ -46,7 +46,7 @@ public class NinteichosaIrai {
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
      * @param 認定調査委託先コード 認定調査委託先コード
      * @param 調査員番号コード 調査員番号コード
-     * @param 認定調査依頼区分コード 認定調査依頼区分コード
+     * @param 認定調査依頼区分 認定調査依頼区分
      * @param 認定調査回数 認定調査回数
      * @param 認定調査依頼年月日 認定調査依頼年月日
      * @param 認定調査期限年月日 認定調査期限年月日
@@ -57,12 +57,11 @@ public class NinteichosaIrai {
      * @param 認定調査督促方法 認定調査督促方法
      * @param 認定調査督促回数 認定調査督促回数
      * @param 認定調査督促メモ 認定調査督促メモ
-     * @throws NullPointerException
-     * 申請書管理番号、認定調査委依頼履歴番号、認定調査委託先コード、調査員番号コード、認定調査委依頼区分コードにnullが渡されたとき
+     * @throws NullPointerException 申請書管理番号、認定調査委依頼履歴番号、認定調査委託先コード、調査員番号コード、認定調査委依頼区分コードにnullが渡されたとき
      */
     public NinteichosaIrai(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号,
             KaigoJigyoshaNo 認定調査委託先コード, NinteichosainBangoCode 調査員番号コード,
-            NinteichosaIraiKubunCode 認定調査依頼区分コード, int 認定調査回数, RDate 認定調査依頼年月日,
+            NinteichosaIraiKubun 認定調査依頼区分, int 認定調査回数, RDate 認定調査依頼年月日,
             RDate 認定調査期限年月日, RDate 認定調査出力年月日, RDate 調査票等出力年月日,
             MobileDataShutsuryoku モバイルデータ出力, RDate 認定調査督促年月日,
             NinteichosaTokusokuHoho 認定調査督促方法, int 認定調査督促回数, RString 認定調査督促メモ) throws NullPointerException {
@@ -70,14 +69,14 @@ public class NinteichosaIrai {
         requireNonNull(認定調査依頼履歴番号, Messages.E00003.replace("認定調査依頼履歴番号", getClass().getName()).getMessage());
         requireNonNull(認定調査委託先コード, Messages.E00003.replace("認定調査委託先コード", getClass().getName()).getMessage());
         requireNonNull(調査員番号コード, Messages.E00003.replace("調査員番号コード", getClass().getName()).getMessage());
-        requireNonNull(認定調査依頼区分コード, Messages.E00003.replace("認定調査依頼区分コード", getClass().getName()).getMessage());
+        requireNonNull(認定調査依頼区分, Messages.E00003.replace("認定調査依頼区分", getClass().getName()).getMessage());
 
         this.申請書管理番号 = 申請書管理番号;
         this.認定調査依頼履歴番号 = 認定調査依頼履歴番号;
         //TODO n8178 城間篤人 認定調査委託先コードと調査員コードについて、それらを表すクラスが実装された後にメンバを変更 2014年2月末
         this.認定調査委託先コード = 認定調査委託先コード;
         this.調査員番号コード = 調査員番号コード;
-        this.認定調査依頼区分コード = 認定調査依頼区分コード;
+        this.認定調査依頼区分 = 認定調査依頼区分;
         this.認定調査回数 = 認定調査回数;
         this.認定調査依頼年月日 = 認定調査依頼年月日;
         this.認定調査期限年月日 = 認定調査期限年月日;
@@ -127,12 +126,12 @@ public class NinteichosaIrai {
     }
 
     /**
-     * 認定調査依頼区分コードを返します。
+     * 認定調査依頼区分を返します。
      *
-     * @return 認定調査依頼区分コード
+     * @return 認定調査依頼区分
      */
-    public NinteichosaIraiKubunCode get認定調査依頼区分コード() {
-        return 認定調査依頼区分コード;
+    public NinteichosaIraiKubun get認定調査依頼区分() {
+        return 認定調査依頼区分;
     }
 
     /**
