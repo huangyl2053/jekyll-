@@ -35,7 +35,7 @@ public class NinteichosaResultTest {
 
     private static NinteichosaResult createNinteichosaResult(int flg) {
         return new NinteichosaResult(
-                flg == AS_概況調査結果がNULL ? null : any(NinteichosaResultOfGaikyo.class),
-                flg == AS_基本調査結果がNULL ? null : any(NinteichosaResultOfKihon.class));
+                flg == AS_概況調査結果がNULL ? null : mock(NinteichosaResultOfGaikyo.class),
+                flg == AS_基本調査結果がNULL ? null : mock(NinteichosaResultOfKihon.class));
     }
 }

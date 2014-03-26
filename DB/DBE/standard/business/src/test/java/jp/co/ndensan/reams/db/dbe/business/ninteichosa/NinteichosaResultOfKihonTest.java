@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -50,9 +51,9 @@ public class NinteichosaResultOfKihonTest {
 
     private static NinteichosaResultOfKihon createNinteichosaResultOfKihon(int flg) {
         return new NinteichosaResultOfKihon(
-                flg == AS_申請書管理番号がNULL ? null : any(ShinseishoKanriNo.class),
-                flg == AS_認定調査依頼履歴番号がNULL ? null : any(NinteichosaIraiRirekiNo.class),
-                flg == AS_厚労省IF識別区分がNULL ? null : any(KoroshoIFKubun.class),
-                flg == AS_認定調査票がNULL ? null : any(Ninteichosahyo.class));
+                flg == AS_申請書管理番号がNULL ? null : new ShinseishoKanriNo(new RString("0000000001")),
+                flg == AS_認定調査依頼履歴番号がNULL ? null : new NinteichosaIraiRirekiNo(0),
+                flg == AS_厚労省IF識別区分がNULL ? null : KoroshoIFKubun.V09A,
+                flg == AS_認定調査票がNULL ? null : mock(Ninteichosahyo.class));
     }
 }

@@ -43,8 +43,8 @@ public class NinteichosaJisshibashoKubunTest {
 
     private static NinteichosaJisshibashoKubun createNinteichosaJisshibashoKubun(int flg) {
         return new NinteichosaJisshibashoKubun(
-                flg == AS_コードがNULL ? null : any(NinteichosaJisshibashoKubunCode.class),
-                flg == AS_名称がNULL ? null : any(RString.class),
-                flg == AS_略称がNULL ? null : any(RString.class));
+                flg == AS_コードがNULL ? null : new NinteichosaJisshibashoKubunCode(new RString("1")),
+                flg == AS_名称がNULL ? null : new RString("名称"),
+                flg == AS_略称がNULL ? null : new RString("略称"));
     }
 }

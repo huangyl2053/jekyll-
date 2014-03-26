@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubun
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
 import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -63,11 +64,17 @@ public class NinteichosaResultOfGaikyoKihonTest {
 
     private static NinteichosaResultOfGaikyoKihon createNinteichosaResultOfGaikyoKihon(int flg) {
         return new NinteichosaResultOfGaikyoKihon(
-                flg == AS_認定調査依頼区分がNULL ? null : any(NinteichosaIraiKubun.class), 1,
-                flg == AS_認定調査実施年月日がNULL ? null : any(FlexibleDate.class),
-                flg == AS_認定調査受領年月日がNULL ? null : any(FlexibleDate.class),
-                flg == AS_認定調査区分がNULL ? null : any(NinteichosaKubun.class),
-                flg == AS_認定調査員がNULL ? null : any(INinteiChosain.class),
-                flg == AS_認定調査実施場所区分がNULL ? null : any(NinteichosaJisshibashoKubun.class));
+                //                flg == AS_認定調査依頼区分がNULL ? null : any(NinteichosaIraiKubun.class), 1,
+                //                flg == AS_認定調査実施年月日がNULL ? null : any(FlexibleDate.class),
+                //                flg == AS_認定調査受領年月日がNULL ? null : any(FlexibleDate.class),
+                //                flg == AS_認定調査区分がNULL ? null : any(NinteichosaKubun.class),
+                //                flg == AS_認定調査員がNULL ? null : any(INinteiChosain.class),
+                //                flg == AS_認定調査実施場所区分がNULL ? null : any(NinteichosaJisshibashoKubun.class));
+                flg == AS_認定調査依頼区分がNULL ? null : NinteichosaIraiKubun.toValue(new RString("1")), 1,
+                flg == AS_認定調査実施年月日がNULL ? null : new FlexibleDate("00000000"),
+                flg == AS_認定調査受領年月日がNULL ? null : new FlexibleDate("00000000"),
+                flg == AS_認定調査区分がNULL ? null : NinteichosaKubun.新規調査,
+                flg == AS_認定調査員がNULL ? null : mock(INinteiChosain.class),
+                flg == AS_認定調査実施場所区分がNULL ? null : mock(NinteichosaJisshibashoKubun.class));
     }
 }
