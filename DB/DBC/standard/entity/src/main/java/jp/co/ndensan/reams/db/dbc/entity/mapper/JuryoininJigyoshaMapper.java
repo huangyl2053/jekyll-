@@ -118,17 +118,17 @@ public final class JuryoininJigyoshaMapper {
         entity.setTodokedeAddress(受領委任事業者.get届出者().get住所());
         entity.setTodokedeJigyoshaName(受領委任事業者.get届出者().get事業者名称());
         entity.setTodokedeDaihyoshaName(受領委任事業者.get届出者().get代表者氏名());
-        entity.setShikibetsuCode(受領委任事業者.get契約事業者().get法人().get識別コード());
+        entity.setShikibetsuCode(受領委任事業者.get識別コード());
         entity.setJigyoshaFaxNo(受領委任事業者.get契約事業者().get事業者FAX番号());
         entity.setKeiyakuTorokuYMD(受領委任事業者.get契約登録年月日());
         entity.setSofusakiBusho(受領委任事業者.get契約事業者().get送付先部署());
         entity.setEigyoKeitai(受領委任事業者.get契約事業者().get営業形態().getCode());
-        entity.setJutakuKaishuKeiyakuUmu(受領委任事業者.get住宅改修契約区分().is契約有り());
-        entity.setTokuteiFukushiYoguHanbaiKeiyakuUmu(受領委任事業者.get特定福祉用具販売契約区分().is契約有り());
-        entity.setShokanbaraiKyufuKeiyakuUmu(受領委任事業者.get償還払給付契約区分().is契約有り());
-        entity.setKogakuKyufuKeiyakuUmu(受領委任事業者.get高額給付契約区分().is契約有り());
+        entity.setJutakuKaishuKeiyakuUmu(受領委任事業者.has住宅改修契約());
+        entity.setTokuteiFukushiYoguHanbaiKeiyakuUmu(受領委任事業者.has特定福祉用具販売契約());
+        entity.setShokanbaraiKyufuKeiyakuUmu(受領委任事業者.has償還払給付契約());
+        entity.setKogakuKyufuKeiyakuUmu(受領委任事業者.has高額給付契約());
         entity.setKeiyakuJigyoshaNo(受領委任事業者.get契約事業者().get事業者番号());
-        entity.setToriatsukaiKakuyakushoUmu(受領委任事業者.get取扱確約書区分().is確約書有り());
+        entity.setToriatsukaiKakuyakushoUmu(受領委任事業者.has取扱確約書());
 
         return entity;
     }

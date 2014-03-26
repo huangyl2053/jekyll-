@@ -98,8 +98,8 @@ public class JuryoininJigyoshaMapperTest extends DbcTestBase {
         }
 
         @Test
-        public void get契約事業者のget法人のget識別コードの結果が_Entityの識別コードと同一になる() {
-            assertThat(sut.get契約事業者().get法人().get識別コード(), is(JuryoininJigyoshaEntity.getShikibetsuCode()));
+        public void get識別コードの結果が_Entityの識別コードと同一になる() {
+            assertThat(sut.get識別コード(), is(JuryoininJigyoshaEntity.getShikibetsuCode()));
         }
 
         @Test
@@ -128,28 +128,28 @@ public class JuryoininJigyoshaMapperTest extends DbcTestBase {
         }
 
         @Test
-        public void get住宅改修契約区分のis契約有りの結果が_Entityの住宅改修契約有無と同一になる() {
-            assertThat(sut.get住宅改修契約区分().is契約有り(), is(JuryoininJigyoshaEntity.getJutakuKaishuKeiyakuUmu()));
+        public void has住宅改修契約の結果が_Entityの住宅改修契約有無と同一になる() {
+            assertThat(sut.has住宅改修契約(), is(JuryoininJigyoshaEntity.getJutakuKaishuKeiyakuUmu()));
         }
 
         @Test
-        public void get特定福祉用具販売契約区分のis契約有りの結果が_Entityの特定福祉用具販売契約有無と同一になる() {
-            assertThat(sut.get特定福祉用具販売契約区分().is契約有り(), is(JuryoininJigyoshaEntity.getTokuteiFukushiYoguHanbaiKeiyakuUmu()));
+        public void has特定福祉用具販売契約の結果が_Entityの特定福祉用具販売契約有無と同一になる() {
+            assertThat(sut.has特定福祉用具販売契約(), is(JuryoininJigyoshaEntity.getTokuteiFukushiYoguHanbaiKeiyakuUmu()));
         }
 
         @Test
-        public void get償還払給付契約区分のis契約有りの結果が_Entityの償還払給付契約有無と同一になる() {
-            assertThat(sut.get償還払給付契約区分().is契約有り(), is(JuryoininJigyoshaEntity.getShokanbaraiKyufuKeiyakuUmu()));
+        public void has償還払給付契約の結果が_Entityの償還払給付契約有無と同一になる() {
+            assertThat(sut.has償還払給付契約(), is(JuryoininJigyoshaEntity.getShokanbaraiKyufuKeiyakuUmu()));
         }
 
         @Test
-        public void get高額給付契約区分のis契約有りの結果が_Entityの高額給付契約有無と同一になる() {
-            assertThat(sut.get高額給付契約区分().is契約有り(), is(JuryoininJigyoshaEntity.getKogakuKyufuKeiyakuUmu()));
+        public void has高額給付契約の結果が_Entityの高額給付契約有無と同一になる() {
+            assertThat(sut.has高額給付契約(), is(JuryoininJigyoshaEntity.getKogakuKyufuKeiyakuUmu()));
         }
 
         @Test
-        public void get取扱確約書区分のis確約書有りの結果が_Entityの取扱確約書有無と同一になる() {
-            assertThat(sut.get取扱確約書区分().is確約書有り(), is(JuryoininJigyoshaEntity.getToriatsukaiKakuyakushoUmu()));
+        public void has取扱確約書の結果が_Entityの取扱確約書有無と同一になる() {
+            assertThat(sut.has取扱確約書(), is(JuryoininJigyoshaEntity.getToriatsukaiKakuyakushoUmu()));
         }
     }
 
@@ -259,8 +259,8 @@ public class JuryoininJigyoshaMapperTest extends DbcTestBase {
         }
 
         @Test
-        public void Entityの識別コードと_契約事業者の法人の識別コードが同一になる() {
-            assertThat(sut.getShikibetsuCode(), is(受領委任事業者.get契約事業者().get法人().get識別コード()));
+        public void Entityの識別コードと_受領委任事業者のget識別コードが同一になる() {
+            assertThat(sut.getShikibetsuCode(), is(受領委任事業者.get識別コード()));
         }
 
         @Test
@@ -284,23 +284,23 @@ public class JuryoininJigyoshaMapperTest extends DbcTestBase {
         }
 
         @Test
-        public void Entityの住宅改修契約有無と_受領委任事業者の住宅改修契約区分のis契約有りが同一になる() {
-            assertThat(sut.getJutakuKaishuKeiyakuUmu(), is(受領委任事業者.get住宅改修契約区分().is契約有り()));
+        public void Entityの住宅改修契約有無と_受領委任事業者のhas住宅改修契約が同一になる() {
+            assertThat(sut.getJutakuKaishuKeiyakuUmu(), is(受領委任事業者.has住宅改修契約()));
         }
 
         @Test
-        public void Entityの特定福祉用具販売契約有無と_受領委任事業者の特定福祉用具販売契約区分のis契約有りが同一になる() {
-            assertThat(sut.getTokuteiFukushiYoguHanbaiKeiyakuUmu(), is(受領委任事業者.get特定福祉用具販売契約区分().is契約有り()));
+        public void Entityの特定福祉用具販売契約有無と_受領委任事業者のhas特定福祉用具販売契約が同一になる() {
+            assertThat(sut.getTokuteiFukushiYoguHanbaiKeiyakuUmu(), is(受領委任事業者.has特定福祉用具販売契約()));
         }
 
         @Test
-        public void Entityの償還払給付契約有無と_受領委任事業者の償還払給付契約区分のis契約有りが同一になる() {
-            assertThat(sut.getShokanbaraiKyufuKeiyakuUmu(), is(受領委任事業者.get償還払給付契約区分().is契約有り()));
+        public void Entityの償還払給付契約有無と_受領委任事業者のhas償還払給付契約が同一になる() {
+            assertThat(sut.getShokanbaraiKyufuKeiyakuUmu(), is(受領委任事業者.has償還払給付契約()));
         }
 
         @Test
-        public void Entityの高額給付契約有無と_受領委任事業者の高額給付契約区分のis契約有りが同一になる() {
-            assertThat(sut.getKogakuKyufuKeiyakuUmu(), is(受領委任事業者.get高額給付契約区分().is契約有り()));
+        public void Entityの高額給付契約有無と_受領委任事業者のhas高額給付契約が同一になる() {
+            assertThat(sut.getKogakuKyufuKeiyakuUmu(), is(受領委任事業者.has高額給付契約()));
         }
 
         @Test
@@ -309,8 +309,8 @@ public class JuryoininJigyoshaMapperTest extends DbcTestBase {
         }
 
         @Test
-        public void Entityの取扱確約書有無と_受領委任事業者の取扱確約書区分のis確約書有りが同一になる() {
-            assertThat(sut.getToriatsukaiKakuyakushoUmu(), is(受領委任事業者.get取扱確約書区分().is確約書有り()));
+        public void Entityの取扱確約書有無と_受領委任事業者のhas取扱確約書が同一になる() {
+            assertThat(sut.getToriatsukaiKakuyakushoUmu(), is(受領委任事業者.has取扱確約書()));
         }
     }
 }

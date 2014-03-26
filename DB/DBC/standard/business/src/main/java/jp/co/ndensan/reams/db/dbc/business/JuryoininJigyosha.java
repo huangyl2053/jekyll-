@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.EigyoKeitai;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.JutakuKaishuKeiyakuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KogakuKyufuKeiyakuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShokanbaraiKyufuKeiyakuKubun;
@@ -13,8 +14,10 @@ import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.TokuteiFukushiYoguHa
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ToriatsukaiKakuyakushoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 
 /**
@@ -139,12 +142,30 @@ public class JuryoininJigyosha {
     }
 
     /**
+     * 識別コードを返します。
+     *
+     * @return 識別コード
+     */
+    public ShikibetsuCode get識別コード() {
+        return 契約事業者.get法人().get識別コード();
+    }
+
+    /**
      * 住宅改修契約区分を返します。
      *
      * @return 住宅改修契約区分
      */
     public JutakuKaishuKeiyakuKubun get住宅改修契約区分() {
         return 住宅改修契約有無;
+    }
+
+    /**
+     * 住宅改修契約か否かを返します。
+     *
+     * @return 住宅改修契約ならtrue、異なればfalse
+     */
+    public boolean has住宅改修契約() {
+        return 住宅改修契約有無.is契約有り();
     }
 
     /**
@@ -157,12 +178,30 @@ public class JuryoininJigyosha {
     }
 
     /**
+     * 特定福祉用具販売契約か否かを返します。
+     *
+     * @return 特定福祉用具販売契約ならtrue、異なればfalse
+     */
+    public boolean has特定福祉用具販売契約() {
+        return 特定福祉用具販売契約有無.is契約有り();
+    }
+
+    /**
      * 償還払給付契約区分を返します。
      *
      * @return 償還払給付契約有無
      */
     public ShokanbaraiKyufuKeiyakuKubun get償還払給付契約区分() {
         return 償還払給付契約有無;
+    }
+
+    /**
+     * 償還払給付契約か否かを返します。
+     *
+     * @return 償還払給付契約ならtrue、異なればfalse
+     */
+    public boolean has償還払給付契約() {
+        return 償還払給付契約有無.is契約有り();
     }
 
     /**
@@ -175,11 +214,29 @@ public class JuryoininJigyosha {
     }
 
     /**
+     * 高額給付契約か否かを返します。
+     *
+     * @return 高額給付契約ならtrue、異なればfalse
+     */
+    public boolean has高額給付契約() {
+        return 高額給付契約有無.is契約有り();
+    }
+
+    /**
      * 取扱確約書区分を返します。
      *
      * @return 取扱確約書有無
      */
     public ToriatsukaiKakuyakushoKubun get取扱確約書区分() {
         return 取扱確約書有無;
+    }
+
+    /**
+     * 取扱確約書があるか否かを返します。
+     *
+     * @return 取扱確約書があればtrue、なければfalse
+     */
+    public boolean has取扱確約書() {
+        return 取扱確約書有無.is確約書有り();
     }
 }
