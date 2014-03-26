@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteiJotaiAnteiseiCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -28,7 +29,7 @@ public class KaigoNinteiJotaiAnteiseiKubunTest {
 
         @Before
         public void setUp() {
-            sut = new KaigoNinteiJotaiAnteiseiKubun(new KaigoNinteiJotaiAnteiseiCode(new RString("001")), new RString("名称"));
+            sut = new KaigoNinteiJotaiAnteiseiKubun(new Code(new RString("001")), new RString("名称"), new RString("略称"));
         }
 
         @Test

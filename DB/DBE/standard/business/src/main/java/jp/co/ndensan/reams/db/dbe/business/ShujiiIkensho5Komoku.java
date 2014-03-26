@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
  * 主治医意見書の詳細情報のうち、一次判定に使用する5項目の情報を扱うクラスです。
@@ -61,10 +62,9 @@ public class ShujiiIkensho5Komoku {
      * 主治医意見書5項目について、初期値をもったインスタンスを生成します。
      */
     public ShujiiIkensho5Komoku() {
-        this.障害高齢者自立度 = new ShogaiKoreishaJiritsudoKomoku(null, RString.EMPTY);
-        //TODO n8178 城間篤人 初期値をどのように作るか後日確認 2014年3月
+        this.障害高齢者自立度 = new ShogaiKoreishaJiritsudoKomoku(new Code(RString.EMPTY), RString.EMPTY, RString.EMPTY);
         this.認知症高齢者自立度 = new NinchishoKoreishaJiritsudoKomoku(new NinchishoKoreishaJiritsudoCode(new RString("9")),
-                new RString("記載無し"));
+                new RString("記載無し"), new RString("記載無し"));
         this.短期記憶 = TankiKiokuKomoku.記載無し;
         this.認知能力 = NinchiNoryokuKomoku.記載無し;
         this.伝達能力 = DentatsuNoryokuKomoku.記載無し;

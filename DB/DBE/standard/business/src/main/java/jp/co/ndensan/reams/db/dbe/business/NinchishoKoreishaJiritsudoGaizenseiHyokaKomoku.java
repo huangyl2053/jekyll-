@@ -5,7 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinchishoKoreishaJiritsudoGaizenseiHyokaCode;
-import jp.co.ndensan.reams.ur.urz.business.CodeAssignedItem;
+import jp.co.ndensan.reams.db.dbz.business.KaigoCodeAssignedItem;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -13,17 +14,19 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8178 城間篤人
  */
-public class NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku extends CodeAssignedItem {
+public class NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku
+        extends KaigoCodeAssignedItem<NinchishoKoreishaJiritsudoGaizenseiHyokaCode> {
 
     /**
      * コードと名称を受け取り、インスタンスを生成します。
      *
      * @param 認知症高齢者自立度蓋然性評価コード 認知症高齢者自立度蓋然性評価コード
      * @param 名称 名称
+     * @param 略称 略称
      */
-    public NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku(NinchishoKoreishaJiritsudoGaizenseiHyokaCode 認知症高齢者自立度蓋然性評価コード,
-            RString 名称) {
-        super(認知症高齢者自立度蓋然性評価コード, 名称, null, null, null, null);
+    public NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku(Code 認知症高齢者自立度蓋然性評価コード, RString 名称, RString 略称) {
+        super(new NinchishoKoreishaJiritsudoGaizenseiHyokaCode(認知症高齢者自立度蓋然性評価コード.value()),
+                認知症高齢者自立度蓋然性評価コード, 名称, 略称, null, null, null);
     }
 
     /**
@@ -32,6 +35,6 @@ public class NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku extends CodeAssigned
      * @return 能力未低下認知症高齢者指標コード
      */
     public NinchishoKoreishaJiritsudoGaizenseiHyokaCode get認知症高齢者自立度蓋然性評価コード() {
-        return (NinchishoKoreishaJiritsudoGaizenseiHyokaCode) getCode();
+        return getExtendedCode();
     }
 }

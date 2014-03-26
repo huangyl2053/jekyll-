@@ -5,7 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NoryokuMiteikaNinchishoKoreishaShihyoCode;
-import jp.co.ndensan.reams.ur.urz.business.CodeAssignedItem;
+import jp.co.ndensan.reams.db.dbz.business.KaigoCodeAssignedItem;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -13,16 +14,19 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8178 城間篤人
  */
-public class NoryokuMiteikaNinchishoKoreishaShihyoKomoku extends CodeAssignedItem {
+public class NoryokuMiteikaNinchishoKoreishaShihyoKomoku
+        extends KaigoCodeAssignedItem<NoryokuMiteikaNinchishoKoreishaShihyoCode> {
 
     /**
      * コードと名称を受け取り、インスタンスを生成します。
      *
      * @param 能力未低下認知症高齢者指標コード 能力未低下認知症高齢者指標コード
      * @param 名称 名称
+     * @param 略称 略称
      */
-    public NoryokuMiteikaNinchishoKoreishaShihyoKomoku(NoryokuMiteikaNinchishoKoreishaShihyoCode 能力未低下認知症高齢者指標コード, RString 名称) {
-        super(能力未低下認知症高齢者指標コード, 名称, null, null, null, null);
+    public NoryokuMiteikaNinchishoKoreishaShihyoKomoku(Code 能力未低下認知症高齢者指標コード, RString 名称, RString 略称) {
+        super(new NoryokuMiteikaNinchishoKoreishaShihyoCode(能力未低下認知症高齢者指標コード.value()),
+                能力未低下認知症高齢者指標コード, 名称, 略称, null, null, null);
     }
 
     /**
@@ -31,6 +35,6 @@ public class NoryokuMiteikaNinchishoKoreishaShihyoKomoku extends CodeAssignedIte
      * @return 能力未低下認知症高齢者指標コード
      */
     public NoryokuMiteikaNinchishoKoreishaShihyoCode get能力未低下認知症高齢者指標コード() {
-        return (NoryokuMiteikaNinchishoKoreishaShihyoCode) getCode();
+        return getExtendedCode();
     }
 }

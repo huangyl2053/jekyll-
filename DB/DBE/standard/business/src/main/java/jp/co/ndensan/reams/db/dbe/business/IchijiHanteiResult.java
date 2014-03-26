@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KariIchijiHanteiKubun;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**
@@ -16,9 +18,11 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
  *
  * @author n8178 城間篤人
  */
-class IchijiHanteiResult {
+public class IchijiHanteiResult {
 
     private final ShinseishoKanriNo 申請書管理番号;
+    private final KoroshoIFKubun 厚労省IF区分;
+    private final KariIchijiHanteiKubun 仮一次判定区分;
     private final FlexibleDate 一次判定年月日;
     private final IchijiHanteiKekkaKomoku 一次判定結果;
     private final IchijiHanteiKekkaKomoku 認知症加算一次判定結果;
@@ -39,6 +43,8 @@ class IchijiHanteiResult {
      * 引数から一次判定結果の詳細な情報を受け取り、インスタンスを生成します。
      *
      * @param 申請書管理番号 申請書管理番号
+     * @param 厚労省IF区分 厚労省IF区分
+     * @param 仮一次判定区分 仮一次判定区分
      * @param 一次判定年月日 一次判定年月日
      * @param 一次判定結果 一次判定結果
      * @param 認知症加算一次判定結果 認知症加算一次判定結果
@@ -58,13 +64,17 @@ class IchijiHanteiResult {
      * 申請書管理番号、一次判定年月日、一次判定結果、認知症加算一次判定結果、要介護認定等基準時間、中間評価項目得点、一次判定警告List、
      * 認定状態安定性、認知症自立度2以上蓋然性、推定給付区分のいずれかにnullが渡されたとき
      */
-    public IchijiHanteiResult(ShinseishoKanriNo 申請書管理番号, FlexibleDate 一次判定年月日, IchijiHanteiKekkaKomoku 一次判定結果,
-            IchijiHanteiKekkaKomoku 認知症加算一次判定結果, YokaigoNinteiToKijunTime 要介護認定等基準時間, YokaigoNinteiChukanHyokaKomokuTokuten 中間評価項目得点,
-            IchijiHanteiKeikokuList 一次判定警告List, KaigoNinteiJotaiAnteiseiKubun 認定状態安定性, Decimal 認知症自立度2以上蓋然性, SuiteiKyuhuKubun 推定給付区分,
-            NoryokuMiteikaNinchishoKoreishaShihyoKomoku 運動能力未低下認知症高齢者指標, NichijoSeikatsuJiritsudoKumiawase 日常生活自立度組み合わせ,
-            NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku 認知症高齢者日常生活自立度蓋然性評価, int 認知症高齢者日常生活自立度蓋然性評価率, RString 一次判定結果送付区分,
-            FlexibleDate 一次判定結果送付年月日) throws NullPointerException {
+    public IchijiHanteiResult(ShinseishoKanriNo 申請書管理番号, KoroshoIFKubun 厚労省IF区分, KariIchijiHanteiKubun 仮一次判定区分,
+            FlexibleDate 一次判定年月日, IchijiHanteiKekkaKomoku 一次判定結果, IchijiHanteiKekkaKomoku 認知症加算一次判定結果,
+            YokaigoNinteiToKijunTime 要介護認定等基準時間, YokaigoNinteiChukanHyokaKomokuTokuten 中間評価項目得点,
+            IchijiHanteiKeikokuList 一次判定警告List, KaigoNinteiJotaiAnteiseiKubun 認定状態安定性, Decimal 認知症自立度2以上蓋然性,
+            SuiteiKyuhuKubun 推定給付区分, NoryokuMiteikaNinchishoKoreishaShihyoKomoku 運動能力未低下認知症高齢者指標,
+            NichijoSeikatsuJiritsudoKumiawase 日常生活自立度組み合わせ,
+            NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku 認知症高齢者日常生活自立度蓋然性評価, int 認知症高齢者日常生活自立度蓋然性評価率,
+            RString 一次判定結果送付区分, FlexibleDate 一次判定結果送付年月日) throws NullPointerException {
         requireNonNull(申請書管理番号, Messages.E00003.replace("申請書管理番号", getClass().getName()).getMessage());
+        requireNonNull(厚労省IF区分, Messages.E00003.replace("厚労省IF区分", getClass().getName()).getMessage());
+        requireNonNull(仮一次判定区分, Messages.E00003.replace("仮一次判定区分", getClass().getName()).getMessage());
         requireNonNull(一次判定年月日, Messages.E00003.replace("一次判定年月日", getClass().getName()).getMessage());
         requireNonNull(一次判定結果, Messages.E00003.replace("一次判定結果", getClass().getName()).getMessage());
         requireNonNull(認知症加算一次判定結果, Messages.E00003.replace("認知症加算一次判定結果", getClass().getName()).getMessage());
@@ -76,6 +86,8 @@ class IchijiHanteiResult {
         requireNonNull(推定給付区分, Messages.E00003.replace("推定給付区分", getClass().getName()).getMessage());
 
         this.申請書管理番号 = 申請書管理番号;
+        this.厚労省IF区分 = 厚労省IF区分;
+        this.仮一次判定区分 = 仮一次判定区分;
         this.一次判定年月日 = 一次判定年月日;
         this.一次判定結果 = 一次判定結果;
         this.認知症加算一次判定結果 = 認知症加算一次判定結果;
@@ -100,6 +112,24 @@ class IchijiHanteiResult {
      */
     public ShinseishoKanriNo get申請書管理番号() {
         return 申請書管理番号;
+    }
+
+    /**
+     * 厚労省IF区分を返します。
+     *
+     * @return 厚労省IF区分
+     */
+    public KoroshoIFKubun get厚労省IF区分() {
+        return 厚労省IF区分;
+    }
+
+    /**
+     * 仮一次判定区分を返します
+     *
+     * @return 仮一次判定区分
+     */
+    public KariIchijiHanteiKubun get仮一次判定区分() {
+        return 仮一次判定区分;
     }
 
     /**
@@ -175,11 +205,11 @@ class IchijiHanteiResult {
     }
 
     /**
-     * 推定給付区分コードを返します。
+     * 推定給付区分を返します。
      *
-     * @return 推定給付区分コード
+     * @return 推定給付区分
      */
-    public SuiteiKyuhuKubun get推定給付区分コード() {
+    public SuiteiKyuhuKubun get推定給付区分() {
         return 推定給付区分;
     }
 

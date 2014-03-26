@@ -8,8 +8,8 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.DentatsuNoryokuKomok
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinchiNoryokuKomoku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShokujiKoiHyokaKomoku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TankiKiokuKomoku;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinchishoKoreishaJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -29,8 +29,8 @@ public class ShujiiIkensho5KomokuTest {
 
     private static ShujiiIkensho5Komoku sut;
     private static ShogaiKoreishaJiritsudoKomoku 障害高齢者自立度項目_mock = mock(ShogaiKoreishaJiritsudoKomoku.class);
-    private static NinchishoKoreishaJiritsudoKomoku 認知症高齢者自立度_1_自立 = new NinchishoKoreishaJiritsudoKomoku(
-            new NinchishoKoreishaJiritsudoCode(new RString("1")), new RString("自立"));
+    private static NinchishoKoreishaJiritsudoKomoku 認知症高齢者自立度_1_自立 = new NinchishoKoreishaJiritsudoKomoku(new Code(new RString("1")),
+            new RString("自立"), new RString("自立"));
     private static TankiKiokuKomoku 短期記憶_2 = TankiKiokuKomoku.問題あり;
     private static NinchiNoryokuKomoku 認知能力_1 = NinchiNoryokuKomoku.自立;
     private static DentatsuNoryokuKomoku 伝達能力_3 = DentatsuNoryokuKomoku.具体的要求に限られる;

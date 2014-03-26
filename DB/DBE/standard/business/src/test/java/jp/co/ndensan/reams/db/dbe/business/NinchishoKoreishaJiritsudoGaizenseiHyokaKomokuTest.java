@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinchishoKoreishaJiritsudoGaizenseiHyokaCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -28,8 +28,7 @@ public class NinchishoKoreishaJiritsudoGaizenseiHyokaKomokuTest {
 
         @Before
         public void setUp() {
-            sut = new NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku(new NinchishoKoreishaJiritsudoGaizenseiHyokaCode(new RString("001")),
-                    new RString("名称"));
+            sut = new NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku(new Code(new RString("001")), new RString("名称"), new RString("略称"));
         }
 
         @Test

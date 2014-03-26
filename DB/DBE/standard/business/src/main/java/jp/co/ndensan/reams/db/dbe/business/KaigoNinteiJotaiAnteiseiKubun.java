@@ -5,7 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteiJotaiAnteiseiCode;
-import jp.co.ndensan.reams.ur.urz.business.CodeAssignedItem;
+import jp.co.ndensan.reams.db.dbz.business.KaigoCodeAssignedItem;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -13,16 +14,17 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8178 城間篤人
  */
-public class KaigoNinteiJotaiAnteiseiKubun extends CodeAssignedItem {
+public class KaigoNinteiJotaiAnteiseiKubun extends KaigoCodeAssignedItem<KaigoNinteiJotaiAnteiseiCode> {
 
     /**
      * コードと名称を受け取り、インスタンスを生成します。
      *
      * @param 介護認定状態安定性コード 介護認定状態安定性コード
      * @param 名称 名称
+     * @param 略称 略称
      */
-    public KaigoNinteiJotaiAnteiseiKubun(KaigoNinteiJotaiAnteiseiCode 介護認定状態安定性コード, RString 名称) {
-        super(介護認定状態安定性コード, 名称, null, null, null, null);
+    public KaigoNinteiJotaiAnteiseiKubun(Code 介護認定状態安定性コード, RString 名称, RString 略称) {
+        super(new KaigoNinteiJotaiAnteiseiCode(介護認定状態安定性コード.value()), 介護認定状態安定性コード, 名称, 略称, null, null, null);
     }
 
     /**
@@ -31,6 +33,6 @@ public class KaigoNinteiJotaiAnteiseiKubun extends CodeAssignedItem {
      * @return 介護認定状態安定性コード
      */
     public KaigoNinteiJotaiAnteiseiCode get介護認定状態安定性コード() {
-        return (KaigoNinteiJotaiAnteiseiCode) getCode();
+        return getExtendedCode();
     }
 }

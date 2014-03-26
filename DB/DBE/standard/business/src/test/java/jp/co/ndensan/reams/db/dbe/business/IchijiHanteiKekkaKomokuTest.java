@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IchijiHanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -28,7 +29,7 @@ public class IchijiHanteiKekkaKomokuTest {
 
         @Before
         public void setUp() {
-            sut = new IchijiHanteiKekkaKomoku(new IchijiHanteiKekkaCode(new RString("001")), new RString("名称"));
+            sut = new IchijiHanteiKekkaKomoku(new Code(new RString("001")), new RString("名称"), new RString("略称"));
         }
 
         @Test
