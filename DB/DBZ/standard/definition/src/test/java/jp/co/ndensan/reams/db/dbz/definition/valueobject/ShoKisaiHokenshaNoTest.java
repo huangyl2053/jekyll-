@@ -39,16 +39,7 @@ public class ShoKisaiHokenshaNoTest extends DbzTestBase {
     }
 
     @RunWith(Enclosed.class)
-    public static class KaigoValueObject extends DbzTestBase {
-
-        public static class Implements extends DbzTestBase {
-
-            @Test
-            public void ShoKisaiHokenshaNoは_IKaigoValueObjectのインスタンスである() {
-                ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo(n00000);
-                assertThat(sut, is(instanceOf(IKaigoValueObject.class)));
-            }
-        }
+    public static class ValueAndComparable extends DbzTestBase {
 
         public static class Value extends DbzTestBase {
 

@@ -34,16 +34,7 @@ public class ShishoCodeTest extends DbzTestBase {
     }
 
     @RunWith(Enclosed.class)
-    public static class KaigoValueObject extends DbzTestBase {
-
-        public static class Implements extends DbzTestBase {
-
-            @Test
-            public void ShishoCodeは_IKaigoValueObjectのインスタンスである() {
-                ShishoCode sut = new ShishoCode(n00000);
-                assertThat(sut, is(instanceOf(IKaigoValueObject.class)));
-            }
-        }
+    public static class ValueAndComparable extends DbzTestBase {
 
         public static class Value extends DbzTestBase {
 

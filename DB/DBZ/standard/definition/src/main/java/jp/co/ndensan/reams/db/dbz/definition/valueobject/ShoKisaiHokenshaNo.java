@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.definition.valueobject;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
@@ -16,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  *
  * @author N3327 三浦 凌
  */
-public class ShoKisaiHokenshaNo implements IKaigoValueObject<RString, ShoKisaiHokenshaNo>, IDbColumnMappable {
+public class ShoKisaiHokenshaNo implements IValueObject<RString>, Comparable<ShoKisaiHokenshaNo>, IDbColumnMappable {
 
     private static final int PERMISSIBLE_LENGTH = 6;
     private final RString 証記載保険者番号;

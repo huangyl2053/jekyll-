@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.definition.valueobject;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3327 三浦 凌
  */
-public class ChohyoKofuRirekiID implements IKaigoValueObject<RString, ChohyoKofuRirekiID> {
+public class ChohyoKofuRirekiID implements IValueObject<RString>, Comparable<ChohyoKofuRirekiID> {
 
     private final RString 帳票交付履歴ID;
 
