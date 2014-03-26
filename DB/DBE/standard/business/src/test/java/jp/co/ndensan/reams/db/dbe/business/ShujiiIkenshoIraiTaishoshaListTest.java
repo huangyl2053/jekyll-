@@ -33,6 +33,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
+import static org.mockito.Mockito.mock;
 
 /**
  * 主治医意見書作成依頼対象者のリストを扱うクラスのテストです。
@@ -123,9 +124,10 @@ public class ShujiiIkenshoIraiTaishoshaListTest extends DbeTestBase {
 //        IWorker 就労者 = mock(IWorker.class);
         IWorker 就労者 = null;
         IDateOfBirth 生年月日 = new _DateOfBirth(new RDate(19660401));
-        IKojin 個人情報 = new _Kojin(識別対象, 就労者, new RString("旧性"), 生年月日, Gender.FEMALE,
-                続柄, JuminJotai.住民, new FlexibleDate("00000000"), new FlexibleDate("00000000"),
-                new RString("異動事由コード"), JuminShubetsu.日本人, new RString("家族番号"), 1);
+//        IKojin 個人情報 = new _Kojin(識別対象, 就労者, new RString("旧性"), 生年月日, Gender.FEMALE,
+//                続柄, JuminJotai.住民, new FlexibleDate("00000000"), new FlexibleDate("00000000"),
+//                new RString("異動事由コード"), JuminShubetsu.日本人, new RString("家族番号"), 1);
+        IKojin 個人情報 = mock(IKojin.class);
 //        KaigoIryoKikan 主治医医療機関 = mock(KaigoIryoKikan.class);
 //        IDoctor 主治医 = mock(IDoctor.class);
         KaigoIryoKikan 主治医医療機関 = null;
