@@ -38,7 +38,7 @@ public class NinteichosaKekkaTorikomiTaishoshaDac implements INinteichosaKekkaTo
                 .table(DbT5005NinteiShinchokuJoho.class)
                 .leftJoin(DbT5001NinteiShinseiJoho.class, using(DbT5005NinteiShinchokuJoho.shinseishoKanriNo))
                 .where(and(lt(YokaigoninteiDateConstants.認定調査依頼未完了年月日, DbT5005NinteiShinchokuJoho.ninteichosaIraiKanryoYMD),
-                eq(YokaigoninteiDateConstants.認定調査未完了年月日, DbT5005NinteiShinchokuJoho.ninteichosaKanryoYMD)))
+                                eq(YokaigoninteiDateConstants.認定調査未完了年月日, DbT5005NinteiShinchokuJoho.ninteichosaKanryoYMD)))
                 .toList(NinteichosaKekkaTorikomiTaishoshaEntity.class);
 
         return (!list.isEmpty()) ? list : Collections.EMPTY_LIST;
@@ -52,23 +52,8 @@ public class NinteichosaKekkaTorikomiTaishoshaDac implements INinteichosaKekkaTo
                 .table(DbT5005NinteiShinchokuJoho.class)
                 .leftJoin(DbT5001NinteiShinseiJoho.class, using(DbT5005NinteiShinchokuJoho.shinseishoKanriNo))
                 .where(and(lt(YokaigoninteiDateConstants.認定調査依頼未完了年月日, DbT5005NinteiShinchokuJoho.ninteichosaIraiKanryoYMD),
-                eq(YokaigoninteiDateConstants.認定調査未完了年月日, DbT5005NinteiShinchokuJoho.ninteichosaKanryoYMD),
-                eq(DbT5001NinteiShinseiJoho.shichosonCode, 市町村コード)))
-                .toList(NinteichosaKekkaTorikomiTaishoshaEntity.class);
-
-        return (!list.isEmpty()) ? list : Collections.EMPTY_LIST;
-    }
-
-    @Override
-    public List<NinteichosaKekkaTorikomiTaishoshaEntity> select支所コード(RString 支所コード) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-
-        List<NinteichosaKekkaTorikomiTaishoshaEntity> list = accessor.select()
-                .table(DbT5005NinteiShinchokuJoho.class)
-                .leftJoin(DbT5001NinteiShinseiJoho.class, using(DbT5005NinteiShinchokuJoho.shinseishoKanriNo))
-                .where(and(lt(YokaigoninteiDateConstants.認定調査依頼未完了年月日, DbT5005NinteiShinchokuJoho.ninteichosaIraiKanryoYMD),
-                eq(YokaigoninteiDateConstants.認定調査未完了年月日, DbT5005NinteiShinchokuJoho.ninteichosaKanryoYMD),
-                eq(DbT5001NinteiShinseiJoho.shishoCode, 支所コード)))
+                                eq(YokaigoninteiDateConstants.認定調査未完了年月日, DbT5005NinteiShinchokuJoho.ninteichosaKanryoYMD),
+                                eq(DbT5001NinteiShinseiJoho.shichosonCode, 市町村コード)))
                 .toList(NinteichosaKekkaTorikomiTaishoshaEntity.class);
 
         return (!list.isEmpty()) ? list : Collections.EMPTY_LIST;
@@ -82,9 +67,9 @@ public class NinteichosaKekkaTorikomiTaishoshaDac implements INinteichosaKekkaTo
                 .table(DbT5005NinteiShinchokuJoho.class)
                 .leftJoin(DbT5001NinteiShinseiJoho.class, using(DbT5005NinteiShinchokuJoho.shinseishoKanriNo))
                 .where(and(lt(YokaigoninteiDateConstants.認定調査依頼未完了年月日, DbT5005NinteiShinchokuJoho.ninteichosaIraiKanryoYMD),
-                eq(YokaigoninteiDateConstants.認定調査未完了年月日, DbT5005NinteiShinchokuJoho.ninteichosaKanryoYMD),
-                eq(DbT5001NinteiShinseiJoho.shichosonCode, 市町村コード),
-                eq(DbT5001NinteiShinseiJoho.shishoCode, 支所コード)))
+                                eq(YokaigoninteiDateConstants.認定調査未完了年月日, DbT5005NinteiShinchokuJoho.ninteichosaKanryoYMD),
+                                eq(DbT5001NinteiShinseiJoho.shichosonCode, 市町村コード),
+                                eq(DbT5001NinteiShinseiJoho.shishoCode, 支所コード)))
                 .toList(NinteichosaKekkaTorikomiTaishoshaEntity.class);
 
         return (!list.isEmpty()) ? list : Collections.EMPTY_LIST;

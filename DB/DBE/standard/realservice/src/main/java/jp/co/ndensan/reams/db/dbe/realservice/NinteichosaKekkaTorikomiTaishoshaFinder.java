@@ -78,17 +78,6 @@ public class NinteichosaKekkaTorikomiTaishoshaFinder {
     }
 
     /**
-     * 認定調査結果取込対象者を支所コードを指定して全件取得します。
-     *
-     * @param 支所コード 支所コード
-     * @return 認定調査結果取込対象者全件
-     */
-    public List<NinteichosaKekkaTorikomiTaishosha> get認定調査結果取込対象者全件(RString 支所コード) {
-        List<NinteichosaKekkaTorikomiTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select支所コード(支所コード);
-        return create認定調査結果取込対象者List(torikomiTaishoshaEntityList);
-    }
-
-    /**
      * 認定調査結果取込対象者を、市町村コードと支所コードを指定して全件取得します。
      *
      * @param 市町村コード 市町村コード

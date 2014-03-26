@@ -36,15 +36,6 @@ public interface INinteichosaKekkaTorikomiTaishoshaDac {
     List<NinteichosaKekkaTorikomiTaishoshaEntity> select市町村コード(ShichosonCode 市町村コード);
 
     /**
-     * 支所コードを元に、認定調査結果取込対象者を取得します。
-     *
-     * @param 支所コード 支所コード
-     * @return 認定調査結果取込対象者のリスト
-     */
-    @Transaction
-    List<NinteichosaKekkaTorikomiTaishoshaEntity> select支所コード(RString 支所コード);
-
-    /**
      * 市町村コードと支所コードを元に、認定調査結果取込対象者を取得します。
      *
      * @param 市町村コード 市町村コード

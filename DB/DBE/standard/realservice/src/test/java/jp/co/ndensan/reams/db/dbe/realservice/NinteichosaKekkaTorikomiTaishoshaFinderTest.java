@@ -64,17 +64,6 @@ public class NinteichosaKekkaTorikomiTaishoshaFinderTest extends DbeTestBase {
         }
     }
 
-    public static class get認定調査結果取込対象者全件_支所コード extends DbeTestBase {
-
-        @Test
-        public void 認定調査結果取込対象者の取得条件に一致するデータが登録されていないとき_COLLECTIONS_EMPTYを返す() {
-            when(torikomiTaishoshaDac.select支所コード(支所コード)).thenReturn(Collections.EMPTY_LIST);
-            sut = new NinteichosaKekkaTorikomiTaishoshaFinder(chosaIraiJohoDac, torikomiTaishoshaDac);
-            resultList = sut.get認定調査結果取込対象者全件(支所コード);
-            assertThat(resultList, is(Collections.EMPTY_LIST));
-        }
-    }
-
     public static class get認定調査結果取込対象者全件_市町村コード_支所コード extends DbeTestBase {
 
         @Test

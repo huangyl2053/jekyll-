@@ -110,36 +110,6 @@ public class NinteichosaKekkaTorikomiTaishoshaDacTest extends DbeTestDacBase {
 //        }
 //    }
 //
-//    public static class select支所コード extends DbeTestDacBase {
-//
-//        @Test
-//        public void select支所コード_対象者0件の場合() {
-//            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0001, ChosaShinchoku.未調査));
-//            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0001, 登録あり市町村コード, 登録あり支所コード));
-//            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0002, ChosaShinchoku.調査依頼済完了済));
-//            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0002, 登録あり市町村コード, 登録あり支所コード));
-//            assertThat(sut.select支所コード(登録あり支所コード).size(), is(0));
-//        }
-//
-//        @Test
-//        public void select支所コード_対象者1件_支所コード一致0件の場合() {
-//            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0001, ChosaShinchoku.未調査));
-//            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0001, 登録あり市町村コード, 登録あり支所コード));
-//            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0002, ChosaShinchoku.調査依頼済未完了));
-//            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0002, 登録あり市町村コード, 登録あり支所コード));
-//            assertThat(sut.select支所コード(登録なし支所コード).size(), is(0));
-//        }
-//
-//        @Test
-//        public void select支所コード_対象者2件_支所コード一致1件の場合() {
-//            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0001, ChosaShinchoku.調査依頼済未完了));
-//            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0001, 登録なし市町村コード, 登録なし支所コード));
-//            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0001, ChosaShinchoku.調査依頼済未完了));
-//            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0002, 登録あり市町村コード, 登録あり支所コード));
-//            assertThat(sut.select支所コード(登録あり支所コード).size(), is(1));
-//        }
-//    }
-//
 //    public static class select市町村コード及び支所コード extends DbeTestDacBase {
 //
 //        @Test
