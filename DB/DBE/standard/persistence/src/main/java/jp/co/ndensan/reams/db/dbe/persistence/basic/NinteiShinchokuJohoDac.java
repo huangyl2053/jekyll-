@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
 
 /**
- * 要介護認定進捗情報を管理するクラスです。
+ * 要介護認定進捗情報のデータアクセスクラスです。
  *
  * @author N8187 久保田 英男
  */
@@ -29,7 +29,7 @@ public class NinteiShinchokuJohoDac implements INinteiShinchokuJohoDac {
         return accessor
                 .select()
                 .table(DbT5005NinteiShinchokuJoho.class)
-                .where(eq(DbT5005NinteiShinchokuJoho.ninteichosaIraiKanryoYMD, YokaigoninteiDateConstants.認定調査未完了年月日))
+                .where(eq(DbT5005NinteiShinchokuJoho.ninteichosaKanryoYMD, YokaigoninteiDateConstants.認定調査未完了年月日))
                 .toList(DbT5005NinteiShinchokuJohoEntity.class);
     }
 
@@ -41,5 +41,11 @@ public class NinteiShinchokuJohoDac implements INinteiShinchokuJohoDac {
                 .table(DbT5005NinteiShinchokuJoho.class)
                 .where(eq(DbT5005NinteiShinchokuJoho.ikenshoSakuseiIraiKanryoYMD, YokaigoninteiDateConstants.主治医意見書作成依頼未完了年月日))
                 .toList(DbT5005NinteiShinchokuJohoEntity.class);
+    }
+
+    @Override
+    public int update(DbT5005NinteiShinchokuJohoEntity entity) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.update(entity).execute();
     }
 }
