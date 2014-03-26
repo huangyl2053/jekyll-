@@ -156,11 +156,11 @@ public class NinteichosahyoRegulationOf2006 implements INinteichosahyoRegulation
 
     @Override
     public Map<NinteichosaItemKubunOfGaikyo, INinteichosaItem> getサービス状況調査定義() {
-        return サービス状況調査定義;
+        return new EnumMap<>(サービス状況調査定義);
     }
 
     @Override
     public Map<NinteichosaItemKubunOfKihon, INinteichosaItem> get基本調査定義() {
-        return 基本調査定義;
+        return new EnumMap<>(基本調査定義);
     }
 }

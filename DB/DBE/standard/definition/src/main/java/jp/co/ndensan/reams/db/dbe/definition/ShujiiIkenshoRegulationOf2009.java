@@ -189,6 +189,6 @@ public class ShujiiIkenshoRegulationOf2009 implements IShujiiIkenshoRegulation {
 
     @Override
     public Map<ShujiiIkenshoItemKubun, IShujiiIkenshoItem> get意見書定義() {
-        return 意見書定義;
+        return new EnumMap<>(意見書定義);
     }
 }
