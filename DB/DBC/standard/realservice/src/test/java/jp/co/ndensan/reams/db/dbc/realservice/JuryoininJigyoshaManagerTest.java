@@ -10,7 +10,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.JuryoininJigyosha;
 import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
-import jp.co.ndensan.reams.db.dbc.entity.helper.JuryoininJigyoshaMock;
+import jp.co.ndensan.reams.db.dbc.business.helper.JuryoininJigyoshaMock;
+import jp.co.ndensan.reams.db.dbc.entity.helper.JuryoininJigyoshaEntityMock;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.JuryoininJigyoshaDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
@@ -113,7 +114,7 @@ public class JuryoininJigyoshaManagerTest extends DbcTestBase {
     }
 
     private static DbT3077JuryoininKeiyakuJigyoshaEntity createEntity(int flg) {
-        return flg == 0 ? null : JuryoininJigyoshaMock.create受領委任事業者Entity(契約番号, 送付先部署);
+        return flg == 0 ? null : JuryoininJigyoshaEntityMock.create受領委任事業者Entity(契約番号, 送付先部署);
     }
 
     private static KeiyakuNo createKeiyakuNo(RString no) {

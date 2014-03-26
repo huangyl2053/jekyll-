@@ -12,7 +12,8 @@ import jp.co.ndensan.reams.db.dbc.business.JuryoininJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.JuryoininJigyoshaList;
 import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
-import jp.co.ndensan.reams.db.dbc.entity.helper.JuryoininJigyoshaMock;
+import jp.co.ndensan.reams.db.dbc.business.helper.JuryoininJigyoshaMock;
+import jp.co.ndensan.reams.db.dbc.entity.helper.JuryoininJigyoshaEntityMock;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IKoza;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
@@ -38,7 +39,7 @@ public class JuryoininJigyoshaMapperTest extends DbcTestBase {
     public static class Test_to受領委任事業者 extends DbcTestBase {
 
         private final DbT3077JuryoininKeiyakuJigyoshaEntity JuryoininJigyoshaEntity
-                = JuryoininJigyoshaMock.create受領委任事業者Entity(契約番号, 送付先部署);
+                = JuryoininJigyoshaEntityMock.create受領委任事業者Entity(契約番号, 送付先部署);
         private JuryoininJigyosha sut;
 
         @Before
@@ -179,7 +180,7 @@ public class JuryoininJigyoshaMapperTest extends DbcTestBase {
         private List<DbT3077JuryoininKeiyakuJigyoshaEntity> create受領委任事業者EntityList(int listSize) {
             List<DbT3077JuryoininKeiyakuJigyoshaEntity> list = new ArrayList<>();
             for (int i = 0; i < listSize; i++) {
-                list.add(JuryoininJigyoshaMock.create受領委任事業者Entity(契約番号, 送付先部署));
+                list.add(JuryoininJigyoshaEntityMock.create受領委任事業者Entity(契約番号, 送付先部署));
             }
             return list;
         }

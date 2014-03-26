@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.entity.helper;
+package jp.co.ndensan.reams.db.dbc.business.helper;
 
 import jp.co.ndensan.reams.db.dbc.business.JuryoininJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.KeiyakuJigyosha;
@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShokanbaraiKyufuKeiy
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.TokuteiFukushiYoguHanbaiKeiyakuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ToriatsukaiKakuyakushoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
-import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IKinyuKikan;
 import jp.co.ndensan.reams.ur.urz.business.IKinyuKikanBranch;
@@ -44,7 +43,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
-import static org.mockito.Mockito.mock;
 
 /**
  * 受領委任事業者のテストヘルパーです。
@@ -53,40 +51,13 @@ import static org.mockito.Mockito.mock;
  */
 public class JuryoininJigyoshaMock {
 
-    public static DbT3077JuryoininKeiyakuJigyoshaEntity create受領委任事業者Entity(
-            KeiyakuNo 契約番号, RString 送付先部署) {
-
-        DbT3077JuryoininKeiyakuJigyoshaEntity entity = new DbT3077JuryoininKeiyakuJigyoshaEntity();
-        entity.setJigyoshaKeiyakuNo(契約番号.value());
-        entity.setKaishiYMD(new FlexibleDate("20110303"));
-        entity.setShoriTimestamp(RDateTime.of(2014, 1, 10, 11, 12));
-        entity.setShuryoYMD(new FlexibleDate("20130303"));
-        entity.setTodokedeYMD(new FlexibleDate("20110203"));
-        entity.setTodokedeAddress(new RString("長野市高田"));
-        entity.setTodokedeJigyoshaName(new RString("ひまわり"));
-        entity.setTodokedeDaihyoshaName(new RString("田中良夫"));
-        entity.setShikibetsuCode(new ShikibetsuCode(new RString("0000000001")));
-        entity.setJigyoshaFaxNo(new TelNo(new RString("0262222222")));
-        entity.setKeiyakuTorokuYMD(new FlexibleDate("20110208"));
-        entity.setSofusakiBusho(送付先部署);
-        entity.setEigyoKeitai(EigyoKeitai.法人.getCode());
-        entity.setJutakuKaishuKeiyakuUmu(true);
-        entity.setTokuteiFukushiYoguHanbaiKeiyakuUmu(true);
-        entity.setShokanbaraiKyufuKeiyakuUmu(true);
-        entity.setKogakuKyufuKeiyakuUmu(true);
-        entity.setKeiyakuJigyoshaNo(new JigyoshaNo(new RString("1234567890")));
-        entity.setToriatsukaiKakuyakushoUmu(true);
-
-        return entity;
-    }
-
     public static JuryoininJigyosha create受領委任事業者() {
         return new JuryoininJigyosha(
                 new KeiyakuNo(new RString("1234567890")),
                 new Range(new FlexibleDate("20110303"), new FlexibleDate("20130303")),
                 RDateTime.of(2014, 1, 10, 11, 12),
                 new FlexibleDate("20110203"),
-                mock(Todokedesha.class),
+                create届出者(),
                 new FlexibleDate("20110208"),
                 create契約事業者(),
                 JutakuKaishuKeiyakuKubun.契約有り,
@@ -94,6 +65,13 @@ public class JuryoininJigyoshaMock {
                 ShokanbaraiKyufuKeiyakuKubun.契約無し,
                 KogakuKyufuKeiyakuKubun.契約無し,
                 ToriatsukaiKakuyakushoKubun.確約書有り);
+    }
+
+    private static Todokedesha create届出者() {
+        return new Todokedesha(
+                new RString("住所"),
+                new RString("事業者名称"),
+                new RString("代表者氏名"));
     }
 
     private static KeiyakuJigyosha create契約事業者() {
@@ -119,12 +97,12 @@ public class JuryoininJigyoshaMock {
     private static IShikibetsuTaisho createShikibetsuTaisho() {
         return new _ShikibetsuTaisho(
                 new ShikibetsuCode(new RString("0000000001")),
-                null, 1, null, null, null, null, null, null, null, null,
+                null, 1, true, null, null, null, null, null, null, null,
                 null, null, null, null, 1);
     }
 
     public static IKoza createKoza() {
-        return new _Koza(new GyomuCode(new RString("URZ")),
+        return new _Koza(new GyomuCode(new RString("DBC")),
                 new KamokuCode(new RString("01")),
                 new KinyuKikanShitenCode(new RString("101")),
                 new KinyuKikanCode(new RString("100")),

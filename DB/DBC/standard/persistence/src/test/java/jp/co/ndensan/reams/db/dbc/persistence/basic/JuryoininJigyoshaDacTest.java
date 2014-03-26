@@ -7,10 +7,9 @@ package jp.co.ndensan.reams.db.dbc.persistence.basic;
 
 import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
-import jp.co.ndensan.reams.db.dbc.entity.helper.JuryoininJigyoshaMock;
+import jp.co.ndensan.reams.db.dbc.entity.helper.JuryoininJigyoshaEntityMock;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -41,14 +40,14 @@ public class JuryoininJigyoshaDacTest extends DbcTestDacBase {
 
         @Test
         public void 新規にデータをinsertできる() {
-            int result = sut.insert(JuryoininJigyoshaMock.create受領委任事業者Entity(契約番号, 送付先部署));
+            int result = sut.insert(JuryoininJigyoshaEntityMock.create受領委任事業者Entity(契約番号, 送付先部署));
             assertThat(result, is(成功));
         }
 
         @Test
         public void 追記型は同じデータがある時でもinsertできる() {
-            sut.insert(JuryoininJigyoshaMock.create受領委任事業者Entity(契約番号, 送付先部署));
-            int result = sut.insert(JuryoininJigyoshaMock.create受領委任事業者Entity(契約番号, 送付先部署));
+            sut.insert(JuryoininJigyoshaEntityMock.create受領委任事業者Entity(契約番号, 送付先部署));
+            int result = sut.insert(JuryoininJigyoshaEntityMock.create受領委任事業者Entity(契約番号, 送付先部署));
             assertThat(result, is(成功));
         }
     }
@@ -76,22 +75,22 @@ public class JuryoininJigyoshaDacTest extends DbcTestDacBase {
         @Test
         public void 論理削除したいデータがある時_deleteできる() {
             initializeEntityData();
-            int result = sut.delete(JuryoininJigyoshaMock.create受領委任事業者Entity(契約番号, 送付先部署));
+            int result = sut.delete(JuryoininJigyoshaEntityMock.create受領委任事業者Entity(契約番号, 送付先部署));
             assertThat(result, is(成功));
         }
 
         @Test
         public void 論理削除したデータは取得できない() {
             initializeEntityData();
-            sut.delete(JuryoininJigyoshaMock.create受領委任事業者Entity(契約番号, 送付先部署));
+            sut.delete(JuryoininJigyoshaEntityMock.create受領委任事業者Entity(契約番号, 送付先部署));
             DbT3077JuryoininKeiyakuJigyoshaEntity result = sut.select(契約番号);
             assertThat(result, nullValue());
         }
     }
 
     private static void initializeEntityData() {
-        sut.insert(JuryoininJigyoshaMock.create受領委任事業者Entity(契約番号, new RString("１課")));
-        sut.insert(JuryoininJigyoshaMock.create受領委任事業者Entity(契約番号, new RString("２課")));
-        sut.insert(JuryoininJigyoshaMock.create受領委任事業者Entity(契約番号, new RString("３課")));
+        sut.insert(JuryoininJigyoshaEntityMock.create受領委任事業者Entity(契約番号, new RString("１課")));
+        sut.insert(JuryoininJigyoshaEntityMock.create受領委任事業者Entity(契約番号, new RString("２課")));
+        sut.insert(JuryoininJigyoshaEntityMock.create受領委任事業者Entity(契約番号, new RString("３課")));
     }
 }
