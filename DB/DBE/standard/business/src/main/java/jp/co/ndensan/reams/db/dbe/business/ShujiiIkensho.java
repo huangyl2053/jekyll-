@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemGroup;
@@ -80,7 +81,7 @@ public class ShujiiIkensho<E extends IShujiiIkenshoItemKubun, T extends IShujiiI
      * @return 意見書項目リスト
      */
     public List<T> get意見書項目ListAll() {
-        return (List) Arrays.asList(意見書定義.values().toArray());
+        return Collections.unmodifiableList((List) Arrays.asList(意見書定義.values().toArray()));
     }
 
     /**
