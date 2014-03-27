@@ -17,10 +17,10 @@ import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ToriatsukaiKakuyakus
 import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IKinyuKikan;
-import jp.co.ndensan.reams.ur.urz.business.IKinyuKikanBranch;
+import jp.co.ndensan.reams.ur.urz.business.IKinyuKikanShiten;
 import jp.co.ndensan.reams.ur.urz.business.IKoza;
 import jp.co.ndensan.reams.ur.urz.business._KinyuKikan;
-import jp.co.ndensan.reams.ur.urz.business._KinyuKikanBranch;
+import jp.co.ndensan.reams.ur.urz.business._KinyuKikanShiten;
 import jp.co.ndensan.reams.ur.urz.business._Koza;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
@@ -28,6 +28,9 @@ import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._Hojin;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._ShikibetsuTaisho;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.YokinShubetsu;
+import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.HojinKeitai;
+import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.HojinKeitaiFuyoKubun;
+import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.HojinKeitaiRyakushoKubun;
 import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.NinkaChienDantai;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -86,12 +89,13 @@ public class JuryoininJigyoshaMock {
 
     public static IHojin createHojin() {
         IShikibetsuTaisho 識別対象 = createShikibetsuTaisho();
-        RString 法人形態 = new RString("有限会社");
-        IKojin 法人代表者 = null;
+        AtenaMeisho 法人代表者氏名 = new AtenaMeisho(new RString("法人代表者氏名"));
         NinkaChienDantai 認可地縁団体 = null;
         FlexibleDate 認可地縁団体認可年月日 = new FlexibleDate("20131109");
 
-        return new _Hojin(識別対象, 法人形態, 法人代表者, 認可地縁団体, 認可地縁団体認可年月日);
+        return new _Hojin(識別対象, HojinKeitai.有限会社,
+                HojinKeitaiFuyoKubun.付与しない, HojinKeitaiRyakushoKubun.正式名称,
+                法人代表者氏名, 認可地縁団体, 認可地縁団体認可年月日);
     }
 
     private static IShikibetsuTaisho createShikibetsuTaisho() {
@@ -131,8 +135,8 @@ public class JuryoininJigyoshaMock {
                 new Range(new RDate("2014/01/10"), new RDate("2014/01/20")), 1);
     }
 
-    private static IKinyuKikanBranch create金融機関支店() {
-        return new _KinyuKikanBranch(new RString("0123"), new RString("支店コード"), new RString("支店名称"), new RString("金融機関カナ名称"),
+    private static IKinyuKikanShiten create金融機関支店() {
+        return new _KinyuKikanShiten(new RString("0123"), new RString("支店コード"), new RString("支店名称"), new RString("金融機関カナ名称"),
                 new Range(new RDate("2014/01/10"), new RDate("2014/01/20")), 1);
     }
 }
