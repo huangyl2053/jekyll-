@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.business;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.EigyoKeitai;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.JutakuKaishuKeiyakuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.KogakuKyufuKeiyakuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShokanbaraiKyufuKeiyakuKubun;
@@ -17,7 +16,6 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 
 /**
@@ -70,7 +68,7 @@ public class JuryoininJigyosha {
         this.届出年月日 = 届出年月日;
         this.届出者 = 届出者;
         this.契約登録年月日 = 契約登録年月日;
-        this.契約事業者 = 契約事業者;
+        this.契約事業者 = requireNonNull(契約事業者, Messages.E00001.replace("契約事業者").getMessage());
         this.住宅改修契約有無 = 住宅改修契約有無;
         this.特定福祉用具販売契約有無 = 特定福祉用具販売契約有無;
         this.償還払給付契約有無 = 償還払給付契約有無;
@@ -165,7 +163,7 @@ public class JuryoininJigyosha {
      * @return 住宅改修契約ならtrue、異なればfalse
      */
     public boolean has住宅改修契約() {
-        return 住宅改修契約有無.is契約有り();
+        return 住宅改修契約有無 == JutakuKaishuKeiyakuKubun.契約有り;
     }
 
     /**
@@ -183,7 +181,7 @@ public class JuryoininJigyosha {
      * @return 特定福祉用具販売契約ならtrue、異なればfalse
      */
     public boolean has特定福祉用具販売契約() {
-        return 特定福祉用具販売契約有無.is契約有り();
+        return 特定福祉用具販売契約有無 == TokuteiFukushiYoguHanbaiKeiyakuKubun.契約有り;
     }
 
     /**
@@ -201,7 +199,7 @@ public class JuryoininJigyosha {
      * @return 償還払給付契約ならtrue、異なればfalse
      */
     public boolean has償還払給付契約() {
-        return 償還払給付契約有無.is契約有り();
+        return 償還払給付契約有無 == ShokanbaraiKyufuKeiyakuKubun.契約有り;
     }
 
     /**
@@ -219,7 +217,7 @@ public class JuryoininJigyosha {
      * @return 高額給付契約ならtrue、異なればfalse
      */
     public boolean has高額給付契約() {
-        return 高額給付契約有無.is契約有り();
+        return 高額給付契約有無 == KogakuKyufuKeiyakuKubun.契約有り;
     }
 
     /**
@@ -237,6 +235,6 @@ public class JuryoininJigyosha {
      * @return 取扱確約書があればtrue、なければfalse
      */
     public boolean has取扱確約書() {
-        return 取扱確約書有無.is確約書有り();
+        return 取扱確約書有無 == ToriatsukaiKakuyakushoKubun.確約書有り;
     }
 }
