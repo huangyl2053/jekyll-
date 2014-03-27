@@ -157,4 +157,4 @@ ik_kansenshoUmu,bpchar,RString,,,,,A
 ik_kansenshoShojo,varchar,RString,,,,,A
 ik_tokkiJiko,text,RString,,,,,A
 ik_tokkiJikoImage,bytea,byte[],,,,,A
-ik_kangoSyokuiHomonUmu,bpchar,RString,,,,,A
+ik_kangoShokuiHomonUmu,bpchar,RString,,,,,A

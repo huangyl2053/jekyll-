@@ -1555,8 +1555,8 @@ public class ShujiiIkenshoMapperTest {
         }
 
         @Test
-        public void 看護職員の訪問による相談_支援の設定がある時_toShujiiIkenshoEntity_getIk_kangoSyokuiHomonUmuは_設定値を返す() {
-            assertThat(toShujiiIkenshoEntity().getDbT5013ShujiiIkenshoShosaiJohoEntity().getIk_kangoSyokuiHomonUmu(), is(Checked.有り.getCode()));
+        public void 看護職員の訪問による相談_支援の設定がある時_toShujiiIkenshoEntity_getIk_kangoShokuiHomonUmuは_設定値を返す() {
+            assertThat(toShujiiIkenshoEntity().getDbT5013ShujiiIkenshoShosaiJohoEntity().getIk_kangoShokuiHomonUmu(), is(Checked.有り.getCode()));
         }
     }
 

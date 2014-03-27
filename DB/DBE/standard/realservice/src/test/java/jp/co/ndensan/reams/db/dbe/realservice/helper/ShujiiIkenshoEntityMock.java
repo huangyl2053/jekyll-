@@ -256,7 +256,7 @@ public class ShujiiIkenshoEntityMock {
         entity.setIk_kansenshoUmu(NashiAri2.無.getCode());
         entity.setIk_kansenshoShojo(new RString("感染症内容"));
         entity.setIk_tokkiJiko(new RString("特記事項"));
-        entity.setIk_kangoSyokuiHomonUmu(Checked.有り.getCode());
+        entity.setIk_kangoShokuiHomonUmu(Checked.有り.getCode());
         return entity;
     }
 }

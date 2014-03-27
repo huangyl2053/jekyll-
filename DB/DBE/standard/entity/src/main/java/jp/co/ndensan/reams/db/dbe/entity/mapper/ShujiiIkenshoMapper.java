@@ -224,7 +224,7 @@ public final class ShujiiIkenshoMapper {
         entity.setIk_kansenshoUmu(converter.get意見書結果ByStringValue(ShujiiIkenshoItemKubun.感染症));
         entity.setIk_kansenshoShojo(converter.get意見書結果ByStringValue(ShujiiIkenshoItemKubun.感染症内容));
         entity.setIk_tokkiJiko(converter.get意見書結果ByStringValue(ShujiiIkenshoItemKubun.特記事項));
-        entity.setIk_kangoSyokuiHomonUmu(converter.get意見書結果ByStringValue(ShujiiIkenshoItemKubun.看護職員の訪問による相談_支援));
+        entity.setIk_kangoShokuiHomonUmu(converter.get意見書結果ByStringValue(ShujiiIkenshoItemKubun.看護職員の訪問による相談_支援));
         return entity;
     }
 
@@ -387,7 +387,7 @@ public final class ShujiiIkenshoMapper {
         result.set意見書項目(converter.create意見書結果(ShujiiIkenshoItemKubun.感染症, entity.getIk_kansenshoUmu()));
         result.set意見書項目(converter.create意見書結果(ShujiiIkenshoItemKubun.感染症内容, entity.getIk_kansenshoShojo()));
         result.set意見書項目(converter.create意見書結果(ShujiiIkenshoItemKubun.特記事項, entity.getIk_tokkiJiko()));
-        result.set意見書項目(converter.create意見書結果(ShujiiIkenshoItemKubun.看護職員の訪問による相談_支援, entity.getIk_kangoSyokuiHomonUmu()));
+        result.set意見書項目(converter.create意見書結果(ShujiiIkenshoItemKubun.看護職員の訪問による相談_支援, entity.getIk_kangoShokuiHomonUmu()));
         return new ShujiiIkenshoDetails(
                 entity.getShinseishoKanriNo(), new ShujiiIkenshoRirekiNo(entity.getIkenshoIraiRirekiNo()), koroshoIFKubun, result);
     }

@@ -177,7 +177,7 @@ public enum DbT5013ShujiiIkenshoShosaiJoho implements IColumnDefinition {
     ik_kansenshoShojo(80, 0),
     ik_tokkiJiko(2147483647, 0),
     ik_tokkiJikoImage(2147483647, 0),
-    ik_kangoSyokuiHomonUmu(1, 0);
+    ik_kangoShokuiHomonUmu(1, 0);
     private final int maxLength;
     private final int scale;
 

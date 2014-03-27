@@ -189,7 +189,7 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
     private RString ik_kansenshoShojo;
     private RString ik_tokkiJiko;
     private byte[] ik_tokkiJikoImage;
-    private RString ik_kangoSyokuiHomonUmu;
+    private RString ik_kangoShokuiHomonUmu;
 
     /**
      * getInsertDantaiCd
@@ -3099,21 +3099,21 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
     }
 
     /**
-     * getIk_kangoSyokuiHomonUmu
+     * getIk_kangoShokuiHomonUmu
      *
-     * @return ik_kangoSyokuiHomonUmu
+     * @return ik_kangoShokuiHomonUmu
      */
-    public RString getIk_kangoSyokuiHomonUmu() {
-        return ik_kangoSyokuiHomonUmu;
+    public RString getIk_kangoShokuiHomonUmu() {
+        return ik_kangoShokuiHomonUmu;
     }
 
     /**
-     * setIk_kangoSyokuiHomonUmu
+     * setIk_kangoShokuiHomonUmu
      *
-     * @param ik_kangoSyokuiHomonUmu ik_kangoSyokuiHomonUmu
+     * @param ik_kangoShokuiHomonUmu ik_kangoShokuiHomonUmu
      */
-    public void setIk_kangoSyokuiHomonUmu(RString ik_kangoSyokuiHomonUmu) {
-        this.ik_kangoSyokuiHomonUmu = ik_kangoSyokuiHomonUmu;
+    public void setIk_kangoShokuiHomonUmu(RString ik_kangoShokuiHomonUmu) {
+        this.ik_kangoShokuiHomonUmu = ik_kangoShokuiHomonUmu;
     }
 // </editor-fold>
 }
