@@ -26,6 +26,11 @@ public class KaigoHihokenshaNoTest extends DbzTestBase {
         public void コンストラクタは_引数がnullのとき_NullPointerExceptionをスローする() {
             KaigoHihokenshaNo sut = new KaigoHihokenshaNo((RString) null);
         }
+
+        @Test(expected = IllegalArgumentException.class)
+        public void コンストラクタは_引数が10桁でないとき_IllegalArgumentExceptionをスローする() {
+            KaigoHihokenshaNo sut = new KaigoHihokenshaNo(new RString(""));
+        }
     }
 
     public static class CompareTo extends DbzTestBase {

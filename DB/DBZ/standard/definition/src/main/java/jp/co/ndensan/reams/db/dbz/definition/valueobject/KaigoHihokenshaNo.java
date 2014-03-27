@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  */
 public class KaigoHihokenshaNo implements IValueObject<RString>, Comparable<KaigoHihokenshaNo>, IDbColumnMappable {
 
-    // private static final int PERMISSIBLE_LENGTH = 10;
+    private static final int PERMISSIBLE_LENGTH = 10;
     private final RString 被保険者番号;
 
     /**
@@ -31,8 +31,7 @@ public class KaigoHihokenshaNo implements IValueObject<RString>, Comparable<Kaig
      */
     public KaigoHihokenshaNo(RString value) throws NullPointerException, IllegalArgumentException {
         requireNonNull(value, Messages.E00003.replace("value", getClass().getName()).getMessage());
-        // TODO N3327 三浦凌 現在、使用しているテストでは、10桁が意識されていない可能性があるので、コメントアウトとする。バリデーションの方法も後日検討する必要がある。 期限: 2014年中
-        // validate(value);
+        validate(value);
         this.被保険者番号 = value;
     }
 
@@ -98,11 +97,12 @@ public class KaigoHihokenshaNo implements IValueObject<RString>, Comparable<Kaig
         return this.被保険者番号;
     }
 
-//    private void validate(RString value) throws IllegalArgumentException {
-//        if (value.length() != PERMISSIBLE_LENGTH) {
-//            throw new IllegalArgumentException(Messages.E00013.replace("被保険者番号", PERMISSIBLE_LENGTH + "桁").getMessage());
-//        }
-//    }
+    private void validate(RString value) throws IllegalArgumentException {
+        if (value.length() != PERMISSIBLE_LENGTH) {
+            throw new IllegalArgumentException(Messages.E00013.replace("被保険者番号", PERMISSIBLE_LENGTH + "桁").getMessage());
+        }
+    }
+
     private boolean isNull(Object target) {
         return target == null;
     }
