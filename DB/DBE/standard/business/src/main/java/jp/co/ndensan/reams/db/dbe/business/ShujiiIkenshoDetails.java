@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShujiiIkenshoRirekiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import static java.util.Objects.requireNonNull;
@@ -19,7 +19,7 @@ import static java.util.Objects.requireNonNull;
 public class ShujiiIkenshoDetails {
 
     private final ShinseishoKanriNo 申請書管理番号;
-    private final ShujiiIkenshoRirekiNo 意見書履歴番号;
+    private final IkenshosakuseiIraiRirekiNo 意見書履歴番号;
     private final KoroshoIFKubun 厚労省IF識別区分;
     private final ShujiiIkensho<ShujiiIkenshoItemKubun, ShujiiIkenshoItemForResult> 主治医意見書;
 
@@ -33,7 +33,7 @@ public class ShujiiIkenshoDetails {
      */
     public ShujiiIkenshoDetails(
             ShinseishoKanriNo 申請書管理番号,
-            ShujiiIkenshoRirekiNo 意見書履歴番号,
+            IkenshosakuseiIraiRirekiNo 意見書履歴番号,
             KoroshoIFKubun 厚労省IF識別区分,
             ShujiiIkensho<ShujiiIkenshoItemKubun, ShujiiIkenshoItemForResult> 主治医意見書) {
         this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00001.replace("申請書管理番号").getMessage());
@@ -56,7 +56,7 @@ public class ShujiiIkenshoDetails {
      *
      * @return 意見書履歴番号
      */
-    public ShujiiIkenshoRirekiNo get意見書履歴番号() {
+    public IkenshosakuseiIraiRirekiNo get意見書履歴番号() {
         return 意見書履歴番号;
     }
 

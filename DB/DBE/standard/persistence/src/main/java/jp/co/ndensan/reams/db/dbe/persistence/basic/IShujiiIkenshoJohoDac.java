@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShujiiIkenshoRirekiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5012ShujiiIkenshoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
@@ -27,5 +27,5 @@ public interface IShujiiIkenshoJohoDac
      * @return 主治医意見書情報エンティティ
      */
     @Transaction
-    DbT5012ShujiiIkenshoJohoEntity select(ShinseishoKanriNo 申請書管理番号, ShujiiIkenshoRirekiNo 意見書履歴番号);
+    DbT5012ShujiiIkenshoJohoEntity select(ShinseishoKanriNo 申請書管理番号, IkenshosakuseiIraiRirekiNo 意見書履歴番号);
 }

@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemKub
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiKaisu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiryoShubetsu;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShujiiIkenshoRirekiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5012ShujiiIkenshoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5013ShujiiIkenshoShosaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.relate.ShujiiIkenshoEntity;
@@ -232,7 +232,7 @@ public final class ShujiiIkenshoMapper {
         DbT5012ShujiiIkenshoJohoEntity entity = shujiiIkenshoEntity.getDbT5012ShujiiIkenshoJohoEntity();
         return new ShujiiIkenshoBase(
                 entity.getShinseishoKanriNo(),
-                new ShujiiIkenshoRirekiNo(entity.getIkenshoIraiRirekiNo()),
+                new IkenshosakuseiIraiRirekiNo(entity.getIkenshoIraiRirekiNo()),
                 ShujiiIkenshoIraiKubun.toValue(entity.getIkenshoIraiKubun()),
                 kaigoDoctor,
                 entity.getIkenshoJuryoYMD(),
@@ -389,7 +389,7 @@ public final class ShujiiIkenshoMapper {
         result.set意見書項目(converter.create意見書結果(ShujiiIkenshoItemKubun.特記事項, entity.getIk_tokkiJiko()));
         result.set意見書項目(converter.create意見書結果(ShujiiIkenshoItemKubun.看護職員の訪問による相談_支援, entity.getIk_kangoShokuiHomonUmu()));
         return new ShujiiIkenshoDetails(
-                entity.getShinseishoKanriNo(), new ShujiiIkenshoRirekiNo(entity.getIkenshoIraiRirekiNo()), koroshoIFKubun, result);
+                entity.getShinseishoKanriNo(), new IkenshosakuseiIraiRirekiNo(entity.getIkenshoIraiRirekiNo()), koroshoIFKubun, result);
     }
 
     private static IShujiiIkenshoItemGroup[] getShujiiIkenshoItemGroup(KoroshoIFKubun koroshoIFKubun) {

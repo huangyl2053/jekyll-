@@ -4,16 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbe.realservice;
 
-import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoResult;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShujiiIkenshoRirekiNo;
+import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoSakuseiIrai;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.relate.ShujiiIkenshoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.ShujiiIkenshoDac;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.ShujiiIkenshoEntityMock;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.ShujiiIkenshoResultMock;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbe.realservice.helper.ShujiiIkenshoSakuseiIraiMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
@@ -43,12 +41,12 @@ public class ShujiiIkenshoResultManagerTest {
 
         @Test
         public void 意見書結果ありの時_get主治医意見書結果は_該当の意見書結果を返す() {
-            assertThat(createShujiiIkenshoResultManager(AS_意見書結果あり).get主治医意見書結果(createShinseishoKanriNo(), createShujiiIkenshoRirekiNo()).get基本情報().get申請書管理番号().value(), is(new RString("1234567890")));
+            assertThat(createShujiiIkenshoResultManager(AS_意見書結果あり).get主治医意見書結果(createShinseishoKanriNo(), createRirekiNo()).get基本情報().get申請書管理番号().value(), is(new RString("1234567890")));
         }
 
         @Test
         public void 意見書結果なしの時_get主治医意見書結果は_NULLを返す() {
-            assertThat(createShujiiIkenshoResultManager(AS_意見書結果なし).get主治医意見書結果(createShinseishoKanriNo(), createShujiiIkenshoRirekiNo()), nullValue());
+            assertThat(createShujiiIkenshoResultManager(AS_意見書結果なし).get主治医意見書結果(createShinseishoKanriNo(), createRirekiNo()), nullValue());
         }
     }
 
@@ -79,13 +77,13 @@ public class ShujiiIkenshoResultManagerTest {
     }
 
     private static ShujiiIkenshoResultManager createShujiiIkenshoResultManager(boolean flg) {
-        return new ShujiiIkenshoResultManager(createShujiiIkenshoDac(flg), createKaigoDoctorManager());
+        return new ShujiiIkenshoResultManager(createShujiiIkenshoDac(flg), createShujiiIkenshoSakuseiIraiKirokuManager());
     }
 
     private static ShujiiIkenshoDac createShujiiIkenshoDac(boolean flg) {
         ShujiiIkenshoDac dac = mock(ShujiiIkenshoDac.class);
         ShujiiIkenshoEntity entity = createShujiiIkenshoEntity(flg);
-        when(dac.select(any(ShinseishoKanriNo.class), any(ShujiiIkenshoRirekiNo.class))).thenReturn(entity);
+        when(dac.select(any(ShinseishoKanriNo.class), any(IkenshosakuseiIraiRirekiNo.class))).thenReturn(entity);
         when(dac.insertOrUpdate(any(ShujiiIkenshoEntity.class))).thenReturn(flg);
         when(dac.insert(any(ShujiiIkenshoEntity.class))).thenReturn(flg);
         when(dac.update(any(ShujiiIkenshoEntity.class))).thenReturn(flg);
@@ -93,10 +91,10 @@ public class ShujiiIkenshoResultManagerTest {
         return dac;
     }
 
-    private static IKaigoDoctorManager createKaigoDoctorManager() {
-        IKaigoDoctorManager manager = mock(IKaigoDoctorManager.class);
-        KaigoDoctor kaigoDoctor = ShujiiIkenshoResultMock.getSpiedShujiiIkenshoBaseInstance().get主治医();
-        when(manager.get介護医師(any(ShichosonCode.class), any(KaigoIryoKikanCode.class), any(KaigoDoctorCode.class))).thenReturn(kaigoDoctor);
+    private static ShujiiIkenshoSakuseiIraiKirokuManager createShujiiIkenshoSakuseiIraiKirokuManager() {
+        ShujiiIkenshoSakuseiIraiKirokuManager manager = mock(ShujiiIkenshoSakuseiIraiKirokuManager.class);
+        ShujiiIkenshoSakuseiIrai sakuseiIrai = ShujiiIkenshoSakuseiIraiMock.getSpiedInstance();
+        when(manager.get主治医意見書作成依頼情報(any(ShinseishoKanriNo.class), any(IkenshosakuseiIraiRirekiNo.class))).thenReturn(sakuseiIrai);
         return manager;
     }
 
@@ -104,8 +102,8 @@ public class ShujiiIkenshoResultManagerTest {
         return new ShinseishoKanriNo(new RString("1234567890"));
     }
 
-    private static ShujiiIkenshoRirekiNo createShujiiIkenshoRirekiNo() {
-        return new ShujiiIkenshoRirekiNo(0);
+    private static IkenshosakuseiIraiRirekiNo createRirekiNo() {
+        return new IkenshosakuseiIraiRirekiNo(0);
     }
 
     private static ShujiiIkenshoResult createShujiiIkenshoResult() {

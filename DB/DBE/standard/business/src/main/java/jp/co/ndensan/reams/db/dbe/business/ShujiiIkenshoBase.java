@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiKaisu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiryoShubetsu;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShujiiIkenshoRirekiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -21,7 +21,7 @@ import static java.util.Objects.requireNonNull;
 public class ShujiiIkenshoBase {
 
     private final ShinseishoKanriNo 申請書管理番号;
-    private final ShujiiIkenshoRirekiNo 意見書履歴番号;
+    private final IkenshosakuseiIraiRirekiNo 意見書履歴番号;
     private final ShujiiIkenshoIraiKubun 意見書依頼区分;
     private final KaigoDoctor 主治医;
     private final FlexibleDate 意見書受領年月日;
@@ -47,7 +47,7 @@ public class ShujiiIkenshoBase {
      */
     public ShujiiIkenshoBase(
             ShinseishoKanriNo 申請書管理番号,
-            ShujiiIkenshoRirekiNo 意見書履歴番号,
+            IkenshosakuseiIraiRirekiNo 意見書履歴番号,
             ShujiiIkenshoIraiKubun 意見書依頼区分,
             KaigoDoctor 主治医,
             FlexibleDate 意見書受領年月日,
@@ -82,7 +82,7 @@ public class ShujiiIkenshoBase {
      *
      * @return 意見書履歴番号
      */
-    public ShujiiIkenshoRirekiNo get意見書履歴番号() {
+    public IkenshosakuseiIraiRirekiNo get意見書履歴番号() {
         return 意見書履歴番号;
     }
 

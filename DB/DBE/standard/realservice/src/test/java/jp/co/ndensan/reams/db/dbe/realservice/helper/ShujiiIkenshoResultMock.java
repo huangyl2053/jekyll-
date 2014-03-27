@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakusei
 import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ShujiiIkenshoItem;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShujiiIkenshoRirekiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
@@ -84,7 +84,7 @@ public class ShujiiIkenshoResultMock {
     public static ShujiiIkenshoBase getSpiedShujiiIkenshoBaseInstance() {
         return spy(new ShujiiIkenshoBase(
                 new ShinseishoKanriNo(new RString("1234567890")),
-                new ShujiiIkenshoRirekiNo(0),
+                new IkenshosakuseiIraiRirekiNo(0),
                 ShujiiIkenshoIraiKubun.初回,
                 createKaigoDoctor(),
                 new FlexibleDate("20140101"),
@@ -286,7 +286,7 @@ public class ShujiiIkenshoResultMock {
         result.set意見書項目(create意見書結果(意見書, 感染症内容, new RString("感染症内容")));
         result.set意見書項目(create意見書結果(意見書, 特記事項, new RString("特記事項")));
 
-        return spy(new ShujiiIkenshoDetails(new ShinseishoKanriNo(new RString("1234567890")), new ShujiiIkenshoRirekiNo(0), KoroshoIFKubun.V09A, result));
+        return spy(new ShujiiIkenshoDetails(new ShinseishoKanriNo(new RString("1234567890")), new IkenshosakuseiIraiRirekiNo(0), KoroshoIFKubun.V09A, result));
     }
 
     private static ShujiiIkenshoItemForResult create意見書結果(ShujiiIkensho 意見書, IShujiiIkenshoItemKubun 意見書項目区分, RString 意見書結果) {

@@ -6,7 +6,8 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 
 import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoResult;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShujiiIkenshoRirekiNo;
+import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoSakuseiIrai;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.ShujiiIkenshoMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.ShujiiIkenshoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.ShujiiIkenshoDac;
@@ -25,23 +26,23 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class ShujiiIkenshoResultManager {
 
     private final ShujiiIkenshoDac dac;
-    private final IKaigoDoctorManager manager;
+    private final ShujiiIkenshoSakuseiIraiKirokuManager manager;
 
     /**
      * InstanceProviderを用いてDacのインスタンスを生成し、メンバ変数に保持します。
      */
     public ShujiiIkenshoResultManager() {
         dac = InstanceProvider.create(ShujiiIkenshoDac.class);
-        manager = new KaigoDoctorManager();
+        manager = new ShujiiIkenshoSakuseiIraiKirokuManager();
     }
 
     /**
      * モックを使用するテスト用コンストラクタです。
      *
      * @param dac 主治医意見書Dac
-     * @param finder 認定調査員Finder
+     * @param manager 主治医意見書作成依頼記録Manager
      */
-    ShujiiIkenshoResultManager(ShujiiIkenshoDac dac, IKaigoDoctorManager manager) {
+    ShujiiIkenshoResultManager(ShujiiIkenshoDac dac, ShujiiIkenshoSakuseiIraiKirokuManager manager) {
         this.dac = dac;
         this.manager = manager;
     }
@@ -53,17 +54,12 @@ public class ShujiiIkenshoResultManager {
      * @param 意見書履歴番号 意見書履歴番号
      * @return 認定調査結果
      */
-    public ShujiiIkenshoResult get主治医意見書結果(ShinseishoKanriNo 申請書管理番号, ShujiiIkenshoRirekiNo 意見書履歴番号) {
+    public ShujiiIkenshoResult get主治医意見書結果(ShinseishoKanriNo 申請書管理番号, IkenshosakuseiIraiRirekiNo 意見書履歴番号) {
         ShujiiIkenshoEntity entity = dac.select(申請書管理番号, 意見書履歴番号);
         if (entity == null) {
             return null;
         }
-        // TODO N8156 宮本 康 市町村コードはどこから取得するか
-        KaigoDoctor kaigoDoctor = manager.get介護医師(
-                new ShichosonCode(RString.EMPTY),
-                new KaigoIryoKikanCode(entity.getDbT5012ShujiiIkenshoJohoEntity().getShujiiIryoKikanCode()),
-                new KaigoDoctorCode(entity.getDbT5012ShujiiIkenshoJohoEntity().getShujiiCode()));
-        return ShujiiIkenshoMapper.toShujiiIkenshoResult(entity, kaigoDoctor);
+        return ShujiiIkenshoMapper.toShujiiIkenshoResult(entity, manager.get主治医意見書作成依頼情報(申請書管理番号, 意見書履歴番号).get介護医師());
     }
 
     /**

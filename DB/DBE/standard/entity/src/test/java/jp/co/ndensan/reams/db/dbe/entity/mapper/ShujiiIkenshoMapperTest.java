@@ -9,10 +9,11 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoIraiKub
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiKaisu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiryoShubetsu;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShujiiIkenshoRirekiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShujiiIkenshoEntityMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShujiiIkenshoResultMock;
 import jp.co.ndensan.reams.db.dbe.entity.relate.ShujiiIkenshoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -43,17 +44,18 @@ public class ShujiiIkenshoMapperTest {
 
         @Test
         public void 意見書履歴番号の設定がある時_toShujiiIkenshoResult_get意見書履歴番号は_設定値を返す() {
-            assertThat(toShujiiIkenshoResult().get基本情報().get意見書履歴番号(), is(new ShujiiIkenshoRirekiNo(0)));
+            assertThat(toShujiiIkenshoResult().get基本情報().get意見書履歴番号(), is(new IkenshosakuseiIraiRirekiNo(0)));
         }
 
         @Test
         public void 意見書依頼区分の設定がある時_toShujiiIkenshoResult_get意見書依頼区分は_設定値を返す() {
             assertThat(toShujiiIkenshoResult().get基本情報().get意見書依頼区分(), is(ShujiiIkenshoIraiKubun.初回));
         }
-//        @Test
-//        public void 主治医の設定がある時_toShujiiIkenshoResult_get主治医は_設定値を返す() {
-//            assertThat(toShujiiIkenshoResult().get基本情報().get意見書依頼区分(), is(ShujiiIkenshoIraiKubun.初回));
-//        }
+
+        @Test
+        public void 主治医の設定がある時_toShujiiIkenshoResult_get主治医は_設定値を返す() {
+            assertThat(toShujiiIkenshoResult().get基本情報().get主治医().get介護医師コード(), is(new KaigoDoctorCode(new RString("介護医師コード"))));
+        }
 
         @Test
         public void 意見書受領年月日の設定がある時_toShujiiIkenshoResult_get意見書受領年月日は_設定値を返す() {
@@ -95,7 +97,7 @@ public class ShujiiIkenshoMapperTest {
 
         @Test
         public void 意見書履歴番号の設定がある時_toShujiiIkenshoResult_get意見書履歴番号は_設定値を返す() {
-            assertThat(toShujiiIkenshoResult().get詳細情報().get意見書履歴番号(), is(new ShujiiIkenshoRirekiNo(0)));
+            assertThat(toShujiiIkenshoResult().get詳細情報().get意見書履歴番号(), is(new IkenshosakuseiIraiRirekiNo(0)));
         }
 
         @Test

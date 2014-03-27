@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShujiiIkenshoRirekiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5012ShujiiIkenshoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.helper.ShujiiIkenshoEntityMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
@@ -201,7 +201,7 @@ public class ShujiiIkenshoJohoDacTest extends DbeTestDacBase {
         return entity;
     }
 
-    private static ShujiiIkenshoRirekiNo createRirekiNo() {
-        return new ShujiiIkenshoRirekiNo(0);
+    private static IkenshosakuseiIraiRirekiNo createRirekiNo() {
+        return new IkenshosakuseiIraiRirekiNo(0);
     }
 }

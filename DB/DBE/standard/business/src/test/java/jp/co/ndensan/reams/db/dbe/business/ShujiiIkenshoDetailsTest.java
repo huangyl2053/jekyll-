@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.business.helper.ShujiiIkenshoResultMock;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShujiiIkenshoRirekiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
@@ -52,7 +52,7 @@ public class ShujiiIkenshoDetailsTest {
     private static ShujiiIkenshoDetails createShujiiIkenshoDetails(int flg) {
         return new ShujiiIkenshoDetails(
                 flg == AS_申請書管理番号がNULL ? null : new ShinseishoKanriNo(new RString("1234567890")),
-                flg == AS_意見書履歴番号がNULL ? null : new ShujiiIkenshoRirekiNo(0),
+                flg == AS_意見書履歴番号がNULL ? null : new IkenshosakuseiIraiRirekiNo(0),
                 flg == AS_厚労省IF識別区分がNULL ? null : KoroshoIFKubun.V09A,
                 flg == AS_主治医意見書がNULL ? null : ShujiiIkenshoResultMock.getSpiedShujiiIkenshoDetailsInstance().get主治医意見書());
     }

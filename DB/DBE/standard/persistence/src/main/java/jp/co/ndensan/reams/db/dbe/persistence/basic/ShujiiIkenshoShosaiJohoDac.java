@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShujiiIkenshoRirekiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5013ShujiiIkenshoShosaiJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5013ShujiiIkenshoShosaiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
@@ -25,13 +25,13 @@ public class ShujiiIkenshoShosaiJohoDac implements IShujiiIkenshoShosaiJohoDac {
     private SqlSession session;
 
     @Override
-    public DbT5013ShujiiIkenshoShosaiJohoEntity select(ShinseishoKanriNo 申請書管理番号, ShujiiIkenshoRirekiNo 意見書履歴番号) {
+    public DbT5013ShujiiIkenshoShosaiJohoEntity select(ShinseishoKanriNo 申請書管理番号, IkenshosakuseiIraiRirekiNo 意見書履歴番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT5013ShujiiIkenshoShosaiJoho.class)
                 .where(and(
                 eq(shinseishoKanriNo, 申請書管理番号),
-                eq(ikenshoIraiRirekiNo, 意見書履歴番号)))
+                eq(ikenshoIraiRirekiNo, 意見書履歴番号.value())))
                 .toObject(DbT5013ShujiiIkenshoShosaiJohoEntity.class);
     }
 
