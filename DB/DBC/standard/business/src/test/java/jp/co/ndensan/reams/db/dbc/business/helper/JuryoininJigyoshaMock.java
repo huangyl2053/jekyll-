@@ -46,6 +46,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
+import static org.mockito.Mockito.mock;
 
 /**
  * 受領委任事業者のテストヘルパーです。
@@ -84,7 +85,8 @@ public class JuryoininJigyoshaMock {
                 new TelNo(new RString("0262222222")),
                 EigyoKeitai.法人,
                 new RString("担当課"),
-                createKoza());
+                //                createKoza());
+                mock(IKoza.class));
     }
 
     public static IHojin createHojin() {
