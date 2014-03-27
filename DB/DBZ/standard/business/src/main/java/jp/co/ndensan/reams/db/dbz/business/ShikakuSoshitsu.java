@@ -1,0 +1,27 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbz.business;
+
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+
+/**
+ * 被保険者の資格喪失を扱います。
+ *
+ * @author N3327 三浦 凌
+ */
+public class ShikakuSoshitsu extends ShikakuIdoBaseItem<ShikakuSoshitsuJiyu> {
+
+    /**
+     * 新しい資格喪失の事由、届出年月日、処理年月日を持ったインスタンスを生成します。
+     *
+     * @param reason 資格喪失事由
+     * @param noticeDate 資格喪失届出年月日
+     * @param actionDate 資格喪失年月日
+     */
+    public ShikakuSoshitsu(ShikakuSoshitsuJiyu reason, FlexibleDate noticeDate, FlexibleDate actionDate) {
+        super(reason, noticeDate, actionDate);
+    }
+}
