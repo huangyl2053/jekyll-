@@ -48,7 +48,7 @@ public class JuryoininJigyoshaMapperTest extends DbcTestBase {
             sut = JuryoininJigyoshaMapper.to受領委任事業者(
                     JuryoininJigyoshaEntity,
                     JuryoininJigyoshaMock.createHojin(),
-                    JuryoininJigyoshaMock.createKoza());
+                    mock(IKoza.class));
         }
 
         @Test
@@ -197,7 +197,6 @@ public class JuryoininJigyoshaMapperTest extends DbcTestBase {
         private List<IKoza> createKozaList(int listSize) {
             List<IKoza> list = new ArrayList<>();
             for (int i = 0; i < listSize; i++) {
-//                list.add(JuryoininJigyoshaMock.createKoza());
                 list.add(mock(IKoza.class));
             }
             return list;
