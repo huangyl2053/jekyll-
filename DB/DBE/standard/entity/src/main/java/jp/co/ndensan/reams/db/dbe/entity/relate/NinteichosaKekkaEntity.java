@@ -6,13 +6,14 @@ package jp.co.ndensan.reams.db.dbe.entity.relate;
 
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5008NinteichosaKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5009NinteichosahyoJohoEntity;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
  * 要介護認定調査結果のエンティティクラスです。
  *
  * @author N8156 宮本 康
  */
-public class NinteichosaKekkaEntity {
+public class NinteichosaKekkaEntity implements IDbAccessable {
 
     private DbT5008NinteichosaKekkaJohoEntity dbT5008NinteichosaKekkaJohoEntity = null;
     private DbT5009NinteichosahyoJohoEntity dbT5009NinteichosahyoJohoEntity = null;
