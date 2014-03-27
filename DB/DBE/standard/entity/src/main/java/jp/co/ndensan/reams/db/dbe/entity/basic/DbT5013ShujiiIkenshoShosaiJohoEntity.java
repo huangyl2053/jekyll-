@@ -1,22 +1,25 @@
 package jp.co.ndensan.reams.db.dbe.entity.basic;
 
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 
 /**
- * 主治医意見書詳細情報のエンティティクラスです。
+ * DbT5013ShujiiIkenshoShosaiJohoの項目定義クラスです
  *
- * @author N8156 宮本 康
+ * @author n8178 城間篤人
  */
 public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Generated Code">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.1">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5013ShujiiIkenshoShosaiJoho");
@@ -189,7 +192,7 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
     private RString ik_kansenshoShojo;
     private RString ik_tokkiJiko;
     private byte[] ik_tokkiJikoImage;
-    private RString ik_kangoSyokuiHomonUmu;
+    private RString ik_kangoShokuiHomonUmu;
 
     /**
      * getInsertDantaiCd
@@ -770,7 +773,8 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
     /**
      * setIk_tokubetsuIryoChushinJomyakuEiyoUmuKubun
      *
-     * @param ik_tokubetsuIryoChushinJomyakuEiyoUmuKubun ik_tokubetsuIryoChushinJomyakuEiyoUmuKubun
+     * @param ik_tokubetsuIryoChushinJomyakuEiyoUmuKubun
+     * ik_tokubetsuIryoChushinJomyakuEiyoUmuKubun
      */
     public void setIk_tokubetsuIryoChushinJomyakuEiyoUmuKubun(boolean ik_tokubetsuIryoChushinJomyakuEiyoUmuKubun) {
         this.ik_tokubetsuIryoChushinJomyakuEiyoUmuKubun = ik_tokubetsuIryoChushinJomyakuEiyoUmuKubun;
@@ -806,7 +810,8 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
     /**
      * setIk_tokubetsuIryoStomaShochiUmuKubun
      *
-     * @param ik_tokubetsuIryoStomaShochiUmuKubun ik_tokubetsuIryoStomaShochiUmuKubun
+     * @param ik_tokubetsuIryoStomaShochiUmuKubun
+     * ik_tokubetsuIryoStomaShochiUmuKubun
      */
     public void setIk_tokubetsuIryoStomaShochiUmuKubun(boolean ik_tokubetsuIryoStomaShochiUmuKubun) {
         this.ik_tokubetsuIryoStomaShochiUmuKubun = ik_tokubetsuIryoStomaShochiUmuKubun;
@@ -824,7 +829,8 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
     /**
      * setIk_tokubetsuIryoSansoRyohoUmuKubun
      *
-     * @param ik_tokubetsuIryoSansoRyohoUmuKubun ik_tokubetsuIryoSansoRyohoUmuKubun
+     * @param ik_tokubetsuIryoSansoRyohoUmuKubun
+     * ik_tokubetsuIryoSansoRyohoUmuKubun
      */
     public void setIk_tokubetsuIryoSansoRyohoUmuKubun(boolean ik_tokubetsuIryoSansoRyohoUmuKubun) {
         this.ik_tokubetsuIryoSansoRyohoUmuKubun = ik_tokubetsuIryoSansoRyohoUmuKubun;
@@ -842,7 +848,8 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
     /**
      * setIk_tokubetsuIryoRespiratorUmuKubun
      *
-     * @param ik_tokubetsuIryoRespiratorUmuKubun ik_tokubetsuIryoRespiratorUmuKubun
+     * @param ik_tokubetsuIryoRespiratorUmuKubun
+     * ik_tokubetsuIryoRespiratorUmuKubun
      */
     public void setIk_tokubetsuIryoRespiratorUmuKubun(boolean ik_tokubetsuIryoRespiratorUmuKubun) {
         this.ik_tokubetsuIryoRespiratorUmuKubun = ik_tokubetsuIryoRespiratorUmuKubun;
@@ -860,7 +867,8 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
     /**
      * setIk_tokubetsuIryoKikanSekkaiUmuKubun
      *
-     * @param ik_tokubetsuIryoKikanSekkaiUmuKubun ik_tokubetsuIryoKikanSekkaiUmuKubun
+     * @param ik_tokubetsuIryoKikanSekkaiUmuKubun
+     * ik_tokubetsuIryoKikanSekkaiUmuKubun
      */
     public void setIk_tokubetsuIryoKikanSekkaiUmuKubun(boolean ik_tokubetsuIryoKikanSekkaiUmuKubun) {
         this.ik_tokubetsuIryoKikanSekkaiUmuKubun = ik_tokubetsuIryoKikanSekkaiUmuKubun;
@@ -878,7 +886,8 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
     /**
      * setIk_tokubetsuIryoTotsuKangoUmuKubun
      *
-     * @param ik_tokubetsuIryoTotsuKangoUmuKubun ik_tokubetsuIryoTotsuKangoUmuKubun
+     * @param ik_tokubetsuIryoTotsuKangoUmuKubun
+     * ik_tokubetsuIryoTotsuKangoUmuKubun
      */
     public void setIk_tokubetsuIryoTotsuKangoUmuKubun(boolean ik_tokubetsuIryoTotsuKangoUmuKubun) {
         this.ik_tokubetsuIryoTotsuKangoUmuKubun = ik_tokubetsuIryoTotsuKangoUmuKubun;
@@ -896,7 +905,8 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
     /**
      * setIk_tokubetsuIryoKeikanEiyoUmuKubun
      *
-     * @param ik_tokubetsuIryoKeikanEiyoUmuKubun ik_tokubetsuIryoKeikanEiyoUmuKubun
+     * @param ik_tokubetsuIryoKeikanEiyoUmuKubun
+     * ik_tokubetsuIryoKeikanEiyoUmuKubun
      */
     public void setIk_tokubetsuIryoKeikanEiyoUmuKubun(boolean ik_tokubetsuIryoKeikanEiyoUmuKubun) {
         this.ik_tokubetsuIryoKeikanEiyoUmuKubun = ik_tokubetsuIryoKeikanEiyoUmuKubun;
@@ -914,7 +924,8 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
     /**
      * setIk_tokubetsuIryoMonitorSokuteiUmuKubun
      *
-     * @param ik_tokubetsuIryoMonitorSokuteiUmuKubun ik_tokubetsuIryoMonitorSokuteiUmuKubun
+     * @param ik_tokubetsuIryoMonitorSokuteiUmuKubun
+     * ik_tokubetsuIryoMonitorSokuteiUmuKubun
      */
     public void setIk_tokubetsuIryoMonitorSokuteiUmuKubun(boolean ik_tokubetsuIryoMonitorSokuteiUmuKubun) {
         this.ik_tokubetsuIryoMonitorSokuteiUmuKubun = ik_tokubetsuIryoMonitorSokuteiUmuKubun;
@@ -932,7 +943,8 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
     /**
      * setIk_tokubetsuIryoJokusoShochiUmuKubun
      *
-     * @param ik_tokubetsuIryoJokusoShochiUmuKubun ik_tokubetsuIryoJokusoShochiUmuKubun
+     * @param ik_tokubetsuIryoJokusoShochiUmuKubun
+     * ik_tokubetsuIryoJokusoShochiUmuKubun
      */
     public void setIk_tokubetsuIryoJokusoShochiUmuKubun(boolean ik_tokubetsuIryoJokusoShochiUmuKubun) {
         this.ik_tokubetsuIryoJokusoShochiUmuKubun = ik_tokubetsuIryoJokusoShochiUmuKubun;
@@ -975,6 +987,24 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
     }
 
     /**
+     * getIk_seikatsuJiritsudoShyogaiCodeMeisho
+     *
+     * @return Meisho
+     */
+    public RString getIk_seikatsuJiritsudoShyogaiCodeMeisho() {
+        return CodeMaster.getCodeMeisho(new SubGyomuCode(new RString("DBE")), new CodeShubetsu(new RString("0015")), ik_seikatsuJiritsudoShyogaiCode);
+    }
+
+    /**
+     * getIk_seikatsuJiritsudoShyogaiCodeRyakusho
+     *
+     * @return Ryakusho
+     */
+    public RString getIk_seikatsuJiritsudoShyogaiCodeRyakusho() {
+        return CodeMaster.getCodeRyakusho(new SubGyomuCode(new RString("DBE")), new CodeShubetsu(new RString("0015")), ik_seikatsuJiritsudoShyogaiCode);
+    }
+
+    /**
      * getIk_seikatsuJiritsudoNinchshoCode
      *
      * @return ik_seikatsuJiritsudoNinchshoCode
@@ -990,6 +1020,24 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
      */
     public void setIk_seikatsuJiritsudoNinchshoCode(Code ik_seikatsuJiritsudoNinchshoCode) {
         this.ik_seikatsuJiritsudoNinchshoCode = ik_seikatsuJiritsudoNinchshoCode;
+    }
+
+    /**
+     * getIk_seikatsuJiritsudoNinchshoCodeMeisho
+     *
+     * @return Meisho
+     */
+    public RString getIk_seikatsuJiritsudoNinchshoCodeMeisho() {
+        return CodeMaster.getCodeMeisho(new SubGyomuCode(new RString("DBE")), new CodeShubetsu(new RString("0016")), ik_seikatsuJiritsudoNinchshoCode);
+    }
+
+    /**
+     * getIk_seikatsuJiritsudoNinchshoCodeRyakusho
+     *
+     * @return Ryakusho
+     */
+    public RString getIk_seikatsuJiritsudoNinchshoCodeRyakusho() {
+        return CodeMaster.getCodeRyakusho(new SubGyomuCode(new RString("DBE")), new CodeShubetsu(new RString("0016")), ik_seikatsuJiritsudoNinchshoCode);
     }
 
     /**
@@ -1076,7 +1124,8 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
     /**
      * setIk_shuhenShojoGenshiGenchoUmuKubun
      *
-     * @param ik_shuhenShojoGenshiGenchoUmuKubun ik_shuhenShojoGenshiGenchoUmuKubun
+     * @param ik_shuhenShojoGenshiGenchoUmuKubun
+     * ik_shuhenShojoGenshiGenchoUmuKubun
      */
     public void setIk_shuhenShojoGenshiGenchoUmuKubun(boolean ik_shuhenShojoGenshiGenchoUmuKubun) {
         this.ik_shuhenShojoGenshiGenchoUmuKubun = ik_shuhenShojoGenshiGenchoUmuKubun;
@@ -1112,7 +1161,8 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
     /**
      * setIk_shuhenShojoChuyaGakutenUmuKubun
      *
-     * @param ik_shuhenShojoChuyaGakutenUmuKubun ik_shuhenShojoChuyaGakutenUmuKubun
+     * @param ik_shuhenShojoChuyaGakutenUmuKubun
+     * ik_shuhenShojoChuyaGakutenUmuKubun
      */
     public void setIk_shuhenShojoChuyaGakutenUmuKubun(boolean ik_shuhenShojoChuyaGakutenUmuKubun) {
         this.ik_shuhenShojoChuyaGakutenUmuKubun = ik_shuhenShojoChuyaGakutenUmuKubun;
@@ -1166,7 +1216,8 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
     /**
      * setIk_shuhenShojoKaigoHenoTeikoUmuKubun
      *
-     * @param ik_shuhenShojoKaigoHenoTeikoUmuKubun ik_shuhenShojoKaigoHenoTeikoUmuKubun
+     * @param ik_shuhenShojoKaigoHenoTeikoUmuKubun
+     * ik_shuhenShojoKaigoHenoTeikoUmuKubun
      */
     public void setIk_shuhenShojoKaigoHenoTeikoUmuKubun(boolean ik_shuhenShojoKaigoHenoTeikoUmuKubun) {
         this.ik_shuhenShojoKaigoHenoTeikoUmuKubun = ik_shuhenShojoKaigoHenoTeikoUmuKubun;
@@ -1202,7 +1253,8 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
     /**
      * setIk_shuhenShojoHiNoFushimatsuUmuKubun
      *
-     * @param ik_shuhenShojoHiNoFushimatsuUmuKubun ik_shuhenShojoHiNoFushimatsuUmuKubun
+     * @param ik_shuhenShojoHiNoFushimatsuUmuKubun
+     * ik_shuhenShojoHiNoFushimatsuUmuKubun
      */
     public void setIk_shuhenShojoHiNoFushimatsuUmuKubun(boolean ik_shuhenShojoHiNoFushimatsuUmuKubun) {
         this.ik_shuhenShojoHiNoFushimatsuUmuKubun = ik_shuhenShojoHiNoFushimatsuUmuKubun;
@@ -1256,7 +1308,8 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
     /**
      * setIk_shuhenShojoSeitekiMondaiKodoUmuKubun
      *
-     * @param ik_shuhenShojoSeitekiMondaiKodoUmuKubun ik_shuhenShojoSeitekiMondaiKodoUmuKubun
+     * @param ik_shuhenShojoSeitekiMondaiKodoUmuKubun
+     * ik_shuhenShojoSeitekiMondaiKodoUmuKubun
      */
     public void setIk_shuhenShojoSeitekiMondaiKodoUmuKubun(boolean ik_shuhenShojoSeitekiMondaiKodoUmuKubun) {
         this.ik_shuhenShojoSeitekiMondaiKodoUmuKubun = ik_shuhenShojoSeitekiMondaiKodoUmuKubun;
@@ -2300,7 +2353,8 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
     /**
      * setIk_probabilityTentoOrKossetsuUmuKubun
      *
-     * @param ik_probabilityTentoOrKossetsuUmuKubun ik_probabilityTentoOrKossetsuUmuKubun
+     * @param ik_probabilityTentoOrKossetsuUmuKubun
+     * ik_probabilityTentoOrKossetsuUmuKubun
      */
     public void setIk_probabilityTentoOrKossetsuUmuKubun(boolean ik_probabilityTentoOrKossetsuUmuKubun) {
         this.ik_probabilityTentoOrKossetsuUmuKubun = ik_probabilityTentoOrKossetsuUmuKubun;
@@ -2318,7 +2372,8 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
     /**
      * setIk_probabilityIdoNoryokuTeikaUmuKubun
      *
-     * @param ik_probabilityIdoNoryokuTeikaUmuKubun ik_probabilityIdoNoryokuTeikaUmuKubun
+     * @param ik_probabilityIdoNoryokuTeikaUmuKubun
+     * ik_probabilityIdoNoryokuTeikaUmuKubun
      */
     public void setIk_probabilityIdoNoryokuTeikaUmuKubun(boolean ik_probabilityIdoNoryokuTeikaUmuKubun) {
         this.ik_probabilityIdoNoryokuTeikaUmuKubun = ik_probabilityIdoNoryokuTeikaUmuKubun;
@@ -2372,7 +2427,8 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
     /**
      * setIk_probabilitiyIyokuTeikaUmuKubun
      *
-     * @param ik_probabilitiyIyokuTeikaUmuKubun ik_probabilitiyIyokuTeikaUmuKubun
+     * @param ik_probabilitiyIyokuTeikaUmuKubun
+     * ik_probabilitiyIyokuTeikaUmuKubun
      */
     public void setIk_probabilitiyIyokuTeikaUmuKubun(boolean ik_probabilitiyIyokuTeikaUmuKubun) {
         this.ik_probabilitiyIyokuTeikaUmuKubun = ik_probabilitiyIyokuTeikaUmuKubun;
@@ -2426,7 +2482,8 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
     /**
      * setIk_probabilitySesshokuEngiKinoTeikaUmuKubun
      *
-     * @param ik_probabilitySesshokuEngiKinoTeikaUmuKubun ik_probabilitySesshokuEngiKinoTeikaUmuKubun
+     * @param ik_probabilitySesshokuEngiKinoTeikaUmuKubun
+     * ik_probabilitySesshokuEngiKinoTeikaUmuKubun
      */
     public void setIk_probabilitySesshokuEngiKinoTeikaUmuKubun(boolean ik_probabilitySesshokuEngiKinoTeikaUmuKubun) {
         this.ik_probabilitySesshokuEngiKinoTeikaUmuKubun = ik_probabilitySesshokuEngiKinoTeikaUmuKubun;
@@ -2534,7 +2591,8 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
     /**
      * setIk_probabilityEngeseiHaienUmuKubun
      *
-     * @param ik_probabilityEngeseiHaienUmuKubun ik_probabilityEngeseiHaienUmuKubun
+     * @param ik_probabilityEngeseiHaienUmuKubun
+     * ik_probabilityEngeseiHaienUmuKubun
      */
     public void setIk_probabilityEngeseiHaienUmuKubun(boolean ik_probabilityEngeseiHaienUmuKubun) {
         this.ik_probabilityEngeseiHaienUmuKubun = ik_probabilityEngeseiHaienUmuKubun;
@@ -2570,7 +2628,8 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
     /**
      * setIk_probabilityShinpaiKinoTeikaUmuKubun
      *
-     * @param ik_probabilityShinpaiKinoTeikaUmuKubun ik_probabilityShinpaiKinoTeikaUmuKubun
+     * @param ik_probabilityShinpaiKinoTeikaUmuKubun
+     * ik_probabilityShinpaiKinoTeikaUmuKubun
      */
     public void setIk_probabilityShinpaiKinoTeikaUmuKubun(boolean ik_probabilityShinpaiKinoTeikaUmuKubun) {
         this.ik_probabilityShinpaiKinoTeikaUmuKubun = ik_probabilityShinpaiKinoTeikaUmuKubun;
@@ -2804,7 +2863,8 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
     /**
      * setIk_homonYakuzaiKanriShidoUmuKubun
      *
-     * @param ik_homonYakuzaiKanriShidoUmuKubun ik_homonYakuzaiKanriShidoUmuKubun
+     * @param ik_homonYakuzaiKanriShidoUmuKubun
+     * ik_homonYakuzaiKanriShidoUmuKubun
      */
     public void setIk_homonYakuzaiKanriShidoUmuKubun(boolean ik_homonYakuzaiKanriShidoUmuKubun) {
         this.ik_homonYakuzaiKanriShidoUmuKubun = ik_homonYakuzaiKanriShidoUmuKubun;
@@ -3099,21 +3159,21 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
     }
 
     /**
-     * getIk_kangoSyokuiHomonUmu
+     * getIk_kangoShokuiHomonUmu
      *
-     * @return ik_kangoSyokuiHomonUmu
+     * @return ik_kangoShokuiHomonUmu
      */
-    public RString getIk_kangoSyokuiHomonUmu() {
-        return ik_kangoSyokuiHomonUmu;
+    public RString getIk_kangoShokuiHomonUmu() {
+        return ik_kangoShokuiHomonUmu;
     }
 
     /**
-     * setIk_kangoSyokuiHomonUmu
+     * setIk_kangoShokuiHomonUmu
      *
-     * @param ik_kangoSyokuiHomonUmu ik_kangoSyokuiHomonUmu
+     * @param ik_kangoShokuiHomonUmu ik_kangoShokuiHomonUmu
      */
-    public void setIk_kangoSyokuiHomonUmu(RString ik_kangoSyokuiHomonUmu) {
-        this.ik_kangoSyokuiHomonUmu = ik_kangoSyokuiHomonUmu;
+    public void setIk_kangoShokuiHomonUmu(RString ik_kangoShokuiHomonUmu) {
+        this.ik_kangoShokuiHomonUmu = ik_kangoShokuiHomonUmu;
     }
 // </editor-fold>
 }

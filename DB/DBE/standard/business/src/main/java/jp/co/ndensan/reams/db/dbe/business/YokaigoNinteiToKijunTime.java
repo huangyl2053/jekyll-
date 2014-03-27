@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 一時判定における、要介護認定等基準時間の情報を持つクラスです。
@@ -14,55 +15,56 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
 public class YokaigoNinteiToKijunTime {
 
     private final int 基準時間;
-    private final int 食事基準時間;
-    private final int 排泄基準時間;
-    private final int 移動基準時間;
-    private final int 清潔保持基準時間;
-    private final int 間接ケア基準時間;
-    private final int BPSD関連基準時間;
-    private final int 機能訓練基準時間;
-    private final int 医療関連基準時間;
-    private final int 認知症加算基準時間;
+    private final int 基準時間_食事;
+    private final int 基準時間_排泄;
+    private final int 基準時間_移動;
+    private final int 基準時間_清潔保持;
+    private final int 基準時間_間接ケア;
+    private final int 基準時間_BPSD関連;
+    private final int 基準時間_機能訓練;
+    private final int 基準時間_医療関連;
+    private final int 基準時間_認知症加算;
 
     /**
      * 引数から各基準時間を受け取り、インスタンスを生成します。
      *
      * @param 基準時間 基準時間
-     * @param 食事基準時間 食事基準時間
-     * @param 排泄基準時間 排泄基準時間
-     * @param 移動基準時間 移動基準時間
-     * @param 清潔保持基準時間 清潔保持基準時間
-     * @param 間接ケア基準時間 間接ケア基準時間
-     * @param BPSD関連基準時間 BPSD関連基準時間
-     * @param 機能訓練基準時間 機能訓練基準時間
-     * @param 医療関連基準時間 医療関連基準時間
-     * @param 認知症加算基準時間 認知症加算基準時間
+     * @param 基準時間_食事 食事基準時間
+     * @param 基準時間_排泄 排泄基準時間
+     * @param 基準時間_移動 移動基準時間
+     * @param 基準時間_清潔保持 清潔保持基準時間
+     * @param 基準時間_間接ケア 間接ケア基準時間
+     * @param 基準時間_BPSD関連 BPSD関連基準時間
+     * @param 基準時間_機能訓練 機能訓練基準時間
+     * @param 基準時間_医療関連 医療関連基準時間
+     * @param 基準時間_認知症加算 認知症加算基準時間
      * @throws IllegalArgumentException いずれかの引数に、0より小さいの値が渡されたとき
      */
-    public YokaigoNinteiToKijunTime(int 基準時間, int 食事基準時間, int 排泄基準時間, int 移動基準時間,
-            int 清潔保持基準時間, int 間接ケア基準時間, int BPSD関連基準時間, int 機能訓練基準時間,
-            int 医療関連基準時間, int 認知症加算基準時間) throws IllegalArgumentException {
-        check0以下(基準時間, Messages.E00013.replace("基準時間", "0以上").getMessage());
-        check0以下(食事基準時間, Messages.E00013.replace("食事基準時間", "0以上").getMessage());
-        check0以下(排泄基準時間, Messages.E00013.replace("排泄基準時間", "0以上").getMessage());
-        check0以下(移動基準時間, Messages.E00013.replace("移動基準時間", "0以上").getMessage());
-        check0以下(清潔保持基準時間, Messages.E00013.replace("清潔保持基準時間", "0以上").getMessage());
-        check0以下(間接ケア基準時間, Messages.E00013.replace("間接ケア基準時間", "0以上").getMessage());
-        check0以下(BPSD関連基準時間, Messages.E00013.replace("BPSD関連基準時間", "0以上").getMessage());
-        check0以下(機能訓練基準時間, Messages.E00013.replace("機能訓練基準時間", "0以上").getMessage());
-        check0以下(医療関連基準時間, Messages.E00013.replace("医療関連基準時間", "0以上").getMessage());
-        check0以下(認知症加算基準時間, Messages.E00013.replace("認知症加算基準時間", "0以上").getMessage());
+    public YokaigoNinteiToKijunTime(int 基準時間, int 基準時間_食事, int 基準時間_排泄, int 基準時間_移動,
+            int 基準時間_清潔保持, int 基準時間_間接ケア, int 基準時間_BPSD関連, int 基準時間_機能訓練,
+            int 基準時間_医療関連, int 基準時間_認知症加算) throws IllegalArgumentException {
+        RString エラー表示 = new RString("0以上");
+        check0以下(基準時間, Messages.E00013.replace("基準時間", エラー表示.toString()).getMessage());
+        check0以下(基準時間_食事, Messages.E00013.replace("食事基準時間", エラー表示.toString()).getMessage());
+        check0以下(基準時間_排泄, Messages.E00013.replace("排泄基準時間", エラー表示.toString()).getMessage());
+        check0以下(基準時間_移動, Messages.E00013.replace("移動基準時間", エラー表示.toString()).getMessage());
+        check0以下(基準時間_清潔保持, Messages.E00013.replace("清潔保持基準時間", エラー表示.toString()).getMessage());
+        check0以下(基準時間_間接ケア, Messages.E00013.replace("間接ケア基準時間", エラー表示.toString()).getMessage());
+        check0以下(基準時間_BPSD関連, Messages.E00013.replace("BPSD関連基準時間", エラー表示.toString()).getMessage());
+        check0以下(基準時間_機能訓練, Messages.E00013.replace("機能訓練基準時間", エラー表示.toString()).getMessage());
+        check0以下(基準時間_医療関連, Messages.E00013.replace("医療関連基準時間", エラー表示.toString()).getMessage());
+        check0以下(基準時間_認知症加算, Messages.E00013.replace("認知症加算基準時間", エラー表示.toString()).getMessage());
 
         this.基準時間 = 基準時間;
-        this.食事基準時間 = 食事基準時間;
-        this.排泄基準時間 = 排泄基準時間;
-        this.移動基準時間 = 移動基準時間;
-        this.清潔保持基準時間 = 清潔保持基準時間;
-        this.間接ケア基準時間 = 間接ケア基準時間;
-        this.BPSD関連基準時間 = BPSD関連基準時間;
-        this.機能訓練基準時間 = 機能訓練基準時間;
-        this.医療関連基準時間 = 医療関連基準時間;
-        this.認知症加算基準時間 = 認知症加算基準時間;
+        this.基準時間_食事 = 基準時間_食事;
+        this.基準時間_排泄 = 基準時間_排泄;
+        this.基準時間_移動 = 基準時間_移動;
+        this.基準時間_清潔保持 = 基準時間_清潔保持;
+        this.基準時間_間接ケア = 基準時間_間接ケア;
+        this.基準時間_BPSD関連 = 基準時間_BPSD関連;
+        this.基準時間_機能訓練 = 基準時間_機能訓練;
+        this.基準時間_医療関連 = 基準時間_医療関連;
+        this.基準時間_認知症加算 = 基準時間_認知症加算;
     }
 
     private int check0以下(int check対象, String エラーメッセージ) {
@@ -87,7 +89,7 @@ public class YokaigoNinteiToKijunTime {
      * @return 食事基準時間
      */
     public int get食事基準時間() {
-        return 食事基準時間;
+        return 基準時間_食事;
     }
 
     /**
@@ -96,7 +98,7 @@ public class YokaigoNinteiToKijunTime {
      * @return 排泄基準時間
      */
     public int get排泄基準時間() {
-        return 排泄基準時間;
+        return 基準時間_排泄;
     }
 
     /**
@@ -105,7 +107,7 @@ public class YokaigoNinteiToKijunTime {
      * @return 移動基準時間
      */
     public int get移動基準時間() {
-        return 移動基準時間;
+        return 基準時間_移動;
     }
 
     /**
@@ -114,7 +116,7 @@ public class YokaigoNinteiToKijunTime {
      * @return 清潔保持基準時間
      */
     public int get清潔保持基準時間() {
-        return 清潔保持基準時間;
+        return 基準時間_清潔保持;
     }
 
     /**
@@ -123,7 +125,7 @@ public class YokaigoNinteiToKijunTime {
      * @return 間接ケア基準時間
      */
     public int get間接ケア基準時間() {
-        return 間接ケア基準時間;
+        return 基準時間_間接ケア;
     }
 
     /**
@@ -132,7 +134,7 @@ public class YokaigoNinteiToKijunTime {
      * @return BPSD関連基準時間
      */
     public int getBPSD関連基準時間() {
-        return BPSD関連基準時間;
+        return 基準時間_BPSD関連;
     }
 
     /**
@@ -141,7 +143,7 @@ public class YokaigoNinteiToKijunTime {
      * @return 機能訓練基準時間
      */
     public int get機能訓練基準時間() {
-        return 機能訓練基準時間;
+        return 基準時間_機能訓練;
     }
 
     /**
@@ -150,7 +152,7 @@ public class YokaigoNinteiToKijunTime {
      * @return 医療関連基準時間
      */
     public int get医療関連基準時間() {
-        return 医療関連基準時間;
+        return 基準時間_医療関連;
     }
 
     /**
@@ -159,6 +161,6 @@ public class YokaigoNinteiToKijunTime {
      * @return 認知症加算基準時間
      */
     public int get認知症加算基準時間() {
-        return 認知症加算基準時間;
+        return 基準時間_認知症加算;
     }
 }

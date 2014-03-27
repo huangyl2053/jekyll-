@@ -15,6 +15,11 @@ public class NinteichosaRirekiNo implements IValueObject<Integer> {
 
     private final int 履歴番号;
 
+    /**
+     * 引数から履歴を表す数値を受け取り、インスタンスを生成します。
+     *
+     * @param 履歴番号
+     */
     public NinteichosaRirekiNo(int 履歴番号) {
         this.履歴番号 = 履歴番号;
     }

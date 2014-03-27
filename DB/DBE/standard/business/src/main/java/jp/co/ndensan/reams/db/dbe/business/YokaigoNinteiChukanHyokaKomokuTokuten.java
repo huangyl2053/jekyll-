@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 一時判定における、要介護認定中間評価項目得点群の情報を持つクラスです。
@@ -35,13 +36,14 @@ public class YokaigoNinteiChukanHyokaKomokuTokuten {
      */
     public YokaigoNinteiChukanHyokaKomokuTokuten(int 第1群, int 第2群, int 第3群, int 第4群,
             int 第5群, int 第6群, int 第7群) throws IllegalArgumentException {
-        check0以下(第1群, Messages.E00013.replace("中間評価項目得点第1群", "0以上").getMessage());
-        check0以下(第2群, Messages.E00013.replace("中間評価項目得点第2群", "0以上").getMessage());
-        check0以下(第3群, Messages.E00013.replace("中間評価項目得点第3群", "0以上").getMessage());
-        check0以下(第4群, Messages.E00013.replace("中間評価項目得点第4群", "0以上").getMessage());
-        check0以下(第5群, Messages.E00013.replace("中間評価項目得点第5群", "0以上").getMessage());
-        check0以下(第6群, Messages.E00013.replace("中間評価項目得点第6群", "0以上").getMessage());
-        check0以下(第7群, Messages.E00013.replace("中間評価項目得点第7群", "0以上").getMessage());
+        RString エラー表示 = new RString("0以上");
+        check0以下(第1群, Messages.E00013.replace("中間評価項目得点第1群", エラー表示.toString()).getMessage());
+        check0以下(第2群, Messages.E00013.replace("中間評価項目得点第2群", エラー表示.toString()).getMessage());
+        check0以下(第3群, Messages.E00013.replace("中間評価項目得点第3群", エラー表示.toString()).getMessage());
+        check0以下(第4群, Messages.E00013.replace("中間評価項目得点第4群", エラー表示.toString()).getMessage());
+        check0以下(第5群, Messages.E00013.replace("中間評価項目得点第5群", エラー表示.toString()).getMessage());
+        check0以下(第6群, Messages.E00013.replace("中間評価項目得点第6群", エラー表示.toString()).getMessage());
+        check0以下(第7群, Messages.E00013.replace("中間評価項目得点第7群", エラー表示.toString()).getMessage());
 
         this.第1群 = 第1群;
         this.第2群 = 第2群;

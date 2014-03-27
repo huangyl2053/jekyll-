@@ -71,30 +71,65 @@ public class ShujiiIkensho5Komoku {
         this.食事行為 = ShokujiKoiHyokaKomoku.記載無し;
     }
 
+    /**
+     * 障害高齢者自立度を返します。
+     *
+     * @return 障害高齢者自立度
+     */
     public ShogaiKoreishaJiritsudoKomoku get障害高齢者自立度() {
         return 障害高齢者自立度;
     }
 
+    /**
+     * 認知症高齢者自立度を返します。
+     *
+     * @return 認知症高齢者自立度
+     */
     public NinchishoKoreishaJiritsudoKomoku get認知症高齢者自立度() {
         return 認知症高齢者自立度;
     }
 
+    /**
+     * 短期記憶を返します。
+     *
+     * @return 短期記憶
+     */
     public TankiKiokuKomoku get短期記憶() {
         return 短期記憶;
     }
 
+    /**
+     * 認知能力を返します。
+     *
+     * @return 認知能力
+     */
     public NinchiNoryokuKomoku get認知能力() {
         return 認知能力;
     }
 
+    /**
+     * 伝達能力を返します。
+     *
+     * @return 伝達能力
+     */
     public DentatsuNoryokuKomoku get伝達能力() {
         return 伝達能力;
     }
 
+    /**
+     * 食事行為を返します。
+     *
+     * @return 食事行為
+     */
     public ShokujiKoiHyokaKomoku get食事行為() {
         return 食事行為;
     }
 
+    /**
+     * 5項目の回答を元に、一次判定の計算で使用する回答を表す数列を返します。
+     *
+     * @return 5項目回答
+     */
     public RString get5項目回答() {
         RStringBuilder 回答 = new RStringBuilder();
         回答.append(認知症高齢者自立度.getCode().value());

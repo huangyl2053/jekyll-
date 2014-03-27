@@ -864,7 +864,7 @@ public class DbT5016IchijiHanteiKekkaJohoEntity implements IDbAccessable {
      * @return Meisho
      */
     public RString getGaizenseiHyokaCodeMeisho() {
-        return CodeMaster.getCodeMeisho(new SubGyomuCode(new RString("DBE")), new CodeShubetsu(new RString("21")), gaizenseiHyokaCode);
+        return CodeMaster.getCodeMeisho(new SubGyomuCode(new RString("DBE")), new CodeShubetsu(new RString("0021")), gaizenseiHyokaCode);
     }
 
     /**
@@ -873,7 +873,7 @@ public class DbT5016IchijiHanteiKekkaJohoEntity implements IDbAccessable {
      * @return Ryakusho
      */
     public RString getGaizenseiHyokaCodeRyakusho() {
-        return CodeMaster.getCodeRyakusho(new SubGyomuCode(new RString("DBE")), new CodeShubetsu(new RString("21")), gaizenseiHyokaCode);
+        return CodeMaster.getCodeRyakusho(new SubGyomuCode(new RString("DBE")), new CodeShubetsu(new RString("0021")), gaizenseiHyokaCode);
     }
 
     /**

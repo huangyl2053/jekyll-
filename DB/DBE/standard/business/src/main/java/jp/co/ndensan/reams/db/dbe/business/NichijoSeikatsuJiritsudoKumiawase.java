@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 一次判定における、日常生活自立度の組み合わせについての情報を持つクラスです。
@@ -21,15 +22,28 @@ public class NichijoSeikatsuJiritsudoKumiawase {
     private final int 要介護4;
     private final int 要介護5;
 
+    /**
+     * 引数から日常生活自立度組み合わせを構成する割合を受け取り、インスタンスを生成します。
+     *
+     * @param 自立 自立
+     * @param 要支援 要支援
+     * @param 要介護1 要介護1
+     * @param 要介護2 要介護2
+     * @param 要介護3 要介護3
+     * @param 要介護4 要介護4
+     * @param 要介護5 要介護5
+     * @throws IllegalArgumentException 0より小さい数字が渡された場合
+     */
     public NichijoSeikatsuJiritsudoKumiawase(int 自立, int 要支援, int 要介護1, int 要介護2,
             int 要介護3, int 要介護4, int 要介護5) throws IllegalArgumentException {
-        check0以下(自立, Messages.E00013.replace("自立", "0以上").getMessage());
-        check0以下(要支援, Messages.E00013.replace("要支援", "0以上").getMessage());
-        check0以下(要介護1, Messages.E00013.replace("要介護1", "0以上").getMessage());
-        check0以下(要介護2, Messages.E00013.replace("要介護2", "0以上").getMessage());
-        check0以下(要介護3, Messages.E00013.replace("要介護3", "0以上").getMessage());
-        check0以下(要介護4, Messages.E00013.replace("要介護4", "0以上").getMessage());
-        check0以下(要介護5, Messages.E00013.replace("要介護5", "0以上").getMessage());
+        RString エラーメッセージ = new RString("0以上");
+        check0以下(自立, Messages.E00013.replace("自立", エラーメッセージ.toString()).getMessage());
+        check0以下(要支援, Messages.E00013.replace("要支援", エラーメッセージ.toString()).getMessage());
+        check0以下(要介護1, Messages.E00013.replace("要介護1", エラーメッセージ.toString()).getMessage());
+        check0以下(要介護2, Messages.E00013.replace("要介護2", エラーメッセージ.toString()).getMessage());
+        check0以下(要介護3, Messages.E00013.replace("要介護3", エラーメッセージ.toString()).getMessage());
+        check0以下(要介護4, Messages.E00013.replace("要介護4", エラーメッセージ.toString()).getMessage());
+        check0以下(要介護5, Messages.E00013.replace("要介護5", エラーメッセージ.toString()).getMessage());
 
         this.自立 = 自立;
         this.要支援 = 要支援;
