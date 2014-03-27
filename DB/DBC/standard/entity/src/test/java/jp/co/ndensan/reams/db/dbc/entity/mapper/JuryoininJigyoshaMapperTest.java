@@ -24,6 +24,7 @@ import static org.hamcrest.CoreMatchers.*;
 import org.junit.Before;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import static org.mockito.Mockito.mock;
 
 /**
  * 受領委任事業者のbusinessクラスとentityクラスのマッピングを行うテストクラスです。
@@ -196,7 +197,8 @@ public class JuryoininJigyoshaMapperTest extends DbcTestBase {
         private List<IKoza> createKozaList(int listSize) {
             List<IKoza> list = new ArrayList<>();
             for (int i = 0; i < listSize; i++) {
-                list.add(JuryoininJigyoshaMock.createKoza());
+//                list.add(JuryoininJigyoshaMock.createKoza());
+                list.add(mock(IKoza.class));
             }
             return list;
         }
