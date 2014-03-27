@@ -4,13 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.Choices;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.IAnsweringItem;
+import jp.co.ndensan.reams.db.dbe.definition.Choices;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Choice;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IAnsweringItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemSubGroup;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.FreeInputItem;
+import jp.co.ndensan.reams.db.dbe.definition.FreeInputItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.INinteichosaItem;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItemNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;

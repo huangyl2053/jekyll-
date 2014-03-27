@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.definition;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemSubGroup;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.Choices;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShujiiIkenshoItemNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

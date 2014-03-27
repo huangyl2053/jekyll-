@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroupOf2006;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosahyoRegulationOf2006;

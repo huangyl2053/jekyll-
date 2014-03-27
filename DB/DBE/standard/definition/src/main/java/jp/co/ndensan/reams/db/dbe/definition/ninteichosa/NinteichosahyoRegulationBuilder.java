@@ -4,8 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.ninteichosa;
 
+import jp.co.ndensan.reams.db.dbe.definition.Choices;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.IAnsweringItem;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IAnsweringItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemSubGroup;

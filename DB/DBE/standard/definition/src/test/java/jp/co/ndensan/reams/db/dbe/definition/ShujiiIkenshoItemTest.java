@@ -9,8 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemSu
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemSubGroupOf2009;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.Choices;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Choice;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShujiiIkenshoItemNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;

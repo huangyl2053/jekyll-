@@ -2,12 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 要介護認定調査の調査項目に対する選択肢を扱うクラスです。
+ * 要介護認定の各種項目に対する選択肢を扱うクラスです。
  *
  * @author N8156 宮本 康
  */

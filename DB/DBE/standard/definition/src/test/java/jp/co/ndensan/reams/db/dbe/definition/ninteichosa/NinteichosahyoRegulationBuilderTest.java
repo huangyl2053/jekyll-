@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.definition.ninteichosa;
 
 import java.util.EnumMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Choice;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroupOf2009;

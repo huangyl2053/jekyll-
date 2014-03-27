@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemKubun;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ShujiiIkenshoRegulationOf2009;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;

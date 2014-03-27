@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.ninteichosa;
+package jp.co.ndensan.reams.db.dbe.definition;
 
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.IAnsweringItem;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IAnsweringItem;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Choice;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -15,7 +15,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 /**
- * 要介護認定調査の調査項目に対する選択肢のリストを扱うクラスのテストクラスです。
+ * 要介護認定の各種項目に対する選択肢のリストを扱うクラスのテストクラスです。
  *
  * @author N8156 宮本 康
  */

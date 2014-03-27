@@ -2,13 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.ninteichosa;
+package jp.co.ndensan.reams.db.dbe.definition;
 
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.IAnsweringItem;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IAnsweringItem;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 要介護認定調査の調査項目における自由入力項目の情報を扱うクラスです。
+ * 要介護認定の各種項目における自由入力項目の情報を扱うクラスです。
  *
  * @author N8156 宮本 康
  */

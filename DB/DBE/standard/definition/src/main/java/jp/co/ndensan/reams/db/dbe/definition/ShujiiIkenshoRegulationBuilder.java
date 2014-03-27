@@ -10,8 +10,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemKu
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemSubGroup;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.Choices;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.IAnsweringItem;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IAnsweringItem;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShujiiIkenshoItemNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

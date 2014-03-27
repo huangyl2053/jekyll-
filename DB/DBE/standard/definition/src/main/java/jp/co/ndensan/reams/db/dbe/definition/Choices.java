@@ -2,17 +2,17 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.ninteichosa;
+package jp.co.ndensan.reams.db.dbe.definition;
 
 import java.util.Arrays;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.IAnsweringItem;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IAnsweringItem;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
 
 /**
- * 要介護認定調査の調査項目に対する選択肢のリストを扱うクラスです。
+ * 要介護認定の各種項目に対する選択肢のリストを扱うクラスです。
  *
  * @author N8156 宮本 康
  */

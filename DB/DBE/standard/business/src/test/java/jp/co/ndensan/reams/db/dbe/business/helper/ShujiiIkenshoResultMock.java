@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemKub
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiKaisu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiryoShubetsu;
 import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ShujiiIkenshoItem;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
@@ -51,7 +51,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemKubun.*;
-import static jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice.*;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Choice.*;
 import static org.mockito.Mockito.spy;
 
 /**
