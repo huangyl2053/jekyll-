@@ -32,6 +32,7 @@ public final class ShujiiIkenshoSakuseiIraiJohoMapper {
      * 引数のエンティティから主治医意見書作成依頼情報を作成して返します。
      *
      * @param entity 主治医意見書作成依頼情報エンティティ
+     * @param kaigoDoctor 介護ドクター
      * @return 主治医意見書作成依頼情報
      */
     public static ShujiiIkenshoSakuseiIrai toShujiiIkenshoSakuseiIrai(DbT5011ShujiiIkenshoIraiJohoEntity entity, KaigoDoctor kaigoDoctor) {
@@ -48,10 +49,10 @@ public final class ShujiiIkenshoSakuseiIraiJohoMapper {
                 entity.getSeikyushoShutsuryokuYMD(),
                 SakuseiryoSeikyuKubun.toValue(entity.getSakuseiryoSeikyuKubun().value()),
                 new ShujiiIkenshoSakuseiTokusoku(
-                entity.getIkenshoSakuseiTokusokuYMD(),
-                IkenshoSakuseiTokusokuHoho.toValue(entity.getIkenshoSakuseiTokusokuHoho()),
-                entity.getIkenshoTokusokuKaisu(),
-                entity.getIkenshoTokusokuMemo()));
+                        entity.getIkenshoSakuseiTokusokuYMD(),
+                        IkenshoSakuseiTokusokuHoho.toValue(entity.getIkenshoSakuseiTokusokuHoho()),
+                        entity.getIkenshoTokusokuKaisu(),
+                        entity.getIkenshoTokusokuMemo()));
     }
 
     /**

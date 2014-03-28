@@ -265,7 +265,8 @@ public final class NinteichosaKekkaMapper {
                         NinteichosaKubun.toValue(entity.getNinteiChosaKubunCode().value()),
                         chosain,
                         new NinteichosaJisshibashoKubun(
-                                new NinteichosaJisshibashoKubunCode(entity.getChosaJisshiBashoCode()), entity.getChosaJisshiBashoMeisho(), RString.EMPTY)),
+                                new NinteichosaJisshibashoKubunCode(entity.getChosaJisshiBashoCode()),
+                                entity.getChosaJisshiBashoMeisho(), RString.EMPTY)),
                 result);
     }
 
