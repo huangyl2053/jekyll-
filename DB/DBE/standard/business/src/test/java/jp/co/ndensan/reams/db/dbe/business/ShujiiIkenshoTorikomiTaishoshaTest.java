@@ -26,6 +26,7 @@ public class ShujiiIkenshoTorikomiTaishoshaTest extends DbeTestBase {
     public static class コンストラクタ extends DbeTestBase {
 
         private ShujiiIkenshoTorikomiTaishosha sut;
+        private YokaigoninteiProgress 認定進捗情報;
         private NinteiShinseiJoho 認定申請情報;
         private ShujiiIkenshoSakuseiIrai 主治医意見書作成依頼情報;
         private IKojin 個人;
@@ -33,6 +34,7 @@ public class ShujiiIkenshoTorikomiTaishoshaTest extends DbeTestBase {
 
         @Before
         public void setUp() {
+            認定進捗情報 = mock(YokaigoninteiProgress.class);
             認定申請情報 = mock(NinteiShinseiJoho.class);
             主治医意見書作成依頼情報 = mock(ShujiiIkenshoSakuseiIrai.class);
             個人 = mock(IKojin.class);
@@ -40,30 +42,37 @@ public class ShujiiIkenshoTorikomiTaishoshaTest extends DbeTestBase {
         }
 
         @Test(expected = NullPointerException.class)
+        public void 認定進捗情報にnullが渡されたとき_NullPointerException発生() {
+            認定進捗情報 = null;
+            sut = new ShujiiIkenshoTorikomiTaishosha(認定進捗情報, 認定申請情報, 主治医意見書作成依頼情報, 個人, 介護主治医);
+            assertThat(sut, is(instanceOf(NinteichosaKekkaTorikomiTaishosha.class)));
+        }
+
+        @Test(expected = NullPointerException.class)
         public void 認定申請情報にnullが渡されたとき_NullPointerException発生() {
             認定申請情報 = null;
-            sut = new ShujiiIkenshoTorikomiTaishosha(認定申請情報, 主治医意見書作成依頼情報, 個人, 介護主治医);
+            sut = new ShujiiIkenshoTorikomiTaishosha(認定進捗情報, 認定申請情報, 主治医意見書作成依頼情報, 個人, 介護主治医);
             assertThat(sut, is(instanceOf(NinteichosaKekkaTorikomiTaishosha.class)));
         }
 
         @Test(expected = NullPointerException.class)
         public void 主治医意見書作成依頼情報にnullが渡されたとき_NullPointerException発生() {
             主治医意見書作成依頼情報 = null;
-            sut = new ShujiiIkenshoTorikomiTaishosha(認定申請情報, 主治医意見書作成依頼情報, 個人, 介護主治医);
+            sut = new ShujiiIkenshoTorikomiTaishosha(認定進捗情報, 認定申請情報, 主治医意見書作成依頼情報, 個人, 介護主治医);
             assertThat(sut, is(instanceOf(NinteichosaKekkaTorikomiTaishosha.class)));
         }
 
         @Test(expected = NullPointerException.class)
         public void 個人にnullが渡されたとき_NullPointerException発生() {
             個人 = null;
-            sut = new ShujiiIkenshoTorikomiTaishosha(認定申請情報, 主治医意見書作成依頼情報, 個人, 介護主治医);
+            sut = new ShujiiIkenshoTorikomiTaishosha(認定進捗情報, 認定申請情報, 主治医意見書作成依頼情報, 個人, 介護主治医);
             assertThat(sut, is(instanceOf(NinteichosaKekkaTorikomiTaishosha.class)));
         }
 
         @Test(expected = NullPointerException.class)
         public void 介護主治医にnullが渡されたとき_NullPointerException発生() {
             介護主治医 = null;
-            sut = new ShujiiIkenshoTorikomiTaishosha(認定申請情報, 主治医意見書作成依頼情報, 個人, 介護主治医);
+            sut = new ShujiiIkenshoTorikomiTaishosha(認定進捗情報, 認定申請情報, 主治医意見書作成依頼情報, 個人, 介護主治医);
             assertThat(sut, is(instanceOf(NinteichosaKekkaTorikomiTaishosha.class)));
         }
     }

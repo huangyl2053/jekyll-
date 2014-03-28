@@ -11,9 +11,13 @@ import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoSakuseiIrai;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoTorikomiTaishosha;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteiShinchokuJohoMapper;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteishinseiJohoMapper;
+import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.IShujiiIkenshoTorikomiTaishoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
@@ -53,7 +57,7 @@ public class ShujiiIkenshoTorikomiTaishoshaFinder {
      * @return 主治医意見書取込対象者全件
      */
     public List<ShujiiIkenshoTorikomiTaishosha> get主治医意見書取込対象者全件() {
-        List<DbT5001NinteiShinseiJohoEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.selectAll();
+        List<KaigoNinteiTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.selectAll();
         return create主治医意見書取込対象者List(torikomiTaishoshaEntityList);
     }
 
@@ -64,7 +68,7 @@ public class ShujiiIkenshoTorikomiTaishoshaFinder {
      * @return 主治医意見書取込対象者全件
      */
     public List<ShujiiIkenshoTorikomiTaishosha> get主治医意見書取込対象者全件(ShichosonCode 市町村コード) {
-        List<DbT5001NinteiShinseiJohoEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select市町村コード(市町村コード);
+        List<KaigoNinteiTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select市町村コード(市町村コード);
         return create主治医意見書取込対象者List(torikomiTaishoshaEntityList);
     }
 
@@ -76,15 +80,15 @@ public class ShujiiIkenshoTorikomiTaishoshaFinder {
      * @return 主治医意見書取込対象者全件
      */
     public List<ShujiiIkenshoTorikomiTaishosha> get主治医意見書取込対象者全件(ShichosonCode 市町村コード, RString 支所コード) {
-        List<DbT5001NinteiShinseiJohoEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select市町村コード及び支所コード(市町村コード, 支所コード);
+        List<KaigoNinteiTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select市町村コード及び支所コード(市町村コード, 支所コード);
         return create主治医意見書取込対象者List(torikomiTaishoshaEntityList);
     }
 
     private List<ShujiiIkenshoTorikomiTaishosha> create主治医意見書取込対象者List(
-            List<DbT5001NinteiShinseiJohoEntity> entityList) {
+            List<KaigoNinteiTaishoshaEntity> entityList) {
         List<ShujiiIkenshoTorikomiTaishosha> list = new ArrayList<>();
 
-        for (DbT5001NinteiShinseiJohoEntity entity : entityList) {
+        for (KaigoNinteiTaishoshaEntity entity : entityList) {
             list.add(create主治医意見書取込対象者(entity));
         }
 
@@ -95,7 +99,11 @@ public class ShujiiIkenshoTorikomiTaishoshaFinder {
         return list;
     }
 
-    private ShujiiIkenshoTorikomiTaishosha create主治医意見書取込対象者(DbT5001NinteiShinseiJohoEntity shinseiEntity) {
+    private ShujiiIkenshoTorikomiTaishosha create主治医意見書取込対象者(KaigoNinteiTaishoshaEntity entity) {
+        DbT5005NinteiShinchokuJohoEntity shinchokuEntity = entity.getNinteiShinchokuJohoEntity();
+        DbT5001NinteiShinseiJohoEntity shinseiEntity = entity.getNinteiShinseiJohoEntity();
+
+        YokaigoninteiProgress yokaigoninteiProgress = NinteiShinchokuJohoMapper.toNinteiShinchokuJoho(shinchokuEntity);
         NinteiShinseiJoho ninteiShinseiJoho = NinteishinseiJohoMapper.to認定申請情報(shinseiEntity);
         ShujiiIkenshoSakuseiIrai shujiiIkenshoIraiJoho = new ShujiiIkenshoSakuseiIraiKirokuManager().get主治医意見書作成依頼情報(
                 shinseiEntity.getShinseishoKanriNo(), new IkenshosakuseiIraiRirekiNo(shinseiEntity.getIkenshoIraiRirekiNo()));
@@ -103,6 +111,6 @@ public class ShujiiIkenshoTorikomiTaishoshaFinder {
         KaigoDoctor doctor = shujiiIkenshoIraiJoho.get介護医師();
 
         return new ShujiiIkenshoTorikomiTaishosha(
-                ninteiShinseiJoho, shujiiIkenshoIraiJoho, kojin, doctor);
+                yokaigoninteiProgress, ninteiShinseiJoho, shujiiIkenshoIraiJoho, kojin, doctor);
     }
 }

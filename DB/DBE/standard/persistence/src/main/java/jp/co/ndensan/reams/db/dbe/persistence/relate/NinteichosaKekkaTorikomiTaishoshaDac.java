@@ -9,7 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.YokaigoninteiDateConstants;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJoho;
-import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaTorikomiTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -31,46 +31,46 @@ public class NinteichosaKekkaTorikomiTaishoshaDac implements INinteichosaKekkaTo
     private SqlSession session;
 
     @Override
-    public List<NinteichosaKekkaTorikomiTaishoshaEntity> selectAll() {
+    public List<KaigoNinteiTaishoshaEntity> selectAll() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        List<NinteichosaKekkaTorikomiTaishoshaEntity> list = accessor.select()
+        List<KaigoNinteiTaishoshaEntity> list = accessor.select()
                 .table(DbT5005NinteiShinchokuJoho.class)
                 .leftJoin(DbT5001NinteiShinseiJoho.class, using(DbT5005NinteiShinchokuJoho.shinseishoKanriNo))
                 .where(and(lt(YokaigoninteiDateConstants.認定調査依頼未完了年月日, DbT5005NinteiShinchokuJoho.ninteichosaIraiKanryoYMD),
                                 eq(YokaigoninteiDateConstants.認定調査未完了年月日, DbT5005NinteiShinchokuJoho.ninteichosaKanryoYMD)))
-                .toList(NinteichosaKekkaTorikomiTaishoshaEntity.class);
+                .toList(KaigoNinteiTaishoshaEntity.class);
 
         return (!list.isEmpty()) ? list : Collections.EMPTY_LIST;
     }
 
     @Override
-    public List<NinteichosaKekkaTorikomiTaishoshaEntity> select市町村コード(ShichosonCode 市町村コード) {
+    public List<KaigoNinteiTaishoshaEntity> select市町村コード(ShichosonCode 市町村コード) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        List<NinteichosaKekkaTorikomiTaishoshaEntity> list = accessor.select()
+        List<KaigoNinteiTaishoshaEntity> list = accessor.select()
                 .table(DbT5005NinteiShinchokuJoho.class)
                 .leftJoin(DbT5001NinteiShinseiJoho.class, using(DbT5005NinteiShinchokuJoho.shinseishoKanriNo))
                 .where(and(lt(YokaigoninteiDateConstants.認定調査依頼未完了年月日, DbT5005NinteiShinchokuJoho.ninteichosaIraiKanryoYMD),
                                 eq(YokaigoninteiDateConstants.認定調査未完了年月日, DbT5005NinteiShinchokuJoho.ninteichosaKanryoYMD),
                                 eq(DbT5001NinteiShinseiJoho.shichosonCode, 市町村コード)))
-                .toList(NinteichosaKekkaTorikomiTaishoshaEntity.class);
+                .toList(KaigoNinteiTaishoshaEntity.class);
 
         return (!list.isEmpty()) ? list : Collections.EMPTY_LIST;
     }
 
     @Override
-    public List<NinteichosaKekkaTorikomiTaishoshaEntity> select市町村コード及び支所コード(ShichosonCode 市町村コード, RString 支所コード) {
+    public List<KaigoNinteiTaishoshaEntity> select市町村コード及び支所コード(ShichosonCode 市町村コード, RString 支所コード) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        List<NinteichosaKekkaTorikomiTaishoshaEntity> list = accessor.select()
+        List<KaigoNinteiTaishoshaEntity> list = accessor.select()
                 .table(DbT5005NinteiShinchokuJoho.class)
                 .leftJoin(DbT5001NinteiShinseiJoho.class, using(DbT5005NinteiShinchokuJoho.shinseishoKanriNo))
                 .where(and(lt(YokaigoninteiDateConstants.認定調査依頼未完了年月日, DbT5005NinteiShinchokuJoho.ninteichosaIraiKanryoYMD),
                                 eq(YokaigoninteiDateConstants.認定調査未完了年月日, DbT5005NinteiShinchokuJoho.ninteichosaKanryoYMD),
                                 eq(DbT5001NinteiShinseiJoho.shichosonCode, 市町村コード),
                                 eq(DbT5001NinteiShinseiJoho.shishoCode, 支所コード)))
-                .toList(NinteichosaKekkaTorikomiTaishoshaEntity.class);
+                .toList(KaigoNinteiTaishoshaEntity.class);
 
         return (!list.isEmpty()) ? list : Collections.EMPTY_LIST;
     }
