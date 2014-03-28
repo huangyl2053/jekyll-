@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
@@ -36,6 +37,15 @@ public class Ninteichosahyo<E extends INinteichosaItemKubun, T extends INinteich
     public Ninteichosahyo(Map<E, T> 調査票定義, INinteichosaItemGroup[] 調査項目グループ) {
         this.調査票定義 = requireNonNull(調査票定義, Messages.E00001.replace("調査票定義").getMessage());
         this.調査項目グループ = requireNonNull(調査項目グループ, Messages.E00001.replace("調査項目グループ").getMessage());
+    }
+
+    /**
+     * 調査票定義を返します。
+     *
+     * @return 調査票定義
+     */
+    public Map<E, T> get調査票定義() {
+        return new EnumMap(調査票定義);
     }
 
     /**

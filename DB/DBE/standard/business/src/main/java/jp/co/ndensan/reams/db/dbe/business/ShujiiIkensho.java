@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemGroup;
@@ -36,6 +37,15 @@ public class ShujiiIkensho<E extends IShujiiIkenshoItemKubun, T extends IShujiiI
     public ShujiiIkensho(Map<E, T> 意見書定義, IShujiiIkenshoItemGroup[] 意見書項目グループ) {
         this.意見書定義 = requireNonNull(意見書定義, Messages.E00001.replace("意見書定義").getMessage());
         this.意見書項目グループ = requireNonNull(意見書項目グループ, Messages.E00001.replace("意見書項目グループ").getMessage());
+    }
+
+    /**
+     * 意見書定義を返します。
+     *
+     * @return 意見書定義
+     */
+    public Map<E, T> get意見書定義() {
+        return new EnumMap(意見書定義);
     }
 
     /**
