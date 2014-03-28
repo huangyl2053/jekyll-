@@ -67,7 +67,7 @@ public class NinteichosaResultManager {
      * @return 追加、または更新が成功した場合はtrueを返します。
      */
     public boolean save認定調査結果(NinteichosaResult 認定調査結果) {
-        return dac.insertOrUpdate(NinteichosaKekkaMapper.toNinteichosaKekkaEntity(認定調査結果));
+        return dac.insertOrUpdate(NinteichosaKekkaMapper.toNinteichosaKekkaEntity(認定調査結果)) != 0;
     }
 
     /**
@@ -77,6 +77,6 @@ public class NinteichosaResultManager {
      * @return 削除が成功した場合はtrueを返します。
      */
     public boolean remove認定調査結果(NinteichosaResult 認定調査結果) {
-        return dac.delete(NinteichosaKekkaMapper.toNinteichosaKekkaEntity(認定調査結果));
+        return dac.delete(NinteichosaKekkaMapper.toNinteichosaKekkaEntity(認定調査結果)) != 0;
     }
 }

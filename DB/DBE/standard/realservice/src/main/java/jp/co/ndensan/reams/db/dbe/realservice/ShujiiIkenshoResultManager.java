@@ -69,7 +69,7 @@ public class ShujiiIkenshoResultManager {
      * @return 追加、または更新が成功した場合はtrueを返します。
      */
     public boolean save主治医意見書結果(ShujiiIkenshoResult 主治医意見書結果) {
-        return dac.insertOrUpdate(ShujiiIkenshoMapper.toShujiiIkenshoEntity(主治医意見書結果));
+        return dac.insertOrUpdate(ShujiiIkenshoMapper.toShujiiIkenshoEntity(主治医意見書結果)) != 0;
     }
 
     /**
@@ -79,6 +79,6 @@ public class ShujiiIkenshoResultManager {
      * @return 削除が成功した場合はtrueを返します。
      */
     public boolean remove主治医意見書結果(ShujiiIkenshoResult 主治医意見書結果) {
-        return dac.delete(ShujiiIkenshoMapper.toShujiiIkenshoEntity(主治医意見書結果));
+        return dac.delete(ShujiiIkenshoMapper.toShujiiIkenshoEntity(主治医意見書結果)) != 0;
     }
 }

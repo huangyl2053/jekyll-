@@ -110,7 +110,7 @@ public class ShujiiIkenshoDacTest extends DbeTestDacBase {
 
         @Test
         public void 指定した主治医意見書が存在しない時_insertは_成功する() {
-            assertThat(sut.insert(createEntity(AS_新規データ)), is(true));
+            assertThat(sut.insert(createEntity(AS_新規データ)), is(1));
         }
 
         @Test
@@ -141,7 +141,7 @@ public class ShujiiIkenshoDacTest extends DbeTestDacBase {
 
         @Test
         public void 指定した主治医意見書が存在する時_updateは_成功する() {
-            assertThat(sut.update(createEntity(AS_既存データ)), is(true));
+            assertThat(sut.update(createEntity(AS_既存データ)), is(1));
         }
 
         @Test
@@ -172,7 +172,7 @@ public class ShujiiIkenshoDacTest extends DbeTestDacBase {
 
         @Test
         public void 指定した主治医意見書が存在する時_deleteは_成功する() {
-            assertThat(sut.delete(createEntity(AS_既存データ)), is(true));
+            assertThat(sut.delete(createEntity(AS_既存データ)), is(1));
         }
 
         @Test

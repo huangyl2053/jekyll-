@@ -30,26 +30,26 @@ public class ShujiiIkenshoDac implements IShujiiIkenshoDac {
     }
 
     @Override
-    public boolean insertOrUpdate(ShujiiIkenshoEntity entity) {
-        return ikenshoDac.insertOrUpdate(entity.getDbT5012ShujiiIkenshoJohoEntity()) != 0
-                && shosaiDac.insertOrUpdate(entity.getDbT5013ShujiiIkenshoShosaiJohoEntity()) != 0;
+    public int insertOrUpdate(ShujiiIkenshoEntity entity) {
+        return ikenshoDac.insertOrUpdate(entity.getDbT5012ShujiiIkenshoJohoEntity())
+                & shosaiDac.insertOrUpdate(entity.getDbT5013ShujiiIkenshoShosaiJohoEntity());
     }
 
     @Override
-    public boolean insert(ShujiiIkenshoEntity entity) {
-        return ikenshoDac.insert(entity.getDbT5012ShujiiIkenshoJohoEntity()) != 0
-                && shosaiDac.insert(entity.getDbT5013ShujiiIkenshoShosaiJohoEntity()) != 0;
+    public int insert(ShujiiIkenshoEntity entity) {
+        return ikenshoDac.insert(entity.getDbT5012ShujiiIkenshoJohoEntity())
+                & shosaiDac.insert(entity.getDbT5013ShujiiIkenshoShosaiJohoEntity());
     }
 
     @Override
-    public boolean update(ShujiiIkenshoEntity entity) {
-        return ikenshoDac.update(entity.getDbT5012ShujiiIkenshoJohoEntity()) != 0
-                && shosaiDac.update(entity.getDbT5013ShujiiIkenshoShosaiJohoEntity()) != 0;
+    public int update(ShujiiIkenshoEntity entity) {
+        return ikenshoDac.update(entity.getDbT5012ShujiiIkenshoJohoEntity())
+                & shosaiDac.update(entity.getDbT5013ShujiiIkenshoShosaiJohoEntity());
     }
 
     @Override
-    public boolean delete(ShujiiIkenshoEntity entity) {
-        return ikenshoDac.delete(entity.getDbT5012ShujiiIkenshoJohoEntity()) != 0
-                && shosaiDac.delete(entity.getDbT5013ShujiiIkenshoShosaiJohoEntity()) != 0;
+    public int delete(ShujiiIkenshoEntity entity) {
+        return ikenshoDac.delete(entity.getDbT5012ShujiiIkenshoJohoEntity())
+                & shosaiDac.delete(entity.getDbT5013ShujiiIkenshoShosaiJohoEntity());
     }
 }

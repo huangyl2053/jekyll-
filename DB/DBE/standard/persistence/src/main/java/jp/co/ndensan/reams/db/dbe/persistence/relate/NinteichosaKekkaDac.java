@@ -9,7 +9,9 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteichosaKekkaJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteichosahyoJohoDac;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.db.dbe.persistence.basic.NinteichosaKekkaJohoDac;
+import jp.co.ndensan.reams.db.dbe.persistence.basic.NinteichosahyoJohoDac;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 要介護認定調査結果のデータアクセスクラスです。
@@ -18,8 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
  */
 public class NinteichosaKekkaDac implements INinteichosaKekkaDac {
 
-    private final INinteichosaKekkaJohoDac chosaKekkaDac = InstanceCreator.create(INinteichosaKekkaJohoDac.class);
-    private final INinteichosahyoJohoDac chosahyoDac = InstanceCreator.create(INinteichosahyoJohoDac.class);
+    private final INinteichosaKekkaJohoDac chosaKekkaDac = InstanceProvider.create(NinteichosaKekkaJohoDac.class);
+    private final INinteichosahyoJohoDac chosahyoDac = InstanceProvider.create(NinteichosahyoJohoDac.class);
 
     @Override
     public NinteichosaKekkaEntity select(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査履歴番号) {
@@ -30,26 +32,26 @@ public class NinteichosaKekkaDac implements INinteichosaKekkaDac {
     }
 
     @Override
-    public boolean insertOrUpdate(NinteichosaKekkaEntity entity) {
-        return chosaKekkaDac.insertOrUpdate(entity.getDbT5008NinteichosaKekkaJohoEntity()) != 0
-                && chosahyoDac.insertOrUpdate(entity.getDbT5009NinteichosahyoJohoEntity()) != 0;
+    public int insertOrUpdate(NinteichosaKekkaEntity entity) {
+        return chosaKekkaDac.insertOrUpdate(entity.getDbT5008NinteichosaKekkaJohoEntity())
+                & chosahyoDac.insertOrUpdate(entity.getDbT5009NinteichosahyoJohoEntity());
     }
 
     @Override
-    public boolean insert(NinteichosaKekkaEntity entity) {
-        return chosaKekkaDac.insert(entity.getDbT5008NinteichosaKekkaJohoEntity()) != 0
-                && chosahyoDac.insert(entity.getDbT5009NinteichosahyoJohoEntity()) != 0;
+    public int insert(NinteichosaKekkaEntity entity) {
+        return chosaKekkaDac.insert(entity.getDbT5008NinteichosaKekkaJohoEntity())
+                & chosahyoDac.insert(entity.getDbT5009NinteichosahyoJohoEntity());
     }
 
     @Override
-    public boolean update(NinteichosaKekkaEntity entity) {
-        return chosaKekkaDac.update(entity.getDbT5008NinteichosaKekkaJohoEntity()) != 0
-                && chosahyoDac.update(entity.getDbT5009NinteichosahyoJohoEntity()) != 0;
+    public int update(NinteichosaKekkaEntity entity) {
+        return chosaKekkaDac.update(entity.getDbT5008NinteichosaKekkaJohoEntity())
+                & chosahyoDac.update(entity.getDbT5009NinteichosahyoJohoEntity());
     }
 
     @Override
-    public boolean delete(NinteichosaKekkaEntity entity) {
-        return chosaKekkaDac.delete(entity.getDbT5008NinteichosaKekkaJohoEntity()) != 0
-                && chosahyoDac.delete(entity.getDbT5009NinteichosahyoJohoEntity()) != 0;
+    public int delete(NinteichosaKekkaEntity entity) {
+        return chosaKekkaDac.delete(entity.getDbT5008NinteichosaKekkaJohoEntity())
+                & chosahyoDac.delete(entity.getDbT5009NinteichosahyoJohoEntity());
     }
 }

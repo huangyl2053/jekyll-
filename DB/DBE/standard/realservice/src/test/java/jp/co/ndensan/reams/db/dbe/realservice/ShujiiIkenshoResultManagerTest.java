@@ -30,12 +30,12 @@ import static org.mockito.Mockito.*;
 @RunWith(Enclosed.class)
 public class ShujiiIkenshoResultManagerTest {
 
-    private static final boolean AS_意見書結果あり = true;
-    private static final boolean AS_意見書結果なし = false;
-    private static final boolean AS_save成功 = true;
-    private static final boolean AS_save失敗 = false;
-    private static final boolean AS_remove成功 = true;
-    private static final boolean AS_remove失敗 = false;
+    private static final int AS_意見書結果あり = 1;
+    private static final int AS_意見書結果なし = 0;
+    private static final int AS_save成功 = 1;
+    private static final int AS_save失敗 = 0;
+    private static final int AS_remove成功 = 1;
+    private static final int AS_remove失敗 = 0;
 
     public static class get主治医意見書結果 {
 
@@ -76,11 +76,11 @@ public class ShujiiIkenshoResultManagerTest {
         }
     }
 
-    private static ShujiiIkenshoResultManager createShujiiIkenshoResultManager(boolean flg) {
+    private static ShujiiIkenshoResultManager createShujiiIkenshoResultManager(int flg) {
         return new ShujiiIkenshoResultManager(createShujiiIkenshoDac(flg), createShujiiIkenshoSakuseiIraiKirokuManager());
     }
 
-    private static ShujiiIkenshoDac createShujiiIkenshoDac(boolean flg) {
+    private static ShujiiIkenshoDac createShujiiIkenshoDac(int flg) {
         ShujiiIkenshoDac dac = mock(ShujiiIkenshoDac.class);
         ShujiiIkenshoEntity entity = createShujiiIkenshoEntity(flg);
         when(dac.select(any(ShinseishoKanriNo.class), any(IkenshosakuseiIraiRirekiNo.class))).thenReturn(entity);
@@ -110,7 +110,7 @@ public class ShujiiIkenshoResultManagerTest {
         return ShujiiIkenshoResultMock.getSpiedShujiiIkenshoResultInstance();
     }
 
-    private static ShujiiIkenshoEntity createShujiiIkenshoEntity(boolean flg) {
-        return flg ? ShujiiIkenshoEntityMock.getSpiedShujiiIkenshoEntityInstance() : null;
+    private static ShujiiIkenshoEntity createShujiiIkenshoEntity(int flg) {
+        return flg != 0 ? ShujiiIkenshoEntityMock.getSpiedShujiiIkenshoEntityInstance() : null;
     }
 }

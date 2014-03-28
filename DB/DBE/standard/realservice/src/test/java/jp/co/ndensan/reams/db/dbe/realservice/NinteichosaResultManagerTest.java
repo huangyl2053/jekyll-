@@ -30,12 +30,12 @@ import static org.mockito.Mockito.*;
 @RunWith(Enclosed.class)
 public class NinteichosaResultManagerTest {
 
-    private static final boolean AS_調査結果あり = true;
-    private static final boolean AS_調査結果なし = false;
-    private static final boolean AS_save成功 = true;
-    private static final boolean AS_save失敗 = false;
-    private static final boolean AS_remove成功 = true;
-    private static final boolean AS_remove失敗 = false;
+    private static final int AS_調査結果あり = 1;
+    private static final int AS_調査結果なし = 0;
+    private static final int AS_save成功 = 1;
+    private static final int AS_save失敗 = 0;
+    private static final int AS_remove成功 = 1;
+    private static final int AS_remove失敗 = 0;
 
     public static class get認定調査結果 {
 
@@ -76,11 +76,11 @@ public class NinteichosaResultManagerTest {
         }
     }
 
-    private static NinteichosaResultManager createNinteichosaResultManager(boolean flg) {
+    private static NinteichosaResultManager createNinteichosaResultManager(int flg) {
         return new NinteichosaResultManager(createNinteichosaKekkaDac(flg), createNinteiChosainFinder());
     }
 
-    private static INinteichosaKekkaDac createNinteichosaKekkaDac(boolean flg) {
+    private static INinteichosaKekkaDac createNinteichosaKekkaDac(int flg) {
         INinteichosaKekkaDac dac = mock(INinteichosaKekkaDac.class);
         NinteichosaKekkaEntity entity = createNinteichosaKekkaEntity(flg);
         when(dac.select(any(ShinseishoKanriNo.class), any(NinteichosaIraiRirekiNo.class))).thenReturn(entity);
@@ -110,7 +110,7 @@ public class NinteichosaResultManagerTest {
         return NinteichosaResultMock.getSpiedNinteichosaResultInstance();
     }
 
-    private static NinteichosaKekkaEntity createNinteichosaKekkaEntity(boolean flg) {
-        return flg ? NinteichosaKekkaEntityMock.getSpiedNinteichosaKekkaEntityInstance() : null;
+    private static NinteichosaKekkaEntity createNinteichosaKekkaEntity(int flg) {
+        return flg != 0 ? NinteichosaKekkaEntityMock.getSpiedNinteichosaKekkaEntityInstance() : null;
     }
 }
