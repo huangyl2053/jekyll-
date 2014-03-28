@@ -9,11 +9,11 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaKekkaMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.relate.INinteichosaKekkaDac;
+import jp.co.ndensan.reams.db.dbe.persistence.relate.NinteichosaKekkaDac;
 import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
 import jp.co.ndensan.reams.ur.urf.realservice._NinteiChosainFinder;
 import jp.co.ndensan.reams.ur.urf.realservice.INinteiChosainFinder;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 要介護認定調査の調査結果を管理するクラスです。
@@ -22,14 +22,14 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
  */
 public class NinteichosaResultManager {
 
-    private final INinteichosaKekkaDac dac;
+    private final NinteichosaKekkaDac dac;
     private final INinteiChosainFinder finder;
 
     /**
      * InstanceCreatorを用いてDacのインスタンスを生成し、メンバ変数に保持します。
      */
     public NinteichosaResultManager() {
-        dac = InstanceCreator.create(INinteichosaKekkaDac.class);
+        dac = InstanceProvider.create(NinteichosaKekkaDac.class);
         finder = new _NinteiChosainFinder();
     }
 
@@ -39,7 +39,7 @@ public class NinteichosaResultManager {
      * @param dac 要介護認定調査結果Dac
      * @param finder 認定調査員Finder
      */
-    NinteichosaResultManager(INinteichosaKekkaDac dac, INinteiChosainFinder finder) {
+    NinteichosaResultManager(NinteichosaKekkaDac dac, INinteiChosainFinder finder) {
         this.dac = dac;
         this.finder = finder;
     }

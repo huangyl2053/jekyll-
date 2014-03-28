@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.realservice.helper.NinteichosaKekkaEntityMock;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.NinteichosaResultMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.relate.INinteichosaKekkaDac;
+import jp.co.ndensan.reams.db.dbe.persistence.relate.NinteichosaKekkaDac;
 import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
 import jp.co.ndensan.reams.ur.urf.realservice.INinteiChosainFinder;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -80,8 +80,8 @@ public class NinteichosaResultManagerTest {
         return new NinteichosaResultManager(createNinteichosaKekkaDac(flg), createNinteiChosainFinder());
     }
 
-    private static INinteichosaKekkaDac createNinteichosaKekkaDac(int flg) {
-        INinteichosaKekkaDac dac = mock(INinteichosaKekkaDac.class);
+    private static NinteichosaKekkaDac createNinteichosaKekkaDac(int flg) {
+        NinteichosaKekkaDac dac = mock(NinteichosaKekkaDac.class);
         NinteichosaKekkaEntity entity = createNinteichosaKekkaEntity(flg);
         when(dac.select(any(ShinseishoKanriNo.class), any(NinteichosaIraiRirekiNo.class))).thenReturn(entity);
         when(dac.insertOrUpdate(any(NinteichosaKekkaEntity.class))).thenReturn(flg);

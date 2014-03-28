@@ -4,18 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.realservice;
 
-import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoResult;
-import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoSakuseiIrai;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.ShujiiIkenshoMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.ShujiiIkenshoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.ShujiiIkenshoDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**

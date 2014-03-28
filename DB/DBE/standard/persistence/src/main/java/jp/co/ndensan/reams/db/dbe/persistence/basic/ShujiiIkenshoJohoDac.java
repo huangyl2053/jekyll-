@@ -8,9 +8,12 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirek
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5012ShujiiIkenshoJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5012ShujiiIkenshoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
+import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5012ShujiiIkenshoJoho.*;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
 
@@ -19,12 +22,12 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
  *
  * @author N8156 宮本 康
  */
-public class ShujiiIkenshoJohoDac implements IShujiiIkenshoJohoDac {
+public class ShujiiIkenshoJohoDac implements IReplaceable<DbT5012ShujiiIkenshoJohoEntity>, IDeletable<DbT5012ShujiiIkenshoJohoEntity> {
 
     @InjectSession
     private SqlSession session;
 
-    @Override
+    @Transaction
     public DbT5012ShujiiIkenshoJohoEntity select(ShinseishoKanriNo 申請書管理番号, IkenshosakuseiIraiRirekiNo 意見書履歴番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()

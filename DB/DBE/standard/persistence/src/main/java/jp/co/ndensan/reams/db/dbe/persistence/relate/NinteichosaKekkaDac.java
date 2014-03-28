@@ -5,25 +5,26 @@
 package jp.co.ndensan.reams.db.dbe.persistence.relate;
 
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteichosaKekkaJohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteichosahyoJohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.NinteichosaKekkaJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.NinteichosahyoJohoDac;
+import jp.co.ndensan.reams.db.dbe.persistence.basic.NinteichosaKekkaJohoDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
+import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 要介護認定調査結果のデータアクセスクラスです。
  *
  * @author N8156 宮本 康
  */
-public class NinteichosaKekkaDac implements INinteichosaKekkaDac {
+public class NinteichosaKekkaDac implements IReplaceable<NinteichosaKekkaEntity>, IDeletable<NinteichosaKekkaEntity> {
 
-    private final INinteichosaKekkaJohoDac chosaKekkaDac = InstanceProvider.create(NinteichosaKekkaJohoDac.class);
-    private final INinteichosahyoJohoDac chosahyoDac = InstanceProvider.create(NinteichosahyoJohoDac.class);
+    private final NinteichosaKekkaJohoDac chosaKekkaDac = InstanceProvider.create(NinteichosaKekkaJohoDac.class);
+    private final NinteichosahyoJohoDac chosahyoDac = InstanceProvider.create(NinteichosahyoJohoDac.class);
 
-    @Override
+    @Transaction
     public NinteichosaKekkaEntity select(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査履歴番号) {
         NinteichosaKekkaEntity entity = new NinteichosaKekkaEntity();
         entity.setDbT5008NinteichosaKekkaJohoEntity(chosaKekkaDac.select(申請書管理番号, 認定調査履歴番号));
