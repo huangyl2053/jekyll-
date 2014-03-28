@@ -26,9 +26,9 @@ import static org.mockito.Mockito.*;
  * @author N8187 久保田 英男
  */
 @RunWith(Enclosed.class)
-public class NinteichosaKekkaTorikomiTaishoshaFinderTest extends DbeTestBase {
+public class NinteichosaKekkaTorikomiTaishoshaManagerTest extends DbeTestBase {
 
-    private static NinteichosaKekkaTorikomiTaishoshaFinder sut;
+    private static NinteichosaKekkaTorikomiTaishoshaManager sut;
     private static INinteiChosaIraiJohoDac chosaIraiJohoDac;
     private static INinteichosaKekkaTorikomiTaishoshaDac torikomiTaishoshaDac;
     private static ShichosonCode 市町村コード = new ShichosonCode(new RString("123456"));
@@ -47,7 +47,7 @@ public class NinteichosaKekkaTorikomiTaishoshaFinderTest extends DbeTestBase {
         @Test
         public void 認定調査結果取込対象者の取得条件に一致するデータが登録されていないとき_COLLECTIONS_EMPTYを返す() {
             when(torikomiTaishoshaDac.selectAll()).thenReturn(Collections.EMPTY_LIST);
-            sut = new NinteichosaKekkaTorikomiTaishoshaFinder(chosaIraiJohoDac, torikomiTaishoshaDac);
+            sut = new NinteichosaKekkaTorikomiTaishoshaManager(chosaIraiJohoDac, torikomiTaishoshaDac);
             resultList = sut.get認定調査結果取込対象者全件();
             assertThat(resultList, is(Collections.EMPTY_LIST));
         }
@@ -58,7 +58,7 @@ public class NinteichosaKekkaTorikomiTaishoshaFinderTest extends DbeTestBase {
         @Test
         public void 認定調査結果取込対象者の取得条件に一致するデータが登録されていないとき_COLLECTIONS_EMPTYを返す() {
             when(torikomiTaishoshaDac.select市町村コード(市町村コード)).thenReturn(Collections.EMPTY_LIST);
-            sut = new NinteichosaKekkaTorikomiTaishoshaFinder(chosaIraiJohoDac, torikomiTaishoshaDac);
+            sut = new NinteichosaKekkaTorikomiTaishoshaManager(chosaIraiJohoDac, torikomiTaishoshaDac);
             resultList = sut.get認定調査結果取込対象者全件(市町村コード);
             assertThat(resultList, is(Collections.EMPTY_LIST));
         }
@@ -69,7 +69,7 @@ public class NinteichosaKekkaTorikomiTaishoshaFinderTest extends DbeTestBase {
         @Test
         public void 認定調査結果取込対象者の取得条件に一致するデータが登録されていないとき_COLLECTIONS_EMPTYを返す() {
             when(torikomiTaishoshaDac.select市町村コード及び支所コード(市町村コード, 支所コード)).thenReturn(Collections.EMPTY_LIST);
-            sut = new NinteichosaKekkaTorikomiTaishoshaFinder(chosaIraiJohoDac, torikomiTaishoshaDac);
+            sut = new NinteichosaKekkaTorikomiTaishoshaManager(chosaIraiJohoDac, torikomiTaishoshaDac);
             resultList = sut.get認定調査結果取込対象者全件(市町村コード, 支所コード);
             assertThat(resultList, is(Collections.EMPTY_LIST));
         }

@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.KaigoNinteichosain;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaKekkaTorikomiTaishosha;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
@@ -21,6 +22,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.relate.INinteichosaKekkaTorikomiTa
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -29,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * @author N8187 久保田 英男
  */
-public class NinteichosaKekkaTorikomiTaishoshaFinder {
+public class NinteichosaKekkaTorikomiTaishoshaManager {
 
     private final INinteiChosaIraiJohoDac chosaIraiJohoDac;
     private final INinteichosaKekkaTorikomiTaishoshaDac torikomiTaishoshaDac;
@@ -37,7 +39,7 @@ public class NinteichosaKekkaTorikomiTaishoshaFinder {
     /**
      * コンストラクタです。
      */
-    public NinteichosaKekkaTorikomiTaishoshaFinder() {
+    public NinteichosaKekkaTorikomiTaishoshaManager() {
         chosaIraiJohoDac = InstanceProvider.create(INinteiChosaIraiJohoDac.class);
         torikomiTaishoshaDac = InstanceProvider.create(INinteichosaKekkaTorikomiTaishoshaDac.class);
     }
@@ -48,7 +50,7 @@ public class NinteichosaKekkaTorikomiTaishoshaFinder {
      * @param chosaIraiJohoDac chosaIraiJohoDac
      * @param torikomiTaishoshaDac torikomiTaishoshaDac
      */
-    NinteichosaKekkaTorikomiTaishoshaFinder(
+    NinteichosaKekkaTorikomiTaishoshaManager(
             INinteiChosaIraiJohoDac chosaIraiJohoDac,
             INinteichosaKekkaTorikomiTaishoshaDac torikomiTaishoshaDac) {
         this.chosaIraiJohoDac = chosaIraiJohoDac;
@@ -89,11 +91,42 @@ public class NinteichosaKekkaTorikomiTaishoshaFinder {
         return create認定調査結果取込対象者List(torikomiTaishoshaEntityList);
     }
 
+    /**
+     * 認定調査結果取込対象者の進捗を完了状態にするために、要介護認定進捗情報の認定調査完了年月日を更新します。
+     *
+     * @param 認定調査結果取込対象者 認定調査結果取込対象者
+     * @param 認定調査完了年月日 認定調査完了年月日
+     * @return true:更新OK, false:更新NG
+     */
+    public boolean update認定調査完了年月日(NinteichosaKekkaTorikomiTaishosha 認定調査結果取込対象者, FlexibleDate 認定調査完了年月日) {
+        YokaigoninteiProgress currentProgress = 認定調査結果取込対象者.get認定進捗情報();
+        YokaigoninteiProgress yokaigoninteiProgress = new YokaigoninteiProgress(
+                currentProgress.get申請書管理番号(),
+                currentProgress.get認定申請情報登録年月日(),
+                currentProgress.has認定延期通知発行に対する同意有無(),
+                currentProgress.get認定延期通知発行年月日(),
+                currentProgress.get認定延期通知発行回数(),
+                currentProgress.get要介護認定延期理由(),
+                currentProgress.get要介護認定一次判定情報抽出年月日(),
+                currentProgress.get依頼情報データ送信年月日(),
+                currentProgress.get認定調査依頼完了年月日(),
+                認定調査完了年月日,
+                currentProgress.get主治医意見書作成依頼完了年月日(),
+                currentProgress.get主治医意見書登録完了年月日(),
+                currentProgress.get要介護認定一次判定完了年月日(),
+                currentProgress.get要介護認定1_5次判定完了年月日(),
+                currentProgress.get認定審査会割当完了年月日(),
+                currentProgress.get認定審査会完了年月日(),
+                currentProgress.getセンター送信年月日());
+        return new YokaigoninteiProgressManager().save(yokaigoninteiProgress);
+    }
+
     private List<NinteichosaKekkaTorikomiTaishosha> create認定調査結果取込対象者List(
             List<KaigoNinteiTaishoshaEntity> entityList) {
         List<NinteichosaKekkaTorikomiTaishosha> list = new ArrayList<>();
 
         for (KaigoNinteiTaishoshaEntity entity : entityList) {
+            DbT5005NinteiShinchokuJohoEntity shinchokuEntity = entity.getNinteiShinchokuJohoEntity();
             DbT5001NinteiShinseiJohoEntity shinseiJohoEntity = entity.getNinteiShinseiJohoEntity();
             DbT5006NinteichosaIraiJohoEntity iraiJohoEntity = get認定調査依頼情報Entity(
                     entity.getNinteiShinchokuJohoEntity(),
@@ -105,6 +138,7 @@ public class NinteichosaKekkaTorikomiTaishoshaFinder {
                     shinseiJohoEntity.getShikibetsuCode());
 
             list.add(NinteichosaKekkaTorikomiTaishoshaMapper.toNinteichosaKekkaTorikomiTaishosha(
+                    shinchokuEntity,
                     shinseiJohoEntity,
                     iraiJohoEntity,
                     kaigoNinteichosain,

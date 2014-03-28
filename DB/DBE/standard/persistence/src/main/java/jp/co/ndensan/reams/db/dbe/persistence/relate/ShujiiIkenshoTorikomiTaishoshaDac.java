@@ -19,6 +19,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.lt;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.using;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 主治医意見書取込対象者を取得するクラスです。
@@ -31,6 +32,7 @@ public class ShujiiIkenshoTorikomiTaishoshaDac implements IShujiiIkenshoTorikomi
     private SqlSession session;
 
     @Override
+    @Transaction
     public List<KaigoNinteiTaishoshaEntity> selectAll() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -45,6 +47,7 @@ public class ShujiiIkenshoTorikomiTaishoshaDac implements IShujiiIkenshoTorikomi
     }
 
     @Override
+    @Transaction
     public List<KaigoNinteiTaishoshaEntity> select市町村コード(ShichosonCode 市町村コード) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -60,6 +63,7 @@ public class ShujiiIkenshoTorikomiTaishoshaDac implements IShujiiIkenshoTorikomi
     }
 
     @Override
+    @Transaction
     public List<KaigoNinteiTaishoshaEntity> select市町村コード及び支所コード(ShichosonCode 市町村コード, RString 支所コード) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 

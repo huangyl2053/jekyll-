@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
  */
 public class NinteichosaKekkaTorikomiTaishosha {
 
+    private YokaigoninteiProgress 認定進捗情報;
     private NinteiShinseiJoho 認定申請情報;
     private NinteichosaIrai 認定調査依頼情報;
     private KaigoNinteichosain 介護認定調査員;
@@ -23,20 +24,32 @@ public class NinteichosaKekkaTorikomiTaishosha {
     /**
      * コンストラクタです。
      *
+     * @param 認定進捗情報 認定進捗情報
      * @param 認定申請情報 認定申請情報
      * @param 認定調査依頼情報 認定調査依頼情報
      * @param 介護認定調査員 介護認定調査員
      * @param 個人 個人
      */
     public NinteichosaKekkaTorikomiTaishosha(
+            YokaigoninteiProgress 認定進捗情報,
             NinteiShinseiJoho 認定申請情報,
             NinteichosaIrai 認定調査依頼情報,
             KaigoNinteichosain 介護認定調査員,
             IKojin 個人) {
+        this.認定進捗情報 = requireNonNull(認定進捗情報, Messages.E00003.replace("認定進捗情報", "認定調査結果取込対象者").getMessage());
         this.認定申請情報 = requireNonNull(認定申請情報, Messages.E00003.replace("認定申請情報", "認定調査結果取込対象者").getMessage());
         this.認定調査依頼情報 = requireNonNull(認定調査依頼情報, Messages.E00003.replace("認定調査依頼情報", "認定調査結果取込対象者").getMessage());
         this.介護認定調査員 = requireNonNull(介護認定調査員, Messages.E00003.replace("介護認定調査員", "認定調査結果取込対象者").getMessage());
         this.個人 = requireNonNull(個人, Messages.E00003.replace("個人", "認定調査結果取込対象者").getMessage());
+    }
+
+    /**
+     * 認定進捗情報を返します。
+     *
+     * @return 認定進捗情報
+     */
+    public YokaigoninteiProgress get認定進捗情報() {
+        return 認定進捗情報;
     }
 
     /**
