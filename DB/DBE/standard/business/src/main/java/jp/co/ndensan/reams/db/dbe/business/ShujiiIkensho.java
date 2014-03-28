@@ -59,17 +59,6 @@ public class ShujiiIkensho<E extends IShujiiIkenshoItemKubun, T extends IShujiiI
     }
 
     /**
-     * 引数の意見書項目を意見書定義に設定します。
-     *
-     * @param 意見書項目 意見書項目
-     */
-    public void set意見書項目(T 意見書項目) {
-        if (意見書項目 != null) {
-            意見書定義.put((E) 意見書項目.get意見書項目区分(), 意見書項目);
-        }
-    }
-
-    /**
      * 引数の意見書項目グループに該当する意見書項目リストを返します。
      *
      * @param 意見書項目グループ 意見書項目グループ

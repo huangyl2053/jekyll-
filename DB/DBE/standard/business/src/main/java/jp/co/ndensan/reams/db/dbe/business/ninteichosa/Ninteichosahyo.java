@@ -59,17 +59,6 @@ public class Ninteichosahyo<E extends INinteichosaItemKubun, T extends INinteich
     }
 
     /**
-     * 引数の調査項目を調査票定義に設定します。
-     *
-     * @param 調査項目 調査項目
-     */
-    public void set調査項目(T 調査項目) {
-        if (調査項目 != null) {
-            調査票定義.put((E) 調査項目.get調査項目区分(), 調査項目);
-        }
-    }
-
-    /**
      * 引数の調査項目グループに該当する調査項目リストを返します。
      *
      * @param 調査項目グループ 調査項目グループ
