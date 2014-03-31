@@ -98,7 +98,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
      * @param 認定調査完了年月日 認定調査完了年月日
      * @return true:更新OK, false:更新NG
      */
-    public boolean update認定調査完了年月日(NinteichosaKekkaTorikomiTaishosha 認定調査結果取込対象者, FlexibleDate 認定調査完了年月日) {
+    public boolean save認定調査完了年月日(NinteichosaKekkaTorikomiTaishosha 認定調査結果取込対象者, FlexibleDate 認定調査完了年月日) {
         YokaigoninteiProgress currentProgress = 認定調査結果取込対象者.get認定進捗情報();
         YokaigoninteiProgress yokaigoninteiProgress = new YokaigoninteiProgress(
                 currentProgress.get申請書管理番号(),

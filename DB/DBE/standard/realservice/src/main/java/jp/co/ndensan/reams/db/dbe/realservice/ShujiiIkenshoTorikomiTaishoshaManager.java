@@ -92,7 +92,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
      * @param 主治医意見書登録完了年月日 主治医意見書登録完了年月日
      * @return true:更新OK, false:更新NG
      */
-    public boolean update主治医意見書登録完了年月日(ShujiiIkenshoTorikomiTaishosha 主治医意見書取込対象者, FlexibleDate 主治医意見書登録完了年月日) {
+    public boolean save主治医意見書登録完了年月日(ShujiiIkenshoTorikomiTaishosha 主治医意見書取込対象者, FlexibleDate 主治医意見書登録完了年月日) {
         YokaigoninteiProgress currentProgress = 主治医意見書取込対象者.get認定進捗情報();
         YokaigoninteiProgress yokaigoninteiProgress = new YokaigoninteiProgress(
                 currentProgress.get申請書管理番号(),
