@@ -9,7 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.YokaigoninteiDateConstants;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJoho;
-import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -33,48 +33,48 @@ public class ShujiiIkenshoTorikomiTaishoshaDac implements IShujiiIkenshoTorikomi
 
     @Override
     @Transaction
-    public List<KaigoNinteiTaishoshaEntity> selectAll() {
+    public List<KaigoNinteiShoriTaishoshaEntity> selectAll() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        List<KaigoNinteiTaishoshaEntity> list = accessor.select()
+        List<KaigoNinteiShoriTaishoshaEntity> list = accessor.select()
                 .table(DbT5001NinteiShinseiJoho.class)
                 .leftJoin(DbT5001NinteiShinseiJoho.class, using(DbT5005NinteiShinchokuJoho.shinseishoKanriNo))
                 .where(and(lt(YokaigoninteiDateConstants.主治医意見書作成依頼未完了年月日, DbT5005NinteiShinchokuJoho.ikenshoSakuseiIraiKanryoYMD),
                 eq(YokaigoninteiDateConstants.主治医意見書登録未完了年月日, DbT5005NinteiShinchokuJoho.ikenshoTorokuKanryoYMD)))
-                .toList(KaigoNinteiTaishoshaEntity.class);
+                .toList(KaigoNinteiShoriTaishoshaEntity.class);
 
         return (!list.isEmpty()) ? list : Collections.EMPTY_LIST;
     }
 
     @Override
     @Transaction
-    public List<KaigoNinteiTaishoshaEntity> select市町村コード(ShichosonCode 市町村コード) {
+    public List<KaigoNinteiShoriTaishoshaEntity> select市町村コード(ShichosonCode 市町村コード) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        List<KaigoNinteiTaishoshaEntity> list = accessor.select()
+        List<KaigoNinteiShoriTaishoshaEntity> list = accessor.select()
                 .table(DbT5001NinteiShinseiJoho.class)
                 .leftJoin(DbT5001NinteiShinseiJoho.class, using(DbT5005NinteiShinchokuJoho.shinseishoKanriNo))
                 .where(and(lt(YokaigoninteiDateConstants.主治医意見書作成依頼未完了年月日, DbT5005NinteiShinchokuJoho.ikenshoSakuseiIraiKanryoYMD),
                 eq(YokaigoninteiDateConstants.主治医意見書登録未完了年月日, DbT5005NinteiShinchokuJoho.ikenshoTorokuKanryoYMD),
                 eq(DbT5001NinteiShinseiJoho.shichosonCode, 市町村コード)))
-                .toList(KaigoNinteiTaishoshaEntity.class);
+                .toList(KaigoNinteiShoriTaishoshaEntity.class);
 
         return (!list.isEmpty()) ? list : Collections.EMPTY_LIST;
     }
 
     @Override
     @Transaction
-    public List<KaigoNinteiTaishoshaEntity> select市町村コード及び支所コード(ShichosonCode 市町村コード, RString 支所コード) {
+    public List<KaigoNinteiShoriTaishoshaEntity> select市町村コード及び支所コード(ShichosonCode 市町村コード, RString 支所コード) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        List<KaigoNinteiTaishoshaEntity> list = accessor.select()
+        List<KaigoNinteiShoriTaishoshaEntity> list = accessor.select()
                 .table(DbT5001NinteiShinseiJoho.class)
                 .leftJoin(DbT5001NinteiShinseiJoho.class, using(DbT5005NinteiShinchokuJoho.shinseishoKanriNo))
                 .where(and(lt(YokaigoninteiDateConstants.主治医意見書作成依頼未完了年月日, DbT5005NinteiShinchokuJoho.ikenshoSakuseiIraiKanryoYMD),
                 eq(YokaigoninteiDateConstants.主治医意見書登録未完了年月日, DbT5005NinteiShinchokuJoho.ikenshoTorokuKanryoYMD),
                 eq(DbT5001NinteiShinseiJoho.shichosonCode, 市町村コード),
                 eq(DbT5001NinteiShinseiJoho.shishoCode, 支所コード)))
-                .toList(KaigoNinteiTaishoshaEntity.class);
+                .toList(KaigoNinteiShoriTaishoshaEntity.class);
 
         return (!list.isEmpty()) ? list : Collections.EMPTY_LIST;
     }

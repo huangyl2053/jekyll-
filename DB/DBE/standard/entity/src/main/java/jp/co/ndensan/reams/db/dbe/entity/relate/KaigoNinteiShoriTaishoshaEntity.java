@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
  *
  * @author N8187 久保田 英男
  */
-public class KaigoNinteiTaishoshaEntity {
+public class KaigoNinteiShoriTaishoshaEntity {
 
     private DbT5001NinteiShinseiJohoEntity ninteiShinseiJohoEntity;
     private DbT5005NinteiShinchokuJohoEntity ninteiShinchokuJohoEntity;

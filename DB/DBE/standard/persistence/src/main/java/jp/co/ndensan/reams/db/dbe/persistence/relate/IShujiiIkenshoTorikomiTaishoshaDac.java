@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.relate;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -24,7 +24,7 @@ public interface IShujiiIkenshoTorikomiTaishoshaDac {
      * @return 主治医意見書取込対象者のリスト
      */
     @Transaction
-    List<KaigoNinteiTaishoshaEntity> selectAll();
+    List<KaigoNinteiShoriTaishoshaEntity> selectAll();
 
     /**
      * 市町村コードを元に、主治医意見書取込対象者を取得します。
@@ -33,7 +33,7 @@ public interface IShujiiIkenshoTorikomiTaishoshaDac {
      * @return 主治医意見書取込対象者のリスト
      */
     @Transaction
-    List<KaigoNinteiTaishoshaEntity> select市町村コード(ShichosonCode 市町村コード);
+    List<KaigoNinteiShoriTaishoshaEntity> select市町村コード(ShichosonCode 市町村コード);
 
     /**
      * 市町村コードと支所コードを元に、主治医意見書取込対象者を取得します。
@@ -43,5 +43,5 @@ public interface IShujiiIkenshoTorikomiTaishoshaDac {
      * @return 主治医意見書取込対象者のリスト
      */
     @Transaction
-    List<KaigoNinteiTaishoshaEntity> select市町村コード及び支所コード(ShichosonCode 市町村コード, RString 支所コード);
+    List<KaigoNinteiShoriTaishoshaEntity> select市町村コード及び支所コード(ShichosonCode 市町村コード, RString 支所コード);
 }

@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaKekkaTorikomiTaishoshaMapper;
-import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiChosaIraiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.INinteichosaKekkaTorikomiTaishoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
@@ -64,7 +64,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
      */
     public List<NinteichosaKekkaTorikomiTaishosha> get認定調査結果取込対象者全件() {
 
-        List<KaigoNinteiTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.selectAll();
+        List<KaigoNinteiShoriTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.selectAll();
         return create認定調査結果取込対象者List(torikomiTaishoshaEntityList);
     }
 
@@ -75,7 +75,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
      * @return 認定調査結果取込対象者全件
      */
     public List<NinteichosaKekkaTorikomiTaishosha> get認定調査結果取込対象者全件(ShichosonCode 市町村コード) {
-        List<KaigoNinteiTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select市町村コード(市町村コード);
+        List<KaigoNinteiShoriTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select市町村コード(市町村コード);
         return create認定調査結果取込対象者List(torikomiTaishoshaEntityList);
     }
 
@@ -87,7 +87,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
      * @return 認定調査結果取込対象者全件
      */
     public List<NinteichosaKekkaTorikomiTaishosha> get認定調査結果取込対象者全件(ShichosonCode 市町村コード, RString 支所コード) {
-        List<KaigoNinteiTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select市町村コード及び支所コード(市町村コード, 支所コード);
+        List<KaigoNinteiShoriTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select市町村コード及び支所コード(市町村コード, 支所コード);
         return create認定調査結果取込対象者List(torikomiTaishoshaEntityList);
     }
 
@@ -122,10 +122,10 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
     }
 
     private List<NinteichosaKekkaTorikomiTaishosha> create認定調査結果取込対象者List(
-            List<KaigoNinteiTaishoshaEntity> entityList) {
+            List<KaigoNinteiShoriTaishoshaEntity> entityList) {
         List<NinteichosaKekkaTorikomiTaishosha> list = new ArrayList<>();
 
-        for (KaigoNinteiTaishoshaEntity entity : entityList) {
+        for (KaigoNinteiShoriTaishoshaEntity entity : entityList) {
             DbT5005NinteiShinchokuJohoEntity shinchokuEntity = entity.getNinteiShinchokuJohoEntity();
             DbT5001NinteiShinseiJohoEntity shinseiJohoEntity = entity.getNinteiShinseiJohoEntity();
             DbT5006NinteichosaIraiJohoEntity iraiJohoEntity = get認定調査依頼情報Entity(

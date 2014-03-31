@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteiShinchokuJohoMapper;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteishinseiJohoMapper;
-import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.IShujiiIkenshoTorikomiTaishoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
@@ -58,7 +58,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
      * @return 主治医意見書取込対象者全件
      */
     public List<ShujiiIkenshoTorikomiTaishosha> get主治医意見書取込対象者全件() {
-        List<KaigoNinteiTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.selectAll();
+        List<KaigoNinteiShoriTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.selectAll();
         return create主治医意見書取込対象者List(torikomiTaishoshaEntityList);
     }
 
@@ -69,7 +69,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
      * @return 主治医意見書取込対象者全件
      */
     public List<ShujiiIkenshoTorikomiTaishosha> get主治医意見書取込対象者全件(ShichosonCode 市町村コード) {
-        List<KaigoNinteiTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select市町村コード(市町村コード);
+        List<KaigoNinteiShoriTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select市町村コード(市町村コード);
         return create主治医意見書取込対象者List(torikomiTaishoshaEntityList);
     }
 
@@ -81,7 +81,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
      * @return 主治医意見書取込対象者全件
      */
     public List<ShujiiIkenshoTorikomiTaishosha> get主治医意見書取込対象者全件(ShichosonCode 市町村コード, RString 支所コード) {
-        List<KaigoNinteiTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select市町村コード及び支所コード(市町村コード, 支所コード);
+        List<KaigoNinteiShoriTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select市町村コード及び支所コード(市町村コード, 支所コード);
         return create主治医意見書取込対象者List(torikomiTaishoshaEntityList);
     }
 
@@ -116,10 +116,10 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
     }
 
     private List<ShujiiIkenshoTorikomiTaishosha> create主治医意見書取込対象者List(
-            List<KaigoNinteiTaishoshaEntity> entityList) {
+            List<KaigoNinteiShoriTaishoshaEntity> entityList) {
         List<ShujiiIkenshoTorikomiTaishosha> list = new ArrayList<>();
 
-        for (KaigoNinteiTaishoshaEntity entity : entityList) {
+        for (KaigoNinteiShoriTaishoshaEntity entity : entityList) {
             list.add(create主治医意見書取込対象者(entity));
         }
 
@@ -130,7 +130,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
         return list;
     }
 
-    private ShujiiIkenshoTorikomiTaishosha create主治医意見書取込対象者(KaigoNinteiTaishoshaEntity entity) {
+    private ShujiiIkenshoTorikomiTaishosha create主治医意見書取込対象者(KaigoNinteiShoriTaishoshaEntity entity) {
         DbT5005NinteiShinchokuJohoEntity shinchokuEntity = entity.getNinteiShinchokuJohoEntity();
         DbT5001NinteiShinseiJohoEntity shinseiEntity = entity.getNinteiShinseiJohoEntity();
 
