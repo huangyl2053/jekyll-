@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoTorikomiTaishosha;
-import jp.co.ndensan.reams.db.dbe.persistence.relate.IShujiiIkenshoTorikomiTaishoshaDac;
+import jp.co.ndensan.reams.db.dbe.persistence.relate.ShujiiIkenshoTorikomiTaishoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -28,14 +28,14 @@ import static org.hamcrest.CoreMatchers.is;
 public class ShujiiIkenshoTorikomiTaishoshaManagerTest extends DbeTestBase {
 
     private static ShujiiIkenshoTorikomiTaishoshaManager sut;
-    private static IShujiiIkenshoTorikomiTaishoshaDac torikomiTaishoshaDac;
+    private static ShujiiIkenshoTorikomiTaishoshaDac torikomiTaishoshaDac;
     private static ShichosonCode 市町村コード = new ShichosonCode(new RString("123456"));
     private static RString 支所コード = new RString("0001");
     private static List<ShujiiIkenshoTorikomiTaishosha> resultList;
 
     @BeforeClass
     public static void setUpClass() {
-        torikomiTaishoshaDac = mock(IShujiiIkenshoTorikomiTaishoshaDac.class);
+        torikomiTaishoshaDac = mock(ShujiiIkenshoTorikomiTaishoshaDac.class);
     }
 
     public static class get主治医意見書取込対象者全件 extends DbeTestBase {

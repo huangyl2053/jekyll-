@@ -26,12 +26,11 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author N8187 久保田 英男
  */
-public class ShujiiIkenshoTorikomiTaishoshaDac implements IShujiiIkenshoTorikomiTaishoshaDac {
+public class ShujiiIkenshoTorikomiTaishoshaDac {
 
     @InjectSession
     private SqlSession session;
 
-    @Override
     @Transaction
     public List<KaigoNinteiShoriTaishoshaEntity> selectAll() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -46,7 +45,6 @@ public class ShujiiIkenshoTorikomiTaishoshaDac implements IShujiiIkenshoTorikomi
         return (!list.isEmpty()) ? list : Collections.EMPTY_LIST;
     }
 
-    @Override
     @Transaction
     public List<KaigoNinteiShoriTaishoshaEntity> select市町村コード(ShichosonCode 市町村コード) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -62,7 +60,6 @@ public class ShujiiIkenshoTorikomiTaishoshaDac implements IShujiiIkenshoTorikomi
         return (!list.isEmpty()) ? list : Collections.EMPTY_LIST;
     }
 
-    @Override
     @Transaction
     public List<KaigoNinteiShoriTaishoshaEntity> select市町村コード及び支所コード(ShichosonCode 市町村コード, RString 支所コード) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);

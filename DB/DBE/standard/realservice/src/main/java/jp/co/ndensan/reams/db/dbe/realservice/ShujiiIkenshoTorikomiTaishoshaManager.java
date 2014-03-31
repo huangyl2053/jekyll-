@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteiShinchokuJohoMapper;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteishinseiJohoMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.relate.IShujiiIkenshoTorikomiTaishoshaDac;
+import jp.co.ndensan.reams.db.dbe.persistence.relate.ShujiiIkenshoTorikomiTaishoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
@@ -33,13 +33,13 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class ShujiiIkenshoTorikomiTaishoshaManager {
 
-    private final IShujiiIkenshoTorikomiTaishoshaDac torikomiTaishoshaDac;
+    private final ShujiiIkenshoTorikomiTaishoshaDac torikomiTaishoshaDac;
 
     /**
      * コンストラクタです。
      */
     public ShujiiIkenshoTorikomiTaishoshaManager() {
-        torikomiTaishoshaDac = InstanceProvider.create(IShujiiIkenshoTorikomiTaishoshaDac.class);
+        torikomiTaishoshaDac = InstanceProvider.create(ShujiiIkenshoTorikomiTaishoshaDac.class);
     }
 
     /**
@@ -48,7 +48,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
      * @param torikomiTaishoshaDac torikomiTaishoshaDac
      */
     ShujiiIkenshoTorikomiTaishoshaManager(
-            IShujiiIkenshoTorikomiTaishoshaDac torikomiTaishoshaDac) {
+            ShujiiIkenshoTorikomiTaishoshaDac torikomiTaishoshaDac) {
         this.torikomiTaishoshaDac = torikomiTaishoshaDac;
     }
 
