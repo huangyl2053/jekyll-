@@ -19,6 +19,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public interface INinteichosaItem {
 
     /**
+     * 自身が調査結果項目なのか調査項目なのかを判定します。
+     *
+     * @return 調査結果項目の場合はtrueを返します。調査項目の場合はfalseを返します。
+     */
+    boolean is調査結果項目();
+
+    /**
      * 調査項目グループを返します。
      *
      * @return 調査項目グループ

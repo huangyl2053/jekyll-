@@ -68,6 +68,14 @@ public class NinteichosaItemTest {
         }
     }
 
+    public static class is調査結果項目 {
+
+        @Test
+        public void 調査項目の時_is調査結果項目は_FALSEを返す() {
+            assertThat(createNinteichosaItem().is調査結果項目(), is(false));
+        }
+    }
+
     public static class get調査項目グループ {
 
         @Test

@@ -55,6 +55,11 @@ public class NinteichosaItem implements INinteichosaItem {
     }
 
     @Override
+    public boolean is調査結果項目() {
+        return false;
+    }
+
+    @Override
     public INinteichosaItemGroup get調査項目グループ() {
         return 調査項目グループ;
     }

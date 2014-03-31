@@ -57,6 +57,11 @@ public class ShujiiIkenshoItem implements IShujiiIkenshoItem {
     }
 
     @Override
+    public boolean is意見書結果項目() {
+        return false;
+    }
+
+    @Override
     public IShujiiIkenshoItemGroup get意見書項目グループ() {
         return 意見書項目グループ;
     }

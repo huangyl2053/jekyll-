@@ -69,6 +69,14 @@ public class ShujiiIkenshoItemTest {
         }
     }
 
+    public static class is意見書結果項目 {
+
+        @Test
+        public void 意見書項目の時_is意見書結果項目は_FALSEを返す() {
+            assertThat(createShujiiIkenshoItem().is意見書結果項目(), is(false));
+        }
+    }
+
     public static class get意見書項目グループ {
 
         @Test

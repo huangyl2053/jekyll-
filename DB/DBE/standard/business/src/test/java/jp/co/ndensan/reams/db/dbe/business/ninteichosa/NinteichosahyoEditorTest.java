@@ -91,6 +91,22 @@ public class NinteichosahyoEditorTest {
         }
     }
 
+    public static class isResultSet {
+
+        @Test
+        public void 調査結果の設定がある時_isResultSetは_TRUEを返す() {
+            NinteichosahyoEditor sut = createEditor(createChosahyo());
+            sut.setResult(ITEM_KUBUN, CODE_VALUE.value());
+            assertThat(sut.isResultSet(ITEM_KUBUN), is(true));
+        }
+
+        @Test
+        public void 調査結果の設定がない時_isResultSetは_FALSEを返す() {
+            NinteichosahyoEditor sut = createEditor(createChosahyo());
+            assertThat(sut.isResultSet(ITEM_KUBUN), is(false));
+        }
+    }
+
     public static class getNinteichosahyo {
 
         @Test

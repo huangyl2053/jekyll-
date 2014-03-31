@@ -4,14 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemGroup;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemSubGroup;
-import jp.co.ndensan.reams.db.dbe.definition.IShujiiIkenshoItem;
 import jp.co.ndensan.reams.db.dbe.definition.Choices;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Choice;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IAnsweringItem;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.FreeInputItem;
+import jp.co.ndensan.reams.db.dbe.definition.IShujiiIkenshoItem;
+import jp.co.ndensan.reams.db.dbe.definition.ShujiiIkenshoItem;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShujiiIkenshoItemNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -24,7 +25,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class ShujiiIkenshoItemForResult implements IShujiiIkenshoItem {
 
-    private final IShujiiIkenshoItem 意見書項目;
+    private final ShujiiIkenshoItem 意見書項目;
     private final RString 意見書結果;
 
     /**
@@ -33,9 +34,14 @@ public class ShujiiIkenshoItemForResult implements IShujiiIkenshoItem {
      * @param 意見書項目 意見書項目
      * @param 意見書結果 意見書結果
      */
-    public ShujiiIkenshoItemForResult(IShujiiIkenshoItem 意見書項目, RString 意見書結果) {
+    public ShujiiIkenshoItemForResult(ShujiiIkenshoItem 意見書項目, RString 意見書結果) {
         this.意見書項目 = requireNonNull(意見書項目, Messages.E00001.replace("意見書項目").getMessage());
         this.意見書結果 = requireNonNull(意見書結果, Messages.E00001.replace("意見書結果").getMessage());
+    }
+
+    @Override
+    public boolean is意見書結果項目() {
+        return true;
     }
 
     @Override
@@ -81,6 +87,15 @@ public class ShujiiIkenshoItemForResult implements IShujiiIkenshoItem {
     @Override
     public boolean is主要意見書項目() {
         return 意見書項目.is主要意見書項目();
+    }
+
+    /**
+     * 意見書項目を返します。
+     *
+     * @return 意見書項目
+     */
+    public ShujiiIkenshoItem get意見書項目() {
+        return 意見書項目;
     }
 
     /**

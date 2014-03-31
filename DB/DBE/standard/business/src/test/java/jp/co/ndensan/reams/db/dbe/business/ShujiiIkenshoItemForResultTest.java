@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemSu
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemSubGroupOf2009;
-import jp.co.ndensan.reams.db.dbe.definition.IShujiiIkenshoItem;
+import jp.co.ndensan.reams.db.dbe.definition.ShujiiIkenshoItem;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Choice;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IAnsweringItem;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
@@ -44,6 +44,14 @@ public class ShujiiIkenshoItemForResultTest {
         @Test(expected = NullPointerException.class)
         public void 意見書結果がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
             createShujiiIkenshoItemForResult(AS_意見書結果がNULL);
+        }
+    }
+
+    public static class is意見書結果項目 {
+
+        @Test
+        public void 調査結果項目の時_is調査結果項目は_TRUEを返す() {
+            assertThat(createShujiiIkenshoItemForResult().is意見書結果項目(), is(true));
         }
     }
 
@@ -160,7 +168,7 @@ public class ShujiiIkenshoItemForResultTest {
                 flg == AS_意見書結果がNULL ? null : new RString(choice ? "1" : "自由入力"));
     }
 
-    private static IShujiiIkenshoItem createShujiiIkenshoItem(ShujiiIkenshoItemKubun itemKubun) {
-        return ShujiiIkenshoFactory.create主治医意見書Instance(KoroshoIFKubun.V09A).get意見書項目(itemKubun);
+    private static ShujiiIkenshoItem createShujiiIkenshoItem(ShujiiIkenshoItemKubun itemKubun) {
+        return (ShujiiIkenshoItem) ShujiiIkenshoFactory.create主治医意見書Instance(KoroshoIFKubun.V09A).get意見書項目(itemKubun);
     }
 }

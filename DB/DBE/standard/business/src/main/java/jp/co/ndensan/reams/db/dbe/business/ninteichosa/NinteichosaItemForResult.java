@@ -7,11 +7,12 @@ package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 import jp.co.ndensan.reams.db.dbe.definition.Choices;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Choice;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IAnsweringItem;
+import jp.co.ndensan.reams.db.dbe.definition.FreeInputItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemSubGroup;
-import jp.co.ndensan.reams.db.dbe.definition.FreeInputItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.INinteichosaItem;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosaItem;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItemNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -24,7 +25,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class NinteichosaItemForResult implements INinteichosaItem {
 
-    private final INinteichosaItem 調査項目;
+    private final NinteichosaItem 調査項目;
     private final RString 調査結果;
 
     /**
@@ -33,9 +34,14 @@ public class NinteichosaItemForResult implements INinteichosaItem {
      * @param 調査項目 調査項目
      * @param 調査結果 調査結果
      */
-    public NinteichosaItemForResult(INinteichosaItem 調査項目, RString 調査結果) {
+    public NinteichosaItemForResult(NinteichosaItem 調査項目, RString 調査結果) {
         this.調査項目 = requireNonNull(調査項目, Messages.E00001.replace("調査項目").getMessage());
         this.調査結果 = requireNonNull(調査結果, Messages.E00001.replace("調査結果").getMessage());
+    }
+
+    @Override
+    public boolean is調査結果項目() {
+        return true;
     }
 
     @Override
@@ -76,6 +82,15 @@ public class NinteichosaItemForResult implements INinteichosaItem {
     @Override
     public Choices get選択肢() {
         return 調査項目.get選択肢();
+    }
+
+    /**
+     * 調査項目を返します。
+     *
+     * @return 調査項目
+     */
+    public NinteichosaItem get調査項目() {
+        return 調査項目;
     }
 
     /**

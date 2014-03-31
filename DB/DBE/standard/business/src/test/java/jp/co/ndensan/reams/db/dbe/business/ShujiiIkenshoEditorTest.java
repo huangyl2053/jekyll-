@@ -112,6 +112,22 @@ public class ShujiiIkenshoEditorTest {
         }
     }
 
+    public static class isResultSet {
+
+        @Test
+        public void 意見書結果の設定がある時_isResultSetは_TRUEを返す() {
+            ShujiiIkenshoEditor sut = createEditor(createIkensho());
+            sut.setResult(ITEM_KUBUN, BOOL_VALUE);
+            assertThat(sut.isResultSet(ITEM_KUBUN), is(true));
+        }
+
+        @Test
+        public void 意見書結果の設定がない時_isResultSetは_FALSEを返す() {
+            ShujiiIkenshoEditor sut = createEditor(createIkensho());
+            assertThat(sut.isResultSet(ITEM_KUBUN), is(false));
+        }
+    }
+
     public static class getShujiiIkensho {
 
         @Test

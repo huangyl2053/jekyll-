@@ -18,6 +18,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public interface IShujiiIkenshoItem {
 
     /**
+     * 自身が意見書結果項目なのか意見書項目なのかを判定します。
+     *
+     * @return 意見書結果項目の場合はtrueを返します。意見書項目の場合はfalseを返します。
+     */
+    boolean is意見書結果項目();
+
+    /**
      * 意見書項目グループを返します。
      *
      * @return 意見書項目グループ

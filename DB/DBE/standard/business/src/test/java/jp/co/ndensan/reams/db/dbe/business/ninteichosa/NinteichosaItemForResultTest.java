@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubunOfGaikyo;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemSubGroup;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.INinteichosaItem;
+import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosaItem;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -44,6 +44,14 @@ public class NinteichosaItemForResultTest {
         @Test(expected = NullPointerException.class)
         public void 調査結果がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
             createNinteichosaItemForResult(AS_調査結果がNULL);
+        }
+    }
+
+    public static class is調査結果項目 {
+
+        @Test
+        public void 調査結果項目の時_is調査結果項目は_TRUEを返す() {
+            assertThat(createNinteichosaItemForResult().is調査結果項目(), is(true));
         }
     }
 
@@ -160,7 +168,7 @@ public class NinteichosaItemForResultTest {
                 flg == AS_調査結果がNULL ? null : new RString(choice ? "1" : "自由入力"));
     }
 
-    private static INinteichosaItem createNinteichosaItem(NinteichosaItemKubunOfGaikyo itemKubun) {
-        return NinteichosahyoFactory.createサービス状況Instance(KoroshoIFKubun.V09A).get調査項目(itemKubun);
+    private static NinteichosaItem createNinteichosaItem(NinteichosaItemKubunOfGaikyo itemKubun) {
+        return (NinteichosaItem) NinteichosahyoFactory.createサービス状況Instance(KoroshoIFKubun.V09A).get調査項目(itemKubun);
     }
 }
