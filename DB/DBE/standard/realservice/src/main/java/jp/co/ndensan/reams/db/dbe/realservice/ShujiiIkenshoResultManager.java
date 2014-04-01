@@ -46,7 +46,7 @@ public class ShujiiIkenshoResultManager {
      *
      * @param 申請書管理番号 申請書管理番号
      * @param 意見書履歴番号 意見書履歴番号
-     * @return 認定調査結果
+     * @return 主治医意見書結果
      */
     public ShujiiIkenshoResult get主治医意見書結果(ShinseishoKanriNo 申請書管理番号, IkenshosakuseiIraiRirekiNo 意見書履歴番号) {
         ShujiiIkenshoEntity entity = dac.select(申請書管理番号, 意見書履歴番号);
