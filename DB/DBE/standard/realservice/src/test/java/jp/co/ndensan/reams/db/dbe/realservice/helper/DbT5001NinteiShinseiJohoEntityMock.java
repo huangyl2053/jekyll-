@@ -4,9 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.realservice.helper;
 
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -37,7 +38,7 @@ public class DbT5001NinteiShinseiJohoEntityMock {
     public static DbT5001NinteiShinseiJohoEntity getSpiedInstance() {
         DbT5001NinteiShinseiJohoEntity entity = new DbT5001NinteiShinseiJohoEntity();
         entity.setShinseishoKanriNo(new ShinseishoKanriNo(new RString("申請書管理番号")));
-        entity.setShichosonCode(new ShichosonCode(new RString("市町村コード")));
+        entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(new RString("証記載保険者番号")));
         entity.setShishoCode(new RString("支所コード"));
         entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("被保険者番号")));
         entity.setShikibetsuCode(new ShikibetsuCode(new RString("123456")));
@@ -51,7 +52,7 @@ public class DbT5001NinteiShinseiJohoEntityMock {
         entity.setZenYokaigoKubunCode(new Code(new RString("前回要介護状態区分コード")));
         entity.setZenYukoKikan(0);
         entity.setJohoteikyoDouiUmuKubun(true);
-        entity.setNinteichosaIraiRirekiNo(1);
+        entity.setNinteichosaIraiRirekiNo(new NinteichosaIraiRirekiNo(1));
         entity.setIkenshoIraiRirekiNo(2);
         entity.setMinashiCode(new RString("みなし要介護区分コード"));
         entity.setEnkitsuchiDoiUmuKubun(false);

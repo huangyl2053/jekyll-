@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikan;
 import jp.co.ndensan.reams.ur.urz.business.IKoza;
@@ -71,7 +71,7 @@ public class KaigoDoctorMock {
 
     private static IShujii createShujii() {
         return new Shujii(
-                new ShichosonCode(new RString("市町村コード")),
+                new ShoKisaiHokenshaNo(new RString("証記載保険者番号")),
                 new KaigoIryoKikanCode(new RString("介護医療機関コード")),
                 new KaigoDoctorCode(new RString("介護医師コード")),
                 new _IryoKikanCode(new RString("1234567890")),
@@ -108,7 +108,7 @@ public class KaigoDoctorMock {
 
     private static IShujiiIryoKikan createShujiiIryoKikan() {
         return new ShujiiIryoKikan(
-                new ShichosonCode(new RString("市町村コード")),
+                new ShoKisaiHokenshaNo(new RString("証記載保険者番号")),
                 new KaigoIryoKikanCode(new RString("1234567890")),
                 new _IryoKikanCode(new RString("1234567890")),
                 IryoKikanJokyo.有効,

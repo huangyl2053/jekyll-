@@ -37,7 +37,7 @@ public final class ShujiiIryoKikanMapper {
     public static IShujiiIryoKikan toShujiiIryoKikan(DbT7011ShujiiIryoKikanJohoEntity shujiiIryokikanEntity) throws NullPointerException {
         requireNonNull(shujiiIryokikanEntity, Messages.E00003.replace("主治医医療機関エンティティ", "主治医医療機関").getMessage());
 
-        return new ShujiiIryoKikan(shujiiIryokikanEntity.getShichosonCode(),
+        return new ShujiiIryoKikan(shujiiIryokikanEntity.getShoKisaiHokenshaNo(),
                 shujiiIryokikanEntity.getKaigoIryokikanCode(),
                 create医療機関コード(shujiiIryokikanEntity),
                 IryoKikanJokyo.toValue(shujiiIryokikanEntity.getIryokikanJokyo()),
@@ -66,7 +66,7 @@ public final class ShujiiIryoKikanMapper {
         //TODO n8178 城間篤人 共通項目についてどのように扱うか未定 2014年2月末
         DbT7011ShujiiIryoKikanJohoEntity entity = new DbT7011ShujiiIryoKikanJohoEntity();
 
-        entity.setShichosonCode(iryoKikan.get市町村コード());
+        entity.setShoKisaiHokenshaNo(iryoKikan.get証記載保険者番号());
         entity.setKaigoIryokikanCode(iryoKikan.get介護医療機関コード());
         //TODO n8178 城間篤人 IDbColumnMappableじゃないが、共通の医療機関テーブルが確定するまでは、扱いを保留にする 2014年2月末
         entity.setIryokikanCode(iryoKikan.get医療機関コード().getValue());

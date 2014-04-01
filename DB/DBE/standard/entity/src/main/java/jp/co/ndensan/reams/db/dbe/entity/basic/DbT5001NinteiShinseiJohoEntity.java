@@ -1,15 +1,16 @@
 package jp.co.ndensan.reams.db.dbe.entity.basic;
 
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
+import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang._UUID;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -19,24 +20,24 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 /**
  * DbT5001NinteiShinseiJohoの項目定義クラスです
  *
- * @author n8178 城間篤人
  */
 public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Generated Code">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5001NinteiShinseiJoho");
-    private RString insertDantaiCd = RString.EMPTY;
+    private RString insertDantaiCd;
+    @PrimaryKey
     private RDateTime insertTimestamp;
-    private RString insertReamsLoginId = RString.EMPTY;
-    private _UUID insertContextId;
+    private RString insertReamsLoginId;
+    private UUID insertContextId;
     private boolean isDeleted = false;
     private int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
-    private RString lastUpdateReamsLoginId = RString.EMPTY;
+    private RString lastUpdateReamsLoginId;
     @PrimaryKey
     private ShinseishoKanriNo shinseishoKanriNo;
-    private ShichosonCode shichosonCode;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private RString shishoCode;
     private KaigoHihokenshaNo hihokenshaNo;
     private ShikibetsuCode shikibetsuCode;
@@ -50,8 +51,11 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     private Code zenYokaigoKubunCode;
     private int zenYukoKikan;
     private boolean johoteikyoDouiUmuKubun;
-    private int ninteichosaIraiRirekiNo;
+    private NinteichosaIraiRirekiNo ninteichosaIraiRirekiNo;
+    private Code ninteichosaShikibetsuCode;
     private int ikenshoIraiRirekiNo;
+    private RString kaigoIryokikanCode;
+    private RString kaigoIshiCode;
     private RString minashiCode;
     private boolean enkitsuchiDoiUmuKubun;
     private boolean shisetsuNyushoUmuKubun;
@@ -60,94 +64,6 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     private RString torisageRiyu;
     private FlexibleDate torisageYMD;
     private boolean shinsaKeizokuKubun;
-
-    /**
-     * ORマッパーのためのデフォルトコンストラクタです。
-     */
-    public DbT5001NinteiShinseiJohoEntity() {
-    }
-
-    /**
-     * コンストラクタです。
-     *
-     * @param shinseishoKanriNo 申請書管理番号
-     * @param shichosonCode 市町村コード
-     * @param shishoCode 支所コード
-     * @param hihokenshaNo 被保険者番号
-     * @param shikibetsuCode 識別コード
-     * @param ninteiShinseiYMD 認定申請年月日
-     * @param ninteiShinseiEdabanCode 認定申請枝番コード
-     * @param ninteiShinseiShinseijiKubunCode 認定申請区分（申請時）コード
-     * @param ninteiShinseiHoreiKubunCode 認定申請区分（法令）コード
-     * @param ninteiShinseiYukoKubunCode 認定申請有効区分
-     * @param shienShinseiKubun 要介護申請・要支援申請の区分
-     * @param shinseiRiyu 認定申請理由
-     * @param zenYokaigoKubunCode 前回要介護状態区分コード
-     * @param zenYukoKikan 前回認定有効期間
-     * @param johoteikyoDouiUmuKubun 情報提供への同意有無
-     * @param ninteichosaIraiRirekiNo 認定調査依頼履歴番号
-     * @param ikenshoIraiRirekiNo 主治医意見書作成依頼履歴番号
-     * @param minashiCode みなし要介護区分コード
-     * @param enkitsuchiDoiUmuKubun 認定延期通知発行に対する同意有無
-     * @param shisetsuNyushoUmuKubun 施設入所の有無
-     * @param sichosonRenrakuJiko 市町村連絡事項
-     * @param torisageKubunCode 取下げ区分コード
-     * @param torisageRiyu 取下げ理由
-     * @param torisageYMD 取下げ年月日
-     * @param shinsaKeizokuKubun 審査継続区分
-     */
-    public DbT5001NinteiShinseiJohoEntity(ShinseishoKanriNo shinseishoKanriNo,
-            ShichosonCode shichosonCode,
-            RString shishoCode,
-            KaigoHihokenshaNo hihokenshaNo,
-            ShikibetsuCode shikibetsuCode,
-            FlexibleDate ninteiShinseiYMD,
-            EdabanCode ninteiShinseiEdabanCode,
-            NinteiShinseiKubunShinsei ninteiShinseiShinseijiKubunCode,
-            Code ninteiShinseiHoreiKubunCode,
-            Code ninteiShinseiYukoKubunCode,
-            RString shienShinseiKubun,
-            RString shinseiRiyu,
-            Code zenYokaigoKubunCode,
-            int zenYukoKikan,
-            boolean johoteikyoDouiUmuKubun,
-            NinteichosaIraiRirekiNo ninteichosaIraiRirekiNo,
-            int ikenshoIraiRirekiNo,
-            RString minashiCode,
-            boolean enkitsuchiDoiUmuKubun,
-            boolean shisetsuNyushoUmuKubun,
-            RString sichosonRenrakuJiko,
-            Code torisageKubunCode,
-            RString torisageRiyu,
-            FlexibleDate torisageYMD,
-            boolean shinsaKeizokuKubun) {
-
-        this.shinseishoKanriNo = shinseishoKanriNo;
-        this.shichosonCode = shichosonCode;
-        this.shishoCode = shishoCode;
-        this.hihokenshaNo = hihokenshaNo;
-        this.shikibetsuCode = shikibetsuCode;
-        this.ninteiShinseiYMD = ninteiShinseiYMD;
-        this.ninteiShinseiEdabanCode = ninteiShinseiEdabanCode;
-        this.ninteiShinseiShinseijiKubunCode = ninteiShinseiShinseijiKubunCode;
-        this.ninteiShinseiHoreiKubunCode = ninteiShinseiHoreiKubunCode;
-        this.ninteiShinseiYukoKubunCode = ninteiShinseiYukoKubunCode;
-        this.shienShinseiKubun = shienShinseiKubun;
-        this.shinseiRiyu = shinseiRiyu;
-        this.zenYokaigoKubunCode = zenYokaigoKubunCode;
-        this.zenYukoKikan = zenYukoKikan;
-        this.johoteikyoDouiUmuKubun = johoteikyoDouiUmuKubun;
-        this.ninteichosaIraiRirekiNo = ninteichosaIraiRirekiNo.value();
-        this.ikenshoIraiRirekiNo = ikenshoIraiRirekiNo;
-        this.minashiCode = minashiCode;
-        this.enkitsuchiDoiUmuKubun = enkitsuchiDoiUmuKubun;
-        this.shisetsuNyushoUmuKubun = shisetsuNyushoUmuKubun;
-        this.sichosonRenrakuJiko = sichosonRenrakuJiko;
-        this.torisageKubunCode = torisageKubunCode;
-        this.torisageRiyu = torisageRiyu;
-        this.torisageYMD = torisageYMD;
-        this.shinsaKeizokuKubun = shinsaKeizokuKubun;
-    }
 
     /**
      * getInsertDantaiCd
@@ -213,21 +129,21 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     }
 
     /**
-     * getShichosonCode
+     * getShoKisaiHokenshaNo
      *
-     * @return shichosonCode
+     * @return shoKisaiHokenshaNo
      */
-    public ShichosonCode getShichosonCode() {
-        return shichosonCode;
+    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
+        return shoKisaiHokenshaNo;
     }
 
     /**
-     * setShichosonCode
+     * setShoKisaiHokenshaNo
      *
-     * @param shichosonCode shichosonCode
+     * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
      */
-    public void setShichosonCode(ShichosonCode shichosonCode) {
-        this.shichosonCode = shichosonCode;
+    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     /**
@@ -447,11 +363,11 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     }
 
     /**
-     * 情報提供への同意有無が有効かどうかを返します。
+     * getJohoteikyoDouiUmuKubun
      *
-     * @return {@code true}:有効、{@code false}:無効
+     * @return johoteikyoDouiUmuKubun
      */
-    public boolean isJohoteikyoDouiUmuKubun() {
+    public boolean getJohoteikyoDouiUmuKubun() {
         return johoteikyoDouiUmuKubun;
     }
 
@@ -469,7 +385,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
      *
      * @return ninteichosaIraiRirekiNo
      */
-    public int getNinteichosaIraiRirekiNo() {
+    public NinteichosaIraiRirekiNo getNinteichosaIraiRirekiNo() {
         return ninteichosaIraiRirekiNo;
     }
 
@@ -478,8 +394,26 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
      *
      * @param ninteichosaIraiRirekiNo ninteichosaIraiRirekiNo
      */
-    public void setNinteichosaIraiRirekiNo(int ninteichosaIraiRirekiNo) {
+    public void setNinteichosaIraiRirekiNo(NinteichosaIraiRirekiNo ninteichosaIraiRirekiNo) {
         this.ninteichosaIraiRirekiNo = ninteichosaIraiRirekiNo;
+    }
+
+    /**
+     * getNinteichosaShikibetsuCode
+     *
+     * @return ninteichosaShikibetsuCode
+     */
+    public Code getNinteichosaShikibetsuCode() {
+        return ninteichosaShikibetsuCode;
+    }
+
+    /**
+     * setNinteichosaShikibetsuCode
+     *
+     * @param ninteichosaShikibetsuCode ninteichosaShikibetsuCode
+     */
+    public void setNinteichosaShikibetsuCode(Code ninteichosaShikibetsuCode) {
+        this.ninteichosaShikibetsuCode = ninteichosaShikibetsuCode;
     }
 
     /**
@@ -501,6 +435,42 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     }
 
     /**
+     * getKaigoIryokikanCode
+     *
+     * @return kaigoIryokikanCode
+     */
+    public RString getKaigoIryokikanCode() {
+        return kaigoIryokikanCode;
+    }
+
+    /**
+     * setKaigoIryokikanCode
+     *
+     * @param kaigoIryokikanCode kaigoIryokikanCode
+     */
+    public void setKaigoIryokikanCode(RString kaigoIryokikanCode) {
+        this.kaigoIryokikanCode = kaigoIryokikanCode;
+    }
+
+    /**
+     * getKaigoIshiCode
+     *
+     * @return kaigoIshiCode
+     */
+    public RString getKaigoIshiCode() {
+        return kaigoIshiCode;
+    }
+
+    /**
+     * setKaigoIshiCode
+     *
+     * @param kaigoIshiCode kaigoIshiCode
+     */
+    public void setKaigoIshiCode(RString kaigoIshiCode) {
+        this.kaigoIshiCode = kaigoIshiCode;
+    }
+
+    /**
      * getMinashiCode
      *
      * @return minashiCode
@@ -519,11 +489,11 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     }
 
     /**
-     * 認定延期通知発行に対する同意有無が有効かどうかを返します。
+     * getEnkitsuchiDoiUmuKubun
      *
-     * @return {@code true}:有効、{@code false}:無効
+     * @return enkitsuchiDoiUmuKubun
      */
-    public boolean isEnkitsuchiDoiUmuKubun() {
+    public boolean getEnkitsuchiDoiUmuKubun() {
         return enkitsuchiDoiUmuKubun;
     }
 
@@ -537,11 +507,11 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     }
 
     /**
-     * 施設入所の有無が有効かどうかを返します。
+     * getShisetsuNyushoUmuKubun
      *
-     * @return {@code true}:有効、{@code false}:無効
+     * @return shisetsuNyushoUmuKubun
      */
-    public boolean isShisetsuNyushoUmuKubun() {
+    public boolean getShisetsuNyushoUmuKubun() {
         return shisetsuNyushoUmuKubun;
     }
 
@@ -618,30 +588,50 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     }
 
     /**
-     * 取下げ年月日を設定します。
+     * setTorisageYMD
      *
-     * @param torisageYMD 取下げ年月日
+     * @param torisageYMD torisageYMD
      */
     public void setTorisageYMD(FlexibleDate torisageYMD) {
         this.torisageYMD = torisageYMD;
     }
 
     /**
-     * 審査継続区分が有効かどうかを返します。
+     * getShinsaKeizokuKubun
      *
-     * @return {@code true}:有効、{@code false}:無効
+     * @return shinsaKeizokuKubun
      */
-    public boolean isShinsaKeizokuKubun() {
+    public boolean getShinsaKeizokuKubun() {
         return shinsaKeizokuKubun;
     }
 
     /**
-     * 審査継続区分を設定します。
+     * setShinsaKeizokuKubun
      *
-     * @param shinsaKeizokuKubun 審査継続区分
+     * @param shinsaKeizokuKubun shinsaKeizokuKubun
      */
     public void setShinsaKeizokuKubun(boolean shinsaKeizokuKubun) {
         this.shinsaKeizokuKubun = shinsaKeizokuKubun;
+    }
+
+    /**
+     * このエンティティの主キーが他の{@literal DbT5001NinteiShinseiJohoEntity}と等しいか判定します。
+     *
+     * @param other 比較するエンティティ
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT5001NinteiShinseiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     */
+    public boolean equalsPrimaryKeys(DbT5001NinteiShinseiJohoEntity other) {
+        if (other == null) {
+            return false;
+        }
+        if (!Objects.equals(this.insertTimestamp, other.insertTimestamp)) {
+            return false;
+        }
+        if (!Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo)) {
+            return false;
+        }
+        return true;
     }
 // </editor-fold>
 }

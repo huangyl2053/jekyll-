@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IDateOfBirth;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
@@ -51,23 +51,20 @@ public class ShujiiIkenshoIraiTaishoshaListTest extends DbeTestBase {
         @Test
         public void 申請書管理番号に10を指定したとき_申請書管理番号に10を持つ主治医意見書作成依頼対象者が返る() {
             ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo((new RString("10")));
-            ShujiiIkenshoIraiTaishoshaList sut
-                    = new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
+            ShujiiIkenshoIraiTaishoshaList sut = new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
             assertThat(sut.get主治医意見書作成依頼処理対象者(申請書管理番号).get申請書管理番号().value(), is(申請書管理番号.value()));
         }
 
         @Test(expected = IllegalArgumentException.class)
         public void 申請書管理番号に存在しない値を指定したとき_例外が発生する() {
             ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo((new RString("65536")));
-            ShujiiIkenshoIraiTaishoshaList sut
-                    = new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
+            ShujiiIkenshoIraiTaishoshaList sut = new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
             sut.get主治医意見書作成依頼処理対象者(申請書管理番号);
         }
 
         @Test(expected = NullPointerException.class)
         public void 申請書管理番号にnullを指定したとき_例外が発生する() {
-            ShujiiIkenshoIraiTaishoshaList sut
-                    = new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
+            ShujiiIkenshoIraiTaishoshaList sut = new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
             sut.get主治医意見書作成依頼処理対象者((ShinseishoKanriNo.class).cast(null));
         }
     }
@@ -75,26 +72,23 @@ public class ShujiiIkenshoIraiTaishoshaListTest extends DbeTestBase {
     public static class sub主治医意見書作成依頼処理対象者List extends DbeTestBase {
 
         @Test
-        public void 市町村コードに0001を指定したとき_市町村コードに0001を持つ主治医意見書作成依頼対象者がすべて返る() {
-            ShichosonCode 市町村コード = new ShichosonCode((new RString("0001")));
-            ShujiiIkenshoIraiTaishoshaList sut
-                    = new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
-            assertThat(sut.sub主治医意見書作成依頼処理対象者List(市町村コード).size(), is(6));
+        public void 証記載保険者番号に000001を指定したとき_証記載保険者番号に0001を持つ主治医意見書作成依頼対象者がすべて返る() {
+            ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo((new RString("000001")));
+            ShujiiIkenshoIraiTaishoshaList sut = new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
+            assertThat(sut.sub主治医意見書作成依頼処理対象者List(証記載保険者番号).size(), is(6));
         }
 
         @Test
-        public void 市町村コードに存在しない値を指定したとき_空のリストが返る() {
-            ShichosonCode 市町村コード = new ShichosonCode((new RString("9999")));
-            ShujiiIkenshoIraiTaishoshaList sut
-                    = new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
-            assertThat(sut.sub主治医意見書作成依頼処理対象者List(市町村コード).size(), is(0));
+        public void 証記載保険者番号に存在しない値を指定したとき_空のリストが返る() {
+            ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo((new RString("999999")));
+            ShujiiIkenshoIraiTaishoshaList sut = new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
+            assertThat(sut.sub主治医意見書作成依頼処理対象者List(証記載保険者番号).size(), is(0));
         }
 
         @Test(expected = NullPointerException.class)
-        public void 市町村コードにnullを指定したとき_例外が発生する() {
-            ShujiiIkenshoIraiTaishoshaList sut
-                    = new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
-            sut.sub主治医意見書作成依頼処理対象者List((ShichosonCode.class).cast(null));
+        public void 証記載保険者番号にnullを指定したとき_例外が発生する() {
+            ShujiiIkenshoIraiTaishoshaList sut = new ShujiiIkenshoIraiTaishoshaList(create主治医意見書作成依頼対象者List());
+            sut.sub主治医意見書作成依頼処理対象者List((ShoKisaiHokenshaNo.class).cast(null));
         }
     }
 
@@ -115,7 +109,7 @@ public class ShujiiIkenshoIraiTaishoshaListTest extends DbeTestBase {
 //        IShikibetsuTaisho 識別対象 = mock(IShikibetsuTaisho.class);
         IShikibetsuTaisho 識別対象 = new _ShikibetsuTaisho(new ShikibetsuCode("0000000001"), null, 0, true, null, FlexibleDate.MAX, FlexibleDate.EMPTY,
                 new SetaiCode("00001"), null, null, JuminShubetsu.日本人, null, null, null, null, 0);
-        ShichosonCode 市町村コード = new ShichosonCode(new RString("0001"));
+        ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("000001"));
         KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(new RString("0002"));
         FlexibleDate 認定申請年月日 = new FlexibleDate(new RString("20140101"));
         NinteiShinseiKubunShinsei 認定申請区分 = NinteiShinseiKubunShinsei.新規申請;
@@ -134,7 +128,7 @@ public class ShujiiIkenshoIraiTaishoshaListTest extends DbeTestBase {
         IDoctor 主治医 = null;
 
         return new ShujiiIkenshoIraiTaishosha(申請書管理番号,
-                市町村コード,
+                証記載保険者番号,
                 被保険者番号,
                 認定申請年月日,
                 認定申請区分,

@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoIryoKikanEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.KaigoIryoKikanTestHelper;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.business.IKoza;
 import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
@@ -53,7 +53,7 @@ public class KaigoIryoKikanMapperTest extends TestBase {
         private RString 休止区分;
         private RString 異動事由;
         private FlexibleDate 異動年月日;
-        private ShichosonCode 市町村コード;
+        private ShoKisaiHokenshaNo 証記載保険者番号;
         private KaigoIryoKikanCode 介護医療機関コード;
         private IIryoKikanCode 医療機関コード;
         private IryoKikanJokyo 医療機関状況;
@@ -79,7 +79,7 @@ public class KaigoIryoKikanMapperTest extends TestBase {
             休止区分 = new RString("休止");
             異動事由 = new RString("疲れのため");
             異動年月日 = new FlexibleDate("20051212");
-            市町村コード = new ShichosonCode(new RString("A001"));
+            証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("A00123"));
             介護医療機関コード = new KaigoIryoKikanCode(new RString("B001"));
             医療機関コード = new _IryoKikanCode(new RString("C00000001"));
             医療機関状況 = IryoKikanJokyo.有効;
@@ -196,8 +196,8 @@ public class KaigoIryoKikanMapperTest extends TestBase {
         }
 
         @Test
-        public void 引数から渡された市町村コードと_戻り値の介護医療機関クラスの市町村コードが同一になる() {
-            assertThat(sut.get市町村コード(), is(市町村コード));
+        public void 引数から渡された証記載保険者番号と_戻り値の介護医療機関クラスの証記載保険者番号が同一になる() {
+            assertThat(sut.get証記載保険者番号(), is(証記載保険者番号));
         }
 
         @Test

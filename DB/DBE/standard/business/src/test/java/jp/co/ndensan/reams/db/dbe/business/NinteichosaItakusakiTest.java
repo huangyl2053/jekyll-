@@ -4,10 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.ChosaItakuKubun;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
@@ -25,7 +25,7 @@ public class NinteichosaItakusakiTest extends TestBase {
     public static class ConstructorTest extends TestBase {
 
         NinteichosaItakusaki sut;
-        private RString 市町村コード;
+        private ShoKisaiHokenshaNo 証記載保険者番号;
         private KaigoJigyoshaNo 介護事業者番号;
         private JigyoshaNo 事業者番号;
         private boolean 有効区分;
@@ -36,7 +36,7 @@ public class NinteichosaItakusakiTest extends TestBase {
 
         @Override
         public void setUp() {
-            市町村コード = new RString("20213");
+            証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("202130"));
             介護事業者番号 = new KaigoJigyoshaNo(new RString("0000000001"));
             事業者番号 = new JigyoshaNo(new RString("0000000001"));
             有効区分 = true;
@@ -47,20 +47,20 @@ public class NinteichosaItakusakiTest extends TestBase {
         }
 
         @Test(expected = NullPointerException.class)
-        public void コンストラクタの市町村コードに_Nullを指定した場合_NullPointerExceptionが発生する() {
+        public void コンストラクタの証記載保険者番号に_Nullを指定した場合_NullPointerExceptionが発生する() {
             sut = new NinteichosaItakusaki(null, 介護事業者番号, 事業者番号, 有効区分, 調査委託区分,
                     割付定員, 割付地区, 機関の区分);
         }
 
         @Test(expected = NullPointerException.class)
         public void コンストラクタの事業者番号に_Nullを指定した場合_NullPointerExceptionが発生する() {
-            sut = new NinteichosaItakusaki(市町村コード, 介護事業者番号, null, 有効区分, 調査委託区分,
+            sut = new NinteichosaItakusaki(証記載保険者番号, 介護事業者番号, null, 有効区分, 調査委託区分,
                     割付定員, 割付地区, 機関の区分);
         }
 
         @Test(expected = NullPointerException.class)
         public void コンストラクタの介護事業者に_Nullを指定した場合_NullPointerExceptionが発生する() {
-            sut = new NinteichosaItakusaki(市町村コード, null, 事業者番号, 有効区分, 調査委託区分,
+            sut = new NinteichosaItakusaki(証記載保険者番号, null, 事業者番号, 有効区分, 調査委託区分,
                     割付定員, 割付地区, 機関の区分);
         }
     }

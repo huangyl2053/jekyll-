@@ -32,7 +32,7 @@ public final class NinteichosaItakusakiMapper {
     public static NinteichosaItakusaki toNinteichosaItakusaki(DbT7010NinteichosaItakusakiJohoEntity 認定調査委託先Entity) throws NullPointerException {
         requireNonNull(認定調査委託先Entity, Messages.E00003.replace("認定調査委託先エンティティ", "認定調査委託先").getMessage());
         return new NinteichosaItakusaki(
-                認定調査委託先Entity.get市町村コード(),
+                認定調査委託先Entity.get証記載保険者番号(),
                 認定調査委託先Entity.get介護事業者番号(),
                 認定調査委託先Entity.get事業者番号(),
                 認定調査委託先Entity.is介護事業者状況(),

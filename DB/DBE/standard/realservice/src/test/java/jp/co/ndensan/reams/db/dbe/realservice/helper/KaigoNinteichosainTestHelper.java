@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaItakusakiMapper;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KaigoNinteichosainTestHelper {
 
-    public static final ShichosonCode 市町村コード = new ShichosonCode(new RString("0001"));
+    public static final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("000001"));
     public static final KaigoJigyoshaNo 介護事業者番号 = new KaigoJigyoshaNo(new RString("0002"));
     public static final RString 介護調査員番号 = new RString("0003");
     public static final JigyoshaNo 事業者番号 = new JigyoshaNo(new RString("2020300001"));
@@ -44,7 +44,7 @@ public class KaigoNinteichosainTestHelper {
 
     public static DbT7013ChosainJohoEntity create認定調査員Entity() {
         DbT7013ChosainJohoEntity entity = new DbT7013ChosainJohoEntity();
-        entity.setShichosonCode(市町村コード);
+        entity.setShoKisaiHokenshaNo(証記載保険者番号);
         entity.setKaigoJigyoshaNo(介護事業者番号);
         entity.setKaigoChosainNo(介護調査員番号);
         entity.setJigyoshaNo(事業者番号);
@@ -63,7 +63,7 @@ public class KaigoNinteichosainTestHelper {
 
     public static KaigoNinteichosain create認定調査員() {
         return new KaigoNinteichosain(
-                市町村コード,
+                証記載保険者番号,
                 介護事業者番号,
                 new KaigoNinteichosainNo(介護調査員番号),
                 調査員状況,

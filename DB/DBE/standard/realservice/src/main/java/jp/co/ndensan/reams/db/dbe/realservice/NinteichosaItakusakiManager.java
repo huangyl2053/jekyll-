@@ -51,15 +51,15 @@ public class NinteichosaItakusakiManager {
     }
 
     /**
-     * 市町村コードと介護事業状況を指定して該当する調査委託先を全件取得するクラスです
+     * 証記載保険者番号と介護事業状況を指定して該当する調査委託先を全件取得するクラスです
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @param 介護事業状況 介護事業状況
      * @return NinteichosaItakusaki
      */
-    public List<NinteichosaItakusaki> get認定調査委託先市町村指定全件(RString 市町村コード, Boolean 介護事業状況) {
+    public List<NinteichosaItakusaki> get認定調査委託先市町村指定全件(RString 証記載保険者番号, Boolean 介護事業状況) {
         List<NinteichosaItakusaki> list = new ArrayList();
-        List<DbT7010NinteichosaItakusakiJohoEntity> entityList = dac.selectAll(市町村コード, 介護事業状況);
+        List<DbT7010NinteichosaItakusakiJohoEntity> entityList = dac.selectAll(証記載保険者番号, 介護事業状況);
 
         if (entityList.isEmpty()) {
             return Collections.EMPTY_LIST;
@@ -74,14 +74,14 @@ public class NinteichosaItakusakiManager {
     }
 
     /**
-     * 市町村コードを指定して該当する調査委託先を全件取得するクラスです
+     * 証記載保険者番号を指定して該当する調査委託先を全件取得するクラスです
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @return NinteichosaItakusaki
      */
-    public List<NinteichosaItakusaki> get認定調査委託先市町村指定全件(RString 市町村コード) {
+    public List<NinteichosaItakusaki> get認定調査委託先市町村指定全件(RString 証記載保険者番号) {
         List<NinteichosaItakusaki> list = new ArrayList();
-        List<DbT7010NinteichosaItakusakiJohoEntity> entityList = dac.selectAll(市町村コード);
+        List<DbT7010NinteichosaItakusakiJohoEntity> entityList = dac.selectAll(証記載保険者番号);
 
         if (entityList.isEmpty()) {
             return Collections.EMPTY_LIST;
@@ -96,15 +96,15 @@ public class NinteichosaItakusakiManager {
     }
 
     /**
-     * 市町村コード・介護事業者番号・介護事業区分を指定し、認定調査委託先を取得するクラスです
+     * 証記載保険者番号・介護事業者番号・介護事業区分を指定し、認定調査委託先を取得するクラスです
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @param 介護事業者番号 介護事業者番号
      * @param 介護事業状況 介護事業状況
      * @return NinteichosaItakusaki
      */
-    public NinteichosaItakusaki get認定調査委託先介護事業者番号指定(RString 市町村コード, KaigoJigyoshaNo 介護事業者番号, boolean 介護事業状況) {
-        DbT7010NinteichosaItakusakiJohoEntity entity = dac.select(市町村コード, 介護事業者番号, 介護事業状況);
+    public NinteichosaItakusaki get認定調査委託先介護事業者番号指定(RString 証記載保険者番号, KaigoJigyoshaNo 介護事業者番号, boolean 介護事業状況) {
+        DbT7010NinteichosaItakusakiJohoEntity entity = dac.select(証記載保険者番号, 介護事業者番号, 介護事業状況);
 
         if (entity == null) {
             return null;
@@ -114,15 +114,15 @@ public class NinteichosaItakusakiManager {
     }
 
     /**
-     * 市町村コード・事業者番号・介護事業区分を指定し、認定調査委託先を取得するクラスです
+     * 証記載保険者番号・事業者番号・介護事業区分を指定し、認定調査委託先を取得するクラスです
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @param 事業者番号 事業者番号
      * @param 介護事業状況 介護事業状況
      * @return NinteichosaItakusaki
      */
-    public NinteichosaItakusaki get認定調査委託先事業者番号指定(RString 市町村コード, JigyoshaNo 事業者番号, boolean 介護事業状況) {
-        DbT7010NinteichosaItakusakiJohoEntity entity = dac.select(市町村コード, 事業者番号, 介護事業状況);
+    public NinteichosaItakusaki get認定調査委託先事業者番号指定(RString 証記載保険者番号, JigyoshaNo 事業者番号, boolean 介護事業状況) {
+        DbT7010NinteichosaItakusakiJohoEntity entity = dac.select(証記載保険者番号, 事業者番号, 介護事業状況);
 
         if (entity == null) {
             return null;

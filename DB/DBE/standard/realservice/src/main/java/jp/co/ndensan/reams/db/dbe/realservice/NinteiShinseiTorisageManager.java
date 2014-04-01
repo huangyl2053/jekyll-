@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisageTaishoshaList;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteishinseiTorisageTaishoshaMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
@@ -57,24 +57,24 @@ public class NinteiShinseiTorisageManager {
     /**
      * 指定した市町村分で、指定された認定申請日の範囲で取下げされていない認定申請情報を全件取得します。
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @param 認定申請年月日範囲 認定申請年月日範囲
      * @return 指定した条件に合致する、取り下げされていない認定申請情報のリスト
      */
-    public NinteiShinseiTorisageTaishoshaList get認定申請取下げ対象者全件(ShichosonCode 市町村コード, Range<RDate> 認定申請年月日範囲) {
-        List<DbT5001NinteiShinseiJohoEntity> entities = shinseiDac.selectAllBy認定申請年月日(市町村コード, 認定申請年月日範囲);
+    public NinteiShinseiTorisageTaishoshaList get認定申請取下げ対象者全件(ShoKisaiHokenshaNo 証記載保険者番号, Range<RDate> 認定申請年月日範囲) {
+        List<DbT5001NinteiShinseiJohoEntity> entities = shinseiDac.selectAllBy認定申請年月日(証記載保険者番号, 認定申請年月日範囲);
         return create認定申請取下げList(entities);
     }
 
     /**
      * 指定した市町村分で、指定された取下げ年月日の範囲で取下げされている認定申請情報を全件取得します。
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @param 取下げ年月日範囲 取下げ年月日範囲
      * @return 指定した条件に合致する、取り下げされている認定申請情報のリスト
      */
-    public NinteiShinseiTorisageTaishoshaList get認定申請取下げ者(ShichosonCode 市町村コード, Range<RDate> 取下げ年月日範囲) {
-        List<DbT5001NinteiShinseiJohoEntity> entities = shinseiDac.selectAllBy取下げ年月日(市町村コード, 取下げ年月日範囲);
+    public NinteiShinseiTorisageTaishoshaList get認定申請取下げ者(ShoKisaiHokenshaNo 証記載保険者番号, Range<RDate> 取下げ年月日範囲) {
+        List<DbT5001NinteiShinseiJohoEntity> entities = shinseiDac.selectAllBy取下げ年月日(証記載保険者番号, 取下げ年月日範囲);
         return create認定申請取下げList(entities);
     }
 

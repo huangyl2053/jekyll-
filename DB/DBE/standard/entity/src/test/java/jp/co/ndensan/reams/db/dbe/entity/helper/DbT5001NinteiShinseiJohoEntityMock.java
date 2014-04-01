@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
@@ -28,34 +28,32 @@ public class DbT5001NinteiShinseiJohoEntityMock {
     }
 
     public static DbT5001NinteiShinseiJohoEntity getSpiedInstance() {
-        final RString 試験用文字列 = new RString("0001");
-        return spy(
-                new DbT5001NinteiShinseiJohoEntity(
-                        new ShinseishoKanriNo(試験用文字列),
-                        new ShichosonCode(試験用文字列),
-                        試験用文字列,
-                        new KaigoHihokenshaNo(試験用文字列),
-                        new ShikibetsuCode(試験用文字列),
-                        new FlexibleDate(new RString("20140101")),
-                        new EdabanCode(new RString("01")),
-                        //                new Code(試験用文字列),
-                        NinteiShinseiKubunShinsei.新規申請,
-                        new Code(試験用文字列),
-                        new Code(試験用文字列),
-                        試験用文字列,
-                        試験用文字列,
-                        new Code(試験用文字列),
-                        1,
-                        true,
-                        new NinteichosaIraiRirekiNo(1),
-                        1,
-                        試験用文字列,
-                        true,
-                        true,
-                        試験用文字列,
-                        new Code(試験用文字列),
-                        試験用文字列,
-                        new FlexibleDate(new RString("20140101")),
-                        true));
+        DbT5001NinteiShinseiJohoEntity entity = new DbT5001NinteiShinseiJohoEntity();
+        entity.setShinseishoKanriNo(new ShinseishoKanriNo(new RString("申請書管理番号")));
+        entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(new RString("123456")));
+        entity.setShishoCode(new RString("支所コード"));
+        entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("被保険者番号")));
+        entity.setShikibetsuCode(new ShikibetsuCode(new RString("123456")));
+        entity.setNinteiShinseiYMD(FlexibleDate.MIN);
+        entity.setNinteiShinseiEdabanCode(new EdabanCode(new RString("01")));
+        entity.setNinteiShinseiShinseijiKubunCode(NinteiShinseiKubunShinsei.新規申請);
+        entity.setNinteiShinseiHoreiKubunCode(new Code(new RString("認定申請区分（法令）コード")));
+        entity.setNinteiShinseiYukoKubunCode(new Code(new RString("認定申請有効区分")));
+        entity.setShienShinseiKubun(new RString("要介護申請・要支援申請の区分"));
+        entity.setShinseiRiyu(new RString("認定申請理由"));
+        entity.setZenYokaigoKubunCode(new Code(new RString("前回要介護状態区分コード")));
+        entity.setZenYukoKikan(0);
+        entity.setJohoteikyoDouiUmuKubun(true);
+        entity.setNinteichosaIraiRirekiNo(new NinteichosaIraiRirekiNo(1));
+        entity.setIkenshoIraiRirekiNo(2);
+        entity.setMinashiCode(new RString("みなし要介護区分コード"));
+        entity.setEnkitsuchiDoiUmuKubun(false);
+        entity.setShisetsuNyushoUmuKubun(true);
+        entity.setSichosonRenrakuJiko(new RString("市町村連絡事項"));
+        entity.setTorisageKubunCode(new Code(new RString("取下げ区分コード")));
+        entity.setTorisageRiyu(new RString("取下げ理由"));
+        entity.setTorisageYMD(FlexibleDate.MAX);
+        entity.setShinsaKeizokuKubun(false);
+        return spy(entity);
     }
 }

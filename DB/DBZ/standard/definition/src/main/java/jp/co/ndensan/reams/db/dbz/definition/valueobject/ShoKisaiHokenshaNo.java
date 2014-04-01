@@ -13,21 +13,21 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 //import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
- * 介護保険業務で利用する、5桁の市町村コードです。
+ * 介護保険業務で利用する、6桁の証記載保険者番号です。
  *
  * @author N3327 三浦 凌
  */
-public class ShichosonCode implements IDbColumnMappable {
+public class ShoKisaiHokenshaNo implements IDbColumnMappable {
 
-    private final RString 市町村コード;
+    private final RString 証記載保険者番号;
 
     /**
-     * 指定した値から、市町村コードを生成します。
+     * 指定した値から、証記載保険者番号を生成します。
      *
-     * @param コード 市町村コードの値
+     * @param コード 証記載保険者番号の値
      */
-    public ShichosonCode(RString コード) {
-        this.市町村コード = Objects.requireNonNull(コード, Messages.E00003.replace("コード", "市町村コード").getMessage());
+    public ShoKisaiHokenshaNo(RString コード) {
+        this.証記載保険者番号 = Objects.requireNonNull(コード, Messages.E00003.replace("コード", "証記載保険者番号").getMessage());
     }
 
 //    /**
@@ -35,7 +35,7 @@ public class ShichosonCode implements IDbColumnMappable {
 //     *
 //     * @param 地方公共団体コード 地方公共団体コード
 //     */
-//    public ShichosonCode(ILocalGovernmentCode 地方公共団体コード) {
+//    public ShoKisaiHokenshaNo(ILocalGovernmentCode 地方公共団体コード) {
 //        Objects.requireNonNull(地方公共団体コード, Messages.E00003.replace("地方公共団体コード", "市町村コード").getMessage());
 //
 //        //TODO N3327 三浦凌 以下の処理は、5桁のコードを取得するメソッドがILocalGovernmentCodeに作成されたら、そのメソッドに書き直す。
@@ -49,12 +49,12 @@ public class ShichosonCode implements IDbColumnMappable {
      * @return 市町村コードの値
      */
     public RString getValue() {
-        return 市町村コード;
+        return 証記載保険者番号;
     }
 
     @Override
     public String toString() {
-        return 市町村コード.toString();
+        return 証記載保険者番号.toString();
     }
 
     @Override
@@ -62,11 +62,11 @@ public class ShichosonCode implements IDbColumnMappable {
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof ShichosonCode)) {
+        if (!(obj instanceof ShoKisaiHokenshaNo)) {
             return false;
         }
-        ShichosonCode 比較対象 = (ShichosonCode) obj;
-        return 比較対象.getValue().equals(市町村コード);
+        ShoKisaiHokenshaNo 比較対象 = (ShoKisaiHokenshaNo) obj;
+        return 比較対象.getValue().equals(証記載保険者番号);
     }
 
     @Override
@@ -84,6 +84,6 @@ public class ShichosonCode implements IDbColumnMappable {
 
     @Override
     public RString getColumnValue() {
-        return 市町村コード;
+        return 証記載保険者番号;
     }
 }

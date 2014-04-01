@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShujiiIkenshoIraiTaishosha {
 
     private final ShinseishoKanriNo 申請書管理番号;
-    private final ShichosonCode 市町村コード;
+    private final ShoKisaiHokenshaNo 証記載保険者番号;
     private final KaigoHihokenshaNo 被保険者番号;
     private final FlexibleDate 認定申請年月日;
     private final NinteiShinseiKubunShinsei 認定申請区分;
@@ -38,7 +38,7 @@ public class ShujiiIkenshoIraiTaishosha {
      * コンストラクタです。
      *
      * @param 申請書管理番号 申請書管理番号
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @param 被保険者番号 被保険者番号
      * @param 認定申請年月日 認定申請年月日
      * @param 認定申請区分 認定申請区分
@@ -48,13 +48,13 @@ public class ShujiiIkenshoIraiTaishosha {
      * @param 主治医医療機関 主治医医療機関
      * @param 主治医 主治医
      * @throws NullPointerException
-     * {@code 申請書管理番号}がnullの場合、{@code 市町村コード}がnullの場合、{@code 被保険者番号}がnullの場合、
+     * {@code 申請書管理番号}がnullの場合、{@code 証記載保険者番号}がnullの場合、{@code 被保険者番号}がnullの場合、
      * {@code 認定申請年月日}がnullの場合、{@code 認定申請区分}がnullの場合、{@code 個人情報}がnullの場合、{@code 氏名}がnullの場合
      * または{@code 住所}がnullの場合
      */
     public ShujiiIkenshoIraiTaishosha(
             ShinseishoKanriNo 申請書管理番号,
-            ShichosonCode 市町村コード,
+            ShoKisaiHokenshaNo 証記載保険者番号,
             KaigoHihokenshaNo 被保険者番号,
             FlexibleDate 認定申請年月日,
             NinteiShinseiKubunShinsei 認定申請区分,
@@ -65,7 +65,7 @@ public class ShujiiIkenshoIraiTaishosha {
             IDoctor 主治医) throws NullPointerException {
 
         requireNonNull(申請書管理番号, Messages.E00003.replace("申請書管理番号", getClass().getName()).getMessage());
-        requireNonNull(市町村コード, Messages.E00003.replace("市町村コード", getClass().getName()).getMessage());
+        requireNonNull(証記載保険者番号, Messages.E00003.replace("証記載保険者番号", getClass().getName()).getMessage());
         requireNonNull(被保険者番号, Messages.E00003.replace("被保険者番号", getClass().getName()).getMessage());
         requireNonNull(認定申請年月日, Messages.E00003.replace("認定申請年月日", getClass().getName()).getMessage());
         requireNonNull(認定申請区分, Messages.E00003.replace("認定申請区分", getClass().getName()).getMessage());
@@ -74,7 +74,7 @@ public class ShujiiIkenshoIraiTaishosha {
         requireNonNull(住所, Messages.E00003.replace("住所", getClass().getName()).getMessage());
 
         this.申請書管理番号 = 申請書管理番号;
-        this.市町村コード = 市町村コード;
+        this.証記載保険者番号 = 証記載保険者番号;
         this.被保険者番号 = 被保険者番号;
         this.認定申請年月日 = 認定申請年月日;
         this.認定申請区分 = 認定申請区分;
@@ -95,12 +95,12 @@ public class ShujiiIkenshoIraiTaishosha {
     }
 
     /**
-     * 市町村コードを返します。
+     * 証記載保険者番号を返します。
      *
-     * @return 市町村コード
+     * @return 証記載保険者番号
      */
-    public ShichosonCode get市町村コード() {
-        return 市町村コード;
+    public ShoKisaiHokenshaNo get証記載保険者番号() {
+        return 証記載保険者番号;
     }
 
     /**

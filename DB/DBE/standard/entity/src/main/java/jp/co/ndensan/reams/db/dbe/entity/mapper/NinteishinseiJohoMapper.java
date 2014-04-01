@@ -36,7 +36,7 @@ public final class NinteishinseiJohoMapper {
     public static NinteiShinseiJoho to認定申請情報(DbT5001NinteiShinseiJohoEntity entity) {
         return new NinteiShinseiJoho(
                 entity.getShinseishoKanriNo(),
-                entity.getShichosonCode(),
+                entity.getShoKisaiHokenshaNo(),
                 entity.getShishoCode(),
                 entity.getHihokenshaNo(),
                 entity.getShikibetsuCode(),
@@ -49,16 +49,16 @@ public final class NinteishinseiJohoMapper {
                 entity.getShinseiRiyu(),
                 entity.getZenYokaigoKubunCode(),
                 entity.getZenYukoKikan(),
-                entity.isJohoteikyoDouiUmuKubun(),
+                entity.getJohoteikyoDouiUmuKubun(),
                 entity.getNinteichosaIraiRirekiNo(),
                 entity.getIkenshoIraiRirekiNo(),
                 new Code(entity.getMinashiCode()),
-                entity.isEnkitsuchiDoiUmuKubun(),
-                entity.isShisetsuNyushoUmuKubun(),
+                entity.getEnkitsuchiDoiUmuKubun(),
+                entity.getShisetsuNyushoUmuKubun(),
                 entity.getSichosonRenrakuJiko(),
                 new NinteiShinseiTorisage(TorisageKubun.toValue(entity.getTorisageKubunCode()),
-                        entity.getTorisageRiyu(), entity.getTorisageYMD(),
-                        ShinsaKeizokuKubun.toValue(entity.isShinsaKeizokuKubun())));
+                entity.getTorisageRiyu(), entity.getTorisageYMD(),
+                ShinsaKeizokuKubun.toValue(entity.getShinsaKeizokuKubun())));
     }
 
     /**
@@ -71,7 +71,7 @@ public final class NinteishinseiJohoMapper {
         DbT5001NinteiShinseiJohoEntity 更新済みEntity = new DbT5001NinteiShinseiJohoEntity();
         更新済みEntity.setShinseishoKanriNo(認定申請情報.get申請書管理番号());
         更新済みEntity.setNinteichosaIraiRirekiNo(認定申請情報.get認定調査依頼履歴番号());
-        更新済みEntity.setShichosonCode(認定申請情報.get市町村コード());
+        更新済みEntity.setShoKisaiHokenshaNo(認定申請情報.get証記載保険者番号());
         更新済みEntity.setShishoCode(認定申請情報.get支所コード());
         更新済みEntity.setHihokenshaNo(認定申請情報.get介護被保険者番号());
         更新済みEntity.setShikibetsuCode(認定申請情報.get識別コード());

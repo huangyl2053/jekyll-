@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -26,7 +26,7 @@ import static org.mockito.Mockito.*;
 @RunWith(Enclosed.class)
 public class ShujiiTest {
 
-    private static final int AS_市町村コードがNULL = 0;
+    private static final int AS_証記載保険者番号がNULL = 0;
     private static final int AS_介護医療機関コードがNULL = 1;
     private static final int AS_介護医師コードがNULL = 2;
     private static final int AS_医療機関コードがNULL = 3;
@@ -36,8 +36,8 @@ public class ShujiiTest {
     public static class コンストラクタ {
 
         @Test(expected = NullPointerException.class)
-        public void 市町村コードがNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createShujii(AS_市町村コードがNULL);
+        public void 証記載保険者番号がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
+            createShujii(AS_証記載保険者番号がNULL);
         }
 
         @Test(expected = NullPointerException.class)
@@ -68,7 +68,7 @@ public class ShujiiTest {
 
     private static IShujii createShujii(int flg) {
         return new Shujii(
-                flg != AS_市町村コードがNULL ? any(ShichosonCode.class) : null,
+                flg != AS_証記載保険者番号がNULL ? any(ShoKisaiHokenshaNo.class) : null,
                 flg != AS_介護医療機関コードがNULL ? any(KaigoIryoKikanCode.class) : null,
                 flg != AS_介護医師コードがNULL ? any(KaigoDoctorCode.class) : null,
                 flg != AS_医療機関コードがNULL ? any(IIryoKikanCode.class) : null,

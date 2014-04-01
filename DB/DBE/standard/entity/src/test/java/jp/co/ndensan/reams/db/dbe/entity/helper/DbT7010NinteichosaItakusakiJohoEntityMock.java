@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.db.dbe.definition.ChosaItakuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.spy;
 
@@ -22,9 +23,9 @@ public class DbT7010NinteichosaItakusakiJohoEntityMock {
     }
 
     public static DbT7010NinteichosaItakusakiJohoEntity getSpiedInstance() {
-        final RString 試験用文字列 = new RString("0001");
+        final RString 試験用文字列 = new RString("000001");
         return spy(new DbT7010NinteichosaItakusakiJohoEntity(
-                試験用文字列,
+                new ShoKisaiHokenshaNo(試験用文字列),
                 new KaigoJigyoshaNo(試験用文字列),
                 new JigyoshaNo(試験用文字列),
                 true,

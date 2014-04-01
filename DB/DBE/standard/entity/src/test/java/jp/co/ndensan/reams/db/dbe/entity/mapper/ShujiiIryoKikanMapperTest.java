@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.KaigoIryoKikanTestHelper;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -30,7 +30,7 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class ShujiiIryoKikanMapperTest extends TestBase {
 
-    private static final ShichosonCode 市町村コード_A001 = new ShichosonCode(new RString("A001"));
+    private static final ShoKisaiHokenshaNo 証記載保険者番号_A00123 = new ShoKisaiHokenshaNo(new RString("A00123"));
     private static final KaigoIryoKikanCode 介護医療機関コード_B001 = new KaigoIryoKikanCode(new RString("B001"));
     private static final IIryoKikanCode 医療機関コード_C00000001 = new _IryoKikanCode(new RString("C00000001"));
     private static final IryoKikanJokyo 医療機関状況_有効 = IryoKikanJokyo.有効;
@@ -52,8 +52,8 @@ public class ShujiiIryoKikanMapperTest extends TestBase {
         }
 
         @Test
-        public void 市町村コードがA001の主治医医療機関エンティティを渡すと_市町村コードがA001の主治医医療機関クラスが作成される() {
-            assertThat(result.get市町村コード(), is(市町村コード_A001));
+        public void 証記載保険者番号がA00123の主治医医療機関エンティティを渡すと_証記載保険者番号がA00123の主治医医療機関クラスが作成される() {
+            assertThat(result.get証記載保険者番号(), is(証記載保険者番号_A00123));
         }
 
         @Test
@@ -92,8 +92,8 @@ public class ShujiiIryoKikanMapperTest extends TestBase {
         }
 
         @Test
-        public void 市町村コードがA001の主治医医療機関クラスを渡すと_市町村コードがA001の主治医医療機関エンティティが作成される() {
-            assertThat(result.getShichosonCode(), is(市町村コード_A001));
+        public void 証記載保険者番号がA00123の主治医医療機関クラスを渡すと_証記載保険者番号がA00123の主治医医療機関エンティティが作成される() {
+            assertThat(result.getShoKisaiHokenshaNo(), is(証記載保険者番号_A00123));
         }
 
         @Test
@@ -145,6 +145,6 @@ public class ShujiiIryoKikanMapperTest extends TestBase {
     }
 
     private static IShujiiIryoKikan create主治医医療機関() {
-        return new ShujiiIryoKikan(市町村コード_A001, 介護医療機関コード_B001, 医療機関コード_C00000001, 医療機関状況_有効, 医療機関区分_100);
+        return new ShujiiIryoKikan(証記載保険者番号_A00123, 介護医療機関コード_B001, 医療機関コード_C00000001, 医療機関状況_有効, 医療機関区分_100);
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoIryoKikanEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -29,42 +29,42 @@ public interface IKaigoIryoKikanDac {
     List<KaigoIryoKikanEntity> select(ITrueFalseCriteria criteria);
 
     /**
-     * 市町村コードと介護医療機関コードを元に、介護医療機関の情報を取得します。
+     * 証記載保険者番号と介護医療機関コードを元に、介護医療機関の情報を取得します。
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @param 介護医療機関コード 介護医療機関コード
      * @return 介護医療機関情報のリスト
      */
     @Transaction
-    KaigoIryoKikanEntity select(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード);
+    KaigoIryoKikanEntity select(ShoKisaiHokenshaNo 証記載保険者番号, KaigoIryoKikanCode 介護医療機関コード);
 
     /**
-     * 市町村コード、介護医療機関コード、医療機関状況を元に、介護医療機関の情報を取得します。
+     * 証記載保険者番号、介護医療機関コード、医療機関状況を元に、介護医療機関の情報を取得します。
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @param 介護医療機関コード 介護医療機関コード
      * @param 医療機関の状況 医療機関の状況
      * @return 介護医療機関情報
      */
     @Transaction
-    KaigoIryoKikanEntity select(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, IryoKikanJokyo 医療機関の状況);
+    KaigoIryoKikanEntity select(ShoKisaiHokenshaNo 証記載保険者番号, KaigoIryoKikanCode 介護医療機関コード, IryoKikanJokyo 医療機関の状況);
 
     /**
-     * 指定した市町村コードに該当する、介護医療機関情報をリストで返します。
+     * 指定した証記載保険者番号に該当する、介護医療機関情報をリストで返します。
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @return 介護医療機関情報のリスト
      */
     @Transaction
-    List<KaigoIryoKikanEntity> select(ShichosonCode 市町村コード);
+    List<KaigoIryoKikanEntity> select(ShoKisaiHokenshaNo 証記載保険者番号);
 
     /**
-     * 指定した市町村コードと医療機関状況に該当する、介護医療機関情報をリストで返します。
+     * 指定した証記載保険者番号と医療機関状況に該当する、介護医療機関情報をリストで返します。
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @param 医療機関の状況 医療機関の状況
      * @return 介護医療機関情報のリスト
      */
     @Transaction
-    List<KaigoIryoKikanEntity> select(ShichosonCode 市町村コード, IryoKikanJokyo 医療機関の状況);
+    List<KaigoIryoKikanEntity> select(ShoKisaiHokenshaNo 証記載保険者番号, IryoKikanJokyo 医療機関の状況);
 }

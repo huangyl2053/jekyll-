@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5020HatsubanKanriJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.IHatsubanKanriJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.INinteichosaItakusakiDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import static org.hamcrest.CoreMatchers.is;
@@ -57,7 +58,7 @@ public class NinteichosaItakusakiManagerTest {
         entity = mock(DbT7010NinteichosaItakusakiJohoEntity.class);
         hatsubanentity = mock(DbT5020HatsubanKanriJohoEntity.class);
         list = new ArrayList<>();
-        when(entity.get市町村コード()).thenReturn(new RString("20203"));
+        when(entity.get証記載保険者番号()).thenReturn(new ShoKisaiHokenshaNo(new RString("202030")));
         kaigojigyoshaNo = new KaigoJigyoshaNo(new RString("0000000001"));
         when(entity.get介護事業者番号()).thenReturn(kaigojigyoshaNo);
         jigyoshaNo = new JigyoshaNo(new RString("2020300001"));
@@ -76,7 +77,7 @@ public class NinteichosaItakusakiManagerTest {
         when(ninteichosaItakusakiDac.selectAll(null)).thenReturn(emptyList);
         when(ninteichosaItakusakiDac.selectAll(new RString("20203"), true)).thenReturn(list);
 
-        when(entity.get市町村コード()).thenReturn(new RString("20203"));
+        when(entity.get証記載保険者番号()).thenReturn(new ShoKisaiHokenshaNo(new RString("202030")));
         kaigojigyoshaNo = new KaigoJigyoshaNo(new RString("0000000002"));
         when(entity.get介護事業者番号()).thenReturn(kaigojigyoshaNo);
         jigyoshaNo = new JigyoshaNo(new RString("2020300002"));

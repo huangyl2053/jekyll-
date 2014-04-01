@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -21,11 +21,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public interface IShujii {
 
     /**
-     * 市町村コードを返します。
+     * 証記載保険者番号を返します。
      *
-     * @return 市町村コード
+     * @return 証記載保険者番号
      */
-    ShichosonCode get市町村コード();
+    ShoKisaiHokenshaNo get証記載保険者番号();
 
     /**
      * 介護医療機関コードを返します。

@@ -1,7 +1,7 @@
-﻿shichosonCode,DbUDD001ShichosonCode,ShichosonCode,,,,,A
+﻿shichosonCode,varchar,ShoKisaiHokenshaNo,,,,,A
 kaigoIryokikanCode,varchar,KaigoIryoKikanCode,,,,,A
 kaigoIshiCode,varchar,RString,,,,,A
-iryokikanCode,DbUDD012IryoKikanCode,RString,,,,,A
+iryokikanCode,varchar,RString,,,,,A
 ishiShikibetsuNo,varchar,RString,,,,,A
 shujiiJokyo,bool,boolean,,,,,A
 yubinNo,UDD003YubinNo,YubinNo,,,,,A

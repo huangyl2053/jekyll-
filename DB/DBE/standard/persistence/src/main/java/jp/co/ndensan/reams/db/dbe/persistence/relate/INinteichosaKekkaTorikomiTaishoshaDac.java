@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.relate;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -27,21 +27,21 @@ public interface INinteichosaKekkaTorikomiTaishoshaDac {
     List<KaigoNinteiShoriTaishoshaEntity> selectAll();
 
     /**
-     * 市町村コードを元に、認定調査結果取込対象者を取得します。
+     * 証記載保険者番号を元に、認定調査結果取込対象者を取得します。
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @return 認定調査結果取込対象者のリスト
      */
     @Transaction
-    List<KaigoNinteiShoriTaishoshaEntity> select市町村コード(ShichosonCode 市町村コード);
+    List<KaigoNinteiShoriTaishoshaEntity> select証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号);
 
     /**
-     * 市町村コードと支所コードを元に、認定調査結果取込対象者を取得します。
+     * 証記載保険者番号と支所コードを元に、認定調査結果取込対象者を取得します。
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @param 支所コード 支所コード
      * @return 認定調査結果取込対象者のリスト
      */
     @Transaction
-    List<KaigoNinteiShoriTaishoshaEntity> select市町村コード及び支所コード(ShichosonCode 市町村コード, RString 支所コード);
+    List<KaigoNinteiShoriTaishoshaEntity> select証記載保険者番号及び支所コード(ShoKisaiHokenshaNo 証記載保険者番号, RString 支所コード);
 }

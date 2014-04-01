@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.KaigoIryoKikanMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoIryoKikanEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.IKaigoIryoKikanDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IKoza;
 import jp.co.ndensan.reams.ur.urz.realservice.IKozaManager;
 import jp.co.ndensan.reams.ur.urz.realservice.KozaService;
@@ -48,26 +48,26 @@ public class KaigoIryoKikanFinder implements IKaigoIryoKikanFinder {
     }
 
     @Override
-    public KaigoIryoKikan get介護医療機関(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード) {
-        KaigoIryoKikanEntity entity = dac.select(市町村コード, 介護医療機関コード);
+    public KaigoIryoKikan get介護医療機関(ShoKisaiHokenshaNo 証記載保険者番号, KaigoIryoKikanCode 介護医療機関コード) {
+        KaigoIryoKikanEntity entity = dac.select(証記載保険者番号, 介護医療機関コード);
         return create介護医療機関(entity);
     }
 
     @Override
-    public KaigoIryoKikan get介護医療機関(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, IryoKikanJokyo 医療機関状況) {
-        KaigoIryoKikanEntity entity = dac.select(市町村コード, 介護医療機関コード, 医療機関状況);
+    public KaigoIryoKikan get介護医療機関(ShoKisaiHokenshaNo 証記載保険者番号, KaigoIryoKikanCode 介護医療機関コード, IryoKikanJokyo 医療機関状況) {
+        KaigoIryoKikanEntity entity = dac.select(証記載保険者番号, 介護医療機関コード, 医療機関状況);
         return create介護医療機関(entity);
     }
 
     @Override
-    public KaigoIryoKikanCollection get介護医療機関Collection(ShichosonCode 市町村コード) {
-        List<KaigoIryoKikanEntity> entities = dac.select(市町村コード);
+    public KaigoIryoKikanCollection get介護医療機関Collection(ShoKisaiHokenshaNo 証記載保険者番号) {
+        List<KaigoIryoKikanEntity> entities = dac.select(証記載保険者番号);
         return new KaigoIryoKikanCollection(create介護医療機関List(entities));
     }
 
     @Override
-    public KaigoIryoKikanCollection get介護医療機関Collection(ShichosonCode 市町村コード, IryoKikanJokyo 医療機関状況) {
-        List<KaigoIryoKikanEntity> entities = dac.select(市町村コード, 医療機関状況);
+    public KaigoIryoKikanCollection get介護医療機関Collection(ShoKisaiHokenshaNo 証記載保険者番号, IryoKikanJokyo 医療機関状況) {
+        List<KaigoIryoKikanEntity> entities = dac.select(証記載保険者番号, 医療機関状況);
         return new KaigoIryoKikanCollection(create介護医療機関List(entities));
     }
 

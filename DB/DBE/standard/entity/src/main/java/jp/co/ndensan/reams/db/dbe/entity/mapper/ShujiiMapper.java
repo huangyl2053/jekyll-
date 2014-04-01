@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.business.Shujii;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 
@@ -34,7 +34,7 @@ public final class ShujiiMapper {
      */
     public static IShujii toShujii(DbT7012ShujiiJohoEntity entity) {
         return new Shujii(
-                entity.getShichosonCode(),
+                entity.getShoKisaiHokenshaNo(),
                 entity.getKaigoIryokikanCode(),
                 new KaigoDoctorCode(entity.getKaigoIshiCode()),
                 new _IryoKikanCode(entity.getIryokikanCode()),
@@ -54,7 +54,7 @@ public final class ShujiiMapper {
      */
     public static DbT7012ShujiiJohoEntity toEntity(IShujii shujii) {
         DbT7012ShujiiJohoEntity entity = new DbT7012ShujiiJohoEntity();
-        entity.setShichosonCode(shujii.get市町村コード());
+        entity.setShoKisaiHokenshaNo(shujii.get証記載保険者番号());
         entity.setKaigoIryokikanCode(shujii.get介護医療機関コード());
         entity.setKaigoIshiCode(shujii.get介護医師コード().value());
         entity.setIryokikanCode(shujii.get医療機関コード().getValue());

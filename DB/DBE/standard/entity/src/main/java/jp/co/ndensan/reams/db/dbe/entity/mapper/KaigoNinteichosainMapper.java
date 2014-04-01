@@ -39,7 +39,7 @@ public final class KaigoNinteichosainMapper {
         requireNonNull(itakusakiJohoEntity, Messages.E00003.replace("認定調査委託先エンティティ", "介護認定調査員").getMessage());
 
         return new KaigoNinteichosain(
-                chosainJohoEntity.getShichosonCode(),
+                chosainJohoEntity.getShoKisaiHokenshaNo(),
                 chosainJohoEntity.getKaigoJigyoshaNo(),
                 new KaigoNinteichosainNo(chosainJohoEntity.getKaigoChosainNo()),
                 chosainJohoEntity.getKaigoChosainJokyo(),
@@ -64,7 +64,7 @@ public final class KaigoNinteichosainMapper {
     public static DbT7013ChosainJohoEntity toKaigoNinteichosainEntity(KaigoNinteichosain 介護認定調査員) throws NullPointerException {
         requireNonNull(介護認定調査員, Messages.E00003.replace("介護認定調査員", "介護認定調査員エンティティ").getMessage());
         DbT7013ChosainJohoEntity entity = new DbT7013ChosainJohoEntity();
-        entity.setShichosonCode(介護認定調査員.get市町村コード());
+        entity.setShoKisaiHokenshaNo(介護認定調査員.get証記載保険者番号());
         entity.setKaigoJigyoshaNo(介護認定調査員.get介護事業者番号());
         entity.setKaigoChosainNo(介護認定調査員.get介護調査員番号().value());
         entity.setJigyoshaNo(介護認定調査員.get認定調査委託先().getJigyoshaNo());

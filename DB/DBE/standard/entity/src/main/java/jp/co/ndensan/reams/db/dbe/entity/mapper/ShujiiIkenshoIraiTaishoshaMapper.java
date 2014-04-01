@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoIraiTaishosha;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
@@ -54,14 +54,14 @@ public final class ShujiiIkenshoIraiTaishoshaMapper {
         requireNonNull(認定申請情報Entity, Messages.E00003.replace("認定申請情報Entity", "主治医意見書作成依頼対象者").getMessage());
 
         ShinseishoKanriNo 申請書管理番号 = 認定申請情報Entity.getShinseishoKanriNo();
-        ShichosonCode 市町村コード = 認定申請情報Entity.getShichosonCode();
+        ShoKisaiHokenshaNo 証記載保険者番号 = 認定申請情報Entity.getShoKisaiHokenshaNo();
         KaigoHihokenshaNo 被保険者番号 = 認定申請情報Entity.getHihokenshaNo();
         FlexibleDate 認定申請年月日 = 認定申請情報Entity.getNinteiShinseiYMD();
         NinteiShinseiKubunShinsei 認定申請区分 = 認定申請情報Entity.getNinteiShinseiShinseijiKubunCode();
 
         return new ShujiiIkenshoIraiTaishosha(
                 申請書管理番号,
-                市町村コード,
+                証記載保険者番号,
                 被保険者番号,
                 認定申請年月日,
                 認定申請区分,

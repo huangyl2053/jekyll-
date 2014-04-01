@@ -31,11 +31,11 @@ public class NinteichosaItakusakiDac implements INinteichosaItakusakiDac {
     private final DbAccessor accessor = new DbAccessor(session);
 
     @Override
-    public List<DbT7010NinteichosaItakusakiJohoEntity> selectAll(RString 市町村コード, boolean 介護事業状況) {
+    public List<DbT7010NinteichosaItakusakiJohoEntity> selectAll(RString 証記載保険者番号, boolean 介護事業状況) {
 
         List<DbT7010NinteichosaItakusakiJohoEntity> list = accessor.select()
                 .table(DbT7010NinteichosaItakusakiJoho.class)
-                .where(and(eq(DbT7010NinteichosaItakusakiJoho.SHICHOSON_CD, 市町村コード),
+                .where(and(eq(DbT7010NinteichosaItakusakiJoho.SHICHOSON_CD, 証記載保険者番号),
                 eq(DbT7010NinteichosaItakusakiJoho.KAIGO_JIGYOSHA_JOKYO, 介護事業状況)))
                 .order(by(DbT7010NinteichosaItakusakiJoho.KAIGO_JIGYOSHA_NO, Order.DESC))
                 .toList(DbT7010NinteichosaItakusakiJohoEntity.class);
@@ -45,11 +45,11 @@ public class NinteichosaItakusakiDac implements INinteichosaItakusakiDac {
     }
 
     @Override
-    public List<DbT7010NinteichosaItakusakiJohoEntity> selectAll(RString 市町村コード) {
+    public List<DbT7010NinteichosaItakusakiJohoEntity> selectAll(RString 証記載保険者番号) {
 
         List<DbT7010NinteichosaItakusakiJohoEntity> list = accessor.select()
                 .table(DbT7010NinteichosaItakusakiJoho.class)
-                .where(eq(DbT7010NinteichosaItakusakiJoho.SHICHOSON_CD, 市町村コード))
+                .where(eq(DbT7010NinteichosaItakusakiJoho.SHICHOSON_CD, 証記載保険者番号))
                 .order(by(DbT7010NinteichosaItakusakiJoho.KAIGO_JIGYOSHA_NO, Order.DESC))
                 .toList(DbT7010NinteichosaItakusakiJohoEntity.class);
 
@@ -58,11 +58,11 @@ public class NinteichosaItakusakiDac implements INinteichosaItakusakiDac {
     }
 
     @Override
-    public DbT7010NinteichosaItakusakiJohoEntity select(RString 市町村コード, KaigoJigyoshaNo 介護事業者番号, boolean 介護事業状況) {
+    public DbT7010NinteichosaItakusakiJohoEntity select(RString 証記載保険者番号, KaigoJigyoshaNo 介護事業者番号, boolean 介護事業状況) {
 
         List<DbT7010NinteichosaItakusakiJohoEntity> list = accessor.select()
                 .table(DbT7010NinteichosaItakusakiJoho.class)
-                .where(and(eq(DbT7010NinteichosaItakusakiJoho.SHICHOSON_CD, 市町村コード),
+                .where(and(eq(DbT7010NinteichosaItakusakiJoho.SHICHOSON_CD, 証記載保険者番号),
                 eq(DbT7010NinteichosaItakusakiJoho.KAIGO_JIGYOSHA_NO, 介護事業者番号),
                 eq(DbT7010NinteichosaItakusakiJoho.KAIGO_JIGYOSHA_JOKYO, 介護事業状況)))
                 .order(by(DbT7010NinteichosaItakusakiJoho.KAIGO_JIGYOSHA_NO, Order.DESC))
@@ -75,11 +75,11 @@ public class NinteichosaItakusakiDac implements INinteichosaItakusakiDac {
     }
 
     @Override
-    public DbT7010NinteichosaItakusakiJohoEntity select(RString 市町村コード, JigyoshaNo 事業者番号, boolean 介護事業状況) {
+    public DbT7010NinteichosaItakusakiJohoEntity select(RString 証記載保険者番号, JigyoshaNo 事業者番号, boolean 介護事業状況) {
 
         List<DbT7010NinteichosaItakusakiJohoEntity> list = accessor.select()
                 .table(DbT7010NinteichosaItakusakiJoho.class)
-                .where(and(eq(DbT7010NinteichosaItakusakiJoho.SHICHOSON_CD, 市町村コード),
+                .where(and(eq(DbT7010NinteichosaItakusakiJoho.SHICHOSON_CD, 証記載保険者番号),
                 eq(DbT7010NinteichosaItakusakiJoho.JIGYOSHA_NO, 事業者番号),
                 eq(DbT7010NinteichosaItakusakiJoho.KAIGO_JIGYOSHA_JOKYO, 介護事業状況)))
                 .order(by(DbT7010NinteichosaItakusakiJoho.KAIGO_JIGYOSHA_NO, Order.DESC))
@@ -138,7 +138,7 @@ public class NinteichosaItakusakiDac implements INinteichosaItakusakiDac {
         return accessor.
                 select().
                 table(DbT7010NinteichosaItakusakiJoho.class).
-                where(and(eq(DbT7010NinteichosaItakusakiJoho.SHICHOSON_CD, entity.get市町村コード()),
+                where(and(eq(DbT7010NinteichosaItakusakiJoho.SHICHOSON_CD, entity.get証記載保険者番号()),
                 eq(DbT7010NinteichosaItakusakiJoho.KAIGO_JIGYOSHA_NO, entity.get介護事業者番号()))).
                 getCount();
     }

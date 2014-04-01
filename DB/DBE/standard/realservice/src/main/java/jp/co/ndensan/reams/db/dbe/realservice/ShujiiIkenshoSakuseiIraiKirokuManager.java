@@ -146,7 +146,7 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
         if (shinseiEntity == null) {
             return null;
         }
-        KaigoDoctor kaigoDoctor = kaigoDoctorManager.get介護医師(shinseiEntity.getShichosonCode(),
+        KaigoDoctor kaigoDoctor = kaigoDoctorManager.get介護医師(shinseiEntity.getShoKisaiHokenshaNo(),
                 new KaigoIryoKikanCode(iraiEntity.getKaigoIryokikanCode()), new KaigoDoctorCode(iraiEntity.getKaigoIshiCode()));
         if (kaigoDoctor == null) {
             return null;

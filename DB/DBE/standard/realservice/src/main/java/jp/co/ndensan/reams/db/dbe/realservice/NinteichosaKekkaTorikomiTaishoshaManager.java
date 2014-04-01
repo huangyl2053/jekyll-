@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaKekkaTorikomiTaishosh
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiChosaIraiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.INinteichosaKekkaTorikomiTaishoshaDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -69,25 +69,25 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
     }
 
     /**
-     * 認定調査結果取込対象者を市町村コードを指定して全件取得します。
+     * 認定調査結果取込対象者を証記載保険者番号を指定して全件取得します。
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @return 認定調査結果取込対象者全件
      */
-    public List<NinteichosaKekkaTorikomiTaishosha> get認定調査結果取込対象者全件(ShichosonCode 市町村コード) {
-        List<KaigoNinteiShoriTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select市町村コード(市町村コード);
+    public List<NinteichosaKekkaTorikomiTaishosha> get認定調査結果取込対象者全件(ShoKisaiHokenshaNo 証記載保険者番号) {
+        List<KaigoNinteiShoriTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select証記載保険者番号(証記載保険者番号);
         return create認定調査結果取込対象者List(torikomiTaishoshaEntityList);
     }
 
     /**
-     * 認定調査結果取込対象者を、市町村コードと支所コードを指定して全件取得します。
+     * 認定調査結果取込対象者を、証記載保険者番号と支所コードを指定して全件取得します。
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @param 支所コード 支所コード
      * @return 認定調査結果取込対象者全件
      */
-    public List<NinteichosaKekkaTorikomiTaishosha> get認定調査結果取込対象者全件(ShichosonCode 市町村コード, RString 支所コード) {
-        List<KaigoNinteiShoriTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select市町村コード及び支所コード(市町村コード, 支所コード);
+    public List<NinteichosaKekkaTorikomiTaishosha> get認定調査結果取込対象者全件(ShoKisaiHokenshaNo 証記載保険者番号, RString 支所コード) {
+        List<KaigoNinteiShoriTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select証記載保険者番号及び支所コード(証記載保険者番号, 支所コード);
         return create認定調査結果取込対象者List(torikomiTaishoshaEntityList);
     }
 
@@ -157,14 +157,14 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
             DbT5001NinteiShinseiJohoEntity shinseiJohoEntity) {
         return chosaIraiJohoDac.select(
                 shinchokuJohoEntity.getShinseishoKanriNo().value(),
-                new NinteichosaIraiRirekiNo(shinseiJohoEntity.getNinteichosaIraiRirekiNo()));
+                shinseiJohoEntity.getNinteichosaIraiRirekiNo());
     }
 
     private KaigoNinteichosain get介護認定調査員(
             DbT5001NinteiShinseiJohoEntity shinseiJohoEntity,
             DbT5006NinteichosaIraiJohoEntity iraiJohoEntity) {
         return new KaigoNinteichosainManager().get介護認定調査員(
-                shinseiJohoEntity.getShichosonCode(),
+                shinseiJohoEntity.getShoKisaiHokenshaNo(),
                 iraiJohoEntity.getNinteichosaItakusakiCode(),
                 new KaigoNinteichosainNo(iraiJohoEntity.getChousainCode().value()));
     }

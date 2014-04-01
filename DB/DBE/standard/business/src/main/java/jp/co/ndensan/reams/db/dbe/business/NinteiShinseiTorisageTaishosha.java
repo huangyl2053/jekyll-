@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 public class NinteiShinseiTorisageTaishosha {
 
     private final ShinseishoKanriNo 申請書管理No;
-    private final ShichosonCode 市町村コード;
+    private final ShoKisaiHokenshaNo 証記載保険者番号;
     private final KaigoHihokenshaNo 被保険者番号;
     private final FlexibleDate 認定申請年月日;
     //TODO n8178 城間篤人
@@ -32,24 +32,24 @@ public class NinteiShinseiTorisageTaishosha {
      * 引数からメンバを受け取るコンストラクタです。
      *
      * @param 申請書管理No 申請書管理No
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @param 被保険者番号 被保険者番号
      * @param 認定申請年月日 認定申請年月日
      * @param 認定申請区分コード_申請時 認定申請区分（申請時）コード
      * @param 認定申請取下げ 認定申請取下げ
      */
-    public NinteiShinseiTorisageTaishosha(ShinseishoKanriNo 申請書管理No, ShichosonCode 市町村コード, KaigoHihokenshaNo 被保険者番号,
+    public NinteiShinseiTorisageTaishosha(ShinseishoKanriNo 申請書管理No, ShoKisaiHokenshaNo 証記載保険者番号, KaigoHihokenshaNo 被保険者番号,
             FlexibleDate 認定申請年月日, NinteiShinseiKubunShinsei 認定申請区分コード_申請時, NinteiShinseiTorisage 認定申請取下げ) {
 
         requireNonNull(申請書管理No, Messages.E00003.replace("申請書管理No", getClass().getName()).getMessage());
-        requireNonNull(市町村コード, Messages.E00003.replace("市町村コード", getClass().getName()).getMessage());
+        requireNonNull(証記載保険者番号, Messages.E00003.replace("証記載保険者番号", getClass().getName()).getMessage());
         requireNonNull(被保険者番号, Messages.E00003.replace("被保険者番号", getClass().getName()).getMessage());
         requireNonNull(認定申請年月日, Messages.E00003.replace("認定申請年月日", getClass().getName()).getMessage());
         requireNonNull(認定申請区分コード_申請時, Messages.E00003.replace("認定申請区分コード(申請時)", getClass().getName()).getMessage());
         requireNonNull(認定申請取下げ, Messages.E00003.replace("認定申請取下げ", getClass().getName()).getMessage());
 
         this.申請書管理No = 申請書管理No;
-        this.市町村コード = 市町村コード;
+        this.証記載保険者番号 = 証記載保険者番号;
         this.被保険者番号 = 被保険者番号;
         this.認定申請年月日 = 認定申請年月日;
         this.認定申請区分コード_申請時 = 認定申請区分コード_申請時;
@@ -66,12 +66,12 @@ public class NinteiShinseiTorisageTaishosha {
     }
 
     /**
-     * 市町村コードを返します。
+     * 証記載保険者番号を返します。
      *
-     * @return 市町村コード
+     * @return 証記載保険者番号
      */
-    public ShichosonCode get市町村コード() {
-        return 市町村コード;
+    public ShoKisaiHokenshaNo get証記載保険者番号() {
+        return 証記載保険者番号;
     }
 
     /**

@@ -50,10 +50,10 @@ public class NinteichosaKekkaTorikomiTaishoshaMapperTest extends DbeTestBase {
         }
 
         @Test
-        public void 要介護認定申請情報Entityの市町村コードと_Mapping後の認定調査結果取込対象者の_認定申請情報の市町村コードが_同一になる() {
+        public void 要介護認定申請情報Entityの証記載保険者番号と_Mapping後の認定調査結果取込対象者の_認定申請情報の証記載保険者番号が_同一になる() {
             sut = NinteichosaKekkaTorikomiTaishoshaMapper.toNinteichosaKekkaTorikomiTaishosha(
                     要介護認定進捗情報Entity, 要介護認定申請情報Entity, 認定調査依頼情報Entity, 介護認定調査員, 個人);
-            assertThat(sut.get認定申請情報().get市町村コード().getValue(), is(DbT5001NinteiShinseiJohoEntityMock.getSpiedInstance().getShichosonCode().getValue()));
+            assertThat(sut.get認定申請情報().get証記載保険者番号().getValue(), is(DbT5001NinteiShinseiJohoEntityMock.getSpiedInstance().getShoKisaiHokenshaNo().getValue()));
         }
 
         @Test

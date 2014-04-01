@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteiShinchokuJohoMapper;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteishinseiJohoMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.ShujiiIkenshoTorikomiTaishoshaDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -63,25 +63,25 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
     }
 
     /**
-     * 主治医意見書取込対象者を市町村コードを指定して全件取得します。
+     * 主治医意見書取込対象者を証記載保険者番号を指定して全件取得します。
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @return 主治医意見書取込対象者全件
      */
-    public List<ShujiiIkenshoTorikomiTaishosha> get主治医意見書取込対象者全件(ShichosonCode 市町村コード) {
-        List<KaigoNinteiShoriTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select市町村コード(市町村コード);
+    public List<ShujiiIkenshoTorikomiTaishosha> get主治医意見書取込対象者全件(ShoKisaiHokenshaNo 証記載保険者番号) {
+        List<KaigoNinteiShoriTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select証記載保険者番号(証記載保険者番号);
         return create主治医意見書取込対象者List(torikomiTaishoshaEntityList);
     }
 
     /**
-     * 主治医意見書取込対象者を、市町村コードと支所コードを指定して全件取得します。
+     * 主治医意見書取込対象者を、証記載保険者番号と支所コードを指定して全件取得します。
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @param 支所コード 支所コード
      * @return 主治医意見書取込対象者全件
      */
-    public List<ShujiiIkenshoTorikomiTaishosha> get主治医意見書取込対象者全件(ShichosonCode 市町村コード, RString 支所コード) {
-        List<KaigoNinteiShoriTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select市町村コード及び支所コード(市町村コード, 支所コード);
+    public List<ShujiiIkenshoTorikomiTaishosha> get主治医意見書取込対象者全件(ShoKisaiHokenshaNo 証記載保険者番号, RString 支所コード) {
+        List<KaigoNinteiShoriTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select証記載保険者番号及び支所コード(証記載保険者番号, 支所コード);
         return create主治医意見書取込対象者List(torikomiTaishoshaEntityList);
     }
 

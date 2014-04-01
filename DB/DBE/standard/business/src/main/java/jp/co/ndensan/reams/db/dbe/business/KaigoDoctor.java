@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
@@ -150,13 +150,13 @@ public class KaigoDoctor implements IShujii, IDoctor {
     }
 
     /**
-     * 市町村コードを返します。
+     * 証記載保険者番号を返します。
      *
-     * @return 市町村コード
+     * @return 証記載保険者番号
      */
     @Override
-    public ShichosonCode get市町村コード() {
-        return 主治医.get市町村コード();
+    public ShoKisaiHokenshaNo get証記載保険者番号() {
+        return 主治医.get証記載保険者番号();
     }
 
     /**

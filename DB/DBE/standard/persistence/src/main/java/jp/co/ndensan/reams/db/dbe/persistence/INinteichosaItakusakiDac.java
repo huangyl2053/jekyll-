@@ -20,39 +20,39 @@ public interface INinteichosaItakusakiDac {
     /**
      * 市町村・介護事業者番号・介護事業状況を指定して認定調査委託先を取得します
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @param 介護事業者番号 介護事業者番号
      * @param 介護事業状況 介護事業状況
      * @return 認定調査委託先情報エンティティ
      */
-    DbT7010NinteichosaItakusakiJohoEntity select(RString 市町村コード, KaigoJigyoshaNo 介護事業者番号, boolean 介護事業状況);
+    DbT7010NinteichosaItakusakiJohoEntity select(RString 証記載保険者番号, KaigoJigyoshaNo 介護事業者番号, boolean 介護事業状況);
 
     /**
-     * 市町村コード・事業者番号・介護事業状況を指定して認定調査委託先を取得します
+     * 証記載保険者番号・事業者番号・介護事業状況を指定して認定調査委託先を取得します
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @param 事業者番号 事業者番号
      * @param 介護事業状況 介護事業状況
      * @return 認定調査委託先情報エンティティ
      */
-    DbT7010NinteichosaItakusakiJohoEntity select(RString 市町村コード, JigyoshaNo 事業者番号, boolean 介護事業状況);
+    DbT7010NinteichosaItakusakiJohoEntity select(RString 証記載保険者番号, JigyoshaNo 事業者番号, boolean 介護事業状況);
 
     /**
-     * 指定した市町村コードで有効又は無効の認定調査委託先を取得します
+     * 指定した証記載保険者番号で有効又は無効の認定調査委託先を取得します
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @param 介護事業状況 介護事業状況
      * @return 認定調査委託先情報エンティティ
      */
-    List<DbT7010NinteichosaItakusakiJohoEntity> selectAll(RString 市町村コード, boolean 介護事業状況);
+    List<DbT7010NinteichosaItakusakiJohoEntity> selectAll(RString 証記載保険者番号, boolean 介護事業状況);
 
     /**
-     * 指定した市町村コードで登録されている全ての認定調査委託先を取得します
+     * 指定した証記載保険者番号で登録されている全ての認定調査委託先を取得します
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @return 認定調査委託先情報エンティティ
      */
-    List<DbT7010NinteichosaItakusakiJohoEntity> selectAll(RString 市町村コード);
+    List<DbT7010NinteichosaItakusakiJohoEntity> selectAll(RString 証記載保険者番号);
 
     /**
      * 認定調査委託先情報に対し追加・更新を行います

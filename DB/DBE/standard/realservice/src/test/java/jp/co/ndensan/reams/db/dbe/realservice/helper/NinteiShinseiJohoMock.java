@@ -8,8 +8,9 @@ import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisage;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -41,7 +42,7 @@ public class NinteiShinseiJohoMock {
     public static NinteiShinseiJoho getSpiedInstance() {
         return spy(new NinteiShinseiJoho(
                 new ShinseishoKanriNo(new RString("申請書管理番号")),
-                new ShichosonCode(new RString("市町村コード")),
+                new ShoKisaiHokenshaNo(new RString("証記載保険者番号")),
                 new RString("支所コード"),
                 new KaigoHihokenshaNo(new RString("介護被保険者番号")),
                 new ShikibetsuCode(new RString("123456")),
@@ -55,7 +56,7 @@ public class NinteiShinseiJohoMock {
                 new Code(new RString("前回要介護状態区分コード")),
                 0,
                 true,
-                1,
+                new NinteichosaIraiRirekiNo(1),
                 2,
                 new Code(new RString("みなし要介護区分コード")),
                 false,

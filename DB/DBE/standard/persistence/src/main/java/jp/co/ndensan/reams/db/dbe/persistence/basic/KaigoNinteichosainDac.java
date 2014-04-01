@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJoho.*;
@@ -28,74 +28,74 @@ public class KaigoNinteichosainDac implements IKaigoNinteichosainDac {
     private SqlSession session;
 
     @Override
-    public DbT7013ChosainJohoEntity select(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoNinteichosainNo 介護調査員番号) {
+    public DbT7013ChosainJohoEntity select(ShoKisaiHokenshaNo 証記載保険者番号, KaigoJigyoshaNo 介護事業者番号, KaigoNinteichosainNo 介護調査員番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT7013ChosainJoho.class)
                 .where(and(
-                                eq(shichosonCode, 市町村コード),
-                                eq(kaigoJigyoshaNo, 介護事業者番号),
-                                eq(kaigoChosainNo, 介護調査員番号)))
+                eq(shichosonCode, 証記載保険者番号),
+                eq(kaigoJigyoshaNo, 介護事業者番号),
+                eq(kaigoChosainNo, 介護調査員番号)))
                 .toObject(DbT7013ChosainJohoEntity.class);
     }
 
     @Override
-    public DbT7013ChosainJohoEntity select(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, KaigoNinteichosainNo 介護調査員番号, ChosainJokyo 調査員の状況) {
+    public DbT7013ChosainJohoEntity select(ShoKisaiHokenshaNo 証記載保険者番号, KaigoJigyoshaNo 介護事業者番号, KaigoNinteichosainNo 介護調査員番号, ChosainJokyo 調査員の状況) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()
                 .table(DbT7013ChosainJoho.class)
                 .where(and(
-                                eq(shichosonCode, 市町村コード),
-                                eq(kaigoJigyoshaNo, 介護事業者番号),
-                                eq(kaigoChosainNo, 介護調査員番号),
-                                eq(kaigoChosainJokyo, 調査員の状況)))
+                eq(shichosonCode, 証記載保険者番号),
+                eq(kaigoJigyoshaNo, 介護事業者番号),
+                eq(kaigoChosainNo, 介護調査員番号),
+                eq(kaigoChosainJokyo, 調査員の状況)))
                 .toObject(DbT7013ChosainJohoEntity.class);
     }
 
     @Override
-    public List<DbT7013ChosainJohoEntity> selectAll(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号) {
+    public List<DbT7013ChosainJohoEntity> selectAll(ShoKisaiHokenshaNo 証記載保険者番号, KaigoJigyoshaNo 介護事業者番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor
                 .select()
                 .table(DbT7013ChosainJoho.class)
                 .where(and(
-                                eq(shichosonCode, 市町村コード),
-                                eq(kaigoJigyoshaNo, 介護事業者番号)))
+                eq(shichosonCode, 証記載保険者番号),
+                eq(kaigoJigyoshaNo, 介護事業者番号)))
                 .toList(DbT7013ChosainJohoEntity.class);
     }
 
     @Override
-    public List<DbT7013ChosainJohoEntity> selectAll(ShichosonCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, ChosainJokyo 調査員の状況) {
+    public List<DbT7013ChosainJohoEntity> selectAll(ShoKisaiHokenshaNo 証記載保険者番号, KaigoJigyoshaNo 介護事業者番号, ChosainJokyo 調査員の状況) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor
                 .select()
                 .table(DbT7013ChosainJoho.class)
                 .where(and(
-                                eq(shichosonCode, 市町村コード),
-                                eq(kaigoJigyoshaNo, 介護事業者番号),
-                                eq(kaigoChosainJokyo, 調査員の状況)))
+                eq(shichosonCode, 証記載保険者番号),
+                eq(kaigoJigyoshaNo, 介護事業者番号),
+                eq(kaigoChosainJokyo, 調査員の状況)))
                 .toList(DbT7013ChosainJohoEntity.class);
     }
 
     @Override
-    public List<DbT7013ChosainJohoEntity> selectAll(ShichosonCode 市町村コード, ChosainJokyo 調査員の状況) {
+    public List<DbT7013ChosainJohoEntity> selectAll(ShoKisaiHokenshaNo 証記載保険者番号, ChosainJokyo 調査員の状況) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor
                 .select()
                 .table(DbT7013ChosainJoho.class)
                 .where(and(
-                                eq(shichosonCode, 市町村コード),
-                                eq(kaigoChosainJokyo, 調査員の状況)))
+                eq(shichosonCode, 証記載保険者番号),
+                eq(kaigoChosainJokyo, 調査員の状況)))
                 .toList(DbT7013ChosainJohoEntity.class);
     }
 
     @Override
-    public List<DbT7013ChosainJohoEntity> selectAll(ShichosonCode 市町村コード) {
+    public List<DbT7013ChosainJohoEntity> selectAll(ShoKisaiHokenshaNo 証記載保険者番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor
                 .select()
                 .table(DbT7013ChosainJoho.class)
-                .where(eq(shichosonCode, 市町村コード))
+                .where(eq(shichosonCode, 証記載保険者番号))
                 .toList(DbT7013ChosainJohoEntity.class);
     }
 
@@ -127,9 +127,9 @@ public class KaigoNinteichosainDac implements IKaigoNinteichosainDac {
         return accessor.select()
                 .table(DbT7013ChosainJoho.class)
                 .where(and(
-                                eq(shichosonCode, entity.getShichosonCode()),
-                                eq(kaigoJigyoshaNo, entity.getKaigoChosainNo()),
-                                eq(kaigoChosainNo, entity.getKaigoChosainNo())))
+                eq(shichosonCode, entity.getShoKisaiHokenshaNo()),
+                eq(kaigoJigyoshaNo, entity.getKaigoChosainNo()),
+                eq(kaigoChosainNo, entity.getKaigoChosainNo())))
                 .getCount();
     }
 }

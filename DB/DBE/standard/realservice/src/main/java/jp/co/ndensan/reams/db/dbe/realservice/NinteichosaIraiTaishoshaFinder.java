@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinchokuJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.INinteichosaItakusakiDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiChosaIraiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.INinteiChosaIraiTaishoshaDac;
@@ -97,16 +97,16 @@ public class NinteichosaIraiTaishoshaFinder {
     }
 
     /**
-     * 市町村コードを指定して、認定調査依頼が未完了の認定調査依頼対象者を取得します。
+     * 証記載保険者番号を指定して、認定調査依頼が未完了の認定調査依頼対象者を取得します。
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @return NinteichosaIraiTaishoshaのList
-     * @throws NullPointerException {@code 市町村コード}がnullの場合
+     * @throws NullPointerException {@code 証記載保険者番号}がnullの場合
      */
-    public List<NinteichosaIraiTaishosha> get認定調査依頼対象者市町村指定(ShichosonCode 市町村コード) throws NullPointerException {
-        requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
+    public List<NinteichosaIraiTaishosha> get認定調査依頼対象者証記載保険者番号指定(ShoKisaiHokenshaNo 証記載保険者番号) throws NullPointerException {
+        requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
 
-        List<DbT5005NinteiShinchokuJohoEntity> 要介護認定進捗情報EntityList = iraiTaishoshaDac.select(市町村コード);
+        List<DbT5005NinteiShinchokuJohoEntity> 要介護認定進捗情報EntityList = iraiTaishoshaDac.select(証記載保険者番号);
         if (要介護認定進捗情報EntityList.isEmpty()) {
             return Collections.EMPTY_LIST;
         }
@@ -135,10 +135,10 @@ public class NinteichosaIraiTaishoshaFinder {
         for (DbT5005NinteiShinchokuJohoEntity entity : 要介護認定進捗情報EntityList) {
 
             DbT5001NinteiShinseiJohoEntity 認定申請情報Entity = shinseiJohoDac.select(entity.getShinseishoKanriNo());
-//            KojinEntity 個人Entity = kojinDac.select最新(認定申請情報Entity.getShichosonCode().getValue());
+//            KojinEntity 個人Entity = kojinDac.select最新(認定申請情報Entity.getShoKisaiHokenshaNo().getValue());
 //            KojinEntity 個人Entity = KojinService.createKojinFinder().get個人(認定申請情報Entity.getShikibetsuCode());
             IKojin 個人 = KojinService.createKojinFinder().get個人(認定申請情報Entity.getShikibetsuCode());
-            NinteichosaIraiRirekiNo ninteichosaIraiRirekiNo = new NinteichosaIraiRirekiNo(認定申請情報Entity.getNinteichosaIraiRirekiNo());
+            NinteichosaIraiRirekiNo ninteichosaIraiRirekiNo = 認定申請情報Entity.getNinteichosaIraiRirekiNo();
             DbT5006NinteichosaIraiJohoEntity 認定調査依頼情報Entity = iraiJohoDac.select(
                     認定申請情報Entity.getShinseishoKanriNo().getColumnValue(),
                     ninteichosaIraiRirekiNo);
@@ -159,16 +159,16 @@ public class NinteichosaIraiTaishoshaFinder {
         boolean isUncreatable = isNull(shinseiJohoEntity) || isNull(chosaIraiJohoEntity);
         return isUncreatable ? null
                 : itakusakiDac.select(
-                        shinseiJohoEntity.getShichosonCode().getValue(),
-                        new KaigoJigyoshaNo(chosaIraiJohoEntity.getNinteichosaItakusakiCode().getColumnValue()),
-                        true);
+                shinseiJohoEntity.getShoKisaiHokenshaNo().getValue(),
+                new KaigoJigyoshaNo(chosaIraiJohoEntity.getNinteichosaItakusakiCode().getColumnValue()),
+                true);
     }
 
     private KaigoJigyoshaEntity create介護事業者(
             DbT5006NinteichosaIraiJohoEntity chosaIraiJohoEntity) {
         return isNull(chosaIraiJohoEntity) ? null
                 : kaigoJigyoshaDac.select特定の事業者番号の事業者(
-                        chosaIraiJohoEntity.getNinteichosaItakusakiCode().getColumnValue()).get(0);
+                chosaIraiJohoEntity.getNinteichosaItakusakiCode().getColumnValue()).get(0);
     }
 
     private ChosainJohoEntity create調査員情報(
@@ -177,9 +177,9 @@ public class NinteichosaIraiTaishoshaFinder {
         boolean isUncreatable = isNull(shinseiJohoEntity) || isNull(chosaIraiJohoEntity);
         return isUncreatable ? null
                 : chosainJohoDac.selectByAllKey(
-                        shinseiJohoEntity.getShichosonCode().getValue(),
-                        chosaIraiJohoEntity.getNinteichosaItakusakiCode().getColumnValue(),
-                        chosaIraiJohoEntity.getChousainCode().getColumnValue());
+                shinseiJohoEntity.getShoKisaiHokenshaNo().getValue(),
+                chosaIraiJohoEntity.getNinteichosaItakusakiCode().getColumnValue(),
+                chosaIraiJohoEntity.getChousainCode().getColumnValue());
     }
 
     private static <T> boolean isNull(T object) {

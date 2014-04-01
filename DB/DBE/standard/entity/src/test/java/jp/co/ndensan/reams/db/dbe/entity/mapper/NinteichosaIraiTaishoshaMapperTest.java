@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5001NinteiShinseiJohoEntityMo
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT7010NinteichosaItakusakiJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.KaigoJigyoshaEntityMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ur.urf.entity.basic.ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urf.entity.basic.KaigoJigyoshaEntity;
@@ -89,13 +89,13 @@ public class NinteichosaIraiTaishoshaMapperTest extends TestBase {
         protected void setUp() {
             要介護認定申請情報Entity = DbT5001NinteiShinseiJohoEntityMock.getSpiedInstance();
             要介護認定申請情報Entity.setShinseishoKanriNo(new ShinseishoKanriNo(new RString("0001")));
-            要介護認定申請情報Entity.setShichosonCode(new ShichosonCode(new RString("1111")));
+            要介護認定申請情報Entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(new RString("111111")));
             要介護認定申請情報Entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("0002")));
             要介護認定申請情報Entity.setNinteiShinseiYMD(new FlexibleDate(new RString("20140101")));
             要介護認定申請情報Entity.setNinteiShinseiShinseijiKubunCode(NinteiShinseiKubunShinsei.新規申請);
             個人 = createKojinWhoseNameIs("個人", "こじん");
             認定調査委託先Entity = DbT7010NinteichosaItakusakiJohoEntityMock.getSpiedInstance();
-            認定調査委託先Entity.set市町村コード(new RString("1111市町村コード"));
+            認定調査委託先Entity.set証記載保険者番号(new ShoKisaiHokenshaNo(new RString("123456")));
             認定調査委託先Entity.set介護事業者番号(new KaigoJigyoshaNo(new RString("0001介護事業者番号")));
             認定調査委託先Entity.set事業者番号(new JigyoshaNo(new RString("0002事業者番号")));
             認定調査委託先Entity.set介護事業者状況(true);
@@ -116,8 +116,8 @@ public class NinteichosaIraiTaishoshaMapperTest extends TestBase {
         }
 
         @Test
-        public void 引き渡した_要介護認定申請情報の市町村コード_とtoNinteichosaIraiTaishoshaの結果は一致する() {
-            assertThat(sut.get市町村コード(), is(要介護認定申請情報Entity.getShichosonCode()));
+        public void 引き渡した_要介護認定申請情報の証記載保険者番号_とtoNinteichosaIraiTaishoshaの結果は一致する() {
+            assertThat(sut.get証記載保険者番号(), is(要介護認定申請情報Entity.getShoKisaiHokenshaNo()));
         }
 
         @Test
@@ -152,7 +152,7 @@ public class NinteichosaIraiTaishoshaMapperTest extends TestBase {
 
         @Test
         public void 引き渡した_認定調査委託先_とtoNinteichosaIraiTaishoshaの結果は一致する() {
-            assertThat(sut.get認定調査委託先().get市町村コード(), is(認定調査委託先Entity.get市町村コード()));
+            assertThat(sut.get認定調査委託先().get証記載保険者番号(), is(認定調査委託先Entity.get証記載保険者番号()));
         }
 
         @Test

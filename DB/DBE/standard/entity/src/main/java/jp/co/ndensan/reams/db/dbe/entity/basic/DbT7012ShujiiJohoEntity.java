@@ -1,25 +1,24 @@
 package jp.co.ndensan.reams.db.dbe.entity.basic;
 
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 
 /**
  * DbT7012ShujiiJohoの項目定義クラスです
  *
- * @author N8156 宮本 康
- *
  */
 public class DbT7012ShujiiJohoEntity implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Generated Code">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7012ShujiiJoho");
@@ -32,7 +31,7 @@ public class DbT7012ShujiiJohoEntity implements IDbAccessable {
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private ShichosonCode shichosonCode;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     @PrimaryKey
     private KaigoIryoKikanCode kaigoIryokikanCode;
     @PrimaryKey
@@ -91,21 +90,21 @@ public class DbT7012ShujiiJohoEntity implements IDbAccessable {
     }
 
     /**
-     * getShichosonCode
+     * getShoKisaiHokenshaNo
      *
-     * @return shichosonCode
+     * @return shoKisaiHokenshaNo
      */
-    public ShichosonCode getShichosonCode() {
-        return shichosonCode;
+    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
+        return shoKisaiHokenshaNo;
     }
 
     /**
-     * setShichosonCode
+     * setShoKisaiHokenshaNo
      *
-     * @param shichosonCode shichosonCode
+     * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
      */
-    public void setShichosonCode(ShichosonCode shichosonCode) {
-        this.shichosonCode = shichosonCode;
+    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     /**
@@ -268,6 +267,29 @@ public class DbT7012ShujiiJohoEntity implements IDbAccessable {
      */
     public void setFaxNo(RString faxNo) {
         this.faxNo = faxNo;
+    }
+
+    /**
+     * このエンティティの主キーが他の{@literal DbT7012ShujiiJohoEntity}と等しいか判定します。
+     *
+     * @param other 比較するエンティティ
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT7012ShujiiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     */
+    public boolean equalsPrimaryKeys(DbT7012ShujiiJohoEntity other) {
+        if (other == null) {
+            return false;
+        }
+        if (!Objects.equals(this.shoKisaiHokenshaNo, other.shoKisaiHokenshaNo)) {
+            return false;
+        }
+        if (!Objects.equals(this.kaigoIryokikanCode, other.kaigoIryokikanCode)) {
+            return false;
+        }
+        if (!Objects.equals(this.kaigoIshiCode, other.kaigoIshiCode)) {
+            return false;
+        }
+        return true;
     }
 // </editor-fold>
 }
