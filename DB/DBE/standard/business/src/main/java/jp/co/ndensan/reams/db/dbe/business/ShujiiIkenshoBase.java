@@ -4,6 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IkenshoDoi;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiJohoTeikyoKibo;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiKaisu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiryoShubetsu;
@@ -28,8 +30,8 @@ public class ShujiiIkenshoBase {
     private final FlexibleDate 意見書記入年月日;
     private final ShujiiIkenshoSakuseiKaisu 意見書作成回数;
     private final ShujiiIkenshoSakuseiryoShubetsu 意見書作成料種別;
-    private final boolean 認定情報提供希望;
-    private final boolean 意見書同意;
+    private final NinteiJohoTeikyoKibo 認定情報提供希望;
+    private final IkenshoDoi 意見書同意;
 
     /**
      * インスタンスを生成します。
@@ -54,8 +56,8 @@ public class ShujiiIkenshoBase {
             FlexibleDate 意見書記入年月日,
             ShujiiIkenshoSakuseiKaisu 意見書作成回数,
             ShujiiIkenshoSakuseiryoShubetsu 意見書作成料種別,
-            boolean 認定情報提供希望,
-            boolean 意見書同意) {
+            NinteiJohoTeikyoKibo 認定情報提供希望,
+            IkenshoDoi 意見書同意) {
         this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00001.replace("申請書管理番号").getMessage());
         this.意見書履歴番号 = requireNonNull(意見書履歴番号, Messages.E00001.replace("意見書履歴番号").getMessage());
         this.意見書依頼区分 = requireNonNull(意見書依頼区分, Messages.E00001.replace("意見書依頼区分").getMessage());
@@ -141,20 +143,38 @@ public class ShujiiIkenshoBase {
     }
 
     /**
-     * 認定情報提供希望かどうかを判定します。
+     * 認定情報提供希望を返します。
      *
-     * @return 希望の場合はtrueを返します。
+     * @return 認定情報提供希望
      */
-    public boolean is認定情報提供希望() {
+    public NinteiJohoTeikyoKibo get認定情報提供希望() {
         return 認定情報提供希望;
     }
 
     /**
-     * 意見書同意かどうかを判定します。
+     * 認定情報の提供を希望するかどうかを判定します。
      *
-     * @return 同意の場合はtrueを返します。
+     * @return 希望する場合はtrueを返します。
+     */
+    public boolean is認定情報提供希望() {
+        return 認定情報提供希望.is希望();
+    }
+
+    /**
+     * 意見書同意を返します。
+     *
+     * @return 意見書同意
+     */
+    public IkenshoDoi get意見書同意() {
+        return 意見書同意;
+    }
+
+    /**
+     * 意見書に同意するかどうかを判定します。
+     *
+     * @return 同意する場合はtrueを返します。
      */
     public boolean is意見書同意() {
-        return 意見書同意;
+        return 意見書同意.is同意();
     }
 }

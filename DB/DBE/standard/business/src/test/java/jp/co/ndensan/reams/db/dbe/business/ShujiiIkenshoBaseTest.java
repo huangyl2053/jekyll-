@@ -5,6 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.business.helper.ShujiiIkenshoResultMock;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IkenshoDoi;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiJohoTeikyoKibo;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiKaisu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiryoShubetsu;
@@ -86,7 +88,7 @@ public class ShujiiIkenshoBaseTest {
                 flg == AS_意見書記入年月日がNULL ? null : FlexibleDate.MAX,
                 flg == AS_意見書作成回数がNULL ? null : ShujiiIkenshoSakuseiKaisu.初回,
                 flg == AS_意見書作成料種別がNULL ? null : ShujiiIkenshoSakuseiryoShubetsu.施設,
-                true,
-                false);
+                NinteiJohoTeikyoKibo.希望する,
+                IkenshoDoi.同意しない);
     }
 }

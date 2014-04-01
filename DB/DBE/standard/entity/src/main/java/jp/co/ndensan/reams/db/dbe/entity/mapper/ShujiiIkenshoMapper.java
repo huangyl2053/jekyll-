@@ -10,7 +10,9 @@ import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoDetails;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoEditor;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoFactory;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoResult;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IkenshoDoi;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiJohoTeikyoKibo;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiKaisu;
@@ -236,8 +238,8 @@ public final class ShujiiIkenshoMapper {
                 entity.getIkenshoKinyuYMD(),
                 ShujiiIkenshoSakuseiKaisu.toValue(entity.getIkenshoSakuseiKaisu()),
                 ShujiiIkenshoSakuseiryoShubetsu.toValue(entity.getIkenshoSakuseiryoShubetsu()),
-                entity.getNinteiJohoTeikyoKiboFlag(),
-                entity.getIkenshoDoiUmuFlag());
+                NinteiJohoTeikyoKibo.toValue(entity.getNinteiJohoTeikyoKiboFlag()),
+                IkenshoDoi.toValue(entity.getIkenshoDoiUmuFlag()));
     }
 
     private static ShujiiIkenshoDetails toShujiiIkenshoDetails(ShujiiIkenshoEntity shujiiIkenshoEntity) {
