@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemSu
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemSubGroupOf2009;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Choice;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChoiceResultItem;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShujiiIkenshoItemNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
@@ -32,7 +32,7 @@ public class ShujiiIkenshoItemTest {
     private static final int AS_意見書項目番号がNULL = 3;
     private static final int AS_意見書項目区分がNULL = 4;
     private static final int AS_表示名称がNULL = 5;
-    private static final int AS_選択肢がNULL = 6;
+    private static final int AS_回答項目がNULL = 6;
     private static final int AS_主要意見書項目 = 7;
     private static final int AS_通常意見書項目 = 8;
 
@@ -64,8 +64,8 @@ public class ShujiiIkenshoItemTest {
         }
 
         @Test(expected = NullPointerException.class)
-        public void 選択肢がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createShujiiIkenshoItem(AS_選択肢がNULL);
+        public void 回答項目がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
+            createShujiiIkenshoItem(AS_回答項目がNULL);
         }
     }
 
@@ -133,16 +133,16 @@ public class ShujiiIkenshoItemTest {
         }
     }
 
-    public static class get選択肢 {
+    public static class get回答項目 {
 
         @Test
-        public void 選択肢が2択の時_get選択肢は_2件の選択肢を返す() {
-            assertThat(createShujiiIkenshoItem().get選択肢().asList().size(), is(2));
+        public void 選択肢が2択の時_get回答項目は_2件の選択肢を返す() {
+            assertThat(((ChoiceItem) createShujiiIkenshoItem().get回答項目()).asList().size(), is(2));
         }
 
         @Test
-        public void 選択肢の設定がある時_get選択肢は_設定値を返す() {
-            assertThat(createShujiiIkenshoItem().get選択肢().asList().get(0).getValue(), is(new RString("問題なし")));
+        public void 選択肢の設定がある時_get回答項目は_設定値を返す() {
+            assertThat(((ChoiceItem) createShujiiIkenshoItem().get回答項目()).asList().get(0).getValue(), is(new RString("問題なし")));
         }
     }
 
@@ -170,7 +170,7 @@ public class ShujiiIkenshoItemTest {
                 flg == AS_意見書項目番号がNULL ? null : new ShujiiIkenshoItemNo(new RString("3-2")),
                 flg == AS_意見書項目区分がNULL ? null : ShujiiIkenshoItemKubun.短期記憶,
                 flg == AS_表示名称がNULL ? null : new RString("短期記憶"),
-                flg == AS_選択肢がNULL ? null : new Choices(Choice.MondaiNashiAri.values()),
+                flg == AS_回答項目がNULL ? null : new ChoiceItem(ChoiceResultItem.MondaiNashiAri.values()),
                 flg == AS_主要意見書項目 ? true : false);
     }
 }

@@ -4,10 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 
-import jp.co.ndensan.reams.db.dbe.definition.Choices;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Choice;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IAnsweringItem;
-import jp.co.ndensan.reams.db.dbe.definition.FreeInputItem;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IAnswerResultItem;
+import jp.co.ndensan.reams.db.dbe.definition.IAnswerItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemSubGroup;
@@ -80,8 +78,8 @@ public class NinteichosaItemForResult implements INinteichosaItem {
     }
 
     @Override
-    public Choices get選択肢() {
-        return 調査項目.get選択肢();
+    public IAnswerItem get回答項目() {
+        return 調査項目.get回答項目();
     }
 
     /**
@@ -107,12 +105,7 @@ public class NinteichosaItemForResult implements INinteichosaItem {
      *
      * @return 回答結果
      */
-    public IAnsweringItem get回答結果() {
-        for (IAnsweringItem data : 調査項目.get選択肢().asList()) {
-            if (data.getValue().equals(Choice.FreeInput.自由入力.getValue())) {
-                return new FreeInputItem(調査結果);
-            }
-        }
-        return 調査項目.get選択肢().toValue(調査結果);
+    public IAnswerResultItem get回答結果() {
+        return 調査項目.get回答項目().toValue(調査結果);
     }
 }

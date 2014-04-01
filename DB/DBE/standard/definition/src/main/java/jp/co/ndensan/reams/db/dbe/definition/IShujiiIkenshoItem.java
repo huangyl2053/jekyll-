@@ -76,11 +76,11 @@ public interface IShujiiIkenshoItem {
     RString get表示名称();
 
     /**
-     * 意見書項目の選択肢を返します。
+     * 回答項目を返します。
      *
-     * @return 選択肢
+     * @return 回答項目
      */
-    Choices get選択肢();
+    IAnswerItem get回答項目();
 
     /**
      * 主要意見書項目かどうか判定します。

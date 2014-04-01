@@ -4,9 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.ninteichosa;
 
-import jp.co.ndensan.reams.db.dbe.definition.Choices;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IAnsweringItem;
+import jp.co.ndensan.reams.db.dbe.definition.IAnswerItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemSubGroup;
@@ -65,13 +64,13 @@ class NinteichosahyoRegulationBuilder<E extends INinteichosaItemKubun> {
      * @param 調査項目番号 調査項目番号
      * @param 調査項目区分 調査項目区分
      * @param 表示名称 表示名称
-     * @param 選択肢 選択肢
+     * @param 回答項目 回答項目
      */
-    void set調査項目(String 調査項目番号, E 調査項目区分, String 表示名称, IAnsweringItem[] 選択肢) {
+    void set調査項目(String 調査項目番号, E 調査項目区分, String 表示名称, IAnswerItem 回答項目) {
         調査票定義.put(調査項目区分,
                 new NinteichosaItem(調査項目グループ, 調査項目サブグループ,
                 this.調査項目サブグループ == NinteichosaItemSubGroup.なし ? 調査項目グループ内番号++ : 調査項目グループ内番号,
                 this.調査項目サブグループ != NinteichosaItemSubGroup.なし ? 調査項目サブグループ内番号++ : 調査項目サブグループ内番号,
-                new NinteichosaItemNo(new RString(調査項目番号)), 調査項目区分, new RString(表示名称), new Choices(選択肢)));
+                new NinteichosaItemNo(new RString(調査項目番号)), 調査項目区分, new RString(表示名称), 回答項目));
     }
 }

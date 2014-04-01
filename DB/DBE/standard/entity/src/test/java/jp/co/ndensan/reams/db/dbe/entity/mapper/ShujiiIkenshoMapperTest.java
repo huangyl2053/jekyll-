@@ -22,7 +22,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.junit.Test;
 import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemKubun.*;
-import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Choice.*;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChoiceResultItem.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;

@@ -26,7 +26,7 @@ public class ShujiiIkenshoItem implements IShujiiIkenshoItem {
     private final ShujiiIkenshoItemNo 意見書項目番号;
     private final IShujiiIkenshoItemKubun 意見書項目区分;
     private final RString 表示名称;
-    private final Choices 選択肢;
+    private final IAnswerItem 回答項目;
     private final boolean 主要意見書項目;
 
     /**
@@ -39,12 +39,12 @@ public class ShujiiIkenshoItem implements IShujiiIkenshoItem {
      * @param 意見書項目番号 意見書項目番号
      * @param 意見書項目区分 意見書項目区分
      * @param 表示名称 表示名称
-     * @param 選択肢 選択肢
+     * @param 回答項目 回答項目
      * @param 主要意見書項目 主要意見書項目
      */
     public ShujiiIkenshoItem(IShujiiIkenshoItemGroup 意見書項目グループ, IShujiiIkenshoItemSubGroup 意見書項目サブグループ,
             int 意見書項目グループ内番号, int 意見書項目サブグループ内番号, ShujiiIkenshoItemNo 意見書項目番号,
-            IShujiiIkenshoItemKubun 意見書項目区分, RString 表示名称, Choices 選択肢, boolean 主要意見書項目) {
+            IShujiiIkenshoItemKubun 意見書項目区分, RString 表示名称, IAnswerItem 回答項目, boolean 主要意見書項目) {
         this.意見書項目グループ = requireNonNull(意見書項目グループ, Messages.E00001.replace("意見書項目グループ").getMessage());
         this.意見書項目サブグループ = requireNonNull(意見書項目サブグループ, Messages.E00001.replace("意見書項目サブグループ").getMessage());
         this.意見書項目グループ内番号 = 意見書項目グループ内番号;
@@ -52,7 +52,7 @@ public class ShujiiIkenshoItem implements IShujiiIkenshoItem {
         this.意見書項目番号 = requireNonNull(意見書項目番号, Messages.E00001.replace("意見書項目番号").getMessage());
         this.意見書項目区分 = requireNonNull(意見書項目区分, Messages.E00001.replace("意見書項目区分").getMessage());
         this.表示名称 = requireNonNull(表示名称, Messages.E00001.replace("表示名称").getMessage());
-        this.選択肢 = requireNonNull(選択肢, Messages.E00001.replace("選択肢").getMessage());
+        this.回答項目 = requireNonNull(回答項目, Messages.E00001.replace("回答項目").getMessage());
         this.主要意見書項目 = 主要意見書項目;
     }
 
@@ -97,8 +97,8 @@ public class ShujiiIkenshoItem implements IShujiiIkenshoItem {
     }
 
     @Override
-    public Choices get選択肢() {
-        return 選択肢;
+    public IAnswerItem get回答項目() {
+        return 回答項目;
     }
 
     @Override

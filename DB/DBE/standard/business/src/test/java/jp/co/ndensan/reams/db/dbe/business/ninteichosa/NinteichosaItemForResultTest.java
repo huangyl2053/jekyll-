@@ -4,8 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Choice;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IAnsweringItem;
+import jp.co.ndensan.reams.db.dbe.definition.ChoiceItem;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChoiceResultItem;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IAnswerResultItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
@@ -111,16 +112,16 @@ public class NinteichosaItemForResultTest {
         }
     }
 
-    public static class get選択肢 {
+    public static class get回答項目 {
 
         @Test
-        public void 選択肢が3択の時_get選択肢は_3件の選択肢を返す() {
-            assertThat(createNinteichosaItemForResult().get選択肢().asList().size(), is(3));
+        public void 選択肢が3択の時_get回答項目は_3件の選択肢を返す() {
+            assertThat(((ChoiceItem) createNinteichosaItemForResult().get回答項目()).asList().size(), is(3));
         }
 
         @Test
-        public void 選択肢の設定がある時_get選択肢は_設定値を返す() {
-            assertThat(createNinteichosaItemForResult().get選択肢().asList().get(0), is((IAnsweringItem) Choice.ServiceKubun.予防));
+        public void 選択肢の設定がある時_get回答項目は_設定値を返す() {
+            assertThat(((ChoiceItem) createNinteichosaItemForResult().get回答項目()).asList().get(0), is((IAnswerResultItem) ChoiceResultItem.ServiceKubun.予防));
         }
     }
 
@@ -136,7 +137,7 @@ public class NinteichosaItemForResultTest {
 
         @Test
         public void 調査項目が選択形式の時_get回答結果は_該当の選択肢を返す() {
-            assertThat(createNinteichosaItemForResult(AS_選択項目).get回答結果(), is((IAnsweringItem) Choice.ServiceKubun.予防));
+            assertThat(createNinteichosaItemForResult(AS_選択項目).get回答結果(), is((IAnswerResultItem) ChoiceResultItem.ServiceKubun.予防));
         }
 
         @Test

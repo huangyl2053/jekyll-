@@ -6,37 +6,32 @@ package jp.co.ndensan.reams.db.dbe.definition;
 
 import java.util.Arrays;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IAnsweringItem;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IAnswerResultItem;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
 
 /**
- * 要介護認定の各種項目に対する選択肢のリストを扱うクラスです。
+ * 回答項目（選択項目）を扱うクラスです。
  *
  * @author N8156 宮本 康
  */
-public class Choices {
+public class ChoiceItem implements IAnswerItem {
 
-    private final IAnsweringItem[] 選択肢;
+    private final IAnswerResultItem[] 選択肢;
 
     /**
      * インスタンスを生成します。
      *
      * @param 選択肢 選択肢
      */
-    public Choices(IAnsweringItem[] 選択肢) {
+    public ChoiceItem(IAnswerResultItem[] 選択肢) {
         this.選択肢 = requireNonNull(選択肢, Messages.E00001.replace("選択肢").getMessage());
     }
 
-    /**
-     * 引数の値に該当する回答項目を返します。
-     *
-     * @param 値 値
-     * @return 回答項目
-     */
-    public IAnsweringItem toValue(RString 値) {
-        for (IAnsweringItem data : 選択肢) {
+    @Override
+    public IAnswerResultItem toValue(RString 値) {
+        for (IAnswerResultItem data : 選択肢) {
             if (data.getCode().equals(値)) {
                 return data;
             }
@@ -45,11 +40,11 @@ public class Choices {
     }
 
     /**
-     * 回答項目のリストを返します。
+     * 回答結果項目（選択結果項目）のリストを返します。
      *
-     * @return 回答項目のリスト
+     * @return 回答結果項目（選択結果項目）のリスト
      */
-    public List<IAnsweringItem> asList() {
+    public List<IAnswerResultItem> asList() {
         return Arrays.asList(選択肢);
     }
 }

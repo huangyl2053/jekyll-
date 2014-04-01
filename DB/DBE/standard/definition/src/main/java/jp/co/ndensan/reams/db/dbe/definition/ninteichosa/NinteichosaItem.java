@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.ninteichosa;
 
-import jp.co.ndensan.reams.db.dbe.definition.Choices;
+import jp.co.ndensan.reams.db.dbe.definition.IAnswerItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemSubGroup;
@@ -27,7 +27,7 @@ public class NinteichosaItem implements INinteichosaItem {
     private final NinteichosaItemNo 調査項目番号;
     private final INinteichosaItemKubun 調査項目区分;
     private final RString 表示名称;
-    private final Choices 選択肢;
+    private final IAnswerItem 回答項目;
 
     /**
      * インスタンスを生成します。
@@ -39,11 +39,11 @@ public class NinteichosaItem implements INinteichosaItem {
      * @param 調査項目番号 調査項目番号
      * @param 調査項目区分 調査項目区分
      * @param 表示名称 表示名称
-     * @param 選択肢 選択肢
+     * @param 回答項目 回答項目
      */
     public NinteichosaItem(INinteichosaItemGroup 調査項目グループ, INinteichosaItemSubGroup 調査項目サブグループ,
             int 調査項目グループ内番号, int 調査項目サブグループ内番号, NinteichosaItemNo 調査項目番号,
-            INinteichosaItemKubun 調査項目区分, RString 表示名称, Choices 選択肢) {
+            INinteichosaItemKubun 調査項目区分, RString 表示名称, IAnswerItem 回答項目) {
         this.調査項目グループ = requireNonNull(調査項目グループ, Messages.E00001.replace("調査項目グループ").getMessage());
         this.調査項目サブグループ = requireNonNull(調査項目サブグループ, Messages.E00001.replace("調査項目サブグループ").getMessage());
         this.調査項目グループ内番号 = 調査項目グループ内番号;
@@ -51,7 +51,7 @@ public class NinteichosaItem implements INinteichosaItem {
         this.調査項目番号 = requireNonNull(調査項目番号, Messages.E00001.replace("調査項目番号").getMessage());
         this.調査項目区分 = requireNonNull(調査項目区分, Messages.E00001.replace("調査項目区分").getMessage());
         this.表示名称 = requireNonNull(表示名称, Messages.E00001.replace("表示名称").getMessage());
-        this.選択肢 = requireNonNull(選択肢, Messages.E00001.replace("選択肢").getMessage());
+        this.回答項目 = requireNonNull(回答項目, Messages.E00001.replace("回答項目").getMessage());
     }
 
     @Override
@@ -95,7 +95,7 @@ public class NinteichosaItem implements INinteichosaItem {
     }
 
     @Override
-    public Choices get選択肢() {
-        return 選択肢;
+    public IAnswerItem get回答項目() {
+        return 回答項目;
     }
 }

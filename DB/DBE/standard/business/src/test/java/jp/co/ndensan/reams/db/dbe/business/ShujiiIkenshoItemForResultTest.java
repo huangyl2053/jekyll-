@@ -4,14 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbe.definition.ChoiceItem;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemSubGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.ShujiiIkenshoItem;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Choice;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IAnsweringItem;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChoiceResultItem;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IAnswerResultItem;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
@@ -111,16 +112,16 @@ public class ShujiiIkenshoItemForResultTest {
         }
     }
 
-    public static class get選択肢 {
+    public static class get回答項目 {
 
         @Test
-        public void 選択肢が2択の時_get選択肢は_2件の選択肢を返す() {
-            assertThat(createShujiiIkenshoItemForResult().get選択肢().asList().size(), is(2));
+        public void 選択肢が2択の時_get回答項目は_2件の選択肢を返す() {
+            assertThat(((ChoiceItem) createShujiiIkenshoItemForResult().get回答項目()).asList().size(), is(2));
         }
 
         @Test
-        public void 選択肢の設定がある時_get選択肢は_設定値を返す() {
-            assertThat(createShujiiIkenshoItemForResult().get選択肢().asList().get(0), is((IAnsweringItem) Choice.MigiHidari.右));
+        public void 選択肢の設定がある時_get回答項目は_設定値を返す() {
+            assertThat(((ChoiceItem) createShujiiIkenshoItemForResult().get回答項目()).asList().get(0), is((IAnswerResultItem) ChoiceResultItem.MigiHidari.右));
         }
     }
 
@@ -136,7 +137,7 @@ public class ShujiiIkenshoItemForResultTest {
 
         @Test
         public void 調査項目が選択形式の時_get回答結果は_該当の選択肢を返す() {
-            assertThat(createShujiiIkenshoItemForResult(AS_選択項目).get回答結果(), is((IAnsweringItem) Choice.MigiHidari.右));
+            assertThat(createShujiiIkenshoItemForResult(AS_選択項目).get回答結果(), is((IAnswerResultItem) ChoiceResultItem.MigiHidari.右));
         }
 
         @Test

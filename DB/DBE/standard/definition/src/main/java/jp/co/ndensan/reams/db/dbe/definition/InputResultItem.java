@@ -4,15 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IAnsweringItem;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IAnswerResultItem;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 要介護認定の各種項目における自由入力項目の情報を扱うクラスです。
+ * 回答結果項目（入力結果項目）を扱うクラスです。
  *
  * @author N8156 宮本 康
  */
-public class FreeInputItem implements IAnsweringItem {
+public class InputResultItem implements IAnswerResultItem {
 
     private final RString value;
 
@@ -21,7 +21,7 @@ public class FreeInputItem implements IAnsweringItem {
      *
      * @param value 入力値
      */
-    public FreeInputItem(RString value) {
+    public InputResultItem(RString value) {
         this.value = value;
     }
 
@@ -33,5 +33,14 @@ public class FreeInputItem implements IAnsweringItem {
     @Override
     public RString getValue() {
         return value;
+    }
+
+    /**
+     * 回答項目（入力項目）を返します。
+     *
+     * @return 回答項目（入力項目）
+     */
+    public static IAnswerItem getAnswerItem() {
+        return new InputItem();
     }
 }

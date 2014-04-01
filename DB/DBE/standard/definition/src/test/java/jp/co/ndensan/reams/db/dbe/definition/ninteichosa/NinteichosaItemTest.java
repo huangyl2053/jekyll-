@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.ninteichosa;
 
-import jp.co.ndensan.reams.db.dbe.definition.Choices;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Choice;
+import jp.co.ndensan.reams.db.dbe.definition.ChoiceItem;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChoiceResultItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemGroupOf2009;
@@ -33,7 +33,7 @@ public class NinteichosaItemTest {
     private static final int AS_調査項目番号がNULL = 3;
     private static final int AS_調査項目区分がNULL = 4;
     private static final int AS_表示名称がNULL = 5;
-    private static final int AS_選択肢がNULL = 6;
+    private static final int AS_回答項目がNULL = 6;
 
     public static class コンストラクタ {
 
@@ -63,8 +63,8 @@ public class NinteichosaItemTest {
         }
 
         @Test(expected = NullPointerException.class)
-        public void 選択肢がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            createNinteichosaItem(AS_選択肢がNULL);
+        public void 回答項目がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
+            createNinteichosaItem(AS_回答項目がNULL);
         }
     }
 
@@ -132,16 +132,16 @@ public class NinteichosaItemTest {
         }
     }
 
-    public static class get選択肢 {
+    public static class get回答項目 {
 
         @Test
-        public void 選択肢が2択の時_get選択肢は_2件の選択肢を返す() {
-            assertThat(createNinteichosaItem().get選択肢().asList().size(), is(2));
+        public void 選択肢が2択の時_get回答項目は_2件の選択肢を返す() {
+            assertThat(((ChoiceItem) createNinteichosaItem().get回答項目()).asList().size(), is(2));
         }
 
         @Test
-        public void 選択肢の設定がある時_get選択肢は_設定値を返す() {
-            assertThat(createNinteichosaItem().get選択肢().asList().get(0).getValue(), is(new RString("ない")));
+        public void 選択肢の設定がある時_get回答項目は_設定値を返す() {
+            assertThat(((ChoiceItem) createNinteichosaItem().get回答項目()).asList().get(0).getValue(), is(new RString("ない")));
         }
     }
 
@@ -156,6 +156,6 @@ public class NinteichosaItemTest {
                 flg == AS_調査項目番号がNULL ? null : new NinteichosaItemNo(new RString("1-1")),
                 flg == AS_調査項目区分がNULL ? null : NinteichosaItemKubunOfKihon.麻痺等の有無_右上肢,
                 flg == AS_表示名称がNULL ? null : new RString("右上肢"),
-                flg == AS_選択肢がNULL ? null : new Choices(Choice.NaiAru.values()));
+                flg == AS_回答項目がNULL ? null : new ChoiceItem(ChoiceResultItem.NaiAru.values()));
     }
 }

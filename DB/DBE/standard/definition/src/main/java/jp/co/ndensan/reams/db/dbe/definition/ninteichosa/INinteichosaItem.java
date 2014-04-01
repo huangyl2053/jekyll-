@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.ninteichosa;
 
-import jp.co.ndensan.reams.db.dbe.definition.Choices;
+import jp.co.ndensan.reams.db.dbe.definition.IAnswerItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemSubGroup;
@@ -77,9 +77,9 @@ public interface INinteichosaItem {
     RString get表示名称();
 
     /**
-     * 調査項目の選択肢を返します。
+     * 回答項目を返します。
      *
-     * @return 選択肢
+     * @return 回答項目
      */
-    Choices get選択肢();
+    IAnswerItem get回答項目();
 }

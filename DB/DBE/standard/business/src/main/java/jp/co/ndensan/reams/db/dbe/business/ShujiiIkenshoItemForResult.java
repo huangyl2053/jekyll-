@@ -4,13 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.Choices;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Choice;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IAnsweringItem;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IAnswerResultItem;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemSubGroup;
-import jp.co.ndensan.reams.db.dbe.definition.FreeInputItem;
+import jp.co.ndensan.reams.db.dbe.definition.IAnswerItem;
 import jp.co.ndensan.reams.db.dbe.definition.IShujiiIkenshoItem;
 import jp.co.ndensan.reams.db.dbe.definition.ShujiiIkenshoItem;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShujiiIkenshoItemNo;
@@ -80,8 +78,8 @@ public class ShujiiIkenshoItemForResult implements IShujiiIkenshoItem {
     }
 
     @Override
-    public Choices get選択肢() {
-        return 意見書項目.get選択肢();
+    public IAnswerItem get回答項目() {
+        return 意見書項目.get回答項目();
     }
 
     @Override
@@ -112,12 +110,7 @@ public class ShujiiIkenshoItemForResult implements IShujiiIkenshoItem {
      *
      * @return 回答結果
      */
-    public IAnsweringItem get回答結果() {
-        for (IAnsweringItem data : 意見書項目.get選択肢().asList()) {
-            if (data.getValue().equals(Choice.FreeInput.自由入力.getValue())) {
-                return new FreeInputItem(意見書結果);
-            }
-        }
-        return 意見書項目.get選択肢().toValue(意見書結果);
+    public IAnswerResultItem get回答結果() {
+        return 意見書項目.get回答項目().toValue(意見書結果);
     }
 }
