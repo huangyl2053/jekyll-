@@ -34,6 +34,8 @@ public class ShujiiIkenshoBaseTest {
     private static final int AS_意見書記入年月日がNULL = 6;
     private static final int AS_意見書作成回数がNULL = 7;
     private static final int AS_意見書作成料種別がNULL = 8;
+    private static final int AS_認定情報提供希望がNULL = 9;
+    private static final int AS_意見書同意がNULL = 10;
 
     public static class コンストラクタ {
 
@@ -76,6 +78,16 @@ public class ShujiiIkenshoBaseTest {
         public void 意見書作成料種別がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
             createShujiiIkenshoBase(AS_意見書作成料種別がNULL);
         }
+
+        @Test(expected = NullPointerException.class)
+        public void 認定情報提供希望がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
+            createShujiiIkenshoBase(AS_認定情報提供希望がNULL);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 意見書同意がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
+            createShujiiIkenshoBase(AS_意見書同意がNULL);
+        }
     }
 
     private static ShujiiIkenshoBase createShujiiIkenshoBase(int flg) {
@@ -88,7 +100,7 @@ public class ShujiiIkenshoBaseTest {
                 flg == AS_意見書記入年月日がNULL ? null : FlexibleDate.MAX,
                 flg == AS_意見書作成回数がNULL ? null : ShujiiIkenshoSakuseiKaisu.初回,
                 flg == AS_意見書作成料種別がNULL ? null : ShujiiIkenshoSakuseiryoShubetsu.施設,
-                NinteiJohoTeikyoKibo.希望する,
-                IkenshoDoi.同意しない);
+                flg == AS_認定情報提供希望がNULL ? null : NinteiJohoTeikyoKibo.希望する,
+                flg == AS_意見書同意がNULL ? null : IkenshoDoi.同意しない);
     }
 }

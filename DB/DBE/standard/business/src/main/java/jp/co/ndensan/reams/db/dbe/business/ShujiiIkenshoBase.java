@@ -66,8 +66,8 @@ public class ShujiiIkenshoBase {
         this.意見書記入年月日 = requireNonNull(意見書記入年月日, Messages.E00001.replace("意見書記入年月日").getMessage());
         this.意見書作成回数 = requireNonNull(意見書作成回数, Messages.E00001.replace("意見書作成回数").getMessage());
         this.意見書作成料種別 = requireNonNull(意見書作成料種別, Messages.E00001.replace("意見書作成料種別").getMessage());
-        this.認定情報提供希望 = 認定情報提供希望;
-        this.意見書同意 = 意見書同意;
+        this.認定情報提供希望 = requireNonNull(認定情報提供希望, Messages.E00001.replace("認定情報提供希望").getMessage());
+        this.意見書同意 = requireNonNull(意見書同意, Messages.E00001.replace("意見書同意").getMessage());
     }
 
     /**
