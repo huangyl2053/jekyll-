@@ -27,7 +27,7 @@ public final class NinteichosahyoFactory {
      * 要介護認定調査の調査票（サービス状況）を扱うクラスのインスタンスを生成します。
      *
      * @param 厚労省IF識別区分 厚労省IF識別区分
-     * @return 要介護認定調査の調査票（サービス状況）を扱うクラスのインスタンス
+     * @return 認定調査票（サービス状況）を扱うクラスのインスタンスを返します。指定した厚労省IF識別区分に該当する調査票が存在しない場合、nullを返します。
      */
     public static Ninteichosahyo createサービス状況Instance(KoroshoIFKubun 厚労省IF識別区分) {
         switch (厚労省IF識別区分) {
@@ -44,7 +44,7 @@ public final class NinteichosahyoFactory {
      * 要介護認定調査の調査票（基本情報）を扱うクラスのインスタンスを生成します。
      *
      * @param 厚労省IF識別区分 厚労省IF識別区分
-     * @return 要介護認定調査の調査票（基本情報）を扱うクラスのインスタンス
+     * @return 認定調査票（基本情報）を扱うクラスのインスタンスを返します。指定した厚労省IF識別区分に該当する調査票が存在しない場合、nullを返します。
      */
     public static Ninteichosahyo create基本情報Instance(KoroshoIFKubun 厚労省IF識別区分) {
         switch (厚労省IF識別区分) {

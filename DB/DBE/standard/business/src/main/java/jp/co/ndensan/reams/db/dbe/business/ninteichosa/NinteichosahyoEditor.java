@@ -47,7 +47,7 @@ public class NinteichosahyoEditor<E extends INinteichosaItemKubun, T extends INi
 
     /**
      * 調査結果を設定します。<br />
-     * 結果が設定済みの場合は上書きします。
+     * 調査結果が設定済みの場合は上書きします。指定した調査項目が存在しない場合、調査結果は設定しません。
      *
      * @param itemKubun 調査項目区分
      * @param result 調査結果（RString型）
@@ -62,7 +62,7 @@ public class NinteichosahyoEditor<E extends INinteichosaItemKubun, T extends INi
 
     /**
      * 調査結果を設定します。<br />
-     * 結果が設定済みの場合は上書きします。
+     * 調査結果が設定済みの場合は上書きします。指定した調査項目が存在しない場合、調査結果は設定しません。
      *
      * @param itemKubun 調査項目区分
      * @param result 調査結果（int型）
@@ -72,11 +72,11 @@ public class NinteichosahyoEditor<E extends INinteichosaItemKubun, T extends INi
     }
 
     /**
-     * 調査結果をRString型で返します。<br />
-     * 事前にisResultSetメソッドを使用して結果が設定済みであることを確認して下さい。
+     * 調査結果を返します。<br />
+     * 事前にisResultSetメソッドを使用して調査結果が設定済みであることを確認した上で呼び出して下さい。
      *
      * @param itemKubun 調査項目区分
-     * @return 調査結果（RString型）
+     * @return 調査結果をRString型で返します。指定した調査項目が存在しない場合、または調査結果が未設定の場合はnullを返します。
      */
     public RString getResultByString(E itemKubun) {
         T result = regulation.get(itemKubun);
@@ -84,11 +84,11 @@ public class NinteichosahyoEditor<E extends INinteichosaItemKubun, T extends INi
     }
 
     /**
-     * 調査結果をint型で返します。<br />
-     * 事前にisResultSetメソッドを使用して結果が設定済みであることを確認して下さい。
+     * 調査結果を返します。<br />
+     * 事前にisResultSetメソッドを使用して調査結果が設定済みであることを確認した上で呼び出して下さい。
      *
      * @param itemKubun 調査項目区分
-     * @return 調査結果（int型）
+     * @return 調査結果をint型で返します。指定した調査項目が存在しない場合、または調査結果が未設定の場合は0を返します。
      */
     public int getResultByInt(E itemKubun) {
         RString result = getResultByString(itemKubun);
@@ -96,11 +96,11 @@ public class NinteichosahyoEditor<E extends INinteichosaItemKubun, T extends INi
     }
 
     /**
-     * 調査結果をCode型で返します。<br />
-     * 事前にisResultSetメソッドを使用して結果が設定済みであることを確認して下さい。
+     * 調査結果を返します。<br />
+     * 事前にisResultSetメソッドを使用して調査結果が設定済みであることを確認した上で呼び出して下さい。
      *
      * @param itemKubun 調査項目区分
-     * @return 調査結果（Code型）
+     * @return 調査結果をCode型で返します。指定した調査項目が存在しない場合、または調査結果が未設定の場合はnullを返します。
      */
     public Code getResultByCode(E itemKubun) {
         RString result = getResultByString(itemKubun);
@@ -108,10 +108,10 @@ public class NinteichosahyoEditor<E extends INinteichosaItemKubun, T extends INi
     }
 
     /**
-     * 結果が設定されているかどうか判定します。
+     * 調査結果が設定されているかどうか判定します。
      *
      * @param itemKubun 調査項目区分
-     * @return 設定されている場合はtrueを返します。
+     * @return 調査結果が設定済みの場合はtrueを返します。指定した調査項目が存在しない場合、または調査結果が未設定の場合はfalseを返します。
      */
     public boolean isResultSet(E itemKubun) {
         T result = regulation.get(itemKubun);

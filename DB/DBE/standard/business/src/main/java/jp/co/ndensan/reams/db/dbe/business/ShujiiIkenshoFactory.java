@@ -25,7 +25,7 @@ public final class ShujiiIkenshoFactory {
      * 主治医意見書を扱うクラスのインスタンスを生成します。
      *
      * @param 厚労省IF識別区分 厚労省IF識別区分
-     * @return 主治医意見書を扱うクラスのインスタンス
+     * @return 主治医意見書を扱うクラスのインスタンスを返します。指定した厚労省IF識別区分に該当する調査票が存在しない場合、nullを返します。
      */
     public static ShujiiIkensho create主治医意見書Instance(KoroshoIFKubun 厚労省IF識別区分) {
         switch (厚労省IF識別区分) {

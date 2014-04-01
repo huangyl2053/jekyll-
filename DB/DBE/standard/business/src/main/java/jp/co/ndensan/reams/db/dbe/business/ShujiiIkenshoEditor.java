@@ -47,7 +47,7 @@ public class ShujiiIkenshoEditor<E extends IShujiiIkenshoItemKubun, T extends IS
 
     /**
      * 意見書結果を設定します。<br />
-     * 結果が設定済みの場合は上書きします。
+     * 意見書結果が設定済みの場合は上書きします。指定した意見書項目が存在しない場合、意見書結果は設定しません。
      *
      * @param itemKubun 意見書項目区分
      * @param result 意見書結果（RString型）
@@ -62,7 +62,7 @@ public class ShujiiIkenshoEditor<E extends IShujiiIkenshoItemKubun, T extends IS
 
     /**
      * 意見書結果を設定します。<br />
-     * 結果が設定済みの場合は上書きします。
+     * 意見書結果が設定済みの場合は上書きします。指定した意見書項目が存在しない場合、意見書結果は設定しません。
      *
      * @param itemKubun 意見書項目区分
      * @param result 意見書結果（int型）
@@ -73,7 +73,7 @@ public class ShujiiIkenshoEditor<E extends IShujiiIkenshoItemKubun, T extends IS
 
     /**
      * 意見書結果を設定します。<br />
-     * 結果が設定済みの場合は上書きします。
+     * 意見書結果が設定済みの場合は上書きします。指定した意見書項目が存在しない場合、意見書結果は設定しません。
      *
      * @param itemKubun 意見書項目区分
      * @param result 意見書結果（boolean型）
@@ -83,11 +83,11 @@ public class ShujiiIkenshoEditor<E extends IShujiiIkenshoItemKubun, T extends IS
     }
 
     /**
-     * 意見書結果をRString型で返します。<br />
-     * 事前にisResultSetメソッドを使用して結果が設定済みであることを確認して下さい。
+     * 意見書結果を返します。<br />
+     * 事前にisResultSetメソッドを使用して意見書結果が設定済みであることを確認した上で呼び出して下さい。
      *
      * @param itemKubun 意見書項目区分
-     * @return 意見書結果（RString型）
+     * @return 意見書結果をRString型で返します。指定した意見書項目が存在しない場合、または意見書結果が未設定の場合はnullを返します。
      */
     public RString getResultByString(E itemKubun) {
         T result = regulation.get(itemKubun);
@@ -95,11 +95,11 @@ public class ShujiiIkenshoEditor<E extends IShujiiIkenshoItemKubun, T extends IS
     }
 
     /**
-     * 意見書結果をint型で返します。<br />
-     * 事前にisResultSetメソッドを使用して結果が設定済みであることを確認して下さい。
+     * 意見書結果を返します。<br />
+     * 事前にisResultSetメソッドを使用して意見書結果が設定済みであることを確認した上で呼び出して下さい。
      *
      * @param itemKubun 意見書項目区分
-     * @return 意見書結果（int型）
+     * @return 意見書結果をint型で返します。指定した意見書項目が存在しない場合、または意見書結果が未設定の場合は0を返します。
      */
     public int getResultByInt(E itemKubun) {
         RString result = getResultByString(itemKubun);
@@ -107,11 +107,11 @@ public class ShujiiIkenshoEditor<E extends IShujiiIkenshoItemKubun, T extends IS
     }
 
     /**
-     * 意見書結果をCode型で返します。<br />
-     * 事前にisResultSetメソッドを使用して結果が設定済みであることを確認して下さい。
+     * 意見書結果を返します。<br />
+     * 事前にisResultSetメソッドを使用して意見書結果が設定済みであることを確認した上で呼び出して下さい。
      *
      * @param itemKubun 意見書項目区分
-     * @return 意見書結果（Code型）
+     * @return 意見書結果をCode型で返します。指定した意見書項目が存在しない場合、または意見書結果が未設定の場合はnullを返します。
      */
     public Code getResultByCode(E itemKubun) {
         RString result = getResultByString(itemKubun);
@@ -119,11 +119,11 @@ public class ShujiiIkenshoEditor<E extends IShujiiIkenshoItemKubun, T extends IS
     }
 
     /**
-     * 意見書結果をboolean型で返します。<br />
-     * 事前にisResultSetメソッドを使用して結果が設定済みであることを確認して下さい。
+     * 意見書結果を返します。<br />
+     * 事前にisResultSetメソッドを使用して意見書結果が設定済みであることを確認した上で呼び出して下さい。
      *
      * @param itemKubun 意見書項目区分
-     * @return 意見書結果（boolean型）
+     * @return 意見書結果をboolean型（"0"以外:true、"0":false）で返します。指定した意見書項目が存在しない場合、または意見書結果が未設定の場合はfalseを返します。
      */
     public boolean getResultByBool(E itemKubun) {
         RString result = getResultByString(itemKubun);
@@ -131,10 +131,10 @@ public class ShujiiIkenshoEditor<E extends IShujiiIkenshoItemKubun, T extends IS
     }
 
     /**
-     * 結果が設定されているかどうか判定します。
+     * 意見書結果が設定されているかどうか判定します。
      *
-     * @param itemKubun 調査項目区分
-     * @return 設定されている場合はtrueを返します。
+     * @param itemKubun 意見書項目区分
+     * @return 意見書結果が設定済みの場合はtrueを返します。指定した意見書項目が存在しない場合、または意見書結果が未設定の場合はfalseを返します。
      */
     public boolean isResultSet(E itemKubun) {
         T result = regulation.get(itemKubun);
