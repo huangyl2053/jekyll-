@@ -17,22 +17,37 @@ import org.junit.AfterClass;
  */
 public class DbeTestDacBase extends TestDacBase3 {
 
+    /**
+     * サブ業務コードを返します。
+     *
+     * @return サブ業務コード
+     */
     @Override
     public RString getSubGyomuCD() {
         return new RString("DBE");
     }
 
+    /**
+     * ダミーのControlDataを作成します。<br/>
+     * DBセッションを開き、sqlSessionオブジェクトにDBセッションを代入します。
+     */
     @BeforeClass
     public static void beforeSetUpClass() {
         setDummyControlData(new RString("DBE"));
         openMainSession();
     }
 
+    /**
+     * ロールバックします。
+     */
     @After
     public void afterTearDown() {
         rollback();
     }
 
+    /**
+     * DBセッションを閉じます。
+     */
     @AfterClass
     public static void afterTearDownClass() {
         closeSession();
