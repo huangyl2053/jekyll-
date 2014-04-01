@@ -39,28 +39,33 @@ public class ShujiiIkenshoShosaiJohoDac implements IReplaceable<DbT5013ShujiiIke
     }
 
     @Override
+    @Transaction
     public int insertOrUpdate(DbT5013ShujiiIkenshoShosaiJohoEntity entity) {
         return getMatchRowCount(entity) == 0 ? insert(entity) : update(entity);
     }
 
     @Override
+    @Transaction
     public int insert(DbT5013ShujiiIkenshoShosaiJohoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.insert(entity).execute();
     }
 
     @Override
+    @Transaction
     public int update(DbT5013ShujiiIkenshoShosaiJohoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.update(entity).execute();
     }
 
     @Override
+    @Transaction
     public int delete(DbT5013ShujiiIkenshoShosaiJohoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.delete(entity).execute();
     }
 
+    @Transaction
     private int getMatchRowCount(DbT5013ShujiiIkenshoShosaiJohoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()

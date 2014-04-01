@@ -41,28 +41,33 @@ public class NinteichosaKekkaJohoDac implements IReplaceable<DbT5008NinteichosaK
     }
 
     @Override
+    @Transaction
     public int insertOrUpdate(DbT5008NinteichosaKekkaJohoEntity entity) {
         return getMatchRowCount(entity) == 0 ? insert(entity) : update(entity);
     }
 
     @Override
+    @Transaction
     public int insert(DbT5008NinteichosaKekkaJohoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.insert(entity).execute();
     }
 
     @Override
+    @Transaction
     public int update(DbT5008NinteichosaKekkaJohoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.update(entity).execute();
     }
 
     @Override
+    @Transaction
     public int delete(DbT5008NinteichosaKekkaJohoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.delete(entity).execute();
     }
 
+    @Transaction
     private int getMatchRowCount(DbT5008NinteichosaKekkaJohoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select()

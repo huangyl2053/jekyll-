@@ -33,24 +33,28 @@ public class NinteichosaKekkaDac implements IReplaceable<NinteichosaKekkaEntity>
     }
 
     @Override
+    @Transaction
     public int insertOrUpdate(NinteichosaKekkaEntity entity) {
         return chosaKekkaDac.insertOrUpdate(entity.getDbT5008NinteichosaKekkaJohoEntity())
                 & chosahyoDac.insertOrUpdate(entity.getDbT5009NinteichosahyoJohoEntity());
     }
 
     @Override
+    @Transaction
     public int insert(NinteichosaKekkaEntity entity) {
         return chosaKekkaDac.insert(entity.getDbT5008NinteichosaKekkaJohoEntity())
                 & chosahyoDac.insert(entity.getDbT5009NinteichosahyoJohoEntity());
     }
 
     @Override
+    @Transaction
     public int update(NinteichosaKekkaEntity entity) {
         return chosaKekkaDac.update(entity.getDbT5008NinteichosaKekkaJohoEntity())
                 & chosahyoDac.update(entity.getDbT5009NinteichosahyoJohoEntity());
     }
 
     @Override
+    @Transaction
     public int delete(NinteichosaKekkaEntity entity) {
         return chosaKekkaDac.delete(entity.getDbT5008NinteichosaKekkaJohoEntity())
                 & chosahyoDac.delete(entity.getDbT5009NinteichosahyoJohoEntity());

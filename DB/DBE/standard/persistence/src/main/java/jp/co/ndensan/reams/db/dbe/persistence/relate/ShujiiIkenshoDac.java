@@ -33,24 +33,28 @@ public class ShujiiIkenshoDac implements IReplaceable<ShujiiIkenshoEntity>, IDel
     }
 
     @Override
+    @Transaction
     public int insertOrUpdate(ShujiiIkenshoEntity entity) {
         return ikenshoDac.insertOrUpdate(entity.getDbT5012ShujiiIkenshoJohoEntity())
                 & shosaiDac.insertOrUpdate(entity.getDbT5013ShujiiIkenshoShosaiJohoEntity());
     }
 
     @Override
+    @Transaction
     public int insert(ShujiiIkenshoEntity entity) {
         return ikenshoDac.insert(entity.getDbT5012ShujiiIkenshoJohoEntity())
                 & shosaiDac.insert(entity.getDbT5013ShujiiIkenshoShosaiJohoEntity());
     }
 
     @Override
+    @Transaction
     public int update(ShujiiIkenshoEntity entity) {
         return ikenshoDac.update(entity.getDbT5012ShujiiIkenshoJohoEntity())
                 & shosaiDac.update(entity.getDbT5013ShujiiIkenshoShosaiJohoEntity());
     }
 
     @Override
+    @Transaction
     public int delete(ShujiiIkenshoEntity entity) {
         return ikenshoDac.delete(entity.getDbT5012ShujiiIkenshoJohoEntity())
                 & shosaiDac.delete(entity.getDbT5013ShujiiIkenshoShosaiJohoEntity());
