@@ -8,8 +8,8 @@ import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisage;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisageTaishosha;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiShinseiDate;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5001NinteiShinseiJohoEntityMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
@@ -22,7 +22,6 @@ import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.mock;
 
 /**
  * 認定申請情報Entityを認定申請取下げ対象者クラスに変換するためのMapperのテストクラスです。
@@ -159,7 +158,7 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
         }
 
         private DbT5001NinteiShinseiJohoEntity createMockEntity() {
-            return mock(DbT5001NinteiShinseiJohoEntity.class);
+            return DbT5001NinteiShinseiJohoEntityMock.getSpiedInstance();
         }
 
         private NinteiShinseiTorisage create認定申請取下げ() {

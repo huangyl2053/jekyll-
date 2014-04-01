@@ -221,7 +221,7 @@ public class NinteichosaKekkaMapperTest {
 
         @Test
         public void 利用施設郵便番号の設定がある時_toNinteichosaResult_get利用施設郵便番号は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().get認定調査票().get調査項目(利用施設郵便番号).get調査結果(), is(new RString("123-4567")));
+            assertThat(toNinteichosaResult().get概況調査結果().get認定調査票().get調査項目(利用施設郵便番号).get調査結果(), is(new RString("1234567")));
         }
 
         @Test
@@ -807,7 +807,7 @@ public class NinteichosaKekkaMapperTest {
 
         @Test
         public void 利用施設郵便番号の設定がある時_toNinteichosaKekkaEntity_getRiyoShisetsuYubinNoは_設定値を返す() {
-            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getRiyoShisetsuYubinNo().value(), is(new RString("123-4567")));
+            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getRiyoShisetsuYubinNo().value(), is(new RString("1234567")));
         }
 
         @Test

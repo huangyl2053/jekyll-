@@ -43,7 +43,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
     private ShikibetsuCode shikibetsuCode;
     private FlexibleDate ninteiShinseiYMD;
     private EdabanCode ninteiShinseiEdabanCode;
-    private NinteiShinseiKubunShinsei ninteiShinseiShinseijiKubunCode;
+    private RString ninteiShinseiShinseijiKubunCode;
     private Code ninteiShinseiHoreiKubunCode;
     private Code ninteiShinseiYukoKubunCode;
     private RString shienShinseiKubun;
@@ -242,7 +242,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
      * @return ninteiShinseiShinseijiKubunCode
      */
     public NinteiShinseiKubunShinsei getNinteiShinseiShinseijiKubunCode() {
-        return ninteiShinseiShinseijiKubunCode;
+        return NinteiShinseiKubunShinsei.valueOf(ninteiShinseiShinseijiKubunCode.toString());
     }
 
     /**
@@ -251,7 +251,7 @@ public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
      * @param ninteiShinseiShinseijiKubunCode ninteiShinseiShinseijiKubunCode
      */
     public void setNinteiShinseiShinseijiKubunCode(NinteiShinseiKubunShinsei ninteiShinseiShinseijiKubunCode) {
-        this.ninteiShinseiShinseijiKubunCode = ninteiShinseiShinseijiKubunCode;
+        this.ninteiShinseiShinseijiKubunCode = new RString(ninteiShinseiShinseijiKubunCode.toString());
     }
 
     /**

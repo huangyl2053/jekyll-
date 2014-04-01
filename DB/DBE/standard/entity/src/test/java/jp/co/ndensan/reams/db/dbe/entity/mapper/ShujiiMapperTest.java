@@ -63,7 +63,7 @@ public class ShujiiMapperTest {
 
         @Test
         public void 郵便番号の設定がある時_toShujii_get郵便番号は_設定値を返す() {
-            assertThat(createShujii().get郵便番号().value(), is(new RString("123-4567")));
+            assertThat(createShujii().get郵便番号().value(), is(new RString("1234567")));
         }
 
         @Test
@@ -117,7 +117,7 @@ public class ShujiiMapperTest {
 
         @Test
         public void 郵便番号の設定がある時_toShujiiEntity_getYubinNoは_設定値を返す() {
-            YubinNo yubinNo = new YubinNo(new RString("123-4567"));
+            YubinNo yubinNo = new YubinNo(new RString("1234567"));
             assertThat(createShujiiEntity().getYubinNo(), is(yubinNo));
         }
 

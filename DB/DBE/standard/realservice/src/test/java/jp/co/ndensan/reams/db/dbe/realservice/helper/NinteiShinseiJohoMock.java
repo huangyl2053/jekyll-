@@ -47,7 +47,7 @@ public class NinteiShinseiJohoMock {
                 new KaigoHihokenshaNo(new RString("介護被保険者番号")),
                 new ShikibetsuCode(new RString("123456")),
                 RDate.MIN,
-                new EdabanCode(new RString("01")),
+                new EdabanCode(new RString("001")),
                 NinteiShinseiKubunShinsei.新規申請,
                 new Code(new RString("認定申請区分_法令")),
                 new Code(new RString("認定申請有効区分")),

@@ -43,7 +43,7 @@ public class DbT5001NinteiShinseiJohoEntityMock {
         entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("被保険者番号")));
         entity.setShikibetsuCode(new ShikibetsuCode(new RString("123456")));
         entity.setNinteiShinseiYMD(FlexibleDate.MIN);
-        entity.setNinteiShinseiEdabanCode(new EdabanCode(new RString("01")));
+        entity.setNinteiShinseiEdabanCode(new EdabanCode(new RString("001")));
         entity.setNinteiShinseiShinseijiKubunCode(NinteiShinseiKubunShinsei.新規申請);
         entity.setNinteiShinseiHoreiKubunCode(new Code(new RString("認定申請区分（法令）コード")));
         entity.setNinteiShinseiYukoKubunCode(new Code(new RString("認定申請有効区分")));

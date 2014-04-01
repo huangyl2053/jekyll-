@@ -230,7 +230,7 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
         entity.setHihokenshaNo(new KaigoHihokenshaNo(試験用文字列));
         entity.setShikibetsuCode(new ShikibetsuCode(試験用文字列));
         entity.setNinteiShinseiYMD(調査完了年月日);
-        entity.setNinteiShinseiEdabanCode(new EdabanCode(new RString("01")));
+        entity.setNinteiShinseiEdabanCode(new EdabanCode(new RString("001")));
         entity.setNinteiShinseiShinseijiKubunCode(NinteiShinseiKubunShinsei.新規申請);
         entity.setNinteiShinseiHoreiKubunCode(new Code(試験用文字列));
         entity.setNinteiShinseiYukoKubunCode(new Code(試験用文字列));
