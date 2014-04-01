@@ -16,7 +16,7 @@ import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 
 /**
- * 市町村コードのテストクラスです。
+ * 証記載保険者番号のテストクラスです。
  *
  * @author N3327 三浦 凌
  */
