@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.util.db._SQLOptimisticLockFaildException;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.experimental.runners.Enclosed;
@@ -29,16 +28,16 @@ import static org.junit.Assert.assertThat;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class ShujiiIkenshoJohoDacTest extends DbeTestDacBase {
+public class ShujiiIkenshoJohoDacTest {
 
     private static ShujiiIkenshoJohoDac sut;
-    private static final RString CONTROL_DATA = new RString("DBE");
     private static final int AS_新規データ = 1;
     private static final int AS_既存データ = 2;
     private static final int AS_更新データ = 3;
     private static final ShinseishoKanriNo 新規管理番号 = new ShinseishoKanriNo(new RString("9999999999"));
-    private static final ShinseishoKanriNo 既存管理番号 = new ShinseishoKanriNo(new RString("1234567890"));
-    private static final RString 更新用主治医コード = new RString("11111111");
+    private static final ShinseishoKanriNo 既存管理番号 = new ShinseishoKanriNo(new RString("1234567899"));
+    private static final RString 更新前主治医コード = new RString("11111111");
+    private static final RString 更新後主治医コード = new RString("22222222");
 
     @BeforeClass
     public static void setUpClass() {
@@ -50,8 +49,6 @@ public class ShujiiIkenshoJohoDacTest extends DbeTestDacBase {
         @Before
         public void setUp() {
             initializeEntityData();
-            setDummyControlData(CONTROL_DATA);
-            openMainSession();
         }
 
         @Test
@@ -63,11 +60,6 @@ public class ShujiiIkenshoJohoDacTest extends DbeTestDacBase {
         public void 該当の主治医意見書情報が存在する時_selectは_該当の情報を返す() {
             assertThat(sut.select(既存管理番号, createRirekiNo()).getShinseishoKanriNo(), is(既存管理番号));
         }
-
-        @After
-        public void tearDownClassTest() {
-            rollBackAndCloseSession();
-        }
     }
 
     public static class insertOrUpdate extends DbeTestDacBase {
@@ -75,8 +67,6 @@ public class ShujiiIkenshoJohoDacTest extends DbeTestDacBase {
         @Before
         public void setUp() {
             initializeEntityData();
-            setDummyControlData(CONTROL_DATA);
-            openMainSession();
         }
 
         @Test
@@ -88,12 +78,7 @@ public class ShujiiIkenshoJohoDacTest extends DbeTestDacBase {
         @Test
         public void 指定した主治医意見書情報が存在する時_insertOrUpdateは_該当の情報を更新する() {
             sut.insertOrUpdate(createEntity(AS_更新データ));
-            assertThat(sut.select(既存管理番号, createRirekiNo()).getShujiiCode(), is(更新用主治医コード));
-        }
-
-        @After
-        public void tearDownClassTest() {
-            rollBackAndCloseSession();
+            assertThat(sut.select(既存管理番号, createRirekiNo()).getShujiiCode(), is(更新後主治医コード));
         }
     }
 
@@ -102,8 +87,6 @@ public class ShujiiIkenshoJohoDacTest extends DbeTestDacBase {
         @Before
         public void setUp() {
             initializeEntityData();
-            setDummyControlData(CONTROL_DATA);
-            openMainSession();
         }
 
         @Test
@@ -121,11 +104,6 @@ public class ShujiiIkenshoJohoDacTest extends DbeTestDacBase {
         public void 指定した主治医意見書情報が存在する時_insertは_失敗する() {
             sut.insert(createEntity(AS_既存データ));
         }
-
-        @After
-        public void tearDownClassTest() {
-            rollBackAndCloseSession();
-        }
     }
 
     public static class update extends DbeTestDacBase {
@@ -133,8 +111,6 @@ public class ShujiiIkenshoJohoDacTest extends DbeTestDacBase {
         @Before
         public void setUp() {
             initializeEntityData();
-            setDummyControlData(CONTROL_DATA);
-            openMainSession();
         }
 
         @Test
@@ -145,17 +121,12 @@ public class ShujiiIkenshoJohoDacTest extends DbeTestDacBase {
         @Test
         public void 指定した主治医意見書情報が存在する時_updateは_該当の情報を更新する() {
             sut.update(createEntity(AS_更新データ));
-            assertThat(sut.select(既存管理番号, createRirekiNo()).getShujiiCode(), is(更新用主治医コード));
+            assertThat(sut.select(既存管理番号, createRirekiNo()).getShujiiCode(), is(更新後主治医コード));
         }
 
         @Test(expected = _SQLOptimisticLockFaildException.class)
         public void 指定した主治医意見書情報が存在しない時_updateは_失敗する() {
             sut.update(createEntity(AS_新規データ));
-        }
-
-        @After
-        public void tearDownClassTest() {
-            rollBackAndCloseSession();
         }
     }
 
@@ -164,8 +135,6 @@ public class ShujiiIkenshoJohoDacTest extends DbeTestDacBase {
         @Before
         public void setUp() {
             initializeEntityData();
-            setDummyControlData(CONTROL_DATA);
-            openMainSession();
         }
 
         @Test
@@ -183,11 +152,6 @@ public class ShujiiIkenshoJohoDacTest extends DbeTestDacBase {
         public void 指定した主治医意見書情報が存在しない時_deleteは_失敗する() {
             sut.delete(createEntity(AS_新規データ));
         }
-
-        @After
-        public void tearDownClassTest() {
-            rollBackAndCloseSession();
-        }
     }
 
     private static void initializeEntityData() {
@@ -196,8 +160,8 @@ public class ShujiiIkenshoJohoDacTest extends DbeTestDacBase {
 
     private static DbT5012ShujiiIkenshoJohoEntity createEntity(int flg) {
         DbT5012ShujiiIkenshoJohoEntity entity = ShujiiIkenshoEntityMock.getDbT5012ShujiiIkenshoJohoEntity();
-        entity.setShujiiCode(flg == AS_更新データ ? 更新用主治医コード : entity.getShujiiCode());
-        entity.setShinseishoKanriNo(flg == AS_新規データ ? 新規管理番号 : entity.getShinseishoKanriNo());
+        entity.setShinseishoKanriNo(flg == AS_新規データ ? 新規管理番号 : 既存管理番号);
+        entity.setShujiiCode(flg == AS_更新データ ? 更新後主治医コード : 更新前主治医コード);
         return entity;
     }
 

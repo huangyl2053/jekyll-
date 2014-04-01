@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.util.db._SQLOptimisticLockFaildException;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.experimental.runners.Enclosed;
@@ -30,17 +29,18 @@ import static org.junit.Assert.assertThat;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class ShujiiIkenshoDacTest extends DbeTestDacBase {
+public class ShujiiIkenshoDacTest {
 
     private static ShujiiIkenshoDac sut;
-    private static final RString CONTROL_DATA = new RString("DBE");
     private static final int AS_新規データ = 1;
     private static final int AS_既存データ = 2;
     private static final int AS_更新データ = 3;
     private static final ShinseishoKanriNo 新規管理番号 = new ShinseishoKanriNo(new RString("9999999999"));
-    private static final ShinseishoKanriNo 既存管理番号 = new ShinseishoKanriNo(new RString("1234567890"));
-    private static final RString 更新用主治医コード = new RString("11111111");
-    private static final RString 更新用特記事項 = new RString("特記事項2");
+    private static final ShinseishoKanriNo 既存管理番号 = new ShinseishoKanriNo(new RString("1234567899"));
+    private static final RString 更新前主治医コード = new RString("11111111");
+    private static final RString 更新後主治医コード = new RString("22222222");
+    private static final RString 更新前特記事項 = new RString("特記事項_前");
+    private static final RString 更新後特記事項 = new RString("特記事項_後");
 
     @BeforeClass
     public static void setUpClass() {
@@ -52,8 +52,6 @@ public class ShujiiIkenshoDacTest extends DbeTestDacBase {
         @Before
         public void setUp() {
             initializeEntityData();
-            setDummyControlData(CONTROL_DATA);
-            openMainSession();
         }
 
         @Test
@@ -65,11 +63,6 @@ public class ShujiiIkenshoDacTest extends DbeTestDacBase {
         public void 該当の主治医意見書が存在する時_selectは_該当の情報を返す() {
             assertThat(sut.select(既存管理番号, createRirekiNo()).getDbT5012ShujiiIkenshoJohoEntity().getShinseishoKanriNo(), is(既存管理番号));
         }
-
-        @After
-        public void tearDownClassTest() {
-            rollBackAndCloseSession();
-        }
     }
 
     public static class insertOrUpdate extends DbeTestDacBase {
@@ -77,8 +70,6 @@ public class ShujiiIkenshoDacTest extends DbeTestDacBase {
         @Before
         public void setUp() {
             initializeEntityData();
-            setDummyControlData(CONTROL_DATA);
-            openMainSession();
         }
 
         @Test
@@ -90,12 +81,7 @@ public class ShujiiIkenshoDacTest extends DbeTestDacBase {
         @Test
         public void 指定した主治医意見書が存在する時_insertOrUpdateは_該当の情報を更新する() {
             sut.insertOrUpdate(createEntity(AS_更新データ));
-            assertThat(sut.select(既存管理番号, createRirekiNo()).getDbT5012ShujiiIkenshoJohoEntity().getShujiiCode(), is(更新用主治医コード));
-        }
-
-        @After
-        public void tearDownClassTest() {
-            rollBackAndCloseSession();
+            assertThat(sut.select(既存管理番号, createRirekiNo()).getDbT5012ShujiiIkenshoJohoEntity().getShujiiCode(), is(更新後主治医コード));
         }
     }
 
@@ -104,8 +90,6 @@ public class ShujiiIkenshoDacTest extends DbeTestDacBase {
         @Before
         public void setUp() {
             initializeEntityData();
-            setDummyControlData(CONTROL_DATA);
-            openMainSession();
         }
 
         @Test
@@ -123,11 +107,6 @@ public class ShujiiIkenshoDacTest extends DbeTestDacBase {
         public void 指定した主治医意見書が存在する時_insertは_失敗する() {
             sut.insert(createEntity(AS_既存データ));
         }
-
-        @After
-        public void tearDownClassTest() {
-            rollBackAndCloseSession();
-        }
     }
 
     public static class update extends DbeTestDacBase {
@@ -135,8 +114,6 @@ public class ShujiiIkenshoDacTest extends DbeTestDacBase {
         @Before
         public void setUp() {
             initializeEntityData();
-            setDummyControlData(CONTROL_DATA);
-            openMainSession();
         }
 
         @Test
@@ -147,17 +124,12 @@ public class ShujiiIkenshoDacTest extends DbeTestDacBase {
         @Test
         public void 指定した主治医意見書が存在する時_updateは_該当の情報を更新する() {
             sut.update(createEntity(AS_更新データ));
-            assertThat(sut.select(既存管理番号, createRirekiNo()).getDbT5012ShujiiIkenshoJohoEntity().getShujiiCode(), is(更新用主治医コード));
+            assertThat(sut.select(既存管理番号, createRirekiNo()).getDbT5012ShujiiIkenshoJohoEntity().getShujiiCode(), is(更新後主治医コード));
         }
 
         @Test(expected = _SQLOptimisticLockFaildException.class)
         public void 指定した主治医意見書が存在しない時_updateは_失敗する() {
             sut.update(createEntity(AS_新規データ));
-        }
-
-        @After
-        public void tearDownClassTest() {
-            rollBackAndCloseSession();
         }
     }
 
@@ -166,8 +138,6 @@ public class ShujiiIkenshoDacTest extends DbeTestDacBase {
         @Before
         public void setUp() {
             initializeEntityData();
-            setDummyControlData(CONTROL_DATA);
-            openMainSession();
         }
 
         @Test
@@ -185,11 +155,6 @@ public class ShujiiIkenshoDacTest extends DbeTestDacBase {
         public void 指定した主治医意見書情報が存在しない時_deleteは_失敗する() {
             sut.delete(createEntity(AS_新規データ));
         }
-
-        @After
-        public void tearDownClassTest() {
-            rollBackAndCloseSession();
-        }
     }
 
     private static void initializeEntityData() {
@@ -200,10 +165,10 @@ public class ShujiiIkenshoDacTest extends DbeTestDacBase {
         ShujiiIkenshoEntity entity = ShujiiIkenshoEntityMock.getShujiiIkenshoEntity();
         DbT5012ShujiiIkenshoJohoEntity ikenshoEntity = entity.getDbT5012ShujiiIkenshoJohoEntity();
         DbT5013ShujiiIkenshoShosaiJohoEntity shosaiEntity = entity.getDbT5013ShujiiIkenshoShosaiJohoEntity();
-        ikenshoEntity.setShujiiCode(flg == AS_更新データ ? 更新用主治医コード : ikenshoEntity.getShujiiCode());
-        ikenshoEntity.setShinseishoKanriNo(flg == AS_新規データ ? 新規管理番号 : ikenshoEntity.getShinseishoKanriNo());
-        shosaiEntity.setIk_tokkiJiko(flg == AS_更新データ ? 更新用特記事項 : shosaiEntity.getIk_tokkiJiko());
-        shosaiEntity.setShinseishoKanriNo(flg == AS_新規データ ? 新規管理番号 : shosaiEntity.getShinseishoKanriNo());
+        ikenshoEntity.setShinseishoKanriNo(flg == AS_新規データ ? 新規管理番号 : 既存管理番号);
+        ikenshoEntity.setShujiiCode(flg == AS_更新データ ? 更新後主治医コード : 更新前主治医コード);
+        shosaiEntity.setShinseishoKanriNo(flg == AS_新規データ ? 新規管理番号 : 既存管理番号);
+        shosaiEntity.setIk_tokkiJiko(flg == AS_更新データ ? 更新後特記事項 : 更新前特記事項);
         return entity;
     }
 
