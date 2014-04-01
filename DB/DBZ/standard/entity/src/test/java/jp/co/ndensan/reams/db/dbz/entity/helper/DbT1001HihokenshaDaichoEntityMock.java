@@ -31,11 +31,22 @@ import static org.mockito.Mockito.*;
 public final class DbT1001HihokenshaDaichoEntityMock {
 
     /**
-     * DbT1001HihokenshaDaichoEntityのスパイインスタンスを返します。
+     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の
+     * {@link org.mockito.Mockito#spy(java.lang.Object)  スパイインスタンス}を返します。
      *
      * @return DbT1001HihokenshaDaichoEntityのスパイ
      */
     public static DbT1001HihokenshaDaichoEntity getSpiedInstance() {
+        DbT1001HihokenshaDaichoEntity entity = createNormalEntity();
+        return spy(entity);
+    }
+
+    /**
+     * テスト用にDbT1001HihokenshaDaichoEntityを生成します。
+     *
+     * @return DbT1001HihokenshaDaichoEntity
+     */
+    public static DbT1001HihokenshaDaichoEntity createNormalEntity() {
         DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
         entity.setShichosonCode(new LasdecCode("000000"));
         entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("1234567890")));
@@ -65,6 +76,7 @@ public final class DbT1001HihokenshaDaichoEntityMock {
         entity.setSaikofuKubun(HihokenshashoSaikofuKubun.なし.getCode());
         entity.setSaikofuJiyuCode(HihokenshashoSaikofuJiyu.なし.getCode());
         entity.setChohyoKofuRirekiID(null);
-        return spy(entity);
+
+        return entity;
     }
 }
