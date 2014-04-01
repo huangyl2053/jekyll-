@@ -42,11 +42,6 @@ import static org.mockito.Mockito.*;
 @RunWith(Enclosed.class)
 public class HihokenshaShikakuTest extends DbzTestBase {
 
-    private static final int IKaigoShikaku_is_NULL = 1;
-    private static final int ShikakuHenko_is_NULL = 2;
-    private static final int JushochitokureiTekiyo_is_NULL = 3;
-    private static final int JushochitokureiKaijo_is_NULL = 4;
-    private static final int HihokenshashoSaikofu_is_NULL = 5;
     private static LasdecCode lasdecCode = new LasdecCode("123456");
     private static ShikibetsuCode shikibetsuCode = new ShikibetsuCode("3327");
     private static KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(new RString("1234567890"));
@@ -68,32 +63,73 @@ public class HihokenshaShikakuTest extends DbzTestBase {
     private static HihokenshashoSaikofuKubun saikofuKubun = HihokenshashoSaikofuKubun.なし;
     private static HihokenshashoSaikofuJiyu saikofuJiyu = HihokenshashoSaikofuJiyu.なし;
     private static ChohyoKofuRirekiID chohyoKofuRirekiID = new ChohyoKofuRirekiID(new RString(""));
+    private static final int IKaigoShikaku_is_Null = 1;
+    private static final int ShikakuHenko_is_Null = 2;
+    private static final int JushochitokureiTekiyo_is_Null = 3;
+    private static final int JushochitokureiKaijo_is_Null = 4;
+    private static final int HihokenshashoSaikofu_is_Null = 5;
+    private static final int LasdecCode_is_Null = 6;
+    private static final int ShikibetsuCode_is_Null = 7;
+    private static final int ShikakuIdoKubun_is_Null = 8;
+    private static final int HihokenshaKubun_is_Null = 9;
+    private static final int JushochitokureishaKubun_is_Null = 10;
+    private static final int KoikinaiJushochitokureishaKubun_is_Null = 11;
 
     public static class Constructor extends DbzTestBase {
 
         @Test(expected = NullPointerException.class)
         public void コンストラクタは_引数のIKaigoShikakuがnullのとき_NullPointerExceptionをスローする() {
-            callConstructorAS(IKaigoShikaku_is_NULL);
+            callConstructorAS(IKaigoShikaku_is_Null);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void コンストラクタは_引数のLasdecCodeがnullのとき_NullPointerExceptionをスローする() {
+            callConstructorAS(LasdecCode_is_Null);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void コンストラクタは_引数のShikibetsuCodeがnullのとき_NullPointerExceptionをスローする() {
+            callConstructorAS(ShikibetsuCode_is_Null);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void コンストラクタは_引数のShikakuIdoKubunがnullのとき_NullPointerExceptionをスローする() {
+            callConstructorAS(ShikakuIdoKubun_is_Null);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void コンストラクタは_引数のHihokenshaKubunがnullのとき_NullPointerExceptionをスローする() {
+            callConstructorAS(HihokenshaKubun_is_Null);
         }
 
         @Test(expected = NullPointerException.class)
         public void コンストラクタは_引数のShikakuHenkoがnullのとき_NullPointerExceptionをスローする() {
-            callConstructorAS(ShikakuHenko_is_NULL);
+            callConstructorAS(ShikakuHenko_is_Null);
         }
 
         @Test(expected = NullPointerException.class)
         public void コンストラクタは_引数のJushochitokureiTekiyoがnullのとき_NullPointerExceptionをスローする() {
-            callConstructorAS(JushochitokureiTekiyo_is_NULL);
+            callConstructorAS(JushochitokureiTekiyo_is_Null);
         }
 
         @Test(expected = NullPointerException.class)
         public void コンストラクタは_引数のJushochitokureiKaijoがnullのとき_NullPointerExceptionをスローする() {
-            callConstructorAS(JushochitokureiKaijo_is_NULL);
+            callConstructorAS(JushochitokureiKaijo_is_Null);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void コンストラクタは_引数のJushochitokureishaKubunがnullのとき_NullPointerExceptionをスローする() {
+            callConstructorAS(JushochitokureishaKubun_is_Null);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void コンストラクタは_引数のKoikinaiJushochitokureishaKubunがnullのとき_NullPointerExceptionをスローする() {
+            callConstructorAS(KoikinaiJushochitokureishaKubun_is_Null);
         }
 
         @Test(expected = NullPointerException.class)
         public void コンストラクタは_引数のHihokenshashoSaikofuがnullのとき_NullPointerExceptionをスローする() {
-            callConstructorAS(HihokenshashoSaikofu_is_NULL);
+            callConstructorAS(HihokenshashoSaikofu_is_Null);
         }
     }
 
@@ -122,17 +158,17 @@ public class HihokenshaShikakuTest extends DbzTestBase {
             }
 
             @Test
-            public void get資格取得_getNoticeDateは_IKaigoShikakuのget資格取得届出年月日の返り値を_FlexibleDateへ変換して返す() {
+            public void get資格取得$getNoticeDateは_IKaigoShikakuのget資格取得届出年月日の返り値を_FlexibleDateへ変換して返す() {
                 assertThat(sut.get資格取得().getNoticeDate().toString(), is(this.kaigoShikaku.get資格取得届出年月日().toString()));
             }
 
             @Test
-            public void get資格取得_getActionDateは_IKaigoShikakuのget資格取得年月日の返り値を_FlexibleDateへ変換して返す() {
+            public void get資格取得$getActionDateは_IKaigoShikakuのget資格取得年月日の返り値を_FlexibleDateへ変換して返す() {
                 assertThat(sut.get資格取得().getActionDate().toString(), is(this.kaigoShikaku.get資格取得年月日().toString()));
             }
 
             @Test
-            public void get資格取得_getReasonは_IKaigoShikakuのget資格取得事由の返り値のgetCodeから得られるコードを_ShikakuShutokuJiyuへ変換して返す() {
+            public void get資格取得$getReasonは_IKaigoShikakuのget資格取得事由の返り値のgetCodeから得られるコードを_ShikakuShutokuJiyuへ変換して返す() {
                 assertThat(sut.get資格取得().getReason(), is(ShikakuShutokuJiyu.toValue(this.kaigoShikaku.get資格取得事由().getCode())));
             }
         }
@@ -158,17 +194,17 @@ public class HihokenshaShikakuTest extends DbzTestBase {
             }
 
             @Test
-            public void get資格喪失_getNoticeDateは_IKaigoShikakuのget資格喪失届出年月日の返り値を_FlexibleDateへ変換して返す() {
+            public void get資格喪失$getNoticeDateは_IKaigoShikakuのget資格喪失届出年月日の返り値を_FlexibleDateへ変換して返す() {
                 assertThat(sut.get資格喪失().getNoticeDate().toString(), is(this.kaigoShikaku.get資格喪失届出年月日().toString()));
             }
 
             @Test
-            public void get資格喪失_getActionDateは_IKaigoShikakuのget資格喪失年月日の返り値を_FlexibleDateへ変換して返す() {
+            public void get資格喪失$getActionDateは_IKaigoShikakuのget資格喪失年月日の返り値を_FlexibleDateへ変換して返す() {
                 assertThat(sut.get資格喪失().getActionDate().toString(), is(this.kaigoShikaku.get資格喪失年月日().toString()));
             }
 
             @Test
-            public void get資格喪失_getReasonは_IKaigoShikakuのget資格喪失事由の返り値のgetCodeから得られるコードを_ShikakuSoshitsuJiyuへ変換して返す() {
+            public void get資格喪失$getReasonは_IKaigoShikakuのget資格喪失事由の返り値のgetCodeから得られるコードを_ShikakuSoshitsuJiyuへ変換して返す() {
                 assertThat(sut.get資格喪失().getReason(), is(ShikakuSoshitsuJiyu.toValue(this.kaigoShikaku.get資格喪失事由().getCode())));
             }
         }
@@ -252,32 +288,32 @@ public class HihokenshaShikakuTest extends DbzTestBase {
         }
 
         @Test
-        public void get資格変更_getReasonは_コンストラクタに渡された資格変更事由と_同じ値を返す() {
+        public void get資格変更$getReasonは_コンストラクタに渡された資格変更事由と_同じ値を返す() {
             assertThat(sut.get資格変更().getReason(), is(shikakuHenkoJiyu));
         }
 
         @Test
-        public void get資格変更_getNoticeDateは_コンストラクタに渡された資格変更届出年月日と_同じ値を返す() {
+        public void get資格変更$getNoticeDateは_コンストラクタに渡された資格変更届出年月日と_同じ値を返す() {
             assertThat(sut.get資格変更().getNoticeDate(), is(shikakuHenkoTodokedeDate));
         }
 
         @Test
-        public void get資格変更_getActionDateは_コンストラクタに渡された資格変更年月日と_同じ値を返す() {
+        public void get資格変更$getActionDateは_コンストラクタに渡された資格変更年月日と_同じ値を返す() {
             assertThat(sut.get資格変更().getActionDate(), is(shikakuHenkoDate));
         }
 
         @Test
-        public void get住所地特例適用_getReasonは_コンストラクタに渡された住所地特例適用事由と_同じ値を返す() {
+        public void get住所地特例適用$getReasonは_コンストラクタに渡された住所地特例適用事由と_同じ値を返す() {
             assertThat(sut.get住所地特例適用().getReason(), is(jutokuTekiyoJiyu));
         }
 
         @Test
-        public void get住所地特例適用_getNoticeDateは_コンストラクタに渡された住所地特例適用届出年月日と_同じ値を返す() {
+        public void get住所地特例適用$getNoticeDateは_コンストラクタに渡された住所地特例適用届出年月日と_同じ値を返す() {
             assertThat(sut.get住所地特例適用().getNoticeDate(), is(jutokuTekiyoTodokedeDate));
         }
 
         @Test
-        public void get住所地特例適用_getActionDateは_コンストラクタに渡された住所地特例適用年月日と_同じ値を返す() {
+        public void get住所地特例適用$getActionDateは_コンストラクタに渡された住所地特例適用年月日と_同じ値を返す() {
             assertThat(sut.get住所地特例適用().getActionDate(), is(jutokuTekiyoDate));
         }
 
@@ -317,17 +353,17 @@ public class HihokenshaShikakuTest extends DbzTestBase {
         }
 
         @Test
-        public void get被保険者証再交付_get有無区分は_コンストラクタに渡されたものと_同じ値を返す() {
+        public void get被保険者証再交付$get有無区分は_コンストラクタに渡されたものと_同じ値を返す() {
             assertThat(sut.get被保険者証再交付().get有無区分(), is(saikofuKubun));
         }
 
         @Test
-        public void get被保険者証再交付_getReasonは_コンストラクタに渡されたものと_同じ値を返す() {
+        public void get被保険者証再交付$getReasonは_コンストラクタに渡されたものと_同じ値を返す() {
             assertThat(sut.get被保険者証再交付().getReason(), is(saikofuJiyu));
         }
 
         @Test
-        public void get被保険者証再交付_getChohyoKofuRirekiIDは_コンストラクタに渡されたものと_同じ値を返す() {
+        public void get被保険者証再交付$getChohyoKofuRirekiIDは_コンストラクタに渡されたものと_同じ値を返す() {
             assertThat(sut.get被保険者証再交付().getChohyoKofuRirekiID(), is(chohyoKofuRirekiID));
         }
     }
@@ -344,12 +380,19 @@ public class HihokenshaShikakuTest extends DbzTestBase {
 
     private static HihokenshaShikaku callConstructorAS(int flag) {
         return new HihokenshaShikaku(
-                flag == IKaigoShikaku_is_NULL ? null : mock(IKaigoShikaku.class),
-                lasdecCode, shikibetsuCode, hihokenshaNo, shikakuIdoKubun, hihokenshaKubun,
-                flag == ShikakuHenko_is_NULL ? null : new ShikakuHenko(shikakuHenkoJiyu, shikakuHenkoTodokedeDate, shikakuHenkoDate),
-                flag == JushochitokureiTekiyo_is_NULL ? null : new JushochitokureiTekiyo(jutokuTekiyoJiyu, jutokuTekiyoTodokedeDate, jutokuTekiyoDate),
-                flag == JushochitokureiKaijo_is_NULL ? null : new JushochitokureiKaijo(jutokuKaijoJiyu, jutokuKaijoTodokedeDate, jutokuKaijoDate),
-                jutokushaKubun, koikinaiJutokushaKubun, koikiJutokuOriginLasdecCode, oldLasdecCode,
-                flag == HihokenshashoSaikofu_is_NULL ? null : new HihokenshashoSaikofu(saikofuKubun, saikofuJiyu, chohyoKofuRirekiID));
+                flag == IKaigoShikaku_is_Null ? null : mock(IKaigoShikaku.class),
+                flag == LasdecCode_is_Null ? null : lasdecCode,
+                flag == ShikibetsuCode_is_Null ? null : shikibetsuCode,
+                hihokenshaNo,
+                flag == ShikakuIdoKubun_is_Null ? null : shikakuIdoKubun,
+                flag == HihokenshaKubun_is_Null ? null : hihokenshaKubun,
+                flag == ShikakuHenko_is_Null ? null : new ShikakuHenko(shikakuHenkoJiyu, shikakuHenkoTodokedeDate, shikakuHenkoDate),
+                flag == JushochitokureiTekiyo_is_Null ? null : new JushochitokureiTekiyo(jutokuTekiyoJiyu, jutokuTekiyoTodokedeDate, jutokuTekiyoDate),
+                flag == JushochitokureiKaijo_is_Null ? null : new JushochitokureiKaijo(jutokuKaijoJiyu, jutokuKaijoTodokedeDate, jutokuKaijoDate),
+                flag == JushochitokureishaKubun_is_Null ? null : jutokushaKubun,
+                flag == KoikinaiJushochitokureishaKubun_is_Null ? null : koikinaiJutokushaKubun,
+                koikiJutokuOriginLasdecCode,
+                oldLasdecCode,
+                flag == HihokenshashoSaikofu_is_Null ? null : new HihokenshashoSaikofu(saikofuKubun, saikofuJiyu, chohyoKofuRirekiID));
     }
 }

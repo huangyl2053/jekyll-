@@ -37,9 +37,10 @@ public interface IHihokenshaShikaku {
     ShikibetsuCode get識別コード();
 
     /**
-     * 被保険者の被保険者番号を返します。
+     * 被保険者の被保険者番号を返します。 <br />
+     * 被保険者番号がないとき、nullを返します。
      *
-     * @return {@link KaigoHihokenshaNo 被保険者番号}
+     * @return {@link KaigoHihokenshaNo 被保険者番号}。もしくは、null。
      */
     KaigoHihokenshaNo get被保険者番号();
 
@@ -122,16 +123,18 @@ public interface IHihokenshaShikaku {
     KoikinaiJushochitokureishaKubun get広域内住所地特例者区分();
 
     /**
-     * 広域内住所地特例の措置元市町村を表す地方公共団体コードを返します。
+     * 広域内住所地特例の措置元市町村を表す地方公共団体コードを返します。<br />
+     * 広域内住所地特例措置元市町村がないとき、nullを返します。
      *
-     * @return 広域内の住所地特例措置元の地方公共団体コード
+     * @return 広域内の住所地特例措置元の地方公共団体コード。もしくは、null。
      */
     LasdecCode get広域内住所地特例措置元市町村コード();
 
     /**
-     * 合併前の市町村を表す地方公共団体コードを返します。
+     * 合併前の市町村を表す地方公共団体コードを返します。<br />
+     * 合併前の市町村がないとき、nullを返します。
      *
-     * @return 合併前の地方公共団体コード
+     * @return 合併前の地方公共団体コード。もしくは、null。
      */
     LasdecCode get旧市町村コード();
 

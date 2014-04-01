@@ -59,9 +59,9 @@ public class HihokenshaShikaku implements IHihokenshaShikaku {
      * @param 広域内住所地特例措置元 広域内住所地特例措置元の{@link LasdecCode 地方公共団体コード}
      * @param 旧市町村 合併前の{@link LasdecCode 地方公共団体コード}
      * @param 被保険者証再交付 {@link HihokenshashoSaikofu 被保険者証再交付}
-     * @throws NullPointerException IKaigoShikaku, ShikakuHenko,
-     * JushochitokureiTekiyo, JushochitokureiKaijo, HihokenshashoSaikofu
-     * のどれかがnullのとき。
+     * @throws NullPointerException
+     * {@link KaigoHihokenshaNo 被保険者番号}, {@link LasdecCode 広域内住所地特例措置元}, {@link LasdecCode 旧市町村}
+     * 以外の項目がnullのとき。
      */
     public HihokenshaShikaku(IKaigoShikaku 介護資格得喪,
             LasdecCode 地方公共団体コード, ShikibetsuCode 識別コード, KaigoHihokenshaNo 被保険者番号,
@@ -70,20 +70,20 @@ public class HihokenshaShikaku implements IHihokenshaShikaku {
             JushochiTokureishaKubun 住所地特例者区分, KoikinaiJushochitokureishaKubun 広域内住所地特例者区分, LasdecCode 広域内住所地特例措置元,
             LasdecCode 旧市町村, HihokenshashoSaikofu 被保険者証再交付) throws NullPointerException {
 
-        this.kaigoShikaku = requireNonNull(介護資格得喪, errorMessageFor(IKaigoShikaku.class));
-        this.lasdecCode = 地方公共団体コード;
-        this.shikibetsuCode = 識別コード;
+        this.kaigoShikaku = requireNonNull(介護資格得喪, errorMessageWith(simpleNameOf(IKaigoShikaku.class)));
+        this.lasdecCode = requireNonNull(地方公共団体コード, errorMessageWith("地方公共団体コード (" + simpleNameOf(LasdecCode.class)) + ")");
+        this.shikibetsuCode = requireNonNull(識別コード, errorMessageWith(simpleNameOf(ShikibetsuCode.class)));
         this.hihokenshaNo = 被保険者番号;
-        this.shikakuIdoKubun = 資格異動区分;
-        this.hihokenshaKubun = 被保険者区分;
-        this.shikakuHenko = requireNonNull(資格変更, errorMessageFor(ShikakuHenko.class));
-        this.jutokuTekiyo = requireNonNull(住所地特例適用, errorMessageFor(JushochitokureiTekiyo.class));
-        this.jutokuKaijo = requireNonNull(住所地特例解除, errorMessageFor(JushochitokureiKaijo.class));
-        this.jutokushaKubun = 住所地特例者区分;
-        this.koikinaiJutokushaKubun = 広域内住所地特例者区分;
+        this.shikakuIdoKubun = requireNonNull(資格異動区分, errorMessageWith(simpleNameOf(ShikakuIdoKubun.class)));
+        this.hihokenshaKubun = requireNonNull(被保険者区分, errorMessageWith(simpleNameOf(ShikakuHihokenshaKubun.class)));
+        this.shikakuHenko = requireNonNull(資格変更, errorMessageWith(simpleNameOf(ShikakuHenko.class)));
+        this.jutokuTekiyo = requireNonNull(住所地特例適用, errorMessageWith(simpleNameOf(JushochitokureiTekiyo.class)));
+        this.jutokuKaijo = requireNonNull(住所地特例解除, errorMessageWith(simpleNameOf(JushochitokureiKaijo.class)));
+        this.jutokushaKubun = requireNonNull(住所地特例者区分, errorMessageWith(simpleNameOf(JushochiTokureishaKubun.class)));
+        this.koikinaiJutokushaKubun = requireNonNull(広域内住所地特例者区分, errorMessageWith(simpleNameOf(KoikinaiJushochitokureishaKubun.class)));
         this.koikiJutokuOriginLasdecCode = 広域内住所地特例措置元;
         this.oldLasdecCode = 旧市町村;
-        this.saikofu = requireNonNull(被保険者証再交付, errorMessageFor(HihokenshashoSaikofu.class));
+        this.saikofu = requireNonNull(被保険者証再交付, errorMessageWith(simpleNameOf(HihokenshashoSaikofu.class)));
     }
 
     @Override
@@ -200,7 +200,11 @@ public class HihokenshaShikaku implements IHihokenshaShikaku {
         return new FlexibleDate(date.toString());
     }
 
-    private String errorMessageFor(Class clazz) {
-        return Messages.E00003.replace("引数の" + clazz.getSimpleName(), getClass().getSimpleName()).getMessage();
+    private String simpleNameOf(Class clazz) {
+        return clazz.getSimpleName();
+    }
+
+    private String errorMessageWith(String str) {
+        return Messages.E00003.replace(str, getClass().getSimpleName()).getMessage();
     }
 }

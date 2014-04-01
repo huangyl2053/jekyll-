@@ -48,9 +48,13 @@ public final class HihokenshaShikakuMapper {
      *
      * @param shikaku {@link IHihokenshaShikaku IHihokenshaShikaku}
      * @return
-     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}
+     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}。ただし、引数がnullのときnull。
      */
     public static DbT1001HihokenshaDaichoEntity toHihokenshaDaichoEntity(IHihokenshaShikaku shikaku) {
+        return isNull(shikaku) ? null : _toHihokenshaDaichoEntity(shikaku);
+    }
+
+    private static DbT1001HihokenshaDaichoEntity _toHihokenshaDaichoEntity(IHihokenshaShikaku shikaku) {
         DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
         entity.setShichosonCode(shikaku.get地方公共団体コード());
         entity.setHihokenshaNo(shikaku.get被保険者番号());
@@ -80,7 +84,6 @@ public final class HihokenshaShikakuMapper {
         entity.setSaikofuKubun(shikaku.get被保険者証再交付().get有無区分().getCode());
         entity.setSaikofuJiyuCode(shikaku.get被保険者証再交付().getReason().getCode());
         entity.setChohyoKofuRirekiID(toValue(shikaku.get被保険者証再交付().getChohyoKofuRirekiID()));
-
         return entity;
     }
 
@@ -90,9 +93,13 @@ public final class HihokenshaShikakuMapper {
      *
      * @param entity
      * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}
-     * @return {@link IHihokenshaShikaku IHihokenshaShikaku}
+     * @return {@link IHihokenshaShikaku IHihokenshaShikaku}。ただし、引数がnullのときnull。
      */
     public static IHihokenshaShikaku toHihokenshaShikaku(DbT1001HihokenshaDaichoEntity entity) {
+        return isNull(entity) ? null : _toHihokenshaShikaku(entity);
+    }
+
+    private static IHihokenshaShikaku _toHihokenshaShikaku(DbT1001HihokenshaDaichoEntity entity) {
         IKaigoShikaku kaigoShikaku = toKaigoShikaku(entity);
         ShikakuHenko 資格変更 = toShikakuHenko(
                 entity.getShikakuHenkoJiyuCode(),
@@ -148,17 +155,15 @@ public final class HihokenshaShikakuMapper {
     }
 
     private static RDate toRDateOrMin(FlexibleDate date) {
-        if (date.isValid()) {
-            return new RDate(date.toString());
-        }
-        return RDate.MIN;
+        return date.isValid() ? toRDate(date) : RDate.MIN;
     }
 
     private static RDate toRDateOrMax(FlexibleDate date) {
-        if (date.isValid()) {
-            return new RDate(date.toString());
-        }
-        return RDate.MAX;
+        return date.isValid() ? toRDate(date) : RDate.MAX;
+    }
+
+    private static RDate toRDate(FlexibleDate date) {
+        return new RDate(date.toString());
     }
 
     private static <T> T toValue(IValueObject<T> source) {
