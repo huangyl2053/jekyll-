@@ -4,16 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
-
 /**
  * テーブルへのデータの挿入をするためのインタフェースです。
  *
  * @author N3327 三浦 凌
  * @param <T> 挿入したいテーブルのEntityクラス
  */
-public interface IInsertable<T extends IDbAccessable> {
+public interface IInsertable<T> {
 
     /**
      * データをテーブルへ挿入します。
@@ -21,6 +18,5 @@ public interface IInsertable<T extends IDbAccessable> {
      * @param data 挿入したいデータ
      * @return 挿入件数
      */
-    @Transaction
     int insert(T data);
 }
