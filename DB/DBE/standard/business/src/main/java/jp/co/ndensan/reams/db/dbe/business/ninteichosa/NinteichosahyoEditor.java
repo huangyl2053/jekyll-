@@ -7,8 +7,6 @@ package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemKubun;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.INinteichosaItem;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosaItem;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

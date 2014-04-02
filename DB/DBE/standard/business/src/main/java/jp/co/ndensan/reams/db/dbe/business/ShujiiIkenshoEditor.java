@@ -7,8 +7,6 @@ package jp.co.ndensan.reams.db.dbe.business;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemKubun;
-import jp.co.ndensan.reams.db.dbe.definition.IShujiiIkenshoItem;
-import jp.co.ndensan.reams.db.dbe.definition.ShujiiIkenshoItem;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

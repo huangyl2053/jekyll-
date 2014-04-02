@@ -2,9 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition;
+package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IAnswerResultItem;
+import jp.co.ndensan.reams.db.dbe.definition.IAnswerResultItem;
+import jp.co.ndensan.reams.ur.urz.business.lib.util.IWrapper;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -12,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N8156 宮本 康
  */
-public interface IAnswerItem {
+public interface IAnswerItem extends IWrapper {
 
     /**
      * 引数の値に該当する回答結果項目を返します。

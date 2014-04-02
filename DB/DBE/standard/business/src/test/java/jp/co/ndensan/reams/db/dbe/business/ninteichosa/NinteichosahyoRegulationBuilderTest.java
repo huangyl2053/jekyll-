@@ -2,10 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.ninteichosa;
+package jp.co.ndensan.reams.db.dbe.business.ninteichosa;
 
 import java.util.EnumMap;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbe.business.ChoiceItem;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChoiceResultItem;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.INinteichosaItemSubGroup;
@@ -121,17 +122,17 @@ public class NinteichosahyoRegulationBuilderTest {
         Map<NinteichosaItemKubunOfKihon, INinteichosaItem> 調査票定義 = new EnumMap<>(NinteichosaItemKubunOfKihon.class);
         NinteichosahyoRegulationBuilder builder = new NinteichosahyoRegulationBuilder(調査票定義);
         builder.set調査項目グループ(NinteichosaItemGroupOf2009.第１群, NinteichosaItemSubGroupOf2009.麻痺等の有無);
-        builder.set調査項目("1-1", NinteichosaItemKubunOfKihon.麻痺等の有無_左上肢, "左上肢", ChoiceResultItem.Checked.getAnswerItem());
+        builder.set調査項目("1-1", NinteichosaItemKubunOfKihon.麻痺等の有無_左上肢, "左上肢", new ChoiceItem(ChoiceResultItem.Checked.values()));
         builder.set調査項目グループ(NinteichosaItemGroupOf2009.第１群, NinteichosaItemSubGroupOf2009.麻痺等の有無);
-        builder.set調査項目("1-1", NinteichosaItemKubunOfKihon.麻痺等の有無_右上肢, "右上肢", ChoiceResultItem.Checked.getAnswerItem());
+        builder.set調査項目("1-1", NinteichosaItemKubunOfKihon.麻痺等の有無_右上肢, "右上肢", new ChoiceItem(ChoiceResultItem.Checked.values()));
         builder.set調査項目グループ(NinteichosaItemGroupOf2009.第１群, NinteichosaItemSubGroupOf2009.拘縮の有無);
-        builder.set調査項目("1-2", NinteichosaItemKubunOfKihon.関節の動く範囲の制限_肩関節, "肩", ChoiceResultItem.Checked.getAnswerItem());
+        builder.set調査項目("1-2", NinteichosaItemKubunOfKihon.関節の動く範囲の制限_肩関節, "肩", new ChoiceItem(ChoiceResultItem.Checked.values()));
         builder.set調査項目グループ(NinteichosaItemGroupOf2009.第２群, NinteichosaItemSubGroup.なし);
-        builder.set調査項目("2-1", NinteichosaItemKubunOfKihon.移乗, "移乗", ChoiceResultItem.Kaijo3.getAnswerItem());
+        builder.set調査項目("2-1", NinteichosaItemKubunOfKihon.移乗, "移乗", new ChoiceItem(ChoiceResultItem.Kaijo3.values()));
         builder.set調査項目グループ(NinteichosaItemGroupOf2009.第２群, NinteichosaItemSubGroup.なし);
-        builder.set調査項目("2-1", NinteichosaItemKubunOfKihon.移動, "移動", ChoiceResultItem.Kaijo3.getAnswerItem());
+        builder.set調査項目("2-1", NinteichosaItemKubunOfKihon.移動, "移動", new ChoiceItem(ChoiceResultItem.Kaijo3.values()));
         builder.set調査項目グループ(NinteichosaItemGroupOf2009.第３群, NinteichosaItemSubGroup.なし);
-        builder.set調査項目("3-1", NinteichosaItemKubunOfKihon.意思の伝達, "意思の伝達", ChoiceResultItem.DekiruDekinai2.getAnswerItem());
+        builder.set調査項目("3-1", NinteichosaItemKubunOfKihon.意思の伝達, "意思の伝達", new ChoiceItem(ChoiceResultItem.DekiruDekinai2.values()));
         return 調査票定義;
     }
 }

@@ -2,14 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition;
+package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IAnswerResultItem;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChoiceResultItem;
+import jp.co.ndensan.reams.db.dbe.definition.IAnswerResultItem;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Test;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -40,6 +41,27 @@ public class ChoiceItemTest {
         @Test
         public void 選択肢の設定がない時_toValueは_NULLを返す() {
             assertThat(new ChoiceItem(createChoice(1)).toValue(new RString("999")), nullValue());
+        }
+    }
+
+    public static class isWapperFor {
+
+        @Test
+        public void 選択項目を指定した時_isWapperForは_TRUEを返す() {
+            assertThat(new ChoiceItem(createChoice(1)).isWapperFor(ChoiceItem.class), is(true));
+        }
+
+        @Test
+        public void 入力項目を指定した時_isWapperForは_FALSEを返す() {
+            assertThat(new ChoiceItem(createChoice(1)).isWapperFor(InputItem.class), is(false));
+        }
+    }
+
+    public static class unwrap {
+
+        @Test
+        public void 選択項目を指定した時_unwrapは_選択項目のインスタンスを返す() {
+            assertThat(new ChoiceItem(createChoice(1)).unwrap(ChoiceItem.class), instanceOf(ChoiceItem.class));
         }
     }
 

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition;
+package jp.co.ndensan.reams.db.dbe.business;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -121,17 +121,17 @@ public class ShujiiIkenshoRegulationBuilderTest {
         Map<ShujiiIkenshoItemKubun, IShujiiIkenshoItem> 意見書定義 = new EnumMap<>(ShujiiIkenshoItemKubun.class);
         ShujiiIkenshoRegulationBuilder builder = new ShujiiIkenshoRegulationBuilder(意見書定義);
         builder.set意見書項目グループ(ShujiiIkenshoItemGroupOf2009.傷病, ShujiiIkenshoItemSubGroupOf2009.診断名_発症年月日);
-        builder.set意見書項目("1-1", ShujiiIkenshoItemKubun.診断名1, "１．診断名", InputResultItem.getAnswerItem());
+        builder.set意見書項目("1-1", ShujiiIkenshoItemKubun.診断名1, "１．診断名", new InputItem());
         builder.set意見書項目グループ(ShujiiIkenshoItemGroupOf2009.傷病, ShujiiIkenshoItemSubGroupOf2009.診断名_発症年月日);
-        builder.set意見書項目("1-1", ShujiiIkenshoItemKubun.診断名2, "２．診断名", InputResultItem.getAnswerItem());
+        builder.set意見書項目("1-1", ShujiiIkenshoItemKubun.診断名2, "２．診断名", new InputItem());
         builder.set意見書項目グループ(ShujiiIkenshoItemGroupOf2009.傷病, ShujiiIkenshoItemSubGroupOf2009.安定性);
-        builder.set意見書項目("1-2", ShujiiIkenshoItemKubun.症状の安定性, "症状の安定性", ChoiceResultItem.Antei.getAnswerItem());
+        builder.set意見書項目("1-2", ShujiiIkenshoItemKubun.症状の安定性, "症状の安定性", new ChoiceItem(ChoiceResultItem.Antei.values()));
         builder.set意見書項目グループ(ShujiiIkenshoItemGroupOf2009.特別医療, ShujiiIkenshoItemSubGroup.なし);
-        builder.set意見書項目("2-1", ShujiiIkenshoItemKubun.点滴の管理, "点滴の管理", ChoiceResultItem.Checked.getAnswerItem());
+        builder.set意見書項目("2-1", ShujiiIkenshoItemKubun.点滴の管理, "点滴の管理", new ChoiceItem(ChoiceResultItem.Checked.values()));
         builder.set意見書項目グループ(ShujiiIkenshoItemGroupOf2009.特別医療, ShujiiIkenshoItemSubGroup.なし);
-        builder.set意見書項目("2-1", ShujiiIkenshoItemKubun.中心静脈栄養, "中心静脈栄養", ChoiceResultItem.Checked.getAnswerItem());
+        builder.set意見書項目("2-1", ShujiiIkenshoItemKubun.中心静脈栄養, "中心静脈栄養", new ChoiceItem(ChoiceResultItem.Checked.values()));
         builder.set意見書項目グループ(ShujiiIkenshoItemGroupOf2009.心身状態, ShujiiIkenshoItemSubGroup.なし);
-        builder.set意見書項目("3-1", ShujiiIkenshoItemKubun.障害高齢者日常生活自立度, "障害高齢者の日常生活自立度(寝たきり度)", ChoiceResultItem.ShogaiJiritsu.getAnswerItem());
+        builder.set意見書項目("3-1", ShujiiIkenshoItemKubun.障害高齢者日常生活自立度, "障害高齢者の日常生活自立度(寝たきり度)", new ChoiceItem(ChoiceResultItem.ShogaiJiritsu.values()));
         return 意見書定義;
     }
 }

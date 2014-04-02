@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemKubun;
-import jp.co.ndensan.reams.db.dbe.definition.IShujiiIkenshoItem;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import static java.util.Objects.requireNonNull;
 

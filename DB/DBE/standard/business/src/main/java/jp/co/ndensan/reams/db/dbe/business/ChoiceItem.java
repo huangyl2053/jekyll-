@@ -2,11 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition;
+package jp.co.ndensan.reams.db.dbe.business;
 
 import java.util.Arrays;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IAnswerResultItem;
+import jp.co.ndensan.reams.db.dbe.definition.IAnswerResultItem;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
@@ -37,6 +37,16 @@ public class ChoiceItem implements IAnswerItem {
             }
         }
         return null;
+    }
+
+    @Override
+    public boolean isWapperFor(Class<?> iface) {
+        return iface.isInstance(this);
+    }
+
+    @Override
+    public <T> T unwrap(Class<T> iface) {
+        return iface.cast(this);
     }
 
     /**

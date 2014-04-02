@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition;
+package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IAnswerResultItem;
+import jp.co.ndensan.reams.db.dbe.definition.IAnswerResultItem;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -33,14 +33,5 @@ public class InputResultItem implements IAnswerResultItem {
     @Override
     public RString getValue() {
         return value;
-    }
-
-    /**
-     * 回答項目（入力項目）を返します。
-     *
-     * @return 回答項目（入力項目）
-     */
-    public static IAnswerItem getAnswerItem() {
-        return new InputItem();
     }
 }

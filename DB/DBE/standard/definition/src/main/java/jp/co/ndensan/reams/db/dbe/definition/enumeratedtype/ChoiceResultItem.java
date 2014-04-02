@@ -4,8 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
 
-import jp.co.ndensan.reams.db.dbe.definition.ChoiceItem;
-import jp.co.ndensan.reams.db.dbe.definition.IAnswerItem;
+import jp.co.ndensan.reams.db.dbe.definition.IAnswerResultItem;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -46,15 +45,6 @@ public class ChoiceResultItem {
         public RString getValue() {
             return new RString(name());
         }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
-        }
     }
 
     /**
@@ -86,15 +76,6 @@ public class ChoiceResultItem {
         @Override
         public RString getValue() {
             return new RString(name());
-        }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
         }
     }
 
@@ -133,15 +114,6 @@ public class ChoiceResultItem {
         public RString getValue() {
             return new RString(name());
         }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
-        }
     }
 
     /**
@@ -173,15 +145,6 @@ public class ChoiceResultItem {
         @Override
         public RString getValue() {
             return new RString(name());
-        }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
         }
     }
 
@@ -225,15 +188,6 @@ public class ChoiceResultItem {
         public RString getValue() {
             return new RString(name());
         }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
-        }
     }
 
     /**
@@ -270,15 +224,6 @@ public class ChoiceResultItem {
         @Override
         public RString getValue() {
             return new RString(name());
-        }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
         }
     }
 
@@ -317,15 +262,6 @@ public class ChoiceResultItem {
         public RString getValue() {
             return new RString(name());
         }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
-        }
     }
 
     /**
@@ -362,15 +298,6 @@ public class ChoiceResultItem {
         @Override
         public RString getValue() {
             return new RString(name());
-        }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
         }
     }
 
@@ -414,15 +341,6 @@ public class ChoiceResultItem {
         public RString getValue() {
             return new RString(name());
         }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
-        }
     }
 
     /**
@@ -465,15 +383,6 @@ public class ChoiceResultItem {
         public RString getValue() {
             return new RString(name());
         }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
-        }
     }
 
     /**
@@ -510,15 +419,6 @@ public class ChoiceResultItem {
         @Override
         public RString getValue() {
             return new RString(name());
-        }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
         }
     }
 
@@ -562,15 +462,6 @@ public class ChoiceResultItem {
         public RString getValue() {
             return new RString(name());
         }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
-        }
     }
 
     /**
@@ -612,15 +503,6 @@ public class ChoiceResultItem {
         @Override
         public RString getValue() {
             return new RString(name());
-        }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
         }
     }
 
@@ -669,15 +551,6 @@ public class ChoiceResultItem {
         public RString getValue() {
             return new RString(name());
         }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
-        }
     }
 
     /**
@@ -725,15 +598,6 @@ public class ChoiceResultItem {
         public RString getValue() {
             return new RString(name());
         }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
-        }
     }
 
     /**
@@ -771,15 +635,6 @@ public class ChoiceResultItem {
         public RString getValue() {
             return new RString(name());
         }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
-        }
     }
 
     /**
@@ -816,15 +671,6 @@ public class ChoiceResultItem {
         @Override
         public RString getValue() {
             return new RString(name());
-        }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
         }
     }
 
@@ -893,15 +739,6 @@ public class ChoiceResultItem {
         public RString getValue() {
             return new RString(name());
         }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
-        }
     }
 
     /**
@@ -969,15 +806,6 @@ public class ChoiceResultItem {
         public RString getValue() {
             return new RString(name());
         }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
-        }
     }
 
     /**
@@ -1014,15 +842,6 @@ public class ChoiceResultItem {
         @Override
         public RString getValue() {
             return new RString(name());
-        }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
         }
     }
 
@@ -1086,15 +905,6 @@ public class ChoiceResultItem {
         public RString getValue() {
             return new RString(name());
         }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
-        }
     }
 
     /**
@@ -1133,15 +943,6 @@ public class ChoiceResultItem {
         public RString getValue() {
             return new RString(name());
         }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
-        }
     }
 
     /**
@@ -1173,15 +974,6 @@ public class ChoiceResultItem {
         @Override
         public RString getValue() {
             return new RString(name());
-        }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
         }
     }
 
@@ -1225,15 +1017,6 @@ public class ChoiceResultItem {
         public RString getValue() {
             return new RString(name());
         }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
-        }
     }
 
     /**
@@ -1276,15 +1059,6 @@ public class ChoiceResultItem {
         public RString getValue() {
             return new RString(name());
         }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
-        }
     }
 
     /**
@@ -1316,15 +1090,6 @@ public class ChoiceResultItem {
         @Override
         public RString getValue() {
             return new RString(name());
-        }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
         }
     }
 
@@ -1363,15 +1128,6 @@ public class ChoiceResultItem {
         public RString getValue() {
             return new RString(name());
         }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
-        }
     }
 
     /**
@@ -1403,15 +1159,6 @@ public class ChoiceResultItem {
         @Override
         public RString getValue() {
             return new RString(name());
-        }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
         }
     }
 
@@ -1445,15 +1192,6 @@ public class ChoiceResultItem {
         public RString getValue() {
             return new RString(name());
         }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
-        }
     }
 
     /**
@@ -1485,15 +1223,6 @@ public class ChoiceResultItem {
         @Override
         public RString getValue() {
             return new RString(name());
-        }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
         }
     }
 
@@ -1532,15 +1261,6 @@ public class ChoiceResultItem {
         public RString getValue() {
             return new RString(name());
         }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
-        }
     }
 
     /**
@@ -1577,15 +1297,6 @@ public class ChoiceResultItem {
         @Override
         public RString getValue() {
             return new RString(name());
-        }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
         }
     }
 
@@ -1624,15 +1335,6 @@ public class ChoiceResultItem {
         public RString getValue() {
             return new RString(name());
         }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
-        }
     }
 
     /**
@@ -1670,15 +1372,6 @@ public class ChoiceResultItem {
         public RString getValue() {
             return new RString(name());
         }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
-        }
     }
 
     /**
@@ -1711,15 +1404,6 @@ public class ChoiceResultItem {
         public RString getValue() {
             return new RString(name());
         }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
-        }
     }
 
     /**
@@ -1751,15 +1435,6 @@ public class ChoiceResultItem {
         @Override
         public RString getValue() {
             return new RString(name());
-        }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
         }
     }
 
@@ -1797,15 +1472,6 @@ public class ChoiceResultItem {
         @Override
         public RString getValue() {
             return new RString(name());
-        }
-
-        /**
-         * 回答項目（選択項目）を返します。
-         *
-         * @return 回答項目（選択項目）
-         */
-        public static IAnswerItem getAnswerItem() {
-            return new ChoiceItem(values());
         }
     }
 }
