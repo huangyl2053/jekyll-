@@ -122,12 +122,21 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
 
         YokaigoninteiProgress yokaigoninteiProgress = NinteiShinchokuJohoMapper.toNinteiShinchokuJoho(shinchokuEntity);
         NinteiShinseiJoho ninteiShinseiJoho = NinteishinseiJohoMapper.to認定申請情報(shinseiEntity);
-        ShujiiIkenshoSakuseiIrai shujiiIkenshoIraiJoho = new ShujiiIkenshoSakuseiIraiKirokuManager().get主治医意見書作成依頼情報(
-                shinseiEntity.getShinseishoKanriNo(), new IkenshosakuseiIraiRirekiNo(shinseiEntity.getIkenshoIraiRirekiNo()));
+        ShujiiIkenshoSakuseiIrai shujiiIkenshoSakuseiIrai = get主治医意見書作成依頼情報(shinseiEntity);
         IKojin kojin = KojinService.createKojinFinder().get個人(shinseiEntity.getShikibetsuCode());
-        KaigoDoctor doctor = shujiiIkenshoIraiJoho.get介護医師();
+        KaigoDoctor doctor = shujiiIkenshoSakuseiIrai.get介護医師();
 
         return new ShujiiIkenshoTorikomiTaishosha(
-                yokaigoninteiProgress, ninteiShinseiJoho, shujiiIkenshoIraiJoho, kojin, doctor);
+                yokaigoninteiProgress,
+                ninteiShinseiJoho,
+                shujiiIkenshoSakuseiIrai,
+                kojin,
+                doctor);
+    }
+
+    private ShujiiIkenshoSakuseiIrai get主治医意見書作成依頼情報(DbT5001NinteiShinseiJohoEntity shinseiEntity) {
+        return new ShujiiIkenshoSakuseiIraiKirokuManager().get主治医意見書作成依頼情報(
+                shinseiEntity.getShinseishoKanriNo(),
+                new IkenshosakuseiIraiRirekiNo(shinseiEntity.getIkenshoIraiRirekiNo()));
     }
 }
