@@ -4,8 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
+import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ShujiiIkensho;
+import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ShujiiIkenshoRegulationOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemGroupOf2009;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemGroupOf2009;
 
 /**
  * 主治医意見書を扱うクラスのファクトリークラスです。

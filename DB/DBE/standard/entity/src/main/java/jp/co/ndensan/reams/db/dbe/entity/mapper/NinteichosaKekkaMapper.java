@@ -4,19 +4,19 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosahyoEditor;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosahyoFactory;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaJisshibashoKubun;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResult;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyo;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfGaikyoKihon;
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResultOfKihon;
+import jp.co.ndensan.reams.db.dbe.business.core.chosahyo.NinteichosahyoEditor;
+import jp.co.ndensan.reams.db.dbe.business.NinteichosahyoFactory;
+import jp.co.ndensan.reams.db.dbe.business.NinteichosaJisshibashoKubun;
+import jp.co.ndensan.reams.db.dbe.business.NinteichosaResult;
+import jp.co.ndensan.reams.db.dbe.business.NinteichosaResultOfGaikyo;
+import jp.co.ndensan.reams.db.dbe.business.NinteichosaResultOfGaikyoKihon;
+import jp.co.ndensan.reams.db.dbe.business.NinteichosaResultOfKihon;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubunOfGaikyo;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubunOfKihon;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.NinteichosaJisshibashoKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon;
+import jp.co.ndensan.reams.db.dbe.definition.NinteichosaJisshibashoKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5008NinteichosaKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5009NinteichosahyoJohoEntity;

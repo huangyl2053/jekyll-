@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.realservice;
 
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResult;
+import jp.co.ndensan.reams.db.dbe.business.NinteichosaResult;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaKekkaMapper;

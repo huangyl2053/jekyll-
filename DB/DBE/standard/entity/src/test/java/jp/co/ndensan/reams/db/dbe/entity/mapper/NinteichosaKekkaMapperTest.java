@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResult;
+import jp.co.ndensan.reams.db.dbe.business.NinteichosaResult;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
@@ -16,9 +16,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.junit.Test;
-import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChoiceResultItem.*;
-import static jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubunOfGaikyo.*;
-import static jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.NinteichosaItemKubunOfKihon.*;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.*;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.*;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -221,7 +221,7 @@ public class NinteichosaKekkaMapperTest {
 
         @Test
         public void 利用施設郵便番号の設定がある時_toNinteichosaResult_get利用施設郵便番号は_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().get認定調査票().get調査項目(利用施設郵便番号).get調査結果(), is(new RString("123-4567")));
+            assertThat(toNinteichosaResult().get概況調査結果().get認定調査票().get調査項目(利用施設郵便番号).get調査結果(), is(new RString("1234567")));
         }
 
         @Test
@@ -807,7 +807,7 @@ public class NinteichosaKekkaMapperTest {
 
         @Test
         public void 利用施設郵便番号の設定がある時_toNinteichosaKekkaEntity_getRiyoShisetsuYubinNoは_設定値を返す() {
-            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getRiyoShisetsuYubinNo().value(), is(new RString("123-4567")));
+            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getRiyoShisetsuYubinNo().value(), is(new RString("1234567")));
         }
 
         @Test

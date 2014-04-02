@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.Shujii;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoBase;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoDetails;
-import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoEditor;
+import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ShujiiIkenshoEditor;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoFactory;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoResult;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIryoKikan;
@@ -46,8 +46,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChoiceResultItem.*;
-import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemKubun.*;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.*;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemKubun.*;
 import static org.mockito.Mockito.spy;
 
 /**
