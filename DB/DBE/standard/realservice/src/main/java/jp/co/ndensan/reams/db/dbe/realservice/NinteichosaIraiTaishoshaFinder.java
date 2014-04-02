@@ -138,7 +138,7 @@ public class NinteichosaIraiTaishoshaFinder {
 //            KojinEntity 個人Entity = kojinDac.select最新(認定申請情報Entity.getShoKisaiHokenshaNo().getValue());
 //            KojinEntity 個人Entity = KojinService.createKojinFinder().get個人(認定申請情報Entity.getShikibetsuCode());
             IKojin 個人 = KojinService.createKojinFinder().get個人(認定申請情報Entity.getShikibetsuCode());
-            NinteichosaIraiRirekiNo ninteichosaIraiRirekiNo = 認定申請情報Entity.getNinteichosaIraiRirekiNo();
+            NinteichosaIraiRirekiNo ninteichosaIraiRirekiNo = new NinteichosaIraiRirekiNo(認定申請情報Entity.getNinteichosaIraiRirekiNo());
             DbT5006NinteichosaIraiJohoEntity 認定調査依頼情報Entity = iraiJohoDac.select(
                     認定申請情報Entity.getShinseishoKanriNo().getColumnValue(),
                     ninteichosaIraiRirekiNo);

@@ -37,7 +37,7 @@ public class ShujiiIkenshoTorikomiTaishoshaDac {
 
         List<KaigoNinteiShoriTaishoshaEntity> list = accessor.select()
                 .table(DbT5001NinteiShinseiJoho.class)
-                .leftJoin(DbT5001NinteiShinseiJoho.class, using(DbT5005NinteiShinchokuJoho.shinseishoKanriNo))
+                .leftJoin(DbT5005NinteiShinchokuJoho.class, using(DbT5001NinteiShinseiJoho.shinseishoKanriNo))
                 .where(and(lt(YokaigoninteiDateConstants.主治医意見書作成依頼未完了年月日, DbT5005NinteiShinchokuJoho.ikenshoSakuseiIraiKanryoYMD),
                 eq(YokaigoninteiDateConstants.主治医意見書登録未完了年月日, DbT5005NinteiShinchokuJoho.ikenshoTorokuKanryoYMD)))
                 .toList(KaigoNinteiShoriTaishoshaEntity.class);
@@ -51,7 +51,7 @@ public class ShujiiIkenshoTorikomiTaishoshaDac {
 
         List<KaigoNinteiShoriTaishoshaEntity> list = accessor.select()
                 .table(DbT5001NinteiShinseiJoho.class)
-                .leftJoin(DbT5001NinteiShinseiJoho.class, using(DbT5005NinteiShinchokuJoho.shinseishoKanriNo))
+                .leftJoin(DbT5005NinteiShinchokuJoho.class, using(DbT5001NinteiShinseiJoho.shinseishoKanriNo))
                 .where(and(lt(YokaigoninteiDateConstants.主治医意見書作成依頼未完了年月日, DbT5005NinteiShinchokuJoho.ikenshoSakuseiIraiKanryoYMD),
                 eq(YokaigoninteiDateConstants.主治医意見書登録未完了年月日, DbT5005NinteiShinchokuJoho.ikenshoTorokuKanryoYMD),
                 eq(DbT5001NinteiShinseiJoho.shoKisaiHokenshaNo, 証記載保険者番号)))
@@ -66,7 +66,7 @@ public class ShujiiIkenshoTorikomiTaishoshaDac {
 
         List<KaigoNinteiShoriTaishoshaEntity> list = accessor.select()
                 .table(DbT5001NinteiShinseiJoho.class)
-                .leftJoin(DbT5001NinteiShinseiJoho.class, using(DbT5005NinteiShinchokuJoho.shinseishoKanriNo))
+                .leftJoin(DbT5005NinteiShinchokuJoho.class, using(DbT5001NinteiShinseiJoho.shinseishoKanriNo))
                 .where(and(lt(YokaigoninteiDateConstants.主治医意見書作成依頼未完了年月日, DbT5005NinteiShinchokuJoho.ikenshoSakuseiIraiKanryoYMD),
                 eq(YokaigoninteiDateConstants.主治医意見書登録未完了年月日, DbT5005NinteiShinchokuJoho.ikenshoTorokuKanryoYMD),
                 eq(DbT5001NinteiShinseiJoho.shoKisaiHokenshaNo, 証記載保険者番号),

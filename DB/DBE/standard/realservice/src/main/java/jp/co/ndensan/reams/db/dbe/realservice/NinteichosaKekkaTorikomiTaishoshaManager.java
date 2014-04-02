@@ -157,7 +157,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
             DbT5001NinteiShinseiJohoEntity shinseiJohoEntity) {
         return chosaIraiJohoDac.select(
                 shinchokuJohoEntity.getShinseishoKanriNo().value(),
-                shinseiJohoEntity.getNinteichosaIraiRirekiNo());
+                new NinteichosaIraiRirekiNo(shinseiJohoEntity.getNinteichosaIraiRirekiNo()));
     }
 
     private KaigoNinteichosain get介護認定調査員(

@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.realservice.helper;
 
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
@@ -52,7 +51,7 @@ public class DbT5001NinteiShinseiJohoEntityMock {
         entity.setZenYokaigoKubunCode(new Code(new RString("前回要介護状態区分コード")));
         entity.setZenYukoKikan(0);
         entity.setJohoteikyoDouiUmuKubun(true);
-        entity.setNinteichosaIraiRirekiNo(new NinteichosaIraiRirekiNo(1));
+        entity.setNinteichosaIraiRirekiNo(1);
         entity.setIkenshoIraiRirekiNo(2);
         entity.setMinashiCode(new RString("みなし要介護区分コード"));
         entity.setEnkitsuchiDoiUmuKubun(false);

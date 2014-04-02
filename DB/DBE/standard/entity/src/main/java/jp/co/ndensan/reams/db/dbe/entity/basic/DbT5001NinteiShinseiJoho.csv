@@ -5,7 +5,7 @@ hihokenshaNo,varchar,KaigoHihokenshaNo,,,,,A
 shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
 ninteiShinseiYMD,UDD015YMD,FlexibleDate,,,,,A
 ninteiShinseiEdabanCode,UDD025EdabanCode,EdabanCode,,,,,A
-ninteiShinseiShinseijiKubunCode,UDD035Code,NinteiShinseiKubunShinsei,,,,,A
+ninteiShinseiShinseijiKubunCode,UDD035Code,RString,,,,,A
 ninteiShinseiHoreiKubunCode,UDD035Code,Code,,,,,A
 ninteiShinseiYukoKubunCode,UDD035Code,Code,,,,,A
 shienShinseiKubun,bpchar,RString,,,,,A
@@ -13,7 +13,7 @@ shinseiRiyu,text,RString,,,,,A
 zenYokaigoKubunCode,UDD035Code,Code,,,,,A
 zenYukoKikan,int2,int,,,,,A
 johoteikyoDouiUmuKubun,bool,boolean,,,,,A
-ninteichosaIraiRirekiNo,int2,NinteichosaIraiRirekiNo,,,,,A
+ninteichosaIraiRirekiNo,int2,int,,,,,A
 ninteichosaShikibetsuCode,UDD035Code,Code,,,,,A
 ikenshoIraiRirekiNo,int2,int,,,,,A
 kaigoIryokikanCode,varchar,RString,,,,,A

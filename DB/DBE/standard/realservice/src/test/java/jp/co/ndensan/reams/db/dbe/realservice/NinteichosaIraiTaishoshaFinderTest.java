@@ -239,7 +239,7 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
         entity.setZenYokaigoKubunCode(new Code(試験用文字列));
         entity.setZenYukoKikan(1);
         entity.setJohoteikyoDouiUmuKubun(true);
-        entity.setNinteichosaIraiRirekiNo(TestCases[テストパターン].get認定調査依頼履歴番号());
+        entity.setNinteichosaIraiRirekiNo(TestCases[テストパターン].get認定調査依頼履歴番号().value());
         entity.setIkenshoIraiRirekiNo(1);
         entity.setMinashiCode(試験用文字列);
         entity.setEnkitsuchiDoiUmuKubun(true);

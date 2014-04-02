@@ -43,7 +43,7 @@ public class DbT5001NinteiShinseiJohoEntityMock {
         entity.setZenYokaigoKubunCode(new Code(new RString("前回要介護状態区分コード")));
         entity.setZenYukoKikan(0);
         entity.setJohoteikyoDouiUmuKubun(true);
-        entity.setNinteichosaIraiRirekiNo(new NinteichosaIraiRirekiNo(1));
+        entity.setNinteichosaIraiRirekiNo(1);
         entity.setNinteichosaShikibetsuCode(new Code(new RString("1")));
         entity.setIkenshoIraiRirekiNo(2);
         entity.setMinashiCode(new RString("2"));
