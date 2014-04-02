@@ -23,17 +23,17 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class NinteichosaIraiTaishosha {
 
-    private ShinseishoKanriNo 申請書管理番号;
-    private ShoKisaiHokenshaNo 証記載保険者番号;
-    private KaigoHihokenshaNo 被保険者番号;
-    private FlexibleDate 認定申請年月日;
-    private NinteiShinseiKubunShinsei 認定申請区分;
-    private IKojin 個人情報;
-    private RString 氏名;
-    private RString 住所;
-    private NinteichosaItakusaki 認定調査委託先;
-    private IKaigoJigyosha 事業者情報;
-    private INinteiChosain 認定調査員情報;
+    private final ShinseishoKanriNo 申請書管理番号;
+    private final ShoKisaiHokenshaNo 証記載保険者番号;
+    private final KaigoHihokenshaNo 被保険者番号;
+    private final FlexibleDate 認定申請年月日;
+    private final NinteiShinseiKubunShinsei 認定申請区分;
+    private final IKojin 個人情報;
+    private final RString 氏名;
+    private final RString 住所;
+    private final NinteichosaItakusaki 認定調査委託先;
+    private final IKaigoJigyosha 事業者情報;
+    private final INinteiChosain 認定調査員情報;
 
     /**
      * コンストラクタです。
@@ -57,23 +57,14 @@ public class NinteichosaIraiTaishosha {
             FlexibleDate 認定申請年月日, NinteiShinseiKubunShinsei 認定申請区分, IKojin 個人情報, RString 氏名, RString 住所,
             NinteichosaItakusaki 認定調査委託先, IKaigoJigyosha 事業者情報, INinteiChosain 認定調査員情報) throws NullPointerException {
 
-        requireNonNull(申請書管理番号, Messages.E00003.replace("申請書管理番号", getClass().getName()).getMessage());
-        requireNonNull(証記載保険者番号, Messages.E00003.replace("証記載保険者番号", getClass().getName()).getMessage());
-        requireNonNull(被保険者番号, Messages.E00003.replace("被保険者", getClass().getName()).getMessage());
-        requireNonNull(認定申請年月日, Messages.E00003.replace("認定申請年月日", getClass().getName()).getMessage());
-        requireNonNull(認定申請区分, Messages.E00003.replace("認定申請区分", getClass().getName()).getMessage());
-        requireNonNull(個人情報, Messages.E00003.replace("個人情報", getClass().getName()).getMessage());
-        requireNonNull(氏名, Messages.E00003.replace("氏名", getClass().getName()).getMessage());
-        requireNonNull(住所, Messages.E00003.replace("住所", getClass().getName()).getMessage());
-
-        this.申請書管理番号 = 申請書管理番号;
-        this.証記載保険者番号 = 証記載保険者番号;
-        this.被保険者番号 = 被保険者番号;
-        this.認定申請年月日 = 認定申請年月日;
-        this.認定申請区分 = 認定申請区分;
-        this.個人情報 = 個人情報;
-        this.氏名 = 氏名;
-        this.住所 = 住所;
+        this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00003.replace("申請書管理番号", getClass().getName()).getMessage());
+        this.証記載保険者番号 = requireNonNull(証記載保険者番号, Messages.E00003.replace("証記載保険者番号", getClass().getName()).getMessage());
+        this.被保険者番号 = requireNonNull(被保険者番号, Messages.E00003.replace("被保険者番号", getClass().getName()).getMessage());
+        this.認定申請年月日 = requireNonNull(認定申請年月日, Messages.E00003.replace("認定申請年月日", getClass().getName()).getMessage());
+        this.認定申請区分 = requireNonNull(認定申請区分, Messages.E00003.replace("認定申請区分", getClass().getName()).getMessage());
+        this.個人情報 = requireNonNull(個人情報, Messages.E00003.replace("個人情報", getClass().getName()).getMessage());
+        this.氏名 = requireNonNull(氏名, Messages.E00003.replace("氏名", getClass().getName()).getMessage());
+        this.住所 = requireNonNull(住所, Messages.E00003.replace("住所", getClass().getName()).getMessage());
         this.認定調査委託先 = 認定調査委託先;
         this.事業者情報 = 事業者情報;
         this.認定調査員情報 = 認定調査員情報;

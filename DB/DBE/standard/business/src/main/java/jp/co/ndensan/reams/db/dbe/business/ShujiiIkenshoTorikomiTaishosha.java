@@ -36,11 +36,11 @@ public class ShujiiIkenshoTorikomiTaishosha {
             ShujiiIkenshoSakuseiIrai 主治医意見書作成依頼情報,
             IKojin 個人,
             KaigoDoctor 介護主治医) {
-        this.認定進捗情報 = requireNonNull(認定進捗情報, Messages.E00003.replace("認定進捗情報", "主治医意見書取込対象者").getMessage());
-        this.認定申請情報 = requireNonNull(認定申請情報, Messages.E00003.replace("認定申請情報", "主治医意見書取込対象者").getMessage());
-        this.主治医意見書作成依頼情報 = requireNonNull(主治医意見書作成依頼情報, Messages.E00003.replace("主治医意見書作成依頼情報", "主治医意見書取込対象者").getMessage());
-        this.個人 = requireNonNull(個人, Messages.E00003.replace("個人", "主治医意見書取込対象者").getMessage());
-        this.介護主治医 = requireNonNull(介護主治医, Messages.E00003.replace("介護主治医", "主治医意見書取込対象者").getMessage());
+        this.認定進捗情報 = requireNonNull(認定進捗情報, Messages.E00003.replace("認定進捗情報", getClass().getName()).getMessage());
+        this.認定申請情報 = requireNonNull(認定申請情報, Messages.E00003.replace("認定申請情報", getClass().getName()).getMessage());
+        this.主治医意見書作成依頼情報 = requireNonNull(主治医意見書作成依頼情報, Messages.E00003.replace("主治医意見書作成依頼情報", getClass().getName()).getMessage());
+        this.個人 = requireNonNull(個人, Messages.E00003.replace("個人", getClass().getName()).getMessage());
+        this.介護主治医 = requireNonNull(介護主治医, Messages.E00003.replace("介護主治医", getClass().getName()).getMessage());
     }
 
     /**

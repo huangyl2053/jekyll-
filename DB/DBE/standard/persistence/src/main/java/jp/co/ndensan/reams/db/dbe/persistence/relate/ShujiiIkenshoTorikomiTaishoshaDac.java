@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 主治医意見書取込対象者を取得するクラスです。
+ * 主治医意見書取込対象者に該当する介護認定処理対象者を取得するクラスです。
  *
  * @author N8187 久保田 英男
  */
@@ -31,6 +31,11 @@ public class ShujiiIkenshoTorikomiTaishoshaDac {
     @InjectSession
     private SqlSession session;
 
+    /**
+     * 主治医意見書取込対象者を全件取得します。
+     *
+     * @return 主治医意見書取込対象者に該当する介護認定処理対象者のエンティティリスト
+     */
     @Transaction
     public List<KaigoNinteiShoriTaishoshaEntity> selectAll() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -45,6 +50,12 @@ public class ShujiiIkenshoTorikomiTaishoshaDac {
         return (!list.isEmpty()) ? list : Collections.EMPTY_LIST;
     }
 
+    /**
+     * 引数の証記載保険者番号に該当する、主治医意見書取込対象者を全件取得します。
+     *
+     * @param 証記載保険者番号 証記載保険者番号
+     * @return 主治医意見書取込対象者に該当する介護認定処理対象者のエンティティリスト
+     */
     @Transaction
     public List<KaigoNinteiShoriTaishoshaEntity> select証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -60,6 +71,13 @@ public class ShujiiIkenshoTorikomiTaishoshaDac {
         return (!list.isEmpty()) ? list : Collections.EMPTY_LIST;
     }
 
+    /**
+     * 引数の証記載保険者番号、支所コードに該当する、主治医意見書取込対象者を全件取得します。
+     *
+     * @param 証記載保険者番号 証記載保険者番号
+     * @param 支所コード 支所コード
+     * @return 主治医意見書取込対象者に該当する介護認定処理対象者のエンティティリスト
+     */
     @Transaction
     public List<KaigoNinteiShoriTaishoshaEntity> select証記載保険者番号及び支所コード(ShoKisaiHokenshaNo 証記載保険者番号, RString 支所コード) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);

@@ -64,23 +64,14 @@ public class ShujiiIkenshoIraiTaishosha {
             KaigoIryoKikan 主治医医療機関,
             IDoctor 主治医) throws NullPointerException {
 
-        requireNonNull(申請書管理番号, Messages.E00003.replace("申請書管理番号", getClass().getName()).getMessage());
-        requireNonNull(証記載保険者番号, Messages.E00003.replace("証記載保険者番号", getClass().getName()).getMessage());
-        requireNonNull(被保険者番号, Messages.E00003.replace("被保険者番号", getClass().getName()).getMessage());
-        requireNonNull(認定申請年月日, Messages.E00003.replace("認定申請年月日", getClass().getName()).getMessage());
-        requireNonNull(認定申請区分, Messages.E00003.replace("認定申請区分", getClass().getName()).getMessage());
-        requireNonNull(個人情報, Messages.E00003.replace("個人情報", getClass().getName()).getMessage());
-        requireNonNull(氏名, Messages.E00003.replace("氏名", getClass().getName()).getMessage());
-        requireNonNull(住所, Messages.E00003.replace("住所", getClass().getName()).getMessage());
-
-        this.申請書管理番号 = 申請書管理番号;
-        this.証記載保険者番号 = 証記載保険者番号;
-        this.被保険者番号 = 被保険者番号;
-        this.認定申請年月日 = 認定申請年月日;
-        this.認定申請区分 = 認定申請区分;
-        this.個人情報 = 個人情報;
-        this.氏名 = 氏名;
-        this.住所 = 住所;
+        this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00003.replace("申請書管理番号", getClass().getName()).getMessage());
+        this.証記載保険者番号 = requireNonNull(証記載保険者番号, Messages.E00003.replace("証記載保険者番号", getClass().getName()).getMessage());
+        this.被保険者番号 = requireNonNull(被保険者番号, Messages.E00003.replace("被保険者番号", getClass().getName()).getMessage());
+        this.認定申請年月日 = requireNonNull(認定申請年月日, Messages.E00003.replace("認定申請年月日", getClass().getName()).getMessage());
+        this.認定申請区分 = requireNonNull(認定申請区分, Messages.E00003.replace("認定申請区分", getClass().getName()).getMessage());
+        this.個人情報 = requireNonNull(個人情報, Messages.E00003.replace("個人情報", getClass().getName()).getMessage());
+        this.氏名 = requireNonNull(氏名, Messages.E00003.replace("氏名", getClass().getName()).getMessage());
+        this.住所 = requireNonNull(住所, Messages.E00003.replace("住所", getClass().getName()).getMessage());
         this.主治医医療機関 = 主治医医療機関;
         this.主治医 = 主治医;
     }

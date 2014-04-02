@@ -36,11 +36,11 @@ public class NinteichosaKekkaTorikomiTaishosha {
             NinteichosaIrai 認定調査依頼情報,
             KaigoNinteichosain 介護認定調査員,
             IKojin 個人) {
-        this.認定進捗情報 = requireNonNull(認定進捗情報, Messages.E00003.replace("認定進捗情報", "認定調査結果取込対象者").getMessage());
-        this.認定申請情報 = requireNonNull(認定申請情報, Messages.E00003.replace("認定申請情報", "認定調査結果取込対象者").getMessage());
-        this.認定調査依頼情報 = requireNonNull(認定調査依頼情報, Messages.E00003.replace("認定調査依頼情報", "認定調査結果取込対象者").getMessage());
-        this.介護認定調査員 = requireNonNull(介護認定調査員, Messages.E00003.replace("介護認定調査員", "認定調査結果取込対象者").getMessage());
-        this.個人 = requireNonNull(個人, Messages.E00003.replace("個人", "認定調査結果取込対象者").getMessage());
+        this.認定進捗情報 = requireNonNull(認定進捗情報, Messages.E00003.replace("認定進捗情報", getClass().getName()).getMessage());
+        this.認定申請情報 = requireNonNull(認定申請情報, Messages.E00003.replace("認定申請情報", getClass().getName()).getMessage());
+        this.認定調査依頼情報 = requireNonNull(認定調査依頼情報, Messages.E00003.replace("認定調査依頼情報", getClass().getName()).getMessage());
+        this.介護認定調査員 = requireNonNull(介護認定調査員, Messages.E00003.replace("介護認定調査員", getClass().getName()).getMessage());
+        this.個人 = requireNonNull(個人, Messages.E00003.replace("個人", getClass().getName()).getMessage());
     }
 
     /**

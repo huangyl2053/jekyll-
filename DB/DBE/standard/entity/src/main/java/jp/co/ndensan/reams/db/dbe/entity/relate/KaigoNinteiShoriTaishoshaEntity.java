@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 
 /**
- * 認定申請情報、認定進捗情報をまとめたエンティティクラスです。
+ * 認定申請情報、認定進捗情報をまとめた介護認定処理対象者エンティティクラスです。
  *
  * @author N8187 久保田 英男
  */

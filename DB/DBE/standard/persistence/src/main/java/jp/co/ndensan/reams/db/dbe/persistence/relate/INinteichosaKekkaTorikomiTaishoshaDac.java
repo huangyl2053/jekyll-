@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 認定調査結果取込対象者を取得するインターフェースです。
+ * 認定調査結果取込対象者に該当する介護認定処理対象者を取得するインターフェースです。
  * 要介護認定進捗情報から、認定調査依頼完了年月日が”00000000”以上で、認定調査完了年月日が”00000000”のデータを取得します。
  *
  * @author N8187 久保田 英男
@@ -21,7 +21,7 @@ public interface INinteichosaKekkaTorikomiTaishoshaDac {
     /**
      * 認定調査結果取込対象者を全件取得します。
      *
-     * @return 認定調査結果取込対象者のリスト
+     * @return 認定調査結果取込対象者に該当する介護認定処理対象者のエンティティリスト
      */
     @Transaction
     List<KaigoNinteiShoriTaishoshaEntity> selectAll();
@@ -30,7 +30,7 @@ public interface INinteichosaKekkaTorikomiTaishoshaDac {
      * 証記載保険者番号を元に、認定調査結果取込対象者を取得します。
      *
      * @param 証記載保険者番号 証記載保険者番号
-     * @return 認定調査結果取込対象者のリスト
+     * @return 認定調査結果取込対象者に該当する介護認定処理対象者のエンティティリスト
      */
     @Transaction
     List<KaigoNinteiShoriTaishoshaEntity> select証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号);
@@ -40,7 +40,7 @@ public interface INinteichosaKekkaTorikomiTaishoshaDac {
      *
      * @param 証記載保険者番号 証記載保険者番号
      * @param 支所コード 支所コード
-     * @return 認定調査結果取込対象者のリスト
+     * @return 認定調査結果取込対象者に該当する介護認定処理対象者のエンティティリスト
      */
     @Transaction
     List<KaigoNinteiShoriTaishoshaEntity> select証記載保険者番号及び支所コード(ShoKisaiHokenshaNo 証記載保険者番号, RString 支所コード);

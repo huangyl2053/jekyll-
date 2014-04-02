@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 認定調査結果取込対象者を取得するクラスです。
+ * 認定調査結果取込対象者に該当する介護認定処理対象者を取得するクラスです。
  *
  * @author N8187 久保田 英男
  */
