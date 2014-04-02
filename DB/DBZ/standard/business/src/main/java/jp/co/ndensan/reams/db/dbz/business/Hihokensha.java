@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 
 /**
  * 介護保険の被保険者です。
@@ -52,6 +53,11 @@ public class Hihokensha implements IHihokenshaShikaku {
     @Override
     public ShikibetsuCode get識別コード() {
         return this.shikaku.get識別コード();
+    }
+
+    @Override
+    public RDateTime get被保険者台帳登録日時() {
+        return this.shikaku.get被保険者台帳登録日時();
     }
 
     @Override

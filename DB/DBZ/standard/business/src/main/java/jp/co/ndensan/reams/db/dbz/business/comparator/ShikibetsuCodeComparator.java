@@ -12,10 +12,22 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.SortOrder;
  * {@link IShikibetsuCodeGettable 識別コードが取得可能なオブジェクト}専用のComparatorです。
  *
  * @author N3327 三浦 凌
- * @param <T> {@link IShikibetsuCodeGettable IShikibetsuCodeGettable}を継承したオブジェクト
  */
-public class ShikibetsuCodeComparator<T extends IShikibetsuCodeGettable> implements Comparator<T> {
+public final class ShikibetsuCodeComparator implements Comparator<IShikibetsuCodeGettable> {
 
+    /**
+     * 昇順ソート用のShikibetsuCodeComparatorです。
+     */
+    public static final ShikibetsuCodeComparator ASC;
+    /**
+     * 降順ソート用のShikibetsuCodeComparatorです。
+     */
+    public static final ShikibetsuCodeComparator DESC;
+
+    static {
+        ASC = new ShikibetsuCodeComparator(SortOrder.ASC);
+        DESC = new ShikibetsuCodeComparator(SortOrder.DESC);
+    }
     private SortOrder order;
 
     /**
@@ -25,12 +37,12 @@ public class ShikibetsuCodeComparator<T extends IShikibetsuCodeGettable> impleme
      *
      * @param order {@link SortOrder ソート順}
      */
-    public ShikibetsuCodeComparator(SortOrder order) {
+    private ShikibetsuCodeComparator(SortOrder order) {
         this.order = order;
     }
 
     @Override
-    public int compare(T o1, T o2) {
+    public int compare(IShikibetsuCodeGettable o1, IShikibetsuCodeGettable o2) {
         return o1.get識別コード().compareTo(o2.get識別コード()) * order.getRate();
     }
 }

@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -30,6 +31,7 @@ public class HihokenshaShikaku implements IHihokenshaShikaku {
     private final IKaigoShikaku kaigoShikaku;
     private final LasdecCode lasdecCode;
     private final ShikibetsuCode shikibetsuCode;
+    private final RDateTime registerTimestamp;
     private final KaigoHihokenshaNo hihokenshaNo;
     private final ShikakuIdoKubun shikakuIdoKubun;
     private final ShikakuHihokenshaKubun hihokenshaKubun;
@@ -43,11 +45,13 @@ public class HihokenshaShikaku implements IHihokenshaShikaku {
     private final HihokenshashoSaikofu saikofu;
 
     /**
+     *
      * 新しい被保険者の資格(異動)を作成します。
      *
      * @param 介護資格得喪 介護資格の取得・喪失をもった{@link IKaigoShikaku IKaigoShikaku}
      * @param 地方公共団体コード {@link LasdecCode 地方公共団体コード}
      * @param 識別コード {@link ShikibetsuCode 識別コード}
+     * @param 被保険者台帳登録日時 {@link RDateTime 被保険者台帳登録日時}
      * @param 被保険者番号 {@link KaigoHihokenshaNo 被保険者番号}
      * @param 資格異動区分 {@link ShikakuIdoKubun 資格異動区分}
      * @param 被保険者区分 {@link ShikakuHihokenshaKubun 被保険者区分}
@@ -64,7 +68,7 @@ public class HihokenshaShikaku implements IHihokenshaShikaku {
      * 以外の項目がnullのとき。
      */
     public HihokenshaShikaku(IKaigoShikaku 介護資格得喪,
-            LasdecCode 地方公共団体コード, ShikibetsuCode 識別コード, KaigoHihokenshaNo 被保険者番号,
+            LasdecCode 地方公共団体コード, ShikibetsuCode 識別コード, RDateTime 被保険者台帳登録日時, KaigoHihokenshaNo 被保険者番号,
             ShikakuIdoKubun 資格異動区分, ShikakuHihokenshaKubun 被保険者区分,
             ShikakuHenko 資格変更, JushochitokureiTekiyo 住所地特例適用, JushochitokureiKaijo 住所地特例解除,
             JushochiTokureishaKubun 住所地特例者区分, KoikinaiJushochitokureishaKubun 広域内住所地特例者区分, LasdecCode 広域内住所地特例措置元,
@@ -73,6 +77,7 @@ public class HihokenshaShikaku implements IHihokenshaShikaku {
         this.kaigoShikaku = requireNonNull(介護資格得喪, errorMessageWith(simpleNameOf(IKaigoShikaku.class)));
         this.lasdecCode = requireNonNull(地方公共団体コード, errorMessageWith("地方公共団体コード (" + simpleNameOf(LasdecCode.class)) + ")");
         this.shikibetsuCode = requireNonNull(識別コード, errorMessageWith(simpleNameOf(ShikibetsuCode.class)));
+        this.registerTimestamp = requireNonNull(被保険者台帳登録日時, errorMessageWith("被保険者台帳登録日時 (" + simpleNameOf(RDateTime.class) + ")"));
         this.hihokenshaNo = 被保険者番号;
         this.shikakuIdoKubun = requireNonNull(資格異動区分, errorMessageWith(simpleNameOf(ShikakuIdoKubun.class)));
         this.hihokenshaKubun = requireNonNull(被保険者区分, errorMessageWith(simpleNameOf(ShikakuHihokenshaKubun.class)));
@@ -94,6 +99,11 @@ public class HihokenshaShikaku implements IHihokenshaShikaku {
     @Override
     public ShikibetsuCode get識別コード() {
         return this.shikibetsuCode;
+    }
+
+    @Override
+    public RDateTime get被保険者台帳登録日時() {
+        return this.registerTimestamp;
     }
 
     @Override

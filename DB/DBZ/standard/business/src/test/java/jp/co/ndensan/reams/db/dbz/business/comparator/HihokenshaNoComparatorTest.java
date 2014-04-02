@@ -52,12 +52,12 @@ public class HihokenshaNoComparatorTest extends DbzTestBase {
     public static class ASC extends DbzTestBase {
 
         List<Sample> sampleList;
-        HihokenshaNoComparator<Sample> sut;
+        HihokenshaNoComparator sut;
 
         @Before
         public void setUp() {
             sampleList = createSampleList();
-            sut = new HihokenshaNoComparator<>(SortOrder.ASC);
+            sut = HihokenshaNoComparator.ASC;
             Collections.sort(sampleList, sut);
         }
 
@@ -86,12 +86,12 @@ public class HihokenshaNoComparatorTest extends DbzTestBase {
     public static class DESC extends DbzTestBase {
 
         List<Sample> sampleList;
-        HihokenshaNoComparator<Sample> sut;
+        HihokenshaNoComparator sut;
 
         @Before
         public void setUp() {
             sampleList = createSampleList();
-            sut = new HihokenshaNoComparator<>(SortOrder.DESC);
+            sut = HihokenshaNoComparator.DESC;
             Collections.sort(sampleList, sut);
         }
 

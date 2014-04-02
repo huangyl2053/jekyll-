@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.*;
 
@@ -64,6 +65,7 @@ public final class HihokenshaShikakuMock {
                 kaigoShikaku,
                 new LasdecCode("123456"),
                 new ShikibetsuCode("1020304050"),
+                RDateTime.of(2014, 4, 2, 15, 47),
                 hihokenshaNo,
                 ShikakuIdoKubun.資格取得, ShikakuHihokenshaKubun.第１号被保険者,
                 new ShikakuHenko(ShikakuHenkoJiyu.なし, FlexibleDate.MAX, FlexibleDate.MAX),

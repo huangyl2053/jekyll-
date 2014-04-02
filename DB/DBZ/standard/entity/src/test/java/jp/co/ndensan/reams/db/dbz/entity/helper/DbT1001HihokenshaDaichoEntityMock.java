@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ShikakuHihokenshaKub
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.*;
 
@@ -37,7 +38,7 @@ public final class DbT1001HihokenshaDaichoEntityMock {
      * @return DbT1001HihokenshaDaichoEntityのスパイ
      */
     public static DbT1001HihokenshaDaichoEntity getSpiedInstance() {
-        DbT1001HihokenshaDaichoEntity entity = createNormalEntity();
+        DbT1001HihokenshaDaichoEntity entity = create();
         return spy(entity);
     }
 
@@ -46,11 +47,12 @@ public final class DbT1001HihokenshaDaichoEntityMock {
      *
      * @return DbT1001HihokenshaDaichoEntity
      */
-    public static DbT1001HihokenshaDaichoEntity createNormalEntity() {
+    public static DbT1001HihokenshaDaichoEntity create() {
         DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
         entity.setShichosonCode(new LasdecCode("000000"));
         entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("1234567890")));
         entity.setShikibetsuCode(new ShikibetsuCode("0000000001"));
+        entity.setShoriTimestamp(RDateTime.of(2014, 03, 28, 0, 0));
         entity.setHihokennshaKubunCode(ShikakuHihokenshaKubun.第１号被保険者.getコード());
         entity.setIchigoHihokenshaNenreiTotatsuYMD(new FlexibleDate("20140328"));
         entity.setShikakuIdouKubunCode(ShikakuIdoKubun.資格取得.getCode());
@@ -77,6 +79,18 @@ public final class DbT1001HihokenshaDaichoEntityMock {
         entity.setSaikofuJiyuCode(HihokenshashoSaikofuJiyu.なし.getCode());
         entity.setChohyoKofuRirekiID(null);
 
+        return entity;
+    }
+
+    /**
+     * 市町村コードを指定して、DbT1001HihokenshaDaichoEntityを生成します。
+     *
+     * @param lasdecCode 市町村コード
+     * @return DbT1001HihokenshaDaichoEntity
+     */
+    public static DbT1001HihokenshaDaichoEntity createWith(LasdecCode lasdecCode) {
+        DbT1001HihokenshaDaichoEntity entity = create();
+        entity.setShichosonCode(lasdecCode);
         return entity;
     }
 }

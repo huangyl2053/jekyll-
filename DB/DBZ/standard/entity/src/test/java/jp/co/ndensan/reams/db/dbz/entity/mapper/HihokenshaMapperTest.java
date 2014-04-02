@@ -20,6 +20,7 @@ import org.junit.Test;
 import static org.mockito.Mockito.*;
 
 /**
+ * HihokenshaMapperのテストです。
  *
  * @author N3327 三浦 凌
  */

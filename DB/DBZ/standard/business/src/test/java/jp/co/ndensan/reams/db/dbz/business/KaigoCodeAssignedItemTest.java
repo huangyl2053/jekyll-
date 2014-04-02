@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business;
 
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ICodeWrapValueObject;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -25,10 +26,22 @@ public class KaigoCodeAssignedItemTest extends DbzTestBase {
     /**
      * 審査会委員の資格をあらわすコードです。(sample)
      */
-    private static class ShinsakaiIinShikakuCode extends Code {
+    private static class ShinsakaiIinShikakuCode implements ICodeWrapValueObject {
 
-        public ShinsakaiIinShikakuCode(RString code) throws NullPointerException, IllegalArgumentException {
-            super(code);
+        private final Code code;
+
+        public ShinsakaiIinShikakuCode(Code code) {
+            this.code = code;
+        }
+
+        @Override
+        public Code asCode() {
+            return code;
+        }
+
+        @Override
+        public RString value() {
+            return code.value();
         }
     }
 
@@ -37,24 +50,8 @@ public class KaigoCodeAssignedItemTest extends DbzTestBase {
      */
     private static class ShisakaiIinShikaku extends KaigoCodeAssignedItem<ShinsakaiIinShikakuCode> {
 
-        /**
-         * 何も考えなかったときの実装です。とはいえ、スーパークラスのKaigoCodeAssingeItemのコンストラクタが必要としているので、
-         * 最低限、こういったコンストラクタは必要になります。
-         * CodeAssinedItemのコンストラクタ引数に、ShinsakaiIinShikakuCodeを追加した形になります。
-         */
-        private ShisakaiIinShikaku(ShinsakaiIinShikakuCode extendedCode, Code code, RString codeMeisho, RString codeRyakusho, RString option1, RString option2, RString option3) {
-            super(extendedCode, code, codeMeisho, codeRyakusho, option1, option2, option3);
-        }
-
-        /**
-         * ↑の形だと、引数の項目が多くて大変です。 作成するクラスによっては、コンストラクタの引数を
-         * 必要なものだけに、絞り込むことを考慮しましょう。
-         *
-         * Codeを継承したValueObjectが初期化に必要ですが、
-         * それは『Code#value()を使ってコンストラクタ内でインスタンスを作ってしまう』と、スマートだと思います。
-         */
         public ShisakaiIinShikaku(Code code, RString codeMeisho, RString codeRyakusho) {
-            this(new ShinsakaiIinShikakuCode(code.value()), code, codeMeisho, codeRyakusho, null, null, null);
+            super(new ShinsakaiIinShikakuCode(code), code, codeMeisho, codeRyakusho);
         }
 
         /**
@@ -81,7 +78,7 @@ public class KaigoCodeAssignedItemTest extends DbzTestBase {
 
         @Test
         public void get審査会委員資格コードは_コンストラクタに引き渡したCodeと_値が一致する() {
-            assertThat(sut.get審査会委員資格コード().value(), is(code.value()));
+            assertThat(sut.get審査会委員資格コード().asCode(), is(code));
         }
     }
 }

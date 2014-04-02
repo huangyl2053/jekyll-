@@ -24,7 +24,9 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ShikakuHihokenshaKub
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.Month;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -44,6 +46,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
 
     private static LasdecCode lasdecCode = new LasdecCode("123456");
     private static ShikibetsuCode shikibetsuCode = new ShikibetsuCode("3327");
+    private static RDateTime registerTimestamp = RDateTime.of(2014, Month.AUGUST, 2, 15, 37);
     private static KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(new RString("1234567890"));
     private static ShikakuIdoKubun shikakuIdoKubun = ShikakuIdoKubun.資格取得;
     private static ShikakuHihokenshaKubun hihokenshaKubun = ShikakuHihokenshaKubun.第１号被保険者;
@@ -74,6 +77,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
     private static final int HihokenshaKubun_is_Null = 9;
     private static final int JushochitokureishaKubun_is_Null = 10;
     private static final int KoikinaiJushochitokureishaKubun_is_Null = 11;
+    private static final int RDateTime_is_Null = 12;
 
     public static class Constructor extends DbzTestBase {
 
@@ -90,6 +94,11 @@ public class HihokenshaShikakuTest extends DbzTestBase {
         @Test(expected = NullPointerException.class)
         public void コンストラクタは_引数のShikibetsuCodeがnullのとき_NullPointerExceptionをスローする() {
             callConstructorAS(ShikibetsuCode_is_Null);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void コンストラクタは_引数のRDateTimeがnullのとき_NullPointerExceptionをスローする() {
+            callConstructorAS(RDateTime_is_Null);
         }
 
         @Test(expected = NullPointerException.class)
@@ -370,7 +379,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
 
     private static HihokenshaShikaku callConstructorToCreateWith(IKaigoShikaku kaigoShikaku) {
         return new HihokenshaShikaku(kaigoShikaku,
-                lasdecCode, shikibetsuCode, hihokenshaNo, shikakuIdoKubun, hihokenshaKubun,
+                lasdecCode, shikibetsuCode, registerTimestamp, hihokenshaNo, shikakuIdoKubun, hihokenshaKubun,
                 new ShikakuHenko(shikakuHenkoJiyu, shikakuHenkoTodokedeDate, shikakuHenkoDate),
                 new JushochitokureiTekiyo(jutokuTekiyoJiyu, jutokuTekiyoTodokedeDate, jutokuTekiyoDate),
                 new JushochitokureiKaijo(jutokuKaijoJiyu, jutokuKaijoTodokedeDate, jutokuKaijoDate),
@@ -383,6 +392,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                 flag == IKaigoShikaku_is_Null ? null : mock(IKaigoShikaku.class),
                 flag == LasdecCode_is_Null ? null : lasdecCode,
                 flag == ShikibetsuCode_is_Null ? null : shikibetsuCode,
+                flag == RDateTime_is_Null ? null : registerTimestamp,
                 hihokenshaNo,
                 flag == ShikakuIdoKubun_is_Null ? null : shikakuIdoKubun,
                 flag == HihokenshaKubun_is_Null ? null : hihokenshaKubun,

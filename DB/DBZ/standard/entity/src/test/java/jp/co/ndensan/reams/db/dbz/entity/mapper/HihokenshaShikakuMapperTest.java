@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -78,6 +79,14 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
                 when(shikaku.get地方公共団体コード()).thenReturn(lasdecCode);
                 result = sut.toHihokenshaDaichoEntity(shikaku);
                 assertThat(result.getShichosonCode(), is(shikaku.get地方公共団体コード()));
+            }
+
+            @Test
+            public void toHihokenshaDaichoEntityで変換したとき_結果のgetShoriTimestampは_引数のget被保険者台帳登録日時と一致する() {
+                RDateTime timeStamp = RDateTime.of(2014, 12, 31, 3, 31);
+                when(shikaku.get被保険者台帳登録日時()).thenReturn(timeStamp);
+                result = sut.toHihokenshaDaichoEntity(shikaku);
+                assertThat(result.getShoriTimestamp(), is(shikaku.get被保険者台帳登録日時()));
             }
 
             @Test

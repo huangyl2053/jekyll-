@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 
 /**
  * 介護保険被保険者の被保険者台帳上の情報を扱うインタフェースです。
@@ -36,6 +37,13 @@ public interface IHihokenshaShikaku extends IHihokenshaNoGettable, IShikibetsuCo
      */
     @Override
     ShikibetsuCode get識別コード();
+
+    /**
+     * 被保険者台帳に登録された日時を返します。
+     *
+     * @return {@link RDateTime 被保険者台帳登録日時}
+     */
+    RDateTime get被保険者台帳登録日時();
 
     /**
      * 被保険者の被保険者番号を返します。 <br />

@@ -59,6 +59,7 @@ public final class HihokenshaShikakuMapper {
         entity.setShichosonCode(shikaku.get地方公共団体コード());
         entity.setHihokenshaNo(shikaku.get被保険者番号());
         entity.setShikibetsuCode(shikaku.get識別コード());
+        entity.setShoriTimestamp(shikaku.get被保険者台帳登録日時());
         entity.setHihokennshaKubunCode(shikaku.get被保険者区分().getコード());
         entity.setIchigoHihokenshaNenreiTotatsuYMD(shikaku.get第一号年齢到達日());
         entity.setShikakuIdouKubunCode(shikaku.get資格異動区分().getCode());
@@ -122,6 +123,7 @@ public final class HihokenshaShikakuMapper {
                 kaigoShikaku,
                 entity.getShichosonCode(),
                 entity.getShikibetsuCode(),
+                entity.getShoriTimestamp(),
                 entity.getHihokenshaNo(),
                 ShikakuIdoKubun.toValue(entity.getShikakuIdouKubunCode()),
                 ShikakuHihokenshaKubun.toValue(entity.getHihokennshaKubunCode()),

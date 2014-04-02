@@ -12,10 +12,22 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.SortOrder;
  * {@link IHihokenshaNoGettable 被保険者番号を取得可能なオブジェクト}専用のComparatorです。
  *
  * @author N3327 三浦 凌
- * @param <T> {@link IHihokenshaNoGettable IHihokenshaNoGettable}を継承したオブジェクト
  */
-public class HihokenshaNoComparator<T extends IHihokenshaNoGettable> implements Comparator<T> {
+public final class HihokenshaNoComparator implements Comparator<IHihokenshaNoGettable> {
 
+    /**
+     * 昇順ソート用のHihokenshaNoComparatorです。
+     */
+    public static final HihokenshaNoComparator ASC;
+    /**
+     * 降順ソート用のHihokenshaNoComparatorです。
+     */
+    public static final HihokenshaNoComparator DESC;
+
+    static {
+        ASC = new HihokenshaNoComparator(SortOrder.ASC);
+        DESC = new HihokenshaNoComparator(SortOrder.DESC);
+    }
     private SortOrder order;
 
     /**
@@ -25,12 +37,12 @@ public class HihokenshaNoComparator<T extends IHihokenshaNoGettable> implements 
      *
      * @param order {@link SortOrder ソート順}
      */
-    public HihokenshaNoComparator(SortOrder order) {
+    private HihokenshaNoComparator(SortOrder order) {
         this.order = order;
     }
 
     @Override
-    public int compare(T o1, T o2) {
+    public int compare(IHihokenshaNoGettable o1, IHihokenshaNoGettable o2) {
         return o1.get被保険者番号().compareTo(o2.get被保険者番号()) * order.getRate();
     }
 }

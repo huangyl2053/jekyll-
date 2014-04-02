@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.IShikibetsuCodeGettable;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.SortOrder;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import org.junit.experimental.runners.Enclosed;
@@ -51,12 +50,12 @@ public class ShikibetsuCodeComparatorTest extends DbzTestBase {
     public static class ASC extends DbzTestBase {
 
         List<Sample> sampleList;
-        ShikibetsuCodeComparator<Sample> sut;
+        ShikibetsuCodeComparator sut;
 
         @Before
         public void setUp() {
             sampleList = createSampleList();
-            sut = new ShikibetsuCodeComparator<>(SortOrder.ASC);
+            sut = ShikibetsuCodeComparator.ASC;
             Collections.sort(sampleList, sut);
         }
 
@@ -85,12 +84,12 @@ public class ShikibetsuCodeComparatorTest extends DbzTestBase {
     public static class DESC extends DbzTestBase {
 
         List<Sample> sampleList;
-        ShikibetsuCodeComparator<Sample> sut;
+        ShikibetsuCodeComparator sut;
 
         @Before
         public void setUp() {
             sampleList = createSampleList();
-            sut = new ShikibetsuCodeComparator<>(SortOrder.DESC);
+            sut = ShikibetsuCodeComparator.DESC;
             Collections.sort(sampleList, sut);
         }
 
