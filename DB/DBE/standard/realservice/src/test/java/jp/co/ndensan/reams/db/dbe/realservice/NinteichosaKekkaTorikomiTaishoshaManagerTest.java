@@ -45,7 +45,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManagerTest extends DbeTestBase {
     public static class get認定調査結果取込対象者全件 extends DbeTestBase {
 
         @Test
-        public void 認定調査結果取込対象者の取得条件に一致するデータが登録されていないとき_COLLECTIONS_EMPTYを返す() {
+        public void get認定調査結果取込対象者全件で_認定調査結果取込対象者の取得条件に一致するデータが登録されていないとき_COLLECTIONS_EMPTYを返す() {
             when(torikomiTaishoshaDac.selectAll()).thenReturn(Collections.EMPTY_LIST);
             sut = new NinteichosaKekkaTorikomiTaishoshaManager(chosaIraiJohoDac, torikomiTaishoshaDac);
             resultList = sut.get認定調査結果取込対象者全件();
@@ -56,7 +56,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManagerTest extends DbeTestBase {
     public static class get認定調査結果取込対象者全件_証記載保険者番号 extends DbeTestBase {
 
         @Test
-        public void 認定調査結果取込対象者の取得条件に一致するデータが登録されていないとき_COLLECTIONS_EMPTYを返す() {
+        public void get認定調査結果取込対象者全件で_証記載保険者番号を指定し_認定調査結果取込対象者の取得条件に一致するデータが登録されていないとき_COLLECTIONS_EMPTYを返す() {
             when(torikomiTaishoshaDac.select証記載保険者番号(証記載保険者番号)).thenReturn(Collections.EMPTY_LIST);
             sut = new NinteichosaKekkaTorikomiTaishoshaManager(chosaIraiJohoDac, torikomiTaishoshaDac);
             resultList = sut.get認定調査結果取込対象者全件(証記載保険者番号);
@@ -67,7 +67,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManagerTest extends DbeTestBase {
     public static class get認定調査結果取込対象者全件_証記載保険者番号_支所コード extends DbeTestBase {
 
         @Test
-        public void 認定調査結果取込対象者の取得条件に一致するデータが登録されていないとき_COLLECTIONS_EMPTYを返す() {
+        public void get認定調査結果取込対象者全件で_証記載保険者番号と支所コードを指定し_認定調査結果取込対象者の取得条件に一致するデータが登録されていないとき_COLLECTIONS_EMPTYを返す() {
             when(torikomiTaishoshaDac.select証記載保険者番号及び支所コード(証記載保険者番号, 支所コード)).thenReturn(Collections.EMPTY_LIST);
             sut = new NinteichosaKekkaTorikomiTaishoshaManager(chosaIraiJohoDac, torikomiTaishoshaDac);
             resultList = sut.get認定調査結果取込対象者全件(証記載保険者番号, 支所コード);
