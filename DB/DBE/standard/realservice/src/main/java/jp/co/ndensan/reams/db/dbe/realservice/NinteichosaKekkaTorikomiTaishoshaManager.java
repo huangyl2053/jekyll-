@@ -10,6 +10,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.KaigoNinteichosain;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaKekkaTorikomiTaishosha;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgressFactory;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgressFactory.ParticularDates;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
@@ -99,25 +101,9 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
      * @return true:更新OK, false:更新NG
      */
     public boolean save認定調査完了年月日(NinteichosaKekkaTorikomiTaishosha 認定調査結果取込対象者, FlexibleDate 認定調査完了年月日) {
-        YokaigoninteiProgress currentProgress = 認定調査結果取込対象者.get認定進捗情報();
-        YokaigoninteiProgress yokaigoninteiProgress = new YokaigoninteiProgress(
-                currentProgress.get申請書管理番号(),
-                currentProgress.get認定申請情報登録年月日(),
-                currentProgress.has認定延期通知発行に対する同意有無(),
-                currentProgress.get認定延期通知発行年月日(),
-                currentProgress.get認定延期通知発行回数(),
-                currentProgress.get要介護認定延期理由(),
-                currentProgress.get要介護認定一次判定情報抽出年月日(),
-                currentProgress.get依頼情報データ送信年月日(),
-                currentProgress.get認定調査依頼完了年月日(),
-                認定調査完了年月日,
-                currentProgress.get主治医意見書作成依頼完了年月日(),
-                currentProgress.get主治医意見書登録完了年月日(),
-                currentProgress.get要介護認定一次判定完了年月日(),
-                currentProgress.get要介護認定1_5次判定完了年月日(),
-                currentProgress.get認定審査会割当完了年月日(),
-                currentProgress.get認定審査会完了年月日(),
-                currentProgress.getセンター送信年月日());
+        YokaigoninteiProgressFactory factory = new YokaigoninteiProgressFactory(認定調査結果取込対象者.get認定進捗情報());
+        YokaigoninteiProgress yokaigoninteiProgress = factory.createYokaigoninteiPorgressWith(
+                ParticularDates.認定調査完了年月日, 認定調査完了年月日);
         return new YokaigoninteiProgressManager().save(yokaigoninteiProgress);
     }
 
