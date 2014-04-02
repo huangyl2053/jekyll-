@@ -41,7 +41,7 @@ public class ShujiiIkenshoTorikomiTaishoshaDacTest extends DbeTestDacBase {
     private static ShoKisaiHokenshaNo 登録あり証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("A00001"));
     private static ShoKisaiHokenshaNo 登録なし証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("A00002"));
     private static RString 登録あり支所コード = new RString("0001");
-    private static RString 登録なし支所コード = new RString("0001");
+    private static RString 登録なし支所コード = new RString("0002");
 
     enum IkenshoShinchoku {
 
