@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiChosaIraiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.INinteichosaKekkaTorikomiTaishoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
-import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
+import jp.co.ndensan.reams.ur.urz.realservice.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -120,8 +120,8 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
             KaigoNinteichosain kaigoNinteichosain = get介護認定調査員(
                     shinseiJohoEntity,
                     iraiJohoEntity);
-            IKojin kojin = KojinService.createKojinFinder().get個人(
-                    shinseiJohoEntity.getShikibetsuCode());
+            IKojin kojin = ShikibetsuTaishoService.getShikibetsuTaishoFinder().get識別対象(
+                    shinseiJohoEntity.getShikibetsuCode()).to個人();
 
             list.add(NinteichosaKekkaTorikomiTaishoshaMapper.toNinteichosaKekkaTorikomiTaishosha(
                     shinchokuEntity,

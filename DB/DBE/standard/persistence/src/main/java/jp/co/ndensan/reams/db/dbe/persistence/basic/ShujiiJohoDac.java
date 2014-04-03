@@ -30,7 +30,7 @@ public class ShujiiJohoDac implements IShujiiJohoDac {
         return accessor
                 .select()
                 .table(DbT7012ShujiiJoho.class)
-                .where(and(eq(DbT7012ShujiiJoho.shichosonCode, 証記載保険者番号),
+                .where(and(eq(DbT7012ShujiiJoho.shoKisaiHokenshaNo, 証記載保険者番号),
                 eq(DbT7012ShujiiJoho.kaigoIryokikanCode, 介護医療機関コード),
                 eq(DbT7012ShujiiJoho.kaigoIshiCode, 介護医師コード)))
                 .toObject(DbT7012ShujiiJohoEntity.class);

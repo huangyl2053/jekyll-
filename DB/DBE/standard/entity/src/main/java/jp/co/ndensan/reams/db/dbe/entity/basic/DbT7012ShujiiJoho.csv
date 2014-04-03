@@ -1,4 +1,4 @@
-﻿shichosonCode,varchar,ShoKisaiHokenshaNo,,,,,A
+﻿shoKisaiHokenshaNo,varchar,ShoKisaiHokenshaNo,,,,,A
 kaigoIryokikanCode,varchar,KaigoIryoKikanCode,,,,,A
 kaigoIshiCode,varchar,RString,,,,,A
 iryokikanCode,varchar,RString,,,,,A

@@ -28,7 +28,7 @@ public class ShujiiIryoKikanDacMock implements IShujiiIryoKikanDacMock {
     public DbT7011ShujiiIryoKikanJohoEntity select(ShoKisaiHokenshaNo 証記載保険者番号, KaigoIryoKikanCode 介護医療機関コード) {
         DbAccessor accessor = new DbAccessor(session);
         return accessor.select().table(DbT7011ShujiiIryoKikanJoho.class).
-                where(and(eq(shichosonCode, 証記載保険者番号), eq(kaigoIryokikanCode, 介護医療機関コード))).
+                where(and(eq(shoKisaiHokenshaNo, 証記載保険者番号), eq(kaigoIryokikanCode, 介護医療機関コード))).
                 toObject(DbT7011ShujiiIryoKikanJohoEntity.class);
     }
 }

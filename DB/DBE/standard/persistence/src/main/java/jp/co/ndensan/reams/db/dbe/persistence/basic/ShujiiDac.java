@@ -32,7 +32,7 @@ public class ShujiiDac implements IShujiiDac {
         return accessor.select()
                 .table(DbT7012ShujiiJoho.class)
                 .where(and(
-                eq(shichosonCode, 証記載保険者番号),
+                eq(shoKisaiHokenshaNo, 証記載保険者番号),
                 eq(kaigoIryokikanCode, 介護医療機関コード),
                 eq(kaigoIshiCode, 介護医師コード)))
                 .toObject(DbT7012ShujiiJohoEntity.class);
@@ -66,7 +66,7 @@ public class ShujiiDac implements IShujiiDac {
         return accessor.select()
                 .table(DbT7012ShujiiJoho.class)
                 .where(and(
-                eq(shichosonCode, entity.getShoKisaiHokenshaNo()),
+                eq(shoKisaiHokenshaNo, entity.getShoKisaiHokenshaNo()),
                 eq(kaigoIryokikanCode, entity.getKaigoIryokikanCode()),
                 eq(kaigoIshiCode, entity.getKaigoIshiCode())))
                 .getCount();

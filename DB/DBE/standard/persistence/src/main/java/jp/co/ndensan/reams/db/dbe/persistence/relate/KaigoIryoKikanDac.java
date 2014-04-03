@@ -44,7 +44,7 @@ public class KaigoIryoKikanDac implements IKaigoIryoKikanDac {
         return accessor.select().
                 table(DbT7011ShujiiIryoKikanJoho.class).
                 leftJoin(UrT0516Iryokikan.class, using(DbT7011ShujiiIryoKikanJoho.iryokikanCode)).
-                where(and(eq(shichosonCode, 証記載保険者番号), eq(kaigoIryokikanCode, 介護医療機関コード))).
+                where(and(eq(shoKisaiHokenshaNo, 証記載保険者番号), eq(kaigoIryokikanCode, 介護医療機関コード))).
                 toObject(KaigoIryoKikanEntity.class);
     }
 
@@ -54,7 +54,7 @@ public class KaigoIryoKikanDac implements IKaigoIryoKikanDac {
         return accessor.select().
                 table(DbT7011ShujiiIryoKikanJoho.class).
                 leftJoin(UrT0516Iryokikan.class, using(DbT7011ShujiiIryoKikanJoho.iryokikanCode)).
-                where(and(eq(shichosonCode, 証記載保険者番号), eq(kaigoIryokikanCode, 介護医療機関コード),
+                where(and(eq(shoKisaiHokenshaNo, 証記載保険者番号), eq(kaigoIryokikanCode, 介護医療機関コード),
                 eq(iryokikanJokyo, 医療機関状況.is有効()))).
                 toObject(KaigoIryoKikanEntity.class);
     }
@@ -65,7 +65,7 @@ public class KaigoIryoKikanDac implements IKaigoIryoKikanDac {
         return accessor.select().
                 table(DbT7011ShujiiIryoKikanJoho.class).
                 leftJoin(UrT0516Iryokikan.class, using(DbT7011ShujiiIryoKikanJoho.iryokikanCode)).
-                where(eq(shichosonCode, 証記載保険者番号)).
+                where(eq(shoKisaiHokenshaNo, 証記載保険者番号)).
                 toList(KaigoIryoKikanEntity.class);
     }
 
@@ -75,7 +75,7 @@ public class KaigoIryoKikanDac implements IKaigoIryoKikanDac {
         return accessor.select().
                 table(DbT7011ShujiiIryoKikanJoho.class).
                 leftJoin(UrT0516Iryokikan.class, using(DbT7011ShujiiIryoKikanJoho.iryokikanCode)).
-                where(and(eq(shichosonCode, 証記載保険者番号), eq(iryokikanJokyo, 医療機関状況.is有効()))).
+                where(and(eq(shoKisaiHokenshaNo, 証記載保険者番号), eq(iryokikanJokyo, 医療機関状況.is有効()))).
                 toList(KaigoIryoKikanEntity.class);
     }
 }

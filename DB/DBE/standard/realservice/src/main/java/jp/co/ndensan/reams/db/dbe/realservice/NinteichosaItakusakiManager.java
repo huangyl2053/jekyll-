@@ -16,11 +16,12 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEn
 import jp.co.ndensan.reams.db.dbe.entity.mapper.HatsubanJohoMapper;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaItakusakiMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.IHatsubanKanriJohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.INinteichosaItakusakiDac;
+import jp.co.ndensan.reams.db.dbe.persistence.NinteichosaItakusakiDac;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 認定調査委託先の情報を管理するクラスです
@@ -29,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
  */
 public class NinteichosaItakusakiManager {
 
-    private final INinteichosaItakusakiDac dac;
+    private final NinteichosaItakusakiDac dac;
     private final IHatsubanKanriJohoDac hatsubanDac;
 
     /**
@@ -37,7 +38,7 @@ public class NinteichosaItakusakiManager {
      *
      */
     public NinteichosaItakusakiManager() {
-        dac = InstanceCreator.create(INinteichosaItakusakiDac.class);
+        dac = InstanceProvider.create(NinteichosaItakusakiDac.class);
         hatsubanDac = InstanceCreator.create(IHatsubanKanriJohoDac.class);
     }
 
@@ -45,7 +46,7 @@ public class NinteichosaItakusakiManager {
      * テスト用のコンストラクタです。
      *
      */
-    NinteichosaItakusakiManager(INinteichosaItakusakiDac dac, IHatsubanKanriJohoDac hatsubanDac) {
+    NinteichosaItakusakiManager(NinteichosaItakusakiDac dac, IHatsubanKanriJohoDac hatsubanDac) {
         this.dac = dac;
         this.hatsubanDac = hatsubanDac;
     }

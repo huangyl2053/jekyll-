@@ -14,10 +14,10 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.KaigoNinteichosainMapper;
-import jp.co.ndensan.reams.db.dbe.persistence.INinteichosaItakusakiDac;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.IKaigoNinteichosainDac;
+import jp.co.ndensan.reams.db.dbe.persistence.NinteichosaItakusakiDac;
+import jp.co.ndensan.reams.db.dbe.persistence.basic.KaigoNinteichosainDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 介護認定調査員情報を扱うクラスです。
@@ -26,15 +26,15 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
  */
 public class KaigoNinteichosainManager {
 
-    private final IKaigoNinteichosainDac chosainDac;
-    private final INinteichosaItakusakiDac itakusakiDac;
+    private final KaigoNinteichosainDac chosainDac;
+    private final NinteichosaItakusakiDac itakusakiDac;
 
     /**
      * デフォルトコンストラクタです。
      */
     public KaigoNinteichosainManager() {
-        chosainDac = InstanceCreator.create(IKaigoNinteichosainDac.class);
-        itakusakiDac = InstanceCreator.create(INinteichosaItakusakiDac.class);
+        chosainDac = InstanceProvider.create(KaigoNinteichosainDac.class);
+        itakusakiDac = InstanceProvider.create(NinteichosaItakusakiDac.class);
     }
 
     /**
@@ -42,7 +42,7 @@ public class KaigoNinteichosainManager {
      *
      * @param dac テスト用DAC
      */
-    KaigoNinteichosainManager(IKaigoNinteichosainDac chosainDac, INinteichosaItakusakiDac itakusakiDac) {
+    KaigoNinteichosainManager(KaigoNinteichosainDac chosainDac, NinteichosaItakusakiDac itakusakiDac) {
         this.chosainDac = chosainDac;
         this.itakusakiDac = itakusakiDac;
     }

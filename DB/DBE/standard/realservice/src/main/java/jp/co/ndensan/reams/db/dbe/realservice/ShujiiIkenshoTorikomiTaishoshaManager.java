@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.ShujiiIkenshoTorikomiTaishoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
-import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
+import jp.co.ndensan.reams.ur.urz.realservice.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -123,7 +123,8 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
         YokaigoninteiProgress yokaigoninteiProgress = NinteiShinchokuJohoMapper.toNinteiShinchokuJoho(shinchokuEntity);
         NinteiShinseiJoho ninteiShinseiJoho = NinteishinseiJohoMapper.to認定申請情報(shinseiEntity);
         ShujiiIkenshoSakuseiIrai shujiiIkenshoSakuseiIrai = get主治医意見書作成依頼情報(shinseiEntity);
-        IKojin kojin = KojinService.createKojinFinder().get個人(shinseiEntity.getShikibetsuCode());
+        IKojin kojin = ShikibetsuTaishoService.getShikibetsuTaishoFinder().get識別対象(
+                shinseiEntity.getShikibetsuCode()).to個人();
         KaigoDoctor doctor = shujiiIkenshoSakuseiIrai.get介護医師();
 
         return new ShujiiIkenshoTorikomiTaishosha(

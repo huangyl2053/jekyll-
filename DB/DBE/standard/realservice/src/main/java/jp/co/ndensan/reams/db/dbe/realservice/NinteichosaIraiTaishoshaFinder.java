@@ -15,12 +15,12 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaIraiTaishoshaMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinchokuJohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.INinteichosaItakusakiDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiChosaIraiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
+import jp.co.ndensan.reams.db.dbe.persistence.NinteichosaItakusakiDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.INinteiChosaIraiTaishoshaDac;
 import jp.co.ndensan.reams.ur.urf.entity.basic.ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urf.entity.basic.KaigoJigyoshaEntity;
@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
 //import jp.co.ndensan.reams.ur.urz.persistence.basic.IKojinDac;
 //import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 認定調査依頼対象者情報を管理するクラスです。
@@ -42,7 +43,7 @@ public class NinteichosaIraiTaishoshaFinder {
 
     private final INinteiShinchokuJohoDac shinchokuJohoDac;
     private final INinteiShinseiJohoDac shinseiJohoDac;
-    private final INinteichosaItakusakiDac itakusakiDac;
+    private final NinteichosaItakusakiDac itakusakiDac;
     private final INinteiChosaIraiJohoDac iraiJohoDac;
     private final INinteiChosaIraiTaishoshaDac iraiTaishoshaDac;
 //    private final IKojinDac kojinDac;
@@ -57,7 +58,7 @@ public class NinteichosaIraiTaishoshaFinder {
     public NinteichosaIraiTaishoshaFinder() {
         shinchokuJohoDac = InstanceCreator.create(INinteiShinchokuJohoDac.class);
         shinseiJohoDac = InstanceCreator.create(INinteiShinseiJohoDac.class);
-        itakusakiDac = InstanceCreator.create(INinteichosaItakusakiDac.class);
+        itakusakiDac = InstanceProvider.create(NinteichosaItakusakiDac.class);
         iraiJohoDac = InstanceCreator.create(INinteiChosaIraiJohoDac.class);
         iraiTaishoshaDac = InstanceCreator.create(INinteiChosaIraiTaishoshaDac.class);
 //        kojinDac = InstanceCreator.create(IKojinDac.class);
@@ -80,7 +81,7 @@ public class NinteichosaIraiTaishoshaFinder {
     NinteichosaIraiTaishoshaFinder(
             INinteiShinchokuJohoDac shinchokuJohoDac,
             INinteiShinseiJohoDac shinseiJohoDac,
-            INinteichosaItakusakiDac itakusakiDac,
+            NinteichosaItakusakiDac itakusakiDac,
             INinteiChosaIraiJohoDac iraiJohoDac,
             INinteiChosaIraiTaishoshaDac iraiTaishoshaDac,
             //            IKojinDac kojinDac,

@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.INinteichosaItakusakiDac;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.IKaigoNinteichosainDac;
+import jp.co.ndensan.reams.db.dbe.persistence.NinteichosaItakusakiDac;
+import jp.co.ndensan.reams.db.dbe.persistence.basic.KaigoNinteichosainDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
@@ -224,8 +224,8 @@ public class KaigoNinteichosainManagerTest extends TestBase {
             assertThat(sut.save(create認定調査員()), is(false));
         }
 
-        private IKaigoNinteichosainDac createMockSaveDac(int 件数) {
-            IKaigoNinteichosainDac dac = mock(IKaigoNinteichosainDac.class);
+        private KaigoNinteichosainDac createMockSaveDac(int 件数) {
+            KaigoNinteichosainDac dac = mock(KaigoNinteichosainDac.class);
             when(dac.insertOrUpdate(any(DbT7013ChosainJohoEntity.class))).thenReturn(件数);
             return dac;
         }
@@ -245,15 +245,15 @@ public class KaigoNinteichosainManagerTest extends TestBase {
             assertThat(sut.remove(create認定調査員()), is(false));
         }
 
-        private IKaigoNinteichosainDac createMockRemoveDac(int 件数) {
-            IKaigoNinteichosainDac dac = mock(IKaigoNinteichosainDac.class);
+        private KaigoNinteichosainDac createMockRemoveDac(int 件数) {
+            KaigoNinteichosainDac dac = mock(KaigoNinteichosainDac.class);
             when(dac.delete(any(DbT7013ChosainJohoEntity.class))).thenReturn(件数);
             return dac;
         }
     }
 
-    private static IKaigoNinteichosainDac createMockChosainDac() {
-        IKaigoNinteichosainDac dac = mock(IKaigoNinteichosainDac.class);
+    private static KaigoNinteichosainDac createMockChosainDac() {
+        KaigoNinteichosainDac dac = mock(KaigoNinteichosainDac.class);
         when(dac.select(証記載保険者番号, 介護事業者番号, 介護調査員番号)).thenReturn(createChosainEntity(証記載保険者番号, 介護事業者番号, 介護調査員番号));
         when(dac.select(証記載保険者番号, 介護事業者番号, 介護調査員番号, 調査員の状況)).thenReturn(createChosainEntity(証記載保険者番号, 介護事業者番号, 介護調査員番号, 調査員の状況));
         return dac;
@@ -276,8 +276,8 @@ public class KaigoNinteichosainManagerTest extends TestBase {
         return entity;
     }
 
-    private static IKaigoNinteichosainDac createMockChosainDac(int 要素数) {
-        IKaigoNinteichosainDac dac = mock(IKaigoNinteichosainDac.class);
+    private static KaigoNinteichosainDac createMockChosainDac(int 要素数) {
+        KaigoNinteichosainDac dac = mock(KaigoNinteichosainDac.class);
         when(dac.selectAll(any(ShoKisaiHokenshaNo.class), any(KaigoJigyoshaNo.class))).thenReturn(createChosainEntity(要素数));
         when(dac.selectAll(any(ShoKisaiHokenshaNo.class), any(KaigoJigyoshaNo.class), any(ChosainJokyo.class))).thenReturn(createChosainEntity(要素数));
         when(dac.selectAll(any(ShoKisaiHokenshaNo.class), any(ChosainJokyo.class))).thenReturn(createChosainEntity(要素数));
@@ -293,8 +293,8 @@ public class KaigoNinteichosainManagerTest extends TestBase {
         return list;
     }
 
-    private static INinteichosaItakusakiDac createMockItakusakiDac() {
-        INinteichosaItakusakiDac dac = mock(INinteichosaItakusakiDac.class);
+    private static NinteichosaItakusakiDac createMockItakusakiDac() {
+        NinteichosaItakusakiDac dac = mock(NinteichosaItakusakiDac.class);
         when(dac.select(any(RString.class), any(KaigoJigyoshaNo.class), any(boolean.class))).thenReturn(createItakusakiEntity());
         return dac;
     }

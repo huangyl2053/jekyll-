@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.INinteichosaItakusakiDac;
+import jp.co.ndensan.reams.db.dbe.persistence.NinteichosaItakusakiDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiChosaIraiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinchokuJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
@@ -55,7 +55,7 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
 
         private INinteiShinchokuJohoDac shinchokuJohoDac;
         private INinteiShinseiJohoDac shinseiJohoDac;
-        private INinteichosaItakusakiDac itakusakiDac;
+        private NinteichosaItakusakiDac itakusakiDac;
         private INinteiChosaIraiJohoDac iraiJohoDac;
         private INinteiChosaIraiTaishoshaDac iraiTaishoshaDac;
         private IKojin kojin;
@@ -79,7 +79,7 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
             when(shinseiJohoDac.select(TestCases[3].get申請書管理番号())).thenReturn(Result認定申請情報[3]);
             when(shinseiJohoDac.select(TestCases[4].get申請書管理番号())).thenReturn(Result認定申請情報[4]);
             when(shinseiJohoDac.select(TestCases[5].get申請書管理番号())).thenReturn(Result認定申請情報[5]);
-            itakusakiDac = mock(INinteichosaItakusakiDac.class);
+            itakusakiDac = mock(NinteichosaItakusakiDac.class);
             iraiJohoDac = mock(INinteiChosaIraiJohoDac.class);
             when(iraiJohoDac.select(any(RString.class), any(NinteichosaIraiRirekiNo.class))).thenReturn(null);
             kojin = mock(IKojin.class);

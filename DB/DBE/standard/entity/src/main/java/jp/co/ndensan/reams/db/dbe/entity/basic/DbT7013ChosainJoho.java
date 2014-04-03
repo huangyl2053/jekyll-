@@ -17,7 +17,7 @@ public enum DbT7013ChosainJoho implements IColumnDefinition {
     updateCount(10, 0),
     lastUpdateTimestamp(29, 0),
     lastUpdateReamsLoginId(2147483647, 0),
-    shichosonCode(2147483647, 0),
+    shoKisaiHokenshaNo(6, 0),
     kaigoJigyoshaNo(2147483647, 0),
     kaigoChosainNo(8, 0),
     jigyoshaNo(2147483647, 0),

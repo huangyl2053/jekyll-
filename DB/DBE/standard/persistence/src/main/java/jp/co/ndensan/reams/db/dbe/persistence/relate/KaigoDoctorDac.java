@@ -46,7 +46,7 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
                 .table(DbT7012ShujiiJoho.class)
                 .leftJoin(UrT0517Ishi.class, using(DbT7012ShujiiJoho.ishiShikibetsuNo))
                 .where(and(
-                eq(shichosonCode, 証記載保険者番号),
+                eq(shoKisaiHokenshaNo, 証記載保険者番号),
                 eq(kaigoIryokikanCode, 介護医療機関コード),
                 eq(kaigoIshiCode, 介護医師コード)))
                 .toObject(KaigoDoctorEntity.class);
@@ -60,7 +60,7 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
                 .table(DbT7012ShujiiJoho.class)
                 .leftJoin(UrT0517Ishi.class, using(DbT7012ShujiiJoho.ishiShikibetsuNo))
                 .where(and(
-                eq(shichosonCode, 証記載保険者番号),
+                eq(shoKisaiHokenshaNo, 証記載保険者番号),
                 eq(kaigoIryokikanCode, 介護医療機関コード),
                 eq(kaigoIshiCode, 介護医師コード),
                 eq(shujiiJokyo, 医師の状況.is有効())))
@@ -74,7 +74,7 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
                 .table(DbT7012ShujiiJoho.class)
                 .leftJoin(UrT0517Ishi.class, using(DbT7012ShujiiJoho.ishiShikibetsuNo))
                 .where(and(
-                eq(shichosonCode, 証記載保険者番号),
+                eq(shoKisaiHokenshaNo, 証記載保険者番号),
                 eq(kaigoIryokikanCode, 介護医療機関コード)))
                 .toList(KaigoDoctorEntity.class);
     }
@@ -86,7 +86,7 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
                 .table(DbT7012ShujiiJoho.class)
                 .leftJoin(UrT0517Ishi.class, using(DbT7012ShujiiJoho.ishiShikibetsuNo))
                 .where(and(
-                eq(shichosonCode, 証記載保険者番号),
+                eq(shoKisaiHokenshaNo, 証記載保険者番号),
                 eq(kaigoIryokikanCode, 介護医療機関コード),
                 eq(shujiiJokyo, 医師の状況.is有効())))
                 .toList(KaigoDoctorEntity.class);
@@ -98,7 +98,7 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
         return accessor.select()
                 .table(DbT7012ShujiiJoho.class)
                 .leftJoin(UrT0517Ishi.class, using(DbT7012ShujiiJoho.ishiShikibetsuNo))
-                .where(eq(shichosonCode, 証記載保険者番号))
+                .where(eq(shoKisaiHokenshaNo, 証記載保険者番号))
                 .toList(KaigoDoctorEntity.class);
     }
 
@@ -109,7 +109,7 @@ public class KaigoDoctorDac implements IKaigoDoctorDac {
                 .table(DbT7012ShujiiJoho.class)
                 .leftJoin(UrT0517Ishi.class, using(DbT7012ShujiiJoho.ishiShikibetsuNo))
                 .where(and(
-                eq(shichosonCode, 証記載保険者番号),
+                eq(shoKisaiHokenshaNo, 証記載保険者番号),
                 eq(shujiiJokyo, 医師の状況.is有効())))
                 .toList(KaigoDoctorEntity.class);
     }
