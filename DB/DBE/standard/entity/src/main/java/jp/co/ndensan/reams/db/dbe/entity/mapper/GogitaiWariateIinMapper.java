@@ -12,8 +12,6 @@ import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIinList;
 import jp.co.ndensan.reams.db.dbe.business.GogitaichoKubun;
 import jp.co.ndensan.reams.db.dbe.business.ShinsainKubun;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIin;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaichoKubunCode;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsainKubunCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5107GogitaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.relate.GogitaiWariateShinsakaiIinEntity;
 
@@ -73,13 +71,13 @@ public final class GogitaiWariateIinMapper {
     }
 
     private static ShinsainKubun create審査員区分(GogitaiWariateShinsakaiIinEntity 合議体割当委員Entity) {
-        return new ShinsainKubun(new ShinsainKubunCode(合議体割当委員Entity.get合議体割当Entity().getShinsainKubunCode().value()),
-                合議体割当委員Entity.get合議体割当Entity().getShinsainKubunName());
+        return new ShinsainKubun(合議体割当委員Entity.get合議体割当Entity().getShinsainKubunCode(),
+                合議体割当委員Entity.get合議体割当Entity().getShinsainKubunCodeMeisho(), 合議体割当委員Entity.get合議体割当Entity().getShinsainKubunCodeRyakusho());
     }
 
     private static GogitaichoKubun create合議体長区分(GogitaiWariateShinsakaiIinEntity 合議体割当委員Entity) {
-        return new GogitaichoKubun(new GogitaichoKubunCode(合議体割当委員Entity.get合議体割当Entity().getGogitaichoKubunCode().value()),
-                合議体割当委員Entity.get合議体割当Entity().getGogitaichoKubunName());
+        return new GogitaichoKubun(合議体割当委員Entity.get合議体割当Entity().getGogitaichoKubunCode(),
+                合議体割当委員Entity.get合議体割当Entity().getGogitaichoKubunCodeMeisho(), 合議体割当委員Entity.get合議体割当Entity().getGogitaichoKubunCodeRyakusho());
     }
 
     private static GogitaiDetail create合議体情報(GogitaiWariateShinsakaiIinEntity 合議体割当委員Entity) {
@@ -123,8 +121,8 @@ public final class GogitaiWariateIinMapper {
         entity.setShinsakaiIinCode(合議体割当委員.get委員情報().get委員コード().value());
         entity.setGogitaiYukoKikanKaishiYMD(合議体割当委員.get合議体情報().get有効期間開始年月日().value());
         entity.setGogitaiYukoKikanShuryoYMD(合議体割当委員.get合議体情報().get有効期間終了年月日());
-        entity.setGogitaichoKubunCode(合議体割当委員.get合議体長区分().get区分コード());
-        entity.setShinsainKubunCode(合議体割当委員.get認定調査員区分().get区分コード());
+        entity.setGogitaichoKubunCode(合議体割当委員.get合議体長区分().getCode());
+        entity.setShinsainKubunCode(合議体割当委員.get認定調査員区分().getCode());
         return entity;
     }
 }

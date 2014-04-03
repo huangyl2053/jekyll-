@@ -6,9 +6,13 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import java.util.Objects;
+import jp.co.ndensan.reams.db.dbe.definition.DbeShubetsuKey;
 
 /**
  * DbT5104ShinsakaiKaisaiBashoJohoの項目定義クラスです
@@ -16,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
  * @author n8178 城間篤人
  */
 public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Generated Code">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5104ShinsakaiKaisaiBashoJoho");
@@ -126,18 +130,6 @@ public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
         return shinsakaiKaisaiChikuCode;
     }
 
-    public RString getShinsakaiKaisaiChikuCodeMeisho() {
-        //TODO n8178 城間篤人 コードマスタが作成された後に実装予定
-        //return CodeMaster.getCodeMeisho(new RString("DB"), new RString("100"), shinsakaiKaisaiChikuCode);
-        return new RString("meisho");
-    }
-
-    public RString getShinsakaiKaisaiChikuCodeRyakusho() {
-        //TODO n8178 城間篤人 コードマスタが作成された後に実装予定
-        //return CodeMaster.getCodeRyakusho(new RString("DB"), new RString("100"), shinsakaiKaisaiChikuCode);
-        return new RString("ryakusho");
-    }
-
     /**
      * setShinsakaiKaisaiChikuCode
      *
@@ -145,6 +137,24 @@ public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
      */
     public void setShinsakaiKaisaiChikuCode(Code shinsakaiKaisaiChikuCode) {
         this.shinsakaiKaisaiChikuCode = shinsakaiKaisaiChikuCode;
+    }
+
+    /**
+     * getShinsakaiKaisaiChikuCodeMeisho
+     *
+     * @return Meisho
+     */
+    public RString getShinsakaiKaisaiChikuCodeMeisho() {
+        return CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.審査会地区, shinsakaiKaisaiChikuCode);
+    }
+
+    /**
+     * getShinsakaiKaisaiChikuCodeRyakusho
+     *
+     * @return Ryakusho
+     */
+    public RString getShinsakaiKaisaiChikuCodeRyakusho() {
+        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.審査会地区, shinsakaiKaisaiChikuCode);
     }
 
     /**
@@ -199,6 +209,23 @@ public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
      */
     public void setShinsakaiKaisaiBashoJokyo(boolean shinsakaiKaisaiBashoJokyo) {
         this.shinsakaiKaisaiBashoJokyo = shinsakaiKaisaiBashoJokyo;
+    }
+
+    /**
+     * このエンティティの主キーが他の{@literal DbT5104ShinsakaiKaisaiBashoJohoEntity}と等しいか判定します。
+     *
+     * @param other 比較するエンティティ
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT5104ShinsakaiKaisaiBashoJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     */
+    public boolean equalsPrimaryKeys(DbT5104ShinsakaiKaisaiBashoJohoEntity other) {
+        if (other == null) {
+            return false;
+        }
+        if (!Objects.equals(this.shinsakaiKaisaiBashoCode, other.shinsakaiKaisaiBashoCode)) {
+            return false;
+        }
+        return true;
     }
 // </editor-fold>
 }

@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -139,6 +140,16 @@ public class TimeStringTest {
         public void 時刻を表す文字列1230を持つインスタンスを_同値1230を持つインスタンスと比較した場合_0が返る() {
             sut2 = new TimeString("1230");
             assertThat(sut.compareTo(sut2) == 0, is(true));
+        }
+    }
+
+    public static class toRTimeのテスト extends DbeTestBase {
+
+        @Test
+        public void 同じ時間を示す値を持つ場合_RTime型の時間と_TimeStringからtoRTimeで受け取った時間が_同一になる() {
+            sut = new TimeString("1234");
+            RTime time = RTime.of(12, 34);
+            assertThat(sut.toRTime(), is(time));
         }
     }
 }

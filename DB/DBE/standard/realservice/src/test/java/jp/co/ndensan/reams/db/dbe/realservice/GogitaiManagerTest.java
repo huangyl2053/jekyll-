@@ -125,10 +125,10 @@ public class GogitaiManagerTest {
 
     private static GogitaiWariateShinsakaiIinEntity create合議体割当委員Entity(int 合議体番号) {
         GogitaiWariateShinsakaiIinEntity entity = new GogitaiWariateShinsakaiIinEntity();
-        entity.set割当Entity(GogitaiMockEntityCreator.create合議体割当Entity(合議体番号, "iin01", "19991212", "19991231"));
-        entity.set合議体情報Entity(GogitaiMockEntityCreator.create合議体情報Entity(合議体番号, "19991212", "19991231", "basho1"));
-        entity.set委員Entity(GogitaiMockEntityCreator.create審査会委員Entity("iin01", "19800101"));
-        entity.set開催場所Entity(GogitaiMockEntityCreator.create開催場所Entity("basho1"));
+        entity.set割当Entity(GogitaiMockEntityCreator.create合議体割当EntitySpy(合議体番号, "iin01", "19991212", "19991231"));
+        entity.set合議体情報Entity(GogitaiMockEntityCreator.create合議体情報EntitySpy(合議体番号, "19991212", "19991231", "basho1"));
+        entity.set委員Entity(GogitaiMockEntityCreator.create審査会委員EntitySpy("iin01", "19800101"));
+        entity.set開催場所Entity(GogitaiMockEntityCreator.create開催場所EntitySpy("basho1"));
         return entity;
     }
 }

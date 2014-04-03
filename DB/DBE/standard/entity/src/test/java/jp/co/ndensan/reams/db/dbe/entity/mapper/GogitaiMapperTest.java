@@ -123,12 +123,12 @@ public class GogitaiMapperTest {
     private static GogitaiWariateShinsakaiIinEntity create合議体割当委員Entity(int 合議体番号, String 合議体有効期間開始年月日,
             String 合議体有効期間終了年月日, String 委員コード, String 委員開始年月日, String 場所コード) {
         GogitaiWariateShinsakaiIinEntity entity = new GogitaiWariateShinsakaiIinEntity();
-        entity.set割当Entity(GogitaiMockEntityCreator.create合議体割当Entity(合議体番号, 委員コード,
+        entity.set割当Entity(GogitaiMockEntityCreator.create合議体割当EntitySpy(合議体番号, 委員コード,
                 合議体有効期間開始年月日, 合議体有効期間終了年月日));
         entity.set合議体情報Entity(GogitaiMockEntityCreator.create合議体情報Entity(合議体番号, 合議体有効期間開始年月日,
                 合議体有効期間終了年月日, 場所コード));
-        entity.set委員Entity(GogitaiMockEntityCreator.create審査会委員Entity(委員コード, 委員開始年月日));
-        entity.set開催場所Entity(GogitaiMockEntityCreator.create開催場所Entity(場所コード));
+        entity.set委員Entity(GogitaiMockEntityCreator.create審査会委員EntitySpy(委員コード, 委員開始年月日));
+        entity.set開催場所Entity(GogitaiMockEntityCreator.create開催場所EntitySpy(場所コード));
         return entity;
     }
 }

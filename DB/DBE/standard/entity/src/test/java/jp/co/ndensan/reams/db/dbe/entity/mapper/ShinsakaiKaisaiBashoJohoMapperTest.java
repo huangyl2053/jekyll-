@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBasho
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiChiku;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.helper.GogitaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -131,7 +132,8 @@ public class ShinsakaiKaisaiBashoJohoMapperTest {
 
     private static DbT5104ShinsakaiKaisaiBashoJohoEntity createEntity() {
 
-        DbT5104ShinsakaiKaisaiBashoJohoEntity 審査会開催場所Entity = new DbT5104ShinsakaiKaisaiBashoJohoEntity();
+        DbT5104ShinsakaiKaisaiBashoJohoEntity 審査会開催場所Entity =
+                GogitaiMockEntityCreator.create開催場所EntitySpy(開催場所コード_A001.value().toString());
         審査会開催場所Entity.setShinsakaiKaisaiBashoCode(開催場所コード_A001.value());
         審査会開催場所Entity.setShinsakaiKaisaiBashoMei(開催場所名_山田家);
         審査会開催場所Entity.setShinsakaiKaisaiChikuCode(開催地区_chiku01_name01);

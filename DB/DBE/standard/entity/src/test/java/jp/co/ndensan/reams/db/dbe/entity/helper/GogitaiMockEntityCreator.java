@@ -4,14 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.helper;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5102ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5107GogitaiWariateIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.relate.GogitaiWariateShinsakaiIinEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -24,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.doReturn;
 
 /**
  * 合議体関連のテストで必要なインスタンスを生成するクラスです。
@@ -82,7 +80,14 @@ public final class GogitaiMockEntityCreator {
      */
     public static DbT5107GogitaiWariateIinJohoEntity create合議体割当EntitySpy(int 合議体番号, String 割当委員コード,
             String 開始年月日, String 終了年月日) {
-        return spy(create合議体割当Entity(合議体番号, 割当委員コード, 開始年月日, 終了年月日));
+        DbT5107GogitaiWariateIinJohoEntity entity = create合議体割当Entity(合議体番号, 割当委員コード, 開始年月日, 終了年月日);
+        entity = spy(entity);
+
+        doReturn(new RString("meisho")).when(entity).getGogitaichoKubunCodeMeisho();
+        doReturn(new RString("meisho")).when(entity).getShinsainKubunCodeMeisho();
+        doReturn(new RString("ryakusho")).when(entity).getGogitaichoKubunCodeRyakusho();
+        doReturn(new RString("ryakusho")).when(entity).getShinsainKubunCodeRyakusho();
+        return entity;
     }
 
     /**
@@ -114,7 +119,10 @@ public final class GogitaiMockEntityCreator {
      * @return 審査会委員Entity
      */
     public static DbT5102ShinsakaiIinJohoEntity create審査会委員EntitySpy(String 委員コード, String 開始年月日) {
-        return spy(create審査会委員Entity(委員コード, 開始年月日));
+        DbT5102ShinsakaiIinJohoEntity entity = spy(create審査会委員Entity(委員コード, 開始年月日));
+        doReturn(new RString("meisho")).when(entity).getShinsakaiIinShikakuCodeMeisho();
+        doReturn(new RString("ryakusho")).when(entity).getShinsakaiIinShikakuCodeRyakusho();
+        return entity;
     }
 
     /**
@@ -140,8 +148,8 @@ public final class GogitaiMockEntityCreator {
         entity.setYubinNo(new YubinNo(new RString("123-1234")));
         entity.setJusho(new AtenaJusho(RString.EMPTY));
         entity.setTelNo(new TelNo(RString.EMPTY));
-        entity.setKinyuKikanCode(new KinyuKikanCode(RString.HALF_SPACE));
-        entity.setKinyuKikanShitenCode(new KinyuKikanShitenCode(RString.HALF_SPACE));
+        entity.setKinyuKikanCode(new KinyuKikanCode(new RString("0001")));
+        entity.setKinyuKikanShitenCode(new KinyuKikanShitenCode(new RString("011")));
         entity.setKozaShubetsu(RString.EMPTY);
         entity.setKozaMeigi(RString.EMPTY);
         entity.setKozaMeigiKana(RString.EMPTY);
@@ -156,7 +164,10 @@ public final class GogitaiMockEntityCreator {
      * @return 審査会開催場所Entity
      */
     public static DbT5104ShinsakaiKaisaiBashoJohoEntity create開催場所EntitySpy(String 審査会開催場所) {
-        return spy(create開催場所Entity(審査会開催場所));
+        DbT5104ShinsakaiKaisaiBashoJohoEntity entity = spy(create開催場所Entity(審査会開催場所));
+        doReturn(new RString("meisho")).when(entity).getShinsakaiKaisaiChikuCodeMeisho();
+        doReturn(new RString("meisho")).when(entity).getShinsakaiKaisaiChikuCodeRyakusho();
+        return entity;
     }
 
     /**

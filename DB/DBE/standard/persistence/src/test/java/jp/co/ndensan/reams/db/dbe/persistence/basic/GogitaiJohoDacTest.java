@@ -24,7 +24,7 @@ import org.junit.runner.RunWith;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class GogitaiDacTest {
+public class GogitaiJohoDacTest {
 
     private static GogitaiJohoDac sut;
 
@@ -79,6 +79,30 @@ public class GogitaiDacTest {
         @Test
         public void 年月日に2011_01_01を指定したとき_2件のリストが返る() {
             assertThat(sut.select(new FlexibleDate("20110101")).size(), is(2));
+        }
+    }
+
+    public static class select_合議体番号と基準年月日を渡したときのテスト extends DbeTestDacBase {
+
+        @Before
+        public void setUp() {
+            sut.insert(create合議体Entity(1, "19990101", "19991231", "合議体01"));
+            sut.insert(create合議体Entity(1, "20000101", "20001231", "合議体01"));
+            sut.insert(create合議体Entity(1, "20010101", "20011231", "合議体01"));
+            sut.insert(create合議体Entity(1, "20020101", "20021231", "合議体01"));
+            sut.insert(create合議体Entity(1, "20030101", "20031231", "合議体01"));
+        }
+
+        @Test
+        public void 合議体番号に1_年月日19991231を指定したとき_有効期間開始年月日が19990101の合議体が返る() {
+            DbT5103GogitaiJohoEntity result = sut.select(new GogitaiNo(1), new FlexibleDate("19991231"));
+            assertThat(result.getGogitaiYukoKikanKaishiYMD(), is(new FlexibleDate("19990101")));
+        }
+
+        @Test
+        public void 合議体番号に1_年月日20000101を指定したとき_有効期間開始年月日が20000101の合議体が返る() {
+            DbT5103GogitaiJohoEntity result = sut.select(new GogitaiNo(1), new FlexibleDate("20000101"));
+            assertThat(result.getGogitaiYukoKikanKaishiYMD(), is(new FlexibleDate("20000101")));
         }
     }
 

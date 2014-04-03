@@ -4,9 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaichoKubunCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -20,19 +22,16 @@ import org.junit.runner.RunWith;
 public class GogitaichoKubunTest {
 
     private static GogitaichoKubun sut;
-    private static GogitaichoKubunCode 区分コード = new GogitaichoKubunCode(new RString("A001"));
-    private static RString 区分名称 = new RString("長");
+    private static Code 区分コード = new Code("A001");
+    private static RString 名称 = new RString("委員");
+    private static RString 略称 = new RString("委員");
 
-    public static class コンストラクタのテスト extends DbeTestBase {
+    public static class get区分コードのテスト extends DbeTestBase {
 
-        @Test(expected = NullPointerException.class)
-        public void 区分コードにnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut = new GogitaichoKubun(null, 区分名称);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 区分名称にnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut = new GogitaichoKubun(区分コード, null);
+        @Test
+        public void get区分コードとgetCodeで取得した内容は_同一になる() {
+            sut = new GogitaichoKubun(区分コード, 名称, 略称);
+            assertThat(sut.get区分コード().value(), is(sut.getCode().value()));
         }
     }
 }

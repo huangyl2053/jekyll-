@@ -11,8 +11,6 @@ import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIin;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIinList;
 import jp.co.ndensan.reams.db.dbe.business.GogitaichoKubun;
 import jp.co.ndensan.reams.db.dbe.business.ShinsainKubun;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaichoKubunCode;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsainKubunCode;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
@@ -50,9 +48,9 @@ public class GogitaiWariateIinMapperTest {
     private static GogitaiYukoKikanKaishiYMD 開始年月日_19991212 = new GogitaiYukoKikanKaishiYMD("19991212");
     private static FlexibleDate 終了年月日_20101212 = new FlexibleDate("20101212");
     private static ShinsainKubun 認定調査員区分_iinCode_iinName =
-            new ShinsainKubun(new ShinsainKubunCode(new RString("iinCode")), new RString("iinName"));
+            new ShinsainKubun(new Code("iinCode"), new RString("iinName"), new RString("ryakusho"));
     private static GogitaichoKubun 合議体長区分_taichoCode_taichoName =
-            new GogitaichoKubun(new GogitaichoKubunCode(new RString("taichoCode")), new RString("taichoName"));
+            new GogitaichoKubun(new Code("taichoCode"), new RString("taichoName"), new RString("ryakusho"));
 
     public static class to合議体割当委員Listのテスト extends DbeTestBase {
 
@@ -174,13 +172,13 @@ public class GogitaiWariateIinMapperTest {
         @Test
         public void 認定調査員区分コードにiinCodeを持つ合議体割当委員を渡したとき_認定調査員区分コードにiinCodeを持つ合議体割当Entityが返る() {
             sut = GogitaiWariateIinMapper.to合議体割当委員Entity(createGogitaiWariateIin());
-            assertThat(sut.getShinsainKubunCode(), is((Code) 認定調査員区分_iinCode_iinName.get区分コード()));
+            assertThat(sut.getShinsainKubunCode(), is(認定調査員区分_iinCode_iinName.getCode()));
         }
 
         @Test
         public void 合議体長区分コードにtaichoCodeを持つ合議体割当委員を渡したとき_合議体長区分コードにtaichoCodeを持つ合議体割当Entityが返る() {
             sut = GogitaiWariateIinMapper.to合議体割当委員Entity(createGogitaiWariateIin());
-            assertThat(sut.getGogitaichoKubunCode(), is((Code) 合議体長区分_taichoCode_taichoName.get区分コード()));
+            assertThat(sut.getGogitaichoKubunCode(), is(合議体長区分_taichoCode_taichoName.getCode()));
         }
     }
 
@@ -193,15 +191,15 @@ public class GogitaiWariateIinMapperTest {
         GogitaiWariateShinsakaiIinEntity entity = new GogitaiWariateShinsakaiIinEntity();
 
         DbT5107GogitaiWariateIinJohoEntity 割当Entity = GogitaiMockEntityCreator.create合議体割当EntitySpy(1, "iin01", "19991212", "20101212");
-        ShinsainKubunCode shinsakaiKubunCode = 認定調査員区分_iinCode_iinName.get区分コード();
+        Code shinsakaiKubunCode = 認定調査員区分_iinCode_iinName.getCode();
         when(割当Entity.getShinsainKubunCode()).thenReturn(shinsakaiKubunCode);
-        GogitaichoKubunCode gogitaichoKubunCode = 合議体長区分_taichoCode_taichoName.get区分コード();
+        Code gogitaichoKubunCode = 合議体長区分_taichoCode_taichoName.getCode();
         when(割当Entity.getGogitaichoKubunCode()).thenReturn(gogitaichoKubunCode);
         entity.set割当Entity(割当Entity);
 
-        entity.set委員Entity(GogitaiMockEntityCreator.create審査会委員Entity("iin01", "19990101"));
+        entity.set委員Entity(GogitaiMockEntityCreator.create審査会委員EntitySpy("iin01", "19990101"));
         entity.set合議体情報Entity(GogitaiMockEntityCreator.create合議体情報Entity(1, "19991212", "20101212", "basho01"));
-        entity.set開催場所Entity(GogitaiMockEntityCreator.create開催場所Entity("A001"));
+        entity.set開催場所Entity(GogitaiMockEntityCreator.create開催場所EntitySpy("A001"));
         return entity;
     }
 

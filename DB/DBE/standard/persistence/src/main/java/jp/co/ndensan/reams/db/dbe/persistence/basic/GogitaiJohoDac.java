@@ -56,6 +56,22 @@ public class GogitaiJohoDac implements IReplaceable<DbT5103GogitaiJohoEntity>, I
                 toList(DbT5103GogitaiJohoEntity.class);
     }
 
+    /**
+     * 合議体番号と年月日を指定し、現在有効な合議体の情報を一件取得します。
+     *
+     * @param 合議体番号 合議体番号
+     * @param 年月日 年月日
+     * @return 合議体EntityのList
+     */
+    @Transaction
+    public DbT5103GogitaiJohoEntity select(GogitaiNo 合議体番号, FlexibleDate 年月日) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().table(DbT5103GogitaiJoho.class).
+                where(and(eq(gogitaiNo, 合議体番号.value()),
+                and(leq(gogitaiYukoKikanKaishiYMD, 年月日), leq(年月日, gogitaiYukoKikanShuryoYMD)))).
+                toObject(DbT5103GogitaiJohoEntity.class);
+    }
+
     @Override
     public int insertOrUpdate(DbT5103GogitaiJohoEntity entity) {
         //TODO n8178 城間篤人 updateCountから更新か新規か判断できるまで保留 2014年3月

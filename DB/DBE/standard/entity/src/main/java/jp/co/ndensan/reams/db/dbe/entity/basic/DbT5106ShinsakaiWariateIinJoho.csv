@@ -1,0 +1,8 @@
+﻿shinsakaiKaisaiNo,int2,int,,,,,A
+shinsakaiKaisaiYMD,UDD015YMD,FlexibleDate,,,,,A
+shinsakaiIinCode,varchar,RString,,,,,A
+shinsainKubunCode,UDD035Code,Code,SubGyomuCode.DBE認定支援,DbeShubetsuKey.認定調査員区分,,,A
+gogitaichoKubunCode,UDD035Code,Code,SubGyomuCode.DBE認定支援,合議体長区分,,,A
+shinsakaiIinShinsaKaishiTime,varchar,RString,,,,,A
+shinsakaiIinshinsaShuryoTime,varchar,RString,,,,,A
+shinsakaiIinShukketsuKubun,bpchar,RString,,,,,A

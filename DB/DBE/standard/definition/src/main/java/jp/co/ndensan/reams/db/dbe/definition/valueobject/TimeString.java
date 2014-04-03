@@ -103,4 +103,13 @@ public class TimeString implements IValueObject<RString>, Comparable<TimeString>
     public int compareTo(TimeString 比較対象) {
         return this.value().compareTo(比較対象.value());
     }
+
+    /**
+     * 自身の情報をRTime型の変換して返します。
+     *
+     * @return 時間
+     */
+    public RTime toRTime() {
+        return time;
+    }
 }

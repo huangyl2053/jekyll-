@@ -1,0 +1,6 @@
+﻿gogitaiNo,int2,int,,,,,A
+gogitaiYukoKikanKaishiYMD,UDD015YMD,FlexibleDate,,,,,A
+gogitaiYukoKikanShuryoYMD,UDD015YMD,FlexibleDate,,,,,A
+shinsakaiIinCode,varchar,RString,,,,,A
+shinsainKubunCode,UDD035Code,Code,SubGyomuCode.DBE認定支援,DbeShubetsuKey.認定審査員区分,,,A
+gogitaichoKubunCode,UDD035Code,Code,SubGyomuCode.DBE認定支援,0032,,,A
