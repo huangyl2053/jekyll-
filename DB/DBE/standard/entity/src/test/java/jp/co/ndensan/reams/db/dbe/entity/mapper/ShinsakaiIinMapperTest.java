@@ -47,13 +47,13 @@ public class ShinsakaiIinMapperTest {
     private static AtenaMeisho 氏名_太郎 = new AtenaMeisho(new RString("太郎"));
     private static AtenaKanaMeisho カナ氏名_タロウ = new AtenaKanaMeisho(new RString("タロウ"));
     private static Gender 性別_MALE = Gender.MALE;
-    private static ShinsakaiIinShikaku 審査会委員資格_code_name =
-            new ShinsakaiIinShikaku(new ShinsakaiIinShikakuCode(new RString("code")), new RString("name"));
+    private static ShinsakaiIinShikaku 審査会委員資格_code_name
+            = new ShinsakaiIinShikaku(new ShinsakaiIinShikakuCode(new RString("code")), new RString("name"));
     private static ShinsainYusoKubun 審査委員郵送区分_自宅 = ShinsainYusoKubun.自宅;
     private static YubinNo 郵便番号_1231234 = new YubinNo("1231234");
     private static AtenaJusho 住所_山田市 = new AtenaJusho(new RString("山田市"));
     private static TelNo 電話番号_0981234567 = new TelNo("0981234567");
-    private static KinyuKikanCode 金融機関コード_01 = new KinyuKikanCode(new RString("01"));
+    private static KinyuKikanCode 金融機関コード_01 = new KinyuKikanCode(new RString("0001"));
     private static KinyuKikanShitenCode 金融機関支店コード_011 = new KinyuKikanShitenCode(new RString("011"));
     private static RString 口座種別_普通 = new RString("普通");
     private static RString 口座名義人_次郎 = new RString("次郎");

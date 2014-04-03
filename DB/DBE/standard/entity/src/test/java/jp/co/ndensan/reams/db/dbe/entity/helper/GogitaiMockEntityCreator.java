@@ -140,8 +140,8 @@ public final class GogitaiMockEntityCreator {
         entity.setYubinNo(new YubinNo(new RString("123-1234")));
         entity.setJusho(new AtenaJusho(RString.EMPTY));
         entity.setTelNo(new TelNo(RString.EMPTY));
-        entity.setKinyuKikanCode(new KinyuKikanCode(RString.HALF_SPACE));
-        entity.setKinyuKikanShitenCode(new KinyuKikanShitenCode(RString.HALF_SPACE));
+        entity.setKinyuKikanCode(new KinyuKikanCode(new RString("0000")));
+        entity.setKinyuKikanShitenCode(new KinyuKikanShitenCode(new RString("000")));
         entity.setKozaShubetsu(RString.EMPTY);
         entity.setKozaMeigi(RString.EMPTY);
         entity.setKozaMeigiKana(RString.EMPTY);

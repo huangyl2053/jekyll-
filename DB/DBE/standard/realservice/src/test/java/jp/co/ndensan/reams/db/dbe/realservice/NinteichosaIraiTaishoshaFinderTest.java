@@ -230,7 +230,7 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
         KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(試験用文字列);
         ShikibetsuCode shikibetsuCode = new ShikibetsuCode(試験用文字列);
         FlexibleDate ninteiShinseiYMD = 調査完了年月日;
-        EdabanCode ninteiShinseiEdabanCode = new EdabanCode(new RString("01"));
+        EdabanCode ninteiShinseiEdabanCode = new EdabanCode(new RString("001"));
         NinteiShinseiKubunShinsei ninteiShinseiShinseijiKubunCode = NinteiShinseiKubunShinsei.新規申請;
         Code ninteiShinseiHoreiKubunCode = new Code(試験用文字列);
         Code ninteiShinseiYukoKubunCode = new Code(試験用文字列);

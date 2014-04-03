@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.NinteichosaJisshibashoKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaJisshibashoKubunCode;
 import jp.co.ndensan.reams.db.dbz.business.KaigoCodeAssignedItem;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -24,7 +24,7 @@ public class NinteichosaJisshibashoKubun extends KaigoCodeAssignedItem<Ninteicho
      * @param codeRyakusho 略称
      */
     public NinteichosaJisshibashoKubun(Code code, RString codeMeisho, RString codeRyakusho) {
-        super(new NinteichosaJisshibashoKubunCode(code.value()), code, codeMeisho, codeRyakusho, null, null, null);
+        super(new NinteichosaJisshibashoKubunCode(code), code, codeMeisho, codeRyakusho, null, null, null);
     }
 
     /**
