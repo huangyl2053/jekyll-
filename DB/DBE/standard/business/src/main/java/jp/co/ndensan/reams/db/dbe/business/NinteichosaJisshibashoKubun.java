@@ -24,6 +24,7 @@ public class NinteichosaJisshibashoKubun extends KaigoCodeAssignedItem<Ninteicho
      * @param codeRyakusho 略称
      */
     public NinteichosaJisshibashoKubun(Code code, RString codeMeisho, RString codeRyakusho) {
+
         super(new NinteichosaJisshibashoKubunCode(code), code, codeMeisho, codeRyakusho, null, null, null);
     }
 
