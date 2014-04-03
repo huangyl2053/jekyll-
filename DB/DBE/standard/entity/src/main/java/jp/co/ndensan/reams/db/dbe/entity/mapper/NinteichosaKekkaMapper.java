@@ -83,7 +83,7 @@ public final class NinteichosaKekkaMapper {
         entity.setNinteiChosaKubunCode(new Code(rsltKihon.get認定調査区分().getCode()));
         entity.setChosainCode(rsltKihon.get認定調査員().get介護調査員番号());
         entity.setChosaJisshiBashoCode(new Code(rsltKihon.get認定調査実施場所区分().getCode().value()));
-        entity.setChosaJisshiBashoMeisho(rsltKihon.get認定調査実施場所区分().getName());
+        entity.setChosaJisshiBashoMeisho(rsltKihon.get認定調査実施場所区分().getMeisho());
         entity.setGenzainoJokyoCode(editor.getResultByCode(NinteichosaItemKubunOfGaikyo.現在の状況コード));
         entity.setServiceKubunCode(editor.getResultByCode(NinteichosaItemKubunOfGaikyo.サービス区分コード));
         entity.setHomonKaigo(editor.getResultByInt(NinteichosaItemKubunOfGaikyo.訪問介護));

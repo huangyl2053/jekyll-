@@ -86,7 +86,7 @@ public class NinteichosaKekkaMapperTest {
 
         @Test
         public void 認定調査実施場所名称の設定がある時_toNinteichosaResult_get認定調査実施場所区分_getNameは_設定値を返す() {
-            assertThat(toNinteichosaResult().get概況調査結果().get基本情報().get認定調査実施場所区分().getName(), is(new RString("認定調査実施場所名称")));
+            assertThat(toNinteichosaResult().get概況調査結果().get基本情報().get認定調査実施場所区分().getMeisho(), is(new RString("認定調査実施場所名称")));
         }
 
         @Test
