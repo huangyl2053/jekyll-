@@ -25,8 +25,8 @@ public class NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku
      * @param 略称 略称
      */
     public NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku(Code 認知症高齢者自立度蓋然性評価コード, RString 名称, RString 略称) {
-        super(new NinchishoKoreishaJiritsudoGaizenseiHyokaCode(認知症高齢者自立度蓋然性評価コード.value()),
-                認知症高齢者自立度蓋然性評価コード, 名称, 略称, null, null, null);
+        super(new NinchishoKoreishaJiritsudoGaizenseiHyokaCode(認知症高齢者自立度蓋然性評価コード),
+                認知症高齢者自立度蓋然性評価コード, 名称, 略称);
     }
 
     /**

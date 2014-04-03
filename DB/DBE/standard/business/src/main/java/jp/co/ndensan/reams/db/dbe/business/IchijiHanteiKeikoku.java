@@ -24,7 +24,7 @@ public class IchijiHanteiKeikoku extends KaigoCodeAssignedItem<IchijiHanteiKeiko
      * @param codeRyakusho 警告内容(略)
      */
     public IchijiHanteiKeikoku(Code code, RString codeMeisho, RString codeRyakusho) {
-        super(new IchijiHanteiKeikokuCode(code.value()), code, codeMeisho, codeRyakusho, null, null, null);
+        super(new IchijiHanteiKeikokuCode(code), code, codeMeisho, codeRyakusho);
     }
 
     /**

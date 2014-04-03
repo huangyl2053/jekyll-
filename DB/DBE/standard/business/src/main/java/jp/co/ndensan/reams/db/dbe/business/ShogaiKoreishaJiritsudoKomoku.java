@@ -24,7 +24,7 @@ public class ShogaiKoreishaJiritsudoKomoku extends KaigoCodeAssignedItem<ShogaiK
      * @param 略称 略称
      */
     public ShogaiKoreishaJiritsudoKomoku(Code 障害高齢者自立度コード, RString 名称, RString 略称) {
-        super(new ShogaiKoreishaJiritsudoCode(障害高齢者自立度コード.value()), 障害高齢者自立度コード, 名称, 略称, null, null, null);
+        super(new ShogaiKoreishaJiritsudoCode(障害高齢者自立度コード), 障害高齢者自立度コード, 名称, 略称);
     }
 
     /**

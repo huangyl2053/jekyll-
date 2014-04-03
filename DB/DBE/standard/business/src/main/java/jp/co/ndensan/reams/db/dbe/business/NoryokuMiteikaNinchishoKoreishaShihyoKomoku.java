@@ -25,8 +25,8 @@ public class NoryokuMiteikaNinchishoKoreishaShihyoKomoku
      * @param 略称 略称
      */
     public NoryokuMiteikaNinchishoKoreishaShihyoKomoku(Code 能力未低下認知症高齢者指標コード, RString 名称, RString 略称) {
-        super(new NoryokuMiteikaNinchishoKoreishaShihyoCode(能力未低下認知症高齢者指標コード.value()),
-                能力未低下認知症高齢者指標コード, 名称, 略称, null, null, null);
+        super(new NoryokuMiteikaNinchishoKoreishaShihyoCode(能力未低下認知症高齢者指標コード),
+                能力未低下認知症高齢者指標コード, 名称, 略称);
     }
 
     /**

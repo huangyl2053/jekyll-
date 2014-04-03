@@ -24,7 +24,7 @@ public class NinchishoKoreishaJiritsudoKomoku extends KaigoCodeAssignedItem<Ninc
      * @param 略称 略称
      */
     public NinchishoKoreishaJiritsudoKomoku(Code 認知症高齢者自立度コード, RString 名称, RString 略称) {
-        super(new NinchishoKoreishaJiritsudoCode(認知症高齢者自立度コード.value()), 認知症高齢者自立度コード, 名称, 略称, null, null, null);
+        super(new NinchishoKoreishaJiritsudoCode(認知症高齢者自立度コード), 認知症高齢者自立度コード, 名称, 略称);
     }
 
     /**

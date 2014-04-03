@@ -24,7 +24,7 @@ public class SuiteiKyuhuKubun extends KaigoCodeAssignedItem<SuiteiKyuhuKubunCode
      * @param 略称 略称
      */
     public SuiteiKyuhuKubun(Code 推定給付区分コード, RString 名称, RString 略称) {
-        super(new SuiteiKyuhuKubunCode(推定給付区分コード.value()), 推定給付区分コード, 名称, 略称, null, null, null);
+        super(new SuiteiKyuhuKubunCode(推定給付区分コード), 推定給付区分コード, 名称, 略称);
     }
 
     /**

@@ -24,7 +24,7 @@ public class KaigoNinteiJotaiAnteiseiKubun extends KaigoCodeAssignedItem<KaigoNi
      * @param 略称 略称
      */
     public KaigoNinteiJotaiAnteiseiKubun(Code 介護認定状態安定性コード, RString 名称, RString 略称) {
-        super(new KaigoNinteiJotaiAnteiseiCode(介護認定状態安定性コード.value()), 介護認定状態安定性コード, 名称, 略称, null, null, null);
+        super(new KaigoNinteiJotaiAnteiseiCode(介護認定状態安定性コード), 介護認定状態安定性コード, 名称, 略称);
     }
 
     /**

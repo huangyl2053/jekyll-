@@ -24,7 +24,7 @@ public class IchijiHanteiKekkaKomoku extends KaigoCodeAssignedItem<IchijiHanteiK
      * @param 略称 略称
      */
     public IchijiHanteiKekkaKomoku(Code 一次判定結果コード, RString 名称, RString 略称) {
-        super(new IchijiHanteiKekkaCode(一次判定結果コード.value()), 一次判定結果コード, 名称, 略称, null, null, null);
+        super(new IchijiHanteiKekkaCode(一次判定結果コード), 一次判定結果コード, 名称, 略称);
     }
 
     /**

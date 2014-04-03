@@ -8,7 +8,6 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.DentatsuNoryokuKomok
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinchiNoryokuKomoku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShokujiKoiHyokaKomoku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TankiKiokuKomoku;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinchishoKoreishaJiritsudoCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import static java.util.Objects.requireNonNull;
@@ -63,8 +62,7 @@ public class ShujiiIkensho5Komoku {
      */
     public ShujiiIkensho5Komoku() {
         this.障害高齢者自立度 = new ShogaiKoreishaJiritsudoKomoku(new Code(RString.EMPTY), RString.EMPTY, RString.EMPTY);
-        this.認知症高齢者自立度 = new NinchishoKoreishaJiritsudoKomoku(new NinchishoKoreishaJiritsudoCode(new RString("9")),
-                new RString("記載無し"), new RString("記載無し"));
+        this.認知症高齢者自立度 = new NinchishoKoreishaJiritsudoKomoku(new Code("9"), new RString("記載無し"), new RString("記載無し"));
         this.短期記憶 = TankiKiokuKomoku.記載無し;
         this.認知能力 = NinchiNoryokuKomoku.記載無し;
         this.伝達能力 = DentatsuNoryokuKomoku.記載無し;
