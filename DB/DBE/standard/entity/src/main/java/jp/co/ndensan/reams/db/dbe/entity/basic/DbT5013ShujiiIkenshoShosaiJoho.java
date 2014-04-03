@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * @author n8178 城間篤人
  */
 public enum DbT5013ShujiiIkenshoShosaiJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
 
     insertDantaiCd(2147483647, 0),
     insertTimestamp(29, 0),

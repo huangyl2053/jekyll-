@@ -2,8 +2,8 @@
 koroshoIfShikibetsuCode,bpchar,RString,,,,,A
 kariIchijiHanteiKubun,bool,boolean,,,,,A
 ichijiHanteiYMD,UDD015YMD,FlexibleDate,,,,,A
-ichijiHanteiKekkaCode,UDD035Code,Code,DBE,0028,,,A
-ichijiHanteiKekkaNinchishoKasanCode,UDD035Code,Code,DBE,0028,,,A
+ichijiHanteiKekkaCode,UDD035Code,Code,SubGyomuCode.DBE認定支援,DbeShubetsuKey.一次判定用要介護状態区分,,,A
+ichijiHanteiKekkaNinchishoKasanCode,UDD035Code,Code,SubGyomuCode.DBE認定支援,DbeShubetsuKey.一次判定用要介護状態区分,,,A
 kijunJikan,int2,int,,,,,A
 kijunJikanShokuji,int2,int,,,,,A
 kijunJikanHaisetsu,int2,int,,,,,A
@@ -22,10 +22,10 @@ chukanHyokaKomoku5gun,int2,int,,,,,A
 chukanHyokaKomoku6gun,int2,int,,,,,A
 chukanHyokaKomoku7gun,int2,int,,,,,A
 ichijiHnateiKeikokuCode,UDD035Code,RString,,,,,A
-jotaiAnteiseiCode,UDD035Code,Code,DBE,0018,,,A
+jotaiAnteiseiCode,UDD035Code,Code,SubGyomuCode.DBE認定支援,DbeShubetsuKey.状態の安定性,,,A
 ninchishoJiritsudoIIijoNoGaizensei,numeric,Decimal,,,,,A
-suiteiKyufuKubunCode,UDD035Code,Code,DBE,0022,,,A
-ninchishoKoreishaShihyoCode,UDD035Code,Code,DBE,0020,,,A
+suiteiKyufuKubunCode,UDD035Code,Code,SubGyomuCode.DBE認定支援,DbeShubetsuKey.認知機能及び状態安定性から推定される給付区分,,,A
+ninchishoKoreishaShihyoCode,UDD035Code,Code,SubGyomuCode.DBE認定支援,DbeShubetsuKey.運動能力の低下していない認知症高齢者の指標,,,A
 jiiritsudoKumiawase1,int2,int,,,,,A
 jiiritsudoKumiawase2,int2,int,,,,,A
 jiiritsudoKumiawase3,int2,int,,,,,A
@@ -33,7 +33,7 @@ jiiritsudoKumiawase4,int2,int,,,,,A
 jiiritsudoKumiawase5,int2,int,,,,,A
 jiiritsudoKumiawase6,int2,int,,,,,A
 jiiritsudoKumiawase7,int2,int,,,,,A
-gaizenseiHyokaCode,UDD035Code,Code,DBE,21,,,A
+gaizenseiHyokaCode,UDD035Code,Code,SubGyomuCode.DBE認定支援,DbeShubetsuKey.認知症高齢者の日常生活自立度の蓋然性評価,,,A
 gaizenseiHyokaPercent,int2,int,,,,,A
 ichijiHanteiSofuKubun,bpchar,RString,,,,,A
 ichijiHanteiKekkaSofuYMD,UDD015YMD,FlexibleDate,,,,,A

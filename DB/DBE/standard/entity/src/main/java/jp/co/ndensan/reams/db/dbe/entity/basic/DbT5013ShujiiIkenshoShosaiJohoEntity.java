@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import java.util.Objects;
+import jp.co.ndensan.reams.db.dbe.definition.DbeShubetsuKey;
 
 /**
  * DbT5013ShujiiIkenshoShosaiJohoの項目定義クラスです
@@ -19,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
  * @author n8178 城間篤人
  */
 public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5013ShujiiIkenshoShosaiJoho");
@@ -992,7 +993,7 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
      * @return Meisho
      */
     public RString getIk_seikatsuJiritsudoShyogaiCodeMeisho() {
-        return CodeMaster.getCodeMeisho(new SubGyomuCode(new RString("DBE")), new CodeShubetsu(new RString("0015")), ik_seikatsuJiritsudoShyogaiCode);
+        return CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.障害高齢者自立度, ik_seikatsuJiritsudoShyogaiCode);
     }
 
     /**
@@ -1001,7 +1002,7 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
      * @return Ryakusho
      */
     public RString getIk_seikatsuJiritsudoShyogaiCodeRyakusho() {
-        return CodeMaster.getCodeRyakusho(new SubGyomuCode(new RString("DBE")), new CodeShubetsu(new RString("0015")), ik_seikatsuJiritsudoShyogaiCode);
+        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.障害高齢者自立度, ik_seikatsuJiritsudoShyogaiCode);
     }
 
     /**
@@ -1028,7 +1029,7 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
      * @return Meisho
      */
     public RString getIk_seikatsuJiritsudoNinchshoCodeMeisho() {
-        return CodeMaster.getCodeMeisho(new SubGyomuCode(new RString("DBE")), new CodeShubetsu(new RString("0016")), ik_seikatsuJiritsudoNinchshoCode);
+        return CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.認知症高齢者自立度, ik_seikatsuJiritsudoNinchshoCode);
     }
 
     /**
@@ -1037,7 +1038,7 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
      * @return Ryakusho
      */
     public RString getIk_seikatsuJiritsudoNinchshoCodeRyakusho() {
-        return CodeMaster.getCodeRyakusho(new SubGyomuCode(new RString("DBE")), new CodeShubetsu(new RString("0016")), ik_seikatsuJiritsudoNinchshoCode);
+        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.認知症高齢者自立度, ik_seikatsuJiritsudoNinchshoCode);
     }
 
     /**
@@ -3174,6 +3175,26 @@ public class DbT5013ShujiiIkenshoShosaiJohoEntity implements IDbAccessable {
      */
     public void setIk_kangoShokuiHomonUmu(RString ik_kangoShokuiHomonUmu) {
         this.ik_kangoShokuiHomonUmu = ik_kangoShokuiHomonUmu;
+    }
+
+    /**
+     * このエンティティの主キーが他の{@literal DbT5013ShujiiIkenshoShosaiJohoEntity}と等しいか判定します。
+     *
+     * @param other 比較するエンティティ
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT5013ShujiiIkenshoShosaiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     */
+    public boolean equalsPrimaryKeys(DbT5013ShujiiIkenshoShosaiJohoEntity other) {
+        if (other == null) {
+            return false;
+        }
+        if (!Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo)) {
+            return false;
+        }
+        if (this.ikenshoIraiRirekiNo != other.ikenshoIraiRirekiNo) {
+            return false;
+        }
+        return true;
     }
 // </editor-fold>
 }

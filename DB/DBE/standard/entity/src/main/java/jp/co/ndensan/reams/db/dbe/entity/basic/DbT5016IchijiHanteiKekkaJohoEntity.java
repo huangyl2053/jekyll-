@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import java.util.Objects;
+import jp.co.ndensan.reams.db.dbe.definition.DbeShubetsuKey;
 
 /**
  * DbT5016IchijiHanteiKekkaJohoの項目定義クラスです
@@ -20,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
  * @author n8178 城間篤人
  */
 public class DbT5016IchijiHanteiKekkaJohoEntity implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5016IchijiHanteiKekkaJoho");
@@ -214,7 +215,7 @@ public class DbT5016IchijiHanteiKekkaJohoEntity implements IDbAccessable {
      * @return Meisho
      */
     public RString getIchijiHanteiKekkaCodeMeisho() {
-        return CodeMaster.getCodeMeisho(new SubGyomuCode(new RString("DBE")), new CodeShubetsu(new RString("0028")), ichijiHanteiKekkaCode);
+        return CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.一次判定用要介護状態区分, ichijiHanteiKekkaCode);
     }
 
     /**
@@ -223,7 +224,7 @@ public class DbT5016IchijiHanteiKekkaJohoEntity implements IDbAccessable {
      * @return Ryakusho
      */
     public RString getIchijiHanteiKekkaCodeRyakusho() {
-        return CodeMaster.getCodeRyakusho(new SubGyomuCode(new RString("DBE")), new CodeShubetsu(new RString("0028")), ichijiHanteiKekkaCode);
+        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.一次判定用要介護状態区分, ichijiHanteiKekkaCode);
     }
 
     /**
@@ -251,7 +252,7 @@ public class DbT5016IchijiHanteiKekkaJohoEntity implements IDbAccessable {
      * @return Meisho
      */
     public RString getIchijiHanteiKekkaNinchishoKasanCodeMeisho() {
-        return CodeMaster.getCodeMeisho(new SubGyomuCode(new RString("DBE")), new CodeShubetsu(new RString("0028")), ichijiHanteiKekkaNinchishoKasanCode);
+        return CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.一次判定用要介護状態区分, ichijiHanteiKekkaNinchishoKasanCode);
     }
 
     /**
@@ -260,7 +261,7 @@ public class DbT5016IchijiHanteiKekkaJohoEntity implements IDbAccessable {
      * @return Ryakusho
      */
     public RString getIchijiHanteiKekkaNinchishoKasanCodeRyakusho() {
-        return CodeMaster.getCodeRyakusho(new SubGyomuCode(new RString("DBE")), new CodeShubetsu(new RString("0028")), ichijiHanteiKekkaNinchishoKasanCode);
+        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.一次判定用要介護状態区分, ichijiHanteiKekkaNinchishoKasanCode);
     }
 
     /**
@@ -611,7 +612,7 @@ public class DbT5016IchijiHanteiKekkaJohoEntity implements IDbAccessable {
      * @return Meisho
      */
     public RString getJotaiAnteiseiCodeMeisho() {
-        return CodeMaster.getCodeMeisho(new SubGyomuCode(new RString("DBE")), new CodeShubetsu(new RString("0018")), jotaiAnteiseiCode);
+        return CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.状態の安定性, jotaiAnteiseiCode);
     }
 
     /**
@@ -620,7 +621,7 @@ public class DbT5016IchijiHanteiKekkaJohoEntity implements IDbAccessable {
      * @return Ryakusho
      */
     public RString getJotaiAnteiseiCodeRyakusho() {
-        return CodeMaster.getCodeRyakusho(new SubGyomuCode(new RString("DBE")), new CodeShubetsu(new RString("0018")), jotaiAnteiseiCode);
+        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.状態の安定性, jotaiAnteiseiCode);
     }
 
     /**
@@ -666,7 +667,7 @@ public class DbT5016IchijiHanteiKekkaJohoEntity implements IDbAccessable {
      * @return Meisho
      */
     public RString getSuiteiKyufuKubunCodeMeisho() {
-        return CodeMaster.getCodeMeisho(new SubGyomuCode(new RString("DBE")), new CodeShubetsu(new RString("0022")), suiteiKyufuKubunCode);
+        return CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.認知機能及び状態安定性から推定される給付区分, suiteiKyufuKubunCode);
     }
 
     /**
@@ -675,7 +676,7 @@ public class DbT5016IchijiHanteiKekkaJohoEntity implements IDbAccessable {
      * @return Ryakusho
      */
     public RString getSuiteiKyufuKubunCodeRyakusho() {
-        return CodeMaster.getCodeRyakusho(new SubGyomuCode(new RString("DBE")), new CodeShubetsu(new RString("0022")), suiteiKyufuKubunCode);
+        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.認知機能及び状態安定性から推定される給付区分, suiteiKyufuKubunCode);
     }
 
     /**
@@ -702,7 +703,7 @@ public class DbT5016IchijiHanteiKekkaJohoEntity implements IDbAccessable {
      * @return Meisho
      */
     public RString getNinchishoKoreishaShihyoCodeMeisho() {
-        return CodeMaster.getCodeMeisho(new SubGyomuCode(new RString("DBE")), new CodeShubetsu(new RString("0020")), ninchishoKoreishaShihyoCode);
+        return CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.運動能力の低下していない認知症高齢者の指標, ninchishoKoreishaShihyoCode);
     }
 
     /**
@@ -711,7 +712,7 @@ public class DbT5016IchijiHanteiKekkaJohoEntity implements IDbAccessable {
      * @return Ryakusho
      */
     public RString getNinchishoKoreishaShihyoCodeRyakusho() {
-        return CodeMaster.getCodeRyakusho(new SubGyomuCode(new RString("DBE")), new CodeShubetsu(new RString("0020")), ninchishoKoreishaShihyoCode);
+        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.運動能力の低下していない認知症高齢者の指標, ninchishoKoreishaShihyoCode);
     }
 
     /**
@@ -864,7 +865,7 @@ public class DbT5016IchijiHanteiKekkaJohoEntity implements IDbAccessable {
      * @return Meisho
      */
     public RString getGaizenseiHyokaCodeMeisho() {
-        return CodeMaster.getCodeMeisho(new SubGyomuCode(new RString("DBE")), new CodeShubetsu(new RString("0021")), gaizenseiHyokaCode);
+        return CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.認知症高齢者の日常生活自立度の蓋然性評価, gaizenseiHyokaCode);
     }
 
     /**
@@ -873,7 +874,7 @@ public class DbT5016IchijiHanteiKekkaJohoEntity implements IDbAccessable {
      * @return Ryakusho
      */
     public RString getGaizenseiHyokaCodeRyakusho() {
-        return CodeMaster.getCodeRyakusho(new SubGyomuCode(new RString("DBE")), new CodeShubetsu(new RString("0021")), gaizenseiHyokaCode);
+        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.認知症高齢者の日常生活自立度の蓋然性評価, gaizenseiHyokaCode);
     }
 
     /**
@@ -928,6 +929,23 @@ public class DbT5016IchijiHanteiKekkaJohoEntity implements IDbAccessable {
      */
     public void setIchijiHanteiKekkaSofuYMD(FlexibleDate ichijiHanteiKekkaSofuYMD) {
         this.ichijiHanteiKekkaSofuYMD = ichijiHanteiKekkaSofuYMD;
+    }
+
+    /**
+     * このエンティティの主キーが他の{@literal DbT5016IchijiHanteiKekkaJohoEntity}と等しいか判定します。
+     *
+     * @param other 比較するエンティティ
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT5016IchijiHanteiKekkaJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     */
+    public boolean equalsPrimaryKeys(DbT5016IchijiHanteiKekkaJohoEntity other) {
+        if (other == null) {
+            return false;
+        }
+        if (!Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo)) {
+            return false;
+        }
+        return true;
     }
 // </editor-fold>
 }
