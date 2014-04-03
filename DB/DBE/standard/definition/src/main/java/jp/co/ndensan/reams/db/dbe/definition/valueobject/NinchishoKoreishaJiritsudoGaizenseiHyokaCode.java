@@ -23,8 +23,6 @@ public class NinchishoKoreishaJiritsudoGaizenseiHyokaCode implements ICodeWrapVa
      * 引数から、認知症高齢者の自立度蓋然性評価を表すコードを受け取り、インスタンスを生成します。
      *
      * @param code 認知症高齢者の自立度蓋然性評価コード
-     * @throws NullPointerException 引数にnullが渡された場合
-     * @throws IllegalArgumentException 引数が20桁以下の文字列でない場合
      */
     public NinchishoKoreishaJiritsudoGaizenseiHyokaCode(Code code) {
         this.code = code;

@@ -22,8 +22,6 @@ public class KaigoNinteiJotaiAnteiseiCode implements ICodeWrapValueObject, Compa
      * 引数から要介護認定状態の安定性を表すコードを受け取り、インスタンスを生成します。
      *
      * @param code 要介護認定状態の安定性を表すコード
-     * @throws NullPointerException 引数にnullが渡された場合
-     * @throws IllegalArgumentException 引数が20桁以下の文字列でない場合
      */
     public KaigoNinteiJotaiAnteiseiCode(Code code) {
         this.code = code;
