@@ -4,13 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbe.realservice;
 
-import jp.co.ndensan.reams.db.dbe.business.ninteichosa.NinteichosaResult;
+import jp.co.ndensan.reams.db.dbe.business.NinteichosaResult;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.NinteichosaKekkaEntityMock;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.NinteichosaResultMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.relate.INinteichosaKekkaDac;
+import jp.co.ndensan.reams.db.dbe.persistence.relate.NinteichosaKekkaDac;
 import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
 import jp.co.ndensan.reams.ur.urf.realservice.INinteiChosainFinder;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -30,12 +30,12 @@ import static org.mockito.Mockito.*;
 @RunWith(Enclosed.class)
 public class NinteichosaResultManagerTest {
 
-    private static final boolean AS_調査結果あり = true;
-    private static final boolean AS_調査結果なし = false;
-    private static final boolean AS_save成功 = true;
-    private static final boolean AS_save失敗 = false;
-    private static final boolean AS_remove成功 = true;
-    private static final boolean AS_remove失敗 = false;
+    private static final int AS_調査結果あり = 1;
+    private static final int AS_調査結果なし = 0;
+    private static final int AS_save成功 = 1;
+    private static final int AS_save失敗 = 0;
+    private static final int AS_remove成功 = 1;
+    private static final int AS_remove失敗 = 0;
 
     public static class get認定調査結果 {
 
@@ -76,12 +76,12 @@ public class NinteichosaResultManagerTest {
         }
     }
 
-    private static NinteichosaResultManager createNinteichosaResultManager(boolean flg) {
+    private static NinteichosaResultManager createNinteichosaResultManager(int flg) {
         return new NinteichosaResultManager(createNinteichosaKekkaDac(flg), createNinteiChosainFinder());
     }
 
-    private static INinteichosaKekkaDac createNinteichosaKekkaDac(boolean flg) {
-        INinteichosaKekkaDac dac = mock(INinteichosaKekkaDac.class);
+    private static NinteichosaKekkaDac createNinteichosaKekkaDac(int flg) {
+        NinteichosaKekkaDac dac = mock(NinteichosaKekkaDac.class);
         NinteichosaKekkaEntity entity = createNinteichosaKekkaEntity(flg);
         when(dac.select(any(ShinseishoKanriNo.class), any(NinteichosaIraiRirekiNo.class))).thenReturn(entity);
         when(dac.insertOrUpdate(any(NinteichosaKekkaEntity.class))).thenReturn(flg);
@@ -110,7 +110,7 @@ public class NinteichosaResultManagerTest {
         return NinteichosaResultMock.getSpiedNinteichosaResultInstance();
     }
 
-    private static NinteichosaKekkaEntity createNinteichosaKekkaEntity(boolean flg) {
-        return flg ? NinteichosaKekkaEntityMock.getSpiedNinteichosaKekkaEntityInstance() : null;
+    private static NinteichosaKekkaEntity createNinteichosaKekkaEntity(int flg) {
+        return flg != 0 ? NinteichosaKekkaEntityMock.getSpiedNinteichosaKekkaEntityInstance() : null;
     }
 }

@@ -32,7 +32,7 @@ public final class ShujiiIkenshoSakuseiIraiJohoMapper {
      * 引数のエンティティから主治医意見書作成依頼情報を作成して返します。
      *
      * @param entity 主治医意見書作成依頼情報エンティティ
-     * @param kaigoDoctor 介護ドクター
+     * @param kaigoDoctor 介護医師情報
      * @return 主治医意見書作成依頼情報
      */
     public static ShujiiIkenshoSakuseiIrai toShujiiIkenshoSakuseiIrai(DbT5011ShujiiIkenshoIraiJohoEntity entity, KaigoDoctor kaigoDoctor) {
