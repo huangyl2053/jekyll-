@@ -135,7 +135,7 @@ public class NinteichosahyoRegulationOf2009 implements INinteichosahyoRegulation
         builder.set調査項目("4-13", NinteichosaItemKubunOfKihon.独り言_独り笑, "独り言・独り笑い", new ChoiceItem(ChoiceResultItem.NaiAru2.values()));
         builder.set調査項目("4-14", NinteichosaItemKubunOfKihon.自分勝手に行動する, "自分勝手に行動する", new ChoiceItem(ChoiceResultItem.NaiAru2.values()));
         builder.set調査項目("4-15", NinteichosaItemKubunOfKihon.話がまとまらない, "話がまとまらない", new ChoiceItem(ChoiceResultItem.NaiAru2.values()));
-        builder.set調査項目グループ(NinteichosaItemGroupOf2009.第４群, NinteichosaItemSubGroup.なし);
+        builder.set調査項目グループ(NinteichosaItemGroupOf2009.第５群, NinteichosaItemSubGroup.なし);
         builder.set調査項目("5-1", NinteichosaItemKubunOfKihon.薬の内服, "薬の内服", new ChoiceItem(ChoiceResultItem.Kaijo.values()));
         builder.set調査項目("5-2", NinteichosaItemKubunOfKihon.金銭の管理, "金銭の管理", new ChoiceItem(ChoiceResultItem.Kaijo.values()));
         builder.set調査項目("5-3", NinteichosaItemKubunOfKihon.日常の意思決定, "日常の意思決定", new ChoiceItem(ChoiceResultItem.DekiruDekinai7.values()));
