@@ -4,12 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.KaigoNinteichosain;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaKekkaTorikomiTaishosha;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**
  * 認定調査結果取込対象者を変換するMapperクラスです。
@@ -33,13 +35,20 @@ public final class NinteichosaKekkaTorikomiTaishoshaMapper {
      * @param 介護認定調査員 介護認定調査員
      * @param 個人 個人
      * @return 認定調査結果取込対象者
+     * @throws NullPointerException 引数にNULLが渡された場合
      */
     public static NinteichosaKekkaTorikomiTaishosha toNinteichosaKekkaTorikomiTaishosha(
             DbT5005NinteiShinchokuJohoEntity 要介護認定進捗情報Entity,
             DbT5001NinteiShinseiJohoEntity 要介護認定申請情報Entity,
             DbT5006NinteichosaIraiJohoEntity 認定調査依頼情報Entity,
             KaigoNinteichosain 介護認定調査員,
-            IKojin 個人) {
+            IKojin 個人) throws NullPointerException {
+
+        requireNonNull(要介護認定進捗情報Entity, Messages.E00003.replace("要介護認定進捗情報エンティティ", "認定調査結果取込対象者").getMessage());
+        requireNonNull(要介護認定申請情報Entity, Messages.E00003.replace("要介護認定申請情報エンティティ", "認定調査結果取込対象者").getMessage());
+        requireNonNull(認定調査依頼情報Entity, Messages.E00003.replace("認定調査依頼情報エンティティ", "認定調査結果取込対象者").getMessage());
+        requireNonNull(介護認定調査員, Messages.E00003.replace("介護認定調査員", "認定調査結果取込対象者").getMessage());
+        requireNonNull(個人, Messages.E00003.replace("個人", "認定調査結果取込対象者").getMessage());
 
         return new NinteichosaKekkaTorikomiTaishosha(
                 NinteiShinchokuJohoMapper.toNinteiShinchokuJoho(要介護認定進捗情報Entity),

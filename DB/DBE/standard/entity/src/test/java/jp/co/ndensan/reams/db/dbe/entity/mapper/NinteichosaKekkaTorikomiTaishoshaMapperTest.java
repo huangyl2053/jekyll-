@@ -49,6 +49,41 @@ public class NinteichosaKekkaTorikomiTaishoshaMapperTest extends DbeTestBase {
             個人 = mock(IKojin.class);
         }
 
+        @Test(expected = NullPointerException.class)
+        public void 引数の要介護認定進捗情報Entityに_nullが渡された場合_NullpointerExceptionが発生する() {
+            要介護認定進捗情報Entity = null;
+            sut = NinteichosaKekkaTorikomiTaishoshaMapper.toNinteichosaKekkaTorikomiTaishosha(
+                    要介護認定進捗情報Entity, 要介護認定申請情報Entity, 認定調査依頼情報Entity, 介護認定調査員, 個人);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 引数の要介護認定申請情報Entityに_nullが渡された場合_NullpointerExceptionが発生する() {
+            要介護認定申請情報Entity = null;
+            sut = NinteichosaKekkaTorikomiTaishoshaMapper.toNinteichosaKekkaTorikomiTaishosha(
+                    要介護認定進捗情報Entity, 要介護認定申請情報Entity, 認定調査依頼情報Entity, 介護認定調査員, 個人);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 引数の認定調査依頼情報Entityに_nullが渡された場合_NullpointerExceptionが発生する() {
+            認定調査依頼情報Entity = null;
+            sut = NinteichosaKekkaTorikomiTaishoshaMapper.toNinteichosaKekkaTorikomiTaishosha(
+                    要介護認定進捗情報Entity, 要介護認定申請情報Entity, 認定調査依頼情報Entity, 介護認定調査員, 個人);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 引数の介護認定調査員に_nullが渡された場合_NullpointerExceptionが発生する() {
+            介護認定調査員 = null;
+            sut = NinteichosaKekkaTorikomiTaishoshaMapper.toNinteichosaKekkaTorikomiTaishosha(
+                    要介護認定進捗情報Entity, 要介護認定申請情報Entity, 認定調査依頼情報Entity, 介護認定調査員, 個人);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 引数の個人に_nullが渡された場合_NullpointerExceptionが発生する() {
+            個人 = null;
+            sut = NinteichosaKekkaTorikomiTaishoshaMapper.toNinteichosaKekkaTorikomiTaishosha(
+                    要介護認定進捗情報Entity, 要介護認定申請情報Entity, 認定調査依頼情報Entity, 介護認定調査員, 個人);
+        }
+
         @Test
         public void 要介護認定申請情報Entityの証記載保険者番号と_Mapping後の認定調査結果取込対象者の_認定申請情報の証記載保険者番号が_同一になる() {
             sut = NinteichosaKekkaTorikomiTaishoshaMapper.toNinteichosaKekkaTorikomiTaishosha(
