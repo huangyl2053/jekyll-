@@ -34,8 +34,13 @@ public class ChoiceItemTest {
     public static class toValue {
 
         @Test
-        public void 選択肢の設定がある時_toValueは_該当の選択肢を返す() {
-            assertThat(new ChoiceItem(createChoice(1)).toValue(new RString("2")), is((IAnswerResultItem) ChoiceResultItem.NaiAru.ある));
+        public void 選択肢に_ないある_が設定されている時_toValueは_コード1指定で_ない_を返す() {
+            assertThat(new ChoiceItem(ChoiceResultItem.NaiAru.values()).toValue(new RString("1")), is((IAnswerResultItem) ChoiceResultItem.NaiAru.ない));
+        }
+
+        @Test
+        public void 選択肢に_ないある_が設定されている時_toValueは_コード2指定で_ある_を返す() {
+            assertThat(new ChoiceItem(ChoiceResultItem.NaiAru.values()).toValue(new RString("2")), is((IAnswerResultItem) ChoiceResultItem.NaiAru.ある));
         }
 
         @Test
