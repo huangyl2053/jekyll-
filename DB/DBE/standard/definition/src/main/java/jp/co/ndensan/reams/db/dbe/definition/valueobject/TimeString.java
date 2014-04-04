@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 public class TimeString implements IValueObject<RString>, Comparable<TimeString> {
 
     private final RTime time;
+    private final RString timeString;
     private static final int TIME_STRING_LENGTH = 4;
 
     /**
@@ -52,6 +53,10 @@ public class TimeString implements IValueObject<RString>, Comparable<TimeString>
         } catch (RuntimeException e) {
             throw new IllegalArgumentException(Messages.E00013.replace(エラー出力.toString(), "0000～2359の間").getMessage());
         }
+
+        RString hourString = padToZero(Integer.toString(time.getHour()));
+        RString minuteString = padToZero(Integer.toString(time.getMinute()));
+        timeString = hourString.concat(minuteString);
     }
 
     /**
@@ -87,9 +92,7 @@ public class TimeString implements IValueObject<RString>, Comparable<TimeString>
 
     @Override
     public RString value() {
-        RString hourString = padToZero(Integer.toString(time.getHour()));
-        RString minuteString = padToZero(Integer.toString(time.getMinute()));
-        return hourString.concat(minuteString);
+        return timeString;
     }
 
     private RString padToZero(String str) {
