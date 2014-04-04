@@ -21,10 +21,6 @@
             <artifactId>UrdBusiness</artifactId>
         </dependency>
         <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
-            <artifactId>UrzBusiness</artifactId>
-        </dependency>
-        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbcDefinition</artifactId>
             <version>${project.version}</version>

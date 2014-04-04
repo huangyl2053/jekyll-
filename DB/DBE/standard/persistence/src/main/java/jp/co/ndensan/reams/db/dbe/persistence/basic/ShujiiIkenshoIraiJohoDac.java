@@ -36,7 +36,7 @@ public class ShujiiIkenshoIraiJohoDac implements IShujiiIkenshoIraiJohoDac {
                 .table(DbT5011ShujiiIkenshoIraiJoho.class)
                 .where(and(
                 eq(shinseishoKanriNo, 申請書管理番号),
-                eq(ikenshoIraiRirekiNo, 意見書作成依頼履歴番号.value().intValue())))
+                eq(ikenshoIraiRirekiNo, 意見書作成依頼履歴番号.value())))
                 .toObject(DbT5011ShujiiIkenshoIraiJohoEntity.class);
     }
 

@@ -68,12 +68,12 @@ public class ShujiiTest {
 
     private static IShujii createShujii(int flg) {
         return new Shujii(
-                flg != AS_市町村コードがNULL ? any(ShichosonCode.class) : null,
-                flg != AS_介護医療機関コードがNULL ? any(KaigoIryoKikanCode.class) : null,
-                flg != AS_介護医師コードがNULL ? any(KaigoDoctorCode.class) : null,
-                flg != AS_医療機関コードがNULL ? any(IIryoKikanCode.class) : null,
-                flg != AS_医師識別番号がNULL ? any(RString.class) : null,
-                flg != AS_医師の状況がNULL ? any(IshiJokyo.class) : null,
-                any(YubinNo.class), any(AtenaJusho.class), any(TelNo.class), any(RString.class));
+                flg != AS_市町村コードがNULL ? new ShichosonCode(new RString("20205")) : null,
+                flg != AS_介護医療機関コードがNULL ? new KaigoIryoKikanCode(new RString("0000000001")) : null,
+                flg != AS_介護医師コードがNULL ? new KaigoDoctorCode(new RString("00000001")) : null,
+                flg != AS_医療機関コードがNULL ? mock(IIryoKikanCode.class) : null,
+                flg != AS_医師識別番号がNULL ? new RString("00000001") : null,
+                flg != AS_医師の状況がNULL ? IshiJokyo.有効 : null,
+                new YubinNo(new RString("381-0000")), mock(AtenaJusho.class), mock(TelNo.class), new RString(""));
     }
 }

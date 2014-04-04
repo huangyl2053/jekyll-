@@ -51,7 +51,8 @@ public abstract class KaigoCodeAssignedItem<V extends ICodeWrapValueObject> exte
 
     /**
      * このクラスが保持する、CodeをwrapしたValueObjcetの値を返します。
-     * <p> {@link CodeAssignedItem#getOption1() CodeAssignedItemの任意情報}と同じように、 『何が返るかがメソッド名から明確になるメソッドを実装し、内部では当メソッドに委譲して』
+     * <p> {@link CodeAssignedItem#getOption1() CodeAssignedItemの任意情報}と同じように、
+     * 『何が返るかがメソッド名から明確になるメソッドを実装し、内部では当メソッドに委譲して』
      * ください。すると、わかりやすい名称のメソッドで、CodeをwrapしたValueObjcetの値を取得できます。
      * </p>
      *

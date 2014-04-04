@@ -1,0 +1,11 @@
+﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,ShinseishoKanriNo,,,,,A
+ikenshoIraiKubun,bpchar,RString,,,,,A
+ikenshoIraiRirekiNo,int2,int,,,,,A
+shujiiIryoKikanCode,varchar,RString,,,,,A
+shujiiCode,varchar,RString,,,,,A
+ikenshoJuryoYMD,UDD015YMD,FlexibleDate,,,,,A
+ikenshoKinyuYMD,UDD015YMD,FlexibleDate,,,,,A
+ikenshoSakuseiKaisu,bpchar,RString,,,,,A
+ikenshoSakuseiryoShubetsu,bpchar,RString,,,,,A
+ninteiJohoTeikyoKiboFlag,bool,boolean,,,,,A
+ikenshoDoiUmuFlag,bool,boolean,,,,,A

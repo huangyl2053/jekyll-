@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence;
 
-import jp.co.ndensan.reams.db.dbz.persistence.IInsertable;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
