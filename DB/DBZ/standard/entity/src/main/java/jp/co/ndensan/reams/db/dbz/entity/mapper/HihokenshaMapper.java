@@ -13,7 +13,9 @@ import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
  * Hihokenshaマッパークラスです。
  *
  * @author N3327 三浦 凌
+ * @deprecated 別に使う必要ない。
  */
+@Deprecated
 public final class HihokenshaMapper {
 
     private HihokenshaMapper() {

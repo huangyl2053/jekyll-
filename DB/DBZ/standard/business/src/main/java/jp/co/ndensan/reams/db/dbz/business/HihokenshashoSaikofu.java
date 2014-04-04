@@ -38,9 +38,8 @@ public class HihokenshashoSaikofu {
 
     private HihokenshashoSaikofu(HihokenshashoSaikofuKubun saikofuKubun,
             HihokenshashoSaikofuJiyu reason, ChohyoKofuRirekiID chohyoKofuRirekiID) {
-
-        this.saikofuKubun = isNull(saikofuKubun) ? HihokenshashoSaikofuKubun.なし : saikofuKubun;
-        this.reason = isNull(reason) ? HihokenshashoSaikofuJiyu.なし : reason;
+        this.saikofuKubun = saikofuKubun;
+        this.reason = reason;
         this.chohyoKofuRirekiID = chohyoKofuRirekiID;
     }
 
@@ -94,10 +93,6 @@ public class HihokenshashoSaikofu {
      */
     public ChohyoKofuRirekiID getChohyoKofuRirekiID() {
         return this.chohyoKofuRirekiID;
-    }
-
-    private boolean isNull(Object target) {
-        return target == null;
     }
 
     private String simpleNameOf(Class clazz) {

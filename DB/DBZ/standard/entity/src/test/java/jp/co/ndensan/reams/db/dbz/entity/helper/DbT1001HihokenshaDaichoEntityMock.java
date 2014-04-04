@@ -88,9 +88,12 @@ public final class DbT1001HihokenshaDaichoEntityMock {
      * @param lasdecCode 市町村コード
      * @return DbT1001HihokenshaDaichoEntity
      */
-    public static DbT1001HihokenshaDaichoEntity createWith(LasdecCode lasdecCode) {
+    public static DbT1001HihokenshaDaichoEntity createWithKey(
+            LasdecCode lasdecCode, ShikibetsuCode shikibetsuCode, RDateTime timeStamp) {
         DbT1001HihokenshaDaichoEntity entity = create();
         entity.setShichosonCode(lasdecCode);
+        entity.setShikibetsuCode(shikibetsuCode);
+        entity.setShoriTimestamp(timeStamp);
         return entity;
     }
 }

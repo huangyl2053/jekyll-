@@ -4,17 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.business;
 
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoSaikofuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoSaikofuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureiKaijoJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureiTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoikinaiJushochitokureishaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureiTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChohyoKofuRirekiID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
@@ -53,14 +48,13 @@ public class HihokenshaShikakuTest extends DbzTestBase {
     private static final KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(new RString("1234567890"));
     private static final ShikakuHihokenshaKubun hihokenshaKubun = ShikakuHihokenshaKubun.第１号被保険者;
     private static final RDate ichigoGaitoDate = new RDate("20140403");
+    private static final FlexibleDate ichigoDate = new FlexibleDate(ichigoGaitoDate.toString());
 
     @RunWith(Enclosed.class)
     public static class Builder extends DbzTestBase {
 
         @RunWith(Enclosed.class)
         public static class IKaigoShikakuを用いないConstructor {
-
-            private static final FlexibleDate ichigoDate = new FlexibleDate(ichigoGaitoDate.toString());
 
             public static class NullCheck {
 
@@ -544,6 +538,122 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                         ShikakuSoshitsuJiyu shikakuHenkoJiyu = ShikakuSoshitsuJiyu.toValue(kaigoShikaku.get資格喪失事由().getCode());
                         assertThat(shikaku.get資格喪失().getReason(), is(shikakuHenkoJiyu));
                     }
+                }
+            }
+        }
+
+        @RunWith(Enclosed.class)
+        public static class IHihokenshaShikakuを用いるConstructor {
+
+            public static class NullCheck {
+
+                @Test(expected = NullPointerException.class)
+                public void Builderのコンストラクタは_引数の_被保険者資格_がnullのとき_NullPointerExceptionをスローする() {
+                    HihokenshaShikaku.Builder sut = new HihokenshaShikaku.Builder(null);
+                }
+            }
+
+            public static class PublicMethods {
+
+                private HihokenshaShikaku shikaku;
+                private HihokenshaShikaku.Builder sut;
+                private HihokenshaShikaku created;
+
+                @Before
+                public void setUp() {
+                    shikaku = new HihokenshaShikaku.Builder(
+                            lasdecCode, shikibetsuCode, registerTimestamp, hihokenshaKubun, ichigoDate, ShikakuShutoku.NOTHING).build();
+                    sut = new HihokenshaShikaku.Builder(shikaku);
+                    created = sut.build();
+                }
+
+                @Test
+                public void 引数のHihokenshaShikakuのget地方公共団体コードと_生成後のHihokenshaShikakuのget地方公共団体コードは一致する() {
+                    assertThat(created.get地方公共団体コード(), is(shikaku.get地方公共団体コード()));
+                }
+
+                @Test
+                public void 引数のHihokenshaShikakuのget識別コードと_生成後のHihokenshaShikakuのget識別コードは一致する() {
+                    assertThat(created.get識別コード(), is(shikaku.get識別コード()));
+                }
+
+                @Test
+                public void 引数のHihokenshaShikakuのget被保険者台帳登録日時と_生成後のHihokenshaShikakuのget被保険者台帳登録日時は一致する() {
+                    assertThat(created.get被保険者台帳登録日時(), is(shikaku.get被保険者台帳登録日時()));
+                }
+
+                @Test
+                public void 引数のHihokenshaShikakuのget被保険者番号と_生成後のHihokenshaShikakuのget被保険者番号は一致する() {
+                    assertThat(created.get被保険者番号(), is(shikaku.get被保険者番号()));
+                }
+
+                @Test
+                public void 引数のHihokenshaShikakuのget第一号年齢到達日と_生成後のHihokenshaShikakuのget第一号年齢到達日は一致する() {
+                    assertThat(created.get第一号年齢到達日(), is(shikaku.get第一号年齢到達日()));
+                }
+
+                @Test
+                public void 引数のHihokenshaShikakuのget被保険者区分と_生成後のHihokenshaShikakuのget被保険者区分は一致する() {
+                    assertThat(created.get被保険者区分(), is(shikaku.get被保険者区分()));
+                }
+
+                @Test
+                public void 引数のHihokenshaShikakuのhas被保険者資格Atと_生成後のHihokenshaShikakuのhas被保険者資格Atは一致する() {
+                    assertThat(created.has被保険者資格At(ichigoGaitoDate), is(shikaku.has被保険者資格At(ichigoGaitoDate)));
+                }
+
+                @Test
+                public void 引数のHihokenshaShikakuのget資格異動区分と_生成後のHihokenshaShikakuのget資格異動区分は一致する() {
+                    assertThat(created.get資格異動区分(), is(shikaku.get資格異動区分()));
+                }
+
+                @Test
+                public void 引数のHihokenshaShikakuのget資格取得と_生成後のHihokenshaShikakuのget資格取得は一致する() {
+                    assertThat(created.get資格取得(), is(shikaku.get資格取得()));
+                }
+
+                @Test
+                public void 引数のHihokenshaShikakuのget資格喪失と_生成後のHihokenshaShikakuのget資格喪失は一致する() {
+                    assertThat(created.get資格喪失(), is(shikaku.get資格喪失()));
+                }
+
+                @Test
+                public void 引数のHihokenshaShikakuのget資格変更と_生成後のHihokenshaShikakuのget資格変更は一致する() {
+                    assertThat(created.get資格変更(), is(shikaku.get資格変更()));
+                }
+
+                public void 引数のHihokenshaShikakuのget住所地特例適用と_生成後のHihokenshaShikakuのget住所地特例適用は一致する() {
+                    assertThat(created.get住所地特例適用(), is(shikaku.get住所地特例適用()));
+                }
+
+                @Test
+                public void 引数のHihokenshaShikakuのget住所地特例解除と_生成後のHihokenshaShikakuのget住所地特例解除は一致する() {
+                    assertThat(created.get住所地特例解除(), is(shikaku.get住所地特例解除()));
+                }
+
+                @Test
+                public void 引数のHihokenshaShikakuのget住所地特例者区分と_生成後のHihokenshaShikakuのget住所地特例者区分は一致する() {
+                    assertThat(created.get住所地特例者区分(), is(shikaku.get住所地特例者区分()));
+                }
+
+                @Test
+                public void 引数のHihokenshaShikakuのget広域内住所地特例者区分と_生成後のHihokenshaShikakuのget広域内住所地特例者区分は一致する() {
+                    assertThat(created.get広域内住所地特例者区分(), is(shikaku.get広域内住所地特例者区分()));
+                }
+
+                @Test
+                public void 引数のHihokenshaShikakuのget広域内住所地特例措置元市町村コードと_生成後のHihokenshaShikakuのget広域内住所地特例措置元市町村コードは一致する() {
+                    assertThat(created.get広域内住所地特例措置元市町村コード(), is(shikaku.get広域内住所地特例措置元市町村コード()));
+                }
+
+                @Test
+                public void 引数のHihokenshaShikakuのget旧市町村コードと_生成後のHihokenshaShikakuのget旧市町村コードは一致する() {
+                    assertThat(created.get旧市町村コード(), is(shikaku.get旧市町村コード()));
+                }
+
+                @Test
+                public void 引数のHihokenshaShikakuのget被保険者証再交付と_生成後のHihokenshaShikakuのget被保険者証再交付は一致する() {
+                    assertThat(created.get被保険者証再交付(), is(shikaku.get被保険者証再交付()));
                 }
             }
         }

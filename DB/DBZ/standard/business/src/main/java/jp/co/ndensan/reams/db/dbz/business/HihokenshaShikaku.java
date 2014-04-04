@@ -59,9 +59,9 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
         this.registerTimestamp = builder.shoriTimestamp;
         this.hihokenshaNo = builder.theHihokenshaNo;
         this.hihokenshaKubun = builder.hihokenshaKubun;
-        this.shikakuShutoku = builder.shikakuObtain;
-        this.shikakuSoshitsu = builder.shikakuLose;
-        this.shikakuHenko = builder.shikakuChange;
+        this.shikakuShutoku = builder.shutoku;
+        this.shikakuSoshitsu = builder.soshitsu;
+        this.shikakuHenko = builder.henko;
         this.jutokuTekiyo = builder.jutokuTekiyo;
         this.jutokuKaijo = builder.jutokuKaijo;
         this.jutokushaKubun = builder.jutokushaKubun;
@@ -198,9 +198,9 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
         private final FlexibleDate ichigoGaitoDate;
         private IKaigoShikaku kaigoShikaku;
         private KaigoHihokenshaNo theHihokenshaNo = KaigoHihokenshaNo.NULL_VALUE;
-        private ShikakuShutoku shikakuObtain = ShikakuShutoku.NOTHING;
-        private ShikakuSoshitsu shikakuLose = ShikakuSoshitsu.NOTHING;
-        private ShikakuHenko shikakuChange = ShikakuHenko.NOTHING;
+        private ShikakuShutoku shutoku = ShikakuShutoku.NOTHING;
+        private ShikakuSoshitsu soshitsu = ShikakuSoshitsu.NOTHING;
+        private ShikakuHenko henko = ShikakuHenko.NOTHING;
         private JushochitokureiTekiyo jutokuTekiyo = JushochitokureiTekiyo.NOTHING;
         private JushochitokureiKaijo jutokuKaijo = JushochitokureiKaijo.NOTHING;
         private JushochiTokureishaKubun jutokushaKubun = JushochiTokureishaKubun.通常資格者;
@@ -208,6 +208,33 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
         private LasdecCode koikiJutokuOriginLasdecCode = null;
         private LasdecCode theOldLasdecCode = null;
         private HihokenshashoSaikofu saikofu = HihokenshashoSaikofu.NOTHING;
+
+        /**
+         * 既存の{@link IHihokenshaShikaku IHihokenshaShikaku}から、Builderを生成します。
+         *
+         * @param 被保険者資格 {@link IHihokenshaShikaku 被保険者資格}
+         * @throws NullPointerException 引数がnullのとき。
+         */
+        public Builder(IHihokenshaShikaku 被保険者資格) throws NullPointerException {
+            requireNonNull(被保険者資格, errorMessageForE00003With("被保険者資格", simpleNameOf(IHihokenshaShikaku.class)));
+            this.theLasdecCode = 被保険者資格.get地方公共団体コード();
+            this.theShikibetsuCode = 被保険者資格.get識別コード();
+            this.shoriTimestamp = 被保険者資格.get被保険者台帳登録日時();
+            this.hihokenshaKubun = 被保険者資格.get被保険者区分();
+            this.ichigoGaitoDate = 被保険者資格.get第一号年齢到達日();
+            this.kaigoShikaku = 被保険者資格.toKaigoShikaku();
+            this.theHihokenshaNo = 被保険者資格.get被保険者番号();
+            this.shutoku = 被保険者資格.get資格取得();
+            this.soshitsu = 被保険者資格.get資格喪失();
+            this.henko = 被保険者資格.get資格変更();
+            this.jutokuTekiyo = 被保険者資格.get住所地特例適用();
+            this.jutokuKaijo = 被保険者資格.get住所地特例解除();
+            this.jutokushaKubun = 被保険者資格.get住所地特例者区分();
+            this.koikiJutokushaKubun = 被保険者資格.get広域内住所地特例者区分();
+            this.koikiJutokuOriginLasdecCode = 被保険者資格.get広域内住所地特例措置元市町村コード();
+            this.theOldLasdecCode = 被保険者資格.get旧市町村コード();
+            this.saikofu = 被保険者資格.get被保険者証再交付();
+        }
 
         /**
          * 引数の情報を用いて、Builderを生成します。
@@ -224,7 +251,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
                 ShikakuHihokenshaKubun 被保険者区分, FlexibleDate 第1号年齢到達日, ShikakuShutoku 資格取得) throws NullPointerException {
             this(地方公共団体コード, 識別コード, 被保険者台帳登録日時, 被保険者区分, 第1号年齢到達日);
 
-            this.shikakuObtain = requireNonNull(資格取得, errorMessageForE00003With("資格取得", simpleNameOf(ShikakuShutoku.class)));
+            this.shutoku = requireNonNull(資格取得, errorMessageForE00003With("資格取得", simpleNameOf(ShikakuShutoku.class)));
         }
 
         /**
@@ -272,7 +299,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
          * 被保険者資格を生成します。<br />
          * 生成したHihokenshaShikakuの{@link HihokenshaShikaku#toKaigoShikaku() toKaigoShikaku()}で得られるオブジェクトは、
          * もしBuilderの生成にIKaigoShikakuオブジェクトを渡していたとしても、そのオブジェクトと異なる結果を持つことがあります。
-         * それは、Builderによる生成過程で{@link HihokenshaShikaku.Builder#shikakuLose shikakuSoshitsu}等のメソッドにより、
+         * それは、Builderによる生成過程で{@link HihokenshaShikaku.Builder#soshitsu shikakuSoshitsu}等のメソッドにより、
          * コンストラクタが受け取ったIKaigoShikakuが保持する物と異なる値が設定される可能性があるからです。
          * 生整過程での設定内容と生成後のオブジェクトとの整合性をとるために、このメソッドで、IKaigoShikakuは再計算されます。
          *
@@ -305,7 +332,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
             if (isNull(shikakuShutoku)) {
                 throw new IllegalArgumentException(errorMessageForE00001With(simpleNameOf(ShikakuShutoku.class)));
             }
-            this.shikakuObtain = shikakuShutoku;
+            this.shutoku = shikakuShutoku;
             return this;
         }
 
@@ -320,7 +347,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
             if (isNull(shikakuSoshitsu)) {
                 throw new IllegalArgumentException(errorMessageForE00001With(simpleNameOf(ShikakuSoshitsu.class)));
             }
-            this.shikakuLose = shikakuSoshitsu;
+            this.soshitsu = shikakuSoshitsu;
             return this;
         }
 
@@ -335,7 +362,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
             if (isNull(shikakuHenko)) {
                 throw new IllegalArgumentException(errorMessageForE00001With(simpleNameOf(ShikakuHenko.class)));
             }
-            this.shikakuChange = shikakuHenko;
+            this.henko = shikakuHenko;
             return this;
         }
 
@@ -454,8 +481,8 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
 
         private void initializeFromKaigoShikaku() {
             this.theHihokenshaNo = createKaigoHihokenshaNo();
-            this.shikakuObtain = createShikakuShutoku();
-            this.shikakuLose = createShikakuSoshitsu();
+            this.shutoku = createShikakuShutoku();
+            this.soshitsu = createShikakuSoshitsu();
         }
 
         private KaigoHihokenshaNo createKaigoHihokenshaNo() {
@@ -467,13 +494,13 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
         }
 
         private ShikakuShutoku createShikakuShutoku() {
-            ShikakuShutokuJiyu cause = toShikakuSHutokuJiyu(this.kaigoShikaku.get資格取得事由().getCode());
+            ShikakuShutokuJiyu cause = toShikakuShutokuJiyu(this.kaigoShikaku.get資格取得事由().getCode());
             FlexibleDate noticeDate = toFlexibleDate(this.kaigoShikaku.get資格取得届出年月日());
             FlexibleDate actionDate = toFlexibleDate(this.kaigoShikaku.get資格取得年月日());
             return new ShikakuShutoku(cause, noticeDate, actionDate);
         }
 
-        private ShikakuShutokuJiyu toShikakuSHutokuJiyu(RString code) {
+        private ShikakuShutokuJiyu toShikakuShutokuJiyu(RString code) {
             return ShikakuShutokuJiyu.toValue(code);
         }
 
@@ -491,12 +518,12 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
         private void calculateKaigoShikakuFromMember() {
             IKaigoShikaku shikaku = KaigoShikakuFactory.createInstance(
                     this.theShikibetsuCode, HokenShubetsu.介護保険,
-                    toRDateOrMin(this.shikakuObtain.getNoticeDate()),
-                    toRDateOrMin(this.shikakuObtain.getActionDate()),
-                    toIShikakuShutokuJiyu(this.shikakuObtain.getReason().getCode()),
-                    toRDateOrMax(this.shikakuLose.getNoticeDate()),
-                    toRDateOrMax(this.shikakuLose.getActionDate()),
-                    toIShikakuSoshitsuJiyu(this.shikakuLose.getReason().getCode()),
+                    toRDateOrMin(this.shutoku.getNoticeDate()),
+                    toRDateOrMin(this.shutoku.getActionDate()),
+                    toIShikakuShutokuJiyu(this.shutoku.getReason().getCode()),
+                    toRDateOrMax(this.soshitsu.getNoticeDate()),
+                    toRDateOrMax(this.soshitsu.getActionDate()),
+                    toIShikakuSoshitsuJiyu(this.soshitsu.getReason().getCode()),
                     this.theHihokenshaNo.value(),
                     this.theLasdecCode.value(),
                     toRDate(this.ichigoGaitoDate),

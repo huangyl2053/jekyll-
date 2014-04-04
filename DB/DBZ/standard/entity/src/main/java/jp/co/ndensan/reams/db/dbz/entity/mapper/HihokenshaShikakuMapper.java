@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureiKaijo
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureiTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoikinaiJushochitokureishaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChohyoKofuRirekiID;
@@ -28,8 +27,11 @@ import jp.co.ndensan.reams.ur.urz.business.KaigoShikakuFactory;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ShikakuHihokenshaKubun;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -115,24 +117,26 @@ public final class HihokenshaShikakuMapper {
                 entity.getJushochitokureiKaijoTodokedeYMD(),
                 entity.getJushochitokureiKaijoYMD());
         HihokenshashoSaikofu 被保険者証再交付 = toHihokenshashoSaikofu(
-                entity.getHihokennshaKubunCode(),
+                entity.getSaikofuKubun(),
                 entity.getSaikofuJiyuCode(),
                 entity.getChohyoKofuRirekiID());
 
-        HihokenshaShikaku shikaku = new HihokenshaShikaku(
-                kaigoShikaku,
-                entity.getShichosonCode(),
-                entity.getShikibetsuCode(),
-                entity.getShoriTimestamp(),
-                entity.getHihokenshaNo(),
-                ShikakuIdoKubun.toValue(entity.getShikakuIdouKubunCode()),
-                ShikakuHihokenshaKubun.toValue(entity.getHihokennshaKubunCode()),
-                資格変更, 住所地特例適用, 住所地特例解除,
-                JushochiTokureishaKubun.toValue(entity.getJushochiTokureiFlag()),
-                KoikinaiJushochitokureishaKubun.toValue(entity.getKoikinaiJushochiTokureiFlag()),
-                entity.getKoikinaiTokureiSochimotoShichosonCode(),
-                entity.getKyuShichosonCode(),
-                被保険者証再交付);
+        LasdecCode shichosonCode = entity.getShichosonCode();
+        ShikibetsuCode shikibetsuCode = entity.getShikibetsuCode();
+        RDateTime shoriTimestamp = entity.getShoriTimestamp();
+        ShikakuHihokenshaKubun hihokenshaKubun = ShikakuHihokenshaKubun.toValue(entity.getHihokennshaKubunCode());
+        HihokenshaShikaku shikaku =
+                new HihokenshaShikaku.Builder(kaigoShikaku, shichosonCode, shikibetsuCode, shoriTimestamp, hihokenshaKubun).
+                hihokenshaNo(entity.getHihokenshaNo()).
+                shikakuHenko(資格変更).
+                jushochitokureiTekiyo(住所地特例適用).
+                jushochitokureiKaijo(住所地特例解除).
+                jushochiTokureishaKubun(JushochiTokureishaKubun.toValue(entity.getJushochiTokureiFlag())).
+                koikinaiJushochiTokureishaKubun(KoikinaiJushochitokureishaKubun.toValue(entity.getKoikinaiJushochiTokureiFlag())).
+                koikinaiJutokuSochimotoLasdecCode(entity.getKoikinaiTokureiSochimotoShichosonCode()).
+                oldLasdecCode(entity.getKyuShichosonCode()).
+                hihokenshashoSaikofu(被保険者証再交付).
+                build();
 
         return shikaku;
     }
@@ -225,10 +229,10 @@ public final class HihokenshaShikakuMapper {
     }
 
     private static HihokenshashoSaikofu toHihokenshashoSaikofu(RString kubunCode, RString reasonCode, RString chohyoID) {
-        return new HihokenshashoSaikofu(
-                HihokenshashoSaikofuKubun.toValue(kubunCode),
-                HihokenshashoSaikofuJiyu.toValue(reasonCode),
-                isNull(chohyoID) ? null : new ChohyoKofuRirekiID(chohyoID));
+        if (HihokenshashoSaikofuKubun.toValue(kubunCode) == HihokenshashoSaikofuKubun.なし) {
+            return HihokenshashoSaikofu.NOTHING;
+        }
+        return new HihokenshashoSaikofu(HihokenshashoSaikofuJiyu.toValue(reasonCode), new ChohyoKofuRirekiID(chohyoID));
     }
 
     private static boolean isNull(Object target) {
