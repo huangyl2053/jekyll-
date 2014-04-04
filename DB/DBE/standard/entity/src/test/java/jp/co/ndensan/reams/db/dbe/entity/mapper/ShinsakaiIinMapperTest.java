@@ -122,7 +122,7 @@ public class ShinsakaiIinMapperTest {
         @Test
         public void 審査会委員資格にcodeを持つEntityが渡されたとき_審査会委員資格にcodeを持つ審査会委員が返る() {
             sut = ShinsakaiIinMapper.to審査会委員(createEntity());
-            assertThat(sut.get審査会委員資格().get区分コード(), is(審査会委員資格_code_name.get区分コード()));
+            assertThat(sut.get審査会委員資格().getShinsakaiIinShikakuCode(), is(審査会委員資格_code_name.getShinsakaiIinShikakuCode()));
         }
 
         @Test

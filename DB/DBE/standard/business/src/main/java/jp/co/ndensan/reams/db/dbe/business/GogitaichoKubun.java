@@ -30,9 +30,9 @@ public class GogitaichoKubun extends KaigoCodeAssignedItem<GogitaichoKubunCode> 
     /**
      * 合議体長区分を表すコードを返します。
      *
-     * @return 審査員区分コード
+     * @return 合議体長区分コード
      */
-    public GogitaichoKubunCode get区分コード() {
+    public GogitaichoKubunCode getGogitaichoKubunCode() {
         return getExtendedCode();
     }
 }

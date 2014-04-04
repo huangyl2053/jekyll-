@@ -96,13 +96,13 @@ public class GogitaiWariateIinMapperTest {
         @Test
         public void 認定調査員区分コードにiinCodeを持つ合議体割当審査会委員Entityが渡されたとき_認定調査員区分コードにiinCodeを持つ合議体割当委員が返る() {
             sut = GogitaiWariateIinMapper.to合議体割当委員(create合議体割当審査会委員Entity());
-            assertThat(sut.get認定調査員区分().get区分コード(), is(認定調査員区分_iinCode_iinName.get区分コード()));
+            assertThat(sut.get認定調査員区分().getShinsainKubunCode(), is(認定調査員区分_iinCode_iinName.getShinsainKubunCode()));
         }
 
         @Test
         public void 合議体長区分にtaichoCodeを持つ合議体割当審査会委員Entityが渡されたとき_合議体長区分にtaichoCodeを持つ合議体割当委員が返る() {
             sut = GogitaiWariateIinMapper.to合議体割当委員(create合議体割当審査会委員Entity());
-            assertThat(sut.get合議体長区分().get区分コード(), is(合議体長区分_taichoCode_taichoName.get区分コード()));
+            assertThat(sut.get合議体長区分().getGogitaichoKubunCode(), is(合議体長区分_taichoCode_taichoName.getGogitaichoKubunCode()));
         }
 
         @Test

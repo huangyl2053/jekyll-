@@ -30,9 +30,9 @@ public class ShinsakaiIinShikaku extends KaigoCodeAssignedItem<ShinsakaiIinShika
     /**
      * 審査会委員資格を表すコードを返します。
      *
-     * @return 審査会委員資格
+     * @return 審査会委員資格コード
      */
-    public ShinsakaiIinShikakuCode get区分コード() {
+    public ShinsakaiIinShikakuCode getShinsakaiIinShikakuCode() {
         return getExtendedCode();
     }
 }

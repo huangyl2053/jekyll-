@@ -32,7 +32,7 @@ public class ShinsainKubun extends KaigoCodeAssignedItem<ShinsainKubunCode> {
      *
      * @return 審査員区分コード
      */
-    public ShinsainKubunCode get区分コード() {
+    public ShinsainKubunCode getShinsainKubunCode() {
         return getExtendedCode();
     }
 }

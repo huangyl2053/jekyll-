@@ -29,7 +29,7 @@ public class ShinsakaiIinShikakuTest {
         @Test
         public void get区分コードと_getCodeで取得できる内容が_同一である() {
             sut = new ShinsakaiIinShikaku(区分コード, 名称, 略称);
-            assertThat(sut.get区分コード().value(), is(sut.getCode().value()));
+            assertThat(sut.getShinsakaiIinShikakuCode().value(), is(sut.getCode().value()));
         }
     }
 }

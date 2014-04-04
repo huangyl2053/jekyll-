@@ -31,7 +31,7 @@ public class GogitaichoKubunTest {
         @Test
         public void get区分コードとgetCodeで取得した内容は_同一になる() {
             sut = new GogitaichoKubun(区分コード, 名称, 略称);
-            assertThat(sut.get区分コード().value(), is(sut.getCode().value()));
+            assertThat(sut.getGogitaichoKubunCode().value(), is(sut.getCode().value()));
         }
     }
 }
