@@ -15,7 +15,7 @@ import java.util.List;
 public class ShinsakaiIinList implements Iterable<ShinsakaiIin> {
     //TODO n8178 城間篤人　審査会チケットで必要な分を実装。後の審査会委員チケットで修正される可能性がある 2014年4月
 
-    private List<ShinsakaiIin> 委員List;
+    private final List<ShinsakaiIin> 委員List;
 
     /**
      * 引数から審査会委員のリストを受け取り、インスタンスを生成します。
