@@ -90,13 +90,13 @@ public final class ShinsakaiWariateIinMapper {
 
         List<ShinsakaiWariateIin> 審査会員List = new ArrayList<>();
         for (DbT5106ShinsakaiWariateIinJohoEntity 審査会割当委員Entity : 審査会割当委員EntityList) {
-            ShinsakaiIin 委員 = get対応委員(審査会割当委員Entity, 委員List);
+            ShinsakaiIin 委員 = find対応委員(審査会割当委員Entity, 委員List);
             審査会員List.add(to審査会割当委員(審査会割当委員Entity, 委員, 審査会情報));
         }
         return new ShinsakaiWariateIinList(審査会員List);
     }
 
-    private static ShinsakaiIin get対応委員(DbT5106ShinsakaiWariateIinJohoEntity 審査会割当委員Entity, ShinsakaiIinList 委員List)
+    private static ShinsakaiIin find対応委員(DbT5106ShinsakaiWariateIinJohoEntity 審査会割当委員Entity, ShinsakaiIinList 委員List)
             throws IllegalArgumentException {
         for (ShinsakaiIin 委員 : 委員List) {
             if (is委員コードが一致(審査会割当委員Entity, 委員)) {
