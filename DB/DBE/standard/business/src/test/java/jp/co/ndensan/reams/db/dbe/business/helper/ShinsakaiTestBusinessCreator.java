@@ -90,7 +90,7 @@ public final class ShinsakaiTestBusinessCreator {
      */
     public static ShinsakaiDetail create審査会情報(int 審査会開催番号, String 審査会開催年月日) {
         return new ShinsakaiDetail(new ShinsakaiKaisaiNo(審査会開催番号),
-                new ShinsakaiKaisaiYMD(new FlexibleDate(審査会開催年月日)), new ShinsakaiKaishiTime("0000"),
+                new ShinsakaiKaisaiYMD(new FlexibleDate(審査会開催年月日)), new ShinsakaiKaishiTime(new TimeString("0000")),
                 new TimeString("2359"), create合議体情報(1), create審査会開催場所("A001"), 6, 7, 8, 9,
                 GogitaiSeishinkaIshiSonzaiKubun.存在, GogitaiDummyKubun.ダミー, new FlexibleDate("19800101"),
                 ShinsakaiKyukaiKubun.休会, 10);

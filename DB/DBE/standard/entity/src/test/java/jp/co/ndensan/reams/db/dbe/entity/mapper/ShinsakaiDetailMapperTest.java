@@ -78,7 +78,7 @@ public class ShinsakaiDetailMapperTest {
 
         @Test
         public void to審査会情報で返された審査会情報が持つ_審査会開始時間は_0830になる() {
-            assertThat(result.get審査会開始時間(), is(new ShinsakaiKaishiTime(new RString("0830"))));
+            assertThat(result.get審査会開始時間(), is(new ShinsakaiKaishiTime(new TimeString("0830"))));
         }
 
         @Test

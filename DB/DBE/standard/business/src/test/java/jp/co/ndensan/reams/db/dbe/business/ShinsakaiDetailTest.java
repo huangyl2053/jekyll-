@@ -54,7 +54,7 @@ public class ShinsakaiDetailTest {
         public void setUp() {
             審査会開催番号 = new ShinsakaiKaisaiNo(1);
             審査会開催年月日 = new ShinsakaiKaisaiYMD(new FlexibleDate("19800101"));
-            審査会開始時間 = new ShinsakaiKaishiTime("1234");
+            審査会開始時間 = new ShinsakaiKaishiTime(new TimeString("1234"));
             審査会終了時間 = new TimeString("2345");
             合議体情報 = mock(GogitaiDetail.class);
             開催場所 = mock(ShinsakaiKaisaiBasho.class);
@@ -163,7 +163,7 @@ public class ShinsakaiDetailTest {
         public void setUp() {
             審査会開催番号 = new ShinsakaiKaisaiNo(1);
             審査会開催年月日 = new ShinsakaiKaisaiYMD(new FlexibleDate("19800101"));
-            審査会開始時間 = new ShinsakaiKaishiTime("1234");
+            審査会開始時間 = new ShinsakaiKaishiTime(new TimeString("1234"));
             審査会終了時間 = new TimeString("2345");
             合議体情報 = mock(GogitaiDetail.class);
             開催場所 = mock(ShinsakaiKaisaiBasho.class);
@@ -219,7 +219,7 @@ public class ShinsakaiDetailTest {
 
         @Test
         public void 審査会開始時間が違う値の場合_falseが返る() {
-            sut2 = new ShinsakaiDetail(審査会開催番号, 審査会開催年月日, new ShinsakaiKaishiTime("0012"),
+            sut2 = new ShinsakaiDetail(審査会開催番号, 審査会開催年月日, new ShinsakaiKaishiTime(new TimeString("0012")),
                     審査会終了時間, 合議体情報, 開催場所,
                     審査会予定定員, 審査会最大定員, 審査会自動割当定員, 審査会委員定員, 精神科医師存在区分, ダミー区分,
                     審査会資料作成年月日, 休会区分, 審査会割当済み人数);

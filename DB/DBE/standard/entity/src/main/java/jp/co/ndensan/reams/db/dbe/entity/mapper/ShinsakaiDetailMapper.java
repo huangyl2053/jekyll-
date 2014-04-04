@@ -45,7 +45,7 @@ public final class ShinsakaiDetailMapper {
 
         return new ShinsakaiDetail(new ShinsakaiKaisaiNo(審査会Entity.getShinsakaiKaisaiNo()),
                 new ShinsakaiKaisaiYMD(審査会Entity.getShinsakaiKaisaiYMD()),
-                new ShinsakaiKaishiTime(審査会Entity.getShinsakaiKaishiTime()),
+                new ShinsakaiKaishiTime(new TimeString(審査会Entity.getShinsakaiKaishiTime())),
                 new TimeString(審査会Entity.getShinsakaiShuryoTime()),
                 合議体情報,
                 開催場所,
@@ -73,7 +73,7 @@ public final class ShinsakaiDetailMapper {
         DbT5101ShinsakaiJohoEntity entity = new DbT5101ShinsakaiJohoEntity();
         entity.setShinsakaiKaisaiNo(審査会情報.get審査会開催番号().value());
         entity.setShinsakaiKaisaiYMD(審査会情報.get審査会開催年月日().value());
-        entity.setShinsakaiKaishiTime(審査会情報.get審査会開始時間().value());
+        entity.setShinsakaiKaishiTime(審査会情報.get審査会開始時間().toRString());
         entity.setShinsakaiShuryoTime(審査会情報.get審査会終了時間().value());
         entity.setShinsakaiKaisaiBashoCode(審査会情報.get合議体情報().get審査会開催場所().get開催場所コード().value());
         entity.setGogitaiNo(審査会情報.get合議体情報().get合議体番号().value());
