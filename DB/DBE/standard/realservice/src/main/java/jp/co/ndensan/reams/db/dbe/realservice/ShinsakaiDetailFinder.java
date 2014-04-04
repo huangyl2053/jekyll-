@@ -61,12 +61,12 @@ public class ShinsakaiDetailFinder {
      */
     public ShinsakaiDetail get審査会情報(ShinsakaiKaisaiNo 開催番号, ShinsakaiKaisaiDate 開催年月日) {
         DbT5101ShinsakaiJohoEntity entity = dac.select(開催番号, 開催年月日);
-        ShinsakaiKaisaiBasho 開催場所 = get開催場所(entity);
+        ShinsakaiKaisaiBasho 開催場所 = get審査会開催場所(entity);
         GogitaiDetail 合議体情報 = get合議体情報(entity);
         return ShinsakaiDetailMapper.to審査会情報(entity, 開催場所, 合議体情報);
     }
 
-    private ShinsakaiKaisaiBasho get開催場所(DbT5101ShinsakaiJohoEntity entity) {
+    private ShinsakaiKaisaiBasho get審査会開催場所(DbT5101ShinsakaiJohoEntity entity) {
         return 開催場所Manager.get審査会開催場所(new ShinsakaiKaisaiBashoCode(entity.getShinsakaiKaisaiBashoCode()));
     }
 
@@ -90,7 +90,7 @@ public class ShinsakaiDetailFinder {
     private List<ShinsakaiDetail> create審査会情報(List<DbT5101ShinsakaiJohoEntity> entityList) {
         List<ShinsakaiDetail> 審査会情報List = new ArrayList<>();
         for (DbT5101ShinsakaiJohoEntity entity : entityList) {
-            ShinsakaiKaisaiBasho 開催場所 = get開催場所(entity);
+            ShinsakaiKaisaiBasho 開催場所 = get審査会開催場所(entity);
             GogitaiDetail 合議体情報 = get合議体情報(entity);
             審査会情報List.add(ShinsakaiDetailMapper.to審査会情報(entity, 開催場所, 合議体情報));
         }
