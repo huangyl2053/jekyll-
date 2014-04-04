@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiChosaIraiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.INinteichosaKekkaTorikomiTaishoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
+import jp.co.ndensan.reams.ur.urz.realservice.IShikibetsuTaishoFinder;
 import jp.co.ndensan.reams.ur.urz.realservice.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -37,6 +38,8 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
 
     private final INinteiChosaIraiJohoDac chosaIraiJohoDac;
     private final INinteichosaKekkaTorikomiTaishoshaDac torikomiTaishoshaDac;
+    private final KaigoNinteichosainManager kaigoNinteichosainManager;
+    private final IShikibetsuTaishoFinder shikibetsuTaishoFinder;
 
     /**
      * コンストラクタです。
@@ -44,6 +47,8 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
     public NinteichosaKekkaTorikomiTaishoshaManager() {
         chosaIraiJohoDac = InstanceProvider.create(INinteiChosaIraiJohoDac.class);
         torikomiTaishoshaDac = InstanceProvider.create(INinteichosaKekkaTorikomiTaishoshaDac.class);
+        kaigoNinteichosainManager = new KaigoNinteichosainManager();
+        shikibetsuTaishoFinder = ShikibetsuTaishoService.getShikibetsuTaishoFinder();
     }
 
     /**
@@ -51,12 +56,18 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
      *
      * @param chosaIraiJohoDac chosaIraiJohoDac
      * @param torikomiTaishoshaDac torikomiTaishoshaDac
+     * @param kaigoNinteichosainManager kaigoNinteichosainManager
+     * @param shikibetsuTaishoFinder shikibetsuTaishoFinder
      */
     NinteichosaKekkaTorikomiTaishoshaManager(
             INinteiChosaIraiJohoDac chosaIraiJohoDac,
-            INinteichosaKekkaTorikomiTaishoshaDac torikomiTaishoshaDac) {
+            INinteichosaKekkaTorikomiTaishoshaDac torikomiTaishoshaDac,
+            KaigoNinteichosainManager kaigoNinteichosainManager,
+            IShikibetsuTaishoFinder shikibetsuTaishoFinder) {
         this.chosaIraiJohoDac = chosaIraiJohoDac;
         this.torikomiTaishoshaDac = torikomiTaishoshaDac;
+        this.kaigoNinteichosainManager = kaigoNinteichosainManager;
+        this.shikibetsuTaishoFinder = shikibetsuTaishoFinder;
     }
 
     /**
@@ -120,7 +131,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
             KaigoNinteichosain kaigoNinteichosain = get介護認定調査員(
                     shinseiJohoEntity,
                     iraiJohoEntity);
-            IKojin kojin = ShikibetsuTaishoService.getShikibetsuTaishoFinder().get識別対象(
+            IKojin kojin = shikibetsuTaishoFinder.get識別対象(
                     shinseiJohoEntity.getShikibetsuCode()).to個人();
 
             list.add(NinteichosaKekkaTorikomiTaishoshaMapper.toNinteichosaKekkaTorikomiTaishosha(
@@ -149,7 +160,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
     private KaigoNinteichosain get介護認定調査員(
             DbT5001NinteiShinseiJohoEntity shinseiJohoEntity,
             DbT5006NinteichosaIraiJohoEntity iraiJohoEntity) {
-        return new KaigoNinteichosainManager().get介護認定調査員(
+        return kaigoNinteichosainManager.get介護認定調査員(
                 shinseiJohoEntity.getShoKisaiHokenshaNo(),
                 iraiJohoEntity.getNinteichosaItakusakiCode(),
                 new KaigoNinteichosainNo(iraiJohoEntity.getChousainCode().value()));
