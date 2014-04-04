@@ -107,15 +107,6 @@ public final class ShinsakaiWariateIinMapper {
     }
 
     private static boolean is委員コードが一致(DbT5106ShinsakaiWariateIinJohoEntity 審査会割当委員Entity, ShinsakaiIin 委員) {
-        if (委員.get委員コード().value().equals(new RString("iin01"))) {
-            return true;
-        }
-        if (委員.get委員コード().value().equals(new RString("iin02"))) {
-            return true;
-        }
-        if (委員.get委員コード().value().equals(new RString("iin03"))) {
-            return true;
-        }
         return 委員.get委員コード().value().equals(審査会割当委員Entity.getShinsakaiIinCode());
     }
 
