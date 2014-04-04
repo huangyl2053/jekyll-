@@ -9,7 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiDate;
 
 /**
  * 審査会のListを表すクラスです。
@@ -38,7 +38,7 @@ public class ShinsakaiList implements Iterable<Shinsakai> {
      * @return 審査会
      * @throws IllegalArgumentException 対応する審査会が存在しないとき
      */
-    public Shinsakai get審査会(ShinsakaiKaisaiNo 開催番号, ShinsakaiKaisaiYMD 開催年月日)
+    public Shinsakai get審査会(ShinsakaiKaisaiNo 開催番号, ShinsakaiKaisaiDate 開催年月日)
             throws IllegalArgumentException {
         for (Shinsakai 審査会 : 審査会List) {
             if (isキー項目が一致(審査会, 開催番号, 開催年月日)) {
@@ -48,7 +48,7 @@ public class ShinsakaiList implements Iterable<Shinsakai> {
         throw new IllegalArgumentException(Messages.E00006.replace("対応する審査会").getMessage());
     }
 
-    private boolean isキー項目が一致(Shinsakai 審査会, ShinsakaiKaisaiNo 開催番号, ShinsakaiKaisaiYMD 開催年月日) {
+    private boolean isキー項目が一致(Shinsakai 審査会, ShinsakaiKaisaiNo 開催番号, ShinsakaiKaisaiDate 開催年月日) {
         if (!審査会.get審査会情報().get審査会開催番号().equals(開催番号)) {
             return false;
         }

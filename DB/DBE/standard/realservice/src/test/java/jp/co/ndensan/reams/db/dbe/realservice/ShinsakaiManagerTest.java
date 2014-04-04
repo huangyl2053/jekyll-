@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinList;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiList;
 import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiTestBusinessCreator;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiDate;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5101ShinsakaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiTestEntityCreator;
@@ -49,14 +49,14 @@ public class ShinsakaiManagerTest {
 
         @Test
         public void 開催番号と開催年月日を指定して_審査会の情報を取得できる() {
-            Shinsakai result = sut.get審査会(new ShinsakaiKaisaiNo(1), new ShinsakaiKaisaiYMD(new FlexibleDate("19990101")));
+            Shinsakai result = sut.get審査会(new ShinsakaiKaisaiNo(1), new ShinsakaiKaisaiDate(new FlexibleDate("19990101")));
             assertThat(result.get審査会情報().get審査会開催番号().value(), is(1));
         }
 
         private static ShinsakaiDetailFinder create審査会情報FinderMock() {
             ShinsakaiDetailFinder 審査会情報Finder = mock(ShinsakaiDetailFinder.class);
             ShinsakaiDetail 審査会情報 = ShinsakaiTestBusinessCreator.create審査会情報(1, "19990101");
-            when(審査会情報Finder.get審査会情報(any(ShinsakaiKaisaiNo.class), any(ShinsakaiKaisaiYMD.class))).thenReturn(審査会情報);
+            when(審査会情報Finder.get審査会情報(any(ShinsakaiKaisaiNo.class), any(ShinsakaiKaisaiDate.class))).thenReturn(審査会情報);
             return 審査会情報Finder;
         }
     }
@@ -70,14 +70,14 @@ public class ShinsakaiManagerTest {
 
         @Test
         public void 開催年月日を指定して_その日に開催される審査会が2件取得できる() {
-            ShinsakaiList result = sut.get開催審査会List(new ShinsakaiKaisaiYMD(new FlexibleDate("19990101")));
+            ShinsakaiList result = sut.get開催審査会List(new ShinsakaiKaisaiDate(new FlexibleDate("19990101")));
             assertThat(result.size(), is(2));
         }
 
         private static ShinsakaiDetailFinder create審査会情報FinderMock(int 件数) {
             ShinsakaiDetailFinder 審査会情報Finder = mock(ShinsakaiDetailFinder.class);
             List<ShinsakaiDetail> 審査会情報 = create審査会割当委員List(件数);
-            when(審査会情報Finder.get開催審査会情報(any(ShinsakaiKaisaiYMD.class))).thenReturn(審査会情報);
+            when(審査会情報Finder.get開催審査会情報(any(ShinsakaiKaisaiDate.class))).thenReturn(審査会情報);
             return 審査会情報Finder;
         }
     }
@@ -189,7 +189,7 @@ public class ShinsakaiManagerTest {
         ShinsakaiWariateIinJohoDac 割当委員情報Dac = mock(ShinsakaiWariateIinJohoDac.class);
         List<DbT5106ShinsakaiWariateIinJohoEntity> entityList =
                 ShinsakaiTestEntityCreator.create審査会割当委員情報EntityListSpy(1, "19990101", "iin01", "iin02", "iin03", "iin04");
-        when(割当委員情報Dac.select(any(ShinsakaiKaisaiNo.class), any(ShinsakaiKaisaiYMD.class))).thenReturn(entityList);
+        when(割当委員情報Dac.select(any(ShinsakaiKaisaiNo.class), any(ShinsakaiKaisaiDate.class))).thenReturn(entityList);
         return 割当委員情報Dac;
     }
 }

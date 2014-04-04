@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKyukaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiDate;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaishiTime;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
 import static java.util.Objects.requireNonNull;
@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShinsakaiDetail {
 
     private final ShinsakaiKaisaiNo 審査会開催番号;
-    private final ShinsakaiKaisaiYMD 審査会開催年月日;
+    private final ShinsakaiKaisaiDate 審査会開催年月日;
     private final ShinsakaiKaishiTime 審査会開始時間;
     private final TimeString 審査会終了時間;
     private final GogitaiDetail 合議体情報;
@@ -63,7 +63,7 @@ public class ShinsakaiDetail {
      * @throws IllegalArgumentException
      * 審査会予定定員、審査会最大定員、審査会自動割当定員、審査会委員定員、審査会割当済み人数に0より小さい数字が渡されたとき
      */
-    public ShinsakaiDetail(ShinsakaiKaisaiNo 審査会開催番号, ShinsakaiKaisaiYMD 審査会開催年月日,
+    public ShinsakaiDetail(ShinsakaiKaisaiNo 審査会開催番号, ShinsakaiKaisaiDate 審査会開催年月日,
             ShinsakaiKaishiTime 審査会開始時間, TimeString 審査会終了時間, GogitaiDetail 合議体情報, ShinsakaiKaisaiBasho 開催場所,
             int 審査会予定定員, int 審査会最大定員, int 審査会自動割当定員, int 審査会委員定員,
             GogitaiSeishinkaIshiSonzaiKubun 精神科医師存在区分, GogitaiDummyKubun ダミー区分, FlexibleDate 審査会資料作成年月日,
@@ -120,7 +120,7 @@ public class ShinsakaiDetail {
      *
      * @return 審査会開催年月日
      */
-    public ShinsakaiKaisaiYMD get審査会開催年月日() {
+    public ShinsakaiKaisaiDate get審査会開催年月日() {
         return 審査会開催年月日;
     }
 

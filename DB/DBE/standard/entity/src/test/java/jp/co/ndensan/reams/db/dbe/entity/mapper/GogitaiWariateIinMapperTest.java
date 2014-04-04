@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiDate;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5107GogitaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.relate.GogitaiWariateShinsakaiIinEntity;
@@ -45,7 +45,7 @@ public class GogitaiWariateIinMapperTest {
     private static GogitaiNo 合議体番号_1 = new GogitaiNo(1);
     private static ShinsakaiIinCode 委員コード_iin01 = new ShinsakaiIinCode(new RString("iin01"));
     private static ShinsakaiIin 委員情報_iin01 = create審査会委員Mock();
-    private static GogitaiYukoKikanKaishiYMD 開始年月日_19991212 = new GogitaiYukoKikanKaishiYMD("19991212");
+    private static GogitaiYukoKikanKaishiDate 開始年月日_19991212 = new GogitaiYukoKikanKaishiDate("19991212");
     private static FlexibleDate 終了年月日_20101212 = new FlexibleDate("20101212");
     private static ShinsainKubun 認定調査員区分_iinCode_iinName =
             new ShinsainKubun(new Code("iinCode"), new RString("iinName"), new RString("ryakusho"));

@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKyukaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiDate;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaishiTime;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5101ShinsakaiJohoEntity;
@@ -44,7 +44,7 @@ public final class ShinsakaiDetailMapper {
         }
 
         return new ShinsakaiDetail(new ShinsakaiKaisaiNo(審査会Entity.getShinsakaiKaisaiNo()),
-                new ShinsakaiKaisaiYMD(審査会Entity.getShinsakaiKaisaiYMD()),
+                new ShinsakaiKaisaiDate(審査会Entity.getShinsakaiKaisaiYMD()),
                 new ShinsakaiKaishiTime(new TimeString(審査会Entity.getShinsakaiKaishiTime())),
                 new TimeString(審査会Entity.getShinsakaiShuryoTime()),
                 合議体情報,

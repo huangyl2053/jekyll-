@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  *
  * @author n8178 城間篤人
  */
-public class ShinsakaiKaisaiYMD implements IValueObject<FlexibleDate>, Comparable<ShinsakaiKaisaiYMD> {
+public class ShinsakaiKaisaiDate implements IValueObject<FlexibleDate>, Comparable<ShinsakaiKaisaiDate> {
 
     private final FlexibleDate 審査会開催年月日;
 
@@ -25,7 +25,7 @@ public class ShinsakaiKaisaiYMD implements IValueObject<FlexibleDate>, Comparabl
      * @param 審査会開催年月日 審査会開催年月日
      * @throws NullPointerException 引数にnullが渡されたとき
      */
-    public ShinsakaiKaisaiYMD(FlexibleDate 審査会開催年月日) throws NullPointerException {
+    public ShinsakaiKaisaiDate(FlexibleDate 審査会開催年月日) throws NullPointerException {
         requireNonNull(審査会開催年月日, Messages.E00003.replace("審査会開催年月日", getClass().getName()).getMessage());
         this.審査会開催年月日 = 審査会開催年月日;
     }
@@ -36,7 +36,7 @@ public class ShinsakaiKaisaiYMD implements IValueObject<FlexibleDate>, Comparabl
     }
 
     @Override
-    public int compareTo(ShinsakaiKaisaiYMD target) {
+    public int compareTo(ShinsakaiKaisaiDate target) {
         return this.審査会開催年月日.compareTo(target.value());
     }
 
@@ -45,7 +45,7 @@ public class ShinsakaiKaisaiYMD implements IValueObject<FlexibleDate>, Comparabl
         if (isNull(比較対象) || isNotSameClass(比較対象.getClass())) {
             return false;
         }
-        return hasSameValue((ShinsakaiKaisaiYMD) 比較対象);
+        return hasSameValue((ShinsakaiKaisaiDate) 比較対象);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class ShinsakaiKaisaiYMD implements IValueObject<FlexibleDate>, Comparabl
         return clazz != this.getClass();
     }
 
-    private boolean hasSameValue(ShinsakaiKaisaiYMD target) {
+    private boolean hasSameValue(ShinsakaiKaisaiDate target) {
         return target.value().equals(this.審査会開催年月日);
     }
 }

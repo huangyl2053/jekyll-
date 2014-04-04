@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiDate;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5107GogitaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.relate.GogitaiWariateShinsakaiIinEntity;
@@ -67,13 +67,13 @@ public class GogitaiWariateIinManagerTest {
         @Test
         public void Dacから3件のリストを取得できるとき_size3の合議体割当委員リストが取得できる() {
             sut = new GogitaiWariateIinManager(create合議体割当委員DacMock(3), null);
-            assertThat(sut.get有効割当委員List(new GogitaiYukoKikanKaishiYMD("19990101")).size(), is(3));
+            assertThat(sut.get有効割当委員List(new GogitaiYukoKikanKaishiDate("19990101")).size(), is(3));
         }
 
         private GogitaiWariateShinsakaiIinDac create合議体割当委員DacMock(int 件数) {
             GogitaiWariateShinsakaiIinDac dac = mock(GogitaiWariateShinsakaiIinDac.class);
             List<GogitaiWariateShinsakaiIinEntity> 合議体割当委員EntityList = create合議体割当委員EntityList(件数);
-            when(dac.select(any(GogitaiYukoKikanKaishiYMD.class))).thenReturn(合議体割当委員EntityList);
+            when(dac.select(any(GogitaiYukoKikanKaishiDate.class))).thenReturn(合議体割当委員EntityList);
             return dac;
         }
     }
@@ -83,13 +83,13 @@ public class GogitaiWariateIinManagerTest {
         @Test
         public void Dacから3件のリストを取得できるとき_size3の合議体割当委員リストが取得できる() {
             sut = new GogitaiWariateIinManager(create合議体割当委員DacMock(2), null);
-            assertThat(sut.get合議体割当委員List(new GogitaiNo(1), new GogitaiYukoKikanKaishiYMD("19990101")).size(), is(2));
+            assertThat(sut.get合議体割当委員List(new GogitaiNo(1), new GogitaiYukoKikanKaishiDate("19990101")).size(), is(2));
         }
 
         private GogitaiWariateShinsakaiIinDac create合議体割当委員DacMock(int 件数) {
             GogitaiWariateShinsakaiIinDac dac = mock(GogitaiWariateShinsakaiIinDac.class);
             List<GogitaiWariateShinsakaiIinEntity> 合議体割当委員EntityList = create合議体割当委員EntityList(件数);
-            when(dac.select(any(GogitaiNo.class), any(GogitaiYukoKikanKaishiYMD.class))).thenReturn(合議体割当委員EntityList);
+            when(dac.select(any(GogitaiNo.class), any(GogitaiYukoKikanKaishiDate.class))).thenReturn(合議体割当委員EntityList);
             return dac;
         }
     }
@@ -144,7 +144,7 @@ public class GogitaiWariateIinManagerTest {
     }
 
     private static GogitaiDetail create合議体情報(int 合議体番号, String 開始年月日) {
-        return new GogitaiDetail(new GogitaiNo(合議体番号), RString.EMPTY, new GogitaiYukoKikanKaishiYMD(開始年月日),
+        return new GogitaiDetail(new GogitaiNo(合議体番号), RString.EMPTY, new GogitaiYukoKikanKaishiDate(開始年月日),
                 new FlexibleDate("20011231"), mock(Range.class), mock(ShinsakaiKaisaiBasho.class), 3, 4, 5,
                 GogitaiSeishinkaIshiSonzaiKubun.存在, GogitaiDummyKubun.ダミー);
     }

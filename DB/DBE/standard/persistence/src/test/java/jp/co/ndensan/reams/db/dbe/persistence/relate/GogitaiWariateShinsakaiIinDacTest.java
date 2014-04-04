@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.relate;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiDate;
 import jp.co.ndensan.reams.db.dbe.entity.relate.GogitaiWariateShinsakaiIinEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.GogitaiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.GogitaiWariateDac;
@@ -58,25 +58,25 @@ public class GogitaiWariateShinsakaiIinDacTest {
 
         @Test
         public void 取得した合議体割当Entityが持つ_合議体番号が1になる() {
-            List<GogitaiWariateShinsakaiIinEntity> result = sut.select(new GogitaiNo(1), new GogitaiYukoKikanKaishiYMD("19990101"));
+            List<GogitaiWariateShinsakaiIinEntity> result = sut.select(new GogitaiNo(1), new GogitaiYukoKikanKaishiDate("19990101"));
             assertThat(result.get(0).get合議体割当Entity().getGogitaiNo(), is(1));
         }
 
         @Test
         public void 取得した審査会委員Entityが持つ_委員コードが_iin01になる() {
-            List<GogitaiWariateShinsakaiIinEntity> result = sut.select(new GogitaiNo(1), new GogitaiYukoKikanKaishiYMD("19990101"));
+            List<GogitaiWariateShinsakaiIinEntity> result = sut.select(new GogitaiNo(1), new GogitaiYukoKikanKaishiDate("19990101"));
             assertThat(result.get(0).get審査会委員Entity().getShinsakaiIinCode(), is(new RString("iin01")));
         }
 
         @Test
         public void 取得した合議体情報Entityが持つ_合議体番号が1になる() {
-            List<GogitaiWariateShinsakaiIinEntity> result = sut.select(new GogitaiNo(1), new GogitaiYukoKikanKaishiYMD("19990101"));
+            List<GogitaiWariateShinsakaiIinEntity> result = sut.select(new GogitaiNo(1), new GogitaiYukoKikanKaishiDate("19990101"));
             assertThat(result.get(0).get合議体情報Entity().getGogitaiNo(), is(1));
         }
 
         @Test
         public void 取得した開催場所Entityが持つ_合議体番号が1になる() {
-            List<GogitaiWariateShinsakaiIinEntity> result = sut.select(new GogitaiNo(1), new GogitaiYukoKikanKaishiYMD("19990101"));
+            List<GogitaiWariateShinsakaiIinEntity> result = sut.select(new GogitaiNo(1), new GogitaiYukoKikanKaishiDate("19990101"));
             assertThat(result.get(0).get開催場所Entity().getShinsakaiKaisaiBashoCode(), is(new RString("basho01")));
         }
     }
@@ -163,13 +163,13 @@ public class GogitaiWariateShinsakaiIinDacTest {
 
         @Test
         public void 引数に19990214を指定した場合_4件のリストが取得できる() {
-            List<GogitaiWariateShinsakaiIinEntity> result = sut.select(new GogitaiYukoKikanKaishiYMD("19990214"));
+            List<GogitaiWariateShinsakaiIinEntity> result = sut.select(new GogitaiYukoKikanKaishiDate("19990214"));
             assertThat(result.size(), is(4));
         }
 
         @Test
         public void 引数に20020314を指定した場合_2件のリストが取得できる() {
-            List<GogitaiWariateShinsakaiIinEntity> result = sut.select(new GogitaiYukoKikanKaishiYMD("20020314"));
+            List<GogitaiWariateShinsakaiIinEntity> result = sut.select(new GogitaiYukoKikanKaishiDate("20020314"));
             assertThat(result.size(), is(2));
         }
     }
@@ -191,13 +191,13 @@ public class GogitaiWariateShinsakaiIinDacTest {
 
         @Test
         public void 引数に合議体番号1_開始年月日に19990101を指定した場合_3件のリストが取得できる() {
-            List<GogitaiWariateShinsakaiIinEntity> result = sut.select(new GogitaiNo(1), new GogitaiYukoKikanKaishiYMD("19990101"));
+            List<GogitaiWariateShinsakaiIinEntity> result = sut.select(new GogitaiNo(1), new GogitaiYukoKikanKaishiDate("19990101"));
             assertThat(result.size(), is(3));
         }
 
         @Test
         public void 引数に合議体番号2_開始年月日に20000101を指定した場合_1件のリストが取得できる() {
-            List<GogitaiWariateShinsakaiIinEntity> result = sut.select(new GogitaiNo(2), new GogitaiYukoKikanKaishiYMD("20000101"));
+            List<GogitaiWariateShinsakaiIinEntity> result = sut.select(new GogitaiNo(2), new GogitaiYukoKikanKaishiDate("20000101"));
             assertThat(result.size(), is(1));
         }
     }

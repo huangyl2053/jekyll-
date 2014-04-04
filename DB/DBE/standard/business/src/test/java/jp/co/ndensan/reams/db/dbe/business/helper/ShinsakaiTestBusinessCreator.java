@@ -26,12 +26,12 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinShukkets
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKaisaiBashoJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKyukaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiDate;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiChiku;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiDate;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaishiTime;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
@@ -65,7 +65,7 @@ public final class ShinsakaiTestBusinessCreator {
      * @return 合議体情報
      */
     public static GogitaiDetail create合議体情報(int 合議体番号) {
-        return new GogitaiDetail(new GogitaiNo(合議体番号), RString.EMPTY, new GogitaiYukoKikanKaishiYMD("19990101"),
+        return new GogitaiDetail(new GogitaiNo(合議体番号), RString.EMPTY, new GogitaiYukoKikanKaishiDate("19990101"),
                 FlexibleDate.MAX, new Range(new TimeString("0000"), new TimeString("2359")),
                 create審査会開催場所("A001"), 6, 7, 8, GogitaiSeishinkaIshiSonzaiKubun.存在, GogitaiDummyKubun.ダミー);
     }
@@ -90,7 +90,7 @@ public final class ShinsakaiTestBusinessCreator {
      */
     public static ShinsakaiDetail create審査会情報(int 審査会開催番号, String 審査会開催年月日) {
         return new ShinsakaiDetail(new ShinsakaiKaisaiNo(審査会開催番号),
-                new ShinsakaiKaisaiYMD(new FlexibleDate(審査会開催年月日)), new ShinsakaiKaishiTime(new TimeString("0000")),
+                new ShinsakaiKaisaiDate(new FlexibleDate(審査会開催年月日)), new ShinsakaiKaishiTime(new TimeString("0000")),
                 new TimeString("2359"), create合議体情報(1), create審査会開催場所("A001"), 6, 7, 8, 9,
                 GogitaiSeishinkaIshiSonzaiKubun.存在, GogitaiDummyKubun.ダミー, new FlexibleDate("19800101"),
                 ShinsakaiKyukaiKubun.休会, 10);

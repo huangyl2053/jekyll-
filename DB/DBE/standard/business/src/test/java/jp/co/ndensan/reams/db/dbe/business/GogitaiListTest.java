@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiDate;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -51,19 +51,19 @@ public class GogitaiListTest {
 
         @Test
         public void 合議体番号に1_年月日に19991212_を持つ合議体情報を引数に渡したとき_戻り値の合議体が持つ合議体番号は1になる() {
-            assertThat(sut.get合議体(new GogitaiNo(1), new GogitaiYukoKikanKaishiYMD("19991212")).get合議体情報().get合議体番号(),
+            assertThat(sut.get合議体(new GogitaiNo(1), new GogitaiYukoKikanKaishiDate("19991212")).get合議体情報().get合議体番号(),
                     is(new GogitaiNo(1)));
         }
 
         @Test
         public void 合議体番号に1_年月日に19991212_を持つ合議体情報を引数に渡したとき_戻り値の合議体が持つ合議体有効期間開始年月日は19991212になる() {
-            assertThat(sut.get合議体(new GogitaiNo(1), new GogitaiYukoKikanKaishiYMD("19991212")).get合議体情報().get有効期間開始年月日(),
-                    is(new GogitaiYukoKikanKaishiYMD("19991212")));
+            assertThat(sut.get合議体(new GogitaiNo(1), new GogitaiYukoKikanKaishiDate("19991212")).get合議体情報().get有効期間開始年月日(),
+                    is(new GogitaiYukoKikanKaishiDate("19991212")));
         }
 
         @Test(expected = IllegalArgumentException.class)
         public void 合議体番号に4_年月日に2028_12_12を指定して_該当する合議体が存在しないとき_IllegalArgumentExceptionが返る() {
-            sut.get合議体(new GogitaiNo(4), new GogitaiYukoKikanKaishiYMD("20281212"));
+            sut.get合議体(new GogitaiNo(4), new GogitaiYukoKikanKaishiDate("20281212"));
         }
 
         private List<Gogitai> createList() {
@@ -83,7 +83,7 @@ public class GogitaiListTest {
         }
 
         private GogitaiDetail createGogitaiInfo(int 合議体番号, String 有効期間開始年月日) {
-            return new GogitaiDetail(new GogitaiNo(合議体番号), RString.EMPTY, new GogitaiYukoKikanKaishiYMD(有効期間開始年月日),
+            return new GogitaiDetail(new GogitaiNo(合議体番号), RString.EMPTY, new GogitaiYukoKikanKaishiDate(有効期間開始年月日),
                     FlexibleDate.MAX, mock(Range.class), mock(ShinsakaiKaisaiBasho.class), 3, 4, 5,
                     GogitaiSeishinkaIshiSonzaiKubun.存在, GogitaiDummyKubun.ダミー);
         }

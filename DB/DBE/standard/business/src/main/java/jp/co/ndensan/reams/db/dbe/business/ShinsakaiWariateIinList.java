@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiDate;
 
 /**
  * 審査会割当委員のリストです。
@@ -40,7 +40,7 @@ public class ShinsakaiWariateIinList implements Iterable<ShinsakaiWariateIin> {
      * @return 審査会割当委員
      * @throws IllegalArgumentException 対応する割当委員が存在しないとき
      */
-    public ShinsakaiWariateIin get審査会割当委員(ShinsakaiKaisaiNo 審査会開催番号, ShinsakaiKaisaiYMD 審査会開催年月日,
+    public ShinsakaiWariateIin get審査会割当委員(ShinsakaiKaisaiNo 審査会開催番号, ShinsakaiKaisaiDate 審査会開催年月日,
             ShinsakaiIinCode 審査会委員コード) throws IllegalArgumentException {
         for (ShinsakaiWariateIin 割当委員 : 割当委員List) {
             if (isキー項目が一致(割当委員, 審査会開催番号, 審査会開催年月日, 審査会委員コード)) {
@@ -50,7 +50,7 @@ public class ShinsakaiWariateIinList implements Iterable<ShinsakaiWariateIin> {
         throw new IllegalArgumentException(Messages.E00006.replace("対応する審査会割当委員").getMessage());
     }
 
-    private boolean isキー項目が一致(ShinsakaiWariateIin 割当委員, ShinsakaiKaisaiNo 審査会開催番号, ShinsakaiKaisaiYMD 審査会開催年月日,
+    private boolean isキー項目が一致(ShinsakaiWariateIin 割当委員, ShinsakaiKaisaiNo 審査会開催番号, ShinsakaiKaisaiDate 審査会開催年月日,
             ShinsakaiIinCode 審査会委員コード) {
         if (!割当委員.get審査会情報().get審査会開催番号().equals(審査会開催番号)) {
             return false;

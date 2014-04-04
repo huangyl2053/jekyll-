@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiDate;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5101ShinsakaiJoho;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5101ShinsakaiJoho.*;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5101ShinsakaiJohoEntity;
@@ -38,7 +38,7 @@ public class ShinsakaiJohoDac implements IReplaceable<DbT5101ShinsakaiJohoEntity
      * @return 審査会Entity
      */
     @Transaction
-    public DbT5101ShinsakaiJohoEntity select(ShinsakaiKaisaiNo 開催番号, ShinsakaiKaisaiYMD 開催年月日) {
+    public DbT5101ShinsakaiJohoEntity select(ShinsakaiKaisaiNo 開催番号, ShinsakaiKaisaiDate 開催年月日) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5101ShinsakaiJoho.class)
                 .where(and(eq(shinsakaiKaisaiNo, 開催番号.value()),
@@ -67,7 +67,7 @@ public class ShinsakaiJohoDac implements IReplaceable<DbT5101ShinsakaiJohoEntity
      * @return 審査会EntityList
      */
     @Transaction
-    public List<DbT5101ShinsakaiJohoEntity> select開催審査会(ShinsakaiKaisaiYMD 開催年月日) {
+    public List<DbT5101ShinsakaiJohoEntity> select開催審査会(ShinsakaiKaisaiDate 開催年月日) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5101ShinsakaiJoho.class)
                 .where(eq(shinsakaiKaisaiYMD, 開催年月日.value()))

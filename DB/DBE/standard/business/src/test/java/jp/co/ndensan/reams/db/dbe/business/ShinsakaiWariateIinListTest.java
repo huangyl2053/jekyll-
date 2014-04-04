@@ -9,7 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiTestBusinessCreator;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiDate;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -32,13 +32,13 @@ public class ShinsakaiWariateIinListTest {
     private ShinsakaiWariateIin result;
     private ShinsakaiIinCode 委員コード;
     private ShinsakaiKaisaiNo 開催番号;
-    private ShinsakaiKaisaiYMD 開催年月日;
+    private ShinsakaiKaisaiDate 開催年月日;
 
     @Before
     public void setUp() {
         委員コード = new ShinsakaiIinCode(new RString("A001"));
         開催番号 = new ShinsakaiKaisaiNo(1);
-        開催年月日 = new ShinsakaiKaisaiYMD(new FlexibleDate("19990101"));
+        開催年月日 = new ShinsakaiKaisaiDate(new FlexibleDate("19990101"));
 
         List<ShinsakaiWariateIin> list = new ArrayList<>();
         list.add(ShinsakaiTestBusinessCreator.create審査会割当委員(1, "19990101", "A001"));

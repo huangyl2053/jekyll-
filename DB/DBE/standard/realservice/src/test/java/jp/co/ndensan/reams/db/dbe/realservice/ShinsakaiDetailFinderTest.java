@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiTestBusinessCreator;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiDate;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5101ShinsakaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiTestEntityCreator;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.ShinsakaiJohoDac;
@@ -48,14 +48,14 @@ public class ShinsakaiDetailFinderTest {
 
         @Test
         public void 開催番号_開催年月日を指定して_審査会情報が取得できる() {
-            ShinsakaiDetail result = sut.get審査会情報(new ShinsakaiKaisaiNo(1), new ShinsakaiKaisaiYMD(new FlexibleDate("19990101")));
+            ShinsakaiDetail result = sut.get審査会情報(new ShinsakaiKaisaiNo(1), new ShinsakaiKaisaiDate(new FlexibleDate("19990101")));
             assertThat(result.get審査会開催番号().value(), is(1));
         }
 
         private ShinsakaiJohoDac create審査会情報DacMock() {
             ShinsakaiJohoDac 審査会情報Dac = mock(ShinsakaiJohoDac.class);
             DbT5101ShinsakaiJohoEntity entity = ShinsakaiTestEntityCreator.create審査会情報Entity(1, "19990101");
-            when(審査会情報Dac.select(any(ShinsakaiKaisaiNo.class), any(ShinsakaiKaisaiYMD.class))).thenReturn(entity);
+            when(審査会情報Dac.select(any(ShinsakaiKaisaiNo.class), any(ShinsakaiKaisaiDate.class))).thenReturn(entity);
             return 審査会情報Dac;
         }
     }
@@ -69,14 +69,14 @@ public class ShinsakaiDetailFinderTest {
 
         @Test
         public void 開催年月日を指定して_審査会情報を3件取得できる() {
-            List<ShinsakaiDetail> result = sut.get開催審査会情報(new ShinsakaiKaisaiYMD(new FlexibleDate("19990101")));
+            List<ShinsakaiDetail> result = sut.get開催審査会情報(new ShinsakaiKaisaiDate(new FlexibleDate("19990101")));
             assertThat(result.size(), is(3));
         }
 
         private ShinsakaiJohoDac create審査会情報DacMock(int 件数) {
             ShinsakaiJohoDac 審査会情報Dac = mock(ShinsakaiJohoDac.class);
             List<DbT5101ShinsakaiJohoEntity> entityList = create審査会情報EntityList(件数);
-            when(審査会情報Dac.select開催審査会(any(ShinsakaiKaisaiYMD.class))).thenReturn(entityList);
+            when(審査会情報Dac.select開催審査会(any(ShinsakaiKaisaiDate.class))).thenReturn(entityList);
             return 審査会情報Dac;
         }
     }

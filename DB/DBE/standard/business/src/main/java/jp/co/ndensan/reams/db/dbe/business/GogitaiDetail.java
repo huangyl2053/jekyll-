@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshi
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiDate;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -25,7 +25,7 @@ public class GogitaiDetail {
 
     private final GogitaiNo 合議体番号;
     private final RString 合議体名称;
-    private final GogitaiYukoKikanKaishiYMD 有効期間開始年月日;
+    private final GogitaiYukoKikanKaishiDate 有効期間開始年月日;
     private final FlexibleDate 有効期間終了年月日;
     private final Range<TimeString> 予定開催時間;
     private final ShinsakaiKaisaiBasho 審査会開催場所;
@@ -54,7 +54,7 @@ public class GogitaiDetail {
      * @throws IllegalArgumentException
      * 審査会予定定員、審査会自動割当定員、審査会委員定員のいずれかに0より小さい値が渡されたとき
      */
-    public GogitaiDetail(GogitaiNo 合議体番号, RString 合議体名称, GogitaiYukoKikanKaishiYMD 有効期間開始年月日,
+    public GogitaiDetail(GogitaiNo 合議体番号, RString 合議体名称, GogitaiYukoKikanKaishiDate 有効期間開始年月日,
             FlexibleDate 有効期間終了年月日, Range<TimeString> 予定開催時間, ShinsakaiKaisaiBasho 審査会開催場所,
             int 審査会予定定員, int 審査会自動割当定員, int 審査会委員定員,
             GogitaiSeishinkaIshiSonzaiKubun 精神科医師存在区分, GogitaiDummyKubun ダミー区分)
@@ -113,7 +113,7 @@ public class GogitaiDetail {
      *
      * @return 有効期間開始年月日
      */
-    public GogitaiYukoKikanKaishiYMD get有効期間開始年月日() {
+    public GogitaiYukoKikanKaishiDate get有効期間開始年月日() {
         return 有効期間開始年月日;
     }
 

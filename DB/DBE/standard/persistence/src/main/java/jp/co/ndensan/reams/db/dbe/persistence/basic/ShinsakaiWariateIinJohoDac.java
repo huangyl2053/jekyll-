@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiDate;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJoho;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJoho.*;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJohoEntity;
@@ -38,7 +38,7 @@ public class ShinsakaiWariateIinJohoDac implements IReplaceable<DbT5106Shinsakai
      * @return 審査会割当委員EntityList
      */
     @Transaction
-    public List<DbT5106ShinsakaiWariateIinJohoEntity> select(ShinsakaiKaisaiNo 開催番号, ShinsakaiKaisaiYMD 開催年月日) {
+    public List<DbT5106ShinsakaiWariateIinJohoEntity> select(ShinsakaiKaisaiNo 開催番号, ShinsakaiKaisaiDate 開催年月日) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5106ShinsakaiWariateIinJoho.class)
                 .where(and(eq(shinsakaiKaisaiNo, 開催番号.value()), eq(shinsakaiKaisaiYMD, 開催年月日.value())))
@@ -53,7 +53,7 @@ public class ShinsakaiWariateIinJohoDac implements IReplaceable<DbT5106Shinsakai
      * @return 審査会割当委員EntityList
      */
     @Transaction
-    public List<DbT5106ShinsakaiWariateIinJohoEntity> select(ShinsakaiKaisaiYMD 開催年月日) {
+    public List<DbT5106ShinsakaiWariateIinJohoEntity> select(ShinsakaiKaisaiDate 開催年月日) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5106ShinsakaiWariateIinJoho.class)
                 .where(eq(shinsakaiKaisaiYMD, 開催年月日.value()))

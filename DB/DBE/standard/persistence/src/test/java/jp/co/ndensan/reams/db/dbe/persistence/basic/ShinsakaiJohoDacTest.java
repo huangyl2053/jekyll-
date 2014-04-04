@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiDate;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5101ShinsakaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiTestEntityCreator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
@@ -40,13 +40,13 @@ public class ShinsakaiJohoDacTest {
 
         private DbT5101ShinsakaiJohoEntity result;
         private ShinsakaiKaisaiNo 開催番号_1;
-        private ShinsakaiKaisaiYMD 開催年月日_19990101;
+        private ShinsakaiKaisaiDate 開催年月日_19990101;
 
         @Before
         public void setUp() {
             sut.insert(ShinsakaiTestEntityCreator.create審査会情報Entity(1, "19990101", 4, "0830", "basho01"));
             開催番号_1 = new ShinsakaiKaisaiNo(1);
-            開催年月日_19990101 = new ShinsakaiKaisaiYMD(new FlexibleDate("19990101"));
+            開催年月日_19990101 = new ShinsakaiKaisaiDate(new FlexibleDate("19990101"));
         }
 
         @Test
@@ -90,7 +90,7 @@ public class ShinsakaiJohoDacTest {
     public static class select開催審査会のテスト extends DbeTestDacBase {
 
         private List<DbT5101ShinsakaiJohoEntity> result;
-        private ShinsakaiKaisaiYMD 開催年月日;
+        private ShinsakaiKaisaiDate 開催年月日;
 
         @Before
         public void setUp() {
@@ -102,14 +102,14 @@ public class ShinsakaiJohoDacTest {
 
         @Test
         public void 基準年月日に19990205を指定した場合_2件の要素が取得できる() {
-            開催年月日 = new ShinsakaiKaisaiYMD(new FlexibleDate("19990205"));
+            開催年月日 = new ShinsakaiKaisaiDate(new FlexibleDate("19990205"));
             result = sut.select開催審査会(開催年月日);
             assertThat(result.size(), is(2));
         }
 
         @Test
         public void 基準年月日に19990312を指定した場合_1件の要素が取得できる() {
-            開催年月日 = new ShinsakaiKaisaiYMD(new FlexibleDate("19990312"));
+            開催年月日 = new ShinsakaiKaisaiDate(new FlexibleDate("19990312"));
             result = sut.select開催審査会(開催年月日);
             assertThat(result.size(), is(1));
         }
@@ -141,7 +141,7 @@ public class ShinsakaiJohoDacTest {
             sut.insert(ShinsakaiTestEntityCreator.create審査会情報Entity(1, "19990201", 4, "0830", "basho01"));
 
             ShinsakaiKaisaiNo 開催番号 = new ShinsakaiKaisaiNo(1);
-            ShinsakaiKaisaiYMD 開催年月日 = new ShinsakaiKaisaiYMD(new FlexibleDate("19990201"));
+            ShinsakaiKaisaiDate 開催年月日 = new ShinsakaiKaisaiDate(new FlexibleDate("19990201"));
             assertThat(sut.select(開催番号, 開催年月日).getShinsakaiKaisaiBashoCode(), is(new RString("basho01")));
         }
     }
@@ -154,7 +154,7 @@ public class ShinsakaiJohoDacTest {
             sut.update(ShinsakaiTestEntityCreator.create審査会情報Entity(1, "19990201", 4, "0830", "basho02"));
 
             ShinsakaiKaisaiNo 開催番号 = new ShinsakaiKaisaiNo(1);
-            ShinsakaiKaisaiYMD 開催年月日 = new ShinsakaiKaisaiYMD(new FlexibleDate("19990201"));
+            ShinsakaiKaisaiDate 開催年月日 = new ShinsakaiKaisaiDate(new FlexibleDate("19990201"));
             assertThat(sut.select(開催番号, 開催年月日).getShinsakaiKaisaiBashoCode(), is(new RString("basho02")));
         }
     }
@@ -167,7 +167,7 @@ public class ShinsakaiJohoDacTest {
             sut.delete(ShinsakaiTestEntityCreator.create審査会情報Entity(1, "19990201", 4, "0830", "basho01"));
 
             ShinsakaiKaisaiNo 開催番号 = new ShinsakaiKaisaiNo(1);
-            ShinsakaiKaisaiYMD 開催年月日 = new ShinsakaiKaisaiYMD(new FlexibleDate("19990101"));
+            ShinsakaiKaisaiDate 開催年月日 = new ShinsakaiKaisaiDate(new FlexibleDate("19990101"));
             assertThat(sut.select(開催番号, 開催年月日), is(nullValue()));
         }
     }

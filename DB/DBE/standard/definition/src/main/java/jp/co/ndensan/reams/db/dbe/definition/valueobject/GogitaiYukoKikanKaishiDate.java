@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8178 城間篤人
  */
-public class GogitaiYukoKikanKaishiYMD implements IValueObject<FlexibleDate>, Comparable<GogitaiYukoKikanKaishiYMD> {
+public class GogitaiYukoKikanKaishiDate implements IValueObject<FlexibleDate>, Comparable<GogitaiYukoKikanKaishiDate> {
 
     private final FlexibleDate 開始年月日;
 
@@ -25,7 +25,7 @@ public class GogitaiYukoKikanKaishiYMD implements IValueObject<FlexibleDate>, Co
      * @param 開始年月日 開始年月日
      * @throws NullPointerException 引数にnullが渡されたとき
      */
-    public GogitaiYukoKikanKaishiYMD(FlexibleDate 開始年月日) throws NullPointerException {
+    public GogitaiYukoKikanKaishiDate(FlexibleDate 開始年月日) throws NullPointerException {
         this.開始年月日 = requireNonNull(開始年月日, Messages.E00003.replace("開始年月日", getClass().getName()).getMessage());
     }
 
@@ -36,7 +36,7 @@ public class GogitaiYukoKikanKaishiYMD implements IValueObject<FlexibleDate>, Co
      * @throws NullPointerException 引数にnullが渡されたとき
      * @throws IllegalArgumentException 8桁以上の文字列が渡されたとき
      */
-    public GogitaiYukoKikanKaishiYMD(RString 開始年月日) throws IllegalArgumentException, NullPointerException {
+    public GogitaiYukoKikanKaishiDate(RString 開始年月日) throws IllegalArgumentException, NullPointerException {
         this(new FlexibleDate(開始年月日));
     }
 
@@ -47,7 +47,7 @@ public class GogitaiYukoKikanKaishiYMD implements IValueObject<FlexibleDate>, Co
      * @throws NullPointerException 引数にnullが渡されたとき
      * @throws IllegalArgumentException 8桁以上の文字列が渡されたとき
      */
-    public GogitaiYukoKikanKaishiYMD(String 開始年月日) throws IllegalArgumentException, NullPointerException {
+    public GogitaiYukoKikanKaishiDate(String 開始年月日) throws IllegalArgumentException, NullPointerException {
         this(new FlexibleDate(開始年月日));
     }
 
@@ -59,7 +59,7 @@ public class GogitaiYukoKikanKaishiYMD implements IValueObject<FlexibleDate>, Co
      * @param day 日
      * @throws IllegalArgumentException 日付と判断できない数値が渡されたとき
      */
-    public GogitaiYukoKikanKaishiYMD(int year, int month, int day) throws IllegalArgumentException {
+    public GogitaiYukoKikanKaishiDate(int year, int month, int day) throws IllegalArgumentException {
         this(new FlexibleDate(year, month, day));
     }
 
@@ -75,7 +75,7 @@ public class GogitaiYukoKikanKaishiYMD implements IValueObject<FlexibleDate>, Co
         if (比較対象 == null || getClass() != 比較対象.getClass()) {
             return false;
         }
-        return ((GogitaiYukoKikanKaishiYMD) 比較対象).value().equals(this.value());
+        return ((GogitaiYukoKikanKaishiDate) 比較対象).value().equals(this.value());
     }
 
     @Override
@@ -84,7 +84,7 @@ public class GogitaiYukoKikanKaishiYMD implements IValueObject<FlexibleDate>, Co
     }
 
     @Override
-    public int compareTo(GogitaiYukoKikanKaishiYMD 比較対象) {
+    public int compareTo(GogitaiYukoKikanKaishiDate 比較対象) {
         return 開始年月日.compareTo(比較対象.value());
     }
 }

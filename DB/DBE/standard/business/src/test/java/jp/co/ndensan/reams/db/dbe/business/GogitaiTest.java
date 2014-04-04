@@ -9,7 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiDate;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -70,7 +70,7 @@ public class GogitaiTest {
     }
 
     private static GogitaiDetail create合議体情報(int 合議体番号, String 開始年月日) {
-        return new GogitaiDetail(new GogitaiNo(合議体番号), RString.EMPTY, new GogitaiYukoKikanKaishiYMD(開始年月日),
+        return new GogitaiDetail(new GogitaiNo(合議体番号), RString.EMPTY, new GogitaiYukoKikanKaishiDate(開始年月日),
                 FlexibleDate.MAX, mock(Range.class), mock(ShinsakaiKaisaiBasho.class), 1, 2, 3,
                 GogitaiSeishinkaIshiSonzaiKubun.存在, GogitaiDummyKubun.ダミー);
     }

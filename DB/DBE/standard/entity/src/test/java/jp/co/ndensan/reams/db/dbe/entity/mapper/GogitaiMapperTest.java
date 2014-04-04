@@ -9,7 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.Gogitai;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiList;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiDate;
 import jp.co.ndensan.reams.db.dbe.entity.helper.GogitaiMockEntityCreator;
 import jp.co.ndensan.reams.db.dbe.entity.relate.GogitaiWariateShinsakaiIinEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
@@ -39,25 +39,25 @@ public class GogitaiMapperTest {
 
         @Test
         public void 合議体番号1_有効期間開始年月日19990101の合議体は_割当委員を3件持つ() {
-            Gogitai 合議体 = result.get合議体(new GogitaiNo(1), new GogitaiYukoKikanKaishiYMD("19990101"));
+            Gogitai 合議体 = result.get合議体(new GogitaiNo(1), new GogitaiYukoKikanKaishiDate("19990101"));
             assertThat(合議体.get割当委員List().size(), is(3));
         }
 
         @Test
         public void 合議体番号1_有効期間開始年月日20010101の合議体は_割当委員を2件持つ() {
-            Gogitai 合議体 = result.get合議体(new GogitaiNo(1), new GogitaiYukoKikanKaishiYMD("20010101"));
+            Gogitai 合議体 = result.get合議体(new GogitaiNo(1), new GogitaiYukoKikanKaishiDate("20010101"));
             assertThat(合議体.get割当委員List().size(), is(2));
         }
 
         @Test
         public void 合議体番号2_有効期間開始年月日19990101の合議体は_割当委員を3件持つ() {
-            Gogitai 合議体 = result.get合議体(new GogitaiNo(2), new GogitaiYukoKikanKaishiYMD("19990101"));
+            Gogitai 合議体 = result.get合議体(new GogitaiNo(2), new GogitaiYukoKikanKaishiDate("19990101"));
             assertThat(合議体.get割当委員List().size(), is(3));
         }
 
         @Test
         public void 合議体番号3_有効期間開始年月日20080101の合議体は_割当委員を1件持つ() {
-            Gogitai 合議体 = result.get合議体(new GogitaiNo(3), new GogitaiYukoKikanKaishiYMD("20080101"));
+            Gogitai 合議体 = result.get合議体(new GogitaiNo(3), new GogitaiYukoKikanKaishiDate("20080101"));
             assertThat(合議体.get割当委員List().size(), is(1));
         }
     }
@@ -73,19 +73,19 @@ public class GogitaiMapperTest {
 
         @Test
         public void 合議体番号1_有効期間開始年月日19990101の合議体は_割当委員を2件持つ() {
-            Gogitai 合議体 = result.get合議体(new GogitaiNo(1), new GogitaiYukoKikanKaishiYMD("19990101"));
+            Gogitai 合議体 = result.get合議体(new GogitaiNo(1), new GogitaiYukoKikanKaishiDate("19990101"));
             assertThat(合議体.get割当委員List().size(), is(2));
         }
 
         @Test
         public void 合議体番号1_有効期間開始年月日20010101の合議体は_割当委員を2件持つ() {
-            Gogitai 合議体 = result.get合議体(new GogitaiNo(1), new GogitaiYukoKikanKaishiYMD("20010101"));
+            Gogitai 合議体 = result.get合議体(new GogitaiNo(1), new GogitaiYukoKikanKaishiDate("20010101"));
             assertThat(合議体.get割当委員List().size(), is(2));
         }
 
         @Test
         public void 合議体番号2_有効期間開始年月日19990101の合議体は_割当委員を2件持つ() {
-            Gogitai 合議体 = result.get合議体(new GogitaiNo(2), new GogitaiYukoKikanKaishiYMD("19990101"));
+            Gogitai 合議体 = result.get合議体(new GogitaiNo(2), new GogitaiYukoKikanKaishiDate("19990101"));
             assertThat(合議体.get割当委員List().size(), is(2));
         }
     }
