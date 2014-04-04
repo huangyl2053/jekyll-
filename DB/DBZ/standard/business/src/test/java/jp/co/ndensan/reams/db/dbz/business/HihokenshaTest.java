@@ -195,7 +195,7 @@ public class HihokenshaTest extends DbzTestBase {
                 kubun = HihokenshashoSaikofuKubun.あり;
                 reason = HihokenshashoSaikofuJiyu.その他;
                 id = new ChohyoKofuRirekiID(new RString("111"));
-                saikofu = new HihokenshashoSaikofu(kubun, reason, id);
+                saikofu = new HihokenshashoSaikofu(reason, id);
 
                 when(shikaku.get被保険者証再交付()).thenReturn(saikofu);
                 sut = new Hihokensha(profile, shikaku);

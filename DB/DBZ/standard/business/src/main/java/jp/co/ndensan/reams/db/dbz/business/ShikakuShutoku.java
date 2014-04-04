@@ -15,6 +15,16 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 public class ShikakuShutoku extends ShikakuIdoBaseItem<ShikakuShutokuJiyu> {
 
     /**
+     * 資格取得がないことを表すオブジェクトです。<br />
+     * 通常、このオブジェクトを使うことはありえません。
+     */
+    public static final ShikakuShutoku NOTHING;
+
+    static {
+        NOTHING = new ShikakuShutoku(ShikakuShutokuJiyu.なし, FlexibleDate.MIN, FlexibleDate.MIN);
+    }
+
+    /**
      * 新しい資格取得の事由、届出年月日、処理年月日を持ったインスタンスを生成します。
      *
      * @param reason 資格取得事由
@@ -23,5 +33,10 @@ public class ShikakuShutoku extends ShikakuIdoBaseItem<ShikakuShutokuJiyu> {
      */
     public ShikakuShutoku(ShikakuShutokuJiyu reason, FlexibleDate noticeDate, FlexibleDate actionDate) {
         super(reason, noticeDate, actionDate);
+    }
+
+    @Override
+    public boolean isNothing() {
+        return this == NOTHING;
     }
 }

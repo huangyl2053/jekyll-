@@ -20,6 +20,14 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 public class KaigoHihokenshaNo implements IValueObject<RString>, Comparable<KaigoHihokenshaNo>, IDbColumnMappable {
 
     private static final int PERMISSIBLE_LENGTH = 10;
+    /**
+     * 被保険者番号がないことを表す値です。
+     */
+    public static final KaigoHihokenshaNo NULL_VALUE;
+
+    static {
+        NULL_VALUE = new KaigoHihokenshaNo(new RString("          "));
+    }
     private final RString 被保険者番号;
 
     /**

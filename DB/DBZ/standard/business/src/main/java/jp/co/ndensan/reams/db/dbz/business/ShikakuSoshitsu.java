@@ -12,7 +12,16 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  *
  * @author N3327 三浦 凌
  */
-public class ShikakuSoshitsu extends ShikakuIdoBaseItem<ShikakuSoshitsuJiyu> {
+public final class ShikakuSoshitsu extends ShikakuIdoBaseItem<ShikakuSoshitsuJiyu> {
+
+    /**
+     * 資格喪失がないことを表すオブジェクトです。
+     */
+    public static final ShikakuSoshitsu NOTHING;
+
+    static {
+        NOTHING = new ShikakuSoshitsu(ShikakuSoshitsuJiyu.なし, FlexibleDate.MAX, FlexibleDate.MAX);
+    }
 
     /**
      * 新しい資格喪失の事由、届出年月日、処理年月日を持ったインスタンスを生成します。
@@ -23,5 +32,10 @@ public class ShikakuSoshitsu extends ShikakuIdoBaseItem<ShikakuSoshitsuJiyu> {
      */
     public ShikakuSoshitsu(ShikakuSoshitsuJiyu reason, FlexibleDate noticeDate, FlexibleDate actionDate) {
         super(reason, noticeDate, actionDate);
+    }
+
+    @Override
+    public boolean isNothing() {
+        return this == NOTHING;
     }
 }

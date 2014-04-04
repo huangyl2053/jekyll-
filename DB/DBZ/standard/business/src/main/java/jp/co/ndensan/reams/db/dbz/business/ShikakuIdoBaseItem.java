@@ -63,4 +63,11 @@ public abstract class ShikakuIdoBaseItem<E extends Enum & IShikakuIdoJiyu> {
     public FlexibleDate getActionDate() {
         return this.actionDate;
     }
+
+    /**
+     * 資格異動が存在するかどうかを返します。
+     *
+     * @return 資格異動が存在するかどうか
+     */
+    public abstract boolean isNothing();
 }

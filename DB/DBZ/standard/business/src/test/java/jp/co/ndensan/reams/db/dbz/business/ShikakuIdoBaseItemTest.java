@@ -27,8 +27,19 @@ public class ShikakuIdoBaseItemTest extends DbzTestBase {
      */
     private static class ShikakuIdoBaseItemSample extends ShikakuIdoBaseItem<ShikakuShutokuJiyu> {
 
+        public static final ShikakuIdoBaseItemSample NOTHING;
+
+        static {
+            NOTHING = new ShikakuIdoBaseItemSample(ShikakuShutokuJiyu.なし, FlexibleDate.MAX, FlexibleDate.MAX);
+        }
+
         private ShikakuIdoBaseItemSample(ShikakuShutokuJiyu reason, FlexibleDate noticeDate, FlexibleDate actionDate) {
             super(reason, noticeDate, actionDate);
+        }
+
+        @Override
+        public boolean isNothing() {
+            return this == NOTHING;
         }
     }
 
@@ -58,6 +69,20 @@ public class ShikakuIdoBaseItemTest extends DbzTestBase {
                     flag == ReasonIsNull ? null : ShikakuShutokuJiyu.年齢到達,
                     flag == NoticeDateIsNull ? null : new FlexibleDate("20130617"),
                     flag == ActionDateIsNull ? null : new FlexibleDate("20130617"));
+        }
+    }
+
+    public static class NOTHING extends DbzTestBase {
+
+        @Test
+        public void NOTHINGは_isNothingで_trueを返す() {
+            assertThat(ShikakuIdoBaseItemSample.NOTHING.isNothing(), is(true));
+        }
+
+        @Test
+        public void NOTHING以外は_isNothingで_falseを返す() {
+            ShikakuIdoBaseItemSample sut = new ShikakuIdoBaseItemSample(ShikakuShutokuJiyu.なし, FlexibleDate.MAX, FlexibleDate.MAX);
+            assertThat(sut.isNothing(), is(false));
         }
     }
 

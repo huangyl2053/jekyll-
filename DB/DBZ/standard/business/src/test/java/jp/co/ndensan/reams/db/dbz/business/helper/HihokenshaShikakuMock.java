@@ -5,18 +5,6 @@
 package jp.co.ndensan.reams.db.dbz.business.helper;
 
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaShikaku;
-import jp.co.ndensan.reams.db.dbz.business.HihokenshashoSaikofu;
-import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
-import jp.co.ndensan.reams.db.dbz.business.JushochitokureiKaijo;
-import jp.co.ndensan.reams.db.dbz.business.JushochitokureiTekiyo;
-import jp.co.ndensan.reams.db.dbz.business.ShikakuHenko;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoSaikofuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoSaikofuKubun;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureiKaijoJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureiTekiyoJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoikinaiJushochitokureishaKubun;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
@@ -29,7 +17,6 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKu
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ShikakuHihokenshaKubun;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -42,17 +29,19 @@ import static org.mockito.Mockito.*;
  */
 public final class HihokenshaShikakuMock {
 
-    private static LasdecCode lasdecCode;
-    private static ShikibetsuCode shikibetsuCode;
-    private static KaigoHihokenshaNo hihokenshaNo;
-    private static RDate ichigoGaitoDate;
-    private static IShikakuShutokuJiyu shutokuReason;
-    private static IShikakuSoshitsuJiyu soshitsuReason;
-    private static IKaigoShikaku kaigoShikaku;
+    private static final LasdecCode lasdecCode;
+    private static final ShikibetsuCode shikibetsuCode;
+    private static final RDateTime shoriTimestamp;
+    private static final KaigoHihokenshaNo hihokenshaNo;
+    private static final RDate ichigoGaitoDate;
+    private static final IShikakuShutokuJiyu shutokuReason;
+    private static final IShikakuSoshitsuJiyu soshitsuReason;
+    private static final IKaigoShikaku kaigoShikaku;
 
     static {
         lasdecCode = new LasdecCode("123456");
         shikibetsuCode = new ShikibetsuCode("1020304050");
+        shoriTimestamp = RDateTime.of(2014, 4, 2, 15, 47);
         hihokenshaNo = new KaigoHihokenshaNo(new RString("1234567890"));
         ichigoGaitoDate = new RDate("20140328");
         shutokuReason = createShikakuShutokuJiyu();
@@ -60,19 +49,11 @@ public final class HihokenshaShikakuMock {
         kaigoShikaku = createKaigoShikaku();
     }
 
-    public static IHihokenshaShikaku getSpiedInstance() {
-        IHihokenshaShikaku shikaku = new HihokenshaShikaku(
-                kaigoShikaku,
-                new LasdecCode("123456"),
-                new ShikibetsuCode("1020304050"),
-                RDateTime.of(2014, 4, 2, 15, 47),
-                hihokenshaNo,
-                ShikakuIdoKubun.資格取得, ShikakuHihokenshaKubun.第１号被保険者,
-                new ShikakuHenko(ShikakuHenkoJiyu.なし, FlexibleDate.MAX, FlexibleDate.MAX),
-                new JushochitokureiTekiyo(JushochitokureiTekiyoJiyu.なし, FlexibleDate.MAX, FlexibleDate.MAX),
-                new JushochitokureiKaijo(JushochitokureiKaijoJiyu.なし, FlexibleDate.MAX, FlexibleDate.MAX),
-                JushochiTokureishaKubun.通常資格者, KoikinaiJushochitokureishaKubun.通常資格者, null, null,
-                new HihokenshashoSaikofu(HihokenshashoSaikofuKubun.なし, HihokenshashoSaikofuJiyu.なし, null));
+    public static HihokenshaShikaku getSpiedInstance() {
+        HihokenshaShikaku shikaku = new HihokenshaShikaku.Builder(
+                kaigoShikaku, lasdecCode, shikibetsuCode, shoriTimestamp, ShikakuHihokenshaKubun.第１号被保険者).
+                hihokenshaNo(hihokenshaNo).
+                build();
         return spy(shikaku);
     }
 
@@ -83,7 +64,6 @@ public final class HihokenshaShikakuMock {
                 hihokenshaNo.value(), lasdecCode.value(),
                 ichigoGaitoDate, ShikakuHihokenshaKubun.第１号被保険者,
                 JushochiTokureishaKubun.通常資格者);
-
     }
 
     private static IShikakuShutokuJiyu createShikakuShutokuJiyu() {

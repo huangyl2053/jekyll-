@@ -15,6 +15,15 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 public class JushochitokureiKaijo extends ShikakuIdoBaseItem<JushochitokureiKaijoJiyu> {
 
     /**
+     * 住所地特例解除がないことを表すオブジェクトです。
+     */
+    public static final JushochitokureiKaijo NOTHING;
+
+    static {
+        NOTHING = new JushochitokureiKaijo(JushochitokureiKaijoJiyu.なし, FlexibleDate.MAX, FlexibleDate.MAX);
+    }
+
+    /**
      * 新しい住所地特例解除の事由、届出年月日、処理年月日を持ったインスタンスを生成します。
      *
      * @param reason 資格変更事由
@@ -23,5 +32,10 @@ public class JushochitokureiKaijo extends ShikakuIdoBaseItem<JushochitokureiKaij
      */
     public JushochitokureiKaijo(JushochitokureiKaijoJiyu reason, FlexibleDate noticeDate, FlexibleDate actionDate) {
         super(reason, noticeDate, actionDate);
+    }
+
+    @Override
+    public boolean isNothing() {
+        return this == NOTHING;
     }
 }

@@ -15,6 +15,15 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 public class JushochitokureiTekiyo extends ShikakuIdoBaseItem<JushochitokureiTekiyoJiyu> {
 
     /**
+     * 住所地特例適用がないことを表すオブジェクトです。
+     */
+    public static final JushochitokureiTekiyo NOTHING;
+
+    static {
+        NOTHING = new JushochitokureiTekiyo(JushochitokureiTekiyoJiyu.なし, FlexibleDate.MIN, FlexibleDate.MIN);
+    }
+
+    /**
      * 新しい住所地特例適用の事由、届出年月日、処理年月日を持ったインスタンスを生成します。
      *
      * @param reason 住所地特例適用事由
@@ -23,5 +32,10 @@ public class JushochitokureiTekiyo extends ShikakuIdoBaseItem<JushochitokureiTek
      */
     public JushochitokureiTekiyo(JushochitokureiTekiyoJiyu reason, FlexibleDate noticeDate, FlexibleDate actionDate) {
         super(reason, noticeDate, actionDate);
+    }
+
+    @Override
+    public boolean isNothing() {
+        return this == NOTHING;
     }
 }
