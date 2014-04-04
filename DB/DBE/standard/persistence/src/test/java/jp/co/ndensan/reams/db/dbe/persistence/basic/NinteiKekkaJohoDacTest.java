@@ -75,7 +75,7 @@ public class NinteiKekkaJohoDacTest extends DbeTestDacBase {
         }
 
         @Test
-        public void 指定した認定結果情報が存在する時_insertは_成功する() {
+        public void 追記型は指定した認定結果情報が存在する時も_insertが_成功する() {
             assertThat(sut.insert(createEntity(AS_既存データ)), is(1));
         }
     }
@@ -92,16 +92,14 @@ public class NinteiKekkaJohoDacTest extends DbeTestDacBase {
             assertThat(sut.delete(createEntity(AS_既存データ)), is(1));
         }
 
-//        @Test
-//        public void 指定した認定結果情報が存在する時_deleteは_該当の情報を削除する() {
-//            DbT5002NinteiKekkaJohoEntity entity = DbT5002NinteiKekkaJohoEntityMock.getDbT5002NinteiKekkaJohoEntity();
-//            sut.insert(entity);
-//            sut.delete(entity);
-//            DbT5002NinteiKekkaJohoEntity result = sut.select(new ShinseishoKanriNo(entity.getShinseishoKanriNo()));
-//            assertThat(result, nullValue());
-//        }
         @Test
-        public void 指定した認定結果情報が存在しない時_deleteは_成功する() {
+        public void 指定した認定結果情報が存在する時_deleteは_該当の情報を削除する() {
+            sut.delete(createEntity(AS_既存データ));
+            assertThat(sut.select(既存管理番号), nullValue());
+        }
+
+        @Test
+        public void 追記型は指定した認定結果情報が存在しない時も_deleteが_成功する() {
             assertThat(sut.delete(createEntity(AS_新規データ)), is(1));
         }
     }
