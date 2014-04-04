@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.ShujiiIkenshoTorikomiTaishoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
+import jp.co.ndensan.reams.ur.urz.realservice.IShikibetsuTaishoFinder;
 import jp.co.ndensan.reams.ur.urz.realservice.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -36,22 +37,32 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class ShujiiIkenshoTorikomiTaishoshaManager {
 
     private final ShujiiIkenshoTorikomiTaishoshaDac torikomiTaishoshaDac;
+    private final ShujiiIkenshoSakuseiIraiKirokuManager shujiiManager;
+    private final IShikibetsuTaishoFinder shikibetsuTaishoFinder;
 
     /**
      * コンストラクタです。
      */
     public ShujiiIkenshoTorikomiTaishoshaManager() {
         torikomiTaishoshaDac = InstanceProvider.create(ShujiiIkenshoTorikomiTaishoshaDac.class);
+        shujiiManager = new ShujiiIkenshoSakuseiIraiKirokuManager();
+        shikibetsuTaishoFinder = ShikibetsuTaishoService.getShikibetsuTaishoFinder();
     }
 
     /**
      * テスト用プライベートコンストラクタです。
      *
      * @param torikomiTaishoshaDac torikomiTaishoshaDac
+     * @param shujiiManager shujiiManager
+     * @param shikibetsuTaishoFinder shikibetsuTaishoFinder
      */
     ShujiiIkenshoTorikomiTaishoshaManager(
-            ShujiiIkenshoTorikomiTaishoshaDac torikomiTaishoshaDac) {
+            ShujiiIkenshoTorikomiTaishoshaDac torikomiTaishoshaDac,
+            ShujiiIkenshoSakuseiIraiKirokuManager shujiiManager,
+            IShikibetsuTaishoFinder shikibetsuTaishoFinder) {
         this.torikomiTaishoshaDac = torikomiTaishoshaDac;
+        this.shujiiManager = shujiiManager;
+        this.shikibetsuTaishoFinder = shikibetsuTaishoFinder;
     }
 
     /**
@@ -123,7 +134,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
         YokaigoninteiProgress yokaigoninteiProgress = NinteiShinchokuJohoMapper.toNinteiShinchokuJoho(shinchokuEntity);
         NinteiShinseiJoho ninteiShinseiJoho = NinteishinseiJohoMapper.to認定申請情報(shinseiEntity);
         ShujiiIkenshoSakuseiIrai shujiiIkenshoSakuseiIrai = get主治医意見書作成依頼情報(shinseiEntity);
-        IKojin kojin = ShikibetsuTaishoService.getShikibetsuTaishoFinder().get識別対象(
+        IKojin kojin = shikibetsuTaishoFinder.get識別対象(
                 shinseiEntity.getShikibetsuCode()).to個人();
         KaigoDoctor doctor = shujiiIkenshoSakuseiIrai.get介護医師();
 
@@ -136,7 +147,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
     }
 
     private ShujiiIkenshoSakuseiIrai get主治医意見書作成依頼情報(DbT5001NinteiShinseiJohoEntity shinseiEntity) {
-        return new ShujiiIkenshoSakuseiIraiKirokuManager().get主治医意見書作成依頼情報(
+        return shujiiManager.get主治医意見書作成依頼情報(
                 shinseiEntity.getShinseishoKanriNo(),
                 new IkenshosakuseiIraiRirekiNo(shinseiEntity.getIkenshoIraiRirekiNo()));
     }
