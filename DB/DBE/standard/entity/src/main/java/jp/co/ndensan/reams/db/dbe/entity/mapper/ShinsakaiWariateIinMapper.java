@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinShukkets
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 
 /**
@@ -72,7 +71,8 @@ public final class ShinsakaiWariateIinMapper {
     }
 
     /**
-     * 引数から審査会割当委員関連EntityのListを受け取り、それらの情報をマッピングして審査会Listを生成します。<br/>
+     * 引数から審査会割当委員EntityList・委員List・審査会情報を受け取り、
+     * それらの情報をマッピングして審査会割当委員Listを生成し、返却します。<br/>
      * 引数のいずれかにnullが渡されたとき、nullが返却されます。
      *
      * @param 審査会割当委員EntityList 審査会割当委員EntityList
