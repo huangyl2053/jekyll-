@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.MobileDataShutsuryoku;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaTokusokuHoho;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIrai;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiCollection;
@@ -41,7 +41,7 @@ public final class NinteichosaIraiMapper {
 
         return new NinteichosaIrai(entity.getShinseishoKanriNo(), entity.getNinteichosaIraiRirekiNo(),
                 entity.getNinteichosaItakusakiCode(), entity.getChousainCode(),
-                NinteichosaIraiKubunCode.toValue(entity.getNinteichousaIraiKubunCode()), entity.getNinteichosaIraiKaisu(),
+                NinteichosaIraiKubun.toValue(entity.getNinteichousaIraiKubunCode()), entity.getNinteichosaIraiKaisu(),
                 entity.getNinteichosaIraiYMD().toRDate(), entity.getNinteichosaKigenYMD().toRDate(),
                 entity.getIraishoShutsuryokuYMD().toRDate(), entity.getChosahyoTouShutsuryokuYMD().toRDate(),
                 MobileDataShutsuryoku.toValue(entity.getMobileDataShutsuryokuFlag()), entity.getNinteichosaTokusokuYMD().toRDate(),
@@ -84,7 +84,7 @@ public final class NinteichosaIraiMapper {
         entity.setNinteichosaIraiRirekiNo(iraiJoho.get認定調査依頼履歴番号());
         entity.setNinteichosaItakusakiCode(iraiJoho.get認定調査委託先コード());
         entity.setChousainCode(iraiJoho.get調査員番号コード());
-        entity.setNinteichousaIraiKubunCode(iraiJoho.get認定調査依頼区分コード().getCode());
+        entity.setNinteichousaIraiKubunCode(iraiJoho.get認定調査依頼区分().getCode());
         entity.setNinteichosaIraiKaisu(iraiJoho.get認定調査回数());
         entity.setNinteichosaIraiYMD(iraiJoho.get認定調査依頼年月日().toFlexibleDate());
         entity.setNinteichosaKigenYMD(iraiJoho.get認定調査期限年月日().toFlexibleDate());

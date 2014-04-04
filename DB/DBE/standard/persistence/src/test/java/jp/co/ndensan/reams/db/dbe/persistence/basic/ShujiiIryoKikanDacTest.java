@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestDacBase;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;

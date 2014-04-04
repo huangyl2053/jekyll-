@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 介護認定申請を取り下げる際の情報を管理するクラスです。
@@ -31,7 +31,7 @@ public class NinteiShinseiTorisageManager {
      * デフォルトコンストラクタです。
      */
     public NinteiShinseiTorisageManager() {
-        shinseiDac = InstanceCreator.create(INinteiShinseiJohoDac.class);
+        shinseiDac = InstanceProvider.create(INinteiShinseiJohoDac.class);
     }
 
     /**
@@ -97,6 +97,6 @@ public class NinteiShinseiTorisageManager {
         DbT5001NinteiShinseiJohoEntity 更新前entity = shinseiDac.select(申請書管理No);
         DbT5001NinteiShinseiJohoEntity 更新後entity = NinteishinseiTorisageTaishoshaMapper
                 .to認定申請情報Entity(更新前entity, 認定申請取下げ情報);
-        return shinseiDac.update(更新後entity) == 1 ? true : false;
+        return shinseiDac.insert(更新後entity) == 1 ? true : false;
     }
 }

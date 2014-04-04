@@ -15,6 +15,9 @@ import org.junit.BeforeClass;
  */
 public class DbeTestBase extends TestBase3 {
 
+    /**
+     * ダミーのControlDataを作成します。
+     */
     @BeforeClass
     public static void setUpClass() {
         setDummyControlData(new RString("DBE"));

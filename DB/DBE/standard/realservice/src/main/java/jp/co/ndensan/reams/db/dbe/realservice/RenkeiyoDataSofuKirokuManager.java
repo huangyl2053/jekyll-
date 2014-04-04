@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbe.entity.mapper.RenkeiyoDataSofuKirokuMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IRenkeiyoDataSofuKirokuDac;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 連携用データ送付記録の情報を管理するクラスです。
@@ -33,7 +33,7 @@ public class RenkeiyoDataSofuKirokuManager {
      *
      */
     public RenkeiyoDataSofuKirokuManager() {
-        dac = InstanceCreator.create(IRenkeiyoDataSofuKirokuDac.class);
+        dac = InstanceProvider.create(IRenkeiyoDataSofuKirokuDac.class);
     }
 
     /**

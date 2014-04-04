@@ -1,6 +1,0 @@
-﻿shinsakaiKaisaiBashoCode,varchar,ShinsakaiKaisaiBashoCode,,,,,A
-shinsakaiKaisaiBashoMei,varchar,RString,,,,,A
-shinsakaiKaisaiChikuCode,UDD035Code,ShinsakaiKaisaiBashoChikuCode,DB,100,,,A
-shinsakaiKaisaiBashoJusho,UDD046Jusho,RString,,,,,A
-shinsakaiKaisaiBashoTelNo,UDD026TelNo,RString,,,,,A
-shinsakaiKaisaiBashoJokyo,bool,boolean,,,,,A

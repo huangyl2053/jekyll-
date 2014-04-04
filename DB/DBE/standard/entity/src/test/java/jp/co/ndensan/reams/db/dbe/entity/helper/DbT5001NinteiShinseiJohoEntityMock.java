@@ -37,7 +37,7 @@ public class DbT5001NinteiShinseiJohoEntityMock {
                         new KaigoHihokenshaNo(試験用文字列),
                         new ShikibetsuCode(試験用文字列),
                         new FlexibleDate(new RString("20140101")),
-                        new EdabanCode(new RString("01")),
+                        new EdabanCode(new RString("001")),
                         //                new Code(試験用文字列),
                         NinteiShinseiKubunShinsei.新規申請,
                         new Code(試験用文字列),

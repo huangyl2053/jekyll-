@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.INinteichosaItakusakiDac;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 認定調査委託先の情報を管理するクラスです
@@ -37,8 +37,8 @@ public class NinteichosaItakusakiManager {
      *
      */
     public NinteichosaItakusakiManager() {
-        dac = InstanceCreator.create(INinteichosaItakusakiDac.class);
-        hatsubanDac = InstanceCreator.create(IHatsubanKanriJohoDac.class);
+        dac = InstanceProvider.create(INinteichosaItakusakiDac.class);
+        hatsubanDac = InstanceProvider.create(IHatsubanKanriJohoDac.class);
     }
 
     /**

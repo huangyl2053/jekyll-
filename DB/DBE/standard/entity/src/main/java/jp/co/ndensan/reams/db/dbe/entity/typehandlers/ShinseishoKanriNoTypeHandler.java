@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class ShinseishoKanriNoTypeHandler extends BaseTypeHandler<ShinseishoKanriNo> {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, ShinseishoKanriNo parameter, JdbcType jdbcType) throws SQLException {
         ps.setString(i, parameter == null ? null : parameter.getColumnValue().toString());

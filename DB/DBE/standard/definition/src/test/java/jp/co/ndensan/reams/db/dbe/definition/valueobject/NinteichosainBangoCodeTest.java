@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -18,11 +18,11 @@ import org.junit.runner.RunWith;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class NinteichosainBangoCodeTest extends TestBase {
+public class NinteichosainBangoCodeTest {
 
     private static NinteichosainBangoCode sut;
 
-    public static class コンストラクタのテスト {
+    public static class コンストラクタのテスト extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
         public void nullが渡されたとき_NullPinterExceptionが発生する() {
@@ -30,7 +30,7 @@ public class NinteichosainBangoCodeTest extends TestBase {
         }
     }
 
-    public static class equalsのテスト {
+    public static class equalsのテスト extends DbeTestBase {
 
         @Test
         public void 引数にnullを渡すと_falseが返る() {
@@ -60,7 +60,7 @@ public class NinteichosainBangoCodeTest extends TestBase {
         }
     }
 
-    public static class hashCodeのテスト {
+    public static class hashCodeのテスト extends DbeTestBase {
 
         @Test
         public void メンバの内容が同一の_ChosainBangoCode型のクラスを渡したとき_hashCodeの値が同じになる() {

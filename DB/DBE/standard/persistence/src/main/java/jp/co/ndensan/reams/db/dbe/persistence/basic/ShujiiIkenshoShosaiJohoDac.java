@@ -4,44 +4,75 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
-import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5013ShujiiIkenshoShosaiJoho;
-import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5013ShujiiIkenshoShosaiJoho.*;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5013ShujiiIkenshoShosaiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
+import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
+import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5013ShujiiIkenshoShosaiJoho.*;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
-import static jp.co.ndensan.reams.uz.uza.util.db.Order.*;
 
 /**
- * 主治医意見書の詳細情報を取得するDacです。
+ * 主治医意見書詳細情報のデータアクセスクラスです。
  *
- * @author n8178 城間篤人
+ * @author N8156 宮本 康
  */
-public class ShujiiIkenshoShosaiJohoDac {
+public class ShujiiIkenshoShosaiJohoDac implements IReplaceable<DbT5013ShujiiIkenshoShosaiJohoEntity>, IDeletable<DbT5013ShujiiIkenshoShosaiJohoEntity> {
 
     @InjectSession
     private SqlSession session;
 
-    /**
-     * 申請書管理番号を指定し、主治医意見書詳細情報の最新を取得します。
-     *
-     * @param 申請書管理番号 申請書管理番号
-     * @return 主治医意見書詳細情報
-     */
     @Transaction
-    public DbT5013ShujiiIkenshoShosaiJohoEntity select(ShinseishoKanriNo 申請書管理番号) {
+    public DbT5013ShujiiIkenshoShosaiJohoEntity select(ShinseishoKanriNo 申請書管理番号, IkenshosakuseiIraiRirekiNo 意見書履歴番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        List<DbT5013ShujiiIkenshoShosaiJohoEntity> list = accessor.select().table(DbT5013ShujiiIkenshoShosaiJoho.class)
-                .where(eq(shinseishoKanriNo, 申請書管理番号))
-                .order(by(ikenshoIraiRirekiNo, DESC))
-                .toList(DbT5013ShujiiIkenshoShosaiJohoEntity.class);
-        if (list.isEmpty()) {
-            return null;
-        }
-        return list.get(0);
+        return accessor.select()
+                .table(DbT5013ShujiiIkenshoShosaiJoho.class)
+                .where(and(
+                eq(shinseishoKanriNo, 申請書管理番号),
+                eq(ikenshoIraiRirekiNo, 意見書履歴番号.value())))
+                .toObject(DbT5013ShujiiIkenshoShosaiJohoEntity.class);
+    }
+
+    @Override
+    @Transaction
+    public int insertOrUpdate(DbT5013ShujiiIkenshoShosaiJohoEntity entity) {
+        return getMatchRowCount(entity) == 0 ? insert(entity) : update(entity);
+    }
+
+    @Override
+    @Transaction
+    public int insert(DbT5013ShujiiIkenshoShosaiJohoEntity entity) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.insert(entity).execute();
+    }
+
+    @Override
+    @Transaction
+    public int update(DbT5013ShujiiIkenshoShosaiJohoEntity entity) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.update(entity).execute();
+    }
+
+    @Override
+    @Transaction
+    public int delete(DbT5013ShujiiIkenshoShosaiJohoEntity entity) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.delete(entity).execute();
+    }
+
+    @Transaction
+    private int getMatchRowCount(DbT5013ShujiiIkenshoShosaiJohoEntity entity) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select()
+                .table(DbT5013ShujiiIkenshoShosaiJoho.class)
+                .where(and(
+                eq(shinseishoKanriNo, entity.getShinseishoKanriNo()),
+                eq(ikenshoIraiRirekiNo, entity.getIkenshoIraiRirekiNo())))
+                .getCount();
     }
 }

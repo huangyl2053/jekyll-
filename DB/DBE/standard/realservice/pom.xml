@@ -25,6 +25,10 @@
             <artifactId>UrfPersistence</artifactId>
         </dependency>
         <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urf</groupId>
+            <artifactId>UrfRealService</artifactId>
+        </dependency>
+        <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzRealService</artifactId>
         </dependency>

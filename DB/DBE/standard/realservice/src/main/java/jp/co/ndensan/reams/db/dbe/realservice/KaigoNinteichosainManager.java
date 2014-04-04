@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbe.entity.mapper.KaigoNinteichosainMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.INinteichosaItakusakiDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IKaigoNinteichosainDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 介護認定調査員情報を扱うクラスです。
@@ -33,8 +33,8 @@ public class KaigoNinteichosainManager {
      * デフォルトコンストラクタです。
      */
     public KaigoNinteichosainManager() {
-        chosainDac = InstanceCreator.create(IKaigoNinteichosainDac.class);
-        itakusakiDac = InstanceCreator.create(INinteichosaItakusakiDac.class);
+        chosainDac = InstanceProvider.create(IKaigoNinteichosainDac.class);
+        itakusakiDac = InstanceProvider.create(INinteichosaItakusakiDac.class);
     }
 
     /**
@@ -150,8 +150,7 @@ public class KaigoNinteichosainManager {
         List<KaigoNinteichosain> chosainList = new ArrayList<>();
 
         for (DbT7013ChosainJohoEntity chosainEntity : entityList) {
-            DbT7010NinteichosaItakusakiJohoEntity itakusakiEntity
-                    = itakusakiDac.select(chosainEntity.getShichosonCode().getValue(), chosainEntity.getKaigoJigyoshaNo(), true);
+            DbT7010NinteichosaItakusakiJohoEntity itakusakiEntity = itakusakiDac.select(chosainEntity.getShichosonCode().getValue(), chosainEntity.getKaigoJigyoshaNo(), true);
             chosainList.add(KaigoNinteichosainMapper.toKaigoNinteichosain(chosainEntity, itakusakiEntity));
         }
 

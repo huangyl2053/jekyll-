@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResult;
 import jp.co.ndensan.reams.db.dbe.business.helper.IchijiHanteiTestBusinessCreator;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiKeikokuShubetsu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KariIchijiHanteiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5016IchijiHanteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.IchijiHanteiTestEntityCreator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;

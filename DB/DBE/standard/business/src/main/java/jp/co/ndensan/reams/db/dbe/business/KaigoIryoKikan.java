@@ -13,13 +13,13 @@ import jp.co.ndensan.reams.ur.urz.business.IIryoKikan;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.business.IKoza;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * 介護の主治医医療機関を表すクラスです。
@@ -82,7 +82,7 @@ public class KaigoIryoKikan implements IIryoKikan, IShujiiIryoKikan {
     }
 
     @Override
-    public Range<RDate> get開設期間() {
+    public Range<FlexibleDate> get開設期間() {
         return 医療機関.get開設期間();
     }
 
@@ -97,7 +97,7 @@ public class KaigoIryoKikan implements IIryoKikan, IShujiiIryoKikan {
     }
 
     @Override
-    public RDate get異動年月日() {
+    public FlexibleDate get異動年月日() {
         return 医療機関.get異動年月日();
     }
 
@@ -122,7 +122,7 @@ public class KaigoIryoKikan implements IIryoKikan, IShujiiIryoKikan {
     }
 
     @Override
-    public boolean is有効医療機関(RDate 基準日) {
+    public boolean is有効医療機関(FlexibleDate 基準日) {
         return 医療機関.is有効医療機関(基準日);
     }
 

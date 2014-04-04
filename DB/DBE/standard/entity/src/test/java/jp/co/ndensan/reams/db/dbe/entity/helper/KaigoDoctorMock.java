@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
@@ -95,10 +96,10 @@ public class KaigoDoctorMock {
                 new RString("所在地郵便番号"),
                 new RString("所在地住所"),
                 new RString("所在地カナ住所"),
-                new Range(RDate.MIN, RDate.MAX),
+                new Range(FlexibleDate.MIN, FlexibleDate.MAX),
                 new _Doctors(new ArrayList<IDoctor>()),
                 new ArrayList<IKoza>(),
-                RDate.MIN,
+                FlexibleDate.MIN,
                 new RString("休止区分"),
                 new RString("異動事由"),
                 new RString("会員区分"),

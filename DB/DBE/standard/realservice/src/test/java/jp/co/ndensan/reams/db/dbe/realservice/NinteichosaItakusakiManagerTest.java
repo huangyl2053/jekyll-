@@ -68,7 +68,6 @@ public class NinteichosaItakusakiManagerTest {
         entity.set機関の区分(new RString("b"));
         entity.set調査委託区分(ChosaItakuKubun.指定なし);
 
-
         list.add(entity);
 
         emptyList = Collections.EMPTY_LIST;
@@ -88,7 +87,6 @@ public class NinteichosaItakusakiManagerTest {
         entity.set調査委託区分(ChosaItakuKubun.指定なし);
         list.add(entity);
         when(ninteichosaItakusakiDac.selectAll(new RString("20203"))).thenReturn(list);
-
 
     }
 
@@ -156,8 +154,9 @@ public class NinteichosaItakusakiManagerTest {
 
         @Test
         public void 引数の指定がない場合get認定調査委託先事業者番号指定はNullを返却する() {
-            jigyoshaNo = new JigyoshaNo(null);
-            when(ninteichosaItakusakiDac.select(null, jigyoshaNo, true)).thenReturn(null);
+//            jigyoshaNo = new JigyoshaNo(null);
+            jigyoshaNo = null;
+            when(ninteichosaItakusakiDac.select(new RString("20205"), jigyoshaNo, true)).thenReturn(null);
             NinteichosaItakusaki result = sut.get認定調査委託先事業者番号指定(null, jigyoshaNo, true);
             assertThat(result, nullValue());
         }

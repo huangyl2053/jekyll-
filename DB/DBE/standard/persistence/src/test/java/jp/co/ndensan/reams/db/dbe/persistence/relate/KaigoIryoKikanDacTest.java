@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.HokenShubetsu;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestDacBase;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
 import org.junit.Test;
 import static org.junit.Assert.*;

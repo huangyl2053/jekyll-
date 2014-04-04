@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5010NinteichosaTokkijikoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaTokkijikoMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteichosaTokkijikoDac;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 認定調査特記事項のManagerクラスです。
@@ -27,7 +27,7 @@ public class NinteichosaTokkijikoManager {
      * デフォルトコンストラクタです。
      */
     public NinteichosaTokkijikoManager() {
-        dac = InstanceCreator.create(INinteichosaTokkijikoDac.class);
+        dac = InstanceProvider.create(INinteichosaTokkijikoDac.class);
     }
 
     /**

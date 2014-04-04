@@ -191,7 +191,7 @@ public class ShujiiIkenshoSakuseiIraiKirokuManagerTest {
     private static INinteiShinseiJohoDac createShinseiDac(int flg) {
         INinteiShinseiJohoDac dac = mock(INinteiShinseiJohoDac.class);
         when(dac.select(any(ShinseishoKanriNo.class))).thenReturn(createShinseiEntity(flg));
-        when(dac.update(any(DbT5001NinteiShinseiJohoEntity.class))).thenReturn(flg);
+        when(dac.insert(any(DbT5001NinteiShinseiJohoEntity.class))).thenReturn(flg);
         return dac;
     }
 

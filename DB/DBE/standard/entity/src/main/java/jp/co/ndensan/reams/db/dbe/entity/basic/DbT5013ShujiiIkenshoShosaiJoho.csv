@@ -38,8 +38,13 @@ ik_tokubetsuIryoKeikanEiyoUmuKubun,bool,boolean,,,,,A
 ik_tokubetsuIryoMonitorSokuteiUmuKubun,bool,boolean,,,,,A
 ik_tokubetsuIryoJokusoShochiUmuKubun,bool,boolean,,,,,A
 ik_tokubetsuIryoCatheterUmuKubun,bool,boolean,,,,,A
+<<<<<<< HEAD
 ik_seikatsuJiritsudoShyogaiCode,UDD035Code,Code,SubGyomuCode.DBE認定支援,DbeShubetsuKey.障害高齢者自立度,,,A
 ik_seikatsuJiritsudoNinchshoCode,UDD035Code,Code,SubGyomuCode.DBE認定支援,DbeShubetsuKey.認知症高齢者自立度,,,A
+=======
+ik_seikatsuJiritsudoShyogaiCode,UDD035Code,Code,,,,,A
+ik_seikatsuJiritsudoNinchshoCode,UDD035Code,Code,,,,,A
+>>>>>>> origin/develop
 ik_chukakuShojoTankiKioku,bpchar,RString,,,,,A
 ik_chukakuShojoNinchiNoryoku,bpchar,RString,,,,,A
 ik_chukakuShojoDentatsuNoryoku,bpchar,RString,,,,,A

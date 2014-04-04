@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import java.util.Objects;
 
 /**
  * DbT5009NinteichosahyoJohoの項目定義クラスです
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
  * @author n8178 城間篤人
  */
 public class DbT5009NinteichosahyoJohoEntity implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5009NinteichosahyoJoho");
@@ -2048,6 +2049,26 @@ public class DbT5009NinteichosahyoJohoEntity implements IDbAccessable {
      */
     public void setCk_jokyoHenka(RString ck_jokyoHenka) {
         this.ck_jokyoHenka = ck_jokyoHenka;
+    }
+
+    /**
+     * このエンティティの主キーが他の{@literal DbT5009NinteichosahyoJohoEntity}と等しいか判定します。
+     *
+     * @param other 比較するエンティティ
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT5009NinteichosahyoJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     */
+    public boolean equalsPrimaryKeys(DbT5009NinteichosahyoJohoEntity other) {
+        if (other == null) {
+            return false;
+        }
+        if (!Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo)) {
+            return false;
+        }
+        if (this.ninteichosaRirekiNo != other.ninteichosaRirekiNo) {
+            return false;
+        }
+        return true;
     }
 // </editor-fold>
 }

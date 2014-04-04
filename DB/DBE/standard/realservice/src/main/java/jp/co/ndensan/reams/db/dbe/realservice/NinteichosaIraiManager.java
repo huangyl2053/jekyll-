@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaIraiMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteichosaIraiDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 認定調査依頼情報を扱い管理するクラスです。
@@ -27,7 +27,7 @@ public class NinteichosaIraiManager {
      * デフォルトコンストラクタです。
      */
     public NinteichosaIraiManager() {
-        dac = InstanceCreator.create(INinteichosaIraiDac.class);
+        dac = InstanceProvider.create(INinteichosaIraiDac.class);
     }
 
     /**

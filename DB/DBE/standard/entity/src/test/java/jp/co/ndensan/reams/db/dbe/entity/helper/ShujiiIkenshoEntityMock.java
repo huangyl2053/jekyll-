@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.entity.helper;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiKaisu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiryoShubetsu;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5012ShujiiIkenshoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5013ShujiiIkenshoShosaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.relate.ShujiiIkenshoEntity;
@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import static jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice.*;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.*;
 import static org.mockito.Mockito.spy;
 
 /**
@@ -256,7 +256,7 @@ public class ShujiiIkenshoEntityMock {
         entity.setIk_kansenshoUmu(NashiAri2.無.getCode());
         entity.setIk_kansenshoShojo(new RString("感染症内容"));
         entity.setIk_tokkiJiko(new RString("特記事項"));
-        entity.setIk_kangoSyokuiHomonUmu(Checked.有り.getCode());
+        entity.setIk_kangoShokuiHomonUmu(Checked.有り.getCode());
         return entity;
     }
 }

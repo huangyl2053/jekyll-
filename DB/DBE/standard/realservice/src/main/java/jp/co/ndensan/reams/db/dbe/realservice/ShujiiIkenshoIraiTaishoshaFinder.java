@@ -35,7 +35,7 @@ import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
 import jp.co.ndensan.reams.ur.urz.realservice.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 主治医意見書依頼対象者の情報を扱うクラスです。
@@ -54,11 +54,11 @@ public class ShujiiIkenshoIraiTaishoshaFinder {
      * コンストラクタです。
      */
     public ShujiiIkenshoIraiTaishoshaFinder() {
-        ninteiShinchokuJohoDac = InstanceCreator.create(INinteiShinchokuJohoDac.class);
-        shujiiIkenshoIraiTaishoshaDac = InstanceCreator.create(IShujiiIkenshoIraiTaishoshaDac.class);
-        ninteiShinseiJohoDac = InstanceCreator.create(INinteiShinseiJohoDac.class);
-        shujiiJohoDac = InstanceCreator.create(IShujiiJohoDac.class);
-        shujiiIkenshoIraiJohoDac = InstanceCreator.create(IShujiiIkenshoIraiJohoDac.class);
+        ninteiShinchokuJohoDac = InstanceProvider.create(INinteiShinchokuJohoDac.class);
+        shujiiIkenshoIraiTaishoshaDac = InstanceProvider.create(IShujiiIkenshoIraiTaishoshaDac.class);
+        ninteiShinseiJohoDac = InstanceProvider.create(INinteiShinseiJohoDac.class);
+        shujiiJohoDac = InstanceProvider.create(IShujiiJohoDac.class);
+        shujiiIkenshoIraiJohoDac = InstanceProvider.create(IShujiiIkenshoIraiJohoDac.class);
     }
 
     /**

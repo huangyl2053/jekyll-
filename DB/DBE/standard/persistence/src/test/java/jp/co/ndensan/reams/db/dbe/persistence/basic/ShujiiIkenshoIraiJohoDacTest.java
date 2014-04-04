@@ -44,7 +44,7 @@ public class ShujiiIkenshoIraiJohoDacTest extends DbeTestDacBase {
     public static class select extends TestDacBase {
 
         static {
-            setGyomuCD("DB");
+            setGyomuCD("DBE");
         }
 
         @Override
@@ -66,7 +66,7 @@ public class ShujiiIkenshoIraiJohoDacTest extends DbeTestDacBase {
     public static class selectBy申請書管理番号 extends TestDacBase {
 
         static {
-            setGyomuCD("DB");
+            setGyomuCD("DBE");
         }
 
         @Override
@@ -93,7 +93,7 @@ public class ShujiiIkenshoIraiJohoDacTest extends DbeTestDacBase {
     public static class selectBy依頼年月日 extends TestDacBase {
 
         static {
-            setGyomuCD("DB");
+            setGyomuCD("DBE");
         }
 
         @Override
@@ -120,7 +120,7 @@ public class ShujiiIkenshoIraiJohoDacTest extends DbeTestDacBase {
     public static class selectBy主治医情報 extends TestDacBase {
 
         static {
-            setGyomuCD("DB");
+            setGyomuCD("DBE");
         }
 
         @Override
@@ -147,7 +147,7 @@ public class ShujiiIkenshoIraiJohoDacTest extends DbeTestDacBase {
     public static class selectBy督促年月日 extends TestDacBase {
 
         static {
-            setGyomuCD("DB");
+            setGyomuCD("DBE");
         }
 
         @Override
@@ -174,7 +174,7 @@ public class ShujiiIkenshoIraiJohoDacTest extends DbeTestDacBase {
     public static class insertOrUpdate extends TestDacBase {
 
         static {
-            setGyomuCD("DB");
+            setGyomuCD("DBE");
         }
 
         @Override
@@ -198,7 +198,7 @@ public class ShujiiIkenshoIraiJohoDacTest extends DbeTestDacBase {
     public static class insert extends TestDacBase {
 
         static {
-            setGyomuCD("DB");
+            setGyomuCD("DBE");
         }
 
         @Override
@@ -226,7 +226,7 @@ public class ShujiiIkenshoIraiJohoDacTest extends DbeTestDacBase {
     public static class update extends TestDacBase {
 
         static {
-            setGyomuCD("DB");
+            setGyomuCD("DBE");
         }
 
         @Override
@@ -254,7 +254,7 @@ public class ShujiiIkenshoIraiJohoDacTest extends DbeTestDacBase {
     public static class delete extends TestDacBase {
 
         static {
-            setGyomuCD("DB");
+            setGyomuCD("DBE");
         }
 
         @Override

@@ -48,11 +48,11 @@ public class ShujiiIkenshoIraiTaishoshaTest extends TestBase {
             被保険者番号 = new KaigoHihokenshaNo(new RString("0001"));
             認定申請年月日 = new FlexibleDate("20140101");
             認定申請区分 = NinteiShinseiKubunShinsei.新規申請;
-            個人情報 = mock(IKojin.class);
+//            個人情報 = mock(IKojin.class);
             氏名 = new RString("あああ");
             住所 = new RString("長野市AAAAAAAA");
-            主治医医療機関 = mock(KaigoIryoKikan.class);
-            主治医 = mock(IDoctor.class);
+//            主治医医療機関 = mock(KaigoIryoKikan.class);
+//            主治医 = mock(IDoctor.class);
         }
 
         @Test(expected = NullPointerException.class)

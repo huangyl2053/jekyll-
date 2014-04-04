@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
 /**
  * 認定申請情報のMapperです。
@@ -55,8 +57,8 @@ public final class NinteishinseiJohoMapper {
                 entity.isShisetsuNyushoUmuKubun(),
                 entity.getSichosonRenrakuJiko(),
                 new NinteiShinseiTorisage(TorisageKubun.toValue(entity.getTorisageKubunCode()),
-                entity.getTorisageRiyu(), entity.getTorisageYMD(),
-                ShinsaKeizokuKubun.toValue(entity.isShinsaKeizokuKubun())));
+                        entity.getTorisageRiyu(), entity.getTorisageYMD(),
+                        ShinsaKeizokuKubun.toValue(entity.isShinsaKeizokuKubun())));
     }
 
     /**

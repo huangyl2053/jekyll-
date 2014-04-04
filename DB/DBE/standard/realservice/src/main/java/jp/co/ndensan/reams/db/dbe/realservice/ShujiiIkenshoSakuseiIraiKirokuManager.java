@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 主治医意見書作成依頼記録を管理するクラスです。
@@ -37,8 +37,8 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
      * InstanceCreatorを用いてDacのインスタンスを生成し、メンバ変数に保持します。
      */
     public ShujiiIkenshoSakuseiIraiKirokuManager() {
-        iraiDac = InstanceCreator.create(IShujiiIkenshoIraiJohoDac.class);
-        shinseiDac = InstanceCreator.create(INinteiShinseiJohoDac.class);
+        iraiDac = InstanceProvider.create(IShujiiIkenshoIraiJohoDac.class);
+        shinseiDac = InstanceProvider.create(INinteiShinseiJohoDac.class);
         kaigoDoctorManager = new KaigoDoctorManager();
     }
 
@@ -135,7 +135,7 @@ public class ShujiiIkenshoSakuseiIraiKirokuManager {
      * @return 更新が成功した場合はtrueを返します。
      */
     public boolean save(NinteiShinseiJoho 認定申請情報) {
-        return shinseiDac.update(NinteishinseiJohoMapper.to認定申請情報Entity(認定申請情報)) != 0;
+        return shinseiDac.insert(NinteishinseiJohoMapper.to認定申請情報Entity(認定申請情報)) != 0;
     }
 
     private ShujiiIkenshoSakuseiIrai getShujiiIkenshoSakuseiIrai(DbT5011ShujiiIkenshoIraiJohoEntity iraiEntity) {

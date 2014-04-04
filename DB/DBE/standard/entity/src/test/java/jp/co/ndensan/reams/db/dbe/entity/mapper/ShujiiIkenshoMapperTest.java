@@ -8,11 +8,12 @@ import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoResult;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiKaisu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiryoShubetsu;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.KoroshoIFKubun;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShujiiIkenshoRirekiNo;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShujiiIkenshoEntityMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShujiiIkenshoResultMock;
 import jp.co.ndensan.reams.db.dbe.entity.relate.ShujiiIkenshoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -20,8 +21,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.junit.Test;
-import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoItemKubun.*;
-import static jp.co.ndensan.reams.db.dbe.definition.ninteichosa.enumeratedtype.Choice.*;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemKubun.*;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -43,17 +44,18 @@ public class ShujiiIkenshoMapperTest {
 
         @Test
         public void 意見書履歴番号の設定がある時_toShujiiIkenshoResult_get意見書履歴番号は_設定値を返す() {
-            assertThat(toShujiiIkenshoResult().get基本情報().get意見書履歴番号(), is(new ShujiiIkenshoRirekiNo(0)));
+            assertThat(toShujiiIkenshoResult().get基本情報().get意見書履歴番号(), is(new IkenshosakuseiIraiRirekiNo(0)));
         }
 
         @Test
         public void 意見書依頼区分の設定がある時_toShujiiIkenshoResult_get意見書依頼区分は_設定値を返す() {
             assertThat(toShujiiIkenshoResult().get基本情報().get意見書依頼区分(), is(ShujiiIkenshoIraiKubun.初回));
         }
-//        @Test
-//        public void 主治医の設定がある時_toShujiiIkenshoResult_get主治医は_設定値を返す() {
-//            assertThat(toShujiiIkenshoResult().get基本情報().get意見書依頼区分(), is(ShujiiIkenshoIraiKubun.初回));
-//        }
+
+        @Test
+        public void 主治医の設定がある時_toShujiiIkenshoResult_get主治医は_設定値を返す() {
+            assertThat(toShujiiIkenshoResult().get基本情報().get主治医().get介護医師コード(), is(new KaigoDoctorCode(new RString("介護医師コード"))));
+        }
 
         @Test
         public void 意見書受領年月日の設定がある時_toShujiiIkenshoResult_get意見書受領年月日は_設定値を返す() {
@@ -95,7 +97,7 @@ public class ShujiiIkenshoMapperTest {
 
         @Test
         public void 意見書履歴番号の設定がある時_toShujiiIkenshoResult_get意見書履歴番号は_設定値を返す() {
-            assertThat(toShujiiIkenshoResult().get詳細情報().get意見書履歴番号(), is(new ShujiiIkenshoRirekiNo(0)));
+            assertThat(toShujiiIkenshoResult().get詳細情報().get意見書履歴番号(), is(new IkenshosakuseiIraiRirekiNo(0)));
         }
 
         @Test
@@ -1555,8 +1557,8 @@ public class ShujiiIkenshoMapperTest {
         }
 
         @Test
-        public void 看護職員の訪問による相談_支援の設定がある時_toShujiiIkenshoEntity_getIk_kangoSyokuiHomonUmuは_設定値を返す() {
-            assertThat(toShujiiIkenshoEntity().getDbT5013ShujiiIkenshoShosaiJohoEntity().getIk_kangoSyokuiHomonUmu(), is(Checked.有り.getCode()));
+        public void 看護職員の訪問による相談_支援の設定がある時_toShujiiIkenshoEntity_getIk_kangoShokuiHomonUmuは_設定値を返す() {
+            assertThat(toShujiiIkenshoEntity().getDbT5013ShujiiIkenshoShosaiJohoEntity().getIk_kangoShokuiHomonUmu(), is(Checked.有り.getCode()));
         }
     }
 

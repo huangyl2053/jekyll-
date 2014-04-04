@@ -4,10 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.ShujiiIkensho;
-import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoItemForResult;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IShujiiIkenshoItemKubun;
-import jp.co.ndensan.reams.db.dbe.definition.ShujiiIkenshoItem;
+import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ShujiiIkensho;
+import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ShujiiIkenshoItemForResult;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.IShujiiIkenshoItemKubun;
+import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ShujiiIkenshoItem;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

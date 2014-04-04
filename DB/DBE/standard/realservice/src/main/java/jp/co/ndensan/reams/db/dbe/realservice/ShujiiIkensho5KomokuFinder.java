@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.realservice;
 
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkensho5Komoku;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5013ShujiiIkenshoShosaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.ShujiiIkensho5KomokuMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.ShujiiIkenshoShosaiJohoDac;
@@ -40,10 +41,11 @@ public class ShujiiIkensho5KomokuFinder {
      * 申請書管理番号を指定し、一次判定で使用する主治医意見書5項目の情報を取得します。
      *
      * @param 申請書管理番号 申請書管理番号
+     * @param 意見書作成依頼履歴番号 意見書作成依頼履歴番号
      * @return 主治医意見書5項目
      */
-    public ShujiiIkensho5Komoku get主治医意見書5項目(ShinseishoKanriNo 申請書管理番号) {
-        DbT5013ShujiiIkenshoShosaiJohoEntity entity = dac.select(申請書管理番号);
+    public ShujiiIkensho5Komoku get主治医意見書5項目(ShinseishoKanriNo 申請書管理番号, IkenshosakuseiIraiRirekiNo 意見書作成依頼履歴番号) {
+        DbT5013ShujiiIkenshoShosaiJohoEntity entity = dac.select(申請書管理番号, 意見書作成依頼履歴番号);
         return ShujiiIkensho5KomokuMapper.to主治医意見書5項目(entity);
     }
 }

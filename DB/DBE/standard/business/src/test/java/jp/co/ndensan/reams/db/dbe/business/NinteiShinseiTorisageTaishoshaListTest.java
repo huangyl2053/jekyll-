@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
@@ -77,11 +79,17 @@ public class NinteiShinseiTorisageTaishoshaListTest extends TestBase {
     }
 
     private static NinteiShinseiTorisageTaishosha create認定申請取下げ対象者(ShinseishoKanriNo 申請書管理番号) {
-        ShichosonCode 市町村コード = mock(ShichosonCode.class);
-        KaigoHihokenshaNo 被保険者番号 = mock(KaigoHihokenshaNo.class);
-        FlexibleDate 認定申請年月日 = mock(FlexibleDate.class);
+//        ShichosonCode 市町村コード = mock(ShichosonCode.class);
+//        KaigoHihokenshaNo 被保険者番号 = mock(KaigoHihokenshaNo.class);
+//        FlexibleDate 認定申請年月日 = mock(FlexibleDate.class);
+        ShichosonCode 市町村コード = new ShichosonCode(new RString("20205"));
+        KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(new RString("0000000001"));
+        FlexibleDate 認定申請年月日 = new FlexibleDate("00000000");
         NinteiShinseiKubunShinsei 認定申請区分_申請時コード = NinteiShinseiKubunShinsei.新規申請;
-        NinteiShinseiTorisage 認定申請取下げ = mock(NinteiShinseiTorisage.class);
+//        NinteiShinseiTorisage 認定申請取下げ = mock(NinteiShinseiTorisage.class);
+
+        NinteiShinseiTorisage 認定申請取下げ = new NinteiShinseiTorisage(TorisageKubun.認定申請有効,
+                new RString("取下げ理由"), new FlexibleDate("00000000"), ShinsaKeizokuKubun.継続する);
 
         return new NinteiShinseiTorisageTaishosha(申請書管理番号, 市町村コード,
                 被保険者番号, 認定申請年月日, 認定申請区分_申請時コード, 認定申請取下げ);

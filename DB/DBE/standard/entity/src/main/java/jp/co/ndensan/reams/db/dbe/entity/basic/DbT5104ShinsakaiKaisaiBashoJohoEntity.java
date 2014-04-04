@@ -5,21 +5,18 @@ import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-//import java.util.UUID.co.ndensan.reams.uz.uza.lang.UUID;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
- * DbT5104ShinsakaiKaisaiBashoJohoの項目定義クラスです。
+ * DbT5104ShinsakaiKaisaiBashoJohoの項目定義クラスです
  *
+ * @author n8178 城間篤人
  */
 public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
-//TODO 審査会開催場所及び審査会開催場所地区コードのValueObject使用は検討後に再テスト　2014/02/28
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5104ShinsakaiKaisaiBashoJoho");
@@ -32,9 +29,9 @@ public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private ShinsakaiKaisaiBashoCode shinsakaiKaisaiBashoCode;
+    private RString shinsakaiKaisaiBashoCode;
     private RString shinsakaiKaisaiBashoMei;
-    private ShinsakaiKaisaiBashoChikuCode shinsakaiKaisaiChikuCode;
+    private Code shinsakaiKaisaiChikuCode;
     private AtenaJusho shinsakaiKaisaiBashoJusho;
     private TelNo shinsakaiKaisaiBashoTelNo;
     private boolean shinsakaiKaisaiBashoJokyo;
@@ -89,8 +86,7 @@ public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
      *
      * @return shinsakaiKaisaiBashoCode
      */
-    public ShinsakaiKaisaiBashoCode getShinsakaiKaisaiBashoCode() {
-//    public RString getShinsakaiKaisaiBashoCode() {
+    public RString getShinsakaiKaisaiBashoCode() {
         return shinsakaiKaisaiBashoCode;
     }
 
@@ -99,8 +95,7 @@ public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
      *
      * @param shinsakaiKaisaiBashoCode shinsakaiKaisaiBashoCode
      */
-    public void setShinsakaiKaisaiBashoCode(ShinsakaiKaisaiBashoCode shinsakaiKaisaiBashoCode) {
-//    public void setShinsakaiKaisaiBashoCode(RString shinsakaiKaisaiBashoCode) {
+    public void setShinsakaiKaisaiBashoCode(RString shinsakaiKaisaiBashoCode) {
         this.shinsakaiKaisaiBashoCode = shinsakaiKaisaiBashoCode;
     }
 
@@ -127,9 +122,20 @@ public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
      *
      * @return shinsakaiKaisaiChikuCode
      */
-    public ShinsakaiKaisaiBashoChikuCode getShinsakaiKaisaiChikuCode() {
-//    public RString getShinsakaiKaisaiChikuCode() {
+    public Code getShinsakaiKaisaiChikuCode() {
         return shinsakaiKaisaiChikuCode;
+    }
+
+    public RString getShinsakaiKaisaiChikuCodeMeisho() {
+        //TODO n8178 城間篤人 コードマスタが作成された後に実装予定
+        //return CodeMaster.getCodeMeisho(new RString("DB"), new RString("100"), shinsakaiKaisaiChikuCode);
+        return new RString("meisho");
+    }
+
+    public RString getShinsakaiKaisaiChikuCodeRyakusho() {
+        //TODO n8178 城間篤人 コードマスタが作成された後に実装予定
+        //return CodeMaster.getCodeRyakusho(new RString("DB"), new RString("100"), shinsakaiKaisaiChikuCode);
+        return new RString("ryakusho");
     }
 
     /**
@@ -137,18 +143,9 @@ public class DbT5104ShinsakaiKaisaiBashoJohoEntity implements IDbAccessable {
      *
      * @param shinsakaiKaisaiChikuCode shinsakaiKaisaiChikuCode
      */
-    public void setShinsakaiKaisaiChikuCode(ShinsakaiKaisaiBashoChikuCode shinsakaiKaisaiChikuCode) {
-//    public void setShinsakaiKaisaiChikuCode(RString shinsakaiKaisaiChikuCode) {
+    public void setShinsakaiKaisaiChikuCode(Code shinsakaiKaisaiChikuCode) {
         this.shinsakaiKaisaiChikuCode = shinsakaiKaisaiChikuCode;
     }
-//TODO n1013 コードマスタの使用方法が固まってからテストを行う
-//    public RString getShinsakaiKaisaiChikuCodeMeisho() {
-//        return CodeMaster.getCodeMeisho(new RString("DB"), new RString("100"), shinsakaiKaisaiChikuCode.getColumnValue());
-//    }
-//
-//    public RString getShinsakaiKaisaiChikuCodeRyakusho() {
-//        return CodeMaster.getCodeRyakusho(new RString("DB"), new RString("100"), shinsakaiKaisaiChikuCode.getColumnValue());
-//    }
 
     /**
      * getShinsakaiKaisaiBashoJusho

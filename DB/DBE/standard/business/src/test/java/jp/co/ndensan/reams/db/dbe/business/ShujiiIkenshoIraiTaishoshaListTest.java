@@ -6,16 +6,28 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiShinseiDate;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
+import jp.co.ndensan.reams.ur.urz.business.IDateOfBirth;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
+import jp.co.ndensan.reams.ur.urz.business.IWorker;
+import jp.co.ndensan.reams.ur.urz.business._DateOfBirth;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
+import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuTaisho;
+import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.ITsuzukigaraList;
+import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._Kojin;
+import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._ShikibetsuTaisho;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
+import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.JuminJotai;
+import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.JuminShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -29,9 +41,12 @@ import static org.mockito.Mockito.mock;
  * @author N8187 久保田 英男
  */
 @RunWith(Enclosed.class)
-public class ShujiiIkenshoIraiTaishoshaListTest extends TestBase {
+public class ShujiiIkenshoIraiTaishoshaListTest extends DbeTestBase {
 
-    public static class get主治医意見書作成依頼処理対象者 extends TestBase {
+    public static class get主治医意見書作成依頼処理対象者 extends DbeTestBase {
+
+        public static void setUp() {
+        }
 
         @Test
         public void 申請書管理番号に10を指定したとき_申請書管理番号に10を持つ主治医意見書作成依頼対象者が返る() {
@@ -57,7 +72,7 @@ public class ShujiiIkenshoIraiTaishoshaListTest extends TestBase {
         }
     }
 
-    public static class sub主治医意見書作成依頼処理対象者List extends TestBase {
+    public static class sub主治医意見書作成依頼処理対象者List extends DbeTestBase {
 
         @Test
         public void 市町村コードに0001を指定したとき_市町村コードに0001を持つ主治医意見書作成依頼対象者がすべて返る() {
@@ -96,15 +111,27 @@ public class ShujiiIkenshoIraiTaishoshaListTest extends TestBase {
 
     private static ShujiiIkenshoIraiTaishosha create主治医意見書作成依頼対象者(ShinseishoKanriNo 申請書管理番号) {
 
+        ITsuzukigaraList 続柄 = null;
+//        IShikibetsuTaisho 識別対象 = mock(IShikibetsuTaisho.class);
+        IShikibetsuTaisho 識別対象 = new _ShikibetsuTaisho(new ShikibetsuCode("0000000001"), null, 0, true, null, FlexibleDate.MAX, FlexibleDate.EMPTY,
+                new SetaiCode("00001"), null, null, JuminShubetsu.日本人, null, null, null, null, 0);
         ShichosonCode 市町村コード = new ShichosonCode(new RString("0001"));
         KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(new RString("0002"));
         FlexibleDate 認定申請年月日 = new FlexibleDate(new RString("20140101"));
         NinteiShinseiKubunShinsei 認定申請区分 = NinteiShinseiKubunShinsei.新規申請;
-        IKojin 個人情報 = mock(IKojin.class);
         RString 氏名 = new RString("あああ");
         RString 住所 = new RString("長野市");
-        KaigoIryoKikan 主治医医療機関 = mock(KaigoIryoKikan.class);
-        IDoctor 主治医 = mock(IDoctor.class);
+//        IWorker 就労者 = mock(IWorker.class);
+        IWorker 就労者 = null;
+        IDateOfBirth 生年月日 = new _DateOfBirth(new RDate(19660401));
+//        IKojin 個人情報 = new _Kojin(識別対象, 就労者, new RString("旧性"), 生年月日, Gender.FEMALE,
+//                続柄, JuminJotai.住民, new FlexibleDate("00000000"), new FlexibleDate("00000000"),
+//                new RString("異動事由コード"), JuminShubetsu.日本人, new RString("家族番号"), 1);
+        IKojin 個人情報 = mock(IKojin.class);
+//        KaigoIryoKikan 主治医医療機関 = mock(KaigoIryoKikan.class);
+//        IDoctor 主治医 = mock(IDoctor.class);
+        KaigoIryoKikan 主治医医療機関 = null;
+        IDoctor 主治医 = null;
 
         return new ShujiiIkenshoIraiTaishosha(申請書管理番号,
                 市町村コード,

@@ -3,12 +3,12 @@ package jp.co.ndensan.reams.db.dbe.entity.basic;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * DbT5013ShujiiIkenshoShosaiJohoの項目定義クラスです
+ * 主治医意見書詳細情報を表す列挙型です。
  *
- * @author n8178 城間篤人
+ * @author N8156 宮本 康
  */
 public enum DbT5013ShujiiIkenshoShosaiJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
+// <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     insertDantaiCd(2147483647, 0),
     insertTimestamp(29, 0),
