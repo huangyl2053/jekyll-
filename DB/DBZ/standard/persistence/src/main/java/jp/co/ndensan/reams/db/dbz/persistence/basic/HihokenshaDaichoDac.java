@@ -36,7 +36,8 @@ public class HihokenshaDaichoDac implements IInsertable<DbT1001HihokenshaDaichoE
      * 地方公共団体コードから、指定した市町村の被保険者台帳情報を検索します。
      *
      * @param 地方公共団体コード {@link LasdecCode 地方公共団体コード}
-     * @return 被保険者台帳管理Entityリスト
+     * @return
+     * {@link DbT1001HihokenshaDaichoEntity 被保険者台帳管理Entity}の{@link List リスト}
      */
     @Transaction
     public List<DbT1001HihokenshaDaichoEntity> select(LasdecCode 地方公共団体コード) {
@@ -51,12 +52,32 @@ public class HihokenshaDaichoDac implements IInsertable<DbT1001HihokenshaDaichoE
     }
 
     /**
+     * 指定の{@link LasdecCode 地方公共団体コード},{@link ShikibetsuCode 識別コード}から特定される個人の、
+     * 直近の資格情報を検索します。
+     *
+     * @param 地方公共団体コード {@link LasdecCode 地方公共団体コード}
+     * @param 識別コード {@link ShikibetsuCode 識別コード}
+     * @return 直近の資格情報を保持した{@link DbT1001HihokenshaDaichoEntity 被保険者台帳Entity}
+     */
+    @Transaction
+    public DbT1001HihokenshaDaichoEntity selectLatestOfPerson(LasdecCode 地方公共団体コード, ShikibetsuCode 識別コード) {
+        DbAccessorForAddType accessor = new DbAccessorForAddType(session);
+        List<DbT1001HihokenshaDaichoEntity> entities = accessor.
+                select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(eq(shichosonCode, 地方公共団体コード), eq(shikibetsuCode, 識別コード))).
+                order(by(shoriTimestamp, Order.DESC)).
+                toList(DbT1001HihokenshaDaichoEntity.class);
+        return entities.isEmpty() ? null : entities.get(0);
+    }
+
+    /**
      * 主キーから被保険者台帳を検索します。
      *
      * @param 地方公共団体コード {@link LasdecCode 地方公共団体コード}
      * @param 識別コード {@link ShikibetsuCode 識別コード}
      * @param 処理日時 {@link RDateTime 処理日時}
-     * @return
+     * @return {@link DbT1001HihokenshaDaichoEntity 被保険者台帳Entity}
      */
     @Transaction
     public DbT1001HihokenshaDaichoEntity selectFromKey(LasdecCode 地方公共団体コード, ShikibetsuCode 識別コード, RDateTime 処理日時) {

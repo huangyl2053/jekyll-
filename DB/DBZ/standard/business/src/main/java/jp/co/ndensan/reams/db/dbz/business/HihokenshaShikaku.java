@@ -487,7 +487,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
 
         private KaigoHihokenshaNo createKaigoHihokenshaNo() {
             RString value = this.kaigoShikaku.get被保険者番号();
-            if (value == null) {
+            if (isNull(value)) {
                 return null;
             }
             return new KaigoHihokenshaNo(value);
@@ -526,7 +526,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
                     toIShikakuSoshitsuJiyu(this.soshitsu.getReason().getCode()),
                     this.theHihokenshaNo.value(),
                     this.theLasdecCode.value(),
-                    toRDate(this.ichigoGaitoDate),
+                    toRDateOrMax(this.ichigoGaitoDate),
                     this.hihokenshaKubun,
                     this.jutokushaKubun);
             this.kaigoShikaku = shikaku;
@@ -541,14 +541,14 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
         }
 
         private RDate toRDateOrMin(FlexibleDate date) {
-            return date.isValid() ? toRDate(date) : RDate.MIN;
+            return date.isValid() ? _toRDate(date) : RDate.MIN;
         }
 
         private RDate toRDateOrMax(FlexibleDate date) {
-            return date.isValid() ? toRDate(date) : RDate.MAX;
+            return date.isValid() ? _toRDate(date) : RDate.MAX;
         }
 
-        private RDate toRDate(FlexibleDate date) {
+        private RDate _toRDate(FlexibleDate date) {
             return new RDate(date.toString());
         }
 

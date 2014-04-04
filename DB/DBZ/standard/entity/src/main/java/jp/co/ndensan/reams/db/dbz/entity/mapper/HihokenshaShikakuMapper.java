@@ -4,6 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.mapper;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshashoSaikofu;
 import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
@@ -88,6 +92,30 @@ public final class HihokenshaShikakuMapper {
         entity.setSaikofuJiyuCode(shikaku.get被保険者証再交付().getReason().getCode());
         entity.setChohyoKofuRirekiID(toValue(shikaku.get被保険者証再交付().getChohyoKofuRirekiID()));
         return entity;
+    }
+
+    /**
+     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の
+     * {@link List list}を、 {@link IHihokenshaShikaku IHihokenshaShikaku}の
+     * {@link List list}へ変換します。<br />
+     *
+     * 引数のlistが空だったときは、{@link Collections#EMPTY_LIST Collections.EMPTY_LIST}を返します。
+     *
+     * @param entities
+     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の{@link List list}
+     * @return
+     * {@link IHihokenshaShikaku IHihokenshaShikaku}の{@link List list}。もしくは、{@link Collections#EMPTY_LIST Collections.EMPTY_LIST}
+     */
+    public static List<IHihokenshaShikaku> toListOfHihokenshaShikaku(List<DbT1001HihokenshaDaichoEntity> entities) {
+        return entities.isEmpty() ? Collections.EMPTY_LIST : _toListOfHihokenshaShikaku(entities);
+    }
+
+    private static List<IHihokenshaShikaku> _toListOfHihokenshaShikaku(List<DbT1001HihokenshaDaichoEntity> entities) {
+        List<IHihokenshaShikaku> list = new ArrayList<>();
+        for (DbT1001HihokenshaDaichoEntity entity : entities) {
+            list.add(toHihokenshaShikaku(entity));
+        }
+        return list;
     }
 
     /**
