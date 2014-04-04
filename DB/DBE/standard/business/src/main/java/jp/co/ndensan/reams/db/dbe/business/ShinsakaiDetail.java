@@ -211,7 +211,7 @@ public class ShinsakaiDetail {
      * @return 存在するならtrue
      */
     public boolean is精神科医存在() {
-        return 精神科医師存在区分.is存在();
+        return 精神科医師存在区分 == GogitaiSeishinkaIshiSonzaiKubun.存在;
     }
 
     /**
@@ -229,7 +229,7 @@ public class ShinsakaiDetail {
      * @return ダミーならtrue
      */
     public boolean isDummy() {
-        return ダミー区分.isダミー();
+        return ダミー区分 == GogitaiDummyKubun.ダミー;
     }
 
     /**
@@ -256,7 +256,7 @@ public class ShinsakaiDetail {
      * @return 休会ならtrue
      */
     public boolean is休会() {
-        return 休会区分.is休会();
+        return 休会区分 == ShinsakaiKyukaiKubun.休会;
     }
 
     /**
