@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5001NinteiShinseiJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaIraiTestHelper;
