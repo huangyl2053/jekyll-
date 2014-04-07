@@ -3,11 +3,12 @@ package jp.co.ndensan.reams.db.dbz.entity.basic;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * DbT1001HihokenshaDaichoの項目定義クラスです
+ * DbT1001HihokenshaDaichoの項目定義クラスです。
  *
  */
 public enum DbT1001HihokenshaDaicho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
+
     insertDantaiCd(2147483647, 0),
     insertTimestamp(29, 0),
     insertReamsLoginId(2147483647, 0),
@@ -45,7 +46,6 @@ public enum DbT1001HihokenshaDaicho implements IColumnDefinition {
     saikofuKubun(1, 0),
     saikofuJiyuCode(2, 0),
     chohyoKofuRirekiID(10, 0);
-
     private final int maxLength;
     private final int scale;
 
@@ -56,6 +56,7 @@ public enum DbT1001HihokenshaDaicho implements IColumnDefinition {
 
     /**
      * getMaxLength
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -64,11 +65,11 @@ public enum DbT1001HihokenshaDaicho implements IColumnDefinition {
 
     /**
      * getScale
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {
         return scale;
     }
-
 // </editor-fold>
 }

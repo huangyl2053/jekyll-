@@ -30,6 +30,7 @@ import org.junit.Before;
 import static org.mockito.Mockito.*;
 
 /**
+ * HihokenshaFinderのテストです。
  *
  * @author N3327 三浦 凌
  */
