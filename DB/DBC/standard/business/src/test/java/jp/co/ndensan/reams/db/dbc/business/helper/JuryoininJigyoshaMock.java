@@ -107,31 +107,30 @@ public class JuryoininJigyoshaMock {
                 null, null, null, null, 1);
     }
 
-    public static IKoza createKoza() {
-        return new _Koza(new GyomuCode(new RString("DBC")),
-                new KamokuCode(new RString("01")),
-                new KinyuKikanShitenCode(new RString("101")),
-                new KinyuKikanCode(new RString("100")),
-                new RString("123456789"),
-                true,
-                new AtenaKanaMeisho(new RString("メイギニンタロウ")),
-                new AtenaMeisho(new RString("名義人太郎")),
-                true,
-                new AtenaKanaMeisho(new RString("検索次郎")),
-                new ShikibetsuCode(new RString("0001")),
-                new RString("種別"),
-                new RString("234567890"),
-                new RString("ABC"),
-                new Code(new RString("用途区分")),
-                YokinShubetsu.普通預金,
-                new FlexibleDate("20170101"),
-                new FlexibleDate("20140102"),
-                true,
-                true,
-                create金融機関(),
-                create金融機関支店());
-    }
-
+//    public static IKoza createKoza() {
+//        return new _Koza(new GyomuCode(new RString("DBC")),
+//                new KamokuCode(new RString("01")),
+//                new KinyuKikanShitenCode(new RString("101")),
+//                new KinyuKikanCode(new RString("100")),
+//                new RString("123456789"),
+//                true,
+//                new AtenaKanaMeisho(new RString("メイギニンタロウ")),
+//                new AtenaMeisho(new RString("名義人太郎")),
+//                true,
+//                new AtenaKanaMeisho(new RString("検索次郎")),
+//                new ShikibetsuCode(new RString("0001")),
+//                new RString("種別"),
+//                new RString("234567890"),
+//                new RString("ABC"),
+//                new Code(new RString("用途区分")),
+//                YokinShubetsu.普通預金,
+//                new FlexibleDate("20170101"),
+//                new FlexibleDate("20140102"),
+//                true,
+//                true,
+//                create金融機関(),
+//                create金融機関支店());
+//    }
     private static IKinyuKikan create金融機関() {
         return new _KinyuKikan(new KinyuKikanCode(new RString("0123")), new RString("金融機関名称"), new RString("金融機関カナ名称"),
                 new Range(new RDate("2014/01/10"), new RDate("2014/01/20")), 1);
