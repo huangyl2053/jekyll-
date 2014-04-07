@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.entity.helper.DbT1001HihokenshaDaichoEntityMoc
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import org.junit.experimental.runners.Enclosed;
@@ -88,9 +89,52 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
             }
         }
 
-        public static class FromKey extends DbzTestDacBase {
+        public static class selectLatestOfPerson extends DbzTestDacBase {
 
-            private DbT1001HihokenshaDaichoEntity entity;
+            private LasdecCode shichosonCode;
+            private ShikibetsuCode shikibetsuCode;
+            private FlexibleDate latestDate;
+
+            @Before
+            public void setUp() {
+                initializeTable();
+            }
+
+            @Test
+            public void selectLatestOfPersonは_ある個人に対する_直近の情報を取得する() {
+                DbT1001HihokenshaDaichoEntity result = sut.selectLatestOfPerson(shichosonCode, shikibetsuCode);
+                assertThat(result.getShikakuShutokuYMD(), is(latestDate));
+            }
+
+            private void initializeTable() {
+                shichosonCode = new LasdecCode("111111");
+                shikibetsuCode = new ShikibetsuCode("1234567890");
+                latestDate = new FlexibleDate("20140302");
+
+                sut.insert(createEntityFrom(toRDateTime(latestDate), latestDate));
+                FlexibleDate oneYearAgo = latestDate.minusYear(1);
+                sut.insert(createEntityFrom(toRDateTime(oneYearAgo), oneYearAgo));
+                FlexibleDate twoYearAgo = latestDate.minusYear(2);
+                sut.insert(createEntityFrom(toRDateTime(twoYearAgo), twoYearAgo));
+            }
+
+            private RDateTime toRDateTime(FlexibleDate date) {
+                int year = date.getYearValue();
+                int month = date.getMonthValue();
+                int day = date.getDayValue();
+                return RDateTime.of(year, month, day, 0, 0);
+            }
+
+            private DbT1001HihokenshaDaichoEntity createEntityFrom(RDateTime 処理日時, FlexibleDate 資格取得年月日) {
+                DbT1001HihokenshaDaichoEntity entity;
+                entity = DbT1001HihokenshaDaichoEntityMock.createWithKey(shichosonCode, shikibetsuCode, 処理日時);
+                entity.setShikakuShutokuYMD(資格取得年月日);
+                return entity;
+            }
+        }
+
+        public static class selectFromKey extends DbzTestDacBase {
+
             private RDateTime shoriTimestamp;
             private LasdecCode shichosonCode;
             private ShikibetsuCode shikibetsuCode;
@@ -110,8 +154,6 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
 
             private void initializeTable() {
                 insertWithSpecifiedKey();
-                sut.insert(DbT1001HihokenshaDaichoEntityMock.createWithKey(shichosonCode, shikibetsuCode, RDateTime.now()));
-                sut.insert(DbT1001HihokenshaDaichoEntityMock.createWithKey(shichosonCode, shikibetsuCode, RDateTime.now()));
             }
 
             private void insertWithSpecifiedKey() {

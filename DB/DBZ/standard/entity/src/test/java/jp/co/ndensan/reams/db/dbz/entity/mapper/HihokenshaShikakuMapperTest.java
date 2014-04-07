@@ -4,6 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.mapper;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshashoSaikofu;
 import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
@@ -53,38 +56,37 @@ import static org.mockito.Mockito.*;
 public class HihokenshaShikakuMapperTest extends DbzTestBase {
 
     private static HihokenshaShikakuMapper sut;
+    private static DbT1001HihokenshaDaichoEntity result;
+    private static final LasdecCode lasdecCode;
+    private static final ShikibetsuCode shikibetsuCode;
+    private static final RDateTime shoriTimestamp;
+    private static final KaigoHihokenshaNo hihokenshaNo;
+    private static final RDate ichigoGaitoDate;
+    private static final IKaigoShikaku kaigoShikaku;
+
+    static {
+        lasdecCode = new LasdecCode("123456");
+        shikibetsuCode = new ShikibetsuCode("1020304050");
+        shoriTimestamp = RDateTime.of(2014, 4, 2, 15, 47);
+        hihokenshaNo = new KaigoHihokenshaNo(new RString("1234567890"));
+        ichigoGaitoDate = new RDate("20140328");
+
+        kaigoShikaku = mock(IKaigoShikaku.class);
+        when(kaigoShikaku.get一号該当日()).thenReturn(ichigoGaitoDate);
+        IShikakuShutokuJiyu shutokujiyu = mock(IShikakuShutokuJiyu.class);
+        when(shutokujiyu.getCode()).thenReturn(ShikakuShutokuJiyu.年齢到達.getCode());
+        when(kaigoShikaku.get資格取得事由()).thenReturn(shutokujiyu);
+        when(kaigoShikaku.get資格取得届出年月日()).thenReturn(ichigoGaitoDate);
+        when(kaigoShikaku.get資格取得年月日()).thenReturn(ichigoGaitoDate);
+        IShikakuSoshitsuJiyu soshitsuJiyu = mock(IShikakuSoshitsuJiyu.class);
+        when(soshitsuJiyu.getCode()).thenReturn(ShikakuSoshitsuJiyu.なし.getCode());
+        when(kaigoShikaku.get資格喪失事由()).thenReturn(soshitsuJiyu);
+        when(kaigoShikaku.get資格喪失届出年月日()).thenReturn(RDate.MAX);
+        when(kaigoShikaku.get資格喪失年月日()).thenReturn(RDate.MAX);
+    }
 
     @RunWith(Enclosed.class)
     public static class toHihokenshaDaichoEntity extends DbzTestBase {
-
-        private static DbT1001HihokenshaDaichoEntity result;
-        private static final LasdecCode lasdecCode;
-        private static final ShikibetsuCode shikibetsuCode;
-        private static final RDateTime shoriTimestamp;
-        private static final KaigoHihokenshaNo hihokenshaNo;
-        private static final RDate ichigoGaitoDate;
-        private static final IKaigoShikaku kaigoShikaku;
-
-        static {
-            lasdecCode = new LasdecCode("123456");
-            shikibetsuCode = new ShikibetsuCode("1020304050");
-            shoriTimestamp = RDateTime.of(2014, 4, 2, 15, 47);
-            hihokenshaNo = new KaigoHihokenshaNo(new RString("1234567890"));
-            ichigoGaitoDate = new RDate("20140328");
-
-            kaigoShikaku = mock(IKaigoShikaku.class);
-            when(kaigoShikaku.get一号該当日()).thenReturn(ichigoGaitoDate);
-            IShikakuShutokuJiyu shutokujiyu = mock(IShikakuShutokuJiyu.class);
-            when(shutokujiyu.getCode()).thenReturn(ShikakuShutokuJiyu.年齢到達.getCode());
-            when(kaigoShikaku.get資格取得事由()).thenReturn(shutokujiyu);
-            when(kaigoShikaku.get資格取得届出年月日()).thenReturn(ichigoGaitoDate);
-            when(kaigoShikaku.get資格取得年月日()).thenReturn(ichigoGaitoDate);
-            IShikakuSoshitsuJiyu soshitsuJiyu = mock(IShikakuSoshitsuJiyu.class);
-            when(soshitsuJiyu.getCode()).thenReturn(ShikakuSoshitsuJiyu.なし.getCode());
-            when(kaigoShikaku.get資格喪失事由()).thenReturn(soshitsuJiyu);
-            when(kaigoShikaku.get資格喪失届出年月日()).thenReturn(RDate.MAX);
-            when(kaigoShikaku.get資格喪失年月日()).thenReturn(RDate.MAX);
-        }
 
         public static class Other extends DbzTestBase {
 
@@ -389,6 +391,33 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
             public void toHihokenshaDaichoEntityで変換したとき_結果のgetChohyoKofuRirekiIDは_引数のget被保険者証再交付$getChohyoKofuRirekiIDと一致する() {
                 assertThat(result.getChohyoKofuRirekiID(), is(shikaku.get被保険者証再交付().getChohyoKofuRirekiID().value()));
             }
+        }
+    }
+
+    public static class toListOfHihokenshaShikaku extends DbzTestBase {
+
+        private IHihokenshaShikaku shikaku;
+        private List<DbT1001HihokenshaDaichoEntity> entities;
+
+        @Before
+        public void setUp() {
+            entities = new ArrayList<>();
+            entities.add(DbT1001HihokenshaDaichoEntityMock.getSpiedInstance());
+            entities.add(DbT1001HihokenshaDaichoEntityMock.getSpiedInstance());
+            entities.add(DbT1001HihokenshaDaichoEntityMock.getSpiedInstance());
+        }
+
+        @Test
+        public void toListOfHihokenshaShikakuにより得られるlistのサイズは_引数のlistのサイズと一致する() {
+            List<IHihokenshaShikaku> resultList = sut.toListOfHihokenshaShikaku(entities);
+            assertThat(resultList.size(), is(entities.size()));
+        }
+
+        @Test
+        public void toListOfHihokenshaShikakuの引数に_Collections_EMPTY_LIST_のとき_返り値は_Collections_EMPTY_LIST() {
+            entities = Collections.EMPTY_LIST;
+            List<IHihokenshaShikaku> resultList = sut.toListOfHihokenshaShikaku(entities);
+            assertThat(resultList, is(Collections.EMPTY_LIST));
         }
     }
 

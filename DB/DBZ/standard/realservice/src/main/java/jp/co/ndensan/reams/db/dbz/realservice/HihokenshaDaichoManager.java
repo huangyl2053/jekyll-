@@ -48,7 +48,7 @@ public class HihokenshaDaichoManager {
      * @param 識別コード {@link ShikibetsuCode 識別コード}
      * @return {@link IHihokenshaShikaku IHihokenshaShikaku}。もしくは、null。
      */
-    IHihokenshaShikaku get被保険者資格(LasdecCode 地方公共団体コード, ShikibetsuCode 識別コード) {
+    IHihokenshaShikaku get直近被保険者資格(LasdecCode 地方公共団体コード, ShikibetsuCode 識別コード) {
         DbT1001HihokenshaDaichoEntity entity = dac.selectLatestOfPerson(地方公共団体コード, 識別コード);
         return HihokenshaShikakuMapper.toHihokenshaShikaku(entity);
     }

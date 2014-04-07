@@ -57,7 +57,7 @@ public class HihokenshaFinder {
      * @return {@link Hihokensha Hihokensha}。もしくは、null。
      */
     public Hihokensha get被保険者(LasdecCode 地方公共団体コード, ShikibetsuCode 識別コード) {
-        IHihokenshaShikaku shikaku = hihokenshaDaicho.get被保険者資格(地方公共団体コード, 識別コード);
+        IHihokenshaShikaku shikaku = hihokenshaDaicho.get直近被保険者資格(地方公共団体コード, 識別コード);
         return toHihokensha(shikaku);
     }
 
