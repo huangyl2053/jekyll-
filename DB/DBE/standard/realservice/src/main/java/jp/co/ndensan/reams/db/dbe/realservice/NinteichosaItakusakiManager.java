@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbe.persistence.NinteichosaItakusakiDac;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -39,7 +38,7 @@ public class NinteichosaItakusakiManager {
      */
     public NinteichosaItakusakiManager() {
         dac = InstanceProvider.create(NinteichosaItakusakiDac.class);
-        hatsubanDac = InstanceCreator.create(IHatsubanKanriJohoDac.class);
+        hatsubanDac = InstanceProvider.create(IHatsubanKanriJohoDac.class);
     }
 
     /**

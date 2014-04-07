@@ -68,7 +68,7 @@ public class ShujiiTest {
 
     private static IShujii createShujii(int flg) {
         return new Shujii(
-                flg != AS_市町村コードがNULL ? new ShichosonCode(new RString("20205")) : null,
+                flg != AS_証記載保険者番号がNULL ? new ShoKisaiHokenshaNo(new RString("202052")) : null,
                 flg != AS_介護医療機関コードがNULL ? new KaigoIryoKikanCode(new RString("0000000001")) : null,
                 flg != AS_介護医師コードがNULL ? new KaigoDoctorCode(new RString("00000001")) : null,
                 flg != AS_医療機関コードがNULL ? mock(IIryoKikanCode.class) : null,

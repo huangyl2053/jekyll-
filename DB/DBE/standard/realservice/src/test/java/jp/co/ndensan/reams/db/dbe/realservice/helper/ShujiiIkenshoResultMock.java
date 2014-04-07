@@ -26,7 +26,6 @@ import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.business._Doctor;
 import jp.co.ndensan.reams.ur.urz.business._Doctors;
@@ -48,6 +47,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.*;
 import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemKubun.*;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import static org.mockito.Mockito.spy;
 
 /**
@@ -100,7 +100,7 @@ public class ShujiiIkenshoResultMock {
                         new Code(new RString("所属診療科")),
                         new Code(new RString("医師区分"))),
                 new Shujii(
-                        new ShichosonCode(new RString("市町村コード")),
+                        new ShoKisaiHokenshaNo(new RString("202052")),
                         new KaigoIryoKikanCode(new RString("介護医療機関コード")),
                         new KaigoDoctorCode(new RString("介護医師コード")),
                         new _IryoKikanCode(new RString("1234567890")),
@@ -128,7 +128,7 @@ public class ShujiiIkenshoResultMock {
                                 new RString("会員区分"),
                                 true),
                         new ShujiiIryoKikan(
-                                new ShichosonCode(new RString("市町村コード")),
+                                new ShoKisaiHokenshaNo(new RString("202052")),
                                 new KaigoIryoKikanCode(new RString("1234567890")),
                                 new _IryoKikanCode(new RString("1234567890")),
                                 IryoKikanJokyo.有効,

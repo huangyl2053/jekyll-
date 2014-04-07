@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.ShujiiIryoKikanMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IShuJiiIryoKikanDac;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 主治医医療機関の情報を扱うクラスです。
@@ -24,7 +24,7 @@ public class ShujiiIryoKikanManager implements IShujiiIryoKikanManager {
      * デフォルトコンストラクタです。
      */
     public ShujiiIryoKikanManager() {
-        dac = InstanceCreator.create(IShuJiiIryoKikanDac.class);
+        dac = InstanceProvider.create(IShuJiiIryoKikanDac.class);
     }
 
     /**
@@ -50,15 +50,15 @@ public class ShujiiIryoKikanManager implements IShujiiIryoKikanManager {
 
     @Override
     public boolean saveAs有効(IShujiiIryoKikan 主治医医療機関) {
-        DbT7011ShujiiIryoKikanJohoEntity entity =
-                ShujiiIryoKikanMapper.toShujiiIryoKikanEntity(主治医医療機関, IryoKikanJokyo.有効);
+        DbT7011ShujiiIryoKikanJohoEntity entity
+                = ShujiiIryoKikanMapper.toShujiiIryoKikanEntity(主治医医療機関, IryoKikanJokyo.有効);
         return is更新成功(dac.insertOrUpdate(entity));
     }
 
     @Override
     public boolean saveAs無効(IShujiiIryoKikan 主治医医療機関) {
-        DbT7011ShujiiIryoKikanJohoEntity entity =
-                ShujiiIryoKikanMapper.toShujiiIryoKikanEntity(主治医医療機関, IryoKikanJokyo.無効);
+        DbT7011ShujiiIryoKikanJohoEntity entity
+                = ShujiiIryoKikanMapper.toShujiiIryoKikanEntity(主治医医療機関, IryoKikanJokyo.無効);
         return is更新成功(dac.insertOrUpdate(entity));
     }
 

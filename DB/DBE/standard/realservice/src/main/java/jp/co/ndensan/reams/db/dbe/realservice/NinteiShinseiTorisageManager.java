@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 介護認定申請を取り下げる際の情報を管理するクラスです。
@@ -31,7 +31,7 @@ public class NinteiShinseiTorisageManager {
      * デフォルトコンストラクタです。
      */
     public NinteiShinseiTorisageManager() {
-        shinseiDac = InstanceCreator.create(INinteiShinseiJohoDac.class);
+        shinseiDac = InstanceProvider.create(INinteiShinseiJohoDac.class);
     }
 
     /**

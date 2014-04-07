@@ -106,7 +106,7 @@ public class NinteichosaIraiTaishoshaFinder {
     public List<NinteichosaIraiTaishosha> get認定調査依頼対象者証記載保険者番号指定(ShoKisaiHokenshaNo 証記載保険者番号) throws NullPointerException {
         requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
 
-        List< DbT5005NinteiShinchokuJohoEntity> 要介護認定進捗情報EntityList = iraiTaishoshaDac.select(証記載保険者番号);
+        List<DbT5005NinteiShinchokuJohoEntity> 要介護認定進捗情報EntityList = iraiTaishoshaDac.select(証記載保険者番号);
         if (要介護認定進捗情報EntityList.isEmpty()) {
             return Collections.EMPTY_LIST;
         }

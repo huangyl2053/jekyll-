@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.ur.urz.entity.mapper.DoctorEntityMapper;
 import jp.co.ndensan.reams.ur.urz.realservice.DoctorManagerFactory;
 import jp.co.ndensan.reams.ur.urz.realservice.IDoctorManager;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 介護医師情報を管理するクラスです。
@@ -40,7 +40,7 @@ public class KaigoDoctorManager implements IKaigoDoctorManager {
      * InstanceCreatorを用いてDacのインスタンスを生成し、メンバ変数に保持します。
      */
     public KaigoDoctorManager() {
-        kaigoDoctorDac = InstanceCreator.create(KaigoDoctorDac.class);
+        kaigoDoctorDac = InstanceProvider.create(KaigoDoctorDac.class);
         doctorManager = DoctorManagerFactory.createInstance();
         shujiiManager = new ShujiiManager();
         kaigoIryoKikanFinder = new KaigoIryoKikanFinder();

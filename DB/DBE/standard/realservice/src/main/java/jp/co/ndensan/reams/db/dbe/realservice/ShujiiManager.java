@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.ShujiiMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IShujiiDac;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 主治医情報を管理するクラスです。
@@ -24,7 +24,7 @@ public class ShujiiManager implements IShujiiManager {
      * InstanceCreatorを用いてDacのインスタンスを生成し、メンバ変数に保持します。
      */
     public ShujiiManager() {
-        dac = InstanceCreator.create(IShujiiDac.class);
+        dac = InstanceProvider.create(IShujiiDac.class);
     }
 
     /**

@@ -17,9 +17,8 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IKoza;
 import jp.co.ndensan.reams.ur.urz.realservice.IKozaManager;
 import jp.co.ndensan.reams.ur.urz.realservice.KozaService;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 介護医療機関の情報を取得するクラスです。
@@ -35,7 +34,7 @@ public class KaigoIryoKikanFinder implements IKaigoIryoKikanFinder {
      * デフォルトコンストラクタです。
      */
     public KaigoIryoKikanFinder() {
-        dac = InstanceCreator.create(IKaigoIryoKikanDac.class);
+        dac = InstanceProvider.create(IKaigoIryoKikanDac.class);
         kozaManager = KozaService.createKozaManager();
     }
 
