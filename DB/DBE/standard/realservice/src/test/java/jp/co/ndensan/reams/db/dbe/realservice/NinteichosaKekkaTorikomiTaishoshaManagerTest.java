@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.KaigoNinteichosain;
+import jp.co.ndensan.reams.db.dbe.business.NinteichosaIrai;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaKekkaTorikomiTaishosha;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
@@ -17,10 +18,11 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5001NinteiShinseiJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaIraiTestHelper;
+import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaIraiMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiChosaIraiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.INinteichosaKekkaTorikomiTaishoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
@@ -45,8 +47,8 @@ import static org.mockito.Mockito.*;
 public class NinteichosaKekkaTorikomiTaishoshaManagerTest extends DbeTestBase {
 
     private static NinteichosaKekkaTorikomiTaishoshaManager sut;
-    private static INinteiChosaIraiJohoDac chosaIraiJohoDac;
     private static INinteichosaKekkaTorikomiTaishoshaDac torikomiTaishoshaDac;
+    private static NinteichosaIraiManager ninteichosaIraiManager;
     private static KaigoNinteichosainManager kaigoNinteichosainManager;
     private static IShikibetsuTaishoFinder shikibetsuTaishoFinder;
     private static ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("123456"));
@@ -55,8 +57,8 @@ public class NinteichosaKekkaTorikomiTaishoshaManagerTest extends DbeTestBase {
 
     @BeforeClass
     public static void setUpClass() {
-        chosaIraiJohoDac = mock(INinteiChosaIraiJohoDac.class);
         torikomiTaishoshaDac = mock(INinteichosaKekkaTorikomiTaishoshaDac.class);
+        ninteichosaIraiManager = mock(NinteichosaIraiManager.class);
         kaigoNinteichosainManager = mock(KaigoNinteichosainManager.class);
         shikibetsuTaishoFinder = mock(IShikibetsuTaishoFinder.class);
     }
@@ -66,7 +68,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManagerTest extends DbeTestBase {
         @Test
         public void get認定調査結果取込対象者全件で_認定調査結果取込対象者が登録されていないとき_COLLECTIONS_EMPTYを返す() {
             when(torikomiTaishoshaDac.selectAll()).thenReturn(Collections.EMPTY_LIST);
-            sut = new NinteichosaKekkaTorikomiTaishoshaManager(chosaIraiJohoDac, torikomiTaishoshaDac, kaigoNinteichosainManager, shikibetsuTaishoFinder);
+            sut = new NinteichosaKekkaTorikomiTaishoshaManager(torikomiTaishoshaDac, ninteichosaIraiManager, kaigoNinteichosainManager, shikibetsuTaishoFinder);
             resultList = sut.get認定調査結果取込対象者全件();
             assertThat(resultList, is(Collections.EMPTY_LIST));
         }
@@ -74,11 +76,11 @@ public class NinteichosaKekkaTorikomiTaishoshaManagerTest extends DbeTestBase {
         @Test
         public void get認定調査結果取込対象者全件で_認定調査結果取込対象者が1件登録されているとき_1件の対象者を取得する() {
             when(torikomiTaishoshaDac.selectAll()).thenReturn(create介護認定処理対象者List(1));
-            when(chosaIraiJohoDac.select(any(RString.class), any(NinteichosaIraiRirekiNo.class))).thenReturn(create認定調査依頼情報Entity());
+            when(ninteichosaIraiManager.get認定調査依頼情報(any(ShinseishoKanriNo.class), any(NinteichosaIraiRirekiNo.class))).thenReturn(create認定調査依頼情報());
             when(kaigoNinteichosainManager.get介護認定調査員(any(ShoKisaiHokenshaNo.class), any(KaigoJigyoshaNo.class), any(KaigoNinteichosainNo.class))).thenReturn(mock(KaigoNinteichosain.class));
             when(shikibetsuTaishoFinder.get識別対象(any(ShikibetsuCode.class))).thenReturn(mock(IShikibetsuTaisho.class));
             when(shikibetsuTaishoFinder.get識別対象(any(ShikibetsuCode.class)).to個人()).thenReturn(mock(IKojin.class));
-            sut = new NinteichosaKekkaTorikomiTaishoshaManager(chosaIraiJohoDac, torikomiTaishoshaDac, kaigoNinteichosainManager, shikibetsuTaishoFinder);
+            sut = new NinteichosaKekkaTorikomiTaishoshaManager(torikomiTaishoshaDac, ninteichosaIraiManager, kaigoNinteichosainManager, shikibetsuTaishoFinder);
             resultList = sut.get認定調査結果取込対象者全件();
             assertThat(resultList.size(), is(1));
         }
@@ -89,7 +91,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManagerTest extends DbeTestBase {
         @Test
         public void get認定調査結果取込対象者全件_証記載保険者番号の指定時_認定調査結果取込対象者が登録されていないとき_COLLECTIONS_EMPTYを返す() {
             when(torikomiTaishoshaDac.select証記載保険者番号(証記載保険者番号)).thenReturn(Collections.EMPTY_LIST);
-            sut = new NinteichosaKekkaTorikomiTaishoshaManager(chosaIraiJohoDac, torikomiTaishoshaDac, kaigoNinteichosainManager, shikibetsuTaishoFinder);
+            sut = new NinteichosaKekkaTorikomiTaishoshaManager(torikomiTaishoshaDac, ninteichosaIraiManager, kaigoNinteichosainManager, shikibetsuTaishoFinder);
             resultList = sut.get認定調査結果取込対象者全件(証記載保険者番号);
             assertThat(resultList, is(Collections.EMPTY_LIST));
         }
@@ -97,11 +99,11 @@ public class NinteichosaKekkaTorikomiTaishoshaManagerTest extends DbeTestBase {
         @Test
         public void get認定調査結果取込対象者全件_証記載保険者番号の指定時_認定調査結果取込対象者が1件登録されているとき_1件の対象者を取得する() {
             when(torikomiTaishoshaDac.select証記載保険者番号(any(ShoKisaiHokenshaNo.class))).thenReturn(create介護認定処理対象者List(1));
-            when(chosaIraiJohoDac.select(any(RString.class), any(NinteichosaIraiRirekiNo.class))).thenReturn(create認定調査依頼情報Entity());
+            when(ninteichosaIraiManager.get認定調査依頼情報(any(ShinseishoKanriNo.class), any(NinteichosaIraiRirekiNo.class))).thenReturn(create認定調査依頼情報());
             when(kaigoNinteichosainManager.get介護認定調査員(any(ShoKisaiHokenshaNo.class), any(KaigoJigyoshaNo.class), any(KaigoNinteichosainNo.class))).thenReturn(mock(KaigoNinteichosain.class));
             when(shikibetsuTaishoFinder.get識別対象(any(ShikibetsuCode.class))).thenReturn(mock(IShikibetsuTaisho.class));
             when(shikibetsuTaishoFinder.get識別対象(any(ShikibetsuCode.class)).to個人()).thenReturn(mock(IKojin.class));
-            sut = new NinteichosaKekkaTorikomiTaishoshaManager(chosaIraiJohoDac, torikomiTaishoshaDac, kaigoNinteichosainManager, shikibetsuTaishoFinder);
+            sut = new NinteichosaKekkaTorikomiTaishoshaManager(torikomiTaishoshaDac, ninteichosaIraiManager, kaigoNinteichosainManager, shikibetsuTaishoFinder);
             resultList = sut.get認定調査結果取込対象者全件(証記載保険者番号);
             assertThat(resultList.size(), is(1));
         }
@@ -112,7 +114,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManagerTest extends DbeTestBase {
         @Test
         public void get認定調査結果取込対象者全件で_証記載保険者番号と支所コードの指定時_認定調査結果取込対象者が登録されていないとき_COLLECTIONS_EMPTYを返す() {
             when(torikomiTaishoshaDac.select証記載保険者番号及び支所コード(証記載保険者番号, 支所コード)).thenReturn(Collections.EMPTY_LIST);
-            sut = new NinteichosaKekkaTorikomiTaishoshaManager(chosaIraiJohoDac, torikomiTaishoshaDac, kaigoNinteichosainManager, shikibetsuTaishoFinder);
+            sut = new NinteichosaKekkaTorikomiTaishoshaManager(torikomiTaishoshaDac, ninteichosaIraiManager, kaigoNinteichosainManager, shikibetsuTaishoFinder);
             resultList = sut.get認定調査結果取込対象者全件(証記載保険者番号, 支所コード);
             assertThat(resultList, is(Collections.EMPTY_LIST));
         }
@@ -120,19 +122,18 @@ public class NinteichosaKekkaTorikomiTaishoshaManagerTest extends DbeTestBase {
         @Test
         public void get認定調査結果取込対象者全件で_証記載保険者番号と支所コードの指定時_認定調査結果取込対象者が1件登録されているとき_1件の対象者を取得する() {
             when(torikomiTaishoshaDac.select証記載保険者番号及び支所コード(any(ShoKisaiHokenshaNo.class), any(RString.class))).thenReturn(create介護認定処理対象者List(1));
-            when(chosaIraiJohoDac.select(any(RString.class), any(NinteichosaIraiRirekiNo.class))).thenReturn(create認定調査依頼情報Entity());
+            when(ninteichosaIraiManager.get認定調査依頼情報(any(ShinseishoKanriNo.class), any(NinteichosaIraiRirekiNo.class))).thenReturn(create認定調査依頼情報());
             when(kaigoNinteichosainManager.get介護認定調査員(any(ShoKisaiHokenshaNo.class), any(KaigoJigyoshaNo.class), any(KaigoNinteichosainNo.class))).thenReturn(mock(KaigoNinteichosain.class));
             when(shikibetsuTaishoFinder.get識別対象(any(ShikibetsuCode.class))).thenReturn(mock(IShikibetsuTaisho.class));
             when(shikibetsuTaishoFinder.get識別対象(any(ShikibetsuCode.class)).to個人()).thenReturn(mock(IKojin.class));
-            sut = new NinteichosaKekkaTorikomiTaishoshaManager(chosaIraiJohoDac, torikomiTaishoshaDac, kaigoNinteichosainManager, shikibetsuTaishoFinder);
+            sut = new NinteichosaKekkaTorikomiTaishoshaManager(torikomiTaishoshaDac, ninteichosaIraiManager, kaigoNinteichosainManager, shikibetsuTaishoFinder);
             resultList = sut.get認定調査結果取込対象者全件(証記載保険者番号, 支所コード);
             assertThat(resultList.size(), is(1));
         }
     }
 
-    private static DbT5006NinteichosaIraiJohoEntity create認定調査依頼情報Entity() {
-        DbT5006NinteichosaIraiJohoEntity entity = NinteichosaIraiTestHelper.create認定調査依頼情報Entity();
-        return entity;
+    private static NinteichosaIrai create認定調査依頼情報() {
+        return NinteichosaIraiMapper.to認定調査依頼情報(NinteichosaIraiTestHelper.create認定調査依頼情報Entity());
     }
 
     private static List<KaigoNinteiShoriTaishoshaEntity> create介護認定処理対象者List(int num) {
