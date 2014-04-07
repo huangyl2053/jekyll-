@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -23,7 +23,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class Shujii implements IShujii {
 
-    private final ShichosonCode 市町村コード;
+    private final ShoKisaiHokenshaNo 証記載保険者番号;
     private final KaigoIryoKikanCode 介護医療機関コード;
     private final KaigoDoctorCode 介護医師コード;
     private final IIryoKikanCode 医療機関コード;
@@ -37,7 +37,7 @@ public class Shujii implements IShujii {
     /**
      * インスタンスを生成します。
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @param 介護医療機関コード 介護医療機関コード
      * @param 介護医師コード 介護医師コード
      * @param 医療機関コード 医療機関コード
@@ -48,10 +48,10 @@ public class Shujii implements IShujii {
      * @param 電話番号 電話番号
      * @param ＦＡＸ番号 ＦＡＸ番号
      */
-    public Shujii(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード,
+    public Shujii(ShoKisaiHokenshaNo 証記載保険者番号, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード,
             IIryoKikanCode 医療機関コード, RString 医師識別番号, IshiJokyo 医師の状況,
             YubinNo 郵便番号, AtenaJusho 住所, TelNo 電話番号, RString ＦＡＸ番号) {
-        this.市町村コード = requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
+        this.証記載保険者番号 = requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
         this.介護医療機関コード = requireNonNull(介護医療機関コード, Messages.E00001.replace("介護医療機関コード").getMessage());
         this.介護医師コード = requireNonNull(介護医師コード, Messages.E00001.replace("介護医師コード").getMessage());
         this.医療機関コード = requireNonNull(医療機関コード, Messages.E00001.replace("医療機関コード").getMessage());
@@ -64,8 +64,8 @@ public class Shujii implements IShujii {
     }
 
     @Override
-    public ShichosonCode get市町村コード() {
-        return 市町村コード;
+    public ShoKisaiHokenshaNo get証記載保険者番号() {
+        return 証記載保険者番号;
     }
 
     @Override

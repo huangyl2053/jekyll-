@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
 
 /**
@@ -18,11 +18,11 @@ import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
 public interface IShujiiIryoKikan {
 
     /**
-     * 市町村コードを取得する。
+     * 証記載保険者番号を取得する。
      *
-     * @return 市町村コード
+     * @return 証記載保険者番号
      */
-    ShichosonCode get市町村コード();
+    ShoKisaiHokenshaNo get証記載保険者番号();
 
     /**
      * 介護独自の医療機関コードを取得する。

@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT7012ShujiiJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShujiiMock;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -32,8 +32,8 @@ public class ShujiiMapperTest {
     public static class toShujii {
 
         @Test
-        public void 市町村コードの設定がある時_toShujii_get市町村コードは_設定値を返す() {
-            assertThat(createShujii().get市町村コード().getValue(), is(new RString("市町村コード")));
+        public void 証記載保険者番号の設定がある時_toShujii_get証記載保険者番号は_設定値を返す() {
+            assertThat(createShujii().get証記載保険者番号().getValue(), is(new RString("証記載保険者番号")));
         }
 
         @Test
@@ -85,8 +85,8 @@ public class ShujiiMapperTest {
     public static class toShujiiEntity {
 
         @Test
-        public void 市町村コードの設定がある時_toShujiiEntity_getShichosonCodeは_設定値を返す() {
-            assertThat(createShujiiEntity().getShichosonCode(), is(new ShichosonCode(new RString("市町村コード"))));
+        public void 証記載保険者番号の設定がある時_toShujiiEntity_getShoKisaiHokenshaNoは_設定値を返す() {
+            assertThat(createShujiiEntity().getShoKisaiHokenshaNo(), is(new ShoKisaiHokenshaNo(new RString("証記載保険者番号"))));
         }
 
         @Test

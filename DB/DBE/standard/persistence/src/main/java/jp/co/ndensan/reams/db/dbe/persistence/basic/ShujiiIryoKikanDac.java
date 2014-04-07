@@ -49,7 +49,7 @@ public class ShujiiIryoKikanDac implements IShuJiiIryoKikanDac {
         DbAccessor accessor = new DbAccessor(session);
         return accessor.select().
                 table(DbT7011ShujiiIryoKikanJoho.class).
-                where(and(eq(shichosonCode, entity.getShichosonCode()),
+                where(and(eq(shoKisaiHokenshaNo, entity.getShoKisaiHokenshaNo()),
                 eq(kaigoIryokikanCode, entity.getKaigoIryokikanCode()))).
                 getCount();
     }

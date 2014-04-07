@@ -13,14 +13,14 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.INinteichosaItakusakiDac;
+import jp.co.ndensan.reams.db.dbe.persistence.NinteichosaItakusakiDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiChosaIraiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinchokuJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.INinteiChosaIraiTaishoshaDac;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.KojinEntityMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ur.urf.persistence.basic.IChosainJohoDac;
 import jp.co.ndensan.reams.ur.urf.persistence.basic.IKaigoJigyoshaDac;
@@ -55,21 +55,21 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
 
         private INinteiShinchokuJohoDac shinchokuJohoDac;
         private INinteiShinseiJohoDac shinseiJohoDac;
-        private INinteichosaItakusakiDac itakusakiDac;
+        private NinteichosaItakusakiDac itakusakiDac;
         private INinteiChosaIraiJohoDac iraiJohoDac;
         private INinteiChosaIraiTaishoshaDac iraiTaishoshaDac;
         private IKojin kojin;
         private IKaigoJigyoshaDac kaigoJigyoshaDac;
         private IChosainJohoDac chosainJohoDac;
         private NinteichosaIraiTaishoshaFinder sut;
-        private ShichosonCode 市町村コード_登録なし = new ShichosonCode(new RString("00000"));
-        private ShichosonCode 市町村コード_登録あり = new ShichosonCode(new RString("12345"));
+        private ShoKisaiHokenshaNo 証記載保険者番号_登録なし = new ShoKisaiHokenshaNo(new RString("000000"));
+        private ShoKisaiHokenshaNo 証記載保険者番号_登録あり = new ShoKisaiHokenshaNo(new RString("123456"));
 
         @Override
         public void setUp() {
             iraiTaishoshaDac = mock(INinteiChosaIraiTaishoshaDac.class);
-            when(iraiTaishoshaDac.select(市町村コード_登録なし)).thenReturn(Collections.EMPTY_LIST);
-            when(iraiTaishoshaDac.select(市町村コード_登録あり)).thenReturn(create認定進捗情報Result(市町村コード_登録あり.getValue()));
+            when(iraiTaishoshaDac.select(証記載保険者番号_登録なし)).thenReturn(Collections.EMPTY_LIST);
+            when(iraiTaishoshaDac.select(証記載保険者番号_登録あり)).thenReturn(create認定進捗情報Result(証記載保険者番号_登録あり));
             shinchokuJohoDac = mock(INinteiShinchokuJohoDac.class);
             when(shinchokuJohoDac.select認定調査未完了()).thenReturn(create認定進捗情報市町村指定なしResult());
             shinseiJohoDac = mock(INinteiShinseiJohoDac.class);
@@ -79,7 +79,7 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
             when(shinseiJohoDac.select(TestCases[3].get申請書管理番号())).thenReturn(Result認定申請情報[3]);
             when(shinseiJohoDac.select(TestCases[4].get申請書管理番号())).thenReturn(Result認定申請情報[4]);
             when(shinseiJohoDac.select(TestCases[5].get申請書管理番号())).thenReturn(Result認定申請情報[5]);
-            itakusakiDac = mock(INinteichosaItakusakiDac.class);
+            itakusakiDac = mock(NinteichosaItakusakiDac.class);
             iraiJohoDac = mock(INinteiChosaIraiJohoDac.class);
             when(iraiJohoDac.select(any(RString.class), any(NinteichosaIraiRirekiNo.class))).thenReturn(null);
             kojin = mock(IKojin.class);
@@ -98,19 +98,18 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
         }
 
         @Test(expected = NullPointerException.class)
-        public void 引数の市町村コードがNULLの場合_get認定調査依頼対象者市町村指定_例外をthrowする() {
-            List<NinteichosaIraiTaishosha> resultList = sut.get認定調査依頼対象者市町村指定(null);
+        public void 引数の証記載保険者番号がNULLの場合_get認定調査依頼対象者市町村指定_例外をthrowする() {
+            List<NinteichosaIraiTaishosha> resultList = sut.get認定調査依頼対象者証記載保険者番号指定(null);
         }
 
         @Test
-        public void 指定された市町村コードで_未完了の要介護認定申請情報が_1件も登録されていない場合_EMPTY_LISTが返されること() {
-            List<NinteichosaIraiTaishosha> resultList = sut.get認定調査依頼対象者市町村指定(市町村コード_登録なし);
+        public void 指定された証記載保険者番号で_未完了の要介護認定申請情報が_1件も登録されていない場合_EMPTY_LISTが返されること() {
+            List<NinteichosaIraiTaishosha> resultList = sut.get認定調査依頼対象者証記載保険者番号指定(証記載保険者番号_登録なし);
             assertThat(resultList, is(Collections.EMPTY_LIST));
         }
-
 //        @Test
-//        public void 指定された市町村コードで_未完了の要介護認定申請情報が_3件登録されている場合_指定された市町村コードの情報が3件返されること() {
-//            List<NinteichosaIraiTaishosha> resultList = sut.get認定調査依頼対象者市町村指定(市町村コード_登録あり);
+//        public void 指定された証記載保険者番号で_未完了の要介護認定申請情報が_3件登録されている場合_指定された証記載保険者番号の情報が3件返されること() {
+//            List<NinteichosaIraiTaishosha> resultList = sut.get認定調査依頼対象者証記載保険者番号指定(証記載保険者番号_登録あり);
 //            assertThat(resultList.size(), is(3));
 //        }
 //
@@ -123,16 +122,16 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
     /**
      * テストケースのデータです。
      *
-     * 市町村コード=12345の場合、テストケース1,3,4が該当します。市町村コードの指定が無い場合、テストケース1,3,4,5が該当します。
+     * 証記載保険者番号=12345の場合、テストケース1,3,4が該当します。証記載保険者番号の指定が無い場合、テストケース1,3,4,5が該当します。
      */
     private static TestCase[] TestCases = {
-        // TestNo, 申請書管理番号, 市町村コード, 認定調査依頼履歴番号, 認定調査完了年月日, 認定調査委託先コード, 調査員番号コード;
-        new TestCase(0, new ShinseishoKanriNo(new RString("0000")), new ShichosonCode(new RString("00000")), new NinteichosaIraiRirekiNo(1), 調査完了年月日, new RString("01"), new RString("001")),
-        new TestCase(1, new ShinseishoKanriNo(new RString("0001")), new ShichosonCode(new RString("12345")), new NinteichosaIraiRirekiNo(2), YokaigoninteiDateConstants.認定調査未完了年月日, new RString("01"), new RString("001")),
-        new TestCase(2, new ShinseishoKanriNo(new RString("0002")), new ShichosonCode(new RString("12345")), new NinteichosaIraiRirekiNo(1), 調査完了年月日, new RString("01"), new RString("001")),
-        new TestCase(3, new ShinseishoKanriNo(new RString("0003")), new ShichosonCode(new RString("12345")), new NinteichosaIraiRirekiNo(1), YokaigoninteiDateConstants.認定調査未完了年月日, null, null),
-        new TestCase(4, new ShinseishoKanriNo(new RString("0004")), new ShichosonCode(new RString("12345")), new NinteichosaIraiRirekiNo(5), YokaigoninteiDateConstants.認定調査未完了年月日, new RString("02"), new RString("002")),
-        new TestCase(5, new ShinseishoKanriNo(new RString("0005")), new ShichosonCode(new RString("22222")), new NinteichosaIraiRirekiNo(1), YokaigoninteiDateConstants.認定調査未完了年月日, new RString("04"), new RString("004"))
+        // TestNo, 申請書管理番号, 証記載保険者番号, 認定調査依頼履歴番号, 認定調査完了年月日, 認定調査委託先コード, 調査員番号コード;
+        new TestCase(0, new ShinseishoKanriNo(new RString("0000")), new ShoKisaiHokenshaNo(new RString("000000")), new NinteichosaIraiRirekiNo(1), 調査完了年月日, new RString("01"), new RString("001")),
+        new TestCase(1, new ShinseishoKanriNo(new RString("0001")), new ShoKisaiHokenshaNo(new RString("123456")), new NinteichosaIraiRirekiNo(2), YokaigoninteiDateConstants.認定調査未完了年月日, new RString("01"), new RString("001")),
+        new TestCase(2, new ShinseishoKanriNo(new RString("0002")), new ShoKisaiHokenshaNo(new RString("123456")), new NinteichosaIraiRirekiNo(1), 調査完了年月日, new RString("01"), new RString("001")),
+        new TestCase(3, new ShinseishoKanriNo(new RString("0003")), new ShoKisaiHokenshaNo(new RString("123456")), new NinteichosaIraiRirekiNo(1), YokaigoninteiDateConstants.認定調査未完了年月日, null, null),
+        new TestCase(4, new ShinseishoKanriNo(new RString("0004")), new ShoKisaiHokenshaNo(new RString("123456")), new NinteichosaIraiRirekiNo(5), YokaigoninteiDateConstants.認定調査未完了年月日, new RString("02"), new RString("002")),
+        new TestCase(5, new ShinseishoKanriNo(new RString("0005")), new ShoKisaiHokenshaNo(new RString("222222")), new NinteichosaIraiRirekiNo(1), YokaigoninteiDateConstants.認定調査未完了年月日, new RString("04"), new RString("004"))
     };
     private static DbT5001NinteiShinseiJohoEntity[] Result認定申請情報 = {
         create認定申請情報Entity(0),
@@ -151,12 +150,12 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
         create認定進捗情報Entity(5)
     };
 
-    private static List<DbT5005NinteiShinchokuJohoEntity> create認定進捗情報Result(RString 市町村コード) {
+    private static List<DbT5005NinteiShinchokuJohoEntity> create認定進捗情報Result(ShoKisaiHokenshaNo 証記載保険者番号) {
         List<DbT5005NinteiShinchokuJohoEntity> resultList = new ArrayList<>();
         List<RString> list申請書管理番号 = new ArrayList<>();
 
         for (DbT5001NinteiShinseiJohoEntity entity : Result認定申請情報) {
-            if (entity.getShichosonCode().getValue().equals(市町村コード)) {
+            if (entity.getShoKisaiHokenshaNo().equals(証記載保険者番号)) {
                 list申請書管理番号.add(entity.getShinseishoKanriNo().getColumnValue());
             }
         }
@@ -224,57 +223,32 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
     }
 
     private static DbT5001NinteiShinseiJohoEntity create認定申請情報Entity(int テストパターン) {
-        ShinseishoKanriNo shinseishoKanriNo = TestCases[テストパターン].get申請書管理番号();
-        ShichosonCode shichosonCode = TestCases[テストパターン].get市町村コード();
-        RString shishoCode = new RString("1");
-        KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(試験用文字列);
-        ShikibetsuCode shikibetsuCode = new ShikibetsuCode(試験用文字列);
-        FlexibleDate ninteiShinseiYMD = 調査完了年月日;
-        EdabanCode ninteiShinseiEdabanCode = new EdabanCode(new RString("001"));
-        NinteiShinseiKubunShinsei ninteiShinseiShinseijiKubunCode = NinteiShinseiKubunShinsei.新規申請;
-        Code ninteiShinseiHoreiKubunCode = new Code(試験用文字列);
-        Code ninteiShinseiYukoKubunCode = new Code(試験用文字列);
-        RString shienShinseiKubun = 試験用文字列;
-        RString shinseiRiyu = 試験用文字列;
-        Code zenYokaigoKubunCode = new Code(試験用文字列);
-        int zenYukoKikan = 1;
-        boolean johoteikyoDouiUmuKubun = true;
-        NinteichosaIraiRirekiNo ninteichosaIraiRirekiNo = TestCases[テストパターン].get認定調査依頼履歴番号();
-        int ikenshoIraiRirekiNo = 1;
-        RString minashiCode = 試験用文字列;
-        boolean enkitsuchiDoiUmuKubun = true;
-        boolean shisetsuNyushoUmuKubun = true;
-        RString sichosonRenrakuJiko = 試験用文字列;
-        Code torisageKubunCode = new Code(試験用文字列);
-        RString torisageRiyu = 試験用文字列;
-        FlexibleDate torisageYMD = 調査完了年月日;
-        boolean shinsaKeizokuKubun = true;
-        DbT5001NinteiShinseiJohoEntity entity = new DbT5001NinteiShinseiJohoEntity(
-                shinseishoKanriNo,
-                shichosonCode,
-                shishoCode,
-                hihokenshaNo,
-                shikibetsuCode,
-                ninteiShinseiYMD,
-                ninteiShinseiEdabanCode,
-                ninteiShinseiShinseijiKubunCode,
-                ninteiShinseiHoreiKubunCode,
-                ninteiShinseiYukoKubunCode,
-                shienShinseiKubun,
-                shinseiRiyu,
-                zenYokaigoKubunCode,
-                zenYukoKikan,
-                johoteikyoDouiUmuKubun,
-                ninteichosaIraiRirekiNo,
-                ikenshoIraiRirekiNo,
-                minashiCode,
-                enkitsuchiDoiUmuKubun,
-                shisetsuNyushoUmuKubun,
-                sichosonRenrakuJiko,
-                torisageKubunCode,
-                torisageRiyu,
-                torisageYMD,
-                shinsaKeizokuKubun);
+        DbT5001NinteiShinseiJohoEntity entity = new DbT5001NinteiShinseiJohoEntity();
+        entity.setShinseishoKanriNo(TestCases[テストパターン].get申請書管理番号());
+        entity.setShoKisaiHokenshaNo(TestCases[テストパターン].get証記載保険者番号());
+        entity.setShishoCode(new RString("1"));
+        entity.setHihokenshaNo(new KaigoHihokenshaNo(試験用文字列));
+        entity.setShikibetsuCode(new ShikibetsuCode(試験用文字列));
+        entity.setNinteiShinseiYMD(調査完了年月日);
+        entity.setNinteiShinseiEdabanCode(new EdabanCode(new RString("001")));
+        entity.setNinteiShinseiShinseijiKubunCode(NinteiShinseiKubunShinsei.新規申請);
+        entity.setNinteiShinseiHoreiKubunCode(new Code(試験用文字列));
+        entity.setNinteiShinseiYukoKubunCode(new Code(試験用文字列));
+        entity.setShienShinseiKubun(試験用文字列);
+        entity.setShinseiRiyu(試験用文字列);
+        entity.setZenYokaigoKubunCode(new Code(試験用文字列));
+        entity.setZenYukoKikan(1);
+        entity.setJohoteikyoDouiUmuKubun(true);
+        entity.setNinteichosaIraiRirekiNo(TestCases[テストパターン].get認定調査依頼履歴番号().value());
+        entity.setIkenshoIraiRirekiNo(1);
+        entity.setMinashiCode(試験用文字列);
+        entity.setEnkitsuchiDoiUmuKubun(true);
+        entity.setShisetsuNyushoUmuKubun(true);
+        entity.setSichosonRenrakuJiko(試験用文字列);
+        entity.setTorisageKubunCode(new Code(試験用文字列));
+        entity.setTorisageRiyu(試験用文字列);
+        entity.setTorisageYMD(調査完了年月日);
+        entity.setShinsaKeizokuKubun(true);
         return entity;
     }
 
@@ -285,7 +259,7 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
 
         private int TestNo;
         private ShinseishoKanriNo 申請書管理番号;
-        private ShichosonCode 市町村コード;
+        private ShoKisaiHokenshaNo 証記載保険者番号;
         private NinteichosaIraiRirekiNo 認定調査依頼履歴番号;
         private FlexibleDate 認定調査完了年月日;
         private RString 認定調査委託先コード;
@@ -293,14 +267,14 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
 
         public TestCase(int TestNo,
                 ShinseishoKanriNo 申請書管理番号,
-                ShichosonCode 市町村コード,
+                ShoKisaiHokenshaNo 証記載保険者番号,
                 NinteichosaIraiRirekiNo 認定調査依頼履歴番号,
                 FlexibleDate 認定調査完了年月日,
                 RString 認定調査委託先コード,
                 RString 調査員番号コード) {
             this.TestNo = TestNo;
             this.申請書管理番号 = 申請書管理番号;
-            this.市町村コード = 市町村コード;
+            this.証記載保険者番号 = 証記載保険者番号;
             this.認定調査依頼履歴番号 = 認定調査依頼履歴番号;
             this.認定調査完了年月日 = 認定調査完了年月日;
             this.認定調査委託先コード = 認定調査委託先コード;
@@ -322,10 +296,10 @@ public class NinteichosaIraiTaishoshaFinderTest extends TestBase {
         }
 
         /**
-         * @return 市町村コード
+         * @return 証記載保険者番号
          */
-        public ShichosonCode get市町村コード() {
-            return 市町村コード;
+        public ShoKisaiHokenshaNo get証記載保険者番号() {
+            return 証記載保険者番号;
         }
 
         /**

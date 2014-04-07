@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.basic.IShujiiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.IShujiiIkenshoIraiTaishoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.business.JushoEditor;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
@@ -93,32 +93,32 @@ public class ShujiiIkenshoIraiTaishoshaFinder {
     }
 
     /**
-     * 市町村コードを指定して、主治医意見書作成が未完了の主治医意見書作成依頼対象者を取得します。
+     * 証記載保険者番号を指定して、主治医意見書作成が未完了の主治医意見書作成依頼対象者を取得します。
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @return ShujiiIkenshoIraiTaishoshaのList
-     * @throws NullPointerException {@code 市町村コード}がnullの場合
+     * @throws NullPointerException {@code 証記載保険者番号}がnullの場合
      */
-    public List<ShujiiIkenshoIraiTaishosha> get主治医意見書作成依頼対象者(ShichosonCode 市町村コード) throws NullPointerException {
-        requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
+    public List<ShujiiIkenshoIraiTaishosha> get主治医意見書作成依頼対象者(ShoKisaiHokenshaNo 証記載保険者番号) throws NullPointerException {
+        requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
 
-        List<DbT5005NinteiShinchokuJohoEntity> 認定進捗情報EntityList = shujiiIkenshoIraiTaishoshaDac.select主治医意見書作成依頼対象者(市町村コード);
+        List<DbT5005NinteiShinchokuJohoEntity> 認定進捗情報EntityList = shujiiIkenshoIraiTaishoshaDac.select主治医意見書作成依頼対象者(証記載保険者番号);
         return create主治医意見書作成依頼対象者List(認定進捗情報EntityList);
     }
 
     /**
-     * 市町村コード、支所コードを指定して、主治医意見書作成が未完了の主治医意見書作成依頼対象者を取得します。
+     * 証記載保険者番号、支所コードを指定して、主治医意見書作成が未完了の主治医意見書作成依頼対象者を取得します。
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @param 支所コード 支所コード
      * @return ShujiiIkenshoIraiTaishoshaのList
      * @throws NullPointerException 引数がnullの場合
      */
-    public List<ShujiiIkenshoIraiTaishosha> get主治医意見書作成依頼対象者(ShichosonCode 市町村コード, RString 支所コード) throws NullPointerException {
-        requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
+    public List<ShujiiIkenshoIraiTaishosha> get主治医意見書作成依頼対象者(ShoKisaiHokenshaNo 証記載保険者番号, RString 支所コード) throws NullPointerException {
+        requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
         requireNonNull(支所コード, Messages.E00001.replace("支所コード").getMessage());
 
-        List<DbT5005NinteiShinchokuJohoEntity> 認定進捗情報EntityList = shujiiIkenshoIraiTaishoshaDac.select主治医意見書作成依頼対象者(市町村コード, 支所コード);
+        List<DbT5005NinteiShinchokuJohoEntity> 認定進捗情報EntityList = shujiiIkenshoIraiTaishoshaDac.select主治医意見書作成依頼対象者(証記載保険者番号, 支所コード);
         return create主治医意見書作成依頼対象者List(認定進捗情報EntityList);
     }
 
@@ -164,7 +164,7 @@ public class ShujiiIkenshoIraiTaishoshaFinder {
     private DbT7012ShujiiJohoEntity create主治医情報Entity(DbT5001NinteiShinseiJohoEntity 認定申請情報Entity,
             DbT5011ShujiiIkenshoIraiJohoEntity 主治医意見書作成依頼情報Entity) {
         return shujiiJohoDac.select(
-                認定申請情報Entity.getShichosonCode(),
+                認定申請情報Entity.getShoKisaiHokenshaNo(),
                 new KaigoIryoKikanCode(主治医意見書作成依頼情報Entity.getKaigoIryokikanCode()),
                 new KaigoDoctorCode(主治医意見書作成依頼情報Entity.getKaigoIshiCode()));
     }
@@ -193,7 +193,7 @@ public class ShujiiIkenshoIraiTaishoshaFinder {
 
     private KaigoIryoKikan create主治医医療機関情報(DbT5001NinteiShinseiJohoEntity 認定申請情報Entity, DbT7012ShujiiJohoEntity 主治医情報Entity) {
         return new KaigoIryoKikanFinder().get介護医療機関(
-                認定申請情報Entity.getShichosonCode(),
+                認定申請情報Entity.getShoKisaiHokenshaNo(),
                 主治医情報Entity.getKaigoIryokikanCode());
     }
 }

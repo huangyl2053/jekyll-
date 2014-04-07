@@ -1,0 +1,13 @@
+﻿shoKisaiHokenshaNo,varchar,ShoKisaiHokenshaNo,,,,,A
+kaigoJigyoshaNo,varchar,RString,,,,,A
+kaigoChosainNo,varchar,RString,,,,,A
+jigyoshaNo,varchar,RString,,,,,A
+kaigoChosainJokyo,bool,boolean,,,,,A
+chosainShimei,UDD042AtenaMeisho,AtenaMeisho,,,,,A
+chosainKanaShimei,UDD043AtenaKanaMeisho,AtenaKanaMeisho,,,,,A
+seibetsu,bpchar,RString,,,,,A
+chosainShikakuCode,UDD035Code,Code,,,,,A
+chikuCode,UDD011ChikuCode,ChikuCode,,,,,A
+yubinNo,UDD003YubinNo,YubinNo,,,,,A
+jusho,UDD046AtenaJusho,AtenaJusho,,,,,A
+telNo,UDD026TelNo,TelNo,,,,,A

@@ -12,40 +12,40 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * @author N1013 松本直樹
  */
 public enum DbT7010NinteichosaItakusakiJoho implements IColumnDefinition {
-//TODO 市町村コードはILocalGovernmentCodeを使用するか検討する。 2014/02/14 期限
+//TODO 証記載保険者番号はILocalGovernmentCodeを使用するか検討する。 2014/02/14 期限
 
     /**
-     * 市町村コード
+     * 証記載保険者番号
      */
-    SHICHOSON_CD(5, 0),
+    shoKisaiHokenshaNo(6, 0),
     /**
      * 介護事業者番号
      */
-    KAIGO_JIGYOSHA_NO(10, 0),
+    kaigoJigyoshaNo(10, 0),
     /**
      * 事業者番号
      */
-    JIGYOSHA_NO(10, 0),
+    jigyoshaNo(10, 0),
     /**
      * 介護事業者状況
      */
-    KAIGO_JIGYOSHA_JOKYO(1, 0),
+    kaigoJigyoshaJokyo(1, 0),
     /**
      * 調査委託区分
      */
-    CHOSA_ITAKU_KUBUN(8, 0),
+    chosaItakuKubunCode(8, 0),
     /**
      * 割付定員
      */
-    WARITSUKE_TEIIN(4, 0),
+    waritsukeTeiin(4, 0),
     /**
      * 割付地区
      */
-    WARITSUKE_TIKU(8, 0),
+    waritsukeChiku(8, 0),
     /**
      * 機関の区分
      */
-    KIKAN_KUBUN(8, 0);
+    kikanKubunCode(8, 0);
     private final int maxLength;
     private final int scale;
 

@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.helper.INinteiShinseiJohoDacMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -55,8 +55,8 @@ public class NinteiShinseiJohoDacTest extends TestDacBase {
 //
 //        @Override
 //        public void setUp() {
-//            ShichosonCode 市町村コード = new ShichosonCode(new RString("A0012"));
-//            inserter.insert(create認定申請情報Entity(create申請書管理番号("1"), 市町村コード, create年月日("20120101"), create認定申請取下げ情報(create年月日("20120101"))));
+//            ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("A00120"));
+//            inserter.insert(create認定申請情報Entity(create申請書管理番号("1"), 証記載保険者番号, create年月日("20120101"), create認定申請取下げ情報(create年月日("20120101"))));
 //        }
 //
 //        @Test
@@ -68,7 +68,7 @@ public class NinteiShinseiJohoDacTest extends TestDacBase {
 //
 //    public static class selectAllBy認定申請年月日のテスト extends TestDacBase {
 //
-//        ShichosonCode 市町村コード;
+//        ShoKisaiHokenshaNo 証記載保険者番号;
 //
 //        static {
 //            setGyomuCD("DB");
@@ -76,23 +76,23 @@ public class NinteiShinseiJohoDacTest extends TestDacBase {
 //
 //        @Override
 //        public void setUp() {
-//            市町村コード = new ShichosonCode(new RString("A0012"));
-//            inserter.insert(create認定申請情報Entity(create申請書管理番号("1"), 市町村コード, create年月日("20120101"), create認定申請取下げ情報(create年月日("20150101"))));
-//            inserter.insert(create認定申請情報Entity(create申請書管理番号("1"), 市町村コード, create年月日("20130101"), create認定申請取下げ情報(create年月日("20150101"))));
-//            inserter.insert(create認定申請情報Entity(create申請書管理番号("1"), 市町村コード, create年月日("20140101"), create認定申請取下げ情報(create年月日("20150101"))));
-//            inserter.insert(create認定申請情報Entity(create申請書管理番号("1"), 市町村コード, create年月日("20150101"), create認定申請取下げ情報(create年月日("20150101"))));
+//            証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("A00120"));
+//            inserter.insert(create認定申請情報Entity(create申請書管理番号("1"), 証記載保険者番号, create年月日("20120101"), create認定申請取下げ情報(create年月日("20150101"))));
+//            inserter.insert(create認定申請情報Entity(create申請書管理番号("1"), 証記載保険者番号, create年月日("20130101"), create認定申請取下げ情報(create年月日("20150101"))));
+//            inserter.insert(create認定申請情報Entity(create申請書管理番号("1"), 証記載保険者番号, create年月日("20140101"), create認定申請取下げ情報(create年月日("20150101"))));
+//            inserter.insert(create認定申請情報Entity(create申請書管理番号("1"), 証記載保険者番号, create年月日("20150101"), create認定申請取下げ情報(create年月日("20150101"))));
 //        }
 //
 //        @Test
 //        public void 指定した認定申請年月日の範囲に該当する情報が_2件取得できる() {
-//            List<DbT5001NinteiShinseiJohoEntity> results = sut.selectAllBy認定申請年月日(市町村コード, new Range(create年月日("20110101"), create年月日("20130401")));
+//            List<DbT5001NinteiShinseiJohoEntity> results = sut.selectAllBy認定申請年月日(証記載保険者番号, new Range(create年月日("20110101"), create年月日("20130401")));
 //            assertThat(results.size(), is(2));
 //        }
 //    }
 //
 //    public static class selectAllBy取下げ年月日のテスト extends TestDacBase {
 //
-//        ShichosonCode 市町村コード;
+//        ShoKisaiHokenshaNo 証記載保険者番号;
 //
 //        static {
 //            setGyomuCD("DB");
@@ -100,16 +100,16 @@ public class NinteiShinseiJohoDacTest extends TestDacBase {
 //
 //        @Override
 //        public void setUp() {
-//            市町村コード = new ShichosonCode(new RString("A0012"));
-//            inserter.insert(create認定申請情報Entity(create申請書管理番号("1"), 市町村コード, create年月日("20150101"), create認定申請取下げ情報(create年月日("20120101"))));
-//            inserter.insert(create認定申請情報Entity(create申請書管理番号("1"), 市町村コード, create年月日("20150101"), create認定申請取下げ情報(create年月日("20130101"))));
-//            inserter.insert(create認定申請情報Entity(create申請書管理番号("1"), 市町村コード, create年月日("20150101"), create認定申請取下げ情報(create年月日("20140101"))));
-//            inserter.insert(create認定申請情報Entity(create申請書管理番号("1"), 市町村コード, create年月日("20150101"), create認定申請取下げ情報(create年月日("20150101"))));
+//            証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("A00120"));
+//            inserter.insert(create認定申請情報Entity(create申請書管理番号("1"), 証記載保険者番号, create年月日("20150101"), create認定申請取下げ情報(create年月日("20120101"))));
+//            inserter.insert(create認定申請情報Entity(create申請書管理番号("1"), 証記載保険者番号, create年月日("20150101"), create認定申請取下げ情報(create年月日("20130101"))));
+//            inserter.insert(create認定申請情報Entity(create申請書管理番号("1"), 証記載保険者番号, create年月日("20150101"), create認定申請取下げ情報(create年月日("20140101"))));
+//            inserter.insert(create認定申請情報Entity(create申請書管理番号("1"), 証記載保険者番号, create年月日("20150101"), create認定申請取下げ情報(create年月日("20150101"))));
 //        }
 //
 //        @Test
 //        public void 指定した取下げ年月日の範囲に該当する情報が_3件取得できる() {
-//            List<DbT5001NinteiShinseiJohoEntity> results = sut.selectAllBy認定申請年月日(市町村コード, new Range(create年月日("20130101"), create年月日("20150401")));
+//            List<DbT5001NinteiShinseiJohoEntity> results = sut.selectAllBy認定申請年月日(証記載保険者番号, new Range(create年月日("20130101"), create年月日("20150401")));
 //            assertThat(results.size(), is(3));
 //        }
 //    }
@@ -117,7 +117,7 @@ public class NinteiShinseiJohoDacTest extends TestDacBase {
 //    public static class updateのテスト extends TestDacBase {
 //
 //        private ShinseishoKanriNo 申請書管理番号;
-//        private ShichosonCode 市町村コード;
+//        private ShoKisaiHokenshaNo 証記載保険者番号;
 //        private TorisageKubun 取下げ区分;
 //        private RString 取下げ理由;
 //        private FlexibleDate 取下げ年月日;
@@ -137,9 +137,9 @@ public class NinteiShinseiJohoDacTest extends TestDacBase {
 //            審査継続区分 = ShinsaKeizokuKubun.継続する;
 //            認定申請取下げ = create認定申請取下げ情報(取下げ区分, 取下げ理由, 取下げ年月日, 審査継続区分);
 //
-//            更新用Entity = create認定申請情報Entity(create申請書管理番号("1"), new ShichosonCode(new RString("A0012")), create年月日("19990101"), 認定申請取下げ);
+//            更新用Entity = create認定申請情報Entity(create申請書管理番号("1"), new ShoKisaiHokenshaNo(new RString("A00120")), create年月日("19990101"), 認定申請取下げ);
 //
-//            inserter.insert(create認定申請情報Entity(create申請書管理番号("1"), 市町村コード, create年月日("20150101"),
+//            inserter.insert(create認定申請情報Entity(create申請書管理番号("1"), 証記載保険者番号, create年月日("20150101"),
 //                    create認定申請取下げ情報(TorisageKubun.認定申請有効, new RString("AAA"), create年月日("19990101"), ShinsaKeizokuKubun.継続しない)));
 //        }
 //
@@ -176,7 +176,7 @@ public class NinteiShinseiJohoDacTest extends TestDacBase {
 //        return new FlexibleDate(new RString(str));
 //    }
 //
-//    private static DbT5001NinteiShinseiJohoEntity create認定申請情報Entity(ShinseishoKanriNo 申請書管理番号, ShichosonCode 市町村コード,
+//    private static DbT5001NinteiShinseiJohoEntity create認定申請情報Entity(ShinseishoKanriNo 申請書管理番号, ShoKisaiHokenshaNo 証記載保険者番号,
 //            FlexibleDate 認定申請年月日, NinteiShinseiTorisage 認定申請取下げ情報) {
 //        DbT5001NinteiShinseiJohoEntity entity = new DbT5001NinteiShinseiJohoEntity();
 //        entity.setInsertDantaiCd(new RString("0001"));
@@ -188,7 +188,7 @@ public class NinteiShinseiJohoDacTest extends TestDacBase {
 //        entity.setLastUpdateTimestamp(RDateTime.now());
 //        entity.setLastUpdateReamsLoginId(new RString("0001"));
 //        entity.setShinseishoKanriNo(申請書管理番号);
-//        entity.setShichosonCode(市町村コード);
+//        entity.setShoKisaiHokenshaNo(証記載保険者番号);
 //        entity.setShishoCode(new RString("0001"));
 //        entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("0001")));
 //        entity.setShikibetsuCode(new RString("0001"));

@@ -8,10 +8,10 @@ import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisage;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisageTaishosha;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiShinseiDate;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5001NinteiShinseiJohoEntityMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -22,7 +22,6 @@ import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.mock;
 
 /**
  * 認定申請情報Entityを認定申請取下げ対象者クラスに変換するためのMapperのテストクラスです。
@@ -35,7 +34,7 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
     public static class to認定申請取下げ対象者のテスト extends TestBase {
 
         private ShinseishoKanriNo 申請書管理No;
-        private ShichosonCode 市町村Code;
+        private ShoKisaiHokenshaNo 証記載保険者番号;
         private KaigoHihokenshaNo 被保険者No;
         private FlexibleDate 認定申請年月日;
         private NinteiShinseiKubunShinsei 認定申請区分コード_申請時;
@@ -48,7 +47,7 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
         @Override
         public void setUp() {
             申請書管理No = new ShinseishoKanriNo(new RString("0123"));
-            市町村Code = new ShichosonCode(new RString("A012"));
+            証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("A01200"));
             被保険者No = new KaigoHihokenshaNo(new RString("DB0001"));
             認定申請年月日 = new FlexibleDate(new RString("20120101"));
             認定申請区分コード_申請時 = NinteiShinseiKubunShinsei.新規申請;
@@ -67,8 +66,8 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
         }
 
         @Test
-        public void get市町村コードの結果が_Entityの市町村コードと同一になる() {
-            assertThat(sut.get市町村コード(), is(市町村Code));
+        public void get証記載保険者番号の結果が_Entityの証記載保険者番号と同一になる() {
+            assertThat(sut.get証記載保険者番号(), is(証記載保険者番号));
         }
 
         @Test
@@ -109,7 +108,7 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
         private DbT5001NinteiShinseiJohoEntity create認定申請情報Entity() {
             DbT5001NinteiShinseiJohoEntity entity = new DbT5001NinteiShinseiJohoEntity();
             entity.setShinseishoKanriNo(申請書管理No);
-            entity.setShichosonCode(市町村Code);
+            entity.setShoKisaiHokenshaNo(証記載保険者番号);
             entity.setHihokenshaNo(被保険者No);
             entity.setNinteiShinseiYMD(認定申請年月日);
             entity.setNinteiShinseiShinseijiKubunCode(認定申請区分コード_申請時);
@@ -155,11 +154,11 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
 
         @Test
         public void 認定申請情報Entityの審査継続区分が_認定申請取下げの審査継続区分と同一になる() {
-            assertThat(sut.isShinsaKeizokuKubun(), is(審査継続区分.is継続()));
+            assertThat(sut.getShinsaKeizokuKubun(), is(審査継続区分.is継続()));
         }
 
         private DbT5001NinteiShinseiJohoEntity createMockEntity() {
-            return mock(DbT5001NinteiShinseiJohoEntity.class);
+            return DbT5001NinteiShinseiJohoEntityMock.getSpiedInstance();
         }
 
         private NinteiShinseiTorisage create認定申請取下げ() {

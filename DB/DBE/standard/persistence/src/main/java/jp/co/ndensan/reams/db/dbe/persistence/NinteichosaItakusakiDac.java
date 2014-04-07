@@ -12,60 +12,83 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEn
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbAccessor;
+import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 認定調査委託先を管理するクラスです
  *
  * @author N1013 松本直樹
  */
-public class NinteichosaItakusakiDac implements INinteichosaItakusakiDac {
+public class NinteichosaItakusakiDac {
 
     @InjectSession
     private SqlSession session;
-    private final DbAccessor accessor = new DbAccessor(session);
 
-    @Override
-    public List<DbT7010NinteichosaItakusakiJohoEntity> selectAll(RString 市町村コード, boolean 介護事業状況) {
-
+    /**
+     * 指定した証記載保険者番号で有効又は無効の認定調査委託先を取得します
+     *
+     * @param 証記載保険者番号 証記載保険者番号
+     * @param 介護事業状況 介護事業状況
+     * @return 認定調査委託先情報エンティティ
+     */
+    @Transaction
+    public List<DbT7010NinteichosaItakusakiJohoEntity> selectAll(RString 証記載保険者番号, boolean 介護事業状況) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT7010NinteichosaItakusakiJohoEntity> list = accessor.select()
                 .table(DbT7010NinteichosaItakusakiJoho.class)
-                .where(and(eq(DbT7010NinteichosaItakusakiJoho.SHICHOSON_CD, 市町村コード),
-                eq(DbT7010NinteichosaItakusakiJoho.KAIGO_JIGYOSHA_JOKYO, 介護事業状況)))
-                .order(by(DbT7010NinteichosaItakusakiJoho.KAIGO_JIGYOSHA_NO, Order.DESC))
+                .where(and(eq(DbT7010NinteichosaItakusakiJoho.shoKisaiHokenshaNo, 証記載保険者番号),
+                eq(DbT7010NinteichosaItakusakiJoho.kaigoJigyoshaJokyo, 介護事業状況)))
+                .order(by(DbT7010NinteichosaItakusakiJoho.kaigoJigyoshaNo, Order.DESC))
                 .toList(DbT7010NinteichosaItakusakiJohoEntity.class);
 
         return (!list.isEmpty()) ? list : Collections.EMPTY_LIST;
 
     }
 
-    @Override
-    public List<DbT7010NinteichosaItakusakiJohoEntity> selectAll(RString 市町村コード) {
+    /**
+     * 指定した証記載保険者番号で登録されている全ての認定調査委託先を取得します
+     *
+     * @param 証記載保険者番号 証記載保険者番号
+     * @return 認定調査委託先情報エンティティ
+     */
+    @Transaction
+    public List<DbT7010NinteichosaItakusakiJohoEntity> selectAll(RString 証記載保険者番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         List<DbT7010NinteichosaItakusakiJohoEntity> list = accessor.select()
                 .table(DbT7010NinteichosaItakusakiJoho.class)
-                .where(eq(DbT7010NinteichosaItakusakiJoho.SHICHOSON_CD, 市町村コード))
-                .order(by(DbT7010NinteichosaItakusakiJoho.KAIGO_JIGYOSHA_NO, Order.DESC))
+                .where(eq(DbT7010NinteichosaItakusakiJoho.shoKisaiHokenshaNo, 証記載保険者番号))
+                .order(by(DbT7010NinteichosaItakusakiJoho.kaigoJigyoshaNo, Order.DESC))
                 .toList(DbT7010NinteichosaItakusakiJohoEntity.class);
 
         return (!list.isEmpty()) ? list : Collections.EMPTY_LIST;
 
     }
 
-    @Override
-    public DbT7010NinteichosaItakusakiJohoEntity select(RString 市町村コード, KaigoJigyoshaNo 介護事業者番号, boolean 介護事業状況) {
+    /**
+     * 市町村・介護事業者番号・介護事業状況を指定して認定調査委託先を取得します
+     *
+     * @param 証記載保険者番号 証記載保険者番号
+     * @param 介護事業者番号 介護事業者番号
+     * @param 介護事業状況 介護事業状況
+     * @return 認定調査委託先情報エンティティ
+     */
+    @Transaction
+    public DbT7010NinteichosaItakusakiJohoEntity select(RString 証記載保険者番号, KaigoJigyoshaNo 介護事業者番号, boolean 介護事業状況) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         List<DbT7010NinteichosaItakusakiJohoEntity> list = accessor.select()
                 .table(DbT7010NinteichosaItakusakiJoho.class)
-                .where(and(eq(DbT7010NinteichosaItakusakiJoho.SHICHOSON_CD, 市町村コード),
-                eq(DbT7010NinteichosaItakusakiJoho.KAIGO_JIGYOSHA_NO, 介護事業者番号),
-                eq(DbT7010NinteichosaItakusakiJoho.KAIGO_JIGYOSHA_JOKYO, 介護事業状況)))
-                .order(by(DbT7010NinteichosaItakusakiJoho.KAIGO_JIGYOSHA_NO, Order.DESC))
+                .where(and(eq(DbT7010NinteichosaItakusakiJoho.shoKisaiHokenshaNo, 証記載保険者番号),
+                eq(DbT7010NinteichosaItakusakiJoho.kaigoJigyoshaNo, 介護事業者番号),
+                eq(DbT7010NinteichosaItakusakiJoho.kaigoJigyoshaJokyo, 介護事業状況)))
+                .order(by(DbT7010NinteichosaItakusakiJoho.kaigoJigyoshaNo, Order.DESC))
                 .toList(DbT7010NinteichosaItakusakiJohoEntity.class);
 
         if (list.isEmpty()) {
@@ -74,15 +97,24 @@ public class NinteichosaItakusakiDac implements INinteichosaItakusakiDac {
         return list.get(0);
     }
 
-    @Override
-    public DbT7010NinteichosaItakusakiJohoEntity select(RString 市町村コード, JigyoshaNo 事業者番号, boolean 介護事業状況) {
+    /**
+     * 証記載保険者番号・事業者番号・介護事業状況を指定して認定調査委託先を取得します
+     *
+     * @param 証記載保険者番号 証記載保険者番号
+     * @param 事業者番号 事業者番号
+     * @param 介護事業状況 介護事業状況
+     * @return 認定調査委託先情報エンティティ
+     */
+    @Transaction
+    public DbT7010NinteichosaItakusakiJohoEntity select(RString 証記載保険者番号, JigyoshaNo 事業者番号, boolean 介護事業状況) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         List<DbT7010NinteichosaItakusakiJohoEntity> list = accessor.select()
                 .table(DbT7010NinteichosaItakusakiJoho.class)
-                .where(and(eq(DbT7010NinteichosaItakusakiJoho.SHICHOSON_CD, 市町村コード),
-                eq(DbT7010NinteichosaItakusakiJoho.JIGYOSHA_NO, 事業者番号),
-                eq(DbT7010NinteichosaItakusakiJoho.KAIGO_JIGYOSHA_JOKYO, 介護事業状況)))
-                .order(by(DbT7010NinteichosaItakusakiJoho.KAIGO_JIGYOSHA_NO, Order.DESC))
+                .where(and(eq(DbT7010NinteichosaItakusakiJoho.shoKisaiHokenshaNo, 証記載保険者番号),
+                eq(DbT7010NinteichosaItakusakiJoho.jigyoshaNo, 事業者番号),
+                eq(DbT7010NinteichosaItakusakiJoho.kaigoJigyoshaJokyo, 介護事業状況)))
+                .order(by(DbT7010NinteichosaItakusakiJoho.kaigoJigyoshaNo, Order.DESC))
                 .toList(DbT7010NinteichosaItakusakiJohoEntity.class);
 
         if (list.isEmpty()) {
@@ -92,7 +124,12 @@ public class NinteichosaItakusakiDac implements INinteichosaItakusakiDac {
 
     }
 
-    @Override
+    /**
+     * 認定調査委託先情報に対し追加・更新を行います
+     *
+     * @param entity 認定調査委託先情報エンティティ
+     * @return 更新・追加結果
+     */
     public int insertOrUpdate(DbT7010NinteichosaItakusakiJohoEntity entity) {
 
         if (getMatchRowCount(entity) == 0) {
@@ -108,7 +145,9 @@ public class NinteichosaItakusakiDac implements INinteichosaItakusakiDac {
      * @param data 認定調査委託先情報エンティティ
      * @return 追加結果
      */
+    @Transaction
     public int insert(DbT7010NinteichosaItakusakiJohoEntity data) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.insert(data).execute();
     }
 
@@ -118,12 +157,21 @@ public class NinteichosaItakusakiDac implements INinteichosaItakusakiDac {
      * @param data 認定調査委託先情報エンティティ
      * @return 更新結果
      */
+    @Transaction
     public int update(DbT7010NinteichosaItakusakiJohoEntity data) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.update(data).execute();
     }
 
-    @Override
+    /**
+     * 認定調査委託先を削除します
+     *
+     * @param data 認定調査委託先情報エンティティ
+     * @return 削除結果
+     */
+    @Transaction
     public int delete(DbT7010NinteichosaItakusakiJohoEntity data) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.delete(data).execute();
     }
 
@@ -134,12 +182,13 @@ public class NinteichosaItakusakiDac implements INinteichosaItakusakiDac {
      * @return 取得件数
      */
     private int getMatchRowCount(DbT7010NinteichosaItakusakiJohoEntity entity) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.
                 select().
                 table(DbT7010NinteichosaItakusakiJoho.class).
-                where(and(eq(DbT7010NinteichosaItakusakiJoho.SHICHOSON_CD, entity.get市町村コード()),
-                eq(DbT7010NinteichosaItakusakiJoho.KAIGO_JIGYOSHA_NO, entity.get介護事業者番号()))).
+                where(and(eq(DbT7010NinteichosaItakusakiJoho.shoKisaiHokenshaNo, entity.get証記載保険者番号()),
+                eq(DbT7010NinteichosaItakusakiJoho.kaigoJigyoshaNo, entity.get介護事業者番号()))).
                 getCount();
     }
 }

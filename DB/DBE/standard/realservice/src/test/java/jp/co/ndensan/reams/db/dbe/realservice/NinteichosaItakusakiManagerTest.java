@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.realservice;
 
-import jp.co.ndensan.reams.db.dbe.realservice.NinteichosaItakusakiManager;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,7 +15,8 @@ import jp.co.ndensan.reams.db.dbe.definition.ChosaItakuKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5020HatsubanKanriJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.IHatsubanKanriJohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.INinteichosaItakusakiDac;
+import jp.co.ndensan.reams.db.dbe.persistence.NinteichosaItakusakiDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import static org.hamcrest.CoreMatchers.is;
@@ -36,7 +36,7 @@ import static org.mockito.Mockito.*;
 @RunWith(Enclosed.class)
 public class NinteichosaItakusakiManagerTest {
 
-    private static INinteichosaItakusakiDac ninteichosaItakusakiDac;
+    private static NinteichosaItakusakiDac ninteichosaItakusakiDac;
     private static IHatsubanKanriJohoDac hatsubankanrijohoDac;
     private static DbT7010NinteichosaItakusakiJohoEntity entity;
     private static DbT5020HatsubanKanriJohoEntity hatsubanentity;
@@ -49,7 +49,7 @@ public class NinteichosaItakusakiManagerTest {
 
     @BeforeClass
     public static void setUpClass() {
-        ninteichosaItakusakiDac = mock(INinteichosaItakusakiDac.class);
+        ninteichosaItakusakiDac = mock(NinteichosaItakusakiDac.class);
         hatsubankanrijohoDac = mock(IHatsubanKanriJohoDac.class);
         ninteichosaItakusaki = mock(NinteichosaItakusaki.class);
         kaigojigyoshaNo = mock(KaigoJigyoshaNo.class);
@@ -57,7 +57,7 @@ public class NinteichosaItakusakiManagerTest {
         entity = mock(DbT7010NinteichosaItakusakiJohoEntity.class);
         hatsubanentity = mock(DbT5020HatsubanKanriJohoEntity.class);
         list = new ArrayList<>();
-        when(entity.get市町村コード()).thenReturn(new RString("20203"));
+        when(entity.get証記載保険者番号()).thenReturn(new ShoKisaiHokenshaNo(new RString("202030")));
         kaigojigyoshaNo = new KaigoJigyoshaNo(new RString("0000000001"));
         when(entity.get介護事業者番号()).thenReturn(kaigojigyoshaNo);
         jigyoshaNo = new JigyoshaNo(new RString("2020300001"));
@@ -75,7 +75,7 @@ public class NinteichosaItakusakiManagerTest {
         when(ninteichosaItakusakiDac.selectAll(null)).thenReturn(emptyList);
         when(ninteichosaItakusakiDac.selectAll(new RString("20203"), true)).thenReturn(list);
 
-        when(entity.get市町村コード()).thenReturn(new RString("20203"));
+        when(entity.get証記載保険者番号()).thenReturn(new ShoKisaiHokenshaNo(new RString("202030")));
         kaigojigyoshaNo = new KaigoJigyoshaNo(new RString("0000000002"));
         when(entity.get介護事業者番号()).thenReturn(kaigojigyoshaNo);
         jigyoshaNo = new JigyoshaNo(new RString("2020300002"));

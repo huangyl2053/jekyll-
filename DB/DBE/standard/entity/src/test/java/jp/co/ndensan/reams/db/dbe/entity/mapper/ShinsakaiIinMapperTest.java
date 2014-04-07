@@ -54,6 +54,7 @@ public class ShinsakaiIinMapperTest {
     private static AtenaJusho 住所_山田市 = new AtenaJusho(new RString("山田市"));
     private static TelNo 電話番号_0981234567 = new TelNo("0981234567");
     private static KinyuKikanCode 金融機関コード_01 = new KinyuKikanCode(new RString("0001"));
+    private static KinyuKikanCode 金融機関コード_0001 = new KinyuKikanCode(new RString("0001"));
     private static KinyuKikanShitenCode 金融機関支店コード_011 = new KinyuKikanShitenCode(new RString("011"));
     private static RString 口座種別_普通 = new RString("普通");
     private static RString 口座名義人_次郎 = new RString("次郎");
@@ -151,7 +152,7 @@ public class ShinsakaiIinMapperTest {
         @Test
         public void 金融機関コードに01を持つEntityが渡されたとき_金融機関コードに01を持つ審査会委員が返る() {
             sut = ShinsakaiIinMapper.to審査会委員(createEntity());
-            assertThat(sut.get口座情報().get金融機関コード(), is(金融機関コード_01));
+            assertThat(sut.get口座情報().get金融機関コード(), is(金融機関コード_0001));
         }
 
         @Test
@@ -276,7 +277,7 @@ public class ShinsakaiIinMapperTest {
         @Test
         public void 金融機関コードに01を持つ審査会委員が渡されたとき_金融機関コードに01を持つEntityが返す() {
             sut = ShinsakaiIinMapper.to審査会委員Entity(createShinsakaiIin());
-            assertThat(sut.getKinyuKikanCode(), is(金融機関コード_01));
+            assertThat(sut.getKinyuKikanCode(), is(金融機関コード_0001));
         }
 
         @Test
@@ -311,7 +312,7 @@ public class ShinsakaiIinMapperTest {
     }
 
     private static ShinsakaiIin createShinsakaiIin() {
-        ShinsakaiIinKoza kozaJoho = new ShinsakaiIinKoza(金融機関コード_01,
+        ShinsakaiIinKoza kozaJoho = new ShinsakaiIinKoza(金融機関コード_0001,
                 金融機関支店コード_011, 口座種別_普通, 口座名義人_次郎, 口座名義人カナ_ジロウ, 口座番号_1237890);
 
         return new ShinsakaiIin(委員コード_iin01, 委員着任期間_19991212_20101212, 審査会委員状況_有効,
@@ -334,7 +335,7 @@ public class ShinsakaiIinMapperTest {
         委員Entity.setYubinNo(郵便番号_1231234);
         委員Entity.setJusho(住所_山田市);
         委員Entity.setTelNo(電話番号_0981234567);
-        委員Entity.setKinyuKikanCode(金融機関コード_01);
+        委員Entity.setKinyuKikanCode(金融機関コード_0001);
         委員Entity.setKinyuKikanShitenCode(金融機関支店コード_011);
         委員Entity.setKozaShubetsu(口座種別_普通);
         委員Entity.setKozaMeigi(口座名義人_次郎);

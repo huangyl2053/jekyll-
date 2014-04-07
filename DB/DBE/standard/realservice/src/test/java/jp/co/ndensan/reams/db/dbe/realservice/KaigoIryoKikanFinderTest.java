@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoIryoKikanEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.IKaigoIryoKikanDac;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.KaigoIryoKikanTestHelper;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.realservice.IKozaManager;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -38,10 +38,10 @@ import static org.mockito.Mockito.any;
 public class KaigoIryoKikanFinderTest extends TestBase {
 
     private static KaigoIryoKikanFinder sut;
-    public static ShichosonCode 市町村コード = new ShichosonCode(new RString("A001"));
+    public static ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("A00001"));
     public static KaigoIryoKikanCode 介護医療機関コード = new KaigoIryoKikanCode(new RString("B001"));
 
-    public static class get介護医療機関_市町村コードと介護医療機関コードが引数の場合のテスト extends TestBase {
+    public static class get介護医療機関_証記載保険者番号と介護医療機関コードが引数の場合のテスト extends TestBase {
 
         @Override
         public void setUp() {
@@ -49,23 +49,23 @@ public class KaigoIryoKikanFinderTest extends TestBase {
         }
 
         @Test
-        public void 指定した市町村コードを持つ_介護医療機関が取得できる() {
+        public void 指定した証記載保険者番号を持つ_介護医療機関が取得できる() {
             sut = new KaigoIryoKikanFinder(createDac(), createKozaManager());
-            KaigoIryoKikan result = sut.get介護医療機関(市町村コード, 介護医療機関コード);
-            assertThat(result.get市町村コード(), is(市町村コード));
+            KaigoIryoKikan result = sut.get介護医療機関(証記載保険者番号, 介護医療機関コード);
+            assertThat(result.get証記載保険者番号(), is(証記載保険者番号));
         }
 
         @Test
         public void 介護医療機関Entityが取得できなかった場合_nullが返る() {
             IKaigoIryoKikanDac dac = createDac();
-            when(dac.select(市町村コード, 介護医療機関コード)).thenReturn(null);
+            when(dac.select(証記載保険者番号, 介護医療機関コード)).thenReturn(null);
             sut = new KaigoIryoKikanFinder(dac, createKozaManager());
-            KaigoIryoKikan result = sut.get介護医療機関(市町村コード, 介護医療機関コード);
+            KaigoIryoKikan result = sut.get介護医療機関(証記載保険者番号, 介護医療機関コード);
             assertThat(result, is(nullValue()));
         }
     }
 
-    public static class get介護医療機関Collection_市町村コードと介護医療機関コード_医療機関状況が引数の場合のテスト extends TestBase {
+    public static class get介護医療機関Collection_証記載保険者番号と介護医療機関コード_医療機関状況が引数の場合のテスト extends TestBase {
 
         @Override
         public void setUp() {
@@ -73,23 +73,23 @@ public class KaigoIryoKikanFinderTest extends TestBase {
         }
 
         @Test
-        public void 指定した市町村コードを持つ_介護医療機関が取得できる() {
+        public void 指定した証記載保険者番号を持つ_介護医療機関が取得できる() {
             sut = new KaigoIryoKikanFinder(createDac(), createKozaManager());
-            KaigoIryoKikan result = sut.get介護医療機関(市町村コード, 介護医療機関コード, IryoKikanJokyo.有効);
-            assertThat(result.get市町村コード(), is(市町村コード));
+            KaigoIryoKikan result = sut.get介護医療機関(証記載保険者番号, 介護医療機関コード, IryoKikanJokyo.有効);
+            assertThat(result.get証記載保険者番号(), is(証記載保険者番号));
         }
 
         @Test
         public void 介護医療機関Entityが取得できなかった場合_nullが返る() {
             IKaigoIryoKikanDac dac = createDac();
-            when(dac.select(市町村コード, 介護医療機関コード, IryoKikanJokyo.有効)).thenReturn(null);
+            when(dac.select(証記載保険者番号, 介護医療機関コード, IryoKikanJokyo.有効)).thenReturn(null);
             sut = new KaigoIryoKikanFinder(dac, createKozaManager());
-            KaigoIryoKikan result = sut.get介護医療機関(市町村コード, 介護医療機関コード, IryoKikanJokyo.有効);
+            KaigoIryoKikan result = sut.get介護医療機関(証記載保険者番号, 介護医療機関コード, IryoKikanJokyo.有効);
             assertThat(result, is(nullValue()));
         }
     }
 
-    public static class get介護医療機関_市町村コードが引数の場合のテスト extends TestBase {
+    public static class get介護医療機関_証記載保険者番号が引数の場合のテスト extends TestBase {
 
         @Override
         public void setUp() {
@@ -97,23 +97,23 @@ public class KaigoIryoKikanFinderTest extends TestBase {
         }
 
         @Test
-        public void 指定した市町村コードを持つ_介護医療機関を要素として持つCollectionが取得できる() {
+        public void 指定した証記載保険者番号を持つ_介護医療機関を要素として持つCollectionが取得できる() {
             sut = new KaigoIryoKikanFinder(createDac(), createKozaManager());
-            KaigoIryoKikanCollection results = sut.get介護医療機関Collection(市町村コード);
-            assertThat(results.get介護医療機関(市町村コード, 介護医療機関コード).get市町村コード(), is(市町村コード));
+            KaigoIryoKikanCollection results = sut.get介護医療機関Collection(証記載保険者番号);
+            assertThat(results.get介護医療機関(証記載保険者番号, 介護医療機関コード).get証記載保険者番号(), is(証記載保険者番号));
         }
 
         @Test
         public void 介護医療機関Entityのリストが取得できずEMPTY_LISTが戻り値だった場合_空のCollectionが返る() {
             IKaigoIryoKikanDac dac = createDac();
-            when(dac.select(市町村コード)).thenReturn(Collections.EMPTY_LIST);
+            when(dac.select(証記載保険者番号)).thenReturn(Collections.EMPTY_LIST);
             sut = new KaigoIryoKikanFinder(dac, createKozaManager());
-            KaigoIryoKikanCollection results = sut.get介護医療機関Collection(市町村コード);
+            KaigoIryoKikanCollection results = sut.get介護医療機関Collection(証記載保険者番号);
             assertThat(results.isEmpty(), is(true));
         }
     }
 
-    public static class get介護医療機関Collection_市町村コードと医療機関状況が引数の場合のテスト extends TestBase {
+    public static class get介護医療機関Collection_証記載保険者番号と医療機関状況が引数の場合のテスト extends TestBase {
 
         @Override
         public void setUp() {
@@ -121,18 +121,18 @@ public class KaigoIryoKikanFinderTest extends TestBase {
         }
 
         @Test
-        public void 指定した市町村コードを持つ_介護医療機関を要素として持つCollectionが取得できる() {
+        public void 指定した証記載保険者番号を持つ_介護医療機関を要素として持つCollectionが取得できる() {
             sut = new KaigoIryoKikanFinder(createDac(), createKozaManager());
-            KaigoIryoKikanCollection results = sut.get介護医療機関Collection(市町村コード, IryoKikanJokyo.有効);
-            assertThat(results.get介護医療機関(市町村コード, 介護医療機関コード).get市町村コード(), is(市町村コード));
+            KaigoIryoKikanCollection results = sut.get介護医療機関Collection(証記載保険者番号, IryoKikanJokyo.有効);
+            assertThat(results.get介護医療機関(証記載保険者番号, 介護医療機関コード).get証記載保険者番号(), is(証記載保険者番号));
         }
 
         @Test
         public void 介護医療機関Entityのリストが取得できずEMPTY_LISTが戻り値だった場合_空のCollectionが返る() {
             IKaigoIryoKikanDac dac = createDac();
-            when(dac.select(市町村コード, IryoKikanJokyo.有効)).thenReturn(Collections.EMPTY_LIST);
+            when(dac.select(証記載保険者番号, IryoKikanJokyo.有効)).thenReturn(Collections.EMPTY_LIST);
             sut = new KaigoIryoKikanFinder(dac, createKozaManager());
-            KaigoIryoKikanCollection results = sut.get介護医療機関Collection(市町村コード, IryoKikanJokyo.有効);
+            KaigoIryoKikanCollection results = sut.get介護医療機関Collection(証記載保険者番号, IryoKikanJokyo.有効);
             assertThat(results.isEmpty(), is(true));
         }
     }
@@ -141,14 +141,14 @@ public class KaigoIryoKikanFinderTest extends TestBase {
         IKaigoIryoKikanDac dac = mock(IKaigoIryoKikanDac.class);
 
         KaigoIryoKikanEntity entity = create介護医療機関Entity();
-        when(dac.select(any(ShichosonCode.class), any(KaigoIryoKikanCode.class))).thenReturn(entity);
-        when(dac.select(any(ShichosonCode.class), any(KaigoIryoKikanCode.class), any(IryoKikanJokyo.class))).thenReturn(entity);
+        when(dac.select(any(ShoKisaiHokenshaNo.class), any(KaigoIryoKikanCode.class))).thenReturn(entity);
+        when(dac.select(any(ShoKisaiHokenshaNo.class), any(KaigoIryoKikanCode.class), any(IryoKikanJokyo.class))).thenReturn(entity);
 
         List<KaigoIryoKikanEntity> 介護医療機関リスト_2件 = create介護医療機関EntityList(2);
-        when(dac.select(any(ShichosonCode.class))).thenReturn(介護医療機関リスト_2件);
+        when(dac.select(any(ShoKisaiHokenshaNo.class))).thenReturn(介護医療機関リスト_2件);
 
         List<KaigoIryoKikanEntity> 介護医療機関リスト_3件 = create介護医療機関EntityList(3);
-        when(dac.select(any(ShichosonCode.class), any(IryoKikanJokyo.class))).thenReturn(介護医療機関リスト_3件);
+        when(dac.select(any(ShoKisaiHokenshaNo.class), any(IryoKikanJokyo.class))).thenReturn(介護医療機関リスト_3件);
         return dac;
     }
 

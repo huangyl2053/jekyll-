@@ -16,19 +16,19 @@ import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 
 /**
- * 市町村コードのテストクラスです。
+ * 証記載保険者番号のテストクラスです。
  *
  * @author N3327 三浦 凌
  */
 @RunWith(Enclosed.class)
-public class ShichosonCodeTest extends TestBase {
+public class ShoKisaiHokenshaNoTest extends TestBase {
 
     public static class コンストラクタ_RString extends TestBase {
 
         @Test(expected = NullPointerException.class)
         public void コンストラクタ引数のRStringにnullを指定した時_NullPointerExceptionを返す() {
             RString test = null;
-            ShichosonCode sut = new ShichosonCode(test);
+            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo(test);
         }
     }
 
@@ -37,7 +37,7 @@ public class ShichosonCodeTest extends TestBase {
 //        @Test(expected = NullPointerException.class)
 //        public void コンストラクタ引数のILocalGovernmentにnullを指定した時_NullPointerExceptionを返す() {
 //            ILocalGovernmentCode test = null;
-//            ShichosonCode sut = new ShichosonCode(test);
+//            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo(test);
 //        }
 //    }
 //    public static class GetValue extends TestBase {
@@ -52,7 +52,7 @@ public class ShichosonCodeTest extends TestBase {
 //            String 市区町村コード = "345";
 //            when(地方公共団体コード.get市区町村コード()).thenReturn(new RString(市区町村コード));
 //
-//            ShichosonCode sut = new ShichosonCode(地方公共団体コード);
+//            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo(地方公共団体コード);
 //            assertThat(sut.getValue(), is(new RString(都道府県コード + 市区町村コード)));
 //        }
 //    }
@@ -61,17 +61,17 @@ public class ShichosonCodeTest extends TestBase {
         @Test
         public void 比較対象がnullなら_falseを返す() {
 
-            ShichosonCode sut = new ShichosonCode(new RString("1"));
-            ShichosonCode 比較対象 = null;
+            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo(new RString("1"));
+            ShoKisaiHokenshaNo 比較対象 = null;
 
             assertThat(sut.equals(比較対象), is(false));
         }
 
         @Test
-        public void 比較対象がShichosonCodeのインスタンスでないなら_falseを返す() {
+        public void 比較対象がShoKisaiHokenshaNoのインスタンスでないなら_falseを返す() {
             RString コード = new RString("1");
 
-            ShichosonCode sut = new ShichosonCode(コード);
+            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo(コード);
 
             assertThat(sut.equals(コード), is(false));
         }
@@ -80,16 +80,16 @@ public class ShichosonCodeTest extends TestBase {
         public void 同一の値で生成されたインスタンス同士は_trueを返す() {
             RString 同じコード = new RString("1");
 
-            ShichosonCode sut = new ShichosonCode(同じコード);
-            ShichosonCode 比較対象 = new ShichosonCode(同じコード);
+            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo(同じコード);
+            ShoKisaiHokenshaNo 比較対象 = new ShoKisaiHokenshaNo(同じコード);
 
             assertThat(sut.equals(比較対象), is(true));
         }
 
         @Test
         public void 異なった値で生成されたインスタンス同士は_falseを返す() {
-            ShichosonCode sut = new ShichosonCode(new RString("11"));
-            ShichosonCode 比較対象 = new ShichosonCode(new RString("22"));
+            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo(new RString("11"));
+            ShoKisaiHokenshaNo 比較対象 = new ShoKisaiHokenshaNo(new RString("22"));
 
             assertThat(sut.equals(比較対象), is(false));
         }
@@ -101,16 +101,16 @@ public class ShichosonCodeTest extends TestBase {
         public void 同一の値で生成されたインスタンス同士は_同じ値を返す() {
             RString 同じコード = new RString("1");
 
-            ShichosonCode sut = new ShichosonCode(同じコード);
-            ShichosonCode 比較対象 = new ShichosonCode(同じコード);
+            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo(同じコード);
+            ShoKisaiHokenshaNo 比較対象 = new ShoKisaiHokenshaNo(同じコード);
 
             assertThat((sut.hashCode() == 比較対象.hashCode()), is(true));
         }
 
         @Test
         public void 異なった値で生成されたインスタンス同士は_違う値を返す() {
-            ShichosonCode sut = new ShichosonCode(new RString("11"));
-            ShichosonCode 比較対象 = new ShichosonCode(new RString("22"));
+            ShoKisaiHokenshaNo sut = new ShoKisaiHokenshaNo(new RString("11"));
+            ShoKisaiHokenshaNo 比較対象 = new ShoKisaiHokenshaNo(new RString("22"));
 
             assertThat((sut.hashCode() == 比較対象.hashCode()), is(false));
         }

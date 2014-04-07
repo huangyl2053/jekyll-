@@ -5,12 +5,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 /**
  * DbT7012ShujiiJohoの項目定義クラスです
  *
- * @author N8156 宮本 康
- *
  */
 public enum DbT7012ShujiiJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Generated Code">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
     insertDantaiCd(2147483647, 0),
     insertTimestamp(29, 0),
     insertReamsLoginId(2147483647, 0),
@@ -19,16 +16,17 @@ public enum DbT7012ShujiiJoho implements IColumnDefinition {
     updateCount(10, 0),
     lastUpdateTimestamp(29, 0),
     lastUpdateReamsLoginId(2147483647, 0),
-    shichosonCode(5, 0),
+    shoKisaiHokenshaNo(6, 0),
     kaigoIryokikanCode(10, 0),
-    kaigoIshiCode(8, 0),
+    kaigoIshiCode(10, 0),
     iryokikanCode(10, 0),
-    ishiShikibetsuNo(8, 0),
+    ishiShikibetsuNo(10, 0),
     shujiiJokyo(1, 0),
-    yubinNo(7, 0),
-    jusho(50, 0),
-    telNo(14, 0),
+    yubinNo(2147483647, 0),
+    jusho(2147483647, 0),
+    telNo(2147483647, 0),
     faxNo(16, 0);
+
     private final int maxLength;
     private final int scale;
 
@@ -39,7 +37,6 @@ public enum DbT7012ShujiiJoho implements IColumnDefinition {
 
     /**
      * getMaxLength
-     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -48,11 +45,11 @@ public enum DbT7012ShujiiJoho implements IColumnDefinition {
 
     /**
      * getScale
-     *
      * @return 小数点以下の桁数
      */
     public int getScale() {
         return scale;
     }
+
 // </editor-fold>
 }

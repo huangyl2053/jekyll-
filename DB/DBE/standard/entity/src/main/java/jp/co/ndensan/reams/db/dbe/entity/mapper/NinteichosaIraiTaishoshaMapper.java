@@ -12,7 +12,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
 // TODO N8187 久保田英男 URのNinteiChosainのキャメルケースをNinteichosainに修正する。URを修正するタイミングで対応する。
 import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
@@ -62,7 +62,7 @@ public final class NinteichosaIraiTaishoshaMapper {
         requireNonNull(個人, Messages.E00003.replace("個人", "認定調査対象者").getMessage());
 
         ShinseishoKanriNo 申請書管理番号 = 要介護認定申請情報Entity.getShinseishoKanriNo();
-        ShichosonCode 市町村コード = 要介護認定申請情報Entity.getShichosonCode();
+        ShoKisaiHokenshaNo 証記載保険者番号 = 要介護認定申請情報Entity.getShoKisaiHokenshaNo();
         KaigoHihokenshaNo 被保険者 = 要介護認定申請情報Entity.getHihokenshaNo();
         FlexibleDate 認定申請年月日 = 要介護認定申請情報Entity.getNinteiShinseiYMD();
         NinteiShinseiKubunShinsei 認定申請区分 = 要介護認定申請情報Entity.getNinteiShinseiShinseijiKubunCode();
@@ -75,7 +75,7 @@ public final class NinteichosaIraiTaishoshaMapper {
         INinteiChosain 認定調査員情報 = create認定調査員(調査員情報Entity, 事業者情報);
 
         return new NinteichosaIraiTaishosha(
-                申請書管理番号, 市町村コード, 被保険者,
+                申請書管理番号, 証記載保険者番号, 被保険者,
                 認定申請年月日, 認定申請区分, 個人情報, 氏名, 住所,
                 認定調査委託先, 事業者情報, 認定調査員情報);
     }

@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.ChosaItakuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -61,17 +61,17 @@ public class KaigoNinteichosainCollectionTest extends TestBase {
         public void 介護認定調査員が存在する時_get介護認定調査員は_該当の認定調査員情報を返す() {
             sut = createKaigoNinteichosainList();
             assertThat(sut.get介護認定調査員(
-                    new ShichosonCode(new RString("0001")),
+                    new ShoKisaiHokenshaNo(new RString("0001")),
                     new KaigoJigyoshaNo(new RString("S001")),
                     new KaigoNinteichosainNo(new RString("K00A")))
                     .get介護事業者番号().value(), is(new RString("S001")));
         }
 
         @Test(expected = IllegalArgumentException.class)
-        public void 市町村コードが該当しない時_get介護認定調査員は_IllegalArgumentExceptionを投げる() {
+        public void 証記載保険者番号が該当しない時_get介護認定調査員は_IllegalArgumentExceptionを投げる() {
             sut = createKaigoNinteichosainList();
             sut.get介護認定調査員(
-                    new ShichosonCode(new RString("9999")),
+                    new ShoKisaiHokenshaNo(new RString("9999")),
                     new KaigoJigyoshaNo(new RString("S001")),
                     new KaigoNinteichosainNo(new RString("K00A")));
         }
@@ -80,7 +80,7 @@ public class KaigoNinteichosainCollectionTest extends TestBase {
         public void 介護事業者番号が該当しない時_get介護認定調査員は_IllegalArgumentExceptionを投げる() {
             sut = createKaigoNinteichosainList();
             sut.get介護認定調査員(
-                    new ShichosonCode(new RString("0001")),
+                    new ShoKisaiHokenshaNo(new RString("0001")),
                     new KaigoJigyoshaNo(new RString("S999")),
                     new KaigoNinteichosainNo(new RString("K00A")));
         }
@@ -89,7 +89,7 @@ public class KaigoNinteichosainCollectionTest extends TestBase {
         public void 介護調査員番号が該当しない時_get介護認定調査員は_IllegalArgumentExceptionを投げる() {
             sut = createKaigoNinteichosainList();
             sut.get介護認定調査員(
-                    new ShichosonCode(new RString("0001")),
+                    new ShoKisaiHokenshaNo(new RString("0001")),
                     new KaigoJigyoshaNo(new RString("S001")),
                     new KaigoNinteichosainNo(new RString("K999")));
         }
@@ -110,33 +110,33 @@ public class KaigoNinteichosainCollectionTest extends TestBase {
         }
     }
 
-    public static class sub介護認定調査員Collectionで市町村コードを指定した場合 extends TestBase {
+    public static class sub介護認定調査員Collectionで証記載保険者番号を指定した場合 extends TestBase {
 
         @Test
         public void 介護認定調査員が存在する時_sub介護認定調査員Collectionは_該当の介護認定調査員を返す() {
             sut = createKaigoNinteichosainList();
-            assertThat(sut.sub介護認定調査員Collection(new ShichosonCode(new RString("0001"))).size(), is(3));
+            assertThat(sut.sub介護認定調査員Collection(new ShoKisaiHokenshaNo(new RString("0001"))).size(), is(3));
         }
 
         @Test
         public void 介護認定調査員が存在しない時_sub介護認定調査員Collectionは_空のListを返す() {
             sut = createKaigoNinteichosainList();
-            assertThat(sut.sub介護認定調査員Collection(new ShichosonCode(new RString("9999"))).size(), is(0));
+            assertThat(sut.sub介護認定調査員Collection(new ShoKisaiHokenshaNo(new RString("9999"))).size(), is(0));
         }
     }
 
-    public static class sub介護認定調査員Collectionで市町村コードと介護事業者番号を指定した場合 extends TestBase {
+    public static class sub介護認定調査員Collectionで証記載保険者番号と介護事業者番号を指定した場合 extends TestBase {
 
         @Test
         public void 該当する介護認定調査員が存在する時_sub介護認定調査員Collectionは_該当の介護認定調査員を返す() {
             sut = createKaigoNinteichosainList();
-            assertThat(sut.sub介護認定調査員Collection(new ShichosonCode(new RString("0001")), new KaigoJigyoshaNo(new RString("S001"))).size(), is(1));
+            assertThat(sut.sub介護認定調査員Collection(new ShoKisaiHokenshaNo(new RString("0001")), new KaigoJigyoshaNo(new RString("S001"))).size(), is(1));
         }
 
         @Test
         public void 該当する介護認定調査員が存在しない時_sub介護認定調査員Collectionは_空のListを返す() {
             sut = createKaigoNinteichosainList();
-            assertThat(sut.sub介護認定調査員Collection(new ShichosonCode(new RString("9999")), new KaigoJigyoshaNo(new RString("S999"))).size(), is(0));
+            assertThat(sut.sub介護認定調査員Collection(new ShoKisaiHokenshaNo(new RString("9999")), new KaigoJigyoshaNo(new RString("S999"))).size(), is(0));
         }
     }
 
@@ -180,7 +180,7 @@ public class KaigoNinteichosainCollectionTest extends TestBase {
 
     private static KaigoNinteichosain createKaigoNinteichosain(String 介護事業者番号, String 介護調査員番号) {
         return new KaigoNinteichosain(
-                new ShichosonCode(new RString("0001")),
+                new ShoKisaiHokenshaNo(new RString("0001")),
                 new KaigoJigyoshaNo(new RString(介護事業者番号)),
                 new KaigoNinteichosainNo(new RString(介護調査員番号)),
                 true,
@@ -197,7 +197,7 @@ public class KaigoNinteichosainCollectionTest extends TestBase {
 
     private static NinteichosaItakusaki createNinteichosaItakusaki(String 介護事業者番号) {
         return new NinteichosaItakusaki(
-                new RString("0001"),
+                new ShoKisaiHokenshaNo(new RString("000001")),
                 new KaigoJigyoshaNo(new RString(介護事業者番号)),
                 new JigyoshaNo(new RString("0001")),
                 true,

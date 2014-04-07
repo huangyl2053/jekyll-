@@ -18,7 +18,7 @@ public enum DbT7011ShujiiIryoKikanJoho implements IColumnDefinition {
     updateCount(10, 0),
     lastUpdateTimestamp(29, 0),
     lastUpdateReamsLoginId(2147483647, 0),
-    shichosonCode(5, 0),
+    shoKisaiHokenshaNo(6, 0),
     kaigoIryokikanCode(10, 0),
     iryokikanCode(10, 0),
     iryokikanJokyo(1, 0),

@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**
@@ -51,19 +51,19 @@ public class ShujiiIkenshoIraiTaishoshaList implements Iterable {
     }
 
     /**
-     * 市町村コードに一致する主治医意見書作成依頼処理対象者のリストを返します。<br />
+     * 証記載保険者番号に一致する主治医意見書作成依頼処理対象者のリストを返します。<br />
      * 一致する対象者がいない場合Collections.EMPTY_LISTを返します。
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @return 主治医意見書作成依頼対象者のリスト
      * @throws NullPointerException 引数がNULLのとき
      */
-    public ShujiiIkenshoIraiTaishoshaList sub主治医意見書作成依頼処理対象者List(ShichosonCode 市町村コード)
+    public ShujiiIkenshoIraiTaishoshaList sub主治医意見書作成依頼処理対象者List(ShoKisaiHokenshaNo 証記載保険者番号)
             throws NullPointerException {
-        requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
+        requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
         List<ShujiiIkenshoIraiTaishosha> list = new ArrayList<>();
         for (ShujiiIkenshoIraiTaishosha taishosha : taishoshaList) {
-            if (taishosha.get市町村コード().equals(市町村コード)) {
+            if (taishosha.get証記載保険者番号().equals(証記載保険者番号)) {
                 list.add(taishosha);
             }
         }

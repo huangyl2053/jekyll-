@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.YokaigoninteiDateConstants;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
@@ -28,7 +28,7 @@ public class ShujiiIkenshoIraiTaishoshaDac implements IShujiiIkenshoIraiTaishosh
     private SqlSession session;
 
     @Override
-    public List<DbT5005NinteiShinchokuJohoEntity> select主治医意見書作成依頼対象者(ShichosonCode 市町村コード) {
+    public List<DbT5005NinteiShinchokuJohoEntity> select主治医意見書作成依頼対象者(ShoKisaiHokenshaNo 証記載保険者番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor
@@ -36,14 +36,14 @@ public class ShujiiIkenshoIraiTaishoshaDac implements IShujiiIkenshoIraiTaishosh
                 .table(DbT5005NinteiShinchokuJoho.class)
                 .innerJoin(DbT5001NinteiShinseiJoho.class,
                 using(DbT5001NinteiShinseiJoho.shinseishoKanriNo, DbT5005NinteiShinchokuJoho.shinseishoKanriNo))
-                .where(and(eq(DbT5001NinteiShinseiJoho.shichosonCode, 市町村コード),
+                .where(and(eq(DbT5001NinteiShinseiJoho.shoKisaiHokenshaNo, 証記載保険者番号),
                 eq(DbT5005NinteiShinchokuJoho.ikenshoSakuseiIraiKanryoYMD, YokaigoninteiDateConstants.主治医意見書作成依頼未完了年月日)))
                 .order(by(DbT5005NinteiShinchokuJoho.shinseishoKanriNo, Order.ASC))
                 .toList(DbT5005NinteiShinchokuJohoEntity.class);
     }
 
     @Override
-    public List<DbT5005NinteiShinchokuJohoEntity> select主治医意見書作成依頼対象者(ShichosonCode 市町村コード, RString 支所コード) {
+    public List<DbT5005NinteiShinchokuJohoEntity> select主治医意見書作成依頼対象者(ShoKisaiHokenshaNo 証記載保険者番号, RString 支所コード) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor
@@ -51,7 +51,7 @@ public class ShujiiIkenshoIraiTaishoshaDac implements IShujiiIkenshoIraiTaishosh
                 .table(DbT5005NinteiShinchokuJoho.class)
                 .innerJoin(DbT5001NinteiShinseiJoho.class,
                 using(DbT5001NinteiShinseiJoho.shinseishoKanriNo, DbT5005NinteiShinchokuJoho.shinseishoKanriNo))
-                .where(and(eq(DbT5001NinteiShinseiJoho.shichosonCode, 市町村コード),
+                .where(and(eq(DbT5001NinteiShinseiJoho.shoKisaiHokenshaNo, 証記載保険者番号),
                 eq(DbT5001NinteiShinseiJoho.shishoCode, 支所コード),
                 eq(DbT5005NinteiShinchokuJoho.ikenshoSakuseiIraiKanryoYMD, YokaigoninteiDateConstants.主治医意見書作成依頼未完了年月日)))
                 .order(by(DbT5005NinteiShinchokuJoho.shinseishoKanriNo, Order.ASC))

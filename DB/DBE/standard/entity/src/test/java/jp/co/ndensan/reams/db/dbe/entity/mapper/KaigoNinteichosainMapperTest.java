@@ -44,8 +44,8 @@ public class KaigoNinteichosainMapperTest extends TestBase {
         }
 
         @Test
-        public void 認定調査員entityから渡された市町村コードと_Mapping後の認定調査員が返す市町村コードが_同一になる() {
-            assertThat(sut.get市町村コード(), is(市町村コード));
+        public void 認定調査員entityから渡された証記載保険者番号と_Mapping後の認定調査員が返す証記載保険者番号が_同一になる() {
+            assertThat(sut.get証記載保険者番号(), is(証記載保険者番号));
         }
 
         @Test
@@ -124,8 +124,8 @@ public class KaigoNinteichosainMapperTest extends TestBase {
         }
 
         @Test
-        public void 渡された認定調査員クラスの市町村コードと_認定調査員エンティティの市町村コードが_同一になる() {
-            assertThat(sut.getShichosonCode(), is(市町村コード));
+        public void 渡された認定調査員クラスの証記載保険者番号と_認定調査員エンティティの証記載保険者番号が_同一になる() {
+            assertThat(sut.getShoKisaiHokenshaNo(), is(証記載保険者番号));
         }
 
         @Test

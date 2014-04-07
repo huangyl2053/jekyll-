@@ -137,11 +137,11 @@ public final class GogitaiMockEntityCreator {
         entity.setSeibetsu(Gender.FEMALE.getCode());
         entity.setShinsakaiIinShikakuCode(new Code(RString.EMPTY));
         entity.setShinsainYusoKubun(new RString("1"));
-        entity.setYubinNo(new YubinNo(new RString("123-1234")));
+        entity.setYubinNo(new YubinNo(new RString("1231234")));
         entity.setJusho(new AtenaJusho(RString.EMPTY));
         entity.setTelNo(new TelNo(RString.EMPTY));
-        entity.setKinyuKikanCode(new KinyuKikanCode(new RString("0000")));
-        entity.setKinyuKikanShitenCode(new KinyuKikanShitenCode(new RString("000")));
+        entity.setKinyuKikanCode(new KinyuKikanCode(new RString("1234")));
+        entity.setKinyuKikanShitenCode(new KinyuKikanShitenCode(new RString("123")));
         entity.setKozaShubetsu(RString.EMPTY);
         entity.setKozaMeigi(RString.EMPTY);
         entity.setKozaMeigiKana(RString.EMPTY);

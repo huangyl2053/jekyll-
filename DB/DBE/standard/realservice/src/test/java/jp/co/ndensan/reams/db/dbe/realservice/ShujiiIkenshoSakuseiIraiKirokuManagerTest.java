@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.db.dbe.realservice.helper.NinteiShinseiJohoMock;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.ShujiiIkenshoSakuseiIraiMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -197,7 +197,7 @@ public class ShujiiIkenshoSakuseiIraiKirokuManagerTest {
 
     private static KaigoDoctorManager createKaigoDoctorManager() {
         KaigoDoctorManager manager = mock(KaigoDoctorManager.class);
-        when(manager.get介護医師(any(ShichosonCode.class), any(KaigoIryoKikanCode.class), any(KaigoDoctorCode.class))).thenReturn(KaigoDoctorMock.getSpiedInstance());
+        when(manager.get介護医師(any(ShoKisaiHokenshaNo.class), any(KaigoIryoKikanCode.class), any(KaigoDoctorCode.class))).thenReturn(KaigoDoctorMock.getSpiedInstance());
         return manager;
     }
 

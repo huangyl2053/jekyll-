@@ -15,12 +15,12 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaIraiTaishoshaMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinchokuJohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.INinteichosaItakusakiDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiChosaIraiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
+import jp.co.ndensan.reams.db.dbe.persistence.NinteichosaItakusakiDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.INinteiChosaIraiTaishoshaDac;
 import jp.co.ndensan.reams.ur.urf.entity.basic.ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urf.entity.basic.KaigoJigyoshaEntity;
@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
 //import jp.co.ndensan.reams.ur.urz.persistence.basic.IKojinDac;
 //import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceCreator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 認定調査依頼対象者情報を管理するクラスです。
@@ -42,7 +42,7 @@ public class NinteichosaIraiTaishoshaFinder {
 
     private final INinteiShinchokuJohoDac shinchokuJohoDac;
     private final INinteiShinseiJohoDac shinseiJohoDac;
-    private final INinteichosaItakusakiDac itakusakiDac;
+    private final NinteichosaItakusakiDac itakusakiDac;
     private final INinteiChosaIraiJohoDac iraiJohoDac;
     private final INinteiChosaIraiTaishoshaDac iraiTaishoshaDac;
 //    private final IKojinDac kojinDac;
@@ -55,14 +55,14 @@ public class NinteichosaIraiTaishoshaFinder {
      *
      */
     public NinteichosaIraiTaishoshaFinder() {
-        shinchokuJohoDac = InstanceCreator.create(INinteiShinchokuJohoDac.class);
-        shinseiJohoDac = InstanceCreator.create(INinteiShinseiJohoDac.class);
-        itakusakiDac = InstanceCreator.create(INinteichosaItakusakiDac.class);
-        iraiJohoDac = InstanceCreator.create(INinteiChosaIraiJohoDac.class);
-        iraiTaishoshaDac = InstanceCreator.create(INinteiChosaIraiTaishoshaDac.class);
+        shinchokuJohoDac = InstanceProvider.create(INinteiShinchokuJohoDac.class);
+        shinseiJohoDac = InstanceProvider.create(INinteiShinseiJohoDac.class);
+        itakusakiDac = InstanceProvider.create(NinteichosaItakusakiDac.class);
+        iraiJohoDac = InstanceProvider.create(INinteiChosaIraiJohoDac.class);
+        iraiTaishoshaDac = InstanceProvider.create(INinteiChosaIraiTaishoshaDac.class);
 //        kojinDac = InstanceCreator.create(IKojinDac.class);
-        kaigoJigyoshaDac = InstanceCreator.create(IKaigoJigyoshaDac.class);
-        chosainJohoDac = InstanceCreator.create(IChosainJohoDac.class);
+        kaigoJigyoshaDac = InstanceProvider.create(IKaigoJigyoshaDac.class);
+        chosainJohoDac = InstanceProvider.create(IChosainJohoDac.class);
     }
 
     /**
@@ -80,7 +80,7 @@ public class NinteichosaIraiTaishoshaFinder {
     NinteichosaIraiTaishoshaFinder(
             INinteiShinchokuJohoDac shinchokuJohoDac,
             INinteiShinseiJohoDac shinseiJohoDac,
-            INinteichosaItakusakiDac itakusakiDac,
+            NinteichosaItakusakiDac itakusakiDac,
             INinteiChosaIraiJohoDac iraiJohoDac,
             INinteiChosaIraiTaishoshaDac iraiTaishoshaDac,
             //            IKojinDac kojinDac,
@@ -97,21 +97,19 @@ public class NinteichosaIraiTaishoshaFinder {
     }
 
     /**
-     * 市町村コードを指定して、認定調査依頼が未完了の認定調査依頼対象者を取得します。
+     * 証記載保険者番号を指定して、認定調査依頼が未完了の認定調査依頼対象者を取得します。
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @return NinteichosaIraiTaishoshaのList
-     * @throws NullPointerException {@code 市町村コード}がnullの場合
+     * @throws NullPointerException {@code 証記載保険者番号}がnullの場合
      */
-    public List<NinteichosaIraiTaishosha> get認定調査依頼対象者市町村指定(ShichosonCode 市町村コード) throws NullPointerException {
-        requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
+    public List<NinteichosaIraiTaishosha> get認定調査依頼対象者証記載保険者番号指定(ShoKisaiHokenshaNo 証記載保険者番号) throws NullPointerException {
+        requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
 
-
-        List<DbT5005NinteiShinchokuJohoEntity> 要介護認定進捗情報EntityList = iraiTaishoshaDac.select(市町村コード);
+        List< DbT5005NinteiShinchokuJohoEntity> 要介護認定進捗情報EntityList = iraiTaishoshaDac.select(証記載保険者番号);
         if (要介護認定進捗情報EntityList.isEmpty()) {
             return Collections.EMPTY_LIST;
         }
-
 
         return create認定調査依頼対象者List(要介護認定進捗情報EntityList);
     }
@@ -127,7 +125,6 @@ public class NinteichosaIraiTaishoshaFinder {
             return Collections.EMPTY_LIST;
         }
 
-
         return create認定調査依頼対象者List(要介護認定進捗情報EntityList);
     }
 
@@ -135,12 +132,10 @@ public class NinteichosaIraiTaishoshaFinder {
             throws NullPointerException {
         List<NinteichosaIraiTaishosha> list = new ArrayList<>();
 
-
         for (DbT5005NinteiShinchokuJohoEntity entity : 要介護認定進捗情報EntityList) {
 
-
             DbT5001NinteiShinseiJohoEntity 認定申請情報Entity = shinseiJohoDac.select(entity.getShinseishoKanriNo());
-//            KojinEntity 個人Entity = kojinDac.select最新(認定申請情報Entity.getShichosonCode().getValue());
+//            KojinEntity 個人Entity = kojinDac.select最新(認定申請情報Entity.getShoKisaiHokenshaNo().getValue());
 //            KojinEntity 個人Entity = KojinService.createKojinFinder().get個人(認定申請情報Entity.getShikibetsuCode());
             IKojin 個人 = KojinService.createKojinFinder().get個人(認定申請情報Entity.getShikibetsuCode());
             NinteichosaIraiRirekiNo ninteichosaIraiRirekiNo = new NinteichosaIraiRirekiNo(認定申請情報Entity.getNinteichosaIraiRirekiNo());
@@ -150,7 +145,6 @@ public class NinteichosaIraiTaishoshaFinder {
             DbT7010NinteichosaItakusakiJohoEntity 認定委託先情報Entity = create認定調査委託先(認定申請情報Entity, 認定調査依頼情報Entity);
             KaigoJigyoshaEntity 介護事業者Entity = create介護事業者(認定調査依頼情報Entity);
             ChosainJohoEntity 調査員情報Entity = create調査員情報(認定申請情報Entity, 認定調査依頼情報Entity);
-
 
             list.add(NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(
                     認定申請情報Entity, 個人,
@@ -165,7 +159,7 @@ public class NinteichosaIraiTaishoshaFinder {
         boolean isUncreatable = isNull(shinseiJohoEntity) || isNull(chosaIraiJohoEntity);
         return isUncreatable ? null
                 : itakusakiDac.select(
-                        shinseiJohoEntity.getShichosonCode().getValue(),
+                        shinseiJohoEntity.getShoKisaiHokenshaNo().getValue(),
                         new KaigoJigyoshaNo(chosaIraiJohoEntity.getNinteichosaItakusakiCode().getColumnValue()),
                         true);
     }
@@ -183,7 +177,7 @@ public class NinteichosaIraiTaishoshaFinder {
         boolean isUncreatable = isNull(shinseiJohoEntity) || isNull(chosaIraiJohoEntity);
         return isUncreatable ? null
                 : chosainJohoDac.selectByAllKey(
-                        shinseiJohoEntity.getShichosonCode().getValue(),
+                        shinseiJohoEntity.getShoKisaiHokenshaNo().getValue(),
                         chosaIraiJohoEntity.getNinteichosaItakusakiCode().getColumnValue(),
                         chosaIraiJohoEntity.getChousainCode().getColumnValue());
     }

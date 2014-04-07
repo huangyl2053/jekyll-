@@ -7,8 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  *
  */
 public enum DbT5001NinteiShinseiJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Generated Code">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
     insertDantaiCd(2147483647, 0),
     insertTimestamp(29, 0),
     insertReamsLoginId(2147483647, 0),
@@ -18,7 +17,7 @@ public enum DbT5001NinteiShinseiJoho implements IColumnDefinition {
     lastUpdateTimestamp(29, 0),
     lastUpdateReamsLoginId(2147483647, 0),
     shinseishoKanriNo(10, 0),
-    shichosonCode(5, 0),
+    shoKisaiHokenshaNo(6, 0),
     shishoCode(9, 0),
     hihokenshaNo(10, 0),
     shikibetsuCode(2147483647, 0),
@@ -33,7 +32,10 @@ public enum DbT5001NinteiShinseiJoho implements IColumnDefinition {
     zenYukoKikan(5, 0),
     johoteikyoDouiUmuKubun(1, 0),
     ninteichosaIraiRirekiNo(5, 0),
+    ninteichosaShikibetsuCode(2147483647, 0),
     ikenshoIraiRirekiNo(5, 0),
+    kaigoIryokikanCode(10, 0),
+    kaigoIshiCode(8, 0),
     minashiCode(1, 0),
     enkitsuchiDoiUmuKubun(1, 0),
     shisetsuNyushoUmuKubun(1, 0),
@@ -42,6 +44,7 @@ public enum DbT5001NinteiShinseiJoho implements IColumnDefinition {
     torisageRiyu(2147483647, 0),
     torisageYMD(2147483647, 0),
     shinsaKeizokuKubun(1, 0);
+
     private final int maxLength;
     private final int scale;
 
@@ -52,7 +55,6 @@ public enum DbT5001NinteiShinseiJoho implements IColumnDefinition {
 
     /**
      * getMaxLength
-     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -61,11 +63,11 @@ public enum DbT5001NinteiShinseiJoho implements IColumnDefinition {
 
     /**
      * getScale
-     *
      * @return 小数点以下の桁数
      */
     public int getScale() {
         return scale;
     }
+
 // </editor-fold>
 }

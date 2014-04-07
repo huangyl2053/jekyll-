@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5001NinteiShinseiJohoEntityMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
@@ -75,7 +75,7 @@ public class ShujiiIkenshoIraiTaishoshaMapperTest extends TestBase {
         protected void setUp() {
             認定申請情報Entity = DbT5001NinteiShinseiJohoEntityMock.getSpiedInstance();
             認定申請情報Entity.setShinseishoKanriNo(new ShinseishoKanriNo(new RString("0001")));
-            認定申請情報Entity.setShichosonCode(new ShichosonCode(new RString("1111")));
+            認定申請情報Entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(new RString("111111")));
             認定申請情報Entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("0002")));
             認定申請情報Entity.setNinteiShinseiYMD(new FlexibleDate(new RString("20140101")));
             認定申請情報Entity.setNinteiShinseiShinseijiKubunCode(NinteiShinseiKubunShinsei.新規申請);
@@ -94,10 +94,10 @@ public class ShujiiIkenshoIraiTaishoshaMapperTest extends TestBase {
         }
 
         @Test
-        public void 引き渡した_認定申請情報Entityの市町村コード_とtoShujiiIkenshoIraiTaishoshaの結果は一致する() {
+        public void 引き渡した_認定申請情報Entityの証記載保険者番号_とtoShujiiIkenshoIraiTaishoshaの結果は一致する() {
             sut = ShujiiIkenshoIraiTaishoshaMapper.toShujiiIkenshoIraiTaishosha(
                     認定申請情報Entity, 個人, 氏名, 住所, 主治医医療機関, 主治医);
-            assertThat(sut.get市町村コード(), is(認定申請情報Entity.getShichosonCode()));
+            assertThat(sut.get証記載保険者番号(), is(認定申請情報Entity.getShoKisaiHokenshaNo()));
         }
 
         @Test

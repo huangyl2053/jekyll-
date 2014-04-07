@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.entity.helper;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -34,7 +34,7 @@ public class DbT7012ShujiiJohoEntityMock {
      */
     public static DbT7012ShujiiJohoEntity getSpiedInstance() {
         DbT7012ShujiiJohoEntity entity = new DbT7012ShujiiJohoEntity();
-        entity.setShichosonCode(new ShichosonCode(new RString("市町村コード")));
+        entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(new RString("証記載保険者番号")));
         entity.setKaigoIryokikanCode(new KaigoIryoKikanCode(new RString("介護医療機関コード")));
         entity.setKaigoIshiCode(new RString("介護医師コード"));
         entity.setIryokikanCode(new RString("1234567890"));

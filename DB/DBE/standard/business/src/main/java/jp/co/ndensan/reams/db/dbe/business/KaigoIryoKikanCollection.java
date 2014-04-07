@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
@@ -36,35 +36,35 @@ public class KaigoIryoKikanCollection implements Iterable {
     }
 
     /**
-     * 引数から市町村コードと介護医療機関コードを渡し、それに対応した介護医療機関を返します。<br/>
+     * 引数から証記載保険者番号と介護医療機関コードを渡し、それに対応した介護医療機関を返します。<br/>
      * 対応した介護医療機関が存在しない場合はnullが返ります。
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @param 介護医療機関コード 介護医療機関コード
      * @return 対応した介護医療機関
      * @throws IllegalArgumentException 存在しない対象を指定したとき
      */
-    public KaigoIryoKikan get介護医療機関(ShichosonCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード)
+    public KaigoIryoKikan get介護医療機関(ShoKisaiHokenshaNo 証記載保険者番号, KaigoIryoKikanCode 介護医療機関コード)
             throws IllegalArgumentException {
         for (KaigoIryoKikan kaigoIryoKikan : 介護医療機関List) {
-            if (is市町村コードと介護機関コードが一致(kaigoIryoKikan, 市町村コード, 介護医療機関コード)) {
+            if (is証記載保険者番号と介護機関コードが一致(kaigoIryoKikan, 証記載保険者番号, 介護医療機関コード)) {
                 return kaigoIryoKikan;
             }
         }
         throw new IllegalArgumentException(Messages.E00006.replace("対応する介護医療機関").getMessage());
     }
 
-    private boolean is市町村コードと介護機関コードが一致(KaigoIryoKikan kaigoIryoKikan, ShichosonCode 市町村コード,
+    private boolean is証記載保険者番号と介護機関コードが一致(KaigoIryoKikan kaigoIryoKikan, ShoKisaiHokenshaNo 証記載保険者番号,
             KaigoIryoKikanCode 介護医療機関コード) {
-        return is市町村コードが一致(kaigoIryoKikan, 市町村コード) && is介護機関コードが一致(kaigoIryoKikan, 介護医療機関コード);
+        return is証記載保険者番号が一致(kaigoIryoKikan, 証記載保険者番号) && is介護機関コードが一致(kaigoIryoKikan, 介護医療機関コード);
     }
 
     private boolean is介護機関コードが一致(KaigoIryoKikan kaigoIryoKikan, KaigoIryoKikanCode 介護医療機関コード) {
         return kaigoIryoKikan.get介護医療機関コード().equals(介護医療機関コード);
     }
 
-    private boolean is市町村コードが一致(KaigoIryoKikan kaigoIryoKikan, ShichosonCode 市町村コード) {
-        return kaigoIryoKikan.get市町村コード().equals(市町村コード);
+    private boolean is証記載保険者番号が一致(KaigoIryoKikan kaigoIryoKikan, ShoKisaiHokenshaNo 証記載保険者番号) {
+        return kaigoIryoKikan.get証記載保険者番号().equals(証記載保険者番号);
     }
 
     /**

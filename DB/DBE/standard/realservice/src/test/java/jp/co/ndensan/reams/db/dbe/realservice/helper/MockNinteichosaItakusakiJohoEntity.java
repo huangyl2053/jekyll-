@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.ChosaItakuKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.*;
 
@@ -30,7 +31,7 @@ public class MockNinteichosaItakusakiJohoEntity {
         kaigojigyoshaNo = new KaigoJigyoshaNo(new RString("0000000001"));
         jigyoshaNo = new JigyoshaNo(new RString("2020300001"));
         DbT7010NinteichosaItakusakiJohoEntity ninteichosaItakusakiJohoEntity = new DbT7010NinteichosaItakusakiJohoEntity(
-                new RString("20203"), kaigojigyoshaNo, jigyoshaNo,
+                new ShoKisaiHokenshaNo(new RString("202030")), kaigojigyoshaNo, jigyoshaNo,
                 true, ChosaItakuKubun.指定なし, 10, new RString("A"), new RString("B"));
         return spy(ninteichosaItakusakiJohoEntity);
     }

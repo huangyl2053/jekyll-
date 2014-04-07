@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.relate;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
@@ -17,11 +17,11 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public interface INinteiChosaIraiTaishoshaDac {
 
     /**
-     * 要介護認定進捗情報から、指定した市町村コードに該当する、認定調査完了年月日が”00000000”のデータを取得する
+     * 要介護認定進捗情報から、指定した証記載保険者番号に該当する、認定調査完了年月日が”00000000”のデータを取得する
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @return 要介護認定進捗情報データのリスト
      */
     @Transaction
-    List<DbT5005NinteiShinchokuJohoEntity> select(ShichosonCode 市町村コード);
+    List<DbT5005NinteiShinchokuJohoEntity> select(ShoKisaiHokenshaNo 証記載保険者番号);
 }

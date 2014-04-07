@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
  */
 public class KaigoNinteichosain {
 
-    private final ShichosonCode 市町村コード;
+    private final ShoKisaiHokenshaNo 証記載保険者番号;
     private final KaigoJigyoshaNo 介護事業者番号;
     private final KaigoNinteichosainNo 介護調査員番号;
     private final boolean 調査員状況;
@@ -43,7 +43,7 @@ public class KaigoNinteichosain {
     /**
      * コンストラクタです。
      *
-     * @param 市町村コード 市町村コード
+     * @param 証記載保険者番号 証記載保険者番号
      * @param 介護事業者番号 介護事業者番号
      * @param 介護調査員番号 介護調査員番号
      * @param 調査員状況 調査員状況
@@ -58,7 +58,7 @@ public class KaigoNinteichosain {
      * @param 認定調査委託先 認定調査委託先
      * @throws NullPointerException 調査員状況および性別以外の引数にNULLが渡された場合
      */
-    public KaigoNinteichosain(ShichosonCode 市町村コード,
+    public KaigoNinteichosain(ShoKisaiHokenshaNo 証記載保険者番号,
             KaigoJigyoshaNo 介護事業者番号,
             KaigoNinteichosainNo 介護調査員番号,
             boolean 調査員状況,
@@ -72,7 +72,7 @@ public class KaigoNinteichosain {
             TelNo 電話番号,
             NinteichosaItakusaki 認定調査委託先) throws NullPointerException {
 
-        this.市町村コード = requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
+        this.証記載保険者番号 = requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
         this.介護事業者番号 = requireNonNull(介護事業者番号, Messages.E00001.replace("介護事業者番号").getMessage());
         this.介護調査員番号 = requireNonNull(介護調査員番号, Messages.E00001.replace("介護調査員番号").getMessage());
         this.調査員状況 = 調査員状況;
@@ -88,12 +88,12 @@ public class KaigoNinteichosain {
     }
 
     /**
-     * 市町村コードを返します。
+     * 証記載保険者番号を返します。
      *
-     * @return 市町村コード
+     * @return 証記載保険者番号
      */
-    public ShichosonCode get市町村コード() {
-        return 市町村コード;
+    public ShoKisaiHokenshaNo get証記載保険者番号() {
+        return 証記載保険者番号;
     }
 
     /**

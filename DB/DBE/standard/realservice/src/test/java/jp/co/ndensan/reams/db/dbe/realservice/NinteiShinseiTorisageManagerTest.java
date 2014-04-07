@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteishinseiTorisageTaishoshaMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -42,7 +42,7 @@ import static org.mockito.Mockito.any;
 public class NinteiShinseiTorisageManagerTest extends TestBase {
 
     private static ShinseishoKanriNo 申請書管理No = new ShinseishoKanriNo(new RString("0123"));
-    private static ShichosonCode 市町村Code = new ShichosonCode(new RString("A012"));
+    private static ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("A01200"));
     private static KaigoHihokenshaNo 被保険者No = new KaigoHihokenshaNo(new RString("DB0001"));
     private static FlexibleDate 認定申請年月日 = new FlexibleDate(new RString("20120101"));
     private static NinteiShinseiKubunShinsei 認定申請区分コード_申請時 = NinteiShinseiKubunShinsei.新規申請;
@@ -71,7 +71,7 @@ public class NinteiShinseiTorisageManagerTest extends TestBase {
         @Test
         public void 指定した認定申請年月日範囲に合致する認定申請取下げ対象者を_3件持つリストを取得できる() {
             sut = new NinteiShinseiTorisageManager(createMockDac());
-            NinteiShinseiTorisageTaishoshaList results = sut.get認定申請取下げ対象者全件(市町村Code, 年月日範囲);
+            NinteiShinseiTorisageTaishoshaList results = sut.get認定申請取下げ対象者全件(証記載保険者番号, 年月日範囲);
             assertThat(results.size(), is(3));
         }
     }
@@ -81,7 +81,7 @@ public class NinteiShinseiTorisageManagerTest extends TestBase {
         @Test
         public void 指定した取下げ年月日範囲に合致する認定申請取下げ者を_2件持つリストを取得できる() {
             sut = new NinteiShinseiTorisageManager(createMockDac());
-            NinteiShinseiTorisageTaishoshaList results = sut.get認定申請取下げ者(市町村Code, 年月日範囲);
+            NinteiShinseiTorisageTaishoshaList results = sut.get認定申請取下げ者(証記載保険者番号, 年月日範囲);
             assertThat(results.size(), is(2));
         }
     }
@@ -104,8 +104,8 @@ public class NinteiShinseiTorisageManagerTest extends TestBase {
     private static INinteiShinseiJohoDac createMockDac() {
         INinteiShinseiJohoDac mockDac = mock(INinteiShinseiJohoDac.class);
         when(mockDac.select(any(ShinseishoKanriNo.class))).thenReturn(create認定申請情報Entity());
-        when(mockDac.selectAllBy認定申請年月日(any(ShichosonCode.class), any(Range.class))).thenReturn(create認定申請情報EntityList(3));
-        when(mockDac.selectAllBy取下げ年月日(any(ShichosonCode.class), any(Range.class))).thenReturn(create認定申請情報EntityList(2));
+        when(mockDac.selectAllBy認定申請年月日(any(ShoKisaiHokenshaNo.class), any(Range.class))).thenReturn(create認定申請情報EntityList(3));
+        when(mockDac.selectAllBy取下げ年月日(any(ShoKisaiHokenshaNo.class), any(Range.class))).thenReturn(create認定申請情報EntityList(2));
         when(mockDac.insert(any(DbT5001NinteiShinseiJohoEntity.class))).thenReturn(1);
         return mockDac;
     }
@@ -113,8 +113,8 @@ public class NinteiShinseiTorisageManagerTest extends TestBase {
     private static INinteiShinseiJohoDac createMockDac_更新に失敗した場合() {
         INinteiShinseiJohoDac mockDac = mock(INinteiShinseiJohoDac.class);
         when(mockDac.select(any(ShinseishoKanriNo.class))).thenReturn(create認定申請情報Entity());
-        when(mockDac.selectAllBy認定申請年月日(any(ShichosonCode.class), any(Range.class))).thenReturn(create認定申請情報EntityList(3));
-        when(mockDac.selectAllBy取下げ年月日(any(ShichosonCode.class), any(Range.class))).thenReturn(create認定申請情報EntityList(2));
+        when(mockDac.selectAllBy認定申請年月日(any(ShoKisaiHokenshaNo.class), any(Range.class))).thenReturn(create認定申請情報EntityList(3));
+        when(mockDac.selectAllBy取下げ年月日(any(ShoKisaiHokenshaNo.class), any(Range.class))).thenReturn(create認定申請情報EntityList(2));
         when(mockDac.insert(any(DbT5001NinteiShinseiJohoEntity.class))).thenReturn(0);
         return mockDac;
     }
@@ -122,7 +122,7 @@ public class NinteiShinseiTorisageManagerTest extends TestBase {
     private static DbT5001NinteiShinseiJohoEntity create認定申請情報Entity() {
         DbT5001NinteiShinseiJohoEntity entity = new DbT5001NinteiShinseiJohoEntity();
         entity.setShinseishoKanriNo(申請書管理No);
-        entity.setShichosonCode(市町村Code);
+        entity.setShoKisaiHokenshaNo(証記載保険者番号);
         entity.setHihokenshaNo(被保険者No);
         entity.setNinteiShinseiYMD(認定申請年月日);
         entity.setNinteiShinseiShinseijiKubunCode(認定申請区分コード_申請時);

@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 
 /**
  * DbT7011ShujiiIryoKikanJohoの項目定義クラスです
@@ -31,7 +31,7 @@ public class DbT7011ShujiiIryoKikanJohoEntity implements IDbAccessable {
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId = RString.EMPTY;
     @PrimaryKey
-    private ShichosonCode shichosonCode;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     @PrimaryKey
     private KaigoIryoKikanCode kaigoIryokikanCode;
     private RString iryokikanCode;
@@ -84,21 +84,21 @@ public class DbT7011ShujiiIryoKikanJohoEntity implements IDbAccessable {
     }
 
     /**
-     * getShichosonCode
+     * getShoKisaiHokenshaNo
      *
-     * @return shichosonCode
+     * @return shoKisaiHokenshaNo
      */
-    public ShichosonCode getShichosonCode() {
-        return shichosonCode;
+    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
+        return shoKisaiHokenshaNo;
     }
 
     /**
-     * setShichosonCode
+     * setShoKisaiHokenshaNo
      *
-     * @param shichosonCode shichosonCode
+     * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
      */
-    public void setShichosonCode(ShichosonCode shichosonCode) {
-        this.shichosonCode = shichosonCode;
+    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     /**
