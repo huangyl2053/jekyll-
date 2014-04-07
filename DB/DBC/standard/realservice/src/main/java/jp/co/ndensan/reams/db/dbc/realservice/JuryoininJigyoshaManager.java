@@ -131,7 +131,7 @@ public class JuryoininJigyoshaManager {
         //TODO n3317塚田萌　RDateからFlexibleDateに変更されたら.toRDate()を外す。
         //TODO n3317塚田萌　kozaFinderの修正が完了した時に対応する。
         RString 業務コード = new RString("業務コード");
-        KamokuCode 科目コード = new KamokuCode(new RString("AA"));
+        KamokuCode 科目コード = new KamokuCode(new RString("AAA"));
         return kozaFinder.get口座(契約開始日.toRDate(), 識別コード, 業務コード, 科目コード).get(0);
     }
 
