@@ -27,12 +27,41 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class ShinsakaiMapperTest {
 
-    public static class to審査会のテスト extends DbeTestBase {
+    private static List<DbT5106ShinsakaiWariateIinJohoEntity> 審査会割当委員EntityList;
+    private static ShinsakaiIinList 委員List;
+    private static ShinsakaiDetail 審査会情報;
+    private static Shinsakai result;
 
-        private List<DbT5106ShinsakaiWariateIinJohoEntity> 審査会割当委員EntityList;
-        private ShinsakaiIinList 委員List;
-        private ShinsakaiDetail 審査会情報;
-        private Shinsakai result;
+    public static class to審査会_引数のいずれかにnullが渡された場合のテスト extends DbeTestBase {
+
+        @Before
+        public void setUp() {
+            審査会割当委員EntityList =
+                    ShinsakaiTestEntityCreator.create審査会割当委員情報EntityListSpy(1, "19990101", "iin001", "iin002", "iin003");
+            委員List = ShinsakaiTestBusinessCreator.create審査会委員List("iin001", "iin002", "iin003");
+            審査会情報 = ShinsakaiTestBusinessCreator.create審査会情報(1, "19990101");
+        }
+
+        @Test
+        public void 審査会割当委員EntityListにnullが渡された場合_返却される値はnullになる() {
+            result = ShinsakaiMapper.to審査会(null, 委員List, 審査会情報);
+            assertThat(result, is(nullValue()));
+        }
+
+        @Test
+        public void 委員Listにnullが渡された場合_返却される値はnullになる() {
+            result = ShinsakaiMapper.to審査会(審査会割当委員EntityList, null, 審査会情報);
+            assertThat(result, is(nullValue()));
+        }
+
+        @Test
+        public void 審査会情報にnullが渡された場合_返却される値はnullになる() {
+            result = ShinsakaiMapper.to審査会(審査会割当委員EntityList, 委員List, null);
+            assertThat(result, is(nullValue()));
+        }
+    }
+
+    public static class to審査会_引数に3件の割当委員_3件の審査会委員_審査会情報が渡された場合のテスト extends DbeTestBase {
 
         @Before
         public void setUp() {
