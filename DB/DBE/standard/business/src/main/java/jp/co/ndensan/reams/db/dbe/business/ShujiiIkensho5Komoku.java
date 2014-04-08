@@ -58,7 +58,8 @@ public class ShujiiIkensho5Komoku {
     }
 
     /**
-     * 主治医意見書5項目について、初期値をもったインスタンスを生成します。
+     * 主治医意見書5項目について、初期値をもったインスタンスを生成します。<br/>
+     * 仮一次判定の計算を行う際に使用します。
      */
     public ShujiiIkensho5Komoku() {
         this.障害高齢者自立度 = new ShogaiKoreishaJiritsudoKomoku(new Code(RString.EMPTY), RString.EMPTY, RString.EMPTY);
