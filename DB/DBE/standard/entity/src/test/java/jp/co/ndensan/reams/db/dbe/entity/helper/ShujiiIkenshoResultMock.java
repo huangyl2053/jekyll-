@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.helper;
 
 import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.Shujii;
@@ -28,13 +29,8 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
-import jp.co.ndensan.reams.ur.urz.business._Doctor;
-import jp.co.ndensan.reams.ur.urz.business._Doctors;
-import jp.co.ndensan.reams.ur.urz.business._IryoKikan;
-import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.business.IKoza;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._Name;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -48,7 +44,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.*;
 import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemKubun.*;
+import jp.co.ndensan.reams.ur.urz.business.IDoctors;
+import jp.co.ndensan.reams.ur.urz.business.IIryoKikan;
+import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
+import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * ShujiiIkenshoResultを生成するMockです。
@@ -93,46 +95,85 @@ public class ShujiiIkenshoResultMock {
 
     private static KaigoDoctor createKaigoDoctor() {
         return new KaigoDoctor(
-                new _Doctor(
-                new RString("医師識別番号"),
-                new AtenaMeisho(new RString("医師氏名")),
-                new _IryoKikanCode(new RString("1234567890")),
-                new Code(new RString("所属診療科")),
-                new Code(new RString("医師区分"))),
+                create医師Mock(),
                 new Shujii(
                 new ShichosonCode(new RString("市町村コード")),
                 new KaigoIryoKikanCode(new RString("介護医療機関コード")),
                 new KaigoDoctorCode(new RString("介護医師コード")),
-                new _IryoKikanCode(new RString("1234567890")),
+                create医療機関コードMock(new RString("1234567890")),
                 new RString("医師識別番号"),
                 IshiJokyo.有効,
                 new YubinNo(new RString("1234567")),
                 new AtenaJusho(new RString("住所")),
                 new TelNo("電話番号"),
                 new RString("FAX番号")),
-                new KaigoIryoKikan(
-                new _IryoKikan(
-                new _IryoKikanCode(new RString("1234567890")),
-                new ShikibetsuCode(new RString("123456")),
-                new _Name(new AtenaMeisho(new RString("医療機関名称")), new AtenaKanaMeisho(RString.EMPTY)),
-                new _Name(new AtenaMeisho(new RString("医療機関略称")), new AtenaKanaMeisho(RString.EMPTY)),
-                new RString("所在地郵便番号"),
-                new RString("所在地住所"),
-                new RString("所在地カナ住所"),
-                new Range(RDate.MIN, RDate.MAX),
-                new _Doctors(new ArrayList<IDoctor>()),
-                new ArrayList<IKoza>(),
-                FlexibleDate.MIN,
-                new RString("休止区分"),
-                new RString("異動事由"),
-                new RString("会員区分"),
-                true),
-                new ShujiiIryoKikan(
+                new KaigoIryoKikan(create医療機関Mock(), create主治医医療機関()));
+    }
+
+    private static IDoctor create医師Mock() {
+        IIryoKikanCode 医療機関コードMock = create医療機関コードMock(new RString("1234567890"));
+
+        IDoctor doctorMock = mock(IDoctor.class);
+        when(doctorMock.get医師識別番号()).thenReturn(new RString("医師識別番号"));
+        when(doctorMock.get医師氏名()).thenReturn(new AtenaMeisho(new RString("医師氏名")));
+        when(doctorMock.get所属医療機関コード()).thenReturn(医療機関コードMock);
+        when(doctorMock.get所属診療科()).thenReturn(new Code(new RString("所属診療科")));
+        when(doctorMock.get医師区分()).thenReturn(new Code(new RString("医師区分")));
+
+        return doctorMock;
+    }
+
+    private static IIryoKikan create医療機関Mock() {
+        IIryoKikanCode 医療機関コードMock = create医療機関コードMock(new RString("1234567890"));
+        IName 名称Mock = createNameMock(new AtenaMeisho(new RString("医療機関名称")), new AtenaKanaMeisho(RString.EMPTY));
+        IName 略称Mock = createNameMock(new AtenaMeisho(new RString("医療機関略称")), new AtenaKanaMeisho(RString.EMPTY));
+        IDoctors 所属医師Mock = createDoctorsMock(new ArrayList<IDoctor>());
+
+        IIryoKikan iryoKikanMock = mock(IIryoKikan.class);
+        when(iryoKikanMock.get医療機関コード()).thenReturn(医療機関コードMock);
+        when(iryoKikanMock.get識別コード()).thenReturn(new ShikibetsuCode(new RString("123456")));
+        when(iryoKikanMock.get医療機関名称()).thenReturn(名称Mock);
+        when(iryoKikanMock.get医療機関略称()).thenReturn(略称Mock);
+        when(iryoKikanMock.get所在地郵便番号()).thenReturn(new RString("所在地郵便番号"));
+        when(iryoKikanMock.get所在地住所()).thenReturn(new RString("所在地住所"));
+        when(iryoKikanMock.get所在地カナ住所()).thenReturn(new RString("所在地カナ住所"));
+        when(iryoKikanMock.get開設期間()).thenReturn(new Range(RDate.MIN, RDate.MAX));
+        when(iryoKikanMock.get所属医師()).thenReturn(所属医師Mock);
+        when(iryoKikanMock.get口座()).thenReturn(new ArrayList<IKoza>());
+        when(iryoKikanMock.get異動年月日()).thenReturn(FlexibleDate.MIN);
+        when(iryoKikanMock.get休止区分()).thenReturn(new RString("休止区分"));
+        when(iryoKikanMock.get異動事由()).thenReturn(new RString("異動事由"));
+        when(iryoKikanMock.get会員区分()).thenReturn(new RString("会員区分"));
+        when(iryoKikanMock.is指定自立支援医療機関()).thenReturn(true);
+
+        return iryoKikanMock;
+    }
+
+    private static ShujiiIryoKikan create主治医医療機関() {
+        return new ShujiiIryoKikan(
                 new ShichosonCode(new RString("市町村コード")),
                 new KaigoIryoKikanCode(new RString("1234567890")),
-                new _IryoKikanCode(new RString("1234567890")),
+                create医療機関コードMock(new RString("1234567890")),
                 IryoKikanJokyo.有効,
-                new IryoKikanKubun(new RString("医療機関の区分"), RString.EMPTY, RString.EMPTY))));
+                new IryoKikanKubun(new RString("医療機関の区分"), RString.EMPTY, RString.EMPTY));
+    }
+
+    private static IIryoKikanCode create医療機関コードMock(RString 医療機関コード) {
+        IIryoKikanCode iryoKikanCodeMock = mock(IIryoKikanCode.class);
+        when(iryoKikanCodeMock.getValue()).thenReturn(医療機関コード);
+        return iryoKikanCodeMock;
+    }
+
+    private static IName createNameMock(AtenaMeisho 名称, AtenaKanaMeisho カナ名称) {
+        IName nameMock = mock(IName.class);
+        when(nameMock.getName()).thenReturn(名称);
+        when(nameMock.getKana()).thenReturn(カナ名称);
+        return nameMock;
+    }
+
+    private static IDoctors createDoctorsMock(List<IDoctor> 医師List) {
+        IDoctors doctorsMock = mock(IDoctors.class);
+        return doctorsMock;
     }
 
     /**
