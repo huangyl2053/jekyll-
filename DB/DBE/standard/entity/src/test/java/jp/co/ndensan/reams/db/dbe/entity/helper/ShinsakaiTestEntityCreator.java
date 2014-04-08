@@ -124,6 +124,33 @@ public final class ShinsakaiTestEntityCreator {
     }
 
     /**
+     * 割当委員の情報をすべて引数から設定して審査会割当委員情報Entityを生成します。(Spy)
+     *
+     * @param 開催番号 開催番号
+     * @param 開催年月日 開催年月日
+     * @param 審査会委員コード 審査会委員コード
+     * @param 審査会区分 審査会区分
+     * @param 合議体長区分 合議体長区分
+     * @param 開始時間 開始時間
+     * @param 終了時間 終了時間
+     * @param 出欠区分 出欠区分
+     * @return 審査会割当委員情報Entity
+     */
+    public static DbT5106ShinsakaiWariateIinJohoEntity create審査会割当委員情報EntitySpy(int 開催番号, FlexibleDate 開催年月日,
+            RString 審査会委員コード, Code 審査会区分, Code 合議体長区分, RString 開始時間, RString 終了時間, RString 出欠区分) {
+        DbT5106ShinsakaiWariateIinJohoEntity entity = new DbT5106ShinsakaiWariateIinJohoEntity();
+        entity.setShinsakaiKaisaiNo(開催番号);
+        entity.setShinsakaiKaisaiYMD(開催年月日);
+        entity.setShinsakaiIinCode(審査会委員コード);
+        entity.setShinsainKubunCode(審査会区分);
+        entity.setGogitaichoKubunCode(合議体長区分);
+        entity.setShinsakaiIinShinsaKaishiTime(開始時間);
+        entity.setShinsakaiIinshinsaShuryoTime(終了時間);
+        entity.setShinsakaiIinShukketsuKubun(出欠区分);
+        return spySet審査会割当委員Entity(entity);
+    }
+
+    /**
      * キー項目と審査員区分を指定して、審査会割当委員情報Entityを生成します。
      *
      * @param 開催番号 開催番号

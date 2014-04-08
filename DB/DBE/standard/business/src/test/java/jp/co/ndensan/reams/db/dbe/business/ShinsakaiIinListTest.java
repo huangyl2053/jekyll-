@@ -5,7 +5,9 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiTestBusinessCreator;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -21,6 +23,24 @@ import org.junit.runner.RunWith;
 public class ShinsakaiIinListTest {
 
     private static ShinsakaiIinList sut;
+
+    public static class get審査会委員のテスト extends DbeTestBase {
+
+        @Test
+        public void 指定した審査会委員コードに対応した委員が取得できる() {
+            ShinsakaiIinCode code = new ShinsakaiIinCode(new RString("test01"));
+            sut = ShinsakaiTestBusinessCreator.create審査会委員List(code.value().toString(), "iin02", "iin03");
+            ShinsakaiIin result = sut.get審査会委員(code);
+            assertThat(result.get委員コード(), is(code));
+        }
+
+        @Test(expected = IllegalArgumentException.class)
+        public void 対応した委員が存在しない場合_IllegalArgumentExceptionが発生する() {
+            ShinsakaiIinCode code = new ShinsakaiIinCode(new RString("test01"));
+            sut = ShinsakaiTestBusinessCreator.create審査会委員List("iin01", "iin02", "iin03");
+            sut.get審査会委員(code);
+        }
+    }
 
     public static class isEmptyのテスト extends DbeTestBase {
 

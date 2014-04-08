@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import java.util.Iterator;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**
  * 審査会委員リストです。
@@ -24,6 +26,21 @@ public class ShinsakaiIinList implements Iterable<ShinsakaiIin> {
      */
     public ShinsakaiIinList(List<ShinsakaiIin> 委員List) {
         this.委員List = 委員List;
+    }
+
+    /**
+     * 審査会委員コードを指定して、対応する審査会委員を一件取得します。
+     *
+     * @param 審査会委員コード 審査会委員コード
+     * @return 審査会委員
+     */
+    public ShinsakaiIin get審査会委員(ShinsakaiIinCode 審査会委員コード) {
+        for (ShinsakaiIin 委員 : 委員List) {
+            if (委員.get委員コード().equals(審査会委員コード)) {
+                return 委員;
+            }
+        }
+        throw new IllegalArgumentException(Messages.E00006.replace("指定した委員コードに対応した委員").getMessage());
     }
 
     /**

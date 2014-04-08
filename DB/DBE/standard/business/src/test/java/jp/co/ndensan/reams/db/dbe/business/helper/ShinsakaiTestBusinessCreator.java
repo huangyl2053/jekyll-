@@ -112,6 +112,27 @@ public final class ShinsakaiTestBusinessCreator {
     }
 
     /**
+     * 引数から項目をすべて指定して、審査会割当委員を生成します。
+     *
+     * @param 審査会開催番号 審査会開催番号
+     * @param 審査会開催年月日 審査会開催年月日
+     * @param 審査会委員コード 審査会委員コード
+     * @param 審査員区分 審査員区分
+     * @param 合議体長区分 合議体長区分
+     * @param 開始時間 開始時間
+     * @param 終了時間 終了時間
+     * @param 出欠区分 出欠区分
+     * @return 審査会割当委員
+     */
+    public static ShinsakaiWariateIin create審査会割当委員(int 審査会開催番号, String 審査会開催年月日, String 審査会委員コード,
+            Code 審査員区分, Code 合議体長区分, TimeString 開始時間, TimeString 終了時間, ShinsakaiIinShukketsuKubun 出欠区分) {
+        return new ShinsakaiWariateIin(create審査会情報(審査会開催番号, 審査会開催年月日), create審査会委員(審査会委員コード),
+                new ShinsainKubun(審査員区分, new RString("名称"), new RString("略称")),
+                new GogitaichoKubun(合議体長区分, new RString("名称"), new RString("略称")),
+                new Range(開始時間, 終了時間), 出欠区分);
+    }
+
+    /**
      * 審査会割当委員Listを生成します。
      *
      * @param 審査会開催番号 審査会開催番号
