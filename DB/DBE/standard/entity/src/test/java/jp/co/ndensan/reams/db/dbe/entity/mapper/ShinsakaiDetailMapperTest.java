@@ -105,7 +105,7 @@ public class ShinsakaiDetailMapperTest {
         }
 
         @Test
-        public void to審査会情報で返された審査会情報が持つ_審査会終了時間は_1720になる() {
+        public void to審査会情報で返された審査会情報が持つ_審査会終了時間は_1730になる() {
             assertThat(result.get審査会終了時間(), is(終了時間_1730));
         }
 
@@ -206,12 +206,12 @@ public class ShinsakaiDetailMapperTest {
         }
 
         @Test
-        public void 戻り値の審査会情報Entityが持つ_開催場所の開催場所コードは_1になる() {
+        public void 戻り値の審査会情報Entityが持つ_開催場所の開催場所コードは_A001になる() {
             assertThat(result.getShinsakaiKaisaiBashoCode(), is(開催場所番号_A001.value()));
         }
 
         @Test
-        public void 戻り値の審査会情報Entityが持つ_合議体情報の合議体番号は_1になる() {
+        public void 戻り値の審査会情報Entityが持つ_合議体情報の合議体番号は_22になる() {
             assertThat(result.getGogitaiNo(), is(合議体番号_22.value()));
         }
 
