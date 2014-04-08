@@ -54,8 +54,9 @@ public class NinteichosahyoDacTest {
         }
 
         @Test
-        public void 履歴番号が3の_認定調査票Entityが取得できる() {
-            assertThat(result.getNinteichosaRirekiNo(), is(3));
+        public void 履歴が存在するとき_最新の認定調査票Entityが取得できる() {
+            int 最新履歴番号 = 3;
+            assertThat(result.getNinteichosaRirekiNo(), is(最新履歴番号));
         }
     }
 }
