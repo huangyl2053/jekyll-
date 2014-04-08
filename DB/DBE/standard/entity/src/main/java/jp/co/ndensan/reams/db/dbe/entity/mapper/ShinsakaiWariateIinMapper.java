@@ -34,12 +34,15 @@ public final class ShinsakaiWariateIinMapper {
 
     /**
      * 審査会割当委員Entityと、それに対応する委員情報、審査会情報を受け取り、審査会割当委員クラスにマッピングします。<br/>
-     * 引数にnullが渡された場合、nullが返ります。
+     * 審査会割当委員Entityにnullが渡された場合、nullが返ります。<br/>
+     * 審査会割当委員Entityがnullでは無いときに、審査会情報と委員情報のいずれかにnullが渡された場合、IllegalArgumentExceptionが発生します。
      *
      * @param 審査会割当委員Entity 審査会割当委員Entity
      * @param 委員 委員
      * @param 審査会情報 審査会情報
      * @return 審査会割当委員
+     * @throws IllegalArgumentException
+     * 審査会割当委員Entityがnullでは無いときに、審査会情報と委員情報のいずれかにnullが渡された場合
      */
     public static ShinsakaiWariateIin to審査会割当委員(DbT5106ShinsakaiWariateIinJohoEntity 審査会割当委員Entity,
             ShinsakaiIin 委員, ShinsakaiDetail 審査会情報) throws IllegalArgumentException {
