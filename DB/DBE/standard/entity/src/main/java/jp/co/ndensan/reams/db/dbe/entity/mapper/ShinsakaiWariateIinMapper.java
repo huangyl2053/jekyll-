@@ -42,9 +42,11 @@ public final class ShinsakaiWariateIinMapper {
      * @return 審査会割当委員
      */
     public static ShinsakaiWariateIin to審査会割当委員(DbT5106ShinsakaiWariateIinJohoEntity 審査会割当委員Entity,
-            ShinsakaiIin 委員, ShinsakaiDetail 審査会情報) {
-        if (委員 == null || 審査会割当委員Entity == null || 審査会情報 == null) {
+            ShinsakaiIin 委員, ShinsakaiDetail 審査会情報) throws IllegalArgumentException {
+        if (審査会割当委員Entity == null) {
             return null;
+        } else if (委員 == null || 審査会情報 == null) {
+            throw new IllegalArgumentException();
         }
 
         return new ShinsakaiWariateIin(審査会情報,
