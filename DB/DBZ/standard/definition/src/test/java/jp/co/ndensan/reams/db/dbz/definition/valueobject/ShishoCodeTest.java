@@ -40,9 +40,8 @@ public class ShishoCodeTest extends DbzTestBase {
 
             @Test
             public void valueは_コンストラクタの引数に指定したRStringと_同じ値を返す() {
-                RString sameValue = n00000;
-                ShishoCode sut = new ShishoCode(sameValue);
-                assertThat(sut.value(), is(sameValue));
+                ShishoCode sut = new ShishoCode(n00000);
+                assertThat(sut.value(), is(n00000));
             }
         }
 
@@ -50,9 +49,8 @@ public class ShishoCodeTest extends DbzTestBase {
 
             @Test
             public void compareToは_同じ値から生成したオブジェクトを渡したとき_0を返す() {
-                RString sameValue = n00000;
-                ShishoCode sut = new ShishoCode(sameValue);
-                ShishoCode target = new ShishoCode(sameValue);
+                ShishoCode sut = new ShishoCode(new RString("n00000"));
+                ShishoCode target = new ShishoCode(new RString("n00000"));
                 assertThat(sut.compareTo(target), is(0));
             }
 
@@ -88,9 +86,8 @@ public class ShishoCodeTest extends DbzTestBase {
 
             @Test
             public void getColumnValueは_コンストラクタの引数に指定したRStringと_同じ値を返す() {
-                RString sameValue = n00000;
-                ShishoCode sut = new ShishoCode(sameValue);
-                assertThat(sut.getColumnValue(), is(sameValue));
+                ShishoCode sut = new ShishoCode(n00000);
+                assertThat(sut.getColumnValue(), is(n00000));
             }
         }
     }
@@ -115,9 +112,8 @@ public class ShishoCodeTest extends DbzTestBase {
 
             @Test
             public void equalsは_同じ値から生成したオブジェトが渡されたとき_trueを返す() {
-                RString sameValue = n00000;
-                ShishoCode sut = new ShishoCode(sameValue);
-                ShishoCode target = new ShishoCode(sameValue);
+                ShishoCode sut = new ShishoCode(new RString("n00000"));
+                ShishoCode target = new ShishoCode(new RString("n00000"));
                 assertThat(sut.equals(target), is(true));
             }
         }
@@ -126,9 +122,8 @@ public class ShishoCodeTest extends DbzTestBase {
 
             @Test
             public void hashCodeは_同じ値から生成したオブジェクト同士は_同じ値を返す() {
-                RString sameValue = n00000;
-                ShishoCode sut = new ShishoCode(sameValue);
-                ShishoCode target = new ShishoCode(sameValue);
+                ShishoCode sut = new ShishoCode(new RString("n00000"));
+                ShishoCode target = new ShishoCode(new RString("n00000"));
                 assertThat(sut.hashCode(), is(target.hashCode()));
             }
         }

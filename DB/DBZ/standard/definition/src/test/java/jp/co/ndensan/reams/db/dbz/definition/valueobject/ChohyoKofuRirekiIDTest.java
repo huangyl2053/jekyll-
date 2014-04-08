@@ -10,7 +10,6 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.assertThat;
-import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 
 /**
@@ -39,9 +38,8 @@ public class ChohyoKofuRirekiIDTest extends DbzTestBase {
 
             @Test
             public void valueは_コンストラクタの引数に指定したRStringと_同じ値を返す() {
-                RString sameValue = n0000000000;
-                ChohyoKofuRirekiID sut = new ChohyoKofuRirekiID(sameValue);
-                assertThat(sut.value(), is(sameValue));
+                ChohyoKofuRirekiID sut = new ChohyoKofuRirekiID(n0000000000);
+                assertThat(sut.value(), is(n0000000000));
             }
         }
 
@@ -49,9 +47,8 @@ public class ChohyoKofuRirekiIDTest extends DbzTestBase {
 
             @Test
             public void compareToは_同じ値から生成したオブジェクトを渡したとき_0を返す() {
-                RString sameValue = n0000000000;
-                ChohyoKofuRirekiID sut = new ChohyoKofuRirekiID(sameValue);
-                ChohyoKofuRirekiID target = new ChohyoKofuRirekiID(sameValue);
+                ChohyoKofuRirekiID sut = new ChohyoKofuRirekiID(new RString("0000000000"));
+                ChohyoKofuRirekiID target = new ChohyoKofuRirekiID(new RString("0000000000"));
                 assertThat(sut.compareTo(target), is(0));
             }
 
@@ -91,9 +88,8 @@ public class ChohyoKofuRirekiIDTest extends DbzTestBase {
 
             @Test
             public void equalsは_同じ値から生成したオブジェトが渡されたとき_trueを返す() {
-                RString sameValue = n0000000000;
-                ChohyoKofuRirekiID sut = new ChohyoKofuRirekiID(sameValue);
-                ChohyoKofuRirekiID target = new ChohyoKofuRirekiID(sameValue);
+                ChohyoKofuRirekiID sut = new ChohyoKofuRirekiID(new RString("0000000000"));
+                ChohyoKofuRirekiID target = new ChohyoKofuRirekiID(new RString("0000000000"));
                 assertThat(sut.equals(target), is(true));
             }
         }
@@ -102,9 +98,8 @@ public class ChohyoKofuRirekiIDTest extends DbzTestBase {
 
             @Test
             public void hashCodeは_同じ値から生成したオブジェクト同士は_同じ値を返す() {
-                RString sameValue = n0000000000;
-                ChohyoKofuRirekiID sut = new ChohyoKofuRirekiID(sameValue);
-                ChohyoKofuRirekiID target = new ChohyoKofuRirekiID(sameValue);
+                ChohyoKofuRirekiID sut = new ChohyoKofuRirekiID(new RString("0000000000"));
+                ChohyoKofuRirekiID target = new ChohyoKofuRirekiID(new RString("0000000000"));
                 assertThat(sut.hashCode(), is(target.hashCode()));
             }
         }

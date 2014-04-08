@@ -37,9 +37,8 @@ public class KaigoHihokenshaNoTest extends DbzTestBase {
 
         @Test
         public void compareToは_自身と値が同じものを比較したときは_0を返す() {
-            RString sameNumber = new RString("0000000001");
-            KaigoHihokenshaNo sut = new KaigoHihokenshaNo(sameNumber);
-            KaigoHihokenshaNo target = new KaigoHihokenshaNo(sameNumber);
+            KaigoHihokenshaNo sut = new KaigoHihokenshaNo(new RString("0000000000"));
+            KaigoHihokenshaNo target = new KaigoHihokenshaNo(new RString("0000000000"));
             assertThat(sut.compareTo(target), is(0));
         }
 
@@ -89,9 +88,8 @@ public class KaigoHihokenshaNoTest extends DbzTestBase {
 
         @Test
         public void equalsは_同一の値で生成されたインスタンス同士では_trueを返す() {
-            RString sameNumber = new RString("0000000001");
-            KaigoHihokenshaNo sut = new KaigoHihokenshaNo(sameNumber);
-            KaigoHihokenshaNo target = new KaigoHihokenshaNo(sameNumber);
+            KaigoHihokenshaNo sut = new KaigoHihokenshaNo(new RString("0000000001"));
+            KaigoHihokenshaNo target = new KaigoHihokenshaNo(new RString("0000000001"));
             assertThat(sut.equals(target), is(true));
         }
 
@@ -107,9 +105,8 @@ public class KaigoHihokenshaNoTest extends DbzTestBase {
 
         @Test
         public void hashCodeは_同一の値で生成されたインスタンス同士は_同じ値を返す() {
-            RString sameNumber = new RString("0000000001");
-            KaigoHihokenshaNo sut = new KaigoHihokenshaNo(sameNumber);
-            KaigoHihokenshaNo target = new KaigoHihokenshaNo(sameNumber);
+            KaigoHihokenshaNo sut = new KaigoHihokenshaNo(new RString("0000000001"));
+            KaigoHihokenshaNo target = new KaigoHihokenshaNo(new RString("0000000001"));
             assertThat((sut.hashCode() == target.hashCode()), is(true));
         }
 
