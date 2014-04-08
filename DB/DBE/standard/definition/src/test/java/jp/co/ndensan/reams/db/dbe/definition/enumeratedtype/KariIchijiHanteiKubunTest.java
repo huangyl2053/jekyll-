@@ -12,6 +12,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
+ * 仮一次判定区分のテストです。
  *
  * @author n8178 城間篤人
  */
