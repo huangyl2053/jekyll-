@@ -606,6 +606,7 @@ public class NinteichosaKekkaMapperTest {
         public void カテーテルの設定がある時_toNinteichosaResult_getカテーテルは_設定値を返す() {
             assertThat(toNinteichosaResult().get基本調査結果().get認定調査票().get調査項目(カテーテル).get調査結果(), is(NaiAru.ある.getCode()));
         }
+        //TODO n8178 城間篤人 DBの構造に修正が入ったため、テストが通らなくなった。別チケットで対応される予定 2014年4月
 //
 //        @Test
 //        public void 障害高齢者の日常生活自立度の設定がある時_toNinteichosaResult_get障害高齢者の日常生活自立度は_設定値を返す() {
@@ -814,6 +815,7 @@ public class NinteichosaKekkaMapperTest {
         public void 概況特記事項の設定がある時_toNinteichosaKekkaEntity_getGaikyochosaTokkijikoは_設定値を返す() {
             assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getGaikyochosaTokkijiko(), is(new RString("概況特記事項")));
         }
+        //TODO n8178 城間篤人 DBの構造に修正が入ったため、テストが通らなくなった。別チケットで対応される予定 2014年4月
 //        @Test
 //        public void 障害高齢者の日常生活自立度の設定がある時_toNinteichosaKekkaEntity_getShogaiNichijoSeikatsuJiritsudoCodeは_設定値を返す() {
 //            assertThat(toNinteichosaKekkaEntity().getDbT5008NinteichosaKekkaJohoEntity().getShogaiNichijoSeikatsuJiritsudoCode().value(), is(ShogaiJiritsu.Ａ１.getCode()));
