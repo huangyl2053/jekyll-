@@ -45,6 +45,12 @@ public class IchijiHanteiKekkaDacTest {
             DbT5016IchijiHanteiKekkaJohoEntity result = sut.select(new ShinseishoKanriNo(new RString("A000000001")));
             assertThat(result.getShinseishoKanriNo(), is(new ShinseishoKanriNo(new RString("A000000001"))));
         }
+
+        @Test
+        public void 存在しないデータを取得しようとした場合_nullが返る() {
+            DbT5016IchijiHanteiKekkaJohoEntity result = sut.select(new ShinseishoKanriNo(new RString("B000000001")));
+            assertThat(result, is(nullValue()));
+        }
     }
 
     public static class insertのテスト extends DbeTestDacBase {
