@@ -81,7 +81,7 @@ public class GogitaiTest {
             GogitaiDetail info = create合議体情報(1, "19990101");
             ShinsakaiIin shinsakaiIin = mock(ShinsakaiIin.class);
             ShinsakaiIinCode shinsakaiIinCode = new ShinsakaiIinCode(new RString("01"));
-            when(shinsakaiIin.get委員コード()).thenReturn(shinsakaiIinCode);
+            when(shinsakaiIin.get審査会委員コード()).thenReturn(shinsakaiIinCode);
 
             GogitaiWariateIin wariateIin = mock(GogitaiWariateIin.class);
             when(wariateIin.get合議体情報()).thenReturn(info);
@@ -98,7 +98,7 @@ public class GogitaiTest {
             GogitaiDetail info = create合議体情報(i, "19990101");
             ShinsakaiIin shinsakaiIin = mock(ShinsakaiIin.class);
             ShinsakaiIinCode shinsakaiIinCode = new ShinsakaiIinCode(new RString("01"));
-            when(shinsakaiIin.get委員コード()).thenReturn(shinsakaiIinCode);
+            when(shinsakaiIin.get審査会委員コード()).thenReturn(shinsakaiIinCode);
 
             GogitaiWariateIin wariateIin = mock(GogitaiWariateIin.class);
             when(wariateIin.get合議体情報()).thenReturn(info);

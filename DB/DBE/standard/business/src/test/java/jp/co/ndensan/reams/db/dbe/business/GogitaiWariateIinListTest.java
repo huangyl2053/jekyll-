@@ -57,7 +57,7 @@ public class GogitaiWariateIinListTest {
         @Test
         public void 合議体番号1_有効期間開始年月日19990101を持つ合議体情報と_審査委員コード0001を指定したとき_対応する合議体割当委員が取得できる() {
             GogitaiWariateIin result = sut.get合議体割当委員(new GogitaiNo(1), new GogitaiYukoKikanKaishiDate("19990101"), create委員コード("0001"));
-            assertThat(result.get委員情報().get委員コード(), is(create委員コード("0001")));
+            assertThat(result.get委員情報().get審査会委員コード(), is(create委員コード("0001")));
         }
 
         @Test(expected = IllegalArgumentException.class)
@@ -68,7 +68,7 @@ public class GogitaiWariateIinListTest {
         private GogitaiWariateIin create合議体割当委員(String str, GogitaiDetail 合議体情報) {
             ShinsakaiIin 審査会委員 = mock(ShinsakaiIin.class);
             ShinsakaiIinCode shinsakaiIinCode = create委員コード(str);
-            when(審査会委員.get委員コード()).thenReturn(shinsakaiIinCode);
+            when(審査会委員.get審査会委員コード()).thenReturn(shinsakaiIinCode);
 
             GogitaiWariateIin 割当委員 = mock(GogitaiWariateIin.class);
             when(割当委員.get委員情報()).thenReturn(審査会委員);

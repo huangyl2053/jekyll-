@@ -29,15 +29,15 @@ public class ShinsakaiDetail {
     private final ShinsakaiKaishiTime 審査会開始時間;
     private final TimeString 審査会終了時間;
     private final GogitaiDetail 合議体情報;
-    private final ShinsakaiKaisaiBasho 開催場所;
+    private final ShinsakaiKaisaiBasho 審査会開催場所;
     private final int 審査会予定定員;
     private final int 審査会最大定員;
     private final int 審査会自動割当定員;
     private final int 審査会委員定員;
-    private final GogitaiSeishinkaIshiSonzaiKubun 精神科医師存在区分;
-    private final GogitaiDummyKubun ダミー区分;
+    private final GogitaiSeishinkaIshiSonzaiKubun 合議体精神科医師存在区分;
+    private final GogitaiDummyKubun 合議体ダミー区分;
     private final FlexibleDate 審査会資料作成年月日;
-    private final ShinsakaiKyukaiKubun 休会区分;
+    private final ShinsakaiKyukaiKubun 審査会休会区分;
     private final int 審査会割当済み人数;
 
     /**
@@ -48,15 +48,15 @@ public class ShinsakaiDetail {
      * @param 審査会開始時間 審査会開始時間
      * @param 審査会終了時間 審査会終了時間
      * @param 合議体情報 合議体情報
-     * @param 開催場所 開催場所
+     * @param 審査会開催場所 審査会開催場所
      * @param 審査会予定定員 審査会予定定員
      * @param 審査会最大定員 審査会最大定員
      * @param 審査会自動割当定員 審査会自動割当定員
      * @param 審査会委員定員 審査会委員定員
-     * @param 精神科医師存在区分 精神科医師存在区分
-     * @param ダミー区分 ダミー区分
+     * @param 合議体精神科医師存在区分 合議体精神科医師存在区分
+     * @param 合議体ダミー区分 合議体ダミー区分
      * @param 審査会資料作成年月日 審査会資料作成年月日
-     * @param 休会区分 休会区分
+     * @param 審査会休会区分 審査会休会区分
      * @param 審査会割当済み人数 審査会割当済み人数
      * @throws NullPointerException
      * 審査会開催番号、審査会開催年月日、審査会開始時間、審査会終了時間、合議体情報のいずれかにnullが渡されたとき
@@ -64,16 +64,16 @@ public class ShinsakaiDetail {
      * 審査会予定定員、審査会最大定員、審査会自動割当定員、審査会委員定員、審査会割当済み人数に0より小さい数字が渡されたとき
      */
     public ShinsakaiDetail(ShinsakaiKaisaiNo 審査会開催番号, ShinsakaiKaisaiDate 審査会開催年月日,
-            ShinsakaiKaishiTime 審査会開始時間, TimeString 審査会終了時間, GogitaiDetail 合議体情報, ShinsakaiKaisaiBasho 開催場所,
+            ShinsakaiKaishiTime 審査会開始時間, TimeString 審査会終了時間, GogitaiDetail 合議体情報, ShinsakaiKaisaiBasho 審査会開催場所,
             int 審査会予定定員, int 審査会最大定員, int 審査会自動割当定員, int 審査会委員定員,
-            GogitaiSeishinkaIshiSonzaiKubun 精神科医師存在区分, GogitaiDummyKubun ダミー区分, FlexibleDate 審査会資料作成年月日,
-            ShinsakaiKyukaiKubun 休会区分, int 審査会割当済み人数) throws NullPointerException, IllegalArgumentException {
+            GogitaiSeishinkaIshiSonzaiKubun 合議体精神科医師存在区分, GogitaiDummyKubun 合議体ダミー区分, FlexibleDate 審査会資料作成年月日,
+            ShinsakaiKyukaiKubun 審査会休会区分, int 審査会割当済み人数) throws NullPointerException, IllegalArgumentException {
         requireNonNull(審査会開催番号, Messages.E00003.replace("審査会開催番号", getClass().getName()).getMessage());
         requireNonNull(審査会開催年月日, Messages.E00003.replace("審査会開催年月日", getClass().getName()).getMessage());
         requireNonNull(審査会開始時間, Messages.E00003.replace("審査会開始時間", getClass().getName()).getMessage());
         requireNonNull(審査会終了時間, Messages.E00003.replace("審査会終了時間", getClass().getName()).getMessage());
         requireNonNull(合議体情報, Messages.E00003.replace("合議体情報", getClass().getName()).getMessage());
-        requireNonNull(開催場所, Messages.E00003.replace("開催場所", getClass().getName()).getMessage());
+        requireNonNull(審査会開催場所, Messages.E00003.replace("審査会開催場所", getClass().getName()).getMessage());
 
         RString エラー表示 = new RString("0以上");
         check0以上(審査会予定定員, Messages.E00013.replace("審査会予定定員", エラー表示.toString()).getMessage());
@@ -87,15 +87,15 @@ public class ShinsakaiDetail {
         this.審査会開始時間 = 審査会開始時間;
         this.審査会終了時間 = 審査会終了時間;
         this.合議体情報 = 合議体情報;
-        this.開催場所 = 開催場所;
+        this.審査会開催場所 = 審査会開催場所;
         this.審査会予定定員 = 審査会予定定員;
         this.審査会最大定員 = 審査会最大定員;
         this.審査会自動割当定員 = 審査会自動割当定員;
         this.審査会委員定員 = 審査会委員定員;
-        this.精神科医師存在区分 = 精神科医師存在区分;
-        this.ダミー区分 = ダミー区分;
+        this.合議体精神科医師存在区分 = 合議体精神科医師存在区分;
+        this.合議体ダミー区分 = 合議体ダミー区分;
         this.審査会資料作成年月日 = 審査会資料作成年月日;
-        this.休会区分 = 休会区分;
+        this.審査会休会区分 = 審査会休会区分;
         this.審査会割当済み人数 = 審査会割当済み人数;
     }
 
@@ -152,12 +152,12 @@ public class ShinsakaiDetail {
     }
 
     /**
-     * 審査会の開催場所を返します。
+     * 審査会開催場所を返します。
      *
-     * @return 開催場所
+     * @return 審査会開催場所
      */
-    public ShinsakaiKaisaiBasho get開催場所() {
-        return 開催場所;
+    public ShinsakaiKaisaiBasho get審査会開催場所() {
+        return 審査会開催場所;
     }
 
     /**
@@ -202,7 +202,7 @@ public class ShinsakaiDetail {
      * @return 精神科医師存在区分
      */
     public GogitaiSeishinkaIshiSonzaiKubun get精神科医師存在区分() {
-        return 精神科医師存在区分;
+        return 合議体精神科医師存在区分;
     }
 
     /**
@@ -211,7 +211,7 @@ public class ShinsakaiDetail {
      * @return 存在するならtrue
      */
     public boolean is精神科医存在() {
-        return 精神科医師存在区分 == GogitaiSeishinkaIshiSonzaiKubun.存在;
+        return 合議体精神科医師存在区分 == GogitaiSeishinkaIshiSonzaiKubun.存在;
     }
 
     /**
@@ -220,7 +220,7 @@ public class ShinsakaiDetail {
      * @return ダミー区分
      */
     public GogitaiDummyKubun getダミー区分() {
-        return ダミー区分;
+        return 合議体ダミー区分;
     }
 
     /**
@@ -229,7 +229,7 @@ public class ShinsakaiDetail {
      * @return ダミーならtrue
      */
     public boolean isDummy() {
-        return ダミー区分 == GogitaiDummyKubun.ダミー;
+        return 合議体ダミー区分 == GogitaiDummyKubun.ダミー;
     }
 
     /**
@@ -247,7 +247,7 @@ public class ShinsakaiDetail {
      * @return 休会区分
      */
     public ShinsakaiKyukaiKubun get休会区分() {
-        return 休会区分;
+        return 審査会休会区分;
     }
 
     /**
@@ -256,7 +256,7 @@ public class ShinsakaiDetail {
      * @return 休会ならtrue
      */
     public boolean is休会() {
-        return 休会区分 == ShinsakaiKyukaiKubun.休会;
+        return 審査会休会区分 == ShinsakaiKyukaiKubun.休会;
     }
 
     /**
@@ -280,10 +280,10 @@ public class ShinsakaiDetail {
                 + 29 * this.審査会最大定員
                 + 29 * this.審査会自動割当定員
                 + 29 * this.審査会委員定員
-                + 29 * Objects.hashCode(this.精神科医師存在区分)
-                + 29 * Objects.hashCode(this.ダミー区分)
+                + 29 * Objects.hashCode(this.合議体精神科医師存在区分)
+                + 29 * Objects.hashCode(this.合議体ダミー区分)
                 + 29 * Objects.hashCode(this.審査会資料作成年月日)
-                + 29 * Objects.hashCode(this.休会区分)
+                + 29 * Objects.hashCode(this.審査会休会区分)
                 + 29 * this.審査会割当済み人数;
         return hash;
     }
@@ -312,7 +312,7 @@ public class ShinsakaiDetail {
         if (!Objects.equals(this.合議体情報, other.合議体情報)) {
             return false;
         }
-        if (!Objects.equals(this.開催場所, other.開催場所)) {
+        if (!Objects.equals(this.審査会開催場所, other.審査会開催場所)) {
             return false;
         }
         if (this.審査会予定定員 != other.審査会予定定員) {
@@ -327,16 +327,16 @@ public class ShinsakaiDetail {
         if (this.審査会委員定員 != other.審査会委員定員) {
             return false;
         }
-        if (this.精神科医師存在区分 != other.精神科医師存在区分) {
+        if (this.合議体精神科医師存在区分 != other.合議体精神科医師存在区分) {
             return false;
         }
-        if (this.ダミー区分 != other.ダミー区分) {
+        if (this.合議体ダミー区分 != other.合議体ダミー区分) {
             return false;
         }
         if (!Objects.equals(this.審査会資料作成年月日, other.審査会資料作成年月日)) {
             return false;
         }
-        if (this.休会区分 != other.休会区分) {
+        if (this.審査会休会区分 != other.審査会休会区分) {
             return false;
         }
         if (this.審査会割当済み人数 != other.審査会割当済み人数) {

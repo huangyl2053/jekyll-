@@ -20,20 +20,20 @@ public class ShinsakaiIinManager {
     /**
      * 委員コードをリストで指定し、対応する委員をリストにして返します。
      *
-     * @param 委員コードList 委員コードList
+     * @param 審査会委員コードList 審査会委員コードList
      * @return 審査会委員List
      */
-    public ShinsakaiIinList get審査会委員List(List<ShinsakaiIinCode> 委員コードList) {
+    public ShinsakaiIinList get審査会委員List(List<ShinsakaiIinCode> 審査会委員コードList) {
         return null;
     }
 
     /**
      * 委員コードを指定し、対応する委員を返します。
      *
-     * @param 委員コード 委員コード
+     * @param 審査会委員コード 審査会委員コード
      * @return 審査会委員
      */
-    public ShinsakaiIin get審査会委員(ShinsakaiIinCode 委員コード) {
+    public ShinsakaiIin get審査会委員(ShinsakaiIinCode 審査会委員コード) {
         return null;
     }
 }

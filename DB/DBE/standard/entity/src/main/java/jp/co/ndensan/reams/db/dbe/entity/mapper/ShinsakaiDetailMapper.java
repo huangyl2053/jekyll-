@@ -33,13 +33,13 @@ public final class ShinsakaiDetailMapper {
      * 審査会Entityとその開催場所の情報、割り当てられた合議体情報を受け取り、審査会情報を生成します。
      *
      * @param 審査会Entity 審査会Entity
-     * @param 開催場所 開催場所
+     * @param 審査会開催場所 審査会開催場所
      * @param 合議体情報 合議体情報
      * @return 審査会情報
      */
     public static ShinsakaiDetail to審査会情報(DbT5101ShinsakaiJohoEntity 審査会Entity,
-            ShinsakaiKaisaiBasho 開催場所, GogitaiDetail 合議体情報) {
-        if (合議体情報 == null || 審査会Entity == null || 開催場所 == null) {
+            ShinsakaiKaisaiBasho 審査会開催場所, GogitaiDetail 合議体情報) {
+        if (合議体情報 == null || 審査会Entity == null || 審査会開催場所 == null) {
             return null;
         }
 
@@ -48,7 +48,7 @@ public final class ShinsakaiDetailMapper {
                 new ShinsakaiKaishiTime(new TimeString(審査会Entity.getShinsakaiKaishiTime())),
                 new TimeString(審査会Entity.getShinsakaiShuryoTime()),
                 合議体情報,
-                開催場所,
+                審査会開催場所,
                 審査会Entity.getShinsakaiYoteiTeiin(),
                 審査会Entity.getShinsakaiSaidaiTeiin(),
                 審査会Entity.getShinsakaiJidoWariateTeiin(),

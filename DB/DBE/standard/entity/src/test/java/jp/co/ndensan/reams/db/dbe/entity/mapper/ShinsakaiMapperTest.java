@@ -79,7 +79,7 @@ public class ShinsakaiMapperTest {
 
         @Test
         public void 返却された審査会が持つ_割当委員Listの件数は_3になる() {
-            assertThat(result.get割当委員List().size(), is(3));
+            assertThat(result.get審査会割当委員List().size(), is(3));
         }
     }
 }

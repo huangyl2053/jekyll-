@@ -31,7 +31,7 @@ public class ShinsakaiIinListTest {
             ShinsakaiIinCode code = new ShinsakaiIinCode(new RString("test01"));
             sut = ShinsakaiTestBusinessCreator.create審査会委員List(code.value().toString(), "iin02", "iin03");
             ShinsakaiIin result = sut.get審査会委員(code);
-            assertThat(result.get委員コード(), is(code));
+            assertThat(result.get審査会委員コード(), is(code));
         }
 
         @Test(expected = IllegalArgumentException.class)

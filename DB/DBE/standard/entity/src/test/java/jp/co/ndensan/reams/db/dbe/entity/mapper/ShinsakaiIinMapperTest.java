@@ -74,7 +74,7 @@ public class ShinsakaiIinMapperTest {
         @Test
         public void 委員コードにiin01を持つEntityが渡されたとき_委員コードにiin01を持つ審査会委員が返る() {
             sut = ShinsakaiIinMapper.to審査会委員(createEntity());
-            assertThat(sut.get委員コード(), is(委員コード_iin01));
+            assertThat(sut.get審査会委員コード(), is(委員コード_iin01));
         }
 
         @Test

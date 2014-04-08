@@ -19,12 +19,12 @@ public class GogitaichoKubun extends KaigoCodeAssignedItem<GogitaichoKubunCode> 
     /**
      * 引数からメンバを受け取り、インスタンスを生成します。
      *
-     * @param 区分コード 区分コード
+     * @param 合議体長区分コード 合議体長区分コード
      * @param 名称 名称
      * @param 略称 略称
      */
-    public GogitaichoKubun(Code 区分コード, RString 名称, RString 略称) {
-        super(new GogitaichoKubunCode(区分コード), 区分コード, 名称, 略称);
+    public GogitaichoKubun(Code 合議体長区分コード, RString 名称, RString 略称) {
+        super(new GogitaichoKubunCode(合議体長区分コード), 合議体長区分コード, 名称, 略称);
     }
 
     /**

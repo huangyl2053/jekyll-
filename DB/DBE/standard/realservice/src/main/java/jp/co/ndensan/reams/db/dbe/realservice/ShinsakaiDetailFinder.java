@@ -26,48 +26,49 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class ShinsakaiDetailFinder {
 
-    private final ShinsakaiJohoDac dac;
-    private final ShinsakaiKaisaiBashoManager 開催場所Manager;
+    private final ShinsakaiJohoDac 審査会情報Dac;
+    private final ShinsakaiKaisaiBashoManager 審査会開催場所Manager;
     private final GogitaiDetailFinder 合議体DetailFinder;
 
     /**
      * インスタンスを生成します。
      */
     public ShinsakaiDetailFinder() {
-        dac = InstanceProvider.create(ShinsakaiJohoDac.class);
-        開催場所Manager = new ShinsakaiKaisaiBashoManager();
+        審査会情報Dac = InstanceProvider.create(ShinsakaiJohoDac.class);
+        審査会開催場所Manager = new ShinsakaiKaisaiBashoManager();
         合議体DetailFinder = new GogitaiDetailFinder();
     }
 
     /**
      * テスト用コンストラクタです。引数からテストに必要なDacなどを受け取り、インスタンスを生成します。
      *
-     * @param dac
-     * @param 開催場所Manager
-     * @param 合議体DetailFinder
+     * @param 審査会情報Dac 審査会情報Dac
+     * @param 審査会開催場所Manager 審査会開催場所Manager
+     * @param 合議体DetailFinder 合議体DetailFinder
      */
-    ShinsakaiDetailFinder(ShinsakaiJohoDac dac, ShinsakaiKaisaiBashoManager 開催場所Manager, GogitaiDetailFinder 合議体DetailFinder) {
-        this.dac = dac;
-        this.開催場所Manager = 開催場所Manager;
+    ShinsakaiDetailFinder(ShinsakaiJohoDac 審査会情報Dac, ShinsakaiKaisaiBashoManager 審査会開催場所Manager,
+            GogitaiDetailFinder 合議体DetailFinder) {
+        this.審査会情報Dac = 審査会情報Dac;
+        this.審査会開催場所Manager = 審査会開催場所Manager;
         this.合議体DetailFinder = 合議体DetailFinder;
     }
 
     /**
-     * 審査会の開催番号と開催年月日を受け取り、審査会情報を取得します。
+     * 審査会開催番号と審査会開催年月日を引数から受け取り、それに対応する審査会情報を取得します。
      *
-     * @param 開催番号 開催番号
-     * @param 開催年月日 開催年月日
+     * @param 審査会開催番号 審査会開催番号
+     * @param 審査会開催年月日 審査会開催年月日
      * @return 審査会情報
      */
-    public ShinsakaiDetail get審査会情報(ShinsakaiKaisaiNo 開催番号, ShinsakaiKaisaiDate 開催年月日) {
-        DbT5101ShinsakaiJohoEntity entity = dac.select(開催番号, 開催年月日);
+    public ShinsakaiDetail get審査会情報(ShinsakaiKaisaiNo 審査会開催番号, ShinsakaiKaisaiDate 審査会開催年月日) {
+        DbT5101ShinsakaiJohoEntity entity = 審査会情報Dac.select(審査会開催番号, 審査会開催年月日);
         ShinsakaiKaisaiBasho 開催場所 = get審査会開催場所(entity);
         GogitaiDetail 合議体情報 = get合議体情報(entity);
         return ShinsakaiDetailMapper.to審査会情報(entity, 開催場所, 合議体情報);
     }
 
     private ShinsakaiKaisaiBasho get審査会開催場所(DbT5101ShinsakaiJohoEntity entity) {
-        return 開催場所Manager.get審査会開催場所(new ShinsakaiKaisaiBashoCode(entity.getShinsakaiKaisaiBashoCode()));
+        return 審査会開催場所Manager.get審査会開催場所(new ShinsakaiKaisaiBashoCode(entity.getShinsakaiKaisaiBashoCode()));
     }
 
     private GogitaiDetail get合議体情報(DbT5101ShinsakaiJohoEntity entity) {
@@ -77,13 +78,13 @@ public class ShinsakaiDetailFinder {
     }
 
     /**
-     * 開催年月日を指定して、その日に開催される審査会の情報を取得します。
+     * 審査会開催年月日を指定して、その日に開催される審査会の情報を取得します。
      *
-     * @param 開催年月日 開催年月日
+     * @param 審査会開催年月日 審査会開催年月日
      * @return 審査会情報List
      */
-    public List<ShinsakaiDetail> get開催審査会情報(ShinsakaiKaisaiDate 開催年月日) {
-        List<DbT5101ShinsakaiJohoEntity> entityList = dac.select開催審査会(開催年月日);
+    public List<ShinsakaiDetail> get開催審査会情報(ShinsakaiKaisaiDate 審査会開催年月日) {
+        List<DbT5101ShinsakaiJohoEntity> entityList = 審査会情報Dac.select開催審査会(審査会開催年月日);
         return create審査会情報(entityList);
     }
 
@@ -98,13 +99,13 @@ public class ShinsakaiDetailFinder {
     }
 
     /**
-     * 基準年月日を指定して、開催が予定されている審査会情報のリストを受け取ります。
+     * 基準となる年月日を指定して、その日付を基準に、開催が予定されている審査会情報のリストを検索して返します。
      *
      * @param 基準年月日 基準年月日
      * @return 開催予定の審査会情報List
      */
     public List<ShinsakaiDetail> get開催予定審査会情報(FlexibleDate 基準年月日) {
-        List<DbT5101ShinsakaiJohoEntity> entityList = dac.select開催予定審査会(基準年月日);
+        List<DbT5101ShinsakaiJohoEntity> entityList = 審査会情報Dac.select開催予定審査会(基準年月日);
         return create審査会情報(entityList);
     }
 
@@ -114,7 +115,7 @@ public class ShinsakaiDetailFinder {
      * @return 審査会情報List
      */
     public List<ShinsakaiDetail> get審査会All() {
-        List<DbT5101ShinsakaiJohoEntity> entityList = dac.selectAll();
+        List<DbT5101ShinsakaiJohoEntity> entityList = 審査会情報Dac.selectAll();
         return create審査会情報(entityList);
     }
 }

@@ -31,28 +31,28 @@ public class ShinsakaiList implements Iterable<Shinsakai> {
     }
 
     /**
-     * 開催番号と開催年月日を指定して、Listから審査会を1件取得します。
+     * 審査会開催番号と審査会開催年月日を指定して、Listから審査会を1件取得します。
      *
-     * @param 開催番号 開催番号
-     * @param 開催年月日 開催年月日
+     * @param 審査会開催番号 審査会開催番号
+     * @param 審査会開催年月日 審査会開催年月日
      * @return 審査会
      * @throws IllegalArgumentException 対応する審査会が存在しないとき
      */
-    public Shinsakai get審査会(ShinsakaiKaisaiNo 開催番号, ShinsakaiKaisaiDate 開催年月日)
+    public Shinsakai get審査会(ShinsakaiKaisaiNo 審査会開催番号, ShinsakaiKaisaiDate 審査会開催年月日)
             throws IllegalArgumentException {
         for (Shinsakai 審査会 : 審査会List) {
-            if (isキー項目が一致(審査会, 開催番号, 開催年月日)) {
+            if (isキー項目が一致(審査会, 審査会開催番号, 審査会開催年月日)) {
                 return 審査会;
             }
         }
         throw new IllegalArgumentException(Messages.E00006.replace("対応する審査会").getMessage());
     }
 
-    private boolean isキー項目が一致(Shinsakai 審査会, ShinsakaiKaisaiNo 開催番号, ShinsakaiKaisaiDate 開催年月日) {
-        if (!審査会.get審査会情報().get審査会開催番号().equals(開催番号)) {
+    private boolean isキー項目が一致(Shinsakai 審査会, ShinsakaiKaisaiNo 審査会開催番号, ShinsakaiKaisaiDate 審査会開催年月日) {
+        if (!審査会.get審査会情報().get審査会開催番号().equals(審査会開催番号)) {
             return false;
         }
-        if (!審査会.get審査会情報().get審査会開催年月日().equals(開催年月日)) {
+        if (!審査会.get審査会情報().get審査会開催年月日().equals(審査会開催年月日)) {
             return false;
         }
         return true;

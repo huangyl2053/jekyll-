@@ -152,7 +152,7 @@ public class GogitaiWariateIinManagerTest {
     private static ShinsakaiIin create審査会委員(String 委員コード) {
         ShinsakaiIin iin = mock(ShinsakaiIin.class);
         ShinsakaiIinCode shinsakaiIinCode = new ShinsakaiIinCode(new RString(委員コード));
-        when(iin.get委員コード()).thenReturn(shinsakaiIinCode);
+        when(iin.get審査会委員コード()).thenReturn(shinsakaiIinCode);
         return iin;
     }
 

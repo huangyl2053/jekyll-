@@ -51,7 +51,7 @@ public class GogitaiWariateIinList implements Iterable<GogitaiWariateIin> {
 
     private boolean isキー項目が一致(GogitaiWariateIin 割当委員, GogitaiNo 合議体番号,
             GogitaiYukoKikanKaishiDate 合議体有効期間開始年月日, ShinsakaiIinCode 審査会委員コード) {
-        if (!審査会委員コード.equals(割当委員.get委員情報().get委員コード())) {
+        if (!審査会委員コード.equals(割当委員.get委員情報().get審査会委員コード())) {
             return false;
         }
         if (!合議体番号.equals(割当委員.get合議体情報().get合議体番号())) {

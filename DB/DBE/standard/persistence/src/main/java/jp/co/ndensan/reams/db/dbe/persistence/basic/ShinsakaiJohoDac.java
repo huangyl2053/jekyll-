@@ -31,18 +31,18 @@ public class ShinsakaiJohoDac implements IReplaceable<DbT5101ShinsakaiJohoEntity
     private SqlSession session;
 
     /**
-     * 審査会開催番号と開催年月日を指定し、審査会の情報を一件取得します。
+     * 審査会開催番号と審査会開催年月日を指定し、審査会の情報を一件取得します。
      *
-     * @param 開催番号 開催番号
-     * @param 開催年月日 開催年月日
+     * @param 審査会開催番号 審査会開催番号
+     * @param 審査会開催年月日 審査会開催年月日
      * @return 審査会Entity
      */
     @Transaction
-    public DbT5101ShinsakaiJohoEntity select(ShinsakaiKaisaiNo 開催番号, ShinsakaiKaisaiDate 開催年月日) {
+    public DbT5101ShinsakaiJohoEntity select(ShinsakaiKaisaiNo 審査会開催番号, ShinsakaiKaisaiDate 審査会開催年月日) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5101ShinsakaiJoho.class)
-                .where(and(eq(shinsakaiKaisaiNo, 開催番号.value()),
-                eq(shinsakaiKaisaiYMD, 開催年月日.value())))
+                .where(and(eq(shinsakaiKaisaiNo, 審査会開催番号.value()),
+                eq(shinsakaiKaisaiYMD, 審査会開催年月日.value())))
                 .toObject(DbT5101ShinsakaiJohoEntity.class);
     }
 

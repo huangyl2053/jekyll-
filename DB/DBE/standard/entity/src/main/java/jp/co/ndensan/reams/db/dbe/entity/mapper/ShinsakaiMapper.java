@@ -25,21 +25,21 @@ public final class ShinsakaiMapper {
     }
 
     /**
-     * 引数から審査会割当委員関連EntityのListを受け取り、それらの情報をマッピングして審査会を生成します。<br/>
+     * 引数から審査会割当委員EntityList・審査会委員List・審査会情報を受け取り、それらの情報をマッピングして審査会を生成します。<br/>
      * 引数のいずれかにnullが渡されたとき、nullが返却されます。
      *
      * @param 審査会割当委員EntityList 審査会割当委員EntityList
-     * @param 委員List 委員List
+     * @param 審査会委員List 審査会委員List
      * @param 審査会情報 審査会情報
      * @return 審査会
      * @throws IllegalArgumentException 審査会に割り当てられる委員リストの生成に失敗した場合
      */
     public static Shinsakai to審査会(List<DbT5106ShinsakaiWariateIinJohoEntity> 審査会割当委員EntityList,
-            ShinsakaiIinList 委員List, ShinsakaiDetail 審査会情報) throws IllegalArgumentException {
-        if (委員List == null || 審査会割当委員EntityList == null || 審査会情報 == null) {
+            ShinsakaiIinList 審査会委員List, ShinsakaiDetail 審査会情報) throws IllegalArgumentException {
+        if (審査会委員List == null || 審査会割当委員EntityList == null || 審査会情報 == null) {
             return null;
         }
-        ShinsakaiWariateIinList 割当委員List = ShinsakaiWariateIinMapper.to審査会割当委員List(審査会割当委員EntityList, 委員List, 審査会情報);
-        return new Shinsakai(審査会情報, 割当委員List);
+        ShinsakaiWariateIinList 審査会割当委員List = ShinsakaiWariateIinMapper.to審査会割当委員List(審査会割当委員EntityList, 審査会委員List, 審査会情報);
+        return new Shinsakai(審査会情報, 審査会割当委員List);
     }
 }

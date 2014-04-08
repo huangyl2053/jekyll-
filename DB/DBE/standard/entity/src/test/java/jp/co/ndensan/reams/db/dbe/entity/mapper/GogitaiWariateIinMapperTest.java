@@ -90,7 +90,7 @@ public class GogitaiWariateIinMapperTest {
         @Test
         public void 認定審査員コードにiin01を持つ合議体割当審査会委員Entityが渡されたとき_認定審査員コードにiin01を持つ合議体割当委員が返る() {
             sut = GogitaiWariateIinMapper.to合議体割当委員(create合議体割当審査会委員Entity());
-            assertThat(sut.get委員情報().get委員コード(), is(委員コード_iin01));
+            assertThat(sut.get委員情報().get審査会委員コード(), is(委員コード_iin01));
         }
 
         @Test
@@ -166,7 +166,7 @@ public class GogitaiWariateIinMapperTest {
         @Test
         public void 委員コードにiin01を持つ合議体割当委員を渡したとき_委員コードにiin01を持つ合議体割当Entityが返る() {
             sut = GogitaiWariateIinMapper.to合議体割当委員Entity(createGogitaiWariateIin());
-            assertThat(sut.getShinsakaiIinCode(), is(委員情報_iin01.get委員コード().value()));
+            assertThat(sut.getShinsakaiIinCode(), is(委員情報_iin01.get審査会委員コード().value()));
         }
 
         @Test
@@ -205,7 +205,7 @@ public class GogitaiWariateIinMapperTest {
 
     private static ShinsakaiIin create審査会委員Mock() {
         ShinsakaiIin 委員 = mock(ShinsakaiIin.class);
-        when(委員.get委員コード()).thenReturn(委員コード_iin01);
+        when(委員.get審査会委員コード()).thenReturn(委員コード_iin01);
         return 委員;
     }
 

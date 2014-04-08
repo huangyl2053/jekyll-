@@ -25,42 +25,42 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class ShinsakaiWariateIinManager {
 
-    private ShinsakaiWariateIinJohoDac 割当委員情報Dac;
+    private ShinsakaiWariateIinJohoDac 審査会割当委員情報Dac;
     private ShinsakaiDetailFinder 審査会情報Finder;
-    private ShinsakaiIinManager 委員Manager;
+    private ShinsakaiIinManager 審査会委員Manager;
 
     /**
      * インスタンスを生成します。
      */
     public ShinsakaiWariateIinManager() {
-        割当委員情報Dac = InstanceProvider.create(ShinsakaiWariateIinJohoDac.class);
+        審査会割当委員情報Dac = InstanceProvider.create(ShinsakaiWariateIinJohoDac.class);
         審査会情報Finder = new ShinsakaiDetailFinder();
-        委員Manager = new ShinsakaiIinManager();
+        審査会委員Manager = new ShinsakaiIinManager();
     }
 
     /**
      * テスト用コンストラクタです。外部からDacなどを受け取り、インスタンスを生成します。
      *
-     * @param 割当委員情報Dac 割当委員情報Dac
+     * @param 審査会割当委員情報Dac 審査会割当委員情報Dac
      * @param 審査会情報Finder 審査会情報Finder
-     * @param 委員Manager 委員Manager
+     * @param 審査会委員Manager 審査会委員Manager
      */
-    ShinsakaiWariateIinManager(ShinsakaiWariateIinJohoDac 割当委員情報Dac, ShinsakaiDetailFinder 審査会情報Finder,
-            ShinsakaiIinManager 委員Manager) {
-        this.割当委員情報Dac = 割当委員情報Dac;
+    ShinsakaiWariateIinManager(ShinsakaiWariateIinJohoDac 審査会割当委員情報Dac, ShinsakaiDetailFinder 審査会情報Finder,
+            ShinsakaiIinManager 審査会委員Manager) {
+        this.審査会割当委員情報Dac = 審査会割当委員情報Dac;
         this.審査会情報Finder = 審査会情報Finder;
-        this.委員Manager = 委員Manager;
+        this.審査会委員Manager = 審査会委員Manager;
     }
 
     /**
-     * 開催年月日を指定して、その日に開催される審査会に割り当てられている委員のリストを取得します。
+     * 開催年月日を指定して、その日に開催される審査会に割り当てられている、審査会割当委員のリストを取得します。
      *
      * @param 開催年月日 開催年月日
      * @return 審査会割当委員List
      */
     public ShinsakaiWariateIinList get審査会参加割当委員List(ShinsakaiKaisaiDate 開催年月日) {
-        List<DbT5106ShinsakaiWariateIinJohoEntity> 割当委員EntityList = 割当委員情報Dac.select(開催年月日);
-        List<ShinsakaiWariateIin> 審査会割当委員List = create審査会割当委員List(割当委員EntityList);
+        List<DbT5106ShinsakaiWariateIinJohoEntity> 審査会割当委員EntityList = 審査会割当委員情報Dac.select(開催年月日);
+        List<ShinsakaiWariateIin> 審査会割当委員List = create審査会割当委員List(審査会割当委員EntityList);
         return new ShinsakaiWariateIinList(審査会割当委員List);
     }
 
@@ -70,7 +70,7 @@ public class ShinsakaiWariateIinManager {
      * @return 審査会割当委員List
      */
     public ShinsakaiWariateIinList get審査会割当委員All() {
-        List<DbT5106ShinsakaiWariateIinJohoEntity> 割当委員EntityList = 割当委員情報Dac.selectAll();
+        List<DbT5106ShinsakaiWariateIinJohoEntity> 割当委員EntityList = 審査会割当委員情報Dac.selectAll();
         List<ShinsakaiWariateIin> 審査会割当委員List = create審査会割当委員List(割当委員EntityList);
         return new ShinsakaiWariateIinList(審査会割当委員List);
     }
@@ -94,7 +94,7 @@ public class ShinsakaiWariateIinManager {
     }
 
     private ShinsakaiIin get委員(DbT5106ShinsakaiWariateIinJohoEntity 割当委員Entity) {
-        return 委員Manager.get審査会委員(new ShinsakaiIinCode(割当委員Entity.getShinsakaiIinCode()));
+        return 審査会委員Manager.get審査会委員(new ShinsakaiIinCode(割当委員Entity.getShinsakaiIinCode()));
     }
 
     /**
@@ -105,7 +105,7 @@ public class ShinsakaiWariateIinManager {
      */
     public boolean save(ShinsakaiWariateIin 割当委員) {
         DbT5106ShinsakaiWariateIinJohoEntity entity = ShinsakaiWariateIinMapper.to審査員割当委員Entity(割当委員);
-        return 割当委員情報Dac.insertOrUpdate(entity) == 1 ? true : false;
+        return 審査会割当委員情報Dac.insertOrUpdate(entity) == 1 ? true : false;
     }
 
     /**
@@ -116,6 +116,6 @@ public class ShinsakaiWariateIinManager {
      */
     public boolean remove(ShinsakaiWariateIin 割当委員) {
         DbT5106ShinsakaiWariateIinJohoEntity entity = ShinsakaiWariateIinMapper.to審査員割当委員Entity(割当委員);
-        return 割当委員情報Dac.delete(entity) == 1 ? true : false;
+        return 審査会割当委員情報Dac.delete(entity) == 1 ? true : false;
     }
 }

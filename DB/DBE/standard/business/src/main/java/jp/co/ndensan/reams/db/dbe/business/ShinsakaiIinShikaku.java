@@ -19,12 +19,12 @@ public class ShinsakaiIinShikaku extends KaigoCodeAssignedItem<ShinsakaiIinShika
     /**
      * 引数からメンバを受け取り、インスタンスを生成します。
      *
-     * @param 区分コード 審査会委員資格コード
+     * @param 審査会委員資格コード 審査会委員資格コード
      * @param 名称 名称
      * @param 略称 略称
      */
-    public ShinsakaiIinShikaku(Code 区分コード, RString 名称, RString 略称) {
-        super(new ShinsakaiIinShikakuCode(区分コード), 区分コード, 名称, 略称);
+    public ShinsakaiIinShikaku(Code 審査会委員資格コード, RString 名称, RString 略称) {
+        super(new ShinsakaiIinShikakuCode(審査会委員資格コード), 審査会委員資格コード, 名称, 略称);
     }
 
     /**

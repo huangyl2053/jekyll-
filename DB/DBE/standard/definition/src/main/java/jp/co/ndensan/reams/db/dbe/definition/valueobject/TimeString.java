@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 public class TimeString implements IValueObject<RString>, Comparable<TimeString> {
 
     private final RTime time;
-    private final RString timeString;
+    private final RString time変換後文字列;
     private static final int TIME_STRING_LENGTH = 4;
 
     /**
@@ -56,7 +56,7 @@ public class TimeString implements IValueObject<RString>, Comparable<TimeString>
 
         RString hourString = padToZero(Integer.toString(time.getHour()));
         RString minuteString = padToZero(Integer.toString(time.getMinute()));
-        timeString = hourString.concat(minuteString);
+        time変換後文字列 = hourString.concat(minuteString);
     }
 
     /**
@@ -92,7 +92,7 @@ public class TimeString implements IValueObject<RString>, Comparable<TimeString>
 
     @Override
     public RString value() {
-        return timeString;
+        return time変換後文字列;
     }
 
     private RString padToZero(String str) {

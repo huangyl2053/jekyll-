@@ -19,20 +19,21 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiDate;
  */
 public class ShinsakaiWariateIinList implements Iterable<ShinsakaiWariateIin> {
 
-    private final List<ShinsakaiWariateIin> 割当委員List;
+    private final List<ShinsakaiWariateIin> 審査会割当委員List;
 
     /**
-     * 引数から割当委員のリストを受け取り、インスタンスを生成します。
+     * 引数から審査会割当委員Listのリストを受け取り、インスタンスを生成します。
      *
-     * @param 割当委員List 割当委員List
+     * @param 審査会割当委員List 審査会割当委員List
      * @throws NullPointerException 引数にnullが渡されたとき
      */
-    public ShinsakaiWariateIinList(List<ShinsakaiWariateIin> 割当委員List) throws NullPointerException {
-        this.割当委員List = requireNonNull(割当委員List, Messages.E00003.replace("割当委員List", getClass().getName()).getMessage());
+    public ShinsakaiWariateIinList(List<ShinsakaiWariateIin> 審査会割当委員List) throws NullPointerException {
+        this.審査会割当委員List = requireNonNull(審査会割当委員List,
+                Messages.E00003.replace("審査会割当委員List", getClass().getName()).getMessage());
     }
 
     /**
-     * 開催番号と開催年月日、委員コードを指定し、審査会に割り当てられた委員を一件。
+     * 審査会開催番号、審査会開催年月日、審査会委員コードを指定し、審査会に割り当てられた委員の情報を一件取得します。
      *
      * @param 審査会開催番号 審査会開催番号
      * @param 審査会開催年月日 審査会開催年月日
@@ -42,23 +43,23 @@ public class ShinsakaiWariateIinList implements Iterable<ShinsakaiWariateIin> {
      */
     public ShinsakaiWariateIin get審査会割当委員(ShinsakaiKaisaiNo 審査会開催番号, ShinsakaiKaisaiDate 審査会開催年月日,
             ShinsakaiIinCode 審査会委員コード) throws IllegalArgumentException {
-        for (ShinsakaiWariateIin 割当委員 : 割当委員List) {
-            if (isキー項目が一致(割当委員, 審査会開催番号, 審査会開催年月日, 審査会委員コード)) {
-                return 割当委員;
+        for (ShinsakaiWariateIin 審査会割当委員 : 審査会割当委員List) {
+            if (isキー項目が一致(審査会割当委員, 審査会開催番号, 審査会開催年月日, 審査会委員コード)) {
+                return 審査会割当委員;
             }
         }
         throw new IllegalArgumentException(Messages.E00006.replace("対応する審査会割当委員").getMessage());
     }
 
-    private boolean isキー項目が一致(ShinsakaiWariateIin 割当委員, ShinsakaiKaisaiNo 審査会開催番号, ShinsakaiKaisaiDate 審査会開催年月日,
+    private boolean isキー項目が一致(ShinsakaiWariateIin 審査会割当委員, ShinsakaiKaisaiNo 審査会開催番号, ShinsakaiKaisaiDate 審査会開催年月日,
             ShinsakaiIinCode 審査会委員コード) {
-        if (!割当委員.get審査会情報().get審査会開催番号().equals(審査会開催番号)) {
+        if (!審査会割当委員.get審査会情報().get審査会開催番号().equals(審査会開催番号)) {
             return false;
         }
-        if (!割当委員.get審査会情報().get審査会開催年月日().equals(審査会開催年月日)) {
+        if (!審査会割当委員.get審査会情報().get審査会開催年月日().equals(審査会開催年月日)) {
             return false;
         }
-        if (!割当委員.get委員情報().get委員コード().equals(審査会委員コード)) {
+        if (!審査会割当委員.get審査会委員情報().get審査会委員コード().equals(審査会委員コード)) {
             return false;
         }
         return true;
@@ -70,7 +71,7 @@ public class ShinsakaiWariateIinList implements Iterable<ShinsakaiWariateIin> {
      * @return 空ならtrue
      */
     public boolean isEmpty() {
-        return 割当委員List.isEmpty();
+        return 審査会割当委員List.isEmpty();
     }
 
     /**
@@ -79,11 +80,11 @@ public class ShinsakaiWariateIinList implements Iterable<ShinsakaiWariateIin> {
      * @return サイズ
      */
     public int size() {
-        return 割当委員List.size();
+        return 審査会割当委員List.size();
     }
 
     @Override
     public Iterator<ShinsakaiWariateIin> iterator() {
-        return 割当委員List.iterator();
+        return 審査会割当委員List.iterator();
     }
 }

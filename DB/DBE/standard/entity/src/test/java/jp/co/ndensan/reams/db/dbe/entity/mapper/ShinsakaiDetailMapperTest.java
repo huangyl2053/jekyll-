@@ -116,7 +116,7 @@ public class ShinsakaiDetailMapperTest {
 
         @Test
         public void to審査会情報で返された審査会情報が持つ_開催場所の開催場所コードは_A001になる() {
-            assertThat(result.get開催場所().get開催場所コード(), is(開催場所番号_A001));
+            assertThat(result.get審査会開催場所().get開催場所コード(), is(開催場所番号_A001));
         }
 
         @Test

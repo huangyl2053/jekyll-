@@ -31,32 +31,32 @@ public class ShinsakaiWariateIinJohoDac implements IReplaceable<DbT5106Shinsakai
     private SqlSession session;
 
     /**
-     * 開催番号と開催年月日を指定して、審査会に割り当てられている委員の情報を取得します。
+     * 審査会開催番号と審査会開催年月日を指定して、審査会に割り当てられている審査会委員の情報を取得します。
      *
-     * @param 開催番号 開催番号
-     * @param 開催年月日 開催年月日
+     * @param 審査会開催番号 審査会開催番号
+     * @param 審査会開催年月日 審査会開催年月日
      * @return 審査会割当委員EntityList
      */
     @Transaction
-    public List<DbT5106ShinsakaiWariateIinJohoEntity> select(ShinsakaiKaisaiNo 開催番号, ShinsakaiKaisaiDate 開催年月日) {
+    public List<DbT5106ShinsakaiWariateIinJohoEntity> select(ShinsakaiKaisaiNo 審査会開催番号, ShinsakaiKaisaiDate 審査会開催年月日) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5106ShinsakaiWariateIinJoho.class)
-                .where(and(eq(shinsakaiKaisaiNo, 開催番号.value()), eq(shinsakaiKaisaiYMD, 開催年月日.value())))
+                .where(and(eq(shinsakaiKaisaiNo, 審査会開催番号.value()), eq(shinsakaiKaisaiYMD, 審査会開催年月日.value())))
                 .order(by(shinsakaiIinCode, ASC))
                 .toList(DbT5106ShinsakaiWariateIinJohoEntity.class);
     }
 
     /**
-     * 開催年月日を指定して、その日に開催予定の審査会に割り当てられている委員を取得します。
+     * 審査会開催年月日を指定して、その日に開催予定の審査会に割り当てられている委員を取得します。
      *
-     * @param 開催年月日 開催年月日
+     * @param 審査会開催年月日 審査会開催年月日
      * @return 審査会割当委員EntityList
      */
     @Transaction
-    public List<DbT5106ShinsakaiWariateIinJohoEntity> select(ShinsakaiKaisaiDate 開催年月日) {
+    public List<DbT5106ShinsakaiWariateIinJohoEntity> select(ShinsakaiKaisaiDate 審査会開催年月日) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5106ShinsakaiWariateIinJoho.class)
-                .where(eq(shinsakaiKaisaiYMD, 開催年月日.value()))
+                .where(eq(shinsakaiKaisaiYMD, 審査会開催年月日.value()))
                 .toList(DbT5106ShinsakaiWariateIinJohoEntity.class);
     }
 

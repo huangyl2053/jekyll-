@@ -33,27 +33,27 @@ public final class ShinsakaiWariateIinMapper {
     }
 
     /**
-     * 審査会割当委員Entityと、それに対応する委員情報、審査会情報を受け取り、審査会割当委員クラスにマッピングします。<br/>
+     * 審査会割当委員Entityと、それに対応する審査会委員、審査会情報を受け取り、審査会割当委員クラスにマッピングします。<br/>
      * 審査会割当委員Entityにnullが渡された場合、nullが返ります。<br/>
      * 審査会割当委員Entityがnullでは無いときに、審査会情報と委員情報のいずれかにnullが渡された場合、IllegalArgumentExceptionが発生します。
      *
      * @param 審査会割当委員Entity 審査会割当委員Entity
-     * @param 委員 委員
+     * @param 審査会委員 審査会委員
      * @param 審査会情報 審査会情報
      * @return 審査会割当委員
      * @throws IllegalArgumentException
-     * 審査会割当委員Entityがnullでは無いときに、審査会情報と委員情報のいずれかにnullが渡された場合
+     * 審査会割当委員Entityがnullでは無いときに、審査会情報か審査会委員のいずれかにnullが渡された場合
      */
     public static ShinsakaiWariateIin to審査会割当委員(DbT5106ShinsakaiWariateIinJohoEntity 審査会割当委員Entity,
-            ShinsakaiIin 委員, ShinsakaiDetail 審査会情報) throws IllegalArgumentException {
+            ShinsakaiIin 審査会委員, ShinsakaiDetail 審査会情報) throws IllegalArgumentException {
         if (審査会割当委員Entity == null) {
             return null;
-        } else if (委員 == null || 審査会情報 == null) {
+        } else if (審査会委員 == null || 審査会情報 == null) {
             throw new IllegalArgumentException();
         }
 
         return new ShinsakaiWariateIin(審査会情報,
-                委員,
+                審査会委員,
                 create審査員区分(審査会割当委員Entity),
                 create合議体長区分(審査会割当委員Entity),
                 create審査時間(審査会割当委員Entity),
@@ -76,43 +76,43 @@ public final class ShinsakaiWariateIinMapper {
     }
 
     /**
-     * 引数から審査会割当委員EntityList・委員List・審査会情報を受け取り、
+     * 引数から審査会割当委員EntityList・審査会委員List・審査会情報を受け取り、
      * それらの情報をマッピングして審査会割当委員Listを生成し、返却します。<br/>
      * 引数のいずれかにnullが渡されたとき、nullが返却されます。
      *
      * @param 審査会割当委員EntityList 審査会割当委員EntityList
-     * @param 委員List 委員List
+     * @param 審査会委員List 審査会委員List
      * @param 審査会情報 審査会情報
      * @return 審査会List
      * @throws IllegalArgumentException
      * 審査会割当委員Entityが持つ委員コードと、委員情報の委員コードで、対応しないものが存在したとき
      */
     public static ShinsakaiWariateIinList to審査会割当委員List(List<DbT5106ShinsakaiWariateIinJohoEntity> 審査会割当委員EntityList,
-            ShinsakaiIinList 委員List, ShinsakaiDetail 審査会情報) throws IllegalArgumentException {
-        if (委員List == null || 審査会割当委員EntityList == null || 審査会情報 == null) {
+            ShinsakaiIinList 審査会委員List, ShinsakaiDetail 審査会情報) throws IllegalArgumentException {
+        if (審査会委員List == null || 審査会割当委員EntityList == null || 審査会情報 == null) {
             return null;
         }
 
-        List<ShinsakaiWariateIin> 審査会員List = new ArrayList<>();
+        List<ShinsakaiWariateIin> 審査会割当委員List = new ArrayList<>();
         for (DbT5106ShinsakaiWariateIinJohoEntity 審査会割当委員Entity : 審査会割当委員EntityList) {
-            ShinsakaiIin 委員 = find対応委員(審査会割当委員Entity, 委員List);
-            審査会員List.add(to審査会割当委員(審査会割当委員Entity, 委員, 審査会情報));
+            ShinsakaiIin 委員 = find対応委員(審査会割当委員Entity, 審査会委員List);
+            審査会割当委員List.add(to審査会割当委員(審査会割当委員Entity, 委員, 審査会情報));
         }
-        return new ShinsakaiWariateIinList(審査会員List);
+        return new ShinsakaiWariateIinList(審査会割当委員List);
     }
 
-    private static ShinsakaiIin find対応委員(DbT5106ShinsakaiWariateIinJohoEntity 審査会割当委員Entity, ShinsakaiIinList 委員List)
+    private static ShinsakaiIin find対応委員(DbT5106ShinsakaiWariateIinJohoEntity 審査会割当委員Entity, ShinsakaiIinList 審査会委員List)
             throws IllegalArgumentException {
-        for (ShinsakaiIin 委員 : 委員List) {
-            if (is委員コードが一致(審査会割当委員Entity, 委員)) {
+        for (ShinsakaiIin 委員 : 審査会委員List) {
+            if (is審査会委員コードが一致(審査会割当委員Entity, 委員)) {
                 return 委員;
             }
         }
         throw new IllegalArgumentException(Messages.E00006.replace("審査会割当情報に対応した委員").getMessage());
     }
 
-    private static boolean is委員コードが一致(DbT5106ShinsakaiWariateIinJohoEntity 審査会割当委員Entity, ShinsakaiIin 委員) {
-        return 委員.get委員コード().value().equals(審査会割当委員Entity.getShinsakaiIinCode());
+    private static boolean is審査会委員コードが一致(DbT5106ShinsakaiWariateIinJohoEntity 審査会割当委員Entity, ShinsakaiIin 審査会委員) {
+        return 審査会委員.get審査会委員コード().value().equals(審査会割当委員Entity.getShinsakaiIinCode());
     }
 
     /**
@@ -126,7 +126,7 @@ public final class ShinsakaiWariateIinMapper {
         DbT5106ShinsakaiWariateIinJohoEntity entity = new DbT5106ShinsakaiWariateIinJohoEntity();
         entity.setShinsakaiKaisaiNo(審査会割当委員.get審査会情報().get審査会開催番号().value());
         entity.setShinsakaiKaisaiYMD(審査会割当委員.get審査会情報().get審査会開催年月日().value());
-        entity.setShinsakaiIinCode(審査会割当委員.get委員情報().get委員コード().value());
+        entity.setShinsakaiIinCode(審査会割当委員.get審査会委員情報().get審査会委員コード().value());
         entity.setShinsainKubunCode(審査会割当委員.get認定審査員区分().getCode());
         entity.setGogitaichoKubunCode(審査会割当委員.get合議体長区分().getCode());
         entity.setShinsakaiIinShinsaKaishiTime(審査会割当委員.get審査時間().getFrom().value());

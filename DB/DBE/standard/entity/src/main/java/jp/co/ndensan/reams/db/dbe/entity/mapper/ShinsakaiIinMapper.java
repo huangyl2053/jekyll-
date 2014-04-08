@@ -73,7 +73,7 @@ public final class ShinsakaiIinMapper {
         }
 
         DbT5102ShinsakaiIinJohoEntity 委員Entity = new DbT5102ShinsakaiIinJohoEntity();
-        委員Entity.setShinsakaiIinCode(審査会委員.get委員コード().value());
+        委員Entity.setShinsakaiIinCode(審査会委員.get審査会委員コード().value());
         委員Entity.setShinsakaiIinKaishiYMD(審査会委員.get委員着任期間().getFrom());
         委員Entity.setShinsakaiIinShuryoYMD(審査会委員.get委員着任期間().getTo());
         委員Entity.setShinsakaiIinJokyo(審査会委員.get審査会委員状況().is有効());

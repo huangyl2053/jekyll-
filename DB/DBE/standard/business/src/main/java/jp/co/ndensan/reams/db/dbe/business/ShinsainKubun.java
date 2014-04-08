@@ -19,12 +19,12 @@ public class ShinsainKubun extends KaigoCodeAssignedItem<ShinsainKubunCode> {
     /**
      * 引数からメンバを受け取り、インスタンスを生成します。
      *
-     * @param 区分コード 区分コード
+     * @param 審査員区分コード 審査員区分コード
      * @param 名称 名称
      * @param 略称 略称
      */
-    public ShinsainKubun(Code 区分コード, RString 名称, RString 略称) {
-        super(new ShinsainKubunCode(区分コード), 区分コード, 名称, 略称);
+    public ShinsainKubun(Code 審査員区分コード, RString 名称, RString 略称) {
+        super(new ShinsainKubunCode(審査員区分コード), 審査員区分コード, 名称, 略称);
     }
 
     /**

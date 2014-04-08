@@ -94,7 +94,7 @@ public class ShinsakaiWariateIinMapperTest {
 
         @Test
         public void 返却された審査会割当委員が持つ_委員情報の委員コードは_iin01になる() {
-            assertThat(result.get委員情報().get委員コード().value(), is(審査会委員コード_iin01.value()));
+            assertThat(result.get審査会委員情報().get審査会委員コード().value(), is(審査会委員コード_iin01.value()));
         }
 
         @Test
@@ -188,27 +188,27 @@ public class ShinsakaiWariateIinMapperTest {
             ShinsakaiIinCode 委員コード = new ShinsakaiIinCode(new RString("iin01"));
             result = ShinsakaiWariateIinMapper.to審査会割当委員List(審査会割当委員EntityList, 委員List, 審査会情報);
 
-            ShinsakaiIin iin1 = result.get審査会割当委員(開催番号, 開催年月日, 委員コード).get委員情報();
+            ShinsakaiIin iin1 = result.get審査会割当委員(開催番号, 開催年月日, 委員コード).get審査会委員情報();
             ShinsakaiIin iin2 = 委員List.get審査会委員(委員コード);
-            assertThat(iin1.get委員コード(), is(iin2.get委員コード()));
+            assertThat(iin1.get審査会委員コード(), is(iin2.get審査会委員コード()));
         }
 
         public void 返却された審査会割当委員Listと_引数から渡された委員Listは_審査会委員コードがiin02の要素をそれぞれ持つ() {
             ShinsakaiIinCode 委員コード = new ShinsakaiIinCode(new RString("iin02"));
             result = ShinsakaiWariateIinMapper.to審査会割当委員List(審査会割当委員EntityList, 委員List, 審査会情報);
 
-            ShinsakaiIin iin1 = result.get審査会割当委員(開催番号, 開催年月日, 委員コード).get委員情報();
+            ShinsakaiIin iin1 = result.get審査会割当委員(開催番号, 開催年月日, 委員コード).get審査会委員情報();
             ShinsakaiIin iin2 = 委員List.get審査会委員(委員コード);
-            assertThat(iin1.get委員コード(), is(iin2.get委員コード()));
+            assertThat(iin1.get審査会委員コード(), is(iin2.get審査会委員コード()));
         }
 
         public void 返却された審査会割当委員Listと_引数から渡された委員Listは_審査会委員コードがiin03の要素をそれぞれ持つ() {
             ShinsakaiIinCode 委員コード = new ShinsakaiIinCode(new RString("iin03"));
             result = ShinsakaiWariateIinMapper.to審査会割当委員List(審査会割当委員EntityList, 委員List, 審査会情報);
 
-            ShinsakaiIin iin1 = result.get審査会割当委員(開催番号, 開催年月日, 委員コード).get委員情報();
+            ShinsakaiIin iin1 = result.get審査会割当委員(開催番号, 開催年月日, 委員コード).get審査会委員情報();
             ShinsakaiIin iin2 = 委員List.get審査会委員(委員コード);
-            assertThat(iin1.get委員コード(), is(iin2.get委員コード()));
+            assertThat(iin1.get審査会委員コード(), is(iin2.get審査会委員コード()));
         }
     }
 

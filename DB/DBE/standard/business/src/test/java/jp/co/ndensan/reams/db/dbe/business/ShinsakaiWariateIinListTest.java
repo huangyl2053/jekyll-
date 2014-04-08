@@ -62,7 +62,7 @@ public class ShinsakaiWariateIinListTest {
     @Test
     public void 審査会開催番号1_審査会開催年月日19990101_審査会委員コードA001を指定したとき_委員コードにA001を持つ審査会割当委員が返る() {
         result = sut.get審査会割当委員(開催番号, 開催年月日, 委員コード);
-        assertThat(result.get委員情報().get委員コード(), is(委員コード));
+        assertThat(result.get審査会委員情報().get審査会委員コード(), is(委員コード));
     }
 
     public static class isEmptyのテスト extends DbeTestBase {
