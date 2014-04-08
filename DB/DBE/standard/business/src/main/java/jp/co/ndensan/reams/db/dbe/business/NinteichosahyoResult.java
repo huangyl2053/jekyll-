@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaRirekiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -20,7 +20,7 @@ public class NinteichosahyoResult {
 
     private final RString 調査項目回答;
     private final ShinseishoKanriNo 申請書管理番号;
-    private final NinteichosaRirekiNo 要介護認定調査履歴番号;
+    private final NinteichosaIraiRirekiNo 要介護認定調査履歴番号;
     private final KoroshoIFKubun 厚労省IF区分;
 
     /**
@@ -32,7 +32,7 @@ public class NinteichosahyoResult {
      * @param 厚労省IF区分 厚労省IF区分
      * @throws NullPointerException いずれかの引数にnullが渡されたとき
      */
-    public NinteichosahyoResult(RString 調査項目回答, ShinseishoKanriNo 申請書管理番号, NinteichosaRirekiNo 要介護認定調査履歴番号,
+    public NinteichosahyoResult(RString 調査項目回答, ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 要介護認定調査履歴番号,
             KoroshoIFKubun 厚労省IF区分) throws NullPointerException {
         requireNonNull(調査項目回答, Messages.E00003.replace("調査項目回答", getClass().getName()).getMessage());
         requireNonNull(申請書管理番号, Messages.E00003.replace("申請書管理番号", getClass().getName()).getMessage());
@@ -68,7 +68,7 @@ public class NinteichosahyoResult {
      *
      * @return 要介護認定調査履歴番号
      */
-    public NinteichosaRirekiNo get要介護認定調査履歴番号() {
+    public NinteichosaIraiRirekiNo get要介護認定調査履歴番号() {
         return 要介護認定調査履歴番号;
     }
 

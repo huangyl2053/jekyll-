@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteichosahyoResult;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaRirekiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5009NinteichosahyoJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -37,7 +37,7 @@ public final class NinteichosahyoResultMapper {
         }
         return new NinteichosahyoResult(create調査項目回答(entity),
                 entity.getShinseishoKanriNo(),
-                new NinteichosaRirekiNo(entity.getNinteichosaRirekiNo()),
+                new NinteichosaIraiRirekiNo(entity.getNinteichosaRirekiNo()),
                 KoroshoIFKubun.toValue(entity.getKoroshoIfShikibetsuCode()));
     }
 

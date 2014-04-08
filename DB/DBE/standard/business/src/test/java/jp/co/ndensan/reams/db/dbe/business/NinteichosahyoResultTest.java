@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaRirekiNo;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
@@ -29,14 +29,14 @@ public class NinteichosahyoResultTest {
 
         private RString 調査項目回答;
         private ShinseishoKanriNo 申請書管理番号;
-        private NinteichosaRirekiNo 要介護認定調査履歴番号;
+        private NinteichosaIraiRirekiNo 要介護認定調査履歴番号;
         private KoroshoIFKubun 厚労省IF区分;
 
         @Before
         public void setUp() {
             調査項目回答 = new RString("0001122341212234333332110001223300012");
             申請書管理番号 = new ShinseishoKanriNo(new RString("A001"));
-            要介護認定調査履歴番号 = new NinteichosaRirekiNo(1);
+            要介護認定調査履歴番号 = new NinteichosaIraiRirekiNo(1);
             厚労省IF区分 = KoroshoIFKubun.V09B;
         }
 
