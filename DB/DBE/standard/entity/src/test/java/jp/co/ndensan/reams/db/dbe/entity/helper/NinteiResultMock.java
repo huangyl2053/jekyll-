@@ -47,7 +47,7 @@ public class NinteiResultMock {
     private static NinteiResult createNinteiResult() {
         return new NinteiResult(
                 createShinseishoKanriNo(),
-                FlexibleDate.MIN,
+                new FlexibleDate("20140101"),
                 createYokaigoJotaiKubun(),
                 createYokaigoJotaizoRei(),
                 createNinteiYukoKikan(),
@@ -63,19 +63,19 @@ public class NinteiResultMock {
     }
 
     private static YokaigoJotaiKubun createYokaigoJotaiKubun() {
-        return new YokaigoJotaiKubun(new Code(new RString("コード")), new RString("名称"), new RString("略称"));
+        return new YokaigoJotaiKubun(new Code(new RString("1111111111")), new RString("名称"), new RString("略称"));
     }
 
     private static YokaigoJotaizoRei createYokaigoJotaizoRei() {
-        return new YokaigoJotaizoRei(new Code(new RString("コード")), new RString("名称"), new RString("略称"));
+        return new YokaigoJotaizoRei(new Code(new RString("2222222222")), new RString("名称"), new RString("略称"));
     }
 
     private static NinteiYukoKikan createNinteiYukoKikan() {
-        return new NinteiYukoKikan(FlexibleDate.MIN, new NinteiYukoKikanTsukisu(1), FlexibleDate.MAX);
+        return new NinteiYukoKikan(new FlexibleDate("20140202"), new NinteiYukoKikanTsukisu(1), new FlexibleDate("20140303"));
     }
 
     private static TokuteiShippeiKubun createTokuteiShippeiKubun() {
-        return new TokuteiShippeiKubun(new Code(new RString("コード")), new RString("名称"), new RString("略称"));
+        return new TokuteiShippeiKubun(new Code(new RString("3333333333")), new RString("名称"), new RString("略称"));
     }
 
     private static NinteiShinsakaiIken createNinteiShinsakaiIken() {
@@ -90,9 +90,9 @@ public class NinteiResultMock {
         return new NinteiRiyu(
                 new RString("一次判定結果変更理由"),
                 NinteiResultIdoJiyu.職権追加,
-                FlexibleDate.MIN,
+                new FlexibleDate("20140404"),
                 new RString("認定取消理由"),
-                FlexibleDate.MAX,
+                new FlexibleDate("20140505"),
                 new RString("認定理由"));
     }
 }
