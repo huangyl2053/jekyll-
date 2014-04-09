@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum HihokenshashoSaikofuJiyu {
 
     /**
-     * 被保険者再交付事由がないこと表す。<br />
+     * 被保険者再交付事由がないことを表す。<br />
      * コード : 00
      */
     なし("00"),
