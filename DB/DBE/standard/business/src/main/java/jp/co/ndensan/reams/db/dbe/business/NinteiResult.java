@@ -20,9 +20,8 @@ public class NinteiResult {
 
     private final ShinseishoKanriNo 申請書管理番号;
     private final FlexibleDate 要介護度認定年月日;
-    private final YokaigoJotaiKubun 要介護状態区分;
+    private final YokaigoJotai 要介護状態;
     private final YokaigoJotaizoRei 要介護状態像例;
-    private final NinteiYukoKikan 認定有効期間;
     private final KaigoServiceType 介護サービス種類;
     private final ShisetsuNyushoKubun 施設入所区分;
     private final TokuteiShippeiKubun 特定疾病区分;
@@ -34,9 +33,8 @@ public class NinteiResult {
      *
      * @param 申請書管理番号 申請書管理番号
      * @param 要介護度認定年月日 要介護度認定年月日
-     * @param 要介護状態区分 要介護状態区分
+     * @param 要介護状態 要介護状態
      * @param 要介護状態像例 要介護状態像例
-     * @param 認定有効期間 認定有効期間
      * @param 介護サービス種類 介護サービス種類
      * @param 施設入所区分 施設入所区分
      * @param 特定疾病区分 特定疾病区分
@@ -46,9 +44,8 @@ public class NinteiResult {
     public NinteiResult(
             ShinseishoKanriNo 申請書管理番号,
             FlexibleDate 要介護度認定年月日,
-            YokaigoJotaiKubun 要介護状態区分,
+            YokaigoJotai 要介護状態,
             YokaigoJotaizoRei 要介護状態像例,
-            NinteiYukoKikan 認定有効期間,
             KaigoServiceType 介護サービス種類,
             ShisetsuNyushoKubun 施設入所区分,
             TokuteiShippeiKubun 特定疾病区分,
@@ -56,9 +53,8 @@ public class NinteiResult {
             NinteiRiyu 認定理由) {
         this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00001.replace("申請書管理番号").getMessage());
         this.要介護度認定年月日 = requireNonNull(要介護度認定年月日, Messages.E00001.replace("要介護度認定年月日").getMessage());
-        this.要介護状態区分 = requireNonNull(要介護状態区分, Messages.E00001.replace("要介護状態区分").getMessage());
+        this.要介護状態 = requireNonNull(要介護状態, Messages.E00001.replace("要介護状態").getMessage());
         this.要介護状態像例 = 要介護状態像例;
-        this.認定有効期間 = requireNonNull(認定有効期間, Messages.E00001.replace("認定有効期間").getMessage());
         this.介護サービス種類 = 介護サービス種類;
         this.施設入所区分 = 施設入所区分;
         this.特定疾病区分 = 特定疾病区分;
@@ -85,12 +81,12 @@ public class NinteiResult {
     }
 
     /**
-     * 要介護状態区分を返します。
+     * 要介護状態を返します。
      *
-     * @return 要介護状態区分
+     * @return 要介護状態
      */
-    public YokaigoJotaiKubun get要介護状態区分() {
-        return 要介護状態区分;
+    public YokaigoJotai get要介護状態() {
+        return 要介護状態;
     }
 
     /**
@@ -100,15 +96,6 @@ public class NinteiResult {
      */
     public YokaigoJotaizoRei get要介護状態像例() {
         return 要介護状態像例;
-    }
-
-    /**
-     * 認定有効期間を返します。
-     *
-     * @return 認定有効期間
-     */
-    public NinteiYukoKikan get認定有効期間() {
-        return 認定有効期間;
     }
 
     /**

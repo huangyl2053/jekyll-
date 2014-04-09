@@ -79,7 +79,7 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
 
         @Test
         public void 要介護状態区分の設定がある時_toNinteiResult_get要介護状態区分は_設定値を返す() {
-            assertThat(result.get要介護状態区分().getYokaigoJotaiKubunCode(), is(要介護状態区分コード));
+            assertThat(result.get要介護状態().get要介護状態区分().getYokaigoJotaiKubunCode(), is(要介護状態区分コード));
         }
 
         @Test
@@ -89,17 +89,17 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
 
         @Test
         public void 有効期間月数の設定がある時_toNinteiResult_get有効期間月数は_設定値を返す() {
-            assertThat(result.get認定有効期間().get有効期間月数(), is(有効期間月数));
+            assertThat(result.get要介護状態().get認定有効期間().get有効期間月数(), is(有効期間月数));
         }
 
         @Test
         public void 有効開始年月日の設定がある時_toNinteiResult_get有効開始年月日は_設定値を返す() {
-            assertThat(result.get認定有効期間().get有効期間().getFrom(), is(有効開始年月日));
+            assertThat(result.get要介護状態().get認定有効期間().get有効期間().getFrom(), is(有効開始年月日));
         }
 
         @Test
         public void 有効終了年月日の設定がある時_toNinteiResult_get有効終了年月日は_設定値を返す() {
-            assertThat(result.get認定有効期間().get有効期間().getTo(), is(有効終了年月日));
+            assertThat(result.get要介護状態().get認定有効期間().get有効期間().getTo(), is(有効終了年月日));
         }
 
         @Test

@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.business.NinteiRiyu;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinsakaiIken;
 import jp.co.ndensan.reams.db.dbe.business.NinteiYukoKikan;
 import jp.co.ndensan.reams.db.dbe.business.TokuteiShippeiKubun;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoJotai;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotaizoRei;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
@@ -49,9 +50,8 @@ public class NinteiResultMock {
         return new NinteiResult(
                 createShinseishoKanriNo(),
                 new FlexibleDate("20140101"),
-                createYokaigoJotaiKubun(),
+                createYokaigoJotai(),
                 createYokaigoJotaizoRei(),
-                createNinteiYukoKikan(),
                 KaigoServiceType.訪問介護,
                 ShisetsuNyushoKubun.入所している,
                 createTokuteiShippeiKubun(),
@@ -61,6 +61,10 @@ public class NinteiResultMock {
 
     private static ShinseishoKanriNo createShinseishoKanriNo() {
         return new ShinseishoKanriNo(new RString("1234567890"));
+    }
+
+    private static YokaigoJotai createYokaigoJotai() {
+        return new YokaigoJotai(createYokaigoJotaiKubun(), createNinteiYukoKikan());
     }
 
     private static YokaigoJotaiKubun createYokaigoJotaiKubun() {
