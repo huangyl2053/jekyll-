@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbe.business.ShinsakaiWariateIinList;
 import jp.co.ndensan.reams.db.dbe.business.helper.ShinsakaiTestBusinessCreator;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiDate;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiTestEntityCreator;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.ShinsakaiWariateIinJohoDac;
@@ -48,14 +47,14 @@ public class ShinsakaiWariateIinManagerTest {
 
         @Test
         public void 開催年月日を指定して_その日に審査会に参加する委員を2件取得できる() {
-            ShinsakaiWariateIinList result = sut.get審査会参加割当委員List(new ShinsakaiKaisaiDate(new FlexibleDate("19990101")));
+            ShinsakaiWariateIinList result = sut.get審査会参加割当委員List(new FlexibleDate("19990101"));
             assertThat(result.size(), is(2));
         }
 
         private ShinsakaiWariateIinJohoDac create割当委員情報DacMock(int 件数) {
             ShinsakaiWariateIinJohoDac 割当委員Dac = mock(ShinsakaiWariateIinJohoDac.class);
             List<DbT5106ShinsakaiWariateIinJohoEntity> 審査会情報 = create審査会割当委員(件数);
-            when(割当委員Dac.select(any(ShinsakaiKaisaiDate.class))).thenReturn(審査会情報);
+            when(割当委員Dac.select(any(FlexibleDate.class))).thenReturn(審査会情報);
             return 割当委員Dac;
         }
     }
@@ -138,7 +137,7 @@ public class ShinsakaiWariateIinManagerTest {
     private static ShinsakaiDetailFinder create審査会情報Finder() {
         ShinsakaiDetailFinder 審査会情報Finder = mock(ShinsakaiDetailFinder.class);
         ShinsakaiDetail 審査会情報 = ShinsakaiTestBusinessCreator.create審査会情報(1, "19990101");
-        when(審査会情報Finder.get審査会情報(any(ShinsakaiKaisaiNo.class), any(ShinsakaiKaisaiDate.class))).thenReturn(審査会情報);
+        when(審査会情報Finder.get審査会情報(any(ShinsakaiKaisaiNo.class), any(FlexibleDate.class))).thenReturn(審査会情報);
         return 審査会情報Finder;
     }
 

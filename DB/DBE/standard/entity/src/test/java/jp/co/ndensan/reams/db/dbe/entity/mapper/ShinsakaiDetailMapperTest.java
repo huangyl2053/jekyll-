@@ -13,9 +13,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshi
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKyukaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiDate;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaishiTime;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5101ShinsakaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShinsakaiTestEntityCreator;
@@ -38,9 +36,9 @@ import org.junit.runner.RunWith;
 public class ShinsakaiDetailMapperTest {
 
     private static ShinsakaiKaisaiNo 開催番号_1 = new ShinsakaiKaisaiNo(1);
-    private static ShinsakaiKaisaiDate 開催年月日_19990101 = new ShinsakaiKaisaiDate(new FlexibleDate("19990101"));
+    private static FlexibleDate 開催年月日_19990101 = new FlexibleDate("19990101");
     private static GogitaiNo 合議体番号_22 = new GogitaiNo(22);
-    private static ShinsakaiKaishiTime 開始時間_0830 = new ShinsakaiKaishiTime(new TimeString("0830"));
+    private static TimeString 開始時間_0830 = new TimeString("0830");
     private static TimeString 終了時間_1730 = new TimeString("1730");
     private static ShinsakaiKaisaiBashoCode 開催場所番号_A001 = new ShinsakaiKaisaiBashoCode(new RString("A001"));
     private static int 審査会予定定員_6 = 6;
@@ -96,7 +94,7 @@ public class ShinsakaiDetailMapperTest {
 
         @Test
         public void to審査会情報で返された審査会情報が持つ_審査会開催年月日は_19990101になる() {
-            assertThat(result.get審査会開催年月日().value(), is(開催年月日_19990101.value()));
+            assertThat(result.get審査会開催年月日(), is(開催年月日_19990101));
         }
 
         @Test
@@ -172,11 +170,13 @@ public class ShinsakaiDetailMapperTest {
 
         @Before
         public void setUp() {
-            審査会情報 = new ShinsakaiDetail(開催番号_1, 開催年月日_19990101, 開始時間_0830, 終了時間_1730,
-                    ShinsakaiTestBusinessCreator.create合議体情報(合議体番号_22.value()),
-                    ShinsakaiTestBusinessCreator.create審査会開催場所(開催場所番号_A001.value().toString()),
-                    審査会予定定員_6, 審査会最大定員_7, 審査会自動割当定員_8, 審査会委員定員_9,
-                    精神科医存在区分_存在, 合議体ダミー区分_正規, 審査会資料作成年月日_20090101, 休会区分_開催, 審査会割当済み人数_5);
+            審査会情報 = new ShinsakaiDetail.Builder(開催番号_1, 開催年月日_19990101, 開始時間_0830, 終了時間_1730,
+                    ShinsakaiTestBusinessCreator.create合議体情報(合議体番号_22.value()))
+                    .set審査会開催場所(ShinsakaiTestBusinessCreator.create審査会開催場所(開催場所番号_A001.value().toString()))
+                    .set審査会予定定員(審査会予定定員_6).set審査会最大定員(審査会最大定員_7).set審査会自動割当定員(審査会自動割当定員_8)
+                    .set審査会委員定員(審査会委員定員_9).set精神科医存在区分(精神科医存在区分_存在)
+                    .set合議体ダミー区分(合議体ダミー区分_正規).set審査会資料作成年月日(審査会資料作成年月日_20090101)
+                    .set審査会休会区分(休会区分_開催).set審査会割当済み人数(審査会割当済み人数_5).build();
             result = ShinsakaiDetailMapper.to審査会情報Entity(審査会情報);
         }
 
@@ -192,12 +192,12 @@ public class ShinsakaiDetailMapperTest {
 
         @Test
         public void 戻り値の審査会情報Entityが持つ_審査会開始年月日は_19990101になる() {
-            assertThat(result.getShinsakaiKaisaiYMD(), is(開催年月日_19990101.value()));
+            assertThat(result.getShinsakaiKaisaiYMD(), is(開催年月日_19990101));
         }
 
         @Test
         public void 戻り値の審査会情報Entityが持つ_審査会開始時間は_0830になる() {
-            assertThat(result.getShinsakaiKaishiTime(), is(開始時間_0830.toRString()));
+            assertThat(result.getShinsakaiKaishiTime(), is(開始時間_0830.value()));
         }
 
         @Test

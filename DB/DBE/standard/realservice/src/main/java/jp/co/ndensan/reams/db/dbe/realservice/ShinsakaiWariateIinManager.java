@@ -12,10 +12,10 @@ import jp.co.ndensan.reams.db.dbe.business.ShinsakaiWariateIin;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiWariateIinList;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiDate;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.ShinsakaiWariateIinMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.ShinsakaiWariateIinJohoDac;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -58,7 +58,7 @@ public class ShinsakaiWariateIinManager {
      * @param 開催年月日 開催年月日
      * @return 審査会割当委員List
      */
-    public ShinsakaiWariateIinList get審査会参加割当委員List(ShinsakaiKaisaiDate 開催年月日) {
+    public ShinsakaiWariateIinList get審査会参加割当委員List(FlexibleDate 開催年月日) {
         List<DbT5106ShinsakaiWariateIinJohoEntity> 審査会割当委員EntityList = 審査会割当委員情報Dac.select(開催年月日);
         List<ShinsakaiWariateIin> 審査会割当委員List = create審査会割当委員List(審査会割当委員EntityList);
         return new ShinsakaiWariateIinList(審査会割当委員List);
@@ -89,7 +89,7 @@ public class ShinsakaiWariateIinManager {
 
     private ShinsakaiDetail get審査会情報(DbT5106ShinsakaiWariateIinJohoEntity 割当委員Entity) {
         ShinsakaiKaisaiNo 開催番号 = new ShinsakaiKaisaiNo(割当委員Entity.getShinsakaiKaisaiNo());
-        ShinsakaiKaisaiDate 開催年月日 = new ShinsakaiKaisaiDate(割当委員Entity.getShinsakaiKaisaiYMD());
+        FlexibleDate 開催年月日 = 割当委員Entity.getShinsakaiKaisaiYMD();
         return 審査会情報Finder.get審査会情報(開催番号, 開催年月日);
     }
 

@@ -9,8 +9,6 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKyukaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiDate;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaishiTime;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
@@ -22,11 +20,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8178 城間篤人
  */
-public class ShinsakaiDetail {
+public final class ShinsakaiDetail {
 
     private final ShinsakaiKaisaiNo 審査会開催番号;
-    private final ShinsakaiKaisaiDate 審査会開催年月日;
-    private final ShinsakaiKaishiTime 審査会開始時間;
+    private final FlexibleDate 審査会開催年月日;
+    private final TimeString 審査会開始時間;
     private final TimeString 審査会終了時間;
     private final GogitaiDetail 合議体情報;
     private final ShinsakaiKaisaiBasho 審査会開催場所;
@@ -41,69 +39,26 @@ public class ShinsakaiDetail {
     private final int 審査会割当済み人数;
 
     /**
-     * 引数から審査会の詳細な情報を受け取り、インスタンスを生成します。
+     * Builderで設定した情報を受け取るコンストラクタです。
      *
-     * @param 審査会開催番号 審査会開催番号
-     * @param 審査会開催年月日 審査会開催年月日
-     * @param 審査会開始時間 審査会開始時間
-     * @param 審査会終了時間 審査会終了時間
-     * @param 合議体情報 合議体情報
-     * @param 審査会開催場所 審査会開催場所
-     * @param 審査会予定定員 審査会予定定員
-     * @param 審査会最大定員 審査会最大定員
-     * @param 審査会自動割当定員 審査会自動割当定員
-     * @param 審査会委員定員 審査会委員定員
-     * @param 合議体精神科医師存在区分 合議体精神科医師存在区分
-     * @param 合議体ダミー区分 合議体ダミー区分
-     * @param 審査会資料作成年月日 審査会資料作成年月日
-     * @param 審査会休会区分 審査会休会区分
-     * @param 審査会割当済み人数 審査会割当済み人数
-     * @throws NullPointerException
-     * 審査会開催番号、審査会開催年月日、審査会開始時間、審査会終了時間、合議体情報のいずれかにnullが渡されたとき
-     * @throws IllegalArgumentException
-     * 審査会予定定員、審査会最大定員、審査会自動割当定員、審査会委員定員、審査会割当済み人数に0より小さい数字が渡されたとき
+     * @param builder 審査会情報Builder
      */
-    public ShinsakaiDetail(ShinsakaiKaisaiNo 審査会開催番号, ShinsakaiKaisaiDate 審査会開催年月日,
-            ShinsakaiKaishiTime 審査会開始時間, TimeString 審査会終了時間, GogitaiDetail 合議体情報, ShinsakaiKaisaiBasho 審査会開催場所,
-            int 審査会予定定員, int 審査会最大定員, int 審査会自動割当定員, int 審査会委員定員,
-            GogitaiSeishinkaIshiSonzaiKubun 合議体精神科医師存在区分, GogitaiDummyKubun 合議体ダミー区分, FlexibleDate 審査会資料作成年月日,
-            ShinsakaiKyukaiKubun 審査会休会区分, int 審査会割当済み人数) throws NullPointerException, IllegalArgumentException {
-        requireNonNull(審査会開催番号, Messages.E00003.replace("審査会開催番号", getClass().getName()).getMessage());
-        requireNonNull(審査会開催年月日, Messages.E00003.replace("審査会開催年月日", getClass().getName()).getMessage());
-        requireNonNull(審査会開始時間, Messages.E00003.replace("審査会開始時間", getClass().getName()).getMessage());
-        requireNonNull(審査会終了時間, Messages.E00003.replace("審査会終了時間", getClass().getName()).getMessage());
-        requireNonNull(合議体情報, Messages.E00003.replace("合議体情報", getClass().getName()).getMessage());
-        requireNonNull(審査会開催場所, Messages.E00003.replace("審査会開催場所", getClass().getName()).getMessage());
-
-        RString エラー表示 = new RString("0以上");
-        check0以上(審査会予定定員, Messages.E00013.replace("審査会予定定員", エラー表示.toString()).getMessage());
-        check0以上(審査会最大定員, Messages.E00013.replace("審査会最大定員", エラー表示.toString()).getMessage());
-        check0以上(審査会自動割当定員, Messages.E00013.replace("審査会自動割当定員", エラー表示.toString()).getMessage());
-        check0以上(審査会委員定員, Messages.E00013.replace("審査会委員定員", エラー表示.toString()).getMessage());
-        check0以上(審査会割当済み人数, Messages.E00013.replace("審査会割当済み人数", エラー表示.toString()).getMessage());
-
-        this.審査会開催番号 = 審査会開催番号;
-        this.審査会開催年月日 = 審査会開催年月日;
-        this.審査会開始時間 = 審査会開始時間;
-        this.審査会終了時間 = 審査会終了時間;
-        this.合議体情報 = 合議体情報;
-        this.審査会開催場所 = 審査会開催場所;
-        this.審査会予定定員 = 審査会予定定員;
-        this.審査会最大定員 = 審査会最大定員;
-        this.審査会自動割当定員 = 審査会自動割当定員;
-        this.審査会委員定員 = 審査会委員定員;
-        this.合議体精神科医師存在区分 = 合議体精神科医師存在区分;
-        this.合議体ダミー区分 = 合議体ダミー区分;
-        this.審査会資料作成年月日 = 審査会資料作成年月日;
-        this.審査会休会区分 = 審査会休会区分;
-        this.審査会割当済み人数 = 審査会割当済み人数;
-    }
-
-    private int check0以上(int check対象, String エラー表示) {
-        if (check対象 < 0) {
-            throw new IllegalArgumentException(エラー表示);
-        }
-        return check対象;
+    private ShinsakaiDetail(Builder builder) {
+        this.審査会開催番号 = builder.shinsakaiKaisaiNo;
+        this.審査会開催年月日 = builder.kaisaiDate;
+        this.審査会開始時間 = builder.kaishiTime;
+        this.審査会終了時間 = builder.shuryoTime;
+        this.合議体情報 = builder.gogitaiDetail;
+        this.審査会開催場所 = builder.kaisaiBasho;
+        this.審査会予定定員 = builder.plannedTeiin;
+        this.審査会最大定員 = builder.maxTeiin;
+        this.審査会自動割当定員 = builder.autoWariateTeiin;
+        this.審査会委員定員 = builder.memberTeiin;
+        this.合議体精神科医師存在区分 = builder.existSeishinkaIshi;
+        this.合議体ダミー区分 = builder.gogitaiDummyKubun;
+        this.審査会資料作成年月日 = builder.documentationDate;
+        this.審査会休会区分 = builder.kyukaiKubun;
+        this.審査会割当済み人数 = builder.wariatesumi;
     }
 
     /**
@@ -120,7 +75,7 @@ public class ShinsakaiDetail {
      *
      * @return 審査会開催年月日
      */
-    public ShinsakaiKaisaiDate get審査会開催年月日() {
+    public FlexibleDate get審査会開催年月日() {
         return 審査会開催年月日;
     }
 
@@ -129,7 +84,7 @@ public class ShinsakaiDetail {
      *
      * @return 審査会開始時間
      */
-    public ShinsakaiKaishiTime get審査会開始時間() {
+    public TimeString get審査会開始時間() {
         return 審査会開始時間;
     }
 
@@ -343,5 +298,209 @@ public class ShinsakaiDetail {
             return false;
         }
         return true;
+    }
+
+    /**
+     * 審査会情報を作成するための内部クラスです。
+     */
+    public static class Builder {
+
+        private final ShinsakaiKaisaiNo shinsakaiKaisaiNo;
+        private final FlexibleDate kaisaiDate;
+        private final TimeString kaishiTime;
+        private final TimeString shuryoTime;
+        private final GogitaiDetail gogitaiDetail;
+        private ShinsakaiKaisaiBasho kaisaiBasho;
+        private int plannedTeiin;
+        private int maxTeiin;
+        private int autoWariateTeiin;
+        private int memberTeiin;
+        private GogitaiSeishinkaIshiSonzaiKubun existSeishinkaIshi;
+        private GogitaiDummyKubun gogitaiDummyKubun;
+        private FlexibleDate documentationDate;
+        private ShinsakaiKyukaiKubun kyukaiKubun;
+        private int wariatesumi;
+
+        /**
+         * 必須項目であり、かつ初期値が存在しない項目について値を指定し、審査会のBuilderインスタンスを生成して返します。<br/>
+         * その他の項目については初期値が設定されます。合議体に存在する項目については、合議体の情報を元に初期値を設定します。<br/>
+         * 必須項目にnullが渡された場合、NullPointerExceptionが発生します。
+         *
+         * @param 審査会開催番号 審査会開催番号
+         * @param 審査会開催年月日 審査会開催年月日
+         * @param 審査会開始時間 審査会開始時間
+         * @param 審査会終了時間 審査会終了時間
+         * @param 合議体情報 合議体情報
+         * @throws NullPointerException 引数のいずれかにnullが渡されたとき
+         */
+        public Builder(ShinsakaiKaisaiNo 審査会開催番号, FlexibleDate 審査会開催年月日, TimeString 審査会開始時間,
+                TimeString 審査会終了時間, GogitaiDetail 合議体情報) throws NullPointerException {
+
+            RString null例外表示 = new RString("審査会情報");
+            requireNonNull(審査会開催番号, Messages.E00003.replace("審査会開催番号", null例外表示.toString()).getMessage());
+            requireNonNull(審査会開催年月日, Messages.E00003.replace("審査会開催年月日", null例外表示.toString()).getMessage());
+            requireNonNull(審査会開始時間, Messages.E00003.replace("審査会開始時間", null例外表示.toString()).getMessage());
+            requireNonNull(審査会終了時間, Messages.E00003.replace("審査会終了時間", null例外表示.toString()).getMessage());
+            requireNonNull(合議体情報, Messages.E00003.replace("合議体情報", null例外表示.toString()).getMessage());
+
+            this.shinsakaiKaisaiNo = 審査会開催番号;
+            this.kaisaiDate = 審査会開催年月日;
+            this.kaishiTime = 審査会開始時間;
+            this.shuryoTime = 審査会終了時間;
+            this.gogitaiDetail = 合議体情報;
+
+            this.kaisaiBasho = 合議体情報.get審査会開催場所();
+            this.plannedTeiin = 合議体情報.get審査会予定定員();
+            this.maxTeiin = 合議体情報.get審査会予定定員();
+            this.autoWariateTeiin = 合議体情報.get審査会自動割当定員();
+            this.memberTeiin = 合議体情報.get審査会委員定員();
+            this.existSeishinkaIshi = 合議体情報.get精神科医師存在();
+            this.gogitaiDummyKubun = 合議体情報.getダミー区分();
+
+            this.documentationDate = FlexibleDate.MIN;
+            this.kyukaiKubun = ShinsakaiKyukaiKubun.開催;
+            this.wariatesumi = 0;
+        }
+
+        /**
+         * Builderで設定した情報を元に、審査会情報を生成して返します。<br/>
+         * 生成と同時に、定員などの数値が正しく設定されているかのチェックも行います。
+         *
+         * @return 審査会情報
+         * @throws NullPointerException 審査会開催場所にnullが設定された場合
+         * @throws IllegalArgumentException
+         * 審査会予定定員、審査会最大定員、審査会自動割当定員、審査会委員定員、審査会割当済み人数に0より小さい値が設定された場合
+         */
+        public ShinsakaiDetail build() throws NullPointerException, IllegalArgumentException {
+
+            RString null例外表示 = new RString("審査会情報");
+            requireNonNull(kaisaiBasho, Messages.E00003.replace("審査会開催場所", null例外表示.toString()).getMessage());
+
+            RString 引数エラー表示 = new RString("0以上");
+            check0以上(plannedTeiin, Messages.E00013.replace("審査会予定定員", 引数エラー表示.toString()).getMessage());
+            check0以上(maxTeiin, Messages.E00013.replace("審査会最大定員", 引数エラー表示.toString()).getMessage());
+            check0以上(autoWariateTeiin, Messages.E00013.replace("審査会自動割当定員", 引数エラー表示.toString()).getMessage());
+            check0以上(memberTeiin, Messages.E00013.replace("審査会委員定員", 引数エラー表示.toString()).getMessage());
+            check0以上(wariatesumi, Messages.E00013.replace("審査会割当済み人数", 引数エラー表示.toString()).getMessage());
+
+            return new ShinsakaiDetail(this);
+        }
+
+        private int check0以上(int check対象, String エラー表示) {
+            if (check対象 < 0) {
+                throw new IllegalArgumentException(エラー表示);
+            }
+            return check対象;
+        }
+
+        /**
+         * 審査会開催場所の情報を設定して、自身を返します。
+         *
+         * @param 審査会開催場所 審査会開催場所
+         * @return 審査会情報Builder
+         */
+        public Builder set審査会開催場所(ShinsakaiKaisaiBasho 審査会開催場所) {
+            kaisaiBasho = 審査会開催場所;
+            return this;
+        }
+
+        /**
+         * 審査会予定定員を設定して、自身を返します。
+         *
+         * @param 審査会予定定員 審査会予定定員
+         * @return 審査会情報Builder
+         */
+        public Builder set審査会予定定員(int 審査会予定定員) {
+            plannedTeiin = 審査会予定定員;
+            return this;
+        }
+
+        /**
+         * 審査会最大定員を設定して、自身を返します。
+         *
+         * @param 審査会最大定員 審査会最大定員
+         * @return 審査会情報Builder
+         */
+        public Builder set審査会最大定員(int 審査会最大定員) {
+            maxTeiin = 審査会最大定員;
+            return this;
+        }
+
+        /**
+         * 審査会自動割当定員の情報を設定して、自身を返します。
+         *
+         * @param 審査会自動割当定員 審査会自動割当定員
+         * @return 審査会情報Builder
+         */
+        public Builder set審査会自動割当定員(int 審査会自動割当定員) {
+            autoWariateTeiin = 審査会自動割当定員;
+            return this;
+        }
+
+        /**
+         * 審査会委員定員を設定して、自身を返します。
+         *
+         * @param 審査会委員定員 審査会委員定員
+         * @return 審査会情報Builder
+         */
+        public Builder set審査会委員定員(int 審査会委員定員) {
+            memberTeiin = 審査会委員定員;
+            return this;
+        }
+
+        /**
+         * 合議体精神科医存在区分を設定して、自身を返します。
+         *
+         * @param 合議体精神科医存在区分 合議体精神科医存在区分
+         * @return 審査会情報Builder
+         */
+        public Builder set精神科医存在区分(GogitaiSeishinkaIshiSonzaiKubun 合議体精神科医存在区分) {
+            existSeishinkaIshi = 合議体精神科医存在区分;
+            return this;
+        }
+
+        /**
+         * 合議体ダミー区分を設定して、自身を返します。
+         *
+         * @param 合議体ダミー区分 合議体ダミー区分
+         * @return 審査会情報Builder
+         */
+        public Builder set合議体ダミー区分(GogitaiDummyKubun 合議体ダミー区分) {
+            gogitaiDummyKubun = 合議体ダミー区分;
+            return this;
+        }
+
+        /**
+         * 審査会資料作成年月日を設定して、自身を返します。
+         *
+         * @param 審査会資料作成年月日 審査会資料作成年月日
+         * @return 審査会情報Builder
+         */
+        public Builder set審査会資料作成年月日(FlexibleDate 審査会資料作成年月日) {
+            documentationDate = 審査会資料作成年月日;
+            return this;
+        }
+
+        /**
+         * 審査会休会区分を設定して、自身を返します。
+         *
+         * @param 審査会休会区分 審査会休会区分
+         * @return 審査会情報Builder
+         */
+        public Builder set審査会休会区分(ShinsakaiKyukaiKubun 審査会休会区分) {
+            kyukaiKubun = 審査会休会区分;
+            return this;
+        }
+
+        /**
+         * 審査会割当済み人数を設定して、自身を返します。
+         *
+         * @param 審査会割当済み人数 審査会割当済み人数
+         * @return 審査会情報Builder
+         */
+        public Builder set審査会割当済み人数(int 審査会割当済み人数) {
+            wariatesumi = 審査会割当済み人数;
+            return this;
+        }
     }
 }

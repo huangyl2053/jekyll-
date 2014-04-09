@@ -31,8 +31,6 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiChiku;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiDate;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaishiTime;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
@@ -89,11 +87,12 @@ public final class ShinsakaiTestBusinessCreator {
      * @return 審査会情報
      */
     public static ShinsakaiDetail create審査会情報(int 審査会開催番号, String 審査会開催年月日) {
-        return new ShinsakaiDetail(new ShinsakaiKaisaiNo(審査会開催番号),
-                new ShinsakaiKaisaiDate(new FlexibleDate(審査会開催年月日)), new ShinsakaiKaishiTime(new TimeString("0000")),
-                new TimeString("2359"), create合議体情報(1), create審査会開催場所("A001"), 6, 7, 8, 9,
-                GogitaiSeishinkaIshiSonzaiKubun.存在, GogitaiDummyKubun.ダミー, new FlexibleDate("19800101"),
-                ShinsakaiKyukaiKubun.休会, 10);
+        return new ShinsakaiDetail.Builder(new ShinsakaiKaisaiNo(審査会開催番号), new FlexibleDate(審査会開催年月日),
+                new TimeString("0000"), new TimeString("2359"), create合議体情報(1))
+                .set審査会開催場所(create審査会開催場所("A001")).set審査会予定定員(6).set審査会最大定員(7).set審査会自動割当定員(8)
+                .set審査会委員定員(9).set精神科医存在区分(GogitaiSeishinkaIshiSonzaiKubun.存在).set合議体ダミー区分(GogitaiDummyKubun.ダミー)
+                .set審査会資料作成年月日(new FlexibleDate("19800101")).set審査会休会区分(ShinsakaiKyukaiKubun.休会).set審査会割当済み人数(10).build();
+
     }
 
     /**

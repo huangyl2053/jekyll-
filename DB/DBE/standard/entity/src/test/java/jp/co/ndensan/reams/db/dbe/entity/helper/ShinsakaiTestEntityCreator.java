@@ -11,9 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshi
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKyukaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiDate;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaishiTime;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5101ShinsakaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJohoEntity;
@@ -116,14 +114,14 @@ public final class ShinsakaiTestEntityCreator {
      * @param 審査会割当済み人数 審査会割当済み人数
      * @return 審査会情報Entity
      */
-    public static DbT5101ShinsakaiJohoEntity create審査会情報Entity(ShinsakaiKaisaiNo 開催番号, ShinsakaiKaisaiDate 開催年月日,
-            GogitaiNo 合議体番号, ShinsakaiKaishiTime 開始時間, TimeString 終了時間, ShinsakaiKaisaiBashoCode 開催場所番号,
+    public static DbT5101ShinsakaiJohoEntity create審査会情報Entity(ShinsakaiKaisaiNo 開催番号, FlexibleDate 開催年月日,
+            GogitaiNo 合議体番号, TimeString 開始時間, TimeString 終了時間, ShinsakaiKaisaiBashoCode 開催場所番号,
             int 審査会予定定員, int 審査会最大定員, int 審査会自動割当定員, int 審査会委員定員, GogitaiSeishinkaIshiSonzaiKubun 精神科医存在区分,
             GogitaiDummyKubun 合議体ダミー区分, ShinsakaiKyukaiKubun 休会区分, FlexibleDate 審査会資料作成年月日, int 審査会割当済み人数) {
         DbT5101ShinsakaiJohoEntity entity = new DbT5101ShinsakaiJohoEntity();
         entity.setShinsakaiKaisaiNo(開催番号.value());
-        entity.setShinsakaiKaisaiYMD(開催年月日.value());
-        entity.setShinsakaiKaishiTime(開始時間.toRString());
+        entity.setShinsakaiKaisaiYMD(開催年月日);
+        entity.setShinsakaiKaishiTime(開始時間.value());
         entity.setShinsakaiShuryoTime(終了時間.value());
         entity.setShinsakaiKaisaiBashoCode(開催場所番号.value());
         entity.setGogitaiNo(合議体番号.value());

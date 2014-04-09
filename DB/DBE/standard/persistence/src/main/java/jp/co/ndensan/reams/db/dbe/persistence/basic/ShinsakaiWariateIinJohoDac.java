@@ -6,13 +6,13 @@ package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiDate;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJoho;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJoho.*;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
 import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -38,10 +38,10 @@ public class ShinsakaiWariateIinJohoDac implements IReplaceable<DbT5106Shinsakai
      * @return 審査会割当委員EntityList
      */
     @Transaction
-    public List<DbT5106ShinsakaiWariateIinJohoEntity> select(ShinsakaiKaisaiNo 審査会開催番号, ShinsakaiKaisaiDate 審査会開催年月日) {
+    public List<DbT5106ShinsakaiWariateIinJohoEntity> select(ShinsakaiKaisaiNo 審査会開催番号, FlexibleDate 審査会開催年月日) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5106ShinsakaiWariateIinJoho.class)
-                .where(and(eq(shinsakaiKaisaiNo, 審査会開催番号.value()), eq(shinsakaiKaisaiYMD, 審査会開催年月日.value())))
+                .where(and(eq(shinsakaiKaisaiNo, 審査会開催番号.value()), eq(shinsakaiKaisaiYMD, 審査会開催年月日)))
                 .order(by(shinsakaiIinCode, ASC))
                 .toList(DbT5106ShinsakaiWariateIinJohoEntity.class);
     }
@@ -53,10 +53,10 @@ public class ShinsakaiWariateIinJohoDac implements IReplaceable<DbT5106Shinsakai
      * @return 審査会割当委員EntityList
      */
     @Transaction
-    public List<DbT5106ShinsakaiWariateIinJohoEntity> select(ShinsakaiKaisaiDate 審査会開催年月日) {
+    public List<DbT5106ShinsakaiWariateIinJohoEntity> select(FlexibleDate 審査会開催年月日) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5106ShinsakaiWariateIinJoho.class)
-                .where(eq(shinsakaiKaisaiYMD, 審査会開催年月日.value()))
+                .where(eq(shinsakaiKaisaiYMD, 審査会開催年月日))
                 .toList(DbT5106ShinsakaiWariateIinJohoEntity.class);
     }
 

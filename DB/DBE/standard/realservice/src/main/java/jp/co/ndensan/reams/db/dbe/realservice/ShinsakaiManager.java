@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinList;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiList;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiDate;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5101ShinsakaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.ShinsakaiDetailMapper;
@@ -68,7 +67,7 @@ public class ShinsakaiManager {
      * @param 審査会開催年月日 審査会開催年月日
      * @return 審査会
      */
-    public Shinsakai get審査会(ShinsakaiKaisaiNo 審査会開催番号, ShinsakaiKaisaiDate 審査会開催年月日) {
+    public Shinsakai get審査会(ShinsakaiKaisaiNo 審査会開催番号, FlexibleDate 審査会開催年月日) {
         ShinsakaiDetail 審査会情報 = 審査会情報Finder.get審査会情報(審査会開催番号, 審査会開催年月日);
         return create審査会(審査会情報);
     }
@@ -79,7 +78,7 @@ public class ShinsakaiManager {
      * @param 審査会開催年月日 審査会開催年月日
      * @return 審査会List
      */
-    public ShinsakaiList get開催審査会List(ShinsakaiKaisaiDate 審査会開催年月日) {
+    public ShinsakaiList get開催審査会List(FlexibleDate 審査会開催年月日) {
         List<Shinsakai> 審査会List = new ArrayList<>();
 
         List<ShinsakaiDetail> 審査会情報List = 審査会情報Finder.get開催審査会情報(審査会開催年月日);

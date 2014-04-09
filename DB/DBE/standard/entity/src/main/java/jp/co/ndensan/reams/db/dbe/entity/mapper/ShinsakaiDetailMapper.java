@@ -11,8 +11,6 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiKyukaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiDate;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaishiTime;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5101ShinsakaiJohoEntity;
 
@@ -43,21 +41,21 @@ public final class ShinsakaiDetailMapper {
             return null;
         }
 
-        return new ShinsakaiDetail(new ShinsakaiKaisaiNo(審査会Entity.getShinsakaiKaisaiNo()),
-                new ShinsakaiKaisaiDate(審査会Entity.getShinsakaiKaisaiYMD()),
-                new ShinsakaiKaishiTime(new TimeString(審査会Entity.getShinsakaiKaishiTime())),
+        return new ShinsakaiDetail.Builder(new ShinsakaiKaisaiNo(審査会Entity.getShinsakaiKaisaiNo()),
+                審査会Entity.getShinsakaiKaisaiYMD(),
+                new TimeString(審査会Entity.getShinsakaiKaishiTime()),
                 new TimeString(審査会Entity.getShinsakaiShuryoTime()),
-                合議体情報,
-                審査会開催場所,
-                審査会Entity.getShinsakaiYoteiTeiin(),
-                審査会Entity.getShinsakaiSaidaiTeiin(),
-                審査会Entity.getShinsakaiJidoWariateTeiin(),
-                審査会Entity.getShinsakaiIinTeiin(),
-                GogitaiSeishinkaIshiSonzaiKubun.toValue(審査会Entity.getGogitaiSeishinkaiSonzaiFlag()),
-                GogitaiDummyKubun.toValue(審査会Entity.getGogitaiDummyFlag()),
-                審査会Entity.getShinsakaiShiryoSakuseiYMD(),
-                ShinsakaiKyukaiKubun.toValue(審査会Entity.getShinsakaiKyukaiFlag()),
-                審査会Entity.getShinsakaiWariateZumiNinzu());
+                合議体情報)
+                .set審査会開催場所(審査会開催場所)
+                .set審査会予定定員(審査会Entity.getShinsakaiYoteiTeiin())
+                .set審査会最大定員(審査会Entity.getShinsakaiSaidaiTeiin())
+                .set審査会自動割当定員(審査会Entity.getShinsakaiJidoWariateTeiin())
+                .set審査会委員定員(審査会Entity.getShinsakaiIinTeiin())
+                .set精神科医存在区分(GogitaiSeishinkaIshiSonzaiKubun.toValue(審査会Entity.getGogitaiSeishinkaiSonzaiFlag()))
+                .set合議体ダミー区分(GogitaiDummyKubun.toValue(審査会Entity.getGogitaiDummyFlag()))
+                .set審査会資料作成年月日(審査会Entity.getShinsakaiShiryoSakuseiYMD())
+                .set審査会休会区分(ShinsakaiKyukaiKubun.toValue(審査会Entity.getShinsakaiKyukaiFlag()))
+                .set審査会割当済み人数(審査会Entity.getShinsakaiWariateZumiNinzu()).build();
     }
 
     /**
@@ -72,8 +70,8 @@ public final class ShinsakaiDetailMapper {
         }
         DbT5101ShinsakaiJohoEntity entity = new DbT5101ShinsakaiJohoEntity();
         entity.setShinsakaiKaisaiNo(審査会情報.get審査会開催番号().value());
-        entity.setShinsakaiKaisaiYMD(審査会情報.get審査会開催年月日().value());
-        entity.setShinsakaiKaishiTime(審査会情報.get審査会開始時間().toRString());
+        entity.setShinsakaiKaisaiYMD(審査会情報.get審査会開催年月日());
+        entity.setShinsakaiKaishiTime(審査会情報.get審査会開始時間().value());
         entity.setShinsakaiShuryoTime(審査会情報.get審査会終了時間().value());
         entity.setShinsakaiKaisaiBashoCode(審査会情報.get合議体情報().get審査会開催場所().get開催場所コード().value());
         entity.setGogitaiNo(審査会情報.get合議体情報().get合議体番号().value());

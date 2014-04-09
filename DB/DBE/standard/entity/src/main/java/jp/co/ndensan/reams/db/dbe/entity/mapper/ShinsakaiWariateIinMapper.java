@@ -125,7 +125,7 @@ public final class ShinsakaiWariateIinMapper {
     public static DbT5106ShinsakaiWariateIinJohoEntity to審査員割当委員Entity(ShinsakaiWariateIin 審査会割当委員) {
         DbT5106ShinsakaiWariateIinJohoEntity entity = new DbT5106ShinsakaiWariateIinJohoEntity();
         entity.setShinsakaiKaisaiNo(審査会割当委員.get審査会情報().get審査会開催番号().value());
-        entity.setShinsakaiKaisaiYMD(審査会割当委員.get審査会情報().get審査会開催年月日().value());
+        entity.setShinsakaiKaisaiYMD(審査会割当委員.get審査会情報().get審査会開催年月日());
         entity.setShinsakaiIinCode(審査会割当委員.get審査会委員情報().get審査会委員コード().value());
         entity.setShinsainKubunCode(審査会割当委員.get認定審査員区分().getCode());
         entity.setGogitaichoKubunCode(審査会割当委員.get合議体長区分().getCode());
