@@ -10,7 +10,8 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 要介護状態像例を保持するクラスです。
+ * 要介護状態像例を保持するクラスです。<br />
+ * 要介護状態像例とは、要介護状態区分の要介護度を決定する際に比較した要介護状態像の例です。
  *
  * @author N8156 宮本 康
  */
