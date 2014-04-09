@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteiResult;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiKekkaIdoJiyu;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiResultIdoJiyu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIkenShurui;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5002NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5002NinteiKekkaJohoEntityMock;
@@ -106,7 +106,7 @@ public class NinteiKekkaMapperTest {
 
         @Test
         public void 認定結果異動事由の設定がある時_toNinteiResult_get認定結果異動事由は_設定値を返す() {
-            assertThat(toNinteiResult().get認定理由().get認定結果異動事由(), is(NinteiKekkaIdoJiyu.職権追加));
+            assertThat(toNinteiResult().get認定理由().get認定結果異動事由(), is(NinteiResultIdoJiyu.職権追加));
         }
 
         @Test
@@ -204,7 +204,7 @@ public class NinteiKekkaMapperTest {
 
         @Test
         public void 認定結果異動事由の設定がある時_toDbT5002NinteiKekkaJohoEntity_getNinteiKekkaIdoJiyuは_設定値を返す() {
-            assertThat(toDbT5002NinteiKekkaJohoEntity().getNinteiKekkaIdoJiyu(), is(NinteiKekkaIdoJiyu.職権追加.getCode()));
+            assertThat(toDbT5002NinteiKekkaJohoEntity().getNinteiKekkaIdoJiyu(), is(NinteiResultIdoJiyu.職権追加.getCode()));
         }
 
         @Test

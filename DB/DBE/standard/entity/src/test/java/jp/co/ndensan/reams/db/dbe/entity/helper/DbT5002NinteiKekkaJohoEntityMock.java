@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.helper;
 
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiKekkaIdoJiyu;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiResultIdoJiyu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIkenShurui;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5002NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -58,7 +58,7 @@ public class DbT5002NinteiKekkaJohoEntityMock {
         entity.setYokaigoJotaizoReiCode(new Code("コード"));
         entity.setNinteishinsakaiIkenShurui(ShinsakaiIkenShurui.サービス利用への意見.getCode());
         entity.setKaigoServiceShurui(KaigoServiceType.訪問介護.getCode());
-        entity.setNinteiKekkaIdoJiyu(NinteiKekkaIdoJiyu.職権追加.getCode());
+        entity.setNinteiKekkaIdoJiyu(NinteiResultIdoJiyu.職権追加.getCode());
         entity.setNinteiKekkaIdoYMD(FlexibleDate.MIN);
         entity.setNinteiTorikeshiRiyu(new RString("認定取消理由"));
         entity.setNinteiTorikeshiYMD(FlexibleDate.MAX);

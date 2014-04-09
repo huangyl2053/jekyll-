@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.TokuteiShippeiKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotaizoRei;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiKekkaIdoJiyu;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiResultIdoJiyu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIkenShurui;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiYukoKikanTsukisu;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
@@ -89,7 +89,7 @@ public class NinteiResultMock {
     private static NinteiRiyu createNinteiRiyu() {
         return new NinteiRiyu(
                 new RString("一次判定結果変更理由"),
-                NinteiKekkaIdoJiyu.職権追加,
+                NinteiResultIdoJiyu.職権追加,
                 FlexibleDate.MIN,
                 new RString("認定取消理由"),
                 FlexibleDate.MAX,

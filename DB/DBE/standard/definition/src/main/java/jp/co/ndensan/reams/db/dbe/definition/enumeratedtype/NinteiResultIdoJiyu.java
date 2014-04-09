@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N8156 宮本 康
  */
-public enum NinteiKekkaIdoJiyu {
+public enum NinteiResultIdoJiyu {
 
     /**
      * 介護サービス種類が「職権追加」であることを表します。<br />
@@ -36,7 +36,7 @@ public enum NinteiKekkaIdoJiyu {
     職権一部削除("4");
     private final RString code;
 
-    private NinteiKekkaIdoJiyu(String code) {
+    private NinteiResultIdoJiyu(String code) {
         this.code = new RString(code);
     }
 
@@ -55,8 +55,8 @@ public enum NinteiKekkaIdoJiyu {
      * @param code コード
      * @return 列挙型
      */
-    public static NinteiKekkaIdoJiyu toValue(RString code) {
-        for (NinteiKekkaIdoJiyu data : NinteiKekkaIdoJiyu.values()) {
+    public static NinteiResultIdoJiyu toValue(RString code) {
+        for (NinteiResultIdoJiyu data : NinteiResultIdoJiyu.values()) {
             if (data.getCode().equals(code)) {
                 return data;
             }

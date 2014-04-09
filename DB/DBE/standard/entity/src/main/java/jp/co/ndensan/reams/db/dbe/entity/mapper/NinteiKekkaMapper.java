@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.TokuteiShippeiKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotaizoRei;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiKekkaIdoJiyu;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiResultIdoJiyu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIkenShurui;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiYukoKikanTsukisu;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
@@ -51,7 +51,7 @@ public final class NinteiKekkaMapper {
                 entity.getShinsakaiMemo());
         NinteiRiyu 認定理由 = new NinteiRiyu(
                 entity.getIchijiHnateiKekkaHenkoRiyu(),
-                NinteiKekkaIdoJiyu.toValue(entity.getNinteiKekkaIdoJiyu()),
+                NinteiResultIdoJiyu.toValue(entity.getNinteiKekkaIdoJiyu()),
                 entity.getNinteiKekkaIdoYMD(),
                 entity.getNinteiTorikeshiRiyu(),
                 entity.getNinteiTorikeshiYMD(),

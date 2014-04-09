@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiKekkaIdoJiyu;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiResultIdoJiyu;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class NinteiRiyu {
 
     private final RString 一次判定結果変更理由;
-    private final NinteiKekkaIdoJiyu 認定結果異動事由;
+    private final NinteiResultIdoJiyu 認定結果異動事由;
     private final FlexibleDate 認定結果異動年月日;
     private final RString 認定取消理由;
     private final FlexibleDate 認定取消年月日;
@@ -34,7 +34,7 @@ public class NinteiRiyu {
      */
     public NinteiRiyu(
             RString 一次判定結果変更理由,
-            NinteiKekkaIdoJiyu 認定結果異動事由,
+            NinteiResultIdoJiyu 認定結果異動事由,
             FlexibleDate 認定結果異動年月日,
             RString 認定取消理由,
             FlexibleDate 認定取消年月日,
@@ -61,7 +61,7 @@ public class NinteiRiyu {
      *
      * @return 認定結果異動事由
      */
-    public NinteiKekkaIdoJiyu get認定結果異動事由() {
+    public NinteiResultIdoJiyu get認定結果異動事由() {
         return 認定結果異動事由;
     }
 
