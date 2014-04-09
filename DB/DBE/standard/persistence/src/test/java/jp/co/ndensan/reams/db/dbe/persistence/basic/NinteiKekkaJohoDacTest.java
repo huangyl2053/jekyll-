@@ -32,6 +32,7 @@ public class NinteiKekkaJohoDacTest extends DbeTestDacBase {
     private static final int AS_既存データ = 2;
     private static final ShinseishoKanriNo 新規管理番号 = new ShinseishoKanriNo(new RString("9999999999"));
     private static final ShinseishoKanriNo 既存管理番号 = new ShinseishoKanriNo(new RString("1234567899"));
+    private static final int 最新審査会番号 = 300;
 
     @BeforeClass
     public static void setUpClass() {
@@ -52,7 +53,7 @@ public class NinteiKekkaJohoDacTest extends DbeTestDacBase {
 
         @Test
         public void 該当の認定結果情報が存在する時_selectは_該当の最新情報を返す() {
-            assertThat(sut.select(既存管理番号).getShinsakaiKaisaiNo(), is(300));
+            assertThat(sut.select(既存管理番号).getShinsakaiKaisaiNo(), is(最新審査会番号));
         }
     }
 
