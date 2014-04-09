@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.Hihokensha;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaList;
 import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
 import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
@@ -49,6 +50,7 @@ public class HihokenshaFinder {
     }
 
     /**
+     * {@link LasdecCode 地方公共団体コード}と{@link ShikibetsuCode 識別コード}から、
      * 直近の資格情報を保持した{@link Hihokensha Hihokensha}を返します。<br />
      * 該当するHihokenshaがいないときは、nullを返します。
      *
@@ -58,6 +60,20 @@ public class HihokenshaFinder {
      */
     public Hihokensha get被保険者(LasdecCode 地方公共団体コード, ShikibetsuCode 識別コード) {
         IHihokenshaShikaku shikaku = hihokenshaDaicho.get直近被保険者資格(地方公共団体コード, 識別コード);
+        return toHihokensha(shikaku);
+    }
+
+    /**
+     * {@link LasdecCode 地方公共団体コード}と{@link KaigoHihokenshaNo 被保険者番号}から、
+     * 直近の資格情報を保持した{@link Hihokensha Hihokensha}を返します。<br />
+     * 該当するHihokenshaがいないときは、nullを返します。
+     *
+     * @param 地方公共団体コード {@link LasdecCode 地方公共団体コード}
+     * @param 被保険者番号 {@link KaigoHihokenshaNo 被保険者番号}
+     * @return {@link Hihokensha Hihokensha}。もしくは、null。
+     */
+    public Hihokensha get被保険者(LasdecCode 地方公共団体コード, KaigoHihokenshaNo 被保険者番号) {
+        IHihokenshaShikaku shikaku = hihokenshaDaicho.get直近被保険者資格(地方公共団体コード, 被保険者番号);
         return toHihokensha(shikaku);
     }
 

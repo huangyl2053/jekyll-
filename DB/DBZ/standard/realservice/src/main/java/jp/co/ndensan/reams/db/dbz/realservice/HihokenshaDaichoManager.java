@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.mapper.HihokenshaShikakuMapper;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.HihokenshaDaichoDac;
@@ -54,6 +55,20 @@ public class HihokenshaDaichoManager {
     }
 
     /**
+     * 指定の{@link LasecCode 地方公共団体コード}, {@link KaigoHihokenshaNo 被保険者番号}に該当する
+     * 被保険者の資格情報を返します。<br />
+     * 得られる資格情報は、直近の登録内容です。 指定の値に相当する資格情報がないときは、nullを返します。
+     *
+     * @param 地方公共団体コード {@link LasecCode 地方公共団体コード}
+     * @param 被保険者番号 {@link KaigoHihokenshaNo 被保険者番号}
+     * @return {@link IHihokenshaShikaku IHihokenshaShikaku}。もしくは、null。
+     */
+    IHihokenshaShikaku get直近被保険者資格(LasdecCode 地方公共団体コード, KaigoHihokenshaNo 被保険者番号) {
+        DbT1001HihokenshaDaichoEntity entity = dac.selectLatestOfPerson(地方公共団体コード, 被保険者番号);
+        return HihokenshaShikakuMapper.toHihokenshaShikaku(entity);
+    }
+
+    /**
      * 指定の項目に該当する被保険者の資格情報を返します。<br />
      * 指定の値に相当する資格情報がないときは、nullを返します。
      *
@@ -76,7 +91,7 @@ public class HihokenshaDaichoManager {
      * もしくは、{@link Collections#EMPTY_LIST Collections.EMPTY_LIST}。
      */
     List<IHihokenshaShikaku> get被保険者資格ListOf(LasdecCode 地方公共団体コード) {
-        List<DbT1001HihokenshaDaichoEntity> entites = dac.select(地方公共団体コード);
+        List<DbT1001HihokenshaDaichoEntity> entites = dac.selectAll(地方公共団体コード);
         return HihokenshaShikakuMapper.toListOfHihokenshaShikaku(entites);
     }
 

@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.ShikakuShutoku;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.helper.DbT1001HihokenshaDaichoEntityMock;
 import jp.co.ndensan.reams.db.dbz.entity.mapper.HihokenshaShikakuMapper;
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -103,17 +105,20 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
         private static final LasdecCode lasdecCode = new LasdecCode("123456");
         private static final ShikibetsuCode shikibetsuCode = new ShikibetsuCode("1234567890");
         private static final RDateTime shoriTimestamp = RDateTime.of(2014, 4, 17, 9, 59);
+        private static final KaigoHihokenshaNo hihokenshaNo = new KaigoHihokenshaNo(new RString("1562483169"));
         private static IHihokenshaShikaku shikaku;
         private static HihokenshaDaichoManager sut;
 
         @BeforeClass
         public static void setUpClass() {
-
             DbT1001HihokenshaDaichoEntity entity = createEntity(lasdecCode, shikibetsuCode, shoriTimestamp);
+            entity.setHihokenshaNo(hihokenshaNo);
             shikaku = HihokenshaShikakuMapper.toHihokenshaShikaku(entity);
 
             dac = mock(HihokenshaDaichoDac.class);
             when(dac.selectLatestOfPerson(lasdecCode, shikibetsuCode))
+                    .thenReturn(entity);
+            when(dac.selectLatestOfPerson(lasdecCode, hihokenshaNo))
                     .thenReturn(entity);
             when(dac.selectFromKey(lasdecCode, shikibetsuCode, shoriTimestamp))
                     .thenReturn(entity);
@@ -121,29 +126,56 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
             sut = new HihokenshaDaichoManager(dac);
         }
 
-        public static class get直近被保険者資格 extends DbzTestBase {
+        public static class get直近被保険者資格_ShikibetsuCode版 extends DbzTestBase {
 
             @Test
-            public void get直近被保険者資格の結果は_同じ条件のHihokenshaDaichoDac$selectLatestOfPersonの結果をHihokenshaShikakuMapperで変換したものと_地方公共団体コードが一致する() {
+            public void get直近被保険者資格_ShikibetsuCode版_の結果は_同じ条件のHihokenshaDaichoDac$selectLatestOfPersonの結果をHihokenshaShikakuMapperで変換したものと_地方公共団体コードが一致する() {
                 IHihokenshaShikaku result = sut.get直近被保険者資格(lasdecCode, shikibetsuCode);
                 assertThat(result.get地方公共団体コード(), is(shikaku.get地方公共団体コード()));
             }
 
             @Test
-            public void get直近被保険者資格の結果は_同じ条件のHihokenshaDaichoDac$selectLatestOfPersonの結果をHihokenshaShikakuMapperで変換したものと_識別コードが一致する() {
+            public void get直近被保険者資格_ShikibetsuCode版_の結果は_同じ条件のHihokenshaDaichoDac$selectLatestOfPersonの結果をHihokenshaShikakuMapperで変換したものと_識別コードが一致する() {
                 IHihokenshaShikaku result = sut.get直近被保険者資格(lasdecCode, shikibetsuCode);
                 assertThat(result.get識別コード(), is(shikaku.get識別コード()));
             }
 
             @Test
-            public void get直近被保険者資格の結果は_同じ条件のHihokenshaDaichoDac$selectLatestOfPersonの結果をHihokenshaShikakuMapperで変換したものと_被保険者台帳登録日時が一致する() {
+            public void get直近被保険者資格_ShikibetsuCode版_の結果は_同じ条件のHihokenshaDaichoDac$selectLatestOfPersonの結果をHihokenshaShikakuMapperで変換したものと_被保険者台帳登録日時が一致する() {
                 IHihokenshaShikaku result = sut.get直近被保険者資格(lasdecCode, shikibetsuCode);
                 assertThat(result.get被保険者台帳登録日時(), is(shikaku.get被保険者台帳登録日時()));
             }
 
             @Test
-            public void get直近被保険者資格は_検索結果が得られないとき_nullを返す() {
+            public void get直近被保険者資格_ShikibetsuCode版_は_検索結果が得られないとき_nullを返す() {
                 IHihokenshaShikaku result = sut.get直近被保険者資格(lasdecCode, new ShikibetsuCode("9876543210"));
+                assertThat(result, is(nullValue()));
+            }
+        }
+
+        public static class get直近被保険者資格_KaigoHihokenshaNo版 extends DbzTestBase {
+
+            @Test
+            public void get直近被保険者資格_KaigoHihokenshaNo版_の結果は_同じ条件のHihokenshaDaichoDac$selectLatestOfPersonの結果をHihokenshaShikakuMapperで変換したものと_地方公共団体コードが一致する() {
+                IHihokenshaShikaku result = sut.get直近被保険者資格(lasdecCode, hihokenshaNo);
+                assertThat(result.get地方公共団体コード(), is(shikaku.get地方公共団体コード()));
+            }
+
+            @Test
+            public void get直近被保険者資格_KaigoHihokenshaNo版_の結果は_同じ条件のHihokenshaDaichoDac$selectLatestOfPersonの結果をHihokenshaShikakuMapperで変換したものと_識別コードが一致する() {
+                IHihokenshaShikaku result = sut.get直近被保険者資格(lasdecCode, hihokenshaNo);
+                assertThat(result.get識別コード(), is(shikaku.get識別コード()));
+            }
+
+            @Test
+            public void get直近被保険者資格_KaigoHihokenshaNo版_の結果は_同じ条件のHihokenshaDaichoDac$selectLatestOfPersonの結果をHihokenshaShikakuMapperで変換したものと_被保険者台帳登録日時が一致する() {
+                IHihokenshaShikaku result = sut.get直近被保険者資格(lasdecCode, hihokenshaNo);
+                assertThat(result.get被保険者台帳登録日時(), is(shikaku.get被保険者台帳登録日時()));
+            }
+
+            @Test
+            public void get直近被保険者資格_KaigoHihokenshaNo版_は_検索結果が得られないとき_nullを返す() {
+                IHihokenshaShikaku result = sut.get直近被保険者資格(lasdecCode, new KaigoHihokenshaNo(new RString("9876543210")));
                 assertThat(result, is(nullValue()));
             }
         }
@@ -185,7 +217,7 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
                 entities.add(createEntity(lasdecCode, shikibetsuCode, shoriTimestamp));
                 entities.add(createEntity(lasdecCode, new ShikibetsuCode("9876543210"), shoriTimestamp));
                 entities.add(createEntity(lasdecCode, new ShikibetsuCode("0987654321"), shoriTimestamp));
-                when(dac.select(lasdecCode)).thenReturn(entities);
+                when(dac.selectAll(lasdecCode)).thenReturn(entities);
             }
 
             @Test
