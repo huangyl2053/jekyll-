@@ -34,9 +34,8 @@ public class DbT5106ShinsakaiWariateIinJohoEntity implements IDbAccessable {
     @PrimaryKey
     private int shinsakaiKaisaiNo;
     @PrimaryKey
-    private FlexibleDate shinsakaiKaisaiYMD;
-    @PrimaryKey
     private RString shinsakaiIinCode;
+    private FlexibleDate shinsakaiKaisaiYMD;
     private Code shinsainKubunCode;
     private Code gogitaichoKubunCode;
     private RString shinsakaiIinShinsaKaishiTime;
@@ -107,24 +106,6 @@ public class DbT5106ShinsakaiWariateIinJohoEntity implements IDbAccessable {
     }
 
     /**
-     * getShinsakaiKaisaiYMD
-     *
-     * @return shinsakaiKaisaiYMD
-     */
-    public FlexibleDate getShinsakaiKaisaiYMD() {
-        return shinsakaiKaisaiYMD;
-    }
-
-    /**
-     * setShinsakaiKaisaiYMD
-     *
-     * @param shinsakaiKaisaiYMD shinsakaiKaisaiYMD
-     */
-    public void setShinsakaiKaisaiYMD(FlexibleDate shinsakaiKaisaiYMD) {
-        this.shinsakaiKaisaiYMD = shinsakaiKaisaiYMD;
-    }
-
-    /**
      * getShinsakaiIinCode
      *
      * @return shinsakaiIinCode
@@ -140,6 +121,24 @@ public class DbT5106ShinsakaiWariateIinJohoEntity implements IDbAccessable {
      */
     public void setShinsakaiIinCode(RString shinsakaiIinCode) {
         this.shinsakaiIinCode = shinsakaiIinCode;
+    }
+
+    /**
+     * getShinsakaiKaisaiYMD
+     *
+     * @return shinsakaiKaisaiYMD
+     */
+    public FlexibleDate getShinsakaiKaisaiYMD() {
+        return shinsakaiKaisaiYMD;
+    }
+
+    /**
+     * setShinsakaiKaisaiYMD
+     *
+     * @param shinsakaiKaisaiYMD shinsakaiKaisaiYMD
+     */
+    public void setShinsakaiKaisaiYMD(FlexibleDate shinsakaiKaisaiYMD) {
+        this.shinsakaiKaisaiYMD = shinsakaiKaisaiYMD;
     }
 
     /**
@@ -280,9 +279,6 @@ public class DbT5106ShinsakaiWariateIinJohoEntity implements IDbAccessable {
             return false;
         }
         if (this.shinsakaiKaisaiNo != other.shinsakaiKaisaiNo) {
-            return false;
-        }
-        if (!Objects.equals(this.shinsakaiKaisaiYMD, other.shinsakaiKaisaiYMD)) {
             return false;
         }
         if (!Objects.equals(this.shinsakaiIinCode, other.shinsakaiIinCode)) {

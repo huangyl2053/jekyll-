@@ -7,7 +7,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import java.util.Objects;
 
 /**
  * DbT5101ShinsakaiJohoの項目定義クラスです
@@ -29,13 +28,10 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
     private int shinsakaiKaisaiNo;
-    @PrimaryKey
     private FlexibleDate shinsakaiKaisaiYMD;
-    @PrimaryKey
     private RString shinsakaiKaishiTime;
     private RString shinsakaiShuryoTime;
     private RString shinsakaiKaisaiBashoCode;
-    @PrimaryKey
     private int gogitaiNo;
     private int shinsakaiYoteiTeiin;
     private int shinsakaiSaidaiTeiin;
@@ -374,15 +370,6 @@ public class DbT5101ShinsakaiJohoEntity implements IDbAccessable {
             return false;
         }
         if (this.shinsakaiKaisaiNo != other.shinsakaiKaisaiNo) {
-            return false;
-        }
-        if (!Objects.equals(this.shinsakaiKaisaiYMD, other.shinsakaiKaisaiYMD)) {
-            return false;
-        }
-        if (!Objects.equals(this.shinsakaiKaishiTime, other.shinsakaiKaishiTime)) {
-            return false;
-        }
-        if (this.gogitaiNo != other.gogitaiNo) {
             return false;
         }
         return true;

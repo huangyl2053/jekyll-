@@ -31,7 +31,6 @@ public class ShinsakaiListTest {
     public static class get審査会のテスト extends DbeTestBase {
 
         private ShinsakaiKaisaiNo 開催番号;
-        private ShinsakaiKaisaiDate 開催年月日;
 
         @Before
         public void setUp() {
@@ -41,17 +40,11 @@ public class ShinsakaiListTest {
             list.add(ShinsakaiTestBusinessCreator.create審査会(3, "20010101"));
             sut = new ShinsakaiList(list);
             開催番号 = new ShinsakaiKaisaiNo(2);
-            開催年月日 = new ShinsakaiKaisaiDate(new FlexibleDate("20000101"));
         }
 
         @Test
-        public void 開催番号2_開催年月日20000101を指定したとき_開催番号に2を持つ審査会が返る() {
-            assertThat(sut.get審査会(開催番号, 開催年月日).get審査会情報().get審査会開催番号(), is(開催番号));
-        }
-
-        @Test
-        public void 開催番号2_開催年月日20000101を指定したとき_開催年月日に20000101を持つ審査会が返る() {
-            assertThat(sut.get審査会(開催番号, 開催年月日).get審査会情報().get審査会開催年月日(), is(開催年月日));
+        public void 開催番号2を指定したとき_開催番号に2を持つ審査会が返る() {
+            assertThat(sut.get審査会(開催番号).get審査会情報().get審査会開催番号(), is(開催番号));
         }
     }
 
