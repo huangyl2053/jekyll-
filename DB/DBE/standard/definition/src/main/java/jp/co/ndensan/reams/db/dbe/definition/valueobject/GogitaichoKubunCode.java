@@ -8,6 +8,8 @@ import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ICodeWrapValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**
  * 合議体（介護認定審査会）の長や長代理、委員などの区分コードを表すクラスです。
@@ -19,12 +21,13 @@ public class GogitaichoKubunCode implements ICodeWrapValueObject, Comparable<Gog
     private final Code code;
 
     /**
-     * 引数からコードを受け取り、インスタンスを生成します。
+     * 引数から合議体長コードを受け取り、インスタンスを生成します。
      *
-     * @param code コードを表す文字列
+     * @param code 合議体長区分コード
+     * @throws NullPointerException 引数にnullが渡されたとき
      */
-    public GogitaichoKubunCode(Code code) {
-        this.code = code;
+    public GogitaichoKubunCode(Code code) throws NullPointerException {
+        this.code = requireNonNull(code, Messages.E00003.replace("合議体長区分コード", getClass().getName()).getMessage());
     }
 
     @Override

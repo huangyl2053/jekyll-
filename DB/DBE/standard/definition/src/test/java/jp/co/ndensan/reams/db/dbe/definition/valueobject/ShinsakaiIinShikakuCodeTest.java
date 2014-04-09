@@ -25,6 +25,14 @@ public class ShinsakaiIinShikakuCodeTest {
     private static ShinsakaiIinShikakuCode sut;
     private static ShinsakaiIinShikakuCode sut2;
 
+    public static class コンストラクタのテスト extends DbeTestBase {
+
+        @Test(expected = NullPointerException.class)
+        public void 引数にnullを渡したとき_NullPointerExceptionが発生する() {
+            sut = new ShinsakaiIinShikakuCode(null);
+        }
+    }
+
     public static class compareToのテスト extends DbeTestBase {
 
         @Before

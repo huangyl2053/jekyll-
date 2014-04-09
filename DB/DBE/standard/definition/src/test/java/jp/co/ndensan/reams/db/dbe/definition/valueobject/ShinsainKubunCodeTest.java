@@ -25,6 +25,14 @@ public class ShinsainKubunCodeTest {
     private static ShinsainKubunCode sut;
     private static ShinsainKubunCode sut2;
 
+    public static class コンストラクタのテスト extends DbeTestBase {
+
+        @Test(expected = NullPointerException.class)
+        public void 引数にnullを渡したとき_NullPointerExceptionが発生する() {
+            sut = new ShinsainKubunCode(null);
+        }
+    }
+
     public static class compareToのテスト extends DbeTestBase {
 
         @Before

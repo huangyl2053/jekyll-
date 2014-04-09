@@ -25,6 +25,14 @@ public class GogitaichoKubunCodeTest {
     private static GogitaichoKubunCode sut;
     private static GogitaichoKubunCode sut2;
 
+    public static class コンストラクタのテスト extends DbeTestBase {
+
+        @Test(expected = NullPointerException.class)
+        public void 引数にnullを渡したとき_NullPointerExceptionが発生する() {
+            sut = new GogitaichoKubunCode(null);
+        }
+    }
+
     public static class compareToのテスト extends DbeTestBase {
 
         @Before

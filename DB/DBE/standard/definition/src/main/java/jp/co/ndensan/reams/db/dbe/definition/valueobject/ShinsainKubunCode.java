@@ -5,7 +5,9 @@
 package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
 import java.util.Objects;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ICodeWrapValueObject;
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 
@@ -19,12 +21,13 @@ public class ShinsainKubunCode implements ICodeWrapValueObject, Comparable<Shins
     private final Code code;
 
     /**
-     * 引数からコードを受け取り、インスタンスを生成します。
+     * 引数から審査員区分コードを受け取り、インスタンスを生成します。
      *
-     * @param code コードを表す文字列
+     * @param code 審査員区分コード
+     * @throws NullPointerException 引数にnullが渡されたとき
      */
-    public ShinsainKubunCode(Code code) {
-        this.code = code;
+    public ShinsainKubunCode(Code code) throws NullPointerException {
+        this.code = requireNonNull(code, Messages.E00003.replace("審査員区分コード", getClass().getName()).getMessage());
     }
 
     @Override
