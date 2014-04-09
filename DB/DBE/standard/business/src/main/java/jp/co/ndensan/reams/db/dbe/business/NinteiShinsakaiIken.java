@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIkenShurui;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIkenType;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class NinteiShinsakaiIken {
 
     private final ShinsakaiKaisaiNo 審査会開催番号;
-    private final ShinsakaiIkenShurui 審査会意見種類;
+    private final ShinsakaiIkenType 審査会意見種類;
     private final RString 審査会意見;
     private final RString 審査会メモ;
 
@@ -30,7 +30,7 @@ public class NinteiShinsakaiIken {
      */
     public NinteiShinsakaiIken(
             ShinsakaiKaisaiNo 審査会開催番号,
-            ShinsakaiIkenShurui 審査会意見種類,
+            ShinsakaiIkenType 審査会意見種類,
             RString 審査会意見,
             RString 審査会メモ) {
         this.審査会開催番号 = 審査会開催番号;
@@ -53,7 +53,7 @@ public class NinteiShinsakaiIken {
      *
      * @return 審査会意見種類
      */
-    public ShinsakaiIkenShurui get審査会意見種類() {
+    public ShinsakaiIkenType get審査会意見種類() {
         return 審査会意見種類;
     }
 

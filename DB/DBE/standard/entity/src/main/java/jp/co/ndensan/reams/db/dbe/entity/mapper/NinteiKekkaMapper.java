@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotaizoRei;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiResultIdoJiyu;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIkenShurui;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIkenType;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiYukoKikanTsukisu;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5002NinteiKekkaJohoEntity;
@@ -63,7 +63,7 @@ public final class NinteiKekkaMapper {
     private static NinteiShinsakaiIken create認定審査会意見(DbT5002NinteiKekkaJohoEntity entity) {
         return new NinteiShinsakaiIken(
                 new ShinsakaiKaisaiNo(entity.getShinsakaiKaisaiNo()),
-                ShinsakaiIkenShurui.toValue(entity.getNinteishinsakaiIkenShurui()),
+                ShinsakaiIkenType.toValue(entity.getNinteishinsakaiIkenShurui()),
                 entity.getShinsakaiIken(),
                 entity.getShinsakaiMemo());
     }

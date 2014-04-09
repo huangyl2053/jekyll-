@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 import jp.co.ndensan.reams.db.dbe.business.NinteiResult;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiResultIdoJiyu;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIkenShurui;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIkenType;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiYukoKikanTsukisu;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TokuteiShippeiKubunCode;
@@ -47,7 +47,7 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
     private static final boolean 施設入所有無 = true;
     private static final TokuteiShippeiKubunCode 特定疾病区分コード = new TokuteiShippeiKubunCode(new Code(new RString("3333333333")));
     private static final ShinsakaiKaisaiNo 審査会開催番号 = new ShinsakaiKaisaiNo(123);
-    private static final ShinsakaiIkenShurui 審査会意見種類 = ShinsakaiIkenShurui.サービス利用への意見;
+    private static final ShinsakaiIkenType 審査会意見種類 = ShinsakaiIkenType.サービス利用への意見;
     private static final RString 審査会意見 = new RString("審査会意見");
     private static final RString 審査会メモ = new RString("審査会メモ");
     private static final RString 一次判定結果変更理由 = new RString("一次判定結果変更理由");

@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N8156 宮本 康
  */
-public enum ShinsakaiIkenShurui {
+public enum ShinsakaiIkenType {
 
     /**
      * 介護サービス種類が「必要な療養への意見」であることを表します。<br />
@@ -31,7 +31,7 @@ public enum ShinsakaiIkenShurui {
     サービス利用への意見("3");
     private final RString code;
 
-    private ShinsakaiIkenShurui(String code) {
+    private ShinsakaiIkenType(String code) {
         this.code = new RString(code);
     }
 
@@ -50,8 +50,8 @@ public enum ShinsakaiIkenShurui {
      * @param code コード
      * @return 列挙型
      */
-    public static ShinsakaiIkenShurui toValue(RString code) {
-        for (ShinsakaiIkenShurui data : ShinsakaiIkenShurui.values()) {
+    public static ShinsakaiIkenType toValue(RString code) {
+        for (ShinsakaiIkenType data : ShinsakaiIkenType.values()) {
             if (data.getCode().equals(code)) {
                 return data;
             }
