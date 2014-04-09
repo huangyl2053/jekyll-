@@ -5,10 +5,10 @@
 package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.IKaigoValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 
 /**
  * 連絡先区分番号です。<br />
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
  *
  * @author N3327 三浦 凌
  */
-public class RenrakusakiKubunNo implements IKaigoValueObject<RString, RenrakusakiKubunNo> {
+public class RenrakusakiKubunNo implements IValueObject<RString>, Comparable<RenrakusakiKubunNo> {
 
     private static final int PERMISSIBLE_LENGTH = 8;
     private final RString 連絡先区分番号;
