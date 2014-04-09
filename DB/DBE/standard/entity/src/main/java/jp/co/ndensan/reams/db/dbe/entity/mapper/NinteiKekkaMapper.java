@@ -41,8 +41,8 @@ public final class NinteiKekkaMapper {
      */
     public static NinteiResult toNinteiResult(DbT5002NinteiKekkaJohoEntity entity) {
         NinteiYukoKikan 認定有効期間 = new NinteiYukoKikan(
-                new NinteiYukoKikanTsukisu(entity.getNinteiYukoKikan()),
                 entity.getNinteiYukoKaishiYMD(),
+                new NinteiYukoKikanTsukisu(entity.getNinteiYukoKikan()),
                 entity.getNinteiYukoShuryoYMD());
         NinteiShinsakaiIken 認定審査会意見 = new NinteiShinsakaiIken(
                 new ShinsakaiKaisaiNo(entity.getShinsakaiKaisaiNo()),

@@ -71,7 +71,7 @@ public class NinteiResultMock {
     }
 
     private static NinteiYukoKikan createNinteiYukoKikan() {
-        return new NinteiYukoKikan(new NinteiYukoKikanTsukisu(1), FlexibleDate.MIN, FlexibleDate.MAX);
+        return new NinteiYukoKikan(FlexibleDate.MIN, new NinteiYukoKikanTsukisu(1), FlexibleDate.MAX);
     }
 
     private static TokuteiShippeiKubun createTokuteiShippeiKubun() {
