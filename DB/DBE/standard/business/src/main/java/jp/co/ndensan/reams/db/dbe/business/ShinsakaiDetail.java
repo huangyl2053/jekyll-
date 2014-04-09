@@ -320,6 +320,7 @@ public final class ShinsakaiDetail {
         private FlexibleDate documentationDate;
         private ShinsakaiKyukaiKubun kyukaiKubun;
         private int wariatesumi;
+        private static final RString エラーメッセージ_0以上 = new RString("0以下");
 
         /**
          * 必須項目であり、かつ初期値が存在しない項目について値を指定し、審査会のBuilderインスタンスを生成して返します。<br/>
@@ -367,23 +368,35 @@ public final class ShinsakaiDetail {
          * 生成と同時に、定員などの数値が正しく設定されているかのチェックも行います。
          *
          * @return 審査会情報
-         * @throws NullPointerException 審査会開催場所にnullが設定された場合
-         * @throws IllegalArgumentException
-         * 審査会予定定員、審査会最大定員、審査会自動割当定員、審査会委員定員、審査会割当済み人数に0より小さい値が設定された場合
          */
-        public ShinsakaiDetail build() throws NullPointerException, IllegalArgumentException {
-
-            RString null例外表示 = new RString("審査会情報");
-            requireNonNull(kaisaiBasho, Messages.E00003.replace("審査会開催場所", null例外表示.toString()).getMessage());
-
-            RString 引数エラー表示 = new RString("0以上");
-            check0以上(plannedTeiin, Messages.E00013.replace("審査会予定定員", 引数エラー表示.toString()).getMessage());
-            check0以上(maxTeiin, Messages.E00013.replace("審査会最大定員", 引数エラー表示.toString()).getMessage());
-            check0以上(autoWariateTeiin, Messages.E00013.replace("審査会自動割当定員", 引数エラー表示.toString()).getMessage());
-            check0以上(memberTeiin, Messages.E00013.replace("審査会委員定員", 引数エラー表示.toString()).getMessage());
-            check0以上(wariatesumi, Messages.E00013.replace("審査会割当済み人数", 引数エラー表示.toString()).getMessage());
-
+        public ShinsakaiDetail build() {
             return new ShinsakaiDetail(this);
+        }
+
+        /**
+         * 審査会開催場所の情報を設定して、自身を返します。
+         *
+         * @param 審査会開催場所 審査会開催場所
+         * @return 審査会情報Builder
+         * @throws NullPointerException 審査会開催場所にnullが設定された場合
+         */
+        public Builder set審査会開催場所(ShinsakaiKaisaiBasho 審査会開催場所) throws NullPointerException {
+            requireNonNull(審査会開催場所, Messages.E00001.replace("審査会開催場所").getMessage());
+            kaisaiBasho = 審査会開催場所;
+            return this;
+        }
+
+        /**
+         * 審査会予定定員を設定して、自身を返します。
+         *
+         * @param 審査会予定定員 審査会予定定員
+         * @return 審査会情報Builder
+         * @throws IllegalArgumentException 審査会予定定員に0より小さい値が渡されたとき
+         */
+        public Builder set審査会予定定員(int 審査会予定定員) throws IllegalArgumentException {
+            check0以上(審査会予定定員, Messages.E00013.replace("審査会予定定員", エラーメッセージ_0以上.toString()).getMessage());
+            plannedTeiin = 審査会予定定員;
+            return this;
         }
 
         private int check0以上(int check対象, String エラー表示) {
@@ -394,34 +407,14 @@ public final class ShinsakaiDetail {
         }
 
         /**
-         * 審査会開催場所の情報を設定して、自身を返します。
-         *
-         * @param 審査会開催場所 審査会開催場所
-         * @return 審査会情報Builder
-         */
-        public Builder set審査会開催場所(ShinsakaiKaisaiBasho 審査会開催場所) {
-            kaisaiBasho = 審査会開催場所;
-            return this;
-        }
-
-        /**
-         * 審査会予定定員を設定して、自身を返します。
-         *
-         * @param 審査会予定定員 審査会予定定員
-         * @return 審査会情報Builder
-         */
-        public Builder set審査会予定定員(int 審査会予定定員) {
-            plannedTeiin = 審査会予定定員;
-            return this;
-        }
-
-        /**
          * 審査会最大定員を設定して、自身を返します。
          *
          * @param 審査会最大定員 審査会最大定員
          * @return 審査会情報Builder
+         * @throws IllegalArgumentException 審査会最大定員に0より小さい値が渡されたとき
          */
-        public Builder set審査会最大定員(int 審査会最大定員) {
+        public Builder set審査会最大定員(int 審査会最大定員) throws IllegalArgumentException {
+            check0以上(審査会最大定員, Messages.E00013.replace("審査会最大定員", エラーメッセージ_0以上.toString()).getMessage());
             maxTeiin = 審査会最大定員;
             return this;
         }
@@ -431,8 +424,10 @@ public final class ShinsakaiDetail {
          *
          * @param 審査会自動割当定員 審査会自動割当定員
          * @return 審査会情報Builder
+         * @throws IllegalArgumentException 審査会自動割当定員に0より小さい値が渡されたとき
          */
-        public Builder set審査会自動割当定員(int 審査会自動割当定員) {
+        public Builder set審査会自動割当定員(int 審査会自動割当定員) throws IllegalArgumentException {
+            check0以上(審査会自動割当定員, Messages.E00013.replace("審査会自動割当定員", エラーメッセージ_0以上.toString()).getMessage());
             autoWariateTeiin = 審査会自動割当定員;
             return this;
         }
@@ -442,8 +437,10 @@ public final class ShinsakaiDetail {
          *
          * @param 審査会委員定員 審査会委員定員
          * @return 審査会情報Builder
+         * @throws IllegalArgumentException 審査会委員定員に0より小さい値が渡されたとき
          */
-        public Builder set審査会委員定員(int 審査会委員定員) {
+        public Builder set審査会委員定員(int 審査会委員定員) throws IllegalArgumentException {
+            check0以上(審査会委員定員, Messages.E00013.replace("審査会委員定員", エラーメッセージ_0以上.toString()).getMessage());
             memberTeiin = 審査会委員定員;
             return this;
         }
@@ -497,8 +494,10 @@ public final class ShinsakaiDetail {
          *
          * @param 審査会割当済み人数 審査会割当済み人数
          * @return 審査会情報Builder
+         * @throws IllegalArgumentException 審査会割当済み人数に0より小さい値が渡されたとき
          */
-        public Builder set審査会割当済み人数(int 審査会割当済み人数) {
+        public Builder set審査会割当済み人数(int 審査会割当済み人数) throws IllegalArgumentException {
+            check0以上(審査会割当済み人数, Messages.E00013.replace("審査会割当済み人数", エラーメッセージ_0以上.toString()).getMessage());
             wariatesumi = 審査会割当済み人数;
             return this;
         }

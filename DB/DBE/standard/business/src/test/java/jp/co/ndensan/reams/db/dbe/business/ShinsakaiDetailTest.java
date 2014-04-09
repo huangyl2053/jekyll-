@@ -99,6 +99,9 @@ public class ShinsakaiDetailTest {
             sut = new ShinsakaiDetail.Builder(審査会開催番号, 審査会開催年月日, 審査会開始時間, 審査会終了時間, 合議体情報)
                     .set審査会開催場所(null).build();
         }
+    }
+
+    public static class Builder_例外処理が存在する各設定メソッドのテスト extends DbeTestBase {
 
         @Test(expected = IllegalArgumentException.class)
         public void 審査会予定定員に0より小さい数値が設定されたとき_IllegalArgumentExceptionが発生する() {
