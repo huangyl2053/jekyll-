@@ -40,33 +40,42 @@ public final class NinteiKekkaMapper {
      * @return 認定結果情報
      */
     public static NinteiResult toNinteiResult(DbT5002NinteiKekkaJohoEntity entity) {
-        NinteiYukoKikan 認定有効期間 = new NinteiYukoKikan(
+        return new NinteiResult(
+                new ShinseishoKanriNo(entity.getShinseishoKanriNo()),
+                entity.getYoukaigodoNinteiYMD(),
+                new YokaigoJotaiKubun(entity.getYoukaigoJotaiKubunCode(), RString.EMPTY, RString.EMPTY),
+                new YokaigoJotaizoRei(entity.getYokaigoJotaizoReiCode(), RString.EMPTY, RString.EMPTY),
+                create認定有効期間(entity),
+                KaigoServiceType.toValue(entity.getKaigoServiceShurui()),
+                entity.getShisetsuNyushoFlag(),
+                new TokuteiShippeiKubun(entity.getTokuteiShippeiCode(), RString.EMPTY, RString.EMPTY),
+                create認定審査会意見(entity),
+                create認定理由(entity));
+    }
+
+    private static NinteiYukoKikan create認定有効期間(DbT5002NinteiKekkaJohoEntity entity) {
+        return new NinteiYukoKikan(
                 entity.getNinteiYukoKaishiYMD(),
                 new NinteiYukoKikanTsukisu(entity.getNinteiYukoKikan()),
                 entity.getNinteiYukoShuryoYMD());
-        NinteiShinsakaiIken 認定審査会意見 = new NinteiShinsakaiIken(
+    }
+
+    private static NinteiShinsakaiIken create認定審査会意見(DbT5002NinteiKekkaJohoEntity entity) {
+        return new NinteiShinsakaiIken(
                 new ShinsakaiKaisaiNo(entity.getShinsakaiKaisaiNo()),
                 ShinsakaiIkenShurui.toValue(entity.getNinteishinsakaiIkenShurui()),
                 entity.getShinsakaiIken(),
                 entity.getShinsakaiMemo());
-        NinteiRiyu 認定理由 = new NinteiRiyu(
+    }
+
+    private static NinteiRiyu create認定理由(DbT5002NinteiKekkaJohoEntity entity) {
+        return new NinteiRiyu(
                 entity.getIchijiHnateiKekkaHenkoRiyu(),
                 NinteiResultIdoJiyu.toValue(entity.getNinteiKekkaIdoJiyu()),
                 entity.getNinteiKekkaIdoYMD(),
                 entity.getNinteiTorikeshiRiyu(),
                 entity.getNinteiTorikeshiYMD(),
                 entity.getNinteiRiyu());
-        return new NinteiResult(
-                new ShinseishoKanriNo(entity.getShinseishoKanriNo()),
-                entity.getYoukaigodoNinteiYMD(),
-                new YokaigoJotaiKubun(entity.getYoukaigoJotaiKubunCode(), RString.EMPTY, RString.EMPTY),
-                new YokaigoJotaizoRei(entity.getYokaigoJotaizoReiCode(), RString.EMPTY, RString.EMPTY),
-                認定有効期間,
-                KaigoServiceType.toValue(entity.getKaigoServiceShurui()),
-                entity.getShisetsuNyushoFlag(),
-                new TokuteiShippeiKubun(entity.getTokuteiShippeiCode(), RString.EMPTY, RString.EMPTY),
-                認定審査会意見,
-                認定理由);
     }
 
     /**
