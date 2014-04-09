@@ -5,10 +5,12 @@
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho.shichosonCode;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho.shikibetsuCode;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho.shoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
 import jp.co.ndensan.reams.db.dbz.persistence.IInsertable;
@@ -40,7 +42,7 @@ public class HihokenshaDaichoDac implements IInsertable<DbT1001HihokenshaDaichoE
      * {@link DbT1001HihokenshaDaichoEntity 被保険者台帳管理Entity}の{@link List リスト}
      */
     @Transaction
-    public List<DbT1001HihokenshaDaichoEntity> select(LasdecCode 地方公共団体コード) {
+    public List<DbT1001HihokenshaDaichoEntity> selectAll(LasdecCode 地方公共団体コード) {
         DbAccessorForAddType accessor = new DbAccessorForAddType(session);
         List<DbT1001HihokenshaDaichoEntity> entities = accessor.
                 select().
@@ -52,7 +54,7 @@ public class HihokenshaDaichoDac implements IInsertable<DbT1001HihokenshaDaichoE
     }
 
     /**
-     * 指定の{@link LasdecCode 地方公共団体コード},{@link ShikibetsuCode 識別コード}から特定される個人の、
+     * 指定の{@link LasdecCode 地方公共団体コード}と{@link ShikibetsuCode 識別コード}から特定される個人の、
      * 直近の資格情報を検索します。
      *
      * @param 地方公共団体コード {@link LasdecCode 地方公共団体コード}
@@ -66,6 +68,25 @@ public class HihokenshaDaichoDac implements IInsertable<DbT1001HihokenshaDaichoE
                 select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(eq(shichosonCode, 地方公共団体コード), eq(shikibetsuCode, 識別コード))).
+                order(by(shoriTimestamp, Order.DESC)).
+                toList(DbT1001HihokenshaDaichoEntity.class);
+        return entities.isEmpty() ? null : entities.get(0);
+    }
+
+    /**
+     * 指定の{@link LasdecCode 地方公共団体コード}と{@link ShikibetsuCode 識別コード}から特定される被保険者の、
+     * 直近の資格情報を検索します。
+     *
+     * @param 地方公共団体コード {@link LasdecCode 地方公共団体コード}
+     * @param 被保険者番号 {@link KaigoHihokenshaNo 介護被保険者番号}
+     * @return 直近の資格情報を保持した{@link DbT1001HihokenshaDaichoEntity 被保険者台帳Entity}
+     */
+    public DbT1001HihokenshaDaichoEntity selectLatestOfPerson(LasdecCode 地方公共団体コード, KaigoHihokenshaNo 被保険者番号) {
+        DbAccessorForAddType accessor = new DbAccessorForAddType(session);
+        List<DbT1001HihokenshaDaichoEntity> entities = accessor.
+                select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(eq(shichosonCode, 地方公共団体コード), eq(hihokenshaNo, 被保険者番号))).
                 order(by(shoriTimestamp, Order.DESC)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
         return entities.isEmpty() ? null : entities.get(0);

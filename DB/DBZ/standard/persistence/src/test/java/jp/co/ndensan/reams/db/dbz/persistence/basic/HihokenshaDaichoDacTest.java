@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
-import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.helper.DbT1001HihokenshaDaichoEntityMock;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -56,7 +57,7 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
     @RunWith(Enclosed.class)
     public static class Select extends DbzTestDacBase {
 
-        public static class FromLasdecCode extends DbzTestDacBase {
+        public static class select_LasdecCode extends DbzTestDacBase {
 
             private LasdecCode code1 = new LasdecCode("111111");
             private LasdecCode code2 = new LasdecCode("222222");
@@ -69,13 +70,13 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
 
             @Test
             public void LasecCodeによるselectを用いて_あるLasdecCodeで検索したとき_検索結果のLasdecCodeは_検索条件のものと一致する() {
-                List<DbT1001HihokenshaDaichoEntity> result = sut.select(code1);
+                List<DbT1001HihokenshaDaichoEntity> result = sut.selectAll(code1);
                 assertThat(result.get(0).getShichosonCode(), is(code1));
             }
 
             @Test
             public void LasecCodeによるselectを用いて_DB上3件存在するLasecCodeで検索したとき_検索結果のListのsizeは3を返す() {
-                List<DbT1001HihokenshaDaichoEntity> result = sut.select(code1);
+                List<DbT1001HihokenshaDaichoEntity> result = sut.selectAll(code1);
                 assertThat(result.size(), is(3));
             }
 
@@ -89,7 +90,7 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
             }
         }
 
-        public static class selectLatestOfPerson extends DbzTestDacBase {
+        public static class selectLatestOfPerson_shikibetsuCode extends DbzTestDacBase {
 
             private LasdecCode shichosonCode;
             private ShikibetsuCode shikibetsuCode;
@@ -101,7 +102,7 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
             }
 
             @Test
-            public void selectLatestOfPersonは_ある個人に対する_直近の情報を取得する() {
+            public void selectLatestOfPerson_LasdecCodeAndShikibetsuCode版は_ある個人に対する_直近の情報を取得する() {
                 DbT1001HihokenshaDaichoEntity result = sut.selectLatestOfPerson(shichosonCode, shikibetsuCode);
                 assertThat(result.getShikakuShutokuYMD(), is(latestDate));
             }
@@ -128,6 +129,54 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
             private DbT1001HihokenshaDaichoEntity createEntityFrom(RDateTime 処理日時, FlexibleDate 資格取得年月日) {
                 DbT1001HihokenshaDaichoEntity entity;
                 entity = DbT1001HihokenshaDaichoEntityMock.createWithKey(shichosonCode, shikibetsuCode, 処理日時);
+                entity.setShikakuShutokuYMD(資格取得年月日);
+                return entity;
+            }
+        }
+
+        public static class selectLatestOfPerson_hihokenshaNo extends DbzTestDacBase {
+
+            private LasdecCode shichosonCode;
+            private ShikibetsuCode shikibetsuCode;
+            private RDateTime latestShoriTimeDate;
+            private KaigoHihokenshaNo hihokenshaNo;
+
+            @Before
+            public void setUp() {
+                initializeTable();
+            }
+
+            @Test
+            public void selectLatestOfPerson_LasdecCodeAndKaigoHihokenshaNo版は_ある個人に対する_直近の情報を取得する() {
+                DbT1001HihokenshaDaichoEntity result = sut.selectLatestOfPerson(shichosonCode, hihokenshaNo);
+                assertThat(result.getShoriTimestamp(), is(this.latestShoriTimeDate));
+            }
+
+            private void initializeTable() {
+                this.shichosonCode = new LasdecCode("111111");
+                this.shikibetsuCode = new ShikibetsuCode("1234567890");
+                this.hihokenshaNo = new KaigoHihokenshaNo(new RString("0987654321"));
+                FlexibleDate latestDate = new FlexibleDate("20140302");
+
+                this.latestShoriTimeDate = toRDateTime(latestDate);
+                sut.insert(createEntityFrom(latestShoriTimeDate, latestDate));
+                FlexibleDate oneYearAgo = latestDate.minusYear(1);
+                sut.insert(createEntityFrom(toRDateTime(oneYearAgo), oneYearAgo));
+                FlexibleDate twoYearAgo = latestDate.minusYear(2);
+                sut.insert(createEntityFrom(toRDateTime(twoYearAgo), twoYearAgo));
+            }
+
+            private RDateTime toRDateTime(FlexibleDate date) {
+                int year = date.getYearValue();
+                int month = date.getMonthValue();
+                int day = date.getDayValue();
+                return RDateTime.of(year, month, day, 0, 0);
+            }
+
+            private DbT1001HihokenshaDaichoEntity createEntityFrom(RDateTime 処理日時, FlexibleDate 資格取得年月日) {
+                DbT1001HihokenshaDaichoEntity entity;
+                entity = DbT1001HihokenshaDaichoEntityMock.createWithKey(shichosonCode, shikibetsuCode, 処理日時);
+                entity.setHihokenshaNo(this.hihokenshaNo);
                 entity.setShikakuShutokuYMD(資格取得年月日);
                 return entity;
             }
