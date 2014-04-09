@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.business.helper.NinteiResultMock;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceShurui;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -55,7 +55,7 @@ public class NinteiResultTest {
                 flg == AS_要介護状態区分がNULL ? null : ninteiResult.get要介護状態区分(),
                 ninteiResult.get要介護状態像例(),
                 flg == AS_認定有効期間がNULL ? null : ninteiResult.get認定有効期間(),
-                KaigoServiceShurui.訪問介護,
+                KaigoServiceType.訪問介護,
                 true,
                 ninteiResult.get特定疾病区分(),
                 ninteiResult.get認定審査会意見(),

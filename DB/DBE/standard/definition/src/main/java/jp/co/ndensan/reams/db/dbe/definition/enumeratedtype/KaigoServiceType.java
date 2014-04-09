@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N8156 宮本 康
  */
-public enum KaigoServiceShurui {
+public enum KaigoServiceType {
 
     /**
      * 介護サービス種類が「訪問介護」であることを表します。<br />
@@ -366,7 +366,7 @@ public enum KaigoServiceShurui {
     介護予防認知症対応型共同生活介護_短期利用型_2("97");
     private final RString code;
 
-    private KaigoServiceShurui(String code) {
+    private KaigoServiceType(String code) {
         this.code = new RString(code);
     }
 
@@ -385,8 +385,8 @@ public enum KaigoServiceShurui {
      * @param code コード
      * @return 列挙型
      */
-    public static KaigoServiceShurui toValue(RString code) {
-        for (KaigoServiceShurui data : KaigoServiceShurui.values()) {
+    public static KaigoServiceType toValue(RString code) {
+        for (KaigoServiceType data : KaigoServiceType.values()) {
             if (data.getCode().equals(code)) {
                 return data;
             }

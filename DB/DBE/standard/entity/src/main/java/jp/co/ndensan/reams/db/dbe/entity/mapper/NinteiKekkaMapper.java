@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.business.NinteiYukoKikan;
 import jp.co.ndensan.reams.db.dbe.business.TokuteiShippeiKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotaizoRei;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceShurui;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiKekkaIdoJiyu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIkenShurui;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiYukoKikanTsukisu;
@@ -62,7 +62,7 @@ public final class NinteiKekkaMapper {
                 new YokaigoJotaiKubun(entity.getYoukaigoJotaiKubunCode(), RString.EMPTY, RString.EMPTY),
                 new YokaigoJotaizoRei(entity.getYokaigoJotaizoReiCode(), RString.EMPTY, RString.EMPTY),
                 認定有効期間,
-                KaigoServiceShurui.toValue(entity.getKaigoServiceShurui()),
+                KaigoServiceType.toValue(entity.getKaigoServiceShurui()),
                 entity.getShisetsuNyushoFlag(),
                 new TokuteiShippeiKubun(entity.getTokuteiShippeiCode(), RString.EMPTY, RString.EMPTY),
                 認定審査会意見,

@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteiResult;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceShurui;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiKekkaIdoJiyu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIkenShurui;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5002NinteiKekkaJohoEntity;
@@ -66,7 +66,7 @@ public class NinteiKekkaMapperTest {
 
         @Test
         public void 介護サービス種類の設定がある時_toNinteiResult_get介護サービス種類は_設定値を返す() {
-            assertThat(toNinteiResult().get介護サービス種類(), is(KaigoServiceShurui.訪問介護));
+            assertThat(toNinteiResult().get介護サービス種類(), is(KaigoServiceType.訪問介護));
         }
 
         @Test
@@ -199,7 +199,7 @@ public class NinteiKekkaMapperTest {
 
         @Test
         public void 介護サービス種類の設定がある時_toDbT5002NinteiKekkaJohoEntity_getKaigoServiceShuruiは_設定値を返す() {
-            assertThat(toDbT5002NinteiKekkaJohoEntity().getKaigoServiceShurui(), is(KaigoServiceShurui.訪問介護.getCode()));
+            assertThat(toDbT5002NinteiKekkaJohoEntity().getKaigoServiceShurui(), is(KaigoServiceType.訪問介護.getCode()));
         }
 
         @Test

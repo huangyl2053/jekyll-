@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.business.NinteiYukoKikan;
 import jp.co.ndensan.reams.db.dbe.business.TokuteiShippeiKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotaizoRei;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceShurui;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiKekkaIdoJiyu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIkenShurui;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiYukoKikanTsukisu;
@@ -51,7 +51,7 @@ public class NinteiResultMock {
                 createYokaigoJotaiKubun(),
                 createYokaigoJotaizoRei(),
                 createNinteiYukoKikan(),
-                KaigoServiceShurui.訪問介護,
+                KaigoServiceType.訪問介護,
                 true,
                 createTokuteiShippeiKubun(),
                 createNinteiShinsakaiIken(),
