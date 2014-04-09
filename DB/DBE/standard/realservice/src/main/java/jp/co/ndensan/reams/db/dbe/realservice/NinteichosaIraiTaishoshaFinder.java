@@ -5,184 +5,180 @@
 package jp.co.ndensan.reams.db.dbe.realservice;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.business.KaigoNinteichosain;
+import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbe.business.NinteichosaIrai;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiTaishosha;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaIraiTaishoshaMapper;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinchokuJohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiChosaIraiJohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbe.persistence.NinteichosaItakusakiDac;
-import jp.co.ndensan.reams.db.dbe.persistence.relate.INinteiChosaIraiTaishoshaDac;
-import jp.co.ndensan.reams.ur.urf.entity.basic.ChosainJohoEntity;
-import jp.co.ndensan.reams.ur.urf.entity.basic.KaigoJigyoshaEntity;
-import jp.co.ndensan.reams.ur.urf.persistence.basic.IChosainJohoDac;
-import jp.co.ndensan.reams.ur.urf.persistence.basic.IKaigoJigyoshaDac;
+import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteishinseiJohoMapper;
+import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbe.persistence.relate.NinteichosaIraiTaishoshaDac;
+import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
+import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
+import jp.co.ndensan.reams.ur.urf.definition.KaigoJigyoshaShubetsu;
+import jp.co.ndensan.reams.ur.urf.realservice.IKaigoJigyoshaFinder;
+import jp.co.ndensan.reams.ur.urf.realservice.INinteiChosainFinder;
+import jp.co.ndensan.reams.ur.urf.realservice.KaigoJigyoshaFinderFactory;
+import jp.co.ndensan.reams.ur.urf.realservice.NinteiChosainFinderFactory;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
 import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
-//import jp.co.ndensan.reams.ur.urz.persistence.basic.IKojinDac;
-//import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- * 認定調査依頼対象者情報を管理するクラスです。
+ * 認定調査依頼対象者を管理するクラスです。
  *
  * @author N8187 久保田 英男
  */
 public class NinteichosaIraiTaishoshaFinder {
 
-    private final INinteiShinchokuJohoDac shinchokuJohoDac;
-    private final INinteiShinseiJohoDac shinseiJohoDac;
-    private final NinteichosaItakusakiDac itakusakiDac;
-    private final INinteiChosaIraiJohoDac iraiJohoDac;
-    private final INinteiChosaIraiTaishoshaDac iraiTaishoshaDac;
-//    private final IKojinDac kojinDac;
-//    private final KojinService kojinService;
-    private final IKaigoJigyoshaDac kaigoJigyoshaDac;
-    private final IChosainJohoDac chosainJohoDac;
+    private final NinteichosaIraiTaishoshaDac iraiTaishoshaDac;
+    private final IKojinFinder kojinFinder;
+    private final NinteichosaIraiManager ninteichosaIraiManager;
+    private final NinteichosaItakusakiManager ninteichosaItakusakiManager;
+    private final IKaigoJigyoshaFinder kaigoJigyoshaFinder;
+    private final KaigoNinteichosainManager kaigoNinteichosainManager;
+    private final INinteiChosainFinder ninteiChosainFinder;
 
     /**
      * コンストラクタです。
      *
      */
     public NinteichosaIraiTaishoshaFinder() {
-        shinchokuJohoDac = InstanceProvider.create(INinteiShinchokuJohoDac.class);
-        shinseiJohoDac = InstanceProvider.create(INinteiShinseiJohoDac.class);
-        itakusakiDac = InstanceProvider.create(NinteichosaItakusakiDac.class);
-        iraiJohoDac = InstanceProvider.create(INinteiChosaIraiJohoDac.class);
-        iraiTaishoshaDac = InstanceProvider.create(INinteiChosaIraiTaishoshaDac.class);
-//        kojinDac = InstanceCreator.create(IKojinDac.class);
-        kaigoJigyoshaDac = InstanceProvider.create(IKaigoJigyoshaDac.class);
-        chosainJohoDac = InstanceProvider.create(IChosainJohoDac.class);
+        iraiTaishoshaDac = InstanceProvider.create(NinteichosaIraiTaishoshaDac.class);
+        kojinFinder = KojinService.createKojinFinder();
+        ninteichosaIraiManager = new NinteichosaIraiManager();
+        ninteichosaItakusakiManager = new NinteichosaItakusakiManager();
+        kaigoJigyoshaFinder = KaigoJigyoshaFinderFactory.getInstance();
+        kaigoNinteichosainManager = new KaigoNinteichosainManager();
+        ninteiChosainFinder = NinteiChosainFinderFactory.getInstance();
     }
 
     /**
      * テスト用のコンストラクタです。
      *
-     * @param shinchokuJohoDac 進捗情報DAC
-     * @param shinseiJohoDac 申請情報DAC
-     * @param itakusakiDac 委託先DAC
-     * @param iraiJohoDac 依頼情報DAC
-     * @param iraiTaishoshaDac 認定調査依頼対象者を取得するDAC
-     * @param kojinDac 個人DAC
-     * @param kaigoJigyoshaDac 介護事業者DAC
-     * @param chosainJohoDac 調査員情報DAC
+     * @param iraiTaishoshaDac iraiTaishoshaDac
+     * @param kojinFinder kojinFinderkojinFinder
+     * @param ninteichosaIraiManager ninteichosaIraiManager
+     * @param ninteichosaItakusakiManager ninteichosaItakusakiManager
+     * @param kaigoJigyoshaFinder kaigoJigyoshaFinder
+     * @param kaigoNinteichosainManager kaigoNinteichosainManager
+     * @param ninteiChosainFinder ninteiChosainFinder
      */
     NinteichosaIraiTaishoshaFinder(
-            INinteiShinchokuJohoDac shinchokuJohoDac,
-            INinteiShinseiJohoDac shinseiJohoDac,
-            NinteichosaItakusakiDac itakusakiDac,
-            INinteiChosaIraiJohoDac iraiJohoDac,
-            INinteiChosaIraiTaishoshaDac iraiTaishoshaDac,
-            //            IKojinDac kojinDac,
-            IKaigoJigyoshaDac kaigoJigyoshaDac,
-            IChosainJohoDac chosainJohoDac) {
-        this.shinchokuJohoDac = shinchokuJohoDac;
-        this.shinseiJohoDac = shinseiJohoDac;
-        this.itakusakiDac = itakusakiDac;
-        this.iraiJohoDac = iraiJohoDac;
+            NinteichosaIraiTaishoshaDac iraiTaishoshaDac,
+            IKojinFinder kojinFinder,
+            NinteichosaIraiManager ninteichosaIraiManager,
+            NinteichosaItakusakiManager ninteichosaItakusakiManager,
+            IKaigoJigyoshaFinder kaigoJigyoshaFinder,
+            KaigoNinteichosainManager kaigoNinteichosainManager,
+            INinteiChosainFinder ninteiChosainFinder) {
         this.iraiTaishoshaDac = iraiTaishoshaDac;
-//        this.kojinDac = kojinDac;
-        this.kaigoJigyoshaDac = kaigoJigyoshaDac;
-        this.chosainJohoDac = chosainJohoDac;
+        this.kojinFinder = kojinFinder;
+        this.ninteichosaIraiManager = ninteichosaIraiManager;
+        this.ninteichosaItakusakiManager = ninteichosaItakusakiManager;
+        this.kaigoJigyoshaFinder = kaigoJigyoshaFinder;
+        this.kaigoNinteichosainManager = kaigoNinteichosainManager;
+        this.ninteiChosainFinder = ninteiChosainFinder;
     }
 
     /**
-     * 証記載保険者番号を指定して、認定調査依頼が未完了の認定調査依頼対象者を取得します。
+     * 認定調査依頼対象者を取得します。
+     *
+     * @return 認定調査依頼対象者リスト
+     */
+    public List<NinteichosaIraiTaishosha> get認定調査依頼対象者() {
+        return create認定調査依頼対象者List(iraiTaishoshaDac.selectAll());
+    }
+
+    /**
+     * 証記載保険者番号を指定して、認定調査依頼対象者を取得します。
      *
      * @param 証記載保険者番号 証記載保険者番号
-     * @return NinteichosaIraiTaishoshaのList
-     * @throws NullPointerException {@code 証記載保険者番号}がnullの場合
+     * @return 認定調査依頼対象者リスト
+     * @throws NullPointerException 引数がnullの場合
      */
-    public List<NinteichosaIraiTaishosha> get認定調査依頼対象者証記載保険者番号指定(ShoKisaiHokenshaNo 証記載保険者番号) throws NullPointerException {
+    public List<NinteichosaIraiTaishosha> get認定調査依頼対象者(ShoKisaiHokenshaNo 証記載保険者番号) throws NullPointerException {
         requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
-
-        List<DbT5005NinteiShinchokuJohoEntity> 要介護認定進捗情報EntityList = iraiTaishoshaDac.select(証記載保険者番号);
-        if (要介護認定進捗情報EntityList.isEmpty()) {
-            return Collections.EMPTY_LIST;
-        }
-
-        return create認定調査依頼対象者List(要介護認定進捗情報EntityList);
+        return create認定調査依頼対象者List(iraiTaishoshaDac.select証記載保険者番号(証記載保険者番号));
     }
 
     /**
-     * 認定調査依頼が未完了の認定調査依頼対象者を取得します。
+     * 証記載保険者番号と支所コードを指定して、認定調査依頼対象者を取得します。
      *
-     * @return NinteichosaIraiTaishoshaのList
+     * @param 証記載保険者番号 証記載保険者番号
+     * @param 支所コード 支所コード
+     * @return 認定調査依頼対象者リスト
+     * @throws NullPointerException 引数がnullの場合
      */
-    public List<NinteichosaIraiTaishosha> get認定調査依頼対象者全件() {
-        List<DbT5005NinteiShinchokuJohoEntity> 要介護認定進捗情報EntityList = shinchokuJohoDac.select認定調査未完了();
-        if (要介護認定進捗情報EntityList.isEmpty()) {
-            return Collections.EMPTY_LIST;
-        }
-
-        return create認定調査依頼対象者List(要介護認定進捗情報EntityList);
+    public List<NinteichosaIraiTaishosha> get認定調査依頼対象者(ShoKisaiHokenshaNo 証記載保険者番号, RString 支所コード) throws NullPointerException {
+        requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
+        requireNonNull(支所コード, Messages.E00001.replace("支所コード").getMessage());
+        return create認定調査依頼対象者List(iraiTaishoshaDac.select証記載保険者番号及び支所コード(証記載保険者番号, 支所コード));
     }
 
-    private List<NinteichosaIraiTaishosha> create認定調査依頼対象者List(List<DbT5005NinteiShinchokuJohoEntity> 要介護認定進捗情報EntityList)
+    private List<NinteichosaIraiTaishosha> create認定調査依頼対象者List(List<KaigoNinteiShoriTaishoshaEntity> entityList)
             throws NullPointerException {
         List<NinteichosaIraiTaishosha> list = new ArrayList<>();
 
-        for (DbT5005NinteiShinchokuJohoEntity entity : 要介護認定進捗情報EntityList) {
-
-            DbT5001NinteiShinseiJohoEntity 認定申請情報Entity = shinseiJohoDac.select(entity.getShinseishoKanriNo());
-//            KojinEntity 個人Entity = kojinDac.select最新(認定申請情報Entity.getShoKisaiHokenshaNo().getValue());
-//            KojinEntity 個人Entity = KojinService.createKojinFinder().get個人(認定申請情報Entity.getShikibetsuCode());
-            IKojin 個人 = KojinService.createKojinFinder().get個人(認定申請情報Entity.getShikibetsuCode());
-            NinteichosaIraiRirekiNo ninteichosaIraiRirekiNo = new NinteichosaIraiRirekiNo(認定申請情報Entity.getNinteichosaIraiRirekiNo());
-            DbT5006NinteichosaIraiJohoEntity 認定調査依頼情報Entity = iraiJohoDac.select(
-                    認定申請情報Entity.getShinseishoKanriNo().getColumnValue(),
-                    ninteichosaIraiRirekiNo);
-            DbT7010NinteichosaItakusakiJohoEntity 認定委託先情報Entity = create認定調査委託先(認定申請情報Entity, 認定調査依頼情報Entity);
-            KaigoJigyoshaEntity 介護事業者Entity = create介護事業者(認定調査依頼情報Entity);
-            ChosainJohoEntity 調査員情報Entity = create調査員情報(認定申請情報Entity, 認定調査依頼情報Entity);
+        for (KaigoNinteiShoriTaishoshaEntity entity : entityList) {
+            NinteiShinseiJoho 認定申請情報 = NinteishinseiJohoMapper.to認定申請情報(entity.getNinteiShinseiJohoEntity());
+            IKojin 個人 = get個人(認定申請情報);
+            NinteichosaIrai 認定調査依頼情報 = get認定調査依頼情報(認定申請情報);
+            NinteichosaItakusaki 認定調査委託先情報 = get認定調査委託先情報(認定申請情報, 認定調査依頼情報);
+            IKaigoJigyosha 介護事業者 = get介護事業者(認定調査依頼情報);
+            KaigoNinteichosain 介護認定調査員 = get介護認定調査員(認定申請情報, 認定調査依頼情報);
+            INinteiChosain 認定調査員情報 = get認定調査員情報(介護認定調査員);
 
             list.add(NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(
-                    認定申請情報Entity, 個人,
-                    認定委託先情報Entity, 介護事業者Entity, 調査員情報Entity));
+                    認定申請情報,
+                    個人,
+                    認定調査委託先情報,
+                    介護事業者,
+                    認定調査員情報));
         }
+
         return list;
     }
 
-    private DbT7010NinteichosaItakusakiJohoEntity create認定調査委託先(
-            DbT5001NinteiShinseiJohoEntity shinseiJohoEntity,
-            DbT5006NinteichosaIraiJohoEntity chosaIraiJohoEntity) {
-        boolean isUncreatable = isNull(shinseiJohoEntity) || isNull(chosaIraiJohoEntity);
-        return isUncreatable ? null
-                : itakusakiDac.select(
-                        shinseiJohoEntity.getShoKisaiHokenshaNo().getValue(),
-                        new KaigoJigyoshaNo(chosaIraiJohoEntity.getNinteichosaItakusakiCode().getColumnValue()),
-                        true);
+    private IKojin get個人(NinteiShinseiJoho 認定申請情報) {
+        return kojinFinder.get個人(認定申請情報.get識別コード());
     }
 
-    private KaigoJigyoshaEntity create介護事業者(
-            DbT5006NinteichosaIraiJohoEntity chosaIraiJohoEntity) {
-        return isNull(chosaIraiJohoEntity) ? null
-                : kaigoJigyoshaDac.select特定の事業者番号の事業者(
-                        chosaIraiJohoEntity.getNinteichosaItakusakiCode().getColumnValue()).get(0);
+    private NinteichosaIrai get認定調査依頼情報(NinteiShinseiJoho 認定申請情報) {
+        return ninteichosaIraiManager.get認定調査依頼情報(
+                認定申請情報.get申請書管理番号(),
+                認定申請情報.get認定調査依頼履歴番号());
     }
 
-    private ChosainJohoEntity create調査員情報(
-            DbT5001NinteiShinseiJohoEntity shinseiJohoEntity,
-            DbT5006NinteichosaIraiJohoEntity chosaIraiJohoEntity) {
-        boolean isUncreatable = isNull(shinseiJohoEntity) || isNull(chosaIraiJohoEntity);
-        return isUncreatable ? null
-                : chosainJohoDac.selectByAllKey(
-                        shinseiJohoEntity.getShoKisaiHokenshaNo().getValue(),
-                        chosaIraiJohoEntity.getNinteichosaItakusakiCode().getColumnValue(),
-                        chosaIraiJohoEntity.getChousainCode().getColumnValue());
+    private NinteichosaItakusaki get認定調査委託先情報(NinteiShinseiJoho 認定申請情報, NinteichosaIrai 認定調査依頼情報) {
+        return ninteichosaItakusakiManager.get認定調査委託先介護事業者番号指定(
+                認定申請情報.get証記載保険者番号(),
+                認定調査依頼情報.get認定調査委託先コード(),
+                true);
     }
 
-    private static <T> boolean isNull(T object) {
-        return object == null;
+    private IKaigoJigyosha get介護事業者(NinteichosaIrai 認定調査依頼情報) {
+        return kaigoJigyoshaFinder.get特定の事業者種別かつ事業者番号の介護事業者(
+                KaigoJigyoshaShubetsu.サービス事業者,
+                認定調査依頼情報.get認定調査委託先コード().value());
+    }
+
+    private KaigoNinteichosain get介護認定調査員(NinteiShinseiJoho 認定申請情報, NinteichosaIrai 認定調査依頼情報) {
+        return kaigoNinteichosainManager.get介護認定調査員(
+                認定申請情報.get証記載保険者番号(),
+                認定調査依頼情報.get認定調査委託先コード(),
+                new KaigoNinteichosainNo(認定調査依頼情報.get調査員番号コード().value()));
+    }
+
+    private INinteiChosain get認定調査員情報(KaigoNinteichosain 介護認定調査員) {
+        return ninteiChosainFinder.get認定調査員(介護認定調査員.get介護調査員番号().value());
     }
 }

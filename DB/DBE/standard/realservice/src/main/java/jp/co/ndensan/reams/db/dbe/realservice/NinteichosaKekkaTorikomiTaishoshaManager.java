@@ -21,8 +21,8 @@ import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.INinteichosaKekkaTorikomiTaishoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
-import jp.co.ndensan.reams.ur.urz.realservice.IShikibetsuTaishoFinder;
-import jp.co.ndensan.reams.ur.urz.realservice.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
+import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -37,7 +37,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
     private final INinteichosaKekkaTorikomiTaishoshaDac torikomiTaishoshaDac;
     private final NinteichosaIraiManager ninteichosaIraiManager;
     private final KaigoNinteichosainManager kaigoNinteichosainManager;
-    private final IShikibetsuTaishoFinder shikibetsuTaishoFinder;
+    private final IKojinFinder kojinFinder;
 
     /**
      * コンストラクタです。
@@ -46,26 +46,26 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
         torikomiTaishoshaDac = InstanceProvider.create(INinteichosaKekkaTorikomiTaishoshaDac.class);
         ninteichosaIraiManager = new NinteichosaIraiManager();
         kaigoNinteichosainManager = new KaigoNinteichosainManager();
-        shikibetsuTaishoFinder = ShikibetsuTaishoService.getShikibetsuTaishoFinder();
+        kojinFinder = KojinService.createKojinFinder();
     }
 
     /**
      * テスト用プライベートコンストラクタです。
      *
-     * @param chosaIraiJohoDac chosaIraiJohoDac
      * @param torikomiTaishoshaDac torikomiTaishoshaDac
+     * @param ninteichosaIraiManager ninteichosaIraiManager
      * @param kaigoNinteichosainManager kaigoNinteichosainManager
-     * @param shikibetsuTaishoFinder shikibetsuTaishoFinder
+     * @param kojinFinder kojinFinder
      */
     NinteichosaKekkaTorikomiTaishoshaManager(
             INinteichosaKekkaTorikomiTaishoshaDac torikomiTaishoshaDac,
             NinteichosaIraiManager ninteichosaIraiManager,
             KaigoNinteichosainManager kaigoNinteichosainManager,
-            IShikibetsuTaishoFinder shikibetsuTaishoFinder) {
+            IKojinFinder kojinFinder) {
         this.torikomiTaishoshaDac = torikomiTaishoshaDac;
         this.ninteichosaIraiManager = ninteichosaIraiManager;
         this.kaigoNinteichosainManager = kaigoNinteichosainManager;
-        this.shikibetsuTaishoFinder = shikibetsuTaishoFinder;
+        this.kojinFinder = kojinFinder;
     }
 
     /**
@@ -120,15 +120,15 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
         List<NinteichosaKekkaTorikomiTaishosha> list = new ArrayList<>();
 
         for (KaigoNinteiShoriTaishoshaEntity entity : entityList) {
-            YokaigoninteiProgress yokaigoninteiProgress = NinteiShinchokuJohoMapper.toNinteiShinchokuJoho(entity.getNinteiShinchokuJohoEntity());
-            NinteiShinseiJoho shinseiJoho = NinteishinseiJohoMapper.to認定申請情報(entity.getNinteiShinseiJohoEntity());
-            NinteichosaIrai iraiJoho = get認定調査依頼情報(yokaigoninteiProgress, shinseiJoho);
-            KaigoNinteichosain kaigoNinteichosain = get介護認定調査員(shinseiJoho, iraiJoho);
-            IKojin kojin = shikibetsuTaishoFinder.get識別対象(shinseiJoho.get識別コード()).to個人();
+            YokaigoninteiProgress 認定進捗情報 = NinteiShinchokuJohoMapper.toNinteiShinchokuJoho(entity.getNinteiShinchokuJohoEntity());
+            NinteiShinseiJoho 認定申請情報 = NinteishinseiJohoMapper.to認定申請情報(entity.getNinteiShinseiJohoEntity());
+            NinteichosaIrai 認定調査依頼情報 = get認定調査依頼情報(認定進捗情報, 認定申請情報);
+            KaigoNinteichosain 介護認定調査員 = get介護認定調査員(認定申請情報, 認定調査依頼情報);
+            IKojin 個人 = kojinFinder.get個人(認定申請情報.get識別コード());
 
             list.add(new NinteichosaKekkaTorikomiTaishosha(
-                    yokaigoninteiProgress, shinseiJoho, iraiJoho,
-                    kaigoNinteichosain, kojin));
+                    認定進捗情報, 認定申請情報, 認定調査依頼情報,
+                    介護認定調査員, 個人));
         }
 
         if (list.isEmpty()) {

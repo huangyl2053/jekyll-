@@ -21,8 +21,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuTaisho;
-import jp.co.ndensan.reams.ur.urz.realservice.IShikibetsuTaishoFinder;
+import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
@@ -44,7 +43,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManagerTest extends DbeTestBase {
     private static ShujiiIkenshoTorikomiTaishoshaManager sut;
     private static ShujiiIkenshoTorikomiTaishoshaDac torikomiTaishoshaDac;
     private static ShujiiIkenshoSakuseiIraiKirokuManager shujiiManager;
-    private static IShikibetsuTaishoFinder shikibetsuTaishoFinder;
+    private static IKojinFinder kojinFinder;
     private static ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("123456"));
     private static RString 支所コード = new RString("0001");
     private static List<ShujiiIkenshoTorikomiTaishosha> resultList;
@@ -53,7 +52,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManagerTest extends DbeTestBase {
     public static void setUpClass() {
         torikomiTaishoshaDac = mock(ShujiiIkenshoTorikomiTaishoshaDac.class);
         shujiiManager = mock(ShujiiIkenshoSakuseiIraiKirokuManager.class);
-        shikibetsuTaishoFinder = mock(IShikibetsuTaishoFinder.class);
+        kojinFinder = mock(IKojinFinder.class);
     }
 
     public static class get主治医意見書取込対象者全件 extends DbeTestBase {
@@ -61,7 +60,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManagerTest extends DbeTestBase {
         @Test
         public void get主治医意見書取込対象者全件で_主治医意見書取込対象者が登録されていないとき_COLLECTIONS_EMPTYを返す() {
             when(torikomiTaishoshaDac.selectAll()).thenReturn(Collections.EMPTY_LIST);
-            sut = new ShujiiIkenshoTorikomiTaishoshaManager(torikomiTaishoshaDac, shujiiManager, shikibetsuTaishoFinder);
+            sut = new ShujiiIkenshoTorikomiTaishoshaManager(torikomiTaishoshaDac, shujiiManager, kojinFinder);
             resultList = sut.get主治医意見書取込対象者全件();
             assertThat(resultList, is(Collections.EMPTY_LIST));
         }
@@ -70,9 +69,8 @@ public class ShujiiIkenshoTorikomiTaishoshaManagerTest extends DbeTestBase {
         public void get主治医意見書取込対象者全件で_主治医意見書取込対象者が1件登録されているとき_1件の対象者を取得する() {
             when(torikomiTaishoshaDac.selectAll()).thenReturn(create介護認定処理対象者List(1));
             when(shujiiManager.get主治医意見書作成依頼情報(any(ShinseishoKanriNo.class), any(IkenshosakuseiIraiRirekiNo.class))).thenReturn(create主治医意見書作成依頼());
-            when(shikibetsuTaishoFinder.get識別対象(any(ShikibetsuCode.class))).thenReturn(mock(IShikibetsuTaisho.class));
-            when(shikibetsuTaishoFinder.get識別対象(any(ShikibetsuCode.class)).to個人()).thenReturn(mock(IKojin.class));
-            sut = new ShujiiIkenshoTorikomiTaishoshaManager(torikomiTaishoshaDac, shujiiManager, shikibetsuTaishoFinder);
+            when(kojinFinder.get個人(any(ShikibetsuCode.class))).thenReturn(mock(IKojin.class));
+            sut = new ShujiiIkenshoTorikomiTaishoshaManager(torikomiTaishoshaDac, shujiiManager, kojinFinder);
             resultList = sut.get主治医意見書取込対象者全件();
             assertThat(resultList.size(), is(1));
         }
@@ -83,7 +81,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManagerTest extends DbeTestBase {
         @Test
         public void get主治医意見書取込対象者全件で_証記載保険者番号を指定し_主治医意見書取込対象者が登録されていないとき_COLLECTIONS_EMPTYを返す() {
             when(torikomiTaishoshaDac.select証記載保険者番号(any(ShoKisaiHokenshaNo.class))).thenReturn(Collections.EMPTY_LIST);
-            sut = new ShujiiIkenshoTorikomiTaishoshaManager(torikomiTaishoshaDac, shujiiManager, shikibetsuTaishoFinder);
+            sut = new ShujiiIkenshoTorikomiTaishoshaManager(torikomiTaishoshaDac, shujiiManager, kojinFinder);
             resultList = sut.get主治医意見書取込対象者全件(証記載保険者番号);
             assertThat(resultList, is(Collections.EMPTY_LIST));
         }
@@ -92,9 +90,8 @@ public class ShujiiIkenshoTorikomiTaishoshaManagerTest extends DbeTestBase {
         public void get主治医意見書取込対象者全件で_証記載保険者番号を指定し_主治医意見書取込対象者が1件登録されているとき_1件の対象者を取得する() {
             when(torikomiTaishoshaDac.select証記載保険者番号(any(ShoKisaiHokenshaNo.class))).thenReturn(create介護認定処理対象者List(1));
             when(shujiiManager.get主治医意見書作成依頼情報(any(ShinseishoKanriNo.class), any(IkenshosakuseiIraiRirekiNo.class))).thenReturn(create主治医意見書作成依頼());
-            when(shikibetsuTaishoFinder.get識別対象(any(ShikibetsuCode.class))).thenReturn(mock(IShikibetsuTaisho.class));
-            when(shikibetsuTaishoFinder.get識別対象(any(ShikibetsuCode.class)).to個人()).thenReturn(mock(IKojin.class));
-            sut = new ShujiiIkenshoTorikomiTaishoshaManager(torikomiTaishoshaDac, shujiiManager, shikibetsuTaishoFinder);
+            when(kojinFinder.get個人(any(ShikibetsuCode.class))).thenReturn(mock(IKojin.class));
+            sut = new ShujiiIkenshoTorikomiTaishoshaManager(torikomiTaishoshaDac, shujiiManager, kojinFinder);
             resultList = sut.get主治医意見書取込対象者全件(証記載保険者番号);
             assertThat(resultList.size(), is(1));
         }
@@ -105,7 +102,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManagerTest extends DbeTestBase {
         @Test
         public void get主治医意見書取込対象者全件で_証記載保険者番号と支所コードを指定し_主治医意見書取込対象者が登録されていないとき_COLLECTIONS_EMPTYを返す() {
             when(torikomiTaishoshaDac.select証記載保険者番号及び支所コード(any(ShoKisaiHokenshaNo.class), any(RString.class))).thenReturn(Collections.EMPTY_LIST);
-            sut = new ShujiiIkenshoTorikomiTaishoshaManager(torikomiTaishoshaDac, shujiiManager, shikibetsuTaishoFinder);
+            sut = new ShujiiIkenshoTorikomiTaishoshaManager(torikomiTaishoshaDac, shujiiManager, kojinFinder);
             resultList = sut.get主治医意見書取込対象者全件(証記載保険者番号, 支所コード);
             assertThat(resultList, is(Collections.EMPTY_LIST));
         }
@@ -114,9 +111,8 @@ public class ShujiiIkenshoTorikomiTaishoshaManagerTest extends DbeTestBase {
         public void get主治医意見書取込対象者全件で_証記載保険者番号と支所コードを指定し_主治医意見書取込対象者が1件登録されているとき_1件の対象者を取得する() {
             when(torikomiTaishoshaDac.select証記載保険者番号及び支所コード(any(ShoKisaiHokenshaNo.class), any(RString.class))).thenReturn(create介護認定処理対象者List(1));
             when(shujiiManager.get主治医意見書作成依頼情報(any(ShinseishoKanriNo.class), any(IkenshosakuseiIraiRirekiNo.class))).thenReturn(create主治医意見書作成依頼());
-            when(shikibetsuTaishoFinder.get識別対象(any(ShikibetsuCode.class))).thenReturn(mock(IShikibetsuTaisho.class));
-            when(shikibetsuTaishoFinder.get識別対象(any(ShikibetsuCode.class)).to個人()).thenReturn(mock(IKojin.class));
-            sut = new ShujiiIkenshoTorikomiTaishoshaManager(torikomiTaishoshaDac, shujiiManager, shikibetsuTaishoFinder);
+            when(kojinFinder.get個人(any(ShikibetsuCode.class))).thenReturn(mock(IKojin.class));
+            sut = new ShujiiIkenshoTorikomiTaishoshaManager(torikomiTaishoshaDac, shujiiManager, kojinFinder);
             resultList = sut.get主治医意見書取込対象者全件(証記載保険者番号, 支所コード);
             assertThat(resultList.size(), is(1));
         }

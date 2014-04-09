@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.spy;
 
@@ -46,7 +45,7 @@ public class NinteiShinseiJohoMock {
                 new RString("支所コード"),
                 new KaigoHihokenshaNo(new RString("介護被保険者番号")),
                 new ShikibetsuCode(new RString("123456")),
-                RDate.MIN,
+                FlexibleDate.MIN,
                 new EdabanCode(new RString("001")),
                 NinteiShinseiKubunShinsei.新規申請,
                 new Code(new RString("認定申請区分_法令")),

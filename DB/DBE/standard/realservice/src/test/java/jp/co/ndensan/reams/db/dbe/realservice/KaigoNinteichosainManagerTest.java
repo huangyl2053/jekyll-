@@ -295,7 +295,7 @@ public class KaigoNinteichosainManagerTest extends TestBase {
 
     private static NinteichosaItakusakiDac createMockItakusakiDac() {
         NinteichosaItakusakiDac dac = mock(NinteichosaItakusakiDac.class);
-        when(dac.select(any(RString.class), any(KaigoJigyoshaNo.class), any(boolean.class))).thenReturn(createItakusakiEntity());
+        when(dac.select(any(ShoKisaiHokenshaNo.class), any(KaigoJigyoshaNo.class), any(boolean.class))).thenReturn(createItakusakiEntity());
         return dac;
     }
 

@@ -24,16 +24,6 @@ public class NinteiShinchokuJohoDac implements INinteiShinchokuJohoDac {
     private SqlSession session;
 
     @Override
-    public List<DbT5005NinteiShinchokuJohoEntity> select認定調査未完了() {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor
-                .select()
-                .table(DbT5005NinteiShinchokuJoho.class)
-                .where(eq(DbT5005NinteiShinchokuJoho.ninteichosaKanryoYMD, YokaigoninteiDateConstants.認定調査未完了年月日))
-                .toList(DbT5005NinteiShinchokuJohoEntity.class);
-    }
-
-    @Override
     public List<DbT5005NinteiShinchokuJohoEntity> select主治医意見書作成依頼未完了() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor
