@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShisetsuNyushoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -23,7 +24,7 @@ public class NinteiResult {
     private final YokaigoJotaizoRei 要介護状態像例;
     private final NinteiYukoKikan 認定有効期間;
     private final KaigoServiceType 介護サービス種類;
-    private final boolean 施設入所有無;
+    private final ShisetsuNyushoKubun 施設入所区分;
     private final TokuteiShippeiKubun 特定疾病区分;
     private final NinteiShinsakaiIken 認定審査会意見;
     private final NinteiRiyu 認定理由;
@@ -37,7 +38,7 @@ public class NinteiResult {
      * @param 要介護状態像例 要介護状態像例
      * @param 認定有効期間 認定有効期間
      * @param 介護サービス種類 介護サービス種類
-     * @param 施設入所有無 施設入所有無
+     * @param 施設入所区分 施設入所区分
      * @param 特定疾病区分 特定疾病区分
      * @param 認定審査会意見 認定審査会意見
      * @param 認定理由 認定理由
@@ -49,7 +50,7 @@ public class NinteiResult {
             YokaigoJotaizoRei 要介護状態像例,
             NinteiYukoKikan 認定有効期間,
             KaigoServiceType 介護サービス種類,
-            boolean 施設入所有無,
+            ShisetsuNyushoKubun 施設入所区分,
             TokuteiShippeiKubun 特定疾病区分,
             NinteiShinsakaiIken 認定審査会意見,
             NinteiRiyu 認定理由) {
@@ -59,7 +60,7 @@ public class NinteiResult {
         this.要介護状態像例 = 要介護状態像例;
         this.認定有効期間 = requireNonNull(認定有効期間, Messages.E00001.replace("認定有効期間").getMessage());
         this.介護サービス種類 = 介護サービス種類;
-        this.施設入所有無 = 施設入所有無;
+        this.施設入所区分 = 施設入所区分;
         this.特定疾病区分 = 特定疾病区分;
         this.認定審査会意見 = 認定審査会意見;
         this.認定理由 = 認定理由;
@@ -120,12 +121,12 @@ public class NinteiResult {
     }
 
     /**
-     * 施設入所有無を返します。
+     * 施設入所区分を返します。
      *
-     * @return 施設入所有無
+     * @return 施設入所区分
      */
-    public boolean is施設入所有無() {
-        return 施設入所有無;
+    public ShisetsuNyushoKubun get施設入所区分() {
+        return 施設入所区分;
     }
 
     /**

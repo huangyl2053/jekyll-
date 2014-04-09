@@ -6,10 +6,11 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.business.helper.NinteiResultMock;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShisetsuNyushoKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Test;
 
 /**
  * 要介護認定結果を保持するクラスのテストクラスです。
@@ -56,7 +57,7 @@ public class NinteiResultTest {
                 ninteiResult.get要介護状態像例(),
                 flg == AS_認定有効期間がNULL ? null : ninteiResult.get認定有効期間(),
                 KaigoServiceType.訪問介護,
-                true,
+                ShisetsuNyushoKubun.入所している,
                 ninteiResult.get特定疾病区分(),
                 ninteiResult.get認定審査会意見(),
                 ninteiResult.get認定理由());

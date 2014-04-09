@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.business.YokaigoJotaizoRei;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiResultIdoJiyu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIkenType;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShisetsuNyushoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiYukoKikanTsukisu;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5002NinteiKekkaJohoEntity;
@@ -47,7 +48,7 @@ public final class NinteiKekkaMapper {
                 new YokaigoJotaizoRei(entity.getYokaigoJotaizoReiCode(), RString.EMPTY, RString.EMPTY),
                 create認定有効期間(entity),
                 KaigoServiceType.toValue(entity.getKaigoServiceShurui()),
-                entity.getShisetsuNyushoFlag(),
+                ShisetsuNyushoKubun.toValue(entity.getShisetsuNyushoFlag()),
                 new TokuteiShippeiKubun(entity.getTokuteiShippeiCode(), RString.EMPTY, RString.EMPTY),
                 create認定審査会意見(entity),
                 create認定理由(entity));
@@ -93,7 +94,7 @@ public final class NinteiKekkaMapper {
         entity.setNinteiYukoKaishiYMD(ninteiResult.get認定有効期間().get有効期間().getFrom());
         entity.setNinteiYukoShuryoYMD(ninteiResult.get認定有効期間().get有効期間().getTo());
         entity.setTokuteiShippeiCode(ninteiResult.get特定疾病区分().getCode());
-        entity.setShisetsuNyushoFlag(ninteiResult.is施設入所有無());
+        entity.setShisetsuNyushoFlag(ninteiResult.get施設入所区分().is施設入所());
         entity.setShinsakaiKaisaiNo(ninteiResult.get認定審査会意見().get審査会開催番号().value().intValue());
         entity.setShinsakaiIken(ninteiResult.get認定審査会意見().get審査会意見());
         entity.setIchijiHnateiKekkaHenkoRiyu(ninteiResult.get認定理由().get一次判定結果変更理由());

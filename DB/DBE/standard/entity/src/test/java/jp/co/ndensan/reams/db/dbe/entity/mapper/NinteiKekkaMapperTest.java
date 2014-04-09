@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.db.dbe.business.NinteiResult;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiResultIdoJiyu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIkenType;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShisetsuNyushoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiYukoKikanTsukisu;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TokuteiShippeiKubunCode;
@@ -44,7 +45,7 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
     private static final FlexibleDate 有効開始年月日 = new FlexibleDate("20140202");
     private static final FlexibleDate 有効終了年月日 = new FlexibleDate("20140303");
     private static final KaigoServiceType 介護サービス種類 = KaigoServiceType.訪問介護;
-    private static final boolean 施設入所有無 = true;
+    private static final ShisetsuNyushoKubun 施設入所区分 = ShisetsuNyushoKubun.入所している;
     private static final TokuteiShippeiKubunCode 特定疾病区分コード = new TokuteiShippeiKubunCode(new Code(new RString("3333333333")));
     private static final ShinsakaiKaisaiNo 審査会開催番号 = new ShinsakaiKaisaiNo(123);
     private static final ShinsakaiIkenType 審査会意見種類 = ShinsakaiIkenType.サービス利用への意見;
@@ -107,8 +108,8 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
         }
 
         @Test
-        public void 施設入所有無の設定がある時_toNinteiResult_is施設入所有無は_設定値を返す() {
-            assertThat(result.is施設入所有無(), is(施設入所有無));
+        public void 施設入所区分の設定がある時_toNinteiResult_is施設入所区分は_設定値を返す() {
+            assertThat(result.get施設入所区分(), is(施設入所区分));
         }
 
         @Test
@@ -212,8 +213,8 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
         }
 
         @Test
-        public void 施設入所有無の設定がある時_toDbT5002NinteiKekkaJohoEntity_getShisetsuNyushoFlagは_設定値を返す() {
-            assertThat(result.getShisetsuNyushoFlag(), is(施設入所有無));
+        public void 施設入所区分の設定がある時_toDbT5002NinteiKekkaJohoEntity_getShisetsuNyushoFlagは_設定値を返す() {
+            assertThat(result.getShisetsuNyushoFlag(), is(施設入所区分.is施設入所()));
         }
 
         @Test
