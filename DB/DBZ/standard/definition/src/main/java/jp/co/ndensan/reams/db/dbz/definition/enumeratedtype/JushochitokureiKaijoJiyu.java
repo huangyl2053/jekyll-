@@ -21,15 +21,15 @@ public enum JushochitokureiKaijoJiyu implements IShikakuIdoJiyu {
      */
     なし("00"),
     /**
-     * 自特例転入 <br />
+     * 特例転入 <br />
      * コード : 54
      */
-    自特例転入("54"),
+    特例転入("54"),
     /**
-     * 自特例解除 <br />
+     * 特例解除 <br />
      * コード : 55
      */
-    自特例解除("55"),
+    特例解除("55"),
     /**
      * その他 <br />
      * コード : 99
