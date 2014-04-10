@@ -4,8 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import java.util.Collections;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiKeikokuShubetsu;
+import jp.co.ndensan.reams.db.dbe.business.helper.IchijiHanteiTestBusinessCreator;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KariIchijiHanteiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
@@ -62,8 +61,7 @@ public class IchijiHanteiResultTest {
             認知症加算一次判定結果 = new IchijiHanteiKekkaKomoku(new Code(new RString("001")), new RString("名称"), new RString("略称"));
             要介護認定等基準時間 = new YokaigoNinteiToKijunTime(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             中間評価項目得点 = new YokaigoNinteiChukanHyokaKomokuTokuten(0, 0, 0, 0, 0, 0, 0);
-            一次判定警告List = new IchijiHanteiKeikokuList(RString.EMPTY,
-                    IchijiHanteiKeikokuShubetsu.介護保険制度2006年度版, Collections.EMPTY_LIST);
+            一次判定警告List = IchijiHanteiTestBusinessCreator.create一次判定警告List("000111000111000111");
             認定状態安定性 = new KaigoNinteiJotaiAnteiseiKubun(new Code(new RString("001")), new RString("名称"), new RString("略称"));
             認知症自立度2以上蓋然性 = new Decimal(123);
             推定給付区分 = new SuiteiKyuhuKubun(new Code(new RString("001")), new RString("名称"), new RString("略称"));

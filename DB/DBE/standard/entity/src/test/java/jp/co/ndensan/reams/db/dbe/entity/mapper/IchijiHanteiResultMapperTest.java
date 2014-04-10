@@ -4,11 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
-import java.util.Collections;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiKeikokuList;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResult;
 import jp.co.ndensan.reams.db.dbe.business.helper.IchijiHanteiTestBusinessCreator;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiKeikokuShubetsu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KariIchijiHanteiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5016IchijiHanteiKekkaJohoEntity;
@@ -42,8 +40,7 @@ public class IchijiHanteiResultMapperTest {
         public void setUp() {
             DbT5016IchijiHanteiKekkaJohoEntity entity = IchijiHanteiTestEntityCreator.create一次判定結果EntitySpy();
 
-            IchijiHanteiKeikokuList list = new IchijiHanteiKeikokuList(entity.getIchijiHnateiKeikokuCode(),
-                    IchijiHanteiKeikokuShubetsu.介護保険制度2006年度版, Collections.EMPTY_LIST);
+            IchijiHanteiKeikokuList list = IchijiHanteiTestBusinessCreator.create一次判定警告List("000111000111000111");
 
             result = IchijiHanteiResultMapper.to一次判定結果(entity, list);
         }
@@ -79,7 +76,7 @@ public class IchijiHanteiResultMapperTest {
 
         @Test
         public void マッピング後に返される一次判定結果は_一次判定年月日に20060101を持つ() {
-            assertThat(result.get一次判定年月日(), is(new FlexibleDate("20060101")));
+            assertThat(result.get一次判定年月日(), is(new FlexibleDate("20060401")));
         }
 
         @Test
@@ -179,7 +176,7 @@ public class IchijiHanteiResultMapperTest {
 
         @Test
         public void マッピング後に返される一次判定結果は_一次判定警告配列コードに000111000111000111を持つ() {
-            assertThat(result.get一次判定警告List().get警告配列コード(), is(new RString("000111000111000111")));
+            assertThat(result.get一次判定警告List().get警告配列コード().toRString(), is(new RString("000111000111000111")));
         }
 
         @Test

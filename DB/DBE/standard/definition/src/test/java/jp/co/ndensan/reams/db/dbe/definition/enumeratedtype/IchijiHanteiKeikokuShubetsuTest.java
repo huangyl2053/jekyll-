@@ -23,32 +23,32 @@ public class IchijiHanteiKeikokuShubetsuTest {
     public static class toValueのテスト extends DbeTestBase {
 
         @Test
-        public void 一次判定年月日に20121102を指定すると_介護保険制度2009年度版が返る() {
+        public void 一次判定年月日に20101102を指定すると_介護保険制度2009年度版が返る() {
             assertThat(IchijiHanteiKeikokuShubetsu.toValue(new FlexibleDate("20101102")),
                     is(IchijiHanteiKeikokuShubetsu.介護保険制度2009年度版));
         }
 
         @Test
-        public void 一次判定年月日に20090123を指定すると_介護保険制度2009年度版が返る() {
-            assertThat(IchijiHanteiKeikokuShubetsu.toValue(new FlexibleDate("20090123")),
+        public void 一次判定年月日に20090401を指定すると_介護保険制度2009年度版が返る() {
+            assertThat(IchijiHanteiKeikokuShubetsu.toValue(new FlexibleDate("20090401")),
                     is(IchijiHanteiKeikokuShubetsu.介護保険制度2009年度版));
         }
 
         @Test
-        public void 一次判定年月日に20080918を指定すると_介護保険制度2006年度版が返る() {
-            assertThat(IchijiHanteiKeikokuShubetsu.toValue(new FlexibleDate("20080918")),
+        public void 一次判定年月日に20090331を指定すると_介護保険制度2006年度版が返る() {
+            assertThat(IchijiHanteiKeikokuShubetsu.toValue(new FlexibleDate("20090331")),
                     is(IchijiHanteiKeikokuShubetsu.介護保険制度2006年度版));
         }
 
         @Test
-        public void 一次判定年月日に20060311を指定すると_介護保険制度2006年度版が返る() {
-            assertThat(IchijiHanteiKeikokuShubetsu.toValue(new FlexibleDate("20060311")),
+        public void 一次判定年月日に20060401を指定すると_介護保険制度2006年度版が返る() {
+            assertThat(IchijiHanteiKeikokuShubetsu.toValue(new FlexibleDate("20060401")),
                     is(IchijiHanteiKeikokuShubetsu.介護保険制度2006年度版));
         }
 
         @Test(expected = IllegalArgumentException.class)
         public void 一次判定年月日に項目に該当しない年月日を指定すると_IllegalArgumentExceptionが発生する() {
-            IchijiHanteiKeikokuShubetsu.toValue(new FlexibleDate("20051231"));
+            IchijiHanteiKeikokuShubetsu.toValue(new FlexibleDate("20060331"));
         }
     }
 }

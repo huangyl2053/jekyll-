@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.realservice;
 
+import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiKeikokuHairetsuCode;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiKeikokuList;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResult;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5016IchijiHanteiKekkaJohoEntity;
@@ -11,6 +12,8 @@ import jp.co.ndensan.reams.db.dbe.entity.mapper.IchijiHanteiKeikokuMapper;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.IchijiHanteiResultMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IchijiHanteiKekkaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -46,8 +49,15 @@ public class IchijiHanteiResultManager {
      */
     public IchijiHanteiResult get一次判定結果(ShinseishoKanriNo 申請書管理番号) {
         DbT5016IchijiHanteiKekkaJohoEntity entity = dac.select(申請書管理番号);
-        IchijiHanteiKeikokuList list = IchijiHanteiKeikokuMapper.to一次判定警告List(entity);
+
+        IchijiHanteiKeikokuList list = IchijiHanteiKeikokuMapper.to一次判定警告List(create警告配列コード(entity));
         return IchijiHanteiResultMapper.to一次判定結果(entity, list);
+    }
+
+    private IchijiHanteiKeikokuHairetsuCode create警告配列コード(DbT5016IchijiHanteiKekkaJohoEntity entity) {
+        RString 警告配列コード文字列 = entity.getIchijiHnateiKeikokuCode();
+        FlexibleDate 判定年月日 = entity.getIchijiHanteiYMD();
+        return new IchijiHanteiKeikokuHairetsuCode(警告配列コード文字列, 判定年月日);
     }
 
     /**

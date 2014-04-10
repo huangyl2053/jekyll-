@@ -41,7 +41,7 @@ public final class IchijiHanteiTestEntityCreator {
         entity.setShinseishoKanriNo(new ShinseishoKanriNo(new RString("01")));
         entity.setKoroshoIfShikibetsuCode(KoroshoIFKubun.V02A.getCode());
         entity.setKariIchijiHanteiKubun(KariIchijiHanteiKubun.本判定.is仮判定());
-        entity.setIchijiHanteiYMD(new FlexibleDate("20060101"));
+        entity.setIchijiHanteiYMD(new FlexibleDate("20060401"));
         entity.setIchijiHanteiKekkaCode(new Code("01"));
         entity.setIchijiHanteiKekkaNinchishoKasanCode(new Code("12"));
         entity.setKijunJikan(11);

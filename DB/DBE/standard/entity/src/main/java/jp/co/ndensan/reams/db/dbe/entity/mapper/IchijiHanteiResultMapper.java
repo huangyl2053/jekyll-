@@ -147,7 +147,7 @@ public final class IchijiHanteiResultMapper {
         entity.setChukanHyokaKomoku5gun(一次判定結果.get中間評価項目得点().get第5群());
         entity.setChukanHyokaKomoku6gun(一次判定結果.get中間評価項目得点().get第6群());
         entity.setChukanHyokaKomoku7gun(一次判定結果.get中間評価項目得点().get第7群());
-        entity.setIchijiHnateiKeikokuCode(一次判定結果.get一次判定警告List().get警告配列コード());
+        entity.setIchijiHnateiKeikokuCode(一次判定結果.get一次判定警告List().get警告配列コード().toRString());
         entity.setJotaiAnteiseiCode(一次判定結果.get認定状態安定性().getCode());
         entity.setNinchishoJiritsudoIIijoNoGaizensei(一次判定結果.get認知症自立度2以上蓋然性());
         entity.setSuiteiKyufuKubunCode(一次判定結果.get推定給付区分().getCode());

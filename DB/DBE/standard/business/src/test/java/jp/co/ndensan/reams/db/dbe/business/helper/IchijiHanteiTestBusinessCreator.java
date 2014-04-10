@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business.helper;
 
 import java.util.Collections;
+import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiKeikokuHairetsuCode;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiKeikokuList;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiKekkaKomoku;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResult;
@@ -40,7 +41,7 @@ public final class IchijiHanteiTestBusinessCreator {
                 create認知症加算一次判定結果(),
                 new YokaigoNinteiToKijunTime(11, 12, 13, 14, 15, 16, 17, 18, 19, 20),
                 new YokaigoNinteiChukanHyokaKomokuTokuten(1, 2, 3, 4, 5, 6, 7),
-                new IchijiHanteiKeikokuList(new RString("000111000111000111"), IchijiHanteiKeikokuShubetsu.介護保険制度2006年度版, Collections.EMPTY_LIST),
+                create一次判定警告List("000111000111000111"),
                 create介護認定状態安定性(),
                 new Decimal(12.34),
                 create推定給付区分(),
@@ -80,5 +81,17 @@ public final class IchijiHanteiTestBusinessCreator {
     private static NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku create認知症高齢者自立度蓋然性評価() {
         return new NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku(new Code("6"),
                 new RString("認知症高齢者自立度蓋然性評価"), new RString("認知症高齢者自立度蓋然性評価略称"));
+    }
+
+    /**
+     * 警告配列コードを表す文字列を受け取り、一次判定警告Listを返します。
+     *
+     * @param 警告配列コード文字列 警告配列コード文字列
+     * @return 一次判定警告List
+     */
+    public static IchijiHanteiKeikokuList create一次判定警告List(String 警告配列コード文字列) {
+        IchijiHanteiKeikokuHairetsuCode 警告配列コード = new IchijiHanteiKeikokuHairetsuCode(new RString(警告配列コード文字列),
+                new FlexibleDate("20060401"));
+        return new IchijiHanteiKeikokuList(警告配列コード, Collections.EMPTY_LIST);
     }
 }

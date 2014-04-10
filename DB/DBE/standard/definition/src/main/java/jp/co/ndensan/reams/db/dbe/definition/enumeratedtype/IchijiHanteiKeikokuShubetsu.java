@@ -22,18 +22,20 @@ public enum IchijiHanteiKeikokuShubetsu {
     /**
      * 2006年度版の警告コードであることを表します。
      */
-    介護保険制度2006年度版("K001", "2006"),
+    介護保険制度2006年度版("K001", "2006", 62),
     /**
      * 2009年度版の警告コードであることを表します。
      */
-    介護保険制度2009年度版("K002", "2009");
+    介護保険制度2009年度版("K002", "2009", 57);
     //TODO n8178 城間篤人 警告種別コードはコードマスタの種別コードに対応している。コードマスタの詳細が決まり次第、修正の可能性がある 2014年3月
     private final CodeShubetsu 警告種別コード;
     private final FlexibleYear 警告年度;
+    private final int 警告数;
 
-    private IchijiHanteiKeikokuShubetsu(String 警告種別コード, String 改定年度) {
+    private IchijiHanteiKeikokuShubetsu(String 警告種別コード, String 改定年度, int 警告数) {
         this.警告種別コード = new CodeShubetsu(警告種別コード);
         this.警告年度 = new FlexibleYear(改定年度);
+        this.警告数 = 警告数;
     }
 
     /**
@@ -52,6 +54,15 @@ public enum IchijiHanteiKeikokuShubetsu {
      */
     public FlexibleYear get警告種別対応年度() {
         return 警告年度;
+    }
+
+    /**
+     * 一次判定警告の数を返します。
+     *
+     * @return
+     */
+    public int get警告数() {
+        return 警告数;
     }
 
     /**
@@ -82,7 +93,7 @@ public enum IchijiHanteiKeikokuShubetsu {
         Collections.reverse(年度List);
 
         for (FlexibleYear 年度 : 年度List) {
-            if (年度.compareTo(一次判定年月日.getYear()) <= 0) {
+            if (年度.compareTo(一次判定年月日.getNendo()) <= 0) {
                 return 年度;
             }
         }
