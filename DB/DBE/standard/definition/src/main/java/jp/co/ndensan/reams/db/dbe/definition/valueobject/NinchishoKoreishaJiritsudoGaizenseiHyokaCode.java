@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 認知症高齢者の自立度蓋然性評価を表すコードです。
+ * 認知症高齢者日常生活自立度が、どの程度確からしいかを表すコードです。
  *
  * @author n8178 城間篤人
  */

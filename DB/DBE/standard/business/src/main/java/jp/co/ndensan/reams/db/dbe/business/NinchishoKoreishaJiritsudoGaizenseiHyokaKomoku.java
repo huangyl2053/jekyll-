@@ -10,7 +10,8 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 認知症高齢者の自立度蓋然性評価項目を表すクラスです。
+ * 認知症高齢者日常生活自立度の蓋然性評価を表すクラスです。<br/>
+ * 一次判定にて設定された認知症高齢者の日常生活自立度が、どの程度確からしいかを評価する項目になります。
  *
  * @author n8178 城間篤人
  */
