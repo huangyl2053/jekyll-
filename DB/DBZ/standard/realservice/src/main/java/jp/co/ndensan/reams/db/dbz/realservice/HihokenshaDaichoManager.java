@@ -38,6 +38,7 @@ public class HihokenshaDaichoManager {
      * テスト用のコンストラクタです。dacを指定してインスタンスを生成します。
      *
      * @param dac {@link HihokenshaDiachoDac 被保険者台帳DAC}
+     * @param sequencer 被保険者番号採番用のオブジェクト
      */
     public HihokenshaDaichoManager(HihokenshaDaichoDac dac, IKaigoSaiban<KaigoHihokenshaNo> sequencer) {
         this.dac = dac;

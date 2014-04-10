@@ -27,6 +27,9 @@ public final class HihokenshaNoSaibanService {
         FOR_MUSHIKAKUSHA_TYPE = new ForMushikakushaType();
     }
 
+    private HihokenshaNoSaibanService() {
+    }
+
     /**
      * 通常の被保険者番号を採番するためのオブジェクトを取得します。
      *
@@ -99,7 +102,7 @@ public final class HihokenshaNoSaibanService {
     /**
      * 被保険者番号を採番をするクラスの抽象です。
      */
-    private static abstract class HihokenshaNoSaibanBase implements IKaigoSaiban<KaigoHihokenshaNo> {
+    private abstract static class HihokenshaNoSaibanBase implements IKaigoSaiban<KaigoHihokenshaNo> {
 
         @Override
         public KaigoHihokenshaNo number() {
@@ -111,6 +114,6 @@ public final class HihokenshaNoSaibanService {
          *
          * @return 採番した値
          */
-        abstract protected RString nextRString();
+        protected abstract RString nextRString();
     }
 }
