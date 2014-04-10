@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.NinchishoKoreishaJiritsudoGaizenseiHy
 import jp.co.ndensan.reams.db.dbe.business.NoryokuMiteikaNinchishoKoreishaShihyoKomoku;
 import jp.co.ndensan.reams.db.dbe.business.SuiteiKyuhuKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiChukanHyokaKomokuTokuten;
-import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiToKijunTime;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiKijunTime;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KariIchijiHanteiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5016IchijiHanteiKekkaJohoEntity;
@@ -73,8 +73,8 @@ public final class IchijiHanteiResultDetailMapper {
                 entity.getIchijiHanteiKekkaNinchishoKasanCodeMeisho(), entity.getIchijiHanteiKekkaNinchishoKasanCodeRyakusho());
     }
 
-    private static YokaigoNinteiToKijunTime create要介護認定等基準時間(DbT5016IchijiHanteiKekkaJohoEntity entity) {
-        return new YokaigoNinteiToKijunTime(entity.getKijunJikan(), entity.getKijunJikanShokuji(),
+    private static YokaigoNinteiKijunTime create要介護認定等基準時間(DbT5016IchijiHanteiKekkaJohoEntity entity) {
+        return new YokaigoNinteiKijunTime(entity.getKijunJikan(), entity.getKijunJikanShokuji(),
                 entity.getKijunJikanHaisetsu(), entity.getKijunJikanIdo(), entity.getKijunJikanSeiketsuHoji(),
                 entity.getKijunJikanKansetsuCare(), entity.getKijunJikanBPSDKanren(), entity.getKijunJikanKinoKunren(),
                 entity.getKijunJikanIryoKanren(), entity.getKijunJikanNinchishoKasan());

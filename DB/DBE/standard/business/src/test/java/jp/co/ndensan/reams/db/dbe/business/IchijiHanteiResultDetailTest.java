@@ -38,7 +38,7 @@ public class IchijiHanteiResultDetailTest {
         private FlexibleDate 一次判定年月日;
         private IchijiHanteiResultKomoku 一次判定結果;
         private IchijiHanteiResultKomoku 認知症加算一次判定結果;
-        private YokaigoNinteiToKijunTime 要介護認定等基準時間;
+        private YokaigoNinteiKijunTime 要介護認定等基準時間;
         private YokaigoNinteiChukanHyokaKomokuTokuten 中間評価項目得点;
         private IchijiHanteiKeikokuList 一次判定警告List;
         private JotaiAnteiseiKubun 認定状態安定性;
@@ -59,7 +59,7 @@ public class IchijiHanteiResultDetailTest {
             一次判定年月日 = new FlexibleDate("19990101");
             一次判定結果 = new IchijiHanteiResultKomoku(new Code(new RString("001")), new RString("名称"), new RString("略称"));
             認知症加算一次判定結果 = new IchijiHanteiResultKomoku(new Code(new RString("001")), new RString("名称"), new RString("略称"));
-            要介護認定等基準時間 = new YokaigoNinteiToKijunTime(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            要介護認定等基準時間 = new YokaigoNinteiKijunTime(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             中間評価項目得点 = new YokaigoNinteiChukanHyokaKomokuTokuten(0, 0, 0, 0, 0, 0, 0);
             一次判定警告List = IchijiHanteiTestBusinessCreator.create一次判定警告List("000111000111000111");
             認定状態安定性 = new JotaiAnteiseiKubun(new Code(new RString("001")), new RString("名称"), new RString("略称"));

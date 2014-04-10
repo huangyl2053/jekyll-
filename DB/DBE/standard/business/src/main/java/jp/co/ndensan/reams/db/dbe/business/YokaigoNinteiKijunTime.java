@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8178 城間篤人
  */
-public class YokaigoNinteiToKijunTime {
+public class YokaigoNinteiKijunTime {
 
     private final int 基準時間;
     private final int 基準時間_食事;
@@ -40,7 +40,7 @@ public class YokaigoNinteiToKijunTime {
      * @param 基準時間_認知症加算 認知症加算基準時間
      * @throws IllegalArgumentException いずれかの引数に、0より小さいの値が渡されたとき
      */
-    public YokaigoNinteiToKijunTime(int 基準時間, int 基準時間_食事, int 基準時間_排泄, int 基準時間_移動,
+    public YokaigoNinteiKijunTime(int 基準時間, int 基準時間_食事, int 基準時間_排泄, int 基準時間_移動,
             int 基準時間_清潔保持, int 基準時間_間接ケア, int 基準時間_BPSD関連, int 基準時間_機能訓練,
             int 基準時間_医療関連, int 基準時間_認知症加算) throws IllegalArgumentException {
         RString エラー表示 = new RString("0以上");

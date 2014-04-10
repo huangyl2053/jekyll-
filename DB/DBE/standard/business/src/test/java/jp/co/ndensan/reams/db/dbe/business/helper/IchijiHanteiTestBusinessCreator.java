@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbe.business.NinchishoKoreishaJiritsudoGaizenseiHy
 import jp.co.ndensan.reams.db.dbe.business.NoryokuMiteikaNinchishoKoreishaShihyoKomoku;
 import jp.co.ndensan.reams.db.dbe.business.SuiteiKyuhuKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiChukanHyokaKomokuTokuten;
-import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiToKijunTime;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiKijunTime;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiKeikokuShubetsu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KariIchijiHanteiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
@@ -39,7 +39,7 @@ public final class IchijiHanteiTestBusinessCreator {
                 new FlexibleDate("20060101"),
                 create一次判定結果項目(),
                 create認知症加算一次判定結果(),
-                new YokaigoNinteiToKijunTime(11, 12, 13, 14, 15, 16, 17, 18, 19, 20),
+                new YokaigoNinteiKijunTime(11, 12, 13, 14, 15, 16, 17, 18, 19, 20),
                 new YokaigoNinteiChukanHyokaKomokuTokuten(1, 2, 3, 4, 5, 6, 7),
                 create一次判定警告List("000111000111000111"),
                 create介護認定状態安定性(),

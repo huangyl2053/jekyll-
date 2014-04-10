@@ -18,9 +18,9 @@ import org.junit.runner.RunWith;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class YokaigoNinteiToKijunTimeTest {
+public class YokaigoNinteiKijunTimeTest {
 
-    private static YokaigoNinteiToKijunTime sut;
+    private static YokaigoNinteiKijunTime sut;
 
     public static class コンストラクタのテスト extends DbeTestBase {
 
@@ -51,80 +51,80 @@ public class YokaigoNinteiToKijunTimeTest {
 
         @Test(expected = IllegalArgumentException.class)
         public void 基準時間に0より小さい数字が渡されたとき_IllegalArgumentExceptionが発生する() {
-            sut = new YokaigoNinteiToKijunTime(-1, 食事基準時間, 排泄基準時間,
+            sut = new YokaigoNinteiKijunTime(-1, 食事基準時間, 排泄基準時間,
                     移動基準時間, 清潔保持基準時間, 間接ケア基準時間, BPSD関連基準時間,
                     機能訓練基準時間, 医療関連基準時間, 認知症加算基準時間);
         }
 
         @Test(expected = IllegalArgumentException.class)
         public void 食事基準時間に0より小さい数字が渡されたとき_IllegalArgumentExceptionが発生する() {
-            sut = new YokaigoNinteiToKijunTime(基準時間, -1, 排泄基準時間,
+            sut = new YokaigoNinteiKijunTime(基準時間, -1, 排泄基準時間,
                     移動基準時間, 清潔保持基準時間, 間接ケア基準時間, BPSD関連基準時間,
                     機能訓練基準時間, 医療関連基準時間, 認知症加算基準時間);
         }
 
         @Test(expected = IllegalArgumentException.class)
         public void 排泄基準時間に0より小さい数字が渡されたとき_IllegalArgumentExceptionが発生する() {
-            sut = new YokaigoNinteiToKijunTime(基準時間, 食事基準時間, -1,
+            sut = new YokaigoNinteiKijunTime(基準時間, 食事基準時間, -1,
                     移動基準時間, 清潔保持基準時間, 間接ケア基準時間, BPSD関連基準時間,
                     機能訓練基準時間, 医療関連基準時間, 認知症加算基準時間);
         }
 
         @Test(expected = IllegalArgumentException.class)
         public void 移動基準時間に0より小さい数字が渡されたとき_IllegalArgumentExceptionが発生する() {
-            sut = new YokaigoNinteiToKijunTime(基準時間, 食事基準時間, 排泄基準時間,
+            sut = new YokaigoNinteiKijunTime(基準時間, 食事基準時間, 排泄基準時間,
                     -1, 清潔保持基準時間, 間接ケア基準時間, BPSD関連基準時間,
                     機能訓練基準時間, 医療関連基準時間, 認知症加算基準時間);
         }
 
         @Test(expected = IllegalArgumentException.class)
         public void 清潔保持基準時間に0より小さい数字が渡されたとき_IllegalArgumentExceptionが発生する() {
-            sut = new YokaigoNinteiToKijunTime(基準時間, 食事基準時間, 排泄基準時間,
+            sut = new YokaigoNinteiKijunTime(基準時間, 食事基準時間, 排泄基準時間,
                     移動基準時間, -1, 間接ケア基準時間, BPSD関連基準時間,
                     機能訓練基準時間, 医療関連基準時間, 認知症加算基準時間);
         }
 
         @Test(expected = IllegalArgumentException.class)
         public void 間接ケア基準時間に0より小さい数字が渡されたとき_IllegalArgumentExceptionが発生する() {
-            sut = new YokaigoNinteiToKijunTime(基準時間, 食事基準時間, 排泄基準時間,
+            sut = new YokaigoNinteiKijunTime(基準時間, 食事基準時間, 排泄基準時間,
                     移動基準時間, 清潔保持基準時間, -1, BPSD関連基準時間,
                     機能訓練基準時間, 医療関連基準時間, 認知症加算基準時間);
         }
 
         @Test(expected = IllegalArgumentException.class)
         public void BPSD関連基準時間に0より小さい数字が渡されたとき_IllegalArgumentExceptionが発生する() {
-            sut = new YokaigoNinteiToKijunTime(基準時間, 食事基準時間, 排泄基準時間,
+            sut = new YokaigoNinteiKijunTime(基準時間, 食事基準時間, 排泄基準時間,
                     移動基準時間, 清潔保持基準時間, 間接ケア基準時間, -1,
                     機能訓練基準時間, 医療関連基準時間, 認知症加算基準時間);
         }
 
         @Test(expected = IllegalArgumentException.class)
         public void 機能訓練基準時間に0より小さい数字が渡されたとき_IllegalArgumentExceptionが発生する() {
-            sut = new YokaigoNinteiToKijunTime(基準時間, 食事基準時間, 排泄基準時間,
+            sut = new YokaigoNinteiKijunTime(基準時間, 食事基準時間, 排泄基準時間,
                     移動基準時間, 清潔保持基準時間, 間接ケア基準時間, BPSD関連基準時間,
                     -1, 医療関連基準時間, 認知症加算基準時間);
         }
 
         @Test(expected = IllegalArgumentException.class)
         public void 医療関連基準時間に0より小さい数字が渡されたとき_IllegalArgumentExceptionが発生する() {
-            sut = new YokaigoNinteiToKijunTime(基準時間, 食事基準時間, 排泄基準時間,
+            sut = new YokaigoNinteiKijunTime(基準時間, 食事基準時間, 排泄基準時間,
                     移動基準時間, 清潔保持基準時間, 間接ケア基準時間, BPSD関連基準時間,
                     機能訓練基準時間, -1, 認知症加算基準時間);
         }
 
         @Test(expected = IllegalArgumentException.class)
         public void 認知症加算基準時間に0より小さい数字が渡されたとき_IllegalArgumentExceptionが発生する() {
-            sut = new YokaigoNinteiToKijunTime(基準時間, 食事基準時間, 排泄基準時間,
+            sut = new YokaigoNinteiKijunTime(基準時間, 食事基準時間, 排泄基準時間,
                     移動基準時間, 清潔保持基準時間, 間接ケア基準時間, BPSD関連基準時間,
                     機能訓練基準時間, 医療関連基準時間, -1);
         }
 
         @Test
         public void すべての引数に0以上の値が渡されているとき_インスタンスが生成される() {
-            sut = new YokaigoNinteiToKijunTime(基準時間, 食事基準時間, 排泄基準時間,
+            sut = new YokaigoNinteiKijunTime(基準時間, 食事基準時間, 排泄基準時間,
                     移動基準時間, 清潔保持基準時間, 間接ケア基準時間, BPSD関連基準時間,
                     機能訓練基準時間, 医療関連基準時間, 認知症加算基準時間);
-            assertThat(sut, is(instanceOf(YokaigoNinteiToKijunTime.class)));
+            assertThat(sut, is(instanceOf(YokaigoNinteiKijunTime.class)));
         }
     }
 }
