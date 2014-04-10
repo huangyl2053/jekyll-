@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisageTaishosha;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5001NinteiShinseiJohoEntityMock;
+import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinseiJohoTestHelper;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
@@ -158,7 +158,7 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
         }
 
         private DbT5001NinteiShinseiJohoEntity createMockEntity() {
-            return DbT5001NinteiShinseiJohoEntityMock.getSpiedInstance();
+            return NinteiShinseiJohoTestHelper.create認定申請情報Entity();
         }
 
         private NinteiShinseiTorisage create認定申請取下げ() {

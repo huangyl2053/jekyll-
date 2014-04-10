@@ -8,32 +8,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
+import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoIraiTaishosha;
+import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoSakuseiIrai;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5011ShujiiIkenshoIraiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteishinseiJohoMapper;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.ShujiiIkenshoIraiTaishoshaMapper;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinchokuJohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.IShujiiIkenshoIraiJohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.IShujiiJohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.relate.IShujiiIkenshoIraiTaishoshaDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
+import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbe.persistence.relate.ShujiiIkenshoIraiTaishoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.ur.urz.business.IDoctor;
-import jp.co.ndensan.reams.ur.urz.business.JushoEditor;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushoEditPattern;
-import jp.co.ndensan.reams.ur.urz.realservice.DoctorManagerFactory;
+import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
 import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
-import jp.co.ndensan.reams.ur.urz.realservice.ShikibetsuTaishoService;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -44,156 +33,118 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class ShujiiIkenshoIraiTaishoshaFinder {
 
-    private final INinteiShinchokuJohoDac ninteiShinchokuJohoDac;
-    private final IShujiiIkenshoIraiTaishoshaDac shujiiIkenshoIraiTaishoshaDac;
-    private final INinteiShinseiJohoDac ninteiShinseiJohoDac;
-    private final IShujiiJohoDac shujiiJohoDac;
-    private final IShujiiIkenshoIraiJohoDac shujiiIkenshoIraiJohoDac;
+    private final ShujiiIkenshoIraiTaishoshaDac shujiiIkenshoIraiTaishoshaDac;
+    private final IKojinFinder kojinFinder;
+    private final ShujiiIkenshoSakuseiIraiKirokuManager shujiiManager;
+    private final KaigoIryoKikanFinder kaigoIryoKikanFinder;
 
     /**
      * コンストラクタです。
      */
     public ShujiiIkenshoIraiTaishoshaFinder() {
-        ninteiShinchokuJohoDac = InstanceProvider.create(INinteiShinchokuJohoDac.class);
-        shujiiIkenshoIraiTaishoshaDac = InstanceProvider.create(IShujiiIkenshoIraiTaishoshaDac.class);
-        ninteiShinseiJohoDac = InstanceProvider.create(INinteiShinseiJohoDac.class);
-        shujiiJohoDac = InstanceProvider.create(IShujiiJohoDac.class);
-        shujiiIkenshoIraiJohoDac = InstanceProvider.create(IShujiiIkenshoIraiJohoDac.class);
+        shujiiIkenshoIraiTaishoshaDac = InstanceProvider.create(ShujiiIkenshoIraiTaishoshaDac.class);
+        kojinFinder = KojinService.createKojinFinder();
+        shujiiManager = new ShujiiIkenshoSakuseiIraiKirokuManager();
+        kaigoIryoKikanFinder = new KaigoIryoKikanFinder();
     }
 
     /**
      * テスト用パッケージプライベートコンストラクタです。
      *
-     * @param ninteiShinchokuJohoDac INinteiShinchokuJohoDac
-     * @param shujiiIkenshoIraiTaishoshaDac IShujiiIkenshoIraiTaishoshaDac
-     * @param ninteiShinseiJohoDac INinteiShinseiJohoDac
-     * @param shujiiJohoDac IShujiiJohoDac
-     * @param shujiiIkenshoIraiJohoDac IShujiiIkenshoIraiJohoDac
+     * @param shujiiIkenshoIraiTaishoshaDac shujiiIkenshoIraiTaishoshaDac
+     * @param kojinFinder kojinFinder
+     * @param shujiiManager shujiiManager
+     * @param kaigoIryoKikanFinder kaigoIryoKikanFinder
      */
-    ShujiiIkenshoIraiTaishoshaFinder(INinteiShinchokuJohoDac ninteiShinchokuJohoDac,
-            IShujiiIkenshoIraiTaishoshaDac shujiiIkenshoIraiTaishoshaDac,
-            INinteiShinseiJohoDac ninteiShinseiJohoDac,
-            IShujiiJohoDac shujiiJohoDac,
-            IShujiiIkenshoIraiJohoDac shujiiIkenshoIraiJohoDac) {
-        this.ninteiShinchokuJohoDac = ninteiShinchokuJohoDac;
+    ShujiiIkenshoIraiTaishoshaFinder(
+            ShujiiIkenshoIraiTaishoshaDac shujiiIkenshoIraiTaishoshaDac,
+            IKojinFinder kojinFinder,
+            ShujiiIkenshoSakuseiIraiKirokuManager shujiiManager,
+            KaigoIryoKikanFinder kaigoIryoKikanFinder) {
         this.shujiiIkenshoIraiTaishoshaDac = shujiiIkenshoIraiTaishoshaDac;
-        this.ninteiShinseiJohoDac = ninteiShinseiJohoDac;
-        this.shujiiJohoDac = shujiiJohoDac;
-        this.shujiiIkenshoIraiJohoDac = shujiiIkenshoIraiJohoDac;
+        this.kojinFinder = kojinFinder;
+        this.shujiiManager = shujiiManager;
+        this.kaigoIryoKikanFinder = kaigoIryoKikanFinder;
     }
 
     /**
-     * 主治医意見書作成が未完了の主治医意見書作成依頼対象者を取得します。
+     * 主治医意見書作成依頼対象者を取得します。
      *
-     * @return ShujiiIkenshoIraiTaishoshaのList
+     * @return 主治医意見書作成依頼対象者リスト
      */
     public List<ShujiiIkenshoIraiTaishosha> get主治医意見書作成依頼対象者() {
-        List<DbT5005NinteiShinchokuJohoEntity> 認定進捗情報EntityList = ninteiShinchokuJohoDac.select主治医意見書作成依頼未完了();
-        return create主治医意見書作成依頼対象者List(認定進捗情報EntityList);
+        List<KaigoNinteiShoriTaishoshaEntity> iraiTaishoshaEntityList = shujiiIkenshoIraiTaishoshaDac.selectAll();
+        return create主治医意見書作成依頼対象者List(iraiTaishoshaEntityList);
     }
 
     /**
-     * 証記載保険者番号を指定して、主治医意見書作成が未完了の主治医意見書作成依頼対象者を取得します。
+     * 主治医意見書作成依頼対象者を、証記載保険者番号を指定して取得します。
      *
      * @param 証記載保険者番号 証記載保険者番号
-     * @return ShujiiIkenshoIraiTaishoshaのList
-     * @throws NullPointerException {@code 証記載保険者番号}がnullの場合
+     * @return 主治医意見書作成依頼対象者リスト
+     * @throws NullPointerException 引数がnullの場合
      */
     public List<ShujiiIkenshoIraiTaishosha> get主治医意見書作成依頼対象者(ShoKisaiHokenshaNo 証記載保険者番号) throws NullPointerException {
         requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
-
-        List<DbT5005NinteiShinchokuJohoEntity> 認定進捗情報EntityList = shujiiIkenshoIraiTaishoshaDac.select主治医意見書作成依頼対象者(証記載保険者番号);
-        return create主治医意見書作成依頼対象者List(認定進捗情報EntityList);
+        List<KaigoNinteiShoriTaishoshaEntity> iraiTaishoshaEntityList = shujiiIkenshoIraiTaishoshaDac.select証記載保険者番号(証記載保険者番号);
+        return create主治医意見書作成依頼対象者List(iraiTaishoshaEntityList);
     }
 
     /**
-     * 証記載保険者番号、支所コードを指定して、主治医意見書作成が未完了の主治医意見書作成依頼対象者を取得します。
+     * 主治医意見書作成依頼対象者を、証記載保険者番号、支所コードを指定して取得します。
      *
      * @param 証記載保険者番号 証記載保険者番号
      * @param 支所コード 支所コード
-     * @return ShujiiIkenshoIraiTaishoshaのList
+     * @return 主治医意見書作成依頼対象者リスト
      * @throws NullPointerException 引数がnullの場合
      */
     public List<ShujiiIkenshoIraiTaishosha> get主治医意見書作成依頼対象者(ShoKisaiHokenshaNo 証記載保険者番号, RString 支所コード) throws NullPointerException {
         requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
         requireNonNull(支所コード, Messages.E00001.replace("支所コード").getMessage());
-
-        List<DbT5005NinteiShinchokuJohoEntity> 認定進捗情報EntityList = shujiiIkenshoIraiTaishoshaDac.select主治医意見書作成依頼対象者(証記載保険者番号, 支所コード);
-        return create主治医意見書作成依頼対象者List(認定進捗情報EntityList);
+        List<KaigoNinteiShoriTaishoshaEntity> iraiTaishoshaEntityList = shujiiIkenshoIraiTaishoshaDac.select証記載保険者番号及び支所コード(証記載保険者番号, 支所コード);
+        return create主治医意見書作成依頼対象者List(iraiTaishoshaEntityList);
     }
 
-    private List<ShujiiIkenshoIraiTaishosha> create主治医意見書作成依頼対象者List(List<DbT5005NinteiShinchokuJohoEntity> 認定進捗情報EntityList) {
-
-        if (認定進捗情報EntityList.isEmpty()) {
-            return Collections.EMPTY_LIST;
-        }
+    private List<ShujiiIkenshoIraiTaishosha> create主治医意見書作成依頼対象者List(List<KaigoNinteiShoriTaishoshaEntity> entityList) {
         List<ShujiiIkenshoIraiTaishosha> list = new ArrayList<>();
 
-        for (DbT5005NinteiShinchokuJohoEntity entity : 認定進捗情報EntityList) {
-            DbT5001NinteiShinseiJohoEntity 認定申請情報Entity = create認定申請情報Entity(entity);
-            DbT5011ShujiiIkenshoIraiJohoEntity 主治医意見書作成依頼情報Entity = create主治医意見書作成依頼情報Entity(認定申請情報Entity);
-            IKojin 個人 = create個人(認定申請情報Entity);
-            IShikibetsuTaisho 識別対象 = create識別対象(認定申請情報Entity);
-            RString 氏名 = create氏名(識別対象);
-            RString 住所 = create住所(識別対象);
-            DbT7012ShujiiJohoEntity 主治医情報Entity = create主治医情報Entity(認定申請情報Entity, 主治医意見書作成依頼情報Entity);
-            KaigoIryoKikan 主治医医療機関情報 = create主治医医療機関情報(認定申請情報Entity, 主治医情報Entity);
-            IDoctor 主治医 = create主治医(主治医情報Entity);
+        for (KaigoNinteiShoriTaishoshaEntity entity : entityList) {
+            NinteiShinseiJoho 認定申請情報 = NinteishinseiJohoMapper.to認定申請情報(entity.getNinteiShinseiJohoEntity());
+            IKojin 個人 = get個人(認定申請情報);
+            RString 氏名 = 個人.get氏名().getName().value();
+            RString 住所 = 個人.get住所().getValue();
+            ShujiiIkenshoSakuseiIrai 主治医意見書作成依頼情報 = get主治医意見書作成依頼情報(認定申請情報);
+            KaigoIryoKikan 主治医医療機関情報 = get主治医医療機関情報(認定申請情報, 主治医意見書作成依頼情報);
+            KaigoDoctor 主治医情報 = 主治医意見書作成依頼情報.get介護医師();
+
             list.add(ShujiiIkenshoIraiTaishoshaMapper.toShujiiIkenshoIraiTaishosha(
-                    認定申請情報Entity,
+                    認定申請情報,
                     個人,
                     氏名,
                     住所,
                     主治医医療機関情報,
-                    主治医));
+                    主治医情報));
+        }
+        if (list.isEmpty()) {
+            return Collections.EMPTY_LIST;
         }
 
         return list;
     }
 
-    private DbT5001NinteiShinseiJohoEntity create認定申請情報Entity(DbT5005NinteiShinchokuJohoEntity entity) {
-        return ninteiShinseiJohoDac.select(entity.getShinseishoKanriNo());
+    private IKojin get個人(NinteiShinseiJoho 認定申請情報) {
+        return kojinFinder.get個人(認定申請情報.get識別コード());
     }
 
-    private DbT5011ShujiiIkenshoIraiJohoEntity create主治医意見書作成依頼情報Entity(DbT5001NinteiShinseiJohoEntity 認定申請情報Entity) {
-        return shujiiIkenshoIraiJohoDac.select(
-                認定申請情報Entity.getShinseishoKanriNo(),
-                new IkenshosakuseiIraiRirekiNo(認定申請情報Entity.getIkenshoIraiRirekiNo()));
+    private ShujiiIkenshoSakuseiIrai get主治医意見書作成依頼情報(NinteiShinseiJoho 認定申請情報) {
+        return shujiiManager.get主治医意見書作成依頼情報(
+                認定申請情報.get申請書管理番号(),
+                new IkenshosakuseiIraiRirekiNo(認定申請情報.get意見書依頼履歴番号()));
     }
 
-    private DbT7012ShujiiJohoEntity create主治医情報Entity(DbT5001NinteiShinseiJohoEntity 認定申請情報Entity,
-            DbT5011ShujiiIkenshoIraiJohoEntity 主治医意見書作成依頼情報Entity) {
-        return shujiiJohoDac.select(
-                認定申請情報Entity.getShoKisaiHokenshaNo(),
-                new KaigoIryoKikanCode(主治医意見書作成依頼情報Entity.getKaigoIryokikanCode()),
-                new KaigoDoctorCode(主治医意見書作成依頼情報Entity.getKaigoIshiCode()));
-    }
-
-    private IKojin create個人(DbT5001NinteiShinseiJohoEntity 認定申請情報Entity) {
-        return KojinService.createKojinFinder().get個人(
-                new ShikibetsuCode(認定申請情報Entity.getShikibetsuCode().getColumnValue()));
-    }
-
-    private IShikibetsuTaisho create識別対象(DbT5001NinteiShinseiJohoEntity 認定申請情報Entity) {
-        return ShikibetsuTaishoService.getShikibetsuTaishoFinder().get識別対象(
-                new ShikibetsuCode(認定申請情報Entity.getShikibetsuCode().getColumnValue()));
-    }
-
-    private RString create氏名(IShikibetsuTaisho 識別対象) {
-        return 識別対象.get氏名().getName().value();
-    }
-
-    private RString create住所(IShikibetsuTaisho 識別対象) {
-        return JushoEditor.editJusho(識別対象.get住所(), JushoEditPattern.町域番地);
-    }
-
-    private IDoctor create主治医(DbT7012ShujiiJohoEntity 主治医情報Entity) {
-        return DoctorManagerFactory.createInstance().get医師(主治医情報Entity.getIshiShikibetsuNo());
-    }
-
-    private KaigoIryoKikan create主治医医療機関情報(DbT5001NinteiShinseiJohoEntity 認定申請情報Entity, DbT7012ShujiiJohoEntity 主治医情報Entity) {
-        return new KaigoIryoKikanFinder().get介護医療機関(
-                認定申請情報Entity.getShoKisaiHokenshaNo(),
-                主治医情報Entity.getKaigoIryokikanCode());
+    private KaigoIryoKikan get主治医医療機関情報(NinteiShinseiJoho 認定申請情報, ShujiiIkenshoSakuseiIrai 主治医意見書作成依頼情報) {
+        return kaigoIryoKikanFinder.get介護医療機関(
+                認定申請情報.get証記載保険者番号(),
+                主治医意見書作成依頼情報.get介護医師().get介護医療機関コード());
     }
 }

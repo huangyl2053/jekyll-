@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
-import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -31,8 +30,7 @@ public class ShujiiIkenshoIraiTaishosha {
     private final RString 氏名;
     private final RString 住所;
     private final KaigoIryoKikan 主治医医療機関;
-    // TODO N8187 久保田英男 主治医は業務クラス(KaigoDoctor)を作成するか検討する。クラスが作成されたら修正を行う。 2014/3月末まで
-    private final IDoctor 主治医;
+    private final KaigoDoctor 主治医;
 
     /**
      * コンストラクタです。
@@ -62,16 +60,16 @@ public class ShujiiIkenshoIraiTaishosha {
             RString 氏名,
             RString 住所,
             KaigoIryoKikan 主治医医療機関,
-            IDoctor 主治医) throws NullPointerException {
+            KaigoDoctor 主治医) throws NullPointerException {
 
-        this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00003.replace("申請書管理番号", getClass().getName()).getMessage());
-        this.証記載保険者番号 = requireNonNull(証記載保険者番号, Messages.E00003.replace("証記載保険者番号", getClass().getName()).getMessage());
-        this.被保険者番号 = requireNonNull(被保険者番号, Messages.E00003.replace("被保険者番号", getClass().getName()).getMessage());
-        this.認定申請年月日 = requireNonNull(認定申請年月日, Messages.E00003.replace("認定申請年月日", getClass().getName()).getMessage());
-        this.認定申請区分 = requireNonNull(認定申請区分, Messages.E00003.replace("認定申請区分", getClass().getName()).getMessage());
-        this.個人情報 = requireNonNull(個人情報, Messages.E00003.replace("個人情報", getClass().getName()).getMessage());
-        this.氏名 = requireNonNull(氏名, Messages.E00003.replace("氏名", getClass().getName()).getMessage());
-        this.住所 = requireNonNull(住所, Messages.E00003.replace("住所", getClass().getName()).getMessage());
+        this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00003.replace("申請書管理番号", "主治医意見書依頼対象").getMessage());
+        this.証記載保険者番号 = requireNonNull(証記載保険者番号, Messages.E00003.replace("証記載保険者番号", "主治医意見書依頼対象").getMessage());
+        this.被保険者番号 = requireNonNull(被保険者番号, Messages.E00003.replace("被保険者番号", "主治医意見書依頼対象").getMessage());
+        this.認定申請年月日 = requireNonNull(認定申請年月日, Messages.E00003.replace("認定申請年月日", "主治医意見書依頼対象").getMessage());
+        this.認定申請区分 = requireNonNull(認定申請区分, Messages.E00003.replace("認定申請区分", "主治医意見書依頼対象").getMessage());
+        this.個人情報 = requireNonNull(個人情報, Messages.E00003.replace("個人情報", "主治医意見書依頼対象").getMessage());
+        this.氏名 = requireNonNull(氏名, Messages.E00003.replace("氏名", "主治医意見書依頼対象").getMessage());
+        this.住所 = requireNonNull(住所, Messages.E00003.replace("住所", "主治医意見書依頼対象").getMessage());
         this.主治医医療機関 = 主治医医療機関;
         this.主治医 = 主治医;
     }
@@ -162,7 +160,7 @@ public class ShujiiIkenshoIraiTaishosha {
      *
      * @return 主治医
      */
-    public IDoctor get主治医() {
+    public KaigoDoctor get主治医() {
         return 主治医;
     }
 }

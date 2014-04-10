@@ -50,11 +50,11 @@ public class NinteiShinchokuJohoDacTest extends DbeTestDacBase {
     public static class update_DB登録が更新される extends DbeTestDacBase {
 
         @Test
-        public void updateに成功し_select主治医意見書作成依頼未完了で取得した認定進捗情報の_主治医意見書登録完了年月日が_20140103に変更される() {
+        public void updateに成功し_select申請書管理番号で取得した認定進捗情報の_主治医意見書登録完了年月日が_20140103に変更される() {
             ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(new RString("0001"), new FlexibleDate("00000000"), new FlexibleDate("00000000")));
             ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(new RString("0002"), new FlexibleDate("20140101"), new FlexibleDate("20140102")));
             sut.update(create認定進捗情報Entity(new RString("0001"), new FlexibleDate("20140103"), new FlexibleDate("00000000")));
-            assertThat(sut.select主治医意見書作成依頼未完了().get(0).getIkenshoTorokuKanryoYMD().toString(), is("20140103"));
+            assertThat(ninteiShinchokuJohoDacMock.select申請書管理番号(new ShinseishoKanriNo(new RString("0001"))).getIkenshoTorokuKanryoYMD().toString(), is("20140103"));
         }
     }
 

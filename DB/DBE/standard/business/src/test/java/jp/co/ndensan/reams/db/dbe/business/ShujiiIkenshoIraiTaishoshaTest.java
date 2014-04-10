@@ -4,12 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiShinseiDate;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
-import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -39,20 +37,20 @@ public class ShujiiIkenshoIraiTaishoshaTest extends TestBase {
         private RString 氏名;
         private RString 住所;
         private KaigoIryoKikan 主治医医療機関;
-        private IDoctor 主治医;
+        private KaigoDoctor 主治医;
 
         @Override
         public void setUp() {
             申請書管理番号 = new ShinseishoKanriNo(new RString("0001"));
-            証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("000001"));
+            証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("123456"));
             被保険者番号 = new KaigoHihokenshaNo(new RString("0001"));
             認定申請年月日 = new FlexibleDate("20140101");
             認定申請区分 = NinteiShinseiKubunShinsei.新規申請;
-//            個人情報 = mock(IKojin.class);
+            個人情報 = mock(IKojin.class);
             氏名 = new RString("あああ");
             住所 = new RString("長野市AAAAAAAA");
-//            主治医医療機関 = mock(KaigoIryoKikan.class);
-//            主治医 = mock(IDoctor.class);
+            主治医医療機関 = mock(KaigoIryoKikan.class);
+            主治医 = mock(KaigoDoctor.class);
         }
 
         @Test(expected = NullPointerException.class)

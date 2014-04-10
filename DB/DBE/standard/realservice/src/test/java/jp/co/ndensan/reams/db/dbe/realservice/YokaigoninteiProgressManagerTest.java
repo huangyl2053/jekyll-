@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 
 import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinchokuJohoDac;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
+import jp.co.ndensan.reams.db.dbe.persistence.basic.NinteiShinchokuJohoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -40,7 +40,7 @@ public class YokaigoninteiProgressManagerTest extends DbeTestBase {
     }
 
     private static YokaigoninteiProgressManager createYokaigoniteiProgressManager(int flg) {
-        INinteiShinchokuJohoDac dac = mock(INinteiShinchokuJohoDac.class);
+        NinteiShinchokuJohoDac dac = mock(NinteiShinchokuJohoDac.class);
         when(dac.update(any(DbT5005NinteiShinchokuJohoEntity.class))).thenReturn(flg);
         return new YokaigoninteiProgressManager(dac);
     }

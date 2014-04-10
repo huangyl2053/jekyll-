@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiTaishosha;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ChosainJohoEntityMock;
-import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5001NinteiShinseiJohoEntityMock;
+import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinseiJohoTestHelper;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT7010NinteichosaItakusakiJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.KaigoJigyoshaEntityMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.KojinTestHelper;
@@ -76,7 +76,7 @@ public class NinteichosaIraiTaishoshaMapperTest extends DbeTestBase {
 
         @Before
         public void setUp() {
-            認定申請情報 = NinteishinseiJohoMapper.to認定申請情報(DbT5001NinteiShinseiJohoEntityMock.getSpiedInstance());
+            認定申請情報 = NinteishinseiJohoMapper.to認定申請情報(NinteiShinseiJohoTestHelper.create認定申請情報Entity());
             個人 = KojinTestHelper.create個人();
             認定調査委託先 = NinteichosaItakusakiMapper.toNinteichosaItakusaki(DbT7010NinteichosaItakusakiJohoEntityMock.getSpiedInstance());
             介護事業者 = KaigoJigyoshaMapper.toKaigoJigyosha(KaigoJigyoshaEntityMock.getSpiedInstance());

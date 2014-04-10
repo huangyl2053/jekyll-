@@ -5,14 +5,14 @@
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
+import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoIraiTaishosha;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
-import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -34,7 +34,7 @@ public final class ShujiiIkenshoIraiTaishoshaMapper {
     /**
      * 渡されたパラメータから、主治医意見書作成依頼対象者への対応付けを行います。
      *
-     * @param 認定申請情報Entity 認定申請情報Entity
+     * @param 認定申請情報 認定申請情報
      * @param 個人 個人
      * @param 氏名 氏名
      * @param 住所 住所
@@ -44,20 +44,20 @@ public final class ShujiiIkenshoIraiTaishoshaMapper {
      * @throws NullPointerException {@code 認定申請情報Entity}がnullの場合
      */
     public static ShujiiIkenshoIraiTaishosha toShujiiIkenshoIraiTaishosha(
-            DbT5001NinteiShinseiJohoEntity 認定申請情報Entity,
+            NinteiShinseiJoho 認定申請情報,
             IKojin 個人,
             RString 氏名,
             RString 住所,
             KaigoIryoKikan 主治医医療機関,
-            IDoctor 主治医) throws NullPointerException {
+            KaigoDoctor 主治医) throws NullPointerException {
 
-        requireNonNull(認定申請情報Entity, Messages.E00003.replace("認定申請情報Entity", "主治医意見書作成依頼対象者").getMessage());
+        requireNonNull(認定申請情報, Messages.E00003.replace("認定申請情報", "主治医意見書作成依頼対象者").getMessage());
 
-        ShinseishoKanriNo 申請書管理番号 = 認定申請情報Entity.getShinseishoKanriNo();
-        ShoKisaiHokenshaNo 証記載保険者番号 = 認定申請情報Entity.getShoKisaiHokenshaNo();
-        KaigoHihokenshaNo 被保険者番号 = 認定申請情報Entity.getHihokenshaNo();
-        FlexibleDate 認定申請年月日 = 認定申請情報Entity.getNinteiShinseiYMD();
-        NinteiShinseiKubunShinsei 認定申請区分 = 認定申請情報Entity.getNinteiShinseiShinseijiKubunCode();
+        ShinseishoKanriNo 申請書管理番号 = 認定申請情報.get申請書管理番号();
+        ShoKisaiHokenshaNo 証記載保険者番号 = 認定申請情報.get証記載保険者番号();
+        KaigoHihokenshaNo 被保険者番号 = 認定申請情報.get介護被保険者番号();
+        FlexibleDate 認定申請年月日 = 認定申請情報.get認定申請年月日();
+        NinteiShinseiKubunShinsei 認定申請区分 = 認定申請情報.get認定申請区分_申請時();
 
         return new ShujiiIkenshoIraiTaishosha(
                 申請書管理番号,

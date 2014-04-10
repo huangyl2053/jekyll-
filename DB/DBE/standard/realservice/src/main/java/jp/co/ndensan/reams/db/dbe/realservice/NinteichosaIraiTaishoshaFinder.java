@@ -65,7 +65,7 @@ public class NinteichosaIraiTaishoshaFinder {
      * テスト用のコンストラクタです。
      *
      * @param iraiTaishoshaDac iraiTaishoshaDac
-     * @param kojinFinder kojinFinderkojinFinder
+     * @param kojinFinder kojinFinder
      * @param ninteichosaIraiManager ninteichosaIraiManager
      * @param ninteichosaItakusakiManager ninteichosaItakusakiManager
      * @param kaigoJigyoshaFinder kaigoJigyoshaFinder
