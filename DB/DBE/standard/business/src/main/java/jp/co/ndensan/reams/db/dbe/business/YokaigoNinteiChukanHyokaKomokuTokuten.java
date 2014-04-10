@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 一時判定における、要介護認定中間評価項目得点群の情報を持つクラスです。
+ * 一次判定における、要介護認定中間評価項目得点群の情報を持つクラスです。
  *
  * @author n8178 城間篤人
  */
