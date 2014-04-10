@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import java.util.Objects;
 
 /**
  * 要介護認定結果情報のエンティティクラスです。
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
  * @author N8156 宮本 康
  */
 public class DbT5002NinteiKekkaJohoEntity implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5002NinteiKekkaJoho");
@@ -510,6 +511,25 @@ public class DbT5002NinteiKekkaJohoEntity implements IDbAccessable {
      */
     public void setShinsakaiMemo(RString shinsakaiMemo) {
         this.shinsakaiMemo = shinsakaiMemo;
+    }
+
+    /**
+     * このエンティティの主キーが他の{@literal DbT5002NinteiKekkaJohoEntity}と等しいか判定します。
+     *
+     * @param other 比較するエンティティ
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT5002NinteiKekkaJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     */
+    public boolean equalsPrimaryKeys(DbT5002NinteiKekkaJohoEntity other) {
+        if (other == null) {
+            return false;
+        }
+        if (!Objects.equals(this.insertTimestamp, other.insertTimestamp)) {
+            return false;
+        }
+        if (!Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo)) {
+            return false;
+        }
+        return true;
     }
 // </editor-fold>
 }
