@@ -37,6 +37,7 @@ import static org.junit.Assert.assertThat;
 @RunWith(Enclosed.class)
 public class NinteiKekkaMapperTest extends DbeTestBase {
 
+    private static NinteiKekkaMapper sut;
     private static final ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(new RString("1234567890"));
     private static final FlexibleDate 要介護度認定年月日 = new FlexibleDate("20140101");
     private static final YokaigoJotaiKubunCode 要介護状態区分コード = new YokaigoJotaiKubunCode(new Code(new RString("1111111111")));
@@ -60,220 +61,280 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
 
     public static class toNinteiResult extends DbeTestBase {
 
-        private NinteiResult result;
+        private DbT5002NinteiKekkaJohoEntity entity;
 
         @Before
         public void setUp() {
-            result = NinteiKekkaMapper.toNinteiResult(DbT5002NinteiKekkaJohoEntityMock.getSpiedInstance());
+            entity = DbT5002NinteiKekkaJohoEntityMock.getSpiedInstance();
         }
 
         @Test
-        public void 申請書管理番号の設定がある時_toNinteiResult_get申請書管理番号は_設定値を返す() {
+        public void 申請書管理番号の設定がある時_toNinteiResultで生成した_NinteiResult_get申請書管理番号は_設定値を返す() {
+            entity.setShinseishoKanriNo(申請書管理番号.value());
+            NinteiResult result = sut.toNinteiResult(entity);
             assertThat(result.get申請書管理番号(), is(申請書管理番号));
         }
 
         @Test
-        public void 要介護度認定年月日の設定がある時_toNinteiResult_get要介護度認定年月日は_設定値を返す() {
+        public void 要介護度認定年月日の設定がある時_toNinteiResultで生成した_NinteiResult_get要介護度認定年月日は_設定値を返す() {
+            entity.setYoukaigodoNinteiYMD(要介護度認定年月日);
+            NinteiResult result = sut.toNinteiResult(entity);
             assertThat(result.get要介護度認定年月日(), is(要介護度認定年月日));
         }
 
         @Test
-        public void 要介護状態区分の設定がある時_toNinteiResult_get要介護状態区分は_設定値を返す() {
+        public void 要介護状態区分コードの設定がある時_toNinteiResultで生成した_NinteiResult_get要介護状態_get要介護状態区分_getYokaigoJotaiKubunCodeは_設定値を返す() {
+            entity.setYoukaigoJotaiKubunCode(要介護状態区分コード.asCode());
+            NinteiResult result = sut.toNinteiResult(entity);
             assertThat(result.get要介護状態().get要介護状態区分().getYokaigoJotaiKubunCode(), is(要介護状態区分コード));
         }
 
         @Test
-        public void 要介護状態像例の設定がある時_toNinteiResult_get要介護状態像例は_設定値を返す() {
-            assertThat(result.get要介護状態像例().getYokaigoJotaizoReiCode(), is(要介護状態像例コード));
-        }
-
-        @Test
-        public void 有効期間月数の設定がある時_toNinteiResult_get有効期間月数は_設定値を返す() {
+        public void 有効期間月数の設定がある時_toNinteiResultで生成した_NinteiResult_get要介護状態_get認定有効期間_get有効期間月数は_設定値を返す() {
+            entity.setNinteiYukoKikan(有効期間月数.value());
+            NinteiResult result = sut.toNinteiResult(entity);
             assertThat(result.get要介護状態().get認定有効期間().get有効期間月数(), is(有効期間月数));
         }
 
         @Test
-        public void 有効開始年月日の設定がある時_toNinteiResult_get有効開始年月日は_設定値を返す() {
+        public void 有効開始年月日の設定がある時_toNinteiResultで生成した_NinteiResult_get要介護状態_get認定有効期間_get有効期間_getFromは_設定値を返す() {
+            entity.setNinteiYukoKaishiYMD(有効開始年月日);
+            NinteiResult result = sut.toNinteiResult(entity);
             assertThat(result.get要介護状態().get認定有効期間().get有効期間().getFrom(), is(有効開始年月日));
         }
 
         @Test
-        public void 有効終了年月日の設定がある時_toNinteiResult_get有効終了年月日は_設定値を返す() {
+        public void 有効終了年月日の設定がある時_toNinteiResultで生成した_NinteiResult_get要介護状態_get認定有効期間_get有効期間_getToは_設定値を返す() {
+            entity.setNinteiYukoShuryoYMD(有効終了年月日);
+            NinteiResult result = sut.toNinteiResult(entity);
             assertThat(result.get要介護状態().get認定有効期間().get有効期間().getTo(), is(有効終了年月日));
         }
 
         @Test
-        public void 介護サービス種類の設定がある時_toNinteiResult_get介護サービス種類は_設定値を返す() {
+        public void 要介護状態像例コードの設定がある時_toNinteiResultで生成した_NinteiResult_get要介護状態像例_getYokaigoJotaizoReiCodeは_設定値を返す() {
+            entity.setYokaigoJotaizoReiCode(要介護状態像例コード.asCode());
+            NinteiResult result = sut.toNinteiResult(entity);
+            assertThat(result.get要介護状態像例().getYokaigoJotaizoReiCode(), is(要介護状態像例コード));
+        }
+
+        @Test
+        public void 介護サービス種類の設定がある時_toNinteiResultで生成した_NinteiResult_get介護サービス種類は_設定値を返す() {
+            entity.setKaigoServiceShurui(介護サービス種類.getCode());
+            NinteiResult result = sut.toNinteiResult(entity);
             assertThat(result.get介護サービス種類(), is(介護サービス種類));
         }
 
         @Test
-        public void 施設入所区分の設定がある時_toNinteiResult_is施設入所区分は_設定値を返す() {
+        public void 施設入所区分の設定がある時_toNinteiResultで生成した_NinteiResult_is施設入所区分は_設定値を返す() {
+            entity.setShisetsuNyushoFlag(施設入所区分.is施設入所());
+            NinteiResult result = sut.toNinteiResult(entity);
             assertThat(result.get施設入所区分(), is(施設入所区分));
         }
 
         @Test
-        public void 特定疾病区分の設定がある時_toNinteiResult_get特定疾病区分は_設定値を返す() {
+        public void 特定疾病区分コードの設定がある時_toNinteiResultで生成した_NinteiResult_get特定疾病区分_getTokuteiShippeiKubunCodeは_設定値を返す() {
+            entity.setTokuteiShippeiCode(特定疾病区分コード.asCode());
+            NinteiResult result = sut.toNinteiResult(entity);
             assertThat(result.get特定疾病区分().getTokuteiShippeiKubunCode(), is(特定疾病区分コード));
         }
 
         @Test
-        public void 審査会開催番号の設定がある時_toNinteiResult_get審査会開催番号は_設定値を返す() {
+        public void 審査会開催番号の設定がある時_toNinteiResultで生成した_NinteiResult_get認定審査会意見_get審査会開催番号は_設定値を返す() {
+            entity.setShinsakaiKaisaiNo(審査会開催番号.value());
+            NinteiResult result = sut.toNinteiResult(entity);
             assertThat(result.get認定審査会意見().get審査会開催番号(), is(審査会開催番号));
         }
 
         @Test
-        public void 審査会意見種類の設定がある時_toNinteiResult_get審査会意見種類は_設定値を返す() {
+        public void 審査会意見種類の設定がある時_toNinteiResultで生成した_NinteiResult_get認定審査会意見_get審査会意見種類は_設定値を返す() {
+            entity.setNinteishinsakaiIkenShurui(審査会意見種類.getCode());
+            NinteiResult result = sut.toNinteiResult(entity);
             assertThat(result.get認定審査会意見().get審査会意見種類(), is(審査会意見種類));
         }
 
         @Test
-        public void 審査会意見の設定がある時_toNinteiResult_get審査会意見は_設定値を返す() {
+        public void 審査会意見の設定がある時_toNinteiResultで生成した_NinteiResult_get認定審査会意見_get審査会意見は_設定値を返す() {
+            entity.setShinsakaiIken(審査会意見);
+            NinteiResult result = sut.toNinteiResult(entity);
             assertThat(result.get認定審査会意見().get審査会意見(), is(審査会意見));
         }
 
         @Test
-        public void 審査会メモの設定がある時_toNinteiResult_get審査会メモは_設定値を返す() {
+        public void 審査会メモの設定がある時_toNinteiResultで生成した_NinteiResult_get認定審査会意見_get審査会メモは_設定値を返す() {
+            entity.setShinsakaiMemo(審査会メモ);
+            NinteiResult result = sut.toNinteiResult(entity);
             assertThat(result.get認定審査会意見().get審査会メモ(), is(審査会メモ));
         }
 
         @Test
-        public void 一次判定結果変更理由の設定がある時_toNinteiResult_get一次判定結果変更理由は_設定値を返す() {
+        public void 一次判定結果変更理由の設定がある時_toNinteiResultで生成した_NinteiResult_get認定理由_get一次判定結果変更理由は_設定値を返す() {
+            entity.setIchijiHnateiKekkaHenkoRiyu(一次判定結果変更理由);
+            NinteiResult result = sut.toNinteiResult(entity);
             assertThat(result.get認定理由().get一次判定結果変更理由(), is(一次判定結果変更理由));
         }
 
         @Test
-        public void 認定結果異動事由区分の設定がある時_toNinteiResult_get認定結果異動事由区分は_設定値を返す() {
+        public void 認定結果異動事由区分の設定がある時_toNinteiResultで生成した_NinteiResult_get認定理由_get認定結果異動事由_get認定結果異動事由区分は_設定値を返す() {
+            entity.setNinteiKekkaIdoJiyu(認定結果異動事由区分.getCode());
+            NinteiResult result = sut.toNinteiResult(entity);
             assertThat(result.get認定理由().get認定結果異動事由().get認定結果異動事由区分(), is(認定結果異動事由区分));
         }
 
         @Test
-        public void 認定結果異動年月日の設定がある時_toNinteiResult_get認定結果異動年月日は_設定値を返す() {
+        public void 認定結果異動年月日の設定がある時_toNinteiResultで生成した_NinteiResult_get認定理由_get認定結果異動事由_get認定結果異動年月日は_設定値を返す() {
+            entity.setNinteiKekkaIdoYMD(認定結果異動年月日);
+            NinteiResult result = sut.toNinteiResult(entity);
             assertThat(result.get認定理由().get認定結果異動事由().get認定結果異動年月日(), is(認定結果異動年月日));
         }
 
         @Test
-        public void 認定取消理由の設定がある時_toNinteiResult_get認定取消理由は_設定値を返す() {
+        public void 認定取消理由の設定がある時_toNinteiResultで生成した_NinteiResult_get認定理由_get認定取消理由_get認定取消理由は_設定値を返す() {
+            entity.setNinteiTorikeshiRiyu(認定取消理由);
+            NinteiResult result = sut.toNinteiResult(entity);
             assertThat(result.get認定理由().get認定取消理由().get認定取消理由(), is(認定取消理由));
         }
 
         @Test
-        public void 認定取消年月日の設定がある時_toNinteiResult_get認定取消年月日は_設定値を返す() {
+        public void 認定取消年月日の設定がある時_toNinteiResultで生成した_NinteiResult_get認定理由_get認定取消理由_get認定取消年月日は_設定値を返す() {
+            entity.setNinteiTorikeshiYMD(認定取消年月日);
+            NinteiResult result = sut.toNinteiResult(entity);
             assertThat(result.get認定理由().get認定取消理由().get認定取消年月日(), is(認定取消年月日));
         }
 
         @Test
-        public void 認定理由の設定がある時_toNinteiResult_get認定理由は_設定値を返す() {
+        public void 認定理由の設定がある時_toNinteiResultで生成した_NinteiResult_get認定理由_get認定理由は_設定値を返す() {
+            entity.setNinteiRiyu(認定理由);
+            NinteiResult result = sut.toNinteiResult(entity);
             assertThat(result.get認定理由().get認定理由(), is(認定理由));
         }
     }
 
     public static class toDbT5002NinteiKekkaJohoEntity extends DbeTestBase {
 
-        private DbT5002NinteiKekkaJohoEntity result;
+        private NinteiResult ninteiResult;
 
         @Before
         public void setUp() {
-            result = NinteiKekkaMapper.toDbT5002NinteiKekkaJohoEntity(NinteiResultMock.getSpiedInstance());
+            ninteiResult = NinteiResultMock.getSpiedInstance();
         }
 
         @Test
-        public void 申請書管理番号の設定がある時_toDbT5002NinteiKekkaJohoEntity_getShinseishoKanriNoは_設定値を返す() {
+        public void 申請書管理番号の設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getShinseishoKanriNoは_設定値を返す() {
+            DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
             assertThat(result.getShinseishoKanriNo(), is(申請書管理番号.value()));
         }
 
         @Test
-        public void 要介護度認定年月日の設定がある時_toDbT5002NinteiKekkaJohoEntity_getYoukaigodoNinteiYMDは_設定値を返す() {
+        public void 要介護度認定年月日の設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getYoukaigodoNinteiYMDは_設定値を返す() {
+            DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
             assertThat(result.getYoukaigodoNinteiYMD(), is(要介護度認定年月日));
         }
 
         @Test
-        public void 要介護状態区分の設定がある時_toDbT5002NinteiKekkaJohoEntity_getYoukaigoJotaiKubunCodeは_設定値を返す() {
+        public void 要介護状態区分コードの設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getYoukaigoJotaiKubunCodeは_設定値を返す() {
+            DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
             assertThat(result.getYoukaigoJotaiKubunCode(), is(要介護状態区分コード.asCode()));
         }
 
         @Test
-        public void 有効期間月数の設定がある時_toDbT5002NinteiKekkaJohoEntity_getNinteiYukoKikanは_設定値を返す() {
+        public void 有効期間月数の設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getNinteiYukoKikanは_設定値を返す() {
+            DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
             assertThat(result.getNinteiYukoKikan(), is(有効期間月数.value()));
         }
 
         @Test
-        public void 有効開始年月日の設定がある時_toDbT5002NinteiKekkaJohoEntity_getNinteiYukoKaishiYMDは_設定値を返す() {
+        public void 有効開始年月日の設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getNinteiYukoKaishiYMDは_設定値を返す() {
+            DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
             assertThat(result.getNinteiYukoKaishiYMD(), is(有効開始年月日));
         }
 
         @Test
-        public void 有効終了年月日の設定がある時_toDbT5002NinteiKekkaJohoEntity_getNinteiYukoShuryoYMDは_設定値を返す() {
+        public void 有効終了年月日の設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getNinteiYukoShuryoYMDは_設定値を返す() {
+            DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
             assertThat(result.getNinteiYukoShuryoYMD(), is(有効終了年月日));
         }
 
         @Test
-        public void 特定疾病区分の設定がある時_toDbT5002NinteiKekkaJohoEntity_getTokuteiShippeiCodeは_設定値を返す() {
+        public void 特定疾病区分コードの設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getTokuteiShippeiCodeは_設定値を返す() {
+            DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
             assertThat(result.getTokuteiShippeiCode(), is(特定疾病区分コード.asCode()));
         }
 
         @Test
-        public void 施設入所区分の設定がある時_toDbT5002NinteiKekkaJohoEntity_getShisetsuNyushoFlagは_設定値を返す() {
+        public void 施設入所区分の設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getShisetsuNyushoFlagは_設定値を返す() {
+            DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
             assertThat(result.getShisetsuNyushoFlag(), is(施設入所区分.is施設入所()));
         }
 
         @Test
-        public void 審査会開催番号の設定がある時_toDbT5002NinteiKekkaJohoEntity_getShinsakaiKaisaiNoは_設定値を返す() {
+        public void 審査会開催番号の設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getShinsakaiKaisaiNoは_設定値を返す() {
+            DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
             assertThat(result.getShinsakaiKaisaiNo(), is(審査会開催番号.value()));
         }
 
         @Test
-        public void 審査会意見の設定がある時_toDbT5002NinteiKekkaJohoEntity_getShinsakaiIkenは_設定値を返す() {
+        public void 審査会意見の設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getShinsakaiIkenは_設定値を返す() {
+            DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
             assertThat(result.getShinsakaiIken(), is(審査会意見));
         }
 
         @Test
-        public void 一次判定結果変更理由の設定がある時_toDbT5002NinteiKekkaJohoEntity_getIchijiHnateiKekkaHenkoRiyuは_設定値を返す() {
+        public void 一次判定結果変更理由の設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getIchijiHnateiKekkaHenkoRiyuは_設定値を返す() {
+            DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
             assertThat(result.getIchijiHnateiKekkaHenkoRiyu(), is(一次判定結果変更理由));
         }
 
         @Test
-        public void 要介護状態像例の設定がある時_toDbT5002NinteiKekkaJohoEntity_getYokaigoJotaizoReiCodeは_設定値を返す() {
+        public void 要介護状態像例コードの設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getYokaigoJotaizoReiCodeは_設定値を返す() {
+            DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
             assertThat(result.getYokaigoJotaizoReiCode(), is(要介護状態像例コード.asCode()));
         }
 
         @Test
-        public void 審査会意見種類の設定がある時_toDbT5002NinteiKekkaJohoEntity_getNinteishinsakaiIkenShuruiは_設定値を返す() {
+        public void 審査会意見種類の設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getNinteishinsakaiIkenShuruiは_設定値を返す() {
+            DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
             assertThat(result.getNinteishinsakaiIkenShurui(), is(審査会意見種類.getCode()));
         }
 
         @Test
-        public void 介護サービス種類の設定がある時_toDbT5002NinteiKekkaJohoEntity_getKaigoServiceShuruiは_設定値を返す() {
+        public void 介護サービス種類の設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getKaigoServiceShuruiは_設定値を返す() {
+            DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
             assertThat(result.getKaigoServiceShurui(), is(介護サービス種類.getCode()));
         }
 
         @Test
-        public void 認定結果異動事由区分の設定がある時_toDbT5002NinteiKekkaJohoEntity_getNinteiKekkaIdoJiyuは_設定値を返す() {
+        public void 認定結果異動事由区分の設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getNinteiKekkaIdoJiyuは_設定値を返す() {
+            DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
             assertThat(result.getNinteiKekkaIdoJiyu(), is(認定結果異動事由区分.getCode()));
         }
 
         @Test
-        public void 認定結果異動年月日の設定がある時_toDbT5002NinteiKekkaJohoEntity_getNinteiKekkaIdoYMDは_設定値を返す() {
+        public void 認定結果異動年月日の設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getNinteiKekkaIdoYMDは_設定値を返す() {
+            DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
             assertThat(result.getNinteiKekkaIdoYMD(), is(認定結果異動年月日));
         }
 
         @Test
-        public void 認定取消理由の設定がある時_toDbT5002NinteiKekkaJohoEntity_getNinteiTorikeshiRiyuは_設定値を返す() {
+        public void 認定取消理由の設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getNinteiTorikeshiRiyuは_設定値を返す() {
+            DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
             assertThat(result.getNinteiTorikeshiRiyu(), is(認定取消理由));
         }
 
         @Test
-        public void 認定取消年月日の設定がある時_toDbT5002NinteiKekkaJohoEntity_getNinteiTorikeshiYMDは_設定値を返す() {
+        public void 認定取消年月日の設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getNinteiTorikeshiYMDは_設定値を返す() {
+            DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
             assertThat(result.getNinteiTorikeshiYMD(), is(認定取消年月日));
         }
 
         @Test
-        public void 認定理由の設定がある時_toDbT5002NinteiKekkaJohoEntity_getNinteiRiyuは_設定値を返す() {
+        public void 認定理由の設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getNinteiRiyuは_設定値を返す() {
+            DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
             assertThat(result.getNinteiRiyu(), is(認定理由));
         }
 
         @Test
-        public void 認定理由の設定がある時_toDbT5002NinteiKekkaJohoEntity_getShinsakaiMemoは_設定値を返す() {
+        public void 審査会メモの設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getShinsakaiMemoは_設定値を返す() {
+            DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
             assertThat(result.getShinsakaiMemo(), is(審査会メモ));
         }
     }
