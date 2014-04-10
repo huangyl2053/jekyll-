@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.business.helper.ShujiiIkenshoResultMock;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.junit.Test;
@@ -15,12 +16,12 @@ import org.junit.Test;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class ShujiiIkenshoResultTest {
+public class ShujiiIkenshoResultTest extends DbeTestBase {
 
     private static final int AS_基本情報がNULL = 1;
     private static final int AS_詳細情報がNULL = 2;
 
-    public static class コンストラクタ {
+    public static class コンストラクタ extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 基本情報がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {

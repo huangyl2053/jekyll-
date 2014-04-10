@@ -4,9 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
 
-import org.junit.Test;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -16,9 +17,9 @@ import static org.junit.Assert.assertThat;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class IshiJokyoTest {
+public class IshiJokyoTest extends DbeTestBase {
 
-    public static class toValue {
+    public static class toValue extends DbeTestBase {
 
         @Test
         public void 引数がTRUEの時_toValueは_有効を返す() {

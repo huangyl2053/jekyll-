@@ -6,18 +6,19 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.IShujii;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT7012ShujiiJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShujiiMock;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Test;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
@@ -27,9 +28,9 @@ import static org.junit.Assert.*;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class ShujiiMapperTest {
+public class ShujiiMapperTest extends DbeTestBase {
 
-    public static class toShujii {
+    public static class toShujii extends DbeTestBase {
 
         @Test
         public void 市町村コードの設定がある時_toShujii_get市町村コードは_設定値を返す() {
@@ -82,7 +83,7 @@ public class ShujiiMapperTest {
         }
     }
 
-    public static class toShujiiEntity {
+    public static class toShujiiEntity extends DbeTestBase {
 
         @Test
         public void 市町村コードの設定がある時_toShujiiEntity_getShichosonCodeは_設定値を返す() {

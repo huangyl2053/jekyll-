@@ -5,11 +5,12 @@
 package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
@@ -20,7 +21,7 @@ import static org.junit.Assert.assertThat;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class KaigoDoctorCodeTest {
+public class KaigoDoctorCodeTest extends DbeTestBase {
 
     public static class コンストラクタ {
 
@@ -30,7 +31,7 @@ public class KaigoDoctorCodeTest {
         }
     }
 
-    public static class equals {
+    public static class equals extends DbeTestBase {
 
         @Test
         public void 引数と値が一致する時_equalsは_TRUEを返す() {
@@ -53,7 +54,7 @@ public class KaigoDoctorCodeTest {
         }
     }
 
-    public static class hashCode {
+    public static class hashCode extends DbeTestBase {
 
         @Test
         public void 引数と値が一致する時_hashCodeは_同一の値を返す() {
@@ -66,7 +67,7 @@ public class KaigoDoctorCodeTest {
         }
     }
 
-    public static class compareTo {
+    public static class compareTo extends DbeTestBase {
 
         @Test
         public void 引数と値が一致する時_compareToは_0を返す() {

@@ -5,24 +5,25 @@
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoResult;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiKaisu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiryoShubetsu;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShujiiIkenshoEntityMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShujiiIkenshoResultMock;
 import jp.co.ndensan.reams.db.dbe.entity.relate.ShujiiIkenshoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.junit.Test;
-import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemKubun.*;
 import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.*;
+import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemKubun.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -33,9 +34,9 @@ import static org.junit.Assert.assertThat;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class ShujiiIkenshoMapperTest {
+public class ShujiiIkenshoMapperTest extends DbeTestBase {
 
-    public static class toShujiiIkenshoResult_基本情報 {
+    public static class toShujiiIkenshoResult_基本情報 extends DbeTestBase {
 
         @Test
         public void 申請書管理番号の設定がある時_toShujiiIkenshoResult_get申請書管理番号は_設定値を返す() {
@@ -88,7 +89,7 @@ public class ShujiiIkenshoMapperTest {
         }
     }
 
-    public static class toShujiiIkenshoResult_詳細情報 {
+    public static class toShujiiIkenshoResult_詳細情報 extends DbeTestBase {
 
         @Test
         public void 申請書管理番号の設定がある時_toShujiiIkenshoResult_get申請書管理番号は_設定値を返す() {
@@ -786,7 +787,7 @@ public class ShujiiIkenshoMapperTest {
         }
     }
 
-    public static class toShujiiIkenshoEntity_getDbT5012ShujiiIkenshoJohoEntity {
+    public static class toShujiiIkenshoEntity_getDbT5012ShujiiIkenshoJohoEntity extends DbeTestBase {
 
         @Test
         public void 申請書管理番号の設定がある時_toShujiiIkenshoEntity_getShinseishoKanriNoは_設定値を返す() {
@@ -844,7 +845,7 @@ public class ShujiiIkenshoMapperTest {
         }
     }
 
-    public static class toShujiiIkenshoEntity_getDbT5013ShujiiIkenshoShosaiJohoEntity {
+    public static class toShujiiIkenshoEntity_getDbT5013ShujiiIkenshoShosaiJohoEntity extends DbeTestBase {
 
         @Test
         public void 申請書管理番号の設定がある時_toShujiiIkenshoEntity_getShinseishoKanriNoは_設定値を返す() {

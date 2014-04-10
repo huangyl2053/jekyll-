@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakusei
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiryoShubetsu;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
@@ -24,7 +25,7 @@ import org.junit.Test;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class ShujiiIkenshoBaseTest {
+public class ShujiiIkenshoBaseTest extends DbeTestBase {
 
     private static final int AS_申請書管理番号がNULL = 1;
     private static final int AS_主治医意見書履歴番号がNULL = 2;
@@ -37,7 +38,7 @@ public class ShujiiIkenshoBaseTest {
     private static final int AS_認定情報提供希望がNULL = 9;
     private static final int AS_意見書同意がNULL = 10;
 
-    public static class コンストラクタ {
+    public static class コンストラクタ extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 申請書管理番号がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {

@@ -5,9 +5,10 @@
 package jp.co.ndensan.reams.db.dbe.business.core.chosahyo;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteichosahyoFactory;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -22,9 +23,9 @@ import static org.junit.Assert.assertThat;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class NinteichosahyoTest {
+public class NinteichosahyoTest extends DbeTestBase {
 
-    public static class コンストラクタ {
+    public static class コンストラクタ extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 調査票定義がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
@@ -37,7 +38,7 @@ public class NinteichosahyoTest {
         }
     }
 
-    public static class get調査項目 {
+    public static class get調査項目 extends DbeTestBase {
 
         @Test
         public void 調査項目区分の指定がある時_get調査項目は_該当の調査項目を返す() {
@@ -50,7 +51,7 @@ public class NinteichosahyoTest {
         }
     }
 
-    public static class get調査項目List {
+    public static class get調査項目List extends DbeTestBase {
 
         @Test
         public void 調査項目グループの指定がある時_get調査項目Listは_該当の調査項目を返す() {
@@ -63,7 +64,7 @@ public class NinteichosahyoTest {
         }
     }
 
-    public static class get調査項目ListAll {
+    public static class get調査項目ListAll extends DbeTestBase {
 
         @Test
         public void 調査項目の設定がある時_get調査項目ListAllは_全調査項目を返す() {
@@ -71,7 +72,7 @@ public class NinteichosahyoTest {
         }
     }
 
-    public static class get調査項目グループ {
+    public static class get調査項目グループ extends DbeTestBase {
 
         @Test
         public void 調査項目グループの設定がある時_get調査項目グループは_全調査項目グループを返す() {

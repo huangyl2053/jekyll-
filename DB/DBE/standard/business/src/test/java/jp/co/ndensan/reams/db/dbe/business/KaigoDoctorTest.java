@@ -18,7 +18,7 @@ import static org.mockito.Mockito.*;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class KaigoDoctorTest {
+public class KaigoDoctorTest extends DbeTestBase {
 
     public static class コンストラクタ extends DbeTestBase {
 

@@ -23,11 +23,12 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -39,7 +40,7 @@ import static org.mockito.Mockito.*;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class ShujiiIkenshoSakuseiIraiKirokuManagerTest {
+public class ShujiiIkenshoSakuseiIraiKirokuManagerTest extends DbeTestBase {
 
     private static final int AS_情報0件 = 0;
     private static final int AS_情報1件 = 1;
@@ -47,7 +48,7 @@ public class ShujiiIkenshoSakuseiIraiKirokuManagerTest {
     private static final int AS_save成功 = 1;
     private static final int AS_save失敗 = 0;
 
-    public static class get主治医意見書作成依頼情報 {
+    public static class get主治医意見書作成依頼情報 extends DbeTestBase {
 
         @Test
         public void 該当の主治医意見書作成依頼情報が存在しない時_get主治医意見書作成依頼情報は_NULLを返す() {
@@ -60,7 +61,7 @@ public class ShujiiIkenshoSakuseiIraiKirokuManagerTest {
         }
     }
 
-    public static class get主治医意見書作成依頼情報By申請書管理番号 {
+    public static class get主治医意見書作成依頼情報By申請書管理番号 extends DbeTestBase {
 
         @Test
         public void 該当の主治医意見書作成依頼情報が0件の時_get主治医意見書作成依頼情報By申請書管理番号は_EMPTYを返す() {
@@ -78,7 +79,7 @@ public class ShujiiIkenshoSakuseiIraiKirokuManagerTest {
         }
     }
 
-    public static class get主治医意見書作成依頼情報By依頼年月日 {
+    public static class get主治医意見書作成依頼情報By依頼年月日 extends DbeTestBase {
 
         @Test
         public void 該当の主治医意見書作成依頼情報が0件の時_get主治医意見書作成依頼情報By依頼年月日は_EMPTYを返す() {
@@ -96,7 +97,7 @@ public class ShujiiIkenshoSakuseiIraiKirokuManagerTest {
         }
     }
 
-    public static class get主治医意見書作成依頼情報By主治医情報 {
+    public static class get主治医意見書作成依頼情報By主治医情報 extends DbeTestBase {
 
         @Test
         public void 該当の主治医意見書作成依頼情報が0件の時_get主治医意見書作成依頼情報By主治医情報は_EMPTYを返す() {
@@ -114,7 +115,7 @@ public class ShujiiIkenshoSakuseiIraiKirokuManagerTest {
         }
     }
 
-    public static class get主治医意見書作成依頼情報By督促年月日 {
+    public static class get主治医意見書作成依頼情報By督促年月日 extends DbeTestBase {
 
         @Test
         public void 該当の主治医意見書作成依頼情報が0件の時_get主治医意見書作成依頼情報By督促年月日は_EMPTYを返す() {
@@ -132,7 +133,7 @@ public class ShujiiIkenshoSakuseiIraiKirokuManagerTest {
         }
     }
 
-    public static class save_主治医意見書作成依頼情報 {
+    public static class save_主治医意見書作成依頼情報 extends DbeTestBase {
 
         @Test
         public void saveが成功した時_saveは_TRUEを返す() {
@@ -145,7 +146,7 @@ public class ShujiiIkenshoSakuseiIraiKirokuManagerTest {
         }
     }
 
-    public static class get認定申請情報 {
+    public static class get認定申請情報 extends DbeTestBase {
 
         @Test
         public void 該当の認定申請情報が存在しない時_get認定申請情報は_NULLを返す() {
@@ -158,7 +159,7 @@ public class ShujiiIkenshoSakuseiIraiKirokuManagerTest {
         }
     }
 
-    public static class save_認定申請情報 {
+    public static class save_認定申請情報 extends DbeTestBase {
 
         @Test
         public void saveが成功した時_saveは_TRUEを返す() {

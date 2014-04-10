@@ -7,9 +7,10 @@ package jp.co.ndensan.reams.db.dbe.business.core.ikensho;
 import java.util.EnumMap;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoFactory;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.IShujiiIkenshoItemKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
@@ -25,7 +26,7 @@ import static org.junit.Assert.assertThat;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class ShujiiIkenshoEditorTest {
+public class ShujiiIkenshoEditorTest extends DbeTestBase {
 
     private static final IShujiiIkenshoItemKubun ITEM_KUBUN = ShujiiIkenshoItemKubun.麻痺_右上肢;
     private static final RString STRING_VALUE = new RString("123");
@@ -33,7 +34,7 @@ public class ShujiiIkenshoEditorTest {
     private static final boolean BOOL_VALUE = true;
     private static final Code CODE_VALUE = new Code("123");
 
-    public static class setItem {
+    public static class setItem extends DbeTestBase {
 
         @Test
         public void 意見書項目の指定がある時_setItemは_指定値を設定する() {
@@ -43,7 +44,7 @@ public class ShujiiIkenshoEditorTest {
         }
     }
 
-    public static class setResult_string {
+    public static class setResult_string extends DbeTestBase {
 
         @Test
         public void 意見書結果の指定がある時_setResultは_指定値を設定する() {
@@ -53,7 +54,7 @@ public class ShujiiIkenshoEditorTest {
         }
     }
 
-    public static class setResult_int {
+    public static class setResult_int extends DbeTestBase {
 
         @Test
         public void 意見書結果の指定がある時_setResultは_指定値を設定する() {
@@ -63,7 +64,7 @@ public class ShujiiIkenshoEditorTest {
         }
     }
 
-    public static class setResult_boolean {
+    public static class setResult_boolean extends DbeTestBase {
 
         @Test
         public void 意見書結果の指定がある時_setResultは_指定値を設定する() {
@@ -73,7 +74,7 @@ public class ShujiiIkenshoEditorTest {
         }
     }
 
-    public static class getResultByString {
+    public static class getResultByString extends DbeTestBase {
 
         @Test
         public void 意見書結果の設定がある時_getResultByStringは_設定値を返す() {
@@ -83,7 +84,7 @@ public class ShujiiIkenshoEditorTest {
         }
     }
 
-    public static class getResultByInt {
+    public static class getResultByInt extends DbeTestBase {
 
         @Test
         public void 意見書結果の設定がある時_getResultByIntは_設定値を返す() {
@@ -93,7 +94,7 @@ public class ShujiiIkenshoEditorTest {
         }
     }
 
-    public static class getResultByCode {
+    public static class getResultByCode extends DbeTestBase {
 
         @Test
         public void 意見書結果の設定がある時_getResultByIntは_設定値を返す() {
@@ -103,7 +104,7 @@ public class ShujiiIkenshoEditorTest {
         }
     }
 
-    public static class getResultByBool {
+    public static class getResultByBool extends DbeTestBase {
 
         @Test
         public void 意見書結果の設定がある時_getResultByBoolは_設定値を返す() {
@@ -113,7 +114,7 @@ public class ShujiiIkenshoEditorTest {
         }
     }
 
-    public static class isResultSet {
+    public static class isResultSet extends DbeTestBase {
 
         @Test
         public void 意見書結果の設定がある時_isResultSetは_TRUEを返す() {
@@ -129,7 +130,7 @@ public class ShujiiIkenshoEditorTest {
         }
     }
 
-    public static class getShujiiIkensho {
+    public static class getShujiiIkensho extends DbeTestBase {
 
         @Test
         public void 意見書の設定がある時_getShujiiIkenshoは_意見書のインスタンスを返す() {

@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5002NinteiKekkaJohoEntityMock
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiResultMock;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.NinteiKekkaJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -25,7 +26,7 @@ import static org.mockito.Mockito.*;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class NinteiResultManagerTest {
+public class NinteiResultManagerTest extends DbeTestBase {
 
     private static final int AS_認定結果あり = 1;
     private static final int AS_認定結果なし = 0;
@@ -34,7 +35,7 @@ public class NinteiResultManagerTest {
     private static final int AS_remove成功 = 1;
     private static final int AS_remove失敗 = 0;
 
-    public static class get認定結果 {
+    public static class get認定結果 extends DbeTestBase {
 
         @Test
         public void 認定結果ありの時_get認定結果は_該当の認定結果を返す() {
@@ -47,7 +48,7 @@ public class NinteiResultManagerTest {
         }
     }
 
-    public static class save認定結果 {
+    public static class save認定結果 extends DbeTestBase {
 
         @Test
         public void save成功の時_save認定結果は_TRUEを返す() {
@@ -60,7 +61,7 @@ public class NinteiResultManagerTest {
         }
     }
 
-    public static class remove認定結果 {
+    public static class remove認定結果 extends DbeTestBase {
 
         @Test
         public void remove成功の時_remove認定結果は_TRUEを返す() {
