@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5002NinteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5002NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
@@ -12,7 +11,6 @@ import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
 import jp.co.ndensan.reams.db.dbz.persistence.IInsertable;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorForAddType;
-import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT5002NinteiKekkaJoho.*;
@@ -37,12 +35,10 @@ public class NinteiKekkaJohoDac implements IInsertable<DbT5002NinteiKekkaJohoEnt
     @Transaction
     public DbT5002NinteiKekkaJohoEntity select(ShinseishoKanriNo 申請書管理番号) {
         DbAccessorForAddType accessor = new DbAccessorForAddType(session);
-        List<DbT5002NinteiKekkaJohoEntity> list = accessor.select()
+        return accessor.select()
                 .table(DbT5002NinteiKekkaJoho.class)
                 .where(eq(shinseishoKanriNo, 申請書管理番号))
-                .order(by(insertTimestamp, Order.DESC))
-                .toList(DbT5002NinteiKekkaJohoEntity.class);
-        return !list.isEmpty() ? list.get(0) : null;
+                .toObject(DbT5002NinteiKekkaJohoEntity.class);
     }
 
     @Override
