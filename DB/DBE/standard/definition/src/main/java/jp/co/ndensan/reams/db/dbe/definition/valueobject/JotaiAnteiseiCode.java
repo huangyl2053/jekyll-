@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8178 城間篤人
  */
-public class KaigoNinteiJotaiAnteiseiCode implements ICodeWrapValueObject, Comparable<KaigoNinteiJotaiAnteiseiCode> {
+public class JotaiAnteiseiCode implements ICodeWrapValueObject, Comparable<JotaiAnteiseiCode> {
 
     private final Code code;
 
@@ -26,7 +26,7 @@ public class KaigoNinteiJotaiAnteiseiCode implements ICodeWrapValueObject, Compa
      * @param code 介護認定状態の安定性コード
      * @throws NullPointerException 引数にnullが渡されたとき
      */
-    public KaigoNinteiJotaiAnteiseiCode(Code code)
+    public JotaiAnteiseiCode(Code code)
             throws NullPointerException {
         this.code = requireNonNull(code, Messages.E00003.replace("介護認定状態の安定性コード", getClass().getName()).getMessage());
     }
@@ -42,7 +42,7 @@ public class KaigoNinteiJotaiAnteiseiCode implements ICodeWrapValueObject, Compa
     }
 
     @Override
-    public int compareTo(KaigoNinteiJotaiAnteiseiCode 比較対象) {
+    public int compareTo(JotaiAnteiseiCode 比較対象) {
         return this.value().compareTo(比較対象.value());
     }
 
@@ -58,6 +58,6 @@ public class KaigoNinteiJotaiAnteiseiCode implements ICodeWrapValueObject, Compa
         if (比較対象 == null || getClass() != 比較対象.getClass()) {
             return false;
         }
-        return ((KaigoNinteiJotaiAnteiseiCode) 比較対象).value().equals(this.value());
+        return ((JotaiAnteiseiCode) 比較対象).value().equals(this.value());
     }
 }

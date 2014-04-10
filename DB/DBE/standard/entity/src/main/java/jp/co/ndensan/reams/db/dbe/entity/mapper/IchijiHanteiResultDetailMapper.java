@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiKeikokuList;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResultKomoku;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResultDetail;
-import jp.co.ndensan.reams.db.dbe.business.KaigoNinteiJotaiAnteiseiKubun;
+import jp.co.ndensan.reams.db.dbe.business.JotaiAnteiseiKubun;
 import jp.co.ndensan.reams.db.dbe.business.NichijoSeikatsuJiritsudoKumiawase;
 import jp.co.ndensan.reams.db.dbe.business.NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku;
 import jp.co.ndensan.reams.db.dbe.business.NoryokuMiteikaNinchishoKoreishaShihyoKomoku;
@@ -86,8 +86,8 @@ public final class IchijiHanteiResultDetailMapper {
                 entity.getChukanHyokaKomoku5gun(), entity.getChukanHyokaKomoku6gun(), entity.getChukanHyokaKomoku7gun());
     }
 
-    private static KaigoNinteiJotaiAnteiseiKubun create介護認定状態安定性(DbT5016IchijiHanteiKekkaJohoEntity entity) {
-        return new KaigoNinteiJotaiAnteiseiKubun(entity.getJotaiAnteiseiCode(),
+    private static JotaiAnteiseiKubun create介護認定状態安定性(DbT5016IchijiHanteiKekkaJohoEntity entity) {
+        return new JotaiAnteiseiKubun(entity.getJotaiAnteiseiCode(),
                 entity.getJotaiAnteiseiCodeMeisho(), entity.getJotaiAnteiseiCodeRyakusho());
     }
 

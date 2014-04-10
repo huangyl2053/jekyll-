@@ -20,15 +20,15 @@ import org.junit.runner.RunWith;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class KaigoNinteiJotaiAnteiseiKubunTest {
+public class JotaiAnteiseiKubunTest {
 
-    private static KaigoNinteiJotaiAnteiseiKubun sut;
+    private static JotaiAnteiseiKubun sut;
 
     public static class get介護認定状態安定性コードのテスト extends DbeTestBase {
 
         @Before
         public void setUp() {
-            sut = new KaigoNinteiJotaiAnteiseiKubun(new Code(new RString("001")), new RString("名称"), new RString("略称"));
+            sut = new JotaiAnteiseiKubun(new Code(new RString("001")), new RString("名称"), new RString("略称"));
         }
 
         @Test

@@ -29,7 +29,7 @@ public class IchijiHanteiResultDetail {
     private final YokaigoNinteiToKijunTime 要介護認定等基準時間;
     private final YokaigoNinteiChukanHyokaKomokuTokuten 中間評価項目得点;
     private final IchijiHanteiKeikokuList 一次判定警告List;
-    private final KaigoNinteiJotaiAnteiseiKubun 認定状態安定性;
+    private final JotaiAnteiseiKubun 認定状態安定性;
     private final Decimal 認知症自立度2以上蓋然性;
     private final SuiteiKyuhuKubun 推定給付区分;
     private final NoryokuMiteikaNinchishoKoreishaShihyoKomoku 運動能力未低下認知症高齢者指標;
@@ -67,7 +67,7 @@ public class IchijiHanteiResultDetail {
     public IchijiHanteiResultDetail(ShinseishoKanriNo 申請書管理番号, KoroshoIFKubun 厚労省IF区分, KariIchijiHanteiKubun 仮一次判定区分,
             FlexibleDate 一次判定年月日, IchijiHanteiResultKomoku 一次判定結果, IchijiHanteiResultKomoku 認知症加算一次判定結果,
             YokaigoNinteiToKijunTime 要介護認定等基準時間, YokaigoNinteiChukanHyokaKomokuTokuten 中間評価項目得点,
-            IchijiHanteiKeikokuList 一次判定警告List, KaigoNinteiJotaiAnteiseiKubun 認定状態安定性, Decimal 認知症自立度2以上蓋然性,
+            IchijiHanteiKeikokuList 一次判定警告List, JotaiAnteiseiKubun 認定状態安定性, Decimal 認知症自立度2以上蓋然性,
             SuiteiKyuhuKubun 推定給付区分, NoryokuMiteikaNinchishoKoreishaShihyoKomoku 運動能力未低下認知症高齢者指標,
             NichijoSeikatsuJiritsudoKumiawase 日常生活自立度組み合わせ,
             NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku 認知症高齢者日常生活自立度蓋然性評価, int 認知症高齢者日常生活自立度蓋然性評価率,
@@ -191,7 +191,7 @@ public class IchijiHanteiResultDetail {
      *
      * @return 認定状態安定性
      */
-    public KaigoNinteiJotaiAnteiseiKubun get認定状態安定性() {
+    public JotaiAnteiseiKubun get認定状態安定性() {
         return 認定状態安定性;
     }
 

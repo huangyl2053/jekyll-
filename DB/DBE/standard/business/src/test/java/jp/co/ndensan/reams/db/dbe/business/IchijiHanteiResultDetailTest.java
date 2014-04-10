@@ -41,7 +41,7 @@ public class IchijiHanteiResultDetailTest {
         private YokaigoNinteiToKijunTime 要介護認定等基準時間;
         private YokaigoNinteiChukanHyokaKomokuTokuten 中間評価項目得点;
         private IchijiHanteiKeikokuList 一次判定警告List;
-        private KaigoNinteiJotaiAnteiseiKubun 認定状態安定性;
+        private JotaiAnteiseiKubun 認定状態安定性;
         private Decimal 認知症自立度2以上蓋然性;
         private SuiteiKyuhuKubun 推定給付区分;
         private NoryokuMiteikaNinchishoKoreishaShihyoKomoku 運動能力未低下認知症高齢者指標;
@@ -62,7 +62,7 @@ public class IchijiHanteiResultDetailTest {
             要介護認定等基準時間 = new YokaigoNinteiToKijunTime(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             中間評価項目得点 = new YokaigoNinteiChukanHyokaKomokuTokuten(0, 0, 0, 0, 0, 0, 0);
             一次判定警告List = IchijiHanteiTestBusinessCreator.create一次判定警告List("000111000111000111");
-            認定状態安定性 = new KaigoNinteiJotaiAnteiseiKubun(new Code(new RString("001")), new RString("名称"), new RString("略称"));
+            認定状態安定性 = new JotaiAnteiseiKubun(new Code(new RString("001")), new RString("名称"), new RString("略称"));
             認知症自立度2以上蓋然性 = new Decimal(123);
             推定給付区分 = new SuiteiKyuhuKubun(new Code(new RString("001")), new RString("名称"), new RString("略称"));
             運動能力未低下認知症高齢者指標 = new NoryokuMiteikaNinchishoKoreishaShihyoKomoku(new Code(new RString("001")),

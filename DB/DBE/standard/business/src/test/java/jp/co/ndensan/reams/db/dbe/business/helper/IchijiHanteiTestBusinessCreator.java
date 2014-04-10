@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiKeikokuHairetsuCode;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiKeikokuList;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResultKomoku;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResultDetail;
-import jp.co.ndensan.reams.db.dbe.business.KaigoNinteiJotaiAnteiseiKubun;
+import jp.co.ndensan.reams.db.dbe.business.JotaiAnteiseiKubun;
 import jp.co.ndensan.reams.db.dbe.business.NichijoSeikatsuJiritsudoKumiawase;
 import jp.co.ndensan.reams.db.dbe.business.NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku;
 import jp.co.ndensan.reams.db.dbe.business.NoryokuMiteikaNinchishoKoreishaShihyoKomoku;
@@ -63,8 +63,8 @@ public final class IchijiHanteiTestBusinessCreator {
                 new RString("認知症加算一次判定結果"), new RString("認知症加算一次判定結果略称"));
     }
 
-    private static KaigoNinteiJotaiAnteiseiKubun create介護認定状態安定性() {
-        return new KaigoNinteiJotaiAnteiseiKubun(new Code("3"),
+    private static JotaiAnteiseiKubun create介護認定状態安定性() {
+        return new JotaiAnteiseiKubun(new Code("3"),
                 new RString("介護認定状態安定性"), new RString("介護認定状態安定性略称"));
     }
 
