@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.mapper.HihokenshaShikakuMapper;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.HihokenshaDaichoDac;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ShikakuHihokenshaKubun;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -23,12 +24,14 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class HihokenshaDaichoManager {
 
     private final HihokenshaDaichoDac dac;
+    private IKaigoSaiban<KaigoHihokenshaNo> sequencer;
 
     /**
      * 新しいHihokenshaDaichoManagerのインスタンスを生成します。
      */
     public HihokenshaDaichoManager() {
         this.dac = InstanceProvider.create(HihokenshaDaichoDac.class);
+        this.sequencer = null;
     }
 
     /**
@@ -36,8 +39,9 @@ public class HihokenshaDaichoManager {
      *
      * @param dac {@link HihokenshaDiachoDac 被保険者台帳DAC}
      */
-    public HihokenshaDaichoManager(HihokenshaDaichoDac dac) {
+    public HihokenshaDaichoManager(HihokenshaDaichoDac dac, IKaigoSaiban<KaigoHihokenshaNo> sequencer) {
         this.dac = dac;
+        this.sequencer = sequencer;
     }
 
     /**
@@ -96,13 +100,23 @@ public class HihokenshaDaichoManager {
     }
 
     /**
-     * 指定の資格情報を被保険者台帳へ保存します。
+     * 指定の資格情報を被保険者台帳へ保存します。<br />
+     * 被保険者番号のない情報が渡されたとき、被保険者番号の採番を行います。
      *
      * @param 被保険者資格 {@link IHihokenshaShikaku IHihokenshaShikaku}のオブジェクト
      * @return 成功したときはtrue, 失敗したときはfalse。
      */
     public boolean save(IHihokenshaShikaku 被保険者資格) {
         DbT1001HihokenshaDaichoEntity entity = HihokenshaShikakuMapper.toHihokenshaDaichoEntity(被保険者資格);
+        if (entity.getHihokenshaNo() == KaigoHihokenshaNo.NULL_VALUE) {
+            //TODO n3327 三浦凌 テスト用にいらない判定処理を設けている。採番APIの正しい使い方がわかり次第、修正する。
+            if (this.sequencer == null) {
+                this.sequencer = createSequencer(被保険者資格.get被保険者区分());
+            }
+            KaigoHihokenshaNo hihokenshaNo = this.sequencer.number();
+            assert hihokenshaNo != null;
+            entity.setHihokenshaNo(hihokenshaNo);
+        }
         int result = this.dac.insert(entity);
         return isSuccess(result);
     }
@@ -121,5 +135,19 @@ public class HihokenshaDaichoManager {
 
     private boolean isSuccess(int result) {
         return 0 < result;
+    }
+
+    //TODO n3327 三浦 凌 ShikakuHihokenshaKubun に無資格者を追加し、無資格者用の採番ロジックを呼べるように修正する。 期限 : 開発終了時
+    private IKaigoSaiban<KaigoHihokenshaNo> createSequencer(ShikakuHihokenshaKubun hihokenshaKubun) {
+        switch (hihokenshaKubun) {
+            case 第１号被保険者:
+                return HihokenshaNoSaibanService.normalType();
+            case 第２号被保険者:
+                return HihokenshaNoSaibanService.normalType();
+//            case 無資格者 :
+//                return HihokenshaNoSaibanService.forMushikakushaType().number();
+            default:
+                return HihokenshaNoSaibanService.normalType();
+        }
     }
 }
