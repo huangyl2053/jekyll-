@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 主治医意見書作成依頼対象者を取得するデータアクセスクラスです。
+ * 要介護認定進捗情報の、主治医意見書登録完了年月日が"00000000"のデータを取得します。
  *
  * @author N8187 久保田 英男
  */
@@ -28,7 +29,7 @@ public class ShujiiIkenshoIraiTaishoshaDac {
     private SqlSession session;
 
     /**
-     * 主治医意見書登録完了年月日が”00000000”のデータを取得します。
+     * 主治医意見書作成依頼対象者を取得します。
      *
      * @return 介護認定処理対象者エンティティのリスト
      */
@@ -39,12 +40,12 @@ public class ShujiiIkenshoIraiTaishoshaDac {
                 .select()
                 .table(DbT5005NinteiShinchokuJoho.class)
                 .leftJoin(DbT5001NinteiShinseiJoho.class, using(DbT5005NinteiShinchokuJoho.shinseishoKanriNo))
-                .where(eq(DbT5005NinteiShinchokuJoho.ikenshoSakuseiIraiKanryoYMD, YokaigoninteiDateConstants.主治医意見書作成依頼未完了年月日))
+                .where(eq(YokaigoninteiDateConstants.主治医意見書登録未完了年月日, DbT5005NinteiShinchokuJoho.ikenshoTorokuKanryoYMD))
                 .toList(KaigoNinteiShoriTaishoshaEntity.class);
     }
 
     /**
-     * 指定した証記載保険者番号に該当する、主治医意見書登録完了年月日が”00000000”のデータを取得します。
+     * 指定された証記載保険者番号に該当する、主治医意見書作成依頼対象者を取得します。
      *
      * @param 証記載保険者番号 証記載保険者番号
      * @return 介護認定処理対象者エンティティのリスト
@@ -52,18 +53,17 @@ public class ShujiiIkenshoIraiTaishoshaDac {
     @Transaction
     public List<KaigoNinteiShoriTaishoshaEntity> select証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-
         return accessor
                 .select()
                 .table(DbT5005NinteiShinchokuJoho.class)
                 .leftJoin(DbT5001NinteiShinseiJoho.class, using(DbT5005NinteiShinchokuJoho.shinseishoKanriNo))
-                .where(and(eq(DbT5001NinteiShinseiJoho.shoKisaiHokenshaNo, 証記載保険者番号),
-                eq(DbT5005NinteiShinchokuJoho.ikenshoSakuseiIraiKanryoYMD, YokaigoninteiDateConstants.主治医意見書作成依頼未完了年月日)))
+                .where(and(eq(YokaigoninteiDateConstants.主治医意見書登録未完了年月日, DbT5005NinteiShinchokuJoho.ikenshoTorokuKanryoYMD),
+                eq(証記載保険者番号, DbT5001NinteiShinseiJoho.shoKisaiHokenshaNo)))
                 .toList(KaigoNinteiShoriTaishoshaEntity.class);
     }
 
     /**
-     * 指定した証記載保険者番号、支所コードに該当する、主治医意見書登録完了年月日が”00000000”のデータを取得します。
+     * 指定された証記載保険者番号及び支所コードに該当する、主治医意見書作成依頼対象者を取得します。
      *
      * @param 証記載保険者番号 証記載保険者番号
      * @param 支所コード 支所コード
@@ -72,14 +72,13 @@ public class ShujiiIkenshoIraiTaishoshaDac {
     @Transaction
     public List<KaigoNinteiShoriTaishoshaEntity> select証記載保険者番号及び支所コード(ShoKisaiHokenshaNo 証記載保険者番号, RString 支所コード) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-
         return accessor
                 .select()
                 .table(DbT5005NinteiShinchokuJoho.class)
                 .leftJoin(DbT5001NinteiShinseiJoho.class, using(DbT5005NinteiShinchokuJoho.shinseishoKanriNo))
-                .where(and(eq(DbT5001NinteiShinseiJoho.shoKisaiHokenshaNo, 証記載保険者番号),
-                eq(DbT5001NinteiShinseiJoho.shishoCode, 支所コード),
-                eq(DbT5005NinteiShinchokuJoho.ikenshoSakuseiIraiKanryoYMD, YokaigoninteiDateConstants.主治医意見書作成依頼未完了年月日)))
+                .where(and(eq(YokaigoninteiDateConstants.主治医意見書登録未完了年月日, DbT5005NinteiShinchokuJoho.ikenshoTorokuKanryoYMD),
+                eq(証記載保険者番号, DbT5001NinteiShinseiJoho.shoKisaiHokenshaNo),
+                eq(支所コード, DbT5001NinteiShinseiJoho.shishoCode)))
                 .toList(KaigoNinteiShoriTaishoshaEntity.class);
     }
 }

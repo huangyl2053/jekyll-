@@ -78,7 +78,7 @@ public class ShujiiIkenshoIraiTaishoshaFinder {
     }
 
     /**
-     * 主治医意見書作成依頼対象者を、証記載保険者番号を指定して取得します。
+     * 証記載保険者番号を指定して、主治医意見書作成依頼対象者を取得します。
      *
      * @param 証記載保険者番号 証記載保険者番号
      * @return 主治医意見書作成依頼対象者リスト
@@ -91,7 +91,7 @@ public class ShujiiIkenshoIraiTaishoshaFinder {
     }
 
     /**
-     * 主治医意見書作成依頼対象者を、証記載保険者番号、支所コードを指定して取得します。
+     * 証記載保険者番号と支所コードを指定して、主治医意見書作成依頼対象者を取得します。
      *
      * @param 証記載保険者番号 証記載保険者番号
      * @param 支所コード 支所コード
@@ -105,31 +105,37 @@ public class ShujiiIkenshoIraiTaishoshaFinder {
         return create主治医意見書作成依頼対象者List(iraiTaishoshaEntityList);
     }
 
-    private List<ShujiiIkenshoIraiTaishosha> create主治医意見書作成依頼対象者List(List<KaigoNinteiShoriTaishoshaEntity> entityList) {
+    private List<ShujiiIkenshoIraiTaishosha> create主治医意見書作成依頼対象者List(
+            List<KaigoNinteiShoriTaishoshaEntity> entityList) {
         List<ShujiiIkenshoIraiTaishosha> list = new ArrayList<>();
 
         for (KaigoNinteiShoriTaishoshaEntity entity : entityList) {
-            NinteiShinseiJoho 認定申請情報 = NinteishinseiJohoMapper.to認定申請情報(entity.getNinteiShinseiJohoEntity());
-            IKojin 個人 = get個人(認定申請情報);
-            RString 氏名 = 個人.get氏名().getName().value();
-            RString 住所 = 個人.get住所().getValue();
-            ShujiiIkenshoSakuseiIrai 主治医意見書作成依頼情報 = get主治医意見書作成依頼情報(認定申請情報);
-            KaigoIryoKikan 主治医医療機関情報 = get主治医医療機関情報(認定申請情報, 主治医意見書作成依頼情報);
-            KaigoDoctor 主治医情報 = 主治医意見書作成依頼情報.get介護医師();
-
-            list.add(ShujiiIkenshoIraiTaishoshaMapper.toShujiiIkenshoIraiTaishosha(
-                    認定申請情報,
-                    個人,
-                    氏名,
-                    住所,
-                    主治医医療機関情報,
-                    主治医情報));
+            list.add(create主治医意見書作成依頼対象者(entity));
         }
+
         if (list.isEmpty()) {
             return Collections.EMPTY_LIST;
         }
 
         return list;
+    }
+
+    private ShujiiIkenshoIraiTaishosha create主治医意見書作成依頼対象者(KaigoNinteiShoriTaishoshaEntity entity) {
+        NinteiShinseiJoho 認定申請情報 = NinteishinseiJohoMapper.to認定申請情報(entity.getNinteiShinseiJohoEntity());
+        IKojin 個人 = get個人(認定申請情報);
+        RString 氏名 = 個人.get氏名().getName().value();
+        RString 住所 = 個人.get住所().getValue();
+        ShujiiIkenshoSakuseiIrai 主治医意見書作成依頼情報 = get主治医意見書作成依頼情報(認定申請情報);
+        KaigoIryoKikan 主治医医療機関情報 = get主治医医療機関情報(認定申請情報, 主治医意見書作成依頼情報);
+        KaigoDoctor 主治医情報 = 主治医意見書作成依頼情報.get介護医師();
+
+        return ShujiiIkenshoIraiTaishoshaMapper.toShujiiIkenshoIraiTaishosha(
+                認定申請情報,
+                個人,
+                氏名,
+                住所,
+                主治医医療機関情報,
+                主治医情報);
     }
 
     private IKojin get個人(NinteiShinseiJoho 認定申請情報) {

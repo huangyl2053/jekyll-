@@ -53,18 +53,12 @@ public final class ShujiiIkenshoIraiTaishoshaMapper {
 
         requireNonNull(認定申請情報, Messages.E00003.replace("認定申請情報", "主治医意見書作成依頼対象者").getMessage());
 
-        ShinseishoKanriNo 申請書管理番号 = 認定申請情報.get申請書管理番号();
-        ShoKisaiHokenshaNo 証記載保険者番号 = 認定申請情報.get証記載保険者番号();
-        KaigoHihokenshaNo 被保険者番号 = 認定申請情報.get介護被保険者番号();
-        FlexibleDate 認定申請年月日 = 認定申請情報.get認定申請年月日();
-        NinteiShinseiKubunShinsei 認定申請区分 = 認定申請情報.get認定申請区分_申請時();
-
         return new ShujiiIkenshoIraiTaishosha(
-                申請書管理番号,
-                証記載保険者番号,
-                被保険者番号,
-                認定申請年月日,
-                認定申請区分,
+                認定申請情報.get申請書管理番号(),
+                認定申請情報.get証記載保険者番号(),
+                認定申請情報.get介護被保険者番号(),
+                認定申請情報.get認定申請年月日(),
+                認定申請情報.get認定申請区分_申請時(),
                 個人,
                 氏名,
                 住所,

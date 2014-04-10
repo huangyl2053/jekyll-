@@ -16,12 +16,12 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.is;
+import org.junit.BeforeClass;
 
 /**
  * 認定調査結果取込対象者Dacのテストクラスです。

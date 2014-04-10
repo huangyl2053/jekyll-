@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.KaigoNinteichosain;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIrai;
@@ -18,9 +19,10 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteiShinchokuJohoMapper;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteishinseiJohoMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.relate.INinteichosaKekkaTorikomiTaishoshaDac;
+import jp.co.ndensan.reams.db.dbe.persistence.relate.NinteichosaKekkaTorikomiTaishoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
 import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -34,7 +36,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class NinteichosaKekkaTorikomiTaishoshaManager {
 
-    private final INinteichosaKekkaTorikomiTaishoshaDac torikomiTaishoshaDac;
+    private final NinteichosaKekkaTorikomiTaishoshaDac torikomiTaishoshaDac;
     private final NinteichosaIraiManager ninteichosaIraiManager;
     private final KaigoNinteichosainManager kaigoNinteichosainManager;
     private final IKojinFinder kojinFinder;
@@ -43,7 +45,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
      * コンストラクタです。
      */
     public NinteichosaKekkaTorikomiTaishoshaManager() {
-        torikomiTaishoshaDac = InstanceProvider.create(INinteichosaKekkaTorikomiTaishoshaDac.class);
+        torikomiTaishoshaDac = InstanceProvider.create(NinteichosaKekkaTorikomiTaishoshaDac.class);
         ninteichosaIraiManager = new NinteichosaIraiManager();
         kaigoNinteichosainManager = new KaigoNinteichosainManager();
         kojinFinder = KojinService.createKojinFinder();
@@ -58,7 +60,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
      * @param kojinFinder kojinFinder
      */
     NinteichosaKekkaTorikomiTaishoshaManager(
-            INinteichosaKekkaTorikomiTaishoshaDac torikomiTaishoshaDac,
+            NinteichosaKekkaTorikomiTaishoshaDac torikomiTaishoshaDac,
             NinteichosaIraiManager ninteichosaIraiManager,
             KaigoNinteichosainManager kaigoNinteichosainManager,
             IKojinFinder kojinFinder) {
@@ -69,34 +71,39 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
     }
 
     /**
-     * 認定調査結果取込対象者を全件取得します。
+     * 認定調査結果取込対象者を取得します。
      *
-     * @return 認定調査結果取込対象者全件
+     * @return 認定調査結果取込対象者リスト
      */
-    public List<NinteichosaKekkaTorikomiTaishosha> get認定調査結果取込対象者全件() {
+    public List<NinteichosaKekkaTorikomiTaishosha> get認定調査結果取込対象者() {
         List<KaigoNinteiShoriTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.selectAll();
         return create認定調査結果取込対象者List(torikomiTaishoshaEntityList);
     }
 
     /**
-     * 認定調査結果取込対象者を証記載保険者番号を指定して全件取得します。
+     * 証記載保険者番号を指定して、認定調査結果取込対象者を取得します。
      *
      * @param 証記載保険者番号 証記載保険者番号
-     * @return 認定調査結果取込対象者全件
+     * @return 認定調査結果取込対象者リスト
+     * @throws NullPointerException 引数がnullの場合
      */
-    public List<NinteichosaKekkaTorikomiTaishosha> get認定調査結果取込対象者全件(ShoKisaiHokenshaNo 証記載保険者番号) {
+    public List<NinteichosaKekkaTorikomiTaishosha> get認定調査結果取込対象者(ShoKisaiHokenshaNo 証記載保険者番号) throws NullPointerException {
+        requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
         List<KaigoNinteiShoriTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select証記載保険者番号(証記載保険者番号);
         return create認定調査結果取込対象者List(torikomiTaishoshaEntityList);
     }
 
     /**
-     * 認定調査結果取込対象者を、証記載保険者番号と支所コードを指定して全件取得します。
+     * 証記載保険者番号と支所コードを指定して、認定調査結果取込対象者を取得します。
      *
      * @param 証記載保険者番号 証記載保険者番号
      * @param 支所コード 支所コード
-     * @return 認定調査結果取込対象者全件
+     * @return 認定調査結果取込対象者リスト
+     * @throws NullPointerException 引数がnullの場合
      */
-    public List<NinteichosaKekkaTorikomiTaishosha> get認定調査結果取込対象者全件(ShoKisaiHokenshaNo 証記載保険者番号, RString 支所コード) {
+    public List<NinteichosaKekkaTorikomiTaishosha> get認定調査結果取込対象者(ShoKisaiHokenshaNo 証記載保険者番号, RString 支所コード) throws NullPointerException {
+        requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
+        requireNonNull(支所コード, Messages.E00001.replace("支所コード").getMessage());
         List<KaigoNinteiShoriTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select証記載保険者番号及び支所コード(証記載保険者番号, 支所コード);
         return create認定調査結果取込対象者List(torikomiTaishoshaEntityList);
     }
@@ -120,15 +127,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
         List<NinteichosaKekkaTorikomiTaishosha> list = new ArrayList<>();
 
         for (KaigoNinteiShoriTaishoshaEntity entity : entityList) {
-            YokaigoninteiProgress 認定進捗情報 = NinteiShinchokuJohoMapper.toNinteiShinchokuJoho(entity.getNinteiShinchokuJohoEntity());
-            NinteiShinseiJoho 認定申請情報 = NinteishinseiJohoMapper.to認定申請情報(entity.getNinteiShinseiJohoEntity());
-            NinteichosaIrai 認定調査依頼情報 = get認定調査依頼情報(認定進捗情報, 認定申請情報);
-            KaigoNinteichosain 介護認定調査員 = get介護認定調査員(認定申請情報, 認定調査依頼情報);
-            IKojin 個人 = kojinFinder.get個人(認定申請情報.get識別コード());
-
-            list.add(new NinteichosaKekkaTorikomiTaishosha(
-                    認定進捗情報, 認定申請情報, 認定調査依頼情報,
-                    介護認定調査員, 個人));
+            list.add(create認定調査結果取込対象者(entity));
         }
 
         if (list.isEmpty()) {
@@ -136,6 +135,24 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
         }
 
         return list;
+    }
+
+    private NinteichosaKekkaTorikomiTaishosha create認定調査結果取込対象者(KaigoNinteiShoriTaishoshaEntity entity) {
+        YokaigoninteiProgress 認定進捗情報 = NinteiShinchokuJohoMapper.toNinteiShinchokuJoho(entity.getNinteiShinchokuJohoEntity());
+        NinteiShinseiJoho 認定申請情報 = NinteishinseiJohoMapper.to認定申請情報(entity.getNinteiShinseiJohoEntity());
+        NinteichosaIrai 認定調査依頼情報 = get認定調査依頼情報(認定進捗情報, 認定申請情報);
+        KaigoNinteichosain 介護認定調査員 = get介護認定調査員(認定申請情報, 認定調査依頼情報);
+        IKojin 個人 = get個人(認定申請情報);
+        return new NinteichosaKekkaTorikomiTaishosha(
+                認定進捗情報,
+                認定申請情報,
+                認定調査依頼情報,
+                介護認定調査員,
+                個人);
+    }
+
+    private IKojin get個人(NinteiShinseiJoho 認定申請情報) {
+        return kojinFinder.get個人(認定申請情報.get識別コード());
     }
 
     private NinteichosaIrai get認定調査依頼情報(

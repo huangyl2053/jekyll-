@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoSakuseiIrai;
@@ -21,6 +22,7 @@ import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.ShujiiIkenshoTorikomiTaishoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
 import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -64,34 +66,39 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
     }
 
     /**
-     * 主治医意見書取込対象者を全件取得します。
+     * 主治医意見書取込対象者を取得します。
      *
-     * @return 主治医意見書取込対象者全件
+     * @return 主治医意見書取込対象者リスト
      */
-    public List<ShujiiIkenshoTorikomiTaishosha> get主治医意見書取込対象者全件() {
+    public List<ShujiiIkenshoTorikomiTaishosha> get主治医意見書取込対象者() {
         List<KaigoNinteiShoriTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.selectAll();
         return create主治医意見書取込対象者List(torikomiTaishoshaEntityList);
     }
 
     /**
-     * 主治医意見書取込対象者を証記載保険者番号を指定して全件取得します。
+     * 証記載保険者番号を指定して、主治医意見書取込対象者を取得します。
      *
      * @param 証記載保険者番号 証記載保険者番号
-     * @return 主治医意見書取込対象者全件
+     * @return 主治医意見書取込対象者リスト
+     * @throws NullPointerException 引数がnullの場合
      */
-    public List<ShujiiIkenshoTorikomiTaishosha> get主治医意見書取込対象者全件(ShoKisaiHokenshaNo 証記載保険者番号) {
+    public List<ShujiiIkenshoTorikomiTaishosha> get主治医意見書取込対象者(ShoKisaiHokenshaNo 証記載保険者番号) throws NullPointerException {
+        requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
         List<KaigoNinteiShoriTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select証記載保険者番号(証記載保険者番号);
         return create主治医意見書取込対象者List(torikomiTaishoshaEntityList);
     }
 
     /**
-     * 主治医意見書取込対象者を、証記載保険者番号と支所コードを指定して全件取得します。
+     * 証記載保険者番号と支所コードを指定して、主治医意見書取込対象者を取得します。
      *
      * @param 証記載保険者番号 証記載保険者番号
      * @param 支所コード 支所コード
-     * @return 主治医意見書取込対象者全件
+     * @return 主治医意見書取込対象者リスト
+     * @throws NullPointerException 引数がnullの場合
      */
-    public List<ShujiiIkenshoTorikomiTaishosha> get主治医意見書取込対象者全件(ShoKisaiHokenshaNo 証記載保険者番号, RString 支所コード) {
+    public List<ShujiiIkenshoTorikomiTaishosha> get主治医意見書取込対象者(ShoKisaiHokenshaNo 証記載保険者番号, RString 支所コード) throws NullPointerException {
+        requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
+        requireNonNull(支所コード, Messages.E00001.replace("支所コード").getMessage());
         List<KaigoNinteiShoriTaishoshaEntity> torikomiTaishoshaEntityList = torikomiTaishoshaDac.select証記載保険者番号及び支所コード(証記載保険者番号, 支所コード);
         return create主治医意見書取込対象者List(torikomiTaishoshaEntityList);
     }
@@ -129,7 +136,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
         YokaigoninteiProgress 認定進捗情報 = NinteiShinchokuJohoMapper.toNinteiShinchokuJoho(entity.getNinteiShinchokuJohoEntity());
         NinteiShinseiJoho 認定申請情報 = NinteishinseiJohoMapper.to認定申請情報(entity.getNinteiShinseiJohoEntity());
         ShujiiIkenshoSakuseiIrai 主治医意見書作成依頼情報 = get主治医意見書作成依頼情報(認定申請情報);
-        IKojin 個人 = kojinFinder.get個人(認定申請情報.get識別コード());
+        IKojin 個人 = get個人(認定申請情報);
         KaigoDoctor 介護主治医 = 主治医意見書作成依頼情報.get介護医師();
 
         return new ShujiiIkenshoTorikomiTaishosha(
@@ -138,6 +145,10 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
                 主治医意見書作成依頼情報,
                 個人,
                 介護主治医);
+    }
+
+    private IKojin get個人(NinteiShinseiJoho 認定申請情報) {
+        return kojinFinder.get個人(認定申請情報.get識別コード());
     }
 
     private ShujiiIkenshoSakuseiIrai get主治医意見書作成依頼情報(NinteiShinseiJoho 認定申請情報) {
