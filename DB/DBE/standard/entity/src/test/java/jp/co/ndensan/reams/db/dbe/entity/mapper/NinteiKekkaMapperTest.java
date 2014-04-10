@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteiResult;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiResultIdoJiyu;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiResultIdoJiyuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIkenType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShisetsuNyushoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiYukoKikanTsukisu;
@@ -52,7 +52,7 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
     private static final RString 審査会意見 = new RString("審査会意見");
     private static final RString 審査会メモ = new RString("審査会メモ");
     private static final RString 一次判定結果変更理由 = new RString("一次判定結果変更理由");
-    private static final NinteiResultIdoJiyu 認定結果異動事由 = NinteiResultIdoJiyu.職権追加;
+    private static final NinteiResultIdoJiyuKubun 認定結果異動事由区分 = NinteiResultIdoJiyuKubun.職権追加;
     private static final FlexibleDate 認定結果異動年月日 = new FlexibleDate("20140404");
     private static final RString 認定取消理由 = new RString("認定取消理由");
     private static final FlexibleDate 認定取消年月日 = new FlexibleDate("20140505");
@@ -143,23 +143,23 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
         }
 
         @Test
-        public void 認定結果異動事由の設定がある時_toNinteiResult_get認定結果異動事由は_設定値を返す() {
-            assertThat(result.get認定理由().get認定結果異動事由(), is(認定結果異動事由));
+        public void 認定結果異動事由区分の設定がある時_toNinteiResult_get認定結果異動事由区分は_設定値を返す() {
+            assertThat(result.get認定理由().get認定結果異動事由().get認定結果異動事由区分(), is(認定結果異動事由区分));
         }
 
         @Test
         public void 認定結果異動年月日の設定がある時_toNinteiResult_get認定結果異動年月日は_設定値を返す() {
-            assertThat(result.get認定理由().get認定結果異動年月日(), is(認定結果異動年月日));
+            assertThat(result.get認定理由().get認定結果異動事由().get認定結果異動年月日(), is(認定結果異動年月日));
         }
 
         @Test
         public void 認定取消理由の設定がある時_toNinteiResult_get認定取消理由は_設定値を返す() {
-            assertThat(result.get認定理由().get認定取消理由(), is(認定取消理由));
+            assertThat(result.get認定理由().get認定取消理由().get認定取消理由(), is(認定取消理由));
         }
 
         @Test
         public void 認定取消年月日の設定がある時_toNinteiResult_get認定取消年月日は_設定値を返す() {
-            assertThat(result.get認定理由().get認定取消年月日(), is(認定取消年月日));
+            assertThat(result.get認定理由().get認定取消理由().get認定取消年月日(), is(認定取消年月日));
         }
 
         @Test
@@ -248,8 +248,8 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
         }
 
         @Test
-        public void 認定結果異動事由の設定がある時_toDbT5002NinteiKekkaJohoEntity_getNinteiKekkaIdoJiyuは_設定値を返す() {
-            assertThat(result.getNinteiKekkaIdoJiyu(), is(認定結果異動事由.getCode()));
+        public void 認定結果異動事由区分の設定がある時_toDbT5002NinteiKekkaJohoEntity_getNinteiKekkaIdoJiyuは_設定値を返す() {
+            assertThat(result.getNinteiKekkaIdoJiyu(), is(認定結果異動事由区分.getCode()));
         }
 
         @Test

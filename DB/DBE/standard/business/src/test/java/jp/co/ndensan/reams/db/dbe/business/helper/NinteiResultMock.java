@@ -5,15 +5,17 @@
 package jp.co.ndensan.reams.db.dbe.business.helper;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteiResult;
+import jp.co.ndensan.reams.db.dbe.business.NinteiResultIdoJiyu;
 import jp.co.ndensan.reams.db.dbe.business.NinteiRiyu;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinsakaiIken;
+import jp.co.ndensan.reams.db.dbe.business.NinteiTorikeshiRiyu;
 import jp.co.ndensan.reams.db.dbe.business.NinteiYukoKikan;
 import jp.co.ndensan.reams.db.dbe.business.TokuteiShippeiKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotai;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotaizoRei;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiResultIdoJiyu;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiResultIdoJiyuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIkenType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShisetsuNyushoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiYukoKikanTsukisu;
@@ -94,10 +96,8 @@ public class NinteiResultMock {
     private static NinteiRiyu createNinteiRiyu() {
         return new NinteiRiyu(
                 new RString("一次判定結果変更理由"),
-                NinteiResultIdoJiyu.職権追加,
-                new FlexibleDate("20140404"),
-                new RString("認定取消理由"),
-                new FlexibleDate("20140505"),
+                new NinteiResultIdoJiyu(NinteiResultIdoJiyuKubun.職権追加, new FlexibleDate("20140404")),
+                new NinteiTorikeshiRiyu(new RString("認定取消理由"), new FlexibleDate("20140505")),
                 new RString("認定理由"));
     }
 }

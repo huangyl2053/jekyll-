@@ -8,11 +8,11 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 要介護認定結果異動事由を表す列挙型です。
+ * 要介護認定結果異動事由区分を表す列挙型です。
  *
  * @author N8156 宮本 康
  */
-public enum NinteiResultIdoJiyu {
+public enum NinteiResultIdoJiyuKubun {
 
     /**
      * 介護サービス種類が「職権追加」であることを表します。<br />
@@ -36,7 +36,7 @@ public enum NinteiResultIdoJiyu {
     職権一部削除("4");
     private final RString code;
 
-    private NinteiResultIdoJiyu(String code) {
+    private NinteiResultIdoJiyuKubun(String code) {
         this.code = new RString(code);
     }
 
@@ -55,12 +55,12 @@ public enum NinteiResultIdoJiyu {
      * @param code コード
      * @return 列挙型
      */
-    public static NinteiResultIdoJiyu toValue(RString code) {
-        for (NinteiResultIdoJiyu data : NinteiResultIdoJiyu.values()) {
+    public static NinteiResultIdoJiyuKubun toValue(RString code) {
+        for (NinteiResultIdoJiyuKubun data : NinteiResultIdoJiyuKubun.values()) {
             if (data.getCode().equals(code)) {
                 return data;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("対応する要介護認定結果異動事由").getMessage());
+        throw new IllegalArgumentException(Messages.E00006.replace("対応する要介護認定結果異動事由区分").getMessage());
     }
 }

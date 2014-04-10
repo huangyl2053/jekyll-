@@ -5,15 +5,17 @@
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteiResult;
+import jp.co.ndensan.reams.db.dbe.business.NinteiResultIdoJiyu;
 import jp.co.ndensan.reams.db.dbe.business.NinteiRiyu;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinsakaiIken;
+import jp.co.ndensan.reams.db.dbe.business.NinteiTorikeshiRiyu;
 import jp.co.ndensan.reams.db.dbe.business.NinteiYukoKikan;
 import jp.co.ndensan.reams.db.dbe.business.TokuteiShippeiKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotai;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotaizoRei;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiResultIdoJiyu;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiResultIdoJiyuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIkenType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShisetsuNyushoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiYukoKikanTsukisu;
@@ -78,10 +80,8 @@ public final class NinteiKekkaMapper {
     private static NinteiRiyu create認定理由(DbT5002NinteiKekkaJohoEntity entity) {
         return new NinteiRiyu(
                 entity.getIchijiHnateiKekkaHenkoRiyu(),
-                NinteiResultIdoJiyu.toValue(entity.getNinteiKekkaIdoJiyu()),
-                entity.getNinteiKekkaIdoYMD(),
-                entity.getNinteiTorikeshiRiyu(),
-                entity.getNinteiTorikeshiYMD(),
+                new NinteiResultIdoJiyu(NinteiResultIdoJiyuKubun.toValue(entity.getNinteiKekkaIdoJiyu()), entity.getNinteiKekkaIdoYMD()),
+                new NinteiTorikeshiRiyu(entity.getNinteiTorikeshiRiyu(), entity.getNinteiTorikeshiYMD()),
                 entity.getNinteiRiyu());
     }
 
@@ -107,10 +107,10 @@ public final class NinteiKekkaMapper {
         entity.setYokaigoJotaizoReiCode(ninteiResult.get要介護状態像例().getCode());
         entity.setNinteishinsakaiIkenShurui(ninteiResult.get認定審査会意見().get審査会意見種類().getCode());
         entity.setKaigoServiceShurui(ninteiResult.get介護サービス種類().getCode());
-        entity.setNinteiKekkaIdoJiyu(ninteiResult.get認定理由().get認定結果異動事由().getCode());
-        entity.setNinteiKekkaIdoYMD(ninteiResult.get認定理由().get認定結果異動年月日());
-        entity.setNinteiTorikeshiRiyu(ninteiResult.get認定理由().get認定取消理由());
-        entity.setNinteiTorikeshiYMD(ninteiResult.get認定理由().get認定取消年月日());
+        entity.setNinteiKekkaIdoJiyu(ninteiResult.get認定理由().get認定結果異動事由().get認定結果異動事由区分().getCode());
+        entity.setNinteiKekkaIdoYMD(ninteiResult.get認定理由().get認定結果異動事由().get認定結果異動年月日());
+        entity.setNinteiTorikeshiRiyu(ninteiResult.get認定理由().get認定取消理由().get認定取消理由());
+        entity.setNinteiTorikeshiYMD(ninteiResult.get認定理由().get認定取消理由().get認定取消年月日());
         entity.setNinteiRiyu(ninteiResult.get認定理由().get認定理由());
         entity.setShinsakaiMemo(ninteiResult.get認定審査会意見().get審査会メモ());
         return entity;
