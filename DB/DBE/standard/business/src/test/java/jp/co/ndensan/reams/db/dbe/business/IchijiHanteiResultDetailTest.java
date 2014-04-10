@@ -26,9 +26,9 @@ import org.junit.runner.RunWith;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class IchijiHanteiResultTest {
+public class IchijiHanteiResultDetailTest {
 
-    private static IchijiHanteiResult sut;
+    private static IchijiHanteiResultDetail sut;
 
     public static class コンストラクタのテスト extends DbeTestBase {
 
@@ -36,8 +36,8 @@ public class IchijiHanteiResultTest {
         private KoroshoIFKubun 厚労省IF区分;
         private KariIchijiHanteiKubun 仮一次判定区分;
         private FlexibleDate 一次判定年月日;
-        private IchijiHanteiKekkaKomoku 一次判定結果;
-        private IchijiHanteiKekkaKomoku 認知症加算一次判定結果;
+        private IchijiHanteiResultKomoku 一次判定結果;
+        private IchijiHanteiResultKomoku 認知症加算一次判定結果;
         private YokaigoNinteiToKijunTime 要介護認定等基準時間;
         private YokaigoNinteiChukanHyokaKomokuTokuten 中間評価項目得点;
         private IchijiHanteiKeikokuList 一次判定警告List;
@@ -57,8 +57,8 @@ public class IchijiHanteiResultTest {
             厚労省IF区分 = KoroshoIFKubun.V02A;
             仮一次判定区分 = KariIchijiHanteiKubun.仮判定;
             一次判定年月日 = new FlexibleDate("19990101");
-            一次判定結果 = new IchijiHanteiKekkaKomoku(new Code(new RString("001")), new RString("名称"), new RString("略称"));
-            認知症加算一次判定結果 = new IchijiHanteiKekkaKomoku(new Code(new RString("001")), new RString("名称"), new RString("略称"));
+            一次判定結果 = new IchijiHanteiResultKomoku(new Code(new RString("001")), new RString("名称"), new RString("略称"));
+            認知症加算一次判定結果 = new IchijiHanteiResultKomoku(new Code(new RString("001")), new RString("名称"), new RString("略称"));
             要介護認定等基準時間 = new YokaigoNinteiToKijunTime(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             中間評価項目得点 = new YokaigoNinteiChukanHyokaKomokuTokuten(0, 0, 0, 0, 0, 0, 0);
             一次判定警告List = IchijiHanteiTestBusinessCreator.create一次判定警告List("000111000111000111");
@@ -77,7 +77,7 @@ public class IchijiHanteiResultTest {
 
         @Test(expected = NullPointerException.class)
         public void 申請書管理番号にnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut = new IchijiHanteiResult(null, 厚労省IF区分, 仮一次判定区分, 一次判定年月日, 一次判定結果, 認知症加算一次判定結果, 要介護認定等基準時間,
+            sut = new IchijiHanteiResultDetail(null, 厚労省IF区分, 仮一次判定区分, 一次判定年月日, 一次判定結果, 認知症加算一次判定結果, 要介護認定等基準時間,
                     中間評価項目得点, 一次判定警告List, 認定状態安定性, 認知症自立度2以上蓋然性, 推定給付区分,
                     運動能力未低下認知症高齢者指標, 日常生活自立度組み合わせ, 認知症高齢者日常生活自立度蓋然性評価,
                     認知症高齢者日常生活自立度蓋然性評価率, 一次判定結果送付区分, 一次判定結果送付年月日);
@@ -85,7 +85,7 @@ public class IchijiHanteiResultTest {
 
         @Test(expected = NullPointerException.class)
         public void 厚労省IF区分にnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut = new IchijiHanteiResult(申請書管理番号, null, 仮一次判定区分, 一次判定年月日, 一次判定結果, 認知症加算一次判定結果, 要介護認定等基準時間,
+            sut = new IchijiHanteiResultDetail(申請書管理番号, null, 仮一次判定区分, 一次判定年月日, 一次判定結果, 認知症加算一次判定結果, 要介護認定等基準時間,
                     中間評価項目得点, 一次判定警告List, 認定状態安定性, 認知症自立度2以上蓋然性, 推定給付区分,
                     運動能力未低下認知症高齢者指標, 日常生活自立度組み合わせ, 認知症高齢者日常生活自立度蓋然性評価,
                     認知症高齢者日常生活自立度蓋然性評価率, 一次判定結果送付区分, 一次判定結果送付年月日);
@@ -93,7 +93,7 @@ public class IchijiHanteiResultTest {
 
         @Test(expected = NullPointerException.class)
         public void 仮一次判定区分にnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut = new IchijiHanteiResult(申請書管理番号, 厚労省IF区分, null, 一次判定年月日, 一次判定結果, 認知症加算一次判定結果, 要介護認定等基準時間,
+            sut = new IchijiHanteiResultDetail(申請書管理番号, 厚労省IF区分, null, 一次判定年月日, 一次判定結果, 認知症加算一次判定結果, 要介護認定等基準時間,
                     中間評価項目得点, 一次判定警告List, 認定状態安定性, 認知症自立度2以上蓋然性, 推定給付区分,
                     運動能力未低下認知症高齢者指標, 日常生活自立度組み合わせ, 認知症高齢者日常生活自立度蓋然性評価,
                     認知症高齢者日常生活自立度蓋然性評価率, 一次判定結果送付区分, 一次判定結果送付年月日);
@@ -101,7 +101,7 @@ public class IchijiHanteiResultTest {
 
         @Test(expected = NullPointerException.class)
         public void 一次判定年月日にnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut = new IchijiHanteiResult(申請書管理番号, 厚労省IF区分, 仮一次判定区分, null, 一次判定結果, 認知症加算一次判定結果, 要介護認定等基準時間,
+            sut = new IchijiHanteiResultDetail(申請書管理番号, 厚労省IF区分, 仮一次判定区分, null, 一次判定結果, 認知症加算一次判定結果, 要介護認定等基準時間,
                     中間評価項目得点, 一次判定警告List, 認定状態安定性, 認知症自立度2以上蓋然性, 推定給付区分,
                     運動能力未低下認知症高齢者指標, 日常生活自立度組み合わせ, 認知症高齢者日常生活自立度蓋然性評価,
                     認知症高齢者日常生活自立度蓋然性評価率, 一次判定結果送付区分, 一次判定結果送付年月日);
@@ -109,7 +109,7 @@ public class IchijiHanteiResultTest {
 
         @Test(expected = NullPointerException.class)
         public void 一次判定結果にnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut = new IchijiHanteiResult(申請書管理番号, 厚労省IF区分, 仮一次判定区分, 一次判定年月日, null, 認知症加算一次判定結果, 要介護認定等基準時間,
+            sut = new IchijiHanteiResultDetail(申請書管理番号, 厚労省IF区分, 仮一次判定区分, 一次判定年月日, null, 認知症加算一次判定結果, 要介護認定等基準時間,
                     中間評価項目得点, 一次判定警告List, 認定状態安定性, 認知症自立度2以上蓋然性, 推定給付区分,
                     運動能力未低下認知症高齢者指標, 日常生活自立度組み合わせ, 認知症高齢者日常生活自立度蓋然性評価,
                     認知症高齢者日常生活自立度蓋然性評価率, 一次判定結果送付区分, 一次判定結果送付年月日);
@@ -117,7 +117,7 @@ public class IchijiHanteiResultTest {
 
         @Test(expected = NullPointerException.class)
         public void 認知症加算一次判定結果にnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut = new IchijiHanteiResult(申請書管理番号, 厚労省IF区分, 仮一次判定区分, 一次判定年月日, 一次判定結果, null, 要介護認定等基準時間,
+            sut = new IchijiHanteiResultDetail(申請書管理番号, 厚労省IF区分, 仮一次判定区分, 一次判定年月日, 一次判定結果, null, 要介護認定等基準時間,
                     中間評価項目得点, 一次判定警告List, 認定状態安定性, 認知症自立度2以上蓋然性, 推定給付区分,
                     運動能力未低下認知症高齢者指標, 日常生活自立度組み合わせ, 認知症高齢者日常生活自立度蓋然性評価,
                     認知症高齢者日常生活自立度蓋然性評価率, 一次判定結果送付区分, 一次判定結果送付年月日);
@@ -125,7 +125,7 @@ public class IchijiHanteiResultTest {
 
         @Test(expected = NullPointerException.class)
         public void 要介護認定等基準時間にnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut = new IchijiHanteiResult(申請書管理番号, 厚労省IF区分, 仮一次判定区分, 一次判定年月日, 一次判定結果, 認知症加算一次判定結果, null,
+            sut = new IchijiHanteiResultDetail(申請書管理番号, 厚労省IF区分, 仮一次判定区分, 一次判定年月日, 一次判定結果, 認知症加算一次判定結果, null,
                     中間評価項目得点, 一次判定警告List, 認定状態安定性, 認知症自立度2以上蓋然性, 推定給付区分,
                     運動能力未低下認知症高齢者指標, 日常生活自立度組み合わせ, 認知症高齢者日常生活自立度蓋然性評価,
                     認知症高齢者日常生活自立度蓋然性評価率, 一次判定結果送付区分, 一次判定結果送付年月日);
@@ -133,7 +133,7 @@ public class IchijiHanteiResultTest {
 
         @Test(expected = NullPointerException.class)
         public void 中間評価項目得点にnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut = new IchijiHanteiResult(申請書管理番号, 厚労省IF区分, 仮一次判定区分, 一次判定年月日, 一次判定結果, 認知症加算一次判定結果, 要介護認定等基準時間,
+            sut = new IchijiHanteiResultDetail(申請書管理番号, 厚労省IF区分, 仮一次判定区分, 一次判定年月日, 一次判定結果, 認知症加算一次判定結果, 要介護認定等基準時間,
                     null, 一次判定警告List, 認定状態安定性, 認知症自立度2以上蓋然性, 推定給付区分,
                     運動能力未低下認知症高齢者指標, 日常生活自立度組み合わせ, 認知症高齢者日常生活自立度蓋然性評価,
                     認知症高齢者日常生活自立度蓋然性評価率, 一次判定結果送付区分, 一次判定結果送付年月日);
@@ -141,7 +141,7 @@ public class IchijiHanteiResultTest {
 
         @Test(expected = NullPointerException.class)
         public void 一次判定警告Listにnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut = new IchijiHanteiResult(申請書管理番号, 厚労省IF区分, 仮一次判定区分, 一次判定年月日, 一次判定結果, 認知症加算一次判定結果, 要介護認定等基準時間,
+            sut = new IchijiHanteiResultDetail(申請書管理番号, 厚労省IF区分, 仮一次判定区分, 一次判定年月日, 一次判定結果, 認知症加算一次判定結果, 要介護認定等基準時間,
                     中間評価項目得点, null, 認定状態安定性, 認知症自立度2以上蓋然性, 推定給付区分,
                     運動能力未低下認知症高齢者指標, 日常生活自立度組み合わせ, 認知症高齢者日常生活自立度蓋然性評価,
                     認知症高齢者日常生活自立度蓋然性評価率, 一次判定結果送付区分, 一次判定結果送付年月日);
@@ -149,7 +149,7 @@ public class IchijiHanteiResultTest {
 
         @Test(expected = NullPointerException.class)
         public void 認定状態安定性にnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut = new IchijiHanteiResult(申請書管理番号, 厚労省IF区分, 仮一次判定区分, 一次判定年月日, 一次判定結果, 認知症加算一次判定結果, 要介護認定等基準時間,
+            sut = new IchijiHanteiResultDetail(申請書管理番号, 厚労省IF区分, 仮一次判定区分, 一次判定年月日, 一次判定結果, 認知症加算一次判定結果, 要介護認定等基準時間,
                     中間評価項目得点, 一次判定警告List, null, 認知症自立度2以上蓋然性, 推定給付区分,
                     運動能力未低下認知症高齢者指標, 日常生活自立度組み合わせ, 認知症高齢者日常生活自立度蓋然性評価,
                     認知症高齢者日常生活自立度蓋然性評価率, 一次判定結果送付区分, 一次判定結果送付年月日);
@@ -157,7 +157,7 @@ public class IchijiHanteiResultTest {
 
         @Test(expected = NullPointerException.class)
         public void 認知症自立度2以上蓋然性にnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut = new IchijiHanteiResult(申請書管理番号, 厚労省IF区分, 仮一次判定区分, 一次判定年月日, 一次判定結果, 認知症加算一次判定結果, 要介護認定等基準時間,
+            sut = new IchijiHanteiResultDetail(申請書管理番号, 厚労省IF区分, 仮一次判定区分, 一次判定年月日, 一次判定結果, 認知症加算一次判定結果, 要介護認定等基準時間,
                     中間評価項目得点, 一次判定警告List, 認定状態安定性, null, 推定給付区分,
                     運動能力未低下認知症高齢者指標, 日常生活自立度組み合わせ, 認知症高齢者日常生活自立度蓋然性評価,
                     認知症高齢者日常生活自立度蓋然性評価率, 一次判定結果送付区分, 一次判定結果送付年月日);
@@ -165,7 +165,7 @@ public class IchijiHanteiResultTest {
 
         @Test(expected = NullPointerException.class)
         public void 推定給付区分にnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut = new IchijiHanteiResult(申請書管理番号, 厚労省IF区分, 仮一次判定区分, 一次判定年月日, 一次判定結果, 認知症加算一次判定結果, 要介護認定等基準時間,
+            sut = new IchijiHanteiResultDetail(申請書管理番号, 厚労省IF区分, 仮一次判定区分, 一次判定年月日, 一次判定結果, 認知症加算一次判定結果, 要介護認定等基準時間,
                     中間評価項目得点, 一次判定警告List, 認定状態安定性, 認知症自立度2以上蓋然性, null,
                     運動能力未低下認知症高齢者指標, 日常生活自立度組み合わせ, 認知症高齢者日常生活自立度蓋然性評価,
                     認知症高齢者日常生活自立度蓋然性評価率, 一次判定結果送付区分, 一次判定結果送付年月日);
@@ -173,10 +173,10 @@ public class IchijiHanteiResultTest {
 
         @Test
         public void 必要項目に値が入っているとき_インスタンスが生成される() {
-            sut = new IchijiHanteiResult(申請書管理番号, 厚労省IF区分, 仮一次判定区分, 一次判定年月日, 一次判定結果, 認知症加算一次判定結果, 要介護認定等基準時間,
+            sut = new IchijiHanteiResultDetail(申請書管理番号, 厚労省IF区分, 仮一次判定区分, 一次判定年月日, 一次判定結果, 認知症加算一次判定結果, 要介護認定等基準時間,
                     中間評価項目得点, 一次判定警告List, 認定状態安定性, 認知症自立度2以上蓋然性, 推定給付区分,
                     null, null, null, 0, null, null);
-            assertThat(sut, is(instanceOf(IchijiHanteiResult.class)));
+            assertThat(sut, is(instanceOf(IchijiHanteiResultDetail.class)));
         }
     }
 }

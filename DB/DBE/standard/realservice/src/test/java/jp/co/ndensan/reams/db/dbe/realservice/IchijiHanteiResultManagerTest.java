@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.realservice;
 
-import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResult;
+import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResultDetail;
 import jp.co.ndensan.reams.db.dbe.business.helper.IchijiHanteiTestBusinessCreator;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5016IchijiHanteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.IchijiHanteiTestEntityCreator;
@@ -36,7 +36,7 @@ public class IchijiHanteiResultManagerTest {
         @Test
         public void 一次判定結果が取得できる() {
             sut = new IchijiHanteiResultManager(createDacMock());
-            IchijiHanteiResult result = sut.get一次判定結果(new ShinseishoKanriNo(new RString("A001")));
+            IchijiHanteiResultDetail result = sut.get一次判定結果(new ShinseishoKanriNo(new RString("A001")));
             assertThat(result.get申請書管理番号(), is(new ShinseishoKanriNo(new RString("A001"))));
         }
 
@@ -61,7 +61,7 @@ public class IchijiHanteiResultManagerTest {
         @Test
         public void 保存に成功したときtrueが返る() {
             sut = new IchijiHanteiResultManager(createDacMock(1));
-            IchijiHanteiResult ichijiHantei = IchijiHanteiTestBusinessCreator.create一次判定結果();
+            IchijiHanteiResultDetail ichijiHantei = IchijiHanteiTestBusinessCreator.create一次判定結果();
             boolean result = sut.save(ichijiHantei);
             assertThat(result, is(true));
         }
@@ -69,7 +69,7 @@ public class IchijiHanteiResultManagerTest {
         @Test
         public void 保存に失敗したときfalseが返る() {
             sut = new IchijiHanteiResultManager(createDacMock(0));
-            IchijiHanteiResult ichijiHantei = IchijiHanteiTestBusinessCreator.create一次判定結果();
+            IchijiHanteiResultDetail ichijiHantei = IchijiHanteiTestBusinessCreator.create一次判定結果();
             boolean result = sut.save(ichijiHantei);
             assertThat(result, is(false));
         }
@@ -86,7 +86,7 @@ public class IchijiHanteiResultManagerTest {
         @Test
         public void 削除に成功したときtrueが返る() {
             sut = new IchijiHanteiResultManager(createDacMock(1));
-            IchijiHanteiResult ichijiHantei = IchijiHanteiTestBusinessCreator.create一次判定結果();
+            IchijiHanteiResultDetail ichijiHantei = IchijiHanteiTestBusinessCreator.create一次判定結果();
             boolean result = sut.remove(ichijiHantei);
             assertThat(result, is(true));
         }
@@ -94,7 +94,7 @@ public class IchijiHanteiResultManagerTest {
         @Test
         public void 削除に失敗したときfalseが返る() {
             sut = new IchijiHanteiResultManager(createDacMock(0));
-            IchijiHanteiResult ichijiHantei = IchijiHanteiTestBusinessCreator.create一次判定結果();
+            IchijiHanteiResultDetail ichijiHantei = IchijiHanteiTestBusinessCreator.create一次判定結果();
             boolean result = sut.remove(ichijiHantei);
             assertThat(result, is(false));
         }

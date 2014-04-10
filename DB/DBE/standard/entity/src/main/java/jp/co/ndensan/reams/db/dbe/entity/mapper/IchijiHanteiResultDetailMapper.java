@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiKeikokuList;
-import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiKekkaKomoku;
-import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResult;
+import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResultKomoku;
+import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResultDetail;
 import jp.co.ndensan.reams.db.dbe.business.KaigoNinteiJotaiAnteiseiKubun;
 import jp.co.ndensan.reams.db.dbe.business.NichijoSeikatsuJiritsudoKumiawase;
 import jp.co.ndensan.reams.db.dbe.business.NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku;
@@ -23,12 +23,12 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5016IchijiHanteiKekkaJohoEntit
  *
  * @author n8178 城間篤人
  */
-public final class IchijiHanteiResultMapper {
+public final class IchijiHanteiResultDetailMapper {
 
     /**
      * インスタンス化防止のためのプライベートコンストラクタです。
      */
-    private IchijiHanteiResultMapper() {
+    private IchijiHanteiResultDetailMapper() {
     }
 
     /**
@@ -39,11 +39,11 @@ public final class IchijiHanteiResultMapper {
      * @param 一次判定警告List 一次判定警告List
      * @return 一次判定結果
      */
-    public static IchijiHanteiResult to一次判定結果(DbT5016IchijiHanteiKekkaJohoEntity entity, IchijiHanteiKeikokuList 一次判定警告List) {
+    public static IchijiHanteiResultDetail to一次判定結果(DbT5016IchijiHanteiKekkaJohoEntity entity, IchijiHanteiKeikokuList 一次判定警告List) {
         if (entity == null || 一次判定警告List == null) {
             return null;
         }
-        return new IchijiHanteiResult(entity.getShinseishoKanriNo(),
+        return new IchijiHanteiResultDetail(entity.getShinseishoKanriNo(),
                 KoroshoIFKubun.toValue(entity.getKoroshoIfShikibetsuCode()),
                 KariIchijiHanteiKubun.toValue(entity.getKariIchijiHanteiKubun()),
                 entity.getIchijiHanteiYMD(),
@@ -63,13 +63,13 @@ public final class IchijiHanteiResultMapper {
                 entity.getIchijiHanteiKekkaSofuYMD());
     }
 
-    private static IchijiHanteiKekkaKomoku create一次判定結果(DbT5016IchijiHanteiKekkaJohoEntity entity) {
-        return new IchijiHanteiKekkaKomoku(entity.getIchijiHanteiKekkaCode(),
+    private static IchijiHanteiResultKomoku create一次判定結果(DbT5016IchijiHanteiKekkaJohoEntity entity) {
+        return new IchijiHanteiResultKomoku(entity.getIchijiHanteiKekkaCode(),
                 entity.getIchijiHanteiKekkaCodeMeisho(), entity.getIchijiHanteiKekkaCodeRyakusho());
     }
 
-    private static IchijiHanteiKekkaKomoku create認知症加算一次判定結果(DbT5016IchijiHanteiKekkaJohoEntity entity) {
-        return new IchijiHanteiKekkaKomoku(entity.getIchijiHanteiKekkaNinchishoKasanCode(),
+    private static IchijiHanteiResultKomoku create認知症加算一次判定結果(DbT5016IchijiHanteiKekkaJohoEntity entity) {
+        return new IchijiHanteiResultKomoku(entity.getIchijiHanteiKekkaNinchishoKasanCode(),
                 entity.getIchijiHanteiKekkaNinchishoKasanCodeMeisho(), entity.getIchijiHanteiKekkaNinchishoKasanCodeRyakusho());
     }
 
@@ -119,7 +119,7 @@ public final class IchijiHanteiResultMapper {
      * @param 一次判定結果 一次判定結果
      * @return 一次判定結果Entity
      */
-    public static DbT5016IchijiHanteiKekkaJohoEntity to一次判定結果Entity(IchijiHanteiResult 一次判定結果) {
+    public static DbT5016IchijiHanteiKekkaJohoEntity to一次判定結果Entity(IchijiHanteiResultDetail 一次判定結果) {
         if (一次判定結果 == null) {
             return null;
         }

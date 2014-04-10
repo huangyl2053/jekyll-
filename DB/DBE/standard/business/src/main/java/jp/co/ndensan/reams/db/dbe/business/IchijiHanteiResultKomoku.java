@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8178 城間篤人
  */
-public class IchijiHanteiKekkaKomoku extends KaigoCodeAssignedItem<IchijiHanteiKekkaCode> {
+public class IchijiHanteiResultKomoku extends KaigoCodeAssignedItem<IchijiHanteiKekkaCode> {
 
     /**
      * 引数に一次判定結果コードとそれに対応する名称を受け取り、インスタンスを生成します。
@@ -23,7 +23,7 @@ public class IchijiHanteiKekkaKomoku extends KaigoCodeAssignedItem<IchijiHanteiK
      * @param 名称 名称
      * @param 略称 略称
      */
-    public IchijiHanteiKekkaKomoku(Code 一次判定結果コード, RString 名称, RString 略称) {
+    public IchijiHanteiResultKomoku(Code 一次判定結果コード, RString 名称, RString 略称) {
         super(new IchijiHanteiKekkaCode(一次判定結果コード), 一次判定結果コード, 名称, 略称);
     }
 

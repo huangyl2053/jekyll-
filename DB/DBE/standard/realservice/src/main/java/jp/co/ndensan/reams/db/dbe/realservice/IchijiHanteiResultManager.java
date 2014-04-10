@@ -6,10 +6,10 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiKeikokuHairetsuCode;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiKeikokuList;
-import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResult;
+import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResultDetail;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5016IchijiHanteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.IchijiHanteiKeikokuMapper;
-import jp.co.ndensan.reams.db.dbe.entity.mapper.IchijiHanteiResultMapper;
+import jp.co.ndensan.reams.db.dbe.entity.mapper.IchijiHanteiResultDetailMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IchijiHanteiKekkaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -47,11 +47,11 @@ public class IchijiHanteiResultManager {
      * @param 申請書管理番号 申請書管理番号
      * @return 一次判定結果
      */
-    public IchijiHanteiResult get一次判定結果(ShinseishoKanriNo 申請書管理番号) {
+    public IchijiHanteiResultDetail get一次判定結果(ShinseishoKanriNo 申請書管理番号) {
         DbT5016IchijiHanteiKekkaJohoEntity entity = dac.select(申請書管理番号);
 
         IchijiHanteiKeikokuList list = IchijiHanteiKeikokuMapper.to一次判定警告List(create警告配列コード(entity));
-        return IchijiHanteiResultMapper.to一次判定結果(entity, list);
+        return IchijiHanteiResultDetailMapper.to一次判定結果(entity, list);
     }
 
     private IchijiHanteiKeikokuHairetsuCode create警告配列コード(DbT5016IchijiHanteiKekkaJohoEntity entity) {
@@ -66,7 +66,7 @@ public class IchijiHanteiResultManager {
      * @param dll一次判定計算結果 dll一次判定計算結果
      * @return 一次判定結果
      */
-    public IchijiHanteiResult get一次判定結果(IchijiHanteiResult dll一次判定計算結果) {
+    public IchijiHanteiResultDetail get一次判定結果(IchijiHanteiResultDetail dll一次判定計算結果) {
         //TODO n8178 城間篤人 DLLから情報がどのように渡るかの詳細が決まった後に、改めて実装を行う 2014年3月
         return dll一次判定計算結果;
     }
@@ -77,8 +77,8 @@ public class IchijiHanteiResultManager {
      * @param 一次判定結果 一次判定結果
      * @return 保存に成功したらtrue
      */
-    public boolean save(IchijiHanteiResult 一次判定結果) {
-        DbT5016IchijiHanteiKekkaJohoEntity entity = IchijiHanteiResultMapper.to一次判定結果Entity(一次判定結果);
+    public boolean save(IchijiHanteiResultDetail 一次判定結果) {
+        DbT5016IchijiHanteiKekkaJohoEntity entity = IchijiHanteiResultDetailMapper.to一次判定結果Entity(一次判定結果);
         return dac.insertOrUpdate(entity) == 1 ? true : false;
     }
 
@@ -88,8 +88,8 @@ public class IchijiHanteiResultManager {
      * @param 一次判定結果 一次判定結果
      * @return 削除に成功したらtrue
      */
-    public boolean remove(IchijiHanteiResult 一次判定結果) {
-        DbT5016IchijiHanteiKekkaJohoEntity entity = IchijiHanteiResultMapper.to一次判定結果Entity(一次判定結果);
+    public boolean remove(IchijiHanteiResultDetail 一次判定結果) {
+        DbT5016IchijiHanteiKekkaJohoEntity entity = IchijiHanteiResultDetailMapper.to一次判定結果Entity(一次判定結果);
         return dac.delete(entity) == 1 ? true : false;
     }
 }

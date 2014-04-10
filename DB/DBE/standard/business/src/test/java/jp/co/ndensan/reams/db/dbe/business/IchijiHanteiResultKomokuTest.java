@@ -21,15 +21,15 @@ import org.junit.runner.RunWith;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class IchijiHanteiKekkaKomokuTest {
+public class IchijiHanteiResultKomokuTest {
 
-    private static IchijiHanteiKekkaKomoku sut;
+    private static IchijiHanteiResultKomoku sut;
 
     public static class get一次判定結果コードのテスト extends DbeTestBase {
 
         @Before
         public void setUp() {
-            sut = new IchijiHanteiKekkaKomoku(new Code(new RString("001")), new RString("名称"), new RString("略称"));
+            sut = new IchijiHanteiResultKomoku(new Code(new RString("001")), new RString("名称"), new RString("略称"));
         }
 
         @Test

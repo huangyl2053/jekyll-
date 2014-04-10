@@ -18,14 +18,14 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
  *
  * @author n8178 城間篤人
  */
-public class IchijiHanteiResult {
+public class IchijiHanteiResultDetail {
 
     private final ShinseishoKanriNo 申請書管理番号;
     private final KoroshoIFKubun 厚労省IF区分;
     private final KariIchijiHanteiKubun 仮一次判定区分;
     private final FlexibleDate 一次判定年月日;
-    private final IchijiHanteiKekkaKomoku 一次判定結果;
-    private final IchijiHanteiKekkaKomoku 認知症加算一次判定結果;
+    private final IchijiHanteiResultKomoku 一次判定結果;
+    private final IchijiHanteiResultKomoku 認知症加算一次判定結果;
     private final YokaigoNinteiToKijunTime 要介護認定等基準時間;
     private final YokaigoNinteiChukanHyokaKomokuTokuten 中間評価項目得点;
     private final IchijiHanteiKeikokuList 一次判定警告List;
@@ -64,8 +64,8 @@ public class IchijiHanteiResult {
      * 申請書管理番号、一次判定年月日、一次判定結果、認知症加算一次判定結果、要介護認定等基準時間、中間評価項目得点、一次判定警告List、
      * 認定状態安定性、認知症自立度2以上蓋然性、推定給付区分のいずれかにnullが渡されたとき
      */
-    public IchijiHanteiResult(ShinseishoKanriNo 申請書管理番号, KoroshoIFKubun 厚労省IF区分, KariIchijiHanteiKubun 仮一次判定区分,
-            FlexibleDate 一次判定年月日, IchijiHanteiKekkaKomoku 一次判定結果, IchijiHanteiKekkaKomoku 認知症加算一次判定結果,
+    public IchijiHanteiResultDetail(ShinseishoKanriNo 申請書管理番号, KoroshoIFKubun 厚労省IF区分, KariIchijiHanteiKubun 仮一次判定区分,
+            FlexibleDate 一次判定年月日, IchijiHanteiResultKomoku 一次判定結果, IchijiHanteiResultKomoku 認知症加算一次判定結果,
             YokaigoNinteiToKijunTime 要介護認定等基準時間, YokaigoNinteiChukanHyokaKomokuTokuten 中間評価項目得点,
             IchijiHanteiKeikokuList 一次判定警告List, KaigoNinteiJotaiAnteiseiKubun 認定状態安定性, Decimal 認知症自立度2以上蓋然性,
             SuiteiKyuhuKubun 推定給付区分, NoryokuMiteikaNinchishoKoreishaShihyoKomoku 運動能力未低下認知症高齢者指標,
@@ -146,7 +146,7 @@ public class IchijiHanteiResult {
      *
      * @return 一次判定結果
      */
-    public IchijiHanteiKekkaKomoku get一次判定結果() {
+    public IchijiHanteiResultKomoku get一次判定結果() {
         return 一次判定結果;
     }
 
@@ -155,7 +155,7 @@ public class IchijiHanteiResult {
      *
      * @return 認知症加算一次判定結果
      */
-    public IchijiHanteiKekkaKomoku get認知症加算一次判定結果() {
+    public IchijiHanteiResultKomoku get認知症加算一次判定結果() {
         return 認知症加算一次判定結果;
     }
 

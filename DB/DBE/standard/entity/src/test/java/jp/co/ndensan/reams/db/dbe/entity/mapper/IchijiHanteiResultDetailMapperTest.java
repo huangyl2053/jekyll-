@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiKeikokuList;
-import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResult;
+import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResultDetail;
 import jp.co.ndensan.reams.db.dbe.business.helper.IchijiHanteiTestBusinessCreator;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KariIchijiHanteiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
@@ -30,11 +30,11 @@ import static org.mockito.Mockito.mock;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class IchijiHanteiResultMapperTest {
+public class IchijiHanteiResultDetailMapperTest {
 
     public static class to一次判定結果のテスト extends DbeTestBase {
 
-        private IchijiHanteiResult result;
+        private IchijiHanteiResultDetail result;
 
         @Before
         public void setUp() {
@@ -42,20 +42,20 @@ public class IchijiHanteiResultMapperTest {
 
             IchijiHanteiKeikokuList list = IchijiHanteiTestBusinessCreator.create一次判定警告List("000111000111000111");
 
-            result = IchijiHanteiResultMapper.to一次判定結果(entity, list);
+            result = IchijiHanteiResultDetailMapper.to一次判定結果(entity, list);
         }
 
         @Test
         public void 一次判定結果Entityにnullが渡されたとき_nullが返る() {
             IchijiHanteiKeikokuList list = mock(IchijiHanteiKeikokuList.class);
-            result = IchijiHanteiResultMapper.to一次判定結果(null, list);
+            result = IchijiHanteiResultDetailMapper.to一次判定結果(null, list);
             assertThat(result, is(nullValue()));
         }
 
         @Test
         public void 一次判定警告Listにnullが渡されたとき_nullが返る() {
             DbT5016IchijiHanteiKekkaJohoEntity entity = new DbT5016IchijiHanteiKekkaJohoEntity();
-            result = IchijiHanteiResultMapper.to一次判定結果(entity, null);
+            result = IchijiHanteiResultDetailMapper.to一次判定結果(entity, null);
             assertThat(result, is(nullValue()));
         }
 
@@ -261,12 +261,12 @@ public class IchijiHanteiResultMapperTest {
 
         @Before
         public void setUp() {
-            result = IchijiHanteiResultMapper.to一次判定結果Entity(IchijiHanteiTestBusinessCreator.create一次判定結果());
+            result = IchijiHanteiResultDetailMapper.to一次判定結果Entity(IchijiHanteiTestBusinessCreator.create一次判定結果());
         }
 
         @Test
         public void 引数にnullが渡されたとき_nullが返る() {
-            result = IchijiHanteiResultMapper.to一次判定結果Entity(null);
+            result = IchijiHanteiResultDetailMapper.to一次判定結果Entity(null);
             assertThat(result, is(nullValue()));
         }
 

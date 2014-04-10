@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbe.business.helper;
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiKeikokuHairetsuCode;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiKeikokuList;
-import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiKekkaKomoku;
-import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResult;
+import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResultKomoku;
+import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResultDetail;
 import jp.co.ndensan.reams.db.dbe.business.KaigoNinteiJotaiAnteiseiKubun;
 import jp.co.ndensan.reams.db.dbe.business.NichijoSeikatsuJiritsudoKumiawase;
 import jp.co.ndensan.reams.db.dbe.business.NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku;
@@ -32,8 +32,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public final class IchijiHanteiTestBusinessCreator {
 
-    public static IchijiHanteiResult create一次判定結果() {
-        return new IchijiHanteiResult(new ShinseishoKanriNo(new RString("01")),
+    public static IchijiHanteiResultDetail create一次判定結果() {
+        return new IchijiHanteiResultDetail(new ShinseishoKanriNo(new RString("01")),
                 KoroshoIFKubun.V02A,
                 KariIchijiHanteiKubun.本判定,
                 new FlexibleDate("20060101"),
@@ -53,13 +53,13 @@ public final class IchijiHanteiTestBusinessCreator {
                 new FlexibleDate("20061231"));
     }
 
-    private static IchijiHanteiKekkaKomoku create一次判定結果項目() {
-        return new IchijiHanteiKekkaKomoku(new Code("1"),
+    private static IchijiHanteiResultKomoku create一次判定結果項目() {
+        return new IchijiHanteiResultKomoku(new Code("1"),
                 new RString("一次判定結果"), new RString("一次判定結果略称"));
     }
 
-    private static IchijiHanteiKekkaKomoku create認知症加算一次判定結果() {
-        return new IchijiHanteiKekkaKomoku(new Code("2"),
+    private static IchijiHanteiResultKomoku create認知症加算一次判定結果() {
+        return new IchijiHanteiResultKomoku(new Code("2"),
                 new RString("認知症加算一次判定結果"), new RString("認知症加算一次判定結果略称"));
     }
 
