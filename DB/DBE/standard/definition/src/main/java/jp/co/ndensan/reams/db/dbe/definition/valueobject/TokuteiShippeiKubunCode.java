@@ -6,8 +6,10 @@ package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ICodeWrapValueObject;
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import static java.util.Objects.requireNonNull;
 
 /**
  * 特定疾病区分コードを保持するクラスです。
@@ -24,7 +26,7 @@ public class TokuteiShippeiKubunCode implements ICodeWrapValueObject, Comparable
      * @param code 値
      */
     public TokuteiShippeiKubunCode(Code code) {
-        this.code = code;
+        this.code = requireNonNull(code, Messages.E00003.replace("code", getClass().getName()).getMessage());
     }
 
     @Override
