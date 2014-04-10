@@ -5,7 +5,9 @@
 package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
 import java.util.Objects;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ICodeWrapValueObject;
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -19,12 +21,14 @@ public class SuiteiKyuhuKubunCode implements ICodeWrapValueObject, Comparable<Su
     private final Code code;
 
     /**
-     * 引数から推定給付区分コードを受け取り、インスタンスを生成します。
+     * 推定給付区分コードを受け取り、インスタンスを生成します。
      *
      * @param code 推定給付区分コード
+     * @throws NullPointerException 引数にnullが渡されたとき
      */
-    public SuiteiKyuhuKubunCode(Code code) {
-        this.code = code;
+    public SuiteiKyuhuKubunCode(Code code)
+            throws NullPointerException {
+        this.code = requireNonNull(code, Messages.E00003.replace("推定給付区分コード", getClass().getName()).getMessage());
     }
 
     @Override

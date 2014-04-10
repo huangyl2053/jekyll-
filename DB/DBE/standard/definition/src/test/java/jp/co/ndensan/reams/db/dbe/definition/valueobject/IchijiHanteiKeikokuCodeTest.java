@@ -25,6 +25,14 @@ public class IchijiHanteiKeikokuCodeTest {
     private static IchijiHanteiKeikokuCode sut;
     private static IchijiHanteiKeikokuCode sut2;
 
+    public static class コンストラクタのテスト extends DbeTestBase {
+
+        @Test(expected = NullPointerException.class)
+        public void 引数にnullが渡されたとき_NullPointerExceptionが発生する() {
+            sut = new IchijiHanteiKeikokuCode(null);
+        }
+    }
+
     public static class compareToのテスト extends DbeTestBase {
 
         @Before

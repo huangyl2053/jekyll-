@@ -25,6 +25,14 @@ public class SuiteiKyuhuKubunCodeTest {
     private static SuiteiKyuhuKubunCode sut;
     private static SuiteiKyuhuKubunCode sut2;
 
+    public static class コンストラクタのテスト extends DbeTestBase {
+
+        @Test(expected = NullPointerException.class)
+        public void 引数にnullが渡されたとき_NullPointerExceptionが発生する() {
+            sut = new SuiteiKyuhuKubunCode(null);
+        }
+    }
+
     public static class compareToのテスト extends DbeTestBase {
 
         @Before

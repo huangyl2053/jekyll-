@@ -5,7 +5,9 @@
 package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
 import java.util.Objects;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ICodeWrapValueObject;
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -20,12 +22,14 @@ public class NinchishoKoreishaJiritsudoGaizenseiHyokaCode implements ICodeWrapVa
     private final Code code;
 
     /**
-     * 引数から、認知症高齢者の自立度蓋然性評価を表すコードを受け取り、インスタンスを生成します。
+     * 認知症高齢者自立度の蓋然性評価コードを受け取り、インスタンスを生成します。
      *
-     * @param code 認知症高齢者の自立度蓋然性評価コード
+     * @param code 認知症高齢者自立度の蓋然性評価コード
+     * @throws NullPointerException 引数にnullが渡されたとき
      */
-    public NinchishoKoreishaJiritsudoGaizenseiHyokaCode(Code code) {
-        this.code = code;
+    public NinchishoKoreishaJiritsudoGaizenseiHyokaCode(Code code)
+            throws NullPointerException {
+        this.code = requireNonNull(code, Messages.E00003.replace("認知症高齢者自立度の蓋然性評価コード", getClass().getName()).getMessage());
     }
 
     @Override

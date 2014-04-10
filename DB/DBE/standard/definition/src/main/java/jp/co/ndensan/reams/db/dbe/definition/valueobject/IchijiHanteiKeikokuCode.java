@@ -8,6 +8,8 @@ import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ICodeWrapValueObject;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**
  * 一次判定警告コードを表すクラスです。
@@ -19,12 +21,14 @@ public class IchijiHanteiKeikokuCode implements ICodeWrapValueObject, Comparable
     private final Code code;
 
     /**
-     * 一次判定警告コードを表す文字列を受け取り、インスタンスを生成します。
+     * 一次判定警告コードを受け取り、インスタンスを生成します。
      *
      * @param code 一次判定警告コード
+     * @throws NullPointerException 引数にnullが渡されたとき
      */
-    public IchijiHanteiKeikokuCode(Code code) {
-        this.code = code;
+    public IchijiHanteiKeikokuCode(Code code)
+            throws NullPointerException {
+        this.code = requireNonNull(code, Messages.E00003.replace("一次判定警告コード", getClass().getName()).getMessage());
     }
 
     @Override

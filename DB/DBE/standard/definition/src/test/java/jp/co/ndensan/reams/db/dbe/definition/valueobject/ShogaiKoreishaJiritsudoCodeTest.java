@@ -25,6 +25,14 @@ public class ShogaiKoreishaJiritsudoCodeTest {
     private static ShogaiKoreishaJiritsudoCode sut;
     private static ShogaiKoreishaJiritsudoCode sut2;
 
+    public static class コンストラクタのテスト extends DbeTestBase {
+
+        @Test(expected = NullPointerException.class)
+        public void 引数にnullが渡されたとき_NullPointerExceptionが発生する() {
+            sut = new ShogaiKoreishaJiritsudoCode(null);
+        }
+    }
+
     public static class compareToのテスト extends DbeTestBase {
 
         @Before

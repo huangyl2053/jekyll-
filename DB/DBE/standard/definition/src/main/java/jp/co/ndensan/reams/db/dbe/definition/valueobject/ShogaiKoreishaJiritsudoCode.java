@@ -5,7 +5,9 @@
 package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
 import java.util.Objects;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ICodeWrapValueObject;
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -19,12 +21,14 @@ public class ShogaiKoreishaJiritsudoCode implements ICodeWrapValueObject, Compar
     private final Code code;
 
     /**
-     * 引数から障害高齢者自立度コードを受け取り、インスタンスを生成します。
+     * 障害高齢者自立度コードを受け取り、インスタンスを生成します。
      *
      * @param code 障害高齢者自立度コード
+     * @throws NullPointerException 引数にnullが渡されたとき
      */
-    public ShogaiKoreishaJiritsudoCode(Code code) {
-        this.code = code;
+    public ShogaiKoreishaJiritsudoCode(Code code)
+            throws NullPointerException {
+        this.code = requireNonNull(code, Messages.E00003.replace("障害高齢者自立度コード", getClass().getName()).getMessage());
     }
 
     @Override

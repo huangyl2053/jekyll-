@@ -25,6 +25,14 @@ public class NoryokuMiteikaNinchishoKoreishaShihyoCodeTest {
     private static NoryokuMiteikaNinchishoKoreishaShihyoCode sut;
     private static NoryokuMiteikaNinchishoKoreishaShihyoCode sut2;
 
+    public static class コンストラクタのテスト extends DbeTestBase {
+
+        @Test(expected = NullPointerException.class)
+        public void 引数にnullが渡されたとき_NullPointerExceptionが発生する() {
+            sut = new NoryokuMiteikaNinchishoKoreishaShihyoCode(null);
+        }
+    }
+
     public static class compareToのテスト extends DbeTestBase {
 
         @Before

@@ -5,12 +5,14 @@
 package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
 import java.util.Objects;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ICodeWrapValueObject;
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 能力が低下していない認知症高齢者の指標を表すコードです。
+ * 運動能力が低下していない認知症高齢者の指標を表すコードです。
  *
  * @author n8178 城間篤人
  */
@@ -20,12 +22,14 @@ public class NoryokuMiteikaNinchishoKoreishaShihyoCode implements ICodeWrapValue
     private final Code code;
 
     /**
-     * 引数から、能力が低下していない認知症高齢者の指標を表すコードを受け取り、インスタンスを生成します。
+     * 運動能力未低下認知症高齢者の指標コードを受け取り、インスタンスを生成します。
      *
-     * @param code 能力未低下認知症高齢者指標コード
+     * @param code 運動能力未低下認知症高齢者の指標コード
+     * @throws NullPointerException 引数にnullが渡されたとき
      */
-    public NoryokuMiteikaNinchishoKoreishaShihyoCode(Code code) {
-        this.code = code;
+    public NoryokuMiteikaNinchishoKoreishaShihyoCode(Code code)
+            throws NullPointerException {
+        this.code = requireNonNull(code, Messages.E00003.replace("運動能力未低下認知症高齢者の指標コード", getClass().getName()).getMessage());
     }
 
     @Override

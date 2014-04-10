@@ -25,6 +25,14 @@ public class NinchishoKoreishaJiritsudoCodeTest {
     private static NinchishoKoreishaJiritsudoCode sut;
     private static NinchishoKoreishaJiritsudoCode sut2;
 
+    public static class コンストラクタのテスト extends DbeTestBase {
+
+        @Test(expected = NullPointerException.class)
+        public void 引数にnullが渡されたとき_NullPointerExceptionが発生する() {
+            sut = new NinchishoKoreishaJiritsudoCode(null);
+        }
+    }
+
     public static class compareToのテスト extends DbeTestBase {
 
         @Before

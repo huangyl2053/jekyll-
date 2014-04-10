@@ -25,6 +25,14 @@ public class NinchishoKoreishaJiritsudoGaizenseiHyokaCodeTest {
     private static NinchishoKoreishaJiritsudoGaizenseiHyokaCode sut;
     private static NinchishoKoreishaJiritsudoGaizenseiHyokaCode sut2;
 
+    public static class コンストラクタのテスト extends DbeTestBase {
+
+        @Test(expected = NullPointerException.class)
+        public void 引数にnullが渡されたとき_NullPointerExceptionが発生する() {
+            sut = new NinchishoKoreishaJiritsudoGaizenseiHyokaCode(null);
+        }
+    }
+
     public static class compareToのテスト extends DbeTestBase {
 
         @Before
