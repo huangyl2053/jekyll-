@@ -5,7 +5,6 @@
 package jp.co.ndensan.reams.db.dbe.realservice;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteiResult;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5002NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteiKekkaMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.NinteiKekkaJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
@@ -43,11 +42,7 @@ public class NinteiResultManager {
      * @return 認定結果
      */
     public NinteiResult get認定結果(ShinseishoKanriNo 申請書管理番号) {
-        DbT5002NinteiKekkaJohoEntity entity = dac.select(申請書管理番号);
-        if (entity == null) {
-            return null;
-        }
-        return NinteiKekkaMapper.toNinteiResult(entity);
+        return NinteiKekkaMapper.toNinteiResult(dac.select(申請書管理番号));
     }
 
     /**

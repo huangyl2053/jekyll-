@@ -44,6 +44,9 @@ public final class NinteiKekkaMapper {
      * @return 認定結果情報
      */
     public static NinteiResult toNinteiResult(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         return new NinteiResult(
                 new ShinseishoKanriNo(entity.getShinseishoKanriNo()),
                 entity.getYoukaigodoNinteiYMD(),
