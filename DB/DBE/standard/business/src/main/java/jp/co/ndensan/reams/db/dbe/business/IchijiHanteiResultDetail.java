@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiSohuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KariIchijiHanteiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
@@ -36,7 +37,7 @@ public class IchijiHanteiResultDetail {
     private final NichijoSeikatsuJiritsudoKumiawase 日常生活自立度組み合わせ;
     private final NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku 認知症高齢者日常生活自立度蓋然性評価;
     private final int 認知症高齢者日常生活自立度蓋然性評価率;
-    private final RString 一次判定結果送付区分;
+    private final IchijiHanteiSohuKubun 一次判定結果送付区分;
     private final FlexibleDate 一次判定結果送付年月日;
 
     /**
@@ -71,7 +72,7 @@ public class IchijiHanteiResultDetail {
             SuiteiKyuhuKubun 推定給付区分, NoryokuMiteikaNinchishoKoreishaShihyoKomoku 運動能力未低下認知症高齢者指標,
             NichijoSeikatsuJiritsudoKumiawase 日常生活自立度組み合わせ,
             NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku 認知症高齢者日常生活自立度蓋然性評価, int 認知症高齢者日常生活自立度蓋然性評価率,
-            RString 一次判定結果送付区分, FlexibleDate 一次判定結果送付年月日) throws NullPointerException {
+            IchijiHanteiSohuKubun 一次判定結果送付区分, FlexibleDate 一次判定結果送付年月日) throws NullPointerException {
         requireNonNull(申請書管理番号, Messages.E00003.replace("申請書管理番号", getClass().getName()).getMessage());
         requireNonNull(厚労省IF区分, Messages.E00003.replace("厚労省IF区分", getClass().getName()).getMessage());
         requireNonNull(仮一次判定区分, Messages.E00003.replace("仮一次判定区分", getClass().getName()).getMessage());
@@ -254,7 +255,7 @@ public class IchijiHanteiResultDetail {
      *
      * @return 一次判定結果送付区分
      */
-    public RString get一次判定結果送付区分() {
+    public IchijiHanteiSohuKubun get一次判定結果送付区分() {
         return 一次判定結果送付区分;
     }
 

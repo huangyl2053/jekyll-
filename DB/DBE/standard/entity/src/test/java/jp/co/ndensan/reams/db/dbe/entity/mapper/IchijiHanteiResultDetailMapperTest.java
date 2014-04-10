@@ -246,7 +246,7 @@ public class IchijiHanteiResultDetailMapperTest {
 
         @Test
         public void マッピング後に返される一次判定結果は_一次判定結果送付区分に1を持つ() {
-            assertThat(result.get一次判定結果送付区分(), is(new RString("1")));
+            assertThat(result.get一次判定結果送付区分().get送付区分コード(), is(new RString("1")));
         }
 
         @Test

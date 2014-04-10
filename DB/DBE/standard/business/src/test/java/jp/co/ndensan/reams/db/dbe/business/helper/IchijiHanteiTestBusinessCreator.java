@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbe.business.NoryokuMiteikaNinchishoKoreishaShihyo
 import jp.co.ndensan.reams.db.dbe.business.SuiteiKyuhuKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiChukanHyokaKomokuTokuten;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiKijunTime;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiKeikokuShubetsu;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiSohuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KariIchijiHanteiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
@@ -49,7 +49,7 @@ public final class IchijiHanteiTestBusinessCreator {
                 new NichijoSeikatsuJiritsudoKumiawase(21, 22, 23, 24, 25, 26, 27),
                 create認知症高齢者自立度蓋然性評価(),
                 48,
-                new RString("1"),
+                IchijiHanteiSohuKubun.toValue(new RString("1")),
                 new FlexibleDate("20061231"));
     }
 

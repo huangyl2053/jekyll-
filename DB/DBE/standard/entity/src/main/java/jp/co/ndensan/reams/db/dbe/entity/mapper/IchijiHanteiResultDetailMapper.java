@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.business.NoryokuMiteikaNinchishoKoreishaShihyo
 import jp.co.ndensan.reams.db.dbe.business.SuiteiKyuhuKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiChukanHyokaKomokuTokuten;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiKijunTime;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiSohuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KariIchijiHanteiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5016IchijiHanteiKekkaJohoEntity;
@@ -59,7 +60,7 @@ public final class IchijiHanteiResultDetailMapper {
                 create日常生活自立度組み合わせ(entity),
                 create認知症高齢者自立度蓋然性評価(entity),
                 entity.getGaizenseiHyokaPercent(),
-                entity.getIchijiHanteiSofuKubun(),
+                IchijiHanteiSohuKubun.toValue(entity.getIchijiHanteiSofuKubun()),
                 entity.getIchijiHanteiKekkaSofuYMD());
     }
 
@@ -161,7 +162,7 @@ public final class IchijiHanteiResultDetailMapper {
         entity.setJiiritsudoKumiawase7(一次判定結果.get日常生活自立度組み合わせ().get要介護5());
         entity.setGaizenseiHyokaCode(一次判定結果.get認知症高齢者日常生活自立度蓋然性評価().getCode());
         entity.setGaizenseiHyokaPercent(一次判定結果.get認知症高齢者日常生活自立度蓋然性評価率());
-        entity.setIchijiHanteiSofuKubun(一次判定結果.get一次判定結果送付区分());
+        entity.setIchijiHanteiSofuKubun(一次判定結果.get一次判定結果送付区分().get送付区分コード());
         entity.setIchijiHanteiKekkaSofuYMD(一次判定結果.get一次判定結果送付年月日());
         return entity;
     }

@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.business.helper.IchijiHanteiTestBusinessCreator;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiSohuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KariIchijiHanteiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
@@ -48,7 +49,7 @@ public class IchijiHanteiResultDetailTest {
         private NichijoSeikatsuJiritsudoKumiawase 日常生活自立度組み合わせ;
         private NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku 認知症高齢者日常生活自立度蓋然性評価;
         private int 認知症高齢者日常生活自立度蓋然性評価率;
-        private RString 一次判定結果送付区分;
+        private IchijiHanteiSohuKubun 一次判定結果送付区分;
         private FlexibleDate 一次判定結果送付年月日;
 
         @Before
@@ -71,7 +72,7 @@ public class IchijiHanteiResultDetailTest {
             認知症高齢者日常生活自立度蓋然性評価 = new NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku(new Code(new RString("001")),
                     new RString("名称"), new RString("略称"));
             認知症高齢者日常生活自立度蓋然性評価率 = 100;
-            一次判定結果送付区分 = new RString("A01");
+            一次判定結果送付区分 = IchijiHanteiSohuKubun.送付済み;
             一次判定結果送付年月日 = new FlexibleDate("19991231");
         }
 
