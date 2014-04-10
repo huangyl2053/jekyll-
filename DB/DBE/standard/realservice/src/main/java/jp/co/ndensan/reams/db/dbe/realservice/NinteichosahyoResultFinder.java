@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.realservice;
 
-import jp.co.ndensan.reams.db.dbe.business.NinteichosahyoResult;
+import jp.co.ndensan.reams.db.dbe.business.NinteichosahyoKaitoHairetsuCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5009NinteichosahyoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosahyoResultMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.NinteichosahyoDac;
@@ -42,7 +42,7 @@ public class NinteichosahyoResultFinder {
      * @param 申請書管理番号 申請書管理番号
      * @return 認定調査票回答結果
      */
-    public NinteichosahyoResult get認定調査票回答結果(ShinseishoKanriNo 申請書管理番号) {
+    public NinteichosahyoKaitoHairetsuCode get認定調査票回答結果(ShinseishoKanriNo 申請書管理番号) {
         DbT5009NinteichosahyoJohoEntity entity = dac.select(申請書管理番号);
         return NinteichosahyoResultMapper.to認定調査結果(entity);
     }

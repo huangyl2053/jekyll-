@@ -23,7 +23,7 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class NinteichosahyoResultTest {
 
-    private static NinteichosahyoResult sut;
+    private static NinteichosahyoKaitoHairetsuCode sut;
 
     public static class コンストラクタのテスト {
 
@@ -42,28 +42,28 @@ public class NinteichosahyoResultTest {
 
         @Test(expected = NullPointerException.class)
         public void 調査項目回答にnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut = new NinteichosahyoResult(null, 申請書管理番号, 要介護認定調査履歴番号, 厚労省IF区分);
+            sut = new NinteichosahyoKaitoHairetsuCode(null, 申請書管理番号, 要介護認定調査履歴番号, 厚労省IF区分);
         }
 
         @Test(expected = NullPointerException.class)
         public void 申請書管理番号にnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut = new NinteichosahyoResult(調査項目回答, null, 要介護認定調査履歴番号, 厚労省IF区分);
+            sut = new NinteichosahyoKaitoHairetsuCode(調査項目回答, null, 要介護認定調査履歴番号, 厚労省IF区分);
         }
 
         @Test(expected = NullPointerException.class)
         public void 要介護認定調査履歴番号にnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut = new NinteichosahyoResult(調査項目回答, 申請書管理番号, null, 厚労省IF区分);
+            sut = new NinteichosahyoKaitoHairetsuCode(調査項目回答, 申請書管理番号, null, 厚労省IF区分);
         }
 
         @Test(expected = NullPointerException.class)
         public void 厚労省IF区分にnullが渡されたとき_NullPointerExceptionが発生する() {
-            sut = new NinteichosahyoResult(調査項目回答, 申請書管理番号, 要介護認定調査履歴番号, null);
+            sut = new NinteichosahyoKaitoHairetsuCode(調査項目回答, 申請書管理番号, 要介護認定調査履歴番号, null);
         }
 
         @Test
         public void 引数のいずれにもnullが渡されていないとき_インスタンスが生成される() {
-            sut = new NinteichosahyoResult(調査項目回答, 申請書管理番号, 要介護認定調査履歴番号, 厚労省IF区分);
-            assertThat(sut, is(instanceOf(NinteichosahyoResult.class)));
+            sut = new NinteichosahyoKaitoHairetsuCode(調査項目回答, 申請書管理番号, 要介護認定調査履歴番号, 厚労省IF区分);
+            assertThat(sut, is(instanceOf(NinteichosahyoKaitoHairetsuCode.class)));
         }
     }
 }

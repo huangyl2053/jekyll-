@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.NinteichosahyoResult;
+import jp.co.ndensan.reams.db.dbe.business.NinteichosahyoKaitoHairetsuCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.entity.helper.IchijiHanteiTestEntityCreator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
@@ -24,7 +24,7 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class NinteichosahyoResultMapperTest {
 
-    private static NinteichosahyoResult result;
+    private static NinteichosahyoKaitoHairetsuCode result;
 
     public static class to認定調査結果のテスト extends DbeTestBase {
 

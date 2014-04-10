@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.realservice;
 
-import jp.co.ndensan.reams.db.dbe.business.NinteichosahyoResult;
+import jp.co.ndensan.reams.db.dbe.business.NinteichosahyoKaitoHairetsuCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5009NinteichosahyoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.IchijiHanteiTestEntityCreator;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.NinteichosahyoDac;
@@ -35,7 +35,7 @@ public class NinteichosahyoResultFinderTest {
         @Test
         public void 認定調査票の回答結果が取得できる() {
             sut = new NinteichosahyoResultFinder(createDacMock());
-            NinteichosahyoResult result = sut.get認定調査票回答結果(new ShinseishoKanriNo(new RString("A001")));
+            NinteichosahyoKaitoHairetsuCode result = sut.get認定調査票回答結果(new ShinseishoKanriNo(new RString("A001")));
             assertThat(result.get調査項目回答(),
                     is(new RString("22222111112222211111222223333311111222223333344444111112222233333444445555511111222223333344444555556")));
         }

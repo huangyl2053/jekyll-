@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.NinteichosahyoResult;
+import jp.co.ndensan.reams.db.dbe.business.NinteichosahyoKaitoHairetsuCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5009NinteichosahyoJohoEntity;
@@ -31,11 +31,11 @@ public final class NinteichosahyoResultMapper {
      * @param entity 認定調査票Entity
      * @return 認定調査結果
      */
-    public static NinteichosahyoResult to認定調査結果(DbT5009NinteichosahyoJohoEntity entity) {
+    public static NinteichosahyoKaitoHairetsuCode to認定調査結果(DbT5009NinteichosahyoJohoEntity entity) {
         if (entity == null) {
             return null;
         }
-        return new NinteichosahyoResult(create調査項目回答(entity),
+        return new NinteichosahyoKaitoHairetsuCode(create調査項目回答(entity),
                 entity.getShinseishoKanriNo(),
                 new NinteichosaIraiRirekiNo(entity.getNinteichosaRirekiNo()),
                 KoroshoIFKubun.toValue(entity.getKoroshoIfShikibetsuCode()));
