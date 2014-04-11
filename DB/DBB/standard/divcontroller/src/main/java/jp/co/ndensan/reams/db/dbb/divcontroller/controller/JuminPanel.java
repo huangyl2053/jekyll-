@@ -10,14 +10,22 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 画面上部の住民の住基と介護の情報があるパネルです。
  *
  * @author N3317 塚田 萌
  */
 public class JuminPanel {
 
+    /**
+     * 画面が読み込まれた際の初期値をセットします。
+     *
+     * @param panel 住民PanelDiv
+     * @return 住民PanelDivのResponseData
+     */
     public ResponseData<JuminPanelDiv> getOnLoadData(JuminPanelDiv panel) {
         ResponseData<JuminPanelDiv> response = new ResponseData<>();
-        //初期値を設定したいものに値を入れる。
+
+        //初期値を設定したいものに値を入れる。値をセットしなければ空欄
         panel.getNushiJuminJoho().getTxtNushiShikibetsuCode().setValue(new RString("000000000000001"));
         panel.getNushiJuminJoho().getTxtNushiName().setValue(new RString("電算 太郎"));
         panel.getNushiJuminJoho().getTxtNushiSetaiCode().setValue(new RString("000000000000001"));

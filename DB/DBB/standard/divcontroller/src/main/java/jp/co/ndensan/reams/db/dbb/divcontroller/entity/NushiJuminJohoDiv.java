@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Apr 09 09:19:26 JST 2014 
+ * Wed Apr 09 15:13:08 JST 2014 
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -22,8 +22,8 @@ public class NushiJuminJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblHihokenshaName")
-    private Label lblHihokenshaName;
+    @JsonProperty("lblNushiName")
+    private Label lblNushiName;
     @JsonProperty("txtNushiShikibetsuCode")
     private TextBoxCode txtNushiShikibetsuCode;
     @JsonProperty("txtNushiName")
@@ -55,14 +55,14 @@ public class NushiJuminJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblHihokenshaName")
-    public Label getLblHihokenshaName() {
-        return lblHihokenshaName;
+    @JsonProperty("lblNushiName")
+    public Label getLblNushiName() {
+        return lblNushiName;
     }
 
-    @JsonProperty("lblHihokenshaName")
-    public void setLblHihokenshaName(Label lblHihokenshaName) {
-        this.lblHihokenshaName=lblHihokenshaName;
+    @JsonProperty("lblNushiName")
+    public void setLblNushiName(Label lblNushiName) {
+        this.lblNushiName=lblNushiName;
     }
 
     @JsonProperty("txtNushiShikibetsuCode")

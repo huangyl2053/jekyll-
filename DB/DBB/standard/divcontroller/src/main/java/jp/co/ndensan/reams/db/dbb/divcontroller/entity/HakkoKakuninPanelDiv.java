@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Apr 09 09:37:23 JST 2014 
+ * Wed Apr 09 17:14:03 JST 2014 
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.SashidashininKakuninPanelDiv;
@@ -28,8 +28,6 @@ public class HakkoKakuninPanelDiv extends Panel {
     private SashidashininKakuninPanelDiv SashidashininKakuninPanel;
     @JsonProperty("dgHakkoKakunin")
     private DataGrid<dgHakkoKakunin_Row> dgHakkoKakunin;
-    @JsonProperty("Label2")
-    private Label Label2;
     @JsonProperty("Label1")
     private Label Label1;
     @JsonProperty("btnHakko")
@@ -61,16 +59,6 @@ public class HakkoKakuninPanelDiv extends Panel {
     @JsonProperty("dgHakkoKakunin")
     public void setDgHakkoKakunin(DataGrid<dgHakkoKakunin_Row> dgHakkoKakunin) {
         this.dgHakkoKakunin=dgHakkoKakunin;
-    }
-
-    @JsonProperty("Label2")
-    public Label getLabel2() {
-        return Label2;
-    }
-
-    @JsonProperty("Label2")
-    public void setLabel2(Label Label2) {
-        this.Label2=Label2;
     }
 
     @JsonProperty("Label1")

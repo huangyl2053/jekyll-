@@ -33,7 +33,7 @@ public class ShotokuShokaiHakkoKojinMain {
      * @param panel 所得照会票発行個人一覧Div
      * @return 所得照会票発行個人一覧DivのResponseData
      */
-    //TODO N3310酒井 裕亮 住民情報等はDBアクセスが可能になった時点でデータの取得部分を差し替える。
+    //TODO N3317 塚田 萌 住民情報等はDBアクセスが可能になった時点でデータの取得部分を差し替える。
     public ResponseData<ShotokuShokaiHakkoKojinMainDiv> getOnLoadData(ShotokuShokaiHakkoKojinMainDiv panel) {
         ResponseData<ShotokuShokaiHakkoKojinMainDiv> response = new ResponseData<>();
         setDefaultParam(panel);
@@ -55,7 +55,7 @@ public class ShotokuShokaiHakkoKojinMain {
     }
 
     /**
-     * 選択された世帯員の修正ボタンで呼び出され、各項目に世帯員の情報が初期値としてセットされます。
+     * 「選択された世帯員の印字内容を修正する」ボタンで呼び出され、各項目に世帯員の情報が初期値としてセットされます。
      * 選択された世帯員内において優先度の高い世帯員の情報を初期値とする。
      * 転出先が登録されている世帯員の情報を最優先とし、いずれの世帯員も転出先が登録されていない場合は転入前の情報が登録されている世帯員とする。
      * いずれの世帯員も転出先、転入前が登録されていない場合はリスト先頭世帯員の情報を初期値とする。
@@ -136,7 +136,6 @@ public class ShotokuShokaiHakkoKojinMain {
 
             }
             createRowKetsugo(kojin);
-
         }
 
         panel.getShotokuShokaiHyoHakkoIchiranPanel().getDgShotokuShokaiHyoHakko().setDataSource(kojinData);
@@ -159,7 +158,6 @@ public class ShotokuShokaiHakkoKojinMain {
      */
     private void setDefaultJuminzeiNendo(ShotokuShokaiHakkoKojinMainDiv panel) {
         panel.getShotokuShokaiHyoHakkoIchiranPanel().getDdlJuminzeiNendo().setSelectedItem(RDate.getNowDate().getYear().wareki().eraType(EraType.KANJI_RYAKU).toDateString());
-//        panel.getSSHHakkoPanel().getDdlJuminzeiNendo().setSelectedItem(new RString("H26"));
     }
 
     /*
@@ -187,7 +185,6 @@ public class ShotokuShokaiHakkoKojinMain {
         List<dgShotokuShokaiHyoHakko_Row> arraydata = createRowSetaiTestData();
         DataGrid<dgShotokuShokaiHyoHakko_Row> grid = panel.getShotokuShokaiHyoHakkoIchiranPanel().getDgShotokuShokaiHyoHakko();
         grid.setDataSource(arraydata);
-
     }
 
     /*
@@ -198,6 +195,9 @@ public class ShotokuShokaiHakkoKojinMain {
             String 現住所, String 送付先郵便番号, String 送付先1, String 送付先2, String 送付先3, String 御中, String 様) {
 
         dgShotokuShokaiHyoHakko_Row rowKojinData = new dgShotokuShokaiHyoHakko_Row(RString.HALF_SPACE, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, new Button());
+//↓引数を渡さないとそもそも情報が出力されない。引数ありのコンストラクタを使うこと
+// dgShotokuShokaiHyoHakko_Row rowKojinData = new dgShotokuShokaiHyoHakko_Row();
+
 //        rowKojinData.setTxtIchiranShotokuKubun(new RString(所得区分));
         rowKojinData.setTxtShikibetsuCode(new RString(識別コード));
         rowKojinData.setTxtShimei(new RString(氏名));
@@ -218,6 +218,7 @@ public class ShotokuShokaiHakkoKojinMain {
         rowKojinData.setTxtSofusakiOnchu(new RString(御中));
         rowKojinData.setTxtSofusakisama(new RString(様));
         createRowKetsugo(rowKojinData);
+
         return rowKojinData;
     }
 
@@ -227,6 +228,7 @@ public class ShotokuShokaiHakkoKojinMain {
     private dgShuseiSetaiIn_Row createRowShuseiTaishoSetaiIn(String 識別コード, String 氏名) {
         dgShuseiSetaiIn_Row shuseiTaishoSetaiInData = new dgShuseiSetaiIn_Row(RString.EMPTY, RString.EMPTY, RString.EMPTY);
         shuseiTaishoSetaiInData.setTxtKetsugoShuseiYo(new RString(識別コード.concat("<br>").concat(氏名)));
+
         return shuseiTaishoSetaiInData;
     }
 
@@ -235,15 +237,15 @@ public class ShotokuShokaiHakkoKojinMain {
      */
     private List<dgShotokuShokaiHyoHakko_Row> createRowSetaiTestData() {
         List<dgShotokuShokaiHyoHakko_Row> arrayData = new ArrayList<>();
-        dgShotokuShokaiHyoHakko_Row item = null;
+        dgShotokuShokaiHyoHakko_Row item;
 
-        item = createRowKojinData(/*"未申告",*/"000000000000001", "電算　太郎", "種別", " 男", "世帯主", "19700101", "２号", "長野県千曲市", "20100101", "長野県電算市", "20140101", "長野県長野市", "1234567", "長野県電算市", "", "", "長野県電算市役所", "電算市長");
+        item = createRowKojinData(/*"未申告",*/"000000000000001", "電算　太郎", "種別", " 男", "世帯主", "19700101", "2号", "長野県千曲市", "20100101", "長野県電算市", "20140101", "長野県長野市", "1234567", "長野県電算市", "", "", "長野県電算市役所", "電算市長");
         arrayData.add(item);
-        item = createRowKojinData(/*"未申告",*/"000000000000011", "電算　花子", "種別", " 女", "妻", "19750101", "２号", "長野県千曲市", "20100101", "長野県電算市", "20140101", "長野県長野市", "1234567", "長野県電算市", "", "", "長野県電算市役所", "電算市長");
+        item = createRowKojinData(/*"未申告",*/"000000000000011", "電算　花子", "種別", " 女", "妻", "19750101", "2号", "長野県千曲市", "20100101", "長野県電算市", "20140101", "長野県長野市", "1234567", "長野県電算市", "", "", "長野県電算市役所", "電算市長");
         arrayData.add(item);
         item = createRowKojinData(/*"未申告",*/"000000000000111", "電算　姫子", "種別", " 女", "子", "19950101", "", "長野県千曲市", "20100101", "長野県電算市", "20140101", "長野県長野市", "1234567", "長野県電算市", "", "", "長野県電算市役所", "電算市長");
         arrayData.add(item);
-        item = createRowKojinData(/*"未申告",*/"000000000001111", "電算　次郎", "種別", " 男", "子", "19950101", "", "長野県中野市", "20100101", "長野県飯田市", "20140101", "長野県長野市", "1234567", "長野県電算市", "", "", "長野県電算市役所", "電算市長");
+        item = createRowKojinData(/*"未申告",*/"000000000001111", "電算　次郎", "種別", " 男", "子", "19950101", "", "長野県千曲市", "20100101", "長野県電算市", "20140101", "長野県長野市", "1234567", "長野県電算市", "", "", "長野県電算市役所", "電算市長");
         arrayData.add(item);
         item = createRowKojinData(/*"未申告",*/"000000000011111", "電算　三郎", "種別", " 男", "子", "19950101", "", "長野県千曲市", "20100101", "長野県電算市", "20140101", "長野県長野市", "1234567", "長野県電算市", "", "", "長野県電算市役所", "電算市長");
         arrayData.add(item);
@@ -251,6 +253,7 @@ public class ShotokuShokaiHakkoKojinMain {
         arrayData.add(item);
         item = createRowKojinData(/*"未申告",*/"000000001111111", "電算　五郎", "種別", " 男", "子", "19950101", "", "長野県千曲市", "20100101", "長野県電算市", "20140101", "長野県長野市", "1234567", "長野県電算市", "", "", "長野県電算市役所", "電算市長");
         arrayData.add(item);
+
         return arrayData;
     }
 
@@ -384,7 +387,7 @@ public class ShotokuShokaiHakkoKojinMain {
     }
 
     private dgHakkoKakunin_Row makeSigleSetaiInRow(dgShotokuShokaiHyoHakko_Row setaiIn) {
-        dgHakkoKakunin_Row singleHakkoSetaiIn = new dgHakkoKakunin_Row(RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.HALF_SPACE, RString.EMPTY);
+        dgHakkoKakunin_Row singleHakkoSetaiIn = new dgHakkoKakunin_Row(RString.EMPTY, RString.EMPTY,/* RString.EMPTY,*/ RString.HALF_SPACE, RString.EMPTY);
         singleHakkoSetaiIn.setTxtGenJusho(setaiIn.getTxtGenJusho());
         singleHakkoSetaiIn.setTxtSetaiin(setaiIn.getTxtShimei());
 //        singleHakkoSetaiIn.setTxtKakuninShotokuKubun(setaiIn.getTxtIchiranShotokuKubun());
@@ -401,7 +404,7 @@ public class ShotokuShokaiHakkoKojinMain {
     }
 
     private dgHakkoKakunin_Row makePareSetaiInRow(dgShotokuShokaiHyoHakko_Row setaiIn1, dgShotokuShokaiHyoHakko_Row setaiIn2) {
-        dgHakkoKakunin_Row singleHakkoSetaiIn = new dgHakkoKakunin_Row(RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.HALF_SPACE, RString.EMPTY);
+        dgHakkoKakunin_Row singleHakkoSetaiIn = new dgHakkoKakunin_Row(RString.EMPTY, RString.EMPTY,/* RString.EMPTY,*/ RString.HALF_SPACE, RString.EMPTY);
         singleHakkoSetaiIn.setTxtGenJusho(setaiIn1.getTxtGenJusho());
         singleHakkoSetaiIn.setTxtSetaiin(setaiIn1.getTxtShimei().concat(new RString("<br>")).concat(setaiIn2.getTxtShimei()));
 //        singleHakkoSetaiIn.setTxtKakuninShotokuKubun(setaiIn1.getTxtIchiranShotokuKubun().concat(new RString("<br>")).concat(setaiIn2.getTxtIchiranShotokuKubun()));

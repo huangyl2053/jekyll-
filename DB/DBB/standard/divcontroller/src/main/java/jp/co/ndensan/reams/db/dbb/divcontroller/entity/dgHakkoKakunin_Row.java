@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Apr 09 09:37:23 JST 2014 
+ * Wed Apr 09 17:14:03 JST 2014 
  */
 
 
@@ -23,24 +23,21 @@ public class dgHakkoKakunin_Row extends DataRow {
     private RString txtSofusaki;
     private RString txtTennyuuOrTenshutsu;
     private RString txtGenJusho;
-    private RString txtKakuninShotokuKubun;
     private RString txtSetaiin;
 
     public dgHakkoKakunin_Row() {
         super();
     }
 
-    public dgHakkoKakunin_Row(RString txtSofusaki, RString txtTennyuuOrTenshutsu, RString txtGenJusho, RString txtKakuninShotokuKubun, RString txtSetaiin) {
+    public dgHakkoKakunin_Row(RString txtSofusaki, RString txtTennyuuOrTenshutsu, RString txtGenJusho, RString txtSetaiin) {
         super();
         this.setOriginalData("txtSofusaki", txtSofusaki);
         this.setOriginalData("txtTennyuuOrTenshutsu", txtTennyuuOrTenshutsu);
         this.setOriginalData("txtGenJusho", txtGenJusho);
-        this.setOriginalData("txtKakuninShotokuKubun", txtKakuninShotokuKubun);
         this.setOriginalData("txtSetaiin", txtSetaiin);
         this.txtSofusaki = txtSofusaki;
         this.txtTennyuuOrTenshutsu = txtTennyuuOrTenshutsu;
         this.txtGenJusho = txtGenJusho;
-        this.txtKakuninShotokuKubun = txtKakuninShotokuKubun;
         this.txtSetaiin = txtSetaiin;
     }
 
@@ -54,10 +51,6 @@ public class dgHakkoKakunin_Row extends DataRow {
 
     public RString getTxtGenJusho() {
         return txtGenJusho;
-    }
-
-    public RString getTxtKakuninShotokuKubun() {
-        return txtKakuninShotokuKubun;
     }
 
     public RString getTxtSetaiin() {
@@ -77,11 +70,6 @@ public class dgHakkoKakunin_Row extends DataRow {
     public void setTxtGenJusho(RString txtGenJusho) {
         this.setOriginalData("txtGenJusho", txtGenJusho);
         this.txtGenJusho = txtGenJusho;
-    }
-
-    public void setTxtKakuninShotokuKubun(RString txtKakuninShotokuKubun) {
-        this.setOriginalData("txtKakuninShotokuKubun", txtKakuninShotokuKubun);
-        this.txtKakuninShotokuKubun = txtKakuninShotokuKubun;
     }
 
     public void setTxtSetaiin(RString txtSetaiin) {
