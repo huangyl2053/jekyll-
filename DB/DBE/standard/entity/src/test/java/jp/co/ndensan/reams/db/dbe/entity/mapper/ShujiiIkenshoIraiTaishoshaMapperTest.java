@@ -76,7 +76,7 @@ public class ShujiiIkenshoIraiTaishoshaMapperTest extends TestBase {
             認定申請情報Entity = DbT5001NinteiShinseiJohoEntityMock.getSpiedInstance();
             認定申請情報Entity.setShinseishoKanriNo(new ShinseishoKanriNo(new RString("0001")));
             認定申請情報Entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(new RString("111111")));
-            認定申請情報Entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("0002")));
+            認定申請情報Entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("0000000002")));
             認定申請情報Entity.setNinteiShinseiYMD(new FlexibleDate(new RString("20140101")));
             認定申請情報Entity.setNinteiShinseiShinseijiKubunCode(NinteiShinseiKubunShinsei.新規申請);
             個人 = mock(IKojin.class);

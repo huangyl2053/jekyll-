@@ -23,15 +23,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShujiiIkenshoRegulationOf2009 implements IShujiiIkenshoRegulation {
 
     private static Map<ShujiiIkenshoItemKubun, IShujiiIkenshoItem> 意見書定義;
+    private static final RString その他 = new RString("その他");
+    private static ShujiiIkenshoRegulationBuilder builder;
 
     static {
         意見書定義 = new EnumMap<>(ShujiiIkenshoItemKubun.class);
+        builder = new ShujiiIkenshoRegulationBuilder(意見書定義);
         initialize();
     }
 
-    private static void initialize() {
-        final RString その他 = new RString("その他");
-        ShujiiIkenshoRegulationBuilder builder = new ShujiiIkenshoRegulationBuilder(意見書定義);
+    private static void initializeShobyo() {
         builder.set意見書項目グループ(ShujiiIkenshoItemGroupOf2009.傷病, ShujiiIkenshoItemSubGroupOf2009.診断名_発症年月日);
         builder.set意見書項目("", ShujiiIkenshoItemKubun.診断名1, "１．診断名", new InputItem());
         builder.set意見書項目("", ShujiiIkenshoItemKubun.発症年月日1, "発症年月日", new InputItem());
@@ -44,6 +45,9 @@ public class ShujiiIkenshoRegulationOf2009 implements IShujiiIkenshoRegulation {
         builder.set意見書項目("", ShujiiIkenshoItemKubun.具体的な状況, "", new InputItem());
         builder.set意見書項目グループ(ShujiiIkenshoItemGroupOf2009.傷病, ShujiiIkenshoItemSubGroupOf2009.傷病_治療内容);
         builder.set意見書項目("", ShujiiIkenshoItemKubun.治療内容, "", new InputItem());
+    }
+
+    private static void initializeTokubetsuIryo() {
         builder.set意見書項目グループ(ShujiiIkenshoItemGroupOf2009.特別医療, ShujiiIkenshoItemSubGroupOf2009.処置内容);
         builder.set意見書項目("", ShujiiIkenshoItemKubun.点滴の管理, "点滴の管理", new ChoiceItem(ChoiceResultItem.Checked.values()));
         builder.set意見書項目("", ShujiiIkenshoItemKubun.中心静脈栄養, "中心静脈栄養", new ChoiceItem(ChoiceResultItem.Checked.values()));
@@ -59,6 +63,11 @@ public class ShujiiIkenshoRegulationOf2009 implements IShujiiIkenshoRegulation {
         builder.set意見書項目("", ShujiiIkenshoItemKubun.褥瘡の処置, "褥瘡の処置", new ChoiceItem(ChoiceResultItem.Checked.values()));
         builder.set意見書項目グループ(ShujiiIkenshoItemGroupOf2009.特別医療, ShujiiIkenshoItemSubGroupOf2009.失禁対応);
         builder.set意見書項目("", ShujiiIkenshoItemKubun.カテーテル, "カテーテル（コンドームカテーテル、留置カテーテル 等）", new ChoiceItem(ChoiceResultItem.Checked.values()));
+    }
+
+    private static void initialize() {
+        initializeShobyo();
+        initializeTokubetsuIryo();
         builder.set意見書項目グループ(ShujiiIkenshoItemGroupOf2009.心身状態, ShujiiIkenshoItemSubGroupOf2009.自立度);
         builder.set意見書項目("", ShujiiIkenshoItemKubun.障害高齢者日常生活自立度, "障害高齢者の日常生活自立度(寝たきり度)", new ChoiceItem(ChoiceResultItem.ShogaiJiritsu.values()));
         builder.set主要意見書項目("", ShujiiIkenshoItemKubun.認知症高齢者日常生活自立度, "認知症高齢者の日常生活自立度", new ChoiceItem(ChoiceResultItem.NinchishoJiritsu.values()));

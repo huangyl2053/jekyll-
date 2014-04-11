@@ -67,7 +67,7 @@ public class RenkeiyoDataSofuKirokuManagerTest extends TestBase {
 
         @Test
         public void 被保険者番号_H000000001_指定したとき_被保険者番号にH000000001を持つ連携用データ送付記録情報が返る() {
-            RString 被保険者番号 = new RString("H00000001");
+            RString 被保険者番号 = new RString("H000000001");
             List<RenkeiyoDataSofuKiroku> selectlist = sut.get連携用データ送付記録リスト(被保険者番号);
             assertThat(selectlist.get(0).get被保険者番号().getColumnValue(), is(被保険者番号));
         }
@@ -237,7 +237,7 @@ public class RenkeiyoDataSofuKirokuManagerTest extends TestBase {
     }
 
     private static RenkeiyoDataSofuKiroku RenkeiData(ShinseishoKanriNo 申請書管理番号) throws NullPointerException {
-        KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(new RString("H00000001"));
+        KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(new RString("H000000001"));
         NinteiShinseijiKubun 認定申請時区分 = NinteiShinseijiKubun.新規申請;
         HikiwatashiKubun 引渡し区分 = HikiwatashiKubun.引き渡し未済;
         SaiSoufuKubun 再送付区分 = SaiSoufuKubun.再送信;

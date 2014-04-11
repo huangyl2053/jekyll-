@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.basic.helper;
 
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.util.db.DbAccessor;
+import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorForAddType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 
 /**
@@ -21,7 +21,7 @@ public class NinteiShinseiJohoDacMock implements INinteiShinseiJohoDacMock {
 
     @Override
     public int insert(DbT5001NinteiShinseiJohoEntity entity) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorForAddType accessor = new DbAccessorForAddType(session);
         return accessor.insert(entity).execute();
     }
 }

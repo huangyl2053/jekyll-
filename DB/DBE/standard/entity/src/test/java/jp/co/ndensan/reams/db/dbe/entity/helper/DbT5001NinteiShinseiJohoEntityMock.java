@@ -32,7 +32,7 @@ public class DbT5001NinteiShinseiJohoEntityMock {
         entity.setShinseishoKanriNo(new ShinseishoKanriNo(new RString("申請書管理番号")));
         entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(new RString("123456")));
         entity.setShishoCode(new RString("支所コード"));
-        entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("被保険者番号")));
+        entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("0000000002")));
         entity.setShikibetsuCode(new ShikibetsuCode(new RString("123456")));
         entity.setNinteiShinseiYMD(FlexibleDate.MIN);
         entity.setNinteiShinseiEdabanCode(new EdabanCode(new RString("001")));

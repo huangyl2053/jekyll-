@@ -110,7 +110,7 @@ public class ShujiiIkenshoIraiTaishoshaListTest extends DbeTestBase {
         IShikibetsuTaisho 識別対象 = new _ShikibetsuTaisho(new ShikibetsuCode("0000000001"), null, 0, true, null, FlexibleDate.MAX, FlexibleDate.EMPTY,
                 new SetaiCode("00001"), null, null, JuminShubetsu.日本人, null, null, null, null, 0);
         ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("000001"));
-        KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(new RString("0002"));
+        KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(new RString("0000000002"));
         FlexibleDate 認定申請年月日 = new FlexibleDate(new RString("20140101"));
         NinteiShinseiKubunShinsei 認定申請区分 = NinteiShinseiKubunShinsei.新規申請;
         RString 氏名 = new RString("あああ");

@@ -61,7 +61,7 @@ public class NinteichosaIraiTaishoshaTest extends TestBase {
         public void setUp() {
             申請書管理番号 = new ShinseishoKanriNo(new RString("0001"));
             証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("0001"));
-            被保険者 = new KaigoHihokenshaNo(new RString("0001"));
+            被保険者 = new KaigoHihokenshaNo(new RString("0000000001"));
             認定申請年月日 = new FlexibleDate("20140101");
             認定申請区分 = NinteiShinseiKubunShinsei.新規申請;
 //            個人情報 = mock(IKojin.class);

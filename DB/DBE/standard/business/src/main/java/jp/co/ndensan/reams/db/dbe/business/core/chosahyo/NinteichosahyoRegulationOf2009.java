@@ -155,10 +155,13 @@ public class NinteichosahyoRegulationOf2009 implements INinteichosahyoRegulation
         builder.set調査項目グループ(NinteichosaItemGroupOf2009.特別医療, NinteichosaItemSubGroupOf2009.特別な対応);
         builder.set調査項目("6-10", NinteichosaItemKubunOfKihon.モニター測定, "モニター測定（血圧、心拍、酸素飽和度等）", new ChoiceItem(ChoiceResultItem.Checked.values()));
         builder.set調査項目("6-11", NinteichosaItemKubunOfKihon.じょくそうの処置, "じょくそうの処置", new ChoiceItem(ChoiceResultItem.Checked.values()));
-        builder.set調査項目("6-12", NinteichosaItemKubunOfKihon.カテーテル, "カテーテル（コンドームカテーテル、留置カテーテル、ウロストーマ等）", new ChoiceItem(ChoiceResultItem.Checked.values()));
+        builder.set調査項目("6-12", NinteichosaItemKubunOfKihon.カテーテル, "カテーテル（コンドームカテーテル、留置カテーテル、ウロストーマ等）",
+                new ChoiceItem(ChoiceResultItem.Checked.values()));
         builder.set調査項目グループ(NinteichosaItemGroupOf2009.自立度, NinteichosaItemSubGroup.なし);
-        builder.set調査項目("7-1", NinteichosaItemKubunOfKihon.障害高齢者の日常生活自立度, "障害高齢者の日常生活自立度（寝たきり度）", new ChoiceItem(ChoiceResultItem.ShogaiJiritsu.values()));
-        builder.set調査項目("7-2", NinteichosaItemKubunOfKihon.認知症高齢者の日常生活自立度, "認知症高齢者の日常生活自立度", new ChoiceItem(ChoiceResultItem.NinchishoJiritsu.values()));
+        builder.set調査項目("7-1", NinteichosaItemKubunOfKihon.障害高齢者の日常生活自立度, "障害高齢者の日常生活自立度（寝たきり度）",
+                new ChoiceItem(ChoiceResultItem.ShogaiJiritsu.values()));
+        builder.set調査項目("7-2", NinteichosaItemKubunOfKihon.認知症高齢者の日常生活自立度, "認知症高齢者の日常生活自立度",
+                new ChoiceItem(ChoiceResultItem.NinchishoJiritsu.values()));
     }
 
     @Override

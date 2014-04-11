@@ -90,7 +90,7 @@ public class NinteichosaIraiTaishoshaMapperTest extends TestBase {
             要介護認定申請情報Entity = DbT5001NinteiShinseiJohoEntityMock.getSpiedInstance();
             要介護認定申請情報Entity.setShinseishoKanriNo(new ShinseishoKanriNo(new RString("0001")));
             要介護認定申請情報Entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(new RString("111111")));
-            要介護認定申請情報Entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("0002")));
+            要介護認定申請情報Entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("0000000002")));
             要介護認定申請情報Entity.setNinteiShinseiYMD(new FlexibleDate(new RString("20140101")));
             要介護認定申請情報Entity.setNinteiShinseiShinseijiKubunCode(NinteiShinseiKubunShinsei.新規申請);
             個人 = createKojinWhoseNameIs("個人", "こじん");
