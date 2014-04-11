@@ -74,11 +74,11 @@ public class HihokenshaDaichoDac implements IInsertable<DbT1001HihokenshaDaichoE
     }
 
     /**
-     * 指定の{@link LasdecCode 地方公共団体コード}と{@link KaigoHihokenshaNo 介護被保険者番号}から特定される被保険者の、
+     * 指定の{@link LasdecCode 地方公共団体コード}と{@link KaigoHihokenshaNo 被保険者番号}から特定される被保険者の、
      * 直近の資格情報を検索します。
      *
      * @param 地方公共団体コード {@link LasdecCode 地方公共団体コード}
-     * @param 被保険者番号 {@link KaigoHihokenshaNo 介護被保険者番号}
+     * @param 被保険者番号 {@link KaigoHihokenshaNo 被保険者番号}
      * @return 直近の資格情報を保持した{@link DbT1001HihokenshaDaichoEntity 被保険者台帳Entity}
      */
     public DbT1001HihokenshaDaichoEntity selectLatestOfPerson(LasdecCode 地方公共団体コード, KaigoHihokenshaNo 被保険者番号) {
