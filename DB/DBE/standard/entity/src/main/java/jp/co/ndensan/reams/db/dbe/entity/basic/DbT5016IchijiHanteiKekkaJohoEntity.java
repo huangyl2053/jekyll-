@@ -57,18 +57,18 @@ public class DbT5016IchijiHanteiKekkaJohoEntity implements IDbAccessable {
     private int chukanHyokaKomoku5gun;
     private int chukanHyokaKomoku6gun;
     private int chukanHyokaKomoku7gun;
-    private RString ichijiHnateiKeikokuCode;
+    private RString ichijiHanteiKeikokuCode;
     private Code jotaiAnteiseiCode;
     private Decimal ninchishoJiritsudoIIijoNoGaizensei;
     private Code suiteiKyufuKubunCode;
     private Code ninchishoKoreishaShihyoCode;
-    private int jiiritsudoKumiawase1;
-    private int jiiritsudoKumiawase2;
-    private int jiiritsudoKumiawase3;
-    private int jiiritsudoKumiawase4;
-    private int jiiritsudoKumiawase5;
-    private int jiiritsudoKumiawase6;
-    private int jiiritsudoKumiawase7;
+    private int jiritsudoKumiawase1;
+    private int jiritsudoKumiawase2;
+    private int jiritsudoKumiawase3;
+    private int jiritsudoKumiawase4;
+    private int jiritsudoKumiawase5;
+    private int jiritsudoKumiawase6;
+    private int jiritsudoKumiawase7;
     private Code gaizenseiHyokaCode;
     private int gaizenseiHyokaPercent;
     private RString ichijiHanteiSofuKubun;
@@ -571,21 +571,21 @@ public class DbT5016IchijiHanteiKekkaJohoEntity implements IDbAccessable {
     }
 
     /**
-     * getIchijiHnateiKeikokuCode
+     * getIchijiHanteiKeikokuCode
      *
-     * @return ichijiHnateiKeikokuCode
+     * @return ichijiHanteiKeikokuCode
      */
-    public RString getIchijiHnateiKeikokuCode() {
-        return ichijiHnateiKeikokuCode;
+    public RString getIchijiHanteiKeikokuCode() {
+        return ichijiHanteiKeikokuCode;
     }
 
     /**
-     * setIchijiHnateiKeikokuCode
+     * setIchijiHanteiKeikokuCode
      *
-     * @param ichijiHnateiKeikokuCode ichijiHnateiKeikokuCode
+     * @param ichijiHanteiKeikokuCode ichijiHanteiKeikokuCode
      */
-    public void setIchijiHnateiKeikokuCode(RString ichijiHnateiKeikokuCode) {
-        this.ichijiHnateiKeikokuCode = ichijiHnateiKeikokuCode;
+    public void setIchijiHanteiKeikokuCode(RString ichijiHanteiKeikokuCode) {
+        this.ichijiHanteiKeikokuCode = ichijiHanteiKeikokuCode;
     }
 
     /**
@@ -716,129 +716,129 @@ public class DbT5016IchijiHanteiKekkaJohoEntity implements IDbAccessable {
     }
 
     /**
-     * getJiiritsudoKumiawase1
+     * getJiritsudoKumiawase1
      *
-     * @return jiiritsudoKumiawase1
+     * @return jiritsudoKumiawase1
      */
-    public int getJiiritsudoKumiawase1() {
-        return jiiritsudoKumiawase1;
+    public int getJiritsudoKumiawase1() {
+        return jiritsudoKumiawase1;
     }
 
     /**
-     * setJiiritsudoKumiawase1
+     * setJiritsudoKumiawase1
      *
-     * @param jiiritsudoKumiawase1 jiiritsudoKumiawase1
+     * @param jiritsudoKumiawase1 jiritsudoKumiawase1
      */
-    public void setJiiritsudoKumiawase1(int jiiritsudoKumiawase1) {
-        this.jiiritsudoKumiawase1 = jiiritsudoKumiawase1;
+    public void setJiritsudoKumiawase1(int jiritsudoKumiawase1) {
+        this.jiritsudoKumiawase1 = jiritsudoKumiawase1;
     }
 
     /**
-     * getJiiritsudoKumiawase2
+     * getJiritsudoKumiawase2
      *
-     * @return jiiritsudoKumiawase2
+     * @return jiritsudoKumiawase2
      */
-    public int getJiiritsudoKumiawase2() {
-        return jiiritsudoKumiawase2;
+    public int getJiritsudoKumiawase2() {
+        return jiritsudoKumiawase2;
     }
 
     /**
-     * setJiiritsudoKumiawase2
+     * setJiritsudoKumiawase2
      *
-     * @param jiiritsudoKumiawase2 jiiritsudoKumiawase2
+     * @param jiritsudoKumiawase2 jiritsudoKumiawase2
      */
-    public void setJiiritsudoKumiawase2(int jiiritsudoKumiawase2) {
-        this.jiiritsudoKumiawase2 = jiiritsudoKumiawase2;
+    public void setJiritsudoKumiawase2(int jiritsudoKumiawase2) {
+        this.jiritsudoKumiawase2 = jiritsudoKumiawase2;
     }
 
     /**
-     * getJiiritsudoKumiawase3
+     * getJiritsudoKumiawase3
      *
-     * @return jiiritsudoKumiawase3
+     * @return jiritsudoKumiawase3
      */
-    public int getJiiritsudoKumiawase3() {
-        return jiiritsudoKumiawase3;
+    public int getJiritsudoKumiawase3() {
+        return jiritsudoKumiawase3;
     }
 
     /**
-     * setJiiritsudoKumiawase3
+     * setJiritsudoKumiawase3
      *
-     * @param jiiritsudoKumiawase3 jiiritsudoKumiawase3
+     * @param jiritsudoKumiawase3 jiritsudoKumiawase3
      */
-    public void setJiiritsudoKumiawase3(int jiiritsudoKumiawase3) {
-        this.jiiritsudoKumiawase3 = jiiritsudoKumiawase3;
+    public void setJiritsudoKumiawase3(int jiritsudoKumiawase3) {
+        this.jiritsudoKumiawase3 = jiritsudoKumiawase3;
     }
 
     /**
-     * getJiiritsudoKumiawase4
+     * getJiritsudoKumiawase4
      *
-     * @return jiiritsudoKumiawase4
+     * @return jiritsudoKumiawase4
      */
-    public int getJiiritsudoKumiawase4() {
-        return jiiritsudoKumiawase4;
+    public int getJiritsudoKumiawase4() {
+        return jiritsudoKumiawase4;
     }
 
     /**
-     * setJiiritsudoKumiawase4
+     * setJiritsudoKumiawase4
      *
-     * @param jiiritsudoKumiawase4 jiiritsudoKumiawase4
+     * @param jiritsudoKumiawase4 jiritsudoKumiawase4
      */
-    public void setJiiritsudoKumiawase4(int jiiritsudoKumiawase4) {
-        this.jiiritsudoKumiawase4 = jiiritsudoKumiawase4;
+    public void setJiritsudoKumiawase4(int jiritsudoKumiawase4) {
+        this.jiritsudoKumiawase4 = jiritsudoKumiawase4;
     }
 
     /**
-     * getJiiritsudoKumiawase5
+     * getJiritsudoKumiawase5
      *
-     * @return jiiritsudoKumiawase5
+     * @return jiritsudoKumiawase5
      */
-    public int getJiiritsudoKumiawase5() {
-        return jiiritsudoKumiawase5;
+    public int getJiritsudoKumiawase5() {
+        return jiritsudoKumiawase5;
     }
 
     /**
-     * setJiiritsudoKumiawase5
+     * setJiritsudoKumiawase5
      *
-     * @param jiiritsudoKumiawase5 jiiritsudoKumiawase5
+     * @param jiritsudoKumiawase5 jiritsudoKumiawase5
      */
-    public void setJiiritsudoKumiawase5(int jiiritsudoKumiawase5) {
-        this.jiiritsudoKumiawase5 = jiiritsudoKumiawase5;
+    public void setJiritsudoKumiawase5(int jiritsudoKumiawase5) {
+        this.jiritsudoKumiawase5 = jiritsudoKumiawase5;
     }
 
     /**
-     * getJiiritsudoKumiawase6
+     * getJiritsudoKumiawase6
      *
-     * @return jiiritsudoKumiawase6
+     * @return jiritsudoKumiawase6
      */
-    public int getJiiritsudoKumiawase6() {
-        return jiiritsudoKumiawase6;
+    public int getJiritsudoKumiawase6() {
+        return jiritsudoKumiawase6;
     }
 
     /**
-     * setJiiritsudoKumiawase6
+     * setJiritsudoKumiawase6
      *
-     * @param jiiritsudoKumiawase6 jiiritsudoKumiawase6
+     * @param jiritsudoKumiawase6 jiritsudoKumiawase6
      */
-    public void setJiiritsudoKumiawase6(int jiiritsudoKumiawase6) {
-        this.jiiritsudoKumiawase6 = jiiritsudoKumiawase6;
+    public void setJiritsudoKumiawase6(int jiritsudoKumiawase6) {
+        this.jiritsudoKumiawase6 = jiritsudoKumiawase6;
     }
 
     /**
-     * getJiiritsudoKumiawase7
+     * getJiritsudoKumiawase7
      *
-     * @return jiiritsudoKumiawase7
+     * @return jiritsudoKumiawase7
      */
-    public int getJiiritsudoKumiawase7() {
-        return jiiritsudoKumiawase7;
+    public int getJiritsudoKumiawase7() {
+        return jiritsudoKumiawase7;
     }
 
     /**
-     * setJiiritsudoKumiawase7
+     * setJiritsudoKumiawase7
      *
-     * @param jiiritsudoKumiawase7 jiiritsudoKumiawase7
+     * @param jiritsudoKumiawase7 jiritsudoKumiawase7
      */
-    public void setJiiritsudoKumiawase7(int jiiritsudoKumiawase7) {
-        this.jiiritsudoKumiawase7 = jiiritsudoKumiawase7;
+    public void setJiritsudoKumiawase7(int jiritsudoKumiawase7) {
+        this.jiritsudoKumiawase7 = jiritsudoKumiawase7;
     }
 
     /**

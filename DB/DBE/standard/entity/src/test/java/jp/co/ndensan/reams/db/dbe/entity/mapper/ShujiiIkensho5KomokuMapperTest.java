@@ -6,11 +6,14 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkensho5Komoku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.DentatsuNoryokuKomoku;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinchiNoryokuKomoku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShokujiKoiHyokaKomoku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TankiKiokuKomoku;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5013ShujiiIkenshoShosaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.IchijiHanteiTestEntityCreator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -30,10 +33,24 @@ public class ShujiiIkensho5KomokuMapperTest {
     public static class to主治医意見書5項目のテスト extends DbeTestBase {
 
         private ShujiiIkensho5Komoku result;
+        private Code 障害高齢者自立度コード;
+        private Code 認知症高齢者自立度コード;
+        private TankiKiokuKomoku 短期記憶;
+        private NinchiNoryokuKomoku 認知能力;
+        private DentatsuNoryokuKomoku 伝達能力;
+        private ShokujiKoiHyokaKomoku 食事行為;
 
         @Before
         public void setUp() {
-            result = ShujiiIkensho5KomokuMapper.to主治医意見書5項目(IchijiHanteiTestEntityCreator.create主治医意見書5項目EntitySpy());
+            障害高齢者自立度コード = new Code("9");
+            認知症高齢者自立度コード = new Code("8");
+            短期記憶 = TankiKiokuKomoku.問題あり;
+            認知能力 = NinchiNoryokuKomoku.判断できない;
+            伝達能力 = DentatsuNoryokuKomoku.具体的要求に限られる;
+            食事行為 = ShokujiKoiHyokaKomoku.自立ないし何とか自分で食べられる;
+            DbT5013ShujiiIkenshoShosaiJohoEntity entity = IchijiHanteiTestEntityCreator.create主治医意見書5項目EntitySpy(KoroshoIFKubun.V99A,
+                    障害高齢者自立度コード, 認知症高齢者自立度コード, 短期記憶, 認知能力, 伝達能力, 食事行為);
+            result = ShujiiIkensho5KomokuMapper.to主治医意見書5項目(entity);
         }
 
         @Test

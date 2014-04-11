@@ -6,7 +6,10 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteichosahyoKaitoHairetsuCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
+import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5009NinteichosahyoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.IchijiHanteiTestEntityCreator;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
@@ -28,9 +31,20 @@ public class NinteichosahyoKaitoHairetsuCodeMapperTest {
 
     public static class to認定調査結果のテスト extends DbeTestBase {
 
+        private ShinseishoKanriNo 申請書管理番号_01;
+        private KoroshoIFKubun IF区分_V02A;
+        private NinteichosaIraiRirekiNo 依頼履歴番号_1;
+        private RString 回答項目;
+
         @Before
         public void setUp() {
-            result = NinteichosahyoKaitoHairetsuCodeMapper.to認定調査結果(IchijiHanteiTestEntityCreator.create認定調査票Entity());
+            申請書管理番号_01 = new ShinseishoKanriNo(new RString("01"));
+            IF区分_V02A = KoroshoIFKubun.V02A;
+            依頼履歴番号_1 = new NinteichosaIraiRirekiNo(1);
+            回答項目 = new RString("22222111112222211111222223333311111222223333344444111112222233333444445555511111222223333344444555556");
+            DbT5009NinteichosahyoJohoEntity entity =
+                    IchijiHanteiTestEntityCreator.create認定調査票Entity(申請書管理番号_01, IF区分_V02A, 依頼履歴番号_1, 回答項目);
+            result = NinteichosahyoKaitoHairetsuCodeMapper.to認定調査結果(entity);
         }
 
         @Test
@@ -41,23 +55,22 @@ public class NinteichosahyoKaitoHairetsuCodeMapperTest {
 
         @Test
         public void マッピング後の調査項目結果は_申請書管理番号に01を持つ() {
-            assertThat(result.get申請書管理番号().value(), is(new RString("01")));
+            assertThat(result.get申請書管理番号(), is(申請書管理番号_01));
         }
 
         @Test
         public void マッピング後の調査項目結果は_厚労省IF区分にV02Aを持つ() {
-            assertThat(result.get厚労省IF区分(), is(KoroshoIFKubun.V02A));
+            assertThat(result.get厚労省IF区分(), is(IF区分_V02A));
         }
 
         @Test
         public void マッピング後の調査項目結果は_要介護認定調査履歴番号に1を持つ() {
-            assertThat(result.get要介護認定調査履歴番号().value(), is(1));
+            assertThat(result.get要介護認定調査履歴番号(), is(依頼履歴番号_1));
         }
 
         @Test
         public void マッピング後の調査項目結果は_get調査項目回答で_entity内の調査項目に対応した回答結果を返す() {
-            assertThat(result.get調査項目回答(),
-                    is(new RString("22222111112222211111222223333311111222223333344444111112222233333444445555511111222223333344444555556")));
+            assertThat(result.get調査項目回答(), is(回答項目));
         }
     }
 }

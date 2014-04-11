@@ -16,12 +16,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  *
  * @author n8178 城間篤人
  */
-public final class NinteichosahyoResultMapper {
+public final class NinteichosahyoKaitoHairetsuCodeMapper {
 
     /**
      * インスタンス化防止のためのプライベートコンストラクタです。
      */
-    private NinteichosahyoResultMapper() {
+    private NinteichosahyoKaitoHairetsuCodeMapper() {
     }
 
     /**

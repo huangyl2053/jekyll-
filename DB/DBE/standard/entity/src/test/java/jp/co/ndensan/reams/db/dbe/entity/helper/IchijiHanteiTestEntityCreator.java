@@ -4,12 +4,22 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.helper;
 
+import java.util.EnumMap;
+import java.util.Map;
+import jp.co.ndensan.reams.db.dbe.business.NichijoSeikatsuJiritsudoKumiawase;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiChukanHyokaKomokuTokuten;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiKijunTime;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChukanHyokaKomokuTokutenItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.DentatsuNoryokuKomoku;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiSohuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KariIchijiHanteiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinchiNoryokuKomoku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShokujiKoiHyokaKomoku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TankiKiokuKomoku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NichijoSeikatsuJiritsudoKumiawaseItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.YokaigoNinteiKijunTimeItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5009NinteichosahyoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5013ShujiiIkenshoShosaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5016IchijiHanteiKekkaJohoEntity;
@@ -37,42 +47,126 @@ public final class IchijiHanteiTestEntityCreator {
      * @return 一次判定結果Entity
      */
     public static DbT5016IchijiHanteiKekkaJohoEntity create一次判定結果Entity() {
+        Map<YokaigoNinteiKijunTimeItemGroup, Integer> 基準時間Map = new EnumMap<>(YokaigoNinteiKijunTimeItemGroup.class);
+        YokaigoNinteiKijunTime 要介護認定等基準時間 = create要介護認定等基準時間(11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
+        YokaigoNinteiChukanHyokaKomokuTokuten 中間評価項目得点 = create中間項目得点群(1, 2, 3, 4, 5, 6, 7);
+        NichijoSeikatsuJiritsudoKumiawase 日常生活自立度組み合わせ = create日常生活自立度組み合わせ(21, 22, 23, 24, 25, 26, 27);
+
+        return create一次判定結果Entity(new ShinseishoKanriNo(new RString("01")), KoroshoIFKubun.V02A, KariIchijiHanteiKubun.本判定,
+                new FlexibleDate("20060401"), new Code("01"), new Code("12"), 要介護認定等基準時間, 中間評価項目得点,
+                new RString("000111000111000111"), new Code("3"), new Decimal(12.34), new Code("4"),
+                new Code("5"), 日常生活自立度組み合わせ, new Code("6"), 48, IchijiHanteiSohuKubun.送付済み, new FlexibleDate("20061231"));
+    }
+
+    private static YokaigoNinteiKijunTime create要介護認定等基準時間(int 基準時間, int 基準時間_食事,
+            int 基準時間_排泄, int 基準時間_移動, int 基準時間_清潔保持, int 基準時間_間接ケア,
+            int 基準時間_BPSD関連, int 基準時間_機能訓練, int 基準時間_医療関連, int 基準時間_認知症加算) {
+        Map<YokaigoNinteiKijunTimeItemGroup, Integer> 基準時間Map = new EnumMap<>(YokaigoNinteiKijunTimeItemGroup.class);
+        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.基準時間, 基準時間);
+        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.基準時間_食事, 基準時間_食事);
+        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.基準時間_排泄, 基準時間_排泄);
+        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.基準時間_移動, 基準時間_移動);
+        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.基準時間_清潔保持, 基準時間_清潔保持);
+        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.基準時間_間接ケア, 基準時間_間接ケア);
+        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.基準時間_BPSD関連, 基準時間_BPSD関連);
+        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.基準時間_機能訓練, 基準時間_機能訓練);
+        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.基準時間_医療関連, 基準時間_医療関連);
+        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.基準時間_認知症加算, 基準時間_認知症加算);
+        return new YokaigoNinteiKijunTime(基準時間Map);
+    }
+
+    private static YokaigoNinteiChukanHyokaKomokuTokuten create中間項目得点群(int 第1群, int 第2群, int 第3群,
+            int 第4群, int 第5群, int 第6群, int 第7群) {
+        Map<ChukanHyokaKomokuTokutenItemGroup, Integer> 得点群 = new EnumMap<>(ChukanHyokaKomokuTokutenItemGroup.class);
+        得点群.put(ChukanHyokaKomokuTokutenItemGroup.第1群, 第1群);
+        得点群.put(ChukanHyokaKomokuTokutenItemGroup.第2群, 第2群);
+        得点群.put(ChukanHyokaKomokuTokutenItemGroup.第3群, 第3群);
+        得点群.put(ChukanHyokaKomokuTokutenItemGroup.第4群, 第4群);
+        得点群.put(ChukanHyokaKomokuTokutenItemGroup.第5群, 第5群);
+        得点群.put(ChukanHyokaKomokuTokutenItemGroup.第6群, 第6群);
+        得点群.put(ChukanHyokaKomokuTokutenItemGroup.第7群, 第7群);
+        return new YokaigoNinteiChukanHyokaKomokuTokuten(得点群);
+    }
+
+    private static NichijoSeikatsuJiritsudoKumiawase create日常生活自立度組み合わせ(int 自立, int 要支援, int 要介護1,
+            int 要介護2, int 要介護3, int 要介護4, int 要介護5) {
+        Map<NichijoSeikatsuJiritsudoKumiawaseItemGroup, Integer> 日常生活自立度組み合わせ =
+                new EnumMap<>(NichijoSeikatsuJiritsudoKumiawaseItemGroup.class);
+        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.自立, 自立);
+        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要支援, 要支援);
+        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護1, 要介護1);
+        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護2, 要介護2);
+        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護3, 要介護3);
+        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護4, 要介護4);
+        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護5, 要介護5);
+        return new NichijoSeikatsuJiritsudoKumiawase(日常生活自立度組み合わせ);
+    }
+
+    /**
+     * 一次判定結果Entityを生成して返します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @param IF区分 IF区分
+     * @param 仮判定区分 仮判定区分
+     * @param 一次判定年月日 一次判定年月日
+     * @param 一次判定結果コード 一次判定結果コード
+     * @param 認知症加算一次判定結果コード 認知症加算一次判定結果コード
+     * @param 要介護認定等基準時間 要介護認定等基準時間
+     * @param 要介護認定中間評価項目得点 要介護認定中間評価項目得点
+     * @param 警告配列コード 警告配列コード
+     * @param 状態安定性コード 状態安定性コード
+     * @param 認知症高齢者自立度2以上蓋然性 認知症高齢者自立度2以上蓋然性
+     * @param 給付区分コード 給付区分コード
+     * @param 運動能力未低下認知症高齢者の指標コード 運動能力未低下認知症高齢者の指標コード
+     * @param 日常生活自立度組み合わせ 日常生活自立度組み合わせ
+     * @param 蓋然性評価コード 蓋然性評価コード
+     * @param 蓋然性評価率 蓋然性評価率
+     * @param 結果送付区分 結果送付区分
+     * @param 結果送付年月 結果送付年月
+     * @return 一次判定結果Entity
+     */
+    public static DbT5016IchijiHanteiKekkaJohoEntity create一次判定結果Entity(ShinseishoKanriNo 申請書管理番号, KoroshoIFKubun IF区分,
+            KariIchijiHanteiKubun 仮判定区分, FlexibleDate 一次判定年月日, Code 一次判定結果コード, Code 認知症加算一次判定結果コード,
+            YokaigoNinteiKijunTime 要介護認定等基準時間, YokaigoNinteiChukanHyokaKomokuTokuten 要介護認定中間評価項目得点,
+            RString 警告配列コード, Code 状態安定性コード, Decimal 認知症高齢者自立度2以上蓋然性, Code 給付区分コード,
+            Code 運動能力未低下認知症高齢者の指標コード, NichijoSeikatsuJiritsudoKumiawase 日常生活自立度組み合わせ, Code 蓋然性評価コード,
+            int 蓋然性評価率, IchijiHanteiSohuKubun 結果送付区分, FlexibleDate 結果送付年月) {
         DbT5016IchijiHanteiKekkaJohoEntity entity = new DbT5016IchijiHanteiKekkaJohoEntity();
-        entity.setShinseishoKanriNo(new ShinseishoKanriNo(new RString("01")));
-        entity.setKoroshoIfShikibetsuCode(KoroshoIFKubun.V02A.getCode());
-        entity.setKariIchijiHanteiKubun(KariIchijiHanteiKubun.本判定.is仮判定());
-        entity.setIchijiHanteiYMD(new FlexibleDate("20060401"));
-        entity.setIchijiHanteiKekkaCode(new Code("01"));
-        entity.setIchijiHanteiKekkaNinchishoKasanCode(new Code("12"));
-        entity.setKijunJikan(11);
-        entity.setKijunJikanShokuji(12);
-        entity.setKijunJikanHaisetsu(13);
-        entity.setKijunJikanIdo(14);
-        entity.setKijunJikanSeiketsuHoji(15);
-        entity.setKijunJikanKansetsuCare(16);
-        entity.setKijunJikanBPSDKanren(17);
-        entity.setKijunJikanKinoKunren(18);
-        entity.setKijunJikanIryoKanren(19);
-        entity.setKijunJikanNinchishoKasan(20);
-        entity.setChukanHyokaKomoku1gun(1);
-        entity.setChukanHyokaKomoku2gun(2);
-        entity.setChukanHyokaKomoku3gun(3);
-        entity.setChukanHyokaKomoku4gun(4);
-        entity.setChukanHyokaKomoku5gun(5);
-        entity.setChukanHyokaKomoku6gun(6);
-        entity.setChukanHyokaKomoku7gun(7);
-        entity.setIchijiHnateiKeikokuCode(new RString("000111000111000111"));
+        entity.setShinseishoKanriNo(申請書管理番号);
+        entity.setKoroshoIfShikibetsuCode(IF区分.getCode());
+        entity.setKariIchijiHanteiKubun(仮判定区分.is仮判定());
+        entity.setIchijiHanteiYMD(一次判定年月日);
+        entity.setIchijiHanteiKekkaCode(一次判定結果コード);
+        entity.setIchijiHanteiKekkaNinchishoKasanCode(認知症加算一次判定結果コード);
+        entity.setKijunJikan(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間));
+        entity.setKijunJikanShokuji(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_食事));
+        entity.setKijunJikanHaisetsu(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_排泄));
+        entity.setKijunJikanIdo(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_移動));
+        entity.setKijunJikanSeiketsuHoji(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_清潔保持));
+        entity.setKijunJikanKansetsuCare(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_間接ケア));
+        entity.setKijunJikanBPSDKanren(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_BPSD関連));
+        entity.setKijunJikanKinoKunren(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_機能訓練));
+        entity.setKijunJikanIryoKanren(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_医療関連));
+        entity.setKijunJikanNinchishoKasan(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_認知症加算));
+        entity.setChukanHyokaKomoku1gun(要介護認定中間評価項目得点.get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第1群));
+        entity.setChukanHyokaKomoku2gun(要介護認定中間評価項目得点.get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第2群));
+        entity.setChukanHyokaKomoku3gun(要介護認定中間評価項目得点.get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第3群));
+        entity.setChukanHyokaKomoku4gun(要介護認定中間評価項目得点.get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第4群));
+        entity.setChukanHyokaKomoku5gun(要介護認定中間評価項目得点.get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第5群));
+        entity.setChukanHyokaKomoku6gun(要介護認定中間評価項目得点.get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第6群));
+        entity.setChukanHyokaKomoku7gun(要介護認定中間評価項目得点.get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第7群));
+        entity.setIchijiHanteiKeikokuCode(new RString("000111000111000111"));
         entity.setJotaiAnteiseiCode(new Code("3"));
         entity.setNinchishoJiritsudoIIijoNoGaizensei(new Decimal(12.34));
         entity.setSuiteiKyufuKubunCode(new Code("4"));
         entity.setNinchishoKoreishaShihyoCode(new Code("5"));
-        entity.setJiiritsudoKumiawase1(21);
-        entity.setJiiritsudoKumiawase2(22);
-        entity.setJiiritsudoKumiawase3(23);
-        entity.setJiiritsudoKumiawase4(24);
-        entity.setJiiritsudoKumiawase5(25);
-        entity.setJiiritsudoKumiawase6(26);
-        entity.setJiiritsudoKumiawase7(27);
+        entity.setJiritsudoKumiawase1(21);
+        entity.setJiritsudoKumiawase2(22);
+        entity.setJiritsudoKumiawase3(23);
+        entity.setJiritsudoKumiawase4(24);
+        entity.setJiritsudoKumiawase5(25);
+        entity.setJiritsudoKumiawase6(26);
+        entity.setJiritsudoKumiawase7(27);
         entity.setGaizenseiHyokaCode(new Code("6"));
         entity.setGaizenseiHyokaPercent(48);
         entity.setIchijiHanteiSofuKubun(new RString("1"));
@@ -87,6 +181,41 @@ public final class IchijiHanteiTestEntityCreator {
      */
     public static DbT5016IchijiHanteiKekkaJohoEntity create一次判定結果EntitySpy() {
         return set一次判定結果コードマスタ項目(create一次判定結果Entity());
+    }
+
+    /**
+     * 一次判定結果Entityを生成して返します。（Spy）
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @param IF区分 IF区分
+     * @param 仮判定区分 仮判定区分
+     * @param 一次判定年月日 一次判定年月日
+     * @param 一次判定結果コード 一次判定結果コード
+     * @param 認知症加算一次判定結果コード 認知症加算一次判定結果コード
+     * @param 要介護認定等基準時間 要介護認定等基準時間
+     * @param 要介護認定中間評価項目得点 要介護認定中間評価項目得点
+     * @param 警告配列コード 警告配列コード
+     * @param 状態安定性コード 状態安定性コード
+     * @param 認知症高齢者自立度2以上蓋然性 認知症高齢者自立度2以上蓋然性
+     * @param 給付区分コード 給付区分コード
+     * @param 運動能力未低下認知症高齢者の指標コード 運動能力未低下認知症高齢者の指標コード
+     * @param 日常生活自立度組み合わせ 日常生活自立度組み合わせ
+     * @param 蓋然性評価コード 蓋然性評価コード
+     * @param 蓋然性評価率 蓋然性評価率
+     * @param 結果送付区分 結果送付区分
+     * @param 結果送付年月 結果送付年月
+     * @return 一次判定結果Entity
+     */
+    public static DbT5016IchijiHanteiKekkaJohoEntity create一次判定結果EntitySpy(ShinseishoKanriNo 申請書管理番号, KoroshoIFKubun IF区分,
+            KariIchijiHanteiKubun 仮判定区分, FlexibleDate 一次判定年月日, Code 一次判定結果コード, Code 認知症加算一次判定結果コード,
+            YokaigoNinteiKijunTime 要介護認定等基準時間, YokaigoNinteiChukanHyokaKomokuTokuten 要介護認定中間評価項目得点,
+            RString 警告配列コード, Code 状態安定性コード, Decimal 認知症高齢者自立度2以上蓋然性, Code 給付区分コード,
+            Code 運動能力未低下認知症高齢者の指標コード, NichijoSeikatsuJiritsudoKumiawase 日常生活自立度組み合わせ, Code 蓋然性評価コード,
+            int 蓋然性評価率, IchijiHanteiSohuKubun 結果送付区分, FlexibleDate 結果送付年月) {
+        return set一次判定結果コードマスタ項目(create一次判定結果Entity(申請書管理番号, IF区分, 仮判定区分, 一次判定年月日, 一次判定結果コード,
+                認知症加算一次判定結果コード, 要介護認定等基準時間, 要介護認定中間評価項目得点, 警告配列コード, 状態安定性コード,
+                認知症高齢者自立度2以上蓋然性, 給付区分コード, 運動能力未低下認知症高齢者の指標コード, 日常生活自立度組み合わせ,
+                蓋然性評価コード, 蓋然性評価率, 結果送付区分, 結果送付年月));
     }
 
     private static DbT5016IchijiHanteiKekkaJohoEntity set一次判定結果コードマスタ項目(DbT5016IchijiHanteiKekkaJohoEntity entity) {
@@ -153,14 +282,34 @@ public final class IchijiHanteiTestEntityCreator {
      * @return 主治医意見書詳細情報Entity
      */
     public static DbT5013ShujiiIkenshoShosaiJohoEntity create主治医意見書5項目Entity() {
+        return create主治医意見書5項目Entity(KoroshoIFKubun.V02A, new Code("9"), new Code("8"), TankiKiokuKomoku.問題あり,
+                NinchiNoryokuKomoku.判断できない, DentatsuNoryokuKomoku.具体的要求に限られる,
+                ShokujiKoiHyokaKomoku.自立ないし何とか自分で食べられる);
+    }
+
+    /**
+     * 主治医意見書詳細情報Entityの中で、一次判定処理に使用される主治医意見書5項目の要素を持ったEntityを返します。
+     *
+     * @param 厚労省IF区分 厚労省IF区分
+     * @param 障害高齢者生活自立度コード 障害高齢者生活自立度コード
+     * @param 認知症高齢者生活自立度コード 認知症高齢者生活自立度コード
+     * @param 短期記憶項目 短期記憶項目
+     * @param 認知能力記憶 認知能力記憶
+     * @param 伝達能力項目 伝達能力項目
+     * @param 食事行為評価項目 食事行為評価項目
+     * @return 主治医意見書詳細情報Entity
+     */
+    public static DbT5013ShujiiIkenshoShosaiJohoEntity create主治医意見書5項目Entity(KoroshoIFKubun 厚労省IF区分,
+            Code 障害高齢者生活自立度コード, Code 認知症高齢者生活自立度コード, TankiKiokuKomoku 短期記憶項目, NinchiNoryokuKomoku 認知能力記憶,
+            DentatsuNoryokuKomoku 伝達能力項目, ShokujiKoiHyokaKomoku 食事行為評価項目) {
         DbT5013ShujiiIkenshoShosaiJohoEntity entity = new DbT5013ShujiiIkenshoShosaiJohoEntity();
-        entity.setKoroshoIfShikibetsuCode(KoroshoIFKubun.V02A.getCode());
-        entity.setIk_seikatsuJiritsudoShyogaiCode(new Code("9"));
-        entity.setIk_seikatsuJiritsudoNinchshoCode(new Code("8"));
-        entity.setIk_chukakuShojoTankiKioku(TankiKiokuKomoku.問題あり.get項目コード());
-        entity.setIk_chukakuShojoNinchiNoryoku(NinchiNoryokuKomoku.判断できない.get項目コード());
-        entity.setIk_chukakuShojoDentatsuNoryoku(DentatsuNoryokuKomoku.具体的要求に限られる.get項目コード());
-        entity.setIk_shokuseikatsuShokujiKoi(ShokujiKoiHyokaKomoku.自立ないし何とか自分で食べられる.get項目コード());
+        entity.setKoroshoIfShikibetsuCode(厚労省IF区分.getCode());
+        entity.setIk_seikatsuJiritsudoShyogaiCode(障害高齢者生活自立度コード);
+        entity.setIk_seikatsuJiritsudoNinchshoCode(認知症高齢者生活自立度コード);
+        entity.setIk_chukakuShojoTankiKioku(短期記憶項目.get項目コード());
+        entity.setIk_chukakuShojoNinchiNoryoku(認知能力記憶.get項目コード());
+        entity.setIk_chukakuShojoDentatsuNoryoku(伝達能力項目.get項目コード());
+        entity.setIk_shokuseikatsuShokujiKoi(食事行為評価項目.get項目コード());
         return entity;
     }
 
@@ -171,6 +320,25 @@ public final class IchijiHanteiTestEntityCreator {
      */
     public static DbT5013ShujiiIkenshoShosaiJohoEntity create主治医意見書5項目EntitySpy() {
         return set主治医意見書コードマスタ項目(create主治医意見書5項目Entity());
+    }
+
+    /**
+     * 主治医意見書詳細情報Entityの中で、一次判定処理に使用される主治医意見書5項目の要素を持ったEntityを返します。(Spy)
+     *
+     * @param 厚労省IF区分 厚労省IF区分
+     * @param 障害高齢者生活自立度コード 障害高齢者生活自立度コード
+     * @param 認知症高齢者生活自立度コード 認知症高齢者生活自立度コード
+     * @param 短期記憶項目 短期記憶項目
+     * @param 認知能力記憶 認知能力記憶
+     * @param 伝達能力項目 伝達能力項目
+     * @param 食事行為評価項目 食事行為評価項目
+     * @return 主治医意見書詳細情報Entity
+     */
+    public static DbT5013ShujiiIkenshoShosaiJohoEntity create主治医意見書5項目EntitySpy(KoroshoIFKubun 厚労省IF区分,
+            Code 障害高齢者生活自立度コード, Code 認知症高齢者生活自立度コード, TankiKiokuKomoku 短期記憶項目, NinchiNoryokuKomoku 認知能力記憶,
+            DentatsuNoryokuKomoku 伝達能力項目, ShokujiKoiHyokaKomoku 食事行為評価項目) {
+        return set主治医意見書コードマスタ項目(create主治医意見書5項目Entity(厚労省IF区分, 障害高齢者生活自立度コード, 認知症高齢者生活自立度コード,
+                短期記憶項目, 認知能力記憶, 伝達能力項目, 食事行為評価項目));
     }
 
     private static DbT5013ShujiiIkenshoShosaiJohoEntity set主治医意見書コードマスタ項目(DbT5013ShujiiIkenshoShosaiJohoEntity entity) {
@@ -230,111 +398,131 @@ public final class IchijiHanteiTestEntityCreator {
      * @return 認定調査票Entity
      */
     public static DbT5009NinteichosahyoJohoEntity create認定調査票Entity() {
+        return create認定調査票Entity(new ShinseishoKanriNo(new RString("01")),
+                KoroshoIFKubun.V02A, new NinteichosaIraiRirekiNo(1),
+                new RString("22222111112222211111222223333311111222223333344444111112222233333444445555511111222223333344444555556"));
+    }
+
+    /**
+     * 認定調査票情報を生成します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @param IF区分 IF区分
+     * @param 依頼履歴番号 依頼履歴番号
+     * @param 回答項目 回答項目
+     * @return 認定調査票情報
+     */
+    public static DbT5009NinteichosahyoJohoEntity create認定調査票Entity(ShinseishoKanriNo 申請書管理番号, KoroshoIFKubun IF区分,
+            NinteichosaIraiRirekiNo 依頼履歴番号, RString 回答項目) {
+        if (回答項目.length() < 101) {
+            回答項目.padRight("0", 101);
+        }
+
         DbT5009NinteichosahyoJohoEntity entity = new DbT5009NinteichosahyoJohoEntity();
-        entity.setShinseishoKanriNo(new ShinseishoKanriNo(new RString("01")));
-        entity.setKoroshoIfShikibetsuCode(KoroshoIFKubun.V02A.getCode());
-        entity.setNinteichosaRirekiNo(1);
-        entity.setCk_mahiHidariJoshi(new RString("2"));
-        entity.setCk_mahiMigiJoshi(new RString("2"));
-        entity.setCk_mahiHidariKashi(new RString("2"));
-        entity.setCk_mahiMigiKashi(new RString("2"));
-        entity.setCk_mahiSonota(new RString("2"));
-        entity.setCk_koshukuKata(new RString("1"));
-        entity.setCk_koshukuHiji(new RString("1"));
-        entity.setCk_koshukuMata(new RString("1"));
-        entity.setCk_koshukuHiza(new RString("1"));
-        entity.setCk_koshukuAshi(new RString("1"));
-        entity.setCk_koshukuSonota(new RString("2"));
-        entity.setCk_negaeri(new RString("2"));
-        entity.setCk_okiagari(new RString("2"));
-        entity.setCk_zaihoji(new RString("2"));
-        entity.setCk_hisetchiZaihoji(new RString("2"));
-        entity.setCk_ryoashiRitsui(new RString("1"));
-        entity.setCk_hoko(new RString("1"));
-        entity.setCk_tachiagari(new RString("1"));
-        entity.setCk_kataashiRitsui(new RString("1"));
-        entity.setCk_yokusoDeiri(new RString("1"));
-        entity.setCk_senshin(new RString("2"));
-        entity.setCk_jokuso(new RString("2"));
-        entity.setCk_sonotaHihushikkan(new RString("2"));
-        entity.setCk_katateMunamotoage(new RString("2"));
-        entity.setCk_tumekiri(new RString("2"));
-        entity.setCk_shiryoku(new RString("3"));
-        entity.setCk_choryoku(new RString("3"));
-        entity.setCk_ijo(new RString("3"));
-        entity.setCk_ido(new RString("3"));
-        entity.setCk_enge(new RString("3"));
-        entity.setCk_shokujiSesshu(new RString("1"));
-        entity.setCk_insui(new RString("1"));
-        entity.setCk_hainyo(new RString("1"));
-        entity.setCk_haiben(new RString("1"));
-        entity.setCk_nyoi(new RString("1"));
-        entity.setCk_beni(new RString("2"));
-        entity.setCk_hainyogoShimatsu(new RString("2"));
-        entity.setCk_haibengoShimatsu(new RString("2"));
-        entity.setCk_kokoSeiketsu(new RString("2"));
-        entity.setCk_sengan(new RString("2"));
-        entity.setCk_seihatsu(new RString("3"));
-        entity.setCk_buttonKakehazushi(new RString("3"));
-        entity.setCk_joiChakudatsu(new RString("3"));
-        entity.setCk_zubonChakudatsu(new RString("3"));
-        entity.setCk_kutsushitaChakudatsu(new RString("3"));
-        entity.setCk_koshitsuSeiso(new RString("4"));
-        entity.setCk_gaishutsuHindo(new RString("4"));
-        entity.setCk_ishiDentatsu(new RString("4"));
-        entity.setCk_hanno(new RString("4"));
-        entity.setCk_nikka(new RString("4"));
-        entity.setCk_seinengappi(new RString("1"));
-        entity.setCk_tankiKioku(new RString("1"));
-        entity.setCk_namae(new RString("1"));
-        entity.setCk_kisetsu(new RString("1"));
-        entity.setCk_basho(new RString("1"));
-        entity.setCk_haikai(new RString("2"));
-        entity.setCk_gaishutsu(new RString("2"));
-        entity.setCk_higaiteki(new RString("2"));
-        entity.setCk_sakuwa(new RString("2"));
-        entity.setCk_genshiGencho(new RString("2"));
-        entity.setCk_kanjoHuantei(new RString("3"));
-        entity.setCk_chuyaGyakuten(new RString("3"));
-        entity.setCk_bogenBoko(new RString("3"));
-        entity.setCk_onajiHanashi(new RString("3"));
-        entity.setCk_ogoe(new RString("3"));
-        entity.setCk_kaigoNiTeiko(new RString("4"));
-        entity.setCk_ochitsuki(new RString("4"));
-        entity.setCk_hitoriDeDetagaru(new RString("4"));
-        entity.setCk_shushuheki(new RString("4"));
-        entity.setCk_hiNoHushimatsu(new RString("4"));
-        entity.setCk_monoYaIruiWoKowasu(new RString("5"));
-        entity.setCk_huketsuKoi(new RString("5"));
-        entity.setCk_ishokuKodo(new RString("5"));
-        entity.setCk_hidoiMonowasure(new RString("5"));
-        entity.setCk_seitekiMeiwakuKoi(new RString("5"));
-        entity.setCk_hitorigotoHitoriwarai(new RString("1"));
-        entity.setCk_jibunKatte(new RString("1"));
-        entity.setCk_hanashiGaMatomaranai(new RString("1"));
-        entity.setCk_kusuri(new RString("1"));
-        entity.setCk_kinsenKanri(new RString("1"));
-        entity.setCk_ishiKettei(new RString("2"));
-        entity.setCk_mukanshin(new RString("2"));
-        entity.setCk_shudanHutekio(new RString("2"));
-        entity.setCk_denwa(new RString("2"));
-        entity.setCk_kaimono(new RString("2"));
-        entity.setCk_chori(new RString("3"));
-        entity.setCk_tenteki(new RString("3"));
-        entity.setCk_chushinJomyakuEiyo(new RString("3"));
-        entity.setCk_toseki(new RString("3"));
-        entity.setCk_stomaShochi(new RString("3"));
-        entity.setCk_sansoRyoho(new RString("4"));
-        entity.setCk_respirator(new RString("4"));
-        entity.setCk_kikanSekkai(new RString("4"));
-        entity.setCk_totsuKango(new RString("4"));
-        entity.setCk_keikanEiyo(new RString("4"));
-        entity.setCk_monitorSokutei(new RString("5"));
-        entity.setCk_jokusoShochi(new RString("5"));
-        entity.setCk_catheter(new RString("5"));
-        entity.setCk_nitchuNoSeikatsuNiTsuite(new RString("5"));
-        entity.setCk_gaishutsuHindoNiTsuite(new RString("5"));
-        entity.setCk_jokyoHenka(new RString("6"));
+        entity.setShinseishoKanriNo(申請書管理番号);
+        entity.setKoroshoIfShikibetsuCode(IF区分.getCode());
+        entity.setNinteichosaRirekiNo(依頼履歴番号.value());
+        entity.setCk_mahiHidariJoshi(回答項目.stringAt(0));
+        entity.setCk_mahiMigiJoshi(回答項目.stringAt(1));
+        entity.setCk_mahiHidariKashi(回答項目.stringAt(2));
+        entity.setCk_mahiMigiKashi(回答項目.stringAt(3));
+        entity.setCk_mahiSonota(回答項目.stringAt(4));
+        entity.setCk_koshukuKata(回答項目.stringAt(5));
+        entity.setCk_koshukuHiji(回答項目.stringAt(6));
+        entity.setCk_koshukuMata(回答項目.stringAt(7));
+        entity.setCk_koshukuHiza(回答項目.stringAt(8));
+        entity.setCk_koshukuAshi(回答項目.stringAt(9));
+        entity.setCk_koshukuSonota(回答項目.stringAt(10));
+        entity.setCk_negaeri(回答項目.stringAt(11));
+        entity.setCk_okiagari(回答項目.stringAt(12));
+        entity.setCk_zaihoji(回答項目.stringAt(13));
+        entity.setCk_hisetchiZaihoji(回答項目.stringAt(14));
+        entity.setCk_ryoashiRitsui(回答項目.stringAt(15));
+        entity.setCk_hoko(回答項目.stringAt(16));
+        entity.setCk_tachiagari(回答項目.stringAt(17));
+        entity.setCk_kataashiRitsui(回答項目.stringAt(18));
+        entity.setCk_yokusoDeiri(回答項目.stringAt(19));
+        entity.setCk_senshin(回答項目.stringAt(20));
+        entity.setCk_jokuso(回答項目.stringAt(21));
+        entity.setCk_sonotaHihushikkan(回答項目.stringAt(22));
+        entity.setCk_katateMunamotoage(回答項目.stringAt(23));
+        entity.setCk_tumekiri(回答項目.stringAt(24));
+        entity.setCk_shiryoku(回答項目.stringAt(25));
+        entity.setCk_choryoku(回答項目.stringAt(26));
+        entity.setCk_ijo(回答項目.stringAt(27));
+        entity.setCk_ido(回答項目.stringAt(28));
+        entity.setCk_enge(回答項目.stringAt(29));
+        entity.setCk_shokujiSesshu(回答項目.stringAt(30));
+        entity.setCk_insui(回答項目.stringAt(31));
+        entity.setCk_hainyo(回答項目.stringAt(32));
+        entity.setCk_haiben(回答項目.stringAt(33));
+        entity.setCk_nyoi(回答項目.stringAt(34));
+        entity.setCk_beni(回答項目.stringAt(35));
+        entity.setCk_hainyogoShimatsu(回答項目.stringAt(36));
+        entity.setCk_haibengoShimatsu(回答項目.stringAt(37));
+        entity.setCk_kokoSeiketsu(回答項目.stringAt(38));
+        entity.setCk_sengan(回答項目.stringAt(39));
+        entity.setCk_seihatsu(回答項目.stringAt(40));
+        entity.setCk_buttonKakehazushi(回答項目.stringAt(41));
+        entity.setCk_joiChakudatsu(回答項目.stringAt(42));
+        entity.setCk_zubonChakudatsu(回答項目.stringAt(43));
+        entity.setCk_kutsushitaChakudatsu(回答項目.stringAt(44));
+        entity.setCk_koshitsuSeiso(回答項目.stringAt(45));
+        entity.setCk_gaishutsuHindo(回答項目.stringAt(46));
+        entity.setCk_ishiDentatsu(回答項目.stringAt(47));
+        entity.setCk_hanno(回答項目.stringAt(48));
+        entity.setCk_nikka(回答項目.stringAt(49));
+        entity.setCk_seinengappi(回答項目.stringAt(50));
+        entity.setCk_tankiKioku(回答項目.stringAt(51));
+        entity.setCk_namae(回答項目.stringAt(52));
+        entity.setCk_kisetsu(回答項目.stringAt(53));
+        entity.setCk_basho(回答項目.stringAt(54));
+        entity.setCk_haikai(回答項目.stringAt(55));
+        entity.setCk_gaishutsu(回答項目.stringAt(56));
+        entity.setCk_higaiteki(回答項目.stringAt(57));
+        entity.setCk_sakuwa(回答項目.stringAt(58));
+        entity.setCk_genshiGencho(回答項目.stringAt(59));
+        entity.setCk_kanjoHuantei(回答項目.stringAt(60));
+        entity.setCk_chuyaGyakuten(回答項目.stringAt(61));
+        entity.setCk_bogenBoko(回答項目.stringAt(62));
+        entity.setCk_onajiHanashi(回答項目.stringAt(63));
+        entity.setCk_ogoe(回答項目.stringAt(64));
+        entity.setCk_kaigoNiTeiko(回答項目.stringAt(65));
+        entity.setCk_ochitsuki(回答項目.stringAt(66));
+        entity.setCk_hitoriDeDetagaru(回答項目.stringAt(67));
+        entity.setCk_shushuheki(回答項目.stringAt(68));
+        entity.setCk_hiNoHushimatsu(回答項目.stringAt(69));
+        entity.setCk_monoYaIruiWoKowasu(回答項目.stringAt(70));
+        entity.setCk_huketsuKoi(回答項目.stringAt(71));
+        entity.setCk_ishokuKodo(回答項目.stringAt(72));
+        entity.setCk_hidoiMonowasure(回答項目.stringAt(73));
+        entity.setCk_seitekiMeiwakuKoi(回答項目.stringAt(74));
+        entity.setCk_hitorigotoHitoriwarai(回答項目.stringAt(75));
+        entity.setCk_jibunKatte(回答項目.stringAt(76));
+        entity.setCk_hanashiGaMatomaranai(回答項目.stringAt(77));
+        entity.setCk_kusuri(回答項目.stringAt(78));
+        entity.setCk_kinsenKanri(回答項目.stringAt(79));
+        entity.setCk_ishiKettei(回答項目.stringAt(80));
+        entity.setCk_mukanshin(回答項目.stringAt(81));
+        entity.setCk_shudanHutekio(回答項目.stringAt(82));
+        entity.setCk_denwa(回答項目.stringAt(83));
+        entity.setCk_kaimono(回答項目.stringAt(84));
+        entity.setCk_chori(回答項目.stringAt(85));
+        entity.setCk_tenteki(回答項目.stringAt(86));
+        entity.setCk_chushinJomyakuEiyo(回答項目.stringAt(87));
+        entity.setCk_toseki(回答項目.stringAt(88));
+        entity.setCk_stomaShochi(回答項目.stringAt(89));
+        entity.setCk_sansoRyoho(回答項目.stringAt(90));
+        entity.setCk_respirator(回答項目.stringAt(91));
+        entity.setCk_kikanSekkai(回答項目.stringAt(92));
+        entity.setCk_totsuKango(回答項目.stringAt(93));
+        entity.setCk_keikanEiyo(回答項目.stringAt(94));
+        entity.setCk_monitorSokutei(回答項目.stringAt(95));
+        entity.setCk_jokusoShochi(回答項目.stringAt(96));
+        entity.setCk_catheter(回答項目.stringAt(97));
+        entity.setCk_nitchuNoSeikatsuNiTsuite(回答項目.stringAt(98));
+        entity.setCk_gaishutsuHindoNiTsuite(回答項目.stringAt(99));
+        entity.setCk_jokyoHenka(回答項目.stringAt(100));
         return entity;
     }
 

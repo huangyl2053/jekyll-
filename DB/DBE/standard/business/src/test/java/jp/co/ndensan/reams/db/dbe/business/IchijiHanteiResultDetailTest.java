@@ -60,15 +60,15 @@ public class IchijiHanteiResultDetailTest {
             一次判定年月日 = new FlexibleDate("19990101");
             一次判定結果 = new IchijiHanteiResultKomoku(new Code(new RString("001")), new RString("名称"), new RString("略称"));
             認知症加算一次判定結果 = new IchijiHanteiResultKomoku(new Code(new RString("001")), new RString("名称"), new RString("略称"));
-            要介護認定等基準時間 = new YokaigoNinteiKijunTime(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-            中間評価項目得点 = new YokaigoNinteiChukanHyokaKomokuTokuten(0, 0, 0, 0, 0, 0, 0);
+            要介護認定等基準時間 = IchijiHanteiTestBusinessCreator.create要介護認定等基準時間(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            中間評価項目得点 = IchijiHanteiTestBusinessCreator.create中間評価項目得点(0, 0, 0, 0, 0, 0, 0);
             一次判定警告List = IchijiHanteiTestBusinessCreator.create一次判定警告List("000111000111000111");
             認定状態安定性 = new JotaiAnteiseiKubun(new Code(new RString("001")), new RString("名称"), new RString("略称"));
             認知症自立度2以上蓋然性 = new Decimal(123);
             推定給付区分 = new SuiteiKyuhuKubun(new Code(new RString("001")), new RString("名称"), new RString("略称"));
             運動能力未低下認知症高齢者指標 = new NoryokuMiteikaNinchishoKoreishaShihyoKomoku(new Code(new RString("001")),
                     new RString("名称"), new RString("略称"));
-            日常生活自立度組み合わせ = new NichijoSeikatsuJiritsudoKumiawase(0, 0, 0, 0, 0, 0, 0);
+            日常生活自立度組み合わせ = IchijiHanteiTestBusinessCreator.create日常生活自立度組み合わせ(0, 0, 0, 0, 0, 0, 0);
             認知症高齢者日常生活自立度蓋然性評価 = new NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku(new Code(new RString("001")),
                     new RString("名称"), new RString("略称"));
             認知症高齢者日常生活自立度蓋然性評価率 = 100;

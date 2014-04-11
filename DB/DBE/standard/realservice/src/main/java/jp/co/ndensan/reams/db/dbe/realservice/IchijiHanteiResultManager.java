@@ -55,7 +55,7 @@ public class IchijiHanteiResultManager {
     }
 
     private IchijiHanteiKeikokuHairetsuCode create警告配列コード(DbT5016IchijiHanteiKekkaJohoEntity entity) {
-        RString 警告配列コード文字列 = entity.getIchijiHnateiKeikokuCode();
+        RString 警告配列コード文字列 = entity.getIchijiHanteiKeikokuCode();
         FlexibleDate 判定年月日 = entity.getIchijiHanteiYMD();
         return new IchijiHanteiKeikokuHairetsuCode(警告配列コード文字列, 判定年月日);
     }
