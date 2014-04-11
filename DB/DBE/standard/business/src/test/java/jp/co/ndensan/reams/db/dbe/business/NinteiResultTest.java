@@ -52,7 +52,7 @@ public class NinteiResultTest extends DbeTestBase {
                 ninteiResult.get要介護状態像例(),
                 KaigoServiceType.訪問介護,
                 ShisetsuNyushoKubun.入所している,
-                ninteiResult.get特定疾病区分(),
+                ninteiResult.get特定疾病(),
                 ninteiResult.get認定審査会意見(),
                 ninteiResult.get認定結果異動(),
                 ninteiResult.get認定取消(),

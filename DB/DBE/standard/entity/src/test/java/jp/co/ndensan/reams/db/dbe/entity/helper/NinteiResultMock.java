@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.business.NinteiResultIdo;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinsakaiIken;
 import jp.co.ndensan.reams.db.dbe.business.NinteiTorikeshi;
 import jp.co.ndensan.reams.db.dbe.business.NinteiYukoKikan;
-import jp.co.ndensan.reams.db.dbe.business.TokuteiShippeiKubun;
+import jp.co.ndensan.reams.db.dbe.business.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotai;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotaizoRei;
@@ -82,8 +82,8 @@ public class NinteiResultMock {
         return new NinteiYukoKikan(new FlexibleDate("20140202"), new NinteiYukoKikanTsukisu(1), new FlexibleDate("20140303"));
     }
 
-    private static TokuteiShippeiKubun createTokuteiShippeiKubun() {
-        return new TokuteiShippeiKubun(new Code(new RString("3333333333")), new RString("名称"), new RString("略称"));
+    private static TokuteiShippei createTokuteiShippeiKubun() {
+        return new TokuteiShippei(new Code(new RString("3333333333")), new RString("名称"), new RString("略称"));
     }
 
     private static NinteiShinsakaiIken createNinteiShinsakaiIken() {

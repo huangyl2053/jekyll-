@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIkenType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShisetsuNyushoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiYukoKikanTsukisu;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.TokuteiShippeiKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.TokuteiShippeiCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.YokaigoJotaiKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.YokaigoJotaizoReiCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5002NinteiKekkaJohoEntity;
@@ -47,7 +47,7 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
     private static final FlexibleDate 有効終了年月日 = new FlexibleDate("20140303");
     private static final KaigoServiceType 介護サービス種類 = KaigoServiceType.訪問介護;
     private static final ShisetsuNyushoKubun 施設入所区分 = ShisetsuNyushoKubun.入所している;
-    private static final TokuteiShippeiKubunCode 特定疾病区分コード = new TokuteiShippeiKubunCode(new Code(new RString("3333333333")));
+    private static final TokuteiShippeiCode 特定疾病コード = new TokuteiShippeiCode(new Code(new RString("3333333333")));
     private static final ShinsakaiKaisaiNo 審査会開催番号 = new ShinsakaiKaisaiNo(123);
     private static final ShinsakaiIkenType 審査会意見種類 = ShinsakaiIkenType.サービス利用への意見;
     private static final RString 審査会意見 = new RString("審査会意見");
@@ -132,10 +132,10 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
         }
 
         @Test
-        public void 特定疾病区分コードの設定がある時_toNinteiResultで生成した_NinteiResult_get特定疾病区分_getTokuteiShippeiKubunCodeは_設定値を返す() {
-            entity.setTokuteiShippeiCode(特定疾病区分コード.asCode());
+        public void 特定疾病コードの設定がある時_toNinteiResultで生成した_NinteiResult_get特定疾病_getTokuteiShippeiKubunCodeは_設定値を返す() {
+            entity.setTokuteiShippeiCode(特定疾病コード.asCode());
             NinteiResult result = sut.toNinteiResult(entity);
-            assertThat(result.get特定疾病区分().getTokuteiShippeiKubunCode(), is(特定疾病区分コード));
+            assertThat(result.get特定疾病().getTokuteiShippeiKubunCode(), is(特定疾病コード));
         }
 
         @Test
@@ -255,9 +255,9 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
         }
 
         @Test
-        public void 特定疾病区分コードの設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getTokuteiShippeiCodeは_設定値を返す() {
+        public void 特定疾病コードの設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getTokuteiShippeiCodeは_設定値を返す() {
             DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
-            assertThat(result.getTokuteiShippeiCode(), is(特定疾病区分コード.asCode()));
+            assertThat(result.getTokuteiShippeiCode(), is(特定疾病コード.asCode()));
         }
 
         @Test

@@ -25,7 +25,7 @@ public class NinteiResult {
     private final YokaigoJotaizoRei 要介護状態像例;
     private final KaigoServiceType 介護サービス種類;
     private final ShisetsuNyushoKubun 施設入所区分;
-    private final TokuteiShippeiKubun 特定疾病区分;
+    private final TokuteiShippei 特定疾病;
     private final NinteiShinsakaiIken 認定審査会意見;
     private final NinteiResultIdo 認定結果異動;
     private final NinteiTorikeshi 認定取消;
@@ -40,7 +40,7 @@ public class NinteiResult {
      * @param 要介護状態像例 要介護状態像例
      * @param 介護サービス種類 介護サービス種類
      * @param 施設入所区分 施設入所区分
-     * @param 特定疾病区分 特定疾病区分
+     * @param 特定疾病 特定疾病
      * @param 認定審査会意見 認定審査会意見
      * @param 認定結果異動 認定結果異動
      * @param 認定取消 認定取消
@@ -53,7 +53,7 @@ public class NinteiResult {
             YokaigoJotaizoRei 要介護状態像例,
             KaigoServiceType 介護サービス種類,
             ShisetsuNyushoKubun 施設入所区分,
-            TokuteiShippeiKubun 特定疾病区分,
+            TokuteiShippei 特定疾病,
             NinteiShinsakaiIken 認定審査会意見,
             NinteiResultIdo 認定結果異動,
             NinteiTorikeshi 認定取消,
@@ -64,7 +64,7 @@ public class NinteiResult {
         this.要介護状態像例 = 要介護状態像例;
         this.介護サービス種類 = 介護サービス種類;
         this.施設入所区分 = 施設入所区分;
-        this.特定疾病区分 = 特定疾病区分;
+        this.特定疾病 = 特定疾病;
         this.認定審査会意見 = 認定審査会意見;
         this.認定結果異動 = 認定結果異動;
         this.認定取消 = 認定取消;
@@ -126,12 +126,12 @@ public class NinteiResult {
     }
 
     /**
-     * 特定疾病区分を返します。
+     * 特定疾病を返します。
      *
-     * @return 特定疾病区分
+     * @return 特定疾病
      */
-    public TokuteiShippeiKubun get特定疾病区分() {
-        return 特定疾病区分;
+    public TokuteiShippei get特定疾病() {
+        return 特定疾病;
     }
 
     /**

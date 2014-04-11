@@ -4,17 +4,17 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.TokuteiShippeiKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.TokuteiShippeiCode;
 import jp.co.ndensan.reams.db.dbz.business.KaigoCodeAssignedItem;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 特定疾病区分を保持するクラスです。
+ * 特定疾病を保持するクラスです。
  *
  * @author N8156 宮本 康
  */
-public class TokuteiShippeiKubun extends KaigoCodeAssignedItem<TokuteiShippeiKubunCode> {
+public class TokuteiShippei extends KaigoCodeAssignedItem<TokuteiShippeiCode> {
 
     /**
      * インスタンスを生成します。
@@ -23,16 +23,16 @@ public class TokuteiShippeiKubun extends KaigoCodeAssignedItem<TokuteiShippeiKub
      * @param codeMeisho 名称
      * @param codeRyakusho 略称
      */
-    public TokuteiShippeiKubun(Code code, RString codeMeisho, RString codeRyakusho) {
-        super(new TokuteiShippeiKubunCode(code), code, codeMeisho, codeRyakusho);
+    public TokuteiShippei(Code code, RString codeMeisho, RString codeRyakusho) {
+        super(new TokuteiShippeiCode(code), code, codeMeisho, codeRyakusho);
     }
 
     /**
-     * 特定疾病区分コードを返します。
+     * 特定疾病コードを返します。
      *
-     * @return 特定疾病区分コード
+     * @return 特定疾病コード
      */
-    public TokuteiShippeiKubunCode getTokuteiShippeiKubunCode() {
+    public TokuteiShippeiCode getTokuteiShippeiKubunCode() {
         return getExtendedCode();
     }
 }

@@ -12,11 +12,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
 
 /**
- * 特定疾病区分コードを保持するクラスです。
+ * 特定疾病コードを保持するクラスです。
  *
  * @author N8156 宮本 康
  */
-public class TokuteiShippeiKubunCode implements ICodeWrapValueObject, Comparable<TokuteiShippeiKubunCode> {
+public class TokuteiShippeiCode implements ICodeWrapValueObject, Comparable<TokuteiShippeiCode> {
 
     private final Code code;
 
@@ -25,7 +25,7 @@ public class TokuteiShippeiKubunCode implements ICodeWrapValueObject, Comparable
      *
      * @param code 値
      */
-    public TokuteiShippeiKubunCode(Code code) {
+    public TokuteiShippeiCode(Code code) {
         this.code = requireNonNull(code, Messages.E00003.replace("code", getClass().getName()).getMessage());
     }
 
@@ -40,7 +40,7 @@ public class TokuteiShippeiKubunCode implements ICodeWrapValueObject, Comparable
     }
 
     @Override
-    public int compareTo(TokuteiShippeiKubunCode target) {
+    public int compareTo(TokuteiShippeiCode target) {
         return this.code.compareTo(target.asCode());
     }
 
@@ -49,7 +49,7 @@ public class TokuteiShippeiKubunCode implements ICodeWrapValueObject, Comparable
         if (isNull(target) || isNotSameClass(target.getClass())) {
             return false;
         }
-        return hasSameValue((TokuteiShippeiKubunCode) target);
+        return hasSameValue((TokuteiShippeiCode) target);
     }
 
     @Override
@@ -67,7 +67,7 @@ public class TokuteiShippeiKubunCode implements ICodeWrapValueObject, Comparable
         return clazz != this.getClass();
     }
 
-    private boolean hasSameValue(TokuteiShippeiKubunCode target) {
+    private boolean hasSameValue(TokuteiShippeiCode target) {
         return target.asCode().equals(this.code);
     }
 }

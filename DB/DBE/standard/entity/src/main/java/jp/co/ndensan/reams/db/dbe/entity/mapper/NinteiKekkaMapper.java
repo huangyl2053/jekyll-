@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.business.NinteiResultIdo;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinsakaiIken;
 import jp.co.ndensan.reams.db.dbe.business.NinteiTorikeshi;
 import jp.co.ndensan.reams.db.dbe.business.NinteiYukoKikan;
-import jp.co.ndensan.reams.db.dbe.business.TokuteiShippeiKubun;
+import jp.co.ndensan.reams.db.dbe.business.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotai;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotaizoRei;
@@ -53,7 +53,7 @@ public final class NinteiKekkaMapper {
                 new YokaigoJotaizoRei(entity.getYokaigoJotaizoReiCode(), RString.EMPTY, RString.EMPTY),
                 KaigoServiceType.toValue(entity.getKaigoServiceShurui()),
                 ShisetsuNyushoKubun.toValue(entity.getShisetsuNyushoFlag()),
-                new TokuteiShippeiKubun(entity.getTokuteiShippeiCode(), RString.EMPTY, RString.EMPTY),
+                new TokuteiShippei(entity.getTokuteiShippeiCode(), RString.EMPTY, RString.EMPTY),
                 create認定審査会意見(entity),
                 new NinteiResultIdo(NinteiResultIdoJiyuKubun.toValue(entity.getNinteiKekkaIdoJiyu()), entity.getNinteiKekkaIdoYMD()),
                 new NinteiTorikeshi(entity.getNinteiTorikeshiRiyu(), entity.getNinteiTorikeshiYMD()),
@@ -96,7 +96,7 @@ public final class NinteiKekkaMapper {
         entity.setNinteiYukoKikan(ninteiResult.get要介護状態().get認定有効期間().get有効期間月数().value().intValue());
         entity.setNinteiYukoKaishiYMD(ninteiResult.get要介護状態().get認定有効期間().get有効期間().getFrom());
         entity.setNinteiYukoShuryoYMD(ninteiResult.get要介護状態().get認定有効期間().get有効期間().getTo());
-        entity.setTokuteiShippeiCode(ninteiResult.get特定疾病区分().getCode());
+        entity.setTokuteiShippeiCode(ninteiResult.get特定疾病().getCode());
         entity.setShisetsuNyushoFlag(ninteiResult.get施設入所区分().is施設入所());
         entity.setShinsakaiKaisaiNo(ninteiResult.get認定審査会意見().get審査会開催番号().value().intValue());
         entity.setShinsakaiIken(ninteiResult.get認定審査会意見().get審査会意見());
