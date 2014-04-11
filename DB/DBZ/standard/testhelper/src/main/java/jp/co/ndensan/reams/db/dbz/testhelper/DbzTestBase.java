@@ -5,21 +5,18 @@
 package jp.co.ndensan.reams.db.dbz.testhelper;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
+import jp.co.ndensan.reams.uz.uza.testhelper.TestBase3;
+import org.junit.BeforeClass;
 
 /**
- * {@link TestBase}のラッパークラスです。
+ * {@link TestBase3}のラッパークラスです。
  *
  * @author N1013 松本直樹
  */
-public class DbzTestBase extends TestBase {
+public class DbzTestBase extends TestBase3 {
 
-    /**
-     * サブ業務コードを指定します。
-     *
-     * @return サブ業務コード
-     */
-    public RString getSubGyomuCD() {
-        return new RString("DBZ");
+    @BeforeClass
+    public static void setUpClass() {
+        setDummyControlData(new RString("DBZ"));
     }
 }

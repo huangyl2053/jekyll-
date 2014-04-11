@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.testhelper.TestBase3;
 import org.junit.BeforeClass;
 
 /**
- * {@link TestBase}のラッパークラスです。
+ * {@link TestBase3}のラッパークラスです。
  *
  * @author N1013 松本直樹
  */

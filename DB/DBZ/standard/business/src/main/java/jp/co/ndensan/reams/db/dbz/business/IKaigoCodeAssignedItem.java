@@ -15,8 +15,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3327 三浦 凌
  * @param <T> IValueObjectを実装したコードクラス
+ * @deprecated {@link KaigoCodeAssignedItem KaigoCodeAssignedItem}を使ってください。
  */
-public interface IKaigoCodeMasterItem<T extends IValueObject> {
+@Deprecated
+public interface IKaigoCodeAssignedItem<T extends IValueObject> {
 
     /**
      * コードを返します。

@@ -4,16 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
-
 /**
  * テーブルのデータを更新するためのインタフェースです。
  *
  * @author N3327 三浦 凌
  * @param <T> 更新したいテーブルのEntityクラス
  */
-public interface IUpdatable<T extends IDbAccessable> {
+public interface IUpdatable<T> {
 
     /**
      * データでテーブルを更新します。
@@ -21,6 +18,5 @@ public interface IUpdatable<T extends IDbAccessable> {
      * @param data 更新したいデータ
      * @return 更新件数
      */
-    @Transaction
     int update(T data);
 }

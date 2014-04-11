@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import static org.mockito.Mockito.spy;
 
 /**
  * DbT5001NinteiShinseiJohoEntityを生成するためのMockクラスです
@@ -54,6 +55,6 @@ public class DbT5001NinteiShinseiJohoEntityMock {
         entity.setTorisageRiyu(new RString("取下げ理由"));
         entity.setTorisageYMD(FlexibleDate.MAX);
         entity.setShinsaKeizokuKubun(false);
-        return entity;
+        return spy(entity);
     }
 }
