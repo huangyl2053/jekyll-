@@ -22,7 +22,7 @@ import org.junit.runner.RunWith;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class NinteichosahyoResultMapperTest {
+public class NinteichosahyoKaitoHairetsuCodeMapperTest {
 
     private static NinteichosahyoKaitoHairetsuCode result;
 
@@ -30,12 +30,12 @@ public class NinteichosahyoResultMapperTest {
 
         @Before
         public void setUp() {
-            result = NinteichosahyoResultMapper.to認定調査結果(IchijiHanteiTestEntityCreator.create認定調査票Entity());
+            result = NinteichosahyoKaitoHairetsuCodeMapper.to認定調査結果(IchijiHanteiTestEntityCreator.create認定調査票Entity());
         }
 
         @Test
         public void 引数にnullが渡されたとき_nullが返る() {
-            result = NinteichosahyoResultMapper.to認定調査結果(null);
+            result = NinteichosahyoKaitoHairetsuCodeMapper.to認定調査結果(null);
             assertThat(result, is(nullValue()));
         }
 
