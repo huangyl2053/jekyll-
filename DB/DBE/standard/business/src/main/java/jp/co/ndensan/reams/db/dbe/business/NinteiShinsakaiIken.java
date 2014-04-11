@@ -19,6 +19,7 @@ public class NinteiShinsakaiIken {
     private final ShinsakaiIkenType 審査会意見種類;
     private final RString 審査会意見;
     private final RString 審査会メモ;
+    private final RString 一次判定結果変更理由;
 
     /**
      * インスタンスを生成します。
@@ -27,16 +28,19 @@ public class NinteiShinsakaiIken {
      * @param 審査会意見種類 審査会意見種類
      * @param 審査会意見 審査会意見
      * @param 審査会メモ 審査会メモ
+     * @param 一次判定結果変更理由 一次判定結果変更理由
      */
     public NinteiShinsakaiIken(
             ShinsakaiKaisaiNo 審査会開催番号,
             ShinsakaiIkenType 審査会意見種類,
             RString 審査会意見,
-            RString 審査会メモ) {
+            RString 審査会メモ,
+            RString 一次判定結果変更理由) {
         this.審査会開催番号 = 審査会開催番号;
         this.審査会意見種類 = 審査会意見種類;
         this.審査会意見 = 審査会意見;
         this.審査会メモ = 審査会メモ;
+        this.一次判定結果変更理由 = 一次判定結果変更理由;
     }
 
     /**
@@ -73,5 +77,14 @@ public class NinteiShinsakaiIken {
      */
     public RString get審査会メモ() {
         return 審査会メモ;
+    }
+
+    /**
+     * 一次判定結果変更理由を返します。
+     *
+     * @return 一次判定結果変更理由
+     */
+    public RString get一次判定結果変更理由() {
+        return 一次判定結果変更理由;
     }
 }

@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShisetsuNyushoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -26,7 +27,9 @@ public class NinteiResult {
     private final ShisetsuNyushoKubun 施設入所区分;
     private final TokuteiShippeiKubun 特定疾病区分;
     private final NinteiShinsakaiIken 認定審査会意見;
-    private final NinteiRiyu 認定理由;
+    private final NinteiResultIdo 認定結果異動;
+    private final NinteiTorikeshi 認定取消;
+    private final RString 認定理由;
 
     /**
      * インスタンスを生成します。
@@ -39,6 +42,8 @@ public class NinteiResult {
      * @param 施設入所区分 施設入所区分
      * @param 特定疾病区分 特定疾病区分
      * @param 認定審査会意見 認定審査会意見
+     * @param 認定結果異動 認定結果異動
+     * @param 認定取消 認定取消
      * @param 認定理由 認定理由
      */
     public NinteiResult(
@@ -50,7 +55,9 @@ public class NinteiResult {
             ShisetsuNyushoKubun 施設入所区分,
             TokuteiShippeiKubun 特定疾病区分,
             NinteiShinsakaiIken 認定審査会意見,
-            NinteiRiyu 認定理由) {
+            NinteiResultIdo 認定結果異動,
+            NinteiTorikeshi 認定取消,
+            RString 認定理由) {
         this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00001.replace("申請書管理番号").getMessage());
         this.要介護度認定年月日 = requireNonNull(要介護度認定年月日, Messages.E00001.replace("要介護度認定年月日").getMessage());
         this.要介護状態 = requireNonNull(要介護状態, Messages.E00001.replace("要介護状態").getMessage());
@@ -59,6 +66,8 @@ public class NinteiResult {
         this.施設入所区分 = 施設入所区分;
         this.特定疾病区分 = 特定疾病区分;
         this.認定審査会意見 = 認定審査会意見;
+        this.認定結果異動 = 認定結果異動;
+        this.認定取消 = 認定取消;
         this.認定理由 = 認定理由;
     }
 
@@ -135,11 +144,29 @@ public class NinteiResult {
     }
 
     /**
+     * 認定結果異動を返します。
+     *
+     * @return 認定結果異動
+     */
+    public NinteiResultIdo get認定結果異動() {
+        return 認定結果異動;
+    }
+
+    /**
+     * 認定取消を返します。
+     *
+     * @return 認定取消
+     */
+    public NinteiTorikeshi get認定取消() {
+        return 認定取消;
+    }
+
+    /**
      * 認定理由を返します。
      *
      * @return 認定理由
      */
-    public NinteiRiyu get認定理由() {
+    public RString get認定理由() {
         return 認定理由;
     }
 }

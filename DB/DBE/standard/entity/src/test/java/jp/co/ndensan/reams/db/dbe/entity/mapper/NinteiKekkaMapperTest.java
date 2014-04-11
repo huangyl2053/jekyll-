@@ -167,45 +167,45 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
         }
 
         @Test
-        public void 一次判定結果変更理由の設定がある時_toNinteiResultで生成した_NinteiResult_get認定理由_get一次判定結果変更理由は_設定値を返す() {
+        public void 一次判定結果変更理由の設定がある時_toNinteiResultで生成した_NinteiResult_get認定審査会意見_get一次判定結果変更理由は_設定値を返す() {
             entity.setIchijiHnateiKekkaHenkoRiyu(一次判定結果変更理由);
             NinteiResult result = sut.toNinteiResult(entity);
-            assertThat(result.get認定理由().get一次判定結果変更理由(), is(一次判定結果変更理由));
+            assertThat(result.get認定審査会意見().get一次判定結果変更理由(), is(一次判定結果変更理由));
         }
 
         @Test
-        public void 認定結果異動事由区分の設定がある時_toNinteiResultで生成した_NinteiResult_get認定理由_get認定結果異動事由_get認定結果異動事由区分は_設定値を返す() {
+        public void 認定結果異動事由区分の設定がある時_toNinteiResultで生成した_NinteiResult_get認定結果異動_get認定結果異動事由区分は_設定値を返す() {
             entity.setNinteiKekkaIdoJiyu(認定結果異動事由区分.getCode());
             NinteiResult result = sut.toNinteiResult(entity);
-            assertThat(result.get認定理由().get認定結果異動事由().get認定結果異動事由区分(), is(認定結果異動事由区分));
+            assertThat(result.get認定結果異動().get認定結果異動事由区分(), is(認定結果異動事由区分));
         }
 
         @Test
-        public void 認定結果異動年月日の設定がある時_toNinteiResultで生成した_NinteiResult_get認定理由_get認定結果異動事由_get認定結果異動年月日は_設定値を返す() {
+        public void 認定結果異動年月日の設定がある時_toNinteiResultで生成した_NinteiResult_get認定結果異動_get認定結果異動年月日は_設定値を返す() {
             entity.setNinteiKekkaIdoYMD(認定結果異動年月日);
             NinteiResult result = sut.toNinteiResult(entity);
-            assertThat(result.get認定理由().get認定結果異動事由().get認定結果異動年月日(), is(認定結果異動年月日));
+            assertThat(result.get認定結果異動().get認定結果異動年月日(), is(認定結果異動年月日));
         }
 
         @Test
-        public void 認定取消理由の設定がある時_toNinteiResultで生成した_NinteiResult_get認定理由_get認定取消理由_get認定取消理由は_設定値を返す() {
+        public void 認定取消理由の設定がある時_toNinteiResultで生成した_NinteiResult_get認定取消_get認定取消理由は_設定値を返す() {
             entity.setNinteiTorikeshiRiyu(認定取消理由);
             NinteiResult result = sut.toNinteiResult(entity);
-            assertThat(result.get認定理由().get認定取消理由().get認定取消理由(), is(認定取消理由));
+            assertThat(result.get認定取消().get認定取消理由(), is(認定取消理由));
         }
 
         @Test
-        public void 認定取消年月日の設定がある時_toNinteiResultで生成した_NinteiResult_get認定理由_get認定取消理由_get認定取消年月日は_設定値を返す() {
+        public void 認定取消年月日の設定がある時_toNinteiResultで生成した_NinteiResult_get認定取消_get認定取消年月日は_設定値を返す() {
             entity.setNinteiTorikeshiYMD(認定取消年月日);
             NinteiResult result = sut.toNinteiResult(entity);
-            assertThat(result.get認定理由().get認定取消理由().get認定取消年月日(), is(認定取消年月日));
+            assertThat(result.get認定取消().get認定取消年月日(), is(認定取消年月日));
         }
 
         @Test
-        public void 認定理由の設定がある時_toNinteiResultで生成した_NinteiResult_get認定理由_get認定理由は_設定値を返す() {
+        public void 認定理由の設定がある時_toNinteiResultで生成した_NinteiResult_get認定理由は_設定値を返す() {
             entity.setNinteiRiyu(認定理由);
             NinteiResult result = sut.toNinteiResult(entity);
-            assertThat(result.get認定理由().get認定理由(), is(認定理由));
+            assertThat(result.get認定理由(), is(認定理由));
         }
     }
 

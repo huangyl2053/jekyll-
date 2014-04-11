@@ -54,6 +54,8 @@ public class NinteiResultTest extends DbeTestBase {
                 ShisetsuNyushoKubun.入所している,
                 ninteiResult.get特定疾病区分(),
                 ninteiResult.get認定審査会意見(),
+                ninteiResult.get認定結果異動(),
+                ninteiResult.get認定取消(),
                 ninteiResult.get認定理由());
     }
 }

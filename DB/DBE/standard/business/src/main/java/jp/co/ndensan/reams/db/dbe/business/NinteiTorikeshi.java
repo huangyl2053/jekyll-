@@ -8,11 +8,11 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 認定取消理由を保持するクラスです。
+ * 認定取消情報を保持するクラスです。
  *
  * @author N8156 宮本 康
  */
-public class NinteiTorikeshiRiyu {
+public class NinteiTorikeshi {
 
     private final RString 認定取消理由;
     private final FlexibleDate 認定取消年月日;
@@ -23,7 +23,7 @@ public class NinteiTorikeshiRiyu {
      * @param 認定取消理由 認定取消理由
      * @param 認定取消年月日 認定取消年月日
      */
-    public NinteiTorikeshiRiyu(RString 認定取消理由, FlexibleDate 認定取消年月日) {
+    public NinteiTorikeshi(RString 認定取消理由, FlexibleDate 認定取消年月日) {
         this.認定取消理由 = 認定取消理由;
         this.認定取消年月日 = 認定取消年月日;
     }

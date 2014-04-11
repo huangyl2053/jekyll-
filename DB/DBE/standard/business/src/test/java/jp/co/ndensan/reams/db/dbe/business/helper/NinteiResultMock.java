@@ -5,10 +5,9 @@
 package jp.co.ndensan.reams.db.dbe.business.helper;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteiResult;
-import jp.co.ndensan.reams.db.dbe.business.NinteiResultIdoJiyu;
-import jp.co.ndensan.reams.db.dbe.business.NinteiRiyu;
+import jp.co.ndensan.reams.db.dbe.business.NinteiResultIdo;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinsakaiIken;
-import jp.co.ndensan.reams.db.dbe.business.NinteiTorikeshiRiyu;
+import jp.co.ndensan.reams.db.dbe.business.NinteiTorikeshi;
 import jp.co.ndensan.reams.db.dbe.business.NinteiYukoKikan;
 import jp.co.ndensan.reams.db.dbe.business.TokuteiShippeiKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotai;
@@ -58,7 +57,9 @@ public class NinteiResultMock {
                 ShisetsuNyushoKubun.入所している,
                 createTokuteiShippeiKubun(),
                 createNinteiShinsakaiIken(),
-                createNinteiRiyu());
+                new NinteiResultIdo(NinteiResultIdoJiyuKubun.職権追加, new FlexibleDate("20140404")),
+                new NinteiTorikeshi(new RString("認定取消理由"), new FlexibleDate("20140505")),
+                new RString("認定理由"));
     }
 
     private static ShinseishoKanriNo createShinseishoKanriNo() {
@@ -90,14 +91,7 @@ public class NinteiResultMock {
                 new ShinsakaiKaisaiNo(new Integer("123")),
                 ShinsakaiIkenType.サービス利用への意見,
                 new RString("審査会意見"),
-                new RString("審査会メモ"));
-    }
-
-    private static NinteiRiyu createNinteiRiyu() {
-        return new NinteiRiyu(
-                new RString("一次判定結果変更理由"),
-                new NinteiResultIdoJiyu(NinteiResultIdoJiyuKubun.職権追加, new FlexibleDate("20140404")),
-                new NinteiTorikeshiRiyu(new RString("認定取消理由"), new FlexibleDate("20140505")),
-                new RString("認定理由"));
+                new RString("審査会メモ"),
+                new RString("一次判定結果変更理由"));
     }
 }
