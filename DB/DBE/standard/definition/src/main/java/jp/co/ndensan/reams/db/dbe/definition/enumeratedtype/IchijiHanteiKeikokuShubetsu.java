@@ -59,7 +59,7 @@ public enum IchijiHanteiKeikokuShubetsu {
     /**
      * 一次判定警告の数を返します。
      *
-     * @return
+     * @return 警告数
      */
     public int get警告数() {
         return 警告数;

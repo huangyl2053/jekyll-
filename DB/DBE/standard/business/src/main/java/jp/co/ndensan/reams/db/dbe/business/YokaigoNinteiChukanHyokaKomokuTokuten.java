@@ -22,6 +22,7 @@ public class YokaigoNinteiChukanHyokaKomokuTokuten {
     /**
      * 中間評価項目得点群の情報を受け取り、インスタンスを生成します。
      *
+     * @param 中間評価項目得点群 中間評価項目得点群
      * @throws NullPointerException 引数にnullが渡されたとき
      * @throws IllegalArgumentException 中間評価項目得点の中に、0より小さい数値が存在したとき
      */

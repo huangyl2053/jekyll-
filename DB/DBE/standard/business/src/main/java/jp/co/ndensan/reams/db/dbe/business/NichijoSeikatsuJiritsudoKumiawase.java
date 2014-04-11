@@ -36,6 +36,7 @@ public class NichijoSeikatsuJiritsudoKumiawase {
     /**
      * 日常生活自立度組み合わせの情報を受け取り、インスタンスを生成します。
      *
+     * @param 日常生活自立度組み合わせ 日常生活自立度組み合わせ
      * @throws NullPointerException 引数にnullが渡されたとき
      * @throws IllegalArgumentException 日常生活自立度組み合わせが持つ割合の中に、0より小さい数値が存在したとき
      */

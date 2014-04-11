@@ -43,7 +43,7 @@ public enum IchijiHanteiSohuKubun {
      *
      * @param 送付区分コード 一次判定送付区分コード
      * @return 送付区分
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException 対応する送付区分が存在しないとき
      */
     public static IchijiHanteiSohuKubun toValue(RString 送付区分コード) throws IllegalArgumentException {
         for (IchijiHanteiSohuKubun 送付区分 : values()) {

@@ -22,6 +22,7 @@ public class YokaigoNinteiKijunTime {
     /**
      * 要介護認定等基準時間の情報を受け取り、インスタンスを生成します。
      *
+     * @param 要介護認定等基準時間 要介護認定等基準時間
      * @throws NullPointerException 引数にnullが渡されたとき
      * @throws IllegalArgumentException 要介護認定等基準時間の中に、0より小さい数値が存在したとき
      */
