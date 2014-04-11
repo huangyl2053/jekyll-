@@ -57,8 +57,8 @@ public class NinteiResultMock {
                 ShisetsuNyushoKubun.入所している,
                 createTokuteiShippeiKubun(),
                 createNinteiShinsakaiIken(),
-                new NinteiResultIdo(NinteiResultIdoJiyuKubun.職権追加, new FlexibleDate("20140404")),
-                new NinteiTorikeshi(new RString("認定取消理由"), new FlexibleDate("20140505")),
+                createNinteiResultIdo(),
+                createNinteiTorikeshi(),
                 new RString("認定理由"));
     }
 
@@ -71,27 +71,35 @@ public class NinteiResultMock {
     }
 
     private static YokaigoJotaiKubun createYokaigoJotaiKubun() {
-        return new YokaigoJotaiKubun(new Code(new RString("1111111111")), new RString("名称"), new RString("略称"));
+        return spy(new YokaigoJotaiKubun(new Code(new RString("1111111111")), new RString("名称"), new RString("略称")));
     }
 
     private static YokaigoJotaizoRei createYokaigoJotaizoRei() {
-        return new YokaigoJotaizoRei(new Code(new RString("2222222222")), new RString("名称"), new RString("略称"));
+        return spy(new YokaigoJotaizoRei(new Code(new RString("2222222222")), new RString("名称"), new RString("略称")));
     }
 
     private static NinteiYukoKikan createNinteiYukoKikan() {
-        return new NinteiYukoKikan(new FlexibleDate("20140202"), new NinteiYukoKikanTsukisu(1), new FlexibleDate("20140303"));
+        return spy(new NinteiYukoKikan(new FlexibleDate("20140202"), new NinteiYukoKikanTsukisu(1), new FlexibleDate("20140303")));
     }
 
     private static TokuteiShippei createTokuteiShippeiKubun() {
-        return new TokuteiShippei(new Code(new RString("3333333333")), new RString("名称"), new RString("略称"));
+        return spy(new TokuteiShippei(new Code(new RString("3333333333")), new RString("名称"), new RString("略称")));
     }
 
     private static NinteiShinsakaiIken createNinteiShinsakaiIken() {
-        return new NinteiShinsakaiIken(
+        return spy(new NinteiShinsakaiIken(
                 new ShinsakaiKaisaiNo(new Integer("123")),
                 ShinsakaiIkenType.サービス利用への意見,
                 new RString("審査会意見"),
                 new RString("審査会メモ"),
-                new RString("一次判定結果変更理由"));
+                new RString("一次判定結果変更理由")));
+    }
+
+    private static NinteiResultIdo createNinteiResultIdo() {
+        return spy(new NinteiResultIdo(NinteiResultIdoJiyuKubun.職権追加, new FlexibleDate("20140404")));
+    }
+
+    private static NinteiTorikeshi createNinteiTorikeshi() {
+        return spy(new NinteiTorikeshi(new RString("認定取消理由"), new FlexibleDate("20140505")));
     }
 }
