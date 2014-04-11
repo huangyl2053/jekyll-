@@ -43,24 +43,25 @@ public final class IchijiHanteiTestBusinessCreator {
      * @return 一次判定結果
      */
     public static IchijiHanteiResultDetail create一次判定結果() {
-        return new IchijiHanteiResultDetail(new ShinseishoKanriNo(new RString("01")),
-                KoroshoIFKubun.V02A,
-                KariIchijiHanteiKubun.本判定,
-                new FlexibleDate("20060101"),
-                create一次判定結果項目(),
-                create認知症加算一次判定結果(),
-                create要介護認定等基準時間(11, 12, 13, 14, 15, 16, 17, 18, 19, 20),
-                create中間評価項目得点(1, 2, 3, 4, 5, 6, 7),
-                create一次判定警告List("000111000111000111"),
-                create介護認定状態安定性(),
-                new Decimal(12.34),
-                create推定給付区分(),
-                create能力未低下認知症高齢者指標(),
-                create日常生活自立度組み合わせ(21, 22, 23, 24, 25, 26, 27),
-                create認知症高齢者自立度蓋然性評価(),
-                48,
-                IchijiHanteiSohuKubun.toValue(new RString("1")),
-                new FlexibleDate("20061231"));
+
+        return IchijiHanteiResultDetail.builder().set申請書管理番号(new ShinseishoKanriNo(new RString("01")))
+                .set厚労省IF区分(KoroshoIFKubun.V02A)
+                .set厚労省IF区分(KariIchijiHanteiKubun.本判定)
+                .set一次判定年月日(new FlexibleDate("20060101"))
+                .set一次判定結果(create一次判定結果項目())
+                .set認知症加算一次判定結果(create認知症加算一次判定結果())
+                .set要介護認定等基準時間(create要介護認定等基準時間(11, 12, 13, 14, 15, 16, 17, 18, 19, 20))
+                .set中間評価項目得点(create中間評価項目得点(1, 2, 3, 4, 5, 6, 7))
+                .set一次判定警告List(create一次判定警告List("000111000111000111"))
+                .set状態安定性(create介護認定状態安定性())
+                .set認知症自立度2以上蓋然性(new Decimal(12.34))
+                .set推定給付区分(create推定給付区分())
+                .set運動能力未低下認知症高齢者指標(create能力未低下認知症高齢者指標())
+                .set日常生活自立度組み合わせ(create日常生活自立度組み合わせ(21, 22, 23, 24, 25, 26, 27))
+                .set認知症高齢者日常生活自立度蓋然性評価(create認知症高齢者自立度蓋然性評価())
+                .set認知症高齢者日常生活自立度蓋然性評価率(48)
+                .set一次判定結果送付区分(IchijiHanteiSohuKubun.toValue(new RString("1")))
+                .set一次判定結果送付年月日(new FlexibleDate("20061231")).build();
     }
 
     private static IchijiHanteiResultKomoku create一次判定結果項目() {

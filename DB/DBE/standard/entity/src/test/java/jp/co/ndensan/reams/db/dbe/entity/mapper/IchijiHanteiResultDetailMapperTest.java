@@ -359,9 +359,14 @@ public class IchijiHanteiResultDetailMapperTest {
                     new RString("meisho"), new RString("ryakusho"));
             蓋然性評価 = new NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku(蓋然性評価コード_6, new RString("meisho"), new RString("ryakusho"));
 
-            IchijiHanteiResultDetail 一次判定結果詳細 = new IchijiHanteiResultDetail(申請書管理番号_01, IF区分_V02A, 仮判定区分_本判定, 一次判定年月日_20060401,
-                    一次判定結果, 認知症加算一次判定結果, 要介護認定等基準時間, 中間評価項目, list, 状態安定性, 認知症高齢者自立度2以上蓋然性_12_34,
-                    推定給付区分, 運動能力未低下認知症高齢者の指標, 日常生活自立度組み合わせ, 蓋然性評価, 蓋然性評価率_48, 結果送付区分_1, 結果送付年月_20061231);
+            IchijiHanteiResultDetail 一次判定結果詳細 = IchijiHanteiResultDetail.builder().set申請書管理番号(申請書管理番号_01)
+                    .set厚労省IF区分(IF区分_V02A).set厚労省IF区分(仮判定区分_本判定).set一次判定年月日(一次判定年月日_20060401)
+                    .set一次判定結果(一次判定結果).set認知症加算一次判定結果(認知症加算一次判定結果).set要介護認定等基準時間(要介護認定等基準時間)
+                    .set中間評価項目得点(中間評価項目).set一次判定警告List(list).set状態安定性(状態安定性)
+                    .set認知症自立度2以上蓋然性(認知症高齢者自立度2以上蓋然性_12_34).set推定給付区分(推定給付区分)
+                    .set運動能力未低下認知症高齢者指標(運動能力未低下認知症高齢者の指標).set日常生活自立度組み合わせ(日常生活自立度組み合わせ)
+                    .set認知症高齢者日常生活自立度蓋然性評価(蓋然性評価).set認知症高齢者日常生活自立度蓋然性評価率(蓋然性評価率_48)
+                    .set一次判定結果送付区分(結果送付区分_1).set一次判定結果送付年月日(結果送付年月_20061231).build();
             result = IchijiHanteiResultDetailMapper.to一次判定結果Entity(一次判定結果詳細);
         }
 

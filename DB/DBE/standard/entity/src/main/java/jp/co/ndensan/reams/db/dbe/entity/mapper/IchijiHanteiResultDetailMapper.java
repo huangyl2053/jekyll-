@@ -49,24 +49,24 @@ public final class IchijiHanteiResultDetailMapper {
         if (entity == null || 一次判定警告List == null) {
             return null;
         }
-        return new IchijiHanteiResultDetail(entity.getShinseishoKanriNo(),
-                KoroshoIFKubun.toValue(entity.getKoroshoIfShikibetsuCode()),
-                KariIchijiHanteiKubun.toValue(entity.getKariIchijiHanteiKubun()),
-                entity.getIchijiHanteiYMD(),
-                create一次判定結果(entity),
-                create認知症加算一次判定結果(entity),
-                create要介護認定等基準時間(entity),
-                create中間項目得点群(entity),
-                一次判定警告List,
-                create介護認定状態安定性(entity),
-                entity.getNinchishoJiritsudoIIijoNoGaizensei(),
-                create推定給付区分(entity),
-                create能力未低下認知症高齢者指標(entity),
-                create日常生活自立度組み合わせ(entity),
-                create認知症高齢者自立度蓋然性評価(entity),
-                entity.getGaizenseiHyokaPercent(),
-                IchijiHanteiSohuKubun.toValue(entity.getIchijiHanteiSofuKubun()),
-                entity.getIchijiHanteiKekkaSofuYMD());
+        return IchijiHanteiResultDetail.builder().set申請書管理番号(entity.getShinseishoKanriNo())
+                .set厚労省IF区分(KoroshoIFKubun.toValue(entity.getKoroshoIfShikibetsuCode()))
+                .set厚労省IF区分(KariIchijiHanteiKubun.toValue(entity.getKariIchijiHanteiKubun()))
+                .set一次判定年月日(entity.getIchijiHanteiYMD())
+                .set一次判定結果(create一次判定結果(entity))
+                .set認知症加算一次判定結果(create認知症加算一次判定結果(entity))
+                .set要介護認定等基準時間(create要介護認定等基準時間(entity))
+                .set中間評価項目得点(create中間項目得点群(entity))
+                .set一次判定警告List(一次判定警告List)
+                .set状態安定性(create介護認定状態安定性(entity))
+                .set認知症自立度2以上蓋然性(entity.getNinchishoJiritsudoIIijoNoGaizensei())
+                .set推定給付区分(create推定給付区分(entity))
+                .set運動能力未低下認知症高齢者指標(create能力未低下認知症高齢者指標(entity))
+                .set日常生活自立度組み合わせ(create日常生活自立度組み合わせ(entity))
+                .set認知症高齢者日常生活自立度蓋然性評価(create認知症高齢者自立度蓋然性評価(entity))
+                .set認知症高齢者日常生活自立度蓋然性評価率(entity.getGaizenseiHyokaPercent())
+                .set一次判定結果送付区分(IchijiHanteiSohuKubun.toValue(entity.getIchijiHanteiSofuKubun()))
+                .set一次判定結果送付年月日(entity.getIchijiHanteiKekkaSofuYMD()).build();
     }
 
     private static IchijiHanteiResultKomoku create一次判定結果(DbT5016IchijiHanteiKekkaJohoEntity entity) {
