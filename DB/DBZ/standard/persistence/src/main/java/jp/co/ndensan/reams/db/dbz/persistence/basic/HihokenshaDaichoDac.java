@@ -74,7 +74,7 @@ public class HihokenshaDaichoDac implements IInsertable<DbT1001HihokenshaDaichoE
     }
 
     /**
-     * 指定の{@link LasdecCode 地方公共団体コード}と{@link ShikibetsuCode 識別コード}から特定される被保険者の、
+     * 指定の{@link LasdecCode 地方公共団体コード}と{@link KaigoHihokenshaNo 介護被保険者番号}から特定される被保険者の、
      * 直近の資格情報を検索します。
      *
      * @param 地方公共団体コード {@link LasdecCode 地方公共団体コード}
