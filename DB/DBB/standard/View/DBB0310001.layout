@@ -1,0 +1,554 @@
+﻿{
+ "fieldName": "Page",
+ "items": [
+  {
+   "fieldName": "HonsanteiBatchKidoMain",
+   "items": [
+    {
+     "fieldName": "ShoriJokyoPanel",
+     "items": [
+      {
+       "fieldName": "lblJuminzeiKakutei",
+       "items": [],
+       "controlType": "Label",
+       "width": "M",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "align": 2,
+       "text": "住民税確定処理日時",
+       "isPrivateInfo": false
+      },
+      {
+       "fieldName": "txtJuminzeiKakuteiNichiji",
+       "items": [],
+       "controlType": "TextBoxDate",
+       "width": "M",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "text": "",
+       "isPrivateInfo": false,
+       "required": false,
+       "readOnly": true,
+       "placeHolder": "",
+       "textKind": 0,
+       "isPassword": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
+       "onKeyPress": "",
+       "labelLText": "",
+       "labelRText": "",
+       "labelLWidth": "S",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "ymdKubun": 2,
+       "displayFormat": 1
+      },
+      {
+       "fieldName": "lblTokuchoDoteiShoriNichiji",
+       "items": [],
+       "controlType": "Label",
+       "width": "M",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "align": 2,
+       "text": "特別徴収同定処理日時",
+       "isPrivateInfo": false
+      },
+      {
+       "fieldName": "txtTokuchoDoteiShoriNichiji",
+       "items": [],
+       "controlType": "TextBoxDate",
+       "width": "M",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "text": "",
+       "isPrivateInfo": false,
+       "required": false,
+       "readOnly": true,
+       "placeHolder": "",
+       "textKind": 0,
+       "isPassword": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
+       "onKeyPress": "",
+       "labelLText": "",
+       "labelRText": "",
+       "labelLWidth": "S",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "ymdKubun": 2,
+       "displayFormat": 1
+      }
+     ],
+     "controlType": "Panel",
+     "width": "M",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 1,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "onLoad": "",
+     "title": "事前処理状況",
+     "isOpen": true,
+     "canOpenAndClose": true,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "ShikakuFuseigoIchiran"
+      }
+     ],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "XS",
+     "marginBottom": "XS",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
+     "backgroundColor": 0,
+     "widthAuto": true
+    },
+    {
+     "fieldName": "ShikakuFuseigoIchiran",
+     "items": [
+      {
+       "fieldName": "dgShikakuFuseigoIchiran",
+       "items": [],
+       "controlType": "DataGrid",
+       "width": "1000",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": true,
+       "dependencies": [],
+       "float": 1,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "gridSetting": {
+        "rowNum": 10,
+        "isMultiSelectable": false,
+        "isShowAddButton": false,
+        "isShowInsertButton": false,
+        "isShowDeleteButton": false,
+        "isShowFooter": false,
+        "isShowFilter": false,
+        "header": {
+         "combineColumns": [
+          {
+           "combineColumnName": "被保番号",
+           "combineItem": [
+            "txtKetsugo01"
+           ]
+          },
+          {
+           "combineColumnName": "カナ氏名",
+           "combineItem": [
+            "txtKetsugo02"
+           ]
+          },
+          {
+           "combineColumnName": "不整合内容",
+           "combineItem": [
+            "txtFuseigo"
+           ]
+          },
+          {
+           "combineColumnName": "資格取得日",
+           "combineItem": [
+            "txtKetsugo03"
+           ]
+          },
+          {
+           "combineColumnName": "住登日",
+           "combineItem": [
+            "txtKetsugo04"
+           ]
+          }
+         ],
+         "frozenColumn": "txtShikibetsuCode"
+        },
+        "columns": [
+         {
+          "columnName": "被保番号",
+          "dataName": "txtHihoNo",
+          "width": "150",
+          "visible": false,
+          "cellType": 0,
+          "cellDetails": "\"{\\\"cellType\\\":0}\"",
+          "align": 1,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": "txtHihoNo"
+         },
+         {
+          "columnName": "識別コード",
+          "dataName": "txtShikibetsuCode",
+          "width": "150",
+          "visible": false,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": "txtShikibetsuCode"
+         },
+         {
+          "columnName": "識別コード",
+          "dataName": "txtKetsugo01",
+          "width": "150",
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": "txtKetsugo01"
+         },
+         {
+          "columnName": "カナ氏名",
+          "dataName": "txtKanaShimei",
+          "width": "230",
+          "visible": false,
+          "cellType": 0,
+          "cellDetails": "\"{\\\"cellType\\\":0}\"",
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": "txtKanaShimei"
+         },
+         {
+          "columnName": "氏名",
+          "dataName": "txtShimei",
+          "width": "230",
+          "visible": false,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": "txtShimei"
+         },
+         {
+          "columnName": "氏名",
+          "dataName": "txtKetsugo02",
+          "width": "230",
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": "txtKetsugo02"
+         },
+         {
+          "columnName": "",
+          "dataName": "txtFuseigo",
+          "width": "380",
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": {
+           "cellType": 0
+          },
+          "align": 1,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": "txtFuseigo"
+         },
+         {
+          "columnName": "資格取得日",
+          "dataName": "txtShikakuGetYmd",
+          "width": "100",
+          "visible": false,
+          "cellType": 7,
+          "cellDetails": {
+           "cellType": 7,
+           "ymdKubun": 2,
+           "displayFormat": 5
+          },
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": "txtShikakuGetYmd"
+         },
+         {
+          "columnName": "資格喪失日",
+          "dataName": "txtShikakuLostYmd",
+          "width": "100",
+          "visible": false,
+          "cellType": 7,
+          "cellDetails": {
+           "cellType": 7,
+           "ymdKubun": 2,
+           "displayFormat": 5
+          },
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": "txtShikakuLostYmd"
+         },
+         {
+          "columnName": "資格喪失日",
+          "dataName": "txtKetsugo03",
+          "width": "100",
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 1,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": "txtKetsugo03"
+         },
+         {
+          "columnName": "住登日",
+          "dataName": "txtJutouYmd",
+          "width": "100",
+          "visible": false,
+          "cellType": 7,
+          "cellDetails": {
+           "cellType": 7,
+           "ymdKubun": 2,
+           "displayFormat": 5
+          },
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": "txtJutouYmd"
+         },
+         {
+          "columnName": "消除日",
+          "dataName": "txtShojoYmd",
+          "width": "100",
+          "visible": false,
+          "cellType": 7,
+          "cellDetails": {
+           "cellType": 7,
+           "ymdKubun": 2,
+           "displayFormat": 5
+          },
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": "txtShojoYmd"
+         },
+         {
+          "columnName": "消除日",
+          "dataName": "txtKetsugo04",
+          "width": "100",
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 1,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": "txtKetsugo04"
+         }
+        ]
+       },
+       "height": 5,
+       "onSort": "",
+       "onPageChanged": "",
+       "onSelect": "",
+       "onAddRow": "",
+       "onDeleteRow": "",
+       "onOnlyRow": "",
+       "onNoRow": "",
+       "onMultiRows": "",
+       "onExecuteFilter": "",
+       "currentPageNum": 1,
+       "dataSource": [],
+       "selectedItems": [],
+       "clickedItem": null,
+       "sortOrder": "",
+       "isAscending": true,
+       "filterList": [],
+       "totalRecords": 10
+      }
+     ],
+     "controlType": "Panel",
+     "width": "M",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 1,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "onLoad": "",
+     "title": "資格不整合一覧",
+     "isOpen": true,
+     "canOpenAndClose": true,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "ShikakuFuseigoIchiran"
+      }
+     ],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "XS",
+     "marginBottom": "XS",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
+     "backgroundColor": 0,
+     "widthAuto": true
+    }
+   ],
+   "controlType": "Panel",
+   "width": "M",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "HonsanteiBatchKidoMain"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "XS",
+   "marginBottom": "XS",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": true
+  }
+ ],
+ "controlType": null,
+ "width": "XS",
+ "visible": true,
+ "displayNone": false,
+ "disabled": false,
+ "accessKey": "",
+ "nextFocusFieldName": "",
+ "wrap": false,
+ "dependencies": [],
+ "float": 0,
+ "toolTip": "",
+ "authorityMode": 0,
+ "marginLeft": "XS",
+ "marginRight": "XS",
+ "onLoad": "",
+ "title": "親Divタイトル",
+ "jsPathCollection": [],
+ "relation": [],
+ "stateTransition": [
+  {
+   "order": "1",
+   "stateName": "不整合一覧",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "ShoriJokyoPanel",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "ShikakuFuseigoIchiran",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "HonsanteiBatchKidoMain",
+     "panelState": "visible"
+    }
+   ],
+   "validation": {},
+   "events": []
+  }
+ ],
+ "currentState": "All",
+ "id": "DBB0310001",
+ "WFParameter": [],
+ "UIContainerEventMapping": [],
+ "loadSequencePanelNames": [
+  [
+   "ShikakuFuseigoIchiran",
+   "ShoriJokyoPanel"
+  ],
+  [
+   "HonsanteiBatchKidoMain"
+  ]
+ ]
+}
