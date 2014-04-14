@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaItakusakiTestHelper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.NinteichosaIraiTaishoshaDac;
 import jp.co.ndensan.reams.db.dbe.entity.helper.KaigoNinteichosainTestHelper;
-import jp.co.ndensan.reams.db.dbe.realservice.helper.NinteichosaIraiTestHelper;
+import jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaIraiTestHelper;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;

@@ -21,7 +21,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.*;
 import static jp.co.ndensan.reams.db.dbe.entity.helper.KaigoNinteichosainTestHelper.*;
-import jp.co.ndensan.reams.db.dbe.realservice.helper.MockNinteichosaItakusakiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaItakusakiTestHelper;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -300,7 +300,7 @@ public class KaigoNinteichosainManagerTest extends TestBase {
     }
 
     private static DbT7010NinteichosaItakusakiJohoEntity createItakusakiEntity() {
-        DbT7010NinteichosaItakusakiJohoEntity entity = MockNinteichosaItakusakiJohoEntity.getSpiedInstance();
+        DbT7010NinteichosaItakusakiJohoEntity entity = NinteichosaItakusakiTestHelper.create認定調査委託先Entity();
         return entity;
     }
 }
