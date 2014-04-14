@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiResultIdoJiyuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIkenType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShisetsuNyushoKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TsuchiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiYukoKikanTsukisu;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TokuteiShippeiCode;
@@ -58,6 +59,7 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
     private static final FlexibleDate 認定結果異動年月日 = new FlexibleDate("20140404");
     private static final RString 認定取消理由 = new RString("認定取消理由");
     private static final FlexibleDate 認定取消年月日 = new FlexibleDate("20140505");
+    private static final TsuchiKubun 通知区分 = TsuchiKubun.認定;
     private static final RString 認定理由 = new RString("認定理由");
 
     public static class toNinteiResult extends DbeTestBase {
@@ -200,6 +202,13 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
             entity.setNinteiTorikeshiYMD(認定取消年月日);
             NinteiResult result = sut.toNinteiResult(entity);
             assertThat(result.get認定取消().get認定取消年月日(), is(認定取消年月日));
+        }
+
+        @Test
+        public void 通知区分の設定がある時_toNinteiResultで生成した_NinteiResult_get通知区分は_設定値を返す() {
+            entity.setTuchiKubun(通知区分.getCode());
+            NinteiResult result = sut.toNinteiResult(entity);
+            assertThat(result.get通知区分(), is(通知区分));
         }
 
         @Test
@@ -350,6 +359,13 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
             when(ninteiResult.get認定理由()).thenReturn(認定理由);
             DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
             assertThat(result.getNinteiRiyu(), is(認定理由));
+        }
+
+        @Test
+        public void 通地区分の設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getTuchiKubunは_設定値を返す() {
+            when(ninteiResult.get通知区分()).thenReturn(通知区分);
+            DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
+            assertThat(result.getTuchiKubun(), is(通知区分.getCode()));
         }
 
         @Test

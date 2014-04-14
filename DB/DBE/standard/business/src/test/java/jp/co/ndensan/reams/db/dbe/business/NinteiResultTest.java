@@ -56,6 +56,7 @@ public class NinteiResultTest extends DbeTestBase {
                 ninteiResult.get認定審査会意見(),
                 ninteiResult.get認定結果異動(),
                 ninteiResult.get認定取消(),
+                ninteiResult.get通知区分(),
                 ninteiResult.get認定理由());
     }
 }

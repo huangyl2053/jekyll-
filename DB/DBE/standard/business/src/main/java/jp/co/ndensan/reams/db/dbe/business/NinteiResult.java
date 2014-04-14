@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShisetsuNyushoKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TsuchiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -29,6 +30,7 @@ public class NinteiResult {
     private final NinteiShinsakaiIken 認定審査会意見;
     private final NinteiResultIdo 認定結果異動;
     private final NinteiTorikeshi 認定取消;
+    private final TsuchiKubun 通知区分;
     private final RString 認定理由;
 
     /**
@@ -57,6 +59,7 @@ public class NinteiResult {
             NinteiShinsakaiIken 認定審査会意見,
             NinteiResultIdo 認定結果異動,
             NinteiTorikeshi 認定取消,
+            TsuchiKubun 通知区分,
             RString 認定理由) {
         this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00001.replace("申請書管理番号").getMessage());
         this.要介護度認定年月日 = requireNonNull(要介護度認定年月日, Messages.E00001.replace("要介護度認定年月日").getMessage());
@@ -68,6 +71,7 @@ public class NinteiResult {
         this.認定審査会意見 = 認定審査会意見;
         this.認定結果異動 = 認定結果異動;
         this.認定取消 = 認定取消;
+        this.通知区分 = 通知区分;
         this.認定理由 = 認定理由;
     }
 
@@ -159,6 +163,15 @@ public class NinteiResult {
      */
     public NinteiTorikeshi get認定取消() {
         return 認定取消;
+    }
+
+    /**
+     * 通知区分を返します。
+     *
+     * @return 通知区分
+     */
+    public TsuchiKubun get通知区分() {
+        return 通知区分;
     }
 
     /**

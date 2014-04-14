@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.entity.helper;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiResultIdoJiyuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIkenType;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TsuchiKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5002NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -62,7 +63,7 @@ public class DbT5002NinteiKekkaJohoEntityMock {
         entity.setNinteiKekkaIdoYMD(new FlexibleDate("20140404"));
         entity.setNinteiTorikeshiRiyu(new RString("認定取消理由"));
         entity.setNinteiTorikeshiYMD(new FlexibleDate("20140505"));
-        entity.setTuchiKubun(new RString("01"));
+        entity.setTuchiKubun(TsuchiKubun.認定.getCode());
         entity.setNinteiRiyu(new RString("認定理由"));
         entity.setShinsakaiMemo(new RString("審査会メモ"));
         return entity;

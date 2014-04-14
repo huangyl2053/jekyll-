@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiResultIdoJiyuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIkenType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShisetsuNyushoKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TsuchiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiYukoKikanTsukisu;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5002NinteiKekkaJohoEntity;
@@ -57,6 +58,7 @@ public final class NinteiKekkaMapper {
                 create認定審査会意見(entity),
                 new NinteiResultIdo(NinteiResultIdoJiyuKubun.toValue(entity.getNinteiKekkaIdoJiyu()), entity.getNinteiKekkaIdoYMD()),
                 new NinteiTorikeshi(entity.getNinteiTorikeshiRiyu(), entity.getNinteiTorikeshiYMD()),
+                TsuchiKubun.toValue(entity.getTuchiKubun()),
                 entity.getNinteiRiyu());
     }
 
@@ -108,6 +110,7 @@ public final class NinteiKekkaMapper {
         entity.setNinteiKekkaIdoYMD(ninteiResult.get認定結果異動().get認定結果異動年月日());
         entity.setNinteiTorikeshiRiyu(ninteiResult.get認定取消().get認定取消理由());
         entity.setNinteiTorikeshiYMD(ninteiResult.get認定取消().get認定取消年月日());
+        entity.setTuchiKubun(ninteiResult.get通知区分().getCode());
         entity.setNinteiRiyu(ninteiResult.get認定理由());
         entity.setShinsakaiMemo(ninteiResult.get認定審査会意見().get審査会メモ());
         return entity;

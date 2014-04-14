@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiResultIdoJiyuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIkenType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShisetsuNyushoKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TsuchiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiYukoKikanTsukisu;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
@@ -59,6 +60,7 @@ public class NinteiResultMock {
                 createNinteiShinsakaiIken(),
                 createNinteiResultIdo(),
                 createNinteiTorikeshi(),
+                TsuchiKubun.認定,
                 new RString("認定理由"));
     }
 
