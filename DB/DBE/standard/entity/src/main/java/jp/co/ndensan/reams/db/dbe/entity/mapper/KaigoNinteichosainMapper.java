@@ -9,7 +9,9 @@ import jp.co.ndensan.reams.db.dbe.business.KaigoNinteichosain;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 
 /**
  * 介護認定調査員のMapperクラスです。
@@ -40,12 +42,12 @@ public final class KaigoNinteichosainMapper {
 
         return new KaigoNinteichosain(
                 chosainJohoEntity.getShoKisaiHokenshaNo(),
-                chosainJohoEntity.getKaigoJigyoshaNo(),
+                new KaigoJigyoshaNo(chosainJohoEntity.getKaigoJigyoshaNo()),
                 new KaigoNinteichosainNo(chosainJohoEntity.getKaigoChosainNo()),
                 chosainJohoEntity.getKaigoChosainJokyo(),
                 chosainJohoEntity.getChosainShimei(),
                 chosainJohoEntity.getChosainKanaShimei(),
-                chosainJohoEntity.getSeibetsu(),
+                Gender.toValue(chosainJohoEntity.getSeibetsu()),
                 chosainJohoEntity.getChosainShikakuCode(),
                 chosainJohoEntity.getChikuCode(),
                 chosainJohoEntity.getYubinNo(),
@@ -65,13 +67,13 @@ public final class KaigoNinteichosainMapper {
         requireNonNull(介護認定調査員, Messages.E00003.replace("介護認定調査員", "介護認定調査員エンティティ").getMessage());
         DbT7013ChosainJohoEntity entity = new DbT7013ChosainJohoEntity();
         entity.setShoKisaiHokenshaNo(介護認定調査員.get証記載保険者番号());
-        entity.setKaigoJigyoshaNo(介護認定調査員.get介護事業者番号());
+        entity.setKaigoJigyoshaNo(介護認定調査員.get介護事業者番号().value());
         entity.setKaigoChosainNo(介護認定調査員.get介護調査員番号().value());
-        entity.setJigyoshaNo(介護認定調査員.get認定調査委託先().getJigyoshaNo());
+        entity.setJigyoshaNo(介護認定調査員.get認定調査委託先().getJigyoshaNo().value());
         entity.setKaigoChosainJokyo(介護認定調査員.is調査員状況());
         entity.setChosainShimei(介護認定調査員.get調査員氏名());
         entity.setChosainKanaShimei(介護認定調査員.get調査員氏名カナ());
-        entity.setSeibetsu(介護認定調査員.get性別());
+        entity.setSeibetsu(介護認定調査員.get性別().getCode());
         entity.setChosainShikakuCode(介護認定調査員.get調査員資格コード());
         entity.setChikuCode(介護認定調査員.get地区コード());
         entity.setYubinNo(介護認定調査員.get郵便番号());

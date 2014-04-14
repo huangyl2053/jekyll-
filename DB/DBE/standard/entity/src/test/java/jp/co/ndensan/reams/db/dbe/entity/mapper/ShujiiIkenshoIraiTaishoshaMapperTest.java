@@ -9,15 +9,16 @@ import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoIraiTaishosha;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinseiJohoTestHelper;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import static org.mockito.Mockito.mock;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import static org.hamcrest.CoreMatchers.*;
+import org.junit.Before;
 
 /**
  * 主治医意見書作成依頼対象者のビジネスクラスとエンティティの変換を行うMapperのテストクラスです。
@@ -25,7 +26,7 @@ import static org.hamcrest.CoreMatchers.*;
  * @author N8187 久保田 英男
  */
 @RunWith(Enclosed.class)
-public class ShujiiIkenshoIraiTaishoshaMapperTest extends TestBase {
+public class ShujiiIkenshoIraiTaishoshaMapperTest extends DbeTestBase {
 
     private static ShujiiIkenshoIraiTaishosha sut;
     private static NinteiShinseiJoho 認定申請情報;
@@ -35,10 +36,10 @@ public class ShujiiIkenshoIraiTaishoshaMapperTest extends TestBase {
     private static KaigoIryoKikan 主治医医療機関;
     private static KaigoDoctor 主治医;
 
-    public static class ConstructorTest extends TestBase {
+    public static class ConstructorTest extends DbeTestBase {
 
-        @Override
-        protected void setUp() {
+        @Before
+        public void setUp() {
             認定申請情報 = mock(NinteiShinseiJoho.class);
             個人 = mock(IKojin.class);
             氏名 = new RString("あああ");
@@ -55,10 +56,10 @@ public class ShujiiIkenshoIraiTaishoshaMapperTest extends TestBase {
         }
     }
 
-    public static class toShujiiIkenshoIraiTaishoshaTest extends TestBase {
+    public static class toShujiiIkenshoIraiTaishoshaTest extends DbeTestBase {
 
-        @Override
-        protected void setUp() {
+        @Before
+        public void setUp() {
             認定申請情報 = NinteiShinseiJohoTestHelper.create認定申請情報();
             個人 = mock(IKojin.class);
             氏名 = new RString("あああ");

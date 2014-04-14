@@ -68,7 +68,7 @@ public class KaigoNinteichosainDac implements IReplaceable<DbT7013ChosainJohoEnt
                 eq(shoKisaiHokenshaNo, 証記載保険者番号),
                 eq(kaigoJigyoshaNo, 介護事業者番号),
                 eq(kaigoChosainNo, 介護調査員番号.value()),
-                eq(kaigoChosainJokyo, 調査員の状況)))
+                eq(kaigoChosainJokyo, 調査員の状況.is有効())))
                 .toObject(DbT7013ChosainJohoEntity.class);
     }
 
@@ -108,7 +108,7 @@ public class KaigoNinteichosainDac implements IReplaceable<DbT7013ChosainJohoEnt
                 .where(and(
                 eq(shoKisaiHokenshaNo, 証記載保険者番号),
                 eq(kaigoJigyoshaNo, 介護事業者番号),
-                eq(kaigoChosainJokyo, 調査員の状況)))
+                eq(kaigoChosainJokyo, 調査員の状況.is有効())))
                 .toList(DbT7013ChosainJohoEntity.class);
     }
 
@@ -127,7 +127,7 @@ public class KaigoNinteichosainDac implements IReplaceable<DbT7013ChosainJohoEnt
                 .table(DbT7013ChosainJoho.class)
                 .where(and(
                 eq(shoKisaiHokenshaNo, 証記載保険者番号),
-                eq(kaigoChosainJokyo, 調査員の状況)))
+                eq(kaigoChosainJokyo, 調査員の状況.is有効())))
                 .toList(DbT7013ChosainJohoEntity.class);
     }
 
@@ -175,8 +175,8 @@ public class KaigoNinteichosainDac implements IReplaceable<DbT7013ChosainJohoEnt
         return accessor.select()
                 .table(DbT7013ChosainJoho.class)
                 .where(and(
-                eq(shoKisaiHokenshaNo, entity.getShoKisaiHokenshaNo()),
-                eq(kaigoJigyoshaNo, entity.getKaigoChosainNo()),
+                eq(shoKisaiHokenshaNo, entity.getShoKisaiHokenshaNo().getValue()),
+                eq(kaigoJigyoshaNo, entity.getKaigoJigyoshaNo()),
                 eq(kaigoChosainNo, entity.getKaigoChosainNo())))
                 .getCount();
     }

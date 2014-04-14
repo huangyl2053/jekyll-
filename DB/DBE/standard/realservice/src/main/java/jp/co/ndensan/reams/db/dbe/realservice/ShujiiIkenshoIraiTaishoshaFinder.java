@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- * 主治医意見書依頼対象者の情報を扱うクラスです。
+ * 主治医意見書作成依頼対象者の情報を扱うクラスです。
  *
  * @author N8187 久保田 英男
  */

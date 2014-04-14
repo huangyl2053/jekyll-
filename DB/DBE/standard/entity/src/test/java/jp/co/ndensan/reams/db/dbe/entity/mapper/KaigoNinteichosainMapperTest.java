@@ -130,7 +130,7 @@ public class KaigoNinteichosainMapperTest extends TestBase {
 
         @Test
         public void 渡された認定調査員クラスの介護事業者番号と_認定調査員エンティティの介護事業者番号が_同一になる() {
-            assertThat(sut.getKaigoJigyoshaNo(), is(介護事業者番号));
+            assertThat(sut.getKaigoJigyoshaNo(), is(介護事業者番号.value()));
         }
 
         @Test
@@ -140,7 +140,7 @@ public class KaigoNinteichosainMapperTest extends TestBase {
 
         @Test
         public void 渡された認定調査員クラスの事業者番号と_認定調査員エンティティの事業者番号が_同一になる() {
-            assertThat(sut.getJigyoshaNo().getColumnValue(), is(事業者番号.getColumnValue()));
+            assertThat(sut.getJigyoshaNo(), is(事業者番号.getColumnValue()));
         }
 
         @Test
@@ -160,7 +160,7 @@ public class KaigoNinteichosainMapperTest extends TestBase {
 
         @Test
         public void 渡された認定調査員クラスの性別と_認定調査員エンティティの性別が_同一になる() {
-            assertThat(sut.getSeibetsu(), is(性別));
+            assertThat(sut.getSeibetsu(), is(性別.getCode()));
         }
 
         @Test

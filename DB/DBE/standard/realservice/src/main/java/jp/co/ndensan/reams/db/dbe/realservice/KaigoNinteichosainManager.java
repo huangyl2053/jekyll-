@@ -151,7 +151,7 @@ public class KaigoNinteichosainManager {
 
         for (DbT7013ChosainJohoEntity chosainEntity : entityList) {
             DbT7010NinteichosaItakusakiJohoEntity itakusakiEntity = itakusakiDac.select(
-                    chosainEntity.getShoKisaiHokenshaNo(), chosainEntity.getKaigoJigyoshaNo(), true);
+                    chosainEntity.getShoKisaiHokenshaNo(), new KaigoJigyoshaNo(chosainEntity.getKaigoJigyoshaNo()), true);
             chosainList.add(KaigoNinteichosainMapper.toKaigoNinteichosain(chosainEntity, itakusakiEntity));
         }
 
