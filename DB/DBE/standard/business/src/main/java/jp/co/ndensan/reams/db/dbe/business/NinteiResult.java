@@ -4,11 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShisetsuNyushoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TsuchiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.ur.urz.business.IKaigoServiceShurui;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -27,7 +27,7 @@ public class NinteiResult {
     private final FlexibleDate 要介護度認定年月日;
     private final YokaigoJotai 要介護状態;
     private final YokaigoJotaizoRei 要介護状態像例;
-    private final KaigoServiceType 介護サービス種類;
+    private final IKaigoServiceShurui 介護サービス種類;
     private final ShisetsuNyushoKubun 施設入所区分;
     private final TokuteiShippei 特定疾病;
     private final NinteiShinsakaiIken 認定審査会意見;
@@ -60,7 +60,7 @@ public class NinteiResult {
             FlexibleDate 要介護度認定年月日,
             YokaigoJotai 要介護状態,
             YokaigoJotaizoRei 要介護状態像例,
-            KaigoServiceType 介護サービス種類,
+            IKaigoServiceShurui 介護サービス種類,
             ShisetsuNyushoKubun 施設入所区分,
             TokuteiShippei 特定疾病,
             NinteiShinsakaiIken 認定審査会意見,
@@ -143,7 +143,7 @@ public class NinteiResult {
      *
      * @return 介護サービス種類
      */
-    public KaigoServiceType get介護サービス種類() {
+    public IKaigoServiceShurui get介護サービス種類() {
         return 介護サービス種類;
     }
 

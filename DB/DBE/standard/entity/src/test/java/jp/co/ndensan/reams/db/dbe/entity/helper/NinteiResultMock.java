@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbe.business.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotai;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotaizoRei;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiResultIdoJiyuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIkenType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShisetsuNyushoKubun;
@@ -22,9 +21,13 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiYukoKikanTsukisu;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.ur.urz.business._KaigoServiceShurui;
+import jp.co.ndensan.reams.ur.urz.business.IKaigoServiceShurui;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import static org.mockito.Mockito.spy;
 
 /**
@@ -57,7 +60,7 @@ public class NinteiResultMock {
                 new FlexibleDate("20140101"),
                 createYokaigoJotai(),
                 createYokaigoJotaizoRei(),
-                KaigoServiceType.訪問介護,
+                createKaigoServiceShurui(),
                 ShisetsuNyushoKubun.入所している,
                 createTokuteiShippeiKubun(),
                 createNinteiShinsakaiIken(),
@@ -65,10 +68,6 @@ public class NinteiResultMock {
                 createNinteiTorikeshi(),
                 TsuchiKubun.認定,
                 new RString("認定理由"));
-    }
-
-    private static ShinseishoKanriNo createShinseishoKanriNo() {
-        return new ShinseishoKanriNo(new RString("1234567890"));
     }
 
     private static YokaigoJotai createYokaigoJotai() {
@@ -81,6 +80,12 @@ public class NinteiResultMock {
 
     private static YokaigoJotaizoRei createYokaigoJotaizoRei() {
         return spy(new YokaigoJotaizoRei(new Code(new RString("2222222222")), new RString("名称"), new RString("略称")));
+    }
+
+    private static IKaigoServiceShurui createKaigoServiceShurui() {
+        return spy(new _KaigoServiceShurui(
+                new RString("01"), new Range<>(RYearMonth.MIN, RYearMonth.MAX), new RString("サービス種類名称"),
+                new RString("サービス種類名称略称"), new RString("サービス分類")));
     }
 
     private static NinteiYukoKikan createNinteiYukoKikan() {

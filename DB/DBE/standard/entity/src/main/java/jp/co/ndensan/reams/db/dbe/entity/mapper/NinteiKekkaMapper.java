@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbe.business.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotai;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoJotaizoRei;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiResultIdoJiyuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIkenType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShisetsuNyushoKubun;
@@ -21,6 +20,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TsuchiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiYukoKikanTsukisu;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5002NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.ur.urz.business.IKaigoServiceShurui;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -40,9 +40,10 @@ public final class NinteiKekkaMapper {
      * 引数の認定結果情報エンティティから認定結果情報を作成して返します。
      *
      * @param entity 認定結果エンティティ
+     * @param 介護サービス種類 介護サービス種類
      * @return 認定結果情報
      */
-    public static NinteiResult toNinteiResult(DbT5002NinteiKekkaJohoEntity entity) {
+    public static NinteiResult toNinteiResult(DbT5002NinteiKekkaJohoEntity entity, IKaigoServiceShurui 介護サービス種類) {
         if (entity == null) {
             return null;
         }
@@ -53,7 +54,7 @@ public final class NinteiKekkaMapper {
                 entity.getYoukaigodoNinteiYMD(),
                 create要介護状態(entity),
                 new YokaigoJotaizoRei(entity.getYokaigoJotaizoReiCode(), RString.EMPTY, RString.EMPTY),
-                KaigoServiceType.toValue(entity.getKaigoServiceShurui()),
+                介護サービス種類,
                 ShisetsuNyushoKubun.toValue(entity.getShisetsuNyushoFlag()),
                 new TokuteiShippei(entity.getTokuteiShippeiCode(), RString.EMPTY, RString.EMPTY),
                 create認定審査会意見(entity),
@@ -108,7 +109,7 @@ public final class NinteiKekkaMapper {
         entity.setIchijiHnateiKekkaHenkoRiyu(ninteiResult.get認定審査会意見().get一次判定結果変更理由());
         entity.setYokaigoJotaizoReiCode(ninteiResult.get要介護状態像例().getCode());
         entity.setNinteishinsakaiIkenShurui(ninteiResult.get認定審査会意見().get審査会意見種類().getCode());
-        entity.setKaigoServiceShurui(ninteiResult.get介護サービス種類().getCode());
+        entity.setKaigoServiceShurui(ninteiResult.get介護サービス種類().getサービス種類コード());
         entity.setNinteiKekkaIdoJiyu(ninteiResult.get認定結果異動().get認定結果異動事由区分().getCode());
         entity.setNinteiKekkaIdoYMD(ninteiResult.get認定結果異動().get認定結果異動年月日());
         entity.setNinteiTorikeshiRiyu(ninteiResult.get認定取消().get認定取消理由());

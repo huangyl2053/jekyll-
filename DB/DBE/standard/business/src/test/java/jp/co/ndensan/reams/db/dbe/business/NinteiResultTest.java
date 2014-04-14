@@ -5,8 +5,6 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.business.helper.NinteiResultMock;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShisetsuNyushoKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import org.junit.experimental.runners.Enclosed;
@@ -64,8 +62,8 @@ public class NinteiResultTest extends DbeTestBase {
                 flg == AS_要介護度認定年月日がNULL ? null : FlexibleDate.MIN,
                 flg == AS_要介護状態がNULL ? null : ninteiResult.get要介護状態(),
                 ninteiResult.get要介護状態像例(),
-                KaigoServiceType.訪問介護,
-                ShisetsuNyushoKubun.入所している,
+                ninteiResult.get介護サービス種類(),
+                ninteiResult.get施設入所区分(),
                 ninteiResult.get特定疾病(),
                 ninteiResult.get認定審査会意見(),
                 ninteiResult.get認定結果異動(),

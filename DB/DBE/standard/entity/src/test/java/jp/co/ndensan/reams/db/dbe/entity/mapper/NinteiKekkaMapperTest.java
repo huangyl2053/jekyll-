@@ -5,7 +5,6 @@
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteiResult;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiResultIdoJiyuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIkenType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShisetsuNyushoKubun;
@@ -21,9 +20,12 @@ import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiResultMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
+import jp.co.ndensan.reams.ur.urz.business.IKaigoServiceShurui;
+import jp.co.ndensan.reams.ur.urz.business._KaigoServiceShurui;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import org.junit.Before;
 import org.junit.experimental.runners.Enclosed;
@@ -50,7 +52,7 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
     private static final YokaigoJotaizoReiCode 要介護状態像例コード = new YokaigoJotaizoReiCode(new Code(new RString("2222222222")));
     private static final NinteiYukoKikanTsukisu 有効期間月数 = new NinteiYukoKikanTsukisu(1);
     private static final Range<FlexibleDate> 有効期間 = new Range(new FlexibleDate("20140202"), new FlexibleDate("20140303"));
-    private static final KaigoServiceType 介護サービス種類 = KaigoServiceType.訪問介護;
+    private static final IKaigoServiceShurui 介護サービス種類 = create介護サービス種類("01");
     private static final ShisetsuNyushoKubun 施設入所区分 = ShisetsuNyushoKubun.入所している;
     private static final TokuteiShippeiCode 特定疾病コード = new TokuteiShippeiCode(new Code(new RString("3333333333")));
     private static final ShinsakaiKaisaiNo 審査会開催番号 = new ShinsakaiKaisaiNo(123);
@@ -77,161 +79,161 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
         @Test
         public void 申請書管理番号の設定がある時_toNinteiResultで生成した_NinteiResult_get申請書管理番号は_設定値を返す() {
             entity.setShinseishoKanriNo(申請書管理番号);
-            NinteiResult result = sut.toNinteiResult(entity);
+            NinteiResult result = sut.toNinteiResult(entity, 介護サービス種類);
             assertThat(result.get申請書管理番号(), is(申請書管理番号));
         }
 
         @Test
         public void 証記載保険者番号の設定がある時_toNinteiResultで生成した_NinteiResult_get証記載保険者番号は_設定値を返す() {
             entity.setShoKisaiHokenshaNo(証記載保険者番号);
-            NinteiResult result = sut.toNinteiResult(entity);
+            NinteiResult result = sut.toNinteiResult(entity, 介護サービス種類);
             assertThat(result.get証記載保険者番号(), is(証記載保険者番号));
         }
 
         @Test
         public void 被保険者番号の設定がある時_toNinteiResultで生成した_NinteiResult_get被保険者番号は_設定値を返す() {
             entity.setHihokenshaNo(被保険者番号);
-            NinteiResult result = sut.toNinteiResult(entity);
+            NinteiResult result = sut.toNinteiResult(entity, 介護サービス種類);
             assertThat(result.get被保険者番号(), is(被保険者番号));
         }
 
         @Test
         public void 要介護度認定年月日の設定がある時_toNinteiResultで生成した_NinteiResult_get要介護度認定年月日は_設定値を返す() {
             entity.setYoukaigodoNinteiYMD(要介護度認定年月日);
-            NinteiResult result = sut.toNinteiResult(entity);
+            NinteiResult result = sut.toNinteiResult(entity, 介護サービス種類);
             assertThat(result.get要介護度認定年月日(), is(要介護度認定年月日));
         }
 
         @Test
         public void 要介護状態区分コードの設定がある時_toNinteiResultで生成した_NinteiResult_get要介護状態_get要介護状態区分_getYokaigoJotaiKubunCode_設定値を返す() {
             entity.setYoukaigoJotaiKubunCode(要介護状態区分コード.asCode());
-            NinteiResult result = sut.toNinteiResult(entity);
+            NinteiResult result = sut.toNinteiResult(entity, 介護サービス種類);
             assertThat(result.get要介護状態().get要介護状態区分().getYokaigoJotaiKubunCode(), is(要介護状態区分コード));
         }
 
         @Test
         public void 有効期間月数の設定がある時_toNinteiResultで生成した_NinteiResult_get要介護状態_get認定有効期間_get有効期間月数は_設定値を返す() {
             entity.setNinteiYukoKikan(有効期間月数.value());
-            NinteiResult result = sut.toNinteiResult(entity);
+            NinteiResult result = sut.toNinteiResult(entity, 介護サービス種類);
             assertThat(result.get要介護状態().get認定有効期間().get有効期間月数(), is(有効期間月数));
         }
 
         @Test
         public void 有効開始年月日の設定がある時_toNinteiResultで生成した_NinteiResult_get要介護状態_get認定有効期間_get有効期間_getFromは_設定値を返す() {
             entity.setNinteiYukoKaishiYMD(有効期間.getFrom());
-            NinteiResult result = sut.toNinteiResult(entity);
+            NinteiResult result = sut.toNinteiResult(entity, 介護サービス種類);
             assertThat(result.get要介護状態().get認定有効期間().get有効期間().getFrom(), is(有効期間.getFrom()));
         }
 
         @Test
         public void 有効終了年月日の設定がある時_toNinteiResultで生成した_NinteiResult_get要介護状態_get認定有効期間_get有効期間_getToは_設定値を返す() {
             entity.setNinteiYukoShuryoYMD(有効期間.getTo());
-            NinteiResult result = sut.toNinteiResult(entity);
+            NinteiResult result = sut.toNinteiResult(entity, 介護サービス種類);
             assertThat(result.get要介護状態().get認定有効期間().get有効期間().getTo(), is(有効期間.getTo()));
         }
 
         @Test
         public void 要介護状態像例コードの設定がある時_toNinteiResultで生成した_NinteiResult_get要介護状態像例_getYokaigoJotaizoReiCodeは_設定値を返す() {
             entity.setYokaigoJotaizoReiCode(要介護状態像例コード.asCode());
-            NinteiResult result = sut.toNinteiResult(entity);
+            NinteiResult result = sut.toNinteiResult(entity, 介護サービス種類);
             assertThat(result.get要介護状態像例().getYokaigoJotaizoReiCode(), is(要介護状態像例コード));
         }
 
         @Test
         public void 介護サービス種類の設定がある時_toNinteiResultで生成した_NinteiResult_get介護サービス種類は_設定値を返す() {
-            entity.setKaigoServiceShurui(介護サービス種類.getCode());
-            NinteiResult result = sut.toNinteiResult(entity);
+            entity.setKaigoServiceShurui(介護サービス種類.getサービス種類コード());
+            NinteiResult result = sut.toNinteiResult(entity, 介護サービス種類);
             assertThat(result.get介護サービス種類(), is(介護サービス種類));
         }
 
         @Test
         public void 施設入所区分の設定がある時_toNinteiResultで生成した_NinteiResult_is施設入所区分は_設定値を返す() {
             entity.setShisetsuNyushoFlag(施設入所区分.is施設入所());
-            NinteiResult result = sut.toNinteiResult(entity);
+            NinteiResult result = sut.toNinteiResult(entity, 介護サービス種類);
             assertThat(result.get施設入所区分(), is(施設入所区分));
         }
 
         @Test
         public void 特定疾病コードの設定がある時_toNinteiResultで生成した_NinteiResult_get特定疾病_getTokuteiShippeiKubunCodeは_設定値を返す() {
             entity.setTokuteiShippeiCode(特定疾病コード.asCode());
-            NinteiResult result = sut.toNinteiResult(entity);
+            NinteiResult result = sut.toNinteiResult(entity, 介護サービス種類);
             assertThat(result.get特定疾病().getTokuteiShippeiKubunCode(), is(特定疾病コード));
         }
 
         @Test
         public void 審査会開催番号の設定がある時_toNinteiResultで生成した_NinteiResult_get認定審査会意見_get審査会開催番号は_設定値を返す() {
             entity.setShinsakaiKaisaiNo(審査会開催番号.value());
-            NinteiResult result = sut.toNinteiResult(entity);
+            NinteiResult result = sut.toNinteiResult(entity, 介護サービス種類);
             assertThat(result.get認定審査会意見().get審査会開催番号(), is(審査会開催番号));
         }
 
         @Test
         public void 審査会意見種類の設定がある時_toNinteiResultで生成した_NinteiResult_get認定審査会意見_get審査会意見種類は_設定値を返す() {
             entity.setNinteishinsakaiIkenShurui(審査会意見種類.getCode());
-            NinteiResult result = sut.toNinteiResult(entity);
+            NinteiResult result = sut.toNinteiResult(entity, 介護サービス種類);
             assertThat(result.get認定審査会意見().get審査会意見種類(), is(審査会意見種類));
         }
 
         @Test
         public void 審査会意見の設定がある時_toNinteiResultで生成した_NinteiResult_get認定審査会意見_get審査会意見は_設定値を返す() {
             entity.setShinsakaiIken(審査会意見);
-            NinteiResult result = sut.toNinteiResult(entity);
+            NinteiResult result = sut.toNinteiResult(entity, 介護サービス種類);
             assertThat(result.get認定審査会意見().get審査会意見(), is(審査会意見));
         }
 
         @Test
         public void 審査会メモの設定がある時_toNinteiResultで生成した_NinteiResult_get認定審査会意見_get審査会メモは_設定値を返す() {
             entity.setShinsakaiMemo(審査会メモ);
-            NinteiResult result = sut.toNinteiResult(entity);
+            NinteiResult result = sut.toNinteiResult(entity, 介護サービス種類);
             assertThat(result.get認定審査会意見().get審査会メモ(), is(審査会メモ));
         }
 
         @Test
         public void 一次判定結果変更理由の設定がある時_toNinteiResultで生成した_NinteiResult_get認定審査会意見_get一次判定結果変更理由は_設定値を返す() {
             entity.setIchijiHnateiKekkaHenkoRiyu(一次判定結果変更理由);
-            NinteiResult result = sut.toNinteiResult(entity);
+            NinteiResult result = sut.toNinteiResult(entity, 介護サービス種類);
             assertThat(result.get認定審査会意見().get一次判定結果変更理由(), is(一次判定結果変更理由));
         }
 
         @Test
         public void 認定結果異動事由区分の設定がある時_toNinteiResultで生成した_NinteiResult_get認定結果異動_get認定結果異動事由区分は_設定値を返す() {
             entity.setNinteiKekkaIdoJiyu(認定結果異動事由区分.getCode());
-            NinteiResult result = sut.toNinteiResult(entity);
+            NinteiResult result = sut.toNinteiResult(entity, 介護サービス種類);
             assertThat(result.get認定結果異動().get認定結果異動事由区分(), is(認定結果異動事由区分));
         }
 
         @Test
         public void 認定結果異動年月日の設定がある時_toNinteiResultで生成した_NinteiResult_get認定結果異動_get認定結果異動年月日は_設定値を返す() {
             entity.setNinteiKekkaIdoYMD(認定結果異動年月日);
-            NinteiResult result = sut.toNinteiResult(entity);
+            NinteiResult result = sut.toNinteiResult(entity, 介護サービス種類);
             assertThat(result.get認定結果異動().get認定結果異動年月日(), is(認定結果異動年月日));
         }
 
         @Test
         public void 認定取消理由の設定がある時_toNinteiResultで生成した_NinteiResult_get認定取消_get認定取消理由は_設定値を返す() {
             entity.setNinteiTorikeshiRiyu(認定取消理由);
-            NinteiResult result = sut.toNinteiResult(entity);
+            NinteiResult result = sut.toNinteiResult(entity, 介護サービス種類);
             assertThat(result.get認定取消().get認定取消理由(), is(認定取消理由));
         }
 
         @Test
         public void 認定取消年月日の設定がある時_toNinteiResultで生成した_NinteiResult_get認定取消_get認定取消年月日は_設定値を返す() {
             entity.setNinteiTorikeshiYMD(認定取消年月日);
-            NinteiResult result = sut.toNinteiResult(entity);
+            NinteiResult result = sut.toNinteiResult(entity, 介護サービス種類);
             assertThat(result.get認定取消().get認定取消年月日(), is(認定取消年月日));
         }
 
         @Test
         public void 通知区分の設定がある時_toNinteiResultで生成した_NinteiResult_get通知区分は_設定値を返す() {
             entity.setTuchiKubun(通知区分.getCode());
-            NinteiResult result = sut.toNinteiResult(entity);
+            NinteiResult result = sut.toNinteiResult(entity, 介護サービス種類);
             assertThat(result.get通知区分(), is(通知区分));
         }
 
         @Test
         public void 認定理由の設定がある時_toNinteiResultで生成した_NinteiResult_get認定理由は_設定値を返す() {
             entity.setNinteiRiyu(認定理由);
-            NinteiResult result = sut.toNinteiResult(entity);
+            NinteiResult result = sut.toNinteiResult(entity, 介護サービス種類);
             assertThat(result.get認定理由(), is(認定理由));
         }
     }
@@ -354,7 +356,7 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
         public void 介護サービス種類の設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getKaigoServiceShuruiは_設定値を返す() {
             when(ninteiResult.get介護サービス種類()).thenReturn(介護サービス種類);
             DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
-            assertThat(result.getKaigoServiceShurui(), is(介護サービス種類.getCode()));
+            assertThat(result.getKaigoServiceShurui(), is(介護サービス種類.getサービス種類コード()));
         }
 
         @Test
@@ -405,5 +407,11 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
             DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
             assertThat(result.getShinsakaiMemo(), is(審査会メモ));
         }
+    }
+
+    private static IKaigoServiceShurui create介護サービス種類(String code) {
+        return new _KaigoServiceShurui(
+                new RString(code), new Range<>(RYearMonth.MIN, RYearMonth.MAX), new RString("サービス種類名称"),
+                new RString("サービス種類名称略称"), new RString("サービス分類"));
     }
 }

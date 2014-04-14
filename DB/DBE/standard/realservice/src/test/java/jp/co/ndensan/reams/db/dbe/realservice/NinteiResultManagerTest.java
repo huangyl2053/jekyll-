@@ -11,6 +11,10 @@ import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiResultMock;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.NinteiKekkaJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
+import jp.co.ndensan.reams.ur.urz.business.IKaigoService;
+import jp.co.ndensan.reams.ur.urz.business.IKaigoServiceShurui;
+import jp.co.ndensan.reams.ur.urz.realservice.IKaigoServiceManager;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -75,7 +79,7 @@ public class NinteiResultManagerTest extends DbeTestBase {
     }
 
     private static NinteiResultManager createNinteiResultManager(int flg) {
-        return new NinteiResultManager(createNinteiKekkaJohoDac(flg));
+        return new NinteiResultManager(createNinteiKekkaJohoDac(flg), createKaigoServiceManager());
     }
 
     private static NinteiKekkaJohoDac createNinteiKekkaJohoDac(int flg) {
@@ -85,6 +89,20 @@ public class NinteiResultManagerTest extends DbeTestBase {
         when(dac.insert(any(DbT5002NinteiKekkaJohoEntity.class))).thenReturn(flg);
         when(dac.delete(any(DbT5002NinteiKekkaJohoEntity.class))).thenReturn(flg);
         return dac;
+    }
+
+    private static IKaigoServiceManager createKaigoServiceManager() {
+        IKaigoService service = createKaigoService();
+        IKaigoServiceManager manager = mock(IKaigoServiceManager.class);
+        when(manager.get介護サービス(any(RDate.class), any(RString.class))).thenReturn(service);
+        return manager;
+    }
+
+    private static IKaigoService createKaigoService() {
+        IKaigoServiceShurui shurui = createNinteiResult().get介護サービス種類();
+        IKaigoService service = mock(IKaigoService.class);
+        when(service.get介護サービス種類()).thenReturn(shurui);
+        return service;
     }
 
     private static ShinseishoKanriNo createShinseishoKanriNo() {
