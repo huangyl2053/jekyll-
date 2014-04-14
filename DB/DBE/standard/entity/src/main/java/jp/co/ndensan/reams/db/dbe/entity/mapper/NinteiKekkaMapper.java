@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TsuchiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiYukoKikanTsukisu;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5002NinteiKekkaJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -48,7 +47,9 @@ public final class NinteiKekkaMapper {
             return null;
         }
         return new NinteiResult(
-                new ShinseishoKanriNo(entity.getShinseishoKanriNo()),
+                entity.getShinseishoKanriNo(),
+                entity.getShoKisaiHokenshaNo(),
+                entity.getHihokenshaNo(),
                 entity.getYoukaigodoNinteiYMD(),
                 create要介護状態(entity),
                 new YokaigoJotaizoRei(entity.getYokaigoJotaizoReiCode(), RString.EMPTY, RString.EMPTY),
@@ -92,7 +93,9 @@ public final class NinteiKekkaMapper {
      */
     public static DbT5002NinteiKekkaJohoEntity toDbT5002NinteiKekkaJohoEntity(NinteiResult ninteiResult) {
         DbT5002NinteiKekkaJohoEntity entity = new DbT5002NinteiKekkaJohoEntity();
-        entity.setShinseishoKanriNo(ninteiResult.get申請書管理番号().value());
+        entity.setShinseishoKanriNo(ninteiResult.get申請書管理番号());
+        entity.setShoKisaiHokenshaNo(ninteiResult.get証記載保険者番号());
+        entity.setHihokenshaNo(ninteiResult.get被保険者番号());
         entity.setYoukaigodoNinteiYMD(ninteiResult.get要介護度認定年月日());
         entity.setYoukaigoJotaiKubunCode(ninteiResult.get要介護状態().get要介護状態区分().getCode());
         entity.setNinteiYukoKikan(ninteiResult.get要介護状態().get認定有効期間().get有効期間月数().value().intValue());

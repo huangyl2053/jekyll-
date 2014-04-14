@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KaigoServiceType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShisetsuNyushoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TsuchiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -21,6 +22,8 @@ import static java.util.Objects.requireNonNull;
 public class NinteiResult {
 
     private final ShinseishoKanriNo 申請書管理番号;
+    private final KaigoHihokenshaNo 証記載保険者番号;
+    private final KaigoHihokenshaNo 被保険者番号;
     private final FlexibleDate 要介護度認定年月日;
     private final YokaigoJotai 要介護状態;
     private final YokaigoJotaizoRei 要介護状態像例;
@@ -37,6 +40,8 @@ public class NinteiResult {
      * インスタンスを生成します。
      *
      * @param 申請書管理番号 申請書管理番号
+     * @param 証記載保険者番号 証記載保険者番号
+     * @param 被保険者番号 被保険者番号
      * @param 要介護度認定年月日 要介護度認定年月日
      * @param 要介護状態 要介護状態
      * @param 要介護状態像例 要介護状態像例
@@ -50,6 +55,8 @@ public class NinteiResult {
      */
     public NinteiResult(
             ShinseishoKanriNo 申請書管理番号,
+            KaigoHihokenshaNo 証記載保険者番号,
+            KaigoHihokenshaNo 被保険者番号,
             FlexibleDate 要介護度認定年月日,
             YokaigoJotai 要介護状態,
             YokaigoJotaizoRei 要介護状態像例,
@@ -62,6 +69,8 @@ public class NinteiResult {
             TsuchiKubun 通知区分,
             RString 認定理由) {
         this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00001.replace("申請書管理番号").getMessage());
+        this.証記載保険者番号 = requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
+        this.被保険者番号 = requireNonNull(被保険者番号, Messages.E00001.replace("被保険者番号").getMessage());
         this.要介護度認定年月日 = requireNonNull(要介護度認定年月日, Messages.E00001.replace("要介護度認定年月日").getMessage());
         this.要介護状態 = requireNonNull(要介護状態, Messages.E00001.replace("要介護状態").getMessage());
         this.要介護状態像例 = 要介護状態像例;
@@ -82,6 +91,24 @@ public class NinteiResult {
      */
     public ShinseishoKanriNo get申請書管理番号() {
         return 申請書管理番号;
+    }
+
+    /**
+     * 証記載保険者番号を返します。
+     *
+     * @return 証記載保険者番号
+     */
+    public KaigoHihokenshaNo get証記載保険者番号() {
+        return 証記載保険者番号;
+    }
+
+    /**
+     * 被保険者番号を返します。
+     *
+     * @return 被保険者番号
+     */
+    public KaigoHihokenshaNo get被保険者番号() {
+        return 被保険者番号;
     }
 
     /**

@@ -6,6 +6,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import java.util.Objects;
@@ -30,9 +32,9 @@ public class DbT5002NinteiKekkaJohoEntity implements IDbAccessable {
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private RString shinseishoKanriNo;
-    private RString shoKisaiHokenshaNo;
-    private RString hihokenshaNo;
+    private ShinseishoKanriNo shinseishoKanriNo;
+    private KaigoHihokenshaNo shoKisaiHokenshaNo;
+    private KaigoHihokenshaNo hihokenshaNo;
     private FlexibleDate youkaigodoNinteiYMD;
     private Code youkaigoJotaiKubunCode;
     private int ninteiYukoKikan;
@@ -104,7 +106,7 @@ public class DbT5002NinteiKekkaJohoEntity implements IDbAccessable {
      *
      * @return shinseishoKanriNo
      */
-    public RString getShinseishoKanriNo() {
+    public ShinseishoKanriNo getShinseishoKanriNo() {
         return shinseishoKanriNo;
     }
 
@@ -113,7 +115,7 @@ public class DbT5002NinteiKekkaJohoEntity implements IDbAccessable {
      *
      * @param shinseishoKanriNo shinseishoKanriNo
      */
-    public void setShinseishoKanriNo(RString shinseishoKanriNo) {
+    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
@@ -122,7 +124,7 @@ public class DbT5002NinteiKekkaJohoEntity implements IDbAccessable {
      *
      * @return shoKisaiHokenshaNo
      */
-    public RString getShoKisaiHokenshaNo() {
+    public KaigoHihokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
 
@@ -131,7 +133,7 @@ public class DbT5002NinteiKekkaJohoEntity implements IDbAccessable {
      *
      * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
      */
-    public void setShoKisaiHokenshaNo(RString shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(KaigoHihokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
@@ -140,7 +142,7 @@ public class DbT5002NinteiKekkaJohoEntity implements IDbAccessable {
      *
      * @return hihokenshaNo
      */
-    public RString getHihokenshaNo() {
+    public KaigoHihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
@@ -149,7 +151,7 @@ public class DbT5002NinteiKekkaJohoEntity implements IDbAccessable {
      *
      * @param hihokenshaNo hihokenshaNo
      */
-    public void setHihokenshaNo(RString hihokenshaNo) {
+    public void setHihokenshaNo(KaigoHihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 

@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.YokaigoJotaizoReiCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5002NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5002NinteiKekkaJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiResultMock;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -42,6 +43,8 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
 
     private static NinteiKekkaMapper sut;
     private static final ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(new RString("1234567890"));
+    private static final KaigoHihokenshaNo 証記載保険者番号 = new KaigoHihokenshaNo(new RString("123456"));
+    private static final KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(new RString("456789"));
     private static final FlexibleDate 要介護度認定年月日 = new FlexibleDate("20140101");
     private static final YokaigoJotaiKubunCode 要介護状態区分コード = new YokaigoJotaiKubunCode(new Code(new RString("1111111111")));
     private static final YokaigoJotaizoReiCode 要介護状態像例コード = new YokaigoJotaizoReiCode(new Code(new RString("2222222222")));
@@ -73,9 +76,23 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
 
         @Test
         public void 申請書管理番号の設定がある時_toNinteiResultで生成した_NinteiResult_get申請書管理番号は_設定値を返す() {
-            entity.setShinseishoKanriNo(申請書管理番号.value());
+            entity.setShinseishoKanriNo(申請書管理番号);
             NinteiResult result = sut.toNinteiResult(entity);
             assertThat(result.get申請書管理番号(), is(申請書管理番号));
+        }
+
+        @Test
+        public void 証記載保険者番号の設定がある時_toNinteiResultで生成した_NinteiResult_get証記載保険者番号は_設定値を返す() {
+            entity.setShoKisaiHokenshaNo(証記載保険者番号);
+            NinteiResult result = sut.toNinteiResult(entity);
+            assertThat(result.get証記載保険者番号(), is(証記載保険者番号));
+        }
+
+        @Test
+        public void 被保険者番号の設定がある時_toNinteiResultで生成した_NinteiResult_get被保険者番号は_設定値を返す() {
+            entity.setHihokenshaNo(被保険者番号);
+            NinteiResult result = sut.toNinteiResult(entity);
+            assertThat(result.get被保険者番号(), is(被保険者番号));
         }
 
         @Test
@@ -232,7 +249,21 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
         public void 申請書管理番号の設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getShinseishoKanriNoは_設定値を返す() {
             when(ninteiResult.get申請書管理番号()).thenReturn(申請書管理番号);
             DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
-            assertThat(result.getShinseishoKanriNo(), is(申請書管理番号.value()));
+            assertThat(result.getShinseishoKanriNo(), is(申請書管理番号));
+        }
+
+        @Test
+        public void 証記載保険者番号の設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getShoKisaiHokenshaNoは_設定値を返す() {
+            when(ninteiResult.get証記載保険者番号()).thenReturn(証記載保険者番号);
+            DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
+            assertThat(result.getShoKisaiHokenshaNo(), is(証記載保険者番号));
+        }
+
+        @Test
+        public void 被保険者番号の設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getHihokenshaNoは_設定値を返す() {
+            when(ninteiResult.get被保険者番号()).thenReturn(被保険者番号);
+            DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
+            assertThat(result.getHihokenshaNo(), is(被保険者番号));
         }
 
         @Test

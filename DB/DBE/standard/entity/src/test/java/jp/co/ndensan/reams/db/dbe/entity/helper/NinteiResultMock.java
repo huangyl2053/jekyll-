@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShisetsuNyushoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TsuchiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiYukoKikanTsukisu;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -50,7 +51,9 @@ public class NinteiResultMock {
 
     private static NinteiResult createNinteiResult() {
         return new NinteiResult(
-                createShinseishoKanriNo(),
+                new ShinseishoKanriNo(new RString("1234567890")),
+                new KaigoHihokenshaNo(new RString("123456")),
+                new KaigoHihokenshaNo(new RString("456789")),
                 new FlexibleDate("20140101"),
                 createYokaigoJotai(),
                 createYokaigoJotaizoRei(),

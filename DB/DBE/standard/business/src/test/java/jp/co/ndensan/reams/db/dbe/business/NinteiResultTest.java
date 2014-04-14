@@ -22,14 +22,26 @@ import org.junit.Test;
 public class NinteiResultTest extends DbeTestBase {
 
     private static final int AS_申請書管理番号がNULL = 1;
-    private static final int AS_要介護度認定年月日がNULL = 2;
-    private static final int AS_要介護状態がNULL = 3;
+    private static final int AS_証記載保険者番号がNULL = 2;
+    private static final int AS_被保険者番号がNULL = 3;
+    private static final int AS_要介護度認定年月日がNULL = 4;
+    private static final int AS_要介護状態がNULL = 5;
 
     public static class コンストラクタ extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 申請書管理番号がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
             createNinteiResult(AS_申請書管理番号がNULL);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 証記載保険者番号がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
+            createNinteiResult(AS_証記載保険者番号がNULL);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 被保険者番号がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
+            createNinteiResult(AS_被保険者番号がNULL);
         }
 
         @Test(expected = NullPointerException.class)
@@ -47,6 +59,8 @@ public class NinteiResultTest extends DbeTestBase {
         NinteiResult ninteiResult = NinteiResultMock.getSpiedInstance();
         return new NinteiResult(
                 flg == AS_申請書管理番号がNULL ? null : ninteiResult.get申請書管理番号(),
+                flg == AS_証記載保険者番号がNULL ? null : ninteiResult.get証記載保険者番号(),
+                flg == AS_被保険者番号がNULL ? null : ninteiResult.get被保険者番号(),
                 flg == AS_要介護度認定年月日がNULL ? null : FlexibleDate.MIN,
                 flg == AS_要介護状態がNULL ? null : ninteiResult.get要介護状態(),
                 ninteiResult.get要介護状態像例(),

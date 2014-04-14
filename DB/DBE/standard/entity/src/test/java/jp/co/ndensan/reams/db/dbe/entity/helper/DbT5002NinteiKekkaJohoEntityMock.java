@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiResultIdoJiyuK
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIkenType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TsuchiKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5002NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -43,9 +45,9 @@ public class DbT5002NinteiKekkaJohoEntityMock {
      */
     public static DbT5002NinteiKekkaJohoEntity getDbT5002NinteiKekkaJohoEntity() {
         DbT5002NinteiKekkaJohoEntity entity = new DbT5002NinteiKekkaJohoEntity();
-        entity.setShinseishoKanriNo(new RString("1234567890"));
-        entity.setShoKisaiHokenshaNo(new RString("123456"));
-        entity.setHihokenshaNo(new RString("123456"));
+        entity.setShinseishoKanriNo(new ShinseishoKanriNo(new RString("1234567890")));
+        entity.setShoKisaiHokenshaNo(new KaigoHihokenshaNo(new RString("123456")));
+        entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("123456")));
         entity.setYoukaigodoNinteiYMD(new FlexibleDate("20140101"));
         entity.setYoukaigoJotaiKubunCode(new Code("1111111111"));
         entity.setNinteiYukoKikan(1);

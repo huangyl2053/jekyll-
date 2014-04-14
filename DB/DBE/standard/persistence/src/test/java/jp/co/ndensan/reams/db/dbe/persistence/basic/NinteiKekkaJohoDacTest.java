@@ -72,7 +72,7 @@ public class NinteiKekkaJohoDacTest extends DbeTestDacBase {
         @Test
         public void 指定した認定結果情報が存在しない時_insertは_指定した情報を追加する() {
             sut.insert(createEntity(AS_新規データ));
-            assertThat(sut.select(新規管理番号).getShinseishoKanriNo(), is(新規管理番号.value()));
+            assertThat(sut.select(新規管理番号).getShinseishoKanriNo(), is(新規管理番号));
         }
 
         @Test
@@ -115,7 +115,7 @@ public class NinteiKekkaJohoDacTest extends DbeTestDacBase {
 
     private static DbT5002NinteiKekkaJohoEntity createEntity(int flg) {
         DbT5002NinteiKekkaJohoEntity entity = DbT5002NinteiKekkaJohoEntityMock.getDbT5002NinteiKekkaJohoEntity();
-        entity.setShinseishoKanriNo(flg == AS_新規データ ? 新規管理番号.value() : 既存管理番号.value());
+        entity.setShinseishoKanriNo(flg == AS_新規データ ? 新規管理番号 : 既存管理番号);
         return entity;
     }
 }

@@ -1,6 +1,6 @@
-﻿shinseishoKanriNo,varchar,RString,,,,,A
-shoKisaiHokenshaNo,varchar,RString,,,,,A
-hihokenshaNo,varchar,RString,,,,,A
+﻿shinseishoKanriNo,varchar,ShinseishoKanriNo,,,,,A
+shoKisaiHokenshaNo,varchar,KaigoHihokenshaNo,,,,,A
+hihokenshaNo,varchar,KaigoHihokenshaNo,,,,,A
 youkaigodoNinteiYMD,UDD015YMD,FlexibleDate,,,,,A
 youkaigoJotaiKubunCode,UDD035Code,Code,,,,,A
 ninteiYukoKikan,int2,int,,,,,A
