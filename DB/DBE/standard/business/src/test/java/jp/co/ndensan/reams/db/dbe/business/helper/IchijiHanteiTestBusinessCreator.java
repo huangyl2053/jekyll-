@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiKeikokuHairetsuCode;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiKeikokuList;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResultKomoku;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResultDetail;
+import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResultSofu;
 import jp.co.ndensan.reams.db.dbe.business.JotaiAnteiseiKubun;
 import jp.co.ndensan.reams.db.dbe.business.NichijoSeikatsuJiritsudoKumiawase;
 import jp.co.ndensan.reams.db.dbe.business.NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku;
@@ -19,7 +20,7 @@ import jp.co.ndensan.reams.db.dbe.business.SuiteiKyuhuKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiChukanHyokaKomokuTokuten;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiKijunTime;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChukanHyokaKomokuTokutenItemGroup;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiSohuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiResultSofuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KariIchijiHanteiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NichijoSeikatsuJiritsudoKumiawaseItemGroup;
@@ -60,8 +61,8 @@ public final class IchijiHanteiTestBusinessCreator {
                 .set日常生活自立度組み合わせ(create日常生活自立度組み合わせ(21, 22, 23, 24, 25, 26, 27))
                 .set認知症高齢者日常生活自立度蓋然性評価(create認知症高齢者自立度蓋然性評価())
                 .set認知症高齢者日常生活自立度蓋然性評価率(48)
-                .set一次判定結果送付区分(IchijiHanteiSohuKubun.toValue(new RString("1")))
-                .set一次判定結果送付年月日(new FlexibleDate("20061231")).build();
+                .set一次判定結果送付状況(new IchijiHanteiResultSofu(IchijiHanteiResultSofuKubun.toValue(new RString("1")),
+                                new FlexibleDate("20061231"))).build();
     }
 
     private static IchijiHanteiResultKomoku create一次判定結果項目() {
@@ -120,8 +121,8 @@ public final class IchijiHanteiTestBusinessCreator {
      */
     public static NichijoSeikatsuJiritsudoKumiawase create日常生活自立度組み合わせ(int 自立, int 要支援, int 要介護1,
             int 要介護2, int 要介護3, int 要介護4, int 要介護5) {
-        Map<NichijoSeikatsuJiritsudoKumiawaseItemGroup, Integer> 日常生活自立度組み合わせ =
-                new EnumMap<>(NichijoSeikatsuJiritsudoKumiawaseItemGroup.class);
+        Map<NichijoSeikatsuJiritsudoKumiawaseItemGroup, Integer> 日常生活自立度組み合わせ
+                = new EnumMap<>(NichijoSeikatsuJiritsudoKumiawaseItemGroup.class);
         日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.自立, 自立);
         日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要支援, 要支援);
         日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護1, 要介護1);

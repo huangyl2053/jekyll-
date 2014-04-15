@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.business.helper.IchijiHanteiTestBusinessCreator;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiSohuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiResultSofuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KariIchijiHanteiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
@@ -49,8 +49,7 @@ public class IchijiHanteiResultDetailTest {
         private NichijoSeikatsuJiritsudoKumiawase 日常生活自立度組み合わせ;
         private NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku 認知症高齢者日常生活自立度蓋然性評価;
         private int 認知症高齢者日常生活自立度蓋然性評価率;
-        private IchijiHanteiSohuKubun 一次判定結果送付区分;
-        private FlexibleDate 一次判定結果送付年月日;
+        private IchijiHanteiResultSofu 一次判定結果送付状況;
 
         @Before
         public void setUp() {
@@ -72,8 +71,7 @@ public class IchijiHanteiResultDetailTest {
             認知症高齢者日常生活自立度蓋然性評価 = new NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku(new Code(new RString("001")),
                     new RString("名称"), new RString("略称"));
             認知症高齢者日常生活自立度蓋然性評価率 = 100;
-            一次判定結果送付区分 = IchijiHanteiSohuKubun.送付済み;
-            一次判定結果送付年月日 = new FlexibleDate("19991231");
+            一次判定結果送付状況 = new IchijiHanteiResultSofu(IchijiHanteiResultSofuKubun.送付済み, new FlexibleDate("19991231"));
         }
 
         @Test(expected = NullPointerException.class)
@@ -86,7 +84,7 @@ public class IchijiHanteiResultDetailTest {
                     .set運動能力未低下認知症高齢者指標(運動能力未低下認知症高齢者指標).set日常生活自立度組み合わせ(日常生活自立度組み合わせ)
                     .set認知症高齢者日常生活自立度蓋然性評価(認知症高齢者日常生活自立度蓋然性評価)
                     .set認知症高齢者日常生活自立度蓋然性評価率(認知症高齢者日常生活自立度蓋然性評価率)
-                    .set一次判定結果送付区分(一次判定結果送付区分).set一次判定結果送付年月日(一次判定結果送付年月日).build();
+                    .set一次判定結果送付状況(一次判定結果送付状況).build();
         }
 
         @Test(expected = NullPointerException.class)
@@ -99,7 +97,7 @@ public class IchijiHanteiResultDetailTest {
                     .set運動能力未低下認知症高齢者指標(運動能力未低下認知症高齢者指標).set日常生活自立度組み合わせ(日常生活自立度組み合わせ)
                     .set認知症高齢者日常生活自立度蓋然性評価(認知症高齢者日常生活自立度蓋然性評価)
                     .set認知症高齢者日常生活自立度蓋然性評価率(認知症高齢者日常生活自立度蓋然性評価率)
-                    .set一次判定結果送付区分(一次判定結果送付区分).set一次判定結果送付年月日(一次判定結果送付年月日).build();
+                    .set一次判定結果送付状況(一次判定結果送付状況).build();
         }
 
         @Test(expected = NullPointerException.class)
@@ -112,7 +110,7 @@ public class IchijiHanteiResultDetailTest {
                     .set運動能力未低下認知症高齢者指標(運動能力未低下認知症高齢者指標).set日常生活自立度組み合わせ(日常生活自立度組み合わせ)
                     .set認知症高齢者日常生活自立度蓋然性評価(認知症高齢者日常生活自立度蓋然性評価)
                     .set認知症高齢者日常生活自立度蓋然性評価率(認知症高齢者日常生活自立度蓋然性評価率)
-                    .set一次判定結果送付区分(一次判定結果送付区分).set一次判定結果送付年月日(一次判定結果送付年月日).build();
+                    .set一次判定結果送付状況(一次判定結果送付状況).build();
         }
 
         @Test(expected = NullPointerException.class)
@@ -125,7 +123,7 @@ public class IchijiHanteiResultDetailTest {
                     .set運動能力未低下認知症高齢者指標(運動能力未低下認知症高齢者指標).set日常生活自立度組み合わせ(日常生活自立度組み合わせ)
                     .set認知症高齢者日常生活自立度蓋然性評価(認知症高齢者日常生活自立度蓋然性評価)
                     .set認知症高齢者日常生活自立度蓋然性評価率(認知症高齢者日常生活自立度蓋然性評価率)
-                    .set一次判定結果送付区分(一次判定結果送付区分).set一次判定結果送付年月日(一次判定結果送付年月日).build();
+                    .set一次判定結果送付状況(一次判定結果送付状況).build();
         }
 
         @Test(expected = NullPointerException.class)
@@ -138,7 +136,7 @@ public class IchijiHanteiResultDetailTest {
                     .set運動能力未低下認知症高齢者指標(運動能力未低下認知症高齢者指標).set日常生活自立度組み合わせ(日常生活自立度組み合わせ)
                     .set認知症高齢者日常生活自立度蓋然性評価(認知症高齢者日常生活自立度蓋然性評価)
                     .set認知症高齢者日常生活自立度蓋然性評価率(認知症高齢者日常生活自立度蓋然性評価率)
-                    .set一次判定結果送付区分(一次判定結果送付区分).set一次判定結果送付年月日(一次判定結果送付年月日).build();
+                    .set一次判定結果送付状況(一次判定結果送付状況).build();
         }
 
         @Test(expected = NullPointerException.class)
@@ -151,7 +149,7 @@ public class IchijiHanteiResultDetailTest {
                     .set運動能力未低下認知症高齢者指標(運動能力未低下認知症高齢者指標).set日常生活自立度組み合わせ(日常生活自立度組み合わせ)
                     .set認知症高齢者日常生活自立度蓋然性評価(認知症高齢者日常生活自立度蓋然性評価)
                     .set認知症高齢者日常生活自立度蓋然性評価率(認知症高齢者日常生活自立度蓋然性評価率)
-                    .set一次判定結果送付区分(一次判定結果送付区分).set一次判定結果送付年月日(一次判定結果送付年月日).build();
+                    .set一次判定結果送付状況(一次判定結果送付状況).build();
         }
 
         @Test(expected = NullPointerException.class)
@@ -164,7 +162,7 @@ public class IchijiHanteiResultDetailTest {
                     .set運動能力未低下認知症高齢者指標(運動能力未低下認知症高齢者指標).set日常生活自立度組み合わせ(日常生活自立度組み合わせ)
                     .set認知症高齢者日常生活自立度蓋然性評価(認知症高齢者日常生活自立度蓋然性評価)
                     .set認知症高齢者日常生活自立度蓋然性評価率(認知症高齢者日常生活自立度蓋然性評価率)
-                    .set一次判定結果送付区分(一次判定結果送付区分).set一次判定結果送付年月日(一次判定結果送付年月日).build();
+                    .set一次判定結果送付状況(一次判定結果送付状況).build();
         }
 
         @Test(expected = NullPointerException.class)
@@ -177,7 +175,7 @@ public class IchijiHanteiResultDetailTest {
                     .set運動能力未低下認知症高齢者指標(運動能力未低下認知症高齢者指標).set日常生活自立度組み合わせ(日常生活自立度組み合わせ)
                     .set認知症高齢者日常生活自立度蓋然性評価(認知症高齢者日常生活自立度蓋然性評価)
                     .set認知症高齢者日常生活自立度蓋然性評価率(認知症高齢者日常生活自立度蓋然性評価率)
-                    .set一次判定結果送付区分(一次判定結果送付区分).set一次判定結果送付年月日(一次判定結果送付年月日).build();
+                    .set一次判定結果送付状況(一次判定結果送付状況).build();
         }
 
         @Test(expected = NullPointerException.class)
@@ -190,7 +188,7 @@ public class IchijiHanteiResultDetailTest {
                     .set運動能力未低下認知症高齢者指標(運動能力未低下認知症高齢者指標).set日常生活自立度組み合わせ(日常生活自立度組み合わせ)
                     .set認知症高齢者日常生活自立度蓋然性評価(認知症高齢者日常生活自立度蓋然性評価)
                     .set認知症高齢者日常生活自立度蓋然性評価率(認知症高齢者日常生活自立度蓋然性評価率)
-                    .set一次判定結果送付区分(一次判定結果送付区分).set一次判定結果送付年月日(一次判定結果送付年月日).build();
+                    .set一次判定結果送付状況(一次判定結果送付状況).build();
         }
 
         @Test(expected = NullPointerException.class)
@@ -203,7 +201,7 @@ public class IchijiHanteiResultDetailTest {
                     .set運動能力未低下認知症高齢者指標(運動能力未低下認知症高齢者指標).set日常生活自立度組み合わせ(日常生活自立度組み合わせ)
                     .set認知症高齢者日常生活自立度蓋然性評価(認知症高齢者日常生活自立度蓋然性評価)
                     .set認知症高齢者日常生活自立度蓋然性評価率(認知症高齢者日常生活自立度蓋然性評価率)
-                    .set一次判定結果送付区分(一次判定結果送付区分).set一次判定結果送付年月日(一次判定結果送付年月日).build();
+                    .set一次判定結果送付状況(一次判定結果送付状況).build();
         }
 
         @Test(expected = NullPointerException.class)
@@ -216,7 +214,7 @@ public class IchijiHanteiResultDetailTest {
                     .set運動能力未低下認知症高齢者指標(運動能力未低下認知症高齢者指標).set日常生活自立度組み合わせ(日常生活自立度組み合わせ)
                     .set認知症高齢者日常生活自立度蓋然性評価(認知症高齢者日常生活自立度蓋然性評価)
                     .set認知症高齢者日常生活自立度蓋然性評価率(認知症高齢者日常生活自立度蓋然性評価率)
-                    .set一次判定結果送付区分(一次判定結果送付区分).set一次判定結果送付年月日(一次判定結果送付年月日).build();
+                    .set一次判定結果送付状況(一次判定結果送付状況).build();
         }
 
         @Test(expected = NullPointerException.class)
@@ -229,7 +227,7 @@ public class IchijiHanteiResultDetailTest {
                     .set運動能力未低下認知症高齢者指標(運動能力未低下認知症高齢者指標).set日常生活自立度組み合わせ(日常生活自立度組み合わせ)
                     .set認知症高齢者日常生活自立度蓋然性評価(認知症高齢者日常生活自立度蓋然性評価)
                     .set認知症高齢者日常生活自立度蓋然性評価率(認知症高齢者日常生活自立度蓋然性評価率)
-                    .set一次判定結果送付区分(一次判定結果送付区分).set一次判定結果送付年月日(一次判定結果送付年月日).build();
+                    .set一次判定結果送付状況(一次判定結果送付状況).build();
         }
 
         @Test

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiKeikokuList;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResultDetail;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResultKomoku;
+import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResultSofu;
 import jp.co.ndensan.reams.db.dbe.business.JotaiAnteiseiKubun;
 import jp.co.ndensan.reams.db.dbe.business.NichijoSeikatsuJiritsudoKumiawase;
 import jp.co.ndensan.reams.db.dbe.business.NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku;
@@ -16,7 +17,7 @@ import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiChukanHyokaKomokuTokuten
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiKijunTime;
 import jp.co.ndensan.reams.db.dbe.business.helper.IchijiHanteiTestBusinessCreator;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChukanHyokaKomokuTokutenItemGroup;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiSohuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiResultSofuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KariIchijiHanteiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NichijoSeikatsuJiritsudoKumiawaseItemGroup;
@@ -62,7 +63,7 @@ public class IchijiHanteiResultDetailMapperTest {
     private static NichijoSeikatsuJiritsudoKumiawase 日常生活自立度組み合わせ;
     private static Code 蓋然性評価コード_6;
     private static int 蓋然性評価率_48;
-    private static IchijiHanteiSohuKubun 結果送付区分_1;
+    private static IchijiHanteiResultSofuKubun 結果送付区分_1;
     private static FlexibleDate 結果送付年月_20061231;
 
     @BeforeClass
@@ -83,7 +84,7 @@ public class IchijiHanteiResultDetailMapperTest {
         日常生活自立度組み合わせ = IchijiHanteiTestBusinessCreator.create日常生活自立度組み合わせ(21, 22, 23, 24, 25, 26, 27);
         蓋然性評価コード_6 = new Code("6");
         蓋然性評価率_48 = 48;
-        結果送付区分_1 = IchijiHanteiSohuKubun.toValue(new RString("1"));
+        結果送付区分_1 = IchijiHanteiResultSofuKubun.toValue(new RString("1"));
         結果送付年月_20061231 = new FlexibleDate("20061231");
     }
 
@@ -328,12 +329,12 @@ public class IchijiHanteiResultDetailMapperTest {
 
         @Test
         public void マッピング後に返される一次判定結果は_一次判定結果送付区分に1を持つ() {
-            assertThat(result.get一次判定結果送付区分().get送付区分コード(), is(結果送付区分_1.get送付区分コード()));
+            assertThat(result.get一次判定結果送付状況().get一次判定結果送付区分().get送付区分コード(), is(結果送付区分_1.get送付区分コード()));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_一次判定結果送付年月日に20061231を持つ() {
-            assertThat(result.get一次判定結果送付年月日(), is(結果送付年月_20061231));
+            assertThat(result.get一次判定結果送付状況().get一次判定結果送付年月日(), is(結果送付年月_20061231));
         }
     }
 
@@ -366,7 +367,7 @@ public class IchijiHanteiResultDetailMapperTest {
                     .set認知症自立度2以上蓋然性(認知症高齢者自立度2以上蓋然性_12_34).set推定給付区分(推定給付区分)
                     .set運動能力未低下認知症高齢者指標(運動能力未低下認知症高齢者の指標).set日常生活自立度組み合わせ(日常生活自立度組み合わせ)
                     .set認知症高齢者日常生活自立度蓋然性評価(蓋然性評価).set認知症高齢者日常生活自立度蓋然性評価率(蓋然性評価率_48)
-                    .set一次判定結果送付区分(結果送付区分_1).set一次判定結果送付年月日(結果送付年月_20061231).build();
+                    .set一次判定結果送付状況(new IchijiHanteiResultSofu(結果送付区分_1, 結果送付年月_20061231)).build();
             result = IchijiHanteiResultDetailMapper.to一次判定結果Entity(一次判定結果詳細);
         }
 

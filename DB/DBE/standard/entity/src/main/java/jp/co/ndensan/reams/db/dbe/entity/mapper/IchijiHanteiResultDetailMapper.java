@@ -9,6 +9,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiKeikokuList;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResultKomoku;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResultDetail;
+import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiResultSofu;
 import jp.co.ndensan.reams.db.dbe.business.JotaiAnteiseiKubun;
 import jp.co.ndensan.reams.db.dbe.business.NichijoSeikatsuJiritsudoKumiawase;
 import jp.co.ndensan.reams.db.dbe.business.NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku;
@@ -17,7 +18,7 @@ import jp.co.ndensan.reams.db.dbe.business.SuiteiKyuhuKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiChukanHyokaKomokuTokuten;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiKijunTime;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChukanHyokaKomokuTokutenItemGroup;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiSohuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiResultSofuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KariIchijiHanteiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NichijoSeikatsuJiritsudoKumiawaseItemGroup;
@@ -65,8 +66,7 @@ public final class IchijiHanteiResultDetailMapper {
                 .set日常生活自立度組み合わせ(create日常生活自立度組み合わせ(entity))
                 .set認知症高齢者日常生活自立度蓋然性評価(create認知症高齢者自立度蓋然性評価(entity))
                 .set認知症高齢者日常生活自立度蓋然性評価率(entity.getGaizenseiHyokaPercent())
-                .set一次判定結果送付区分(IchijiHanteiSohuKubun.toValue(entity.getIchijiHanteiSofuKubun()))
-                .set一次判定結果送付年月日(entity.getIchijiHanteiKekkaSofuYMD()).build();
+                .set一次判定結果送付状況(create一次判定結果送付状況(entity)).build();
     }
 
     private static IchijiHanteiResultKomoku create一次判定結果(DbT5016IchijiHanteiKekkaJohoEntity entity) {
@@ -127,8 +127,8 @@ public final class IchijiHanteiResultDetailMapper {
     }
 
     private static NichijoSeikatsuJiritsudoKumiawase create日常生活自立度組み合わせ(DbT5016IchijiHanteiKekkaJohoEntity entity) {
-        Map<NichijoSeikatsuJiritsudoKumiawaseItemGroup, Integer> 日常生活自立度組み合わせ =
-                new EnumMap<>(NichijoSeikatsuJiritsudoKumiawaseItemGroup.class);
+        Map<NichijoSeikatsuJiritsudoKumiawaseItemGroup, Integer> 日常生活自立度組み合わせ
+                = new EnumMap<>(NichijoSeikatsuJiritsudoKumiawaseItemGroup.class);
         日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.自立, entity.getJiritsudoKumiawase1());
         日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要支援, entity.getJiritsudoKumiawase2());
         日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護1, entity.getJiritsudoKumiawase3());
@@ -137,6 +137,11 @@ public final class IchijiHanteiResultDetailMapper {
         日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護4, entity.getJiritsudoKumiawase6());
         日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護5, entity.getJiritsudoKumiawase7());
         return new NichijoSeikatsuJiritsudoKumiawase(日常生活自立度組み合わせ);
+    }
+
+    private static IchijiHanteiResultSofu create一次判定結果送付状況(DbT5016IchijiHanteiKekkaJohoEntity entity) {
+        return new IchijiHanteiResultSofu(IchijiHanteiResultSofuKubun.toValue(entity.getIchijiHanteiSofuKubun()),
+                entity.getIchijiHanteiKekkaSofuYMD());
     }
 
     /**
@@ -188,8 +193,8 @@ public final class IchijiHanteiResultDetailMapper {
         entity.setJiritsudoKumiawase7(一次判定結果.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護5));
         entity.setGaizenseiHyokaCode(一次判定結果.get認知症高齢者日常生活自立度蓋然性評価().getCode());
         entity.setGaizenseiHyokaPercent(一次判定結果.get認知症高齢者日常生活自立度蓋然性評価率());
-        entity.setIchijiHanteiSofuKubun(一次判定結果.get一次判定結果送付区分().get送付区分コード());
-        entity.setIchijiHanteiKekkaSofuYMD(一次判定結果.get一次判定結果送付年月日());
+        entity.setIchijiHanteiSofuKubun(一次判定結果.get一次判定結果送付状況().get一次判定結果送付区分().get送付区分コード());
+        entity.setIchijiHanteiKekkaSofuYMD(一次判定結果.get一次判定結果送付状況().get一次判定結果送付年月日());
         return entity;
     }
 }

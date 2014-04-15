@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiSohuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KariIchijiHanteiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NichijoSeikatsuJiritsudoKumiawaseItemGroup;
@@ -41,8 +40,7 @@ public final class IchijiHanteiResultDetail {
     private final NichijoSeikatsuJiritsudoKumiawase 日常生活自立度組み合わせ;
     private final NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku 認知症高齢者日常生活自立度蓋然性評価;
     private final int 認知症高齢者日常生活自立度蓋然性評価率;
-    private final IchijiHanteiSohuKubun 一次判定結果送付区分;
-    private final FlexibleDate 一次判定結果送付年月日;
+    private final IchijiHanteiResultSofu 一次判定結果送付状況;
 
     /**
      * Builderから一次判定結果の詳細な情報を受け取り、インスタンスを生成します。
@@ -66,8 +64,7 @@ public final class IchijiHanteiResultDetail {
         this.日常生活自立度組み合わせ = builder.日常生活自立度組み合わせ;
         this.認知症高齢者日常生活自立度蓋然性評価 = builder.認知症高齢者日常生活自立度蓋然性評価;
         this.認知症高齢者日常生活自立度蓋然性評価率 = builder.認知症高齢者日常生活自立度蓋然性評価率;
-        this.一次判定結果送付区分 = builder.一次判定結果送付区分;
-        this.一次判定結果送付年月日 = builder.一次判定結果送付年月日;
+        this.一次判定結果送付状況 = builder.一次判定結果送付状況;
     }
 
     /**
@@ -215,21 +212,12 @@ public final class IchijiHanteiResultDetail {
     }
 
     /**
-     * 一次判定結果送付区分を返します。
+     * 一次判定結果送付状況についての情報を返します。
      *
-     * @return 一次判定結果送付区分
+     * @return 一次判定結果送付状況
      */
-    public IchijiHanteiSohuKubun get一次判定結果送付区分() {
-        return 一次判定結果送付区分;
-    }
-
-    /**
-     * 一次判定結果送付年月日を返します。
-     *
-     * @return 一次判定結果送付年月日
-     */
-    public FlexibleDate get一次判定結果送付年月日() {
-        return 一次判定結果送付年月日;
+    public IchijiHanteiResultSofu get一次判定結果送付状況() {
+        return 一次判定結果送付状況;
     }
 
     /**
@@ -264,27 +252,25 @@ public final class IchijiHanteiResultDetail {
         private NichijoSeikatsuJiritsudoKumiawase 日常生活自立度組み合わせ;
         private NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku 認知症高齢者日常生活自立度蓋然性評価;
         private int 認知症高齢者日常生活自立度蓋然性評価率;
-        private IchijiHanteiSohuKubun 一次判定結果送付区分;
-        private FlexibleDate 一次判定結果送付年月日;
+        private IchijiHanteiResultSofu 一次判定結果送付状況;
 
         /**
          * 一次判定結果詳細のBuilderインスタンスを生成します。
          * 認定ソフト2006年度版のときに使用されていた指標や送付区分などについては、ここで初期値を設定します。
          */
         private Builder() {
-            this.運動能力未低下認知症高齢者指標 =
-                    new NoryokuMiteikaNinchishoKoreishaShihyoKomoku(new Code("1"), RString.EMPTY, RString.EMPTY);
+            this.運動能力未低下認知症高齢者指標
+                    = new NoryokuMiteikaNinchishoKoreishaShihyoKomoku(new Code("1"), RString.EMPTY, RString.EMPTY);
             this.日常生活自立度組み合わせ = create日常生活自立度組み合わせ初期値();
-            this.認知症高齢者日常生活自立度蓋然性評価 =
-                    new NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku(new Code("0"), RString.EMPTY, RString.EMPTY);
+            this.認知症高齢者日常生活自立度蓋然性評価
+                    = new NinchishoKoreishaJiritsudoGaizenseiHyokaKomoku(new Code("0"), RString.EMPTY, RString.EMPTY);
             this.認知症高齢者日常生活自立度蓋然性評価率 = 0;
-            this.一次判定結果送付区分 = IchijiHanteiSohuKubun.未送付;
-            this.一次判定結果送付年月日 = FlexibleDate.MIN;
+            this.一次判定結果送付状況 = IchijiHanteiResultSofu.MI_SOFU;
         }
 
         private NichijoSeikatsuJiritsudoKumiawase create日常生活自立度組み合わせ初期値() {
-            Map<NichijoSeikatsuJiritsudoKumiawaseItemGroup, Integer> 日常生活自立度組み合わせMap =
-                    new EnumMap<>(NichijoSeikatsuJiritsudoKumiawaseItemGroup.class);
+            Map<NichijoSeikatsuJiritsudoKumiawaseItemGroup, Integer> 日常生活自立度組み合わせMap
+                    = new EnumMap<>(NichijoSeikatsuJiritsudoKumiawaseItemGroup.class);
             日常生活自立度組み合わせMap.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.自立, 0);
             日常生活自立度組み合わせMap.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要支援, 0);
             日常生活自立度組み合わせMap.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護1, 0);
@@ -409,14 +395,8 @@ public final class IchijiHanteiResultDetail {
         }
 
         @Override
-        public OthersSetter set一次判定結果送付区分(IchijiHanteiSohuKubun 一次判定結果送付区分) {
-            this.一次判定結果送付区分 = 一次判定結果送付区分;
-            return this;
-        }
-
-        @Override
-        public OthersSetter set一次判定結果送付年月日(FlexibleDate 一次判定結果送付年月日) {
-            this.一次判定結果送付年月日 = 一次判定結果送付年月日;
+        public OthersSetter set一次判定結果送付状況(IchijiHanteiResultSofu 一次判定結果送付状況) {
+            this.一次判定結果送付状況 = 一次判定結果送付状況;
             return this;
         }
     }
@@ -629,18 +609,10 @@ public final class IchijiHanteiResultDetail {
         /**
          * 一次判定結果送付区分を、引数から設定します。
          *
-         * @param 一次判定結果送付区分 一次判定結果送付区分
+         * @param 一次判定結果送付状況 一次判定結果送付状況
          * @return OthersSetter
          */
-        OthersSetter set一次判定結果送付区分(IchijiHanteiSohuKubun 一次判定結果送付区分);
-
-        /**
-         * 一次判定結果送付年月日を引数から設定します。
-         *
-         * @param 一次判定結果送付年月日 一次判定結果送付年月日
-         * @return OthersSetter
-         */
-        OthersSetter set一次判定結果送付年月日(FlexibleDate 一次判定結果送付年月日);
+        OthersSetter set一次判定結果送付状況(IchijiHanteiResultSofu 一次判定結果送付状況);
 
         /**
          * 設定した情報を元に、一次判定結果の詳細情報を生成して返します。

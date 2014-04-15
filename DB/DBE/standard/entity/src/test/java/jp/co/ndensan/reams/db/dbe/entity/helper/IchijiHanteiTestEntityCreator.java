@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiChukanHyokaKomokuTokuten
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiKijunTime;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChukanHyokaKomokuTokutenItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.DentatsuNoryokuKomoku;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiSohuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiResultSofuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KariIchijiHanteiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinchiNoryokuKomoku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShokujiKoiHyokaKomoku;
@@ -55,7 +55,7 @@ public final class IchijiHanteiTestEntityCreator {
         return create一次判定結果Entity(new ShinseishoKanriNo(new RString("01")), KoroshoIFKubun.V02A, KariIchijiHanteiKubun.本判定,
                 new FlexibleDate("20060401"), new Code("01"), new Code("12"), 要介護認定等基準時間, 中間評価項目得点,
                 new RString("000111000111000111"), new Code("3"), new Decimal(12.34), new Code("4"),
-                new Code("5"), 日常生活自立度組み合わせ, new Code("6"), 48, IchijiHanteiSohuKubun.送付済み, new FlexibleDate("20061231"));
+                new Code("5"), 日常生活自立度組み合わせ, new Code("6"), 48, IchijiHanteiResultSofuKubun.送付済み, new FlexibleDate("20061231"));
     }
 
     private static YokaigoNinteiKijunTime create要介護認定等基準時間(int 基準時間, int 基準時間_食事,
@@ -130,7 +130,7 @@ public final class IchijiHanteiTestEntityCreator {
             YokaigoNinteiKijunTime 要介護認定等基準時間, YokaigoNinteiChukanHyokaKomokuTokuten 要介護認定中間評価項目得点,
             RString 警告配列コード, Code 状態安定性コード, Decimal 認知症高齢者自立度2以上蓋然性, Code 給付区分コード,
             Code 運動能力未低下認知症高齢者の指標コード, NichijoSeikatsuJiritsudoKumiawase 日常生活自立度組み合わせ, Code 蓋然性評価コード,
-            int 蓋然性評価率, IchijiHanteiSohuKubun 結果送付区分, FlexibleDate 結果送付年月) {
+            int 蓋然性評価率, IchijiHanteiResultSofuKubun 結果送付区分, FlexibleDate 結果送付年月) {
         DbT5016IchijiHanteiKekkaJohoEntity entity = new DbT5016IchijiHanteiKekkaJohoEntity();
         entity.setShinseishoKanriNo(申請書管理番号);
         entity.setKoroshoIfShikibetsuCode(IF区分.getCode());
@@ -211,7 +211,7 @@ public final class IchijiHanteiTestEntityCreator {
             YokaigoNinteiKijunTime 要介護認定等基準時間, YokaigoNinteiChukanHyokaKomokuTokuten 要介護認定中間評価項目得点,
             RString 警告配列コード, Code 状態安定性コード, Decimal 認知症高齢者自立度2以上蓋然性, Code 給付区分コード,
             Code 運動能力未低下認知症高齢者の指標コード, NichijoSeikatsuJiritsudoKumiawase 日常生活自立度組み合わせ, Code 蓋然性評価コード,
-            int 蓋然性評価率, IchijiHanteiSohuKubun 結果送付区分, FlexibleDate 結果送付年月) {
+            int 蓋然性評価率, IchijiHanteiResultSofuKubun 結果送付区分, FlexibleDate 結果送付年月) {
         return set一次判定結果コードマスタ項目(create一次判定結果Entity(申請書管理番号, IF区分, 仮判定区分, 一次判定年月日, 一次判定結果コード,
                 認知症加算一次判定結果コード, 要介護認定等基準時間, 要介護認定中間評価項目得点, 警告配列コード, 状態安定性コード,
                 認知症高齢者自立度2以上蓋然性, 給付区分コード, 運動能力未低下認知症高齢者の指標コード, 日常生活自立度組み合わせ,
