@@ -29,6 +29,22 @@ public class ShujiiIkensho5Komoku {
     private final ShokujiKoiHyokaKomoku 食事行為;
 
     /**
+     * 仮一次判定で使用する、主治医意見書5項目に関して記載が無いことを表す定数です。
+     */
+    public static final ShujiiIkensho5Komoku KISAI_NASHI;
+
+    static {
+        ShogaiKoreishaJiritsudoKomoku 障害高齢者自立度記載無し = new ShogaiKoreishaJiritsudoKomoku(new Code(RString.EMPTY), RString.EMPTY, RString.EMPTY);
+        NinchishoKoreishaJiritsudoKomoku 認知症高齢者自立度記載無し = new NinchishoKoreishaJiritsudoKomoku(new Code("9"), new RString("記載無し"), new RString("記載無し"));
+        TankiKiokuKomoku 短期記憶記載無し = TankiKiokuKomoku.記載無し;
+        NinchiNoryokuKomoku 認知能力記載無し = NinchiNoryokuKomoku.記載無し;
+        DentatsuNoryokuKomoku 伝達能力記載無し = DentatsuNoryokuKomoku.記載無し;
+        ShokujiKoiHyokaKomoku 食事行為記載無し = ShokujiKoiHyokaKomoku.記載無し;
+        KISAI_NASHI = new ShujiiIkensho5Komoku(障害高齢者自立度記載無し, 認知症高齢者自立度記載無し, 短期記憶記載無し, 認知能力記載無し,
+                伝達能力記載無し, 食事行為記載無し);
+    }
+
+    /**
      * 引数から主治医意見書5項目を受け取り、インスタンスを生成します。
      *
      * @param 障害高齢者自立度 障害高齢者自立度
@@ -55,19 +71,6 @@ public class ShujiiIkensho5Komoku {
         this.認知能力 = 認知能力;
         this.伝達能力 = 伝達能力;
         this.食事行為 = 食事行為;
-    }
-
-    /**
-     * 主治医意見書5項目について、初期値をもったインスタンスを生成します。<br/>
-     * 仮一次判定の計算を行う際に使用します。
-     */
-    public ShujiiIkensho5Komoku() {
-        this.障害高齢者自立度 = new ShogaiKoreishaJiritsudoKomoku(new Code(RString.EMPTY), RString.EMPTY, RString.EMPTY);
-        this.認知症高齢者自立度 = new NinchishoKoreishaJiritsudoKomoku(new Code("9"), new RString("記載無し"), new RString("記載無し"));
-        this.短期記憶 = TankiKiokuKomoku.記載無し;
-        this.認知能力 = NinchiNoryokuKomoku.記載無し;
-        this.伝達能力 = DentatsuNoryokuKomoku.記載無し;
-        this.食事行為 = ShokujiKoiHyokaKomoku.記載無し;
     }
 
     /**

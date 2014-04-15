@@ -28,13 +28,13 @@ import static org.mockito.Mockito.mock;
 public class ShujiiIkensho5KomokuTest {
 
     private static ShujiiIkensho5Komoku sut;
-    private static ShogaiKoreishaJiritsudoKomoku 障害高齢者自立度項目_mock = mock(ShogaiKoreishaJiritsudoKomoku.class);
-    private static NinchishoKoreishaJiritsudoKomoku 認知症高齢者自立度_1_自立 = new NinchishoKoreishaJiritsudoKomoku(new Code(new RString("1")),
+    private static final ShogaiKoreishaJiritsudoKomoku 障害高齢者自立度項目_mock = mock(ShogaiKoreishaJiritsudoKomoku.class);
+    private static final NinchishoKoreishaJiritsudoKomoku 認知症高齢者自立度_1_自立 = new NinchishoKoreishaJiritsudoKomoku(new Code(new RString("1")),
             new RString("自立"), new RString("自立"));
-    private static TankiKiokuKomoku 短期記憶_2 = TankiKiokuKomoku.問題あり;
-    private static NinchiNoryokuKomoku 認知能力_1 = NinchiNoryokuKomoku.自立;
-    private static DentatsuNoryokuKomoku 伝達能力_3 = DentatsuNoryokuKomoku.具体的要求に限られる;
-    private static ShokujiKoiHyokaKomoku 食事行為_1 = ShokujiKoiHyokaKomoku.自立ないし何とか自分で食べられる;
+    private static final TankiKiokuKomoku 短期記憶_2 = TankiKiokuKomoku.問題あり;
+    private static final NinchiNoryokuKomoku 認知能力_1 = NinchiNoryokuKomoku.自立;
+    private static final DentatsuNoryokuKomoku 伝達能力_3 = DentatsuNoryokuKomoku.具体的要求に限られる;
+    private static final ShokujiKoiHyokaKomoku 食事行為_1 = ShokujiKoiHyokaKomoku.自立ないし何とか自分で食べられる;
 
     public static class コンストラクタ_引数から5項目を渡す場合のテスト extends DbeTestBase {
 
@@ -75,11 +75,11 @@ public class ShujiiIkensho5KomokuTest {
         }
     }
 
-    public static class コンストラクタ_初期値を生成する場合のテスト extends DbeTestBase {
+    public static class 仮一次判定で使用する_記載が無いことを表す定数のテスト extends DbeTestBase {
 
         @Before
         public void setUp() {
-            sut = new ShujiiIkensho5Komoku();
+            sut = ShujiiIkensho5Komoku.KISAI_NASHI;
         }
 
         @Test
@@ -118,9 +118,8 @@ public class ShujiiIkensho5KomokuTest {
         }
 
         @Test
-        public void 初期値をもつインスタンスを生成した場合_初期値を示す数列が返る() {
-            sut = new ShujiiIkensho5Komoku();
-            assertThat(sut.get5項目回答(), is(new RString("99999")));
+        public void 記載が無いことを表す定数の場合_99999が返る() {
+            assertThat(ShujiiIkensho5Komoku.KISAI_NASHI.get5項目回答(), is(new RString("99999")));
         }
     }
 }
