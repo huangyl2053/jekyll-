@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8178 城間篤人
  */
-public enum IchijiHanteiSohuKubun {
+public enum IchijiHanteiResultSofuKubun {
 
     /**
      * 送付済みであることを表します。
@@ -24,7 +24,7 @@ public enum IchijiHanteiSohuKubun {
     未送付("0");
     private final RString 送付区分コード;
 
-    private IchijiHanteiSohuKubun(String 送付区分コード) {
+    private IchijiHanteiResultSofuKubun(String 送付区分コード) {
         this.送付区分コード = new RString(送付区分コード);
     }
 
@@ -45,8 +45,8 @@ public enum IchijiHanteiSohuKubun {
      * @return 送付区分
      * @throws IllegalArgumentException 対応する送付区分が存在しないとき
      */
-    public static IchijiHanteiSohuKubun toValue(RString 送付区分コード) throws IllegalArgumentException {
-        for (IchijiHanteiSohuKubun 送付区分 : values()) {
+    public static IchijiHanteiResultSofuKubun toValue(RString 送付区分コード) throws IllegalArgumentException {
+        for (IchijiHanteiResultSofuKubun 送付区分 : values()) {
             if (送付区分.get送付区分コード().equals(送付区分コード)) {
                 return 送付区分;
             }
