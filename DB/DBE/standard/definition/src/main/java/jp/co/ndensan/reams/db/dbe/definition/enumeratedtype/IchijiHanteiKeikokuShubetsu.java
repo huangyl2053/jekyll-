@@ -89,8 +89,7 @@ public enum IchijiHanteiKeikokuShubetsu {
             年度List.add(警告種別.get警告種別対応年度());
         }
 
-        Collections.sort(年度List);
-        Collections.reverse(年度List);
+        Collections.sort(年度List, Collections.reverseOrder());
 
         for (FlexibleYear 年度 : 年度List) {
             if (年度.compareTo(一次判定年月日.getNendo()) <= 0) {
