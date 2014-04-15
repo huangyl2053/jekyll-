@@ -28,15 +28,15 @@ import static org.mockito.Mockito.when;
 @RunWith(Enclosed.class)
 public class NinteichosahyoResultFinderTest {
 
-    private static NinteichosahyoResultFinder sut;
+    private static NinteichosahyoKaitoHairetsuFinder sut;
 
     public static class get認定調査票回答結果のテスト extends DbeTestBase {
 
         @Test
         public void 認定調査票の回答結果が取得できる() {
-            sut = new NinteichosahyoResultFinder(createDacMock());
+            sut = new NinteichosahyoKaitoHairetsuFinder(createDacMock());
             NinteichosahyoKaitoHairetsuCode result = sut.get認定調査票回答結果(new ShinseishoKanriNo(new RString("A001")));
-            assertThat(result.get調査項目回答(),
+            assertThat(result.asRString(),
                     is(new RString("22222111112222211111222223333311111222223333344444111112222233333444445555511111222223333344444555556")));
         }
 

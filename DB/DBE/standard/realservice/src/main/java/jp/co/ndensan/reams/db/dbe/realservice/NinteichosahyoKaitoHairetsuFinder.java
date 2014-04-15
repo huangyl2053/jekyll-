@@ -16,14 +16,14 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * @author n8178 城間篤人
  */
-public class NinteichosahyoResultFinder {
+public class NinteichosahyoKaitoHairetsuFinder {
 
     private final NinteichosahyoDac dac;
 
     /**
      * デフォルトコンストラクタです。
      */
-    public NinteichosahyoResultFinder() {
+    public NinteichosahyoKaitoHairetsuFinder() {
         dac = InstanceProvider.create(NinteichosahyoDac.class);
     }
 
@@ -32,7 +32,7 @@ public class NinteichosahyoResultFinder {
      *
      * @param dac テスト用Dac
      */
-    NinteichosahyoResultFinder(NinteichosahyoDac dac) {
+    NinteichosahyoKaitoHairetsuFinder(NinteichosahyoDac dac) {
         this.dac = dac;
     }
 

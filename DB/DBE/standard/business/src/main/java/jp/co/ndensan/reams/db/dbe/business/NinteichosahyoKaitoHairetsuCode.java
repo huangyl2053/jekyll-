@@ -61,11 +61,11 @@ public class NinteichosahyoKaitoHairetsuCode {
     }
 
     /**
-     * 調査項目の回答結果を元に作成した数列を返します。
+     * 調査項目の回答結果を元に作成した文字列を返します。
      *
      * @return 調査項目回答
      */
-    public RString get調査項目回答() {
+    public RString asRString() {
         return 調査項目回答;
     }
 

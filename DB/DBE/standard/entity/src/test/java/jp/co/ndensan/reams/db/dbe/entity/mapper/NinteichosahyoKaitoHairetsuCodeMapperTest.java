@@ -70,7 +70,7 @@ public class NinteichosahyoKaitoHairetsuCodeMapperTest {
 
         @Test
         public void マッピング後の調査項目結果は_get調査項目回答で_entity内の調査項目に対応した回答結果を返す() {
-            assertThat(result.get調査項目回答(), is(回答項目));
+            assertThat(result.asRString(), is(回答項目));
         }
     }
 }
