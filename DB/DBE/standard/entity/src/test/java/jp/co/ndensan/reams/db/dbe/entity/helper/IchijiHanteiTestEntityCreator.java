@@ -58,20 +58,20 @@ public final class IchijiHanteiTestEntityCreator {
                 new Code("5"), 日常生活自立度組み合わせ, new Code("6"), 48, IchijiHanteiResultSofuKubun.送付済み, new FlexibleDate("20061231"));
     }
 
-    private static YokaigoNinteiKijunTime create要介護認定等基準時間(int 基準時間, int 基準時間_食事,
+    private static YokaigoNinteiKijunTime create要介護認定等基準時間(int 基準時間_合計, int 基準時間_食事,
             int 基準時間_排泄, int 基準時間_移動, int 基準時間_清潔保持, int 基準時間_間接ケア,
             int 基準時間_BPSD関連, int 基準時間_機能訓練, int 基準時間_医療関連, int 基準時間_認知症加算) {
         Map<YokaigoNinteiKijunTimeItemGroup, Integer> 基準時間Map = new EnumMap<>(YokaigoNinteiKijunTimeItemGroup.class);
-        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.基準時間, 基準時間);
-        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.基準時間_食事, 基準時間_食事);
-        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.基準時間_排泄, 基準時間_排泄);
-        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.基準時間_移動, 基準時間_移動);
-        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.基準時間_清潔保持, 基準時間_清潔保持);
-        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.基準時間_間接ケア, 基準時間_間接ケア);
-        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.基準時間_BPSD関連, 基準時間_BPSD関連);
-        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.基準時間_機能訓練, 基準時間_機能訓練);
-        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.基準時間_医療関連, 基準時間_医療関連);
-        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.基準時間_認知症加算, 基準時間_認知症加算);
+        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.合計, 基準時間_合計);
+        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.食事, 基準時間_食事);
+        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.排泄, 基準時間_排泄);
+        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.移動, 基準時間_移動);
+        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.清潔保持, 基準時間_清潔保持);
+        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.間接ケア, 基準時間_間接ケア);
+        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.BPSD関連, 基準時間_BPSD関連);
+        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.機能訓練, 基準時間_機能訓練);
+        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.医療関連, 基準時間_医療関連);
+        基準時間Map.put(YokaigoNinteiKijunTimeItemGroup.認知症加算, 基準時間_認知症加算);
         return new YokaigoNinteiKijunTime(基準時間Map);
     }
 
@@ -90,8 +90,8 @@ public final class IchijiHanteiTestEntityCreator {
 
     private static NichijoSeikatsuJiritsudoKumiawase create日常生活自立度組み合わせ(int 自立, int 要支援, int 要介護1,
             int 要介護2, int 要介護3, int 要介護4, int 要介護5) {
-        Map<NichijoSeikatsuJiritsudoKumiawaseItemGroup, Integer> 日常生活自立度組み合わせ =
-                new EnumMap<>(NichijoSeikatsuJiritsudoKumiawaseItemGroup.class);
+        Map<NichijoSeikatsuJiritsudoKumiawaseItemGroup, Integer> 日常生活自立度組み合わせ
+                = new EnumMap<>(NichijoSeikatsuJiritsudoKumiawaseItemGroup.class);
         日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.自立, 自立);
         日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要支援, 要支援);
         日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護1, 要介護1);
@@ -111,7 +111,7 @@ public final class IchijiHanteiTestEntityCreator {
      * @param 一次判定年月日 一次判定年月日
      * @param 一次判定結果コード 一次判定結果コード
      * @param 認知症加算一次判定結果コード 認知症加算一次判定結果コード
-     * @param 要介護認定等基準時間 要介護認定等基準時間
+     * @param 要介護認定等基準時間 要介護認定等合計
      * @param 要介護認定中間評価項目得点 要介護認定中間評価項目得点
      * @param 警告配列コード 警告配列コード
      * @param 状態安定性コード 状態安定性コード
@@ -138,16 +138,16 @@ public final class IchijiHanteiTestEntityCreator {
         entity.setIchijiHanteiYMD(一次判定年月日);
         entity.setIchijiHanteiKekkaCode(一次判定結果コード);
         entity.setIchijiHanteiKekkaNinchishoKasanCode(認知症加算一次判定結果コード);
-        entity.setKijunJikan(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間));
-        entity.setKijunJikanShokuji(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_食事));
-        entity.setKijunJikanHaisetsu(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_排泄));
-        entity.setKijunJikanIdo(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_移動));
-        entity.setKijunJikanSeiketsuHoji(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_清潔保持));
-        entity.setKijunJikanKansetsuCare(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_間接ケア));
-        entity.setKijunJikanBPSDKanren(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_BPSD関連));
-        entity.setKijunJikanKinoKunren(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_機能訓練));
-        entity.setKijunJikanIryoKanren(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_医療関連));
-        entity.setKijunJikanNinchishoKasan(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_認知症加算));
+        entity.setKijunJikan(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.合計));
+        entity.setKijunJikanShokuji(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.食事));
+        entity.setKijunJikanHaisetsu(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.排泄));
+        entity.setKijunJikanIdo(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.移動));
+        entity.setKijunJikanSeiketsuHoji(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.清潔保持));
+        entity.setKijunJikanKansetsuCare(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.間接ケア));
+        entity.setKijunJikanBPSDKanren(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.BPSD関連));
+        entity.setKijunJikanKinoKunren(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.機能訓練));
+        entity.setKijunJikanIryoKanren(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.医療関連));
+        entity.setKijunJikanNinchishoKasan(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.認知症加算));
         entity.setChukanHyokaKomoku1gun(要介護認定中間評価項目得点.get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第1群));
         entity.setChukanHyokaKomoku2gun(要介護認定中間評価項目得点.get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第2群));
         entity.setChukanHyokaKomoku3gun(要介護認定中間評価項目得点.get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第3群));
@@ -192,7 +192,7 @@ public final class IchijiHanteiTestEntityCreator {
      * @param 一次判定年月日 一次判定年月日
      * @param 一次判定結果コード 一次判定結果コード
      * @param 認知症加算一次判定結果コード 認知症加算一次判定結果コード
-     * @param 要介護認定等基準時間 要介護認定等基準時間
+     * @param 要介護認定等基準時間 要介護認定等合計
      * @param 要介護認定中間評価項目得点 要介護認定中間評価項目得点
      * @param 警告配列コード 警告配列コード
      * @param 状態安定性コード 状態安定性コード
@@ -238,6 +238,7 @@ public final class IchijiHanteiTestEntityCreator {
     /**
      * 申請書管理番号を外部から指定して、一次判定結果Entityを生成して返します。
      *
+     * @param 申請書管理番号 申請書管理番号
      * @return 一次判定結果Entity
      */
     public static DbT5016IchijiHanteiKekkaJohoEntity create一次判定結果Entity(String 申請書管理番号) {
@@ -249,6 +250,7 @@ public final class IchijiHanteiTestEntityCreator {
     /**
      * 申請書管理番号を外部から指定して、一次判定結果Entityを生成して返します。(Spy)
      *
+     * @param 申請書管理番号 申請書管理番号
      * @return 一次判定結果Entity
      */
     public static DbT5016IchijiHanteiKekkaJohoEntity create一次判定結果EntitySpy(String 申請書管理番号) {
@@ -258,6 +260,8 @@ public final class IchijiHanteiTestEntityCreator {
     /**
      * 申請書管理番号と仮一次判定フラグを外部から指定して、一次判定結果Entityを生成して返します。
      *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 仮一次判定フラグ 仮一次判定フラグ
      * @return 一次判定結果Entity
      */
     public static DbT5016IchijiHanteiKekkaJohoEntity create一次判定結果Entity(String 申請書管理番号, boolean 仮一次判定フラグ) {
@@ -270,6 +274,8 @@ public final class IchijiHanteiTestEntityCreator {
     /**
      * 申請書管理番号と仮一次判定フラグを外部から指定して、一次判定結果Entityを生成して返します。(Spy)
      *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 仮一次判定フラグ 仮一次判定フラグ
      * @return 一次判定結果Entity
      */
     public static DbT5016IchijiHanteiKekkaJohoEntity create一次判定結果EntitySpy(String 申請書管理番号, boolean 仮一次判定フラグ) {
@@ -353,6 +359,8 @@ public final class IchijiHanteiTestEntityCreator {
     /**
      * 申請書管理番号と履歴番号を指定し、一次判定で使用される主治医意見書詳細情報Entityを生成して返します。
      *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 履歴番号 履歴番号
      * @return 主治医意見書詳細情報Entity
      */
     public static DbT5013ShujiiIkenshoShosaiJohoEntity create主治医意見書5項目Entity(String 申請書管理番号, int 履歴番号) {
@@ -365,6 +373,7 @@ public final class IchijiHanteiTestEntityCreator {
     /**
      * 主治医意見書5項目回答結果の数列を指定して、その情報を元に主治医意見書詳細情報Entityを生成します。
      *
+     * @param 回答結果数列 回答結果数列
      * @return 主治医意見書詳細情報Entity
      */
     public static DbT5013ShujiiIkenshoShosaiJohoEntity create主治医意見書5項目Entity(String 回答結果数列) {
@@ -386,6 +395,7 @@ public final class IchijiHanteiTestEntityCreator {
     /**
      * 主治医意見書5項目回答結果の数列を指定して、その情報を元に主治医意見書詳細情報Entityを生成します。(Spy)
      *
+     * @param 回答結果数列 回答結果数列
      * @return 主治医意見書詳細情報Entity
      */
     public static DbT5013ShujiiIkenshoShosaiJohoEntity create主治医意見書5項目EntitySpy(String 回答結果数列) {
@@ -529,6 +539,8 @@ public final class IchijiHanteiTestEntityCreator {
     /**
      * 申請書管理番号と履歴番号を指定して、認定調査票Entityを生成して返します。
      *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 履歴番号 履歴番号
      * @return 認定調査票Entity
      */
     public static DbT5009NinteichosahyoJohoEntity create認定調査票Entity(String 申請書管理番号, int 履歴番号) {

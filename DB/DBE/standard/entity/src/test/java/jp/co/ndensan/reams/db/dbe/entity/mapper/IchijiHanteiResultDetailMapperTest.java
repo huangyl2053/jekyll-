@@ -150,62 +150,62 @@ public class IchijiHanteiResultDetailMapperTest {
 
         @Test
         public void マッピング後に返される一次判定結果は_基準時間に11を持つ() {
-            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間),
-                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間)));
+            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.合計),
+                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.合計)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_食事基準時間に12を持つ() {
-            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_食事),
-                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_食事)));
+            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.食事),
+                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.食事)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_排泄食事基準時間に13を持つ() {
-            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_排泄),
-                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_排泄)));
+            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.排泄),
+                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.排泄)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_移動基準時間に14を持つ() {
-            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_移動),
-                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_移動)));
+            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.移動),
+                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.移動)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_清潔保持基準時間に15を持つ() {
-            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_清潔保持),
-                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_清潔保持)));
+            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.清潔保持),
+                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.清潔保持)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_間接ケア基準時間に16を持つ() {
-            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_間接ケア),
-                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_間接ケア)));
+            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.間接ケア),
+                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.間接ケア)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_BPSD関連基準時間に17を持つ() {
-            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_BPSD関連),
-                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_BPSD関連)));
+            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.BPSD関連),
+                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.BPSD関連)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_機能訓練基準時間に18を持つ() {
-            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_機能訓練),
-                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_機能訓練)));
+            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.機能訓練),
+                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.機能訓練)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_医療関連基準時間に19を持つ() {
-            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_医療関連),
-                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_医療関連)));
+            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.医療関連),
+                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.医療関連)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_認知症加算基準時間に20を持つ() {
-            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_認知症加算),
-                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_認知症加算)));
+            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.認知症加算),
+                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.認知症加算)));
         }
 
         @Test
@@ -409,52 +409,52 @@ public class IchijiHanteiResultDetailMapperTest {
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_基準時間に11を持つ() {
-            assertThat(result.getKijunJikan(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間)));
+            assertThat(result.getKijunJikan(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.合計)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_食事基準時間に12を持つ() {
-            assertThat(result.getKijunJikanShokuji(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_食事)));
+            assertThat(result.getKijunJikanShokuji(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.食事)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_排泄食事基準時間に13を持つ() {
-            assertThat(result.getKijunJikanHaisetsu(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_排泄)));
+            assertThat(result.getKijunJikanHaisetsu(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.排泄)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_移動基準時間に14を持つ() {
-            assertThat(result.getKijunJikanIdo(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_移動)));
+            assertThat(result.getKijunJikanIdo(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.移動)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_清潔保持基準時間に15を持つ() {
-            assertThat(result.getKijunJikanSeiketsuHoji(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_清潔保持)));
+            assertThat(result.getKijunJikanSeiketsuHoji(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.清潔保持)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_間接ケア基準時間に16を持つ() {
-            assertThat(result.getKijunJikanKansetsuCare(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_間接ケア)));
+            assertThat(result.getKijunJikanKansetsuCare(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.間接ケア)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_BPSD関連基準時間に17を持つ() {
-            assertThat(result.getKijunJikanBPSDKanren(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_BPSD関連)));
+            assertThat(result.getKijunJikanBPSDKanren(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.BPSD関連)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_機能訓練基準時間に18を持つ() {
-            assertThat(result.getKijunJikanKinoKunren(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_機能訓練)));
+            assertThat(result.getKijunJikanKinoKunren(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.機能訓練)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_医療関連基準時間に19を持つ() {
-            assertThat(result.getKijunJikanIryoKanren(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_医療関連)));
+            assertThat(result.getKijunJikanIryoKanren(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.医療関連)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_認知症加算基準時間に20を持つ() {
-            assertThat(result.getKijunJikanNinchishoKasan(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_認知症加算)));
+            assertThat(result.getKijunJikanNinchishoKasan(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.認知症加算)));
         }
 
         @Test

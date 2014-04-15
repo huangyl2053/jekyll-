@@ -134,34 +134,34 @@ public final class IchijiHanteiTestBusinessCreator {
     }
 
     /**
-     * 要介護認定等基準時間を生成します。
+     * 要介護認定等合計を生成します。
      *
-     * @param 基準時間 基準時間
-     * @param 食事基準時間 食事基準時間
-     * @param 排泄基準時間 排泄基準時間
-     * @param 移動基準時間 移動基準時間
-     * @param 清潔保持基準時間 清潔保持基準時間
-     * @param 間接ケア基準時間 間接ケア基準時間
-     * @param BPSD関連基準時間 BPSD関連基準時間
-     * @param 機能訓練基準時間 機能訓練基準時間
-     * @param 医療関連基準時間 医療関連基準時間
-     * @param 認知症加算基準時間 認知症加算基準時間
-     * @return 要介護認定等基準時間
+     * @param 基準時間_合計 基準時間_合計
+     * @param 食事基準時間 食事合計
+     * @param 排泄基準時間 排泄合計
+     * @param 移動基準時間 移動合計
+     * @param 清潔保持基準時間 清潔保持合計
+     * @param 間接ケア基準時間 間接ケア合計
+     * @param BPSD関連基準時間 BPSD関連合計
+     * @param 機能訓練基準時間 機能訓練合計
+     * @param 医療関連基準時間 医療関連合計
+     * @param 認知症加算基準時間 認知症加算合計
+     * @return 要介護認定等合計
      */
-    public static YokaigoNinteiKijunTime create要介護認定等基準時間(int 基準時間, int 食事基準時間, int 排泄基準時間,
+    public static YokaigoNinteiKijunTime create要介護認定等基準時間(int 基準時間_合計, int 食事基準時間, int 排泄基準時間,
             int 移動基準時間, int 清潔保持基準時間, int 間接ケア基準時間, int BPSD関連基準時間, int 機能訓練基準時間,
             int 医療関連基準時間, int 認知症加算基準時間) {
         Map<YokaigoNinteiKijunTimeItemGroup, Integer> 要介護認定等基準時間 = new EnumMap<>(YokaigoNinteiKijunTimeItemGroup.class);
-        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.基準時間, 基準時間);
-        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.基準時間_食事, 食事基準時間);
-        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.基準時間_排泄, 排泄基準時間);
-        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.基準時間_移動, 移動基準時間);
-        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.基準時間_清潔保持, 清潔保持基準時間);
-        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.基準時間_間接ケア, 間接ケア基準時間);
-        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.基準時間_BPSD関連, BPSD関連基準時間);
-        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.基準時間_機能訓練, 機能訓練基準時間);
-        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.基準時間_医療関連, 医療関連基準時間);
-        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.基準時間_認知症加算, 認知症加算基準時間);
+        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.合計, 基準時間_合計);
+        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.食事, 食事基準時間);
+        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.排泄, 排泄基準時間);
+        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.移動, 移動基準時間);
+        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.清潔保持, 清潔保持基準時間);
+        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.間接ケア, 間接ケア基準時間);
+        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.BPSD関連, BPSD関連基準時間);
+        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.機能訓練, 機能訓練基準時間);
+        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.医療関連, 医療関連基準時間);
+        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.認知症加算, 認知症加算基準時間);
         return new YokaigoNinteiKijunTime(要介護認定等基準時間);
     }
 

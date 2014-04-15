@@ -81,16 +81,16 @@ public final class IchijiHanteiResultDetailMapper {
 
     private static YokaigoNinteiKijunTime create要介護認定等基準時間(DbT5016IchijiHanteiKekkaJohoEntity entity) {
         Map<YokaigoNinteiKijunTimeItemGroup, Integer> 基準時間 = new EnumMap<>(YokaigoNinteiKijunTimeItemGroup.class);
-        基準時間.put(YokaigoNinteiKijunTimeItemGroup.基準時間, entity.getKijunJikan());
-        基準時間.put(YokaigoNinteiKijunTimeItemGroup.基準時間_食事, entity.getKijunJikanShokuji());
-        基準時間.put(YokaigoNinteiKijunTimeItemGroup.基準時間_排泄, entity.getKijunJikanHaisetsu());
-        基準時間.put(YokaigoNinteiKijunTimeItemGroup.基準時間_移動, entity.getKijunJikanIdo());
-        基準時間.put(YokaigoNinteiKijunTimeItemGroup.基準時間_清潔保持, entity.getKijunJikanSeiketsuHoji());
-        基準時間.put(YokaigoNinteiKijunTimeItemGroup.基準時間_間接ケア, entity.getKijunJikanKansetsuCare());
-        基準時間.put(YokaigoNinteiKijunTimeItemGroup.基準時間_BPSD関連, entity.getKijunJikanBPSDKanren());
-        基準時間.put(YokaigoNinteiKijunTimeItemGroup.基準時間_機能訓練, entity.getKijunJikanKinoKunren());
-        基準時間.put(YokaigoNinteiKijunTimeItemGroup.基準時間_医療関連, entity.getKijunJikanIryoKanren());
-        基準時間.put(YokaigoNinteiKijunTimeItemGroup.基準時間_認知症加算, entity.getKijunJikanNinchishoKasan());
+        基準時間.put(YokaigoNinteiKijunTimeItemGroup.合計, entity.getKijunJikan());
+        基準時間.put(YokaigoNinteiKijunTimeItemGroup.食事, entity.getKijunJikanShokuji());
+        基準時間.put(YokaigoNinteiKijunTimeItemGroup.排泄, entity.getKijunJikanHaisetsu());
+        基準時間.put(YokaigoNinteiKijunTimeItemGroup.移動, entity.getKijunJikanIdo());
+        基準時間.put(YokaigoNinteiKijunTimeItemGroup.清潔保持, entity.getKijunJikanSeiketsuHoji());
+        基準時間.put(YokaigoNinteiKijunTimeItemGroup.間接ケア, entity.getKijunJikanKansetsuCare());
+        基準時間.put(YokaigoNinteiKijunTimeItemGroup.BPSD関連, entity.getKijunJikanBPSDKanren());
+        基準時間.put(YokaigoNinteiKijunTimeItemGroup.機能訓練, entity.getKijunJikanKinoKunren());
+        基準時間.put(YokaigoNinteiKijunTimeItemGroup.医療関連, entity.getKijunJikanIryoKanren());
+        基準時間.put(YokaigoNinteiKijunTimeItemGroup.認知症加算, entity.getKijunJikanNinchishoKasan());
         return new YokaigoNinteiKijunTime(基準時間);
     }
 
@@ -162,16 +162,16 @@ public final class IchijiHanteiResultDetailMapper {
         entity.setIchijiHanteiYMD(一次判定結果.get一次判定年月日());
         entity.setIchijiHanteiKekkaCode(一次判定結果.get一次判定結果().getCode());
         entity.setIchijiHanteiKekkaNinchishoKasanCode(一次判定結果.get認知症加算一次判定結果().getCode());
-        entity.setKijunJikan(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間));
-        entity.setKijunJikanShokuji(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_食事));
-        entity.setKijunJikanHaisetsu(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_排泄));
-        entity.setKijunJikanIdo(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_移動));
-        entity.setKijunJikanSeiketsuHoji(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_清潔保持));
-        entity.setKijunJikanKansetsuCare(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_間接ケア));
-        entity.setKijunJikanBPSDKanren(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_BPSD関連));
-        entity.setKijunJikanKinoKunren(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_機能訓練));
-        entity.setKijunJikanIryoKanren(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_医療関連));
-        entity.setKijunJikanNinchishoKasan(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.基準時間_認知症加算));
+        entity.setKijunJikan(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.合計));
+        entity.setKijunJikanShokuji(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.食事));
+        entity.setKijunJikanHaisetsu(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.排泄));
+        entity.setKijunJikanIdo(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.移動));
+        entity.setKijunJikanSeiketsuHoji(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.清潔保持));
+        entity.setKijunJikanKansetsuCare(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.間接ケア));
+        entity.setKijunJikanBPSDKanren(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.BPSD関連));
+        entity.setKijunJikanKinoKunren(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.機能訓練));
+        entity.setKijunJikanIryoKanren(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.医療関連));
+        entity.setKijunJikanNinchishoKasan(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.認知症加算));
         entity.setChukanHyokaKomoku1gun(一次判定結果.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第1群));
         entity.setChukanHyokaKomoku2gun(一次判定結果.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第2群));
         entity.setChukanHyokaKomoku3gun(一次判定結果.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第3群));
