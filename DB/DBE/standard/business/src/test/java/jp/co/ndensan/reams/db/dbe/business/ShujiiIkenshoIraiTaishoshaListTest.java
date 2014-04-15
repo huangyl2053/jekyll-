@@ -30,6 +30,7 @@ import static org.mockito.Mockito.mock;
 public class ShujiiIkenshoIraiTaishoshaListTest extends DbeTestBase {
 
     private static ShujiiIkenshoIraiTaishoshaList sut;
+    private static YokaigoninteiProgress 認定進捗情報 = mock(YokaigoninteiProgress.class);
     private static ShinseishoKanriNo 申請書管理番号登録あり1 = new ShinseishoKanriNo((new RString("11")));
     private static ShinseishoKanriNo 申請書管理番号登録あり2 = new ShinseishoKanriNo((new RString("12")));
     private static ShinseishoKanriNo 申請書管理番号登録あり3 = new ShinseishoKanriNo((new RString("13")));
@@ -101,6 +102,7 @@ public class ShujiiIkenshoIraiTaishoshaListTest extends DbeTestBase {
     private static ShujiiIkenshoIraiTaishosha create主治医意見書作成依頼対象者(ShinseishoKanriNo 申請書管理番号) {
 
         return new ShujiiIkenshoIraiTaishosha(
+                認定進捗情報,
                 申請書管理番号,
                 証記載保険者番号登録あり,
                 被保険者番号,

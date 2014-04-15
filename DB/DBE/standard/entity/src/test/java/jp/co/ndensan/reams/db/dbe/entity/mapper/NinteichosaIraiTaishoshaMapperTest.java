@@ -7,10 +7,12 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiTaishosha;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ChosainJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinseiJohoTestHelper;
 import jp.co.ndensan.reams.db.dbe.entity.helper.KaigoJigyoshaEntityMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.KojinTestHelper;
+import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaItakusakiTestHelper;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
@@ -39,6 +41,7 @@ import org.junit.Before;
 @RunWith(Enclosed.class)
 public class NinteichosaIraiTaishoshaMapperTest extends DbeTestBase {
 
+    private static YokaigoninteiProgress 認定進捗情報;
     private static NinteiShinseiJoho 認定申請情報;
     private static IKojin 個人;
     private static NinteichosaItakusaki 認定調査委託先;
@@ -50,6 +53,7 @@ public class NinteichosaIraiTaishoshaMapperTest extends DbeTestBase {
 
         @Before
         public void setUp() {
+            認定進捗情報 = mock(YokaigoninteiProgress.class);
             認定申請情報 = mock(NinteiShinseiJoho.class);
             個人 = mock(IKojin.class);
             認定調査委託先 = mock(NinteichosaItakusaki.class);
@@ -58,17 +62,24 @@ public class NinteichosaIraiTaishoshaMapperTest extends DbeTestBase {
         }
 
         @Test(expected = NullPointerException.class)
+        public void コンストラクタで_認定進捗情報に_nullを指定した場合_NullPointerExceptionが発生する() {
+            認定進捗情報 = null;
+            sut = NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(
+                    認定進捗情報, 認定申請情報, 個人, 認定調査委託先, 介護事業者, 認定調査員情報);
+        }
+
+        @Test(expected = NullPointerException.class)
         public void コンストラクタで_認定申請情報に_nullを指定した場合_NullPointerExceptionが発生する() {
             認定申請情報 = null;
             sut = NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(
-                    認定申請情報, 個人, 認定調査委託先, 介護事業者, 認定調査員情報);
+                    認定進捗情報, 認定申請情報, 個人, 認定調査委託先, 介護事業者, 認定調査員情報);
         }
 
         @Test(expected = NullPointerException.class)
         public void コンストラクタで_個人に_nullを指定した場合_NullPointerExceptionが発生する() {
             個人 = null;
             sut = NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(
-                    認定申請情報, 個人, 認定調査委託先, 介護事業者, 認定調査員情報);
+                    認定進捗情報, 認定申請情報, 個人, 認定調査委託先, 介護事業者, 認定調査員情報);
         }
     }
 
@@ -76,6 +87,7 @@ public class NinteichosaIraiTaishoshaMapperTest extends DbeTestBase {
 
         @Before
         public void setUp() {
+            認定進捗情報 = NinteiShinchokuJohoMock.create認定進捗情報();
             認定申請情報 = NinteishinseiJohoMapper.to認定申請情報(NinteiShinseiJohoTestHelper.create認定申請情報Entity());
             個人 = KojinTestHelper.create個人();
             認定調査委託先 = NinteichosaItakusakiMapper.toNinteichosaItakusaki(NinteichosaItakusakiTestHelper.create認定調査委託先Entity());
@@ -83,7 +95,7 @@ public class NinteichosaIraiTaishoshaMapperTest extends DbeTestBase {
             認定調査員情報 = NinteiChosainMapper.toNinteiChosain(ChosainJohoEntityMock.getSpiedInstance(), 介護事業者);
 
             sut = NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(
-                    認定申請情報, 個人, 認定調査委託先, 介護事業者, 認定調査員情報);
+                    認定進捗情報, 認定申請情報, 個人, 認定調査委託先, 介護事業者, 認定調査員情報);
         }
 
         @Test

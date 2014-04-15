@@ -40,6 +40,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
     private final NinteichosaIraiManager ninteichosaIraiManager;
     private final KaigoNinteichosainManager kaigoNinteichosainManager;
     private final IKojinFinder kojinFinder;
+    private final YokaigoninteiProgressManager yokaigoninteiProgressManager;
 
     /**
      * コンストラクタです。
@@ -49,6 +50,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
         ninteichosaIraiManager = new NinteichosaIraiManager();
         kaigoNinteichosainManager = new KaigoNinteichosainManager();
         kojinFinder = KojinService.createKojinFinder();
+        yokaigoninteiProgressManager = new YokaigoninteiProgressManager();
     }
 
     /**
@@ -58,16 +60,19 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
      * @param ninteichosaIraiManager ninteichosaIraiManager
      * @param kaigoNinteichosainManager kaigoNinteichosainManager
      * @param kojinFinder kojinFinder
+     * @param yokaigoninteiProgressManager yokaigoninteiProgressManager
      */
     NinteichosaKekkaTorikomiTaishoshaManager(
             NinteichosaKekkaTorikomiTaishoshaDac torikomiTaishoshaDac,
             NinteichosaIraiManager ninteichosaIraiManager,
             KaigoNinteichosainManager kaigoNinteichosainManager,
-            IKojinFinder kojinFinder) {
+            IKojinFinder kojinFinder,
+            YokaigoninteiProgressManager yokaigoninteiProgressManager) {
         this.torikomiTaishoshaDac = torikomiTaishoshaDac;
         this.ninteichosaIraiManager = ninteichosaIraiManager;
         this.kaigoNinteichosainManager = kaigoNinteichosainManager;
         this.kojinFinder = kojinFinder;
+        this.yokaigoninteiProgressManager = yokaigoninteiProgressManager;
     }
 
     /**
@@ -119,7 +124,7 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
         YokaigoninteiProgressFactory factory = new YokaigoninteiProgressFactory(認定調査結果取込対象者.get認定進捗情報());
         YokaigoninteiProgress yokaigoninteiProgress = factory.createYokaigoninteiPorgressWith(
                 ParticularDates.認定調査完了年月日, 認定調査完了年月日);
-        return new YokaigoninteiProgressManager().save(yokaigoninteiProgress);
+        return yokaigoninteiProgressManager.save(yokaigoninteiProgress);
     }
 
     private List<NinteichosaKekkaTorikomiTaishosha> create認定調査結果取込対象者List(

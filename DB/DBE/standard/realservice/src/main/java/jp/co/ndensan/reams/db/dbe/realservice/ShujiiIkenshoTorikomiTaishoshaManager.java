@@ -39,6 +39,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
     private final ShujiiIkenshoTorikomiTaishoshaDac torikomiTaishoshaDac;
     private final ShujiiIkenshoSakuseiIraiKirokuManager shujiiManager;
     private final IKojinFinder kojinFinder;
+    private final YokaigoninteiProgressManager yokaigoninteiProgressManager;
 
     /**
      * コンストラクタです。
@@ -47,6 +48,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
         torikomiTaishoshaDac = InstanceProvider.create(ShujiiIkenshoTorikomiTaishoshaDac.class);
         shujiiManager = new ShujiiIkenshoSakuseiIraiKirokuManager();
         kojinFinder = KojinService.createKojinFinder();
+        yokaigoninteiProgressManager = new YokaigoninteiProgressManager();
     }
 
     /**
@@ -55,14 +57,17 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
      * @param torikomiTaishoshaDac torikomiTaishoshaDac
      * @param shujiiManager shujiiManager
      * @param kojinFinder kojinFinder
+     * @param yokaigoninteiProgressManager yokaigoninteiProgressManager
      */
     ShujiiIkenshoTorikomiTaishoshaManager(
             ShujiiIkenshoTorikomiTaishoshaDac torikomiTaishoshaDac,
             ShujiiIkenshoSakuseiIraiKirokuManager shujiiManager,
-            IKojinFinder kojinFinder) {
+            IKojinFinder kojinFinder,
+            YokaigoninteiProgressManager yokaigoninteiProgressManager) {
         this.torikomiTaishoshaDac = torikomiTaishoshaDac;
         this.shujiiManager = shujiiManager;
         this.kojinFinder = kojinFinder;
+        this.yokaigoninteiProgressManager = yokaigoninteiProgressManager;
     }
 
     /**
@@ -114,7 +119,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManager {
         YokaigoninteiProgressFactory factory = new YokaigoninteiProgressFactory(主治医意見書取込対象者.get認定進捗情報());
         YokaigoninteiProgress yokaigoninteiProgress = factory.createYokaigoninteiPorgressWith(
                 ParticularDates.主治医意見書登録完了年月日, 主治医意見書登録完了年月日);
-        return new YokaigoninteiProgressManager().save(yokaigoninteiProgress);
+        return yokaigoninteiProgressManager.save(yokaigoninteiProgress);
     }
 
     private List<ShujiiIkenshoTorikomiTaishosha> create主治医意見書取込対象者List(

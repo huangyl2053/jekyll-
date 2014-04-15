@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoIraiTaishosha;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -29,6 +30,7 @@ public final class ShujiiIkenshoIraiTaishoshaMapper {
     /**
      * 渡されたパラメータから、主治医意見書作成依頼対象者への対応付けを行います。
      *
+     * @param 認定進捗情報 認定進捗情報
      * @param 認定申請情報 認定申請情報
      * @param 個人 個人
      * @param 氏名 氏名
@@ -36,9 +38,11 @@ public final class ShujiiIkenshoIraiTaishoshaMapper {
      * @param 主治医医療機関 主治医医療機関
      * @param 主治医 主治医
      * @return 主治医意見書作成依頼対象者
-     * @throws NullPointerException {@code 認定申請情報Entity}がnullの場合
+     * @throws NullPointerException
+     * {@code 認定進捗情報}がnullの場合、または{@code 認定申請情報}がnullの場合
      */
     public static ShujiiIkenshoIraiTaishosha toShujiiIkenshoIraiTaishosha(
+            YokaigoninteiProgress 認定進捗情報,
             NinteiShinseiJoho 認定申請情報,
             IKojin 個人,
             RString 氏名,
@@ -46,9 +50,11 @@ public final class ShujiiIkenshoIraiTaishoshaMapper {
             KaigoIryoKikan 主治医医療機関,
             KaigoDoctor 主治医) throws NullPointerException {
 
+        requireNonNull(認定進捗情報, Messages.E00003.replace("認定進捗情報", " 主治医意見書作成依頼対象者").getMessage());
         requireNonNull(認定申請情報, Messages.E00003.replace("認定申請情報", "主治医意見書作成依頼対象者").getMessage());
 
         return new ShujiiIkenshoIraiTaishosha(
+                認定進捗情報,
                 認定申請情報.get申請書管理番号(),
                 認定申請情報.get証記載保険者番号(),
                 認定申請情報.get介護被保険者番号(),

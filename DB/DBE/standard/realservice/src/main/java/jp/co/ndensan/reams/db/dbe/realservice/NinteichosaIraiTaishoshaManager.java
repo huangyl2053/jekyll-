@@ -13,7 +13,11 @@ import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIrai;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiTaishosha;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgressFactory;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgressFactory.ParticularDates;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
+import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteiShinchokuJohoMapper;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaIraiTaishoshaMapper;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteishinseiJohoMapper;
@@ -30,6 +34,7 @@ import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
 import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -38,7 +43,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * @author N8187 久保田 英男
  */
-public class NinteichosaIraiTaishoshaFinder {
+public class NinteichosaIraiTaishoshaManager {
 
     private final NinteichosaIraiTaishoshaDac iraiTaishoshaDac;
     private final IKojinFinder kojinFinder;
@@ -47,12 +52,13 @@ public class NinteichosaIraiTaishoshaFinder {
     private final IKaigoJigyoshaFinder kaigoJigyoshaFinder;
     private final KaigoNinteichosainManager kaigoNinteichosainManager;
     private final INinteiChosainFinder ninteiChosainFinder;
+    private final YokaigoninteiProgressManager yokaigoninteiProgressManager;
 
     /**
      * コンストラクタです。
      *
      */
-    public NinteichosaIraiTaishoshaFinder() {
+    public NinteichosaIraiTaishoshaManager() {
         iraiTaishoshaDac = InstanceProvider.create(NinteichosaIraiTaishoshaDac.class);
         kojinFinder = KojinService.createKojinFinder();
         ninteichosaIraiManager = new NinteichosaIraiManager();
@@ -60,6 +66,7 @@ public class NinteichosaIraiTaishoshaFinder {
         kaigoJigyoshaFinder = KaigoJigyoshaFinderFactory.getInstance();
         kaigoNinteichosainManager = new KaigoNinteichosainManager();
         ninteiChosainFinder = NinteiChosainFinderFactory.getInstance();
+        yokaigoninteiProgressManager = new YokaigoninteiProgressManager();
     }
 
     /**
@@ -72,15 +79,17 @@ public class NinteichosaIraiTaishoshaFinder {
      * @param kaigoJigyoshaFinder kaigoJigyoshaFinder
      * @param kaigoNinteichosainManager kaigoNinteichosainManager
      * @param ninteiChosainFinder ninteiChosainFinder
+     * @param yokaigoninteiProgressManager yokaigoninteiProgressManager
      */
-    NinteichosaIraiTaishoshaFinder(
+    NinteichosaIraiTaishoshaManager(
             NinteichosaIraiTaishoshaDac iraiTaishoshaDac,
             IKojinFinder kojinFinder,
             NinteichosaIraiManager ninteichosaIraiManager,
             NinteichosaItakusakiManager ninteichosaItakusakiManager,
             IKaigoJigyoshaFinder kaigoJigyoshaFinder,
             KaigoNinteichosainManager kaigoNinteichosainManager,
-            INinteiChosainFinder ninteiChosainFinder) {
+            INinteiChosainFinder ninteiChosainFinder,
+            YokaigoninteiProgressManager yokaigoninteiProgressManager) {
         this.iraiTaishoshaDac = iraiTaishoshaDac;
         this.kojinFinder = kojinFinder;
         this.ninteichosaIraiManager = ninteichosaIraiManager;
@@ -88,6 +97,7 @@ public class NinteichosaIraiTaishoshaFinder {
         this.kaigoJigyoshaFinder = kaigoJigyoshaFinder;
         this.kaigoNinteichosainManager = kaigoNinteichosainManager;
         this.ninteiChosainFinder = ninteiChosainFinder;
+        this.yokaigoninteiProgressManager = yokaigoninteiProgressManager;
     }
 
     /**
@@ -128,6 +138,20 @@ public class NinteichosaIraiTaishoshaFinder {
         return create認定調査依頼対象者List(iraiTaishoshaEntityList);
     }
 
+    /**
+     * 認定調査依頼対象者の進捗を完了状態にするために、要介護認定進捗情報の認定調査依頼完了年月日を更新します。
+     *
+     * @param 認定調査依頼対象者 認定調査依頼対象者
+     * @param 認定調査依頼完了年月日 認定調査依頼完了年月日
+     * @return true:更新OK, false:更新NG
+     */
+    public boolean save認定調査依頼完了年月日(NinteichosaIraiTaishosha 認定調査依頼対象者, FlexibleDate 認定調査依頼完了年月日) {
+        YokaigoninteiProgressFactory factory = new YokaigoninteiProgressFactory(認定調査依頼対象者.get認定進捗情報());
+        YokaigoninteiProgress yokaigoninteiProgress = factory.createYokaigoninteiPorgressWith(
+                ParticularDates.認定調査依頼完了年月日, 認定調査依頼完了年月日);
+        return yokaigoninteiProgressManager.save(yokaigoninteiProgress);
+    }
+
     private List<NinteichosaIraiTaishosha> create認定調査依頼対象者List(
             List<KaigoNinteiShoriTaishoshaEntity> entityList) {
         List<NinteichosaIraiTaishosha> list = new ArrayList<>();
@@ -144,6 +168,7 @@ public class NinteichosaIraiTaishoshaFinder {
     }
 
     private NinteichosaIraiTaishosha create認定調査依頼対象者(KaigoNinteiShoriTaishoshaEntity entity) {
+        YokaigoninteiProgress 認定進捗情報 = NinteiShinchokuJohoMapper.toNinteiShinchokuJoho(entity.getNinteiShinchokuJohoEntity());
         NinteiShinseiJoho 認定申請情報 = NinteishinseiJohoMapper.to認定申請情報(entity.getNinteiShinseiJohoEntity());
         IKojin 個人 = get個人(認定申請情報);
         NinteichosaIrai 認定調査依頼情報 = get認定調査依頼情報(認定申請情報);
@@ -152,6 +177,7 @@ public class NinteichosaIraiTaishoshaFinder {
         KaigoNinteichosain 介護認定調査員 = get介護認定調査員(認定申請情報, 認定調査依頼情報);
         INinteiChosain 認定調査員情報 = get認定調査員情報(介護認定調査員);
         return NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(
+                認定進捗情報,
                 認定申請情報,
                 個人,
                 認定調査委託先情報,

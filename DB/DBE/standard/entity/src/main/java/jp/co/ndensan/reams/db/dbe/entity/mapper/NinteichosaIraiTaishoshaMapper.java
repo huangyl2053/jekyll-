@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
 // TODO N8187 久保田英男 URのNinteiChosainのキャメルケースをNinteichosainに修正する。URを修正するタイミングで対応する。
 import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
@@ -30,6 +31,7 @@ public final class NinteichosaIraiTaishoshaMapper {
     /**
      * 引数で渡されたパラメータから認定調査依頼対象者への対応付けを行います。
      *
+     * @param 認定進捗情報 認定進捗情報
      * @param 要介護認定申請情報 要介護認定申請情報
      * @param 個人 個人
      * @param 認定調査委託先情報 認定調査委託先情報
@@ -37,19 +39,22 @@ public final class NinteichosaIraiTaishoshaMapper {
      * @param 認定調査員情報 認定調査員情報
      * @return 認定調査依頼対象者
      * @throws NullPointerException
-     * {@code 要介護認定申請情報}がnullの場合、または{@code 個人}がnullの場合
+     * {@code 認定進捗情報}がnullの場合、{@code 要介護認定申請情報}がnullの場合、または{@code 個人}がnullの場合
      */
     public static NinteichosaIraiTaishosha toNinteichosaIraiTaishosha(
+            YokaigoninteiProgress 認定進捗情報,
             NinteiShinseiJoho 要介護認定申請情報,
             IKojin 個人,
             NinteichosaItakusaki 認定調査委託先情報,
             IKaigoJigyosha 事業者情報,
             INinteiChosain 認定調査員情報) throws NullPointerException {
 
-        requireNonNull(要介護認定申請情報, Messages.E00003.replace("要介護認定申請情報", "認定調査対象者").getMessage());
-        requireNonNull(個人, Messages.E00003.replace("個人", "認定調査対象者").getMessage());
+        requireNonNull(認定進捗情報, Messages.E00003.replace("認定進捗情報", " 認定調査依頼対象者").getMessage());
+        requireNonNull(要介護認定申請情報, Messages.E00003.replace("要介護認定申請情報", " 認定調査依頼対象者").getMessage());
+        requireNonNull(個人, Messages.E00003.replace("個人", " 認定調査依頼対象者").getMessage());
 
         return new NinteichosaIraiTaishosha(
+                認定進捗情報,
                 要介護認定申請情報.get申請書管理番号(),
                 要介護認定申請情報.get証記載保険者番号(),
                 要介護認定申請情報.get介護被保険者番号(),

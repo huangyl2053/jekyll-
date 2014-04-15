@@ -13,7 +13,11 @@ import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoIraiTaishosha;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoSakuseiIrai;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgressFactory;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgressFactory.ParticularDates;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
+import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteiShinchokuJohoMapper;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteishinseiJohoMapper;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.ShujiiIkenshoIraiTaishoshaMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
@@ -23,6 +27,7 @@ import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
 import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -31,21 +36,23 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * @author N8187 久保田 英男
  */
-public class ShujiiIkenshoIraiTaishoshaFinder {
+public class ShujiiIkenshoIraiTaishoshaManager {
 
     private final ShujiiIkenshoIraiTaishoshaDac shujiiIkenshoIraiTaishoshaDac;
     private final IKojinFinder kojinFinder;
     private final ShujiiIkenshoSakuseiIraiKirokuManager shujiiManager;
     private final KaigoIryoKikanFinder kaigoIryoKikanFinder;
+    private final YokaigoninteiProgressManager yokaigoninteiProgressManager;
 
     /**
      * コンストラクタです。
      */
-    public ShujiiIkenshoIraiTaishoshaFinder() {
+    public ShujiiIkenshoIraiTaishoshaManager() {
         shujiiIkenshoIraiTaishoshaDac = InstanceProvider.create(ShujiiIkenshoIraiTaishoshaDac.class);
         kojinFinder = KojinService.createKojinFinder();
         shujiiManager = new ShujiiIkenshoSakuseiIraiKirokuManager();
         kaigoIryoKikanFinder = new KaigoIryoKikanFinder();
+        yokaigoninteiProgressManager = new YokaigoninteiProgressManager();
     }
 
     /**
@@ -55,16 +62,19 @@ public class ShujiiIkenshoIraiTaishoshaFinder {
      * @param kojinFinder kojinFinder
      * @param shujiiManager shujiiManager
      * @param kaigoIryoKikanFinder kaigoIryoKikanFinder
+     * @param yokaigoninteiProgressManager yokaigoninteiProgressManager
      */
-    ShujiiIkenshoIraiTaishoshaFinder(
+    ShujiiIkenshoIraiTaishoshaManager(
             ShujiiIkenshoIraiTaishoshaDac shujiiIkenshoIraiTaishoshaDac,
             IKojinFinder kojinFinder,
             ShujiiIkenshoSakuseiIraiKirokuManager shujiiManager,
-            KaigoIryoKikanFinder kaigoIryoKikanFinder) {
+            KaigoIryoKikanFinder kaigoIryoKikanFinder,
+            YokaigoninteiProgressManager yokaigoninteiProgressManager) {
         this.shujiiIkenshoIraiTaishoshaDac = shujiiIkenshoIraiTaishoshaDac;
         this.kojinFinder = kojinFinder;
         this.shujiiManager = shujiiManager;
         this.kaigoIryoKikanFinder = kaigoIryoKikanFinder;
+        this.yokaigoninteiProgressManager = yokaigoninteiProgressManager;
     }
 
     /**
@@ -105,6 +115,20 @@ public class ShujiiIkenshoIraiTaishoshaFinder {
         return create主治医意見書作成依頼対象者List(iraiTaishoshaEntityList);
     }
 
+    /**
+     * 主治医意見書作成依頼対象者の進捗を完了状態にするために、要介護認定進捗情報の主治医意見書登録完了年月日を更新します。
+     *
+     * @param 主治医意見書作成依頼対象者 主治医意見書作成依頼対象者
+     * @param 主治医意見書登録完了年月日 主治医意見書登録完了年月日
+     * @return true:更新OK, false:更新NG
+     */
+    public boolean save主治医意見書登録完了年月日(ShujiiIkenshoIraiTaishosha 主治医意見書作成依頼対象者, FlexibleDate 主治医意見書登録完了年月日) {
+        YokaigoninteiProgressFactory factory = new YokaigoninteiProgressFactory(主治医意見書作成依頼対象者.get認定進捗情報());
+        YokaigoninteiProgress yokaigoninteiProgress = factory.createYokaigoninteiPorgressWith(
+                ParticularDates.主治医意見書登録完了年月日, 主治医意見書登録完了年月日);
+        return yokaigoninteiProgressManager.save(yokaigoninteiProgress);
+    }
+
     private List<ShujiiIkenshoIraiTaishosha> create主治医意見書作成依頼対象者List(
             List<KaigoNinteiShoriTaishoshaEntity> entityList) {
         List<ShujiiIkenshoIraiTaishosha> list = new ArrayList<>();
@@ -121,6 +145,7 @@ public class ShujiiIkenshoIraiTaishoshaFinder {
     }
 
     private ShujiiIkenshoIraiTaishosha create主治医意見書作成依頼対象者(KaigoNinteiShoriTaishoshaEntity entity) {
+        YokaigoninteiProgress 認定進捗情報 = NinteiShinchokuJohoMapper.toNinteiShinchokuJoho(entity.getNinteiShinchokuJohoEntity());
         NinteiShinseiJoho 認定申請情報 = NinteishinseiJohoMapper.to認定申請情報(entity.getNinteiShinseiJohoEntity());
         IKojin 個人 = get個人(認定申請情報);
         RString 氏名 = 個人.get氏名().getName().value();
@@ -130,6 +155,7 @@ public class ShujiiIkenshoIraiTaishoshaFinder {
         KaigoDoctor 主治医情報 = 主治医意見書作成依頼情報.get介護医師();
 
         return ShujiiIkenshoIraiTaishoshaMapper.toShujiiIkenshoIraiTaishosha(
+                認定進捗情報,
                 認定申請情報,
                 個人,
                 氏名,
