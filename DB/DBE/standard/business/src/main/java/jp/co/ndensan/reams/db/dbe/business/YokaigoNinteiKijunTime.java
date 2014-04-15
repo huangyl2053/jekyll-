@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.YokaigoNinteiKijunTi
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**
- * 一時判定における、要介護認定等基準時間の情報を持つクラスです。
+ * 一次判定における、要介護認定等基準時間の情報を持つクラスです。
  *
  * @author n8178 城間篤人
  */

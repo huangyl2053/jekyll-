@@ -15,7 +15,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * 一時判定結果コードのテストです。
+ * 一次判定結果コードのテストです。
  *
  * @author n8178 城間篤人
  */

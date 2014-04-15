@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 一時判定結果コードを表すクラスです。
+ * 一次判定結果コードを表すクラスです。
  *
  * @author n8178 城間篤人
  */
