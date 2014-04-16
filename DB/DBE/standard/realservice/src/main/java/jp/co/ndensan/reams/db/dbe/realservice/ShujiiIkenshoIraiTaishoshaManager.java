@@ -116,16 +116,16 @@ public class ShujiiIkenshoIraiTaishoshaManager {
     }
 
     /**
-     * 主治医意見書作成依頼対象者の進捗を完了状態にするために、要介護認定進捗情報の主治医意見書登録完了年月日を更新します。
+     * 主治医意見書作成依頼対象者の進捗を完了状態にするために、要介護認定進捗情報の主治医意見書作成依頼完了年月日を更新します。
      *
      * @param 主治医意見書作成依頼対象者 主治医意見書作成依頼対象者
-     * @param 主治医意見書登録完了年月日 主治医意見書登録完了年月日
+     * @param 主治医意見書作成依頼完了年月日 主治医意見書作成依頼完了年月日
      * @return true:更新OK, false:更新NG
      */
-    public boolean save主治医意見書登録完了年月日(ShujiiIkenshoIraiTaishosha 主治医意見書作成依頼対象者, FlexibleDate 主治医意見書登録完了年月日) {
+    public boolean save主治医意見書作成依頼完了年月日(ShujiiIkenshoIraiTaishosha 主治医意見書作成依頼対象者, FlexibleDate 主治医意見書作成依頼完了年月日) {
         YokaigoninteiProgressFactory factory = new YokaigoninteiProgressFactory(主治医意見書作成依頼対象者.get認定進捗情報());
         YokaigoninteiProgress yokaigoninteiProgress = factory.createYokaigoninteiPorgressWith(
-                ParticularDates.主治医意見書登録完了年月日, 主治医意見書登録完了年月日);
+                ParticularDates.主治医意見書作成依頼完了年月日, 主治医意見書作成依頼完了年月日);
         return yokaigoninteiProgressManager.save(yokaigoninteiProgress);
     }
 

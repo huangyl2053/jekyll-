@@ -54,8 +54,8 @@ public class ShujiiIkenshoIraiTaishoshaManagerTest extends DbeTestBase {
     private static ShujiiIkenshoSakuseiIraiKirokuManager shujiiManager;
     private static KaigoIryoKikanFinder kaigoIryoKikanFinder;
     private static YokaigoninteiProgressManager yokaigoninteiProgressManager;
-    private static ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("123456"));
-    private static RString 支所コード = new RString("0002");
+    private static final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("123456"));
+    private static final RString 支所コード = new RString("0002");
     private static List<ShujiiIkenshoIraiTaishosha> resultList;
 
     @BeforeClass
@@ -149,23 +149,23 @@ public class ShujiiIkenshoIraiTaishoshaManagerTest extends DbeTestBase {
         }
     }
 
-    public static class save主治医意見書登録完了年月日 extends DbeTestBase {
+    public static class save主治医意見書作成依頼完了年月日 extends DbeTestBase {
 
-        private static ShujiiIkenshoIraiTaishosha 主治医意見書作成依頼対象者 = create主治医意見書作成依頼対象者();
-        private static FlexibleDate 主治医意見書登録完了年月日 = new FlexibleDate(new RString("20140101"));
+        private static final ShujiiIkenshoIraiTaishosha 主治医意見書作成依頼対象者 = create主治医意見書作成依頼対象者();
+        private static final FlexibleDate 主治医意見書作成依頼完了年月日 = new FlexibleDate(new RString("20140101"));
 
         @Test
-        public void save主治医意見書登録完了年月日_saveが成功した時_TRUEを返す() {
+        public void save主治医意見書作成依頼完了年月日_saveが成功した時_TRUEを返す() {
             when(yokaigoninteiProgressManager.save(any(YokaigoninteiProgress.class))).thenReturn(true);
             sut = new ShujiiIkenshoIraiTaishoshaManager(shujiiIkenshoIraiTaishoshaDac, kojinFinder, shujiiManager, kaigoIryoKikanFinder, yokaigoninteiProgressManager);
-            assertThat(sut.save主治医意見書登録完了年月日(主治医意見書作成依頼対象者, 主治医意見書登録完了年月日), is(true));
+            assertThat(sut.save主治医意見書作成依頼完了年月日(主治医意見書作成依頼対象者, 主治医意見書作成依頼完了年月日), is(true));
         }
 
         @Test
-        public void save主治医意見書登録完了年月日_saveが失敗した時_FALSEを返す() {
+        public void save主治医意見書作成依頼完了年月日_saveが失敗した時_FALSEを返す() {
             when(yokaigoninteiProgressManager.save(any(YokaigoninteiProgress.class))).thenReturn(false);
             sut = new ShujiiIkenshoIraiTaishoshaManager(shujiiIkenshoIraiTaishoshaDac, kojinFinder, shujiiManager, kaigoIryoKikanFinder, yokaigoninteiProgressManager);
-            assertThat(sut.save主治医意見書登録完了年月日(主治医意見書作成依頼対象者, 主治医意見書登録完了年月日), is(false));
+            assertThat(sut.save主治医意見書作成依頼完了年月日(主治医意見書作成依頼対象者, 主治医意見書作成依頼完了年月日), is(false));
         }
     }
 
