@@ -9,7 +9,7 @@ package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
  *
  * @author n8178 城間篤人
  */
-public enum NichijoSeikatsuJiritsudoKumiawaseItemGroup {
+public enum NichijoSeikatsuJiritsudoKumiawaseItem {
 
     /**
      * 自立の割合を表す項目です。

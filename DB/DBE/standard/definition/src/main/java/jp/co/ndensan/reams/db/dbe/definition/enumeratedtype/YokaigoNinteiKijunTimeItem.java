@@ -9,7 +9,7 @@ package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
  *
  * @author n8178 城間篤人
  */
-public enum YokaigoNinteiKijunTimeItemGroup {
+public enum YokaigoNinteiKijunTimeItem {
 
     /**
      * 基準時間の合計を表す項目です。

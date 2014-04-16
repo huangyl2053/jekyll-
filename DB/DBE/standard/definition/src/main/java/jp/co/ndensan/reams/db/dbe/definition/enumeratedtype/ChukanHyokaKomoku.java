@@ -9,7 +9,7 @@ package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
  *
  * @author n8178 城間篤人
  */
-public enum ChukanHyokaKomokuTokutenItemGroup {
+public enum ChukanHyokaKomoku {
 
     /**
      * 第1群項目です。
