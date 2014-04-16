@@ -39,6 +39,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  * @author N8187 久保田 英男
  */
 public class NinteichosaIraiTaishoshaFinder {
+    //TODO n8178 城間篤人 コメントアウト箇所について、他チケットで修正を行う予定 2014年4月
 
     private final INinteiShinchokuJohoDac shinchokuJohoDac;
     private final INinteiShinseiJohoDac shinseiJohoDac;
@@ -60,7 +61,6 @@ public class NinteichosaIraiTaishoshaFinder {
         itakusakiDac = InstanceProvider.create(INinteichosaItakusakiDac.class);
         iraiJohoDac = InstanceProvider.create(INinteiChosaIraiJohoDac.class);
         iraiTaishoshaDac = InstanceProvider.create(INinteiChosaIraiTaishoshaDac.class);
-        //TODO n8178 城間篤人 他チケットで修正予定 2014年4月
 //        kojinDac = InstanceCreator.create(IKojinDac.class);
         kaigoJigyoshaDac = InstanceProvider.create(IKaigoJigyoshaDac.class);
         chosainJohoDac = InstanceProvider.create(IChosainJohoDac.class);
