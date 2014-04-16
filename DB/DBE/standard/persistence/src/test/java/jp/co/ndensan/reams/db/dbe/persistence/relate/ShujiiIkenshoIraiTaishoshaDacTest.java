@@ -35,19 +35,19 @@ public class ShujiiIkenshoIraiTaishoshaDacTest extends TestBase {
     private static ShujiiIkenshoIraiTaishoshaDac sut;
     private static NinteiShinchokuJohoDacMock ninteiShinchokuJohoDacMock;
     private static NinteiShinseiJohoDacMock ninteiShinseiJohoDacMock;
-    private static FlexibleDate 未完了年月日 = new FlexibleDate("00000000");
-    private static FlexibleDate 完了済年月日 = new FlexibleDate("20140101");
-    private static RString 申請書管理番号0001 = new RString("0001");
-    private static RString 申請書管理番号0002 = new RString("0002");
-    private static ShoKisaiHokenshaNo 登録あり証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("A00001"));
-    private static ShoKisaiHokenshaNo 登録なし証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("A00002"));
-    private static RString 登録あり支所コード = new RString("0001");
-    private static RString 登録なし支所コード = new RString("0002");
+    private static final FlexibleDate 未完了年月日 = new FlexibleDate("00000000");
+    private static final FlexibleDate 完了済年月日 = new FlexibleDate("20140101");
+    private static final RString 申請書管理番号0001 = new RString("0001");
+    private static final RString 申請書管理番号0002 = new RString("0002");
+    private static final ShoKisaiHokenshaNo 証記載保険者番号A00001 = new ShoKisaiHokenshaNo(new RString("A00001"));
+    private static final ShoKisaiHokenshaNo 証記載保険者番号A00002 = new ShoKisaiHokenshaNo(new RString("A00002"));
+    private static final RString 支所コード0001 = new RString("0001");
+    private static final RString 支所コード0002 = new RString("0002");
 
     enum ChosaShinchoku {
 
-        登録未完了,
-        登録完了済
+        作成依頼未完了,
+        作成依頼完了済
     };
 
     @BeforeClass
@@ -61,19 +61,19 @@ public class ShujiiIkenshoIraiTaishoshaDacTest extends TestBase {
 
         @Test
         public void selectAll_対象者がいない場合_対象者0件の結果が返る() {
-            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0001, ChosaShinchoku.登録完了済));
-            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0001, 登録あり証記載保険者番号, 登録あり支所コード));
-            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0002, ChosaShinchoku.登録完了済));
-            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0002, 登録あり証記載保険者番号, 登録あり支所コード));
+            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0001, ChosaShinchoku.作成依頼完了済));
+            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0001, 証記載保険者番号A00001, 支所コード0001));
+            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0002, ChosaShinchoku.作成依頼完了済));
+            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0002, 証記載保険者番号A00001, 支所コード0001));
             assertThat(sut.selectAll().size(), is(0));
         }
 
         @Test
         public void selectAll_対象者が1人の場合_対象者1件の結果が返る() {
-            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0001, ChosaShinchoku.登録未完了));
-            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0001, 登録あり証記載保険者番号, 登録あり支所コード));
-            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0002, ChosaShinchoku.登録完了済));
-            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0002, 登録あり証記載保険者番号, 登録あり支所コード));
+            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0001, ChosaShinchoku.作成依頼未完了));
+            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0001, 証記載保険者番号A00001, 支所コード0001));
+            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0002, ChosaShinchoku.作成依頼完了済));
+            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0002, 証記載保険者番号A00001, 支所コード0001));
             assertThat(sut.selectAll().size(), is(1));
         }
     }
@@ -82,38 +82,38 @@ public class ShujiiIkenshoIraiTaishoshaDacTest extends TestBase {
 
         @Test
         public void select証記載保険者番号_対象者がいない場合_対象者0件の結果が返る() {
-            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0001, ChosaShinchoku.登録完了済));
-            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0001, 登録あり証記載保険者番号, 登録あり支所コード));
-            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0002, ChosaShinchoku.登録完了済));
-            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0002, 登録あり証記載保険者番号, 登録あり支所コード));
-            assertThat(sut.select証記載保険者番号(登録あり証記載保険者番号).size(), is(0));
+            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0001, ChosaShinchoku.作成依頼完了済));
+            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0001, 証記載保険者番号A00001, 支所コード0001));
+            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0002, ChosaShinchoku.作成依頼完了済));
+            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0002, 証記載保険者番号A00001, 支所コード0001));
+            assertThat(sut.select証記載保険者番号(証記載保険者番号A00001).size(), is(0));
         }
 
         @Test
         public void select証記載保険者番号_対象者が1人いて_証記載保険者番号に一致しない場合_対象者0件の結果が返る() {
-            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0001, ChosaShinchoku.登録未完了));
-            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0001, 登録あり証記載保険者番号, 登録あり支所コード));
-            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0002, ChosaShinchoku.登録完了済));
-            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0002, 登録あり証記載保険者番号, 登録あり支所コード));
-            assertThat(sut.select証記載保険者番号(登録なし証記載保険者番号).size(), is(0));
+            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0001, ChosaShinchoku.作成依頼未完了));
+            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0001, 証記載保険者番号A00001, 支所コード0001));
+            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0002, ChosaShinchoku.作成依頼完了済));
+            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0002, 証記載保険者番号A00001, 支所コード0001));
+            assertThat(sut.select証記載保険者番号(証記載保険者番号A00002).size(), is(0));
         }
 
         @Test
         public void select証記載保険者番号_対象者が2人いて_証記載保険者番号に1人一致する場合_対象者1件の結果が返る() {
-            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0001, ChosaShinchoku.登録未完了));
-            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0001, 登録なし証記載保険者番号, 登録なし支所コード));
-            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0002, ChosaShinchoku.登録未完了));
-            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0002, 登録あり証記載保険者番号, 登録あり支所コード));
-            assertThat(sut.select証記載保険者番号(登録あり証記載保険者番号).size(), is(1));
+            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0001, ChosaShinchoku.作成依頼未完了));
+            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0001, 証記載保険者番号A00002, 支所コード0002));
+            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0002, ChosaShinchoku.作成依頼未完了));
+            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0002, 証記載保険者番号A00001, 支所コード0001));
+            assertThat(sut.select証記載保険者番号(証記載保険者番号A00001).size(), is(1));
         }
 
         @Test
         public void select証記載保険者番号_対象者が2人いて_証記載保険者番号に2人一致する場合_対象者2件の結果が返る() {
-            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0001, ChosaShinchoku.登録未完了));
-            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0001, 登録あり証記載保険者番号, 登録なし支所コード));
-            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0002, ChosaShinchoku.登録未完了));
-            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0002, 登録あり証記載保険者番号, 登録あり支所コード));
-            assertThat(sut.select証記載保険者番号(登録あり証記載保険者番号).size(), is(2));
+            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0001, ChosaShinchoku.作成依頼未完了));
+            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0001, 証記載保険者番号A00001, 支所コード0002));
+            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0002, ChosaShinchoku.作成依頼未完了));
+            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0002, 証記載保険者番号A00001, 支所コード0001));
+            assertThat(sut.select証記載保険者番号(証記載保険者番号A00001).size(), is(2));
         }
     }
 
@@ -121,38 +121,38 @@ public class ShujiiIkenshoIraiTaishoshaDacTest extends TestBase {
 
         @Test
         public void select証記載保険者番号及び支所コード_対象者がいない場合_対象者0件の結果が返る() {
-            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0001, ChosaShinchoku.登録完了済));
-            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0001, 登録あり証記載保険者番号, 登録あり支所コード));
-            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0002, ChosaShinchoku.登録完了済));
-            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0002, 登録あり証記載保険者番号, 登録あり支所コード));
-            assertThat(sut.select証記載保険者番号及び支所コード(登録あり証記載保険者番号, 登録あり支所コード).size(), is(0));
+            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0001, ChosaShinchoku.作成依頼完了済));
+            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0001, 証記載保険者番号A00001, 支所コード0001));
+            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0002, ChosaShinchoku.作成依頼完了済));
+            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0002, 証記載保険者番号A00001, 支所コード0001));
+            assertThat(sut.select証記載保険者番号及び支所コード(証記載保険者番号A00001, 支所コード0001).size(), is(0));
         }
 
         @Test
         public void select証記載保険者番号及び支所コード_対象者が1人いて_証記載保険者番号及び支所コードに一致しない場合_対象者0件の結果が返る() {
-            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0001, ChosaShinchoku.登録完了済));
-            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0001, 登録あり証記載保険者番号, 登録あり支所コード));
-            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0002, ChosaShinchoku.登録未完了));
-            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0002, 登録あり証記載保険者番号, 登録あり支所コード));
-            assertThat(sut.select証記載保険者番号及び支所コード(登録なし証記載保険者番号, 登録なし支所コード).size(), is(0));
+            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0001, ChosaShinchoku.作成依頼完了済));
+            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0001, 証記載保険者番号A00001, 支所コード0001));
+            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0002, ChosaShinchoku.作成依頼未完了));
+            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0002, 証記載保険者番号A00001, 支所コード0001));
+            assertThat(sut.select証記載保険者番号及び支所コード(証記載保険者番号A00002, 支所コード0002).size(), is(0));
         }
 
         @Test
         public void select証記載保険者番号及び支所コード__対象者が2人いて_証記載保険者番号及び支所コードに1人一致する場合_対象者1件の結果が返る() {
-            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0001, ChosaShinchoku.登録未完了));
-            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0001, 登録なし証記載保険者番号, 登録なし支所コード));
-            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0002, ChosaShinchoku.登録未完了));
-            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0002, 登録あり証記載保険者番号, 登録あり支所コード));
-            assertThat(sut.select証記載保険者番号及び支所コード(登録あり証記載保険者番号, 登録あり支所コード).size(), is(1));
+            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0001, ChosaShinchoku.作成依頼未完了));
+            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0001, 証記載保険者番号A00002, 支所コード0002));
+            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0002, ChosaShinchoku.作成依頼未完了));
+            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0002, 証記載保険者番号A00001, 支所コード0001));
+            assertThat(sut.select証記載保険者番号及び支所コード(証記載保険者番号A00001, 支所コード0001).size(), is(1));
         }
 
         @Test
         public void select証記載保険者番号及び支所コード__対象者が2人いて_証記載保険者番号及び支所コードに2人一致する場合_対象者2件の結果が返る() {
-            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0001, ChosaShinchoku.登録未完了));
-            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0001, 登録あり証記載保険者番号, 登録あり支所コード));
-            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0002, ChosaShinchoku.登録未完了));
-            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0002, 登録あり証記載保険者番号, 登録あり支所コード));
-            assertThat(sut.select証記載保険者番号及び支所コード(登録あり証記載保険者番号, 登録あり支所コード).size(), is(2));
+            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0001, ChosaShinchoku.作成依頼未完了));
+            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0001, 証記載保険者番号A00001, 支所コード0001));
+            ninteiShinchokuJohoDacMock.insert(create認定進捗情報Entity(申請書管理番号0002, ChosaShinchoku.作成依頼未完了));
+            ninteiShinseiJohoDacMock.insert(create認定申請情報Entity(申請書管理番号0002, 証記載保険者番号A00001, 支所コード0001));
+            assertThat(sut.select証記載保険者番号及び支所コード(証記載保険者番号A00001, 支所コード0001).size(), is(2));
         }
     }
 
@@ -160,11 +160,11 @@ public class ShujiiIkenshoIraiTaishoshaDacTest extends TestBase {
         DbT5005NinteiShinchokuJohoEntity entity = NinteiShinchokuJohoMock.create認定進捗情報Entity();
         entity.setShinseishoKanriNo(new ShinseishoKanriNo(申請書管理番号));
         switch (調査進捗) {
-            case 登録未完了:
-                entity.setIkenshoTorokuKanryoYMD(未完了年月日);
+            case 作成依頼未完了:
+                entity.setIkenshoSakuseiIraiKanryoYMD(未完了年月日);
                 break;
-            case 登録完了済:
-                entity.setIkenshoTorokuKanryoYMD(完了済年月日);
+            case 作成依頼完了済:
+                entity.setIkenshoSakuseiIraiKanryoYMD(完了済年月日);
                 break;
         }
         return entity;
