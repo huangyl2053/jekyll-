@@ -16,12 +16,13 @@ import jp.co.ndensan.reams.db.dbe.business.SuiteiKyuhuKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiChukanHyokaKomokuTokuten;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiKijunTime;
 import jp.co.ndensan.reams.db.dbe.business.helper.IchijiHanteiTestBusinessCreator;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChukanHyokaKomokuTokutenItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChukanHyokaKomoku;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiKeikokuShubetsu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiResultSofuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KariIchijiHanteiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NichijoSeikatsuJiritsudoKumiawaseItemGroup;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.YokaigoNinteiKijunTimeItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NichijoSeikatsuJiritsudoKumiawaseItem;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.YokaigoNinteiKijunTimeItem;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5016IchijiHanteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.IchijiHanteiTestEntityCreator;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
@@ -29,6 +30,7 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -76,7 +78,7 @@ public class IchijiHanteiResultDetailMapperTest {
         認知症加算一次判定結果コード_12 = new Code("12");
         要介護認定等基準時間 = IchijiHanteiTestBusinessCreator.create要介護認定等基準時間(11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
         中間評価項目 = IchijiHanteiTestBusinessCreator.create中間評価項目得点(1, 2, 3, 4, 5, 6, 7);
-        警告配列コード = new RString("000111000111000111");
+        警告配列コード = create警告配列コード(一次判定年月日_20060401);
         状態安定性コード_3 = new Code("3");
         認知症高齢者自立度2以上蓋然性_12_34 = new Decimal(12.34);
         給付区分コード_4 = new Code("4");
@@ -86,6 +88,15 @@ public class IchijiHanteiResultDetailMapperTest {
         蓋然性評価率_48 = 48;
         結果送付区分_1 = IchijiHanteiResultSofuKubun.toValue(new RString("1"));
         結果送付年月_20061231 = new FlexibleDate("20061231");
+    }
+
+    private static RString create警告配列コード(FlexibleDate 一次判定年月日) {
+        int 警告数 = IchijiHanteiKeikokuShubetsu.toValue(一次判定年月日).get警告数();
+        RStringBuilder builder = new RStringBuilder();
+        for (int i = 0; i < 警告数; i++) {
+            builder.append(new RString("0"));
+        }
+        return builder.toRString();
     }
 
     public static class to一次判定結果のテスト extends DbeTestBase {
@@ -150,108 +161,108 @@ public class IchijiHanteiResultDetailMapperTest {
 
         @Test
         public void マッピング後に返される一次判定結果は_基準時間に11を持つ() {
-            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.合計),
-                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.合計)));
+            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItem.合計),
+                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItem.合計)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_食事基準時間に12を持つ() {
-            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.食事),
-                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.食事)));
+            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItem.食事),
+                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItem.食事)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_排泄食事基準時間に13を持つ() {
-            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.排泄),
-                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.排泄)));
+            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItem.排泄),
+                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItem.排泄)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_移動基準時間に14を持つ() {
-            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.移動),
-                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.移動)));
+            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItem.移動),
+                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItem.移動)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_清潔保持基準時間に15を持つ() {
-            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.清潔保持),
-                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.清潔保持)));
+            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItem.清潔保持),
+                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItem.清潔保持)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_間接ケア基準時間に16を持つ() {
-            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.間接ケア),
-                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.間接ケア)));
+            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItem.間接ケア),
+                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItem.間接ケア)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_BPSD関連基準時間に17を持つ() {
-            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.BPSD関連),
-                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.BPSD関連)));
+            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItem.BPSD関連),
+                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItem.BPSD関連)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_機能訓練基準時間に18を持つ() {
-            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.機能訓練),
-                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.機能訓練)));
+            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItem.機能訓練),
+                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItem.機能訓練)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_医療関連基準時間に19を持つ() {
-            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.医療関連),
-                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.医療関連)));
+            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItem.医療関連),
+                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItem.医療関連)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_認知症加算基準時間に20を持つ() {
-            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.認知症加算),
-                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.認知症加算)));
+            assertThat(result.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItem.認知症加算),
+                    is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItem.認知症加算)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_中間評価項目第1群に1を持つ() {
-            assertThat(result.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第1群),
-                    is(中間評価項目.get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第1群)));
+            assertThat(result.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomoku.第1群),
+                    is(中間評価項目.get中間評価項目得点(ChukanHyokaKomoku.第1群)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_中間評価項目第2群に2を持つ() {
-            assertThat(result.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第2群),
-                    is(中間評価項目.get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第2群)));
+            assertThat(result.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomoku.第2群),
+                    is(中間評価項目.get中間評価項目得点(ChukanHyokaKomoku.第2群)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_中間評価項目第3群に3を持つ() {
-            assertThat(result.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第3群),
-                    is(中間評価項目.get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第3群)));
+            assertThat(result.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomoku.第3群),
+                    is(中間評価項目.get中間評価項目得点(ChukanHyokaKomoku.第3群)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_中間評価項目第4群に4を持つ() {
-            assertThat(result.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第4群),
-                    is(中間評価項目.get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第4群)));
+            assertThat(result.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomoku.第4群),
+                    is(中間評価項目.get中間評価項目得点(ChukanHyokaKomoku.第4群)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_中間評価項目第5群に5を持つ() {
-            assertThat(result.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第5群),
-                    is(中間評価項目.get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第5群)));
+            assertThat(result.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomoku.第5群),
+                    is(中間評価項目.get中間評価項目得点(ChukanHyokaKomoku.第5群)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_中間評価項目第6群に6を持つ() {
-            assertThat(result.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第6群),
-                    is(中間評価項目.get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第6群)));
+            assertThat(result.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomoku.第6群),
+                    is(中間評価項目.get中間評価項目得点(ChukanHyokaKomoku.第6群)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_中間評価項目第7群に7を持つ() {
-            assertThat(result.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第7群),
-                    is(中間評価項目.get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第7群)));
+            assertThat(result.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomoku.第7群),
+                    is(中間評価項目.get中間評価項目得点(ChukanHyokaKomoku.第7群)));
         }
 
         @Test
-        public void マッピング後に返される一次判定結果は_一次判定警告配列コードに000111000111000111を持つ() {
+        public void マッピング後に返される一次判定結果は_マッピング元が持っている一次判定警告配列コードと同一になる() {
             assertThat(result.get一次判定警告List().get警告配列コード().toRString(), is(警告配列コード));
         }
 
@@ -277,44 +288,44 @@ public class IchijiHanteiResultDetailMapperTest {
 
         @Test
         public void マッピング後に返される一次判定結果は_日常生活自立度組み合わせの_自立の項目に21を持つ() {
-            assertThat(result.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.自立),
-                    is(日常生活自立度組み合わせ.get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.自立)));
+            assertThat(result.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItem.自立),
+                    is(日常生活自立度組み合わせ.get割合(NichijoSeikatsuJiritsudoKumiawaseItem.自立)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_日常生活自立度組み合わせの_要支援の項目に22を持つ() {
-            assertThat(result.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要支援),
-                    is(日常生活自立度組み合わせ.get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要支援)));
+            assertThat(result.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItem.要支援),
+                    is(日常生活自立度組み合わせ.get割合(NichijoSeikatsuJiritsudoKumiawaseItem.要支援)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_日常生活自立度組み合わせの_要介護1の項目に23を持つ() {
-            assertThat(result.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護1),
-                    is(日常生活自立度組み合わせ.get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護1)));
+            assertThat(result.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItem.要介護1),
+                    is(日常生活自立度組み合わせ.get割合(NichijoSeikatsuJiritsudoKumiawaseItem.要介護1)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_日常生活自立度組み合わせの_要介護2の項目に24を持つ() {
-            assertThat(result.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護2),
-                    is(日常生活自立度組み合わせ.get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護2)));
+            assertThat(result.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItem.要介護2),
+                    is(日常生活自立度組み合わせ.get割合(NichijoSeikatsuJiritsudoKumiawaseItem.要介護2)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_日常生活自立度組み合わせの_要介護3の項目に25を持つ() {
-            assertThat(result.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護3),
-                    is(日常生活自立度組み合わせ.get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護3)));
+            assertThat(result.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItem.要介護3),
+                    is(日常生活自立度組み合わせ.get割合(NichijoSeikatsuJiritsudoKumiawaseItem.要介護3)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_日常生活自立度組み合わせの_要介護4の項目に26を持つ() {
-            assertThat(result.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護4),
-                    is(日常生活自立度組み合わせ.get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護4)));
+            assertThat(result.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItem.要介護4),
+                    is(日常生活自立度組み合わせ.get割合(NichijoSeikatsuJiritsudoKumiawaseItem.要介護4)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果は_日常生活自立度組み合わせの_要介護5の項目に27を持つ() {
-            assertThat(result.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護5),
-                    is(日常生活自立度組み合わせ.get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護5)));
+            assertThat(result.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItem.要介護5),
+                    is(日常生活自立度組み合わせ.get割合(NichijoSeikatsuJiritsudoKumiawaseItem.要介護5)));
         }
 
         @Test
@@ -409,87 +420,87 @@ public class IchijiHanteiResultDetailMapperTest {
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_基準時間に11を持つ() {
-            assertThat(result.getKijunJikan(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.合計)));
+            assertThat(result.getKijunJikan(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItem.合計)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_食事基準時間に12を持つ() {
-            assertThat(result.getKijunJikanShokuji(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.食事)));
+            assertThat(result.getKijunJikanShokuji(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItem.食事)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_排泄食事基準時間に13を持つ() {
-            assertThat(result.getKijunJikanHaisetsu(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.排泄)));
+            assertThat(result.getKijunJikanHaisetsu(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItem.排泄)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_移動基準時間に14を持つ() {
-            assertThat(result.getKijunJikanIdo(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.移動)));
+            assertThat(result.getKijunJikanIdo(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItem.移動)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_清潔保持基準時間に15を持つ() {
-            assertThat(result.getKijunJikanSeiketsuHoji(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.清潔保持)));
+            assertThat(result.getKijunJikanSeiketsuHoji(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItem.清潔保持)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_間接ケア基準時間に16を持つ() {
-            assertThat(result.getKijunJikanKansetsuCare(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.間接ケア)));
+            assertThat(result.getKijunJikanKansetsuCare(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItem.間接ケア)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_BPSD関連基準時間に17を持つ() {
-            assertThat(result.getKijunJikanBPSDKanren(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.BPSD関連)));
+            assertThat(result.getKijunJikanBPSDKanren(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItem.BPSD関連)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_機能訓練基準時間に18を持つ() {
-            assertThat(result.getKijunJikanKinoKunren(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.機能訓練)));
+            assertThat(result.getKijunJikanKinoKunren(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItem.機能訓練)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_医療関連基準時間に19を持つ() {
-            assertThat(result.getKijunJikanIryoKanren(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.医療関連)));
+            assertThat(result.getKijunJikanIryoKanren(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItem.医療関連)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_認知症加算基準時間に20を持つ() {
-            assertThat(result.getKijunJikanNinchishoKasan(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItemGroup.認知症加算)));
+            assertThat(result.getKijunJikanNinchishoKasan(), is(要介護認定等基準時間.get基準時間(YokaigoNinteiKijunTimeItem.認知症加算)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_中間評価項目第1群に1を持つ() {
-            assertThat(result.getChukanHyokaKomoku1gun(), is(中間評価項目.get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第1群)));
+            assertThat(result.getChukanHyokaKomoku1gun(), is(中間評価項目.get中間評価項目得点(ChukanHyokaKomoku.第1群)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_中間評価項目第2群に2を持つ() {
-            assertThat(result.getChukanHyokaKomoku2gun(), is(中間評価項目.get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第2群)));
+            assertThat(result.getChukanHyokaKomoku2gun(), is(中間評価項目.get中間評価項目得点(ChukanHyokaKomoku.第2群)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_中間評価項目第3群に3を持つ() {
-            assertThat(result.getChukanHyokaKomoku3gun(), is(中間評価項目.get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第3群)));
+            assertThat(result.getChukanHyokaKomoku3gun(), is(中間評価項目.get中間評価項目得点(ChukanHyokaKomoku.第3群)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_中間評価項目第4群に4を持つ() {
-            assertThat(result.getChukanHyokaKomoku4gun(), is(中間評価項目.get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第4群)));
+            assertThat(result.getChukanHyokaKomoku4gun(), is(中間評価項目.get中間評価項目得点(ChukanHyokaKomoku.第4群)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_中間評価項目第5群に5を持つ() {
-            assertThat(result.getChukanHyokaKomoku5gun(), is(中間評価項目.get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第5群)));
+            assertThat(result.getChukanHyokaKomoku5gun(), is(中間評価項目.get中間評価項目得点(ChukanHyokaKomoku.第5群)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_中間評価項目第6群に6を持つ() {
-            assertThat(result.getChukanHyokaKomoku6gun(), is(中間評価項目.get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第6群)));
+            assertThat(result.getChukanHyokaKomoku6gun(), is(中間評価項目.get中間評価項目得点(ChukanHyokaKomoku.第6群)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_中間評価項目第7群に7を持つ() {
-            assertThat(result.getChukanHyokaKomoku7gun(), is(中間評価項目.get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第7群)));
+            assertThat(result.getChukanHyokaKomoku7gun(), is(中間評価項目.get中間評価項目得点(ChukanHyokaKomoku.第7群)));
         }
 
         @Test
@@ -519,37 +530,37 @@ public class IchijiHanteiResultDetailMapperTest {
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_日常生活自立度組み合わせの_自立の項目に21を持つ() {
-            assertThat(result.getJiritsudoKumiawase1(), is(日常生活自立度組み合わせ.get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.自立)));
+            assertThat(result.getJiritsudoKumiawase1(), is(日常生活自立度組み合わせ.get割合(NichijoSeikatsuJiritsudoKumiawaseItem.自立)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_日常生活自立度組み合わせの_要支援の項目に22を持つ() {
-            assertThat(result.getJiritsudoKumiawase2(), is(日常生活自立度組み合わせ.get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要支援)));
+            assertThat(result.getJiritsudoKumiawase2(), is(日常生活自立度組み合わせ.get割合(NichijoSeikatsuJiritsudoKumiawaseItem.要支援)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_日常生活自立度組み合わせの_要介護1の項目に23を持つ() {
-            assertThat(result.getJiritsudoKumiawase3(), is(日常生活自立度組み合わせ.get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護1)));
+            assertThat(result.getJiritsudoKumiawase3(), is(日常生活自立度組み合わせ.get割合(NichijoSeikatsuJiritsudoKumiawaseItem.要介護1)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_日常生活自立度組み合わせの_要介護2の項目に24を持つ() {
-            assertThat(result.getJiritsudoKumiawase4(), is(日常生活自立度組み合わせ.get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護2)));
+            assertThat(result.getJiritsudoKumiawase4(), is(日常生活自立度組み合わせ.get割合(NichijoSeikatsuJiritsudoKumiawaseItem.要介護2)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_日常生活自立度組み合わせの_要介護3の項目に25を持つ() {
-            assertThat(result.getJiritsudoKumiawase5(), is(日常生活自立度組み合わせ.get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護3)));
+            assertThat(result.getJiritsudoKumiawase5(), is(日常生活自立度組み合わせ.get割合(NichijoSeikatsuJiritsudoKumiawaseItem.要介護3)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_日常生活自立度組み合わせの_要介護4の項目に26を持つ() {
-            assertThat(result.getJiritsudoKumiawase6(), is(日常生活自立度組み合わせ.get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護4)));
+            assertThat(result.getJiritsudoKumiawase6(), is(日常生活自立度組み合わせ.get割合(NichijoSeikatsuJiritsudoKumiawaseItem.要介護4)));
         }
 
         @Test
         public void マッピング後に返される一次判定結果Entityは_日常生活自立度組み合わせの_要介護5の項目に27を持つ() {
-            assertThat(result.getJiritsudoKumiawase7(), is(日常生活自立度組み合わせ.get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護5)));
+            assertThat(result.getJiritsudoKumiawase7(), is(日常生活自立度組み合わせ.get割合(NichijoSeikatsuJiritsudoKumiawaseItem.要介護5)));
         }
 
         @Test

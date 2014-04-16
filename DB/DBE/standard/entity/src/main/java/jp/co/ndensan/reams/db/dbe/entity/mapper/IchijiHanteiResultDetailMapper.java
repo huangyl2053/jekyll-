@@ -17,12 +17,12 @@ import jp.co.ndensan.reams.db.dbe.business.NoryokuMiteikaNinchishoKoreishaShihyo
 import jp.co.ndensan.reams.db.dbe.business.SuiteiKyuhuKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiChukanHyokaKomokuTokuten;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiKijunTime;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChukanHyokaKomokuTokutenItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChukanHyokaKomoku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiResultSofuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KariIchijiHanteiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NichijoSeikatsuJiritsudoKumiawaseItemGroup;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.YokaigoNinteiKijunTimeItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NichijoSeikatsuJiritsudoKumiawaseItem;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.YokaigoNinteiKijunTimeItem;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5016IchijiHanteiKekkaJohoEntity;
 
 /**
@@ -80,29 +80,29 @@ public final class IchijiHanteiResultDetailMapper {
     }
 
     private static YokaigoNinteiKijunTime create要介護認定等基準時間(DbT5016IchijiHanteiKekkaJohoEntity entity) {
-        Map<YokaigoNinteiKijunTimeItemGroup, Integer> 基準時間 = new EnumMap<>(YokaigoNinteiKijunTimeItemGroup.class);
-        基準時間.put(YokaigoNinteiKijunTimeItemGroup.合計, entity.getKijunJikan());
-        基準時間.put(YokaigoNinteiKijunTimeItemGroup.食事, entity.getKijunJikanShokuji());
-        基準時間.put(YokaigoNinteiKijunTimeItemGroup.排泄, entity.getKijunJikanHaisetsu());
-        基準時間.put(YokaigoNinteiKijunTimeItemGroup.移動, entity.getKijunJikanIdo());
-        基準時間.put(YokaigoNinteiKijunTimeItemGroup.清潔保持, entity.getKijunJikanSeiketsuHoji());
-        基準時間.put(YokaigoNinteiKijunTimeItemGroup.間接ケア, entity.getKijunJikanKansetsuCare());
-        基準時間.put(YokaigoNinteiKijunTimeItemGroup.BPSD関連, entity.getKijunJikanBPSDKanren());
-        基準時間.put(YokaigoNinteiKijunTimeItemGroup.機能訓練, entity.getKijunJikanKinoKunren());
-        基準時間.put(YokaigoNinteiKijunTimeItemGroup.医療関連, entity.getKijunJikanIryoKanren());
-        基準時間.put(YokaigoNinteiKijunTimeItemGroup.認知症加算, entity.getKijunJikanNinchishoKasan());
+        Map<YokaigoNinteiKijunTimeItem, Integer> 基準時間 = new EnumMap<>(YokaigoNinteiKijunTimeItem.class);
+        基準時間.put(YokaigoNinteiKijunTimeItem.合計, entity.getKijunJikan());
+        基準時間.put(YokaigoNinteiKijunTimeItem.食事, entity.getKijunJikanShokuji());
+        基準時間.put(YokaigoNinteiKijunTimeItem.排泄, entity.getKijunJikanHaisetsu());
+        基準時間.put(YokaigoNinteiKijunTimeItem.移動, entity.getKijunJikanIdo());
+        基準時間.put(YokaigoNinteiKijunTimeItem.清潔保持, entity.getKijunJikanSeiketsuHoji());
+        基準時間.put(YokaigoNinteiKijunTimeItem.間接ケア, entity.getKijunJikanKansetsuCare());
+        基準時間.put(YokaigoNinteiKijunTimeItem.BPSD関連, entity.getKijunJikanBPSDKanren());
+        基準時間.put(YokaigoNinteiKijunTimeItem.機能訓練, entity.getKijunJikanKinoKunren());
+        基準時間.put(YokaigoNinteiKijunTimeItem.医療関連, entity.getKijunJikanIryoKanren());
+        基準時間.put(YokaigoNinteiKijunTimeItem.認知症加算, entity.getKijunJikanNinchishoKasan());
         return new YokaigoNinteiKijunTime(基準時間);
     }
 
     private static YokaigoNinteiChukanHyokaKomokuTokuten create中間項目得点群(DbT5016IchijiHanteiKekkaJohoEntity entity) {
-        Map<ChukanHyokaKomokuTokutenItemGroup, Integer> 得点群 = new EnumMap<>(ChukanHyokaKomokuTokutenItemGroup.class);
-        得点群.put(ChukanHyokaKomokuTokutenItemGroup.第1群, entity.getChukanHyokaKomoku1gun());
-        得点群.put(ChukanHyokaKomokuTokutenItemGroup.第2群, entity.getChukanHyokaKomoku2gun());
-        得点群.put(ChukanHyokaKomokuTokutenItemGroup.第3群, entity.getChukanHyokaKomoku3gun());
-        得点群.put(ChukanHyokaKomokuTokutenItemGroup.第4群, entity.getChukanHyokaKomoku4gun());
-        得点群.put(ChukanHyokaKomokuTokutenItemGroup.第5群, entity.getChukanHyokaKomoku5gun());
-        得点群.put(ChukanHyokaKomokuTokutenItemGroup.第6群, entity.getChukanHyokaKomoku6gun());
-        得点群.put(ChukanHyokaKomokuTokutenItemGroup.第7群, entity.getChukanHyokaKomoku7gun());
+        Map<ChukanHyokaKomoku, Integer> 得点群 = new EnumMap<>(ChukanHyokaKomoku.class);
+        得点群.put(ChukanHyokaKomoku.第1群, entity.getChukanHyokaKomoku1gun());
+        得点群.put(ChukanHyokaKomoku.第2群, entity.getChukanHyokaKomoku2gun());
+        得点群.put(ChukanHyokaKomoku.第3群, entity.getChukanHyokaKomoku3gun());
+        得点群.put(ChukanHyokaKomoku.第4群, entity.getChukanHyokaKomoku4gun());
+        得点群.put(ChukanHyokaKomoku.第5群, entity.getChukanHyokaKomoku5gun());
+        得点群.put(ChukanHyokaKomoku.第6群, entity.getChukanHyokaKomoku6gun());
+        得点群.put(ChukanHyokaKomoku.第7群, entity.getChukanHyokaKomoku7gun());
         return new YokaigoNinteiChukanHyokaKomokuTokuten(得点群);
     }
 
@@ -127,15 +127,15 @@ public final class IchijiHanteiResultDetailMapper {
     }
 
     private static NichijoSeikatsuJiritsudoKumiawase create日常生活自立度組み合わせ(DbT5016IchijiHanteiKekkaJohoEntity entity) {
-        Map<NichijoSeikatsuJiritsudoKumiawaseItemGroup, Integer> 日常生活自立度組み合わせ
-                = new EnumMap<>(NichijoSeikatsuJiritsudoKumiawaseItemGroup.class);
-        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.自立, entity.getJiritsudoKumiawase1());
-        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要支援, entity.getJiritsudoKumiawase2());
-        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護1, entity.getJiritsudoKumiawase3());
-        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護2, entity.getJiritsudoKumiawase4());
-        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護3, entity.getJiritsudoKumiawase5());
-        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護4, entity.getJiritsudoKumiawase6());
-        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護5, entity.getJiritsudoKumiawase7());
+        Map<NichijoSeikatsuJiritsudoKumiawaseItem, Integer> 日常生活自立度組み合わせ
+                = new EnumMap<>(NichijoSeikatsuJiritsudoKumiawaseItem.class);
+        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItem.自立, entity.getJiritsudoKumiawase1());
+        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItem.要支援, entity.getJiritsudoKumiawase2());
+        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItem.要介護1, entity.getJiritsudoKumiawase3());
+        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItem.要介護2, entity.getJiritsudoKumiawase4());
+        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItem.要介護3, entity.getJiritsudoKumiawase5());
+        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItem.要介護4, entity.getJiritsudoKumiawase6());
+        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItem.要介護5, entity.getJiritsudoKumiawase7());
         return new NichijoSeikatsuJiritsudoKumiawase(日常生活自立度組み合わせ);
     }
 
@@ -162,35 +162,35 @@ public final class IchijiHanteiResultDetailMapper {
         entity.setIchijiHanteiYMD(一次判定結果.get一次判定年月日());
         entity.setIchijiHanteiKekkaCode(一次判定結果.get一次判定結果().getCode());
         entity.setIchijiHanteiKekkaNinchishoKasanCode(一次判定結果.get認知症加算一次判定結果().getCode());
-        entity.setKijunJikan(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.合計));
-        entity.setKijunJikanShokuji(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.食事));
-        entity.setKijunJikanHaisetsu(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.排泄));
-        entity.setKijunJikanIdo(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.移動));
-        entity.setKijunJikanSeiketsuHoji(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.清潔保持));
-        entity.setKijunJikanKansetsuCare(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.間接ケア));
-        entity.setKijunJikanBPSDKanren(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.BPSD関連));
-        entity.setKijunJikanKinoKunren(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.機能訓練));
-        entity.setKijunJikanIryoKanren(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.医療関連));
-        entity.setKijunJikanNinchishoKasan(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItemGroup.認知症加算));
-        entity.setChukanHyokaKomoku1gun(一次判定結果.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第1群));
-        entity.setChukanHyokaKomoku2gun(一次判定結果.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第2群));
-        entity.setChukanHyokaKomoku3gun(一次判定結果.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第3群));
-        entity.setChukanHyokaKomoku4gun(一次判定結果.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第4群));
-        entity.setChukanHyokaKomoku5gun(一次判定結果.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第5群));
-        entity.setChukanHyokaKomoku6gun(一次判定結果.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第6群));
-        entity.setChukanHyokaKomoku7gun(一次判定結果.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup.第7群));
+        entity.setKijunJikan(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItem.合計));
+        entity.setKijunJikanShokuji(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItem.食事));
+        entity.setKijunJikanHaisetsu(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItem.排泄));
+        entity.setKijunJikanIdo(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItem.移動));
+        entity.setKijunJikanSeiketsuHoji(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItem.清潔保持));
+        entity.setKijunJikanKansetsuCare(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItem.間接ケア));
+        entity.setKijunJikanBPSDKanren(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItem.BPSD関連));
+        entity.setKijunJikanKinoKunren(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItem.機能訓練));
+        entity.setKijunJikanIryoKanren(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItem.医療関連));
+        entity.setKijunJikanNinchishoKasan(一次判定結果.get要介護認定等基準時間().get基準時間(YokaigoNinteiKijunTimeItem.認知症加算));
+        entity.setChukanHyokaKomoku1gun(一次判定結果.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomoku.第1群));
+        entity.setChukanHyokaKomoku2gun(一次判定結果.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomoku.第2群));
+        entity.setChukanHyokaKomoku3gun(一次判定結果.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomoku.第3群));
+        entity.setChukanHyokaKomoku4gun(一次判定結果.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomoku.第4群));
+        entity.setChukanHyokaKomoku5gun(一次判定結果.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomoku.第5群));
+        entity.setChukanHyokaKomoku6gun(一次判定結果.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomoku.第6群));
+        entity.setChukanHyokaKomoku7gun(一次判定結果.get中間評価項目得点().get中間評価項目得点(ChukanHyokaKomoku.第7群));
         entity.setIchijiHanteiKeikokuCode(一次判定結果.get一次判定警告List().get警告配列コード().toRString());
         entity.setJotaiAnteiseiCode(一次判定結果.get認定状態安定性().getCode());
         entity.setNinchishoJiritsudoIIijoNoGaizensei(一次判定結果.get認知症自立度2以上蓋然性());
         entity.setSuiteiKyufuKubunCode(一次判定結果.get推定給付区分().getCode());
         entity.setNinchishoKoreishaShihyoCode(一次判定結果.get運動能力未低下認知症高齢者指標().getCode());
-        entity.setJiritsudoKumiawase1(一次判定結果.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.自立));
-        entity.setJiritsudoKumiawase2(一次判定結果.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要支援));
-        entity.setJiritsudoKumiawase3(一次判定結果.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護1));
-        entity.setJiritsudoKumiawase4(一次判定結果.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護2));
-        entity.setJiritsudoKumiawase5(一次判定結果.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護3));
-        entity.setJiritsudoKumiawase6(一次判定結果.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護4));
-        entity.setJiritsudoKumiawase7(一次判定結果.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護5));
+        entity.setJiritsudoKumiawase1(一次判定結果.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItem.自立));
+        entity.setJiritsudoKumiawase2(一次判定結果.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItem.要支援));
+        entity.setJiritsudoKumiawase3(一次判定結果.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItem.要介護1));
+        entity.setJiritsudoKumiawase4(一次判定結果.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItem.要介護2));
+        entity.setJiritsudoKumiawase5(一次判定結果.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItem.要介護3));
+        entity.setJiritsudoKumiawase6(一次判定結果.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItem.要介護4));
+        entity.setJiritsudoKumiawase7(一次判定結果.get日常生活自立度組み合わせ().get割合(NichijoSeikatsuJiritsudoKumiawaseItem.要介護5));
         entity.setGaizenseiHyokaCode(一次判定結果.get認知症高齢者日常生活自立度蓋然性評価().getCode());
         entity.setGaizenseiHyokaPercent(一次判定結果.get認知症高齢者日常生活自立度蓋然性評価率());
         entity.setIchijiHanteiSofuKubun(一次判定結果.get一次判定結果送付状況().get一次判定結果送付区分().get送付区分コード());

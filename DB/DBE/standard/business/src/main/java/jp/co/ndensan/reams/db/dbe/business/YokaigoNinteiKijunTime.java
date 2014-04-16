@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 import java.util.EnumMap;
 import java.util.Map;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.YokaigoNinteiKijunTimeItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.YokaigoNinteiKijunTimeItem;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
  */
 public class YokaigoNinteiKijunTime {
 
-    private final Map<YokaigoNinteiKijunTimeItemGroup, Integer> 要介護認定等基準時間;
+    private final Map<YokaigoNinteiKijunTimeItem, Integer> 要介護認定等基準時間;
 
     /**
      * 要介護認定等基準時間の情報を受け取り、インスタンスを生成します。
@@ -26,7 +26,7 @@ public class YokaigoNinteiKijunTime {
      * @throws NullPointerException 引数にnullが渡されたとき
      * @throws IllegalArgumentException 要介護認定等基準時間の中に、0より小さい数値が存在したとき
      */
-    public YokaigoNinteiKijunTime(Map<YokaigoNinteiKijunTimeItemGroup, Integer> 要介護認定等基準時間)
+    public YokaigoNinteiKijunTime(Map<YokaigoNinteiKijunTimeItem, Integer> 要介護認定等基準時間)
             throws NullPointerException, IllegalArgumentException {
         requireNonNull(要介護認定等基準時間, Messages.E00003.replace("要介護認定等基準時間", getClass().getName()).getMessage());
 
@@ -50,7 +50,7 @@ public class YokaigoNinteiKijunTime {
      * @param 基準時間項目 要介護認定等基準時間項目
      * @return 指定した基準時間
      */
-    public int get基準時間(YokaigoNinteiKijunTimeItemGroup 基準時間項目) {
+    public int get基準時間(YokaigoNinteiKijunTimeItem 基準時間項目) {
         return 要介護認定等基準時間.get(基準時間項目);
     }
 }

@@ -48,8 +48,9 @@ public final class IchijiHanteiKeikokuMapper {
 //
 //        return new IchijiHanteiKeikokuList(警告配列コード, 警告種別, 一次判定警告List);
 
+        RString 警告コード = RString.EMPTY.padZeroToLeft(IchijiHanteiKeikokuShubetsu.介護保険制度2009年度版.get警告数());
         return new IchijiHanteiKeikokuList(
-                new IchijiHanteiKeikokuHairetsuCode(new RString("001101"), new FlexibleDate("20090401")),
+                new IchijiHanteiKeikokuHairetsuCode(警告コード, new FlexibleDate("20090401")),
                 Collections.EMPTY_LIST);
     }
 

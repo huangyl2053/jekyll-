@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 import java.util.EnumMap;
 import java.util.Map;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NichijoSeikatsuJiritsudoKumiawaseItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NichijoSeikatsuJiritsudoKumiawaseItem;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**
@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
  */
 public class NichijoSeikatsuJiritsudoKumiawase {
 
-    private final Map<NichijoSeikatsuJiritsudoKumiawaseItemGroup, Integer> 日常生活自立度組み合わせ;
+    private final Map<NichijoSeikatsuJiritsudoKumiawaseItem, Integer> 日常生活自立度組み合わせ;
 
     /**
      * 日常生活自立度組み合わせの情報を受け取り、インスタンスを生成します。
@@ -40,7 +40,7 @@ public class NichijoSeikatsuJiritsudoKumiawase {
      * @throws NullPointerException 引数にnullが渡されたとき
      * @throws IllegalArgumentException 日常生活自立度組み合わせが持つ割合の中に、0より小さい数値が存在したとき
      */
-    public NichijoSeikatsuJiritsudoKumiawase(Map<NichijoSeikatsuJiritsudoKumiawaseItemGroup, Integer> 日常生活自立度組み合わせ)
+    public NichijoSeikatsuJiritsudoKumiawase(Map<NichijoSeikatsuJiritsudoKumiawaseItem, Integer> 日常生活自立度組み合わせ)
             throws NullPointerException, IllegalArgumentException {
         requireNonNull(日常生活自立度組み合わせ, Messages.E00003.replace("日常生活自立度組み合わせ", getClass().getName()).getMessage());
 
@@ -64,7 +64,7 @@ public class NichijoSeikatsuJiritsudoKumiawase {
      * @param 要介護度項目 割合を取得したい要介護度を指定
      * @return 指定した項目に対応した割合
      */
-    public int get割合(NichijoSeikatsuJiritsudoKumiawaseItemGroup 要介護度項目) {
+    public int get割合(NichijoSeikatsuJiritsudoKumiawaseItem 要介護度項目) {
         return 日常生活自立度組み合わせ.get(要介護度項目);
     }
 }

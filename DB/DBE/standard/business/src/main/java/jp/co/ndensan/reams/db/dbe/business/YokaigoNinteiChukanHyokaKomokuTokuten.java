@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 import java.util.EnumMap;
 import java.util.Map;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChukanHyokaKomokuTokutenItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChukanHyokaKomoku;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
  */
 public class YokaigoNinteiChukanHyokaKomokuTokuten {
 
-    private Map<ChukanHyokaKomokuTokutenItemGroup, Integer> 中間評価項目得点群;
+    private Map<ChukanHyokaKomoku, Integer> 中間評価項目得点群;
 
     /**
      * 中間評価項目得点群の情報を受け取り、インスタンスを生成します。
@@ -26,7 +26,7 @@ public class YokaigoNinteiChukanHyokaKomokuTokuten {
      * @throws NullPointerException 引数にnullが渡されたとき
      * @throws IllegalArgumentException 中間評価項目得点の中に、0より小さい数値が存在したとき
      */
-    public YokaigoNinteiChukanHyokaKomokuTokuten(Map<ChukanHyokaKomokuTokutenItemGroup, Integer> 中間評価項目得点群)
+    public YokaigoNinteiChukanHyokaKomokuTokuten(Map<ChukanHyokaKomoku, Integer> 中間評価項目得点群)
             throws NullPointerException, IllegalArgumentException {
         requireNonNull(中間評価項目得点群, Messages.E00003.replace("中間評価項目得点群", getClass().getName()).getMessage());
 
@@ -50,7 +50,7 @@ public class YokaigoNinteiChukanHyokaKomokuTokuten {
      * @param 得点群項目 中間評価項目得点の第何群かを指定
      * @return 指定した得点
      */
-    public int get中間評価項目得点(ChukanHyokaKomokuTokutenItemGroup 得点群項目) {
+    public int get中間評価項目得点(ChukanHyokaKomoku 得点群項目) {
         return 中間評価項目得点群.get(得点群項目);
     }
 }

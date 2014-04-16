@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KariIchijiHanteiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NichijoSeikatsuJiritsudoKumiawaseItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NichijoSeikatsuJiritsudoKumiawaseItem;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -269,15 +269,15 @@ public final class IchijiHanteiResultDetail {
         }
 
         private NichijoSeikatsuJiritsudoKumiawase create日常生活自立度組み合わせ初期値() {
-            Map<NichijoSeikatsuJiritsudoKumiawaseItemGroup, Integer> 日常生活自立度組み合わせMap
-                    = new EnumMap<>(NichijoSeikatsuJiritsudoKumiawaseItemGroup.class);
-            日常生活自立度組み合わせMap.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.自立, 0);
-            日常生活自立度組み合わせMap.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要支援, 0);
-            日常生活自立度組み合わせMap.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護1, 0);
-            日常生活自立度組み合わせMap.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護2, 0);
-            日常生活自立度組み合わせMap.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護3, 0);
-            日常生活自立度組み合わせMap.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護4, 0);
-            日常生活自立度組み合わせMap.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護5, 0);
+            Map<NichijoSeikatsuJiritsudoKumiawaseItem, Integer> 日常生活自立度組み合わせMap
+                    = new EnumMap<>(NichijoSeikatsuJiritsudoKumiawaseItem.class);
+            日常生活自立度組み合わせMap.put(NichijoSeikatsuJiritsudoKumiawaseItem.自立, 0);
+            日常生活自立度組み合わせMap.put(NichijoSeikatsuJiritsudoKumiawaseItem.要支援, 0);
+            日常生活自立度組み合わせMap.put(NichijoSeikatsuJiritsudoKumiawaseItem.要介護1, 0);
+            日常生活自立度組み合わせMap.put(NichijoSeikatsuJiritsudoKumiawaseItem.要介護2, 0);
+            日常生活自立度組み合わせMap.put(NichijoSeikatsuJiritsudoKumiawaseItem.要介護3, 0);
+            日常生活自立度組み合わせMap.put(NichijoSeikatsuJiritsudoKumiawaseItem.要介護4, 0);
+            日常生活自立度組み合わせMap.put(NichijoSeikatsuJiritsudoKumiawaseItem.要介護5, 0);
             return new NichijoSeikatsuJiritsudoKumiawase(日常生活自立度組み合わせMap);
         }
 

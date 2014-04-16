@@ -39,7 +39,7 @@ public class IchijiHanteiKeikokuHairetsuCode {
         this.警告種別 = IchijiHanteiKeikokuShubetsu.toValue(判定年月日);
 
         if (警告配列コード.length() != 警告種別.get警告数()) {
-            throw new IllegalArgumentException(Messages.E00013.replace("警告配列コードは", 警告種別.get警告数() + "桁").getMessage());
+            throw new IllegalArgumentException(Messages.E00013.replace("警告配列コード", 警告種別.get警告数() + "桁").getMessage());
         }
     }
 

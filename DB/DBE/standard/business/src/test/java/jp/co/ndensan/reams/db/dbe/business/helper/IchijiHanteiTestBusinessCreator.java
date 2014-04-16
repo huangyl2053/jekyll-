@@ -19,16 +19,18 @@ import jp.co.ndensan.reams.db.dbe.business.NoryokuMiteikaNinchishoKoreishaShihyo
 import jp.co.ndensan.reams.db.dbe.business.SuiteiKyuhuKubun;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiChukanHyokaKomokuTokuten;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiKijunTime;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChukanHyokaKomokuTokutenItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChukanHyokaKomoku;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiKeikokuShubetsu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiResultSofuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KariIchijiHanteiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NichijoSeikatsuJiritsudoKumiawaseItemGroup;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.YokaigoNinteiKijunTimeItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NichijoSeikatsuJiritsudoKumiawaseItem;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.YokaigoNinteiKijunTimeItem;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -48,12 +50,12 @@ public final class IchijiHanteiTestBusinessCreator {
         return IchijiHanteiResultDetail.builder().set申請書管理番号(new ShinseishoKanriNo(new RString("01")))
                 .set厚労省IF区分(KoroshoIFKubun.V02A)
                 .set厚労省IF区分(KariIchijiHanteiKubun.本判定)
-                .set一次判定年月日(new FlexibleDate("20060101"))
+                .set一次判定年月日(new FlexibleDate("20060401"))
                 .set一次判定結果(create一次判定結果項目())
                 .set認知症加算一次判定結果(create認知症加算一次判定結果())
                 .set要介護認定等基準時間(create要介護認定等基準時間(11, 12, 13, 14, 15, 16, 17, 18, 19, 20))
                 .set中間評価項目得点(create中間評価項目得点(1, 2, 3, 4, 5, 6, 7))
-                .set一次判定警告List(create一次判定警告List("000111000111000111"))
+                .set一次判定警告List(create一次判定警告List(new FlexibleDate("20060401")))
                 .set状態安定性(create介護認定状態安定性())
                 .set認知症自立度2以上蓋然性(new Decimal(12.34))
                 .set推定給付区分(create推定給付区分())
@@ -108,6 +110,27 @@ public final class IchijiHanteiTestBusinessCreator {
     }
 
     /**
+     * 年月日を受け取り、一次判定警告Listを返します。
+     *
+     * @param 判定年月日 判定年月日
+     * @return 一次判定警告List
+     */
+    public static IchijiHanteiKeikokuList create一次判定警告List(FlexibleDate 判定年月日) {
+        IchijiHanteiKeikokuHairetsuCode 警告配列コード
+                = new IchijiHanteiKeikokuHairetsuCode(create警告配列コード文字列(判定年月日), new FlexibleDate("20060401"));
+        return new IchijiHanteiKeikokuList(警告配列コード, Collections.EMPTY_LIST);
+    }
+
+    private static RString create警告配列コード文字列(FlexibleDate 判定年月日) {
+        int 警告数 = IchijiHanteiKeikokuShubetsu.toValue(判定年月日).get警告数();
+        RStringBuilder builder = new RStringBuilder();
+        for (int i = 0; i < 警告数; i++) {
+            builder.append(new RString("0"));
+        }
+        return builder.toRString();
+    }
+
+    /**
      * 日常生活自立度組み合わせを生成します。
      *
      * @param 自立 自立
@@ -121,15 +144,15 @@ public final class IchijiHanteiTestBusinessCreator {
      */
     public static NichijoSeikatsuJiritsudoKumiawase create日常生活自立度組み合わせ(int 自立, int 要支援, int 要介護1,
             int 要介護2, int 要介護3, int 要介護4, int 要介護5) {
-        Map<NichijoSeikatsuJiritsudoKumiawaseItemGroup, Integer> 日常生活自立度組み合わせ
-                = new EnumMap<>(NichijoSeikatsuJiritsudoKumiawaseItemGroup.class);
-        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.自立, 自立);
-        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要支援, 要支援);
-        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護1, 要介護1);
-        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護2, 要介護2);
-        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護3, 要介護3);
-        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護4, 要介護4);
-        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItemGroup.要介護5, 要介護5);
+        Map<NichijoSeikatsuJiritsudoKumiawaseItem, Integer> 日常生活自立度組み合わせ
+                = new EnumMap<>(NichijoSeikatsuJiritsudoKumiawaseItem.class);
+        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItem.自立, 自立);
+        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItem.要支援, 要支援);
+        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItem.要介護1, 要介護1);
+        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItem.要介護2, 要介護2);
+        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItem.要介護3, 要介護3);
+        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItem.要介護4, 要介護4);
+        日常生活自立度組み合わせ.put(NichijoSeikatsuJiritsudoKumiawaseItem.要介護5, 要介護5);
         return new NichijoSeikatsuJiritsudoKumiawase(日常生活自立度組み合わせ);
     }
 
@@ -151,17 +174,17 @@ public final class IchijiHanteiTestBusinessCreator {
     public static YokaigoNinteiKijunTime create要介護認定等基準時間(int 基準時間_合計, int 食事基準時間, int 排泄基準時間,
             int 移動基準時間, int 清潔保持基準時間, int 間接ケア基準時間, int BPSD関連基準時間, int 機能訓練基準時間,
             int 医療関連基準時間, int 認知症加算基準時間) {
-        Map<YokaigoNinteiKijunTimeItemGroup, Integer> 要介護認定等基準時間 = new EnumMap<>(YokaigoNinteiKijunTimeItemGroup.class);
-        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.合計, 基準時間_合計);
-        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.食事, 食事基準時間);
-        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.排泄, 排泄基準時間);
-        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.移動, 移動基準時間);
-        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.清潔保持, 清潔保持基準時間);
-        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.間接ケア, 間接ケア基準時間);
-        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.BPSD関連, BPSD関連基準時間);
-        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.機能訓練, 機能訓練基準時間);
-        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.医療関連, 医療関連基準時間);
-        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItemGroup.認知症加算, 認知症加算基準時間);
+        Map<YokaigoNinteiKijunTimeItem, Integer> 要介護認定等基準時間 = new EnumMap<>(YokaigoNinteiKijunTimeItem.class);
+        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItem.合計, 基準時間_合計);
+        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItem.食事, 食事基準時間);
+        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItem.排泄, 排泄基準時間);
+        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItem.移動, 移動基準時間);
+        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItem.清潔保持, 清潔保持基準時間);
+        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItem.間接ケア, 間接ケア基準時間);
+        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItem.BPSD関連, BPSD関連基準時間);
+        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItem.機能訓練, 機能訓練基準時間);
+        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItem.医療関連, 医療関連基準時間);
+        要介護認定等基準時間.put(YokaigoNinteiKijunTimeItem.認知症加算, 認知症加算基準時間);
         return new YokaigoNinteiKijunTime(要介護認定等基準時間);
     }
 
@@ -179,14 +202,14 @@ public final class IchijiHanteiTestBusinessCreator {
      */
     public static YokaigoNinteiChukanHyokaKomokuTokuten create中間評価項目得点(int 第1群, int 第2群, int 第3群, int 第4群,
             int 第5群, int 第6群, int 第7群) {
-        Map<ChukanHyokaKomokuTokutenItemGroup, Integer> 中間評価項目得点群 = new EnumMap<>(ChukanHyokaKomokuTokutenItemGroup.class);
-        中間評価項目得点群.put(ChukanHyokaKomokuTokutenItemGroup.第1群, 第1群);
-        中間評価項目得点群.put(ChukanHyokaKomokuTokutenItemGroup.第2群, 第2群);
-        中間評価項目得点群.put(ChukanHyokaKomokuTokutenItemGroup.第3群, 第3群);
-        中間評価項目得点群.put(ChukanHyokaKomokuTokutenItemGroup.第4群, 第4群);
-        中間評価項目得点群.put(ChukanHyokaKomokuTokutenItemGroup.第5群, 第5群);
-        中間評価項目得点群.put(ChukanHyokaKomokuTokutenItemGroup.第6群, 第6群);
-        中間評価項目得点群.put(ChukanHyokaKomokuTokutenItemGroup.第7群, 第7群);
+        Map<ChukanHyokaKomoku, Integer> 中間評価項目得点群 = new EnumMap<>(ChukanHyokaKomoku.class);
+        中間評価項目得点群.put(ChukanHyokaKomoku.第1群, 第1群);
+        中間評価項目得点群.put(ChukanHyokaKomoku.第2群, 第2群);
+        中間評価項目得点群.put(ChukanHyokaKomoku.第3群, 第3群);
+        中間評価項目得点群.put(ChukanHyokaKomoku.第4群, 第4群);
+        中間評価項目得点群.put(ChukanHyokaKomoku.第5群, 第5群);
+        中間評価項目得点群.put(ChukanHyokaKomoku.第6群, 第6群);
+        中間評価項目得点群.put(ChukanHyokaKomoku.第7群, 第7群);
         return new YokaigoNinteiChukanHyokaKomokuTokuten(中間評価項目得点群);
     }
 }

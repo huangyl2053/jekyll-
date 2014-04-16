@@ -56,12 +56,12 @@ public class IchijiHanteiResultDetailTest {
             申請書管理番号 = new ShinseishoKanriNo(new RString("001"));
             厚労省IF区分 = KoroshoIFKubun.V02A;
             仮一次判定区分 = KariIchijiHanteiKubun.仮判定;
-            一次判定年月日 = new FlexibleDate("19990101");
+            一次判定年月日 = new FlexibleDate("20060401");
             一次判定結果 = new IchijiHanteiResultKomoku(new Code(new RString("001")), new RString("名称"), new RString("略称"));
             認知症加算一次判定結果 = new IchijiHanteiResultKomoku(new Code(new RString("001")), new RString("名称"), new RString("略称"));
             要介護認定等基準時間 = IchijiHanteiTestBusinessCreator.create要介護認定等基準時間(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             中間評価項目得点 = IchijiHanteiTestBusinessCreator.create中間評価項目得点(0, 0, 0, 0, 0, 0, 0);
-            一次判定警告List = IchijiHanteiTestBusinessCreator.create一次判定警告List("000111000111000111");
+            一次判定警告List = IchijiHanteiTestBusinessCreator.create一次判定警告List(一次判定年月日);
             認定状態安定性 = new JotaiAnteiseiKubun(new Code(new RString("001")), new RString("名称"), new RString("略称"));
             認知症自立度2以上蓋然性 = new Decimal(123);
             推定給付区分 = new SuiteiKyuhuKubun(new Code(new RString("001")), new RString("名称"), new RString("略称"));
