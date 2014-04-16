@@ -5,6 +5,7 @@ target/
 libs/
 .idea/
 build/
+d.ts/
 
 *.map
 *.dll
