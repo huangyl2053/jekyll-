@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urf.business._KaigoJigyosha;
 import jp.co.ndensan.reams.ur.urf.business._NinteiChosain;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
-import jp.co.ndensan.reams.ur.urf.definition.KaigoJigyoshaShubetsu;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._Name;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -113,7 +112,7 @@ public class NinteichosaResultMock {
 
     private static IKaigoJigyosha createKaigoJigyosha() {
         return new _KaigoJigyosha(
-                new RString("事業者番号"), KaigoJigyoshaShubetsu.介護保険施設, RDate.MIN, RDate.MAX,
+                new RString("事業者番号"), RDate.MIN, RDate.MAX,
                 new ShikibetsuCode(new RString("1234567890")), new RString("事業者略称"), new RString("事業者略称カナ"),
                 new RString("事業者住所カナ"), new RString("異動事由"), RDate.MIN, new RString("社会福祉法人軽減対象区分"),
                 new RString("地域差区分"), new RString("受領委任区分"), new RString("生活保護指定区分"), new RString("法人種別"),

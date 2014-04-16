@@ -30,7 +30,7 @@ public final class NinteiShinseiJohoTestHelper {
     private static final ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(new RString("申請書管理番号"));
     private static final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("123456"));
     private static final RString 支所コード = new RString("支所コード");
-    private static final KaigoHihokenshaNo 介護被保険者番号 = new KaigoHihokenshaNo(new RString("被保険者番号"));
+    private static final KaigoHihokenshaNo 介護被保険者番号 = new KaigoHihokenshaNo(new RString("1234567890"));
     private static final ShikibetsuCode 識別コード = new ShikibetsuCode(new RString("123456"));
     private static final FlexibleDate 認定申請年月日 = FlexibleDate.MIN;
     private static final EdabanCode 枝番コード = new EdabanCode(new RString("001"));

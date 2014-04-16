@@ -29,7 +29,6 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
 import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
-import jp.co.ndensan.reams.ur.urf.definition.KaigoJigyoshaShubetsu;
 import jp.co.ndensan.reams.ur.urf.realservice.IKaigoJigyoshaFinder;
 import jp.co.ndensan.reams.ur.urf.realservice.INinteiChosainFinder;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
@@ -97,7 +96,7 @@ public class NinteichosaIraiTaishoshaManagerTest extends DbeTestBase {
             when(kojinFinder.get個人(any(ShikibetsuCode.class))).thenReturn(create個人());
             when(ninteichosaIraiManager.get認定調査依頼情報(any(ShinseishoKanriNo.class), any(NinteichosaIraiRirekiNo.class))).thenReturn(create認定調査依頼情報());
             when(ninteichosaItakusakiManager.get認定調査委託先介護事業者番号指定(any(ShoKisaiHokenshaNo.class), any(KaigoJigyoshaNo.class), any(boolean.class))).thenReturn(create認定調査委託先());
-            when(kaigoJigyoshaFinder.get特定の事業者種別かつ事業者番号の介護事業者(any(KaigoJigyoshaShubetsu.class), any(RString.class))).thenReturn(mock(IKaigoJigyosha.class));
+            when(kaigoJigyoshaFinder.get特定の事業者番号の介護事業者(any(RString.class))).thenReturn(mock(IKaigoJigyosha.class));
             when(kaigoNinteichosainManager.get介護認定調査員(any(ShoKisaiHokenshaNo.class), any(KaigoJigyoshaNo.class), any(KaigoNinteichosainNo.class))).thenReturn(create介護認定調査員());
             when(ninteiChosainFinder.get認定調査員(any(RString.class))).thenReturn(mock(INinteiChosain.class));
             sut = new NinteichosaIraiTaishoshaManager(
@@ -136,7 +135,7 @@ public class NinteichosaIraiTaishoshaManagerTest extends DbeTestBase {
             when(kojinFinder.get個人(any(ShikibetsuCode.class))).thenReturn(create個人());
             when(ninteichosaIraiManager.get認定調査依頼情報(any(ShinseishoKanriNo.class), any(NinteichosaIraiRirekiNo.class))).thenReturn(create認定調査依頼情報());
             when(ninteichosaItakusakiManager.get認定調査委託先介護事業者番号指定(any(ShoKisaiHokenshaNo.class), any(KaigoJigyoshaNo.class), any(boolean.class))).thenReturn(create認定調査委託先());
-            when(kaigoJigyoshaFinder.get特定の事業者種別かつ事業者番号の介護事業者(any(KaigoJigyoshaShubetsu.class), any(RString.class))).thenReturn(mock(IKaigoJigyosha.class));
+            when(kaigoJigyoshaFinder.get特定の事業者番号の介護事業者(any(RString.class))).thenReturn(mock(IKaigoJigyosha.class));
             when(kaigoNinteichosainManager.get介護認定調査員(any(ShoKisaiHokenshaNo.class), any(KaigoJigyoshaNo.class), any(KaigoNinteichosainNo.class))).thenReturn(create介護認定調査員());
             when(ninteiChosainFinder.get認定調査員(any(RString.class))).thenReturn(mock(INinteiChosain.class));
             sut = new NinteichosaIraiTaishoshaManager(
@@ -175,7 +174,7 @@ public class NinteichosaIraiTaishoshaManagerTest extends DbeTestBase {
             when(kojinFinder.get個人(any(ShikibetsuCode.class))).thenReturn(create個人());
             when(ninteichosaIraiManager.get認定調査依頼情報(any(ShinseishoKanriNo.class), any(NinteichosaIraiRirekiNo.class))).thenReturn(create認定調査依頼情報());
             when(ninteichosaItakusakiManager.get認定調査委託先介護事業者番号指定(any(ShoKisaiHokenshaNo.class), any(KaigoJigyoshaNo.class), any(boolean.class))).thenReturn(create認定調査委託先());
-            when(kaigoJigyoshaFinder.get特定の事業者種別かつ事業者番号の介護事業者(any(KaigoJigyoshaShubetsu.class), any(RString.class))).thenReturn(mock(IKaigoJigyosha.class));
+            when(kaigoJigyoshaFinder.get特定の事業者番号の介護事業者(any(RString.class))).thenReturn(mock(IKaigoJigyosha.class));
             when(kaigoNinteichosainManager.get介護認定調査員(any(ShoKisaiHokenshaNo.class), any(KaigoJigyoshaNo.class), any(KaigoNinteichosainNo.class))).thenReturn(create介護認定調査員());
             when(ninteiChosainFinder.get認定調査員(any(RString.class))).thenReturn(mock(INinteiChosain.class));
             sut = new NinteichosaIraiTaishoshaManager(
@@ -188,8 +187,8 @@ public class NinteichosaIraiTaishoshaManagerTest extends DbeTestBase {
 
     public static class save認定調査依頼完了年月日 extends DbeTestBase {
 
-        private static NinteichosaIraiTaishosha 認定調査依頼対象者 = create認定調査依頼対象者();
-        private static FlexibleDate 認定調査依頼完了年月日 = new FlexibleDate(new RString("20140101"));
+        private static final NinteichosaIraiTaishosha 認定調査依頼対象者 = create認定調査依頼対象者();
+        private static final FlexibleDate 認定調査依頼完了年月日 = new FlexibleDate(new RString("20140101"));
 
         @Test
         public void save認定調査依頼完了年月日_saveが成功した時_TRUEを返す() {
@@ -242,7 +241,7 @@ public class NinteichosaIraiTaishoshaManagerTest extends DbeTestBase {
                 NinteiShinchokuJohoMock.create認定進捗情報(),
                 new ShinseishoKanriNo(new RString("1234")),
                 new ShoKisaiHokenshaNo(new RString("1234")),
-                new KaigoHihokenshaNo(new RString("1234")),
+                new KaigoHihokenshaNo(new RString("1234567890")),
                 new FlexibleDate(new RString("20140101")),
                 NinteiShinseiKubunShinsei.新規申請,
                 KojinTestHelper.create個人(),

@@ -30,21 +30,21 @@ import static org.mockito.Mockito.mock;
 public class ShujiiIkenshoIraiTaishoshaListTest extends DbeTestBase {
 
     private static ShujiiIkenshoIraiTaishoshaList sut;
-    private static YokaigoninteiProgress 認定進捗情報 = mock(YokaigoninteiProgress.class);
-    private static ShinseishoKanriNo 申請書管理番号登録あり1 = new ShinseishoKanriNo((new RString("11")));
-    private static ShinseishoKanriNo 申請書管理番号登録あり2 = new ShinseishoKanriNo((new RString("12")));
-    private static ShinseishoKanriNo 申請書管理番号登録あり3 = new ShinseishoKanriNo((new RString("13")));
-    private static ShinseishoKanriNo 申請書管理番号登録なし = new ShinseishoKanriNo((new RString("99999")));
-    private static ShoKisaiHokenshaNo 証記載保険者番号登録あり = new ShoKisaiHokenshaNo((new RString("123456")));
-    private static ShoKisaiHokenshaNo 証記載保険者番号登録なし = new ShoKisaiHokenshaNo(new RString("999999"));
-    private static KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(new RString("0002"));
-    private static FlexibleDate 認定申請年月日 = new FlexibleDate(new RString("20140101"));
-    private static NinteiShinseiKubunShinsei 認定申請区分 = NinteiShinseiKubunShinsei.新規申請;
-    private static IKojin 個人情報 = mock(IKojin.class);
-    private static RString 氏名 = new RString("あああ");
-    private static RString 住所 = new RString("長野市");
-    private static KaigoIryoKikan 主治医医療機関 = mock(KaigoIryoKikan.class);
-    private static KaigoDoctor 主治医 = mock(KaigoDoctor.class);
+    private static final YokaigoninteiProgress 認定進捗情報 = mock(YokaigoninteiProgress.class);
+    private static final ShinseishoKanriNo 申請書管理番号登録あり1 = new ShinseishoKanriNo((new RString("11")));
+    private static final ShinseishoKanriNo 申請書管理番号登録あり2 = new ShinseishoKanriNo((new RString("12")));
+    private static final ShinseishoKanriNo 申請書管理番号登録あり3 = new ShinseishoKanriNo((new RString("13")));
+    private static final ShinseishoKanriNo 申請書管理番号登録なし = new ShinseishoKanriNo((new RString("99999")));
+    private static final ShoKisaiHokenshaNo 証記載保険者番号登録あり = new ShoKisaiHokenshaNo((new RString("123456")));
+    private static final ShoKisaiHokenshaNo 証記載保険者番号登録なし = new ShoKisaiHokenshaNo(new RString("999999"));
+    private static final KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(new RString("1234567890"));
+    private static final FlexibleDate 認定申請年月日 = new FlexibleDate(new RString("20140101"));
+    private static final NinteiShinseiKubunShinsei 認定申請区分 = NinteiShinseiKubunShinsei.新規申請;
+    private static final IKojin 個人情報 = mock(IKojin.class);
+    private static final RString 氏名 = new RString("あああ");
+    private static final RString 住所 = new RString("長野市");
+    private static final KaigoIryoKikan 主治医医療機関 = mock(KaigoIryoKikan.class);
+    private static final KaigoDoctor 主治医 = mock(KaigoDoctor.class);
 
     public static class get主治医意見書作成依頼処理対象者 extends DbeTestBase {
 

@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.NinteichosaIraiTaishoshaDac;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
 import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
-import jp.co.ndensan.reams.ur.urf.definition.KaigoJigyoshaShubetsu;
 import jp.co.ndensan.reams.ur.urf.realservice.IKaigoJigyoshaFinder;
 import jp.co.ndensan.reams.ur.urf.realservice.INinteiChosainFinder;
 import jp.co.ndensan.reams.ur.urf.realservice.KaigoJigyoshaFinderFactory;
@@ -203,8 +202,7 @@ public class NinteichosaIraiTaishoshaManager {
     }
 
     private IKaigoJigyosha get介護事業者(NinteichosaIrai 認定調査依頼情報) {
-        return kaigoJigyoshaFinder.get特定の事業者種別かつ事業者番号の介護事業者(
-                KaigoJigyoshaShubetsu.サービス事業者,
+        return kaigoJigyoshaFinder.get特定の事業者番号の介護事業者(
                 認定調査依頼情報.get認定調査委託先コード().value());
     }
 

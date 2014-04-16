@@ -43,7 +43,7 @@ public class NinteiShinseiJohoMock {
                 new ShinseishoKanriNo(new RString("申請書管理番号")),
                 new ShoKisaiHokenshaNo(new RString("証記載保険者番号")),
                 new RString("支所コード"),
-                new KaigoHihokenshaNo(new RString("介護被保険者番号")),
+                new KaigoHihokenshaNo(new RString("1234567890")),
                 new ShikibetsuCode(new RString("123456")),
                 FlexibleDate.MIN,
                 new EdabanCode(new RString("001")),

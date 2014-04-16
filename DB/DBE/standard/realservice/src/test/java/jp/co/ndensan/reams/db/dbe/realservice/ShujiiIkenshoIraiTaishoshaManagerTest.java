@@ -200,7 +200,7 @@ public class ShujiiIkenshoIraiTaishoshaManagerTest extends DbeTestBase {
                 NinteiShinchokuJohoMock.create認定進捗情報(),
                 new ShinseishoKanriNo(new RString("1234")),
                 new ShoKisaiHokenshaNo(new RString("1234")),
-                new KaigoHihokenshaNo(new RString("1234")),
+                new KaigoHihokenshaNo(new RString("1234567890")),
                 new FlexibleDate(new RString("20140101")),
                 NinteiShinseiKubunShinsei.更新申請,
                 KojinTestHelper.create個人(),

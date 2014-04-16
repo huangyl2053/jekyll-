@@ -48,7 +48,7 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
         public void setUp() {
             申請書管理No = new ShinseishoKanriNo(new RString("0123"));
             証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("A01200"));
-            被保険者No = new KaigoHihokenshaNo(new RString("DB0001"));
+            被保険者No = new KaigoHihokenshaNo(new RString("1234567890"));
             認定申請年月日 = new FlexibleDate(new RString("20120101"));
             認定申請区分コード_申請時 = NinteiShinseiKubunShinsei.新規申請;
             取下げ区分 = TorisageKubun.区分変更却下;
