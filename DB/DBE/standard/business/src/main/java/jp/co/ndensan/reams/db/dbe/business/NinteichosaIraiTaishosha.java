@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class NinteichosaIraiTaishosha {
 
+    private final YokaigoninteiProgress 認定進捗情報;
     private final ShinseishoKanriNo 申請書管理番号;
     private final ShoKisaiHokenshaNo 証記載保険者番号;
     private final KaigoHihokenshaNo 被保険者番号;
@@ -38,6 +39,7 @@ public class NinteichosaIraiTaishosha {
     /**
      * コンストラクタです。
      *
+     * @param 認定進捗情報 認定進捗情報
      * @param 申請書管理番号 申請書管理番号
      * @param 証記載保険者番号 証記載保険者番号
      * @param 被保険者番号 被保険者番号
@@ -50,13 +52,24 @@ public class NinteichosaIraiTaishosha {
      * @param 事業者情報 事業者情報
      * @param 認定調査員情報 認定調査員情報
      * @throws NullPointerException
-     * {@code 申請書管理番号}がnullの場合、{@code 証記載保険者番号}がnullの場合、{@code 被保険者}がnullの場合、
+     * {@code 認定進捗情報}がnullの場合、{@code 申請書管理番号}がnullの場合、{@code 証記載保険者番号}がnullの場合、{@code 被保険者}がnullの場合、
      * {@code 認定申請年月日}がnullの場合、{@code 認定申請区分}がnullの場合、{@code 個人情報}がnullの場合、{@code 氏名}がnullの場合、または{@code 住所}がnullの場合
      */
-    public NinteichosaIraiTaishosha(ShinseishoKanriNo 申請書管理番号, ShoKisaiHokenshaNo 証記載保険者番号, KaigoHihokenshaNo 被保険者番号,
-            FlexibleDate 認定申請年月日, NinteiShinseiKubunShinsei 認定申請区分, IKojin 個人情報, RString 氏名, RString 住所,
-            NinteichosaItakusaki 認定調査委託先, IKaigoJigyosha 事業者情報, INinteiChosain 認定調査員情報) throws NullPointerException {
+    public NinteichosaIraiTaishosha(
+            YokaigoninteiProgress 認定進捗情報,
+            ShinseishoKanriNo 申請書管理番号,
+            ShoKisaiHokenshaNo 証記載保険者番号,
+            KaigoHihokenshaNo 被保険者番号,
+            FlexibleDate 認定申請年月日,
+            NinteiShinseiKubunShinsei 認定申請区分,
+            IKojin 個人情報,
+            RString 氏名,
+            RString 住所,
+            NinteichosaItakusaki 認定調査委託先,
+            IKaigoJigyosha 事業者情報,
+            INinteiChosain 認定調査員情報) throws NullPointerException {
 
+        this.認定進捗情報 = requireNonNull(認定進捗情報, Messages.E00003.replace("認定進捗情報", getClass().getName()).getMessage());
         this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00003.replace("申請書管理番号", getClass().getName()).getMessage());
         this.証記載保険者番号 = requireNonNull(証記載保険者番号, Messages.E00003.replace("証記載保険者番号", getClass().getName()).getMessage());
         this.被保険者番号 = requireNonNull(被保険者番号, Messages.E00003.replace("被保険者番号", getClass().getName()).getMessage());
@@ -68,6 +81,15 @@ public class NinteichosaIraiTaishosha {
         this.認定調査委託先 = 認定調査委託先;
         this.事業者情報 = 事業者情報;
         this.認定調査員情報 = 認定調査員情報;
+    }
+
+    /**
+     * 認定進捗情報を返します。
+     *
+     * @return 認定進捗情報
+     */
+    public YokaigoninteiProgress get認定進捗情報() {
+        return 認定進捗情報;
     }
 
     /**

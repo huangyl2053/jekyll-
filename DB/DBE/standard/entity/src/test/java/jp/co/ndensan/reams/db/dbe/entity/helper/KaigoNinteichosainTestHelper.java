@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KaigoNinteichosainTestHelper {
 
-    public static final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("000001"));
+    public static final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("123456"));
     public static final KaigoJigyoshaNo 介護事業者番号 = new KaigoJigyoshaNo(new RString("0002"));
     public static final RString 介護調査員番号 = new RString("0003");
     public static final JigyoshaNo 事業者番号 = new JigyoshaNo(new RString("2020300001"));
@@ -45,13 +45,13 @@ public class KaigoNinteichosainTestHelper {
     public static DbT7013ChosainJohoEntity create認定調査員Entity() {
         DbT7013ChosainJohoEntity entity = new DbT7013ChosainJohoEntity();
         entity.setShoKisaiHokenshaNo(証記載保険者番号);
-        entity.setKaigoJigyoshaNo(介護事業者番号);
+        entity.setKaigoJigyoshaNo(介護事業者番号.value());
         entity.setKaigoChosainNo(介護調査員番号);
-        entity.setJigyoshaNo(事業者番号);
+        entity.setJigyoshaNo(事業者番号.value());
         entity.setKaigoChosainJokyo(調査員状況);
         entity.setChosainShimei(調査員氏名);
         entity.setChosainKanaShimei(調査員氏名カナ);
-        entity.setSeibetsu(性別);
+        entity.setSeibetsu(性別.getCode());
         entity.setChosainShikakuCode(調査員資格コード);
         entity.setChikuCode(地区コード);
         entity.setYubinNo(郵便番号);

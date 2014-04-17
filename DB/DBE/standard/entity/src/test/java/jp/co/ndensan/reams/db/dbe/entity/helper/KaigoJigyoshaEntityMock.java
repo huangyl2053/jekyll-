@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.helper;
 
-import jp.co.ndensan.reams.ur.urf.definition.KaigoJigyoshaShubetsu;
 import jp.co.ndensan.reams.ur.urf.entity.basic.KaigoJigyoshaEntity;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.*;
@@ -25,8 +25,7 @@ public final class KaigoJigyoshaEntityMock {
                 new RString("123456"),
                 new RDate("20130101"),
                 new RDate("20140101"),
-                new RString("1234567"),
-                KaigoJigyoshaShubetsu.介護保険施設.getValue(),
+                new ShikibetsuCode(new RString("1234567")),
                 new RString("テスト事業者略称"),
                 new RString("テストジギョウシャリャクショウ"),
                 new RString("テストジュウショカナ"),

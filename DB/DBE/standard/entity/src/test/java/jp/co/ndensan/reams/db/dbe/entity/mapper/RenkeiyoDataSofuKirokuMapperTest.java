@@ -40,7 +40,7 @@ public class RenkeiyoDataSofuKirokuMapperTest extends TestBase {
         @Override
         public void setUp() {
             申請書管理番号 = new ShinseishoKanriNo(new RString("100000001"));
-            被保険者番号 = new KaigoHihokenshaNo(new RString("0000000001"));
+            被保険者番号 = new KaigoHihokenshaNo(new RString("1234567890"));
             認定申請時区分 = new RString("01");
             引渡し区分 = new RString("1");
             引渡し日時 = RDateTime.of(2014, 03, 14, 18, 45, 59);

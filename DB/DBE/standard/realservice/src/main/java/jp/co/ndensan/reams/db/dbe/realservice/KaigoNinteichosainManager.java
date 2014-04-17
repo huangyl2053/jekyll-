@@ -57,7 +57,7 @@ public class KaigoNinteichosainManager {
      */
     public KaigoNinteichosain get介護認定調査員(ShoKisaiHokenshaNo 証記載保険者番号, KaigoJigyoshaNo 介護事業者番号, KaigoNinteichosainNo 介護調査員番号) {
         DbT7013ChosainJohoEntity chosainJohoEntity = chosainDac.select(証記載保険者番号, 介護事業者番号, 介護調査員番号);
-        DbT7010NinteichosaItakusakiJohoEntity itakusakiEntity = itakusakiDac.select(証記載保険者番号.getValue(), 介護事業者番号, true);
+        DbT7010NinteichosaItakusakiJohoEntity itakusakiEntity = itakusakiDac.select(証記載保険者番号, 介護事業者番号, true);
         return KaigoNinteichosainMapper.toKaigoNinteichosain(chosainJohoEntity, itakusakiEntity);
     }
 
@@ -72,7 +72,7 @@ public class KaigoNinteichosainManager {
      */
     public KaigoNinteichosain get介護認定調査員(ShoKisaiHokenshaNo 証記載保険者番号, KaigoJigyoshaNo 介護事業者番号, KaigoNinteichosainNo 介護調査員番号, ChosainJokyo 調査員の状況) {
         DbT7013ChosainJohoEntity chosainJohoEntity = chosainDac.select(証記載保険者番号, 介護事業者番号, 介護調査員番号, 調査員の状況);
-        DbT7010NinteichosaItakusakiJohoEntity itakusakiEntity = itakusakiDac.select(証記載保険者番号.getValue(), 介護事業者番号, true);
+        DbT7010NinteichosaItakusakiJohoEntity itakusakiEntity = itakusakiDac.select(証記載保険者番号, 介護事業者番号, true);
         return KaigoNinteichosainMapper.toKaigoNinteichosain(chosainJohoEntity, itakusakiEntity);
     }
 
@@ -151,7 +151,7 @@ public class KaigoNinteichosainManager {
 
         for (DbT7013ChosainJohoEntity chosainEntity : entityList) {
             DbT7010NinteichosaItakusakiJohoEntity itakusakiEntity = itakusakiDac.select(
-                    chosainEntity.getShoKisaiHokenshaNo().getValue(), chosainEntity.getKaigoJigyoshaNo(), true);
+                    chosainEntity.getShoKisaiHokenshaNo(), new KaigoJigyoshaNo(chosainEntity.getKaigoJigyoshaNo()), true);
             chosainList.add(KaigoNinteichosainMapper.toKaigoNinteichosain(chosainEntity, itakusakiEntity));
         }
 

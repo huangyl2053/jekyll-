@@ -33,6 +33,6 @@ public class MockNinteichosaItakusakiJohoEntity {
         DbT7010NinteichosaItakusakiJohoEntity ninteichosaItakusakiJohoEntity = new DbT7010NinteichosaItakusakiJohoEntity(
                 new ShoKisaiHokenshaNo(new RString("202030")), kaigojigyoshaNo, jigyoshaNo,
                 true, ChosaItakuKubun.指定なし, 10, new RString("A"), new RString("B"));
-        return spy(ninteichosaItakusakiJohoEntity);
+        return ninteichosaItakusakiJohoEntity;
     }
 }

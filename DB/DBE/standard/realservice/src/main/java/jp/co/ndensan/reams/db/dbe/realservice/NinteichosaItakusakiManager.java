@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.entity.mapper.HatsubanJohoMapper;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteichosaItakusakiMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.IHatsubanKanriJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.NinteichosaItakusakiDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -57,7 +58,7 @@ public class NinteichosaItakusakiManager {
      * @param 介護事業状況 介護事業状況
      * @return NinteichosaItakusaki
      */
-    public List<NinteichosaItakusaki> get認定調査委託先市町村指定全件(RString 証記載保険者番号, Boolean 介護事業状況) {
+    public List<NinteichosaItakusaki> get認定調査委託先市町村指定全件(ShoKisaiHokenshaNo 証記載保険者番号, Boolean 介護事業状況) {
         List<NinteichosaItakusaki> list = new ArrayList();
         List<DbT7010NinteichosaItakusakiJohoEntity> entityList = dac.selectAll(証記載保険者番号, 介護事業状況);
 
@@ -79,7 +80,7 @@ public class NinteichosaItakusakiManager {
      * @param 証記載保険者番号 証記載保険者番号
      * @return NinteichosaItakusaki
      */
-    public List<NinteichosaItakusaki> get認定調査委託先市町村指定全件(RString 証記載保険者番号) {
+    public List<NinteichosaItakusaki> get認定調査委託先市町村指定全件(ShoKisaiHokenshaNo 証記載保険者番号) {
         List<NinteichosaItakusaki> list = new ArrayList();
         List<DbT7010NinteichosaItakusakiJohoEntity> entityList = dac.selectAll(証記載保険者番号);
 
@@ -103,7 +104,7 @@ public class NinteichosaItakusakiManager {
      * @param 介護事業状況 介護事業状況
      * @return NinteichosaItakusaki
      */
-    public NinteichosaItakusaki get認定調査委託先介護事業者番号指定(RString 証記載保険者番号, KaigoJigyoshaNo 介護事業者番号, boolean 介護事業状況) {
+    public NinteichosaItakusaki get認定調査委託先介護事業者番号指定(ShoKisaiHokenshaNo 証記載保険者番号, KaigoJigyoshaNo 介護事業者番号, boolean 介護事業状況) {
         DbT7010NinteichosaItakusakiJohoEntity entity = dac.select(証記載保険者番号, 介護事業者番号, 介護事業状況);
 
         if (entity == null) {
@@ -121,7 +122,7 @@ public class NinteichosaItakusakiManager {
      * @param 介護事業状況 介護事業状況
      * @return NinteichosaItakusaki
      */
-    public NinteichosaItakusaki get認定調査委託先事業者番号指定(RString 証記載保険者番号, JigyoshaNo 事業者番号, boolean 介護事業状況) {
+    public NinteichosaItakusaki get認定調査委託先事業者番号指定(ShoKisaiHokenshaNo 証記載保険者番号, JigyoshaNo 事業者番号, boolean 介護事業状況) {
         DbT7010NinteichosaItakusakiJohoEntity entity = dac.select(証記載保険者番号, 事業者番号, 介護事業状況);
 
         if (entity == null) {

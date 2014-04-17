@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJoho;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
@@ -38,7 +38,7 @@ public class NinteichosaItakusakiDac {
      * @return 認定調査委託先情報エンティティ
      */
     @Transaction
-    public List<DbT7010NinteichosaItakusakiJohoEntity> selectAll(RString 証記載保険者番号, boolean 介護事業状況) {
+    public List<DbT7010NinteichosaItakusakiJohoEntity> selectAll(ShoKisaiHokenshaNo 証記載保険者番号, boolean 介護事業状況) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT7010NinteichosaItakusakiJohoEntity> list = accessor.select()
                 .table(DbT7010NinteichosaItakusakiJoho.class)
@@ -58,7 +58,7 @@ public class NinteichosaItakusakiDac {
      * @return 認定調査委託先情報エンティティ
      */
     @Transaction
-    public List<DbT7010NinteichosaItakusakiJohoEntity> selectAll(RString 証記載保険者番号) {
+    public List<DbT7010NinteichosaItakusakiJohoEntity> selectAll(ShoKisaiHokenshaNo 証記載保険者番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         List<DbT7010NinteichosaItakusakiJohoEntity> list = accessor.select()
@@ -80,7 +80,7 @@ public class NinteichosaItakusakiDac {
      * @return 認定調査委託先情報エンティティ
      */
     @Transaction
-    public DbT7010NinteichosaItakusakiJohoEntity select(RString 証記載保険者番号, KaigoJigyoshaNo 介護事業者番号, boolean 介護事業状況) {
+    public DbT7010NinteichosaItakusakiJohoEntity select(ShoKisaiHokenshaNo 証記載保険者番号, KaigoJigyoshaNo 介護事業者番号, boolean 介護事業状況) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         List<DbT7010NinteichosaItakusakiJohoEntity> list = accessor.select()
@@ -106,7 +106,7 @@ public class NinteichosaItakusakiDac {
      * @return 認定調査委託先情報エンティティ
      */
     @Transaction
-    public DbT7010NinteichosaItakusakiJohoEntity select(RString 証記載保険者番号, JigyoshaNo 事業者番号, boolean 介護事業状況) {
+    public DbT7010NinteichosaItakusakiJohoEntity select(ShoKisaiHokenshaNo 証記載保険者番号, JigyoshaNo 事業者番号, boolean 介護事業状況) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         List<DbT7010NinteichosaItakusakiJohoEntity> list = accessor.select()
