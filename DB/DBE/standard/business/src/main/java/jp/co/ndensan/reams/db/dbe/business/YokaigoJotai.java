@@ -12,6 +12,7 @@ import static java.util.Objects.requireNonNull;
  *
  * @author N8156 宮本 康
  */
+// TODO N8156 宮本 康 申請情報の「前回結果」としても使用する為、「認定の結果」であることが判断できるクラス名を検討する。
 public class YokaigoJotai {
 
     private final YokaigoJotaiKubun 要介護状態区分;
