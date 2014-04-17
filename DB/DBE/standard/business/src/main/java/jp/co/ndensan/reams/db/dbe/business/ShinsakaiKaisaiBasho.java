@@ -116,4 +116,43 @@ public class ShinsakaiKaisaiBasho {
     public boolean is有効() {
         return 開催場所状況.is有効();
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 97 * Objects.hashCode(this.開催場所コード)
+                * Objects.hashCode(this.開催場所名称)
+                * Objects.hashCode(this.開催地区)
+                * Objects.hashCode(this.開催場所住所)
+                * Objects.hashCode(this.開催場所電話番号)
+                * Objects.hashCode(this.開催場所状況);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object 比較対象) {
+        if (比較対象 == null || getClass() != 比較対象.getClass()) {
+            return false;
+        }
+
+        final ShinsakaiKaisaiBasho other = (ShinsakaiKaisaiBasho) 比較対象;
+        if (!Objects.equals(this.開催場所コード, other.開催場所コード)) {
+            return false;
+        }
+        if (!Objects.equals(this.開催場所名称, other.開催場所名称)) {
+            return false;
+        }
+        if (!Objects.equals(this.開催地区, other.開催地区)) {
+            return false;
+        }
+        if (!Objects.equals(this.開催場所住所, other.開催場所住所)) {
+            return false;
+        }
+        if (!Objects.equals(this.開催場所電話番号, other.開催場所電話番号)) {
+            return false;
+        }
+        if (this.開催場所状況 != other.開催場所状況) {
+            return false;
+        }
+        return true;
+    }
 }

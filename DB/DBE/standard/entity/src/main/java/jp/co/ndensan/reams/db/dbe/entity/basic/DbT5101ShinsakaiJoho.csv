@@ -1,0 +1,15 @@
+﻿shinsakaiKaisaiNo,int2,int,,,,,A
+shinsakaiKaisaiYMD,UDD015YMD,FlexibleDate,,,,,A
+shinsakaiKaishiTime,varchar,RString,,,,,A
+shinsakaiShuryoTime,varchar,RString,,,,,A
+shinsakaiKaisaiBashoCode,varchar,RString,,,,,A
+gogitaiNo,int2,int,,,,,A
+shinsakaiYoteiTeiin,int2,int,,,,,A
+shinsakaiSaidaiTeiin,int2,int,,,,,A
+shinsakaiJidoWariateTeiin,int2,int,,,,,A
+shinsakaiIinTeiin,int2,int,,,,,A
+gogitaiSeishinkaiSonzaiFlag,bool,boolean,,,,,A
+gogitaiDummyFlag,bool,boolean,,,,,A
+shinsakaiShiryoSakuseiYMD,UDD015YMD,FlexibleDate,,,,,A
+shinsakaiKyukaiFlag,bool,boolean,,,,,A
+shinsakaiWariateZumiNinzu,int2,int,,,,,A

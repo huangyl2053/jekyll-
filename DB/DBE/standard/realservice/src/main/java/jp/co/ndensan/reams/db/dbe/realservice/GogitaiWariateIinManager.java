@@ -8,7 +8,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIin;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiWariateIinList;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiDate;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5107GogitaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.GogitaiWariateIinMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.GogitaiWariateShinsakaiIinEntity;
@@ -61,7 +61,7 @@ public class GogitaiWariateIinManager {
      * @param 有効期間開始年月日 合議体有効期間開始年月日
      * @return 現在有効な割当委員のリスト
      */
-    public GogitaiWariateIinList get有効割当委員List(GogitaiYukoKikanKaishiYMD 有効期間開始年月日) {
+    public GogitaiWariateIinList get有効割当委員List(GogitaiYukoKikanKaishiDate 有効期間開始年月日) {
         List<GogitaiWariateShinsakaiIinEntity> entities = gogitaiWariateIinDac.select(有効期間開始年月日);
         return GogitaiWariateIinMapper.to合議体割当委員List(entities);
     }
@@ -73,7 +73,7 @@ public class GogitaiWariateIinManager {
      * @param 有効期間開始年月日 有効期間開始年月日
      * @return 特定の合議体に割り当てられている審査会委員List
      */
-    public GogitaiWariateIinList get合議体割当委員List(GogitaiNo 合議体番号, GogitaiYukoKikanKaishiYMD 有効期間開始年月日) {
+    public GogitaiWariateIinList get合議体割当委員List(GogitaiNo 合議体番号, GogitaiYukoKikanKaishiDate 有効期間開始年月日) {
         List<GogitaiWariateShinsakaiIinEntity> entities = gogitaiWariateIinDac.select(合議体番号, 有効期間開始年月日);
         return GogitaiWariateIinMapper.to合議体割当委員List(entities);
     }

@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiDate;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
@@ -41,7 +41,7 @@ public final class GogitaiDetailMapper {
         }
 
         return new GogitaiDetail(new GogitaiNo(合議体Entity.getGogitaiNo()), 合議体Entity.getGogitaiMei(),
-                new GogitaiYukoKikanKaishiYMD(合議体Entity.getGogitaiYukoKikanKaishiYMD()), 合議体Entity.getGogitaiYukoKikanShuryoYMD(),
+                new GogitaiYukoKikanKaishiDate(合議体Entity.getGogitaiYukoKikanKaishiYMD()), 合議体Entity.getGogitaiYukoKikanShuryoYMD(),
                 create開始終了時間(合議体Entity),
                 開催場所, 合議体Entity.getShinsakaiYoteiTeiin(), 合議体Entity.getShinsakaiJidoWariateTeiin(),
                 合議体Entity.getShinsakaiIinTeiin(),

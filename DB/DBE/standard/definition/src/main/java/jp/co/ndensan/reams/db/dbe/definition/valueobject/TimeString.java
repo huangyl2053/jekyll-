@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 public class TimeString implements IValueObject<RString>, Comparable<TimeString> {
 
     private final RTime time;
+    private final RString time変換後文字列;
     private static final int TIME_STRING_LENGTH = 4;
 
     /**
@@ -52,6 +53,10 @@ public class TimeString implements IValueObject<RString>, Comparable<TimeString>
         } catch (RuntimeException e) {
             throw new IllegalArgumentException(Messages.E00013.replace(エラー出力.toString(), "0000～2359の間").getMessage());
         }
+
+        RString hourString = padToZero(Integer.toString(time.getHour()));
+        RString minuteString = padToZero(Integer.toString(time.getMinute()));
+        time変換後文字列 = hourString.concat(minuteString);
     }
 
     /**
@@ -87,9 +92,7 @@ public class TimeString implements IValueObject<RString>, Comparable<TimeString>
 
     @Override
     public RString value() {
-        RString hourString = padToZero(Integer.toString(time.getHour()));
-        RString minuteString = padToZero(Integer.toString(time.getMinute()));
-        return hourString.concat(minuteString);
+        return time変換後文字列;
     }
 
     private RString padToZero(String str) {
@@ -102,5 +105,14 @@ public class TimeString implements IValueObject<RString>, Comparable<TimeString>
     @Override
     public int compareTo(TimeString 比較対象) {
         return this.value().compareTo(比較対象.value());
+    }
+
+    /**
+     * 自身の情報をRTime型の変換して返します。
+     *
+     * @return 時間
+     */
+    public RTime toRTime() {
+        return time;
     }
 }

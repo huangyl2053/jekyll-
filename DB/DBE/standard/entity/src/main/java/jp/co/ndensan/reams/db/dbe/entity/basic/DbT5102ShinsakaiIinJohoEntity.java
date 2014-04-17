@@ -7,7 +7,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -16,6 +15,11 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import java.util.Objects;
+import jp.co.ndensan.reams.db.dbe.definition.DbeShubetsuKey;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 
 /**
  * DbT5102ShinsakaiIinJohoの項目定義クラスです
@@ -23,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
  * @author n8178 城間篤人
  */
 public class DbT5102ShinsakaiIinJohoEntity implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Generated Code">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5102ShinsakaiIinJoho");
@@ -37,7 +41,6 @@ public class DbT5102ShinsakaiIinJohoEntity implements IDbAccessable {
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
     private RString shinsakaiIinCode;
-    @PrimaryKey
     private FlexibleDate shinsakaiIinKaishiYMD;
     private FlexibleDate shinsakaiIinShuryoYMD;
     private boolean shinsakaiIinJokyo;
@@ -187,10 +190,10 @@ public class DbT5102ShinsakaiIinJohoEntity implements IDbAccessable {
     /**
      * setJigyoshaKubun
      *
-     * @param jigyoushaKubun jigyoshaKubun
+     * @param jigyoshaKubun jigyoshaKubun
      */
-    public void setJigyoshaKubun(RString jigyoushaKubun) {
-        this.jigyoshaKubun = jigyoushaKubun;
+    public void setJigyoshaKubun(RString jigyoshaKubun) {
+        this.jigyoshaKubun = jigyoshaKubun;
     }
 
     /**
@@ -205,10 +208,10 @@ public class DbT5102ShinsakaiIinJohoEntity implements IDbAccessable {
     /**
      * setJigyoshaNo
      *
-     * @param jigyoushaNo jigyoshaNo
+     * @param jigyoshaNo jigyoshaNo
      */
-    public void setJigyoshaNo(JigyoshaNo jigyoushaNo) {
-        this.jigyoshaNo = jigyoushaNo;
+    public void setJigyoshaNo(JigyoshaNo jigyoshaNo) {
+        this.jigyoshaNo = jigyoshaNo;
     }
 
     /**
@@ -281,6 +284,24 @@ public class DbT5102ShinsakaiIinJohoEntity implements IDbAccessable {
      */
     public void setShinsakaiIinShikakuCode(Code shinsakaiIinShikakuCode) {
         this.shinsakaiIinShikakuCode = shinsakaiIinShikakuCode;
+    }
+
+    /**
+     * getShinsakaiIinShikakuCodeMeisho
+     *
+     * @return Meisho
+     */
+    public RString getShinsakaiIinShikakuCodeMeisho() {
+        return CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.資格, shinsakaiIinShikakuCode);
+    }
+
+    /**
+     * getShinsakaiIinShikakuCodeRyakusho
+     *
+     * @return Ryakusho
+     */
+    public RString getShinsakaiIinShikakuCodeRyakusho() {
+        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.資格, shinsakaiIinShikakuCode);
     }
 
     /**
@@ -462,16 +483,22 @@ public class DbT5102ShinsakaiIinJohoEntity implements IDbAccessable {
     public void setKozaNo(RString KozaNo) {
         this.KozaNo = KozaNo;
     }
-// </editor-fold>
 
     /**
-     * 審査会委員資格の名称をコードマスタから取得します。
+     * このエンティティの主キーが他の{@literal DbT5102ShinsakaiIinJohoEntity}と等しいか判定します。
      *
-     * @return 審査会委員資格の名称
+     * @param other 比較するエンティティ
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT5102ShinsakaiIinJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
-    public RString getShinsakaiIinShikakuName() {
-        //TODO n8178 城間篤人 コードマスタが用意されてから実装予定 2014年3月末
-        //return CodeMaster.getCodeMeisho(new RString("db03"), shinsakaiIinShikakuCode.getColumnValue());
-        return new RString("審査会委員資格");
+    public boolean equalsPrimaryKeys(DbT5102ShinsakaiIinJohoEntity other) {
+        if (other == null) {
+            return false;
+        }
+        if (!Objects.equals(this.shinsakaiIinCode, other.shinsakaiIinCode)) {
+            return false;
+        }
+        return true;
     }
+// </editor-fold>
 }

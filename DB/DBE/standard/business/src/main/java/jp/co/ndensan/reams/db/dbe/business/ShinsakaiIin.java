@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 public class ShinsakaiIin {
     //TODO n8178 城間篤人 他チケットで実装予定の箇所のため、後に改修が入る可能性があり 2014年3月末
 
-    private final ShinsakaiIinCode 委員コード;
+    private final ShinsakaiIinCode 審査会委員コード;
     private final Range<FlexibleDate> 委員着任期間;
     private final ShinsakaiIinJokyo 審査会委員状況;
     private final JigyoshaNo 事業者番号;
@@ -44,7 +44,7 @@ public class ShinsakaiIin {
     /**
      * 引数からメンバを受け取るコンストラクタです。
      *
-     * @param 委員コード 委員コード
+     * @param 審査会委員コード 審査会委員コード
      * @param 委員着任期間 委員着任期間
      * @param 審査会委員状況 審査会委員状況
      * @param 事業者番号 事業者番号
@@ -59,11 +59,11 @@ public class ShinsakaiIin {
      * @param 口座情報 口座情報
      * @throws NullPointerException 引数のいずれかにNullが渡されたとき
      */
-    public ShinsakaiIin(ShinsakaiIinCode 委員コード, Range<FlexibleDate> 委員着任期間, ShinsakaiIinJokyo 審査会委員状況,
+    public ShinsakaiIin(ShinsakaiIinCode 審査会委員コード, Range<FlexibleDate> 委員着任期間, ShinsakaiIinJokyo 審査会委員状況,
             JigyoshaNo 事業者番号, AtenaMeisho 氏名, AtenaKanaMeisho カナ氏名, Gender 性別, ShinsakaiIinShikaku 審査会委員資格,
             ShinsainYusoKubun 審査委員郵送区分, YubinNo 郵便番号, AtenaJusho 住所, TelNo 電話番号, ShinsakaiIinKoza 口座情報)
             throws NullPointerException {
-        requireNonNull(委員コード, Messages.E00003.replace("委員コード", getClass().getName()).getMessage());
+        requireNonNull(審査会委員コード, Messages.E00003.replace("審査会委員コード", getClass().getName()).getMessage());
         requireNonNull(委員着任期間, Messages.E00003.replace("委員着任期間", getClass().getName()).getMessage());
         requireNonNull(審査会委員状況, Messages.E00003.replace("審査会委員状況", getClass().getName()).getMessage());
         requireNonNull(事業者番号, Messages.E00003.replace("事業者番号", getClass().getName()).getMessage());
@@ -77,7 +77,7 @@ public class ShinsakaiIin {
         requireNonNull(電話番号, Messages.E00003.replace("電話番号", getClass().getName()).getMessage());
         requireNonNull(口座情報, Messages.E00003.replace("口座情報", getClass().getName()).getMessage());
 
-        this.委員コード = 委員コード;
+        this.審査会委員コード = 審査会委員コード;
         this.委員着任期間 = 委員着任期間;
         this.審査会委員状況 = 審査会委員状況;
         this.事業者番号 = 事業者番号;
@@ -93,12 +93,12 @@ public class ShinsakaiIin {
     }
 
     /**
-     * 委員コードを返します。
+     * 審査会委員コードを返します。
      *
-     * @return 委員コード
+     * @return 審査会委員コード
      */
-    public ShinsakaiIinCode get委員コード() {
-        return 委員コード;
+    public ShinsakaiIinCode get審査会委員コード() {
+        return 審査会委員コード;
     }
 
     /**

@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiDate;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 
 /**
@@ -38,7 +38,7 @@ public class GogitaiList implements Iterable<Gogitai> {
      * @return 合議体
      * @throws IllegalArgumentException 合致する合議体が存在しないとき
      */
-    public Gogitai get合議体(GogitaiNo 合議体番号, GogitaiYukoKikanKaishiYMD 合議体有効期間開始年月日)
+    public Gogitai get合議体(GogitaiNo 合議体番号, GogitaiYukoKikanKaishiDate 合議体有効期間開始年月日)
             throws IllegalArgumentException {
         for (Gogitai 合議体 : 合議体List) {
             if (isキー項目が一致(合議体, 合議体番号, 合議体有効期間開始年月日)) {
@@ -48,7 +48,7 @@ public class GogitaiList implements Iterable<Gogitai> {
         throw new IllegalArgumentException(Messages.E00006.replace("合致する合議体").getMessage());
     }
 
-    private boolean isキー項目が一致(Gogitai 合議体, GogitaiNo 合議体番号, GogitaiYukoKikanKaishiYMD 合議体有効期間開始年月日) {
+    private boolean isキー項目が一致(Gogitai 合議体, GogitaiNo 合議体番号, GogitaiYukoKikanKaishiDate 合議体有効期間開始年月日) {
 
         if (!合議体番号.equals(合議体.get合議体情報().get合議体番号())) {
             return false;

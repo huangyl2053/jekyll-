@@ -5,10 +5,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 /**
  * DbT5102ShinsakaiIinJohoの項目定義クラスです
  *
+ * @author n8178 城間篤人
  */
 public enum DbT5102ShinsakaiIinJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Generated Code">
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
 
     insertDantaiCd(2147483647, 0),
     insertTimestamp(29, 0),
@@ -38,7 +38,6 @@ public enum DbT5102ShinsakaiIinJoho implements IColumnDefinition {
     KozaMeigi(80, 0),
     KozaMeigiKana(80, 0),
     KozaNo(7, 0);
-
     private final int maxLength;
     private final int scale;
 
@@ -64,6 +63,5 @@ public enum DbT5102ShinsakaiIinJoho implements IColumnDefinition {
     public int getScale() {
         return scale;
     }
-
 // </editor-fold>
 }

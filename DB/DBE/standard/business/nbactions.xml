@@ -11,4 +11,12 @@
                 <skipTests>true</skipTests>
             </properties>
         </action>
+        <action>
+            <actionName>CUSTOM-testClassCreate</actionName>
+            <displayName>testClassCreate</displayName>
+            <goals>
+                <goal>jar:test-jar</goal>
+                <goal>install</goal>
+            </goals>
+        </action>
     </actions>

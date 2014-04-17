@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIin;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinKoza;
 import jp.co.ndensan.reams.db.dbe.business.ShinsakaiIinShikaku;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinShikakuCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsainYusoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
@@ -52,8 +51,8 @@ public final class ShinsakaiIinMapper {
     }
 
     private static ShinsakaiIinShikaku create審査員区分(DbT5102ShinsakaiIinJohoEntity 委員Entity) {
-        return new ShinsakaiIinShikaku(new ShinsakaiIinShikakuCode(委員Entity.getShinsakaiIinShikakuCode().getColumnValue()),
-                委員Entity.getShinsakaiIinShikakuName());
+        return new ShinsakaiIinShikaku(委員Entity.getShinsakaiIinShikakuCode(),
+                委員Entity.getShinsakaiIinShikakuCodeMeisho(), 委員Entity.getShinsakaiIinShikakuCodeRyakusho());
     }
 
     private static ShinsakaiIinKoza create審査会委員口座情報(DbT5102ShinsakaiIinJohoEntity 委員Entity) {
@@ -74,7 +73,7 @@ public final class ShinsakaiIinMapper {
         }
 
         DbT5102ShinsakaiIinJohoEntity 委員Entity = new DbT5102ShinsakaiIinJohoEntity();
-        委員Entity.setShinsakaiIinCode(審査会委員.get委員コード().value());
+        委員Entity.setShinsakaiIinCode(審査会委員.get審査会委員コード().value());
         委員Entity.setShinsakaiIinKaishiYMD(審査会委員.get委員着任期間().getFrom());
         委員Entity.setShinsakaiIinShuryoYMD(審査会委員.get委員着任期間().getTo());
         委員Entity.setShinsakaiIinJokyo(審査会委員.get審査会委員状況().is有効());
@@ -82,7 +81,7 @@ public final class ShinsakaiIinMapper {
         委員Entity.setShinsakaiIinShimei(審査会委員.get氏名());
         委員Entity.setShinsakaiIinKanaShimei(審査会委員.getカナ氏名());
         委員Entity.setSeibetsu(審査会委員.get性別().getCommonName());
-        委員Entity.setShinsakaiIinShikakuCode(審査会委員.get審査会委員資格().get区分コード());
+        委員Entity.setShinsakaiIinShikakuCode(審査会委員.get審査会委員資格().getCode());
         委員Entity.setShinsainYusoKubun(審査会委員.get審査委員郵送区分().get郵送区分());
         委員Entity.setYubinNo(審査会委員.get郵便番号());
         委員Entity.setJusho(審査会委員.get住所());

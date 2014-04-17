@@ -8,7 +8,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.Gogitai;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiList;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiDate;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5107GogitaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.GogitaiDetailMapper;
@@ -66,7 +66,7 @@ public class GogitaiManager {
      * @param 合議体有効期間開始年月日 合議体有効期間開始年月日
      * @return 現時点で有効な合議体のリスト
      */
-    public GogitaiList get有効合議体List(GogitaiYukoKikanKaishiYMD 合議体有効期間開始年月日) {
+    public GogitaiList get有効合議体List(GogitaiYukoKikanKaishiDate 合議体有効期間開始年月日) {
         List<GogitaiWariateShinsakaiIinEntity> 合議体割当委員Entities = gogitaiWariateIinDac.select(合議体有効期間開始年月日);
         return GogitaiMapper.to合議体List(合議体割当委員Entities);
     }
