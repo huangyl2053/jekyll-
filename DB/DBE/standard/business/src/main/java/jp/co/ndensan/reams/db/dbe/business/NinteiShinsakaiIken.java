@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class NinteiShinsakaiIken {
 
+    // TODO N8156 宮本 康 審査会開催番号だけではなく審査会自体を持たせる。
     private final ShinsakaiKaisaiNo 審査会開催番号;
     private final ShinsakaiIkenType 審査会意見種類;
     private final RString 審査会意見;
