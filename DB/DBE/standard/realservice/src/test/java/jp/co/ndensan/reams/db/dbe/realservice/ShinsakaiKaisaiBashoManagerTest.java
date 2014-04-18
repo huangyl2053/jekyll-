@@ -39,12 +39,13 @@ public class ShinsakaiKaisaiBashoManagerTest extends DbeTestBase {
             sut = new ShinsakaiKaisaiBashoManager(new ShinsakaiKaisaiBashoDacMock());
         }
 
-//        @Test
-//        public void 引数の指定した開催場所コードを持つ開催場所が取得できる() {
-//            ShinsakaiKaisaiBashoCode 開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
-//            ShinsakaiKaisaiBasho result = sut.get審査会開催場所(開催場所コード);
-//            assertThat(result.get開催場所コード(), is(開催場所コード));
-//        }
+        @Test
+        public void 引数の指定した開催場所コードを持つ開催場所が取得できる() {
+            ShinsakaiKaisaiBashoCode 開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
+            ShinsakaiKaisaiBasho result = sut.get審査会開催場所(開催場所コード);
+            assertThat(result.get開催場所コード(), is(開催場所コード));
+        }
+
         @Test
         public void 引数の指定した開催場所コードから開催場所がみつから無い場合にはnullを返す() {
             ShinsakaiKaisaiBashoCode 開催場所コード = new ShinsakaiKaisaiBashoCode(ShinsakaiKaisaiBashoDacMock.検索不可な開催場所コード);
@@ -52,12 +53,13 @@ public class ShinsakaiKaisaiBashoManagerTest extends DbeTestBase {
             assertThat(result, nullValue());
         }
 
-//        @Test
-//        public void 引数の指定した開催場所コードと開催場所状況を持つ開催場所を取得できる() {
-//            ShinsakaiKaisaiBashoCode 開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
-//            ShinsakaiKaisaiBasho result = sut.get審査会開催場所(開催場所コード, ShinsakaiKaisaiBashoJokyo.有効);
-//            assertThat(result.get開催場所コード(), is(開催場所コード));
-//        }
+        @Test
+        public void 引数の指定した開催場所コードと開催場所状況を持つ開催場所を取得できる() {
+            ShinsakaiKaisaiBashoCode 開催場所コード = new ShinsakaiKaisaiBashoCode(new RString("00001"));
+            ShinsakaiKaisaiBasho result = sut.get審査会開催場所(開催場所コード, ShinsakaiKaisaiBashoJokyo.有効);
+            assertThat(result.get開催場所コード(), is(開催場所コード));
+        }
+
         @Test
         public void 引数の指定した開催場所コードと開催場所状況から開催場所がみつから無い場合にはnullを返す() {
             ShinsakaiKaisaiBashoCode 開催場所コード = new ShinsakaiKaisaiBashoCode(ShinsakaiKaisaiBashoDacMock.検索不可な開催場所コード);
@@ -66,27 +68,28 @@ public class ShinsakaiKaisaiBashoManagerTest extends DbeTestBase {
         }
     }
 
-//    public static class get審査会開催場所List extends DbeTestBase {
-//
-//        private static ShinsakaiKaisaiBashoManager sut;
-//
-//        @Before
-//        public void setUp() {
-//            sut = new ShinsakaiKaisaiBashoManager(new ShinsakaiKaisaiBashoDacMock());
-//        }
-//
-//        @Test
-//        public void 開催場所情報に保持している全件データを取得する() {
-//            List<ShinsakaiKaisaiBasho> result = sut.get審査会開催場所List();
-//            assertThat(result.size(), is(2));
-//        }
-//
-//        @Test
-//        public void 引数の指定した開催場所状況を持つ開催場所を全件取得する() {
-//            List<ShinsakaiKaisaiBasho> result = sut.get審査会開催場所List(ShinsakaiKaisaiBashoJokyo.有効);
-//            assertThat(result.size(), is(1));
-//        }
-//    }
+    public static class get審査会開催場所List extends DbeTestBase {
+
+        private static ShinsakaiKaisaiBashoManager sut;
+
+        @Before
+        public void setUp() {
+            sut = new ShinsakaiKaisaiBashoManager(new ShinsakaiKaisaiBashoDacMock());
+        }
+
+        @Test
+        public void 開催場所情報に保持している全件データを取得する() {
+            List<ShinsakaiKaisaiBasho> result = sut.get審査会開催場所List();
+            assertThat(result.size(), is(2));
+        }
+
+        @Test
+        public void 引数の指定した開催場所状況を持つ開催場所を全件取得する() {
+            List<ShinsakaiKaisaiBasho> result = sut.get審査会開催場所List(ShinsakaiKaisaiBashoJokyo.有効);
+            assertThat(result.size(), is(1));
+        }
+    }
+
     public static class saveのテスト extends DbeTestBase {
 
         private static ShinsakaiKaisaiBashoManager sut;
