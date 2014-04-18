@@ -21,10 +21,12 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiYukoKikanTsukisu;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business._KaigoServiceShurui;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoServiceShurui;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
@@ -55,8 +57,8 @@ public class NinteiResultMock {
     private static NinteiResult createNinteiResult() {
         return new NinteiResult(
                 new ShinseishoKanriNo(new RString("1234567890")),
-                new KaigoHihokenshaNo(new RString("123456")),
-                new KaigoHihokenshaNo(new RString("456789")),
+                new ShoKisaiHokenshaNo(new RString("123456")),
+                new KaigoHihokenshaNo(new RString("4567890123")),
                 new FlexibleDate("20140101"),
                 createYokaigoJotai(),
                 createYokaigoJotaizoRei(),
@@ -84,7 +86,7 @@ public class NinteiResultMock {
 
     private static IKaigoServiceShurui createKaigoServiceShurui() {
         return spy(new _KaigoServiceShurui(
-                new RString("01"), new Range<>(RYearMonth.MIN, RYearMonth.MAX), new RString("サービス種類名称"),
+                new RString("01"), new Range<>(FlexibleYearMonth.MIN, FlexibleYearMonth.MAX), new RString("サービス種類名称"),
                 new RString("サービス種類名称略称"), new RString("サービス分類")));
     }
 

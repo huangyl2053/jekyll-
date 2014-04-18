@@ -19,11 +19,13 @@ import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5002NinteiKekkaJohoEntityMock
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiResultMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoServiceShurui;
 import jp.co.ndensan.reams.ur.urz.business._KaigoServiceShurui;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
@@ -45,8 +47,8 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
 
     private static NinteiKekkaMapper sut;
     private static final ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(new RString("1234567890"));
-    private static final KaigoHihokenshaNo 証記載保険者番号 = new KaigoHihokenshaNo(new RString("123456"));
-    private static final KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(new RString("456789"));
+    private static final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("123456"));
+    private static final KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(new RString("1000000000"));
     private static final FlexibleDate 要介護度認定年月日 = new FlexibleDate("20140101");
     private static final YokaigoJotaiKubunCode 要介護状態区分コード = new YokaigoJotaiKubunCode(new Code(new RString("1111111111")));
     private static final YokaigoJotaizoReiCode 要介護状態像例コード = new YokaigoJotaizoReiCode(new Code(new RString("2222222222")));
@@ -411,7 +413,7 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
 
     private static IKaigoServiceShurui create介護サービス種類(String code) {
         return new _KaigoServiceShurui(
-                new RString(code), new Range<>(RYearMonth.MIN, RYearMonth.MAX), new RString("サービス種類名称"),
+                new RString(code), new Range<>(FlexibleYearMonth.MIN, FlexibleYearMonth.MAX), new RString("サービス種類名称"),
                 new RString("サービス種類名称略称"), new RString("サービス分類"));
     }
 }

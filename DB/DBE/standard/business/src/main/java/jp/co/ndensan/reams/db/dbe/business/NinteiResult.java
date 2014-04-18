@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 
 /**
  * 要介護認定結果を保持するクラスです。
@@ -22,7 +23,7 @@ import static java.util.Objects.requireNonNull;
 public class NinteiResult {
 
     private final ShinseishoKanriNo 申請書管理番号;
-    private final KaigoHihokenshaNo 証記載保険者番号;
+    private final ShoKisaiHokenshaNo 証記載保険者番号;
     private final KaigoHihokenshaNo 被保険者番号;
     private final FlexibleDate 要介護度認定年月日;
     private final YokaigoJotai 要介護状態;
@@ -55,7 +56,7 @@ public class NinteiResult {
      */
     public NinteiResult(
             ShinseishoKanriNo 申請書管理番号,
-            KaigoHihokenshaNo 証記載保険者番号,
+            ShoKisaiHokenshaNo 証記載保険者番号,
             KaigoHihokenshaNo 被保険者番号,
             FlexibleDate 要介護度認定年月日,
             YokaigoJotai 要介護状態,
@@ -98,7 +99,7 @@ public class NinteiResult {
      *
      * @return 証記載保険者番号
      */
-    public KaigoHihokenshaNo get証記載保険者番号() {
+    public ShoKisaiHokenshaNo get証記載保険者番号() {
         return 証記載保険者番号;
     }
 

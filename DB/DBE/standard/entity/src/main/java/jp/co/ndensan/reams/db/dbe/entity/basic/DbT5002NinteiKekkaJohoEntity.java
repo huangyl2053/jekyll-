@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 
 /**
  * 要介護認定結果情報のエンティティクラスです。
@@ -33,7 +34,7 @@ public class DbT5002NinteiKekkaJohoEntity implements IDbAccessable {
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
     private ShinseishoKanriNo shinseishoKanriNo;
-    private KaigoHihokenshaNo shoKisaiHokenshaNo;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private KaigoHihokenshaNo hihokenshaNo;
     private FlexibleDate youkaigodoNinteiYMD;
     private Code youkaigoJotaiKubunCode;
@@ -124,7 +125,7 @@ public class DbT5002NinteiKekkaJohoEntity implements IDbAccessable {
      *
      * @return shoKisaiHokenshaNo
      */
-    public KaigoHihokenshaNo getShoKisaiHokenshaNo() {
+    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
 
@@ -133,7 +134,7 @@ public class DbT5002NinteiKekkaJohoEntity implements IDbAccessable {
      *
      * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
      */
-    public void setShoKisaiHokenshaNo(KaigoHihokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
@@ -519,7 +520,8 @@ public class DbT5002NinteiKekkaJohoEntity implements IDbAccessable {
      * このエンティティの主キーが他の{@literal DbT5002NinteiKekkaJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT5002NinteiKekkaJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT5002NinteiKekkaJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     public boolean equalsPrimaryKeys(DbT5002NinteiKekkaJohoEntity other) {
         if (other == null) {

@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoService;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoServiceShurui;
 import jp.co.ndensan.reams.ur.urz.realservice.IKaigoServiceManager;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
@@ -94,7 +96,7 @@ public class NinteiResultManagerTest extends DbeTestBase {
     private static IKaigoServiceManager createKaigoServiceManager() {
         IKaigoService service = createKaigoService();
         IKaigoServiceManager manager = mock(IKaigoServiceManager.class);
-        when(manager.get介護サービス(any(RDate.class), any(RString.class))).thenReturn(service);
+        when(manager.get介護サービス(any(FlexibleYearMonth.class), any(RString.class))).thenReturn(service);
         return manager;
     }
 

@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.ur.urz.business.IKaigoService;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoServiceShurui;
 import jp.co.ndensan.reams.ur.urz.realservice.IKaigoServiceManager;
 import jp.co.ndensan.reams.ur.urz.realservice.KaigoServiceManagerFactory;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -82,7 +84,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new RDate(entity.getYoukaigodoNinteiYMD().toString()), entity.getKaigoServiceShurui());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui());
         return service.get介護サービス種類();
     }
 }

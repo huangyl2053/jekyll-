@@ -20,7 +20,7 @@ public enum DbT5002NinteiKekkaJoho implements IColumnDefinition {
     lastUpdateReamsLoginId(2147483647, 0),
     shinseishoKanriNo(10, 0),
     shoKisaiHokenshaNo(6, 0),
-    hihokenshaNo(6, 0),
+    hihokenshaNo(10, 0),
     youkaigodoNinteiYMD(2147483647, 0),
     youkaigoJotaiKubunCode(2147483647, 0),
     ninteiYukoKikan(5, 0),

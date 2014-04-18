@@ -1,5 +1,5 @@
 ﻿shinseishoKanriNo,varchar,ShinseishoKanriNo,,,,,A
-shoKisaiHokenshaNo,varchar,KaigoHihokenshaNo,,,,,A
+shoKisaiHokenshaNo,varchar,shoKisaiHokenshaNo,,,,,A
 hihokenshaNo,varchar,KaigoHihokenshaNo,,,,,A
 youkaigodoNinteiYMD,UDD015YMD,FlexibleDate,,,,,A
 youkaigoJotaiKubunCode,UDD035Code,Code,,,,,A
