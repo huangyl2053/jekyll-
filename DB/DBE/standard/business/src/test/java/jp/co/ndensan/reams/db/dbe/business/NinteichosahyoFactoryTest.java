@@ -6,9 +6,10 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.business.core.chosahyo.Ninteichosahyo;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
-import org.junit.Test;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Test;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertThat;
 
@@ -18,9 +19,9 @@ import static org.junit.Assert.assertThat;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class NinteichosahyoFactoryTest {
+public class NinteichosahyoFactoryTest extends DbeTestBase {
 
-    public static class create概況情報Instance {
+    public static class create概況情報Instance extends DbeTestBase {
 
         @Test
         public void 厚労省IF識別区分の指定がある時_createサービス状況Instanceは_Ninteichosahyoのインスタンスを返す() {
@@ -28,7 +29,7 @@ public class NinteichosahyoFactoryTest {
         }
     }
 
-    public static class create基本情報Instance {
+    public static class create基本情報Instance extends DbeTestBase {
 
         @Test
         public void 厚労省IF識別区分の指定がある時_create基本情報Instanceは_Ninteichosahyoのインスタンスを返す() {

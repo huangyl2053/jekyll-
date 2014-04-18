@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core;
 
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -18,9 +19,9 @@ import static org.junit.Assert.assertThat;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class InputItemTest {
+public class InputItemTest extends DbeTestBase {
 
-    public static class toValue {
+    public static class toValue extends DbeTestBase {
 
         @Test
         public void 入力値の指定がある時_toValueは_入力値を返す() {
@@ -28,7 +29,7 @@ public class InputItemTest {
         }
     }
 
-    public static class isWapperFor {
+    public static class isWapperFor extends DbeTestBase {
 
         @Test
         public void 入力項目を指定した時_isWapperForは_TRUEを返す() {
@@ -41,7 +42,7 @@ public class InputItemTest {
         }
     }
 
-    public static class unwrap {
+    public static class unwrap extends DbeTestBase {
 
         @Test
         public void 入力項目を指定した時_unwrapは_入力項目のインスタンスを返す() {

@@ -7,8 +7,10 @@ package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ICodeWrapValueObject;
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import static java.util.Objects.requireNonNull;
 
 /**
  * 要介護認定調査の実施場所区分コードを扱うクラスです。
@@ -25,7 +27,7 @@ public class NinteichosaJisshibashoKubunCode implements ICodeWrapValueObject, Co
      * @param code コード
      */
     public NinteichosaJisshibashoKubunCode(Code code) {
-        this.code = code;
+        this.code = requireNonNull(code, Messages.E00003.replace("code", getClass().getName()).getMessage());
     }
 
     @Override

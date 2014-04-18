@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.Nintei
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemSubGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItemNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -25,7 +26,7 @@ import static org.junit.Assert.assertThat;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class NinteichosaItemTest {
+public class NinteichosaItemTest extends DbeTestBase {
 
     private static final int AS_NULL項目無し = 0;
     private static final int AS_調査項目グループがNULL = 1;
@@ -35,7 +36,7 @@ public class NinteichosaItemTest {
     private static final int AS_表示名称がNULL = 5;
     private static final int AS_回答項目がNULL = 6;
 
-    public static class コンストラクタ {
+    public static class コンストラクタ extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 調査項目グループがNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
@@ -68,7 +69,7 @@ public class NinteichosaItemTest {
         }
     }
 
-    public static class is調査結果項目 {
+    public static class is調査結果項目 extends DbeTestBase {
 
         @Test
         public void 調査項目の時_is調査結果項目は_FALSEを返す() {
@@ -76,7 +77,7 @@ public class NinteichosaItemTest {
         }
     }
 
-    public static class get調査項目グループ {
+    public static class get調査項目グループ extends DbeTestBase {
 
         @Test
         public void 調査項目グループの設定がある時_get調査項目グループは_設置値を返す() {
@@ -84,7 +85,7 @@ public class NinteichosaItemTest {
         }
     }
 
-    public static class get調査項目サブグループ {
+    public static class get調査項目サブグループ extends DbeTestBase {
 
         @Test
         public void 調査項目サブグループの設定がある時_get調査項目サブグループは_設置値を返す() {
@@ -92,7 +93,7 @@ public class NinteichosaItemTest {
         }
     }
 
-    public static class get調査項目グループ内番号 {
+    public static class get調査項目グループ内番号 extends DbeTestBase {
 
         @Test
         public void 調査項目グループ内番号の設定がある時_get調査項目グループ内番号は_設定値を返す() {
@@ -100,7 +101,7 @@ public class NinteichosaItemTest {
         }
     }
 
-    public static class get調査項目サブグループ内番号 {
+    public static class get調査項目サブグループ内番号 extends DbeTestBase {
 
         @Test
         public void 調査項目サブグループ内番号の設定がある時_get調査項目サブグループ内番号は_設定値を返す() {
@@ -108,7 +109,7 @@ public class NinteichosaItemTest {
         }
     }
 
-    public static class get調査項目番号 {
+    public static class get調査項目番号 extends DbeTestBase {
 
         @Test
         public void 調査項目番号の設定がある時_get調査項目番号は_設定値を返す() {
@@ -116,7 +117,7 @@ public class NinteichosaItemTest {
         }
     }
 
-    public static class get調査項目区分 {
+    public static class get調査項目区分 extends DbeTestBase {
 
         @Test
         public void 調査項目区分の設定がある時_get調査項目区分は_設定値を返す() {
@@ -124,7 +125,7 @@ public class NinteichosaItemTest {
         }
     }
 
-    public static class get表示名称 {
+    public static class get表示名称 extends DbeTestBase {
 
         @Test
         public void 表示名称の設定がある時_get表示名称は_設定値を返す() {
@@ -132,7 +133,7 @@ public class NinteichosaItemTest {
         }
     }
 
-    public static class get回答項目 {
+    public static class get回答項目 extends DbeTestBase {
 
         @Test
         public void 選択肢が2択の時_get回答項目は_2件の選択肢を返す() {

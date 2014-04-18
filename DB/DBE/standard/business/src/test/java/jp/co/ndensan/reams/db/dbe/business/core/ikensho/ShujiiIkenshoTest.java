@@ -5,9 +5,10 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ikensho;
 
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoFactory;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -22,9 +23,9 @@ import static org.junit.Assert.assertThat;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class ShujiiIkenshoTest {
+public class ShujiiIkenshoTest extends DbeTestBase {
 
-    public static class コンストラクタ {
+    public static class コンストラクタ extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 意見書定義がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
@@ -37,7 +38,7 @@ public class ShujiiIkenshoTest {
         }
     }
 
-    public static class get意見書項目 {
+    public static class get意見書項目 extends DbeTestBase {
 
         @Test
         public void 意見書項目区分の指定がある時_get意見書項目は_該当の意見書項目を返す() {
@@ -50,7 +51,7 @@ public class ShujiiIkenshoTest {
         }
     }
 
-    public static class get意見書項目List {
+    public static class get意見書項目List extends DbeTestBase {
 
         @Test
         public void 意見書項目グループの指定がある時_get意見書項目Listは_該当の意見書項目を返す() {
@@ -63,7 +64,7 @@ public class ShujiiIkenshoTest {
         }
     }
 
-    public static class get意見書項目ListAll {
+    public static class get意見書項目ListAll extends DbeTestBase {
 
         @Test
         public void 意見書項目の設定がある時_get意見書項目ListAllは_全意見書項目を返す() {
@@ -71,7 +72,7 @@ public class ShujiiIkenshoTest {
         }
     }
 
-    public static class get主要意見書項目List {
+    public static class get主要意見書項目List extends DbeTestBase {
 
         @Test
         public void 主要意見書項目の設定がある時_get主要意見書項目Listは_該当の意見書項目を返す() {
@@ -79,7 +80,7 @@ public class ShujiiIkenshoTest {
         }
     }
 
-    public static class get意見書項目グループ {
+    public static class get意見書項目グループ extends DbeTestBase {
 
         @Test
         public void 意見書項目グループの設定がある時_get意見書項目グループは_全意見書項目グループを返す() {

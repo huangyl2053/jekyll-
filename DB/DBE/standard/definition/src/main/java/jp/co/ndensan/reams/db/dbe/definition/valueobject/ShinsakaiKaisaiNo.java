@@ -4,48 +4,64 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
+import static java.util.Objects.requireNonNull;
 
 /**
- * 審査会開催番号を表すクラスです。
+ * 審査会開催番号を保持するクラスです。
  *
- * @author n8178 城間篤人
+ * @author N8156 宮本 康
  */
 public class ShinsakaiKaisaiNo implements IValueObject<Integer>, Comparable<ShinsakaiKaisaiNo> {
 
-    private final int 審査会開催番号;
+    private final Integer theValue;
 
     /**
-     * 審査会開催番号を受け取り、インスタンスを生成します。
+     * 指定の値を持った、ShinsakaiKaisaiNoを生成します。
      *
-     * @param 審査会開催番号 審査会開催番号
+     * @param value 値
+     * @throws NullPointerException
      */
-    public ShinsakaiKaisaiNo(int 審査会開催番号) {
-        this.審査会開催番号 = 審査会開催番号;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 17 * hash + this.審査会開催番号;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object 比較対象) {
-        if (比較対象 == null || getClass() != 比較対象.getClass()) {
-            return false;
-        }
-        return ((ShinsakaiKaisaiNo) 比較対象).value().equals(this.value());
+    public ShinsakaiKaisaiNo(Integer value) {
+        requireNonNull(value, Messages.E00003.replace("value", getClass().getName()).getMessage());
+        this.theValue = value;
     }
 
     @Override
     public Integer value() {
-        return 審査会開催番号;
+        return this.theValue;
     }
 
     @Override
-    public int compareTo(ShinsakaiKaisaiNo 比較対象) {
-        return this.value().compareTo(比較対象.value());
+    public int compareTo(ShinsakaiKaisaiNo target) {
+        return this.theValue.compareTo(target.value());
+    }
+
+    @Override
+    public boolean equals(Object target) {
+        if (isNull(target) || isNotSameClass(target.getClass())) {
+            return false;
+        }
+        return hasSameValue((ShinsakaiKaisaiNo) target);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 17 * hash + theValue;
+        return hash;
+    }
+
+    private boolean isNull(Object target) {
+        return target == null;
+    }
+
+    private boolean isNotSameClass(Class clazz) {
+        return clazz != this.getClass();
+    }
+
+    private boolean hasSameValue(ShinsakaiKaisaiNo target) {
+        return target.value().equals(this.theValue);
     }
 }

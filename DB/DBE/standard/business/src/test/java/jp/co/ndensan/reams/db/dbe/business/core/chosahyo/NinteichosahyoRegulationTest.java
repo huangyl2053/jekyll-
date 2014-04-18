@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.chosahyo;
 
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.junit.Test;
@@ -16,9 +17,9 @@ import static org.junit.Assert.assertThat;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class NinteichosahyoRegulationTest {
+public class NinteichosahyoRegulationTest extends DbeTestBase {
 
-    public static class getサービス状況調査定義 {
+    public static class getサービス状況調査定義 extends DbeTestBase {
 
         @Test
         public void サービス状況調査定義に設定がある時_getサービス状況調査定義は_該当の概況調査定義を返す() {
@@ -26,7 +27,7 @@ public class NinteichosahyoRegulationTest {
         }
     }
 
-    public static class get基本調査定義 {
+    public static class get基本調査定義 extends DbeTestBase {
 
         @Test
         public void 基本調査定義に設定がある時_get基本調査定義は_該当の基本調査定義を返す() {

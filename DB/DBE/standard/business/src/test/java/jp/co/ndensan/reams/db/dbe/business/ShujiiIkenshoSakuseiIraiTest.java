@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.business.IDoctors;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikan;
@@ -53,7 +54,7 @@ import static org.mockito.Mockito.*;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class ShujiiIkenshoSakuseiIraiTest {
+public class ShujiiIkenshoSakuseiIraiTest extends DbeTestBase {
 
 //TODO N1013 松本 mockの取り扱いがわかるまで保留　2014/03/24
     private static final int AS_申請書管理番号がNULL = 1;
@@ -71,7 +72,7 @@ public class ShujiiIkenshoSakuseiIraiTest {
     private static final int AS_督促情報がNULL = 13;
     private static final int AS_督促情報内項目がNULL = 14;
 
-    public static class コンストラクタ {
+    public static class コンストラクタ extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 申請書管理番号がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
@@ -99,7 +100,7 @@ public class ShujiiIkenshoSakuseiIraiTest {
         }
     }
 
-    public static class is意見書作成依頼済み {
+    public static class is意見書作成依頼済み extends DbeTestBase {
 
         @Test
         public void 意見書作成依頼済の時_is意見書作成依頼済みは_TRUEを返す() {
@@ -112,7 +113,7 @@ public class ShujiiIkenshoSakuseiIraiTest {
         }
     }
 
-    public static class is意見書出力済み {
+    public static class is意見書出力済み extends DbeTestBase {
 
         @Test
         public void 意見書出力済の時_is意見書出力済みは_TRUEを返す() {
@@ -125,7 +126,7 @@ public class ShujiiIkenshoSakuseiIraiTest {
         }
     }
 
-    public static class is請求書出力済み {
+    public static class is請求書出力済み extends DbeTestBase {
 
         @Test
         public void 請求書出力済の時_is請求書出力済みは_TRUEを返す() {
@@ -138,7 +139,7 @@ public class ShujiiIkenshoSakuseiIraiTest {
         }
     }
 
-    public static class is意見書作成督促済み {
+    public static class is意見書作成督促済み extends DbeTestBase {
 
         @Test
         public void 督促情報がある時_is意見書作成督促済みは_TRUEを返す() {

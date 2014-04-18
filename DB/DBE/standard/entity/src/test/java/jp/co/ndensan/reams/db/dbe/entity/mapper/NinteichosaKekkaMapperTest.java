@@ -5,12 +5,13 @@
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaResult;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaKekkaEntityMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaResultMock;
 import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaEntity;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
@@ -28,9 +29,9 @@ import static org.junit.Assert.assertThat;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class NinteichosaKekkaMapperTest {
+public class NinteichosaKekkaMapperTest extends DbeTestBase {
 
-    public static class toNinteichosaResult {
+    public static class toNinteichosaResult extends DbeTestBase {
 
         @Test
         public void 申請書管理番号の設定がある時_toNinteichosaResult_get申請書管理番号は_設定値を返す() {
@@ -43,7 +44,7 @@ public class NinteichosaKekkaMapperTest {
         }
     }
 
-    public static class toNinteichosaKekka_概況調査結果 {
+    public static class toNinteichosaKekka_概況調査結果 extends DbeTestBase {
 
         @Test
         public void 厚労省IF識別区分の設定がある時_toNinteichosaResult_get厚労省IF識別区分は_設定値を返す() {
@@ -230,7 +231,7 @@ public class NinteichosaKekkaMapperTest {
         }
     }
 
-    public static class toNinteichosaResult_調査票結果 {
+    public static class toNinteichosaResult_調査票結果 extends DbeTestBase {
 
         @Test
         public void 厚労省IF識別区分の設定がある時_toNinteichosaResult_get厚労省IF識別区分は_設定値を返す() {
@@ -618,7 +619,7 @@ public class NinteichosaKekkaMapperTest {
         }
     }
 
-    public static class toNinteichosaKekkaEntity_getDbT5008NinteichosaKekkaJohoEntity {
+    public static class toNinteichosaKekkaEntity_getDbT5008NinteichosaKekkaJohoEntity extends DbeTestBase {
 
         @Test
         public void 申請書管理番号の設定がある時_toNinteichosaKekkaEntity_getShinseishoKanriNoは_設定値を返す() {
@@ -816,7 +817,7 @@ public class NinteichosaKekkaMapperTest {
         }
     }
 
-    public static class toNinteichosaKekkaEntity_getDbT5009NinteichosahyoJohoEntity {
+    public static class toNinteichosaKekkaEntity_getDbT5009NinteichosahyoJohoEntity extends DbeTestBase {
 
         @Test
         public void 申請書管理番号の設定がある時_toNinteichosaKekkaEntity_getShinseishoKanriNoは_設定値を返す() {

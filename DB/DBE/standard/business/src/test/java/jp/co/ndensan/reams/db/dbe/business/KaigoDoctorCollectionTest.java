@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+//import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -29,9 +31,9 @@ import static org.mockito.Mockito.*;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class KaigoDoctorCollectionTest {
+public class KaigoDoctorCollectionTest extends DbeTestBase {
 
-    public static class コンストラクタ {
+    public static class コンストラクタ extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 介護医師リストがNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
@@ -39,7 +41,7 @@ public class KaigoDoctorCollectionTest {
         }
     }
 
-    public static class get介護医師 {
+    public static class get介護医師 extends DbeTestBase {
 
         @Test
         public void 介護医師情報が存在する時_get介護医師は_該当の介護医師情報を返す() {
@@ -66,7 +68,7 @@ public class KaigoDoctorCollectionTest {
         }
     }
 
-    public static class sub介護医師List {
+    public static class sub介護医師List extends DbeTestBase {
 
         @Test
         public void 介護医師情報が存在する時_sub介護医師Listは_該当の介護医師情報を返す() {
@@ -81,7 +83,7 @@ public class KaigoDoctorCollectionTest {
         }
     }
 
-    public static class isEmpty {
+    public static class isEmpty extends DbeTestBase {
 
         @Test
         public void 介護医師情報が存在する時_isEmptyは_FALSEを返す() {
@@ -108,11 +110,11 @@ public class KaigoDoctorCollectionTest {
         return new KaigoDoctor(
                 mock(IDoctor.class),
                 new Shujii(
-                createShoKisaiHokenshaNo(証記載保険者番号),
-                createKaigoIryoKikanCode(介護医療機関コード),
-                createKaigoDoctorCode(介護医師コード),
-                mock(IIryoKikanCode.class), new RString("1234"), IshiJokyo.有効,
-                mock(YubinNo.class), mock(AtenaJusho.class), mock(TelNo.class), new RString("0123456789")),
+                        createShoKisaiHokenshaNo(証記載保険者番号),
+                        createKaigoIryoKikanCode(介護医療機関コード),
+                        createKaigoDoctorCode(介護医師コード),
+                        mock(IIryoKikanCode.class), new RString("1234"), IshiJokyo.有効,
+                        mock(YubinNo.class), mock(AtenaJusho.class), mock(TelNo.class), new RString("0123456789")),
                 mock(KaigoIryoKikan.class));
     }
 
