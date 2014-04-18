@@ -99,14 +99,14 @@ public class NinteichosaResultMock {
                 new NinteichosaIraiRirekiNo(0),
                 KoroshoIFKubun.V09A,
                 new NinteichosaResultOfGaikyoKihon(
-                        NinteichosaIraiKubun.初回,
-                        1,
-                        new FlexibleDate("20140101"),
-                        new FlexibleDate("20140202"),
-                        NinteichosaKubun.新規調査,
-                        new _NinteiChosain(new RString("12345678"), new _Name(new AtenaMeisho("氏名"), new AtenaKanaMeisho("")), createKaigoJigyosha()),
-                        new NinteichosaJisshibashoKubun(
-                                new NinteichosaJisshibashoKubunCode(new Code(new RString("12345678"))).asCode(), new RString("認定調査実施場所名称"), RString.EMPTY)),
+                NinteichosaIraiKubun.初回,
+                1,
+                new FlexibleDate("20140101"),
+                new FlexibleDate("20140202"),
+                NinteichosaKubun.新規調査,
+                new _NinteiChosain(new RString("12345678"), new _Name(new AtenaMeisho("氏名"), new AtenaKanaMeisho("")), createKaigoJigyosha()),
+                new NinteichosaJisshibashoKubun(
+                new NinteichosaJisshibashoKubunCode(new Code(new RString("12345678"))).asCode(), new RString("認定調査実施場所名称"), RString.EMPTY)),
                 editor.getNinteichosahyo()));
     }
 

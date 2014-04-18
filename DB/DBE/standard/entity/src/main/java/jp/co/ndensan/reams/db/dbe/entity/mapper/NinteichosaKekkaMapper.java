@@ -76,7 +76,7 @@ public final class NinteichosaKekkaMapper {
         entity.setShinseishoKanriNo(ninteichosaKekka.get概況調査結果().get申請書管理番号());
         entity.setNinteichosaRirekiNo(ninteichosaKekka.get概況調査結果().get認定調査依頼履歴番号().value().intValue());
         entity.setKoroshoIfShikibetsuCode(ninteichosaKekka.get概況調査結果().get厚労省IF識別区分().getCode());
-        entity.setNinteichousaIraiKubunCode(new Code(rsltKihon.get認定調査依頼区分().getCode()));
+        entity.setNinteichosaIraiKubunCode(new Code(rsltKihon.get認定調査依頼区分().getCode()));
         entity.setNinteichosaIraiKaisu(rsltKihon.get認定調査回数());
         entity.setNinteichosaJisshiYMD(rsltKihon.get認定調査実施年月日());
         entity.setNinteichosaJuryoYMD(rsltKihon.get認定調査受領年月日());
@@ -117,6 +117,8 @@ public final class NinteichosaKekkaMapper {
         entity.setRiyoShisetsuTelNo(new TelNo(editor.getResultByString(NinteichosaItemKubunOfGaikyo.利用施設電話番号)));
         entity.setRiyoShisetsuYubinNo(new YubinNo(editor.getResultByString(NinteichosaItemKubunOfGaikyo.利用施設郵便番号)));
         entity.setGaikyochosaTokkijiko(editor.getResultByString(NinteichosaItemKubunOfGaikyo.概況特記事項));
+        entity.setShogaiNichijoSeikatsuJiritsudoCode(editor.getResultByCode(NinteichosaItemKubunOfKihon.障害高齢者の日常生活自立度));
+        entity.setNinchishoNichijoSeikatsuJiritsudoCode(editor.getResultByCode(NinteichosaItemKubunOfKihon.認知症高齢者の日常生活自立度));
 
         return entity;
     }
@@ -203,8 +205,6 @@ public final class NinteichosaKekkaMapper {
         entity.setCk_monitorSokutei(editor.getResultByString(NinteichosaItemKubunOfKihon.モニター測定));
         entity.setCk_jokusoShochi(editor.getResultByString(NinteichosaItemKubunOfKihon.じょくそうの処置));
         entity.setCk_catheter(editor.getResultByString(NinteichosaItemKubunOfKihon.カテーテル));
-        entity.setShogaiNichijoSeikatsuJiritsudoCode(editor.getResultByCode(NinteichosaItemKubunOfKihon.障害高齢者の日常生活自立度));
-        entity.setNinchishoNichijoSeikatsuJiritsudoCode(editor.getResultByCode(NinteichosaItemKubunOfKihon.認知症高齢者の日常生活自立度));
 
         return entity;
     }
@@ -249,20 +249,22 @@ public final class NinteichosaKekkaMapper {
         editor.setResult(NinteichosaItemKubunOfGaikyo.利用施設電話番号, entity.getRiyoShisetsuTelNo().value());
         editor.setResult(NinteichosaItemKubunOfGaikyo.利用施設郵便番号, entity.getRiyoShisetsuYubinNo().value());
         editor.setResult(NinteichosaItemKubunOfGaikyo.概況特記事項, entity.getGaikyochosaTokkijiko());
+        editor.setResult(NinteichosaItemKubunOfKihon.障害高齢者の日常生活自立度, entity.getShogaiNichijoSeikatsuJiritsudoCode().value());
+        editor.setResult(NinteichosaItemKubunOfKihon.認知症高齢者の日常生活自立度, entity.getNinchishoNichijoSeikatsuJiritsudoCode().value());
 
         return new NinteichosaResultOfGaikyo(
                 new ShinseishoKanriNo(entity.getShinseishoKanriNo().value()),
                 new NinteichosaIraiRirekiNo(entity.getNinteichosaRirekiNo()),
                 koroshoIFKubun,
                 new NinteichosaResultOfGaikyoKihon(
-                        NinteichosaIraiKubun.toValue(entity.getNinteichousaIraiKubunCode().value()),
-                        entity.getNinteichosaIraiKaisu(),
-                        entity.getNinteichosaJisshiYMD(),
-                        entity.getNinteichosaJuryoYMD(),
-                        NinteichosaKubun.toValue(entity.getNinteiChosaKubunCode().value()),
-                        chosain,
-                        new NinteichosaJisshibashoKubun(
-                                new NinteichosaJisshibashoKubunCode(entity.getChosaJisshiBashoCode()).asCode(), entity.getChosaJisshiBashoMeisho(), RString.EMPTY)),
+                NinteichosaIraiKubun.toValue(entity.getNinteichosaIraiKubunCode().value()),
+                entity.getNinteichosaIraiKaisu(),
+                entity.getNinteichosaJisshiYMD(),
+                entity.getNinteichosaJuryoYMD(),
+                NinteichosaKubun.toValue(entity.getNinteiChosaKubunCode().value()),
+                chosain,
+                new NinteichosaJisshibashoKubun(
+                new NinteichosaJisshibashoKubunCode(entity.getChosaJisshiBashoCode()).asCode(), entity.getChosaJisshiBashoMeisho(), RString.EMPTY)),
                 editor.getNinteichosahyo());
     }
 
@@ -346,8 +348,6 @@ public final class NinteichosaKekkaMapper {
         editor.setResult(NinteichosaItemKubunOfKihon.モニター測定, entity.getCk_monitorSokutei());
         editor.setResult(NinteichosaItemKubunOfKihon.じょくそうの処置, entity.getCk_jokusoShochi());
         editor.setResult(NinteichosaItemKubunOfKihon.カテーテル, entity.getCk_catheter());
-        editor.setResult(NinteichosaItemKubunOfKihon.障害高齢者の日常生活自立度, entity.getShogaiNichijoSeikatsuJiritsudoCode().value());
-        editor.setResult(NinteichosaItemKubunOfKihon.認知症高齢者の日常生活自立度, entity.getNinchishoNichijoSeikatsuJiritsudoCode().value());
 
         return new NinteichosaResultOfKihon(entity.getShinseishoKanriNo(), new NinteichosaIraiRirekiNo(entity.getNinteichosaRirekiNo()),
                 koroshoIFKubun, editor.getNinteichosahyo());

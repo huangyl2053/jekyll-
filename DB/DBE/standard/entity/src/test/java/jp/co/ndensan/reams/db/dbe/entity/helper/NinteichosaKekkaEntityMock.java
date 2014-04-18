@@ -55,7 +55,7 @@ public class NinteichosaKekkaEntityMock {
         entity.setShinseishoKanriNo(new ShinseishoKanriNo(new RString("1234567890")));
         entity.setNinteichosaRirekiNo(0);
         entity.setKoroshoIfShikibetsuCode(new RString("09A"));
-        entity.setNinteichousaIraiKubunCode(new Code(NinteichosaIraiKubun.初回.getCode()));
+        entity.setNinteichosaIraiKubunCode(new Code(NinteichosaIraiKubun.初回.getCode()));
         entity.setNinteichosaIraiKaisu(1);
         entity.setNinteichosaJisshiYMD(new FlexibleDate("20140101"));
         entity.setNinteichosaJuryoYMD(new FlexibleDate("20140202"));
@@ -94,6 +94,8 @@ public class NinteichosaKekkaEntityMock {
         entity.setRiyoShisetsuTelNo(new TelNo(new RString("利用施設電話番号")));
         entity.setRiyoShisetsuYubinNo(new YubinNo(new RString("1234567")));
         entity.setGaikyochosaTokkijiko(new RString("概況特記事項"));
+        entity.setShogaiNichijoSeikatsuJiritsudoCode(new Code(ShogaiJiritsu.Ａ１.getCode()));
+        entity.setNinchishoNichijoSeikatsuJiritsudoCode(new Code(NinchishoJiritsu.Ⅱａ.getCode()));
         return spy(entity);
     }
 
@@ -181,8 +183,6 @@ public class NinteichosaKekkaEntityMock {
         entity.setCk_monitorSokutei(NaiAru.ある.getCode());
         entity.setCk_jokusoShochi(NaiAru.ない.getCode());
         entity.setCk_catheter(NaiAru.ある.getCode());
-        entity.setShogaiNichijoSeikatsuJiritsudoCode(new Code(ShogaiJiritsu.Ａ１.getCode()));
-        entity.setNinchishoNichijoSeikatsuJiritsudoCode(new Code(NinchishoJiritsu.Ⅱａ.getCode()));
         return spy(entity);
     }
 }

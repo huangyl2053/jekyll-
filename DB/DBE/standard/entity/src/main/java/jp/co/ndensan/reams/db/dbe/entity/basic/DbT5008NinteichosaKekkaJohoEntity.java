@@ -1,26 +1,30 @@
 package jp.co.ndensan.reams.db.dbe.entity.basic;
 
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import java.util.Objects;
+import jp.co.ndensan.reams.db.dbe.definition.DbeShubetsuKey;
 
 /**
- * 要介護認定調査結果情報のエンティティクラスです。
+ * DbT5008NinteichosaKekkaJohoの項目定義クラスです
  *
- * @author N8156 宮本 康
+ * @author n8178 城間篤人
  */
 public class DbT5008NinteichosaKekkaJohoEntity implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Generated Code">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5008NinteichosaKekkaJoho");
@@ -37,7 +41,7 @@ public class DbT5008NinteichosaKekkaJohoEntity implements IDbAccessable {
     @PrimaryKey
     private int ninteichosaRirekiNo;
     private RString koroshoIfShikibetsuCode;
-    private Code ninteichousaIraiKubunCode;
+    private Code ninteichosaIraiKubunCode;
     private int ninteichosaIraiKaisu;
     private FlexibleDate ninteichosaJisshiYMD;
     private FlexibleDate ninteichosaJuryoYMD;
@@ -94,6 +98,9 @@ public class DbT5008NinteichosaKekkaJohoEntity implements IDbAccessable {
     private TelNo riyoShisetsuTelNo;
     private YubinNo riyoShisetsuYubinNo;
     private RString gaikyochosaTokkijiko;
+    private Code ninchishoNichijoSeikatsuJiritsudoCode;
+    private Code shogaiNichijoSeikatsuJiritsudoCode;
+    private Code shinsakaiYusenWaritsukeKubunCode;
     private FlexibleDate tokkijikoUketsukeYMD;
     private FlexibleDate tokkijikoJuryoYMD;
 
@@ -197,21 +204,21 @@ public class DbT5008NinteichosaKekkaJohoEntity implements IDbAccessable {
     }
 
     /**
-     * getNinteichousaIraiKubunCode
+     * getNinteichosaIraiKubunCode
      *
-     * @return ninteichousaIraiKubunCode
+     * @return ninteichosaIraiKubunCode
      */
-    public Code getNinteichousaIraiKubunCode() {
-        return ninteichousaIraiKubunCode;
+    public Code getNinteichosaIraiKubunCode() {
+        return ninteichosaIraiKubunCode;
     }
 
     /**
-     * setNinteichousaIraiKubunCode
+     * setNinteichosaIraiKubunCode
      *
-     * @param ninteichousaIraiKubunCode ninteichousaIraiKubunCode
+     * @param ninteichosaIraiKubunCode ninteichosaIraiKubunCode
      */
-    public void setNinteichousaIraiKubunCode(Code ninteichousaIraiKubunCode) {
-        this.ninteichousaIraiKubunCode = ninteichousaIraiKubunCode;
+    public void setNinteichosaIraiKubunCode(Code ninteichosaIraiKubunCode) {
+        this.ninteichosaIraiKubunCode = ninteichosaIraiKubunCode;
     }
 
     /**
@@ -287,6 +294,24 @@ public class DbT5008NinteichosaKekkaJohoEntity implements IDbAccessable {
     }
 
     /**
+     * getChosaItakuKubunCodeMeisho
+     *
+     * @return Meisho
+     */
+    public RString getChosaItakuKubunCodeMeisho() {
+        return CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.調査委託区分, chosaItakuKubunCode);
+    }
+
+    /**
+     * getChosaItakuKubunCodeRyakusho
+     *
+     * @return Ryakusho
+     */
+    public RString getChosaItakuKubunCodeRyakusho() {
+        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.調査委託区分, chosaItakuKubunCode);
+    }
+
+    /**
      * getNinteiChosaKubunCode
      *
      * @return ninteiChosaKubunCode
@@ -302,6 +327,24 @@ public class DbT5008NinteichosaKekkaJohoEntity implements IDbAccessable {
      */
     public void setNinteiChosaKubunCode(Code ninteiChosaKubunCode) {
         this.ninteiChosaKubunCode = ninteiChosaKubunCode;
+    }
+
+    /**
+     * getNinteiChosaKubunCodeMeisho
+     *
+     * @return Meisho
+     */
+    public RString getNinteiChosaKubunCodeMeisho() {
+        return CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.認定調査区分, ninteiChosaKubunCode);
+    }
+
+    /**
+     * getNinteiChosaKubunCodeRyakusho
+     *
+     * @return Ryakusho
+     */
+    public RString getNinteiChosaKubunCodeRyakusho() {
+        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.認定調査区分, ninteiChosaKubunCode);
     }
 
     /**
@@ -359,6 +402,24 @@ public class DbT5008NinteichosaKekkaJohoEntity implements IDbAccessable {
     }
 
     /**
+     * getChosaJisshiBashoCodeMeisho
+     *
+     * @return Meisho
+     */
+    public RString getChosaJisshiBashoCodeMeisho() {
+        return CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.実施場所, chosaJisshiBashoCode);
+    }
+
+    /**
+     * getChosaJisshiBashoCodeRyakusho
+     *
+     * @return Ryakusho
+     */
+    public RString getChosaJisshiBashoCodeRyakusho() {
+        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.実施場所, chosaJisshiBashoCode);
+    }
+
+    /**
      * getChosaJisshiBashoMeisho
      *
      * @return chosaJisshiBashoMeisho
@@ -395,6 +456,24 @@ public class DbT5008NinteichosaKekkaJohoEntity implements IDbAccessable {
     }
 
     /**
+     * getGenzainoJokyoCodeMeisho
+     *
+     * @return Meisho
+     */
+    public RString getGenzainoJokyoCodeMeisho() {
+        return CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.現在の状況, genzainoJokyoCode);
+    }
+
+    /**
+     * getGenzainoJokyoCodeRyakusho
+     *
+     * @return Ryakusho
+     */
+    public RString getGenzainoJokyoCodeRyakusho() {
+        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.現在の状況, genzainoJokyoCode);
+    }
+
+    /**
      * getServiceKubunCode
      *
      * @return serviceKubunCode
@@ -410,6 +489,24 @@ public class DbT5008NinteichosaKekkaJohoEntity implements IDbAccessable {
      */
     public void setServiceKubunCode(Code serviceKubunCode) {
         this.serviceKubunCode = serviceKubunCode;
+    }
+
+    /**
+     * getServiceKubunCodeMeisho
+     *
+     * @return Meisho
+     */
+    public RString getServiceKubunCodeMeisho() {
+        return CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.現在のサービス区分, serviceKubunCode);
+    }
+
+    /**
+     * getServiceKubunCodeRyakusho
+     *
+     * @return Ryakusho
+     */
+    public RString getServiceKubunCodeRyakusho() {
+        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.現在のサービス区分, serviceKubunCode);
     }
 
     /**
@@ -1234,6 +1331,116 @@ public class DbT5008NinteichosaKekkaJohoEntity implements IDbAccessable {
     }
 
     /**
+     * getNinchishoNichijoSeikatsuJiritsudoCode
+     *
+     * @return ninchishoNichijoSeikatsuJiritsudoCode
+     */
+    public Code getNinchishoNichijoSeikatsuJiritsudoCode() {
+        return ninchishoNichijoSeikatsuJiritsudoCode;
+    }
+
+    /**
+     * setNinchishoNichijoSeikatsuJiritsudoCode
+     *
+     * @param ninchishoNichijoSeikatsuJiritsudoCode
+     * ninchishoNichijoSeikatsuJiritsudoCode
+     */
+    public void setNinchishoNichijoSeikatsuJiritsudoCode(Code ninchishoNichijoSeikatsuJiritsudoCode) {
+        this.ninchishoNichijoSeikatsuJiritsudoCode = ninchishoNichijoSeikatsuJiritsudoCode;
+    }
+
+    /**
+     * getNinchishoNichijoSeikatsuJiritsudoCodeMeisho
+     *
+     * @return Meisho
+     */
+    public RString getNinchishoNichijoSeikatsuJiritsudoCodeMeisho() {
+        return CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.認知症高齢者自立度, ninchishoNichijoSeikatsuJiritsudoCode);
+    }
+
+    /**
+     * getNinchishoNichijoSeikatsuJiritsudoCodeRyakusho
+     *
+     * @return Ryakusho
+     */
+    public RString getNinchishoNichijoSeikatsuJiritsudoCodeRyakusho() {
+        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.認知症高齢者自立度, ninchishoNichijoSeikatsuJiritsudoCode);
+    }
+
+    /**
+     * getShogaiNichijoSeikatsuJiritsudoCode
+     *
+     * @return shogaiNichijoSeikatsuJiritsudoCode
+     */
+    public Code getShogaiNichijoSeikatsuJiritsudoCode() {
+        return shogaiNichijoSeikatsuJiritsudoCode;
+    }
+
+    /**
+     * setShogaiNichijoSeikatsuJiritsudoCode
+     *
+     * @param shogaiNichijoSeikatsuJiritsudoCode
+     * shogaiNichijoSeikatsuJiritsudoCode
+     */
+    public void setShogaiNichijoSeikatsuJiritsudoCode(Code shogaiNichijoSeikatsuJiritsudoCode) {
+        this.shogaiNichijoSeikatsuJiritsudoCode = shogaiNichijoSeikatsuJiritsudoCode;
+    }
+
+    /**
+     * getShogaiNichijoSeikatsuJiritsudoCodeMeisho
+     *
+     * @return Meisho
+     */
+    public RString getShogaiNichijoSeikatsuJiritsudoCodeMeisho() {
+        return CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.障害高齢者自立度, shogaiNichijoSeikatsuJiritsudoCode);
+    }
+
+    /**
+     * getShogaiNichijoSeikatsuJiritsudoCodeRyakusho
+     *
+     * @return Ryakusho
+     */
+    public RString getShogaiNichijoSeikatsuJiritsudoCodeRyakusho() {
+        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.障害高齢者自立度, shogaiNichijoSeikatsuJiritsudoCode);
+    }
+
+    /**
+     * getShinsakaiYusenWaritsukeKubunCode
+     *
+     * @return shinsakaiYusenWaritsukeKubunCode
+     */
+    public Code getShinsakaiYusenWaritsukeKubunCode() {
+        return shinsakaiYusenWaritsukeKubunCode;
+    }
+
+    /**
+     * setShinsakaiYusenWaritsukeKubunCode
+     *
+     * @param shinsakaiYusenWaritsukeKubunCode shinsakaiYusenWaritsukeKubunCode
+     */
+    public void setShinsakaiYusenWaritsukeKubunCode(Code shinsakaiYusenWaritsukeKubunCode) {
+        this.shinsakaiYusenWaritsukeKubunCode = shinsakaiYusenWaritsukeKubunCode;
+    }
+
+    /**
+     * getShinsakaiYusenWaritsukeKubunCodeMeisho
+     *
+     * @return Meisho
+     */
+    public RString getShinsakaiYusenWaritsukeKubunCodeMeisho() {
+        return CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.要介護認定審査会優先振分区分, shinsakaiYusenWaritsukeKubunCode);
+    }
+
+    /**
+     * getShinsakaiYusenWaritsukeKubunCodeRyakusho
+     *
+     * @return Ryakusho
+     */
+    public RString getShinsakaiYusenWaritsukeKubunCodeRyakusho() {
+        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.要介護認定審査会優先振分区分, shinsakaiYusenWaritsukeKubunCode);
+    }
+
+    /**
      * getTokkijikoUketsukeYMD
      *
      * @return tokkijikoUketsukeYMD
@@ -1267,6 +1474,26 @@ public class DbT5008NinteichosaKekkaJohoEntity implements IDbAccessable {
      */
     public void setTokkijikoJuryoYMD(FlexibleDate tokkijikoJuryoYMD) {
         this.tokkijikoJuryoYMD = tokkijikoJuryoYMD;
+    }
+
+    /**
+     * このエンティティの主キーが他の{@literal DbT5008NinteichosaKekkaJohoEntity}と等しいか判定します。
+     *
+     * @param other 比較するエンティティ
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT5008NinteichosaKekkaJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     */
+    public boolean equalsPrimaryKeys(DbT5008NinteichosaKekkaJohoEntity other) {
+        if (other == null) {
+            return false;
+        }
+        if (!Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo)) {
+            return false;
+        }
+        if (this.ninteichosaRirekiNo != other.ninteichosaRirekiNo) {
+            return false;
+        }
+        return true;
     }
 // </editor-fold>
 }
