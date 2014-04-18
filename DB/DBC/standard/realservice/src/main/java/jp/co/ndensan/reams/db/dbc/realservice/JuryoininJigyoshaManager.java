@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.ur.urz.realservice.IKozaManager;
 import jp.co.ndensan.reams.ur.urz.realservice.KozaService;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.ur.urf.definition.KaigoJigyoshaShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -117,9 +116,7 @@ public class JuryoininJigyoshaManager {
     }
 
     private IKaigoJigyosha find介護事業者(JigyoshaNo 事業者番号) {
-        //TODO n3317塚田萌 IKaigoJigyoshaFinderの修正が完了したら引数(KaigoJigyoshaShubetsu.サービス事業者)を削除する。
-        return jigyoshaFinder.get特定の事業者種別かつ事業者番号の介護事業者(
-                KaigoJigyoshaShubetsu.サービス事業者, 事業者番号.value());
+        return jigyoshaFinder.get特定の事業者番号の介護事業者(事業者番号.value());
     }
 
     private IHojin find法人(ShikibetsuCode 識別コード, FlexibleDate 契約開始日) {
