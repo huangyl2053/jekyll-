@@ -1,0 +1,485 @@
+﻿{
+ "fieldName": "Page",
+ "items": [
+  {
+   "fieldName": "Sofujoho",
+   "items": [
+    {
+     "fieldName": "lblSofuYM",
+     "items": [],
+     "controlType": "Label",
+     "width": "60",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "align": 2,
+     "text": "送付年月",
+     "isPrivateInfo": false
+    },
+    {
+     "fieldName": "txtSofuYM",
+     "items": [],
+     "controlType": "TextBoxFlexibleDate",
+     "width": "70",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "text": "",
+     "isPrivateInfo": false,
+     "required": false,
+     "maxLength": 1000000000000,
+     "minLength": 0,
+     "textAlign": 0,
+     "readOnly": false,
+     "placeHolder": "",
+     "textKind": 0,
+     "isPassword": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "onKeyPress": "",
+     "suggest": [],
+     "value": "",
+     "labelLText": "",
+     "labelRText": "",
+     "labelLWidth": "S",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "permitCharactor": "未送付",
+     "ymdKubun": 1,
+     "displayFormat": 0
+    },
+    {
+     "fieldName": "lblShichosonName",
+     "items": [],
+     "controlType": "Label",
+     "width": "55",
+     "visible": false,
+     "displayNone": true,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "align": 2,
+     "text": "市町村",
+     "isPrivateInfo": false
+    },
+    {
+     "fieldName": "ddlShichosonName",
+     "items": [],
+     "controlType": "DropDownList",
+     "width": "120",
+     "visible": false,
+     "displayNone": true,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "text": "",
+     "required": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "labelLText": "",
+     "labelRText": "",
+     "labelLWidth": "S",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "selectedItem": "",
+     "dataSource": [
+      {
+       "key": "key0",
+       "value": "小諸市"
+      },
+      {
+       "key": "key1",
+       "value": "佐久市"
+      }
+     ]
+    },
+    {
+     "fieldName": "btnSearchSofuzumi",
+     "items": [],
+     "controlType": "Button",
+     "width": "M",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "text": "送付年月を指定して表示する",
+     "onClick": "onClick_btnSofuzumi",
+     "imageFileUrl": ""
+    },
+    {
+     "fieldName": "btnSearchMisofu",
+     "items": [],
+     "controlType": "Button",
+     "width": "M",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "text": "未送付情報を表示する",
+     "onClick": "onClick_btnMisofu",
+     "imageFileUrl": ""
+    },
+    {
+     "fieldName": "dgSofuIchiran",
+     "items": [],
+     "controlType": "DataGrid",
+     "width": "970",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "dataSource": [],
+     "gridSetting": {
+      "rowHeight": null,
+      "isMultiSelectable": false,
+      "isShowFooter": true,
+      "isShowFilter": true,
+      "header": {
+       "combineColumns": [],
+       "frozenColumn": ""
+      },
+      "columns": [
+       {
+        "columnName": "事業者番号",
+        "dataName": "txtJigyoshaNo",
+        "width": 95,
+        "visible": true,
+        "cellType": 4,
+        "cellDetails": {
+         "cellType": 4,
+         "maxLength": "1.7976931348623157e+308",
+         "minLength": "0",
+         "formatLength": "10"
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtJigyoshaNo"
+       },
+       {
+        "columnName": "事業者名",
+        "dataName": "txtJigyoshaName",
+        "width": 150,
+        "visible": true,
+        "cellType": 1,
+        "cellDetails": {
+         "cellType": 1,
+         "maxLength": "1.7976931348623157e+308",
+         "minLength": "0",
+         "textAlign": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtJigyoshaName"
+       },
+       {
+        "columnName": "被保番号",
+        "dataName": "txtHihoNo",
+        "width": 85,
+        "visible": true,
+        "cellType": 4,
+        "cellDetails": {
+         "cellType": 4,
+         "maxLength": "1.7976931348623157e+308",
+         "minLength": "0",
+         "formatLength": "10"
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtHihoNo"
+       },
+       {
+        "columnName": "氏名",
+        "dataName": "txtHihoName",
+        "width": 140,
+        "visible": true,
+        "cellType": 1,
+        "cellDetails": {
+         "cellType": 1,
+         "maxLength": "1.7976931348623157e+308",
+         "minLength": "0",
+         "textAlign": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtHihoName"
+       },
+       {
+        "columnName": "申立者区分",
+        "dataName": "txtMoshitateshaKubun",
+        "width": 95,
+        "visible": true,
+        "cellType": 4,
+        "cellDetails": {
+         "cellType": 4,
+         "maxLength": "1.7976931348623157e+308",
+         "minLength": "0",
+         "formatLength": "1"
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtMoshitateshaKubun"
+       },
+       {
+        "columnName": "様式",
+        "dataName": "txtStyle",
+        "width": 100,
+        "visible": true,
+        "cellType": 1,
+        "cellDetails": {
+         "cellType": 1,
+         "maxLength": "1.7976931348623157e+308",
+         "minLength": "0",
+         "textAlign": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtStyle"
+       },
+       {
+        "columnName": "申立理由",
+        "dataName": "txtMoshitateRiyu",
+        "width": 100,
+        "visible": true,
+        "cellType": 1,
+        "cellDetails": {
+         "cellType": 1,
+         "maxLength": "1.7976931348623157e+308",
+         "minLength": "0",
+         "textAlign": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtMoshitateRiyu"
+       },
+       {
+        "columnName": "サービス提供年月",
+        "dataName": "txtServiceTeikyoYM",
+        "width": 145,
+        "visible": true,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 1,
+         "displayFormat": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtServiceTeikyoYM"
+       },
+       {
+        "columnName": "申立日",
+        "dataName": "txtMoshitateYMD",
+        "width": 80,
+        "visible": true,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtMoshitateYMD"
+       },
+       {
+        "columnName": "証記載保険者番号",
+        "dataName": "txtShokisaiHokenshaNo",
+        "width": 145,
+        "visible": true,
+        "cellType": 4,
+        "cellDetails": {
+         "cellType": 4,
+         "maxLength": "1.7976931348623157e+308",
+         "minLength": "0",
+         "formatLength": "6"
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtShokisaiHokenshaNo"
+       }
+      ]
+     },
+     "height": "Auto",
+     "onSort": "",
+     "onSelect": "",
+     "onOnlyRow": "",
+     "onNoRow": "",
+     "onMultiRows": "",
+     "sortOrder": "txtServiceTeikyoYM",
+     "isAscending": true,
+     "filterList": [],
+     "clickedRowId": -1
+    }
+   ],
+   "controlType": "Panel",
+   "width": "M",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "onLoad": "",
+   "title": "過誤申立書送付情報",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "Sofujoho"
+    }
+   ],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/Sofujoho/onLoad"
+    },
+    {
+     "eventName": "onClick_btnMisofu",
+     "requestUrl": "dbc/db/dbc/Sofujoho/onClick_btnMisofu"
+    },
+    {
+     "eventName": "onClick_btnSofuzumi",
+     "requestUrl": "dbc/db/dbc/Sofujoho/onClick_btnSofuzumi"
+    }
+   ],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "XS",
+   "marginBottom": "XS",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": true
+  }
+ ],
+ "controlType": null,
+ "width": "XS",
+ "visible": true,
+ "displayNone": false,
+ "disabled": false,
+ "accessKey": "",
+ "nextFocusFieldName": "",
+ "wrap": false,
+ "dependencies": [],
+ "float": 0,
+ "toolTip": "",
+ "authorityMode": 0,
+ "marginLeft": "XS",
+ "marginRight": "XS",
+ "onLoad": "",
+ "title": "過誤申立書送付情報照会",
+ "jsPathCollection": [],
+ "relation": [],
+ "stateTransition": [
+  {
+   "order": "1",
+   "stateName": "照会",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "SearchSofuJoho",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "Sofujoho",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "SofuJohoList",
+     "panelState": "readOnly visible"
+    }
+   ],
+   "validation": {},
+   "events": []
+  }
+ ],
+ "currentState": "All",
+ "id": "DBC0070011",
+ "WFParameter": [],
+ "UIContainerEventMapping": [],
+ "loadSequencePanelNames": [
+  [
+   "Sofujoho"
+  ]
+ ]
+}
