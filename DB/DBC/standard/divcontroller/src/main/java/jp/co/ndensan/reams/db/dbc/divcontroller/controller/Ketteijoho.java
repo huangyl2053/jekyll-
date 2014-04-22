@@ -157,8 +157,7 @@ public class Ketteijoho {
         list = create決定保険者明細List();
         list = get決定保険者明細By取扱年月(panel.getTxtToriatsukaiYM(), list);
 
-        DataGrid<dgKetteiHokenshaDetail_Row> grid = panel.getKetteiHokensha().
-                getKetteiHokenshaDetail().getDgKetteiHokenshaDetail();
+        DataGrid<dgKetteiHokenshaDetail_Row> grid = panel.getKetteiHokensha().getDgKetteiHokenshaDetail();
         grid.setDataSource(list);
     }
 
@@ -169,8 +168,7 @@ public class Ketteijoho {
         list = create決定公費負担者明細List();
         list = get決定公費負担者明細By取扱年月(panel.getTxtToriatsukaiYM(), list);
 
-        DataGrid<dgKetteiKohiDetail_Row> grid = panel.getKetteiKohi().
-                getKetteiKohiDetail().getDgKetteiKohiDetail();
+        DataGrid<dgKetteiKohiDetail_Row> grid = panel.getKetteiKohi().getDgKetteiKohiDetail();
         grid.setDataSource(list);
     }
 
@@ -208,24 +206,26 @@ public class Ketteijoho {
         List<dgKetteiHokenshaDetail_Row> list = new ArrayList<>();
         dgKetteiHokenshaDetail_Row row;
 
-        row = createRow保険者("0000000001", "ひまわり", "0000000011", "最新　一郎",
-                "21:居宅サービス介護給付費明細書(短期入所生活介護)", "02:請求誤りによる実績取り下げ",
-                "201404", "11:訪問介護", "300", "10000", "");
-        list.add(row);
+        for (int i = 0; i < 10; i++) {
+            row = createRow保険者("0000000001", "ひまわり", "0000000011", "最新　一郎",
+                    "21:居宅サービス介護給付費明細書(短期入所生活介護)", "02:請求誤りによる実績取り下げ",
+                    "201404", "11:訪問介護", "3000", "100000", "");
+            list.add(row);
+        }
 
         row = createRow保険者("0000000001", "ひまわり", "0000000012", "最新　二郎",
                 "21:居宅サービス介護給付費明細書(短期入所生活介護)", "02:請求誤りによる実績取り下げ",
-                "201404", "11:訪問介護", "300", "10000", "");
+                "201404", "11:訪問介護", "3000", "100000", "");
         list.add(row);
 
         row = createRow保険者("0000000001", "ひまわり", "0000000013", "過去　一郎",
                 "21:居宅サービス介護給付費明細書(短期入所生活介護)", "02:請求誤りによる実績取り下げ",
-                "201402", "11:訪問介護", "300", "10000", "");
+                "201402", "11:訪問介護", "3000", "100000", "");
         list.add(row);
 
         row = createRow保険者("0000000001", "ひまわり", "0000000014", "過去　二郎",
                 "21:居宅サービス介護給付費明細書(短期入所生活介護)", "02:請求誤りによる実績取り下げ",
-                "201402", "11:訪問介護", "300", "10000", "");
+                "201402", "11:訪問介護", "3000", "100000", "");
         list.add(row);
 
         return list;
@@ -235,24 +235,26 @@ public class Ketteijoho {
         List<dgKetteiKohiDetail_Row> list = new ArrayList<>();
         dgKetteiKohiDetail_Row row;
 
-        row = createRow公費負担者("0000000001", "ひまわり", "0000000011", "最新　一郎",
-                "21:居宅サービス介護給付費明細書(短期入所生活介護)", "02:請求誤りによる実績取り下げ",
-                "201404", "11:訪問介護", "300", "10000", "0000001", "00000001", "");
-        list.add(row);
+        for (int i = 0; i < 10; i++) {
+            row = createRow公費負担者("0000000001", "ひまわり", "0000000011", "最新　一郎",
+                    "21:居宅サービス介護給付費明細書(短期入所生活介護)", "02:請求誤りによる実績取り下げ",
+                    "201404", "11:訪問介護", "3000", "100000", "0000001", "00000001", "");
+            list.add(row);
+        }
 
         row = createRow公費負担者("0000000001", "ひまわり", "0000000012", "最新　二郎",
                 "21:居宅サービス介護給付費明細書(短期入所生活介護)", "02:請求誤りによる実績取り下げ",
-                "201404", "11:訪問介護", "300", "10000", "0000001", "00000001", "");
+                "201404", "11:訪問介護", "3000", "100000", "0000001", "00000001", "");
         list.add(row);
 
         row = createRow公費負担者("0000000001", "ひまわり", "0000000013", "過去　一郎",
                 "21:居宅サービス介護給付費明細書(短期入所生活介護)", "02:請求誤りによる実績取り下げ",
-                "201402", "11:訪問介護", "300", "10000", "0000001", "00000001", "");
+                "201402", "11:訪問介護", "3000", "100000", "0000001", "00000001", "");
         list.add(row);
 
         row = createRow公費負担者("0000000001", "ひまわり", "0000000014", "過去　二郎",
                 "21:居宅サービス介護給付費明細書(短期入所生活介護)", "02:請求誤りによる実績取り下げ",
-                "201402", "11:訪問介護", "300", "10000", "0000001", "00000001", "");
+                "201402", "11:訪問介護", "3000", "100000", "0000001", "00000001", "");
         list.add(row);
 
         return list;

@@ -5,8 +5,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KetteiHokenshaDetailDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KetteiHokenshaShukeiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgKetteiHokenshaDetail_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -29,8 +29,8 @@ public class KetteiHokenshaDiv extends Panel {
     private TextBoxFlexibleDate txtKetteiHokenshaSakuseiYMD;
     @JsonProperty("KetteiHokenshaShukei")
     private KetteiHokenshaShukeiDiv KetteiHokenshaShukei;
-    @JsonProperty("KetteiHokenshaDetail")
-    private KetteiHokenshaDetailDiv KetteiHokenshaDetail;
+    @JsonProperty("dgKetteiHokenshaDetail")
+    private DataGrid<dgKetteiHokenshaDetail_Row> dgKetteiHokenshaDetail;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -68,14 +68,14 @@ public class KetteiHokenshaDiv extends Panel {
         this.KetteiHokenshaShukei=KetteiHokenshaShukei;
     }
 
-    @JsonProperty("KetteiHokenshaDetail")
-    public KetteiHokenshaDetailDiv getKetteiHokenshaDetail() {
-        return KetteiHokenshaDetail;
+    @JsonProperty("dgKetteiHokenshaDetail")
+    public DataGrid<dgKetteiHokenshaDetail_Row> getDgKetteiHokenshaDetail() {
+        return dgKetteiHokenshaDetail;
     }
 
-    @JsonProperty("KetteiHokenshaDetail")
-    public void setKetteiHokenshaDetail(KetteiHokenshaDetailDiv KetteiHokenshaDetail) {
-        this.KetteiHokenshaDetail=KetteiHokenshaDetail;
+    @JsonProperty("dgKetteiHokenshaDetail")
+    public void setDgKetteiHokenshaDetail(DataGrid<dgKetteiHokenshaDetail_Row> dgKetteiHokenshaDetail) {
+        this.dgKetteiHokenshaDetail=dgKetteiHokenshaDetail;
     }
 
 }

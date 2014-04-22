@@ -175,7 +175,7 @@
      "fieldName": "dgSofuIchiran",
      "items": [],
      "controlType": "DataGrid",
-     "width": "970",
+     "width": "980",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -369,13 +369,13 @@
        }
       ]
      },
-     "height": "Auto",
+     "height": "600",
      "onSort": "",
      "onSelect": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "sortOrder": "txtServiceTeikyoYM",
+     "sortOrder": "txtMoshitateYMD",
      "isAscending": true,
      "filterList": [],
      "clickedRowId": -1

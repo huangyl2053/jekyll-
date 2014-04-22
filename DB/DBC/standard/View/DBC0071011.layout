@@ -178,7 +178,7 @@
        "fieldName": "txtKetteiHokenshaSakuseiYMD",
        "items": [],
        "controlType": "TextBoxFlexibleDate",
-       "width": "70",
+       "width": "80",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -198,7 +198,7 @@
        "minLength": 0,
        "textAlign": 0,
        "readOnly": true,
-       "placeHolder": "",
+       "placeHolder": "平26.04.01",
        "textKind": 0,
        "isPassword": false,
        "onFocus": "",
@@ -215,7 +215,7 @@
        "labelRAlign": 0,
        "permitCharactor": "./_-",
        "ymdKubun": 2,
-       "displayFormat": 1
+       "displayFormat": 0
       },
       {
        "fieldName": "KetteiHokenshaShukei",
@@ -241,7 +241,7 @@
            "marginLeft": "5",
            "marginRight": "XS",
            "align": 1,
-           "text": "決定集計情報",
+           "text": "",
            "isPrivateInfo": false
           }
          ],
@@ -391,27 +391,27 @@
            "fieldName": "txtHokenshaCell11",
            "items": [],
            "controlType": "TextBoxNum",
-           "width": "XS",
+           "width": "75",
            "visible": true,
            "displayNone": false,
            "disabled": false,
            "accessKey": "",
            "nextFocusFieldName": "",
-           "wrap": false,
+           "wrap": true,
            "dependencies": [],
-           "float": 0,
+           "float": 1,
            "toolTip": "",
            "authorityMode": 0,
-           "marginLeft": "XS",
-           "marginRight": "XS",
+           "marginLeft": ".1",
+           "marginRight": "0.1",
            "text": "",
            "isPrivateInfo": false,
            "required": false,
-           "maxLength": 1000000000000,
+           "maxLength": "0",
            "minLength": 0,
            "textAlign": 2,
            "readOnly": true,
-           "placeHolder": "",
+           "placeHolder": "-12345678",
            "textKind": 2,
            "isPassword": false,
            "onFocus": "",
@@ -430,7 +430,7 @@
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
-           "isComma": false,
+           "isComma": true,
            "decimalPointLength": 0
           }
          ],
@@ -457,7 +457,7 @@
            "fieldName": "txtHokenshaCell12",
            "items": [],
            "controlType": "TextBoxNum",
-           "width": "S",
+           "width": "120",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -477,7 +477,7 @@
            "minLength": 0,
            "textAlign": 2,
            "readOnly": true,
-           "placeHolder": "",
+           "placeHolder": "-12345678901234",
            "textKind": 2,
            "isPassword": false,
            "onFocus": "",
@@ -496,7 +496,7 @@
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
-           "isComma": false,
+           "isComma": true,
            "decimalPointLength": 0
           }
          ],
@@ -564,7 +564,7 @@
            "fieldName": "txtHokenshaCell21",
            "items": [],
            "controlType": "TextBoxNum",
-           "width": "XS",
+           "width": "75",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -603,7 +603,7 @@
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
-           "isComma": false,
+           "isComma": true,
            "decimalPointLength": 0
           }
          ],
@@ -630,7 +630,7 @@
            "fieldName": "txtHokenshaCell22",
            "items": [],
            "controlType": "TextBoxNum",
-           "width": "S",
+           "width": "120",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -669,7 +669,7 @@
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
-           "isComma": false,
+           "isComma": true,
            "decimalPointLength": 0
           }
          ],
@@ -737,7 +737,7 @@
            "fieldName": "txtHokenshaCell13",
            "items": [],
            "controlType": "TextBoxNum",
-           "width": "S",
+           "width": "120",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -803,7 +803,7 @@
            "fieldName": "txtHokenshaCell23",
            "items": [],
            "controlType": "TextBoxNum",
-           "width": "S",
+           "width": "120",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -910,7 +910,7 @@
            "fieldName": "txtHokenshaCell31",
            "items": [],
            "controlType": "TextBoxNum",
-           "width": "XS",
+           "width": "75",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -949,7 +949,7 @@
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
-           "isComma": false,
+           "isComma": true,
            "decimalPointLength": 0
           }
          ],
@@ -976,7 +976,7 @@
            "fieldName": "txtHokenshaCell32",
            "items": [],
            "controlType": "TextBoxNum",
-           "width": "S",
+           "width": "120",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -1015,7 +1015,7 @@
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
-           "isComma": false,
+           "isComma": true,
            "decimalPointLength": 0
           }
          ],
@@ -1042,7 +1042,7 @@
            "fieldName": "txtHokenshaCell33",
            "items": [],
            "controlType": "TextBoxNum",
-           "width": "S",
+           "width": "120",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -1149,7 +1149,7 @@
            "fieldName": "txtHokenshaCell41",
            "items": [],
            "controlType": "TextBoxNum",
-           "width": "XS",
+           "width": "75",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -1188,7 +1188,7 @@
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
-           "isComma": false,
+           "isComma": true,
            "decimalPointLength": 0
           }
          ],
@@ -1215,7 +1215,7 @@
            "fieldName": "txtHokenshaCell42",
            "items": [],
            "controlType": "TextBoxNum",
-           "width": "S",
+           "width": "120",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -1254,7 +1254,7 @@
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
-           "isComma": false,
+           "isComma": true,
            "decimalPointLength": 0
           }
          ],
@@ -1281,7 +1281,7 @@
            "fieldName": "txtHokenshaCell43",
            "items": [],
            "controlType": "TextBoxNum",
-           "width": "S",
+           "width": "120",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -1358,246 +1358,10 @@
        "html": "<table>\n  <tbody>\n    <tr><td id='R1C1'></td><td id='R1C2'></td><td id='R1C3'></td><td id='R1C4'></td></tr>\n    <tr><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td></tr>\n    <tr><td id='R3C1'></td><td id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td></tr>\n<tr><td id='R4C1'></td><td id='R4C2'></td><td id='R4C3'></td><td id='R4C4'></td></tr>\n<tr><td id='R5C1'></td><td id='R5C2'></td><td id='R5C3'></td><td id='R5C4'></td></tr>\n  </tbody>\n</table>\n"
       },
       {
-       "fieldName": "KetteiHokenshaDetail",
-       "items": [
-        {
-         "fieldName": "dgKetteiHokenshaDetail",
-         "items": [],
-         "controlType": "DataGrid",
-         "width": "970",
-         "visible": true,
-         "displayNone": false,
-         "disabled": false,
-         "accessKey": "",
-         "nextFocusFieldName": "",
-         "wrap": false,
-         "dependencies": [],
-         "float": 0,
-         "toolTip": "",
-         "authorityMode": 0,
-         "marginLeft": "XS",
-         "marginRight": "XS",
-         "dataSource": [],
-         "gridSetting": {
-          "rowHeight": null,
-          "isMultiSelectable": false,
-          "isShowFooter": true,
-          "isShowFilter": true,
-          "header": {
-           "combineColumns": [],
-           "frozenColumn": ""
-          },
-          "columns": [
-           {
-            "columnName": "事業者番号",
-            "dataName": "txtHokenshaJigyoshaNo",
-            "width": 95,
-            "visible": true,
-            "cellType": 4,
-            "cellDetails": {
-             "cellType": 4,
-             "maxLength": "1.7976931348623157e+308",
-             "minLength": "0",
-             "formatLength": "10"
-            },
-            "align": 0,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtHokenshaJigyoshaNo"
-           },
-           {
-            "columnName": "事業者名",
-            "dataName": "txtHokenshaJigyoshaName",
-            "width": 150,
-            "visible": true,
-            "cellType": 1,
-            "cellDetails": {
-             "cellType": 1,
-             "maxLength": "1.7976931348623157e+308",
-             "minLength": "0",
-             "textAlign": 0
-            },
-            "align": 0,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtHokenshaJigyoshaName"
-           },
-           {
-            "columnName": "被保番号",
-            "dataName": "txtHokenshaHihoNo",
-            "width": 85,
-            "visible": true,
-            "cellType": 4,
-            "cellDetails": {
-             "cellType": 4,
-             "maxLength": "1.7976931348623157e+308",
-             "minLength": "0",
-             "formatLength": "10"
-            },
-            "align": 0,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtHokenshaHihoNo"
-           },
-           {
-            "columnName": "氏名",
-            "dataName": "txtHokenshaHihoName",
-            "width": 140,
-            "visible": true,
-            "cellType": 1,
-            "cellDetails": {
-             "cellType": 1,
-             "maxLength": "1.7976931348623157e+308",
-             "minLength": "0",
-             "textAlign": 0
-            },
-            "align": 0,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtHokenshaHihoName"
-           },
-           {
-            "columnName": "様式",
-            "dataName": "txtHokenshaStyle",
-            "width": 100,
-            "visible": true,
-            "cellType": 1,
-            "cellDetails": {
-             "cellType": 1,
-             "maxLength": "1.7976931348623157e+308",
-             "minLength": "0",
-             "textAlign": 0
-            },
-            "align": 0,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtHokenshaStyle"
-           },
-           {
-            "columnName": "申立理由",
-            "dataName": "txtHokenshaMoshitateRiyu",
-            "width": 100,
-            "visible": true,
-            "cellType": 1,
-            "cellDetails": {
-             "cellType": 1,
-             "maxLength": "1.7976931348623157e+308",
-             "minLength": "0",
-             "textAlign": 0
-            },
-            "align": 0,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtHokenshaMoshitateRiyu"
-           },
-           {
-            "columnName": "サービス提供年月",
-            "dataName": "txtHokenshaServiceTeikyoYM",
-            "width": 145,
-            "visible": true,
-            "cellType": 7,
-            "cellDetails": {
-             "cellType": 7,
-             "ymdKubun": 1,
-             "displayFormat": 0
-            },
-            "align": 0,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtHokenshaServiceTeikyoYM"
-           },
-           {
-            "columnName": "サービス種類",
-            "dataName": "txtHokenshaServiceType",
-            "width": 100,
-            "visible": true,
-            "cellType": 1,
-            "cellDetails": {
-             "cellType": 1,
-             "maxLength": "1.7976931348623157e+308",
-             "minLength": "0",
-             "textAlign": 0
-            },
-            "align": 0,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtHokenshaServiceType"
-           },
-           {
-            "columnName": "単位数(特定入所者介護費等)",
-            "dataName": "txtHokenshaTanisu",
-            "width": 190,
-            "visible": true,
-            "cellType": 5,
-            "cellDetails": {
-             "cellType": 5,
-             "maxLength": "1.7976931348623157e+308",
-             "minLength": "0",
-             "maxValue": "1.7976931348623157e+308",
-             "minValue": "0",
-             "isCurrency": false,
-             "isComma": false,
-             "decimalPointLength": "0"
-            },
-            "align": 0,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtHokenshaTanisu"
-           },
-           {
-            "columnName": "負担額",
-            "dataName": "txtHokenshaFutangaku",
-            "width": 80,
-            "visible": true,
-            "cellType": 5,
-            "cellDetails": {
-             "cellType": 5,
-             "maxLength": "1.7976931348623157e+308",
-             "minLength": "0",
-             "maxValue": "1.7976931348623157e+308",
-             "minValue": "0",
-             "isCurrency": false,
-             "isComma": true,
-             "decimalPointLength": "0"
-            },
-            "align": 0,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtHokenshaFutangaku"
-           },
-           {
-            "columnName": "証記載保険者番号",
-            "dataName": "txtHokenshaShokisaiHokenshaNo",
-            "width": 145,
-            "visible": false,
-            "cellType": 4,
-            "cellDetails": {
-             "cellType": 4,
-             "maxLength": "1.7976931348623157e+308",
-             "minLength": "0",
-             "formatLength": "6"
-            },
-            "align": 0,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtHokenshaShokisaiHokenshaNo"
-           }
-          ]
-         },
-         "height": "Auto",
-         "onSort": "",
-         "onSelect": "",
-         "onOnlyRow": "",
-         "onNoRow": "",
-         "onMultiRows": "",
-         "sortOrder": "rowState",
-         "isAscending": true,
-         "filterList": [],
-         "clickedRowId": -1
-        }
-       ],
-       "controlType": "Panel",
-       "width": "M",
+       "fieldName": "dgKetteiHokenshaDetail",
+       "items": [],
+       "controlType": "DataGrid",
+       "width": "980",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1610,28 +1374,223 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "onLoad": "",
-       "title": "明細一覧",
-       "isOpen": true,
-       "canOpenAndClose": true,
-       "postParameterPanelNames": [
-        {
-         "postParameterPanelNames": "KetteiHokenshaDetail"
-        }
-       ],
-       "requestSettings": [],
-       "hiddenInput": [],
-       "onOpen": "",
-       "onClose": "",
-       "session": {},
-       "marginTop": "XS",
-       "marginBottom": "XS",
-       "eraseBorderTop": false,
-       "eraseBorderBottom": false,
-       "eraseBorderRight": false,
-       "eraseBorderLeft": false,
-       "backgroundColor": 0,
-       "widthAuto": true
+       "dataSource": [],
+       "gridSetting": {
+        "rowHeight": null,
+        "isMultiSelectable": false,
+        "isShowFooter": true,
+        "isShowFilter": true,
+        "header": {
+         "combineColumns": [],
+         "frozenColumn": ""
+        },
+        "columns": [
+         {
+          "columnName": "事業者番号",
+          "dataName": "txtHokenshaJigyoshaNo",
+          "width": 95,
+          "visible": true,
+          "cellType": 4,
+          "cellDetails": {
+           "cellType": 4,
+           "maxLength": "1.7976931348623157e+308",
+           "minLength": "0",
+           "formatLength": "10"
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtHokenshaJigyoshaNo"
+         },
+         {
+          "columnName": "事業者名",
+          "dataName": "txtHokenshaJigyoshaName",
+          "width": 160,
+          "visible": true,
+          "cellType": 1,
+          "cellDetails": {
+           "cellType": 1,
+           "maxLength": "1.7976931348623157e+308",
+           "minLength": "0",
+           "textAlign": 0
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtHokenshaJigyoshaName"
+         },
+         {
+          "columnName": "被保番号",
+          "dataName": "txtHokenshaHihoNo",
+          "width": 90,
+          "visible": true,
+          "cellType": 4,
+          "cellDetails": {
+           "cellType": 4,
+           "maxLength": "1.7976931348623157e+308",
+           "minLength": "0",
+           "formatLength": "10"
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtHokenshaHihoNo"
+         },
+         {
+          "columnName": "氏名",
+          "dataName": "txtHokenshaHihoName",
+          "width": 140,
+          "visible": true,
+          "cellType": 1,
+          "cellDetails": {
+           "cellType": 1,
+           "maxLength": "1.7976931348623157e+308",
+           "minLength": "0",
+           "textAlign": 0
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtHokenshaHihoName"
+         },
+         {
+          "columnName": "様式",
+          "dataName": "txtHokenshaStyle",
+          "width": 120,
+          "visible": true,
+          "cellType": 1,
+          "cellDetails": {
+           "cellType": 1,
+           "maxLength": "1.7976931348623157e+308",
+           "minLength": "0",
+           "textAlign": 0
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtHokenshaStyle"
+         },
+         {
+          "columnName": "申立理由",
+          "dataName": "txtHokenshaMoshitateRiyu",
+          "width": 120,
+          "visible": true,
+          "cellType": 1,
+          "cellDetails": {
+           "cellType": 1,
+           "maxLength": "1.7976931348623157e+308",
+           "minLength": "0",
+           "textAlign": 0
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtHokenshaMoshitateRiyu"
+         },
+         {
+          "columnName": "サービス提供年月",
+          "dataName": "txtHokenshaServiceTeikyoYM",
+          "width": 145,
+          "visible": true,
+          "cellType": 7,
+          "cellDetails": {
+           "cellType": 7,
+           "ymdKubun": 1,
+           "displayFormat": 0
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtHokenshaServiceTeikyoYM"
+         },
+         {
+          "columnName": "サービス種類",
+          "dataName": "txtHokenshaServiceType",
+          "width": 120,
+          "visible": true,
+          "cellType": 1,
+          "cellDetails": {
+           "cellType": 1,
+           "maxLength": "1.7976931348623157e+308",
+           "minLength": "0",
+           "textAlign": 0
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtHokenshaServiceType"
+         },
+         {
+          "columnName": "単位数(特定入所者介護費等)",
+          "dataName": "txtHokenshaTanisu",
+          "width": 220,
+          "visible": true,
+          "cellType": 5,
+          "cellDetails": {
+           "cellType": 5,
+           "maxLength": "1.7976931348623157e+308",
+           "minLength": "0",
+           "maxValue": "1.7976931348623157e+308",
+           "minValue": "0",
+           "isCurrency": false,
+           "isComma": true,
+           "decimalPointLength": "0"
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtHokenshaTanisu"
+         },
+         {
+          "columnName": "負担額",
+          "dataName": "txtHokenshaFutangaku",
+          "width": 120,
+          "visible": true,
+          "cellType": 5,
+          "cellDetails": {
+           "cellType": 5,
+           "maxLength": "1.7976931348623157e+308",
+           "minLength": "0",
+           "maxValue": "1.7976931348623157e+308",
+           "minValue": "0",
+           "isCurrency": false,
+           "isComma": true,
+           "decimalPointLength": "0"
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtHokenshaFutangaku"
+         },
+         {
+          "columnName": "証記載保険者番号",
+          "dataName": "txtHokenshaShokisaiHokenshaNo",
+          "width": 145,
+          "visible": false,
+          "cellType": 4,
+          "cellDetails": {
+           "cellType": 4,
+           "maxLength": "1.7976931348623157e+308",
+           "minLength": "0",
+           "formatLength": "6"
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtHokenshaShokisaiHokenshaNo"
+         }
+        ]
+       },
+       "height": "S",
+       "onSort": "",
+       "onSelect": "",
+       "onOnlyRow": "",
+       "onNoRow": "",
+       "onMultiRows": "",
+       "sortOrder": "txtHokenshaHihoNo",
+       "isAscending": true,
+       "filterList": [],
+       "clickedRowId": -1
       }
      ],
      "controlType": "Panel",
@@ -1699,7 +1658,7 @@
        "fieldName": "txtKetteiKohiSakuseiYMD",
        "items": [],
        "controlType": "TextBoxFlexibleDate",
-       "width": "70",
+       "width": "80",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1736,7 +1695,7 @@
        "labelRAlign": 0,
        "permitCharactor": "./_-",
        "ymdKubun": 2,
-       "displayFormat": 1
+       "displayFormat": 0
       },
       {
        "fieldName": "KetteiKohiShukei",
@@ -1762,7 +1721,7 @@
            "marginLeft": "5",
            "marginRight": "XS",
            "align": 1,
-           "text": "決定集計情報",
+           "text": "",
            "isPrivateInfo": false
           }
          ],
@@ -1912,7 +1871,7 @@
            "fieldName": "txtKohiCell11",
            "items": [],
            "controlType": "TextBoxNum",
-           "width": "XS",
+           "width": "75",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -1951,7 +1910,7 @@
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
-           "isComma": false,
+           "isComma": true,
            "decimalPointLength": 0
           }
          ],
@@ -1978,7 +1937,7 @@
            "fieldName": "txtKohiCell12",
            "items": [],
            "controlType": "TextBoxNum",
-           "width": "S",
+           "width": "120",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -2017,7 +1976,7 @@
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
-           "isComma": false,
+           "isComma": true,
            "decimalPointLength": 0
           }
          ],
@@ -2085,7 +2044,7 @@
            "fieldName": "txtKohiCell21",
            "items": [],
            "controlType": "TextBoxNum",
-           "width": "XS",
+           "width": "75",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -2124,7 +2083,7 @@
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
-           "isComma": false,
+           "isComma": true,
            "decimalPointLength": 0
           }
          ],
@@ -2151,7 +2110,7 @@
            "fieldName": "txtKohiCell22",
            "items": [],
            "controlType": "TextBoxNum",
-           "width": "S",
+           "width": "120",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -2190,7 +2149,7 @@
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
-           "isComma": false,
+           "isComma": true,
            "decimalPointLength": 0
           }
          ],
@@ -2258,7 +2217,7 @@
            "fieldName": "txtKohiCell13",
            "items": [],
            "controlType": "TextBoxNum",
-           "width": "S",
+           "width": "120",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -2324,7 +2283,7 @@
            "fieldName": "txtKohiCell23",
            "items": [],
            "controlType": "TextBoxNum",
-           "width": "S",
+           "width": "120",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -2431,7 +2390,7 @@
            "fieldName": "txtKohiCell31",
            "items": [],
            "controlType": "TextBoxNum",
-           "width": "XS",
+           "width": "75",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -2470,7 +2429,7 @@
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
-           "isComma": false,
+           "isComma": true,
            "decimalPointLength": 0
           }
          ],
@@ -2497,7 +2456,7 @@
            "fieldName": "txtKohiCell32",
            "items": [],
            "controlType": "TextBoxNum",
-           "width": "S",
+           "width": "120",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -2536,7 +2495,7 @@
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
-           "isComma": false,
+           "isComma": true,
            "decimalPointLength": 0
           }
          ],
@@ -2563,7 +2522,7 @@
            "fieldName": "txtKohiCell33",
            "items": [],
            "controlType": "TextBoxNum",
-           "width": "S",
+           "width": "120",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -2640,280 +2599,10 @@
        "html": "<table>\n  <tbody>\n    <tr><td id='R1C1'></td><td id='R1C2'></td><td id='R1C3'></td><td id='R1C4'></td></tr>\n    <tr><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td></tr>\n    <tr><td id='R3C1'></td><td id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td></tr>\n<tr><td id='R4C1'></td><td id='R4C2'></td><td id='R4C3'></td><td id='R4C4'></td></tr>\n<!-- <tr><td id='R5C1'></td><td id='R5C2'></td><td id='R5C3'></td><td id='R5C4'></td></tr> -->\n  </tbody>\n</table>\n"
       },
       {
-       "fieldName": "KetteiKohiDetail",
-       "items": [
-        {
-         "fieldName": "dgKetteiKohiDetail",
-         "items": [],
-         "controlType": "DataGrid",
-         "width": "970",
-         "visible": true,
-         "displayNone": false,
-         "disabled": false,
-         "accessKey": "",
-         "nextFocusFieldName": "",
-         "wrap": false,
-         "dependencies": [],
-         "float": 0,
-         "toolTip": "",
-         "authorityMode": 0,
-         "marginLeft": "XS",
-         "marginRight": "XS",
-         "dataSource": [],
-         "gridSetting": {
-          "rowHeight": null,
-          "isMultiSelectable": false,
-          "isShowFooter": true,
-          "isShowFilter": true,
-          "header": {
-           "combineColumns": [],
-           "frozenColumn": ""
-          },
-          "columns": [
-           {
-            "columnName": "事業者番号",
-            "dataName": "txtKohiJigyoshaNo",
-            "width": 95,
-            "visible": true,
-            "cellType": 4,
-            "cellDetails": {
-             "cellType": 4,
-             "maxLength": "1.7976931348623157e+308",
-             "minLength": "0",
-             "formatLength": "10"
-            },
-            "align": 0,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtKohiJigyoshaNo"
-           },
-           {
-            "columnName": "事業者名",
-            "dataName": "txtKohiJigyoshaName",
-            "width": 150,
-            "visible": true,
-            "cellType": 1,
-            "cellDetails": {
-             "cellType": 1,
-             "maxLength": "1.7976931348623157e+308",
-             "minLength": "0",
-             "textAlign": 0
-            },
-            "align": 0,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtKohiJigyoshaName"
-           },
-           {
-            "columnName": "被保番号",
-            "dataName": "txtKohiHihoNo",
-            "width": 85,
-            "visible": true,
-            "cellType": 4,
-            "cellDetails": {
-             "cellType": 4,
-             "maxLength": "1.7976931348623157e+308",
-             "minLength": "0",
-             "formatLength": "10"
-            },
-            "align": 0,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtKohiHihoNo"
-           },
-           {
-            "columnName": "氏名",
-            "dataName": "txtKohiHihoName",
-            "width": 140,
-            "visible": true,
-            "cellType": 1,
-            "cellDetails": {
-             "cellType": 1,
-             "maxLength": "1.7976931348623157e+308",
-             "minLength": "0",
-             "textAlign": 0
-            },
-            "align": 0,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtKohiHihoName"
-           },
-           {
-            "columnName": "様式",
-            "dataName": "txtKohiStyle",
-            "width": 100,
-            "visible": true,
-            "cellType": 1,
-            "cellDetails": {
-             "cellType": 1,
-             "maxLength": "1.7976931348623157e+308",
-             "minLength": "0",
-             "textAlign": 0
-            },
-            "align": 0,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtKohiStyle"
-           },
-           {
-            "columnName": "申立理由",
-            "dataName": "txtKohiMoshitateRiyu",
-            "width": 100,
-            "visible": true,
-            "cellType": 1,
-            "cellDetails": {
-             "cellType": 1,
-             "maxLength": "1.7976931348623157e+308",
-             "minLength": "0",
-             "textAlign": 0
-            },
-            "align": 0,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtKohiMoshitateRiyu"
-           },
-           {
-            "columnName": "サービス提供年月",
-            "dataName": "txtKohiServiceTeikyoYM",
-            "width": 145,
-            "visible": true,
-            "cellType": 7,
-            "cellDetails": {
-             "cellType": 7,
-             "ymdKubun": 1,
-             "displayFormat": 0
-            },
-            "align": 0,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtKohiServiceTeikyoYM"
-           },
-           {
-            "columnName": "サービス種類",
-            "dataName": "txtKohiServiceType",
-            "width": 120,
-            "visible": true,
-            "cellType": 1,
-            "cellDetails": {
-             "cellType": 1,
-             "maxLength": "1.7976931348623157e+308",
-             "minLength": "0",
-             "textAlign": 0
-            },
-            "align": 0,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtKohiServiceType"
-           },
-           {
-            "columnName": "単位数(特定入所者介護費等)",
-            "dataName": "txtKohiTanisu",
-            "width": 190,
-            "visible": true,
-            "cellType": 5,
-            "cellDetails": {
-             "cellType": 5,
-             "maxLength": "1.7976931348623157e+308",
-             "minLength": "0",
-             "maxValue": "1.7976931348623157e+308",
-             "minValue": "0",
-             "isCurrency": false,
-             "isComma": false,
-             "decimalPointLength": "0"
-            },
-            "align": 0,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtKohiTanisu"
-           },
-           {
-            "columnName": "負担額",
-            "dataName": "txtKohiFutangaku",
-            "width": 80,
-            "visible": true,
-            "cellType": 5,
-            "cellDetails": {
-             "cellType": 5,
-             "maxLength": "1.7976931348623157e+308",
-             "minLength": "0",
-             "maxValue": "1.7976931348623157e+308",
-             "minValue": "0",
-             "isCurrency": false,
-             "isComma": true,
-             "decimalPointLength": "0"
-            },
-            "align": 0,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtKohiFutangaku"
-           },
-           {
-            "columnName": "公費受給者番号",
-            "dataName": "txtKohiJukyushaNo",
-            "width": 130,
-            "visible": true,
-            "cellType": 4,
-            "cellDetails": {
-             "cellType": 4,
-             "maxLength": "1.7976931348623157e+308",
-             "minLength": "0",
-             "formatLength": "7"
-            },
-            "align": 0,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtKohiJukyushaNo"
-           },
-           {
-            "columnName": "公費負担者番号",
-            "dataName": "txtKohiFutanshaNo",
-            "width": 130,
-            "visible": true,
-            "cellType": 4,
-            "cellDetails": {
-             "cellType": 4,
-             "maxLength": "1.7976931348623157e+308",
-             "minLength": "0",
-             "formatLength": "8"
-            },
-            "align": 0,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtKohiFutanshaNo"
-           },
-           {
-            "columnName": "証記載保険者番号",
-            "dataName": "txtHokenshaShokisaiHokenshaNo",
-            "width": 145,
-            "visible": false,
-            "cellType": 4,
-            "cellDetails": {
-             "cellType": 4,
-             "maxLength": "1.7976931348623157e+308",
-             "minLength": "0",
-             "formatLength": "6"
-            },
-            "align": 0,
-            "resize": true,
-            "isPrivateInfo": false,
-            "sortKey": "txtHokenshaShokisaiHokenshaNo"
-           }
-          ]
-         },
-         "height": "Auto",
-         "onSort": "",
-         "onSelect": "",
-         "onOnlyRow": "",
-         "onNoRow": "",
-         "onMultiRows": "",
-         "sortOrder": "txtKohiServiceTeikyoYM",
-         "isAscending": true,
-         "filterList": [],
-         "clickedRowId": -1
-        }
-       ],
-       "controlType": "Panel",
-       "width": "M",
+       "fieldName": "dgKetteiKohiDetail",
+       "items": [],
+       "controlType": "DataGrid",
+       "width": "980",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -2926,28 +2615,257 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "onLoad": "",
-       "title": "明細一覧",
-       "isOpen": true,
-       "canOpenAndClose": true,
-       "postParameterPanelNames": [
-        {
-         "postParameterPanelNames": "KetteiKohiDetail"
-        }
-       ],
-       "requestSettings": [],
-       "hiddenInput": [],
-       "onOpen": "",
-       "onClose": "",
-       "session": {},
-       "marginTop": "XS",
-       "marginBottom": "XS",
-       "eraseBorderTop": false,
-       "eraseBorderBottom": false,
-       "eraseBorderRight": false,
-       "eraseBorderLeft": false,
-       "backgroundColor": 0,
-       "widthAuto": true
+       "dataSource": [],
+       "gridSetting": {
+        "rowHeight": null,
+        "isMultiSelectable": false,
+        "isShowFooter": true,
+        "isShowFilter": true,
+        "header": {
+         "combineColumns": [],
+         "frozenColumn": ""
+        },
+        "columns": [
+         {
+          "columnName": "事業者番号",
+          "dataName": "txtKohiJigyoshaNo",
+          "width": 95,
+          "visible": true,
+          "cellType": 4,
+          "cellDetails": {
+           "cellType": 4,
+           "maxLength": "1.7976931348623157e+308",
+           "minLength": "0",
+           "formatLength": "10"
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtKohiJigyoshaNo"
+         },
+         {
+          "columnName": "事業者名",
+          "dataName": "txtKohiJigyoshaName",
+          "width": 160,
+          "visible": true,
+          "cellType": 1,
+          "cellDetails": {
+           "cellType": 1,
+           "maxLength": "1.7976931348623157e+308",
+           "minLength": "0",
+           "textAlign": 0
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtKohiJigyoshaName"
+         },
+         {
+          "columnName": "被保番号",
+          "dataName": "txtKohiHihoNo",
+          "width": 90,
+          "visible": true,
+          "cellType": 4,
+          "cellDetails": {
+           "cellType": 4,
+           "maxLength": "1.7976931348623157e+308",
+           "minLength": "0",
+           "formatLength": "10"
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtKohiHihoNo"
+         },
+         {
+          "columnName": "氏名",
+          "dataName": "txtKohiHihoName",
+          "width": 140,
+          "visible": true,
+          "cellType": 1,
+          "cellDetails": {
+           "cellType": 1,
+           "maxLength": "1.7976931348623157e+308",
+           "minLength": "0",
+           "textAlign": 0
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtKohiHihoName"
+         },
+         {
+          "columnName": "様式",
+          "dataName": "txtKohiStyle",
+          "width": 120,
+          "visible": true,
+          "cellType": 1,
+          "cellDetails": {
+           "cellType": 1,
+           "maxLength": "1.7976931348623157e+308",
+           "minLength": "0",
+           "textAlign": 0
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtKohiStyle"
+         },
+         {
+          "columnName": "申立理由",
+          "dataName": "txtKohiMoshitateRiyu",
+          "width": 120,
+          "visible": true,
+          "cellType": 1,
+          "cellDetails": {
+           "cellType": 1,
+           "maxLength": "1.7976931348623157e+308",
+           "minLength": "0",
+           "textAlign": 0
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtKohiMoshitateRiyu"
+         },
+         {
+          "columnName": "サービス提供年月",
+          "dataName": "txtKohiServiceTeikyoYM",
+          "width": 145,
+          "visible": true,
+          "cellType": 7,
+          "cellDetails": {
+           "cellType": 7,
+           "ymdKubun": 1,
+           "displayFormat": 0
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtKohiServiceTeikyoYM"
+         },
+         {
+          "columnName": "サービス種類",
+          "dataName": "txtKohiServiceType",
+          "width": 120,
+          "visible": true,
+          "cellType": 1,
+          "cellDetails": {
+           "cellType": 1,
+           "maxLength": "1.7976931348623157e+308",
+           "minLength": "0",
+           "textAlign": 0
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtKohiServiceType"
+         },
+         {
+          "columnName": "単位数(特定入所者介護費等)",
+          "dataName": "txtKohiTanisu",
+          "width": 220,
+          "visible": true,
+          "cellType": 5,
+          "cellDetails": {
+           "cellType": 5,
+           "maxLength": "1.7976931348623157e+308",
+           "minLength": "0",
+           "maxValue": "1.7976931348623157e+308",
+           "minValue": "0",
+           "isCurrency": false,
+           "isComma": true,
+           "decimalPointLength": "0"
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtKohiTanisu"
+         },
+         {
+          "columnName": "負担額",
+          "dataName": "txtKohiFutangaku",
+          "width": 120,
+          "visible": true,
+          "cellType": 5,
+          "cellDetails": {
+           "cellType": 5,
+           "maxLength": "1.7976931348623157e+308",
+           "minLength": "0",
+           "maxValue": "1.7976931348623157e+308",
+           "minValue": "0",
+           "isCurrency": false,
+           "isComma": true,
+           "decimalPointLength": "0"
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtKohiFutangaku"
+         },
+         {
+          "columnName": "公費受給者番号",
+          "dataName": "txtKohiJukyushaNo",
+          "width": 130,
+          "visible": true,
+          "cellType": 4,
+          "cellDetails": {
+           "cellType": 4,
+           "maxLength": "1.7976931348623157e+308",
+           "minLength": "0",
+           "formatLength": "7"
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtKohiJukyushaNo"
+         },
+         {
+          "columnName": "公費負担者番号",
+          "dataName": "txtKohiFutanshaNo",
+          "width": 130,
+          "visible": true,
+          "cellType": 4,
+          "cellDetails": {
+           "cellType": 4,
+           "maxLength": "1.7976931348623157e+308",
+           "minLength": "0",
+           "formatLength": "8"
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtKohiFutanshaNo"
+         },
+         {
+          "columnName": "証記載保険者番号",
+          "dataName": "txtHokenshaShokisaiHokenshaNo",
+          "width": 145,
+          "visible": false,
+          "cellType": 4,
+          "cellDetails": {
+           "cellType": 4,
+           "maxLength": "1.7976931348623157e+308",
+           "minLength": "0",
+           "formatLength": "6"
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtHokenshaShokisaiHokenshaNo"
+         }
+        ]
+       },
+       "height": "S",
+       "onSort": "",
+       "onSelect": "",
+       "onOnlyRow": "",
+       "onNoRow": "",
+       "onMultiRows": "",
+       "sortOrder": "txtKohiServiceTeikyoYM",
+       "isAscending": true,
+       "filterList": [],
+       "clickedRowId": -1
       }
      ],
      "controlType": "Panel",
@@ -2989,7 +2907,7 @@
     }
    ],
    "controlType": "Panel",
-   "width": "S",
+   "width": "1000",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -3104,13 +3022,7 @@
    "KetteiHokensha"
   ],
   [
-   "KetteiHokenshaDetail"
-  ],
-  [
    "KetteiKohi"
-  ],
-  [
-   "KetteiKohiDetail"
   ]
  ]
 }
