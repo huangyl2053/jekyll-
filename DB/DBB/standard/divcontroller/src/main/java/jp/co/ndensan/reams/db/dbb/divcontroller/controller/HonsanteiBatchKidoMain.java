@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
@@ -44,20 +45,24 @@ public class HonsanteiBatchKidoMain {
 
     private void setFuseigoData(HonsanteiBatchKidoMainDiv panel) {
         List<dgShikakuFuseigoIchiran_Row> arrayData = createRowShikakuFuseigoTestData();
+        DataGrid<dgShikakuFuseigoIchiran_Row> grid = panel.getShikakuFuseigoIchiran().getDgShikakuFuseigoIchiran();
+        grid.setDataSource(arrayData);
     }
 
     private List<dgShikakuFuseigoIchiran_Row> createRowShikakuFuseigoTestData() {
         List<dgShikakuFuseigoIchiran_Row> arrayData = new ArrayList<>();
-        dgShikakuFuseigoIchiran_Row item = null;
-        item = createRowShikakuFuseigoData("1234567890", "1234560123456789", "ｶｲｺﾞ ﾃｽﾄ", "介護　てすと", "資格取得日・住登日不一致", "H240331", "", "H240401", "");
+        dgShikakuFuseigoIchiran_Row item;
+        item = createRowShikakuFuseigoData("1234567890", "1234560123456789", "ｶｲｺﾞ ﾃｽﾄ", "介護　てすと", "資格取得日・住登日不一致", "20140331", "", "20140401", "");
         arrayData.add(item);
         return arrayData;
     }
 
     private dgShikakuFuseigoIchiran_Row createRowShikakuFuseigoData(String 被保番号, String 識別コード, String カナ氏名, String 氏名,
             String 不整合内容, String 資格取得日, String 資格喪失日, String 住登日, String 消除日) {
-        dgShikakuFuseigoIchiran_Row row = new dgShikakuFuseigoIchiran_Row(RString.HALF_SPACE, RString.HALF_SPACE, RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY);
+        dgShikakuFuseigoIchiran_Row row;
+        row = new dgShikakuFuseigoIchiran_Row(RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                RString.EMPTY, new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,RString.EMPTY,RString.EMPTY,
+                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY);
         row.setTxtHihoNo(new RString(被保番号));
         row.setTxtShikibetsuCode(new RString(識別コード));
         row.setTxtKanaShimei(new RString(カナ氏名));

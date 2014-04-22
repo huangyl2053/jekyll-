@@ -1,9 +1,8 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity;
 /**
  * このコードはツールによって生成されました。
- * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
- * コードが再生成されるときに損失したりします。
- * Tue Apr 08 20:00:42 JST 2014 
+ * このファイルへの変更は、再生成時には損失するため
+ * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.ShikakuFuseigoIchiranDiv;

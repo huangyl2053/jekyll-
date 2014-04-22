@@ -1,9 +1,8 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity;
 /**
  * このコードはツールによって生成されました。
- * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
- * コードが再生成されるときに損失したりします。
- * Tue Apr 08 20:00:42 JST 2014 
+ * このファイルへの変更は、再生成時には損失するため
+ * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -22,12 +21,8 @@ public class ShoriJokyoPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblJuminzeiKakutei")
-    private Label lblJuminzeiKakutei;
     @JsonProperty("txtJuminzeiKakuteiNichiji")
     private TextBoxDate txtJuminzeiKakuteiNichiji;
-    @JsonProperty("lblTokuchoDoteiShoriNichiji")
-    private Label lblTokuchoDoteiShoriNichiji;
     @JsonProperty("txtTokuchoDoteiShoriNichiji")
     private TextBoxDate txtTokuchoDoteiShoriNichiji;
 
@@ -37,16 +32,6 @@ public class ShoriJokyoPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblJuminzeiKakutei")
-    public Label getLblJuminzeiKakutei() {
-        return lblJuminzeiKakutei;
-    }
-
-    @JsonProperty("lblJuminzeiKakutei")
-    public void setLblJuminzeiKakutei(Label lblJuminzeiKakutei) {
-        this.lblJuminzeiKakutei=lblJuminzeiKakutei;
-    }
-
     @JsonProperty("txtJuminzeiKakuteiNichiji")
     public TextBoxDate getTxtJuminzeiKakuteiNichiji() {
         return txtJuminzeiKakuteiNichiji;
@@ -55,16 +40,6 @@ public class ShoriJokyoPanelDiv extends Panel {
     @JsonProperty("txtJuminzeiKakuteiNichiji")
     public void setTxtJuminzeiKakuteiNichiji(TextBoxDate txtJuminzeiKakuteiNichiji) {
         this.txtJuminzeiKakuteiNichiji=txtJuminzeiKakuteiNichiji;
-    }
-
-    @JsonProperty("lblTokuchoDoteiShoriNichiji")
-    public Label getLblTokuchoDoteiShoriNichiji() {
-        return lblTokuchoDoteiShoriNichiji;
-    }
-
-    @JsonProperty("lblTokuchoDoteiShoriNichiji")
-    public void setLblTokuchoDoteiShoriNichiji(Label lblTokuchoDoteiShoriNichiji) {
-        this.lblTokuchoDoteiShoriNichiji=lblTokuchoDoteiShoriNichiji;
     }
 
     @JsonProperty("txtTokuchoDoteiShoriNichiji")
