@@ -2,6 +2,1001 @@
  "fieldName": "Page",
  "items": [
   {
+   "fieldName": "HihokenshaSearchPanel",
+   "items": [
+    {
+     "fieldName": "ReamsCommonSearchInfoPanel",
+     "items": [
+      {
+       "fieldName": "SearchShimeiLabel",
+       "items": [],
+       "controlType": "Label",
+       "width": "S",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "align": 2,
+       "text": "氏名",
+       "isPrivateInfo": false
+      },
+      {
+       "fieldName": "SearchShimeiText",
+       "items": [],
+       "controlType": "TextBox",
+       "width": "300",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "text": "",
+       "isPrivateInfo": false,
+       "required": false,
+       "maxLength": 1000000000000,
+       "minLength": 0,
+       "textAlign": 0,
+       "readOnly": false,
+       "placeHolder": "",
+       "textKind": 0,
+       "isPassword": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
+       "onKeyPress": "",
+       "suggest": [],
+       "value": "",
+       "labelLText": "",
+       "labelRText": "",
+       "labelLWidth": "S",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "permitCharactor": ""
+      },
+      {
+       "fieldName": "SearchDateObBirthLabel",
+       "items": [],
+       "controlType": "Label",
+       "width": "S",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": true,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "align": 2,
+       "text": "生年月日",
+       "isPrivateInfo": false
+      },
+      {
+       "fieldName": "SearchDateOfBirthText",
+       "items": [],
+       "controlType": "TextBox",
+       "width": "S",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "text": "",
+       "isPrivateInfo": false,
+       "required": false,
+       "maxLength": 1000000000000,
+       "minLength": 0,
+       "textAlign": 0,
+       "readOnly": false,
+       "placeHolder": "",
+       "textKind": 0,
+       "isPassword": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
+       "onKeyPress": "",
+       "suggest": [],
+       "value": "",
+       "labelLText": "",
+       "labelRText": "",
+       "labelLWidth": "S",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "permitCharactor": ""
+      },
+      {
+       "fieldName": "SearchShichosonCodeLabel",
+       "items": [],
+       "controlType": "Label",
+       "width": "S",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": true,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "align": 2,
+       "text": "市町村コード",
+       "isPrivateInfo": false
+      },
+      {
+       "fieldName": "SearchShichosonCodeText",
+       "items": [],
+       "controlType": "TextBox",
+       "width": "M",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "text": "",
+       "isPrivateInfo": false,
+       "required": false,
+       "maxLength": 1000000000000,
+       "minLength": 0,
+       "textAlign": 0,
+       "readOnly": false,
+       "placeHolder": "",
+       "textKind": 0,
+       "isPassword": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
+       "onKeyPress": "",
+       "suggest": [],
+       "value": "",
+       "labelLText": "",
+       "labelRText": "",
+       "labelLWidth": "S",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "permitCharactor": ""
+      },
+      {
+       "fieldName": "SearchShikibetsuCodeLabel",
+       "items": [],
+       "controlType": "Label",
+       "width": "S",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": true,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "align": 2,
+       "text": "識別コード",
+       "isPrivateInfo": false
+      },
+      {
+       "fieldName": "SearchShikibetsuCodeText",
+       "items": [],
+       "controlType": "TextBox",
+       "width": "M",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "text": "",
+       "isPrivateInfo": false,
+       "required": false,
+       "maxLength": 1000000000000,
+       "minLength": 0,
+       "textAlign": 0,
+       "readOnly": false,
+       "placeHolder": "",
+       "textKind": 0,
+       "isPassword": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
+       "onKeyPress": "",
+       "suggest": [],
+       "value": "",
+       "labelLText": "",
+       "labelRText": "",
+       "labelLWidth": "S",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "permitCharactor": ""
+      },
+      {
+       "fieldName": "SearchSetaiCodeLabel",
+       "items": [],
+       "controlType": "Label",
+       "width": "S",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "align": 2,
+       "text": "世帯コード",
+       "isPrivateInfo": false
+      },
+      {
+       "fieldName": "SearchSetaiCodeText",
+       "items": [],
+       "controlType": "TextBox",
+       "width": "M",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "text": "",
+       "isPrivateInfo": false,
+       "required": false,
+       "maxLength": 1000000000000,
+       "minLength": 0,
+       "textAlign": 0,
+       "readOnly": false,
+       "placeHolder": "",
+       "textKind": 0,
+       "isPassword": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
+       "onKeyPress": "",
+       "suggest": [],
+       "value": "",
+       "labelLText": "",
+       "labelRText": "",
+       "labelLWidth": "S",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "permitCharactor": ""
+      }
+     ],
+     "controlType": "Panel",
+     "width": "950",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "S",
+     "marginRight": "XS",
+     "onLoad": "",
+     "title": "",
+     "isOpen": true,
+     "canOpenAndClose": true,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "ReamsCommonSearchInfoPanel"
+      }
+     ],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "S",
+     "marginBottom": "XS",
+     "eraseBorderTop": true,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true,
+     "backgroundColor": 0,
+     "widthAuto": false
+    },
+    {
+     "fieldName": "DBCommonSearchInfoPanel",
+     "items": [
+      {
+       "fieldName": "SearchHihokenshaNoLabel",
+       "items": [],
+       "controlType": "Label",
+       "width": "S",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "align": 2,
+       "text": "被保番号",
+       "isPrivateInfo": false
+      },
+      {
+       "fieldName": "SearchHihokenshaNoText",
+       "items": [],
+       "controlType": "TextBox",
+       "width": "S",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "text": "",
+       "isPrivateInfo": false,
+       "required": false,
+       "maxLength": 1000000000000,
+       "minLength": 0,
+       "textAlign": 0,
+       "readOnly": false,
+       "placeHolder": "",
+       "textKind": 0,
+       "isPassword": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
+       "onKeyPress": "",
+       "suggest": [],
+       "value": "",
+       "labelLText": "",
+       "labelRText": "",
+       "labelLWidth": "S",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "permitCharactor": ""
+      }
+     ],
+     "controlType": "Panel",
+     "width": "950",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "S",
+     "marginRight": "XS",
+     "onLoad": "",
+     "title": "",
+     "isOpen": true,
+     "canOpenAndClose": true,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "DBCommonSearchInfoPanel"
+      }
+     ],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "S",
+     "marginBottom": "XS",
+     "eraseBorderTop": true,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true,
+     "backgroundColor": 0,
+     "widthAuto": false
+    },
+    {
+     "fieldName": "MaeShorishaRirekiPanel",
+     "items": [
+      {
+       "fieldName": "MaeShorishaRirekiLabel",
+       "items": [],
+       "controlType": "Label",
+       "width": "S",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "align": 2,
+       "text": "前処理者履歴",
+       "isPrivateInfo": false
+      },
+      {
+       "fieldName": "MaeShorishaRirekiDropDown",
+       "items": [],
+       "controlType": "DropDownList",
+       "width": "L",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "text": "",
+       "required": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
+       "labelLText": "",
+       "labelRText": "",
+       "labelLWidth": "S",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "selectedItem": "",
+       "dataSource": [
+        {
+         "key": "noData",
+         "value": "未選択"
+        },
+        {
+         "key": "data1",
+         "value": "喜屋武三郎"
+        }
+       ]
+      }
+     ],
+     "controlType": "Panel",
+     "width": "950",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "S",
+     "marginRight": "XS",
+     "onLoad": "",
+     "title": "",
+     "isOpen": true,
+     "canOpenAndClose": true,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "MaeShorishaRirekiPanel"
+      }
+     ],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "S",
+     "marginBottom": "XS",
+     "eraseBorderTop": true,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true,
+     "backgroundColor": 0,
+     "widthAuto": false
+    },
+    {
+     "fieldName": "HihokenshaSearchButton",
+     "items": [],
+     "controlType": "Button",
+     "width": "S",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XL",
+     "marginRight": "XL",
+     "text": "検索",
+     "onClick": "onClick_HihokenshaSearch",
+     "imageFileUrl": ""
+    }
+   ],
+   "controlType": "Panel",
+   "width": "1000",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "onLoad": "",
+   "title": "被保険者検索条件",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "HihokenshaSearchPanel"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "S",
+   "marginBottom": "XS",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": false
+  },
+  {
+   "fieldName": "HihokenshaSearchGaitoshaPanel",
+   "items": [
+    {
+     "fieldName": "HihokenshaSelectButton",
+     "items": [],
+     "controlType": "Button",
+     "width": "S",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XL",
+     "text": "照会",
+     "onClick": "onClick_HihokenshaSelect",
+     "imageFileUrl": ""
+    },
+    {
+     "fieldName": "HihokenshaSearchGaitoshaGrid",
+     "items": [],
+     "controlType": "DataGrid",
+     "width": "850",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "S",
+     "marginRight": "XS",
+     "dataSource": [],
+     "gridSetting": {
+      "rowHeight": 25,
+      "isMultiSelectable": false,
+      "isShowFooter": true,
+      "isShowFilter": false,
+      "header": {
+       "combineColumns": [],
+       "frozenColumn": ""
+      },
+      "columns": [
+       {
+        "columnName": "被保番号",
+        "dataName": "hihokenshaNo",
+        "width": 100,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 2,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "hihokenshaNo"
+       },
+       {
+        "columnName": "氏名",
+        "dataName": "shimei",
+        "width": 150,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "shimei"
+       },
+       {
+        "columnName": "生年月日",
+        "dataName": "dateOfBirth",
+        "width": 90,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "dateOfBirth"
+       },
+       {
+        "columnName": "年齢",
+        "dataName": "age",
+        "width": 60,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 2,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "age"
+       },
+       {
+        "columnName": "性別",
+        "dataName": "gender",
+        "width": 60,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "gender"
+       },
+       {
+        "columnName": "住所",
+        "dataName": "jusho",
+        "width": 250,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "jusho"
+       },
+       {
+        "columnName": "識別コード",
+        "dataName": "shikibetsuCode",
+        "width": 120,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 2,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "shikibetsuCode"
+       },
+       {
+        "columnName": "フリガナ",
+        "dataName": "hurikana",
+        "width": 0,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "hurikana"
+       },
+       {
+        "columnName": "住所コード",
+        "dataName": "jushoCode",
+        "width": 0,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "jushoCode"
+       },
+       {
+        "columnName": "行政区",
+        "dataName": "gyoseiku",
+        "width": 0,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "gyoseiku"
+       },
+       {
+        "columnName": "組合",
+        "dataName": "kumiai",
+        "width": 0,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "kumiai"
+       },
+       {
+        "columnName": "世帯コード",
+        "dataName": "setaiCode",
+        "width": 0,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "setaiCode"
+       },
+       {
+        "columnName": "住民票コード",
+        "dataName": "juminhyoCode",
+        "width": 0,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "juminhyoCode"
+       },
+       {
+        "columnName": "連絡先1",
+        "dataName": "renrakusaki1",
+        "width": 0,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "renrakusaki1"
+       },
+       {
+        "columnName": "連絡先2",
+        "dataName": "renrakusaki2",
+        "width": 0,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "renrakusaki2"
+       },
+       {
+        "columnName": "要介護度",
+        "dataName": "yokaigodo",
+        "width": 0,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "yokaigodo"
+       },
+       {
+        "columnName": "認定期間開始",
+        "dataName": "ninteiKikanKaishi",
+        "width": 0,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "ninteiKikanKaishi"
+       },
+       {
+        "columnName": "認定期間終了",
+        "dataName": "ninteiKikanShuryo",
+        "width": 0,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "ninteiKikanShuryo"
+       },
+       {
+        "columnName": "旧被保険者番号",
+        "dataName": "kyuHihokenshaNo",
+        "width": 0,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "kyuHihokenshaNo"
+       },
+       {
+        "columnName": "旧市町村コード",
+        "dataName": "kyuShichosonCode",
+        "width": 0,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "kyuShichosonCode"
+       },
+       {
+        "columnName": "旧市町村",
+        "dataName": "kyuShichoson",
+        "width": 0,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "kyuShichoson"
+       }
+      ]
+     },
+     "height": "Auto",
+     "onSort": "",
+     "onSelect": "",
+     "onOnlyRow": "onlyRow_HihokenshaSearchGaitoshaGrid",
+     "onNoRow": "",
+     "onMultiRows": "",
+     "sortOrder": "jusho",
+     "isAscending": true,
+     "filterList": [],
+     "clickedRowId": -1
+    }
+   ],
+   "controlType": "Panel",
+   "width": "1000",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "onLoad": "",
+   "title": "該当者一覧",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "HihokenshaSearchGaitoshaPanel"
+    },
+    {
+     "postParameterPanelNames": "HihokenshaSearchPanel"
+    }
+   ],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_HihokenshaSearch",
+     "requestUrl": "dba/db/dba/HihokenshaSearchGaitoshaPanel/getOnLoadDivData"
+    }
+   ],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "S",
+   "marginBottom": "XS",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": false
+  },
+  {
    "fieldName": "HihokenshaInfoPanel",
    "items": [
     {
@@ -379,7 +1374,7 @@
        "labelRAlign": 0,
        "permitCharactor": "./_-",
        "ymdKubun": 2,
-       "displayFormat": 1
+       "displayFormat": 0
       },
       {
        "fieldName": "JushoLabel",
@@ -1074,7 +2069,7 @@
        "labelRAlign": 0,
        "permitCharactor": "",
        "ymdKubun": 2,
-       "displayFormat": 1,
+       "displayFormat": 0,
        "fromPlaceHolder": "",
        "toPlaceHolder": "",
        "minDate": "",
@@ -1310,11 +2305,18 @@
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "HihokenshaInfoPanel"
+    },
+    {
+     "postParameterPanelNames": "HihokenshaSearchGaitoshaPanel"
     }
    ],
    "requestSettings": [
     {
      "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_HihokenshaSelect",
      "requestUrl": "dba/db/dba/HihokenshaInfoPanel/getOnLoadDivData"
     }
    ],
@@ -1351,6 +2353,7 @@
      "authorityMode": 0,
      "marginLeft": "S",
      "marginRight": "S",
+     "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -1371,7 +2374,7 @@
          "cellType": 0
         },
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": "hihokenshaKubun"
        },
@@ -1385,7 +2388,7 @@
          "cellType": 0
         },
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": "shutokuJiyu"
        },
@@ -1399,7 +2402,7 @@
          "cellType": 0
         },
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": "shutokuTodokedeYMD"
        },
@@ -1413,7 +2416,7 @@
          "cellType": 0
         },
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": "shutokuYMD"
        },
@@ -1425,7 +2428,7 @@
         "cellType": 0,
         "cellDetails": null,
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": "soshitsuJiyu"
        },
@@ -1439,7 +2442,7 @@
          "cellType": 0
         },
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": "soshitsuTodokedeYMD"
        },
@@ -1453,7 +2456,7 @@
          "cellType": 0
         },
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": "soshitsuYMD"
        },
@@ -1467,7 +2470,7 @@
          "cellType": 0
         },
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": "ichigoHihokenshaNenreiTotatsuYMD"
        },
@@ -1479,7 +2482,7 @@
         "cellType": 0,
         "cellDetails": null,
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": "henkoJiyu"
        },
@@ -1493,7 +2496,7 @@
          "cellType": 0
         },
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": "henkoTodokedeYMD"
        },
@@ -1507,25 +2510,25 @@
          "cellType": 0
         },
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": "henkoYMD"
        },
        {
-        "columnName": "住所地特例適応事由",
-        "dataName": "jushochitokureiTekioJiyu",
+        "columnName": "住所地特例適用事由",
+        "dataName": "jushochitokureiTekiyoJiyu",
         "width": 180,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "jushochitokureiTekioJiyu"
+        "sortKey": "jushochitokureiTekiyoJiyu"
        },
        {
-        "columnName": "適応届出日",
-        "dataName": "tekioTodokedeYMD",
+        "columnName": "適用届出日",
+        "dataName": "tekiyoTodokedeYMD",
         "width": 100,
         "visible": true,
         "cellType": 0,
@@ -1533,13 +2536,13 @@
          "cellType": 0
         },
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "tekioTodokedeYMD"
+        "sortKey": "tekiyoTodokedeYMD"
        },
        {
-        "columnName": "適応日",
-        "dataName": "tekioYMD",
+        "columnName": "適用日",
+        "dataName": "tekiyoYMD",
         "width": 80,
         "visible": true,
         "cellType": 0,
@@ -1547,9 +2550,9 @@
          "cellType": 0
         },
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "tekioYMD"
+        "sortKey": "tekiyoYMD"
        },
        {
         "columnName": "住所地特例解除事由",
@@ -1559,7 +2562,7 @@
         "cellType": 0,
         "cellDetails": null,
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": "jushochitokureiKaijoJiyu"
        },
@@ -1573,7 +2576,7 @@
          "cellType": 0
         },
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": "kaijoTodokedeYMD"
        },
@@ -1587,7 +2590,7 @@
          "cellType": 0
         },
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": "kaijoYMD"
        },
@@ -1599,7 +2602,7 @@
         "cellType": 0,
         "cellDetails": null,
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": "koikinaiTokureiSochimotoShichoson"
        },
@@ -1611,7 +2614,7 @@
         "cellType": 0,
         "cellDetails": null,
         "align": 2,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": "kyuShichosonCode"
        },
@@ -1623,7 +2626,7 @@
         "cellType": 0,
         "cellDetails": null,
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": "saikofuKubun"
        },
@@ -1635,7 +2638,7 @@
         "cellType": 0,
         "cellDetails": null,
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": "saikohuJiyu"
        },
@@ -1647,7 +2650,7 @@
         "cellType": 0,
         "cellDetails": null,
         "align": 2,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": "chohyoKofuRirekiID"
        }
@@ -1659,7 +2662,6 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "dataSource": [],
      "sortOrder": "soshitsuTodokedeYMD",
      "isAscending": true,
      "filterList": [],
@@ -1687,11 +2689,18 @@
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "HihokenshaDaichoRirekiPanel"
+    },
+    {
+     "postParameterPanelNames": "HihokenshaSearchGaitoshaPanel"
     }
    ],
    "requestSettings": [
     {
      "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_HihokenshaSelect",
      "requestUrl": "dba/db/dba/HihokenshaDaichoRirekiPanel/getOnLoadDivData"
     }
    ],
@@ -1734,6 +2743,7 @@
          "authorityMode": 0,
          "marginLeft": "S",
          "marginRight": "XS",
+         "dataSource": [],
          "gridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
@@ -1752,7 +2762,7 @@
             "cellType": 0,
             "cellDetails": null,
             "align": 0,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "nyushoShoriYMD"
            },
@@ -1766,7 +2776,7 @@
              "cellType": 0
             },
             "align": 0,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "nyushoYMD"
            },
@@ -1778,7 +2788,7 @@
             "cellType": 0,
             "cellDetails": null,
             "align": 0,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "taishoShoriYMD"
            },
@@ -1792,7 +2802,7 @@
              "cellType": 0
             },
             "align": 0,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "taishoYMD"
            },
@@ -1804,7 +2814,7 @@
             "cellType": 0,
             "cellDetails": null,
             "align": 0,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "jigyoshaShubetsu"
            },
@@ -1818,7 +2828,7 @@
              "cellType": 0
             },
             "align": 2,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "jigyoshaNo"
            },
@@ -1832,7 +2842,7 @@
              "cellType": 0
             },
             "align": 0,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "shisetsuMeisho"
            },
@@ -1846,7 +2856,7 @@
              "cellType": 0
             },
             "align": 0,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "shisetsuKanaMeisho"
            },
@@ -1858,7 +2868,7 @@
             "cellType": 0,
             "cellDetails": null,
             "align": 0,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "shozaichiJusho"
            }
@@ -1870,7 +2880,6 @@
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
-         "dataSource": [],
          "sortOrder": "jigyoshaShubetsu",
          "isAscending": true,
          "filterList": [],
@@ -1914,6 +2923,7 @@
          "authorityMode": 0,
          "marginLeft": "S",
          "marginRight": "XS",
+         "dataSource": [],
          "gridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
@@ -1932,21 +2942,21 @@
             "cellType": 0,
             "cellDetails": "\"{\\\"cellType\\\":0}\"",
             "align": 2,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "hihokenshaNo"
            },
            {
             "columnName": "氏名",
-            "dataName": "name",
+            "dataName": "shimei",
             "width": 200,
             "visible": true,
             "cellType": 0,
             "cellDetails": "\"{\\\"cellType\\\":0}\"",
             "align": 0,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
-            "sortKey": "name"
+            "sortKey": "shimei"
            },
            {
             "columnName": "性別",
@@ -1956,7 +2966,7 @@
             "cellType": 0,
             "cellDetails": "\"{\\\"cellType\\\":0}\"",
             "align": 0,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "gender"
            },
@@ -1968,7 +2978,7 @@
             "cellType": 0,
             "cellDetails": "\"{\\\"cellType\\\":0}\"",
             "align": 0,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "dateOfBirth"
            },
@@ -1980,7 +2990,7 @@
             "cellType": 0,
             "cellDetails": "\"{\\\"cellType\\\":0}\"",
             "align": 0,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "zokugara"
            },
@@ -1992,7 +3002,7 @@
             "cellType": 0,
             "cellDetails": "\"null\"",
             "align": 0,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "juminShubetsu"
            },
@@ -2004,7 +3014,7 @@
             "cellType": 0,
             "cellDetails": "\"null\"",
             "align": 2,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "shikibetsuCode"
            }
@@ -2016,8 +3026,7 @@
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
-         "dataSource": [],
-         "sortOrder": "zokugara",
+         "sortOrder": "name",
          "isAscending": true,
          "filterList": [],
          "clickedRowId": -1
@@ -2027,7 +3036,7 @@
        "width": "XS",
        "visible": true,
        "displayNone": false,
-       "disabled": false,
+       "disabled": true,
        "accessKey": "",
        "nextFocusFieldName": "",
        "wrap": false,
@@ -2060,6 +3069,7 @@
          "authorityMode": 0,
          "marginLeft": "S",
          "marginRight": "XS",
+         "dataSource": [],
          "gridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
@@ -2078,7 +3088,7 @@
             "cellType": 0,
             "cellDetails": null,
             "align": 2,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "jukyushaNo"
            },
@@ -2092,7 +3102,7 @@
              "cellType": 0
             },
             "align": 0,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "kaishiYMD"
            },
@@ -2106,7 +3116,7 @@
              "cellType": 0
             },
             "align": 0,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "haishiYMD"
            },
@@ -2120,7 +3130,7 @@
              "cellType": 0
             },
             "align": 0,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "seikatsuHogoShubetsu"
            }
@@ -2132,7 +3142,6 @@
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
-         "dataSource": [],
          "sortOrder": "",
          "isAscending": true,
          "filterList": [],
@@ -2176,6 +3185,7 @@
          "authorityMode": 0,
          "marginLeft": "S",
          "marginRight": "XS",
+         "dataSource": [],
          "gridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
@@ -2194,7 +3204,7 @@
             "cellType": 0,
             "cellDetails": null,
             "align": 2,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "jukyushaNo"
            },
@@ -2208,7 +3218,7 @@
              "cellType": 0
             },
             "align": 0,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "kaishiYMD"
            },
@@ -2222,7 +3232,7 @@
              "cellType": 0
             },
             "align": 0,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "haishiYMD"
            }
@@ -2234,7 +3244,6 @@
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
-         "dataSource": [],
          "sortOrder": "",
          "isAscending": true,
          "filterList": [],
@@ -2278,6 +3287,7 @@
          "authorityMode": 0,
          "marginLeft": "S",
          "marginRight": "XS",
+         "dataSource": [],
          "gridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
@@ -2296,7 +3306,7 @@
             "cellType": 0,
             "cellDetails": "{\"cellType\":0}",
             "align": 0,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "shubetsu"
            },
@@ -2308,7 +3318,7 @@
             "cellType": 0,
             "cellDetails": "{\"cellType\":0}",
             "align": 2,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "hokenshaNo"
            },
@@ -2320,7 +3330,7 @@
             "cellType": 0,
             "cellDetails": "{\"cellType\":0}",
             "align": 0,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "meisho"
            },
@@ -2332,7 +3342,7 @@
             "cellType": 0,
             "cellDetails": "{\"cellType\":0}",
             "align": 2,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "kigoNo"
            },
@@ -2344,7 +3354,7 @@
             "cellType": 0,
             "cellDetails": "{\"cellType\":0}",
             "align": 0,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "kanyuYMD"
            },
@@ -2356,7 +3366,7 @@
             "cellType": 0,
             "cellDetails": "null",
             "align": 0,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "dattaiYMD"
            }
@@ -2368,7 +3378,6 @@
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
-         "dataSource": [],
          "sortOrder": "shubetsu",
          "isAscending": true,
          "filterList": [],
@@ -2412,6 +3421,7 @@
          "authorityMode": 0,
          "marginLeft": "S",
          "marginRight": "XS",
+         "dataSource": [],
          "gridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
@@ -2432,7 +3442,7 @@
              "cellType": 0
             },
             "align": 0,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "todokedeYMD"
            },
@@ -2446,7 +3456,7 @@
              "cellType": 0
             },
             "align": 2,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "shinseishoKanriNo"
            },
@@ -2460,7 +3470,7 @@
              "cellType": 0
             },
             "align": 0,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "todokedeShubetsu"
            }
@@ -2472,7 +3482,6 @@
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
-         "dataSource": [],
          "sortOrder": "",
          "isAscending": true,
          "filterList": [],
@@ -2522,7 +3531,7 @@
       "ShinseiInfoTabPanel"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "ShisetsuNyutaishoTabPanel"
+     "selectedItemFieldName": "ShinseiInfoTabPanel"
     }
    ],
    "controlType": "Panel",
@@ -2546,11 +3555,18 @@
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "HihokenshaDetailPanel"
+    },
+    {
+     "postParameterPanelNames": "HihokenshaSearchGaitoshaPanel"
     }
    ],
    "requestSettings": [
     {
      "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_HihokenshaSelect",
      "requestUrl": "dba/db/dba/HihokenshaDetailPanel/getOnLoadDivData"
     }
    ],
@@ -2588,27 +3604,6 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "text": "再検索を行う",
-     "onClick": "",
-     "imageFileUrl": ""
-    },
-    {
-     "fieldName": "ReturnMenuButton",
-     "items": [],
-     "controlType": "Button",
-     "width": "M",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "text": "メニューへ戻る",
      "onClick": "",
      "imageFileUrl": ""
     }
@@ -2684,7 +3679,57 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "被保険者照会画面Tab",
+   "stateName": "被保険者検索画面",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "HihokenshaSearchPanel",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "ReamsCommonSearchInfoPanel",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "DBCommonSearchInfoPanel",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "MaeShorishaRirekiPanel",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "HihokenshaSearchGaitoshaPanel",
+     "panelState": "close"
+    }
+   ],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "HihokenshaSelectButton",
+     "event": "onClick",
+     "transition": "被保険者照会画面"
+    },
+    {
+     "fieldName": "ResearchButton",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "HihokenshaSearchGaitoshaGrid",
+     "event": "onOnlyRow",
+     "transition": "被保険者照会画面"
+    },
+    {
+     "fieldName": "HihokenshaSearchGaitoshaGrid",
+     "event": "onMultiRows",
+     "transition": "被保険者照会画面"
+    }
+   ]
+  },
+  {
+   "order": "2",
+   "stateName": "被保険者照会画面",
    "showWizard": false,
    "visibleDivs": [
     {
@@ -2713,7 +3758,28 @@
     }
    ],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "HihokenshaSelectButton",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ResearchButton",
+     "event": "onClick",
+     "transition": "被保険者検索画面"
+    },
+    {
+     "fieldName": "HihokenshaSearchGaitoshaGrid",
+     "event": "onOnlyRow",
+     "transition": ""
+    },
+    {
+     "fieldName": "HihokenshaSearchGaitoshaGrid",
+     "event": "onMultiRows",
+     "transition": ""
+    }
+   ]
   }
  ],
  "currentState": "All",
@@ -2722,19 +3788,26 @@
  "UIContainerEventMapping": [],
  "loadSequencePanelNames": [
   [
+   "HihokenshaSearchPanel",
+   "HihokenshaSearchGaitoshaPanel",
+   "HihokenshaDetailPanel",
+   "HihokenshaDaichoRirekiPanel",
    "HihokenshaInfoPanel"
+  ],
+  [
+   "ReamsCommonSearchInfoPanel"
+  ],
+  [
+   "DBCommonSearchInfoPanel"
+  ],
+  [
+   "MaeShorishaRirekiPanel"
   ],
   [
    "ReamsCommonInfoPanel"
   ],
   [
    "DBCommonInfoPanel"
-  ],
-  [
-   "HihokenshaDaichoRirekiPanel"
-  ],
-  [
-   "HihokenshaDetailPanel"
   ],
   [
    "KyotsuPanel"

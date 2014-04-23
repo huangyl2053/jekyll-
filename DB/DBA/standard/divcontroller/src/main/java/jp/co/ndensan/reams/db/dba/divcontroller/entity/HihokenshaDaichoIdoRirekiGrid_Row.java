@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Apr 22 11:32:54 JST 2014 
+ * Wed Apr 23 14:39:55 JST 2014 
  */
 
 
@@ -31,9 +31,9 @@ public class HihokenshaDaichoIdoRirekiGrid_Row extends DataRow {
     private RString henkoJiyu;
     private RString henkoTodokedeYMD;
     private RString henkoYMD;
-    private RString jushochitokureiTekioJiyu;
-    private RString tekioTodokedeYMD;
-    private RString tekioYMD;
+    private RString jushochitokureiTekiyoJiyu;
+    private RString tekiyoTodokedeYMD;
+    private RString tekiyoYMD;
     private RString jushochitokureiKaijoJiyu;
     private RString kaijoTodokedeYMD;
     private RString kaijoYMD;
@@ -47,7 +47,7 @@ public class HihokenshaDaichoIdoRirekiGrid_Row extends DataRow {
         super();
     }
 
-    public HihokenshaDaichoIdoRirekiGrid_Row(RString hihokenshaKubun, RString shutokuJiyu, RString shutokuTodokedeYMD, RString shutokuYMD, RString soshitsuJiyu, RString soshitsuTodokedeYMD, RString soshitsuYMD, RString ichigoHihokenshaNenreiTotatsuYMD, RString henkoJiyu, RString henkoTodokedeYMD, RString henkoYMD, RString jushochitokureiTekioJiyu, RString tekioTodokedeYMD, RString tekioYMD, RString jushochitokureiKaijoJiyu, RString kaijoTodokedeYMD, RString kaijoYMD, RString koikinaiTokureiSochimotoShichoson, RString kyuShichosonCode, RString saikofuKubun, RString saikohuJiyu, RString chohyoKofuRirekiID) {
+    public HihokenshaDaichoIdoRirekiGrid_Row(RString hihokenshaKubun, RString shutokuJiyu, RString shutokuTodokedeYMD, RString shutokuYMD, RString soshitsuJiyu, RString soshitsuTodokedeYMD, RString soshitsuYMD, RString ichigoHihokenshaNenreiTotatsuYMD, RString henkoJiyu, RString henkoTodokedeYMD, RString henkoYMD, RString jushochitokureiTekiyoJiyu, RString tekiyoTodokedeYMD, RString tekiyoYMD, RString jushochitokureiKaijoJiyu, RString kaijoTodokedeYMD, RString kaijoYMD, RString koikinaiTokureiSochimotoShichoson, RString kyuShichosonCode, RString saikofuKubun, RString saikohuJiyu, RString chohyoKofuRirekiID) {
         super();
         this.setOriginalData("hihokenshaKubun", hihokenshaKubun);
         this.setOriginalData("shutokuJiyu", shutokuJiyu);
@@ -60,9 +60,9 @@ public class HihokenshaDaichoIdoRirekiGrid_Row extends DataRow {
         this.setOriginalData("henkoJiyu", henkoJiyu);
         this.setOriginalData("henkoTodokedeYMD", henkoTodokedeYMD);
         this.setOriginalData("henkoYMD", henkoYMD);
-        this.setOriginalData("jushochitokureiTekioJiyu", jushochitokureiTekioJiyu);
-        this.setOriginalData("tekioTodokedeYMD", tekioTodokedeYMD);
-        this.setOriginalData("tekioYMD", tekioYMD);
+        this.setOriginalData("jushochitokureiTekiyoJiyu", jushochitokureiTekiyoJiyu);
+        this.setOriginalData("tekiyoTodokedeYMD", tekiyoTodokedeYMD);
+        this.setOriginalData("tekiyoYMD", tekiyoYMD);
         this.setOriginalData("jushochitokureiKaijoJiyu", jushochitokureiKaijoJiyu);
         this.setOriginalData("kaijoTodokedeYMD", kaijoTodokedeYMD);
         this.setOriginalData("kaijoYMD", kaijoYMD);
@@ -82,9 +82,9 @@ public class HihokenshaDaichoIdoRirekiGrid_Row extends DataRow {
         this.henkoJiyu = henkoJiyu;
         this.henkoTodokedeYMD = henkoTodokedeYMD;
         this.henkoYMD = henkoYMD;
-        this.jushochitokureiTekioJiyu = jushochitokureiTekioJiyu;
-        this.tekioTodokedeYMD = tekioTodokedeYMD;
-        this.tekioYMD = tekioYMD;
+        this.jushochitokureiTekiyoJiyu = jushochitokureiTekiyoJiyu;
+        this.tekiyoTodokedeYMD = tekiyoTodokedeYMD;
+        this.tekiyoYMD = tekiyoYMD;
         this.jushochitokureiKaijoJiyu = jushochitokureiKaijoJiyu;
         this.kaijoTodokedeYMD = kaijoTodokedeYMD;
         this.kaijoYMD = kaijoYMD;
@@ -139,16 +139,16 @@ public class HihokenshaDaichoIdoRirekiGrid_Row extends DataRow {
         return henkoYMD;
     }
 
-    public RString getJushochitokureiTekioJiyu() {
-        return jushochitokureiTekioJiyu;
+    public RString getJushochitokureiTekiyoJiyu() {
+        return jushochitokureiTekiyoJiyu;
     }
 
-    public RString getTekioTodokedeYMD() {
-        return tekioTodokedeYMD;
+    public RString getTekiyoTodokedeYMD() {
+        return tekiyoTodokedeYMD;
     }
 
-    public RString getTekioYMD() {
-        return tekioYMD;
+    public RString getTekiyoYMD() {
+        return tekiyoYMD;
     }
 
     public RString getJushochitokureiKaijoJiyu() {
@@ -238,19 +238,19 @@ public class HihokenshaDaichoIdoRirekiGrid_Row extends DataRow {
         this.henkoYMD = henkoYMD;
     }
 
-    public void setJushochitokureiTekioJiyu(RString jushochitokureiTekioJiyu) {
-        this.setOriginalData("jushochitokureiTekioJiyu", jushochitokureiTekioJiyu);
-        this.jushochitokureiTekioJiyu = jushochitokureiTekioJiyu;
+    public void setJushochitokureiTekiyoJiyu(RString jushochitokureiTekiyoJiyu) {
+        this.setOriginalData("jushochitokureiTekiyoJiyu", jushochitokureiTekiyoJiyu);
+        this.jushochitokureiTekiyoJiyu = jushochitokureiTekiyoJiyu;
     }
 
-    public void setTekioTodokedeYMD(RString tekioTodokedeYMD) {
-        this.setOriginalData("tekioTodokedeYMD", tekioTodokedeYMD);
-        this.tekioTodokedeYMD = tekioTodokedeYMD;
+    public void setTekiyoTodokedeYMD(RString tekiyoTodokedeYMD) {
+        this.setOriginalData("tekiyoTodokedeYMD", tekiyoTodokedeYMD);
+        this.tekiyoTodokedeYMD = tekiyoTodokedeYMD;
     }
 
-    public void setTekioYMD(RString tekioYMD) {
-        this.setOriginalData("tekioYMD", tekioYMD);
-        this.tekioYMD = tekioYMD;
+    public void setTekiyoYMD(RString tekiyoYMD) {
+        this.setOriginalData("tekiyoYMD", tekiyoYMD);
+        this.tekiyoYMD = tekiyoYMD;
     }
 
     public void setJushochitokureiKaijoJiyu(RString jushochitokureiKaijoJiyu) {

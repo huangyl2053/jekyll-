@@ -5,25 +5,26 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.HihokenshaDaichoIdoRirekiGrid_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * HihokenshaDaichoRirekiPanel のクラスファイル 
+ * MaeShorishaRirekiPanel のクラスファイル 
  * 
  * @author 自動生成
  */
-public class HihokenshaDaichoRirekiPanelDiv extends Panel {
+public class MaeShorishaRirekiPanelDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("HihokenshaDaichoIdoRirekiGrid")
-    private DataGrid<HihokenshaDaichoIdoRirekiGrid_Row> HihokenshaDaichoIdoRirekiGrid;
+    @JsonProperty("MaeShorishaRirekiLabel")
+    private Label MaeShorishaRirekiLabel;
+    @JsonProperty("MaeShorishaRirekiDropDown")
+    private DropDownList MaeShorishaRirekiDropDown;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,14 +32,24 @@ public class HihokenshaDaichoRirekiPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("HihokenshaDaichoIdoRirekiGrid")
-    public DataGrid<HihokenshaDaichoIdoRirekiGrid_Row> getHihokenshaDaichoIdoRirekiGrid() {
-        return HihokenshaDaichoIdoRirekiGrid;
+    @JsonProperty("MaeShorishaRirekiLabel")
+    public Label getMaeShorishaRirekiLabel() {
+        return MaeShorishaRirekiLabel;
     }
 
-    @JsonProperty("HihokenshaDaichoIdoRirekiGrid")
-    public void setHihokenshaDaichoIdoRirekiGrid(DataGrid<HihokenshaDaichoIdoRirekiGrid_Row> HihokenshaDaichoIdoRirekiGrid) {
-        this.HihokenshaDaichoIdoRirekiGrid=HihokenshaDaichoIdoRirekiGrid;
+    @JsonProperty("MaeShorishaRirekiLabel")
+    public void setMaeShorishaRirekiLabel(Label MaeShorishaRirekiLabel) {
+        this.MaeShorishaRirekiLabel=MaeShorishaRirekiLabel;
+    }
+
+    @JsonProperty("MaeShorishaRirekiDropDown")
+    public DropDownList getMaeShorishaRirekiDropDown() {
+        return MaeShorishaRirekiDropDown;
+    }
+
+    @JsonProperty("MaeShorishaRirekiDropDown")
+    public void setMaeShorishaRirekiDropDown(DropDownList MaeShorishaRirekiDropDown) {
+        this.MaeShorishaRirekiDropDown=MaeShorishaRirekiDropDown;
     }
 
 }

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Apr 22 14:56:45 JST 2014 
+ * Wed Apr 23 14:40:00 JST 2014 
  */
 
 
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class SetaiShokaiGrid_Row extends DataRow {
 
     private RString hihokenshaNo;
-    private RString name;
+    private RString shimei;
     private RString gender;
     private RString dateOfBirth;
     private RString zokugara;
@@ -32,17 +32,17 @@ public class SetaiShokaiGrid_Row extends DataRow {
         super();
     }
 
-    public SetaiShokaiGrid_Row(RString hihokenshaNo, RString name, RString gender, RString dateOfBirth, RString zokugara, RString juminShubetsu, RString shikibetsuCode) {
+    public SetaiShokaiGrid_Row(RString hihokenshaNo, RString shimei, RString gender, RString dateOfBirth, RString zokugara, RString juminShubetsu, RString shikibetsuCode) {
         super();
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
-        this.setOriginalData("name", name);
+        this.setOriginalData("shimei", shimei);
         this.setOriginalData("gender", gender);
         this.setOriginalData("dateOfBirth", dateOfBirth);
         this.setOriginalData("zokugara", zokugara);
         this.setOriginalData("juminShubetsu", juminShubetsu);
         this.setOriginalData("shikibetsuCode", shikibetsuCode);
         this.hihokenshaNo = hihokenshaNo;
-        this.name = name;
+        this.shimei = shimei;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.zokugara = zokugara;
@@ -54,8 +54,8 @@ public class SetaiShokaiGrid_Row extends DataRow {
         return hihokenshaNo;
     }
 
-    public RString getName() {
-        return name;
+    public RString getShimei() {
+        return shimei;
     }
 
     public RString getGender() {
@@ -83,9 +83,9 @@ public class SetaiShokaiGrid_Row extends DataRow {
         this.hihokenshaNo = hihokenshaNo;
     }
 
-    public void setName(RString name) {
-        this.setOriginalData("name", name);
-        this.name = name;
+    public void setShimei(RString shimei) {
+        this.setOriginalData("shimei", shimei);
+        this.shimei = shimei;
     }
 
     public void setGender(RString gender) {

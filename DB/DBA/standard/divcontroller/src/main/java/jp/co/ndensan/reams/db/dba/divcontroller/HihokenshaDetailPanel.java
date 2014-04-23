@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.HihokenshaDetailPanelDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.HihokenshaDetailTabDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.HihokenshaSearchGaitoshaGrid_Row;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.HihokenshaSearchGaitoshaPanelDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.IryoHokenGrid_Row;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.RoreiFukushiGrid_Row;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.SeikatsuHogoGrid_Row;
@@ -34,20 +36,24 @@ public class HihokenshaDetailPanel {
     /**
      * Divに対して値を設定します。
      *
-     * @param panel divData
+     * @param detailPanel 被保険者詳細パネル
+     * @param gaitoshaPanel 被保険者検索該当者パネル
      * @return response
      */
-    public ResponseData<HihokenshaDetailPanelDiv> getOnLoadDivData(HihokenshaDetailPanelDiv panel) {
+    public ResponseData<HihokenshaDetailPanelDiv> getOnLoadDivData(HihokenshaDetailPanelDiv detailPanel, HihokenshaSearchGaitoshaPanelDiv gaitoshaPanel) {
         ResponseData<HihokenshaDetailPanelDiv> response = new ResponseData<>();
 
-        HihokenshaDetailTabDiv tab = panel.getHihokenshaDetailTab();
-        createShisetsuNyutaishoGrid(tab);
-        createSetaiShokaiGrid(tab);
-        createRoreiFukushiGrid(tab);
-        createIryoHokenGrid(tab);
-        createShinseiJohoGrid(tab);
-        createSeikatsuHogoGrid(tab);
-        response.data = panel;
+        HihokenshaDetailTabDiv tab = detailPanel.getHihokenshaDetailTab();
+        RString 名称 = get該当者情報(gaitoshaPanel).getShimei();
+
+        setShisetsuNyutaishoGrid(tab, 名称);
+        setSetaiShokaiGrid(tab, 名称);
+        setRoreiFukushiGrid(tab, 名称);
+        setIryoHokenGrid(tab, 名称);
+        setShinseiJohoGrid(tab, 名称);
+        setSeikatsuHogoGrid(tab, 名称);
+
+        response.data = detailPanel;
         return response;
     }
 
@@ -56,17 +62,29 @@ public class HihokenshaDetailPanel {
      *
      * @param tab タブ
      */
-    private void createShisetsuNyutaishoGrid(HihokenshaDetailTabDiv tab) {
-        tab.getShisetsuNyutaishoTabPanel().getShisetsuNyutaishoGrid().setDataSource(createShisetsuNyutaishoList());
+    private void setShisetsuNyutaishoGrid(HihokenshaDetailTabDiv tab, RString 名称) {
+        List<ShisetsuNyutaishoGrid_Row> list = createShisetsuNyutaishoList(名称);
+        tab.getShisetsuNyutaishoTabPanel().getShisetsuNyutaishoGrid().setDataSource(list);
+        tab.getShisetsuNyutaishoTabPanel().setVisible(!list.isEmpty());
     }
 
-    private List<ShisetsuNyutaishoGrid_Row> createShisetsuNyutaishoList() {
+    private List<ShisetsuNyutaishoGrid_Row> createShisetsuNyutaishoList(RString 名称) {
         List<ShisetsuNyutaishoGrid_Row> list = new ArrayList<>();
         ShisetsuNyutaishoGrid_Row item;
 
-        item = createShisetsuNyutaishoData("19900219", "19900228", "", "",
-                "指定介護療養型医療施設", "0000001254", "電算介護療養支援センター", "ﾃﾞﾝｻﾝｶｲｺﾞﾘｮｳﾖｳｼｴﾝｾﾝﾀｰ", "電算市高松2201-1");
-        list.add(item);
+        if (名称.equals(new RString("電算太郎"))) {
+            item = createShisetsuNyutaishoData("19900219", "19900228", "", "",
+                    "指定介護療養型医療施設", "0000001254", "電算介護療養支援センター", "デンサンカイゴリョウヨウシエンセンター", "電算市高松2201-1");
+            list.add(item);
+        } else if (名称.equals(new RString("山本九十九子"))) {
+        } else {
+            item = createShisetsuNyutaishoData("19900219", "19900228", "", "",
+                    "指定介護療養型医療施設", "0000001254", "電算介護療養支援センター", "デンサンカイゴリョウヨウシエンセンター", "電算市高松2201-1");
+            list.add(item);
+            item = createShisetsuNyutaishoData("19800101", "19800112", "19900219", "19900228",
+                    "指定介護療養型医療施設", "0000001012", "電算総合支援センター", "デンサンソウゴウシエンセンター", "電算市稲葉1000-1");
+            list.add(item);
+        }
 
         return list;
     }
@@ -92,20 +110,31 @@ public class HihokenshaDetailPanel {
      *
      * @param tab タブ
      */
-    private void createSetaiShokaiGrid(HihokenshaDetailTabDiv tab) {
-        tab.getSetaiShokaiTabPanel().getSetaiShokaiGrid().setDataSource(createSetaiList());
+    private void setSetaiShokaiGrid(HihokenshaDetailTabDiv tab, RString 名称) {
+        List<SetaiShokaiGrid_Row> list = createSetaiList(名称);
+        tab.getSetaiShokaiTabPanel().getSetaiShokaiGrid().setDataSource(list);
+        tab.getSetaiShokaiTabPanel().setVisible(!list.isEmpty());
     }
 
-    private List<SetaiShokaiGrid_Row> createSetaiList() {
+    private List<SetaiShokaiGrid_Row> createSetaiList(RString 名称) {
         List<SetaiShokaiGrid_Row> list = new ArrayList<>();
         SetaiShokaiGrid_Row item;
 
-        item = createSetaiData("0000708123", "電算太郎", "男", "19420101", "世帯主", "", "000001200034567");
-        list.add(item);
-        item = createSetaiData("0000345723", "電算妙子", "女", "19430101", "妻", "", "000001200045590");
-        list.add(item);
-        item = createSetaiData("0010204123", "電算勤", "男", "19650101", "子", "", "000001200345988");
-        list.add(item);
+        if (名称.equals(new RString("電算太郎"))) {
+            item = createSetaiData("0000708123", "電算太郎", "男", "19420101", "世帯主", "", "000001200034567");
+            list.add(item);
+            item = createSetaiData("0000345723", "電算妙子", "女", "19430101", "妻", "", "000001200045590");
+            list.add(item);
+            item = createSetaiData("0010204123", "電算勤", "男", "19650101", "子", "", "000001200345988");
+            list.add(item);
+        } else if (名称.equals(new RString("山本九十九子"))) {
+            item = createSetaiData("0000125723", "山本九十九子", "女", "19600101", "本人", "", "000008760045590");
+            list.add(item);
+            item = createSetaiData("0000124123", "山本百舌朗", "男", "19650208", "世帯主", "", "0000087600345988");
+            list.add(item);
+        } else {
+
+        }
 
         return list;
     }
@@ -115,7 +144,7 @@ public class HihokenshaDetailPanel {
         SetaiShokaiGrid_Row row = new SetaiShokaiGrid_Row(RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY);
         row.setHihokenshaNo(new RString(被保番号));
-        row.setName(new RString(氏名));
+        row.setShimei(new RString(氏名));
         row.setGender(new RString(性別));
         row.setDateOfBirth(createDateString(生年月日));
         row.setZokugara(new RString(続柄));
@@ -129,16 +158,20 @@ public class HihokenshaDetailPanel {
      *
      * @param tab タブ
      */
-    private void createSeikatsuHogoGrid(HihokenshaDetailTabDiv tab) {
-        tab.getSeikatsuHogoTabPanel().getSeikatsuHogoGrid().setDataSource(createSeikatsuHogoList());
+    private void setSeikatsuHogoGrid(HihokenshaDetailTabDiv tab, RString 名称) {
+        List<SeikatsuHogoGrid_Row> list = createSeikatsuHogoList(名称);
+        tab.getSeikatsuHogoTabPanel().getSeikatsuHogoGrid().setDataSource(list);
+        tab.getSeikatsuHogoTabPanel().setVisible(!list.isEmpty());
     }
 
-    private List<SeikatsuHogoGrid_Row> createSeikatsuHogoList() {
+    private List<SeikatsuHogoGrid_Row> createSeikatsuHogoList(RString 名称) {
         List<SeikatsuHogoGrid_Row> list = new ArrayList<>();
         SeikatsuHogoGrid_Row item;
 
-        item = createSeikatsuHogoData("09010901", "20090413", "20110420", "生活扶助");
-        list.add(item);
+        if (名称.equals(new RString("電算太郎"))) {
+            item = createSeikatsuHogoData("09010901", "20090413", "20110420", "生活扶助");
+            list.add(item);
+        }
 
         return list;
     }
@@ -157,16 +190,22 @@ public class HihokenshaDetailPanel {
      *
      * @param tab タブ
      */
-    private void createRoreiFukushiGrid(HihokenshaDetailTabDiv tab) {
-        tab.getRoreiFukushiTabPanel().getRoreiFukushiGrid().setDataSource(createRoreiFukushiList());
+    private void setRoreiFukushiGrid(HihokenshaDetailTabDiv tab, RString 名称) {
+        List<RoreiFukushiGrid_Row> list = createRoreiFukushiList(名称);
+        tab.getRoreiFukushiTabPanel().getRoreiFukushiGrid().setDataSource(list);
+        tab.getRoreiFukushiTabPanel().setVisible(!list.isEmpty());
     }
 
-    private List<RoreiFukushiGrid_Row> createRoreiFukushiList() {
+    private List<RoreiFukushiGrid_Row> createRoreiFukushiList(RString 名称) {
         List<RoreiFukushiGrid_Row> list = new ArrayList<>();
         RoreiFukushiGrid_Row item;
 
-        item = createRoreiFukushiData("09010901", "20090413", "20110420");
-        list.add(item);
+        if (名称.equals(new RString("喜屋武三郎"))) {
+            item = createRoreiFukushiData("09010901", "20090413", "20110420");
+            list.add(item);
+        } else {
+
+        }
 
         return list;
     }
@@ -184,16 +223,20 @@ public class HihokenshaDetailPanel {
      *
      * @param tab タブ
      */
-    private void createIryoHokenGrid(HihokenshaDetailTabDiv tab) {
-        tab.getIryoHokenTabPanel().getIryoHokenGrid().setDataSource(createIryoHokenList());
+    private void setIryoHokenGrid(HihokenshaDetailTabDiv tab, RString 名称) {
+        List<IryoHokenGrid_Row> list = createIryoHokenList(名称);
+        tab.getIryoHokenTabPanel().getIryoHokenGrid().setDataSource(list);
+        tab.getIryoHokenTabPanel().setVisible(!list.isEmpty());
     }
 
-    private List<IryoHokenGrid_Row> createIryoHokenList() {
+    private List<IryoHokenGrid_Row> createIryoHokenList(RString 名称) {
         List<IryoHokenGrid_Row> list = new ArrayList<>();
         IryoHokenGrid_Row item;
 
-        item = createIryoHokenData("国民健康保険", "0001002890", "長野市", "00100289", "20020627", "");
-        list.add(item);
+        if (名称.equals(new RString("山本九十九子"))) {
+            item = createIryoHokenData("国民健康保険", "0001002890", "長野市", "00100289", "20020627", "");
+            list.add(item);
+        }
 
         return list;
     }
@@ -214,18 +257,25 @@ public class HihokenshaDetailPanel {
      *
      * @param tab タブ
      */
-    private void createShinseiJohoGrid(HihokenshaDetailTabDiv tab) {
-        tab.getShinseiInfoTabPanel().getShinseishoTodokedeGrid().setDataSource(createShinseiJohoList());
+    private void setShinseiJohoGrid(HihokenshaDetailTabDiv tab, RString 名称) {
+        List<ShinseishoTodokedeGrid_Row> list = createShinseiJohoList(名称);
+        tab.getShinseiInfoTabPanel().getShinseishoTodokedeGrid().setDataSource(list);
+        tab.getShinseiInfoTabPanel().setVisible(!list.isEmpty());
     }
 
-    private List<ShinseishoTodokedeGrid_Row> createShinseiJohoList() {
+    private List<ShinseishoTodokedeGrid_Row> createShinseiJohoList(RString 名称) {
         List<ShinseishoTodokedeGrid_Row> list = new ArrayList<>();
         ShinseishoTodokedeGrid_Row item;
 
-        item = createShinseiJohoData("20080123", "122890", "介護");
-        list.add(item);
-        item = createShinseiJohoData("20071104", "112010", "介護");
-        list.add(item);
+        if (名称.equals(new RString("電算太郎"))) {
+            item = createShinseiJohoData("20100808", "140012", "介護");
+            list.add(item);
+        } else if (名称.equals(new RString("喜屋武三郎"))) {
+            item = createShinseiJohoData("20080123", "122890", "介護");
+            list.add(item);
+            item = createShinseiJohoData("20071104", "112010", "介護");
+            list.add(item);
+        }
 
         return list;
     }
@@ -236,6 +286,20 @@ public class HihokenshaDetailPanel {
         row.setShinseishoKanriNo(new RString(申請書管理番号));
         row.setTodokedeShubetsu(new RString(届出種別));
         return row;
+    }
+
+    private HihokenshaSearchGaitoshaGrid_Row get該当者情報(HihokenshaSearchGaitoshaPanelDiv gaitoshaPanel) {
+        HihokenshaSearchGaitoshaGrid_Row gaitoshaGrid;
+        if (check未選択(gaitoshaPanel)) {
+            gaitoshaGrid = gaitoshaPanel.getHihokenshaSearchGaitoshaGrid().getDataSource().get(0);
+        } else {
+            gaitoshaGrid = gaitoshaPanel.getHihokenshaSearchGaitoshaGrid().getSelectedItems().get(0);
+        }
+        return gaitoshaGrid;
+    }
+
+    private boolean check未選択(HihokenshaSearchGaitoshaPanelDiv gaitoshaPanel) {
+        return gaitoshaPanel.getHihokenshaSearchGaitoshaGrid().getSelectedItems().isEmpty();
     }
 
     private RString createDateString(String str) {

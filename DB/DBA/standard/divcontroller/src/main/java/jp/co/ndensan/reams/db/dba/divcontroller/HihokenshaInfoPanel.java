@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dba.divcontroller;
 
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.DBCommonInfoPanelDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.HihokenshaInfoPanelDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.HihokenshaSearchGaitoshaGrid_Row;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.HihokenshaSearchGaitoshaPanelDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.ReamsCommonInfoPanelDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.DateRoundingType;
@@ -27,55 +29,62 @@ public class HihokenshaInfoPanel {
     /**
      * Panelに表示される情報に対して値を設定します。
      *
-     * @param Panel Panel
+     * @param infoPanel 被保険者情報パネル
+     * @param gaitoshaPanel 被保険者検索該当者パネル
      * @return response
      */
-    public ResponseData<HihokenshaInfoPanelDiv> getOnLoadDivData(HihokenshaInfoPanelDiv Panel) {
+    public ResponseData<HihokenshaInfoPanelDiv> getOnLoadDivData(HihokenshaInfoPanelDiv infoPanel, HihokenshaSearchGaitoshaPanelDiv gaitoshaPanel) {
         ResponseData<HihokenshaInfoPanelDiv> response = new ResponseData<>();
 
-        setReamsCommonInfoData(Panel.getReamsCommonInfoPanel());
-        setDBCommonInfoData(Panel.getDBCommonInfoPanel());
-        response.data = Panel;
+        setReamsCommonInfoData(infoPanel.getReamsCommonInfoPanel(), gaitoshaPanel);
+        setDBCommonInfoData(infoPanel.getDBCommonInfoPanel(), gaitoshaPanel);
+        response.data = infoPanel;
 
         return response;
     }
 
-    private void setReamsCommonInfoData(ReamsCommonInfoPanelDiv reamsCommonData) {
-        reamsCommonData.getAgeText().setValue(new RString("20"));
-        reamsCommonData.getDateOfBirthText().setValue(new RString("19990101"));
-        reamsCommonData.getGenderText().setValue(new RString("男"));
-        reamsCommonData.getGyoseikuText().setValue(new RString("電算"));
-        reamsCommonData.getShimeiText().setValue(new RString("電算太郎"));
-        reamsCommonData.getHurikanaText().setValue(new RString("ﾃﾞﾝｻﾝ ﾀﾛｳ"));
-        reamsCommonData.getJuminShubetsuText().setValue(new RString("住民"));
-        reamsCommonData.getJuminhyoCodeText().setValue(new RString("012314"));
-        reamsCommonData.getJushoCodeText().setValue(new RString("303"));
-        reamsCommonData.getJushoText().setValue(new RString("電算市高松2201-1"));
-        reamsCommonData.getKumiaiText().setValue(new RString("組合"));
-        reamsCommonData.getRenrakusaki1Text().setValue(new RString("098-123-1234"));
-        reamsCommonData.getRenrakusaki2Text().setValue(new RString("098-345-3456"));
-        reamsCommonData.getSetaiCodeText().setValue(new RString("1234"));
+    private void setReamsCommonInfoData(ReamsCommonInfoPanelDiv reamsCommonData, HihokenshaSearchGaitoshaPanelDiv gaitoshaPanel) {
+        HihokenshaSearchGaitoshaGrid_Row gaitoshaGrid = get該当者情報(gaitoshaPanel);
+
+        reamsCommonData.getAgeText().setValue(gaitoshaGrid.getAge());
+        reamsCommonData.getDateOfBirthText().setValue(gaitoshaGrid.getDateOfBirth());
+        reamsCommonData.getGenderText().setValue(gaitoshaGrid.getGender());
+        reamsCommonData.getGyoseikuText().setValue(gaitoshaGrid.getGyoseiku());
+        reamsCommonData.getShimeiText().setValue(gaitoshaGrid.getShimei());
+        reamsCommonData.getHurikanaText().setValue(gaitoshaGrid.getHurikana());
+        reamsCommonData.getJuminhyoCodeText().setValue(gaitoshaGrid.getJuminhyoCode());
+        reamsCommonData.getJushoCodeText().setValue(gaitoshaGrid.getJushoCode());
+        reamsCommonData.getJushoText().setValue(gaitoshaGrid.getJusho());
+        reamsCommonData.getKumiaiText().setValue(gaitoshaGrid.getKumiai());
+        reamsCommonData.getRenrakusaki1Text().setValue(gaitoshaGrid.getRenrakusaki1());
+        reamsCommonData.getRenrakusaki2Text().setValue(gaitoshaGrid.getRenrakusaki2());
+        reamsCommonData.getSetaiCodeText().setValue(gaitoshaGrid.getSetaiCode());
     }
 
-    private void setDBCommonInfoData(DBCommonInfoPanelDiv dbCommonData) {
-        dbCommonData.getHihokenshaNoText().setValue(new RString("0000708123"));
-        dbCommonData.getYokaigodoText().setValue(new RString("要支援2"));
-        dbCommonData.getNinteiKikanText().setFromValue(createDateString("20120912"));
-        dbCommonData.getNinteiKikanText().setToValue(createDateString(""));
-        dbCommonData.getKyuHihokenshaNoText().setValue(new RString("0100012345"));
-        dbCommonData.getKyuShichosonCodeText().setValue(new RString("301"));
-        dbCommonData.getKyuShichosonText().setValue(new RString("電算市伝山村田賛2201-1"));
+    private void setDBCommonInfoData(DBCommonInfoPanelDiv dbCommonData, HihokenshaSearchGaitoshaPanelDiv gaitoshaPanel) {
+        HihokenshaSearchGaitoshaGrid_Row gaitoshaGrid = get該当者情報(gaitoshaPanel);
+
+        dbCommonData.getHihokenshaNoText().setValue(gaitoshaGrid.getHihokenshaNo());
+        dbCommonData.getYokaigodoText().setValue(gaitoshaGrid.getYokaigodo());
+        dbCommonData.getNinteiKikanText().setFromValue(gaitoshaGrid.getNinteiKikanKaishi());
+        dbCommonData.getNinteiKikanText().setToValue(gaitoshaGrid.getNinteiKikanShuryo());
+        dbCommonData.getKyuHihokenshaNoText().setValue(gaitoshaGrid.getKyuHihokenshaNo());
+        dbCommonData.getKyuShichosonCodeText().setValue(gaitoshaGrid.getKyuShichosonCode());
+        dbCommonData.getKyuShichosonText().setValue(gaitoshaGrid.getKyuShichoson());
     }
 
-    private RString createDateString(String str) {
-        FlexibleDate ymd = new FlexibleDate(str);
-        return createDateString(ymd);
+    private HihokenshaSearchGaitoshaGrid_Row get該当者情報(HihokenshaSearchGaitoshaPanelDiv gaitoshaPanel) {
+        HihokenshaSearchGaitoshaGrid_Row gaitoshaGrid;
+        if (check未選択(gaitoshaPanel)) {
+            gaitoshaGrid = gaitoshaPanel.getHihokenshaSearchGaitoshaGrid().getDataSource().get(0);
+        } else {
+            gaitoshaGrid = gaitoshaPanel.getHihokenshaSearchGaitoshaGrid().getSelectedItems().get(0);
+        }
+        return gaitoshaGrid;
     }
 
-    private RString createDateString(FlexibleDate ymd) {
-        Wareki wareki = ymd.wareki(DateRoundingType.同月の暦上日);
-        wareki.separator(Separator.PERIOD);
-        wareki.eraType(EraType.KANJI_RYAKU);
-        return wareki.toDateString();
+    private boolean check未選択(HihokenshaSearchGaitoshaPanelDiv gaitoshaPanel) {
+        return gaitoshaPanel.getHihokenshaSearchGaitoshaGrid().getSelectedItems().isEmpty();
     }
+
 }

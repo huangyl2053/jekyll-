@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.HihokenshaDaichoIdoRirekiGrid_Row;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.HihokenshaDaichoRirekiPanelDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.HihokenshaSearchGaitoshaGrid_Row;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.HihokenshaSearchGaitoshaPanelDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.DateRoundingType;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -29,16 +31,18 @@ public class HihokenshaDaichoRirekiPanel {
     /**
      * 被保険者台帳の履歴情報を表示するパネルに対して値を設定します。
      *
-     * @param panel panel
+     * @param daichoRirekiPanel 被保険者台帳履歴パネル
+     * @param gaitoshaPanel 被保険者検索該当者パネル
      * @return response
      */
-    public ResponseData<HihokenshaDaichoRirekiPanelDiv> getOnLoadDivData(HihokenshaDaichoRirekiPanelDiv panel) {
+    public ResponseData<HihokenshaDaichoRirekiPanelDiv> getOnLoadDivData(HihokenshaDaichoRirekiPanelDiv daichoRirekiPanel, HihokenshaSearchGaitoshaPanelDiv gaitoshaPanel) {
         ResponseData<HihokenshaDaichoRirekiPanelDiv> response = new ResponseData<>();
 
-        DataGrid<HihokenshaDaichoIdoRirekiGrid_Row> grid = panel.getHihokenshaDaichoIdoRirekiGrid();
-        grid.setDataSource(createIdoRirekiGridDataList());
-        response.data = panel;
-        System.out.println(response.data.getHihokenshaDaichoIdoRirekiGrid().getDataSource().get(0).getShutokuTodokedeYMD());
+        DataGrid<HihokenshaDaichoIdoRirekiGrid_Row> grid = daichoRirekiPanel.getHihokenshaDaichoIdoRirekiGrid();
+        RString 氏名 = get該当者情報(gaitoshaPanel).getShimei();
+
+        grid.setDataSource(createIdoRirekiGridDataList(氏名));
+        response.data = daichoRirekiPanel;
         return response;
     }
 
@@ -47,7 +51,56 @@ public class HihokenshaDaichoRirekiPanel {
      *
      * @return 被保台帳履歴情報グリッドのデータ
      */
-    private List<HihokenshaDaichoIdoRirekiGrid_Row> createIdoRirekiGridDataList() {
+    private List<HihokenshaDaichoIdoRirekiGrid_Row> createIdoRirekiGridDataList(RString 氏名) {
+        List<HihokenshaDaichoIdoRirekiGrid_Row> list;
+
+        if (氏名.equals(new RString("電算太郎"))) {
+            list = create電算Data();
+        } else if (氏名.equals(new RString("山本九十九子"))) {
+            list = create山本Data();
+        } else {
+            list = create喜屋武Data();
+        }
+
+        return list;
+    }
+
+    private List<HihokenshaDaichoIdoRirekiGrid_Row> create電算Data() {
+        List<HihokenshaDaichoIdoRirekiGrid_Row> list = new ArrayList<>();
+        HihokenshaDaichoIdoRirekiGrid_Row item;
+
+        item = createIdoRirekiData("第2号", "年齢到達", "20130602", "20130602",
+                "", "", "", "20120820",
+                "", "", "",
+                "", "", "",
+                "", "", "",
+                "", "", "", "", "0000234123");
+        list.add(item);
+        item = createIdoRirekiData("第2号", "障害認定", "20090413", "20090420",
+                "年齢到達", "20130602", "20130602", "",
+                "", "", "",
+                "", "", "",
+                "", "", "",
+                "", "", "", "", "0000214563");
+        list.add(item);
+        return list;
+    }
+
+    private List<HihokenshaDaichoIdoRirekiGrid_Row> create山本Data() {
+        List<HihokenshaDaichoIdoRirekiGrid_Row> list = new ArrayList<>();
+        HihokenshaDaichoIdoRirekiGrid_Row item;
+
+        item = createIdoRirekiData("第2号", "障害認定", "20070109", "20070110",
+                "", "", "", "20120820",
+                "", "", "",
+                "", "", "",
+                "", "", "",
+                "", "", "", "", "0000234123");
+        list.add(item);
+        return list;
+    }
+
+    private List<HihokenshaDaichoIdoRirekiGrid_Row> create喜屋武Data() {
         List<HihokenshaDaichoIdoRirekiGrid_Row> list = new ArrayList<>();
         HihokenshaDaichoIdoRirekiGrid_Row item;
 
@@ -77,7 +130,7 @@ public class HihokenshaDaichoRirekiPanel {
 
     private HihokenshaDaichoIdoRirekiGrid_Row createIdoRirekiData(String 被保険者区分, String 取得事由, String 取得届出日, String 取得日,
             String 喪失事由, String 喪失届出日, String 喪失日, String 第1号被保険者年齢到達日, String 変更事由, String 変更届出日,
-            String 変更日, String 住所地特例適応事由, String 適応届出日, String 適応日, String 住所地特例解除事由, String 解除届出日,
+            String 変更日, String 住所地特例適用事由, String 適用届出日, String 適用日, String 住所地特例解除事由, String 解除届出日,
             String 解除日, String 広住特措置元市町村, String 旧市町村コード, String 再交付区分, String 再交付事由, String 帳票交付履歴ID) {
         HihokenshaDaichoIdoRirekiGrid_Row row = new HihokenshaDaichoIdoRirekiGrid_Row(RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
@@ -94,9 +147,9 @@ public class HihokenshaDaichoRirekiPanel {
         row.setHenkoJiyu(new RString(変更事由));
         row.setHenkoTodokedeYMD(createDateString(変更届出日));
         row.setHenkoYMD(createDateString(変更日));
-        row.setJushochitokureiTekioJiyu(new RString(住所地特例適応事由));
-        row.setTekioTodokedeYMD(createDateString(適応届出日));
-        row.setTekioYMD(createDateString(適応日));
+        row.setJushochitokureiTekiyoJiyu(new RString(住所地特例適用事由));
+        row.setTekiyoTodokedeYMD(createDateString(適用届出日));
+        row.setTekiyoYMD(createDateString(適用日));
         row.setJushochitokureiKaijoJiyu(new RString(住所地特例解除事由));
         row.setKaijoTodokedeYMD(createDateString(解除届出日));
         row.setKaijoYMD(createDateString(解除日));
@@ -106,6 +159,20 @@ public class HihokenshaDaichoRirekiPanel {
         row.setSaikohuJiyu(new RString(再交付事由));
         row.setChohyoKofuRirekiID(new RString(帳票交付履歴ID));
         return row;
+    }
+
+    private HihokenshaSearchGaitoshaGrid_Row get該当者情報(HihokenshaSearchGaitoshaPanelDiv gaitoshaPanel) {
+        HihokenshaSearchGaitoshaGrid_Row gaitoshaGrid;
+        if (check未選択(gaitoshaPanel)) {
+            gaitoshaGrid = gaitoshaPanel.getHihokenshaSearchGaitoshaGrid().getDataSource().get(0);
+        } else {
+            gaitoshaGrid = gaitoshaPanel.getHihokenshaSearchGaitoshaGrid().getSelectedItems().get(0);
+        }
+        return gaitoshaGrid;
+    }
+
+    private boolean check未選択(HihokenshaSearchGaitoshaPanelDiv gaitoshaPanel) {
+        return gaitoshaPanel.getHihokenshaSearchGaitoshaGrid().getSelectedItems().isEmpty();
     }
 
     private RString createDateString(String str) {
