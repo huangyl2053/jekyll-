@@ -21,60 +21,36 @@ public class ReamsCommonInfoPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("JuminShubetsuLabel")
-    private Label JuminShubetsuLabel;
-    @JsonProperty("JuminShubetsuText")
-    private TextBox JuminShubetsuText;
-    @JsonProperty("HurikanaLabel")
-    private Label HurikanaLabel;
-    @JsonProperty("HurikanaText")
-    private TextBox HurikanaText;
-    @JsonProperty("GenderLabel")
-    private Label GenderLabel;
-    @JsonProperty("GenderText")
-    private TextBox GenderText;
-    @JsonProperty("AgeLabel")
-    private Label AgeLabel;
-    @JsonProperty("AgeText")
-    private TextBox AgeText;
-    @JsonProperty("ShimeiLabel")
-    private Label ShimeiLabel;
-    @JsonProperty("ShimeiText")
-    private TextBox ShimeiText;
-    @JsonProperty("DateOfBirthLabel")
-    private Label DateOfBirthLabel;
-    @JsonProperty("DateOfBirthText")
-    private TextBoxFlexibleDate DateOfBirthText;
-    @JsonProperty("JushoLabel")
-    private Label JushoLabel;
-    @JsonProperty("JushoCodeText")
-    private TextBox JushoCodeText;
-    @JsonProperty("JushoText")
-    private TextBox JushoText;
-    @JsonProperty("GyoseikuLabel")
-    private Label GyoseikuLabel;
-    @JsonProperty("GyoseikuText")
-    private TextBox GyoseikuText;
-    @JsonProperty("KumiaiLabel")
-    private Label KumiaiLabel;
-    @JsonProperty("KumiaiText")
-    private TextBox KumiaiText;
-    @JsonProperty("SetaiCodeLabel")
-    private Label SetaiCodeLabel;
-    @JsonProperty("SetaiCodeText")
-    private TextBox SetaiCodeText;
-    @JsonProperty("JuminhyoCodeLabel")
-    private Label JuminhyoCodeLabel;
-    @JsonProperty("JuminhyoCodeText")
-    private TextBox JuminhyoCodeText;
-    @JsonProperty("Renrakusaki1Label")
-    private Label Renrakusaki1Label;
-    @JsonProperty("Renrakusaki1Text")
-    private TextBox Renrakusaki1Text;
-    @JsonProperty("Renrakusaki2Label")
-    private Label Renrakusaki2Label;
-    @JsonProperty("Renrakusaki2Text")
-    private TextBox Renrakusaki2Text;
+    @JsonProperty("txtJuminShubetsu")
+    private TextBox txtJuminShubetsu;
+    @JsonProperty("txtHurikana")
+    private TextBox txtHurikana;
+    @JsonProperty("txtGender")
+    private TextBox txtGender;
+    @JsonProperty("txtAge")
+    private TextBox txtAge;
+    @JsonProperty("txtShimei")
+    private TextBox txtShimei;
+    @JsonProperty("txtDateOfBirth")
+    private TextBoxFlexibleDate txtDateOfBirth;
+    @JsonProperty("lblJusho")
+    private Label lblJusho;
+    @JsonProperty("txtJushoCode")
+    private TextBox txtJushoCode;
+    @JsonProperty("txtJusho")
+    private TextBox txtJusho;
+    @JsonProperty("txtGyoseiku")
+    private TextBox txtGyoseiku;
+    @JsonProperty("txtKumiai")
+    private TextBox txtKumiai;
+    @JsonProperty("txtSetaiCode")
+    private TextBox txtSetaiCode;
+    @JsonProperty("txtJuminhyoCode")
+    private TextBox txtJuminhyoCode;
+    @JsonProperty("txtRenrakusaki1")
+    private TextBox txtRenrakusaki1;
+    @JsonProperty("txtRenrakusaki2")
+    private TextBox txtRenrakusaki2;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -82,274 +58,154 @@ public class ReamsCommonInfoPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("JuminShubetsuLabel")
-    public Label getJuminShubetsuLabel() {
-        return JuminShubetsuLabel;
+    @JsonProperty("txtJuminShubetsu")
+    public TextBox getTxtJuminShubetsu() {
+        return txtJuminShubetsu;
     }
 
-    @JsonProperty("JuminShubetsuLabel")
-    public void setJuminShubetsuLabel(Label JuminShubetsuLabel) {
-        this.JuminShubetsuLabel=JuminShubetsuLabel;
+    @JsonProperty("txtJuminShubetsu")
+    public void setTxtJuminShubetsu(TextBox txtJuminShubetsu) {
+        this.txtJuminShubetsu=txtJuminShubetsu;
     }
 
-    @JsonProperty("JuminShubetsuText")
-    public TextBox getJuminShubetsuText() {
-        return JuminShubetsuText;
+    @JsonProperty("txtHurikana")
+    public TextBox getTxtHurikana() {
+        return txtHurikana;
     }
 
-    @JsonProperty("JuminShubetsuText")
-    public void setJuminShubetsuText(TextBox JuminShubetsuText) {
-        this.JuminShubetsuText=JuminShubetsuText;
+    @JsonProperty("txtHurikana")
+    public void setTxtHurikana(TextBox txtHurikana) {
+        this.txtHurikana=txtHurikana;
     }
 
-    @JsonProperty("HurikanaLabel")
-    public Label getHurikanaLabel() {
-        return HurikanaLabel;
+    @JsonProperty("txtGender")
+    public TextBox getTxtGender() {
+        return txtGender;
     }
 
-    @JsonProperty("HurikanaLabel")
-    public void setHurikanaLabel(Label HurikanaLabel) {
-        this.HurikanaLabel=HurikanaLabel;
+    @JsonProperty("txtGender")
+    public void setTxtGender(TextBox txtGender) {
+        this.txtGender=txtGender;
     }
 
-    @JsonProperty("HurikanaText")
-    public TextBox getHurikanaText() {
-        return HurikanaText;
+    @JsonProperty("txtAge")
+    public TextBox getTxtAge() {
+        return txtAge;
     }
 
-    @JsonProperty("HurikanaText")
-    public void setHurikanaText(TextBox HurikanaText) {
-        this.HurikanaText=HurikanaText;
+    @JsonProperty("txtAge")
+    public void setTxtAge(TextBox txtAge) {
+        this.txtAge=txtAge;
     }
 
-    @JsonProperty("GenderLabel")
-    public Label getGenderLabel() {
-        return GenderLabel;
+    @JsonProperty("txtShimei")
+    public TextBox getTxtShimei() {
+        return txtShimei;
     }
 
-    @JsonProperty("GenderLabel")
-    public void setGenderLabel(Label GenderLabel) {
-        this.GenderLabel=GenderLabel;
+    @JsonProperty("txtShimei")
+    public void setTxtShimei(TextBox txtShimei) {
+        this.txtShimei=txtShimei;
     }
 
-    @JsonProperty("GenderText")
-    public TextBox getGenderText() {
-        return GenderText;
+    @JsonProperty("txtDateOfBirth")
+    public TextBoxFlexibleDate getTxtDateOfBirth() {
+        return txtDateOfBirth;
     }
 
-    @JsonProperty("GenderText")
-    public void setGenderText(TextBox GenderText) {
-        this.GenderText=GenderText;
+    @JsonProperty("txtDateOfBirth")
+    public void setTxtDateOfBirth(TextBoxFlexibleDate txtDateOfBirth) {
+        this.txtDateOfBirth=txtDateOfBirth;
     }
 
-    @JsonProperty("AgeLabel")
-    public Label getAgeLabel() {
-        return AgeLabel;
+    @JsonProperty("lblJusho")
+    public Label getLblJusho() {
+        return lblJusho;
     }
 
-    @JsonProperty("AgeLabel")
-    public void setAgeLabel(Label AgeLabel) {
-        this.AgeLabel=AgeLabel;
+    @JsonProperty("lblJusho")
+    public void setLblJusho(Label lblJusho) {
+        this.lblJusho=lblJusho;
     }
 
-    @JsonProperty("AgeText")
-    public TextBox getAgeText() {
-        return AgeText;
+    @JsonProperty("txtJushoCode")
+    public TextBox getTxtJushoCode() {
+        return txtJushoCode;
     }
 
-    @JsonProperty("AgeText")
-    public void setAgeText(TextBox AgeText) {
-        this.AgeText=AgeText;
+    @JsonProperty("txtJushoCode")
+    public void setTxtJushoCode(TextBox txtJushoCode) {
+        this.txtJushoCode=txtJushoCode;
     }
 
-    @JsonProperty("ShimeiLabel")
-    public Label getShimeiLabel() {
-        return ShimeiLabel;
+    @JsonProperty("txtJusho")
+    public TextBox getTxtJusho() {
+        return txtJusho;
     }
 
-    @JsonProperty("ShimeiLabel")
-    public void setShimeiLabel(Label ShimeiLabel) {
-        this.ShimeiLabel=ShimeiLabel;
+    @JsonProperty("txtJusho")
+    public void setTxtJusho(TextBox txtJusho) {
+        this.txtJusho=txtJusho;
     }
 
-    @JsonProperty("ShimeiText")
-    public TextBox getShimeiText() {
-        return ShimeiText;
+    @JsonProperty("txtGyoseiku")
+    public TextBox getTxtGyoseiku() {
+        return txtGyoseiku;
     }
 
-    @JsonProperty("ShimeiText")
-    public void setShimeiText(TextBox ShimeiText) {
-        this.ShimeiText=ShimeiText;
+    @JsonProperty("txtGyoseiku")
+    public void setTxtGyoseiku(TextBox txtGyoseiku) {
+        this.txtGyoseiku=txtGyoseiku;
     }
 
-    @JsonProperty("DateOfBirthLabel")
-    public Label getDateOfBirthLabel() {
-        return DateOfBirthLabel;
+    @JsonProperty("txtKumiai")
+    public TextBox getTxtKumiai() {
+        return txtKumiai;
     }
 
-    @JsonProperty("DateOfBirthLabel")
-    public void setDateOfBirthLabel(Label DateOfBirthLabel) {
-        this.DateOfBirthLabel=DateOfBirthLabel;
+    @JsonProperty("txtKumiai")
+    public void setTxtKumiai(TextBox txtKumiai) {
+        this.txtKumiai=txtKumiai;
     }
 
-    @JsonProperty("DateOfBirthText")
-    public TextBoxFlexibleDate getDateOfBirthText() {
-        return DateOfBirthText;
+    @JsonProperty("txtSetaiCode")
+    public TextBox getTxtSetaiCode() {
+        return txtSetaiCode;
     }
 
-    @JsonProperty("DateOfBirthText")
-    public void setDateOfBirthText(TextBoxFlexibleDate DateOfBirthText) {
-        this.DateOfBirthText=DateOfBirthText;
+    @JsonProperty("txtSetaiCode")
+    public void setTxtSetaiCode(TextBox txtSetaiCode) {
+        this.txtSetaiCode=txtSetaiCode;
     }
 
-    @JsonProperty("JushoLabel")
-    public Label getJushoLabel() {
-        return JushoLabel;
+    @JsonProperty("txtJuminhyoCode")
+    public TextBox getTxtJuminhyoCode() {
+        return txtJuminhyoCode;
     }
 
-    @JsonProperty("JushoLabel")
-    public void setJushoLabel(Label JushoLabel) {
-        this.JushoLabel=JushoLabel;
+    @JsonProperty("txtJuminhyoCode")
+    public void setTxtJuminhyoCode(TextBox txtJuminhyoCode) {
+        this.txtJuminhyoCode=txtJuminhyoCode;
     }
 
-    @JsonProperty("JushoCodeText")
-    public TextBox getJushoCodeText() {
-        return JushoCodeText;
+    @JsonProperty("txtRenrakusaki1")
+    public TextBox getTxtRenrakusaki1() {
+        return txtRenrakusaki1;
     }
 
-    @JsonProperty("JushoCodeText")
-    public void setJushoCodeText(TextBox JushoCodeText) {
-        this.JushoCodeText=JushoCodeText;
+    @JsonProperty("txtRenrakusaki1")
+    public void setTxtRenrakusaki1(TextBox txtRenrakusaki1) {
+        this.txtRenrakusaki1=txtRenrakusaki1;
     }
 
-    @JsonProperty("JushoText")
-    public TextBox getJushoText() {
-        return JushoText;
+    @JsonProperty("txtRenrakusaki2")
+    public TextBox getTxtRenrakusaki2() {
+        return txtRenrakusaki2;
     }
 
-    @JsonProperty("JushoText")
-    public void setJushoText(TextBox JushoText) {
-        this.JushoText=JushoText;
-    }
-
-    @JsonProperty("GyoseikuLabel")
-    public Label getGyoseikuLabel() {
-        return GyoseikuLabel;
-    }
-
-    @JsonProperty("GyoseikuLabel")
-    public void setGyoseikuLabel(Label GyoseikuLabel) {
-        this.GyoseikuLabel=GyoseikuLabel;
-    }
-
-    @JsonProperty("GyoseikuText")
-    public TextBox getGyoseikuText() {
-        return GyoseikuText;
-    }
-
-    @JsonProperty("GyoseikuText")
-    public void setGyoseikuText(TextBox GyoseikuText) {
-        this.GyoseikuText=GyoseikuText;
-    }
-
-    @JsonProperty("KumiaiLabel")
-    public Label getKumiaiLabel() {
-        return KumiaiLabel;
-    }
-
-    @JsonProperty("KumiaiLabel")
-    public void setKumiaiLabel(Label KumiaiLabel) {
-        this.KumiaiLabel=KumiaiLabel;
-    }
-
-    @JsonProperty("KumiaiText")
-    public TextBox getKumiaiText() {
-        return KumiaiText;
-    }
-
-    @JsonProperty("KumiaiText")
-    public void setKumiaiText(TextBox KumiaiText) {
-        this.KumiaiText=KumiaiText;
-    }
-
-    @JsonProperty("SetaiCodeLabel")
-    public Label getSetaiCodeLabel() {
-        return SetaiCodeLabel;
-    }
-
-    @JsonProperty("SetaiCodeLabel")
-    public void setSetaiCodeLabel(Label SetaiCodeLabel) {
-        this.SetaiCodeLabel=SetaiCodeLabel;
-    }
-
-    @JsonProperty("SetaiCodeText")
-    public TextBox getSetaiCodeText() {
-        return SetaiCodeText;
-    }
-
-    @JsonProperty("SetaiCodeText")
-    public void setSetaiCodeText(TextBox SetaiCodeText) {
-        this.SetaiCodeText=SetaiCodeText;
-    }
-
-    @JsonProperty("JuminhyoCodeLabel")
-    public Label getJuminhyoCodeLabel() {
-        return JuminhyoCodeLabel;
-    }
-
-    @JsonProperty("JuminhyoCodeLabel")
-    public void setJuminhyoCodeLabel(Label JuminhyoCodeLabel) {
-        this.JuminhyoCodeLabel=JuminhyoCodeLabel;
-    }
-
-    @JsonProperty("JuminhyoCodeText")
-    public TextBox getJuminhyoCodeText() {
-        return JuminhyoCodeText;
-    }
-
-    @JsonProperty("JuminhyoCodeText")
-    public void setJuminhyoCodeText(TextBox JuminhyoCodeText) {
-        this.JuminhyoCodeText=JuminhyoCodeText;
-    }
-
-    @JsonProperty("Renrakusaki1Label")
-    public Label getRenrakusaki1Label() {
-        return Renrakusaki1Label;
-    }
-
-    @JsonProperty("Renrakusaki1Label")
-    public void setRenrakusaki1Label(Label Renrakusaki1Label) {
-        this.Renrakusaki1Label=Renrakusaki1Label;
-    }
-
-    @JsonProperty("Renrakusaki1Text")
-    public TextBox getRenrakusaki1Text() {
-        return Renrakusaki1Text;
-    }
-
-    @JsonProperty("Renrakusaki1Text")
-    public void setRenrakusaki1Text(TextBox Renrakusaki1Text) {
-        this.Renrakusaki1Text=Renrakusaki1Text;
-    }
-
-    @JsonProperty("Renrakusaki2Label")
-    public Label getRenrakusaki2Label() {
-        return Renrakusaki2Label;
-    }
-
-    @JsonProperty("Renrakusaki2Label")
-    public void setRenrakusaki2Label(Label Renrakusaki2Label) {
-        this.Renrakusaki2Label=Renrakusaki2Label;
-    }
-
-    @JsonProperty("Renrakusaki2Text")
-    public TextBox getRenrakusaki2Text() {
-        return Renrakusaki2Text;
-    }
-
-    @JsonProperty("Renrakusaki2Text")
-    public void setRenrakusaki2Text(TextBox Renrakusaki2Text) {
-        this.Renrakusaki2Text=Renrakusaki2Text;
+    @JsonProperty("txtRenrakusaki2")
+    public void setTxtRenrakusaki2(TextBox txtRenrakusaki2) {
+        this.txtRenrakusaki2=txtRenrakusaki2;
     }
 
 }

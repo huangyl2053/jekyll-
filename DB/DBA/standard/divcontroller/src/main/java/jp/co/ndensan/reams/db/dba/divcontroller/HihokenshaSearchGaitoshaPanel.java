@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.HihokenshaSearchGaitoshaGrid_Row;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dgHihokenshaSearchGaitosha_Row;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.HihokenshaSearchGaitoshaPanelDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.HihokenshaSearchPanelDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -38,7 +38,7 @@ public class HihokenshaSearchGaitoshaPanel {
             HihokenshaSearchPanelDiv searchPanel) {
         ResponseData<HihokenshaSearchGaitoshaPanelDiv> response = new ResponseData<>();
 
-        setHihokienshaSearchGaitoshaGrid(gaitoshaPanel.getHihokenshaSearchGaitoshaGrid(), searchPanel);
+        setHihokienshaSearchGaitoshaGrid(gaitoshaPanel.getDgHihokenshaSearchGaitosha(), searchPanel);
         gaitoshaPanel.setIsOpen(true);
         response.data = gaitoshaPanel;
 
@@ -51,9 +51,9 @@ public class HihokenshaSearchGaitoshaPanel {
      * @param hihokenshaSearchGaitoshaGrid 設定するグリッド
      * @param searchPanel 検索パネル
      */
-    private void setHihokienshaSearchGaitoshaGrid(DataGrid<HihokenshaSearchGaitoshaGrid_Row> hihokenshaSearchGaitoshaGrid,
+    private void setHihokienshaSearchGaitoshaGrid(DataGrid<dgHihokenshaSearchGaitosha_Row> hihokenshaSearchGaitoshaGrid,
             HihokenshaSearchPanelDiv searchPanel) {
-        DropDownList dropDown = searchPanel.getMaeShorishaRirekiPanel().getMaeShorishaRirekiDropDown();
+        DropDownList dropDown = searchPanel.getMaeShorishaRirekiPanel().getDdlMaeShorishaRireki();
 
         if (dropDown.getSelectedItem().equals(new RString("noData")) || dropDown.getSelectedValue().isEmpty()) {
             hihokenshaSearchGaitoshaGrid.setDataSource(createHihokenshaSearchHukusuGaitosha());
@@ -67,9 +67,9 @@ public class HihokenshaSearchGaitoshaPanel {
      *
      * @return 該当者リスト(1件)
      */
-    private List<HihokenshaSearchGaitoshaGrid_Row> createHihokenshaSearchGaitosha() {
-        List<HihokenshaSearchGaitoshaGrid_Row> list = new ArrayList<>();
-        HihokenshaSearchGaitoshaGrid_Row item;
+    private List<dgHihokenshaSearchGaitosha_Row> createHihokenshaSearchGaitosha() {
+        List<dgHihokenshaSearchGaitosha_Row> list = new ArrayList<>();
+        dgHihokenshaSearchGaitosha_Row item;
 
         item = createHihokenshaSearchGaitoshaData("0000011111", "喜屋武三郎", "19380623", "75",
                 "男", "電算市南風原1-12-45", "000001019011009", "キャンサブロウ", "311", "電算", "電算介護組合",
@@ -85,9 +85,9 @@ public class HihokenshaSearchGaitoshaPanel {
      *
      * @return 該当者リスト(2件)
      */
-    private List<HihokenshaSearchGaitoshaGrid_Row> createHihokenshaSearchHukusuGaitosha() {
-        List<HihokenshaSearchGaitoshaGrid_Row> list = new ArrayList<>();
-        HihokenshaSearchGaitoshaGrid_Row item;
+    private List<dgHihokenshaSearchGaitosha_Row> createHihokenshaSearchHukusuGaitosha() {
+        List<dgHihokenshaSearchGaitosha_Row> list = new ArrayList<>();
+        dgHihokenshaSearchGaitosha_Row item;
 
         item = createHihokenshaSearchGaitoshaData("0000022222", "電算太郎", "19480101", "66",
                 "男", "電算市稲葉2201-1", "000001019012345", "デンサンタロウ", "312", "電算", "電算介護組合",
@@ -103,10 +103,10 @@ public class HihokenshaSearchGaitoshaPanel {
         return list;
     }
 
-    private HihokenshaSearchGaitoshaGrid_Row createHihokenshaSearchGaitoshaData(String 被保険者番号, String 氏名, String 生年月日, String 年齢,
+    private dgHihokenshaSearchGaitosha_Row createHihokenshaSearchGaitoshaData(String 被保険者番号, String 氏名, String 生年月日, String 年齢,
             String 性別, String 住所, String 識別コード, String フリガナ, String 住所コード, String 行政区, String 組合, String 世帯コード,
             String 住民票コード, String 連絡先1, String 連絡先2, String 要介護度, String 認定期間開始, String 認定期間終了, String 旧被保険者番号, String 旧市町村コード, String 旧市町村) {
-        HihokenshaSearchGaitoshaGrid_Row row = new HihokenshaSearchGaitoshaGrid_Row(RString.EMPTY, RString.EMPTY, RString.EMPTY,
+        dgHihokenshaSearchGaitosha_Row row = new dgHihokenshaSearchGaitosha_Row(RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);

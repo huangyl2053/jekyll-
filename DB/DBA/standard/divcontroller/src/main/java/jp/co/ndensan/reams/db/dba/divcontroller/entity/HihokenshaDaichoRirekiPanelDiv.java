@@ -5,7 +5,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.HihokenshaDaichoIdoRirekiGrid_Row;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dgHihokenshaDaichoIdoRireki_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -22,8 +22,12 @@ public class HihokenshaDaichoRirekiPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("HihokenshaDaichoIdoRirekiGrid")
-    private DataGrid<HihokenshaDaichoIdoRirekiGrid_Row> HihokenshaDaichoIdoRirekiGrid;
+    @JsonProperty("btnHihokenshaDetail")
+    private Button btnHihokenshaDetail;
+    @JsonProperty("btnShinseiTodokedeInfo")
+    private Button btnShinseiTodokedeInfo;
+    @JsonProperty("dgHihokenshaDaichoIdoRireki")
+    private DataGrid<dgHihokenshaDaichoIdoRireki_Row> dgHihokenshaDaichoIdoRireki;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,14 +35,34 @@ public class HihokenshaDaichoRirekiPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("HihokenshaDaichoIdoRirekiGrid")
-    public DataGrid<HihokenshaDaichoIdoRirekiGrid_Row> getHihokenshaDaichoIdoRirekiGrid() {
-        return HihokenshaDaichoIdoRirekiGrid;
+    @JsonProperty("btnHihokenshaDetail")
+    public Button getBtnHihokenshaDetail() {
+        return btnHihokenshaDetail;
     }
 
-    @JsonProperty("HihokenshaDaichoIdoRirekiGrid")
-    public void setHihokenshaDaichoIdoRirekiGrid(DataGrid<HihokenshaDaichoIdoRirekiGrid_Row> HihokenshaDaichoIdoRirekiGrid) {
-        this.HihokenshaDaichoIdoRirekiGrid=HihokenshaDaichoIdoRirekiGrid;
+    @JsonProperty("btnHihokenshaDetail")
+    public void setBtnHihokenshaDetail(Button btnHihokenshaDetail) {
+        this.btnHihokenshaDetail=btnHihokenshaDetail;
+    }
+
+    @JsonProperty("btnShinseiTodokedeInfo")
+    public Button getBtnShinseiTodokedeInfo() {
+        return btnShinseiTodokedeInfo;
+    }
+
+    @JsonProperty("btnShinseiTodokedeInfo")
+    public void setBtnShinseiTodokedeInfo(Button btnShinseiTodokedeInfo) {
+        this.btnShinseiTodokedeInfo=btnShinseiTodokedeInfo;
+    }
+
+    @JsonProperty("dgHihokenshaDaichoIdoRireki")
+    public DataGrid<dgHihokenshaDaichoIdoRireki_Row> getDgHihokenshaDaichoIdoRireki() {
+        return dgHihokenshaDaichoIdoRireki;
+    }
+
+    @JsonProperty("dgHihokenshaDaichoIdoRireki")
+    public void setDgHihokenshaDaichoIdoRireki(DataGrid<dgHihokenshaDaichoIdoRireki_Row> dgHihokenshaDaichoIdoRireki) {
+        this.dgHihokenshaDaichoIdoRireki=dgHihokenshaDaichoIdoRireki;
     }
 
 }

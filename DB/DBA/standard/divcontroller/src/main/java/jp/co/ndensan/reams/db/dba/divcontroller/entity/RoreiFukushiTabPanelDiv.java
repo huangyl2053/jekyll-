@@ -5,7 +5,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.RoreiFukushiGrid_Row;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dgRoreiFukushi_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -22,8 +22,8 @@ public class RoreiFukushiTabPanelDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("RoreiFukushiGrid")
-    private DataGrid<RoreiFukushiGrid_Row> RoreiFukushiGrid;
+    @JsonProperty("dgRoreiFukushi")
+    private DataGrid<dgRoreiFukushi_Row> dgRoreiFukushi;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,14 +31,14 @@ public class RoreiFukushiTabPanelDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("RoreiFukushiGrid")
-    public DataGrid<RoreiFukushiGrid_Row> getRoreiFukushiGrid() {
-        return RoreiFukushiGrid;
+    @JsonProperty("dgRoreiFukushi")
+    public DataGrid<dgRoreiFukushi_Row> getDgRoreiFukushi() {
+        return dgRoreiFukushi;
     }
 
-    @JsonProperty("RoreiFukushiGrid")
-    public void setRoreiFukushiGrid(DataGrid<RoreiFukushiGrid_Row> RoreiFukushiGrid) {
-        this.RoreiFukushiGrid=RoreiFukushiGrid;
+    @JsonProperty("dgRoreiFukushi")
+    public void setDgRoreiFukushi(DataGrid<dgRoreiFukushi_Row> dgRoreiFukushi) {
+        this.dgRoreiFukushi=dgRoreiFukushi;
     }
 
 }

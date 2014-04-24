@@ -21,10 +21,8 @@ public class DBCommonSearchInfoPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("SearchHihokenshaNoLabel")
-    private Label SearchHihokenshaNoLabel;
-    @JsonProperty("SearchHihokenshaNoText")
-    private TextBox SearchHihokenshaNoText;
+    @JsonProperty("txtSearchHihokenshaNo")
+    private TextBox txtSearchHihokenshaNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,24 +30,14 @@ public class DBCommonSearchInfoPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("SearchHihokenshaNoLabel")
-    public Label getSearchHihokenshaNoLabel() {
-        return SearchHihokenshaNoLabel;
+    @JsonProperty("txtSearchHihokenshaNo")
+    public TextBox getTxtSearchHihokenshaNo() {
+        return txtSearchHihokenshaNo;
     }
 
-    @JsonProperty("SearchHihokenshaNoLabel")
-    public void setSearchHihokenshaNoLabel(Label SearchHihokenshaNoLabel) {
-        this.SearchHihokenshaNoLabel=SearchHihokenshaNoLabel;
-    }
-
-    @JsonProperty("SearchHihokenshaNoText")
-    public TextBox getSearchHihokenshaNoText() {
-        return SearchHihokenshaNoText;
-    }
-
-    @JsonProperty("SearchHihokenshaNoText")
-    public void setSearchHihokenshaNoText(TextBox SearchHihokenshaNoText) {
-        this.SearchHihokenshaNoText=SearchHihokenshaNoText;
+    @JsonProperty("txtSearchHihokenshaNo")
+    public void setTxtSearchHihokenshaNo(TextBox txtSearchHihokenshaNo) {
+        this.txtSearchHihokenshaNo=txtSearchHihokenshaNo;
     }
 
 }

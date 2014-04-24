@@ -21,28 +21,20 @@ public class DBCommonInfoPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("HihokenshaNoLabel")
-    private Label HihokenshaNoLabel;
-    @JsonProperty("HihokenshaNoText")
-    private TextBox HihokenshaNoText;
-    @JsonProperty("YokaigodoLabel")
-    private Label YokaigodoLabel;
-    @JsonProperty("YokaigodoText")
-    private TextBox YokaigodoText;
-    @JsonProperty("NinteiKikanLabel")
-    private Label NinteiKikanLabel;
-    @JsonProperty("NinteiKikanText")
-    private TextBoxDateRange NinteiKikanText;
-    @JsonProperty("KyuHihokenshaNoLabel")
-    private Label KyuHihokenshaNoLabel;
-    @JsonProperty("KyuHihokenshaNoText")
-    private TextBox KyuHihokenshaNoText;
+    @JsonProperty("txtHihokenshaNo")
+    private TextBox txtHihokenshaNo;
+    @JsonProperty("txtYokaigodo")
+    private TextBox txtYokaigodo;
+    @JsonProperty("txtNinteiKikan")
+    private TextBoxDateRange txtNinteiKikan;
+    @JsonProperty("txtKyuHihokenshaNo")
+    private TextBox txtKyuHihokenshaNo;
     @JsonProperty("KyuShichosonLabel")
     private Label KyuShichosonLabel;
-    @JsonProperty("KyuShichosonCodeText")
-    private TextBoxCode KyuShichosonCodeText;
-    @JsonProperty("KyuShichosonText")
-    private TextBox KyuShichosonText;
+    @JsonProperty("txtKyuShichosonCode")
+    private TextBoxCode txtKyuShichosonCode;
+    @JsonProperty("txtKyuShichoson")
+    private TextBox txtKyuShichoson;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -50,84 +42,44 @@ public class DBCommonInfoPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("HihokenshaNoLabel")
-    public Label getHihokenshaNoLabel() {
-        return HihokenshaNoLabel;
+    @JsonProperty("txtHihokenshaNo")
+    public TextBox getTxtHihokenshaNo() {
+        return txtHihokenshaNo;
     }
 
-    @JsonProperty("HihokenshaNoLabel")
-    public void setHihokenshaNoLabel(Label HihokenshaNoLabel) {
-        this.HihokenshaNoLabel=HihokenshaNoLabel;
+    @JsonProperty("txtHihokenshaNo")
+    public void setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
+        this.txtHihokenshaNo=txtHihokenshaNo;
     }
 
-    @JsonProperty("HihokenshaNoText")
-    public TextBox getHihokenshaNoText() {
-        return HihokenshaNoText;
+    @JsonProperty("txtYokaigodo")
+    public TextBox getTxtYokaigodo() {
+        return txtYokaigodo;
     }
 
-    @JsonProperty("HihokenshaNoText")
-    public void setHihokenshaNoText(TextBox HihokenshaNoText) {
-        this.HihokenshaNoText=HihokenshaNoText;
+    @JsonProperty("txtYokaigodo")
+    public void setTxtYokaigodo(TextBox txtYokaigodo) {
+        this.txtYokaigodo=txtYokaigodo;
     }
 
-    @JsonProperty("YokaigodoLabel")
-    public Label getYokaigodoLabel() {
-        return YokaigodoLabel;
+    @JsonProperty("txtNinteiKikan")
+    public TextBoxDateRange getTxtNinteiKikan() {
+        return txtNinteiKikan;
     }
 
-    @JsonProperty("YokaigodoLabel")
-    public void setYokaigodoLabel(Label YokaigodoLabel) {
-        this.YokaigodoLabel=YokaigodoLabel;
+    @JsonProperty("txtNinteiKikan")
+    public void setTxtNinteiKikan(TextBoxDateRange txtNinteiKikan) {
+        this.txtNinteiKikan=txtNinteiKikan;
     }
 
-    @JsonProperty("YokaigodoText")
-    public TextBox getYokaigodoText() {
-        return YokaigodoText;
+    @JsonProperty("txtKyuHihokenshaNo")
+    public TextBox getTxtKyuHihokenshaNo() {
+        return txtKyuHihokenshaNo;
     }
 
-    @JsonProperty("YokaigodoText")
-    public void setYokaigodoText(TextBox YokaigodoText) {
-        this.YokaigodoText=YokaigodoText;
-    }
-
-    @JsonProperty("NinteiKikanLabel")
-    public Label getNinteiKikanLabel() {
-        return NinteiKikanLabel;
-    }
-
-    @JsonProperty("NinteiKikanLabel")
-    public void setNinteiKikanLabel(Label NinteiKikanLabel) {
-        this.NinteiKikanLabel=NinteiKikanLabel;
-    }
-
-    @JsonProperty("NinteiKikanText")
-    public TextBoxDateRange getNinteiKikanText() {
-        return NinteiKikanText;
-    }
-
-    @JsonProperty("NinteiKikanText")
-    public void setNinteiKikanText(TextBoxDateRange NinteiKikanText) {
-        this.NinteiKikanText=NinteiKikanText;
-    }
-
-    @JsonProperty("KyuHihokenshaNoLabel")
-    public Label getKyuHihokenshaNoLabel() {
-        return KyuHihokenshaNoLabel;
-    }
-
-    @JsonProperty("KyuHihokenshaNoLabel")
-    public void setKyuHihokenshaNoLabel(Label KyuHihokenshaNoLabel) {
-        this.KyuHihokenshaNoLabel=KyuHihokenshaNoLabel;
-    }
-
-    @JsonProperty("KyuHihokenshaNoText")
-    public TextBox getKyuHihokenshaNoText() {
-        return KyuHihokenshaNoText;
-    }
-
-    @JsonProperty("KyuHihokenshaNoText")
-    public void setKyuHihokenshaNoText(TextBox KyuHihokenshaNoText) {
-        this.KyuHihokenshaNoText=KyuHihokenshaNoText;
+    @JsonProperty("txtKyuHihokenshaNo")
+    public void setTxtKyuHihokenshaNo(TextBox txtKyuHihokenshaNo) {
+        this.txtKyuHihokenshaNo=txtKyuHihokenshaNo;
     }
 
     @JsonProperty("KyuShichosonLabel")
@@ -140,24 +92,24 @@ public class DBCommonInfoPanelDiv extends Panel {
         this.KyuShichosonLabel=KyuShichosonLabel;
     }
 
-    @JsonProperty("KyuShichosonCodeText")
-    public TextBoxCode getKyuShichosonCodeText() {
-        return KyuShichosonCodeText;
+    @JsonProperty("txtKyuShichosonCode")
+    public TextBoxCode getTxtKyuShichosonCode() {
+        return txtKyuShichosonCode;
     }
 
-    @JsonProperty("KyuShichosonCodeText")
-    public void setKyuShichosonCodeText(TextBoxCode KyuShichosonCodeText) {
-        this.KyuShichosonCodeText=KyuShichosonCodeText;
+    @JsonProperty("txtKyuShichosonCode")
+    public void setTxtKyuShichosonCode(TextBoxCode txtKyuShichosonCode) {
+        this.txtKyuShichosonCode=txtKyuShichosonCode;
     }
 
-    @JsonProperty("KyuShichosonText")
-    public TextBox getKyuShichosonText() {
-        return KyuShichosonText;
+    @JsonProperty("txtKyuShichoson")
+    public TextBox getTxtKyuShichoson() {
+        return txtKyuShichoson;
     }
 
-    @JsonProperty("KyuShichosonText")
-    public void setKyuShichosonText(TextBox KyuShichosonText) {
-        this.KyuShichosonText=KyuShichosonText;
+    @JsonProperty("txtKyuShichoson")
+    public void setTxtKyuShichoson(TextBox txtKyuShichoson) {
+        this.txtKyuShichoson=txtKyuShichoson;
     }
 
 }

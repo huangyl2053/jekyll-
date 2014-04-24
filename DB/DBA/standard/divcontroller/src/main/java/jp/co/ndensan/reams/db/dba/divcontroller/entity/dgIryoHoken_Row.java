@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Apr 23 14:40:00 JST 2014 
+ * Thu Apr 24 19:08:37 JST 2014 
  */
 
 
@@ -13,12 +13,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 
 /**
- * IryoHokenGrid_Row のクラスファイル 
+ * dgIryoHoken_Row のクラスファイル 
  * 
  * @author 自動生成
  */
 
-public class IryoHokenGrid_Row extends DataRow {
+public class dgIryoHoken_Row extends DataRow {
 
     private RString shubetsu;
     private RString hokenshaNo;
@@ -27,11 +27,11 @@ public class IryoHokenGrid_Row extends DataRow {
     private RString kanyuYMD;
     private RString dattaiYMD;
 
-    public IryoHokenGrid_Row() {
+    public dgIryoHoken_Row() {
         super();
     }
 
-    public IryoHokenGrid_Row(RString shubetsu, RString hokenshaNo, RString meisho, RString kigoNo, RString kanyuYMD, RString dattaiYMD) {
+    public dgIryoHoken_Row(RString shubetsu, RString hokenshaNo, RString meisho, RString kigoNo, RString kanyuYMD, RString dattaiYMD) {
         super();
         this.setOriginalData("shubetsu", shubetsu);
         this.setOriginalData("hokenshaNo", hokenshaNo);

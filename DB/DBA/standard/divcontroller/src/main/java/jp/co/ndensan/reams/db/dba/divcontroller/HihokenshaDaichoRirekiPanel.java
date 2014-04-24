@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dba.divcontroller;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.HihokenshaDaichoIdoRirekiGrid_Row;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dgHihokenshaDaichoIdoRireki_Row;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.HihokenshaDaichoRirekiPanelDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.HihokenshaSearchGaitoshaGrid_Row;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dgHihokenshaSearchGaitosha_Row;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.HihokenshaSearchGaitoshaPanelDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.DateRoundingType;
@@ -38,12 +38,38 @@ public class HihokenshaDaichoRirekiPanel {
     public ResponseData<HihokenshaDaichoRirekiPanelDiv> getOnLoadDivData(HihokenshaDaichoRirekiPanelDiv daichoRirekiPanel, HihokenshaSearchGaitoshaPanelDiv gaitoshaPanel) {
         ResponseData<HihokenshaDaichoRirekiPanelDiv> response = new ResponseData<>();
 
-        DataGrid<HihokenshaDaichoIdoRirekiGrid_Row> grid = daichoRirekiPanel.getHihokenshaDaichoIdoRirekiGrid();
+        DataGrid<dgHihokenshaDaichoIdoRireki_Row> grid = daichoRirekiPanel.getDgHihokenshaDaichoIdoRireki();
         RString 氏名 = get該当者情報(gaitoshaPanel).getShimei();
 
+        set非表示カラム(grid);
         grid.setDataSource(createIdoRirekiGridDataList(氏名));
+
         response.data = daichoRirekiPanel;
         return response;
+    }
+
+    /**
+     * システムを導入した市町村に対応して、非表示にするカラムを設定します。
+     * デモを行う南魚沼市は合併市町村であり、広域連合では無いため、広域に関する情報が表示されず、旧市町村の情報が表示される。
+     * 実際は、システムから市町村情報を取得して、その情報を元に判定を行う。
+     *
+     * @param grid grid
+     */
+    private void set非表示カラム(DataGrid<dgHihokenshaDaichoIdoRireki_Row> grid) {
+        if (is広域()) {
+            grid.getGridSetting().getColumn("kyuShichosonCode").setVisible(false);
+        }
+        if (is合併市町村()) {
+            grid.getGridSetting().getColumn("koikinaiTokureiSochimotoShichoson").setVisible(false);
+        }
+    }
+
+    private boolean is広域() {
+        return false;
+    }
+
+    private boolean is合併市町村() {
+        return true;
     }
 
     /**
@@ -51,8 +77,8 @@ public class HihokenshaDaichoRirekiPanel {
      *
      * @return 被保台帳履歴情報グリッドのデータ
      */
-    private List<HihokenshaDaichoIdoRirekiGrid_Row> createIdoRirekiGridDataList(RString 氏名) {
-        List<HihokenshaDaichoIdoRirekiGrid_Row> list;
+    private List<dgHihokenshaDaichoIdoRireki_Row> createIdoRirekiGridDataList(RString 氏名) {
+        List<dgHihokenshaDaichoIdoRireki_Row> list;
 
         if (氏名.equals(new RString("電算太郎"))) {
             list = create電算Data();
@@ -65,9 +91,9 @@ public class HihokenshaDaichoRirekiPanel {
         return list;
     }
 
-    private List<HihokenshaDaichoIdoRirekiGrid_Row> create電算Data() {
-        List<HihokenshaDaichoIdoRirekiGrid_Row> list = new ArrayList<>();
-        HihokenshaDaichoIdoRirekiGrid_Row item;
+    private List<dgHihokenshaDaichoIdoRireki_Row> create電算Data() {
+        List<dgHihokenshaDaichoIdoRireki_Row> list = new ArrayList<>();
+        dgHihokenshaDaichoIdoRireki_Row item;
 
         item = createIdoRirekiData("第2号", "年齢到達", "20130602", "20130602",
                 "", "", "", "20120820",
@@ -86,9 +112,9 @@ public class HihokenshaDaichoRirekiPanel {
         return list;
     }
 
-    private List<HihokenshaDaichoIdoRirekiGrid_Row> create山本Data() {
-        List<HihokenshaDaichoIdoRirekiGrid_Row> list = new ArrayList<>();
-        HihokenshaDaichoIdoRirekiGrid_Row item;
+    private List<dgHihokenshaDaichoIdoRireki_Row> create山本Data() {
+        List<dgHihokenshaDaichoIdoRireki_Row> list = new ArrayList<>();
+        dgHihokenshaDaichoIdoRireki_Row item;
 
         item = createIdoRirekiData("第2号", "障害認定", "20070109", "20070110",
                 "", "", "", "20120820",
@@ -100,39 +126,39 @@ public class HihokenshaDaichoRirekiPanel {
         return list;
     }
 
-    private List<HihokenshaDaichoIdoRirekiGrid_Row> create喜屋武Data() {
-        List<HihokenshaDaichoIdoRirekiGrid_Row> list = new ArrayList<>();
-        HihokenshaDaichoIdoRirekiGrid_Row item;
+    private List<dgHihokenshaDaichoIdoRireki_Row> create喜屋武Data() {
+        List<dgHihokenshaDaichoIdoRireki_Row> list = new ArrayList<>();
+        dgHihokenshaDaichoIdoRireki_Row item;
 
         item = createIdoRirekiData("第1号", "年齢到達", "20120912", "20120912",
                 "", "", "", "20120820",
                 "", "", "",
                 "", "", "",
                 "", "", "",
-                "", "", "", "", "0000234123");
+                "", "301", "", "", "0000234123");
         list.add(item);
         item = createIdoRirekiData("第2号", "障害認定", "20090413", "20090420",
                 "年齢到達", "20120912", "20120912", "",
                 "", "", "",
                 "", "", "",
                 "", "", "",
-                "", "", "", "", "0000214563");
+                "", "301", "", "", "0000214563");
         list.add(item);
         item = createIdoRirekiData("第2号", "障害認定仮登録", "20090222", "20090223",
                 "障害認定", "20090413", "20090420", "",
                 "", "", "",
                 "", "", "",
                 "", "", "",
-                "", "", "", "", "0000200654");
+                "", "301", "", "", "0000200654");
         list.add(item);
         return list;
     }
 
-    private HihokenshaDaichoIdoRirekiGrid_Row createIdoRirekiData(String 被保険者区分, String 取得事由, String 取得届出日, String 取得日,
+    private dgHihokenshaDaichoIdoRireki_Row createIdoRirekiData(String 被保険者区分, String 取得事由, String 取得届出日, String 取得日,
             String 喪失事由, String 喪失届出日, String 喪失日, String 第1号被保険者年齢到達日, String 変更事由, String 変更届出日,
             String 変更日, String 住所地特例適用事由, String 適用届出日, String 適用日, String 住所地特例解除事由, String 解除届出日,
             String 解除日, String 広住特措置元市町村, String 旧市町村コード, String 再交付区分, String 再交付事由, String 帳票交付履歴ID) {
-        HihokenshaDaichoIdoRirekiGrid_Row row = new HihokenshaDaichoIdoRirekiGrid_Row(RString.EMPTY, RString.EMPTY,
+        dgHihokenshaDaichoIdoRireki_Row row = new dgHihokenshaDaichoIdoRireki_Row(RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
@@ -158,21 +184,22 @@ public class HihokenshaDaichoRirekiPanel {
         row.setSaikofuKubun(new RString(再交付区分));
         row.setSaikohuJiyu(new RString(再交付事由));
         row.setChohyoKofuRirekiID(new RString(帳票交付履歴ID));
+
         return row;
     }
 
-    private HihokenshaSearchGaitoshaGrid_Row get該当者情報(HihokenshaSearchGaitoshaPanelDiv gaitoshaPanel) {
-        HihokenshaSearchGaitoshaGrid_Row gaitoshaGrid;
+    private dgHihokenshaSearchGaitosha_Row get該当者情報(HihokenshaSearchGaitoshaPanelDiv gaitoshaPanel) {
+        dgHihokenshaSearchGaitosha_Row gaitoshaGrid;
         if (check未選択(gaitoshaPanel)) {
-            gaitoshaGrid = gaitoshaPanel.getHihokenshaSearchGaitoshaGrid().getDataSource().get(0);
+            gaitoshaGrid = gaitoshaPanel.getDgHihokenshaSearchGaitosha().getDataSource().get(0);
         } else {
-            gaitoshaGrid = gaitoshaPanel.getHihokenshaSearchGaitoshaGrid().getSelectedItems().get(0);
+            gaitoshaGrid = gaitoshaPanel.getDgHihokenshaSearchGaitosha().getSelectedItems().get(0);
         }
         return gaitoshaGrid;
     }
 
     private boolean check未選択(HihokenshaSearchGaitoshaPanelDiv gaitoshaPanel) {
-        return gaitoshaPanel.getHihokenshaSearchGaitoshaGrid().getSelectedItems().isEmpty();
+        return gaitoshaPanel.getDgHihokenshaSearchGaitosha().getSelectedItems().isEmpty();
     }
 
     private RString createDateString(String str) {

@@ -5,7 +5,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.IryoHokenGrid_Row;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dgIryoHoken_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -22,8 +22,8 @@ public class IryoHokenTabPanelDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("IryoHokenGrid")
-    private DataGrid<IryoHokenGrid_Row> IryoHokenGrid;
+    @JsonProperty("dgIryoHoken")
+    private DataGrid<dgIryoHoken_Row> dgIryoHoken;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,14 +31,14 @@ public class IryoHokenTabPanelDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("IryoHokenGrid")
-    public DataGrid<IryoHokenGrid_Row> getIryoHokenGrid() {
-        return IryoHokenGrid;
+    @JsonProperty("dgIryoHoken")
+    public DataGrid<dgIryoHoken_Row> getDgIryoHoken() {
+        return dgIryoHoken;
     }
 
-    @JsonProperty("IryoHokenGrid")
-    public void setIryoHokenGrid(DataGrid<IryoHokenGrid_Row> IryoHokenGrid) {
-        this.IryoHokenGrid=IryoHokenGrid;
+    @JsonProperty("dgIryoHoken")
+    public void setDgIryoHoken(DataGrid<dgIryoHoken_Row> dgIryoHoken) {
+        this.dgIryoHoken=dgIryoHoken;
     }
 
 }

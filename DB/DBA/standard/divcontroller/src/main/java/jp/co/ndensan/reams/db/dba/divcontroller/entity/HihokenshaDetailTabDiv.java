@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.IryoHokenTabPanelDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.RoreiFukushiTabPanelDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.SeikatsuHogoTabPanelDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.SetaiShokaiTabPanelDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.ShinseiInfoTabPanelDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.ShisetsuNyutaishoTabPanelDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
 
@@ -35,8 +34,6 @@ public class HihokenshaDetailTabDiv extends TabContainer {
     private RoreiFukushiTabPanelDiv RoreiFukushiTabPanel;
     @JsonProperty("IryoHokenTabPanel")
     private IryoHokenTabPanelDiv IryoHokenTabPanel;
-    @JsonProperty("ShinseiInfoTabPanel")
-    private ShinseiInfoTabPanelDiv ShinseiInfoTabPanel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -92,16 +89,6 @@ public class HihokenshaDetailTabDiv extends TabContainer {
     @JsonProperty("IryoHokenTabPanel")
     public void setIryoHokenTabPanel(IryoHokenTabPanelDiv IryoHokenTabPanel) {
         this.IryoHokenTabPanel=IryoHokenTabPanel;
-    }
-
-    @JsonProperty("ShinseiInfoTabPanel")
-    public ShinseiInfoTabPanelDiv getShinseiInfoTabPanel() {
-        return ShinseiInfoTabPanel;
-    }
-
-    @JsonProperty("ShinseiInfoTabPanel")
-    public void setShinseiInfoTabPanel(ShinseiInfoTabPanelDiv ShinseiInfoTabPanel) {
-        this.ShinseiInfoTabPanel=ShinseiInfoTabPanel;
     }
 
 }

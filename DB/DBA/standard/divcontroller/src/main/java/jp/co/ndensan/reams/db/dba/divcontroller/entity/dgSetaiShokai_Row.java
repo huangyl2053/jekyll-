@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Apr 23 14:40:00 JST 2014 
+ * Thu Apr 24 19:08:37 JST 2014 
  */
 
 
@@ -13,12 +13,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 
 /**
- * SetaiShokaiGrid_Row のクラスファイル 
+ * dgSetaiShokai_Row のクラスファイル 
  * 
  * @author 自動生成
  */
 
-public class SetaiShokaiGrid_Row extends DataRow {
+public class dgSetaiShokai_Row extends DataRow {
 
     private RString hihokenshaNo;
     private RString shimei;
@@ -28,11 +28,11 @@ public class SetaiShokaiGrid_Row extends DataRow {
     private RString juminShubetsu;
     private RString shikibetsuCode;
 
-    public SetaiShokaiGrid_Row() {
+    public dgSetaiShokai_Row() {
         super();
     }
 
-    public SetaiShokaiGrid_Row(RString hihokenshaNo, RString shimei, RString gender, RString dateOfBirth, RString zokugara, RString juminShubetsu, RString shikibetsuCode) {
+    public dgSetaiShokai_Row(RString hihokenshaNo, RString shimei, RString gender, RString dateOfBirth, RString zokugara, RString juminShubetsu, RString shikibetsuCode) {
         super();
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
         this.setOriginalData("shimei", shimei);

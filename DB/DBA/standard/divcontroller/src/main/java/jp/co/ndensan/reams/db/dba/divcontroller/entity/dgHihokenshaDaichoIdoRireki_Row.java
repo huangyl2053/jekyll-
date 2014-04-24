@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Apr 23 14:39:55 JST 2014 
+ * Thu Apr 24 19:08:33 JST 2014 
  */
 
 
@@ -13,12 +13,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 
 /**
- * HihokenshaDaichoIdoRirekiGrid_Row のクラスファイル 
+ * dgHihokenshaDaichoIdoRireki_Row のクラスファイル 
  * 
  * @author 自動生成
  */
 
-public class HihokenshaDaichoIdoRirekiGrid_Row extends DataRow {
+public class dgHihokenshaDaichoIdoRireki_Row extends DataRow {
 
     private RString hihokenshaKubun;
     private RString shutokuJiyu;
@@ -43,11 +43,11 @@ public class HihokenshaDaichoIdoRirekiGrid_Row extends DataRow {
     private RString saikohuJiyu;
     private RString chohyoKofuRirekiID;
 
-    public HihokenshaDaichoIdoRirekiGrid_Row() {
+    public dgHihokenshaDaichoIdoRireki_Row() {
         super();
     }
 
-    public HihokenshaDaichoIdoRirekiGrid_Row(RString hihokenshaKubun, RString shutokuJiyu, RString shutokuTodokedeYMD, RString shutokuYMD, RString soshitsuJiyu, RString soshitsuTodokedeYMD, RString soshitsuYMD, RString ichigoHihokenshaNenreiTotatsuYMD, RString henkoJiyu, RString henkoTodokedeYMD, RString henkoYMD, RString jushochitokureiTekiyoJiyu, RString tekiyoTodokedeYMD, RString tekiyoYMD, RString jushochitokureiKaijoJiyu, RString kaijoTodokedeYMD, RString kaijoYMD, RString koikinaiTokureiSochimotoShichoson, RString kyuShichosonCode, RString saikofuKubun, RString saikohuJiyu, RString chohyoKofuRirekiID) {
+    public dgHihokenshaDaichoIdoRireki_Row(RString hihokenshaKubun, RString shutokuJiyu, RString shutokuTodokedeYMD, RString shutokuYMD, RString soshitsuJiyu, RString soshitsuTodokedeYMD, RString soshitsuYMD, RString ichigoHihokenshaNenreiTotatsuYMD, RString henkoJiyu, RString henkoTodokedeYMD, RString henkoYMD, RString jushochitokureiTekiyoJiyu, RString tekiyoTodokedeYMD, RString tekiyoYMD, RString jushochitokureiKaijoJiyu, RString kaijoTodokedeYMD, RString kaijoYMD, RString koikinaiTokureiSochimotoShichoson, RString kyuShichosonCode, RString saikofuKubun, RString saikohuJiyu, RString chohyoKofuRirekiID) {
         super();
         this.setOriginalData("hihokenshaKubun", hihokenshaKubun);
         this.setOriginalData("shutokuJiyu", shutokuJiyu);

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Apr 23 15:12:14 JST 2014 
+ * Thu Apr 24 19:08:29 JST 2014 
  */
 
 
@@ -13,12 +13,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 
 /**
- * HihokenshaSearchGaitoshaGrid_Row のクラスファイル 
+ * dgHihokenshaSearchGaitosha_Row のクラスファイル 
  * 
  * @author 自動生成
  */
 
-public class HihokenshaSearchGaitoshaGrid_Row extends DataRow {
+public class dgHihokenshaSearchGaitosha_Row extends DataRow {
 
     private RString hihokenshaNo;
     private RString shimei;
@@ -42,11 +42,11 @@ public class HihokenshaSearchGaitoshaGrid_Row extends DataRow {
     private RString kyuShichosonCode;
     private RString kyuShichoson;
 
-    public HihokenshaSearchGaitoshaGrid_Row() {
+    public dgHihokenshaSearchGaitosha_Row() {
         super();
     }
 
-    public HihokenshaSearchGaitoshaGrid_Row(RString hihokenshaNo, RString shimei, RString dateOfBirth, RString age, RString gender, RString jusho, RString shikibetsuCode, RString hurikana, RString jushoCode, RString gyoseiku, RString kumiai, RString setaiCode, RString juminhyoCode, RString renrakusaki1, RString renrakusaki2, RString yokaigodo, RString ninteiKikanKaishi, RString ninteiKikanShuryo, RString kyuHihokenshaNo, RString kyuShichosonCode, RString kyuShichoson) {
+    public dgHihokenshaSearchGaitosha_Row(RString hihokenshaNo, RString shimei, RString dateOfBirth, RString age, RString gender, RString jusho, RString shikibetsuCode, RString hurikana, RString jushoCode, RString gyoseiku, RString kumiai, RString setaiCode, RString juminhyoCode, RString renrakusaki1, RString renrakusaki2, RString yokaigodo, RString ninteiKikanKaishi, RString ninteiKikanShuryo, RString kyuHihokenshaNo, RString kyuShichosonCode, RString kyuShichoson) {
         super();
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
         this.setOriginalData("shimei", shimei);

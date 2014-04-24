@@ -21,10 +21,8 @@ public class MaeShorishaRirekiPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("MaeShorishaRirekiLabel")
-    private Label MaeShorishaRirekiLabel;
-    @JsonProperty("MaeShorishaRirekiDropDown")
-    private DropDownList MaeShorishaRirekiDropDown;
+    @JsonProperty("ddlMaeShorishaRireki")
+    private DropDownList ddlMaeShorishaRireki;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,24 +30,14 @@ public class MaeShorishaRirekiPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("MaeShorishaRirekiLabel")
-    public Label getMaeShorishaRirekiLabel() {
-        return MaeShorishaRirekiLabel;
+    @JsonProperty("ddlMaeShorishaRireki")
+    public DropDownList getDdlMaeShorishaRireki() {
+        return ddlMaeShorishaRireki;
     }
 
-    @JsonProperty("MaeShorishaRirekiLabel")
-    public void setMaeShorishaRirekiLabel(Label MaeShorishaRirekiLabel) {
-        this.MaeShorishaRirekiLabel=MaeShorishaRirekiLabel;
-    }
-
-    @JsonProperty("MaeShorishaRirekiDropDown")
-    public DropDownList getMaeShorishaRirekiDropDown() {
-        return MaeShorishaRirekiDropDown;
-    }
-
-    @JsonProperty("MaeShorishaRirekiDropDown")
-    public void setMaeShorishaRirekiDropDown(DropDownList MaeShorishaRirekiDropDown) {
-        this.MaeShorishaRirekiDropDown=MaeShorishaRirekiDropDown;
+    @JsonProperty("ddlMaeShorishaRireki")
+    public void setDdlMaeShorishaRireki(DropDownList ddlMaeShorishaRireki) {
+        this.ddlMaeShorishaRireki=ddlMaeShorishaRireki;
     }
 
 }

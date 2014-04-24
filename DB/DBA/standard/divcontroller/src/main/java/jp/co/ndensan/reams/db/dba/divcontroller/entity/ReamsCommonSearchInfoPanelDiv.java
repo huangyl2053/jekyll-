@@ -21,26 +21,16 @@ public class ReamsCommonSearchInfoPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("SearchShimeiLabel")
-    private Label SearchShimeiLabel;
-    @JsonProperty("SearchShimeiText")
-    private TextBox SearchShimeiText;
-    @JsonProperty("SearchDateObBirthLabel")
-    private Label SearchDateObBirthLabel;
-    @JsonProperty("SearchDateOfBirthText")
-    private TextBox SearchDateOfBirthText;
-    @JsonProperty("SearchShichosonCodeLabel")
-    private Label SearchShichosonCodeLabel;
-    @JsonProperty("SearchShichosonCodeText")
-    private TextBox SearchShichosonCodeText;
-    @JsonProperty("SearchShikibetsuCodeLabel")
-    private Label SearchShikibetsuCodeLabel;
-    @JsonProperty("SearchShikibetsuCodeText")
-    private TextBox SearchShikibetsuCodeText;
-    @JsonProperty("SearchSetaiCodeLabel")
-    private Label SearchSetaiCodeLabel;
-    @JsonProperty("SearchSetaiCodeText")
-    private TextBox SearchSetaiCodeText;
+    @JsonProperty("txtSearchShimei")
+    private TextBox txtSearchShimei;
+    @JsonProperty("txtSearchDateOfBirth")
+    private TextBox txtSearchDateOfBirth;
+    @JsonProperty("txtSearchShichosonCode")
+    private TextBox txtSearchShichosonCode;
+    @JsonProperty("txtSearchShikibetsuCode")
+    private TextBox txtSearchShikibetsuCode;
+    @JsonProperty("txtSearchSetaiCode")
+    private TextBox txtSearchSetaiCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -48,104 +38,54 @@ public class ReamsCommonSearchInfoPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("SearchShimeiLabel")
-    public Label getSearchShimeiLabel() {
-        return SearchShimeiLabel;
+    @JsonProperty("txtSearchShimei")
+    public TextBox getTxtSearchShimei() {
+        return txtSearchShimei;
     }
 
-    @JsonProperty("SearchShimeiLabel")
-    public void setSearchShimeiLabel(Label SearchShimeiLabel) {
-        this.SearchShimeiLabel=SearchShimeiLabel;
+    @JsonProperty("txtSearchShimei")
+    public void setTxtSearchShimei(TextBox txtSearchShimei) {
+        this.txtSearchShimei=txtSearchShimei;
     }
 
-    @JsonProperty("SearchShimeiText")
-    public TextBox getSearchShimeiText() {
-        return SearchShimeiText;
+    @JsonProperty("txtSearchDateOfBirth")
+    public TextBox getTxtSearchDateOfBirth() {
+        return txtSearchDateOfBirth;
     }
 
-    @JsonProperty("SearchShimeiText")
-    public void setSearchShimeiText(TextBox SearchShimeiText) {
-        this.SearchShimeiText=SearchShimeiText;
+    @JsonProperty("txtSearchDateOfBirth")
+    public void setTxtSearchDateOfBirth(TextBox txtSearchDateOfBirth) {
+        this.txtSearchDateOfBirth=txtSearchDateOfBirth;
     }
 
-    @JsonProperty("SearchDateObBirthLabel")
-    public Label getSearchDateObBirthLabel() {
-        return SearchDateObBirthLabel;
+    @JsonProperty("txtSearchShichosonCode")
+    public TextBox getTxtSearchShichosonCode() {
+        return txtSearchShichosonCode;
     }
 
-    @JsonProperty("SearchDateObBirthLabel")
-    public void setSearchDateObBirthLabel(Label SearchDateObBirthLabel) {
-        this.SearchDateObBirthLabel=SearchDateObBirthLabel;
+    @JsonProperty("txtSearchShichosonCode")
+    public void setTxtSearchShichosonCode(TextBox txtSearchShichosonCode) {
+        this.txtSearchShichosonCode=txtSearchShichosonCode;
     }
 
-    @JsonProperty("SearchDateOfBirthText")
-    public TextBox getSearchDateOfBirthText() {
-        return SearchDateOfBirthText;
+    @JsonProperty("txtSearchShikibetsuCode")
+    public TextBox getTxtSearchShikibetsuCode() {
+        return txtSearchShikibetsuCode;
     }
 
-    @JsonProperty("SearchDateOfBirthText")
-    public void setSearchDateOfBirthText(TextBox SearchDateOfBirthText) {
-        this.SearchDateOfBirthText=SearchDateOfBirthText;
+    @JsonProperty("txtSearchShikibetsuCode")
+    public void setTxtSearchShikibetsuCode(TextBox txtSearchShikibetsuCode) {
+        this.txtSearchShikibetsuCode=txtSearchShikibetsuCode;
     }
 
-    @JsonProperty("SearchShichosonCodeLabel")
-    public Label getSearchShichosonCodeLabel() {
-        return SearchShichosonCodeLabel;
+    @JsonProperty("txtSearchSetaiCode")
+    public TextBox getTxtSearchSetaiCode() {
+        return txtSearchSetaiCode;
     }
 
-    @JsonProperty("SearchShichosonCodeLabel")
-    public void setSearchShichosonCodeLabel(Label SearchShichosonCodeLabel) {
-        this.SearchShichosonCodeLabel=SearchShichosonCodeLabel;
-    }
-
-    @JsonProperty("SearchShichosonCodeText")
-    public TextBox getSearchShichosonCodeText() {
-        return SearchShichosonCodeText;
-    }
-
-    @JsonProperty("SearchShichosonCodeText")
-    public void setSearchShichosonCodeText(TextBox SearchShichosonCodeText) {
-        this.SearchShichosonCodeText=SearchShichosonCodeText;
-    }
-
-    @JsonProperty("SearchShikibetsuCodeLabel")
-    public Label getSearchShikibetsuCodeLabel() {
-        return SearchShikibetsuCodeLabel;
-    }
-
-    @JsonProperty("SearchShikibetsuCodeLabel")
-    public void setSearchShikibetsuCodeLabel(Label SearchShikibetsuCodeLabel) {
-        this.SearchShikibetsuCodeLabel=SearchShikibetsuCodeLabel;
-    }
-
-    @JsonProperty("SearchShikibetsuCodeText")
-    public TextBox getSearchShikibetsuCodeText() {
-        return SearchShikibetsuCodeText;
-    }
-
-    @JsonProperty("SearchShikibetsuCodeText")
-    public void setSearchShikibetsuCodeText(TextBox SearchShikibetsuCodeText) {
-        this.SearchShikibetsuCodeText=SearchShikibetsuCodeText;
-    }
-
-    @JsonProperty("SearchSetaiCodeLabel")
-    public Label getSearchSetaiCodeLabel() {
-        return SearchSetaiCodeLabel;
-    }
-
-    @JsonProperty("SearchSetaiCodeLabel")
-    public void setSearchSetaiCodeLabel(Label SearchSetaiCodeLabel) {
-        this.SearchSetaiCodeLabel=SearchSetaiCodeLabel;
-    }
-
-    @JsonProperty("SearchSetaiCodeText")
-    public TextBox getSearchSetaiCodeText() {
-        return SearchSetaiCodeText;
-    }
-
-    @JsonProperty("SearchSetaiCodeText")
-    public void setSearchSetaiCodeText(TextBox SearchSetaiCodeText) {
-        this.SearchSetaiCodeText=SearchSetaiCodeText;
+    @JsonProperty("txtSearchSetaiCode")
+    public void setTxtSearchSetaiCode(TextBox txtSearchSetaiCode) {
+        this.txtSearchSetaiCode=txtSearchSetaiCode;
     }
 
 }

@@ -5,7 +5,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.ShisetsuNyutaishoGrid_Row;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dgShisetsuNyutaisho_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -22,8 +22,8 @@ public class ShisetsuNyutaishoTabPanelDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ShisetsuNyutaishoGrid")
-    private DataGrid<ShisetsuNyutaishoGrid_Row> ShisetsuNyutaishoGrid;
+    @JsonProperty("dgShisetsuNyutaisho")
+    private DataGrid<dgShisetsuNyutaisho_Row> dgShisetsuNyutaisho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,14 +31,14 @@ public class ShisetsuNyutaishoTabPanelDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("ShisetsuNyutaishoGrid")
-    public DataGrid<ShisetsuNyutaishoGrid_Row> getShisetsuNyutaishoGrid() {
-        return ShisetsuNyutaishoGrid;
+    @JsonProperty("dgShisetsuNyutaisho")
+    public DataGrid<dgShisetsuNyutaisho_Row> getDgShisetsuNyutaisho() {
+        return dgShisetsuNyutaisho;
     }
 
-    @JsonProperty("ShisetsuNyutaishoGrid")
-    public void setShisetsuNyutaishoGrid(DataGrid<ShisetsuNyutaishoGrid_Row> ShisetsuNyutaishoGrid) {
-        this.ShisetsuNyutaishoGrid=ShisetsuNyutaishoGrid;
+    @JsonProperty("dgShisetsuNyutaisho")
+    public void setDgShisetsuNyutaisho(DataGrid<dgShisetsuNyutaisho_Row> dgShisetsuNyutaisho) {
+        this.dgShisetsuNyutaisho=dgShisetsuNyutaisho;
     }
 
 }

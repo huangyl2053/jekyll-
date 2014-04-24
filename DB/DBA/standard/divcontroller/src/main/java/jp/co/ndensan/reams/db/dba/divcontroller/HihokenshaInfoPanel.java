@@ -7,16 +7,10 @@ package jp.co.ndensan.reams.db.dba.divcontroller;
 
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.DBCommonInfoPanelDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.HihokenshaInfoPanelDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.HihokenshaSearchGaitoshaGrid_Row;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dgHihokenshaSearchGaitosha_Row;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.HihokenshaSearchGaitoshaPanelDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.ReamsCommonInfoPanelDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.DateRoundingType;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.lang.Wareki;
 
 /**
  * 被保険者照会画面上部の、被保険者情報を表示するパネルを表すクラスです。
@@ -44,47 +38,47 @@ public class HihokenshaInfoPanel {
     }
 
     private void setReamsCommonInfoData(ReamsCommonInfoPanelDiv reamsCommonData, HihokenshaSearchGaitoshaPanelDiv gaitoshaPanel) {
-        HihokenshaSearchGaitoshaGrid_Row gaitoshaGrid = get該当者情報(gaitoshaPanel);
+        dgHihokenshaSearchGaitosha_Row gaitoshaGrid = get該当者情報(gaitoshaPanel);
 
-        reamsCommonData.getAgeText().setValue(gaitoshaGrid.getAge());
-        reamsCommonData.getDateOfBirthText().setValue(gaitoshaGrid.getDateOfBirth());
-        reamsCommonData.getGenderText().setValue(gaitoshaGrid.getGender());
-        reamsCommonData.getGyoseikuText().setValue(gaitoshaGrid.getGyoseiku());
-        reamsCommonData.getShimeiText().setValue(gaitoshaGrid.getShimei());
-        reamsCommonData.getHurikanaText().setValue(gaitoshaGrid.getHurikana());
-        reamsCommonData.getJuminhyoCodeText().setValue(gaitoshaGrid.getJuminhyoCode());
-        reamsCommonData.getJushoCodeText().setValue(gaitoshaGrid.getJushoCode());
-        reamsCommonData.getJushoText().setValue(gaitoshaGrid.getJusho());
-        reamsCommonData.getKumiaiText().setValue(gaitoshaGrid.getKumiai());
-        reamsCommonData.getRenrakusaki1Text().setValue(gaitoshaGrid.getRenrakusaki1());
-        reamsCommonData.getRenrakusaki2Text().setValue(gaitoshaGrid.getRenrakusaki2());
-        reamsCommonData.getSetaiCodeText().setValue(gaitoshaGrid.getSetaiCode());
+        reamsCommonData.getTxtAge().setValue(gaitoshaGrid.getAge());
+        reamsCommonData.getTxtDateOfBirth().setValue(gaitoshaGrid.getDateOfBirth());
+        reamsCommonData.getTxtGender().setValue(gaitoshaGrid.getGender());
+        reamsCommonData.getTxtGyoseiku().setValue(gaitoshaGrid.getGyoseiku());
+        reamsCommonData.getTxtShimei().setValue(gaitoshaGrid.getShimei());
+        reamsCommonData.getTxtHurikana().setValue(gaitoshaGrid.getHurikana());
+        reamsCommonData.getTxtJuminhyoCode().setValue(gaitoshaGrid.getJuminhyoCode());
+        reamsCommonData.getTxtJushoCode().setValue(gaitoshaGrid.getJushoCode());
+        reamsCommonData.getTxtJusho().setValue(gaitoshaGrid.getJusho());
+        reamsCommonData.getTxtKumiai().setValue(gaitoshaGrid.getKumiai());
+        reamsCommonData.getTxtRenrakusaki1().setValue(gaitoshaGrid.getRenrakusaki1());
+        reamsCommonData.getTxtRenrakusaki2().setValue(gaitoshaGrid.getRenrakusaki2());
+        reamsCommonData.getTxtSetaiCode().setValue(gaitoshaGrid.getSetaiCode());
     }
 
     private void setDBCommonInfoData(DBCommonInfoPanelDiv dbCommonData, HihokenshaSearchGaitoshaPanelDiv gaitoshaPanel) {
-        HihokenshaSearchGaitoshaGrid_Row gaitoshaGrid = get該当者情報(gaitoshaPanel);
+        dgHihokenshaSearchGaitosha_Row gaitoshaGrid = get該当者情報(gaitoshaPanel);
 
-        dbCommonData.getHihokenshaNoText().setValue(gaitoshaGrid.getHihokenshaNo());
-        dbCommonData.getYokaigodoText().setValue(gaitoshaGrid.getYokaigodo());
-        dbCommonData.getNinteiKikanText().setFromValue(gaitoshaGrid.getNinteiKikanKaishi());
-        dbCommonData.getNinteiKikanText().setToValue(gaitoshaGrid.getNinteiKikanShuryo());
-        dbCommonData.getKyuHihokenshaNoText().setValue(gaitoshaGrid.getKyuHihokenshaNo());
-        dbCommonData.getKyuShichosonCodeText().setValue(gaitoshaGrid.getKyuShichosonCode());
-        dbCommonData.getKyuShichosonText().setValue(gaitoshaGrid.getKyuShichoson());
+        dbCommonData.getTxtHihokenshaNo().setValue(gaitoshaGrid.getHihokenshaNo());
+        dbCommonData.getTxtYokaigodo().setValue(gaitoshaGrid.getYokaigodo());
+        dbCommonData.getTxtNinteiKikan().setFromValue(gaitoshaGrid.getNinteiKikanKaishi());
+        dbCommonData.getTxtNinteiKikan().setToValue(gaitoshaGrid.getNinteiKikanShuryo());
+        dbCommonData.getTxtKyuHihokenshaNo().setValue(gaitoshaGrid.getKyuHihokenshaNo());
+        dbCommonData.getTxtKyuShichosonCode().setValue(gaitoshaGrid.getKyuShichosonCode());
+        dbCommonData.getTxtKyuShichoson().setValue(gaitoshaGrid.getKyuShichoson());
     }
 
-    private HihokenshaSearchGaitoshaGrid_Row get該当者情報(HihokenshaSearchGaitoshaPanelDiv gaitoshaPanel) {
-        HihokenshaSearchGaitoshaGrid_Row gaitoshaGrid;
+    private dgHihokenshaSearchGaitosha_Row get該当者情報(HihokenshaSearchGaitoshaPanelDiv gaitoshaPanel) {
+        dgHihokenshaSearchGaitosha_Row gaitoshaGrid;
         if (check未選択(gaitoshaPanel)) {
-            gaitoshaGrid = gaitoshaPanel.getHihokenshaSearchGaitoshaGrid().getDataSource().get(0);
+            gaitoshaGrid = gaitoshaPanel.getDgHihokenshaSearchGaitosha().getDataSource().get(0);
         } else {
-            gaitoshaGrid = gaitoshaPanel.getHihokenshaSearchGaitoshaGrid().getSelectedItems().get(0);
+            gaitoshaGrid = gaitoshaPanel.getDgHihokenshaSearchGaitosha().getSelectedItems().get(0);
         }
         return gaitoshaGrid;
     }
 
     private boolean check未選択(HihokenshaSearchGaitoshaPanelDiv gaitoshaPanel) {
-        return gaitoshaPanel.getHihokenshaSearchGaitoshaGrid().getSelectedItems().isEmpty();
+        return gaitoshaPanel.getDgHihokenshaSearchGaitosha().getSelectedItems().isEmpty();
     }
 
 }

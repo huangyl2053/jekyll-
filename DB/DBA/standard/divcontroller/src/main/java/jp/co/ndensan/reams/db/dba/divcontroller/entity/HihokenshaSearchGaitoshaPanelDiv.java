@@ -5,7 +5,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.HihokenshaSearchGaitoshaGrid_Row;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dgHihokenshaSearchGaitosha_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -24,8 +24,8 @@ public class HihokenshaSearchGaitoshaPanelDiv extends Panel {
      */
     @JsonProperty("HihokenshaSelectButton")
     private Button HihokenshaSelectButton;
-    @JsonProperty("HihokenshaSearchGaitoshaGrid")
-    private DataGrid<HihokenshaSearchGaitoshaGrid_Row> HihokenshaSearchGaitoshaGrid;
+    @JsonProperty("dgHihokenshaSearchGaitosha")
+    private DataGrid<dgHihokenshaSearchGaitosha_Row> dgHihokenshaSearchGaitosha;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -43,14 +43,14 @@ public class HihokenshaSearchGaitoshaPanelDiv extends Panel {
         this.HihokenshaSelectButton=HihokenshaSelectButton;
     }
 
-    @JsonProperty("HihokenshaSearchGaitoshaGrid")
-    public DataGrid<HihokenshaSearchGaitoshaGrid_Row> getHihokenshaSearchGaitoshaGrid() {
-        return HihokenshaSearchGaitoshaGrid;
+    @JsonProperty("dgHihokenshaSearchGaitosha")
+    public DataGrid<dgHihokenshaSearchGaitosha_Row> getDgHihokenshaSearchGaitosha() {
+        return dgHihokenshaSearchGaitosha;
     }
 
-    @JsonProperty("HihokenshaSearchGaitoshaGrid")
-    public void setHihokenshaSearchGaitoshaGrid(DataGrid<HihokenshaSearchGaitoshaGrid_Row> HihokenshaSearchGaitoshaGrid) {
-        this.HihokenshaSearchGaitoshaGrid=HihokenshaSearchGaitoshaGrid;
+    @JsonProperty("dgHihokenshaSearchGaitosha")
+    public void setDgHihokenshaSearchGaitosha(DataGrid<dgHihokenshaSearchGaitosha_Row> dgHihokenshaSearchGaitosha) {
+        this.dgHihokenshaSearchGaitosha=dgHihokenshaSearchGaitosha;
     }
 
 }
