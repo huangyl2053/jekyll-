@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Apr 24 19:08:33 JST 2014 
+ * Fri Apr 25 17:33:21 JST 2014 
  */
 
 
@@ -37,8 +37,8 @@ public class dgHihokenshaDaichoIdoRireki_Row extends DataRow {
     private RString jushochitokureiKaijoJiyu;
     private RString kaijoTodokedeYMD;
     private RString kaijoYMD;
-    private RString koikinaiTokureiSochimotoShichoson;
-    private RString kyuShichosonCode;
+    private RString koikinaiTokureiSochimotoHokensha;
+    private RString kyuHokensha;
     private RString saikofuKubun;
     private RString saikohuJiyu;
     private RString chohyoKofuRirekiID;
@@ -47,7 +47,7 @@ public class dgHihokenshaDaichoIdoRireki_Row extends DataRow {
         super();
     }
 
-    public dgHihokenshaDaichoIdoRireki_Row(RString hihokenshaKubun, RString shutokuJiyu, RString shutokuTodokedeYMD, RString shutokuYMD, RString soshitsuJiyu, RString soshitsuTodokedeYMD, RString soshitsuYMD, RString ichigoHihokenshaNenreiTotatsuYMD, RString henkoJiyu, RString henkoTodokedeYMD, RString henkoYMD, RString jushochitokureiTekiyoJiyu, RString tekiyoTodokedeYMD, RString tekiyoYMD, RString jushochitokureiKaijoJiyu, RString kaijoTodokedeYMD, RString kaijoYMD, RString koikinaiTokureiSochimotoShichoson, RString kyuShichosonCode, RString saikofuKubun, RString saikohuJiyu, RString chohyoKofuRirekiID) {
+    public dgHihokenshaDaichoIdoRireki_Row(RString hihokenshaKubun, RString shutokuJiyu, RString shutokuTodokedeYMD, RString shutokuYMD, RString soshitsuJiyu, RString soshitsuTodokedeYMD, RString soshitsuYMD, RString ichigoHihokenshaNenreiTotatsuYMD, RString henkoJiyu, RString henkoTodokedeYMD, RString henkoYMD, RString jushochitokureiTekiyoJiyu, RString tekiyoTodokedeYMD, RString tekiyoYMD, RString jushochitokureiKaijoJiyu, RString kaijoTodokedeYMD, RString kaijoYMD, RString koikinaiTokureiSochimotoHokensha, RString kyuHokensha, RString saikofuKubun, RString saikohuJiyu, RString chohyoKofuRirekiID) {
         super();
         this.setOriginalData("hihokenshaKubun", hihokenshaKubun);
         this.setOriginalData("shutokuJiyu", shutokuJiyu);
@@ -66,8 +66,8 @@ public class dgHihokenshaDaichoIdoRireki_Row extends DataRow {
         this.setOriginalData("jushochitokureiKaijoJiyu", jushochitokureiKaijoJiyu);
         this.setOriginalData("kaijoTodokedeYMD", kaijoTodokedeYMD);
         this.setOriginalData("kaijoYMD", kaijoYMD);
-        this.setOriginalData("koikinaiTokureiSochimotoShichoson", koikinaiTokureiSochimotoShichoson);
-        this.setOriginalData("kyuShichosonCode", kyuShichosonCode);
+        this.setOriginalData("koikinaiTokureiSochimotoHokensha", koikinaiTokureiSochimotoHokensha);
+        this.setOriginalData("kyuHokensha", kyuHokensha);
         this.setOriginalData("saikofuKubun", saikofuKubun);
         this.setOriginalData("saikohuJiyu", saikohuJiyu);
         this.setOriginalData("chohyoKofuRirekiID", chohyoKofuRirekiID);
@@ -88,8 +88,8 @@ public class dgHihokenshaDaichoIdoRireki_Row extends DataRow {
         this.jushochitokureiKaijoJiyu = jushochitokureiKaijoJiyu;
         this.kaijoTodokedeYMD = kaijoTodokedeYMD;
         this.kaijoYMD = kaijoYMD;
-        this.koikinaiTokureiSochimotoShichoson = koikinaiTokureiSochimotoShichoson;
-        this.kyuShichosonCode = kyuShichosonCode;
+        this.koikinaiTokureiSochimotoHokensha = koikinaiTokureiSochimotoHokensha;
+        this.kyuHokensha = kyuHokensha;
         this.saikofuKubun = saikofuKubun;
         this.saikohuJiyu = saikohuJiyu;
         this.chohyoKofuRirekiID = chohyoKofuRirekiID;
@@ -163,12 +163,12 @@ public class dgHihokenshaDaichoIdoRireki_Row extends DataRow {
         return kaijoYMD;
     }
 
-    public RString getKoikinaiTokureiSochimotoShichoson() {
-        return koikinaiTokureiSochimotoShichoson;
+    public RString getKoikinaiTokureiSochimotoHokensha() {
+        return koikinaiTokureiSochimotoHokensha;
     }
 
-    public RString getKyuShichosonCode() {
-        return kyuShichosonCode;
+    public RString getKyuHokensha() {
+        return kyuHokensha;
     }
 
     public RString getSaikofuKubun() {
@@ -268,14 +268,14 @@ public class dgHihokenshaDaichoIdoRireki_Row extends DataRow {
         this.kaijoYMD = kaijoYMD;
     }
 
-    public void setKoikinaiTokureiSochimotoShichoson(RString koikinaiTokureiSochimotoShichoson) {
-        this.setOriginalData("koikinaiTokureiSochimotoShichoson", koikinaiTokureiSochimotoShichoson);
-        this.koikinaiTokureiSochimotoShichoson = koikinaiTokureiSochimotoShichoson;
+    public void setKoikinaiTokureiSochimotoHokensha(RString koikinaiTokureiSochimotoHokensha) {
+        this.setOriginalData("koikinaiTokureiSochimotoHokensha", koikinaiTokureiSochimotoHokensha);
+        this.koikinaiTokureiSochimotoHokensha = koikinaiTokureiSochimotoHokensha;
     }
 
-    public void setKyuShichosonCode(RString kyuShichosonCode) {
-        this.setOriginalData("kyuShichosonCode", kyuShichosonCode);
-        this.kyuShichosonCode = kyuShichosonCode;
+    public void setKyuHokensha(RString kyuHokensha) {
+        this.setOriginalData("kyuHokensha", kyuHokensha);
+        this.kyuHokensha = kyuHokensha;
     }
 
     public void setSaikofuKubun(RString saikofuKubun) {

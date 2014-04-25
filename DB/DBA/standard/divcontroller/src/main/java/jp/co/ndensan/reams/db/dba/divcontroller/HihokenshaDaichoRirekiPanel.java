@@ -57,10 +57,10 @@ public class HihokenshaDaichoRirekiPanel {
      */
     private void set非表示カラム(DataGrid<dgHihokenshaDaichoIdoRireki_Row> grid) {
         if (is広域()) {
-            grid.getGridSetting().getColumn("kyuShichosonCode").setVisible(false);
+            grid.getGridSetting().getColumn("kyuHokensha").setVisible(false);
         }
         if (is合併市町村()) {
-            grid.getGridSetting().getColumn("koikinaiTokureiSochimotoShichoson").setVisible(false);
+            grid.getGridSetting().getColumn("koikinaiTokureiSochimotoHokensha").setVisible(false);
         }
     }
 
@@ -100,14 +100,14 @@ public class HihokenshaDaichoRirekiPanel {
                 "", "", "",
                 "", "", "",
                 "", "", "",
-                "", "302011", "", "", "0000234123");
+                "", "電算町", "", "", "0000234123");
         list.add(item);
         item = createIdoRirekiData("第2号", "障害認定", "20090413", "20090420",
                 "年齢到達", "20130602", "20130602", "",
                 "", "", "",
                 "", "", "",
                 "", "", "",
-                "", "302011", "", "", "0000214563");
+                "", "電算町", "", "", "0000214563");
         list.add(item);
         return list;
     }
@@ -121,7 +121,7 @@ public class HihokenshaDaichoRirekiPanel {
                 "", "", "",
                 "", "", "",
                 "", "", "",
-                "", "302011", "", "", "0000234123");
+                "", "電算町", "", "", "0000234123");
         list.add(item);
         return list;
     }
@@ -135,21 +135,21 @@ public class HihokenshaDaichoRirekiPanel {
                 "", "", "",
                 "", "", "",
                 "", "", "",
-                "", "302011", "", "", "0000234123");
+                "", "電算町", "", "", "0000234123");
         list.add(item);
         item = createIdoRirekiData("第2号", "障害認定", "20090413", "20090420",
                 "年齢到達", "20120912", "20120912", "",
                 "", "", "",
                 "", "", "",
                 "", "", "",
-                "", "302011", "", "", "0000214563");
+                "", "電算町", "", "", "0000214563");
         list.add(item);
         item = createIdoRirekiData("第2号", "障害認定仮登録", "20090222", "20090223",
                 "障害認定", "20090413", "20090420", "",
                 "", "", "",
                 "", "", "",
                 "", "", "",
-                "", "302011", "", "", "0000200654");
+                "", "電算町", "", "", "0000200654");
         list.add(item);
         return list;
     }
@@ -157,7 +157,7 @@ public class HihokenshaDaichoRirekiPanel {
     private dgHihokenshaDaichoIdoRireki_Row createIdoRirekiData(String 被保険者区分, String 取得事由, String 取得届出日, String 取得日,
             String 喪失事由, String 喪失届出日, String 喪失日, String 第1号被保険者年齢到達日, String 変更事由, String 変更届出日,
             String 変更日, String 住所地特例適用事由, String 適用届出日, String 適用日, String 住所地特例解除事由, String 解除届出日,
-            String 解除日, String 広住特措置元市町村, String 旧市町村コード, String 再交付区分, String 再交付事由, String 帳票交付履歴ID) {
+            String 解除日, String 広住特措置元保険者, String 旧保険者, String 再交付区分, String 再交付事由, String 帳票交付履歴ID) {
         dgHihokenshaDaichoIdoRireki_Row row = new dgHihokenshaDaichoIdoRireki_Row(RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
@@ -179,8 +179,8 @@ public class HihokenshaDaichoRirekiPanel {
         row.setJushochitokureiKaijoJiyu(new RString(住所地特例解除事由));
         row.setKaijoTodokedeYMD(createDateString(解除届出日));
         row.setKaijoYMD(createDateString(解除日));
-        row.setKoikinaiTokureiSochimotoShichoson(new RString(広住特措置元市町村));
-        row.setKyuShichosonCode(new RString(旧市町村コード));
+        row.setKoikinaiTokureiSochimotoHokensha(new RString(広住特措置元保険者));
+        row.setKyuHokensha(new RString(旧保険者));
         row.setSaikofuKubun(new RString(再交付区分));
         row.setSaikohuJiyu(new RString(再交付事由));
         row.setChohyoKofuRirekiID(new RString(帳票交付履歴ID));

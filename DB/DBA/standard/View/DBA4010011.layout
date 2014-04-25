@@ -2154,8 +2154,8 @@
         "sortKey": "kaijoYMD"
        },
        {
-        "columnName": "広住特措置元市町村",
-        "dataName": "koikinaiTokureiSochimotoShichoson",
+        "columnName": "広住特措置元保険者",
+        "dataName": "koikinaiTokureiSochimotoHokensha",
         "width": 180,
         "visible": true,
         "cellType": 0,
@@ -2163,11 +2163,11 @@
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "koikinaiTokureiSochimotoShichoson"
+        "sortKey": "koikinaiTokureiSochimotoHokensha"
        },
        {
-        "columnName": "旧市町村コード",
-        "dataName": "kyuShichosonCode",
+        "columnName": "旧保険者",
+        "dataName": "kyuHokensha",
         "width": 120,
         "visible": true,
         "cellType": 0,
@@ -2175,7 +2175,7 @@
         "align": 2,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "kyuShichosonCode"
+        "sortKey": "kyuHokensha"
        },
        {
         "columnName": "再交付区分",
