@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Apr 25 14:05:39 JST 2014 
+ * Fri Apr 25 16:54:46 JST 2014 
  */
 
 
@@ -11,6 +11,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 
 /**
@@ -23,14 +24,14 @@ public class dgShisetsuRereki_Row extends DataRow {
 
     private Button editButton;
     private RString name;
-    private RString startDate;
-    private RString endDate;
+    private TextBoxDate startDate;
+    private TextBoxDate endDate;
 
     public dgShisetsuRereki_Row() {
         super();
     }
 
-    public dgShisetsuRereki_Row(Button editButton, RString name, RString startDate, RString endDate) {
+    public dgShisetsuRereki_Row(Button editButton, RString name, TextBoxDate startDate, TextBoxDate endDate) {
         super();
         this.setOriginalData("editButton", editButton);
         this.setOriginalData("name", name);
@@ -50,11 +51,11 @@ public class dgShisetsuRereki_Row extends DataRow {
         return name;
     }
 
-    public RString getStartDate() {
+    public TextBoxDate getStartDate() {
         return startDate;
     }
 
-    public RString getEndDate() {
+    public TextBoxDate getEndDate() {
         return endDate;
     }
 
@@ -68,12 +69,12 @@ public class dgShisetsuRereki_Row extends DataRow {
         this.name = name;
     }
 
-    public void setStartDate(RString startDate) {
+    public void setStartDate(TextBoxDate startDate) {
         this.setOriginalData("startDate", startDate);
         this.startDate = startDate;
     }
 
-    public void setEndDate(RString endDate) {
+    public void setEndDate(TextBoxDate endDate) {
         this.setOriginalData("endDate", endDate);
         this.endDate = endDate;
     }

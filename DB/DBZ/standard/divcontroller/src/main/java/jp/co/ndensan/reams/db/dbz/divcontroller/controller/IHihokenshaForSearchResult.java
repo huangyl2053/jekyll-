@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -61,7 +62,7 @@ public interface IHihokenshaForSearchResult {
      *
      * @return 生年月日
      */
-    RString birthDay();
+    RDate birthDay();
 
     /**
      * 住所を返します。

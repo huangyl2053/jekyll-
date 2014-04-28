@@ -2941,12 +2941,14 @@
             "dataName": "startDate",
             "width": 100,
             "visible": true,
-            "cellType": 0,
+            "cellType": 6,
             "cellDetails": {
-             "cellType": 0
+             "cellType": 6,
+             "ymdKubun": 2,
+             "displayFormat": 5
             },
             "align": 1,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "startDate"
            },
@@ -2955,12 +2957,14 @@
             "dataName": "endDate",
             "width": 100,
             "visible": true,
-            "cellType": 0,
+            "cellType": 6,
             "cellDetails": {
-             "cellType": 0
+             "cellType": 6,
+             "ymdKubun": 2,
+             "displayFormat": 5
             },
             "align": 1,
-            "resize": false,
+            "resize": true,
             "isPrivateInfo": false,
             "sortKey": "endDate"
            }
@@ -2971,7 +2975,7 @@
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
-         "sortOrder": "endDate",
+         "sortOrder": "name",
          "isAscending": true,
          "filterList": [],
          "clickedRowId": -1
@@ -4198,8 +4202,12 @@
         "dataName": "birthDay",
         "width": 110,
         "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
+        "cellType": 6,
+        "cellDetails": {
+         "cellType": 6,
+         "ymdKubun": 2,
+         "displayFormat": 3
+        },
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
@@ -4209,29 +4217,17 @@
         "columnName": "郵便番号",
         "dataName": "yubinNo",
         "width": 110,
-        "visible": false,
+        "visible": true,
         "cellType": 0,
         "cellDetails": null,
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": "yubinNo"
        },
        {
         "columnName": "住所",
         "dataName": "jusho",
-        "width": 300,
-        "visible": false,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 0,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "jusho"
-       },
-       {
-        "columnName": "住所",
-        "dataName": "yubinNoAndJusho",
         "width": 300,
         "visible": true,
         "cellType": 0,

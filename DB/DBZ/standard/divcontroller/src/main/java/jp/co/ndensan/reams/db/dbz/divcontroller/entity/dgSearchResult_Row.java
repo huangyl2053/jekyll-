@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Apr 23 10:27:08 JST 2014 
+ * Mon Apr 28 09:00:04 JST 2014 
  */
 
 
@@ -11,6 +11,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 
 /**
@@ -29,10 +30,9 @@ public class dgSearchResult_Row extends DataRow {
     private RString kanaShimsei;
     private RString shimeiAndKanaShimsei;
     private RString gender;
-    private RString birthDay;
+    private TextBoxDate birthDay;
     private RString yubinNo;
     private RString jusho;
-    private RString yubinNoAndJusho;
     private RString kojinNo;
     private RString juminShubetsu;
     private RString setaiCode;
@@ -41,7 +41,7 @@ public class dgSearchResult_Row extends DataRow {
         super();
     }
 
-    public dgSearchResult_Row(Button btnToDecide, RString hihokenshaNo, RString shikibetsuCode, RString hihokenshaKubun, RString shimei, RString kanaShimsei, RString shimeiAndKanaShimsei, RString gender, RString birthDay, RString yubinNo, RString jusho, RString yubinNoAndJusho, RString kojinNo, RString juminShubetsu, RString setaiCode) {
+    public dgSearchResult_Row(Button btnToDecide, RString hihokenshaNo, RString shikibetsuCode, RString hihokenshaKubun, RString shimei, RString kanaShimsei, RString shimeiAndKanaShimsei, RString gender, TextBoxDate birthDay, RString yubinNo, RString jusho, RString kojinNo, RString juminShubetsu, RString setaiCode) {
         super();
         this.setOriginalData("btnToDecide", btnToDecide);
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
@@ -54,7 +54,6 @@ public class dgSearchResult_Row extends DataRow {
         this.setOriginalData("birthDay", birthDay);
         this.setOriginalData("yubinNo", yubinNo);
         this.setOriginalData("jusho", jusho);
-        this.setOriginalData("yubinNoAndJusho", yubinNoAndJusho);
         this.setOriginalData("kojinNo", kojinNo);
         this.setOriginalData("juminShubetsu", juminShubetsu);
         this.setOriginalData("setaiCode", setaiCode);
@@ -69,7 +68,6 @@ public class dgSearchResult_Row extends DataRow {
         this.birthDay = birthDay;
         this.yubinNo = yubinNo;
         this.jusho = jusho;
-        this.yubinNoAndJusho = yubinNoAndJusho;
         this.kojinNo = kojinNo;
         this.juminShubetsu = juminShubetsu;
         this.setaiCode = setaiCode;
@@ -107,7 +105,7 @@ public class dgSearchResult_Row extends DataRow {
         return gender;
     }
 
-    public RString getBirthDay() {
+    public TextBoxDate getBirthDay() {
         return birthDay;
     }
 
@@ -117,10 +115,6 @@ public class dgSearchResult_Row extends DataRow {
 
     public RString getJusho() {
         return jusho;
-    }
-
-    public RString getYubinNoAndJusho() {
-        return yubinNoAndJusho;
     }
 
     public RString getKojinNo() {
@@ -175,7 +169,7 @@ public class dgSearchResult_Row extends DataRow {
         this.gender = gender;
     }
 
-    public void setBirthDay(RString birthDay) {
+    public void setBirthDay(TextBoxDate birthDay) {
         this.setOriginalData("birthDay", birthDay);
         this.birthDay = birthDay;
     }
@@ -188,11 +182,6 @@ public class dgSearchResult_Row extends DataRow {
     public void setJusho(RString jusho) {
         this.setOriginalData("jusho", jusho);
         this.jusho = jusho;
-    }
-
-    public void setYubinNoAndJusho(RString yubinNoAndJusho) {
-        this.setOriginalData("yubinNoAndJusho", yubinNoAndJusho);
-        this.yubinNoAndJusho = yubinNoAndJusho;
     }
 
     public void setKojinNo(RString kojinNo) {

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.SearchResultOfHihokenshaD
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgSearchResult_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.DataGridUtil;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * SearchResultOfHihokenshaDivのControllerです。
@@ -42,7 +43,7 @@ public final class SearchResultOfHihokensha {
     /**
      * 内包する編集可能なUI部品への設定値をクリアします。
      *
-     * @param div クリアされた
+     * @param div
      * {@link SearchResultOfHihokenshaDiv SearchResultOfHihokenshaDiv}
      */
     public static void clear(SearchResultOfHihokenshaDiv div) {
@@ -50,6 +51,8 @@ public final class SearchResultOfHihokensha {
     }
 
     private static dgSearchResult_Row to_dgSearchResult_Row(IHihokenshaForSearchResult hihokensha) {
+        TextBoxDate forBrithDay = new TextBoxDate();
+        forBrithDay.setValue(hihokensha.birthDay());
         return new dgSearchResult_Row(new Button(),
                 hihokensha.hihokenshaNo(),
                 hihokensha.shikibetsuCode(),
@@ -58,12 +61,11 @@ public final class SearchResultOfHihokensha {
                 hihokensha.kanaShimei(),
                 DataGridUtil.lineFeedBetween(hihokensha.kanaShimei(), hihokensha.shimei()),
                 hihokensha.gender(),
-                hihokensha.birthDay(),
+                forBrithDay,
                 hihokensha.yubinNo(),
                 hihokensha.jusho(),
-                DataGridUtil.lineFeedBetween(hihokensha.yubinNo(), hihokensha.jusho()),
                 hihokensha.kojinNo(),
-                hihokensha.setaiCode(),
-                hihokensha.jusho());
+                hihokensha.juminShubetsu(),
+                hihokensha.setaiCode());
     }
 }

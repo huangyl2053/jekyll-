@@ -5,6 +5,7 @@ target/
 libs/
 .idea/
 build/
+d.ts/
 
 *.map
 *.dll
@@ -18,4 +19,3 @@ build/
 *.log
 nb-configuration.xml
 myBatisSettings.properties
-

@@ -28,7 +28,7 @@ public class HihokenshaForSearchResult implements IHihokenshaForSearchResult {
     private final RString theShimei;
     private final RString theKanaShimei;
     private final RString theGender;
-    private final RString theBirthDay;
+    private final RDate theBirthDay;
     private final RString theJusho;
     private final RString theYubinNo;
     private final RString theKojinNo;
@@ -60,13 +60,24 @@ public class HihokenshaForSearchResult implements IHihokenshaForSearchResult {
         this.theHihokenshaKubun = hihokenshaKubun;
         this.theShimei = shimei;
         this.theKanaShimei = kanaShimei;
-        this.theGender = new RString(gender.name());
-        this.theBirthDay = birthDay.toDateString();
+        this.theGender = toRString(gender);
+        this.theBirthDay = birthDay;
         this.theJusho = jusho.value();
-        this.theYubinNo = yubinNo.value();
+        this.theYubinNo = yubinNo.getEditedYubinNo();
         this.theKojinNo = kojinNo;
         this.theJuminShubetsu = new RString(juminShubetsu.name());
         this.theSetaiCode = setaiCode.value();
+    }
+
+    private RString toRString(Gender gender) {
+        switch (gender) {
+            case MALE:
+                return new RString("男");
+            case FEMALE:
+                return new RString("女");
+            default:
+                return new RString("その他");
+        }
     }
 
     @Override
@@ -100,7 +111,7 @@ public class HihokenshaForSearchResult implements IHihokenshaForSearchResult {
     }
 
     @Override
-    public RString birthDay() {
+    public RDate birthDay() {
         return this.theBirthDay;
     }
 

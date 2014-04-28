@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShisetsuRerekiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgKankeiIin_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgShisetsuRereki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgSearchResult_Row;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiYukoKubun;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -34,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * 申請情報入力用Div制御クラスです。
@@ -63,6 +65,8 @@ public class ShinseiJohoInput {
 
         NyuinNyusho.onLoad(div.getNyuinNyusho(), hihokensha);
         KankeiIin.onLoad(div.getKankeiIin(), hihokensha);
+
+        div.getTxtShinseiYukoKubun().setValue(new RString(NinteiShinseiYukoKubun.申請中.name()));
 
         response.data = div;
         return response;
@@ -585,7 +589,11 @@ public class ShinseiJohoInput {
             }
 
             private static dgShisetsuRereki_Row createDgShisetsuRereki(RString name, RDate startDate, RDate endDate) {
-                return new dgShisetsuRereki_Row(new Button(), name, startDate.toDateString(), endDate.toDateString());
+                TextBoxDate ForStartDate = new TextBoxDate();
+                ForStartDate.setValue(startDate);
+                TextBoxDate ForEndDate = new TextBoxDate();
+                ForEndDate.setValue(endDate);
+                return new dgShisetsuRereki_Row(new Button(), name, ForStartDate, ForEndDate);
             }
         }
     }
