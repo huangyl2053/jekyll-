@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.HomonTsushoJikoSakuseiDiv
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgHomonTushoJikoSakusei_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tblHomonTsushoJikoSakuseiDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
@@ -143,8 +144,8 @@ public class HomonTsushoJikoSakusei {
         panel.getHomonTsushoJikoSakuseiSummary().getTxtHomonTsushoJikoSakusei2().setValue(new RString("888888"));
         panel.getHomonTsushoJikoSakuseiSummary().getTxtHomonTsushoJikoSakusei3().setValue(new RString("888888"));
         panel.getHomonTsushoJikoSakuseiSummary().getTxtHomonTsushoJikoSakuseiSikyuuGendoGaku().setValue(new RString("888,888"));
-        panel.getHomonTsushoJikoSakuseiSummary().getTxtHomonTsushoJikoSakuseiGendoKanriRange().setFromValue(new RString("平15.07.01"));
-        panel.getHomonTsushoJikoSakuseiSummary().getTxtHomonTsushoJikoSakuseiGendoKanriRange().setToValue(new RString("平16.05.31"));
+        panel.getHomonTsushoJikoSakuseiSummary().getTxtHomonTsushoJikoSakuseiGendoKanriRange().setFromValue(new RDate("20030701"));
+        panel.getHomonTsushoJikoSakuseiSummary().getTxtHomonTsushoJikoSakuseiGendoKanriRange().setToValue(new RDate("20040531"));
     }
 
     /*

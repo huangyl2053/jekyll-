@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuServiceJikoSakusei
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgKyotakuServiceJikoSakusei_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tblKyotakuServiceJikoSakuseiDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
@@ -163,8 +164,8 @@ public class KyotakuServiceJikoSakusei {
         panel.getKyotakuServiceJikoSakuseiSummary().getTxtKyotakuServiceJikoSakusei2().setValue(new RString("888888"));
         panel.getKyotakuServiceJikoSakuseiSummary().getTxtKyotakuServiceJikoSakusei3().setValue(new RString("888888"));
         panel.getKyotakuServiceJikoSakuseiSummary().getTxtKyotakuServiceJikoSakuseiSikyuuGendoGaku().setValue(new RString("888,888"));
-        panel.getKyotakuServiceJikoSakuseiSummary().getTxtKyotakuServiceJikoSakuseiGendoKanriRange().setFromValue(new RString("平15.07.01"));
-        panel.getKyotakuServiceJikoSakuseiSummary().getTxtKyotakuServiceJikoSakuseiGendoKanriRange().setToValue(new RString("平16.05.31"));
+        panel.getKyotakuServiceJikoSakuseiSummary().getTxtKyotakuServiceJikoSakuseiGendoKanriRange().setFromValue(new RDate("20030701"));
+        panel.getKyotakuServiceJikoSakuseiSummary().getTxtKyotakuServiceJikoSakuseiGendoKanriRange().setToValue(new RDate("20040531"));
     }
 
     /*

@@ -148,8 +148,8 @@ public class KyotakuServicePlanIchiran {
         dgKyotakuServicePlanIchiran_Row selectRow = panel.getDgKyotakuServicePlanIchiran().getClickedItem();
         infoDiv.getTblKyotakuServiceJigyoshaSakuseiInfo().getTxtJigyoshaSakuseiJigyoshaNo().setValue(selectRow.getTxtJigyoshaNo());
         infoDiv.getTblKyotakuServiceJigyoshaSakuseiInfo().getTxtJigyoshaSakuseiJigyoshaName().setValue(selectRow.getTxtJigyoshaName());
-        infoDiv.getTblKyotakuServiceJigyoshaSakuseiInfo().getTxtJigyoshaSakuseiStartYMD().setValue(selectRow.getTxtStartYMD());
-        infoDiv.getTblKyotakuServiceJigyoshaSakuseiInfo().getTxtJigyoshaSakuseiEndYMD().setValue(selectRow.getTxtEndYMD());
+        infoDiv.getTblKyotakuServiceJigyoshaSakuseiInfo().getTxtJigyoshaSakuseiStartYMD().setValue(new FlexibleDate(selectRow.getTxtStartYMD()));
+        infoDiv.getTblKyotakuServiceJigyoshaSakuseiInfo().getTxtJigyoshaSakuseiEndYMD().setValue(new FlexibleDate(selectRow.getTxtEndYMD()));
     }
 
     /*
@@ -158,8 +158,8 @@ public class KyotakuServicePlanIchiran {
     private void setKojinSakuseiData(KyotakuServicePlanIchiranDiv panel) {
         KyotakuServiceJikoSakuseiInfoDiv infoDiv = panel.getKyotakuServiceJikoSakuseiInfo();
         dgKyotakuServicePlanIchiran_Row selectRow = panel.getDgKyotakuServicePlanIchiran().getClickedItem();
-        infoDiv.getTblKyotakuServiceJikoSakuseiInfo().getTxtJikoSakuseiStartYMD().setValue(selectRow.getTxtStartYMD());
-        infoDiv.getTblKyotakuServiceJikoSakuseiInfo().getTxtJikoSakuseiEndYMD().setValue(selectRow.getTxtEndYMD());
+        infoDiv.getTblKyotakuServiceJikoSakuseiInfo().getTxtJikoSakuseiStartYMD().setValue(new FlexibleDate(selectRow.getTxtStartYMD()));
+        infoDiv.getTblKyotakuServiceJikoSakuseiInfo().getTxtJikoSakuseiEndYMD().setValue(new FlexibleDate(selectRow.getTxtEndYMD()));
     }
 
     /*

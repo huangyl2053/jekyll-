@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.TankiNyushoJikoSakuseiDiv
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgTankiNyushoJikoSakusei_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tblTankiNyushoJikoSakuseiDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
@@ -139,8 +140,8 @@ public class TankiNyushoJikoSakusei {
         panel.getTankiNyushoJikoSakuseiSummary().getTxtTankiNyushoJikoSakusei3().setValue(new RString("888888"));
         panel.getTankiNyushoJikoSakuseiSummary().getTxtTankiNyushoJikoSakusei4().setValue(new RString("888888"));
         panel.getTankiNyushoJikoSakuseiSummary().getTxtTankiNyushoJikoSakusei5().setValue(new RString("888888"));
-        panel.getTankiNyushoJikoSakuseiSummary().getTxtTankiNyushoJikoSakuseiGendoKanriRange().setFromValue(new RString("平15.07.01"));
-        panel.getTankiNyushoJikoSakuseiSummary().getTxtTankiNyushoJikoSakuseiGendoKanriRange().setToValue(new RString("平16.05.31"));
+        panel.getTankiNyushoJikoSakuseiSummary().getTxtTankiNyushoJikoSakuseiGendoKanriRange().setFromValue(new RDate("20030701"));
+        panel.getTankiNyushoJikoSakuseiSummary().getTxtTankiNyushoJikoSakuseiGendoKanriRange().setToValue(new RDate("20040531"));
     }
 
     /*
