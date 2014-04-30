@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.chosahyo;
 
-import jp.co.ndensan.reams.db.dbe.business.NinteichosahyoFactory;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;

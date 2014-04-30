@@ -20,11 +20,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N8156 宮本 康
  */
-public class ShujiiIkenshoRegulationOf2009 implements IShujiiIkenshoRegulation {
+class ShujiiIkenshoRegulationOf2009 implements IShujiiIkenshoRegulation {
 
-    private static Map<ShujiiIkenshoItemKubun, IShujiiIkenshoItem> 意見書定義;
+    private static final Map<ShujiiIkenshoItemKubun, IShujiiIkenshoItem> 意見書定義;
     private static final RString その他 = new RString("その他");
-    private static ShujiiIkenshoRegulationBuilder builder;
+    private static final ShujiiIkenshoRegulationBuilder builder;
 
     static {
         意見書定義 = new EnumMap<>(ShujiiIkenshoItemKubun.class);

@@ -5,7 +5,6 @@
 package jp.co.ndensan.reams.db.dbe.business.core.chosahyo;
 
 import java.util.EnumMap;
-import jp.co.ndensan.reams.db.dbe.business.NinteichosahyoFactory;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.INinteichosaItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon;

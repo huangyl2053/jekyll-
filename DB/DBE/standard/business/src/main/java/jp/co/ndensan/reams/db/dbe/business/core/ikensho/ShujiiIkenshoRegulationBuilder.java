@@ -24,7 +24,7 @@ import static java.util.Objects.requireNonNull;
  */
 class ShujiiIkenshoRegulationBuilder<E extends IShujiiIkenshoItemKubun> {
 
-    private Map<E, IShujiiIkenshoItem> 意見書定義;
+    private final Map<E, IShujiiIkenshoItem> 意見書定義;
     private IShujiiIkenshoItemGroup 意見書項目グループ = ShujiiIkenshoItemGroup.なし;
     private IShujiiIkenshoItemSubGroup 意見書項目サブグループ = ShujiiIkenshoItemSubGroup.なし;
     private int 意見書項目グループ内番号 = 1;
@@ -85,8 +85,8 @@ class ShujiiIkenshoRegulationBuilder<E extends IShujiiIkenshoItemKubun> {
     private void set意見書項目(String 意見書項目番号, E 意見書項目区分, String 表示名称, IAnswerItem 回答項目, boolean 主要項目) {
         意見書定義.put(意見書項目区分,
                 new ShujiiIkenshoItem(意見書項目グループ, 意見書項目サブグループ,
-                this.意見書項目サブグループ == ShujiiIkenshoItemSubGroup.なし ? 意見書項目グループ内番号++ : 意見書項目グループ内番号,
-                this.意見書項目サブグループ != ShujiiIkenshoItemSubGroup.なし ? 意見書項目サブグループ内番号++ : 意見書項目サブグループ内番号,
-                new ShujiiIkenshoItemNo(new RString(意見書項目番号)), 意見書項目区分, new RString(表示名称), 回答項目, 主要項目));
+                        this.意見書項目サブグループ == ShujiiIkenshoItemSubGroup.なし ? 意見書項目グループ内番号++ : 意見書項目グループ内番号,
+                        this.意見書項目サブグループ != ShujiiIkenshoItemSubGroup.なし ? 意見書項目サブグループ内番号++ : 意見書項目サブグループ内番号,
+                        new ShujiiIkenshoItemNo(new RString(意見書項目番号)), 意見書項目区分, new RString(表示名称), 回答項目, 主要項目));
     }
 }

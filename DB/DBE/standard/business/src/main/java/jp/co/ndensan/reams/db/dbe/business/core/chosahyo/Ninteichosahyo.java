@@ -43,7 +43,7 @@ public class Ninteichosahyo<E extends INinteichosaItemKubun, T extends INinteich
      *
      * @return 調査票定義
      */
-    public Map<E, T> get調査票定義() {
+    Map<E, T> get調査票定義() {
         return new EnumMap(調査票定義);
     }
 
