@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.entity.mapper;
 import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoDoctorEntity;
-import jp.co.ndensan.reams.ur.urz.entity.mapper.DoctorEntityMapper;
+import jp.co.ndensan.reams.ur.urz.entity.mapper.DoctorMapper;
 
 /**
  * 介護医師情報を変換するMapperクラスです。
@@ -31,7 +31,7 @@ public final class KaigoDoctorMapper {
      */
     public static KaigoDoctor toKaigoDoctor(KaigoDoctorEntity kaigoDoctorEntity, KaigoIryoKikan kaigoIryoKikan) {
         return new KaigoDoctor(
-                DoctorEntityMapper.toDoctor(kaigoDoctorEntity.getDoctorEntity()),
+                DoctorMapper.toDoctor(kaigoDoctorEntity.getDoctorEntity()),
                 ShujiiMapper.toShujii(kaigoDoctorEntity.getDbT7012ShujiiJohoEntity()),
                 kaigoIryoKikan);
     }

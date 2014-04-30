@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoDoctorEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.KaigoDoctorDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IDoctor;
-import jp.co.ndensan.reams.ur.urz.entity.mapper.DoctorEntityMapper;
+import jp.co.ndensan.reams.ur.urz.entity.mapper.DoctorMapper;
 import jp.co.ndensan.reams.ur.urz.realservice.DoctorManagerFactory;
 import jp.co.ndensan.reams.ur.urz.realservice.IDoctorManager;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
@@ -123,7 +123,7 @@ public class KaigoDoctorManager implements IKaigoDoctorManager {
         if (entity == null) {
             return null;
         }
-        IDoctor doctor = DoctorEntityMapper.toDoctor(entity.getDoctorEntity());
+        IDoctor doctor = DoctorMapper.toDoctor(entity.getDoctorEntity());
         IShujii shujii = ShujiiMapper.toShujii(entity.getDbT7012ShujiiJohoEntity());
         KaigoIryoKikan kaigoIryoKikan = kaigoIryoKikanFinder.get介護医療機関(shujii.get証記載保険者番号(), shujii.get介護医療機関コード());
         return new KaigoDoctor(doctor, shujii, kaigoIryoKikan);
