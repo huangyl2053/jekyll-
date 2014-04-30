@@ -278,7 +278,7 @@ public class ShinseiJohoInput {
 
             div.getTxtShinseishaName().setValue(name);
             div.getTxtShinseishaNameKana().setValue(kanaName);
-            div.getTxtYubinNo().setValue(yubinNo);
+//            div.getTxtYubinNo().setValue(yubinNo);
             div.getTxtShinseishaJusho().setValue(jusho);
 
             div.getNinteiShinseishaTudukigara().setDisplayNone(!isFamily);
@@ -455,8 +455,8 @@ public class ShinseiJohoInput {
 
             div.getTxtYokaigodo().setValue(yokaigodo);
             div.getTxtNinteiDate().setValue(ninteiDate);
-            div.getTxtNinteiYukokikan().setFromValue(fromDate);
-            div.getTxtNinteiYukokikan().setToValue(toDate);
+//            div.getTxtNinteiYukokikan().setFromValue(fromDate);
+//            div.getTxtNinteiYukokikan().setToValue(toDate);
         }
     }
 
