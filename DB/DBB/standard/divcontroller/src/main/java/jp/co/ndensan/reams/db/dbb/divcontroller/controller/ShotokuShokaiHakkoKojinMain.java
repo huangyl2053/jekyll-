@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.SofusakiGenJushoShuseiPan
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.dgHakkoKakunin_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.dgShotokuShokaiHyoHakko_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.dgShuseiSetaiIn_Row;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -69,7 +70,7 @@ public class ShotokuShokaiHakkoKojinMain {
         List<dgShotokuShokaiHyoHakko_Row> selectedSetaiIn = panel.getShotokuShokaiHyoHakkoIchiranPanel().getDgShotokuShokaiHyoHakko().getSelectedItems();
         for (dgShotokuShokaiHyoHakko_Row setaiIn : selectedSetaiIn) {
             shuseiTaishoSetaiIn.add(createRowShuseiTaishoSetaiIn(setaiIn.getTxtShikibetsuCode().toString(), setaiIn.getTxtShimei().toString()));
-            panel.getShotokuShokaihyoShuseiNyuryokuPanel().getSofusakiGenJushoShuseiPanel().getSofusakiNyuryokuPanel().getTxtSofusakiYubinNo().setValue(setaiIn.getTxtSoYubinNo());
+            panel.getShotokuShokaihyoShuseiNyuryokuPanel().getSofusakiGenJushoShuseiPanel().getSofusakiNyuryokuPanel().getTxtSofusakiYubinNo().setValue(new YubinNo(setaiIn.getTxtSoYubinNo()));
             panel.getShotokuShokaihyoShuseiNyuryokuPanel().getSofusakiGenJushoShuseiPanel().getSofusakiNyuryokuPanel().getTxtSofusaki01().setValue(setaiIn.getTxtSofusaki01());
             panel.getShotokuShokaihyoShuseiNyuryokuPanel().getSofusakiGenJushoShuseiPanel().getSofusakiNyuryokuPanel().getTxtSofusaki02().setValue(setaiIn.getTxtSofusaki02());
             panel.getShotokuShokaihyoShuseiNyuryokuPanel().getSofusakiGenJushoShuseiPanel().getSofusakiNyuryokuPanel().getTxtSofusaki03().setValue(setaiIn.getTxtSofusaki03());
@@ -171,7 +172,7 @@ public class ShotokuShokaiHakkoKojinMain {
      差出人情報を設定します。
      */
     private void setDefaultSashidashinin(ShotokuShokaiHakkoKojinMainDiv panel) {
-        panel.getSashidashininNyuryokuPanel().getTxtYubinNo().setValue(new RString("1234567"));
+        panel.getSashidashininNyuryokuPanel().getTxtYubinNo().setValue(new YubinNo("1234567"));
         panel.getSashidashininNyuryokuPanel().getTxtShozai().setValue(new RString("長野県長野市1-2-3"));
         panel.getSashidashininNyuryokuPanel().getTxtTantoBusho().setValue(new RString("長野市役所国民健康保険課"));
         panel.getSashidashininNyuryokuPanel().getTxtTellNo().setValue(new RString("123-456-8901"));
@@ -204,12 +205,12 @@ public class ShotokuShokaiHakkoKojinMain {
         rowKojinData.setTxtShubetsu(new RString(種別));
         rowKojinData.setTxtSeibetsu(new RString(性別));
         rowKojinData.setTxtZokugara(new RString(続柄));
-        rowKojinData.getTxtSeinenGappi().setValue(new RString(生年月日));
+        rowKojinData.getTxtSeinenGappi().setValue(new FlexibleDate(生年月日));
         rowKojinData.setTxtShikaku(new RString(資格));
         rowKojinData.setTxtTennyumaeJusho(new RString(転入前住所));
-        rowKojinData.getTxtTennnyubi().setValue(new RString(転入日));
+        rowKojinData.getTxtTennnyubi().setValue(new FlexibleDate(転入日));
         rowKojinData.setTxtTenshutsusakiJusho(new RString(転出先住所));
-        rowKojinData.getTxtTenshutsubi().setValue(new RString(転出日));
+        rowKojinData.getTxtTenshutsubi().setValue(new FlexibleDate(転出日));
         rowKojinData.setTxtGenJusho(new RString(現住所));
         rowKojinData.setTxtSoYubinNo(new RString(送付先郵便番号));
         rowKojinData.setTxtSofusaki01(new RString(送付先1));
@@ -263,9 +264,9 @@ public class ShotokuShokaiHakkoKojinMain {
     private void createRowKetsugo(dgShotokuShokaiHyoHakko_Row rowKojinData) {
         rowKojinData.setTxtKetsugo01(rowKojinData.getTxtShikibetsuCode().concat(new RString("<br>")).concat(rowKojinData.getTxtShimei()).concat(new RString("  ")));
         rowKojinData.setTxtKetsugo02(rowKojinData.getTxtShubetsu().concat(new RString("<br>")).concat(rowKojinData.getTxtSeibetsu()).concat(new RString("  ")));
-        rowKojinData.setTxtKetsugo03(rowKojinData.getTxtZokugara().concat(new RString("<br>")).concat(new FlexibleDate(rowKojinData.getTxtSeinenGappi().getValue()).wareki().toDateString()).concat(new RString("  ")));
-        rowKojinData.setTxtKetsugo04(rowKojinData.getTxtTennyumaeJusho().concat(new RString("<br>")).concat(new FlexibleDate(rowKojinData.getTxtTennnyubi().getValue()).wareki().toDateString()).concat(new RString("  ")));
-        rowKojinData.setTxtKetsugo05(rowKojinData.getTxtTenshutsusakiJusho().concat(new RString("<br>")).concat(new FlexibleDate(rowKojinData.getTxtTenshutsubi().getValue()).wareki().toDateString()).concat(new RString("  ")));
+        rowKojinData.setTxtKetsugo03(rowKojinData.getTxtZokugara().concat(new RString("<br>")).concat(new FlexibleDate(rowKojinData.getTxtSeinenGappi().getValue().toString()).wareki().toDateString()).concat(new RString("  ")));
+        rowKojinData.setTxtKetsugo04(rowKojinData.getTxtTennyumaeJusho().concat(new RString("<br>")).concat(new FlexibleDate(rowKojinData.getTxtTennnyubi().getValue().toString()).wareki().toDateString()).concat(new RString("  ")));
+        rowKojinData.setTxtKetsugo05(rowKojinData.getTxtTenshutsusakiJusho().concat(new RString("<br>")).concat(new FlexibleDate(rowKojinData.getTxtTenshutsubi().getValue().toString()).wareki().toDateString()).concat(new RString("  ")));
     }
 
     private void setKakuninSashidashinin(ShotokuShokaiHakkoKojinMainDiv panel) {
@@ -422,7 +423,7 @@ public class ShotokuShokaiHakkoKojinMain {
 
     private void setShuseiShori(dgShotokuShokaiHyoHakko_Row kojinRow, SofusakiGenJushoShuseiPanelDiv shuseiPanel) {
 
-        kojinRow.setTxtSoYubinNo(shuseiPanel.getSofusakiNyuryokuPanel().getTxtSofusakiYubinNo().getValue());
+        kojinRow.setTxtSoYubinNo(shuseiPanel.getSofusakiNyuryokuPanel().getTxtSofusakiYubinNo().getValue().value());
         kojinRow.setTxtSofusaki01(shuseiPanel.getSofusakiNyuryokuPanel().getTxtSofusaki01().getValue());
         kojinRow.setTxtSofusaki02(shuseiPanel.getSofusakiNyuryokuPanel().getTxtSofusaki02().getValue());
         kojinRow.setTxtSofusaki03(shuseiPanel.getSofusakiNyuryokuPanel().getTxtSofusaki03().getValue());

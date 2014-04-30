@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgKankeiIin_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgShisetsuRereki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgSearchResult_Row;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiYukoKubun;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -278,7 +279,7 @@ public class ShinseiJohoInput {
 
             div.getTxtShinseishaName().setValue(name);
             div.getTxtShinseishaNameKana().setValue(kanaName);
-            div.getTxtYubinNo().setValue(yubinNo);
+            div.getTxtYubinNo().setValue(new YubinNo(yubinNo));
             div.getTxtShinseishaJusho().setValue(jusho);
 
             div.getNinteiShinseishaTudukigara().setDisplayNone(!isFamily);
@@ -422,7 +423,7 @@ public class ShinseiJohoInput {
         private static void _onLoad_demo(ShinseiJohoInputDiv div, dgSearchResult_Row hihokensha) {
             ForDemo.LatestNinteiResult latestResult = ForDemo.getLatestNinteiResultMap().get(hihokensha.getHihokenshaNo());
             _setUpItems(div.getLatestNinteiResult(), latestResult.yokaigodo().toRString(), latestResult.ninteiDate(),
-                    latestResult.yukoKikan().getFrom().toDateString(), latestResult.yukoKikan().getTo().toDateString());
+                    latestResult.yukoKikan().getFrom(), latestResult.yukoKikan().getTo());
 
             RadYokaigoOrYoshien.select(div.getRadYokaigoOrYoshien(), YokaigoOrYoshienKubun.要介護);
             if (latestResult == ForDemo.LatestNinteiResult.NOTHING) {
@@ -447,11 +448,11 @@ public class ShinseiJohoInput {
          * @param div LatestNinteiResultDiv
          */
         public static void clear(LatestNinteiResultDiv div) {
-            _setUpItems(div, RString.EMPTY, null, RString.EMPTY, RString.EMPTY);
+            _setUpItems(div, RString.EMPTY, null, null, null);
         }
 
         private static void _setUpItems(LatestNinteiResultDiv div,
-                RString yokaigodo, RDate ninteiDate, RString fromDate, RString toDate) {
+                RString yokaigodo, RDate ninteiDate, RDate fromDate, RDate toDate) {
 
             div.getTxtYokaigodo().setValue(yokaigodo);
             div.getTxtNinteiDate().setValue(ninteiDate);
