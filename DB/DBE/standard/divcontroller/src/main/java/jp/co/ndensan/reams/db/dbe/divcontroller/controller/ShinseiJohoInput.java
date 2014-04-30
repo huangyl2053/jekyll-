@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgKankeiIin_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgShisetsuRereki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgSearchResult_Row;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiYukoKubun;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -225,7 +226,7 @@ public class ShinseiJohoInput {
          * @param div NinteiShinseishaDiv
          */
         public static void clear(NinteiShinseishaDiv div) {
-            _setUpItem(div, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, true, true);
+            _setUpItem(div, RString.EMPTY, RString.EMPTY, null, RString.EMPTY, true, true);
         }
 
         /**
@@ -258,11 +259,11 @@ public class ShinseiJohoInput {
 
         private static void _onChange_radShinseishaKubun_本人(NinteiShinseishaDiv div, dgSearchResult_Row hihokensha) {
             _setUpItem(div, hihokensha.getShimei(), hihokensha.getKanaShimsei(),
-                    hihokensha.getYubinNo(), hihokensha.getJusho(), false, false);
+                    new YubinNo(hihokensha.getYubinNo()), hihokensha.getJusho(), false, false);
         }
 
         private static void _onChange_radShinseishaKubun_家族(NinteiShinseishaDiv div, dgSearchResult_Row hihokensha) {
-            _setUpItem(div, null, null, hihokensha.getYubinNo(), hihokensha.getJusho(), true, false);
+            _setUpItem(div, null, null, new YubinNo(hihokensha.getYubinNo()), hihokensha.getJusho(), true, false);
         }
 
         private static void _onChange_radShinseishaKubun_施設職員(NinteiShinseishaDiv div) {
@@ -274,7 +275,7 @@ public class ShinseiJohoInput {
         }
 
         private static void _setUpItem(NinteiShinseishaDiv div,
-                RString name, RString kanaName, RString yubinNo, RString jusho, boolean isFamily, boolean isJighosya) {
+                RString name, RString kanaName, YubinNo yubinNo, RString jusho, boolean isFamily, boolean isJighosya) {
 
             div.getTxtShinseishaName().setValue(name);
             div.getTxtShinseishaNameKana().setValue(kanaName);
@@ -422,7 +423,7 @@ public class ShinseiJohoInput {
         private static void _onLoad_demo(ShinseiJohoInputDiv div, dgSearchResult_Row hihokensha) {
             ForDemo.LatestNinteiResult latestResult = ForDemo.getLatestNinteiResultMap().get(hihokensha.getHihokenshaNo());
             _setUpItems(div.getLatestNinteiResult(), latestResult.yokaigodo().toRString(), latestResult.ninteiDate(),
-                    latestResult.yukoKikan().getFrom().toDateString(), latestResult.yukoKikan().getTo().toDateString());
+                    latestResult.yukoKikan().getFrom(), latestResult.yukoKikan().getTo());
 
             RadYokaigoOrYoshien.select(div.getRadYokaigoOrYoshien(), YokaigoOrYoshienKubun.要介護);
             if (latestResult == ForDemo.LatestNinteiResult.NOTHING) {
@@ -447,11 +448,11 @@ public class ShinseiJohoInput {
          * @param div LatestNinteiResultDiv
          */
         public static void clear(LatestNinteiResultDiv div) {
-            _setUpItems(div, RString.EMPTY, null, RString.EMPTY, RString.EMPTY);
+            _setUpItems(div, RString.EMPTY, null, null, null);
         }
 
         private static void _setUpItems(LatestNinteiResultDiv div,
-                RString yokaigodo, RDate ninteiDate, RString fromDate, RString toDate) {
+                RString yokaigodo, RDate ninteiDate, RDate fromDate, RDate toDate) {
 
             div.getTxtYokaigodo().setValue(yokaigodo);
             div.getTxtNinteiDate().setValue(ninteiDate);
