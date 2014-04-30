@@ -22,19 +22,6 @@ public final class TextBoxUtil {
     }
 
     /**
-     * valueをクリアしたTextBoxを返します。
-     *
-     * @param <T> TextBox
-     * @param textBox target
-     * @return valueをクリアしたTextBox
-     */
-    public static <T extends TextBox> T cleared(T textBox) {
-        T cleared = textBox;
-        cleared.setValue(RString.EMPTY);
-        return cleared;
-    }
-
-    /**
      * 指定のTextBoxのvalueをクリアします。
      *
      * @param <T> TextBox
@@ -42,19 +29,6 @@ public final class TextBoxUtil {
      */
     public static <T extends TextBox> void clear(T textBox) {
         textBox.setValue(RString.EMPTY);
-    }
-
-    /**
-     * valueをクリアしたTextBoxCodeを返します。
-     *
-     * @param <T> TextBoxCode
-     * @param textBoxCode target
-     * @return valueをクリアしたTextBoxCode
-     */
-    public static <T extends TextBoxCode> T cleared(T textBoxCode) {
-        T cleared = textBoxCode;
-        cleared.setValue(RString.EMPTY);
-        return cleared;
     }
 
     /**
@@ -68,19 +42,6 @@ public final class TextBoxUtil {
     }
 
     /**
-     * valueをクリアしたTextBoxDateを返します。
-     *
-     * @param <T> TextBoxDate
-     * @param textBoxDate target
-     * @return valueをクリアしたTextBoxDate
-     */
-    public static <T extends TextBoxDate> T cleared(T textBoxDate) {
-        T cleared = textBoxDate;
-        cleared.setValue(null);
-        return cleared;
-    }
-
-    /**
      * 指定のTextBoxDateのvalueをクリアします。
      *
      * @param <T> TextBoxDate
@@ -91,25 +52,12 @@ public final class TextBoxUtil {
     }
 
     /**
-     * valueをクリアしたTextBoxYubinNoを返します。
-     *
-     * @param <T> TextBoxYubinNo
-     * @param textBoxYubinNo target
-     * @return valueをクリアしたTextBoxYubinNo
-     */
-    public static <T extends TextBoxYubinNo> T cleared(T textBoxYubinNo) {
-        T cleared = textBoxYubinNo;
-        cleared.setValue(RString.EMPTY);
-        return cleared;
-    }
-
-    /**
      * 指定のTextBoxYubinNoのvalueをクリアします。
      *
      * @param <T> TextBoxYubinNo
      * @param textBoxYubinNo target
      */
     public static <T extends TextBoxYubinNo> void clear(T textBoxYubinNo) {
-        textBoxYubinNo.setValue(RString.EMPTY);
+        textBoxYubinNo.setValue(null);
     }
 }
