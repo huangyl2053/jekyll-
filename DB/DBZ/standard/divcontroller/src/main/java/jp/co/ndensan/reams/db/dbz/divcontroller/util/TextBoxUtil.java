@@ -99,7 +99,7 @@ public final class TextBoxUtil {
      */
     public static <T extends TextBoxYubinNo> T cleared(T textBoxYubinNo) {
         T cleared = textBoxYubinNo;
-        cleared.setValue(RString.EMPTY);
+        cleared.setValue(null);
         return cleared;
     }
 
@@ -110,6 +110,6 @@ public final class TextBoxUtil {
      * @param textBoxYubinNo target
      */
     public static <T extends TextBoxYubinNo> void clear(T textBoxYubinNo) {
-        textBoxYubinNo.setValue(RString.EMPTY);
+        textBoxYubinNo.setValue(null);
     }
 }
