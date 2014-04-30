@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.INinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.INinteichosaItemKubun;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 
 /**
  * 要介護認定調査の調査票を扱うクラスです。
@@ -25,7 +25,7 @@ import static java.util.Objects.requireNonNull;
 public class Ninteichosahyo<E extends INinteichosaItemKubun, T extends INinteichosaItem> {
 
     private final Map<E, T> 調査票定義;
-    private final INinteichosaItemGroup[] 調査項目グループ;
+    private final List<INinteichosaItemGroup> 調査項目グループ;
 
     /**
      * インスタンスを生成します。
@@ -34,8 +34,20 @@ public class Ninteichosahyo<E extends INinteichosaItemKubun, T extends INinteich
      * @param 調査項目グループ 調査項目グループ
      */
     public Ninteichosahyo(Map<E, T> 調査票定義, INinteichosaItemGroup[] 調査項目グループ) {
-        this.調査票定義 = requireNonNull(調査票定義, Messages.E00001.replace("調査票定義").getMessage());
-        this.調査項目グループ = requireNonNull(調査項目グループ, Messages.E00001.replace("調査項目グループ").getMessage());
+        this.調査票定義 = requireNonNull(調査票定義, UrErrorMessages.存在しない.getMessage().replace("調査票定義").getMessage());
+        requireNonNull(調査項目グループ, UrErrorMessages.存在しない.getMessage().replace("調査項目グループ").getMessage());
+        this.調査項目グループ = Arrays.asList(調査項目グループ);
+    }
+
+    /**
+     * インスタンスを生成します。
+     *
+     * @param 調査票定義 調査票定義
+     * @param 調査項目グループ 調査項目グループ
+     */
+    public Ninteichosahyo(Map<E, T> 調査票定義, List<INinteichosaItemGroup> 調査項目グループ) {
+        this.調査票定義 = requireNonNull(調査票定義, UrErrorMessages.存在しない.getMessage().replace("調査票定義").getMessage());
+        this.調査項目グループ = requireNonNull(調査項目グループ, UrErrorMessages.存在しない.getMessage().replace("調査項目グループ").getMessage());
     }
 
     /**
@@ -87,7 +99,7 @@ public class Ninteichosahyo<E extends INinteichosaItemKubun, T extends INinteich
      *
      * @return 調査項目グループ
      */
-    public INinteichosaItemGroup[] get調査項目グループ() {
-        return 調査項目グループ.clone();
+    public List<INinteichosaItemGroup> get調査項目グループ() {
+        return Collections.unmodifiableList(this.調査項目グループ);
     }
 }

@@ -127,6 +127,6 @@ public class NinteichosahyoEditorTest extends DbeTestBase {
     }
 
     private static Ninteichosahyo createChosahyo() {
-        return NinteichosahyoFactory.create基本情報Instance(KoroshoIFKubun.V09A);
+        return NinteichosahyoFactory.create基本調査Instance(KoroshoIFKubun.V09A);
     }
 }

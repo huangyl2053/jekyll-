@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.chosahyo;
 
+import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.INinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.INinteichosaItemKubun;
@@ -20,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class NinteichosahyoEditor<E extends INinteichosaItemKubun, T extends INinteichosaItem> {
 
     private final Map<E, T> regulation;
-    private final INinteichosaItemGroup[] itemGroup;
+    private final List<INinteichosaItemGroup> itemGroup;
 
     /**
      * インスタンスを生成します。

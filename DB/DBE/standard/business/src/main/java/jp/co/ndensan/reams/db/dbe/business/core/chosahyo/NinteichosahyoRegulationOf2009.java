@@ -173,4 +173,5 @@ class NinteichosahyoRegulationOf2009 implements INinteichosahyoRegulation {
     public Map<NinteichosaItemKubunOfKihon, INinteichosaItem> get基本調査定義() {
         return new EnumMap<>(基本調査定義);
     }
+
 }

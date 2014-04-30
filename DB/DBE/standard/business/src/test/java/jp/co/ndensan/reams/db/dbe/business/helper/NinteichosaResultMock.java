@@ -126,7 +126,7 @@ public class NinteichosaResultMock {
      */
     public static NinteichosaResultOfKihon getSpiedNinteichosaResultKihonInstance() {
 
-        NinteichosahyoEditor editor = new NinteichosahyoEditor(NinteichosahyoFactory.create基本情報Instance(KoroshoIFKubun.V09A));
+        NinteichosahyoEditor editor = new NinteichosahyoEditor(NinteichosahyoFactory.create基本調査Instance(KoroshoIFKubun.V09A));
         editor.setResult(麻痺等の有無_左上肢, NaiAru.ない.getCode());
         editor.setResult(麻痺等の有無_右上肢, NaiAru.ある.getCode());
         editor.setResult(麻痺等の有無_左下肢, NaiAru.ない.getCode());
