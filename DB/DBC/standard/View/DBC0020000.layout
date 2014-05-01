@@ -4392,9 +4392,9 @@
            "text": "",
            "suggest": [],
            "value": "",
-           "labelLText": "単位単価",
+           "labelLText": "単位数単価",
            "labelRText": "",
-           "labelLWidth": "60",
+           "labelLWidth": "80",
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
@@ -4764,6 +4764,29 @@
      "backgroundColor": 0,
      "widthAuto": false,
      "isGroupBox": false
+    },
+    {
+     "fieldName": "btnCloseJikoSakusei",
+     "items": [],
+     "controlType": "Button",
+     "width": "S",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "text": "閉じる",
+     "onClick": "",
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
     }
    ],
    "controlType": "Panel",
@@ -5337,7 +5360,7 @@
         "sortKey": "selfInfoKubunLimitNaiUnit"
        },
        {
-        "columnName": "単位単価",
+        "columnName": "単位数単価",
         "dataName": "selfInfoUnitTanka",
         "toolTip": "",
         "bgColor": 0,
@@ -6029,9 +6052,9 @@
            "text": "",
            "suggest": [],
            "value": "",
-           "labelLText": "単位単価",
+           "labelLText": "単位数単価",
            "labelRText": "",
-           "labelLWidth": "60",
+           "labelLWidth": "80",
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
@@ -6360,6 +6383,29 @@
      "backgroundColor": 0,
      "widthAuto": false,
      "isGroupBox": false
+    },
+    {
+     "fieldName": "btnCloseHomonTsusho",
+     "items": [],
+     "controlType": "Button",
+     "width": "S",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "text": "閉じる",
+     "onClick": "",
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
     }
    ],
    "controlType": "Panel",
@@ -6419,7 +6465,7 @@
        "fieldName": "lblTankiNyushoJikoSakusei1",
        "items": [],
        "controlType": "Label",
-       "width": "80",
+       "width": "90",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -6430,11 +6476,11 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "M",
-       "marginRight": "M",
+       "marginLeft": "XS",
+       "marginRight": "XS",
        "required": false,
        "isPrivateInfo": false,
-       "text": "区分支給<br>限度基準額",
+       "text": "区分支給限度<br>基準額",
        "align": 1
       },
       {
@@ -6452,8 +6498,8 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "M",
-       "marginRight": "M",
+       "marginLeft": "XS",
+       "marginRight": "XS",
        "required": false,
        "isPrivateInfo": false,
        "text": "前月までの<br>利用日数",
@@ -6463,7 +6509,7 @@
        "fieldName": "lblTankiNyushoJikoSakusei3",
        "items": [],
        "controlType": "Label",
-       "width": "80",
+       "width": "90",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -6474,11 +6520,11 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "M",
-       "marginRight": "M",
+       "marginLeft": "XS",
+       "marginRight": "XS",
        "required": false,
        "isPrivateInfo": false,
-       "text": "当月の利用計画日数",
+       "text": "当月の<br>利用計画日数",
        "align": 1
       },
       {
@@ -6496,8 +6542,8 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "M",
-       "marginRight": "M",
+       "marginLeft": "XS",
+       "marginRight": "XS",
        "required": false,
        "isPrivateInfo": false,
        "text": "保険給付<br>対象日数",
@@ -6518,8 +6564,8 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "M",
-       "marginRight": "M",
+       "marginLeft": "XS",
+       "marginRight": "XS",
        "required": false,
        "isPrivateInfo": false,
        "text": "保険給付<br>対象外日数",
@@ -6562,8 +6608,8 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
+       "marginLeft": "XL",
+       "marginRight": "XL",
        "required": false,
        "maxLength": 1000000000000,
        "minLength": 0,
@@ -6580,10 +6626,10 @@
        "text": "",
        "suggest": [],
        "value": "",
-       "labelLText": " ",
-       "labelRText": " ",
-       "labelLWidth": "10",
-       "labelRWidth": "10",
+       "labelLText": "",
+       "labelRText": "",
+       "labelLWidth": "S",
+       "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
        "permitCharactor": ""
@@ -6603,8 +6649,8 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
+       "marginLeft": "XL",
+       "marginRight": "XL",
        "required": false,
        "maxLength": 1000000000000,
        "minLength": 0,
@@ -6621,10 +6667,10 @@
        "text": "",
        "suggest": [],
        "value": "",
-       "labelLText": " ",
-       "labelRText": " ",
-       "labelLWidth": "10",
-       "labelRWidth": "10",
+       "labelLText": "",
+       "labelRText": "",
+       "labelLWidth": "S",
+       "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
        "permitCharactor": ""
@@ -6644,8 +6690,8 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
+       "marginLeft": "XL",
+       "marginRight": "XL",
        "required": false,
        "maxLength": 1000000000000,
        "minLength": 0,
@@ -6662,10 +6708,10 @@
        "text": "",
        "suggest": [],
        "value": "",
-       "labelLText": " ",
-       "labelRText": " ",
-       "labelLWidth": "10",
-       "labelRWidth": "10",
+       "labelLText": "",
+       "labelRText": "",
+       "labelLWidth": "S",
+       "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
        "permitCharactor": ""
@@ -6685,8 +6731,8 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
+       "marginLeft": "XL",
+       "marginRight": "XL",
        "required": false,
        "maxLength": 1000000000000,
        "minLength": 0,
@@ -6703,10 +6749,10 @@
        "text": "",
        "suggest": [],
        "value": "",
-       "labelLText": " ",
-       "labelRText": " ",
-       "labelLWidth": "10",
-       "labelRWidth": "10",
+       "labelLText": "",
+       "labelRText": "",
+       "labelLWidth": "S",
+       "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
        "permitCharactor": ""
@@ -6726,8 +6772,8 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
+       "marginLeft": "XL",
+       "marginRight": "XL",
        "required": false,
        "maxLength": 1000000000000,
        "minLength": 0,
@@ -6744,10 +6790,10 @@
        "text": "",
        "suggest": [],
        "value": "",
-       "labelLText": " ",
-       "labelRText": " ",
-       "labelLWidth": "10",
-       "labelRWidth": "10",
+       "labelLText": "",
+       "labelRText": "",
+       "labelLWidth": "S",
+       "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
        "permitCharactor": ""
@@ -6767,7 +6813,7 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "XL",
+       "marginLeft": "S",
        "marginRight": "XS",
        "readOnly": true,
        "isPrivateInfo": false,
@@ -6968,7 +7014,7 @@
         "sortKey": "selfInfoKyufugaiDateNum"
        },
        {
-        "columnName": "単位単価",
+        "columnName": "単位数単価",
         "dataName": "selfInfoUnitTanka",
         "toolTip": "",
         "bgColor": 0,
@@ -7524,7 +7570,7 @@
            "text": "",
            "suggest": [],
            "value": "",
-           "labelLText": "単位単価",
+           "labelLText": "単位数単価",
            "labelRText": "円",
            "labelLWidth": "150",
            "labelRWidth": "30",
@@ -7896,6 +7942,29 @@
      "backgroundColor": 0,
      "widthAuto": false,
      "isGroupBox": false
+    },
+    {
+     "fieldName": "btnCloseTankiNyusho",
+     "items": [],
+     "controlType": "Button",
+     "width": "S",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "text": "閉じる",
+     "onClick": "",
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
     }
    ],
    "controlType": "Panel",
@@ -8063,12 +8132,27 @@
      "transition": ""
     },
     {
+     "fieldName": "btnCloseJikoSakusei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
      "fieldName": "btnDlgHomonTsusho",
      "event": "onClick",
      "transition": ""
     },
     {
      "fieldName": "btnDlgTankiNyusho",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCloseHomonTsusho",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCloseTankiNyusho",
      "event": "onClick",
      "transition": ""
     }
@@ -8132,45 +8216,40 @@
     {
      "fieldName": "btnDlgKyotakuService",
      "event": "onClick",
-     "transition": "自己_居宅サービス"
+     "transition": "居宅サービス_自己作成"
+    },
+    {
+     "fieldName": "btnCloseJikoSakusei",
+     "event": "onClick",
+     "transition": ""
     },
     {
      "fieldName": "btnDlgHomonTsusho",
      "event": "onClick",
-     "transition": "自己_訪問通所"
+     "transition": "訪問通所_自己作成"
     },
     {
      "fieldName": "btnDlgTankiNyusho",
      "event": "onClick",
-     "transition": "自己_短期入所"
+     "transition": "短期入所_自己作成"
+    },
+    {
+     "fieldName": "btnCloseHomonTsusho",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCloseTankiNyusho",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
   {
    "order": "3",
-   "stateName": "自己_居宅サービス",
+   "stateName": "居宅サービス_自己作成",
    "showWizard": false,
    "visibleDivs": [
-    {
-     "visibleDiv": "KyotakuJumin",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "KyotakuNushiJuminJoho",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "KyotakuKaigoJuminJoho",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "KyotakuServicePlanIchiran",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "KyotakuServiceJikoSakuseiInfo",
-     "panelState": "visible"
-    },
     {
      "visibleDiv": "KyotakuServiceJikoSakusei",
      "panelState": "visible"
@@ -8207,6 +8286,11 @@
      "transition": ""
     },
     {
+     "fieldName": "btnCloseJikoSakusei",
+     "event": "onClick",
+     "transition": "居宅サービス一覧"
+    },
+    {
      "fieldName": "btnDlgHomonTsusho",
      "event": "onClick",
      "transition": ""
@@ -8215,12 +8299,22 @@
      "fieldName": "btnDlgTankiNyusho",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnCloseHomonTsusho",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCloseTankiNyusho",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
   {
    "order": "4",
-   "stateName": "自己_訪問通所",
+   "stateName": "訪問通所_自己作成",
    "showWizard": false,
    "visibleDivs": [
     {
@@ -8279,6 +8373,11 @@
      "transition": ""
     },
     {
+     "fieldName": "btnCloseJikoSakusei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
      "fieldName": "btnDlgHomonTsusho",
      "event": "onClick",
      "transition": ""
@@ -8287,12 +8386,22 @@
      "fieldName": "btnDlgTankiNyusho",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnCloseHomonTsusho",
+     "event": "onClick",
+     "transition": "居宅サービス一覧"
+    },
+    {
+     "fieldName": "btnCloseTankiNyusho",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
   {
    "order": "5",
-   "stateName": "自己_短期入所",
+   "stateName": "短期入所_自己作成",
    "showWizard": false,
    "visibleDivs": [
     {
@@ -8347,6 +8456,11 @@
      "transition": ""
     },
     {
+     "fieldName": "btnCloseJikoSakusei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
      "fieldName": "btnDlgHomonTsusho",
      "event": "onClick",
      "transition": ""
@@ -8355,6 +8469,16 @@
      "fieldName": "btnDlgTankiNyusho",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnCloseHomonTsusho",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCloseTankiNyusho",
+     "event": "onClick",
+     "transition": "居宅サービス一覧"
     }
    ]
   }
