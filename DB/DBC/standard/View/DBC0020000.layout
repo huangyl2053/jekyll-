@@ -146,7 +146,9 @@
      "marginRight": "XS",
      "text": "居宅サービス検索",
      "onClick": "onClick_SearchIchiran",
-     "imageFileUrl": ""
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
     }
    ],
    "controlType": "Panel",
@@ -193,7 +195,8 @@
    "eraseBorderRight": false,
    "eraseBorderLeft": false,
    "backgroundColor": 0,
-   "widthAuto": false
+   "widthAuto": false,
+   "isGroupBox": false
   },
   {
    "fieldName": "KyotakuJumin",
@@ -218,6 +221,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "required": false,
        "isPrivateInfo": false,
        "text": "氏名",
        "align": 2
@@ -322,6 +326,7 @@
        "authorityMode": 0,
        "marginLeft": ".6",
        "marginRight": "XS",
+       "required": false,
        "isPrivateInfo": false,
        "text": "世帯コード",
        "align": 2
@@ -385,6 +390,7 @@
        "authorityMode": 0,
        "marginLeft": "0.5",
        "marginRight": "XS",
+       "required": false,
        "isPrivateInfo": false,
        "text": "行政区",
        "align": 2
@@ -447,6 +453,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "required": false,
        "isPrivateInfo": false,
        "text": "住所",
        "align": 2
@@ -549,9 +556,9 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": ".3",
-       "src": "/uz/uza/css/image_taino.png",
        "imageWidth": "80",
-       "imageHeight": "30"
+       "imageHeight": "30",
+       "src": "/uz/uza/css/image_taino.png"
       },
       {
        "fieldName": "imgNushiSofusaki",
@@ -569,9 +576,9 @@
        "authorityMode": 0,
        "marginLeft": "0",
        "marginRight": ".3",
-       "src": "/uz/uza/css/image_souhusaki.png",
        "imageWidth": "80",
-       "imageHeight": "30"
+       "imageHeight": "30",
+       "src": "/uz/uza/css/image_souhusaki.png"
       },
       {
        "fieldName": "imgNushiKoza",
@@ -589,9 +596,9 @@
        "authorityMode": 0,
        "marginLeft": "0",
        "marginRight": "0",
-       "src": "/uz/uza/css/image_kouza.png",
        "imageWidth": "80",
-       "imageHeight": "30"
+       "imageHeight": "30",
+       "src": "/uz/uza/css/image_kouza.png"
       }
      ],
      "controlType": "Panel",
@@ -634,7 +641,8 @@
      "eraseBorderRight": false,
      "eraseBorderLeft": false,
      "backgroundColor": 0,
-     "widthAuto": true
+     "widthAuto": true,
+     "isGroupBox": false
     },
     {
      "fieldName": "KyotakuKaigoJuminJoho",
@@ -656,6 +664,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "0",
+       "required": false,
        "isPrivateInfo": false,
        "text": "被保険者番号",
        "align": 2
@@ -719,6 +728,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "0",
+       "required": false,
        "isPrivateInfo": false,
        "text": "通知書番号",
        "align": 2
@@ -823,6 +833,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "0",
+       "required": false,
        "isPrivateInfo": false,
        "text": "資格取得日",
        "align": 2
@@ -887,6 +898,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "0",
+       "required": false,
        "isPrivateInfo": false,
        "text": "旧被保険者番号",
        "align": 2
@@ -950,6 +962,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "0",
+       "required": false,
        "isPrivateInfo": false,
        "text": "旧市町村",
        "align": 2
@@ -1054,6 +1067,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "0",
+       "required": false,
        "isPrivateInfo": false,
        "text": "資格喪失日",
        "align": 2
@@ -1118,6 +1132,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "0",
+       "required": false,
        "isPrivateInfo": false,
        "text": "所得段階",
        "align": 2
@@ -1180,6 +1195,7 @@
        "authorityMode": 0,
        "marginLeft": ".1",
        "marginRight": "XS",
+       "required": false,
        "isPrivateInfo": false,
        "text": "段階",
        "align": 0
@@ -1225,7 +1241,8 @@
      "eraseBorderRight": false,
      "eraseBorderLeft": false,
      "backgroundColor": 0,
-     "widthAuto": true
+     "widthAuto": true,
+     "isGroupBox": false
     }
    ],
    "controlType": "Panel",
@@ -1269,7 +1286,8 @@
    "eraseBorderRight": false,
    "eraseBorderLeft": false,
    "backgroundColor": 0,
-   "widthAuto": true
+   "widthAuto": true,
+   "isGroupBox": false
   },
   {
    "fieldName": "KyotakuServicePlanIchiran",
@@ -1293,7 +1311,9 @@
      "marginRight": "XS",
      "text": "世帯情報を表示",
      "onClick": "onClick_showSetai",
-     "imageFileUrl": ""
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
     },
     {
      "fieldName": "SetaiJoho",
@@ -1316,18 +1336,23 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "gridSetting": {
-        "rowHeight": null,
+        "rowHeight": 25,
         "isMultiSelectable": false,
         "isShowFooter": true,
         "isShowFilter": false,
+        "isShowFilterButton": false,
+        "isShowRowState": false,
         "header": {
          "combineColumns": [],
-         "frozenColumn": ""
+         "frozenColumn": "",
+         "headerHeight": 0
         },
         "columns": [
          {
           "columnName": "被保番号",
           "dataName": "setaiHihokenshaNo",
+          "toolTip": "",
+          "bgColor": 0,
           "width": 100,
           "visible": true,
           "cellType": 0,
@@ -1342,6 +1367,8 @@
          {
           "columnName": "氏名",
           "dataName": "setaiName",
+          "toolTip": "",
+          "bgColor": 0,
           "width": 200,
           "visible": true,
           "cellType": 0,
@@ -1356,6 +1383,8 @@
          {
           "columnName": "性別",
           "dataName": "setaiGender",
+          "toolTip": "",
+          "bgColor": 0,
           "width": 50,
           "visible": true,
           "cellType": 0,
@@ -1370,6 +1399,8 @@
          {
           "columnName": "生年月日",
           "dataName": "setaiBirthDay",
+          "toolTip": "",
+          "bgColor": 0,
           "width": 150,
           "visible": true,
           "cellType": 0,
@@ -1384,6 +1415,8 @@
          {
           "columnName": "続柄",
           "dataName": "setaiTsuzukiGara",
+          "toolTip": "",
+          "bgColor": 0,
           "width": 50,
           "visible": true,
           "cellType": 0,
@@ -1398,6 +1431,8 @@
          {
           "columnName": "住民種別",
           "dataName": "setaiJuminShubetsu",
+          "toolTip": "",
+          "bgColor": 0,
           "width": 100,
           "visible": true,
           "cellType": 0,
@@ -1410,6 +1445,8 @@
          {
           "columnName": "住民コード",
           "dataName": "setaiJuminCode",
+          "toolTip": "",
+          "bgColor": 0,
           "width": 150,
           "visible": true,
           "cellType": 0,
@@ -1469,13 +1506,14 @@
      "eraseBorderRight": false,
      "eraseBorderLeft": false,
      "backgroundColor": 0,
-     "widthAuto": true
+     "widthAuto": true,
+     "isGroupBox": false
     },
     {
      "fieldName": "dgKyotakuServicePlanIchiran",
      "items": [],
      "controlType": "DataGrid",
-     "width": "840",
+     "width": "1000",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1486,21 +1524,26 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
+     "marginLeft": "0",
+     "marginRight": "0",
      "gridSetting": {
-      "rowHeight": null,
+      "rowHeight": 25,
       "isMultiSelectable": false,
       "isShowFooter": true,
       "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": false,
       "header": {
        "combineColumns": [],
-       "frozenColumn": ""
+       "frozenColumn": "",
+       "headerHeight": 0
       },
       "columns": [
        {
         "columnName": "選択",
         "dataName": "btnSelect",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 50,
         "visible": true,
         "cellType": 8,
@@ -1508,7 +1551,9 @@
          "cellType": 8,
          "text": "■",
          "onClick": "onClick_ShowDetail",
-         "imageFileUrl": ""
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": ""
         },
         "align": 0,
         "resize": true,
@@ -1518,6 +1563,8 @@
        {
         "columnName": "対象年月invisible",
         "dataName": "txtTaishoYMInvisible",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 10,
         "visible": false,
         "cellType": 0,
@@ -1532,6 +1579,8 @@
        {
         "columnName": "対象年月",
         "dataName": "txtTaishoYM",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 100,
         "visible": true,
         "cellType": 0,
@@ -1546,6 +1595,8 @@
        {
         "columnName": "計画作成区分",
         "dataName": "txtPlanSakuseiKubun",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 120,
         "visible": true,
         "cellType": 0,
@@ -1560,6 +1611,8 @@
        {
         "columnName": "暫定",
         "dataName": "txtZantei",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 50,
         "visible": true,
         "cellType": 0,
@@ -1574,6 +1627,8 @@
        {
         "columnName": "事業者番号",
         "dataName": "txtJigyoshaNo",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 100,
         "visible": true,
         "cellType": 0,
@@ -1588,7 +1643,9 @@
        {
         "columnName": "事業者名",
         "dataName": "txtJigyoshaName",
-        "width": 100,
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 260,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -1600,24 +1657,60 @@
         "sortKey": "txtJigyoshaName"
        },
        {
+        "columnName": "開始年月日invisible",
+        "dataName": "txtStartYMDInvisible",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 10,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "txtStartYMDInvisible"
+       },
+       {
         "columnName": "開始年月日",
         "dataName": "txtStartYMD",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 100,
         "visible": true,
         "cellType": 0,
-        "cellDetails": null,
+        "cellDetails": {
+         "cellType": 0
+        },
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "txtStartYMD"
        },
        {
+        "columnName": "終了年月日invisible",
+        "dataName": "txtEndYMDInvisible",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 10,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "txtEndYMDInvisible"
+       },
+       {
         "columnName": "終了年月日",
         "dataName": "txtEndYMD",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 100,
         "visible": true,
         "cellType": 0,
-        "cellDetails": null,
+        "cellDetails": {
+         "cellType": 0
+        },
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
@@ -1626,6 +1719,8 @@
        {
         "columnName": "有効無効",
         "dataName": "txtEnable",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 100,
         "visible": true,
         "cellType": 0,
@@ -2180,7 +2275,7 @@
            "fieldName": "txtJigyoshaSakuseiJusho",
            "items": [],
            "controlType": "TextBoxMultiLine",
-           "width": "710",
+           "width": "730",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -2447,7 +2542,7 @@
            "fieldName": "txtJigyoshaSakuseiModifyRiyu",
            "items": [],
            "controlType": "TextBoxMultiLine",
-           "width": "660",
+           "width": "680",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -2530,7 +2625,7 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
+     "marginLeft": "0",
      "marginRight": "XS",
      "onLoad": "",
      "title": "居宅サービス計画作成依頼照会",
@@ -2561,7 +2656,8 @@
      "eraseBorderRight": false,
      "eraseBorderLeft": false,
      "backgroundColor": 0,
-     "widthAuto": true
+     "widthAuto": true,
+     "isGroupBox": false
     },
     {
      "fieldName": "KyotakuServiceJikoSakuseiInfo",
@@ -2966,6 +3062,8 @@
        "text": "短期入所計画情報",
        "onClick": "",
        "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
        "displayChildDivName": "",
        "dataPassing": [],
        "visibleCloseButton": false,
@@ -2991,6 +3089,8 @@
        "text": "訪問通所計画情報",
        "onClick": "",
        "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
        "displayChildDivName": "",
        "dataPassing": [],
        "visibleCloseButton": false,
@@ -3016,6 +3116,8 @@
        "text": "居宅サービス計画情報",
        "onClick": "",
        "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
        "displayChildDivName": "",
        "dataPassing": [],
        "visibleCloseButton": false,
@@ -3023,7 +3125,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "995",
+     "width": "1000",
      "visible": true,
      "displayNone": true,
      "disabled": false,
@@ -3034,8 +3136,8 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
+     "marginLeft": "0",
+     "marginRight": "0",
      "onLoad": "",
      "title": "自己作成計画情報",
      "isOpen": true,
@@ -3062,7 +3164,8 @@
      "eraseBorderRight": false,
      "eraseBorderLeft": false,
      "backgroundColor": 0,
-     "widthAuto": false
+     "widthAuto": false,
+     "isGroupBox": false
     }
    ],
    "controlType": "Panel",
@@ -3113,7 +3216,8 @@
    "eraseBorderRight": false,
    "eraseBorderLeft": false,
    "backgroundColor": 0,
-   "widthAuto": false
+   "widthAuto": false,
+   "isGroupBox": false
   },
   {
    "fieldName": "KyotakuServiceJikoSakusei",
@@ -3138,6 +3242,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "required": false,
        "isPrivateInfo": false,
        "text": "短期入所<br>前月までの利用日数",
        "align": 1
@@ -3159,6 +3264,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "required": false,
        "isPrivateInfo": false,
        "text": "短期入所<br>当月の計画利用日数",
        "align": 1
@@ -3180,6 +3286,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "required": false,
        "isPrivateInfo": false,
        "text": "短期入所<br>累積利用日数",
        "align": 1
@@ -3427,7 +3534,8 @@
      "eraseBorderRight": false,
      "eraseBorderLeft": false,
      "backgroundColor": 0,
-     "widthAuto": false
+     "widthAuto": false,
+     "isGroupBox": false
     },
     {
      "fieldName": "dgKyotakuServiceJikoSakusei",
@@ -3447,18 +3555,23 @@
      "marginLeft": "0",
      "marginRight": "0",
      "gridSetting": {
-      "rowHeight": null,
+      "rowHeight": 25,
       "isMultiSelectable": false,
       "isShowFooter": true,
       "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": false,
       "header": {
        "combineColumns": [],
-       "frozenColumn": ""
+       "frozenColumn": "",
+       "headerHeight": 0
       },
       "columns": [
        {
         "columnName": "選択",
         "dataName": "selfInfoBtnSelect",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 50,
         "visible": true,
         "cellType": 8,
@@ -3476,6 +3589,8 @@
        {
         "columnName": "事業者番号",
         "dataName": "selfInfoJigyoshaNo",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 100,
         "visible": true,
         "cellType": 0,
@@ -3488,6 +3603,8 @@
        {
         "columnName": "サービスコード",
         "dataName": "selfInfoServiceCode",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 130,
         "visible": true,
         "cellType": 0,
@@ -3500,6 +3617,8 @@
        {
         "columnName": "単位",
         "dataName": "selfInfoUnit",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 70,
         "visible": true,
         "cellType": 0,
@@ -3512,6 +3631,8 @@
        {
         "columnName": "割引後率",
         "dataName": "selfInfoWaribikiRitsu",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 100,
         "visible": true,
         "cellType": 0,
@@ -3524,6 +3645,8 @@
        {
         "columnName": "割引後単位",
         "dataName": "selfInfoWaribikiUnit",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 100,
         "visible": true,
         "cellType": 0,
@@ -3536,6 +3659,8 @@
        {
         "columnName": "回数",
         "dataName": "selfInfoNum",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 70,
         "visible": true,
         "cellType": 0,
@@ -3548,6 +3673,8 @@
        {
         "columnName": "サービス単位",
         "dataName": "selfInfoServiceUnit",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 120,
         "visible": true,
         "cellType": 0,
@@ -3560,6 +3687,8 @@
        {
         "columnName": "種類限度超過単位",
         "dataName": "selfInfoShuruiLimitChokaUnit",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 150,
         "visible": true,
         "cellType": 0,
@@ -3572,6 +3701,8 @@
        {
         "columnName": "種類限度内単位",
         "dataName": "selfInfoShuruiLimitNaiUnit",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 130,
         "visible": true,
         "cellType": 0,
@@ -3584,6 +3715,8 @@
        {
         "columnName": "区分限度超過単位",
         "dataName": "selfInfoKubunLimitChokaUnit",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 150,
         "visible": true,
         "cellType": 0,
@@ -3596,6 +3729,8 @@
        {
         "columnName": "区分限度内単位",
         "dataName": "selfInfoKubunLimitNaiUnit",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 130,
         "visible": true,
         "cellType": 0,
@@ -3608,6 +3743,8 @@
        {
         "columnName": "単位単価",
         "dataName": "selfInfoUnitTanka",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 100,
         "visible": true,
         "cellType": 0,
@@ -3620,6 +3757,8 @@
        {
         "columnName": "費用総額",
         "dataName": "selfInfoHiyoTotal",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 100,
         "visible": true,
         "cellType": 0,
@@ -3632,6 +3771,8 @@
        {
         "columnName": "給付率",
         "dataName": "selfInfoKyufuRitsu",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 80,
         "visible": true,
         "cellType": 0,
@@ -3644,6 +3785,8 @@
        {
         "columnName": "保険給付額",
         "dataName": "selfInfoHokenKyufuGaku",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 100,
         "visible": true,
         "cellType": 0,
@@ -3656,6 +3799,8 @@
        {
         "columnName": "利用者負担（保険対象分）",
         "dataName": "selfInfoHokenFutan",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 200,
         "visible": true,
         "cellType": 0,
@@ -3668,6 +3813,8 @@
        {
         "columnName": "利用者負担（全額対象分）",
         "dataName": "selfInfoFutanTotal",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 200,
         "visible": true,
         "cellType": 0,
@@ -4601,11 +4748,11 @@
      "requestSettings": [
       {
        "eventName": "onLoad",
-       "requestUrl": "dbc/db/dbc/KyotakuServiceJikoSakusei/getKyotakuServiceJikoSakuseiDetailOnLoadData"
+       "requestUrl": "dbc/db/dbc/KyotakuServiceJikoSakusei/getOnLoadData"
       }
      ],
      "hiddenInput": [],
-     "onOpen": "onOpenDataLoad",
+     "onOpen": "",
      "onClose": "",
      "session": {},
      "marginTop": "XS",
@@ -4615,7 +4762,8 @@
      "eraseBorderRight": false,
      "eraseBorderLeft": false,
      "backgroundColor": 0,
-     "widthAuto": false
+     "widthAuto": false,
+     "isGroupBox": false
     }
    ],
    "controlType": "Panel",
@@ -4662,7 +4810,8 @@
    "eraseBorderRight": false,
    "eraseBorderLeft": false,
    "backgroundColor": 0,
-   "widthAuto": true
+   "widthAuto": true,
+   "isGroupBox": false
   },
   {
    "fieldName": "HomonTsushoJikoSakusei",
@@ -4687,6 +4836,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "required": false,
        "isPrivateInfo": false,
        "text": "短期入所<br>前月までの利用日数",
        "align": 1
@@ -4708,6 +4858,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "required": false,
        "isPrivateInfo": false,
        "text": "短期入所<br>当月の計画利用日数",
        "align": 1
@@ -4729,6 +4880,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "required": false,
        "isPrivateInfo": false,
        "text": "短期入所<br>累積利用日数",
        "align": 1
@@ -4976,7 +5128,8 @@
      "eraseBorderRight": false,
      "eraseBorderLeft": false,
      "backgroundColor": 0,
-     "widthAuto": false
+     "widthAuto": false,
+     "isGroupBox": false
     },
     {
      "fieldName": "dgHomonTushoJikoSakusei",
@@ -4996,18 +5149,23 @@
      "marginLeft": "0",
      "marginRight": "0",
      "gridSetting": {
-      "rowHeight": null,
+      "rowHeight": 25,
       "isMultiSelectable": false,
       "isShowFooter": true,
       "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": false,
       "header": {
        "combineColumns": [],
-       "frozenColumn": ""
+       "frozenColumn": "",
+       "headerHeight": 0
       },
       "columns": [
        {
         "columnName": "選択",
         "dataName": "selfInfoBtnSelect",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 50,
         "visible": true,
         "cellType": 8,
@@ -5015,7 +5173,9 @@
          "cellType": 8,
          "text": "■",
          "onClick": "onClick_JikoSakuseiShowDetail",
-         "imageFileUrl": ""
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": ""
         },
         "align": 0,
         "resize": true,
@@ -5025,6 +5185,8 @@
        {
         "columnName": "事業者番号",
         "dataName": "selfInfoJigyoshaNo",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 100,
         "visible": true,
         "cellType": 0,
@@ -5037,6 +5199,8 @@
        {
         "columnName": "サービスコード",
         "dataName": "selfInfoServiceCode",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 130,
         "visible": true,
         "cellType": 0,
@@ -5049,6 +5213,8 @@
        {
         "columnName": "単位",
         "dataName": "selfInfoUnit",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 70,
         "visible": true,
         "cellType": 0,
@@ -5061,6 +5227,8 @@
        {
         "columnName": "割引後率",
         "dataName": "selfInfoWaribikiRitsu",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 100,
         "visible": true,
         "cellType": 0,
@@ -5073,6 +5241,8 @@
        {
         "columnName": "割引後単位",
         "dataName": "selfInfoWaribikiUnit",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 100,
         "visible": true,
         "cellType": 0,
@@ -5085,6 +5255,8 @@
        {
         "columnName": "回数",
         "dataName": "selfInfoNum",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 70,
         "visible": true,
         "cellType": 0,
@@ -5097,6 +5269,8 @@
        {
         "columnName": "サービス単位",
         "dataName": "selfInfoServiceUnit",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 120,
         "visible": true,
         "cellType": 0,
@@ -5109,6 +5283,8 @@
        {
         "columnName": "種類限度超過単位",
         "dataName": "selfInfoShuruiLimitChokaUnit",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 150,
         "visible": true,
         "cellType": 0,
@@ -5121,6 +5297,8 @@
        {
         "columnName": "種類限度内単位",
         "dataName": "selfInfoShuruiLimitNaiUnit",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 130,
         "visible": true,
         "cellType": 0,
@@ -5133,6 +5311,8 @@
        {
         "columnName": "区分限度超過単位",
         "dataName": "selfInfoKubunLimitChokaUnit",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 150,
         "visible": true,
         "cellType": 0,
@@ -5145,6 +5325,8 @@
        {
         "columnName": "区分限度内単位",
         "dataName": "selfInfoKubunLimitNaiUnit",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 130,
         "visible": true,
         "cellType": 0,
@@ -5157,6 +5339,8 @@
        {
         "columnName": "単位単価",
         "dataName": "selfInfoUnitTanka",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 100,
         "visible": true,
         "cellType": 0,
@@ -5169,6 +5353,8 @@
        {
         "columnName": "費用総額",
         "dataName": "selfInfoHiyoTotal",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 100,
         "visible": true,
         "cellType": 0,
@@ -5181,6 +5367,8 @@
        {
         "columnName": "給付率",
         "dataName": "selfInfoKyufuRitsu",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 80,
         "visible": true,
         "cellType": 0,
@@ -5193,6 +5381,8 @@
        {
         "columnName": "保険給付額",
         "dataName": "selfInfoHokenKyufuGaku",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 100,
         "visible": true,
         "cellType": 0,
@@ -5205,6 +5395,8 @@
        {
         "columnName": "利用者負担（保険対象分）",
         "dataName": "selfInfoHokenFutan",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 200,
         "visible": true,
         "cellType": 0,
@@ -5217,6 +5409,8 @@
        {
         "columnName": "利用者負担（全額対象分）",
         "dataName": "selfInfoFutanTotal",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 200,
         "visible": true,
         "cellType": 0,
@@ -5694,7 +5888,7 @@
            "value": "",
            "labelLText": "サービス単位",
            "labelRText": "単位　【（割引適用後単位）　×　回数】",
-           "labelLWidth": "190",
+           "labelLWidth": "180",
            "labelRWidth": "300",
            "labelLAlign": 2,
            "labelRAlign": 0,
@@ -6154,7 +6348,7 @@
       }
      ],
      "hiddenInput": [],
-     "onOpen": "onOpenDataLoad",
+     "onOpen": "",
      "onClose": "",
      "session": {},
      "marginTop": "XS",
@@ -6164,7 +6358,8 @@
      "eraseBorderRight": false,
      "eraseBorderLeft": false,
      "backgroundColor": 0,
-     "widthAuto": false
+     "widthAuto": false,
+     "isGroupBox": false
     }
    ],
    "controlType": "Panel",
@@ -6211,7 +6406,8 @@
    "eraseBorderRight": false,
    "eraseBorderLeft": false,
    "backgroundColor": 0,
-   "widthAuto": true
+   "widthAuto": true,
+   "isGroupBox": false
   },
   {
    "fieldName": "TankiNyushoJikoSakusei",
@@ -6236,6 +6432,7 @@
        "authorityMode": 0,
        "marginLeft": "M",
        "marginRight": "M",
+       "required": false,
        "isPrivateInfo": false,
        "text": "区分支給<br>限度基準額",
        "align": 1
@@ -6257,6 +6454,7 @@
        "authorityMode": 0,
        "marginLeft": "M",
        "marginRight": "M",
+       "required": false,
        "isPrivateInfo": false,
        "text": "前月までの<br>利用日数",
        "align": 1
@@ -6278,6 +6476,7 @@
        "authorityMode": 0,
        "marginLeft": "M",
        "marginRight": "M",
+       "required": false,
        "isPrivateInfo": false,
        "text": "当月の利用計画日数",
        "align": 1
@@ -6299,6 +6498,7 @@
        "authorityMode": 0,
        "marginLeft": "M",
        "marginRight": "M",
+       "required": false,
        "isPrivateInfo": false,
        "text": "保険給付<br>対象日数",
        "align": 1
@@ -6320,6 +6520,7 @@
        "authorityMode": 0,
        "marginLeft": "M",
        "marginRight": "M",
+       "required": false,
        "isPrivateInfo": false,
        "text": "保険給付<br>対象外日数",
        "align": 1
@@ -6341,6 +6542,7 @@
        "authorityMode": 0,
        "marginLeft": "M",
        "marginRight": "0",
+       "required": false,
        "isPrivateInfo": false,
        "text": "限度管理期間",
        "align": 0
@@ -6629,7 +6831,8 @@
      "eraseBorderRight": false,
      "eraseBorderLeft": false,
      "backgroundColor": 0,
-     "widthAuto": false
+     "widthAuto": false,
+     "isGroupBox": false
     },
     {
      "fieldName": "dgTankiNyushoJikoSakusei",
@@ -6649,18 +6852,23 @@
      "marginLeft": "0",
      "marginRight": "0",
      "gridSetting": {
-      "rowHeight": null,
+      "rowHeight": 25,
       "isMultiSelectable": false,
       "isShowFooter": true,
       "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": false,
       "header": {
        "combineColumns": [],
-       "frozenColumn": ""
+       "frozenColumn": "",
+       "headerHeight": 0
       },
       "columns": [
        {
         "columnName": "選択",
         "dataName": "selfInfoBtnSelect",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 50,
         "visible": true,
         "cellType": 8,
@@ -6678,6 +6886,8 @@
        {
         "columnName": "事業者番号",
         "dataName": "selfInfoJigyoshaNo",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 100,
         "visible": true,
         "cellType": 0,
@@ -6690,6 +6900,8 @@
        {
         "columnName": "サービスコード",
         "dataName": "selfInfoServiceCode",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 130,
         "visible": true,
         "cellType": 0,
@@ -6702,6 +6914,8 @@
        {
         "columnName": "単位",
         "dataName": "selfInfoUnit",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 70,
         "visible": true,
         "cellType": 0,
@@ -6714,6 +6928,8 @@
        {
         "columnName": "日数",
         "dataName": "selfInfoDateNum",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 70,
         "visible": true,
         "cellType": 0,
@@ -6726,6 +6942,8 @@
        {
         "columnName": "給付対象日数",
         "dataName": "selfInfoKyufuDateNum",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 120,
         "visible": true,
         "cellType": 0,
@@ -6738,6 +6956,8 @@
        {
         "columnName": "給付対象外日数",
         "dataName": "selfInfoKyufugaiDateNum",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 0,
         "visible": false,
         "cellType": 0,
@@ -6750,6 +6970,8 @@
        {
         "columnName": "単位単価",
         "dataName": "selfInfoUnitTanka",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 100,
         "visible": true,
         "cellType": 0,
@@ -6762,6 +6984,8 @@
        {
         "columnName": "給付率",
         "dataName": "selfInfoKyufuRitsu",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 80,
         "visible": true,
         "cellType": 0,
@@ -6774,6 +6998,8 @@
        {
         "columnName": "区分限度内単位",
         "dataName": "selfInfoKubunLimitNaiUnit",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 130,
         "visible": true,
         "cellType": 0,
@@ -6786,6 +7012,8 @@
        {
         "columnName": "費用総額",
         "dataName": "selfInfoHiyoTotal",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 100,
         "visible": true,
         "cellType": 0,
@@ -6798,6 +7026,8 @@
        {
         "columnName": "保険給付額",
         "dataName": "selfInfoHokenKyufuGaku",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 100,
         "visible": true,
         "cellType": 0,
@@ -6810,6 +7040,8 @@
        {
         "columnName": "利用者負担（保険対象分）",
         "dataName": "selfInfoHokenFutan",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 200,
         "visible": true,
         "cellType": 0,
@@ -6822,6 +7054,8 @@
        {
         "columnName": "給付対象外単位",
         "dataName": "selfInfoKyufuTaishogaiUnit",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 130,
         "visible": true,
         "cellType": 0,
@@ -6834,6 +7068,8 @@
        {
         "columnName": "利用者負担（全額対象分）",
         "dataName": "selfInfoFutanTotal",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 200,
         "visible": true,
         "cellType": 0,
@@ -7648,7 +7884,7 @@
       }
      ],
      "hiddenInput": [],
-     "onOpen": "onOpenDataLoad",
+     "onOpen": "",
      "onClose": "",
      "session": {},
      "marginTop": "XS",
@@ -7658,7 +7894,8 @@
      "eraseBorderRight": false,
      "eraseBorderLeft": false,
      "backgroundColor": 0,
-     "widthAuto": false
+     "widthAuto": false,
+     "isGroupBox": false
     }
    ],
    "controlType": "Panel",
@@ -7705,7 +7942,8 @@
    "eraseBorderRight": false,
    "eraseBorderLeft": false,
    "backgroundColor": 0,
-   "widthAuto": true
+   "widthAuto": true,
+   "isGroupBox": false
   },
   {
    "fieldName": "KyotsuPanel",
@@ -7729,7 +7967,9 @@
      "marginRight": "XS",
      "text": "検索画面に戻る",
      "onClick": "onClick_ToSearchPanel",
-     "imageFileUrl": ""
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
     }
    ],
    "controlType": "Panel",
@@ -7767,7 +8007,8 @@
    "eraseBorderRight": true,
    "eraseBorderLeft": true,
    "backgroundColor": 0,
-   "widthAuto": true
+   "widthAuto": true,
+   "isGroupBox": false
   }
  ],
  "controlType": null,
@@ -7822,12 +8063,12 @@
      "transition": ""
     },
     {
-     "fieldName": "btnDlgTankiNyusho",
+     "fieldName": "btnDlgHomonTsusho",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnDlgHomonTsusho",
+     "fieldName": "btnDlgTankiNyusho",
      "event": "onClick",
      "transition": ""
     }
@@ -7894,14 +8135,14 @@
      "transition": "自己_居宅サービス"
     },
     {
-     "fieldName": "btnDlgTankiNyusho",
-     "event": "onClick",
-     "transition": "自己_短期入所"
-    },
-    {
      "fieldName": "btnDlgHomonTsusho",
      "event": "onClick",
      "transition": "自己_訪問通所"
+    },
+    {
+     "fieldName": "btnDlgTankiNyusho",
+     "event": "onClick",
+     "transition": "自己_短期入所"
     }
    ]
   },
@@ -7963,17 +8204,17 @@
     {
      "fieldName": "btnDlgKyotakuService",
      "event": "onClick",
-     "transition": "自己_居宅サービス"
-    },
-    {
-     "fieldName": "btnDlgTankiNyusho",
-     "event": "onClick",
-     "transition": "自己_短期入所"
+     "transition": ""
     },
     {
      "fieldName": "btnDlgHomonTsusho",
      "event": "onClick",
-     "transition": "自己_訪問通所"
+     "transition": ""
+    },
+    {
+     "fieldName": "btnDlgTankiNyusho",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
@@ -8035,17 +8276,17 @@
     {
      "fieldName": "btnDlgKyotakuService",
      "event": "onClick",
-     "transition": "自己_居宅サービス"
-    },
-    {
-     "fieldName": "btnDlgTankiNyusho",
-     "event": "onClick",
-     "transition": "自己_短期入所"
+     "transition": ""
     },
     {
      "fieldName": "btnDlgHomonTsusho",
      "event": "onClick",
-     "transition": "自己_訪問通所"
+     "transition": ""
+    },
+    {
+     "fieldName": "btnDlgTankiNyusho",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
@@ -8103,17 +8344,17 @@
     {
      "fieldName": "btnDlgKyotakuService",
      "event": "onClick",
-     "transition": "自己_居宅サービス"
-    },
-    {
-     "fieldName": "btnDlgTankiNyusho",
-     "event": "onClick",
-     "transition": "自己_短期入所"
+     "transition": ""
     },
     {
      "fieldName": "btnDlgHomonTsusho",
      "event": "onClick",
-     "transition": "自己_訪問通所"
+     "transition": ""
+    },
+    {
+     "fieldName": "btnDlgTankiNyusho",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   }
@@ -8164,5 +8405,7 @@
   [
    "KyotsuPanel"
   ]
- ]
+ ],
+ "panelMargin": 1,
+ "controlMargin": 1
 }
