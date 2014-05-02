@@ -6,7 +6,9 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.KaigoNinteiKekkaDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * tabShinsaKekka のクラスファイル 
@@ -22,6 +24,8 @@ public class tabShinsaKekkaDiv extends TabPanel {
      */
     @JsonProperty("NinteiKekkaNyuryoku")
     private KaigoNinteiKekkaDiv NinteiKekkaNyuryoku;
+    @JsonProperty("btnUpdate")
+    private Button btnUpdate;
     @JsonProperty("ZenkaiNinteiKekka")
     private KaigoNinteiKekkaDiv ZenkaiNinteiKekka;
     @JsonProperty("ZenZenkaiNinteiKekka")
@@ -41,6 +45,16 @@ public class tabShinsaKekkaDiv extends TabPanel {
     @JsonProperty("NinteiKekkaNyuryoku")
     public void setNinteiKekkaNyuryoku(KaigoNinteiKekkaDiv NinteiKekkaNyuryoku) {
         this.NinteiKekkaNyuryoku=NinteiKekkaNyuryoku;
+    }
+
+    @JsonProperty("btnUpdate")
+    public Button getBtnUpdate() {
+        return btnUpdate;
+    }
+
+    @JsonProperty("btnUpdate")
+    public void setBtnUpdate(Button btnUpdate) {
+        this.btnUpdate=btnUpdate;
     }
 
     @JsonProperty("ZenkaiNinteiKekka")

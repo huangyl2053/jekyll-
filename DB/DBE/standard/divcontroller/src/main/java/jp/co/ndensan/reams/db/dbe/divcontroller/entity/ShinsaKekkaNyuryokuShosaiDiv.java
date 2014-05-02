@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NinteiChosaKekkaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShinsaTaishoshaShosaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.tabChosaKekkaDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -29,6 +30,8 @@ public class ShinsaKekkaNyuryokuShosaiDiv extends Panel {
     private Button btnBackIchiran;
     @JsonProperty("tabChosaKekka")
     private tabChosaKekkaDiv tabChosaKekka;
+    @JsonProperty("NinteiChosaKekka")
+    private NinteiChosaKekkaDiv NinteiChosaKekka;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -64,6 +67,16 @@ public class ShinsaKekkaNyuryokuShosaiDiv extends Panel {
     @JsonProperty("tabChosaKekka")
     public void setTabChosaKekka(tabChosaKekkaDiv tabChosaKekka) {
         this.tabChosaKekka=tabChosaKekka;
+    }
+
+    @JsonProperty("NinteiChosaKekka")
+    public NinteiChosaKekkaDiv getNinteiChosaKekka() {
+        return NinteiChosaKekka;
+    }
+
+    @JsonProperty("NinteiChosaKekka")
+    public void setNinteiChosaKekka(NinteiChosaKekkaDiv NinteiChosaKekka) {
+        this.NinteiChosaKekka=NinteiChosaKekka;
     }
 
 }

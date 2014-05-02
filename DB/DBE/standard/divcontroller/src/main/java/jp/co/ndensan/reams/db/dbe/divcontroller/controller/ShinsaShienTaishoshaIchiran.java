@@ -23,31 +23,39 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
  */
 public class ShinsaShienTaishoshaIchiran {
 
+    /**
+     * 審査会支援、審査会審査対象者一覧画面ロード時の動作を表します。
+     *
+     * @param div 審査会審査対象者一覧Div
+     * @param shinsaKekkaDiv 審査結果入力Div
+     * @return ResponseData
+     */
     public ResponseData onLoadData(ShinsaShienTaishoshaIchiranDiv div, KaniShinsakaiKaisaiKekkaDiv shinsaKekkaDiv) {
         ResponseData<ShinsaShienTaishoshaIchiranDiv> response = new ResponseData<>();
 
         div.getDgShinsaTaishoshaIchiran1().setDataSource(createRowTaishoIchiran1TestData());
-//        div.getTxtShinsaJissibi().setValue(RDate.getNowDate().toDateString());
-//        div.getTxtStartTime().setValue(RTime.now());
-//        div.getTxtShinsaJissiShuryobi().setValue(RString.EMPTY);
-//        div.getTxtEndTime().setValue(null);
-//        div.getTxtShinsaJissiShuryobi().setDisabled(true);
-//        div.getTxtEndTime().setDisabled(true);
         response.data = div;
         return response;
     }
 
+    /**
+     * 審査会終了ボタンクリック時の動作を表します。
+     *
+     * @param taishoshaDiv 審査会審査対象者一覧Div
+     * @param shinsakaiDiv 審査結果入力Div
+     * @return ResponseData
+     */
     public ResponseData btnShinsaKekkaNyuryokuEndClick(ShinsaShienTaishoshaIchiranDiv taishoshaDiv,
             KaniShinsakaiKaisaiKekkaDiv shinsakaiDiv) {
 
-        ResponseData<ShinsaShienTaishoshaIchiranDiv> response = new ResponseData<>();
+        ResponseData<KaniShinsakaiKaisaiKekkaDiv> response = new ResponseData<>();
 
         shinsakaiDiv.getTxtShinsaJissiShuryobi().setValue(FlexibleDate.getNowDate());
         shinsakaiDiv.getTxtShinsaJissiShuryobi().setDisabled(false);
         shinsakaiDiv.getTxtEndTime().setValue(RTime.now());
         shinsakaiDiv.getTxtEndTime().setDisabled(false);
 
-        response.data = taishoshaDiv;
+        response.data = shinsakaiDiv;
         return response;
 
     }
@@ -56,13 +64,13 @@ public class ShinsaShienTaishoshaIchiran {
         List<dgShinsaTaishoshaIchiran1_Row> arrayData = new ArrayList<>();
         dgShinsaTaishoshaIchiran1_Row item;
 
-        item = createRowTaishosha1Data("更新", "在宅", "介２", "介２", "介２", "　", "24", " ");
+        item = createRowTaishosha1Data("更新", "在宅", "要介護２", "要介護２", "要介護２", "", "２４", "");
         arrayData.add(item);
-        item = createRowTaishosha1Data("新規", "　", "　", "　", "支２", "　", "　", "　");
+        item = createRowTaishosha1Data("新規", "在宅", "", "", "要支援２", "", "", "");
         arrayData.add(item);
-        item = createRowTaishosha1Data("変更", "在宅", "非", "支１", "支１", "　", "12", "　");
+        item = createRowTaishosha1Data("変更", "在宅", "非該当", "要支援１", "要支援１", "", "１２", "");
         arrayData.add(item);
-        item = createRowTaishosha1Data("変更", "介３", "介３", "介３", "　", "　", "24", "　");
+        item = createRowTaishosha1Data("変更", "施設", "要介護３", "要介護３", "要介護３", "", "２４", "");
         arrayData.add(item);
 
         return arrayData;

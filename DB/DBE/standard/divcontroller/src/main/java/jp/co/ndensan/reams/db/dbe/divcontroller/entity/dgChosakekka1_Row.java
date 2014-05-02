@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Apr 28 16:18:12 JST 2014 
+ * Fri May 02 17:05:57 JST 2014 
  */
 
 
@@ -26,23 +26,26 @@ public class dgChosakekka1_Row extends DataRow {
     private RString 群;
     private RString 内容;
     private RString 結果;
+    private RString 選択肢;
 
     public dgChosakekka1_Row() {
         super();
     }
 
-    public dgChosakekka1_Row(Button 編集, RString チェック, RString 群, RString 内容, RString 結果) {
+    public dgChosakekka1_Row(Button 編集, RString チェック, RString 群, RString 内容, RString 結果, RString 選択肢) {
         super();
         this.setOriginalData("編集", 編集);
         this.setOriginalData("チェック", チェック);
         this.setOriginalData("群", 群);
         this.setOriginalData("内容", 内容);
         this.setOriginalData("結果", 結果);
+        this.setOriginalData("選択肢", 選択肢);
         this.編集 = 編集;
         this.チェック = チェック;
         this.群 = 群;
         this.内容 = 内容;
         this.結果 = 結果;
+        this.選択肢 = 選択肢;
     }
 
     public Button get編集() {
@@ -63,6 +66,10 @@ public class dgChosakekka1_Row extends DataRow {
 
     public RString get結果() {
         return 結果;
+    }
+
+    public RString get選択肢() {
+        return 選択肢;
     }
 
     public void set編集(Button 編集) {
@@ -88,6 +95,11 @@ public class dgChosakekka1_Row extends DataRow {
     public void set結果(RString 結果) {
         this.setOriginalData("結果", 結果);
         this.結果 = 結果;
+    }
+
+    public void set選択肢(RString 選択肢) {
+        this.setOriginalData("選択肢", 選択肢);
+        this.選択肢 = 選択肢;
     }
 
 }

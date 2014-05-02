@@ -118,6 +118,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "align": 0,
      "text": "■開始年月日時分",
      "isPrivateInfo": false
@@ -139,6 +140,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "align": 2,
      "text": "開始日",
      "isPrivateInfo": false
@@ -160,9 +162,9 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "text": "",
      "isPrivateInfo": false,
-     "required": false,
      "maxLength": 1000000000000,
      "minLength": 0,
      "textAlign": 0,
@@ -170,6 +172,7 @@
      "placeHolder": "平26.04.24",
      "textKind": 0,
      "isPassword": false,
+     "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
@@ -203,6 +206,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "align": 2,
      "text": "開始時間",
      "isPrivateInfo": false
@@ -224,9 +228,9 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "text": "",
      "isPrivateInfo": false,
-     "required": false,
      "maxLength": 1000000000000,
      "minLength": 0,
      "textAlign": 0,
@@ -234,6 +238,7 @@
      "placeHolder": "",
      "textKind": 0,
      "isPassword": false,
+     "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
@@ -267,6 +272,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "align": 2,
      "text": "終了日",
      "isPrivateInfo": false
@@ -288,9 +294,9 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "text": "",
      "isPrivateInfo": false,
-     "required": false,
      "maxLength": 1000000000000,
      "minLength": 0,
      "textAlign": 0,
@@ -298,6 +304,7 @@
      "placeHolder": "",
      "textKind": 0,
      "isPassword": false,
+     "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
@@ -331,6 +338,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "align": 2,
      "text": "終了時間",
      "isPrivateInfo": false
@@ -352,9 +360,9 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "text": "",
      "isPrivateInfo": false,
-     "required": false,
      "maxLength": 1000000000000,
      "minLength": 0,
      "textAlign": 0,
@@ -362,6 +370,7 @@
      "placeHolder": "",
      "textKind": 0,
      "isPassword": false,
+     "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
@@ -397,7 +406,9 @@
      "marginRight": "XS",
      "text": "開催結果登録",
      "onClick": "",
-     "imageFileUrl": ""
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
     },
     {
      "fieldName": "btnShinsaStart",
@@ -417,8 +428,10 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "text": "審査開始",
-     "onClick": "",
-     "imageFileUrl": ""
+     "onClick": "onClickStartBtn",
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
     },
     {
      "fieldName": "btnCancel",
@@ -439,7 +452,9 @@
      "marginRight": "XS",
      "text": "キャンセル",
      "onClick": "",
-     "imageFileUrl": ""
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
     }
    ],
    "controlType": "Panel",
@@ -473,6 +488,14 @@
     {
      "eventName": "btnShinsaKekkaNyuryokuEndClick",
      "requestUrl": "dbe/db/dbe/ShinsaShienTaishoshaIchiran/btnShinsaKekkaNyuryokuEndClick"
+    },
+    {
+     "eventName": "onClickStartBtn",
+     "requestUrl": "dbe/db/dbe/KaniShinsakaiKaisaiKekka/onClickStartBtn"
+    },
+    {
+     "eventName": "btnShinsaKekkaNyuryokuEndClick",
+     "requestUrl": "dbe/db/dbe/ShinsaShienTaishoshaIchiran/btnShinsaKekkaNyuryokuEndClick"
     }
    ],
    "hiddenInput": [],
@@ -486,7 +509,8 @@
    "eraseBorderRight": false,
    "eraseBorderLeft": false,
    "backgroundColor": 0,
-   "widthAuto": false
+   "widthAuto": false,
+   "isGroupBox": false
   },
   {
    "fieldName": "ShinsaShienTaishoshaIchiran",
@@ -510,7 +534,9 @@
      "marginRight": "XS",
      "text": "審査開始",
      "onClick": "btnShinsaKekkaNyuryokuStartClick",
-     "imageFileUrl": ""
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
     },
     {
      "fieldName": "btnShinsaKekkaNyuryokuEnd",
@@ -531,13 +557,15 @@
      "marginRight": "XS",
      "text": "審査終了",
      "onClick": "btnShinsaKekkaNyuryokuEndClick",
-     "imageFileUrl": ""
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
     },
     {
      "fieldName": "dgShinsaTaishoshaIchiran1",
      "items": [],
      "controlType": "DataGrid",
-     "width": "485",
+     "width": "555",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -555,15 +583,20 @@
       "isMultiSelectable": false,
       "isShowFooter": true,
       "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": false,
       "header": {
        "combineColumns": [],
-       "frozenColumn": ""
+       "frozenColumn": "",
+       "headerHeight": 1
       },
       "columns": [
        {
-        "columnName": "申請",
+        "columnName": "申請<br>区分",
         "dataName": "申請",
-        "width": 50,
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 60,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -577,7 +610,9 @@
        {
         "columnName": "状況",
         "dataName": "状況",
-        "width": 50,
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 60,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -589,9 +624,11 @@
         "sortKey": "状況"
        },
        {
-        "columnName": "前一次",
+        "columnName": "前回<br>一次",
         "dataName": "前一次",
-        "width": 75,
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -603,9 +640,11 @@
         "sortKey": "前一次"
        },
        {
-        "columnName": "前二次",
+        "columnName": "前回<br>二次",
         "dataName": "前二次",
-        "width": 75,
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -617,9 +656,11 @@
         "sortKey": "前二次"
        },
        {
-        "columnName": "一次",
+        "columnName": "一次<br>判定",
         "dataName": "一次",
-        "width": 50,
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -631,9 +672,11 @@
         "sortKey": "一次"
        },
        {
-        "columnName": "二次",
+        "columnName": "二次<br>判定",
         "dataName": "二次",
-        "width": 50,
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -643,9 +686,11 @@
         "sortKey": "二次"
        },
        {
-        "columnName": "前期間",
+        "columnName": "前回<br>期間",
         "dataName": "前期間",
-        "width": 75,
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 50,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -655,8 +700,10 @@
         "sortKey": "前期間"
        },
        {
-        "columnName": "期間",
+        "columnName": "今回<br>期間",
         "dataName": "期間",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 50,
         "visible": true,
         "cellType": 0,
@@ -675,7 +722,7 @@
      "onNoRow": "",
      "onMultiRows": "",
      "dataSource": [],
-     "sortOrder": "申請",
+     "sortOrder": "前期間",
      "isAscending": true,
      "filterList": [],
      "clickedRowId": -1
@@ -684,7 +731,7 @@
      "fieldName": "dgShinsaTaishoshaIchiran2",
      "items": [],
      "controlType": "DataGrid",
-     "width": "485",
+     "width": "555",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -702,15 +749,20 @@
       "isMultiSelectable": false,
       "isShowFooter": true,
       "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": false,
       "header": {
        "combineColumns": [],
-       "frozenColumn": ""
+       "frozenColumn": "",
+       "headerHeight": 1
       },
       "columns": [
        {
-        "columnName": "申請",
+        "columnName": "申請<br>区分",
         "dataName": "申請",
-        "width": 50,
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 60,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -724,7 +776,9 @@
        {
         "columnName": "状況",
         "dataName": "状況",
-        "width": 50,
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 60,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -736,9 +790,11 @@
         "sortKey": "状況"
        },
        {
-        "columnName": "前一次",
+        "columnName": "前回<br>一次",
         "dataName": "前一次",
-        "width": 75,
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -750,9 +806,11 @@
         "sortKey": "前一次"
        },
        {
-        "columnName": "前二次",
+        "columnName": "前回<br>二次",
         "dataName": "前二次",
-        "width": 75,
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -764,9 +822,11 @@
         "sortKey": "前二次"
        },
        {
-        "columnName": "一次",
+        "columnName": "一次<br>判定",
         "dataName": "一次",
-        "width": 50,
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -778,9 +838,11 @@
         "sortKey": "一次"
        },
        {
-        "columnName": "二次",
+        "columnName": "二次<br>判定",
         "dataName": "二次",
-        "width": 50,
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -790,9 +852,11 @@
         "sortKey": "二次"
        },
        {
-        "columnName": "前期間",
+        "columnName": "前回<br>期間",
         "dataName": "前期間",
-        "width": 75,
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 50,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -802,8 +866,10 @@
         "sortKey": "前期間"
        },
        {
-        "columnName": "期間",
+        "columnName": "今回<br>期間",
         "dataName": "期間",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 50,
         "visible": true,
         "cellType": 0,
@@ -829,7 +895,7 @@
     }
    ],
    "controlType": "Panel",
-   "width": "1000",
+   "width": "1200",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -879,7 +945,8 @@
    "eraseBorderRight": false,
    "eraseBorderLeft": false,
    "backgroundColor": 0,
-   "widthAuto": false
+   "widthAuto": false,
+   "isGroupBox": false
   },
   {
    "fieldName": "ShinsaKekkaNyuryokuShosai",
@@ -907,9 +974,9 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "required": false,
          "text": "",
          "isPrivateInfo": false,
-         "required": false,
          "maxLength": 1000000000000,
          "minLength": 0,
          "textAlign": 0,
@@ -917,6 +984,7 @@
          "placeHolder": "",
          "textKind": 0,
          "isPassword": false,
+         "isComboBox": false,
          "onFocus": "",
          "onBlur": "",
          "onChange": "",
@@ -968,9 +1036,9 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "required": false,
          "text": "",
          "isPrivateInfo": false,
-         "required": false,
          "maxLength": 1000000000000,
          "minLength": 0,
          "textAlign": 0,
@@ -978,6 +1046,7 @@
          "placeHolder": "",
          "textKind": 0,
          "isPassword": false,
+         "isComboBox": false,
          "onFocus": "",
          "onBlur": "",
          "onChange": "",
@@ -1029,9 +1098,9 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "required": false,
          "text": "",
          "isPrivateInfo": false,
-         "required": false,
          "maxLength": 1000000000000,
          "minLength": 0,
          "textAlign": 0,
@@ -1039,6 +1108,7 @@
          "placeHolder": "",
          "textKind": 0,
          "isPassword": false,
+         "isComboBox": false,
          "onFocus": "",
          "onBlur": "",
          "onChange": "",
@@ -1090,9 +1160,9 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "required": false,
          "text": "",
          "isPrivateInfo": false,
-         "required": false,
          "maxLength": 1000000000000,
          "minLength": 0,
          "textAlign": 0,
@@ -1100,6 +1170,7 @@
          "placeHolder": "",
          "textKind": 0,
          "isPassword": false,
+         "isComboBox": false,
          "onFocus": "",
          "onBlur": "",
          "onChange": "",
@@ -1153,7 +1224,9 @@
          "marginRight": "XS",
          "text": "概況",
          "onClick": "",
-         "imageFileUrl": ""
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": ""
         }
        ],
        "controlType": "TableCell",
@@ -1194,7 +1267,9 @@
          "marginRight": "XS",
          "text": "自立",
          "onClick": "",
-         "imageFileUrl": ""
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": ""
         }
        ],
        "controlType": "TableCell",
@@ -1235,7 +1310,9 @@
          "marginRight": "XS",
          "text": "自立",
          "onClick": "",
-         "imageFileUrl": ""
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": ""
         }
        ],
        "controlType": "TableCell",
@@ -1274,9 +1351,9 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "required": false,
          "text": "",
          "isPrivateInfo": false,
-         "required": false,
          "maxLength": 1000000000000,
          "minLength": 0,
          "textAlign": 0,
@@ -1284,6 +1361,7 @@
          "placeHolder": "",
          "textKind": 0,
          "isPassword": false,
+         "isComboBox": false,
          "onFocus": "",
          "onBlur": "",
          "onChange": "",
@@ -1335,9 +1413,9 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "required": false,
          "text": "",
          "isPrivateInfo": false,
-         "required": false,
          "maxLength": 1000000000000,
          "minLength": 0,
          "textAlign": 0,
@@ -1345,6 +1423,7 @@
          "placeHolder": "",
          "textKind": 0,
          "isPassword": false,
+         "isComboBox": false,
          "onFocus": "",
          "onBlur": "",
          "onChange": "",
@@ -1398,7 +1477,9 @@
          "marginRight": "XS",
          "text": "一次判定",
          "onClick": "",
-         "imageFileUrl": ""
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": ""
         }
        ],
        "controlType": "TableCell",
@@ -1437,9 +1518,9 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "required": false,
          "text": "",
          "isPrivateInfo": false,
-         "required": false,
          "maxLength": 1000000000000,
          "minLength": 0,
          "textAlign": 0,
@@ -1447,6 +1528,7 @@
          "placeHolder": "",
          "textKind": 0,
          "isPassword": false,
+         "isComboBox": false,
          "onFocus": "",
          "onBlur": "",
          "onChange": "",
@@ -1514,7 +1596,9 @@
      "marginRight": "XS",
      "text": "一覧に戻る",
      "onClick": "",
-     "imageFileUrl": ""
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
     },
     {
      "fieldName": "tabChosaKekka",
@@ -1526,7 +1610,7 @@
          "fieldName": "dgChosakekka1",
          "items": [],
          "controlType": "DataGrid",
-         "width": "310",
+         "width": "370",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1544,24 +1628,31 @@
           "isMultiSelectable": false,
           "isShowFooter": true,
           "isShowFilter": false,
+          "isShowFilterButton": false,
+          "isShowRowState": false,
           "header": {
            "combineColumns": [],
-           "frozenColumn": ""
+           "frozenColumn": "",
+           "headerHeight": 0
           },
           "columns": [
            {
-            "columnName": "編",
+            "columnName": "編集",
             "dataName": "編集",
-            "width": 30,
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 60,
             "visible": true,
             "cellType": 8,
             "cellDetails": {
              "cellType": 8,
-             "text": "...",
-             "onClick": "",
-             "imageFileUrl": "/uz/uza/css/Link.jpg"
+             "text": "□",
+             "onClick": "onClickChosaKekka",
+             "imageFileUrl": "",
+             "imageWidth": "",
+             "imageHeight": ""
             },
-            "align": 0,
+            "align": 1,
             "resize": true,
             "isPrivateInfo": false,
             "sortKey": "編集"
@@ -1569,7 +1660,9 @@
            {
             "columnName": "",
             "dataName": "チェック",
-            "width": 40,
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 30,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -1583,6 +1676,8 @@
            {
             "columnName": "群",
             "dataName": "群",
+            "toolTip": "",
+            "bgColor": 0,
             "width": 50,
             "visible": true,
             "cellType": 0,
@@ -1597,6 +1692,8 @@
            {
             "columnName": "内容",
             "dataName": "内容",
+            "toolTip": "",
+            "bgColor": 0,
             "width": 100,
             "visible": true,
             "cellType": 0,
@@ -1611,7 +1708,9 @@
            {
             "columnName": "結果",
             "dataName": "結果",
-            "width": 100,
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 120,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -1621,6 +1720,20 @@
             "resize": true,
             "isPrivateInfo": false,
             "sortKey": "結果"
+           },
+           {
+            "columnName": "選択肢",
+            "dataName": "選択肢",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 10,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 0,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "選択肢"
            }
           ]
          },
@@ -1631,7 +1744,7 @@
          "onNoRow": "",
          "onMultiRows": "",
          "dataSource": [],
-         "sortOrder": "defaultDataName0",
+         "sortOrder": "内容",
          "isAscending": true,
          "filterList": [],
          "clickedRowId": -1
@@ -1640,7 +1753,7 @@
          "fieldName": "dgChosakekka2",
          "items": [],
          "controlType": "DataGrid",
-         "width": "310",
+         "width": "370",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1658,24 +1771,31 @@
           "isMultiSelectable": false,
           "isShowFooter": true,
           "isShowFilter": false,
+          "isShowFilterButton": false,
+          "isShowRowState": false,
           "header": {
            "combineColumns": [],
-           "frozenColumn": ""
+           "frozenColumn": "",
+           "headerHeight": 0
           },
           "columns": [
            {
-            "columnName": "編",
+            "columnName": "編集",
             "dataName": "編集",
-            "width": 30,
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 60,
             "visible": true,
             "cellType": 8,
             "cellDetails": {
              "cellType": 8,
-             "text": "...",
+             "text": "□",
              "onClick": "",
-             "imageFileUrl": "/uz/uza/css/Link.jpg"
+             "imageFileUrl": "",
+             "imageWidth": "",
+             "imageHeight": ""
             },
-            "align": 0,
+            "align": 1,
             "resize": false,
             "isPrivateInfo": false,
             "sortKey": "編集"
@@ -1683,7 +1803,9 @@
            {
             "columnName": "",
             "dataName": "チェック",
-            "width": 40,
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 30,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -1697,6 +1819,8 @@
            {
             "columnName": "群",
             "dataName": "群",
+            "toolTip": "",
+            "bgColor": 0,
             "width": 50,
             "visible": true,
             "cellType": 0,
@@ -1711,6 +1835,8 @@
            {
             "columnName": "内容",
             "dataName": "内容",
+            "toolTip": "",
+            "bgColor": 0,
             "width": 100,
             "visible": true,
             "cellType": 0,
@@ -1725,7 +1851,9 @@
            {
             "columnName": "結果",
             "dataName": "結果",
-            "width": 100,
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 120,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -1735,6 +1863,20 @@
             "resize": true,
             "isPrivateInfo": false,
             "sortKey": "結果"
+           },
+           {
+            "columnName": "選択肢",
+            "dataName": "選択肢",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 10,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 0,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "選択肢"
            }
           ]
          },
@@ -1745,7 +1887,7 @@
          "onNoRow": "",
          "onMultiRows": "",
          "dataSource": [],
-         "sortOrder": "defaultDataName0",
+         "sortOrder": "内容",
          "isAscending": true,
          "filterList": [],
          "clickedRowId": -1
@@ -1754,7 +1896,7 @@
          "fieldName": "dgChosakekka3",
          "items": [],
          "controlType": "DataGrid",
-         "width": "310",
+         "width": "370",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1772,24 +1914,31 @@
           "isMultiSelectable": false,
           "isShowFooter": true,
           "isShowFilter": false,
+          "isShowFilterButton": false,
+          "isShowRowState": false,
           "header": {
            "combineColumns": [],
-           "frozenColumn": ""
+           "frozenColumn": "",
+           "headerHeight": 0
           },
           "columns": [
            {
-            "columnName": "編",
+            "columnName": "編集",
             "dataName": "編集",
-            "width": 30,
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 60,
             "visible": true,
             "cellType": 8,
             "cellDetails": {
              "cellType": 8,
-             "text": "...",
+             "text": "□",
              "onClick": "",
-             "imageFileUrl": "/uz/uza/css/Link.jpg"
+             "imageFileUrl": "",
+             "imageWidth": "",
+             "imageHeight": ""
             },
-            "align": 0,
+            "align": 1,
             "resize": true,
             "isPrivateInfo": false,
             "sortKey": "編集"
@@ -1797,7 +1946,9 @@
            {
             "columnName": "",
             "dataName": "チェック",
-            "width": 40,
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 30,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -1811,6 +1962,8 @@
            {
             "columnName": "群",
             "dataName": "群",
+            "toolTip": "",
+            "bgColor": 0,
             "width": 50,
             "visible": true,
             "cellType": 0,
@@ -1825,6 +1978,8 @@
            {
             "columnName": "内容",
             "dataName": "内容",
+            "toolTip": "",
+            "bgColor": 0,
             "width": 100,
             "visible": true,
             "cellType": 0,
@@ -1839,7 +1994,9 @@
            {
             "columnName": "結果",
             "dataName": "結果",
-            "width": 100,
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 120,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -1849,6 +2006,20 @@
             "resize": true,
             "isPrivateInfo": false,
             "sortKey": "結果"
+           },
+           {
+            "columnName": "選択肢",
+            "dataName": "選択肢",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 10,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 0,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "選択肢"
            }
           ]
          },
@@ -1883,7 +2054,9 @@
          "marginRight": "XS",
          "text": "一次判定",
          "onClick": "",
-         "imageFileUrl": ""
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": ""
         }
        ],
        "controlType": "TabPanel",
@@ -1936,6 +2109,7 @@
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "required": false,
              "align": 2,
              "text": "特記事項タイトル01",
              "isPrivateInfo": false
@@ -1977,6 +2151,7 @@
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "required": false,
              "align": 2,
              "text": "特記事項タイトル02",
              "isPrivateInfo": false
@@ -2018,6 +2193,7 @@
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "required": false,
              "align": 2,
              "text": "特記事項タイトル03",
              "isPrivateInfo": false
@@ -2060,9 +2236,9 @@
              "marginLeft": "XS",
              "marginRight": "XS",
              "height": "S",
+             "required": false,
              "text": "",
              "isPrivateInfo": false,
-             "required": false,
              "maxLength": 1.7976931348623157e+308,
              "minLength": 0,
              "readOnly": true,
@@ -2120,9 +2296,9 @@
              "marginLeft": "XS",
              "marginRight": "XS",
              "height": "S",
+             "required": false,
              "text": "",
              "isPrivateInfo": false,
-             "required": false,
              "maxLength": 1.7976931348623157e+308,
              "minLength": 0,
              "readOnly": true,
@@ -2180,9 +2356,9 @@
              "marginLeft": "XS",
              "marginRight": "XS",
              "height": "S",
+             "required": false,
              "text": "",
              "isPrivateInfo": false,
-             "required": false,
              "maxLength": 1.7976931348623157e+308,
              "minLength": 0,
              "readOnly": true,
@@ -2330,9 +2506,9 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "src": "",
-         "imageWidth": "800",
-         "imageHeight": "600"
+         "imageWidth": "1000",
+         "imageHeight": "600",
+         "src": ""
         }
        ],
        "controlType": "TabPanel",
@@ -2379,7 +2555,33 @@
          "controlName": "KaigoNinteiKekka",
          "dataPassingForDialog": [],
          "dialogOkEventNameForDialog": "",
-         "dialogCancelEventNameForDialog": ""
+         "dialogCancelEventNameForDialog": "",
+         "selectDdlNijiHantei": "ddlNijiHanteiSelect",
+         "selectDdlNinteiYukoTsukisu": "ddlNinteiYukoTsukisuSelect",
+         "selectDdlNinteiKubun": "ddlNinteiKubunSelect"
+        },
+        {
+         "fieldName": "btnUpdate",
+         "items": [],
+         "controlType": "Button",
+         "width": "S",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": true,
+         "dependencies": [],
+         "float": 2,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "text": "編集内容を登録する",
+         "onClick": "",
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": ""
         },
         {
          "fieldName": "ZenkaiNinteiKekka",
@@ -2405,7 +2607,10 @@
          "controlName": "KaigoNinteiKekka",
          "dataPassingForDialog": [],
          "dialogOkEventNameForDialog": "",
-         "dialogCancelEventNameForDialog": ""
+         "dialogCancelEventNameForDialog": "",
+         "selectDdlNijiHantei": "",
+         "selectDdlNinteiYukoTsukisu": "",
+         "selectDdlNinteiKubun": "ddlNinteiKubunSelect"
         },
         {
          "fieldName": "ZenZenkaiNinteiKekka",
@@ -2431,7 +2636,10 @@
          "controlName": "KaigoNinteiKekka",
          "dataPassingForDialog": [],
          "dialogOkEventNameForDialog": "",
-         "dialogCancelEventNameForDialog": ""
+         "dialogCancelEventNameForDialog": "",
+         "selectDdlNijiHantei": "",
+         "selectDdlNinteiYukoTsukisu": "",
+         "selectDdlNinteiKubun": "ddlNinteiKubunSelect"
         }
        ],
        "controlType": "TabPanel",
@@ -2476,10 +2684,135 @@
      ],
      "isDraggable": false,
      "selectedItemFieldName": "tabChosaKekkaShosai"
+    },
+    {
+     "fieldName": "NinteiChosaKekka",
+     "items": [
+      {
+       "fieldName": "rbSelectKekke",
+       "items": [],
+       "controlType": "RadioButton",
+       "width": "600",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "dataSource": [
+        {
+         "key": "key0",
+         "value": "できる"
+        },
+        {
+         "key": "key1",
+         "value": "つかまればできる"
+        },
+        {
+         "key": "key2",
+         "value": "できない"
+        }
+       ],
+       "required": false,
+       "onChange": "",
+       "labelLText": "",
+       "labelLWidth": "S",
+       "labelLAlign": 2,
+       "onClick": "",
+       "selectedItem": "",
+       "newLineItemNumber": 6,
+       "spaceSize": 1
+      },
+      {
+       "fieldName": "btnKekkaUpdate",
+       "items": [],
+       "controlType": "Button",
+       "width": "S",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "text": "登録する",
+       "onClick": "",
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": ""
+      },
+      {
+       "fieldName": "btnModoru",
+       "items": [],
+       "controlType": "Button",
+       "width": "S",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "text": "キャンセル",
+       "onClick": "",
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": ""
+      }
+     ],
+     "controlType": "Panel",
+     "width": "900",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "onLoad": "onLoadNintiChosaKekka",
+     "title": "認定調査結果",
+     "isOpen": true,
+     "canOpenAndClose": true,
+     "postParameterPanelNames": [],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
+     "backgroundColor": 0,
+     "widthAuto": false,
+     "isGroupBox": false
     }
    ],
    "controlType": "Panel",
-   "width": "1000",
+   "width": "1200",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -2508,6 +2841,26 @@
     {
      "eventName": "onLoad",
      "requestUrl": "dbe/db/dbe/ShinsaKekkaNyuryokuShosai/onLoadData"
+    },
+    {
+     "eventName": "ddlNijiHanteiSelect",
+     "requestUrl": "dbe/db/dbe/ShinsaKekkaNyuryokuShosai/selectDdlNijiHanteiKekka"
+    },
+    {
+     "eventName": "ddlNinteiYukoTsukisuSelect",
+     "requestUrl": "dbe/db/dbe/ShinsaKekkaNyuryokuShosai/ddlNinteiYukoTsukisuSelect"
+    },
+    {
+     "eventName": "ddlNinteiKubunSelect",
+     "requestUrl": "dbe/db/dbe/ShinsaKekkaNyuryokuShosai/ddlNinteiKubunSelect"
+    },
+    {
+     "eventName": "onClickChosaKekka",
+     "requestUrl": "dbe/db/dbe/ShinsaKekkaNyuryokuShosai/onClickChosaKekka"
+    },
+    {
+     "eventName": "onSelectChosaKekka",
+     "requestUrl": "dbe/db/dbe/ShinsaKekkaNyuryokuShosai/onClickChosaKekka"
     }
    ],
    "hiddenInput": [],
@@ -2521,7 +2874,8 @@
    "eraseBorderRight": false,
    "eraseBorderLeft": false,
    "backgroundColor": 0,
-   "widthAuto": false
+   "widthAuto": false,
+   "isGroupBox": false
   }
  ],
  "controlType": null,
@@ -2574,6 +2928,26 @@
      "fieldName": "btnBackIchiran",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "dgChosakekka1[編集]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnKekkaUpdate",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnModoru",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgChosakekka1",
+     "event": "onSelect",
+     "transition": ""
     }
    ]
   },
@@ -2607,6 +2981,26 @@
     {
      "fieldName": "btnBackIchiran",
      "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgChosakekka1[編集]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnKekkaUpdate",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnModoru",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgChosakekka1",
+     "event": "onSelect",
      "transition": ""
     }
    ]
@@ -2654,6 +3048,84 @@
      "fieldName": "btnBackIchiran",
      "event": "onClick",
      "transition": "対象一覧表示"
+    },
+    {
+     "fieldName": "dgChosakekka1[編集]",
+     "event": "onClick",
+     "transition": "調査結果入力"
+    },
+    {
+     "fieldName": "btnKekkaUpdate",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnModoru",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgChosakekka1",
+     "event": "onSelect",
+     "transition": "調査結果入力"
+    }
+   ]
+  },
+  {
+   "order": "4",
+   "stateName": "調査結果入力",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "NinteiChosaKekka",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "ShinsaKekkaNyuryokuShosai",
+     "panelState": "visible"
+    }
+   ],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnShinsaStart",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnShinsaKekkaNyuryokuEnd",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnShinsaKekkaNyuryokuStart",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnBackIchiran",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgChosakekka1[編集]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnKekkaUpdate",
+     "event": "onClick",
+     "transition": "審査結果入力"
+    },
+    {
+     "fieldName": "btnModoru",
+     "event": "onClick",
+     "transition": "審査結果入力"
+    },
+    {
+     "fieldName": "dgChosakekka1",
+     "event": "onSelect",
+     "transition": ""
     }
    ]
   }
@@ -2667,6 +3139,11 @@
    "KaniShinsakaiKaisaiKekka",
    "ShinsaShienTaishoshaIchiran",
    "ShinsaKekkaNyuryokuShosai"
+  ],
+  [
+   "NinteiChosaKekka"
   ]
- ]
+ ],
+ "panelMargin": 1,
+ "controlMargin": 1
 }

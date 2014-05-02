@@ -8,6 +8,48 @@ module DBE {
      */
     export class KaigoNinteiKekka_Design extends Uz.CommonChildDiv {
     
+        public get selectDdlNijiHantei() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[15]["fieldName"])["onChange"];
+        }
+        
+        public set selectDdlNijiHantei(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[15]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[15]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[15]["fieldName"])["onChange"] = value;
+            } else {
+                this.layout.items[0].items[15]["onChange"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get selectDdlNinteiYukoTsukisu() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[22]["fieldName"])["onChange"];
+        }
+        
+        public set selectDdlNinteiYukoTsukisu(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[22]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[22]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[22]["fieldName"])["onChange"] = value;
+            } else {
+                this.layout.items[0].items[22]["onChange"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get selectDdlNinteiKubun() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"])["onChange"];
+        }
+        
+        public set selectDdlNinteiKubun(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"])["onChange"] = value;
+            } else {
+                this.layout.items[0].items[7]["onChange"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, KaigoNinteiKekka_Design.myLayout, fieldName);
         }
@@ -18,6 +60,9 @@ module DBE {
          */
         public registProperty() {
             super.registProperty();
+            Uz.JSControlUtil.registProperty("selectDdlNijiHantei");
+            Uz.JSControlUtil.registProperty("selectDdlNinteiYukoTsukisu");
+            Uz.JSControlUtil.registProperty("selectDdlNinteiKubun");
         }
         
         /**
@@ -27,6 +72,9 @@ module DBE {
          */
         public getEditablePropertyInfo(): any {
             var editablePropertyInfo = super.getEditablePropertyInfo();
+            editablePropertyInfo["selectDdlNijiHantei"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[15]["fieldName"]).getEditablePropertyInfo()["onChange"];
+            editablePropertyInfo["selectDdlNinteiYukoTsukisu"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[22]["fieldName"]).getEditablePropertyInfo()["onChange"];
+            editablePropertyInfo["selectDdlNinteiKubun"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]).getEditablePropertyInfo()["onChange"];
             
             return editablePropertyInfo;
         }
@@ -261,15 +309,15 @@ module DBE {
      "text": "",
      "required": false,
      "onFocus": "",
-     "onBlur": "ddlNinteiKubunSelect",
-     "onChange": "ddlNinteiKubunSelect",
+     "onBlur": "",
+     "onChange": "",
      "labelLText": "",
      "labelRText": "",
      "labelLWidth": "S",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "selectedItem": "ddlNinteiKubunSelect",
+     "selectedItem": "",
      "dataSource": [
       {
        "key": "01",
@@ -522,7 +570,7 @@ module DBE {
      "required": true,
      "onFocus": "",
      "onBlur": "",
-     "onChange": "ddlNijiHanteiKekkaSelect",
+     "onChange": "",
      "labelLText": "",
      "labelRText": "",
      "labelLWidth": "S",
@@ -783,7 +831,7 @@ module DBE {
      "required": true,
      "onFocus": "",
      "onBlur": "",
-     "onChange": "ddlNinteiYukoTsukisuSelect",
+     "onChange": "",
      "labelLText": "",
      "labelRText": "",
      "labelLWidth": "S",
@@ -934,7 +982,23 @@ module DBE {
  "controlName": "KaigoNinteiKekka",
  "marginTop": 0,
  "marginBottom": 0,
- "originalProperty": [],
+ "originalProperty": [
+  {
+   "publicChildFieldName": "ddlNijiHanteiKekka",
+   "publicChildProperty": "onChange",
+   "newPropertyName": "selectDdlNijiHantei"
+  },
+  {
+   "publicChildFieldName": "ddlNinteiYukoTsukisu",
+   "publicChildProperty": "onChange",
+   "newPropertyName": "selectDdlNinteiYukoTsukisu"
+  },
+  {
+   "publicChildFieldName": "ddlNinteiKubun",
+   "publicChildProperty": "onChange",
+   "newPropertyName": "selectDdlNinteiKubun"
+  }
+ ],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
  "dialogCancelEventNameForDialog": ""

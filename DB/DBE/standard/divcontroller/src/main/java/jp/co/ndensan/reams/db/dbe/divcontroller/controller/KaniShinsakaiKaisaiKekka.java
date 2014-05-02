@@ -22,6 +22,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
  */
 public class KaniShinsakaiKaisaiKekka {
 
+    /**
+     * 審査会支援、簡易審査会開開催結果登録画面の編集を行います。
+     *
+     * @param div 簡易審査会開催結果Div
+     * @return ResponseData
+     */
     public ResponseData onLoadData(KaniShinsakaiKaisaiKekkaDiv div) {
         ResponseData<KaniShinsakaiKaisaiKekkaDiv> response = new ResponseData<>();
 
@@ -37,17 +43,37 @@ public class KaniShinsakaiKaisaiKekka {
         return response;
     }
 
+    /**
+     * 審査開始ボタンクリック時の動作を表します。
+     *
+     * @param div 簡易審査会開催結果Div
+     * @return ResponseData
+     */
+    public ResponseData onClickStartBtn(KaniShinsakaiKaisaiKekkaDiv div) {
+        ResponseData<KaniShinsakaiKaisaiKekkaDiv> response = new ResponseData<>();
+
+        div.getDgKaniKaisaiKekka().setDataSource(createRowKaisaiKekkaTestData());
+        div.getTxtShinsaJissiShuryobi().setValue(FlexibleDate.getNowDate());
+        div.getTxtEndTime().setValue(RTime.now());
+        div.getTxtShinsaJissiShuryobi().setDisabled(false);
+        div.getTxtEndTime().setDisabled(false);
+
+        response.data = div;
+        return response;
+
+    }
+
     private List<dgKaniKaisaiKekka_Row> createRowKaisaiKekkaTestData() {
         List<dgKaniKaisaiKekka_Row> arrayData = new ArrayList<>();
         dgKaniKaisaiKekka_Row item;
 
-        item = createRowKaisaiKekkaData(false, false, "審査員Ａ", "医師");
+        item = createRowKaisaiKekkaData(false, true, "審査員Ａ", "医師");
         arrayData.add(item);
-        item = createRowKaisaiKekkaData(false, false, "審査員Ｂ", "保健師");
+        item = createRowKaisaiKekkaData(false, true, "審査員Ｂ", "保健師");
         arrayData.add(item);
-        item = createRowKaisaiKekkaData(false, false, "審査員Ｃ", "作業療法士");
+        item = createRowKaisaiKekkaData(false, true, "審査員Ｃ", "作業療法士");
         arrayData.add(item);
-        item = createRowKaisaiKekkaData(false, false, "審査員Ｄ", "医師");
+        item = createRowKaisaiKekkaData(false, true, "審査員Ｄ", "医師");
         arrayData.add(item);
 
         return arrayData;
