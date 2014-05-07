@@ -5,7 +5,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgSofuIchiran_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.SofuIchiranDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -22,20 +22,16 @@ public class SofujohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblSofuYM")
-    private Label lblSofuYM;
     @JsonProperty("txtSofuYM")
-    private TextBoxFlexibleDate txtSofuYM;
-    @JsonProperty("lblShichosonName")
-    private Label lblShichosonName;
+    private TextBoxDate txtSofuYM;
     @JsonProperty("ddlShichosonName")
     private DropDownList ddlShichosonName;
     @JsonProperty("btnSearchSofuzumi")
     private Button btnSearchSofuzumi;
     @JsonProperty("btnSearchMisofu")
     private Button btnSearchMisofu;
-    @JsonProperty("dgSofuIchiran")
-    private DataGrid<dgSofuIchiran_Row> dgSofuIchiran;
+    @JsonProperty("SofuIchiran")
+    private SofuIchiranDiv SofuIchiran;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -43,34 +39,14 @@ public class SofujohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblSofuYM")
-    public Label getLblSofuYM() {
-        return lblSofuYM;
-    }
-
-    @JsonProperty("lblSofuYM")
-    public void setLblSofuYM(Label lblSofuYM) {
-        this.lblSofuYM=lblSofuYM;
-    }
-
     @JsonProperty("txtSofuYM")
-    public TextBoxFlexibleDate getTxtSofuYM() {
+    public TextBoxDate getTxtSofuYM() {
         return txtSofuYM;
     }
 
     @JsonProperty("txtSofuYM")
-    public void setTxtSofuYM(TextBoxFlexibleDate txtSofuYM) {
+    public void setTxtSofuYM(TextBoxDate txtSofuYM) {
         this.txtSofuYM=txtSofuYM;
-    }
-
-    @JsonProperty("lblShichosonName")
-    public Label getLblShichosonName() {
-        return lblShichosonName;
-    }
-
-    @JsonProperty("lblShichosonName")
-    public void setLblShichosonName(Label lblShichosonName) {
-        this.lblShichosonName=lblShichosonName;
     }
 
     @JsonProperty("ddlShichosonName")
@@ -103,14 +79,14 @@ public class SofujohoDiv extends Panel {
         this.btnSearchMisofu=btnSearchMisofu;
     }
 
-    @JsonProperty("dgSofuIchiran")
-    public DataGrid<dgSofuIchiran_Row> getDgSofuIchiran() {
-        return dgSofuIchiran;
+    @JsonProperty("SofuIchiran")
+    public SofuIchiranDiv getSofuIchiran() {
+        return SofuIchiran;
     }
 
-    @JsonProperty("dgSofuIchiran")
-    public void setDgSofuIchiran(DataGrid<dgSofuIchiran_Row> dgSofuIchiran) {
-        this.dgSofuIchiran=dgSofuIchiran;
+    @JsonProperty("SofuIchiran")
+    public void setSofuIchiran(SofuIchiranDiv SofuIchiran) {
+        this.SofuIchiran=SofuIchiran;
     }
 
 }

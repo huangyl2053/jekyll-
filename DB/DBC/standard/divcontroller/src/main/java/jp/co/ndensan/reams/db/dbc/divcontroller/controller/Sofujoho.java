@@ -10,12 +10,12 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.SofujohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgSofuIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.*;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * 過誤申立書送付情報照会画面です。
@@ -78,11 +78,11 @@ public class Sofujoho {
     private void set送付年月(SofujohoDiv panel, int dataType) {
         switch (dataType) {
             case 未送付:
-                panel.getTxtSofuYM().setValue(new FlexibleDate(RString.EMPTY));
+                panel.getTxtSofuYM().setValue(null);
                 break;
             case 最新:
                 //TODO 最新の情報がある年月を取得・設定する。
-                FlexibleDate recentlyYearMonth = new FlexibleDate("20140401");
+                RDate recentlyYearMonth = new RDate("201404");
                 panel.getTxtSofuYM().setValue(recentlyYearMonth);
                 break;
         }
@@ -100,12 +100,12 @@ public class Sofujoho {
                 list = get送付情報By送付年月(panel.getTxtSofuYM(), list);
                 break;
         }
-        DataGrid<dgSofuIchiran_Row> grid = panel.getDgSofuIchiran();
+        DataGrid<dgSofuIchiran_Row> grid = panel.getSofuIchiran().getDgSofuIchiran();
         grid.setDataSource(list);
     }
 
     private List<dgSofuIchiran_Row> get送付情報By送付年月(
-            TextBoxFlexibleDate 送付年月, List<dgSofuIchiran_Row> list) {
+            TextBoxDate 送付年月, List<dgSofuIchiran_Row> list) {
 
         List<dgSofuIchiran_Row> selectedList = new ArrayList<>();
         for (dgSofuIchiran_Row row : list) {
@@ -121,14 +121,14 @@ public class Sofujoho {
         List<dgSofuIchiran_Row> list = new ArrayList<>();
         dgSofuIchiran_Row row;
 
-        row = createRow("0000000001", "たいよう", "0000000001", "未送　一郎", "2",
+        row = createRow("0000000001", "たいよう", "0000000001", "未送　一郎", "1:サービス事業所等申立",
                 "21:居宅サービス介護給付費明細書(短期入所生活介護)", "02:請求誤りによる実績取り下げ",
-                "20140601", "20110407", "000003");
+                "201406", "20110407", "000003");
         list.add(row);
 
-        row = createRow("0000000001", "たいよう", "0000000002", "未送　二郎", "2",
+        row = createRow("0000000001", "たいよう", "0000000002", "未送　二郎", "2:保険者申立",
                 "21:居宅サービス介護給付費明細書(短期入所生活介護)", "02:請求誤りによる実績取り下げ",
-                "20140601", "20110407", "000003");
+                "201406", "20110407", "000003");
         list.add(row);
 
         return list;
@@ -139,25 +139,25 @@ public class Sofujoho {
         dgSofuIchiran_Row row;
 
         for (int i = 0; i < 50; i++) {
-            row = createRow("0000000001", "ひまわり", "0000000011", "最新　一郎", "2",
+            row = createRow("0000000001", "ひまわり", "0000000011", "最新　一郎", "2:保険者申立",
                     "21:居宅サービス介護給付費明細書(短期入所生活介護)", "02:請求誤りによる実績取り下げ",
-                    "20140401", "20110407", "000003");
+                    "201404", "20110407", "000003");
             list.add(row);
         }
 
-        row = createRow("0000000001", "ひまわり", "0000000012", "最新　二郎", "2",
+        row = createRow("0000000001", "ひまわり", "0000000012", "最新　二郎", "3:公費負担者申立等の区分",
                 "21:居宅サービス介護給付費明細書(短期入所生活介護)", "02:請求誤りによる実績取り下げ",
-                "20140401", "20110407", "000003");
+                "201404", "20110407", "000003");
         list.add(row);
 
-        row = createRow("0000000001", "ひまわり", "0000000013", "過去　一郎", "2",
+        row = createRow("0000000001", "ひまわり", "0000000013", "過去　一郎", "2:保険者申立",
                 "21:居宅サービス介護給付費明細書(短期入所生活介護)", "02:請求誤りによる実績取り下げ",
-                "20140201", "20110407", "000003");
+                "201402", "20110407", "000003");
         list.add(row);
 
-        row = createRow("0000000001", "ひまわり", "0000000014", "過去　二郎", "2",
+        row = createRow("0000000001", "ひまわり", "0000000014", "過去　二郎", "2:保険者申立",
                 "21:居宅サービス介護給付費明細書(短期入所生活介護)", "02:請求誤りによる実績取り下げ",
-                "20140201", "20110407", "000003");
+                "201402", "20110407", "000003");
         list.add(row);
 
         return list;
@@ -169,7 +169,7 @@ public class Sofujoho {
 
         dgSofuIchiran_Row row = new dgSofuIchiran_Row(
                 new TextBoxCode(), new TextBox(), new TextBoxCode(), new TextBox(), new TextBoxCode(),
-                new TextBox(), new TextBox(), new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), new TextBoxCode());
+                new TextBox(), new TextBox(), new TextBoxDate(), new TextBoxDate(), new TextBoxCode());
 
         row.getTxtJigyoshaNo().setValue(new RString(事業者番号));
         row.getTxtJigyoshaName().setValue(new RString(事業者名));
@@ -178,8 +178,8 @@ public class Sofujoho {
         row.getTxtMoshitateshaKubun().setValue(new RString(申立者区分));
         row.getTxtStyle().setValue(new RString(様式));
         row.getTxtMoshitateRiyu().setValue(new RString(申立理由));
-        row.getTxtServiceTeikyoYM().setValue(new FlexibleDate(サービス提供年月));
-        row.getTxtMoshitateYMD().setValue(new FlexibleDate(申立日));
+        row.getTxtServiceTeikyoYM().setValue(new RDate(サービス提供年月));
+        row.getTxtMoshitateYMD().setValue(new RDate(申立日));
         row.getTxtShokisaiHokenshaNo().setValue(new RString(証記載保険者番号));
 
         return row;

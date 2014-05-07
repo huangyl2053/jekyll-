@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Apr 21 15:58:08 JST 2014 
+ * Wed May 07 13:28:07 JST 2014 
  */
 
 
@@ -11,7 +11,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 
 /**
@@ -29,15 +29,15 @@ public class dgSofuIchiran_Row extends DataRow {
     private TextBoxCode txtMoshitateshaKubun;
     private TextBox txtStyle;
     private TextBox txtMoshitateRiyu;
-    private TextBoxFlexibleDate txtServiceTeikyoYM;
-    private TextBoxFlexibleDate txtMoshitateYMD;
+    private TextBoxDate txtServiceTeikyoYM;
+    private TextBoxDate txtMoshitateYMD;
     private TextBoxCode txtShokisaiHokenshaNo;
 
     public dgSofuIchiran_Row() {
         super();
     }
 
-    public dgSofuIchiran_Row(TextBoxCode txtJigyoshaNo, TextBox txtJigyoshaName, TextBoxCode txtHihoNo, TextBox txtHihoName, TextBoxCode txtMoshitateshaKubun, TextBox txtStyle, TextBox txtMoshitateRiyu, TextBoxFlexibleDate txtServiceTeikyoYM, TextBoxFlexibleDate txtMoshitateYMD, TextBoxCode txtShokisaiHokenshaNo) {
+    public dgSofuIchiran_Row(TextBoxCode txtJigyoshaNo, TextBox txtJigyoshaName, TextBoxCode txtHihoNo, TextBox txtHihoName, TextBoxCode txtMoshitateshaKubun, TextBox txtStyle, TextBox txtMoshitateRiyu, TextBoxDate txtServiceTeikyoYM, TextBoxDate txtMoshitateYMD, TextBoxCode txtShokisaiHokenshaNo) {
         super();
         this.setOriginalData("txtJigyoshaNo", txtJigyoshaNo);
         this.setOriginalData("txtJigyoshaName", txtJigyoshaName);
@@ -89,11 +89,11 @@ public class dgSofuIchiran_Row extends DataRow {
         return txtMoshitateRiyu;
     }
 
-    public TextBoxFlexibleDate getTxtServiceTeikyoYM() {
+    public TextBoxDate getTxtServiceTeikyoYM() {
         return txtServiceTeikyoYM;
     }
 
-    public TextBoxFlexibleDate getTxtMoshitateYMD() {
+    public TextBoxDate getTxtMoshitateYMD() {
         return txtMoshitateYMD;
     }
 
@@ -136,12 +136,12 @@ public class dgSofuIchiran_Row extends DataRow {
         this.txtMoshitateRiyu = txtMoshitateRiyu;
     }
 
-    public void setTxtServiceTeikyoYM(TextBoxFlexibleDate txtServiceTeikyoYM) {
+    public void setTxtServiceTeikyoYM(TextBoxDate txtServiceTeikyoYM) {
         this.setOriginalData("txtServiceTeikyoYM", txtServiceTeikyoYM);
         this.txtServiceTeikyoYM = txtServiceTeikyoYM;
     }
 
-    public void setTxtMoshitateYMD(TextBoxFlexibleDate txtMoshitateYMD) {
+    public void setTxtMoshitateYMD(TextBoxDate txtMoshitateYMD) {
         this.setOriginalData("txtMoshitateYMD", txtMoshitateYMD);
         this.txtMoshitateYMD = txtMoshitateYMD;
     }

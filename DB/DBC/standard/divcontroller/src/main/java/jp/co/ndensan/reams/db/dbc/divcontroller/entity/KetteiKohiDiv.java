@@ -23,12 +23,12 @@ public class KetteiKohiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblKetteiKohiSakuseiYMD")
-    private Label lblKetteiKohiSakuseiYMD;
     @JsonProperty("txtKetteiKohiSakuseiYMD")
-    private TextBoxFlexibleDate txtKetteiKohiSakuseiYMD;
+    private TextBoxDate txtKetteiKohiSakuseiYMD;
     @JsonProperty("KetteiKohiShukei")
     private KetteiKohiShukeiDiv KetteiKohiShukei;
+    @JsonProperty("lblKohiHosoku")
+    private Label lblKohiHosoku;
     @JsonProperty("dgKetteiKohiDetail")
     private DataGrid<dgKetteiKohiDetail_Row> dgKetteiKohiDetail;
 
@@ -38,23 +38,13 @@ public class KetteiKohiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblKetteiKohiSakuseiYMD")
-    public Label getLblKetteiKohiSakuseiYMD() {
-        return lblKetteiKohiSakuseiYMD;
-    }
-
-    @JsonProperty("lblKetteiKohiSakuseiYMD")
-    public void setLblKetteiKohiSakuseiYMD(Label lblKetteiKohiSakuseiYMD) {
-        this.lblKetteiKohiSakuseiYMD=lblKetteiKohiSakuseiYMD;
-    }
-
     @JsonProperty("txtKetteiKohiSakuseiYMD")
-    public TextBoxFlexibleDate getTxtKetteiKohiSakuseiYMD() {
+    public TextBoxDate getTxtKetteiKohiSakuseiYMD() {
         return txtKetteiKohiSakuseiYMD;
     }
 
     @JsonProperty("txtKetteiKohiSakuseiYMD")
-    public void setTxtKetteiKohiSakuseiYMD(TextBoxFlexibleDate txtKetteiKohiSakuseiYMD) {
+    public void setTxtKetteiKohiSakuseiYMD(TextBoxDate txtKetteiKohiSakuseiYMD) {
         this.txtKetteiKohiSakuseiYMD=txtKetteiKohiSakuseiYMD;
     }
 
@@ -66,6 +56,16 @@ public class KetteiKohiDiv extends Panel {
     @JsonProperty("KetteiKohiShukei")
     public void setKetteiKohiShukei(KetteiKohiShukeiDiv KetteiKohiShukei) {
         this.KetteiKohiShukei=KetteiKohiShukei;
+    }
+
+    @JsonProperty("lblKohiHosoku")
+    public Label getLblKohiHosoku() {
+        return lblKohiHosoku;
+    }
+
+    @JsonProperty("lblKohiHosoku")
+    public void setLblKohiHosoku(Label lblKohiHosoku) {
+        this.lblKohiHosoku=lblKohiHosoku;
     }
 
     @JsonProperty("dgKetteiKohiDetail")

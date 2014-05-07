@@ -23,10 +23,8 @@ public class KetteijohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblToriatsukaiYM")
-    private Label lblToriatsukaiYM;
     @JsonProperty("txtToriatsukaiYM")
-    private TextBoxFlexibleDate txtToriatsukaiYM;
+    private TextBoxDate txtToriatsukaiYM;
     @JsonProperty("lblShichosonName")
     private Label lblShichosonName;
     @JsonProperty("ddlShichosonName")
@@ -44,23 +42,13 @@ public class KetteijohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblToriatsukaiYM")
-    public Label getLblToriatsukaiYM() {
-        return lblToriatsukaiYM;
-    }
-
-    @JsonProperty("lblToriatsukaiYM")
-    public void setLblToriatsukaiYM(Label lblToriatsukaiYM) {
-        this.lblToriatsukaiYM=lblToriatsukaiYM;
-    }
-
     @JsonProperty("txtToriatsukaiYM")
-    public TextBoxFlexibleDate getTxtToriatsukaiYM() {
+    public TextBoxDate getTxtToriatsukaiYM() {
         return txtToriatsukaiYM;
     }
 
     @JsonProperty("txtToriatsukaiYM")
-    public void setTxtToriatsukaiYM(TextBoxFlexibleDate txtToriatsukaiYM) {
+    public void setTxtToriatsukaiYM(TextBoxDate txtToriatsukaiYM) {
         this.txtToriatsukaiYM=txtToriatsukaiYM;
     }
 

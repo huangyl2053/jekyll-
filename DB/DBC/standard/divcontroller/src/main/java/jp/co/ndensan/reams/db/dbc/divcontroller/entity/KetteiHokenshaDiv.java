@@ -23,12 +23,12 @@ public class KetteiHokenshaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblKetteiHokenshaSakuseiYMD")
-    private Label lblKetteiHokenshaSakuseiYMD;
     @JsonProperty("txtKetteiHokenshaSakuseiYMD")
-    private TextBoxFlexibleDate txtKetteiHokenshaSakuseiYMD;
+    private TextBoxDate txtKetteiHokenshaSakuseiYMD;
     @JsonProperty("KetteiHokenshaShukei")
     private KetteiHokenshaShukeiDiv KetteiHokenshaShukei;
+    @JsonProperty("lblHokenshaHosoku")
+    private Label lblHokenshaHosoku;
     @JsonProperty("dgKetteiHokenshaDetail")
     private DataGrid<dgKetteiHokenshaDetail_Row> dgKetteiHokenshaDetail;
 
@@ -38,23 +38,13 @@ public class KetteiHokenshaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblKetteiHokenshaSakuseiYMD")
-    public Label getLblKetteiHokenshaSakuseiYMD() {
-        return lblKetteiHokenshaSakuseiYMD;
-    }
-
-    @JsonProperty("lblKetteiHokenshaSakuseiYMD")
-    public void setLblKetteiHokenshaSakuseiYMD(Label lblKetteiHokenshaSakuseiYMD) {
-        this.lblKetteiHokenshaSakuseiYMD=lblKetteiHokenshaSakuseiYMD;
-    }
-
     @JsonProperty("txtKetteiHokenshaSakuseiYMD")
-    public TextBoxFlexibleDate getTxtKetteiHokenshaSakuseiYMD() {
+    public TextBoxDate getTxtKetteiHokenshaSakuseiYMD() {
         return txtKetteiHokenshaSakuseiYMD;
     }
 
     @JsonProperty("txtKetteiHokenshaSakuseiYMD")
-    public void setTxtKetteiHokenshaSakuseiYMD(TextBoxFlexibleDate txtKetteiHokenshaSakuseiYMD) {
+    public void setTxtKetteiHokenshaSakuseiYMD(TextBoxDate txtKetteiHokenshaSakuseiYMD) {
         this.txtKetteiHokenshaSakuseiYMD=txtKetteiHokenshaSakuseiYMD;
     }
 
@@ -66,6 +56,16 @@ public class KetteiHokenshaDiv extends Panel {
     @JsonProperty("KetteiHokenshaShukei")
     public void setKetteiHokenshaShukei(KetteiHokenshaShukeiDiv KetteiHokenshaShukei) {
         this.KetteiHokenshaShukei=KetteiHokenshaShukei;
+    }
+
+    @JsonProperty("lblHokenshaHosoku")
+    public Label getLblHokenshaHosoku() {
+        return lblHokenshaHosoku;
+    }
+
+    @JsonProperty("lblHokenshaHosoku")
+    public void setLblHokenshaHosoku(Label lblHokenshaHosoku) {
+        this.lblHokenshaHosoku=lblHokenshaHosoku;
     }
 
     @JsonProperty("dgKetteiHokenshaDetail")

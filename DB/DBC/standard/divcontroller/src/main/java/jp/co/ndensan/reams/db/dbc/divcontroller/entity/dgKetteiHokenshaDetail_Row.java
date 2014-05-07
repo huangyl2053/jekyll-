@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Apr 22 15:34:43 JST 2014 
+ * Wed May 07 14:08:43 JST 2014 
  */
 
 
@@ -11,7 +11,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 
@@ -29,7 +29,7 @@ public class dgKetteiHokenshaDetail_Row extends DataRow {
     private TextBox txtHokenshaHihoName;
     private TextBox txtHokenshaStyle;
     private TextBox txtHokenshaMoshitateRiyu;
-    private TextBoxFlexibleDate txtHokenshaServiceTeikyoYM;
+    private TextBoxDate txtHokenshaServiceTeikyoYM;
     private TextBox txtHokenshaServiceType;
     private TextBoxNum txtHokenshaTanisu;
     private TextBoxNum txtHokenshaFutangaku;
@@ -39,7 +39,7 @@ public class dgKetteiHokenshaDetail_Row extends DataRow {
         super();
     }
 
-    public dgKetteiHokenshaDetail_Row(TextBoxCode txtHokenshaJigyoshaNo, TextBox txtHokenshaJigyoshaName, TextBoxCode txtHokenshaHihoNo, TextBox txtHokenshaHihoName, TextBox txtHokenshaStyle, TextBox txtHokenshaMoshitateRiyu, TextBoxFlexibleDate txtHokenshaServiceTeikyoYM, TextBox txtHokenshaServiceType, TextBoxNum txtHokenshaTanisu, TextBoxNum txtHokenshaFutangaku, TextBoxCode txtHokenshaShokisaiHokenshaNo) {
+    public dgKetteiHokenshaDetail_Row(TextBoxCode txtHokenshaJigyoshaNo, TextBox txtHokenshaJigyoshaName, TextBoxCode txtHokenshaHihoNo, TextBox txtHokenshaHihoName, TextBox txtHokenshaStyle, TextBox txtHokenshaMoshitateRiyu, TextBoxDate txtHokenshaServiceTeikyoYM, TextBox txtHokenshaServiceType, TextBoxNum txtHokenshaTanisu, TextBoxNum txtHokenshaFutangaku, TextBoxCode txtHokenshaShokisaiHokenshaNo) {
         super();
         this.setOriginalData("txtHokenshaJigyoshaNo", txtHokenshaJigyoshaNo);
         this.setOriginalData("txtHokenshaJigyoshaName", txtHokenshaJigyoshaName);
@@ -89,7 +89,7 @@ public class dgKetteiHokenshaDetail_Row extends DataRow {
         return txtHokenshaMoshitateRiyu;
     }
 
-    public TextBoxFlexibleDate getTxtHokenshaServiceTeikyoYM() {
+    public TextBoxDate getTxtHokenshaServiceTeikyoYM() {
         return txtHokenshaServiceTeikyoYM;
     }
 
@@ -139,7 +139,7 @@ public class dgKetteiHokenshaDetail_Row extends DataRow {
         this.txtHokenshaMoshitateRiyu = txtHokenshaMoshitateRiyu;
     }
 
-    public void setTxtHokenshaServiceTeikyoYM(TextBoxFlexibleDate txtHokenshaServiceTeikyoYM) {
+    public void setTxtHokenshaServiceTeikyoYM(TextBoxDate txtHokenshaServiceTeikyoYM) {
         this.setOriginalData("txtHokenshaServiceTeikyoYM", txtHokenshaServiceTeikyoYM);
         this.txtHokenshaServiceTeikyoYM = txtHokenshaServiceTeikyoYM;
     }
