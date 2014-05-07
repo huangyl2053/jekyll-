@@ -4366,7 +4366,7 @@
      "nextFocusFieldName": "",
      "wrap": false,
      "dependencies": [],
-     "float": 0,
+     "float": 2,
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "XS",
@@ -4408,10 +4408,10 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorderTop": true,
+   "eraseBorderBottom": true,
+   "eraseBorderRight": true,
+   "eraseBorderLeft": true,
    "backgroundColor": 0,
    "widthAuto": true,
    "isGroupBox": false
@@ -4457,14 +4457,14 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "btnSearch",
-     "event": "onClick",
-     "transition": "連絡票照会"
-    },
-    {
      "fieldName": "btnReSearch",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "dgJukyushaIdoRenrakuhyoSearchResult[btnShowDetail]",
+     "event": "onClick",
+     "transition": "連絡票照会"
     }
    ]
   },
@@ -4540,24 +4540,32 @@
     {
      "visibleDiv": "JukyushaIdoRenrakuhyoFukushiHojinKeigen",
      "panelState": "visible"
+    },
+    {
+     "visibleDiv": "KyotsuPanel",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "JukyushaIdoRenrakuhyoKokiKorei",
+     "panelState": "visible"
     }
    ],
    "validation": {},
    "events": [
     {
-     "fieldName": "btnSearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "btnReSearch",
      "event": "onClick",
      "transition": "連絡票検索"
+    },
+    {
+     "fieldName": "dgJukyushaIdoRenrakuhyoSearchResult[btnShowDetail]",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   }
  ],
- "currentState": "All",
+ "currentState": "連絡票照会",
  "id": "DBC0040011",
  "WFParameter": [],
  "UIContainerEventMapping": [],
