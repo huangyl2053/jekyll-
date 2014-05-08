@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoSear
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgJukyushaIdoRenrakuhyoSearchResult_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
@@ -27,7 +27,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 public class JukyushaIdoRenrakuhyoSearchPanel {
 
     /**
-     * 検索パネルが読み込まれた時は、検索項目をEMPTYで初期化し、検索結果一覧を閉じた状態にします。
+     * 検索パネルが読み込まれた時は、検索項目をEMPTYで初期化し、検索結果一覧を閉じた状態にします。</br>
+     * 異動日の初期値をあらかじめセットしておきます
      *
      * @param searchPanel
      * @return ResponseData
@@ -37,6 +38,8 @@ public class JukyushaIdoRenrakuhyoSearchPanel {
         searchPanel.getJukyushaIdoRenrakuhyoSearchResultIchiran().setIsOpen(false);
         clearSearchCondtion(searchPanel.getJukyushaIdoRenrakuhyoSearchCondition());
 
+        searchPanel.getJukyushaIdoRenrakuhyoSearchCondition().getTxtIdoDateRange().setFromValue(new RDate("20130101"));
+        searchPanel.getJukyushaIdoRenrakuhyoSearchCondition().getTxtIdoDateRange().setToValue(new RDate("20140701"));
         ResponseData<JukyushaIdoRenrakuhyoSearchPanelDiv> response = new ResponseData<>();
         response.data = searchPanel;
         return response;
@@ -92,8 +95,6 @@ public class JukyushaIdoRenrakuhyoSearchPanel {
         searchConditionDiv.getTxtIdoDateRange().setFromValue(null);
         searchConditionDiv.getTxtIdoDateRange().setToValue(null);
         searchConditionDiv.getTxtSearchHihoNo().setValue(RString.EMPTY);
-//        searchConditionDiv.getTxtGetDataMaxNum().setValue(Decimal.ZERO);
-//        searchConditionDiv.getChkIsSearchDeletedData().setSelectedItems(null);
     }
 
     private void set連絡票検索結果一覧(JukyushaIdoRenrakuhyoSearchPanelDiv searchPanel) {
@@ -105,69 +106,7 @@ public class JukyushaIdoRenrakuhyoSearchPanel {
         List<dgJukyushaIdoRenrakuhyoSearchResult_Row> testDataList;
         testDataList = createTestData();
 
-        //TODO テストデータをそのまま返す
         return testDataList;
-//        return selectData(searchConditionDiv, testDataList);
-    }
-
-    private List<dgJukyushaIdoRenrakuhyoSearchResult_Row> selectData(JukyushaIdoRenrakuhyoSearchConditionDiv searchConditionDiv,
-            List<dgJukyushaIdoRenrakuhyoSearchResult_Row> testDataList) {
-
-        List<dgJukyushaIdoRenrakuhyoSearchResult_Row> selectedList = new ArrayList<>();
-
-//        if (!isEmpty異動期間(searchConditionDiv)) {
-//            if (!isEmpty被保番号(searchConditionDiv)) {
-//                selectedList = match異動期間(searchConditionDiv, testDataList);
-//                selectedList = match被保番号(searchConditionDiv, selectedList);
-//            } else {
-//                selectedList = match異動期間(searchConditionDiv, testDataList);
-//            }
-//        } else if (!isEmpty被保番号(searchConditionDiv)) {
-//            selectedList = match被保番号(searchConditionDiv, testDataList);
-//        }
-//        selectedList = match異動期間(searchConditionDiv, testDataList);
-        selectedList = match被保番号List(searchConditionDiv, testDataList);
-        return selectedList;
-    }
-
-//    private boolean isEmpty異動期間(JukyushaIdoRenrakuhyoSearchConditionDiv searchConditionDiv) {
-//        return isEmpty異動開始期間(searchConditionDiv) & (isEmpty異動終了期間(searchConditionDiv));
-//    }
-//
-//    private boolean isEmpty異動開始期間(JukyushaIdoRenrakuhyoSearchConditionDiv searchConditionDiv) {
-//        return searchConditionDiv.getTxtIdoDateRange().getFromText().equals(RString.EMPTY);
-//    }
-//
-//    private boolean isEmpty異動終了期間(JukyushaIdoRenrakuhyoSearchConditionDiv searchConditionDiv) {
-//        return searchConditionDiv.getTxtIdoDateRange().getToText().equals(RString.EMPTY);
-//    }
-//    private boolean isEmpty被保番号(JukyushaIdoRenrakuhyoSearchConditionDiv searchConditionDiv) {
-//        return searchConditionDiv.getTxtSearchHihoNo().getText().equals(RString.EMPTY);
-//    }
-//    private List<dgJukyushaIdoRenrakuhyoSearchResult_Row> match異動期間(JukyushaIdoRenrakuhyoSearchConditionDiv searchConditionDiv,
-//            List<dgJukyushaIdoRenrakuhyoSearchResult_Row> testDataList) {
-//
-//        List<dgJukyushaIdoRenrakuhyoSearchResult_Row> selectedList = new ArrayList<>();
-//        Range<RDate> dateRange = new Range(searchConditionDiv.getTxtIdoDateRange().getFromValue(),
-//                searchConditionDiv.getTxtIdoDateRange().getToValue());
-//
-//        for (dgJukyushaIdoRenrakuhyoSearchResult_Row row : testDataList) {
-//            if (dateRange.between(new RDate(row.getTxtResultIdoDate().getValue().toString()))) {
-//                selectedList.add(row);
-//            }
-//        }
-//        return selectedList;
-//    }
-    private List<dgJukyushaIdoRenrakuhyoSearchResult_Row> match被保番号List(JukyushaIdoRenrakuhyoSearchConditionDiv searchConditionDiv,
-            List<dgJukyushaIdoRenrakuhyoSearchResult_Row> testDataList) {
-
-        List<dgJukyushaIdoRenrakuhyoSearchResult_Row> selectedList = new ArrayList<>();
-        for (dgJukyushaIdoRenrakuhyoSearchResult_Row row : testDataList) {
-            if (row.getTxtResultHihoNo().getValue().equals(searchConditionDiv.getTxtSearchHihoNo().getValue())) {
-                selectedList.add(row);
-            }
-        }
-        return selectedList;
     }
 
     private List<dgJukyushaIdoRenrakuhyoSearchResult_Row> createTestData() {
@@ -176,11 +115,7 @@ public class JukyushaIdoRenrakuhyoSearchPanel {
 
         row = createRow("20130101", "0000000001", "電算　一郎", "20111010");
         list.add(row);
-        row = createRow("20140101", "0000000001", "電算　一郎", "20111010");
-        list.add(row);
         row = createRow("20130202", "0000000002", "電算　二郎", "20111010");
-        list.add(row);
-        row = createRow("20140202", "0000000002", "電算　二郎", "20111010");
         list.add(row);
         row = createRow("20140301", "0000000003", "電算　三郎", "20111010");
         list.add(row);
@@ -190,14 +125,6 @@ public class JukyushaIdoRenrakuhyoSearchPanel {
         list.add(row);
         row = createRow("20140602", "0000000006", "電算　六郎", "20111010");
         list.add(row);
-//        row = createRow("20110701", "0000000007", "電算　七郎", "20111010");
-//        list.add(row);
-//        row = createRow("20110801", "0000000008", "電算　八郎", "20111010");
-//        list.add(row);
-//        row = createRow("20110902", "0000000009", "電算　九郎", "20111010");
-//        list.add(row);
-//        row = createRow("20111002", "0000000010", "電算　十郎", "20111010");
-//        list.add(row);
 
         return list;
     }

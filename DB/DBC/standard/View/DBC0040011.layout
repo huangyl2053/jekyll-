@@ -197,7 +197,11 @@
          "value": "削除データ検索"
         }
        ],
-       "selectedItems": [],
+       "selectedItems": [
+        {
+         "key": ""
+        }
+       ],
        "newLineItemNumber": 1,
        "minCheckedItem": 0,
        "maxCheckedItem": "1",
@@ -4352,7 +4356,7 @@
    "isGroupBox": false
   },
   {
-   "fieldName": "KyotsuPanel",
+   "fieldName": "KyotsuBtnPanel",
    "items": [
     {
      "fieldName": "btnReSearch",
@@ -4364,7 +4368,7 @@
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": false,
+     "wrap": true,
      "dependencies": [],
      "float": 2,
      "toolTip": "",
@@ -4379,13 +4383,13 @@
     }
    ],
    "controlType": "Panel",
-   "width": "M",
+   "width": "1200",
    "visible": true,
    "displayNone": false,
    "disabled": false,
    "accessKey": "",
    "nextFocusFieldName": "",
-   "wrap": false,
+   "wrap": true,
    "dependencies": [],
    "float": 0,
    "toolTip": "",
@@ -4398,7 +4402,7 @@
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "KyotsuPanel"
+     "postParameterPanelNames": "KyotsuBtnPanel"
     }
    ],
    "requestSettings": [],
@@ -4413,7 +4417,7 @@
    "eraseBorderRight": true,
    "eraseBorderLeft": true,
    "backgroundColor": 0,
-   "widthAuto": true,
+   "widthAuto": false,
    "isGroupBox": false
   }
  ],
@@ -4542,7 +4546,7 @@
      "panelState": "visible"
     },
     {
-     "visibleDiv": "KyotsuPanel",
+     "visibleDiv": "KyotsuBtnPanel",
      "panelState": "visible"
     },
     {
@@ -4565,7 +4569,7 @@
    ]
   }
  ],
- "currentState": "連絡票照会",
+ "currentState": "All",
  "id": "DBC0040011",
  "WFParameter": [],
  "UIContainerEventMapping": [],
@@ -4632,7 +4636,7 @@
    "JukyushaIdoRenrakuhyoFukushiHojinKeigen"
   ],
   [
-   "KyotsuPanel"
+   "KyotsuBtnPanel"
   ]
  ],
  "panelMargin": 1,
