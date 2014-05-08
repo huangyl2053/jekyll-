@@ -5,23 +5,23 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tblHomonTsushoJikoSakuseiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tblTankiNyushoJikoSakuseiSummarySub1Div;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * HomonTsushoJikoSakuseiDetail のクラスファイル 
+ * TankiNyushoJikoSakuseiSummarySub1 のクラスファイル 
  * 
  * @author 自動生成
  */
-public class HomonTsushoJikoSakuseiDetailDiv extends Panel {
+public class TankiNyushoJikoSakuseiSummarySub1Div extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("tblHomonTsushoJikoSakusei")
-    private tblHomonTsushoJikoSakuseiDiv tblHomonTsushoJikoSakusei;
+    @JsonProperty("tblTankiNyushoJikoSakuseiSummarySub1")
+    private tblTankiNyushoJikoSakuseiSummarySub1Div tblTankiNyushoJikoSakuseiSummarySub1;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -29,14 +29,14 @@ public class HomonTsushoJikoSakuseiDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("tblHomonTsushoJikoSakusei")
-    public tblHomonTsushoJikoSakuseiDiv getTblHomonTsushoJikoSakusei() {
-        return tblHomonTsushoJikoSakusei;
+    @JsonProperty("tblTankiNyushoJikoSakuseiSummarySub1")
+    public tblTankiNyushoJikoSakuseiSummarySub1Div getTblTankiNyushoJikoSakuseiSummarySub1() {
+        return tblTankiNyushoJikoSakuseiSummarySub1;
     }
 
-    @JsonProperty("tblHomonTsushoJikoSakusei")
-    public void setTblHomonTsushoJikoSakusei(tblHomonTsushoJikoSakuseiDiv tblHomonTsushoJikoSakusei) {
-        this.tblHomonTsushoJikoSakusei=tblHomonTsushoJikoSakusei;
+    @JsonProperty("tblTankiNyushoJikoSakuseiSummarySub1")
+    public void setTblTankiNyushoJikoSakuseiSummarySub1(tblTankiNyushoJikoSakuseiSummarySub1Div tblTankiNyushoJikoSakuseiSummarySub1) {
+        this.tblTankiNyushoJikoSakuseiSummarySub1=tblTankiNyushoJikoSakuseiSummarySub1;
     }
 
 }

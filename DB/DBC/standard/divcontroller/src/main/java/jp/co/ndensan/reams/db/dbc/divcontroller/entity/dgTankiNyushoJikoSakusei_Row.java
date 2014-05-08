@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu May 01 13:23:10 JST 2014 
+ * Thu May 08 14:49:20 JST 2014 
  */
 
 
@@ -21,193 +21,193 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class dgTankiNyushoJikoSakusei_Row extends DataRow {
 
-    private Button selfInfoBtnSelect;
-    private RString selfInfoJigyoshaNo;
-    private RString selfInfoServiceCode;
-    private RString selfInfoUnit;
-    private RString selfInfoDateNum;
-    private RString selfInfoKyufuDateNum;
-    private RString selfInfoKyufugaiDateNum;
-    private RString selfInfoUnitTanka;
-    private RString selfInfoKyufuRitsu;
-    private RString selfInfoKubunLimitNaiUnit;
-    private RString selfInfoHiyoTotal;
-    private RString selfInfoHokenKyufuGaku;
-    private RString selfInfoHokenFutan;
-    private RString selfInfoKyufuTaishogaiUnit;
-    private RString selfInfoFutanTotal;
+    private Button tankiNyushoBtnSelect;
+    private RString tankiNyushoJigyoshaNo;
+    private RString tankiNyushoServiceCode;
+    private RString tankiNyushoUnit;
+    private RString tankiNyushoDateNum;
+    private RString tankiNyushoKyufuDateNum;
+    private RString tankiNyushoKyufugaiDateNum;
+    private RString tankiNyushoUnitTanka;
+    private RString tankiNyushoKyufuRitsu;
+    private RString tankiNyushoKubunLimitNaiUnit;
+    private RString tankiNyushoHiyoTotal;
+    private RString tankiNyushoHokenKyufuGaku;
+    private RString tankiNyushoHokenFutan;
+    private RString tankiNyushoKyufuTaishogaiUnit;
+    private RString tankiNyushoFutanTotal;
 
     public dgTankiNyushoJikoSakusei_Row() {
         super();
     }
 
-    public dgTankiNyushoJikoSakusei_Row(Button selfInfoBtnSelect, RString selfInfoJigyoshaNo, RString selfInfoServiceCode, RString selfInfoUnit, RString selfInfoDateNum, RString selfInfoKyufuDateNum, RString selfInfoKyufugaiDateNum, RString selfInfoUnitTanka, RString selfInfoKyufuRitsu, RString selfInfoKubunLimitNaiUnit, RString selfInfoHiyoTotal, RString selfInfoHokenKyufuGaku, RString selfInfoHokenFutan, RString selfInfoKyufuTaishogaiUnit, RString selfInfoFutanTotal) {
+    public dgTankiNyushoJikoSakusei_Row(Button tankiNyushoBtnSelect, RString tankiNyushoJigyoshaNo, RString tankiNyushoServiceCode, RString tankiNyushoUnit, RString tankiNyushoDateNum, RString tankiNyushoKyufuDateNum, RString tankiNyushoKyufugaiDateNum, RString tankiNyushoUnitTanka, RString tankiNyushoKyufuRitsu, RString tankiNyushoKubunLimitNaiUnit, RString tankiNyushoHiyoTotal, RString tankiNyushoHokenKyufuGaku, RString tankiNyushoHokenFutan, RString tankiNyushoKyufuTaishogaiUnit, RString tankiNyushoFutanTotal) {
         super();
-        this.setOriginalData("selfInfoBtnSelect", selfInfoBtnSelect);
-        this.setOriginalData("selfInfoJigyoshaNo", selfInfoJigyoshaNo);
-        this.setOriginalData("selfInfoServiceCode", selfInfoServiceCode);
-        this.setOriginalData("selfInfoUnit", selfInfoUnit);
-        this.setOriginalData("selfInfoDateNum", selfInfoDateNum);
-        this.setOriginalData("selfInfoKyufuDateNum", selfInfoKyufuDateNum);
-        this.setOriginalData("selfInfoKyufugaiDateNum", selfInfoKyufugaiDateNum);
-        this.setOriginalData("selfInfoUnitTanka", selfInfoUnitTanka);
-        this.setOriginalData("selfInfoKyufuRitsu", selfInfoKyufuRitsu);
-        this.setOriginalData("selfInfoKubunLimitNaiUnit", selfInfoKubunLimitNaiUnit);
-        this.setOriginalData("selfInfoHiyoTotal", selfInfoHiyoTotal);
-        this.setOriginalData("selfInfoHokenKyufuGaku", selfInfoHokenKyufuGaku);
-        this.setOriginalData("selfInfoHokenFutan", selfInfoHokenFutan);
-        this.setOriginalData("selfInfoKyufuTaishogaiUnit", selfInfoKyufuTaishogaiUnit);
-        this.setOriginalData("selfInfoFutanTotal", selfInfoFutanTotal);
-        this.selfInfoBtnSelect = selfInfoBtnSelect;
-        this.selfInfoJigyoshaNo = selfInfoJigyoshaNo;
-        this.selfInfoServiceCode = selfInfoServiceCode;
-        this.selfInfoUnit = selfInfoUnit;
-        this.selfInfoDateNum = selfInfoDateNum;
-        this.selfInfoKyufuDateNum = selfInfoKyufuDateNum;
-        this.selfInfoKyufugaiDateNum = selfInfoKyufugaiDateNum;
-        this.selfInfoUnitTanka = selfInfoUnitTanka;
-        this.selfInfoKyufuRitsu = selfInfoKyufuRitsu;
-        this.selfInfoKubunLimitNaiUnit = selfInfoKubunLimitNaiUnit;
-        this.selfInfoHiyoTotal = selfInfoHiyoTotal;
-        this.selfInfoHokenKyufuGaku = selfInfoHokenKyufuGaku;
-        this.selfInfoHokenFutan = selfInfoHokenFutan;
-        this.selfInfoKyufuTaishogaiUnit = selfInfoKyufuTaishogaiUnit;
-        this.selfInfoFutanTotal = selfInfoFutanTotal;
+        this.setOriginalData("tankiNyushoBtnSelect", tankiNyushoBtnSelect);
+        this.setOriginalData("tankiNyushoJigyoshaNo", tankiNyushoJigyoshaNo);
+        this.setOriginalData("tankiNyushoServiceCode", tankiNyushoServiceCode);
+        this.setOriginalData("tankiNyushoUnit", tankiNyushoUnit);
+        this.setOriginalData("tankiNyushoDateNum", tankiNyushoDateNum);
+        this.setOriginalData("tankiNyushoKyufuDateNum", tankiNyushoKyufuDateNum);
+        this.setOriginalData("tankiNyushoKyufugaiDateNum", tankiNyushoKyufugaiDateNum);
+        this.setOriginalData("tankiNyushoUnitTanka", tankiNyushoUnitTanka);
+        this.setOriginalData("tankiNyushoKyufuRitsu", tankiNyushoKyufuRitsu);
+        this.setOriginalData("tankiNyushoKubunLimitNaiUnit", tankiNyushoKubunLimitNaiUnit);
+        this.setOriginalData("tankiNyushoHiyoTotal", tankiNyushoHiyoTotal);
+        this.setOriginalData("tankiNyushoHokenKyufuGaku", tankiNyushoHokenKyufuGaku);
+        this.setOriginalData("tankiNyushoHokenFutan", tankiNyushoHokenFutan);
+        this.setOriginalData("tankiNyushoKyufuTaishogaiUnit", tankiNyushoKyufuTaishogaiUnit);
+        this.setOriginalData("tankiNyushoFutanTotal", tankiNyushoFutanTotal);
+        this.tankiNyushoBtnSelect = tankiNyushoBtnSelect;
+        this.tankiNyushoJigyoshaNo = tankiNyushoJigyoshaNo;
+        this.tankiNyushoServiceCode = tankiNyushoServiceCode;
+        this.tankiNyushoUnit = tankiNyushoUnit;
+        this.tankiNyushoDateNum = tankiNyushoDateNum;
+        this.tankiNyushoKyufuDateNum = tankiNyushoKyufuDateNum;
+        this.tankiNyushoKyufugaiDateNum = tankiNyushoKyufugaiDateNum;
+        this.tankiNyushoUnitTanka = tankiNyushoUnitTanka;
+        this.tankiNyushoKyufuRitsu = tankiNyushoKyufuRitsu;
+        this.tankiNyushoKubunLimitNaiUnit = tankiNyushoKubunLimitNaiUnit;
+        this.tankiNyushoHiyoTotal = tankiNyushoHiyoTotal;
+        this.tankiNyushoHokenKyufuGaku = tankiNyushoHokenKyufuGaku;
+        this.tankiNyushoHokenFutan = tankiNyushoHokenFutan;
+        this.tankiNyushoKyufuTaishogaiUnit = tankiNyushoKyufuTaishogaiUnit;
+        this.tankiNyushoFutanTotal = tankiNyushoFutanTotal;
     }
 
-    public Button getSelfInfoBtnSelect() {
-        return selfInfoBtnSelect;
+    public Button getTankiNyushoBtnSelect() {
+        return tankiNyushoBtnSelect;
     }
 
-    public RString getSelfInfoJigyoshaNo() {
-        return selfInfoJigyoshaNo;
+    public RString getTankiNyushoJigyoshaNo() {
+        return tankiNyushoJigyoshaNo;
     }
 
-    public RString getSelfInfoServiceCode() {
-        return selfInfoServiceCode;
+    public RString getTankiNyushoServiceCode() {
+        return tankiNyushoServiceCode;
     }
 
-    public RString getSelfInfoUnit() {
-        return selfInfoUnit;
+    public RString getTankiNyushoUnit() {
+        return tankiNyushoUnit;
     }
 
-    public RString getSelfInfoDateNum() {
-        return selfInfoDateNum;
+    public RString getTankiNyushoDateNum() {
+        return tankiNyushoDateNum;
     }
 
-    public RString getSelfInfoKyufuDateNum() {
-        return selfInfoKyufuDateNum;
+    public RString getTankiNyushoKyufuDateNum() {
+        return tankiNyushoKyufuDateNum;
     }
 
-    public RString getSelfInfoKyufugaiDateNum() {
-        return selfInfoKyufugaiDateNum;
+    public RString getTankiNyushoKyufugaiDateNum() {
+        return tankiNyushoKyufugaiDateNum;
     }
 
-    public RString getSelfInfoUnitTanka() {
-        return selfInfoUnitTanka;
+    public RString getTankiNyushoUnitTanka() {
+        return tankiNyushoUnitTanka;
     }
 
-    public RString getSelfInfoKyufuRitsu() {
-        return selfInfoKyufuRitsu;
+    public RString getTankiNyushoKyufuRitsu() {
+        return tankiNyushoKyufuRitsu;
     }
 
-    public RString getSelfInfoKubunLimitNaiUnit() {
-        return selfInfoKubunLimitNaiUnit;
+    public RString getTankiNyushoKubunLimitNaiUnit() {
+        return tankiNyushoKubunLimitNaiUnit;
     }
 
-    public RString getSelfInfoHiyoTotal() {
-        return selfInfoHiyoTotal;
+    public RString getTankiNyushoHiyoTotal() {
+        return tankiNyushoHiyoTotal;
     }
 
-    public RString getSelfInfoHokenKyufuGaku() {
-        return selfInfoHokenKyufuGaku;
+    public RString getTankiNyushoHokenKyufuGaku() {
+        return tankiNyushoHokenKyufuGaku;
     }
 
-    public RString getSelfInfoHokenFutan() {
-        return selfInfoHokenFutan;
+    public RString getTankiNyushoHokenFutan() {
+        return tankiNyushoHokenFutan;
     }
 
-    public RString getSelfInfoKyufuTaishogaiUnit() {
-        return selfInfoKyufuTaishogaiUnit;
+    public RString getTankiNyushoKyufuTaishogaiUnit() {
+        return tankiNyushoKyufuTaishogaiUnit;
     }
 
-    public RString getSelfInfoFutanTotal() {
-        return selfInfoFutanTotal;
+    public RString getTankiNyushoFutanTotal() {
+        return tankiNyushoFutanTotal;
     }
 
-    public void setSelfInfoBtnSelect(Button selfInfoBtnSelect) {
-        this.setOriginalData("selfInfoBtnSelect", selfInfoBtnSelect);
-        this.selfInfoBtnSelect = selfInfoBtnSelect;
+    public void setTankiNyushoBtnSelect(Button tankiNyushoBtnSelect) {
+        this.setOriginalData("tankiNyushoBtnSelect", tankiNyushoBtnSelect);
+        this.tankiNyushoBtnSelect = tankiNyushoBtnSelect;
     }
 
-    public void setSelfInfoJigyoshaNo(RString selfInfoJigyoshaNo) {
-        this.setOriginalData("selfInfoJigyoshaNo", selfInfoJigyoshaNo);
-        this.selfInfoJigyoshaNo = selfInfoJigyoshaNo;
+    public void setTankiNyushoJigyoshaNo(RString tankiNyushoJigyoshaNo) {
+        this.setOriginalData("tankiNyushoJigyoshaNo", tankiNyushoJigyoshaNo);
+        this.tankiNyushoJigyoshaNo = tankiNyushoJigyoshaNo;
     }
 
-    public void setSelfInfoServiceCode(RString selfInfoServiceCode) {
-        this.setOriginalData("selfInfoServiceCode", selfInfoServiceCode);
-        this.selfInfoServiceCode = selfInfoServiceCode;
+    public void setTankiNyushoServiceCode(RString tankiNyushoServiceCode) {
+        this.setOriginalData("tankiNyushoServiceCode", tankiNyushoServiceCode);
+        this.tankiNyushoServiceCode = tankiNyushoServiceCode;
     }
 
-    public void setSelfInfoUnit(RString selfInfoUnit) {
-        this.setOriginalData("selfInfoUnit", selfInfoUnit);
-        this.selfInfoUnit = selfInfoUnit;
+    public void setTankiNyushoUnit(RString tankiNyushoUnit) {
+        this.setOriginalData("tankiNyushoUnit", tankiNyushoUnit);
+        this.tankiNyushoUnit = tankiNyushoUnit;
     }
 
-    public void setSelfInfoDateNum(RString selfInfoDateNum) {
-        this.setOriginalData("selfInfoDateNum", selfInfoDateNum);
-        this.selfInfoDateNum = selfInfoDateNum;
+    public void setTankiNyushoDateNum(RString tankiNyushoDateNum) {
+        this.setOriginalData("tankiNyushoDateNum", tankiNyushoDateNum);
+        this.tankiNyushoDateNum = tankiNyushoDateNum;
     }
 
-    public void setSelfInfoKyufuDateNum(RString selfInfoKyufuDateNum) {
-        this.setOriginalData("selfInfoKyufuDateNum", selfInfoKyufuDateNum);
-        this.selfInfoKyufuDateNum = selfInfoKyufuDateNum;
+    public void setTankiNyushoKyufuDateNum(RString tankiNyushoKyufuDateNum) {
+        this.setOriginalData("tankiNyushoKyufuDateNum", tankiNyushoKyufuDateNum);
+        this.tankiNyushoKyufuDateNum = tankiNyushoKyufuDateNum;
     }
 
-    public void setSelfInfoKyufugaiDateNum(RString selfInfoKyufugaiDateNum) {
-        this.setOriginalData("selfInfoKyufugaiDateNum", selfInfoKyufugaiDateNum);
-        this.selfInfoKyufugaiDateNum = selfInfoKyufugaiDateNum;
+    public void setTankiNyushoKyufugaiDateNum(RString tankiNyushoKyufugaiDateNum) {
+        this.setOriginalData("tankiNyushoKyufugaiDateNum", tankiNyushoKyufugaiDateNum);
+        this.tankiNyushoKyufugaiDateNum = tankiNyushoKyufugaiDateNum;
     }
 
-    public void setSelfInfoUnitTanka(RString selfInfoUnitTanka) {
-        this.setOriginalData("selfInfoUnitTanka", selfInfoUnitTanka);
-        this.selfInfoUnitTanka = selfInfoUnitTanka;
+    public void setTankiNyushoUnitTanka(RString tankiNyushoUnitTanka) {
+        this.setOriginalData("tankiNyushoUnitTanka", tankiNyushoUnitTanka);
+        this.tankiNyushoUnitTanka = tankiNyushoUnitTanka;
     }
 
-    public void setSelfInfoKyufuRitsu(RString selfInfoKyufuRitsu) {
-        this.setOriginalData("selfInfoKyufuRitsu", selfInfoKyufuRitsu);
-        this.selfInfoKyufuRitsu = selfInfoKyufuRitsu;
+    public void setTankiNyushoKyufuRitsu(RString tankiNyushoKyufuRitsu) {
+        this.setOriginalData("tankiNyushoKyufuRitsu", tankiNyushoKyufuRitsu);
+        this.tankiNyushoKyufuRitsu = tankiNyushoKyufuRitsu;
     }
 
-    public void setSelfInfoKubunLimitNaiUnit(RString selfInfoKubunLimitNaiUnit) {
-        this.setOriginalData("selfInfoKubunLimitNaiUnit", selfInfoKubunLimitNaiUnit);
-        this.selfInfoKubunLimitNaiUnit = selfInfoKubunLimitNaiUnit;
+    public void setTankiNyushoKubunLimitNaiUnit(RString tankiNyushoKubunLimitNaiUnit) {
+        this.setOriginalData("tankiNyushoKubunLimitNaiUnit", tankiNyushoKubunLimitNaiUnit);
+        this.tankiNyushoKubunLimitNaiUnit = tankiNyushoKubunLimitNaiUnit;
     }
 
-    public void setSelfInfoHiyoTotal(RString selfInfoHiyoTotal) {
-        this.setOriginalData("selfInfoHiyoTotal", selfInfoHiyoTotal);
-        this.selfInfoHiyoTotal = selfInfoHiyoTotal;
+    public void setTankiNyushoHiyoTotal(RString tankiNyushoHiyoTotal) {
+        this.setOriginalData("tankiNyushoHiyoTotal", tankiNyushoHiyoTotal);
+        this.tankiNyushoHiyoTotal = tankiNyushoHiyoTotal;
     }
 
-    public void setSelfInfoHokenKyufuGaku(RString selfInfoHokenKyufuGaku) {
-        this.setOriginalData("selfInfoHokenKyufuGaku", selfInfoHokenKyufuGaku);
-        this.selfInfoHokenKyufuGaku = selfInfoHokenKyufuGaku;
+    public void setTankiNyushoHokenKyufuGaku(RString tankiNyushoHokenKyufuGaku) {
+        this.setOriginalData("tankiNyushoHokenKyufuGaku", tankiNyushoHokenKyufuGaku);
+        this.tankiNyushoHokenKyufuGaku = tankiNyushoHokenKyufuGaku;
     }
 
-    public void setSelfInfoHokenFutan(RString selfInfoHokenFutan) {
-        this.setOriginalData("selfInfoHokenFutan", selfInfoHokenFutan);
-        this.selfInfoHokenFutan = selfInfoHokenFutan;
+    public void setTankiNyushoHokenFutan(RString tankiNyushoHokenFutan) {
+        this.setOriginalData("tankiNyushoHokenFutan", tankiNyushoHokenFutan);
+        this.tankiNyushoHokenFutan = tankiNyushoHokenFutan;
     }
 
-    public void setSelfInfoKyufuTaishogaiUnit(RString selfInfoKyufuTaishogaiUnit) {
-        this.setOriginalData("selfInfoKyufuTaishogaiUnit", selfInfoKyufuTaishogaiUnit);
-        this.selfInfoKyufuTaishogaiUnit = selfInfoKyufuTaishogaiUnit;
+    public void setTankiNyushoKyufuTaishogaiUnit(RString tankiNyushoKyufuTaishogaiUnit) {
+        this.setOriginalData("tankiNyushoKyufuTaishogaiUnit", tankiNyushoKyufuTaishogaiUnit);
+        this.tankiNyushoKyufuTaishogaiUnit = tankiNyushoKyufuTaishogaiUnit;
     }
 
-    public void setSelfInfoFutanTotal(RString selfInfoFutanTotal) {
-        this.setOriginalData("selfInfoFutanTotal", selfInfoFutanTotal);
-        this.selfInfoFutanTotal = selfInfoFutanTotal;
+    public void setTankiNyushoFutanTotal(RString tankiNyushoFutanTotal) {
+        this.setOriginalData("tankiNyushoFutanTotal", tankiNyushoFutanTotal);
+        this.tankiNyushoFutanTotal = tankiNyushoFutanTotal;
     }
 
 }

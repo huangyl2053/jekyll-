@@ -5,23 +5,23 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tblKyotakuServiceJikoSakuseiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tblKyotakuServiceJikoSakuseiSummarySub1Div;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KyotakuServiceJikoSakuseiDetail のクラスファイル 
+ * KyotakuServiceJikoSakuseiSummarySub1 のクラスファイル 
  * 
  * @author 自動生成
  */
-public class KyotakuServiceJikoSakuseiDetailDiv extends Panel {
+public class KyotakuServiceJikoSakuseiSummarySub1Div extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("tblKyotakuServiceJikoSakusei")
-    private tblKyotakuServiceJikoSakuseiDiv tblKyotakuServiceJikoSakusei;
+    @JsonProperty("tblKyotakuServiceJikoSakuseiSummarySub1")
+    private tblKyotakuServiceJikoSakuseiSummarySub1Div tblKyotakuServiceJikoSakuseiSummarySub1;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -29,14 +29,14 @@ public class KyotakuServiceJikoSakuseiDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("tblKyotakuServiceJikoSakusei")
-    public tblKyotakuServiceJikoSakuseiDiv getTblKyotakuServiceJikoSakusei() {
-        return tblKyotakuServiceJikoSakusei;
+    @JsonProperty("tblKyotakuServiceJikoSakuseiSummarySub1")
+    public tblKyotakuServiceJikoSakuseiSummarySub1Div getTblKyotakuServiceJikoSakuseiSummarySub1() {
+        return tblKyotakuServiceJikoSakuseiSummarySub1;
     }
 
-    @JsonProperty("tblKyotakuServiceJikoSakusei")
-    public void setTblKyotakuServiceJikoSakusei(tblKyotakuServiceJikoSakuseiDiv tblKyotakuServiceJikoSakusei) {
-        this.tblKyotakuServiceJikoSakusei=tblKyotakuServiceJikoSakusei;
+    @JsonProperty("tblKyotakuServiceJikoSakuseiSummarySub1")
+    public void setTblKyotakuServiceJikoSakuseiSummarySub1(tblKyotakuServiceJikoSakuseiSummarySub1Div tblKyotakuServiceJikoSakuseiSummarySub1) {
+        this.tblKyotakuServiceJikoSakuseiSummarySub1=tblKyotakuServiceJikoSakuseiSummarySub1;
     }
 
 }

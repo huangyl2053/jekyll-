@@ -11,11 +11,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * KyotakuServiceJikoSakuseiInfo のクラスファイル 
+ * KyotakuServiceTodokedeJiko のクラスファイル 
  * 
  * @author 自動生成
  */
-public class KyotakuServiceJikoSakuseiInfoDiv extends Panel {
+public class KyotakuServiceTodokedeJikoDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

@@ -95,7 +95,7 @@ public class tblKyotakuServiceJigyoshaSakuseiInfoDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public TextBoxMultiLine getTxtJigyoshaSakuseiJusho() {
+    public TextBox getTxtJigyoshaSakuseiJusho() {
         return this.tblKyotakuServiceJigyoshaSakuseiInfo2.getTxtJigyoshaSakuseiJusho();
     }
 
@@ -255,7 +255,7 @@ class tblKyotakuServiceJigyoshaSakuseiInfo2AttblKyotakuServiceJigyoshaSakuseiInf
     @JsonProperty("txtJigyoshaSakuseiYubinNo")
     private TextBoxYubinNo txtJigyoshaSakuseiYubinNo;
     @JsonProperty("txtJigyoshaSakuseiJusho")
-    private TextBoxMultiLine txtJigyoshaSakuseiJusho;
+    private TextBox txtJigyoshaSakuseiJusho;
     @JsonProperty("txtJigyoshaSakuseiKanrisha")
     private TextBox txtJigyoshaSakuseiKanrisha;
     @JsonProperty("txtJigyoshaSakuseiTelNo")
@@ -332,12 +332,12 @@ class tblKyotakuServiceJigyoshaSakuseiInfo2AttblKyotakuServiceJigyoshaSakuseiInf
     }
 
     @JsonProperty("txtJigyoshaSakuseiJusho")
-    public TextBoxMultiLine getTxtJigyoshaSakuseiJusho() {
+    public TextBox getTxtJigyoshaSakuseiJusho() {
         return txtJigyoshaSakuseiJusho;
     }
 
     @JsonProperty("txtJigyoshaSakuseiJusho")
-    public void setTxtJigyoshaSakuseiJusho(TextBoxMultiLine txtJigyoshaSakuseiJusho) {
+    public void setTxtJigyoshaSakuseiJusho(TextBox txtJigyoshaSakuseiJusho) {
         this.txtJigyoshaSakuseiJusho=txtJigyoshaSakuseiJusho;
     }
 

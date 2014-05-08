@@ -60,6 +60,11 @@ public class tblKyotakuServiceJikoSakuseiInfoDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public Label getLblKyotakuServiceJikoSakuseiInfo31() {
+        return this.tblKyotakuServiceJikoSakuseiInfo3.getLblKyotakuServiceJikoSakuseiInfo31();
+    }
+
+    @JsonIgnore
     public TextBox getTxtJikoSakuseiYoukaigodo() {
         return this.tblKyotakuServiceJikoSakuseiInfo3.getTxtJikoSakuseiYoukaigodo();
     }
@@ -188,10 +193,22 @@ class tblKyotakuServiceJikoSakuseiInfo2AttblKyotakuServiceJikoSakuseiInfo extend
  * @author 自動生成
  */
 class tblKyotakuServiceJikoSakuseiInfo3AttblKyotakuServiceJikoSakuseiInfo extends TableCell {
+    @JsonProperty("lblKyotakuServiceJikoSakuseiInfo31")
+    private Label lblKyotakuServiceJikoSakuseiInfo31;
     @JsonProperty("txtJikoSakuseiYoukaigodo")
     private TextBox txtJikoSakuseiYoukaigodo;
     @JsonProperty("txtJikoSakuseiYukoKikan")
     private TextBoxDateRange txtJikoSakuseiYukoKikan;
+
+    @JsonProperty("lblKyotakuServiceJikoSakuseiInfo31")
+    public Label getLblKyotakuServiceJikoSakuseiInfo31() {
+        return lblKyotakuServiceJikoSakuseiInfo31;
+    }
+
+    @JsonProperty("lblKyotakuServiceJikoSakuseiInfo31")
+    public void setLblKyotakuServiceJikoSakuseiInfo31(Label lblKyotakuServiceJikoSakuseiInfo31) {
+        this.lblKyotakuServiceJikoSakuseiInfo31=lblKyotakuServiceJikoSakuseiInfo31;
+    }
 
     @JsonProperty("txtJikoSakuseiYoukaigodo")
     public TextBox getTxtJikoSakuseiYoukaigodo() {

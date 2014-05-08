@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.HomonTsushoJikoSakuseiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgHomonTushoJikoSakusei_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tblHomonTsushoJikoSakuseiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tblHomonTsushoJikoSakuseiGoukeiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tblHomonTsushoJikoSakuseiMeisaiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tblHomonTsushoJikoSakuseiSummarySub1Div;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tblHomonTsushoJikoSakuseiSummarySub2Div;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -36,6 +39,7 @@ public class HomonTsushoJikoSakusei {
         setSummaryData(panel);
         List<dgHomonTushoJikoSakusei_Row> arrayData = create訪問通所一覧();
         dgRow.setDataSource(arrayData);
+        setDetailData(panel, arrayData.get(0));
         response.data = panel;
         return response;
     }
@@ -45,25 +49,26 @@ public class HomonTsushoJikoSakusei {
         dgHomonTushoJikoSakusei_Row item;
         Button btn = new Button();
 
-        item = createRow(btn, "1234567890", "111111", "100000", "50", "50000", "30", "4000", "2800", "2000", "2500", "2000", "10000", "150000", "90", "30000", "3000", "100000");
+        /* ボタン, 事業者No, ｻｰﾋﾞｽｺｰﾄﾞ, 単位, 割引後率, 割引後単位, 回数, サービス単位, 種類限度超過単位, 種類限度内単位, 区分限度超過単位, 区分限度内単位, 単位単価, 費用総額, 給付率, 保険給付額, 利用者負担（保険対象分）, 利用者負担（全額対象分）*/
+        item = createRow(btn, "1234567890", "111111:身体介護１２３４５６７８９", "1000", "50", "500", "30", "15000", "2800", "2000", "2500", "2000", "10.00", "20000", "90", "18000", "2000", "53000");
         arrayData.add(item);
-        item = createRow(btn, "1234567890", "111111", "200000", "50", "100000", "25", "5000", "3000", "2000", "2500", "2000", "10000", "150000", "90", "30000", "3000", "100000");
+        item = createRow(btn, "1234567890", "111111:身体介護１", "2000", "50", "1000", "25", "25000", "3000", "2000", "2500", "2000", "10.00", "20000", "90", "18000", "2000", "55000");
         arrayData.add(item);
-        item = createRow(null, "", "合計", "", "", "", "", "9000", "", "", "", "", "", "", "", "", "", "");
+        item = createRow(null, "", "合計", "", "", "", "", "40000", "5800", "4000", "5000", "4000", "", "40000", "", "36000", "4000", "108000");
         arrayData.add(item);
-        item = createRow(btn, "1234567891", "111111", "300000", "60", "120000", "30", "5000", "2000", "2000", "2500", "2000", "10000", "150000", "90", "30000", "3000", "100000");
+        item = createRow(btn, "1234567891", "111111:身体介護１", "3000", "60", "1800", "30", "54000", "2000", "2000", "2500", "2000", "10.00", "20000", "90", "18000", "2000", "45000");
         arrayData.add(item);
-        item = createRow(null, "", "合計", "", "", "", "", "5000", "", "", "", "", "", "", "", "", "", "");
+        item = createRow(null, "", "合計", "", "", "", "", "54000", "2000", "2000", "2500", "2000", "", "20000", "", "18000", "2000", "45000");
         arrayData.add(item);
-        item = createRow(btn, "1234567892", "111111", "100000", "50", "50000", "30", "4000", "2800", "2000", "2500", "2000", "10000", "150000", "90", "30000", "3000", "100000");
+        item = createRow(btn, "1234567892", "111111:身体介護１", "1000", "50", "500", "30", "15000", "2800", "2000", "2500", "2000", "10.00", "20000", "90", "18000", "2000", "40000");
         arrayData.add(item);
-        item = createRow(btn, "1234567892", "111111", "200000", "50", "100000", "25", "5000", "3000", "2000", "2500", "2000", "10000", "150000", "90", "30000", "3000", "100000");
+        item = createRow(btn, "1234567892", "111111:身体介護１", "2000", "50", "1000", "25", "25000", "3000", "2000", "2500", "2000", "10.00", "20000", "90", "18000", "2000", "40000");
         arrayData.add(item);
-        item = createRow(btn, "1234567892", "111111", "100000", "50", "50000", "30", "4000", "2800", "2000", "2500", "2000", "10000", "150000", "90", "30000", "3000", "100000");
+        item = createRow(btn, "1234567892", "111111:身体介護１", "1000", "50", "500", "30", "15000", "2800", "2000", "2500", "2000", "10.00", "20000", "90", "18000", "2000", "40000");
         arrayData.add(item);
-        item = createRow(btn, "1234567892", "111111", "200000", "50", "100000", "25", "5000", "3000", "2000", "2500", "2000", "10000", "150000", "90", "30000", "3000", "100000");
+        item = createRow(btn, "1234567892", "111111:身体介護１", "2000", "50", "1000", "25", "25000", "3000", "2000", "2500", "2000", "10.00", "20000", "90", "18000", "2000", "40000");
         arrayData.add(item);
-        item = createRow(null, "", "合計", "", "", "", "", "18000", "", "", "", "", "", "", "", "", "", "");
+        item = createRow(null, "", "合計", "", "", "", "", "80000", "11600", "8000", "10000", "8000", "", "80000", "", "72000", "8000", "160000");
         arrayData.add(item);
 
         return arrayData;
@@ -91,23 +96,23 @@ public class HomonTsushoJikoSakusei {
         dgHomonTushoJikoSakusei_Row item = new dgHomonTushoJikoSakusei_Row(
                 btn, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
-        item.setSelfInfoJigyoshaNo(new RString(JigyoshaNo));
-        item.setSelfInfoServiceCode(new RString(ServiceCode));
-        item.setSelfInfoUnit(new RString(stringToKingakuFormat(Unit)));
-        item.setSelfInfoWaribikiRitsu(new RString(WaribikiRitsu));
-        item.setSelfInfoWaribikiUnit(new RString(stringToKingakuFormat(WaribikiUnit)));
-        item.setSelfInfoNum(new RString(Num));
-        item.setSelfInfoServiceUnit(new RString(stringToKingakuFormat(ServiceUnit)));
-        item.setSelfInfoShuruiLimitChokaUnit(new RString(stringToKingakuFormat(ShuruiKijunChoka)));
-        item.setSelfInfoShuruiLimitNaiUnit(new RString(stringToKingakuFormat(ShuruiKijunNai)));
-        item.setSelfInfoKubunLimitChokaUnit(new RString(stringToKingakuFormat(KubunKijunChoka)));
-        item.setSelfInfoKubunLimitNaiUnit(new RString(stringToKingakuFormat(KubunKijunNai)));
-        item.setSelfInfoUnitTanka(new RString(stringToKingakuFormat(UnitTanka)));
-        item.setSelfInfoHiyoTotal(new RString(stringToKingakuFormat(HiyoTotal)));
-        item.setSelfInfoKyufuRitsu(new RString(KyufuRitsu));
-        item.setSelfInfoHokenKyufuGaku(new RString(stringToKingakuFormat(HokenKyufuGaku)));
-        item.setSelfInfoHokenFutan(new RString(stringToKingakuFormat(HokenFutan)));
-        item.setSelfInfoFutanTotal(new RString(stringToKingakuFormat(ZengakuFutan)));
+        item.setHomonTushoJigyoshaNo(new RString(JigyoshaNo));
+        item.setHomonTushoServiceCode(new RString(ServiceCode));
+        item.setHomonTushoUnit(new RString(stringToKingakuFormat(Unit)));
+        item.setHomonTushoWaribikiRitsu(new RString(WaribikiRitsu));
+        item.setHomonTushoWaribikiUnit(new RString(stringToKingakuFormat(WaribikiUnit)));
+        item.setHomonTushoNum(new RString(Num));
+        item.setHomonTushoServiceUnit(new RString(stringToKingakuFormat(ServiceUnit)));
+        item.setHomonTushoShuruiLimitChokaUnit(new RString(stringToKingakuFormat(ShuruiKijunChoka)));
+        item.setHomonTushoShuruiLimitNaiUnit(new RString(stringToKingakuFormat(ShuruiKijunNai)));
+        item.setHomonTushoKubunLimitChokaUnit(new RString(stringToKingakuFormat(KubunKijunChoka)));
+        item.setHomonTushoKubunLimitNaiUnit(new RString(stringToKingakuFormat(KubunKijunNai)));
+        item.setHomonTushoUnitTanka(new RString(UnitTanka));
+        item.setHomonTushoHiyoTotal(new RString(stringToKingakuFormat(HiyoTotal)));
+        item.setHomonTushoKyufuRitsu(new RString(KyufuRitsu));
+        item.setHomonTushoHokenKyufuGaku(new RString(stringToKingakuFormat(HokenKyufuGaku)));
+        item.setHomonTushoHokenFutan(new RString(stringToKingakuFormat(HokenFutan)));
+        item.setHomonTushoFutanTotal(new RString(stringToKingakuFormat(ZengakuFutan)));
         return item;
     }
 
@@ -129,9 +134,7 @@ public class HomonTsushoJikoSakusei {
      */
     public ResponseData<HomonTsushoJikoSakuseiDiv> onClick_JikoSakuseiShowDetail(HomonTsushoJikoSakuseiDiv panel) {
         ResponseData<HomonTsushoJikoSakuseiDiv> response = new ResponseData<>();
-        panel.getHomonTsushoJikoSakuseiDetail().setVisible(true);
-        panel.getHomonTsushoJikoSakuseiDetail().setDisplayNone(false);
-        setDetailData(panel);
+        setDetailData(panel, panel.getDgHomonTushoJikoSakusei().getClickedItem());
         response.data = panel;
         return response;
     }
@@ -140,40 +143,42 @@ public class HomonTsushoJikoSakusei {
      SummaryPanelにデータを設定
      */
     private void setSummaryData(HomonTsushoJikoSakuseiDiv panel) {
-        panel.getHomonTsushoJikoSakuseiSummary().getTxtHomonTsushoJikoSakusei1().setValue(new RString("888888"));
-        panel.getHomonTsushoJikoSakuseiSummary().getTxtHomonTsushoJikoSakusei2().setValue(new RString("888888"));
-        panel.getHomonTsushoJikoSakuseiSummary().getTxtHomonTsushoJikoSakusei3().setValue(new RString("888888"));
-        panel.getHomonTsushoJikoSakuseiSummary().getTxtHomonTsushoJikoSakuseiSikyuuGendoGaku().setValue(new RString("888,888"));
-        panel.getHomonTsushoJikoSakuseiSummary().getTxtHomonTsushoJikoSakuseiGendoKanriRange().setFromValue(new RDate("20030701"));
-        panel.getHomonTsushoJikoSakuseiSummary().getTxtHomonTsushoJikoSakuseiGendoKanriRange().setToValue(new RDate("20040531"));
+        tblHomonTsushoJikoSakuseiSummarySub1Div tbl1 = panel.getHomonTsushoJikoSakuseiSummarySub1().getTblHomonTsushoJikoSakuseiSummarySub1();
+        tblHomonTsushoJikoSakuseiSummarySub2Div tbl2 = panel.getHomonTsushoJikoSakuseiSummarySub2().getTblHomonTsushoJikoSakuseiSummarySub2();
+        tbl1.getTxtHomonTsushoJikoSakusei1().setValue(new RString("30"));
+        tbl1.getTxtHomonTsushoJikoSakusei2().setValue(new RString("10"));
+        tbl1.getTxtHomonTsushoJikoSakusei3().setValue(new RString("40"));
+        tbl2.getTxtHomonTsushoJikoSakuseiSikyuuGendoGaku().setValue(new RString("150,000"));
+        tbl2.getTxtHomonTsushoJikoSakuseiGendoKanriRange().setFromValue(new RDate("20010701"));
+        tbl2.getTxtHomonTsushoJikoSakuseiGendoKanriRange().setToValue(new RDate("20011031"));
     }
 
     /*
      詳細Panelにデータを設定
      */
-    private void setDetailData(HomonTsushoJikoSakuseiDiv panel) {
-        dgHomonTushoJikoSakusei_Row selectRow = panel.getDgHomonTushoJikoSakusei().getClickedItem();
-        tblHomonTsushoJikoSakuseiDiv setTbl = panel.getHomonTsushoJikoSakuseiDetail().getTblHomonTsushoJikoSakusei();
-        setTbl.getTxtHomonTsushoJikoSakuseiDetailJigyoshaNo().setValue(selectRow.getSelfInfoJigyoshaNo());
-        setTbl.getTxtHomonTsushoJikoSakuseiDetailJigyoshaName().setValue(new RString("あああ介護事業者"));
-        setTbl.getTxtHomonTsushoJikoSakuseiDetailServiceCode1().setValue(new RString("11"));
-        setTbl.getTxtHomonTsushoJikoSakuseiDetailServiceCode2().setValue(new RString("1111"));
-        setTbl.getTxtHomonTsushoJikoSakuseiDetailServiceCode3().setValue(new RString("身体介護１"));
-        setTbl.getTxtHomonTsushoJikoSakuseiDetailUnit().setValue(selectRow.getSelfInfoUnit());
-        setTbl.getTxtHomonTsushoJikoSakuseiDetailWaribikiTekiyougoRitsu().setValue(selectRow.getSelfInfoWaribikiRitsu());
-        setTbl.getTxtHomonTsushoJikoSakuseiDetailWaribikiTekiyougoUnit().setValue(selectRow.getSelfInfoWaribikiUnit());
-        setTbl.getTxtHomonTsushoJikoSakuseiDetailKaisu().setValue(selectRow.getSelfInfoNum());
-        setTbl.getTxtHomonTsushoJikoSakuseiDetailServiceUnit().setValue(selectRow.getSelfInfoServiceUnit());
-        setTbl.getTxtHomonTsushoJikoSakuseiDetailShuruiLimitChokaUnit().setValue(selectRow.getSelfInfoShuruiLimitChokaUnit());
-        setTbl.getTxtHomonTsushoJikoSakuseiDetailShuruiLimitNaiUnit().setValue(selectRow.getSelfInfoShuruiLimitNaiUnit());
-        setTbl.getTxtHomonTsushoJikoSakuseiDetailKubunLimitChokaUnit().setValue(selectRow.getSelfInfoKubunLimitChokaUnit());
-        setTbl.getTxtHomonTsushoJikoSakuseiDetailKubunLimitNaiUnit().setValue(selectRow.getSelfInfoKubunLimitNaiUnit());
-        setTbl.getTxtHomonTsushoJikoSakuseiDetailUnitTanka().setValue(selectRow.getSelfInfoUnitTanka());
-        setTbl.getTxtHomonTsushoJikoSakuseiDetailKyufuRitsu().setValue(selectRow.getSelfInfoKyufuRitsu());
-        setTbl.getTxtHomonTsushoJikoSakuseiDetailHiyoTotal().setValue(selectRow.getSelfInfoHiyoTotal());
-        setTbl.getTxtHomonTsushoJikoSakuseiDetailHokenKyufu().setValue(selectRow.getSelfInfoHokenKyufuGaku());
-        setTbl.getTxtHomonTsushoJikoSakuseiDetailRiyoshaFutanHoken().setValue(selectRow.getSelfInfoHokenFutan());
-        setTbl.getTxtHomonTsushoJikoSakuseiDetailRiyoshaFutanTotal().setValue(selectRow.getSelfInfoFutanTotal());
+    private void setDetailData(HomonTsushoJikoSakuseiDiv panel, dgHomonTushoJikoSakusei_Row selectRow) {
+        tblHomonTsushoJikoSakuseiMeisaiDiv meisai = panel.getTblHomonTsushoJikoSakuseiMeisai();
+        meisai.getTxtHomonTsushoJikoSakuseiDetailJigyoshaNo().setValue(selectRow.getHomonTushoJigyoshaNo());
+        meisai.getTxtHomonTsushoJikoSakuseiDetailJigyoshaName().setValue(new RString("あああ介護事業者"));
+        meisai.getTxtHomonTsushoJikoSakuseiDetailServiceCode1().setValue(new RString("11"));
+        meisai.getTxtHomonTsushoJikoSakuseiDetailServiceCode2().setValue(new RString("1111"));
+        meisai.getTxtHomonTsushoJikoSakuseiDetailServiceCode3().setValue(new RString("身体介護１"));
+        meisai.getTxtHomonTsushoJikoSakuseiDetailUnit().setValue(selectRow.getHomonTushoUnit());
+        meisai.getTxtHomonTsushoJikoSakuseiDetailWaribikiTekiyougoRitsu().setValue(selectRow.getHomonTushoWaribikiRitsu());
+        meisai.getTxtHomonTsushoJikoSakuseiDetailWaribikiTekiyougoUnit().setValue(selectRow.getHomonTushoWaribikiUnit());
+        meisai.getTxtHomonTsushoJikoSakuseiDetailKaisu().setValue(selectRow.getHomonTushoNum());
+        meisai.getTxtHomonTsushoJikoSakuseiDetailServiceUnit().setValue(selectRow.getHomonTushoServiceUnit());
+        tblHomonTsushoJikoSakuseiGoukeiDiv goukei = panel.getTblHomonTsushoJikoSakuseiGoukei();
+        goukei.getTxtHomonTsushoJikoSakuseiDetailShuruiLimitChokaUnit().setValue(selectRow.getHomonTushoShuruiLimitChokaUnit());
+        goukei.getTxtHomonTsushoJikoSakuseiDetailShuruiLimitNaiUnit().setValue(selectRow.getHomonTushoShuruiLimitNaiUnit());
+        goukei.getTxtHomonTsushoJikoSakuseiDetailKubunLimitChokaUnit().setValue(selectRow.getHomonTushoKubunLimitChokaUnit());
+        goukei.getTxtHomonTsushoJikoSakuseiDetailKubunLimitNaiUnit().setValue(selectRow.getHomonTushoKubunLimitNaiUnit());
+        goukei.getTxtHomonTsushoJikoSakuseiDetailUnitTanka().setValue(selectRow.getHomonTushoUnitTanka());
+        goukei.getTxtHomonTsushoJikoSakuseiDetailKyufuRitsu().setValue(selectRow.getHomonTushoKyufuRitsu());
+        goukei.getTxtHomonTsushoJikoSakuseiDetailHiyoTotal().setValue(selectRow.getHomonTushoHiyoTotal());
+        goukei.getTxtHomonTsushoJikoSakuseiDetailHokenKyufu().setValue(selectRow.getHomonTushoHokenKyufuGaku());
+        goukei.getTxtHomonTsushoJikoSakuseiDetailRiyoshaFutanHoken().setValue(selectRow.getHomonTushoHokenFutan());
+        goukei.getTxtHomonTsushoJikoSakuseiDetailRiyoshaFutanTotal().setValue(selectRow.getHomonTushoFutanTotal());
     }
 
 }

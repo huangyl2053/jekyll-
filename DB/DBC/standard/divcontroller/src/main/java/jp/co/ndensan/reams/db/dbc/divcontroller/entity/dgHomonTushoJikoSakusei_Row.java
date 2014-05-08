@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu May 01 13:23:05 JST 2014 
+ * Thu May 08 14:49:16 JST 2014 
  */
 
 
@@ -21,229 +21,229 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class dgHomonTushoJikoSakusei_Row extends DataRow {
 
-    private Button selfInfoBtnSelect;
-    private RString selfInfoJigyoshaNo;
-    private RString selfInfoServiceCode;
-    private RString selfInfoUnit;
-    private RString selfInfoWaribikiRitsu;
-    private RString selfInfoWaribikiUnit;
-    private RString selfInfoNum;
-    private RString selfInfoServiceUnit;
-    private RString selfInfoShuruiLimitChokaUnit;
-    private RString selfInfoShuruiLimitNaiUnit;
-    private RString selfInfoKubunLimitChokaUnit;
-    private RString selfInfoKubunLimitNaiUnit;
-    private RString selfInfoUnitTanka;
-    private RString selfInfoHiyoTotal;
-    private RString selfInfoKyufuRitsu;
-    private RString selfInfoHokenKyufuGaku;
-    private RString selfInfoHokenFutan;
-    private RString selfInfoFutanTotal;
+    private Button homonTushoBtnSelect;
+    private RString homonTushoJigyoshaNo;
+    private RString homonTushoServiceCode;
+    private RString homonTushoUnit;
+    private RString homonTushoWaribikiRitsu;
+    private RString homonTushoWaribikiUnit;
+    private RString homonTushoNum;
+    private RString homonTushoServiceUnit;
+    private RString homonTushoShuruiLimitChokaUnit;
+    private RString homonTushoShuruiLimitNaiUnit;
+    private RString homonTushoKubunLimitChokaUnit;
+    private RString homonTushoKubunLimitNaiUnit;
+    private RString homonTushoUnitTanka;
+    private RString homonTushoHiyoTotal;
+    private RString homonTushoKyufuRitsu;
+    private RString homonTushoHokenKyufuGaku;
+    private RString homonTushoHokenFutan;
+    private RString homonTushoFutanTotal;
 
     public dgHomonTushoJikoSakusei_Row() {
         super();
     }
 
-    public dgHomonTushoJikoSakusei_Row(Button selfInfoBtnSelect, RString selfInfoJigyoshaNo, RString selfInfoServiceCode, RString selfInfoUnit, RString selfInfoWaribikiRitsu, RString selfInfoWaribikiUnit, RString selfInfoNum, RString selfInfoServiceUnit, RString selfInfoShuruiLimitChokaUnit, RString selfInfoShuruiLimitNaiUnit, RString selfInfoKubunLimitChokaUnit, RString selfInfoKubunLimitNaiUnit, RString selfInfoUnitTanka, RString selfInfoHiyoTotal, RString selfInfoKyufuRitsu, RString selfInfoHokenKyufuGaku, RString selfInfoHokenFutan, RString selfInfoFutanTotal) {
+    public dgHomonTushoJikoSakusei_Row(Button homonTushoBtnSelect, RString homonTushoJigyoshaNo, RString homonTushoServiceCode, RString homonTushoUnit, RString homonTushoWaribikiRitsu, RString homonTushoWaribikiUnit, RString homonTushoNum, RString homonTushoServiceUnit, RString homonTushoShuruiLimitChokaUnit, RString homonTushoShuruiLimitNaiUnit, RString homonTushoKubunLimitChokaUnit, RString homonTushoKubunLimitNaiUnit, RString homonTushoUnitTanka, RString homonTushoHiyoTotal, RString homonTushoKyufuRitsu, RString homonTushoHokenKyufuGaku, RString homonTushoHokenFutan, RString homonTushoFutanTotal) {
         super();
-        this.setOriginalData("selfInfoBtnSelect", selfInfoBtnSelect);
-        this.setOriginalData("selfInfoJigyoshaNo", selfInfoJigyoshaNo);
-        this.setOriginalData("selfInfoServiceCode", selfInfoServiceCode);
-        this.setOriginalData("selfInfoUnit", selfInfoUnit);
-        this.setOriginalData("selfInfoWaribikiRitsu", selfInfoWaribikiRitsu);
-        this.setOriginalData("selfInfoWaribikiUnit", selfInfoWaribikiUnit);
-        this.setOriginalData("selfInfoNum", selfInfoNum);
-        this.setOriginalData("selfInfoServiceUnit", selfInfoServiceUnit);
-        this.setOriginalData("selfInfoShuruiLimitChokaUnit", selfInfoShuruiLimitChokaUnit);
-        this.setOriginalData("selfInfoShuruiLimitNaiUnit", selfInfoShuruiLimitNaiUnit);
-        this.setOriginalData("selfInfoKubunLimitChokaUnit", selfInfoKubunLimitChokaUnit);
-        this.setOriginalData("selfInfoKubunLimitNaiUnit", selfInfoKubunLimitNaiUnit);
-        this.setOriginalData("selfInfoUnitTanka", selfInfoUnitTanka);
-        this.setOriginalData("selfInfoHiyoTotal", selfInfoHiyoTotal);
-        this.setOriginalData("selfInfoKyufuRitsu", selfInfoKyufuRitsu);
-        this.setOriginalData("selfInfoHokenKyufuGaku", selfInfoHokenKyufuGaku);
-        this.setOriginalData("selfInfoHokenFutan", selfInfoHokenFutan);
-        this.setOriginalData("selfInfoFutanTotal", selfInfoFutanTotal);
-        this.selfInfoBtnSelect = selfInfoBtnSelect;
-        this.selfInfoJigyoshaNo = selfInfoJigyoshaNo;
-        this.selfInfoServiceCode = selfInfoServiceCode;
-        this.selfInfoUnit = selfInfoUnit;
-        this.selfInfoWaribikiRitsu = selfInfoWaribikiRitsu;
-        this.selfInfoWaribikiUnit = selfInfoWaribikiUnit;
-        this.selfInfoNum = selfInfoNum;
-        this.selfInfoServiceUnit = selfInfoServiceUnit;
-        this.selfInfoShuruiLimitChokaUnit = selfInfoShuruiLimitChokaUnit;
-        this.selfInfoShuruiLimitNaiUnit = selfInfoShuruiLimitNaiUnit;
-        this.selfInfoKubunLimitChokaUnit = selfInfoKubunLimitChokaUnit;
-        this.selfInfoKubunLimitNaiUnit = selfInfoKubunLimitNaiUnit;
-        this.selfInfoUnitTanka = selfInfoUnitTanka;
-        this.selfInfoHiyoTotal = selfInfoHiyoTotal;
-        this.selfInfoKyufuRitsu = selfInfoKyufuRitsu;
-        this.selfInfoHokenKyufuGaku = selfInfoHokenKyufuGaku;
-        this.selfInfoHokenFutan = selfInfoHokenFutan;
-        this.selfInfoFutanTotal = selfInfoFutanTotal;
+        this.setOriginalData("homonTushoBtnSelect", homonTushoBtnSelect);
+        this.setOriginalData("homonTushoJigyoshaNo", homonTushoJigyoshaNo);
+        this.setOriginalData("homonTushoServiceCode", homonTushoServiceCode);
+        this.setOriginalData("homonTushoUnit", homonTushoUnit);
+        this.setOriginalData("homonTushoWaribikiRitsu", homonTushoWaribikiRitsu);
+        this.setOriginalData("homonTushoWaribikiUnit", homonTushoWaribikiUnit);
+        this.setOriginalData("homonTushoNum", homonTushoNum);
+        this.setOriginalData("homonTushoServiceUnit", homonTushoServiceUnit);
+        this.setOriginalData("homonTushoShuruiLimitChokaUnit", homonTushoShuruiLimitChokaUnit);
+        this.setOriginalData("homonTushoShuruiLimitNaiUnit", homonTushoShuruiLimitNaiUnit);
+        this.setOriginalData("homonTushoKubunLimitChokaUnit", homonTushoKubunLimitChokaUnit);
+        this.setOriginalData("homonTushoKubunLimitNaiUnit", homonTushoKubunLimitNaiUnit);
+        this.setOriginalData("homonTushoUnitTanka", homonTushoUnitTanka);
+        this.setOriginalData("homonTushoHiyoTotal", homonTushoHiyoTotal);
+        this.setOriginalData("homonTushoKyufuRitsu", homonTushoKyufuRitsu);
+        this.setOriginalData("homonTushoHokenKyufuGaku", homonTushoHokenKyufuGaku);
+        this.setOriginalData("homonTushoHokenFutan", homonTushoHokenFutan);
+        this.setOriginalData("homonTushoFutanTotal", homonTushoFutanTotal);
+        this.homonTushoBtnSelect = homonTushoBtnSelect;
+        this.homonTushoJigyoshaNo = homonTushoJigyoshaNo;
+        this.homonTushoServiceCode = homonTushoServiceCode;
+        this.homonTushoUnit = homonTushoUnit;
+        this.homonTushoWaribikiRitsu = homonTushoWaribikiRitsu;
+        this.homonTushoWaribikiUnit = homonTushoWaribikiUnit;
+        this.homonTushoNum = homonTushoNum;
+        this.homonTushoServiceUnit = homonTushoServiceUnit;
+        this.homonTushoShuruiLimitChokaUnit = homonTushoShuruiLimitChokaUnit;
+        this.homonTushoShuruiLimitNaiUnit = homonTushoShuruiLimitNaiUnit;
+        this.homonTushoKubunLimitChokaUnit = homonTushoKubunLimitChokaUnit;
+        this.homonTushoKubunLimitNaiUnit = homonTushoKubunLimitNaiUnit;
+        this.homonTushoUnitTanka = homonTushoUnitTanka;
+        this.homonTushoHiyoTotal = homonTushoHiyoTotal;
+        this.homonTushoKyufuRitsu = homonTushoKyufuRitsu;
+        this.homonTushoHokenKyufuGaku = homonTushoHokenKyufuGaku;
+        this.homonTushoHokenFutan = homonTushoHokenFutan;
+        this.homonTushoFutanTotal = homonTushoFutanTotal;
     }
 
-    public Button getSelfInfoBtnSelect() {
-        return selfInfoBtnSelect;
+    public Button getHomonTushoBtnSelect() {
+        return homonTushoBtnSelect;
     }
 
-    public RString getSelfInfoJigyoshaNo() {
-        return selfInfoJigyoshaNo;
+    public RString getHomonTushoJigyoshaNo() {
+        return homonTushoJigyoshaNo;
     }
 
-    public RString getSelfInfoServiceCode() {
-        return selfInfoServiceCode;
+    public RString getHomonTushoServiceCode() {
+        return homonTushoServiceCode;
     }
 
-    public RString getSelfInfoUnit() {
-        return selfInfoUnit;
+    public RString getHomonTushoUnit() {
+        return homonTushoUnit;
     }
 
-    public RString getSelfInfoWaribikiRitsu() {
-        return selfInfoWaribikiRitsu;
+    public RString getHomonTushoWaribikiRitsu() {
+        return homonTushoWaribikiRitsu;
     }
 
-    public RString getSelfInfoWaribikiUnit() {
-        return selfInfoWaribikiUnit;
+    public RString getHomonTushoWaribikiUnit() {
+        return homonTushoWaribikiUnit;
     }
 
-    public RString getSelfInfoNum() {
-        return selfInfoNum;
+    public RString getHomonTushoNum() {
+        return homonTushoNum;
     }
 
-    public RString getSelfInfoServiceUnit() {
-        return selfInfoServiceUnit;
+    public RString getHomonTushoServiceUnit() {
+        return homonTushoServiceUnit;
     }
 
-    public RString getSelfInfoShuruiLimitChokaUnit() {
-        return selfInfoShuruiLimitChokaUnit;
+    public RString getHomonTushoShuruiLimitChokaUnit() {
+        return homonTushoShuruiLimitChokaUnit;
     }
 
-    public RString getSelfInfoShuruiLimitNaiUnit() {
-        return selfInfoShuruiLimitNaiUnit;
+    public RString getHomonTushoShuruiLimitNaiUnit() {
+        return homonTushoShuruiLimitNaiUnit;
     }
 
-    public RString getSelfInfoKubunLimitChokaUnit() {
-        return selfInfoKubunLimitChokaUnit;
+    public RString getHomonTushoKubunLimitChokaUnit() {
+        return homonTushoKubunLimitChokaUnit;
     }
 
-    public RString getSelfInfoKubunLimitNaiUnit() {
-        return selfInfoKubunLimitNaiUnit;
+    public RString getHomonTushoKubunLimitNaiUnit() {
+        return homonTushoKubunLimitNaiUnit;
     }
 
-    public RString getSelfInfoUnitTanka() {
-        return selfInfoUnitTanka;
+    public RString getHomonTushoUnitTanka() {
+        return homonTushoUnitTanka;
     }
 
-    public RString getSelfInfoHiyoTotal() {
-        return selfInfoHiyoTotal;
+    public RString getHomonTushoHiyoTotal() {
+        return homonTushoHiyoTotal;
     }
 
-    public RString getSelfInfoKyufuRitsu() {
-        return selfInfoKyufuRitsu;
+    public RString getHomonTushoKyufuRitsu() {
+        return homonTushoKyufuRitsu;
     }
 
-    public RString getSelfInfoHokenKyufuGaku() {
-        return selfInfoHokenKyufuGaku;
+    public RString getHomonTushoHokenKyufuGaku() {
+        return homonTushoHokenKyufuGaku;
     }
 
-    public RString getSelfInfoHokenFutan() {
-        return selfInfoHokenFutan;
+    public RString getHomonTushoHokenFutan() {
+        return homonTushoHokenFutan;
     }
 
-    public RString getSelfInfoFutanTotal() {
-        return selfInfoFutanTotal;
+    public RString getHomonTushoFutanTotal() {
+        return homonTushoFutanTotal;
     }
 
-    public void setSelfInfoBtnSelect(Button selfInfoBtnSelect) {
-        this.setOriginalData("selfInfoBtnSelect", selfInfoBtnSelect);
-        this.selfInfoBtnSelect = selfInfoBtnSelect;
+    public void setHomonTushoBtnSelect(Button homonTushoBtnSelect) {
+        this.setOriginalData("homonTushoBtnSelect", homonTushoBtnSelect);
+        this.homonTushoBtnSelect = homonTushoBtnSelect;
     }
 
-    public void setSelfInfoJigyoshaNo(RString selfInfoJigyoshaNo) {
-        this.setOriginalData("selfInfoJigyoshaNo", selfInfoJigyoshaNo);
-        this.selfInfoJigyoshaNo = selfInfoJigyoshaNo;
+    public void setHomonTushoJigyoshaNo(RString homonTushoJigyoshaNo) {
+        this.setOriginalData("homonTushoJigyoshaNo", homonTushoJigyoshaNo);
+        this.homonTushoJigyoshaNo = homonTushoJigyoshaNo;
     }
 
-    public void setSelfInfoServiceCode(RString selfInfoServiceCode) {
-        this.setOriginalData("selfInfoServiceCode", selfInfoServiceCode);
-        this.selfInfoServiceCode = selfInfoServiceCode;
+    public void setHomonTushoServiceCode(RString homonTushoServiceCode) {
+        this.setOriginalData("homonTushoServiceCode", homonTushoServiceCode);
+        this.homonTushoServiceCode = homonTushoServiceCode;
     }
 
-    public void setSelfInfoUnit(RString selfInfoUnit) {
-        this.setOriginalData("selfInfoUnit", selfInfoUnit);
-        this.selfInfoUnit = selfInfoUnit;
+    public void setHomonTushoUnit(RString homonTushoUnit) {
+        this.setOriginalData("homonTushoUnit", homonTushoUnit);
+        this.homonTushoUnit = homonTushoUnit;
     }
 
-    public void setSelfInfoWaribikiRitsu(RString selfInfoWaribikiRitsu) {
-        this.setOriginalData("selfInfoWaribikiRitsu", selfInfoWaribikiRitsu);
-        this.selfInfoWaribikiRitsu = selfInfoWaribikiRitsu;
+    public void setHomonTushoWaribikiRitsu(RString homonTushoWaribikiRitsu) {
+        this.setOriginalData("homonTushoWaribikiRitsu", homonTushoWaribikiRitsu);
+        this.homonTushoWaribikiRitsu = homonTushoWaribikiRitsu;
     }
 
-    public void setSelfInfoWaribikiUnit(RString selfInfoWaribikiUnit) {
-        this.setOriginalData("selfInfoWaribikiUnit", selfInfoWaribikiUnit);
-        this.selfInfoWaribikiUnit = selfInfoWaribikiUnit;
+    public void setHomonTushoWaribikiUnit(RString homonTushoWaribikiUnit) {
+        this.setOriginalData("homonTushoWaribikiUnit", homonTushoWaribikiUnit);
+        this.homonTushoWaribikiUnit = homonTushoWaribikiUnit;
     }
 
-    public void setSelfInfoNum(RString selfInfoNum) {
-        this.setOriginalData("selfInfoNum", selfInfoNum);
-        this.selfInfoNum = selfInfoNum;
+    public void setHomonTushoNum(RString homonTushoNum) {
+        this.setOriginalData("homonTushoNum", homonTushoNum);
+        this.homonTushoNum = homonTushoNum;
     }
 
-    public void setSelfInfoServiceUnit(RString selfInfoServiceUnit) {
-        this.setOriginalData("selfInfoServiceUnit", selfInfoServiceUnit);
-        this.selfInfoServiceUnit = selfInfoServiceUnit;
+    public void setHomonTushoServiceUnit(RString homonTushoServiceUnit) {
+        this.setOriginalData("homonTushoServiceUnit", homonTushoServiceUnit);
+        this.homonTushoServiceUnit = homonTushoServiceUnit;
     }
 
-    public void setSelfInfoShuruiLimitChokaUnit(RString selfInfoShuruiLimitChokaUnit) {
-        this.setOriginalData("selfInfoShuruiLimitChokaUnit", selfInfoShuruiLimitChokaUnit);
-        this.selfInfoShuruiLimitChokaUnit = selfInfoShuruiLimitChokaUnit;
+    public void setHomonTushoShuruiLimitChokaUnit(RString homonTushoShuruiLimitChokaUnit) {
+        this.setOriginalData("homonTushoShuruiLimitChokaUnit", homonTushoShuruiLimitChokaUnit);
+        this.homonTushoShuruiLimitChokaUnit = homonTushoShuruiLimitChokaUnit;
     }
 
-    public void setSelfInfoShuruiLimitNaiUnit(RString selfInfoShuruiLimitNaiUnit) {
-        this.setOriginalData("selfInfoShuruiLimitNaiUnit", selfInfoShuruiLimitNaiUnit);
-        this.selfInfoShuruiLimitNaiUnit = selfInfoShuruiLimitNaiUnit;
+    public void setHomonTushoShuruiLimitNaiUnit(RString homonTushoShuruiLimitNaiUnit) {
+        this.setOriginalData("homonTushoShuruiLimitNaiUnit", homonTushoShuruiLimitNaiUnit);
+        this.homonTushoShuruiLimitNaiUnit = homonTushoShuruiLimitNaiUnit;
     }
 
-    public void setSelfInfoKubunLimitChokaUnit(RString selfInfoKubunLimitChokaUnit) {
-        this.setOriginalData("selfInfoKubunLimitChokaUnit", selfInfoKubunLimitChokaUnit);
-        this.selfInfoKubunLimitChokaUnit = selfInfoKubunLimitChokaUnit;
+    public void setHomonTushoKubunLimitChokaUnit(RString homonTushoKubunLimitChokaUnit) {
+        this.setOriginalData("homonTushoKubunLimitChokaUnit", homonTushoKubunLimitChokaUnit);
+        this.homonTushoKubunLimitChokaUnit = homonTushoKubunLimitChokaUnit;
     }
 
-    public void setSelfInfoKubunLimitNaiUnit(RString selfInfoKubunLimitNaiUnit) {
-        this.setOriginalData("selfInfoKubunLimitNaiUnit", selfInfoKubunLimitNaiUnit);
-        this.selfInfoKubunLimitNaiUnit = selfInfoKubunLimitNaiUnit;
+    public void setHomonTushoKubunLimitNaiUnit(RString homonTushoKubunLimitNaiUnit) {
+        this.setOriginalData("homonTushoKubunLimitNaiUnit", homonTushoKubunLimitNaiUnit);
+        this.homonTushoKubunLimitNaiUnit = homonTushoKubunLimitNaiUnit;
     }
 
-    public void setSelfInfoUnitTanka(RString selfInfoUnitTanka) {
-        this.setOriginalData("selfInfoUnitTanka", selfInfoUnitTanka);
-        this.selfInfoUnitTanka = selfInfoUnitTanka;
+    public void setHomonTushoUnitTanka(RString homonTushoUnitTanka) {
+        this.setOriginalData("homonTushoUnitTanka", homonTushoUnitTanka);
+        this.homonTushoUnitTanka = homonTushoUnitTanka;
     }
 
-    public void setSelfInfoHiyoTotal(RString selfInfoHiyoTotal) {
-        this.setOriginalData("selfInfoHiyoTotal", selfInfoHiyoTotal);
-        this.selfInfoHiyoTotal = selfInfoHiyoTotal;
+    public void setHomonTushoHiyoTotal(RString homonTushoHiyoTotal) {
+        this.setOriginalData("homonTushoHiyoTotal", homonTushoHiyoTotal);
+        this.homonTushoHiyoTotal = homonTushoHiyoTotal;
     }
 
-    public void setSelfInfoKyufuRitsu(RString selfInfoKyufuRitsu) {
-        this.setOriginalData("selfInfoKyufuRitsu", selfInfoKyufuRitsu);
-        this.selfInfoKyufuRitsu = selfInfoKyufuRitsu;
+    public void setHomonTushoKyufuRitsu(RString homonTushoKyufuRitsu) {
+        this.setOriginalData("homonTushoKyufuRitsu", homonTushoKyufuRitsu);
+        this.homonTushoKyufuRitsu = homonTushoKyufuRitsu;
     }
 
-    public void setSelfInfoHokenKyufuGaku(RString selfInfoHokenKyufuGaku) {
-        this.setOriginalData("selfInfoHokenKyufuGaku", selfInfoHokenKyufuGaku);
-        this.selfInfoHokenKyufuGaku = selfInfoHokenKyufuGaku;
+    public void setHomonTushoHokenKyufuGaku(RString homonTushoHokenKyufuGaku) {
+        this.setOriginalData("homonTushoHokenKyufuGaku", homonTushoHokenKyufuGaku);
+        this.homonTushoHokenKyufuGaku = homonTushoHokenKyufuGaku;
     }
 
-    public void setSelfInfoHokenFutan(RString selfInfoHokenFutan) {
-        this.setOriginalData("selfInfoHokenFutan", selfInfoHokenFutan);
-        this.selfInfoHokenFutan = selfInfoHokenFutan;
+    public void setHomonTushoHokenFutan(RString homonTushoHokenFutan) {
+        this.setOriginalData("homonTushoHokenFutan", homonTushoHokenFutan);
+        this.homonTushoHokenFutan = homonTushoHokenFutan;
     }
 
-    public void setSelfInfoFutanTotal(RString selfInfoFutanTotal) {
-        this.setOriginalData("selfInfoFutanTotal", selfInfoFutanTotal);
-        this.selfInfoFutanTotal = selfInfoFutanTotal;
+    public void setHomonTushoFutanTotal(RString homonTushoFutanTotal) {
+        this.setOriginalData("homonTushoFutanTotal", homonTushoFutanTotal);
+        this.homonTushoFutanTotal = homonTushoFutanTotal;
     }
 
 }

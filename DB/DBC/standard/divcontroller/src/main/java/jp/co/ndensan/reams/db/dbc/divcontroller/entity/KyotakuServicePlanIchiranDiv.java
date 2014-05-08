@@ -5,8 +5,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuServiceJigyoshaSakuseiInfoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuServiceJikoSakuseiInfoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuServiceTodokedeInfoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.SetaiJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgKyotakuServicePlanIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -31,10 +30,8 @@ public class KyotakuServicePlanIchiranDiv extends Panel {
     private SetaiJohoDiv SetaiJoho;
     @JsonProperty("dgKyotakuServicePlanIchiran")
     private DataGrid<dgKyotakuServicePlanIchiran_Row> dgKyotakuServicePlanIchiran;
-    @JsonProperty("KyotakuServiceJigyoshaSakuseiInfo")
-    private KyotakuServiceJigyoshaSakuseiInfoDiv KyotakuServiceJigyoshaSakuseiInfo;
-    @JsonProperty("KyotakuServiceJikoSakuseiInfo")
-    private KyotakuServiceJikoSakuseiInfoDiv KyotakuServiceJikoSakuseiInfo;
+    @JsonProperty("KyotakuServiceTodokedeInfo")
+    private KyotakuServiceTodokedeInfoDiv KyotakuServiceTodokedeInfo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -72,24 +69,14 @@ public class KyotakuServicePlanIchiranDiv extends Panel {
         this.dgKyotakuServicePlanIchiran=dgKyotakuServicePlanIchiran;
     }
 
-    @JsonProperty("KyotakuServiceJigyoshaSakuseiInfo")
-    public KyotakuServiceJigyoshaSakuseiInfoDiv getKyotakuServiceJigyoshaSakuseiInfo() {
-        return KyotakuServiceJigyoshaSakuseiInfo;
+    @JsonProperty("KyotakuServiceTodokedeInfo")
+    public KyotakuServiceTodokedeInfoDiv getKyotakuServiceTodokedeInfo() {
+        return KyotakuServiceTodokedeInfo;
     }
 
-    @JsonProperty("KyotakuServiceJigyoshaSakuseiInfo")
-    public void setKyotakuServiceJigyoshaSakuseiInfo(KyotakuServiceJigyoshaSakuseiInfoDiv KyotakuServiceJigyoshaSakuseiInfo) {
-        this.KyotakuServiceJigyoshaSakuseiInfo=KyotakuServiceJigyoshaSakuseiInfo;
-    }
-
-    @JsonProperty("KyotakuServiceJikoSakuseiInfo")
-    public KyotakuServiceJikoSakuseiInfoDiv getKyotakuServiceJikoSakuseiInfo() {
-        return KyotakuServiceJikoSakuseiInfo;
-    }
-
-    @JsonProperty("KyotakuServiceJikoSakuseiInfo")
-    public void setKyotakuServiceJikoSakuseiInfo(KyotakuServiceJikoSakuseiInfoDiv KyotakuServiceJikoSakuseiInfo) {
-        this.KyotakuServiceJikoSakuseiInfo=KyotakuServiceJikoSakuseiInfo;
+    @JsonProperty("KyotakuServiceTodokedeInfo")
+    public void setKyotakuServiceTodokedeInfo(KyotakuServiceTodokedeInfoDiv KyotakuServiceTodokedeInfo) {
+        this.KyotakuServiceTodokedeInfo=KyotakuServiceTodokedeInfo;
     }
 
 }

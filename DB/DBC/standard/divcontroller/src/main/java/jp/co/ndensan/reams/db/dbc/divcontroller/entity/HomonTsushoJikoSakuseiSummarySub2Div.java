@@ -5,23 +5,23 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tblKyotakuServiceJigyoshaSakuseiInfoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tblHomonTsushoJikoSakuseiSummarySub2Div;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KyotakuServiceJigyoshaSakuseiInfo のクラスファイル 
+ * HomonTsushoJikoSakuseiSummarySub2 のクラスファイル 
  * 
  * @author 自動生成
  */
-public class KyotakuServiceJigyoshaSakuseiInfoDiv extends Panel {
+public class HomonTsushoJikoSakuseiSummarySub2Div extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("tblKyotakuServiceJigyoshaSakuseiInfo")
-    private tblKyotakuServiceJigyoshaSakuseiInfoDiv tblKyotakuServiceJigyoshaSakuseiInfo;
+    @JsonProperty("tblHomonTsushoJikoSakuseiSummarySub2")
+    private tblHomonTsushoJikoSakuseiSummarySub2Div tblHomonTsushoJikoSakuseiSummarySub2;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -29,14 +29,14 @@ public class KyotakuServiceJigyoshaSakuseiInfoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("tblKyotakuServiceJigyoshaSakuseiInfo")
-    public tblKyotakuServiceJigyoshaSakuseiInfoDiv getTblKyotakuServiceJigyoshaSakuseiInfo() {
-        return tblKyotakuServiceJigyoshaSakuseiInfo;
+    @JsonProperty("tblHomonTsushoJikoSakuseiSummarySub2")
+    public tblHomonTsushoJikoSakuseiSummarySub2Div getTblHomonTsushoJikoSakuseiSummarySub2() {
+        return tblHomonTsushoJikoSakuseiSummarySub2;
     }
 
-    @JsonProperty("tblKyotakuServiceJigyoshaSakuseiInfo")
-    public void setTblKyotakuServiceJigyoshaSakuseiInfo(tblKyotakuServiceJigyoshaSakuseiInfoDiv tblKyotakuServiceJigyoshaSakuseiInfo) {
-        this.tblKyotakuServiceJigyoshaSakuseiInfo=tblKyotakuServiceJigyoshaSakuseiInfo;
+    @JsonProperty("tblHomonTsushoJikoSakuseiSummarySub2")
+    public void setTblHomonTsushoJikoSakuseiSummarySub2(tblHomonTsushoJikoSakuseiSummarySub2Div tblHomonTsushoJikoSakuseiSummarySub2) {
+        this.tblHomonTsushoJikoSakuseiSummarySub2=tblHomonTsushoJikoSakuseiSummarySub2;
     }
 
 }

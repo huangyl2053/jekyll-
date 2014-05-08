@@ -6,15 +6,22 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuServiceJigyoshaSakuseiInfoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuServiceJikoSakuseiInfoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuServicePlanIchiranDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuServiceTodokedeCommonDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuServiceTodokedeJigyoshaDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuServiceTodokedeJikoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.SetaiJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgKyotakuServicePlanIchiran_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgSetaiJoho_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tblKyotakuServiceJigyoshaSakuseiInfoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tblKyotakuServiceJikoSakuseiInfoDiv;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
@@ -45,8 +52,15 @@ public class KyotakuServicePlanIchiran {
      */
     private void initPanel(KyotakuServicePlanIchiranDiv panel) {
         panel.getSetaiJoho().setVisible(false);
-        panel.getKyotakuServiceJigyoshaSakuseiInfo().setVisible(false);
-        panel.getKyotakuServiceJikoSakuseiInfo().setVisible(false);
+        panel.getSetaiJoho().setDisplayNone(true);
+        panel.getKyotakuServiceTodokedeInfo().setVisible(false);
+        panel.getKyotakuServiceTodokedeInfo().setDisplayNone(true);
+        panel.getKyotakuServiceTodokedeInfo().getKyotakuServiceTodokedeCommon().setVisible(false);
+        panel.getKyotakuServiceTodokedeInfo().getKyotakuServiceTodokedeCommon().setDisplayNone(true);
+        panel.getKyotakuServiceTodokedeInfo().getKyotakuServiceTodokedeJigyosha().setVisible(false);
+        panel.getKyotakuServiceTodokedeInfo().getKyotakuServiceTodokedeJigyosha().setDisplayNone(true);
+        panel.getKyotakuServiceTodokedeInfo().getKyotakuServiceTodokedeJiko().setVisible(false);
+        panel.getKyotakuServiceTodokedeInfo().getKyotakuServiceTodokedeJiko().setDisplayNone(true);
     }
 
     /**
@@ -55,7 +69,7 @@ public class KyotakuServicePlanIchiran {
      * @param panel 住民PanelDiv
      * @return 住民PanelDivのResponseData
      */
-    public ResponseData<KyotakuServicePlanIchiranDiv> onClick_showSetai(KyotakuServicePlanIchiranDiv panel) {
+    public ResponseData<KyotakuServicePlanIchiranDiv> onClick_ShowSetai(KyotakuServicePlanIchiranDiv panel) {
         ResponseData<KyotakuServicePlanIchiranDiv> response = new ResponseData<>();
         SetaiJohoDiv setai = panel.getSetaiJoho();
 
@@ -100,7 +114,7 @@ public class KyotakuServicePlanIchiran {
         rowData.setSetaiGender(new RString(gender));
         rowData.setSetaiBirthDay(new RString(birthDay));
         rowData.setSetaiTsuzukiGara(new RString(tsuzukiGara));
-        rowData.setSetaiJuminCode(new RString(JuminCode));
+        rowData.setSetaiShikibetsuCode(new RString(JuminCode));
         return rowData;
     }
 
@@ -114,25 +128,54 @@ public class KyotakuServicePlanIchiran {
         ResponseData<KyotakuServicePlanIchiranDiv> response = new ResponseData<>();
         dgKyotakuServicePlanIchiran_Row selectRow = panel.getDgKyotakuServicePlanIchiran().getClickedItem();
 
+        KyotakuServiceTodokedeCommonDiv common = panel.getKyotakuServiceTodokedeInfo().getKyotakuServiceTodokedeCommon();
+        KyotakuServiceTodokedeJigyoshaDiv jigyosha = panel.getKyotakuServiceTodokedeInfo().getKyotakuServiceTodokedeJigyosha();
+        KyotakuServiceTodokedeJikoDiv jiko = panel.getKyotakuServiceTodokedeInfo().getKyotakuServiceTodokedeJiko();
+
+        panel.getKyotakuServiceTodokedeInfo().setVisible(true);
+        panel.getKyotakuServiceTodokedeInfo().setDisplayNone(false);
+
+        common.setVisible(true);
+        common.setDisplayNone(false);
+        common.getTxtPlanSakuseiKubun1().setValue(new RString("計画依頼受付情報"));
+        common.getTxtPlanSakuseiKubun2().setValue(new RString("自己作成計画情報"));
+        common.getTxtPlanSakuseiKubun3().setValue(new RString("居宅・介護予防サービス情報"));
+        common.getTxtTodokedeStatus1().setValue(new RString("新規申請"));
+        common.getTxtTodokedeStatus2().setValue(new RString("再申請"));
+        common.getTxtTodokedeStatus2().setDisabled(true);
+        common.getTxtTodokedeStatus3().setValue(new RString("変更申請"));
+        common.getTxtTodokedeStatus3().setDisabled(true);
+        common.getTxtTodokedeStatus4().setValue(new RString("サービス変更"));
+        common.getTxtTodokedeStatus4().setDisabled(true);
+
         if (selectRow.getTxtPlanSakuseiKubun().compareTo(new RString("居宅支援")) == 0) {
-            panel.getKyotakuServiceJigyoshaSakuseiInfo().setVisible(true);
-            panel.getKyotakuServiceJigyoshaSakuseiInfo().setDisplayNone(false);
-            panel.getKyotakuServiceJikoSakuseiInfo().setVisible(false);
-            panel.getKyotakuServiceJikoSakuseiInfo().setDisplayNone(true);
+            jigyosha.setVisible(true);
+            jigyosha.setDisplayNone(false);
+            jiko.setVisible(false);
+            jiko.setDisplayNone(true);
+            common.getTxtPlanSakuseiKubun1().setDisabled(false);
+            common.getTxtPlanSakuseiKubun2().setDisabled(true);
+            common.getTxtPlanSakuseiKubun3().setDisabled(true);
             setKyotakuSienData(panel);
         } else {
-            panel.getKyotakuServiceJigyoshaSakuseiInfo().setVisible(false);
-            panel.getKyotakuServiceJigyoshaSakuseiInfo().setDisplayNone(true);
-            panel.getKyotakuServiceJikoSakuseiInfo().setVisible(true);
-            panel.getKyotakuServiceJikoSakuseiInfo().setDisplayNone(false);
+            jigyosha.setVisible(false);
+            jigyosha.setDisplayNone(true);
+            jiko.setVisible(true);
+            jiko.setDisplayNone(false);
             if (new FlexibleDate(selectRow.getTxtTaishoYMInvisible().concat(new RString("01"))).isBefore(new FlexibleDate(new RString("20020101")))) {
-                panel.getKyotakuServiceJikoSakuseiInfo().getBtnDlgKyotakuService().setVisible(false);
-                panel.getKyotakuServiceJikoSakuseiInfo().getBtnDlgHomonTsusho().setVisible(true);
-                panel.getKyotakuServiceJikoSakuseiInfo().getBtnDlgTankiNyusho().setVisible(true);
+                common.getTxtPlanSakuseiKubun1().setDisabled(true);
+                common.getTxtPlanSakuseiKubun2().setDisabled(true);
+                common.getTxtPlanSakuseiKubun3().setDisabled(false);
+                jiko.getBtnDlgKyotakuService().setVisible(false);
+                jiko.getBtnDlgHomonTsusho().setVisible(true);
+                jiko.getBtnDlgTankiNyusho().setVisible(true);
             } else {
-                panel.getKyotakuServiceJikoSakuseiInfo().getBtnDlgKyotakuService().setVisible(true);
-                panel.getKyotakuServiceJikoSakuseiInfo().getBtnDlgHomonTsusho().setVisible(false);
-                panel.getKyotakuServiceJikoSakuseiInfo().getBtnDlgTankiNyusho().setVisible(false);
+                common.getTxtPlanSakuseiKubun1().setDisabled(true);
+                common.getTxtPlanSakuseiKubun2().setDisabled(false);
+                common.getTxtPlanSakuseiKubun3().setDisabled(true);
+                jiko.getBtnDlgKyotakuService().setVisible(true);
+                jiko.getBtnDlgHomonTsusho().setVisible(false);
+                jiko.getBtnDlgTankiNyusho().setVisible(false);
             }
             setKojinSakuseiData(panel);
         }
@@ -144,22 +187,48 @@ public class KyotakuServicePlanIchiran {
      居宅支援の詳細表示へ計画一覧データグリッドで選択した行のデータを設定します。
      */
     private void setKyotakuSienData(KyotakuServicePlanIchiranDiv panel) {
-        KyotakuServiceJigyoshaSakuseiInfoDiv infoDiv = panel.getKyotakuServiceJigyoshaSakuseiInfo();
+        tblKyotakuServiceJigyoshaSakuseiInfoDiv jigyoshaInfoDiv = panel.getKyotakuServiceTodokedeInfo().getKyotakuServiceTodokedeJigyosha().getTblKyotakuServiceJigyoshaSakuseiInfo();
         dgKyotakuServicePlanIchiran_Row selectRow = panel.getDgKyotakuServicePlanIchiran().getClickedItem();
-        infoDiv.getTblKyotakuServiceJigyoshaSakuseiInfo().getTxtJigyoshaSakuseiJigyoshaNo().setValue(selectRow.getTxtJigyoshaNo());
-        infoDiv.getTblKyotakuServiceJigyoshaSakuseiInfo().getTxtJigyoshaSakuseiJigyoshaName().setValue(selectRow.getTxtJigyoshaName());
-        infoDiv.getTblKyotakuServiceJigyoshaSakuseiInfo().getTxtJigyoshaSakuseiStartYMD().setValue(new FlexibleDate(selectRow.getTxtStartYMDInvisible().toString()));
-        infoDiv.getTblKyotakuServiceJigyoshaSakuseiInfo().getTxtJigyoshaSakuseiEndYMD().setValue(new FlexibleDate(selectRow.getTxtEndYMDInvisible().toString()));
+
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiTodokedeKubun().setValue(new RString("新規"));
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiTodokedeYMD().setValue(new FlexibleDate(selectRow.getTxtStartYMDInvisible()));
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiStartYMD().setValue(new FlexibleDate(selectRow.getTxtStartYMDInvisible()));
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiEndYMD().setValue(new FlexibleDate(selectRow.getTxtEndYMDInvisible()));
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiKubun().setValue(new RString("居宅介護支援事業所作成"));
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiJigyoshaNo().setValue(selectRow.getTxtJigyoshaNo());
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiJigyoshaName().setValue(selectRow.getTxtJigyoshaName());
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiCategory1().setValue(new RString("居宅介護"));
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiCategory2().setValue(new RString("居宅予防"));
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiCategory3().setValue(new RString("小規模介護"));
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiCategory4().setValue(new RString("小規模予防"));
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiYubinNo().setValue(new YubinNo("381-0010"));
+        RString jusho = new RString("長野県長野市鶴賀七瀬中町276-6１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０");
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiJusho().setValue(jusho);
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiJusho().setToolTip(jusho);
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiKanrisha().setValue(new RString("電算　十郎"));
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiTelNo().setValue(new RString("123-456-7890"));
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiItakusakiNo().setValue(new RString("1234567890"));
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiItakusakiName().setValue(new RString("いいい介護施設"));
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiModifyYMD().setValue(new FlexibleDate(selectRow.getTxtStartYMDInvisible()));
+        jigyoshaInfoDiv.getTxtJigyoshaSakuseiModifyRiyu().setValue(new RString("ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ"));
+
     }
 
     /*
      個人作成の詳細表示へ計画一覧データグリッドで選択した行のデータを設定します。
      */
     private void setKojinSakuseiData(KyotakuServicePlanIchiranDiv panel) {
-        KyotakuServiceJikoSakuseiInfoDiv infoDiv = panel.getKyotakuServiceJikoSakuseiInfo();
+        tblKyotakuServiceJikoSakuseiInfoDiv jikoInfoDiv = panel.getKyotakuServiceTodokedeInfo().getKyotakuServiceTodokedeJiko().getTblKyotakuServiceJikoSakuseiInfo();
         dgKyotakuServicePlanIchiran_Row selectRow = panel.getDgKyotakuServicePlanIchiran().getClickedItem();
-        infoDiv.getTblKyotakuServiceJikoSakuseiInfo().getTxtJikoSakuseiStartYMD().setValue(new FlexibleDate(selectRow.getTxtStartYMDInvisible().toString()));
-        infoDiv.getTblKyotakuServiceJikoSakuseiInfo().getTxtJikoSakuseiEndYMD().setValue(new FlexibleDate(selectRow.getTxtEndYMDInvisible().toString()));
+        jikoInfoDiv.getTxtJikoSakuseiTishoYM().setValue(new FlexibleDate(selectRow.getTxtTaishoYMInvisible().concat(new RString("01"))));
+        jikoInfoDiv.getTxtJikoSakuseiCreateYMD().setValue(new FlexibleDate(selectRow.getTxtTaishoYMInvisible().concat(new RString("01"))));
+        jikoInfoDiv.getTxtJikoSakuseiTodokedeYMD().setValue(new FlexibleDate(selectRow.getTxtTaishoYMInvisible().concat(new RString("01"))));
+        jikoInfoDiv.getTxtJikoSakuseiStartYMD().setValue(new FlexibleDate(selectRow.getTxtStartYMDInvisible().toString()));
+        jikoInfoDiv.getTxtJikoSakuseiEndYMD().setValue(new FlexibleDate(selectRow.getTxtEndYMDInvisible().toString()));
+        jikoInfoDiv.getTxtJikoSakuseiYoukaigodo().setValue(new RString("要介護度３"));
+        jikoInfoDiv.getTxtJikoSakuseiYukoKikan().setFromValue(new RDate(selectRow.getTxtStartYMDInvisible().toString()));
+        jikoInfoDiv.getTxtJikoSakuseiYukoKikan().setToValue(new RDate(selectRow.getTxtEndYMDInvisible().toString()));
+
     }
 
     /*
@@ -188,7 +257,17 @@ public class KyotakuServicePlanIchiran {
         item = create計画(btn, "201404", "平26.04", "居宅支援", "", "20002", "福祉サービスセンター", "20140401", "平26.04.01", "", "", "有効");
         arrayData.add(item);
 
+        Collections.sort(arrayData, new DateComparator());
+
         return arrayData;
+    }
+
+    private class DateComparator implements Comparator<dgKyotakuServicePlanIchiran_Row> {
+
+        @Override
+        public int compare(dgKyotakuServicePlanIchiran_Row o1, dgKyotakuServicePlanIchiran_Row o2) {
+            return new FlexibleDate(o2.getTxtTaishoYMInvisible().concat(new RString("01"))).compareTo(new FlexibleDate(o1.getTxtTaishoYMInvisible().concat(new RString("01"))));
+        }
     }
 
     private dgKyotakuServicePlanIchiran_Row create計画(

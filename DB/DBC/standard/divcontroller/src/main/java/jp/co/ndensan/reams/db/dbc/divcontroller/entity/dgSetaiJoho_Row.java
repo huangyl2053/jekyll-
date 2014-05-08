@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu May 01 13:23:00 JST 2014 
+ * Thu May 08 14:51:11 JST 2014 
  */
 
 
@@ -20,38 +20,42 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class dgSetaiJoho_Row extends DataRow {
 
-    private RString setaiHihokenshaNo;
+    private RString setaiShikibetsuCode;
+    private RString setaiJuminShubetsu;
     private RString setaiName;
     private RString setaiGender;
     private RString setaiBirthDay;
     private RString setaiTsuzukiGara;
-    private RString setaiJuminShubetsu;
-    private RString setaiJuminCode;
+    private RString setaiHihokenshaNo;
 
     public dgSetaiJoho_Row() {
         super();
     }
 
-    public dgSetaiJoho_Row(RString setaiHihokenshaNo, RString setaiName, RString setaiGender, RString setaiBirthDay, RString setaiTsuzukiGara, RString setaiJuminShubetsu, RString setaiJuminCode) {
+    public dgSetaiJoho_Row(RString setaiShikibetsuCode, RString setaiJuminShubetsu, RString setaiName, RString setaiGender, RString setaiBirthDay, RString setaiTsuzukiGara, RString setaiHihokenshaNo) {
         super();
-        this.setOriginalData("setaiHihokenshaNo", setaiHihokenshaNo);
+        this.setOriginalData("setaiShikibetsuCode", setaiShikibetsuCode);
+        this.setOriginalData("setaiJuminShubetsu", setaiJuminShubetsu);
         this.setOriginalData("setaiName", setaiName);
         this.setOriginalData("setaiGender", setaiGender);
         this.setOriginalData("setaiBirthDay", setaiBirthDay);
         this.setOriginalData("setaiTsuzukiGara", setaiTsuzukiGara);
-        this.setOriginalData("setaiJuminShubetsu", setaiJuminShubetsu);
-        this.setOriginalData("setaiJuminCode", setaiJuminCode);
-        this.setaiHihokenshaNo = setaiHihokenshaNo;
+        this.setOriginalData("setaiHihokenshaNo", setaiHihokenshaNo);
+        this.setaiShikibetsuCode = setaiShikibetsuCode;
+        this.setaiJuminShubetsu = setaiJuminShubetsu;
         this.setaiName = setaiName;
         this.setaiGender = setaiGender;
         this.setaiBirthDay = setaiBirthDay;
         this.setaiTsuzukiGara = setaiTsuzukiGara;
-        this.setaiJuminShubetsu = setaiJuminShubetsu;
-        this.setaiJuminCode = setaiJuminCode;
+        this.setaiHihokenshaNo = setaiHihokenshaNo;
     }
 
-    public RString getSetaiHihokenshaNo() {
-        return setaiHihokenshaNo;
+    public RString getSetaiShikibetsuCode() {
+        return setaiShikibetsuCode;
+    }
+
+    public RString getSetaiJuminShubetsu() {
+        return setaiJuminShubetsu;
     }
 
     public RString getSetaiName() {
@@ -70,17 +74,18 @@ public class dgSetaiJoho_Row extends DataRow {
         return setaiTsuzukiGara;
     }
 
-    public RString getSetaiJuminShubetsu() {
-        return setaiJuminShubetsu;
+    public RString getSetaiHihokenshaNo() {
+        return setaiHihokenshaNo;
     }
 
-    public RString getSetaiJuminCode() {
-        return setaiJuminCode;
+    public void setSetaiShikibetsuCode(RString setaiShikibetsuCode) {
+        this.setOriginalData("setaiShikibetsuCode", setaiShikibetsuCode);
+        this.setaiShikibetsuCode = setaiShikibetsuCode;
     }
 
-    public void setSetaiHihokenshaNo(RString setaiHihokenshaNo) {
-        this.setOriginalData("setaiHihokenshaNo", setaiHihokenshaNo);
-        this.setaiHihokenshaNo = setaiHihokenshaNo;
+    public void setSetaiJuminShubetsu(RString setaiJuminShubetsu) {
+        this.setOriginalData("setaiJuminShubetsu", setaiJuminShubetsu);
+        this.setaiJuminShubetsu = setaiJuminShubetsu;
     }
 
     public void setSetaiName(RString setaiName) {
@@ -103,14 +108,9 @@ public class dgSetaiJoho_Row extends DataRow {
         this.setaiTsuzukiGara = setaiTsuzukiGara;
     }
 
-    public void setSetaiJuminShubetsu(RString setaiJuminShubetsu) {
-        this.setOriginalData("setaiJuminShubetsu", setaiJuminShubetsu);
-        this.setaiJuminShubetsu = setaiJuminShubetsu;
-    }
-
-    public void setSetaiJuminCode(RString setaiJuminCode) {
-        this.setOriginalData("setaiJuminCode", setaiJuminCode);
-        this.setaiJuminCode = setaiJuminCode;
+    public void setSetaiHihokenshaNo(RString setaiHihokenshaNo) {
+        this.setOriginalData("setaiHihokenshaNo", setaiHihokenshaNo);
+        this.setaiHihokenshaNo = setaiHihokenshaNo;
     }
 
 }
