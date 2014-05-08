@@ -1261,6 +1261,34 @@
      "backgroundColor": 0,
      "widthAuto": true,
      "isGroupBox": false
+    },
+    {
+     "fieldName": "btnDlgSeteiJoho",
+     "items": [],
+     "controlType": "ButtonDialog",
+     "width": "120",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "text": "世帯情報を表示",
+     "onClick": "",
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "displayChildDivName": "",
+     "dataPassing": [],
+     "visibleCloseButton": true,
+     "onOkClose": "",
+     "onBeforeOpenDialog": ""
     }
    ],
    "controlType": "Panel",
@@ -1308,13 +1336,13 @@
    "isGroupBox": false
   },
   {
-   "fieldName": "KyotakuServicePlanIchiran",
+   "fieldName": "SetaiJoho",
    "items": [
     {
-     "fieldName": "btnDisplaySeteiJoho",
+     "fieldName": "dgSetaiJoho",
      "items": [],
-     "controlType": "Button",
-     "width": "120",
+     "controlType": "DataGrid",
+     "width": "820",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1327,206 +1355,211 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "text": "世帯情報を表示",
-     "onClick": "onClick_ShowSetai",
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": ""
+     "gridSetting": {
+      "rowHeight": 25,
+      "isMultiSelectable": false,
+      "isShowFooter": true,
+      "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": false,
+      "header": {
+       "combineColumns": [],
+       "frozenColumn": "",
+       "headerHeight": 0
+      },
+      "columns": [
+       {
+        "columnName": "識別コード",
+        "dataName": "setaiShikibetsuCode",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 150,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "setaiShikibetsuCode"
+       },
+       {
+        "columnName": "住民種別",
+        "dataName": "setaiJuminShubetsu",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 100,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "setaiJuminShubetsu"
+       },
+       {
+        "columnName": "氏名",
+        "dataName": "setaiName",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 200,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "setaiName"
+       },
+       {
+        "columnName": "性別",
+        "dataName": "setaiGender",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 50,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "setaiGender"
+       },
+       {
+        "columnName": "生年月日",
+        "dataName": "setaiBirthDay",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 150,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "setaiBirthDay"
+       },
+       {
+        "columnName": "続柄",
+        "dataName": "setaiTsuzukiGara",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 50,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "setaiTsuzukiGara"
+       },
+       {
+        "columnName": "被保番号",
+        "dataName": "setaiHihokenshaNo",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 100,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "setaiHihokenshaNo"
+       }
+      ]
+     },
+     "height": "S",
+     "onSort": "",
+     "onSelect": "",
+     "onOnlyRow": "",
+     "onNoRow": "",
+     "onMultiRows": "",
+     "dataSource": [],
+     "sortOrder": "setaiJuminCode",
+     "isAscending": true,
+     "filterList": [],
+     "clickedRowId": -1
     },
     {
-     "fieldName": "SetaiJoho",
-     "items": [
-      {
-       "fieldName": "dgSetaiJoho",
-       "items": [],
-       "controlType": "DataGrid",
-       "width": "820",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "gridSetting": {
-        "rowHeight": 25,
-        "isMultiSelectable": false,
-        "isShowFooter": true,
-        "isShowFilter": false,
-        "isShowFilterButton": false,
-        "isShowRowState": false,
-        "header": {
-         "combineColumns": [],
-         "frozenColumn": "",
-         "headerHeight": 0
-        },
-        "columns": [
-         {
-          "columnName": "識別コード",
-          "dataName": "setaiShikibetsuCode",
-          "toolTip": "",
-          "bgColor": 0,
-          "width": 150,
-          "visible": true,
-          "cellType": 0,
-          "cellDetails": null,
-          "align": 1,
-          "resize": true,
-          "isPrivateInfo": false,
-          "sortKey": "setaiShikibetsuCode"
-         },
-         {
-          "columnName": "住民種別",
-          "dataName": "setaiJuminShubetsu",
-          "toolTip": "",
-          "bgColor": 0,
-          "width": 100,
-          "visible": true,
-          "cellType": 0,
-          "cellDetails": null,
-          "align": 1,
-          "resize": true,
-          "isPrivateInfo": false,
-          "sortKey": "setaiJuminShubetsu"
-         },
-         {
-          "columnName": "氏名",
-          "dataName": "setaiName",
-          "toolTip": "",
-          "bgColor": 0,
-          "width": 200,
-          "visible": true,
-          "cellType": 0,
-          "cellDetails": {
-           "cellType": 0
-          },
-          "align": 0,
-          "resize": true,
-          "isPrivateInfo": false,
-          "sortKey": "setaiName"
-         },
-         {
-          "columnName": "性別",
-          "dataName": "setaiGender",
-          "toolTip": "",
-          "bgColor": 0,
-          "width": 50,
-          "visible": true,
-          "cellType": 0,
-          "cellDetails": {
-           "cellType": 0
-          },
-          "align": 1,
-          "resize": true,
-          "isPrivateInfo": false,
-          "sortKey": "setaiGender"
-         },
-         {
-          "columnName": "生年月日",
-          "dataName": "setaiBirthDay",
-          "toolTip": "",
-          "bgColor": 0,
-          "width": 150,
-          "visible": true,
-          "cellType": 0,
-          "cellDetails": {
-           "cellType": 0
-          },
-          "align": 1,
-          "resize": true,
-          "isPrivateInfo": false,
-          "sortKey": "setaiBirthDay"
-         },
-         {
-          "columnName": "続柄",
-          "dataName": "setaiTsuzukiGara",
-          "toolTip": "",
-          "bgColor": 0,
-          "width": 50,
-          "visible": true,
-          "cellType": 0,
-          "cellDetails": {
-           "cellType": 0
-          },
-          "align": 1,
-          "resize": true,
-          "isPrivateInfo": false,
-          "sortKey": "setaiTsuzukiGara"
-         },
-         {
-          "columnName": "被保番号",
-          "dataName": "setaiHihokenshaNo",
-          "toolTip": "",
-          "bgColor": 0,
-          "width": 100,
-          "visible": true,
-          "cellType": 0,
-          "cellDetails": {
-           "cellType": 0
-          },
-          "align": 1,
-          "resize": true,
-          "isPrivateInfo": false,
-          "sortKey": "setaiHihokenshaNo"
-         }
-        ]
-       },
-       "height": "S",
-       "onSort": "",
-       "onSelect": "",
-       "onOnlyRow": "",
-       "onNoRow": "",
-       "onMultiRows": "",
-       "dataSource": [],
-       "sortOrder": "setaiJuminCode",
-       "isAscending": true,
-       "filterList": [],
-       "clickedRowId": -1
-      }
-     ],
-     "controlType": "Panel",
-     "width": "M",
-     "visible": false,
-     "displayNone": true,
+     "fieldName": "btnCloseSetaiJoho",
+     "items": [],
+     "controlType": "Button",
+     "width": "S",
+     "visible": true,
+     "displayNone": false,
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
      "wrap": true,
      "dependencies": [],
-     "float": 0,
+     "float": 2,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "onLoad": "",
-     "title": "世帯情報",
-     "isOpen": false,
-     "canOpenAndClose": true,
-     "postParameterPanelNames": [
-      {
-       "postParameterPanelNames": "SetaiJoho"
-      }
-     ],
-     "requestSettings": [],
-     "hiddenInput": [],
-     "onOpen": "",
-     "onClose": "",
-     "session": {},
-     "marginTop": "XS",
-     "marginBottom": "XS",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
-     "backgroundColor": 0,
-     "widthAuto": true,
-     "isGroupBox": false
-    },
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "text": "閉じる",
+     "onClick": "",
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
+    }
+   ],
+   "controlType": "Panel",
+   "width": "M",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0",
+   "marginRight": "0",
+   "onLoad": "",
+   "title": "世帯情報",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "SetaiJoho"
+    }
+   ],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/SetaiJoho/getOnLoadData"
+    }
+   ],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "XS",
+   "marginBottom": "XS",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": true,
+   "isGroupBox": false
+  },
+  {
+   "fieldName": "KyotakuServicePlanIchiran",
+   "items": [
     {
      "fieldName": "dgKyotakuServicePlanIchiran",
      "items": [],
@@ -1647,23 +1680,7 @@
         "dataName": "txtJigyoshaNo",
         "toolTip": "",
         "bgColor": 0,
-        "width": 100,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0
-        },
-        "align": 2,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "txtJigyoshaNo"
-       },
-       {
-        "columnName": "事業者名",
-        "dataName": "txtJigyoshaName",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 520,
+        "width": 620,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -1672,7 +1689,7 @@
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtJigyoshaName"
+        "sortKey": "txtJigyoshaNo"
        },
        {
         "columnName": "開始年月日invisible",
@@ -1769,133 +1786,7 @@
        "fieldName": "KyotakuServiceTodokedeCommon",
        "items": [
         {
-         "fieldName": "txtPlanSakuseiKubun1",
-         "items": [],
-         "controlType": "TextBox",
-         "width": "M",
-         "visible": true,
-         "displayNone": false,
-         "disabled": false,
-         "accessKey": "",
-         "nextFocusFieldName": "",
-         "wrap": false,
-         "dependencies": [],
-         "float": 0,
-         "toolTip": "",
-         "authorityMode": 0,
-         "marginLeft": "XS",
-         "marginRight": "XS",
-         "required": false,
-         "maxLength": 1000000000000,
-         "minLength": 0,
-         "textAlign": 1,
-         "readOnly": true,
-         "placeHolder": "計画依頼受付情報",
-         "textKind": 0,
-         "isPrivateInfo": false,
-         "isPassword": false,
-         "isComboBox": false,
-         "onFocus": "",
-         "onBlur": "",
-         "onChange": "",
-         "onKeyPress": "",
-         "text": "",
-         "suggest": [],
-         "value": "",
-         "labelLText": "",
-         "labelRText": "",
-         "labelLWidth": "S",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
-         "permitCharactor": ""
-        },
-        {
-         "fieldName": "txtPlanSakuseiKubun2",
-         "items": [],
-         "controlType": "TextBox",
-         "width": "M",
-         "visible": true,
-         "displayNone": false,
-         "disabled": false,
-         "accessKey": "",
-         "nextFocusFieldName": "",
-         "wrap": false,
-         "dependencies": [],
-         "float": 0,
-         "toolTip": "",
-         "authorityMode": 0,
-         "marginLeft": "XS",
-         "marginRight": "XS",
-         "required": false,
-         "maxLength": 1000000000000,
-         "minLength": 0,
-         "textAlign": 1,
-         "readOnly": true,
-         "placeHolder": "自己作成計画情報",
-         "textKind": 0,
-         "isPrivateInfo": false,
-         "isPassword": false,
-         "isComboBox": false,
-         "onFocus": "",
-         "onBlur": "",
-         "onChange": "",
-         "onKeyPress": "",
-         "text": "",
-         "suggest": [],
-         "value": "",
-         "labelLText": "",
-         "labelRText": "",
-         "labelLWidth": "S",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
-         "permitCharactor": ""
-        },
-        {
-         "fieldName": "txtPlanSakuseiKubun3",
-         "items": [],
-         "controlType": "TextBox",
-         "width": "M",
-         "visible": true,
-         "displayNone": false,
-         "disabled": false,
-         "accessKey": "",
-         "nextFocusFieldName": "",
-         "wrap": false,
-         "dependencies": [],
-         "float": 0,
-         "toolTip": "",
-         "authorityMode": 0,
-         "marginLeft": "XS",
-         "marginRight": "XS",
-         "required": false,
-         "maxLength": 1000000000000,
-         "minLength": 0,
-         "textAlign": 1,
-         "readOnly": true,
-         "placeHolder": "居宅・介護予防サービス情報",
-         "textKind": 0,
-         "isPrivateInfo": false,
-         "isPassword": false,
-         "isComboBox": false,
-         "onFocus": "",
-         "onBlur": "",
-         "onChange": "",
-         "onKeyPress": "",
-         "text": "",
-         "suggest": [],
-         "value": "",
-         "labelLText": "",
-         "labelRText": "",
-         "labelLWidth": "S",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
-         "permitCharactor": ""
-        },
-        {
-         "fieldName": "txtTodokedeStatus1",
+         "fieldName": "txtTodokedeStatus",
          "items": [],
          "controlType": "TextBox",
          "width": "S",
@@ -1929,135 +1820,9 @@
          "suggest": [],
          "value": "",
          "labelLText": "認定申請中状況",
-         "labelRText": "",
-         "labelLWidth": "110",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
-         "permitCharactor": ""
-        },
-        {
-         "fieldName": "txtTodokedeStatus2",
-         "items": [],
-         "controlType": "TextBox",
-         "width": "S",
-         "visible": true,
-         "displayNone": false,
-         "disabled": false,
-         "accessKey": "",
-         "nextFocusFieldName": "",
-         "wrap": false,
-         "dependencies": [],
-         "float": 0,
-         "toolTip": "",
-         "authorityMode": 0,
-         "marginLeft": "XS",
-         "marginRight": "XS",
-         "required": false,
-         "maxLength": 1000000000000,
-         "minLength": 0,
-         "textAlign": 1,
-         "readOnly": true,
-         "placeHolder": "再申請",
-         "textKind": 0,
-         "isPrivateInfo": false,
-         "isPassword": false,
-         "isComboBox": false,
-         "onFocus": "",
-         "onBlur": "",
-         "onChange": "",
-         "onKeyPress": "",
-         "text": "",
-         "suggest": [],
-         "value": "",
-         "labelLText": "",
-         "labelRText": "",
-         "labelLWidth": "S",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
-         "permitCharactor": ""
-        },
-        {
-         "fieldName": "txtTodokedeStatus3",
-         "items": [],
-         "controlType": "TextBox",
-         "width": "S",
-         "visible": true,
-         "displayNone": false,
-         "disabled": false,
-         "accessKey": "",
-         "nextFocusFieldName": "",
-         "wrap": false,
-         "dependencies": [],
-         "float": 0,
-         "toolTip": "",
-         "authorityMode": 0,
-         "marginLeft": "XS",
-         "marginRight": "XS",
-         "required": false,
-         "maxLength": 1000000000000,
-         "minLength": 0,
-         "textAlign": 1,
-         "readOnly": true,
-         "placeHolder": "変更申請",
-         "textKind": 0,
-         "isPrivateInfo": false,
-         "isPassword": false,
-         "isComboBox": false,
-         "onFocus": "",
-         "onBlur": "",
-         "onChange": "",
-         "onKeyPress": "",
-         "text": "",
-         "suggest": [],
-         "value": "",
-         "labelLText": "",
-         "labelRText": "",
-         "labelLWidth": "S",
-         "labelRWidth": "S",
-         "labelLAlign": 2,
-         "labelRAlign": 0,
-         "permitCharactor": ""
-        },
-        {
-         "fieldName": "txtTodokedeStatus4",
-         "items": [],
-         "controlType": "TextBox",
-         "width": "S",
-         "visible": true,
-         "displayNone": false,
-         "disabled": false,
-         "accessKey": "",
-         "nextFocusFieldName": "",
-         "wrap": false,
-         "dependencies": [],
-         "float": 0,
-         "toolTip": "",
-         "authorityMode": 0,
-         "marginLeft": "XS",
-         "marginRight": "XS",
-         "required": false,
-         "maxLength": 1000000000000,
-         "minLength": 0,
-         "textAlign": 1,
-         "readOnly": true,
-         "placeHolder": "サービス変更",
-         "textKind": 0,
-         "isPrivateInfo": false,
-         "isPassword": false,
-         "isComboBox": false,
-         "onFocus": "",
-         "onBlur": "",
-         "onChange": "",
-         "onKeyPress": "",
-         "text": "",
-         "suggest": [],
-         "value": "",
-         "labelLText": "",
          "labelRText": " ",
-         "labelLWidth": "S",
-         "labelRWidth": "680",
+         "labelLWidth": "110",
+         "labelRWidth": "1000",
          "labelLAlign": 2,
          "labelRAlign": 0,
          "permitCharactor": ""
@@ -2262,7 +2027,7 @@
              "minLength": 0,
              "textAlign": 0,
              "readOnly": true,
-             "placeHolder": "平23.04.01",
+             "placeHolder": "",
              "textKind": 0,
              "isPrivateInfo": false,
              "isPassword": false,
@@ -2275,9 +2040,9 @@
              "suggest": [],
              "value": "",
              "labelLText": "適用終了日",
-             "labelRText": " ",
+             "labelRText": "",
              "labelLWidth": "80",
-             "labelRWidth": "520",
+             "labelRWidth": "XS",
              "labelLAlign": 2,
              "labelRAlign": 0,
              "permitCharactor": "./_-",
@@ -2294,7 +2059,7 @@
              "disabled": false,
              "accessKey": "",
              "nextFocusFieldName": "",
-             "wrap": true,
+             "wrap": false,
              "dependencies": [],
              "float": 0,
              "toolTip": "",
@@ -2392,7 +2157,7 @@
              "fieldName": "txtJigyoshaSakuseiJigyoshaName",
              "items": [],
              "controlType": "TextBox",
-             "width": "1000",
+             "width": "L",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -2440,7 +2205,7 @@
              "disabled": false,
              "accessKey": "",
              "nextFocusFieldName": "",
-             "wrap": true,
+             "wrap": false,
              "dependencies": [],
              "float": 0,
              "toolTip": "",
@@ -2494,91 +2259,7 @@
              "minLength": 0,
              "textAlign": 1,
              "readOnly": true,
-             "placeHolder": "居宅予防",
-             "textKind": 0,
-             "isPrivateInfo": false,
-             "isPassword": false,
-             "isComboBox": false,
-             "onFocus": "",
-             "onBlur": "",
-             "onChange": "",
-             "onKeyPress": "",
-             "text": "",
-             "suggest": [],
-             "value": "",
-             "labelLText": "",
-             "labelRText": "",
-             "labelLWidth": "S",
-             "labelRWidth": "S",
-             "labelLAlign": 2,
-             "labelRAlign": 0,
-             "permitCharactor": ""
-            },
-            {
-             "fieldName": "txtJigyoshaSakuseiCategory3",
-             "items": [],
-             "controlType": "TextBox",
-             "width": "75",
-             "visible": true,
-             "displayNone": false,
-             "disabled": false,
-             "accessKey": "",
-             "nextFocusFieldName": "",
-             "wrap": false,
-             "dependencies": [],
-             "float": 0,
-             "toolTip": "",
-             "authorityMode": 0,
-             "marginLeft": "XS",
-             "marginRight": "XS",
-             "required": false,
-             "maxLength": 1000000000000,
-             "minLength": 0,
-             "textAlign": 1,
-             "readOnly": true,
              "placeHolder": "小規模介護",
-             "textKind": 0,
-             "isPrivateInfo": false,
-             "isPassword": false,
-             "isComboBox": false,
-             "onFocus": "",
-             "onBlur": "",
-             "onChange": "",
-             "onKeyPress": "",
-             "text": "",
-             "suggest": [],
-             "value": "",
-             "labelLText": "",
-             "labelRText": "",
-             "labelLWidth": "S",
-             "labelRWidth": "S",
-             "labelLAlign": 2,
-             "labelRAlign": 0,
-             "permitCharactor": ""
-            },
-            {
-             "fieldName": "txtJigyoshaSakuseiCategory4",
-             "items": [],
-             "controlType": "TextBox",
-             "width": "75",
-             "visible": true,
-             "displayNone": false,
-             "disabled": false,
-             "accessKey": "",
-             "nextFocusFieldName": "",
-             "wrap": false,
-             "dependencies": [],
-             "float": 0,
-             "toolTip": "",
-             "authorityMode": 0,
-             "marginLeft": "XS",
-             "marginRight": "XS",
-             "required": false,
-             "maxLength": 1000000000000,
-             "minLength": 0,
-             "textAlign": 1,
-             "readOnly": true,
-             "placeHolder": "小規模予防",
              "textKind": 0,
              "isPrivateInfo": false,
              "isPassword": false,
@@ -2632,7 +2313,7 @@
              "text": "",
              "suggest": [],
              "value": "",
-             "labelLText": "郵便番号",
+             "labelLText": "事業者住所",
              "labelRText": "",
              "labelLWidth": "S",
              "labelRWidth": "S",
@@ -2674,9 +2355,9 @@
              "text": "",
              "suggest": [],
              "value": "",
-             "labelLText": "住所",
+             "labelLText": "",
              "labelRText": "",
-             "labelLWidth": "40",
+             "labelLWidth": "S",
              "labelRWidth": "S",
              "labelLAlign": 2,
              "labelRAlign": 0,
@@ -2832,7 +2513,7 @@
              "fieldName": "txtJigyoshaSakuseiItakusakiName",
              "items": [],
              "controlType": "TextBox",
-             "width": "1000",
+             "width": "L",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -3238,7 +2919,7 @@
              "labelRAlign": 0,
              "permitCharactor": "./_-",
              "ymdKubun": 2,
-             "displayFormat": 1
+             "displayFormat": 0
             },
             {
              "fieldName": "txtJikoSakuseiEndYMD",
@@ -3282,7 +2963,7 @@
              "labelRAlign": 0,
              "permitCharactor": "./_-",
              "ymdKubun": 2,
-             "displayFormat": 1
+             "displayFormat": 0
             }
            ],
            "controlType": "TableCell",
@@ -3300,134 +2981,6 @@
            "marginLeft": 0,
            "marginRight": 0,
            "connectTd": "R2C1"
-          },
-          {
-           "fieldName": "tblKyotakuServiceJikoSakuseiInfo3",
-           "items": [
-            {
-             "fieldName": "lblKyotakuServiceJikoSakuseiInfo31",
-             "items": [],
-             "controlType": "Label",
-             "width": "70",
-             "visible": true,
-             "displayNone": false,
-             "disabled": false,
-             "accessKey": "",
-             "nextFocusFieldName": "",
-             "wrap": false,
-             "dependencies": [],
-             "float": 0,
-             "toolTip": "",
-             "authorityMode": 0,
-             "marginLeft": "XS",
-             "marginRight": "XS",
-             "required": false,
-             "isPrivateInfo": false,
-             "text": "認定情報",
-             "align": 0
-            },
-            {
-             "fieldName": "txtJikoSakuseiYoukaigodo",
-             "items": [],
-             "controlType": "TextBox",
-             "width": "80",
-             "visible": true,
-             "displayNone": false,
-             "disabled": false,
-             "accessKey": "",
-             "nextFocusFieldName": "",
-             "wrap": true,
-             "dependencies": [],
-             "float": 0,
-             "toolTip": "",
-             "authorityMode": 0,
-             "marginLeft": "XS",
-             "marginRight": "XS",
-             "required": false,
-             "maxLength": 1000000000000,
-             "minLength": 0,
-             "textAlign": 0,
-             "readOnly": true,
-             "placeHolder": "要介護度３",
-             "textKind": 0,
-             "isPrivateInfo": false,
-             "isPassword": false,
-             "isComboBox": false,
-             "onFocus": "",
-             "onBlur": "",
-             "onChange": "",
-             "onKeyPress": "",
-             "text": "",
-             "suggest": [],
-             "value": "",
-             "labelLText": "要介護度",
-             "labelRText": "",
-             "labelLWidth": "S",
-             "labelRWidth": "S",
-             "labelLAlign": 2,
-             "labelRAlign": 0,
-             "permitCharactor": ""
-            },
-            {
-             "fieldName": "txtJikoSakuseiYukoKikan",
-             "items": [],
-             "controlType": "TextBoxDateRange",
-             "width": "80",
-             "visible": true,
-             "displayNone": false,
-             "disabled": false,
-             "accessKey": "",
-             "nextFocusFieldName": "",
-             "wrap": false,
-             "dependencies": [],
-             "float": 0,
-             "toolTip": "",
-             "authorityMode": 0,
-             "marginLeft": "0",
-             "marginRight": "XS",
-             "readOnly": true,
-             "isPrivateInfo": false,
-             "isPassword": false,
-             "onFocus": "",
-             "onBlur": "",
-             "onChange": "",
-             "onKeyPress": "",
-             "labelLText": "認定有効期間",
-             "labelRText": "",
-             "labelLWidth": "S",
-             "labelRWidth": "S",
-             "labelLAlign": 2,
-             "labelRAlign": 0,
-             "permitCharactor": "",
-             "ymdKubun": 2,
-             "displayFormat": 0,
-             "fromPlaceHolder": "平12.04.13",
-             "toRequired": false,
-             "toPlaceHolder": "平12.08.15",
-             "isHolizontal": false,
-             "minDate": "",
-             "maxDate": "",
-             "fromText": "",
-             "toText": "",
-             "fromValue": "",
-             "toValue": ""
-            }
-           ],
-           "controlType": "TableCell",
-           "width": "XS",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": false,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": 0,
-           "marginRight": 0,
-           "connectTd": "R3C1"
           }
          ],
          "controlType": "TablePanel",
@@ -3444,7 +2997,135 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "html": "<table>\n  <tbody>\n    <tr><td id='R1C1'></td></tr>\n    <tr><td id='R2C1'></td></tr>\n    <tr><td id='R3C1'></td></tr>\n  </tbody>\n</table>\n"
+         "html": "<table>\n  <tbody>\n    <tr><td id='R1C1'></td></tr>\n    <tr><td id='R2C1'></td></tr>\n  </tbody>\n</table>\n"
+        },
+        {
+         "fieldName": "KyotakuServiceTodokedeJikoNinteiJoho",
+         "items": [
+          {
+           "fieldName": "txtJikoSakuseiYoukaigodo",
+           "items": [],
+           "controlType": "TextBox",
+           "width": "80",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": true,
+           "dependencies": [],
+           "float": 0,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "required": false,
+           "maxLength": 1000000000000,
+           "minLength": 0,
+           "textAlign": 0,
+           "readOnly": true,
+           "placeHolder": "要介護度３",
+           "textKind": 0,
+           "isPrivateInfo": false,
+           "isPassword": false,
+           "isComboBox": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
+           "onKeyPress": "",
+           "text": "",
+           "suggest": [],
+           "value": "",
+           "labelLText": "要介護度",
+           "labelRText": "",
+           "labelLWidth": "S",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
+           "permitCharactor": ""
+          },
+          {
+           "fieldName": "txtJikoSakuseiYukoKikan",
+           "items": [],
+           "controlType": "TextBoxDateRange",
+           "width": "80",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": false,
+           "dependencies": [],
+           "float": 0,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "0",
+           "marginRight": "XS",
+           "readOnly": true,
+           "isPrivateInfo": false,
+           "isPassword": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
+           "onKeyPress": "",
+           "labelLText": "認定有効期間",
+           "labelRText": "",
+           "labelLWidth": "S",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
+           "permitCharactor": "",
+           "ymdKubun": 2,
+           "displayFormat": 0,
+           "fromPlaceHolder": "平12.04.13",
+           "toRequired": false,
+           "toPlaceHolder": "平12.08.15",
+           "isHolizontal": false,
+           "minDate": "",
+           "maxDate": "",
+           "fromText": "",
+           "toText": "",
+           "fromValue": "",
+           "toValue": ""
+          }
+         ],
+         "controlType": "Panel",
+         "width": "M",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": true,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "onLoad": "",
+         "title": "認定情報",
+         "isOpen": true,
+         "canOpenAndClose": false,
+         "postParameterPanelNames": [
+          {
+           "postParameterPanelNames": "KyotakuServiceTodokedeJikoNinteiJoho"
+          }
+         ],
+         "requestSettings": [],
+         "hiddenInput": [],
+         "onOpen": "",
+         "onClose": "",
+         "session": {},
+         "marginTop": "Default",
+         "marginBottom": "Default",
+         "eraseBorderTop": false,
+         "eraseBorderBottom": false,
+         "eraseBorderRight": false,
+         "eraseBorderLeft": false,
+         "backgroundColor": 0,
+         "widthAuto": true,
+         "isGroupBox": true
         },
         {
          "fieldName": "btnDlgTankiNyusho",
@@ -3577,8 +3258,8 @@
      ],
      "controlType": "Panel",
      "width": "M",
-     "visible": true,
-     "displayNone": false,
+     "visible": false,
+     "displayNone": true,
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
@@ -3645,10 +3326,6 @@
     {
      "eventName": "onClick_ShowDetail",
      "requestUrl": "dbc/db/dbc/KyotakuServicePlanIchiran/onClick_ShowDetail"
-    },
-    {
-     "eventName": "onClick_ShowSetai",
-     "requestUrl": "dbc/db/dbc/KyotakuServicePlanIchiran/onClick_ShowSetai"
     }
    ],
    "hiddenInput": [],
@@ -4250,7 +3927,29 @@
       "isShowFilterButton": false,
       "isShowRowState": false,
       "header": {
-       "combineColumns": [],
+       "combineColumns": [
+        {
+         "combineColumnName": "種類限度",
+         "combineItem": [
+          "selfInfoShuruiLimitChokaUnit",
+          "selfInfoShuruiLimitNaiUnit"
+         ]
+        },
+        {
+         "combineColumnName": "区分限度",
+         "combineItem": [
+          "selfInfoKubunLimitChokaUnit",
+          "selfInfoKubunLimitNaiUnit"
+         ]
+        },
+        {
+         "combineColumnName": "利用者負担",
+         "combineItem": [
+          "selfInfoHokenFutan",
+          "selfInfoFutanTotal"
+         ]
+        }
+       ],
        "frozenColumn": "",
        "headerHeight": 0
       },
@@ -4297,7 +3996,7 @@
         "visible": true,
         "cellType": 0,
         "cellDetails": "\"\\\"{\\\\\\\"cellType\\\\\\\":0}\\\"\"",
-        "align": 1,
+        "align": 0,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "selfInfoServiceCode"
@@ -4373,11 +4072,11 @@
         "sortKey": "selfInfoServiceUnit"
        },
        {
-        "columnName": "種類限度超過単位",
+        "columnName": "超過単位",
         "dataName": "selfInfoShuruiLimitChokaUnit",
         "toolTip": "",
         "bgColor": 0,
-        "width": 150,
+        "width": 80,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -4387,11 +4086,11 @@
         "sortKey": "selfInfoShuruiLimitChokaUnit"
        },
        {
-        "columnName": "種類限度内単位",
+        "columnName": "内単位",
         "dataName": "selfInfoShuruiLimitNaiUnit",
         "toolTip": "",
         "bgColor": 0,
-        "width": 130,
+        "width": 80,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -4401,11 +4100,11 @@
         "sortKey": "selfInfoShuruiLimitNaiUnit"
        },
        {
-        "columnName": "区分限度超過単位",
+        "columnName": "超過単位",
         "dataName": "selfInfoKubunLimitChokaUnit",
         "toolTip": "",
         "bgColor": 0,
-        "width": 150,
+        "width": 80,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -4415,11 +4114,11 @@
         "sortKey": "selfInfoKubunLimitChokaUnit"
        },
        {
-        "columnName": "区分限度内単位",
+        "columnName": "内単位",
         "dataName": "selfInfoKubunLimitNaiUnit",
         "toolTip": "",
         "bgColor": 0,
-        "width": 130,
+        "width": 80,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -4485,11 +4184,11 @@
         "sortKey": "selfInfoHokenKyufuGaku"
        },
        {
-        "columnName": "利用者負担（保険対象分）",
+        "columnName": "保険対象分",
         "dataName": "selfInfoHokenFutan",
         "toolTip": "",
         "bgColor": 0,
-        "width": 200,
+        "width": 100,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -4499,11 +4198,11 @@
         "sortKey": "selfInfoHokenFutan"
        },
        {
-        "columnName": "利用者負担（全額対象分）",
+        "columnName": "全額対象分",
         "dataName": "selfInfoFutanTotal",
         "toolTip": "",
         "bgColor": 0,
-        "width": 200,
+        "width": 100,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -6102,7 +5801,29 @@
       "isShowFilterButton": false,
       "isShowRowState": false,
       "header": {
-       "combineColumns": [],
+       "combineColumns": [
+        {
+         "combineColumnName": "種類限度",
+         "combineItem": [
+          "homonTushoShuruiLimitChokaUnit",
+          "homonTushoShuruiLimitNaiUnit"
+         ]
+        },
+        {
+         "combineColumnName": "区分限度",
+         "combineItem": [
+          "homonTushoKubunLimitChokaUnit",
+          "homonTushoKubunLimitNaiUnit"
+         ]
+        },
+        {
+         "combineColumnName": "利用者負担",
+         "combineItem": [
+          "homonTushoHokenFutan",
+          "homonTushoFutanTotal"
+         ]
+        }
+       ],
        "frozenColumn": "",
        "headerHeight": 0
       },
@@ -6151,7 +5872,7 @@
         "visible": true,
         "cellType": 0,
         "cellDetails": "\"\\\"{\\\\\\\"cellType\\\\\\\":0}\\\"\"",
-        "align": 1,
+        "align": 0,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "homonTushoServiceCode"
@@ -6227,11 +5948,11 @@
         "sortKey": "homonTushoServiceUnit"
        },
        {
-        "columnName": "種類限度超過単位",
+        "columnName": "超過単位",
         "dataName": "homonTushoShuruiLimitChokaUnit",
         "toolTip": "",
         "bgColor": 0,
-        "width": 150,
+        "width": 80,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -6241,11 +5962,11 @@
         "sortKey": "homonTushoShuruiLimitChokaUnit"
        },
        {
-        "columnName": "種類限度内単位",
+        "columnName": "内単位",
         "dataName": "homonTushoShuruiLimitNaiUnit",
         "toolTip": "",
         "bgColor": 0,
-        "width": 130,
+        "width": 80,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -6255,11 +5976,11 @@
         "sortKey": "homonTushoShuruiLimitNaiUnit"
        },
        {
-        "columnName": "区分限度超過単位",
+        "columnName": "超過単位",
         "dataName": "homonTushoKubunLimitChokaUnit",
         "toolTip": "",
         "bgColor": 0,
-        "width": 150,
+        "width": 80,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -6269,11 +5990,11 @@
         "sortKey": "homonTushoKubunLimitChokaUnit"
        },
        {
-        "columnName": "区分限度内単位",
+        "columnName": "内単位",
         "dataName": "homonTushoKubunLimitNaiUnit",
         "toolTip": "",
         "bgColor": 0,
-        "width": 130,
+        "width": 80,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -6339,11 +6060,11 @@
         "sortKey": "homonTushoHokenKyufuGaku"
        },
        {
-        "columnName": "利用者負担（保険対象分）",
+        "columnName": "保険対象分",
         "dataName": "homonTushoHokenFutan",
         "toolTip": "",
         "bgColor": 0,
-        "width": 200,
+        "width": 100,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -6353,11 +6074,11 @@
         "sortKey": "homonTushoHokenFutan"
        },
        {
-        "columnName": "利用者負担（全額対象分）",
+        "columnName": "全額対象分",
         "dataName": "homonTushoFutanTotal",
         "toolTip": "",
         "bgColor": 0,
-        "width": 200,
+        "width": 100,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -7387,7 +7108,7 @@
            "fieldName": "txtTankiNyushoJikoSakusei1",
            "items": [],
            "controlType": "TextBox",
-           "width": "55",
+           "width": "50",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -7405,7 +7126,7 @@
            "minLength": 0,
            "textAlign": 2,
            "readOnly": true,
-           "placeHolder": "888,888",
+           "placeHolder": "888888",
            "textKind": 0,
            "isPrivateInfo": false,
            "isPassword": false,
@@ -7455,7 +7176,7 @@
            "disabled": false,
            "accessKey": "",
            "nextFocusFieldName": "",
-           "wrap": true,
+           "wrap": false,
            "dependencies": [],
            "float": 0,
            "toolTip": "",
@@ -7601,49 +7322,7 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "html": "<table>\n  <tbody>\n    <tr><td id='R1C1'></td><td id='R1C2'></td></tr>\n    <tr><td id='R2C1'></td><td id='R2C2'></td></tr>\n  </tbody>\n</table>\n"
-      }
-     ],
-     "controlType": "Panel",
-     "width": "M",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "onLoad": "",
-     "title": "",
-     "isOpen": true,
-     "canOpenAndClose": true,
-     "postParameterPanelNames": [
-      {
-       "postParameterPanelNames": "KyotakuServiceJikoSakuseiSummarySub1"
-      }
-     ],
-     "requestSettings": [],
-     "hiddenInput": [],
-     "onOpen": "",
-     "onClose": "",
-     "session": {},
-     "marginTop": "Default",
-     "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
-     "backgroundColor": 0,
-     "widthAuto": true,
-     "isGroupBox": false
-    },
-    {
-     "fieldName": "TankiNyushoJikoSakuseiSummarySub2",
-     "items": [
+      },
       {
        "fieldName": "tblTankiNyushoJikoSakuseiSummarySub2",
        "items": [
@@ -7848,7 +7527,49 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "html": "<table>\n  <tbody>\n    <tr><td id='R1C1'></td><td id='R1C2'></td></tr>\n    <tr><td id='R2C1'></td><td id='R2C2'></td></tr>\n  </tbody>\n</table>\n"
-      },
+      }
+     ],
+     "controlType": "Panel",
+     "width": "M",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "onLoad": "",
+     "title": "",
+     "isOpen": true,
+     "canOpenAndClose": true,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "KyotakuServiceJikoSakuseiSummarySub1"
+      }
+     ],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
+     "backgroundColor": 0,
+     "widthAuto": true,
+     "isGroupBox": false
+    },
+    {
+     "fieldName": "TankiNyushoJikoSakuseiSummarySub2",
+     "items": [
       {
        "fieldName": "tblTankiNyushoJikoSakuseiSummarySub3",
        "items": [
@@ -7929,7 +7650,7 @@
            "labelRAlign": 0,
            "permitCharactor": "",
            "ymdKubun": 2,
-           "displayFormat": 1,
+           "displayFormat": 0,
            "fromRequired": false,
            "fromPlaceHolder": "平15.07.01",
            "toPlaceHolder": "平16.05.31",
@@ -8085,7 +7806,7 @@
         "visible": true,
         "cellType": 0,
         "cellDetails": "\"\\\"{\\\\\\\"cellType\\\\\\\":0}\\\"\"",
-        "align": 1,
+        "align": 0,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "tankiNyushoServiceCode"
@@ -9152,7 +8873,7 @@
      "nextFocusFieldName": "",
      "wrap": false,
      "dependencies": [],
-     "float": 0,
+     "float": 2,
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "XS",
@@ -9250,12 +8971,12 @@
      "transition": ""
     },
     {
-     "fieldName": "btnDlgKyotakuService",
+     "fieldName": "btnDlgSeteiJoho",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnCloseJikoSakusei",
+     "fieldName": "btnCloseSetaiJoho",
      "event": "onClick",
      "transition": ""
     },
@@ -9265,7 +8986,12 @@
      "transition": ""
     },
     {
-     "fieldName": "btnDlgTankiNyusho",
+     "fieldName": "btnDlgKyotakuService",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCloseTankiNyusho",
      "event": "onClick",
      "transition": ""
     },
@@ -9275,7 +9001,12 @@
      "transition": ""
     },
     {
-     "fieldName": "btnCloseTankiNyusho",
+     "fieldName": "btnCloseJikoSakusei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnDlgTankiNyusho",
      "event": "onClick",
      "transition": ""
     }
@@ -9311,10 +9042,6 @@
      "panelState": "visible"
     },
     {
-     "visibleDiv": "SetaiJoho",
-     "panelState": "visible"
-    },
-    {
      "visibleDiv": "KyotsuPanel",
      "panelState": "visible"
     },
@@ -9324,6 +9051,10 @@
     },
     {
      "visibleDiv": "KyotakuServiceTodokedeCommon",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "KyotakuServiceTodokedeJikoNinteiJoho",
      "panelState": "visible"
     }
    ],
@@ -9345,12 +9076,12 @@
      "transition": "居宅サービス一覧"
     },
     {
-     "fieldName": "btnDlgKyotakuService",
+     "fieldName": "btnDlgSeteiJoho",
      "event": "onClick",
-     "transition": "居宅サービス_自己作成"
+     "transition": "世帯情報"
     },
     {
-     "fieldName": "btnCloseJikoSakusei",
+     "fieldName": "btnCloseSetaiJoho",
      "event": "onClick",
      "transition": ""
     },
@@ -9360,9 +9091,14 @@
      "transition": "訪問通所_自己作成"
     },
     {
-     "fieldName": "btnDlgTankiNyusho",
+     "fieldName": "btnDlgKyotakuService",
      "event": "onClick",
-     "transition": "短期入所_自己作成"
+     "transition": "居宅サービス_自己作成"
+    },
+    {
+     "fieldName": "btnCloseTankiNyusho",
+     "event": "onClick",
+     "transition": ""
     },
     {
      "fieldName": "btnCloseHomonTsusho",
@@ -9370,14 +9106,88 @@
      "transition": ""
     },
     {
+     "fieldName": "btnCloseJikoSakusei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnDlgTankiNyusho",
+     "event": "onClick",
+     "transition": "短期入所_自己作成"
+    }
+   ]
+  },
+  {
+   "order": "3",
+   "stateName": "世帯情報",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "SetaiJoho",
+     "panelState": "visible"
+    }
+   ],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnKyotakuServiceSearch",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnToKyotakuServiceSearch",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgKyotakuServicePlanIchiran[btnSelect]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnDlgSeteiJoho",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCloseSetaiJoho",
+     "event": "onClick",
+     "transition": "居宅サービス一覧"
+    },
+    {
+     "fieldName": "btnDlgHomonTsusho",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnDlgKyotakuService",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
      "fieldName": "btnCloseTankiNyusho",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCloseHomonTsusho",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCloseJikoSakusei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnDlgTankiNyusho",
      "event": "onClick",
      "transition": ""
     }
    ]
   },
   {
-   "order": "3",
+   "order": "4",
    "stateName": "居宅サービス_自己作成",
    "showWizard": false,
    "visibleDivs": [
@@ -9409,17 +9219,17 @@
     {
      "fieldName": "dgKyotakuServicePlanIchiran[btnSelect]",
      "event": "onClick",
-     "transition": "居宅サービス一覧"
+     "transition": ""
     },
     {
-     "fieldName": "btnDlgKyotakuService",
+     "fieldName": "btnDlgSeteiJoho",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnCloseJikoSakusei",
+     "fieldName": "btnCloseSetaiJoho",
      "event": "onClick",
-     "transition": "居宅サービス一覧"
+     "transition": ""
     },
     {
      "fieldName": "btnDlgHomonTsusho",
@@ -9427,7 +9237,12 @@
      "transition": ""
     },
     {
-     "fieldName": "btnDlgTankiNyusho",
+     "fieldName": "btnDlgKyotakuService",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCloseTankiNyusho",
      "event": "onClick",
      "transition": ""
     },
@@ -9437,14 +9252,19 @@
      "transition": ""
     },
     {
-     "fieldName": "btnCloseTankiNyusho",
+     "fieldName": "btnCloseJikoSakusei",
+     "event": "onClick",
+     "transition": "居宅サービス一覧"
+    },
+    {
+     "fieldName": "btnDlgTankiNyusho",
      "event": "onClick",
      "transition": ""
     }
    ]
   },
   {
-   "order": "4",
+   "order": "5",
    "stateName": "訪問通所_自己作成",
    "showWizard": false,
    "visibleDivs": [
@@ -9476,15 +9296,15 @@
     {
      "fieldName": "dgKyotakuServicePlanIchiran[btnSelect]",
      "event": "onClick",
-     "transition": "居宅サービス一覧"
+     "transition": ""
     },
     {
-     "fieldName": "btnDlgKyotakuService",
+     "fieldName": "btnDlgSeteiJoho",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnCloseJikoSakusei",
+     "fieldName": "btnCloseSetaiJoho",
      "event": "onClick",
      "transition": ""
     },
@@ -9494,7 +9314,12 @@
      "transition": ""
     },
     {
-     "fieldName": "btnDlgTankiNyusho",
+     "fieldName": "btnDlgKyotakuService",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCloseTankiNyusho",
      "event": "onClick",
      "transition": ""
     },
@@ -9504,14 +9329,19 @@
      "transition": "居宅サービス一覧"
     },
     {
-     "fieldName": "btnCloseTankiNyusho",
+     "fieldName": "btnCloseJikoSakusei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnDlgTankiNyusho",
      "event": "onClick",
      "transition": ""
     }
    ]
   },
   {
-   "order": "5",
+   "order": "6",
    "stateName": "短期入所_自己作成",
    "showWizard": false,
    "visibleDivs": [
@@ -9543,15 +9373,15 @@
     {
      "fieldName": "dgKyotakuServicePlanIchiran[btnSelect]",
      "event": "onClick",
-     "transition": "居宅サービス一覧"
+     "transition": ""
     },
     {
-     "fieldName": "btnDlgKyotakuService",
+     "fieldName": "btnDlgSeteiJoho",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnCloseJikoSakusei",
+     "fieldName": "btnCloseSetaiJoho",
      "event": "onClick",
      "transition": ""
     },
@@ -9561,12 +9391,7 @@
      "transition": ""
     },
     {
-     "fieldName": "btnDlgTankiNyusho",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnCloseHomonTsusho",
+     "fieldName": "btnDlgKyotakuService",
      "event": "onClick",
      "transition": ""
     },
@@ -9574,6 +9399,21 @@
      "fieldName": "btnCloseTankiNyusho",
      "event": "onClick",
      "transition": "居宅サービス一覧"
+    },
+    {
+     "fieldName": "btnCloseHomonTsusho",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCloseJikoSakusei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnDlgTankiNyusho",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   }
@@ -9619,6 +9459,9 @@
   ],
   [
    "KyotakuServiceTodokedeJiko"
+  ],
+  [
+   "KyotakuServiceTodokedeJikoNinteiJoho"
   ],
   [
    "KyotakuServiceJikoSakusei"

@@ -24,6 +24,8 @@ public class SetaiJohoDiv extends Panel {
      */
     @JsonProperty("dgSetaiJoho")
     private DataGrid<dgSetaiJoho_Row> dgSetaiJoho;
+    @JsonProperty("btnCloseSetaiJoho")
+    private Button btnCloseSetaiJoho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -39,6 +41,16 @@ public class SetaiJohoDiv extends Panel {
     @JsonProperty("dgSetaiJoho")
     public void setDgSetaiJoho(DataGrid<dgSetaiJoho_Row> dgSetaiJoho) {
         this.dgSetaiJoho=dgSetaiJoho;
+    }
+
+    @JsonProperty("btnCloseSetaiJoho")
+    public Button getBtnCloseSetaiJoho() {
+        return btnCloseSetaiJoho;
+    }
+
+    @JsonProperty("btnCloseSetaiJoho")
+    public void setBtnCloseSetaiJoho(Button btnCloseSetaiJoho) {
+        this.btnCloseSetaiJoho=btnCloseSetaiJoho;
     }
 
 }

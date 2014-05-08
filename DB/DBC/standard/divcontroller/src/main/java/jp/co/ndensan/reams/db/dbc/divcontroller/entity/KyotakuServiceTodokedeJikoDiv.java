@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuServiceTodokedeJikoNinteiJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tblKyotakuServiceJikoSakuseiInfoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -24,6 +25,8 @@ public class KyotakuServiceTodokedeJikoDiv extends Panel {
      */
     @JsonProperty("tblKyotakuServiceJikoSakuseiInfo")
     private tblKyotakuServiceJikoSakuseiInfoDiv tblKyotakuServiceJikoSakuseiInfo;
+    @JsonProperty("KyotakuServiceTodokedeJikoNinteiJoho")
+    private KyotakuServiceTodokedeJikoNinteiJohoDiv KyotakuServiceTodokedeJikoNinteiJoho;
     @JsonProperty("btnDlgTankiNyusho")
     private ButtonDialog btnDlgTankiNyusho;
     @JsonProperty("btnDlgHomonTsusho")
@@ -45,6 +48,16 @@ public class KyotakuServiceTodokedeJikoDiv extends Panel {
     @JsonProperty("tblKyotakuServiceJikoSakuseiInfo")
     public void setTblKyotakuServiceJikoSakuseiInfo(tblKyotakuServiceJikoSakuseiInfoDiv tblKyotakuServiceJikoSakuseiInfo) {
         this.tblKyotakuServiceJikoSakuseiInfo=tblKyotakuServiceJikoSakuseiInfo;
+    }
+
+    @JsonProperty("KyotakuServiceTodokedeJikoNinteiJoho")
+    public KyotakuServiceTodokedeJikoNinteiJohoDiv getKyotakuServiceTodokedeJikoNinteiJoho() {
+        return KyotakuServiceTodokedeJikoNinteiJoho;
+    }
+
+    @JsonProperty("KyotakuServiceTodokedeJikoNinteiJoho")
+    public void setKyotakuServiceTodokedeJikoNinteiJoho(KyotakuServiceTodokedeJikoNinteiJohoDiv KyotakuServiceTodokedeJikoNinteiJoho) {
+        this.KyotakuServiceTodokedeJikoNinteiJoho=KyotakuServiceTodokedeJikoNinteiJoho;
     }
 
     @JsonProperty("btnDlgTankiNyusho")

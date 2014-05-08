@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu May 08 14:51:11 JST 2014 
+ * Thu May 08 20:18:02 JST 2014 
  */
 
 
@@ -27,7 +27,6 @@ public class dgKyotakuServicePlanIchiran_Row extends DataRow {
     private RString txtPlanSakuseiKubun;
     private RString txtZantei;
     private RString txtJigyoshaNo;
-    private RString txtJigyoshaName;
     private RString txtStartYMDInvisible;
     private RString txtStartYMD;
     private RString txtEndYMDInvisible;
@@ -38,7 +37,7 @@ public class dgKyotakuServicePlanIchiran_Row extends DataRow {
         super();
     }
 
-    public dgKyotakuServicePlanIchiran_Row(Button btnSelect, RString txtTaishoYMInvisible, RString txtTaishoYM, RString txtPlanSakuseiKubun, RString txtZantei, RString txtJigyoshaNo, RString txtJigyoshaName, RString txtStartYMDInvisible, RString txtStartYMD, RString txtEndYMDInvisible, RString txtEndYMD, RString txtEnable) {
+    public dgKyotakuServicePlanIchiran_Row(Button btnSelect, RString txtTaishoYMInvisible, RString txtTaishoYM, RString txtPlanSakuseiKubun, RString txtZantei, RString txtJigyoshaNo, RString txtStartYMDInvisible, RString txtStartYMD, RString txtEndYMDInvisible, RString txtEndYMD, RString txtEnable) {
         super();
         this.setOriginalData("btnSelect", btnSelect);
         this.setOriginalData("txtTaishoYMInvisible", txtTaishoYMInvisible);
@@ -46,7 +45,6 @@ public class dgKyotakuServicePlanIchiran_Row extends DataRow {
         this.setOriginalData("txtPlanSakuseiKubun", txtPlanSakuseiKubun);
         this.setOriginalData("txtZantei", txtZantei);
         this.setOriginalData("txtJigyoshaNo", txtJigyoshaNo);
-        this.setOriginalData("txtJigyoshaName", txtJigyoshaName);
         this.setOriginalData("txtStartYMDInvisible", txtStartYMDInvisible);
         this.setOriginalData("txtStartYMD", txtStartYMD);
         this.setOriginalData("txtEndYMDInvisible", txtEndYMDInvisible);
@@ -58,7 +56,6 @@ public class dgKyotakuServicePlanIchiran_Row extends DataRow {
         this.txtPlanSakuseiKubun = txtPlanSakuseiKubun;
         this.txtZantei = txtZantei;
         this.txtJigyoshaNo = txtJigyoshaNo;
-        this.txtJigyoshaName = txtJigyoshaName;
         this.txtStartYMDInvisible = txtStartYMDInvisible;
         this.txtStartYMD = txtStartYMD;
         this.txtEndYMDInvisible = txtEndYMDInvisible;
@@ -88,10 +85,6 @@ public class dgKyotakuServicePlanIchiran_Row extends DataRow {
 
     public RString getTxtJigyoshaNo() {
         return txtJigyoshaNo;
-    }
-
-    public RString getTxtJigyoshaName() {
-        return txtJigyoshaName;
     }
 
     public RString getTxtStartYMDInvisible() {
@@ -142,11 +135,6 @@ public class dgKyotakuServicePlanIchiran_Row extends DataRow {
     public void setTxtJigyoshaNo(RString txtJigyoshaNo) {
         this.setOriginalData("txtJigyoshaNo", txtJigyoshaNo);
         this.txtJigyoshaNo = txtJigyoshaNo;
-    }
-
-    public void setTxtJigyoshaName(RString txtJigyoshaName) {
-        this.setOriginalData("txtJigyoshaName", txtJigyoshaName);
-        this.txtJigyoshaName = txtJigyoshaName;
     }
 
     public void setTxtStartYMDInvisible(RString txtStartYMDInvisible) {

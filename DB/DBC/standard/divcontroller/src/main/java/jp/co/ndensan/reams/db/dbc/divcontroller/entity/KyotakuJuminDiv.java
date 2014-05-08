@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuKaigoJuminJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuNushiJuminJohoDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * KyotakuJumin のクラスファイル 
@@ -25,6 +27,8 @@ public class KyotakuJuminDiv extends Panel {
     private KyotakuNushiJuminJohoDiv KyotakuNushiJuminJoho;
     @JsonProperty("KyotakuKaigoJuminJoho")
     private KyotakuKaigoJuminJohoDiv KyotakuKaigoJuminJoho;
+    @JsonProperty("btnDlgSeteiJoho")
+    private ButtonDialog btnDlgSeteiJoho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -50,6 +54,16 @@ public class KyotakuJuminDiv extends Panel {
     @JsonProperty("KyotakuKaigoJuminJoho")
     public void setKyotakuKaigoJuminJoho(KyotakuKaigoJuminJohoDiv KyotakuKaigoJuminJoho) {
         this.KyotakuKaigoJuminJoho=KyotakuKaigoJuminJoho;
+    }
+
+    @JsonProperty("btnDlgSeteiJoho")
+    public ButtonDialog getBtnDlgSeteiJoho() {
+        return btnDlgSeteiJoho;
+    }
+
+    @JsonProperty("btnDlgSeteiJoho")
+    public void setBtnDlgSeteiJoho(ButtonDialog btnDlgSeteiJoho) {
+        this.btnDlgSeteiJoho=btnDlgSeteiJoho;
     }
 
 }

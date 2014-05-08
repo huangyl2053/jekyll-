@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tblTankiNyushoJikoSakuseiSummarySub1Div;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tblTankiNyushoJikoSakuseiSummarySub2Div;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -22,6 +23,8 @@ public class TankiNyushoJikoSakuseiSummarySub1Div extends Panel {
      */
     @JsonProperty("tblTankiNyushoJikoSakuseiSummarySub1")
     private tblTankiNyushoJikoSakuseiSummarySub1Div tblTankiNyushoJikoSakuseiSummarySub1;
+    @JsonProperty("tblTankiNyushoJikoSakuseiSummarySub2")
+    private tblTankiNyushoJikoSakuseiSummarySub2Div tblTankiNyushoJikoSakuseiSummarySub2;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,6 +40,16 @@ public class TankiNyushoJikoSakuseiSummarySub1Div extends Panel {
     @JsonProperty("tblTankiNyushoJikoSakuseiSummarySub1")
     public void setTblTankiNyushoJikoSakuseiSummarySub1(tblTankiNyushoJikoSakuseiSummarySub1Div tblTankiNyushoJikoSakuseiSummarySub1) {
         this.tblTankiNyushoJikoSakuseiSummarySub1=tblTankiNyushoJikoSakuseiSummarySub1;
+    }
+
+    @JsonProperty("tblTankiNyushoJikoSakuseiSummarySub2")
+    public tblTankiNyushoJikoSakuseiSummarySub2Div getTblTankiNyushoJikoSakuseiSummarySub2() {
+        return tblTankiNyushoJikoSakuseiSummarySub2;
+    }
+
+    @JsonProperty("tblTankiNyushoJikoSakuseiSummarySub2")
+    public void setTblTankiNyushoJikoSakuseiSummarySub2(tblTankiNyushoJikoSakuseiSummarySub2Div tblTankiNyushoJikoSakuseiSummarySub2) {
+        this.tblTankiNyushoJikoSakuseiSummarySub2=tblTankiNyushoJikoSakuseiSummarySub2;
     }
 
 }

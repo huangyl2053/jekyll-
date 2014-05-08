@@ -5,7 +5,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tblTankiNyushoJikoSakuseiSummarySub2Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tblTankiNyushoJikoSakuseiSummarySub3Div;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -21,8 +20,6 @@ public class TankiNyushoJikoSakuseiSummarySub2Div extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("tblTankiNyushoJikoSakuseiSummarySub2")
-    private tblTankiNyushoJikoSakuseiSummarySub2Div tblTankiNyushoJikoSakuseiSummarySub2;
     @JsonProperty("tblTankiNyushoJikoSakuseiSummarySub3")
     private tblTankiNyushoJikoSakuseiSummarySub3Div tblTankiNyushoJikoSakuseiSummarySub3;
 
@@ -32,16 +29,6 @@ public class TankiNyushoJikoSakuseiSummarySub2Div extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("tblTankiNyushoJikoSakuseiSummarySub2")
-    public tblTankiNyushoJikoSakuseiSummarySub2Div getTblTankiNyushoJikoSakuseiSummarySub2() {
-        return tblTankiNyushoJikoSakuseiSummarySub2;
-    }
-
-    @JsonProperty("tblTankiNyushoJikoSakuseiSummarySub2")
-    public void setTblTankiNyushoJikoSakuseiSummarySub2(tblTankiNyushoJikoSakuseiSummarySub2Div tblTankiNyushoJikoSakuseiSummarySub2) {
-        this.tblTankiNyushoJikoSakuseiSummarySub2=tblTankiNyushoJikoSakuseiSummarySub2;
-    }
-
     @JsonProperty("tblTankiNyushoJikoSakuseiSummarySub3")
     public tblTankiNyushoJikoSakuseiSummarySub3Div getTblTankiNyushoJikoSakuseiSummarySub3() {
         return tblTankiNyushoJikoSakuseiSummarySub3;

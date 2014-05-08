@@ -55,11 +55,11 @@ public class TankiNyushoJikoSakusei {
         arrayData.add(item);
         item = createRow(btn, "1234567890", "111111:身体介護１", "1000", "50", "50", "0", "20.00", "60", "50000", "1000000", "600000", "400000", "", "");
         arrayData.add(item);
-        item = createRow(null, "", "合計", "", "", "", "", "", "", "90000", "1800000", "1080000", "720000", "", "200000");
+        item = createRow(null, "", "             合計", "", "", "", "", "", "", "90000", "1800000", "1080000", "720000", "", "200000");
         arrayData.add(item);
         item = createRow(btn, "1234567891", "111111:身体介護１", "1000", "50", "50", "0", "20.00", "60", "50000", "1000000", "600000", "400000", "", "");
         arrayData.add(item);
-        item = createRow(null, "", "合計", "", "", "", "", "", "", "50000", "1000000", "600000", "400000", "", "");
+        item = createRow(null, "", "             合計", "", "", "", "", "", "", "50000", "1000000", "600000", "400000", "", "");
         arrayData.add(item);
         item = createRow(btn, "1234567892", "111111:身体介護１", "1000", "50", "40", "10", "20.00", "60", "40000", "800000", "480000", "320000", "10000", "200000");
         arrayData.add(item);
@@ -69,7 +69,7 @@ public class TankiNyushoJikoSakusei {
         arrayData.add(item);
         item = createRow(btn, "1234567892", "111111:身体介護１", "1000", "50", "50", "0", "20.00", "60", "50000", "1000000", "600000", "400000", "", "");
         arrayData.add(item);
-        item = createRow(null, "", "合計", "", "", "", "", "", "", "190000", "3800000", "2280000", "1920000", "", "200000");
+        item = createRow(null, "", "             合計", "", "", "", "", "", "", "190000", "3800000", "2280000", "1920000", "", "200000");
         arrayData.add(item);
 
         return arrayData;
@@ -140,7 +140,7 @@ public class TankiNyushoJikoSakusei {
      */
     private void setSummaryData(TankiNyushoJikoSakuseiDiv panel) {
         tblTankiNyushoJikoSakuseiSummarySub1Div tbl1 = panel.getTankiNyushoJikoSakuseiSummarySub1().getTblTankiNyushoJikoSakuseiSummarySub1();
-        tblTankiNyushoJikoSakuseiSummarySub2Div tbl2 = panel.getTankiNyushoJikoSakuseiSummarySub2().getTblTankiNyushoJikoSakuseiSummarySub2();
+        tblTankiNyushoJikoSakuseiSummarySub2Div tbl2 = panel.getTankiNyushoJikoSakuseiSummarySub1().getTblTankiNyushoJikoSakuseiSummarySub2();
         tblTankiNyushoJikoSakuseiSummarySub3Div tbl3 = panel.getTankiNyushoJikoSakuseiSummarySub2().getTblTankiNyushoJikoSakuseiSummarySub3();
 
         tbl1.getTxtTankiNyushoJikoSakusei1().setValue(new RString("150,000"));

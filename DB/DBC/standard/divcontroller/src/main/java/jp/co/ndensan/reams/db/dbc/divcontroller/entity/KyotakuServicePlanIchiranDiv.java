@@ -6,7 +6,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuServiceTodokedeInfoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.SetaiJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgKyotakuServicePlanIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -24,10 +23,6 @@ public class KyotakuServicePlanIchiranDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnDisplaySeteiJoho")
-    private Button btnDisplaySeteiJoho;
-    @JsonProperty("SetaiJoho")
-    private SetaiJohoDiv SetaiJoho;
     @JsonProperty("dgKyotakuServicePlanIchiran")
     private DataGrid<dgKyotakuServicePlanIchiran_Row> dgKyotakuServicePlanIchiran;
     @JsonProperty("KyotakuServiceTodokedeInfo")
@@ -39,26 +34,6 @@ public class KyotakuServicePlanIchiranDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("btnDisplaySeteiJoho")
-    public Button getBtnDisplaySeteiJoho() {
-        return btnDisplaySeteiJoho;
-    }
-
-    @JsonProperty("btnDisplaySeteiJoho")
-    public void setBtnDisplaySeteiJoho(Button btnDisplaySeteiJoho) {
-        this.btnDisplaySeteiJoho=btnDisplaySeteiJoho;
-    }
-
-    @JsonProperty("SetaiJoho")
-    public SetaiJohoDiv getSetaiJoho() {
-        return SetaiJoho;
-    }
-
-    @JsonProperty("SetaiJoho")
-    public void setSetaiJoho(SetaiJohoDiv SetaiJoho) {
-        this.SetaiJoho=SetaiJoho;
-    }
-
     @JsonProperty("dgKyotakuServicePlanIchiran")
     public DataGrid<dgKyotakuServicePlanIchiran_Row> getDgKyotakuServicePlanIchiran() {
         return dgKyotakuServicePlanIchiran;

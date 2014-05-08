@@ -80,16 +80,6 @@ public class tblKyotakuServiceJigyoshaSakuseiInfoDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public TextBox getTxtJigyoshaSakuseiCategory3() {
-        return this.tblKyotakuServiceJigyoshaSakuseiInfo2.getTxtJigyoshaSakuseiCategory3();
-    }
-
-    @JsonIgnore
-    public TextBox getTxtJigyoshaSakuseiCategory4() {
-        return this.tblKyotakuServiceJigyoshaSakuseiInfo2.getTxtJigyoshaSakuseiCategory4();
-    }
-
-    @JsonIgnore
     public TextBoxYubinNo getTxtJigyoshaSakuseiYubinNo() {
         return this.tblKyotakuServiceJigyoshaSakuseiInfo2.getTxtJigyoshaSakuseiYubinNo();
     }
@@ -248,10 +238,6 @@ class tblKyotakuServiceJigyoshaSakuseiInfo2AttblKyotakuServiceJigyoshaSakuseiInf
     private TextBox txtJigyoshaSakuseiCategory1;
     @JsonProperty("txtJigyoshaSakuseiCategory2")
     private TextBox txtJigyoshaSakuseiCategory2;
-    @JsonProperty("txtJigyoshaSakuseiCategory3")
-    private TextBox txtJigyoshaSakuseiCategory3;
-    @JsonProperty("txtJigyoshaSakuseiCategory4")
-    private TextBox txtJigyoshaSakuseiCategory4;
     @JsonProperty("txtJigyoshaSakuseiYubinNo")
     private TextBoxYubinNo txtJigyoshaSakuseiYubinNo;
     @JsonProperty("txtJigyoshaSakuseiJusho")
@@ -299,26 +285,6 @@ class tblKyotakuServiceJigyoshaSakuseiInfo2AttblKyotakuServiceJigyoshaSakuseiInf
     @JsonProperty("txtJigyoshaSakuseiCategory2")
     public void setTxtJigyoshaSakuseiCategory2(TextBox txtJigyoshaSakuseiCategory2) {
         this.txtJigyoshaSakuseiCategory2=txtJigyoshaSakuseiCategory2;
-    }
-
-    @JsonProperty("txtJigyoshaSakuseiCategory3")
-    public TextBox getTxtJigyoshaSakuseiCategory3() {
-        return txtJigyoshaSakuseiCategory3;
-    }
-
-    @JsonProperty("txtJigyoshaSakuseiCategory3")
-    public void setTxtJigyoshaSakuseiCategory3(TextBox txtJigyoshaSakuseiCategory3) {
-        this.txtJigyoshaSakuseiCategory3=txtJigyoshaSakuseiCategory3;
-    }
-
-    @JsonProperty("txtJigyoshaSakuseiCategory4")
-    public TextBox getTxtJigyoshaSakuseiCategory4() {
-        return txtJigyoshaSakuseiCategory4;
-    }
-
-    @JsonProperty("txtJigyoshaSakuseiCategory4")
-    public void setTxtJigyoshaSakuseiCategory4(TextBox txtJigyoshaSakuseiCategory4) {
-        this.txtJigyoshaSakuseiCategory4=txtJigyoshaSakuseiCategory4;
     }
 
     @JsonProperty("txtJigyoshaSakuseiYubinNo")

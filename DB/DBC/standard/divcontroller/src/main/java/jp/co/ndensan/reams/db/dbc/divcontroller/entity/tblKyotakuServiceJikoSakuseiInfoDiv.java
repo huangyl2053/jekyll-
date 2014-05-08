@@ -27,8 +27,6 @@ public class tblKyotakuServiceJikoSakuseiInfoDiv extends TablePanel {
     private tblKyotakuServiceJikoSakuseiInfo1AttblKyotakuServiceJikoSakuseiInfo tblKyotakuServiceJikoSakuseiInfo1;
     @JsonProperty("tblKyotakuServiceJikoSakuseiInfo2")
     private tblKyotakuServiceJikoSakuseiInfo2AttblKyotakuServiceJikoSakuseiInfo tblKyotakuServiceJikoSakuseiInfo2;
-    @JsonProperty("tblKyotakuServiceJikoSakuseiInfo3")
-    private tblKyotakuServiceJikoSakuseiInfo3AttblKyotakuServiceJikoSakuseiInfo tblKyotakuServiceJikoSakuseiInfo3;
 
     /*
      * [ Helperの作成 ]
@@ -59,21 +57,6 @@ public class tblKyotakuServiceJikoSakuseiInfoDiv extends TablePanel {
         return this.tblKyotakuServiceJikoSakuseiInfo2.getTxtJikoSakuseiEndYMD();
     }
 
-    @JsonIgnore
-    public Label getLblKyotakuServiceJikoSakuseiInfo31() {
-        return this.tblKyotakuServiceJikoSakuseiInfo3.getLblKyotakuServiceJikoSakuseiInfo31();
-    }
-
-    @JsonIgnore
-    public TextBox getTxtJikoSakuseiYoukaigodo() {
-        return this.tblKyotakuServiceJikoSakuseiInfo3.getTxtJikoSakuseiYoukaigodo();
-    }
-
-    @JsonIgnore
-    public TextBoxDateRange getTxtJikoSakuseiYukoKikan() {
-        return this.tblKyotakuServiceJikoSakuseiInfo3.getTxtJikoSakuseiYukoKikan();
-    }
-
     /*
      * [ GetterとSetterの作成 ]
      * クライアント側から取得した情報を元に検索を行い
@@ -98,16 +81,6 @@ public class tblKyotakuServiceJikoSakuseiInfoDiv extends TablePanel {
     @JsonProperty("tblKyotakuServiceJikoSakuseiInfo2")
     private void setTblKyotakuServiceJikoSakuseiInfo2(tblKyotakuServiceJikoSakuseiInfo2AttblKyotakuServiceJikoSakuseiInfo tblKyotakuServiceJikoSakuseiInfo2) {
         this.tblKyotakuServiceJikoSakuseiInfo2=tblKyotakuServiceJikoSakuseiInfo2;
-    }
-
-    @JsonProperty("tblKyotakuServiceJikoSakuseiInfo3")
-    private tblKyotakuServiceJikoSakuseiInfo3AttblKyotakuServiceJikoSakuseiInfo getTblKyotakuServiceJikoSakuseiInfo3() {
-        return tblKyotakuServiceJikoSakuseiInfo3;
-    }
-
-    @JsonProperty("tblKyotakuServiceJikoSakuseiInfo3")
-    private void setTblKyotakuServiceJikoSakuseiInfo3(tblKyotakuServiceJikoSakuseiInfo3AttblKyotakuServiceJikoSakuseiInfo tblKyotakuServiceJikoSakuseiInfo3) {
-        this.tblKyotakuServiceJikoSakuseiInfo3=tblKyotakuServiceJikoSakuseiInfo3;
     }
 
 }
@@ -184,50 +157,6 @@ class tblKyotakuServiceJikoSakuseiInfo2AttblKyotakuServiceJikoSakuseiInfo extend
     @JsonProperty("txtJikoSakuseiEndYMD")
     public void setTxtJikoSakuseiEndYMD(TextBoxFlexibleDate txtJikoSakuseiEndYMD) {
         this.txtJikoSakuseiEndYMD=txtJikoSakuseiEndYMD;
-    }
-
-}
-/**
- * tblKyotakuServiceJikoSakuseiInfo3 のクラスファイル 
- * 
- * @author 自動生成
- */
-class tblKyotakuServiceJikoSakuseiInfo3AttblKyotakuServiceJikoSakuseiInfo extends TableCell {
-    @JsonProperty("lblKyotakuServiceJikoSakuseiInfo31")
-    private Label lblKyotakuServiceJikoSakuseiInfo31;
-    @JsonProperty("txtJikoSakuseiYoukaigodo")
-    private TextBox txtJikoSakuseiYoukaigodo;
-    @JsonProperty("txtJikoSakuseiYukoKikan")
-    private TextBoxDateRange txtJikoSakuseiYukoKikan;
-
-    @JsonProperty("lblKyotakuServiceJikoSakuseiInfo31")
-    public Label getLblKyotakuServiceJikoSakuseiInfo31() {
-        return lblKyotakuServiceJikoSakuseiInfo31;
-    }
-
-    @JsonProperty("lblKyotakuServiceJikoSakuseiInfo31")
-    public void setLblKyotakuServiceJikoSakuseiInfo31(Label lblKyotakuServiceJikoSakuseiInfo31) {
-        this.lblKyotakuServiceJikoSakuseiInfo31=lblKyotakuServiceJikoSakuseiInfo31;
-    }
-
-    @JsonProperty("txtJikoSakuseiYoukaigodo")
-    public TextBox getTxtJikoSakuseiYoukaigodo() {
-        return txtJikoSakuseiYoukaigodo;
-    }
-
-    @JsonProperty("txtJikoSakuseiYoukaigodo")
-    public void setTxtJikoSakuseiYoukaigodo(TextBox txtJikoSakuseiYoukaigodo) {
-        this.txtJikoSakuseiYoukaigodo=txtJikoSakuseiYoukaigodo;
-    }
-
-    @JsonProperty("txtJikoSakuseiYukoKikan")
-    public TextBoxDateRange getTxtJikoSakuseiYukoKikan() {
-        return txtJikoSakuseiYukoKikan;
-    }
-
-    @JsonProperty("txtJikoSakuseiYukoKikan")
-    public void setTxtJikoSakuseiYukoKikan(TextBoxDateRange txtJikoSakuseiYukoKikan) {
-        this.txtJikoSakuseiYukoKikan=txtJikoSakuseiYukoKikan;
     }
 
 }
