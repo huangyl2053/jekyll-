@@ -21,36 +21,34 @@ public class JukyushaIdoRenrakuhyoKihonJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtRenrakuhyoHihoNo")
-    private TextBoxCode txtRenrakuhyoHihoNo;
-    @JsonProperty("txtRenrakuhyoSendYM")
-    private TextBoxFlexibleDate txtRenrakuhyoSendYM;
     @JsonProperty("txtRenrakuhyoIdoDate")
     private TextBoxFlexibleDate txtRenrakuhyoIdoDate;
+    @JsonProperty("txtRenrakuhyoHihoNo")
+    private TextBoxCode txtRenrakuhyoHihoNo;
+    @JsonProperty("txtShikakuShutokuDate")
+    private TextBoxFlexibleDate txtShikakuShutokuDate;
+    @JsonProperty("txtShokisaiHokenshaNo")
+    private TextBoxCode txtShokisaiHokenshaNo;
     @JsonProperty("lblRenrakuhyoIdoKubun")
     private Label lblRenrakuhyoIdoKubun;
     @JsonProperty("radRenrakuhyoIdoKubun")
     private RadioButton radRenrakuhyoIdoKubun;
-    @JsonProperty("txtShikakuShutokuDate")
-    private TextBoxFlexibleDate txtShikakuShutokuDate;
     @JsonProperty("txtRenrakuhyoHihoName")
     private TextBoxKana txtRenrakuhyoHihoName;
+    @JsonProperty("txtShikakuSoshitsuDate")
+    private TextBoxFlexibleDate txtShikakuSoshitsuDate;
+    @JsonProperty("txtKoikiHokenshaNo")
+    private TextBoxCode txtKoikiHokenshaNo;
+    @JsonProperty("ddlIdoJiyu")
+    private DropDownList ddlIdoJiyu;
     @JsonProperty("txtHihoBirthday")
     private TextBoxFlexibleDate txtHihoBirthday;
     @JsonProperty("lblHihoSex")
     private Label lblHihoSex;
     @JsonProperty("radHihoSex")
     private RadioButton radHihoSex;
-    @JsonProperty("txtShikakuSoshitsuDate")
-    private TextBoxFlexibleDate txtShikakuSoshitsuDate;
-    @JsonProperty("ddlIdoJiyu")
-    private DropDownList ddlIdoJiyu;
-    @JsonProperty("ddlYokaigoJotaiKubun")
-    private DropDownList ddlYokaigoJotaiKubun;
-    @JsonProperty("txtShokisaiHokenshaNo")
-    private TextBoxCode txtShokisaiHokenshaNo;
-    @JsonProperty("txtKoikiHokenshaNo")
-    private TextBoxCode txtKoikiHokenshaNo;
+    @JsonProperty("txtRenrakuhyoSendYM")
+    private TextBoxFlexibleDate txtRenrakuhyoSendYM;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -58,6 +56,16 @@ public class JukyushaIdoRenrakuhyoKihonJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    @JsonProperty("txtRenrakuhyoIdoDate")
+    public TextBoxFlexibleDate getTxtRenrakuhyoIdoDate() {
+        return txtRenrakuhyoIdoDate;
+    }
+
+    @JsonProperty("txtRenrakuhyoIdoDate")
+    public void setTxtRenrakuhyoIdoDate(TextBoxFlexibleDate txtRenrakuhyoIdoDate) {
+        this.txtRenrakuhyoIdoDate=txtRenrakuhyoIdoDate;
+    }
+
     @JsonProperty("txtRenrakuhyoHihoNo")
     public TextBoxCode getTxtRenrakuhyoHihoNo() {
         return txtRenrakuhyoHihoNo;
@@ -68,24 +76,24 @@ public class JukyushaIdoRenrakuhyoKihonJohoDiv extends Panel {
         this.txtRenrakuhyoHihoNo=txtRenrakuhyoHihoNo;
     }
 
-    @JsonProperty("txtRenrakuhyoSendYM")
-    public TextBoxFlexibleDate getTxtRenrakuhyoSendYM() {
-        return txtRenrakuhyoSendYM;
+    @JsonProperty("txtShikakuShutokuDate")
+    public TextBoxFlexibleDate getTxtShikakuShutokuDate() {
+        return txtShikakuShutokuDate;
     }
 
-    @JsonProperty("txtRenrakuhyoSendYM")
-    public void setTxtRenrakuhyoSendYM(TextBoxFlexibleDate txtRenrakuhyoSendYM) {
-        this.txtRenrakuhyoSendYM=txtRenrakuhyoSendYM;
+    @JsonProperty("txtShikakuShutokuDate")
+    public void setTxtShikakuShutokuDate(TextBoxFlexibleDate txtShikakuShutokuDate) {
+        this.txtShikakuShutokuDate=txtShikakuShutokuDate;
     }
 
-    @JsonProperty("txtRenrakuhyoIdoDate")
-    public TextBoxFlexibleDate getTxtRenrakuhyoIdoDate() {
-        return txtRenrakuhyoIdoDate;
+    @JsonProperty("txtShokisaiHokenshaNo")
+    public TextBoxCode getTxtShokisaiHokenshaNo() {
+        return txtShokisaiHokenshaNo;
     }
 
-    @JsonProperty("txtRenrakuhyoIdoDate")
-    public void setTxtRenrakuhyoIdoDate(TextBoxFlexibleDate txtRenrakuhyoIdoDate) {
-        this.txtRenrakuhyoIdoDate=txtRenrakuhyoIdoDate;
+    @JsonProperty("txtShokisaiHokenshaNo")
+    public void setTxtShokisaiHokenshaNo(TextBoxCode txtShokisaiHokenshaNo) {
+        this.txtShokisaiHokenshaNo=txtShokisaiHokenshaNo;
     }
 
     @JsonProperty("lblRenrakuhyoIdoKubun")
@@ -108,16 +116,6 @@ public class JukyushaIdoRenrakuhyoKihonJohoDiv extends Panel {
         this.radRenrakuhyoIdoKubun=radRenrakuhyoIdoKubun;
     }
 
-    @JsonProperty("txtShikakuShutokuDate")
-    public TextBoxFlexibleDate getTxtShikakuShutokuDate() {
-        return txtShikakuShutokuDate;
-    }
-
-    @JsonProperty("txtShikakuShutokuDate")
-    public void setTxtShikakuShutokuDate(TextBoxFlexibleDate txtShikakuShutokuDate) {
-        this.txtShikakuShutokuDate=txtShikakuShutokuDate;
-    }
-
     @JsonProperty("txtRenrakuhyoHihoName")
     public TextBoxKana getTxtRenrakuhyoHihoName() {
         return txtRenrakuhyoHihoName;
@@ -126,6 +124,36 @@ public class JukyushaIdoRenrakuhyoKihonJohoDiv extends Panel {
     @JsonProperty("txtRenrakuhyoHihoName")
     public void setTxtRenrakuhyoHihoName(TextBoxKana txtRenrakuhyoHihoName) {
         this.txtRenrakuhyoHihoName=txtRenrakuhyoHihoName;
+    }
+
+    @JsonProperty("txtShikakuSoshitsuDate")
+    public TextBoxFlexibleDate getTxtShikakuSoshitsuDate() {
+        return txtShikakuSoshitsuDate;
+    }
+
+    @JsonProperty("txtShikakuSoshitsuDate")
+    public void setTxtShikakuSoshitsuDate(TextBoxFlexibleDate txtShikakuSoshitsuDate) {
+        this.txtShikakuSoshitsuDate=txtShikakuSoshitsuDate;
+    }
+
+    @JsonProperty("txtKoikiHokenshaNo")
+    public TextBoxCode getTxtKoikiHokenshaNo() {
+        return txtKoikiHokenshaNo;
+    }
+
+    @JsonProperty("txtKoikiHokenshaNo")
+    public void setTxtKoikiHokenshaNo(TextBoxCode txtKoikiHokenshaNo) {
+        this.txtKoikiHokenshaNo=txtKoikiHokenshaNo;
+    }
+
+    @JsonProperty("ddlIdoJiyu")
+    public DropDownList getDdlIdoJiyu() {
+        return ddlIdoJiyu;
+    }
+
+    @JsonProperty("ddlIdoJiyu")
+    public void setDdlIdoJiyu(DropDownList ddlIdoJiyu) {
+        this.ddlIdoJiyu=ddlIdoJiyu;
     }
 
     @JsonProperty("txtHihoBirthday")
@@ -158,54 +186,14 @@ public class JukyushaIdoRenrakuhyoKihonJohoDiv extends Panel {
         this.radHihoSex=radHihoSex;
     }
 
-    @JsonProperty("txtShikakuSoshitsuDate")
-    public TextBoxFlexibleDate getTxtShikakuSoshitsuDate() {
-        return txtShikakuSoshitsuDate;
+    @JsonProperty("txtRenrakuhyoSendYM")
+    public TextBoxFlexibleDate getTxtRenrakuhyoSendYM() {
+        return txtRenrakuhyoSendYM;
     }
 
-    @JsonProperty("txtShikakuSoshitsuDate")
-    public void setTxtShikakuSoshitsuDate(TextBoxFlexibleDate txtShikakuSoshitsuDate) {
-        this.txtShikakuSoshitsuDate=txtShikakuSoshitsuDate;
-    }
-
-    @JsonProperty("ddlIdoJiyu")
-    public DropDownList getDdlIdoJiyu() {
-        return ddlIdoJiyu;
-    }
-
-    @JsonProperty("ddlIdoJiyu")
-    public void setDdlIdoJiyu(DropDownList ddlIdoJiyu) {
-        this.ddlIdoJiyu=ddlIdoJiyu;
-    }
-
-    @JsonProperty("ddlYokaigoJotaiKubun")
-    public DropDownList getDdlYokaigoJotaiKubun() {
-        return ddlYokaigoJotaiKubun;
-    }
-
-    @JsonProperty("ddlYokaigoJotaiKubun")
-    public void setDdlYokaigoJotaiKubun(DropDownList ddlYokaigoJotaiKubun) {
-        this.ddlYokaigoJotaiKubun=ddlYokaigoJotaiKubun;
-    }
-
-    @JsonProperty("txtShokisaiHokenshaNo")
-    public TextBoxCode getTxtShokisaiHokenshaNo() {
-        return txtShokisaiHokenshaNo;
-    }
-
-    @JsonProperty("txtShokisaiHokenshaNo")
-    public void setTxtShokisaiHokenshaNo(TextBoxCode txtShokisaiHokenshaNo) {
-        this.txtShokisaiHokenshaNo=txtShokisaiHokenshaNo;
-    }
-
-    @JsonProperty("txtKoikiHokenshaNo")
-    public TextBoxCode getTxtKoikiHokenshaNo() {
-        return txtKoikiHokenshaNo;
-    }
-
-    @JsonProperty("txtKoikiHokenshaNo")
-    public void setTxtKoikiHokenshaNo(TextBoxCode txtKoikiHokenshaNo) {
-        this.txtKoikiHokenshaNo=txtKoikiHokenshaNo;
+    @JsonProperty("txtRenrakuhyoSendYM")
+    public void setTxtRenrakuhyoSendYM(TextBoxFlexibleDate txtRenrakuhyoSendYM) {
+        this.txtRenrakuhyoSendYM=txtRenrakuhyoSendYM;
     }
 
 }

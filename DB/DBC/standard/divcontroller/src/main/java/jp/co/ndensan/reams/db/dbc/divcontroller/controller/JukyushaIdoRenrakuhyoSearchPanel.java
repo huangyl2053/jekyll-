@@ -38,6 +38,7 @@ public class JukyushaIdoRenrakuhyoSearchPanel {
         searchPanel.getJukyushaIdoRenrakuhyoSearchResultIchiran().setIsOpen(false);
         clearSearchCondtion(searchPanel.getJukyushaIdoRenrakuhyoSearchCondition());
 
+        searchPanel.getJukyushaIdoRenrakuhyoSearchCondition().getTxtSearchHihoNo().setValue(new RString("0000000001"));
         searchPanel.getJukyushaIdoRenrakuhyoSearchCondition().getTxtIdoDateRange().setFromValue(new RDate("20130101"));
         searchPanel.getJukyushaIdoRenrakuhyoSearchCondition().getTxtIdoDateRange().setToValue(new RDate("20140701"));
         ResponseData<JukyushaIdoRenrakuhyoSearchPanelDiv> response = new ResponseData<>();
@@ -113,17 +114,11 @@ public class JukyushaIdoRenrakuhyoSearchPanel {
         List<dgJukyushaIdoRenrakuhyoSearchResult_Row> list = new ArrayList<>();
         dgJukyushaIdoRenrakuhyoSearchResult_Row row;
 
-        row = createRow("20130101", "0000000001", "電算　一郎", "20111010");
+        row = createRow("20130101", "0000000001", "デンサン　イチロウ", "20111010");
         list.add(row);
-        row = createRow("20130202", "0000000002", "電算　二郎", "20111010");
+        row = createRow("20130202", "0000000001", "デンサン　イチロウ", "20111010");
         list.add(row);
-        row = createRow("20140301", "0000000003", "電算　三郎", "20111010");
-        list.add(row);
-        row = createRow("20140402", "0000000004", "電算　四郎", "20111010");
-        list.add(row);
-        row = createRow("20140501", "0000000005", "電算　五郎", "20111010");
-        list.add(row);
-        row = createRow("20140602", "0000000006", "電算　六郎", "20111010");
+        row = createRow("20140301", "0000000001", "デンサン　イチロウ", "20111010");
         list.add(row);
 
         return list;

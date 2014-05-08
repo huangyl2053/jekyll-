@@ -31,12 +31,12 @@ public class JukyushaIdoRenrakuhyoGemmenGengakuDiv extends Panel {
     private RadioButton radGemmenShinseichuKubun;
     @JsonProperty("JukyushaIdoRenrakuhyoRiyoshaFutan")
     private JukyushaIdoRenrakuhyoRiyoshaFutanDiv JukyushaIdoRenrakuhyoRiyoshaFutan;
-    @JsonProperty("JukyushaIdoRenrakuhyoHyojunFutan")
-    private JukyushaIdoRenrakuhyoHyojunFutanDiv JukyushaIdoRenrakuhyoHyojunFutan;
     @JsonProperty("JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi")
     private JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHiDiv JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi;
     @JsonProperty("JukyushaIdoRenrakuhyoFukushiHojinKeigen")
     private JukyushaIdoRenrakuhyoFukushiHojinKeigenDiv JukyushaIdoRenrakuhyoFukushiHojinKeigen;
+    @JsonProperty("JukyushaIdoRenrakuhyoHyojunFutan")
+    private JukyushaIdoRenrakuhyoHyojunFutanDiv JukyushaIdoRenrakuhyoHyojunFutan;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -74,16 +74,6 @@ public class JukyushaIdoRenrakuhyoGemmenGengakuDiv extends Panel {
         this.JukyushaIdoRenrakuhyoRiyoshaFutan=JukyushaIdoRenrakuhyoRiyoshaFutan;
     }
 
-    @JsonProperty("JukyushaIdoRenrakuhyoHyojunFutan")
-    public JukyushaIdoRenrakuhyoHyojunFutanDiv getJukyushaIdoRenrakuhyoHyojunFutan() {
-        return JukyushaIdoRenrakuhyoHyojunFutan;
-    }
-
-    @JsonProperty("JukyushaIdoRenrakuhyoHyojunFutan")
-    public void setJukyushaIdoRenrakuhyoHyojunFutan(JukyushaIdoRenrakuhyoHyojunFutanDiv JukyushaIdoRenrakuhyoHyojunFutan) {
-        this.JukyushaIdoRenrakuhyoHyojunFutan=JukyushaIdoRenrakuhyoHyojunFutan;
-    }
-
     @JsonProperty("JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi")
     public JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHiDiv getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi() {
         return JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi;
@@ -102,6 +92,16 @@ public class JukyushaIdoRenrakuhyoGemmenGengakuDiv extends Panel {
     @JsonProperty("JukyushaIdoRenrakuhyoFukushiHojinKeigen")
     public void setJukyushaIdoRenrakuhyoFukushiHojinKeigen(JukyushaIdoRenrakuhyoFukushiHojinKeigenDiv JukyushaIdoRenrakuhyoFukushiHojinKeigen) {
         this.JukyushaIdoRenrakuhyoFukushiHojinKeigen=JukyushaIdoRenrakuhyoFukushiHojinKeigen;
+    }
+
+    @JsonProperty("JukyushaIdoRenrakuhyoHyojunFutan")
+    public JukyushaIdoRenrakuhyoHyojunFutanDiv getJukyushaIdoRenrakuhyoHyojunFutan() {
+        return JukyushaIdoRenrakuhyoHyojunFutan;
+    }
+
+    @JsonProperty("JukyushaIdoRenrakuhyoHyojunFutan")
+    public void setJukyushaIdoRenrakuhyoHyojunFutan(JukyushaIdoRenrakuhyoHyojunFutanDiv JukyushaIdoRenrakuhyoHyojunFutan) {
+        this.JukyushaIdoRenrakuhyoHyojunFutan=JukyushaIdoRenrakuhyoHyojunFutan;
     }
 
 }

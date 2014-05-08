@@ -33,10 +33,10 @@ public class JukyushaIdoRenrakuhyoSub1Div extends Panel {
     private JukyushaIdoRenrakuhyoKyotakuServicePlanDiv JukyushaIdoRenrakuhyoKyotakuServicePlan;
     @JsonProperty("JukyushaIdoRenrakuhyoKokiKoreiKokuho")
     private JukyushaIdoRenrakuhyoKokiKoreiKokuhoDiv JukyushaIdoRenrakuhyoKokiKoreiKokuho;
-    @JsonProperty("JukyushaIdoRenrakuhyoRojinHoken")
-    private JukyushaIdoRenrakuhyoRojinHokenDiv JukyushaIdoRenrakuhyoRojinHoken;
     @JsonProperty("JukyushaIdoRenrakuhyoNijiyoboJigyo")
     private JukyushaIdoRenrakuhyoNijiyoboJigyoDiv JukyushaIdoRenrakuhyoNijiyoboJigyo;
+    @JsonProperty("JukyushaIdoRenrakuhyoRojinHoken")
+    private JukyushaIdoRenrakuhyoRojinHokenDiv JukyushaIdoRenrakuhyoRojinHoken;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -84,16 +84,6 @@ public class JukyushaIdoRenrakuhyoSub1Div extends Panel {
         this.JukyushaIdoRenrakuhyoKokiKoreiKokuho=JukyushaIdoRenrakuhyoKokiKoreiKokuho;
     }
 
-    @JsonProperty("JukyushaIdoRenrakuhyoRojinHoken")
-    public JukyushaIdoRenrakuhyoRojinHokenDiv getJukyushaIdoRenrakuhyoRojinHoken() {
-        return JukyushaIdoRenrakuhyoRojinHoken;
-    }
-
-    @JsonProperty("JukyushaIdoRenrakuhyoRojinHoken")
-    public void setJukyushaIdoRenrakuhyoRojinHoken(JukyushaIdoRenrakuhyoRojinHokenDiv JukyushaIdoRenrakuhyoRojinHoken) {
-        this.JukyushaIdoRenrakuhyoRojinHoken=JukyushaIdoRenrakuhyoRojinHoken;
-    }
-
     @JsonProperty("JukyushaIdoRenrakuhyoNijiyoboJigyo")
     public JukyushaIdoRenrakuhyoNijiyoboJigyoDiv getJukyushaIdoRenrakuhyoNijiyoboJigyo() {
         return JukyushaIdoRenrakuhyoNijiyoboJigyo;
@@ -102,6 +92,16 @@ public class JukyushaIdoRenrakuhyoSub1Div extends Panel {
     @JsonProperty("JukyushaIdoRenrakuhyoNijiyoboJigyo")
     public void setJukyushaIdoRenrakuhyoNijiyoboJigyo(JukyushaIdoRenrakuhyoNijiyoboJigyoDiv JukyushaIdoRenrakuhyoNijiyoboJigyo) {
         this.JukyushaIdoRenrakuhyoNijiyoboJigyo=JukyushaIdoRenrakuhyoNijiyoboJigyo;
+    }
+
+    @JsonProperty("JukyushaIdoRenrakuhyoRojinHoken")
+    public JukyushaIdoRenrakuhyoRojinHokenDiv getJukyushaIdoRenrakuhyoRojinHoken() {
+        return JukyushaIdoRenrakuhyoRojinHoken;
+    }
+
+    @JsonProperty("JukyushaIdoRenrakuhyoRojinHoken")
+    public void setJukyushaIdoRenrakuhyoRojinHoken(JukyushaIdoRenrakuhyoRojinHokenDiv JukyushaIdoRenrakuhyoRojinHoken) {
+        this.JukyushaIdoRenrakuhyoRojinHoken=JukyushaIdoRenrakuhyoRojinHoken;
     }
 
 }

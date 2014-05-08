@@ -35,6 +35,8 @@ public class JukyushaIdoRenrakuhyoYokaigoninteiDiv extends Panel {
     private Label lblMinashiYokaigoKubun;
     @JsonProperty("radMinashiYokaigoKubun")
     private RadioButton radMinashiYokaigoKubun;
+    @JsonProperty("ddlYokaigoJotaiKubun")
+    private DropDownList ddlYokaigoJotaiKubun;
     @JsonProperty("txtNinteiDateRange")
     private TextBoxDateRange txtNinteiDateRange;
 
@@ -112,6 +114,16 @@ public class JukyushaIdoRenrakuhyoYokaigoninteiDiv extends Panel {
     @JsonProperty("radMinashiYokaigoKubun")
     public void setRadMinashiYokaigoKubun(RadioButton radMinashiYokaigoKubun) {
         this.radMinashiYokaigoKubun=radMinashiYokaigoKubun;
+    }
+
+    @JsonProperty("ddlYokaigoJotaiKubun")
+    public DropDownList getDdlYokaigoJotaiKubun() {
+        return ddlYokaigoJotaiKubun;
+    }
+
+    @JsonProperty("ddlYokaigoJotaiKubun")
+    public void setDdlYokaigoJotaiKubun(DropDownList ddlYokaigoJotaiKubun) {
+        this.ddlYokaigoJotaiKubun=ddlYokaigoJotaiKubun;
     }
 
     @JsonProperty("txtNinteiDateRange")
