@@ -45,6 +45,14 @@ public class KaigoHihokenshaJohoDiv extends Panel {
     private Label lblNenrei;
     @JsonProperty("txtNenrei")
     private TextBox txtNenrei;
+    @JsonProperty("lblNinteiShinseiYMD")
+    private Label lblNinteiShinseiYMD;
+    @JsonProperty("txtNinteiShinseiYMD")
+    private TextBoxFlexibleDate txtNinteiShinseiYMD;
+    @JsonProperty("lblShinseiKubun")
+    private Label lblShinseiKubun;
+    @JsonProperty("txtShinseiKubun")
+    private TextBox txtShinseiKubun;
     @JsonProperty("lblZenkaiYokaigodo")
     private Label lblZenkaiYokaigodo;
     @JsonProperty("txtZenkaiYokaigodo")
@@ -182,6 +190,46 @@ public class KaigoHihokenshaJohoDiv extends Panel {
     @JsonProperty("txtNenrei")
     public void setTxtNenrei(TextBox txtNenrei) {
         this.txtNenrei=txtNenrei;
+    }
+
+    @JsonProperty("lblNinteiShinseiYMD")
+    public Label getLblNinteiShinseiYMD() {
+        return lblNinteiShinseiYMD;
+    }
+
+    @JsonProperty("lblNinteiShinseiYMD")
+    public void setLblNinteiShinseiYMD(Label lblNinteiShinseiYMD) {
+        this.lblNinteiShinseiYMD=lblNinteiShinseiYMD;
+    }
+
+    @JsonProperty("txtNinteiShinseiYMD")
+    public TextBoxFlexibleDate getTxtNinteiShinseiYMD() {
+        return txtNinteiShinseiYMD;
+    }
+
+    @JsonProperty("txtNinteiShinseiYMD")
+    public void setTxtNinteiShinseiYMD(TextBoxFlexibleDate txtNinteiShinseiYMD) {
+        this.txtNinteiShinseiYMD=txtNinteiShinseiYMD;
+    }
+
+    @JsonProperty("lblShinseiKubun")
+    public Label getLblShinseiKubun() {
+        return lblShinseiKubun;
+    }
+
+    @JsonProperty("lblShinseiKubun")
+    public void setLblShinseiKubun(Label lblShinseiKubun) {
+        this.lblShinseiKubun=lblShinseiKubun;
+    }
+
+    @JsonProperty("txtShinseiKubun")
+    public TextBox getTxtShinseiKubun() {
+        return txtShinseiKubun;
+    }
+
+    @JsonProperty("txtShinseiKubun")
+    public void setTxtShinseiKubun(TextBox txtShinseiKubun) {
+        this.txtShinseiKubun=txtShinseiKubun;
     }
 
     @JsonProperty("lblZenkaiYokaigodo")
