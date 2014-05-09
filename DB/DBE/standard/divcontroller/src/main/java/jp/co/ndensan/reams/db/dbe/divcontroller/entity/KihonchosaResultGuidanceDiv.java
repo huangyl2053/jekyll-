@@ -29,12 +29,12 @@ public class KihonchosaResultGuidanceDiv extends Panel {
     private Button btnToEditTokkijiko;
     @JsonProperty("lblPaddingItemNo")
     private Label lblPaddingItemNo;
-    @JsonProperty("btnSelectNext")
-    private Button btnSelectNext;
-    @JsonProperty("btnSelectPrevious")
-    private Button btnSelectPrevious;
     @JsonProperty("radChoices")
     private RadioButton radChoices;
+    @JsonProperty("btnSelectPrevious")
+    private Button btnSelectPrevious;
+    @JsonProperty("btnSelectNext")
+    private Button btnSelectNext;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -82,14 +82,14 @@ public class KihonchosaResultGuidanceDiv extends Panel {
         this.lblPaddingItemNo=lblPaddingItemNo;
     }
 
-    @JsonProperty("btnSelectNext")
-    public Button getBtnSelectNext() {
-        return btnSelectNext;
+    @JsonProperty("radChoices")
+    public RadioButton getRadChoices() {
+        return radChoices;
     }
 
-    @JsonProperty("btnSelectNext")
-    public void setBtnSelectNext(Button btnSelectNext) {
-        this.btnSelectNext=btnSelectNext;
+    @JsonProperty("radChoices")
+    public void setRadChoices(RadioButton radChoices) {
+        this.radChoices=radChoices;
     }
 
     @JsonProperty("btnSelectPrevious")
@@ -102,14 +102,14 @@ public class KihonchosaResultGuidanceDiv extends Panel {
         this.btnSelectPrevious=btnSelectPrevious;
     }
 
-    @JsonProperty("radChoices")
-    public RadioButton getRadChoices() {
-        return radChoices;
+    @JsonProperty("btnSelectNext")
+    public Button getBtnSelectNext() {
+        return btnSelectNext;
     }
 
-    @JsonProperty("radChoices")
-    public void setRadChoices(RadioButton radChoices) {
-        this.radChoices=radChoices;
+    @JsonProperty("btnSelectNext")
+    public void setBtnSelectNext(Button btnSelectNext) {
+        this.btnSelectNext=btnSelectNext;
     }
 
 }
