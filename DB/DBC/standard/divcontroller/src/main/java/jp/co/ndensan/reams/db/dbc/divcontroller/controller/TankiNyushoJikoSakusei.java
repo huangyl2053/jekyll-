@@ -143,7 +143,7 @@ public class TankiNyushoJikoSakusei {
         tblTankiNyushoJikoSakuseiSummarySub2Div tbl2 = panel.getTankiNyushoJikoSakuseiSummarySub1().getTblTankiNyushoJikoSakuseiSummarySub2();
         tblTankiNyushoJikoSakuseiSummarySub3Div tbl3 = panel.getTankiNyushoJikoSakuseiSummarySub2().getTblTankiNyushoJikoSakuseiSummarySub3();
 
-        tbl1.getTxtTankiNyushoJikoSakusei1().setValue(new RString("150,000"));
+        tbl1.getTxtTankiNyushoJikoSakusei1().setValue(new RString("40"));
         tbl1.getTxtTankiNyushoJikoSakusei2().setValue(new RString("30"));
         tbl1.getTxtTankiNyushoJikoSakusei3().setValue(new RString("10"));
         tbl2.getTxtTankiNyushoJikoSakusei4().setValue(new RString("20"));
