@@ -456,8 +456,8 @@ public class ShinseiJohoInput {
 
             div.getTxtYokaigodo().setValue(yokaigodo);
             div.getTxtNinteiDate().setValue(ninteiDate);
-            div.getTxtNinteiYukokikan().setFromValue(fromDate);
-            div.getTxtNinteiYukokikan().setToValue(toDate);
+//            div.getTxtNinteiYukokikan().setFromValue(fromDate);
+//            div.getTxtNinteiYukokikan().setToValue(toDate);
         }
     }
 
