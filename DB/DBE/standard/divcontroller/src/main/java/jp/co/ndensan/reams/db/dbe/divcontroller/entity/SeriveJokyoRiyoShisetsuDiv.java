@@ -21,8 +21,8 @@ public class SeriveJokyoRiyoShisetsuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("chk")
-    private CheckBoxList chk;
+    @JsonProperty("radShisetsuType")
+    private RadioButton radShisetsuType;
     @JsonProperty("lblNewLine3")
     private Label lblNewLine3;
     @JsonProperty("lblShisetsuName")
@@ -46,14 +46,14 @@ public class SeriveJokyoRiyoShisetsuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("chk")
-    public CheckBoxList getChk() {
-        return chk;
+    @JsonProperty("radShisetsuType")
+    public RadioButton getRadShisetsuType() {
+        return radShisetsuType;
     }
 
-    @JsonProperty("chk")
-    public void setChk(CheckBoxList chk) {
-        this.chk=chk;
+    @JsonProperty("radShisetsuType")
+    public void setRadShisetsuType(RadioButton radShisetsuType) {
+        this.radShisetsuType=radShisetsuType;
     }
 
     @JsonProperty("lblNewLine3")

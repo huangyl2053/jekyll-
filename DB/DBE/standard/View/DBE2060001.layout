@@ -1028,7 +1028,7 @@
        "marginRight": "XS",
        "required": false,
        "align": 2,
-       "text": "調査委託機関",
+       "text": "調査機関",
        "isPrivateInfo": false
       },
       {
@@ -6070,16 +6070,16 @@
          "fieldName": "SeriveJokyoRiyoShisetsu",
          "items": [
           {
-           "fieldName": "chk",
+           "fieldName": "radShisetsuType",
            "items": [],
-           "controlType": "CheckBoxList",
-           "width": "800",
+           "controlType": "RadioButton",
+           "width": "1000",
            "visible": true,
            "displayNone": false,
            "disabled": false,
            "accessKey": "",
            "nextFocusFieldName": "",
-           "wrap": false,
+           "wrap": true,
            "dependencies": [],
            "float": 0,
            "toolTip": "",
@@ -6116,7 +6116,7 @@
              "value": "医療機関（医療保険適用療養病床）"
             },
             {
-             "key": "9",
+             "key": "8",
              "value": "その他の施設"
             }
            ],
@@ -6128,11 +6128,7 @@
            "selectedItem": "",
            "onClick": "",
            "newLineItemNumber": 4,
-           "spaceSize": 1,
-           "selectedItems": [],
-           "minCheckedItem": "0",
-           "maxCheckedItem": "1",
-           "isAllSelectable": false
+           "spaceSize": 1
           },
           {
            "fieldName": "lblNewLine3",
