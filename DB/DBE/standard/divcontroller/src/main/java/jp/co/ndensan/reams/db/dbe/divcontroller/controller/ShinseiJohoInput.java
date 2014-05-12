@@ -590,11 +590,11 @@ public class ShinseiJohoInput {
             }
 
             private static dgShisetsuRereki_Row createDgShisetsuRereki(RString name, RDate startDate, RDate endDate) {
-                TextBoxDate ForStartDate = new TextBoxDate();
-                ForStartDate.setValue(startDate);
-                TextBoxDate ForEndDate = new TextBoxDate();
-                ForEndDate.setValue(endDate);
-                return new dgShisetsuRereki_Row(new Button(), name, ForStartDate, ForEndDate);
+                TextBoxDate forStartDate = new TextBoxDate();
+                forStartDate.setValue(startDate);
+                TextBoxDate forEndDate = new TextBoxDate();
+                forEndDate.setValue(endDate);
+                return new dgShisetsuRereki_Row(new Button(), name, forStartDate, forEndDate);
             }
         }
     }

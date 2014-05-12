@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.KihonchosaResultInputTabDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ServiceJokyoTabDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.TokkijikoTabDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
 
 /**
@@ -25,6 +26,8 @@ public class tabNinteichosaResultDiv extends TabContainer {
     private KihonchosaResultInputTabDiv KihonchosaResultInputTab;
     @JsonProperty("ServiceJokyoTab")
     private ServiceJokyoTabDiv ServiceJokyoTab;
+    @JsonProperty("TokkijikoTab")
+    private TokkijikoTabDiv TokkijikoTab;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -50,6 +53,16 @@ public class tabNinteichosaResultDiv extends TabContainer {
     @JsonProperty("ServiceJokyoTab")
     public void setServiceJokyoTab(ServiceJokyoTabDiv ServiceJokyoTab) {
         this.ServiceJokyoTab=ServiceJokyoTab;
+    }
+
+    @JsonProperty("TokkijikoTab")
+    public TokkijikoTabDiv getTokkijikoTab() {
+        return TokkijikoTab;
+    }
+
+    @JsonProperty("TokkijikoTab")
+    public void setTokkijikoTab(TokkijikoTabDiv TokkijikoTab) {
+        this.TokkijikoTab=TokkijikoTab;
     }
 
 }

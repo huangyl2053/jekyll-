@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.util;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
@@ -26,9 +25,11 @@ public final class TextBoxUtil {
      *
      * @param <T> TextBox
      * @param textBox target
+     * @deprecated clearValue()を使うべきです。
      */
+    @Deprecated
     public static <T extends TextBox> void clear(T textBox) {
-        textBox.setValue(RString.EMPTY);
+        textBox.clearValue();
     }
 
     /**
@@ -36,9 +37,11 @@ public final class TextBoxUtil {
      *
      * @param <T> TextBoxCode
      * @param textBoxCode target
+     * @deprecated clearValue()を使うべきです。
      */
+    @Deprecated
     public static <T extends TextBoxCode> void clear(T textBoxCode) {
-        textBoxCode.setValue(RString.EMPTY);
+        textBoxCode.clearValue();
     }
 
     /**
@@ -46,9 +49,11 @@ public final class TextBoxUtil {
      *
      * @param <T> TextBoxDate
      * @param textBoxDate target
+     * @deprecated clearValue()を使うべきです。
      */
+    @Deprecated
     public static <T extends TextBoxDate> void clear(T textBoxDate) {
-        textBoxDate.setValue(null);
+        textBoxDate.clearValue();
     }
 
     /**
@@ -56,8 +61,10 @@ public final class TextBoxUtil {
      *
      * @param <T> TextBoxYubinNo
      * @param textBoxYubinNo target
+     * @deprecated clearValue()を使うべきです。
      */
+    @Deprecated
     public static <T extends TextBoxYubinNo> void clear(T textBoxYubinNo) {
-        textBoxYubinNo.setValue(null);
+        textBoxYubinNo.clearValue();
     }
 }
