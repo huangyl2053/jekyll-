@@ -1221,7 +1221,7 @@
      "marginRight": "XS",
      "required": false,
      "readOnly": false,
-     "placeHolder": "平21.01",
+     "placeHolder": "平26.06",
      "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
@@ -1545,7 +1545,7 @@
    "dialogCancelEventNameForDialog": ""
   },
   {
-   "fieldName": "KyotsuBtnPanel",
+   "fieldName": "YoguKonyuhiShikyuShinseiKyotsuBtnPanel",
    "items": [
     {
      "fieldName": "btnSave",
@@ -1573,7 +1573,7 @@
     }
    ],
    "controlType": "Panel",
-   "width": "L",
+   "width": "1235",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -1581,7 +1581,7 @@
    "nextFocusFieldName": "",
    "wrap": false,
    "dependencies": [],
-   "float": 2,
+   "float": 0,
    "toolTip": "",
    "authorityMode": 0,
    "marginLeft": "XS",
@@ -1592,7 +1592,7 @@
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "KyotsuBtnPanel"
+     "postParameterPanelNames": "YoguKonyuhiShikyuShinseiKyotsuBtnPanel"
     }
    ],
    "requestSettings": [],
@@ -1698,7 +1698,7 @@
      "panelState": "visible"
     },
     {
-     "visibleDiv": "KyotsuBtnPanel",
+     "visibleDiv": "YoguKonyuhiShikyuShinseiKyotsuBtnPanel",
      "panelState": "visible"
     },
     {
@@ -1765,7 +1765,7 @@
    ]
   }
  ],
- "currentState": "申請登録",
+ "currentState": "All",
  "id": "DBC0600011",
  "WFParameter": [],
  "UIContainerEventMapping": [],
@@ -1797,7 +1797,7 @@
    "YoguKonyuhiShikyuShinseiContents"
   ],
   [
-   "KyotsuBtnPanel"
+   "YoguKonyuhiShikyuShinseiKyotsuBtnPanel"
   ]
  ],
  "panelMargin": 1,

@@ -45,7 +45,7 @@ var DBC;
                             "marginRight": "XS",
                             "required": false,
                             "readOnly": true,
-                            "placeHolder": "平21.01",
+                            "placeHolder": "平26.06",
                             "textKind": 0,
                             "isPrivateInfo": false,
                             "isPassword": false,
@@ -84,7 +84,7 @@ var DBC;
                             "marginRight": "XS",
                             "required": false,
                             "readOnly": true,
-                            "placeHolder": "1234567890",
+                            "placeHolder": "",
                             "textKind": 0,
                             "isPrivateInfo": false,
                             "isPassword": false,
@@ -126,7 +126,7 @@ var DBC;
                             "marginRight": "XS",
                             "required": false,
                             "readOnly": false,
-                            "placeHolder": "111",
+                            "placeHolder": "90",
                             "textKind": 2,
                             "isPrivateInfo": false,
                             "isPassword": false,
@@ -185,7 +185,7 @@ var DBC;
                                     "fieldName": "dgSeikyuDetail",
                                     "items": [],
                                     "controlType": "DataGrid",
-                                    "width": "720",
+                                    "width": "760",
                                     "visible": true,
                                     "displayNone": false,
                                     "disabled": false,
@@ -196,8 +196,8 @@ var DBC;
                                     "float": 0,
                                     "toolTip": "",
                                     "authorityMode": 0,
-                                    "marginLeft": "XS",
-                                    "marginRight": "XS",
+                                    "marginLeft": "0",
+                                    "marginRight": "0",
                                     "gridSetting": {
                                         "rowHeight": 25,
                                         "isMultiSelectable": false,
@@ -212,11 +212,11 @@ var DBC;
                                         },
                                         "columns": [
                                             {
-                                                "columnName": "",
+                                                "columnName": "修正",
                                                 "dataName": "btnModify",
                                                 "toolTip": "",
                                                 "bgColor": 0,
-                                                "width": 30,
+                                                "width": 50,
                                                 "visible": true,
                                                 "cellType": 8,
                                                 "cellDetails": {
@@ -233,11 +233,11 @@ var DBC;
                                                 "sortKey": "btnModify"
                                             },
                                             {
-                                                "columnName": "",
+                                                "columnName": "削除",
                                                 "dataName": "btnDelete",
                                                 "toolTip": "",
                                                 "bgColor": 0,
-                                                "width": 30,
+                                                "width": 50,
                                                 "visible": true,
                                                 "cellType": 8,
                                                 "cellDetails": {
@@ -297,38 +297,15 @@ var DBC;
                                                 "dataName": "txtShumoku",
                                                 "toolTip": "",
                                                 "bgColor": 0,
-                                                "width": 130,
+                                                "width": 120,
                                                 "visible": true,
-                                                "cellType": 3,
+                                                "cellType": 1,
                                                 "cellDetails": {
-                                                    "cellType": 3,
-                                                    "selectedItem": "code06",
-                                                    "dataSource": [
-                                                        {
-                                                            "key": "code01",
-                                                            "value": "01:腰掛便座"
-                                                        },
-                                                        {
-                                                            "key": "code02",
-                                                            "value": "02:特殊尿器"
-                                                        },
-                                                        {
-                                                            "key": "code03",
-                                                            "value": "03:入浴補助用具"
-                                                        },
-                                                        {
-                                                            "key": "code04",
-                                                            "value": "04:簡易浴槽"
-                                                        },
-                                                        {
-                                                            "key": "code05",
-                                                            "value": "05:移動用リフトのつり具の部分"
-                                                        },
-                                                        {
-                                                            "key": "code06",
-                                                            "value": "06:自動排泄処理装置の交換可能部品"
-                                                        }
-                                                    ]
+                                                    "cellType": 1,
+                                                    "maxLength": "1000000000000",
+                                                    "minLength": "0",
+                                                    "textAlign": 0,
+                                                    "onChange": ""
                                                 },
                                                 "align": 0,
                                                 "resize": true,
@@ -386,20 +363,13 @@ var DBC;
                                                 "bgColor": 0,
                                                 "width": 100,
                                                 "visible": true,
-                                                "cellType": 3,
+                                                "cellType": 1,
                                                 "cellDetails": {
-                                                    "cellType": 3,
-                                                    "selectedItem": "judgeRequest",
-                                                    "dataSource": [
-                                                        {
-                                                            "key": "judgeRequest",
-                                                            "value": "審査依頼"
-                                                        },
-                                                        {
-                                                            "key": "judgeDone",
-                                                            "value": "審査済"
-                                                        }
-                                                    ]
+                                                    "cellType": 1,
+                                                    "maxLength": "1000000000000",
+                                                    "minLength": "0",
+                                                    "textAlign": 0,
+                                                    "onChange": ""
                                                 },
                                                 "align": 0,
                                                 "resize": true,
@@ -416,7 +386,7 @@ var DBC;
                                     "onNoRow": "",
                                     "onMultiRows": "",
                                     "dataSource": [],
-                                    "sortOrder": "txtRowState",
+                                    "sortOrder": "txtShinsaMethod",
                                     "isAscending": true,
                                     "filterList": [],
                                     "activeRowId": -1
@@ -443,7 +413,7 @@ var DBC;
                                             "marginRight": "XS",
                                             "required": false,
                                             "readOnly": false,
-                                            "placeHolder": "",
+                                            "placeHolder": "平26.6.15",
                                             "textKind": 0,
                                             "isPrivateInfo": false,
                                             "isPassword": false,
@@ -522,7 +492,7 @@ var DBC;
                                             "fieldName": "txtShohinName",
                                             "items": [],
                                             "controlType": "TextBox",
-                                            "width": "350",
+                                            "width": "340",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -764,10 +734,10 @@ var DBC;
                                                 },
                                                 {
                                                     "key": "judgeDone",
-                                                    "value": "審査済"
+                                                    "value": "審査済み"
                                                 }
                                             ],
-                                            "selectedItem": "",
+                                            "selectedItem": "judgeDone",
                                             "newLineItemNumber": 2,
                                             "spaceSize": 1
                                         },
@@ -821,7 +791,7 @@ var DBC;
                                         }
                                     ],
                                     "controlType": "Panel",
-                                    "width": "470",
+                                    "width": "450",
                                     "visible": true,
                                     "displayNone": false,
                                     "disabled": false,
@@ -832,8 +802,8 @@ var DBC;
                                     "float": 0,
                                     "toolTip": "",
                                     "authorityMode": 0,
-                                    "marginLeft": "XS",
-                                    "marginRight": "XS",
+                                    "marginLeft": "0.2",
+                                    "marginRight": "0",
                                     "onLoad": "",
                                     "title": "",
                                     "marginTop": "Default",
@@ -1054,7 +1024,7 @@ var DBC;
                                                             "marginRight": "XS",
                                                             "required": false,
                                                             "readOnly": false,
-                                                            "placeHolder": "123456789",
+                                                            "placeHolder": "0",
                                                             "textKind": 2,
                                                             "isPrivateInfo": false,
                                                             "isPassword": false,
@@ -1121,7 +1091,7 @@ var DBC;
                                                             "marginRight": "XS",
                                                             "required": false,
                                                             "readOnly": false,
-                                                            "placeHolder": "123456789",
+                                                            "placeHolder": "0",
                                                             "textKind": 2,
                                                             "isPrivateInfo": false,
                                                             "isPassword": false,
@@ -1448,7 +1418,7 @@ var DBC;
                                                             "marginRight": "XS",
                                                             "required": false,
                                                             "readOnly": false,
-                                                            "placeHolder": "123456789",
+                                                            "placeHolder": "0",
                                                             "textKind": 2,
                                                             "isPrivateInfo": false,
                                                             "isPassword": false,
@@ -1515,7 +1485,7 @@ var DBC;
                                                             "marginRight": "XS",
                                                             "required": false,
                                                             "readOnly": false,
-                                                            "placeHolder": "123456789",
+                                                            "placeHolder": "0",
                                                             "textKind": 2,
                                                             "isPrivateInfo": false,
                                                             "isPassword": false,
@@ -1855,7 +1825,7 @@ var DBC;
                                     "marginRight": "XS",
                                     "required": false,
                                     "readOnly": false,
-                                    "placeHolder": "平21.01.01",
+                                    "placeHolder": "平26.07.01",
                                     "textKind": 0,
                                     "isPrivateInfo": false,
                                     "isPassword": false,
@@ -1894,7 +1864,7 @@ var DBC;
                                     "marginRight": "XS",
                                     "required": false,
                                     "readOnly": false,
-                                    "placeHolder": "平21.01.01",
+                                    "placeHolder": "平26.07.01",
                                     "textKind": 0,
                                     "isPrivateInfo": false,
                                     "isPassword": false,
@@ -1958,7 +1928,7 @@ var DBC;
                                                     "value": "その他"
                                                 }
                                             ],
-                                            "selectedItem": "",
+                                            "selectedItem": "family",
                                             "newLineItemNumber": 4,
                                             "spaceSize": 1
                                         },
@@ -2315,7 +2285,7 @@ var DBC;
                                             "value": "窓口払い"
                                         }
                                     ],
-                                    "selectedItem": "",
+                                    "selectedItem": "payToKoza",
                                     "newLineItemNumber": 3,
                                     "spaceSize": 1
                                 },
