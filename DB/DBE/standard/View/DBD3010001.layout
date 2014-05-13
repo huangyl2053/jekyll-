@@ -57,6 +57,7 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "onClickBtnToResearch": "",
      "gridSetting": {
       "rowHeight": 50,
       "isMultiSelectable": false,
@@ -253,8 +254,7 @@
         "sortKey": "setaiCode"
        }
       ]
-     },
-     "onClickBtnToResearch": ""
+     }
     }
    ],
    "controlType": "Panel",
@@ -345,6 +345,314 @@
      "postParameterPanelNames": [
       {
        "postParameterPanelNames": "KihonJoho"
+      }
+     ],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
+     "backgroundColor": 0,
+     "widthAuto": false,
+     "isGroupBox": false
+    },
+    {
+     "fieldName": "HihokenshaJoho",
+     "items": [
+      {
+       "fieldName": "lblHihokenshaJoho",
+       "items": [],
+       "controlType": "Label",
+       "width": "150",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "required": false,
+       "align": 2,
+       "text": "被保険者情報",
+       "isPrivateInfo": false
+      }
+     ],
+     "controlType": "Panel",
+     "width": "1000",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "onLoad": "",
+     "title": "被保険者情報",
+     "isOpen": false,
+     "canOpenAndClose": true,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "HihokenshaJoho"
+      }
+     ],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
+     "backgroundColor": 0,
+     "widthAuto": false,
+     "isGroupBox": false
+    },
+    {
+     "fieldName": "NinteiRireki",
+     "items": [
+      {
+       "fieldName": "dgNinteiRireki",
+       "items": [],
+       "controlType": "DataGrid",
+       "width": "950",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "dataSource": [],
+       "gridSetting": {
+        "rowHeight": 25,
+        "isMultiSelectable": false,
+        "isShowFooter": true,
+        "isShowFilter": false,
+        "isShowFilterButton": false,
+        "isShowRowState": false,
+        "header": {
+         "combineColumns": [
+          {
+           "combineColumnName": "申請区分",
+           "combineItem": [
+            "（法令）"
+           ]
+          },
+          {
+           "combineColumnName": "認定有効期間",
+           "combineItem": [
+            "開始日",
+            "終了日"
+           ]
+          }
+         ],
+         "frozenColumn": "",
+         "headerHeight": 0
+        },
+        "columns": [
+         {
+          "columnName": "詳細",
+          "dataName": "詳細",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 60,
+          "visible": true,
+          "cellType": 8,
+          "cellDetails": {
+           "cellType": 8,
+           "text": "詳細",
+           "onClick": "",
+           "imageFileUrl": "",
+           "imageWidth": "",
+           "imageHeight": ""
+          },
+          "align": 1,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "詳細"
+         },
+         {
+          "columnName": "認定申請日",
+          "dataName": "認定申請日",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 100,
+          "visible": true,
+          "cellType": 7,
+          "cellDetails": {
+           "cellType": 7,
+           "ymdKubun": 2,
+           "displayFormat": 0,
+           "onChange": ""
+          },
+          "align": 1,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "認定申請日"
+         },
+         {
+          "columnName": "（法令）",
+          "dataName": "（法令）",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 100,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": {
+           "cellType": 0
+          },
+          "align": 1,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "（法令）"
+         },
+         {
+          "columnName": "認定年月日",
+          "dataName": "認定年月日",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 100,
+          "visible": true,
+          "cellType": 7,
+          "cellDetails": {
+           "cellType": 7,
+           "ymdKubun": 2,
+           "displayFormat": 0,
+           "onChange": ""
+          },
+          "align": 1,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "認定年月日"
+         },
+         {
+          "columnName": "要介護度",
+          "dataName": "要介護度",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 100,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": {
+           "cellType": 0
+          },
+          "align": 1,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "要介護度"
+         },
+         {
+          "columnName": "開始日",
+          "dataName": "開始日",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 100,
+          "visible": true,
+          "cellType": 7,
+          "cellDetails": {
+           "cellType": 7,
+           "ymdKubun": 2,
+           "displayFormat": 0,
+           "onChange": ""
+          },
+          "align": 1,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "開始日"
+         },
+         {
+          "columnName": "終了日",
+          "dataName": "終了日",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 100,
+          "visible": true,
+          "cellType": 7,
+          "cellDetails": {
+           "cellType": 7,
+           "ymdKubun": 2,
+           "displayFormat": 0,
+           "onChange": ""
+          },
+          "align": 1,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "終了日"
+         },
+         {
+          "columnName": "審査会意見",
+          "dataName": "審査会意見",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 250,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "審査会意見"
+         }
+        ]
+       },
+       "height": "S",
+       "onSort": "",
+       "onSelect": "",
+       "onSelectByDblClick": "",
+       "onOnlyRow": "",
+       "onNoRow": "",
+       "onMultiRows": "",
+       "sortOrder": "defaultDataName3",
+       "isAscending": true,
+       "filterList": [],
+       "activeRowId": -1
+      }
+     ],
+     "controlType": "Panel",
+     "width": "1000",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "onLoad": "",
+     "title": "認定履歴",
+     "isOpen": true,
+     "canOpenAndClose": true,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "NinteiRireki"
       }
      ],
      "requestSettings": [],
@@ -1863,6 +2171,12 @@
   ],
   [
    "KihonJoho"
+  ],
+  [
+   "HihokenshaJoho"
+  ],
+  [
+   "NinteiRireki"
   ],
   [
    "NinteiShosai"
