@@ -12,11 +12,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * tblSummary のクラスファイル 
+ * tblSeikyuSummary のクラスファイル 
  * 
  * @author 自動生成
  */
-public class tblSummaryDiv extends TablePanel {
+public class tblSeikyuSummaryDiv extends TablePanel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,37 +24,37 @@ public class tblSummaryDiv extends TablePanel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("cel11")
-    private cel11AttblSummary cel11;
+    private cel11AttblSeikyuSummary cel11;
     @JsonProperty("cel12")
-    private cel12AttblSummary cel12;
+    private cel12AttblSeikyuSummary cel12;
     @JsonProperty("cel13")
-    private cel13AttblSummary cel13;
+    private cel13AttblSeikyuSummary cel13;
     @JsonProperty("cel21")
-    private cel21AttblSummary cel21;
+    private cel21AttblSeikyuSummary cel21;
     @JsonProperty("cel22")
-    private cel22AttblSummary cel22;
+    private cel22AttblSeikyuSummary cel22;
     @JsonProperty("cel23")
-    private cel23AttblSummary cel23;
+    private cel23AttblSeikyuSummary cel23;
     @JsonProperty("cel31")
-    private cel31AttblSummary cel31;
+    private cel31AttblSeikyuSummary cel31;
     @JsonProperty("cel32")
-    private cel32AttblSummary cel32;
+    private cel32AttblSeikyuSummary cel32;
     @JsonProperty("cel33")
-    private cel33AttblSummary cel33;
+    private cel33AttblSeikyuSummary cel33;
     @JsonProperty("cel14")
-    private cel14AttblSummary cel14;
+    private cel14AttblSeikyuSummary cel14;
     @JsonProperty("cel15")
-    private cel15AttblSummary cel15;
+    private cel15AttblSeikyuSummary cel15;
     @JsonProperty("cel24")
-    private cel24AttblSummary cel24;
+    private cel24AttblSeikyuSummary cel24;
     @JsonProperty("cel25")
-    private cel25AttblSummary cel25;
+    private cel25AttblSeikyuSummary cel25;
     @JsonProperty("cel34")
-    private cel34AttblSummary cel34;
+    private cel34AttblSeikyuSummary cel34;
     @JsonProperty("cel35")
-    private cel35AttblSummary cel35;
+    private cel35AttblSeikyuSummary cel35;
     @JsonProperty("cel36")
-    private cel36AttblSummary cel36;
+    private cel36AttblSeikyuSummary cel36;
 
     /*
      * [ Helperの作成 ]
@@ -147,162 +147,162 @@ public class tblSummaryDiv extends TablePanel {
      * フィールド名のGetterとSetter を作成
      */
     @JsonProperty("cel11")
-    private cel11AttblSummary getCel11() {
+    private cel11AttblSeikyuSummary getCel11() {
         return cel11;
     }
 
     @JsonProperty("cel11")
-    private void setCel11(cel11AttblSummary cel11) {
+    private void setCel11(cel11AttblSeikyuSummary cel11) {
         this.cel11=cel11;
     }
 
     @JsonProperty("cel12")
-    private cel12AttblSummary getCel12() {
+    private cel12AttblSeikyuSummary getCel12() {
         return cel12;
     }
 
     @JsonProperty("cel12")
-    private void setCel12(cel12AttblSummary cel12) {
+    private void setCel12(cel12AttblSeikyuSummary cel12) {
         this.cel12=cel12;
     }
 
     @JsonProperty("cel13")
-    private cel13AttblSummary getCel13() {
+    private cel13AttblSeikyuSummary getCel13() {
         return cel13;
     }
 
     @JsonProperty("cel13")
-    private void setCel13(cel13AttblSummary cel13) {
+    private void setCel13(cel13AttblSeikyuSummary cel13) {
         this.cel13=cel13;
     }
 
     @JsonProperty("cel21")
-    private cel21AttblSummary getCel21() {
+    private cel21AttblSeikyuSummary getCel21() {
         return cel21;
     }
 
     @JsonProperty("cel21")
-    private void setCel21(cel21AttblSummary cel21) {
+    private void setCel21(cel21AttblSeikyuSummary cel21) {
         this.cel21=cel21;
     }
 
     @JsonProperty("cel22")
-    private cel22AttblSummary getCel22() {
+    private cel22AttblSeikyuSummary getCel22() {
         return cel22;
     }
 
     @JsonProperty("cel22")
-    private void setCel22(cel22AttblSummary cel22) {
+    private void setCel22(cel22AttblSeikyuSummary cel22) {
         this.cel22=cel22;
     }
 
     @JsonProperty("cel23")
-    private cel23AttblSummary getCel23() {
+    private cel23AttblSeikyuSummary getCel23() {
         return cel23;
     }
 
     @JsonProperty("cel23")
-    private void setCel23(cel23AttblSummary cel23) {
+    private void setCel23(cel23AttblSeikyuSummary cel23) {
         this.cel23=cel23;
     }
 
     @JsonProperty("cel31")
-    private cel31AttblSummary getCel31() {
+    private cel31AttblSeikyuSummary getCel31() {
         return cel31;
     }
 
     @JsonProperty("cel31")
-    private void setCel31(cel31AttblSummary cel31) {
+    private void setCel31(cel31AttblSeikyuSummary cel31) {
         this.cel31=cel31;
     }
 
     @JsonProperty("cel32")
-    private cel32AttblSummary getCel32() {
+    private cel32AttblSeikyuSummary getCel32() {
         return cel32;
     }
 
     @JsonProperty("cel32")
-    private void setCel32(cel32AttblSummary cel32) {
+    private void setCel32(cel32AttblSeikyuSummary cel32) {
         this.cel32=cel32;
     }
 
     @JsonProperty("cel33")
-    private cel33AttblSummary getCel33() {
+    private cel33AttblSeikyuSummary getCel33() {
         return cel33;
     }
 
     @JsonProperty("cel33")
-    private void setCel33(cel33AttblSummary cel33) {
+    private void setCel33(cel33AttblSeikyuSummary cel33) {
         this.cel33=cel33;
     }
 
     @JsonProperty("cel14")
-    private cel14AttblSummary getCel14() {
+    private cel14AttblSeikyuSummary getCel14() {
         return cel14;
     }
 
     @JsonProperty("cel14")
-    private void setCel14(cel14AttblSummary cel14) {
+    private void setCel14(cel14AttblSeikyuSummary cel14) {
         this.cel14=cel14;
     }
 
     @JsonProperty("cel15")
-    private cel15AttblSummary getCel15() {
+    private cel15AttblSeikyuSummary getCel15() {
         return cel15;
     }
 
     @JsonProperty("cel15")
-    private void setCel15(cel15AttblSummary cel15) {
+    private void setCel15(cel15AttblSeikyuSummary cel15) {
         this.cel15=cel15;
     }
 
     @JsonProperty("cel24")
-    private cel24AttblSummary getCel24() {
+    private cel24AttblSeikyuSummary getCel24() {
         return cel24;
     }
 
     @JsonProperty("cel24")
-    private void setCel24(cel24AttblSummary cel24) {
+    private void setCel24(cel24AttblSeikyuSummary cel24) {
         this.cel24=cel24;
     }
 
     @JsonProperty("cel25")
-    private cel25AttblSummary getCel25() {
+    private cel25AttblSeikyuSummary getCel25() {
         return cel25;
     }
 
     @JsonProperty("cel25")
-    private void setCel25(cel25AttblSummary cel25) {
+    private void setCel25(cel25AttblSeikyuSummary cel25) {
         this.cel25=cel25;
     }
 
     @JsonProperty("cel34")
-    private cel34AttblSummary getCel34() {
+    private cel34AttblSeikyuSummary getCel34() {
         return cel34;
     }
 
     @JsonProperty("cel34")
-    private void setCel34(cel34AttblSummary cel34) {
+    private void setCel34(cel34AttblSeikyuSummary cel34) {
         this.cel34=cel34;
     }
 
     @JsonProperty("cel35")
-    private cel35AttblSummary getCel35() {
+    private cel35AttblSeikyuSummary getCel35() {
         return cel35;
     }
 
     @JsonProperty("cel35")
-    private void setCel35(cel35AttblSummary cel35) {
+    private void setCel35(cel35AttblSeikyuSummary cel35) {
         this.cel35=cel35;
     }
 
     @JsonProperty("cel36")
-    private cel36AttblSummary getCel36() {
+    private cel36AttblSeikyuSummary getCel36() {
         return cel36;
     }
 
     @JsonProperty("cel36")
-    private void setCel36(cel36AttblSummary cel36) {
+    private void setCel36(cel36AttblSeikyuSummary cel36) {
         this.cel36=cel36;
     }
 
@@ -312,7 +312,7 @@ public class tblSummaryDiv extends TablePanel {
  * 
  * @author 自動生成
  */
-class cel11AttblSummary extends TableCell {
+class cel11AttblSeikyuSummary extends TableCell {
     @JsonProperty("lblSummary")
     private Label lblSummary;
 
@@ -332,7 +332,7 @@ class cel11AttblSummary extends TableCell {
  * 
  * @author 自動生成
  */
-class cel12AttblSummary extends TableCell {
+class cel12AttblSeikyuSummary extends TableCell {
     @JsonProperty("lblPayTotal")
     private Label lblPayTotal;
 
@@ -352,7 +352,7 @@ class cel12AttblSummary extends TableCell {
  * 
  * @author 自動生成
  */
-class cel13AttblSummary extends TableCell {
+class cel13AttblSeikyuSummary extends TableCell {
     @JsonProperty("lblHokenSeikyuAmount")
     private Label lblHokenSeikyuAmount;
 
@@ -372,7 +372,7 @@ class cel13AttblSummary extends TableCell {
  * 
  * @author 自動生成
  */
-class cel21AttblSummary extends TableCell {
+class cel21AttblSeikyuSummary extends TableCell {
     @JsonProperty("lblSummaryMae")
     private Label lblSummaryMae;
 
@@ -392,7 +392,7 @@ class cel21AttblSummary extends TableCell {
  * 
  * @author 自動生成
  */
-class cel22AttblSummary extends TableCell {
+class cel22AttblSeikyuSummary extends TableCell {
     @JsonProperty("txtPayTotalMae")
     private TextBoxNum txtPayTotalMae;
 
@@ -412,7 +412,7 @@ class cel22AttblSummary extends TableCell {
  * 
  * @author 自動生成
  */
-class cel23AttblSummary extends TableCell {
+class cel23AttblSeikyuSummary extends TableCell {
     @JsonProperty("txtHokenSeikyuAmountMae")
     private TextBoxNum txtHokenSeikyuAmountMae;
 
@@ -432,7 +432,7 @@ class cel23AttblSummary extends TableCell {
  * 
  * @author 自動生成
  */
-class cel31AttblSummary extends TableCell {
+class cel31AttblSeikyuSummary extends TableCell {
     @JsonProperty("lblSummaryNow")
     private Label lblSummaryNow;
 
@@ -452,7 +452,7 @@ class cel31AttblSummary extends TableCell {
  * 
  * @author 自動生成
  */
-class cel32AttblSummary extends TableCell {
+class cel32AttblSeikyuSummary extends TableCell {
     @JsonProperty("txtPayTotalNow")
     private TextBoxNum txtPayTotalNow;
 
@@ -472,7 +472,7 @@ class cel32AttblSummary extends TableCell {
  * 
  * @author 自動生成
  */
-class cel33AttblSummary extends TableCell {
+class cel33AttblSeikyuSummary extends TableCell {
     @JsonProperty("txtHokenSeikyuAmountNow")
     private TextBoxNum txtHokenSeikyuAmountNow;
 
@@ -492,7 +492,7 @@ class cel33AttblSummary extends TableCell {
  * 
  * @author 自動生成
  */
-class cel14AttblSummary extends TableCell {
+class cel14AttblSeikyuSummary extends TableCell {
     @JsonProperty("lblRiyoshaFutanAmount")
     private Label lblRiyoshaFutanAmount;
 
@@ -512,7 +512,7 @@ class cel14AttblSummary extends TableCell {
  * 
  * @author 自動生成
  */
-class cel15AttblSummary extends TableCell {
+class cel15AttblSeikyuSummary extends TableCell {
     @JsonProperty("lblLimitOverAmount")
     private Label lblLimitOverAmount;
 
@@ -532,7 +532,7 @@ class cel15AttblSummary extends TableCell {
  * 
  * @author 自動生成
  */
-class cel24AttblSummary extends TableCell {
+class cel24AttblSeikyuSummary extends TableCell {
     @JsonProperty("txtRiyoshaFutanAmountMae")
     private TextBoxNum txtRiyoshaFutanAmountMae;
 
@@ -552,7 +552,7 @@ class cel24AttblSummary extends TableCell {
  * 
  * @author 自動生成
  */
-class cel25AttblSummary extends TableCell {
+class cel25AttblSeikyuSummary extends TableCell {
     @JsonProperty("txtLimitOverAmountMae")
     private TextBoxNum txtLimitOverAmountMae;
 
@@ -572,7 +572,7 @@ class cel25AttblSummary extends TableCell {
  * 
  * @author 自動生成
  */
-class cel34AttblSummary extends TableCell {
+class cel34AttblSeikyuSummary extends TableCell {
     @JsonProperty("txtRiyoshaFutanAmountNow")
     private TextBoxNum txtRiyoshaFutanAmountNow;
 
@@ -592,7 +592,7 @@ class cel34AttblSummary extends TableCell {
  * 
  * @author 自動生成
  */
-class cel35AttblSummary extends TableCell {
+class cel35AttblSeikyuSummary extends TableCell {
     @JsonProperty("txtLimitOverAmountNow")
     private TextBoxNum txtLimitOverAmountNow;
 
@@ -612,7 +612,7 @@ class cel35AttblSummary extends TableCell {
  * 
  * @author 自動生成
  */
-class cel36AttblSummary extends TableCell {
+class cel36AttblSeikyuSummary extends TableCell {
     @JsonProperty("btnLimitOverCheck")
     private Button btnLimitOverCheck;
 

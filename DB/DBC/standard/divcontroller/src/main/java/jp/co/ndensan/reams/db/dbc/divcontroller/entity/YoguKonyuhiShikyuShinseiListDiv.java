@@ -24,8 +24,8 @@ public class YoguKonyuhiShikyuShinseiListDiv extends Panel {
      */
     @JsonProperty("txtTeikyoYMD")
     private TextBoxDate txtTeikyoYMD;
-    @JsonProperty("btnAdd")
-    private Button btnAdd;
+    @JsonProperty("btnAddShikyuShinsei")
+    private Button btnAddShikyuShinsei;
     @JsonProperty("dgShikyuShinseiList")
     private DataGrid<dgShikyuShinseiList_Row> dgShikyuShinseiList;
 
@@ -45,14 +45,14 @@ public class YoguKonyuhiShikyuShinseiListDiv extends Panel {
         this.txtTeikyoYMD=txtTeikyoYMD;
     }
 
-    @JsonProperty("btnAdd")
-    public Button getBtnAdd() {
-        return btnAdd;
+    @JsonProperty("btnAddShikyuShinsei")
+    public Button getBtnAddShikyuShinsei() {
+        return btnAddShikyuShinsei;
     }
 
-    @JsonProperty("btnAdd")
-    public void setBtnAdd(Button btnAdd) {
-        this.btnAdd=btnAdd;
+    @JsonProperty("btnAddShikyuShinsei")
+    public void setBtnAddShikyuShinsei(Button btnAddShikyuShinsei) {
+        this.btnAddShikyuShinsei=btnAddShikyuShinsei;
     }
 
     @JsonProperty("dgShikyuShinseiList")

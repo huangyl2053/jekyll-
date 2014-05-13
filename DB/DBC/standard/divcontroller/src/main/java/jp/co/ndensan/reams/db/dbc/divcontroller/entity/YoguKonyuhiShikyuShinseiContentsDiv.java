@@ -36,8 +36,10 @@ public class YoguKonyuhiShikyuShinseiContentsDiv extends Panel {
     private YoguKonyuhiShikyuShinseishaJohoDiv YoguKonyuhiShikyuShinseishaJoho;
     @JsonProperty("YoguKonyuhiShikyuShinseiPaymentMethod")
     private YoguKonyuhiShikyuShinseiPaymentMethodDiv YoguKonyuhiShikyuShinseiPaymentMethod;
-    @JsonProperty("btnReflect")
-    private Button btnReflect;
+    @JsonProperty("btnUpdateShikyuShinsei")
+    private Button btnUpdateShikyuShinsei;
+    @JsonProperty("btnCancelShikyuShinsei")
+    private Button btnCancelShikyuShinsei;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -105,14 +107,24 @@ public class YoguKonyuhiShikyuShinseiContentsDiv extends Panel {
         this.YoguKonyuhiShikyuShinseiPaymentMethod=YoguKonyuhiShikyuShinseiPaymentMethod;
     }
 
-    @JsonProperty("btnReflect")
-    public Button getBtnReflect() {
-        return btnReflect;
+    @JsonProperty("btnUpdateShikyuShinsei")
+    public Button getBtnUpdateShikyuShinsei() {
+        return btnUpdateShikyuShinsei;
     }
 
-    @JsonProperty("btnReflect")
-    public void setBtnReflect(Button btnReflect) {
-        this.btnReflect=btnReflect;
+    @JsonProperty("btnUpdateShikyuShinsei")
+    public void setBtnUpdateShikyuShinsei(Button btnUpdateShikyuShinsei) {
+        this.btnUpdateShikyuShinsei=btnUpdateShikyuShinsei;
+    }
+
+    @JsonProperty("btnCancelShikyuShinsei")
+    public Button getBtnCancelShikyuShinsei() {
+        return btnCancelShikyuShinsei;
+    }
+
+    @JsonProperty("btnCancelShikyuShinsei")
+    public void setBtnCancelShikyuShinsei(Button btnCancelShikyuShinsei) {
+        this.btnCancelShikyuShinsei=btnCancelShikyuShinsei;
     }
 
 }

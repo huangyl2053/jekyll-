@@ -5,8 +5,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.SeikyuSummaryDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.YoguKonyuhiShikyuShinseiSeikyuDetailInputDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgSeikyuDetail_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tblSummaryDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -23,10 +24,14 @@ public class YoguKonyuhiShikyuShinseiSeikyuDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("btnInputDetail")
+    private Button btnInputDetail;
     @JsonProperty("dgSeikyuDetail")
     private DataGrid<dgSeikyuDetail_Row> dgSeikyuDetail;
-    @JsonProperty("tblSummary")
-    private tblSummaryDiv tblSummary;
+    @JsonProperty("YoguKonyuhiShikyuShinseiSeikyuDetailInput")
+    private YoguKonyuhiShikyuShinseiSeikyuDetailInputDiv YoguKonyuhiShikyuShinseiSeikyuDetailInput;
+    @JsonProperty("SeikyuSummary")
+    private SeikyuSummaryDiv SeikyuSummary;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -34,6 +39,16 @@ public class YoguKonyuhiShikyuShinseiSeikyuDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    @JsonProperty("btnInputDetail")
+    public Button getBtnInputDetail() {
+        return btnInputDetail;
+    }
+
+    @JsonProperty("btnInputDetail")
+    public void setBtnInputDetail(Button btnInputDetail) {
+        this.btnInputDetail=btnInputDetail;
+    }
+
     @JsonProperty("dgSeikyuDetail")
     public DataGrid<dgSeikyuDetail_Row> getDgSeikyuDetail() {
         return dgSeikyuDetail;
@@ -44,14 +59,24 @@ public class YoguKonyuhiShikyuShinseiSeikyuDetailDiv extends Panel {
         this.dgSeikyuDetail=dgSeikyuDetail;
     }
 
-    @JsonProperty("tblSummary")
-    public tblSummaryDiv getTblSummary() {
-        return tblSummary;
+    @JsonProperty("YoguKonyuhiShikyuShinseiSeikyuDetailInput")
+    public YoguKonyuhiShikyuShinseiSeikyuDetailInputDiv getYoguKonyuhiShikyuShinseiSeikyuDetailInput() {
+        return YoguKonyuhiShikyuShinseiSeikyuDetailInput;
     }
 
-    @JsonProperty("tblSummary")
-    public void setTblSummary(tblSummaryDiv tblSummary) {
-        this.tblSummary=tblSummary;
+    @JsonProperty("YoguKonyuhiShikyuShinseiSeikyuDetailInput")
+    public void setYoguKonyuhiShikyuShinseiSeikyuDetailInput(YoguKonyuhiShikyuShinseiSeikyuDetailInputDiv YoguKonyuhiShikyuShinseiSeikyuDetailInput) {
+        this.YoguKonyuhiShikyuShinseiSeikyuDetailInput=YoguKonyuhiShikyuShinseiSeikyuDetailInput;
+    }
+
+    @JsonProperty("SeikyuSummary")
+    public SeikyuSummaryDiv getSeikyuSummary() {
+        return SeikyuSummary;
+    }
+
+    @JsonProperty("SeikyuSummary")
+    public void setSeikyuSummary(SeikyuSummaryDiv SeikyuSummary) {
+        this.SeikyuSummary=SeikyuSummary;
     }
 
 }
