@@ -821,7 +821,7 @@ public class DbT5002NinteiKekkaJohoEntity implements IDbAccessable {
      * @return kaigoServiceShurui24
      */
     public RString getKaigoServiceShurui24() {
-        return kaigoServiceShurui25;
+        return kaigoServiceShurui24;
     }
 
     /**
