@@ -56,7 +56,14 @@ public class NinteiResultManager {
      */
     public NinteiResult get認定結果(ShinseishoKanriNo 申請書管理番号) {
         DbT5002NinteiKekkaJohoEntity entity = dac.select(申請書管理番号);
-        return NinteiKekkaMapper.toNinteiResult(entity, get介護サービス種類(entity));
+        return NinteiKekkaMapper.toNinteiResult(entity, get介護サービス種類０１(entity), get介護サービス種類０２(entity),
+                get介護サービス種類０３(entity), get介護サービス種類０４(entity), get介護サービス種類０５(entity), get介護サービス種類０６(entity),
+                get介護サービス種類０７(entity), get介護サービス種類０８(entity), get介護サービス種類０９(entity), get介護サービス種類１０(entity),
+                get介護サービス種類１１(entity), get介護サービス種類１２(entity), get介護サービス種類１３(entity), get介護サービス種類１４(entity),
+                get介護サービス種類１５(entity), get介護サービス種類１６(entity), get介護サービス種類１７(entity), get介護サービス種類１８(entity),
+                get介護サービス種類１９(entity), get介護サービス種類２０(entity), get介護サービス種類２１(entity), get介護サービス種類２２(entity),
+                get介護サービス種類２３(entity), get介護サービス種類２４(entity), get介護サービス種類２５(entity), get介護サービス種類２６(entity),
+                get介護サービス種類２７(entity), get介護サービス種類２８(entity), get介護サービス種類２９(entity), get介護サービス種類３０(entity));
     }
 
     /**
@@ -79,12 +86,273 @@ public class NinteiResultManager {
         return dac.delete(NinteiKekkaMapper.toDbT5002NinteiKekkaJohoEntity(認定結果)) != 0;
     }
 
-    private IKaigoServiceShurui get介護サービス種類(DbT5002NinteiKekkaJohoEntity entity) {
+    private IKaigoServiceShurui get介護サービス種類０１(DbT5002NinteiKekkaJohoEntity entity) {
         if (entity == null) {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui01());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類０２(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui02());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類０３(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui03());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類０４(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui04());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類０５(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui05());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類０６(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui06());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類０７(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui07());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類０８(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui08());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類０９(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui09());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類１０(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui10());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類１１(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui11());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類１２(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui12());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類１３(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui13());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類１４(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui14());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類１５(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui15());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類１６(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui16());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類１７(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui17());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類１８(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui18());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類１９(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui19());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類２０(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui20());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類２１(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui21());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類２２(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui22());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類２３(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui23());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類２４(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui24());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類２５(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui25());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類２６(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui26());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類２７(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui27());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類２８(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui28());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類２９(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui29());
+        return service.get介護サービス種類();
+    }
+
+    private IKaigoServiceShurui get介護サービス種類３０(DbT5002NinteiKekkaJohoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        IKaigoService service = kaigoServiceManager.get介護サービス(
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui30());
         return service.get介護サービス種類();
     }
 }
