@@ -24,8 +24,6 @@ public class YoguKonyuhiShikyuShinseiMishinsaResultListDiv extends Panel {
      */
     @JsonProperty("txtShinsaDate")
     private TextBoxDate txtShinsaDate;
-    @JsonProperty("btnKari")
-    private Button btnKari;
     @JsonProperty("dgMishinsaShikyuShinseiList")
     private DataGrid<dgMishinsaShikyuShinseiList_Row> dgMishinsaShikyuShinseiList;
     @JsonProperty("btnIkkatsuShinsa")
@@ -45,16 +43,6 @@ public class YoguKonyuhiShikyuShinseiMishinsaResultListDiv extends Panel {
     @JsonProperty("txtShinsaDate")
     public void setTxtShinsaDate(TextBoxDate txtShinsaDate) {
         this.txtShinsaDate=txtShinsaDate;
-    }
-
-    @JsonProperty("btnKari")
-    public Button getBtnKari() {
-        return btnKari;
-    }
-
-    @JsonProperty("btnKari")
-    public void setBtnKari(Button btnKari) {
-        this.btnKari=btnKari;
     }
 
     @JsonProperty("dgMishinsaShikyuShinseiList")
