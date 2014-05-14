@@ -33,14 +33,14 @@ public class KyotakuKeikakuTodokedeJigyoshaDiv extends Panel {
     private TextBox txtServiceShurui1;
     @JsonProperty("txtServiceShurui2")
     private TextBox txtServiceShurui2;
-    @JsonProperty("txtJigyoshaYubinNo")
-    private TextBoxYubinNo txtJigyoshaYubinNo;
-    @JsonProperty("txtJigyoshaJusho")
-    private TextBox txtJigyoshaJusho;
     @JsonProperty("txtKanrishaName")
     private TextBox txtKanrishaName;
     @JsonProperty("txtJigyoshaTelNo")
     private TextBox txtJigyoshaTelNo;
+    @JsonProperty("txtJigyoshaYubinNo")
+    private TextBoxYubinNo txtJigyoshaYubinNo;
+    @JsonProperty("txtJigyoshaJusho")
+    private TextBox txtJigyoshaJusho;
     @JsonProperty("txtItakuJigyoshaCode")
     private TextBoxCode txtItakuJigyoshaCode;
     @JsonProperty("btnItakuJigyosha")
@@ -114,26 +114,6 @@ public class KyotakuKeikakuTodokedeJigyoshaDiv extends Panel {
         this.txtServiceShurui2=txtServiceShurui2;
     }
 
-    @JsonProperty("txtJigyoshaYubinNo")
-    public TextBoxYubinNo getTxtJigyoshaYubinNo() {
-        return txtJigyoshaYubinNo;
-    }
-
-    @JsonProperty("txtJigyoshaYubinNo")
-    public void setTxtJigyoshaYubinNo(TextBoxYubinNo txtJigyoshaYubinNo) {
-        this.txtJigyoshaYubinNo=txtJigyoshaYubinNo;
-    }
-
-    @JsonProperty("txtJigyoshaJusho")
-    public TextBox getTxtJigyoshaJusho() {
-        return txtJigyoshaJusho;
-    }
-
-    @JsonProperty("txtJigyoshaJusho")
-    public void setTxtJigyoshaJusho(TextBox txtJigyoshaJusho) {
-        this.txtJigyoshaJusho=txtJigyoshaJusho;
-    }
-
     @JsonProperty("txtKanrishaName")
     public TextBox getTxtKanrishaName() {
         return txtKanrishaName;
@@ -152,6 +132,26 @@ public class KyotakuKeikakuTodokedeJigyoshaDiv extends Panel {
     @JsonProperty("txtJigyoshaTelNo")
     public void setTxtJigyoshaTelNo(TextBox txtJigyoshaTelNo) {
         this.txtJigyoshaTelNo=txtJigyoshaTelNo;
+    }
+
+    @JsonProperty("txtJigyoshaYubinNo")
+    public TextBoxYubinNo getTxtJigyoshaYubinNo() {
+        return txtJigyoshaYubinNo;
+    }
+
+    @JsonProperty("txtJigyoshaYubinNo")
+    public void setTxtJigyoshaYubinNo(TextBoxYubinNo txtJigyoshaYubinNo) {
+        this.txtJigyoshaYubinNo=txtJigyoshaYubinNo;
+    }
+
+    @JsonProperty("txtJigyoshaJusho")
+    public TextBox getTxtJigyoshaJusho() {
+        return txtJigyoshaJusho;
+    }
+
+    @JsonProperty("txtJigyoshaJusho")
+    public void setTxtJigyoshaJusho(TextBox txtJigyoshaJusho) {
+        this.txtJigyoshaJusho=txtJigyoshaJusho;
     }
 
     @JsonProperty("txtItakuJigyoshaCode")

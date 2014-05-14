@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue May 13 19:55:12 JST 2014 
+ * Wed May 14 17:02:54 JST 2014 
  */
 
 
@@ -11,6 +11,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 
 /**
@@ -23,6 +24,7 @@ public class dgRirekiList_Row extends DataRow {
 
     private Button btnSelect;
     private RString txtJotai;
+    private TextBoxDate txtKeikakuTekiyoKaishiYMDInvisible;
     private RString txtKeikakuTekiyoKaishiYMD;
     private RString txtKeikakuTekiyoShuryoYMD;
     private RString txtTodokedeYMD;
@@ -33,10 +35,11 @@ public class dgRirekiList_Row extends DataRow {
         super();
     }
 
-    public dgRirekiList_Row(Button btnSelect, RString txtJotai, RString txtKeikakuTekiyoKaishiYMD, RString txtKeikakuTekiyoShuryoYMD, RString txtTodokedeYMD, RString txtTodokedeKubun, RString txtKeikakuIraiJigyosha) {
+    public dgRirekiList_Row(Button btnSelect, RString txtJotai, TextBoxDate txtKeikakuTekiyoKaishiYMDInvisible, RString txtKeikakuTekiyoKaishiYMD, RString txtKeikakuTekiyoShuryoYMD, RString txtTodokedeYMD, RString txtTodokedeKubun, RString txtKeikakuIraiJigyosha) {
         super();
         this.setOriginalData("btnSelect", btnSelect);
         this.setOriginalData("txtJotai", txtJotai);
+        this.setOriginalData("txtKeikakuTekiyoKaishiYMDInvisible", txtKeikakuTekiyoKaishiYMDInvisible);
         this.setOriginalData("txtKeikakuTekiyoKaishiYMD", txtKeikakuTekiyoKaishiYMD);
         this.setOriginalData("txtKeikakuTekiyoShuryoYMD", txtKeikakuTekiyoShuryoYMD);
         this.setOriginalData("txtTodokedeYMD", txtTodokedeYMD);
@@ -44,6 +47,7 @@ public class dgRirekiList_Row extends DataRow {
         this.setOriginalData("txtKeikakuIraiJigyosha", txtKeikakuIraiJigyosha);
         this.btnSelect = btnSelect;
         this.txtJotai = txtJotai;
+        this.txtKeikakuTekiyoKaishiYMDInvisible = txtKeikakuTekiyoKaishiYMDInvisible;
         this.txtKeikakuTekiyoKaishiYMD = txtKeikakuTekiyoKaishiYMD;
         this.txtKeikakuTekiyoShuryoYMD = txtKeikakuTekiyoShuryoYMD;
         this.txtTodokedeYMD = txtTodokedeYMD;
@@ -57,6 +61,10 @@ public class dgRirekiList_Row extends DataRow {
 
     public RString getTxtJotai() {
         return txtJotai;
+    }
+
+    public TextBoxDate getTxtKeikakuTekiyoKaishiYMDInvisible() {
+        return txtKeikakuTekiyoKaishiYMDInvisible;
     }
 
     public RString getTxtKeikakuTekiyoKaishiYMD() {
@@ -87,6 +95,11 @@ public class dgRirekiList_Row extends DataRow {
     public void setTxtJotai(RString txtJotai) {
         this.setOriginalData("txtJotai", txtJotai);
         this.txtJotai = txtJotai;
+    }
+
+    public void setTxtKeikakuTekiyoKaishiYMDInvisible(TextBoxDate txtKeikakuTekiyoKaishiYMDInvisible) {
+        this.setOriginalData("txtKeikakuTekiyoKaishiYMDInvisible", txtKeikakuTekiyoKaishiYMDInvisible);
+        this.txtKeikakuTekiyoKaishiYMDInvisible = txtKeikakuTekiyoKaishiYMDInvisible;
     }
 
     public void setTxtKeikakuTekiyoKaishiYMD(RString txtKeikakuTekiyoKaishiYMD) {
