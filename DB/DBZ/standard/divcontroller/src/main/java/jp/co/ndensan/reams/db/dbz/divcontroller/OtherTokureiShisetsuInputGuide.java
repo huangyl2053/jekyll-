@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
  */
 public class OtherTokureiShisetsuInputGuide {
 
-    private static final RString OTHER_SHISETSU_DATA_SOURCE = new RString("dba/demoData/OtherShisetsuData.yml");
+    private static final RString OTHER_SHISETSU_DATA_SOURCE = new RString("dbz/demoData/OtherShisetsuData.yml");
 
     /**
      * その他特例施設を検索し、その情報をグリッドに設定します。

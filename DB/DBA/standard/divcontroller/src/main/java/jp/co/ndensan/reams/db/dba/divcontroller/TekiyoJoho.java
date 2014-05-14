@@ -59,7 +59,7 @@ public class TekiyoJoho {
                 new TextBoxFlexibleDate(), RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.EMPTY,
                 new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), new TextBoxFlexibleDate());
 
-        row.setAddType(new RString("追"));
+        row.setAddType(new RString("追加"));
 
         TekiyoJiyuInputDiv 適用事由 = jutokuJohoInputDiv.getTekiyoJiyuInput();
         row.setTekiyoJiyu(適用事由.getDdlTekiyoJiyu().getSelectedValue());
