@@ -70,9 +70,9 @@ public class KyotakuKeikakuTodokedeDetail {
         List<dgRirekiList_Row> dgList = new ArrayList<>();
         dgRirekiList_Row rowItem;
         Button btn = new Button();
-        rowItem = create履歴(btn, "追加", "平26.06.01", "平26.06.30", "06.01", "新規", "1111111111:事業者１");
+        rowItem = create履歴(btn, "追加", "平26.06.01", "平26.06.30", "06.01", "新規", "1111111111:電算介護調査センター");
         dgList.add(rowItem);
-        rowItem = create履歴(btn, "修正", "平26.06.01", "平26.06.30", "06.01", "変更", "1111111111:事業者１");
+        rowItem = create履歴(btn, "修正", "平26.06.01", "平26.06.30", "06.01", "変更", "1111111111:電算介護調査センター");
         dgList.add(rowItem);
 
         return dgList;
@@ -206,7 +206,7 @@ public class KyotakuKeikakuTodokedeDetail {
         dgRirekiList_Row rowItem;
         Button btn = new Button();
         String kubun = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().getKyotakuServiceRireki().getKyotakuKeikakuTodokedeMeisai().getTxtTodokedeKubun().getValue().toString();
-        rowItem = create履歴(btn, "追加", "平26.06.01", "平26.06.30", "06.01", kubun, "1111111111:事業者１");
+        rowItem = create履歴(btn, "追加", "平26.06.01", "平26.06.30", "06.01", kubun, "1111111111:電算介護調査センター");
 
         add履歴(panel, rowItem);
 
