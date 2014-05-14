@@ -7,9 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuKeikakuTodokedeMeisaiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuKeikakuTodokedeRirekiListDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * KyotakuServiceRireki のクラスファイル 
@@ -27,8 +25,6 @@ public class KyotakuServiceRirekiDiv extends TabPanel {
     private KyotakuKeikakuTodokedeRirekiListDiv KyotakuKeikakuTodokedeRirekiList;
     @JsonProperty("KyotakuKeikakuTodokedeMeisai")
     private KyotakuKeikakuTodokedeMeisaiDiv KyotakuKeikakuTodokedeMeisai;
-    @JsonProperty("btnReturn")
-    private Button btnReturn;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -54,16 +50,6 @@ public class KyotakuServiceRirekiDiv extends TabPanel {
     @JsonProperty("KyotakuKeikakuTodokedeMeisai")
     public void setKyotakuKeikakuTodokedeMeisai(KyotakuKeikakuTodokedeMeisaiDiv KyotakuKeikakuTodokedeMeisai) {
         this.KyotakuKeikakuTodokedeMeisai=KyotakuKeikakuTodokedeMeisai;
-    }
-
-    @JsonProperty("btnReturn")
-    public Button getBtnReturn() {
-        return btnReturn;
-    }
-
-    @JsonProperty("btnReturn")
-    public void setBtnReturn(Button btnReturn) {
-        this.btnReturn=btnReturn;
     }
 
 }

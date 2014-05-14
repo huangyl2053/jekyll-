@@ -70,9 +70,9 @@ public class KyotakuKeikakuTodokedeDetail {
         List<dgRirekiList_Row> dgList = new ArrayList<>();
         dgRirekiList_Row rowItem;
         Button btn = new Button();
-        rowItem = create履歴(btn, "追加", "平26.06.01", "平26.06.30", "06.01", "新規", "事業者１");
+        rowItem = create履歴(btn, "追加", "平26.06.01", "平26.06.30", "06.01", "新規", "1111111111:事業者１");
         dgList.add(rowItem);
-        rowItem = create履歴(btn, "修正", "平26.06.01", "平26.06.30", "06.01", "変更", "事業者２");
+        rowItem = create履歴(btn, "修正", "平26.06.01", "平26.06.30", "06.01", "変更", "1111111111:事業者１");
         dgList.add(rowItem);
 
         return dgList;
@@ -206,7 +206,7 @@ public class KyotakuKeikakuTodokedeDetail {
         dgRirekiList_Row rowItem;
         Button btn = new Button();
         String kubun = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().getKyotakuServiceRireki().getKyotakuKeikakuTodokedeMeisai().getTxtTodokedeKubun().getValue().toString();
-        rowItem = create履歴(btn, "追加", "平26.06.01", "平26.06.30", "06.01", kubun, "事業者３");
+        rowItem = create履歴(btn, "追加", "平26.06.01", "平26.06.30", "06.01", kubun, "1111111111:事業者１");
 
         add履歴(panel, rowItem);
 
@@ -349,15 +349,23 @@ public class KyotakuKeikakuTodokedeDetail {
             todokedesha.getTxtTodokedeshaJusho().setValue(new RString("長野市七瀬中町1111-11"));
 
             jigyosha.getRadKeikakuSakuseiKubun().setSelectedItem(new RString("key0"));
-            jigyosha.getTxtServiceShurui1().setValue(new RString("居宅介護"));
-            jigyosha.getTxtServiceShurui2().setValue(new RString("小規模介護"));
-            jigyosha.getTxtJigyoshaCode().setValue(new RString("10001"));
+            {
+                jigyosha.getTxtItakuJigyoshaCode().setVisible(false);
+                jigyosha.getTxtItakuJigyoshaCode().setDisplayNone(true);
+                jigyosha.getBtnItakuJigyosha().setVisible(false);
+                jigyosha.getBtnItakuJigyosha().setDisplayNone(true);
+                jigyosha.getTxtItakuJigyoshaName().setVisible(false);
+                jigyosha.getTxtItakuJigyoshaName().setDisplayNone(true);
+                jigyosha.getTxtServiceShurui1().setValue(new RString("居宅介護"));
+                jigyosha.getTxtServiceShurui2().setValue(new RString("小規模介護"));
+            }
+            jigyosha.getTxtJigyoshaCode().setValue(new RString("1111111111"));
             jigyosha.getTxtJigyoshaName().setValue(new RString("電算介護調査センター"));
             jigyosha.getTxtJigyoshaYubinNo().setValue(new YubinNo("381-0001"));
             jigyosha.getTxtJigyoshaJusho().setValue(new RString("長野市緑町３丁目14-15"));
             jigyosha.getTxtKanrishaName().setValue(new RString("電算　次郎"));
             jigyosha.getTxtJigyoshaTelNo().setValue(new RString("123-456-7899"));
-            jigyosha.getTxtItakuJigyoshaCode().setValue(new RString("20202"));
+            jigyosha.getTxtItakuJigyoshaCode().setValue(new RString("2222222222"));
             jigyosha.getTxtItakuJigyoshaName().setValue(new RString("電算介護サービスセンター"));
         }
     }
@@ -386,6 +394,7 @@ public class KyotakuKeikakuTodokedeDetail {
 
         jigyosha.getTxtJigyoshaCode().clearValue();
         jigyosha.getTxtJigyoshaName().clearValue();
+        jigyosha.getRadKeikakuSakuseiKubun().setSelectedItem(new RString(""));
         jigyosha.getTxtServiceShurui1().clearValue();
         jigyosha.getTxtServiceShurui2().clearValue();
         jigyosha.getTxtJigyoshaYubinNo().clearValue();

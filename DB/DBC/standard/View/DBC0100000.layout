@@ -175,7 +175,7 @@
    "marginRight": "XS",
    "onLoad": "",
    "title": "(共通) DBZ0010002 該当者一覧",
-   "isOpen": true,
+   "isOpen": false,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
@@ -1202,7 +1202,7 @@
              "isComboBox": false,
              "suggest": [],
              "permitCharactor": "",
-             "formatLength": 1
+             "formatLength": "10"
             },
             {
              "fieldName": "btnJigyosha",
@@ -1288,7 +1288,7 @@
              "marginLeft": "XS",
              "marginRight": "XS",
              "required": false,
-             "text": "居宅介護",
+             "text": "",
              "isPrivateInfo": false,
              "onChange": "",
              "readOnly": true,
@@ -1304,7 +1304,7 @@
              "labelRWidth": "S",
              "labelLAlign": 2,
              "labelRAlign": 0,
-             "value": "居宅介護",
+             "value": "",
              "maxLength": 1000000000000,
              "minLength": 0,
              "textAlign": 1,
@@ -1330,7 +1330,7 @@
              "marginLeft": "XS",
              "marginRight": "XS",
              "required": false,
-             "text": "居宅予防",
+             "text": "",
              "isPrivateInfo": false,
              "onChange": "",
              "readOnly": true,
@@ -1346,7 +1346,7 @@
              "labelRWidth": "S",
              "labelLAlign": 2,
              "labelRAlign": 0,
-             "value": "居宅予防",
+             "value": "",
              "maxLength": 1000000000000,
              "minLength": 0,
              "textAlign": 1,
@@ -1563,7 +1563,7 @@
              "isComboBox": false,
              "suggest": [],
              "permitCharactor": "",
-             "formatLength": 1
+             "formatLength": "10"
             },
             {
              "fieldName": "btnItakuJigyosha",
@@ -1927,30 +1927,6 @@
          "backgroundColor": 0,
          "widthAuto": false,
          "isGroupBox": false
-        },
-        {
-         "fieldName": "btnReturn",
-         "items": [],
-         "controlType": "Button",
-         "width": "150",
-         "visible": true,
-         "displayNone": false,
-         "disabled": false,
-         "accessKey": "",
-         "nextFocusFieldName": "",
-         "wrap": true,
-         "dependencies": [],
-         "float": 2,
-         "toolTip": "",
-         "authorityMode": 0,
-         "marginLeft": "XS",
-         "marginRight": "XS",
-         "text": "該当者一覧に戻る",
-         "onClick": "",
-         "appearance": 0,
-         "imageFileUrl": "",
-         "imageWidth": "",
-         "imageHeight": ""
         }
        ],
        "controlType": "TabPanel",
@@ -2186,6 +2162,30 @@
      ],
      "isDraggable": false,
      "selectedItemFieldName": "KyotakuServiceRireki"
+    },
+    {
+     "fieldName": "btnReturn",
+     "items": [],
+     "controlType": "Button",
+     "width": "150",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "text": "該当者一覧に戻る",
+     "onClick": "",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
     }
    ],
    "controlType": "Panel",
