@@ -246,8 +246,6 @@ public class KyotakuKeikakuTodokedeDetail {
             jigyosha.getBtnItakuJigyosha().setDisplayNone(true);
             jigyosha.getTxtItakuJigyoshaName().setVisible(false);
             jigyosha.getTxtItakuJigyoshaName().setDisplayNone(true);
-            jigyosha.getTxtServiceShurui1().setValue(new RString("居宅介護"));
-            jigyosha.getTxtServiceShurui2().setValue(new RString("小規模介護"));
         } else {
             jigyosha.getTxtItakuJigyoshaCode().setVisible(true);
             jigyosha.getTxtItakuJigyoshaCode().setDisplayNone(false);
@@ -255,8 +253,6 @@ public class KyotakuKeikakuTodokedeDetail {
             jigyosha.getBtnItakuJigyosha().setDisplayNone(false);
             jigyosha.getTxtItakuJigyoshaName().setVisible(true);
             jigyosha.getTxtItakuJigyoshaName().setDisplayNone(false);
-            jigyosha.getTxtServiceShurui1().setValue(new RString("居宅支援"));
-            jigyosha.getTxtServiceShurui2().setValue(new RString("小規模支援"));
         }
         response.data = panel;
         return response;
