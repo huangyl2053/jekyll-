@@ -42,7 +42,7 @@ module DBZ {
      "controlType": "RadioButton",
      "width": "500",
      "visible": true,
-     "displayNone": false,
+     "displayNone": true,
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
@@ -53,7 +53,6 @@ module DBZ {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "required": false,
      "onChange": "",
      "selectedItem": "keyJigyosha",
      "dataSource": [
@@ -74,18 +73,19 @@ module DBZ {
        "value": "事業者コード内訳検索"
       }
      ],
-     "labelLText": "",
-     "labelLWidth": "S",
-     "labelLAlign": 2,
+     "required": false,
      "onClick": "",
      "newLineItemNumber": 4,
-     "spaceSize": 1
+     "spaceSize": 1,
+     "labelLText": "",
+     "labelLWidth": "S",
+     "labelLAlign": 2
     },
     {
      "fieldName": "txtJigyoshaCode",
      "items": [],
-     "controlType": "TextBoxCode",
-     "width": "XS",
+     "controlType": "TextBox",
+     "width": "100",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -98,31 +98,30 @@ module DBZ {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "required": false,
-     "text": "",
-     "isPrivateInfo": false,
      "onChange": "",
+     "required": false,
      "labelLText": "事業者コード",
-     "labelRText": "",
      "labelLWidth": "S",
-     "labelRWidth": "S",
      "labelLAlign": 2,
-     "labelRAlign": 0,
-     "onFocus": "",
-     "onBlur": "",
      "maxLength": 1000000000000,
      "minLength": 0,
      "textAlign": 0,
      "readOnly": false,
      "placeHolder": "",
-     "textKind": 2,
+     "textKind": 0,
+     "isPrivateInfo": false,
      "isPassword": false,
      "isComboBox": false,
+     "onFocus": "",
+     "onBlur": "",
      "onKeyPress": "",
+     "text": "",
      "suggest": [],
      "value": "",
-     "permitCharactor": "",
-     "formatLength": 1
+     "labelRText": "",
+     "labelRWidth": "S",
+     "labelRAlign": 0,
+     "permitCharactor": ""
     },
     {
      "fieldName": "btnSearchJigyosha",
@@ -141,8 +140,9 @@ module DBZ {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "onClick": "onClick_btnSearchJigyosha",
      "text": "該当する事業者を表示する",
-     "onClick": "",
+     "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": ""
@@ -154,7 +154,7 @@ module DBZ {
        "fieldName": "dgSearchResultJigyosha",
        "items": [],
        "controlType": "DataGrid",
-       "width": "1030",
+       "width": "1130",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -192,7 +192,7 @@ module DBZ {
           "cellDetails": {
            "cellType": 8,
            "text": "■",
-           "onClick": "",
+           "onClick": "onClick_select",
            "imageFileUrl": "",
            "imageWidth": "",
            "imageHeight": ""
@@ -201,6 +201,34 @@ module DBZ {
           "resize": false,
           "isPrivateInfo": false,
           "sortKey": "select"
+         },
+         {
+          "columnName": "事業者コード",
+          "dataName": "jigyoshaCode",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 0,
+          "visible": false,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": "jigyoshaCode"
+         },
+         {
+          "columnName": "事業者名称",
+          "dataName": "jigyoshaMeisho",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 0,
+          "visible": false,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": "jigyoshaMeisho"
          },
          {
           "columnName": "事業者",
@@ -223,7 +251,7 @@ module DBZ {
           "dataName": "jusho",
           "toolTip": "",
           "bgColor": 0,
-          "width": 250,
+          "width": 350,
           "visible": true,
           "cellType": 0,
           "cellDetails": null,
@@ -255,11 +283,14 @@ module DBZ {
           "bgColor": 0,
           "width": 100,
           "visible": true,
-          "cellType": 0,
+          "cellType": 7,
           "cellDetails": {
-           "cellType": 0
+           "cellType": 7,
+           "ymdKubun": 2,
+           "displayFormat": 0,
+           "onChange": ""
           },
-          "align": 0,
+          "align": 1,
           "resize": true,
           "isPrivateInfo": false,
           "sortKey": "ninteiKaishiDate"
@@ -271,11 +302,14 @@ module DBZ {
           "bgColor": 0,
           "width": 100,
           "visible": true,
-          "cellType": 0,
+          "cellType": 7,
           "cellDetails": {
-           "cellType": 0
+           "cellType": 7,
+           "ymdKubun": 2,
+           "displayFormat": 0,
+           "onChange": ""
           },
-          "align": 0,
+          "align": 1,
           "resize": true,
           "isPrivateInfo": false,
           "sortKey": "ninteiShuryoDate"
@@ -299,13 +333,14 @@ module DBZ {
        "height": "S",
        "onSort": "",
        "onSelect": "",
+       "onSelectByDblClick": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
        "sortOrder": "keigenTaisho",
        "isAscending": true,
        "filterList": [],
-       "clickedRowId": -1
+       "activeRowId": -1
       }
      ],
      "controlType": "Panel",
@@ -363,8 +398,9 @@ module DBZ {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "onClick": "onClick_btnKaigoHokenShisetsuReturn",
      "text": "キャンセル",
-     "onClick": "",
+     "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": ""
@@ -392,11 +428,33 @@ module DBZ {
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "HokenshaInputGuide"
+     "postParameterPanelNames": "JigyoshaInputGuide"
     }
    ],
-   "requestSettings": [],
-   "hiddenInput": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_select",
+     "requestUrl": "dbz/db/dbz/JigyoshaInputGuide/onClick_select"
+    },
+    {
+     "eventName": "onClick_btnSearchJigyosha",
+     "requestUrl": "dbz/db/dbz/JigyoshaInputGuide/onClick_btnSearchJigyosha"
+    }
+   ],
+   "hiddenInput": [
+    {
+     "propertyName": "jigyoshaCode",
+     "value": ""
+    },
+    {
+     "propertyName": "jigyoshaMeisho",
+     "value": ""
+    }
+   ],
    "onOpen": "",
    "onClose": "",
    "session": {},
@@ -429,9 +487,18 @@ module DBZ {
  "marginTop": 0,
  "marginBottom": 0,
  "originalProperty": [],
- "dataPassingForDialog": [],
- "dialogOkEventNameForDialog": "",
- "dialogCancelEventNameForDialog": ""
+ "dataPassingForDialog": [
+  {
+   "key": "jigyoshaCode",
+   "controlName": "JigyoshaInputGuide.jigyoshaCode"
+  },
+  {
+   "key": "jigyoshaMeisho",
+   "controlName": "JigyoshaInputGuide.jigyoshaMeisho"
+  }
+ ],
+ "dialogOkEventNameForDialog": "onClick_select",
+ "dialogCancelEventNameForDialog": "onClick_btnKaigoHokenShisetsuReturn"
 }        
     }
 }

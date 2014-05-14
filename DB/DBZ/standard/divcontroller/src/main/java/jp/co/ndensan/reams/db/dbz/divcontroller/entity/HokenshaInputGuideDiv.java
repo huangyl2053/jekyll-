@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.SearchResultHokenshaDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -30,6 +31,10 @@ public class HokenshaInputGuideDiv extends Panel {
     private SearchResultHokenshaDiv SearchResultHokensha;
     @JsonProperty("btnHokenshaReturn")
     private Button btnHokenshaReturn;
+    @JsonProperty("hokenshaNo")
+    private RString hokenshaNo;
+    @JsonProperty("hokenshaMeisho")
+    private RString hokenshaMeisho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -75,6 +80,26 @@ public class HokenshaInputGuideDiv extends Panel {
     @JsonProperty("btnHokenshaReturn")
     public void setBtnHokenshaReturn(Button btnHokenshaReturn) {
         this.btnHokenshaReturn=btnHokenshaReturn;
+    }
+
+    @JsonProperty("hokenshaNo")
+    public RString getHokenshaNo() {
+        return hokenshaNo;
+    }
+
+    @JsonProperty("hokenshaNo")
+    public void setHokenshaNo(RString hokenshaNo) {
+        this.hokenshaNo=hokenshaNo;
+    }
+
+    @JsonProperty("hokenshaMeisho")
+    public RString getHokenshaMeisho() {
+        return hokenshaMeisho;
+    }
+
+    @JsonProperty("hokenshaMeisho")
+    public void setHokenshaMeisho(RString hokenshaMeisho) {
+        this.hokenshaMeisho=hokenshaMeisho;
     }
 
 }

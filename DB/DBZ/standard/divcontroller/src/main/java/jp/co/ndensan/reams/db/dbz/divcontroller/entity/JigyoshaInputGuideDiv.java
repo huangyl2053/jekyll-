@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.SearchResultJigyoshaDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -25,13 +26,17 @@ public class JigyoshaInputGuideDiv extends Panel {
     @JsonProperty("radJigyoshaSearchType")
     private RadioButton radJigyoshaSearchType;
     @JsonProperty("txtJigyoshaCode")
-    private TextBoxCode txtJigyoshaCode;
+    private TextBox txtJigyoshaCode;
     @JsonProperty("btnSearchJigyosha")
     private Button btnSearchJigyosha;
     @JsonProperty("SearchResultJigyosha")
     private SearchResultJigyoshaDiv SearchResultJigyosha;
     @JsonProperty("btnKaigoHokenShisetsuReturn")
     private Button btnKaigoHokenShisetsuReturn;
+    @JsonProperty("jigyoshaCode")
+    private RString jigyoshaCode;
+    @JsonProperty("jigyoshaMeisho")
+    private RString jigyoshaMeisho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -50,12 +55,12 @@ public class JigyoshaInputGuideDiv extends Panel {
     }
 
     @JsonProperty("txtJigyoshaCode")
-    public TextBoxCode getTxtJigyoshaCode() {
+    public TextBox getTxtJigyoshaCode() {
         return txtJigyoshaCode;
     }
 
     @JsonProperty("txtJigyoshaCode")
-    public void setTxtJigyoshaCode(TextBoxCode txtJigyoshaCode) {
+    public void setTxtJigyoshaCode(TextBox txtJigyoshaCode) {
         this.txtJigyoshaCode=txtJigyoshaCode;
     }
 
@@ -87,6 +92,26 @@ public class JigyoshaInputGuideDiv extends Panel {
     @JsonProperty("btnKaigoHokenShisetsuReturn")
     public void setBtnKaigoHokenShisetsuReturn(Button btnKaigoHokenShisetsuReturn) {
         this.btnKaigoHokenShisetsuReturn=btnKaigoHokenShisetsuReturn;
+    }
+
+    @JsonProperty("jigyoshaCode")
+    public RString getJigyoshaCode() {
+        return jigyoshaCode;
+    }
+
+    @JsonProperty("jigyoshaCode")
+    public void setJigyoshaCode(RString jigyoshaCode) {
+        this.jigyoshaCode=jigyoshaCode;
+    }
+
+    @JsonProperty("jigyoshaMeisho")
+    public RString getJigyoshaMeisho() {
+        return jigyoshaMeisho;
+    }
+
+    @JsonProperty("jigyoshaMeisho")
+    public void setJigyoshaMeisho(RString jigyoshaMeisho) {
+        this.jigyoshaMeisho=jigyoshaMeisho;
     }
 
 }

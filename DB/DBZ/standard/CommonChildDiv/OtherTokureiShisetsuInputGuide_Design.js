@@ -43,7 +43,6 @@ var DBZ;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
-                            "required": false,
                             "onChange": "",
                             "selectedItem": "keyAll",
                             "dataSource": [
@@ -60,12 +59,13 @@ var DBZ;
                                     "value": "管外"
                                 }
                             ],
-                            "labelLText": "管内・管外区分:",
-                            "labelLWidth": "120",
-                            "labelLAlign": 2,
+                            "required": false,
                             "onClick": "",
                             "newLineItemNumber": 3,
-                            "spaceSize": 1
+                            "spaceSize": 1,
+                            "labelLText": "管内・管外区分:",
+                            "labelLWidth": "120",
+                            "labelLAlign": 2
                         },
                         {
                             "fieldName": "btnSearchOtherShisetsu",
@@ -84,8 +84,9 @@ var DBZ;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "onClick": "onClick_btnSearchOtherShisetsu",
                             "text": "該当する施設を表示する",
-                            "onClick": "",
+                            "appearance": 0,
                             "imageFileUrl": "",
                             "imageWidth": "",
                             "imageHeight": ""
@@ -97,7 +98,7 @@ var DBZ;
                                     "fieldName": "dgSearchResultOtherTokureiShisetsu",
                                     "items": [],
                                     "controlType": "DataGrid",
-                                    "width": "610",
+                                    "width": "710",
                                     "visible": true,
                                     "displayNone": false,
                                     "disabled": false,
@@ -135,7 +136,7 @@ var DBZ;
                                                 "cellDetails": {
                                                     "cellType": 8,
                                                     "text": "■",
-                                                    "onClick": "",
+                                                    "onClick": "onClick_select",
                                                     "imageFileUrl": "",
                                                     "imageWidth": "",
                                                     "imageHeight": ""
@@ -144,6 +145,34 @@ var DBZ;
                                                 "resize": false,
                                                 "isPrivateInfo": false,
                                                 "sortKey": "select"
+                                            },
+                                            {
+                                                "columnName": "事業者コード",
+                                                "dataName": "jigyoshaCode",
+                                                "toolTip": "",
+                                                "bgColor": 0,
+                                                "width": 0,
+                                                "visible": false,
+                                                "cellType": 0,
+                                                "cellDetails": null,
+                                                "align": 0,
+                                                "resize": false,
+                                                "isPrivateInfo": false,
+                                                "sortKey": "jigyoshaCode"
+                                            },
+                                            {
+                                                "columnName": "事業者名称",
+                                                "dataName": "jigyoshaMeisho",
+                                                "toolTip": "",
+                                                "bgColor": 0,
+                                                "width": 0,
+                                                "visible": false,
+                                                "cellType": 0,
+                                                "cellDetails": null,
+                                                "align": 0,
+                                                "resize": false,
+                                                "isPrivateInfo": false,
+                                                "sortKey": "jigyoshaMeisho"
                                             },
                                             {
                                                 "columnName": "事業者",
@@ -166,7 +195,7 @@ var DBZ;
                                                 "dataName": "jusho",
                                                 "toolTip": "",
                                                 "bgColor": 0,
-                                                "width": 250,
+                                                "width": 350,
                                                 "visible": true,
                                                 "cellType": 0,
                                                 "cellDetails": {
@@ -182,13 +211,14 @@ var DBZ;
                                     "height": "S",
                                     "onSort": "",
                                     "onSelect": "",
+                                    "onSelectByDblClick": "",
                                     "onOnlyRow": "",
                                     "onNoRow": "",
                                     "onMultiRows": "",
                                     "sortOrder": "jusho",
                                     "isAscending": true,
                                     "filterList": [],
-                                    "clickedRowId": -1
+                                    "activeRowId": -1
                                 }
                             ],
                             "controlType": "Panel",
@@ -246,8 +276,9 @@ var DBZ;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "onClick": "onClick_btnOtherShisetsuReturn",
                             "text": "キャンセル",
-                            "onClick": "",
+                            "appearance": 0,
                             "imageFileUrl": "",
                             "imageWidth": "",
                             "imageHeight": ""
@@ -268,18 +299,40 @@ var DBZ;
                     "marginLeft": "XS",
                     "marginRight": "XS",
                     "onLoad": "",
-                    "title": "タイトル",
+                    "title": "その他特例施設検索",
                     "marginTop": "Default",
                     "marginBottom": "Default",
                     "isOpen": true,
                     "canOpenAndClose": true,
                     "postParameterPanelNames": [
                         {
-                            "postParameterPanelNames": "HokenshaInputGuide"
+                            "postParameterPanelNames": "OtherTokureiShisetsuInputGuide"
                         }
                     ],
-                    "requestSettings": [],
-                    "hiddenInput": [],
+                    "requestSettings": [
+                        {
+                            "eventName": "onLoad",
+                            "requestUrl": ""
+                        },
+                        {
+                            "eventName": "onClick_btnSearchOtherShisetsu",
+                            "requestUrl": "dbz/db/dbz/OtherTokureiShisetsuInputGuide/onClick_btnSearchOtherShisetsu"
+                        },
+                        {
+                            "eventName": "onClick_select",
+                            "requestUrl": "dbz/db/dbz/OtherTokureiShisetsuInputGuide/onClick_select"
+                        }
+                    ],
+                    "hiddenInput": [
+                        {
+                            "propertyName": "shisetsuCode",
+                            "value": ""
+                        },
+                        {
+                            "propertyName": "shisetsuMeisho",
+                            "value": ""
+                        }
+                    ],
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
@@ -312,9 +365,18 @@ var DBZ;
             "marginTop": 0,
             "marginBottom": 0,
             "originalProperty": [],
-            "dataPassingForDialog": [],
-            "dialogOkEventNameForDialog": "",
-            "dialogCancelEventNameForDialog": ""
+            "dataPassingForDialog": [
+                {
+                    "key": "otherShisetsuCode",
+                    "controlName": "OtherTokureiShisetsuInputGuide.shisetsuCode"
+                },
+                {
+                    "key": "otherShisetsuMeisho",
+                    "controlName": "OtherTokureiShisetsuInputGuide.shisetsuMeisho"
+                }
+            ],
+            "dialogOkEventNameForDialog": "onClick_select",
+            "dialogCancelEventNameForDialog": "onClick_btnOtherShisetsuReturn"
         };
         return OtherTokureiShisetsuInputGuide_Design;
     })(Uz.CommonChildDiv);

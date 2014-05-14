@@ -9,7 +9,9 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.KaijoJiyuInputDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.ShisetsuJohoInputDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.SochimotoJohoInputDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.TekiyoJiyuInputDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * JutokuJohoInput のクラスファイル 
@@ -31,6 +33,8 @@ public class JutokuJohoInputDiv extends Panel {
     private SochimotoJohoInputDiv SochimotoJohoInput;
     @JsonProperty("ShisetsuJohoInput")
     private ShisetsuJohoInputDiv ShisetsuJohoInput;
+    @JsonProperty("btnTekiyoJohoToroku")
+    private Button btnTekiyoJohoToroku;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -76,6 +80,16 @@ public class JutokuJohoInputDiv extends Panel {
     @JsonProperty("ShisetsuJohoInput")
     public void setShisetsuJohoInput(ShisetsuJohoInputDiv ShisetsuJohoInput) {
         this.ShisetsuJohoInput=ShisetsuJohoInput;
+    }
+
+    @JsonProperty("btnTekiyoJohoToroku")
+    public Button getBtnTekiyoJohoToroku() {
+        return btnTekiyoJohoToroku;
+    }
+
+    @JsonProperty("btnTekiyoJohoToroku")
+    public void setBtnTekiyoJohoToroku(Button btnTekiyoJohoToroku) {
+        this.btnTekiyoJohoToroku=btnTekiyoJohoToroku;
     }
 
 }

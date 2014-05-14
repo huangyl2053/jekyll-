@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.SearchResultOtherShisetsuDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -30,6 +31,10 @@ public class OtherTokureiShisetsuInputGuideDiv extends Panel {
     private SearchResultOtherShisetsuDiv SearchResultOtherShisetsu;
     @JsonProperty("btnOtherShisetsuReturn")
     private Button btnOtherShisetsuReturn;
+    @JsonProperty("shisetsuCode")
+    private RString shisetsuCode;
+    @JsonProperty("shisetsuMeisho")
+    private RString shisetsuMeisho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -75,6 +80,26 @@ public class OtherTokureiShisetsuInputGuideDiv extends Panel {
     @JsonProperty("btnOtherShisetsuReturn")
     public void setBtnOtherShisetsuReturn(Button btnOtherShisetsuReturn) {
         this.btnOtherShisetsuReturn=btnOtherShisetsuReturn;
+    }
+
+    @JsonProperty("shisetsuCode")
+    public RString getShisetsuCode() {
+        return shisetsuCode;
+    }
+
+    @JsonProperty("shisetsuCode")
+    public void setShisetsuCode(RString shisetsuCode) {
+        this.shisetsuCode=shisetsuCode;
+    }
+
+    @JsonProperty("shisetsuMeisho")
+    public RString getShisetsuMeisho() {
+        return shisetsuMeisho;
+    }
+
+    @JsonProperty("shisetsuMeisho")
+    public void setShisetsuMeisho(RString shisetsuMeisho) {
+        this.shisetsuMeisho=shisetsuMeisho;
     }
 
 }

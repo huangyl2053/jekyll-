@@ -23,16 +23,14 @@ public class ShisetsuJohoInputDiv extends Panel {
      */
     @JsonProperty("radShisetsuShurui")
     private RadioButton radShisetsuShurui;
-    @JsonProperty("lblShisetsu")
-    private Label lblShisetsu;
     @JsonProperty("txtShisetsuCode")
     private TextBoxCode txtShisetsuCode;
-    @JsonProperty("txtShisetsuMeisho")
-    private TextBox txtShisetsuMeisho;
     @JsonProperty("btnShisetsuSelect")
     private ButtonDialog btnShisetsuSelect;
     @JsonProperty("btnOtherShisetsuSelect")
     private ButtonDialog btnOtherShisetsuSelect;
+    @JsonProperty("txtShisetsuMeisho")
+    private TextBox txtShisetsuMeisho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -50,16 +48,6 @@ public class ShisetsuJohoInputDiv extends Panel {
         this.radShisetsuShurui=radShisetsuShurui;
     }
 
-    @JsonProperty("lblShisetsu")
-    public Label getLblShisetsu() {
-        return lblShisetsu;
-    }
-
-    @JsonProperty("lblShisetsu")
-    public void setLblShisetsu(Label lblShisetsu) {
-        this.lblShisetsu=lblShisetsu;
-    }
-
     @JsonProperty("txtShisetsuCode")
     public TextBoxCode getTxtShisetsuCode() {
         return txtShisetsuCode;
@@ -68,16 +56,6 @@ public class ShisetsuJohoInputDiv extends Panel {
     @JsonProperty("txtShisetsuCode")
     public void setTxtShisetsuCode(TextBoxCode txtShisetsuCode) {
         this.txtShisetsuCode=txtShisetsuCode;
-    }
-
-    @JsonProperty("txtShisetsuMeisho")
-    public TextBox getTxtShisetsuMeisho() {
-        return txtShisetsuMeisho;
-    }
-
-    @JsonProperty("txtShisetsuMeisho")
-    public void setTxtShisetsuMeisho(TextBox txtShisetsuMeisho) {
-        this.txtShisetsuMeisho=txtShisetsuMeisho;
     }
 
     @JsonProperty("btnShisetsuSelect")
@@ -98,6 +76,16 @@ public class ShisetsuJohoInputDiv extends Panel {
     @JsonProperty("btnOtherShisetsuSelect")
     public void setBtnOtherShisetsuSelect(ButtonDialog btnOtherShisetsuSelect) {
         this.btnOtherShisetsuSelect=btnOtherShisetsuSelect;
+    }
+
+    @JsonProperty("txtShisetsuMeisho")
+    public TextBox getTxtShisetsuMeisho() {
+        return txtShisetsuMeisho;
+    }
+
+    @JsonProperty("txtShisetsuMeisho")
+    public void setTxtShisetsuMeisho(TextBox txtShisetsuMeisho) {
+        this.txtShisetsuMeisho=txtShisetsuMeisho;
     }
 
 }
