@@ -531,7 +531,7 @@
    "isGroupBox": false
   },
   {
-   "fieldName": "YoguKonyuhiShikyuInputReport",
+   "fieldName": "YoguKonyuhiShikyuOutputReport",
    "items": [
     {
      "fieldName": "YoguKonyuhiShikyuKetteishaList",
@@ -733,7 +733,7 @@
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "YoguKonyuhiShikyuInputReport"
+     "postParameterPanelNames": "YoguKonyuhiShikyuOutputReport"
     }
    ],
    "requestSettings": [],
@@ -766,7 +766,7 @@
      "nextFocusFieldName": "",
      "wrap": false,
      "dependencies": [],
-     "float": 0,
+     "float": 2,
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "XS",
@@ -791,7 +791,7 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "50",
+   "marginLeft": "XS",
    "marginRight": "XS",
    "onLoad": "",
    "title": "",
@@ -879,7 +879,7 @@
      "panelState": "visible"
     },
     {
-     "visibleDiv": "YoguKonyuhiShikyuInputReport",
+     "visibleDiv": "YoguKonyuhiShikyuOutputReport",
      "panelState": "visible"
     }
    ],
@@ -887,7 +887,7 @@
    "events": []
   }
  ],
- "currentState": "All",
+ "currentState": "一括決定",
  "id": "DBC0620011",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -911,7 +911,7 @@
    "YoguKonyuhiShikyuShinseiShinsazumiResultList"
   ],
   [
-   "YoguKonyuhiShikyuInputReport"
+   "YoguKonyuhiShikyuOutputReport"
   ],
   [
    "YoguKonyuhiShikyuKetteishaListHakkoDate"
