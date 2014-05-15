@@ -1542,7 +1542,8 @@
    "controlName": "YoguKonyuhiShikyuShinseiContents",
    "dataPassingForDialog": [],
    "dialogOkEventNameForDialog": "",
-   "dialogCancelEventNameForDialog": ""
+   "dialogCancelEventNameForDialog": "",
+   "AddSeikyuDetailOnclick": "onClick_btnAddSeikyuDetail"
   },
   {
    "fieldName": "YoguKonyuhiShikyuShinseiKyotsuBtnPanel",
