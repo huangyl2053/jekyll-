@@ -71,7 +71,7 @@ public class KyotakuKeikakuTodokedeDetail {
     /**
      * 履歴一覧の適用開始日を降順でソートするためのクラス。
      */
-    private class DateComparator implements Comparator<dgRirekiList_Row> {
+    private static class DateComparator implements Comparator<dgRirekiList_Row> {
 
         @Override
         public int compare(dgRirekiList_Row o1, dgRirekiList_Row o2) {
@@ -80,7 +80,8 @@ public class KyotakuKeikakuTodokedeDetail {
     }
 
     private void add履歴(KyotakuKeikakuTodokedeDetailDiv panel, dgRirekiList_Row addRow) {
-        KyotakuKeikakuTodokedeRirekiListDiv rirekiList = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().getKyotakuServiceRireki().getKyotakuKeikakuTodokedeRirekiList();
+        KyotakuKeikakuTodokedeRirekiListDiv rirekiList = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
+                getKyotakuServiceRireki().getKyotakuKeikakuTodokedeRirekiList();
         List<dgRirekiList_Row> dgList = rirekiList.getDgRirekiList().getDataSource();
         dgList.add(addRow);
         Collections.sort(dgList, new DateComparator());
@@ -88,7 +89,8 @@ public class KyotakuKeikakuTodokedeDetail {
     }
 
     private void modify履歴(KyotakuKeikakuTodokedeDetailDiv panel, int index, 修正削除 kubun) {
-        KyotakuKeikakuTodokedeRirekiListDiv rirekiList = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().getKyotakuServiceRireki().getKyotakuKeikakuTodokedeRirekiList();
+        KyotakuKeikakuTodokedeRirekiListDiv rirekiList = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
+                getKyotakuServiceRireki().getKyotakuKeikakuTodokedeRirekiList();
         List<dgRirekiList_Row> dgList = rirekiList.getDgRirekiList().getDataSource();
         dgRirekiList_Row currentRow = dgList.get(index);
 
@@ -108,11 +110,11 @@ public class KyotakuKeikakuTodokedeDetail {
         rirekiList.getDgRirekiList().setDataSource(dgList);
     }
 
-    private dgRirekiList_Row create履歴(Button btn, String txtJotai, String txtKeikakuTekiyoKaishiYMDInvisible, String txtKeikakuTekiyoKaishiYMD,
+    private dgRirekiList_Row create履歴(Button btn, String txtJotai, String txtKaishiYMDInvisible, String txtKeikakuTekiyoKaishiYMD,
             String txtKeikakuTekiyoShuryoYMD, String txtTodokedeYMD, String txtTodokedeKubun, String txtKeikakuIraiJigyosha) {
 
         TextBoxDate txtBoxDate = new TextBoxDate();
-        txtBoxDate.setValue(new RDate(txtKeikakuTekiyoKaishiYMDInvisible));
+        txtBoxDate.setValue(new RDate(txtKaishiYMDInvisible));
         return new dgRirekiList_Row(
                 btn,
                 new RString(txtJotai),
@@ -169,9 +171,11 @@ public class KyotakuKeikakuTodokedeDetail {
     public ResponseData onClickTodokedeSelect(KyotakuKeikakuTodokedeDetailDiv panel) {
         ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
         setMeisai(panel, 画面表示.届出内容修正);
-        int selectRowindex = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().getKyotakuServiceRireki().getKyotakuKeikakuTodokedeRirekiList().getDgRirekiList().getActiveRowId();
-        String index = String.valueOf(selectRowindex);
-        panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().getKyotakuServiceRireki().getKyotakuKeikakuTodokedeMeisai().getTxtRirekiListSelectIndex().setValue(new RString(index));
+        int selectRowindex = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().getKyotakuServiceRireki().
+                getKyotakuKeikakuTodokedeRirekiList().getDgRirekiList().getActiveRowId();
+        RString index = new RString(String.valueOf(selectRowindex));
+        panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().getKyotakuServiceRireki().
+                getKyotakuKeikakuTodokedeMeisai().getTxtRirekiListSelectIndex().setValue(index);
 
         response.data = panel;
         return response;
@@ -185,7 +189,8 @@ public class KyotakuKeikakuTodokedeDetail {
      */
     public ResponseData onClickTodokedeDelete(KyotakuKeikakuTodokedeDetailDiv panel) {
         ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
-        int index = Integer.valueOf(panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().getKyotakuServiceRireki().getKyotakuKeikakuTodokedeMeisai().getTxtRirekiListSelectIndex().getValue().toString());
+        int index = Integer.valueOf(panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
+                getKyotakuServiceRireki().getKyotakuKeikakuTodokedeMeisai().getTxtRirekiListSelectIndex().getValue().toString());
         modify履歴(panel, index, 修正削除.削除);
         response.data = panel;
         return response;
@@ -213,11 +218,12 @@ public class KyotakuKeikakuTodokedeDetail {
     public ResponseData onClickTodokedeKakutei(KyotakuKeikakuTodokedeDetailDiv panel) {
         ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
         Button btn = new Button();
-        String kubun = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().getKyotakuServiceRireki().getKyotakuKeikakuTodokedeMeisai().getTxtTodokedeKubun().getValue().toString();
-        if (kubun.equals("新規")) {
-            add履歴(panel, create履歴(btn, "追加", "20140601", "平26.06.01", "", "平26.06.01", kubun, "1111111111:電算介護調査センター"));
+        RString kubun = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
+                getKyotakuServiceRireki().getKyotakuKeikakuTodokedeMeisai().getTxtTodokedeKubun().getValue();
+        if (new RString("新規").equals(kubun)) {
+            add履歴(panel, create履歴(btn, "追加", "20140601", "平26.06.01", "", "平26.06.01", kubun.toString(), "1111111111:電算介護調査センター"));
         } else {
-            add履歴(panel, create履歴(btn, "追加", "20140701", "平26.07.01", "", "平26.07.01", kubun, "3333333333:県町介護調査センター"));
+            add履歴(panel, create履歴(btn, "追加", "20140701", "平26.07.01", "", "平26.07.01", kubun.toString(), "3333333333:県町介護調査センター"));
         }
 
         response.data = panel;
@@ -232,7 +238,8 @@ public class KyotakuKeikakuTodokedeDetail {
      */
     public ResponseData onClickTodokedeTeisei(KyotakuKeikakuTodokedeDetailDiv panel) {
         ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
-        int index = Integer.valueOf(panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().getKyotakuServiceRireki().getKyotakuKeikakuTodokedeMeisai().getTxtRirekiListSelectIndex().getValue().toString());
+        int index = Integer.valueOf(panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
+                getKyotakuServiceRireki().getKyotakuKeikakuTodokedeMeisai().getTxtRirekiListSelectIndex().getValue().toString());
         modify履歴(panel, index, 修正削除.修正);
 
         response.data = panel;
@@ -247,7 +254,8 @@ public class KyotakuKeikakuTodokedeDetail {
      */
     public ResponseData onChangeRadKeikakuSakuseiKubun(KyotakuKeikakuTodokedeDetailDiv panel) {
         ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
-        KyotakuKeikakuTodokedeJigyoshaDiv jigyosha = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().getKyotakuServiceRireki().getKyotakuKeikakuTodokedeMeisai().getKyotakuKeikakuTodokedeJigyosha();
+        KyotakuKeikakuTodokedeJigyoshaDiv jigyosha = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
+                getKyotakuServiceRireki().getKyotakuKeikakuTodokedeMeisai().getKyotakuKeikakuTodokedeJigyosha();
         RadioButton rad = jigyosha.getRadKeikakuSakuseiKubun();
         if (rad.getSelectedItem().equals(new RString("key0"))) {
             jigyosha.getTxtItakuJigyoshaCode().setVisible(false);
@@ -294,8 +302,10 @@ public class KyotakuKeikakuTodokedeDetail {
      */
     private void setMeisai(KyotakuKeikakuTodokedeDetailDiv panel, 画面表示 pattern) {
 
-        KyotakuKeikakuTodokedeMeisaiDiv meisai = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().getKyotakuServiceRireki().getKyotakuKeikakuTodokedeMeisai();
-        DataGrid<dgRirekiList_Row> rirekiList = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().getKyotakuServiceRireki().getKyotakuKeikakuTodokedeRirekiList().getDgRirekiList();
+        KyotakuKeikakuTodokedeMeisaiDiv meisai = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
+                getKyotakuServiceRireki().getKyotakuKeikakuTodokedeMeisai();
+        DataGrid<dgRirekiList_Row> rirekiList = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
+                getKyotakuServiceRireki().getKyotakuKeikakuTodokedeRirekiList().getDgRirekiList();
         dgRirekiList_Row selectRow = rirekiList.getClickedItem();
 
         KyotakuKeikakuTodokedeshaDiv todokedesha = meisai.getKyotakuKeikakuTodokedesha();
@@ -351,16 +361,14 @@ public class KyotakuKeikakuTodokedeDetail {
             todokedesha.getTxtTodokedeshaJusho().setValue(new RString("長野市七瀬中町1111-11"));
 
             jigyosha.getRadKeikakuSakuseiKubun().setSelectedItem(new RString("key0"));
-            {
-                jigyosha.getTxtItakuJigyoshaCode().setVisible(false);
-                jigyosha.getTxtItakuJigyoshaCode().setDisplayNone(true);
-                jigyosha.getBtnItakuJigyosha().setVisible(false);
-                jigyosha.getBtnItakuJigyosha().setDisplayNone(true);
-                jigyosha.getTxtItakuJigyoshaName().setVisible(false);
-                jigyosha.getTxtItakuJigyoshaName().setDisplayNone(true);
-                jigyosha.getTxtServiceShurui1().setValue(new RString("居宅介護"));
-                jigyosha.getTxtServiceShurui2().setValue(new RString("小規模介護"));
-            }
+            jigyosha.getTxtItakuJigyoshaCode().setVisible(false);
+            jigyosha.getTxtItakuJigyoshaCode().setDisplayNone(true);
+            jigyosha.getBtnItakuJigyosha().setVisible(false);
+            jigyosha.getBtnItakuJigyosha().setDisplayNone(true);
+            jigyosha.getTxtItakuJigyoshaName().setVisible(false);
+            jigyosha.getTxtItakuJigyoshaName().setDisplayNone(true);
+            jigyosha.getTxtServiceShurui1().setValue(new RString("居宅介護"));
+            jigyosha.getTxtServiceShurui2().setValue(new RString("小規模介護"));
 
             if (pattern.equals(画面表示.新規届出)) {
                 meisai.getTxtTodokedeYMD().setValue(new RDate("20140601"));
@@ -409,7 +417,8 @@ public class KyotakuKeikakuTodokedeDetail {
      * @param panel panel
      */
     private void initMeisai(KyotakuKeikakuTodokedeDetailDiv panel) {
-        KyotakuKeikakuTodokedeMeisaiDiv meisai = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().getKyotakuServiceRireki().getKyotakuKeikakuTodokedeMeisai();
+        KyotakuKeikakuTodokedeMeisaiDiv meisai = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
+                getKyotakuServiceRireki().getKyotakuKeikakuTodokedeMeisai();
 
         KyotakuKeikakuTodokedeshaDiv todokedesha = meisai.getKyotakuKeikakuTodokedesha();
         KyotakuKeikakuTodokedeJigyoshaDiv jigyosha = meisai.getKyotakuKeikakuTodokedeJigyosha();
