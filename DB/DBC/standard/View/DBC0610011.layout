@@ -194,6 +194,30 @@
        "value": ""
       },
       {
+       "fieldName": "btnkari",
+       "items": [],
+       "controlType": "Button",
+       "width": "S",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "onClick": "onClick_btnkari",
+       "text": "仮ボタン",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": ""
+      },
+      {
        "fieldName": "dgMishinsaShikyuShinseiList",
        "items": [],
        "controlType": "DataGrid",
@@ -557,10 +581,267 @@
    "isGroupBox": false
   },
   {
-   "fieldName": "YoguKonyuhiShikyuShinseiContents",
-   "items": [],
-   "controlType": "CommonChildDiv",
-   "width": "XS",
+   "fieldName": "YoguKonyuhiShikyuShinseiShinsaModifyPanel",
+   "items": [
+    {
+     "fieldName": "txtTeikyoYM",
+     "items": [],
+     "controlType": "TextBoxDate",
+     "width": "60",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "readOnly": false,
+     "isPrivateInfo": false,
+     "isPassword": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "onKeyPress": "",
+     "permitCharactor": "./_-",
+     "ymdKubun": 2,
+     "displayFormat": 0,
+     "labelLText": "提供年月",
+     "labelRText": "",
+     "labelLWidth": "60",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "required": false,
+     "text": "",
+     "placeHolder": "平26.07",
+     "textKind": 0,
+     "value": ""
+    },
+    {
+     "fieldName": "txtSeiriNo",
+     "items": [],
+     "controlType": "TextBoxCode",
+     "width": "80",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "readOnly": false,
+     "isPrivateInfo": false,
+     "isPassword": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "onKeyPress": "",
+     "permitCharactor": "",
+     "labelLText": "整理番号",
+     "labelRText": "",
+     "labelLWidth": "60",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "required": false,
+     "text": "",
+     "placeHolder": "1234567890",
+     "textKind": 2,
+     "value": "",
+     "maxLength": 1000000000000,
+     "minLength": 0,
+     "textAlign": 0,
+     "isComboBox": false,
+     "suggest": [],
+     "formatLength": 1
+    },
+    {
+     "fieldName": "txtKyufuritsu",
+     "items": [],
+     "controlType": "TextBoxNum",
+     "width": "30",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "readOnly": false,
+     "isPrivateInfo": false,
+     "isPassword": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "onKeyPress": "",
+     "permitCharactor": "+-,.\\",
+     "labelLText": "給付率",
+     "labelRText": "％",
+     "labelLWidth": "45",
+     "labelRWidth": "15",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "required": false,
+     "text": "",
+     "placeHolder": "100",
+     "textKind": 2,
+     "value": "",
+     "maxLength": 1000000000000,
+     "minLength": 0,
+     "textAlign": 2,
+     "isComboBox": false,
+     "suggest": [],
+     "maxValue": 1.7976931348623157e+308,
+     "minValue": 0,
+     "isCurrency": false,
+     "isComma": false,
+     "decimalPointLength": 0
+    },
+    {
+     "fieldName": "YoguKonyuhiShikyuShinseiShinsaSeikyuDetail",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": 0,
+     "marginRight": 0,
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": 0,
+     "businessId": "DBC",
+     "controlName": "YoguKonyuhiShikyuShinseiSeikyuDetail",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "btnAddSeikyuDetailOnclick": "onClick_btnAddSeikyuDetail"
+    },
+    {
+     "fieldName": "YoguKonyuhiShikyuShinseiShinsaShinseisha",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": 0,
+     "marginRight": 0,
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": 0,
+     "businessId": "DBC",
+     "controlName": "ShinseishaInfo",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": ""
+    },
+    {
+     "fieldName": "YoguKonyuhiShikyuShinseiShinsaPaymentMethod",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": 0,
+     "marginRight": 0,
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": 0,
+     "businessId": "DBC",
+     "controlName": "PaymentMethod",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": ""
+    },
+    {
+     "fieldName": "btnModifyShinsei",
+     "items": [],
+     "controlType": "Button",
+     "width": "M",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "onClick": "onClick_btnModifyShinsei",
+     "text": "申請を修正する",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
+    },
+    {
+     "fieldName": "btnCancelShinseiModify",
+     "items": [],
+     "controlType": "Button",
+     "width": "M",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "onClick": "onClick_btnCancelShinseiModify",
+     "text": "申請の修正をやめる",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
+    }
+   ],
+   "controlType": "Panel",
+   "width": "1245",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -571,19 +852,34 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": 0,
-   "marginRight": 0,
-   "relation": [],
-   "marginTop": 0,
-   "marginBottom": 0,
-   "businessId": "DBC",
-   "controlName": "YoguKonyuhiShikyuShinseiContents",
-   "dataPassingForDialog": [],
-   "dialogOkEventNameForDialog": "",
-   "dialogCancelEventNameForDialog": ""
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "onLoad": "",
+   "title": "支給申請内容",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "YoguKonyuhiShikyuShinseiShinsaModifyPanel"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "isGroupBox": false
   },
   {
-   "fieldName": "YoguKonyuhiShikyuShinseiShinsaKyotsuBtnPanel",
+   "fieldName": "CommonButtonArea",
    "items": [
     {
      "fieldName": "btnSaveShinsaContents",
@@ -611,7 +907,7 @@
     }
    ],
    "controlType": "Panel",
-   "width": "1175",
+   "width": "220",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -630,7 +926,7 @@
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "YoguKonyuhiShikyuShinseiShinsaKyotsuBtnPanel"
+     "postParameterPanelNames": "CommonButtonArea"
     }
    ],
    "requestSettings": [],
@@ -640,12 +936,12 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorderTop": true,
+   "eraseBorderBottom": true,
+   "eraseBorderRight": true,
+   "eraseBorderLeft": true,
    "backgroundColor": 0,
-   "widthAuto": false,
+   "widthAuto": true,
    "isGroupBox": false
   }
  ],
@@ -686,7 +982,7 @@
      "panelState": "visible"
     },
     {
-     "visibleDiv": "YoguKonyuhiShikyuShinseiShinsaKyotsuBtnPanel",
+     "visibleDiv": "CommonButtonArea",
      "panelState": "visible"
     }
    ],
@@ -698,19 +994,19 @@
      "transition": "修正"
     },
     {
-     "fieldName": "YoguKonyuhiShikyuShinseiContents_YoguKonyuhiShikyuShinseiContents_btnUpdateShikyuShinsei",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "YoguKonyuhiShikyuShinseiContents_YoguKonyuhiShikyuShinseiContents_btnCancelShikyuShinsei",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnKari",
+     "fieldName": "btnkari",
      "event": "onClick",
      "transition": "修正"
+    },
+    {
+     "fieldName": "btnModifyShinsei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCancelShinseiModify",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
@@ -720,7 +1016,19 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "YoguKonyuhiShikyuShinseiContents",
+     "visibleDiv": "YoguKonyuhiShikyuShinseiShinsaModifyPanel",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "YoguKonyuhiShikyuShinseiShinsaSeikyuDetail",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "YoguKonyuhiShikyuShinseiShinsaShinseisha",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "YoguKonyuhiShikyuShinseiShinsaPaymentMethod",
      "panelState": "visible"
     }
    ],
@@ -732,19 +1040,19 @@
      "transition": ""
     },
     {
-     "fieldName": "YoguKonyuhiShikyuShinseiContents_YoguKonyuhiShikyuShinseiContents_btnUpdateShikyuShinsei",
-     "event": "onClick",
-     "transition": "検索"
-    },
-    {
-     "fieldName": "YoguKonyuhiShikyuShinseiContents_YoguKonyuhiShikyuShinseiContents_btnCancelShikyuShinsei",
-     "event": "onClick",
-     "transition": "検索"
-    },
-    {
-     "fieldName": "btnKari",
+     "fieldName": "btnkari",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnModifyShinsei",
+     "event": "onClick",
+     "transition": "検索"
+    },
+    {
+     "fieldName": "btnCancelShinseiModify",
+     "event": "onClick",
+     "transition": "検索"
     }
    ]
   }
@@ -764,10 +1072,19 @@
    "YoguKonyuhiShikyuShinseiMishinsaResultList"
   ],
   [
-   "YoguKonyuhiShikyuShinseiContents"
+   "YoguKonyuhiShikyuShinseiShinsaModifyPanel"
   ],
   [
-   "YoguKonyuhiShikyuShinseiShinsaKyotsuBtnPanel"
+   "YoguKonyuhiShikyuShinseiShinsaSeikyuDetail"
+  ],
+  [
+   "YoguKonyuhiShikyuShinseiShinsaShinseisha"
+  ],
+  [
+   "YoguKonyuhiShikyuShinseiShinsaPaymentMethod"
+  ],
+  [
+   "CommonButtonArea"
   ]
  ],
  "panelMargin": 1,
