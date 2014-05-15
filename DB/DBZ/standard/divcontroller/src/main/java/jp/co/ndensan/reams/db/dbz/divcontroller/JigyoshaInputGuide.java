@@ -48,9 +48,8 @@ public class JigyoshaInputGuide {
         List<dgSearchResultJigyosha_Row> searchResultJigyoshaList = new ArrayList<>();
 
         for (HashMap jigyosha : jigyoshaList) {
-            String jigyoshaCode = jigyosha.get("事業者コード").toString();
-            String 条件str = 条件.toString();
-            if (jigyoshaCode.startsWith(条件str)) {
+            RString jigyoshaCode = new RString(jigyosha.get("事業者コード").toString());
+            if (jigyoshaCode.startsWith(条件)) {
                 searchResultJigyoshaList.add(createJigyoshaGridRow(jigyosha));
             }
         }

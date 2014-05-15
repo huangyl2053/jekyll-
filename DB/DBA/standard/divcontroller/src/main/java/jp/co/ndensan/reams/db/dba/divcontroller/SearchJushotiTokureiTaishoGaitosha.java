@@ -40,7 +40,7 @@ public class SearchJushotiTokureiTaishoGaitosha {
         return response;
     }
 
-    private void setGrid(DataGrid<dgJushochiTokureiTaishoGaitosha_Row> dgJushochiTokureiTaishoGaitosha) {
+    private void setGrid(DataGrid<dgJushochiTokureiTaishoGaitosha_Row> grid) {
         List<dgJushochiTokureiTaishoGaitosha_Row> list = new ArrayList<>();
         dgJushochiTokureiTaishoGaitosha_Row item;
 
@@ -50,13 +50,12 @@ public class SearchJushotiTokureiTaishoGaitosha {
         item = setGridRow(demoData);
         list.add(item);
 
-        dgJushochiTokureiTaishoGaitosha.setDataSource(list);
+        grid.setDataSource(list);
     }
 
     private dgJushochiTokureiTaishoGaitosha_Row setGridRow(Map demoData) {
         dgJushochiTokureiTaishoGaitosha_Row row = new dgJushochiTokureiTaishoGaitosha_Row(RString.EMPTY, RString.EMPTY,
                 new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY);
-        YamlLoader data = new YamlLoader();
 
         row.setAge(new RString(demoData.get("年齢").toString()));
         row.getDateOfBirth().setValue(new FlexibleDate(demoData.get("生年月日").toString()));

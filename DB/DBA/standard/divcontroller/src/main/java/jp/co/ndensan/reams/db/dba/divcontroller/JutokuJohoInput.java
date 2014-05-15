@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 public class JutokuJohoInput {
 
     private static final RString HOKENSHA_DATA_SOURCE = new RString("dbz/demoData/HokenshaData.yml");
-    private static final RString OTHER_SHISETSU_DATA_SOURCE = new RString("dba/demoData/OtherShisetsuData.yml");
+    private static final RString OTHER_SHISETSU_DATA_SOURCE = new RString("dbz/demoData/OtherShisetsuData.yml");
     private static final RString JIGYOSHA_DATA_SOURCE = new RString("dbz/demoData/ShisetsuData.yml");
 
     /**
@@ -49,7 +49,7 @@ public class JutokuJohoInput {
      * パネルが呼び出されたときか、施設情報の施設種類が変更された際に実行されるメソッドです。
      * 選択した種類に合わせて、表示するダイアログボタンを決定します。
      *
-     * @param div　JutokuJohoInputDiv
+     * @param div JutokuJohoInputDiv
      * @return レスポンスデータ
      */
     public ResponseData selectShisetsuShurui(JutokuJohoInputDiv div) {
@@ -171,22 +171,11 @@ public class JutokuJohoInput {
         return getMatchShisetsuMeisho(施設List, 施設コード);
     }
 
-    private List<HashMap> getShisetuList(List<String> keyList, HashMap 管内管外分け特例施設) {
-        List<HashMap> 施設名称List = new ArrayList<>();
-        for (String key : keyList) {
-            List<HashMap> 施設List = (List<HashMap>) 管内管外分け特例施設.get(key);
-            for (HashMap 施設情報 : 施設List) {
-                施設名称List.add(施設情報);
-            }
-        }
-        return 施設名称List;
-    }
-
     private RString getMatchShisetsuMeisho(List<HashMap> 施設名称List, RString 施設コード) {
         RString 施設名称 = RString.EMPTY;
         for (HashMap 比較対象 : 施設名称List) {
-            String 比較対象施設コード = 比較対象.get("事業者コード").toString();
-            if (比較対象施設コード.equals(施設コード.toString())) {
+            RString 比較対象施設コード = new RString(比較対象.get("事業者コード").toString());
+            if (比較対象施設コード.equals(施設コード)) {
                 施設名称 = new RString(比較対象.get("事業者名称").toString());
             }
         }

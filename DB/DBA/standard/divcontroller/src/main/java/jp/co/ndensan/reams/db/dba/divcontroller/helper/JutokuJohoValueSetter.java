@@ -19,9 +19,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8178 城間篤人
  */
-public class JutokuJohoValueSetter {
+public final class JutokuJohoValueSetter {
 
     private static final RString DEFALUT_INPUT_DATA_SOURCE = new RString("dba/demoData/DefaultInputData.yml");
+
+    /**
+     * インスタンス化防止のためのプライベートコンストラクタです。
+     */
+    private JutokuJohoValueSetter() {
+    }
 
     /**
      * 住所地特例情報入力Divに、デモ用の初期値を設定します。

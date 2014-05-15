@@ -36,12 +36,12 @@ public class OtherTokureiShisetsuInputGuide {
 
         List<dgSearchResultOtherTokureiShisetsu_Row> otherShisetsuGridRowList = new ArrayList<>();
         if (div.getRadkannaiKubun().getSelectedValue().equals(new RString("管内"))) {
-            otherShisetsuGridRowList.addAll(createOtherShisetsuGridRowList(div, "管内"));
+            otherShisetsuGridRowList.addAll(createOtherShisetsuGridRowList("管内"));
         } else if (div.getRadkannaiKubun().getSelectedValue().equals(new RString("管外"))) {
-            otherShisetsuGridRowList.addAll(createOtherShisetsuGridRowList(div, "管外"));
+            otherShisetsuGridRowList.addAll(createOtherShisetsuGridRowList("管外"));
         } else {
-            otherShisetsuGridRowList.addAll(createOtherShisetsuGridRowList(div, "管内"));
-            otherShisetsuGridRowList.addAll(createOtherShisetsuGridRowList(div, "管外"));
+            otherShisetsuGridRowList.addAll(createOtherShisetsuGridRowList("管内"));
+            otherShisetsuGridRowList.addAll(createOtherShisetsuGridRowList("管外"));
         }
 
         div.getSearchResultOtherShisetsu().getDgSearchResultOtherTokureiShisetsu().setDataSource(otherShisetsuGridRowList);
@@ -49,7 +49,7 @@ public class OtherTokureiShisetsuInputGuide {
         return response;
     }
 
-    private List<dgSearchResultOtherTokureiShisetsu_Row> createOtherShisetsuGridRowList(OtherTokureiShisetsuInputGuideDiv div, String 検索条件) {
+    private List<dgSearchResultOtherTokureiShisetsu_Row> createOtherShisetsuGridRowList(String 検索条件) {
         List<dgSearchResultOtherTokureiShisetsu_Row> otherShisetsuGridRowList = new ArrayList<>();
 
         Map<String, List> 特例施設List = YamlLoader.loadAsMap(OTHER_SHISETSU_DATA_SOURCE);
