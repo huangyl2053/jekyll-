@@ -63,7 +63,7 @@ public class NinteichosaResultEntryMain {
             div.getTxtHihokenshaJusho().setValue(data.getJusho());
             IDateOfBirth birthDay = DateOfBirthFactory.createInstance(data.getBirthDay().getValue());
             div.getTxtHihokenshaBirthDay().setValue(birthDay.toDate());
-            div.getTxtHihokenshaAge().setValue(new RString("" + birthDay.get年齢()));
+            div.getTxtHihokenshaAge().setValue(new RString(Integer.toString(birthDay.get年齢())));
         }
     }
 
