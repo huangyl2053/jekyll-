@@ -44,7 +44,7 @@ var DBE;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "gridSetting": {
-                                "rowHeight": 25,
+                                "rowHeight": 40,
                                 "isMultiSelectable": false,
                                 "isShowFooter": true,
                                 "isShowFilter": true,
@@ -99,13 +99,13 @@ var DBE;
                                         "toolTip": "",
                                         "bgColor": 0,
                                         "width": 150,
-                                        "visible": true,
+                                        "visible": false,
                                         "cellType": 0,
                                         "cellDetails": {
                                             "cellType": 0
                                         },
                                         "align": 0,
-                                        "resize": true,
+                                        "resize": false,
                                         "isPrivateInfo": false,
                                         "sortKey": "shimei"
                                     },
@@ -115,22 +115,36 @@ var DBE;
                                         "toolTip": "",
                                         "bgColor": 0,
                                         "width": 150,
-                                        "visible": true,
+                                        "visible": false,
                                         "cellType": 0,
                                         "cellDetails": {
                                             "cellType": 0
                                         },
                                         "align": 0,
-                                        "resize": true,
+                                        "resize": false,
                                         "isPrivateInfo": false,
                                         "sortKey": "kanaShimei"
+                                    },
+                                    {
+                                        "columnName": "氏名",
+                                        "dataName": "shimeiAndKanaShimei",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 200,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "shimeiAndKanaShimei"
                                     },
                                     {
                                         "columnName": "所属機関",
                                         "dataName": "shozokuKikan",
                                         "toolTip": "",
                                         "bgColor": 0,
-                                        "width": 150,
+                                        "width": 200,
                                         "visible": true,
                                         "cellType": 0,
                                         "cellDetails": {
@@ -146,7 +160,7 @@ var DBE;
                                         "dataName": "gender",
                                         "toolTip": "",
                                         "bgColor": 0,
-                                        "width": 70,
+                                        "width": 60,
                                         "visible": true,
                                         "cellType": 0,
                                         "cellDetails": {
@@ -212,7 +226,12 @@ var DBE;
                             "postParameterPanelNames": "ShinsakaiIinList"
                         }
                     ],
-                    "requestSettings": [],
+                    "requestSettings": [
+                        {
+                            "eventName": "onLoad",
+                            "requestUrl": "dbe/db/dbe/ShinsakaiIinList/onLoad"
+                        }
+                    ],
                     "hiddenInput": [],
                     "onOpen": "",
                     "onClose": "",

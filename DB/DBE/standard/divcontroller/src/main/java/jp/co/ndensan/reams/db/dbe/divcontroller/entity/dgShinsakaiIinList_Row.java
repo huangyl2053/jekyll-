@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed May 14 19:48:14 JST 2014 
+ * Thu May 15 11:36:16 JST 2014 
  */
 
 
@@ -25,6 +25,7 @@ public class dgShinsakaiIinList_Row extends DataRow {
     private RString shinsakaiIinNo;
     private RString shimei;
     private RString kanaShimei;
+    private RString shimeiAndKanaShimei;
     private RString shozokuKikan;
     private RString gender;
     private RString shikaku;
@@ -33,12 +34,13 @@ public class dgShinsakaiIinList_Row extends DataRow {
         super();
     }
 
-    public dgShinsakaiIinList_Row(Button btnToSelect, RString shinsakaiIinNo, RString shimei, RString kanaShimei, RString shozokuKikan, RString gender, RString shikaku) {
+    public dgShinsakaiIinList_Row(Button btnToSelect, RString shinsakaiIinNo, RString shimei, RString kanaShimei, RString shimeiAndKanaShimei, RString shozokuKikan, RString gender, RString shikaku) {
         super();
         this.setOriginalData("btnToSelect", btnToSelect);
         this.setOriginalData("shinsakaiIinNo", shinsakaiIinNo);
         this.setOriginalData("shimei", shimei);
         this.setOriginalData("kanaShimei", kanaShimei);
+        this.setOriginalData("shimeiAndKanaShimei", shimeiAndKanaShimei);
         this.setOriginalData("shozokuKikan", shozokuKikan);
         this.setOriginalData("gender", gender);
         this.setOriginalData("shikaku", shikaku);
@@ -46,6 +48,7 @@ public class dgShinsakaiIinList_Row extends DataRow {
         this.shinsakaiIinNo = shinsakaiIinNo;
         this.shimei = shimei;
         this.kanaShimei = kanaShimei;
+        this.shimeiAndKanaShimei = shimeiAndKanaShimei;
         this.shozokuKikan = shozokuKikan;
         this.gender = gender;
         this.shikaku = shikaku;
@@ -65,6 +68,10 @@ public class dgShinsakaiIinList_Row extends DataRow {
 
     public RString getKanaShimei() {
         return kanaShimei;
+    }
+
+    public RString getShimeiAndKanaShimei() {
+        return shimeiAndKanaShimei;
     }
 
     public RString getShozokuKikan() {
@@ -97,6 +104,11 @@ public class dgShinsakaiIinList_Row extends DataRow {
     public void setKanaShimei(RString kanaShimei) {
         this.setOriginalData("kanaShimei", kanaShimei);
         this.kanaShimei = kanaShimei;
+    }
+
+    public void setShimeiAndKanaShimei(RString shimeiAndKanaShimei) {
+        this.setOriginalData("shimeiAndKanaShimei", shimeiAndKanaShimei);
+        this.shimeiAndKanaShimei = shimeiAndKanaShimei;
     }
 
     public void setShozokuKikan(RString shozokuKikan) {
