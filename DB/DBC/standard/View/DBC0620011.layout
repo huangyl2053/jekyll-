@@ -114,7 +114,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "1185",
+     "width": "1111",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -197,7 +197,7 @@
        "fieldName": "dgMishinsaShikyuShinseiList",
        "items": [],
        "controlType": "DataGrid",
-       "width": "1170",
+       "width": "1100",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -287,7 +287,7 @@
           "dataName": "txtHihoName",
           "toolTip": "",
           "bgColor": 0,
-          "width": 270,
+          "width": 200,
           "visible": true,
           "cellType": 1,
           "cellDetails": {
@@ -442,14 +442,14 @@
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
-       "sortOrder": "txtSeiriNo",
+       "sortOrder": "txtHihoName",
        "isAscending": true,
        "filterList": [],
        "activeRowId": -1
       }
      ],
      "controlType": "Panel",
-     "width": "1185",
+     "width": "1111",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -567,10 +567,39 @@
        "PrintContentsSetting_eraseBorderBottom": true,
        "PrintContentsSetting_eraseBorderRight": true,
        "PrintContentsSetting_eraseBorderLeft": true
+      },
+      {
+       "fieldName": "OutputOrderForKetteishaList",
+       "items": [],
+       "controlType": "CommonChildDiv",
+       "width": "XS",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": 0,
+       "marginRight": 0,
+       "title": "出力順序・改頁",
+       "relation": [],
+       "marginTop": 0,
+       "marginBottom": 0,
+       "isGroupBox": true,
+       "businessId": "DBC",
+       "controlName": "OutputOrderAndNewpage",
+       "dataPassingForDialog": [],
+       "dialogOkEventNameForDialog": "",
+       "dialogCancelEventNameForDialog": "",
+       "txtNewPageItem_displayNone": false
       }
      ],
      "controlType": "PanelPublish",
-     "width": "340",
+     "width": "1111",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -671,16 +700,45 @@
        "PaymentDate_title": "支払方法",
        "PaymentDate_isGroupBox": true,
        "PaymentDate_canOpenAndClose": false
+      },
+      {
+       "fieldName": "OutputOrderForTsuchisho",
+       "items": [],
+       "controlType": "CommonChildDiv",
+       "width": "XS",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": 0,
+       "marginRight": 0,
+       "title": "出力順序",
+       "relation": [],
+       "marginTop": 0,
+       "marginBottom": 0,
+       "isGroupBox": true,
+       "businessId": "DBC",
+       "controlName": "OutputOrderAndNewpage",
+       "dataPassingForDialog": [],
+       "dialogOkEventNameForDialog": "",
+       "dialogCancelEventNameForDialog": "",
+       "txtNewPageItem_displayNone": true
       }
      ],
      "controlType": "PanelPublish",
-     "width": "830",
+     "width": "1111",
      "visible": true,
      "displayNone": false,
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": false,
+     "wrap": true,
      "dependencies": [],
      "float": 0,
      "toolTip": "",
@@ -881,13 +939,21 @@
     {
      "visibleDiv": "YoguKonyuhiShikyuOutputReport",
      "panelState": "visible"
+    },
+    {
+     "visibleDiv": "OutputOrderForKetteishaList",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "OutputOrderForTsuchisho",
+     "panelState": "visible"
     }
    ],
    "validation": {},
    "events": []
   }
  ],
- "currentState": "一括決定",
+ "currentState": "All",
  "id": "DBC0620011",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -917,10 +983,16 @@
    "YoguKonyuhiShikyuKetteishaListHakkoDate"
   ],
   [
+   "OutputOrderForKetteishaList"
+  ],
+  [
    "YoguKonyuhiShikyuKetteiTsuchishoHakkoDate"
   ],
   [
    "PaymentDate"
+  ],
+  [
+   "OutputOrderForTsuchisho"
   ],
   [
    "CommonButtonArea"
