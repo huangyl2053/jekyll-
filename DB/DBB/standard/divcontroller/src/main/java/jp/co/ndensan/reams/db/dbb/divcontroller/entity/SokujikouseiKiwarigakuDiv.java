@@ -5,10 +5,8 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.dgSokujiKouseiKiwariGaku_Row;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.tblSokujiKouseiKiwariGakuDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * SokujikouseiKiwarigaku のクラスファイル 
@@ -22,8 +20,8 @@ public class SokujikouseiKiwarigakuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("dgSokujiKouseiKiwariGaku")
-    private DataGrid<dgSokujiKouseiKiwariGaku_Row> dgSokujiKouseiKiwariGaku;
+    @JsonProperty("tblSokujiKouseiKiwariGaku")
+    private tblSokujiKouseiKiwariGakuDiv tblSokujiKouseiKiwariGaku;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,14 +29,14 @@ public class SokujikouseiKiwarigakuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("dgSokujiKouseiKiwariGaku")
-    public DataGrid<dgSokujiKouseiKiwariGaku_Row> getDgSokujiKouseiKiwariGaku() {
-        return dgSokujiKouseiKiwariGaku;
+    @JsonProperty("tblSokujiKouseiKiwariGaku")
+    public tblSokujiKouseiKiwariGakuDiv getTblSokujiKouseiKiwariGaku() {
+        return tblSokujiKouseiKiwariGaku;
     }
 
-    @JsonProperty("dgSokujiKouseiKiwariGaku")
-    public void setDgSokujiKouseiKiwariGaku(DataGrid<dgSokujiKouseiKiwariGaku_Row> dgSokujiKouseiKiwariGaku) {
-        this.dgSokujiKouseiKiwariGaku=dgSokujiKouseiKiwariGaku;
+    @JsonProperty("tblSokujiKouseiKiwariGaku")
+    public void setTblSokujiKouseiKiwariGaku(tblSokujiKouseiKiwariGakuDiv tblSokujiKouseiKiwariGaku) {
+        this.tblSokujiKouseiKiwariGaku=tblSokujiKouseiKiwariGaku;
     }
 
 }
