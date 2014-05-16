@@ -73,6 +73,9 @@ public class ShinsakaiIinList {
     }
 
     private static RString _toRString(Object obj) {
+        if (obj == null) {
+            return RString.EMPTY;
+        }
         return new RString(obj.toString());
     }
 
