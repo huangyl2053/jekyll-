@@ -470,7 +470,12 @@
      "postParameterPanelNames": "HihokenshaSearchPanel"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/HihokenshaSearchPanel/onLoad"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -847,6 +852,10 @@
     {
      "eventName": "onLoad",
      "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_HihokenshaSearch",
+     "requestUrl": "dbc/db/dbc/HihokenshaSearchGaitoshaPanel/onClick_HihokenshaSearch"
     }
    ],
    "hiddenInput": [],
@@ -1474,10 +1483,34 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "sortOrder": "txtShikyuKubun",
+     "sortOrder": "txtKetteiYMD",
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1
+    },
+    {
+     "fieldName": "btnSave",
+     "items": [],
+     "controlType": "Button",
+     "width": "M",
+     "visible": true,
+     "displayNone": false,
+     "disabled": true,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "text": "申請を保存する",
+     "onClick": "onClick_btnSave",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
     }
    ],
    "controlType": "Panel",
@@ -1503,7 +1536,16 @@
      "postParameterPanelNames": "YoguKonyuhiShikyuShinseiList"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_btnAddShinsei",
+     "requestUrl": "dbc/db/dbc/YoguKonyuhiShikyuShinseiList/onClick_btnAddShinsei"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -1674,7 +1716,8 @@
      "controlName": "YoguKonyuhiShikyuShinseiSeikyuDetail",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": ""
+     "dialogCancelEventNameForDialog": "",
+     "btnAddSeikyuDetailOnclick": "onClick_btnAddSeikyuDetail"
     },
     {
      "fieldName": "YoguKonyuhiShikyuShinseisha",
@@ -1800,7 +1843,16 @@
      "postParameterPanelNames": "YoguKonyuhiShikyuShinseiContentsPanel"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_btnAdd",
+     "requestUrl": "dbc/db/dbc/YoguKonyuhiShikyuShinseiContents/onClick_btnAdd"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -1817,32 +1869,7 @@
   },
   {
    "fieldName": "CommonButtonArea",
-   "items": [
-    {
-     "fieldName": "btnSave",
-     "items": [],
-     "controlType": "Button",
-     "width": "M",
-     "visible": true,
-     "displayNone": false,
-     "disabled": true,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "text": "申請を保存する",
-     "onClick": "onClick_btnSave",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": ""
-    }
-   ],
+   "items": [],
    "controlType": "Panel",
    "width": "220",
    "visible": true,
@@ -1878,7 +1905,7 @@
    "eraseBorderRight": true,
    "eraseBorderLeft": true,
    "backgroundColor": 0,
-   "widthAuto": false,
+   "widthAuto": true,
    "isGroupBox": false
   }
  ],
@@ -2020,6 +2047,18 @@
     },
     {
      "visibleDiv": "YoguKonyuhiShikyuShinseiPaymentMethod",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "KariKihonPanel",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "KariKaigoCommonPanel",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "YoguKonyuhiShikyuShinseiTorokuHihokenshaPanel",
      "panelState": "visible"
     }
    ],

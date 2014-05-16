@@ -11,12 +11,31 @@ var DBC;
         function YoguKonyuhiShikyuShinseiSeikyuDetail_Design($parentElement, isDesignMode, fieldName) {
             _super.call(this, $parentElement, isDesignMode, YoguKonyuhiShikyuShinseiSeikyuDetail_Design.myLayout, fieldName);
         }
+        Object.defineProperty(YoguKonyuhiShikyuShinseiSeikyuDetail_Design.prototype, "btnAddSeikyuDetailOnclick", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"])["onClick"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"])["onClick"] = value;
+                } else {
+                    this.layout.items[0].items[1].items[9]["onClick"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
         YoguKonyuhiShikyuShinseiSeikyuDetail_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
+            Uz.JSControlUtil.registProperty("btnAddSeikyuDetailOnclick");
         };
 
         YoguKonyuhiShikyuShinseiSeikyuDetail_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+            editablePropertyInfo["btnAddSeikyuDetailOnclick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"]).getEditablePropertyInfo()["onClick"];
 
             return editablePropertyInfo;
         };
@@ -231,7 +250,7 @@ var DBC;
                             "onNoRow": "",
                             "onMultiRows": "",
                             "dataSource": [],
-                            "sortOrder": "txtShinsaMethod",
+                            "sortOrder": "txtBuyAmount",
                             "isAscending": true,
                             "filterList": [],
                             "activeRowId": -1
@@ -295,16 +314,6 @@ var DBC;
                                     "authorityMode": 0,
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
-                                    "required": false,
-                                    "onFocus": "",
-                                    "onBlur": "",
-                                    "onChange": "",
-                                    "labelLText": "種目",
-                                    "labelRText": "",
-                                    "labelLWidth": "75",
-                                    "labelRWidth": "S",
-                                    "labelLAlign": 2,
-                                    "labelRAlign": 0,
                                     "dataSource": [
                                         {
                                             "key": "code01",
@@ -331,6 +340,16 @@ var DBC;
                                             "value": "06:自動排泄処理装置の交換可能部品"
                                         }
                                     ],
+                                    "required": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "labelLText": "種目",
+                                    "labelRText": "",
+                                    "labelLWidth": "75",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
                                     "selectedItem": ""
                                 },
                                 {
@@ -488,7 +507,7 @@ var DBC;
                                     "onKeyPress": "",
                                     "text": "",
                                     "labelLText": "購入金額",
-                                    "labelRText": "円",
+                                    "labelRText": "",
                                     "labelLWidth": "75",
                                     "labelRWidth": "S",
                                     "labelLAlign": 2,
@@ -502,7 +521,7 @@ var DBC;
                                     "maxValue": 1.7976931348623157e+308,
                                     "minValue": 0,
                                     "isCurrency": false,
-                                    "isComma": false,
+                                    "isComma": true,
                                     "decimalPointLength": 0,
                                     "permitCharactor": "+-,.\\"
                                 },
@@ -566,12 +585,6 @@ var DBC;
                                     "authorityMode": 0,
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
-                                    "required": false,
-                                    "onChange": "",
-                                    "labelLText": "審査方法",
-                                    "labelLWidth": "75",
-                                    "labelLAlign": 2,
-                                    "onClick": "",
                                     "dataSource": [
                                         {
                                             "key": "judgeRequest",
@@ -582,7 +595,13 @@ var DBC;
                                             "value": "審査済み"
                                         }
                                     ],
+                                    "required": false,
+                                    "onChange": "",
+                                    "labelLText": "審査方法",
+                                    "labelLWidth": "75",
+                                    "labelLAlign": 2,
                                     "selectedItem": "judgeDone",
+                                    "onClick": "",
                                     "newLineItemNumber": 2,
                                     "spaceSize": 1
                                 },
@@ -628,7 +647,7 @@ var DBC;
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
                                     "text": "明細を追加する",
-                                    "onClick": "",
+                                    "onClick": "onClick_btnAddSeikyuDetail",
                                     "appearance": 0,
                                     "imageFileUrl": "",
                                     "imageWidth": "",
@@ -660,7 +679,12 @@ var DBC;
                                     "postParameterPanelNames": "YoguKonyuhiShikyuShinseiSeikyuDetailInput"
                                 }
                             ],
-                            "requestSettings": [],
+                            "requestSettings": [
+                                {
+                                    "eventName": "onLoad",
+                                    "requestUrl": ""
+                                }
+                            ],
                             "hiddenInput": [],
                             "onOpen": "",
                             "onClose": "",
@@ -1045,7 +1069,7 @@ var DBC;
                                                     "marginRight": "XS",
                                                     "required": false,
                                                     "readOnly": false,
-                                                    "placeHolder": "123456789",
+                                                    "placeHolder": "0",
                                                     "textKind": 2,
                                                     "isPrivateInfo": false,
                                                     "isPassword": false,
@@ -1112,7 +1136,7 @@ var DBC;
                                                     "marginRight": "XS",
                                                     "required": false,
                                                     "readOnly": false,
-                                                    "placeHolder": "123456789",
+                                                    "placeHolder": "0",
                                                     "textKind": 2,
                                                     "isPrivateInfo": false,
                                                     "isPassword": false,
@@ -1397,7 +1421,7 @@ var DBC;
                                                     "marginRight": "XS",
                                                     "required": false,
                                                     "readOnly": false,
-                                                    "placeHolder": "123456789",
+                                                    "placeHolder": "0",
                                                     "textKind": 2,
                                                     "isPrivateInfo": false,
                                                     "isPassword": false,
@@ -1464,7 +1488,7 @@ var DBC;
                                                     "marginRight": "XS",
                                                     "required": false,
                                                     "readOnly": false,
-                                                    "placeHolder": "123456789",
+                                                    "placeHolder": "0",
                                                     "textKind": 2,
                                                     "isPrivateInfo": false,
                                                     "isPassword": false,
@@ -1635,7 +1659,16 @@ var DBC;
                             "postParameterPanelNames": "YoguKonyuhiShikyuShinseiSeikyuDetail"
                         }
                     ],
-                    "requestSettings": [],
+                    "requestSettings": [
+                        {
+                            "eventName": "onLoad",
+                            "requestUrl": ""
+                        },
+                        {
+                            "eventName": "onClick_btnAddSeikyuDetail",
+                            "requestUrl": "dbc/db/dbc/YoguKonyuhiShikyuShinseiSeikyuDetail/onClick_btnAddSeikyuDetail"
+                        }
+                    ],
                     "hiddenInput": [],
                     "onOpen": "",
                     "onClose": "",
@@ -1668,7 +1701,13 @@ var DBC;
             "controlName": "YoguKonyuhiShikyuShinseiSeikyuDetail",
             "marginTop": 0,
             "marginBottom": 0,
-            "originalProperty": [],
+            "originalProperty": [
+                {
+                    "publicChildFieldName": "btnAddSeikyuDetail",
+                    "publicChildProperty": "onClick",
+                    "newPropertyName": "btnAddSeikyuDetailOnclick"
+                }
+            ],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
             "dialogCancelEventNameForDialog": ""

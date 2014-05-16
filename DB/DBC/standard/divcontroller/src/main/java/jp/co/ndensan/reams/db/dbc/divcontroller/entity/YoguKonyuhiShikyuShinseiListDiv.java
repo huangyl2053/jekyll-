@@ -28,6 +28,8 @@ public class YoguKonyuhiShikyuShinseiListDiv extends Panel {
     private Button btnAddShikyuShinsei;
     @JsonProperty("dgShikyuShinseiList")
     private DataGrid<dgShikyuShinseiList_Row> dgShikyuShinseiList;
+    @JsonProperty("btnSave")
+    private Button btnSave;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -63,6 +65,16 @@ public class YoguKonyuhiShikyuShinseiListDiv extends Panel {
     @JsonProperty("dgShikyuShinseiList")
     public void setDgShikyuShinseiList(DataGrid<dgShikyuShinseiList_Row> dgShikyuShinseiList) {
         this.dgShikyuShinseiList=dgShikyuShinseiList;
+    }
+
+    @JsonProperty("btnSave")
+    public Button getBtnSave() {
+        return btnSave;
+    }
+
+    @JsonProperty("btnSave")
+    public void setBtnSave(Button btnSave) {
+        this.btnSave=btnSave;
     }
 
 }

@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBCommonSearchInfoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.MaeShorishaRirekiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ReamsCommonSearchInfoPanelDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgHihokenshaSearchGaitosha_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -32,6 +33,8 @@ public class HihokenshaSearchPanelDiv extends Panel {
     private MaeShorishaRirekiPanelDiv MaeShorishaRirekiPanel;
     @JsonProperty("btnHihokenshaSearch")
     private Button btnHihokenshaSearch;
+    @JsonProperty("dgHihokenshaSearchGaitosha")
+    private DataGrid<dgHihokenshaSearchGaitosha_Row> dgHihokenshaSearchGaitosha;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -77,6 +80,16 @@ public class HihokenshaSearchPanelDiv extends Panel {
     @JsonProperty("btnHihokenshaSearch")
     public void setBtnHihokenshaSearch(Button btnHihokenshaSearch) {
         this.btnHihokenshaSearch=btnHihokenshaSearch;
+    }
+
+    @JsonProperty("dgHihokenshaSearchGaitosha")
+    public DataGrid<dgHihokenshaSearchGaitosha_Row> getDgHihokenshaSearchGaitosha() {
+        return dgHihokenshaSearchGaitosha;
+    }
+
+    @JsonProperty("dgHihokenshaSearchGaitosha")
+    public void setDgHihokenshaSearchGaitosha(DataGrid<dgHihokenshaSearchGaitosha_Row> dgHihokenshaSearchGaitosha) {
+        this.dgHihokenshaSearchGaitosha=dgHihokenshaSearchGaitosha;
     }
 
 }
