@@ -11,12 +11,31 @@ var DBC;
         function KyufugakuSummary_Design($parentElement, isDesignMode, fieldName) {
             _super.call(this, $parentElement, isDesignMode, KyufugakuSummary_Design.myLayout, fieldName);
         }
+        Object.defineProperty(KyufugakuSummary_Design.prototype, "btnLimitOverCheck_displayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[15]["fieldName"] + "_" + this.layout.items[0].items[0].items[15].items[0]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[15]["fieldName"] + "_" + this.layout.items[0].items[0].items[15].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[15]["fieldName"] + "_" + this.layout.items[0].items[0].items[15].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[15]["fieldName"] + "_" + this.layout.items[0].items[0].items[15].items[0]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[0].items[15].items[0]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
         KyufugakuSummary_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
+            Uz.JSControlUtil.registProperty("btnLimitOverCheck_displayNone");
         };
 
         KyufugakuSummary_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+            editablePropertyInfo["btnLimitOverCheck_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[15]["fieldName"] + "_" + this.layout.items[0].items[0].items[15].items[0]["fieldName"]).getEditablePropertyInfo()["displayNone"];
 
             return editablePropertyInfo;
         };
@@ -49,10 +68,10 @@ var DBC;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
-                                            "text": "集計",
                                             "required": false,
-                                            "align": 1,
-                                            "isPrivateInfo": false
+                                            "isPrivateInfo": false,
+                                            "text": "集計",
+                                            "align": 1
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -91,10 +110,10 @@ var DBC;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
-                                            "text": "費用額合計",
                                             "required": false,
-                                            "align": 1,
-                                            "isPrivateInfo": false
+                                            "isPrivateInfo": false,
+                                            "text": "費用額合計",
+                                            "align": 1
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -133,10 +152,10 @@ var DBC;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
-                                            "text": "保険対象費用額",
                                             "required": false,
-                                            "align": 1,
-                                            "isPrivateInfo": false
+                                            "isPrivateInfo": false,
+                                            "text": "保険対象費用額",
+                                            "align": 1
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -175,10 +194,10 @@ var DBC;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
-                                            "text": "前回までの支払結果",
                                             "required": false,
-                                            "align": 2,
-                                            "isPrivateInfo": false
+                                            "isPrivateInfo": false,
+                                            "text": "前回までの支払結果",
+                                            "align": 2
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -217,21 +236,21 @@ var DBC;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
-                                            "text": "",
                                             "required": false,
-                                            "isPrivateInfo": false,
                                             "maxLength": 1000000000000,
                                             "minLength": 0,
                                             "textAlign": 2,
                                             "readOnly": false,
                                             "placeHolder": "1000000",
                                             "textKind": 2,
+                                            "isPrivateInfo": false,
                                             "isPassword": false,
                                             "isComboBox": false,
                                             "onFocus": "",
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "suggest": [],
                                             "value": "",
                                             "labelLText": "",
@@ -284,21 +303,21 @@ var DBC;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
-                                            "text": "",
                                             "required": false,
-                                            "isPrivateInfo": false,
                                             "maxLength": 1000000000000,
                                             "minLength": 0,
                                             "textAlign": 2,
                                             "readOnly": false,
                                             "placeHolder": "0",
                                             "textKind": 2,
+                                            "isPrivateInfo": false,
                                             "isPassword": false,
                                             "isComboBox": false,
                                             "onFocus": "",
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "suggest": [],
                                             "value": "",
                                             "labelLText": "",
@@ -351,10 +370,10 @@ var DBC;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
-                                            "text": "今回の支払状況",
                                             "required": false,
-                                            "align": 2,
-                                            "isPrivateInfo": false
+                                            "isPrivateInfo": false,
+                                            "text": "今回の支払状況",
+                                            "align": 2
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -393,21 +412,21 @@ var DBC;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
-                                            "text": "",
                                             "required": false,
-                                            "isPrivateInfo": false,
                                             "maxLength": 1000000000000,
                                             "minLength": 0,
                                             "textAlign": 2,
                                             "readOnly": false,
                                             "placeHolder": "0",
                                             "textKind": 2,
+                                            "isPrivateInfo": false,
                                             "isPassword": false,
                                             "isComboBox": false,
                                             "onFocus": "",
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "suggest": [],
                                             "value": "",
                                             "labelLText": "",
@@ -460,21 +479,21 @@ var DBC;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
-                                            "text": "",
                                             "required": false,
-                                            "isPrivateInfo": false,
                                             "maxLength": 1000000000000,
                                             "minLength": 0,
                                             "textAlign": 2,
                                             "readOnly": false,
                                             "placeHolder": "0",
                                             "textKind": 2,
+                                            "isPrivateInfo": false,
                                             "isPassword": false,
                                             "isComboBox": false,
                                             "onFocus": "",
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "suggest": [],
                                             "value": "",
                                             "labelLText": "",
@@ -527,10 +546,10 @@ var DBC;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
-                                            "text": "保険給付額",
                                             "required": false,
-                                            "align": 1,
-                                            "isPrivateInfo": false
+                                            "isPrivateInfo": false,
+                                            "text": "保険給付額",
+                                            "align": 1
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -569,10 +588,10 @@ var DBC;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
-                                            "text": "利用者負担額",
                                             "required": false,
-                                            "align": 1,
-                                            "isPrivateInfo": false
+                                            "isPrivateInfo": false,
+                                            "text": "利用者負担額",
+                                            "align": 1
                                         }
                                     ],
                                     "controlType": "TableCell",
@@ -611,21 +630,21 @@ var DBC;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
-                                            "text": "",
                                             "required": false,
-                                            "isPrivateInfo": false,
                                             "maxLength": 1000000000000,
                                             "minLength": 0,
                                             "textAlign": 2,
                                             "readOnly": false,
                                             "placeHolder": "0",
                                             "textKind": 2,
+                                            "isPrivateInfo": false,
                                             "isPassword": false,
                                             "isComboBox": false,
                                             "onFocus": "",
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "suggest": [],
                                             "value": "",
                                             "labelLText": "",
@@ -678,21 +697,21 @@ var DBC;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
-                                            "text": "",
                                             "required": false,
-                                            "isPrivateInfo": false,
                                             "maxLength": 1000000000000,
                                             "minLength": 0,
                                             "textAlign": 2,
                                             "readOnly": false,
                                             "placeHolder": "0",
                                             "textKind": 2,
+                                            "isPrivateInfo": false,
                                             "isPassword": false,
                                             "isComboBox": false,
                                             "onFocus": "",
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "suggest": [],
                                             "value": "",
                                             "labelLText": "",
@@ -745,21 +764,21 @@ var DBC;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
-                                            "text": "",
                                             "required": false,
-                                            "isPrivateInfo": false,
                                             "maxLength": 1000000000000,
                                             "minLength": 0,
                                             "textAlign": 2,
                                             "readOnly": false,
                                             "placeHolder": "0",
                                             "textKind": 2,
+                                            "isPrivateInfo": false,
                                             "isPassword": false,
                                             "isComboBox": false,
                                             "onFocus": "",
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "suggest": [],
                                             "value": "",
                                             "labelLText": "",
@@ -812,21 +831,21 @@ var DBC;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
-                                            "text": "",
                                             "required": false,
-                                            "isPrivateInfo": false,
                                             "maxLength": 1000000000000,
                                             "minLength": 0,
                                             "textAlign": 2,
                                             "readOnly": false,
                                             "placeHolder": "0",
                                             "textKind": 2,
+                                            "isPrivateInfo": false,
                                             "isPassword": false,
                                             "isComboBox": false,
                                             "onFocus": "",
                                             "onBlur": "",
                                             "onChange": "",
                                             "onKeyPress": "",
+                                            "text": "",
                                             "suggest": [],
                                             "value": "",
                                             "labelLText": "",
@@ -879,8 +898,8 @@ var DBC;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
-                                            "onClick": "",
                                             "text": "限度額をチェックする",
+                                            "onClick": "",
                                             "appearance": 0,
                                             "imageFileUrl": "",
                                             "imageWidth": "",
@@ -979,7 +998,13 @@ var DBC;
             "controlName": "KyufugakuSummary",
             "marginTop": 0,
             "marginBottom": 0,
-            "originalProperty": [],
+            "originalProperty": [
+                {
+                    "publicChildFieldName": "btnLimitOverCheck",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "btnLimitOverCheck_displayNone"
+                }
+            ],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
             "dialogCancelEventNameForDialog": ""

@@ -8,6 +8,20 @@ module DBC {
      */
     export class KyufugakuSummary_Design extends Uz.CommonChildDiv {
     
+        public get btnLimitOverCheck_displayNone() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[15]["fieldName"] + "_" + this.layout.items[0].items[0].items[15].items[0]["fieldName"])["displayNone"];
+        }
+        
+        public set btnLimitOverCheck_displayNone(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[15]["fieldName"] + "_" + this.layout.items[0].items[0].items[15].items[0]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[15]["fieldName"] + "_" + this.layout.items[0].items[0].items[15].items[0]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[15]["fieldName"] + "_" + this.layout.items[0].items[0].items[15].items[0]["fieldName"])["displayNone"] = value;
+            } else {
+                this.layout.items[0].items[0].items[15].items[0]["displayNone"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, KyufugakuSummary_Design.myLayout, fieldName);
         }
@@ -18,6 +32,7 @@ module DBC {
          */
         public registProperty() {
             super.registProperty();
+            Uz.JSControlUtil.registProperty("btnLimitOverCheck_displayNone");
         }
         
         /**
@@ -27,6 +42,7 @@ module DBC {
          */
         public getEditablePropertyInfo(): any {
             var editablePropertyInfo = super.getEditablePropertyInfo();
+            editablePropertyInfo["btnLimitOverCheck_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[15]["fieldName"] + "_" + this.layout.items[0].items[0].items[15].items[0]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             
             return editablePropertyInfo;
         }
@@ -59,10 +75,10 @@ module DBC {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "text": "集計",
          "required": false,
-         "align": 1,
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "text": "集計",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -101,10 +117,10 @@ module DBC {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "text": "費用額合計",
          "required": false,
-         "align": 1,
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "text": "費用額合計",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -143,10 +159,10 @@ module DBC {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "text": "保険対象費用額",
          "required": false,
-         "align": 1,
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "text": "保険対象費用額",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -185,10 +201,10 @@ module DBC {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "text": "前回までの支払結果",
          "required": false,
-         "align": 2,
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "text": "前回までの支払結果",
+         "align": 2
         }
        ],
        "controlType": "TableCell",
@@ -227,21 +243,21 @@ module DBC {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "text": "",
          "required": false,
-         "isPrivateInfo": false,
          "maxLength": 1000000000000,
          "minLength": 0,
          "textAlign": 2,
          "readOnly": false,
          "placeHolder": "1000000",
          "textKind": 2,
+         "isPrivateInfo": false,
          "isPassword": false,
          "isComboBox": false,
          "onFocus": "",
          "onBlur": "",
          "onChange": "",
          "onKeyPress": "",
+         "text": "",
          "suggest": [],
          "value": "",
          "labelLText": "",
@@ -294,21 +310,21 @@ module DBC {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "text": "",
          "required": false,
-         "isPrivateInfo": false,
          "maxLength": 1000000000000,
          "minLength": 0,
          "textAlign": 2,
          "readOnly": false,
          "placeHolder": "0",
          "textKind": 2,
+         "isPrivateInfo": false,
          "isPassword": false,
          "isComboBox": false,
          "onFocus": "",
          "onBlur": "",
          "onChange": "",
          "onKeyPress": "",
+         "text": "",
          "suggest": [],
          "value": "",
          "labelLText": "",
@@ -361,10 +377,10 @@ module DBC {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "text": "今回の支払状況",
          "required": false,
-         "align": 2,
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "text": "今回の支払状況",
+         "align": 2
         }
        ],
        "controlType": "TableCell",
@@ -403,21 +419,21 @@ module DBC {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "text": "",
          "required": false,
-         "isPrivateInfo": false,
          "maxLength": 1000000000000,
          "minLength": 0,
          "textAlign": 2,
          "readOnly": false,
          "placeHolder": "0",
          "textKind": 2,
+         "isPrivateInfo": false,
          "isPassword": false,
          "isComboBox": false,
          "onFocus": "",
          "onBlur": "",
          "onChange": "",
          "onKeyPress": "",
+         "text": "",
          "suggest": [],
          "value": "",
          "labelLText": "",
@@ -470,21 +486,21 @@ module DBC {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "text": "",
          "required": false,
-         "isPrivateInfo": false,
          "maxLength": 1000000000000,
          "minLength": 0,
          "textAlign": 2,
          "readOnly": false,
          "placeHolder": "0",
          "textKind": 2,
+         "isPrivateInfo": false,
          "isPassword": false,
          "isComboBox": false,
          "onFocus": "",
          "onBlur": "",
          "onChange": "",
          "onKeyPress": "",
+         "text": "",
          "suggest": [],
          "value": "",
          "labelLText": "",
@@ -537,10 +553,10 @@ module DBC {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "text": "保険給付額",
          "required": false,
-         "align": 1,
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "text": "保険給付額",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -579,10 +595,10 @@ module DBC {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "text": "利用者負担額",
          "required": false,
-         "align": 1,
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "text": "利用者負担額",
+         "align": 1
         }
        ],
        "controlType": "TableCell",
@@ -621,21 +637,21 @@ module DBC {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "text": "",
          "required": false,
-         "isPrivateInfo": false,
          "maxLength": 1000000000000,
          "minLength": 0,
          "textAlign": 2,
          "readOnly": false,
          "placeHolder": "0",
          "textKind": 2,
+         "isPrivateInfo": false,
          "isPassword": false,
          "isComboBox": false,
          "onFocus": "",
          "onBlur": "",
          "onChange": "",
          "onKeyPress": "",
+         "text": "",
          "suggest": [],
          "value": "",
          "labelLText": "",
@@ -688,21 +704,21 @@ module DBC {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "text": "",
          "required": false,
-         "isPrivateInfo": false,
          "maxLength": 1000000000000,
          "minLength": 0,
          "textAlign": 2,
          "readOnly": false,
          "placeHolder": "0",
          "textKind": 2,
+         "isPrivateInfo": false,
          "isPassword": false,
          "isComboBox": false,
          "onFocus": "",
          "onBlur": "",
          "onChange": "",
          "onKeyPress": "",
+         "text": "",
          "suggest": [],
          "value": "",
          "labelLText": "",
@@ -755,21 +771,21 @@ module DBC {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "text": "",
          "required": false,
-         "isPrivateInfo": false,
          "maxLength": 1000000000000,
          "minLength": 0,
          "textAlign": 2,
          "readOnly": false,
          "placeHolder": "0",
          "textKind": 2,
+         "isPrivateInfo": false,
          "isPassword": false,
          "isComboBox": false,
          "onFocus": "",
          "onBlur": "",
          "onChange": "",
          "onKeyPress": "",
+         "text": "",
          "suggest": [],
          "value": "",
          "labelLText": "",
@@ -822,21 +838,21 @@ module DBC {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "text": "",
          "required": false,
-         "isPrivateInfo": false,
          "maxLength": 1000000000000,
          "minLength": 0,
          "textAlign": 2,
          "readOnly": false,
          "placeHolder": "0",
          "textKind": 2,
+         "isPrivateInfo": false,
          "isPassword": false,
          "isComboBox": false,
          "onFocus": "",
          "onBlur": "",
          "onChange": "",
          "onKeyPress": "",
+         "text": "",
          "suggest": [],
          "value": "",
          "labelLText": "",
@@ -889,8 +905,8 @@ module DBC {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "onClick": "",
          "text": "限度額をチェックする",
+         "onClick": "",
          "appearance": 0,
          "imageFileUrl": "",
          "imageWidth": "",
@@ -989,7 +1005,13 @@ module DBC {
  "controlName": "KyufugakuSummary",
  "marginTop": 0,
  "marginBottom": 0,
- "originalProperty": [],
+ "originalProperty": [
+  {
+   "publicChildFieldName": "btnLimitOverCheck",
+   "publicChildProperty": "displayNone",
+   "newPropertyName": "btnLimitOverCheck_displayNone"
+  }
+ ],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
  "dialogCancelEventNameForDialog": ""
