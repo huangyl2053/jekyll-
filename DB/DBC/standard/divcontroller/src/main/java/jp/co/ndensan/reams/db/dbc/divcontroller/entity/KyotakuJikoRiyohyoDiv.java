@@ -26,8 +26,8 @@ public class KyotakuJikoRiyohyoDiv extends Panel {
     private ServiceRiyohyoInfoDiv KyotakuJikoRiyohyoInfo;
     @JsonProperty("btnReturn")
     private Button btnReturn;
-    @JsonProperty("btnRiyohyoSave")
-    private Button btnRiyohyoSave;
+    @JsonProperty("txtBeppyoListSelectIndex")
+    private TextBox txtBeppyoListSelectIndex;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -55,14 +55,14 @@ public class KyotakuJikoRiyohyoDiv extends Panel {
         this.btnReturn=btnReturn;
     }
 
-    @JsonProperty("btnRiyohyoSave")
-    public Button getBtnRiyohyoSave() {
-        return btnRiyohyoSave;
+    @JsonProperty("txtBeppyoListSelectIndex")
+    public TextBox getTxtBeppyoListSelectIndex() {
+        return txtBeppyoListSelectIndex;
     }
 
-    @JsonProperty("btnRiyohyoSave")
-    public void setBtnRiyohyoSave(Button btnRiyohyoSave) {
-        this.btnRiyohyoSave=btnRiyohyoSave;
+    @JsonProperty("txtBeppyoListSelectIndex")
+    public void setTxtBeppyoListSelectIndex(TextBox txtBeppyoListSelectIndex) {
+        this.txtBeppyoListSelectIndex=txtBeppyoListSelectIndex;
     }
 
 }

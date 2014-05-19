@@ -148,6 +148,118 @@ module DBC {
             }
         }
         
+        public get ZengetsuCopyOnClick() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"])["onClick"];
+        }
+        
+        public set ZengetsuCopyOnClick(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"])["onClick"] = value;
+            } else {
+                this.layout.items[0].items[10]["onClick"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get RiyohyoMeisaiAddOnClick() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[1]["fieldName"])["onClick"];
+        }
+        
+        public set RiyohyoMeisaiAddOnClick(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[1]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[1]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[1]["fieldName"])["onClick"] = value;
+            } else {
+                this.layout.items[0].items[11].items[0].items[1]["onClick"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get BeppyoMeisaiNewOnClick() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[0]["fieldName"])["onClick"];
+        }
+        
+        public set BeppyoMeisaiNewOnClick(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[0]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[0]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[0]["fieldName"])["onClick"] = value;
+            } else {
+                this.layout.items[0].items[11].items[1].items[1].items[0]["onClick"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get BeppyoGokeiNewOnClick() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[1]["fieldName"])["onClick"];
+        }
+        
+        public set BeppyoGokeiNewOnClick(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[1]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[1]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[1]["fieldName"])["onClick"] = value;
+            } else {
+                this.layout.items[0].items[11].items[1].items[1].items[1]["onClick"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get BeppyoMeisaiKakuteiOnClick() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[15]["fieldName"])["onClick"];
+        }
+        
+        public set BeppyoMeisaiKakuteiOnClick(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[15]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[15]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[15]["fieldName"])["onClick"] = value;
+            } else {
+                this.layout.items[0].items[11].items[1].items[2].items[15]["onClick"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get BeppyoGokeiKakuteiOnClick() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[14]["fieldName"])["onClick"];
+        }
+        
+        public set BeppyoGokeiKakuteiOnClick(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[14]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[14]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[14]["fieldName"])["onClick"] = value;
+            } else {
+                this.layout.items[0].items[11].items[1].items[3].items[14]["onClick"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get ServiceRiyohyoListGridSetting() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[2]["fieldName"])["gridSetting"];
+        }
+        
+        public set ServiceRiyohyoListGridSetting(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[2]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[2]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[2]["fieldName"])["gridSetting"] = value;
+            } else {
+                this.layout.items[0].items[11].items[0].items[2]["gridSetting"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get ServiceRiyohyoBeppyoListGridSetting() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"])["gridSetting"];
+        }
+        
+        public set ServiceRiyohyoBeppyoListGridSetting(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"])["gridSetting"] = value;
+            } else {
+                this.layout.items[0].items[11].items[1].items[1].items[2]["gridSetting"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, ServiceRiyohyoInfo_Design.myLayout, fieldName);
         }
@@ -168,6 +280,14 @@ module DBC {
             Uz.JSControlUtil.registProperty("KeikakuJigyoshaCodeDisplayNone");
             Uz.JSControlUtil.registProperty("KeikakuJigyoshaNameVisible");
             Uz.JSControlUtil.registProperty("KeikakuJigyoshaNameDisplayNone");
+            Uz.JSControlUtil.registProperty("ZengetsuCopyOnClick");
+            Uz.JSControlUtil.registProperty("RiyohyoMeisaiAddOnClick");
+            Uz.JSControlUtil.registProperty("BeppyoMeisaiNewOnClick");
+            Uz.JSControlUtil.registProperty("BeppyoGokeiNewOnClick");
+            Uz.JSControlUtil.registProperty("BeppyoMeisaiKakuteiOnClick");
+            Uz.JSControlUtil.registProperty("BeppyoGokeiKakuteiOnClick");
+            Uz.JSControlUtil.registProperty("ServiceRiyohyoListGridSetting");
+            Uz.JSControlUtil.registProperty("ServiceRiyohyoBeppyoListGridSetting");
         }
         
         /**
@@ -187,6 +307,14 @@ module DBC {
             editablePropertyInfo["KeikakuJigyoshaCodeDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["KeikakuJigyoshaNameVisible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["visible"];
             editablePropertyInfo["KeikakuJigyoshaNameDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["ZengetsuCopyOnClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["RiyohyoMeisaiAddOnClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["BeppyoMeisaiNewOnClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[0]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["BeppyoGokeiNewOnClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[1]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["BeppyoMeisaiKakuteiOnClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[2].items[15]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["BeppyoGokeiKakuteiOnClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[3].items[14]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["ServiceRiyohyoListGridSetting"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[0]["fieldName"] + "_" + this.layout.items[0].items[11].items[0].items[2]["fieldName"]).getEditablePropertyInfo()["gridSetting"];
+            editablePropertyInfo["ServiceRiyohyoBeppyoListGridSetting"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"] + "_" + this.layout.items[0].items[11].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[11].items[1].items[1].items[2]["fieldName"]).getEditablePropertyInfo()["gridSetting"];
             
             return editablePropertyInfo;
         }
@@ -704,7 +832,7 @@ module DBC {
           "isShowFooter": true,
           "isShowFilter": false,
           "isShowFilterButton": false,
-          "isShowRowState": false,
+          "isShowRowState": true,
           "header": {
            "combineColumns": [
             {
@@ -2479,7 +2607,7 @@ module DBC {
            "textAlign": 0,
            "isComboBox": false,
            "suggest": [],
-           "formatLength": 1
+           "formatLength": "10"
           },
           {
            "fieldName": "btnJigyosha",
@@ -2506,7 +2634,7 @@ module DBC {
            "imageHeight": ""
           },
           {
-           "fieldName": "btnJigyoshaName",
+           "fieldName": "txtJigyoshaName",
            "items": [],
            "controlType": "TextBox",
            "width": "600",
@@ -2588,7 +2716,7 @@ module DBC {
            "textAlign": 0,
            "isComboBox": false,
            "suggest": [],
-           "formatLength": 1
+           "formatLength": "2"
           },
           {
            "fieldName": "btnServiceShurui",
@@ -2655,7 +2783,7 @@ module DBC {
            "textAlign": 0,
            "isComboBox": false,
            "suggest": [],
-           "formatLength": 1
+           "formatLength": "4"
           },
           {
            "fieldName": "btnService",
@@ -2682,7 +2810,7 @@ module DBC {
            "imageHeight": ""
           },
           {
-           "fieldName": "btnServiceName",
+           "fieldName": "txtServiceName",
            "items": [],
            "controlType": "TextBox",
            "width": "600",
@@ -2768,7 +2896,7 @@ module DBC {
            "minValue": 0,
            "isCurrency": false,
            "isComma": true,
-           "decimalPointLength": 0
+           "decimalPointLength": "2"
           },
           {
            "fieldName": "txtWaribikigoRitsu",
@@ -2818,7 +2946,7 @@ module DBC {
            "decimalPointLength": 0
           },
           {
-           "fieldName": "txtWaribikigoTain",
+           "fieldName": "txtWaribikigoTani",
            "items": [],
            "controlType": "TextBoxNum",
            "width": "80",
@@ -3014,7 +3142,7 @@ module DBC {
            "nextFocusFieldName": "",
            "wrap": true,
            "dependencies": [],
-           "float": 2,
+           "float": 0,
            "toolTip": "",
            "authorityMode": 0,
            "marginLeft": "XS",
@@ -3638,7 +3766,7 @@ module DBC {
            "nextFocusFieldName": "",
            "wrap": true,
            "dependencies": [],
-           "float": 2,
+           "float": 0,
            "toolTip": "",
            "authorityMode": 0,
            "marginLeft": "XS",
@@ -3729,7 +3857,7 @@ module DBC {
       "ServiceRiyohyoBeppyo"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "ServiceRiyohyo"
+     "selectedItemFieldName": "ServiceRiyohyoBeppyo"
     }
    ],
    "controlType": "Panel",
@@ -3840,6 +3968,46 @@ module DBC {
    "publicChildFieldName": "txtKeikakuJigyoshaName",
    "publicChildProperty": "displayNone",
    "newPropertyName": "KeikakuJigyoshaNameDisplayNone"
+  },
+  {
+   "publicChildFieldName": "btnZengetsuCopy",
+   "publicChildProperty": "onClick",
+   "newPropertyName": "ZengetsuCopyOnClick"
+  },
+  {
+   "publicChildFieldName": "btnRiyohyoMeisaiAdd",
+   "publicChildProperty": "onClick",
+   "newPropertyName": "RiyohyoMeisaiAddOnClick"
+  },
+  {
+   "publicChildFieldName": "btnBeppyoMeisaiNew",
+   "publicChildProperty": "onClick",
+   "newPropertyName": "BeppyoMeisaiNewOnClick"
+  },
+  {
+   "publicChildFieldName": "btnBeppyoGokeiNew",
+   "publicChildProperty": "onClick",
+   "newPropertyName": "BeppyoGokeiNewOnClick"
+  },
+  {
+   "publicChildFieldName": "btnBeppyoMeisaiKakutei",
+   "publicChildProperty": "onClick",
+   "newPropertyName": "BeppyoMeisaiKakuteiOnClick"
+  },
+  {
+   "publicChildFieldName": "btnBeppyoGokeiKakutei",
+   "publicChildProperty": "onClick",
+   "newPropertyName": "BeppyoGokeiKakuteiOnClick"
+  },
+  {
+   "publicChildFieldName": "dgServiceRiyohyoList",
+   "publicChildProperty": "gridSetting",
+   "newPropertyName": "ServiceRiyohyoListGridSetting"
+  },
+  {
+   "publicChildFieldName": "dgServiceRiyohyoBeppyoList",
+   "publicChildProperty": "gridSetting",
+   "newPropertyName": "ServiceRiyohyoBeppyoListGridSetting"
   }
  ],
  "dataPassingForDialog": [],
