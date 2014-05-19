@@ -115,7 +115,6 @@ public final class YamlLoader {
             throw new SystemException("yamlがloadできません。:" + fileName.toString(), ex);
         }
         Yaml yaml = new Yaml();
-        System.out.println("root:" + rootPath);
         return yaml.load(input);
     }
 
