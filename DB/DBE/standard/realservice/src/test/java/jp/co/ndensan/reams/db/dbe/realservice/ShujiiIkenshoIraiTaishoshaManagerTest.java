@@ -81,7 +81,8 @@ public class ShujiiIkenshoIraiTaishoshaManagerTest extends DbeTestBase {
         public void get主治医意見書作成依頼対象者で_主治医意見書作成依頼対象者が1件登録されているとき_1件の対象者を取得する() {
             when(shujiiIkenshoIraiTaishoshaDac.selectAll()).thenReturn(create介護認定処理対象者List(1));
             when(shujiiManager.get主治医意見書作成依頼情報(any(ShinseishoKanriNo.class), any(IkenshosakuseiIraiRirekiNo.class))).thenReturn(create主治医意見書作成依頼());
-            when(kojinFinder.get個人(any(ShikibetsuCode.class))).thenReturn(create個人());
+            IKojin kojin = create個人();
+            when(kojinFinder.get個人(any(ShikibetsuCode.class))).thenReturn(kojin);
             when(kaigoIryoKikanFinder.get介護医療機関(any(ShoKisaiHokenshaNo.class), any(KaigoIryoKikanCode.class))).thenReturn(mock(KaigoIryoKikan.class));
             sut = new ShujiiIkenshoIraiTaishoshaManager(shujiiIkenshoIraiTaishoshaDac, kojinFinder, shujiiManager, kaigoIryoKikanFinder, yokaigoninteiProgressManager);
             resultList = sut.get主治医意見書作成依頼対象者();
@@ -111,7 +112,8 @@ public class ShujiiIkenshoIraiTaishoshaManagerTest extends DbeTestBase {
         public void get主治医意見書作成依頼対象者_証記載保険者番号の指定で_主治医意見書作成依頼対象者が1件登録されているとき_1件の対象者を取得する() {
             when(shujiiIkenshoIraiTaishoshaDac.select証記載保険者番号(any(ShoKisaiHokenshaNo.class))).thenReturn(create介護認定処理対象者List(1));
             when(shujiiManager.get主治医意見書作成依頼情報(any(ShinseishoKanriNo.class), any(IkenshosakuseiIraiRirekiNo.class))).thenReturn(create主治医意見書作成依頼());
-            when(kojinFinder.get個人(any(ShikibetsuCode.class))).thenReturn(create個人());
+            IKojin kojin = create個人();
+            when(kojinFinder.get個人(any(ShikibetsuCode.class))).thenReturn(kojin);
             when(kaigoIryoKikanFinder.get介護医療機関(any(ShoKisaiHokenshaNo.class), any(KaigoIryoKikanCode.class))).thenReturn(mock(KaigoIryoKikan.class));
             sut = new ShujiiIkenshoIraiTaishoshaManager(shujiiIkenshoIraiTaishoshaDac, kojinFinder, shujiiManager, kaigoIryoKikanFinder, yokaigoninteiProgressManager);
             resultList = sut.get主治医意見書作成依頼対象者(証記載保険者番号);
@@ -141,7 +143,8 @@ public class ShujiiIkenshoIraiTaishoshaManagerTest extends DbeTestBase {
         public void get主治医意見書作成依頼対象者_証記載保険者番号と支所コードの指定で_主治医意見書作成依頼対象者が1件登録されているとき_1件の対象者を取得する() {
             when(shujiiIkenshoIraiTaishoshaDac.select証記載保険者番号及び支所コード(any(ShoKisaiHokenshaNo.class), any(RString.class))).thenReturn(create介護認定処理対象者List(1));
             when(shujiiManager.get主治医意見書作成依頼情報(any(ShinseishoKanriNo.class), any(IkenshosakuseiIraiRirekiNo.class))).thenReturn(create主治医意見書作成依頼());
-            when(kojinFinder.get個人(any(ShikibetsuCode.class))).thenReturn(create個人());
+            IKojin kojin = create個人();
+            when(kojinFinder.get個人(any(ShikibetsuCode.class))).thenReturn(kojin);
             when(kaigoIryoKikanFinder.get介護医療機関(any(ShoKisaiHokenshaNo.class), any(KaigoIryoKikanCode.class))).thenReturn(mock(KaigoIryoKikan.class));
             sut = new ShujiiIkenshoIraiTaishoshaManager(shujiiIkenshoIraiTaishoshaDac, kojinFinder, shujiiManager, kaigoIryoKikanFinder, yokaigoninteiProgressManager);
             resultList = sut.get主治医意見書作成依頼対象者(証記載保険者番号, 支所コード);
