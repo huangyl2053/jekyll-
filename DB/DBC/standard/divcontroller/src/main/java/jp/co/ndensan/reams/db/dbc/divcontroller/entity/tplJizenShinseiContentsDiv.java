@@ -5,19 +5,19 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuJizenShinseiKozaInfoMockDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuJizenShinseiKozaInfoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuJizenShinseiReasonDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuZizenShinseiDetailDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * JutakuKaishuJizenShinseiContents のクラスファイル 
+ * tplJizenShinseiContents のクラスファイル 
  * 
  * @author 自動生成
  */
-public class JutakuKaishuJizenShinseiContentsDiv extends Panel {
+public class tplJizenShinseiContentsDiv extends TabPanel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -30,12 +30,12 @@ public class JutakuKaishuJizenShinseiContentsDiv extends Panel {
     private TextBox txtRelationWithHihokensha;
     @JsonProperty("JutakuKaishuZizenShinseiDetail")
     private JutakuKaishuZizenShinseiDetailDiv JutakuKaishuZizenShinseiDetail;
-    @JsonProperty("JutakuKaishuJizenShinseiSha")
-    private ShinseishaInfoDiv JutakuKaishuJizenShinseiSha;
+    @JsonProperty("JutakuKaishuJizenShinseisha")
+    private ShinseishaInfoDiv JutakuKaishuJizenShinseisha;
     @JsonProperty("JutakuKaishuJizenShinseiReason")
     private JutakuKaishuJizenShinseiReasonDiv JutakuKaishuJizenShinseiReason;
-    @JsonProperty("JutakuKaishuJizenShinseiKozaInfoMock")
-    private JutakuKaishuJizenShinseiKozaInfoMockDiv JutakuKaishuJizenShinseiKozaInfoMock;
+    @JsonProperty("JutakuKaishuJizenShinseiKozaInfo")
+    private JutakuKaishuJizenShinseiKozaInfoDiv JutakuKaishuJizenShinseiKozaInfo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -73,14 +73,14 @@ public class JutakuKaishuJizenShinseiContentsDiv extends Panel {
         this.JutakuKaishuZizenShinseiDetail=JutakuKaishuZizenShinseiDetail;
     }
 
-    @JsonProperty("JutakuKaishuJizenShinseiSha")
-    public ShinseishaInfoDiv getJutakuKaishuJizenShinseiSha() {
-        return JutakuKaishuJizenShinseiSha;
+    @JsonProperty("JutakuKaishuJizenShinseisha")
+    public ShinseishaInfoDiv getJutakuKaishuJizenShinseisha() {
+        return JutakuKaishuJizenShinseisha;
     }
 
-    @JsonProperty("JutakuKaishuJizenShinseiSha")
-    public void setJutakuKaishuJizenShinseiSha(ShinseishaInfoDiv JutakuKaishuJizenShinseiSha) {
-        this.JutakuKaishuJizenShinseiSha=JutakuKaishuJizenShinseiSha;
+    @JsonProperty("JutakuKaishuJizenShinseisha")
+    public void setJutakuKaishuJizenShinseisha(ShinseishaInfoDiv JutakuKaishuJizenShinseisha) {
+        this.JutakuKaishuJizenShinseisha=JutakuKaishuJizenShinseisha;
     }
 
     @JsonProperty("JutakuKaishuJizenShinseiReason")
@@ -93,14 +93,14 @@ public class JutakuKaishuJizenShinseiContentsDiv extends Panel {
         this.JutakuKaishuJizenShinseiReason=JutakuKaishuJizenShinseiReason;
     }
 
-    @JsonProperty("JutakuKaishuJizenShinseiKozaInfoMock")
-    public JutakuKaishuJizenShinseiKozaInfoMockDiv getJutakuKaishuJizenShinseiKozaInfoMock() {
-        return JutakuKaishuJizenShinseiKozaInfoMock;
+    @JsonProperty("JutakuKaishuJizenShinseiKozaInfo")
+    public JutakuKaishuJizenShinseiKozaInfoDiv getJutakuKaishuJizenShinseiKozaInfo() {
+        return JutakuKaishuJizenShinseiKozaInfo;
     }
 
-    @JsonProperty("JutakuKaishuJizenShinseiKozaInfoMock")
-    public void setJutakuKaishuJizenShinseiKozaInfoMock(JutakuKaishuJizenShinseiKozaInfoMockDiv JutakuKaishuJizenShinseiKozaInfoMock) {
-        this.JutakuKaishuJizenShinseiKozaInfoMock=JutakuKaishuJizenShinseiKozaInfoMock;
+    @JsonProperty("JutakuKaishuJizenShinseiKozaInfo")
+    public void setJutakuKaishuJizenShinseiKozaInfo(JutakuKaishuJizenShinseiKozaInfoDiv JutakuKaishuJizenShinseiKozaInfo) {
+        this.JutakuKaishuJizenShinseiKozaInfo=JutakuKaishuJizenShinseiKozaInfo;
     }
 
 }
