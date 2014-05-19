@@ -50,6 +50,48 @@ module DBC {
             }
         }
         
+        public get dg_width() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["width"];
+        }
+        
+        public set dg_width(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["width"] = value;
+            } else {
+                this.layout.items[0].items[0]["width"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get detaiInput_displayNone() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["displayNone"];
+        }
+        
+        public set detaiInput_displayNone(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["displayNone"] = value;
+            } else {
+                this.layout.items[0].items[1]["displayNone"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get dg_height() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["height"];
+        }
+        
+        public set dg_height(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["height"] = value;
+            } else {
+                this.layout.items[0].items[0]["height"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, JutakuKaishuShinseiDetailInput_Design.myLayout, fieldName);
         }
@@ -63,6 +105,9 @@ module DBC {
             Uz.JSControlUtil.registProperty("dg_gridSetting");
             Uz.JSControlUtil.registProperty("txtChakkoDate_lableLText");
             Uz.JSControlUtil.registProperty("txtKanseiDate_lableLText");
+            Uz.JSControlUtil.registProperty("dg_width");
+            Uz.JSControlUtil.registProperty("detaiInput_displayNone");
+            Uz.JSControlUtil.registProperty("dg_height");
         }
         
         /**
@@ -75,6 +120,9 @@ module DBC {
             editablePropertyInfo["dg_gridSetting"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["gridSetting"];
             editablePropertyInfo["txtChakkoDate_lableLText"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[5]["fieldName"]).getEditablePropertyInfo()["labelLText"];
             editablePropertyInfo["txtKanseiDate_lableLText"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[6]["fieldName"]).getEditablePropertyInfo()["labelLText"];
+            editablePropertyInfo["dg_width"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["width"];
+            editablePropertyInfo["detaiInput_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["dg_height"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["height"];
             
             return editablePropertyInfo;
         }
@@ -736,6 +784,21 @@ module DBC {
    "publicChildFieldName": "txtKanseiDueDate",
    "publicChildProperty": "labelLText",
    "newPropertyName": "txtKanseiDate_lableLText"
+  },
+  {
+   "publicChildFieldName": "dgJutakuKaishuDetail",
+   "publicChildProperty": "width",
+   "newPropertyName": "dg_width"
+  },
+  {
+   "publicChildFieldName": "JutakuKaishuDetailInput",
+   "publicChildProperty": "displayNone",
+   "newPropertyName": "detaiInput_displayNone"
+  },
+  {
+   "publicChildFieldName": "dgJutakuKaishuDetail",
+   "publicChildProperty": "height",
+   "newPropertyName": "dg_height"
   }
  ],
  "dataPassingForDialog": [],
