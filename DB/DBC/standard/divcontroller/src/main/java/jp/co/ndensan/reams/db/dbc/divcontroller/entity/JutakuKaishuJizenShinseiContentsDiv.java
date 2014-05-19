@@ -5,7 +5,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuJizenShinseiDateDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuReasonDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuZizenShinseiDetailDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KozaInfoMockDiv;
@@ -31,8 +30,8 @@ public class JutakuKaishuJizenShinseiContentsDiv extends Panel {
     private TextBox txtRelationWithHihokensha;
     @JsonProperty("JutakuKaishuZizenShinseiDetail")
     private JutakuKaishuZizenShinseiDetailDiv JutakuKaishuZizenShinseiDetail;
-    @JsonProperty("JutakuKaishuJizenShinseiDate")
-    private JutakuKaishuJizenShinseiDateDiv JutakuKaishuJizenShinseiDate;
+    @JsonProperty("JutakuKaishuJizenShinseiSha")
+    private ShinseishaInfoDiv JutakuKaishuJizenShinseiSha;
     @JsonProperty("KozaInfoMock")
     private KozaInfoMockDiv KozaInfoMock;
     @JsonProperty("JutakuKaishuReason")
@@ -74,14 +73,14 @@ public class JutakuKaishuJizenShinseiContentsDiv extends Panel {
         this.JutakuKaishuZizenShinseiDetail=JutakuKaishuZizenShinseiDetail;
     }
 
-    @JsonProperty("JutakuKaishuJizenShinseiDate")
-    public JutakuKaishuJizenShinseiDateDiv getJutakuKaishuJizenShinseiDate() {
-        return JutakuKaishuJizenShinseiDate;
+    @JsonProperty("JutakuKaishuJizenShinseiSha")
+    public ShinseishaInfoDiv getJutakuKaishuJizenShinseiSha() {
+        return JutakuKaishuJizenShinseiSha;
     }
 
-    @JsonProperty("JutakuKaishuJizenShinseiDate")
-    public void setJutakuKaishuJizenShinseiDate(JutakuKaishuJizenShinseiDateDiv JutakuKaishuJizenShinseiDate) {
-        this.JutakuKaishuJizenShinseiDate=JutakuKaishuJizenShinseiDate;
+    @JsonProperty("JutakuKaishuJizenShinseiSha")
+    public void setJutakuKaishuJizenShinseiSha(ShinseishaInfoDiv JutakuKaishuJizenShinseiSha) {
+        this.JutakuKaishuJizenShinseiSha=JutakuKaishuJizenShinseiSha;
     }
 
     @JsonProperty("KozaInfoMock")
