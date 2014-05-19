@@ -56,22 +56,22 @@ public final class YamlLoader {
     public static final YamlLoader FOR_DBZ;
 
     static {
-        FOR_DBA = new YamlLoader(yamlPathFor(new RString("dba")));
-        FOR_DBB = new YamlLoader(yamlPathFor(new RString("dbb")));
-        FOR_DBC = new YamlLoader(yamlPathFor(new RString("dbc")));
-        FOR_DBD = new YamlLoader(yamlPathFor(new RString("dbd")));
-        FOR_DBE = new YamlLoader(yamlPathFor(new RString("dbe")));
-        FOR_DBU = new YamlLoader(yamlPathFor(new RString("dbu")));
-        FOR_DBZ = new YamlLoader(yamlPathFor(new RString("dbz")));
+        FOR_DBA = new YamlLoader(rootPathFor(new RString("dba")));
+        FOR_DBB = new YamlLoader(rootPathFor(new RString("dbb")));
+        FOR_DBC = new YamlLoader(rootPathFor(new RString("dbc")));
+        FOR_DBD = new YamlLoader(rootPathFor(new RString("dbd")));
+        FOR_DBE = new YamlLoader(rootPathFor(new RString("dbe")));
+        FOR_DBU = new YamlLoader(rootPathFor(new RString("dbu")));
+        FOR_DBZ = new YamlLoader(rootPathFor(new RString("dbz")));
     }
 
-    private static RString yamlPathFor(RString packageName) {
+    private static RString rootPathFor(RString packageName) {
         return new RString("db/" + packageName + "/demodata/");
     }
-    private final RString ROOT_PATH;
+    private final RString rootPath;
 
     private YamlLoader(RString rootPath) {
-        this.ROOT_PATH = rootPath;
+        this.rootPath = rootPath;
     }
 
     /**
@@ -105,7 +105,7 @@ public final class YamlLoader {
         InputStream input = null;
         String urlHeader = ((_IServletControlData) _ControlDataHolder.getControlData()).getUrlHeader();
         try {
-            URL url = new URL(urlHeader.concat(ROOT_PATH.toString()).concat(fileName.toString()));
+            URL url = new URL(urlHeader.concat(rootPath.toString()).concat(fileName.toString()));
             input = url.openStream();
         } catch (FileNotFoundException ex) {
             throw new SystemException("yamlが見つかりません。:" + fileName.toString(), ex);
@@ -115,6 +115,7 @@ public final class YamlLoader {
             throw new SystemException("yamlがloadできません。:" + fileName.toString(), ex);
         }
         Yaml yaml = new Yaml();
+        System.out.println("root:" + rootPath);
         return yaml.load(input);
     }
 
