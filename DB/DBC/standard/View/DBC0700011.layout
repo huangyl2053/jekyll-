@@ -1645,7 +1645,7 @@
      "dialogCancelEventNameForDialog": ""
     },
     {
-     "fieldName": "KozaInfoMock",
+     "fieldName": "JutakuKaishuJizenShinseiKozaInfoMock",
      "items": [
       {
        "fieldName": "txtKinyuKikanCode",
@@ -2006,7 +2006,7 @@
      "canOpenAndClose": false,
      "postParameterPanelNames": [
       {
-       "postParameterPanelNames": "KozaInfoMock"
+       "postParameterPanelNames": "JutakuKaishuJizenShinseiKozaInfoMock"
       }
      ],
      "requestSettings": [],
@@ -2025,7 +2025,7 @@
      "isGroupBox": true
     },
     {
-     "fieldName": "JutakuKaishuReason",
+     "fieldName": "JutakuKaishuJizenShinseiReason",
      "items": [
       {
        "fieldName": "txtCreateDate",
@@ -2280,7 +2280,7 @@
      "canOpenAndClose": false,
      "postParameterPanelNames": [
       {
-       "postParameterPanelNames": "JutakuKaishuReason"
+       "postParameterPanelNames": "JutakuKaishuJizenShinseiReason"
       }
      ],
      "requestSettings": [],
@@ -2341,7 +2341,7 @@
    "fieldName": "JutakuKaishuJizenShinseiResult",
    "items": [
     {
-     "fieldName": "JutakuKaishuShinsaResult",
+     "fieldName": "JutakuKaishuJizenShinseiShinsaResult",
      "items": [
       {
        "fieldName": "txtJudgeDate",
@@ -2520,7 +2520,7 @@
      "canOpenAndClose": true,
      "postParameterPanelNames": [
       {
-       "postParameterPanelNames": "JutakuKaishuShinsaResult"
+       "postParameterPanelNames": "JutakuKaishuJizenShinseiShinsaResult"
       }
      ],
      "requestSettings": [],
@@ -2539,7 +2539,7 @@
      "isGroupBox": false
     },
     {
-     "fieldName": "JutakuKaishuResetInfo",
+     "fieldName": "JutakuKaishuJizenShinseiResetInfo",
      "items": [
       {
        "fieldName": "chkResetInfo",
@@ -2603,7 +2603,7 @@
      "canOpenAndClose": true,
      "postParameterPanelNames": [
       {
-       "postParameterPanelNames": "JutakuKaishuResetInfo"
+       "postParameterPanelNames": "JutakuKaishuJizenShinseiResetInfo"
       }
      ],
      "requestSettings": [],
@@ -2897,19 +2897,19 @@
      "panelState": "visible"
     },
     {
-     "visibleDiv": "KozaInfoMock",
+     "visibleDiv": "JutakuKaishuJizenShinseiKozaInfoMock",
      "panelState": "visible"
     },
     {
-     "visibleDiv": "JutakuKaishuResetInfo",
+     "visibleDiv": "JutakuKaishuJizenShinseiResetInfo",
      "panelState": "visible"
     },
     {
-     "visibleDiv": "JutakuKaishuReason",
+     "visibleDiv": "JutakuKaishuJizenShinseiReason",
      "panelState": "visible"
     },
     {
-     "visibleDiv": "JutakuKaishuShinsaResult",
+     "visibleDiv": "JutakuKaishuJizenShinseiShinsaResult",
      "panelState": "visible"
     },
     {
@@ -2991,19 +2991,19 @@
    "JutakuKaishuJizenShinseiSha"
   ],
   [
-   "KozaInfoMock"
+   "JutakuKaishuJizenShinseiKozaInfoMock"
   ],
   [
-   "JutakuKaishuReason"
+   "JutakuKaishuJizenShinseiReason"
   ],
   [
    "JutakuKaishuJizenShinseiResult"
   ],
   [
-   "JutakuKaishuShinsaResult"
+   "JutakuKaishuJizenShinseiShinsaResult"
   ],
   [
-   "JutakuKaishuResetInfo"
+   "JutakuKaishuJizenShinseiResetInfo"
   ],
   [
    "JutakuKaishuJizenShoninKetteiTsuchisho"

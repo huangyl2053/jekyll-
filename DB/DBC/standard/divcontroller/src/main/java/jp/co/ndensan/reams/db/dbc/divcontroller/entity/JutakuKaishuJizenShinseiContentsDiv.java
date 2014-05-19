@@ -5,9 +5,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuReasonDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuJizenShinseiKozaInfoMockDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuJizenShinseiReasonDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuZizenShinseiDetailDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KozaInfoMockDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -32,10 +32,10 @@ public class JutakuKaishuJizenShinseiContentsDiv extends Panel {
     private JutakuKaishuZizenShinseiDetailDiv JutakuKaishuZizenShinseiDetail;
     @JsonProperty("JutakuKaishuJizenShinseiSha")
     private ShinseishaInfoDiv JutakuKaishuJizenShinseiSha;
-    @JsonProperty("KozaInfoMock")
-    private KozaInfoMockDiv KozaInfoMock;
-    @JsonProperty("JutakuKaishuReason")
-    private JutakuKaishuReasonDiv JutakuKaishuReason;
+    @JsonProperty("JutakuKaishuJizenShinseiKozaInfoMock")
+    private JutakuKaishuJizenShinseiKozaInfoMockDiv JutakuKaishuJizenShinseiKozaInfoMock;
+    @JsonProperty("JutakuKaishuJizenShinseiReason")
+    private JutakuKaishuJizenShinseiReasonDiv JutakuKaishuJizenShinseiReason;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -83,24 +83,24 @@ public class JutakuKaishuJizenShinseiContentsDiv extends Panel {
         this.JutakuKaishuJizenShinseiSha=JutakuKaishuJizenShinseiSha;
     }
 
-    @JsonProperty("KozaInfoMock")
-    public KozaInfoMockDiv getKozaInfoMock() {
-        return KozaInfoMock;
+    @JsonProperty("JutakuKaishuJizenShinseiKozaInfoMock")
+    public JutakuKaishuJizenShinseiKozaInfoMockDiv getJutakuKaishuJizenShinseiKozaInfoMock() {
+        return JutakuKaishuJizenShinseiKozaInfoMock;
     }
 
-    @JsonProperty("KozaInfoMock")
-    public void setKozaInfoMock(KozaInfoMockDiv KozaInfoMock) {
-        this.KozaInfoMock=KozaInfoMock;
+    @JsonProperty("JutakuKaishuJizenShinseiKozaInfoMock")
+    public void setJutakuKaishuJizenShinseiKozaInfoMock(JutakuKaishuJizenShinseiKozaInfoMockDiv JutakuKaishuJizenShinseiKozaInfoMock) {
+        this.JutakuKaishuJizenShinseiKozaInfoMock=JutakuKaishuJizenShinseiKozaInfoMock;
     }
 
-    @JsonProperty("JutakuKaishuReason")
-    public JutakuKaishuReasonDiv getJutakuKaishuReason() {
-        return JutakuKaishuReason;
+    @JsonProperty("JutakuKaishuJizenShinseiReason")
+    public JutakuKaishuJizenShinseiReasonDiv getJutakuKaishuJizenShinseiReason() {
+        return JutakuKaishuJizenShinseiReason;
     }
 
-    @JsonProperty("JutakuKaishuReason")
-    public void setJutakuKaishuReason(JutakuKaishuReasonDiv JutakuKaishuReason) {
-        this.JutakuKaishuReason=JutakuKaishuReason;
+    @JsonProperty("JutakuKaishuJizenShinseiReason")
+    public void setJutakuKaishuJizenShinseiReason(JutakuKaishuJizenShinseiReasonDiv JutakuKaishuJizenShinseiReason) {
+        this.JutakuKaishuJizenShinseiReason=JutakuKaishuJizenShinseiReason;
     }
 
 }

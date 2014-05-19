@@ -5,8 +5,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuResetInfoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinsaResultDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuJizenShinseiResetInfoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuJizenShinseiShinsaResultDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -23,10 +23,10 @@ public class JutakuKaishuJizenShinseiResultDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("JutakuKaishuShinsaResult")
-    private JutakuKaishuShinsaResultDiv JutakuKaishuShinsaResult;
-    @JsonProperty("JutakuKaishuResetInfo")
-    private JutakuKaishuResetInfoDiv JutakuKaishuResetInfo;
+    @JsonProperty("JutakuKaishuJizenShinseiShinsaResult")
+    private JutakuKaishuJizenShinseiShinsaResultDiv JutakuKaishuJizenShinseiShinsaResult;
+    @JsonProperty("JutakuKaishuJizenShinseiResetInfo")
+    private JutakuKaishuJizenShinseiResetInfoDiv JutakuKaishuJizenShinseiResetInfo;
     @JsonProperty("JutakuKaishuJizenShoninKetteiTsuchisho")
     private PanelPublish JutakuKaishuJizenShoninKetteiTsuchisho;
 
@@ -36,24 +36,24 @@ public class JutakuKaishuJizenShinseiResultDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("JutakuKaishuShinsaResult")
-    public JutakuKaishuShinsaResultDiv getJutakuKaishuShinsaResult() {
-        return JutakuKaishuShinsaResult;
+    @JsonProperty("JutakuKaishuJizenShinseiShinsaResult")
+    public JutakuKaishuJizenShinseiShinsaResultDiv getJutakuKaishuJizenShinseiShinsaResult() {
+        return JutakuKaishuJizenShinseiShinsaResult;
     }
 
-    @JsonProperty("JutakuKaishuShinsaResult")
-    public void setJutakuKaishuShinsaResult(JutakuKaishuShinsaResultDiv JutakuKaishuShinsaResult) {
-        this.JutakuKaishuShinsaResult=JutakuKaishuShinsaResult;
+    @JsonProperty("JutakuKaishuJizenShinseiShinsaResult")
+    public void setJutakuKaishuJizenShinseiShinsaResult(JutakuKaishuJizenShinseiShinsaResultDiv JutakuKaishuJizenShinseiShinsaResult) {
+        this.JutakuKaishuJizenShinseiShinsaResult=JutakuKaishuJizenShinseiShinsaResult;
     }
 
-    @JsonProperty("JutakuKaishuResetInfo")
-    public JutakuKaishuResetInfoDiv getJutakuKaishuResetInfo() {
-        return JutakuKaishuResetInfo;
+    @JsonProperty("JutakuKaishuJizenShinseiResetInfo")
+    public JutakuKaishuJizenShinseiResetInfoDiv getJutakuKaishuJizenShinseiResetInfo() {
+        return JutakuKaishuJizenShinseiResetInfo;
     }
 
-    @JsonProperty("JutakuKaishuResetInfo")
-    public void setJutakuKaishuResetInfo(JutakuKaishuResetInfoDiv JutakuKaishuResetInfo) {
-        this.JutakuKaishuResetInfo=JutakuKaishuResetInfo;
+    @JsonProperty("JutakuKaishuJizenShinseiResetInfo")
+    public void setJutakuKaishuJizenShinseiResetInfo(JutakuKaishuJizenShinseiResetInfoDiv JutakuKaishuJizenShinseiResetInfo) {
+        this.JutakuKaishuJizenShinseiResetInfo=JutakuKaishuJizenShinseiResetInfo;
     }
 
     @JsonProperty("JutakuKaishuJizenShoninKetteiTsuchisho")
