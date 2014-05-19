@@ -65,8 +65,8 @@ public final class YamlLoader {
         FOR_DBZ = new YamlLoader(rootPathFor(new RString("dbz")));
     }
 
-    private static RString rootPathFor(RString packageName) {
-        return new RString("db/" + packageName + "/demodata/");
+    private static RString rootPathFor(RString projectName) {
+        return new RString("db/" + projectName + "/demodata/");
     }
     private final RString rootPath;
 
