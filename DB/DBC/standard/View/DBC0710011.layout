@@ -1554,7 +1554,8 @@
        "controlName": "ShinseishaInfo",
        "dataPassingForDialog": [],
        "dialogOkEventNameForDialog": "",
-       "dialogCancelEventNameForDialog": ""
+       "dialogCancelEventNameForDialog": "",
+       "btnSearch_displayNone": false
       },
       {
        "fieldName": "JutakuKaishuShinseiReason",
@@ -2699,7 +2700,7 @@
    ]
   }
  ],
- "currentState": "申請登録",
+ "currentState": "All",
  "id": "DBC0710011",
  "WFParameter": [],
  "UIContainerEventMapping": [],

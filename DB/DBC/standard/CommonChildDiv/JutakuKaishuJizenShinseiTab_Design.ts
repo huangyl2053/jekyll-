@@ -375,7 +375,8 @@ module DBC {
          "originalProperty": [],
          "dataPassingForDialog": [],
          "dialogOkEventNameForDialog": "",
-         "dialogCancelEventNameForDialog": ""
+         "dialogCancelEventNameForDialog": "",
+         "btnSearch_displayNone": true
         },
         {
          "fieldName": "JutakuKaishuJizenShinseiReason",
