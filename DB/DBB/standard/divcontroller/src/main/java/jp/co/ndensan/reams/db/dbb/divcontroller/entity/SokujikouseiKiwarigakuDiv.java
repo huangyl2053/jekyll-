@@ -5,8 +5,9 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.tblSokujiKouseiKiwariGakuDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * SokujikouseiKiwarigaku のクラスファイル 
@@ -20,8 +21,8 @@ public class SokujikouseiKiwarigakuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("tblSokujiKouseiKiwariGaku")
-    private tblSokujiKouseiKiwariGakuDiv tblSokujiKouseiKiwariGaku;
+    @JsonProperty("Label1")
+    private Label Label1;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -29,14 +30,14 @@ public class SokujikouseiKiwarigakuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("tblSokujiKouseiKiwariGaku")
-    public tblSokujiKouseiKiwariGakuDiv getTblSokujiKouseiKiwariGaku() {
-        return tblSokujiKouseiKiwariGaku;
+    @JsonProperty("Label1")
+    public Label getLabel1() {
+        return Label1;
     }
 
-    @JsonProperty("tblSokujiKouseiKiwariGaku")
-    public void setTblSokujiKouseiKiwariGaku(tblSokujiKouseiKiwariGakuDiv tblSokujiKouseiKiwariGaku) {
-        this.tblSokujiKouseiKiwariGaku=tblSokujiKouseiKiwariGaku;
+    @JsonProperty("Label1")
+    public void setLabel1(Label Label1) {
+        this.Label1=Label1;
     }
 
 }
