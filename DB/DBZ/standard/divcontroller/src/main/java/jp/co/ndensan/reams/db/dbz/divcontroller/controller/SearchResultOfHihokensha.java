@@ -62,7 +62,7 @@ public final class SearchResultOfHihokensha {
                 DataGridUtil.lineFeedBetween(hihokensha.kanaShimei(), hihokensha.shimei()),
                 hihokensha.gender(),
                 forBrithDay,
-                hihokensha.yubinNo(),
+                hihokensha.yubinNo().value(),
                 hihokensha.jusho(),
                 hihokensha.kojinNo(),
                 hihokensha.juminShubetsu(),

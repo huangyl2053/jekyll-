@@ -19,64 +19,110 @@ import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._IServletControlData;
 import org.yaml.snakeyaml.Yaml;
 
-/**
- * テストデータを生成します。後日yamlに置き換えを予定しています。
+/*
+ * Yamlファイルをロードします。
  *
- * @author n8178 城間篤人
+ * @author N3327 三浦 凌
  */
 public final class YamlLoader {
 
-    private static final RString ROOT_PATH = new RString("db/");
-
     /**
-     * インスタンス化防止のためのプライベートコンストラクタです。
+     * DBA用のYamlLoaderです。
      */
-    private YamlLoader() {
+    public static final YamlLoader FOR_DBA;
+    /**
+     * DBB用のYamlLoaderです。
+     */
+    public static final YamlLoader FOR_DBB;
+    /**
+     * DBC用のYamlLoaderです。
+     */
+    public static final YamlLoader FOR_DBC;
+    /**
+     * DBD用のYamlLoaderです。
+     */
+    public static final YamlLoader FOR_DBD;
+    /**
+     * DBE用のYamlLoaderです。
+     */
+    public static final YamlLoader FOR_DBE;
+    /**
+     * DBU用のYamlLoaderです。
+     */
+    public static final YamlLoader FOR_DBU;
+    /**
+     * DBZ用のYamlLoaderです。
+     */
+    public static final YamlLoader FOR_DBZ;
+
+    static {
+        FOR_DBA = new YamlLoader(yamlPathFor(new RString("dba")));
+        FOR_DBB = new YamlLoader(yamlPathFor(new RString("dbb")));
+        FOR_DBC = new YamlLoader(yamlPathFor(new RString("dbc")));
+        FOR_DBD = new YamlLoader(yamlPathFor(new RString("dbd")));
+        FOR_DBE = new YamlLoader(yamlPathFor(new RString("dbe")));
+        FOR_DBU = new YamlLoader(yamlPathFor(new RString("dbu")));
+        FOR_DBZ = new YamlLoader(yamlPathFor(new RString("dbz")));
+    }
+
+    private static RString yamlPathFor(RString packageName) {
+        return new RString("db/" + packageName + "/demodata/");
+    }
+    private final RString ROOT_PATH;
+
+    private YamlLoader(RString rootPath) {
+        this.ROOT_PATH = rootPath;
     }
 
     /**
-     * 引数に渡したURLからYamlファイルをロードして、その内容をList型で返します。
+     * YAMLファイルを読み込みます。<br />
+     * デモ用のデータ読み込みに使用するクラスです。<br />
+     * このメソッドで読み込むYAMLはハッシュのリスト形式で記述されている必要があります。<br />
+     * ファイルははWEB-INF/demodata/以下に配置される必要があります。<br />
      *
-     * @param fileName ファイルの位置情報
-     * @return List化したYamlファイル
+     * @param fileName Yamlファイル名
+     * @return Yamlをパースしたリスト
      */
-    public static List<HashMap> loadAsList(RString fileName) {
+    public List<HashMap> loadAsList(RString fileName) {
         return toList(load(fileName));
     }
 
     /**
-     * 引数に渡したURLからYamlファイルをロードして、その内容をMap型で返します。
+     * YAMLファイルを読み込みます。<br />
+     * デモ用のデータ読み込みに使用するクラスです。<br />
+     * このメソッドで読み込むYAMLはハッシュ形式で記述されている必要があります。<br />
+     * ハッシュの中身は任意の型が許されます。使う側で適宜型変換を行う必要があります。
+     * ファイルはWEB-INF/demodata/以下に配置される必要があります。<br />
      *
-     * @param fileName ファイルの位置情報
-     * @return Map化したYamlファイル
+     * @param fileName Yamlファイル名
+     * @return Yamlをパースしたリスト
      */
-    public static Map loadAsMap(RString fileName) {
+    public Map loadAsMap(RString fileName) {
         return toHashMap(load(fileName));
     }
 
-    private static Object load(RString fileName) {
+    private Object load(RString fileName) {
         InputStream input = null;
-        RString urlHeader = new RString(((_IServletControlData) _ControlDataHolder.getControlData()).getUrlHeader());
+        String urlHeader = ((_IServletControlData) _ControlDataHolder.getControlData()).getUrlHeader();
         try {
-            URL url = new URL(urlHeader.toString().concat(ROOT_PATH.toString()).concat(fileName.toString()));
+            URL url = new URL(urlHeader.concat(ROOT_PATH.toString()).concat(fileName.toString()));
             input = url.openStream();
-        } catch (FileNotFoundException e) {
-            throw new SystemException("fileが見つかりません :" + fileName.toString(), e);
-        } catch (MalformedURLException e) {
-            throw new SystemException("urlが見つかりません :" + e.getLocalizedMessage(), e);
-        } catch (IOException e) {
-            throw new SystemException("yamlがloadできません :" + fileName.toString(), e);
+        } catch (FileNotFoundException ex) {
+            throw new SystemException("yamlが見つかりません。:" + fileName.toString(), ex);
+        } catch (MalformedURLException ex) {
+            throw new SystemException("urlが不適切です。: " + ex.getLocalizedMessage(), ex);
+        } catch (IOException ex) {
+            throw new SystemException("yamlがloadできません。:" + fileName.toString(), ex);
         }
-
         Yaml yaml = new Yaml();
         return yaml.load(input);
     }
 
-    private static List toList(Object target) {
+    private List toList(Object target) {
         return (List) target;
     }
 
-    private static HashMap toHashMap(Object target) {
+    private HashMap toHashMap(Object target) {
         return (HashMap) target;
     }
 }

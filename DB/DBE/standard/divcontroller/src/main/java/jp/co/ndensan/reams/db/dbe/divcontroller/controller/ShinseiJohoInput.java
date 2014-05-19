@@ -226,7 +226,7 @@ public class ShinseiJohoInput {
          * @param div NinteiShinseishaDiv
          */
         public static void clear(NinteiShinseishaDiv div) {
-            _setUpItem(div, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, true, true);
+            _setUpItem(div, RString.EMPTY, RString.EMPTY, null, RString.EMPTY, true, true);
         }
 
         /**
@@ -259,11 +259,11 @@ public class ShinseiJohoInput {
 
         private static void _onChange_radShinseishaKubun_本人(NinteiShinseishaDiv div, dgSearchResult_Row hihokensha) {
             _setUpItem(div, hihokensha.getShimei(), hihokensha.getKanaShimsei(),
-                    hihokensha.getYubinNo(), hihokensha.getJusho(), false, false);
+                    new YubinNo(hihokensha.getYubinNo()), hihokensha.getJusho(), false, false);
         }
 
         private static void _onChange_radShinseishaKubun_家族(NinteiShinseishaDiv div, dgSearchResult_Row hihokensha) {
-            _setUpItem(div, null, null, hihokensha.getYubinNo(), hihokensha.getJusho(), true, false);
+            _setUpItem(div, null, null, new YubinNo(hihokensha.getYubinNo()), hihokensha.getJusho(), true, false);
         }
 
         private static void _onChange_radShinseishaKubun_施設職員(NinteiShinseishaDiv div) {
@@ -275,11 +275,11 @@ public class ShinseiJohoInput {
         }
 
         private static void _setUpItem(NinteiShinseishaDiv div,
-                RString name, RString kanaName, RString yubinNo, RString jusho, boolean isFamily, boolean isJighosya) {
+                RString name, RString kanaName, YubinNo yubinNo, RString jusho, boolean isFamily, boolean isJighosya) {
 
             div.getTxtShinseishaName().setValue(name);
             div.getTxtShinseishaNameKana().setValue(kanaName);
-            div.getTxtYubinNo().setValue(new YubinNo(yubinNo));
+            div.getTxtYubinNo().setValue(yubinNo);
             div.getTxtShinseishaJusho().setValue(jusho);
 
             div.getNinteiShinseishaTudukigara().setDisplayNone(!isFamily);
@@ -456,8 +456,8 @@ public class ShinseiJohoInput {
 
             div.getTxtYokaigodo().setValue(yokaigodo);
             div.getTxtNinteiDate().setValue(ninteiDate);
-//            div.getTxtNinteiYukokikan().setFromValue(fromDate);
-//            div.getTxtNinteiYukokikan().setToValue(toDate);
+            div.getTxtNinteiYukokikan().setFromValue(fromDate);
+            div.getTxtNinteiYukokikan().setToValue(toDate);
         }
     }
 
@@ -590,11 +590,11 @@ public class ShinseiJohoInput {
             }
 
             private static dgShisetsuRereki_Row createDgShisetsuRereki(RString name, RDate startDate, RDate endDate) {
-                TextBoxDate ForStartDate = new TextBoxDate();
-                ForStartDate.setValue(startDate);
-                TextBoxDate ForEndDate = new TextBoxDate();
-                ForEndDate.setValue(endDate);
-                return new dgShisetsuRereki_Row(new Button(), name, ForStartDate, ForEndDate);
+                TextBoxDate forStartDate = new TextBoxDate();
+                forStartDate.setValue(startDate);
+                TextBoxDate forEndDate = new TextBoxDate();
+                forEndDate.setValue(endDate);
+                return new dgShisetsuRereki_Row(new Button(), name, forStartDate, forEndDate);
             }
         }
     }

@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business;
+package jp.co.ndensan.reams.db.dbe.business.core.chosahyo;
 
+import jp.co.ndensan.reams.db.dbe.business.core.chosahyo.NinteichosahyoFactory;
 import jp.co.ndensan.reams.db.dbe.business.core.chosahyo.Ninteichosahyo;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
@@ -29,11 +30,11 @@ public class NinteichosahyoFactoryTest extends DbeTestBase {
         }
     }
 
-    public static class create基本情報Instance extends DbeTestBase {
+    public static class create基本調査Instance extends DbeTestBase {
 
         @Test
-        public void 厚労省IF識別区分の指定がある時_create基本情報Instanceは_Ninteichosahyoのインスタンスを返す() {
-            assertThat(NinteichosahyoFactory.create基本情報Instance(KoroshoIFKubun.V09A), instanceOf(Ninteichosahyo.class));
+        public void 厚労省IF識別区分の指定がある時_create基本調査Instanceは_Ninteichosahyoのインスタンスを返す() {
+            assertThat(NinteichosahyoFactory.create基本調査Instance(KoroshoIFKubun.V09A), instanceOf(Ninteichosahyo.class));
         }
     }
 }

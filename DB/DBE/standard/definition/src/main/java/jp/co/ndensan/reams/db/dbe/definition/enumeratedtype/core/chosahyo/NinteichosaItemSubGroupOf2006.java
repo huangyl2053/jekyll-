@@ -21,10 +21,10 @@ public enum NinteichosaItemSubGroupOf2006 implements INinteichosaItemSubGroup {
      * 調査項目サブグループが「拘縮」であることを表します。
      */
     拘縮("2", "２．拘縮", "拘縮", true);
-    private RString no;
-    private RString name;
-    private RString shortName;
-    private boolean multiSelectable;
+    private final RString no;
+    private final RString name;
+    private final RString shortName;
+    private final boolean multiSelectable;
 
     private NinteichosaItemSubGroupOf2006(String no, String name, String shortName, boolean multiSelectable) {
         this.no = new RString(no);

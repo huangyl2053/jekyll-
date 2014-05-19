@@ -4,6 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo;
 
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
 /**
  * 要介護認定調査の調査項目区分（基本調査）を表す列挙型です。
  *
@@ -431,4 +433,15 @@ public enum NinteichosaItemKubunOfKihon implements INinteichosaItemKubun {
      * 調査項目区分が「認知症高齢者の日常生活自立度」であることを表します。
      */
     認知症高齢者の日常生活自立度;
+    private final RString theName;
+
+    private NinteichosaItemKubunOfKihon() {
+        this.theName = new RString(name());
+    }
+
+    @Override
+    public RString toRString() {
+        return theName;
+    }
+
 }

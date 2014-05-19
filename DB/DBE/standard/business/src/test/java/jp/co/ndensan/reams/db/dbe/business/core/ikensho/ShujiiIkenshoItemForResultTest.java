@@ -5,7 +5,6 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ikensho;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ChoiceItem;
-import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoFactory;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.IAnswerResultItem;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.IShujiiIkenshoItemGroup;
