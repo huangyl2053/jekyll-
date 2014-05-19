@@ -11,12 +11,31 @@ var DBC;
         function ShinseishaInfo_Design($parentElement, isDesignMode, fieldName) {
             _super.call(this, $parentElement, isDesignMode, ShinseishaInfo_Design.myLayout, fieldName);
         }
+        Object.defineProperty(ShinseishaInfo_Design.prototype, "btnSearch_displayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[8]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
         ShinseishaInfo_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
+            Uz.JSControlUtil.registProperty("btnSearch_displayNone");
         };
 
         ShinseishaInfo_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+            editablePropertyInfo["btnSearch_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]).getEditablePropertyInfo()["displayNone"];
 
             return editablePropertyInfo;
         };
@@ -43,6 +62,7 @@ var DBC;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "onChange": "",
                             "required": false,
                             "readOnly": false,
                             "placeHolder": "平26.07.01",
@@ -51,7 +71,6 @@ var DBC;
                             "isPassword": false,
                             "onFocus": "",
                             "onBlur": "",
-                            "onChange": "",
                             "onKeyPress": "",
                             "text": "",
                             "value": "",
@@ -61,9 +80,9 @@ var DBC;
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
+                            "permitCharactor": "./_-",
                             "ymdKubun": 2,
-                            "displayFormat": 0,
-                            "permitCharactor": "./_-"
+                            "displayFormat": 0
                         },
                         {
                             "fieldName": "txtUketsukeYMD",
@@ -82,6 +101,7 @@ var DBC;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "onChange": "",
                             "required": false,
                             "readOnly": false,
                             "placeHolder": "平26.07.01",
@@ -90,7 +110,6 @@ var DBC;
                             "isPassword": false,
                             "onFocus": "",
                             "onBlur": "",
-                            "onChange": "",
                             "onKeyPress": "",
                             "text": "",
                             "value": "",
@@ -100,9 +119,9 @@ var DBC;
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
+                            "permitCharactor": "./_-",
                             "ymdKubun": 2,
-                            "displayFormat": 0,
-                            "permitCharactor": "./_-"
+                            "displayFormat": 0
                         },
                         {
                             "fieldName": "radShinseishaKubun",
@@ -121,8 +140,9 @@ var DBC;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
-                            "required": false,
                             "onChange": "",
+                            "selectedItem": "family",
+                            "required": false,
                             "labelLText": "区分",
                             "labelLWidth": "60",
                             "labelLAlign": 2,
@@ -145,7 +165,6 @@ var DBC;
                                 }
                             ],
                             "onClick": "",
-                            "selectedItem": "family",
                             "newLineItemNumber": 4,
                             "spaceSize": 1
                         },
@@ -166,6 +185,7 @@ var DBC;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "onChange": "",
                             "required": false,
                             "maxLength": 1000000000000,
                             "minLength": 0,
@@ -178,7 +198,6 @@ var DBC;
                             "isComboBox": false,
                             "onFocus": "",
                             "onBlur": "",
-                            "onChange": "",
                             "onKeyPress": "",
                             "text": "",
                             "suggest": [],
@@ -208,6 +227,7 @@ var DBC;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "onChange": "",
                             "required": false,
                             "maxLength": 1000000000000,
                             "minLength": 0,
@@ -220,7 +240,6 @@ var DBC;
                             "isComboBox": false,
                             "onFocus": "",
                             "onBlur": "",
-                            "onChange": "",
                             "onKeyPress": "",
                             "text": "",
                             "suggest": [],
@@ -250,6 +269,7 @@ var DBC;
                             "authorityMode": 0,
                             "marginLeft": "5.3",
                             "marginRight": "XS",
+                            "onChange": "",
                             "required": false,
                             "maxLength": 1000000000000,
                             "minLength": 0,
@@ -262,7 +282,6 @@ var DBC;
                             "isComboBox": false,
                             "onFocus": "",
                             "onBlur": "",
-                            "onChange": "",
                             "onKeyPress": "",
                             "text": "",
                             "suggest": [],
@@ -292,6 +311,7 @@ var DBC;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "onChange": "",
                             "required": false,
                             "maxLength": 1000000000000,
                             "minLength": 0,
@@ -304,7 +324,6 @@ var DBC;
                             "isComboBox": false,
                             "onFocus": "",
                             "onBlur": "",
-                            "onChange": "",
                             "onKeyPress": "",
                             "text": "",
                             "suggest": [],
@@ -334,6 +353,7 @@ var DBC;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "onChange": "",
                             "required": false,
                             "maxLength": 1000000000000,
                             "minLength": 0,
@@ -346,7 +366,6 @@ var DBC;
                             "isComboBox": false,
                             "onFocus": "",
                             "onBlur": "",
-                            "onChange": "",
                             "onKeyPress": "",
                             "text": "",
                             "suggest": [],
@@ -443,7 +462,13 @@ var DBC;
             "controlName": "ShinseishaInfo",
             "marginTop": 0,
             "marginBottom": 0,
-            "originalProperty": [],
+            "originalProperty": [
+                {
+                    "publicChildFieldName": "btnSearchJigyosha",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "btnSearch_displayNone"
+                }
+            ],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
             "dialogCancelEventNameForDialog": ""

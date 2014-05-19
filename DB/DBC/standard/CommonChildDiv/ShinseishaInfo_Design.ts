@@ -8,6 +8,20 @@ module DBC {
      */
     export class ShinseishaInfo_Design extends Uz.CommonChildDiv {
     
+        public get btnSearch_displayNone() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"])["displayNone"];
+        }
+        
+        public set btnSearch_displayNone(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"])["displayNone"] = value;
+            } else {
+                this.layout.items[0].items[8]["displayNone"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, ShinseishaInfo_Design.myLayout, fieldName);
         }
@@ -18,6 +32,7 @@ module DBC {
          */
         public registProperty() {
             super.registProperty();
+            Uz.JSControlUtil.registProperty("btnSearch_displayNone");
         }
         
         /**
@@ -27,6 +42,7 @@ module DBC {
          */
         public getEditablePropertyInfo(): any {
             var editablePropertyInfo = super.getEditablePropertyInfo();
+            editablePropertyInfo["btnSearch_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             
             return editablePropertyInfo;
         }
@@ -53,6 +69,7 @@ module DBC {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "onChange": "",
      "required": false,
      "readOnly": false,
      "placeHolder": "平26.07.01",
@@ -61,7 +78,6 @@ module DBC {
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
-     "onChange": "",
      "onKeyPress": "",
      "text": "",
      "value": "",
@@ -71,9 +87,9 @@ module DBC {
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "permitCharactor": "./_-",
      "ymdKubun": 2,
-     "displayFormat": 0,
-     "permitCharactor": "./_-"
+     "displayFormat": 0
     },
     {
      "fieldName": "txtUketsukeYMD",
@@ -92,6 +108,7 @@ module DBC {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "onChange": "",
      "required": false,
      "readOnly": false,
      "placeHolder": "平26.07.01",
@@ -100,7 +117,6 @@ module DBC {
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
-     "onChange": "",
      "onKeyPress": "",
      "text": "",
      "value": "",
@@ -110,9 +126,9 @@ module DBC {
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "permitCharactor": "./_-",
      "ymdKubun": 2,
-     "displayFormat": 0,
-     "permitCharactor": "./_-"
+     "displayFormat": 0
     },
     {
      "fieldName": "radShinseishaKubun",
@@ -131,8 +147,9 @@ module DBC {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "required": false,
      "onChange": "",
+     "selectedItem": "family",
+     "required": false,
      "labelLText": "区分",
      "labelLWidth": "60",
      "labelLAlign": 2,
@@ -155,7 +172,6 @@ module DBC {
       }
      ],
      "onClick": "",
-     "selectedItem": "family",
      "newLineItemNumber": 4,
      "spaceSize": 1
     },
@@ -176,6 +192,7 @@ module DBC {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "onChange": "",
      "required": false,
      "maxLength": 1000000000000,
      "minLength": 0,
@@ -188,7 +205,6 @@ module DBC {
      "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
-     "onChange": "",
      "onKeyPress": "",
      "text": "",
      "suggest": [],
@@ -218,6 +234,7 @@ module DBC {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "onChange": "",
      "required": false,
      "maxLength": 1000000000000,
      "minLength": 0,
@@ -230,7 +247,6 @@ module DBC {
      "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
-     "onChange": "",
      "onKeyPress": "",
      "text": "",
      "suggest": [],
@@ -260,6 +276,7 @@ module DBC {
      "authorityMode": 0,
      "marginLeft": "5.3",
      "marginRight": "XS",
+     "onChange": "",
      "required": false,
      "maxLength": 1000000000000,
      "minLength": 0,
@@ -272,7 +289,6 @@ module DBC {
      "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
-     "onChange": "",
      "onKeyPress": "",
      "text": "",
      "suggest": [],
@@ -302,6 +318,7 @@ module DBC {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "onChange": "",
      "required": false,
      "maxLength": 1000000000000,
      "minLength": 0,
@@ -314,7 +331,6 @@ module DBC {
      "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
-     "onChange": "",
      "onKeyPress": "",
      "text": "",
      "suggest": [],
@@ -344,6 +360,7 @@ module DBC {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "onChange": "",
      "required": false,
      "maxLength": 1000000000000,
      "minLength": 0,
@@ -356,7 +373,6 @@ module DBC {
      "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
-     "onChange": "",
      "onKeyPress": "",
      "text": "",
      "suggest": [],
@@ -453,7 +469,13 @@ module DBC {
  "controlName": "ShinseishaInfo",
  "marginTop": 0,
  "marginBottom": 0,
- "originalProperty": [],
+ "originalProperty": [
+  {
+   "publicChildFieldName": "btnSearchJigyosha",
+   "publicChildProperty": "displayNone",
+   "newPropertyName": "btnSearch_displayNone"
+  }
+ ],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
  "dialogCancelEventNameForDialog": ""
