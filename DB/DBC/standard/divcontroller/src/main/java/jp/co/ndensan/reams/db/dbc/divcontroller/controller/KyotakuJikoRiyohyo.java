@@ -642,8 +642,6 @@ public class KyotakuJikoRiyohyo {
                 getTabServiceRiyohyo().getServiceRiyohyoBeppyo();
         ServiceRiyohyoBeppyoRiyoNissuDiv nissu = beppyo.getServiceRiyohyoBeppyoRiyoNissu();
         ServiceRiyohyoBeppyoListDiv list = beppyo.getServiceRiyohyoBeppyoList();
-//        ServiceRiyohyoBeppyoMeisaiDiv meisai = beppyo.getServiceRiyohyoBeppyoMeisai();
-//        ServiceRiyohyoBeppyoGokeiDiv gokei = beppyo.getServiceRiyohyoBeppyoGokei();
         setBeppyoNissuData(nissu);
         setBeppyoListData(list);
         initRiyohyoBeppyoMeisaiData(panel);
