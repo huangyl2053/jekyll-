@@ -1349,9 +1349,9 @@
      "text": "",
      "suggest": [],
      "value": "",
-     "labelLText": "被保険者（本人）との関係",
+     "labelLText": "被保険者との関係",
      "labelRText": "",
-     "labelLWidth": "180",
+     "labelLWidth": "120",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -1551,7 +1551,10 @@
         ]
        },
        "txtChakkoDate_lableLText": "着工予定日",
-       "txtKanseiDate_lableLText": "完成予定日"
+       "txtKanseiDate_lableLText": "完成予定日",
+       "dg_width": "480",
+       "detaiInput_displayNone": false,
+       "dg_height": "240"
       },
       {
        "fieldName": "JutakuKaishuJizenShinseiKyufugakuSummary",
@@ -1577,7 +1580,8 @@
        "controlName": "KyufugakuSummary",
        "dataPassingForDialog": [],
        "dialogOkEventNameForDialog": "",
-       "dialogCancelEventNameForDialog": ""
+       "dialogCancelEventNameForDialog": "",
+       "btnLimitOverCheck_displayNone": false
       }
      ],
      "controlType": "Panel",
@@ -1642,10 +1646,11 @@
      "controlName": "ShinseishaInfo",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": ""
+     "dialogCancelEventNameForDialog": "",
+     "btnSearch_displayNone": false
     },
     {
-     "fieldName": "JutakuKaishuJizenShinseiKozaInfoMock",
+     "fieldName": "JutakuKaishuJizenShinseiKozaInfo",
      "items": [
       {
        "fieldName": "txtKinyuKikanCode",
@@ -2001,12 +2006,12 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "onLoad": "",
-     "title": "口座振替申請情報Mock（UR）",
+     "title": "口座振替申請情報（UR）",
      "isOpen": true,
      "canOpenAndClose": false,
      "postParameterPanelNames": [
       {
-       "postParameterPanelNames": "JutakuKaishuJizenShinseiKozaInfoMock"
+       "postParameterPanelNames": "JutakuKaishuJizenShinseiKozaInfo"
       }
      ],
      "requestSettings": [],
@@ -2598,7 +2603,7 @@
      "marginLeft": "XS",
      "marginRight": "0",
      "onLoad": "",
-     "title": "リセット情報",
+     "title": "限度額リセット",
      "isOpen": true,
      "canOpenAndClose": true,
      "postParameterPanelNames": [
@@ -2897,7 +2902,7 @@
      "panelState": "visible"
     },
     {
-     "visibleDiv": "JutakuKaishuJizenShinseiKozaInfoMock",
+     "visibleDiv": "JutakuKaishuJizenShinseiKozaInfo",
      "panelState": "visible"
     },
     {
@@ -2991,7 +2996,7 @@
    "JutakuKaishuJizenShinseiSha"
   ],
   [
-   "JutakuKaishuJizenShinseiKozaInfoMock"
+   "JutakuKaishuJizenShinseiKozaInfo"
   ],
   [
    "JutakuKaishuJizenShinseiReason"
