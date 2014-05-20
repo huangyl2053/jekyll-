@@ -1273,7 +1273,7 @@
          "disabled": false,
          "accessKey": "",
          "nextFocusFieldName": "",
-         "wrap": false,
+         "wrap": true,
          "dependencies": [],
          "float": 0,
          "toolTip": "",
@@ -2940,7 +2940,7 @@
    ]
   }
  ],
- "currentState": "全件",
+ "currentState": "All",
  "id": "DBE4070001",
  "WFParameter": [],
  "UIContainerEventMapping": [],
