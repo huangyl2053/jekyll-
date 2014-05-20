@@ -245,7 +245,7 @@ var DBC;
                             "height": "155",
                             "onSort": "",
                             "onSelect": "",
-                            "onSelectByDblClick": "",
+                            "onSelectByDblClick": "onClick_dgMeisai_modify",
                             "onOnlyRow": "",
                             "onNoRow": "",
                             "onMultiRows": "",
@@ -277,7 +277,7 @@ var DBC;
                                     "marginRight": "XS",
                                     "required": false,
                                     "readOnly": false,
-                                    "placeHolder": "平26.6.15",
+                                    "placeHolder": "",
                                     "textKind": 0,
                                     "isPrivateInfo": false,
                                     "isPassword": false,
@@ -338,6 +338,10 @@ var DBC;
                                         {
                                             "key": "code06",
                                             "value": "06:自動排泄処理装置の交換可能部品"
+                                        },
+                                        {
+                                            "key": "code00",
+                                            "value": ""
                                         }
                                     ],
                                     "required": false,
@@ -350,7 +354,7 @@ var DBC;
                                     "labelRWidth": "S",
                                     "labelLAlign": 2,
                                     "labelRAlign": 0,
-                                    "selectedItem": ""
+                                    "selectedItem": "code00"
                                 },
                                 {
                                     "fieldName": "txtShohinName",
@@ -371,7 +375,7 @@ var DBC;
                                     "marginRight": "XS",
                                     "required": false,
                                     "readOnly": false,
-                                    "placeHolder": "１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０",
+                                    "placeHolder": "",
                                     "textKind": 0,
                                     "isPrivateInfo": false,
                                     "isPassword": false,

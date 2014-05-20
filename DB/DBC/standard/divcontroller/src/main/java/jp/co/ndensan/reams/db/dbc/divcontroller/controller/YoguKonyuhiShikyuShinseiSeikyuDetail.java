@@ -20,19 +20,37 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * 福祉用具購入費支給申請 請求明細の情報を表示する。
+ * 福祉用具購入費支給申請 (請求明細の情報を表示する)パネルです。
  *
  * @author n8223
  */
 public class YoguKonyuhiShikyuShinseiSeikyuDetail {
-
+    
+     /*
+     *　福祉用具購入費支給審査　請求明細に追加・修正ボタン押下後、請求明細の情報を表示する。
+     */
     public ResponseData<YoguKonyuhiShikyuShinseiSeikyuDetailDiv> onClick_btnAddSeikyuDetail(YoguKonyuhiShikyuShinseiSeikyuDetailDiv panel) {
         ResponseData<YoguKonyuhiShikyuShinseiSeikyuDetailDiv> response = new ResponseData<>();
 
-        
+        //TO DO 明細設定
         setSeikyuDetailData(panel);
+        //TO DO 前回までの支払結果の値を設定
         setSummaryMae(panel);
+        //TO DO 今回の支払状況の値を設定
         setSummaryNowData(panel);
+        
+      //修正ボタン押下場合に、明細を修正モードで、クリア処理  
+      if(panel.getYoguKonyuhiShikyuShinseiSeikyuDetailInput().getBtnAddSeikyuDetail().getText().toString().equals("明細を修正する"))  {
+        
+        panel.getYoguKonyuhiShikyuShinseiSeikyuDetailInput().getTxtBuyYMD().clearValue();
+        panel.getYoguKonyuhiShikyuShinseiSeikyuDetailInput().getDdlShumoku().setSelectedItem(new RString("code00"));
+        panel.getYoguKonyuhiShikyuShinseiSeikyuDetailInput().getTxtShohinName().clearValue();
+        panel.getYoguKonyuhiShikyuShinseiSeikyuDetailInput().getTxtSeizoJigyosha().clearValue();
+        panel.getYoguKonyuhiShikyuShinseiSeikyuDetailInput().getTxtHanbaiJigyosha().clearValue();
+        panel.getYoguKonyuhiShikyuShinseiSeikyuDetailInput().getTxtBuyAmount().clearValue();
+        panel.getYoguKonyuhiShikyuShinseiSeikyuDetailInput().getTxtHinmokuCode().clearValue();
+        
+      }
 
         response.data = panel;
         return response;
@@ -69,20 +87,50 @@ public class YoguKonyuhiShikyuShinseiSeikyuDetail {
      請求明細の情報をセットします。
      */
     private void setSeikyuDetailData(YoguKonyuhiShikyuShinseiSeikyuDetailDiv panel) {
-
-        List<dgSeikyuDetail_Row> arraydata = createRowSeikyuDetailTestData();
-        DataGrid<dgSeikyuDetail_Row> grid = panel.getDgSeikyuDetail();
-        grid.setDataSource(arraydata);
+         
+        if (panel.getYoguKonyuhiShikyuShinseiSeikyuDetailInput().getBtnAddSeikyuDetail().getText().toString().equals("明細を修正する")) {
+            List<dgSeikyuDetail_Row> arraydata = updateRowSeikyuDetailTestData();
+            DataGrid<dgSeikyuDetail_Row> grid = panel.getDgSeikyuDetail();
+            grid.setDataSource(arraydata);
+        } else {
+            List<dgSeikyuDetail_Row> arraydata = createRowSeikyuDetailTestData();
+            DataGrid<dgSeikyuDetail_Row> grid = panel.getDgSeikyuDetail();
+            grid.setDataSource(arraydata);
+        }
 
     }
-
+    
+    
     /*
-     請求明細のテストデータです。
+     請求明細のテストデータです。（修正モード）
+     */
+    private List<dgSeikyuDetail_Row> updateRowSeikyuDetailTestData() {
+        List<dgSeikyuDetail_Row> arrayData = new ArrayList<>();
+
+        dgSeikyuDetail_Row item;
+         
+        item = createRowSeikyuDetailData(
+                "",
+                "",
+                "修正",
+                "20140615",
+                "01:腰掛便座",
+                "介護ケア用品　腰掛便座",
+                "50000",
+                "審査済み");
+        arrayData.add(item);
+        return arrayData;
+
+    }
+    
+    /*
+     請求明細のテストデータです。（追加モード）
      */
     private List<dgSeikyuDetail_Row> createRowSeikyuDetailTestData() {
         List<dgSeikyuDetail_Row> arrayData = new ArrayList<>();
 
         dgSeikyuDetail_Row item;
+         
         item = createRowSeikyuDetailData(
                 "",
                 "",
@@ -96,6 +144,7 @@ public class YoguKonyuhiShikyuShinseiSeikyuDetail {
         return arrayData;
 
     }
+
 
     /*
      引数を元にデータグリッド内に挿入する請求明細のデータを作成します。

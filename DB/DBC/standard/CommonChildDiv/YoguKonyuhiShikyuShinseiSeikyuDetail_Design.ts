@@ -252,7 +252,7 @@ module DBC {
      "height": "155",
      "onSort": "",
      "onSelect": "",
-     "onSelectByDblClick": "",
+     "onSelectByDblClick": "onClick_dgMeisai_modify",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -284,7 +284,7 @@ module DBC {
        "marginRight": "XS",
        "required": false,
        "readOnly": false,
-       "placeHolder": "平26.6.15",
+       "placeHolder": "",
        "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
@@ -345,6 +345,10 @@ module DBC {
         {
          "key": "code06",
          "value": "06:自動排泄処理装置の交換可能部品"
+        },
+        {
+         "key": "code00",
+         "value": ""
         }
        ],
        "required": false,
@@ -357,7 +361,7 @@ module DBC {
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "selectedItem": ""
+       "selectedItem": "code00"
       },
       {
        "fieldName": "txtShohinName",
@@ -378,7 +382,7 @@ module DBC {
        "marginRight": "XS",
        "required": false,
        "readOnly": false,
-       "placeHolder": "１２３４５６７８９０１２３４５６７８９０１２３４５６７８９０",
+       "placeHolder": "",
        "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
