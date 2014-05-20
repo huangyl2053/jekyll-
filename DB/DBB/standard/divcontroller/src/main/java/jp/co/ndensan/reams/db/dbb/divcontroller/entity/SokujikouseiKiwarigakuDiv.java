@@ -21,8 +21,12 @@ public class SokujikouseiKiwarigakuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("Label1")
-    private Label Label1;
+    @JsonProperty("lblChoteiNendo")
+    private Label lblChoteiNendo;
+    @JsonProperty("ddlChoteiNendo")
+    private DropDownList ddlChoteiNendo;
+    @JsonProperty("lblDamy")
+    private Label lblDamy;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -30,14 +34,34 @@ public class SokujikouseiKiwarigakuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("Label1")
-    public Label getLabel1() {
-        return Label1;
+    @JsonProperty("lblChoteiNendo")
+    public Label getLblChoteiNendo() {
+        return lblChoteiNendo;
     }
 
-    @JsonProperty("Label1")
-    public void setLabel1(Label Label1) {
-        this.Label1=Label1;
+    @JsonProperty("lblChoteiNendo")
+    public void setLblChoteiNendo(Label lblChoteiNendo) {
+        this.lblChoteiNendo=lblChoteiNendo;
+    }
+
+    @JsonProperty("ddlChoteiNendo")
+    public DropDownList getDdlChoteiNendo() {
+        return ddlChoteiNendo;
+    }
+
+    @JsonProperty("ddlChoteiNendo")
+    public void setDdlChoteiNendo(DropDownList ddlChoteiNendo) {
+        this.ddlChoteiNendo=ddlChoteiNendo;
+    }
+
+    @JsonProperty("lblDamy")
+    public Label getLblDamy() {
+        return lblDamy;
+    }
+
+    @JsonProperty("lblDamy")
+    public void setLblDamy(Label lblDamy) {
+        this.lblDamy=lblDamy;
     }
 
 }

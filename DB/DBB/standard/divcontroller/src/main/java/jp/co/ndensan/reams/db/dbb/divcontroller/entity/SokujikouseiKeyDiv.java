@@ -21,10 +21,6 @@ public class SokujikouseiKeyDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblChoteiNendo")
-    private Label lblChoteiNendo;
-    @JsonProperty("txtChoteiNendo")
-    private TextBox txtChoteiNendo;
     @JsonProperty("lblFukaNendo")
     private Label lblFukaNendo;
     @JsonProperty("txtFukaNendo")
@@ -44,26 +40,6 @@ public class SokujikouseiKeyDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblChoteiNendo")
-    public Label getLblChoteiNendo() {
-        return lblChoteiNendo;
-    }
-
-    @JsonProperty("lblChoteiNendo")
-    public void setLblChoteiNendo(Label lblChoteiNendo) {
-        this.lblChoteiNendo=lblChoteiNendo;
-    }
-
-    @JsonProperty("txtChoteiNendo")
-    public TextBox getTxtChoteiNendo() {
-        return txtChoteiNendo;
-    }
-
-    @JsonProperty("txtChoteiNendo")
-    public void setTxtChoteiNendo(TextBox txtChoteiNendo) {
-        this.txtChoteiNendo=txtChoteiNendo;
-    }
-
     @JsonProperty("lblFukaNendo")
     public Label getLblFukaNendo() {
         return lblFukaNendo;

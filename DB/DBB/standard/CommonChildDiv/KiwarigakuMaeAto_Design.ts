@@ -1996,6 +1996,20 @@ module DBB {
             }
         }
         
+        public get KiwarigakuTableHtml() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["html"];
+        }
+        
+        public set KiwarigakuTableHtml(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["html"] = value;
+            } else {
+                this.layout.items[0].items[0]["html"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, KiwarigakuMaeAto_Design.myLayout, fieldName);
         }
@@ -2148,6 +2162,7 @@ module DBB {
             Uz.JSControlUtil.registProperty("NokigenText12");
             Uz.JSControlUtil.registProperty("NokigenText13");
             Uz.JSControlUtil.registProperty("NokigenText14");
+            Uz.JSControlUtil.registProperty("KiwarigakuTableHtml");
         }
         
         /**
@@ -2299,6 +2314,7 @@ module DBB {
             editablePropertyInfo["NokigenText12"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[132]["fieldName"] + "_" + this.layout.items[0].items[0].items[132].items[0]["fieldName"]).getEditablePropertyInfo()["text"];
             editablePropertyInfo["NokigenText13"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[142]["fieldName"] + "_" + this.layout.items[0].items[0].items[142].items[0]["fieldName"]).getEditablePropertyInfo()["text"];
             editablePropertyInfo["NokigenText14"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[152]["fieldName"] + "_" + this.layout.items[0].items[0].items[152].items[0]["fieldName"]).getEditablePropertyInfo()["text"];
+            editablePropertyInfo["KiwarigakuTableHtml"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["html"];
             
             return editablePropertyInfo;
         }
@@ -9284,7 +9300,7 @@ module DBB {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "html": "<table border=\"1\">\n  <tbody>\n    <tr bgcolor=\"lightgrey\"><td id='R1C1'></td><td colspan=\"4\" id='R1C2'></td><td colspan=\"5\"  id='R1C6'></td></tr>\n    <tr bgcolor=\"lightgrey\" ><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td><td id='R2C7'></td><td id='R2C8'></td><td id='R2C9'></td><td id='R2C10'></td></tr>\n    <tr><td id='R3C1'></td><td id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td><td id='R3C5'></td><td id='R3C6'></td><td id='R3C7'></td><td id='R3C8'></td><td id='R3C9'></td><td id='R3C10'></td></tr>\n    <tr><td id='R4C1'></td><td id='R4C2'></td><td id='R4C3'></td><td id='R4C4'></td><td id='R4C5'></td><td id='R4C6'></td><td id='R4C7'></td><td id='R4C8'></td><td id='R4C9'></td><td id='R4C10'></td></tr>\n    <tr><td id='R5C1'></td><td id='R5C2'></td><td id='R5C3'></td><td id='R5C4'></td><td id='R5C5'></td><td id='R5C6'></td><td id='R5C7'></td><td id='R5C8'></td><td id='R5C9'></td><td id='R5C10'></td></tr>\n    <tr><td id='R6C1'></td><td id='R6C2'></td><td id='R6C3'></td><td id='R6C4'></td><td id='R6C5'></td><td id='R6C6'></td><td id='R6C7'></td><td id='R6C8'></td><td id='R6C9'></td><td id='R6C10'></td></tr>\n    <tr><td id='R7C1'></td><td id='R7C2'></td><td id='R7C3'></td><td id='R7C4'></td><td id='R7C5'></td><td id='R7C6'></td><td id='R7C7'></td><td id='R7C8'></td><td id='R7C9'></td><td id='R7C10'></td></tr>\n    <tr><td id='R8C1'></td><td id='R8C2'></td><td id='R8C3'></td><td id='R8C4'></td><td id='R8C5'></td><td id='R8C6'></td><td id='R8C7'></td><td id='R8C8'></td><td id='R8C9'></td><td id='R8C10'></td></tr>\n    <tr><td id='R9C1'></td><td id='R9C2'></td><td id='R9C3'></td><td id='R9C4'></td><td id='R9C5'></td><td id='R9C6'></td><td id='R9C7'></td><td id='R9C8'></td><td id='R9C9'></td><td id='R9C10'></td></tr>\n    <tr><td id='R10C1'></td><td id='R10C2'></td><td id='R10C3'></td><td id='R10C4'></td><td id='R10C5'></td><td id='R10C6'></td><td id='R10C7'></td><td id='R10C8'></td><td id='R10C9'></td><td id='R10C10'></td></tr>\n    <tr><td id='R11C1'></td><td id='R11C2'></td><td id='R11C3'></td><td id='R11C4'></td><td id='R11C5'></td><td id='R11C6'></td><td id='R11C7'></td><td id='R11C8'></td><td id='R11C9'></td><td id='R11C10'></td></tr>\n    <tr><td id='R12C1'></td><td id='R12C2'></td><td id='R12C3'></td><td id='R12C4'></td><td id='R12C5'></td><td id='R12C6'></td><td id='R12C7'></td><td id='R12C8'></td><td id='R12C9'></td><td id='R12C10'></td></tr>\n    <tr><td id='R13C1'></td><td id='R13C2'></td><td id='R13C3'></td><td id='R13C4'></td><td id='R13C5'></td><td id='R13C6'></td><td id='R13C7'></td><td id='R13C8'></td><td id='R13C9'></td><td id='R13C10'></td></tr>\n    <tr><td id='R14C1'></td><td id='R14C2'></td><td id='R14C3'></td><td id='R14C4'></td><td id='R14C5'></td><td id='R14C6'></td><td id='R14C7'></td><td id='R14C8'></td><td id='R14C9'></td><td id='R14C10'></td></tr>\n    <tr><td id='R15C1'></td><td id='R15C2'></td><td id='R15C3'></td><td id='R15C4'></td><td id='R15C5'></td><td id='R15C6'></td><td id='R15C7'></td><td id='R15C8'></td><td id='R15C9'></td><td id='R15C10'></td></tr>\n    <tr><td id='R16C1'></td><td id='R16C2'></td><td id='R16C3'></td><td id='R16C4'></td><td id='R16C5'></td><td id='R16C6'></td><td id='R16C7'></td><td id='R16C8'></td><td id='R16C9'></td><td id='R16C10'></td></tr>\n    <tr><td id='R17C1'></td><td id='R17C2'></td><td id='R17C3'></td><td id='R17C4'></td><td id='R17C5'></td><td id='R17C6'></td><td id='R17C7'></td><td id='R17C8'></td><td id='R17C9'></td><td id='R17C10'></td></tr>\n  </tbody>\n</table>\n"
+     "html": "<table border=\"1\">\n  <tbody>\n    <tr bgcolor=\"lightgrey\"><td id='R1C1'></td><td colspan=\"4\" id='R1C2'></td><td colspan=\"5\"  id='R1C6'></td></tr>\n    <tr bgcolor=\"lightgrey\" ><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td><td id='R2C7'></td><td id='R2C8'></td><td id='R2C9'></td><td id='R2C10'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R3C1'></td><td id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td><td id='R3C5'></td><td id='R3C6'></td><td id='R3C7'></td><td id='R3C8'></td><td id='R3C9'></td><td id='R3C10'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R4C1'></td><td id='R4C2'></td><td id='R4C3'></td><td id='R4C4'></td><td id='R4C5'></td><td id='R4C6'></td><td id='R4C7'></td><td id='R4C8'></td><td id='R4C9'></td><td id='R4C10'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R5C1'></td><td id='R5C2'></td><td id='R5C3'></td><td id='R5C4'></td><td id='R5C5'></td><td id='R5C6'></td><td id='R5C7'></td><td id='R5C8'></td><td id='R5C9'></td><td id='R5C10'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R6C1'></td><td id='R6C2'></td><td id='R6C3'></td><td id='R6C4'></td><td id='R6C5'></td><td id='R6C6'></td><td id='R6C7'></td><td id='R6C8'></td><td id='R6C9'></td><td id='R6C10'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R7C1'></td><td id='R7C2'></td><td id='R7C3'></td><td id='R7C4'></td><td id='R7C5'></td><td id='R7C6'></td><td id='R7C7'></td><td id='R7C8'></td><td id='R7C9'></td><td id='R7C10'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R8C1'></td><td id='R8C2'></td><td id='R8C3'></td><td id='R8C4'></td><td id='R8C5'></td><td id='R8C6'></td><td id='R8C7'></td><td id='R8C8'></td><td id='R8C9'></td><td id='R8C10'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R9C1'></td><td id='R9C2'></td><td id='R9C3'></td><td id='R9C4'></td><td id='R9C5'></td><td id='R9C6'></td><td id='R9C7'></td><td id='R9C8'></td><td id='R9C9'></td><td id='R9C10'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R10C1'></td><td id='R10C2'></td><td id='R10C3'></td><td id='R10C4'></td><td id='R10C5'></td><td id='R10C6'></td><td id='R10C7'></td><td id='R10C8'></td><td id='R10C9'></td><td id='R10C10'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R11C1'></td><td id='R11C2'></td><td id='R11C3'></td><td id='R11C4'></td><td id='R11C5'></td><td id='R11C6'></td><td id='R11C7'></td><td id='R11C8'></td><td id='R11C9'></td><td id='R11C10'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R12C1'></td><td id='R12C2'></td><td id='R12C3'></td><td id='R12C4'></td><td id='R12C5'></td><td id='R12C6'></td><td id='R12C7'></td><td id='R12C8'></td><td id='R12C9'></td><td id='R12C10'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R13C1'></td><td id='R13C2'></td><td id='R13C3'></td><td id='R13C4'></td><td id='R13C5'></td><td id='R13C6'></td><td id='R13C7'></td><td id='R13C8'></td><td id='R13C9'></td><td id='R13C10'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R14C1'></td><td id='R14C2'></td><td id='R14C3'></td><td id='R14C4'></td><td id='R14C5'></td><td id='R14C6'></td><td id='R14C7'></td><td id='R14C8'></td><td id='R14C9'></td><td id='R14C10'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R15C1'></td><td id='R15C2'></td><td id='R15C3'></td><td id='R15C4'></td><td id='R15C5'></td><td id='R15C6'></td><td id='R15C7'></td><td id='R15C8'></td><td id='R15C9'></td><td id='R15C10'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R16C1'></td><td id='R16C2'></td><td id='R16C3'></td><td id='R16C4'></td><td id='R16C5'></td><td id='R16C6'></td><td id='R16C7'></td><td id='R16C8'></td><td id='R16C9'></td><td id='R16C10'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R17C1'></td><td id='R17C2'></td><td id='R17C3'></td><td id='R17C4'></td><td id='R17C5'></td><td id='R17C6'></td><td id='R17C7'></td><td id='R17C8'></td><td id='R17C9'></td><td id='R17C10'></td></tr>\n  </tbody>\n</table>\n"
     }
    ],
    "controlType": "Panel",
@@ -10055,6 +10071,11 @@ module DBB {
    "publicChildFieldName": "lblNokigen14",
    "publicChildProperty": "text",
    "newPropertyName": "NokigenText14"
+  },
+  {
+   "publicChildFieldName": "tblKiwariGakuMaeAto",
+   "publicChildProperty": "html",
+   "newPropertyName": "KiwarigakuTableHtml"
   }
  ],
  "dataPassingForDialog": [],
