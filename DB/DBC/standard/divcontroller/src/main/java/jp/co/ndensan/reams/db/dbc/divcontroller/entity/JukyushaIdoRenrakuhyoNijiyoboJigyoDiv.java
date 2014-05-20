@@ -21,8 +21,6 @@ public class JukyushaIdoRenrakuhyoNijiyoboJigyoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblNijiyoboJigyoKubun")
-    private Label lblNijiyoboJigyoKubun;
     @JsonProperty("radNijiyoboJigyoKubun")
     private RadioButton radNijiyoboJigyoKubun;
     @JsonProperty("txtNijiyoboJigyoYukoDateRange")
@@ -34,16 +32,6 @@ public class JukyushaIdoRenrakuhyoNijiyoboJigyoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblNijiyoboJigyoKubun")
-    public Label getLblNijiyoboJigyoKubun() {
-        return lblNijiyoboJigyoKubun;
-    }
-
-    @JsonProperty("lblNijiyoboJigyoKubun")
-    public void setLblNijiyoboJigyoKubun(Label lblNijiyoboJigyoKubun) {
-        this.lblNijiyoboJigyoKubun=lblNijiyoboJigyoKubun;
-    }
-
     @JsonProperty("radNijiyoboJigyoKubun")
     public RadioButton getRadNijiyoboJigyoKubun() {
         return radNijiyoboJigyoKubun;
