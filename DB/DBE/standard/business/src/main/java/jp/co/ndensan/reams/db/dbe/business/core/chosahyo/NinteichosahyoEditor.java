@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.chosahyo;
 
+import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.INinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.INinteichosaItemKubun;
@@ -19,8 +20,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class NinteichosahyoEditor<E extends INinteichosaItemKubun, T extends INinteichosaItem> {
 
-    private Map<E, T> regulation;
-    private final INinteichosaItemGroup[] itemGroup;
+    private final Map<E, T> regulation;
+    private final List<INinteichosaItemGroup> itemGroup;
 
     /**
      * インスタンスを生成します。
@@ -109,7 +110,8 @@ public class NinteichosahyoEditor<E extends INinteichosaItemKubun, T extends INi
      * 調査結果が設定されているかどうか判定します。
      *
      * @param itemKubun 調査項目区分
-     * @return 調査結果が設定済みの場合はtrueを返します。指定した調査項目が存在しない場合、または調査結果が未設定の場合はfalseを返します。
+     * @return
+     * 調査結果が設定済みの場合はtrueを返します。指定した調査項目が存在しない場合、または調査結果が未設定の場合はfalseを返します。
      */
     public boolean isResultSet(E itemKubun) {
         T result = regulation.get(itemKubun);

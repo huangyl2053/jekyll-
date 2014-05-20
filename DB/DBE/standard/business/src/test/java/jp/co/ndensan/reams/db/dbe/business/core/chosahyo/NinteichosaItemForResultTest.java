@@ -5,7 +5,6 @@
 package jp.co.ndensan.reams.db.dbe.business.core.chosahyo;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ChoiceItem;
-import jp.co.ndensan.reams.db.dbe.business.NinteichosahyoFactory;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.INinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.INinteichosaItemSubGroup;

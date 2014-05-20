@@ -48,7 +48,36 @@ public class DbT5002NinteiKekkaJohoEntity implements IDbAccessable {
     private RString ichijiHnateiKekkaHenkoRiyu;
     private Code yokaigoJotaizoReiCode;
     private RString ninteishinsakaiIkenShurui;
-    private RString kaigoServiceShurui;
+    private RString kaigoServiceShurui01;
+    private RString kaigoServiceShurui02;
+    private RString kaigoServiceShurui03;
+    private RString kaigoServiceShurui04;
+    private RString kaigoServiceShurui05;
+    private RString kaigoServiceShurui06;
+    private RString kaigoServiceShurui07;
+    private RString kaigoServiceShurui08;
+    private RString kaigoServiceShurui09;
+    private RString kaigoServiceShurui10;
+    private RString kaigoServiceShurui11;
+    private RString kaigoServiceShurui12;
+    private RString kaigoServiceShurui13;
+    private RString kaigoServiceShurui14;
+    private RString kaigoServiceShurui15;
+    private RString kaigoServiceShurui16;
+    private RString kaigoServiceShurui17;
+    private RString kaigoServiceShurui18;
+    private RString kaigoServiceShurui19;
+    private RString kaigoServiceShurui20;
+    private RString kaigoServiceShurui21;
+    private RString kaigoServiceShurui22;
+    private RString kaigoServiceShurui23;
+    private RString kaigoServiceShurui24;
+    private RString kaigoServiceShurui25;
+    private RString kaigoServiceShurui26;
+    private RString kaigoServiceShurui27;
+    private RString kaigoServiceShurui28;
+    private RString kaigoServiceShurui29;
+    private RString kaigoServiceShurui30;
     private RString ninteiKekkaIdoJiyu;
     private FlexibleDate ninteiKekkaIdoYMD;
     private RString ninteiTorikeshiRiyu;
@@ -373,21 +402,543 @@ public class DbT5002NinteiKekkaJohoEntity implements IDbAccessable {
     }
 
     /**
-     * getKaigoServiceShurui
+     * getKaigoServiceShurui01
      *
-     * @return kaigoServiceShurui
+     * @return kaigoServiceShurui01
      */
-    public RString getKaigoServiceShurui() {
-        return kaigoServiceShurui;
+    public RString getKaigoServiceShurui01() {
+        return kaigoServiceShurui01;
     }
 
     /**
-     * setKaigoServiceShurui
+     * setKaigoServiceShurui01
      *
-     * @param kaigoServiceShurui kaigoServiceShurui
+     * @param kaigoServiceShurui01 kaigoServiceShurui01
      */
-    public void setKaigoServiceShurui(RString kaigoServiceShurui) {
-        this.kaigoServiceShurui = kaigoServiceShurui;
+    public void setKaigoServiceShurui01(RString kaigoServiceShurui01) {
+        this.kaigoServiceShurui01 = kaigoServiceShurui01;
+    }
+
+    /**
+     * getKaigoServiceShurui02
+     *
+     * @return kaigoServiceShurui02
+     */
+    public RString getKaigoServiceShurui02() {
+        return kaigoServiceShurui02;
+    }
+
+    /**
+     * setKaigoServiceShurui02
+     *
+     * @param kaigoServiceShurui02 kaigoServiceShurui02
+     */
+    public void setKaigoServiceShurui02(RString kaigoServiceShurui02) {
+        this.kaigoServiceShurui02 = kaigoServiceShurui02;
+    }
+
+    /**
+     * getKaigoServiceShurui03
+     *
+     * @return kaigoServiceShurui03
+     */
+    public RString getKaigoServiceShurui03() {
+        return kaigoServiceShurui03;
+    }
+
+    /**
+     * setKaigoServiceShurui03
+     *
+     * @param kaigoServiceShurui03 kaigoServiceShurui03
+     */
+    public void setKaigoServiceShurui03(RString kaigoServiceShurui03) {
+        this.kaigoServiceShurui03 = kaigoServiceShurui03;
+    }
+
+    /**
+     * getKaigoServiceShurui04
+     *
+     * @return kaigoServiceShurui04
+     */
+    public RString getKaigoServiceShurui04() {
+        return kaigoServiceShurui04;
+    }
+
+    /**
+     * setKaigoServiceShurui04
+     *
+     * @param kaigoServiceShurui04 kaigoServiceShurui04
+     */
+    public void setKaigoServiceShurui04(RString kaigoServiceShurui04) {
+        this.kaigoServiceShurui04 = kaigoServiceShurui04;
+    }
+
+    /**
+     * getKaigoServiceShurui05
+     *
+     * @return kaigoServiceShurui05
+     */
+    public RString getKaigoServiceShurui05() {
+        return kaigoServiceShurui05;
+    }
+
+    /**
+     * setKaigoServiceShurui05
+     *
+     * @param kaigoServiceShurui05 kaigoServiceShurui05
+     */
+    public void setKaigoServiceShurui05(RString kaigoServiceShurui05) {
+        this.kaigoServiceShurui05 = kaigoServiceShurui05;
+    }
+
+    /**
+     * getKaigoServiceShurui06
+     *
+     * @return kaigoServiceShurui06
+     */
+    public RString getKaigoServiceShurui06() {
+        return kaigoServiceShurui06;
+    }
+
+    /**
+     * setKaigoServiceShurui06
+     *
+     * @param kaigoServiceShurui06 kaigoServiceShurui06
+     */
+    public void setKaigoServiceShurui06(RString kaigoServiceShurui06) {
+        this.kaigoServiceShurui06 = kaigoServiceShurui06;
+    }
+
+    /**
+     * getKaigoServiceShurui07
+     *
+     * @return kaigoServiceShurui07
+     */
+    public RString getKaigoServiceShurui07() {
+        return kaigoServiceShurui07;
+    }
+
+    /**
+     * setKaigoServiceShurui07
+     *
+     * @param kaigoServiceShurui07 kaigoServiceShurui07
+     */
+    public void setKaigoServiceShurui07(RString kaigoServiceShurui07) {
+        this.kaigoServiceShurui07 = kaigoServiceShurui07;
+    }
+
+    /**
+     * getKaigoServiceShurui08
+     *
+     * @return kaigoServiceShurui08
+     */
+    public RString getKaigoServiceShurui08() {
+        return kaigoServiceShurui08;
+    }
+
+    /**
+     * setKaigoServiceShurui08
+     *
+     * @param kaigoServiceShurui08 kaigoServiceShurui08
+     */
+    public void setKaigoServiceShurui08(RString kaigoServiceShurui08) {
+        this.kaigoServiceShurui08 = kaigoServiceShurui08;
+    }
+
+    /**
+     * getKaigoServiceShurui09
+     *
+     * @return kaigoServiceShurui09
+     */
+    public RString getKaigoServiceShurui09() {
+        return kaigoServiceShurui09;
+    }
+
+    /**
+     * setKaigoServiceShurui09
+     *
+     * @param kaigoServiceShurui09 kaigoServiceShurui09
+     */
+    public void setKaigoServiceShurui09(RString kaigoServiceShurui09) {
+        this.kaigoServiceShurui09 = kaigoServiceShurui09;
+    }
+
+    /**
+     * getKaigoServiceShurui10
+     *
+     * @return kaigoServiceShurui10
+     */
+    public RString getKaigoServiceShurui10() {
+        return kaigoServiceShurui10;
+    }
+
+    /**
+     * setKaigoServiceShurui10
+     *
+     * @param kaigoServiceShurui10 kaigoServiceShurui10
+     */
+    public void setKaigoServiceShurui10(RString kaigoServiceShurui10) {
+        this.kaigoServiceShurui10 = kaigoServiceShurui10;
+    }
+
+    /**
+     * getKaigoServiceShurui11
+     *
+     * @return kaigoServiceShurui11
+     */
+    public RString getKaigoServiceShurui11() {
+        return kaigoServiceShurui11;
+    }
+
+    /**
+     * setKaigoServiceShurui11
+     *
+     * @param kaigoServiceShurui11 kaigoServiceShurui11
+     */
+    public void setKaigoServiceShurui11(RString kaigoServiceShurui11) {
+        this.kaigoServiceShurui11 = kaigoServiceShurui11;
+    }
+
+    /**
+     * getKaigoServiceShurui12
+     *
+     * @return kaigoServiceShurui12
+     */
+    public RString getKaigoServiceShurui12() {
+        return kaigoServiceShurui12;
+    }
+
+    /**
+     * setKaigoServiceShurui12
+     *
+     * @param kaigoServiceShurui12 kaigoServiceShurui12
+     */
+    public void setKaigoServiceShurui12(RString kaigoServiceShurui12) {
+        this.kaigoServiceShurui12 = kaigoServiceShurui12;
+    }
+
+    /**
+     * getKaigoServiceShurui13
+     *
+     * @return kaigoServiceShurui13
+     */
+    public RString getKaigoServiceShurui13() {
+        return kaigoServiceShurui13;
+    }
+
+    /**
+     * setKaigoServiceShurui13
+     *
+     * @param kaigoServiceShurui13 kaigoServiceShurui13
+     */
+    public void setKaigoServiceShurui13(RString kaigoServiceShurui13) {
+        this.kaigoServiceShurui13 = kaigoServiceShurui13;
+    }
+
+    /**
+     * getKaigoServiceShurui14
+     *
+     * @return kaigoServiceShurui14
+     */
+    public RString getKaigoServiceShurui14() {
+        return kaigoServiceShurui14;
+    }
+
+    /**
+     * setKaigoServiceShurui14
+     *
+     * @param kaigoServiceShurui14 kaigoServiceShurui14
+     */
+    public void setKaigoServiceShurui14(RString kaigoServiceShurui14) {
+        this.kaigoServiceShurui14 = kaigoServiceShurui14;
+    }
+
+    /**
+     * getKaigoServiceShurui15
+     *
+     * @return kaigoServiceShurui15
+     */
+    public RString getKaigoServiceShurui15() {
+        return kaigoServiceShurui15;
+    }
+
+    /**
+     * setKaigoServiceShurui15
+     *
+     * @param kaigoServiceShurui15 kaigoServiceShurui15
+     */
+    public void setKaigoServiceShurui15(RString kaigoServiceShurui15) {
+        this.kaigoServiceShurui15 = kaigoServiceShurui15;
+    }
+
+    /**
+     * getKaigoServiceShurui16
+     *
+     * @return kaigoServiceShurui16
+     */
+    public RString getKaigoServiceShurui16() {
+        return kaigoServiceShurui16;
+    }
+
+    /**
+     * setKaigoServiceShurui16
+     *
+     * @param kaigoServiceShurui16 kaigoServiceShurui16
+     */
+    public void setKaigoServiceShurui16(RString kaigoServiceShurui16) {
+        this.kaigoServiceShurui16 = kaigoServiceShurui16;
+    }
+
+    /**
+     * getKaigoServiceShurui17
+     *
+     * @return kaigoServiceShurui17
+     */
+    public RString getKaigoServiceShurui17() {
+        return kaigoServiceShurui17;
+    }
+
+    /**
+     * setKaigoServiceShurui17
+     *
+     * @param kaigoServiceShurui17 kaigoServiceShurui17
+     */
+    public void setKaigoServiceShurui17(RString kaigoServiceShurui17) {
+        this.kaigoServiceShurui17 = kaigoServiceShurui17;
+    }
+
+    /**
+     * getKaigoServiceShurui18
+     *
+     * @return kaigoServiceShurui18
+     */
+    public RString getKaigoServiceShurui18() {
+        return kaigoServiceShurui18;
+    }
+
+    /**
+     * setKaigoServiceShurui18
+     *
+     * @param kaigoServiceShurui18 kaigoServiceShurui18
+     */
+    public void setKaigoServiceShurui18(RString kaigoServiceShurui18) {
+        this.kaigoServiceShurui18 = kaigoServiceShurui18;
+    }
+
+    /**
+     * getKaigoServiceShurui19
+     *
+     * @return kaigoServiceShurui19
+     */
+    public RString getKaigoServiceShurui19() {
+        return kaigoServiceShurui19;
+    }
+
+    /**
+     * setKaigoServiceShurui19
+     *
+     * @param kaigoServiceShurui19 kaigoServiceShurui19
+     */
+    public void setKaigoServiceShurui19(RString kaigoServiceShurui19) {
+        this.kaigoServiceShurui19 = kaigoServiceShurui19;
+    }
+
+    /**
+     * getKaigoServiceShurui20
+     *
+     * @return kaigoServiceShurui20
+     */
+    public RString getKaigoServiceShurui20() {
+        return kaigoServiceShurui20;
+    }
+
+    /**
+     * setKaigoServiceShurui20
+     *
+     * @param kaigoServiceShurui20 kaigoServiceShurui20
+     */
+    public void setKaigoServiceShurui20(RString kaigoServiceShurui20) {
+        this.kaigoServiceShurui20 = kaigoServiceShurui20;
+    }
+
+    /**
+     * getKaigoServiceShurui21
+     *
+     * @return kaigoServiceShurui21
+     */
+    public RString getKaigoServiceShurui21() {
+        return kaigoServiceShurui21;
+    }
+
+    /**
+     * setKaigoServiceShurui21
+     *
+     * @param kaigoServiceShurui21 kaigoServiceShurui21
+     */
+    public void setKaigoServiceShurui21(RString kaigoServiceShurui21) {
+        this.kaigoServiceShurui21 = kaigoServiceShurui21;
+    }
+
+    /**
+     * getKaigoServiceShurui22
+     *
+     * @return kaigoServiceShurui22
+     */
+    public RString getKaigoServiceShurui22() {
+        return kaigoServiceShurui22;
+    }
+
+    /**
+     * setKaigoServiceShurui22
+     *
+     * @param kaigoServiceShurui22 kaigoServiceShurui22
+     */
+    public void setKaigoServiceShurui22(RString kaigoServiceShurui22) {
+        this.kaigoServiceShurui22 = kaigoServiceShurui22;
+    }
+
+    /**
+     * getKaigoServiceShurui23
+     *
+     * @return kaigoServiceShurui23
+     */
+    public RString getKaigoServiceShurui23() {
+        return kaigoServiceShurui23;
+    }
+
+    /**
+     * setKaigoServiceShurui23
+     *
+     * @param kaigoServiceShurui23 kaigoServiceShurui23
+     */
+    public void setKaigoServiceShurui23(RString kaigoServiceShurui23) {
+        this.kaigoServiceShurui23 = kaigoServiceShurui23;
+    }
+
+    /**
+     * getKaigoServiceShurui24
+     *
+     * @return kaigoServiceShurui24
+     */
+    public RString getKaigoServiceShurui24() {
+        return kaigoServiceShurui24;
+    }
+
+    /**
+     * setKaigoServiceShurui24
+     *
+     * @param kaigoServiceShurui24 kaigoServiceShurui24
+     */
+    public void setKaigoServiceShurui24(RString kaigoServiceShurui24) {
+        this.kaigoServiceShurui24 = kaigoServiceShurui24;
+    }
+
+    /**
+     * getKaigoServiceShurui25
+     *
+     * @return kaigoServiceShurui25
+     */
+    public RString getKaigoServiceShurui25() {
+        return kaigoServiceShurui25;
+    }
+
+    /**
+     * setKaigoServiceShurui25
+     *
+     * @param kaigoServiceShurui25 kaigoServiceShurui25
+     */
+    public void setKaigoServiceShurui25(RString kaigoServiceShurui25) {
+        this.kaigoServiceShurui25 = kaigoServiceShurui25;
+    }
+
+    /**
+     * getKaigoServiceShurui26
+     *
+     * @return kaigoServiceShurui26
+     */
+    public RString getKaigoServiceShurui26() {
+        return kaigoServiceShurui26;
+    }
+
+    /**
+     * setKaigoServiceShurui26
+     *
+     * @param kaigoServiceShurui26 kaigoServiceShurui26
+     */
+    public void setKaigoServiceShurui26(RString kaigoServiceShurui26) {
+        this.kaigoServiceShurui26 = kaigoServiceShurui26;
+    }
+
+    /**
+     * getKaigoServiceShurui27
+     *
+     * @return kaigoServiceShurui27
+     */
+    public RString getKaigoServiceShurui27() {
+        return kaigoServiceShurui27;
+    }
+
+    /**
+     * setKaigoServiceShurui27
+     *
+     * @param kaigoServiceShurui27 kaigoServiceShurui27
+     */
+    public void setKaigoServiceShurui27(RString kaigoServiceShurui27) {
+        this.kaigoServiceShurui27 = kaigoServiceShurui27;
+    }
+
+    /**
+     * getKaigoServiceShurui28
+     *
+     * @return kaigoServiceShurui28
+     */
+    public RString getKaigoServiceShurui28() {
+        return kaigoServiceShurui28;
+    }
+
+    /**
+     * setKaigoServiceShurui28
+     *
+     * @param kaigoServiceShurui28 kaigoServiceShurui28
+     */
+    public void setKaigoServiceShurui28(RString kaigoServiceShurui28) {
+        this.kaigoServiceShurui28 = kaigoServiceShurui28;
+    }
+
+    /**
+     * getKaigoServiceShurui29
+     *
+     * @return kaigoServiceShurui29
+     */
+    public RString getKaigoServiceShurui29() {
+        return kaigoServiceShurui29;
+    }
+
+    /**
+     * setKaigoServiceShurui29
+     *
+     * @param kaigoServiceShurui29 kaigoServiceShurui29
+     */
+    public void setKaigoServiceShurui29(RString kaigoServiceShurui29) {
+        this.kaigoServiceShurui29 = kaigoServiceShurui29;
+    }
+
+    /**
+     * getKaigoServiceShurui30
+     *
+     * @return kaigoServiceShurui30
+     */
+    public RString getKaigoServiceShurui30() {
+        return kaigoServiceShurui30;
+    }
+
+    /**
+     * setKaigoServiceShurui30
+     *
+     * @param kaigoServiceShurui30 kaigoServiceShurui30
+     */
+    public void setKaigoServiceShurui30(RString kaigoServiceShurui30) {
+        this.kaigoServiceShurui30 = kaigoServiceShurui30;
     }
 
     /**

@@ -101,7 +101,7 @@ public class NinteiResultManagerTest extends DbeTestBase {
     }
 
     private static IKaigoService createKaigoService() {
-        IKaigoServiceShurui shurui = createNinteiResult().get介護サービス種類();
+        IKaigoServiceShurui shurui = createNinteiResult().get介護サービス種類０１();
         IKaigoService service = mock(IKaigoService.class);
         when(service.get介護サービス種類()).thenReturn(shurui);
         return service;
