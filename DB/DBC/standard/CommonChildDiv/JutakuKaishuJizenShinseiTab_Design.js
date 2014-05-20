@@ -1301,7 +1301,7 @@ var DBC;
                                             "marginLeft": "XS",
                                             "marginRight": "0",
                                             "onLoad": "",
-                                            "title": "リセット情報",
+                                            "title": "限度額リセット",
                                             "marginTop": "Default",
                                             "marginBottom": "Default",
                                             "isOpen": true,

@@ -2310,7 +2310,7 @@
      "marginLeft": "XS",
      "marginRight": "0",
      "onLoad": "",
-     "title": "リセット情報",
+     "title": "限度額リセット",
      "isOpen": true,
      "canOpenAndClose": true,
      "postParameterPanelNames": [
@@ -2700,7 +2700,7 @@
    ]
   }
  ],
- "currentState": "All",
+ "currentState": "申請登録",
  "id": "DBC0710011",
  "WFParameter": [],
  "UIContainerEventMapping": [],
