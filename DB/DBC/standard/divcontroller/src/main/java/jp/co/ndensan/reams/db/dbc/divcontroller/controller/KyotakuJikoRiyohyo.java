@@ -78,26 +78,68 @@ public class KyotakuJikoRiyohyo {
     public ResponseData onClickRiyohyoMeisaiAdd(KyotakuJikoRiyohyoDiv panel) {
         ResponseData<KyotakuJikoRiyohyoDiv> response = new ResponseData<>();
 
-        DataGrid<dgServiceRiyohyoList_Row> dgRiyohyo = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyo().getDgServiceRiyohyoList();
+        DataGrid<dgServiceRiyohyoList_Row> dgRiyohyo = panel.getKyotakuJikoRiyohyoInfo().
+                getTabServiceRiyohyo().getServiceRiyohyo().getDgServiceRiyohyoList();
         List<dgServiceRiyohyoList_Row> dgRiyohyoList = dgRiyohyo.getDataSource();
-
         Button btnDelete = new Button();
         Button btnService = new Button();
         Button btnJigyosha = new Button();
 
+        // デモ向けにデータ決め打ちで明細行を追加する。
         dgServiceRiyohyoList_Row rowItem = createサービス利用票(btnDelete,
+                "10:00",
+                "15:00",
+                btnService,
+                "111111:通所介護",
+                btnJigyosha,
+                "1111111111:電算介護サービス",
+                "予",
+                "1", "1", "1", "1", "1", "1", "1", "1", "1", "1",
+                "2", "2", "2", "2", "2", "2", "2", "2", "2", "2",
+                "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3",
+                "63");
+        dgRiyohyoList.add(rowItem);
+        rowItem = createサービス利用票(btnDelete,
                 "",
                 "",
                 btnService,
                 "",
                 btnJigyosha,
                 "",
-                "",
+                "実",
                 "0", "0", "0", "0", "0", "0", "0", "0", "0", "0",
                 "0", "0", "0", "0", "0", "0", "0", "0", "0", "0",
                 "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0",
                 "0");
 
+        // デモ向けではない空の明細行を追加する。
+//        rowItem = createサービス利用票(btnDelete,
+//                "",
+//                "",
+//                btnService,
+//                "",
+//                btnJigyosha,
+//                "",
+//                "予",
+//                "0", "0", "0", "0", "0", "0", "0", "0", "0", "0",
+//                "0", "0", "0", "0", "0", "0", "0", "0", "0", "0",
+//                "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0",
+//                "0");
+//
+//        dgRiyohyoList.add(rowItem);
+//        rowItem = createサービス利用票(btnDelete,
+//                "",
+//                "",
+//                btnService,
+//                "",
+//                btnJigyosha,
+//                "",
+//                "実",
+//                "0", "0", "0", "0", "0", "0", "0", "0", "0", "0",
+//                "0", "0", "0", "0", "0", "0", "0", "0", "0", "0",
+//                "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0",
+//                "0");
+//
         dgRiyohyoList.add(rowItem);
         dgRiyohyo.setDataSource(dgRiyohyoList);
 
@@ -113,8 +155,8 @@ public class KyotakuJikoRiyohyo {
      */
     public ResponseData onClickServiceRiyohyoListDelete(KyotakuJikoRiyohyoDiv panel) {
         ResponseData<KyotakuJikoRiyohyoDiv> response = new ResponseData<>();
-        panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyo().getDgServiceRiyohyoList().
-                getActiveRow().setRowState(RowState.Deleted);
+        panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyo().
+                getDgServiceRiyohyoList().getActiveRow().setRowState(RowState.Deleted);
         response.data = panel;
         return response;
     }
@@ -122,7 +164,7 @@ public class KyotakuJikoRiyohyo {
     /**
      * KyotakuJikoRiyohyoInfoの別票Tabの「明細情報を追加する」ボタン押下時の処理
      *
-     * @param panel
+     * @param panel panel
      * @return ResponseData
      */
     public ResponseData onClickBeppyoMeisaiNew(KyotakuJikoRiyohyoDiv panel) {
@@ -137,7 +179,7 @@ public class KyotakuJikoRiyohyo {
     /**
      * KyotakuJikoRiyohyoInfoの別票Tabの「合計情報を追加する」ボタン押下時の処理
      *
-     * @param panel
+     * @param panel panel
      * @return ResponseData
      */
     public ResponseData onClickBeppyoGokeiNew(KyotakuJikoRiyohyoDiv panel) {
@@ -157,8 +199,8 @@ public class KyotakuJikoRiyohyo {
      */
     public ResponseData onClickServiceRiyohyoBeppyoListSelect(KyotakuJikoRiyohyoDiv panel) {
         ResponseData<KyotakuJikoRiyohyoDiv> response = new ResponseData<>();
-        dgServiceRiyohyoBeppyoList_Row row = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo().
-                getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getActiveRow();
+        dgServiceRiyohyoBeppyoList_Row row = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().
+                getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getActiveRow();
         int index = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo().
                 getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getActiveRowId();
         panel.getTxtBeppyoListSelectIndex().setValue(new RString(String.valueOf(index)));
@@ -175,9 +217,10 @@ public class KyotakuJikoRiyohyo {
     }
 
     private void beppyoMeisaiModify(KyotakuJikoRiyohyoDiv panel) {
-        dgServiceRiyohyoBeppyoList_Row row = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo().
-                getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getActiveRow();
-        ServiceRiyohyoBeppyoMeisaiDiv meisai = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
+        dgServiceRiyohyoBeppyoList_Row row = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().
+                getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getActiveRow();
+        ServiceRiyohyoBeppyoMeisaiDiv meisai = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().
+                getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
         meisai.getTxtJigyoshaCode().setValue(row.getTxtJigyosha().substring(0, 10));
         meisai.getTxtJigyoshaName().setValue(row.getTxtJigyosha().substring(11));
         meisai.getTxtServiceShuruiCode().setValue(row.getTxtService().substring(0, 2));
@@ -193,9 +236,10 @@ public class KyotakuJikoRiyohyo {
     }
 
     private void beppyoGokeiModify(KyotakuJikoRiyohyoDiv panel) {
-        dgServiceRiyohyoBeppyoList_Row row = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo().
-                getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getActiveRow();
-        ServiceRiyohyoBeppyoGokeiDiv gokei = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoGokei();
+        dgServiceRiyohyoBeppyoList_Row row = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().
+                getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getActiveRow();
+        ServiceRiyohyoBeppyoGokeiDiv gokei = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().
+                getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoGokei();
         gokei.getTxtShuruiGendoChokaTani().setValue(new Decimal(row.getTxtShuruiGendoChokaTani().toString()));
         gokei.getTxtShuruiGendonaiTani().setValue(new Decimal(row.getTxtShuruiGendonaiTani().toString()));
         gokei.getTxtTanisuTanka().setValue(new Decimal(row.getTxtTanisuTanka().toString()));
@@ -227,7 +271,7 @@ public class KyotakuJikoRiyohyo {
     /**
      * KyotakuJikoRiyohyoInfoの別票Tabの「明細情報を確定する」ボタン押下時の処理
      *
-     * @param panel
+     * @param panel panel
      * @return ResponseData
      */
     public ResponseData onClickBeppyoMeisaiKakutei(KyotakuJikoRiyohyoDiv panel) {
@@ -242,7 +286,7 @@ public class KyotakuJikoRiyohyo {
     /**
      * KyotakuJikoRiyohyoInfoの別票Tabの「合計情報を確定する」ボタン押下時の処理
      *
-     * @param panel
+     * @param panel panel
      * @return ResponseData
      */
     public ResponseData onClickBeppyoGokeiKakutei(KyotakuJikoRiyohyoDiv panel) {
@@ -255,20 +299,33 @@ public class KyotakuJikoRiyohyo {
     }
 
     /**
+     * 利用票のデータ設定
+     */
+    private void setRiyohyoData(KyotakuJikoRiyohyoDiv panel) {
+        setSummaryData(panel);
+        setServiceRiyohyoData(panel);
+        setServiceRiyohyoBeppyoData(panel);
+    }
+
+    /**
      * yotakuJikoRiyohyoInfoの別票Tabの明細のデータを一覧に反映する。
      *
      * @param panel panel
      */
     private void setBeppyoListMeisaiKakutei(KyotakuJikoRiyohyoDiv panel) {
-        ServiceRiyohyoBeppyoListDiv beppyoList = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoList();
-        ServiceRiyohyoBeppyoMeisaiDiv meisai = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
+        ServiceRiyohyoBeppyoListDiv beppyoList = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().
+                getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoList();
+        ServiceRiyohyoBeppyoMeisaiDiv meisai = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().
+                getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
         List<dgServiceRiyohyoBeppyoList_Row> listRow = beppyoList.getDgServiceRiyohyoBeppyoList().getDataSource();
         int index = Integer.parseInt(panel.getTxtBeppyoListSelectIndex().getValue().toString());
 
         Button btnSelect = new Button();
         Button btnDelete = new Button();
-        RString jigyosha = meisai.getTxtJigyoshaCode().getValue().concat(new RString(":")).concat(meisai.getTxtJigyoshaName().getValue());
-        RString service = meisai.getTxtServiceShuruiCode().getValue().concat(meisai.getTxtServiceCode().getValue()).concat(new RString(":")).concat(meisai.getTxtServiceName().getValue());
+        RString jigyosha = meisai.getTxtJigyoshaCode().getValue().concat(new RString(":")).
+                concat(meisai.getTxtJigyoshaName().getValue());
+        RString service = meisai.getTxtServiceShuruiCode().getValue().concat(meisai.getTxtServiceCode().getValue()).
+                concat(new RString(":")).concat(meisai.getTxtServiceName().getValue());
 
         dgServiceRiyohyoBeppyoList_Row rowItem;
         rowItem = create別票一覧リスト(
@@ -291,6 +348,10 @@ public class KyotakuJikoRiyohyo {
                 rowItem.setRowState(RowState.Modified);
                 listRow.remove(index);
                 listRow.add(index, rowItem);
+            } else {
+                rowItem.setRowState(RowState.Unchanged);
+                listRow.remove(index);
+                listRow.add(index, rowItem);
             }
         }
         panel.getTxtBeppyoListSelectIndex().setValue(new RString("-1"));
@@ -299,11 +360,15 @@ public class KyotakuJikoRiyohyo {
     }
 
     private boolean validateMeisai(KyotakuJikoRiyohyoDiv panel, int index) {
-        ServiceRiyohyoBeppyoMeisaiDiv meisai = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
-        List<dgServiceRiyohyoBeppyoList_Row> listRow = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource();
+        ServiceRiyohyoBeppyoMeisaiDiv meisai = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().
+                getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
+        List<dgServiceRiyohyoBeppyoList_Row> listRow = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().
+                getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource();
         dgServiceRiyohyoBeppyoList_Row currentRow = listRow.get(index);
 
-        if (meisai.getTxtKaisu().getValue().equals(new Decimal(currentRow.getTxtKaisu().toString()))) {
+        if (meisai.getTxtTani().getValue().equals(new Decimal(currentRow.getTxtTani().toString()))
+                && meisai.getTxtWaribikigoRitsu().getValue().equals(new Decimal(currentRow.getTxtWaribikigoRitsu().toString()))
+                && meisai.getTxtKaisu().getValue().equals(new Decimal(currentRow.getTxtKaisu().toString()))) {
             return false;
         }
         return true;
@@ -315,8 +380,10 @@ public class KyotakuJikoRiyohyo {
      * @param panel panel
      */
     private void setBeppyoListGokeiKakutei(KyotakuJikoRiyohyoDiv panel) {
-        ServiceRiyohyoBeppyoListDiv beppyoList = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoList();
-        ServiceRiyohyoBeppyoGokeiDiv gokei = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoGokei();
+        ServiceRiyohyoBeppyoListDiv beppyoList = panel.getKyotakuJikoRiyohyoInfo().
+                getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoList();
+        ServiceRiyohyoBeppyoGokeiDiv gokei = panel.getKyotakuJikoRiyohyoInfo().
+                getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoGokei();
         List<dgServiceRiyohyoBeppyoList_Row> listRow = beppyoList.getDgServiceRiyohyoBeppyoList().getDataSource();
         int index = Integer.parseInt(panel.getTxtBeppyoListSelectIndex().getValue().toString());
 
@@ -347,6 +414,10 @@ public class KyotakuJikoRiyohyo {
                 rowItem.setRowState(RowState.Modified);
                 listRow.remove(index);
                 listRow.add(index, rowItem);
+            } else {
+                rowItem.setRowState(RowState.Unchanged);
+                listRow.remove(index);
+                listRow.add(index, rowItem);
             }
         }
         panel.getTxtBeppyoListSelectIndex().setValue(new RString("-1"));
@@ -354,12 +425,19 @@ public class KyotakuJikoRiyohyo {
     }
 
     private boolean validateGokei(KyotakuJikoRiyohyoDiv panel, int index) {
-        ServiceRiyohyoBeppyoGokeiDiv gokei = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoGokei();
-        List<dgServiceRiyohyoBeppyoList_Row> listRow = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource();
+        ServiceRiyohyoBeppyoGokeiDiv gokei = panel.getKyotakuJikoRiyohyoInfo().
+                getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoGokei();
+        List<dgServiceRiyohyoBeppyoList_Row> listRow = panel.getKyotakuJikoRiyohyoInfo().
+                getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoList().
+                getDgServiceRiyohyoBeppyoList().getDataSource();
         dgServiceRiyohyoBeppyoList_Row currentRow = listRow.get(index);
 
         if (gokei.getTxtShuruiGendoChokaTani().getValue().equals(new Decimal(currentRow.getTxtShuruiGendoChokaTani().toString()))
-                || gokei.getTxtShuruiGendonaiTani().getValue().equals(new Decimal(currentRow.getTxtShuruiGendonaiTani().toString()))) {
+                && gokei.getTxtShuruiGendonaiTani().getValue().equals(new Decimal(currentRow.getTxtShuruiGendonaiTani().toString()))
+                && gokei.getTxtTanisuTanka().getValue().equals(new Decimal(currentRow.getTxtTanisuTanka().toString()))
+                && gokei.getTxtKubunGendoChokaTani().getValue().equals(new Decimal(currentRow.getTxtKubunGendoChokaTani().toString()))
+                && gokei.getTxtKubunGendonaiTani().getValue().equals(new Decimal(currentRow.getTxtKubunGendonaiTani().toString()))
+                && gokei.getTxtKyufuritsu().getValue().equals(new Decimal(currentRow.getTxtKyufuritsu().toString()))) {
             return false;
         }
         return true;
@@ -371,7 +449,8 @@ public class KyotakuJikoRiyohyo {
      * @param panel panel
      */
     private void initRiyohyoBeppyoMeisaiData(KyotakuJikoRiyohyoDiv panel) {
-        ServiceRiyohyoBeppyoMeisaiDiv meisai = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
+        ServiceRiyohyoBeppyoMeisaiDiv meisai = panel.getKyotakuJikoRiyohyoInfo().
+                getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
         meisai.getTxtJigyoshaCode().clearValue();
         meisai.getTxtJigyoshaName().clearValue();
         meisai.getTxtServiceShuruiCode().clearValue();
@@ -390,7 +469,8 @@ public class KyotakuJikoRiyohyo {
      * @param panel panel
      */
     private void initRiyohyoBeppyoGokeiData(KyotakuJikoRiyohyoDiv panel) {
-        ServiceRiyohyoBeppyoGokeiDiv gokei = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoGokei();
+        ServiceRiyohyoBeppyoGokeiDiv gokei = panel.getKyotakuJikoRiyohyoInfo().
+                getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoGokei();
         gokei.getTxtShuruiGendoChokaTani().clearValue();
         gokei.getTxtShuruiGendonaiTani().clearValue();
         gokei.getTxtTanisuTanka().clearValue();
@@ -409,7 +489,8 @@ public class KyotakuJikoRiyohyo {
      * @param panel panel
      */
     private void setRiyohyoBeppyoMeisaiDemoData(KyotakuJikoRiyohyoDiv panel) {
-        ServiceRiyohyoBeppyoMeisaiDiv meisai = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
+        ServiceRiyohyoBeppyoMeisaiDiv meisai = panel.getKyotakuJikoRiyohyoInfo().
+                getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
         meisai.getTxtJigyoshaCode().setValue(new RString("1111111111"));
         meisai.getTxtJigyoshaName().setValue(new RString("電算サービスセンター"));
         meisai.getTxtServiceShuruiCode().setValue(new RString("11"));
@@ -428,7 +509,8 @@ public class KyotakuJikoRiyohyo {
      * @param panel panel
      */
     private void setRiyohyoBeppyoGokeiDemoData(KyotakuJikoRiyohyoDiv panel) {
-        ServiceRiyohyoBeppyoGokeiDiv gokei = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoGokei();
+        ServiceRiyohyoBeppyoGokeiDiv gokei = panel.getKyotakuJikoRiyohyoInfo().
+                getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoGokei();
         gokei.getTxtShuruiGendoChokaTani().setValue(new Decimal("0"));
         gokei.getTxtShuruiGendonaiTani().setValue(new Decimal("0"));
         gokei.getTxtTanisuTanka().setValue(new Decimal("10"));
@@ -448,8 +530,8 @@ public class KyotakuJikoRiyohyo {
      * @param 表示 表示
      */
     private void setRiyohyoBeppyoVisible(KyotakuJikoRiyohyoDiv panel, 別票画面表示 表示) {
-//        ServiceRiyohyoInfoDiv info = panel.getKyotakuJikoRiyohyoInfo();
-        ServiceRiyohyoBeppyoDiv beppyo = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo();
+        ServiceRiyohyoBeppyoDiv beppyo = panel.getKyotakuJikoRiyohyoInfo().
+                getTabServiceRiyohyo().getServiceRiyohyoBeppyo();
         if (表示.equals(別票画面表示.初期表示)) {
             beppyo.getServiceRiyohyoBeppyoList().setVisible(true);
             beppyo.getServiceRiyohyoBeppyoList().setDisplayNone(false);
@@ -492,15 +574,6 @@ public class KyotakuJikoRiyohyo {
         info.getTxtGendoKanriKikan().setFromValue(new RDate("20140501"));
         info.getTxtGendoKanriKikan().setToValue(new RDate("20140531"));
 
-    }
-
-    /**
-     * 利用票のデータ設定
-     */
-    private void setRiyohyoData(KyotakuJikoRiyohyoDiv panel) {
-        setSummaryData(panel);
-        setServiceRiyohyoData(panel);
-        setServiceRiyohyoBeppyoData(panel);
     }
 
     /**
@@ -565,12 +638,12 @@ public class KyotakuJikoRiyohyo {
     }
 
     private void setServiceRiyohyoBeppyoData(KyotakuJikoRiyohyoDiv panel) {
-        ServiceRiyohyoBeppyoDiv beppyo = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo();
-
+        ServiceRiyohyoBeppyoDiv beppyo = panel.getKyotakuJikoRiyohyoInfo().
+                getTabServiceRiyohyo().getServiceRiyohyoBeppyo();
         ServiceRiyohyoBeppyoRiyoNissuDiv nissu = beppyo.getServiceRiyohyoBeppyoRiyoNissu();
         ServiceRiyohyoBeppyoListDiv list = beppyo.getServiceRiyohyoBeppyoList();
-        ServiceRiyohyoBeppyoMeisaiDiv meisai = beppyo.getServiceRiyohyoBeppyoMeisai();
-        ServiceRiyohyoBeppyoGokeiDiv gokei = beppyo.getServiceRiyohyoBeppyoGokei();
+//        ServiceRiyohyoBeppyoMeisaiDiv meisai = beppyo.getServiceRiyohyoBeppyoMeisai();
+//        ServiceRiyohyoBeppyoGokeiDiv gokei = beppyo.getServiceRiyohyoBeppyoGokei();
         setBeppyoNissuData(nissu);
         setBeppyoListData(list);
         initRiyohyoBeppyoMeisaiData(panel);
