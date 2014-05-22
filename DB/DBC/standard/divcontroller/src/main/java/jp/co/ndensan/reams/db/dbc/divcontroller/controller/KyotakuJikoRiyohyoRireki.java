@@ -43,8 +43,8 @@ public class KyotakuJikoRiyohyoRireki {
     private void setRirekiList(KyotakuJikoRiyohyoRirekiDiv panel) {
         Button btn = new Button();
         ServiceRiyohyoRirekiListDiv rirekiList = panel.getKyotakuJikoRiyohyoRirekiList();
-        add履歴(rirekiList, create履歴(btn, "", "20140601", "平26.06.01", "変更", "平26.06.01", "平26.06.30", "1111111111:電算介護調査センター"));
-        add履歴(rirekiList, create履歴(btn, "", "20140501", "平26.05.01", "新規", "平26.05.01", "平26.05.31", "1111111111:電算介護調査センター"));
+        add履歴(rirekiList, create履歴(btn, "", "20140601", "平26.06.01", "変更", "平26.06.01", "", "1111111111:電算介護調査センター"));
+        add履歴(rirekiList, create履歴(btn, "", "20130501", "平25.05.01", "新規", "平25.05.01", "平26.04.30", "1111111111:電算介護調査センター"));
     }
 
     private void add履歴(ServiceRiyohyoRirekiListDiv rirekiList, dgServiceRiyohyoRirekiList_Row addRow) {

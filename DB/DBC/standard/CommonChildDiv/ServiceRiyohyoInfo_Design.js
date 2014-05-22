@@ -552,7 +552,7 @@ var DBC;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "required": false,
-                            "readOnly": true,
+                            "readOnly": false,
                             "placeHolder": "",
                             "textKind": 0,
                             "isPrivateInfo": false,

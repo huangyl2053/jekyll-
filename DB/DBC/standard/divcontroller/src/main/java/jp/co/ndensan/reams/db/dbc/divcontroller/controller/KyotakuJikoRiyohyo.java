@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridColumn;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
@@ -50,7 +51,8 @@ public class KyotakuJikoRiyohyo {
         ResponseData<KyotakuJikoRiyohyoDiv> response = new ResponseData<>();
         setRiyohyoData(panel);
         setRiyohyoBeppyoVisible(panel, 別票画面表示.初期表示);
-
+// TBD N8187 久保田英男 共通パネルの「サービス利用票を保存する」ボタンをDisableにする。共通パネルの仕様が固まってから対応する。
+//        kyotsu.getBtnRiyohyoSave().setDisabled(true);
         response.data = panel;
         return response;
     }
@@ -64,7 +66,11 @@ public class KyotakuJikoRiyohyo {
     public ResponseData onClickZengetsuCopy(KyotakuJikoRiyohyoDiv panel) {
         ResponseData<KyotakuJikoRiyohyoDiv> response = new ResponseData<>();
         setSummaryZengetsuData(panel);
-
+        setServiceRiyohyoYobi(panel);
+        setServiceRiyohyoZengetsuData(panel);
+        setServiceRiyohyoBeppyoZengetsuData(panel);
+// TBD N8187 久保田英男 共通パネルの「サービス利用票を保存する」ボタンを有効/無効にする。共通パネルの仕様が固まってから対応する。
+//        validateRiyohyoSave(panel, kyotsu);
         response.data = panel;
         return response;
     }
@@ -142,6 +148,7 @@ public class KyotakuJikoRiyohyo {
 //
         dgRiyohyoList.add(rowItem);
         dgRiyohyo.setDataSource(dgRiyohyoList);
+//        validateRiyohyoSave(panel, kyotsu);
 
         response.data = panel;
         return response;
@@ -216,6 +223,69 @@ public class KyotakuJikoRiyohyo {
         return response;
     }
 
+    /**
+     * KyotakuJikoRiyohyoInfoのサービス別票Tabの明細表の削除ボタン押下時の処理
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData onClickServiceRiyohyoBeppyoListDelete(KyotakuJikoRiyohyoDiv panel) {
+        ResponseData<KyotakuJikoRiyohyoDiv> response = new ResponseData<>();
+        panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoList().
+                getDgServiceRiyohyoBeppyoList().getActiveRow().setRowState(RowState.Deleted);
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * KyotakuJikoRiyohyoInfoの別票Tabの「明細情報を確定する」ボタン押下時の処理
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData onClickBeppyoMeisaiKakutei(KyotakuJikoRiyohyoDiv panel) {
+        ResponseData<KyotakuJikoRiyohyoDiv> response = new ResponseData<>();
+        setBeppyoListMeisaiKakutei(panel);
+        initRiyohyoBeppyoMeisaiData(panel);
+        setRiyohyoBeppyoVisible(panel, 別票画面表示.初期表示);
+// TBD N8187 久保田英男 共通パネルの「サービス利用票を保存する」ボタンを有効/無効にする。共通パネルの仕様が固まってから対応する。
+//        validateRiyohyoSave(panel, kyotsu);
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * KyotakuJikoRiyohyoInfoの別票Tabの「合計情報を確定する」ボタン押下時の処理
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData onClickBeppyoGokeiKakutei(KyotakuJikoRiyohyoDiv panel) {
+        ResponseData<KyotakuJikoRiyohyoDiv> response = new ResponseData<>();
+        setBeppyoListGokeiKakutei(panel);
+        initRiyohyoBeppyoGokeiData(panel);
+        setRiyohyoBeppyoVisible(panel, 別票画面表示.初期表示);
+// TBD N8187 久保田英男 共通パネルの「サービス利用票を保存する」ボタンを有効/無効にする。共通パネルの仕様が固まってから対応する。
+//        validateRiyohyoSave(panel, kyotsu);
+        response.data = panel;
+        return response;
+    }
+
+//    /**
+//     * サービス利用票及び別票が入力されているか判定する。 双方入力されている場合、共通パネルの「サービス利用票を保存する」ボタンをEnableにする。
+//     *
+//     * @param panel panel
+//     * @param kyotsu kyotsu
+//     */
+//    private void validateRiyohyoSave(KyotakuJikoRiyohyoDiv panel, KyotsuPanelDiv kyotsu) {
+//        ServiceRiyohyoDiv riyohyo = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyo();
+//        ServiceRiyohyoBeppyoDiv beppyo = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo();
+//
+//        if (!riyohyo.getDgServiceRiyohyoList().getDataSource().isEmpty()
+//                && !beppyo.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getDataSource().isEmpty()) {
+//            kyotsu.getBtnRiyohyoSave().setDisabled(false);
+//        }
+//    }
     private void beppyoMeisaiModify(KyotakuJikoRiyohyoDiv panel) {
         dgServiceRiyohyoBeppyoList_Row row = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().
                 getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getActiveRow();
@@ -255,55 +325,11 @@ public class KyotakuJikoRiyohyo {
     }
 
     /**
-     * KyotakuJikoRiyohyoInfoのサービス別票Tabの明細表の削除ボタン押下時の処理
-     *
-     * @param panel panel
-     * @return ResponseData
-     */
-    public ResponseData onClickServiceRiyohyoBeppyoListDelete(KyotakuJikoRiyohyoDiv panel) {
-        ResponseData<KyotakuJikoRiyohyoDiv> response = new ResponseData<>();
-        panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoList().
-                getDgServiceRiyohyoBeppyoList().getActiveRow().setRowState(RowState.Deleted);
-        response.data = panel;
-        return response;
-    }
-
-    /**
-     * KyotakuJikoRiyohyoInfoの別票Tabの「明細情報を確定する」ボタン押下時の処理
-     *
-     * @param panel panel
-     * @return ResponseData
-     */
-    public ResponseData onClickBeppyoMeisaiKakutei(KyotakuJikoRiyohyoDiv panel) {
-        ResponseData<KyotakuJikoRiyohyoDiv> response = new ResponseData<>();
-        setBeppyoListMeisaiKakutei(panel);
-        initRiyohyoBeppyoMeisaiData(panel);
-        setRiyohyoBeppyoVisible(panel, 別票画面表示.初期表示);
-        response.data = panel;
-        return response;
-    }
-
-    /**
-     * KyotakuJikoRiyohyoInfoの別票Tabの「合計情報を確定する」ボタン押下時の処理
-     *
-     * @param panel panel
-     * @return ResponseData
-     */
-    public ResponseData onClickBeppyoGokeiKakutei(KyotakuJikoRiyohyoDiv panel) {
-        ResponseData<KyotakuJikoRiyohyoDiv> response = new ResponseData<>();
-        setBeppyoListGokeiKakutei(panel);
-        initRiyohyoBeppyoGokeiData(panel);
-        setRiyohyoBeppyoVisible(panel, 別票画面表示.初期表示);
-        response.data = panel;
-        return response;
-    }
-
-    /**
      * 利用票のデータ設定
      */
     private void setRiyohyoData(KyotakuJikoRiyohyoDiv panel) {
         setSummaryData(panel);
-        setServiceRiyohyoData(panel);
+        setServiceRiyohyoYobi(panel);
         setServiceRiyohyoBeppyoData(panel);
     }
 
@@ -566,13 +592,13 @@ public class KyotakuJikoRiyohyo {
         info.getTxtTodokedeYMD().setValue(new RDate("20140501"));
         info.getTxtTekiyoKikan().setFromValue(new RDate("20140501"));
         info.getTxtTekiyoKikan().setToValue(new RDate("20140531"));
-        info.getTxtTaishoYM().setValue(new RDate("20140501"));
-        info.getTxtRiyohyoSakuseiYMD().setValue(new RDate("20140601"));
-        info.getTxtRiyohyoTodokedeYMD().setValue(new RDate("20140602"));
+        info.getTxtTaishoYM().setValue(new RDate("20140601"));
+        info.getTxtRiyohyoSakuseiYMD().setValue(new RDate("20140501"));
+        info.getTxtRiyohyoTodokedeYMD().setValue(new RDate("20140501"));
         info.getTxtKubunShikyuGendogaku().setValue(new RString("30"));
         info.getTxtRiyohyoSakuseisha().setValue(new RString("電算　太郎"));
-        info.getTxtGendoKanriKikan().setFromValue(new RDate("20140501"));
-        info.getTxtGendoKanriKikan().setToValue(new RDate("20140531"));
+        info.getTxtGendoKanriKikan().setFromValue(new RDate("20140401"));
+        info.getTxtGendoKanriKikan().setToValue(new RDate("20150331"));
 
     }
 
@@ -585,15 +611,33 @@ public class KyotakuJikoRiyohyo {
         ServiceRiyohyoInfoDiv info = panel.getKyotakuJikoRiyohyoInfo();
         info.getTxtTodokedeYMD().setValue(new RDate("20140601"));
         info.getTxtTekiyoKikan().setFromValue(new RDate("20140601"));
-        info.getTxtTekiyoKikan().setToValue(new RDate("20140630"));
-        info.getTxtTaishoYM().setValue(new RDate("20140601"));
-        info.getTxtRiyohyoSakuseiYMD().setValue(new RDate("20140701"));
-        info.getTxtRiyohyoTodokedeYMD().setValue(new RDate("20140702"));
+        info.getTxtTekiyoKikan().clearToValue();
+        info.getTxtTaishoYM().setValue(new RDate("20140701"));
+        info.getTxtRiyohyoSakuseiYMD().setValue(new RDate("20140601"));
+        info.getTxtRiyohyoTodokedeYMD().setValue(new RDate("20140601"));
         info.getTxtKubunShikyuGendogaku().setValue(new RString("30"));
         info.getTxtRiyohyoSakuseisha().setValue(new RString("電算　太郎"));
-        info.getTxtGendoKanriKikan().setFromValue(new RDate("20140601"));
-        info.getTxtGendoKanriKikan().setToValue(new RDate("20140630"));
+        info.getTxtGendoKanriKikan().setFromValue(new RDate("20140401"));
+        info.getTxtGendoKanriKikan().setToValue(new RDate("20150331"));
 
+    }
+
+    /**
+     * サービス利用票タブの曜日の設定
+     *
+     * @param panel panel
+     */
+    private void setServiceRiyohyoYobi(KyotakuJikoRiyohyoDiv panel) {
+        RDate taishoYMD = new RDate(panel.getKyotakuJikoRiyohyoInfo().getTxtTaishoYM().getValue().getYearMonth().toString().concat("01"));
+        ServiceRiyohyoDiv riyohyo = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyo();
+        DataGrid<dgServiceRiyohyoList_Row> dg = riyohyo.getDgServiceRiyohyoList();
+        int dateNum = taishoYMD.getLastDay();
+        for (int i = 0; i < dateNum; i++) {
+            RString txtDay = new RString("txtDay").concat(String.valueOf(i + 1));
+            DataGridColumn column = dg.getGridSetting().getColumn(txtDay);
+            column.setColumnName(new RString(taishoYMD.getDayOfWeek().getShortTerm()));
+            taishoYMD = taishoYMD.plusDay(1);
+        }
     }
 
     /**
@@ -601,9 +645,10 @@ public class KyotakuJikoRiyohyo {
      *
      * @param panel panel
      */
-    private void setServiceRiyohyoData(KyotakuJikoRiyohyoDiv panel) {
+    private void setServiceRiyohyoZengetsuData(KyotakuJikoRiyohyoDiv panel) {
         ServiceRiyohyoDiv riyohyo = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyo();
         List<dgServiceRiyohyoList_Row> dgRowList = riyohyo.getDgServiceRiyohyoList().getDataSource();
+        dgRowList.clear();
         Button btnDelete = new Button();
         Button btnService = new Button();
         Button btnJigyosha = new Button();
@@ -641,12 +686,9 @@ public class KyotakuJikoRiyohyo {
         ServiceRiyohyoBeppyoDiv beppyo = panel.getKyotakuJikoRiyohyoInfo().
                 getTabServiceRiyohyo().getServiceRiyohyoBeppyo();
         ServiceRiyohyoBeppyoRiyoNissuDiv nissu = beppyo.getServiceRiyohyoBeppyoRiyoNissu();
-        ServiceRiyohyoBeppyoListDiv list = beppyo.getServiceRiyohyoBeppyoList();
         setBeppyoNissuData(nissu);
-        setBeppyoListData(list);
         initRiyohyoBeppyoMeisaiData(panel);
         initRiyohyoBeppyoGokeiData(panel);
-
     }
 
     private void setBeppyoNissuData(ServiceRiyohyoBeppyoRiyoNissuDiv nissu) {
@@ -655,8 +697,26 @@ public class KyotakuJikoRiyohyo {
         nissu.getTxtRuikeiRiyoNissu().setValue(new Decimal("60"));
     }
 
-    private void setBeppyoListData(ServiceRiyohyoBeppyoListDiv list) {
+    private void setServiceRiyohyoBeppyoZengetsuData(KyotakuJikoRiyohyoDiv panel) {
+        ServiceRiyohyoBeppyoDiv beppyo = panel.getKyotakuJikoRiyohyoInfo().
+                getTabServiceRiyohyo().getServiceRiyohyoBeppyo();
+        ServiceRiyohyoBeppyoRiyoNissuDiv nissu = beppyo.getServiceRiyohyoBeppyoRiyoNissu();
+        ServiceRiyohyoBeppyoListDiv list = beppyo.getServiceRiyohyoBeppyoList();
+        setBeppyoNissuZengetsuData(nissu);
+        setBeppyoListZengetsuData(list);
+        initRiyohyoBeppyoMeisaiData(panel);
+        initRiyohyoBeppyoGokeiData(panel);
+    }
+
+    private void setBeppyoNissuZengetsuData(ServiceRiyohyoBeppyoRiyoNissuDiv nissu) {
+        nissu.getTxtZengetsuRiyoNissu().setValue(new Decimal("0"));
+        nissu.getTxtTogetsuRiyoNissu().setValue(new Decimal("30"));
+        nissu.getTxtRuikeiRiyoNissu().setValue(new Decimal("30"));
+    }
+
+    private void setBeppyoListZengetsuData(ServiceRiyohyoBeppyoListDiv list) {
         List<dgServiceRiyohyoBeppyoList_Row> listRow = list.getDgServiceRiyohyoBeppyoList().getDataSource();
+        listRow.clear();
         Button btnSelect = new Button();
         Button btnDelete = new Button();
 

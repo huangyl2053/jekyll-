@@ -266,22 +266,6 @@
         "sortKey": "btnSelect"
        },
        {
-        "columnName": "状態",
-        "dataName": "txtJotai",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 60,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0
-        },
-        "align": 1,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "txtJotai"
-       },
-       {
         "columnName": "",
         "dataName": "txtTodokedeYMDInvisible",
         "toolTip": "",
@@ -361,20 +345,6 @@
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "txtTekiyoShuryoYMD"
-       },
-       {
-        "columnName": "計画依頼事業者",
-        "dataName": "txtIraiJigyosha",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 720,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "txtIraiJigyosha"
        }
       ]
      },
@@ -778,7 +748,7 @@
         "cellDetails": {
          "cellType": 0
         },
-        "align": 1,
+        "align": 0,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "txtService"
@@ -815,7 +785,7 @@
         "cellDetails": {
          "cellType": 0
         },
-        "align": 1,
+        "align": 0,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "txtJigyosha"
@@ -1629,7 +1599,7 @@
         "cellDetails": {
          "cellType": 0
         },
-        "align": 1,
+        "align": 0,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "txtJigyosha"
