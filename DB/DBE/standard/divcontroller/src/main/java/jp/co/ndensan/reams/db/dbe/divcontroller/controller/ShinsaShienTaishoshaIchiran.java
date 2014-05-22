@@ -6,10 +6,13 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.KaniShinsakaiKaisaiKekkaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShinsaShienTaishoshaIchiranDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgShinsaTaishoshaIchiran1_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -60,38 +63,37 @@ public class ShinsaShienTaishoshaIchiran {
 
     }
 
-    private List<dgShinsaTaishoshaIchiran1_Row> createRowTaishoIchiran1TestData() {
+    private static List<dgShinsaTaishoshaIchiran1_Row> createRowTaishoIchiran1TestData() {
         List<dgShinsaTaishoshaIchiran1_Row> arrayData = new ArrayList<>();
-        dgShinsaTaishoshaIchiran1_Row item;
 
-        item = createRowTaishosha1Data("更新", "在宅", "要介護２", "要介護２", "要介護２", "", "２４", "");
-        arrayData.add(item);
-        item = createRowTaishosha1Data("新規", "在宅", "", "", "要支援２", "", "", "");
-        arrayData.add(item);
-        item = createRowTaishosha1Data("変更", "在宅", "非該当", "要支援１", "要支援１", "", "１２", "");
-        arrayData.add(item);
-        item = createRowTaishosha1Data("変更", "施設", "要介護３", "要介護３", "要介護３", "", "２４", "");
-        arrayData.add(item);
+        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("ShinsakaiShinsaTaishoshaList.yml"));
+        for (Map info : targetSource) {
+            arrayData.add(toDgShinsaTaishoshaIchiran1_Row(info));
+        }
 
         return arrayData;
     }
 
-    private dgShinsaTaishoshaIchiran1_Row createRowTaishosha1Data(String 申請区分, String 状況,
-            String 前回一次, String 前回二次, String 一次判定, String 二次判定, String 前回有効期間月数, String 今回有効期間月数) {
+    private static dgShinsaTaishoshaIchiran1_Row toDgShinsaTaishoshaIchiran1_Row(Map map) {
+        RString shinseiKubun = _toRString(map.get("申請区分"));
+        RString jokyo = _toRString(map.get("状況"));
+        RString zenIchiji = _toRString(map.get("前回一次"));
+        RString zenNiji = _toRString(map.get("前回二次"));
+        RString ichijiHantei = _toRString(map.get("一次判定"));
+        RString nijiHantei = _toRString(map.get("二次判定"));
+        RString zenKikan = _toRString(map.get("前回期間"));
+        RString kikan = _toRString(map.get("今回期間"));
 
-        dgShinsaTaishoshaIchiran1_Row rowTaishosha1Data = new dgShinsaTaishoshaIchiran1_Row(
-                RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE);
+        dgShinsaTaishoshaIchiran1_Row row = new dgShinsaTaishoshaIchiran1_Row(shinseiKubun,
+                jokyo, zenIchiji, zenNiji, ichijiHantei, nijiHantei, zenKikan, kikan);
+        return row;
+    }
 
-        rowTaishosha1Data.set申請(new RString(申請区分));
-        rowTaishosha1Data.set状況(new RString(状況));
-        rowTaishosha1Data.set前一次(new RString(前回一次));
-        rowTaishosha1Data.set前二次(new RString(前回二次));
-        rowTaishosha1Data.set一次(new RString(一次判定));
-        rowTaishosha1Data.set二次(new RString(二次判定));
-        rowTaishosha1Data.set前期間(new RString(前回有効期間月数));
-        rowTaishosha1Data.set期間(new RString(今回有効期間月数));
-
-        return rowTaishosha1Data;
+    private static RString _toRString(Object obj) {
+        if (obj == null) {
+            return RString.EMPTY;
+        }
+        return new RString(obj.toString());
     }
 
 }
