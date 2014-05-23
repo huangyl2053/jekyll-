@@ -1556,14 +1556,6 @@
     {
      "visibleDiv": "KyufuKanrihyoList",
      "panelState": "close"
-    },
-    {
-     "visibleDiv": "KyufuKanrihyoKihon",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "KyufuKanrihyoKaigoKihon",
-     "panelState": "visible"
     }
    ],
    "validation": {},
@@ -1595,14 +1587,6 @@
    "stateName": "給付管理票情報一覧",
    "showWizard": false,
    "visibleDivs": [
-    {
-     "visibleDiv": "KyufuKanrihyoKihon",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "KyufuKanrihyoKaigoKihon",
-     "panelState": "visible"
-    },
     {
      "visibleDiv": "KyufuKanrihyoSerach",
      "panelState": "close"
