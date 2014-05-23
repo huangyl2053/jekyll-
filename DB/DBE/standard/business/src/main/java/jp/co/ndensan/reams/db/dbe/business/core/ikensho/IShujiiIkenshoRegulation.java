@@ -12,7 +12,7 @@ import java.util.Map;
  *
  * @author N8156 宮本 康
  */
-public interface IShujiiIkenshoRegulation {
+interface IShujiiIkenshoRegulation {
 
     /**
      * 主治医意見書の定義を返します。

@@ -25,16 +25,16 @@ public class JutakuKaishuJizenShinseiKozaInfoMockDiv extends Panel {
     private TextBoxCode txtKinyuKikanCode;
     @JsonProperty("txtKinyuKikanName")
     private TextBox txtKinyuKikanName;
-    @JsonProperty("radKozaType")
-    private RadioButton radKozaType;
-    @JsonProperty("txtKozaMeigininKanaName")
-    private TextBox txtKozaMeigininKanaName;
     @JsonProperty("txtKinyuBranchCode")
     private TextBoxCode txtKinyuBranchCode;
     @JsonProperty("txtKinyuBranchName")
     private TextBox txtKinyuBranchName;
+    @JsonProperty("radKozaType")
+    private RadioButton radKozaType;
     @JsonProperty("txtKozaNo")
     private TextBoxCode txtKozaNo;
+    @JsonProperty("txtKozaMeigininKanaName")
+    private TextBox txtKozaMeigininKanaName;
     @JsonProperty("txtKozaMeigininName")
     private TextBox txtKozaMeigininName;
 
@@ -64,26 +64,6 @@ public class JutakuKaishuJizenShinseiKozaInfoMockDiv extends Panel {
         this.txtKinyuKikanName=txtKinyuKikanName;
     }
 
-    @JsonProperty("radKozaType")
-    public RadioButton getRadKozaType() {
-        return radKozaType;
-    }
-
-    @JsonProperty("radKozaType")
-    public void setRadKozaType(RadioButton radKozaType) {
-        this.radKozaType=radKozaType;
-    }
-
-    @JsonProperty("txtKozaMeigininKanaName")
-    public TextBox getTxtKozaMeigininKanaName() {
-        return txtKozaMeigininKanaName;
-    }
-
-    @JsonProperty("txtKozaMeigininKanaName")
-    public void setTxtKozaMeigininKanaName(TextBox txtKozaMeigininKanaName) {
-        this.txtKozaMeigininKanaName=txtKozaMeigininKanaName;
-    }
-
     @JsonProperty("txtKinyuBranchCode")
     public TextBoxCode getTxtKinyuBranchCode() {
         return txtKinyuBranchCode;
@@ -104,6 +84,16 @@ public class JutakuKaishuJizenShinseiKozaInfoMockDiv extends Panel {
         this.txtKinyuBranchName=txtKinyuBranchName;
     }
 
+    @JsonProperty("radKozaType")
+    public RadioButton getRadKozaType() {
+        return radKozaType;
+    }
+
+    @JsonProperty("radKozaType")
+    public void setRadKozaType(RadioButton radKozaType) {
+        this.radKozaType=radKozaType;
+    }
+
     @JsonProperty("txtKozaNo")
     public TextBoxCode getTxtKozaNo() {
         return txtKozaNo;
@@ -112,6 +102,16 @@ public class JutakuKaishuJizenShinseiKozaInfoMockDiv extends Panel {
     @JsonProperty("txtKozaNo")
     public void setTxtKozaNo(TextBoxCode txtKozaNo) {
         this.txtKozaNo=txtKozaNo;
+    }
+
+    @JsonProperty("txtKozaMeigininKanaName")
+    public TextBox getTxtKozaMeigininKanaName() {
+        return txtKozaMeigininKanaName;
+    }
+
+    @JsonProperty("txtKozaMeigininKanaName")
+    public void setTxtKozaMeigininKanaName(TextBox txtKozaMeigininKanaName) {
+        this.txtKozaMeigininKanaName=txtKozaMeigininKanaName;
     }
 
     @JsonProperty("txtKozaMeigininName")

@@ -4,6 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo;
 
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
 /**
  * 要介護認定調査の調査項目区分（概況調査）を表す列挙型です。
  *
@@ -134,5 +136,16 @@ public enum NinteichosaItemKubunOfGaikyo implements INinteichosaItemKubun {
     /**
      * 調査項目区分が「概況特記事項」であることを表します。
      */
-    概況特記事項,
+    概況特記事項;
+
+    private final RString theName;
+
+    private NinteichosaItemKubunOfGaikyo() {
+        this.theName = new RString(name());
+    }
+
+    @Override
+    public RString toRString() {
+        return theName;
+    }
 }

@@ -5,10 +5,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgJutakuKaishuJizenShinseiDetail_Row;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiDetailInputDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufugakuSummaryDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * JutakuKaishuZizenShinseiDetail のクラスファイル 
@@ -22,8 +21,8 @@ public class JutakuKaishuZizenShinseiDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("dgJutakuKaishuJizenShinseiDetail")
-    private DataGrid<dgJutakuKaishuJizenShinseiDetail_Row> dgJutakuKaishuJizenShinseiDetail;
+    @JsonProperty("JutakuKaishuJizenShinseiDetailInput")
+    private JutakuKaishuShinseiDetailInputDiv JutakuKaishuJizenShinseiDetailInput;
     @JsonProperty("JutakuKaishuJizenShinseiKyufugakuSummary")
     private KyufugakuSummaryDiv JutakuKaishuJizenShinseiKyufugakuSummary;
 
@@ -33,14 +32,14 @@ public class JutakuKaishuZizenShinseiDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("dgJutakuKaishuJizenShinseiDetail")
-    public DataGrid<dgJutakuKaishuJizenShinseiDetail_Row> getDgJutakuKaishuJizenShinseiDetail() {
-        return dgJutakuKaishuJizenShinseiDetail;
+    @JsonProperty("JutakuKaishuJizenShinseiDetailInput")
+    public JutakuKaishuShinseiDetailInputDiv getJutakuKaishuJizenShinseiDetailInput() {
+        return JutakuKaishuJizenShinseiDetailInput;
     }
 
-    @JsonProperty("dgJutakuKaishuJizenShinseiDetail")
-    public void setDgJutakuKaishuJizenShinseiDetail(DataGrid<dgJutakuKaishuJizenShinseiDetail_Row> dgJutakuKaishuJizenShinseiDetail) {
-        this.dgJutakuKaishuJizenShinseiDetail=dgJutakuKaishuJizenShinseiDetail;
+    @JsonProperty("JutakuKaishuJizenShinseiDetailInput")
+    public void setJutakuKaishuJizenShinseiDetailInput(JutakuKaishuShinseiDetailInputDiv JutakuKaishuJizenShinseiDetailInput) {
+        this.JutakuKaishuJizenShinseiDetailInput=JutakuKaishuJizenShinseiDetailInput;
     }
 
     @JsonProperty("JutakuKaishuJizenShinseiKyufugakuSummary")

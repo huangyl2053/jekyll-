@@ -5,9 +5,10 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuJizenShinseiKozaInfoMockDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuJizenShinseiKozaInfoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuJizenShinseiReasonDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuZizenShinseiDetailDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShinseishaInfoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -34,8 +35,8 @@ public class JutakuKaishuJizenShinseiContentsDiv extends Panel {
     private ShinseishaInfoDiv JutakuKaishuJizenShinseiSha;
     @JsonProperty("JutakuKaishuJizenShinseiReason")
     private JutakuKaishuJizenShinseiReasonDiv JutakuKaishuJizenShinseiReason;
-    @JsonProperty("JutakuKaishuJizenShinseiKozaInfoMock")
-    private JutakuKaishuJizenShinseiKozaInfoMockDiv JutakuKaishuJizenShinseiKozaInfoMock;
+    @JsonProperty("JutakuKaishuJizenShinseiKozaInfo")
+    private JutakuKaishuJizenShinseiKozaInfoDiv JutakuKaishuJizenShinseiKozaInfo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -93,14 +94,14 @@ public class JutakuKaishuJizenShinseiContentsDiv extends Panel {
         this.JutakuKaishuJizenShinseiReason=JutakuKaishuJizenShinseiReason;
     }
 
-    @JsonProperty("JutakuKaishuJizenShinseiKozaInfoMock")
-    public JutakuKaishuJizenShinseiKozaInfoMockDiv getJutakuKaishuJizenShinseiKozaInfoMock() {
-        return JutakuKaishuJizenShinseiKozaInfoMock;
+    @JsonProperty("JutakuKaishuJizenShinseiKozaInfo")
+    public JutakuKaishuJizenShinseiKozaInfoDiv getJutakuKaishuJizenShinseiKozaInfo() {
+        return JutakuKaishuJizenShinseiKozaInfo;
     }
 
-    @JsonProperty("JutakuKaishuJizenShinseiKozaInfoMock")
-    public void setJutakuKaishuJizenShinseiKozaInfoMock(JutakuKaishuJizenShinseiKozaInfoMockDiv JutakuKaishuJizenShinseiKozaInfoMock) {
-        this.JutakuKaishuJizenShinseiKozaInfoMock=JutakuKaishuJizenShinseiKozaInfoMock;
+    @JsonProperty("JutakuKaishuJizenShinseiKozaInfo")
+    public void setJutakuKaishuJizenShinseiKozaInfo(JutakuKaishuJizenShinseiKozaInfoDiv JutakuKaishuJizenShinseiKozaInfo) {
+        this.JutakuKaishuJizenShinseiKozaInfo=JutakuKaishuJizenShinseiKozaInfo;
     }
 
 }

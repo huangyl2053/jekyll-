@@ -4,10 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.chosahyo;
 
-import jp.co.ndensan.reams.db.dbe.business.NinteichosahyoFactory;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.INinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
@@ -29,12 +30,17 @@ public class NinteichosahyoTest extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 調査票定義がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            new Ninteichosahyo(null, NinteichosaItemGroupOf2009.values());
+            Ninteichosahyo sut = new Ninteichosahyo(null, NinteichosaItemGroupOf2009.values());
         }
 
         @Test(expected = NullPointerException.class)
-        public void 調査項目グループがNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            new Ninteichosahyo(new NinteichosahyoRegulationOf2009().get基本調査定義(), null);
+        public void 調査項目グループ配列がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
+            Ninteichosahyo sut = new Ninteichosahyo(new NinteichosahyoRegulationOf2009().get基本調査定義(), (INinteichosaItemGroup[]) null);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 調査項目グループListがNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
+            Ninteichosahyo sut = new Ninteichosahyo(new NinteichosahyoRegulationOf2009().get基本調査定義(), (List<INinteichosaItemGroup>) null);
         }
     }
 
@@ -42,12 +48,12 @@ public class NinteichosahyoTest extends DbeTestBase {
 
         @Test
         public void 調査項目区分の指定がある時_get調査項目は_該当の調査項目を返す() {
-            assertThat(NinteichosahyoFactory.create基本情報Instance(KoroshoIFKubun.V09A).get調査項目(NinteichosaItemKubunOfKihon.麻痺等の有無_左上肢).get表示名称(), is(new RString("左上肢")));
+            assertThat(NinteichosahyoFactory.create基本調査Instance(KoroshoIFKubun.V09A).get調査項目(NinteichosaItemKubunOfKihon.麻痺等の有無_左上肢).get表示名称(), is(new RString("左上肢")));
         }
 
         @Test
         public void 調査項目区分がNULLの時_get調査項目は_NULLを返す() {
-            assertThat(NinteichosahyoFactory.create基本情報Instance(KoroshoIFKubun.V09A).get調査項目(null), is(nullValue()));
+            assertThat(NinteichosahyoFactory.create基本調査Instance(KoroshoIFKubun.V09A).get調査項目(null), is(nullValue()));
         }
     }
 
@@ -55,12 +61,12 @@ public class NinteichosahyoTest extends DbeTestBase {
 
         @Test
         public void 調査項目グループの指定がある時_get調査項目Listは_該当の調査項目を返す() {
-            assertThat(NinteichosahyoFactory.create基本情報Instance(KoroshoIFKubun.V09A).get調査項目List(NinteichosaItemGroupOf2009.第１群).size(), is(22));
+            assertThat(NinteichosahyoFactory.create基本調査Instance(KoroshoIFKubun.V09A).get調査項目List(NinteichosaItemGroupOf2009.第１群).size(), is(22));
         }
 
         @Test
         public void 調査項目グループがNULLの時_get調査項目Listは_0件の調査項目を返す() {
-            assertThat(NinteichosahyoFactory.create基本情報Instance(KoroshoIFKubun.V09A).get調査項目List(null).size(), is(0));
+            assertThat(NinteichosahyoFactory.create基本調査Instance(KoroshoIFKubun.V09A).get調査項目List(null).size(), is(0));
         }
     }
 
@@ -68,7 +74,7 @@ public class NinteichosahyoTest extends DbeTestBase {
 
         @Test
         public void 調査項目の設定がある時_get調査項目ListAllは_全調査項目を返す() {
-            assertThat(NinteichosahyoFactory.create基本情報Instance(KoroshoIFKubun.V09A).get調査項目ListAll().size(), is(78));
+            assertThat(NinteichosahyoFactory.create基本調査Instance(KoroshoIFKubun.V09A).get調査項目ListAll().size(), is(78));
         }
     }
 
@@ -76,7 +82,7 @@ public class NinteichosahyoTest extends DbeTestBase {
 
         @Test
         public void 調査項目グループの設定がある時_get調査項目グループは_全調査項目グループを返す() {
-            assertThat(NinteichosahyoFactory.create基本情報Instance(KoroshoIFKubun.V09A).get調査項目グループ().length, is(9));
+            assertThat(NinteichosahyoFactory.create基本調査Instance(KoroshoIFKubun.V09A).get調査項目グループ().size(), is(7));
         }
     }
 }

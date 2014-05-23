@@ -38,7 +38,7 @@ public enum YokaigoninteiShinseiKubun {
      * 転入申請 <br />
      * コード : "5"
      */
-    転入申請("5"),;
+    転入申請("5");
     private final RString code;
     private final RString theName;
 
