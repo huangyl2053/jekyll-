@@ -1,0 +1,635 @@
+﻿{
+ "fieldName": "Page",
+ "items": [
+  {
+   "fieldName": "SearchHihokensha",
+   "items": [
+    {
+     "fieldName": "SearchConditionOfHihokensha",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": 0,
+     "marginRight": 0,
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": 0,
+     "businessId": "DBZ",
+     "controlName": "HihokenshaFinder",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "onClickBtnToSearch": "",
+     "onClickBtnToClear": ""
+    },
+    {
+     "fieldName": "btnKari",
+     "items": [],
+     "controlType": "Button",
+     "width": "S",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "text": "仮ボタン",
+     "onClick": "onClick_btnKari",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
+    },
+    {
+     "fieldName": "SearchResultOfHihokensha",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": 0,
+     "marginRight": 0,
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": 0,
+     "gridSetting": {
+      "rowHeight": 50,
+      "isMultiSelectable": false,
+      "isShowFooter": true,
+      "isShowFilter": false,
+      "header": {
+       "combineColumns": [],
+       "frozenColumn": ""
+      },
+      "columns": [
+       {
+        "columnName": "",
+        "dataName": "btnToDecide",
+        "width": 50,
+        "visible": true,
+        "cellType": 8,
+        "cellDetails": {
+         "cellType": 8,
+         "text": "確定",
+         "onClick": "",
+         "imageFileUrl": ""
+        },
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "btnToDecide"
+       },
+       {
+        "columnName": "被保番号",
+        "dataName": "hihokenshaNo",
+        "width": 110,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "hihokenshaNo"
+       },
+       {
+        "columnName": "識別コード",
+        "dataName": "shikibetsuCode",
+        "width": 110,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "shikibetsuCode"
+       },
+       {
+        "columnName": "被保険者区分",
+        "dataName": "hihokenshaKubun",
+        "width": 110,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "hihokenshaKubun"
+       },
+       {
+        "columnName": "氏名",
+        "dataName": "shimei",
+        "width": 150,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "shimei"
+       },
+       {
+        "columnName": "カナ氏名",
+        "dataName": "kanaShimsei",
+        "width": 150,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "kanaShimsei"
+       },
+       {
+        "columnName": "氏名",
+        "dataName": "shimeiAndKanaShimsei",
+        "width": 150,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "kanaShimsei"
+       },
+       {
+        "columnName": "性別",
+        "dataName": "gender",
+        "width": 50,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "gender"
+       },
+       {
+        "columnName": "生年月日",
+        "dataName": "birthDay",
+        "width": 110,
+        "visible": true,
+        "cellType": 6,
+        "cellDetails": {
+         "cellType": 6,
+         "ymdKubun": 2,
+         "displayFormat": 3
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "birthDay"
+       },
+       {
+        "columnName": "郵便番号",
+        "dataName": "yubinNo",
+        "width": 110,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "yubinNo"
+       },
+       {
+        "columnName": "住所",
+        "dataName": "jusho",
+        "width": 300,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "jusho"
+       },
+       {
+        "columnName": "個人番号",
+        "dataName": "kojinNo",
+        "width": 120,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "kojinNo"
+       },
+       {
+        "columnName": "住民種別",
+        "dataName": "juminShubetsu",
+        "width": 100,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "juminShubetsu"
+       },
+       {
+        "columnName": "世帯コード",
+        "dataName": "setaiCode",
+        "width": 110,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "setaiCode"
+       }
+      ]
+     },
+     "businessId": "DBZ",
+     "controlName": "SearchResultOfHihokensha",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "onClickBtnToResearch": ""
+    }
+   ],
+   "controlType": "Panel",
+   "width": "1000",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "onLoad": "",
+   "title": "対象者検索",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "SearchHihokensha"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "XS",
+   "marginBottom": "XS",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "isGroupBox": false
+  },
+  {
+   "fieldName": "JukyushaIdoRenrakuhyoShinkiTorokuPanel",
+   "items": [
+    {
+     "fieldName": "JukyushaIdoRenrakuhyo",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "-0.2",
+     "marginRight": 0,
+     "title": "受給者異動連絡票",
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": 0,
+     "businessId": "DBC",
+     "controlName": "JukyushaIdoRenrakuhyo",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": ""
+    }
+   ],
+   "controlType": "Panel",
+   "width": "1010",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "JukyushaIdoRenrakuhyoShinkiTorokuPanel"
+    },
+    {
+     "postParameterPanelNames": "SearchHihokensha"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": true,
+   "eraseBorderBottom": true,
+   "eraseBorderRight": true,
+   "eraseBorderLeft": true,
+   "backgroundColor": 0,
+   "widthAuto": true,
+   "isGroupBox": false
+  },
+  {
+   "fieldName": "OutputJukyushaIdoRenrakuhyo",
+   "items": [
+    {
+     "fieldName": "dummy",
+     "items": [],
+     "controlType": "Label",
+     "width": "XS",
+     "visible": false,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "required": false,
+     "isPrivateInfo": false,
+     "text": "dummy",
+     "align": 2
+    }
+   ],
+   "controlType": "PanelPublish",
+   "width": "1000",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "onLoad": "",
+   "title": "受給者異動連絡票",
+   "isOpen": true,
+   "canOpenAndClose": false,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "OutputJukyushaIdoRenrakuhyo"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "isGroupBox": false,
+   "isPublish": true
+  },
+  {
+   "fieldName": "KyotsuBtnPanel",
+   "items": [
+    {
+     "fieldName": "btnSave",
+     "items": [],
+     "controlType": "Button",
+     "width": "M",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "text": "異動連絡票を保存する",
+     "onClick": "onClick_btnSave",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
+    }
+   ],
+   "controlType": "Panel",
+   "width": "1000",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "KyotsuBtnPanel"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": true,
+   "eraseBorderBottom": true,
+   "eraseBorderRight": true,
+   "eraseBorderLeft": true,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "isGroupBox": false
+  }
+ ],
+ "controlType": null,
+ "width": "XS",
+ "visible": true,
+ "displayNone": false,
+ "disabled": false,
+ "accessKey": "",
+ "nextFocusFieldName": "",
+ "wrap": false,
+ "dependencies": [],
+ "float": 0,
+ "toolTip": "",
+ "authorityMode": 0,
+ "marginLeft": "XS",
+ "marginRight": "XS",
+ "onLoad": "",
+ "title": "受給者異動連絡票新規登録",
+ "jsPathCollection": [],
+ "relation": [],
+ "stateTransition": [
+  {
+   "order": "1",
+   "stateName": "連絡票検索",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "SearchHihokensha",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "SearchConditionOfHihokensha",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "SearchResultOfHihokensha",
+     "panelState": "readOnly visible"
+    }
+   ],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnKari",
+     "event": "onClick",
+     "transition": "連絡票変更"
+    }
+   ]
+  },
+  {
+   "order": "2",
+   "stateName": "連絡票変更",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "JukyushaIdoRenrakuhyoShinkiTorokuPanel",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "JukyushaIdoRenrakuhyo",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "KyotsuBtnPanel",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "OutputJukyushaIdoRenrakuhyo",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "PrintContentsSetting",
+     "panelState": "visible"
+    }
+   ],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnKari",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
+  }
+ ],
+ "currentState": "All",
+ "id": "DBC0210011",
+ "WFParameter": [],
+ "UIContainerEventMapping": [],
+ "loadSequencePanelNames": [
+  [
+   "SearchHihokensha",
+   "JukyushaIdoRenrakuhyoShinkiTorokuPanel"
+  ],
+  [
+   "SearchConditionOfHihokensha"
+  ],
+  [
+   "SearchResultOfHihokensha"
+  ],
+  [
+   "JukyushaIdoRenrakuhyo"
+  ],
+  [
+   "OutputJukyushaIdoRenrakuhyo"
+  ],
+  [
+   "KyotsuBtnPanel"
+  ]
+ ],
+ "panelMargin": 1,
+ "controlMargin": 1
+}
