@@ -590,7 +590,7 @@
      "isComboBox": false,
      "suggest": [],
      "permitCharactor": "",
-     "formatLength": 1
+     "formatLength": 8
     },
     {
      "fieldName": "txtShinseiInputKubun",
@@ -796,7 +796,7 @@
          "isComboBox": false,
          "suggest": [],
          "permitCharactor": "",
-         "formatLength": 1
+         "formatLength": 8
         },
         {
          "fieldName": "chkShinseiSaiso",
@@ -1692,7 +1692,7 @@
            "isComboBox": false,
            "suggest": [],
            "permitCharactor": "",
-           "formatLength": 1
+           "formatLength": 8
           },
           {
            "fieldName": "txtShinseiShitenCode",
@@ -1735,7 +1735,7 @@
            "isComboBox": false,
            "suggest": [],
            "permitCharactor": "",
-           "formatLength": 1
+           "formatLength": 8
           },
           {
            "fieldName": "txtShinseiKozaShubetsu",
@@ -2133,7 +2133,7 @@
          "isComboBox": false,
          "suggest": [],
          "permitCharactor": "",
-         "formatLength": 1
+         "formatLength": 8
         },
         {
          "fieldName": "btnShinseiJigyosha",
@@ -2619,7 +2619,7 @@
      "isComboBox": false,
      "suggest": [],
      "permitCharactor": "",
-     "formatLength": 1
+     "formatLength": 8
     },
     {
      "fieldName": "txtShomeishoJigyoshaName",
@@ -2870,7 +2870,7 @@
            "isComboBox": false,
            "suggest": [],
            "permitCharactor": "",
-           "formatLength": 1
+           "formatLength": 8
           },
           {
            "fieldName": "btnShomeishoKihonJigyosha",
@@ -3768,7 +3768,7 @@
            "isComboBox": false,
            "suggest": [],
            "permitCharactor": "",
-           "formatLength": 1
+           "formatLength": 8
           },
           {
            "fieldName": "txtKyufuhiServiceCode",
@@ -3811,7 +3811,7 @@
            "isComboBox": false,
            "suggest": [],
            "permitCharactor": "",
-           "formatLength": 1
+           "formatLength": 8
           },
           {
            "fieldName": "btnKyufuhiService",
@@ -6831,7 +6831,7 @@
              "isComboBox": false,
              "suggest": [],
              "permitCharactor": "",
-             "formatLength": 1
+             "formatLength": 8
             },
             {
              "fieldName": "btnShinryohiShikibetsu",
@@ -8346,7 +8346,7 @@
              "isComboBox": false,
              "suggest": [],
              "permitCharactor": "",
-             "formatLength": 1
+             "formatLength": 8
             },
             {
              "fieldName": "txtShokujihiServiceCode",
@@ -8389,7 +8389,7 @@
              "isComboBox": false,
              "suggest": [],
              "permitCharactor": "",
-             "formatLength": 1
+             "formatLength": 8
             },
             {
              "fieldName": "btnShokujihiService",
@@ -8880,7 +8880,7 @@
            "isComboBox": false,
            "suggest": [],
            "permitCharactor": "",
-           "formatLength": 1
+           "formatLength": 8
           },
           {
            "fieldName": "txtKeikakuhiServiceCodeH2103",
@@ -8923,7 +8923,7 @@
            "isComboBox": false,
            "suggest": [],
            "permitCharactor": "",
-           "formatLength": 1
+           "formatLength": 8
           },
           {
            "fieldName": "btnKeikakuhiServiceH2103",
@@ -9173,7 +9173,7 @@
            "isComboBox": false,
            "suggest": [],
            "permitCharactor": "",
-           "formatLength": 1
+           "formatLength": 8
           },
           {
            "fieldName": "txtKeikakuhiTekiyoH2103",
@@ -9418,7 +9418,7 @@
              "isComboBox": false,
              "suggest": [],
              "permitCharactor": "",
-             "formatLength": 1
+             "formatLength": 8
             },
             {
              "fieldName": "txtKeikakuhiTanisuTankaH2104",
@@ -9830,7 +9830,7 @@
              "isComboBox": false,
              "suggest": [],
              "permitCharactor": "",
-             "formatLength": 1
+             "formatLength": 8
             },
             {
              "fieldName": "txtKeikakuhiServiceCodeH2104",
@@ -9873,7 +9873,7 @@
              "isComboBox": false,
              "suggest": [],
              "permitCharactor": "",
-             "formatLength": 1
+             "formatLength": 8
             },
             {
              "fieldName": "btnKeikakuhiServiceH2104",
@@ -10533,7 +10533,7 @@
            "isComboBox": false,
            "suggest": [],
            "permitCharactor": "",
-           "formatLength": 1
+           "formatLength": 8
           },
           {
            "fieldName": "btnShukeiShurui",
@@ -11895,7 +11895,7 @@
            "isComboBox": false,
            "suggest": [],
            "permitCharactor": "",
-           "formatLength": 1
+           "formatLength": 8
           },
           {
            "fieldName": "txtNyushohiServiceCode",
@@ -11938,7 +11938,7 @@
            "isComboBox": false,
            "suggest": [],
            "permitCharactor": "",
-           "formatLength": 1
+           "formatLength": 8
           },
           {
            "fieldName": "btnNyushohiService",
