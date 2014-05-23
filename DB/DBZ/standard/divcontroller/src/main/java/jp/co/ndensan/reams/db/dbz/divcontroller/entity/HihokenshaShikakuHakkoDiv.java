@@ -34,6 +34,8 @@ public class HihokenshaShikakuHakkoDiv extends Panel {
     private TextBox txtHokensha;
     @JsonProperty("txtYokaigodo")
     private TextBox txtYokaigodo;
+    @JsonProperty("txtNinteiYukoKikan")
+    private TextBoxDateRange txtNinteiYukoKikan;
     @JsonProperty("txtShinseiDate")
     private TextBoxFlexibleDate txtShinseiDate;
     @JsonProperty("tabHihokenshaShikakuShosai")
@@ -103,6 +105,16 @@ public class HihokenshaShikakuHakkoDiv extends Panel {
     @JsonProperty("txtYokaigodo")
     public void setTxtYokaigodo(TextBox txtYokaigodo) {
         this.txtYokaigodo=txtYokaigodo;
+    }
+
+    @JsonProperty("txtNinteiYukoKikan")
+    public TextBoxDateRange getTxtNinteiYukoKikan() {
+        return txtNinteiYukoKikan;
+    }
+
+    @JsonProperty("txtNinteiYukoKikan")
+    public void setTxtNinteiYukoKikan(TextBoxDateRange txtNinteiYukoKikan) {
+        this.txtNinteiYukoKikan=txtNinteiYukoKikan;
     }
 
     @JsonProperty("txtShinseiDate")

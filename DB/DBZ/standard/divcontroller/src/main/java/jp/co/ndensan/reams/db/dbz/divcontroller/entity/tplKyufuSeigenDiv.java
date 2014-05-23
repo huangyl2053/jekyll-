@@ -6,7 +6,9 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.tblKyuhuSeigenDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * tplKyufuSeigen のクラスファイル 
@@ -20,6 +22,8 @@ public class tplKyufuSeigenDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("lblKyufuSeigen")
+    private Label lblKyufuSeigen;
     @JsonProperty("tblKyuhuSeigen")
     private tblKyuhuSeigenDiv tblKyuhuSeigen;
 
@@ -29,6 +33,16 @@ public class tplKyufuSeigenDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    @JsonProperty("lblKyufuSeigen")
+    public Label getLblKyufuSeigen() {
+        return lblKyufuSeigen;
+    }
+
+    @JsonProperty("lblKyufuSeigen")
+    public void setLblKyufuSeigen(Label lblKyufuSeigen) {
+        this.lblKyufuSeigen=lblKyufuSeigen;
+    }
+
     @JsonProperty("tblKyuhuSeigen")
     public tblKyuhuSeigenDiv getTblKyuhuSeigen() {
         return tblKyuhuSeigen;

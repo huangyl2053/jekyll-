@@ -28,14 +28,33 @@ var DBZ;
         });
 
 
+        Object.defineProperty(HihokenshaShikakuHakko_Design.prototype, "radInjiIchi_displayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[0]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
         HihokenshaShikakuHakko_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
             Uz.JSControlUtil.registProperty("txtYukoKigen_displayNone");
+            Uz.JSControlUtil.registProperty("radInjiIchi_displayNone");
         };
 
         HihokenshaShikakuHakko_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
             editablePropertyInfo["txtYukoKigen_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["radInjiIchi_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["displayNone"];
 
             return editablePropertyInfo;
         };
@@ -79,7 +98,7 @@ var DBZ;
                             "newLineItemNumber": 2,
                             "spaceSize": 1,
                             "labelLText": "印字位置:",
-                            "labelLWidth": "６０",
+                            "labelLWidth": "70",
                             "labelLAlign": 2
                         },
                         {
@@ -216,7 +235,7 @@ var DBZ;
                             "onChange": "",
                             "required": false,
                             "labelLText": "有効期限",
-                            "labelLWidth": "85",
+                            "labelLWidth": "100",
                             "labelLAlign": 2,
                             "readOnly": false,
                             "placeHolder": "",
@@ -320,6 +339,48 @@ var DBZ;
                             "permitCharactor": ""
                         },
                         {
+                            "fieldName": "txtNinteiYukoKikan",
+                            "items": [],
+                            "controlType": "TextBoxDateRange",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "onChange": "",
+                            "labelLText": "有効期間",
+                            "labelLWidth": "60",
+                            "labelLAlign": 2,
+                            "readOnly": true,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onKeyPress": "",
+                            "labelRText": "",
+                            "labelRWidth": "S",
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "permitCharactor": "",
+                            "fromPlaceHolder": "",
+                            "toPlaceHolder": "",
+                            "minDate": "",
+                            "maxDate": "",
+                            "fromText": "",
+                            "toText": "",
+                            "fromValue": "",
+                            "toValue": ""
+                        },
+                        {
                             "fieldName": "txtShinseiDate",
                             "items": [],
                             "controlType": "TextBoxFlexibleDate",
@@ -365,10 +426,10 @@ var DBZ;
                                     "fieldName": "tplGendoGaku",
                                     "items": [
                                         {
-                                            "fieldName": "txtServiceShurui",
+                                            "fieldName": "lblKubunShikyuGendoGaku",
                                             "items": [],
-                                            "controlType": "TextBox",
-                                            "width": "220",
+                                            "controlType": "Label",
+                                            "width": "105",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -381,33 +442,13 @@ var DBZ;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
-                                            "onChange": "",
                                             "required": false,
-                                            "labelLText": "サービス種類",
-                                            "labelLWidth": "90",
-                                            "labelLAlign": 2,
-                                            "readOnly": true,
-                                            "placeHolder": "",
-                                            "textKind": 0,
                                             "isPrivateInfo": false,
-                                            "isPassword": false,
-                                            "onFocus": "",
-                                            "onBlur": "",
-                                            "onKeyPress": "",
-                                            "text": "",
-                                            "labelRText": "",
-                                            "labelRWidth": "S",
-                                            "labelRAlign": 0,
-                                            "value": "",
-                                            "maxLength": 1000000000000,
-                                            "minLength": 0,
-                                            "textAlign": 0,
-                                            "isComboBox": false,
-                                            "suggest": [],
-                                            "permitCharactor": ""
+                                            "text": "区分支給限度額",
+                                            "align": 2
                                         },
                                         {
-                                            "fieldName": "txtYukoKikan",
+                                            "fieldName": "txtKyuhuYukoKikan",
                                             "items": [],
                                             "controlType": "TextBoxDateRange",
                                             "width": "80",
@@ -467,8 +508,8 @@ var DBZ;
                                             "marginRight": "XS",
                                             "onChange": "",
                                             "required": false,
-                                            "labelLText": "区分支給限度基準額",
-                                            "labelLWidth": "135",
+                                            "labelLText": "基準額",
+                                            "labelLWidth": "45",
                                             "labelLAlign": 2,
                                             "readOnly": true,
                                             "placeHolder": "",
@@ -496,10 +537,88 @@ var DBZ;
                                             "decimalPointLength": 0
                                         },
                                         {
-                                            "fieldName": "lblShuruiShikyuGendoKijunGaku",
-                                            "items": [],
-                                            "controlType": "Label",
-                                            "width": "１８０",
+                                            "fieldName": "ShuruiShikyuGendoKijungaku",
+                                            "items": [
+                                                {
+                                                    "fieldName": "dgShuruiShikyuGendoKijunGaku",
+                                                    "items": [],
+                                                    "controlType": "DataGrid",
+                                                    "width": "390",
+                                                    "visible": true,
+                                                    "displayNone": false,
+                                                    "disabled": false,
+                                                    "accessKey": "",
+                                                    "nextFocusFieldName": "",
+                                                    "wrap": true,
+                                                    "dependencies": [],
+                                                    "float": 0,
+                                                    "toolTip": "",
+                                                    "authorityMode": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "XS",
+                                                    "dataSource": [],
+                                                    "gridSetting": {
+                                                        "rowHeight": 25,
+                                                        "isMultiSelectable": false,
+                                                        "isShowFooter": true,
+                                                        "isShowFilter": false,
+                                                        "isShowFilterButton": false,
+                                                        "isShowRowState": false,
+                                                        "header": {
+                                                            "combineColumns": [],
+                                                            "frozenColumn": "",
+                                                            "headerHeight": 0
+                                                        },
+                                                        "columns": [
+                                                            {
+                                                                "columnName": "サービス種類",
+                                                                "dataName": "serviceShurui",
+                                                                "toolTip": "",
+                                                                "bgColor": 0,
+                                                                "width": 270,
+                                                                "visible": true,
+                                                                "cellType": 0,
+                                                                "cellDetails": {
+                                                                    "cellType": 0
+                                                                },
+                                                                "align": 0,
+                                                                "resize": true,
+                                                                "isPrivateInfo": false,
+                                                                "sortKey": ""
+                                                            },
+                                                            {
+                                                                "columnName": "限度額",
+                                                                "dataName": "gendoGaku",
+                                                                "toolTip": "",
+                                                                "bgColor": 0,
+                                                                "width": 100,
+                                                                "visible": true,
+                                                                "cellType": 0,
+                                                                "cellDetails": {
+                                                                    "cellType": 0
+                                                                },
+                                                                "align": 2,
+                                                                "resize": true,
+                                                                "isPrivateInfo": false,
+                                                                "sortKey": ""
+                                                            }
+                                                        ]
+                                                    },
+                                                    "height": "125",
+                                                    "onSort": "",
+                                                    "onSelect": "",
+                                                    "onSelectByDblClick": "",
+                                                    "onOnlyRow": "",
+                                                    "onNoRow": "",
+                                                    "onMultiRows": "",
+                                                    "sortOrder": "serviceShurui",
+                                                    "isAscending": true,
+                                                    "filterList": [],
+                                                    "activeRowId": -1
+                                                }
+                                            ],
+                                            "controlType": "Panel",
+                                            "width": "M",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -512,87 +631,29 @@ var DBZ;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
-                                            "required": false,
-                                            "isPrivateInfo": false,
-                                            "text": "うち種類支給限度基準額",
-                                            "align": 2
-                                        },
-                                        {
-                                            "fieldName": "dgShuruiShikyuGendoKijunGaku",
-                                            "items": [],
-                                            "controlType": "DataGrid",
-                                            "width": "390",
-                                            "visible": true,
-                                            "displayNone": false,
-                                            "disabled": false,
-                                            "accessKey": "",
-                                            "nextFocusFieldName": "",
-                                            "wrap": true,
-                                            "dependencies": [],
-                                            "float": 0,
-                                            "toolTip": "",
-                                            "authorityMode": 0,
-                                            "marginLeft": "M",
-                                            "marginRight": "XS",
-                                            "dataSource": [],
-                                            "gridSetting": {
-                                                "rowHeight": 25,
-                                                "isMultiSelectable": false,
-                                                "isShowFooter": true,
-                                                "isShowFilter": false,
-                                                "isShowFilterButton": false,
-                                                "isShowRowState": false,
-                                                "header": {
-                                                    "combineColumns": [],
-                                                    "frozenColumn": "",
-                                                    "headerHeight": 0
-                                                },
-                                                "columns": [
-                                                    {
-                                                        "columnName": "サービス種類",
-                                                        "dataName": "serviceShurui",
-                                                        "toolTip": "",
-                                                        "bgColor": 0,
-                                                        "width": 270,
-                                                        "visible": true,
-                                                        "cellType": 0,
-                                                        "cellDetails": {
-                                                            "cellType": 0
-                                                        },
-                                                        "align": 0,
-                                                        "resize": true,
-                                                        "isPrivateInfo": false,
-                                                        "sortKey": ""
-                                                    },
-                                                    {
-                                                        "columnName": "限度額",
-                                                        "dataName": "gendoGaku",
-                                                        "toolTip": "",
-                                                        "bgColor": 0,
-                                                        "width": 100,
-                                                        "visible": true,
-                                                        "cellType": 0,
-                                                        "cellDetails": {
-                                                            "cellType": 0
-                                                        },
-                                                        "align": 2,
-                                                        "resize": true,
-                                                        "isPrivateInfo": false,
-                                                        "sortKey": ""
-                                                    }
-                                                ]
-                                            },
-                                            "height": "125",
-                                            "onSort": "",
-                                            "onSelect": "",
-                                            "onSelectByDblClick": "",
-                                            "onOnlyRow": "",
-                                            "onNoRow": "",
-                                            "onMultiRows": "",
-                                            "sortOrder": "serviceShurui",
-                                            "isAscending": true,
-                                            "filterList": [],
-                                            "activeRowId": -1
+                                            "onLoad": "",
+                                            "title": "うち種類支給限度基準額",
+                                            "marginTop": "Default",
+                                            "marginBottom": "Default",
+                                            "isOpen": true,
+                                            "canOpenAndClose": false,
+                                            "postParameterPanelNames": [
+                                                {
+                                                    "postParameterPanelNames": "ShuruiShikyuGendoKijungaku"
+                                                }
+                                            ],
+                                            "requestSettings": [],
+                                            "hiddenInput": [],
+                                            "onOpen": "",
+                                            "onClose": "",
+                                            "session": {},
+                                            "eraseBorderTop": false,
+                                            "eraseBorderBottom": false,
+                                            "eraseBorderRight": false,
+                                            "eraseBorderLeft": false,
+                                            "backgroundColor": 0,
+                                            "widthAuto": true,
+                                            "isGroupBox": true
                                         }
                                     ],
                                     "controlType": "TabPanel",
@@ -619,7 +680,7 @@ var DBZ;
                                             "fieldName": "lblShinsakaiIken",
                                             "items": [],
                                             "controlType": "Label",
-                                            "width": "105",
+                                            "width": "265",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -634,14 +695,14 @@ var DBZ;
                                             "marginRight": "XS",
                                             "required": false,
                                             "isPrivateInfo": false,
-                                            "text": "認定審査会意見",
+                                            "text": "認定審査会意見及びサービス種類の指定",
                                             "align": 2
                                         },
                                         {
                                             "fieldName": "txtShinsakaiIken",
                                             "items": [],
                                             "controlType": "TextBoxMultiLine",
-                                            "width": "400",
+                                            "width": "800",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -652,7 +713,7 @@ var DBZ;
                                             "float": 0,
                                             "toolTip": "",
                                             "authorityMode": 0,
-                                            "marginLeft": "M",
+                                            "marginLeft": "XS",
                                             "marginRight": "XS",
                                             "onChange": "",
                                             "required": false,
@@ -698,6 +759,28 @@ var DBZ;
                                 {
                                     "fieldName": "tplKyufuSeigen",
                                     "items": [
+                                        {
+                                            "fieldName": "lblKyufuSeigen",
+                                            "items": [],
+                                            "controlType": "Label",
+                                            "width": "60",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "required": false,
+                                            "isPrivateInfo": false,
+                                            "text": "給付制限",
+                                            "align": 2
+                                        },
                                         {
                                             "fieldName": "tblKyuhuSeigen",
                                             "items": [
@@ -1165,14 +1248,14 @@ var DBZ;
                                             "disabled": false,
                                             "accessKey": "",
                                             "nextFocusFieldName": "",
-                                            "wrap": false,
+                                            "wrap": true,
                                             "dependencies": [],
                                             "float": 0,
                                             "toolTip": "",
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
-                                            "html": "<table>\n  <tbody>\n    <tr><td id='R1C1'></td><td id='R1C2'></td></tr>\n    <tr><td id='R2C1'></td><td id='R2C2'></td></tr>\n    <tr><td id='R3C1'></td><td id='R3C2'></td></tr>\n    <tr><td id='R4C1'></td><td id='R4C2'></td></tr>\n  </tbody>\n</table>\n"
+                                            "html": "<table border='1'>\n  <tbody>\n    <tr><td id='R1C1'></td><td id='R1C2'></td></tr>\n    <tr><td id='R2C1'></td><td id='R2C2'></td></tr>\n    <tr><td id='R3C1'></td><td id='R3C2'></td></tr>\n    <tr><td id='R4C1'></td><td id='R4C2'></td></tr>\n  </tbody>\n</table>\n"
                                         }
                                     ],
                                     "controlType": "TabPanel",
@@ -1196,46 +1279,26 @@ var DBZ;
                                     "fieldName": "tplShienJigyosha",
                                     "items": [
                                         {
-                                            "fieldName": "txtJigyoshaShurui",
+                                            "fieldName": "lblShienJigyosha",
                                             "items": [],
-                                            "controlType": "TextBox",
-                                            "width": "200",
+                                            "controlType": "Label",
+                                            "width": "250",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
                                             "accessKey": "",
                                             "nextFocusFieldName": "",
-                                            "wrap": true,
+                                            "wrap": false,
                                             "dependencies": [],
                                             "float": 0,
                                             "toolTip": "",
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
-                                            "onChange": "",
                                             "required": false,
-                                            "labelLText": "事業者種類",
-                                            "labelLWidth": "75",
-                                            "labelLAlign": 2,
-                                            "readOnly": true,
-                                            "placeHolder": "",
-                                            "textKind": 0,
                                             "isPrivateInfo": false,
-                                            "isPassword": false,
-                                            "onFocus": "",
-                                            "onBlur": "",
-                                            "onKeyPress": "",
-                                            "text": "",
-                                            "labelRText": "",
-                                            "labelRWidth": "S",
-                                            "labelRAlign": 0,
-                                            "value": "",
-                                            "maxLength": 1000000000000,
-                                            "minLength": 0,
-                                            "textAlign": 0,
-                                            "isComboBox": false,
-                                            "suggest": [],
-                                            "permitCharactor": ""
+                                            "text": "居住介護支援事業者及び事業者の名称",
+                                            "align": 2
                                         },
                                         {
                                             "fieldName": "tblJigyosha",
@@ -1702,7 +1765,7 @@ var DBZ;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
-                                            "html": "<table>\n  <tbody>\n    <tr><td id='R1C1'></td><td id='R1C2'></td></tr>\n    <tr><td id='R2C1'></td><td id='R2C2'></td></tr>\n    <tr><td id='R3C1'></td><td id='R3C2'></td></tr>\n    <tr><td id='R4C1'></td><td id='R4C2'></td></tr>\n  </tbody>\n</table>\n"
+                                            "html": "<table border='1'>\n  <tbody>\n    <tr><td id='R1C1'></td><td id='R1C2'></td></tr>\n    <tr><td id='R2C1'></td><td id='R2C2'></td></tr>\n    <tr><td id='R3C1'></td><td id='R3C2'></td></tr>\n    <tr><td id='R4C1'></td><td id='R4C2'></td></tr>\n  </tbody>\n</table>\n"
                                         }
                                     ],
                                     "controlType": "TabPanel",
@@ -1725,6 +1788,28 @@ var DBZ;
                                 {
                                     "fieldName": "tplShisetsuNyutaisho",
                                     "items": [
+                                        {
+                                            "fieldName": "lblKaigoHokensha",
+                                            "items": [],
+                                            "controlType": "Label",
+                                            "width": "105",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "required": false,
+                                            "isPrivateInfo": false,
+                                            "text": "介護保険施設等",
+                                            "align": 2
+                                        },
                                         {
                                             "fieldName": "tblShisetsuNyutaisho",
                                             "items": [
@@ -2215,48 +2300,6 @@ var DBZ;
                                                     "connectTd": "R3C3"
                                                 },
                                                 {
-                                                    "fieldName": "celTaishoJohoTitle",
-                                                    "items": [
-                                                        {
-                                                            "fieldName": "lblTaishoJoho",
-                                                            "items": [],
-                                                            "controlType": "Label",
-                                                            "width": "60",
-                                                            "visible": true,
-                                                            "displayNone": false,
-                                                            "disabled": false,
-                                                            "accessKey": "",
-                                                            "nextFocusFieldName": "",
-                                                            "wrap": true,
-                                                            "dependencies": [],
-                                                            "float": 1,
-                                                            "toolTip": "",
-                                                            "authorityMode": 0,
-                                                            "marginLeft": "XS",
-                                                            "marginRight": "XS",
-                                                            "required": false,
-                                                            "isPrivateInfo": false,
-                                                            "text": "対象情報",
-                                                            "align": 2
-                                                        }
-                                                    ],
-                                                    "controlType": "TableCell",
-                                                    "width": "XS",
-                                                    "visible": true,
-                                                    "displayNone": false,
-                                                    "disabled": false,
-                                                    "accessKey": "",
-                                                    "nextFocusFieldName": "",
-                                                    "wrap": false,
-                                                    "dependencies": [],
-                                                    "float": 0,
-                                                    "toolTip": "",
-                                                    "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
-                                                    "connectTd": "R1C4"
-                                                },
-                                                {
                                                     "fieldName": "celShisetsuShuruiTitle",
                                                     "items": [
                                                         {
@@ -2297,68 +2340,6 @@ var DBZ;
                                                     "marginLeft": 0,
                                                     "marginRight": 0,
                                                     "connectTd": "R1C5"
-                                                },
-                                                {
-                                                    "fieldName": "celTaishoJoho1",
-                                                    "items": [
-                                                        {
-                                                            "fieldName": "txtTaishoJoho1",
-                                                            "items": [],
-                                                            "controlType": "TextBox",
-                                                            "width": "150",
-                                                            "visible": true,
-                                                            "displayNone": false,
-                                                            "disabled": false,
-                                                            "accessKey": "",
-                                                            "nextFocusFieldName": "",
-                                                            "wrap": false,
-                                                            "dependencies": [],
-                                                            "float": 0,
-                                                            "toolTip": "",
-                                                            "authorityMode": 0,
-                                                            "marginLeft": "XS",
-                                                            "marginRight": "XS",
-                                                            "onChange": "",
-                                                            "required": false,
-                                                            "labelLText": "",
-                                                            "labelLWidth": "S",
-                                                            "labelLAlign": 2,
-                                                            "readOnly": true,
-                                                            "placeHolder": "",
-                                                            "textKind": 0,
-                                                            "isPrivateInfo": false,
-                                                            "isPassword": false,
-                                                            "onFocus": "",
-                                                            "onBlur": "",
-                                                            "onKeyPress": "",
-                                                            "text": "",
-                                                            "labelRText": "",
-                                                            "labelRWidth": "S",
-                                                            "labelRAlign": 0,
-                                                            "value": "",
-                                                            "maxLength": 1000000000000,
-                                                            "minLength": 0,
-                                                            "textAlign": 0,
-                                                            "isComboBox": false,
-                                                            "suggest": [],
-                                                            "permitCharactor": ""
-                                                        }
-                                                    ],
-                                                    "controlType": "TableCell",
-                                                    "width": "XS",
-                                                    "visible": true,
-                                                    "displayNone": false,
-                                                    "disabled": false,
-                                                    "accessKey": "",
-                                                    "nextFocusFieldName": "",
-                                                    "wrap": false,
-                                                    "dependencies": [],
-                                                    "float": 0,
-                                                    "toolTip": "",
-                                                    "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
-                                                    "connectTd": "R2C4"
                                                 },
                                                 {
                                                     "fieldName": "celShisetsuShurui1",
@@ -2421,68 +2402,6 @@ var DBZ;
                                                     "marginLeft": 0,
                                                     "marginRight": 0,
                                                     "connectTd": "R2C5"
-                                                },
-                                                {
-                                                    "fieldName": "celTaishoJoho2",
-                                                    "items": [
-                                                        {
-                                                            "fieldName": "txtTaishoJoho2",
-                                                            "items": [],
-                                                            "controlType": "TextBox",
-                                                            "width": "150",
-                                                            "visible": true,
-                                                            "displayNone": false,
-                                                            "disabled": false,
-                                                            "accessKey": "",
-                                                            "nextFocusFieldName": "",
-                                                            "wrap": false,
-                                                            "dependencies": [],
-                                                            "float": 0,
-                                                            "toolTip": "",
-                                                            "authorityMode": 0,
-                                                            "marginLeft": "XS",
-                                                            "marginRight": "XS",
-                                                            "onChange": "",
-                                                            "required": false,
-                                                            "labelLText": "",
-                                                            "labelLWidth": "S",
-                                                            "labelLAlign": 2,
-                                                            "readOnly": true,
-                                                            "placeHolder": "",
-                                                            "textKind": 0,
-                                                            "isPrivateInfo": false,
-                                                            "isPassword": false,
-                                                            "onFocus": "",
-                                                            "onBlur": "",
-                                                            "onKeyPress": "",
-                                                            "text": "",
-                                                            "labelRText": "",
-                                                            "labelRWidth": "S",
-                                                            "labelRAlign": 0,
-                                                            "value": "",
-                                                            "maxLength": 1000000000000,
-                                                            "minLength": 0,
-                                                            "textAlign": 0,
-                                                            "isComboBox": false,
-                                                            "suggest": [],
-                                                            "permitCharactor": ""
-                                                        }
-                                                    ],
-                                                    "controlType": "TableCell",
-                                                    "width": "XS",
-                                                    "visible": true,
-                                                    "displayNone": false,
-                                                    "disabled": false,
-                                                    "accessKey": "",
-                                                    "nextFocusFieldName": "",
-                                                    "wrap": false,
-                                                    "dependencies": [],
-                                                    "float": 0,
-                                                    "toolTip": "",
-                                                    "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
-                                                    "connectTd": "R3C4"
                                                 },
                                                 {
                                                     "fieldName": "celShisetsuShurui2",
@@ -2727,68 +2646,6 @@ var DBZ;
                                                     "connectTd": "R4C3"
                                                 },
                                                 {
-                                                    "fieldName": "celTaishoJoho3",
-                                                    "items": [
-                                                        {
-                                                            "fieldName": "txtTaishoJoho3",
-                                                            "items": [],
-                                                            "controlType": "TextBox",
-                                                            "width": "150",
-                                                            "visible": true,
-                                                            "displayNone": false,
-                                                            "disabled": false,
-                                                            "accessKey": "",
-                                                            "nextFocusFieldName": "",
-                                                            "wrap": false,
-                                                            "dependencies": [],
-                                                            "float": 0,
-                                                            "toolTip": "",
-                                                            "authorityMode": 0,
-                                                            "marginLeft": "XS",
-                                                            "marginRight": "XS",
-                                                            "onChange": "",
-                                                            "required": false,
-                                                            "labelLText": "",
-                                                            "labelLWidth": "S",
-                                                            "labelLAlign": 2,
-                                                            "readOnly": true,
-                                                            "placeHolder": "",
-                                                            "textKind": 0,
-                                                            "isPrivateInfo": false,
-                                                            "isPassword": false,
-                                                            "onFocus": "",
-                                                            "onBlur": "",
-                                                            "onKeyPress": "",
-                                                            "text": "",
-                                                            "labelRText": "",
-                                                            "labelRWidth": "S",
-                                                            "labelRAlign": 0,
-                                                            "value": "",
-                                                            "maxLength": 1000000000000,
-                                                            "minLength": 0,
-                                                            "textAlign": 0,
-                                                            "isComboBox": false,
-                                                            "suggest": [],
-                                                            "permitCharactor": ""
-                                                        }
-                                                    ],
-                                                    "controlType": "TableCell",
-                                                    "width": "XS",
-                                                    "visible": true,
-                                                    "displayNone": false,
-                                                    "disabled": false,
-                                                    "accessKey": "",
-                                                    "nextFocusFieldName": "",
-                                                    "wrap": false,
-                                                    "dependencies": [],
-                                                    "float": 0,
-                                                    "toolTip": "",
-                                                    "authorityMode": 0,
-                                                    "marginLeft": 0,
-                                                    "marginRight": 0,
-                                                    "connectTd": "R4C4"
-                                                },
-                                                {
                                                     "fieldName": "celShisetsuShurui3",
                                                     "items": [
                                                         {
@@ -2858,14 +2715,14 @@ var DBZ;
                                             "disabled": false,
                                             "accessKey": "",
                                             "nextFocusFieldName": "",
-                                            "wrap": false,
+                                            "wrap": true,
                                             "dependencies": [],
                                             "float": 0,
                                             "toolTip": "",
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
-                                            "html": "<table>\n  <tbody>\n    <tr><td id='R1C1'></td><td id='R1C2'></td><td id='R1C3'></td><td id='R1C4'></td><td id='R1C5'></td></tr>\n    <tr><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td></tr>\n    <tr><td id='R3C1'></td><td id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td><td id='R3C5'></td></tr>\n    <tr><td id='R4C1'></td><td id='R4C2'></td><td id='R4C3'></td><td id='R4C4'></td><td id='R4C5'></td></tr>\n  </tbody>\n</table>\n"
+                                            "html": "<table border='1'>\n  <tbody>\n    <tr><td id='R1C5'></td><td id='R1C3'></td><td id='R1C1'></td><td id='R1C2'></td></tr>\n    <tr><td id='R2C5'></td><td id='R2C3'></td><td id='R2C1'></td><td id='R2C2'></td></tr>\n    <tr><td id='R3C5'></td><td id='R3C3'></td><td id='R3C1'></td><td id='R3C2'></td></tr>\n    <tr><td id='R4C5'></td><td id='R4C3'></td><td id='R4C1'></td><td id='R4C2'></td></tr>\n  </tbody>\n</table>\n"
                                         }
                                     ],
                                     "controlType": "TabPanel",
@@ -2887,7 +2744,7 @@ var DBZ;
                                 }
                             ],
                             "controlType": "TabContainer",
-                            "width": "980",
+                            "width": "950",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -2976,6 +2833,11 @@ var DBZ;
                     "publicChildFieldName": "txtYukoKigen",
                     "publicChildProperty": "displayNone",
                     "newPropertyName": "txtYukoKigen_displayNone"
+                },
+                {
+                    "publicChildFieldName": "radInjiIchi",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "radInjiIchi_displayNone"
                 }
             ],
             "dataPassingForDialog": [],

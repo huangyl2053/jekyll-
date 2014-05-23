@@ -507,7 +507,7 @@
    "marginLeft": "XS",
    "marginRight": "XS",
    "onLoad": "",
-   "title": "施設入退所管理対象者検索",
+   "title": "被保険者証発行対象者検索",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
@@ -1097,7 +1097,8 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
-     "txtYukoKigen_displayNone": true
+     "txtYukoKigen_displayNone": true,
+     "radInjiIchi_displayNone": true
     }
    ],
    "controlType": "Panel",

@@ -5,7 +5,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgShuruiShikyuGendoKijunGaku_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShuruiShikyuGendoKijungakuDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -22,16 +22,14 @@ public class tplGendoGakuDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtServiceShurui")
-    private TextBox txtServiceShurui;
-    @JsonProperty("txtYukoKikan")
-    private TextBoxDateRange txtYukoKikan;
+    @JsonProperty("lblKubunShikyuGendoGaku")
+    private Label lblKubunShikyuGendoGaku;
+    @JsonProperty("txtKyuhuYukoKikan")
+    private TextBoxDateRange txtKyuhuYukoKikan;
     @JsonProperty("txtKubunShikyuGendoKijunGaku")
     private TextBoxNum txtKubunShikyuGendoKijunGaku;
-    @JsonProperty("lblShuruiShikyuGendoKijunGaku")
-    private Label lblShuruiShikyuGendoKijunGaku;
-    @JsonProperty("dgShuruiShikyuGendoKijunGaku")
-    private DataGrid<dgShuruiShikyuGendoKijunGaku_Row> dgShuruiShikyuGendoKijunGaku;
+    @JsonProperty("ShuruiShikyuGendoKijungaku")
+    private ShuruiShikyuGendoKijungakuDiv ShuruiShikyuGendoKijungaku;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -39,24 +37,24 @@ public class tplGendoGakuDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("txtServiceShurui")
-    public TextBox getTxtServiceShurui() {
-        return txtServiceShurui;
+    @JsonProperty("lblKubunShikyuGendoGaku")
+    public Label getLblKubunShikyuGendoGaku() {
+        return lblKubunShikyuGendoGaku;
     }
 
-    @JsonProperty("txtServiceShurui")
-    public void setTxtServiceShurui(TextBox txtServiceShurui) {
-        this.txtServiceShurui=txtServiceShurui;
+    @JsonProperty("lblKubunShikyuGendoGaku")
+    public void setLblKubunShikyuGendoGaku(Label lblKubunShikyuGendoGaku) {
+        this.lblKubunShikyuGendoGaku=lblKubunShikyuGendoGaku;
     }
 
-    @JsonProperty("txtYukoKikan")
-    public TextBoxDateRange getTxtYukoKikan() {
-        return txtYukoKikan;
+    @JsonProperty("txtKyuhuYukoKikan")
+    public TextBoxDateRange getTxtKyuhuYukoKikan() {
+        return txtKyuhuYukoKikan;
     }
 
-    @JsonProperty("txtYukoKikan")
-    public void setTxtYukoKikan(TextBoxDateRange txtYukoKikan) {
-        this.txtYukoKikan=txtYukoKikan;
+    @JsonProperty("txtKyuhuYukoKikan")
+    public void setTxtKyuhuYukoKikan(TextBoxDateRange txtKyuhuYukoKikan) {
+        this.txtKyuhuYukoKikan=txtKyuhuYukoKikan;
     }
 
     @JsonProperty("txtKubunShikyuGendoKijunGaku")
@@ -69,24 +67,14 @@ public class tplGendoGakuDiv extends TabPanel {
         this.txtKubunShikyuGendoKijunGaku=txtKubunShikyuGendoKijunGaku;
     }
 
-    @JsonProperty("lblShuruiShikyuGendoKijunGaku")
-    public Label getLblShuruiShikyuGendoKijunGaku() {
-        return lblShuruiShikyuGendoKijunGaku;
+    @JsonProperty("ShuruiShikyuGendoKijungaku")
+    public ShuruiShikyuGendoKijungakuDiv getShuruiShikyuGendoKijungaku() {
+        return ShuruiShikyuGendoKijungaku;
     }
 
-    @JsonProperty("lblShuruiShikyuGendoKijunGaku")
-    public void setLblShuruiShikyuGendoKijunGaku(Label lblShuruiShikyuGendoKijunGaku) {
-        this.lblShuruiShikyuGendoKijunGaku=lblShuruiShikyuGendoKijunGaku;
-    }
-
-    @JsonProperty("dgShuruiShikyuGendoKijunGaku")
-    public DataGrid<dgShuruiShikyuGendoKijunGaku_Row> getDgShuruiShikyuGendoKijunGaku() {
-        return dgShuruiShikyuGendoKijunGaku;
-    }
-
-    @JsonProperty("dgShuruiShikyuGendoKijunGaku")
-    public void setDgShuruiShikyuGendoKijunGaku(DataGrid<dgShuruiShikyuGendoKijunGaku_Row> dgShuruiShikyuGendoKijunGaku) {
-        this.dgShuruiShikyuGendoKijunGaku=dgShuruiShikyuGendoKijunGaku;
+    @JsonProperty("ShuruiShikyuGendoKijungaku")
+    public void setShuruiShikyuGendoKijungaku(ShuruiShikyuGendoKijungakuDiv ShuruiShikyuGendoKijungaku) {
+        this.ShuruiShikyuGendoKijungaku=ShuruiShikyuGendoKijungaku;
     }
 
 }

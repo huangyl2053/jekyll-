@@ -5,27 +5,25 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.tblJigyoshaDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgShuruiShikyuGendoKijunGaku_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * tplShienJigyosha のクラスファイル 
+ * ShuruiShikyuGendoKijungaku のクラスファイル 
  * 
  * @author 自動生成
  */
-public class tplShienJigyoshaDiv extends TabPanel {
+public class ShuruiShikyuGendoKijungakuDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblShienJigyosha")
-    private Label lblShienJigyosha;
-    @JsonProperty("tblJigyosha")
-    private tblJigyoshaDiv tblJigyosha;
+    @JsonProperty("dgShuruiShikyuGendoKijunGaku")
+    private DataGrid<dgShuruiShikyuGendoKijunGaku_Row> dgShuruiShikyuGendoKijunGaku;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -33,24 +31,14 @@ public class tplShienJigyoshaDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblShienJigyosha")
-    public Label getLblShienJigyosha() {
-        return lblShienJigyosha;
+    @JsonProperty("dgShuruiShikyuGendoKijunGaku")
+    public DataGrid<dgShuruiShikyuGendoKijunGaku_Row> getDgShuruiShikyuGendoKijunGaku() {
+        return dgShuruiShikyuGendoKijunGaku;
     }
 
-    @JsonProperty("lblShienJigyosha")
-    public void setLblShienJigyosha(Label lblShienJigyosha) {
-        this.lblShienJigyosha=lblShienJigyosha;
-    }
-
-    @JsonProperty("tblJigyosha")
-    public tblJigyoshaDiv getTblJigyosha() {
-        return tblJigyosha;
-    }
-
-    @JsonProperty("tblJigyosha")
-    public void setTblJigyosha(tblJigyoshaDiv tblJigyosha) {
-        this.tblJigyosha=tblJigyosha;
+    @JsonProperty("dgShuruiShikyuGendoKijunGaku")
+    public void setDgShuruiShikyuGendoKijunGaku(DataGrid<dgShuruiShikyuGendoKijunGaku_Row> dgShuruiShikyuGendoKijunGaku) {
+        this.dgShuruiShikyuGendoKijunGaku=dgShuruiShikyuGendoKijunGaku;
     }
 
 }

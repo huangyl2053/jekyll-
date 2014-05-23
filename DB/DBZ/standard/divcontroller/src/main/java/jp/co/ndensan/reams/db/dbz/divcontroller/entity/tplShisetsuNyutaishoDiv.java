@@ -6,7 +6,9 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.tblShisetsuNyutaishoDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * tplShisetsuNyutaisho のクラスファイル 
@@ -20,6 +22,8 @@ public class tplShisetsuNyutaishoDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("lblKaigoHokensha")
+    private Label lblKaigoHokensha;
     @JsonProperty("tblShisetsuNyutaisho")
     private tblShisetsuNyutaishoDiv tblShisetsuNyutaisho;
 
@@ -29,6 +33,16 @@ public class tplShisetsuNyutaishoDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    @JsonProperty("lblKaigoHokensha")
+    public Label getLblKaigoHokensha() {
+        return lblKaigoHokensha;
+    }
+
+    @JsonProperty("lblKaigoHokensha")
+    public void setLblKaigoHokensha(Label lblKaigoHokensha) {
+        this.lblKaigoHokensha=lblKaigoHokensha;
+    }
+
     @JsonProperty("tblShisetsuNyutaisho")
     public tblShisetsuNyutaishoDiv getTblShisetsuNyutaisho() {
         return tblShisetsuNyutaisho;
