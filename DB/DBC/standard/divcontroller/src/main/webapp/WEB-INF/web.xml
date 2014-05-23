@@ -58,7 +58,6 @@
         <url-pattern>*.css</url-pattern>
         <url-pattern>*.js</url-pattern>
         <url-pattern>*.yml</url-pattern>
-        
     </servlet-mapping>
 
     <jsp-config>

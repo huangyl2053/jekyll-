@@ -57,10 +57,10 @@ public enum NinteichosaItemGroupOf2006 implements INinteichosaItemGroup {
      * 調査項目グループが「自立度」であることを表します。
      */
     自立度("", "自立度", "自立度", false);
-    private RString no;
-    private RString name;
-    private RString shortName;
-    private boolean kihonChosaGroup;
+    private final RString no;
+    private final RString name;
+    private final RString shortName;
+    private final boolean kihonChosaGroup;
 
     private NinteichosaItemGroupOf2006(String no, String name, String shortName, boolean kihonChosaGroup) {
         this.no = new RString(no);

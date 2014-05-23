@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.SearchCriteriaOfKojinDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.TextBoxUtil;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -27,13 +26,13 @@ public final class SearchCriteriaOfKojin {
      * クリアされた{@link SearchCriteriaOfKojinDiv SearchCriteriaOfKojinDiv}
      */
     public static void clear(SearchCriteriaOfKojinDiv div) {
-        TextBoxUtil.clear(div.getTxtBirthDay());
-        TextBoxUtil.clear(div.getTxtJusho());
-        TextBoxUtil.clear(div.getTxtKojinNo());
-        TextBoxUtil.clear(div.getTxtSetaiCode());
-        TextBoxUtil.clear(div.getTxtShikibetsuCode());
-        TextBoxUtil.clear(div.getTxtShimei());
-        TextBoxUtil.clear(div.getTxtYubinNo());
+        div.getTxtBirthDay().clearValue();
+        div.getTxtJusho().clearValue();
+        div.getTxtKojinNo().clearValue();
+        div.getTxtSetaiCode().clearValue();
+        div.getTxtShikibetsuCode().clearValue();
+        div.getTxtShimei().clearValue();
+        div.getTxtYubinNo().clearValue();
         div.getChkGender().setSelectedItems(Collections.EMPTY_LIST);
         div.getRadSearchPatternOfShimei().setSelectedItem(RString.EMPTY);
         div.getDdlJuminShubetsu().setSelectedItem(RString.EMPTY);

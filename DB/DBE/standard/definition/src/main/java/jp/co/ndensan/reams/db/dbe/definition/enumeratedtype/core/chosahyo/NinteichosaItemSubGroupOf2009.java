@@ -29,10 +29,10 @@ public enum NinteichosaItemSubGroupOf2009 implements INinteichosaItemSubGroup {
      * 調査項目サブグループが「特別な対応」であることを表します。
      */
     特別な対応("6", "特別な対応", "特別な対応", true);
-    private RString no;
-    private RString name;
-    private RString shortName;
-    private boolean multiSelectable;
+    private final RString no;
+    private final RString name;
+    private final RString shortName;
+    private final boolean multiSelectable;
 
     private NinteichosaItemSubGroupOf2009(String no, String name, String shortName, boolean multiSelectable) {
         this.no = new RString(no);
