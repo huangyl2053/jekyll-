@@ -25,8 +25,8 @@ public class KaigoHihokenshaJohoDiv extends Panel {
     private Label lblHokensha;
     @JsonProperty("txtHokenshaNo")
     private TextBox txtHokenshaNo;
-    @JsonProperty("txtHihokenshaMeisho")
-    private TextBox txtHihokenshaMeisho;
+    @JsonProperty("txtHokenshaMeisho")
+    private TextBox txtHokenshaMeisho;
     @JsonProperty("lblHihokensha")
     private Label lblHihokensha;
     @JsonProperty("txtHihokenshaNo")
@@ -60,11 +60,11 @@ public class KaigoHihokenshaJohoDiv extends Panel {
     @JsonProperty("lblZenkaiNinteiKikan")
     private Label lblZenkaiNinteiKikan;
     @JsonProperty("txtZenYukokikanStart")
-    private TextBoxDate txtZenYukokikanStart;
+    private TextBoxFlexibleDate txtZenYukokikanStart;
     @JsonProperty("lblKara2")
     private Label lblKara2;
     @JsonProperty("txtZenYukokikanEnd")
-    private TextBoxDate txtZenYukokikanEnd;
+    private TextBoxFlexibleDate txtZenYukokikanEnd;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -92,14 +92,14 @@ public class KaigoHihokenshaJohoDiv extends Panel {
         this.txtHokenshaNo=txtHokenshaNo;
     }
 
-    @JsonProperty("txtHihokenshaMeisho")
-    public TextBox getTxtHihokenshaMeisho() {
-        return txtHihokenshaMeisho;
+    @JsonProperty("txtHokenshaMeisho")
+    public TextBox getTxtHokenshaMeisho() {
+        return txtHokenshaMeisho;
     }
 
-    @JsonProperty("txtHihokenshaMeisho")
-    public void setTxtHihokenshaMeisho(TextBox txtHihokenshaMeisho) {
-        this.txtHihokenshaMeisho=txtHihokenshaMeisho;
+    @JsonProperty("txtHokenshaMeisho")
+    public void setTxtHokenshaMeisho(TextBox txtHokenshaMeisho) {
+        this.txtHokenshaMeisho=txtHokenshaMeisho;
     }
 
     @JsonProperty("lblHihokensha")
@@ -263,12 +263,12 @@ public class KaigoHihokenshaJohoDiv extends Panel {
     }
 
     @JsonProperty("txtZenYukokikanStart")
-    public TextBoxDate getTxtZenYukokikanStart() {
+    public TextBoxFlexibleDate getTxtZenYukokikanStart() {
         return txtZenYukokikanStart;
     }
 
     @JsonProperty("txtZenYukokikanStart")
-    public void setTxtZenYukokikanStart(TextBoxDate txtZenYukokikanStart) {
+    public void setTxtZenYukokikanStart(TextBoxFlexibleDate txtZenYukokikanStart) {
         this.txtZenYukokikanStart=txtZenYukokikanStart;
     }
 
@@ -283,12 +283,12 @@ public class KaigoHihokenshaJohoDiv extends Panel {
     }
 
     @JsonProperty("txtZenYukokikanEnd")
-    public TextBoxDate getTxtZenYukokikanEnd() {
+    public TextBoxFlexibleDate getTxtZenYukokikanEnd() {
         return txtZenYukokikanEnd;
     }
 
     @JsonProperty("txtZenYukokikanEnd")
-    public void setTxtZenYukokikanEnd(TextBoxDate txtZenYukokikanEnd) {
+    public void setTxtZenYukokikanEnd(TextBoxFlexibleDate txtZenYukokikanEnd) {
         this.txtZenYukokikanEnd=txtZenYukokikanEnd;
     }
 

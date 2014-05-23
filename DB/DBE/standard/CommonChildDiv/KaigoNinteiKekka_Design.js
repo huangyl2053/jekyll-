@@ -100,6 +100,7 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "required": false,
                             "align": 2,
                             "text": "申請日",
                             "isPrivateInfo": false
@@ -107,7 +108,7 @@ var DBE;
                         {
                             "fieldName": "txtShinseibi",
                             "items": [],
-                            "controlType": "TextBoxDate",
+                            "controlType": "TextBoxFlexibleDate",
                             "width": "80",
                             "visible": true,
                             "displayNone": false,
@@ -121,9 +122,9 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "required": false,
                             "text": "",
                             "isPrivateInfo": false,
-                            "required": false,
                             "readOnly": true,
                             "placeHolder": "",
                             "textKind": 0,
@@ -140,8 +141,7 @@ var DBE;
                             "labelRAlign": 0,
                             "ymdKubun": 2,
                             "displayFormat": 0,
-                            "valueString": "",
-                            "permitCharactor": "./_-"
+                            "value": ""
                         },
                         {
                             "fieldName": "lblShinseiKubunShinsei",
@@ -160,6 +160,7 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "required": false,
                             "align": 2,
                             "text": "申請区分（申請）",
                             "isPrivateInfo": false
@@ -181,9 +182,9 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "required": false,
                             "text": "",
                             "isPrivateInfo": false,
-                            "required": false,
                             "readOnly": true,
                             "placeHolder": "区分変更",
                             "textKind": 0,
@@ -198,12 +199,12 @@ var DBE;
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
+                            "value": "",
                             "maxLength": 1000000000000,
                             "minLength": 0,
                             "textAlign": 0,
-                            "suggest": [],
-                            "value": "",
-                            "permitCharactor": ""
+                            "isComboBox": false,
+                            "suggest": []
                         },
                         {
                             "fieldName": "lblShinseiKubunHorei",
@@ -222,6 +223,7 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "required": false,
                             "align": 2,
                             "text": "申請区分（法令）",
                             "isPrivateInfo": false
@@ -243,9 +245,9 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "required": false,
                             "text": "",
                             "isPrivateInfo": false,
-                            "required": false,
                             "readOnly": true,
                             "placeHolder": "",
                             "textKind": 0,
@@ -260,12 +262,12 @@ var DBE;
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
+                            "value": "",
                             "maxLength": 1000000000000,
                             "minLength": 0,
                             "textAlign": 0,
-                            "suggest": [],
-                            "value": "",
-                            "permitCharactor": ""
+                            "isComboBox": false,
+                            "suggest": []
                         },
                         {
                             "fieldName": "lblNinteiKubun",
@@ -284,6 +286,7 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "required": false,
                             "align": 2,
                             "text": "認定区分",
                             "isPrivateInfo": false
@@ -305,8 +308,8 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
-                            "text": "",
                             "required": false,
+                            "text": "",
                             "onFocus": "",
                             "onBlur": "",
                             "onChange": "",
@@ -316,7 +319,7 @@ var DBE;
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "selectedItem": "",
+                            "selectedItem": "01",
                             "dataSource": [
                                 {
                                     "key": "01",
@@ -353,6 +356,7 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "required": false,
                             "align": 2,
                             "text": "一次判定結果",
                             "isPrivateInfo": false
@@ -374,9 +378,9 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "required": false,
                             "text": "",
                             "isPrivateInfo": false,
-                            "required": false,
                             "readOnly": true,
                             "placeHolder": "要介護５",
                             "textKind": 0,
@@ -391,12 +395,12 @@ var DBE;
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
+                            "value": "",
                             "maxLength": 1000000000000,
                             "minLength": 0,
                             "textAlign": 0,
-                            "suggest": [],
-                            "value": "",
-                            "permitCharactor": ""
+                            "isComboBox": false,
+                            "suggest": []
                         },
                         {
                             "fieldName": "lblTokuteiShippei",
@@ -415,6 +419,7 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "required": false,
                             "align": 2,
                             "text": "特定疾病",
                             "isPrivateInfo": false
@@ -436,8 +441,8 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
-                            "text": "",
                             "required": false,
+                            "text": "",
                             "onFocus": "",
                             "onBlur": "",
                             "onChange": "",
@@ -480,6 +485,7 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "required": false,
                             "align": 2,
                             "text": "認定日",
                             "isPrivateInfo": false
@@ -501,9 +507,9 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "required": false,
                             "text": "",
                             "isPrivateInfo": false,
-                            "required": false,
                             "readOnly": false,
                             "placeHolder": "",
                             "textKind": 0,
@@ -520,12 +526,11 @@ var DBE;
                             "labelRAlign": 0,
                             "ymdKubun": 2,
                             "displayFormat": 0,
+                            "value": "",
                             "maxLength": 1000000000000,
                             "minLength": 0,
                             "textAlign": 0,
-                            "suggest": [],
-                            "value": "",
-                            "permitCharactor": "./_-"
+                            "suggest": []
                         },
                         {
                             "fieldName": "lblNijihanteiKekka",
@@ -544,6 +549,7 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "required": false,
                             "align": 2,
                             "text": "二次判定結果",
                             "isPrivateInfo": false
@@ -565,8 +571,8 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
-                            "text": "",
                             "required": true,
+                            "text": "",
                             "onFocus": "",
                             "onBlur": "",
                             "onChange": "",
@@ -576,7 +582,7 @@ var DBE;
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "selectedItem": "",
+                            "selectedItem": "01",
                             "dataSource": [
                                 {
                                     "key": "01",
@@ -633,6 +639,7 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "required": false,
                             "align": 2,
                             "text": "状態像例",
                             "isPrivateInfo": false
@@ -654,8 +661,8 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
-                            "text": "",
                             "required": false,
+                            "text": "",
                             "onFocus": "",
                             "onBlur": "",
                             "onChange": "",
@@ -698,6 +705,7 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "required": false,
                             "align": 2,
                             "text": "認定期間",
                             "isPrivateInfo": false
@@ -719,9 +727,9 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "required": false,
                             "text": "",
                             "isPrivateInfo": false,
-                            "required": false,
                             "readOnly": false,
                             "placeHolder": "",
                             "textKind": 0,
@@ -738,12 +746,11 @@ var DBE;
                             "labelRAlign": 0,
                             "ymdKubun": 2,
                             "displayFormat": 0,
+                            "value": "",
                             "maxLength": 1000000000000,
                             "minLength": 0,
                             "textAlign": 0,
-                            "suggest": [],
-                            "value": "",
-                            "permitCharactor": "./_-"
+                            "suggest": []
                         },
                         {
                             "fieldName": "lblKara3",
@@ -762,6 +769,7 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "required": false,
                             "align": 1,
                             "text": "～",
                             "isPrivateInfo": false
@@ -783,9 +791,9 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "required": false,
                             "text": "",
                             "isPrivateInfo": false,
-                            "required": false,
                             "readOnly": true,
                             "placeHolder": "",
                             "textKind": 0,
@@ -802,12 +810,11 @@ var DBE;
                             "labelRAlign": 0,
                             "ymdKubun": 2,
                             "displayFormat": 0,
+                            "value": "",
                             "maxLength": 1000000000000,
                             "minLength": 0,
                             "textAlign": 0,
-                            "suggest": [],
-                            "value": "",
-                            "permitCharactor": "./_-"
+                            "suggest": []
                         },
                         {
                             "fieldName": "ddlNinteiYukoTsukisu",
@@ -826,8 +833,8 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
-                            "text": "",
                             "required": true,
+                            "text": "",
                             "onFocus": "",
                             "onBlur": "",
                             "onChange": "",
@@ -837,7 +844,7 @@ var DBE;
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "selectedItem": "",
+                            "selectedItem": "24",
                             "dataSource": [
                                 {
                                     "key": "24",
@@ -874,6 +881,7 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "required": false,
                             "align": 2,
                             "text": "審査会意見",
                             "isPrivateInfo": false
@@ -895,9 +903,9 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "required": false,
                             "text": "",
                             "isPrivateInfo": false,
-                            "required": false,
                             "readOnly": false,
                             "placeHolder": "",
                             "textKind": 0,
@@ -911,9 +919,9 @@ var DBE;
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
+                            "value": "",
                             "maxLength": "200",
                             "minLength": 0,
-                            "value": "",
                             "height": "S",
                             "limitLength": "200",
                             "countDisp": false
@@ -959,7 +967,8 @@ var DBE;
                     "eraseBorderRight": false,
                     "eraseBorderLeft": false,
                     "backgroundColor": 0,
-                    "widthAuto": true
+                    "widthAuto": true,
+                    "isGroupBox": false
                 }
             ],
             "controlType": "CommonChildDiv",

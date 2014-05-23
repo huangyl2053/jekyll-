@@ -24,7 +24,7 @@ public class KaigoNinteiKekkaDiv extends Panel {
     @JsonProperty("lblShinseibi")
     private Label lblShinseibi;
     @JsonProperty("txtShinseibi")
-    private TextBoxDate txtShinseibi;
+    private TextBoxFlexibleDate txtShinseibi;
     @JsonProperty("lblShinseiKubunShinsei")
     private Label lblShinseiKubunShinsei;
     @JsonProperty("txtShinseiKubunShinsei")
@@ -89,12 +89,12 @@ public class KaigoNinteiKekkaDiv extends Panel {
     }
 
     @JsonProperty("txtShinseibi")
-    public TextBoxDate getTxtShinseibi() {
+    public TextBoxFlexibleDate getTxtShinseibi() {
         return txtShinseibi;
     }
 
     @JsonProperty("txtShinseibi")
-    public void setTxtShinseibi(TextBoxDate txtShinseibi) {
+    public void setTxtShinseibi(TextBoxFlexibleDate txtShinseibi) {
         this.txtShinseibi=txtShinseibi;
     }
 

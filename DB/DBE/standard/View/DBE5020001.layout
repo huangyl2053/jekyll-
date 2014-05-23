@@ -21,6 +21,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -96,7 +97,6 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "dataSource": [],
      "sortOrder": "資格",
      "isAscending": true,
      "filterList": [],
@@ -120,9 +120,9 @@
      "marginLeft": "10",
      "marginRight": "XS",
      "required": false,
-     "align": 0,
+     "isPrivateInfo": false,
      "text": "■開始年月日時分",
-     "isPrivateInfo": false
+     "align": 0
     },
     {
      "fieldName": "lblKaisibi",
@@ -142,9 +142,9 @@
      "marginLeft": "11",
      "marginRight": "XS",
      "required": false,
-     "align": 2,
+     "isPrivateInfo": false,
      "text": "開始日",
-     "isPrivateInfo": false
+     "align": 2
     },
     {
      "fieldName": "txtShinsaJissibi",
@@ -164,16 +164,16 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "required": false,
-     "text": "",
-     "isPrivateInfo": false,
      "readOnly": false,
      "placeHolder": "平26.04.24",
      "textKind": 0,
+     "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
+     "text": "",
      "labelLText": "",
      "labelRText": "",
      "labelLWidth": "S",
@@ -187,7 +187,8 @@
      "minLength": 0,
      "textAlign": 0,
      "isComboBox": false,
-     "suggest": []
+     "suggest": [],
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "lblTime",
@@ -207,9 +208,9 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "required": false,
-     "align": 2,
+     "isPrivateInfo": false,
      "text": "開始時間",
-     "isPrivateInfo": false
+     "align": 2
     },
     {
      "fieldName": "txtStartTime",
@@ -229,16 +230,16 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "required": false,
-     "text": "",
-     "isPrivateInfo": false,
      "readOnly": false,
      "placeHolder": "",
      "textKind": 0,
+     "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
+     "text": "",
      "labelLText": "",
      "labelRText": "",
      "labelLWidth": "S",
@@ -252,7 +253,8 @@
      "textAlign": 0,
      "isComboBox": false,
      "suggest": [],
-     "timeKubun": 1
+     "timeKubun": 1,
+     "permitCharactor": ""
     },
     {
      "fieldName": "lblSyuryobi",
@@ -272,9 +274,9 @@
      "marginLeft": "11",
      "marginRight": "XS",
      "required": false,
-     "align": 2,
+     "isPrivateInfo": false,
      "text": "終了日",
-     "isPrivateInfo": false
+     "align": 2
     },
     {
      "fieldName": "txtShinsaJissiShuryobi",
@@ -294,16 +296,16 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "required": false,
-     "text": "",
-     "isPrivateInfo": false,
      "readOnly": false,
      "placeHolder": "",
      "textKind": 0,
+     "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
+     "text": "",
      "labelLText": "",
      "labelRText": "",
      "labelLWidth": "S",
@@ -317,7 +319,8 @@
      "minLength": 0,
      "textAlign": 0,
      "isComboBox": false,
-     "suggest": []
+     "suggest": [],
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "lblEndTime",
@@ -337,9 +340,9 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "required": false,
-     "align": 2,
+     "isPrivateInfo": false,
      "text": "終了時間",
-     "isPrivateInfo": false
+     "align": 2
     },
     {
      "fieldName": "txtEndTime",
@@ -359,16 +362,16 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "required": false,
-     "text": "",
-     "isPrivateInfo": false,
      "readOnly": false,
      "placeHolder": "",
      "textKind": 0,
+     "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
+     "text": "",
      "labelLText": "",
      "labelRText": "",
      "labelLWidth": "S",
@@ -382,7 +385,8 @@
      "textAlign": 0,
      "isComboBox": false,
      "suggest": [],
-     "timeKubun": 1
+     "timeKubun": 1,
+     "permitCharactor": ""
     },
     {
      "fieldName": "btnKaisaiKekkaToroku",
@@ -580,6 +584,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "dataSource": [],
      "gridSetting": {
       "rowHeight": 20,
       "isMultiSelectable": false,
@@ -724,7 +729,6 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "dataSource": [],
      "sortOrder": "前期間",
      "isAscending": true,
      "filterList": [],
@@ -747,6 +751,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "dataSource": [],
      "gridSetting": {
       "rowHeight": 20,
       "isMultiSelectable": false,
@@ -891,7 +896,6 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "dataSource": [],
      "sortOrder": "",
      "isAscending": true,
      "filterList": [],
@@ -979,16 +983,16 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "required": false,
-         "text": "",
-         "isPrivateInfo": false,
          "readOnly": false,
          "placeHolder": "",
          "textKind": 0,
+         "isPrivateInfo": false,
          "isPassword": false,
          "onFocus": "",
          "onBlur": "",
          "onChange": "",
          "onKeyPress": "",
+         "text": "",
          "labelLText": "",
          "labelRText": "",
          "labelLWidth": "S",
@@ -1000,7 +1004,8 @@
          "minLength": 0,
          "textAlign": 0,
          "isComboBox": false,
-         "suggest": []
+         "suggest": [],
+         "permitCharactor": ""
         }
        ],
        "controlType": "TableCell",
@@ -1040,16 +1045,16 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "required": false,
-         "text": "",
-         "isPrivateInfo": false,
          "readOnly": false,
          "placeHolder": "",
          "textKind": 0,
+         "isPrivateInfo": false,
          "isPassword": false,
          "onFocus": "",
          "onBlur": "",
          "onChange": "",
          "onKeyPress": "",
+         "text": "",
          "labelLText": "",
          "labelRText": "",
          "labelLWidth": "S",
@@ -1061,7 +1066,8 @@
          "minLength": 0,
          "textAlign": 0,
          "isComboBox": false,
-         "suggest": []
+         "suggest": [],
+         "permitCharactor": ""
         }
        ],
        "controlType": "TableCell",
@@ -1101,16 +1107,16 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "required": false,
-         "text": "",
-         "isPrivateInfo": false,
          "readOnly": false,
          "placeHolder": "",
          "textKind": 0,
+         "isPrivateInfo": false,
          "isPassword": false,
          "onFocus": "",
          "onBlur": "",
          "onChange": "",
          "onKeyPress": "",
+         "text": "",
          "labelLText": "",
          "labelRText": "",
          "labelLWidth": "S",
@@ -1122,7 +1128,8 @@
          "minLength": 0,
          "textAlign": 0,
          "isComboBox": false,
-         "suggest": []
+         "suggest": [],
+         "permitCharactor": ""
         }
        ],
        "controlType": "TableCell",
@@ -1162,16 +1169,16 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "required": false,
-         "text": "",
-         "isPrivateInfo": false,
          "readOnly": false,
          "placeHolder": "",
          "textKind": 0,
+         "isPrivateInfo": false,
          "isPassword": false,
          "onFocus": "",
          "onBlur": "",
          "onChange": "",
          "onKeyPress": "",
+         "text": "",
          "labelLText": "",
          "labelRText": "",
          "labelLWidth": "S",
@@ -1183,7 +1190,8 @@
          "minLength": 0,
          "textAlign": 0,
          "isComboBox": false,
-         "suggest": []
+         "suggest": [],
+         "permitCharactor": ""
         }
        ],
        "controlType": "TableCell",
@@ -1355,16 +1363,16 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "required": false,
-         "text": "",
-         "isPrivateInfo": false,
          "readOnly": false,
          "placeHolder": "",
          "textKind": 0,
+         "isPrivateInfo": false,
          "isPassword": false,
          "onFocus": "",
          "onBlur": "",
          "onChange": "",
          "onKeyPress": "",
+         "text": "",
          "labelLText": "",
          "labelRText": "",
          "labelLWidth": "S",
@@ -1376,7 +1384,8 @@
          "minLength": 0,
          "textAlign": 0,
          "isComboBox": false,
-         "suggest": []
+         "suggest": [],
+         "permitCharactor": ""
         }
        ],
        "controlType": "TableCell",
@@ -1416,16 +1425,16 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "required": false,
-         "text": "",
-         "isPrivateInfo": false,
          "readOnly": false,
          "placeHolder": "",
          "textKind": 0,
+         "isPrivateInfo": false,
          "isPassword": false,
          "onFocus": "",
          "onBlur": "",
          "onChange": "",
          "onKeyPress": "",
+         "text": "",
          "labelLText": "",
          "labelRText": "",
          "labelLWidth": "S",
@@ -1437,7 +1446,8 @@
          "minLength": 0,
          "textAlign": 0,
          "isComboBox": false,
-         "suggest": []
+         "suggest": [],
+         "permitCharactor": ""
         }
        ],
        "controlType": "TableCell",
@@ -1526,16 +1536,16 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "required": false,
-         "text": "",
-         "isPrivateInfo": false,
          "readOnly": false,
          "placeHolder": "",
          "textKind": 0,
+         "isPrivateInfo": false,
          "isPassword": false,
          "onFocus": "",
          "onBlur": "",
          "onChange": "",
          "onKeyPress": "",
+         "text": "",
          "labelLText": "",
          "labelRText": "",
          "labelLWidth": "S",
@@ -1547,7 +1557,8 @@
          "minLength": 0,
          "textAlign": 0,
          "isComboBox": false,
-         "suggest": []
+         "suggest": [],
+         "permitCharactor": ""
         }
        ],
        "controlType": "TableCell",
@@ -1627,6 +1638,12 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "required": false,
+       "onChange": "",
+       "labelLText": "",
+       "labelLWidth": "S",
+       "labelLAlign": 2,
+       "selectedItem": "",
        "dataSource": [
         {
          "key": "key0",
@@ -1641,13 +1658,7 @@
          "value": "できない"
         }
        ],
-       "required": false,
-       "onChange": "",
-       "labelLText": "",
-       "labelLWidth": "S",
-       "labelLAlign": 2,
        "onClick": "",
-       "selectedItem": "",
        "newLineItemNumber": 6,
        "spaceSize": 1
       },
@@ -1757,6 +1768,7 @@
          "authorityMode": 0,
          "marginLeft": "0",
          "marginRight": "0",
+         "dataSource": [],
          "gridSetting": {
           "rowHeight": 16,
           "isMultiSelectable": false,
@@ -1878,7 +1890,6 @@
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
-         "dataSource": [],
          "sortOrder": "内容",
          "isAscending": true,
          "filterList": [],
@@ -1901,6 +1912,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "0",
+         "dataSource": [],
          "gridSetting": {
           "rowHeight": 16,
           "isMultiSelectable": false,
@@ -2022,7 +2034,6 @@
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
-         "dataSource": [],
          "sortOrder": "内容",
          "isAscending": true,
          "filterList": [],
@@ -2045,6 +2056,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "dataSource": [],
          "gridSetting": {
           "rowHeight": 16,
           "isMultiSelectable": false,
@@ -2166,7 +2178,6 @@
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
-         "dataSource": [],
          "sortOrder": "結果",
          "isAscending": true,
          "filterList": [],
@@ -2248,9 +2259,9 @@
              "marginLeft": "XS",
              "marginRight": "XS",
              "required": false,
-             "align": 2,
+             "isPrivateInfo": false,
              "text": "特記事項タイトル01",
-             "isPrivateInfo": false
+             "align": 2
             }
            ],
            "controlType": "TableCell",
@@ -2290,9 +2301,9 @@
              "marginLeft": "XS",
              "marginRight": "XS",
              "required": false,
-             "align": 2,
+             "isPrivateInfo": false,
              "text": "特記事項タイトル02",
-             "isPrivateInfo": false
+             "align": 2
             }
            ],
            "controlType": "TableCell",
@@ -2332,9 +2343,9 @@
              "marginLeft": "XS",
              "marginRight": "XS",
              "required": false,
-             "align": 2,
+             "isPrivateInfo": false,
              "text": "特記事項タイトル03",
-             "isPrivateInfo": false
+             "align": 2
             }
            ],
            "controlType": "TableCell",
@@ -2373,17 +2384,16 @@
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
-             "height": "S",
              "required": false,
-             "text": "",
-             "isPrivateInfo": false,
              "readOnly": true,
              "placeHolder": "",
              "textKind": 0,
+             "isPrivateInfo": false,
              "onFocus": "",
              "onBlur": "",
              "onChange": "",
              "onKeyPress": "",
+             "text": "",
              "labelLText": "",
              "labelRText": "",
              "labelLWidth": "S",
@@ -2393,6 +2403,7 @@
              "value": "",
              "maxLength": 1.7976931348623157e+308,
              "minLength": 0,
+             "height": "S",
              "limitLength": "200",
              "countDisp": false
             }
@@ -2433,17 +2444,16 @@
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
-             "height": "S",
              "required": false,
-             "text": "",
-             "isPrivateInfo": false,
              "readOnly": true,
              "placeHolder": "",
              "textKind": 0,
+             "isPrivateInfo": false,
              "onFocus": "",
              "onBlur": "",
              "onChange": "",
              "onKeyPress": "",
+             "text": "",
              "labelLText": "",
              "labelRText": "",
              "labelLWidth": "S",
@@ -2453,6 +2463,7 @@
              "value": "",
              "maxLength": 1.7976931348623157e+308,
              "minLength": 0,
+             "height": "S",
              "limitLength": "200",
              "countDisp": false
             }
@@ -2493,17 +2504,16 @@
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
-             "height": "S",
              "required": false,
-             "text": "",
-             "isPrivateInfo": false,
              "readOnly": true,
              "placeHolder": "",
              "textKind": 0,
+             "isPrivateInfo": false,
              "onFocus": "",
              "onBlur": "",
              "onChange": "",
              "onKeyPress": "",
+             "text": "",
              "labelLText": "",
              "labelRText": "",
              "labelLWidth": "S",
@@ -2513,6 +2523,7 @@
              "value": "",
              "maxLength": 1.7976931348623157e+308,
              "minLength": 0,
+             "height": "S",
              "limitLength": "200",
              "countDisp": false
             }
@@ -2822,7 +2833,7 @@
       "tabShinsaKekka"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "tabShinsaKekka"
+     "selectedItemFieldName": "tabChosaKekkaShosai"
     }
    ],
    "controlType": "Panel",
@@ -3151,7 +3162,12 @@
  "currentState": "All",
  "id": "DBE5020001",
  "WFParameter": [],
- "UIContainerEventMapping": [],
+ "UIContainerEventMapping": [
+  {
+   "alias": "returnIchiran",
+   "eventName": "btnCancel.onClick"
+  }
+ ],
  "loadSequencePanelNames": [
   [
    "KaniShinsakaiKaisaiKekka",

@@ -101,6 +101,7 @@ module DBE {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "align": 2,
      "text": "申請日",
      "isPrivateInfo": false
@@ -108,7 +109,7 @@ module DBE {
     {
      "fieldName": "txtShinseibi",
      "items": [],
-     "controlType": "TextBoxDate",
+     "controlType": "TextBoxFlexibleDate",
      "width": "80",
      "visible": true,
      "displayNone": false,
@@ -122,9 +123,9 @@ module DBE {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "text": "",
      "isPrivateInfo": false,
-     "required": false,
      "readOnly": true,
      "placeHolder": "",
      "textKind": 0,
@@ -141,8 +142,7 @@ module DBE {
      "labelRAlign": 0,
      "ymdKubun": 2,
      "displayFormat": 0,
-     "valueString": "",
-     "permitCharactor": "./_-"
+     "value": ""
     },
     {
      "fieldName": "lblShinseiKubunShinsei",
@@ -161,6 +161,7 @@ module DBE {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "align": 2,
      "text": "申請区分（申請）",
      "isPrivateInfo": false
@@ -182,9 +183,9 @@ module DBE {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "text": "",
      "isPrivateInfo": false,
-     "required": false,
      "readOnly": true,
      "placeHolder": "区分変更",
      "textKind": 0,
@@ -199,12 +200,12 @@ module DBE {
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "value": "",
      "maxLength": 1000000000000,
      "minLength": 0,
      "textAlign": 0,
-     "suggest": [],
-     "value": "",
-     "permitCharactor": ""
+     "isComboBox": false,
+     "suggest": []
     },
     {
      "fieldName": "lblShinseiKubunHorei",
@@ -223,6 +224,7 @@ module DBE {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "align": 2,
      "text": "申請区分（法令）",
      "isPrivateInfo": false
@@ -244,9 +246,9 @@ module DBE {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "text": "",
      "isPrivateInfo": false,
-     "required": false,
      "readOnly": true,
      "placeHolder": "",
      "textKind": 0,
@@ -261,12 +263,12 @@ module DBE {
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "value": "",
      "maxLength": 1000000000000,
      "minLength": 0,
      "textAlign": 0,
-     "suggest": [],
-     "value": "",
-     "permitCharactor": ""
+     "isComboBox": false,
+     "suggest": []
     },
     {
      "fieldName": "lblNinteiKubun",
@@ -285,6 +287,7 @@ module DBE {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "align": 2,
      "text": "認定区分",
      "isPrivateInfo": false
@@ -306,8 +309,8 @@ module DBE {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "text": "",
      "required": false,
+     "text": "",
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
@@ -317,7 +320,7 @@ module DBE {
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "selectedItem": "",
+     "selectedItem": "01",
      "dataSource": [
       {
        "key": "01",
@@ -354,6 +357,7 @@ module DBE {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "align": 2,
      "text": "一次判定結果",
      "isPrivateInfo": false
@@ -375,9 +379,9 @@ module DBE {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "text": "",
      "isPrivateInfo": false,
-     "required": false,
      "readOnly": true,
      "placeHolder": "要介護５",
      "textKind": 0,
@@ -392,12 +396,12 @@ module DBE {
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "value": "",
      "maxLength": 1000000000000,
      "minLength": 0,
      "textAlign": 0,
-     "suggest": [],
-     "value": "",
-     "permitCharactor": ""
+     "isComboBox": false,
+     "suggest": []
     },
     {
      "fieldName": "lblTokuteiShippei",
@@ -416,6 +420,7 @@ module DBE {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "align": 2,
      "text": "特定疾病",
      "isPrivateInfo": false
@@ -437,8 +442,8 @@ module DBE {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "text": "",
      "required": false,
+     "text": "",
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
@@ -481,6 +486,7 @@ module DBE {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "align": 2,
      "text": "認定日",
      "isPrivateInfo": false
@@ -502,9 +508,9 @@ module DBE {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "text": "",
      "isPrivateInfo": false,
-     "required": false,
      "readOnly": false,
      "placeHolder": "",
      "textKind": 0,
@@ -521,12 +527,11 @@ module DBE {
      "labelRAlign": 0,
      "ymdKubun": 2,
      "displayFormat": 0,
+     "value": "",
      "maxLength": 1000000000000,
      "minLength": 0,
      "textAlign": 0,
-     "suggest": [],
-     "value": "",
-     "permitCharactor": "./_-"
+     "suggest": []
     },
     {
      "fieldName": "lblNijihanteiKekka",
@@ -545,6 +550,7 @@ module DBE {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "align": 2,
      "text": "二次判定結果",
      "isPrivateInfo": false
@@ -566,8 +572,8 @@ module DBE {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "text": "",
      "required": true,
+     "text": "",
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
@@ -577,7 +583,7 @@ module DBE {
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "selectedItem": "",
+     "selectedItem": "01",
      "dataSource": [
       {
        "key": "01",
@@ -634,6 +640,7 @@ module DBE {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "align": 2,
      "text": "状態像例",
      "isPrivateInfo": false
@@ -655,8 +662,8 @@ module DBE {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "text": "",
      "required": false,
+     "text": "",
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
@@ -699,6 +706,7 @@ module DBE {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "align": 2,
      "text": "認定期間",
      "isPrivateInfo": false
@@ -720,9 +728,9 @@ module DBE {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "text": "",
      "isPrivateInfo": false,
-     "required": false,
      "readOnly": false,
      "placeHolder": "",
      "textKind": 0,
@@ -739,12 +747,11 @@ module DBE {
      "labelRAlign": 0,
      "ymdKubun": 2,
      "displayFormat": 0,
+     "value": "",
      "maxLength": 1000000000000,
      "minLength": 0,
      "textAlign": 0,
-     "suggest": [],
-     "value": "",
-     "permitCharactor": "./_-"
+     "suggest": []
     },
     {
      "fieldName": "lblKara3",
@@ -763,6 +770,7 @@ module DBE {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "align": 1,
      "text": "～",
      "isPrivateInfo": false
@@ -784,9 +792,9 @@ module DBE {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "text": "",
      "isPrivateInfo": false,
-     "required": false,
      "readOnly": true,
      "placeHolder": "",
      "textKind": 0,
@@ -803,12 +811,11 @@ module DBE {
      "labelRAlign": 0,
      "ymdKubun": 2,
      "displayFormat": 0,
+     "value": "",
      "maxLength": 1000000000000,
      "minLength": 0,
      "textAlign": 0,
-     "suggest": [],
-     "value": "",
-     "permitCharactor": "./_-"
+     "suggest": []
     },
     {
      "fieldName": "ddlNinteiYukoTsukisu",
@@ -827,8 +834,8 @@ module DBE {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "text": "",
      "required": true,
+     "text": "",
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
@@ -838,7 +845,7 @@ module DBE {
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "selectedItem": "",
+     "selectedItem": "24",
      "dataSource": [
       {
        "key": "24",
@@ -875,6 +882,7 @@ module DBE {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "align": 2,
      "text": "審査会意見",
      "isPrivateInfo": false
@@ -896,9 +904,9 @@ module DBE {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "required": false,
      "text": "",
      "isPrivateInfo": false,
-     "required": false,
      "readOnly": false,
      "placeHolder": "",
      "textKind": 0,
@@ -912,9 +920,9 @@ module DBE {
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "value": "",
      "maxLength": "200",
      "minLength": 0,
-     "value": "",
      "height": "S",
      "limitLength": "200",
      "countDisp": false
@@ -960,7 +968,8 @@ module DBE {
    "eraseBorderRight": false,
    "eraseBorderLeft": false,
    "backgroundColor": 0,
-   "widthAuto": true
+   "widthAuto": true,
+   "isGroupBox": false
   }
  ],
  "controlType": "CommonChildDiv",
