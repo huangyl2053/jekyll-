@@ -5,9 +5,12 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.ButtonToEntryChosaIraiDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiContentDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.ButtonsForNinteichosaIraiEntryDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryContentDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryTargetDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * NinteichosaIraiEntry のクラスファイル 
@@ -21,10 +24,14 @@ public class NinteichosaIraiEntryDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("NinteichosaIraiContent")
-    private NinteichosaIraiContentDiv NinteichosaIraiContent;
-    @JsonProperty("ButtonToEntryChosaIrai")
-    private ButtonToEntryChosaIraiDiv ButtonToEntryChosaIrai;
+    @JsonProperty("txtCurrentIndex")
+    private TextBoxNum txtCurrentIndex;
+    @JsonProperty("NinteichosaIraiEntryTarget")
+    private NinteichosaIraiEntryTargetDiv NinteichosaIraiEntryTarget;
+    @JsonProperty("NinteichosaIraiEntryContent")
+    private NinteichosaIraiEntryContentDiv NinteichosaIraiEntryContent;
+    @JsonProperty("ButtonsForNinteichosaIraiEntry")
+    private ButtonsForNinteichosaIraiEntryDiv ButtonsForNinteichosaIraiEntry;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,24 +39,44 @@ public class NinteichosaIraiEntryDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("NinteichosaIraiContent")
-    public NinteichosaIraiContentDiv getNinteichosaIraiContent() {
-        return NinteichosaIraiContent;
+    @JsonProperty("txtCurrentIndex")
+    public TextBoxNum getTxtCurrentIndex() {
+        return txtCurrentIndex;
     }
 
-    @JsonProperty("NinteichosaIraiContent")
-    public void setNinteichosaIraiContent(NinteichosaIraiContentDiv NinteichosaIraiContent) {
-        this.NinteichosaIraiContent=NinteichosaIraiContent;
+    @JsonProperty("txtCurrentIndex")
+    public void setTxtCurrentIndex(TextBoxNum txtCurrentIndex) {
+        this.txtCurrentIndex=txtCurrentIndex;
     }
 
-    @JsonProperty("ButtonToEntryChosaIrai")
-    public ButtonToEntryChosaIraiDiv getButtonToEntryChosaIrai() {
-        return ButtonToEntryChosaIrai;
+    @JsonProperty("NinteichosaIraiEntryTarget")
+    public NinteichosaIraiEntryTargetDiv getNinteichosaIraiEntryTarget() {
+        return NinteichosaIraiEntryTarget;
     }
 
-    @JsonProperty("ButtonToEntryChosaIrai")
-    public void setButtonToEntryChosaIrai(ButtonToEntryChosaIraiDiv ButtonToEntryChosaIrai) {
-        this.ButtonToEntryChosaIrai=ButtonToEntryChosaIrai;
+    @JsonProperty("NinteichosaIraiEntryTarget")
+    public void setNinteichosaIraiEntryTarget(NinteichosaIraiEntryTargetDiv NinteichosaIraiEntryTarget) {
+        this.NinteichosaIraiEntryTarget=NinteichosaIraiEntryTarget;
+    }
+
+    @JsonProperty("NinteichosaIraiEntryContent")
+    public NinteichosaIraiEntryContentDiv getNinteichosaIraiEntryContent() {
+        return NinteichosaIraiEntryContent;
+    }
+
+    @JsonProperty("NinteichosaIraiEntryContent")
+    public void setNinteichosaIraiEntryContent(NinteichosaIraiEntryContentDiv NinteichosaIraiEntryContent) {
+        this.NinteichosaIraiEntryContent=NinteichosaIraiEntryContent;
+    }
+
+    @JsonProperty("ButtonsForNinteichosaIraiEntry")
+    public ButtonsForNinteichosaIraiEntryDiv getButtonsForNinteichosaIraiEntry() {
+        return ButtonsForNinteichosaIraiEntry;
+    }
+
+    @JsonProperty("ButtonsForNinteichosaIraiEntry")
+    public void setButtonsForNinteichosaIraiEntry(ButtonsForNinteichosaIraiEntryDiv ButtonsForNinteichosaIraiEntry) {
+        this.ButtonsForNinteichosaIraiEntry=ButtonsForNinteichosaIraiEntry;
     }
 
 }

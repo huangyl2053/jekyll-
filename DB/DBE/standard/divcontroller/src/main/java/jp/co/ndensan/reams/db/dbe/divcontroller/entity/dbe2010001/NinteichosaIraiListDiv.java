@@ -5,9 +5,9 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.ButtonsForNinteichosaIraiListDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiCompletionDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.ButtonsForNinteichosaIraiListBottomDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.ButtonsForNinteichosaIraiListTopDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.dgNinteichosaIraiList_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -24,14 +24,12 @@ public class NinteichosaIraiListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ButtonsForNinteichosaIraiList")
-    private ButtonsForNinteichosaIraiListDiv ButtonsForNinteichosaIraiList;
+    @JsonProperty("ButtonsForNinteichosaIraiListTop")
+    private ButtonsForNinteichosaIraiListTopDiv ButtonsForNinteichosaIraiListTop;
     @JsonProperty("dgNinteichosaIraiList")
     private DataGrid<dgNinteichosaIraiList_Row> dgNinteichosaIraiList;
-    @JsonProperty("NinteichosaIraiEntry")
-    private NinteichosaIraiEntryDiv NinteichosaIraiEntry;
-    @JsonProperty("NinteichosaIraiCompletion")
-    private NinteichosaIraiCompletionDiv NinteichosaIraiCompletion;
+    @JsonProperty("ButtonsForNinteichosaIraiListBottom")
+    private ButtonsForNinteichosaIraiListBottomDiv ButtonsForNinteichosaIraiListBottom;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -39,14 +37,14 @@ public class NinteichosaIraiListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("ButtonsForNinteichosaIraiList")
-    public ButtonsForNinteichosaIraiListDiv getButtonsForNinteichosaIraiList() {
-        return ButtonsForNinteichosaIraiList;
+    @JsonProperty("ButtonsForNinteichosaIraiListTop")
+    public ButtonsForNinteichosaIraiListTopDiv getButtonsForNinteichosaIraiListTop() {
+        return ButtonsForNinteichosaIraiListTop;
     }
 
-    @JsonProperty("ButtonsForNinteichosaIraiList")
-    public void setButtonsForNinteichosaIraiList(ButtonsForNinteichosaIraiListDiv ButtonsForNinteichosaIraiList) {
-        this.ButtonsForNinteichosaIraiList=ButtonsForNinteichosaIraiList;
+    @JsonProperty("ButtonsForNinteichosaIraiListTop")
+    public void setButtonsForNinteichosaIraiListTop(ButtonsForNinteichosaIraiListTopDiv ButtonsForNinteichosaIraiListTop) {
+        this.ButtonsForNinteichosaIraiListTop=ButtonsForNinteichosaIraiListTop;
     }
 
     @JsonProperty("dgNinteichosaIraiList")
@@ -59,24 +57,14 @@ public class NinteichosaIraiListDiv extends Panel {
         this.dgNinteichosaIraiList=dgNinteichosaIraiList;
     }
 
-    @JsonProperty("NinteichosaIraiEntry")
-    public NinteichosaIraiEntryDiv getNinteichosaIraiEntry() {
-        return NinteichosaIraiEntry;
+    @JsonProperty("ButtonsForNinteichosaIraiListBottom")
+    public ButtonsForNinteichosaIraiListBottomDiv getButtonsForNinteichosaIraiListBottom() {
+        return ButtonsForNinteichosaIraiListBottom;
     }
 
-    @JsonProperty("NinteichosaIraiEntry")
-    public void setNinteichosaIraiEntry(NinteichosaIraiEntryDiv NinteichosaIraiEntry) {
-        this.NinteichosaIraiEntry=NinteichosaIraiEntry;
-    }
-
-    @JsonProperty("NinteichosaIraiCompletion")
-    public NinteichosaIraiCompletionDiv getNinteichosaIraiCompletion() {
-        return NinteichosaIraiCompletion;
-    }
-
-    @JsonProperty("NinteichosaIraiCompletion")
-    public void setNinteichosaIraiCompletion(NinteichosaIraiCompletionDiv NinteichosaIraiCompletion) {
-        this.NinteichosaIraiCompletion=NinteichosaIraiCompletion;
+    @JsonProperty("ButtonsForNinteichosaIraiListBottom")
+    public void setButtonsForNinteichosaIraiListBottom(ButtonsForNinteichosaIraiListBottomDiv ButtonsForNinteichosaIraiListBottom) {
+        this.ButtonsForNinteichosaIraiListBottom=ButtonsForNinteichosaIraiListBottom;
     }
 
 }
