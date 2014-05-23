@@ -106,6 +106,20 @@ module DBE {
             }
         }
         
+        public get height() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["height"];
+        }
+        
+        public set height(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["height"] = value;
+            } else {
+                this.layout.items[0]["height"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, NinteichosaIraiListForByHandCom_Design.myLayout, fieldName);
         }
@@ -123,6 +137,7 @@ module DBE {
             Uz.JSControlUtil.registProperty("onOnlyRow");
             Uz.JSControlUtil.registProperty("onNoRow");
             Uz.JSControlUtil.registProperty("onMultiRows");
+            Uz.JSControlUtil.registProperty("height");
         }
         
         /**
@@ -139,6 +154,7 @@ module DBE {
             editablePropertyInfo["onOnlyRow"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["onOnlyRow"];
             editablePropertyInfo["onNoRow"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["onNoRow"];
             editablePropertyInfo["onMultiRows"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["onMultiRows"];
+            editablePropertyInfo["height"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["height"];
             
             return editablePropertyInfo;
         }
@@ -807,6 +823,11 @@ module DBE {
    "publicChildFieldName": "dgNinteichosaIraiListForByHand",
    "publicChildProperty": "onMultiRows",
    "newPropertyName": "onMultiRows"
+  },
+  {
+   "publicChildFieldName": "dgNinteichosaIraiListForByHand",
+   "publicChildProperty": "height",
+   "newPropertyName": "height"
   }
  ]
 }        
