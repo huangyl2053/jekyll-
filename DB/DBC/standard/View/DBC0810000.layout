@@ -524,7 +524,7 @@
      "isComboBox": false,
      "suggest": [],
      "permitCharactor": "",
-     "formatLength": 1
+     "formatLength": 8
     },
     {
      "fieldName": "tabShokanShikyuKetteiShinseisho",
@@ -693,7 +693,7 @@
          "isComboBox": false,
          "suggest": [],
          "permitCharactor": "",
-         "formatLength": 1
+         "formatLength": 8
         },
         {
          "fieldName": "txtShinseiSaiso",
@@ -1507,7 +1507,7 @@
            "isComboBox": false,
            "suggest": [],
            "permitCharactor": "",
-           "formatLength": 1
+           "formatLength": 8
           },
           {
            "fieldName": "txtShinseiShitenCode",
@@ -1550,7 +1550,7 @@
            "isComboBox": false,
            "suggest": [],
            "permitCharactor": "",
-           "formatLength": 1
+           "formatLength": 8
           },
           {
            "fieldName": "txtShinseiKozaShubetsu",
@@ -1951,7 +1951,7 @@
          "isComboBox": false,
          "suggest": [],
          "permitCharactor": "",
-         "formatLength": 1
+         "formatLength": 8
         },
         {
          "fieldName": "txtShinseiJigyoshaName",
@@ -3048,7 +3048,7 @@
      "isComboBox": false,
      "suggest": [],
      "permitCharactor": "",
-     "formatLength": 1
+     "formatLength": 8
     },
     {
      "fieldName": "txtShomeishoJigyoshaName",
@@ -3307,7 +3307,7 @@
            "isComboBox": false,
            "suggest": [],
            "permitCharactor": "",
-           "formatLength": 1
+           "formatLength": 8
           },
           {
            "fieldName": "txtShomeishoKihonJigyoshaName",
