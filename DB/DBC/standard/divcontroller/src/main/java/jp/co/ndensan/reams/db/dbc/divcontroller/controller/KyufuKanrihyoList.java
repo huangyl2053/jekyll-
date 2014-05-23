@@ -65,19 +65,19 @@ public class KyufuKanrihyoList {
         dgList.clear();
         Button btn = new Button();
         for (HashMap source : sourceList) {
-            String taishoYMInvisible = source.get("対象年月Invisible").toString();
-            String taishoYM = source.get("対象年月").toString();
-            String sakuseiKubun = source.get("作成区分").toString();
-            String hokenshaNo = source.get("保険者番号").toString();
-            String hokenshaName = source.get("保険者名").toString();
-            String jigyosha = source.get("事業者").toString();
-            String shinsaYMD = source.get("審査年月日").toString();
-            dgList.add(create給付管理票(btn, taishoYMInvisible, taishoYM, sakuseiKubun, hokenshaNo, hokenshaName, jigyosha, shinsaYMD));
+            dgList.add(create給付管理票(btn,
+                    source.get("対象年月Invisible").toString(),
+                    source.get("対象年月").toString(),
+                    source.get("作成区分").toString(),
+                    source.get("保険者番号").toString(),
+                    source.get("保険者名").toString(),
+                    source.get("事業者").toString(),
+                    source.get("審査年月日").toString()));
         }
         return dgList;
     }
 
-    private class DateComparator implements Comparator<dgKyufuKanrihyoList_Row> {
+    private static class DateComparator implements Comparator<dgKyufuKanrihyoList_Row> {
 
         @Override
         public int compare(dgKyufuKanrihyoList_Row o1, dgKyufuKanrihyoList_Row o2) {

@@ -36,7 +36,7 @@ public class KyufuKanrihyo {
         ResponseData<KyufuKanrihyoDiv> response = new ResponseData<>();
         dgKyufuKanrihyoList_Row selectRow = listPanel.getDgKyufuKanrihyoList().getActiveRow();
         対象期間区切 kugiri = kugiriHantei(selectRow);
-        setVisible(panel, selectRow, kugiri);
+        setVisible(panel, kugiri);
         setData(panel, selectRow, kugiri);
 
         response.data = panel;
@@ -119,7 +119,7 @@ public class KyufuKanrihyo {
         div.getDgMeisaiList().setDataSource(dgRowList);
     }
 
-    private void setVisible(KyufuKanrihyoDiv panel, dgKyufuKanrihyoList_Row selectRow, 対象期間区切 kugiri) {
+    private void setVisible(KyufuKanrihyoDiv panel, 対象期間区切 kugiri) {
         if (kugiri.equals(対象期間区切.H1204_H1312)) {
             panel.getTabKyufuKanrihyo().setVisible(true);
             panel.getTabKyufuKanrihyo().setDisplayNone(false);
