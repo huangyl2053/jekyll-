@@ -5776,74 +5776,6 @@
    "backgroundColor": 0,
    "widthAuto": false,
    "isGroupBox": false
-  },
-  {
-   "fieldName": "ServiceTeikyoShomeishoGokei",
-   "items": [
-    {
-     "fieldName": "ServiceTeikyoShomeishoGokeiInfo",
-     "items": [],
-     "controlType": "CommonChildDiv",
-     "width": "XS",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": 0,
-     "marginRight": 0,
-     "relation": [],
-     "marginTop": 0,
-     "marginBottom": 0,
-     "businessId": "DBC",
-     "controlName": "ServiceTeikyoShomeishoGokei",
-     "dataPassingForDialog": [],
-     "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": ""
-    }
-   ],
-   "controlType": "Panel",
-   "width": "M",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": true,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
-   "onLoad": "",
-   "title": "合計",
-   "isOpen": true,
-   "canOpenAndClose": true,
-   "postParameterPanelNames": [
-    {
-     "postParameterPanelNames": "ServiceTeikyoShomeishoGokei"
-    }
-   ],
-   "requestSettings": [],
-   "hiddenInput": [],
-   "onOpen": "",
-   "onClose": "",
-   "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
-   "backgroundColor": 0,
-   "widthAuto": true,
-   "isGroupBox": false
   }
  ],
  "controlType": null,
@@ -6048,12 +5980,6 @@
   ],
   [
    "ShokanShikyuKetteiShomeisho"
-  ],
-  [
-   "ServiceTeikyoShomeishoGokei"
-  ],
-  [
-   "ServiceTeikyoShomeishoGokeiInfo"
   ]
  ],
  "panelMargin": 1,
