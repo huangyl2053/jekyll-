@@ -113,6 +113,23 @@ var DBC;
         });
 
 
+        Object.defineProperty(JutakuKaishuShinseiDetailInput_Design.prototype, "onClick_btnAddDetail", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"])["onClick"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"])["onClick"] = value;
+                } else {
+                    this.layout.items[0].items[1].items[9]["onClick"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
         JutakuKaishuShinseiDetailInput_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
             Uz.JSControlUtil.registProperty("dg_gridSetting");
@@ -121,6 +138,7 @@ var DBC;
             Uz.JSControlUtil.registProperty("dg_width");
             Uz.JSControlUtil.registProperty("detaiInput_displayNone");
             Uz.JSControlUtil.registProperty("dg_height");
+            Uz.JSControlUtil.registProperty("onClick_btnAddDetail");
         };
 
         JutakuKaishuShinseiDetailInput_Design.prototype.getEditablePropertyInfo = function () {
@@ -131,6 +149,7 @@ var DBC;
             editablePropertyInfo["dg_width"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["width"];
             editablePropertyInfo["detaiInput_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["dg_height"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["height"];
+            editablePropertyInfo["onClick_btnAddDetail"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[9]["fieldName"]).getEditablePropertyInfo()["onClick"];
 
             return editablePropertyInfo;
         };
@@ -525,7 +544,7 @@ var DBC;
                                     "marginRight": "XS",
                                     "required": false,
                                     "readOnly": false,
-                                    "placeHolder": "平26.07.01",
+                                    "placeHolder": "",
                                     "textKind": 0,
                                     "isPrivateInfo": false,
                                     "onFocus": "",
@@ -564,7 +583,7 @@ var DBC;
                                     "marginRight": "XS",
                                     "required": false,
                                     "readOnly": false,
-                                    "placeHolder": "平26.07.01",
+                                    "placeHolder": "",
                                     "textKind": 0,
                                     "isPrivateInfo": false,
                                     "onFocus": "",
@@ -605,7 +624,7 @@ var DBC;
                                     "maxLength": 1000000000000,
                                     "minLength": 0,
                                     "readOnly": false,
-                                    "placeHolder": "123456",
+                                    "placeHolder": "",
                                     "textKind": 2,
                                     "isPrivateInfo": false,
                                     "onFocus": "",
@@ -807,6 +826,11 @@ var DBC;
                     "publicChildFieldName": "dgJutakuKaishuDetail",
                     "publicChildProperty": "height",
                     "newPropertyName": "dg_height"
+                },
+                {
+                    "publicChildFieldName": "btnAddDetail",
+                    "publicChildProperty": "onClick",
+                    "newPropertyName": "onClick_btnAddDetail"
                 }
             ],
             "dataPassingForDialog": [],
