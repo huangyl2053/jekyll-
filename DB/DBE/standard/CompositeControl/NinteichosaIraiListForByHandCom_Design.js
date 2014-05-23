@@ -222,8 +222,8 @@ var DBE;
                                     "combineItem": [
                                         "chosaIraiKubun",
                                         "chosaIraiDate",
-                                        "iraishoHakkoDate",
-                                        "chosaKigenDate"
+                                        "chosaKigenDate",
+                                        "iraishoHakkoDate"
                                     ]
                                 },
                                 {
@@ -275,7 +275,7 @@ var DBE;
                         "columns": [
                             {
                                 "columnName": "調査<br>状況",
-                                "dataName": "waritukeJokyo",
+                                "dataName": "chosaJokyo",
                                 "toolTip": "",
                                 "bgColor": 0,
                                 "width": 75,
@@ -285,7 +285,7 @@ var DBE;
                                 "align": 0,
                                 "resize": true,
                                 "isPrivateInfo": false,
-                                "sortKey": "waritukeJokyo"
+                                "sortKey": "chosaJokyo"
                             },
                             {
                                 "columnName": "詳細",
@@ -489,25 +489,6 @@ var DBE;
                                 "sortKey": "chosaIraiDate"
                             },
                             {
-                                "columnName": "依頼書発効日",
-                                "dataName": "iraishoHakkoDate",
-                                "toolTip": "",
-                                "bgColor": 0,
-                                "width": 81,
-                                "visible": true,
-                                "cellType": 7,
-                                "cellDetails": {
-                                    "cellType": 7,
-                                    "ymdKubun": 2,
-                                    "displayFormat": 0,
-                                    "onChange": ""
-                                },
-                                "align": 1,
-                                "resize": true,
-                                "isPrivateInfo": false,
-                                "sortKey": "iraishoHakkoDate"
-                            },
-                            {
                                 "columnName": "期限日",
                                 "dataName": "chosaKigenDate",
                                 "toolTip": "",
@@ -525,6 +506,25 @@ var DBE;
                                 "resize": true,
                                 "isPrivateInfo": false,
                                 "sortKey": "chosaKigenDate"
+                            },
+                            {
+                                "columnName": "依頼書<br>発行日",
+                                "dataName": "iraishoHakkoDate",
+                                "toolTip": "",
+                                "bgColor": 0,
+                                "width": 81,
+                                "visible": true,
+                                "cellType": 7,
+                                "cellDetails": {
+                                    "cellType": 7,
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "onChange": ""
+                                },
+                                "align": 1,
+                                "resize": true,
+                                "isPrivateInfo": false,
+                                "sortKey": "iraishoHakkoDate"
                             },
                             {
                                 "columnName": "調査委託先コード",
