@@ -53,7 +53,12 @@ module DBC {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "onClick": "",
+     "required": false,
      "onChange": "",
+     "labelLText": "",
+     "labelLWidth": "60",
+     "labelLAlign": 2,
      "selectedItem": "payToKoza",
      "dataSource": [
       {
@@ -69,13 +74,8 @@ module DBC {
        "value": "窓口払い"
       }
      ],
-     "required": false,
-     "onClick": "",
      "newLineItemNumber": 3,
-     "spaceSize": 1,
-     "labelLText": "",
-     "labelLWidth": "60",
-     "labelLAlign": 2
+     "spaceSize": 1
     },
     {
      "fieldName": "URKoza",
@@ -97,29 +97,30 @@ module DBC {
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "onChange": "",
+       "text": "",
        "required": false,
-       "labelLText": "",
-       "labelLWidth": "S",
-       "labelLAlign": 2,
-       "maxLength": 1000000000000,
-       "minLength": 0,
-       "textAlign": 0,
        "readOnly": false,
        "placeHolder": "",
        "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
-       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
-       "text": "",
-       "suggest": [],
-       "value": "",
+       "labelLText": "",
        "labelRText": "",
+       "labelLWidth": "S",
        "labelRWidth": "S",
-       "labelRAlign": 0
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "value": "",
+       "maxLength": 1000000000000,
+       "minLength": 0,
+       "textAlign": 0,
+       "isComboBox": false,
+       "suggest": [],
+       "permitCharactor": ""
       }
      ],
      "controlType": "Panel",
@@ -180,29 +181,30 @@ module DBC {
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "onChange": "",
+       "text": "",
        "required": false,
-       "labelLText": "",
-       "labelLWidth": "S",
-       "labelLAlign": 2,
-       "maxLength": 1000000000000,
-       "minLength": 0,
-       "textAlign": 0,
        "readOnly": false,
        "placeHolder": "",
        "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
-       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
-       "text": "",
-       "suggest": [],
-       "value": "",
+       "labelLText": "",
        "labelRText": "",
+       "labelLWidth": "S",
        "labelRWidth": "S",
-       "labelRAlign": 0
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "value": "",
+       "maxLength": 1000000000000,
+       "minLength": 0,
+       "textAlign": 0,
+       "isComboBox": false,
+       "suggest": [],
+       "permitCharactor": ""
       }
      ],
      "controlType": "Panel",
@@ -266,15 +268,10 @@ module DBC {
    "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "PaymentMethod"
+     "postParameterPanelNames": "YoguKonyuhiShikyuShinseiPaymentMethod"
     }
    ],
-   "requestSettings": [
-    {
-     "eventName": "onLoad",
-     "requestUrl": ""
-    }
-   ],
+   "requestSettings": [],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",

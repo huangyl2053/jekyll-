@@ -429,12 +429,7 @@ var DBC;
                             "postParameterPanelNames": "YoguKonyuhiShikyuShinseishaJoho"
                         }
                     ],
-                    "requestSettings": [
-                        {
-                            "eventName": "onLoad",
-                            "requestUrl": ""
-                        }
-                    ],
+                    "requestSettings": [],
                     "hiddenInput": [],
                     "onOpen": "",
                     "onClose": "",

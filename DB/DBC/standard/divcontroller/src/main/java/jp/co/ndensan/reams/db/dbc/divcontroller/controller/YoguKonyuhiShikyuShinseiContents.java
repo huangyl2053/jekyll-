@@ -5,23 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.YoguKonyuhiShikyuShinseiContentsPanelDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgSeikyuDetail_Row;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * 福祉用具購入費支給申請・審査（共有DIV)のパネルです。
+ * 福祉用具購入費支給申請
  *
  * @author n8223
  */
@@ -30,7 +22,7 @@ public class YoguKonyuhiShikyuShinseiContents {
     /**
      * 福祉用具購入費支給申請 支給申請内容の初期値をセットします。
      *
-     * @param panel YoguKonyuhiShikyuShinseiContentsPanelDiv
+     * @param panel HihokenshaSearchPanelDiv
      * @return PanelDivのResponseData
      */
     public ResponseData<YoguKonyuhiShikyuShinseiContentsPanelDiv> onClick_btnAdd(YoguKonyuhiShikyuShinseiContentsPanelDiv panel) {
@@ -51,7 +43,7 @@ public class YoguKonyuhiShikyuShinseiContents {
         panel.getYoguKonyuhiShikyuShinseisha().getTxtAddress().setValue(new RString("長野県長野市鶴賀七瀬中町276-6"));
         panel.getYoguKonyuhiShikyuShinseisha().getTxtTelNo().setValue(new RString("12345678901"));
         panel.getYoguKonyuhiShikyuShinseisha().getTxtJigyoshaNo().setValue(new RString("1234567890"));
-
+        
         response.data = panel;
         return response;
     }

@@ -72,7 +72,7 @@ module DBC {
      "fieldName": "dgServiceRiyohyoRirekiList",
      "items": [],
      "controlType": "DataGrid",
-     "width": "1180",
+     "width": "1200",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -93,15 +93,7 @@ module DBC {
       "isShowFilterButton": false,
       "isShowRowState": false,
       "header": {
-       "combineColumns": [
-        {
-         "combineColumnName": "計画適用期間",
-         "combineItem": [
-          "txtTekiyoKaishiYMD",
-          "txtTekiyoShuryoYMD"
-         ]
-        }
-       ],
+       "combineColumns": [],
        "frozenColumn": "",
        "headerHeight": 0
       },
@@ -144,30 +136,11 @@ module DBC {
         "sortKey": "txtJotai"
        },
        {
-        "columnName": "",
-        "dataName": "txtTodokedeYMDInvisible",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 0,
-        "visible": false,
-        "cellType": 6,
-        "cellDetails": {
-         "cellType": 6,
-         "ymdKubun": 2,
-         "displayFormat": 5,
-         "onChange": ""
-        },
-        "align": 1,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "txtTodokedeYMDInvisible"
-       },
-       {
         "columnName": "届出日",
         "dataName": "txtTodokedeYMD",
         "toolTip": "",
         "bgColor": 0,
-        "width": 90,
+        "width": 70,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -183,7 +156,7 @@ module DBC {
         "dataName": "txtTodokedeKubun",
         "toolTip": "",
         "bgColor": 0,
-        "width": 70,
+        "width": 90,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -195,11 +168,11 @@ module DBC {
         "sortKey": "txtTodokedeKubun"
        },
        {
-        "columnName": "開始日",
+        "columnName": "計画適用開始日",
         "dataName": "txtTekiyoKaishiYMD",
         "toolTip": "",
         "bgColor": 0,
-        "width": 90,
+        "width": 130,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -211,11 +184,11 @@ module DBC {
         "sortKey": "txtTekiyoKaishiYMD"
        },
        {
-        "columnName": "終了日",
+        "columnName": "計画適用終了日",
         "dataName": "txtTekiyoShuryoYMD",
         "toolTip": "",
         "bgColor": 0,
-        "width": 90,
+        "width": 130,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -229,7 +202,7 @@ module DBC {
         "dataName": "txtIraiJigyosha",
         "toolTip": "",
         "bgColor": 0,
-        "width": 720,
+        "width": 660,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,

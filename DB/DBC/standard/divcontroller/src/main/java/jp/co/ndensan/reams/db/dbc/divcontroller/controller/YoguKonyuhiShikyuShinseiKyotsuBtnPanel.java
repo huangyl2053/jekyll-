@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.YoguKonyuhiShikyuShinseiK
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
- * 福祉用具購入費支給申請 (申請を保存するボタンを可能に設定する)パネルです。
+ * 福祉用具購入費支給申請 申請を保存するボタンを可能に設定する。
  * @author n8223
  */
 public class YoguKonyuhiShikyuShinseiKyotsuBtnPanel {

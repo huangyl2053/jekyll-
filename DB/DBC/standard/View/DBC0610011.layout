@@ -32,8 +32,8 @@
        "onChange": "",
        "onKeyPress": "",
        "permitCharactor": "",
-       "fromPlaceHolder": "平26.07.01",
-       "toPlaceHolder": "平26.07.01",
+       "fromPlaceHolder": "平21.01.01",
+       "toPlaceHolder": "",
        "ymdKubun": 2,
        "displayFormat": 0,
        "minDate": "",
@@ -105,7 +105,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "onClick": "onClick_btnSearchMishinsa",
+       "onClick": "",
        "text": "未審査分を検索する",
        "appearance": 0,
        "imageFileUrl": "",
@@ -194,6 +194,30 @@
        "value": ""
       },
       {
+       "fieldName": "btnkari",
+       "items": [],
+       "controlType": "Button",
+       "width": "S",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "onClick": "onClick_btnkari",
+       "text": "仮ボタン",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": ""
+      },
+      {
        "fieldName": "dgMishinsaShikyuShinseiList",
        "items": [],
        "controlType": "DataGrid",
@@ -235,7 +259,7 @@
           "cellDetails": {
            "cellType": 8,
            "text": "修正",
-           "onClick": "onClick_btnModifyShinsei",
+           "onClick": "",
            "imageFileUrl": "",
            "imageWidth": "",
            "imageHeight": ""
@@ -400,7 +424,7 @@
           "dataName": "txtShinsaResult",
           "toolTip": "",
           "bgColor": 0,
-          "width": 120,
+          "width": 100,
           "visible": true,
           "cellType": 1,
           "cellDetails": {
@@ -420,7 +444,7 @@
           "dataName": "txtSeiriNo",
           "toolTip": "",
           "bgColor": 0,
-          "width": 80,
+          "width": 100,
           "visible": true,
           "cellType": 1,
           "cellDetails": {
@@ -444,7 +468,7 @@
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
-       "sortOrder": "txtHokenSeikyuAmount",
+       "sortOrder": "txtRiyoshaFutanAmount",
        "isAscending": true,
        "filterList": [],
        "activeRowId": -1
@@ -466,7 +490,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "onClick": "onClick_btnIkkatsuShinsa",
+       "onClick": "",
        "text": "支給申請内容を一括審査する",
        "appearance": 0,
        "imageFileUrl": "",
@@ -497,20 +521,7 @@
        "postParameterPanelNames": "YoguKonyuhiShikyuShinseiMishinsaResultList"
       }
      ],
-     "requestSettings": [
-      {
-       "eventName": "onLoad",
-       "requestUrl": ""
-      },
-      {
-       "eventName": "onClick_btnSearchMishinsa",
-       "requestUrl": "dbc/db/dbc/YoguKonyuhiShikyuShinseiMishinsaResultList/onClick_btnSearchMishinsa"
-      },
-      {
-       "eventName": "onClick_btnIkkatsuShinsa",
-       "requestUrl": "dbc/db/dbc/YoguKonyuhiShikyuShinseiMishinsaResultList/onClick_btnIkkatsuShinsa"
-      }
-     ],
+     "requestSettings": [],
      "hiddenInput": [],
      "onOpen": "",
      "onClose": "",
@@ -718,7 +729,6 @@
      "authorityMode": 0,
      "marginLeft": 0,
      "marginRight": 0,
-     "onLoad": true,
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
@@ -753,8 +763,7 @@
      "controlName": "ShinseishaInfo",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "btnSearch_displayNone": false
+     "dialogCancelEventNameForDialog": ""
     },
     {
      "fieldName": "YoguKonyuhiShikyuShinseiShinsaPaymentMethod",
@@ -854,20 +863,7 @@
      "postParameterPanelNames": "YoguKonyuhiShikyuShinseiShinsaModifyPanel"
     }
    ],
-   "requestSettings": [
-    {
-     "eventName": "onLoad",
-     "requestUrl": ""
-    },
-    {
-     "eventName": "onClick_btnModifyShinsei",
-     "requestUrl": "dbc/db/dbc/YoguKonyuhiShikyuShinseiShinsaModifyPanel/onClick_btnModifyShinsei"
-    },
-    {
-     "eventName": "onClick_dgMeisai_modify",
-     "requestUrl": "dbc/db/dbc/YoguKonyuhiShikyuShinseiShinsaModifyPanel/onClick_dgMeisai_modify"
-    }
-   ],
+   "requestSettings": [],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -933,16 +929,7 @@
      "postParameterPanelNames": "CommonButtonArea"
     }
    ],
-   "requestSettings": [
-    {
-     "eventName": "onLoad",
-     "requestUrl": ""
-    },
-    {
-     "eventName": "onClick_btnIkkatsuShinsa",
-     "requestUrl": "dbc/db/dbc/CommonButtonArea/onClick_btnIkkatsuShinsa"
-    }
-   ],
+   "requestSettings": [],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -1009,7 +996,7 @@
     {
      "fieldName": "btnkari",
      "event": "onClick",
-     "transition": ""
+     "transition": "修正"
     },
     {
      "fieldName": "btnModifyShinsei",
@@ -1043,10 +1030,6 @@
     {
      "visibleDiv": "YoguKonyuhiShikyuShinseiShinsaPaymentMethod",
      "panelState": "visible"
-    },
-    {
-     "visibleDiv": "Panel1",
-     "panelState": "visible"
     }
    ],
    "validation": {},
@@ -1054,7 +1037,7 @@
     {
      "fieldName": "dgMishinsaShikyuShinseiList[btnModifyShinsei]",
      "event": "onClick",
-     "transition": "修正"
+     "transition": ""
     },
     {
      "fieldName": "btnkari",
