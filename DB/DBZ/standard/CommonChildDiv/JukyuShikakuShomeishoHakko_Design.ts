@@ -365,7 +365,7 @@ module DBZ {
      "fieldName": "chkJushoHihyoji",
      "items": [],
      "controlType": "CheckBoxList",
-     "width": "120",
+     "width": "100",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -400,7 +400,7 @@ module DBZ {
     }
    ],
    "controlType": "Panel",
-   "width": "1000",
+   "width": "1030",
    "visible": true,
    "displayNone": false,
    "disabled": false,

@@ -1087,8 +1087,8 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
+     "marginLeft": "0",
+     "marginRight": "0",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
@@ -1328,7 +1328,7 @@
    ]
   }
  ],
- "currentState": "受給資格証明書発行",
+ "currentState": "All",
  "id": "DBU0430011",
  "WFParameter": [],
  "UIContainerEventMapping": [],
