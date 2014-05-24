@@ -490,7 +490,7 @@ var DBC;
                             "textAlign": 0,
                             "isComboBox": false,
                             "suggest": [],
-                            "formatLength": 1
+                            "formatLength": "10"
                         },
                         {
                             "fieldName": "txtKeikakuJigyoshaName",
