@@ -5,8 +5,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuKeikakuTodokedeShoruiListDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuKeikakuTodokedeShoruiMeisaiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuJikoTodokedeShoruiListDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuJikoTodokedeShoruiMeisaiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 
 /**
@@ -21,10 +21,10 @@ public class ShoruiJokyoDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("KyotakuKeikakuTodokedeShoruiList")
-    private KyotakuKeikakuTodokedeShoruiListDiv KyotakuKeikakuTodokedeShoruiList;
-    @JsonProperty("KyotakuKeikakuTodokedeShoruiMeisai")
-    private KyotakuKeikakuTodokedeShoruiMeisaiDiv KyotakuKeikakuTodokedeShoruiMeisai;
+    @JsonProperty("KyotakuJikoTodokedeShoruiList")
+    private KyotakuJikoTodokedeShoruiListDiv KyotakuJikoTodokedeShoruiList;
+    @JsonProperty("KyotakuJikoTodokedeShoruiMeisai")
+    private KyotakuJikoTodokedeShoruiMeisaiDiv KyotakuJikoTodokedeShoruiMeisai;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,24 +32,24 @@ public class ShoruiJokyoDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("KyotakuKeikakuTodokedeShoruiList")
-    public KyotakuKeikakuTodokedeShoruiListDiv getKyotakuKeikakuTodokedeShoruiList() {
-        return KyotakuKeikakuTodokedeShoruiList;
+    @JsonProperty("KyotakuJikoTodokedeShoruiList")
+    public KyotakuJikoTodokedeShoruiListDiv getKyotakuJikoTodokedeShoruiList() {
+        return KyotakuJikoTodokedeShoruiList;
     }
 
-    @JsonProperty("KyotakuKeikakuTodokedeShoruiList")
-    public void setKyotakuKeikakuTodokedeShoruiList(KyotakuKeikakuTodokedeShoruiListDiv KyotakuKeikakuTodokedeShoruiList) {
-        this.KyotakuKeikakuTodokedeShoruiList=KyotakuKeikakuTodokedeShoruiList;
+    @JsonProperty("KyotakuJikoTodokedeShoruiList")
+    public void setKyotakuJikoTodokedeShoruiList(KyotakuJikoTodokedeShoruiListDiv KyotakuJikoTodokedeShoruiList) {
+        this.KyotakuJikoTodokedeShoruiList=KyotakuJikoTodokedeShoruiList;
     }
 
-    @JsonProperty("KyotakuKeikakuTodokedeShoruiMeisai")
-    public KyotakuKeikakuTodokedeShoruiMeisaiDiv getKyotakuKeikakuTodokedeShoruiMeisai() {
-        return KyotakuKeikakuTodokedeShoruiMeisai;
+    @JsonProperty("KyotakuJikoTodokedeShoruiMeisai")
+    public KyotakuJikoTodokedeShoruiMeisaiDiv getKyotakuJikoTodokedeShoruiMeisai() {
+        return KyotakuJikoTodokedeShoruiMeisai;
     }
 
-    @JsonProperty("KyotakuKeikakuTodokedeShoruiMeisai")
-    public void setKyotakuKeikakuTodokedeShoruiMeisai(KyotakuKeikakuTodokedeShoruiMeisaiDiv KyotakuKeikakuTodokedeShoruiMeisai) {
-        this.KyotakuKeikakuTodokedeShoruiMeisai=KyotakuKeikakuTodokedeShoruiMeisai;
+    @JsonProperty("KyotakuJikoTodokedeShoruiMeisai")
+    public void setKyotakuJikoTodokedeShoruiMeisai(KyotakuJikoTodokedeShoruiMeisaiDiv KyotakuJikoTodokedeShoruiMeisai) {
+        this.KyotakuJikoTodokedeShoruiMeisai=KyotakuJikoTodokedeShoruiMeisai;
     }
 
 }
