@@ -30,11 +30,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 public class ShinsaTaishoshaItiran {
 
     /**
+     * 審査会対象者一覧画面ロード時、一覧DIVの初期値の設定を行います。
      *
      * @param div
      * @return
      */
-    public ResponseData getOnloadData(ShinsaTaishoshaItiranDiv div) {
+    public ResponseData onLoadData(ShinsaTaishoshaItiranDiv div) {
         ResponseData<ShinsaTaishoshaItiranDiv> response = new ResponseData<>();
 
         div.getDgShinsaTaishoshaIchiran().setDataSource(createRowSetaiTestData());

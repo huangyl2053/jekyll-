@@ -26,7 +26,7 @@ import org.joda.time.LocalTime;
  */
 public class TaishoShinsakai {
 
-    public ResponseData getOnloadData(TaishoShinsakaiDiv div) {
+    public ResponseData onLoadData(TaishoShinsakaiDiv div) {
         ResponseData<TaishoShinsakaiDiv> response = new ResponseData<>();
         List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("ShinsaKekkaTaishoShinsakai.yml"));
         Map map = targetSource.get(0);

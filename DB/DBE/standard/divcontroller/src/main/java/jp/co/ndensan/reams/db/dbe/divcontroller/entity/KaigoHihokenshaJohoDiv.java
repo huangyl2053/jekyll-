@@ -21,44 +21,26 @@ public class KaigoHihokenshaJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblHokensha")
-    private Label lblHokensha;
     @JsonProperty("txtHokenshaNo")
     private TextBox txtHokenshaNo;
     @JsonProperty("txtHokenshaMeisho")
     private TextBox txtHokenshaMeisho;
-    @JsonProperty("lblHihokensha")
-    private Label lblHihokensha;
     @JsonProperty("txtHihokenshaNo")
     private TextBox txtHihokenshaNo;
-    @JsonProperty("txtHihokenshaKubun")
-    private TextBox txtHihokenshaKubun;
-    @JsonProperty("lblHihokenshaShimei")
-    private Label lblHihokenshaShimei;
     @JsonProperty("txtHihokenshaShimei")
     private TextBox txtHihokenshaShimei;
-    @JsonProperty("lblSeinenGappi")
-    private Label lblSeinenGappi;
+    @JsonProperty("txtHihokenshaKubun")
+    private TextBox txtHihokenshaKubun;
     @JsonProperty("txtBirthDay")
     private TextBoxDate txtBirthDay;
-    @JsonProperty("lblNenrei")
-    private Label lblNenrei;
     @JsonProperty("txtNenrei")
     private TextBox txtNenrei;
-    @JsonProperty("lblNinteiShinseiYMD")
-    private Label lblNinteiShinseiYMD;
     @JsonProperty("txtNinteiShinseiYMD")
     private TextBoxFlexibleDate txtNinteiShinseiYMD;
-    @JsonProperty("lblShinseiKubun")
-    private Label lblShinseiKubun;
     @JsonProperty("txtShinseiKubun")
     private TextBox txtShinseiKubun;
-    @JsonProperty("lblZenkaiYokaigodo")
-    private Label lblZenkaiYokaigodo;
     @JsonProperty("txtZenkaiYokaigodo")
     private TextBox txtZenkaiYokaigodo;
-    @JsonProperty("lblZenkaiNinteiKikan")
-    private Label lblZenkaiNinteiKikan;
     @JsonProperty("txtZenYukokikanStart")
     private TextBoxFlexibleDate txtZenYukokikanStart;
     @JsonProperty("lblKara2")
@@ -72,16 +54,6 @@ public class KaigoHihokenshaJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblHokensha")
-    public Label getLblHokensha() {
-        return lblHokensha;
-    }
-
-    @JsonProperty("lblHokensha")
-    public void setLblHokensha(Label lblHokensha) {
-        this.lblHokensha=lblHokensha;
-    }
-
     @JsonProperty("txtHokenshaNo")
     public TextBox getTxtHokenshaNo() {
         return txtHokenshaNo;
@@ -102,16 +74,6 @@ public class KaigoHihokenshaJohoDiv extends Panel {
         this.txtHokenshaMeisho=txtHokenshaMeisho;
     }
 
-    @JsonProperty("lblHihokensha")
-    public Label getLblHihokensha() {
-        return lblHihokensha;
-    }
-
-    @JsonProperty("lblHihokensha")
-    public void setLblHihokensha(Label lblHihokensha) {
-        this.lblHihokensha=lblHihokensha;
-    }
-
     @JsonProperty("txtHihokenshaNo")
     public TextBox getTxtHihokenshaNo() {
         return txtHihokenshaNo;
@@ -120,26 +82,6 @@ public class KaigoHihokenshaJohoDiv extends Panel {
     @JsonProperty("txtHihokenshaNo")
     public void setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
         this.txtHihokenshaNo=txtHihokenshaNo;
-    }
-
-    @JsonProperty("txtHihokenshaKubun")
-    public TextBox getTxtHihokenshaKubun() {
-        return txtHihokenshaKubun;
-    }
-
-    @JsonProperty("txtHihokenshaKubun")
-    public void setTxtHihokenshaKubun(TextBox txtHihokenshaKubun) {
-        this.txtHihokenshaKubun=txtHihokenshaKubun;
-    }
-
-    @JsonProperty("lblHihokenshaShimei")
-    public Label getLblHihokenshaShimei() {
-        return lblHihokenshaShimei;
-    }
-
-    @JsonProperty("lblHihokenshaShimei")
-    public void setLblHihokenshaShimei(Label lblHihokenshaShimei) {
-        this.lblHihokenshaShimei=lblHihokenshaShimei;
     }
 
     @JsonProperty("txtHihokenshaShimei")
@@ -152,14 +94,14 @@ public class KaigoHihokenshaJohoDiv extends Panel {
         this.txtHihokenshaShimei=txtHihokenshaShimei;
     }
 
-    @JsonProperty("lblSeinenGappi")
-    public Label getLblSeinenGappi() {
-        return lblSeinenGappi;
+    @JsonProperty("txtHihokenshaKubun")
+    public TextBox getTxtHihokenshaKubun() {
+        return txtHihokenshaKubun;
     }
 
-    @JsonProperty("lblSeinenGappi")
-    public void setLblSeinenGappi(Label lblSeinenGappi) {
-        this.lblSeinenGappi=lblSeinenGappi;
+    @JsonProperty("txtHihokenshaKubun")
+    public void setTxtHihokenshaKubun(TextBox txtHihokenshaKubun) {
+        this.txtHihokenshaKubun=txtHihokenshaKubun;
     }
 
     @JsonProperty("txtBirthDay")
@@ -172,16 +114,6 @@ public class KaigoHihokenshaJohoDiv extends Panel {
         this.txtBirthDay=txtBirthDay;
     }
 
-    @JsonProperty("lblNenrei")
-    public Label getLblNenrei() {
-        return lblNenrei;
-    }
-
-    @JsonProperty("lblNenrei")
-    public void setLblNenrei(Label lblNenrei) {
-        this.lblNenrei=lblNenrei;
-    }
-
     @JsonProperty("txtNenrei")
     public TextBox getTxtNenrei() {
         return txtNenrei;
@@ -190,16 +122,6 @@ public class KaigoHihokenshaJohoDiv extends Panel {
     @JsonProperty("txtNenrei")
     public void setTxtNenrei(TextBox txtNenrei) {
         this.txtNenrei=txtNenrei;
-    }
-
-    @JsonProperty("lblNinteiShinseiYMD")
-    public Label getLblNinteiShinseiYMD() {
-        return lblNinteiShinseiYMD;
-    }
-
-    @JsonProperty("lblNinteiShinseiYMD")
-    public void setLblNinteiShinseiYMD(Label lblNinteiShinseiYMD) {
-        this.lblNinteiShinseiYMD=lblNinteiShinseiYMD;
     }
 
     @JsonProperty("txtNinteiShinseiYMD")
@@ -212,16 +134,6 @@ public class KaigoHihokenshaJohoDiv extends Panel {
         this.txtNinteiShinseiYMD=txtNinteiShinseiYMD;
     }
 
-    @JsonProperty("lblShinseiKubun")
-    public Label getLblShinseiKubun() {
-        return lblShinseiKubun;
-    }
-
-    @JsonProperty("lblShinseiKubun")
-    public void setLblShinseiKubun(Label lblShinseiKubun) {
-        this.lblShinseiKubun=lblShinseiKubun;
-    }
-
     @JsonProperty("txtShinseiKubun")
     public TextBox getTxtShinseiKubun() {
         return txtShinseiKubun;
@@ -232,16 +144,6 @@ public class KaigoHihokenshaJohoDiv extends Panel {
         this.txtShinseiKubun=txtShinseiKubun;
     }
 
-    @JsonProperty("lblZenkaiYokaigodo")
-    public Label getLblZenkaiYokaigodo() {
-        return lblZenkaiYokaigodo;
-    }
-
-    @JsonProperty("lblZenkaiYokaigodo")
-    public void setLblZenkaiYokaigodo(Label lblZenkaiYokaigodo) {
-        this.lblZenkaiYokaigodo=lblZenkaiYokaigodo;
-    }
-
     @JsonProperty("txtZenkaiYokaigodo")
     public TextBox getTxtZenkaiYokaigodo() {
         return txtZenkaiYokaigodo;
@@ -250,16 +152,6 @@ public class KaigoHihokenshaJohoDiv extends Panel {
     @JsonProperty("txtZenkaiYokaigodo")
     public void setTxtZenkaiYokaigodo(TextBox txtZenkaiYokaigodo) {
         this.txtZenkaiYokaigodo=txtZenkaiYokaigodo;
-    }
-
-    @JsonProperty("lblZenkaiNinteiKikan")
-    public Label getLblZenkaiNinteiKikan() {
-        return lblZenkaiNinteiKikan;
-    }
-
-    @JsonProperty("lblZenkaiNinteiKikan")
-    public void setLblZenkaiNinteiKikan(Label lblZenkaiNinteiKikan) {
-        this.lblZenkaiNinteiKikan=lblZenkaiNinteiKikan;
     }
 
     @JsonProperty("txtZenYukokikanStart")

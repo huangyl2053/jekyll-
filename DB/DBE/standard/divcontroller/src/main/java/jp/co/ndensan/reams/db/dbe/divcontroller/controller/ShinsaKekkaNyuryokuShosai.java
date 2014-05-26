@@ -203,7 +203,7 @@ public class ShinsaKekkaNyuryokuShosai {
      * @param ichiranDiv 審査対象者一覧Div
      * @return ResponseData
      */
-    public ResponseData selectDdlNijiHanteiKekka(ShinsaKekkaNyuryokuShosaiDiv div, ShinsaShienTaishoshaIchiranDiv ichiranDiv) {
+    public ResponseData onSelect_DdlNijiHanteiKekka(ShinsaKekkaNyuryokuShosaiDiv div, ShinsaShienTaishoshaIchiranDiv ichiranDiv) {
         ResponseData<ShinsaKekkaNyuryokuShosaiDiv> response = new ResponseData<>();
 
         if (div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getDdlNijiHanteiKekka()
@@ -228,7 +228,7 @@ public class ShinsaKekkaNyuryokuShosai {
                 div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getDdlJotaiZo().setDisabled(true);
                 div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getDdlJotaiZo().setDisplayNone(true);
             }
-            response = ddlNinteiYukoTsukisuSelect(div, ichiranDiv);
+            response = onSelect_ddlNinteiYukoTsukisu(div, ichiranDiv);
         }
         return response;
     }
@@ -240,7 +240,7 @@ public class ShinsaKekkaNyuryokuShosai {
      * @param ichiranDiv 審査対象者一覧Div
      * @return ResponseData
      */
-    public ResponseData ddlNinteiKubunSelect(ShinsaKekkaNyuryokuShosaiDiv div, ShinsaShienTaishoshaIchiranDiv ichiranDiv) {
+    public ResponseData onSelect_ddlNinteiKubun(ShinsaKekkaNyuryokuShosaiDiv div, ShinsaShienTaishoshaIchiranDiv ichiranDiv) {
         ResponseData<ShinsaKekkaNyuryokuShosaiDiv> response = new ResponseData<>();
 
         if (div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getDdlNinteiKubun().getSelectedValue().equalsIgnoreCase("再調査")) {
@@ -261,7 +261,7 @@ public class ShinsaKekkaNyuryokuShosai {
      * @param ichiranDiv 審査対象者一覧Div
      * @return ResponseData
      */
-    public ResponseData ddlNinteiYukoTsukisuSelect(ShinsaKekkaNyuryokuShosaiDiv div, ShinsaShienTaishoshaIchiranDiv ichiranDiv) {
+    public ResponseData onSelect_ddlNinteiYukoTsukisu(ShinsaKekkaNyuryokuShosaiDiv div, ShinsaShienTaishoshaIchiranDiv ichiranDiv) {
         ResponseData<ShinsaKekkaNyuryokuShosaiDiv> response = new ResponseData<>();
 
         FlexibleDate startYmd;

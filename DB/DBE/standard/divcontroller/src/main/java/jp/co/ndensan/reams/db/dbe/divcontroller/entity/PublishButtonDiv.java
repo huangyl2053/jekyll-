@@ -10,11 +10,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * PublishingShinsakaiResults のクラスファイル 
+ * PublishButton のクラスファイル 
  * 
  * @author 自動生成
  */
-public class PublishingShinsakaiResultsDiv extends Panel {
+public class PublishButtonDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,8 +23,8 @@ public class PublishingShinsakaiResultsDiv extends Panel {
      */
     @JsonProperty("btnToPublish")
     private Button btnToPublish;
-    @JsonProperty("btnToReturnShinsakaiList")
-    private Button btnToReturnShinsakaiList;
+    @JsonProperty("chkHakkoShoruiType")
+    private CheckBoxList chkHakkoShoruiType;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -42,14 +42,14 @@ public class PublishingShinsakaiResultsDiv extends Panel {
         this.btnToPublish=btnToPublish;
     }
 
-    @JsonProperty("btnToReturnShinsakaiList")
-    public Button getBtnToReturnShinsakaiList() {
-        return btnToReturnShinsakaiList;
+    @JsonProperty("chkHakkoShoruiType")
+    public CheckBoxList getChkHakkoShoruiType() {
+        return chkHakkoShoruiType;
     }
 
-    @JsonProperty("btnToReturnShinsakaiList")
-    public void setBtnToReturnShinsakaiList(Button btnToReturnShinsakaiList) {
-        this.btnToReturnShinsakaiList=btnToReturnShinsakaiList;
+    @JsonProperty("chkHakkoShoruiType")
+    public void setChkHakkoShoruiType(CheckBoxList chkHakkoShoruiType) {
+        this.chkHakkoShoruiType=chkHakkoShoruiType;
     }
 
 }

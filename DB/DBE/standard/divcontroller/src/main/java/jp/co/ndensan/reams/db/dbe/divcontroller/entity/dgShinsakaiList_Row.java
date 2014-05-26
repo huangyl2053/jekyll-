@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue May 13 14:28:34 JST 2014 
+ * Mon May 26 16:17:50 JST 2014 
  */
 
 
@@ -15,17 +15,16 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 
 /**
- * dbShinsakaiList_Row のクラスファイル 
+ * dgShinsakaiList_Row のクラスファイル 
  * 
  * @author 自動生成
  */
 
-public class dbShinsakaiList_Row extends DataRow {
+public class dgShinsakaiList_Row extends DataRow {
 
     private Button btnToDecide;
     private RString kaisaiNo;
     private TextBoxFlexibleDate txtKaisaiDate;
-    private RString gogitaiNo;
     private RString gogitaiMeisho;
     private RString kaisaibasho;
     private RString yoteiTeiin;
@@ -33,16 +32,15 @@ public class dbShinsakaiList_Row extends DataRow {
     private RString startTime;
     private RString endTime;
 
-    public dbShinsakaiList_Row() {
+    public dgShinsakaiList_Row() {
         super();
     }
 
-    public dbShinsakaiList_Row(Button btnToDecide, RString kaisaiNo, TextBoxFlexibleDate txtKaisaiDate, RString gogitaiNo, RString gogitaiMeisho, RString kaisaibasho, RString yoteiTeiin, RString wariateNinzu, RString startTime, RString endTime) {
+    public dgShinsakaiList_Row(Button btnToDecide, RString kaisaiNo, TextBoxFlexibleDate txtKaisaiDate, RString gogitaiMeisho, RString kaisaibasho, RString yoteiTeiin, RString wariateNinzu, RString startTime, RString endTime) {
         super();
         this.setOriginalData("btnToDecide", btnToDecide);
         this.setOriginalData("kaisaiNo", kaisaiNo);
         this.setOriginalData("txtKaisaiDate", txtKaisaiDate);
-        this.setOriginalData("gogitaiNo", gogitaiNo);
         this.setOriginalData("gogitaiMeisho", gogitaiMeisho);
         this.setOriginalData("kaisaibasho", kaisaibasho);
         this.setOriginalData("yoteiTeiin", yoteiTeiin);
@@ -52,7 +50,6 @@ public class dbShinsakaiList_Row extends DataRow {
         this.btnToDecide = btnToDecide;
         this.kaisaiNo = kaisaiNo;
         this.txtKaisaiDate = txtKaisaiDate;
-        this.gogitaiNo = gogitaiNo;
         this.gogitaiMeisho = gogitaiMeisho;
         this.kaisaibasho = kaisaibasho;
         this.yoteiTeiin = yoteiTeiin;
@@ -71,10 +68,6 @@ public class dbShinsakaiList_Row extends DataRow {
 
     public TextBoxFlexibleDate getTxtKaisaiDate() {
         return txtKaisaiDate;
-    }
-
-    public RString getGogitaiNo() {
-        return gogitaiNo;
     }
 
     public RString getGogitaiMeisho() {
@@ -114,11 +107,6 @@ public class dbShinsakaiList_Row extends DataRow {
     public void setTxtKaisaiDate(TextBoxFlexibleDate txtKaisaiDate) {
         this.setOriginalData("txtKaisaiDate", txtKaisaiDate);
         this.txtKaisaiDate = txtKaisaiDate;
-    }
-
-    public void setGogitaiNo(RString gogitaiNo) {
-        this.setOriginalData("gogitaiNo", gogitaiNo);
-        this.gogitaiNo = gogitaiNo;
     }
 
     public void setGogitaiMeisho(RString gogitaiMeisho) {

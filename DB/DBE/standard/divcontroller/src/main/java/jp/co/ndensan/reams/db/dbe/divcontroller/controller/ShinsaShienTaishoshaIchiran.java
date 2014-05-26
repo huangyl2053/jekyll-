@@ -48,7 +48,7 @@ public class ShinsaShienTaishoshaIchiran {
      * @param shinsakaiDiv 審査結果入力Div
      * @return ResponseData
      */
-    public ResponseData btnShinsaKekkaNyuryokuEndClick(ShinsaShienTaishoshaIchiranDiv taishoshaDiv,
+    public ResponseData onClick_btnShinsaKekkaNyuryokuEnd(ShinsaShienTaishoshaIchiranDiv taishoshaDiv,
             KaniShinsakaiKaisaiKekkaDiv shinsakaiDiv) {
 
         ResponseData<KaniShinsakaiKaisaiKekkaDiv> response = new ResponseData<>();

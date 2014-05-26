@@ -20,8 +20,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
+ * 認定審査結果入力用Divの制御を行います。
  *
- * @author N1013
+ * @author N1013 松本直樹
  */
 public class NinteiShinsaKekkaNyuryoku {
 
@@ -31,7 +32,7 @@ public class NinteiShinsaKekkaNyuryoku {
      * @param shinsaTaishoshaItiranDiv
      * @return
      */
-    public ResponseData getOnloadData(NinteiShinsaKekkaNyuryokuDiv ninteiShinsaKekkaNyuryoikuDiv,
+    public ResponseData onLoadData(NinteiShinsaKekkaNyuryokuDiv ninteiShinsaKekkaNyuryoikuDiv,
             ShinsaTaishoshaItiranDiv shinsaTaishoshaItiranDiv) {
         ResponseData<NinteiShinsaKekkaNyuryokuDiv> response = new ResponseData<>();
 
@@ -104,7 +105,7 @@ public class NinteiShinsaKekkaNyuryoku {
      * @param shinsaTaishoshaItiranDiv 審査対象者一覧Div
      * @return ResponseData
      */
-    public ResponseData ddlNinteiKubunSelect(NinteiShinsaKekkaNyuryokuDiv ninteiShinsaKekkaNyuryoikuDiv,
+    public ResponseData onSelect_ddlNinteiKubun(NinteiShinsaKekkaNyuryokuDiv ninteiShinsaKekkaNyuryoikuDiv,
             ShinsaTaishoshaItiranDiv shinsaTaishoshaItiranDiv) {
         ResponseData<NinteiShinsaKekkaNyuryokuDiv> response = new ResponseData<>();
 
@@ -126,7 +127,7 @@ public class NinteiShinsaKekkaNyuryoku {
      * @param shinsaTaishoshaItiranDiv 審査対象者一覧Div
      * @return ResponseData
      */
-    public ResponseData ddlNinteiYukoTsukisuSelect(NinteiShinsaKekkaNyuryokuDiv ninteiShinsaKekkaNyuryoikuDiv,
+    public ResponseData onSelect_ddlNinteiYukoTsukisu(NinteiShinsaKekkaNyuryokuDiv ninteiShinsaKekkaNyuryoikuDiv,
             ShinsaTaishoshaItiranDiv shinsaTaishoshaItiranDiv) {
         ResponseData<NinteiShinsaKekkaNyuryokuDiv> response = new ResponseData<>();
 

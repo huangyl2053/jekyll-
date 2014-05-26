@@ -439,7 +439,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbe/db/dbe/TaishoShinsakai/getOnloadData"
+     "requestUrl": "dbe/db/dbe/TaishoShinsakai/onLoadData"
     }
    ],
    "hiddenInput": [],
@@ -901,7 +901,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbe/db/dbe/ShinsaTaishoshaItiran/getOnloadData"
+     "requestUrl": "dbe/db/dbe/ShinsaTaishoshaItiran/onLoadData"
     }
    ],
    "hiddenInput": [],
@@ -973,8 +973,8 @@
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
      "selectDdlNijiHantei": "",
-     "selectDdlNinteiYukoTsukisu": "ddlNinteiYukoTsukisuSelect",
-     "selectDdlNinteiKubun": "ddlNinteiKubunSelect"
+     "selectDdlNinteiYukoTsukisu": "onSelect_ddlNinteiYukoTsukisu",
+     "selectDdlNinteiKubun": "onSelect_ddlNinteiKubun"
     },
     {
      "fieldName": "NyuryokuSeigyo",
@@ -997,7 +997,7 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "text": "入力内容で登録する",
-       "onClick": "btnTorokuClick",
+       "onClick": "onClick_btnToroku",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
@@ -1133,23 +1133,23 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbe/db/dbe/NinteiShinsaKekkaNyuryoku/getOnloadData"
+     "requestUrl": "dbe/db/dbe/NinteiShinsaKekkaNyuryoku/onLoadData"
     },
     {
-     "eventName": "btnTorokuClick",
+     "eventName": "onClick_btnToroku",
      "requestUrl": "dbe/db/dbe/NyuryokuSeigyo/btnTorokuClick"
     },
     {
      "eventName": "onClickNyuryoku",
-     "requestUrl": "dbe/db/dbe/NinteiShinsaKekkaNyuryoku/getOnloadData"
+     "requestUrl": "dbe/db/dbe/NinteiShinsaKekkaNyuryoku/onLoadData"
     },
     {
-     "eventName": "ddlNinteiKubunSelect",
-     "requestUrl": "dbe/db/dbe/NinteiShinsaKekkaNyuryoku/ddlNinteiKubunSelect"
+     "eventName": "onSelect_ddlNinteiKubun",
+     "requestUrl": "dbe/db/dbe/NinteiShinsaKekkaNyuryoku/onSelect_ddlNinteiKubun"
     },
     {
-     "eventName": "ddlNinteiYukoTsukisuSelect",
-     "requestUrl": "dbe/db/dbe/NinteiShinsaKekkaNyuryoku/ddlNinteiYukoTsukisuSelect"
+     "eventName": "onSelect_ddlNinteiYukoTsukisu",
+     "requestUrl": "dbe/db/dbe/NinteiShinsaKekkaNyuryoku/onSelect_ddlNinteiYukoTsukisu"
     }
    ],
    "hiddenInput": [],

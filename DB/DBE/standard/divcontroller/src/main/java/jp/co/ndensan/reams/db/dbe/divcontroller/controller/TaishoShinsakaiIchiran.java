@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  */
 public class TaishoShinsakaiIchiran {
 
-    public ResponseData getOnloadData(TaishoShinsakaiIchiranDiv div) {
+    public ResponseData onLoadData(TaishoShinsakaiIchiranDiv div) {
         ResponseData<TaishoShinsakaiIchiranDiv> response = new ResponseData<>();
 
         div.getDgShinsakaiIchiran().setDataSource(createRowShinsakaiTestData());
