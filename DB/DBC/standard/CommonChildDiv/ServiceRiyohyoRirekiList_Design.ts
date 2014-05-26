@@ -183,7 +183,7 @@ module DBC {
         "dataName": "txtTodokedeKubun",
         "toolTip": "",
         "bgColor": 0,
-        "width": 70,
+        "width": 80,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -229,7 +229,7 @@ module DBC {
         "dataName": "txtIraiJigyosha",
         "toolTip": "",
         "bgColor": 0,
-        "width": 720,
+        "width": 710,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,

@@ -235,7 +235,7 @@
      "toValue": "",
      "labelLText": "二次予防有効期間",
      "labelRText": "",
-     "labelLWidth": "120",
+     "labelLWidth": "130",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0
@@ -271,7 +271,7 @@
      "displayFormat": 0,
      "labelLText": "二次予防判定日",
      "labelRText": "",
-     "labelLWidth": "110",
+     "labelLWidth": "115",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -327,7 +327,12 @@
      "postParameterPanelNames": "SogoJigyohiRiyohyoTaishosha"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/SogoJigyohiRiyohyoTaishosha/onLoad"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -447,7 +452,7 @@
         "dataName": "txtTodokedeKubun",
         "toolTip": "",
         "bgColor": 0,
-        "width": 70,
+        "width": 80,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -493,7 +498,7 @@
         "dataName": "txtIraiJigyosha",
         "toolTip": "",
         "bgColor": 0,
-        "width": 800,
+        "width": 790,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -533,7 +538,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbc/db/dbc/SogoJigyohiRiyohyoRireki/getOnLoadData"
+     "requestUrl": "dbc/db/dbc/SogoJigyohiRiyohyoRireki/onLoad"
     }
    ],
    "hiddenInput": [],
@@ -824,7 +829,7 @@
         "cellDetails": {
          "cellType": 8,
          "text": "削",
-         "onClick": "onClickSogoJigyohiRiyohyoListDelete",
+         "onClick": "onClickListDelete",
          "imageFileUrl": "",
          "imageWidth": "",
          "imageHeight": ""
@@ -898,7 +903,7 @@
         "dataName": "txtService",
         "toolTip": "",
         "bgColor": 0,
-        "width": 200,
+        "width": 220,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -935,7 +940,7 @@
         "dataName": "txtJigyosha",
         "toolTip": "",
         "bgColor": 0,
-        "width": 200,
+        "width": 220,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -1713,7 +1718,7 @@
         "cellDetails": {
          "cellType": 8,
          "text": "選",
-         "onClick": "onClickSogoJigyohiRiyohyoBeppyoListSelect",
+         "onClick": "onClickBeppyoListSelect",
          "imageFileUrl": "",
          "imageWidth": "",
          "imageHeight": ""
@@ -1734,7 +1739,7 @@
         "cellDetails": {
          "cellType": 8,
          "text": "削",
-         "onClick": "onClickSogoJigyohiRiyohyoBeppyoListDelete",
+         "onClick": "onClickBeppyoListDelete",
          "imageFileUrl": "",
          "imageWidth": "",
          "imageHeight": ""
@@ -1749,7 +1754,7 @@
         "dataName": "txtJigyosha",
         "toolTip": "",
         "bgColor": 0,
-        "width": 200,
+        "width": 220,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -1765,7 +1770,7 @@
         "dataName": "txtService",
         "toolTip": "",
         "bgColor": 0,
-        "width": 200,
+        "width": 220,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -1969,7 +1974,7 @@
         "dataName": "txtRiyoshaFutangakuHoken",
         "toolTip": "",
         "bgColor": 0,
-        "width": 100,
+        "width": 120,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -1983,7 +1988,7 @@
         "dataName": "txtRiyoshaFutangakuZengaku",
         "toolTip": "",
         "bgColor": 0,
-        "width": 100,
+        "width": 120,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -2088,7 +2093,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbc/db/dbc/SogoJigyohiRiyohyo/getOnLoadData"
+     "requestUrl": "dbc/db/dbc/SogoJigyohiRiyohyo/onLoad"
     },
     {
      "eventName": "onClickZengetsuCopy",
@@ -2115,16 +2120,16 @@
      "requestUrl": "dbc/db/dbc/SogoJigyohiRiyohyo/onClickBeppyoGokeiKakutei"
     },
     {
-     "eventName": "onClickSogoJigyohiRiyohyoListDelete",
-     "requestUrl": "dbc/db/dbc/SogoJigyohiRiyohyo/onClickSogoJigyohiRiyohyoListDelete"
+     "eventName": "onClickListDelete",
+     "requestUrl": "dbc/db/dbc/SogoJigyohiRiyohyo/onClickListDelete"
     },
     {
-     "eventName": "onClickSogoJigyohiRiyohyoBeppyoListSelect",
-     "requestUrl": "dbc/db/dbc/SogoJigyohiRiyohyo/onClickSogoJigyohiRiyohyoBeppyoListSelect"
+     "eventName": "onClickBeppyoListSelect",
+     "requestUrl": "dbc/db/dbc/SogoJigyohiRiyohyo/onClickBeppyoListSelect"
     },
     {
-     "eventName": "onClickSogoJigyohiRiyohyoBeppyoListDelete",
-     "requestUrl": "dbc/db/dbc/SogoJigyohiRiyohyo/onClickSogoJigyohiRiyohyoBeppyoListDelete"
+     "eventName": "onClickBeppyoListDelete",
+     "requestUrl": "dbc/db/dbc/SogoJigyohiRiyohyo/onClickBeppyoListDelete"
     }
    ],
    "hiddenInput": [],

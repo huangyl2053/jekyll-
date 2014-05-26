@@ -179,7 +179,7 @@ var DBC;
                                         "dataName": "txtTodokedeKubun",
                                         "toolTip": "",
                                         "bgColor": 0,
-                                        "width": 70,
+                                        "width": 80,
                                         "visible": true,
                                         "cellType": 0,
                                         "cellDetails": {
@@ -225,7 +225,7 @@ var DBC;
                                         "dataName": "txtIraiJigyosha",
                                         "toolTip": "",
                                         "bgColor": 0,
-                                        "width": 720,
+                                        "width": 710,
                                         "visible": true,
                                         "cellType": 0,
                                         "cellDetails": null,
