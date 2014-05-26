@@ -603,10 +603,10 @@
      "BeppyoGokeiDisplayNone": false,
      "BeppyoRiyoNissuVisible": false,
      "BeppyoRiyoNissuDisplayNone": true,
-     "KeikakuJigyoshaCodeVisible": true,
-     "KeikakuJigyoshaCodeDisplayNone": false,
-     "KeikakuJigyoshaNameVisible": true,
-     "KeikakuJigyoshaNameDisplayNone": false,
+     "KeikakuJigyoshaCodeVisible": false,
+     "KeikakuJigyoshaCodeDisplayNone": true,
+     "KeikakuJigyoshaNameVisible": false,
+     "KeikakuJigyoshaNameDisplayNone": true,
      "ZengetsuCopyOnClick": "onClickZengetsuCopy",
      "RiyohyoMeisaiAddOnClick": "onClickRiyohyoMeisaiAdd",
      "BeppyoMeisaiNewOnClick": "onClickBeppyoMeisaiNew",
@@ -923,7 +923,7 @@
         "cellDetails": {
          "cellType": 0
         },
-        "align": 1,
+        "align": 0,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "txtService"
@@ -960,7 +960,7 @@
         "cellDetails": {
          "cellType": 0
         },
-        "align": 1,
+        "align": 0,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "txtJigyosha"
