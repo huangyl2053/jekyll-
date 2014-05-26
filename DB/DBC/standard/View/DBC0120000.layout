@@ -2302,11 +2302,21 @@
     },
     {
      "visibleDiv": "KyotakuJikoRiyohyoList",
-     "panelState": "visible"
+     "panelState": "close"
     }
    ],
    "validation": {},
    "events": [
+    {
+     "fieldName": "btnSearch",
+     "event": "onClick",
+     "transition": "履歴"
+    },
+    {
+     "fieldName": "btnGaitoshaReturn",
+     "event": "onClick",
+     "transition": ""
+    },
     {
      "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList[btnSelect]",
      "event": "onClick",
@@ -2316,16 +2326,49 @@
      "fieldName": "btnReturn",
      "event": "onClick",
      "transition": ""
+    }
+   ]
+  },
+  {
+   "order": "2",
+   "stateName": "該当者一覧",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "KyotakuJikoRiyohyoSearch",
+     "panelState": "close"
+    },
+    {
+     "visibleDiv": "KyotakuJikoRiyohyoList",
+     "panelState": "visible"
+    }
+   ],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnSearch",
+     "event": "onClick",
+     "transition": "履歴"
     },
     {
      "fieldName": "btnGaitoshaReturn",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList[btnSelect]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
      "event": "onClick",
      "transition": ""
     }
    ]
   },
   {
-   "order": "2",
+   "order": "3",
    "stateName": "履歴",
    "showWizard": false,
    "visibleDivs": [
@@ -2349,6 +2392,16 @@
    "validation": {},
    "events": [
     {
+     "fieldName": "btnSearch",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnGaitoshaReturn",
+     "event": "onClick",
+     "transition": "個人検索条件"
+    },
+    {
      "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList[btnSelect]",
      "event": "onClick",
      "transition": "サービス利用票"
@@ -2357,16 +2410,11 @@
      "fieldName": "btnReturn",
      "event": "onClick",
      "transition": ""
-    },
-    {
-     "fieldName": "btnGaitoshaReturn",
-     "event": "onClick",
-     "transition": "個人検索条件"
     }
    ]
   },
   {
-   "order": "3",
+   "order": "4",
    "stateName": "サービス利用票",
    "showWizard": false,
    "visibleDivs": [
@@ -2394,6 +2442,16 @@
    "validation": {},
    "events": [
     {
+     "fieldName": "btnSearch",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnGaitoshaReturn",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
      "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList[btnSelect]",
      "event": "onClick",
      "transition": ""
@@ -2402,11 +2460,6 @@
      "fieldName": "btnReturn",
      "event": "onClick",
      "transition": "履歴"
-    },
-    {
-     "fieldName": "btnGaitoshaReturn",
-     "event": "onClick",
-     "transition": ""
     }
    ]
   }
