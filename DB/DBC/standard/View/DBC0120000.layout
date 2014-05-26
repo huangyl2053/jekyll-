@@ -2,6 +2,202 @@
  "fieldName": "Page",
  "items": [
   {
+   "fieldName": "KyotakuJikoRiyohyoSearch",
+   "items": [
+    {
+     "fieldName": "lblSearch",
+     "items": [],
+     "controlType": "Label",
+     "width": "S",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "required": false,
+     "align": 0,
+     "text": "<<検索条件>>",
+     "isPrivateInfo": false
+    },
+    {
+     "fieldName": "btnSearch",
+     "items": [],
+     "controlType": "Button",
+     "width": "100",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "text": "検索する",
+     "onClick": "",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
+    }
+   ],
+   "controlType": "Panel",
+   "width": "1260",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "onLoad": "",
+   "title": "(共通) DBZ0010001 個人検索条件",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "KyotakuJikoRiyohyoSearch"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "isGroupBox": false
+  },
+  {
+   "fieldName": "KyotakuJikoRiyohyoList",
+   "items": [
+    {
+     "fieldName": "dgTaishoshaList",
+     "items": [],
+     "controlType": "DataGrid",
+     "width": "1240",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "gridSetting": {
+      "rowHeight": 25,
+      "isMultiSelectable": false,
+      "isShowFooter": true,
+      "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": false,
+      "header": {
+       "combineColumns": [],
+       "frozenColumn": "",
+       "headerHeight": 0
+      },
+      "columns": [
+       {
+        "columnName": "",
+        "dataName": "btnSelect",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 50,
+        "visible": true,
+        "cellType": 8,
+        "cellDetails": {
+         "cellType": 8,
+         "text": "選択",
+         "onClick": "",
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": ""
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "btnSelect"
+       }
+      ]
+     },
+     "height": "XS",
+     "onSort": "",
+     "onSelect": "",
+     "onSelectByDblClick": "",
+     "onOnlyRow": "",
+     "onNoRow": "",
+     "onMultiRows": "",
+     "dataSource": [],
+     "sortOrder": "defaultDataName4",
+     "isAscending": true,
+     "filterList": [],
+     "activeRowId": -1
+    }
+   ],
+   "controlType": "Panel",
+   "width": "1260",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "onLoad": "",
+   "title": "(共通) DBZ0010002 該当者一覧",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "KyotakuJikoRiyohyoList"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "isGroupBox": false
+  },
+  {
    "fieldName": "KyotakuJikoRiyohyoKihon",
    "items": [
     {
@@ -349,6 +545,30 @@
       ]
      },
      "RirekiListHeight": "400"
+    },
+    {
+     "fieldName": "btnGaitoshaReturn",
+     "items": [],
+     "controlType": "Button",
+     "width": "180",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "text": "該当者一覧に戻る",
+     "onClick": "",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
     }
    ],
    "controlType": "Panel",
@@ -2073,6 +2293,39 @@
  "stateTransition": [
   {
    "order": "1",
+   "stateName": "個人検索条件",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "KyotakuJikoRiyohyoSearch",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "KyotakuJikoRiyohyoList",
+     "panelState": "visible"
+    }
+   ],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList[btnSelect]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnGaitoshaReturn",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
+  },
+  {
+   "order": "2",
    "stateName": "履歴",
    "showWizard": false,
    "visibleDivs": [
@@ -2104,11 +2357,16 @@
      "fieldName": "btnReturn",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnGaitoshaReturn",
+     "event": "onClick",
+     "transition": "個人検索条件"
     }
    ]
   },
   {
-   "order": "2",
+   "order": "3",
    "stateName": "サービス利用票",
    "showWizard": false,
    "visibleDivs": [
@@ -2144,6 +2402,11 @@
      "fieldName": "btnReturn",
      "event": "onClick",
      "transition": "履歴"
+    },
+    {
+     "fieldName": "btnGaitoshaReturn",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   }
@@ -2153,6 +2416,12 @@
  "WFParameter": [],
  "UIContainerEventMapping": [],
  "loadSequencePanelNames": [
+  [
+   "KyotakuJikoRiyohyoSearch"
+  ],
+  [
+   "KyotakuJikoRiyohyoList"
+  ],
   [
    "KyotakuJikoRiyohyoKihon"
   ],
