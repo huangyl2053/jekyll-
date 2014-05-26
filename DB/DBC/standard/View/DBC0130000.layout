@@ -418,23 +418,23 @@
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "labelLText": "二次予防有効期間",
-     "labelRText": "",
-     "labelLWidth": "130",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "ymdKubun": 2,
-     "displayFormat": 0,
      "permitCharactor": "",
      "fromPlaceHolder": "",
      "toPlaceHolder": "",
+     "ymdKubun": 2,
+     "displayFormat": 0,
      "minDate": "",
      "maxDate": "",
      "fromText": "",
      "toText": "",
      "fromValue": "",
-     "toValue": ""
+     "toValue": "",
+     "labelLText": "二次予防有効期間",
+     "labelRText": "",
+     "labelLWidth": "130",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0
     },
     {
      "fieldName": "txtNijiYoboHanteiYMD",
@@ -457,23 +457,23 @@
      "text": "",
      "isPrivateInfo": false,
      "readOnly": false,
-     "placeHolder": "",
-     "textKind": 0,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
+     "permitCharactor": "./_-",
+     "ymdKubun": 2,
+     "displayFormat": 0,
      "labelLText": "二次予防判定日",
      "labelRText": "",
      "labelLWidth": "115",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "ymdKubun": 2,
-     "displayFormat": 0,
-     "value": "",
-     "permitCharactor": "./_-"
+     "placeHolder": "",
+     "textKind": 0,
+     "value": ""
     },
     {
      "fieldName": "btnKaito",
@@ -2279,21 +2279,21 @@
      "text": "",
      "isPrivateInfo": false,
      "readOnly": false,
-     "placeHolder": "",
-     "textKind": 0,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
+     "permitCharactor": "",
      "labelLText": "",
      "labelRText": "",
      "labelLWidth": "S",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "placeHolder": "",
+     "textKind": 0,
      "value": "",
-     "permitCharactor": "",
      "maxLength": 1000000000000,
      "minLength": 0,
      "textAlign": 0,
@@ -2477,15 +2477,15 @@
     },
     {
      "visibleDiv": "SogoJigyohiRiyohyoList",
-     "panelState": "visible"
+     "panelState": "close"
     }
    ],
    "validation": {},
    "events": [
     {
-     "fieldName": "SogoJigyohiRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList[btnSelect]",
+     "fieldName": "btnSearch",
      "event": "onClick",
-     "transition": ""
+     "transition": "履歴"
     },
     {
      "fieldName": "SogoJigyohiRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList",
@@ -2501,11 +2501,59 @@
      "fieldName": "btnGaitoshaReturn",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "SogoJigyohiRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList[btnSelect]",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
   {
    "order": "2",
+   "stateName": "該当者一覧",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "SogoJigyohiRiyohyoSearch",
+     "panelState": "close"
+    },
+    {
+     "visibleDiv": "SogoJigyohiRiyohyoList",
+     "panelState": "visible"
+    }
+   ],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnSearch",
+     "event": "onClick",
+     "transition": "履歴"
+    },
+    {
+     "fieldName": "SogoJigyohiRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnGaitoshaReturn",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "SogoJigyohiRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList[btnSelect]",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
+  },
+  {
+   "order": "3",
    "stateName": "履歴",
    "showWizard": false,
    "visibleDivs": [
@@ -2533,9 +2581,9 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "SogoJigyohiRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList[btnSelect]",
+     "fieldName": "btnSearch",
      "event": "onClick",
-     "transition": "サービス利用票"
+     "transition": ""
     },
     {
      "fieldName": "SogoJigyohiRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList",
@@ -2551,11 +2599,16 @@
      "fieldName": "btnGaitoshaReturn",
      "event": "onClick",
      "transition": "個人検索条件"
+    },
+    {
+     "fieldName": "SogoJigyohiRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList[btnSelect]",
+     "event": "onClick",
+     "transition": "サービス利用票"
     }
    ]
   },
   {
-   "order": "3",
+   "order": "4",
    "stateName": "サービス利用票",
    "showWizard": false,
    "visibleDivs": [
@@ -2587,7 +2640,7 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "SogoJigyohiRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList[btnSelect]",
+     "fieldName": "btnSearch",
      "event": "onClick",
      "transition": ""
     },
@@ -2603,6 +2656,11 @@
     },
     {
      "fieldName": "btnGaitoshaReturn",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "SogoJigyohiRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList[btnSelect]",
      "event": "onClick",
      "transition": ""
     }
