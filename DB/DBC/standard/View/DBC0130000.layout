@@ -2,6 +2,202 @@
  "fieldName": "Page",
  "items": [
   {
+   "fieldName": "SogoJigyohiRiyohyoSearch",
+   "items": [
+    {
+     "fieldName": "lblSearch",
+     "items": [],
+     "controlType": "Label",
+     "width": "S",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "required": false,
+     "align": 0,
+     "text": "<<検索条件>>",
+     "isPrivateInfo": false
+    },
+    {
+     "fieldName": "btnSearch",
+     "items": [],
+     "controlType": "Button",
+     "width": "100",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "text": "検索する",
+     "onClick": "",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
+    }
+   ],
+   "controlType": "Panel",
+   "width": "1260",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "onLoad": "",
+   "title": "(共通) DBZ0010001 個人検索条件",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "SogoJigyohiRiyohyoSearch"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "isGroupBox": false
+  },
+  {
+   "fieldName": "SogoJigyohiRiyohyoList",
+   "items": [
+    {
+     "fieldName": "dgTaishoshaList",
+     "items": [],
+     "controlType": "DataGrid",
+     "width": "1240",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "gridSetting": {
+      "rowHeight": 25,
+      "isMultiSelectable": false,
+      "isShowFooter": true,
+      "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": false,
+      "header": {
+       "combineColumns": [],
+       "frozenColumn": "",
+       "headerHeight": 0
+      },
+      "columns": [
+       {
+        "columnName": "",
+        "dataName": "btnSelect",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 50,
+        "visible": true,
+        "cellType": 8,
+        "cellDetails": {
+         "cellType": 8,
+         "text": "選択",
+         "onClick": "",
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": ""
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "btnSelect"
+       }
+      ]
+     },
+     "height": "XS",
+     "onSort": "",
+     "onSelect": "",
+     "onSelectByDblClick": "",
+     "onOnlyRow": "",
+     "onNoRow": "",
+     "onMultiRows": "",
+     "dataSource": [],
+     "sortOrder": "defaultDataName4",
+     "isAscending": true,
+     "filterList": [],
+     "activeRowId": -1
+    }
+   ],
+   "controlType": "Panel",
+   "width": "1260",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "onLoad": "",
+   "title": "(共通) DBZ0010002 該当者一覧",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "SogoJigyohiRiyohyoList"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "isGroupBox": false
+  },
+  {
    "fieldName": "SogoJigyohiRiyohyoKihon",
    "items": [
     {
@@ -222,23 +418,23 @@
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "permitCharactor": "",
-     "fromPlaceHolder": "",
-     "toPlaceHolder": "",
-     "ymdKubun": 2,
-     "displayFormat": 0,
-     "minDate": "",
-     "maxDate": "",
-     "fromText": "",
-     "toText": "",
-     "fromValue": "",
-     "toValue": "",
      "labelLText": "二次予防有効期間",
      "labelRText": "",
      "labelLWidth": "130",
      "labelRWidth": "S",
      "labelLAlign": 2,
-     "labelRAlign": 0
+     "labelRAlign": 0,
+     "ymdKubun": 2,
+     "displayFormat": 0,
+     "permitCharactor": "",
+     "fromPlaceHolder": "",
+     "toPlaceHolder": "",
+     "minDate": "",
+     "maxDate": "",
+     "fromText": "",
+     "toText": "",
+     "fromValue": "",
+     "toValue": ""
     },
     {
      "fieldName": "txtNijiYoboHanteiYMD",
@@ -261,23 +457,23 @@
      "text": "",
      "isPrivateInfo": false,
      "readOnly": false,
+     "placeHolder": "",
+     "textKind": 0,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "permitCharactor": "./_-",
-     "ymdKubun": 2,
-     "displayFormat": 0,
      "labelLText": "二次予防判定日",
      "labelRText": "",
      "labelLWidth": "115",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "placeHolder": "",
-     "textKind": 0,
-     "value": ""
+     "ymdKubun": 2,
+     "displayFormat": 0,
+     "value": "",
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "btnKaito",
@@ -524,6 +720,30 @@
       ]
      },
      "RirekiListHeight": "400"
+    },
+    {
+     "fieldName": "btnGaitoshaReturn",
+     "items": [],
+     "controlType": "Button",
+     "width": "180",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "text": "該当者一覧に戻る",
+     "onClick": "",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
     }
    ],
    "controlType": "Panel",
@@ -2059,21 +2279,21 @@
      "text": "",
      "isPrivateInfo": false,
      "readOnly": false,
+     "placeHolder": "",
+     "textKind": 0,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "permitCharactor": "",
      "labelLText": "",
      "labelRText": "",
      "labelLWidth": "S",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "placeHolder": "",
-     "textKind": 0,
      "value": "",
+     "permitCharactor": "",
      "maxLength": 1000000000000,
      "minLength": 0,
      "textAlign": 0,
@@ -2248,6 +2468,44 @@
  "stateTransition": [
   {
    "order": "1",
+   "stateName": "個人検索条件",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "SogoJigyohiRiyohyoSearch",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "SogoJigyohiRiyohyoList",
+     "panelState": "visible"
+    }
+   ],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "SogoJigyohiRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList[btnSelect]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "SogoJigyohiRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnGaitoshaReturn",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
+  },
+  {
+   "order": "2",
    "stateName": "履歴",
    "showWizard": false,
    "visibleDivs": [
@@ -2288,11 +2546,16 @@
      "fieldName": "btnReturn",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnGaitoshaReturn",
+     "event": "onClick",
+     "transition": "個人検索条件"
     }
    ]
   },
   {
-   "order": "2",
+   "order": "3",
    "stateName": "サービス利用票",
    "showWizard": false,
    "visibleDivs": [
@@ -2337,6 +2600,11 @@
      "fieldName": "btnReturn",
      "event": "onClick",
      "transition": "履歴"
+    },
+    {
+     "fieldName": "btnGaitoshaReturn",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   }
@@ -2346,6 +2614,12 @@
  "WFParameter": [],
  "UIContainerEventMapping": [],
  "loadSequencePanelNames": [
+  [
+   "SogoJigyohiRiyohyoSearch"
+  ],
+  [
+   "SogoJigyohiRiyohyoList"
+  ],
   [
    "SogoJigyohiRiyohyoKihon"
   ],
