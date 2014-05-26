@@ -1136,7 +1136,7 @@ module DBC {
             "cellDetails": {
              "cellType": 0
             },
-            "align": 1,
+            "align": 0,
             "resize": true,
             "isPrivateInfo": false,
             "sortKey": "txtService"
@@ -1173,7 +1173,7 @@ module DBC {
             "cellDetails": {
              "cellType": 0
             },
-            "align": 1,
+            "align": 0,
             "resize": true,
             "isPrivateInfo": false,
             "sortKey": "txtJigyosha"
@@ -2272,7 +2272,7 @@ module DBC {
               "cellDetails": {
                "cellType": 0
               },
-              "align": 1,
+              "align": 0,
               "resize": true,
               "isPrivateInfo": false,
               "sortKey": "txtJigyosha"
@@ -3857,7 +3857,7 @@ module DBC {
       "ServiceRiyohyoBeppyo"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "ServiceRiyohyoBeppyo"
+     "selectedItemFieldName": "ServiceRiyohyo"
     }
    ],
    "controlType": "Panel",

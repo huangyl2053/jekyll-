@@ -418,6 +418,20 @@
         "sortKey": "btnSelect"
        },
        {
+        "columnName": "状態",
+        "dataName": "txtJotai",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 60,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "txtJotai"
+       },
+       {
         "columnName": "",
         "dataName": "txtTodokedeYMDInvisivle",
         "toolTip": "",
@@ -499,11 +513,11 @@
         "toolTip": "",
         "bgColor": 0,
         "width": 790,
-        "visible": true,
+        "visible": false,
         "cellType": 0,
         "cellDetails": null,
         "align": 0,
-        "resize": true,
+        "resize": false,
         "isPrivateInfo": false,
         "sortKey": "txtIraiJigyosha"
        }

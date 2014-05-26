@@ -29,9 +29,21 @@ public class SogoJigyohiRiyohyoTaishosha {
     public ResponseData onLoad(SogoJigyohiRiyohyoTaishoshaDiv panel) {
         ResponseData<SogoJigyohiRiyohyoTaishoshaDiv> response = new ResponseData<>();
         List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("SogoJigyohiRiyohyoTaishosha.yml"));
-        panel.getTxtNijiYoboYukoKikan().setFromValue(new RDate(sourceList.get(0).get("二次予防有効期間開始日").toString()));
-        panel.getTxtNijiYoboYukoKikan().setToValue(new RDate(sourceList.get(0).get("二次予防有効期間終了日").toString()));
-        panel.getTxtNijiYoboHanteiYMD().setValue(new RDate(sourceList.get(0).get("二次予防判定日").toString()));
+        if (sourceList.get(0).get("二次予防有効期間開始日").toString().isEmpty()) {
+            panel.getTxtNijiYoboYukoKikan().clearFromValue();
+        } else {
+            panel.getTxtNijiYoboYukoKikan().setFromValue(new RDate(sourceList.get(0).get("二次予防有効期間開始日").toString()));
+        }
+        if (sourceList.get(0).get("二次予防有効期間終了日").toString().isEmpty()) {
+            panel.getTxtNijiYoboYukoKikan().clearToValue();
+        } else {
+            panel.getTxtNijiYoboYukoKikan().setToValue(new RDate(sourceList.get(0).get("二次予防有効期間終了日").toString()));
+        }
+        if (sourceList.get(0).get("二次予防判定日").toString().isEmpty()) {
+            panel.getTxtNijiYoboHanteiYMD().clearValue();
+        } else {
+            panel.getTxtNijiYoboHanteiYMD().setValue(new RDate(sourceList.get(0).get("二次予防判定日").toString()));
+        }
         response.data = panel;
         return response;
     }
