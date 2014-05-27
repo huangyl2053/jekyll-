@@ -10,11 +10,11 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuKeikakuTodokedeRir
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 
 /**
- * KyotakuServiceRireki のクラスファイル 
+ * tplKyotakuKeikakuTodokedeDetailRireki のクラスファイル 
  * 
  * @author 自動生成
  */
-public class KyotakuServiceRirekiDiv extends TabPanel {
+public class tplKyotakuKeikakuTodokedeDetailRirekiDiv extends TabPanel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
