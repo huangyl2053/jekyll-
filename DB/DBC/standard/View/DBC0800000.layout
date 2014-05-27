@@ -225,7 +225,7 @@
      "dialogCancelEventNameForDialog": "",
      "AddButtonVisible": true,
      "AddButtonDisplayNone": false,
-     "AddButtonOnClick": "",
+     "AddButtonOnClick": "onClickAddButton",
      "ShinseishoListGridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -250,7 +250,7 @@
         "cellDetails": {
          "cellType": 8,
          "text": "選",
-         "onClick": "",
+         "onClick": "onSelectedShinseishoList",
          "imageFileUrl": "",
          "imageWidth": "",
          "imageHeight": ""
@@ -426,7 +426,16 @@
      "postParameterPanelNames": "ShokanShikyuTorokuShinseishoList"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/ShokanShikyuTorokuShinseishoList/onLoad"
+    },
+    {
+     "eventName": "onClickAddButton",
+     "requestUrl": "dbc/db/dbc/ShokanShikyuTorokuShinseishoList/onClickAddButton"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -1190,7 +1199,7 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "required": false,
-           "onClick": "",
+           "onClick": "onClickMado",
            "dataSource": [
             {
              "key": "key0",
@@ -1573,7 +1582,7 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "required": false,
-           "onClick": "",
+           "onClick": "onClickKoza",
            "dataSource": [
             {
              "key": "key0",
@@ -1609,11 +1618,11 @@
            "dataSource": [
             {
              "key": "key0",
-             "value": "value0"
+             "value": "1"
             },
             {
              "key": "key1",
-             "value": "value1"
+             "value": "2"
             }
            ],
            "onFocus": "",
@@ -2074,11 +2083,11 @@
          "dataSource": [
           {
            "key": "key0",
-           "value": "value0"
+           "value": "2131 訪問通所他"
           },
           {
            "key": "key1",
-           "value": "value1"
+           "value": "2143 短期入所生活介護"
           }
          ],
          "onFocus": "",
@@ -2405,7 +2414,7 @@
       "ShokanShikyuTorokuShomeishoInfo"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "ShokanShikyuTorokuShinseiInfo"
+     "selectedItemFieldName": "ShokanShikyuTorokuShomeishoInfo"
     }
    ],
    "controlType": "Panel",
@@ -2431,7 +2440,24 @@
      "postParameterPanelNames": "ShokanShikyuTorokuShinseisho"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onSelectedShinseishoList",
+     "requestUrl": "dbc/db/dbc/ShokanShikyuTorokuShinseisho/onSelectedShinseishoList"
+    },
+    {
+     "eventName": "onClickMado",
+     "requestUrl": "dbc/db/dbc/ShokanShikyuTorokuShinseisho/onClickMado"
+    },
+    {
+     "eventName": "onClickKoza",
+     "requestUrl": "dbc/db/dbc/ShokanShikyuTorokuShinseisho/onClickKoza"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -12988,7 +13014,7 @@
       "ShokanShikyuTorokuShomeishoShafuku"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "ShokanShikyuTorokuShomeishoShokuji"
+     "selectedItemFieldName": "ShokanShikyuTorokuShomeishoKihon"
     }
    ],
    "controlType": "Panel",
@@ -13166,7 +13192,28 @@
     }
    ],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "ShokanShikyuTorokuShinseishoListInfo_ShokanShikyuShinseishoList_dgShokanShikyuShinseishoList[btnSelect]",
+     "event": "onClick",
+     "transition": "支給申請書情報"
+    },
+    {
+     "fieldName": "btnShinseiReturn",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ShokanShikyuTorokuShomeishoListInfo_ServiceTeikyoShomeishoList_btnAdd",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnShomeishoReturn",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
   },
   {
    "order": "2",
@@ -13203,7 +13250,28 @@
     }
    ],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "ShokanShikyuTorokuShinseishoListInfo_ShokanShikyuShinseishoList_dgShokanShikyuShinseishoList[btnSelect]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnShinseiReturn",
+     "event": "onClick",
+     "transition": "申請書一覧"
+    },
+    {
+     "fieldName": "ShokanShikyuTorokuShomeishoListInfo_ServiceTeikyoShomeishoList_btnAdd",
+     "event": "onClick",
+     "transition": "サービス証明書情報"
+    },
+    {
+     "fieldName": "btnShomeishoReturn",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
   },
   {
    "order": "3",
@@ -13400,7 +13468,28 @@
     }
    ],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "ShokanShikyuTorokuShinseishoListInfo_ShokanShikyuShinseishoList_dgShokanShikyuShinseishoList[btnSelect]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnShinseiReturn",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ShokanShikyuTorokuShomeishoListInfo_ServiceTeikyoShomeishoList_btnAdd",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnShomeishoReturn",
+     "event": "onClick",
+     "transition": "支給申請書情報"
+    }
+   ]
   }
  ],
  "currentState": "All",
