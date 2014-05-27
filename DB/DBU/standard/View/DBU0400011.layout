@@ -44,7 +44,7 @@
      "minCheckedItem": "3",
      "maxCheckedItem": "3",
      "spaceSize": 1,
-     "labelLText": "出力条件",
+     "labelLText": "",
      "labelLWidth": "65",
      "labelLAlign": 2,
      "isAllSelectable": true
@@ -119,7 +119,7 @@
      "fieldName": "dgIkkatsuHakkoTaisho",
      "items": [],
      "controlType": "DataGrid",
-     "width": "870",
+     "width": "800",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -151,13 +151,13 @@
         "dataName": "hihokenshaNo",
         "toolTip": "",
         "bgColor": 0,
-        "width": 80,
-        "visible": false,
+        "width": 100,
+        "visible": true,
         "cellType": 0,
         "cellDetails": {
          "cellType": 0
         },
-        "align": 0,
+        "align": 1,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": ""
@@ -167,26 +167,12 @@
         "dataName": "hihokenshaMeisho",
         "toolTip": "",
         "bgColor": 0,
-        "width": 200,
-        "visible": false,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 0,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": ""
-       },
-       {
-        "columnName": "被保険者",
-        "dataName": "hihokensha",
-        "toolTip": "",
-        "bgColor": 0,
         "width": 250,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": ""
        },
@@ -229,38 +215,6 @@
         "sortKey": ""
        },
        {
-        "columnName": "決済有無",
-        "dataName": "kessaiUmu",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 90,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0
-        },
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": ""
-       },
-       {
-        "columnName": "証発行有無",
-        "dataName": "shoHakkoUmu",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 90,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0
-        },
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": ""
-       },
-       {
         "columnName": "要介護認定日",
         "dataName": "yokaigoNinteiDate",
         "toolTip": "",
@@ -275,7 +229,7 @@
          "onChange": ""
         },
         "align": 1,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": ""
        },
@@ -284,12 +238,12 @@
         "dataName": "juminShubetsu",
         "toolTip": "",
         "bgColor": 0,
-        "width": 90,
+        "width": 100,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": ""
        }
@@ -346,7 +300,8 @@
        "labelRAlign": 0,
        "ymdKubun": 2,
        "displayFormat": 0,
-       "value": ""
+       "value": "",
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "chkTest",
@@ -409,7 +364,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "870",
+     "width": "800",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -470,7 +425,7 @@
        "relation": [],
        "marginTop": 0,
        "marginBottom": 0,
-       "isGroupBox": false,
+       "isGroupBox": true,
        "businessId": "DBC",
        "controlName": "OutputOrderAndNewpage",
        "dataPassingForDialog": [],
@@ -494,7 +449,7 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "onLoad": "",
-     "title": "介護保険被保険者証",
+     "title": "被保険者証",
      "isOpen": true,
      "canOpenAndClose": false,
      "postParameterPanelNames": [
@@ -542,7 +497,7 @@
        "relation": [],
        "marginTop": 0,
        "marginBottom": 0,
-       "isGroupBox": false,
+       "isGroupBox": true,
        "businessId": "DBC",
        "controlName": "OutputOrderAndNewpage",
        "dataPassingForDialog": [],
@@ -566,8 +521,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "onLoad": "",
-     "title": "被保険者証発行一覧",
-     "isOpen": true,
+     "title": "被保険者証発行一覧表",
+     "isOpen": false,
      "canOpenAndClose": true,
      "postParameterPanelNames": [
       {
@@ -588,7 +543,7 @@
      "backgroundColor": 0,
      "widthAuto": false,
      "isGroupBox": false,
-     "isPublish": true
+     "isPublish": false
     }
    ],
    "controlType": "Panel",
