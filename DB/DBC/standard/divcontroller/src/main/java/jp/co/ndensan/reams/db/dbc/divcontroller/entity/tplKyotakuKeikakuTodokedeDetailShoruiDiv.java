@@ -10,11 +10,11 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuKeikakuTodokedeSho
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 
 /**
- * ShoruiJokyo のクラスファイル 
+ * tplKyotakuKeikakuTodokedeDetailShorui のクラスファイル 
  * 
  * @author 自動生成
  */
-public class ShoruiJokyoDiv extends TabPanel {
+public class tplKyotakuKeikakuTodokedeDetailShoruiDiv extends TabPanel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
