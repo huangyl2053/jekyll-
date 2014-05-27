@@ -1,0 +1,792 @@
+﻿{
+ "fieldName": "Page",
+ "items": [
+  {
+   "fieldName": "SearchMihakkoHihokenshasho",
+   "items": [
+    {
+     "fieldName": "chkHakkoTaishoSearchCondition",
+     "items": [],
+     "controlType": "CheckBoxList",
+     "width": "600",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "onChange": "",
+     "selectedItem": "",
+     "dataSource": [
+      {
+       "key": "nenreiTotatsu",
+       "value": "65歳年齢到達者"
+      },
+      {
+       "key": "jukiIdo",
+       "value": "住基異動対象者"
+      },
+      {
+       "key": "yokaigoNintei",
+       "value": "要介護認定者"
+      }
+     ],
+     "required": false,
+     "onClick": "",
+     "selectedItems": [],
+     "newLineItemNumber": 4,
+     "minCheckedItem": "3",
+     "maxCheckedItem": "3",
+     "spaceSize": 1,
+     "labelLText": "出力条件",
+     "labelLWidth": "65",
+     "labelLAlign": 2,
+     "isAllSelectable": true
+    },
+    {
+     "fieldName": "btnSearchHakkoTaisho",
+     "items": [],
+     "controlType": "Button",
+     "width": "180",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "onClick": "",
+     "text": "一括作成対象を表示する",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
+    }
+   ],
+   "controlType": "Panel",
+   "width": "1050",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "onLoad": "",
+   "title": "未発行検索条件",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "SearchMihakkoHihokenshasho"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "isGroupBox": false
+  },
+  {
+   "fieldName": "IkkatsuHakkoTaishoList",
+   "items": [
+    {
+     "fieldName": "dgIkkatsuHakkoTaisho",
+     "items": [],
+     "controlType": "DataGrid",
+     "width": "870",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "dataSource": [],
+     "gridSetting": {
+      "rowHeight": 25,
+      "isMultiSelectable": true,
+      "isShowFooter": true,
+      "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": false,
+      "header": {
+       "combineColumns": [],
+       "frozenColumn": "",
+       "headerHeight": 0
+      },
+      "columns": [
+       {
+        "columnName": "被保番号",
+        "dataName": "hihokenshaNo",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       },
+       {
+        "columnName": "被保険者名",
+        "dataName": "hihokenshaMeisho",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 200,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       },
+       {
+        "columnName": "被保険者",
+        "dataName": "hihokensha",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 250,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       },
+       {
+        "columnName": "取得日",
+        "dataName": "shutokuDate",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": ""
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       },
+       {
+        "columnName": "変更日",
+        "dataName": "henkoDate",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": ""
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       },
+       {
+        "columnName": "決済有無",
+        "dataName": "kessaiUmu",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       },
+       {
+        "columnName": "証発行有無",
+        "dataName": "shoHakkoUmu",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       },
+       {
+        "columnName": "要介護認定日",
+        "dataName": "yokaigoNinteiDate",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 120,
+        "visible": true,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": ""
+        },
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       },
+       {
+        "columnName": "住民種別",
+        "dataName": "juminShubetsu",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       }
+      ]
+     },
+     "height": "S",
+     "onSort": "",
+     "onSelect": "",
+     "onSelectByDblClick": "",
+     "onOnlyRow": "",
+     "onNoRow": "",
+     "onMultiRows": "",
+     "sortOrder": "",
+     "isAscending": true,
+     "filterList": [],
+     "activeRowId": -1
+    },
+    {
+     "fieldName": "ShutsuryokuJoho",
+     "items": [
+      {
+       "fieldName": "txtKofuDate",
+       "items": [],
+       "controlType": "TextBoxFlexibleDate",
+       "width": "90",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": true,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "onChange": "",
+       "required": false,
+       "labelLText": "交付日",
+       "labelLWidth": "55",
+       "labelLAlign": 2,
+       "text": "",
+       "readOnly": false,
+       "placeHolder": "",
+       "textKind": 0,
+       "isPrivateInfo": false,
+       "isPassword": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onKeyPress": "",
+       "labelRText": "",
+       "labelRWidth": "S",
+       "labelRAlign": 0,
+       "ymdKubun": 2,
+       "displayFormat": 0,
+       "value": ""
+      },
+      {
+       "fieldName": "chkTest",
+       "items": [],
+       "controlType": "CheckBoxList",
+       "width": "100",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "onChange": "",
+       "selectedItem": "",
+       "dataSource": [
+        {
+         "key": "test",
+         "value": "テスト出力"
+        }
+       ],
+       "required": false,
+       "onClick": "",
+       "selectedItems": [],
+       "newLineItemNumber": 1,
+       "minCheckedItem": 0,
+       "maxCheckedItem": "1",
+       "spaceSize": 1,
+       "labelLText": "",
+       "labelLWidth": "S",
+       "labelLAlign": 2,
+       "isAllSelectable": false
+      },
+      {
+       "fieldName": "lblTestHosoku",
+       "items": [],
+       "controlType": "Label",
+       "width": "450",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
+       "required": false,
+       "text": "※テスト出力を行う場合、帳票発行履歴に登録されません。",
+       "isPrivateInfo": false,
+       "align": 0
+      }
+     ],
+     "controlType": "Panel",
+     "width": "870",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "onLoad": "",
+     "title": "出力情報",
+     "isOpen": true,
+     "canOpenAndClose": false,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "ShutsuryokuJoho"
+      }
+     ],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "Default",
+     "marginBottom": "S",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
+     "backgroundColor": 0,
+     "widthAuto": false,
+     "isGroupBox": true
+    },
+    {
+     "fieldName": "HihokenshashoIkkatsuHakko",
+     "items": [
+      {
+       "fieldName": "HihokenshashoOutputOrder",
+       "items": [],
+       "controlType": "CommonChildDiv",
+       "width": "XS",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": true,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "title": "出力順序・改頁",
+       "relation": [],
+       "marginTop": 0,
+       "marginBottom": 0,
+       "isGroupBox": false,
+       "businessId": "DBC",
+       "controlName": "OutputOrderAndNewpage",
+       "dataPassingForDialog": [],
+       "dialogOkEventNameForDialog": "",
+       "dialogCancelEventNameForDialog": "",
+       "txtNewPageItem_displayNone": true
+      }
+     ],
+     "controlType": "PanelPublish",
+     "width": "1020",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "onLoad": "",
+     "title": "介護保険被保険者証",
+     "isOpen": true,
+     "canOpenAndClose": false,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "HihokenshashoIkkatsuHakko"
+      }
+     ],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "Default",
+     "marginBottom": "S",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
+     "backgroundColor": 0,
+     "widthAuto": false,
+     "isGroupBox": false,
+     "isPublish": true
+    },
+    {
+     "fieldName": "HihokenshashoIkkatsuHakkoList",
+     "items": [
+      {
+       "fieldName": "HihokenshashoListOutputOrderAndNewPage",
+       "items": [],
+       "controlType": "CommonChildDiv",
+       "width": "XS",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": true,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "title": "出力順序・改頁",
+       "relation": [],
+       "marginTop": 0,
+       "marginBottom": 0,
+       "isGroupBox": false,
+       "businessId": "DBC",
+       "controlName": "OutputOrderAndNewpage",
+       "dataPassingForDialog": [],
+       "dialogOkEventNameForDialog": "",
+       "dialogCancelEventNameForDialog": "",
+       "txtNewPageItem_displayNone": false
+      }
+     ],
+     "controlType": "PanelPublish",
+     "width": "1020",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "onLoad": "",
+     "title": "被保険者証発行一覧",
+     "isOpen": true,
+     "canOpenAndClose": true,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "HihokenshashoIkkatsuHakkoList"
+      }
+     ],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
+     "backgroundColor": 0,
+     "widthAuto": false,
+     "isGroupBox": false,
+     "isPublish": true
+    }
+   ],
+   "controlType": "Panel",
+   "width": "1050",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "onLoad": "",
+   "title": "一括作成対象者一覧",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "IkkatsuHakkoTaishoList"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "isGroupBox": false
+  },
+  {
+   "fieldName": "KyotsuPanel",
+   "items": [
+    {
+     "fieldName": "btnBatch",
+     "items": [],
+     "controlType": "Button",
+     "width": "180",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "onClick": "",
+     "text": "被保険者証を発行する",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
+    }
+   ],
+   "controlType": "Panel",
+   "width": "M",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "KyotsuPanel"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": true,
+   "eraseBorderBottom": true,
+   "eraseBorderRight": true,
+   "eraseBorderLeft": true,
+   "backgroundColor": 0,
+   "widthAuto": true,
+   "isGroupBox": false
+  }
+ ],
+ "controlType": null,
+ "width": "XS",
+ "visible": true,
+ "displayNone": false,
+ "disabled": false,
+ "accessKey": "",
+ "nextFocusFieldName": "",
+ "wrap": false,
+ "dependencies": [],
+ "float": 0,
+ "toolTip": "",
+ "authorityMode": 0,
+ "marginLeft": "XS",
+ "marginRight": "XS",
+ "onLoad": "",
+ "title": "被保険者証一括発行",
+ "jsPathCollection": [],
+ "relation": [],
+ "stateTransition": [
+  {
+   "order": "1",
+   "stateName": "被保険者証一括発行",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "SearchMihakkoHihokenshasho",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "IkkatsuHakkoTaishoList",
+     "panelState": "close"
+    },
+    {
+     "visibleDiv": "ShutsuryokuJoho",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "KyotsuPanel",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "HihokenshashoIkkatsuHakko",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "HihokenshashoIkkatsuHakkoList",
+     "panelState": "close"
+    },
+    {
+     "visibleDiv": "HihokenshashoOutputOrder",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "HihokenshashoListOutputOrderAndNewPage",
+     "panelState": "visible"
+    }
+   ],
+   "validation": {},
+   "events": []
+  }
+ ],
+ "currentState": "All",
+ "id": "DBU0400011",
+ "WFParameter": [],
+ "UIContainerEventMapping": [],
+ "loadSequencePanelNames": [
+  [
+   "SearchMihakkoHihokenshasho"
+  ],
+  [
+   "IkkatsuHakkoTaishoList"
+  ],
+  [
+   "ShutsuryokuJoho"
+  ],
+  [
+   "HihokenshashoIkkatsuHakko"
+  ],
+  [
+   "HihokenshashoOutputOrder"
+  ],
+  [
+   "HihokenshashoIkkatsuHakkoList"
+  ],
+  [
+   "HihokenshashoListOutputOrderAndNewPage"
+  ],
+  [
+   "KyotsuPanel"
+  ]
+ ],
+ "panelMargin": 1,
+ "controlMargin": 1
+}
