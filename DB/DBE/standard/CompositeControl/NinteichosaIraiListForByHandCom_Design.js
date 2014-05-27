@@ -177,8 +177,8 @@ var DBE;
                         "rowHeight": 40,
                         "isMultiSelectable": false,
                         "isShowFooter": true,
-                        "isShowFilter": true,
-                        "isShowFilterButton": false,
+                        "isShowFilter": false,
+                        "isShowFilterButton": true,
                         "isShowRowState": false,
                         "header": {
                             "combineColumns": [

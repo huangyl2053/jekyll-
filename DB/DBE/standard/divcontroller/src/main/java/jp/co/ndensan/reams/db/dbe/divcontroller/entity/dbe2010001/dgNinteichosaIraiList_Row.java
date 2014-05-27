@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed May 21 15:06:19 JST 2014 
+ * Tue May 27 11:19:53 JST 2014 
  */
 
 
@@ -36,10 +36,10 @@ public class dgNinteichosaIraiList_Row extends DataRow {
     private TextBoxFlexibleDate 調査依頼日;
     private TextBoxFlexibleDate 調査依頼書発行日;
     private TextBoxFlexibleDate 調査依頼完了日;
+    private TextBoxFlexibleDate 調査期限日;
     private RString 調査依頼区分;
     private RString 調査回数;
     private RString 認定調査履歴番号;
-    private TextBoxFlexibleDate 調査期限日;
     private RString 調査委託先コード;
     private RString 調査委託先;
     private RString 調査員コード;
@@ -68,7 +68,7 @@ public class dgNinteichosaIraiList_Row extends DataRow {
         super();
     }
 
-    public dgNinteichosaIraiList_Row(RString 保険者番号, RString 保険者, RString 支所コード, RString 支所, RString 被保険者番号, RString 識別コード, RString 氏名, RString カナ氏名, RString 氏名Withカナ, TextBoxFlexibleDate 認定申請日, RString 認定申請区分申請時, RString 申請書管理番号, TextBoxFlexibleDate 調査依頼日, TextBoxFlexibleDate 調査依頼書発行日, TextBoxFlexibleDate 調査依頼完了日, RString 調査依頼区分, RString 調査回数, RString 認定調査履歴番号, TextBoxFlexibleDate 調査期限日, RString 調査委託先コード, RString 調査委託先, RString 調査員コード, RString 調査員, RString 前回調査委託先コード, RString 前回調査委託先, RString 前回調査員コード, RString 前回調査員, RString 審査会開催地区コード, RString 審査会開催地区, TextBoxFlexibleDate 督促年月日, RString 督促方法, RString 督促回数, TextBoxFlexibleDate 督促期限日, TextBoxFlexibleDate 督促発行日, RString 住所, RString 郵便番号, RString 入所施設, RString 性別, TextBoxFlexibleDate 生年月日, RString データ出力, Boolean 依頼登録済, Boolean 依頼書発行済) {
+    public dgNinteichosaIraiList_Row(RString 保険者番号, RString 保険者, RString 支所コード, RString 支所, RString 被保険者番号, RString 識別コード, RString 氏名, RString カナ氏名, RString 氏名Withカナ, TextBoxFlexibleDate 認定申請日, RString 認定申請区分申請時, RString 申請書管理番号, TextBoxFlexibleDate 調査依頼日, TextBoxFlexibleDate 調査依頼書発行日, TextBoxFlexibleDate 調査依頼完了日, TextBoxFlexibleDate 調査期限日, RString 調査依頼区分, RString 調査回数, RString 認定調査履歴番号, RString 調査委託先コード, RString 調査委託先, RString 調査員コード, RString 調査員, RString 前回調査委託先コード, RString 前回調査委託先, RString 前回調査員コード, RString 前回調査員, RString 審査会開催地区コード, RString 審査会開催地区, TextBoxFlexibleDate 督促年月日, RString 督促方法, RString 督促回数, TextBoxFlexibleDate 督促期限日, TextBoxFlexibleDate 督促発行日, RString 住所, RString 郵便番号, RString 入所施設, RString 性別, TextBoxFlexibleDate 生年月日, RString データ出力, Boolean 依頼登録済, Boolean 依頼書発行済) {
         super();
         this.setOriginalData("保険者番号", 保険者番号);
         this.setOriginalData("保険者", 保険者);
@@ -85,10 +85,10 @@ public class dgNinteichosaIraiList_Row extends DataRow {
         this.setOriginalData("調査依頼日", 調査依頼日);
         this.setOriginalData("調査依頼書発行日", 調査依頼書発行日);
         this.setOriginalData("調査依頼完了日", 調査依頼完了日);
+        this.setOriginalData("調査期限日", 調査期限日);
         this.setOriginalData("調査依頼区分", 調査依頼区分);
         this.setOriginalData("調査回数", 調査回数);
         this.setOriginalData("認定調査履歴番号", 認定調査履歴番号);
-        this.setOriginalData("調査期限日", 調査期限日);
         this.setOriginalData("調査委託先コード", 調査委託先コード);
         this.setOriginalData("調査委託先", 調査委託先);
         this.setOriginalData("調査員コード", 調査員コード);
@@ -127,10 +127,10 @@ public class dgNinteichosaIraiList_Row extends DataRow {
         this.調査依頼日 = 調査依頼日;
         this.調査依頼書発行日 = 調査依頼書発行日;
         this.調査依頼完了日 = 調査依頼完了日;
+        this.調査期限日 = 調査期限日;
         this.調査依頼区分 = 調査依頼区分;
         this.調査回数 = 調査回数;
         this.認定調査履歴番号 = 認定調査履歴番号;
-        this.調査期限日 = 調査期限日;
         this.調査委託先コード = 調査委託先コード;
         this.調査委託先 = 調査委託先;
         this.調査員コード = 調査員コード;
@@ -216,6 +216,10 @@ public class dgNinteichosaIraiList_Row extends DataRow {
         return 調査依頼完了日;
     }
 
+    public TextBoxFlexibleDate get調査期限日() {
+        return 調査期限日;
+    }
+
     public RString get調査依頼区分() {
         return 調査依頼区分;
     }
@@ -226,10 +230,6 @@ public class dgNinteichosaIraiList_Row extends DataRow {
 
     public RString get認定調査履歴番号() {
         return 認定調査履歴番号;
-    }
-
-    public TextBoxFlexibleDate get調査期限日() {
-        return 調査期限日;
     }
 
     public RString get調査委託先コード() {
@@ -399,6 +399,11 @@ public class dgNinteichosaIraiList_Row extends DataRow {
         this.調査依頼完了日 = 調査依頼完了日;
     }
 
+    public void set調査期限日(TextBoxFlexibleDate 調査期限日) {
+        this.setOriginalData("調査期限日", 調査期限日);
+        this.調査期限日 = 調査期限日;
+    }
+
     public void set調査依頼区分(RString 調査依頼区分) {
         this.setOriginalData("調査依頼区分", 調査依頼区分);
         this.調査依頼区分 = 調査依頼区分;
@@ -412,11 +417,6 @@ public class dgNinteichosaIraiList_Row extends DataRow {
     public void set認定調査履歴番号(RString 認定調査履歴番号) {
         this.setOriginalData("認定調査履歴番号", 認定調査履歴番号);
         this.認定調査履歴番号 = 認定調査履歴番号;
-    }
-
-    public void set調査期限日(TextBoxFlexibleDate 調査期限日) {
-        this.setOriginalData("調査期限日", 調査期限日);
-        this.調査期限日 = 調査期限日;
     }
 
     public void set調査委託先コード(RString 調査委託先コード) {

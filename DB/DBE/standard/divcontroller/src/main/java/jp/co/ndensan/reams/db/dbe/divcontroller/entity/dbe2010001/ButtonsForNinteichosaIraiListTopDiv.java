@@ -21,10 +21,10 @@ public class ButtonsForNinteichosaIraiListTopDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnKikanWaritsukeJIdo")
-    private Button btnKikanWaritsukeJIdo;
-    @JsonProperty("btnKikanWaritsukeTedo")
-    private Button btnKikanWaritsukeTedo;
+    @JsonProperty("btnToAuto")
+    private Button btnToAuto;
+    @JsonProperty("btnToByHand")
+    private Button btnToByHand;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,24 +32,24 @@ public class ButtonsForNinteichosaIraiListTopDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("btnKikanWaritsukeJIdo")
-    public Button getBtnKikanWaritsukeJIdo() {
-        return btnKikanWaritsukeJIdo;
+    @JsonProperty("btnToAuto")
+    public Button getBtnToAuto() {
+        return btnToAuto;
     }
 
-    @JsonProperty("btnKikanWaritsukeJIdo")
-    public void setBtnKikanWaritsukeJIdo(Button btnKikanWaritsukeJIdo) {
-        this.btnKikanWaritsukeJIdo=btnKikanWaritsukeJIdo;
+    @JsonProperty("btnToAuto")
+    public void setBtnToAuto(Button btnToAuto) {
+        this.btnToAuto=btnToAuto;
     }
 
-    @JsonProperty("btnKikanWaritsukeTedo")
-    public Button getBtnKikanWaritsukeTedo() {
-        return btnKikanWaritsukeTedo;
+    @JsonProperty("btnToByHand")
+    public Button getBtnToByHand() {
+        return btnToByHand;
     }
 
-    @JsonProperty("btnKikanWaritsukeTedo")
-    public void setBtnKikanWaritsukeTedo(Button btnKikanWaritsukeTedo) {
-        this.btnKikanWaritsukeTedo=btnKikanWaritsukeTedo;
+    @JsonProperty("btnToByHand")
+    public void setBtnToByHand(Button btnToByHand) {
+        this.btnToByHand=btnToByHand;
     }
 
 }

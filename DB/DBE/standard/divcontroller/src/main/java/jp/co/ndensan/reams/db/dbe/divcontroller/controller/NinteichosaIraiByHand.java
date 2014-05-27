@@ -206,7 +206,7 @@ public class NinteichosaIraiByHand {
             private final RString path;
 
             private DemoDataType(String fileName) {
-                this.path = new RString("dbe2010002/" + fileName);
+                this.path = new RString("dbeuc21000/" + fileName);
             }
 
             RString getPath() {

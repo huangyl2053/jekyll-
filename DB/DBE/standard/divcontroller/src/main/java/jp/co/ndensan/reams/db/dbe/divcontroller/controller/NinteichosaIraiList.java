@@ -136,7 +136,7 @@ public class NinteichosaIraiList {
         static {
             DATA_SORCE = new ArrayList<>();
             try {
-                List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("NinteichosaIraiList.yml"));
+                List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("dbeuc21000/ChosaIraiTargets.yml"));
                 for (Map target : targetSource) {
                     DATA_SORCE.add(_to_dgNinteichosaIraiList_Row(target));
                 }
@@ -148,34 +148,34 @@ public class NinteichosaIraiList {
         private static dgNinteichosaIraiList_Row _to_dgNinteichosaIraiList_Row(Map map) {
             RString shimei = toRString(map.get("氏名"));
             RString kanaShimei = toRString(map.get("カナ氏名"));
-            RString iraiDate = toRString(map.get("依頼日"));
+            RString iraiDate = toRString(map.get("調査依頼日"));
             boolean is依頼済 = !iraiDate.equals(RString.EMPTY);
             RString iraishoHakkoDate = toRString(map.get("依頼書発行日"));
             boolean is依頼書発行済 = !iraishoHakkoDate.equals(RString.EMPTY);
 
             return new dgNinteichosaIraiList_Row(
-                    toRString(map.get("保険者番号")), toRString(map.get("保険者")),
+                    toRString(map.get("保険者番号")), toRString(map.get("市町村")),
                     toRString(map.get("市著コード")), toRString(map.get("支所")),
-                    toRString(map.get("被保険者番号")),
+                    toRString(map.get("被保番号")),
                     toRString(map.get("識別コード")),
                     shimei, kanaShimei,
                     DataGridUtil.lineFeedBetween(kanaShimei, shimei),
                     toTextBoxFlexibleDate(toRString(map.get("認定申請日"))),
-                    toRString(map.get("認定申請区分申請時")),
+                    toRString(map.get("認定申請区分")),
                     toRString(map.get("申請書管理番号")),
                     toTextBoxFlexibleDate(iraiDate),
                     toTextBoxFlexibleDate(iraishoHakkoDate),
                     toTextBoxFlexibleDate(toRString(map.get("依頼完了日"))),
+                    toTextBoxFlexibleDate(toRString(map.get("調査期限日"))),
                     toRString(map.get("調査依頼区分")),
                     toRString(map.get("調査回数")),
                     toRString(map.get("認定調査履歴番号")),
-                    toTextBoxFlexibleDate(toRString(map.get("調査期限"))),
-                    toRString(map.get("調査委託先コード")), toRString(map.get("調査委託先")),
-                    toRString(map.get("調査員コード")), toRString(map.get("調査員")),
-                    toRString(map.get("前回調査委託先コード")), toRString(map.get("前回調査委託先")),
-                    toRString(map.get("前回調査員コード")), toRString(map.get("前回調査員")),
+                    toRString(map.get("調査委託先番号")), toRString(map.get("調査委託先名")),
+                    toRString(map.get("調査員番号")), toRString(map.get("調査員名")),
+                    toRString(map.get("前回調査委託先番号")), toRString(map.get("前回調査委託先名")),
+                    toRString(map.get("前回調査員番号")), toRString(map.get("前回調査員名")),
                     toRString(map.get("審査会開催地区コード")), toRString(map.get("審査会開催地区")),
-                    toTextBoxFlexibleDate(toRString(map.get("督促年月日"))),
+                    toTextBoxFlexibleDate(toRString(map.get("督促日"))),
                     toRString(map.get("督促方法")),
                     toRString(map.get("督促回数")),
                     toTextBoxFlexibleDate(toRString(map.get("督促期限"))),
