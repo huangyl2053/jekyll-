@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue May 27 11:19:53 JST 2014 
+ * Tue May 27 14:54:04 JST 2014 
  */
 
 
@@ -55,8 +55,8 @@ public class dgNinteichosaIraiList_Row extends DataRow {
     private RString 督促回数;
     private TextBoxFlexibleDate 督促期限日;
     private TextBoxFlexibleDate 督促発行日;
-    private RString 住所;
     private RString 郵便番号;
+    private RString 住所;
     private RString 入所施設;
     private RString 性別;
     private TextBoxFlexibleDate 生年月日;
@@ -68,7 +68,7 @@ public class dgNinteichosaIraiList_Row extends DataRow {
         super();
     }
 
-    public dgNinteichosaIraiList_Row(RString 保険者番号, RString 保険者, RString 支所コード, RString 支所, RString 被保険者番号, RString 識別コード, RString 氏名, RString カナ氏名, RString 氏名Withカナ, TextBoxFlexibleDate 認定申請日, RString 認定申請区分申請時, RString 申請書管理番号, TextBoxFlexibleDate 調査依頼日, TextBoxFlexibleDate 調査依頼書発行日, TextBoxFlexibleDate 調査依頼完了日, TextBoxFlexibleDate 調査期限日, RString 調査依頼区分, RString 調査回数, RString 認定調査履歴番号, RString 調査委託先コード, RString 調査委託先, RString 調査員コード, RString 調査員, RString 前回調査委託先コード, RString 前回調査委託先, RString 前回調査員コード, RString 前回調査員, RString 審査会開催地区コード, RString 審査会開催地区, TextBoxFlexibleDate 督促年月日, RString 督促方法, RString 督促回数, TextBoxFlexibleDate 督促期限日, TextBoxFlexibleDate 督促発行日, RString 住所, RString 郵便番号, RString 入所施設, RString 性別, TextBoxFlexibleDate 生年月日, RString データ出力, Boolean 依頼登録済, Boolean 依頼書発行済) {
+    public dgNinteichosaIraiList_Row(RString 保険者番号, RString 保険者, RString 支所コード, RString 支所, RString 被保険者番号, RString 識別コード, RString 氏名, RString カナ氏名, RString 氏名Withカナ, TextBoxFlexibleDate 認定申請日, RString 認定申請区分申請時, RString 申請書管理番号, TextBoxFlexibleDate 調査依頼日, TextBoxFlexibleDate 調査依頼書発行日, TextBoxFlexibleDate 調査依頼完了日, TextBoxFlexibleDate 調査期限日, RString 調査依頼区分, RString 調査回数, RString 認定調査履歴番号, RString 調査委託先コード, RString 調査委託先, RString 調査員コード, RString 調査員, RString 前回調査委託先コード, RString 前回調査委託先, RString 前回調査員コード, RString 前回調査員, RString 審査会開催地区コード, RString 審査会開催地区, TextBoxFlexibleDate 督促年月日, RString 督促方法, RString 督促回数, TextBoxFlexibleDate 督促期限日, TextBoxFlexibleDate 督促発行日, RString 郵便番号, RString 住所, RString 入所施設, RString 性別, TextBoxFlexibleDate 生年月日, RString データ出力, Boolean 依頼登録済, Boolean 依頼書発行済) {
         super();
         this.setOriginalData("保険者番号", 保険者番号);
         this.setOriginalData("保険者", 保険者);
@@ -104,8 +104,8 @@ public class dgNinteichosaIraiList_Row extends DataRow {
         this.setOriginalData("督促回数", 督促回数);
         this.setOriginalData("督促期限日", 督促期限日);
         this.setOriginalData("督促発行日", 督促発行日);
-        this.setOriginalData("住所", 住所);
         this.setOriginalData("郵便番号", 郵便番号);
+        this.setOriginalData("住所", 住所);
         this.setOriginalData("入所施設", 入所施設);
         this.setOriginalData("性別", 性別);
         this.setOriginalData("生年月日", 生年月日);
@@ -146,8 +146,8 @@ public class dgNinteichosaIraiList_Row extends DataRow {
         this.督促回数 = 督促回数;
         this.督促期限日 = 督促期限日;
         this.督促発行日 = 督促発行日;
-        this.住所 = 住所;
         this.郵便番号 = 郵便番号;
+        this.住所 = 住所;
         this.入所施設 = 入所施設;
         this.性別 = 性別;
         this.生年月日 = 生年月日;
@@ -292,12 +292,12 @@ public class dgNinteichosaIraiList_Row extends DataRow {
         return 督促発行日;
     }
 
-    public RString get住所() {
-        return 住所;
-    }
-
     public RString get郵便番号() {
         return 郵便番号;
+    }
+
+    public RString get住所() {
+        return 住所;
     }
 
     public RString get入所施設() {
@@ -494,14 +494,14 @@ public class dgNinteichosaIraiList_Row extends DataRow {
         this.督促発行日 = 督促発行日;
     }
 
-    public void set住所(RString 住所) {
-        this.setOriginalData("住所", 住所);
-        this.住所 = 住所;
-    }
-
     public void set郵便番号(RString 郵便番号) {
         this.setOriginalData("郵便番号", 郵便番号);
         this.郵便番号 = 郵便番号;
+    }
+
+    public void set住所(RString 住所) {
+        this.setOriginalData("住所", 住所);
+        this.住所 = 住所;
     }
 
     public void set入所施設(RString 入所施設) {

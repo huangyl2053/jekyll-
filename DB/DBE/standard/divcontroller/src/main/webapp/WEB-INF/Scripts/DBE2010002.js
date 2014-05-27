@@ -17,25 +17,53 @@ var DBE;
         * イベントを登録します。
         */
         function () {
+            Uz.GyomuJSHelper.registOriginalEvent("onLoad_NinteichosaIraiByHand", function (control) {
+                DBE2010002._onLoad_NinteichosaIraiByHand();
+            });
             Uz.GyomuJSHelper.registOriginalEvent("onClick_btnToBind", function (control) {
-                DBE2010002._onClick_btnToBind();
-                DBE2010002.displayChosain();
-                DBE2010002.divideWaritsukeOrMiwaritsuke();
+                DBE2010002.onClick_btnToBind();
+                DBE2010002.onAfterEvent();
             });
             Uz.GyomuJSHelper.registOriginalEvent("onClick_btnToFree", function (control) {
-                DBE2010002._onClick_btnToFree();
-                DBE2010002.displayChosain();
-                DBE2010002.divideWaritsukeOrMiwaritsuke();
+                DBE2010002.onClick_btnToFree();
+                DBE2010002.onAfterEvent();
             });
             Uz.GyomuJSHelper.registOriginalEvent("onSelect_dgChosaItakusakiList", function (control) {
                 DBE2010002.unselect_Chosain_all();
-                DBE2010002.displayChosain();
-                DBE2010002.divideWaritsukeOrMiwaritsuke();
+                DBE2010002.onAfterEvent();
             });
-            Uz.GyomuJSHelper.registOriginalEvent("onLoad_NinteichosaIraiByHand", function (control) {
-                DBE2010002.divideWaritsukeOrMiwaritsuke();
-                DBE2010002.countWaritukeNum();
+            Uz.GyomuJSHelper.registOriginalEvent(DBE2010002.eventName_for_btnToBindChosain, function (control) {
+                DBE2010002.bind_SelectedChosain();
+                DBE2010002.onAfterEvent();
             });
+        };
+
+        DBE2010002._onLoad_NinteichosaIraiByHand = /**
+        * onLoad後の処理です。
+        */
+        function () {
+            DBE2010002.divideWaritsukeOrMiwaritsuke();
+            DBE2010002.countWaritukeNum();
+        };
+
+        DBE2010002.deployOnClickEventToButtonOfChosain = /**
+        * 調査員のbtnToBindChosainのonClickにイベントを追加します。
+        * 現状、この処理はうまくいきません。
+        */
+        function () {
+            var dataSource = DBE2010002.comChosainListAll.dataSource;
+            for (var i = 0; i < dataSource.length; i++) {
+                dataSource[i].btnToBindChosain.onClick = DBE2010002.eventName_for_btnToBindChosain;
+            }
+            DBE2010002.comChosainListAll.dataSource = dataSource;
+        };
+
+        DBE2010002.onAfterEvent = /**
+        * イベント後の共通処理です。
+        */
+        function () {
+            DBE2010002.displayChosain();
+            DBE2010002.divideWaritsukeOrMiwaritsuke();
         };
 
         DBE2010002.countWaritukeNum = /**
@@ -131,7 +159,7 @@ var DBE;
             }
         };
 
-        DBE2010002._onClick_btnToBind = /**
+        DBE2010002.onClick_btnToBind = /**
         * 割付完了化処理です。
         */
         function () {
@@ -183,7 +211,7 @@ var DBE;
             return "1：初回";
         };
 
-        DBE2010002._onClick_btnToFree = /**
+        DBE2010002.onClick_btnToFree = /**
         * 未割付化処理です。
         */
         function () {
@@ -207,28 +235,74 @@ var DBE;
 
             var chosaItakusaki = DBE2010002.getChosaItakusaki(target.chosaItakusakiNo);
             if (chosaItakusaki != null) {
-                if (0 < chosaItakusaki.waritsukeNum) {
-                    chosaItakusaki.waritsukeNum--;
-                } else {
-                    chosaItakusaki.waritsukeNum = 0;
-                }
-                DBE2010002.replaceChosaItakusaki(chosaItakusaki);
+                DBE2010002.replaceAs_decreaseWaritsukeNum_chosaItakusaki(chosaItakusaki);
             }
             target.chosaItakusakiNo = "";
             target.chosaItakusakiName = "";
 
             var chosain = DBE2010002.getChosain(target.chosainNo);
             if (chosain != null) {
-                if (0 < chosain.waritsukeNum) {
-                    chosain.waritsukeNum--;
-                } else {
-                    chosain.waritsukeNum = 0;
-                }
-                DBE2010002.replaceChosain_all(chosain);
+                DBE2010002.replaceAs_decreaseWaritsukeNum_chosain(chosain);
             }
             target.chosainNo = "";
             target.chosainName = "";
             DBE2010002.replaceChosaIraiTarget(target);
+        };
+
+        DBE2010002.bind_SelectedChosain = /**
+        * 選択している調査員に、対象者の調査員として割付ます。
+        * 選択している調査員がすでに割付済みのときには、なにもしません。
+        * 調査員と対象者のどちらかが未選択のときも、なにもしません。
+        */
+        function () {
+            var chosain_new = DBE2010002.selected_Chosain_onDisp();
+            var target = DBE2010002.selected_Waritukezumisha();
+            if (chosain_new === null || target === null) {
+                return;
+            }
+            if (chosain_new.chosainNo === target.chosainNo) {
+                return;
+            }
+            if (target.chosainNo != null) {
+                var chosain_old = DBE2010002.getChosain(target.chosainNo);
+                DBE2010002.replaceAs_decreaseWaritsukeNum_chosain(chosain_old);
+            }
+            chosain_new.waritsukeNum++;
+            DBE2010002.replaceChosain_all(chosain_new);
+
+            target.chosainNo = chosain_new.chosainNo;
+            target.chosainName = chosain_new.chosainName;
+            DBE2010002.replaceChosaIraiTarget(target);
+        };
+
+        DBE2010002.replaceAs_decreaseWaritsukeNum_chosain = /**
+        * 調査員の割付数を減らしつつ、置き換えます。
+        */
+        function (chosain) {
+            if (chosain === null) {
+                return;
+            }
+            if (0 < chosain.waritsukeNum) {
+                chosain.waritsukeNum--;
+            } else {
+                chosain.waritsukeNum = 0;
+            }
+            DBE2010002.replaceChosain_all(chosain);
+        };
+
+        DBE2010002.replaceAs_decreaseWaritsukeNum_chosaItakusaki = /**
+        * 調査委託先の割付数を減らしつつ、置き換えます。
+        */
+        function (chosaItakusaki) {
+            if (chosaItakusaki === null) {
+                return;
+            }
+            if (0 < chosaItakusaki.waritsukeNum) {
+                chosaItakusaki.waritsukeNum--;
+            } else {
+                chosaItakusaki.waritsukeNum = 0;
+            }
+            DBE2010002.replaceChosaItakusaki(chosaItakusaki);
         };
 
         DBE2010002.selected_ChosaItakuskai = /**
@@ -283,6 +357,9 @@ var DBE;
         * 渡した情報で、調査依頼対象者を置き換えます。
         */
         function (target) {
+            if (target === null) {
+                return;
+            }
             var dataSource = DBE2010002.comNinteichosaIraiListGod.dataSource;
             for (var i = 0; i < dataSource.length; i++) {
                 if (dataSource[i].hihokenshaNo === target.hihokenshaNo) {
@@ -296,6 +373,9 @@ var DBE;
         * 渡した情報で、調査員を置き換えます。
         */
         function (chosain) {
+            if (chosain === null) {
+                return;
+            }
             var dataSource = DBE2010002.comChosainListAll.dataSource;
             for (var i = 0; i < dataSource.length; i++) {
                 if (dataSource[i].chosainNo === chosain.chosainNo) {
@@ -309,6 +389,9 @@ var DBE;
         * 渡した情報で、調査委託先を置き換えます。
         */
         function (chosaItakusaki) {
+            if (chosaItakusaki === null) {
+                return;
+            }
             var dataSource = DBE2010002.dgChosaItakusakiList.dataSource;
             for (var i = 0; i < dataSource.length; i++) {
                 if (dataSource[i].chosaItakusakiNo === chosaItakusaki.chosaItakusakiNo) {
@@ -389,6 +472,7 @@ var DBE;
         DBE2010002.dgChosaItakusakiList = Uz.GyomuJSHelper.getJSControl('dgChosaItakusakiList');
         DBE2010002.comChosainList = Uz.GyomuJSHelper.getJSControl('comChosainList_dgShozokuChosainList');
         DBE2010002.comChosainListAll = Uz.GyomuJSHelper.getJSControl('comChosainListAll_dgShozokuChosainList');
+        DBE2010002.eventName_for_btnToBindChosain = "bind_SelectedChosain";
         return DBE2010002;
     })();
     DBE.DBE2010002 = DBE2010002;

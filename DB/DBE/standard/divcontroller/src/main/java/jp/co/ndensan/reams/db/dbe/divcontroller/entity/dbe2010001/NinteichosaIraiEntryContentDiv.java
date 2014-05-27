@@ -5,11 +5,10 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.ButtonsToOperateNinteichosaIraiEntryContentDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryPaperDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryRequestDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryTargetChosainDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryTargetTokusokuDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryTokusokuDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -28,8 +27,8 @@ public class NinteichosaIraiEntryContentDiv extends Panel {
     private NinteichosaIraiEntryTargetChosainDiv NinteichosaIraiEntryTargetChosain;
     @JsonProperty("NinteichosaIraiEntryRequest")
     private NinteichosaIraiEntryRequestDiv NinteichosaIraiEntryRequest;
-    @JsonProperty("NinteichosaIraiEntryTargetTokusoku")
-    private NinteichosaIraiEntryTargetTokusokuDiv NinteichosaIraiEntryTargetTokusoku;
+    @JsonProperty("NinteichosaIraiEntryTokusoku")
+    private NinteichosaIraiEntryTokusokuDiv NinteichosaIraiEntryTokusoku;
     @JsonProperty("NinteichosaIraiEntryPaper")
     private NinteichosaIraiEntryPaperDiv NinteichosaIraiEntryPaper;
     @JsonProperty("ButtonsToOperateNinteichosaIraiEntryContent")
@@ -61,14 +60,14 @@ public class NinteichosaIraiEntryContentDiv extends Panel {
         this.NinteichosaIraiEntryRequest=NinteichosaIraiEntryRequest;
     }
 
-    @JsonProperty("NinteichosaIraiEntryTargetTokusoku")
-    public NinteichosaIraiEntryTargetTokusokuDiv getNinteichosaIraiEntryTargetTokusoku() {
-        return NinteichosaIraiEntryTargetTokusoku;
+    @JsonProperty("NinteichosaIraiEntryTokusoku")
+    public NinteichosaIraiEntryTokusokuDiv getNinteichosaIraiEntryTokusoku() {
+        return NinteichosaIraiEntryTokusoku;
     }
 
-    @JsonProperty("NinteichosaIraiEntryTargetTokusoku")
-    public void setNinteichosaIraiEntryTargetTokusoku(NinteichosaIraiEntryTargetTokusokuDiv NinteichosaIraiEntryTargetTokusoku) {
-        this.NinteichosaIraiEntryTargetTokusoku=NinteichosaIraiEntryTargetTokusoku;
+    @JsonProperty("NinteichosaIraiEntryTokusoku")
+    public void setNinteichosaIraiEntryTokusoku(NinteichosaIraiEntryTokusokuDiv NinteichosaIraiEntryTokusoku) {
+        this.NinteichosaIraiEntryTokusoku=NinteichosaIraiEntryTokusoku;
     }
 
     @JsonProperty("NinteichosaIraiEntryPaper")

@@ -180,7 +180,7 @@ public class NinteichosaIraiList {
                     toRString(map.get("督促回数")),
                     toTextBoxFlexibleDate(toRString(map.get("督促期限"))),
                     toTextBoxFlexibleDate(toRString(map.get("督促発行日"))),
-                    toRString(map.get("住所")), toRString(map.get("郵便番号")),
+                    toRString(map.get("郵便番号")), toRString(map.get("住所")),
                     toRString(map.get("入所施設")),
                     toRString(map.get("性別")),
                     toTextBoxFlexibleDate(toRString(map.get("生年月日"))),
@@ -197,7 +197,7 @@ public class NinteichosaIraiList {
 
         private static TextBoxFlexibleDate toTextBoxFlexibleDate(RString date) {
             TextBoxFlexibleDate textBox = new TextBoxFlexibleDate();
-            if (date.equals(RString.EMPTY)) {
+            if (RString.EMPTY.equals(date)) {
                 textBox.setValue(FlexibleDate.EMPTY);
             } else {
                 textBox.setValue(new FlexibleDate(date));

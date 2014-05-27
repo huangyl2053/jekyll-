@@ -25,6 +25,8 @@ public class NinteichosaIraiEntryTargetLatestChosainDiv extends Panel {
     private TextBoxCode txtLatestChosaItakusakiCode;
     @JsonProperty("txtLatestChosaItakusakiName")
     private TextBox txtLatestChosaItakusakiName;
+    @JsonProperty("btnToSearchChosaItakusaki")
+    private ButtonDialog btnToSearchChosaItakusaki;
     @JsonProperty("txtLatestChosainCode")
     private TextBoxCode txtLatestChosainCode;
     @JsonProperty("txtLatestChosainName")
@@ -54,6 +56,16 @@ public class NinteichosaIraiEntryTargetLatestChosainDiv extends Panel {
     @JsonProperty("txtLatestChosaItakusakiName")
     public void setTxtLatestChosaItakusakiName(TextBox txtLatestChosaItakusakiName) {
         this.txtLatestChosaItakusakiName=txtLatestChosaItakusakiName;
+    }
+
+    @JsonProperty("btnToSearchChosaItakusaki")
+    public ButtonDialog getBtnToSearchChosaItakusaki() {
+        return btnToSearchChosaItakusaki;
+    }
+
+    @JsonProperty("btnToSearchChosaItakusaki")
+    public void setBtnToSearchChosaItakusaki(ButtonDialog btnToSearchChosaItakusaki) {
+        this.btnToSearchChosaItakusaki=btnToSearchChosaItakusaki;
     }
 
     @JsonProperty("txtLatestChosainCode")

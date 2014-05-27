@@ -10,11 +10,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * NinteichosaIraiEntryTargetTokusoku のクラスファイル 
+ * NinteichosaIraiEntryTokusoku のクラスファイル 
  * 
  * @author 自動生成
  */
-public class NinteichosaIraiEntryTargetTokusokuDiv extends Panel {
+public class NinteichosaIraiEntryTokusokuDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

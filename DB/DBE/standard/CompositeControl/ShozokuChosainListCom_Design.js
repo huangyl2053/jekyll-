@@ -187,6 +187,27 @@ var DBE;
                         },
                         "columns": [
                             {
+                                "columnName": "",
+                                "dataName": "btnToBindChosain",
+                                "toolTip": "",
+                                "bgColor": 0,
+                                "width": 50,
+                                "visible": false,
+                                "cellType": 8,
+                                "cellDetails": {
+                                    "cellType": 8,
+                                    "text": "割付",
+                                    "onClick": "",
+                                    "imageFileUrl": "",
+                                    "imageWidth": "",
+                                    "imageHeight": ""
+                                },
+                                "align": 0,
+                                "resize": false,
+                                "isPrivateInfo": false,
+                                "sortKey": "btnToBindChosain"
+                            },
+                            {
                                 "columnName": "番号",
                                 "dataName": "chosainNo",
                                 "toolTip": "",
@@ -239,7 +260,7 @@ var DBE;
                                 "dataName": "chiku",
                                 "toolTip": "",
                                 "bgColor": 0,
-                                "width": 150,
+                                "width": 125,
                                 "visible": true,
                                 "cellType": 0,
                                 "cellDetails": {

@@ -5,7 +5,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.ButtonsForChosaItakusakiListDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.ButtonsForWaritsukeChosaItakusakiListDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.ShozokuChosainListDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.dgChosaItakusakiList_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -24,8 +24,8 @@ public class ChosaItakusakiAndChosainListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ButtonsForChosaItakusakiList")
-    private ButtonsForChosaItakusakiListDiv ButtonsForChosaItakusakiList;
+    @JsonProperty("ButtonsForWaritsukeChosaItakusakiList")
+    private ButtonsForWaritsukeChosaItakusakiListDiv ButtonsForWaritsukeChosaItakusakiList;
     @JsonProperty("dgChosaItakusakiList")
     private DataGrid<dgChosaItakusakiList_Row> dgChosaItakusakiList;
     @JsonProperty("ShozokuChosainList")
@@ -39,14 +39,14 @@ public class ChosaItakusakiAndChosainListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("ButtonsForChosaItakusakiList")
-    public ButtonsForChosaItakusakiListDiv getButtonsForChosaItakusakiList() {
-        return ButtonsForChosaItakusakiList;
+    @JsonProperty("ButtonsForWaritsukeChosaItakusakiList")
+    public ButtonsForWaritsukeChosaItakusakiListDiv getButtonsForWaritsukeChosaItakusakiList() {
+        return ButtonsForWaritsukeChosaItakusakiList;
     }
 
-    @JsonProperty("ButtonsForChosaItakusakiList")
-    public void setButtonsForChosaItakusakiList(ButtonsForChosaItakusakiListDiv ButtonsForChosaItakusakiList) {
-        this.ButtonsForChosaItakusakiList=ButtonsForChosaItakusakiList;
+    @JsonProperty("ButtonsForWaritsukeChosaItakusakiList")
+    public void setButtonsForWaritsukeChosaItakusakiList(ButtonsForWaritsukeChosaItakusakiListDiv ButtonsForWaritsukeChosaItakusakiList) {
+        this.ButtonsForWaritsukeChosaItakusakiList=ButtonsForWaritsukeChosaItakusakiList;
     }
 
     @JsonProperty("dgChosaItakusakiList")

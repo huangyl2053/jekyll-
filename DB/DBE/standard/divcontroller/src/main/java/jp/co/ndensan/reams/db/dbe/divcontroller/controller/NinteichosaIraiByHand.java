@@ -260,7 +260,7 @@ public class NinteichosaIraiByHand {
         }
 
         private static dgShozokuChosainList_Row to_dgShozokuChosainList_Row(Map map) {
-            return new dgShozokuChosainList_Row(
+            return new dgShozokuChosainList_Row(new Button(),
                     toRString(map.get("調査員番号")),
                     toRString(map.get("調査員氏名")),
                     toRString(map.get("割付済人数")),

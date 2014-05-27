@@ -3,12 +3,13 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon May 26 17:07:13 JST 2014 
+ * Tue May 27 16:32:02 JST 2014 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class dgShozokuChosainList_Row extends DataRow {
 
+    private Button btnToBindChosain;
     private RString chosainNo;
     private RString chosainName;
     private RString waritsukeNum;
@@ -30,18 +32,24 @@ public class dgShozokuChosainList_Row extends DataRow {
         super();
     }
 
-    public dgShozokuChosainList_Row(RString chosainNo, RString chosainName, RString waritsukeNum, RString chiku, RString chousaItakusakiNo) {
+    public dgShozokuChosainList_Row(Button btnToBindChosain, RString chosainNo, RString chosainName, RString waritsukeNum, RString chiku, RString chousaItakusakiNo) {
         super();
+        this.setOriginalData("btnToBindChosain", btnToBindChosain);
         this.setOriginalData("chosainNo", chosainNo);
         this.setOriginalData("chosainName", chosainName);
         this.setOriginalData("waritsukeNum", waritsukeNum);
         this.setOriginalData("chiku", chiku);
         this.setOriginalData("chousaItakusakiNo", chousaItakusakiNo);
+        this.btnToBindChosain = btnToBindChosain;
         this.chosainNo = chosainNo;
         this.chosainName = chosainName;
         this.waritsukeNum = waritsukeNum;
         this.chiku = chiku;
         this.chousaItakusakiNo = chousaItakusakiNo;
+    }
+
+    public Button getBtnToBindChosain() {
+        return btnToBindChosain;
     }
 
     public RString getChosainNo() {
@@ -62,6 +70,11 @@ public class dgShozokuChosainList_Row extends DataRow {
 
     public RString getChousaItakusakiNo() {
         return chousaItakusakiNo;
+    }
+
+    public void setBtnToBindChosain(Button btnToBindChosain) {
+        this.setOriginalData("btnToBindChosain", btnToBindChosain);
+        this.btnToBindChosain = btnToBindChosain;
     }
 
     public void setChosainNo(RString chosainNo) {
