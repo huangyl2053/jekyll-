@@ -11,23 +11,6 @@ var DBE;
         function NinteichosaIraiListForByHandCom_Design($parentElement, isDesignMode, fieldName) {
             _super.call(this, $parentElement, isDesignMode, NinteichosaIraiListForByHandCom_Design.myLayout, fieldName);
         }
-        Object.defineProperty(NinteichosaIraiListForByHandCom_Design.prototype, "gridSetting", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["gridSetting"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["gridSetting"] = value;
-                } else {
-                    this.layout.items[0]["gridSetting"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
         Object.defineProperty(NinteichosaIraiListForByHandCom_Design.prototype, "onSort", {
             get: function () {
                 return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["onSort"];
@@ -149,7 +132,6 @@ var DBE;
 
         NinteichosaIraiListForByHandCom_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
-            Uz.JSControlUtil.registProperty("gridSetting");
             Uz.JSControlUtil.registProperty("onSort");
             Uz.JSControlUtil.registProperty("onSelect");
             Uz.JSControlUtil.registProperty("onSelectByDblClick");
@@ -161,7 +143,6 @@ var DBE;
 
         NinteichosaIraiListForByHandCom_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
-            editablePropertyInfo["gridSetting"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["gridSetting"];
             editablePropertyInfo["onSort"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["onSort"];
             editablePropertyInfo["onSelect"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["onSelect"];
             editablePropertyInfo["onSelectByDblClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["onSelectByDblClick"];
@@ -274,6 +255,23 @@ var DBE;
                         },
                         "columns": [
                             {
+                                "columnName": "調査済みフラグ",
+                                "dataName": "chosaKanryoFlag",
+                                "toolTip": "",
+                                "bgColor": 0,
+                                "width": 0,
+                                "visible": false,
+                                "cellType": 2,
+                                "cellDetails": {
+                                    "cellType": 2,
+                                    "disabled": false
+                                },
+                                "align": 0,
+                                "resize": false,
+                                "isPrivateInfo": false,
+                                "sortKey": "chosaKanryoFlag"
+                            },
+                            {
                                 "columnName": "調査<br>状況",
                                 "dataName": "chosaJokyo",
                                 "toolTip": "",
@@ -282,7 +280,7 @@ var DBE;
                                 "visible": true,
                                 "cellType": 0,
                                 "cellDetails": null,
-                                "align": 0,
+                                "align": 1,
                                 "resize": true,
                                 "isPrivateInfo": false,
                                 "sortKey": "chosaJokyo"
@@ -803,11 +801,6 @@ var DBE;
             "businessId": "DBE",
             "controlName": "NinteichosaIraiListForByHandCom",
             "originalProperty": [
-                {
-                    "publicChildFieldName": "dgNinteichosaIraiListForByHand",
-                    "publicChildProperty": "gridSetting",
-                    "newPropertyName": "gridSetting"
-                },
                 {
                     "publicChildFieldName": "dgNinteichosaIraiListForByHand",
                     "publicChildProperty": "onSort",

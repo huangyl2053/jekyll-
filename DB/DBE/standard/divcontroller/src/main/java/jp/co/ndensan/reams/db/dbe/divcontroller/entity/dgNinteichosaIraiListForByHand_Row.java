@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri May 23 17:32:10 JST 2014 
+ * Mon May 26 09:34:46 JST 2014 
  */
 
 
@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 public class dgNinteichosaIraiListForByHand_Row extends DataRow {
 
+    private Boolean chosaKanryoFlag;
     private RString chosaJokyo;
     private Button btnToShowDetail;
     private RString hokenshaNo;
@@ -60,8 +61,9 @@ public class dgNinteichosaIraiListForByHand_Row extends DataRow {
         super();
     }
 
-    public dgNinteichosaIraiListForByHand_Row(RString chosaJokyo, Button btnToShowDetail, RString hokenshaNo, RString shichoson, RString shishoCode, RString shoshoName, RString hihokenshaNo, RString shimei, RString kanaShimei, RString shimeiWithKana, RString ninteiShinseiKubun, TextBoxFlexibleDate ninteiShinseiDate, RString chosaIraiKubun, TextBoxFlexibleDate chosaIraiDate, TextBoxFlexibleDate chosaKigenDate, TextBoxFlexibleDate iraishoHakkoDate, RString chosaItakusakiNo, RString chosaItakusakiName, RString chosainNo, RString chosainName, RString chosaItakusakiNo1TA, RString chosaItakusakiName1TA, RString chosainNo1TA, RString chosainName1TA, RString chosaItakusakiNo2TA, RString chosaItakusakiName2TA, RString chosainNo2TA, RString chosainName2TA, TextBoxFlexibleDate tokusokuDate, RString tokusokuCount, RString yubinNo, RString jusho, RString nyushoShisetsu) {
+    public dgNinteichosaIraiListForByHand_Row(Boolean chosaKanryoFlag, RString chosaJokyo, Button btnToShowDetail, RString hokenshaNo, RString shichoson, RString shishoCode, RString shoshoName, RString hihokenshaNo, RString shimei, RString kanaShimei, RString shimeiWithKana, RString ninteiShinseiKubun, TextBoxFlexibleDate ninteiShinseiDate, RString chosaIraiKubun, TextBoxFlexibleDate chosaIraiDate, TextBoxFlexibleDate chosaKigenDate, TextBoxFlexibleDate iraishoHakkoDate, RString chosaItakusakiNo, RString chosaItakusakiName, RString chosainNo, RString chosainName, RString chosaItakusakiNo1TA, RString chosaItakusakiName1TA, RString chosainNo1TA, RString chosainName1TA, RString chosaItakusakiNo2TA, RString chosaItakusakiName2TA, RString chosainNo2TA, RString chosainName2TA, TextBoxFlexibleDate tokusokuDate, RString tokusokuCount, RString yubinNo, RString jusho, RString nyushoShisetsu) {
         super();
+        this.setOriginalData("chosaKanryoFlag", chosaKanryoFlag);
         this.setOriginalData("chosaJokyo", chosaJokyo);
         this.setOriginalData("btnToShowDetail", btnToShowDetail);
         this.setOriginalData("hokenshaNo", hokenshaNo);
@@ -95,6 +97,7 @@ public class dgNinteichosaIraiListForByHand_Row extends DataRow {
         this.setOriginalData("yubinNo", yubinNo);
         this.setOriginalData("jusho", jusho);
         this.setOriginalData("nyushoShisetsu", nyushoShisetsu);
+        this.chosaKanryoFlag = chosaKanryoFlag;
         this.chosaJokyo = chosaJokyo;
         this.btnToShowDetail = btnToShowDetail;
         this.hokenshaNo = hokenshaNo;
@@ -128,6 +131,10 @@ public class dgNinteichosaIraiListForByHand_Row extends DataRow {
         this.yubinNo = yubinNo;
         this.jusho = jusho;
         this.nyushoShisetsu = nyushoShisetsu;
+    }
+
+    public Boolean getChosaKanryoFlag() {
+        return chosaKanryoFlag;
     }
 
     public RString getChosaJokyo() {
@@ -260,6 +267,11 @@ public class dgNinteichosaIraiListForByHand_Row extends DataRow {
 
     public RString getNyushoShisetsu() {
         return nyushoShisetsu;
+    }
+
+    public void setChosaKanryoFlag(Boolean chosaKanryoFlag) {
+        this.setOriginalData("chosaKanryoFlag", chosaKanryoFlag);
+        this.chosaKanryoFlag = chosaKanryoFlag;
     }
 
     public void setChosaJokyo(RString chosaJokyo) {

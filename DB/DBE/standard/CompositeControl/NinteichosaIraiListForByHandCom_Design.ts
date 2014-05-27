@@ -8,20 +8,6 @@ module DBE {
      */
     export class NinteichosaIraiListForByHandCom_Design extends Uz.CompositeControl {
     
-        public get gridSetting() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["gridSetting"];
-        }
-        
-        public set gridSetting(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["gridSetting"] = value;
-            } else {
-                this.layout.items[0]["gridSetting"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
         public get onSort() {
             return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["onSort"];
         }
@@ -130,7 +116,6 @@ module DBE {
          */
         public registProperty() {
             super.registProperty();
-            Uz.JSControlUtil.registProperty("gridSetting");
             Uz.JSControlUtil.registProperty("onSort");
             Uz.JSControlUtil.registProperty("onSelect");
             Uz.JSControlUtil.registProperty("onSelectByDblClick");
@@ -147,7 +132,6 @@ module DBE {
          */
         public getEditablePropertyInfo(): any {
             var editablePropertyInfo = super.getEditablePropertyInfo();
-            editablePropertyInfo["gridSetting"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["gridSetting"];
             editablePropertyInfo["onSort"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["onSort"];
             editablePropertyInfo["onSelect"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["onSelect"];
             editablePropertyInfo["onSelectByDblClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["onSelectByDblClick"];
@@ -260,6 +244,23 @@ module DBE {
     },
     "columns": [
      {
+      "columnName": "調査済みフラグ",
+      "dataName": "chosaKanryoFlag",
+      "toolTip": "",
+      "bgColor": 0,
+      "width": 0,
+      "visible": false,
+      "cellType": 2,
+      "cellDetails": {
+       "cellType": 2,
+       "disabled": false
+      },
+      "align": 0,
+      "resize": false,
+      "isPrivateInfo": false,
+      "sortKey": "chosaKanryoFlag"
+     },
+     {
       "columnName": "調査<br>状況",
       "dataName": "chosaJokyo",
       "toolTip": "",
@@ -268,7 +269,7 @@ module DBE {
       "visible": true,
       "cellType": 0,
       "cellDetails": null,
-      "align": 0,
+      "align": 1,
       "resize": true,
       "isPrivateInfo": false,
       "sortKey": "chosaJokyo"
@@ -789,11 +790,6 @@ module DBE {
  "businessId": "DBE",
  "controlName": "NinteichosaIraiListForByHandCom",
  "originalProperty": [
-  {
-   "publicChildFieldName": "dgNinteichosaIraiListForByHand",
-   "publicChildProperty": "gridSetting",
-   "newPropertyName": "gridSetting"
-  },
   {
    "publicChildFieldName": "dgNinteichosaIraiListForByHand",
    "publicChildProperty": "onSort",

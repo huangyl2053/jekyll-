@@ -21,8 +21,8 @@ public class RequestContentsDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ddIraiKubun")
-    private DropDownList ddIraiKubun;
+    @JsonProperty("ddlIraiKubun")
+    private DropDownList ddlIraiKubun;
     @JsonProperty("txtChosaIraiDate")
     private TextBoxFlexibleDate txtChosaIraiDate;
     @JsonProperty("txtChosaKigenDate")
@@ -34,14 +34,14 @@ public class RequestContentsDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("ddIraiKubun")
-    public DropDownList getDdIraiKubun() {
-        return ddIraiKubun;
+    @JsonProperty("ddlIraiKubun")
+    public DropDownList getDdlIraiKubun() {
+        return ddlIraiKubun;
     }
 
-    @JsonProperty("ddIraiKubun")
-    public void setDdIraiKubun(DropDownList ddIraiKubun) {
-        this.ddIraiKubun=ddIraiKubun;
+    @JsonProperty("ddlIraiKubun")
+    public void setDdlIraiKubun(DropDownList ddlIraiKubun) {
+        this.ddlIraiKubun=ddlIraiKubun;
     }
 
     @JsonProperty("txtChosaIraiDate")

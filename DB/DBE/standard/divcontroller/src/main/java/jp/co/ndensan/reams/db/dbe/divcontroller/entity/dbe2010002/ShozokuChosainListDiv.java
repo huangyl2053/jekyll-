@@ -5,10 +5,9 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.dgChosainList_Row;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShozokuChosainListCom;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShozokuChosainListCom;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * ShozokuChosainList のクラスファイル 
@@ -22,8 +21,10 @@ public class ShozokuChosainListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("dgChosainList")
-    private DataGrid<dgChosainList_Row> dgChosainList;
+    @JsonProperty("comChosainList")
+    private ShozokuChosainListCom comChosainList;
+    @JsonProperty("comChosainListAll")
+    private ShozokuChosainListCom comChosainListAll;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,14 +32,24 @@ public class ShozokuChosainListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("dgChosainList")
-    public DataGrid<dgChosainList_Row> getDgChosainList() {
-        return dgChosainList;
+    @JsonProperty("comChosainList")
+    public ShozokuChosainListCom getComChosainList() {
+        return comChosainList;
     }
 
-    @JsonProperty("dgChosainList")
-    public void setDgChosainList(DataGrid<dgChosainList_Row> dgChosainList) {
-        this.dgChosainList=dgChosainList;
+    @JsonProperty("comChosainList")
+    public void setComChosainList(ShozokuChosainListCom comChosainList) {
+        this.comChosainList=comChosainList;
+    }
+
+    @JsonProperty("comChosainListAll")
+    public ShozokuChosainListCom getComChosainListAll() {
+        return comChosainListAll;
+    }
+
+    @JsonProperty("comChosainListAll")
+    public void setComChosainListAll(ShozokuChosainListCom comChosainListAll) {
+        this.comChosainListAll=comChosainListAll;
     }
 
 }

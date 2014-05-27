@@ -77,6 +77,12 @@ public class NinteichosaIraiList {
         return response;
     }
 
+    /**
+     * btnToComplete押下時の処理です。
+     *
+     * @param div NinteichosaIraiListDiv
+     * @return ResponseData
+     */
     public ResponseData<NinteichosaIraiListDiv> onClick_btnToComplete(NinteichosaIraiListDiv div) {
         ResponseData<NinteichosaIraiListDiv> response = new ResponseData<>();
 

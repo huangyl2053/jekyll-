@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri May 23 14:46:25 JST 2014 
+ * Mon May 26 16:42:12 JST 2014 
  */
 
 
@@ -20,53 +20,53 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class dgChosaItakusakiList_Row extends DataRow {
 
-    private RString chosaItakusakiCode;
+    private RString chosaItakusakiNo;
     private RString chosaItakusakiName;
-    private RString defaultDataName3;
-    private RString defaultDataName2;
-    private RString defaultDataName4;
+    private RString waritsukeTeiin;
+    private RString waritsukeNum;
+    private RString waritsukeChiku;
 
     public dgChosaItakusakiList_Row() {
         super();
     }
 
-    public dgChosaItakusakiList_Row(RString chosaItakusakiCode, RString chosaItakusakiName, RString defaultDataName3, RString defaultDataName2, RString defaultDataName4) {
+    public dgChosaItakusakiList_Row(RString chosaItakusakiNo, RString chosaItakusakiName, RString waritsukeTeiin, RString waritsukeNum, RString waritsukeChiku) {
         super();
-        this.setOriginalData("chosaItakusakiCode", chosaItakusakiCode);
+        this.setOriginalData("chosaItakusakiNo", chosaItakusakiNo);
         this.setOriginalData("chosaItakusakiName", chosaItakusakiName);
-        this.setOriginalData("defaultDataName3", defaultDataName3);
-        this.setOriginalData("defaultDataName2", defaultDataName2);
-        this.setOriginalData("defaultDataName4", defaultDataName4);
-        this.chosaItakusakiCode = chosaItakusakiCode;
+        this.setOriginalData("waritsukeTeiin", waritsukeTeiin);
+        this.setOriginalData("waritsukeNum", waritsukeNum);
+        this.setOriginalData("waritsukeChiku", waritsukeChiku);
+        this.chosaItakusakiNo = chosaItakusakiNo;
         this.chosaItakusakiName = chosaItakusakiName;
-        this.defaultDataName3 = defaultDataName3;
-        this.defaultDataName2 = defaultDataName2;
-        this.defaultDataName4 = defaultDataName4;
+        this.waritsukeTeiin = waritsukeTeiin;
+        this.waritsukeNum = waritsukeNum;
+        this.waritsukeChiku = waritsukeChiku;
     }
 
-    public RString getChosaItakusakiCode() {
-        return chosaItakusakiCode;
+    public RString getChosaItakusakiNo() {
+        return chosaItakusakiNo;
     }
 
     public RString getChosaItakusakiName() {
         return chosaItakusakiName;
     }
 
-    public RString getDefaultDataName3() {
-        return defaultDataName3;
+    public RString getWaritsukeTeiin() {
+        return waritsukeTeiin;
     }
 
-    public RString getDefaultDataName2() {
-        return defaultDataName2;
+    public RString getWaritsukeNum() {
+        return waritsukeNum;
     }
 
-    public RString getDefaultDataName4() {
-        return defaultDataName4;
+    public RString getWaritsukeChiku() {
+        return waritsukeChiku;
     }
 
-    public void setChosaItakusakiCode(RString chosaItakusakiCode) {
-        this.setOriginalData("chosaItakusakiCode", chosaItakusakiCode);
-        this.chosaItakusakiCode = chosaItakusakiCode;
+    public void setChosaItakusakiNo(RString chosaItakusakiNo) {
+        this.setOriginalData("chosaItakusakiNo", chosaItakusakiNo);
+        this.chosaItakusakiNo = chosaItakusakiNo;
     }
 
     public void setChosaItakusakiName(RString chosaItakusakiName) {
@@ -74,19 +74,19 @@ public class dgChosaItakusakiList_Row extends DataRow {
         this.chosaItakusakiName = chosaItakusakiName;
     }
 
-    public void setDefaultDataName3(RString defaultDataName3) {
-        this.setOriginalData("defaultDataName3", defaultDataName3);
-        this.defaultDataName3 = defaultDataName3;
+    public void setWaritsukeTeiin(RString waritsukeTeiin) {
+        this.setOriginalData("waritsukeTeiin", waritsukeTeiin);
+        this.waritsukeTeiin = waritsukeTeiin;
     }
 
-    public void setDefaultDataName2(RString defaultDataName2) {
-        this.setOriginalData("defaultDataName2", defaultDataName2);
-        this.defaultDataName2 = defaultDataName2;
+    public void setWaritsukeNum(RString waritsukeNum) {
+        this.setOriginalData("waritsukeNum", waritsukeNum);
+        this.waritsukeNum = waritsukeNum;
     }
 
-    public void setDefaultDataName4(RString defaultDataName4) {
-        this.setOriginalData("defaultDataName4", defaultDataName4);
-        this.defaultDataName4 = defaultDataName4;
+    public void setWaritsukeChiku(RString waritsukeChiku) {
+        this.setOriginalData("waritsukeChiku", waritsukeChiku);
+        this.waritsukeChiku = waritsukeChiku;
     }
 
 }
