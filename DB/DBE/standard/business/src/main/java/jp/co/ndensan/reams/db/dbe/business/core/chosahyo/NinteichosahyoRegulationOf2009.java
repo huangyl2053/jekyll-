@@ -21,10 +21,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N8156 宮本 康
  */
-public class NinteichosahyoRegulationOf2009 implements INinteichosahyoRegulation {
+class NinteichosahyoRegulationOf2009 implements INinteichosahyoRegulation {
 
-    private static Map<NinteichosaItemKubunOfGaikyo, INinteichosaItem> サービス状況調査定義;
-    private static Map<NinteichosaItemKubunOfKihon, INinteichosaItem> 基本調査定義;
+    private static final Map<NinteichosaItemKubunOfGaikyo, INinteichosaItem> サービス状況調査定義;
+    private static final Map<NinteichosaItemKubunOfKihon, INinteichosaItem> 基本調査定義;
 
     static {
         サービス状況調査定義 = new EnumMap<>(NinteichosaItemKubunOfGaikyo.class);
@@ -173,4 +173,5 @@ public class NinteichosahyoRegulationOf2009 implements INinteichosahyoRegulation
     public Map<NinteichosaItemKubunOfKihon, INinteichosaItem> get基本調査定義() {
         return new EnumMap<>(基本調査定義);
     }
+
 }

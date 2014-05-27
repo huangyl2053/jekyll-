@@ -503,7 +503,7 @@ var DBC;
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "permitCharactor": "",
-                            "formatLength": 1
+                            "formatLength": "10"
                         },
                         {
                             "fieldName": "txtShienJigyoshaName",
@@ -941,7 +941,7 @@ var DBC;
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "permitCharactor": "",
-                            "formatLength": 1
+                            "formatLength": "8"
                         },
                         {
                             "fieldName": "txtItakuJigyoshaNo",
@@ -984,7 +984,7 @@ var DBC;
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "permitCharactor": "",
-                            "formatLength": 1
+                            "formatLength": "10"
                         },
                         {
                             "fieldName": "txtItakuJigyoshaName",
@@ -1069,7 +1069,7 @@ var DBC;
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "permitCharactor": "",
-                            "formatLength": 1
+                            "formatLength": "8"
                         }
                     ],
                     "controlType": "Panel",

@@ -43,7 +43,7 @@ public class ShujiiIkensho<E extends IShujiiIkenshoItemKubun, T extends IShujiiI
      *
      * @return 意見書定義
      */
-    public Map<E, T> get意見書定義() {
+    Map<E, T> get意見書定義() {
         return new EnumMap(意見書定義);
     }
 

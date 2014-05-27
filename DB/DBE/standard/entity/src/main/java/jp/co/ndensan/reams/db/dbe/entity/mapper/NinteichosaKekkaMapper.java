@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.core.chosahyo.NinteichosahyoEditor;
-import jp.co.ndensan.reams.db.dbe.business.NinteichosahyoFactory;
+import jp.co.ndensan.reams.db.dbe.business.core.chosahyo.NinteichosahyoFactory;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaJisshibashoKubun;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaResult;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaResultOfGaikyo;
@@ -272,7 +272,7 @@ public final class NinteichosaKekkaMapper {
 
         DbT5009NinteichosahyoJohoEntity entity = ninteichosaKekkaEntity.getDbT5009NinteichosahyoJohoEntity();
         KoroshoIFKubun koroshoIFKubun = KoroshoIFKubun.toValue(entity.getKoroshoIfShikibetsuCode());
-        NinteichosahyoEditor editor = new NinteichosahyoEditor(NinteichosahyoFactory.create基本情報Instance(koroshoIFKubun));
+        NinteichosahyoEditor editor = new NinteichosahyoEditor(NinteichosahyoFactory.create基本調査Instance(koroshoIFKubun));
 
         editor.setResult(NinteichosaItemKubunOfKihon.麻痺等の有無_左上肢, entity.getCk_mahiHidariJoshi());
         editor.setResult(NinteichosaItemKubunOfKihon.麻痺等の有無_右上肢, entity.getCk_mahiMigiJoshi());

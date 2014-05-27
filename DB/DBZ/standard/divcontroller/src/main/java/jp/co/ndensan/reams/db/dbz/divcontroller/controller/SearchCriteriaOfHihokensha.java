@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.SearchCriteriaOfHihokenshaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.TextBoxUtil;
 
 /**
  * SearchCriteriaOfHihokenshaDivのControllerです。
@@ -26,7 +25,7 @@ public final class SearchCriteriaOfHihokensha {
      * クリアされた{@link SearchCriteriaOfHihokenshaDiv SearchCriteriaOfHihokenshaDiv}
      */
     public static void clear(SearchCriteriaOfHihokenshaDiv div) {
-        TextBoxUtil.clear(div.getTxtHihokenshaNo());
+        div.getTxtHihokenshaNo().clearValue();
         div.getChkHihokenshaKubun().setSelectedItems(Collections.EMPTY_LIST);
     }
 }

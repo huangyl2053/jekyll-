@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.Nintei
  *
  * @author N8156 宮本 康
  */
-public interface INinteichosahyoRegulation {
+interface INinteichosahyoRegulation {
 
     /**
      * サービス状況調査の定義を返します。
