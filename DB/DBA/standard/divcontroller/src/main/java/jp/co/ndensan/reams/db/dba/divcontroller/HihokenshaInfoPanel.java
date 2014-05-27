@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.dgHihokenshaSearchGaitosh
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.HihokenshaSearchGaitoshaPanelDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.ReamsCommonInfoPanelDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
 /**
  * 被保険者照会画面上部の、被保険者情報を表示するパネルを表すクラスです。
@@ -41,7 +43,7 @@ public class HihokenshaInfoPanel {
         dgHihokenshaSearchGaitosha_Row gaitoshaGrid = get該当者情報(gaitoshaPanel);
 
         reamsCommonData.getTxtAge().setValue(gaitoshaGrid.getAge());
-        reamsCommonData.getTxtDateOfBirth().setValue(gaitoshaGrid.getDateOfBirth());
+        reamsCommonData.getTxtDateOfBirth().setValue(new FlexibleDate("19600914"));
         reamsCommonData.getTxtGender().setValue(gaitoshaGrid.getGender());
         reamsCommonData.getTxtGyoseiku().setValue(gaitoshaGrid.getGyoseiku());
         reamsCommonData.getTxtShimei().setValue(gaitoshaGrid.getShimei());
@@ -60,8 +62,8 @@ public class HihokenshaInfoPanel {
 
         dbCommonData.getTxtHihokenshaNo().setValue(gaitoshaGrid.getHihokenshaNo());
         dbCommonData.getTxtYokaigodo().setValue(gaitoshaGrid.getYokaigodo());
-        dbCommonData.getTxtNinteiKikan().setFromValue(gaitoshaGrid.getNinteiKikanKaishi());
-        dbCommonData.getTxtNinteiKikan().setToValue(gaitoshaGrid.getNinteiKikanShuryo());
+        dbCommonData.getTxtNinteiKikan().setFromValue(new RDate("19990101"));
+        dbCommonData.getTxtNinteiKikan().setToValue(null);
         dbCommonData.getTxtKyuHihokenshaNo().setValue(gaitoshaGrid.getKyuHihokenshaNo());
         dbCommonData.getTxtKyuShichosonCode().setValue(gaitoshaGrid.getKyuShichosonCode());
         dbCommonData.getTxtKyuShichoson().setValue(gaitoshaGrid.getKyuShichoson());
