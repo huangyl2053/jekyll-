@@ -3,13 +3,12 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed May 14 08:52:48 JST 2014 
+ * Tue May 27 18:35:35 JST 2014 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
@@ -17,14 +16,13 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 
 /**
- * dgMishinsaShikyuShinseiList_Row のクラスファイル 
+ * dgYoguKonyuhiKetteiMishinsaShikyuShinseiList_Row のクラスファイル 
  * 
  * @author 自動生成
  */
 
-public class dgMishinsaShikyuShinseiList_Row extends DataRow {
+public class dgYoguKonyuhiKetteiMishinsaShikyuShinseiList_Row extends DataRow {
 
-    private Button btnModifyShinsei;
     private TextBoxDate txtShikyuShinseiDate;
     private TextBoxDate txtTenkyoYM;
     private TextBoxCode txtHihoNo;
@@ -33,15 +31,15 @@ public class dgMishinsaShikyuShinseiList_Row extends DataRow {
     private TextBoxNum txtRiyoshaFutanAmount;
     private TextBoxNum txtLimitOverAmount;
     private TextBox txtShinsaResult;
+    private TextBoxDate txtShinsaDate;
     private TextBox txtSeiriNo;
 
-    public dgMishinsaShikyuShinseiList_Row() {
+    public dgYoguKonyuhiKetteiMishinsaShikyuShinseiList_Row() {
         super();
     }
 
-    public dgMishinsaShikyuShinseiList_Row(Button btnModifyShinsei, TextBoxDate txtShikyuShinseiDate, TextBoxDate txtTenkyoYM, TextBoxCode txtHihoNo, TextBox txtHihoName, TextBoxNum txtHokenSeikyuAmount, TextBoxNum txtRiyoshaFutanAmount, TextBoxNum txtLimitOverAmount, TextBox txtShinsaResult, TextBox txtSeiriNo) {
+    public dgYoguKonyuhiKetteiMishinsaShikyuShinseiList_Row(TextBoxDate txtShikyuShinseiDate, TextBoxDate txtTenkyoYM, TextBoxCode txtHihoNo, TextBox txtHihoName, TextBoxNum txtHokenSeikyuAmount, TextBoxNum txtRiyoshaFutanAmount, TextBoxNum txtLimitOverAmount, TextBox txtShinsaResult, TextBoxDate txtShinsaDate, TextBox txtSeiriNo) {
         super();
-        this.setOriginalData("btnModifyShinsei", btnModifyShinsei);
         this.setOriginalData("txtShikyuShinseiDate", txtShikyuShinseiDate);
         this.setOriginalData("txtTenkyoYM", txtTenkyoYM);
         this.setOriginalData("txtHihoNo", txtHihoNo);
@@ -50,8 +48,8 @@ public class dgMishinsaShikyuShinseiList_Row extends DataRow {
         this.setOriginalData("txtRiyoshaFutanAmount", txtRiyoshaFutanAmount);
         this.setOriginalData("txtLimitOverAmount", txtLimitOverAmount);
         this.setOriginalData("txtShinsaResult", txtShinsaResult);
+        this.setOriginalData("txtShinsaDate", txtShinsaDate);
         this.setOriginalData("txtSeiriNo", txtSeiriNo);
-        this.btnModifyShinsei = btnModifyShinsei;
         this.txtShikyuShinseiDate = txtShikyuShinseiDate;
         this.txtTenkyoYM = txtTenkyoYM;
         this.txtHihoNo = txtHihoNo;
@@ -60,11 +58,8 @@ public class dgMishinsaShikyuShinseiList_Row extends DataRow {
         this.txtRiyoshaFutanAmount = txtRiyoshaFutanAmount;
         this.txtLimitOverAmount = txtLimitOverAmount;
         this.txtShinsaResult = txtShinsaResult;
+        this.txtShinsaDate = txtShinsaDate;
         this.txtSeiriNo = txtSeiriNo;
-    }
-
-    public Button getBtnModifyShinsei() {
-        return btnModifyShinsei;
     }
 
     public TextBoxDate getTxtShikyuShinseiDate() {
@@ -99,13 +94,12 @@ public class dgMishinsaShikyuShinseiList_Row extends DataRow {
         return txtShinsaResult;
     }
 
-    public TextBox getTxtSeiriNo() {
-        return txtSeiriNo;
+    public TextBoxDate getTxtShinsaDate() {
+        return txtShinsaDate;
     }
 
-    public void setBtnModifyShinsei(Button btnModifyShinsei) {
-        this.setOriginalData("btnModifyShinsei", btnModifyShinsei);
-        this.btnModifyShinsei = btnModifyShinsei;
+    public TextBox getTxtSeiriNo() {
+        return txtSeiriNo;
     }
 
     public void setTxtShikyuShinseiDate(TextBoxDate txtShikyuShinseiDate) {
@@ -146,6 +140,11 @@ public class dgMishinsaShikyuShinseiList_Row extends DataRow {
     public void setTxtShinsaResult(TextBox txtShinsaResult) {
         this.setOriginalData("txtShinsaResult", txtShinsaResult);
         this.txtShinsaResult = txtShinsaResult;
+    }
+
+    public void setTxtShinsaDate(TextBoxDate txtShinsaDate) {
+        this.setOriginalData("txtShinsaDate", txtShinsaDate);
+        this.txtShinsaDate = txtShinsaDate;
     }
 
     public void setTxtSeiriNo(TextBox txtSeiriNo) {
