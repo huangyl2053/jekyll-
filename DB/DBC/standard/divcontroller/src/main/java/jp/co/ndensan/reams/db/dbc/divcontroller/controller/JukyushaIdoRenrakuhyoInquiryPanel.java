@@ -65,15 +65,15 @@ public class JukyushaIdoRenrakuhyoInquiryPanel {
     }
 
     private void set連絡票(JukyushaIdoRenrakuhyoInquiryPanelDiv inquiryPanel, dgJukyushaIdoRenrakuhyoSearchResult_Row selectedRow) {
-        set基本情報(inquiryPanel.getJukyushaIdoRenrakuhyoKihonJoho(), selectedRow);
-        set要介護認定(inquiryPanel.getJukyushaIdoRenrakuhyoSub1().getJukyushaIdoRenrakuhyoYokaigonintei());
-        set支給限度基準額(inquiryPanel.getJukyushaIdoRenrakuhyoSub1().getJukyushaIdoRenrakuhyoShikyugendoKijungaku());
-        set居宅サービス計画(inquiryPanel.getJukyushaIdoRenrakuhyoSub1().getJukyushaIdoRenrakuhyoKyotakuServicePlan());
-        set給付制限(inquiryPanel.getJukyushaIdoRenrakuhyoSub2().getJukyushaIdoRenrakuhyoKyufuSeigen());
-        set後期高齢国保(inquiryPanel.getJukyushaIdoRenrakuhyoSub1().getJukyushaIdoRenrakuhyoKokiKoreiKokuho());
-        set老人保健(inquiryPanel.getJukyushaIdoRenrakuhyoSub1().getJukyushaIdoRenrakuhyoRojinHoken());
-        set減免減額(inquiryPanel.getJukyushaIdoRenrakuhyoSub2().getJukyushaIdoRenrakuhyoGemmenGengaku());
-        set二次予防事業(inquiryPanel.getJukyushaIdoRenrakuhyoSub1().getJukyushaIdoRenrakuhyoNijiyoboJigyo());
+        set基本情報(inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho(), selectedRow);
+        set要介護認定(inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoYokaigonintei());
+        set支給限度基準額(inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoShikyugendoKijungaku());
+        set居宅サービス計画(inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKyotakuServicePlan());
+        set給付制限(inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKyufuSeigen());
+        set後期高齢国保(inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKokiKoreiKokuho());
+        set老人保健(inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoRojinHoken());
+        set減免減額(inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoGemmenGengaku());
+        set二次予防事業(inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoNijiyoboJigyo());
 
     }
 
