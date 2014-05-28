@@ -666,6 +666,76 @@
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "期間"
+       },
+       {
+        "columnName": "年齢",
+        "dataName": "年齢",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 10,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "年齢"
+       },
+       {
+        "columnName": "性別",
+        "dataName": "性別",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 10,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "性別"
+       },
+       {
+        "columnName": "被保険者区分",
+        "dataName": "被保険者区分",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 10,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "被保険者区分"
+       },
+       {
+        "columnName": "申請日",
+        "dataName": "申請日",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 10,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "申請日"
+       },
+       {
+        "columnName": "認定期間開始日",
+        "dataName": "認定期間開始日",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 10,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "認定期間開始日"
        }
       ]
      },
@@ -882,8 +952,8 @@
      "requestUrl": "dbe/db/dbe/ShinsaShienTaishoshaIchiran/onLoadData"
     },
     {
-     "eventName": "onClick_btnShinsaKekkaNyuryokuStart",
-     "requestUrl": "dbe/db/dbe/ShinsaKekkaNyuryokuShosai/onLoadData"
+     "eventName": "onClick_btnBackIchiran",
+     "requestUrl": "dbe/db/dbe/ShinsaShienTaishoshaIchiran/onClick_btnBackIchiran"
     }
    ],
    "hiddenInput": [],
@@ -913,7 +983,7 @@
          "fieldName": "txtNenrei",
          "items": [],
          "controlType": "TextBox",
-         "width": "XS",
+         "width": "40",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -925,7 +995,7 @@
          "toolTip": "",
          "authorityMode": 0,
          "marginLeft": "XS",
-         "marginRight": "XS",
+         "marginRight": "0",
          "required": false,
          "text": "",
          "isPrivateInfo": false,
@@ -940,13 +1010,13 @@
          "labelLText": "",
          "labelRText": "",
          "labelLWidth": "S",
-         "labelRWidth": "S",
+         "labelRWidth": "15",
          "labelLAlign": 2,
          "labelRAlign": 0,
          "value": "",
          "maxLength": 1000000000000,
          "minLength": 0,
-         "textAlign": 0,
+         "textAlign": 1,
          "isComboBox": false,
          "suggest": []
         }
@@ -974,7 +1044,7 @@
          "fieldName": "txtSeibetsu",
          "items": [],
          "controlType": "TextBox",
-         "width": "XS",
+         "width": "40",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1007,7 +1077,7 @@
          "value": "",
          "maxLength": 1000000000000,
          "minLength": 0,
-         "textAlign": 0,
+         "textAlign": 1,
          "isComboBox": false,
          "suggest": []
         }
@@ -1289,7 +1359,7 @@
          "fieldName": "txtZenIchiji",
          "items": [],
          "controlType": "TextBox",
-         "width": "XS",
+         "width": "70",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1350,7 +1420,7 @@
          "fieldName": "txtZenNiji",
          "items": [],
          "controlType": "TextBox",
-         "width": "XS",
+         "width": "70",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1549,7 +1619,7 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "text": "一覧に戻る",
-     "onClick": "",
+     "onClick": "onClick_btnBackIchiran",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -2827,6 +2897,14 @@
     {
      "eventName": "onClickBtnUpdate",
      "requestUrl": "dbe/db/dbe/ShinsaKekkaNyuryokuShosai/onClickBtnUpdate"
+    },
+    {
+     "eventName": "onClick_btnShinsaKekkaNyuryokuStart",
+     "requestUrl": "dbe/db/dbe/ShinsaKekkaNyuryokuShosai/onLoadData"
+    },
+    {
+     "eventName": "",
+     "requestUrl": ""
     }
    ],
    "hiddenInput": [],

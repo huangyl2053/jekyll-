@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class ShinsaShienTaishoshaIchiran {
 
+    static final int SELECT_IDX = 0;
+
     /**
      * 審査会支援、審査会審査対象者一覧画面ロード時の動作を表します。
      *
@@ -49,8 +51,12 @@ public class ShinsaShienTaishoshaIchiran {
     public ResponseData onClick_btnBackIchiran(ShinsaShienTaishoshaIchiranDiv div, KaniShinsakaiKaisaiKekkaDiv shinsaKekkaDiv) {
         ResponseData<ShinsaShienTaishoshaIchiranDiv> response = new ResponseData<>();
 
-//        dgShinsaTaishoshaIchiran1_Row dataRow = ViewStateHolder.get("判定結果", dgShinsaTaishoshaIchiran1_Row.class);
-//        dgShinsaTaishoshaIchiran1_Row dataRow = div.getDgShinsaTaishoshaIchiran1().getClickedItem();
+        RString nijiHantei = (RString) ViewStateHolder.get("判定結果", RString.class);
+        RString yukoTsukisu = (RString) ViewStateHolder.get("有効月数", RString.class);
+        div.getDgShinsaTaishoshaIchiran1().getSelectedItems().get(SELECT_IDX).set二次(nijiHantei);
+        div.getDgShinsaTaishoshaIchiran1().getSelectedItems().get(SELECT_IDX).set期間(yukoTsukisu);
+        response.data = div;
+
         return response;
     }
 
@@ -74,9 +80,15 @@ public class ShinsaShienTaishoshaIchiran {
         RString nijiHantei = _toRString(map.get("二次判定"));
         RString zenKikan = _toRString(map.get("前回期間"));
         RString kikan = _toRString(map.get("今回期間"));
+        RString nenrei = _toRString(map.get("年齢"));
+        RString sex = _toRString(map.get("性別"));
+        RString hihoKubun = _toRString(map.get("被保険者区分"));
+        RString shinseibi = _toRString(map.get("申請日"));
+        RString ninteiStartDay = _toRString(map.get("認定有効期間開始日"));
 
         dgShinsaTaishoshaIchiran1_Row row = new dgShinsaTaishoshaIchiran1_Row(shinseiKubun,
-                jokyo, zenIchiji, zenNiji, ichijiHantei, nijiHantei, zenKikan, kikan);
+                jokyo, zenIchiji, zenNiji, ichijiHantei, nijiHantei, zenKikan, kikan,
+                nenrei, sex, hihoKubun, shinseibi, ninteiStartDay);
         return row;
     }
 
