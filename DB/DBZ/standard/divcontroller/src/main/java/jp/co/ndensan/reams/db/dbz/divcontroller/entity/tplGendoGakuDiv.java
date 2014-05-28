@@ -24,10 +24,10 @@ public class tplGendoGakuDiv extends TabPanel {
      */
     @JsonProperty("lblKubunShikyuGendoGaku")
     private Label lblKubunShikyuGendoGaku;
-    @JsonProperty("txtKyuhuYukoKikan")
-    private TextBoxDateRange txtKyuhuYukoKikan;
     @JsonProperty("txtKubunShikyuGendoKijunGaku")
     private TextBoxNum txtKubunShikyuGendoKijunGaku;
+    @JsonProperty("txtKyuhuYukoKikan")
+    private TextBoxDateRange txtKyuhuYukoKikan;
     @JsonProperty("ShuruiShikyuGendoKijungaku")
     private ShuruiShikyuGendoKijungakuDiv ShuruiShikyuGendoKijungaku;
 
@@ -47,16 +47,6 @@ public class tplGendoGakuDiv extends TabPanel {
         this.lblKubunShikyuGendoGaku=lblKubunShikyuGendoGaku;
     }
 
-    @JsonProperty("txtKyuhuYukoKikan")
-    public TextBoxDateRange getTxtKyuhuYukoKikan() {
-        return txtKyuhuYukoKikan;
-    }
-
-    @JsonProperty("txtKyuhuYukoKikan")
-    public void setTxtKyuhuYukoKikan(TextBoxDateRange txtKyuhuYukoKikan) {
-        this.txtKyuhuYukoKikan=txtKyuhuYukoKikan;
-    }
-
     @JsonProperty("txtKubunShikyuGendoKijunGaku")
     public TextBoxNum getTxtKubunShikyuGendoKijunGaku() {
         return txtKubunShikyuGendoKijunGaku;
@@ -65,6 +55,16 @@ public class tplGendoGakuDiv extends TabPanel {
     @JsonProperty("txtKubunShikyuGendoKijunGaku")
     public void setTxtKubunShikyuGendoKijunGaku(TextBoxNum txtKubunShikyuGendoKijunGaku) {
         this.txtKubunShikyuGendoKijunGaku=txtKubunShikyuGendoKijunGaku;
+    }
+
+    @JsonProperty("txtKyuhuYukoKikan")
+    public TextBoxDateRange getTxtKyuhuYukoKikan() {
+        return txtKyuhuYukoKikan;
+    }
+
+    @JsonProperty("txtKyuhuYukoKikan")
+    public void setTxtKyuhuYukoKikan(TextBoxDateRange txtKyuhuYukoKikan) {
+        this.txtKyuhuYukoKikan=txtKyuhuYukoKikan;
     }
 
     @JsonProperty("ShuruiShikyuGendoKijungaku")
