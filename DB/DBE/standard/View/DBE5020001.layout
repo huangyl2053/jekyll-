@@ -125,10 +125,10 @@
      "isPrivateInfo": false
     },
     {
-     "fieldName": "lblKaisibi",
+     "fieldName": "lblShinsaJissibi",
      "items": [],
      "controlType": "Label",
-     "width": "60",
+     "width": "250",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -139,7 +139,7 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "11",
+     "marginLeft": "XS",
      "marginRight": "XS",
      "required": false,
      "align": 2,
@@ -176,7 +176,7 @@
      "onKeyPress": "",
      "labelLText": "",
      "labelRText": "",
-     "labelLWidth": "S",
+     "labelLWidth": "250",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -188,28 +188,6 @@
      "textAlign": 0,
      "isComboBox": false,
      "suggest": []
-    },
-    {
-     "fieldName": "lblTime",
-     "items": [],
-     "controlType": "Label",
-     "width": "60",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "required": false,
-     "align": 2,
-     "text": "開始時間",
-     "isPrivateInfo": false
     },
     {
      "fieldName": "txtStartTime",
@@ -239,7 +217,7 @@
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "labelLText": "",
+     "labelLText": "開始時間",
      "labelRText": "",
      "labelLWidth": "S",
      "labelRWidth": "S",
@@ -255,10 +233,10 @@
      "timeKubun": 1
     },
     {
-     "fieldName": "lblSyuryobi",
+     "fieldName": "lblShinsaJissiSyuryobi",
      "items": [],
      "controlType": "Label",
-     "width": "60",
+     "width": "250",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -269,7 +247,7 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "11",
+     "marginLeft": "XS",
      "marginRight": "XS",
      "required": false,
      "align": 2,
@@ -306,7 +284,7 @@
      "onKeyPress": "",
      "labelLText": "",
      "labelRText": "",
-     "labelLWidth": "S",
+     "labelLWidth": "250",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -318,28 +296,6 @@
      "textAlign": 0,
      "isComboBox": false,
      "suggest": []
-    },
-    {
-     "fieldName": "lblEndTime",
-     "items": [],
-     "controlType": "Label",
-     "width": "60",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "required": false,
-     "align": 2,
-     "text": "終了時間",
-     "isPrivateInfo": false
     },
     {
      "fieldName": "txtEndTime",
@@ -369,7 +325,7 @@
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "labelLText": "",
+     "labelLText": "終了時間",
      "labelRText": "",
      "labelLWidth": "S",
      "labelRWidth": "S",
@@ -487,7 +443,7 @@
     },
     {
      "eventName": "onClick_btnShinsaKekkaNyuryokuEnd",
-     "requestUrl": "dbe/db/dbe/ShinsaShienTaishoshaIchiran/onClick_btnShinsaKekkaNyuryokuEnd"
+     "requestUrl": "dbe/db/dbe/KaniShinsakaiKaisaiKekka/onClick_btnShinsaKekkaNyuryokuEnd"
     },
     {
      "eventName": "onClickStartBtn",
@@ -924,10 +880,6 @@
     {
      "eventName": "onLoad",
      "requestUrl": "dbe/db/dbe/ShinsaShienTaishoshaIchiran/onLoadData"
-    },
-    {
-     "eventName": "onClick_btnShinsaKekkaNyuryokuEnd",
-     "requestUrl": "dbe/db/dbe/ShinsaShienTaishoshaIchiran/onClick_btnShinsaKekkaNyuryokuEnd"
     },
     {
      "eventName": "onClick_btnShinsaKekkaNyuryokuStart",
@@ -2675,7 +2627,7 @@
          "disabled": false,
          "accessKey": "",
          "nextFocusFieldName": "",
-         "wrap": false,
+         "wrap": true,
          "dependencies": [],
          "float": 0,
          "toolTip": "",
@@ -2728,7 +2680,7 @@
          "disabled": false,
          "accessKey": "",
          "nextFocusFieldName": "",
-         "wrap": false,
+         "wrap": true,
          "dependencies": [],
          "float": 0,
          "toolTip": "",
@@ -2757,7 +2709,7 @@
          "disabled": false,
          "accessKey": "",
          "nextFocusFieldName": "",
-         "wrap": false,
+         "wrap": true,
          "dependencies": [],
          "float": 0,
          "toolTip": "",
@@ -2818,7 +2770,7 @@
       "tabShinsaKekka"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "tabShinsaKekka"
+     "selectedItemFieldName": "tabChosaKekkaShosai"
     }
    ],
    "controlType": "Panel",

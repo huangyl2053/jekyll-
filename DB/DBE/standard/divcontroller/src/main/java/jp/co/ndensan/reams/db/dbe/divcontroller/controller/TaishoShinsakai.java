@@ -12,12 +12,9 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.TaishoShinsakaiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import org.joda.time.LocalTime;
 
 /**
  * 対象審査会の情報を編集します。
@@ -26,6 +23,12 @@ import org.joda.time.LocalTime;
  */
 public class TaishoShinsakai {
 
+    /**
+     * 審査会審査結果入力を行う対象となる審査会の情報を表示する画面のロード時の設定を表します。
+     *
+     * @param div 対象審査会情報Div
+     * @return ResponseData
+     */
     public ResponseData onLoadData(TaishoShinsakaiDiv div) {
         ResponseData<TaishoShinsakaiDiv> response = new ResponseData<>();
         List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("ShinsaKekkaTaishoShinsakai.yml"));

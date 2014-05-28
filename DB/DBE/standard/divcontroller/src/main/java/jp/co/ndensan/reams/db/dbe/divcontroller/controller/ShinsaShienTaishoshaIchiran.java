@@ -14,10 +14,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShinsaShienTaishoshaIchir
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgShinsaTaishoshaIchiran1_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 審査会支援での審査会対象者の一覧を編集します。
@@ -42,25 +40,18 @@ public class ShinsaShienTaishoshaIchiran {
     }
 
     /**
-     * 審査会終了ボタンクリック時の動作を表します。
+     * 審査結果入力詳細Divの一覧に戻るボタン押下時の処理を表します。
      *
-     * @param taishoshaDiv 審査会審査対象者一覧Div
-     * @param shinsakaiDiv 審査結果入力Div
+     * @param div 審査会対象者一覧Div（自身）
+     * @param shinsaKekkaDiv 簡易審査会開催結果Div
      * @return ResponseData
      */
-    public ResponseData onClick_btnShinsaKekkaNyuryokuEnd(ShinsaShienTaishoshaIchiranDiv taishoshaDiv,
-            KaniShinsakaiKaisaiKekkaDiv shinsakaiDiv) {
+    public ResponseData onClick_btnBackIchiran(ShinsaShienTaishoshaIchiranDiv div, KaniShinsakaiKaisaiKekkaDiv shinsaKekkaDiv) {
+        ResponseData<ShinsaShienTaishoshaIchiranDiv> response = new ResponseData<>();
 
-        ResponseData<KaniShinsakaiKaisaiKekkaDiv> response = new ResponseData<>();
-
-        shinsakaiDiv.getTxtShinsaJissiShuryobi().setValue(FlexibleDate.getNowDate());
-        shinsakaiDiv.getTxtShinsaJissiShuryobi().setDisabled(false);
-        shinsakaiDiv.getTxtEndTime().setValue(RTime.now());
-        shinsakaiDiv.getTxtEndTime().setDisabled(false);
-
-        response.data = shinsakaiDiv;
+//        dgShinsaTaishoshaIchiran1_Row dataRow = ViewStateHolder.get("判定結果", dgShinsaTaishoshaIchiran1_Row.class);
+//        dgShinsaTaishoshaIchiran1_Row dataRow = div.getDgShinsaTaishoshaIchiran1().getClickedItem();
         return response;
-
     }
 
     private static List<dgShinsaTaishoshaIchiran1_Row> createRowTaishoIchiran1TestData() {

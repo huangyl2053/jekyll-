@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
@@ -33,8 +34,23 @@ public class NinteitsuchishoKobetsuHakko {
     public ResponseData onLoad(NinteitsuchishoKobetsuHakkoDiv div) {
         ResponseData<NinteitsuchishoKobetsuHakkoDiv> response = new ResponseData<>();
 
+        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("DemoCity.yml"));
+        Map map = targetSource.get(0);
+        if (_toRString(map.get("保険者番号")).equalsIgnoreCase(new RString("152264"))) {
+            div.getNinteitsuchishoKobetsuHakkoTargetSearch().getDdlHokensha().setSelectedItem(new RString("2"));
+            div.getNinteitsuchishoKobetsuHakkoTargetList().getTxtHokenshaNo().setValue(_toRString(map.get("保険者番号")));
+            div.getNinteitsuchishoKobetsuHakkoTargetList().getTxtHokensaName().setValue(_toRString(map.get("保険者名称")));
+        } else {
+            div.getNinteitsuchishoKobetsuHakkoTargetSearch().getDdlHokensha().setSelectedItem(new RString("1"));
+            div.getNinteitsuchishoKobetsuHakkoTargetList().getTxtHokenshaNo().setValue(_toRString(map.get("保険者番号")));
+            div.getNinteitsuchishoKobetsuHakkoTargetList().getTxtHokensaName().setValue(_toRString(map.get("保険者名称")));
+        }
+
+        List<KeyValueDataSource> keyList = new ArrayList<>();
+        keyList.add(new KeyValueDataSource(new RString("1"), new RString("男")));
+        keyList.add(new KeyValueDataSource(new RString("2"), new RString("女")));
+        div.getNinteitsuchishoKobetsuHakkoTargetSearch().getHihokensha().getChkGender().setSelectedItems(keyList);
         div.getNinteitsuchishoKobetsuHakkoTargetSearch().getHihokensha().getTxtHihokenshaNo().setValue(RString.EMPTY);
-        //div.getNinteitsuchishoKobetsuHakkoTargetSearch().getHihokensha().getTxtHihokensaName().setValue(new RString("テスト　太郎"));
 
         response.data = div;
         return response;

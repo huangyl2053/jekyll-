@@ -9,12 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.HihokenshaJohoDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NinteiKekkaNyuryokuDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NinteiShinsaKekkaNyuryokuDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShinsaTaishoshaItiranDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.TaishoShinsakaiIchiranDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgShinsaTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgShinsakaiIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -30,6 +25,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  */
 public class TaishoShinsakaiIchiran {
 
+    /**
+     * 審査会審査結果入力対象の審査会一覧画面のロード時の内容設定を行います。
+     *
+     * @param div 対象審査会一覧Div
+     * @return ResponseData
+     */
     public ResponseData onLoadData(TaishoShinsakaiIchiranDiv div) {
         ResponseData<TaishoShinsakaiIchiranDiv> response = new ResponseData<>();
 
