@@ -35,25 +35,6 @@ public class ShokanShikyuTorokuShinseishoList {
         return response;
     }
 
-    /**
-     * 「申請書情報を追加する」ボタン押下時の処理です。
-     *
-     * @param panel panel
-     * @return ResponseData
-     */
-    public ResponseData<ShokanShikyuTorokuShinseishoListDiv> onClickAddButton(ShokanShikyuTorokuShinseishoListDiv panel) {
-        addShinseishoList(panel);
-        ResponseData<ShokanShikyuTorokuShinseishoListDiv> response = new ResponseData<>();
-        response.data = panel;
-        return response;
-    }
-
-    private void addShinseishoList(ShokanShikyuTorokuShinseishoListDiv panel) {
-        DataGrid<dgShokanShikyuShinseishoList_Row> dgListRow = panel.getShokanShikyuTorokuShinseishoListInfo().getDgShokanShikyuShinseishoList();
-        List<dgShokanShikyuShinseishoList_Row> dgList = dgListRow.getDataSource();
-        dgList.add(create申請書情報("", "", "", "", "", ""));
-    }
-
     private void setShinseishoListData(ShokanShikyuTorokuShinseishoListDiv panel) {
         List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShinseishoList.yml"));
 
@@ -69,9 +50,6 @@ public class ShokanShikyuTorokuShinseishoList {
                     source.get("自己負担額合計").toString()));
 
         }
-//        dgList.add(create申請書情報("平26.06.01", "平26.06.01", "11111113", "5,000", "1,500", "1,500"));
-//        dgList.add(create申請書情報("平25.06.01", "平25.06.01", "11111112", "5,000", "1,500", "1,500"));
-//        dgList.add(create申請書情報("平24.06.01", "平24.06.01", "11111111", "5,000", "1,500", "1,500"));
     }
 
     private dgShokanShikyuShinseishoList_Row create申請書情報(

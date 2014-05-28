@@ -39,6 +39,8 @@ public class ShokanShikyuTorokuShomeishoMeisaiMeisaiDiv extends Panel {
     private TextBox txtKyufuhiTekiyo;
     @JsonProperty("btnKyufuhiKakutei")
     private Button btnKyufuhiKakutei;
+    @JsonProperty("txtKyufuhiSelectedIndex")
+    private TextBox txtKyufuhiSelectedIndex;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -134,6 +136,16 @@ public class ShokanShikyuTorokuShomeishoMeisaiMeisaiDiv extends Panel {
     @JsonProperty("btnKyufuhiKakutei")
     public void setBtnKyufuhiKakutei(Button btnKyufuhiKakutei) {
         this.btnKyufuhiKakutei=btnKyufuhiKakutei;
+    }
+
+    @JsonProperty("txtKyufuhiSelectedIndex")
+    public TextBox getTxtKyufuhiSelectedIndex() {
+        return txtKyufuhiSelectedIndex;
+    }
+
+    @JsonProperty("txtKyufuhiSelectedIndex")
+    public void setTxtKyufuhiSelectedIndex(TextBox txtKyufuhiSelectedIndex) {
+        this.txtKyufuhiSelectedIndex=txtKyufuhiSelectedIndex;
     }
 
 }
