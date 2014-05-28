@@ -1,8 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row;
@@ -11,8 +10,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * YoguKonyuhiShikyuShinseiMishinsaResultList のクラスファイル 
- * 
+ * YoguKonyuhiShikyuShinseiMishinsaResultList のクラスファイル
+ *
  * @author 自動生成
  */
 public class YoguKonyuhiShikyuShinseiMishinsaResultListDiv extends Panel {
@@ -22,6 +21,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaResultListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtShinsaDate")
     private TextBoxDate txtShinsaDate;
     @JsonProperty("btnkari")
@@ -44,7 +44,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaResultListDiv extends Panel {
 
     @JsonProperty("txtShinsaDate")
     public void setTxtShinsaDate(TextBoxDate txtShinsaDate) {
-        this.txtShinsaDate=txtShinsaDate;
+        this.txtShinsaDate = txtShinsaDate;
     }
 
     @JsonProperty("btnkari")
@@ -54,7 +54,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaResultListDiv extends Panel {
 
     @JsonProperty("btnkari")
     public void setBtnkari(Button btnkari) {
-        this.btnkari=btnkari;
+        this.btnkari = btnkari;
     }
 
     @JsonProperty("dgYoguKonyuhiShisaMishinsaShikyuShinseiList")
@@ -64,7 +64,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaResultListDiv extends Panel {
 
     @JsonProperty("dgYoguKonyuhiShisaMishinsaShikyuShinseiList")
     public void setDgYoguKonyuhiShisaMishinsaShikyuShinseiList(DataGrid<dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row> dgYoguKonyuhiShisaMishinsaShikyuShinseiList) {
-        this.dgYoguKonyuhiShisaMishinsaShikyuShinseiList=dgYoguKonyuhiShisaMishinsaShikyuShinseiList;
+        this.dgYoguKonyuhiShisaMishinsaShikyuShinseiList = dgYoguKonyuhiShisaMishinsaShikyuShinseiList;
     }
 
     @JsonProperty("btnIkkatsuShinsa")
@@ -74,7 +74,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaResultListDiv extends Panel {
 
     @JsonProperty("btnIkkatsuShinsa")
     public void setBtnIkkatsuShinsa(Button btnIkkatsuShinsa) {
-        this.btnIkkatsuShinsa=btnIkkatsuShinsa;
+        this.btnIkkatsuShinsa = btnIkkatsuShinsa;
     }
 
 }
