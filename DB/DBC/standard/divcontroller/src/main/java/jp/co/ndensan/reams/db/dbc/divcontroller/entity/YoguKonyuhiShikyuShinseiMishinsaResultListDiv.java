@@ -5,7 +5,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgMishinsaShikyuShinseiList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -24,8 +24,10 @@ public class YoguKonyuhiShikyuShinseiMishinsaResultListDiv extends Panel {
      */
     @JsonProperty("txtShinsaDate")
     private TextBoxDate txtShinsaDate;
-    @JsonProperty("dgMishinsaShikyuShinseiList")
-    private DataGrid<dgMishinsaShikyuShinseiList_Row> dgMishinsaShikyuShinseiList;
+    @JsonProperty("btnkari")
+    private Button btnkari;
+    @JsonProperty("dgYoguKonyuhiShisaMishinsaShikyuShinseiList")
+    private DataGrid<dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row> dgYoguKonyuhiShisaMishinsaShikyuShinseiList;
     @JsonProperty("btnIkkatsuShinsa")
     private Button btnIkkatsuShinsa;
 
@@ -45,14 +47,24 @@ public class YoguKonyuhiShikyuShinseiMishinsaResultListDiv extends Panel {
         this.txtShinsaDate=txtShinsaDate;
     }
 
-    @JsonProperty("dgMishinsaShikyuShinseiList")
-    public DataGrid<dgMishinsaShikyuShinseiList_Row> getDgMishinsaShikyuShinseiList() {
-        return dgMishinsaShikyuShinseiList;
+    @JsonProperty("btnkari")
+    public Button getBtnkari() {
+        return btnkari;
     }
 
-    @JsonProperty("dgMishinsaShikyuShinseiList")
-    public void setDgMishinsaShikyuShinseiList(DataGrid<dgMishinsaShikyuShinseiList_Row> dgMishinsaShikyuShinseiList) {
-        this.dgMishinsaShikyuShinseiList=dgMishinsaShikyuShinseiList;
+    @JsonProperty("btnkari")
+    public void setBtnkari(Button btnkari) {
+        this.btnkari=btnkari;
+    }
+
+    @JsonProperty("dgYoguKonyuhiShisaMishinsaShikyuShinseiList")
+    public DataGrid<dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row> getDgYoguKonyuhiShisaMishinsaShikyuShinseiList() {
+        return dgYoguKonyuhiShisaMishinsaShikyuShinseiList;
+    }
+
+    @JsonProperty("dgYoguKonyuhiShisaMishinsaShikyuShinseiList")
+    public void setDgYoguKonyuhiShisaMishinsaShikyuShinseiList(DataGrid<dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row> dgYoguKonyuhiShisaMishinsaShikyuShinseiList) {
+        this.dgYoguKonyuhiShisaMishinsaShikyuShinseiList=dgYoguKonyuhiShisaMishinsaShikyuShinseiList;
     }
 
     @JsonProperty("btnIkkatsuShinsa")

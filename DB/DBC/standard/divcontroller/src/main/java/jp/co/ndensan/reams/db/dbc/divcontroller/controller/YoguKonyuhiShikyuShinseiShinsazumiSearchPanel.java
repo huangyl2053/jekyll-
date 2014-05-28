@@ -3,35 +3,49 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.YoguKonyuhiShikyuShinseiShinsazumiResultListDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgMishinsaShikyuShinseiList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.YoguKonyuhiShikyuShinseiShinsazumiSearchPanelDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgYoguKonyuhiKetteiMishinsaShikyuShinseiList_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 
 /**
  * 福祉用具購入費支給申請決定 福祉用具購入費支給申請決定のパネルです。
  *
  * @author n8223
  */
-public class YoguKonyuhiShikyuShinseiShinsazumiResultList {
+public class YoguKonyuhiShikyuShinseiShinsazumiSearchPanel {
+    
+        /*
+     * 福祉用具購入費支給申請決定 審査日の情報を表示する。
+     */
+      public ResponseData<YoguKonyuhiShikyuShinseiShinsazumiSearchPanelDiv> onLoad(YoguKonyuhiShikyuShinseiShinsazumiSearchPanelDiv panel) {
+        ResponseData<YoguKonyuhiShikyuShinseiShinsazumiSearchPanelDiv> response = new ResponseData<>();
 
+        panel.getYoguKonyuhiShikyuShinseiShinsazumiSearchCondition().getTxtShinsaDateRange().setFromPlaceHolder(new RString("平26.07.01"));
+        panel.getYoguKonyuhiShikyuShinseiShinsazumiSearchCondition().getTxtShinsaDateRange().setToPlaceHolder(new RString("平26.07.31"));
+
+        response.data = panel;
+        return response;
+
+    }
+  
     /*
      * 福祉用具購入費支給申請決定 審査済支給申請一覧情報を表示する。
      */
-    public ResponseData<YoguKonyuhiShikyuShinseiShinsazumiResultListDiv> onClick_btnSearchMishinsa(YoguKonyuhiShikyuShinseiShinsazumiResultListDiv panel) {
-        ResponseData<YoguKonyuhiShikyuShinseiShinsazumiResultListDiv> response = new ResponseData<>();
+    public ResponseData<YoguKonyuhiShikyuShinseiShinsazumiSearchPanelDiv> onClick_btnSearchMishinsa(YoguKonyuhiShikyuShinseiShinsazumiSearchPanelDiv panel) {
+        ResponseData<YoguKonyuhiShikyuShinseiShinsazumiSearchPanelDiv> response = new ResponseData<>();
 
         //TO DO 2014.5.20 追加決定日（審査済分検索ボタン押下、表示される）
         setKetteiDateClear(panel);
@@ -42,15 +56,15 @@ public class YoguKonyuhiShikyuShinseiShinsazumiResultList {
         return response;
 
     }
-    
+
     /**
      * 福祉用具購入費支給申請決定 審査済決定日をクリア処理が行う
      *
      * @param panel YoguKonyuhiShikyuShinseiMishinsaResultListDiv
      * @return PanelDivのResponseData
      */
-    private void setKetteiDateClear(YoguKonyuhiShikyuShinseiShinsazumiResultListDiv panel) {
-        panel.getTxtKetteiDate().setValue(new RDate("20140712"));
+    private void setKetteiDateClear(YoguKonyuhiShikyuShinseiShinsazumiSearchPanelDiv panel) {
+        panel.getYoguKonyuhiShikyuShinseiShinsazumiResultList().getTxtKetteiDate().setValue(new RDate("20140712"));
     }
 
     /**
@@ -59,10 +73,10 @@ public class YoguKonyuhiShikyuShinseiShinsazumiResultList {
      * @param panel YoguKonyuhiShikyuShinseiMishinsaResultListDiv
      * @return PanelDivのResponseData
      */
-    private void setShinseiShinsazumiData(YoguKonyuhiShikyuShinseiShinsazumiResultListDiv panel) {
+    private void setShinseiShinsazumiData(YoguKonyuhiShikyuShinseiShinsazumiSearchPanelDiv panel) {
 
-        List<dgMishinsaShikyuShinseiList_Row> arraydata = createRowShinseiShinsazumiData();
-        DataGrid<dgMishinsaShikyuShinseiList_Row> grid = panel.getDgMishinsaShikyuShinseiList();
+        List<dgYoguKonyuhiKetteiMishinsaShikyuShinseiList_Row> arraydata = createRowShinseiShinsazumiData();
+        DataGrid<dgYoguKonyuhiKetteiMishinsaShikyuShinseiList_Row> grid = panel.getYoguKonyuhiShikyuShinseiShinsazumiResultList().getDgYoguKonyuhiKetteiMishinsaShikyuShinseiList();
         grid.setDataSource(arraydata);
 
     }
@@ -70,9 +84,9 @@ public class YoguKonyuhiShikyuShinseiShinsazumiResultList {
     /*
      *審査済支給申請一覧情報の初期値をセットします。
      */
-    private List<dgMishinsaShikyuShinseiList_Row> createRowShinseiShinsazumiData() {
+    private List<dgYoguKonyuhiKetteiMishinsaShikyuShinseiList_Row> createRowShinseiShinsazumiData() {
 
-        List<dgMishinsaShikyuShinseiList_Row> arrayDataList = new ArrayList<>();
+        List<dgYoguKonyuhiKetteiMishinsaShikyuShinseiList_Row> arrayDataList = new ArrayList<>();
 
         arrayDataList.add(createRowShinseiShinsazumiData(
                 "20140701",
@@ -210,7 +224,7 @@ public class YoguKonyuhiShikyuShinseiShinsazumiResultList {
     /*
      *引数を元にデータグリッド内に挿入する支給審査済データを作成します。
      */
-    private dgMishinsaShikyuShinseiList_Row createRowShinseiShinsazumiData(String 支給申請日,
+    private dgYoguKonyuhiKetteiMishinsaShikyuShinseiList_Row createRowShinseiShinsazumiData(String 支給申請日,
             String 提供年月,
             String 被保番号,
             String 氏名,
@@ -222,7 +236,7 @@ public class YoguKonyuhiShikyuShinseiShinsazumiResultList {
             String 整理番号
     ) {
 
-        dgMishinsaShikyuShinseiList_Row rowShinseiShinsazumiData = new dgMishinsaShikyuShinseiList_Row(
+        dgYoguKonyuhiKetteiMishinsaShikyuShinseiList_Row rowShinseiShinsazumiData = new dgYoguKonyuhiKetteiMishinsaShikyuShinseiList_Row(
                 new TextBoxDate(),
                 new TextBoxDate(),
                 new TextBoxCode(),
@@ -249,6 +263,6 @@ public class YoguKonyuhiShikyuShinseiShinsazumiResultList {
 
     }
 
-
-
+ 
 }
+

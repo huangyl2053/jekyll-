@@ -7,20 +7,20 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.CommonButtonAreaDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgMishinsaShikyuShinseiList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.YoguKonyuhiShikyuShinseiShinsaModifyCommonButtonAreaDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
  *
  * @author n8223
  */
-public class CommonButtonArea {
+public class YoguKonyuhiShikyuShinseiShinsaModifyCommonButtonArea {
         
-        public ResponseData<CommonButtonAreaDiv> onClick_btnIkkatsuShinsa(CommonButtonAreaDiv panel) {
-        ResponseData<CommonButtonAreaDiv> response = new ResponseData<>();
+        public ResponseData<YoguKonyuhiShikyuShinseiShinsaModifyCommonButtonAreaDiv> onClick_btnIkkatsuShinsa(YoguKonyuhiShikyuShinseiShinsaModifyCommonButtonAreaDiv panel) {
+        ResponseData<YoguKonyuhiShikyuShinseiShinsaModifyCommonButtonAreaDiv> response = new ResponseData<>();
 
         panel.getBtnSaveShinsaContents().setDisabled(false);
+       
        
         response.data = panel;
         return response;

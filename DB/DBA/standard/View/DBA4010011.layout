@@ -33,6 +33,7 @@
        "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
@@ -74,6 +75,7 @@
        "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
@@ -115,6 +117,7 @@
        "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
@@ -156,6 +159,7 @@
        "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
@@ -197,6 +201,7 @@
        "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
@@ -248,7 +253,8 @@
      "eraseBorderRight": true,
      "eraseBorderLeft": true,
      "backgroundColor": 0,
-     "widthAuto": false
+     "widthAuto": false,
+     "isGroupBox": false
     },
     {
      "fieldName": "DBCommonSearchInfoPanel",
@@ -279,6 +285,7 @@
        "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
@@ -330,7 +337,8 @@
      "eraseBorderRight": true,
      "eraseBorderLeft": true,
      "backgroundColor": 0,
-     "widthAuto": false
+     "widthAuto": false,
+     "isGroupBox": false
     },
     {
      "fieldName": "MaeShorishaRirekiPanel",
@@ -411,7 +419,8 @@
      "eraseBorderRight": true,
      "eraseBorderLeft": true,
      "backgroundColor": 0,
-     "widthAuto": false
+     "widthAuto": false,
+     "isGroupBox": false
     },
     {
      "fieldName": "HihokenshaSearchButton",
@@ -432,7 +441,10 @@
      "marginRight": "XL",
      "text": "該当者を検索する",
      "onClick": "onClick_HihokenshaSearch",
-     "imageFileUrl": ""
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
     }
    ],
    "controlType": "Panel",
@@ -470,7 +482,8 @@
    "eraseBorderRight": false,
    "eraseBorderLeft": false,
    "backgroundColor": 0,
-   "widthAuto": false
+   "widthAuto": false,
+   "isGroupBox": false
   },
   {
    "fieldName": "HihokenshaSearchGaitoshaPanel",
@@ -494,7 +507,10 @@
      "marginRight": "XL",
      "text": "被保険者の情報を照会する",
      "onClick": "onClick_HihokenshaSelect",
-     "imageFileUrl": ""
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
     },
     {
      "fieldName": "dgHihokenshaSearchGaitosha",
@@ -791,13 +807,14 @@
      "height": "Auto",
      "onSort": "",
      "onSelect": "",
+     "onSelectByDblClick": "",
      "onOnlyRow": "onlyRow_HihokenshaSearchGaitoshaGrid",
      "onNoRow": "",
      "onMultiRows": "",
      "sortOrder": "jusho",
      "isAscending": true,
      "filterList": [],
-     "clickedRowId": -1
+     "activeRowId": -1
     }
    ],
    "controlType": "Panel",
@@ -847,7 +864,8 @@
    "eraseBorderRight": false,
    "eraseBorderLeft": false,
    "backgroundColor": 0,
-   "widthAuto": false
+   "widthAuto": false,
+   "isGroupBox": false
   },
   {
    "fieldName": "HihokenshaInfoPanel",
@@ -881,6 +899,7 @@
        "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
@@ -922,6 +941,7 @@
        "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
@@ -963,6 +983,7 @@
        "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
@@ -1004,6 +1025,7 @@
        "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
@@ -1045,6 +1067,7 @@
        "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
@@ -1099,9 +1122,9 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "permitCharactor": "./_-",
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "lblJusho",
@@ -1120,6 +1143,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "required": false,
        "isPrivateInfo": false,
        "text": "住所",
        "align": 2
@@ -1150,6 +1174,7 @@
        "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
@@ -1191,6 +1216,7 @@
        "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
@@ -1232,6 +1258,7 @@
        "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
@@ -1273,6 +1300,7 @@
        "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
@@ -1314,6 +1342,7 @@
        "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
@@ -1355,6 +1384,7 @@
        "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
@@ -1396,6 +1426,7 @@
        "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
@@ -1437,6 +1468,7 @@
        "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
@@ -1488,7 +1520,8 @@
      "eraseBorderRight": true,
      "eraseBorderLeft": true,
      "backgroundColor": 0,
-     "widthAuto": false
+     "widthAuto": false,
+     "isGroupBox": false
     },
     {
      "fieldName": "DBCommonInfoPanel",
@@ -1519,6 +1552,7 @@
        "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
@@ -1560,6 +1594,7 @@
        "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
@@ -1605,9 +1640,9 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "permitCharactor": "",
        "ymdKubun": 2,
        "displayFormat": 0,
+       "permitCharactor": "",
        "fromPlaceHolder": "",
        "toPlaceHolder": "",
        "minDate": "",
@@ -1643,6 +1678,7 @@
        "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
@@ -1675,6 +1711,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "required": false,
        "isPrivateInfo": false,
        "text": "旧市町村",
        "align": 2
@@ -1705,6 +1742,7 @@
        "textKind": 2,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
@@ -1747,6 +1785,7 @@
        "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
+       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
@@ -1798,7 +1837,8 @@
      "eraseBorderRight": true,
      "eraseBorderLeft": true,
      "backgroundColor": 0,
-     "widthAuto": false
+     "widthAuto": false,
+     "isGroupBox": false
     }
    ],
    "controlType": "Panel",
@@ -1848,7 +1888,8 @@
    "eraseBorderRight": false,
    "eraseBorderLeft": false,
    "backgroundColor": 0,
-   "widthAuto": false
+   "widthAuto": false,
+   "isGroupBox": false
   },
   {
    "fieldName": "HihokenshaDaichoRirekiPanel",
@@ -1872,7 +1913,10 @@
      "marginRight": "XS",
      "text": "その他詳細情報を確認する",
      "onClick": "",
-     "imageFileUrl": ""
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
     },
     {
      "fieldName": "btnShinseiTodokedeInfo",
@@ -1893,7 +1937,10 @@
      "marginRight": "XS",
      "text": "届出情報を確認する",
      "onClick": "",
-     "imageFileUrl": ""
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
     },
     {
      "fieldName": "dgHihokenshaDaichoIdoRireki",
@@ -2218,13 +2265,14 @@
      "height": "S",
      "onSort": "",
      "onSelect": "",
+     "onSelectByDblClick": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
      "sortOrder": "ichigoHihokenshaNenreiTotatsuYMD",
      "isAscending": true,
      "filterList": [],
-     "clickedRowId": -1
+     "activeRowId": -1
     }
    ],
    "controlType": "Panel",
@@ -2274,7 +2322,8 @@
    "eraseBorderRight": false,
    "eraseBorderLeft": false,
    "backgroundColor": 0,
-   "widthAuto": false
+   "widthAuto": false,
+   "isGroupBox": false
   },
   {
    "fieldName": "HihokenshaDetailPanel",
@@ -2436,13 +2485,14 @@
          "height": "S",
          "onSort": "",
          "onSelect": "",
+         "onSelectByDblClick": "",
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
          "sortOrder": "jigyoshaNo",
          "isAscending": true,
          "filterList": [],
-         "clickedRowId": -1
+         "activeRowId": -1
         }
        ],
        "controlType": "TabPanel",
@@ -2582,13 +2632,14 @@
          "height": "S",
          "onSort": "",
          "onSelect": "",
+         "onSelectByDblClick": "",
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
          "sortOrder": "name",
          "isAscending": true,
          "filterList": [],
-         "clickedRowId": -1
+         "activeRowId": -1
         }
        ],
        "controlType": "TabPanel",
@@ -2698,13 +2749,14 @@
          "height": "S",
          "onSort": "",
          "onSelect": "",
+         "onSelectByDblClick": "",
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
          "sortOrder": "",
          "isAscending": true,
          "filterList": [],
-         "clickedRowId": -1
+         "activeRowId": -1
         }
        ],
        "controlType": "TabPanel",
@@ -2800,13 +2852,14 @@
          "height": "S",
          "onSort": "",
          "onSelect": "",
+         "onSelectByDblClick": "",
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
          "sortOrder": "",
          "isAscending": true,
          "filterList": [],
-         "clickedRowId": -1
+         "activeRowId": -1
         }
        ],
        "controlType": "TabPanel",
@@ -2934,13 +2987,14 @@
          "height": "S",
          "onSort": "",
          "onSelect": "",
+         "onSelectByDblClick": "",
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
          "sortOrder": "shubetsu",
          "isAscending": true,
          "filterList": [],
-         "clickedRowId": -1
+         "activeRowId": -1
         }
        ],
        "controlType": "TabPanel",
@@ -3006,7 +3060,10 @@
      "marginRight": "XL",
      "text": "照会画面に戻る",
      "onClick": "",
-     "imageFileUrl": ""
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
     }
    ],
    "controlType": "Panel",
@@ -3056,7 +3113,8 @@
    "eraseBorderRight": false,
    "eraseBorderLeft": false,
    "backgroundColor": 0,
-   "widthAuto": false
+   "widthAuto": false,
+   "isGroupBox": false
   },
   {
    "fieldName": "ShinseiTodokedeInfo",
@@ -3136,13 +3194,14 @@
      "height": "S",
      "onSort": "",
      "onSelect": "",
+     "onSelectByDblClick": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
      "sortOrder": "",
      "isAscending": true,
      "filterList": [],
-     "clickedRowId": -1
+     "activeRowId": -1
     },
     {
      "fieldName": "btnBackTodokedeInfo",
@@ -3163,7 +3222,10 @@
      "marginRight": "XL",
      "text": "照会画面に戻る",
      "onClick": "",
-     "imageFileUrl": ""
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
     }
    ],
    "controlType": "Panel",
@@ -3213,7 +3275,8 @@
    "eraseBorderRight": false,
    "eraseBorderLeft": false,
    "backgroundColor": 0,
-   "widthAuto": false
+   "widthAuto": false,
+   "isGroupBox": false
   },
   {
    "fieldName": "KyotsuPanel",
@@ -3237,14 +3300,17 @@
      "marginRight": "XS",
      "text": "再検索を行う",
      "onClick": "",
-     "imageFileUrl": ""
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
     }
    ],
    "controlType": "Panel",
    "width": "1000",
    "visible": true,
    "displayNone": false,
-   "disabled": true,
+   "disabled": false,
    "accessKey": "",
    "nextFocusFieldName": "",
    "wrap": true,
@@ -3287,7 +3353,8 @@
    "eraseBorderRight": true,
    "eraseBorderLeft": true,
    "backgroundColor": 0,
-   "widthAuto": false
+   "widthAuto": true,
+   "isGroupBox": false
   }
  ],
  "controlType": null,
@@ -3569,5 +3636,7 @@
   [
    "KyotsuPanel"
   ]
- ]
+ ],
+ "panelMargin": 1,
+ "controlMargin": 1
 }
