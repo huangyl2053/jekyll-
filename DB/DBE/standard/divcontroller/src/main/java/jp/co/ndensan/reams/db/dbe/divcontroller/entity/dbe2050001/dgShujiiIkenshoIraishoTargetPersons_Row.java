@@ -3,13 +3,14 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2050001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon May 19 19:46:19 JST 2014 
+ * Wed May 28 14:59:17 JST 2014 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 
 /**
@@ -20,70 +21,84 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class dgShujiiIkenshoIraishoTargetPersons_Row extends DataRow {
 
-    private RString chosaKikanCode;
-    private RString chosaKikanName;
-    private RString chosainCode;
-    private RString chosainName;
+    private RString iryoKikanNo;
+    private RString iryoKikanName;
+    private RString shujiiNo;
+    private RString shujiiName;
     private RString hihokenshaNo;
-    private RString hihokenshaName;
-    private RString shinseiDate;
+    private RString shimei;
+    private RString kanaShimei;
+    private RString shimeiWithKanaShimei;
+    private TextBoxFlexibleDate shinseiDate;
     private RString shinseiKubun;
-    private RString sakuseiIraiDate;
-    private RString iraishoHakkoDate;
+    private TextBoxFlexibleDate sakuseiIraiDate;
+    private TextBoxFlexibleDate iraishoHakkoDate;
 
     public dgShujiiIkenshoIraishoTargetPersons_Row() {
         super();
     }
 
-    public dgShujiiIkenshoIraishoTargetPersons_Row(RString chosaKikanCode, RString chosaKikanName, RString chosainCode, RString chosainName, RString hihokenshaNo, RString hihokenshaName, RString shinseiDate, RString shinseiKubun, RString sakuseiIraiDate, RString iraishoHakkoDate) {
+    public dgShujiiIkenshoIraishoTargetPersons_Row(RString iryoKikanNo, RString iryoKikanName, RString shujiiNo, RString shujiiName, RString hihokenshaNo, RString shimei, RString kanaShimei, RString shimeiWithKanaShimei, TextBoxFlexibleDate shinseiDate, RString shinseiKubun, TextBoxFlexibleDate sakuseiIraiDate, TextBoxFlexibleDate iraishoHakkoDate) {
         super();
-        this.setOriginalData("chosaKikanCode", chosaKikanCode);
-        this.setOriginalData("chosaKikanName", chosaKikanName);
-        this.setOriginalData("chosainCode", chosainCode);
-        this.setOriginalData("chosainName", chosainName);
+        this.setOriginalData("iryoKikanNo", iryoKikanNo);
+        this.setOriginalData("iryoKikanName", iryoKikanName);
+        this.setOriginalData("shujiiNo", shujiiNo);
+        this.setOriginalData("shujiiName", shujiiName);
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
-        this.setOriginalData("hihokenshaName", hihokenshaName);
+        this.setOriginalData("shimei", shimei);
+        this.setOriginalData("kanaShimei", kanaShimei);
+        this.setOriginalData("shimeiWithKanaShimei", shimeiWithKanaShimei);
         this.setOriginalData("shinseiDate", shinseiDate);
         this.setOriginalData("shinseiKubun", shinseiKubun);
         this.setOriginalData("sakuseiIraiDate", sakuseiIraiDate);
         this.setOriginalData("iraishoHakkoDate", iraishoHakkoDate);
-        this.chosaKikanCode = chosaKikanCode;
-        this.chosaKikanName = chosaKikanName;
-        this.chosainCode = chosainCode;
-        this.chosainName = chosainName;
+        this.iryoKikanNo = iryoKikanNo;
+        this.iryoKikanName = iryoKikanName;
+        this.shujiiNo = shujiiNo;
+        this.shujiiName = shujiiName;
         this.hihokenshaNo = hihokenshaNo;
-        this.hihokenshaName = hihokenshaName;
+        this.shimei = shimei;
+        this.kanaShimei = kanaShimei;
+        this.shimeiWithKanaShimei = shimeiWithKanaShimei;
         this.shinseiDate = shinseiDate;
         this.shinseiKubun = shinseiKubun;
         this.sakuseiIraiDate = sakuseiIraiDate;
         this.iraishoHakkoDate = iraishoHakkoDate;
     }
 
-    public RString getChosaKikanCode() {
-        return chosaKikanCode;
+    public RString getIryoKikanNo() {
+        return iryoKikanNo;
     }
 
-    public RString getChosaKikanName() {
-        return chosaKikanName;
+    public RString getIryoKikanName() {
+        return iryoKikanName;
     }
 
-    public RString getChosainCode() {
-        return chosainCode;
+    public RString getShujiiNo() {
+        return shujiiNo;
     }
 
-    public RString getChosainName() {
-        return chosainName;
+    public RString getShujiiName() {
+        return shujiiName;
     }
 
     public RString getHihokenshaNo() {
         return hihokenshaNo;
     }
 
-    public RString getHihokenshaName() {
-        return hihokenshaName;
+    public RString getShimei() {
+        return shimei;
     }
 
-    public RString getShinseiDate() {
+    public RString getKanaShimei() {
+        return kanaShimei;
+    }
+
+    public RString getShimeiWithKanaShimei() {
+        return shimeiWithKanaShimei;
+    }
+
+    public TextBoxFlexibleDate getShinseiDate() {
         return shinseiDate;
     }
 
@@ -91,32 +106,32 @@ public class dgShujiiIkenshoIraishoTargetPersons_Row extends DataRow {
         return shinseiKubun;
     }
 
-    public RString getSakuseiIraiDate() {
+    public TextBoxFlexibleDate getSakuseiIraiDate() {
         return sakuseiIraiDate;
     }
 
-    public RString getIraishoHakkoDate() {
+    public TextBoxFlexibleDate getIraishoHakkoDate() {
         return iraishoHakkoDate;
     }
 
-    public void setChosaKikanCode(RString chosaKikanCode) {
-        this.setOriginalData("chosaKikanCode", chosaKikanCode);
-        this.chosaKikanCode = chosaKikanCode;
+    public void setIryoKikanNo(RString iryoKikanNo) {
+        this.setOriginalData("iryoKikanNo", iryoKikanNo);
+        this.iryoKikanNo = iryoKikanNo;
     }
 
-    public void setChosaKikanName(RString chosaKikanName) {
-        this.setOriginalData("chosaKikanName", chosaKikanName);
-        this.chosaKikanName = chosaKikanName;
+    public void setIryoKikanName(RString iryoKikanName) {
+        this.setOriginalData("iryoKikanName", iryoKikanName);
+        this.iryoKikanName = iryoKikanName;
     }
 
-    public void setChosainCode(RString chosainCode) {
-        this.setOriginalData("chosainCode", chosainCode);
-        this.chosainCode = chosainCode;
+    public void setShujiiNo(RString shujiiNo) {
+        this.setOriginalData("shujiiNo", shujiiNo);
+        this.shujiiNo = shujiiNo;
     }
 
-    public void setChosainName(RString chosainName) {
-        this.setOriginalData("chosainName", chosainName);
-        this.chosainName = chosainName;
+    public void setShujiiName(RString shujiiName) {
+        this.setOriginalData("shujiiName", shujiiName);
+        this.shujiiName = shujiiName;
     }
 
     public void setHihokenshaNo(RString hihokenshaNo) {
@@ -124,12 +139,22 @@ public class dgShujiiIkenshoIraishoTargetPersons_Row extends DataRow {
         this.hihokenshaNo = hihokenshaNo;
     }
 
-    public void setHihokenshaName(RString hihokenshaName) {
-        this.setOriginalData("hihokenshaName", hihokenshaName);
-        this.hihokenshaName = hihokenshaName;
+    public void setShimei(RString shimei) {
+        this.setOriginalData("shimei", shimei);
+        this.shimei = shimei;
     }
 
-    public void setShinseiDate(RString shinseiDate) {
+    public void setKanaShimei(RString kanaShimei) {
+        this.setOriginalData("kanaShimei", kanaShimei);
+        this.kanaShimei = kanaShimei;
+    }
+
+    public void setShimeiWithKanaShimei(RString shimeiWithKanaShimei) {
+        this.setOriginalData("shimeiWithKanaShimei", shimeiWithKanaShimei);
+        this.shimeiWithKanaShimei = shimeiWithKanaShimei;
+    }
+
+    public void setShinseiDate(TextBoxFlexibleDate shinseiDate) {
         this.setOriginalData("shinseiDate", shinseiDate);
         this.shinseiDate = shinseiDate;
     }
@@ -139,12 +164,12 @@ public class dgShujiiIkenshoIraishoTargetPersons_Row extends DataRow {
         this.shinseiKubun = shinseiKubun;
     }
 
-    public void setSakuseiIraiDate(RString sakuseiIraiDate) {
+    public void setSakuseiIraiDate(TextBoxFlexibleDate sakuseiIraiDate) {
         this.setOriginalData("sakuseiIraiDate", sakuseiIraiDate);
         this.sakuseiIraiDate = sakuseiIraiDate;
     }
 
-    public void setIraishoHakkoDate(RString iraishoHakkoDate) {
+    public void setIraishoHakkoDate(TextBoxFlexibleDate iraishoHakkoDate) {
         this.setOriginalData("iraishoHakkoDate", iraishoHakkoDate);
         this.iraishoHakkoDate = iraishoHakkoDate;
     }

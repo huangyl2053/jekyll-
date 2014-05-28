@@ -21,16 +21,10 @@ public class SerachCriteriaForShujiiIkenshoIraishoTargetPersonsDiv extends Panel
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblSakuseiIraiDate")
-    private Label lblSakuseiIraiDate;
     @JsonProperty("txtSakuseiIraiDateRange")
     private TextBoxDateRange txtSakuseiIraiDateRange;
-    @JsonProperty("lblShinseiDateOfShujii")
-    private Label lblShinseiDateOfShujii;
     @JsonProperty("txtShinseiDateRangeOfIkensho")
     private TextBoxDateRange txtShinseiDateRangeOfIkensho;
-    @JsonProperty("lblIkenshoIraishoHakkoExistence")
-    private Label lblIkenshoIraishoHakkoExistence;
     @JsonProperty("chkIkenshoIraishoHakkoExistence")
     private CheckBoxList chkIkenshoIraishoHakkoExistence;
 
@@ -40,16 +34,6 @@ public class SerachCriteriaForShujiiIkenshoIraishoTargetPersonsDiv extends Panel
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblSakuseiIraiDate")
-    public Label getLblSakuseiIraiDate() {
-        return lblSakuseiIraiDate;
-    }
-
-    @JsonProperty("lblSakuseiIraiDate")
-    public void setLblSakuseiIraiDate(Label lblSakuseiIraiDate) {
-        this.lblSakuseiIraiDate=lblSakuseiIraiDate;
-    }
-
     @JsonProperty("txtSakuseiIraiDateRange")
     public TextBoxDateRange getTxtSakuseiIraiDateRange() {
         return txtSakuseiIraiDateRange;
@@ -60,16 +44,6 @@ public class SerachCriteriaForShujiiIkenshoIraishoTargetPersonsDiv extends Panel
         this.txtSakuseiIraiDateRange=txtSakuseiIraiDateRange;
     }
 
-    @JsonProperty("lblShinseiDateOfShujii")
-    public Label getLblShinseiDateOfShujii() {
-        return lblShinseiDateOfShujii;
-    }
-
-    @JsonProperty("lblShinseiDateOfShujii")
-    public void setLblShinseiDateOfShujii(Label lblShinseiDateOfShujii) {
-        this.lblShinseiDateOfShujii=lblShinseiDateOfShujii;
-    }
-
     @JsonProperty("txtShinseiDateRangeOfIkensho")
     public TextBoxDateRange getTxtShinseiDateRangeOfIkensho() {
         return txtShinseiDateRangeOfIkensho;
@@ -78,16 +52,6 @@ public class SerachCriteriaForShujiiIkenshoIraishoTargetPersonsDiv extends Panel
     @JsonProperty("txtShinseiDateRangeOfIkensho")
     public void setTxtShinseiDateRangeOfIkensho(TextBoxDateRange txtShinseiDateRangeOfIkensho) {
         this.txtShinseiDateRangeOfIkensho=txtShinseiDateRangeOfIkensho;
-    }
-
-    @JsonProperty("lblIkenshoIraishoHakkoExistence")
-    public Label getLblIkenshoIraishoHakkoExistence() {
-        return lblIkenshoIraishoHakkoExistence;
-    }
-
-    @JsonProperty("lblIkenshoIraishoHakkoExistence")
-    public void setLblIkenshoIraishoHakkoExistence(Label lblIkenshoIraishoHakkoExistence) {
-        this.lblIkenshoIraishoHakkoExistence=lblIkenshoIraishoHakkoExistence;
     }
 
     @JsonProperty("chkIkenshoIraishoHakkoExistence")

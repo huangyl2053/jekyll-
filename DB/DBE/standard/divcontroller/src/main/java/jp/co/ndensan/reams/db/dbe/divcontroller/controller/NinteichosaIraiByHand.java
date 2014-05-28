@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,13 +17,14 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.dgChosaItakusa
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgNinteichosaIraiListForByHand_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgShozokuChosainList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil.Converter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.DataGridUtil;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
  * NinteichosaIraiByHandDivを操作するためのクラスです。
@@ -219,105 +219,111 @@ public class NinteichosaIraiByHand {
         private static final List<dgChosaItakusakiList_Row> ITAKUSAKI_LIST;
 
         static {
-            TARGET_LIST = new ArrayList<>();
-            CHOSAIN_LIST = new ArrayList<>();
-            ITAKUSAKI_LIST = new ArrayList();
-            init(DemoDataType.依頼者一覧);
-            init(DemoDataType.所属調査員一覧);
-            init(DemoDataType.調査委託先一覧);
+            TARGET_LIST = createList(DemoDataType.依頼者一覧);
+            CHOSAIN_LIST = createList(DemoDataType.所属調査員一覧);
+            ITAKUSAKI_LIST = createList(DemoDataType.調査委託先一覧);
         }
 
-        private static void init(DemoDataType type) {
-            try {
-                List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(type.getPath());
-                for (Map target : targetSource) {
-                    switch (type) {
-                        case 依頼者一覧:
-                            TARGET_LIST.add(to_dgNinteichosaIraiListForByHand_Row(target));
-                            break;
-                        case 所属調査員一覧:
-                            CHOSAIN_LIST.add(to_dgShozokuChosainList_Row(target));
-                            break;
-                        case 調査委託先一覧:
-                            ITAKUSAKI_LIST.add(to_dgChosaItakusakiList(target));
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+        private static <T> List<T> createList(DemoDataType type) {
+            List<HashMap> dataFromYaml = YamlLoader.FOR_DBE.loadAsList(type.getPath());
+            return YamlUtil.convertList(dataFromYaml, createDataEditor(type));
+        }
+
+        private static Converter.IConverter createDataEditor(DemoDataType type) {
+            switch (type) {
+                case 依頼者一覧:
+                    return new Converter.IConverter<dgNinteichosaIraiListForByHand_Row>() {
+
+                        @Override
+                        public dgNinteichosaIraiListForByHand_Row exec(Map map) {
+                            return to_dgNinteichosaIraiListForByHand_Row(map);
+
+                        }
+
+                    };
+                case 所属調査員一覧:
+                    return new Converter.IConverter<dgShozokuChosainList_Row>() {
+
+                        @Override
+                        public dgShozokuChosainList_Row exec(Map map) {
+                            return to_dgShozokuChosainList_Row(map);
+
+                        }
+
+                    };
+                case 調査委託先一覧:
+                    return new Converter.IConverter<dgChosaItakusakiList_Row>() {
+
+                        @Override
+                        public dgChosaItakusakiList_Row exec(Map map) {
+                            return to_dgChosaItakusakiList_Row(map);
+
+                        }
+
+                    };
+                default:
+                    return Converter.NO_CHANGE;
             }
+
         }
 
-        private static dgChosaItakusakiList_Row to_dgChosaItakusakiList(Map map) {
+        private static dgChosaItakusakiList_Row to_dgChosaItakusakiList_Row(Map map) {
             return new dgChosaItakusakiList_Row(
-                    toRString(map.get("調査委託先番号")),
-                    toRString(map.get("調査委託先名称")),
-                    toRString(map.get("割付定員")),
-                    toRString(map.get("割付済み")),
-                    toRString(map.get("割付地区査員番号")));
+                    YamlUtil.toRString(map.get("調査委託先番号")),
+                    YamlUtil.toRString(map.get("調査委託先名称")),
+                    YamlUtil.toRString(map.get("割付定員")),
+                    YamlUtil.toRString(map.get("割付済み")),
+                    YamlUtil.toRString(map.get("割付地区査員番号")));
         }
 
         private static dgShozokuChosainList_Row to_dgShozokuChosainList_Row(Map map) {
             return new dgShozokuChosainList_Row(new Button(),
-                    toRString(map.get("調査員番号")),
-                    toRString(map.get("調査員氏名")),
-                    toRString(map.get("割付済人数")),
-                    toRString(map.get("地区")),
-                    toRString(map.get("調査委託先番号")));
+                    YamlUtil.toRString(map.get("調査員番号")),
+                    YamlUtil.toRString(map.get("調査員氏名")),
+                    YamlUtil.toRString(map.get("割付済人数")),
+                    YamlUtil.toRString(map.get("地区")),
+                    YamlUtil.toRString(map.get("調査委託先番号")));
         }
 
         private static dgNinteichosaIraiListForByHand_Row to_dgNinteichosaIraiListForByHand_Row(Map map) {
-            RString shimei = toRString(map.get("氏名"));
-            RString kanaShimei = toRString(map.get("カナ氏名"));
+            RString shimei = YamlUtil.toRString(map.get("氏名"));
+            RString kanaShimei = YamlUtil.toRString(map.get("カナ氏名"));
             return new dgNinteichosaIraiListForByHand_Row(
-                    toBoolean(map.get("調査状況")),
-                    compose調査状況(toRString(map.get("調査状況"))),
+                    YamlUtil.toBoolean(map.get("調査状況")),
+                    compose調査状況(YamlUtil.toRString(map.get("調査状況"))),
                     new Button(),
-                    toRString(map.get("保険者番号")),
-                    toRString(map.get("市町村")),
-                    toRString(map.get("支所コード")),
-                    toRString(map.get("支所")),
-                    toRString(map.get("被保番号")),
+                    YamlUtil.toRString(map.get("保険者番号")),
+                    YamlUtil.toRString(map.get("市町村")),
+                    YamlUtil.toRString(map.get("支所コード")),
+                    YamlUtil.toRString(map.get("支所")),
+                    YamlUtil.toRString(map.get("被保番号")),
                     shimei,
                     kanaShimei,
                     DataGridUtil.lineFeedBetween(kanaShimei, shimei),
-                    toRString(map.get("認定申請区分")),
-                    toTextBoxFlexibleDate(map.get("認定申請日")),
-                    toRString(map.get("調査依頼区分")),
-                    toTextBoxFlexibleDate(map.get("調査依頼日")),
-                    toTextBoxFlexibleDate(map.get("調査期限日")),
-                    toTextBoxFlexibleDate(map.get("依頼書発行日")),
-                    toRString(map.get("調査委託先番号")),
-                    toRString(map.get("調査委託先名")),
-                    toRString(map.get("調査員番号")),
-                    toRString(map.get("調査員名")),
-                    toRString(map.get("前回調査委託先番号")),
-                    toRString(map.get("前回調査委託先名")),
-                    toRString(map.get("前回調査員番号")),
-                    toRString(map.get("前回調査員名")),
-                    toRString(map.get("前々回調査委託先番号")),
-                    toRString(map.get("前々回調査委託先名")),
-                    toRString(map.get("前々回調査員番号")),
-                    toRString(map.get("前々回調査員名")),
-                    toTextBoxFlexibleDate(map.get("督促日")),
-                    toRString(map.get("督促回数")),
-                    toRString(map.get("郵便番号")),
-                    toRString(map.get("住所")),
-                    toRString(map.get("入所施設"))
+                    YamlUtil.toRString(map.get("認定申請区分")),
+                    YamlUtil.toTextBoxFlexibleDate(map.get("認定申請日")),
+                    YamlUtil.toRString(map.get("調査依頼区分")),
+                    YamlUtil.toTextBoxFlexibleDate(map.get("調査依頼日")),
+                    YamlUtil.toTextBoxFlexibleDate(map.get("調査期限日")),
+                    YamlUtil.toTextBoxFlexibleDate(map.get("依頼書発行日")),
+                    YamlUtil.toRString(map.get("調査委託先番号")),
+                    YamlUtil.toRString(map.get("調査委託先名")),
+                    YamlUtil.toRString(map.get("調査員番号")),
+                    YamlUtil.toRString(map.get("調査員名")),
+                    YamlUtil.toRString(map.get("前回調査委託先番号")),
+                    YamlUtil.toRString(map.get("前回調査委託先名")),
+                    YamlUtil.toRString(map.get("前回調査員番号")),
+                    YamlUtil.toRString(map.get("前回調査員名")),
+                    YamlUtil.toRString(map.get("前々回調査委託先番号")),
+                    YamlUtil.toRString(map.get("前々回調査委託先名")),
+                    YamlUtil.toRString(map.get("前々回調査員番号")),
+                    YamlUtil.toRString(map.get("前々回調査員名")),
+                    YamlUtil.toTextBoxFlexibleDate(map.get("督促日")),
+                    YamlUtil.toRString(map.get("督促回数")),
+                    YamlUtil.toRString(map.get("郵便番号")),
+                    YamlUtil.toRString(map.get("住所")),
+                    YamlUtil.toRString(map.get("入所施設"))
             );
-        }
-
-        private static RString toRString(Object obj) {
-            if (obj == null) {
-                return RString.EMPTY;
-            }
-            return new RString(obj.toString());
-        }
-
-        private static boolean toBoolean(Object obj) {
-            return obj.toString().equals(Boolean.TRUE.toString());
         }
 
         private static RString compose調査状況(RString rstr) {
@@ -326,17 +332,6 @@ public class NinteichosaIraiByHand {
             } else {
                 return new RString("未済");
             }
-        }
-
-        private static TextBoxFlexibleDate toTextBoxFlexibleDate(Object obj) {
-            TextBoxFlexibleDate textBox = new TextBoxFlexibleDate();
-            RString date = toRString(obj);
-            if (date.equals(RString.EMPTY)) {
-                textBox.setValue(FlexibleDate.EMPTY);
-            } else {
-                textBox.setValue(new FlexibleDate(date));
-            }
-            return textBox;
         }
     }
     //</editor-fold>

@@ -21,16 +21,10 @@ public class ShujiiIkenshoIraishoRelatedDatesDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblShoriDateOfIkensho")
-    private Label lblShoriDateOfIkensho;
     @JsonProperty("txtShoriDateOfIkensho")
     private TextBoxDate txtShoriDateOfIkensho;
-    @JsonProperty("lblHakkoDateOfIkensho")
-    private Label lblHakkoDateOfIkensho;
     @JsonProperty("txtHakkoDateOfIkensho")
     private TextBoxDate txtHakkoDateOfIkensho;
-    @JsonProperty("lblKigenDateOfIkensho")
-    private Label lblKigenDateOfIkensho;
     @JsonProperty("txtKigenDateOfIkensho")
     private TextBoxDate txtKigenDateOfIkensho;
 
@@ -40,16 +34,6 @@ public class ShujiiIkenshoIraishoRelatedDatesDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblShoriDateOfIkensho")
-    public Label getLblShoriDateOfIkensho() {
-        return lblShoriDateOfIkensho;
-    }
-
-    @JsonProperty("lblShoriDateOfIkensho")
-    public void setLblShoriDateOfIkensho(Label lblShoriDateOfIkensho) {
-        this.lblShoriDateOfIkensho=lblShoriDateOfIkensho;
-    }
-
     @JsonProperty("txtShoriDateOfIkensho")
     public TextBoxDate getTxtShoriDateOfIkensho() {
         return txtShoriDateOfIkensho;
@@ -60,16 +44,6 @@ public class ShujiiIkenshoIraishoRelatedDatesDiv extends Panel {
         this.txtShoriDateOfIkensho=txtShoriDateOfIkensho;
     }
 
-    @JsonProperty("lblHakkoDateOfIkensho")
-    public Label getLblHakkoDateOfIkensho() {
-        return lblHakkoDateOfIkensho;
-    }
-
-    @JsonProperty("lblHakkoDateOfIkensho")
-    public void setLblHakkoDateOfIkensho(Label lblHakkoDateOfIkensho) {
-        this.lblHakkoDateOfIkensho=lblHakkoDateOfIkensho;
-    }
-
     @JsonProperty("txtHakkoDateOfIkensho")
     public TextBoxDate getTxtHakkoDateOfIkensho() {
         return txtHakkoDateOfIkensho;
@@ -78,16 +52,6 @@ public class ShujiiIkenshoIraishoRelatedDatesDiv extends Panel {
     @JsonProperty("txtHakkoDateOfIkensho")
     public void setTxtHakkoDateOfIkensho(TextBoxDate txtHakkoDateOfIkensho) {
         this.txtHakkoDateOfIkensho=txtHakkoDateOfIkensho;
-    }
-
-    @JsonProperty("lblKigenDateOfIkensho")
-    public Label getLblKigenDateOfIkensho() {
-        return lblKigenDateOfIkensho;
-    }
-
-    @JsonProperty("lblKigenDateOfIkensho")
-    public void setLblKigenDateOfIkensho(Label lblKigenDateOfIkensho) {
-        this.lblKigenDateOfIkensho=lblKigenDateOfIkensho;
     }
 
     @JsonProperty("txtKigenDateOfIkensho")
