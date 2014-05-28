@@ -52,5 +52,11 @@
             <artifactId>snakeyaml</artifactId>
             <version>1.13</version>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzDivController</artifactId>
+            <version>${project.version}</version>
+            <classifier>classes</classifier>
+        </dependency>
     </dependencies>
 </project>

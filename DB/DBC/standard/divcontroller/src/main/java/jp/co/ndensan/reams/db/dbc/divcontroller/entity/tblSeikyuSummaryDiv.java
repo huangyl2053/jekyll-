@@ -66,13 +66,13 @@ public class tblSeikyuSummaryDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblPayTotal() {
-        return this.cel12.getLblPayTotal();
+    public Label getLblHiyoTotal() {
+        return this.cel12.getLblHiyoTotal();
     }
 
     @JsonIgnore
-    public Label getLblHokenSeikyuAmount() {
-        return this.cel13.getLblHokenSeikyuAmount();
+    public Label getLblHokenTaishoHiyo() {
+        return this.cel13.getLblHokenTaishoHiyo();
     }
 
     @JsonIgnore
@@ -106,13 +106,13 @@ public class tblSeikyuSummaryDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblRiyoshaFutanAmount() {
-        return this.cel14.getLblRiyoshaFutanAmount();
+    public Label getLblHokenKyufuAmount() {
+        return this.cel14.getLblHokenKyufuAmount();
     }
 
     @JsonIgnore
-    public Label getLblLimitOverAmount() {
-        return this.cel15.getLblLimitOverAmount();
+    public Label getLblRiyoshaFutanAmount() {
+        return this.cel15.getLblRiyoshaFutanAmount();
     }
 
     @JsonIgnore
@@ -333,17 +333,17 @@ class cel11AttblSeikyuSummary extends TableCell {
  * @author 自動生成
  */
 class cel12AttblSeikyuSummary extends TableCell {
-    @JsonProperty("lblPayTotal")
-    private Label lblPayTotal;
+    @JsonProperty("lblHiyoTotal")
+    private Label lblHiyoTotal;
 
-    @JsonProperty("lblPayTotal")
-    public Label getLblPayTotal() {
-        return lblPayTotal;
+    @JsonProperty("lblHiyoTotal")
+    public Label getLblHiyoTotal() {
+        return lblHiyoTotal;
     }
 
-    @JsonProperty("lblPayTotal")
-    public void setLblPayTotal(Label lblPayTotal) {
-        this.lblPayTotal=lblPayTotal;
+    @JsonProperty("lblHiyoTotal")
+    public void setLblHiyoTotal(Label lblHiyoTotal) {
+        this.lblHiyoTotal=lblHiyoTotal;
     }
 
 }
@@ -353,17 +353,17 @@ class cel12AttblSeikyuSummary extends TableCell {
  * @author 自動生成
  */
 class cel13AttblSeikyuSummary extends TableCell {
-    @JsonProperty("lblHokenSeikyuAmount")
-    private Label lblHokenSeikyuAmount;
+    @JsonProperty("lblHokenTaishoHiyo")
+    private Label lblHokenTaishoHiyo;
 
-    @JsonProperty("lblHokenSeikyuAmount")
-    public Label getLblHokenSeikyuAmount() {
-        return lblHokenSeikyuAmount;
+    @JsonProperty("lblHokenTaishoHiyo")
+    public Label getLblHokenTaishoHiyo() {
+        return lblHokenTaishoHiyo;
     }
 
-    @JsonProperty("lblHokenSeikyuAmount")
-    public void setLblHokenSeikyuAmount(Label lblHokenSeikyuAmount) {
-        this.lblHokenSeikyuAmount=lblHokenSeikyuAmount;
+    @JsonProperty("lblHokenTaishoHiyo")
+    public void setLblHokenTaishoHiyo(Label lblHokenTaishoHiyo) {
+        this.lblHokenTaishoHiyo=lblHokenTaishoHiyo;
     }
 
 }
@@ -493,6 +493,26 @@ class cel33AttblSeikyuSummary extends TableCell {
  * @author 自動生成
  */
 class cel14AttblSeikyuSummary extends TableCell {
+    @JsonProperty("lblHokenKyufuAmount")
+    private Label lblHokenKyufuAmount;
+
+    @JsonProperty("lblHokenKyufuAmount")
+    public Label getLblHokenKyufuAmount() {
+        return lblHokenKyufuAmount;
+    }
+
+    @JsonProperty("lblHokenKyufuAmount")
+    public void setLblHokenKyufuAmount(Label lblHokenKyufuAmount) {
+        this.lblHokenKyufuAmount=lblHokenKyufuAmount;
+    }
+
+}
+/**
+ * cel15 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class cel15AttblSeikyuSummary extends TableCell {
     @JsonProperty("lblRiyoshaFutanAmount")
     private Label lblRiyoshaFutanAmount;
 
@@ -504,26 +524,6 @@ class cel14AttblSeikyuSummary extends TableCell {
     @JsonProperty("lblRiyoshaFutanAmount")
     public void setLblRiyoshaFutanAmount(Label lblRiyoshaFutanAmount) {
         this.lblRiyoshaFutanAmount=lblRiyoshaFutanAmount;
-    }
-
-}
-/**
- * cel15 のクラスファイル 
- * 
- * @author 自動生成
- */
-class cel15AttblSeikyuSummary extends TableCell {
-    @JsonProperty("lblLimitOverAmount")
-    private Label lblLimitOverAmount;
-
-    @JsonProperty("lblLimitOverAmount")
-    public Label getLblLimitOverAmount() {
-        return lblLimitOverAmount;
-    }
-
-    @JsonProperty("lblLimitOverAmount")
-    public void setLblLimitOverAmount(Label lblLimitOverAmount) {
-        this.lblLimitOverAmount=lblLimitOverAmount;
     }
 
 }
