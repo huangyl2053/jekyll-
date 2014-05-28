@@ -10,21 +10,21 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * PublishingShinsakaiResults のクラスファイル 
+ * SearchButtons のクラスファイル 
  * 
  * @author 自動生成
  */
-public class PublishingShinsakaiResultsDiv extends Panel {
+public class SearchButtonsDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnToPublish")
-    private Button btnToPublish;
-    @JsonProperty("btnToReturnShinsakaiList")
-    private Button btnToReturnShinsakaiList;
+    @JsonProperty("btnToClearCriteria")
+    private Button btnToClearCriteria;
+    @JsonProperty("btnToSearch")
+    private Button btnToSearch;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,24 +32,24 @@ public class PublishingShinsakaiResultsDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("btnToPublish")
-    public Button getBtnToPublish() {
-        return btnToPublish;
+    @JsonProperty("btnToClearCriteria")
+    public Button getBtnToClearCriteria() {
+        return btnToClearCriteria;
     }
 
-    @JsonProperty("btnToPublish")
-    public void setBtnToPublish(Button btnToPublish) {
-        this.btnToPublish=btnToPublish;
+    @JsonProperty("btnToClearCriteria")
+    public void setBtnToClearCriteria(Button btnToClearCriteria) {
+        this.btnToClearCriteria=btnToClearCriteria;
     }
 
-    @JsonProperty("btnToReturnShinsakaiList")
-    public Button getBtnToReturnShinsakaiList() {
-        return btnToReturnShinsakaiList;
+    @JsonProperty("btnToSearch")
+    public Button getBtnToSearch() {
+        return btnToSearch;
     }
 
-    @JsonProperty("btnToReturnShinsakaiList")
-    public void setBtnToReturnShinsakaiList(Button btnToReturnShinsakaiList) {
-        this.btnToReturnShinsakaiList=btnToReturnShinsakaiList;
+    @JsonProperty("btnToSearch")
+    public void setBtnToSearch(Button btnToSearch) {
+        this.btnToSearch=btnToSearch;
     }
 
 }

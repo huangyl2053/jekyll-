@@ -45,7 +45,7 @@
         "cellDetails": {
          "cellType": 8,
          "text": "□",
-         "onClick": "btnTorokuClick",
+         "onClick": "onClick_btnToroku",
          "imageFileUrl": "/uz/uza/css/Link.jpg",
          "imageWidth": "",
          "imageHeight": ""
@@ -268,11 +268,11 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbe/db/dbe/TaishoShinsakaiIchiran/getOnloadData"
+     "requestUrl": "dbe/db/dbe/TaishoShinsakaiIchiran/onLoadData"
     },
     {
-     "eventName": "btnTorokuClick",
-     "requestUrl": "dbe/db/dbe/TaishoShinsakai/getOnloadData"
+     "eventName": "onClick_btnToroku",
+     "requestUrl": "dbe/db/dbe/TaishoShinsakai/onLoadData"
     }
    ],
    "hiddenInput": [],

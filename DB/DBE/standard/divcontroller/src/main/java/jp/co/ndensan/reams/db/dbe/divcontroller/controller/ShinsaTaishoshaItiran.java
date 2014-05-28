@@ -9,11 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.HihokenshaJohoDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NinteiKekkaNyuryokuDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NinteiShinsaKekkaNyuryokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShinsaTaishoshaItiranDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.TaishoShinsakaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgShinsaTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -30,11 +26,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 public class ShinsaTaishoshaItiran {
 
     /**
+     * 審査会対象者一覧画面ロード時、一覧DIVの初期値の設定を行います。
      *
-     * @param div
-     * @return
+     * @param div 審査対象者一覧Div
+     * @return ResponseData
      */
-    public ResponseData getOnloadData(ShinsaTaishoshaItiranDiv div) {
+    public ResponseData onLoadData(ShinsaTaishoshaItiranDiv div) {
         ResponseData<ShinsaTaishoshaItiranDiv> response = new ResponseData<>();
 
         div.getDgShinsaTaishoshaIchiran().setDataSource(createRowSetaiTestData());
@@ -43,6 +40,12 @@ public class ShinsaTaishoshaItiran {
         return response;
     }
 
+    /**
+     * 対象者一覧データグリッド上で、選択行の選択ボタン押下時の設定処理を行います。
+     *
+     * @param taishoshaItiranDiv 審査対象者一覧Div
+     * @return ResponseData
+     */
     public ResponseData onClickNyuryoku(ShinsaTaishoshaItiranDiv taishoshaItiranDiv) {
         ResponseData<ShinsaTaishoshaItiranDiv> response = new ResponseData<>();
 
@@ -83,9 +86,9 @@ public class ShinsaTaishoshaItiran {
         TextBoxFlexibleDate startDate = toTextBoxFlexibleDate(new FlexibleDate("00000000"));
         TextBoxFlexibleDate endDate = toTextBoxFlexibleDate(new FlexibleDate("00000000"));
         Button btn = new Button();
-        dgShinsaTaishoshaIchiran_Row row = new dgShinsaTaishoshaIchiran_Row(btn, RString.EMPTY, hokenshaNo, shichoson, hihoban, shimei, kanaShimei,
-                sex, shinseiDate, zenYokaigodo, zenYukokikan, zenStartDate, zenEndDate, ichijiHantei, RString.EMPTY, RString.EMPTY, startDate, endDate,
-                shinseiKubun, seinenGappi, nenrei);
+        dgShinsaTaishoshaIchiran_Row row = new dgShinsaTaishoshaIchiran_Row(btn, RString.EMPTY, hokenshaNo, shichoson,
+                hihoban, shimei, kanaShimei, sex, shinseiDate, zenYokaigodo, zenYukokikan, zenStartDate, zenEndDate, ichijiHantei,
+                RString.EMPTY, RString.EMPTY, startDate, endDate, shinseiKubun, seinenGappi, nenrei);
         return row;
     }
 

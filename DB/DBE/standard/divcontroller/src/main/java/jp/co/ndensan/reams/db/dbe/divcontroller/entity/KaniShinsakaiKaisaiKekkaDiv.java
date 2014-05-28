@@ -24,22 +24,14 @@ public class KaniShinsakaiKaisaiKekkaDiv extends Panel {
      */
     @JsonProperty("dgKaniKaisaiKekka")
     private DataGrid<dgKaniKaisaiKekka_Row> dgKaniKaisaiKekka;
-    @JsonProperty("lblKaisibi")
-    private Label lblKaisibi;
     @JsonProperty("lblKaishibi")
     private Label lblKaishibi;
     @JsonProperty("txtShinsaJissibi")
     private TextBoxFlexibleDate txtShinsaJissibi;
-    @JsonProperty("lblTime")
-    private Label lblTime;
     @JsonProperty("txtStartTime")
     private TextBoxTime txtStartTime;
-    @JsonProperty("lblSyuryobi")
-    private Label lblSyuryobi;
     @JsonProperty("txtShinsaJissiShuryobi")
     private TextBoxFlexibleDate txtShinsaJissiShuryobi;
-    @JsonProperty("lblEndTime")
-    private Label lblEndTime;
     @JsonProperty("txtEndTime")
     private TextBoxTime txtEndTime;
     @JsonProperty("btnKaisaiKekkaToroku")
@@ -65,16 +57,6 @@ public class KaniShinsakaiKaisaiKekkaDiv extends Panel {
         this.dgKaniKaisaiKekka=dgKaniKaisaiKekka;
     }
 
-    @JsonProperty("lblKaisibi")
-    public Label getLblKaisibi() {
-        return lblKaisibi;
-    }
-
-    @JsonProperty("lblKaisibi")
-    public void setLblKaisibi(Label lblKaisibi) {
-        this.lblKaisibi=lblKaisibi;
-    }
-
     @JsonProperty("lblKaishibi")
     public Label getLblKaishibi() {
         return lblKaishibi;
@@ -95,16 +77,6 @@ public class KaniShinsakaiKaisaiKekkaDiv extends Panel {
         this.txtShinsaJissibi=txtShinsaJissibi;
     }
 
-    @JsonProperty("lblTime")
-    public Label getLblTime() {
-        return lblTime;
-    }
-
-    @JsonProperty("lblTime")
-    public void setLblTime(Label lblTime) {
-        this.lblTime=lblTime;
-    }
-
     @JsonProperty("txtStartTime")
     public TextBoxTime getTxtStartTime() {
         return txtStartTime;
@@ -115,16 +87,6 @@ public class KaniShinsakaiKaisaiKekkaDiv extends Panel {
         this.txtStartTime=txtStartTime;
     }
 
-    @JsonProperty("lblSyuryobi")
-    public Label getLblSyuryobi() {
-        return lblSyuryobi;
-    }
-
-    @JsonProperty("lblSyuryobi")
-    public void setLblSyuryobi(Label lblSyuryobi) {
-        this.lblSyuryobi=lblSyuryobi;
-    }
-
     @JsonProperty("txtShinsaJissiShuryobi")
     public TextBoxFlexibleDate getTxtShinsaJissiShuryobi() {
         return txtShinsaJissiShuryobi;
@@ -133,16 +95,6 @@ public class KaniShinsakaiKaisaiKekkaDiv extends Panel {
     @JsonProperty("txtShinsaJissiShuryobi")
     public void setTxtShinsaJissiShuryobi(TextBoxFlexibleDate txtShinsaJissiShuryobi) {
         this.txtShinsaJissiShuryobi=txtShinsaJissiShuryobi;
-    }
-
-    @JsonProperty("lblEndTime")
-    public Label getLblEndTime() {
-        return lblEndTime;
-    }
-
-    @JsonProperty("lblEndTime")
-    public void setLblEndTime(Label lblEndTime) {
-        this.lblEndTime=lblEndTime;
     }
 
     @JsonProperty("txtEndTime")

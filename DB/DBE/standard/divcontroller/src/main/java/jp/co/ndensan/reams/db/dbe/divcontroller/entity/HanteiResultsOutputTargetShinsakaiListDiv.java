@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.SearchButtonsForShinsakaiExtractionDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShinsakaiExtractionConditionDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbShinsakaiList_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgShinsakaiList_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -28,8 +28,8 @@ public class HanteiResultsOutputTargetShinsakaiListDiv extends Panel {
     private ShinsakaiExtractionConditionDiv ShinsakaiExtractionCondition;
     @JsonProperty("SearchButtonsForShinsakaiExtraction")
     private SearchButtonsForShinsakaiExtractionDiv SearchButtonsForShinsakaiExtraction;
-    @JsonProperty("dbShinsakaiList")
-    private DataGrid<dbShinsakaiList_Row> dbShinsakaiList;
+    @JsonProperty("dgShinsakaiList")
+    private DataGrid<dgShinsakaiList_Row> dgShinsakaiList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -57,14 +57,14 @@ public class HanteiResultsOutputTargetShinsakaiListDiv extends Panel {
         this.SearchButtonsForShinsakaiExtraction=SearchButtonsForShinsakaiExtraction;
     }
 
-    @JsonProperty("dbShinsakaiList")
-    public DataGrid<dbShinsakaiList_Row> getDbShinsakaiList() {
-        return dbShinsakaiList;
+    @JsonProperty("dgShinsakaiList")
+    public DataGrid<dgShinsakaiList_Row> getDgShinsakaiList() {
+        return dgShinsakaiList;
     }
 
-    @JsonProperty("dbShinsakaiList")
-    public void setDbShinsakaiList(DataGrid<dbShinsakaiList_Row> dbShinsakaiList) {
-        this.dbShinsakaiList=dbShinsakaiList;
+    @JsonProperty("dgShinsakaiList")
+    public void setDgShinsakaiList(DataGrid<dgShinsakaiList_Row> dgShinsakaiList) {
+        this.dgShinsakaiList=dgShinsakaiList;
     }
 
 }
