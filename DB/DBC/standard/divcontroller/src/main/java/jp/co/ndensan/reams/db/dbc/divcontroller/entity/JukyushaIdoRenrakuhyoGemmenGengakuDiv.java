@@ -5,9 +5,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoFukushiHojinKeigenDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoHyojunFutanDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoRiyoshaFutanDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoGemmenGengakuSubDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -25,18 +23,12 @@ public class JukyushaIdoRenrakuhyoGemmenGengakuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblGemmenShinseichuKubun")
-    private Label lblGemmenShinseichuKubun;
     @JsonProperty("radGemmenShinseichuKubun")
     private RadioButton radGemmenShinseichuKubun;
-    @JsonProperty("JukyushaIdoRenrakuhyoRiyoshaFutan")
-    private JukyushaIdoRenrakuhyoRiyoshaFutanDiv JukyushaIdoRenrakuhyoRiyoshaFutan;
+    @JsonProperty("JukyushaIdoRenrakuhyoGemmenGengakuSub")
+    private JukyushaIdoRenrakuhyoGemmenGengakuSubDiv JukyushaIdoRenrakuhyoGemmenGengakuSub;
     @JsonProperty("JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi")
     private JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHiDiv JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi;
-    @JsonProperty("JukyushaIdoRenrakuhyoFukushiHojinKeigen")
-    private JukyushaIdoRenrakuhyoFukushiHojinKeigenDiv JukyushaIdoRenrakuhyoFukushiHojinKeigen;
-    @JsonProperty("JukyushaIdoRenrakuhyoHyojunFutan")
-    private JukyushaIdoRenrakuhyoHyojunFutanDiv JukyushaIdoRenrakuhyoHyojunFutan;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -44,16 +36,6 @@ public class JukyushaIdoRenrakuhyoGemmenGengakuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblGemmenShinseichuKubun")
-    public Label getLblGemmenShinseichuKubun() {
-        return lblGemmenShinseichuKubun;
-    }
-
-    @JsonProperty("lblGemmenShinseichuKubun")
-    public void setLblGemmenShinseichuKubun(Label lblGemmenShinseichuKubun) {
-        this.lblGemmenShinseichuKubun=lblGemmenShinseichuKubun;
-    }
-
     @JsonProperty("radGemmenShinseichuKubun")
     public RadioButton getRadGemmenShinseichuKubun() {
         return radGemmenShinseichuKubun;
@@ -64,14 +46,14 @@ public class JukyushaIdoRenrakuhyoGemmenGengakuDiv extends Panel {
         this.radGemmenShinseichuKubun=radGemmenShinseichuKubun;
     }
 
-    @JsonProperty("JukyushaIdoRenrakuhyoRiyoshaFutan")
-    public JukyushaIdoRenrakuhyoRiyoshaFutanDiv getJukyushaIdoRenrakuhyoRiyoshaFutan() {
-        return JukyushaIdoRenrakuhyoRiyoshaFutan;
+    @JsonProperty("JukyushaIdoRenrakuhyoGemmenGengakuSub")
+    public JukyushaIdoRenrakuhyoGemmenGengakuSubDiv getJukyushaIdoRenrakuhyoGemmenGengakuSub() {
+        return JukyushaIdoRenrakuhyoGemmenGengakuSub;
     }
 
-    @JsonProperty("JukyushaIdoRenrakuhyoRiyoshaFutan")
-    public void setJukyushaIdoRenrakuhyoRiyoshaFutan(JukyushaIdoRenrakuhyoRiyoshaFutanDiv JukyushaIdoRenrakuhyoRiyoshaFutan) {
-        this.JukyushaIdoRenrakuhyoRiyoshaFutan=JukyushaIdoRenrakuhyoRiyoshaFutan;
+    @JsonProperty("JukyushaIdoRenrakuhyoGemmenGengakuSub")
+    public void setJukyushaIdoRenrakuhyoGemmenGengakuSub(JukyushaIdoRenrakuhyoGemmenGengakuSubDiv JukyushaIdoRenrakuhyoGemmenGengakuSub) {
+        this.JukyushaIdoRenrakuhyoGemmenGengakuSub=JukyushaIdoRenrakuhyoGemmenGengakuSub;
     }
 
     @JsonProperty("JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi")
@@ -82,26 +64,6 @@ public class JukyushaIdoRenrakuhyoGemmenGengakuDiv extends Panel {
     @JsonProperty("JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi")
     public void setJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi(JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHiDiv JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi) {
         this.JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi=JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi;
-    }
-
-    @JsonProperty("JukyushaIdoRenrakuhyoFukushiHojinKeigen")
-    public JukyushaIdoRenrakuhyoFukushiHojinKeigenDiv getJukyushaIdoRenrakuhyoFukushiHojinKeigen() {
-        return JukyushaIdoRenrakuhyoFukushiHojinKeigen;
-    }
-
-    @JsonProperty("JukyushaIdoRenrakuhyoFukushiHojinKeigen")
-    public void setJukyushaIdoRenrakuhyoFukushiHojinKeigen(JukyushaIdoRenrakuhyoFukushiHojinKeigenDiv JukyushaIdoRenrakuhyoFukushiHojinKeigen) {
-        this.JukyushaIdoRenrakuhyoFukushiHojinKeigen=JukyushaIdoRenrakuhyoFukushiHojinKeigen;
-    }
-
-    @JsonProperty("JukyushaIdoRenrakuhyoHyojunFutan")
-    public JukyushaIdoRenrakuhyoHyojunFutanDiv getJukyushaIdoRenrakuhyoHyojunFutan() {
-        return JukyushaIdoRenrakuhyoHyojunFutan;
-    }
-
-    @JsonProperty("JukyushaIdoRenrakuhyoHyojunFutan")
-    public void setJukyushaIdoRenrakuhyoHyojunFutan(JukyushaIdoRenrakuhyoHyojunFutanDiv JukyushaIdoRenrakuhyoHyojunFutan) {
-        this.JukyushaIdoRenrakuhyoHyojunFutan=JukyushaIdoRenrakuhyoHyojunFutan;
     }
 
 }

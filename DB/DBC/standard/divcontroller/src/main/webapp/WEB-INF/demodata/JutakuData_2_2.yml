@@ -1,0 +1,10 @@
+## YAML Template.
+---
+- chakkoDueDate: 20140701
+  kanseiDueDate: 20140701
+  mitsumoriAmount: 60000
+  kaishuJigyosha: 介護　建設（株）
+- payTotalNow: 60000
+  hokenSeikyuAmountNow: 55000
+  riyoshaFutanAmountNow: 5000
+  limitOverAmountNow: 0

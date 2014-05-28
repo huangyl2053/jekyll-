@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu May 15 16:28:05 JST 2014 
+ * Wed May 21 16:53:55 JST 2014 
  */
 
 
@@ -22,47 +22,47 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class dgTekiyoJogaiShisetsu_Row extends DataRow {
 
     private Button btnSelect;
-    private RString defaultDataName1;
-    private RString defaultDataName2;
-    private RString defaultDataName3;
-    private RString defaultDataName4;
+    private RString jigyoshaNo;
+    private RString jigyoshaMeisho;
+    private RString jigyosha;
+    private RString jusho;
 
     public dgTekiyoJogaiShisetsu_Row() {
         super();
     }
 
-    public dgTekiyoJogaiShisetsu_Row(Button btnSelect, RString defaultDataName1, RString defaultDataName2, RString defaultDataName3, RString defaultDataName4) {
+    public dgTekiyoJogaiShisetsu_Row(Button btnSelect, RString jigyoshaNo, RString jigyoshaMeisho, RString jigyosha, RString jusho) {
         super();
         this.setOriginalData("btnSelect", btnSelect);
-        this.setOriginalData("defaultDataName1", defaultDataName1);
-        this.setOriginalData("defaultDataName2", defaultDataName2);
-        this.setOriginalData("defaultDataName3", defaultDataName3);
-        this.setOriginalData("defaultDataName4", defaultDataName4);
+        this.setOriginalData("jigyoshaNo", jigyoshaNo);
+        this.setOriginalData("jigyoshaMeisho", jigyoshaMeisho);
+        this.setOriginalData("jigyosha", jigyosha);
+        this.setOriginalData("jusho", jusho);
         this.btnSelect = btnSelect;
-        this.defaultDataName1 = defaultDataName1;
-        this.defaultDataName2 = defaultDataName2;
-        this.defaultDataName3 = defaultDataName3;
-        this.defaultDataName4 = defaultDataName4;
+        this.jigyoshaNo = jigyoshaNo;
+        this.jigyoshaMeisho = jigyoshaMeisho;
+        this.jigyosha = jigyosha;
+        this.jusho = jusho;
     }
 
     public Button getBtnSelect() {
         return btnSelect;
     }
 
-    public RString getDefaultDataName1() {
-        return defaultDataName1;
+    public RString getJigyoshaNo() {
+        return jigyoshaNo;
     }
 
-    public RString getDefaultDataName2() {
-        return defaultDataName2;
+    public RString getJigyoshaMeisho() {
+        return jigyoshaMeisho;
     }
 
-    public RString getDefaultDataName3() {
-        return defaultDataName3;
+    public RString getJigyosha() {
+        return jigyosha;
     }
 
-    public RString getDefaultDataName4() {
-        return defaultDataName4;
+    public RString getJusho() {
+        return jusho;
     }
 
     public void setBtnSelect(Button btnSelect) {
@@ -70,24 +70,24 @@ public class dgTekiyoJogaiShisetsu_Row extends DataRow {
         this.btnSelect = btnSelect;
     }
 
-    public void setDefaultDataName1(RString defaultDataName1) {
-        this.setOriginalData("defaultDataName1", defaultDataName1);
-        this.defaultDataName1 = defaultDataName1;
+    public void setJigyoshaNo(RString jigyoshaNo) {
+        this.setOriginalData("jigyoshaNo", jigyoshaNo);
+        this.jigyoshaNo = jigyoshaNo;
     }
 
-    public void setDefaultDataName2(RString defaultDataName2) {
-        this.setOriginalData("defaultDataName2", defaultDataName2);
-        this.defaultDataName2 = defaultDataName2;
+    public void setJigyoshaMeisho(RString jigyoshaMeisho) {
+        this.setOriginalData("jigyoshaMeisho", jigyoshaMeisho);
+        this.jigyoshaMeisho = jigyoshaMeisho;
     }
 
-    public void setDefaultDataName3(RString defaultDataName3) {
-        this.setOriginalData("defaultDataName3", defaultDataName3);
-        this.defaultDataName3 = defaultDataName3;
+    public void setJigyosha(RString jigyosha) {
+        this.setOriginalData("jigyosha", jigyosha);
+        this.jigyosha = jigyosha;
     }
 
-    public void setDefaultDataName4(RString defaultDataName4) {
-        this.setOriginalData("defaultDataName4", defaultDataName4);
-        this.defaultDataName4 = defaultDataName4;
+    public void setJusho(RString jusho) {
+        this.setOriginalData("jusho", jusho);
+        this.jusho = jusho;
     }
 
 }
