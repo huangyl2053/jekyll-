@@ -1,0 +1,48 @@
+## YAML Template.
+---
+- teikyoYM: 平26.07
+  seiriNo: 1234567892 
+  jutakuOwner:  介護　太郎
+  relationWithHihokensha: 次男
+- kaishuContents: 滑りにくい床材に変更
+  kaishuJigyoshaName: 介護　建設（株）
+  kaishuTaishoAddress1: 長野県長野市1-2-3  
+  chakkoDueDate: 20140701
+  kanseiDueDate: 20140701
+  estimatedAmount: 60000
+- payTotalMae: 0
+  hokenSeikyuAmountMae: 0
+  riyoshaFutanAmountMae: 0
+  limitOverAmountMae: 0
+  payTotalNow: 60000
+  hokenSeikyuAmountNow: 55000
+  riyoshaFutanAmountNow: 5000
+  limitOverAmountNow: 0
+- shinseiYMD: 20140701
+  uketsukeYMD: 20140701
+  shinseishaName: 介護　太郎
+  yubinNo: 999-9999
+  address: 長野県長野市1-2-3
+  telNo: 1234567890
+  jigyoshaNo: 1234567890
+- createDate: 20140701
+  creationJigyoshaNo: 介護　太郎
+  creationJigyoshaName: 介護　太郎
+  creatorKanaName: カイゴ　タロウ
+  creatorName: 介護　太郎
+- kinyuKikanCode: 1235
+  kinyuKikanName: 介護 あじさい
+  kinyuBranchCode: 124
+  kinyuBranchName: 介護
+  kozaMeigininKanaName: カイゴ　ダイスケ
+  kozaMeigininName: 介護　大輔
+- chakkoDueDate: 20140701
+  kanseiDueDate: 20140701
+  mitsumoriAmount: 50000
+  kaishuJigyosha: 介護　建設（株）
+- payTotalNow: 60000
+  hokenSeikyuAmountNow: 55000
+  riyoshaFutanAmountNow: 5000
+  limitOverAmountNow: 0
+- judgeDate: 20140710
+  shoninCondition: 承認します
