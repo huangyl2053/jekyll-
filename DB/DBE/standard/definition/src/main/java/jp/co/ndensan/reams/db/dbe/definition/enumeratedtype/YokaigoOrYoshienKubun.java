@@ -23,7 +23,7 @@ public enum YokaigoOrYoshienKubun {
      * 要支援 <br />
      * コード : "2"
      */
-    要支援("2"),;
+    要支援("2");
 
     private final RString code;
 

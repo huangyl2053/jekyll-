@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  */
 public class JigyoshaInputGuide {
 
-    private static final RString JIGYOSHA_DATA_SOURCE = new RString("dbz/demoData/ShisetsuData.yml");
+    private static final RString JIGYOSHA_DATA_SOURCE = new RString("ShisetsuData.yml");
 
     /**
      * 事業者の検索を行い、グリッドに表示します。
@@ -44,7 +44,7 @@ public class JigyoshaInputGuide {
     }
 
     private void setJigyoshaList(DataGrid<dgSearchResultJigyosha_Row> grid, RString 条件) {
-        List<HashMap> jigyoshaList = YamlLoader.loadAsList(JIGYOSHA_DATA_SOURCE);
+        List<HashMap> jigyoshaList = YamlLoader.FOR_DBZ.loadAsList(JIGYOSHA_DATA_SOURCE);
         List<dgSearchResultJigyosha_Row> searchResultJigyoshaList = new ArrayList<>();
 
         for (HashMap jigyosha : jigyoshaList) {

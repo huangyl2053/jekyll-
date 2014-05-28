@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
  */
 public class HokenshaInputGuide {
 
-    private static final RString DATA_SOURCE = new RString("dbz/demoData/HokenshaData.yml");
+    private static final RString DATA_SOURCE = new RString("HokenshaData.yml");
 
     /**
      * ドロップダウンリストから県コードを選択し、検索を行う際に動作するメソッドです。<br/>
@@ -45,7 +45,7 @@ public class HokenshaInputGuide {
     }
 
     private void setHokenshaList(DataGrid<dgSearchResultHokensha_Row> grid, RString selectKey) {
-        List<HashMap> kenList = YamlLoader.loadAsList(DATA_SOURCE);
+        List<HashMap> kenList = YamlLoader.FOR_DBZ.loadAsList(DATA_SOURCE);
         List<HashMap> hokenshaList = getKenList(kenList, selectKey);
 
         grid.setDataSource(createHokenshaGrid(hokenshaList));

@@ -471,7 +471,7 @@ module DBC {
      "labelLAlign": 2,
      "labelRAlign": 0,
      "permitCharactor": "",
-     "formatLength": 1
+     "formatLength": "10"
     },
     {
      "fieldName": "txtShienJigyoshaName",
@@ -909,7 +909,7 @@ module DBC {
      "labelLAlign": 2,
      "labelRAlign": 0,
      "permitCharactor": "",
-     "formatLength": 1
+     "formatLength": "8"
     },
     {
      "fieldName": "txtItakuJigyoshaNo",
@@ -952,7 +952,7 @@ module DBC {
      "labelLAlign": 2,
      "labelRAlign": 0,
      "permitCharactor": "",
-     "formatLength": 1
+     "formatLength": "10"
     },
     {
      "fieldName": "txtItakuJigyoshaName",
@@ -1037,7 +1037,7 @@ module DBC {
      "labelLAlign": 2,
      "labelRAlign": 0,
      "permitCharactor": "",
-     "formatLength": 1
+     "formatLength": "8"
     }
    ],
    "controlType": "Panel",

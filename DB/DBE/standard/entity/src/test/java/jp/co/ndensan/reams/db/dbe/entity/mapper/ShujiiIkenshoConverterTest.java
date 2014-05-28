@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
-import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoFactory;
+import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ShujiiIkenshoFactory;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.entity.helper.ShujiiIkenshoResultMock;

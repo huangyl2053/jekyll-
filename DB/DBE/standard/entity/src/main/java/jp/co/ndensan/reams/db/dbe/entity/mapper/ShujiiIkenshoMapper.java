@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoBase;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoDetails;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ShujiiIkenshoEditor;
-import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoFactory;
+import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ShujiiIkenshoFactory;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoResult;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IkenshoDoi;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
