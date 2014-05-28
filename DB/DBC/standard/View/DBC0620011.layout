@@ -194,7 +194,7 @@
        "value": ""
       },
       {
-       "fieldName": "dgMishinsaShikyuShinseiList",
+       "fieldName": "dgYoguKonyuhiKetteiMishinsaShikyuShinseiList",
        "items": [],
        "controlType": "DataGrid",
        "width": "970",
@@ -442,7 +442,7 @@
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
-       "sortOrder": "txtSeiriNo",
+       "sortOrder": "txtShinsaDate",
        "isAscending": true,
        "filterList": [],
        "activeRowId": -1
@@ -518,7 +518,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": ""
+     "requestUrl": "dbc/db/dbc/YoguKonyuhiShikyuShinseiShinsazumiSearchPanel/onLoad"
     },
     {
      "eventName": "onClick_btnSearchShinsazumi",
@@ -829,7 +829,7 @@
    "isGroupBox": false
   },
   {
-   "fieldName": "CommonButtonArea",
+   "fieldName": "YoguKonyuhiShikyuShinseiShinsazumiCommonButtonArea",
    "items": [
     {
      "fieldName": "btnIkkatsuKetteiSave",
@@ -876,7 +876,7 @@
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "CommonButtonArea"
+     "postParameterPanelNames": "YoguKonyuhiShikyuShinseiShinsazumiCommonButtonArea"
     }
    ],
    "requestSettings": [],
@@ -932,7 +932,7 @@
      "panelState": "visible"
     },
     {
-     "visibleDiv": "CommonButtonArea",
+     "visibleDiv": "YoguKonyuhiShikyuShinseiShinsazumiCommonButtonArea",
      "panelState": "visible"
     },
     {
@@ -1016,7 +1016,7 @@
    "OutputOrderForTsuchisho"
   ],
   [
-   "CommonButtonArea"
+   "YoguKonyuhiShikyuShinseiShinsazumiCommonButtonArea"
   ]
  ],
  "panelMargin": 1,

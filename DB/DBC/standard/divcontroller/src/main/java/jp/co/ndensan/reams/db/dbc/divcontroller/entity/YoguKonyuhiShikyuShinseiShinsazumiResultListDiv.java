@@ -5,7 +5,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgMishinsaShikyuShinseiList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgYoguKonyuhiKetteiMishinsaShikyuShinseiList_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -24,8 +24,8 @@ public class YoguKonyuhiShikyuShinseiShinsazumiResultListDiv extends Panel {
      */
     @JsonProperty("txtKetteiDate")
     private TextBoxDate txtKetteiDate;
-    @JsonProperty("dgMishinsaShikyuShinseiList")
-    private DataGrid<dgMishinsaShikyuShinseiList_Row> dgMishinsaShikyuShinseiList;
+    @JsonProperty("dgYoguKonyuhiKetteiMishinsaShikyuShinseiList")
+    private DataGrid<dgYoguKonyuhiKetteiMishinsaShikyuShinseiList_Row> dgYoguKonyuhiKetteiMishinsaShikyuShinseiList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -43,14 +43,14 @@ public class YoguKonyuhiShikyuShinseiShinsazumiResultListDiv extends Panel {
         this.txtKetteiDate=txtKetteiDate;
     }
 
-    @JsonProperty("dgMishinsaShikyuShinseiList")
-    public DataGrid<dgMishinsaShikyuShinseiList_Row> getDgMishinsaShikyuShinseiList() {
-        return dgMishinsaShikyuShinseiList;
+    @JsonProperty("dgYoguKonyuhiKetteiMishinsaShikyuShinseiList")
+    public DataGrid<dgYoguKonyuhiKetteiMishinsaShikyuShinseiList_Row> getDgYoguKonyuhiKetteiMishinsaShikyuShinseiList() {
+        return dgYoguKonyuhiKetteiMishinsaShikyuShinseiList;
     }
 
-    @JsonProperty("dgMishinsaShikyuShinseiList")
-    public void setDgMishinsaShikyuShinseiList(DataGrid<dgMishinsaShikyuShinseiList_Row> dgMishinsaShikyuShinseiList) {
-        this.dgMishinsaShikyuShinseiList=dgMishinsaShikyuShinseiList;
+    @JsonProperty("dgYoguKonyuhiKetteiMishinsaShikyuShinseiList")
+    public void setDgYoguKonyuhiKetteiMishinsaShikyuShinseiList(DataGrid<dgYoguKonyuhiKetteiMishinsaShikyuShinseiList_Row> dgYoguKonyuhiKetteiMishinsaShikyuShinseiList) {
+        this.dgYoguKonyuhiKetteiMishinsaShikyuShinseiList=dgYoguKonyuhiKetteiMishinsaShikyuShinseiList;
     }
 
 }
