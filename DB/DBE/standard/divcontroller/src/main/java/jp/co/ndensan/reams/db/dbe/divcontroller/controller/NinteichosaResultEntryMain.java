@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.HihokenshaForNinteichosaResultDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NinteichosaDetailDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NinteichosaResultEntryMainDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NinteichosaResultEntryTargetDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgNinteichosaResultTaishosha_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.HihokenshaForNinteichosaResultDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.NinteichosaDetailDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.NinteichosaResultEntryMainDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.NinteichosaResultEntryTargetDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.dgNinteichosaResultTaishosha_Row;
 import jp.co.ndensan.reams.ur.urz.business.DateOfBirthFactory;
 import jp.co.ndensan.reams.ur.urz.business.IDateOfBirth;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
