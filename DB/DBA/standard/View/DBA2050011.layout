@@ -255,7 +255,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "1150",
+     "width": "1030",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -339,7 +339,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "1150",
+     "width": "1030",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -416,7 +416,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "1150",
+     "width": "1030",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -471,7 +471,7 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "text": "該当者を表示する",
-     "onClick": "",
+     "onClick": "onClick_btnSearchGaitosha",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -479,7 +479,7 @@
     }
    ],
    "controlType": "Panel",
-   "width": "1200",
+   "width": "1050",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -537,7 +537,7 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "text": "該当者を選択する",
-     "onClick": "",
+     "onClick": "onClick_btnSelectGaitosha",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -662,12 +662,12 @@
         "dataName": "jusho",
         "toolTip": "",
         "bgColor": 0,
-        "width": 300,
+        "width": 320,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": "jusho"
        }
@@ -677,9 +677,9 @@
      "onSort": "",
      "onSelect": "",
      "onSelectByDblClick": "",
-     "onOnlyRow": "",
+     "onOnlyRow": "onOnlyRow_dgTekiyoJogaiTaishoGaitosha",
      "onNoRow": "",
-     "onMultiRows": "",
+     "onMultiRows": "onMultiRows__dgTekiyoJogaiTaishoGaitosha",
      "sortOrder": "",
      "isAscending": true,
      "filterList": [],
@@ -687,7 +687,7 @@
     }
    ],
    "controlType": "Panel",
-   "width": "1200",
+   "width": "1050",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -709,7 +709,20 @@
      "postParameterPanelNames": "TekiyoJogaiTaishoGaitosha"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_btnSearchGaitosha",
+     "requestUrl": "dba/db/dba/TekiyoJogaiTaishoGaitosha/onClick_btnSearchGaitosha"
+    },
+    {
+     "eventName": "onMultiRows__dgTekiyoJogaiTaishoGaitosha",
+     "requestUrl": "dba/db/dba/TekiyoJogaiTaishoGaitosha/onMultiRows_dgTekiyoJogaiTaishoGaitosha"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -995,7 +1008,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "1180",
+     "width": "1020",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1034,7 +1047,7 @@
     }
    ],
    "controlType": "Panel",
-   "width": "1200",
+   "width": "1050",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -1054,9 +1067,25 @@
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "TekiyoJogaiTaishoshaJoho"
+    },
+    {
+     "postParameterPanelNames": "TekiyoJogaiTaishoGaitosha"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_btnSelectGaitosha",
+     "requestUrl": "dba/db/dba/TekiyoJogaiTaishoshaJoho/onClick_btnSelectGaitosha"
+    },
+    {
+     "eventName": "onOnlyRow_dgTekiyoJogaiTaishoGaitosha",
+     "requestUrl": "dba/db/dba/TekiyoJogaiTaishoshaJoho/onOnlyRow_dgTekiyoJogaiTaishoGaitosha"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -1078,7 +1107,7 @@
      "fieldName": "dgTekiyoJogaiRireki",
      "items": [],
      "controlType": "DataGrid",
-     "width": "1100",
+     "width": "1040",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1089,8 +1118,8 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
+     "marginLeft": "0",
+     "marginRight": "0",
      "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
@@ -1137,16 +1166,16 @@
         "dataName": "btnShusei",
         "toolTip": "",
         "bgColor": 0,
-        "width": 40,
+        "width": 25,
         "visible": true,
         "cellType": 8,
         "cellDetails": {
          "cellType": 8,
          "text": "■",
          "onClick": "onClick_btnShusei",
-         "imageFileUrl": "",
-         "imageWidth": "",
-         "imageHeight": ""
+         "imageFileUrl": "/uz/uza/css/Edit.png",
+         "imageWidth": "15",
+         "imageHeight": "15"
         },
         "align": 1,
         "resize": true,
@@ -1154,11 +1183,25 @@
         "sortKey": "btnShusei"
        },
        {
+        "columnName": "適用事由key",
+        "dataName": "tekiyoJiyuKey",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 0,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "tekiyoJiyuKey"
+       },
+       {
         "columnName": "適用事由",
         "dataName": "tekiyoJiyu",
         "toolTip": "",
         "bgColor": 0,
-        "width": 100,
+        "width": 80,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -1212,7 +1255,7 @@
         "dataName": "kaijoJiyu",
         "toolTip": "",
         "bgColor": 0,
-        "width": 100,
+        "width": 80,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -1330,7 +1373,7 @@
         "dataName": "shisetsu",
         "toolTip": "",
         "bgColor": 0,
-        "width": 320,
+        "width": 310,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -1390,7 +1433,7 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "sortOrder": "shisetsu",
+     "sortOrder": "taishoDate",
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1
@@ -1468,7 +1511,7 @@
          "isPrivateInfo": false,
          "isPassword": false,
          "onFocus": "",
-         "onBlur": "",
+         "onBlur": "onBlur_txtShisetsuNyushoDate",
          "onChange": "",
          "onKeyPress": "",
          "text": "",
@@ -1579,8 +1622,8 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "required": false,
-         "maxLength": 1000000000000,
-         "minLength": 0,
+         "maxLength": "9999999999",
+         "minLength": "0000000000",
          "textAlign": 0,
          "readOnly": false,
          "placeHolder": "",
@@ -1589,7 +1632,7 @@
          "isPassword": false,
          "isComboBox": false,
          "onFocus": "",
-         "onBlur": "",
+         "onBlur": "onBlur_txtNyushoShisetsuCode",
          "onChange": "",
          "onKeyPress": "",
          "text": "",
@@ -1602,7 +1645,7 @@
          "labelLAlign": 2,
          "labelRAlign": 0,
          "permitCharactor": "",
-         "formatLength": 1
+         "formatLength": "10"
         },
         {
          "fieldName": "btnNyushoShisetsuInputGuide",
@@ -1686,7 +1729,7 @@
         }
        ],
        "controlType": "Panel",
-       "width": "1150",
+       "width": "1000",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1896,7 +1939,7 @@
         }
        ],
        "controlType": "Panel",
-       "width": "1150",
+       "width": "1000",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -2100,7 +2143,7 @@
         }
        ],
        "controlType": "Panel",
-       "width": "1150",
+       "width": "1000",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -2138,7 +2181,7 @@
        "isGroupBox": true
       },
       {
-       "fieldName": "btnSubmitTekiyoJogaiJoho",
+       "fieldName": "btnInsertTekiyoJogaiJoho",
        "items": [],
        "controlType": "Button",
        "width": "170",
@@ -2155,7 +2198,7 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "text": "適用除外情報を確定する",
-       "onClick": "",
+       "onClick": "onClick_btnInsertTekiyoJogaiJoho",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
@@ -2163,7 +2206,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "1180",
+     "width": "1030",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -2185,7 +2228,20 @@
        "postParameterPanelNames": "TekiyoJogaiToroku"
       }
      ],
-     "requestSettings": [],
+     "requestSettings": [
+      {
+       "eventName": "onLoad",
+       "requestUrl": ""
+      },
+      {
+       "eventName": "onBlur_txtShisetsuNyushoDate",
+       "requestUrl": "dba/db/dba/TekiyoJogaiToroku/onBlur_txtShisetsuNyushoDate"
+      },
+      {
+       "eventName": "onBlur_txtNyushoShisetsuCode",
+       "requestUrl": "dba/db/dba/TekiyoJogaiToroku/onBlur_txtNyushoShisetsuCode"
+      }
+     ],
      "hiddenInput": [],
      "onOpen": "",
      "onClose": "",
@@ -2202,7 +2258,7 @@
     }
    ],
    "controlType": "Panel",
-   "width": "1200",
+   "width": "1050",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -2222,10 +2278,39 @@
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "TekiyoJogaiJoho"
+    },
+    {
+     "postParameterPanelNames": "TekiyoJogaiTaishoGaitosha"
     }
    ],
-   "requestSettings": [],
-   "hiddenInput": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_btnInsertTekiyoJogaiJoho",
+     "requestUrl": "dba/db/dba/TekiyoJogaiJoho/onClick_btnInsertTekiyoJogaiJoho"
+    },
+    {
+     "eventName": "onClick_btnSelectGaitosha",
+     "requestUrl": "dba/db/dba/TekiyoJogaiJoho/onClick_btnSelectGaitosha"
+    },
+    {
+     "eventName": "onClick_btnShusei",
+     "requestUrl": "dba/db/dba/TekiyoJogaiJoho/onClick_btnShusei"
+    },
+    {
+     "eventName": "onOnlyRow_dgTekiyoJogaiTaishoGaitosha",
+     "requestUrl": "dba/db/dba/TekiyoJogaiJoho/onOnlyRow_dgTekiyoJogaiTaishoGaitosha"
+    }
+   ],
+   "hiddenInput": [
+    {
+     "propertyName": "selectedRows",
+     "value": ""
+    }
+   ],
    "onOpen": "",
    "onClose": "",
    "session": {},
@@ -2284,7 +2369,7 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "text": "再検索を行う",
-     "onClick": "",
+     "onClick": "onClick_btnResearch",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -2386,6 +2471,11 @@
      "fieldName": "btnResearch",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "dgTekiyoJogaiTaishoGaitosha",
+     "event": "onOnlyRow",
+     "transition": "除外施設入所による登録"
     }
    ]
   },
@@ -2434,6 +2524,11 @@
      "fieldName": "btnResearch",
      "event": "onClick",
      "transition": "対象者検索"
+    },
+    {
+     "fieldName": "dgTekiyoJogaiTaishoGaitosha",
+     "event": "onOnlyRow",
+     "transition": ""
     }
    ]
   },
@@ -2482,6 +2577,11 @@
      "fieldName": "btnResearch",
      "event": "onClick",
      "transition": "対象者検索"
+    },
+    {
+     "fieldName": "dgTekiyoJogaiTaishoGaitosha",
+     "event": "onOnlyRow",
+     "transition": ""
     }
    ]
   },
@@ -2530,6 +2630,11 @@
      "fieldName": "btnResearch",
      "event": "onClick",
      "transition": "対象者検索"
+    },
+    {
+     "fieldName": "dgTekiyoJogaiTaishoGaitosha",
+     "event": "onOnlyRow",
+     "transition": ""
     }
    ]
   }
@@ -2539,6 +2644,11 @@
  "WFParameter": [],
  "UIContainerEventMapping": [],
  "loadSequencePanelNames": [
+  [
+   "TekiyoJogaiTaishoGaitosha",
+   "TekiyoJogaiTaishoshaJoho",
+   "TekiyoJogaiJoho"
+  ],
   [
    "SearchTekiyoJogaiTaishosa"
   ],
@@ -2552,19 +2662,10 @@
    "MaeShoriTekiyoJogaisha"
   ],
   [
-   "TekiyoJogaiTaishoGaitosha"
-  ],
-  [
-   "TekiyoJogaiTaishoshaJoho"
-  ],
-  [
    "TekiyoJogaishaCommonJoho"
   ],
   [
    "TekiyoJogaishaDbJoho"
-  ],
-  [
-   "TekiyoJogaiJoho"
   ],
   [
    "TekiyoJogaiToroku"

@@ -21,18 +21,12 @@ public class JukyushaIdoRenrakuhyoYokaigoninteiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblShinseiType")
-    private Label lblShinseiType;
     @JsonProperty("radShinseiType")
     private RadioButton radShinseiType;
     @JsonProperty("txtShinseiDate")
     private TextBoxFlexibleDate txtShinseiDate;
-    @JsonProperty("lblHenkoShinseichuKubun")
-    private Label lblHenkoShinseichuKubun;
     @JsonProperty("radHenkoShinseichuKubun")
     private RadioButton radHenkoShinseichuKubun;
-    @JsonProperty("lblMinashiYokaigoKubun")
-    private Label lblMinashiYokaigoKubun;
     @JsonProperty("radMinashiYokaigoKubun")
     private RadioButton radMinashiYokaigoKubun;
     @JsonProperty("ddlYokaigoJotaiKubun")
@@ -46,16 +40,6 @@ public class JukyushaIdoRenrakuhyoYokaigoninteiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblShinseiType")
-    public Label getLblShinseiType() {
-        return lblShinseiType;
-    }
-
-    @JsonProperty("lblShinseiType")
-    public void setLblShinseiType(Label lblShinseiType) {
-        this.lblShinseiType=lblShinseiType;
-    }
-
     @JsonProperty("radShinseiType")
     public RadioButton getRadShinseiType() {
         return radShinseiType;
@@ -76,16 +60,6 @@ public class JukyushaIdoRenrakuhyoYokaigoninteiDiv extends Panel {
         this.txtShinseiDate=txtShinseiDate;
     }
 
-    @JsonProperty("lblHenkoShinseichuKubun")
-    public Label getLblHenkoShinseichuKubun() {
-        return lblHenkoShinseichuKubun;
-    }
-
-    @JsonProperty("lblHenkoShinseichuKubun")
-    public void setLblHenkoShinseichuKubun(Label lblHenkoShinseichuKubun) {
-        this.lblHenkoShinseichuKubun=lblHenkoShinseichuKubun;
-    }
-
     @JsonProperty("radHenkoShinseichuKubun")
     public RadioButton getRadHenkoShinseichuKubun() {
         return radHenkoShinseichuKubun;
@@ -94,16 +68,6 @@ public class JukyushaIdoRenrakuhyoYokaigoninteiDiv extends Panel {
     @JsonProperty("radHenkoShinseichuKubun")
     public void setRadHenkoShinseichuKubun(RadioButton radHenkoShinseichuKubun) {
         this.radHenkoShinseichuKubun=radHenkoShinseichuKubun;
-    }
-
-    @JsonProperty("lblMinashiYokaigoKubun")
-    public Label getLblMinashiYokaigoKubun() {
-        return lblMinashiYokaigoKubun;
-    }
-
-    @JsonProperty("lblMinashiYokaigoKubun")
-    public void setLblMinashiYokaigoKubun(Label lblMinashiYokaigoKubun) {
-        this.lblMinashiYokaigoKubun=lblMinashiYokaigoKubun;
     }
 
     @JsonProperty("radMinashiYokaigoKubun")
