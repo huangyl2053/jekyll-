@@ -5,8 +5,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuServiceRirekiDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShoruiJokyoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tplKyotakuKeikakuTodokedeDetailRirekiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tplKyotakuKeikakuTodokedeDetailShoruiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
 
 /**
@@ -21,10 +21,10 @@ public class tabKyotakuServiceKeikakuSakuseiIraiTodokedeDiv extends TabContainer
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("KyotakuServiceRireki")
-    private KyotakuServiceRirekiDiv KyotakuServiceRireki;
-    @JsonProperty("ShoruiJokyo")
-    private ShoruiJokyoDiv ShoruiJokyo;
+    @JsonProperty("tplKyotakuKeikakuTodokedeDetailRireki")
+    private tplKyotakuKeikakuTodokedeDetailRirekiDiv tplKyotakuKeikakuTodokedeDetailRireki;
+    @JsonProperty("tplKyotakuKeikakuTodokedeDetailShorui")
+    private tplKyotakuKeikakuTodokedeDetailShoruiDiv tplKyotakuKeikakuTodokedeDetailShorui;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,24 +32,24 @@ public class tabKyotakuServiceKeikakuSakuseiIraiTodokedeDiv extends TabContainer
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("KyotakuServiceRireki")
-    public KyotakuServiceRirekiDiv getKyotakuServiceRireki() {
-        return KyotakuServiceRireki;
+    @JsonProperty("tplKyotakuKeikakuTodokedeDetailRireki")
+    public tplKyotakuKeikakuTodokedeDetailRirekiDiv getTplKyotakuKeikakuTodokedeDetailRireki() {
+        return tplKyotakuKeikakuTodokedeDetailRireki;
     }
 
-    @JsonProperty("KyotakuServiceRireki")
-    public void setKyotakuServiceRireki(KyotakuServiceRirekiDiv KyotakuServiceRireki) {
-        this.KyotakuServiceRireki=KyotakuServiceRireki;
+    @JsonProperty("tplKyotakuKeikakuTodokedeDetailRireki")
+    public void setTplKyotakuKeikakuTodokedeDetailRireki(tplKyotakuKeikakuTodokedeDetailRirekiDiv tplKyotakuKeikakuTodokedeDetailRireki) {
+        this.tplKyotakuKeikakuTodokedeDetailRireki=tplKyotakuKeikakuTodokedeDetailRireki;
     }
 
-    @JsonProperty("ShoruiJokyo")
-    public ShoruiJokyoDiv getShoruiJokyo() {
-        return ShoruiJokyo;
+    @JsonProperty("tplKyotakuKeikakuTodokedeDetailShorui")
+    public tplKyotakuKeikakuTodokedeDetailShoruiDiv getTplKyotakuKeikakuTodokedeDetailShorui() {
+        return tplKyotakuKeikakuTodokedeDetailShorui;
     }
 
-    @JsonProperty("ShoruiJokyo")
-    public void setShoruiJokyo(ShoruiJokyoDiv ShoruiJokyo) {
-        this.ShoruiJokyo=ShoruiJokyo;
+    @JsonProperty("tplKyotakuKeikakuTodokedeDetailShorui")
+    public void setTplKyotakuKeikakuTodokedeDetailShorui(tplKyotakuKeikakuTodokedeDetailShoruiDiv tplKyotakuKeikakuTodokedeDetailShorui) {
+        this.tplKyotakuKeikakuTodokedeDetailShorui=tplKyotakuKeikakuTodokedeDetailShorui;
     }
 
 }

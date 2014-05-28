@@ -5,7 +5,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgRirekiList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgKyotakuKeikakuTodokedeRirekiList_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -26,8 +26,8 @@ public class KyotakuKeikakuTodokedeRirekiListDiv extends Panel {
     private Button btnTodokedeNew;
     @JsonProperty("btnTodokedeModify")
     private Button btnTodokedeModify;
-    @JsonProperty("dgRirekiList")
-    private DataGrid<dgRirekiList_Row> dgRirekiList;
+    @JsonProperty("dgKyotakuKeikakuTodokedeRirekiList")
+    private DataGrid<dgKyotakuKeikakuTodokedeRirekiList_Row> dgKyotakuKeikakuTodokedeRirekiList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -55,14 +55,14 @@ public class KyotakuKeikakuTodokedeRirekiListDiv extends Panel {
         this.btnTodokedeModify=btnTodokedeModify;
     }
 
-    @JsonProperty("dgRirekiList")
-    public DataGrid<dgRirekiList_Row> getDgRirekiList() {
-        return dgRirekiList;
+    @JsonProperty("dgKyotakuKeikakuTodokedeRirekiList")
+    public DataGrid<dgKyotakuKeikakuTodokedeRirekiList_Row> getDgKyotakuKeikakuTodokedeRirekiList() {
+        return dgKyotakuKeikakuTodokedeRirekiList;
     }
 
-    @JsonProperty("dgRirekiList")
-    public void setDgRirekiList(DataGrid<dgRirekiList_Row> dgRirekiList) {
-        this.dgRirekiList=dgRirekiList;
+    @JsonProperty("dgKyotakuKeikakuTodokedeRirekiList")
+    public void setDgKyotakuKeikakuTodokedeRirekiList(DataGrid<dgKyotakuKeikakuTodokedeRirekiList_Row> dgKyotakuKeikakuTodokedeRirekiList) {
+        this.dgKyotakuKeikakuTodokedeRirekiList=dgKyotakuKeikakuTodokedeRirekiList;
     }
 
 }

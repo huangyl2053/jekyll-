@@ -1,26 +1,20 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
- * コードが再生成されるときに損失したりします。
- * Fri May 23 13:54:59 JST 2014 
+ * このコードはツールによって生成されました。 このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
+ * コードが再生成されるときに損失したりします。 Tue May 27 14:01:30 JST 2014
  */
-
-
-
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
-
 /**
- * dgJutakuKaishuDetail_Row のクラスファイル 
- * 
+ * dgJutakuKaishuDetail_Row のクラスファイル
+ *
  * @author 自動生成
  */
-
 public class dgJutakuKaishuDetail_Row extends DataRow {
 
     private Button btnModify;
