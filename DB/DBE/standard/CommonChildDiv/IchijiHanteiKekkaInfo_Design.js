@@ -295,7 +295,7 @@ var DBE;
                                             "value": "",
                                             "maxLength": 1000000000000,
                                             "minLength": 0,
-                                            "textAlign": 0,
+                                            "textAlign": 1,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -356,7 +356,7 @@ var DBE;
                                             "value": "",
                                             "maxLength": 1000000000000,
                                             "minLength": 0,
-                                            "textAlign": 0,
+                                            "textAlign": 1,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -711,7 +711,7 @@ var DBE;
                                             "value": "",
                                             "maxLength": 1000000000000,
                                             "minLength": 0,
-                                            "textAlign": 0,
+                                            "textAlign": 1,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -772,7 +772,7 @@ var DBE;
                                             "value": "",
                                             "maxLength": 1000000000000,
                                             "minLength": 0,
-                                            "textAlign": 0,
+                                            "textAlign": 1,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -833,7 +833,7 @@ var DBE;
                                             "value": "",
                                             "maxLength": 1000000000000,
                                             "minLength": 0,
-                                            "textAlign": 0,
+                                            "textAlign": 1,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -894,7 +894,7 @@ var DBE;
                                             "value": "",
                                             "maxLength": 1000000000000,
                                             "minLength": 0,
-                                            "textAlign": 0,
+                                            "textAlign": 1,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -955,7 +955,7 @@ var DBE;
                                             "value": "",
                                             "maxLength": 1000000000000,
                                             "minLength": 0,
-                                            "textAlign": 0,
+                                            "textAlign": 1,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -1016,7 +1016,7 @@ var DBE;
                                             "value": "",
                                             "maxLength": 1000000000000,
                                             "minLength": 0,
-                                            "textAlign": 0,
+                                            "textAlign": 1,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -1077,7 +1077,7 @@ var DBE;
                                             "value": "",
                                             "maxLength": 1000000000000,
                                             "minLength": 0,
-                                            "textAlign": 0,
+                                            "textAlign": 1,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -1242,7 +1242,7 @@ var DBE;
                                             "value": "",
                                             "maxLength": 1000000000000,
                                             "minLength": 0,
-                                            "textAlign": 0,
+                                            "textAlign": 1,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -1303,7 +1303,7 @@ var DBE;
                                             "value": "",
                                             "maxLength": 1000000000000,
                                             "minLength": 0,
-                                            "textAlign": 0,
+                                            "textAlign": 1,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -1574,7 +1574,7 @@ var DBE;
                                             "value": "",
                                             "maxLength": 1000000000000,
                                             "minLength": 0,
-                                            "textAlign": 0,
+                                            "textAlign": 1,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -1635,7 +1635,7 @@ var DBE;
                                             "value": "",
                                             "maxLength": 1000000000000,
                                             "minLength": 0,
-                                            "textAlign": 0,
+                                            "textAlign": 1,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -1696,7 +1696,7 @@ var DBE;
                                             "value": "",
                                             "maxLength": 1000000000000,
                                             "minLength": 0,
-                                            "textAlign": 0,
+                                            "textAlign": 1,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -1757,7 +1757,7 @@ var DBE;
                                             "value": "",
                                             "maxLength": 1000000000000,
                                             "minLength": 0,
-                                            "textAlign": 0,
+                                            "textAlign": 2,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -1818,7 +1818,7 @@ var DBE;
                                             "value": "",
                                             "maxLength": 1000000000000,
                                             "minLength": 0,
-                                            "textAlign": 0,
+                                            "textAlign": 1,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -1860,7 +1860,7 @@ var DBE;
                             "fieldName": "lblNichiJyotaiHyokaKekka",
                             "items": [],
                             "controlType": "Label",
-                            "width": "240",
+                            "width": "257",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -1882,7 +1882,7 @@ var DBE;
                             "fieldName": "lblNinchiNichijyoSeikatsuJiritsudo",
                             "items": [],
                             "controlType": "Label",
-                            "width": "225",
+                            "width": "240",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -2012,7 +2012,7 @@ var DBE;
                             "text": "",
                             "labelLText": "状態の安定性",
                             "labelRText": "",
-                            "labelLWidth": "265",
+                            "labelLWidth": "279",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
@@ -2094,7 +2094,7 @@ var DBE;
                             "text": "",
                             "labelLText": "給付区分",
                             "labelRText": "",
-                            "labelLWidth": "265",
+                            "labelLWidth": "279",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
@@ -2213,7 +2213,7 @@ var DBE;
                             "onNoRow": "",
                             "onMultiRows": "",
                             "dataSource": [],
-                            "sortOrder": "code",
+                            "sortOrder": "setsumei",
                             "isAscending": true,
                             "filterList": [],
                             "activeRowId": -1
