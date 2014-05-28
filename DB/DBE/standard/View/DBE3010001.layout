@@ -45,8 +45,6 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "dataSource": [],
-     "height": "318",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": true,
@@ -65,7 +63,7 @@
         "dataName": "hokensha",
         "toolTip": "",
         "bgColor": 0,
-        "width": 65,
+        "width": 80,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -157,6 +155,20 @@
         "sortKey": "shinseiKbnShin"
        },
        {
+        "columnName": "一次判定<br>完了日",
+        "dataName": "ichijiHanteiKanryobi",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "ichijiHanteiKanryobi"
+       },
+       {
         "columnName": "一次<br>判定日",
         "dataName": "ichijiHanteibi",
         "toolTip": "",
@@ -227,19 +239,59 @@
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "ikenshoJuryobi"
+       },
+       {
+        "columnName": "No",
+        "dataName": "index",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 50,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "index"
        }
       ]
      },
+     "height": "500",
      "onSort": "",
      "onSelect": "",
      "onSelectByDblClick": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "sortOrder": "ichijiHanteibi",
+     "dataSource": [],
+     "sortOrder": "hihokenshaKana",
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1
+    },
+    {
+     "fieldName": "btnIchijiHanteiKanryo",
+     "items": [],
+     "controlType": "Button",
+     "width": "135",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "onClick": "",
+     "text": "一次判定を完了する",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
     },
     {
      "fieldName": "btnIchijiHantei",
@@ -251,7 +303,7 @@
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": true,
+     "wrap": false,
      "dependencies": [],
      "float": 2,
      "toolTip": "",
@@ -282,7 +334,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "onClick": "",
+     "onClick": "onClick_BtnKekkaKakunin",
      "text": "結果確認を行う",
      "appearance": 0,
      "imageFileUrl": "",
@@ -340,11 +392,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbe/db/dbe/TaishoShinsakaiIchiran/getOnloadData"
-    },
-    {
-     "eventName": "btnTorokuClick",
-     "requestUrl": "dbe/db/dbe/TaishoShinsakai/getOnloadData"
+     "requestUrl": "dbe/db/dbe/IchijiHanteiShoriTaishoshaIchiran/onLoad"
     }
    ],
    "hiddenInput": [],
@@ -383,13 +431,13 @@
      "marginRight": "XS",
      "text": "",
      "required": false,
-     "isPrivateInfo": false,
      "maxLength": 1000000000000,
      "minLength": 0,
      "textAlign": 1,
      "readOnly": true,
      "placeHolder": "1 / 10",
      "textKind": 0,
+     "isPrivateInfo": false,
      "isPassword": false,
      "isComboBox": false,
      "onFocus": "",
@@ -407,13 +455,13 @@
      "permitCharactor": ""
     },
     {
-     "fieldName": "TaishoshaJoho",
+     "fieldName": "IchijiHanteiKakuninTaishoshaJoho",
      "items": [
       {
        "fieldName": "txtHokensha",
        "items": [],
        "controlType": "TextBox",
-       "width": "80",
+       "width": "65",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -428,13 +476,13 @@
        "marginRight": "XS",
        "text": "",
        "required": false,
-       "isPrivateInfo": false,
        "maxLength": 1000000000000,
        "minLength": 0,
        "textAlign": 0,
        "readOnly": true,
        "placeHolder": "",
        "textKind": 0,
+       "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
        "onFocus": "",
@@ -445,7 +493,7 @@
        "value": "",
        "labelLText": "保険者",
        "labelRText": "",
-       "labelLWidth": "80",
+       "labelLWidth": "50",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -470,13 +518,13 @@
        "marginRight": "XS",
        "text": "",
        "required": false,
-       "isPrivateInfo": false,
        "maxLength": 1000000000000,
        "minLength": 0,
        "textAlign": 0,
        "readOnly": true,
        "placeHolder": "",
        "textKind": 2,
+       "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
        "onFocus": "",
@@ -487,12 +535,12 @@
        "value": "",
        "labelLText": "被保番号",
        "labelRText": "",
-       "labelLWidth": "60",
+       "labelLWidth": "65",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
        "permitCharactor": "",
-       "formatLength": 1
+       "formatLength": "10"
       },
       {
        "fieldName": "txtHihokenshaName",
@@ -513,13 +561,13 @@
        "marginRight": "XS",
        "text": "",
        "required": false,
-       "isPrivateInfo": false,
        "maxLength": 1000000000000,
        "minLength": 0,
        "textAlign": 0,
        "readOnly": true,
        "placeHolder": "",
        "textKind": 0,
+       "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
        "onFocus": "",
@@ -530,7 +578,7 @@
        "value": "",
        "labelLText": "被保険者氏名",
        "labelRText": "",
-       "labelLWidth": "90",
+       "labelLWidth": "100",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -555,10 +603,10 @@
        "marginRight": "XS",
        "text": "平26.05.15",
        "required": false,
-       "isPrivateInfo": false,
        "readOnly": true,
        "placeHolder": "",
        "textKind": 0,
+       "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
@@ -567,19 +615,19 @@
        "value": "2014/05/15",
        "labelLText": "申請日",
        "labelRText": "",
-       "labelLWidth": "45",
+       "labelLWidth": "50",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "permitCharactor": "./_-",
        "ymdKubun": 2,
-       "displayFormat": 0,
-       "permitCharactor": "./_-"
+       "displayFormat": 0
       },
       {
        "fieldName": "txtShinseiKbnShin",
        "items": [],
        "controlType": "TextBox",
-       "width": "S",
+       "width": "100",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -594,13 +642,13 @@
        "marginRight": "XS",
        "text": "",
        "required": false,
-       "isPrivateInfo": false,
        "maxLength": 1000000000000,
        "minLength": 0,
        "textAlign": 0,
        "readOnly": true,
        "placeHolder": "",
        "textKind": 0,
+       "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
        "onFocus": "",
@@ -611,7 +659,7 @@
        "value": "",
        "labelLText": "申請区分(申請時)",
        "labelRText": "",
-       "labelLWidth": "120",
+       "labelLWidth": "130",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -638,7 +686,7 @@
      "canOpenAndClose": true,
      "postParameterPanelNames": [
       {
-       "postParameterPanelNames": "TaishoshaJoho"
+       "postParameterPanelNames": "IchijiHanteiKakuninTaishoshaJoho"
       }
      ],
      "requestSettings": [],
@@ -657,7 +705,7 @@
      "isGroupBox": false
     },
     {
-     "fieldName": "ccdIchijiHanteiJoho",
+     "fieldName": "ccdIchijiHanteiKakuninJoho",
      "items": [],
      "controlType": "CommonChildDiv",
      "width": "XS",
@@ -699,7 +747,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "onClick": "",
+     "onClick": "onClick_BtnNextHyoji",
      "text": "次の対象者に進む",
      "appearance": 0,
      "imageFileUrl": "",
@@ -723,7 +771,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "onClick": "",
+     "onClick": "onClick_BtnPreHyoji",
      "text": "前の対象者に戻る",
      "appearance": 0,
      "imageFileUrl": "",
@@ -775,20 +823,36 @@
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
+     "postParameterPanelNames": "IchijiHanteiKekkaKakunin"
+    },
+    {
      "postParameterPanelNames": "IchijiHanteiShoriTaishoshaIchiran"
     }
    ],
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbe/db/dbe/TaishoShinsakaiIchiran/getOnloadData"
+     "requestUrl": ""
     },
     {
-     "eventName": "btnTorokuClick",
-     "requestUrl": "dbe/db/dbe/TaishoShinsakai/getOnloadData"
+     "eventName": "onClick_BtnKekkaKakunin",
+     "requestUrl": "dbe/db/dbe/IchijiHanteiKekkaKakunin/dispIchijiHanteiKekkaShosai"
+    },
+    {
+     "eventName": "onClick_BtnNextHyoji",
+     "requestUrl": "dbe/db/dbe/IchijiHanteiKekkaKakunin/dispNextIchijiHanteiKekkaShosai"
+    },
+    {
+     "eventName": "onClick_BtnPreHyoji",
+     "requestUrl": "dbe/db/dbe/IchijiHanteiKekkaKakunin/dispPreIchijiHanteiKekkaShosai"
     }
    ],
-   "hiddenInput": [],
+   "hiddenInput": [
+    {
+     "propertyName": "hidIdxNo",
+     "value": ""
+    }
+   ],
    "onOpen": "",
    "onClose": "",
    "session": {},
@@ -835,9 +899,14 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "btnClose",
+     "fieldName": "btnKekkaKakunin",
      "event": "onClick",
      "transition": "結果確認"
+    },
+    {
+     "fieldName": "btnClose",
+     "event": "onClick",
+     "transition": "終了"
     },
     {
      "fieldName": "btnReturn",
@@ -856,32 +925,21 @@
      "panelState": "visible"
     },
     {
-     "visibleDiv": "TaishoshaJoho",
+     "visibleDiv": "IchijiHanteiKakuninTaishoshaJoho",
      "panelState": "visible"
     },
     {
-     "visibleDiv": "IchijiHantei",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "KijunJikan",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "ChukanHyokaKomokuTokuten",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "NinchiJyotaiAnteiseiHyokaKekka",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "IchijiHanteiKeikokuCode",
+     "visibleDiv": "ccdIchijiHanteiKakuninJoho",
      "panelState": "visible"
     }
    ],
    "validation": {},
    "events": [
+    {
+     "fieldName": "btnKekkaKakunin",
+     "event": "onClick",
+     "transition": ""
+    },
     {
      "fieldName": "btnClose",
      "event": "onClick",
@@ -914,10 +972,10 @@
    "IchijiHanteiKekkaKakunin"
   ],
   [
-   "TaishoshaJoho"
+   "IchijiHanteiKakuninTaishoshaJoho"
   ],
   [
-   "ccdIchijiHanteiJoho"
+   "ccdIchijiHanteiKakuninJoho"
   ]
  ],
  "panelMargin": 1,

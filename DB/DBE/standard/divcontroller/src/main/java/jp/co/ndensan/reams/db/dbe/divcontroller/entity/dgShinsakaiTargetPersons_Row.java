@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue May 13 14:28:38 JST 2014 
+ * Mon May 26 17:31:39 JST 2014 
  */
 
 
@@ -23,62 +23,71 @@ public class dgShinsakaiTargetPersons_Row extends DataRow {
 
     private RString shinsaOrder;
     private RString hokenshaNo;
+    private RString hokenshaMeisho;
     private RString hihokenshaNo;
+    private RString hihokenshaKubun;
     private RString shimei;
     private RString kanaShimei;
     private RString shimeiAndKanaShimsei;
     private RString gender;
     private TextBoxFlexibleDate shinseiDate;
-    private RString latestYokaigodo;
-    private RString latestYukokikan;
-    private TextBoxFlexibleDate latestStartDate;
-    private TextBoxFlexibleDate latestEndDate;
+    private RString shinseiKubun;
     private RString ichijiHanteiResult;
     private RString yokaigodo;
     private RString yukokikan;
     private TextBoxFlexibleDate startDate;
     private TextBoxFlexibleDate endDate;
+    private RString latestYokaigodo;
+    private RString latestYukokikan;
+    private TextBoxFlexibleDate latestStartDate;
+    private TextBoxFlexibleDate latestEndDate;
 
     public dgShinsakaiTargetPersons_Row() {
         super();
     }
 
-    public dgShinsakaiTargetPersons_Row(RString shinsaOrder, RString hokenshaNo, RString hihokenshaNo, RString shimei, RString kanaShimei, RString shimeiAndKanaShimsei, RString gender, TextBoxFlexibleDate shinseiDate, RString latestYokaigodo, RString latestYukokikan, TextBoxFlexibleDate latestStartDate, TextBoxFlexibleDate latestEndDate, RString ichijiHanteiResult, RString yokaigodo, RString yukokikan, TextBoxFlexibleDate startDate, TextBoxFlexibleDate endDate) {
+    public dgShinsakaiTargetPersons_Row(RString shinsaOrder, RString hokenshaNo, RString hokenshaMeisho, RString hihokenshaNo, RString hihokenshaKubun, RString shimei, RString kanaShimei, RString shimeiAndKanaShimsei, RString gender, TextBoxFlexibleDate shinseiDate, RString shinseiKubun, RString ichijiHanteiResult, RString yokaigodo, RString yukokikan, TextBoxFlexibleDate startDate, TextBoxFlexibleDate endDate, RString latestYokaigodo, RString latestYukokikan, TextBoxFlexibleDate latestStartDate, TextBoxFlexibleDate latestEndDate) {
         super();
         this.setOriginalData("shinsaOrder", shinsaOrder);
         this.setOriginalData("hokenshaNo", hokenshaNo);
+        this.setOriginalData("hokenshaMeisho", hokenshaMeisho);
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
+        this.setOriginalData("hihokenshaKubun", hihokenshaKubun);
         this.setOriginalData("shimei", shimei);
         this.setOriginalData("kanaShimei", kanaShimei);
         this.setOriginalData("shimeiAndKanaShimsei", shimeiAndKanaShimsei);
         this.setOriginalData("gender", gender);
         this.setOriginalData("shinseiDate", shinseiDate);
-        this.setOriginalData("latestYokaigodo", latestYokaigodo);
-        this.setOriginalData("latestYukokikan", latestYukokikan);
-        this.setOriginalData("latestStartDate", latestStartDate);
-        this.setOriginalData("latestEndDate", latestEndDate);
+        this.setOriginalData("shinseiKubun", shinseiKubun);
         this.setOriginalData("ichijiHanteiResult", ichijiHanteiResult);
         this.setOriginalData("yokaigodo", yokaigodo);
         this.setOriginalData("yukokikan", yukokikan);
         this.setOriginalData("startDate", startDate);
         this.setOriginalData("endDate", endDate);
+        this.setOriginalData("latestYokaigodo", latestYokaigodo);
+        this.setOriginalData("latestYukokikan", latestYukokikan);
+        this.setOriginalData("latestStartDate", latestStartDate);
+        this.setOriginalData("latestEndDate", latestEndDate);
         this.shinsaOrder = shinsaOrder;
         this.hokenshaNo = hokenshaNo;
+        this.hokenshaMeisho = hokenshaMeisho;
         this.hihokenshaNo = hihokenshaNo;
+        this.hihokenshaKubun = hihokenshaKubun;
         this.shimei = shimei;
         this.kanaShimei = kanaShimei;
         this.shimeiAndKanaShimsei = shimeiAndKanaShimsei;
         this.gender = gender;
         this.shinseiDate = shinseiDate;
-        this.latestYokaigodo = latestYokaigodo;
-        this.latestYukokikan = latestYukokikan;
-        this.latestStartDate = latestStartDate;
-        this.latestEndDate = latestEndDate;
+        this.shinseiKubun = shinseiKubun;
         this.ichijiHanteiResult = ichijiHanteiResult;
         this.yokaigodo = yokaigodo;
         this.yukokikan = yukokikan;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.latestYokaigodo = latestYokaigodo;
+        this.latestYukokikan = latestYukokikan;
+        this.latestStartDate = latestStartDate;
+        this.latestEndDate = latestEndDate;
     }
 
     public RString getShinsaOrder() {
@@ -89,8 +98,16 @@ public class dgShinsakaiTargetPersons_Row extends DataRow {
         return hokenshaNo;
     }
 
+    public RString getHokenshaMeisho() {
+        return hokenshaMeisho;
+    }
+
     public RString getHihokenshaNo() {
         return hihokenshaNo;
+    }
+
+    public RString getHihokenshaKubun() {
+        return hihokenshaKubun;
     }
 
     public RString getShimei() {
@@ -113,20 +130,8 @@ public class dgShinsakaiTargetPersons_Row extends DataRow {
         return shinseiDate;
     }
 
-    public RString getLatestYokaigodo() {
-        return latestYokaigodo;
-    }
-
-    public RString getLatestYukokikan() {
-        return latestYukokikan;
-    }
-
-    public TextBoxFlexibleDate getLatestStartDate() {
-        return latestStartDate;
-    }
-
-    public TextBoxFlexibleDate getLatestEndDate() {
-        return latestEndDate;
+    public RString getShinseiKubun() {
+        return shinseiKubun;
     }
 
     public RString getIchijiHanteiResult() {
@@ -149,6 +154,22 @@ public class dgShinsakaiTargetPersons_Row extends DataRow {
         return endDate;
     }
 
+    public RString getLatestYokaigodo() {
+        return latestYokaigodo;
+    }
+
+    public RString getLatestYukokikan() {
+        return latestYukokikan;
+    }
+
+    public TextBoxFlexibleDate getLatestStartDate() {
+        return latestStartDate;
+    }
+
+    public TextBoxFlexibleDate getLatestEndDate() {
+        return latestEndDate;
+    }
+
     public void setShinsaOrder(RString shinsaOrder) {
         this.setOriginalData("shinsaOrder", shinsaOrder);
         this.shinsaOrder = shinsaOrder;
@@ -159,9 +180,19 @@ public class dgShinsakaiTargetPersons_Row extends DataRow {
         this.hokenshaNo = hokenshaNo;
     }
 
+    public void setHokenshaMeisho(RString hokenshaMeisho) {
+        this.setOriginalData("hokenshaMeisho", hokenshaMeisho);
+        this.hokenshaMeisho = hokenshaMeisho;
+    }
+
     public void setHihokenshaNo(RString hihokenshaNo) {
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
         this.hihokenshaNo = hihokenshaNo;
+    }
+
+    public void setHihokenshaKubun(RString hihokenshaKubun) {
+        this.setOriginalData("hihokenshaKubun", hihokenshaKubun);
+        this.hihokenshaKubun = hihokenshaKubun;
     }
 
     public void setShimei(RString shimei) {
@@ -189,24 +220,9 @@ public class dgShinsakaiTargetPersons_Row extends DataRow {
         this.shinseiDate = shinseiDate;
     }
 
-    public void setLatestYokaigodo(RString latestYokaigodo) {
-        this.setOriginalData("latestYokaigodo", latestYokaigodo);
-        this.latestYokaigodo = latestYokaigodo;
-    }
-
-    public void setLatestYukokikan(RString latestYukokikan) {
-        this.setOriginalData("latestYukokikan", latestYukokikan);
-        this.latestYukokikan = latestYukokikan;
-    }
-
-    public void setLatestStartDate(TextBoxFlexibleDate latestStartDate) {
-        this.setOriginalData("latestStartDate", latestStartDate);
-        this.latestStartDate = latestStartDate;
-    }
-
-    public void setLatestEndDate(TextBoxFlexibleDate latestEndDate) {
-        this.setOriginalData("latestEndDate", latestEndDate);
-        this.latestEndDate = latestEndDate;
+    public void setShinseiKubun(RString shinseiKubun) {
+        this.setOriginalData("shinseiKubun", shinseiKubun);
+        this.shinseiKubun = shinseiKubun;
     }
 
     public void setIchijiHanteiResult(RString ichijiHanteiResult) {
@@ -232,6 +248,26 @@ public class dgShinsakaiTargetPersons_Row extends DataRow {
     public void setEndDate(TextBoxFlexibleDate endDate) {
         this.setOriginalData("endDate", endDate);
         this.endDate = endDate;
+    }
+
+    public void setLatestYokaigodo(RString latestYokaigodo) {
+        this.setOriginalData("latestYokaigodo", latestYokaigodo);
+        this.latestYokaigodo = latestYokaigodo;
+    }
+
+    public void setLatestYukokikan(RString latestYukokikan) {
+        this.setOriginalData("latestYukokikan", latestYukokikan);
+        this.latestYukokikan = latestYukokikan;
+    }
+
+    public void setLatestStartDate(TextBoxFlexibleDate latestStartDate) {
+        this.setOriginalData("latestStartDate", latestStartDate);
+        this.latestStartDate = latestStartDate;
+    }
+
+    public void setLatestEndDate(TextBoxFlexibleDate latestEndDate) {
+        this.setOriginalData("latestEndDate", latestEndDate);
+        this.latestEndDate = latestEndDate;
     }
 
 }

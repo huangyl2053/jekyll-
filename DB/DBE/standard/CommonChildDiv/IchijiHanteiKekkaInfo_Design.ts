@@ -114,49 +114,7 @@ module DBE {
      "textAlign": 1,
      "isComboBox": false,
      "suggest": []
-    }
-   ],
-   "controlType": "Panel",
-   "width": "985",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": true,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
-   "onLoad": "",
-   "title": "",
-   "marginTop": "Default",
-   "marginBottom": "Default",
-   "isOpen": true,
-   "canOpenAndClose": true,
-   "postParameterPanelNames": [
-    {
-     "postParameterPanelNames": "IchijiHantei"
-    }
-   ],
-   "requestSettings": [],
-   "hiddenInput": [],
-   "onOpen": "",
-   "onClose": "",
-   "session": {},
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
-   "backgroundColor": 0,
-   "widthAuto": false,
-   "isGroupBox": false
-  },
-  {
-   "fieldName": "KijunJikan",
-   "items": [
+    },
     {
      "fieldName": "txtKijunJikan",
      "items": [],
@@ -167,7 +125,7 @@ module DBE {
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": false,
+     "wrap": true,
      "dependencies": [],
      "float": 0,
      "toolTip": "",
@@ -197,6 +155,28 @@ module DBE {
      "textAlign": 1,
      "isComboBox": false,
      "suggest": []
+    },
+    {
+     "fieldName": "lblChukanHyokaKomokuTokuten",
+     "items": [],
+     "controlType": "Label",
+     "width": "300",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "required": false,
+     "isPrivateInfo": false,
+     "text": "中間評価項目得点",
+     "align": 2
     },
     {
      "fieldName": "tblKijunJikan",
@@ -325,7 +305,7 @@ module DBE {
          "value": "",
          "maxLength": 1000000000000,
          "minLength": 0,
-         "textAlign": 0,
+         "textAlign": 1,
          "isComboBox": false,
          "suggest": []
         }
@@ -386,7 +366,7 @@ module DBE {
          "value": "",
          "maxLength": 1000000000000,
          "minLength": 0,
-         "textAlign": 0,
+         "textAlign": 1,
          "isComboBox": false,
          "suggest": []
         }
@@ -741,7 +721,7 @@ module DBE {
          "value": "",
          "maxLength": 1000000000000,
          "minLength": 0,
-         "textAlign": 0,
+         "textAlign": 1,
          "isComboBox": false,
          "suggest": []
         }
@@ -802,7 +782,7 @@ module DBE {
          "value": "",
          "maxLength": 1000000000000,
          "minLength": 0,
-         "textAlign": 0,
+         "textAlign": 1,
          "isComboBox": false,
          "suggest": []
         }
@@ -863,7 +843,7 @@ module DBE {
          "value": "",
          "maxLength": 1000000000000,
          "minLength": 0,
-         "textAlign": 0,
+         "textAlign": 1,
          "isComboBox": false,
          "suggest": []
         }
@@ -924,7 +904,7 @@ module DBE {
          "value": "",
          "maxLength": 1000000000000,
          "minLength": 0,
-         "textAlign": 0,
+         "textAlign": 1,
          "isComboBox": false,
          "suggest": []
         }
@@ -985,7 +965,7 @@ module DBE {
          "value": "",
          "maxLength": 1000000000000,
          "minLength": 0,
-         "textAlign": 0,
+         "textAlign": 1,
          "isComboBox": false,
          "suggest": []
         }
@@ -1046,7 +1026,7 @@ module DBE {
          "value": "",
          "maxLength": 1000000000000,
          "minLength": 0,
-         "textAlign": 0,
+         "textAlign": 1,
          "isComboBox": false,
          "suggest": []
         }
@@ -1107,7 +1087,7 @@ module DBE {
          "value": "",
          "maxLength": 1000000000000,
          "minLength": 0,
-         "textAlign": 0,
+         "textAlign": 1,
          "isComboBox": false,
          "suggest": []
         }
@@ -1144,70 +1124,6 @@ module DBE {
      "marginLeft": "2",
      "marginRight": "XS",
      "html": "<table>\n  <tbody>\n    <tr><td id='R1C1'></td><td id='R1C2'></td><td id='R1C3'></td><td id='R1C4'></td><td id='R1C5'></td><td id='R1C6'></td><td id='R1C7'></td><td id='R1C8'></td><td id='R1C9'></td></tr>\n    <tr><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td><td id='R2C7'></td><td id='R2C8'></td><td id='R2C9'></td></tr>\n  </tbody>\n</table>\n"
-    }
-   ],
-   "controlType": "Panel",
-   "width": "545",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": false,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
-   "onLoad": "",
-   "title": "",
-   "marginTop": "Default",
-   "marginBottom": "Default",
-   "isOpen": true,
-   "canOpenAndClose": true,
-   "postParameterPanelNames": [
-    {
-     "postParameterPanelNames": "KijunJikan"
-    }
-   ],
-   "requestSettings": [],
-   "hiddenInput": [],
-   "onOpen": "",
-   "onClose": "",
-   "session": {},
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
-   "backgroundColor": 0,
-   "widthAuto": false,
-   "isGroupBox": false
-  },
-  {
-   "fieldName": "ChukanHyokaKomokuTokuten",
-   "items": [
-    {
-     "fieldName": "lblChukanHyokaKomokuTokuten",
-     "items": [],
-     "controlType": "Label",
-     "width": "M",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "required": false,
-     "isPrivateInfo": false,
-     "text": "中間評価項目得点",
-     "align": 0
     },
     {
      "fieldName": "tblTyukanHyokaKomokuTokuten",
@@ -1336,7 +1252,7 @@ module DBE {
          "value": "",
          "maxLength": 1000000000000,
          "minLength": 0,
-         "textAlign": 0,
+         "textAlign": 1,
          "isComboBox": false,
          "suggest": []
         }
@@ -1397,7 +1313,7 @@ module DBE {
          "value": "",
          "maxLength": 1000000000000,
          "minLength": 0,
-         "textAlign": 0,
+         "textAlign": 1,
          "isComboBox": false,
          "suggest": []
         }
@@ -1668,7 +1584,7 @@ module DBE {
          "value": "",
          "maxLength": 1000000000000,
          "minLength": 0,
-         "textAlign": 0,
+         "textAlign": 1,
          "isComboBox": false,
          "suggest": []
         }
@@ -1729,7 +1645,7 @@ module DBE {
          "value": "",
          "maxLength": 1000000000000,
          "minLength": 0,
-         "textAlign": 0,
+         "textAlign": 1,
          "isComboBox": false,
          "suggest": []
         }
@@ -1790,7 +1706,7 @@ module DBE {
          "value": "",
          "maxLength": 1000000000000,
          "minLength": 0,
-         "textAlign": 0,
+         "textAlign": 1,
          "isComboBox": false,
          "suggest": []
         }
@@ -1851,7 +1767,7 @@ module DBE {
          "value": "",
          "maxLength": 1000000000000,
          "minLength": 0,
-         "textAlign": 0,
+         "textAlign": 2,
          "isComboBox": false,
          "suggest": []
         }
@@ -1912,7 +1828,7 @@ module DBE {
          "value": "",
          "maxLength": 1000000000000,
          "minLength": 0,
-         "textAlign": 0,
+         "textAlign": 1,
          "isComboBox": false,
          "suggest": []
         }
@@ -1941,7 +1857,7 @@ module DBE {
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": true,
+     "wrap": false,
      "dependencies": [],
      "float": 0,
      "toolTip": "",
@@ -1949,76 +1865,12 @@ module DBE {
      "marginLeft": "XS",
      "marginRight": "XS",
      "html": "<table>\n  <tbody>\n    <tr><td id='R1C1'></td><td id='R1C2'></td><td id='R1C3'></td><td id='R1C4'></td><td id='R1C5'></td><td id='R1C6'></td><td id='R1C7'></td></tr>\n    <tr><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td><td id='R2C7'></td></tr>\n  </tbody>\n</table>\n"
-    }
-   ],
-   "controlType": "Panel",
-   "width": "429",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": false,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
-   "onLoad": "",
-   "title": "",
-   "marginTop": "Default",
-   "marginBottom": "Default",
-   "isOpen": true,
-   "canOpenAndClose": true,
-   "postParameterPanelNames": [
-    {
-     "postParameterPanelNames": "KijunJikan"
-    }
-   ],
-   "requestSettings": [],
-   "hiddenInput": [],
-   "onOpen": "",
-   "onClose": "",
-   "session": {},
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
-   "backgroundColor": 0,
-   "widthAuto": false,
-   "isGroupBox": false
-  },
-  {
-   "fieldName": "NinchiJyotaiAnteiseiHyokaKekka",
-   "items": [
+    },
     {
      "fieldName": "lblNichiJyotaiHyokaKekka",
      "items": [],
      "controlType": "Label",
-     "width": "270",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "2",
-     "marginRight": "XS",
-     "required": false,
-     "isPrivateInfo": false,
-     "text": "認知機能・状態の安定性の評価結果",
-     "align": 0
-    },
-    {
-     "fieldName": "lblNinchiNichijyoSeikatsuJiritsudo",
-     "items": [],
-     "controlType": "Label",
-     "width": "255",
+     "width": "257",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -2029,12 +1881,34 @@ module DBE {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "3",
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "required": false,
+     "isPrivateInfo": false,
+     "text": "認知機能・状態の安定性の評価結果",
+     "align": 2
+    },
+    {
+     "fieldName": "lblNinchiNichijyoSeikatsuJiritsudo",
+     "items": [],
+     "controlType": "Label",
+     "width": "240",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
      "marginRight": "XS",
      "required": false,
      "isPrivateInfo": false,
      "text": "認知症高齢者の日常生活自立度",
-     "align": 0
+     "align": 2
     },
     {
      "fieldName": "txtGaizensei",
@@ -2066,9 +1940,9 @@ module DBE {
      "text": "",
      "labelLText": "認知症自立度Ⅱ以上の蓋然性",
      "labelRText": "％",
-     "labelLWidth": "200",
+     "labelLWidth": "220",
      "labelRWidth": "S",
-     "labelLAlign": 0,
+     "labelLAlign": 2,
      "labelRAlign": 0,
      "value": "",
      "maxLength": 1000000000000,
@@ -2092,7 +1966,7 @@ module DBE {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "4",
+     "marginLeft": "XS",
      "marginRight": "XS",
      "required": false,
      "readOnly": true,
@@ -2107,9 +1981,9 @@ module DBE {
      "text": "",
      "labelLText": "認定調査結果",
      "labelRText": "",
-     "labelLWidth": "100",
+     "labelLWidth": "123",
      "labelRWidth": "S",
-     "labelLAlign": 0,
+     "labelLAlign": 2,
      "labelRAlign": 0,
      "value": "",
      "maxLength": 1000000000000,
@@ -2133,7 +2007,7 @@ module DBE {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "13",
+     "marginLeft": "XS",
      "marginRight": "XS",
      "required": false,
      "readOnly": true,
@@ -2148,9 +2022,9 @@ module DBE {
      "text": "",
      "labelLText": "状態の安定性",
      "labelRText": "",
-     "labelLWidth": "99",
+     "labelLWidth": "279",
      "labelRWidth": "S",
-     "labelLAlign": 0,
+     "labelLAlign": 2,
      "labelRAlign": 0,
      "value": "",
      "maxLength": 1000000000000,
@@ -2174,7 +2048,7 @@ module DBE {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "4",
+     "marginLeft": "XS",
      "marginRight": "XS",
      "required": false,
      "readOnly": true,
@@ -2189,9 +2063,9 @@ module DBE {
      "text": "",
      "labelLText": "主治医意見書",
      "labelRText": "",
-     "labelLWidth": "100",
+     "labelLWidth": "123",
      "labelRWidth": "S",
-     "labelLAlign": 0,
+     "labelLAlign": 2,
      "labelRAlign": 0,
      "value": "",
      "maxLength": 1000000000000,
@@ -2215,7 +2089,7 @@ module DBE {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "15",
+     "marginLeft": "XS",
      "marginRight": "XS",
      "required": false,
      "readOnly": true,
@@ -2230,9 +2104,9 @@ module DBE {
      "text": "",
      "labelLText": "給付区分",
      "labelRText": "",
-     "labelLWidth": "69",
+     "labelLWidth": "279",
      "labelRWidth": "S",
-     "labelLAlign": 0,
+     "labelLAlign": 2,
      "labelRAlign": 0,
      "value": "",
      "maxLength": 1000000000000,
@@ -2240,49 +2114,7 @@ module DBE {
      "textAlign": 1,
      "isComboBox": false,
      "suggest": []
-    }
-   ],
-   "controlType": "Panel",
-   "width": "985",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": true,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
-   "onLoad": "",
-   "title": "",
-   "marginTop": "Default",
-   "marginBottom": "Default",
-   "isOpen": true,
-   "canOpenAndClose": true,
-   "postParameterPanelNames": [
-    {
-     "postParameterPanelNames": "KijunJikan"
-    }
-   ],
-   "requestSettings": [],
-   "hiddenInput": [],
-   "onOpen": "",
-   "onClose": "",
-   "session": {},
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
-   "backgroundColor": 0,
-   "widthAuto": false,
-   "isGroupBox": false
-  },
-  {
-   "fieldName": "IchijiHanteiKeikokuCode",
-   "items": [
+    },
     {
      "fieldName": "lblIchijiHanteiKeikokuCode",
      "items": [],
@@ -2293,7 +2125,7 @@ module DBE {
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": false,
+     "wrap": true,
      "dependencies": [],
      "float": 0,
      "toolTip": "",
@@ -2419,7 +2251,7 @@ module DBE {
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "KijunJikan"
+     "postParameterPanelNames": "IchijiHantei"
     }
    ],
    "requestSettings": [],

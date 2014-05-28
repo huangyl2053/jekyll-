@@ -26,6 +26,8 @@ public class TaishoShinsakaiIchiranDiv extends Panel {
     private DataGrid<dgShinsakaiIchiran_Row> dgShinsakaiIchiran;
     @JsonProperty("btnClose")
     private Button btnClose;
+    @JsonProperty("btnSelect")
+    private Button btnSelect;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -51,6 +53,16 @@ public class TaishoShinsakaiIchiranDiv extends Panel {
     @JsonProperty("btnClose")
     public void setBtnClose(Button btnClose) {
         this.btnClose=btnClose;
+    }
+
+    @JsonProperty("btnSelect")
+    public Button getBtnSelect() {
+        return btnSelect;
+    }
+
+    @JsonProperty("btnSelect")
+    public void setBtnSelect(Button btnSelect) {
+        this.btnSelect=btnSelect;
     }
 
 }

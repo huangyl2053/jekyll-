@@ -23,8 +23,8 @@ public class PublishingShinsakaiResultsDiv extends Panel {
      */
     @JsonProperty("btnToPublish")
     private Button btnToPublish;
-    @JsonProperty("btnToPublishOnlySeiho")
-    private Button btnToPublishOnlySeiho;
+    @JsonProperty("btnToReturnShinsakaiList")
+    private Button btnToReturnShinsakaiList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -42,14 +42,14 @@ public class PublishingShinsakaiResultsDiv extends Panel {
         this.btnToPublish=btnToPublish;
     }
 
-    @JsonProperty("btnToPublishOnlySeiho")
-    public Button getBtnToPublishOnlySeiho() {
-        return btnToPublishOnlySeiho;
+    @JsonProperty("btnToReturnShinsakaiList")
+    public Button getBtnToReturnShinsakaiList() {
+        return btnToReturnShinsakaiList;
     }
 
-    @JsonProperty("btnToPublishOnlySeiho")
-    public void setBtnToPublishOnlySeiho(Button btnToPublishOnlySeiho) {
-        this.btnToPublishOnlySeiho=btnToPublishOnlySeiho;
+    @JsonProperty("btnToReturnShinsakaiList")
+    public void setBtnToReturnShinsakaiList(Button btnToReturnShinsakaiList) {
+        this.btnToReturnShinsakaiList=btnToReturnShinsakaiList;
     }
 
 }

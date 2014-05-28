@@ -5,13 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.TaishoShinsakaiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import org.joda.time.LocalTime;
 
 /**
  * 対象審査会の情報を編集します。
@@ -20,19 +23,39 @@ import org.joda.time.LocalTime;
  */
 public class TaishoShinsakai {
 
-    public ResponseData getOnloadData(TaishoShinsakaiDiv div) {
+    /**
+     * 審査会審査結果入力を行う対象となる審査会の情報を表示する画面のロード時の設定を表します。
+     *
+     * @param div 対象審査会情報Div
+     * @return ResponseData
+     */
+    public ResponseData onLoadData(TaishoShinsakaiDiv div) {
         ResponseData<TaishoShinsakaiDiv> response = new ResponseData<>();
+        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("ShinsaKekkaTaishoShinsakai.yml"));
+        Map map = targetSource.get(0);
 
-        div.getTxtGogitai().setValue(new RString("合議体２"));
-        div.getTxtShinsaStartTime().setValue(RTime.of(15, 00));
-        div.getTxtShinsaEndTime().setValue(RTime.of(16, 30));
-        div.getTxtShinsaTaishoshaSu().setValue(new Decimal(10));
-        div.getTxtShinsaTaishoMax().setValue(new Decimal(40));
-        div.getTxtShinsakaiYoteibi().setValue(new RDate("2014/04/25"));
-        div.getTxtShinsakaiKaisaibi().setValue(new RDate("2014/04/25"));
+        System.out.println(_toRString(map.get("合議体")));
+        div.getTxtGogitai().setValue(_toRString(map.get("合議体")));
+        int startTimeHour = new Integer(map.get("開始時間時").toString());
+        int startTimeMin = new Integer(map.get("開始時間分").toString());
+        div.getTxtShinsaStartTime().setValue(RTime.of(startTimeHour, startTimeMin));
+        int endTimeHour = new Integer(map.get("終了時間時").toString());
+        int endTimeMin = new Integer(map.get("終了時間分").toString());
+        div.getTxtShinsaEndTime().setValue(RTime.of(endTimeHour, endTimeMin));
+        div.getTxtShinsaTaishoshaSu().setValue(new Decimal(map.get("対象人数").toString()));
+        div.getTxtShinsaTaishoMax().setValue(new Decimal(map.get("可能人数").toString()));
+        div.getTxtShinsakaiYoteibi().setValue(new FlexibleDate(map.get("開催予定日").toString()));
+        div.getTxtShinsakaiKaisaibi().setValue(new FlexibleDate(map.get("開催日").toString()));
 
         response.data = div;
         return response;
+    }
+
+    private static RString _toRString(Object obj) {
+        if (obj == null) {
+            return RString.EMPTY;
+        }
+        return new RString(obj.toString());
     }
 
 }
