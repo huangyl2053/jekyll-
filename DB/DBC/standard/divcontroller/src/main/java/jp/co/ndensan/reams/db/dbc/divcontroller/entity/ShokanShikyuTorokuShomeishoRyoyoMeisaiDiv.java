@@ -35,6 +35,8 @@ public class ShokanShikyuTorokuShomeishoRyoyoMeisaiDiv extends Panel {
     private ShokanShikyuTorokuShomeishoRyoyoTensuDiv ShokanShikyuTorokuShomeishoRyoyoTensu;
     @JsonProperty("btnRyoyohiKakutei")
     private Button btnRyoyohiKakutei;
+    @JsonProperty("txtRyoyoSelectedIndex")
+    private TextBox txtRyoyoSelectedIndex;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -90,6 +92,16 @@ public class ShokanShikyuTorokuShomeishoRyoyoMeisaiDiv extends Panel {
     @JsonProperty("btnRyoyohiKakutei")
     public void setBtnRyoyohiKakutei(Button btnRyoyohiKakutei) {
         this.btnRyoyohiKakutei=btnRyoyohiKakutei;
+    }
+
+    @JsonProperty("txtRyoyoSelectedIndex")
+    public TextBox getTxtRyoyoSelectedIndex() {
+        return txtRyoyoSelectedIndex;
+    }
+
+    @JsonProperty("txtRyoyoSelectedIndex")
+    public void setTxtRyoyoSelectedIndex(TextBox txtRyoyoSelectedIndex) {
+        this.txtRyoyoSelectedIndex=txtRyoyoSelectedIndex;
     }
 
 }
