@@ -21,8 +21,6 @@ public class TokkijikoCom extends CompositeControl {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblChosaItem")
-    private Label lblChosaItem;
     @JsonProperty("ddlChosaItem")
     private DropDownList ddlChosaItem;
     @JsonProperty("txtTokkijikoContent")
@@ -34,16 +32,6 @@ public class TokkijikoCom extends CompositeControl {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblChosaItem")
-    public Label getLblChosaItem() {
-        return lblChosaItem;
-    }
-
-    @JsonProperty("lblChosaItem")
-    public void setLblChosaItem(Label lblChosaItem) {
-        this.lblChosaItem=lblChosaItem;
-    }
-
     @JsonProperty("ddlChosaItem")
     public DropDownList getDdlChosaItem() {
         return ddlChosaItem;

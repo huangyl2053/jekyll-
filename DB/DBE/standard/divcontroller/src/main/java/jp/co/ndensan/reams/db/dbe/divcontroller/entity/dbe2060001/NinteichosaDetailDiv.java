@@ -21,24 +21,16 @@ public class NinteichosaDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblShozokuKikan")
-    private Label lblShozokuKikan;
     @JsonProperty("txtChosaItakusakiCode")
     private TextBoxCode txtChosaItakusakiCode;
     @JsonProperty("txtChosaItakusakiName")
     private TextBox txtChosaItakusakiName;
-    @JsonProperty("lblChosaJisshiDate")
-    private Label lblChosaJisshiDate;
-    @JsonProperty("txtChosaJisshiDate")
-    private TextBoxDate txtChosaJisshiDate;
-    @JsonProperty("lblChosain")
-    private Label lblChosain;
     @JsonProperty("txtChosainCode")
     private TextBoxCode txtChosainCode;
     @JsonProperty("txtChosainName")
     private TextBox txtChosainName;
-    @JsonProperty("lblChosaJisshiBasho")
-    private Label lblChosaJisshiBasho;
+    @JsonProperty("txtChosaJisshiDate")
+    private TextBoxDate txtChosaJisshiDate;
     @JsonProperty("radChosaJisshiBasho")
     private RadioButton radChosaJisshiBasho;
     @JsonProperty("txtChosaJisshiBashoFreeInput")
@@ -50,16 +42,6 @@ public class NinteichosaDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblShozokuKikan")
-    public Label getLblShozokuKikan() {
-        return lblShozokuKikan;
-    }
-
-    @JsonProperty("lblShozokuKikan")
-    public void setLblShozokuKikan(Label lblShozokuKikan) {
-        this.lblShozokuKikan=lblShozokuKikan;
-    }
-
     @JsonProperty("txtChosaItakusakiCode")
     public TextBoxCode getTxtChosaItakusakiCode() {
         return txtChosaItakusakiCode;
@@ -78,36 +60,6 @@ public class NinteichosaDetailDiv extends Panel {
     @JsonProperty("txtChosaItakusakiName")
     public void setTxtChosaItakusakiName(TextBox txtChosaItakusakiName) {
         this.txtChosaItakusakiName=txtChosaItakusakiName;
-    }
-
-    @JsonProperty("lblChosaJisshiDate")
-    public Label getLblChosaJisshiDate() {
-        return lblChosaJisshiDate;
-    }
-
-    @JsonProperty("lblChosaJisshiDate")
-    public void setLblChosaJisshiDate(Label lblChosaJisshiDate) {
-        this.lblChosaJisshiDate=lblChosaJisshiDate;
-    }
-
-    @JsonProperty("txtChosaJisshiDate")
-    public TextBoxDate getTxtChosaJisshiDate() {
-        return txtChosaJisshiDate;
-    }
-
-    @JsonProperty("txtChosaJisshiDate")
-    public void setTxtChosaJisshiDate(TextBoxDate txtChosaJisshiDate) {
-        this.txtChosaJisshiDate=txtChosaJisshiDate;
-    }
-
-    @JsonProperty("lblChosain")
-    public Label getLblChosain() {
-        return lblChosain;
-    }
-
-    @JsonProperty("lblChosain")
-    public void setLblChosain(Label lblChosain) {
-        this.lblChosain=lblChosain;
     }
 
     @JsonProperty("txtChosainCode")
@@ -130,14 +82,14 @@ public class NinteichosaDetailDiv extends Panel {
         this.txtChosainName=txtChosainName;
     }
 
-    @JsonProperty("lblChosaJisshiBasho")
-    public Label getLblChosaJisshiBasho() {
-        return lblChosaJisshiBasho;
+    @JsonProperty("txtChosaJisshiDate")
+    public TextBoxDate getTxtChosaJisshiDate() {
+        return txtChosaJisshiDate;
     }
 
-    @JsonProperty("lblChosaJisshiBasho")
-    public void setLblChosaJisshiBasho(Label lblChosaJisshiBasho) {
-        this.lblChosaJisshiBasho=lblChosaJisshiBasho;
+    @JsonProperty("txtChosaJisshiDate")
+    public void setTxtChosaJisshiDate(TextBoxDate txtChosaJisshiDate) {
+        this.txtChosaJisshiDate=txtChosaJisshiDate;
     }
 
     @JsonProperty("radChosaJisshiBasho")

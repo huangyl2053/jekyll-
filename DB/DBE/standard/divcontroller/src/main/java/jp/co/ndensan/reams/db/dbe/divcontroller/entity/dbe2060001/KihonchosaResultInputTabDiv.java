@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.IchjiHanteiFromInputedChosaResultDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.Kihonchosa09Div;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.KihonchosaResultGuidanceDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
@@ -23,6 +24,8 @@ public class KihonchosaResultInputTabDiv extends TabPanel {
      */
     @JsonProperty("KihonchosaResultGuidance")
     private KihonchosaResultGuidanceDiv KihonchosaResultGuidance;
+    @JsonProperty("IchjiHanteiFromInputedChosaResult")
+    private IchjiHanteiFromInputedChosaResultDiv IchjiHanteiFromInputedChosaResult;
     @JsonProperty("Kihonchosa09")
     private Kihonchosa09Div Kihonchosa09;
 
@@ -40,6 +43,16 @@ public class KihonchosaResultInputTabDiv extends TabPanel {
     @JsonProperty("KihonchosaResultGuidance")
     public void setKihonchosaResultGuidance(KihonchosaResultGuidanceDiv KihonchosaResultGuidance) {
         this.KihonchosaResultGuidance=KihonchosaResultGuidance;
+    }
+
+    @JsonProperty("IchjiHanteiFromInputedChosaResult")
+    public IchjiHanteiFromInputedChosaResultDiv getIchjiHanteiFromInputedChosaResult() {
+        return IchjiHanteiFromInputedChosaResult;
+    }
+
+    @JsonProperty("IchjiHanteiFromInputedChosaResult")
+    public void setIchjiHanteiFromInputedChosaResult(IchjiHanteiFromInputedChosaResultDiv IchjiHanteiFromInputedChosaResult) {
+        this.IchjiHanteiFromInputedChosaResult=IchjiHanteiFromInputedChosaResult;
     }
 
     @JsonProperty("Kihonchosa09")

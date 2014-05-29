@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  *
  * @author N3327 三浦 凌
  */
-public class YamlUtil {
+public final class YamlUtil {
 
     private YamlUtil() {
     }
@@ -92,7 +92,7 @@ public class YamlUtil {
     /**
      * HashMapを変換するための定数やインターフェースを持ちます。
      */
-    public static class Converter {
+    public static final class Converter {
 
         private Converter() {
         }
@@ -114,12 +114,18 @@ public class YamlUtil {
         }
 
         /**
-         * 指定の方へHashMapを変換します。
+         * 指定の型へMapを変換します。
          *
          * @param <T> 変換後の型
          */
-        public static interface IConverter<T> {
+        public interface IConverter<T> {
 
+            /**
+             * MapをT型のオブジェクトへ変換して返します。
+             *
+             * @param map Map
+             * @return T型のオブジェクト
+             */
             T exec(Map map);
         }
 
