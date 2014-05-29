@@ -8,12 +8,15 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.IchijiHanteiShoriTaishoshaIchiranDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgIchijiHanteiTaishoshaIchiran_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe3010001.IchijiHanteiShoriTaishoshaIchiranDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe3010001.dgIchijiHanteiTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  *
@@ -24,29 +27,74 @@ public class IchijiHanteiShoriTaishoshaIchiran {
     public ResponseData<IchijiHanteiShoriTaishoshaIchiranDiv> onLoad(IchijiHanteiShoriTaishoshaIchiranDiv panel) {
         ResponseData<IchijiHanteiShoriTaishoshaIchiranDiv> response = new ResponseData<>();
 
-        setIchijiHanteiShoriTaishoshaData(panel);
+        int intShoriFlg = 0;
+        setIchijiHanteiShoriTaishoshaData(intShoriFlg, panel);
         response.data = panel;
 
         return response;
 
     }
 
-    private void setIchijiHanteiShoriTaishoshaData(IchijiHanteiShoriTaishoshaIchiranDiv panel) {
+    public ResponseData<IchijiHanteiShoriTaishoshaIchiranDiv> onClick_BtnIchijiHantei(IchijiHanteiShoriTaishoshaIchiranDiv panel) {
+        ResponseData<IchijiHanteiShoriTaishoshaIchiranDiv> response = new ResponseData<>();
+
+        int intShoriFlg = 1;
+        setIchijiHanteiShoriTaishoshaData(intShoriFlg, panel);
+        response.data = panel;
+
+        return response;
+
+    }
+
+    public ResponseData<IchijiHanteiShoriTaishoshaIchiranDiv> onClick_BtnIchijiHanteiKanryo(IchijiHanteiShoriTaishoshaIchiranDiv panel) {
+        ResponseData<IchijiHanteiShoriTaishoshaIchiranDiv> response = new ResponseData<>();
+
+        int intShoriFlg = 2;
+        setIchijiHanteiShoriTaishoshaData(intShoriFlg, panel);
+        response.data = panel;
+
+        return response;
+
+    }
+
+    private void setIchijiHanteiShoriTaishoshaData(int intShoriFlg, IchijiHanteiShoriTaishoshaIchiranDiv panel) {
+
+        List<HashMap> IchijiHanteiTaishoshaData = YamlLoader.FOR_DBE.loadAsList(new RString("IchijiHanteiShoriTaishoshaIchiran.yml"));
 
         List<dgIchijiHanteiTaishoshaIchiran_Row> IchijiHanteiTaishoshaSelectData = panel.getDgIchijiHanteiTaishoshaIchiran().getSelectedItems();
-        panel.getDgIchijiHanteiTaishoshaIchiran().getClickedRowId();
-        List arraydata = createRowIchijiHanteiTaishosha();
-        DataGrid grid = panel.getDgIchijiHanteiTaishoshaIchiran();
-        grid.setDataSource(arraydata);
+        if (intShoriFlg == 0) {
+            List arraydata = createRowIchijiHanteiTaishosha(IchijiHanteiTaishoshaData);
+            DataGrid grid = panel.getDgIchijiHanteiTaishoshaIchiran();
+            grid.setDataSource(arraydata);
+        } else if (intShoriFlg == 1) {
+            for (int i = 0; i < IchijiHanteiTaishoshaSelectData.size(); i++) {
+                HashMap hashMap = IchijiHanteiTaishoshaData.get(Integer.parseInt(IchijiHanteiTaishoshaSelectData.get(i).getIndex().toString()));
+                IchijiHanteiTaishoshaSelectData.get(i).setIchijiHanteibi(new RString(hashMap.get("ichijiHanteibi").toString()));
+                IchijiHanteiTaishoshaSelectData.get(i).setIchijiHanteiKekka(new RString(hashMap.get("ichijiHanteiKekka").toString()));
+                IchijiHanteiTaishoshaSelectData.get(i).setKeikokuCode(new RString(hashMap.get("keikokuCode").toString()));
+            }
+
+        } else if (intShoriFlg == 2) {
+
+            Locale.setDefault(new Locale("ja", "JP", "JP"));
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat dFormat = new SimpleDateFormat("平yyyy.MM.dd");
+            String strSysDate = dFormat.format(cal.getTime());
+
+            for (int i = 0; i < IchijiHanteiTaishoshaSelectData.size(); i++) {
+                if (IchijiHanteiTaishoshaSelectData.get(i).getIchijiHanteibi().isEmpty() == Boolean.FALSE) {
+                    IchijiHanteiTaishoshaSelectData.get(i).setIchijiHanteiKanryobi(new RString(strSysDate));
+                }
+            }
+        }
     }
 
     /*
      *一次判定処理対象者一覧情報の初期値をセットします。
      */
-    private List createRowIchijiHanteiTaishosha() {
+    private List createRowIchijiHanteiTaishosha(List<HashMap> IchijiHanteiTaishoshaData) {
 
         List arrayDataList = new ArrayList();
-        List<HashMap> IchijiHanteiTaishoshaData = YamlLoader.FOR_DBE.loadAsList(new RString("IchijiHanteiShoriTaishoshaIchiran.yml"));
 
         for (int i = 0; i < IchijiHanteiTaishoshaData.size(); i++) {
             HashMap hashMap = IchijiHanteiTaishoshaData.get(i);
@@ -56,10 +104,10 @@ public class IchijiHanteiShoriTaishoshaIchiran {
             String strHihokenshaKana = (String) hashMap.get("hihokenshaKana");
             String strShinseibi = (String) hashMap.get("shinseibi");
             String strShinseiKbnShin = (String) hashMap.get("shinseiKbnShin");
-            String strIchijiHanteiKanryobi = "今日日付";
-            String strIchijiHanteibi = (String) hashMap.get("ichijiHanteibi");
-            String strIchijiHanteiKekka = (String) hashMap.get("ichijiHanteiKekka");
-            String strKeikokuCode = (String) hashMap.get("keikokuCode");
+            String strIchijiHanteiKanryobi = "";
+            String strIchijiHanteibi = "";
+            String strIchijiHanteiKekka = "";
+            String strKeikokuCode = "";
             String strChosaJissibi = (String) hashMap.get("chosaJissibi");
             String strIkenshoJuryobi = (String) hashMap.get("ikenshoJuryobi");
 

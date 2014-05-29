@@ -2,10 +2,10 @@
  "fieldName": "Page",
  "items": [
   {
-   "fieldName": "IchijiHanteiShoriTaishoshaIchiran",
+   "fieldName": "NinteiShinsakaiIchiran",
    "items": [
     {
-     "fieldName": "dgIchijiHanteiTaishoshaIchiran",
+     "fieldName": "dgNinteiShinsakaiIchiran",
      "items": [],
      "controlType": "DataGrid",
      "width": "683",
@@ -21,6 +21,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "dgNinteiShinsakaiIchiran",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -44,7 +45,7 @@
         "cellType": 8,
         "cellDetails": {
          "cellType": 8,
-         "text": "...",
+         "text": "選択",
          "onClick": "",
          "imageFileUrl": "",
          "imageWidth": "",
@@ -171,7 +172,7 @@
      "onNoRow": "",
      "onMultiRows": "",
      "dataSource": [],
-     "sortOrder": "select",
+     "sortOrder": "gogitaiMeisho",
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1
@@ -193,12 +194,14 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnClose",
      "onClick": "",
      "text": "メニューに戻る",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     }
    ],
    "controlType": "Panel",
@@ -215,13 +218,14 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "NinteiShinsakaiIchiran",
    "onLoad": "",
    "title": "介護認定審査会一覧",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "IchijiHanteiShoriTaishoshaIchiran"
+     "postParameterPanelNames": "NinteiShinsakaiIchiran"
     }
    ],
    "requestSettings": [
@@ -246,13 +250,14 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
+   "panelDisplay": 0,
    "isGroupBox": false
   },
   {
-   "fieldName": "TaishoshaWariate",
+   "fieldName": "NinteiShinsakaiTaishoshaWariate",
    "items": [
     {
-     "fieldName": "ShinsakaiJoho",
+     "fieldName": "NinteiShinsakaiJoho",
      "items": [
       {
        "fieldName": "txtShinsakaiYoteibi",
@@ -271,27 +276,28 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtShinsakaiYoteibi_core",
        "text": "",
-       "onChange": "",
        "required": false,
        "readOnly": true,
        "placeHolder": "",
-       "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
-       "value": "",
        "labelLText": "審査会予定日",
        "labelRText": "",
        "labelLWidth": "S",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "permitCharactor": "./_-",
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "value": "",
+       "textKind": 0,
+       "permitCharactor": "./_-"
       },
       {
        "fieldName": "txtGogitaiNo",
@@ -310,29 +316,30 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtGogitaiNo_core",
        "text": "",
-       "onChange": "",
        "required": false,
-       "maxLength": 1000000000000,
-       "minLength": 0,
-       "textAlign": 0,
        "readOnly": true,
        "placeHolder": "",
-       "textKind": 2,
        "isPrivateInfo": false,
        "isPassword": false,
-       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
-       "suggest": [],
-       "value": "",
        "labelLText": "合議体",
        "labelRText": "",
        "labelLWidth": "50",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "value": "",
+       "maxLength": 100000000,
+       "minLength": 0,
+       "textAlign": 0,
+       "textKind": 2,
+       "isComboBox": false,
+       "suggest": [],
        "permitCharactor": "",
        "formatLength": 1
       },
@@ -340,7 +347,7 @@
        "fieldName": "txtGogitaiMeisho",
        "items": [],
        "controlType": "TextBox",
-       "width": "150",
+       "width": "160",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -351,31 +358,32 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "XS",
+       "marginLeft": "0",
        "marginRight": "XS",
+       "selectControlID": "txtGogitaiMeisho_core",
        "text": "",
-       "onChange": "",
        "required": false,
-       "maxLength": 1000000000000,
-       "minLength": 0,
-       "textAlign": 0,
        "readOnly": true,
        "placeHolder": "",
-       "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
-       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
-       "suggest": [],
-       "value": "",
        "labelLText": "",
        "labelRText": "",
        "labelLWidth": "S",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "value": "",
+       "maxLength": 100000000,
+       "minLength": 0,
+       "textAlign": 0,
+       "textKind": 0,
+       "isComboBox": false,
+       "suggest": [],
        "permitCharactor": ""
       },
       {
@@ -395,31 +403,32 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtKaishiYoteiJikan_core",
        "text": "",
-       "onChange": "",
        "required": false,
-       "maxLength": 1000000000000,
-       "minLength": 0,
-       "textAlign": 0,
        "readOnly": true,
        "placeHolder": "",
-       "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
-       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
-       "suggest": [],
-       "value": "",
        "labelLText": "開始予定時間",
        "labelRText": "",
-       "labelLWidth": "S",
+       "labelLWidth": "95",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "permitCharactor": "",
        "displayFormat": 0,
+       "value": "",
+       "maxLength": 100000000,
+       "minLength": 0,
+       "textAlign": 0,
+       "textKind": 0,
+       "isComboBox": false,
+       "suggest": [],
+       "permitCharactor": "",
        "timeKubun": 1
       },
       {
@@ -439,29 +448,30 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtSaidaiTeiin_core",
        "text": "",
-       "onChange": "",
        "required": false,
-       "maxLength": 1000000000000,
-       "minLength": 0,
-       "textAlign": 2,
        "readOnly": true,
        "placeHolder": "",
-       "textKind": 2,
        "isPrivateInfo": false,
        "isPassword": false,
-       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
-       "suggest": [],
-       "value": "",
        "labelLText": "最大定員",
        "labelRText": "人",
-       "labelLWidth": "70",
+       "labelLWidth": "65",
        "labelRWidth": "30",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "value": "",
+       "maxLength": 100000000,
+       "minLength": 0,
+       "textAlign": 2,
+       "textKind": 2,
+       "isComboBox": false,
+       "suggest": [],
        "permitCharactor": "+-,.\\",
        "maxValue": 1.7976931348623157e+308,
        "minValue": 0,
@@ -486,31 +496,32 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "onClick": "",
-       "onChange": "",
-       "selectedItem": "",
-       "required": false,
-       "labelLText": "",
-       "labelLWidth": "S",
-       "labelLAlign": 2,
+       "selectControlID": "chkDummyKbn_core",
        "dataSource": [
         {
          "key": "1",
          "value": "ダミー区分"
         }
        ],
+       "onClick": "",
+       "required": false,
+       "onChange": "",
+       "labelLText": "",
+       "labelLWidth": "S",
+       "labelLAlign": 2,
+       "selectedItem": "",
        "selectedItems": [],
        "newLineItemNumber": 1,
        "minCheckedItem": 0,
        "maxCheckedItem": "1",
-       "spaceSize": 1,
+       "spaceSize": "M",
        "isAllSelectable": false
       },
       {
        "fieldName": "txtKaisaiBasho",
        "items": [],
        "controlType": "TextBox",
-       "width": "374",
+       "width": "370",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -523,29 +534,30 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtKaisaiBasho_core",
        "text": "",
-       "onChange": "",
        "required": false,
-       "maxLength": 1000000000000,
-       "minLength": 0,
-       "textAlign": 0,
        "readOnly": true,
        "placeHolder": "",
-       "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
-       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
-       "suggest": [],
-       "value": "",
        "labelLText": "開催場所",
        "labelRText": "",
        "labelLWidth": "S",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "value": "",
+       "maxLength": 100000000,
+       "minLength": 0,
+       "textAlign": 0,
+       "textKind": 0,
+       "isComboBox": false,
+       "suggest": [],
        "permitCharactor": ""
       },
       {
@@ -565,31 +577,32 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtShuryoYoteiJikan_core",
        "text": "",
-       "onChange": "",
        "required": false,
-       "maxLength": 1000000000000,
-       "minLength": 0,
-       "textAlign": 0,
        "readOnly": true,
        "placeHolder": "",
-       "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
-       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
-       "suggest": [],
-       "value": "",
        "labelLText": "終了予定時間",
        "labelRText": "",
-       "labelLWidth": "98",
+       "labelLWidth": "95",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "permitCharactor": "",
        "displayFormat": 0,
+       "value": "",
+       "maxLength": 100000000,
+       "minLength": 0,
+       "textAlign": 0,
+       "textKind": 0,
+       "isComboBox": false,
+       "suggest": [],
+       "permitCharactor": "",
        "timeKubun": 1
       },
       {
@@ -609,29 +622,30 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtYoteiTeiin_core",
        "text": "",
-       "onChange": "",
        "required": false,
-       "maxLength": 1000000000000,
-       "minLength": 0,
-       "textAlign": 2,
        "readOnly": true,
        "placeHolder": "",
-       "textKind": 2,
        "isPrivateInfo": false,
        "isPassword": false,
-       "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
-       "suggest": [],
-       "value": "",
        "labelLText": "予定定員",
        "labelRText": "人",
-       "labelLWidth": "70",
+       "labelLWidth": "65",
        "labelRWidth": "30",
        "labelLAlign": 2,
        "labelRAlign": 0,
+       "value": "",
+       "maxLength": 100000000,
+       "minLength": 0,
+       "textAlign": 2,
+       "textKind": 2,
+       "isComboBox": false,
+       "suggest": [],
        "permitCharactor": "+-,.\\",
        "maxValue": 1.7976931348623157e+308,
        "minValue": 0,
@@ -656,24 +670,25 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "onClick": "",
-       "onChange": "",
-       "selectedItem": "",
-       "required": false,
-       "labelLText": "",
-       "labelLWidth": "S",
-       "labelLAlign": 2,
+       "selectControlID": "chkKyukaiKbn_core",
        "dataSource": [
         {
          "key": "1",
          "value": "休会区分"
         }
        ],
+       "onClick": "",
+       "required": false,
+       "onChange": "",
+       "labelLText": "",
+       "labelLWidth": "S",
+       "labelLAlign": 2,
+       "selectedItem": "",
        "selectedItems": [],
        "newLineItemNumber": 1,
        "minCheckedItem": 0,
        "maxCheckedItem": "1",
-       "spaceSize": 1,
+       "spaceSize": "M",
        "isAllSelectable": false
       }
      ],
@@ -691,13 +706,14 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "NinteiShinsakaiJoho",
      "onLoad": "",
      "title": "",
      "isOpen": true,
      "canOpenAndClose": true,
      "postParameterPanelNames": [
       {
-       "postParameterPanelNames": "ShinsakaiJoho"
+       "postParameterPanelNames": "NinteiShinsakaiJoho"
       }
      ],
      "requestSettings": [],
@@ -713,6 +729,7 @@
      "eraseBorderLeft": false,
      "backgroundColor": 0,
      "widthAuto": false,
+     "panelDisplay": 0,
      "isGroupBox": false
     },
     {
@@ -738,6 +755,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "lblWariatezumiTaishoshaIchiran",
          "text": "割当済み対象者一覧",
          "required": false,
          "isPrivateInfo": false,
@@ -760,6 +778,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "dgWariatezumiTaishoshaIchiran",
          "gridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
@@ -972,12 +991,14 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "btnWaritsukeTaishosha",
            "onClick": "",
            "text": "対象者一覧に割付ける ↑",
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
-           "imageHeight": ""
+           "imageHeight": "",
+           "icon": 0
           },
           {
            "fieldName": "btnKaijoTaishosha",
@@ -996,12 +1017,14 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "btnKaijoTaishosha",
            "onClick": "",
            "text": "対象者一覧から解除する ↓",
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
-           "imageHeight": ""
+           "imageHeight": "",
+           "icon": 0
           }
          ],
          "controlType": "Panel",
@@ -1018,6 +1041,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "taishoshaWariateBtn",
          "onLoad": "",
          "title": "",
          "isOpen": true,
@@ -1040,6 +1064,7 @@
          "eraseBorderLeft": false,
          "backgroundColor": 0,
          "widthAuto": false,
+         "panelDisplay": 0,
          "isGroupBox": false
         },
         {
@@ -1059,6 +1084,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "lblMiwariateTaishoshaIchiran",
          "text": "未割当対象者一覧",
          "required": false,
          "isPrivateInfo": false,
@@ -1081,6 +1107,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "dgMiwariateTaishoshaIchiran",
          "gridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
@@ -1310,7 +1337,7 @@
          "onNoRow": "",
          "onMultiRows": "",
          "dataSource": [],
-         "sortOrder": "seibetsu",
+         "sortOrder": "iryokikan",
          "isAscending": true,
          "filterList": [],
          "activeRowId": -1
@@ -1332,12 +1359,14 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "btnNarabikae",
          "onClick": "",
          "text": "並び替える",
          "appearance": 0,
          "imageFileUrl": "",
          "imageWidth": "",
-         "imageHeight": ""
+         "imageHeight": "",
+         "icon": 0
         },
         {
          "fieldName": "TaishoshaNarabikae",
@@ -1359,23 +1388,24 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "onChange": "",
-           "selectedItem": "",
+           "selectControlID": "ddlSortKomoku1_core",
+           "dataSource": [
+            {
+             "key": "1",
+             "value": "ソート項目１"
+            }
+           ],
            "required": false,
            "onFocus": "",
            "onBlur": "",
+           "onChange": "",
            "labelLText": "第１ソート",
            "labelRText": "",
            "labelLWidth": "80",
            "labelRWidth": "S",
            "labelLAlign": 0,
            "labelRAlign": 0,
-           "dataSource": [
-            {
-             "key": "1",
-             "value": "ソート項目１"
-            }
-           ]
+           "selectedItem": ""
           },
           {
            "fieldName": "ddlSortKomoku2",
@@ -1394,23 +1424,24 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "onChange": "",
-           "selectedItem": "",
+           "selectControlID": "ddlSortKomoku2_core",
+           "dataSource": [
+            {
+             "key": "1",
+             "value": "ソート項目１"
+            }
+           ],
            "required": false,
            "onFocus": "",
            "onBlur": "",
+           "onChange": "",
            "labelLText": "第２ソート",
            "labelRText": "",
            "labelLWidth": "80",
            "labelRWidth": "S",
            "labelLAlign": 0,
            "labelRAlign": 0,
-           "dataSource": [
-            {
-             "key": "1",
-             "value": "ソート項目１"
-            }
-           ]
+           "selectedItem": ""
           },
           {
            "fieldName": "ddlSortKomoku3",
@@ -1429,23 +1460,24 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "onChange": "",
-           "selectedItem": "",
+           "selectControlID": "ddlSortKomoku3_core",
+           "dataSource": [
+            {
+             "key": "1",
+             "value": "ソート項目１"
+            }
+           ],
            "required": false,
            "onFocus": "",
            "onBlur": "",
+           "onChange": "",
            "labelLText": "第３ソート",
            "labelRText": "",
            "labelLWidth": "80",
            "labelRWidth": "S",
            "labelLAlign": 0,
            "labelRAlign": 0,
-           "dataSource": [
-            {
-             "key": "1",
-             "value": "ソート項目１"
-            }
-           ]
+           "selectedItem": ""
           },
           {
            "fieldName": "btnJikko",
@@ -1464,12 +1496,14 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "btnJikko",
            "onClick": "",
            "text": "実行する",
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
-           "imageHeight": ""
+           "imageHeight": "",
+           "icon": 0
           },
           {
            "fieldName": "btnCancel",
@@ -1488,12 +1522,14 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "btnCancel",
            "onClick": "",
            "text": "キャンセル",
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
-           "imageHeight": ""
+           "imageHeight": "",
+           "icon": 0
           }
          ],
          "controlType": "Panel",
@@ -1510,13 +1546,14 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "TaishoshaNarabikae",
          "onLoad": "",
          "title": "並び替え条件",
          "isOpen": true,
          "canOpenAndClose": true,
          "postParameterPanelNames": [
           {
-           "postParameterPanelNames": "IchijiHanteiShoriTaishoshaIchiran"
+           "postParameterPanelNames": "NinteiShinsakaiIchiran"
           }
          ],
          "requestSettings": [
@@ -1541,6 +1578,7 @@
          "eraseBorderLeft": false,
          "backgroundColor": 0,
          "widthAuto": false,
+         "panelDisplay": 0,
          "isGroupBox": false
         }
        ],
@@ -1558,6 +1596,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "tplTaishoshaWariate",
        "title": "対象者割当",
        "onActive": ""
       },
@@ -1581,6 +1620,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "lblShinsainKoseiIchiran",
          "text": "審査員構成一覧",
          "required": false,
          "isPrivateInfo": false,
@@ -1603,6 +1643,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "dgShinsainKoseiIchiran",
          "gridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
@@ -1773,12 +1814,14 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "btnWaritsukeShinsain",
            "onClick": "",
            "text": "構成一覧に割付ける ↑",
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
-           "imageHeight": ""
+           "imageHeight": "",
+           "icon": 0
           },
           {
            "fieldName": "btnKaijoShinsain",
@@ -1797,12 +1840,14 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "btnKaijoShinsain",
            "onClick": "",
            "text": "構成一覧から解除する ↓",
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
-           "imageHeight": ""
+           "imageHeight": "",
+           "icon": 0
           }
          ],
          "controlType": "Panel",
@@ -1819,6 +1864,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "ShinsainWariateBtn",
          "onLoad": "",
          "title": "",
          "isOpen": true,
@@ -1841,6 +1887,7 @@
          "eraseBorderLeft": false,
          "backgroundColor": 0,
          "widthAuto": false,
+         "panelDisplay": 0,
          "isGroupBox": false
         },
         {
@@ -1860,6 +1907,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "lblShinsainIchiran",
          "text": "審査員一覧",
          "required": false,
          "isPrivateInfo": false,
@@ -1882,6 +1930,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "dgShinsainIchiran",
          "gridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
@@ -2047,6 +2096,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "tplShinsainWariate",
        "title": "審査員割当",
        "onActive": ""
       }
@@ -2065,6 +2115,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "tabWariate",
      "onChange": "",
      "selectedItem": null,
      "tabpanelPosition": [
@@ -2072,7 +2123,8 @@
       "tplShinsainWariate"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "tplShinsainWariate"
+     "selectedItemFieldName": "tplTaishoshaWariate",
+     "initialTab": 0
     },
     {
      "fieldName": "btnToroku",
@@ -2091,12 +2143,14 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnToroku",
      "onClick": "",
      "text": "登録する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     },
     {
      "fieldName": "btnReturn",
@@ -2115,12 +2169,14 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnReturn",
      "onClick": "",
      "text": "一覧に戻る",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     }
    ],
    "controlType": "Panel",
@@ -2137,13 +2193,14 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "NinteiShinsakaiTaishoshaWariate",
    "onLoad": "",
    "title": "介護認定審査会対象者割当",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "IchijiHanteiShoriTaishoshaIchiran"
+     "postParameterPanelNames": "NinteiShinsakaiIchiran"
     }
    ],
    "requestSettings": [
@@ -2168,6 +2225,7 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
+   "panelDisplay": 0,
    "isGroupBox": false
   }
  ],
@@ -2185,6 +2243,7 @@
  "authorityMode": 0,
  "marginLeft": "XS",
  "marginRight": "XS",
+ "selectControlID": "Page",
  "onLoad": "",
  "title": "審査会対象者個別割当",
  "jsPathCollection": [],
@@ -2196,7 +2255,7 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "IchijiHanteiShoriTaishoshaIchiran",
+     "visibleDiv": "NinteiShinsakaiIchiran",
      "panelState": "visible"
     }
    ],
@@ -2219,11 +2278,11 @@
  ],
  "loadSequencePanelNames": [
   [
-   "IchijiHanteiShoriTaishoshaIchiran",
-   "TaishoshaWariate"
+   "NinteiShinsakaiIchiran",
+   "NinteiShinsakaiTaishoshaWariate"
   ],
   [
-   "ShinsakaiJoho"
+   "NinteiShinsakaiJoho"
   ]
  ],
  "panelMargin": 1,

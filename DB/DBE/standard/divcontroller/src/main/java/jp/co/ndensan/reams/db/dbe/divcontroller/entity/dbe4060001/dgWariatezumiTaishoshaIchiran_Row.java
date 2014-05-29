@@ -1,0 +1,164 @@
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4060001;
+/**
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
+ * コードが再生成されるときに損失したりします。
+ * Thu May 29 19:45:02 JST 2014 
+ */
+
+
+
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+
+/**
+ * dgWariatezumiTaishoshaIchiran_Row のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+
+public class dgWariatezumiTaishoshaIchiran_Row extends DataRow {
+
+    private RString shinsaSeq;
+    private RString hokenNo;
+    private RString hihokenNo;
+    private RString shimei;
+    private RString shimeiKana;
+    private RString shinseibi;
+    private RString shinseiKbn;
+    private RString seibetsu;
+    private RString ichijiHantei;
+    private RString kijunJikan;
+    private RString furiwakeKbn;
+
+    public dgWariatezumiTaishoshaIchiran_Row() {
+        super();
+    }
+
+    public dgWariatezumiTaishoshaIchiran_Row(RString shinsaSeq, RString hokenNo, RString hihokenNo, RString shimei, RString shimeiKana, RString shinseibi, RString shinseiKbn, RString seibetsu, RString ichijiHantei, RString kijunJikan, RString furiwakeKbn) {
+        super();
+        this.setOriginalData("shinsaSeq", shinsaSeq);
+        this.setOriginalData("hokenNo", hokenNo);
+        this.setOriginalData("hihokenNo", hihokenNo);
+        this.setOriginalData("shimei", shimei);
+        this.setOriginalData("shimeiKana", shimeiKana);
+        this.setOriginalData("shinseibi", shinseibi);
+        this.setOriginalData("shinseiKbn", shinseiKbn);
+        this.setOriginalData("seibetsu", seibetsu);
+        this.setOriginalData("ichijiHantei", ichijiHantei);
+        this.setOriginalData("kijunJikan", kijunJikan);
+        this.setOriginalData("furiwakeKbn", furiwakeKbn);
+        this.shinsaSeq = shinsaSeq;
+        this.hokenNo = hokenNo;
+        this.hihokenNo = hihokenNo;
+        this.shimei = shimei;
+        this.shimeiKana = shimeiKana;
+        this.shinseibi = shinseibi;
+        this.shinseiKbn = shinseiKbn;
+        this.seibetsu = seibetsu;
+        this.ichijiHantei = ichijiHantei;
+        this.kijunJikan = kijunJikan;
+        this.furiwakeKbn = furiwakeKbn;
+    }
+
+    public RString getShinsaSeq() {
+        return shinsaSeq;
+    }
+
+    public RString getHokenNo() {
+        return hokenNo;
+    }
+
+    public RString getHihokenNo() {
+        return hihokenNo;
+    }
+
+    public RString getShimei() {
+        return shimei;
+    }
+
+    public RString getShimeiKana() {
+        return shimeiKana;
+    }
+
+    public RString getShinseibi() {
+        return shinseibi;
+    }
+
+    public RString getShinseiKbn() {
+        return shinseiKbn;
+    }
+
+    public RString getSeibetsu() {
+        return seibetsu;
+    }
+
+    public RString getIchijiHantei() {
+        return ichijiHantei;
+    }
+
+    public RString getKijunJikan() {
+        return kijunJikan;
+    }
+
+    public RString getFuriwakeKbn() {
+        return furiwakeKbn;
+    }
+
+    public void setShinsaSeq(RString shinsaSeq) {
+        this.setOriginalData("shinsaSeq", shinsaSeq);
+        this.shinsaSeq = shinsaSeq;
+    }
+
+    public void setHokenNo(RString hokenNo) {
+        this.setOriginalData("hokenNo", hokenNo);
+        this.hokenNo = hokenNo;
+    }
+
+    public void setHihokenNo(RString hihokenNo) {
+        this.setOriginalData("hihokenNo", hihokenNo);
+        this.hihokenNo = hihokenNo;
+    }
+
+    public void setShimei(RString shimei) {
+        this.setOriginalData("shimei", shimei);
+        this.shimei = shimei;
+    }
+
+    public void setShimeiKana(RString shimeiKana) {
+        this.setOriginalData("shimeiKana", shimeiKana);
+        this.shimeiKana = shimeiKana;
+    }
+
+    public void setShinseibi(RString shinseibi) {
+        this.setOriginalData("shinseibi", shinseibi);
+        this.shinseibi = shinseibi;
+    }
+
+    public void setShinseiKbn(RString shinseiKbn) {
+        this.setOriginalData("shinseiKbn", shinseiKbn);
+        this.shinseiKbn = shinseiKbn;
+    }
+
+    public void setSeibetsu(RString seibetsu) {
+        this.setOriginalData("seibetsu", seibetsu);
+        this.seibetsu = seibetsu;
+    }
+
+    public void setIchijiHantei(RString ichijiHantei) {
+        this.setOriginalData("ichijiHantei", ichijiHantei);
+        this.ichijiHantei = ichijiHantei;
+    }
+
+    public void setKijunJikan(RString kijunJikan) {
+        this.setOriginalData("kijunJikan", kijunJikan);
+        this.kijunJikan = kijunJikan;
+    }
+
+    public void setFuriwakeKbn(RString furiwakeKbn) {
+        this.setOriginalData("furiwakeKbn", furiwakeKbn);
+        this.furiwakeKbn = furiwakeKbn;
+    }
+
+}

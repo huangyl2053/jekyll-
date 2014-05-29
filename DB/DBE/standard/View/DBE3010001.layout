@@ -21,12 +21,14 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnTaishoshaSearch",
      "onClick": "",
      "text": "対象者を検索する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     },
     {
      "fieldName": "dgIchijiHanteiTaishoshaIchiran",
@@ -45,6 +47,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "dgIchijiHanteiTaishoshaIchiran",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": true,
@@ -112,7 +115,7 @@
         "toolTip": "",
         "bgColor": 0,
         "width": 180,
-        "visible": true,
+        "visible": false,
         "cellType": 0,
         "cellDetails": {
          "cellType": 0
@@ -143,7 +146,7 @@
         "dataName": "shinseiKbnShin",
         "toolTip": "",
         "bgColor": 0,
-        "width": 110,
+        "width": 70,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -286,12 +289,14 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "onClick": "",
+     "selectControlID": "btnIchijiHanteiKanryo",
+     "onClick": "onClick_BtnIchijiHanteiKanryo",
      "text": "一次判定を完了する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     },
     {
      "fieldName": "btnIchijiHantei",
@@ -310,12 +315,14 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "onClick": "",
+     "selectControlID": "btnIchijiHantei",
+     "onClick": "onClick_BtnIchijiHantei",
      "text": "一次判定を行う",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     },
     {
      "fieldName": "btnKekkaKakunin",
@@ -334,12 +341,14 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnKekkaKakunin",
      "onClick": "onClick_BtnKekkaKakunin",
      "text": "結果確認を行う",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     },
     {
      "fieldName": "btnClose",
@@ -358,12 +367,14 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnClose",
      "onClick": "",
      "text": "メニューに戻る",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     }
    ],
    "controlType": "Panel",
@@ -380,6 +391,7 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "IchijiHanteiShoriTaishoshaIchiran",
    "onLoad": "",
    "title": "一次判定処理対象者一覧",
    "isOpen": true,
@@ -393,6 +405,14 @@
     {
      "eventName": "onLoad",
      "requestUrl": "dbe/db/dbe/IchijiHanteiShoriTaishoshaIchiran/onLoad"
+    },
+    {
+     "eventName": "onClick_BtnIchijiHantei",
+     "requestUrl": "dbe/db/dbe/IchijiHanteiShoriTaishoshaIchiran/onClick_BtnIchijiHantei"
+    },
+    {
+     "eventName": "onClick_BtnIchijiHanteiKanryo",
+     "requestUrl": "dbe/db/dbe/IchijiHanteiShoriTaishoshaIchiran/onClick_BtnIchijiHanteiKanryo"
     }
    ],
    "hiddenInput": [],
@@ -407,6 +427,7 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
+   "panelDisplay": 0,
    "isGroupBox": false
   },
   {
@@ -429,13 +450,14 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtKensu_core",
      "text": "",
      "required": false,
-     "maxLength": 1000000000000,
+     "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 1,
      "readOnly": true,
-     "placeHolder": "1 / 10",
+     "placeHolder": "",
      "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
@@ -474,9 +496,10 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtHokensha_core",
        "text": "",
        "required": false,
-       "maxLength": 1000000000000,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
        "readOnly": true,
@@ -516,9 +539,10 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtHihokenNo_core",
        "text": "",
        "required": false,
-       "maxLength": 1000000000000,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
        "readOnly": true,
@@ -559,9 +583,10 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtHihokenshaName_core",
        "text": "",
        "required": false,
-       "maxLength": 1000000000000,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
        "readOnly": true,
@@ -601,6 +626,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtShinseibi_core",
        "text": "平26.05.15",
        "required": false,
        "readOnly": true,
@@ -640,9 +666,10 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtShinseiKbnShin_core",
        "text": "",
        "required": false,
-       "maxLength": 1000000000000,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
        "readOnly": true,
@@ -680,6 +707,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "IchijiHanteiKakuninTaishoshaJoho",
      "onLoad": "",
      "title": "対象者情報",
      "isOpen": true,
@@ -702,6 +730,7 @@
      "eraseBorderLeft": false,
      "backgroundColor": 0,
      "widthAuto": false,
+     "panelDisplay": 0,
      "isGroupBox": false
     },
     {
@@ -721,6 +750,7 @@
      "authorityMode": 0,
      "marginLeft": 0,
      "marginRight": 0,
+     "selectControlID": "ccdIchijiHanteiKakuninJoho",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
@@ -747,12 +777,14 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnNextHyoji",
      "onClick": "onClick_BtnNextHyoji",
      "text": "次の対象者に進む",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     },
     {
      "fieldName": "btnPreHyoji",
@@ -771,12 +803,14 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnPreHyoji",
      "onClick": "onClick_BtnPreHyoji",
      "text": "前の対象者に戻る",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     },
     {
      "fieldName": "btnReturn",
@@ -795,12 +829,14 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnReturn",
      "onClick": "",
      "text": "一覧に戻る",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     }
    ],
    "controlType": "Panel",
@@ -817,6 +853,7 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "IchijiHanteiKekkaKakunin",
    "onLoad": "",
    "title": "一次判定結果確認",
    "isOpen": true,
@@ -864,6 +901,7 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
+   "panelDisplay": 0,
    "isGroupBox": false
   }
  ],
@@ -881,6 +919,7 @@
  "authorityMode": 0,
  "marginLeft": "XS",
  "marginRight": "XS",
+ "selectControlID": "Page",
  "onLoad": "",
  "title": "要介護認定一次判定",
  "jsPathCollection": [],

@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.IchijiHanteiKekkaKakuninDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.IchijiHanteiShoriTaishoshaIchiranDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgIchijiHanteiTaishoshaIchiran_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe3010001.IchijiHanteiKekkaKakuninDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe3010001.IchijiHanteiShoriTaishoshaIchiranDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe3010001.dgIchijiHanteiTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgIchijiHanteiKeikokuCode_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
@@ -62,69 +62,134 @@ public class IchijiHanteiKekkaKakunin {
 
         List<dgIchijiHanteiTaishoshaIchiran_Row> IchijiHanteiKekkaKakuninData = panel2.getDgIchijiHanteiTaishoshaIchiran().getSelectedItems();
 
-        intIdx = Integer.parseInt(panel.getHidIdxNo().toString());
-        HashMap hashmapIchijiHanteiKekka = IchijiHanteiKekkaShosai.get(Integer.parseInt(IchijiHanteiKekkaKakuninData.get(intIdx).getIndex().toString()));
+        if (IchijiHanteiKekkaKakuninData.isEmpty()) {
+            panel.getTxtKensu().clearValue();
+            panel.getIchijiHanteiKakuninTaishoshaJoho().getTxtHokensha().clearValue();
+            panel.getIchijiHanteiKakuninTaishoshaJoho().getTxtHihokenNo().clearValue();
+            panel.getIchijiHanteiKakuninTaishoshaJoho().getTxtHihokenshaName().clearValue();
+            panel.getIchijiHanteiKakuninTaishoshaJoho().getTxtShinseibi().clearValue();
+            panel.getIchijiHanteiKakuninTaishoshaJoho().getTxtShinseiKbnShin().clearValue();
+            panel.getCcdIchijiHanteiKakuninJoho().getTxtIchijiHanteibi().clearValue();
+            panel.getCcdIchijiHanteiKakuninJoho().getTxtIchijiHanteiKekka().clearValue();
+            panel.getCcdIchijiHanteiKakuninJoho().getTxtKijunJikan().clearValue();
+            panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtShokuji().clearValue();
+            panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtHaisetsu().clearValue();
+            panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtIdo().clearValue();
+            panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtSeiketsuHoji().clearValue();
+            panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtKansetsuCare().clearValue();
+            panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtBpsdKanren().clearValue();
+            panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtKinoKunren().clearValue();
+            panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtIryoKanren().clearValue();
+            panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtNinchishoKasan().clearValue();
+            panel.getCcdIchijiHanteiKakuninJoho().getTblTyukanHyokaKomokuTokuten().getTxtDai1gun().clearValue();
+            panel.getCcdIchijiHanteiKakuninJoho().getTblTyukanHyokaKomokuTokuten().getTxtDai2gun().clearValue();
+            panel.getCcdIchijiHanteiKakuninJoho().getTblTyukanHyokaKomokuTokuten().getTxtDai3gun().clearValue();
+            panel.getCcdIchijiHanteiKakuninJoho().getTblTyukanHyokaKomokuTokuten().getTxtDai4gun().clearValue();
+            panel.getCcdIchijiHanteiKakuninJoho().getTblTyukanHyokaKomokuTokuten().getTxtDai5gun().clearValue();
 
-        //件数表示
-        stbKensu = new StringBuilder();
-        stbKensu.append(intIdx + 1);
-        stbKensu.append(" / ");
-        stbKensu.append(IchijiHanteiKekkaKakuninData.size());
-        panel.getTxtKensu().setValue(new RString(stbKensu.toString()));
+            panel.getCcdIchijiHanteiKakuninJoho().getTxtJiritsudoChosa().clearValue();
+            panel.getCcdIchijiHanteiKakuninJoho().getTxtJiritsudoIkensho().clearValue();
+            panel.getCcdIchijiHanteiKakuninJoho().getTxtGaizensei().clearValue();
+            panel.getCcdIchijiHanteiKakuninJoho().getTxtJyotaiAnteisei().clearValue();
+            panel.getCcdIchijiHanteiKakuninJoho().getTxtKyufuKbn().clearValue();
 
-        //対象者情報表示
-        panel.getIchijiHanteiKakuninTaishoshaJoho().getTxtHokensha().setValue(IchijiHanteiKekkaKakuninData.get(intIdx).getHokensha());
-        panel.getIchijiHanteiKakuninTaishoshaJoho().getTxtHihokenNo().setValue(IchijiHanteiKekkaKakuninData.get(intIdx).getHihokenNo());
-        panel.getIchijiHanteiKakuninTaishoshaJoho().getTxtHihokenshaName().setValue(IchijiHanteiKekkaKakuninData.get(intIdx).getHihokenshaName());
-        panel.getIchijiHanteiKakuninTaishoshaJoho().getTxtShinseibi().setValue(new RDate(IchijiHanteiKekkaKakuninData.get(intIdx).getShinseibi().toString()));
-        panel.getIchijiHanteiKakuninTaishoshaJoho().getTxtShinseiKbnShin().setValue(IchijiHanteiKekkaKakuninData.get(intIdx).getShinseiKbnShin());
-
-        //一次判定結果表示
-        panel.getCcdIchijiHanteiKakuninJoho().getTxtIchijiHanteibi().setValue(new RDate(IchijiHanteiKekkaKakuninData.get(intIdx).getIchijiHanteibi().toString()));
-        panel.getCcdIchijiHanteiKakuninJoho().getTxtIchijiHanteiKekka().setValue(new RString(hashmapIchijiHanteiKekka.get("kaigodo").toString()));
-
-        panel.getCcdIchijiHanteiKakuninJoho().getTxtKijunJikan().setValue(new RString(hashmapIchijiHanteiKekka.get("kijunjikan").toString()));
-        panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtShokuji().setValue(new RString(hashmapIchijiHanteiKekka.get("shokuji").toString()));
-        panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtHaisetsu().setValue(new RString(hashmapIchijiHanteiKekka.get("haisetsu").toString()));
-        panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtIdo().setValue(new RString(hashmapIchijiHanteiKekka.get("ido").toString()));
-        panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtSeiketsuHoji().setValue(new RString(hashmapIchijiHanteiKekka.get("seiketsuhoji").toString()));
-        panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtKansetsuCare().setValue(new RString(hashmapIchijiHanteiKekka.get("kansetsucare").toString()));
-        panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtBpsdKanren().setValue(new RString(hashmapIchijiHanteiKekka.get("bpsd").toString()));
-        panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtKinoKunren().setValue(new RString(hashmapIchijiHanteiKekka.get("kinokunren").toString()));
-        panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtIryoKanren().setValue(new RString(hashmapIchijiHanteiKekka.get("iryokanren").toString()));
-        panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtNinchishoKasan().setValue(new RString(hashmapIchijiHanteiKekka.get("ninchishokasan").toString()));
-        panel.getCcdIchijiHanteiKakuninJoho().getTblTyukanHyokaKomokuTokuten().getTxtDai1gun().setValue(new RString(hashmapIchijiHanteiKekka.get("chukantokuten1").toString()));
-        panel.getCcdIchijiHanteiKakuninJoho().getTblTyukanHyokaKomokuTokuten().getTxtDai2gun().setValue(new RString(hashmapIchijiHanteiKekka.get("chukantokuten2").toString()));
-        panel.getCcdIchijiHanteiKakuninJoho().getTblTyukanHyokaKomokuTokuten().getTxtDai3gun().setValue(new RString(hashmapIchijiHanteiKekka.get("chukantokuten3").toString()));
-        panel.getCcdIchijiHanteiKakuninJoho().getTblTyukanHyokaKomokuTokuten().getTxtDai4gun().setValue(new RString(hashmapIchijiHanteiKekka.get("chukantokuten4").toString()));
-        panel.getCcdIchijiHanteiKakuninJoho().getTblTyukanHyokaKomokuTokuten().getTxtDai5gun().setValue(new RString(hashmapIchijiHanteiKekka.get("chukantokuten5").toString()));
-
-        panel.getCcdIchijiHanteiKakuninJoho().getTxtJiritsudoChosa().setValue(new RString(hashmapIchijiHanteiKekka.get("jiritsudochosa").toString()));
-        panel.getCcdIchijiHanteiKakuninJoho().getTxtJiritsudoIkensho().setValue(new RString(hashmapIchijiHanteiKekka.get("jiritsudoikensho").toString()));
-        panel.getCcdIchijiHanteiKakuninJoho().getTxtGaizensei().setValue(new RString(hashmapIchijiHanteiKekka.get("gaizensei").toString()));
-        panel.getCcdIchijiHanteiKakuninJoho().getTxtJyotaiAnteisei().setValue(new RString(hashmapIchijiHanteiKekka.get("anteisei").toString()));
-        panel.getCcdIchijiHanteiKakuninJoho().getTxtKyufuKbn().setValue(new RString(hashmapIchijiHanteiKekka.get("kyufukbn").toString()));
-
-        //一次判定警告コード表示
-        if (hashmapIchijiHanteiKekka.get("keikokusu").toString().equals("0")) {
             List<dgIchijiHanteiKeikokuCode_Row> arraydata = new ArrayList<>();
             panel.getCcdIchijiHanteiKakuninJoho().getDgIchijiHanteiKeikokuCode().setDataSource(arraydata);
-        } else {
-            List arraydata = createRowIchijiHanteiKeikokuCode(hashmapIchijiHanteiKekka);
-            panel.getCcdIchijiHanteiKakuninJoho().getDgIchijiHanteiKeikokuCode().setDataSource(arraydata);
-        }
 
-        //ボタン活性化制御
-        if ((intIdx + 1) == IchijiHanteiKekkaKakuninData.size()) {
-            panel.getBtnNextHyoji().setDisabled(true);
         } else {
-            panel.getBtnNextHyoji().setDisabled(false);
-        }
+            intIdx = Integer.parseInt(panel.getHidIdxNo().toString());
+            HashMap hashmapIchijiHanteiKekka = IchijiHanteiKekkaShosai.get(Integer.parseInt(IchijiHanteiKekkaKakuninData.get(intIdx).getIndex().toString()));
 
-        if (intIdx == 0) {
-            panel.getBtnPreHyoji().setDisabled(true);
-        } else {
-            panel.getBtnPreHyoji().setDisabled(false);
+            //件数表示
+            stbKensu = new StringBuilder();
+            stbKensu.append(intIdx + 1);
+            stbKensu.append(" / ");
+            stbKensu.append(IchijiHanteiKekkaKakuninData.size());
+            panel.getTxtKensu().setValue(new RString(stbKensu.toString()));
+
+            //対象者情報表示
+            panel.getIchijiHanteiKakuninTaishoshaJoho().getTxtHokensha().setValue(IchijiHanteiKekkaKakuninData.get(intIdx).getHokensha());
+            panel.getIchijiHanteiKakuninTaishoshaJoho().getTxtHihokenNo().setValue(IchijiHanteiKekkaKakuninData.get(intIdx).getHihokenNo());
+            panel.getIchijiHanteiKakuninTaishoshaJoho().getTxtHihokenshaName().setValue(IchijiHanteiKekkaKakuninData.get(intIdx).getHihokenshaName());
+            panel.getIchijiHanteiKakuninTaishoshaJoho().getTxtShinseibi().setValue(new RDate(IchijiHanteiKekkaKakuninData.get(intIdx).getShinseibi().toString()));
+            panel.getIchijiHanteiKakuninTaishoshaJoho().getTxtShinseiKbnShin().setValue(IchijiHanteiKekkaKakuninData.get(intIdx).getShinseiKbnShin());
+
+            //一次判定結果表示
+            if (IchijiHanteiKekkaKakuninData.get(intIdx).getIchijiHanteibi().isEmpty()) {
+                panel.getCcdIchijiHanteiKakuninJoho().getTxtIchijiHanteibi().clearValue();
+                panel.getCcdIchijiHanteiKakuninJoho().getTxtIchijiHanteiKekka().clearValue();
+                panel.getCcdIchijiHanteiKakuninJoho().getTxtKijunJikan().clearValue();
+                panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtShokuji().clearValue();
+                panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtHaisetsu().clearValue();
+                panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtIdo().clearValue();
+                panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtSeiketsuHoji().clearValue();
+                panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtKansetsuCare().clearValue();
+                panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtBpsdKanren().clearValue();
+                panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtKinoKunren().clearValue();
+                panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtIryoKanren().clearValue();
+                panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtNinchishoKasan().clearValue();
+                panel.getCcdIchijiHanteiKakuninJoho().getTblTyukanHyokaKomokuTokuten().getTxtDai1gun().clearValue();
+                panel.getCcdIchijiHanteiKakuninJoho().getTblTyukanHyokaKomokuTokuten().getTxtDai2gun().clearValue();
+                panel.getCcdIchijiHanteiKakuninJoho().getTblTyukanHyokaKomokuTokuten().getTxtDai3gun().clearValue();
+                panel.getCcdIchijiHanteiKakuninJoho().getTblTyukanHyokaKomokuTokuten().getTxtDai4gun().clearValue();
+                panel.getCcdIchijiHanteiKakuninJoho().getTblTyukanHyokaKomokuTokuten().getTxtDai5gun().clearValue();
+
+                panel.getCcdIchijiHanteiKakuninJoho().getTxtJiritsudoChosa().clearValue();
+                panel.getCcdIchijiHanteiKakuninJoho().getTxtJiritsudoIkensho().clearValue();
+                panel.getCcdIchijiHanteiKakuninJoho().getTxtGaizensei().clearValue();
+                panel.getCcdIchijiHanteiKakuninJoho().getTxtJyotaiAnteisei().clearValue();
+                panel.getCcdIchijiHanteiKakuninJoho().getTxtKyufuKbn().clearValue();
+
+                List<dgIchijiHanteiKeikokuCode_Row> arraydata = new ArrayList<>();
+                panel.getCcdIchijiHanteiKakuninJoho().getDgIchijiHanteiKeikokuCode().setDataSource(arraydata);
+            } else {
+                panel.getCcdIchijiHanteiKakuninJoho().getTxtIchijiHanteibi().setValue(new RDate(IchijiHanteiKekkaKakuninData.get(intIdx).getIchijiHanteibi().toString()));
+                panel.getCcdIchijiHanteiKakuninJoho().getTxtIchijiHanteiKekka().setValue(new RString(hashmapIchijiHanteiKekka.get("kaigodo").toString()));
+                panel.getCcdIchijiHanteiKakuninJoho().getTxtKijunJikan().setValue(new RString(hashmapIchijiHanteiKekka.get("kijunjikan").toString()));
+                panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtShokuji().setValue(new RString(hashmapIchijiHanteiKekka.get("shokuji").toString()));
+                panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtHaisetsu().setValue(new RString(hashmapIchijiHanteiKekka.get("haisetsu").toString()));
+                panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtIdo().setValue(new RString(hashmapIchijiHanteiKekka.get("ido").toString()));
+                panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtSeiketsuHoji().setValue(new RString(hashmapIchijiHanteiKekka.get("seiketsuhoji").toString()));
+                panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtKansetsuCare().setValue(new RString(hashmapIchijiHanteiKekka.get("kansetsucare").toString()));
+                panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtBpsdKanren().setValue(new RString(hashmapIchijiHanteiKekka.get("bpsd").toString()));
+                panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtKinoKunren().setValue(new RString(hashmapIchijiHanteiKekka.get("kinokunren").toString()));
+                panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtIryoKanren().setValue(new RString(hashmapIchijiHanteiKekka.get("iryokanren").toString()));
+                panel.getCcdIchijiHanteiKakuninJoho().getTblKijunJikan().getTxtNinchishoKasan().setValue(new RString(hashmapIchijiHanteiKekka.get("ninchishokasan").toString()));
+                panel.getCcdIchijiHanteiKakuninJoho().getTblTyukanHyokaKomokuTokuten().getTxtDai1gun().setValue(new RString(hashmapIchijiHanteiKekka.get("chukantokuten1").toString()));
+                panel.getCcdIchijiHanteiKakuninJoho().getTblTyukanHyokaKomokuTokuten().getTxtDai2gun().setValue(new RString(hashmapIchijiHanteiKekka.get("chukantokuten2").toString()));
+                panel.getCcdIchijiHanteiKakuninJoho().getTblTyukanHyokaKomokuTokuten().getTxtDai3gun().setValue(new RString(hashmapIchijiHanteiKekka.get("chukantokuten3").toString()));
+                panel.getCcdIchijiHanteiKakuninJoho().getTblTyukanHyokaKomokuTokuten().getTxtDai4gun().setValue(new RString(hashmapIchijiHanteiKekka.get("chukantokuten4").toString()));
+                panel.getCcdIchijiHanteiKakuninJoho().getTblTyukanHyokaKomokuTokuten().getTxtDai5gun().setValue(new RString(hashmapIchijiHanteiKekka.get("chukantokuten5").toString()));
+
+                panel.getCcdIchijiHanteiKakuninJoho().getTxtJiritsudoChosa().setValue(new RString(hashmapIchijiHanteiKekka.get("jiritsudochosa").toString()));
+                panel.getCcdIchijiHanteiKakuninJoho().getTxtJiritsudoIkensho().setValue(new RString(hashmapIchijiHanteiKekka.get("jiritsudoikensho").toString()));
+                panel.getCcdIchijiHanteiKakuninJoho().getTxtGaizensei().setValue(new RString(hashmapIchijiHanteiKekka.get("gaizensei").toString()));
+                panel.getCcdIchijiHanteiKakuninJoho().getTxtJyotaiAnteisei().setValue(new RString(hashmapIchijiHanteiKekka.get("anteisei").toString()));
+                panel.getCcdIchijiHanteiKakuninJoho().getTxtKyufuKbn().setValue(new RString(hashmapIchijiHanteiKekka.get("kyufukbn").toString()));
+
+                //一次判定警告コード表示
+                if (hashmapIchijiHanteiKekka.get("keikokusu").toString().equals("0")) {
+                    List<dgIchijiHanteiKeikokuCode_Row> arraydata = new ArrayList<>();
+                    panel.getCcdIchijiHanteiKakuninJoho().getDgIchijiHanteiKeikokuCode().setDataSource(arraydata);
+                } else {
+                    List arraydata = createRowIchijiHanteiKeikokuCode(hashmapIchijiHanteiKekka);
+                    panel.getCcdIchijiHanteiKakuninJoho().getDgIchijiHanteiKeikokuCode().setDataSource(arraydata);
+                }
+            }
+
+            //ボタン活性化制御
+            if ((intIdx + 1) == IchijiHanteiKekkaKakuninData.size()) {
+                panel.getBtnNextHyoji().setDisabled(true);
+            } else {
+                panel.getBtnNextHyoji().setDisabled(false);
+            }
+
+            if (intIdx == 0) {
+                panel.getBtnPreHyoji().setDisabled(true);
+            } else {
+                panel.getBtnPreHyoji().setDisabled(false);
+            }
+
         }
     }
 

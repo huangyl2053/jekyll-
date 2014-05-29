@@ -43,10 +43,10 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "selectControlID": "txtIchijiHanteibi_core",
                             "required": false,
                             "readOnly": true,
                             "placeHolder": "",
-                            "textKind": 0,
                             "isPrivateInfo": false,
                             "isPassword": false,
                             "onFocus": "",
@@ -62,7 +62,8 @@ var DBE;
                             "labelRAlign": 0,
                             "ymdKubun": 2,
                             "displayFormat": 0,
-                            "value": "2014/05/15"
+                            "value": "2014/05/15",
+                            "textKind": 0
                         },
                         {
                             "fieldName": "txtIchijiHanteiKekka",
@@ -81,10 +82,10 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "selectControlID": "txtIchijiHanteiKekka_core",
                             "required": false,
                             "readOnly": true,
                             "placeHolder": "",
-                            "textKind": 0,
                             "isPrivateInfo": false,
                             "isPassword": false,
                             "onFocus": "",
@@ -99,9 +100,10 @@ var DBE;
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "value": "",
-                            "maxLength": 1000000000000,
+                            "maxLength": 100000000,
                             "minLength": 0,
                             "textAlign": 1,
+                            "textKind": 0,
                             "isComboBox": false,
                             "suggest": []
                         },
@@ -122,10 +124,10 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "selectControlID": "txtKijunJikan_core",
                             "required": false,
                             "readOnly": true,
                             "placeHolder": "",
-                            "textKind": 0,
                             "isPrivateInfo": false,
                             "isPassword": false,
                             "onFocus": "",
@@ -140,9 +142,10 @@ var DBE;
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "value": "",
-                            "maxLength": 1000000000000,
+                            "maxLength": 100000000,
                             "minLength": 0,
                             "textAlign": 1,
+                            "textKind": 0,
                             "isComboBox": false,
                             "suggest": []
                         },
@@ -150,7 +153,7 @@ var DBE;
                             "fieldName": "lblChukanHyokaKomokuTokuten",
                             "items": [],
                             "controlType": "Label",
-                            "width": "300",
+                            "width": "320",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -163,6 +166,7 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "selectControlID": "lblChukanHyokaKomokuTokuten",
                             "required": false,
                             "isPrivateInfo": false,
                             "text": "中間評価項目得点",
@@ -191,6 +195,7 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "lblShokuji",
                                             "required": false,
                                             "isPrivateInfo": false,
                                             "text": "食事<br><br>",
@@ -211,6 +216,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celShokujiHeader",
                                     "connectTd": "R1C1"
                                 },
                                 {
@@ -233,6 +239,7 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "lblHaisetsu",
                                             "required": false,
                                             "isPrivateInfo": false,
                                             "text": "排泄<br><br>",
@@ -253,6 +260,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celHaisetsuHeader",
                                     "connectTd": "R1C2"
                                 },
                                 {
@@ -275,10 +283,10 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "txtShokuji_core",
                                             "required": false,
                                             "readOnly": true,
                                             "placeHolder": "",
-                                            "textKind": 0,
                                             "isPrivateInfo": false,
                                             "isPassword": false,
                                             "onFocus": "",
@@ -293,9 +301,10 @@ var DBE;
                                             "labelLAlign": 2,
                                             "labelRAlign": 0,
                                             "value": "",
-                                            "maxLength": 1000000000000,
+                                            "maxLength": 100000000,
                                             "minLength": 0,
                                             "textAlign": 1,
+                                            "textKind": 0,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -314,6 +323,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celShokuji",
                                     "connectTd": "R2C1"
                                 },
                                 {
@@ -336,10 +346,10 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "txtHaisetsu_core",
                                             "required": false,
                                             "readOnly": true,
                                             "placeHolder": "",
-                                            "textKind": 0,
                                             "isPrivateInfo": false,
                                             "isPassword": false,
                                             "onFocus": "",
@@ -354,9 +364,10 @@ var DBE;
                                             "labelLAlign": 2,
                                             "labelRAlign": 0,
                                             "value": "",
-                                            "maxLength": 1000000000000,
+                                            "maxLength": 100000000,
                                             "minLength": 0,
                                             "textAlign": 1,
+                                            "textKind": 0,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -375,6 +386,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celHaisetsu",
                                     "connectTd": "R2C2"
                                 },
                                 {
@@ -397,6 +409,7 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "lblIdo",
                                             "required": false,
                                             "isPrivateInfo": false,
                                             "text": "移動<br><br>",
@@ -417,6 +430,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celIdoHeader",
                                     "connectTd": "R1C3"
                                 },
                                 {
@@ -439,6 +453,7 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "lblSeiketsuhoji",
                                             "required": false,
                                             "isPrivateInfo": false,
                                             "text": "清潔<br>保持",
@@ -459,6 +474,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celSeiketsuHojiHeader",
                                     "connectTd": "R1C4"
                                 },
                                 {
@@ -481,6 +497,7 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "lblKansetsuCare",
                                             "required": false,
                                             "isPrivateInfo": false,
                                             "text": "関節<br>ケア",
@@ -501,6 +518,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celKansetsuCareHeader",
                                     "connectTd": "R1C5"
                                 },
                                 {
@@ -523,6 +541,7 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "lblBpsdKanren",
                                             "required": false,
                                             "isPrivateInfo": false,
                                             "text": "BPSD<br>関連",
@@ -543,6 +562,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celBpsdKanrenHeader",
                                     "connectTd": "R1C6"
                                 },
                                 {
@@ -565,6 +585,7 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "lblKinoKunren",
                                             "required": false,
                                             "isPrivateInfo": false,
                                             "text": "機能<br>訓練",
@@ -585,6 +606,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celKinoKunrenHeader",
                                     "connectTd": "R1C7"
                                 },
                                 {
@@ -607,6 +629,7 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "lblIryoKanren",
                                             "required": false,
                                             "isPrivateInfo": false,
                                             "text": "医療<br>関連",
@@ -627,6 +650,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celIryoKanrenHeader",
                                     "connectTd": "R1C8"
                                 },
                                 {
@@ -649,6 +673,7 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "lblNinchishoKasan",
                                             "required": false,
                                             "isPrivateInfo": false,
                                             "text": "認知症<br>加算",
@@ -669,6 +694,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celNinchishoKasanHeader",
                                     "connectTd": "R1C9"
                                 },
                                 {
@@ -691,10 +717,10 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "txtIdo_core",
                                             "required": false,
                                             "readOnly": true,
                                             "placeHolder": "",
-                                            "textKind": 0,
                                             "isPrivateInfo": false,
                                             "isPassword": false,
                                             "onFocus": "",
@@ -709,9 +735,10 @@ var DBE;
                                             "labelLAlign": 2,
                                             "labelRAlign": 0,
                                             "value": "",
-                                            "maxLength": 1000000000000,
+                                            "maxLength": 100000000,
                                             "minLength": 0,
                                             "textAlign": 1,
+                                            "textKind": 0,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -730,6 +757,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celIdo",
                                     "connectTd": "R2C3"
                                 },
                                 {
@@ -752,10 +780,10 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "txtSeiketsuHoji_core",
                                             "required": false,
                                             "readOnly": true,
                                             "placeHolder": "",
-                                            "textKind": 0,
                                             "isPrivateInfo": false,
                                             "isPassword": false,
                                             "onFocus": "",
@@ -770,9 +798,10 @@ var DBE;
                                             "labelLAlign": 2,
                                             "labelRAlign": 0,
                                             "value": "",
-                                            "maxLength": 1000000000000,
+                                            "maxLength": 100000000,
                                             "minLength": 0,
                                             "textAlign": 1,
+                                            "textKind": 0,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -791,6 +820,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celSeiketsuHoji",
                                     "connectTd": "R2C4"
                                 },
                                 {
@@ -813,10 +843,10 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "txtKansetsuCare_core",
                                             "required": false,
                                             "readOnly": true,
                                             "placeHolder": "",
-                                            "textKind": 0,
                                             "isPrivateInfo": false,
                                             "isPassword": false,
                                             "onFocus": "",
@@ -831,9 +861,10 @@ var DBE;
                                             "labelLAlign": 2,
                                             "labelRAlign": 0,
                                             "value": "",
-                                            "maxLength": 1000000000000,
+                                            "maxLength": 100000000,
                                             "minLength": 0,
                                             "textAlign": 1,
+                                            "textKind": 0,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -852,6 +883,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celKansetsuCare",
                                     "connectTd": "R2C5"
                                 },
                                 {
@@ -874,10 +906,10 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "txtBpsdKanren_core",
                                             "required": false,
                                             "readOnly": true,
                                             "placeHolder": "",
-                                            "textKind": 0,
                                             "isPrivateInfo": false,
                                             "isPassword": false,
                                             "onFocus": "",
@@ -892,9 +924,10 @@ var DBE;
                                             "labelLAlign": 2,
                                             "labelRAlign": 0,
                                             "value": "",
-                                            "maxLength": 1000000000000,
+                                            "maxLength": 100000000,
                                             "minLength": 0,
                                             "textAlign": 1,
+                                            "textKind": 0,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -913,6 +946,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celBpsdKanren",
                                     "connectTd": "R2C6"
                                 },
                                 {
@@ -935,10 +969,10 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "txtKinoKunren_core",
                                             "required": false,
                                             "readOnly": true,
                                             "placeHolder": "",
-                                            "textKind": 0,
                                             "isPrivateInfo": false,
                                             "isPassword": false,
                                             "onFocus": "",
@@ -953,9 +987,10 @@ var DBE;
                                             "labelLAlign": 2,
                                             "labelRAlign": 0,
                                             "value": "",
-                                            "maxLength": 1000000000000,
+                                            "maxLength": 100000000,
                                             "minLength": 0,
                                             "textAlign": 1,
+                                            "textKind": 0,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -974,6 +1009,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celKinoKunren",
                                     "connectTd": "R2C7"
                                 },
                                 {
@@ -996,10 +1032,10 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "txtIryoKanren_core",
                                             "required": false,
                                             "readOnly": true,
                                             "placeHolder": "",
-                                            "textKind": 0,
                                             "isPrivateInfo": false,
                                             "isPassword": false,
                                             "onFocus": "",
@@ -1014,9 +1050,10 @@ var DBE;
                                             "labelLAlign": 2,
                                             "labelRAlign": 0,
                                             "value": "",
-                                            "maxLength": 1000000000000,
+                                            "maxLength": 100000000,
                                             "minLength": 0,
                                             "textAlign": 1,
+                                            "textKind": 0,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -1035,6 +1072,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celIryoKanren",
                                     "connectTd": "R2C8"
                                 },
                                 {
@@ -1057,10 +1095,10 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "txtNinchishoKasan_core",
                                             "required": false,
                                             "readOnly": true,
                                             "placeHolder": "",
-                                            "textKind": 0,
                                             "isPrivateInfo": false,
                                             "isPassword": false,
                                             "onFocus": "",
@@ -1075,9 +1113,10 @@ var DBE;
                                             "labelLAlign": 2,
                                             "labelRAlign": 0,
                                             "value": "",
-                                            "maxLength": 1000000000000,
+                                            "maxLength": 100000000,
                                             "minLength": 0,
                                             "textAlign": 1,
+                                            "textKind": 0,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -1096,6 +1135,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celNinchishoKasan",
                                     "connectTd": "R2C9"
                                 }
                             ],
@@ -1113,6 +1153,7 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "2",
                             "marginRight": "XS",
+                            "selectControlID": "tblKijunJikan",
                             "html": "<table>\n  <tbody>\n    <tr><td id='R1C1'></td><td id='R1C2'></td><td id='R1C3'></td><td id='R1C4'></td><td id='R1C5'></td><td id='R1C6'></td><td id='R1C7'></td><td id='R1C8'></td><td id='R1C9'></td></tr>\n    <tr><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td><td id='R2C7'></td><td id='R2C8'></td><td id='R2C9'></td></tr>\n  </tbody>\n</table>\n"
                         },
                         {
@@ -1138,6 +1179,7 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "lblDai1gun",
                                             "required": false,
                                             "isPrivateInfo": false,
                                             "text": "第１群<br><br>",
@@ -1158,6 +1200,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celDai1gunHeader",
                                     "connectTd": "R1C1"
                                 },
                                 {
@@ -1180,6 +1223,7 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "lblDai2gun",
                                             "required": false,
                                             "isPrivateInfo": false,
                                             "text": "第２群<br><br>",
@@ -1200,6 +1244,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celDai2gunHeader",
                                     "connectTd": "R1C2"
                                 },
                                 {
@@ -1222,10 +1267,10 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "txtDai1gun_core",
                                             "required": false,
                                             "readOnly": true,
                                             "placeHolder": "",
-                                            "textKind": 0,
                                             "isPrivateInfo": false,
                                             "isPassword": false,
                                             "onFocus": "",
@@ -1240,9 +1285,10 @@ var DBE;
                                             "labelLAlign": 2,
                                             "labelRAlign": 0,
                                             "value": "",
-                                            "maxLength": 1000000000000,
+                                            "maxLength": 100000000,
                                             "minLength": 0,
                                             "textAlign": 1,
+                                            "textKind": 0,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -1261,6 +1307,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celDai1gun",
                                     "connectTd": "R2C1"
                                 },
                                 {
@@ -1283,10 +1330,10 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "txtDai2gun_core",
                                             "required": false,
                                             "readOnly": true,
                                             "placeHolder": "",
-                                            "textKind": 0,
                                             "isPrivateInfo": false,
                                             "isPassword": false,
                                             "onFocus": "",
@@ -1301,9 +1348,10 @@ var DBE;
                                             "labelLAlign": 2,
                                             "labelRAlign": 0,
                                             "value": "",
-                                            "maxLength": 1000000000000,
+                                            "maxLength": 100000000,
                                             "minLength": 0,
                                             "textAlign": 1,
+                                            "textKind": 0,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -1322,6 +1370,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celDai2gun",
                                     "connectTd": "R2C2"
                                 },
                                 {
@@ -1344,6 +1393,7 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "lblDai3gun",
                                             "required": false,
                                             "isPrivateInfo": false,
                                             "text": "第３群<br><br>",
@@ -1364,6 +1414,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celDai3gunHeader",
                                     "connectTd": "R1C3"
                                 },
                                 {
@@ -1386,6 +1437,7 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "lblDai4gun",
                                             "required": false,
                                             "isPrivateInfo": false,
                                             "text": "第４群<br><br>",
@@ -1406,6 +1458,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celDai4gunHeader",
                                     "connectTd": "R1C4"
                                 },
                                 {
@@ -1428,6 +1481,7 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "lblDai5gun",
                                             "required": false,
                                             "isPrivateInfo": false,
                                             "text": "第５群<br><br>",
@@ -1448,6 +1502,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celDai5gunHeader",
                                     "connectTd": "R1C5"
                                 },
                                 {
@@ -1470,6 +1525,7 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "lblDai6gun",
                                             "required": false,
                                             "isPrivateInfo": false,
                                             "text": "第６群<br><br>",
@@ -1490,6 +1546,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celDai6gunHeader",
                                     "connectTd": "R1C6"
                                 },
                                 {
@@ -1512,6 +1569,7 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "lblDai7gun",
                                             "required": false,
                                             "isPrivateInfo": false,
                                             "text": "第７群<br><br>",
@@ -1532,6 +1590,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celDai7gunHeader",
                                     "connectTd": "R1C7"
                                 },
                                 {
@@ -1554,10 +1613,10 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "txtDai3gun_core",
                                             "required": false,
                                             "readOnly": true,
                                             "placeHolder": "",
-                                            "textKind": 0,
                                             "isPrivateInfo": false,
                                             "isPassword": false,
                                             "onFocus": "",
@@ -1572,9 +1631,10 @@ var DBE;
                                             "labelLAlign": 2,
                                             "labelRAlign": 0,
                                             "value": "",
-                                            "maxLength": 1000000000000,
+                                            "maxLength": 100000000,
                                             "minLength": 0,
                                             "textAlign": 1,
+                                            "textKind": 0,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -1593,6 +1653,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celDai3gun",
                                     "connectTd": "R2C3"
                                 },
                                 {
@@ -1615,10 +1676,10 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "txtDai4gun_core",
                                             "required": false,
                                             "readOnly": true,
                                             "placeHolder": "",
-                                            "textKind": 0,
                                             "isPrivateInfo": false,
                                             "isPassword": false,
                                             "onFocus": "",
@@ -1633,9 +1694,10 @@ var DBE;
                                             "labelLAlign": 2,
                                             "labelRAlign": 0,
                                             "value": "",
-                                            "maxLength": 1000000000000,
+                                            "maxLength": 100000000,
                                             "minLength": 0,
                                             "textAlign": 1,
+                                            "textKind": 0,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -1654,6 +1716,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celDai4gun",
                                     "connectTd": "R2C4"
                                 },
                                 {
@@ -1676,10 +1739,10 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "txtDai5gun_core",
                                             "required": false,
                                             "readOnly": true,
                                             "placeHolder": "",
-                                            "textKind": 0,
                                             "isPrivateInfo": false,
                                             "isPassword": false,
                                             "onFocus": "",
@@ -1694,9 +1757,10 @@ var DBE;
                                             "labelLAlign": 2,
                                             "labelRAlign": 0,
                                             "value": "",
-                                            "maxLength": 1000000000000,
+                                            "maxLength": 100000000,
                                             "minLength": 0,
                                             "textAlign": 1,
+                                            "textKind": 0,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -1715,6 +1779,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celDai5gun",
                                     "connectTd": "R2C5"
                                 },
                                 {
@@ -1737,10 +1802,10 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "txtDai6gun_core",
                                             "required": false,
                                             "readOnly": true,
                                             "placeHolder": "",
-                                            "textKind": 0,
                                             "isPrivateInfo": false,
                                             "isPassword": false,
                                             "onFocus": "",
@@ -1755,9 +1820,10 @@ var DBE;
                                             "labelLAlign": 2,
                                             "labelRAlign": 0,
                                             "value": "",
-                                            "maxLength": 1000000000000,
+                                            "maxLength": 100000000,
                                             "minLength": 0,
                                             "textAlign": 2,
+                                            "textKind": 0,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -1776,6 +1842,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celDai6gun",
                                     "connectTd": "R2C6"
                                 },
                                 {
@@ -1798,10 +1865,10 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
+                                            "selectControlID": "txtDai7gun_core",
                                             "required": false,
                                             "readOnly": true,
                                             "placeHolder": "",
-                                            "textKind": 0,
                                             "isPrivateInfo": false,
                                             "isPassword": false,
                                             "onFocus": "",
@@ -1816,9 +1883,10 @@ var DBE;
                                             "labelLAlign": 2,
                                             "labelRAlign": 0,
                                             "value": "",
-                                            "maxLength": 1000000000000,
+                                            "maxLength": 100000000,
                                             "minLength": 0,
                                             "textAlign": 1,
+                                            "textKind": 0,
                                             "isComboBox": false,
                                             "suggest": []
                                         }
@@ -1837,6 +1905,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": 0,
                                     "marginRight": 0,
+                                    "selectControlID": "celDai7gun",
                                     "connectTd": "R2C7"
                                 }
                             ],
@@ -1854,32 +1923,11 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "selectControlID": "tblTyukanHyokaKomokuTokuten",
                             "html": "<table>\n  <tbody>\n    <tr><td id='R1C1'></td><td id='R1C2'></td><td id='R1C3'></td><td id='R1C4'></td><td id='R1C5'></td><td id='R1C6'></td><td id='R1C7'></td></tr>\n    <tr><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td><td id='R2C7'></td></tr>\n  </tbody>\n</table>\n"
                         },
                         {
                             "fieldName": "lblNichiJyotaiHyokaKekka",
-                            "items": [],
-                            "controlType": "Label",
-                            "width": "257",
-                            "visible": true,
-                            "displayNone": false,
-                            "disabled": false,
-                            "accessKey": "",
-                            "nextFocusFieldName": "",
-                            "wrap": true,
-                            "dependencies": [],
-                            "float": 0,
-                            "toolTip": "",
-                            "authorityMode": 0,
-                            "marginLeft": "XS",
-                            "marginRight": "XS",
-                            "required": false,
-                            "isPrivateInfo": false,
-                            "text": "認知機能・状態の安定性の評価結果",
-                            "align": 2
-                        },
-                        {
-                            "fieldName": "lblNinchiNichijyoSeikatsuJiritsudo",
                             "items": [],
                             "controlType": "Label",
                             "width": "240",
@@ -1895,6 +1943,30 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "selectControlID": "lblNichiJyotaiHyokaKekka",
+                            "required": false,
+                            "isPrivateInfo": false,
+                            "text": "認知機能・状態の安定性の評価結果",
+                            "align": 2
+                        },
+                        {
+                            "fieldName": "lblNinchiNichijyoSeikatsuJiritsudo",
+                            "items": [],
+                            "controlType": "Label",
+                            "width": "225",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "lblNinchiNichijyoSeikatsuJiritsudo",
                             "required": false,
                             "isPrivateInfo": false,
                             "text": "認知症高齢者の日常生活自立度",
@@ -1917,10 +1989,10 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "selectControlID": "txtGaizensei_core",
                             "required": false,
                             "readOnly": true,
                             "placeHolder": "",
-                            "textKind": 0,
                             "isPrivateInfo": false,
                             "isPassword": false,
                             "onFocus": "",
@@ -1930,14 +2002,15 @@ var DBE;
                             "text": "",
                             "labelLText": "認知症自立度Ⅱ以上の蓋然性",
                             "labelRText": "％",
-                            "labelLWidth": "220",
+                            "labelLWidth": "235",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "value": "",
-                            "maxLength": 1000000000000,
+                            "maxLength": 100000000,
                             "minLength": 0,
                             "textAlign": 1,
+                            "textKind": 0,
                             "isComboBox": false,
                             "suggest": []
                         },
@@ -1958,10 +2031,10 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "selectControlID": "txtJiritsudoChosa_core",
                             "required": false,
                             "readOnly": true,
                             "placeHolder": "",
-                            "textKind": 0,
                             "isPrivateInfo": false,
                             "isPassword": false,
                             "onFocus": "",
@@ -1976,9 +2049,10 @@ var DBE;
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "value": "",
-                            "maxLength": 1000000000000,
+                            "maxLength": 100000000,
                             "minLength": 0,
                             "textAlign": 1,
+                            "textKind": 0,
                             "isComboBox": false,
                             "suggest": []
                         },
@@ -1999,10 +2073,10 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "selectControlID": "txtJyotaiAnteisei_core",
                             "required": false,
                             "readOnly": true,
                             "placeHolder": "",
-                            "textKind": 0,
                             "isPrivateInfo": false,
                             "isPassword": false,
                             "onFocus": "",
@@ -2012,14 +2086,15 @@ var DBE;
                             "text": "",
                             "labelLText": "状態の安定性",
                             "labelRText": "",
-                            "labelLWidth": "279",
+                            "labelLWidth": "290",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "value": "",
-                            "maxLength": 1000000000000,
+                            "maxLength": 100000000,
                             "minLength": 0,
                             "textAlign": 1,
+                            "textKind": 0,
                             "isComboBox": false,
                             "suggest": []
                         },
@@ -2040,10 +2115,10 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "selectControlID": "txtJiritsudoIkensho_core",
                             "required": false,
                             "readOnly": true,
                             "placeHolder": "",
-                            "textKind": 0,
                             "isPrivateInfo": false,
                             "isPassword": false,
                             "onFocus": "",
@@ -2058,9 +2133,10 @@ var DBE;
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "value": "",
-                            "maxLength": 1000000000000,
+                            "maxLength": 100000000,
                             "minLength": 0,
                             "textAlign": 1,
+                            "textKind": 0,
                             "isComboBox": false,
                             "suggest": []
                         },
@@ -2081,10 +2157,10 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "selectControlID": "txtKyufuKbn_core",
                             "required": false,
                             "readOnly": true,
                             "placeHolder": "",
-                            "textKind": 0,
                             "isPrivateInfo": false,
                             "isPassword": false,
                             "onFocus": "",
@@ -2094,14 +2170,15 @@ var DBE;
                             "text": "",
                             "labelLText": "給付区分",
                             "labelRText": "",
-                            "labelLWidth": "279",
+                            "labelLWidth": "290",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "value": "",
-                            "maxLength": 1000000000000,
+                            "maxLength": 100000000,
                             "minLength": 0,
                             "textAlign": 1,
+                            "textKind": 0,
                             "isComboBox": false,
                             "suggest": []
                         },
@@ -2122,6 +2199,7 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "2",
                             "marginRight": "XS",
+                            "selectControlID": "lblIchijiHanteiKeikokuCode",
                             "required": false,
                             "isPrivateInfo": false,
                             "text": "一次判定警告コード",
@@ -2144,6 +2222,7 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "2",
                             "marginRight": "XS",
+                            "selectControlID": "dgIchijiHanteiKeikokuCode",
                             "gridSetting": {
                                 "rowHeight": 25,
                                 "isMultiSelectable": false,
@@ -2233,6 +2312,7 @@ var DBE;
                     "authorityMode": 0,
                     "marginLeft": "XS",
                     "marginRight": "XS",
+                    "selectControlID": "IchijiHanteiKekkaInfo",
                     "onLoad": "",
                     "title": "",
                     "marginTop": "Default",
@@ -2255,6 +2335,7 @@ var DBE;
                     "eraseBorderLeft": false,
                     "backgroundColor": 0,
                     "widthAuto": false,
+                    "panelDisplay": 0,
                     "isGroupBox": false
                 }
             ],
@@ -2272,6 +2353,7 @@ var DBE;
             "authorityMode": 0,
             "marginLeft": 0,
             "marginRight": 0,
+            "selectControlID": "defaultLayout",
             "relation": [],
             "businessId": "DBE",
             "controlName": "IchijiHanteiKekkaInfo",
