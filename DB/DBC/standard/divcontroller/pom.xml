@@ -32,11 +32,11 @@
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzRealService</artifactId>
         </dependency>
-        
-         <dependency> 
-            <groupId>org.yaml</groupId> 
-            <artifactId>snakeyaml</artifactId> 
-            <version>1.13</version> 
+
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>1.13</version>
         </dependency>
 
         <dependency>
@@ -54,12 +54,6 @@
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
             <version>1.13</version>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
-            <artifactId>DbzDivcontroller</artifactId>
-            <version>${project.version}</version>
-            <classifier>classes</classifier>
         </dependency>
     </dependencies>
 </project>
