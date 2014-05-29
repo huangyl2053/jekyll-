@@ -13,6 +13,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiListDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.dgNinteichosaIraiList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.DataGridUtil;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -38,7 +39,7 @@ public class NinteichosaIraiList {
         ResponseData<NinteichosaIraiListDiv> response = new ResponseData<>();
 
         DataGrid<dgNinteichosaIraiList_Row> dataGrid = div.getDgNinteichosaIraiList();
-        dataGrid.setDataSource(ChosaIraiTargets.DATA_SORCE);
+        dataGrid.setDataSource(new DemoData().get調査依頼対象者());
         NinteichosaIraiListHolder.saveNinteichosaIraiList(Collections.EMPTY_LIST);
 
         response.data = div;
@@ -129,23 +130,42 @@ public class NinteichosaIraiList {
     /**
      * 調査依頼対象のデモ用データを持ちます。
      */
-    private static class ChosaIraiTargets {
+    private static final class DemoData {
 
-        private static final List<dgNinteichosaIraiList_Row> DATA_SORCE;
+        private final List<dgNinteichosaIraiList_Row> _chosaIraiTargets;
 
-        static {
-            DATA_SORCE = new ArrayList<>();
-            try {
-                List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("dbeuc21000/ChosaIraiTargets.yml"));
-                for (Map target : targetSource) {
-                    DATA_SORCE.add(_to_dgNinteichosaIraiList_Row(target));
-                }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
+        /**
+         * デモデータを生成します。
+         */
+        DemoData() {
+            this._chosaIraiTargets = _createList();
         }
 
-        private static dgNinteichosaIraiList_Row _to_dgNinteichosaIraiList_Row(Map map) {
+        /**
+         * 調査依頼対象者を取得します。
+         *
+         * @return 調査依頼対象者
+         */
+        List<dgNinteichosaIraiList_Row> get調査依頼対象者() {
+            return this._chosaIraiTargets;
+        }
+
+        private List<dgNinteichosaIraiList_Row> _createList() {
+            List<HashMap> dataFromYaml = YamlLoader.FOR_DBE.loadAsList(new RString("dbeuc21000/ChosaIraiTargets.yml"));
+            return YamlUtil.convertList(dataFromYaml, _createConverter());
+        }
+
+        private YamlUtil.Converter.IConverter<dgNinteichosaIraiList_Row> _createConverter() {
+            return new YamlUtil.Converter.IConverter<dgNinteichosaIraiList_Row>() {
+
+                @Override
+                public dgNinteichosaIraiList_Row exec(Map map) {
+                    return _toDgNinteichosaIraiList_Row(map);
+                }
+            };
+        }
+
+        private static dgNinteichosaIraiList_Row _toDgNinteichosaIraiList_Row(Map map) {
             RString shimei = toRString(map.get("氏名"));
             RString kanaShimei = toRString(map.get("カナ氏名"));
             RString iraiDate = toRString(map.get("調査依頼日"));

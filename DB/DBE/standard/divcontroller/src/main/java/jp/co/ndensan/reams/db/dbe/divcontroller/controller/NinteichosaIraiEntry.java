@@ -252,11 +252,11 @@ public class NinteichosaIraiEntry {
             }
 
             private static boolean is登録済み(NinteichosaIraiEntryTargetChosainDiv div) {
-                return isNotEmpty(div.getTxtChosaItakusakiCode().getValue())
-                        && isNotEmpty(div.getTxtChosainCode().getValue());
+                return _isNotEmpty(div.getTxtChosaItakusakiCode().getValue())
+                        && _isNotEmpty(div.getTxtChosainCode().getValue());
             }
 
-            private static boolean isNotEmpty(Object obj) {
+            private static boolean _isNotEmpty(Object obj) {
                 return !RString.EMPTY.equals(obj);
             }
         }
@@ -267,13 +267,13 @@ public class NinteichosaIraiEntry {
         private static final class NinteichosaIraiEntryRequest {
 
             private static void initPanelFromTargetInfo(NinteichosaIraiEntryRequestDiv panel, dgNinteichosaIraiList_Row targetInfo) {
-                panel.getDdlChosaIraiKubun().setSelectedItem(composeItemValue(targetInfo.get調査依頼区分()));
+                panel.getDdlChosaIraiKubun().setSelectedItem(_composeItemValue(targetInfo.get調査依頼区分()));
                 panel.getTxtChosaIraiDate().setValue(targetInfo.get調査依頼日().getValue());
                 panel.getTxtChosaKigenDate().setValue(targetInfo.get調査期限日().getValue());
                 panel.getTxtIraishoHakkoDate().setValue(targetInfo.get調査依頼書発行日().getValue());
             }
 
-            private static RString composeItemValue(RString value) {
+            private static RString _composeItemValue(RString value) {
                 return value.equals(RString.EMPTY) ? new RString("1") : value.substring(0, 1);
             }
 
@@ -285,20 +285,20 @@ public class NinteichosaIraiEntry {
             }
 
             private static boolean is登録済み(NinteichosaIraiEntryRequestDiv div) {
-                return isNotNull(div.getTxtChosaIraiDate().getValue())
-                        && isNotNull(div.getTxtChosaKigenDate().getValue());
+                return _isNotNull(div.getTxtChosaIraiDate().getValue())
+                        && _isNotNull(div.getTxtChosaKigenDate().getValue());
             }
 
             private static boolean is依頼書発行済み(NinteichosaIraiEntryRequestDiv div) {
                 FlexibleDate iraishoHakkoDate = div.getTxtIraishoHakkoDate().getValue();
-                return isNotNull(iraishoHakkoDate) && isNotEmpty(iraishoHakkoDate);
+                return _isNotNull(iraishoHakkoDate) && _isNotEmpty(iraishoHakkoDate);
             }
 
-            private static boolean isNotNull(Object obj) {
+            private static boolean _isNotNull(Object obj) {
                 return obj == null;
             }
 
-            private static boolean isNotEmpty(FlexibleDate date) {
+            private static boolean _isNotEmpty(FlexibleDate date) {
                 return !FlexibleDate.EMPTY.equals(date);
             }
         }
@@ -309,14 +309,14 @@ public class NinteichosaIraiEntry {
         private static final class NinteichosaIraiEntryTargetTokusoku {
 
             private static void initPanelFromTargetInfo(NinteichosaIraiEntryTokusokuDiv panel, dgNinteichosaIraiList_Row targetInfo) {
-                panel.getDdlTokukuHoho().setSelectedItem(composeKey(targetInfo.get督促方法()));
+                panel.getDdlTokukuHoho().setSelectedItem(_composeKey(targetInfo.get督促方法()));
                 panel.getTxtTokusokuCount().setValue(targetInfo.get督促回数());
                 panel.getTxtTokusokuDate().setValue(targetInfo.get督促年月日().getValue());
                 panel.getTxtTokusokujoHakkoDate().setValue(targetInfo.get督促発行日().getValue());
                 panel.getTxtTokusokuKigenDate().setValue(targetInfo.get督促期限日().getValue());
             }
 
-            private static RString composeKey(RString value) {
+            private static RString _composeKey(RString value) {
                 return value.equals(RString.EMPTY) ? new RString("0") : value.substring(0, 0);
             }
 

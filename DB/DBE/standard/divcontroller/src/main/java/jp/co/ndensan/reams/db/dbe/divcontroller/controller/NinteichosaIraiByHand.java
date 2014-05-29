@@ -57,11 +57,13 @@ public class NinteichosaIraiByHand {
         }
 
         private static void init_dgChosaItakusakiList(ChosaItakusakiAndChosainListDiv div) {
-            div.getDgChosaItakusakiList().setDataSource(DemoData.ITAKUSAKI_LIST);
+            div.getDgChosaItakusakiList().setDataSource(
+                    new DemoData().get調査委託先一覧());
         }
 
         private static void init_comChosainListAll(ChosaItakusakiAndChosainListDiv div) {
-            div.getShozokuChosainList().getComChosainListAll().getDgShozokuChosainList().setDataSource(DemoData.CHOSAIN_LIST);
+            div.getShozokuChosainList().getComChosainListAll().getDgShozokuChosainList().setDataSource(
+                    new DemoData().get所属調査員一覧());
         }
 
     }
@@ -108,8 +110,8 @@ public class NinteichosaIraiByHand {
             }
 
             private static void init_comNinteichosaIraiListGod(ChosairaiBindByHandMainDiv div) {
-                div.getComNinteichosaIraiListGod().getDgNinteichosaIraiListForByHand()
-                        .setDataSource(DemoData.TARGET_LIST);
+                div.getComNinteichosaIraiListGod().getDgNinteichosaIraiListForByHand().setDataSource(
+                        new DemoData().get依頼者一覧());
             }
 
             enum Column {
@@ -198,6 +200,9 @@ public class NinteichosaIraiByHand {
      */
     private static final class DemoData {
 
+        /**
+         * デモ用データの種類の列挙型です。
+         */
         private enum DemoDataType {
 
             依頼者一覧("ChosaIraiTargets.yml"),
@@ -214,29 +219,59 @@ public class NinteichosaIraiByHand {
             }
         }
 
-        private static final List<dgNinteichosaIraiListForByHand_Row> TARGET_LIST;
-        private static final List<dgShozokuChosainList_Row> CHOSAIN_LIST;
-        private static final List<dgChosaItakusakiList_Row> ITAKUSAKI_LIST;
+        private final List<dgNinteichosaIraiListForByHand_Row> _targetList;
+        private final List<dgShozokuChosainList_Row> _chosainList;
+        private final List<dgChosaItakusakiList_Row> _chosaItakusakiList;
 
-        static {
-            TARGET_LIST = createList(DemoDataType.依頼者一覧);
-            CHOSAIN_LIST = createList(DemoDataType.所属調査員一覧);
-            ITAKUSAKI_LIST = createList(DemoDataType.調査委託先一覧);
+        /**
+         * DemoDataを生成します。
+         */
+        DemoData() {
+            _targetList = _createList(DemoDataType.依頼者一覧);
+            _chosainList = _createList(DemoDataType.所属調査員一覧);
+            _chosaItakusakiList = _createList(DemoDataType.調査委託先一覧);
         }
 
-        private static <T> List<T> createList(DemoDataType type) {
+        /**
+         * 依頼者一覧を取得します。
+         *
+         * @return 依頼者一覧
+         */
+        List<dgNinteichosaIraiListForByHand_Row> get依頼者一覧() {
+            return this._targetList;
+        }
+
+        /**
+         * 所属調査員一覧を取得します。
+         *
+         * @return 所属調査員一覧
+         */
+        List<dgShozokuChosainList_Row> get所属調査員一覧() {
+            return this._chosainList;
+        }
+
+        /**
+         * 調査委託先一覧を取得します。
+         *
+         * @return 調査委託先一覧
+         */
+        List<dgChosaItakusakiList_Row> get調査委託先一覧() {
+            return this._chosaItakusakiList;
+        }
+
+        private static <T> List<T> _createList(DemoDataType type) {
             List<HashMap> dataFromYaml = YamlLoader.FOR_DBE.loadAsList(type.getPath());
-            return YamlUtil.convertList(dataFromYaml, createDataEditor(type));
+            return YamlUtil.convertList(dataFromYaml, _createDataEditor(type));
         }
 
-        private static Converter.IConverter createDataEditor(DemoDataType type) {
+        private static Converter.IConverter _createDataEditor(DemoDataType type) {
             switch (type) {
                 case 依頼者一覧:
                     return new Converter.IConverter<dgNinteichosaIraiListForByHand_Row>() {
 
                         @Override
                         public dgNinteichosaIraiListForByHand_Row exec(Map map) {
-                            return to_dgNinteichosaIraiListForByHand_Row(map);
+                            return _to_dgNinteichosaIraiListForByHand_Row(map);
 
                         }
 
@@ -246,7 +281,7 @@ public class NinteichosaIraiByHand {
 
                         @Override
                         public dgShozokuChosainList_Row exec(Map map) {
-                            return to_dgShozokuChosainList_Row(map);
+                            return _to_dgShozokuChosainList_Row(map);
 
                         }
 
@@ -256,7 +291,7 @@ public class NinteichosaIraiByHand {
 
                         @Override
                         public dgChosaItakusakiList_Row exec(Map map) {
-                            return to_dgChosaItakusakiList_Row(map);
+                            return _to_dgChosaItakusakiList_Row(map);
 
                         }
 
@@ -267,7 +302,7 @@ public class NinteichosaIraiByHand {
 
         }
 
-        private static dgChosaItakusakiList_Row to_dgChosaItakusakiList_Row(Map map) {
+        private static dgChosaItakusakiList_Row _to_dgChosaItakusakiList_Row(Map map) {
             return new dgChosaItakusakiList_Row(
                     YamlUtil.toRString(map.get("調査委託先番号")),
                     YamlUtil.toRString(map.get("調査委託先名称")),
@@ -276,7 +311,7 @@ public class NinteichosaIraiByHand {
                     YamlUtil.toRString(map.get("割付地区査員番号")));
         }
 
-        private static dgShozokuChosainList_Row to_dgShozokuChosainList_Row(Map map) {
+        private static dgShozokuChosainList_Row _to_dgShozokuChosainList_Row(Map map) {
             return new dgShozokuChosainList_Row(new Button(),
                     YamlUtil.toRString(map.get("調査員番号")),
                     YamlUtil.toRString(map.get("調査員氏名")),
@@ -285,12 +320,12 @@ public class NinteichosaIraiByHand {
                     YamlUtil.toRString(map.get("調査委託先番号")));
         }
 
-        private static dgNinteichosaIraiListForByHand_Row to_dgNinteichosaIraiListForByHand_Row(Map map) {
+        private static dgNinteichosaIraiListForByHand_Row _to_dgNinteichosaIraiListForByHand_Row(Map map) {
             RString shimei = YamlUtil.toRString(map.get("氏名"));
             RString kanaShimei = YamlUtil.toRString(map.get("カナ氏名"));
             return new dgNinteichosaIraiListForByHand_Row(
                     YamlUtil.toBoolean(map.get("調査状況")),
-                    compose調査状況(YamlUtil.toRString(map.get("調査状況"))),
+                    _compose調査状況(YamlUtil.toRString(map.get("調査状況"))),
                     new Button(),
                     YamlUtil.toRString(map.get("保険者番号")),
                     YamlUtil.toRString(map.get("市町村")),
@@ -326,7 +361,7 @@ public class NinteichosaIraiByHand {
             );
         }
 
-        private static RString compose調査状況(RString rstr) {
+        private static RString _compose調査状況(RString rstr) {
             if (rstr.equals(new RString("true"))) {
                 return new RString("済");
             } else {
