@@ -2475,7 +2475,7 @@
       "ShokanShikyuTorokuShomeishoInfo"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "ShokanShikyuTorokuShomeishoInfo",
+     "selectedItemFieldName": "ShokanShikyuTorokuShinseiInfo",
      "initialTab": 0
     }
    ],
@@ -7139,7 +7139,7 @@
              "isComboBox": false,
              "suggest": [],
              "permitCharactor": "",
-             "formatLength": 8
+             "formatLength": "2"
             },
             {
              "fieldName": "btnShinryohiShikibetsu",
@@ -7463,6 +7463,49 @@
            "imageWidth": "",
            "imageHeight": "",
            "icon": 0
+          },
+          {
+           "fieldName": "txtShinryoSelectedIndex",
+           "items": [],
+           "controlType": "TextBox",
+           "width": "0",
+           "visible": false,
+           "displayNone": true,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": false,
+           "dependencies": [],
+           "float": 2,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "selectControlID": "txtShinryoSelectedIndex_core",
+           "required": false,
+           "text": "",
+           "isPrivateInfo": false,
+           "readOnly": false,
+           "placeHolder": "",
+           "isPassword": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
+           "onKeyPress": "",
+           "labelLText": "",
+           "labelRText": "",
+           "labelLWidth": "S",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
+           "value": "",
+           "maxLength": 100000000,
+           "minLength": 0,
+           "textAlign": 0,
+           "textKind": 0,
+           "isComboBox": false,
+           "suggest": [],
+           "permitCharactor": ""
           }
          ],
          "controlType": "Panel",
@@ -13461,7 +13504,7 @@
       "ShokanShikyuTorokuShomeishoShafuku"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "ShokanShikyuTorokuShomeishoKihon",
+     "selectedItemFieldName": "ShokanShikyuTorokuShomeishoShinryo",
      "initialTab": 0
     }
    ],
