@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceTeikyoShomeishoMeisaiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceTeikyoShomeishoRyoyoListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceTeikyoShomeishoShinryoListDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceTeikyoShomeishoShinryoListH1503Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoKihonDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoKihonKeikakuDiv;
@@ -24,11 +25,13 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeis
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoRyoyoShikkanDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoRyoyoTensuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShinryoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShinryoListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShinryoMeisaiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShinryoMeisaiH1503Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShinryoMeisaiH1504Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoMeisaiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoRyoyoList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoShinryoListH1503_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoShinryoList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -653,6 +656,26 @@ public class ShokanShikyuTorokuShomeisho {
 
     private void showShinryo(ShokanShikyuTorokuShomeishoDiv panel, 一覧明細表示 show) {
         ShokanShikyuTorokuShomeishoShinryoDiv shinryo = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShinryo();
+        RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
+        if (date.isBefore(診療費切替.H1504.getDate())) {
+            shinryo.getShokanShikyuTorokuShomeishoShinryoList().getShokanShikyuTorokuShomeishoShinryoListInfoH1503().setVisible(true);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoList().getShokanShikyuTorokuShomeishoShinryoListInfoH1503().setDisplayNone(false);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoList().getShokanShikyuTorokuShomeishoShinryoListInfo().setVisible(false);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoList().getShokanShikyuTorokuShomeishoShinryoListInfo().setDisplayNone(true);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai().getShokanShikyuTorokuShomeishoShinryoMeisaiH1503().setVisible(true);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai().getShokanShikyuTorokuShomeishoShinryoMeisaiH1503().setDisplayNone(false);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai().getShokanShikyuTorokuShomeishoShinryoMeisaiH1504().setVisible(false);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai().getShokanShikyuTorokuShomeishoShinryoMeisaiH1504().setDisplayNone(true);
+        } else {
+            shinryo.getShokanShikyuTorokuShomeishoShinryoList().getShokanShikyuTorokuShomeishoShinryoListInfoH1503().setVisible(false);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoList().getShokanShikyuTorokuShomeishoShinryoListInfoH1503().setDisplayNone(true);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoList().getShokanShikyuTorokuShomeishoShinryoListInfo().setVisible(true);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoList().getShokanShikyuTorokuShomeishoShinryoListInfo().setDisplayNone(false);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai().getShokanShikyuTorokuShomeishoShinryoMeisaiH1503().setVisible(false);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai().getShokanShikyuTorokuShomeishoShinryoMeisaiH1503().setDisplayNone(true);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai().getShokanShikyuTorokuShomeishoShinryoMeisaiH1504().setVisible(true);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai().getShokanShikyuTorokuShomeishoShinryoMeisaiH1504().setDisplayNone(false);
+        }
         if (show.equals(一覧明細表示.一覧表示)) {
             shinryo.getShokanShikyuTorokuShomeishoShinryoList().setIsOpen(true);
             shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai().setIsOpen(false);
@@ -660,30 +683,37 @@ public class ShokanShikyuTorokuShomeisho {
             shinryo.getShokanShikyuTorokuShomeishoShinryoList().setIsOpen(false);
             shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai().setIsOpen(true);
         }
-        RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
-        if (date.isBefore(診療費切替.H1504.getDate())) {
-            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai().getShokanShikyuTorokuShomeishoShinryoMeisaiH1503().setVisible(true);
-            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai().getShokanShikyuTorokuShomeishoShinryoMeisaiH1503().setDisplayNone(false);
-            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai().getShokanShikyuTorokuShomeishoShinryoMeisaiH1504().setVisible(false);
-            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai().getShokanShikyuTorokuShomeishoShinryoMeisaiH1504().setDisplayNone(true);
-        } else {
-            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai().getShokanShikyuTorokuShomeishoShinryoMeisaiH1503().setVisible(false);
-            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai().getShokanShikyuTorokuShomeishoShinryoMeisaiH1503().setDisplayNone(true);
-            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai().getShokanShikyuTorokuShomeishoShinryoMeisaiH1504().setVisible(true);
-            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai().getShokanShikyuTorokuShomeishoShinryoMeisaiH1504().setDisplayNone(false);
-        }
     }
 
     private void setShinryoListData(ShokanShikyuTorokuShomeishoDiv panel) {
         ShokanShikyuTorokuShomeishoShinryoDiv shinryo = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShinryo();
-        ServiceTeikyoShomeishoShinryoListDiv shinryoList = shinryo.getShokanShikyuTorokuShomeishoShinryoList().getShokanShikyuTorokuShomeishoShinryoListInfo();
-        DataGrid<dgServiceTeikyoShomeishoShinryoList_Row> dgRow = shinryoList.getDgServiceTeikyoShomeishoShinryoList();
-        List<dgServiceTeikyoShomeishoShinryoList_Row> dgRowList = dgRow.getDataSource();
+        ServiceTeikyoShomeishoShinryoListH1503Div shinryoH1503List = shinryo.getShokanShikyuTorokuShomeishoShinryoList().getShokanShikyuTorokuShomeishoShinryoListInfoH1503();
+        ServiceTeikyoShomeishoShinryoListDiv shinryoH1504List = shinryo.getShokanShikyuTorokuShomeishoShinryoList().getShokanShikyuTorokuShomeishoShinryoListInfo();
+
+        DataGrid<dgServiceTeikyoShomeishoShinryoListH1503_Row> dgRowH1503 = shinryoH1503List.getDgServiceTeikyoShomeishoShinryoListH1503();
+        List<dgServiceTeikyoShomeishoShinryoListH1503_Row> dgRowListH1503 = dgRowH1503.getDataSource();
+        DataGrid<dgServiceTeikyoShomeishoShinryoList_Row> dgRowH1504 = shinryoH1504List.getDgServiceTeikyoShomeishoShinryoList();
+        List<dgServiceTeikyoShomeishoShinryoList_Row> dgRowListH1504 = dgRowH1504.getDataSource();
 
         List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml"));
-        dgRowList.clear();
+        dgRowListH1503.clear();
         for (int i = 15; i < 18; i++) {
-            dgRowList.add(create特定診療費明細一覧アイテム(
+            dgRowListH1503.add(create特定診療費明細一覧H1503アイテム(
+                    sourceList.get(i).get("傷病名").toString(),
+                    sourceList.get(i).get("指導管理").toString(),
+                    sourceList.get(i).get("リハビリ").toString(),
+                    sourceList.get(i).get("精神科").toString(),
+                    sourceList.get(i).get("エックス線").toString(),
+                    sourceList.get(i).get("その他１").toString(),
+                    sourceList.get(i).get("その他２").toString(),
+                    sourceList.get(i).get("合計").toString()
+            ));
+        }
+        dgRowH1503.setDataSource(dgRowListH1503);
+
+        dgRowListH1504.clear();
+        for (int i = 18; i < 21; i++) {
+            dgRowListH1504.add(create特定診療費明細一覧H1504アイテム(
                     sourceList.get(i).get("傷病名").toString(),
                     sourceList.get(i).get("識別番号").toString(),
                     sourceList.get(i).get("単位数").toString(),
@@ -691,7 +721,7 @@ public class ShokanShikyuTorokuShomeisho {
                     sourceList.get(i).get("合計単位数").toString()
             ));
         }
-        dgRow.setDataSource(dgRowList);
+        dgRowH1504.setDataSource(dgRowListH1504);
     }
 
     private void deleteShinryoListData(ShokanShikyuTorokuShomeishoDiv panel) {
@@ -720,7 +750,7 @@ public class ShokanShikyuTorokuShomeisho {
         }
         RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
         if (date.isBefore(診療費切替.H1504.getDate())) {
-            HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(18);
+            HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(21);
             ShokanShikyuTorokuShomeishoShinryoMeisaiH1503Div h1503div = shinryoMeisai.getShokanShikyuTorokuShomeishoShinryoMeisaiH1503();
             h1503div.getTxtShinryohiShobyoNameH1503().setValue(new RString(source.get("傷病名").toString()));
             h1503div.getTxtShinryohiShidoKanri().setValue(new Decimal(source.get("指導管理等").toString()));
@@ -732,7 +762,7 @@ public class ShokanShikyuTorokuShomeisho {
             h1503div.getTxtShinryohiGokeiTanisuH1503().setValue(new Decimal(source.get("合計単位数").toString()));
             h1503div.getTxtShinryohiTekiyoH1503().setValue(new RString(source.get("摘要").toString()));
         } else {
-            HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(19);
+            HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(22);
             ShokanShikyuTorokuShomeishoShinryoMeisaiH1504Div h1504div = shinryoMeisai.getShokanShikyuTorokuShomeishoShinryoMeisaiH1504();
             h1504div.getTxtShinryohiShobyoNameH1504().setValue(new RString(source.get("傷病名").toString()));
             h1504div.getTxtShinryohiShikibetsuNo().setValue(new RString(source.get("識別番号").toString()));
@@ -770,77 +800,86 @@ public class ShokanShikyuTorokuShomeisho {
 
     private void kakuteiShinryoMeisaiData(ShokanShikyuTorokuShomeishoDiv panel) {
         ShokanShikyuTorokuShomeishoShinryoDiv shinryo = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShinryo();
-        ServiceTeikyoShomeishoShinryoListDiv shinryoList = shinryo.getShokanShikyuTorokuShomeishoShinryoList().getShokanShikyuTorokuShomeishoShinryoListInfo();
+        ShokanShikyuTorokuShomeishoShinryoListDiv shinryoList = shinryo.getShokanShikyuTorokuShomeishoShinryoList();
         ShokanShikyuTorokuShomeishoShinryoMeisaiDiv shinryoMeisai = shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai();
-
-        DataGrid<dgServiceTeikyoShomeishoShinryoList_Row> dgRow = shinryoList.getDgServiceTeikyoShomeishoShinryoList();
-        List<dgServiceTeikyoShomeishoShinryoList_Row> dgRowList = dgRow.getDataSource();
         int index = Integer.parseInt(shinryoMeisai.getTxtShinryoSelectedIndex().getValue().toString());
-
-        // 仮のコード
-        dgServiceTeikyoShomeishoShinryoList_Row item = create特定診療費明細一覧アイテム("", "", "", "", "");
 
         RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
         if (date.isBefore(診療費切替.H1504.getDate())) {
             ShokanShikyuTorokuShomeishoShinryoMeisaiH1503Div h1503div = shinryoMeisai.getShokanShikyuTorokuShomeishoShinryoMeisaiH1503();
-//            h1503div.getTxtShinryohiShobyoNameH1503().setValue(new RString(source.get("傷病名").toString()));
-//            h1503div.getTxtShinryohiShidoKanri().setValue(new Decimal(source.get("指導管理等").toString()));
-//            h1503div.getTxtShinryohiRehabili().setValue(new Decimal(source.get("リハビリ").toString()));
-//            h1503div.getTxtShinryohiSenmonRyoho().setValue(new Decimal(source.get("精神科専門療法").toString()));
-//            h1503div.getTxtShinryohiXSen().setValue(new Decimal(source.get("単純エックス線").toString()));
-//            h1503div.getTxtShinryohiEtc1().setValue(new Decimal(source.get("その他１").toString()));
-//            h1503div.getTxtShinryohiEtc2().setValue(new Decimal(source.get("その他２").toString()));
-//            h1503div.getTxtShinryohiGokeiTanisuH1503().setValue(new Decimal(source.get("合計単位数").toString()));
-//            h1503div.getTxtShinryohiTekiyoH1503().setValue(new RString(source.get("摘要").toString()));
-//
-////    private dgServiceTeikyoShomeishoShinryoList_Row create特定診療費明細一覧アイテム(
-////            String txtShobyoName,
-////            String txtShikibetsuNo,
-////            String txtTanisu,
-////            String txtKaisu,
-////            String txtGokeiTanisu
-//            item = create特定診療費明細一覧アイテム(
-//                    h1503div.getTxtShinryohiShobyoNameH1503().getValue().toString(),
-//                    "",
-//                    shinryoMeisai.getShokanShikyuTorokuShomeishoShinryoShikkan().getTxtShinryohiShikkanName1().getValue().toString(),
-//                    shinryoMeisai.getShokanShikyuTorokuShomeishoShinryoShikkan().getTxtShinryohiShinryoKaishiYMD1().getValue().wareki().toDateString().toString(),
-//                    shinryoMeisai.getShokanShikyuTorokuShomeishoShinryoTensu().getTxtShinryohiShinryohiShokei().getValue().toString(),
-//                    shinryoMeisai.getShokanShikyuTorokuShomeishoShinryoKinkyuji().getTxtShinryohiKinkyuName1().getValue().toString(),
-//                    shinryoMeisai.getShokanShikyuTorokuShomeishoShinryoKinkyuji().getTxtShinryohiChiryoKaishiYMD1().getValue().wareki().toDateString().toString(),
-//                    shinryoMeisai.getShokanShikyuTorokuShomeishoShinryoTensu().getTxtShinryohiChiryohiShokei().getValue().toString(),
-//                    shinryoMeisai.getShokanShikyuTorokuShomeishoShinryoTensu().getTxtShinryohiChiryoGokei().getValue().toString());
-        } else {
-//            ShokanShikyuTorokuShomeishoShinryoMeisaiH1504Div h1504div = shinryoMeisai.getShokanShikyuTorokuShomeishoShinryoMeisaiH1504();
-//            h1504div.getTxtShinryohiShobyoNameH1504().setValue(new RString(source.get("傷病名").toString()));
-//            h1504div.getTxtShinryohiShikibetsuNo().setValue(new RString(source.get("識別番号").toString()));
-//            h1504div.getTxtShinryohiShikibetsuName().setValue(new RString(source.get("識別名").toString()));
-//            h1504div.getTxtShinryohiTanisu().setValue(new Decimal(source.get("単位").toString()));
-//            h1504div.getTxtShinryohiKaisu().setValue(new Decimal(source.get("回数").toString()));
-//            h1504div.getTxtShinryohiGokeiTanisuH1504().setValue(new Decimal(source.get("合計単位数").toString()));
-//            h1504div.getTxtShinryohiTekiyoH1504().setValue(new RString(source.get("摘要").toString()));
-//            item = create特定診療費明細一覧アイテム(
-//                    shinryoMeisai.getShokanShikyuTorokuShomeishoShinryoShikkan().getTxtShinryohiShikkanName1().getValue().toString(),
-//                    shinryoMeisai.getShokanShikyuTorokuShomeishoShinryoShikkan().getTxtShinryohiShinryoKaishiYMD1().getValue().wareki().toDateString().toString(),
-//                    shinryoMeisai.getShokanShikyuTorokuShomeishoShinryoTensu().getTxtShinryohiShinryohiShokei().getValue().toString(),
-//                    shinryoMeisai.getShokanShikyuTorokuShomeishoShinryoKinkyuji().getTxtShinryohiKinkyuName1().getValue().toString(),
-//                    shinryoMeisai.getShokanShikyuTorokuShomeishoShinryoKinkyuji().getTxtShinryohiChiryoKaishiYMD1().getValue().wareki().toDateString().toString(),
-//                    shinryoMeisai.getShokanShikyuTorokuShomeishoShinryoTensu().getTxtShinryohiChiryohiShokei().getValue().toString(),
-//                    shinryoMeisai.getShokanShikyuTorokuShomeishoShinryoTensu().getTxtShinryohiChiryoGokei().getValue().toString());
-//
-        }
+            ServiceTeikyoShomeishoShinryoListH1503Div shinryoH1503List = shinryoList.getShokanShikyuTorokuShomeishoShinryoListInfoH1503();
+            DataGrid<dgServiceTeikyoShomeishoShinryoListH1503_Row> dgRow = shinryoH1503List.getDgServiceTeikyoShomeishoShinryoListH1503();
+            List<dgServiceTeikyoShomeishoShinryoListH1503_Row> dgRowList = dgRow.getDataSource();
+            dgServiceTeikyoShomeishoShinryoListH1503_Row itemH1503 = create特定診療費明細一覧H1503アイテム(
+                    h1503div.getTxtShinryohiShobyoNameH1503().getValue().toString(),
+                    h1503div.getTxtShinryohiShidoKanri().getValue().toString(),
+                    h1503div.getTxtShinryohiRehabili().getValue().toString(),
+                    h1503div.getTxtShinryohiSenmonRyoho().getValue().toString(),
+                    h1503div.getTxtShinryohiXSen().getValue().toString(),
+                    h1503div.getTxtShinryohiEtc1().getValue().toString(),
+                    h1503div.getTxtShinryohiEtc2().getValue().toString(),
+                    h1503div.getTxtShinryohiGokeiTanisuH1503().getValue().toString());
+            if (index == -1) {
+                itemH1503.setRowState(RowState.Added);
+                dgRowList.add(itemH1503);
+            } else {
+                itemH1503.setRowState(RowState.Modified);
+                dgRowList.remove(index);
+                dgRowList.add(index, itemH1503);
+            }
+            dgRow.setDataSource(dgRowList);
 
-        if (index == -1) {
-            item.setRowState(RowState.Added);
-            dgRowList.add(item);
         } else {
-            item.setRowState(RowState.Modified);
-            dgRowList.remove(index);
-            dgRowList.add(index, item);
+            ShokanShikyuTorokuShomeishoShinryoMeisaiH1504Div h1504div = shinryoMeisai.getShokanShikyuTorokuShomeishoShinryoMeisaiH1504();
+            ServiceTeikyoShomeishoShinryoListDiv shinryoH1504List = shinryoList.getShokanShikyuTorokuShomeishoShinryoListInfo();
+            DataGrid<dgServiceTeikyoShomeishoShinryoList_Row> dgRow = shinryoH1504List.getDgServiceTeikyoShomeishoShinryoList();
+            List<dgServiceTeikyoShomeishoShinryoList_Row> dgRowList = dgRow.getDataSource();
+            dgServiceTeikyoShomeishoShinryoList_Row itemH1504 = create特定診療費明細一覧H1504アイテム(
+                    h1504div.getTxtShinryohiShobyoNameH1504().getValue().toString(),
+                    h1504div.getTxtShinryohiShikibetsuNo().getValue().toString().concat(":").concat(h1504div.getTxtShinryohiShikibetsuName().getValue().toString()),
+                    h1504div.getTxtShinryohiTanisu().getValue().toString(),
+                    h1504div.getTxtShinryohiKaisu().getValue().toString(),
+                    h1504div.getTxtShinryohiGokeiTanisuH1504().getValue().toString());
+            if (index == -1) {
+                itemH1504.setRowState(RowState.Added);
+                dgRowList.add(itemH1504);
+            } else {
+                itemH1504.setRowState(RowState.Modified);
+                dgRowList.remove(index);
+                dgRowList.add(index, itemH1504);
+            }
+            dgRow.setDataSource(dgRowList);
         }
-        dgRow.setDataSource(dgRowList);
     }
 
-    private dgServiceTeikyoShomeishoShinryoList_Row create特定診療費明細一覧アイテム(
+    private dgServiceTeikyoShomeishoShinryoListH1503_Row create特定診療費明細一覧H1503アイテム(
+            String txtShobyoName,
+            String txtShidoKanri,
+            String txtRehabili,
+            String txtSeishinka,
+            String txtXSen,
+            String txtEtc1,
+            String txtEtc2,
+            String txtGokei
+    ) {
+        Button btnSelect = new Button();
+        Button btnEdit = new Button();
+        Button btnDelete = new Button();
+        return new dgServiceTeikyoShomeishoShinryoListH1503_Row(
+                btnSelect,
+                btnEdit,
+                btnDelete,
+                new RString(txtShobyoName),
+                new RString(txtShidoKanri),
+                new RString(txtRehabili),
+                new RString(txtSeishinka),
+                new RString(txtXSen),
+                new RString(txtEtc1),
+                new RString(txtEtc2),
+                new RString(txtGokei));
+    }
+
+    private dgServiceTeikyoShomeishoShinryoList_Row create特定診療費明細一覧H1504アイテム(
             String txtShobyoName,
             String txtShikibetsuNo,
             String txtTanisu,
