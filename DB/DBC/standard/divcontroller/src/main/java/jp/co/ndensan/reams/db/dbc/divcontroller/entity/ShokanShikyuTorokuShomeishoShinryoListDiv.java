@@ -20,6 +20,8 @@ public class ShokanShikyuTorokuShomeishoShinryoListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("ShokanShikyuTorokuShomeishoShinryoListInfoH1503")
+    private ServiceTeikyoShomeishoShinryoListH1503Div ShokanShikyuTorokuShomeishoShinryoListInfoH1503;
     @JsonProperty("ShokanShikyuTorokuShomeishoShinryoListInfo")
     private ServiceTeikyoShomeishoShinryoListDiv ShokanShikyuTorokuShomeishoShinryoListInfo;
 
@@ -29,6 +31,16 @@ public class ShokanShikyuTorokuShomeishoShinryoListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    @JsonProperty("ShokanShikyuTorokuShomeishoShinryoListInfoH1503")
+    public ServiceTeikyoShomeishoShinryoListH1503Div getShokanShikyuTorokuShomeishoShinryoListInfoH1503() {
+        return ShokanShikyuTorokuShomeishoShinryoListInfoH1503;
+    }
+
+    @JsonProperty("ShokanShikyuTorokuShomeishoShinryoListInfoH1503")
+    public void setShokanShikyuTorokuShomeishoShinryoListInfoH1503(ServiceTeikyoShomeishoShinryoListH1503Div ShokanShikyuTorokuShomeishoShinryoListInfoH1503) {
+        this.ShokanShikyuTorokuShomeishoShinryoListInfoH1503=ShokanShikyuTorokuShomeishoShinryoListInfoH1503;
+    }
+
     @JsonProperty("ShokanShikyuTorokuShomeishoShinryoListInfo")
     public ServiceTeikyoShomeishoShinryoListDiv getShokanShikyuTorokuShomeishoShinryoListInfo() {
         return ShokanShikyuTorokuShomeishoShinryoListInfo;

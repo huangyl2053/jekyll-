@@ -29,6 +29,8 @@ public class ShokanShikyuTorokuShomeishoShinryoMeisaiDiv extends Panel {
     private ShokanShikyuTorokuShomeishoShinryoMeisaiH1504Div ShokanShikyuTorokuShomeishoShinryoMeisaiH1504;
     @JsonProperty("btnShinryohiKakutei")
     private Button btnShinryohiKakutei;
+    @JsonProperty("txtShinryoSelectedIndex")
+    private TextBox txtShinryoSelectedIndex;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -64,6 +66,16 @@ public class ShokanShikyuTorokuShomeishoShinryoMeisaiDiv extends Panel {
     @JsonProperty("btnShinryohiKakutei")
     public void setBtnShinryohiKakutei(Button btnShinryohiKakutei) {
         this.btnShinryohiKakutei=btnShinryohiKakutei;
+    }
+
+    @JsonProperty("txtShinryoSelectedIndex")
+    public TextBox getTxtShinryoSelectedIndex() {
+        return txtShinryoSelectedIndex;
+    }
+
+    @JsonProperty("txtShinryoSelectedIndex")
+    public void setTxtShinryoSelectedIndex(TextBox txtShinryoSelectedIndex) {
+        this.txtShinryoSelectedIndex=txtShinryoSelectedIndex;
     }
 
 }
