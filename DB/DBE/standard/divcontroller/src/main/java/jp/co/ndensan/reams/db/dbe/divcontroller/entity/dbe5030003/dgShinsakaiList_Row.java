@@ -11,11 +11,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
- * dbShinsakaiList_Row のクラスファイル
+ * dgShinsakaiList_Row のクラスファイル
  *
  * @author 自動生成
  */
-public class dbShinsakaiList_Row extends DataRow {
+public class dgShinsakaiList_Row extends DataRow {
 
     private Button btnToDecide;
     private RString kaisaiNo;
@@ -28,11 +28,11 @@ public class dbShinsakaiList_Row extends DataRow {
     private RString startTime;
     private RString endTime;
 
-    public dbShinsakaiList_Row() {
+    public dgShinsakaiList_Row() {
         super();
     }
 
-    public dbShinsakaiList_Row(Button btnToDecide, RString kaisaiNo, TextBoxFlexibleDate txtKaisaiDate, RString gogitaiNo, RString gogitaiMeisho, RString kaisaibasho, RString yoteiTeiin, RString wariateNinzu, RString startTime, RString endTime) {
+    public dgShinsakaiList_Row(Button btnToDecide, RString kaisaiNo, TextBoxFlexibleDate txtKaisaiDate, RString gogitaiNo, RString gogitaiMeisho, RString kaisaibasho, RString yoteiTeiin, RString wariateNinzu, RString startTime, RString endTime) {
         super();
         this.setOriginalData("btnToDecide", btnToDecide);
         this.setOriginalData("kaisaiNo", kaisaiNo);

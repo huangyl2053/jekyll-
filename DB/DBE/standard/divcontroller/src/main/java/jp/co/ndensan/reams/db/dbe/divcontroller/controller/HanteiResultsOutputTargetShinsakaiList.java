@@ -53,6 +53,7 @@ public class HanteiResultsOutputTargetShinsakaiList {
     private dgShinsakaiList_Row toDgShinsakaiList_Row(Map map) {
         RString kaisaiNo = _toRString(map.get("開催番号"));
         TextBoxFlexibleDate kaisaiDate = toTextBoxFlexibleDate(new FlexibleDate(map.get("開催日").toString()));
+        RString gogitaiNo = _toRString("00001");
         RString gogitaiMeisho = _toRString(map.get("合議体名称"));
         RString kaisaiBasho = _toRString(map.get("開催場所"));
         RString yoteiTeiin = _toRString(map.get("予定定員"));
@@ -61,7 +62,7 @@ public class HanteiResultsOutputTargetShinsakaiList {
         RString endTime = _toRString(map.get("終了時間"));
 
         Button btn = new Button();
-        dgShinsakaiList_Row row = new dgShinsakaiList_Row(btn, kaisaiNo, kaisaiDate, gogitaiMeisho, kaisaiBasho, yoteiTeiin, wariateNinzu,
+        dgShinsakaiList_Row row = new dgShinsakaiList_Row(btn, kaisaiNo, kaisaiDate, gogitaiNo, gogitaiMeisho, kaisaiBasho, yoteiTeiin, wariateNinzu,
                 startTime, endTime);
         return row;
     }

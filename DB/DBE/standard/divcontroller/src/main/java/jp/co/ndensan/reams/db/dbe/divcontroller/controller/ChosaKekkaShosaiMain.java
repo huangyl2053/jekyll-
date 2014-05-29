@@ -353,7 +353,7 @@ public class ChosaKekkaShosaiMain {
 
         Button btn = new Button();
         dgChosakekka2_Row rowChosakekka2Data = new dgChosakekka2_Row(
-                btn, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE);
+                btn, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE);
 
         btn.setDisabled(btnSelect);
         btn.setDisplayNone(btnSelect);
@@ -371,7 +371,7 @@ public class ChosaKekkaShosaiMain {
 
         Button btn = new Button();
         dgChosakekka3_Row rowChosakekka3Data = new dgChosakekka3_Row(
-                btn, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE);
+                btn, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE);
 
         btn.setDisabled(btnSelect);
         btn.setDisplayNone(btnSelect);

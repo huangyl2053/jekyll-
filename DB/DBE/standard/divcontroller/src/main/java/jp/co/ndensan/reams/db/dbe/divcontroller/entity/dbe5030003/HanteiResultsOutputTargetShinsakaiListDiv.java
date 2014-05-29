@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5030003;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5030003.SearchButtonsForShinsakaiExtractionDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5030003.ShinsakaiExtractionConditionDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5030003.dbShinsakaiList_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5030003.dgShinsakaiList_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
