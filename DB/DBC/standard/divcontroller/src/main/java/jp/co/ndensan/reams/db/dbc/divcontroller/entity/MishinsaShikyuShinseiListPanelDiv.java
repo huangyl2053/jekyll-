@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShinsaButtonDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.SystemCheckDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgMishinsaShikyuShinsei_Row;
@@ -26,10 +27,10 @@ public class MishinsaShikyuShinseiListPanelDiv extends Panel {
      */
     @JsonProperty("txtShinsaDate")
     private TextBoxDate txtShinsaDate;
-    @JsonProperty("btnKari")
-    private Button btnKari;
     @JsonProperty("dgMishinsaShikyuShinsei")
     private DataGrid<dgMishinsaShikyuShinsei_Row> dgMishinsaShikyuShinsei;
+    @JsonProperty("JutakuKaishuShinseiPanel")
+    private JutakuKaishuShinseiPanelDiv JutakuKaishuShinseiPanel;
     @JsonProperty("ShinsaButton")
     private ShinsaButtonDiv ShinsaButton;
     @JsonProperty("SystemCheck")
@@ -51,16 +52,6 @@ public class MishinsaShikyuShinseiListPanelDiv extends Panel {
         this.txtShinsaDate=txtShinsaDate;
     }
 
-    @JsonProperty("btnKari")
-    public Button getBtnKari() {
-        return btnKari;
-    }
-
-    @JsonProperty("btnKari")
-    public void setBtnKari(Button btnKari) {
-        this.btnKari=btnKari;
-    }
-
     @JsonProperty("dgMishinsaShikyuShinsei")
     public DataGrid<dgMishinsaShikyuShinsei_Row> getDgMishinsaShikyuShinsei() {
         return dgMishinsaShikyuShinsei;
@@ -69,6 +60,16 @@ public class MishinsaShikyuShinseiListPanelDiv extends Panel {
     @JsonProperty("dgMishinsaShikyuShinsei")
     public void setDgMishinsaShikyuShinsei(DataGrid<dgMishinsaShikyuShinsei_Row> dgMishinsaShikyuShinsei) {
         this.dgMishinsaShikyuShinsei=dgMishinsaShikyuShinsei;
+    }
+
+    @JsonProperty("JutakuKaishuShinseiPanel")
+    public JutakuKaishuShinseiPanelDiv getJutakuKaishuShinseiPanel() {
+        return JutakuKaishuShinseiPanel;
+    }
+
+    @JsonProperty("JutakuKaishuShinseiPanel")
+    public void setJutakuKaishuShinseiPanel(JutakuKaishuShinseiPanelDiv JutakuKaishuShinseiPanel) {
+        this.JutakuKaishuShinseiPanel=JutakuKaishuShinseiPanel;
     }
 
     @JsonProperty("ShinsaButton")
