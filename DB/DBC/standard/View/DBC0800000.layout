@@ -7826,7 +7826,7 @@
            "dialogCancelEventNameForDialog": "",
            "AddButtonVisible": true,
            "AddButtonDisplayNone": false,
-           "AddButtonOnClick": "",
+           "AddButtonOnClick": "onClickAddShokujiMeisai",
            "MeisaiListGridSetting": {
             "rowHeight": 25,
             "isMultiSelectable": false,
@@ -7851,7 +7851,7 @@
               "cellDetails": {
                "cellType": 8,
                "text": "選",
-               "onClick": "",
+               "onClick": "onSelectedShokujiList",
                "imageFileUrl": "",
                "imageWidth": "",
                "imageHeight": ""
@@ -7893,7 +7893,7 @@
               "cellDetails": {
                "cellType": 8,
                "text": "削",
-               "onClick": "",
+               "onClick": "onClickShokujiListDelete",
                "imageFileUrl": "",
                "imageWidth": "",
                "imageHeight": ""
@@ -8097,7 +8097,7 @@
            "dialogCancelEventNameForDialog": "",
            "AddButtonVisible": true,
            "AddButtonDisplayNone": false,
-           "AddButtonOnClick": "",
+           "AddButtonOnClick": "onClickAddShokujiMeisai",
            "MeisaiListGridSetting": {
             "rowHeight": 25,
             "isMultiSelectable": false,
@@ -8122,7 +8122,7 @@
               "cellDetails": {
                "cellType": 8,
                "text": "選",
-               "onClick": "",
+               "onClick": "onSelectedShokujiList",
                "imageFileUrl": "",
                "imageWidth": "",
                "imageHeight": ""
@@ -8164,7 +8164,7 @@
               "cellDetails": {
                "cellType": 8,
                "text": "削",
-               "onClick": "",
+               "onClick": "onClickShokujiListDelete",
                "imageFileUrl": "",
                "imageWidth": "",
                "imageHeight": ""
@@ -9552,12 +9552,55 @@
            "marginRight": "XS",
            "selectControlID": "btnShokujihiKakutei",
            "text": "入力内容を確定する",
-           "onClick": "",
+           "onClick": "onClickShokujiKakutei",
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
            "imageHeight": "",
            "icon": 0
+          },
+          {
+           "fieldName": "txtShokujiSelectedIndex",
+           "items": [],
+           "controlType": "TextBox",
+           "width": "0",
+           "visible": false,
+           "displayNone": true,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": false,
+           "dependencies": [],
+           "float": 2,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "selectControlID": "txtShokujiSelectedIndex_core",
+           "required": false,
+           "text": "",
+           "isPrivateInfo": false,
+           "readOnly": false,
+           "placeHolder": "",
+           "isPassword": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
+           "onKeyPress": "",
+           "labelLText": "",
+           "labelRText": "",
+           "labelLWidth": "S",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
+           "value": "",
+           "maxLength": 100000000,
+           "minLength": 0,
+           "textAlign": 0,
+           "textKind": 0,
+           "isComboBox": false,
+           "suggest": [],
+           "permitCharactor": ""
           }
          ],
          "controlType": "Panel",
@@ -14000,7 +14043,7 @@
       "ShokanShikyuTorokuShomeishoShafuku"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "ShokanShikyuTorokuShomeishoKihon",
+     "selectedItemFieldName": "ShokanShikyuTorokuShomeishoShokuji",
      "initialTab": 0
     }
    ],
@@ -14088,6 +14131,22 @@
     {
      "eventName": "onClickShinryoKakutei",
      "requestUrl": "dbc/db/dbc/ShokanShikyuTorokuShomeisho/onClickShinryoKakutei"
+    },
+    {
+     "eventName": "onClickAddShokujiMeisai",
+     "requestUrl": "dbc/db/dbc/ShokanShikyuTorokuShomeisho/onClickAddShokujiMeisai"
+    },
+    {
+     "eventName": "onSelectedShokujiList",
+     "requestUrl": "dbc/db/dbc/ShokanShikyuTorokuShomeisho/onSelectedShokujiList"
+    },
+    {
+     "eventName": "onClickShokujiListDelete",
+     "requestUrl": "dbc/db/dbc/ShokanShikyuTorokuShomeisho/onClickShokujiListDelete"
+    },
+    {
+     "eventName": "onClickShokujiKakutei",
+     "requestUrl": "dbc/db/dbc/ShokanShikyuTorokuShomeisho/onClickShokujiKakutei"
     }
    ],
    "hiddenInput": [],

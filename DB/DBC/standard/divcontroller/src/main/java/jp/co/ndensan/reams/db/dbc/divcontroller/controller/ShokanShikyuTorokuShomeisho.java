@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceTeikyoShomeishoMei
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceTeikyoShomeishoRyoyoListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceTeikyoShomeishoShinryoListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceTeikyoShomeishoShinryoListH1503Div;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceTeikyoShomeishoShokujiListDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceTeikyoShomeishoShokujiListH1503Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoKihonDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoKihonKeikakuDiv;
@@ -29,10 +31,18 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeis
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShinryoMeisaiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShinryoMeisaiH1503Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShinryoMeisaiH1504Div;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShokujiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShokujiGokeiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShokujiListDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShokujiMeisaiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShokujiMeisaiH1503Div;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShokujiMeisaiH1504Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoMeisaiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoRyoyoList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoShinryoListH1503_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoShinryoList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoShokujiListH1503_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoShokujiList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -75,10 +85,12 @@ public class ShokanShikyuTorokuShomeisho {
         setKyufuhiListData(panel);
         setRyoyoListData(panel);
         setShinryoListData(panel);
+        setShokujiListData(panel);
 
         showKyufuhi(panel, 一覧明細表示.一覧表示);
         showRyoyo(panel, 一覧明細表示.一覧表示);
         showShinryo(panel, 一覧明細表示.一覧表示);
+        showShokuji(panel, 一覧明細表示.一覧表示);
         response.data = panel;
         return response;
     }
@@ -97,10 +109,12 @@ public class ShokanShikyuTorokuShomeisho {
         setKyufuhiListData(panel);
         setRyoyoListData(panel);
         setShinryoListData(panel);
+        setShokujiListData(panel);
 
         showKyufuhi(panel, 一覧明細表示.一覧表示);
         showRyoyo(panel, 一覧明細表示.一覧表示);
         showShinryo(panel, 一覧明細表示.一覧表示);
+        showShokuji(panel, 一覧明細表示.一覧表示);
         response.data = panel;
         return response;
     }
@@ -595,7 +609,7 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     /**
-     * サービス提供証明書情報の緊急時施設療養費タブで明細情報を追加するボタンを押下したときの処理です。
+     * サービス提供証明書情報の特定診療費タブで明細情報を追加するボタンを押下したときの処理です。
      *
      * @param panel panel
      * @return ResponseData
@@ -610,7 +624,7 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     /**
-     * サービス提供証明書情報の緊急時施設療養費タブで、一覧から行を選択したときの処理です。
+     * サービス提供証明書情報の特定診療費タブで、一覧から行を選択したときの処理です。
      *
      * @param panel panel
      * @return ResponseData
@@ -625,7 +639,7 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     /**
-     * サービス提供証明書情報の緊急時施設療養費タブで、一覧の行の削除ボタンを押下したときの処理です。
+     * サービス提供証明書情報の特定診療費タブで、一覧の行の削除ボタンを押下したときの処理です。
      *
      * @param panel panel
      * @return ResponseData
@@ -639,7 +653,7 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     /**
-     * サービス提供証明書情報の緊急時施設療養費タブで入力内容を確定するボタンを押下したときの処理です。
+     * サービス提供証明書情報の特定診療費タブで入力内容を確定するボタンを押下したときの処理です。
      *
      * @param panel panel
      * @return ResponseData
@@ -901,4 +915,370 @@ public class ShokanShikyuTorokuShomeisho {
                 new RString(txtGokeiTanisu));
     }
     // !!!!!!!!!!!!!!!!!!!!!!↑↑ここまで特定診療費タブに関連するコード↑↑!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    // !!!!!!!!!!!!!!!!!!!!!!↓↓ここから食事費用タブに関連するコード↓↓!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    private enum 食事費用切替 {
+
+        H1503(20030331),
+        H1504(20030401),
+        H1710(20051001);
+        private final RDate date;
+
+        private 食事費用切替(int dateString) {
+            this.date = new RDate(dateString);
+        }
+
+        public RDate getDate() {
+            return date;
+        }
+    }
+
+    /**
+     * サービス提供証明書情報の食事費用タブで明細情報を追加するボタンを押下したときの処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<ShokanShikyuTorokuShomeishoDiv> onClickAddShokujiMeisai(ShokanShikyuTorokuShomeishoDiv panel) {
+        ResponseData<ShokanShikyuTorokuShomeishoDiv> response = new ResponseData<>();
+
+        setShokujiMeisaiData(panel, イベント.追加);
+        showShokuji(panel, 一覧明細表示.明細表示);
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * サービス提供証明書情報の食事費用タブで、一覧から行を選択したときの処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<ShokanShikyuTorokuShomeishoDiv> onSelectedShokujiList(ShokanShikyuTorokuShomeishoDiv panel) {
+        ResponseData<ShokanShikyuTorokuShomeishoDiv> response = new ResponseData<>();
+
+        setShokujiMeisaiData(panel, イベント.選択);
+        showShokuji(panel, 一覧明細表示.明細表示);
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * サービス提供証明書情報の食事費用タブで、一覧の行の削除ボタンを押下したときの処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<ShokanShikyuTorokuShomeishoDiv> onClickShokujiListDelete(ShokanShikyuTorokuShomeishoDiv panel) {
+        ResponseData<ShokanShikyuTorokuShomeishoDiv> response = new ResponseData<>();
+
+        deleteShokujiListData(panel);
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * サービス提供証明書情報の食事費用タブで入力内容を確定するボタンを押下したときの処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<ShokanShikyuTorokuShomeishoDiv> onClickShokujiKakutei(ShokanShikyuTorokuShomeishoDiv panel) {
+        ResponseData<ShokanShikyuTorokuShomeishoDiv> response = new ResponseData<>();
+
+        kakuteiShokujiMeisaiData(panel);
+        initShokujiMeisaiData(panel);
+        showShokuji(panel, 一覧明細表示.一覧表示);
+        response.data = panel;
+        return response;
+    }
+
+    private void showShokuji(ShokanShikyuTorokuShomeishoDiv panel, 一覧明細表示 show) {
+        ShokanShikyuTorokuShomeishoShokujiDiv shokuji = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShokuji();
+        RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
+        if (date.isBefore(食事費用切替.H1504.getDate())) {
+            shokuji.getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfoH1503().setVisible(true);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfoH1503().setDisplayNone(false);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfo().setVisible(false);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfo().setDisplayNone(true);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai().getShokanShikyuTorokuShomeishoShokujiMeisaiH1503().setVisible(true);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai().getShokanShikyuTorokuShomeishoShokujiMeisaiH1503().setDisplayNone(false);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai().getShokanShikyuTorokuShomeishoShokujiMeisaiH1504().setVisible(false);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai().getShokanShikyuTorokuShomeishoShokujiMeisaiH1504().setDisplayNone(true);
+        } else {
+            shokuji.getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfoH1503().setVisible(false);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfoH1503().setDisplayNone(true);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfo().setVisible(true);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfo().setDisplayNone(false);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai().getShokanShikyuTorokuShomeishoShokujiMeisaiH1503().setVisible(false);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai().getShokanShikyuTorokuShomeishoShokujiMeisaiH1503().setDisplayNone(true);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai().getShokanShikyuTorokuShomeishoShokujiMeisaiH1504().setVisible(true);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai().getShokanShikyuTorokuShomeishoShokujiMeisaiH1504().setDisplayNone(false);
+        }
+        if (show.equals(一覧明細表示.一覧表示)) {
+            shokuji.getShokanShikyuTorokuShomeishoShokujiList().setIsOpen(true);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai().setIsOpen(false);
+        } else if (show.equals(一覧明細表示.明細表示)) {
+            shokuji.getShokanShikyuTorokuShomeishoShokujiList().setIsOpen(false);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai().setIsOpen(true);
+        }
+    }
+
+    private void setShokujiListData(ShokanShikyuTorokuShomeishoDiv panel) {
+        ShokanShikyuTorokuShomeishoShokujiDiv shokuji = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShokuji();
+        ServiceTeikyoShomeishoShokujiListH1503Div shokujiH1503List = shokuji.getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfoH1503();
+        ServiceTeikyoShomeishoShokujiListDiv shokujiH1504List = shokuji.getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfo();
+
+        DataGrid<dgServiceTeikyoShomeishoShokujiListH1503_Row> dgRowH1503 = shokujiH1503List.getDgServiceTeikyoShomeishoShokujiListH1503();
+        List<dgServiceTeikyoShomeishoShokujiListH1503_Row> dgRowListH1503 = dgRowH1503.getDataSource();
+        DataGrid<dgServiceTeikyoShomeishoShokujiList_Row> dgRowH1504 = shokujiH1504List.getDgServiceTeikyoShomeishoShokujiList();
+        List<dgServiceTeikyoShomeishoShokujiList_Row> dgRowListH1504 = dgRowH1504.getDataSource();
+
+        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml"));
+        dgRowListH1503.clear();
+        for (int i = 23; i < 26; i++) {
+            dgRowListH1503.add(create食事費用明細一覧H1503アイテム(
+                    sourceList.get(i).get("基本食日数").toString(),
+                    sourceList.get(i).get("基本食単価").toString(),
+                    sourceList.get(i).get("基本食金額").toString(),
+                    sourceList.get(i).get("特別食日数").toString(),
+                    sourceList.get(i).get("特別食単価").toString(),
+                    sourceList.get(i).get("特別食単価").toString(),
+                    sourceList.get(i).get("食事提供延べ日数").toString(),
+                    sourceList.get(i).get("食事提供費合計").toString(),
+                    sourceList.get(i).get("標準負担日額").toString(),
+                    sourceList.get(i).get("標準負担月額").toString(),
+                    sourceList.get(i).get("食事提供請求額").toString()
+            ));
+        }
+        dgRowH1503.setDataSource(dgRowListH1503);
+
+        dgRowListH1504.clear();
+        for (int i = 26; i < 29; i++) {
+            dgRowListH1504.add(create食事費用明細一覧H1504アイテム(
+                    sourceList.get(i).get("サービス").toString(),
+                    sourceList.get(i).get("単位数").toString(),
+                    sourceList.get(i).get("日数回数").toString(),
+                    sourceList.get(i).get("合計金額").toString()
+            ));
+        }
+        dgRowH1504.setDataSource(dgRowListH1504);
+
+        set食事費用合計(panel);
+    }
+
+    private void deleteShokujiListData(ShokanShikyuTorokuShomeishoDiv panel) {
+        ShokanShikyuTorokuShomeishoShokujiDiv shokuji = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShokuji();
+        ServiceTeikyoShomeishoShokujiListDiv shokujiList = shokuji.getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfo();
+        DataGrid<dgServiceTeikyoShomeishoShokujiList_Row> dgRow = shokujiList.getDgServiceTeikyoShomeishoShokujiList();
+        List<dgServiceTeikyoShomeishoShokujiList_Row> dgRowList = dgRow.getDataSource();
+        int index = dgRow.getClickedRowId();
+
+        dgServiceTeikyoShomeishoShokujiList_Row item = dgRow.getClickedItem();
+        item.setRowState(RowState.Deleted);
+        dgRowList.remove(index);
+        dgRowList.add(index, item);
+
+        dgRow.setDataSource(dgRowList);
+    }
+
+    private void setShokujiMeisaiData(ShokanShikyuTorokuShomeishoDiv panel, イベント event) {
+        ShokanShikyuTorokuShomeishoShokujiDiv shokuji = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShokuji();
+        ShokanShikyuTorokuShomeishoShokujiMeisaiDiv shokujiMeisai = shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai();
+        if (event.equals(イベント.追加)) {
+            shokujiMeisai.getTxtShokujiSelectedIndex().setValue(new RString("-1"));
+        } else {
+            int index = shokuji.getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfo().getDgServiceTeikyoShomeishoShokujiList().getActiveRowId();
+            shokujiMeisai.getTxtShokujiSelectedIndex().setValue(new RString(String.valueOf(index)));
+        }
+        RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
+        if (date.isBefore(食事費用切替.H1504.getDate())) {
+            HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(29);
+            ShokanShikyuTorokuShomeishoShokujiMeisaiH1503Div h1503div = shokujiMeisai.getShokanShikyuTorokuShomeishoShokujiMeisaiH1503();
+            h1503div.getTxtShokujihiKihonNissu().setValue(new Decimal(source.get("基本食日数").toString()));
+            h1503div.getTxtShokujihiKihonTanka().setValue(new Decimal(source.get("基本食単価").toString()));
+            h1503div.getTxtShokujihiKihonKingaku().setValue(new Decimal(source.get("基本食金額").toString()));
+            h1503div.getTxtShokujihiTokubetsuNissu().setValue(new Decimal(source.get("特別食日数").toString()));
+            h1503div.getTxtShokujihiTokubetsuTanka().setValue(new Decimal(source.get("特別食単価").toString()));
+            h1503div.getTxtShokujihiTokubetsuKingaku().setValue(new Decimal(source.get("特別食金額").toString()));
+            h1503div.getTxtShokujihiNobeNissu().setValue(new Decimal(source.get("食事提供延べ日数").toString()));
+            h1503div.getTxtShokujihiTeikyoGokei().setValue(new Decimal(source.get("食事提供費合計").toString()));
+            h1503div.getTxtShokujihiFutanNichigaku().setValue(new Decimal(source.get("標準負担日額").toString()));
+            h1503div.getTxtShokujihiFutanGetsugaku().setValue(new Decimal(source.get("標準負担月額").toString()));
+            h1503div.getTxtShokujihiSeikyugaku().setValue(new Decimal(source.get("食事提供請求額").toString()));
+        } else {
+            HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(30);
+            ShokanShikyuTorokuShomeishoShokujiMeisaiH1504Div h1504div = shokujiMeisai.getShokanShikyuTorokuShomeishoShokujiMeisaiH1504();
+            h1504div.getTxtShokujihiShuruiCode().setValue(new RString(source.get("サービス種類コード").toString()));
+            h1504div.getTxtShokujihiServiceCode().setValue(new RString(source.get("サービスコード").toString()));
+            h1504div.getTxtShokujihiServiceName().setValue(new RString(source.get("サービス名称").toString()));
+            h1504div.getTxtShokujihiTanisu().setValue(new Decimal(source.get("単位").toString()));
+            h1504div.getTxtShokujihiNissuKaisu().setValue(new Decimal(source.get("日数回数").toString()));
+            h1504div.getTxtShokujihiKingaku().setValue(new Decimal(source.get("金額").toString()));
+        }
+    }
+
+    private void initShokujiMeisaiData(ShokanShikyuTorokuShomeishoDiv panel) {
+        ShokanShikyuTorokuShomeishoShokujiDiv shokuji = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShokuji();
+        ShokanShikyuTorokuShomeishoShokujiMeisaiDiv shokujiMeisai = shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai();
+        shokujiMeisai.getTxtShokujiSelectedIndex().setValue(new RString("-1"));
+        ShokanShikyuTorokuShomeishoShokujiMeisaiH1503Div h1503div = shokujiMeisai.getShokanShikyuTorokuShomeishoShokujiMeisaiH1503();
+        h1503div.getTxtShokujihiKihonNissu().clearValue();
+        h1503div.getTxtShokujihiKihonTanka().clearValue();
+        h1503div.getTxtShokujihiKihonKingaku().clearValue();
+        h1503div.getTxtShokujihiTokubetsuNissu().clearValue();
+        h1503div.getTxtShokujihiTokubetsuTanka().clearValue();
+        h1503div.getTxtShokujihiTokubetsuKingaku().clearValue();
+        h1503div.getTxtShokujihiNobeNissu().clearValue();
+        h1503div.getTxtShokujihiFutanNichigaku().clearValue();
+        h1503div.getTxtShokujihiTeikyoGokei().clearValue();
+        h1503div.getTxtShokujihiFutanGetsugaku().clearValue();
+        h1503div.getTxtShokujihiSeikyugaku().clearValue();
+        ShokanShikyuTorokuShomeishoShokujiMeisaiH1504Div h1504div = shokujiMeisai.getShokanShikyuTorokuShomeishoShokujiMeisaiH1504();
+        h1504div.getTxtShokujihiShuruiCode().clearValue();
+        h1504div.getTxtShokujihiServiceCode().clearValue();
+        h1504div.getTxtShokujihiServiceName().clearValue();
+        h1504div.getTxtShokujihiTanisu().clearValue();
+        h1504div.getTxtShokujihiNissuKaisu().clearValue();
+        h1504div.getTxtShokujihiKingaku().clearValue();
+    }
+
+    private void kakuteiShokujiMeisaiData(ShokanShikyuTorokuShomeishoDiv panel) {
+        ShokanShikyuTorokuShomeishoShokujiDiv shokuji = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShokuji();
+        ShokanShikyuTorokuShomeishoShokujiListDiv shokujiList = shokuji.getShokanShikyuTorokuShomeishoShokujiList();
+        ShokanShikyuTorokuShomeishoShokujiMeisaiDiv shokujiMeisai = shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai();
+        int index = Integer.parseInt(shokujiMeisai.getTxtShokujiSelectedIndex().getValue().toString());
+
+        RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
+        if (date.isBefore(食事費用切替.H1504.getDate())) {
+            ShokanShikyuTorokuShomeishoShokujiMeisaiH1503Div h1503div = shokujiMeisai.getShokanShikyuTorokuShomeishoShokujiMeisaiH1503();
+            ServiceTeikyoShomeishoShokujiListH1503Div shokujiH1503List = shokujiList.getShokanShikyuTorokuShomeishoShokujiListInfoH1503();
+            DataGrid<dgServiceTeikyoShomeishoShokujiListH1503_Row> dgRow = shokujiH1503List.getDgServiceTeikyoShomeishoShokujiListH1503();
+            List<dgServiceTeikyoShomeishoShokujiListH1503_Row> dgRowList = dgRow.getDataSource();
+            dgServiceTeikyoShomeishoShokujiListH1503_Row itemH1503 = create食事費用明細一覧H1503アイテム(
+                    h1503div.getTxtShokujihiKihonNissu().getValue().toString(),
+                    h1503div.getTxtShokujihiKihonTanka().getValue().toString(),
+                    h1503div.getTxtShokujihiKihonKingaku().getValue().toString(),
+                    h1503div.getTxtShokujihiTokubetsuNissu().getValue().toString(),
+                    h1503div.getTxtShokujihiTokubetsuTanka().getValue().toString(),
+                    h1503div.getTxtShokujihiTokubetsuKingaku().getValue().toString(),
+                    h1503div.getTxtShokujihiNobeNissu().getValue().toString(),
+                    h1503div.getTxtShokujihiFutanNichigaku().getValue().toString(),
+                    h1503div.getTxtShokujihiTeikyoGokei().getValue().toString(),
+                    h1503div.getTxtShokujihiFutanGetsugaku().getValue().toString(),
+                    h1503div.getTxtShokujihiSeikyugaku().getValue().toString());
+            if (index == -1) {
+                itemH1503.setRowState(RowState.Added);
+                dgRowList.add(itemH1503);
+            } else {
+                itemH1503.setRowState(RowState.Modified);
+                dgRowList.remove(index);
+                dgRowList.add(index, itemH1503);
+            }
+            dgRow.setDataSource(dgRowList);
+
+        } else {
+            ShokanShikyuTorokuShomeishoShokujiMeisaiH1504Div h1504div = shokujiMeisai.getShokanShikyuTorokuShomeishoShokujiMeisaiH1504();
+            ServiceTeikyoShomeishoShokujiListDiv shokujiH1504List = shokujiList.getShokanShikyuTorokuShomeishoShokujiListInfo();
+            DataGrid<dgServiceTeikyoShomeishoShokujiList_Row> dgRow = shokujiH1504List.getDgServiceTeikyoShomeishoShokujiList();
+            List<dgServiceTeikyoShomeishoShokujiList_Row> dgRowList = dgRow.getDataSource();
+            dgServiceTeikyoShomeishoShokujiList_Row itemH1504 = create食事費用明細一覧H1504アイテム(
+                    h1504div.getTxtShokujihiShuruiCode().getValue().toString().
+                    concat(h1504div.getTxtShokujihiServiceCode().getValue().toString()).concat(":").
+                    concat(h1504div.getTxtShokujihiServiceName().getValue().toString()),
+                    h1504div.getTxtShokujihiTanisu().getValue().toString(),
+                    h1504div.getTxtShokujihiNissuKaisu().getValue().toString(),
+                    h1504div.getTxtShokujihiKingaku().getValue().toString());
+            if (index == -1) {
+                itemH1504.setRowState(RowState.Added);
+                dgRowList.add(itemH1504);
+            } else {
+                itemH1504.setRowState(RowState.Modified);
+                dgRowList.remove(index);
+                dgRowList.add(index, itemH1504);
+            }
+            dgRow.setDataSource(dgRowList);
+        }
+
+        set食事費用合計(panel);
+    }
+
+    private void set食事費用合計(ShokanShikyuTorokuShomeishoDiv panel) {
+        ShokanShikyuTorokuShomeishoShokujiDiv shokuji = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShokuji();
+        ServiceTeikyoShomeishoShokujiListDiv shokujiH1504List = shokuji.getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfo();
+        ShokanShikyuTorokuShomeishoShokujiGokeiDiv shokujiGokei = shokuji.getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiGokei();
+        Integer nobeNissu = 0;
+        Integer futanNichigaku;
+        Integer futanGetsugaku;
+        Integer teikyoGokei = 0;
+        Integer seikyuGokei;
+
+        for (dgServiceTeikyoShomeishoShokujiList_Row item : shokujiH1504List.getDgServiceTeikyoShomeishoShokujiList().getDataSource()) {
+            nobeNissu = nobeNissu + Integer.parseInt(item.getTxtNissuKaisu().toString());
+            teikyoGokei = teikyoGokei + Integer.parseInt(item.getTxtKingaku().toString());
+        }
+        futanNichigaku = 760;
+        futanGetsugaku = nobeNissu * futanNichigaku;
+        seikyuGokei = teikyoGokei - futanGetsugaku;
+
+        shokujiGokei.getTxtGokeiNobeNissu().setValue(new Decimal(nobeNissu));
+        shokujiGokei.getTxtGokeiFutanNichigaku().setValue(new Decimal(futanNichigaku));
+        shokujiGokei.getTxtGokeiFutanGetsugaku().setValue(new Decimal(futanGetsugaku));
+        shokujiGokei.getTxtGokeiTeikyoGokei().setValue(new Decimal(teikyoGokei));
+        shokujiGokei.getTxtGokeiSeikyugaku().setValue(new Decimal(seikyuGokei));
+
+    }
+
+    private dgServiceTeikyoShomeishoShokujiListH1503_Row create食事費用明細一覧H1503アイテム(
+            String txtKihonNissu,
+            String txtKihonTanka,
+            String txtKihonKingaku,
+            String txtTokubetsuNissu,
+            String txtTokubetsuTanka,
+            String txtTokubetsuKingaku,
+            String txtNobeNissu,
+            String txtTeikyohiGokei,
+            String txtNichigaku,
+            String txtGetsugaku,
+            String txtSeikyugaku) {
+        Button btnSelect = new Button();
+        Button btnEdit = new Button();
+        Button btnDelete = new Button();
+        return new dgServiceTeikyoShomeishoShokujiListH1503_Row(
+                btnSelect,
+                btnEdit,
+                btnDelete,
+                new RString(txtKihonNissu),
+                new RString(txtKihonTanka),
+                new RString(txtKihonKingaku),
+                new RString(txtTokubetsuNissu),
+                new RString(txtTokubetsuTanka),
+                new RString(txtTokubetsuKingaku),
+                new RString(txtNobeNissu),
+                new RString(txtTeikyohiGokei),
+                new RString(txtNichigaku),
+                new RString(txtGetsugaku),
+                new RString(txtSeikyugaku));
+    }
+
+    private dgServiceTeikyoShomeishoShokujiList_Row create食事費用明細一覧H1504アイテム(
+            String txtService,
+            String txtTanisu,
+            String txtNissuKaisu,
+            String txtKingaku
+    ) {
+        Button btnSelect = new Button();
+        Button btnEdit = new Button();
+        Button btnDelete = new Button();
+
+        return new dgServiceTeikyoShomeishoShokujiList_Row(
+                btnSelect,
+                btnEdit,
+                btnDelete,
+                new RString(txtService),
+                new RString(txtTanisu),
+                new RString(txtNissuKaisu),
+                new RString(txtKingaku));
+    }
+    // !!!!!!!!!!!!!!!!!!!!!!↑↑ここまで食事費用タブに関連するコード↑↑!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
