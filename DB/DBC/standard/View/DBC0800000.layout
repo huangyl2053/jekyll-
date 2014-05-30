@@ -3135,7 +3135,7 @@
          "eraseBorderLeft": false,
          "backgroundColor": 0,
          "widthAuto": false,
-         "panelDisplay": 0,
+         "panelDisplay": 1,
          "isGroupBox": false
         },
         {
@@ -3299,7 +3299,7 @@
          "eraseBorderLeft": false,
          "backgroundColor": 0,
          "widthAuto": false,
-         "panelDisplay": 0,
+         "panelDisplay": 1,
          "isGroupBox": false
         },
         {
@@ -3599,7 +3599,7 @@
          "eraseBorderLeft": false,
          "backgroundColor": 0,
          "widthAuto": false,
-         "panelDisplay": 0,
+         "panelDisplay": 1,
          "isGroupBox": false
         }
        ],
@@ -4896,7 +4896,7 @@
            "eraseBorderLeft": false,
            "backgroundColor": 0,
            "widthAuto": false,
-           "panelDisplay": 0,
+           "panelDisplay": 1,
            "isGroupBox": false
           },
           {
@@ -5189,7 +5189,7 @@
            "eraseBorderLeft": false,
            "backgroundColor": 0,
            "widthAuto": false,
-           "panelDisplay": 0,
+           "panelDisplay": 1,
            "isGroupBox": false
           },
           {
@@ -5504,7 +5504,7 @@
            "eraseBorderLeft": false,
            "backgroundColor": 0,
            "widthAuto": false,
-           "panelDisplay": 0,
+           "panelDisplay": 1,
            "isGroupBox": false
           },
           {
@@ -6193,7 +6193,7 @@
            "eraseBorderLeft": false,
            "backgroundColor": 0,
            "widthAuto": false,
-           "panelDisplay": 0,
+           "panelDisplay": 1,
            "isGroupBox": false
           },
           {
@@ -7799,6 +7799,277 @@
          "fieldName": "ShokanShikyuTorokuShomeishoShokujiList",
          "items": [
           {
+           "fieldName": "ShokanShikyuTorokuShomeishoShokujiListInfoH1503",
+           "items": [],
+           "controlType": "CommonChildDiv",
+           "width": "XS",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": false,
+           "dependencies": [],
+           "float": 0,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": 0,
+           "marginRight": 0,
+           "selectControlID": "ShokanShikyuTorokuShomeishoShokujiListInfoH1503",
+           "relation": [],
+           "marginTop": 0,
+           "marginBottom": 0,
+           "businessId": "DBC",
+           "controlName": "ServiceTeikyoShomeishoShokujiListH1503",
+           "dataPassingForDialog": [],
+           "dialogOkEventNameForDialog": "",
+           "dialogCancelEventNameForDialog": "",
+           "AddButtonVisible": true,
+           "AddButtonDisplayNone": false,
+           "AddButtonOnClick": "",
+           "MeisaiListGridSetting": {
+            "rowHeight": 25,
+            "isMultiSelectable": false,
+            "isShowFooter": true,
+            "isShowFilter": false,
+            "isShowFilterButton": false,
+            "isShowRowState": true,
+            "header": {
+             "combineColumns": [],
+             "frozenColumn": "",
+             "headerHeight": 1
+            },
+            "columns": [
+             {
+              "columnName": "",
+              "dataName": "btnSelect",
+              "toolTip": "",
+              "bgColor": 0,
+              "width": 35,
+              "visible": true,
+              "cellType": 8,
+              "cellDetails": {
+               "cellType": 8,
+               "text": "選",
+               "onClick": "",
+               "imageFileUrl": "",
+               "imageWidth": "",
+               "imageHeight": ""
+              },
+              "align": 1,
+              "resize": true,
+              "isPrivateInfo": false,
+              "sortKey": "btnSelect"
+             },
+             {
+              "columnName": "",
+              "dataName": "btnEdit",
+              "toolTip": "",
+              "bgColor": 0,
+              "width": 35,
+              "visible": false,
+              "cellType": 8,
+              "cellDetails": {
+               "cellType": 8,
+               "text": "修",
+               "onClick": "",
+               "imageFileUrl": "",
+               "imageWidth": "",
+               "imageHeight": ""
+              },
+              "align": 1,
+              "resize": true,
+              "isPrivateInfo": false,
+              "sortKey": "btnEdit"
+             },
+             {
+              "columnName": "",
+              "dataName": "btnDelete",
+              "toolTip": "",
+              "bgColor": 0,
+              "width": 35,
+              "visible": true,
+              "cellType": 8,
+              "cellDetails": {
+               "cellType": 8,
+               "text": "削",
+               "onClick": "",
+               "imageFileUrl": "",
+               "imageWidth": "",
+               "imageHeight": ""
+              },
+              "align": 1,
+              "resize": true,
+              "isPrivateInfo": false,
+              "sortKey": "btnDelete"
+             },
+             {
+              "columnName": "基本食<br>日数",
+              "dataName": "txtKihonNissu",
+              "toolTip": "",
+              "bgColor": 0,
+              "width": 80,
+              "visible": true,
+              "cellType": 0,
+              "cellDetails": {
+               "cellType": 0
+              },
+              "align": 2,
+              "resize": true,
+              "isPrivateInfo": false,
+              "sortKey": "txtKihonNissu"
+             },
+             {
+              "columnName": "基本食<br>単価",
+              "dataName": "txtKihonTanka",
+              "toolTip": "",
+              "bgColor": 0,
+              "width": 100,
+              "visible": true,
+              "cellType": 0,
+              "cellDetails": {
+               "cellType": 0
+              },
+              "align": 2,
+              "resize": true,
+              "isPrivateInfo": false,
+              "sortKey": "txtKihonTanka"
+             },
+             {
+              "columnName": "基本食<br>金額",
+              "dataName": "txtKihonKingaku",
+              "toolTip": "",
+              "bgColor": 0,
+              "width": 100,
+              "visible": true,
+              "cellType": 0,
+              "cellDetails": {
+               "cellType": 0
+              },
+              "align": 2,
+              "resize": true,
+              "isPrivateInfo": false,
+              "sortKey": "txtKihonKingaku"
+             },
+             {
+              "columnName": "特別食<br>日数",
+              "dataName": "txtTokubetsuNissu",
+              "toolTip": "",
+              "bgColor": 0,
+              "width": 80,
+              "visible": true,
+              "cellType": 0,
+              "cellDetails": null,
+              "align": 2,
+              "resize": true,
+              "isPrivateInfo": false,
+              "sortKey": "txtTokubetsuNissu"
+             },
+             {
+              "columnName": "特別食<br>単価",
+              "dataName": "txtTokubetsuTanka",
+              "toolTip": "",
+              "bgColor": 0,
+              "width": 100,
+              "visible": true,
+              "cellType": 0,
+              "cellDetails": null,
+              "align": 2,
+              "resize": true,
+              "isPrivateInfo": false,
+              "sortKey": "txtTokubetsuTanka"
+             },
+             {
+              "columnName": "特別食<br>金額",
+              "dataName": "txtTokubetsuKingaku",
+              "toolTip": "",
+              "bgColor": 0,
+              "width": 100,
+              "visible": true,
+              "cellType": 0,
+              "cellDetails": null,
+              "align": 2,
+              "resize": true,
+              "isPrivateInfo": false,
+              "sortKey": "txtTokubetsuKingaku"
+             },
+             {
+              "columnName": "食事提供<br>述べ日数",
+              "dataName": "txtNobeNissu",
+              "toolTip": "",
+              "bgColor": 0,
+              "width": 100,
+              "visible": true,
+              "cellType": 0,
+              "cellDetails": null,
+              "align": 2,
+              "resize": true,
+              "isPrivateInfo": false,
+              "sortKey": "txtNobeNissu"
+             },
+             {
+              "columnName": "食事提供<br>費合計",
+              "dataName": "txtTeikyohiGokei",
+              "toolTip": "",
+              "bgColor": 0,
+              "width": 100,
+              "visible": true,
+              "cellType": 0,
+              "cellDetails": null,
+              "align": 2,
+              "resize": true,
+              "isPrivateInfo": false,
+              "sortKey": "txtTeikyohiGokei"
+             },
+             {
+              "columnName": "標準負担<br>(日額)",
+              "dataName": "txtNichigaku",
+              "toolTip": "",
+              "bgColor": 0,
+              "width": 100,
+              "visible": true,
+              "cellType": 0,
+              "cellDetails": null,
+              "align": 2,
+              "resize": true,
+              "isPrivateInfo": false,
+              "sortKey": "txtNichigaku"
+             },
+             {
+              "columnName": "標準負担<br>(月額)",
+              "dataName": "txtGetsugaku",
+              "toolTip": "",
+              "bgColor": 0,
+              "width": 100,
+              "visible": true,
+              "cellType": 0,
+              "cellDetails": null,
+              "align": 2,
+              "resize": true,
+              "isPrivateInfo": false,
+              "sortKey": "txtGetsugaku"
+             },
+             {
+              "columnName": "食事提供<br>請求額",
+              "dataName": "txtSeikyugaku",
+              "toolTip": "",
+              "bgColor": 0,
+              "width": 100,
+              "visible": true,
+              "cellType": 0,
+              "cellDetails": null,
+              "align": 2,
+              "resize": true,
+              "isPrivateInfo": false,
+              "sortKey": "txtSeikyugaku"
+             }
+            ]
+           },
+           "MeisaiListHeight": "159",
+           "MeisaiListOnSelect": "",
+           "MeisaiListOnSelectByDblClick": ""
+          },
+          {
            "fieldName": "ShokanShikyuTorokuShomeishoShokujiListInfo",
            "items": [],
            "controlType": "CommonChildDiv",
@@ -8962,7 +9233,7 @@
              "isComboBox": false,
              "suggest": [],
              "permitCharactor": "",
-             "formatLength": 8
+             "formatLength": "2"
             },
             {
              "fieldName": "txtShokujihiServiceCode",
@@ -9006,7 +9277,7 @@
              "isComboBox": false,
              "suggest": [],
              "permitCharactor": "",
-             "formatLength": 8
+             "formatLength": "4"
             },
             {
              "fieldName": "btnShokujihiService",
@@ -9514,7 +9785,7 @@
            "isComboBox": false,
            "suggest": [],
            "permitCharactor": "",
-           "formatLength": 8
+           "formatLength": "2"
           },
           {
            "fieldName": "txtKeikakuhiServiceCodeH2103",
@@ -9558,7 +9829,7 @@
            "isComboBox": false,
            "suggest": [],
            "permitCharactor": "",
-           "formatLength": 8
+           "formatLength": "4"
           },
           {
            "fieldName": "btnKeikakuhiServiceH2103",
@@ -10486,7 +10757,7 @@
              "isComboBox": false,
              "suggest": [],
              "permitCharactor": "",
-             "formatLength": 8
+             "formatLength": "2"
             },
             {
              "fieldName": "txtKeikakuhiServiceCodeH2104",
@@ -10530,7 +10801,7 @@
              "isComboBox": false,
              "suggest": [],
              "permitCharactor": "",
-             "formatLength": 8
+             "formatLength": "4"
             },
             {
              "fieldName": "btnKeikakuhiServiceH2104",
@@ -11208,7 +11479,7 @@
            "isComboBox": false,
            "suggest": [],
            "permitCharactor": "",
-           "formatLength": 8
+           "formatLength": "2"
           },
           {
            "fieldName": "btnShukeiShurui",
@@ -11598,7 +11869,7 @@
            "eraseBorderLeft": false,
            "backgroundColor": 0,
            "widthAuto": false,
-           "panelDisplay": 0,
+           "panelDisplay": 1,
            "isGroupBox": false
           },
           {
@@ -11738,7 +12009,7 @@
            "eraseBorderLeft": false,
            "backgroundColor": 0,
            "widthAuto": false,
-           "panelDisplay": 0,
+           "panelDisplay": 1,
            "isGroupBox": false
           },
           {
@@ -11974,7 +12245,7 @@
            "eraseBorderLeft": false,
            "backgroundColor": 0,
            "widthAuto": false,
-           "panelDisplay": 0,
+           "panelDisplay": 1,
            "isGroupBox": false
           },
           {
@@ -12210,7 +12481,7 @@
            "eraseBorderLeft": false,
            "backgroundColor": 0,
            "widthAuto": false,
-           "panelDisplay": 0,
+           "panelDisplay": 1,
            "isGroupBox": false
           },
           {
@@ -12606,7 +12877,7 @@
            "isComboBox": false,
            "suggest": [],
            "permitCharactor": "",
-           "formatLength": 8
+           "formatLength": "2"
           },
           {
            "fieldName": "txtNyushohiServiceCode",
@@ -12650,7 +12921,7 @@
            "isComboBox": false,
            "suggest": [],
            "permitCharactor": "",
-           "formatLength": 8
+           "formatLength": "4"
           },
           {
            "fieldName": "btnNyushohiService",
@@ -13729,7 +14000,7 @@
       "ShokanShikyuTorokuShomeishoShafuku"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "ShokanShikyuTorokuShomeishoShinryo",
+     "selectedItemFieldName": "ShokanShikyuTorokuShomeishoKihon",
      "initialTab": 0
     }
    ],
