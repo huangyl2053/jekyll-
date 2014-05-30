@@ -1,15 +1,14 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4040001;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu May 15 11:36:16 JST 2014 
+ * Thu May 29 20:09:34 JST 2014 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 
@@ -21,41 +20,34 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class dgShinsakaiIinList_Row extends DataRow {
 
-    private Button btnToSelect;
     private RString shinsakaiIinNo;
     private RString shimei;
     private RString kanaShimei;
     private RString shimeiAndKanaShimei;
-    private RString shozokuKikan;
     private RString gender;
+    private RString shozokuKikan;
     private RString shikaku;
 
     public dgShinsakaiIinList_Row() {
         super();
     }
 
-    public dgShinsakaiIinList_Row(Button btnToSelect, RString shinsakaiIinNo, RString shimei, RString kanaShimei, RString shimeiAndKanaShimei, RString shozokuKikan, RString gender, RString shikaku) {
+    public dgShinsakaiIinList_Row(RString shinsakaiIinNo, RString shimei, RString kanaShimei, RString shimeiAndKanaShimei, RString gender, RString shozokuKikan, RString shikaku) {
         super();
-        this.setOriginalData("btnToSelect", btnToSelect);
         this.setOriginalData("shinsakaiIinNo", shinsakaiIinNo);
         this.setOriginalData("shimei", shimei);
         this.setOriginalData("kanaShimei", kanaShimei);
         this.setOriginalData("shimeiAndKanaShimei", shimeiAndKanaShimei);
-        this.setOriginalData("shozokuKikan", shozokuKikan);
         this.setOriginalData("gender", gender);
+        this.setOriginalData("shozokuKikan", shozokuKikan);
         this.setOriginalData("shikaku", shikaku);
-        this.btnToSelect = btnToSelect;
         this.shinsakaiIinNo = shinsakaiIinNo;
         this.shimei = shimei;
         this.kanaShimei = kanaShimei;
         this.shimeiAndKanaShimei = shimeiAndKanaShimei;
-        this.shozokuKikan = shozokuKikan;
         this.gender = gender;
+        this.shozokuKikan = shozokuKikan;
         this.shikaku = shikaku;
-    }
-
-    public Button getBtnToSelect() {
-        return btnToSelect;
     }
 
     public RString getShinsakaiIinNo() {
@@ -74,21 +66,16 @@ public class dgShinsakaiIinList_Row extends DataRow {
         return shimeiAndKanaShimei;
     }
 
-    public RString getShozokuKikan() {
-        return shozokuKikan;
-    }
-
     public RString getGender() {
         return gender;
     }
 
-    public RString getShikaku() {
-        return shikaku;
+    public RString getShozokuKikan() {
+        return shozokuKikan;
     }
 
-    public void setBtnToSelect(Button btnToSelect) {
-        this.setOriginalData("btnToSelect", btnToSelect);
-        this.btnToSelect = btnToSelect;
+    public RString getShikaku() {
+        return shikaku;
     }
 
     public void setShinsakaiIinNo(RString shinsakaiIinNo) {
@@ -111,14 +98,14 @@ public class dgShinsakaiIinList_Row extends DataRow {
         this.shimeiAndKanaShimei = shimeiAndKanaShimei;
     }
 
-    public void setShozokuKikan(RString shozokuKikan) {
-        this.setOriginalData("shozokuKikan", shozokuKikan);
-        this.shozokuKikan = shozokuKikan;
-    }
-
     public void setGender(RString gender) {
         this.setOriginalData("gender", gender);
         this.gender = gender;
+    }
+
+    public void setShozokuKikan(RString shozokuKikan) {
+        this.setOriginalData("shozokuKikan", shozokuKikan);
+        this.shozokuKikan = shozokuKikan;
     }
 
     public void setShikaku(RString shikaku) {
