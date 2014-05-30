@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceTeikyoShomeishoKeikakuListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceTeikyoShomeishoMeisaiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceTeikyoShomeishoRyoyoListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceTeikyoShomeishoShinryoListDiv;
@@ -14,6 +15,11 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceTeikyoShomeishoShi
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceTeikyoShomeishoShokujiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceTeikyoShomeishoShokujiListH1503Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoKeikakuDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoKeikakuH2103Div;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoKeikakuH2104Div;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoKeikakuListDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoKeikakuMeisaiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoKihonDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoKihonKeikakuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoKihonKikanDiv;
@@ -43,6 +49,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoS
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoShinryoList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoShokujiListH1503_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoShokujiList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgShokanShikyuTorokuShomeishoKeikakuList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -86,11 +93,14 @@ public class ShokanShikyuTorokuShomeisho {
         setRyoyoListData(panel);
         setShinryoListData(panel);
         setShokujiListData(panel);
+        setKeikakuData(panel);
 
         showKyufuhi(panel, 一覧明細表示.一覧表示);
         showRyoyo(panel, 一覧明細表示.一覧表示);
         showShinryo(panel, 一覧明細表示.一覧表示);
         showShokuji(panel, 一覧明細表示.一覧表示);
+        showKeikaku(panel, 一覧明細表示.一覧表示);
+
         response.data = panel;
         return response;
     }
@@ -110,11 +120,14 @@ public class ShokanShikyuTorokuShomeisho {
         setRyoyoListData(panel);
         setShinryoListData(panel);
         setShokujiListData(panel);
+        setKeikakuData(panel);
 
         showKyufuhi(panel, 一覧明細表示.一覧表示);
         showRyoyo(panel, 一覧明細表示.一覧表示);
         showShinryo(panel, 一覧明細表示.一覧表示);
         showShokuji(panel, 一覧明細表示.一覧表示);
+        showKeikaku(panel, 一覧明細表示.一覧表示);
+
         response.data = panel;
         return response;
     }
@@ -1281,4 +1294,273 @@ public class ShokanShikyuTorokuShomeisho {
                 new RString(txtKingaku));
     }
     // !!!!!!!!!!!!!!!!!!!!!!↑↑ここまで食事費用タブに関連するコード↑↑!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    // !!!!!!!!!!!!!!!!!!!!!!↓↓ここから計画費タブに関連するコード↓↓!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    private enum 計画費切替 {
+
+        H2103(20090331),
+        H2104(20090401);
+        private final RDate date;
+
+        private 計画費切替(int dateString) {
+            this.date = new RDate(dateString);
+        }
+
+        public RDate getDate() {
+            return date;
+        }
+    }
+
+    /**
+     * サービス提供証明書情報の計画費タブで明細情報を追加するボタンを押下したときの処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<ShokanShikyuTorokuShomeishoDiv> onClickAddKeikakuMeisai(ShokanShikyuTorokuShomeishoDiv panel) {
+        ResponseData<ShokanShikyuTorokuShomeishoDiv> response = new ResponseData<>();
+
+        setKeikakuMeisaiData(panel, イベント.追加);
+        showKeikaku(panel, 一覧明細表示.明細表示);
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * サービス提供証明書情報の計画費タブで、一覧から行を選択したときの処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<ShokanShikyuTorokuShomeishoDiv> onSelectedKeikakuList(ShokanShikyuTorokuShomeishoDiv panel) {
+        ResponseData<ShokanShikyuTorokuShomeishoDiv> response = new ResponseData<>();
+
+        setKeikakuMeisaiData(panel, イベント.選択);
+        showKeikaku(panel, 一覧明細表示.明細表示);
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * サービス提供証明書情報の計画費タブで、一覧の行の削除ボタンを押下したときの処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<ShokanShikyuTorokuShomeishoDiv> onClickKeikakuListDelete(ShokanShikyuTorokuShomeishoDiv panel) {
+        ResponseData<ShokanShikyuTorokuShomeishoDiv> response = new ResponseData<>();
+
+        deleteKeikakuListData(panel);
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * サービス提供証明書情報の計画費タブで入力内容を確定するボタンを押下したときの処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<ShokanShikyuTorokuShomeishoDiv> onClickKeikakuKakutei(ShokanShikyuTorokuShomeishoDiv panel) {
+        ResponseData<ShokanShikyuTorokuShomeishoDiv> response = new ResponseData<>();
+
+        kakuteiKeikakuMeisaiData(panel);
+        initKeikakuMeisaiData(panel);
+        showKeikaku(panel, 一覧明細表示.一覧表示);
+        response.data = panel;
+        return response;
+    }
+
+    private void showKeikaku(ShokanShikyuTorokuShomeishoDiv panel, 一覧明細表示 show) {
+        ShokanShikyuTorokuShomeishoKeikakuDiv keikaku = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoKeikaku();
+        ShokanShikyuTorokuShomeishoKeikakuH2103Div h2103Div = keikaku.getShokanShikyuTorokuShomeishoKeikakuH2103();
+        ShokanShikyuTorokuShomeishoKeikakuH2104Div h2104Div = keikaku.getShokanShikyuTorokuShomeishoKeikakuH2104();
+        RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
+        if (date.isBefore(計画費切替.H2104.getDate())) {
+
+            h2103Div.setVisible(true);
+            h2103Div.setDisplayNone(false);
+            h2104Div.setVisible(false);
+            h2104Div.setDisplayNone(true);
+        } else {
+            h2103Div.setVisible(false);
+            h2103Div.setDisplayNone(true);
+            h2104Div.setVisible(true);
+            h2104Div.setDisplayNone(false);
+            if (show.equals(一覧明細表示.一覧表示)) {
+                h2104Div.getShokanShikyuTorokuShomeishoKeikakuList().setIsOpen(true);
+                h2104Div.getShokanShikyuTorokuShomeishoKeikakuMeisai().setIsOpen(false);
+            } else if (show.equals(一覧明細表示.明細表示)) {
+                h2104Div.getShokanShikyuTorokuShomeishoKeikakuList().setIsOpen(false);
+                h2104Div.getShokanShikyuTorokuShomeishoKeikakuMeisai().setIsOpen(true);
+            }
+        }
+    }
+
+    private void setKeikakuData(ShokanShikyuTorokuShomeishoDiv panel) {
+        ShokanShikyuTorokuShomeishoKeikakuDiv keikaku = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoKeikaku();
+        ShokanShikyuTorokuShomeishoKeikakuH2103Div keikakuH2103 = keikaku.getShokanShikyuTorokuShomeishoKeikakuH2103();
+        ShokanShikyuTorokuShomeishoKeikakuH2104Div keikakuH2104 = keikaku.getShokanShikyuTorokuShomeishoKeikakuH2104();
+        ShokanShikyuTorokuShomeishoKeikakuListDiv keikakuH2104List = keikakuH2104.getShokanShikyuTorokuShomeishoKeikakuList();
+        ServiceTeikyoShomeishoKeikakuListDiv keikakuH2104ListList = keikakuH2104List.getShokanShikyuTorokuShomeishoKeikakuListInfo();
+
+        DataGrid<dgShokanShikyuTorokuShomeishoKeikakuList_Row> dgRowH2104 = keikakuH2104ListList.getDgShokanShikyuTorokuShomeishoKeikakuList();
+        List<dgShokanShikyuTorokuShomeishoKeikakuList_Row> dgRowListH2104 = dgRowH2104.getDataSource();
+
+        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml"));
+        RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
+        if (date.isBefore(計画費切替.H2104.getDate())) {
+            keikakuH2103.getRadKeikakuhiShinsaHohoH2103().setSelectedItem(new RString("key0"));
+            HashMap source = sourceList.get(31);
+            keikakuH2103.getTxtKeikakuhiTodokedeYMDH2103().setValue(new RDate(source.get("届出日").toString()));
+            keikakuH2103.getTxtKeikakuhiShuruiCodeH2103().setValue(new RString(source.get("サービス種類コード").toString()));
+            keikakuH2103.getTxtKeikakuhiServiceCodeH2103().setValue(new RString(source.get("サービスコード").toString()));
+            keikakuH2103.getTxtKeikakuhiServiceNameH2103().setValue(new RString(source.get("サービス名称").toString()));
+            keikakuH2103.getTxtKeikakuhiTanisuH2103().setValue(new Decimal(source.get("単位数").toString()));
+            keikakuH2103.getTxtKeikakuhiTanisuTankaH2103().setValue(new Decimal(source.get("単位数単価").toString()));
+            keikakuH2103.getTxtKeikakuhiSeikyuKingakuH2103().setValue(new Decimal(source.get("請求金額").toString()));
+            keikakuH2103.getTxtKeikakuhiSenmoninNoH2103().setValue(new RString(source.get("担当介護支援専門員番号").toString()));
+            keikakuH2103.getTxtKeikakuhiTekiyoH2103().setValue(new RString(source.get("摘要").toString()));
+        } else {
+            HashMap source = sourceList.get(32);
+            keikakuH2104List.getRadKeikakuhiShinsaHohoH2104().setSelectedItem(new RString("key0"));
+            keikakuH2104List.getTxtKeikakuhiTodokedeYMDH2104().setValue(new RDate(source.get("届出日").toString()));
+            keikakuH2104List.getTxtKeikakuhiSenmoninNoH2104().setValue(new RString(source.get("担当介護支援専門員番号").toString()));
+            keikakuH2104List.getTxtKeikakuhiTanisuTankaH2104().setValue(new Decimal(source.get("単位数単価").toString()));
+            keikakuH2104List.getTxtKeikakuhiGokeiTanisu().setValue(new Decimal(source.get("合計単位数").toString()));
+            keikakuH2104List.getTxtKeikakuhiSeikyuKingakuH2104().setValue(new Decimal(source.get("請求金額").toString()));
+            dgRowListH2104.clear();
+            for (int i = 33; i < 36; i++) {
+                dgRowListH2104.add(create計画費明細一覧H2104アイテム(
+                        sourceList.get(i).get("サービス").toString(),
+                        sourceList.get(i).get("単位数").toString(),
+                        sourceList.get(i).get("回数").toString(),
+                        sourceList.get(i).get("サービス単位数").toString(),
+                        sourceList.get(i).get("摘要").toString()
+                ));
+            }
+            dgRowH2104.setDataSource(dgRowListH2104);
+        }
+    }
+
+    private void deleteKeikakuListData(ShokanShikyuTorokuShomeishoDiv panel) {
+        ShokanShikyuTorokuShomeishoKeikakuH2104Div keikakuH2104 = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoKeikaku().getShokanShikyuTorokuShomeishoKeikakuH2104();
+        ServiceTeikyoShomeishoKeikakuListDiv keikakuH2104List = keikakuH2104.getShokanShikyuTorokuShomeishoKeikakuList().getShokanShikyuTorokuShomeishoKeikakuListInfo();
+
+        DataGrid<dgShokanShikyuTorokuShomeishoKeikakuList_Row> dgRowH2104 = keikakuH2104List.getDgShokanShikyuTorokuShomeishoKeikakuList();
+        List<dgShokanShikyuTorokuShomeishoKeikakuList_Row> dgRowListH2104 = dgRowH2104.getDataSource();
+
+        int index = dgRowH2104.getClickedRowId();
+
+        dgShokanShikyuTorokuShomeishoKeikakuList_Row item = dgRowH2104.getClickedItem();
+        item.setRowState(RowState.Deleted);
+        dgRowListH2104.remove(index);
+        dgRowListH2104.add(index, item);
+
+        dgRowH2104.setDataSource(dgRowListH2104);
+    }
+
+    private void setKeikakuMeisaiData(ShokanShikyuTorokuShomeishoDiv panel, イベント event) {
+        ShokanShikyuTorokuShomeishoKeikakuH2104Div keikakuH2104 = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoKeikaku().getShokanShikyuTorokuShomeishoKeikakuH2104();
+        ShokanShikyuTorokuShomeishoKeikakuMeisaiDiv keikakuH2104Meisai = keikakuH2104.getShokanShikyuTorokuShomeishoKeikakuMeisai();
+        if (event.equals(イベント.追加)) {
+            keikakuH2104Meisai.getTxtKeikakuSelectedIndex().setValue(new RString("-1"));
+        } else {
+            int index = keikakuH2104.getShokanShikyuTorokuShomeishoKeikakuList().getShokanShikyuTorokuShomeishoKeikakuListInfo().getDgShokanShikyuTorokuShomeishoKeikakuList().getActiveRowId();
+            keikakuH2104Meisai.getTxtKeikakuSelectedIndex().setValue(new RString(String.valueOf(index)));
+        }
+        RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
+        if (計画費切替.H2103.getDate().isBefore(date)) {
+            HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(36);
+            keikakuH2104Meisai.getTxtKeikakuhiShuruiCodeH2104().setValue(new RString(source.get("サービス種類コード").toString()));
+            keikakuH2104Meisai.getTxtKeikakuhiServiceCodeH2104().setValue(new RString(source.get("サービスコード").toString()));
+            keikakuH2104Meisai.getTxtKeikakuhiServiceNameH2104().setValue(new RString(source.get("サービス名称").toString()));
+            keikakuH2104Meisai.getTxtKeikakuhiTanisuH2104().setValue(new Decimal(source.get("単位数").toString()));
+            keikakuH2104Meisai.getTxtKeikakuhiKaisu().setValue(new Decimal(source.get("回数").toString()));
+            keikakuH2104Meisai.getTxtKeikakuhiServiceTanisu().setValue(new Decimal(source.get("サービス単位数").toString()));
+            keikakuH2104Meisai.getTxtKeikakuhiTekiyoH2104().setValue(new RString(source.get("摘要").toString()));
+        }
+    }
+
+    private void initKeikakuMeisaiData(ShokanShikyuTorokuShomeishoDiv panel) {
+        ShokanShikyuTorokuShomeishoKeikakuH2104Div keikakuH2104 = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoKeikaku().getShokanShikyuTorokuShomeishoKeikakuH2104();
+        ShokanShikyuTorokuShomeishoKeikakuMeisaiDiv keikakuH2104Meisai = keikakuH2104.getShokanShikyuTorokuShomeishoKeikakuMeisai();
+        keikakuH2104Meisai.getTxtKeikakuSelectedIndex().setValue(new RString("-1"));
+        keikakuH2104Meisai.getTxtKeikakuhiShuruiCodeH2104().clearValue();
+        keikakuH2104Meisai.getTxtKeikakuhiServiceCodeH2104().clearValue();
+        keikakuH2104Meisai.getTxtKeikakuhiServiceNameH2104().clearValue();
+        keikakuH2104Meisai.getTxtKeikakuhiTanisuH2104().clearValue();
+        keikakuH2104Meisai.getTxtKeikakuhiKaisu().clearValue();
+        keikakuH2104Meisai.getTxtKeikakuhiServiceTanisu().clearValue();
+        keikakuH2104Meisai.getTxtKeikakuhiTekiyoH2104().clearValue();
+    }
+
+    private void kakuteiKeikakuMeisaiData(ShokanShikyuTorokuShomeishoDiv panel) {
+        ShokanShikyuTorokuShomeishoKeikakuH2104Div keikakuH2104 = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoKeikaku().getShokanShikyuTorokuShomeishoKeikakuH2104();
+        ServiceTeikyoShomeishoKeikakuListDiv keikakuH2104List = keikakuH2104.getShokanShikyuTorokuShomeishoKeikakuList().getShokanShikyuTorokuShomeishoKeikakuListInfo();
+        ShokanShikyuTorokuShomeishoKeikakuMeisaiDiv keikakuH2104Meisai = keikakuH2104.getShokanShikyuTorokuShomeishoKeikakuMeisai();
+        int index = Integer.parseInt(keikakuH2104Meisai.getTxtKeikakuSelectedIndex().getValue().toString());
+
+        DataGrid<dgShokanShikyuTorokuShomeishoKeikakuList_Row> dgRow = keikakuH2104List.getDgShokanShikyuTorokuShomeishoKeikakuList();
+        List<dgShokanShikyuTorokuShomeishoKeikakuList_Row> dgRowList = dgRow.getDataSource();
+        dgShokanShikyuTorokuShomeishoKeikakuList_Row itemH2104 = create計画費明細一覧H2104アイテム(
+                keikakuH2104Meisai.getTxtKeikakuhiShuruiCodeH2104().getValue().toString().
+                concat(keikakuH2104Meisai.getTxtKeikakuhiServiceCodeH2104().getValue().toString()).concat(":").
+                concat(keikakuH2104Meisai.getTxtKeikakuhiServiceNameH2104().getValue().toString()),
+                keikakuH2104Meisai.getTxtKeikakuhiTanisuH2104().getValue().toString(),
+                keikakuH2104Meisai.getTxtKeikakuhiKaisu().getValue().toString(),
+                keikakuH2104Meisai.getTxtKeikakuhiServiceTanisu().getValue().toString(),
+                keikakuH2104Meisai.getTxtKeikakuhiTekiyoH2104().getValue().toString());
+        if (index == -1) {
+            itemH2104.setRowState(RowState.Added);
+            dgRowList.add(itemH2104);
+        } else {
+            itemH2104.setRowState(RowState.Modified);
+            dgRowList.remove(index);
+            dgRowList.add(index, itemH2104);
+        }
+        dgRow.setDataSource(dgRowList);
+        set計画費合計(panel);
+    }
+
+    private void set計画費合計(ShokanShikyuTorokuShomeishoDiv panel) {
+        ShokanShikyuTorokuShomeishoKeikakuDiv keikaku = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoKeikaku();
+        ShokanShikyuTorokuShomeishoKeikakuH2104Div keikakuH2104 = keikaku.getShokanShikyuTorokuShomeishoKeikakuH2104();
+        ShokanShikyuTorokuShomeishoKeikakuListDiv keikakuH2104List = keikakuH2104.getShokanShikyuTorokuShomeishoKeikakuList();
+        ServiceTeikyoShomeishoKeikakuListDiv keikakuH2104ListList = keikakuH2104List.getShokanShikyuTorokuShomeishoKeikakuListInfo();
+
+        Integer gokei = 0;
+        Integer seikyu = 0;
+
+        for (dgShokanShikyuTorokuShomeishoKeikakuList_Row item : keikakuH2104ListList.getDgShokanShikyuTorokuShomeishoKeikakuList().getDataSource()) {
+            gokei = gokei + Integer.parseInt(item.getTxtTanisu().toString());
+            seikyu = seikyu + Integer.parseInt(item.getTxtServiceTanisu().toString());
+        }
+
+        keikakuH2104List.getTxtKeikakuhiGokeiTanisu().setValue(new Decimal(gokei));
+        keikakuH2104List.getTxtKeikakuhiSeikyuKingakuH2104().setValue(new Decimal(seikyu));
+    }
+
+    private dgShokanShikyuTorokuShomeishoKeikakuList_Row create計画費明細一覧H2104アイテム(
+            String txtService,
+            String txtTanisu,
+            String txtKaisu,
+            String txtServiceTanisu,
+            String txtTekiyo
+    ) {
+        Button btnSelect = new Button();
+        Button btnEdit = new Button();
+        Button btnDelete = new Button();
+
+        return new dgShokanShikyuTorokuShomeishoKeikakuList_Row(
+                btnSelect,
+                btnEdit,
+                btnDelete,
+                new RString(txtService),
+                new RString(txtTanisu),
+                new RString(txtKaisu),
+                new RString(txtServiceTanisu),
+                new RString(txtTekiyo));
+    }
+    // !!!!!!!!!!!!!!!!!!!!!!↑↑ここまで計画費タブに関連するコード↑↑!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
