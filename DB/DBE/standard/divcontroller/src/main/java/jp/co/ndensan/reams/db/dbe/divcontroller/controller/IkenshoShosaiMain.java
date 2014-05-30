@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.IkenshoShosaiMainDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShujiiIkenshoImageTorikomiDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2070001.IkenshoShosaiMainDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2070001.ShujiiIkenshoImageTorikomiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -16,11 +16,19 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
+ * 意見書OCR取込みデータ詳細表示Divを制御します。
  *
- * @author n9606
+ * @author N9606 漢那 憲作
  */
 public class IkenshoShosaiMain {
 
+    /**
+     * 意見書取込み対象者一覧データグリッド上の対象者選択時の処理を表します。
+     *
+     * @param panel IkenshoShosaiMainDiv
+     * @param panel2 ShujiiIkenshoImageTorikomiDiv
+     * @return ResponseData
+     */
     public ResponseData<IkenshoShosaiMainDiv> dispIkenshoKekkaShosai(IkenshoShosaiMainDiv panel, ShujiiIkenshoImageTorikomiDiv panel2) {
         ResponseData<IkenshoShosaiMainDiv> response = new ResponseData<>();
         int iSelectId = panel2.getDgIkenshoTorikomiKekka().getClickedRowId();
@@ -32,9 +40,12 @@ public class IkenshoShosaiMain {
 
     }
 
+    /*
+     *意見書結果詳細情報を取得します。
+     */
     private void setIkenshoKekkaShosaiData(IkenshoShosaiMainDiv panel, ShujiiIkenshoImageTorikomiDiv panel2, int iSelectId) {
 
-        List<HashMap> IkenshoKekkaShosai = YamlLoader.FOR_DBE.loadAsList(new RString("IkenshoKekkaShosaiMain.yml"));
+        List<HashMap> IkenshoKekkaShosai = YamlLoader.FOR_DBE.loadAsList(new RString("dbe2070001/IkenshoKekkaShosaiMain.yml"));
 
         HashMap hashMap = IkenshoKekkaShosai.get(iSelectId);
 

@@ -19,11 +19,18 @@ import java.util.Calendar;
 import java.util.Locale;
 
 /**
+ * 一次判定一括処理対象者一覧Divを制御します。
  *
- * @author n9606
+ * @author N9606 漢那 憲作
  */
 public class IchijiHanteiShoriTaishoshaIchiran {
 
+    /**
+     * 一次判定一括処理対象者一覧の初期処理を表します。
+     *
+     * @param panel IchijiHanteiShoriTaishoshaIchiranDiv
+     * @return ResponseData
+     */
     public ResponseData<IchijiHanteiShoriTaishoshaIchiranDiv> onLoad(IchijiHanteiShoriTaishoshaIchiranDiv panel) {
         ResponseData<IchijiHanteiShoriTaishoshaIchiranDiv> response = new ResponseData<>();
 
@@ -35,6 +42,12 @@ public class IchijiHanteiShoriTaishoshaIchiran {
 
     }
 
+    /**
+     * 一次判定ボタン押下時の処理を表します。
+     *
+     * @param panel IchijiHanteiShoriTaishoshaIchiranDiv
+     * @return ResponseData
+     */
     public ResponseData<IchijiHanteiShoriTaishoshaIchiranDiv> onClick_BtnIchijiHantei(IchijiHanteiShoriTaishoshaIchiranDiv panel) {
         ResponseData<IchijiHanteiShoriTaishoshaIchiranDiv> response = new ResponseData<>();
 
@@ -46,6 +59,12 @@ public class IchijiHanteiShoriTaishoshaIchiran {
 
     }
 
+    /**
+     * 一次判定完了ボタン押下時の処理を表します。
+     *
+     * @param panel IchijiHanteiShoriTaishoshaIchiranDiv
+     * @return ResponseData
+     */
     public ResponseData<IchijiHanteiShoriTaishoshaIchiranDiv> onClick_BtnIchijiHanteiKanryo(IchijiHanteiShoriTaishoshaIchiranDiv panel) {
         ResponseData<IchijiHanteiShoriTaishoshaIchiranDiv> response = new ResponseData<>();
 
@@ -57,9 +76,12 @@ public class IchijiHanteiShoriTaishoshaIchiran {
 
     }
 
+    /*
+     *一次判定一括処理対象者一覧情報を設定します。
+     */
     private void setIchijiHanteiShoriTaishoshaData(int intShoriFlg, IchijiHanteiShoriTaishoshaIchiranDiv panel) {
 
-        List<HashMap> IchijiHanteiTaishoshaData = YamlLoader.FOR_DBE.loadAsList(new RString("IchijiHanteiShoriTaishoshaIchiran.yml"));
+        List<HashMap> IchijiHanteiTaishoshaData = YamlLoader.FOR_DBE.loadAsList(new RString("dbe3010001/IchijiHanteiShoriTaishoshaIchiran.yml"));
 
         List<dgIchijiHanteiTaishoshaIchiran_Row> IchijiHanteiTaishoshaSelectData = panel.getDgIchijiHanteiTaishoshaIchiran().getSelectedItems();
         if (intShoriFlg == 0) {
@@ -90,7 +112,7 @@ public class IchijiHanteiShoriTaishoshaIchiran {
     }
 
     /*
-     *一次判定処理対象者一覧情報の初期値をセットします。
+     *一次判定一括処理対象者一覧情報の初期値をセットします。
      */
     private List createRowIchijiHanteiTaishosha(List<HashMap> IchijiHanteiTaishoshaData) {
 
@@ -131,7 +153,7 @@ public class IchijiHanteiShoriTaishoshaIchiran {
     }
 
     /*
-     *引数を元にデータグリッド内に挿入する一次判定処理対象者一覧データを作成します。
+     *引数を元にデータグリッド内に挿入する一次判定一括処理対象者一覧データを作成します。
      */
     private dgIchijiHanteiTaishoshaIchiran_Row createRowIchijiHanteiTaishosha(
             String hokensha,

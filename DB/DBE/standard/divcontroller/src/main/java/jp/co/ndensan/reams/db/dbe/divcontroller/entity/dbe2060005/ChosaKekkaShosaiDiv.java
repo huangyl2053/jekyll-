@@ -1,8 +1,7 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060005;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgChosakekka1_Row;
@@ -13,8 +12,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ChosaKekkaShosai のクラスファイル 
- * 
+ * ChosaKekkaShosai のクラスファイル
+ *
  * @author 自動生成
  */
 public class ChosaKekkaShosaiDiv extends Panel {
@@ -24,6 +23,7 @@ public class ChosaKekkaShosaiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("dgChosakekka1")
     private DataGrid<dgChosakekka1_Row> dgChosakekka1;
     @JsonProperty("dgChosakekka2")
@@ -44,7 +44,7 @@ public class ChosaKekkaShosaiDiv extends Panel {
 
     @JsonProperty("dgChosakekka1")
     public void setDgChosakekka1(DataGrid<dgChosakekka1_Row> dgChosakekka1) {
-        this.dgChosakekka1=dgChosakekka1;
+        this.dgChosakekka1 = dgChosakekka1;
     }
 
     @JsonProperty("dgChosakekka2")
@@ -54,7 +54,7 @@ public class ChosaKekkaShosaiDiv extends Panel {
 
     @JsonProperty("dgChosakekka2")
     public void setDgChosakekka2(DataGrid<dgChosakekka2_Row> dgChosakekka2) {
-        this.dgChosakekka2=dgChosakekka2;
+        this.dgChosakekka2 = dgChosakekka2;
     }
 
     @JsonProperty("dgChosakekka3")
@@ -64,7 +64,7 @@ public class ChosaKekkaShosaiDiv extends Panel {
 
     @JsonProperty("dgChosakekka3")
     public void setDgChosakekka3(DataGrid<dgChosakekka3_Row> dgChosakekka3) {
-        this.dgChosakekka3=dgChosakekka3;
+        this.dgChosakekka3 = dgChosakekka3;
     }
 
 }

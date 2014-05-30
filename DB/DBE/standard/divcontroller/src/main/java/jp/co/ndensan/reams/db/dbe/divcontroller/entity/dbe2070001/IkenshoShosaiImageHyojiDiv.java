@@ -1,18 +1,17 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2070001;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.tabIkenshoShosaiHyojiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+//import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2070001.tabIkenshoImageHyojiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * IkenshoShosaiImageHyoji のクラスファイル 
- * 
+ * IkenshoShosaiImageHyoji のクラスファイル
+ *
  * @author 自動生成
  */
 public class IkenshoShosaiImageHyojiDiv extends Panel {
@@ -22,10 +21,11 @@ public class IkenshoShosaiImageHyojiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtHyojiBairitsu")
     private TextBoxNum txtHyojiBairitsu;
-    @JsonProperty("tabIkenshoShosaiHyoji")
-    private tabIkenshoShosaiHyojiDiv tabIkenshoShosaiHyoji;
+    @JsonProperty("tabIkenshoImageHyoji")
+    private tabIkenshoImageHyojiDiv tabIkenshoImageHyoji;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -40,17 +40,17 @@ public class IkenshoShosaiImageHyojiDiv extends Panel {
 
     @JsonProperty("txtHyojiBairitsu")
     public void setTxtHyojiBairitsu(TextBoxNum txtHyojiBairitsu) {
-        this.txtHyojiBairitsu=txtHyojiBairitsu;
+        this.txtHyojiBairitsu = txtHyojiBairitsu;
     }
 
-    @JsonProperty("tabIkenshoShosaiHyoji")
-    public tabIkenshoShosaiHyojiDiv getTabIkenshoShosaiHyoji() {
-        return tabIkenshoShosaiHyoji;
+    @JsonProperty("tabIkenshoImageHyoji")
+    public tabIkenshoImageHyojiDiv getTabIkenshoImageHyoji() {
+        return tabIkenshoImageHyoji;
     }
 
-    @JsonProperty("tabIkenshoShosaiHyoji")
-    public void setTabIkenshoShosaiHyoji(tabIkenshoShosaiHyojiDiv tabIkenshoShosaiHyoji) {
-        this.tabIkenshoShosaiHyoji=tabIkenshoShosaiHyoji;
+    @JsonProperty("tabIkenshoImageHyoji")
+    public void setTabIkenshoImageHyoji(tabIkenshoImageHyojiDiv tabIkenshoImageHyoji) {
+        this.tabIkenshoImageHyoji = tabIkenshoImageHyoji;
     }
 
 }

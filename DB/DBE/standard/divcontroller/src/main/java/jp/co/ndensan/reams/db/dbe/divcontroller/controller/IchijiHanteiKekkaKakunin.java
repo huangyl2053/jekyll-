@@ -18,11 +18,19 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 一次判定結果詳細表示Divを制御します。
  *
- * @author n9606
+ * @author N9606 漢那 憲作
  */
 public class IchijiHanteiKekkaKakunin {
 
+    /**
+     * 一次判定確認ボタン押下時の一次判定結果詳細画面初期表示処理を表します。
+     *
+     * @param panel IchijiHanteiKekkaKakuninDiv
+     * @param panel2 IchijiHanteiShoriTaishoshaIchiranDiv
+     * @return ResponseData
+     */
     public ResponseData<IchijiHanteiKekkaKakuninDiv> dispIchijiHanteiKekkaShosai(IchijiHanteiKekkaKakuninDiv panel, IchijiHanteiShoriTaishoshaIchiranDiv panel2) {
         ResponseData<IchijiHanteiKekkaKakuninDiv> response = new ResponseData<>();
 
@@ -33,6 +41,13 @@ public class IchijiHanteiKekkaKakunin {
         return response;
     }
 
+    /**
+     * 次対象者表示ボタン押下時の一次判定結果詳細画面表示処理を表します。
+     *
+     * @param panel IchijiHanteiKekkaKakuninDiv
+     * @param panel2 IchijiHanteiShoriTaishoshaIchiranDiv
+     * @return ResponseData
+     */
     public ResponseData<IchijiHanteiKekkaKakuninDiv> dispNextIchijiHanteiKekkaShosai(IchijiHanteiKekkaKakuninDiv panel, IchijiHanteiShoriTaishoshaIchiranDiv panel2) {
         ResponseData<IchijiHanteiKekkaKakuninDiv> response = new ResponseData<>();
 
@@ -43,6 +58,13 @@ public class IchijiHanteiKekkaKakunin {
         return response;
     }
 
+    /**
+     * 前対象者表示ボタン押下時の一次判定結果詳細画面表示処理を表します。
+     *
+     * @param panel IchijiHanteiKekkaKakuninDiv
+     * @param panel2 IchijiHanteiShoriTaishoshaIchiranDiv
+     * @return ResponseData
+     */
     public ResponseData<IchijiHanteiKekkaKakuninDiv> dispPreIchijiHanteiKekkaShosai(IchijiHanteiKekkaKakuninDiv panel, IchijiHanteiShoriTaishoshaIchiranDiv panel2) {
         ResponseData<IchijiHanteiKekkaKakuninDiv> response = new ResponseData<>();
 
@@ -53,12 +75,15 @@ public class IchijiHanteiKekkaKakunin {
         return response;
     }
 
+    /*
+     *一次判定結果詳細情報を取得、設定します。
+     */
     private void setIchijiHanteiKekkaShosaiData(IchijiHanteiKekkaKakuninDiv panel, IchijiHanteiShoriTaishoshaIchiranDiv panel2) {
 
         StringBuilder stbKensu;
         int intIdx;
 
-        List<HashMap> IchijiHanteiKekkaShosai = YamlLoader.FOR_DBE.loadAsList(new RString("IchijiHanteiKekkaKakunin.yml"));
+        List<HashMap> IchijiHanteiKekkaShosai = YamlLoader.FOR_DBE.loadAsList(new RString("dbe3010001/IchijiHanteiKekkaKakunin.yml"));
 
         List<dgIchijiHanteiTaishoshaIchiran_Row> IchijiHanteiKekkaKakuninData = panel2.getDgIchijiHanteiTaishoshaIchiran().getSelectedItems();
 
@@ -193,6 +218,9 @@ public class IchijiHanteiKekkaKakunin {
         }
     }
 
+    /*
+     *一次判定警告コードデータグリッド情報を設定します。
+     */
     private List createRowIchijiHanteiKeikokuCode(HashMap IchijiHanteiKekka) {
 
         List arrayDataList = new ArrayList();

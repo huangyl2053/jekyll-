@@ -46,7 +46,7 @@
         "cellDetails": {
          "cellType": 8,
          "text": "選択",
-         "onClick": "",
+         "onClick": "onSelect_ShinsakaiIchiran",
          "imageFileUrl": "",
          "imageWidth": "",
          "imageHeight": ""
@@ -231,11 +231,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbe/db/dbe/TaishoShinsakaiIchiran/getOnloadData"
-    },
-    {
-     "eventName": "btnTorokuClick",
-     "requestUrl": "dbe/db/dbe/TaishoShinsakai/getOnloadData"
+     "requestUrl": "dbe/db/dbe/NinteiShinsakaiIchiran/onLoad"
     }
    ],
    "hiddenInput": [],
@@ -341,7 +337,7 @@
        "isComboBox": false,
        "suggest": [],
        "permitCharactor": "",
-       "formatLength": 1
+       "formatLength": "3"
       },
       {
        "fieldName": "txtGogitaiMeisho",
@@ -420,7 +416,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "displayFormat": 0,
+       "displayFormat": 1,
        "value": "",
        "maxLength": 100000000,
        "minLength": 0,
@@ -594,7 +590,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "displayFormat": 0,
+       "displayFormat": 1,
        "value": "",
        "maxLength": 100000000,
        "minLength": 0,
@@ -2200,6 +2196,9 @@
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
+     "postParameterPanelNames": "NinteiShinsakaiTaishoshaWariate"
+    },
+    {
      "postParameterPanelNames": "NinteiShinsakaiIchiran"
     }
    ],
@@ -2211,6 +2210,10 @@
     {
      "eventName": "btnTorokuClick",
      "requestUrl": "dbe/db/dbe/TaishoShinsakai/getOnloadData"
+    },
+    {
+     "eventName": "onSelect_ShinsakaiIchiran",
+     "requestUrl": "dbe/db/dbe/NinteiShinsakaiTaishoshaWariate/dispNinteiShinsakaiTaishoshaWariate"
     }
    ],
    "hiddenInput": [],
@@ -2251,16 +2254,76 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "対象一覧",
+   "stateName": "審査会一覧",
    "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "NinteiShinsakaiIchiran",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "validation": {
+    "url": "",
+    "parameters": []
+   },
+   "events": [
+    {
+     "fieldName": "dgNinteiShinsakaiIchiran[select]",
+     "event": "onClick",
+     "transition": "審査会対象者割当"
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
+  },
+  {
+   "order": "2",
+   "stateName": "審査会対象者割当",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "NinteiShinsakaiTaishoshaWariate",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "NinteiShinsakaiJoho",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "taishoshaWariateBtn",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "TaishoshaNarabikae",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ShinsainWariateBtn",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "dgNinteiShinsakaiIchiran[select]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": "審査会一覧"
+    }
+   ]
   }
  ],
  "currentState": "All",
