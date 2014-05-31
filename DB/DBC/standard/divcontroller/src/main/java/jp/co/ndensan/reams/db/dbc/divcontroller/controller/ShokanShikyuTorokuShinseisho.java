@@ -216,7 +216,8 @@ public class ShokanShikyuTorokuShinseisho {
     }
 
     private void setShomeishoData(ShokanShikyuTorokuShinseishoDiv panel) {
-        ShokanShikyuTorokuShomeishoInfoDiv infoDiv = panel.getTabShokanShikyuTorokuShinseisho().getShokanShikyuTorokuShomeishoInfo();
+        ShokanShikyuTorokuShomeishoInfoDiv infoDiv = panel.getTabShokanShikyuTorokuShinseisho().
+                getShokanShikyuTorokuShomeishoInfo();
         HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShinseisho.yml")).get(4);
 
         infoDiv.getTxtShinseiTeikyoshoShinseiYMD().setValue(new RDate(source.get("申請日").toString()));
@@ -225,8 +226,10 @@ public class ShokanShikyuTorokuShinseisho {
     }
 
     private void setShomeishoList(ShokanShikyuTorokuShinseishoDiv panel) {
-        ShokanShikyuTorokuShomeishoInfoDiv infoDiv = panel.getTabShokanShikyuTorokuShinseisho().getShokanShikyuTorokuShomeishoInfo();
-        List<dgServiceTeikyoShomeishoList_Row> dgRowList = infoDiv.getShokanShikyuTorokuShomeishoListInfo().getDgServiceTeikyoShomeishoList().getDataSource();
+        ShokanShikyuTorokuShomeishoInfoDiv infoDiv = panel.getTabShokanShikyuTorokuShinseisho().
+                getShokanShikyuTorokuShomeishoInfo();
+        List<dgServiceTeikyoShomeishoList_Row> dgRowList = infoDiv.getShokanShikyuTorokuShomeishoListInfo().
+                getDgServiceTeikyoShomeishoList().getDataSource();
         List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShinseisho.yml"));
         Button btnSelect = new Button();
         Button btnEdit = new Button();

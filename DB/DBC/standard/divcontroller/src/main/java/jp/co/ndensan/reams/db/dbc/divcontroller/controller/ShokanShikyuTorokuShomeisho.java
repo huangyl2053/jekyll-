@@ -73,7 +73,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 
 /**
@@ -265,8 +264,10 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void setKyufuhiListData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoMeisaiDiv meisai = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoMeisai();
-        ServiceTeikyoShomeishoMeisaiListDiv meisaiList = meisai.getShokanShikyuTorokuShomeishoMeisaiList().getShokanShikyuTorokuShomeishoMeisaiListInfo();
+        ShokanShikyuTorokuShomeishoMeisaiDiv meisai = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoMeisai();
+        ServiceTeikyoShomeishoMeisaiListDiv meisaiList = meisai.getShokanShikyuTorokuShomeishoMeisaiList()
+                .getShokanShikyuTorokuShomeishoMeisaiListInfo();
         DataGrid<dgServiceTeikyoShomeishoMeisaiList_Row> dgRow = meisaiList.getDgServiceTeikyoShomeishoMeisaiList();
         List<dgServiceTeikyoShomeishoMeisaiList_Row> dgRowList = dgRow.getDataSource();
 
@@ -284,8 +285,10 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void deleteKyufuhiListData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoMeisaiDiv meisai = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoMeisai();
-        ServiceTeikyoShomeishoMeisaiListDiv meisaiList = meisai.getShokanShikyuTorokuShomeishoMeisaiList().getShokanShikyuTorokuShomeishoMeisaiListInfo();
+        ShokanShikyuTorokuShomeishoMeisaiDiv meisai = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoMeisai();
+        ServiceTeikyoShomeishoMeisaiListDiv meisaiList = meisai.getShokanShikyuTorokuShomeishoMeisaiList()
+                .getShokanShikyuTorokuShomeishoMeisaiListInfo();
         DataGrid<dgServiceTeikyoShomeishoMeisaiList_Row> dgRow = meisaiList.getDgServiceTeikyoShomeishoMeisaiList();
         List<dgServiceTeikyoShomeishoMeisaiList_Row> dgRowList = dgRow.getDataSource();
         int index = dgRow.getClickedRowId();
@@ -299,12 +302,14 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void setKyufuhiMeisaiData(ShokanShikyuTorokuShomeishoDiv panel, イベント event) {
-        ShokanShikyuTorokuShomeishoMeisaiDiv meisai = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoMeisai();
+        ShokanShikyuTorokuShomeishoMeisaiDiv meisai = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoMeisai();
         ShokanShikyuTorokuShomeishoMeisaiMeisaiDiv meisaiMeisai = meisai.getShokanShikyuTorokuShomeishoMeisaiMeisai();
         if (event.equals(イベント.追加)) {
             meisaiMeisai.getTxtKyufuhiSelectedIndex().setValue(new RString("-1"));
         } else {
-            int index = meisai.getShokanShikyuTorokuShomeishoMeisaiList().getShokanShikyuTorokuShomeishoMeisaiListInfo().getDgServiceTeikyoShomeishoMeisaiList().getActiveRowId();
+            int index = meisai.getShokanShikyuTorokuShomeishoMeisaiList().getShokanShikyuTorokuShomeishoMeisaiListInfo().
+                    getDgServiceTeikyoShomeishoMeisaiList().getActiveRowId();
             meisaiMeisai.getTxtKyufuhiSelectedIndex().setValue(new RString(String.valueOf(index)));
         }
         HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(7);
@@ -318,7 +323,8 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void initKyufuhiMeisaiData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoMeisaiDiv meisai = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoMeisai();
+        ShokanShikyuTorokuShomeishoMeisaiDiv meisai = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoMeisai();
         ShokanShikyuTorokuShomeishoMeisaiMeisaiDiv meisaiMeisai = meisai.getShokanShikyuTorokuShomeishoMeisaiMeisai();
         meisaiMeisai.getTxtKyufuhiSelectedIndex().setValue(new RString("-1"));
         meisaiMeisai.getTxtKyufuhiShuruiCode().clearValue();
@@ -331,8 +337,10 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void kakuteiKyufuhiMeisaiData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoMeisaiDiv meisai = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoMeisai();
-        ServiceTeikyoShomeishoMeisaiListDiv meisaiList = meisai.getShokanShikyuTorokuShomeishoMeisaiList().getShokanShikyuTorokuShomeishoMeisaiListInfo();
+        ShokanShikyuTorokuShomeishoMeisaiDiv meisai = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoMeisai();
+        ServiceTeikyoShomeishoMeisaiListDiv meisaiList = meisai.getShokanShikyuTorokuShomeishoMeisaiList()
+                .getShokanShikyuTorokuShomeishoMeisaiListInfo();
         ShokanShikyuTorokuShomeishoMeisaiMeisaiDiv meisaiMeisai = meisai.getShokanShikyuTorokuShomeishoMeisaiMeisai();
 
         DataGrid<dgServiceTeikyoShomeishoMeisaiList_Row> dgRow = meisaiList.getDgServiceTeikyoShomeishoMeisaiList();
@@ -340,7 +348,8 @@ public class ShokanShikyuTorokuShomeisho {
         int index = Integer.parseInt(meisaiMeisai.getTxtKyufuhiSelectedIndex().getValue().toString());
 
         dgServiceTeikyoShomeishoMeisaiList_Row item = create給付費明細一覧アイテム(
-                meisaiMeisai.getTxtKyufuhiShuruiCode().getValue().toString().concat(meisaiMeisai.getTxtKyufuhiServiceCode().getValue().toString()).
+                meisaiMeisai.getTxtKyufuhiShuruiCode().getValue().toString().concat(meisaiMeisai
+                        .getTxtKyufuhiServiceCode().getValue().toString()).
                 concat(":").concat(meisaiMeisai.getTxtKyufuhiServiceName().getValue().toString()),
                 meisaiMeisai.getTxtKyufuhiTanisu().getValue().toString(),
                 meisaiMeisai.getTxtKyufuhiKaisuNissu().getValue().toString(),
@@ -444,7 +453,8 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void showRyoyo(ShokanShikyuTorokuShomeishoDiv panel, 一覧明細表示 show) {
-        ShokanShikyuTorokuShomeishoRyoyoDiv ryoyo = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoRyoyo();
+        ShokanShikyuTorokuShomeishoRyoyoDiv ryoyo = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoRyoyo();
         if (show.equals(一覧明細表示.一覧表示)) {
             ryoyo.getShokanShikyuTorokuShomeishoRyoyoList().setIsOpen(true);
             ryoyo.getShokanShikyuTorokuShomeishoRyoyoMeisai().setIsOpen(false);
@@ -455,8 +465,10 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void setRyoyoListData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoRyoyoDiv ryoyo = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoRyoyo();
-        ServiceTeikyoShomeishoRyoyoListDiv ryoyoList = ryoyo.getShokanShikyuTorokuShomeishoRyoyoList().getShokanShikyuTorokuShomeishoRyoyoListInfo();
+        ShokanShikyuTorokuShomeishoRyoyoDiv ryoyo = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoRyoyo();
+        ServiceTeikyoShomeishoRyoyoListDiv ryoyoList = ryoyo.getShokanShikyuTorokuShomeishoRyoyoList()
+                .getShokanShikyuTorokuShomeishoRyoyoListInfo();
         DataGrid<dgServiceTeikyoShomeishoRyoyoList_Row> dgRow = ryoyoList.getDgServiceTeikyoShomeishoRyoyoList();
         List<dgServiceTeikyoShomeishoRyoyoList_Row> dgRowList = dgRow.getDataSource();
 
@@ -477,8 +489,10 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void deleteRyoyoListData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoRyoyoDiv ryoyo = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoRyoyo();
-        ServiceTeikyoShomeishoRyoyoListDiv ryoyoList = ryoyo.getShokanShikyuTorokuShomeishoRyoyoList().getShokanShikyuTorokuShomeishoRyoyoListInfo();
+        ShokanShikyuTorokuShomeishoRyoyoDiv ryoyo = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoRyoyo();
+        ServiceTeikyoShomeishoRyoyoListDiv ryoyoList = ryoyo.getShokanShikyuTorokuShomeishoRyoyoList()
+                .getShokanShikyuTorokuShomeishoRyoyoListInfo();
         DataGrid<dgServiceTeikyoShomeishoRyoyoList_Row> dgRow = ryoyoList.getDgServiceTeikyoShomeishoRyoyoList();
         List<dgServiceTeikyoShomeishoRyoyoList_Row> dgRowList = dgRow.getDataSource();
         int index = dgRow.getClickedRowId();
@@ -492,12 +506,14 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void setRyoyoMeisaiData(ShokanShikyuTorokuShomeishoDiv panel, イベント event) {
-        ShokanShikyuTorokuShomeishoRyoyoDiv ryoyo = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoRyoyo();
+        ShokanShikyuTorokuShomeishoRyoyoDiv ryoyo = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoRyoyo();
         ShokanShikyuTorokuShomeishoRyoyoMeisaiDiv ryoyoMeisai = ryoyo.getShokanShikyuTorokuShomeishoRyoyoMeisai();
         if (event.equals(イベント.追加)) {
             ryoyoMeisai.getTxtRyoyoSelectedIndex().setValue(new RString("-1"));
         } else {
-            int index = ryoyo.getShokanShikyuTorokuShomeishoRyoyoList().getShokanShikyuTorokuShomeishoRyoyoListInfo().getDgServiceTeikyoShomeishoRyoyoList().getActiveRowId();
+            int index = ryoyo.getShokanShikyuTorokuShomeishoRyoyoList().getShokanShikyuTorokuShomeishoRyoyoListInfo()
+                    .getDgServiceTeikyoShomeishoRyoyoList().getActiveRowId();
             ryoyoMeisai.getTxtRyoyoSelectedIndex().setValue(new RString(String.valueOf(index)));
         }
         HashMap sourceShikkan = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(11);
@@ -540,7 +556,8 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void initRyoyoMeisaiData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoRyoyoDiv ryoyo = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoRyoyo();
+        ShokanShikyuTorokuShomeishoRyoyoDiv ryoyo = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoRyoyo();
         ShokanShikyuTorokuShomeishoRyoyoMeisaiDiv ryoyoMeisai = ryoyo.getShokanShikyuTorokuShomeishoRyoyoMeisai();
         ryoyoMeisai.getTxtRyoyoSelectedIndex().setValue(new RString("-1"));
         ShokanShikyuTorokuShomeishoRyoyoShikkanDiv shikkan = ryoyoMeisai.getShokanShikyuTorokuShomeishoRyoyoShikkan();
@@ -579,8 +596,10 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void kakuteiRyoyoMeisaiData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoRyoyoDiv ryoyo = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoRyoyo();
-        ServiceTeikyoShomeishoRyoyoListDiv ryoyoList = ryoyo.getShokanShikyuTorokuShomeishoRyoyoList().getShokanShikyuTorokuShomeishoRyoyoListInfo();
+        ShokanShikyuTorokuShomeishoRyoyoDiv ryoyo = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoRyoyo();
+        ServiceTeikyoShomeishoRyoyoListDiv ryoyoList = ryoyo.getShokanShikyuTorokuShomeishoRyoyoList()
+                .getShokanShikyuTorokuShomeishoRyoyoListInfo();
         ShokanShikyuTorokuShomeishoRyoyoMeisaiDiv ryoyoMeisai = ryoyo.getShokanShikyuTorokuShomeishoRyoyoMeisai();
 
         DataGrid<dgServiceTeikyoShomeishoRyoyoList_Row> dgRow = ryoyoList.getDgServiceTeikyoShomeishoRyoyoList();
@@ -589,10 +608,12 @@ public class ShokanShikyuTorokuShomeisho {
 
         dgServiceTeikyoShomeishoRyoyoList_Row item = create療養費一覧アイテム(
                 ryoyoMeisai.getShokanShikyuTorokuShomeishoRyoyoShikkan().getTxtRyoyohiShikkanName1().getValue().toString(),
-                ryoyoMeisai.getShokanShikyuTorokuShomeishoRyoyoShikkan().getTxtRyoyohiRyoyoKaishiYMD1().getValue().wareki().toDateString().toString(),
+                ryoyoMeisai.getShokanShikyuTorokuShomeishoRyoyoShikkan().getTxtRyoyohiRyoyoKaishiYMD1()
+                .getValue().wareki().toDateString().toString(),
                 ryoyoMeisai.getShokanShikyuTorokuShomeishoRyoyoTensu().getTxtRyoyohiRyoyohiShokei().getValue().toString(),
                 ryoyoMeisai.getShokanShikyuTorokuShomeishoRyoyoKinkyuji().getTxtRyoyohiKinkyuName1().getValue().toString(),
-                ryoyoMeisai.getShokanShikyuTorokuShomeishoRyoyoKinkyuji().getTxtRyoyohiChiryoKaishiYMD1().getValue().wareki().toDateString().toString(),
+                ryoyoMeisai.getShokanShikyuTorokuShomeishoRyoyoKinkyuji().getTxtRyoyohiChiryoKaishiYMD1()
+                .getValue().wareki().toDateString().toString(),
                 ryoyoMeisai.getShokanShikyuTorokuShomeishoRyoyoTensu().getTxtRyoyohiChiryohiShokei().getValue().toString(),
                 ryoyoMeisai.getShokanShikyuTorokuShomeishoRyoyoTensu().getTxtRyoyohiChiryoGokei().getValue().toString());
 
@@ -711,26 +732,43 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void showShinryo(ShokanShikyuTorokuShomeishoDiv panel, 一覧明細表示 show) {
-        ShokanShikyuTorokuShomeishoShinryoDiv shinryo = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShinryo();
+        ShokanShikyuTorokuShomeishoShinryoDiv shinryo = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoShinryo();
         RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
         if (date.isBefore(診療費切替.H1504.getDate())) {
-            shinryo.getShokanShikyuTorokuShomeishoShinryoList().getShokanShikyuTorokuShomeishoShinryoListInfoH1503().setVisible(true);
-            shinryo.getShokanShikyuTorokuShomeishoShinryoList().getShokanShikyuTorokuShomeishoShinryoListInfoH1503().setDisplayNone(false);
-            shinryo.getShokanShikyuTorokuShomeishoShinryoList().getShokanShikyuTorokuShomeishoShinryoListInfo().setVisible(false);
-            shinryo.getShokanShikyuTorokuShomeishoShinryoList().getShokanShikyuTorokuShomeishoShinryoListInfo().setDisplayNone(true);
-            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai().getShokanShikyuTorokuShomeishoShinryoMeisaiH1503().setVisible(true);
-            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai().getShokanShikyuTorokuShomeishoShinryoMeisaiH1503().setDisplayNone(false);
-            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai().getShokanShikyuTorokuShomeishoShinryoMeisaiH1504().setVisible(false);
-            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai().getShokanShikyuTorokuShomeishoShinryoMeisaiH1504().setDisplayNone(true);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoList()
+                    .getShokanShikyuTorokuShomeishoShinryoListInfoH1503().setVisible(true);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoList()
+                    .getShokanShikyuTorokuShomeishoShinryoListInfoH1503().setDisplayNone(false);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoList()
+                    .getShokanShikyuTorokuShomeishoShinryoListInfo().setVisible(false);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoList()
+                    .getShokanShikyuTorokuShomeishoShinryoListInfo().setDisplayNone(true);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai()
+                    .getShokanShikyuTorokuShomeishoShinryoMeisaiH1503().setVisible(true);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai()
+                    .getShokanShikyuTorokuShomeishoShinryoMeisaiH1503().setDisplayNone(false);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai()
+                    .getShokanShikyuTorokuShomeishoShinryoMeisaiH1504().setVisible(false);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai()
+                    .getShokanShikyuTorokuShomeishoShinryoMeisaiH1504().setDisplayNone(true);
         } else {
-            shinryo.getShokanShikyuTorokuShomeishoShinryoList().getShokanShikyuTorokuShomeishoShinryoListInfoH1503().setVisible(false);
-            shinryo.getShokanShikyuTorokuShomeishoShinryoList().getShokanShikyuTorokuShomeishoShinryoListInfoH1503().setDisplayNone(true);
-            shinryo.getShokanShikyuTorokuShomeishoShinryoList().getShokanShikyuTorokuShomeishoShinryoListInfo().setVisible(true);
-            shinryo.getShokanShikyuTorokuShomeishoShinryoList().getShokanShikyuTorokuShomeishoShinryoListInfo().setDisplayNone(false);
-            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai().getShokanShikyuTorokuShomeishoShinryoMeisaiH1503().setVisible(false);
-            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai().getShokanShikyuTorokuShomeishoShinryoMeisaiH1503().setDisplayNone(true);
-            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai().getShokanShikyuTorokuShomeishoShinryoMeisaiH1504().setVisible(true);
-            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai().getShokanShikyuTorokuShomeishoShinryoMeisaiH1504().setDisplayNone(false);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoList()
+                    .getShokanShikyuTorokuShomeishoShinryoListInfoH1503().setVisible(false);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoList()
+                    .getShokanShikyuTorokuShomeishoShinryoListInfoH1503().setDisplayNone(true);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoList()
+                    .getShokanShikyuTorokuShomeishoShinryoListInfo().setVisible(true);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoList()
+                    .getShokanShikyuTorokuShomeishoShinryoListInfo().setDisplayNone(false);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai()
+                    .getShokanShikyuTorokuShomeishoShinryoMeisaiH1503().setVisible(false);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai()
+                    .getShokanShikyuTorokuShomeishoShinryoMeisaiH1503().setDisplayNone(true);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai()
+                    .getShokanShikyuTorokuShomeishoShinryoMeisaiH1504().setVisible(true);
+            shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai()
+                    .getShokanShikyuTorokuShomeishoShinryoMeisaiH1504().setDisplayNone(false);
         }
         if (show.equals(一覧明細表示.一覧表示)) {
             shinryo.getShokanShikyuTorokuShomeishoShinryoList().setIsOpen(true);
@@ -742,13 +780,18 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void setShinryoListData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoShinryoDiv shinryo = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShinryo();
-        ServiceTeikyoShomeishoShinryoListH1503Div shinryoH1503List = shinryo.getShokanShikyuTorokuShomeishoShinryoList().getShokanShikyuTorokuShomeishoShinryoListInfoH1503();
-        ServiceTeikyoShomeishoShinryoListDiv shinryoH1504List = shinryo.getShokanShikyuTorokuShomeishoShinryoList().getShokanShikyuTorokuShomeishoShinryoListInfo();
+        ShokanShikyuTorokuShomeishoShinryoDiv shinryo = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoShinryo();
+        ServiceTeikyoShomeishoShinryoListH1503Div shinryoH1503List = shinryo
+                .getShokanShikyuTorokuShomeishoShinryoList().getShokanShikyuTorokuShomeishoShinryoListInfoH1503();
+        ServiceTeikyoShomeishoShinryoListDiv shinryoH1504List = shinryo
+                .getShokanShikyuTorokuShomeishoShinryoList().getShokanShikyuTorokuShomeishoShinryoListInfo();
 
-        DataGrid<dgServiceTeikyoShomeishoShinryoListH1503_Row> dgRowH1503 = shinryoH1503List.getDgServiceTeikyoShomeishoShinryoListH1503();
+        DataGrid<dgServiceTeikyoShomeishoShinryoListH1503_Row> dgRowH1503 = shinryoH1503List
+                .getDgServiceTeikyoShomeishoShinryoListH1503();
         List<dgServiceTeikyoShomeishoShinryoListH1503_Row> dgRowListH1503 = dgRowH1503.getDataSource();
-        DataGrid<dgServiceTeikyoShomeishoShinryoList_Row> dgRowH1504 = shinryoH1504List.getDgServiceTeikyoShomeishoShinryoList();
+        DataGrid<dgServiceTeikyoShomeishoShinryoList_Row> dgRowH1504 = shinryoH1504List
+                .getDgServiceTeikyoShomeishoShinryoList();
         List<dgServiceTeikyoShomeishoShinryoList_Row> dgRowListH1504 = dgRowH1504.getDataSource();
 
         List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml"));
@@ -781,9 +824,12 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void deleteShinryoListData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoShinryoDiv shinryo = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShinryo();
-        ServiceTeikyoShomeishoShinryoListDiv shinryoList = shinryo.getShokanShikyuTorokuShomeishoShinryoList().getShokanShikyuTorokuShomeishoShinryoListInfo();
-        DataGrid<dgServiceTeikyoShomeishoShinryoList_Row> dgRow = shinryoList.getDgServiceTeikyoShomeishoShinryoList();
+        ShokanShikyuTorokuShomeishoShinryoDiv shinryo = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoShinryo();
+        ServiceTeikyoShomeishoShinryoListDiv shinryoList = shinryo
+                .getShokanShikyuTorokuShomeishoShinryoList().getShokanShikyuTorokuShomeishoShinryoListInfo();
+        DataGrid<dgServiceTeikyoShomeishoShinryoList_Row> dgRow = shinryoList
+                .getDgServiceTeikyoShomeishoShinryoList();
         List<dgServiceTeikyoShomeishoShinryoList_Row> dgRowList = dgRow.getDataSource();
         int index = dgRow.getClickedRowId();
 
@@ -801,13 +847,15 @@ public class ShokanShikyuTorokuShomeisho {
         if (event.equals(イベント.追加)) {
             shinryoMeisai.getTxtShinryoSelectedIndex().setValue(new RString("-1"));
         } else {
-            int index = shinryo.getShokanShikyuTorokuShomeishoShinryoList().getShokanShikyuTorokuShomeishoShinryoListInfo().getDgServiceTeikyoShomeishoShinryoList().getActiveRowId();
+            int index = shinryo.getShokanShikyuTorokuShomeishoShinryoList()
+                    .getShokanShikyuTorokuShomeishoShinryoListInfo().getDgServiceTeikyoShomeishoShinryoList().getActiveRowId();
             shinryoMeisai.getTxtShinryoSelectedIndex().setValue(new RString(String.valueOf(index)));
         }
         RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
         if (date.isBefore(診療費切替.H1504.getDate())) {
             HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(21);
-            ShokanShikyuTorokuShomeishoShinryoMeisaiH1503Div h1503div = shinryoMeisai.getShokanShikyuTorokuShomeishoShinryoMeisaiH1503();
+            ShokanShikyuTorokuShomeishoShinryoMeisaiH1503Div h1503div = shinryoMeisai
+                    .getShokanShikyuTorokuShomeishoShinryoMeisaiH1503();
             h1503div.getTxtShinryohiShobyoNameH1503().setValue(new RString(source.get("傷病名").toString()));
             h1503div.getTxtShinryohiShidoKanri().setValue(new Decimal(source.get("指導管理等").toString()));
             h1503div.getTxtShinryohiRehabili().setValue(new Decimal(source.get("リハビリ").toString()));
@@ -819,7 +867,8 @@ public class ShokanShikyuTorokuShomeisho {
             h1503div.getTxtShinryohiTekiyoH1503().setValue(new RString(source.get("摘要").toString()));
         } else {
             HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(22);
-            ShokanShikyuTorokuShomeishoShinryoMeisaiH1504Div h1504div = shinryoMeisai.getShokanShikyuTorokuShomeishoShinryoMeisaiH1504();
+            ShokanShikyuTorokuShomeishoShinryoMeisaiH1504Div h1504div = shinryoMeisai
+                    .getShokanShikyuTorokuShomeishoShinryoMeisaiH1504();
             h1504div.getTxtShinryohiShobyoNameH1504().setValue(new RString(source.get("傷病名").toString()));
             h1504div.getTxtShinryohiShikibetsuNo().setValue(new RString(source.get("識別番号").toString()));
             h1504div.getTxtShinryohiShikibetsuName().setValue(new RString(source.get("識別名").toString()));
@@ -831,10 +880,13 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void initShinryoMeisaiData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoShinryoDiv shinryo = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShinryo();
-        ShokanShikyuTorokuShomeishoShinryoMeisaiDiv shinryoMeisai = shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai();
+        ShokanShikyuTorokuShomeishoShinryoDiv shinryo = panel
+                .getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShinryo();
+        ShokanShikyuTorokuShomeishoShinryoMeisaiDiv shinryoMeisai = shinryo
+                .getShokanShikyuTorokuShomeishoShinryoMeisai();
         shinryoMeisai.getTxtShinryoSelectedIndex().setValue(new RString("-1"));
-        ShokanShikyuTorokuShomeishoShinryoMeisaiH1503Div h1503div = shinryoMeisai.getShokanShikyuTorokuShomeishoShinryoMeisaiH1503();
+        ShokanShikyuTorokuShomeishoShinryoMeisaiH1503Div h1503div = shinryoMeisai
+                .getShokanShikyuTorokuShomeishoShinryoMeisaiH1503();
         h1503div.getTxtShinryohiShobyoNameH1503().clearValue();
         h1503div.getTxtShinryohiShidoKanri().clearValue();
         h1503div.getTxtShinryohiRehabili().clearValue();
@@ -844,7 +896,8 @@ public class ShokanShikyuTorokuShomeisho {
         h1503div.getTxtShinryohiEtc2().clearValue();
         h1503div.getTxtShinryohiGokeiTanisuH1503().clearValue();
         h1503div.getTxtShinryohiTekiyoH1503().clearValue();
-        ShokanShikyuTorokuShomeishoShinryoMeisaiH1504Div h1504div = shinryoMeisai.getShokanShikyuTorokuShomeishoShinryoMeisaiH1504();
+        ShokanShikyuTorokuShomeishoShinryoMeisaiH1504Div h1504div = shinryoMeisai
+                .getShokanShikyuTorokuShomeishoShinryoMeisaiH1504();
         h1504div.getTxtShinryohiShobyoNameH1504().clearValue();
         h1504div.getTxtShinryohiShikibetsuNo().clearValue();
         h1504div.getTxtShinryohiShikibetsuName().clearValue();
@@ -855,16 +908,22 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void kakuteiShinryoMeisaiData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoShinryoDiv shinryo = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShinryo();
-        ShokanShikyuTorokuShomeishoShinryoListDiv shinryoList = shinryo.getShokanShikyuTorokuShomeishoShinryoList();
-        ShokanShikyuTorokuShomeishoShinryoMeisaiDiv shinryoMeisai = shinryo.getShokanShikyuTorokuShomeishoShinryoMeisai();
+        ShokanShikyuTorokuShomeishoShinryoDiv shinryo = panel
+                .getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShinryo();
+        ShokanShikyuTorokuShomeishoShinryoListDiv shinryoList = shinryo
+                .getShokanShikyuTorokuShomeishoShinryoList();
+        ShokanShikyuTorokuShomeishoShinryoMeisaiDiv shinryoMeisai = shinryo
+                .getShokanShikyuTorokuShomeishoShinryoMeisai();
         int index = Integer.parseInt(shinryoMeisai.getTxtShinryoSelectedIndex().getValue().toString());
 
         RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
         if (date.isBefore(診療費切替.H1504.getDate())) {
-            ShokanShikyuTorokuShomeishoShinryoMeisaiH1503Div h1503div = shinryoMeisai.getShokanShikyuTorokuShomeishoShinryoMeisaiH1503();
-            ServiceTeikyoShomeishoShinryoListH1503Div shinryoH1503List = shinryoList.getShokanShikyuTorokuShomeishoShinryoListInfoH1503();
-            DataGrid<dgServiceTeikyoShomeishoShinryoListH1503_Row> dgRow = shinryoH1503List.getDgServiceTeikyoShomeishoShinryoListH1503();
+            ShokanShikyuTorokuShomeishoShinryoMeisaiH1503Div h1503div = shinryoMeisai
+                    .getShokanShikyuTorokuShomeishoShinryoMeisaiH1503();
+            ServiceTeikyoShomeishoShinryoListH1503Div shinryoH1503List = shinryoList
+                    .getShokanShikyuTorokuShomeishoShinryoListInfoH1503();
+            DataGrid<dgServiceTeikyoShomeishoShinryoListH1503_Row> dgRow = shinryoH1503List
+                    .getDgServiceTeikyoShomeishoShinryoListH1503();
             List<dgServiceTeikyoShomeishoShinryoListH1503_Row> dgRowList = dgRow.getDataSource();
             dgServiceTeikyoShomeishoShinryoListH1503_Row itemH1503 = create特定診療費一覧H1503アイテム(
                     h1503div.getTxtShinryohiShobyoNameH1503().getValue().toString(),
@@ -886,13 +945,17 @@ public class ShokanShikyuTorokuShomeisho {
             dgRow.setDataSource(dgRowList);
 
         } else {
-            ShokanShikyuTorokuShomeishoShinryoMeisaiH1504Div h1504div = shinryoMeisai.getShokanShikyuTorokuShomeishoShinryoMeisaiH1504();
-            ServiceTeikyoShomeishoShinryoListDiv shinryoH1504List = shinryoList.getShokanShikyuTorokuShomeishoShinryoListInfo();
-            DataGrid<dgServiceTeikyoShomeishoShinryoList_Row> dgRow = shinryoH1504List.getDgServiceTeikyoShomeishoShinryoList();
+            ShokanShikyuTorokuShomeishoShinryoMeisaiH1504Div h1504div = shinryoMeisai
+                    .getShokanShikyuTorokuShomeishoShinryoMeisaiH1504();
+            ServiceTeikyoShomeishoShinryoListDiv shinryoH1504List = shinryoList
+                    .getShokanShikyuTorokuShomeishoShinryoListInfo();
+            DataGrid<dgServiceTeikyoShomeishoShinryoList_Row> dgRow = shinryoH1504List
+                    .getDgServiceTeikyoShomeishoShinryoList();
             List<dgServiceTeikyoShomeishoShinryoList_Row> dgRowList = dgRow.getDataSource();
             dgServiceTeikyoShomeishoShinryoList_Row itemH1504 = create特定診療費一覧H1504アイテム(
                     h1504div.getTxtShinryohiShobyoNameH1504().getValue().toString(),
-                    h1504div.getTxtShinryohiShikibetsuNo().getValue().toString().concat(":").concat(h1504div.getTxtShinryohiShikibetsuName().getValue().toString()),
+                    h1504div.getTxtShinryohiShikibetsuNo().getValue().toString().concat(":")
+                    .concat(h1504div.getTxtShinryohiShikibetsuName().getValue().toString()),
                     h1504div.getTxtShinryohiTanisu().getValue().toString(),
                     h1504div.getTxtShinryohiKaisu().getValue().toString(),
                     h1504div.getTxtShinryohiGokeiTanisuH1504().getValue().toString());
@@ -1039,23 +1102,39 @@ public class ShokanShikyuTorokuShomeisho {
         ShokanShikyuTorokuShomeishoShokujiDiv shokuji = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShokuji();
         RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
         if (date.isBefore(食事費用切替.H1504.getDate())) {
-            shokuji.getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfoH1503().setVisible(true);
-            shokuji.getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfoH1503().setDisplayNone(false);
-            shokuji.getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfo().setVisible(false);
-            shokuji.getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfo().setDisplayNone(true);
-            shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai().getShokanShikyuTorokuShomeishoShokujiMeisaiH1503().setVisible(true);
-            shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai().getShokanShikyuTorokuShomeishoShokujiMeisaiH1503().setDisplayNone(false);
-            shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai().getShokanShikyuTorokuShomeishoShokujiMeisaiH1504().setVisible(false);
-            shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai().getShokanShikyuTorokuShomeishoShokujiMeisaiH1504().setDisplayNone(true);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiList()
+                    .getShokanShikyuTorokuShomeishoShokujiListInfoH1503().setVisible(true);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiList()
+                    .getShokanShikyuTorokuShomeishoShokujiListInfoH1503().setDisplayNone(false);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiList()
+                    .getShokanShikyuTorokuShomeishoShokujiListInfo().setVisible(false);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiList()
+                    .getShokanShikyuTorokuShomeishoShokujiListInfo().setDisplayNone(true);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai()
+                    .getShokanShikyuTorokuShomeishoShokujiMeisaiH1503().setVisible(true);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai()
+                    .getShokanShikyuTorokuShomeishoShokujiMeisaiH1503().setDisplayNone(false);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai()
+                    .getShokanShikyuTorokuShomeishoShokujiMeisaiH1504().setVisible(false);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai()
+                    .getShokanShikyuTorokuShomeishoShokujiMeisaiH1504().setDisplayNone(true);
         } else {
-            shokuji.getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfoH1503().setVisible(false);
-            shokuji.getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfoH1503().setDisplayNone(true);
-            shokuji.getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfo().setVisible(true);
-            shokuji.getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfo().setDisplayNone(false);
-            shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai().getShokanShikyuTorokuShomeishoShokujiMeisaiH1503().setVisible(false);
-            shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai().getShokanShikyuTorokuShomeishoShokujiMeisaiH1503().setDisplayNone(true);
-            shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai().getShokanShikyuTorokuShomeishoShokujiMeisaiH1504().setVisible(true);
-            shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai().getShokanShikyuTorokuShomeishoShokujiMeisaiH1504().setDisplayNone(false);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiList()
+                    .getShokanShikyuTorokuShomeishoShokujiListInfoH1503().setVisible(false);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiList()
+                    .getShokanShikyuTorokuShomeishoShokujiListInfoH1503().setDisplayNone(true);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiList()
+                    .getShokanShikyuTorokuShomeishoShokujiListInfo().setVisible(true);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiList()
+                    .getShokanShikyuTorokuShomeishoShokujiListInfo().setDisplayNone(false);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai()
+                    .getShokanShikyuTorokuShomeishoShokujiMeisaiH1503().setVisible(false);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai()
+                    .getShokanShikyuTorokuShomeishoShokujiMeisaiH1503().setDisplayNone(true);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai()
+                    .getShokanShikyuTorokuShomeishoShokujiMeisaiH1504().setVisible(true);
+            shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai()
+                    .getShokanShikyuTorokuShomeishoShokujiMeisaiH1504().setDisplayNone(false);
         }
         if (show.equals(一覧明細表示.一覧表示)) {
             shokuji.getShokanShikyuTorokuShomeishoShokujiList().setIsOpen(true);
@@ -1067,13 +1146,18 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void setShokujiListData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoShokujiDiv shokuji = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShokuji();
-        ServiceTeikyoShomeishoShokujiListH1503Div shokujiH1503List = shokuji.getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfoH1503();
-        ServiceTeikyoShomeishoShokujiListDiv shokujiH1504List = shokuji.getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfo();
+        ShokanShikyuTorokuShomeishoShokujiDiv shokuji = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoShokuji();
+        ServiceTeikyoShomeishoShokujiListH1503Div shokujiH1503List = shokuji
+                .getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfoH1503();
+        ServiceTeikyoShomeishoShokujiListDiv shokujiH1504List = shokuji
+                .getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfo();
 
-        DataGrid<dgServiceTeikyoShomeishoShokujiListH1503_Row> dgRowH1503 = shokujiH1503List.getDgServiceTeikyoShomeishoShokujiListH1503();
+        DataGrid<dgServiceTeikyoShomeishoShokujiListH1503_Row> dgRowH1503 = shokujiH1503List
+                .getDgServiceTeikyoShomeishoShokujiListH1503();
         List<dgServiceTeikyoShomeishoShokujiListH1503_Row> dgRowListH1503 = dgRowH1503.getDataSource();
-        DataGrid<dgServiceTeikyoShomeishoShokujiList_Row> dgRowH1504 = shokujiH1504List.getDgServiceTeikyoShomeishoShokujiList();
+        DataGrid<dgServiceTeikyoShomeishoShokujiList_Row> dgRowH1504 = shokujiH1504List
+                .getDgServiceTeikyoShomeishoShokujiList();
         List<dgServiceTeikyoShomeishoShokujiList_Row> dgRowListH1504 = dgRowH1504.getDataSource();
 
         List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml"));
@@ -1110,8 +1194,10 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void deleteShokujiListData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoShokujiDiv shokuji = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShokuji();
-        ServiceTeikyoShomeishoShokujiListDiv shokujiList = shokuji.getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfo();
+        ShokanShikyuTorokuShomeishoShokujiDiv shokuji = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoShokuji();
+        ServiceTeikyoShomeishoShokujiListDiv shokujiList = shokuji
+                .getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfo();
         DataGrid<dgServiceTeikyoShomeishoShokujiList_Row> dgRow = shokujiList.getDgServiceTeikyoShomeishoShokujiList();
         List<dgServiceTeikyoShomeishoShokujiList_Row> dgRowList = dgRow.getDataSource();
         int index = dgRow.getClickedRowId();
@@ -1125,18 +1211,21 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void setShokujiMeisaiData(ShokanShikyuTorokuShomeishoDiv panel, イベント event) {
-        ShokanShikyuTorokuShomeishoShokujiDiv shokuji = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShokuji();
+        ShokanShikyuTorokuShomeishoShokujiDiv shokuji = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoShokuji();
         ShokanShikyuTorokuShomeishoShokujiMeisaiDiv shokujiMeisai = shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai();
         if (event.equals(イベント.追加)) {
             shokujiMeisai.getTxtShokujiSelectedIndex().setValue(new RString("-1"));
         } else {
-            int index = shokuji.getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfo().getDgServiceTeikyoShomeishoShokujiList().getActiveRowId();
+            int index = shokuji.getShokanShikyuTorokuShomeishoShokujiList()
+                    .getShokanShikyuTorokuShomeishoShokujiListInfo().getDgServiceTeikyoShomeishoShokujiList().getActiveRowId();
             shokujiMeisai.getTxtShokujiSelectedIndex().setValue(new RString(String.valueOf(index)));
         }
         RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
         if (date.isBefore(食事費用切替.H1504.getDate())) {
             HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(29);
-            ShokanShikyuTorokuShomeishoShokujiMeisaiH1503Div h1503div = shokujiMeisai.getShokanShikyuTorokuShomeishoShokujiMeisaiH1503();
+            ShokanShikyuTorokuShomeishoShokujiMeisaiH1503Div h1503div = shokujiMeisai
+                    .getShokanShikyuTorokuShomeishoShokujiMeisaiH1503();
             h1503div.getTxtShokujihiKihonNissu().setValue(new Decimal(source.get("基本食日数").toString()));
             h1503div.getTxtShokujihiKihonTanka().setValue(new Decimal(source.get("基本食単価").toString()));
             h1503div.getTxtShokujihiKihonKingaku().setValue(new Decimal(source.get("基本食金額").toString()));
@@ -1150,7 +1239,8 @@ public class ShokanShikyuTorokuShomeisho {
             h1503div.getTxtShokujihiSeikyugaku().setValue(new Decimal(source.get("食事提供請求額").toString()));
         } else {
             HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(30);
-            ShokanShikyuTorokuShomeishoShokujiMeisaiH1504Div h1504div = shokujiMeisai.getShokanShikyuTorokuShomeishoShokujiMeisaiH1504();
+            ShokanShikyuTorokuShomeishoShokujiMeisaiH1504Div h1504div = shokujiMeisai
+                    .getShokanShikyuTorokuShomeishoShokujiMeisaiH1504();
             h1504div.getTxtShokujihiShuruiCode().setValue(new RString(source.get("サービス種類コード").toString()));
             h1504div.getTxtShokujihiServiceCode().setValue(new RString(source.get("サービスコード").toString()));
             h1504div.getTxtShokujihiServiceName().setValue(new RString(source.get("サービス名称").toString()));
@@ -1161,10 +1251,13 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void initShokujiMeisaiData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoShokujiDiv shokuji = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShokuji();
-        ShokanShikyuTorokuShomeishoShokujiMeisaiDiv shokujiMeisai = shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai();
+        ShokanShikyuTorokuShomeishoShokujiDiv shokuji = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoShokuji();
+        ShokanShikyuTorokuShomeishoShokujiMeisaiDiv shokujiMeisai = shokuji
+                .getShokanShikyuTorokuShomeishoShokujiMeisai();
         shokujiMeisai.getTxtShokujiSelectedIndex().setValue(new RString("-1"));
-        ShokanShikyuTorokuShomeishoShokujiMeisaiH1503Div h1503div = shokujiMeisai.getShokanShikyuTorokuShomeishoShokujiMeisaiH1503();
+        ShokanShikyuTorokuShomeishoShokujiMeisaiH1503Div h1503div = shokujiMeisai
+                .getShokanShikyuTorokuShomeishoShokujiMeisaiH1503();
         h1503div.getTxtShokujihiKihonNissu().clearValue();
         h1503div.getTxtShokujihiKihonTanka().clearValue();
         h1503div.getTxtShokujihiKihonKingaku().clearValue();
@@ -1176,7 +1269,8 @@ public class ShokanShikyuTorokuShomeisho {
         h1503div.getTxtShokujihiTeikyoGokei().clearValue();
         h1503div.getTxtShokujihiFutanGetsugaku().clearValue();
         h1503div.getTxtShokujihiSeikyugaku().clearValue();
-        ShokanShikyuTorokuShomeishoShokujiMeisaiH1504Div h1504div = shokujiMeisai.getShokanShikyuTorokuShomeishoShokujiMeisaiH1504();
+        ShokanShikyuTorokuShomeishoShokujiMeisaiH1504Div h1504div = shokujiMeisai
+                .getShokanShikyuTorokuShomeishoShokujiMeisaiH1504();
         h1504div.getTxtShokujihiShuruiCode().clearValue();
         h1504div.getTxtShokujihiServiceCode().clearValue();
         h1504div.getTxtShokujihiServiceName().clearValue();
@@ -1186,16 +1280,22 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void kakuteiShokujiMeisaiData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoShokujiDiv shokuji = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShokuji();
-        ShokanShikyuTorokuShomeishoShokujiListDiv shokujiList = shokuji.getShokanShikyuTorokuShomeishoShokujiList();
-        ShokanShikyuTorokuShomeishoShokujiMeisaiDiv shokujiMeisai = shokuji.getShokanShikyuTorokuShomeishoShokujiMeisai();
+        ShokanShikyuTorokuShomeishoShokujiDiv shokuji = panel
+                .getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShokuji();
+        ShokanShikyuTorokuShomeishoShokujiListDiv shokujiList = shokuji
+                .getShokanShikyuTorokuShomeishoShokujiList();
+        ShokanShikyuTorokuShomeishoShokujiMeisaiDiv shokujiMeisai = shokuji
+                .getShokanShikyuTorokuShomeishoShokujiMeisai();
         int index = Integer.parseInt(shokujiMeisai.getTxtShokujiSelectedIndex().getValue().toString());
 
         RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
         if (date.isBefore(食事費用切替.H1504.getDate())) {
-            ShokanShikyuTorokuShomeishoShokujiMeisaiH1503Div h1503div = shokujiMeisai.getShokanShikyuTorokuShomeishoShokujiMeisaiH1503();
-            ServiceTeikyoShomeishoShokujiListH1503Div shokujiH1503List = shokujiList.getShokanShikyuTorokuShomeishoShokujiListInfoH1503();
-            DataGrid<dgServiceTeikyoShomeishoShokujiListH1503_Row> dgRow = shokujiH1503List.getDgServiceTeikyoShomeishoShokujiListH1503();
+            ShokanShikyuTorokuShomeishoShokujiMeisaiH1503Div h1503div = shokujiMeisai
+                    .getShokanShikyuTorokuShomeishoShokujiMeisaiH1503();
+            ServiceTeikyoShomeishoShokujiListH1503Div shokujiH1503List = shokujiList
+                    .getShokanShikyuTorokuShomeishoShokujiListInfoH1503();
+            DataGrid<dgServiceTeikyoShomeishoShokujiListH1503_Row> dgRow = shokujiH1503List
+                    .getDgServiceTeikyoShomeishoShokujiListH1503();
             List<dgServiceTeikyoShomeishoShokujiListH1503_Row> dgRowList = dgRow.getDataSource();
             dgServiceTeikyoShomeishoShokujiListH1503_Row itemH1503 = create食事費用一覧H1503アイテム(
                     h1503div.getTxtShokujihiKihonNissu().getValue().toString(),
@@ -1220,9 +1320,12 @@ public class ShokanShikyuTorokuShomeisho {
             dgRow.setDataSource(dgRowList);
 
         } else {
-            ShokanShikyuTorokuShomeishoShokujiMeisaiH1504Div h1504div = shokujiMeisai.getShokanShikyuTorokuShomeishoShokujiMeisaiH1504();
-            ServiceTeikyoShomeishoShokujiListDiv shokujiH1504List = shokujiList.getShokanShikyuTorokuShomeishoShokujiListInfo();
-            DataGrid<dgServiceTeikyoShomeishoShokujiList_Row> dgRow = shokujiH1504List.getDgServiceTeikyoShomeishoShokujiList();
+            ShokanShikyuTorokuShomeishoShokujiMeisaiH1504Div h1504div = shokujiMeisai
+                    .getShokanShikyuTorokuShomeishoShokujiMeisaiH1504();
+            ServiceTeikyoShomeishoShokujiListDiv shokujiH1504List = shokujiList
+                    .getShokanShikyuTorokuShomeishoShokujiListInfo();
+            DataGrid<dgServiceTeikyoShomeishoShokujiList_Row> dgRow = shokujiH1504List
+                    .getDgServiceTeikyoShomeishoShokujiList();
             List<dgServiceTeikyoShomeishoShokujiList_Row> dgRowList = dgRow.getDataSource();
             dgServiceTeikyoShomeishoShokujiList_Row itemH1504 = create食事費用一覧H1504アイテム(
                     h1504div.getTxtShokujihiShuruiCode().getValue().toString().
@@ -1246,16 +1349,20 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void set食事費用合計(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoShokujiDiv shokuji = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShokuji();
-        ServiceTeikyoShomeishoShokujiListDiv shokujiH1504List = shokuji.getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfo();
-        ShokanShikyuTorokuShomeishoShokujiGokeiDiv shokujiGokei = shokuji.getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiGokei();
+        ShokanShikyuTorokuShomeishoShokujiDiv shokuji = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoShokuji();
+        ServiceTeikyoShomeishoShokujiListDiv shokujiH1504List = shokuji
+                .getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiListInfo();
+        ShokanShikyuTorokuShomeishoShokujiGokeiDiv shokujiGokei = shokuji
+                .getShokanShikyuTorokuShomeishoShokujiList().getShokanShikyuTorokuShomeishoShokujiGokei();
         Integer nobeNissu = 0;
         Integer futanNichigaku;
         Integer futanGetsugaku;
         Integer teikyoGokei = 0;
         Integer seikyuGokei;
 
-        for (dgServiceTeikyoShomeishoShokujiList_Row item : shokujiH1504List.getDgServiceTeikyoShomeishoShokujiList().getDataSource()) {
+        for (dgServiceTeikyoShomeishoShokujiList_Row item : shokujiH1504List
+                .getDgServiceTeikyoShomeishoShokujiList().getDataSource()) {
             nobeNissu = nobeNissu + Integer.parseInt(item.getTxtNissuKaisu().toString());
             teikyoGokei = teikyoGokei + Integer.parseInt(item.getTxtKingaku().toString());
         }
@@ -1401,7 +1508,8 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void showKeikaku(ShokanShikyuTorokuShomeishoDiv panel, 一覧明細表示 show) {
-        ShokanShikyuTorokuShomeishoKeikakuDiv keikaku = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoKeikaku();
+        ShokanShikyuTorokuShomeishoKeikakuDiv keikaku = panel
+                .getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoKeikaku();
         ShokanShikyuTorokuShomeishoKeikakuH2103Div h2103Div = keikaku.getShokanShikyuTorokuShomeishoKeikakuH2103();
         ShokanShikyuTorokuShomeishoKeikakuH2104Div h2104Div = keikaku.getShokanShikyuTorokuShomeishoKeikakuH2104();
         RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
@@ -1427,13 +1535,19 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void setKeikakuData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoKeikakuDiv keikaku = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoKeikaku();
-        ShokanShikyuTorokuShomeishoKeikakuH2103Div keikakuH2103 = keikaku.getShokanShikyuTorokuShomeishoKeikakuH2103();
-        ShokanShikyuTorokuShomeishoKeikakuH2104Div keikakuH2104 = keikaku.getShokanShikyuTorokuShomeishoKeikakuH2104();
-        ShokanShikyuTorokuShomeishoKeikakuListDiv keikakuH2104List = keikakuH2104.getShokanShikyuTorokuShomeishoKeikakuList();
-        ServiceTeikyoShomeishoKeikakuListDiv keikakuH2104ListList = keikakuH2104List.getShokanShikyuTorokuShomeishoKeikakuListInfo();
+        ShokanShikyuTorokuShomeishoKeikakuDiv keikaku = panel
+                .getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoKeikaku();
+        ShokanShikyuTorokuShomeishoKeikakuH2103Div keikakuH2103 = keikaku
+                .getShokanShikyuTorokuShomeishoKeikakuH2103();
+        ShokanShikyuTorokuShomeishoKeikakuH2104Div keikakuH2104 = keikaku
+                .getShokanShikyuTorokuShomeishoKeikakuH2104();
+        ShokanShikyuTorokuShomeishoKeikakuListDiv keikakuH2104List = keikakuH2104
+                .getShokanShikyuTorokuShomeishoKeikakuList();
+        ServiceTeikyoShomeishoKeikakuListDiv keikakuH2104ListList = keikakuH2104List
+                .getShokanShikyuTorokuShomeishoKeikakuListInfo();
 
-        DataGrid<dgShokanShikyuTorokuShomeishoKeikakuList_Row> dgRowH2104 = keikakuH2104ListList.getDgShokanShikyuTorokuShomeishoKeikakuList();
+        DataGrid<dgShokanShikyuTorokuShomeishoKeikakuList_Row> dgRowH2104 = keikakuH2104ListList
+                .getDgShokanShikyuTorokuShomeishoKeikakuList();
         List<dgShokanShikyuTorokuShomeishoKeikakuList_Row> dgRowListH2104 = dgRowH2104.getDataSource();
 
         List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml"));
@@ -1473,10 +1587,13 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void deleteKeikakuListData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoKeikakuH2104Div keikakuH2104 = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoKeikaku().getShokanShikyuTorokuShomeishoKeikakuH2104();
-        ServiceTeikyoShomeishoKeikakuListDiv keikakuH2104List = keikakuH2104.getShokanShikyuTorokuShomeishoKeikakuList().getShokanShikyuTorokuShomeishoKeikakuListInfo();
+        ShokanShikyuTorokuShomeishoKeikakuH2104Div keikakuH2104 = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoKeikaku().getShokanShikyuTorokuShomeishoKeikakuH2104();
+        ServiceTeikyoShomeishoKeikakuListDiv keikakuH2104List = keikakuH2104
+                .getShokanShikyuTorokuShomeishoKeikakuList().getShokanShikyuTorokuShomeishoKeikakuListInfo();
 
-        DataGrid<dgShokanShikyuTorokuShomeishoKeikakuList_Row> dgRowH2104 = keikakuH2104List.getDgShokanShikyuTorokuShomeishoKeikakuList();
+        DataGrid<dgShokanShikyuTorokuShomeishoKeikakuList_Row> dgRowH2104 = keikakuH2104List
+                .getDgShokanShikyuTorokuShomeishoKeikakuList();
         List<dgShokanShikyuTorokuShomeishoKeikakuList_Row> dgRowListH2104 = dgRowH2104.getDataSource();
 
         int index = dgRowH2104.getClickedRowId();
@@ -1490,12 +1607,14 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void setKeikakuMeisaiData(ShokanShikyuTorokuShomeishoDiv panel, イベント event) {
-        ShokanShikyuTorokuShomeishoKeikakuH2104Div keikakuH2104 = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoKeikaku().getShokanShikyuTorokuShomeishoKeikakuH2104();
+        ShokanShikyuTorokuShomeishoKeikakuH2104Div keikakuH2104 = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoKeikaku().getShokanShikyuTorokuShomeishoKeikakuH2104();
         ShokanShikyuTorokuShomeishoKeikakuMeisaiDiv keikakuH2104Meisai = keikakuH2104.getShokanShikyuTorokuShomeishoKeikakuMeisai();
         if (event.equals(イベント.追加)) {
             keikakuH2104Meisai.getTxtKeikakuSelectedIndex().setValue(new RString("-1"));
         } else {
-            int index = keikakuH2104.getShokanShikyuTorokuShomeishoKeikakuList().getShokanShikyuTorokuShomeishoKeikakuListInfo().getDgShokanShikyuTorokuShomeishoKeikakuList().getActiveRowId();
+            int index = keikakuH2104.getShokanShikyuTorokuShomeishoKeikakuList()
+                    .getShokanShikyuTorokuShomeishoKeikakuListInfo().getDgShokanShikyuTorokuShomeishoKeikakuList().getActiveRowId();
             keikakuH2104Meisai.getTxtKeikakuSelectedIndex().setValue(new RString(String.valueOf(index)));
         }
         RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
@@ -1512,8 +1631,10 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void initKeikakuMeisaiData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoKeikakuH2104Div keikakuH2104 = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoKeikaku().getShokanShikyuTorokuShomeishoKeikakuH2104();
-        ShokanShikyuTorokuShomeishoKeikakuMeisaiDiv keikakuH2104Meisai = keikakuH2104.getShokanShikyuTorokuShomeishoKeikakuMeisai();
+        ShokanShikyuTorokuShomeishoKeikakuH2104Div keikakuH2104 = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoKeikaku().getShokanShikyuTorokuShomeishoKeikakuH2104();
+        ShokanShikyuTorokuShomeishoKeikakuMeisaiDiv keikakuH2104Meisai = keikakuH2104
+                .getShokanShikyuTorokuShomeishoKeikakuMeisai();
         keikakuH2104Meisai.getTxtKeikakuSelectedIndex().setValue(new RString("-1"));
         keikakuH2104Meisai.getTxtKeikakuhiShuruiCodeH2104().clearValue();
         keikakuH2104Meisai.getTxtKeikakuhiServiceCodeH2104().clearValue();
@@ -1525,12 +1646,15 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void kakuteiKeikakuMeisaiData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoKeikakuH2104Div keikakuH2104 = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoKeikaku().getShokanShikyuTorokuShomeishoKeikakuH2104();
-        ServiceTeikyoShomeishoKeikakuListDiv keikakuH2104List = keikakuH2104.getShokanShikyuTorokuShomeishoKeikakuList().getShokanShikyuTorokuShomeishoKeikakuListInfo();
+        ShokanShikyuTorokuShomeishoKeikakuH2104Div keikakuH2104 = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoKeikaku().getShokanShikyuTorokuShomeishoKeikakuH2104();
+        ServiceTeikyoShomeishoKeikakuListDiv keikakuH2104List = keikakuH2104
+                .getShokanShikyuTorokuShomeishoKeikakuList().getShokanShikyuTorokuShomeishoKeikakuListInfo();
         ShokanShikyuTorokuShomeishoKeikakuMeisaiDiv keikakuH2104Meisai = keikakuH2104.getShokanShikyuTorokuShomeishoKeikakuMeisai();
         int index = Integer.parseInt(keikakuH2104Meisai.getTxtKeikakuSelectedIndex().getValue().toString());
 
-        DataGrid<dgShokanShikyuTorokuShomeishoKeikakuList_Row> dgRow = keikakuH2104List.getDgShokanShikyuTorokuShomeishoKeikakuList();
+        DataGrid<dgShokanShikyuTorokuShomeishoKeikakuList_Row> dgRow = keikakuH2104List
+                .getDgShokanShikyuTorokuShomeishoKeikakuList();
         List<dgShokanShikyuTorokuShomeishoKeikakuList_Row> dgRowList = dgRow.getDataSource();
         dgShokanShikyuTorokuShomeishoKeikakuList_Row itemH2104 = create計画費一覧H2104アイテム(
                 keikakuH2104Meisai.getTxtKeikakuhiShuruiCodeH2104().getValue().toString().
@@ -1553,15 +1677,20 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void set計画費合計(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoKeikakuDiv keikaku = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoKeikaku();
-        ShokanShikyuTorokuShomeishoKeikakuH2104Div keikakuH2104 = keikaku.getShokanShikyuTorokuShomeishoKeikakuH2104();
-        ShokanShikyuTorokuShomeishoKeikakuListDiv keikakuH2104List = keikakuH2104.getShokanShikyuTorokuShomeishoKeikakuList();
-        ServiceTeikyoShomeishoKeikakuListDiv keikakuH2104ListList = keikakuH2104List.getShokanShikyuTorokuShomeishoKeikakuListInfo();
+        ShokanShikyuTorokuShomeishoKeikakuDiv keikaku = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoKeikaku();
+        ShokanShikyuTorokuShomeishoKeikakuH2104Div keikakuH2104 = keikaku
+                .getShokanShikyuTorokuShomeishoKeikakuH2104();
+        ShokanShikyuTorokuShomeishoKeikakuListDiv keikakuH2104List = keikakuH2104
+                .getShokanShikyuTorokuShomeishoKeikakuList();
+        ServiceTeikyoShomeishoKeikakuListDiv keikakuH2104ListList = keikakuH2104List
+                .getShokanShikyuTorokuShomeishoKeikakuListInfo();
 
         Integer gokei = 0;
         Integer seikyu = 0;
 
-        for (dgShokanShikyuTorokuShomeishoKeikakuList_Row item : keikakuH2104ListList.getDgShokanShikyuTorokuShomeishoKeikakuList().getDataSource()) {
+        for (dgShokanShikyuTorokuShomeishoKeikakuList_Row item : keikakuH2104ListList
+                .getDgShokanShikyuTorokuShomeishoKeikakuList().getDataSource()) {
             gokei = gokei + Integer.parseInt(item.getTxtTanisu().toString());
             seikyu = seikyu + Integer.parseInt(item.getTxtServiceTanisu().toString());
         }
@@ -1669,9 +1798,11 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void setShukeiListData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoShukeiDiv shukei = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShukei();
+        ShokanShikyuTorokuShomeishoShukeiDiv shukei = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoShukei();
         ShokanShikyuTorokuShomeishoShukeiListDiv list = shukei.getShokanShikyuTorokuShomeishoShukeiList();
-        DataGrid<dgServiceTeikyoShomeishoShukeiList_Row> dgRow = list.getShokanShikyuTorokuShomeishoShukeiListInfo().getDgServiceTeikyoShomeishoShukeiList();
+        DataGrid<dgServiceTeikyoShomeishoShukeiList_Row> dgRow = list.getShokanShikyuTorokuShomeishoShukeiListInfo()
+                .getDgServiceTeikyoShomeishoShukeiList();
         List<dgServiceTeikyoShomeishoShukeiList_Row> dgRowList = dgRow.getDataSource();
 
         List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml"));
@@ -1690,10 +1821,12 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void deleteShukeiListData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoShukeiDiv shukei = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShukei();
+        ShokanShikyuTorokuShomeishoShukeiDiv shukei = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoShukei();
         ShokanShikyuTorokuShomeishoShukeiListDiv list = shukei.getShokanShikyuTorokuShomeishoShukeiList();
 
-        DataGrid<dgServiceTeikyoShomeishoShukeiList_Row> dgRow = list.getShokanShikyuTorokuShomeishoShukeiListInfo().getDgServiceTeikyoShomeishoShukeiList();
+        DataGrid<dgServiceTeikyoShomeishoShukeiList_Row> dgRow = list
+                .getShokanShikyuTorokuShomeishoShukeiListInfo().getDgServiceTeikyoShomeishoShukeiList();
         List<dgServiceTeikyoShomeishoShukeiList_Row> dgRowList = dgRow.getDataSource();
 
         int index = dgRow.getClickedRowId();
@@ -1712,7 +1845,8 @@ public class ShokanShikyuTorokuShomeisho {
         if (event.equals(イベント.追加)) {
             meisai.getTxtShukeiSelectedIndex().setValue(new RString("-1"));
         } else {
-            int index = shukei.getShokanShikyuTorokuShomeishoShukeiList().getShokanShikyuTorokuShomeishoShukeiListInfo().getDgServiceTeikyoShomeishoShukeiList().getActiveRowId();
+            int index = shukei.getShokanShikyuTorokuShomeishoShukeiList().getShokanShikyuTorokuShomeishoShukeiListInfo()
+                    .getDgServiceTeikyoShomeishoShukeiList().getActiveRowId();
             meisai.getTxtShukeiSelectedIndex().setValue(new RString(String.valueOf(index)));
         }
         HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(40);
@@ -1778,13 +1912,15 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void kakuteiShukeiMeisaiData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoShukeiDiv shukei = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShukei();
+        ShokanShikyuTorokuShomeishoShukeiDiv shukei = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoShukei();
         ShokanShikyuTorokuShomeishoShukeiListDiv list = shukei.getShokanShikyuTorokuShomeishoShukeiList();
         ShokanShikyuTorokuShomeishoShukeiMeisaiDiv meisai = shukei.getShokanShikyuTorokuShomeishoShukeiMeisai();
 
         int index = Integer.parseInt(meisai.getTxtShukeiSelectedIndex().getValue().toString());
 
-        DataGrid<dgServiceTeikyoShomeishoShukeiList_Row> dgRow = list.getShokanShikyuTorokuShomeishoShukeiListInfo().getDgServiceTeikyoShomeishoShukeiList();
+        DataGrid<dgServiceTeikyoShomeishoShukeiList_Row> dgRow = list.getShokanShikyuTorokuShomeishoShukeiListInfo()
+                .getDgServiceTeikyoShomeishoShukeiList();
         List<dgServiceTeikyoShomeishoShukeiList_Row> dgRowList = dgRow.getDataSource();
 
         ShokanShikyuTorokuShomeishoShukeiHokenDiv hoken = meisai.getShokanShikyuTorokuShomeishoShukeiHoken();
@@ -1895,7 +2031,8 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void showNyusho(ShokanShikyuTorokuShomeishoDiv panel, 一覧明細表示 show) {
-        ShokanShikyuTorokuShomeishoNyushoDiv nyusho = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoNyusho();
+        ShokanShikyuTorokuShomeishoNyushoDiv nyusho = panel
+                .getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoNyusho();
         ShokanShikyuTorokuShomeishoNyushoListDiv list = nyusho.getShokanShikyuTorokuShomeishoNyushoList();
         ShokanShikyuTorokuShomeishoNyushoMeisaiDiv meisai = nyusho.getShokanShikyuTorokuShomeishoNyushoMeisai();
 
@@ -1909,9 +2046,11 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void setNyushoListData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoNyushoDiv nyusho = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoNyusho();
+        ShokanShikyuTorokuShomeishoNyushoDiv nyusho = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoNyusho();
         ShokanShikyuTorokuShomeishoNyushoListDiv list = nyusho.getShokanShikyuTorokuShomeishoNyushoList();
-        DataGrid<dgServiceTeikyoShomeishoNyushoList_Row> dgRow = list.getShokanShikyuTorokuShomeishoNyushoListInfo().getDgServiceTeikyoShomeishoNyushoList();
+        DataGrid<dgServiceTeikyoShomeishoNyushoList_Row> dgRow = list
+                .getShokanShikyuTorokuShomeishoNyushoListInfo().getDgServiceTeikyoShomeishoNyushoList();
         List<dgServiceTeikyoShomeishoNyushoList_Row> dgRowList = dgRow.getDataSource();
 
         List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml"));
@@ -1931,10 +2070,12 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void deleteNyushoListData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoNyushoDiv nyusho = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoNyusho();
+        ShokanShikyuTorokuShomeishoNyushoDiv nyusho = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoNyusho();
         ShokanShikyuTorokuShomeishoNyushoListDiv list = nyusho.getShokanShikyuTorokuShomeishoNyushoList();
 
-        DataGrid<dgServiceTeikyoShomeishoNyushoList_Row> dgRow = list.getShokanShikyuTorokuShomeishoNyushoListInfo().getDgServiceTeikyoShomeishoNyushoList();
+        DataGrid<dgServiceTeikyoShomeishoNyushoList_Row> dgRow = list
+                .getShokanShikyuTorokuShomeishoNyushoListInfo().getDgServiceTeikyoShomeishoNyushoList();
         List<dgServiceTeikyoShomeishoNyushoList_Row> dgRowList = dgRow.getDataSource();
 
         int index = dgRow.getClickedRowId();
@@ -1953,7 +2094,8 @@ public class ShokanShikyuTorokuShomeisho {
         if (event.equals(イベント.追加)) {
             meisai.getTxtNyushoSelectedIndex().setValue(new RString("-1"));
         } else {
-            int index = nyusho.getShokanShikyuTorokuShomeishoNyushoList().getShokanShikyuTorokuShomeishoNyushoListInfo().getDgServiceTeikyoShomeishoNyushoList().getActiveRowId();
+            int index = nyusho.getShokanShikyuTorokuShomeishoNyushoList().getShokanShikyuTorokuShomeishoNyushoListInfo()
+                    .getDgServiceTeikyoShomeishoNyushoList().getActiveRowId();
             meisai.getTxtNyushoSelectedIndex().setValue(new RString(String.valueOf(index)));
         }
         HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(44);
@@ -1985,13 +2127,15 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void kakuteiNyushoMeisaiData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoNyushoDiv nyusho = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoNyusho();
+        ShokanShikyuTorokuShomeishoNyushoDiv nyusho = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoNyusho();
         ShokanShikyuTorokuShomeishoNyushoListDiv list = nyusho.getShokanShikyuTorokuShomeishoNyushoList();
         ShokanShikyuTorokuShomeishoNyushoMeisaiDiv meisai = nyusho.getShokanShikyuTorokuShomeishoNyushoMeisai();
 
         int index = Integer.parseInt(meisai.getTxtNyushoSelectedIndex().getValue().toString());
 
-        DataGrid<dgServiceTeikyoShomeishoNyushoList_Row> dgRow = list.getShokanShikyuTorokuShomeishoNyushoListInfo().getDgServiceTeikyoShomeishoNyushoList();
+        DataGrid<dgServiceTeikyoShomeishoNyushoList_Row> dgRow = list
+                .getShokanShikyuTorokuShomeishoNyushoListInfo().getDgServiceTeikyoShomeishoNyushoList();
         List<dgServiceTeikyoShomeishoNyushoList_Row> dgRowList = dgRow.getDataSource();
 
         dgServiceTeikyoShomeishoNyushoList_Row item = create特定入所者費用一覧アイテム(
@@ -2105,7 +2249,8 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void showShafuku(ShokanShikyuTorokuShomeishoDiv panel, 一覧明細表示 show) {
-        ShokanShikyuTorokuShomeishoShafukuDiv shafuku = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShafuku();
+        ShokanShikyuTorokuShomeishoShafukuDiv shafuku = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoShafuku();
         ShokanShikyuTorokuShomeishoShafukuListDiv list = shafuku.getShokanShikyuTorokuShomeishoShafukuList();
         ShokanShikyuTorokuShomeishoShafukuMeisaiDiv meisai = shafuku.getShokanShikyuTorokuShomeishoShafukuMeisai();
 
@@ -2119,9 +2264,11 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void setShafukuListData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoShafukuDiv shafuku = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShafuku();
+        ShokanShikyuTorokuShomeishoShafukuDiv shafuku = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoShafuku();
         ShokanShikyuTorokuShomeishoShafukuListDiv list = shafuku.getShokanShikyuTorokuShomeishoShafukuList();
-        DataGrid<dgServiceTeikyoShomeishoShafukuList_Row> dgRow = list.getShokanShikyuTorokuShomeishoShafukuListInfo().getDgServiceTeikyoShomeishoShafukuList();
+        DataGrid<dgServiceTeikyoShomeishoShafukuList_Row> dgRow = list.getShokanShikyuTorokuShomeishoShafukuListInfo()
+                .getDgServiceTeikyoShomeishoShafukuList();
         List<dgServiceTeikyoShomeishoShafukuList_Row> dgRowList = dgRow.getDataSource();
 
         List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml"));
@@ -2139,10 +2286,12 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void deleteShafukuListData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoShafukuDiv shafuku = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShafuku();
+        ShokanShikyuTorokuShomeishoShafukuDiv shafuku = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoShafuku();
         ShokanShikyuTorokuShomeishoShafukuListDiv list = shafuku.getShokanShikyuTorokuShomeishoShafukuList();
 
-        DataGrid<dgServiceTeikyoShomeishoShafukuList_Row> dgRow = list.getShokanShikyuTorokuShomeishoShafukuListInfo().getDgServiceTeikyoShomeishoShafukuList();
+        DataGrid<dgServiceTeikyoShomeishoShafukuList_Row> dgRow = list
+                .getShokanShikyuTorokuShomeishoShafukuListInfo().getDgServiceTeikyoShomeishoShafukuList();
         List<dgServiceTeikyoShomeishoShafukuList_Row> dgRowList = dgRow.getDataSource();
 
         int index = dgRow.getClickedRowId();
@@ -2156,12 +2305,14 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void setShafukuMeisaiData(ShokanShikyuTorokuShomeishoDiv panel, イベント event) {
-        ShokanShikyuTorokuShomeishoShafukuDiv shafuku = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShafuku();
+        ShokanShikyuTorokuShomeishoShafukuDiv shafuku = panel
+                .getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShafuku();
         ShokanShikyuTorokuShomeishoShafukuMeisaiDiv meisai = shafuku.getShokanShikyuTorokuShomeishoShafukuMeisai();
         if (event.equals(イベント.追加)) {
             meisai.getTxtShafukuSelectedIndex().setValue(new RString("-1"));
         } else {
-            int index = shafuku.getShokanShikyuTorokuShomeishoShafukuList().getShokanShikyuTorokuShomeishoShafukuListInfo().getDgServiceTeikyoShomeishoShafukuList().getActiveRowId();
+            int index = shafuku.getShokanShikyuTorokuShomeishoShafukuList()
+                    .getShokanShikyuTorokuShomeishoShafukuListInfo().getDgServiceTeikyoShomeishoShafukuList().getActiveRowId();
             meisai.getTxtShafukuSelectedIndex().setValue(new RString(String.valueOf(index)));
         }
         HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(48);
@@ -2172,7 +2323,8 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void initShafukuMeisaiData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoShafukuDiv shafuku = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShafuku();
+        ShokanShikyuTorokuShomeishoShafukuDiv shafuku = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoShafuku();
         ShokanShikyuTorokuShomeishoShafukuMeisaiDiv meisai = shafuku.getShokanShikyuTorokuShomeishoShafukuMeisai();
         meisai.getTxtShafukuSelectedIndex().setValue(new RString("-1"));
 
@@ -2183,13 +2335,15 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void kakuteiShafukuMeisaiData(ShokanShikyuTorokuShomeishoDiv panel) {
-        ShokanShikyuTorokuShomeishoShafukuDiv shafuku = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShafuku();
+        ShokanShikyuTorokuShomeishoShafukuDiv shafuku = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoShafuku();
         ShokanShikyuTorokuShomeishoShafukuListDiv list = shafuku.getShokanShikyuTorokuShomeishoShafukuList();
         ShokanShikyuTorokuShomeishoShafukuMeisaiDiv meisai = shafuku.getShokanShikyuTorokuShomeishoShafukuMeisai();
 
         int index = Integer.parseInt(meisai.getTxtShafukuSelectedIndex().getValue().toString());
 
-        DataGrid<dgServiceTeikyoShomeishoShafukuList_Row> dgRow = list.getShokanShikyuTorokuShomeishoShafukuListInfo().getDgServiceTeikyoShomeishoShafukuList();
+        DataGrid<dgServiceTeikyoShomeishoShafukuList_Row> dgRow = list.getShokanShikyuTorokuShomeishoShafukuListInfo()
+                .getDgServiceTeikyoShomeishoShafukuList();
         List<dgServiceTeikyoShomeishoShafukuList_Row> dgRowList = dgRow.getDataSource();
 
         dgServiceTeikyoShomeishoShafukuList_Row item = create社福軽減額一覧アイテム(
