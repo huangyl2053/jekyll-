@@ -21,10 +21,10 @@ public class OperationForShinsakaiListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnToDelite")
-    private Button btnToDelite;
-    @JsonProperty("btnKaisaiNoSaiban")
-    private Button btnKaisaiNoSaiban;
+    @JsonProperty("btnToDelete")
+    private Button btnToDelete;
+    @JsonProperty("btnNumberingKaisaiNo")
+    private Button btnNumberingKaisaiNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,24 +32,24 @@ public class OperationForShinsakaiListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("btnToDelite")
-    public Button getBtnToDelite() {
-        return btnToDelite;
+    @JsonProperty("btnToDelete")
+    public Button getBtnToDelete() {
+        return btnToDelete;
     }
 
-    @JsonProperty("btnToDelite")
-    public void setBtnToDelite(Button btnToDelite) {
-        this.btnToDelite=btnToDelite;
+    @JsonProperty("btnToDelete")
+    public void setBtnToDelete(Button btnToDelete) {
+        this.btnToDelete=btnToDelete;
     }
 
-    @JsonProperty("btnKaisaiNoSaiban")
-    public Button getBtnKaisaiNoSaiban() {
-        return btnKaisaiNoSaiban;
+    @JsonProperty("btnNumberingKaisaiNo")
+    public Button getBtnNumberingKaisaiNo() {
+        return btnNumberingKaisaiNo;
     }
 
-    @JsonProperty("btnKaisaiNoSaiban")
-    public void setBtnKaisaiNoSaiban(Button btnKaisaiNoSaiban) {
-        this.btnKaisaiNoSaiban=btnKaisaiNoSaiban;
+    @JsonProperty("btnNumberingKaisaiNo")
+    public void setBtnNumberingKaisaiNo(Button btnNumberingKaisaiNo) {
+        this.btnNumberingKaisaiNo=btnNumberingKaisaiNo;
     }
 
 }

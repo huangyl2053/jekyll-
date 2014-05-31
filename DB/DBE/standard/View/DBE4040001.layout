@@ -209,7 +209,7 @@
        "onKeyPress": "",
        "suggest": [],
        "value": "",
-       "displayFormat": 0,
+       "displayFormat": 1,
        "timeKubun": 1,
        "permitCharactor": ""
       },
@@ -277,7 +277,7 @@
        "onKeyPress": "",
        "suggest": [],
        "value": "",
-       "displayFormat": 0,
+       "displayFormat": 1,
        "timeKubun": 1,
        "permitCharactor": ""
       },
@@ -877,7 +877,7 @@
            }
           ]
          },
-         "height": "S",
+         "height": "180",
          "onSort": "",
          "onSelect": "",
          "onSelectByDblClick": "",
@@ -906,7 +906,7 @@
        "marginRight": "XS",
        "selectControlID": "Gogitai",
        "onLoad": "",
-       "title": "審査員",
+       "title": "",
        "isOpen": true,
        "canOpenAndClose": false,
        "postParameterPanelNames": [
@@ -952,7 +952,7 @@
          "marginRight": "XS",
          "selectControlID": "btnToRegister",
          "text": "スケジュールを登録する",
-         "onClick": "",
+         "onClick": "onClick_btnToRegister",
          "appearance": 0,
          "imageFileUrl": "",
          "imageWidth": "",
@@ -1017,7 +1017,7 @@
      "marginRight": "XS",
      "selectControlID": "Schedule",
      "onLoad": "",
-     "title": "スケジュール",
+     "title": "",
      "isOpen": true,
      "canOpenAndClose": false,
      "postParameterPanelNames": [
@@ -1025,7 +1025,12 @@
        "postParameterPanelNames": "Schedule"
       }
      ],
-     "requestSettings": [],
+     "requestSettings": [
+      {
+       "eventName": "onLoad",
+       "requestUrl": ""
+      }
+     ],
      "hiddenInput": [],
      "onOpen": "",
      "onClose": "",
@@ -1048,7 +1053,7 @@
        "fieldName": "OperationForShinsakaiList",
        "items": [
         {
-         "fieldName": "btnToDelite",
+         "fieldName": "btnToDelete",
          "items": [],
          "controlType": "Button",
          "width": "M",
@@ -1064,9 +1069,9 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "btnToDelite",
+         "selectControlID": "btnToDelete",
          "text": "選択した審査会を削除する",
-         "onClick": "",
+         "onClick": "onClick_btnToDelete",
          "appearance": 0,
          "imageFileUrl": "",
          "imageWidth": "",
@@ -1074,7 +1079,7 @@
          "icon": 0
         },
         {
-         "fieldName": "btnKaisaiNoSaiban",
+         "fieldName": "btnNumberingKaisaiNo",
          "items": [],
          "controlType": "Button",
          "width": "M",
@@ -1090,9 +1095,9 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "btnKaisaiNoSaiban",
+         "selectControlID": "btnNumberingKaisaiNo",
          "text": "開催番号を採番する",
-         "onClick": "",
+         "onClick": "onClick_btnNumberingKaisaiNo",
          "appearance": 0,
          "imageFileUrl": "",
          "imageWidth": "",
@@ -1177,7 +1182,7 @@
           "dataName": "shinsakaiNo",
           "toolTip": "",
           "bgColor": 0,
-          "width": 110,
+          "width": 100,
           "visible": true,
           "cellType": 0,
           "cellDetails": null,
@@ -1191,7 +1196,7 @@
           "dataName": "kaisaiDate",
           "toolTip": "",
           "bgColor": 0,
-          "width": 110,
+          "width": 90,
           "visible": true,
           "cellType": 7,
           "cellDetails": {
@@ -1210,7 +1215,7 @@
           "dataName": "startTime",
           "toolTip": "",
           "bgColor": 0,
-          "width": 90,
+          "width": 80,
           "visible": true,
           "cellType": 0,
           "cellDetails": {
@@ -1226,7 +1231,7 @@
           "dataName": "endTime",
           "toolTip": "",
           "bgColor": 0,
-          "width": 90,
+          "width": 80,
           "visible": true,
           "cellType": 0,
           "cellDetails": {
@@ -1242,7 +1247,7 @@
           "dataName": "kaisaiBasho",
           "toolTip": "",
           "bgColor": 0,
-          "width": 150,
+          "width": 120,
           "visible": true,
           "cellType": 0,
           "cellDetails": {
@@ -1258,7 +1263,7 @@
           "dataName": "gogitai",
           "toolTip": "",
           "bgColor": 0,
-          "width": 150,
+          "width": 90,
           "visible": true,
           "cellType": 0,
           "cellDetails": {
@@ -1274,7 +1279,7 @@
           "dataName": "yoteiTeiin",
           "toolTip": "",
           "bgColor": 0,
-          "width": 70,
+          "width": 60,
           "visible": true,
           "cellType": 0,
           "cellDetails": null,
@@ -1288,7 +1293,7 @@
           "dataName": "maxTeiin",
           "toolTip": "",
           "bgColor": 0,
-          "width": 70,
+          "width": 60,
           "visible": true,
           "cellType": 0,
           "cellDetails": null,
@@ -1298,11 +1303,11 @@
           "sortKey": "maxTeiin"
          },
          {
-          "columnName": "自動割当<br>定員",
+          "columnName": "自動<br>定員",
           "dataName": "autoBindTeiin",
           "toolTip": "",
           "bgColor": 0,
-          "width": 70,
+          "width": 60,
           "visible": true,
           "cellType": 0,
           "cellDetails": null,
@@ -1313,14 +1318,14 @@
          }
         ]
        },
-       "height": "250",
+       "height": "200",
        "onSort": "",
        "onSelect": "",
        "onSelectByDblClick": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
-       "sortOrder": "yoteiTeiin",
+       "sortOrder": "kaisaiBasho",
        "isAscending": true,
        "filterList": [],
        "activeRowId": -1
@@ -1368,7 +1373,7 @@
      "marginRight": "XS",
      "selectControlID": "ShinsakaiList",
      "onLoad": "",
-     "title": "審査会一覧",
+     "title": "審査会",
      "isOpen": true,
      "canOpenAndClose": true,
      "postParameterPanelNames": [
@@ -1409,7 +1414,7 @@
    "marginRight": "XS",
    "selectControlID": "ShinakaiScheduleEntry",
    "onLoad": "",
-   "title": "審査会開催予定登録",
+   "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
@@ -1417,7 +1422,28 @@
      "postParameterPanelNames": "ShinakaiScheduleEntry"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onChange_ddlGogitai",
+     "requestUrl": "dbe/db/dbe/ShinsakaiScheduleEntity/onChange_ddlGogitai"
+    },
+    {
+     "eventName": "onClick_btnToRegister",
+     "requestUrl": "dbe/db/dbe/ShinsakaiScheduleEntity/onClick_btnToRegister"
+    },
+    {
+     "eventName": "onClick_btnNumberingKaisaiNo",
+     "requestUrl": "dbe/db/dbe/ShinsakaiScheduleEntity/onClick_btnNumberingKaisaiNo"
+    },
+    {
+     "eventName": "onClick_btnToDelete",
+     "requestUrl": "dbe/db/dbe/ShinsakaiScheduleEntity/onClick_btnToDelete"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
