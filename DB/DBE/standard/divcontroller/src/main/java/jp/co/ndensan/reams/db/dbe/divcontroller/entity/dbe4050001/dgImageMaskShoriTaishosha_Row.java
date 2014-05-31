@@ -1,9 +1,9 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4050001;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu May 08 16:34:20 JST 2014 
+ * Sat May 31 14:58:06 JST 2014 
  */
 
 
@@ -11,6 +11,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 
 /**
@@ -25,16 +26,18 @@ public class dgImageMaskShoriTaishosha_Row extends DataRow {
     private RString 保険者;
     private RString 被保番号;
     private RString 氏名;
-    private RString 申請日;
+    private TextBoxFlexibleDate 申請日;
     private RString 申請区分;
-    private RString 審査予定日;
+    private TextBoxFlexibleDate 審査予定日;
     private RString マスク区分;
+    private TextBoxFlexibleDate 意見書受領日;
+    private TextBoxFlexibleDate 調査票受領日;
 
     public dgImageMaskShoriTaishosha_Row() {
         super();
     }
 
-    public dgImageMaskShoriTaishosha_Row(Button 処理, RString 保険者, RString 被保番号, RString 氏名, RString 申請日, RString 申請区分, RString 審査予定日, RString マスク区分) {
+    public dgImageMaskShoriTaishosha_Row(Button 処理, RString 保険者, RString 被保番号, RString 氏名, TextBoxFlexibleDate 申請日, RString 申請区分, TextBoxFlexibleDate 審査予定日, RString マスク区分, TextBoxFlexibleDate 意見書受領日, TextBoxFlexibleDate 調査票受領日) {
         super();
         this.setOriginalData("処理", 処理);
         this.setOriginalData("保険者", 保険者);
@@ -44,6 +47,8 @@ public class dgImageMaskShoriTaishosha_Row extends DataRow {
         this.setOriginalData("申請区分", 申請区分);
         this.setOriginalData("審査予定日", 審査予定日);
         this.setOriginalData("マスク区分", マスク区分);
+        this.setOriginalData("意見書受領日", 意見書受領日);
+        this.setOriginalData("調査票受領日", 調査票受領日);
         this.処理 = 処理;
         this.保険者 = 保険者;
         this.被保番号 = 被保番号;
@@ -52,6 +57,8 @@ public class dgImageMaskShoriTaishosha_Row extends DataRow {
         this.申請区分 = 申請区分;
         this.審査予定日 = 審査予定日;
         this.マスク区分 = マスク区分;
+        this.意見書受領日 = 意見書受領日;
+        this.調査票受領日 = 調査票受領日;
     }
 
     public Button get処理() {
@@ -70,7 +77,7 @@ public class dgImageMaskShoriTaishosha_Row extends DataRow {
         return 氏名;
     }
 
-    public RString get申請日() {
+    public TextBoxFlexibleDate get申請日() {
         return 申請日;
     }
 
@@ -78,12 +85,20 @@ public class dgImageMaskShoriTaishosha_Row extends DataRow {
         return 申請区分;
     }
 
-    public RString get審査予定日() {
+    public TextBoxFlexibleDate get審査予定日() {
         return 審査予定日;
     }
 
     public RString getマスク区分() {
         return マスク区分;
+    }
+
+    public TextBoxFlexibleDate get意見書受領日() {
+        return 意見書受領日;
+    }
+
+    public TextBoxFlexibleDate get調査票受領日() {
+        return 調査票受領日;
     }
 
     public void set処理(Button 処理) {
@@ -106,7 +121,7 @@ public class dgImageMaskShoriTaishosha_Row extends DataRow {
         this.氏名 = 氏名;
     }
 
-    public void set申請日(RString 申請日) {
+    public void set申請日(TextBoxFlexibleDate 申請日) {
         this.setOriginalData("申請日", 申請日);
         this.申請日 = 申請日;
     }
@@ -116,7 +131,7 @@ public class dgImageMaskShoriTaishosha_Row extends DataRow {
         this.申請区分 = 申請区分;
     }
 
-    public void set審査予定日(RString 審査予定日) {
+    public void set審査予定日(TextBoxFlexibleDate 審査予定日) {
         this.setOriginalData("審査予定日", 審査予定日);
         this.審査予定日 = 審査予定日;
     }
@@ -124,6 +139,16 @@ public class dgImageMaskShoriTaishosha_Row extends DataRow {
     public void setマスク区分(RString マスク区分) {
         this.setOriginalData("マスク区分", マスク区分);
         this.マスク区分 = マスク区分;
+    }
+
+    public void set意見書受領日(TextBoxFlexibleDate 意見書受領日) {
+        this.setOriginalData("意見書受領日", 意見書受領日);
+        this.意見書受領日 = 意見書受領日;
+    }
+
+    public void set調査票受領日(TextBoxFlexibleDate 調査票受領日) {
+        this.setOriginalData("調査票受領日", 調査票受領日);
+        this.調査票受領日 = 調査票受領日;
     }
 
 }

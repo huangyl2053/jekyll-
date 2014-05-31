@@ -1,15 +1,10 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4050001;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.tplImage01Div;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.tplImage02Div;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.tplImage03Div;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.tplImage04Div;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.tplImage05Div;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
 
 /**
