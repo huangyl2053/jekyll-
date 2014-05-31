@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceTeikyoShomeishoShi
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceTeikyoShomeishoShinryoListH1503Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceTeikyoShomeishoShokujiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceTeikyoShomeishoShokujiListH1503Div;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceTeikyoShomeishoShukeiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoKeikakuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoKeikakuH2103Div;
@@ -27,6 +26,9 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeis
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoKihonNyutaishoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoMeisaiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoMeisaiMeisaiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoNyushoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoNyushoListDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoNyushoMeisaiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoRyoyoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoRyoyoKinkyujiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoRyoyoMeisaiDiv;
@@ -52,6 +54,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeis
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShukeiMeisaiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShukeiTankiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoMeisaiList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoNyushoList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoRyoyoList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoShinryoListH1503_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoShinryoList_Row;
@@ -104,6 +107,7 @@ public class ShokanShikyuTorokuShomeisho {
         setShokujiListData(panel);
         setKeikakuData(panel);
         setShukeiListData(panel);
+        setNyushoListData(panel);
 
         showKyufuhi(panel, 一覧明細表示.一覧表示);
         showRyoyo(panel, 一覧明細表示.一覧表示);
@@ -111,6 +115,7 @@ public class ShokanShikyuTorokuShomeisho {
         showShokuji(panel, 一覧明細表示.一覧表示);
         showKeikaku(panel, 一覧明細表示.一覧表示);
         showShukei(panel, 一覧明細表示.一覧表示);
+        showNyusho(panel, 一覧明細表示.一覧表示);
 
         response.data = panel;
         return response;
@@ -133,6 +138,7 @@ public class ShokanShikyuTorokuShomeisho {
         setShokujiListData(panel);
         setKeikakuData(panel);
         setShukeiListData(panel);
+        setNyushoListData(panel);
 
         showKyufuhi(panel, 一覧明細表示.一覧表示);
         showRyoyo(panel, 一覧明細表示.一覧表示);
@@ -140,6 +146,7 @@ public class ShokanShikyuTorokuShomeisho {
         showShokuji(panel, 一覧明細表示.一覧表示);
         showKeikaku(panel, 一覧明細表示.一覧表示);
         showShukei(panel, 一覧明細表示.一覧表示);
+        showNyusho(panel, 一覧明細表示.一覧表示);
 
         response.data = panel;
         return response;
@@ -1816,4 +1823,214 @@ public class ShokanShikyuTorokuShomeisho {
                 new RString(txtShinsaHoho));
     }
     // !!!!!!!!!!!!!!!!!!!!!!↑↑ここまで請求額集計タブに関連するコード↑↑!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    // !!!!!!!!!!!!!!!!!!!!!!↓↓ここから特定入所者費用タブに関連するコード↓↓!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    /**
+     * サービス提供証明書情報の特定入所者費用タブで明細情報を追加するボタンを押下したときの処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<ShokanShikyuTorokuShomeishoDiv> onClickAddNyushoMeisai(ShokanShikyuTorokuShomeishoDiv panel) {
+        ResponseData<ShokanShikyuTorokuShomeishoDiv> response = new ResponseData<>();
+
+        setNyushoMeisaiData(panel, イベント.追加);
+        showNyusho(panel, 一覧明細表示.明細表示);
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * サービス提供証明書情報の特定入所者費用タブで、一覧から行を選択したときの処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<ShokanShikyuTorokuShomeishoDiv> onSelectedNyushoList(ShokanShikyuTorokuShomeishoDiv panel) {
+        ResponseData<ShokanShikyuTorokuShomeishoDiv> response = new ResponseData<>();
+
+        setNyushoMeisaiData(panel, イベント.選択);
+        showNyusho(panel, 一覧明細表示.明細表示);
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * サービス提供証明書情報の特定入所者費用タブで、一覧の行の削除ボタンを押下したときの処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<ShokanShikyuTorokuShomeishoDiv> onClickNyushoListDelete(ShokanShikyuTorokuShomeishoDiv panel) {
+        ResponseData<ShokanShikyuTorokuShomeishoDiv> response = new ResponseData<>();
+
+        deleteNyushoListData(panel);
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * サービス提供証明書情報の特定入所者費用タブで入力内容を確定するボタンを押下したときの処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<ShokanShikyuTorokuShomeishoDiv> onClickNyushoKakutei(ShokanShikyuTorokuShomeishoDiv panel) {
+        ResponseData<ShokanShikyuTorokuShomeishoDiv> response = new ResponseData<>();
+
+        kakuteiNyushoMeisaiData(panel);
+        initNyushoMeisaiData(panel);
+        showNyusho(panel, 一覧明細表示.一覧表示);
+        response.data = panel;
+        return response;
+    }
+
+    private void showNyusho(ShokanShikyuTorokuShomeishoDiv panel, 一覧明細表示 show) {
+        ShokanShikyuTorokuShomeishoNyushoDiv nyusho = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoNyusho();
+        ShokanShikyuTorokuShomeishoNyushoListDiv list = nyusho.getShokanShikyuTorokuShomeishoNyushoList();
+        ShokanShikyuTorokuShomeishoNyushoMeisaiDiv meisai = nyusho.getShokanShikyuTorokuShomeishoNyushoMeisai();
+
+        if (show.equals(一覧明細表示.一覧表示)) {
+            list.setIsOpen(true);
+            meisai.setIsOpen(false);
+        } else if (show.equals(一覧明細表示.明細表示)) {
+            list.setIsOpen(false);
+            meisai.setIsOpen(true);
+        }
+    }
+
+    private void setNyushoListData(ShokanShikyuTorokuShomeishoDiv panel) {
+        ShokanShikyuTorokuShomeishoNyushoDiv nyusho = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoNyusho();
+        ShokanShikyuTorokuShomeishoNyushoListDiv list = nyusho.getShokanShikyuTorokuShomeishoNyushoList();
+        DataGrid<dgServiceTeikyoShomeishoNyushoList_Row> dgRow = list.getShokanShikyuTorokuShomeishoNyushoListInfo().getDgServiceTeikyoShomeishoNyushoList();
+        List<dgServiceTeikyoShomeishoNyushoList_Row> dgRowList = dgRow.getDataSource();
+
+        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml"));
+        dgRowList.clear();
+        for (int i = 41; i < 44; i++) {
+            dgRowList.add(create特定入所者費用一覧アイテム(
+                    sourceList.get(i).get("サービス").toString(),
+                    sourceList.get(i).get("費用単価").toString(),
+                    sourceList.get(i).get("負担限度額").toString(),
+                    sourceList.get(i).get("日数").toString(),
+                    sourceList.get(i).get("費用額").toString(),
+                    sourceList.get(i).get("保険分請求額").toString(),
+                    sourceList.get(i).get("利用者負担額").toString()
+            ));
+        }
+        dgRow.setDataSource(dgRowList);
+    }
+
+    private void deleteNyushoListData(ShokanShikyuTorokuShomeishoDiv panel) {
+        ShokanShikyuTorokuShomeishoNyushoDiv nyusho = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoNyusho();
+        ShokanShikyuTorokuShomeishoNyushoListDiv list = nyusho.getShokanShikyuTorokuShomeishoNyushoList();
+
+        DataGrid<dgServiceTeikyoShomeishoNyushoList_Row> dgRow = list.getShokanShikyuTorokuShomeishoNyushoListInfo().getDgServiceTeikyoShomeishoNyushoList();
+        List<dgServiceTeikyoShomeishoNyushoList_Row> dgRowList = dgRow.getDataSource();
+
+        int index = dgRow.getClickedRowId();
+
+        dgServiceTeikyoShomeishoNyushoList_Row item = dgRow.getClickedItem();
+        item.setRowState(RowState.Deleted);
+        dgRowList.remove(index);
+        dgRowList.add(index, item);
+
+        dgRow.setDataSource(dgRowList);
+    }
+
+    private void setNyushoMeisaiData(ShokanShikyuTorokuShomeishoDiv panel, イベント event) {
+        ShokanShikyuTorokuShomeishoNyushoDiv nyusho = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoNyusho();
+        ShokanShikyuTorokuShomeishoNyushoMeisaiDiv meisai = nyusho.getShokanShikyuTorokuShomeishoNyushoMeisai();
+        if (event.equals(イベント.追加)) {
+            meisai.getTxtNyushoSelectedIndex().setValue(new RString("-1"));
+        } else {
+            int index = nyusho.getShokanShikyuTorokuShomeishoNyushoList().getShokanShikyuTorokuShomeishoNyushoListInfo().getDgServiceTeikyoShomeishoNyushoList().getActiveRowId();
+            meisai.getTxtNyushoSelectedIndex().setValue(new RString(String.valueOf(index)));
+        }
+        HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(44);
+        meisai.getTxtNyushohiShuruiCode().setValue(new RString(source.get("サービス種類コード").toString()));
+        meisai.getTxtNyushohiServiceCode().setValue(new RString(source.get("サービスコード").toString()));
+        meisai.getTxtNyushohiServiceName().setValue(new RString(source.get("サービス名").toString()));
+        meisai.getTxtNyushohiHiyoTanka().setValue(new Decimal(source.get("費用単価").toString()));
+        meisai.getTxtNyushohiFutanGendogaku().setValue(new Decimal(source.get("負担限度額").toString()));
+        meisai.getTxtNyushohiNissu().setValue(new Decimal(source.get("日数").toString()));
+        meisai.getTxtNyushohiHiyogaku().setValue(new Decimal(source.get("費用額").toString()));
+        meisai.getTxtNyushohiHokengaku().setValue(new Decimal(source.get("保険分請求額").toString()));
+        meisai.getTxtNyushohiFutangaku().setValue(new Decimal(source.get("利用者負担額").toString()));
+    }
+
+    private void initNyushoMeisaiData(ShokanShikyuTorokuShomeishoDiv panel) {
+        ShokanShikyuTorokuShomeishoNyushoDiv nyusho = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoNyusho();
+        ShokanShikyuTorokuShomeishoNyushoMeisaiDiv meisai = nyusho.getShokanShikyuTorokuShomeishoNyushoMeisai();
+        meisai.getTxtNyushoSelectedIndex().setValue(new RString("-1"));
+
+        meisai.getTxtNyushohiShuruiCode().clearValue();
+        meisai.getTxtNyushohiServiceCode().clearValue();
+        meisai.getTxtNyushohiServiceName().clearValue();
+        meisai.getTxtNyushohiHiyoTanka().clearValue();
+        meisai.getTxtNyushohiFutangaku().clearValue();
+        meisai.getTxtNyushohiNissu().clearValue();
+        meisai.getTxtNyushohiHiyogaku().clearValue();
+        meisai.getTxtNyushohiHokengaku().clearValue();
+        meisai.getTxtNyushohiFutangaku().clearValue();
+    }
+
+    private void kakuteiNyushoMeisaiData(ShokanShikyuTorokuShomeishoDiv panel) {
+        ShokanShikyuTorokuShomeishoNyushoDiv nyusho = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoNyusho();
+        ShokanShikyuTorokuShomeishoNyushoListDiv list = nyusho.getShokanShikyuTorokuShomeishoNyushoList();
+        ShokanShikyuTorokuShomeishoNyushoMeisaiDiv meisai = nyusho.getShokanShikyuTorokuShomeishoNyushoMeisai();
+
+        int index = Integer.parseInt(meisai.getTxtNyushoSelectedIndex().getValue().toString());
+
+        DataGrid<dgServiceTeikyoShomeishoNyushoList_Row> dgRow = list.getShokanShikyuTorokuShomeishoNyushoListInfo().getDgServiceTeikyoShomeishoNyushoList();
+        List<dgServiceTeikyoShomeishoNyushoList_Row> dgRowList = dgRow.getDataSource();
+
+        dgServiceTeikyoShomeishoNyushoList_Row item = create特定入所者費用一覧アイテム(
+                meisai.getTxtNyushohiShuruiCode().getValue().toString().
+                concat(meisai.getTxtNyushohiServiceCode().getValue().toString()).
+                concat(":").
+                concat(meisai.getTxtNyushohiServiceName().getValue().toString()),
+                meisai.getTxtNyushohiHiyoTanka().getValue().toString(),
+                meisai.getTxtNyushohiFutanGendogaku().getValue().toString(),
+                meisai.getTxtNyushohiNissu().getValue().toString(),
+                meisai.getTxtNyushohiHiyogaku().getValue().toString(),
+                meisai.getTxtNyushohiHokengaku().getValue().toString(),
+                meisai.getTxtNyushohiFutangaku().getValue().toString());
+        if (index == -1) {
+            item.setRowState(RowState.Added);
+            dgRowList.add(item);
+        } else {
+            item.setRowState(RowState.Modified);
+            dgRowList.remove(index);
+            dgRowList.add(index, item);
+        }
+        dgRow.setDataSource(dgRowList);
+    }
+
+    private dgServiceTeikyoShomeishoNyushoList_Row create特定入所者費用一覧アイテム(
+            String txtService,
+            String txtHiyoTanka,
+            String txtFutanGendogaku,
+            String txtNissu,
+            String txtHiyogaku,
+            String txtHokengaku,
+            String txtRiyoshaFutangaku
+    ) {
+        Button btnSelect = new Button();
+        Button btnEdit = new Button();
+        Button btnDelete = new Button();
+
+        return new dgServiceTeikyoShomeishoNyushoList_Row(
+                btnSelect,
+                btnEdit,
+                btnDelete,
+                new RString(txtService),
+                new RString(txtHiyoTanka),
+                new RString(txtFutanGendogaku),
+                new RString(txtNissu),
+                new RString(txtHiyogaku),
+                new RString(txtHokengaku),
+                new RString(txtRiyoshaFutangaku));
+    }
+    // !!!!!!!!!!!!!!!!!!!!!!↑↑ここまで特定入所者費用タブに関連するコード↑↑!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
