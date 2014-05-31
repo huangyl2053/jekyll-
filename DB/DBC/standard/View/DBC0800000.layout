@@ -11306,7 +11306,7 @@
            "dialogCancelEventNameForDialog": "",
            "AddButtonVisible": true,
            "AddButtonDisplayNone": false,
-           "AddButtonOnClick": "",
+           "AddButtonOnClick": "onClickAddShukeiMeisai",
            "MeisaiListGridSetting": {
             "rowHeight": 25,
             "isMultiSelectable": false,
@@ -11331,7 +11331,7 @@
               "cellDetails": {
                "cellType": 8,
                "text": "選",
-               "onClick": "",
+               "onClick": "onSelectedShukeiList",
                "imageFileUrl": "",
                "imageWidth": "",
                "imageHeight": ""
@@ -11373,7 +11373,7 @@
               "cellDetails": {
                "cellType": 8,
                "text": "削",
-               "onClick": "",
+               "onClick": "onClickShukeiListDelete",
                "imageFileUrl": "",
                "imageWidth": "",
                "imageHeight": ""
@@ -12589,12 +12589,55 @@
            "marginRight": "XS",
            "selectControlID": "btnShukeiKakutei",
            "text": "入力内容を確定する",
-           "onClick": "",
+           "onClick": "onClickShukeiKakutei",
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
            "imageHeight": "",
            "icon": 0
+          },
+          {
+           "fieldName": "txtShukeiSelectedIndex",
+           "items": [],
+           "controlType": "TextBox",
+           "width": "0",
+           "visible": false,
+           "displayNone": true,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": false,
+           "dependencies": [],
+           "float": 2,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "selectControlID": "txtShukeiSelectedIndex_core",
+           "required": false,
+           "text": "",
+           "isPrivateInfo": false,
+           "readOnly": false,
+           "placeHolder": "",
+           "isPassword": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
+           "onKeyPress": "",
+           "labelLText": "",
+           "labelRText": "",
+           "labelLWidth": "S",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
+           "value": "",
+           "maxLength": 100000000,
+           "minLength": 0,
+           "textAlign": 0,
+           "textKind": 0,
+           "isComboBox": false,
+           "suggest": [],
+           "permitCharactor": ""
           }
          ],
          "controlType": "Panel",
@@ -14086,7 +14129,7 @@
       "ShokanShikyuTorokuShomeishoShafuku"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "ShokanShikyuTorokuShomeishoKeikaku",
+     "selectedItemFieldName": "ShokanShikyuTorokuShomeishoShukei",
      "initialTab": 0
     }
    ],
@@ -14206,6 +14249,22 @@
     {
      "eventName": "onClickKeikakuKakutei",
      "requestUrl": "dbc/db/dbc/ShokanShikyuTorokuShomeisho/onClickKeikakuKakutei"
+    },
+    {
+     "eventName": "onClickAddShukeiMeisai",
+     "requestUrl": "dbc/db/dbc/ShokanShikyuTorokuShomeisho/onClickAddShukeiMeisai"
+    },
+    {
+     "eventName": "onSelectedShukeiList",
+     "requestUrl": "dbc/db/dbc/ShokanShikyuTorokuShomeisho/onSelectedShukeiList"
+    },
+    {
+     "eventName": "onClickShukeiListDelete",
+     "requestUrl": "dbc/db/dbc/ShokanShikyuTorokuShomeisho/onClickShukeiListDelete"
+    },
+    {
+     "eventName": "onClickShukeiKakutei",
+     "requestUrl": "dbc/db/dbc/ShokanShikyuTorokuShomeisho/onClickShukeiKakutei"
     }
    ],
    "hiddenInput": [],

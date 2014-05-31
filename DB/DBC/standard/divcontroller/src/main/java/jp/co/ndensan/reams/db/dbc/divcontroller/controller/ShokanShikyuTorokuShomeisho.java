@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceTeikyoShomeishoShi
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceTeikyoShomeishoShinryoListH1503Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceTeikyoShomeishoShokujiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceTeikyoShomeishoShokujiListH1503Div;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceTeikyoShomeishoShukeiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoKeikakuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoKeikakuH2103Div;
@@ -43,12 +44,20 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeis
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShokujiMeisaiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShokujiMeisaiH1503Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShokujiMeisaiH1504Div;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShukeiDekidakaDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShukeiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShukeiGendogakuDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShukeiHokenDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShukeiListDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShukeiMeisaiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShukeiTankiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoMeisaiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoRyoyoList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoShinryoListH1503_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoShinryoList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoShokujiListH1503_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoShokujiList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoShukeiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgShokanShikyuTorokuShomeishoKeikakuList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -94,12 +103,14 @@ public class ShokanShikyuTorokuShomeisho {
         setShinryoListData(panel);
         setShokujiListData(panel);
         setKeikakuData(panel);
+        setShukeiListData(panel);
 
         showKyufuhi(panel, 一覧明細表示.一覧表示);
         showRyoyo(panel, 一覧明細表示.一覧表示);
         showShinryo(panel, 一覧明細表示.一覧表示);
         showShokuji(panel, 一覧明細表示.一覧表示);
         showKeikaku(panel, 一覧明細表示.一覧表示);
+        showShukei(panel, 一覧明細表示.一覧表示);
 
         response.data = panel;
         return response;
@@ -121,12 +132,14 @@ public class ShokanShikyuTorokuShomeisho {
         setShinryoListData(panel);
         setShokujiListData(panel);
         setKeikakuData(panel);
+        setShukeiListData(panel);
 
         showKyufuhi(panel, 一覧明細表示.一覧表示);
         showRyoyo(panel, 一覧明細表示.一覧表示);
         showShinryo(panel, 一覧明細表示.一覧表示);
         showShokuji(panel, 一覧明細表示.一覧表示);
         showKeikaku(panel, 一覧明細表示.一覧表示);
+        showShukei(panel, 一覧明細表示.一覧表示);
 
         response.data = panel;
         return response;
@@ -434,7 +447,7 @@ public class ShokanShikyuTorokuShomeisho {
         List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml"));
         dgRowList.clear();
         for (int i = 8; i < 11; i++) {
-            dgRowList.add(create療養費明細一覧アイテム(
+            dgRowList.add(create療養費一覧アイテム(
                     sourceList.get(i).get("所定疾患傷病名１").toString(),
                     sourceList.get(i).get("療養開始日１").toString(),
                     sourceList.get(i).get("所定疾患施設療養費合計").toString(),
@@ -558,7 +571,7 @@ public class ShokanShikyuTorokuShomeisho {
         List<dgServiceTeikyoShomeishoRyoyoList_Row> dgRowList = dgRow.getDataSource();
         int index = Integer.parseInt(ryoyoMeisai.getTxtRyoyoSelectedIndex().getValue().toString());
 
-        dgServiceTeikyoShomeishoRyoyoList_Row item = create療養費明細一覧アイテム(
+        dgServiceTeikyoShomeishoRyoyoList_Row item = create療養費一覧アイテム(
                 ryoyoMeisai.getShokanShikyuTorokuShomeishoRyoyoShikkan().getTxtRyoyohiShikkanName1().getValue().toString(),
                 ryoyoMeisai.getShokanShikyuTorokuShomeishoRyoyoShikkan().getTxtRyoyohiRyoyoKaishiYMD1().getValue().wareki().toDateString().toString(),
                 ryoyoMeisai.getShokanShikyuTorokuShomeishoRyoyoTensu().getTxtRyoyohiRyoyohiShokei().getValue().toString(),
@@ -578,7 +591,7 @@ public class ShokanShikyuTorokuShomeisho {
         dgRow.setDataSource(dgRowList);
     }
 
-    private dgServiceTeikyoShomeishoRyoyoList_Row create療養費明細一覧アイテム(
+    private dgServiceTeikyoShomeishoRyoyoList_Row create療養費一覧アイテム(
             String txtShoteiShikkanName,
             String txtRyoyoKaishiYMD,
             String txtShoteiShikkanGokei,
@@ -725,7 +738,7 @@ public class ShokanShikyuTorokuShomeisho {
         List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml"));
         dgRowListH1503.clear();
         for (int i = 15; i < 18; i++) {
-            dgRowListH1503.add(create特定診療費明細一覧H1503アイテム(
+            dgRowListH1503.add(create特定診療費一覧H1503アイテム(
                     sourceList.get(i).get("傷病名").toString(),
                     sourceList.get(i).get("指導管理").toString(),
                     sourceList.get(i).get("リハビリ").toString(),
@@ -740,7 +753,7 @@ public class ShokanShikyuTorokuShomeisho {
 
         dgRowListH1504.clear();
         for (int i = 18; i < 21; i++) {
-            dgRowListH1504.add(create特定診療費明細一覧H1504アイテム(
+            dgRowListH1504.add(create特定診療費一覧H1504アイテム(
                     sourceList.get(i).get("傷病名").toString(),
                     sourceList.get(i).get("識別番号").toString(),
                     sourceList.get(i).get("単位数").toString(),
@@ -837,7 +850,7 @@ public class ShokanShikyuTorokuShomeisho {
             ServiceTeikyoShomeishoShinryoListH1503Div shinryoH1503List = shinryoList.getShokanShikyuTorokuShomeishoShinryoListInfoH1503();
             DataGrid<dgServiceTeikyoShomeishoShinryoListH1503_Row> dgRow = shinryoH1503List.getDgServiceTeikyoShomeishoShinryoListH1503();
             List<dgServiceTeikyoShomeishoShinryoListH1503_Row> dgRowList = dgRow.getDataSource();
-            dgServiceTeikyoShomeishoShinryoListH1503_Row itemH1503 = create特定診療費明細一覧H1503アイテム(
+            dgServiceTeikyoShomeishoShinryoListH1503_Row itemH1503 = create特定診療費一覧H1503アイテム(
                     h1503div.getTxtShinryohiShobyoNameH1503().getValue().toString(),
                     h1503div.getTxtShinryohiShidoKanri().getValue().toString(),
                     h1503div.getTxtShinryohiRehabili().getValue().toString(),
@@ -861,7 +874,7 @@ public class ShokanShikyuTorokuShomeisho {
             ServiceTeikyoShomeishoShinryoListDiv shinryoH1504List = shinryoList.getShokanShikyuTorokuShomeishoShinryoListInfo();
             DataGrid<dgServiceTeikyoShomeishoShinryoList_Row> dgRow = shinryoH1504List.getDgServiceTeikyoShomeishoShinryoList();
             List<dgServiceTeikyoShomeishoShinryoList_Row> dgRowList = dgRow.getDataSource();
-            dgServiceTeikyoShomeishoShinryoList_Row itemH1504 = create特定診療費明細一覧H1504アイテム(
+            dgServiceTeikyoShomeishoShinryoList_Row itemH1504 = create特定診療費一覧H1504アイテム(
                     h1504div.getTxtShinryohiShobyoNameH1504().getValue().toString(),
                     h1504div.getTxtShinryohiShikibetsuNo().getValue().toString().concat(":").concat(h1504div.getTxtShinryohiShikibetsuName().getValue().toString()),
                     h1504div.getTxtShinryohiTanisu().getValue().toString(),
@@ -879,7 +892,7 @@ public class ShokanShikyuTorokuShomeisho {
         }
     }
 
-    private dgServiceTeikyoShomeishoShinryoListH1503_Row create特定診療費明細一覧H1503アイテム(
+    private dgServiceTeikyoShomeishoShinryoListH1503_Row create特定診療費一覧H1503アイテム(
             String txtShobyoName,
             String txtShidoKanri,
             String txtRehabili,
@@ -906,7 +919,7 @@ public class ShokanShikyuTorokuShomeisho {
                 new RString(txtGokei));
     }
 
-    private dgServiceTeikyoShomeishoShinryoList_Row create特定診療費明細一覧H1504アイテム(
+    private dgServiceTeikyoShomeishoShinryoList_Row create特定診療費一覧H1504アイテム(
             String txtShobyoName,
             String txtShikibetsuNo,
             String txtTanisu,
@@ -1050,7 +1063,7 @@ public class ShokanShikyuTorokuShomeisho {
         List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml"));
         dgRowListH1503.clear();
         for (int i = 23; i < 26; i++) {
-            dgRowListH1503.add(create食事費用明細一覧H1503アイテム(
+            dgRowListH1503.add(create食事費用一覧H1503アイテム(
                     sourceList.get(i).get("基本食日数").toString(),
                     sourceList.get(i).get("基本食単価").toString(),
                     sourceList.get(i).get("基本食金額").toString(),
@@ -1068,7 +1081,7 @@ public class ShokanShikyuTorokuShomeisho {
 
         dgRowListH1504.clear();
         for (int i = 26; i < 29; i++) {
-            dgRowListH1504.add(create食事費用明細一覧H1504アイテム(
+            dgRowListH1504.add(create食事費用一覧H1504アイテム(
                     sourceList.get(i).get("サービス").toString(),
                     sourceList.get(i).get("単位数").toString(),
                     sourceList.get(i).get("日数回数").toString(),
@@ -1168,7 +1181,7 @@ public class ShokanShikyuTorokuShomeisho {
             ServiceTeikyoShomeishoShokujiListH1503Div shokujiH1503List = shokujiList.getShokanShikyuTorokuShomeishoShokujiListInfoH1503();
             DataGrid<dgServiceTeikyoShomeishoShokujiListH1503_Row> dgRow = shokujiH1503List.getDgServiceTeikyoShomeishoShokujiListH1503();
             List<dgServiceTeikyoShomeishoShokujiListH1503_Row> dgRowList = dgRow.getDataSource();
-            dgServiceTeikyoShomeishoShokujiListH1503_Row itemH1503 = create食事費用明細一覧H1503アイテム(
+            dgServiceTeikyoShomeishoShokujiListH1503_Row itemH1503 = create食事費用一覧H1503アイテム(
                     h1503div.getTxtShokujihiKihonNissu().getValue().toString(),
                     h1503div.getTxtShokujihiKihonTanka().getValue().toString(),
                     h1503div.getTxtShokujihiKihonKingaku().getValue().toString(),
@@ -1195,7 +1208,7 @@ public class ShokanShikyuTorokuShomeisho {
             ServiceTeikyoShomeishoShokujiListDiv shokujiH1504List = shokujiList.getShokanShikyuTorokuShomeishoShokujiListInfo();
             DataGrid<dgServiceTeikyoShomeishoShokujiList_Row> dgRow = shokujiH1504List.getDgServiceTeikyoShomeishoShokujiList();
             List<dgServiceTeikyoShomeishoShokujiList_Row> dgRowList = dgRow.getDataSource();
-            dgServiceTeikyoShomeishoShokujiList_Row itemH1504 = create食事費用明細一覧H1504アイテム(
+            dgServiceTeikyoShomeishoShokujiList_Row itemH1504 = create食事費用一覧H1504アイテム(
                     h1504div.getTxtShokujihiShuruiCode().getValue().toString().
                     concat(h1504div.getTxtShokujihiServiceCode().getValue().toString()).concat(":").
                     concat(h1504div.getTxtShokujihiServiceName().getValue().toString()),
@@ -1242,7 +1255,7 @@ public class ShokanShikyuTorokuShomeisho {
 
     }
 
-    private dgServiceTeikyoShomeishoShokujiListH1503_Row create食事費用明細一覧H1503アイテム(
+    private dgServiceTeikyoShomeishoShokujiListH1503_Row create食事費用一覧H1503アイテム(
             String txtKihonNissu,
             String txtKihonTanka,
             String txtKihonKingaku,
@@ -1274,7 +1287,7 @@ public class ShokanShikyuTorokuShomeisho {
                 new RString(txtSeikyugaku));
     }
 
-    private dgServiceTeikyoShomeishoShokujiList_Row create食事費用明細一覧H1504アイテム(
+    private dgServiceTeikyoShomeishoShokujiList_Row create食事費用一覧H1504アイテム(
             String txtService,
             String txtTanisu,
             String txtNissuKaisu,
@@ -1431,7 +1444,7 @@ public class ShokanShikyuTorokuShomeisho {
             keikakuH2104List.getTxtKeikakuhiSeikyuKingakuH2104().setValue(new Decimal(source.get("請求金額").toString()));
             dgRowListH2104.clear();
             for (int i = 33; i < 36; i++) {
-                dgRowListH2104.add(create計画費明細一覧H2104アイテム(
+                dgRowListH2104.add(create計画費一覧H2104アイテム(
                         sourceList.get(i).get("サービス").toString(),
                         sourceList.get(i).get("単位数").toString(),
                         sourceList.get(i).get("回数").toString(),
@@ -1503,7 +1516,7 @@ public class ShokanShikyuTorokuShomeisho {
 
         DataGrid<dgShokanShikyuTorokuShomeishoKeikakuList_Row> dgRow = keikakuH2104List.getDgShokanShikyuTorokuShomeishoKeikakuList();
         List<dgShokanShikyuTorokuShomeishoKeikakuList_Row> dgRowList = dgRow.getDataSource();
-        dgShokanShikyuTorokuShomeishoKeikakuList_Row itemH2104 = create計画費明細一覧H2104アイテム(
+        dgShokanShikyuTorokuShomeishoKeikakuList_Row itemH2104 = create計画費一覧H2104アイテム(
                 keikakuH2104Meisai.getTxtKeikakuhiShuruiCodeH2104().getValue().toString().
                 concat(keikakuH2104Meisai.getTxtKeikakuhiServiceCodeH2104().getValue().toString()).concat(":").
                 concat(keikakuH2104Meisai.getTxtKeikakuhiServiceNameH2104().getValue().toString()),
@@ -1541,7 +1554,7 @@ public class ShokanShikyuTorokuShomeisho {
         keikakuH2104List.getTxtKeikakuhiSeikyuKingakuH2104().setValue(new Decimal(seikyu));
     }
 
-    private dgShokanShikyuTorokuShomeishoKeikakuList_Row create計画費明細一覧H2104アイテム(
+    private dgShokanShikyuTorokuShomeishoKeikakuList_Row create計画費一覧H2104アイテム(
             String txtService,
             String txtTanisu,
             String txtKaisu,
@@ -1563,4 +1576,244 @@ public class ShokanShikyuTorokuShomeisho {
                 new RString(txtTekiyo));
     }
     // !!!!!!!!!!!!!!!!!!!!!!↑↑ここまで計画費タブに関連するコード↑↑!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    // !!!!!!!!!!!!!!!!!!!!!!↓↓ここから請求額集計タブに関連するコード↓↓!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    /**
+     * サービス提供証明書情報の請求額集計タブで明細情報を追加するボタンを押下したときの処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<ShokanShikyuTorokuShomeishoDiv> onClickAddShukeiMeisai(ShokanShikyuTorokuShomeishoDiv panel) {
+        ResponseData<ShokanShikyuTorokuShomeishoDiv> response = new ResponseData<>();
+
+        setShukeiMeisaiData(panel, イベント.追加);
+        showShukei(panel, 一覧明細表示.明細表示);
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * サービス提供証明書情報の請求額集計タブで、一覧から行を選択したときの処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<ShokanShikyuTorokuShomeishoDiv> onSelectedShukeiList(ShokanShikyuTorokuShomeishoDiv panel) {
+        ResponseData<ShokanShikyuTorokuShomeishoDiv> response = new ResponseData<>();
+
+        setShukeiMeisaiData(panel, イベント.選択);
+        showShukei(panel, 一覧明細表示.明細表示);
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * サービス提供証明書情報の請求額集計タブで、一覧の行の削除ボタンを押下したときの処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<ShokanShikyuTorokuShomeishoDiv> onClickShukeiListDelete(ShokanShikyuTorokuShomeishoDiv panel) {
+        ResponseData<ShokanShikyuTorokuShomeishoDiv> response = new ResponseData<>();
+
+        deleteShukeiListData(panel);
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * サービス提供証明書情報の請求額集計タブで入力内容を確定するボタンを押下したときの処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<ShokanShikyuTorokuShomeishoDiv> onClickShukeiKakutei(ShokanShikyuTorokuShomeishoDiv panel) {
+        ResponseData<ShokanShikyuTorokuShomeishoDiv> response = new ResponseData<>();
+
+        kakuteiShukeiMeisaiData(panel);
+        initShukeiMeisaiData(panel);
+        showShukei(panel, 一覧明細表示.一覧表示);
+        response.data = panel;
+        return response;
+    }
+
+    private void showShukei(ShokanShikyuTorokuShomeishoDiv panel, 一覧明細表示 show) {
+        ShokanShikyuTorokuShomeishoShukeiDiv shukei = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShukei();
+        ShokanShikyuTorokuShomeishoShukeiListDiv list = shukei.getShokanShikyuTorokuShomeishoShukeiList();
+        ShokanShikyuTorokuShomeishoShukeiMeisaiDiv meisai = shukei.getShokanShikyuTorokuShomeishoShukeiMeisai();
+
+        if (show.equals(一覧明細表示.一覧表示)) {
+            list.setIsOpen(true);
+            meisai.setIsOpen(false);
+        } else if (show.equals(一覧明細表示.明細表示)) {
+            list.setIsOpen(false);
+            meisai.setIsOpen(true);
+        }
+    }
+
+    private void setShukeiListData(ShokanShikyuTorokuShomeishoDiv panel) {
+        ShokanShikyuTorokuShomeishoShukeiDiv shukei = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShukei();
+        ShokanShikyuTorokuShomeishoShukeiListDiv list = shukei.getShokanShikyuTorokuShomeishoShukeiList();
+        DataGrid<dgServiceTeikyoShomeishoShukeiList_Row> dgRow = list.getShokanShikyuTorokuShomeishoShukeiListInfo().getDgServiceTeikyoShomeishoShukeiList();
+        List<dgServiceTeikyoShomeishoShukeiList_Row> dgRowList = dgRow.getDataSource();
+
+        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml"));
+        dgRowList.clear();
+        for (int i = 37; i < 40; i++) {
+            dgRowList.add(create請求額一覧アイテム(
+                    sourceList.get(i).get("サービス種類").toString(),
+                    sourceList.get(i).get("単位数合計").toString(),
+                    sourceList.get(i).get("単位数単価").toString(),
+                    sourceList.get(i).get("請求額").toString(),
+                    sourceList.get(i).get("利用者負担額").toString(),
+                    sourceList.get(i).get("審査方法").toString()
+            ));
+        }
+        dgRow.setDataSource(dgRowList);
+    }
+
+    private void deleteShukeiListData(ShokanShikyuTorokuShomeishoDiv panel) {
+        ShokanShikyuTorokuShomeishoShukeiDiv shukei = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShukei();
+        ShokanShikyuTorokuShomeishoShukeiListDiv list = shukei.getShokanShikyuTorokuShomeishoShukeiList();
+
+        DataGrid<dgServiceTeikyoShomeishoShukeiList_Row> dgRow = list.getShokanShikyuTorokuShomeishoShukeiListInfo().getDgServiceTeikyoShomeishoShukeiList();
+        List<dgServiceTeikyoShomeishoShukeiList_Row> dgRowList = dgRow.getDataSource();
+
+        int index = dgRow.getClickedRowId();
+
+        dgServiceTeikyoShomeishoShukeiList_Row item = dgRow.getClickedItem();
+        item.setRowState(RowState.Deleted);
+        dgRowList.remove(index);
+        dgRowList.add(index, item);
+
+        dgRow.setDataSource(dgRowList);
+    }
+
+    private void setShukeiMeisaiData(ShokanShikyuTorokuShomeishoDiv panel, イベント event) {
+        ShokanShikyuTorokuShomeishoShukeiDiv shukei = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShukei();
+        ShokanShikyuTorokuShomeishoShukeiMeisaiDiv meisai = shukei.getShokanShikyuTorokuShomeishoShukeiMeisai();
+        if (event.equals(イベント.追加)) {
+            meisai.getTxtShukeiSelectedIndex().setValue(new RString("-1"));
+        } else {
+            int index = shukei.getShokanShikyuTorokuShomeishoShukeiList().getShokanShikyuTorokuShomeishoShukeiListInfo().getDgServiceTeikyoShomeishoShukeiList().getActiveRowId();
+            meisai.getTxtShukeiSelectedIndex().setValue(new RString(String.valueOf(index)));
+        }
+        HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(40);
+        meisai.getRadShukeiShinsaHoho().setSelectedItem(new RString("key0"));
+        meisai.getTxtShukeiShuruiCode().setValue(new RString(source.get("サービス種類").toString()));
+        meisai.getTxtShukeiShuruiName().setValue(new RString(source.get("サービス種類名").toString()));
+        meisai.getTxtShukeiJitsuNissu().setValue(new Decimal(source.get("実日数").toString()));
+        meisai.getTxtShukeiKyufuritsu().setValue(new Decimal(source.get("給付率").toString()));
+        meisai.getTxtShukeiKeikakuTani().setValue(new Decimal(source.get("計画単位").toString()));
+
+        ShokanShikyuTorokuShomeishoShukeiGendogakuDiv gendogaku = meisai.getShokanShikyuTorokuShomeishoShukeiGendogaku();
+        gendogaku.getTxtShukeiGendoTaishoTani().setValue(new Decimal(source.get("限度額対象単位").toString()));
+        gendogaku.getTxtShukeiGendoTaishogaiTani().setValue(new Decimal(source.get("限度額対象外単位").toString()));
+
+        ShokanShikyuTorokuShomeishoShukeiTankiDiv tanki = meisai.getShokanShikyuTorokuShomeishoShukeiTanki();
+        tanki.getTxtShukeiTankiKeikakuNissu().setValue(new Decimal(source.get("短期入所計画日数").toString()));
+        tanki.getTxtShukeiTankiJitsuNissu().setValue(new Decimal(source.get("短期入所実日数").toString()));
+
+        ShokanShikyuTorokuShomeishoShukeiHokenDiv hoken = meisai.getShokanShikyuTorokuShomeishoShukeiHoken();
+        hoken.getTxtShukeiHokenTanisuGokei().setValue(new Decimal(source.get("保険分単位数合計").toString()));
+        hoken.getTxtShukeiHokenTanisuTanka().setValue(new Decimal(source.get("保険分単位数単価").toString()));
+        hoken.getTxtShukeiHokenSeikyugaku().setValue(new Decimal(source.get("保険分請求額").toString()));
+        hoken.getTxtShukeiHokenRiyoshaFutangaku().setValue(new Decimal(source.get("保険分利用者負担額").toString()));
+
+        ShokanShikyuTorokuShomeishoShukeiDekidakaDiv dekidaka = meisai.getShokanShikyuTorokuShomeishoShukeiDekidaka();
+        dekidaka.getTxtShukeiDekidakaTanisuGokei().setValue(new Decimal(source.get("出来高分単位数合計").toString()));
+        dekidaka.getTxtShukeiDekidakaTanisuTanka().setValue(new Decimal(source.get("出来高分単位数単価").toString()));
+        dekidaka.getTxtShukeiDekidakaSeikyugaku().setValue(new Decimal(source.get("出来高分請求額").toString()));
+        dekidaka.getTxtShukeiDekidakaRiyoshaFutangaku().setValue(new Decimal(source.get("出来高分利用者負担額").toString()));
+    }
+
+    private void initShukeiMeisaiData(ShokanShikyuTorokuShomeishoDiv panel) {
+        ShokanShikyuTorokuShomeishoShukeiDiv shukei = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShukei();
+        ShokanShikyuTorokuShomeishoShukeiMeisaiDiv meisai = shukei.getShokanShikyuTorokuShomeishoShukeiMeisai();
+        meisai.getTxtShukeiSelectedIndex().setValue(new RString("-1"));
+
+        meisai.getRadShukeiShinsaHoho().setSelectedItem(new RString(""));
+        meisai.getTxtShukeiShuruiCode().clearValue();
+        meisai.getTxtShukeiShuruiName().clearValue();
+        meisai.getTxtShukeiJitsuNissu().clearValue();
+        meisai.getTxtShukeiKyufuritsu().clearValue();
+        meisai.getTxtShukeiKeikakuTani().clearValue();
+
+        ShokanShikyuTorokuShomeishoShukeiGendogakuDiv gendogaku = meisai.getShokanShikyuTorokuShomeishoShukeiGendogaku();
+        gendogaku.getTxtShukeiGendoTaishoTani().clearValue();
+        gendogaku.getTxtShukeiGendoTaishogaiTani().clearValue();
+
+        ShokanShikyuTorokuShomeishoShukeiTankiDiv tanki = meisai.getShokanShikyuTorokuShomeishoShukeiTanki();
+        tanki.getTxtShukeiTankiKeikakuNissu().clearValue();
+        tanki.getTxtShukeiTankiKeikakuNissu().clearValue();
+
+        ShokanShikyuTorokuShomeishoShukeiHokenDiv hoken = meisai.getShokanShikyuTorokuShomeishoShukeiHoken();
+        hoken.getTxtShukeiHokenTanisuGokei().clearValue();
+        hoken.getTxtShukeiHokenTanisuTanka().clearValue();
+        hoken.getTxtShukeiHokenSeikyugaku().clearValue();
+        hoken.getTxtShukeiHokenRiyoshaFutangaku().clearValue();
+
+        ShokanShikyuTorokuShomeishoShukeiDekidakaDiv dekidaka = meisai.getShokanShikyuTorokuShomeishoShukeiDekidaka();
+        dekidaka.getTxtShukeiDekidakaTanisuGokei().clearValue();
+        dekidaka.getTxtShukeiDekidakaTanisuTanka().clearValue();
+        dekidaka.getTxtShukeiDekidakaSeikyugaku().clearValue();
+        dekidaka.getTxtShukeiDekidakaRiyoshaFutangaku().clearValue();
+    }
+
+    private void kakuteiShukeiMeisaiData(ShokanShikyuTorokuShomeishoDiv panel) {
+        ShokanShikyuTorokuShomeishoShukeiDiv shukei = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShukei();
+        ShokanShikyuTorokuShomeishoShukeiListDiv list = shukei.getShokanShikyuTorokuShomeishoShukeiList();
+        ShokanShikyuTorokuShomeishoShukeiMeisaiDiv meisai = shukei.getShokanShikyuTorokuShomeishoShukeiMeisai();
+
+        int index = Integer.parseInt(meisai.getTxtShukeiSelectedIndex().getValue().toString());
+
+        DataGrid<dgServiceTeikyoShomeishoShukeiList_Row> dgRow = list.getShokanShikyuTorokuShomeishoShukeiListInfo().getDgServiceTeikyoShomeishoShukeiList();
+        List<dgServiceTeikyoShomeishoShukeiList_Row> dgRowList = dgRow.getDataSource();
+
+        ShokanShikyuTorokuShomeishoShukeiHokenDiv hoken = meisai.getShokanShikyuTorokuShomeishoShukeiHoken();
+        dgServiceTeikyoShomeishoShukeiList_Row item = create請求額一覧アイテム(
+                meisai.getTxtShukeiShuruiCode().getValue().toString().
+                concat(":").
+                concat(meisai.getTxtShukeiShuruiName().getValue().toString()),
+                hoken.getTxtShukeiHokenTanisuGokei().getValue().toString(),
+                hoken.getTxtShukeiHokenTanisuTanka().getValue().toString(),
+                hoken.getTxtShukeiHokenSeikyugaku().getValue().toString(),
+                hoken.getTxtShukeiHokenRiyoshaFutangaku().getValue().toString(),
+                meisai.getRadShukeiShinsaHoho().getSelectedValue().toString());
+        if (index == -1) {
+            item.setRowState(RowState.Added);
+            dgRowList.add(item);
+        } else {
+            item.setRowState(RowState.Modified);
+            dgRowList.remove(index);
+            dgRowList.add(index, item);
+        }
+        dgRow.setDataSource(dgRowList);
+    }
+
+    private dgServiceTeikyoShomeishoShukeiList_Row create請求額一覧アイテム(
+            String txtServiceShurui,
+            String txtTanisuGokei,
+            String txtTanisuTanka,
+            String txtSeikyugaku,
+            String txtRiyoshaFutangaku,
+            String txtShinsaHoho
+    ) {
+        Button btnSelect = new Button();
+        Button btnEdit = new Button();
+        Button btnDelete = new Button();
+
+        return new dgServiceTeikyoShomeishoShukeiList_Row(
+                btnSelect,
+                btnEdit,
+                btnDelete,
+                new RString(txtServiceShurui),
+                new RString(txtTanisuGokei),
+                new RString(txtTanisuTanka),
+                new RString(txtSeikyugaku),
+                new RString(txtRiyoshaFutangaku),
+                new RString(txtShinsaHoho));
+    }
+    // !!!!!!!!!!!!!!!!!!!!!!↑↑ここまで請求額集計タブに関連するコード↑↑!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
