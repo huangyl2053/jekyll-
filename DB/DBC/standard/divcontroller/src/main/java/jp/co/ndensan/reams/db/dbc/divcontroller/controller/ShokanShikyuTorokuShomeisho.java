@@ -355,7 +355,6 @@ public class ShokanShikyuTorokuShomeisho {
                 meisaiMeisai.getTxtKyufuhiKaisuNissu().getValue().toString(),
                 meisaiMeisai.getTxtKyufuhiServiceTanisu().getValue().toString(),
                 meisaiMeisai.getTxtKyufuhiTekiyo().getValue().toString());
-
         if (index == -1) {
             item.setRowState(RowState.Added);
             dgRowList.add(item);
@@ -391,7 +390,6 @@ public class ShokanShikyuTorokuShomeisho {
     // !!!!!!!!!!!!!!!!!!!!!!↑↑ここまで給付費明細タブに関連するコード↑↑!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     // !!!!!!!!!!!!!!!!!!!!!!↓↓ここから緊急時施設療養費タブに関連するコード↓↓!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // Ryoyo
     /**
      * サービス提供証明書情報の緊急時施設療養費タブで明細情報を追加するボタンを押下したときの処理です。
      *
@@ -501,7 +499,6 @@ public class ShokanShikyuTorokuShomeisho {
         item.setRowState(RowState.Deleted);
         dgRowList.remove(index);
         dgRowList.add(index, item);
-
         dgRow.setDataSource(dgRowList);
     }
 
@@ -616,7 +613,6 @@ public class ShokanShikyuTorokuShomeisho {
                 .getValue().wareki().toDateString().toString(),
                 ryoyoMeisai.getShokanShikyuTorokuShomeishoRyoyoTensu().getTxtRyoyohiChiryohiShokei().getValue().toString(),
                 ryoyoMeisai.getShokanShikyuTorokuShomeishoRyoyoTensu().getTxtRyoyohiChiryoGokei().getValue().toString());
-
         if (index == -1) {
             item.setRowState(RowState.Added);
             dgRowList.add(item);
@@ -1318,7 +1314,6 @@ public class ShokanShikyuTorokuShomeisho {
                 dgRowList.add(index, itemH1503);
             }
             dgRow.setDataSource(dgRowList);
-
         } else {
             ShokanShikyuTorokuShomeishoShokujiMeisaiH1504Div h1504div = shokujiMeisai
                     .getShokanShikyuTorokuShomeishoShokujiMeisaiH1504();
@@ -1344,7 +1339,6 @@ public class ShokanShikyuTorokuShomeisho {
             }
             dgRow.setDataSource(dgRowList);
         }
-
         set食事費用合計(panel);
     }
 
@@ -1375,7 +1369,6 @@ public class ShokanShikyuTorokuShomeisho {
         shokujiGokei.getTxtGokeiFutanGetsugaku().setValue(new Decimal(futanGetsugaku));
         shokujiGokei.getTxtGokeiTeikyoGokei().setValue(new Decimal(teikyoGokei));
         shokujiGokei.getTxtGokeiSeikyugaku().setValue(new Decimal(seikyuGokei));
-
     }
 
     private dgServiceTeikyoShomeishoShokujiListH1503_Row create食事費用一覧H1503アイテム(
@@ -1514,7 +1507,6 @@ public class ShokanShikyuTorokuShomeisho {
         ShokanShikyuTorokuShomeishoKeikakuH2104Div h2104Div = keikaku.getShokanShikyuTorokuShomeishoKeikakuH2104();
         RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
         if (date.isBefore(計画費切替.H2104.getDate())) {
-
             h2103Div.setVisible(true);
             h2103Div.setDisplayNone(false);
             h2104Div.setVisible(false);
@@ -1602,7 +1594,6 @@ public class ShokanShikyuTorokuShomeisho {
         item.setRowState(RowState.Deleted);
         dgRowListH2104.remove(index);
         dgRowListH2104.add(index, item);
-
         dgRowH2104.setDataSource(dgRowListH2104);
     }
 
@@ -1688,13 +1679,11 @@ public class ShokanShikyuTorokuShomeisho {
 
         Integer gokei = 0;
         Integer seikyu = 0;
-
         for (dgShokanShikyuTorokuShomeishoKeikakuList_Row item : keikakuH2104ListList
                 .getDgShokanShikyuTorokuShomeishoKeikakuList().getDataSource()) {
             gokei = gokei + Integer.parseInt(item.getTxtTanisu().toString());
             seikyu = seikyu + Integer.parseInt(item.getTxtServiceTanisu().toString());
         }
-
         keikakuH2104List.getTxtKeikakuhiGokeiTanisu().setValue(new Decimal(gokei));
         keikakuH2104List.getTxtKeikakuhiSeikyuKingakuH2104().setValue(new Decimal(seikyu));
     }
@@ -1787,7 +1776,6 @@ public class ShokanShikyuTorokuShomeisho {
         ShokanShikyuTorokuShomeishoShukeiDiv shukei = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShukei();
         ShokanShikyuTorokuShomeishoShukeiListDiv list = shukei.getShokanShikyuTorokuShomeishoShukeiList();
         ShokanShikyuTorokuShomeishoShukeiMeisaiDiv meisai = shukei.getShokanShikyuTorokuShomeishoShukeiMeisai();
-
         if (show.equals(一覧明細表示.一覧表示)) {
             list.setIsOpen(true);
             meisai.setIsOpen(false);
@@ -1835,7 +1823,6 @@ public class ShokanShikyuTorokuShomeisho {
         item.setRowState(RowState.Deleted);
         dgRowList.remove(index);
         dgRowList.add(index, item);
-
         dgRow.setDataSource(dgRowList);
     }
 
@@ -2084,7 +2071,6 @@ public class ShokanShikyuTorokuShomeisho {
         item.setRowState(RowState.Deleted);
         dgRowList.remove(index);
         dgRowList.add(index, item);
-
         dgRow.setDataSource(dgRowList);
     }
 
@@ -2300,7 +2286,6 @@ public class ShokanShikyuTorokuShomeisho {
         item.setRowState(RowState.Deleted);
         dgRowList.remove(index);
         dgRowList.add(index, item);
-
         dgRow.setDataSource(dgRowList);
     }
 
