@@ -35,6 +35,9 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeis
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoRyoyoOshinTsuinDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoRyoyoShikkanDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoRyoyoTensuDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShafukuDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShafukuListDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShafukuMeisaiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShinryoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShinryoListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeishoShinryoMeisaiDiv;
@@ -56,6 +59,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShomeis
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoMeisaiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoNyushoList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoRyoyoList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoShafukuList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoShinryoListH1503_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoShinryoList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceTeikyoShomeishoShokujiListH1503_Row;
@@ -69,6 +73,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 
 /**
@@ -108,6 +113,7 @@ public class ShokanShikyuTorokuShomeisho {
         setKeikakuData(panel);
         setShukeiListData(panel);
         setNyushoListData(panel);
+        setShafukuListData(panel);
 
         showKyufuhi(panel, 一覧明細表示.一覧表示);
         showRyoyo(panel, 一覧明細表示.一覧表示);
@@ -116,6 +122,7 @@ public class ShokanShikyuTorokuShomeisho {
         showKeikaku(panel, 一覧明細表示.一覧表示);
         showShukei(panel, 一覧明細表示.一覧表示);
         showNyusho(panel, 一覧明細表示.一覧表示);
+        showShafuku(panel, 一覧明細表示.一覧表示);
 
         response.data = panel;
         return response;
@@ -139,6 +146,7 @@ public class ShokanShikyuTorokuShomeisho {
         setKeikakuData(panel);
         setShukeiListData(panel);
         setNyushoListData(panel);
+        setShafukuListData(panel);
 
         showKyufuhi(panel, 一覧明細表示.一覧表示);
         showRyoyo(panel, 一覧明細表示.一覧表示);
@@ -147,6 +155,7 @@ public class ShokanShikyuTorokuShomeisho {
         showKeikaku(panel, 一覧明細表示.一覧表示);
         showShukei(panel, 一覧明細表示.一覧表示);
         showNyusho(panel, 一覧明細表示.一覧表示);
+        showShafuku(panel, 一覧明細表示.一覧表示);
 
         response.data = panel;
         return response;
@@ -2033,4 +2042,196 @@ public class ShokanShikyuTorokuShomeisho {
                 new RString(txtRiyoshaFutangaku));
     }
     // !!!!!!!!!!!!!!!!!!!!!!↑↑ここまで特定入所者費用タブに関連するコード↑↑!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    // !!!!!!!!!!!!!!!!!!!!!!↓↓ここから特定入所者費用タブに関連するコード↓↓!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    /**
+     * サービス提供証明書情報の社福軽減額タブで明細情報を追加するボタンを押下したときの処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<ShokanShikyuTorokuShomeishoDiv> onClickAddShafukuMeisai(ShokanShikyuTorokuShomeishoDiv panel) {
+        ResponseData<ShokanShikyuTorokuShomeishoDiv> response = new ResponseData<>();
+
+        setShafukuMeisaiData(panel, イベント.追加);
+        showShafuku(panel, 一覧明細表示.明細表示);
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * サービス提供証明書情報の社福軽減額タブで、一覧から行を選択したときの処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<ShokanShikyuTorokuShomeishoDiv> onSelectedShafukuList(ShokanShikyuTorokuShomeishoDiv panel) {
+        ResponseData<ShokanShikyuTorokuShomeishoDiv> response = new ResponseData<>();
+
+        setShafukuMeisaiData(panel, イベント.選択);
+        showShafuku(panel, 一覧明細表示.明細表示);
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * サービス提供証明書情報の社福軽減額タブで、一覧の行の削除ボタンを押下したときの処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<ShokanShikyuTorokuShomeishoDiv> onClickShafukuListDelete(ShokanShikyuTorokuShomeishoDiv panel) {
+        ResponseData<ShokanShikyuTorokuShomeishoDiv> response = new ResponseData<>();
+
+        deleteShafukuListData(panel);
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * サービス提供証明書情報の社福軽減額タブで入力内容を確定するボタンを押下したときの処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<ShokanShikyuTorokuShomeishoDiv> onClickShafukuKakutei(ShokanShikyuTorokuShomeishoDiv panel) {
+        ResponseData<ShokanShikyuTorokuShomeishoDiv> response = new ResponseData<>();
+
+        kakuteiShafukuMeisaiData(panel);
+        initShafukuMeisaiData(panel);
+        showShafuku(panel, 一覧明細表示.一覧表示);
+        response.data = panel;
+        return response;
+    }
+
+    private void showShafuku(ShokanShikyuTorokuShomeishoDiv panel, 一覧明細表示 show) {
+        ShokanShikyuTorokuShomeishoShafukuDiv shafuku = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShafuku();
+        ShokanShikyuTorokuShomeishoShafukuListDiv list = shafuku.getShokanShikyuTorokuShomeishoShafukuList();
+        ShokanShikyuTorokuShomeishoShafukuMeisaiDiv meisai = shafuku.getShokanShikyuTorokuShomeishoShafukuMeisai();
+
+        if (show.equals(一覧明細表示.一覧表示)) {
+            list.setIsOpen(true);
+            meisai.setIsOpen(false);
+        } else if (show.equals(一覧明細表示.明細表示)) {
+            list.setIsOpen(false);
+            meisai.setIsOpen(true);
+        }
+    }
+
+    private void setShafukuListData(ShokanShikyuTorokuShomeishoDiv panel) {
+        ShokanShikyuTorokuShomeishoShafukuDiv shafuku = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShafuku();
+        ShokanShikyuTorokuShomeishoShafukuListDiv list = shafuku.getShokanShikyuTorokuShomeishoShafukuList();
+        DataGrid<dgServiceTeikyoShomeishoShafukuList_Row> dgRow = list.getShokanShikyuTorokuShomeishoShafukuListInfo().getDgServiceTeikyoShomeishoShafukuList();
+        List<dgServiceTeikyoShomeishoShafukuList_Row> dgRowList = dgRow.getDataSource();
+
+        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml"));
+        dgRowList.clear();
+        for (int i = 45; i < 48; i++) {
+            dgRowList.add(create社福軽減額一覧アイテム(
+                    sourceList.get(i).get("サービス種類").toString(),
+                    sourceList.get(i).get("軽減率").toString(),
+                    sourceList.get(i).get("受領すべき利用者負担の総額").toString(),
+                    sourceList.get(i).get("軽減額").toString(),
+                    sourceList.get(i).get("軽減後利用者負担額").toString(),
+                    sourceList.get(i).get("備考").toString()));
+        }
+        dgRow.setDataSource(dgRowList);
+    }
+
+    private void deleteShafukuListData(ShokanShikyuTorokuShomeishoDiv panel) {
+        ShokanShikyuTorokuShomeishoShafukuDiv shafuku = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShafuku();
+        ShokanShikyuTorokuShomeishoShafukuListDiv list = shafuku.getShokanShikyuTorokuShomeishoShafukuList();
+
+        DataGrid<dgServiceTeikyoShomeishoShafukuList_Row> dgRow = list.getShokanShikyuTorokuShomeishoShafukuListInfo().getDgServiceTeikyoShomeishoShafukuList();
+        List<dgServiceTeikyoShomeishoShafukuList_Row> dgRowList = dgRow.getDataSource();
+
+        int index = dgRow.getClickedRowId();
+
+        dgServiceTeikyoShomeishoShafukuList_Row item = dgRow.getClickedItem();
+        item.setRowState(RowState.Deleted);
+        dgRowList.remove(index);
+        dgRowList.add(index, item);
+
+        dgRow.setDataSource(dgRowList);
+    }
+
+    private void setShafukuMeisaiData(ShokanShikyuTorokuShomeishoDiv panel, イベント event) {
+        ShokanShikyuTorokuShomeishoShafukuDiv shafuku = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShafuku();
+        ShokanShikyuTorokuShomeishoShafukuMeisaiDiv meisai = shafuku.getShokanShikyuTorokuShomeishoShafukuMeisai();
+        if (event.equals(イベント.追加)) {
+            meisai.getTxtShafukuSelectedIndex().setValue(new RString("-1"));
+        } else {
+            int index = shafuku.getShokanShikyuTorokuShomeishoShafukuList().getShokanShikyuTorokuShomeishoShafukuListInfo().getDgServiceTeikyoShomeishoShafukuList().getActiveRowId();
+            meisai.getTxtShafukuSelectedIndex().setValue(new RString(String.valueOf(index)));
+        }
+        HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(48);
+        meisai.getTxtShafukugakuFutanSogaku().setValue(new Decimal(source.get("受領すべき利用者負担の総額").toString()));
+        meisai.getTxtShafukugakuKeigengaku().setValue(new Decimal(source.get("軽減額").toString()));
+        meisai.getTxtShafukugakuKeigengoFutangaku().setValue(new Decimal(source.get("軽減後利用者負担額").toString()));
+        meisai.getTxtShafukugakuBiko().setValue(new RString(source.get("備考").toString()));
+    }
+
+    private void initShafukuMeisaiData(ShokanShikyuTorokuShomeishoDiv panel) {
+        ShokanShikyuTorokuShomeishoShafukuDiv shafuku = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShafuku();
+        ShokanShikyuTorokuShomeishoShafukuMeisaiDiv meisai = shafuku.getShokanShikyuTorokuShomeishoShafukuMeisai();
+        meisai.getTxtShafukuSelectedIndex().setValue(new RString("-1"));
+
+        meisai.getTxtShafukugakuFutanSogaku().clearValue();
+        meisai.getTxtShafukugakuKeigengaku().clearValue();
+        meisai.getTxtShafukugakuKeigengoFutangaku().clearValue();
+        meisai.getTxtShafukugakuBiko().clearValue();
+    }
+
+    private void kakuteiShafukuMeisaiData(ShokanShikyuTorokuShomeishoDiv panel) {
+        ShokanShikyuTorokuShomeishoShafukuDiv shafuku = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoShafuku();
+        ShokanShikyuTorokuShomeishoShafukuListDiv list = shafuku.getShokanShikyuTorokuShomeishoShafukuList();
+        ShokanShikyuTorokuShomeishoShafukuMeisaiDiv meisai = shafuku.getShokanShikyuTorokuShomeishoShafukuMeisai();
+
+        int index = Integer.parseInt(meisai.getTxtShafukuSelectedIndex().getValue().toString());
+
+        DataGrid<dgServiceTeikyoShomeishoShafukuList_Row> dgRow = list.getShokanShikyuTorokuShomeishoShafukuListInfo().getDgServiceTeikyoShomeishoShafukuList();
+        List<dgServiceTeikyoShomeishoShafukuList_Row> dgRowList = dgRow.getDataSource();
+
+        dgServiceTeikyoShomeishoShafukuList_Row item = create社福軽減額一覧アイテム(
+                meisai.getDdlShafukugakuShurui().getSelectedValue().toString(),
+                meisai.getDdlShafukugakuKeigenritsu().getSelectedValue().toString(),
+                meisai.getTxtShafukugakuFutanSogaku().getValue().toString(),
+                meisai.getTxtShafukugakuKeigengaku().getValue().toString(),
+                meisai.getTxtShafukugakuKeigengoFutangaku().getValue().toString(),
+                meisai.getTxtShafukugakuBiko().getValue().toString());
+        if (index == -1) {
+            item.setRowState(RowState.Added);
+            dgRowList.add(item);
+        } else {
+            item.setRowState(RowState.Modified);
+            dgRowList.remove(index);
+            dgRowList.add(index, item);
+        }
+        dgRow.setDataSource(dgRowList);
+    }
+
+    private dgServiceTeikyoShomeishoShafukuList_Row create社福軽減額一覧アイテム(
+            String txtShurui,
+            String txtKeigenritsu,
+            String txtFutanSogaku,
+            String txtKeigengaku,
+            String txtKeigengoRiyoshaFutangaku,
+            String txtBiko
+    ) {
+        Button btnSelect = new Button();
+        Button btnEdit = new Button();
+        Button btnDelete = new Button();
+
+        return new dgServiceTeikyoShomeishoShafukuList_Row(
+                btnSelect,
+                btnEdit,
+                btnDelete,
+                new RString(txtShurui),
+                new RString(txtKeigenritsu),
+                new RString(txtFutanSogaku),
+                new RString(txtKeigengaku),
+                new RString(txtKeigengoRiyoshaFutangaku),
+                new RString(txtBiko));
+    }
+    // !!!!!!!!!!!!!!!!!!!!!!↑↑ここまで社福軽減額タブに関連するコード↑↑!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }

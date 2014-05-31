@@ -35,6 +35,8 @@ public class ShokanShikyuTorokuShomeishoShafukuMeisaiDiv extends Panel {
     private TextBox txtShafukugakuBiko;
     @JsonProperty("btnShafukugakuKakutei")
     private Button btnShafukugakuKakutei;
+    @JsonProperty("txtShafukuSelectedIndex")
+    private TextBox txtShafukuSelectedIndex;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -110,6 +112,16 @@ public class ShokanShikyuTorokuShomeishoShafukuMeisaiDiv extends Panel {
     @JsonProperty("btnShafukugakuKakutei")
     public void setBtnShafukugakuKakutei(Button btnShafukugakuKakutei) {
         this.btnShafukugakuKakutei=btnShafukugakuKakutei;
+    }
+
+    @JsonProperty("txtShafukuSelectedIndex")
+    public TextBox getTxtShafukuSelectedIndex() {
+        return txtShafukuSelectedIndex;
+    }
+
+    @JsonProperty("txtShafukuSelectedIndex")
+    public void setTxtShafukuSelectedIndex(TextBox txtShafukuSelectedIndex) {
+        this.txtShafukuSelectedIndex=txtShafukuSelectedIndex;
     }
 
 }

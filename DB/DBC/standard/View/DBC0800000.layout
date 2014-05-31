@@ -1674,7 +1674,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "selectedItem": ""
+           "selectedItem": "key0"
           },
           {
            "fieldName": "btnKozoRegist",
@@ -2896,7 +2896,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "selectedItem": ""
+           "selectedItem": "key0"
           },
           {
            "fieldName": "chkShomeishoKihonTokurei",
@@ -3259,7 +3259,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "selectedItem": ""
+           "selectedItem": "key0"
           }
          ],
          "controlType": "Panel",
@@ -3519,7 +3519,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "selectedItem": ""
+           "selectedItem": "key0"
           },
           {
            "fieldName": "ddlShomeishoKihonTaishoGoJokyo",
@@ -3559,7 +3559,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "selectedItem": ""
+           "selectedItem": "key0"
           }
          ],
          "controlType": "Panel",
@@ -13572,7 +13572,7 @@
            "dialogCancelEventNameForDialog": "",
            "AddButtonVisible": true,
            "AddButtonDisplayNone": false,
-           "AddButtonOnClick": "",
+           "AddButtonOnClick": "onClickAddShafukuMeisai",
            "MeisaiListGridSetting": {
             "rowHeight": 25,
             "isMultiSelectable": false,
@@ -13597,7 +13597,7 @@
               "cellDetails": {
                "cellType": 8,
                "text": "選",
-               "onClick": "",
+               "onClick": "onSelectedShafukuList",
                "imageFileUrl": "",
                "imageWidth": "",
                "imageHeight": ""
@@ -13639,7 +13639,7 @@
               "cellDetails": {
                "cellType": 8,
                "text": "削",
-               "onClick": "",
+               "onClick": "onClickShafukuListDelete",
                "imageFileUrl": "",
                "imageWidth": "",
                "imageHeight": ""
@@ -13827,7 +13827,7 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "selectedItem": ""
+           "selectedItem": "key0"
           },
           {
            "fieldName": "ddlShafukugakuKeigenritsu",
@@ -13867,7 +13867,7 @@
            "labelRWidth": "15",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "selectedItem": ""
+           "selectedItem": "key0"
           },
           {
            "fieldName": "txtShafukugakuFutanSogaku",
@@ -14075,12 +14075,55 @@
            "marginRight": "XS",
            "selectControlID": "btnShafukugakuKakutei",
            "text": "入力内容を確定する",
-           "onClick": "",
+           "onClick": "onClickShafukuKakutei",
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
            "imageHeight": "",
            "icon": 0
+          },
+          {
+           "fieldName": "txtShafukuSelectedIndex",
+           "items": [],
+           "controlType": "TextBox",
+           "width": "0",
+           "visible": false,
+           "displayNone": true,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": false,
+           "dependencies": [],
+           "float": 2,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "selectControlID": "txtShafukuSelectedIndex_core",
+           "required": false,
+           "text": "",
+           "isPrivateInfo": false,
+           "readOnly": false,
+           "placeHolder": "",
+           "isPassword": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
+           "onKeyPress": "",
+           "labelLText": "",
+           "labelRText": "",
+           "labelLWidth": "S",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
+           "value": "",
+           "maxLength": 100000000,
+           "minLength": 0,
+           "textAlign": 0,
+           "textKind": 0,
+           "isComboBox": false,
+           "suggest": [],
+           "permitCharactor": ""
           }
          ],
          "controlType": "Panel",
@@ -14172,7 +14215,7 @@
       "ShokanShikyuTorokuShomeishoShafuku"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "ShokanShikyuTorokuShomeishoNyusho",
+     "selectedItemFieldName": "ShokanShikyuTorokuShomeishoShafuku",
      "initialTab": 0
     }
    ],
@@ -14324,6 +14367,22 @@
     {
      "eventName": "onClickNyushoKakutei",
      "requestUrl": "dbc/db/dbc/ShokanShikyuTorokuShomeisho/onClickNyushoKakutei"
+    },
+    {
+     "eventName": "onClickAddShafukuMeisai",
+     "requestUrl": "dbc/db/dbc/ShokanShikyuTorokuShomeisho/onClickAddShafukuMeisai"
+    },
+    {
+     "eventName": "onSelectedShafukuList",
+     "requestUrl": "dbc/db/dbc/ShokanShikyuTorokuShomeisho/onSelectedShafukuList"
+    },
+    {
+     "eventName": "onClickShafukuListDelete",
+     "requestUrl": "dbc/db/dbc/ShokanShikyuTorokuShomeisho/onClickShafukuListDelete"
+    },
+    {
+     "eventName": "onClickShafukuKakutei",
+     "requestUrl": "dbc/db/dbc/ShokanShikyuTorokuShomeisho/onClickShafukuKakutei"
     }
    ],
    "hiddenInput": [],
