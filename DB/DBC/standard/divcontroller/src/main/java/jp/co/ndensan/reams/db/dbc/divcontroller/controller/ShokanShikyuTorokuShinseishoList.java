@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuTorokuShinseishoListDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgShokanShikyuShinseishoList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0800000.ShokanShikyuTorokuShinseishoListDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuShinseishoList.dgShokanShikyuShinseishoList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
