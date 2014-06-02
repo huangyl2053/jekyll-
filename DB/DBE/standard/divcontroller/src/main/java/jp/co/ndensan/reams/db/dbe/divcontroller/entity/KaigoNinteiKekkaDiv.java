@@ -24,21 +24,21 @@ public class KaigoNinteiKekkaDiv extends Panel {
     @JsonProperty("lblShinseibi")
     private Label lblShinseibi;
     @JsonProperty("txtShinseibi")
-    private TextBoxDate txtShinseibi;
+    private TextBoxFlexibleDate txtShinseibi;
     @JsonProperty("lblShinseiKubunShinsei")
     private Label lblShinseiKubunShinsei;
     @JsonProperty("txtShinseiKubunShinsei")
     private TextBox txtShinseiKubunShinsei;
-    @JsonProperty("lblShinseiKubunHorei")
-    private Label lblShinseiKubunHorei;
+    @JsonProperty("lblShinseiKubun")
+    private Label lblShinseiKubun;
     @JsonProperty("txtShinseiKubunHorei")
     private TextBox txtShinseiKubunHorei;
     @JsonProperty("lblNinteiKubun")
     private Label lblNinteiKubun;
     @JsonProperty("ddlNinteiKubun")
     private DropDownList ddlNinteiKubun;
-    @JsonProperty("lblIchijiHanteiKekka")
-    private Label lblIchijiHanteiKekka;
+    @JsonProperty("lblIchijiHantei")
+    private Label lblIchijiHantei;
     @JsonProperty("txtIchijiHanteiKekka")
     private TextBox txtIchijiHanteiKekka;
     @JsonProperty("lblTokuteiShippei")
@@ -49,16 +49,16 @@ public class KaigoNinteiKekkaDiv extends Panel {
     private Label lblNinteibi;
     @JsonProperty("txtNinteibi")
     private TextBoxFlexibleDate txtNinteibi;
-    @JsonProperty("lblNijihanteiKekka")
-    private Label lblNijihanteiKekka;
+    @JsonProperty("lblNijiHantei")
+    private Label lblNijiHantei;
     @JsonProperty("ddlNijiHanteiKekka")
     private DropDownList ddlNijiHanteiKekka;
-    @JsonProperty("lblJotaiZo")
-    private Label lblJotaiZo;
+    @JsonProperty("lblJotaizoRei")
+    private Label lblJotaizoRei;
     @JsonProperty("ddlJotaiZo")
     private DropDownList ddlJotaiZo;
-    @JsonProperty("lblNinteiYukoKikan")
-    private Label lblNinteiYukoKikan;
+    @JsonProperty("lblNinteiKikan")
+    private Label lblNinteiKikan;
     @JsonProperty("txtNinteiYukoKikanStart")
     private TextBoxFlexibleDate txtNinteiYukoKikanStart;
     @JsonProperty("lblKara3")
@@ -69,8 +69,14 @@ public class KaigoNinteiKekkaDiv extends Panel {
     private DropDownList ddlNinteiYukoTsukisu;
     @JsonProperty("lblShinsakaiIken")
     private Label lblShinsakaiIken;
+    @JsonProperty("btnShinsaIkenTeikei")
+    private ButtonDialog btnShinsaIkenTeikei;
+    @JsonProperty("lblShinsakaiMemo")
+    private Label lblShinsakaiMemo;
     @JsonProperty("txtShinsakaiIken")
     private TextBoxMultiLine txtShinsakaiIken;
+    @JsonProperty("txtShinsakaiMemo")
+    private TextBoxMultiLine txtShinsakaiMemo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -89,12 +95,12 @@ public class KaigoNinteiKekkaDiv extends Panel {
     }
 
     @JsonProperty("txtShinseibi")
-    public TextBoxDate getTxtShinseibi() {
+    public TextBoxFlexibleDate getTxtShinseibi() {
         return txtShinseibi;
     }
 
     @JsonProperty("txtShinseibi")
-    public void setTxtShinseibi(TextBoxDate txtShinseibi) {
+    public void setTxtShinseibi(TextBoxFlexibleDate txtShinseibi) {
         this.txtShinseibi=txtShinseibi;
     }
 
@@ -118,14 +124,14 @@ public class KaigoNinteiKekkaDiv extends Panel {
         this.txtShinseiKubunShinsei=txtShinseiKubunShinsei;
     }
 
-    @JsonProperty("lblShinseiKubunHorei")
-    public Label getLblShinseiKubunHorei() {
-        return lblShinseiKubunHorei;
+    @JsonProperty("lblShinseiKubun")
+    public Label getLblShinseiKubun() {
+        return lblShinseiKubun;
     }
 
-    @JsonProperty("lblShinseiKubunHorei")
-    public void setLblShinseiKubunHorei(Label lblShinseiKubunHorei) {
-        this.lblShinseiKubunHorei=lblShinseiKubunHorei;
+    @JsonProperty("lblShinseiKubun")
+    public void setLblShinseiKubun(Label lblShinseiKubun) {
+        this.lblShinseiKubun=lblShinseiKubun;
     }
 
     @JsonProperty("txtShinseiKubunHorei")
@@ -158,14 +164,14 @@ public class KaigoNinteiKekkaDiv extends Panel {
         this.ddlNinteiKubun=ddlNinteiKubun;
     }
 
-    @JsonProperty("lblIchijiHanteiKekka")
-    public Label getLblIchijiHanteiKekka() {
-        return lblIchijiHanteiKekka;
+    @JsonProperty("lblIchijiHantei")
+    public Label getLblIchijiHantei() {
+        return lblIchijiHantei;
     }
 
-    @JsonProperty("lblIchijiHanteiKekka")
-    public void setLblIchijiHanteiKekka(Label lblIchijiHanteiKekka) {
-        this.lblIchijiHanteiKekka=lblIchijiHanteiKekka;
+    @JsonProperty("lblIchijiHantei")
+    public void setLblIchijiHantei(Label lblIchijiHantei) {
+        this.lblIchijiHantei=lblIchijiHantei;
     }
 
     @JsonProperty("txtIchijiHanteiKekka")
@@ -218,14 +224,14 @@ public class KaigoNinteiKekkaDiv extends Panel {
         this.txtNinteibi=txtNinteibi;
     }
 
-    @JsonProperty("lblNijihanteiKekka")
-    public Label getLblNijihanteiKekka() {
-        return lblNijihanteiKekka;
+    @JsonProperty("lblNijiHantei")
+    public Label getLblNijiHantei() {
+        return lblNijiHantei;
     }
 
-    @JsonProperty("lblNijihanteiKekka")
-    public void setLblNijihanteiKekka(Label lblNijihanteiKekka) {
-        this.lblNijihanteiKekka=lblNijihanteiKekka;
+    @JsonProperty("lblNijiHantei")
+    public void setLblNijiHantei(Label lblNijiHantei) {
+        this.lblNijiHantei=lblNijiHantei;
     }
 
     @JsonProperty("ddlNijiHanteiKekka")
@@ -238,14 +244,14 @@ public class KaigoNinteiKekkaDiv extends Panel {
         this.ddlNijiHanteiKekka=ddlNijiHanteiKekka;
     }
 
-    @JsonProperty("lblJotaiZo")
-    public Label getLblJotaiZo() {
-        return lblJotaiZo;
+    @JsonProperty("lblJotaizoRei")
+    public Label getLblJotaizoRei() {
+        return lblJotaizoRei;
     }
 
-    @JsonProperty("lblJotaiZo")
-    public void setLblJotaiZo(Label lblJotaiZo) {
-        this.lblJotaiZo=lblJotaiZo;
+    @JsonProperty("lblJotaizoRei")
+    public void setLblJotaizoRei(Label lblJotaizoRei) {
+        this.lblJotaizoRei=lblJotaizoRei;
     }
 
     @JsonProperty("ddlJotaiZo")
@@ -258,14 +264,14 @@ public class KaigoNinteiKekkaDiv extends Panel {
         this.ddlJotaiZo=ddlJotaiZo;
     }
 
-    @JsonProperty("lblNinteiYukoKikan")
-    public Label getLblNinteiYukoKikan() {
-        return lblNinteiYukoKikan;
+    @JsonProperty("lblNinteiKikan")
+    public Label getLblNinteiKikan() {
+        return lblNinteiKikan;
     }
 
-    @JsonProperty("lblNinteiYukoKikan")
-    public void setLblNinteiYukoKikan(Label lblNinteiYukoKikan) {
-        this.lblNinteiYukoKikan=lblNinteiYukoKikan;
+    @JsonProperty("lblNinteiKikan")
+    public void setLblNinteiKikan(Label lblNinteiKikan) {
+        this.lblNinteiKikan=lblNinteiKikan;
     }
 
     @JsonProperty("txtNinteiYukoKikanStart")
@@ -318,6 +324,26 @@ public class KaigoNinteiKekkaDiv extends Panel {
         this.lblShinsakaiIken=lblShinsakaiIken;
     }
 
+    @JsonProperty("btnShinsaIkenTeikei")
+    public ButtonDialog getBtnShinsaIkenTeikei() {
+        return btnShinsaIkenTeikei;
+    }
+
+    @JsonProperty("btnShinsaIkenTeikei")
+    public void setBtnShinsaIkenTeikei(ButtonDialog btnShinsaIkenTeikei) {
+        this.btnShinsaIkenTeikei=btnShinsaIkenTeikei;
+    }
+
+    @JsonProperty("lblShinsakaiMemo")
+    public Label getLblShinsakaiMemo() {
+        return lblShinsakaiMemo;
+    }
+
+    @JsonProperty("lblShinsakaiMemo")
+    public void setLblShinsakaiMemo(Label lblShinsakaiMemo) {
+        this.lblShinsakaiMemo=lblShinsakaiMemo;
+    }
+
     @JsonProperty("txtShinsakaiIken")
     public TextBoxMultiLine getTxtShinsakaiIken() {
         return txtShinsakaiIken;
@@ -326,6 +352,16 @@ public class KaigoNinteiKekkaDiv extends Panel {
     @JsonProperty("txtShinsakaiIken")
     public void setTxtShinsakaiIken(TextBoxMultiLine txtShinsakaiIken) {
         this.txtShinsakaiIken=txtShinsakaiIken;
+    }
+
+    @JsonProperty("txtShinsakaiMemo")
+    public TextBoxMultiLine getTxtShinsakaiMemo() {
+        return txtShinsakaiMemo;
+    }
+
+    @JsonProperty("txtShinsakaiMemo")
+    public void setTxtShinsakaiMemo(TextBoxMultiLine txtShinsakaiMemo) {
+        this.txtShinsakaiMemo=txtShinsakaiMemo;
     }
 
 }

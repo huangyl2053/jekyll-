@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.KaniShinsakaiKaisaiKekkaD
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgKaniKaisaiKekka_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 
@@ -53,10 +52,26 @@ public class KaniShinsakaiKaisaiKekka {
         ResponseData<KaniShinsakaiKaisaiKekkaDiv> response = new ResponseData<>();
 
         div.getDgKaniKaisaiKekka().setDataSource(createRowKaisaiKekkaTestData());
-        div.getTxtShinsaJissiShuryobi().setValue(FlexibleDate.getNowDate());
-        div.getTxtEndTime().setValue(RTime.now());
         div.getTxtShinsaJissiShuryobi().setDisabled(false);
         div.getTxtEndTime().setDisabled(false);
+
+        response.data = div;
+        return response;
+
+    }
+
+    /**
+     * 審査会支援対象者一覧Divの審査会終了ボタンクリック時の動作を表します。
+     *
+     * @param div 簡易審査会開催結果Div
+     * @return ResponseData
+     */
+    public ResponseData onClick_btnShinsaKekkaNyuryokuEnd(KaniShinsakaiKaisaiKekkaDiv div) {
+
+        ResponseData<KaniShinsakaiKaisaiKekkaDiv> response = new ResponseData<>();
+
+        div.getTxtShinsaJissiShuryobi().setValue(FlexibleDate.getNowDate());
+        div.getTxtEndTime().setValue(RTime.now());
 
         response.data = div;
         return response;

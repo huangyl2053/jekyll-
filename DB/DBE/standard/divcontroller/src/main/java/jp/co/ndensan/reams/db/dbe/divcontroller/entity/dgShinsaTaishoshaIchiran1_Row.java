@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu May 01 17:41:02 JST 2014 
+ * Wed May 28 15:02:52 JST 2014 
  */
 
 
@@ -28,12 +28,17 @@ public class dgShinsaTaishoshaIchiran1_Row extends DataRow {
     private RString 二次;
     private RString 前期間;
     private RString 期間;
+    private RString 年齢;
+    private RString 性別;
+    private RString 被保険者区分;
+    private RString 申請日;
+    private RString 認定期間開始日;
 
     public dgShinsaTaishoshaIchiran1_Row() {
         super();
     }
 
-    public dgShinsaTaishoshaIchiran1_Row(RString 申請, RString 状況, RString 前一次, RString 前二次, RString 一次, RString 二次, RString 前期間, RString 期間) {
+    public dgShinsaTaishoshaIchiran1_Row(RString 申請, RString 状況, RString 前一次, RString 前二次, RString 一次, RString 二次, RString 前期間, RString 期間, RString 年齢, RString 性別, RString 被保険者区分, RString 申請日, RString 認定期間開始日) {
         super();
         this.setOriginalData("申請", 申請);
         this.setOriginalData("状況", 状況);
@@ -43,6 +48,11 @@ public class dgShinsaTaishoshaIchiran1_Row extends DataRow {
         this.setOriginalData("二次", 二次);
         this.setOriginalData("前期間", 前期間);
         this.setOriginalData("期間", 期間);
+        this.setOriginalData("年齢", 年齢);
+        this.setOriginalData("性別", 性別);
+        this.setOriginalData("被保険者区分", 被保険者区分);
+        this.setOriginalData("申請日", 申請日);
+        this.setOriginalData("認定期間開始日", 認定期間開始日);
         this.申請 = 申請;
         this.状況 = 状況;
         this.前一次 = 前一次;
@@ -51,6 +61,11 @@ public class dgShinsaTaishoshaIchiran1_Row extends DataRow {
         this.二次 = 二次;
         this.前期間 = 前期間;
         this.期間 = 期間;
+        this.年齢 = 年齢;
+        this.性別 = 性別;
+        this.被保険者区分 = 被保険者区分;
+        this.申請日 = 申請日;
+        this.認定期間開始日 = 認定期間開始日;
     }
 
     public RString get申請() {
@@ -83,6 +98,26 @@ public class dgShinsaTaishoshaIchiran1_Row extends DataRow {
 
     public RString get期間() {
         return 期間;
+    }
+
+    public RString get年齢() {
+        return 年齢;
+    }
+
+    public RString get性別() {
+        return 性別;
+    }
+
+    public RString get被保険者区分() {
+        return 被保険者区分;
+    }
+
+    public RString get申請日() {
+        return 申請日;
+    }
+
+    public RString get認定期間開始日() {
+        return 認定期間開始日;
     }
 
     public void set申請(RString 申請) {
@@ -123,6 +158,31 @@ public class dgShinsaTaishoshaIchiran1_Row extends DataRow {
     public void set期間(RString 期間) {
         this.setOriginalData("期間", 期間);
         this.期間 = 期間;
+    }
+
+    public void set年齢(RString 年齢) {
+        this.setOriginalData("年齢", 年齢);
+        this.年齢 = 年齢;
+    }
+
+    public void set性別(RString 性別) {
+        this.setOriginalData("性別", 性別);
+        this.性別 = 性別;
+    }
+
+    public void set被保険者区分(RString 被保険者区分) {
+        this.setOriginalData("被保険者区分", 被保険者区分);
+        this.被保険者区分 = 被保険者区分;
+    }
+
+    public void set申請日(RString 申請日) {
+        this.setOriginalData("申請日", 申請日);
+        this.申請日 = 申請日;
+    }
+
+    public void set認定期間開始日(RString 認定期間開始日) {
+        this.setOriginalData("認定期間開始日", 認定期間開始日);
+        this.認定期間開始日 = 認定期間開始日;
     }
 
 }
