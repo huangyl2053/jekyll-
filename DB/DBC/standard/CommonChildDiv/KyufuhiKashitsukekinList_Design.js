@@ -240,6 +240,48 @@ var DBC;
                                         "sortKey": "btnDelete"
                                     },
                                     {
+                                        "columnName": "被保番号",
+                                        "dataName": "txtHihoNo",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 100,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtHihoNo"
+                                    },
+                                    {
+                                        "columnName": "被保険者氏名",
+                                        "dataName": "txtHihokenshaName",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 200,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtHihokenshaName"
+                                    },
+                                    {
+                                        "columnName": "被保険者カナ",
+                                        "dataName": "txtHihokenshaKana",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 200,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtHihokenshaKana"
+                                    },
+                                    {
                                         "columnName": "借入<br>受付日",
                                         "dataName": "txtUketsukeYMD",
                                         "toolTip": "",
@@ -314,6 +356,34 @@ var DBC;
                                         "resize": true,
                                         "isPrivateInfo": false,
                                         "sortKey": "txtServiceShurui"
+                                    },
+                                    {
+                                        "columnName": "事業者の<br>支払請求額",
+                                        "dataName": "txtSeikyugaku",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 120,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 2,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtSeikyugaku"
+                                    },
+                                    {
+                                        "columnName": "申請金額",
+                                        "dataName": "txtShinseigaku",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 100,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 2,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtShinseigaku"
                                     },
                                     {
                                         "columnName": "貸付審査<br>決定日",
