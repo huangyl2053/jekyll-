@@ -21,6 +21,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtShinsaDate_core",
      "readOnly": false,
      "isPrivateInfo": false,
      "isPassword": false,
@@ -44,7 +45,9 @@
      "labelLWidth": "45",
      "labelRWidth": "S",
      "labelLAlign": 2,
-     "labelRAlign": 0
+     "labelRAlign": 0,
+     "fromSelectControlID": "txtShinsaDateFrom",
+     "toSelectControlID": "txtShinsaDateTo"
     },
     {
      "fieldName": "btnSearchShinsazumi",
@@ -63,12 +66,14 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "onClick": "",
+     "selectControlID": "btnSearchShinsazumi",
+     "onClick": "onClick_btnSearchShinsazumi",
      "text": "審査済分を検索する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     }
    ],
    "controlType": "Panel",
@@ -85,6 +90,7 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "SearchConditionToShinsazumiShikyuShinseiPanel",
    "onLoad": "",
    "title": "審査済支給申請検索条件",
    "isOpen": true,
@@ -94,7 +100,12 @@
      "postParameterPanelNames": "SearchConditionToShinsazumiShikyuShinseiPanel"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/SearchConditionToShinsazumiShikyuShinseiPanel/onLoad"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -107,6 +118,7 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
+   "panelDisplay": 0,
    "isGroupBox": false
   },
   {
@@ -129,6 +141,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtKetteiDate_core",
      "readOnly": false,
      "isPrivateInfo": false,
      "isPassword": false,
@@ -148,11 +161,11 @@
      "text": "",
      "required": false,
      "placeHolder": "",
-     "textKind": 0,
-     "value": ""
+     "value": "",
+     "textKind": 0
     },
     {
-     "fieldName": "dgMishinsaShikyuShinsei",
+     "fieldName": "dgShinsazumiShikyuShinsei",
      "items": [],
      "controlType": "DataGrid",
      "width": "970",
@@ -168,6 +181,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "dgShinsazumiShikyuShinsei",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": true,
@@ -358,6 +372,25 @@
         "sortKey": "txt3DankaiReset"
        },
        {
+        "columnName": "審査日",
+        "dataName": "txtShinsaDate",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
+        "visible": true,
+        "cellType": 6,
+        "cellDetails": {
+         "cellType": 6,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": ""
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtShinsaDate"
+       },
+       {
         "columnName": "審査結果",
         "dataName": "txtShinsaResult",
         "toolTip": "",
@@ -395,11 +428,11 @@
      },
      "height": "M",
      "onSort": "",
-     "onSelect": "",
+     "onSelect": "onSelect_OnClick",
      "onSelectByDblClick": "",
      "onOnlyRow": "",
      "onNoRow": "",
-     "onMultiRows": "",
+     "onMultiRows": "onSelect_OnClick",
      "dataSource": [],
      "sortOrder": "txtShinsaResult",
      "isAscending": true,
@@ -421,6 +454,7 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "ShinsazumiShikyuShinseiListPanel",
    "onLoad": "",
    "title": "審査済支給申請一覧",
    "isOpen": true,
@@ -430,7 +464,20 @@
      "postParameterPanelNames": "ShinsazumiShikyuShinseiListPanel"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/ShinsazumiShikyuShinseiListPanel/onLoad"
+    },
+    {
+     "eventName": "onClick_btnSearchShinsazumi",
+     "requestUrl": "dbc/db/dbc/ShinsazumiShikyuShinseiListPanel/onClick_btnSearchShinsazumi"
+    },
+    {
+     "eventName": "onSelect_OnClick",
+     "requestUrl": "dbc/db/dbc/ShinsazumiShikyuShinseiListPanel/onSelect_OnClick"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -443,6 +490,7 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
+   "panelDisplay": 0,
    "isGroupBox": false
   },
   {
@@ -465,6 +513,7 @@
      "authorityMode": 0,
      "marginLeft": 0,
      "marginRight": 0,
+     "selectControlID": "JutakuKaishuhiShikyuKetteishaListHakkoDate",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
@@ -502,11 +551,12 @@
      "authorityMode": 0,
      "marginLeft": 0,
      "marginRight": 0,
+     "selectControlID": "JutakuKaishuhiShikyuKetteishaListOutputOrder",
      "title": "出力順序・改頁",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
-     "isGroupBox": true,
+     "isGroupBox": false,
      "businessId": "DBC",
      "controlName": "OutputOrderAndNewpage",
      "dataPassingForDialog": [],
@@ -529,6 +579,7 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "JutakuKaishuhiShikyuKetteishaListPanel",
    "onLoad": "",
    "title": "償還払支給（不支給）決定者一覧表",
    "isOpen": true,
@@ -538,7 +589,12 @@
      "postParameterPanelNames": "JutakuKaishuhiShikyuKetteishaListPanel"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/JutakuKaishuhiShikyuKetteishaListPanel/onLoad"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -551,8 +607,10 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
+   "panelDisplay": 0,
    "isGroupBox": false,
-   "isPublish": true
+   "isPublish": true,
+   "isEmptyControl": false
   },
   {
    "fieldName": "JutakuKaishuhiShikyuKetteiTsuchishoPanel",
@@ -574,6 +632,7 @@
      "authorityMode": 0,
      "marginLeft": 0,
      "marginRight": 0,
+     "selectControlID": "JutakuKaishuhiShikyuKetteiTsuchishoHakkoDate",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
@@ -611,6 +670,7 @@
      "authorityMode": 0,
      "marginLeft": 0,
      "marginRight": 0,
+     "selectControlID": "JutakuKaishuhiShikyuKetteiTsuchishoPaymentMethod",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
@@ -620,7 +680,7 @@
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
      "PaymentDate_title": "支払方法",
-     "PaymentDate_isGroupBox": true,
+     "PaymentDate_isGroupBox": false,
      "PaymentDate_canOpenAndClose": false
     },
     {
@@ -640,11 +700,12 @@
      "authorityMode": 0,
      "marginLeft": 0,
      "marginRight": 0,
+     "selectControlID": "JutakuKaishuhiShikyuKetteiTsuchishoOutputOrder",
      "title": "出力順序",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
-     "isGroupBox": true,
+     "isGroupBox": false,
      "businessId": "DBC",
      "controlName": "OutputOrderAndNewpage",
      "dataPassingForDialog": [],
@@ -667,6 +728,7 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "JutakuKaishuhiShikyuKetteiTsuchishoPanel",
    "onLoad": "",
    "title": "償還払支給（不支給）決定通知書",
    "isOpen": true,
@@ -676,7 +738,12 @@
      "postParameterPanelNames": "JutakuKaishuhiShikyuKetteiTsuchishoPanel"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/JutakuKaishuhiShikyuKetteiTsuchishoPanel/onLoad"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -689,11 +756,13 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
+   "panelDisplay": 0,
    "isGroupBox": false,
-   "isPublish": true
+   "isPublish": false,
+   "isEmptyControl": false
   },
   {
-   "fieldName": "CommonButton",
+   "fieldName": "KyotsuPanel",
    "items": [
     {
      "fieldName": "btnSave",
@@ -702,48 +771,63 @@
      "width": "M",
      "visible": true,
      "displayNone": false,
-     "disabled": false,
+     "disabled": true,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": false,
+     "wrap": true,
      "dependencies": [],
-     "float": 2,
+     "float": 1,
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnSave",
      "onClick": "onClick_btnSave",
      "text": "支給申請を一括決定登録する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     }
    ],
    "controlType": "Panel",
-   "width": "1000",
+   "width": "970",
    "visible": true,
    "displayNone": false,
    "disabled": false,
    "accessKey": "",
    "nextFocusFieldName": "",
-   "wrap": false,
+   "wrap": true,
    "dependencies": [],
-   "float": 0,
+   "float": 1,
    "toolTip": "",
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "KyotsuPanel",
    "onLoad": "",
    "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "CommonButton"
+     "postParameterPanelNames": "KyotsuPanel"
+    },
+    {
+     "postParameterPanelNames": "ShinsazumiShikyuShinseiListPanel"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onSelect_OnClick",
+     "requestUrl": "dbc/db/dbc/KyotsuPanel/onSelect_OnClick"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -756,6 +840,7 @@
    "eraseBorderLeft": true,
    "backgroundColor": 0,
    "widthAuto": false,
+   "panelDisplay": 0,
    "isGroupBox": false
   }
  ],
@@ -773,6 +858,7 @@
  "authorityMode": 0,
  "marginLeft": "XS",
  "marginRight": "XS",
+ "selectControlID": "Page",
  "onLoad": "",
  "title": "住宅改修費支給申請決定",
  "jsPathCollection": [],
@@ -796,7 +882,7 @@
      "panelState": "visible"
     },
     {
-     "visibleDiv": "CommonButton",
+     "visibleDiv": "KyotsuPanel",
      "panelState": "visible"
     },
     {
@@ -838,10 +924,11 @@
  "UIContainerEventMapping": [],
  "loadSequencePanelNames": [
   [
-   "SearchConditionToShinsazumiShikyuShinseiPanel"
+   "ShinsazumiShikyuShinseiListPanel",
+   "KyotsuPanel"
   ],
   [
-   "ShinsazumiShikyuShinseiListPanel"
+   "SearchConditionToShinsazumiShikyuShinseiPanel"
   ],
   [
    "JutakuKaishuhiShikyuKetteishaListPanel"
@@ -863,9 +950,6 @@
   ],
   [
    "JutakuKaishuhiShikyuKetteiTsuchishoOutputOrder"
-  ],
-  [
-   "CommonButton"
   ]
  ],
  "panelMargin": 1,

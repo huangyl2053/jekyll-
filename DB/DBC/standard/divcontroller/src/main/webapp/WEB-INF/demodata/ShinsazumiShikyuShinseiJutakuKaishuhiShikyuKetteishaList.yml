@@ -1,0 +1,9 @@
+## YAML Template.
+---
+- issueDate: 平26.08.10
+  newPageItem: 氏名５０音カナ
+  txt1: 被保険者番号
+  txt2: 氏名５０音カナ
+  txt3: 市町村コード
+  txt4: サービスの分類
+  txt5: 決定通知番号

@@ -100,10 +100,10 @@ var DBC;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "selectControlID": "txtKozaPaymentDate_core",
                             "required": false,
                             "readOnly": false,
                             "placeHolder": "",
-                            "textKind": 0,
                             "isPrivateInfo": false,
                             "isPassword": false,
                             "onFocus": "",
@@ -139,6 +139,7 @@ var DBC;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "selectControlID": "txtMadoguchiPaymentDateRange_core",
                             "readOnly": false,
                             "isPrivateInfo": false,
                             "isPassword": false,
@@ -162,7 +163,9 @@ var DBC;
                             "fromText": "",
                             "toText": "",
                             "fromValue": "",
-                            "toValue": ""
+                            "toValue": "",
+                            "fromSelectControlID": "txtMadoguchiPaymentDateRangeFrom",
+                            "toSelectControlID": "txtMadoguchiPaymentDateRangeTo"
                         }
                     ],
                     "controlType": "Panel",
@@ -179,12 +182,13 @@ var DBC;
                     "authorityMode": 0,
                     "marginLeft": "XS",
                     "marginRight": "XS",
+                    "selectControlID": "PaymentDate",
                     "onLoad": "",
                     "title": "支払方法",
                     "marginTop": "Default",
                     "marginBottom": "Default",
                     "isOpen": true,
-                    "canOpenAndClose": true,
+                    "canOpenAndClose": false,
                     "postParameterPanelNames": [
                         {
                             "postParameterPanelNames": "PaymentDate"
@@ -201,6 +205,7 @@ var DBC;
                     "eraseBorderLeft": false,
                     "backgroundColor": 0,
                     "widthAuto": false,
+                    "panelDisplay": 1,
                     "isGroupBox": false
                 }
             ],
@@ -218,6 +223,7 @@ var DBC;
             "authorityMode": 0,
             "marginLeft": 0,
             "marginRight": 0,
+            "selectControlID": "defaultLayout",
             "relation": [],
             "businessId": "DBC",
             "controlName": "PaymentDate",

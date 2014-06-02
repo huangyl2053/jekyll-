@@ -7,6 +7,9 @@
   hokenKyufuAmount: 72000
   riyoshaFutanAmount: 8000
   hiyoTotalAmount: 80000
+  tenkyoReset: 0
+  DankaiReset3: 0
+  shinsaDate: 平26.07.10
   shinsaResult: 承認
   seiriNo: 0000000001
 - shikyuShinseiDate: 平26.06.01
@@ -16,6 +19,9 @@
   hokenKyufuAmount: 54000
   riyoshaFutanAmount: 6000
   hiyoTotalAmount: 60000
+  tenkyoReset: 0
+  DankaiReset3: 0
+  shinsaDate: 平26.07.10
   shinsaResult: 承認
   seiriNo: 0000000002
 - shikyuShinseiDate: 平26.06.01
@@ -25,6 +31,9 @@
   hokenKyufuAmount: 72000
   riyoshaFutanAmount: 8000
   hiyoTotalAmount: 80000
+  tenkyoReset: 0
+  DankaiReset3: 0
+  shinsaDate: 平26.07.10
   shinsaResult: 承認
   seiriNo: 0000000003 
 - shikyuShinseiDate: 平26.06.01
@@ -34,7 +43,10 @@
   hokenKyufuAmount: 63000
   riyoshaFutanAmount: 7000
   hiyoTotalAmount: 70000
-  shinsaResult: 承認
+  tenkyoReset: 0
+  DankaiReset3: 0
+  shinsaDate: 平26.07.10 
+  shinsaResult:  承認
   seiriNo: 0000000004
 - shikyuShinseiDate: 平26.06.01
   teikyoYM: 平26.5
@@ -43,5 +55,8 @@
   hokenKyufuAmount: 27000
   riyoshaFutanAmount: 3000
   hiyoTotalAmount: 30000
-  shinsaResult: 承認
+  tenkyoReset: 0
+  DankaiReset3: 0
+  shinsaDate: 平26.07.10
+  shinsaResult:  承認
   seiriNo: 0000000005
