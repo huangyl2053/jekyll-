@@ -22,9 +22,9 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "lblSearch",
+     "text": "<<検索条件>>",
      "required": false,
      "align": 0,
-     "text": "<<検索条件>>",
      "isPrivateInfo": false
     },
     {
@@ -45,8 +45,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "btnSearch",
-     "text": "検索する",
      "onClick": "",
+     "text": "検索する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -226,9 +226,9 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "lblKashitsukekinKihon1",
+     "text": "<<基本情報１>>",
      "required": false,
      "align": 0,
-     "text": "<<基本情報１>>",
      "isPrivateInfo": false
     },
     {
@@ -249,9 +249,9 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "lblKashitsukekinKihon2",
+     "text": "<<基本情報２>>",
      "required": false,
      "align": 0,
-     "text": "<<基本情報２>>",
      "isPrivateInfo": false
     },
     {
@@ -272,9 +272,9 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "lblKashitsukekinKihon3",
+     "text": "<<基本情報３>>",
      "required": false,
      "align": 0,
-     "text": "<<基本情報３>>",
      "isPrivateInfo": false
     }
    ],
@@ -339,9 +339,9 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "lblKashitsukekinKaigoKihon1",
+     "text": "<<介護基本情報１>>",
      "required": false,
      "align": 0,
-     "text": "<<介護基本情報１>>",
      "isPrivateInfo": false
     },
     {
@@ -362,9 +362,9 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "lblKashitsukekinKaigoKihon2",
+     "text": "<<介護基本情報２>>",
      "required": false,
      "align": 0,
-     "text": "<<介護基本情報２>>",
      "isPrivateInfo": false
     }
    ],
@@ -691,8 +691,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "btnPrint",
-       "text": "印刷する",
        "onClick": "",
+       "text": "印刷する",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
@@ -804,8 +804,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "btnShinseiSave",
-     "text": "申請情報を保存する",
      "onClick": "",
+     "text": "申請情報を保存する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -874,8 +874,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtShinseiYMD_core",
-     "required": false,
      "text": "",
+     "required": false,
      "isPrivateInfo": false,
      "readOnly": false,
      "placeHolder": "",
@@ -959,8 +959,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtSeikyugaku_core",
-     "required": false,
      "text": "",
+     "required": false,
      "isPrivateInfo": false,
      "readOnly": false,
      "placeHolder": "",
@@ -1007,8 +1007,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtShinseiKingaku_core",
-     "required": false,
      "text": "",
+     "required": false,
      "isPrivateInfo": false,
      "readOnly": false,
      "placeHolder": "",
@@ -1058,7 +1058,6 @@
        "marginLeft": "1",
        "marginRight": "XS",
        "selectControlID": "chkService_core",
-       "required": false,
        "onClick": "",
        "dataSource": [
         {
@@ -1078,16 +1077,17 @@
          "value": "特例介護サービス費等"
         }
        ],
+       "required": false,
        "onChange": "",
        "labelLText": "",
        "labelLWidth": "100",
        "labelLAlign": 2,
        "selectedItem": "",
-       "selectedItems": [],
        "newLineItemNumber": 4,
+       "spaceSize": "L",
+       "selectedItems": [],
        "minCheckedItem": 0,
        "maxCheckedItem": 2,
-       "spaceSize": "L",
        "isAllSelectable": false
       }
      ],
@@ -1152,8 +1152,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtShinseishaName_core",
-       "required": false,
        "text": "",
+       "required": false,
        "isPrivateInfo": false,
        "readOnly": false,
        "placeHolder": "",
@@ -1195,8 +1195,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "btnShinseishaCopy",
-       "text": "被保険者情報をコピーする",
        "onClick": "",
+       "text": "被保険者情報をコピーする",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
@@ -1221,8 +1221,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtShinseishaKana_core",
-       "required": false,
        "text": "",
+       "required": false,
        "isPrivateInfo": false,
        "readOnly": false,
        "placeHolder": "",
@@ -1266,8 +1266,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtShinseishaKankei_core",
-       "required": false,
        "text": "",
+       "required": false,
        "isPrivateInfo": false,
        "readOnly": false,
        "placeHolder": "",
@@ -1309,8 +1309,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtShinseishaYubinNo_core",
-       "required": false,
        "text": "",
+       "required": false,
        "isPrivateInfo": false,
        "readOnly": false,
        "placeHolder": "",
@@ -1352,8 +1352,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtShinseishaJusho_core",
-       "required": false,
        "text": "",
+       "required": false,
        "isPrivateInfo": false,
        "readOnly": false,
        "placeHolder": "",
@@ -1395,8 +1395,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtShinseishaTelNo_core",
-       "required": false,
        "text": "",
+       "required": false,
        "isPrivateInfo": false,
        "readOnly": false,
        "placeHolder": "",
@@ -1482,8 +1482,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtHoshoninName_core",
-       "required": false,
        "text": "",
+       "required": false,
        "isPrivateInfo": false,
        "readOnly": false,
        "placeHolder": "",
@@ -1525,8 +1525,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtHoshoninSeiYMD_core",
-       "required": false,
        "text": "",
+       "required": false,
        "isPrivateInfo": false,
        "readOnly": false,
        "placeHolder": "",
@@ -1565,7 +1565,6 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "radHoshoninSeibetsu_core",
-       "required": false,
        "onClick": "",
        "dataSource": [
         {
@@ -1577,6 +1576,7 @@
          "value": "女"
         }
        ],
+       "required": false,
        "onChange": "",
        "labelLText": "",
        "labelLWidth": "40",
@@ -1603,8 +1603,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtHoshoninKana_core",
-       "required": false,
        "text": "",
+       "required": false,
        "isPrivateInfo": false,
        "readOnly": false,
        "placeHolder": "",
@@ -1648,8 +1648,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtHoshoninKankei_core",
-       "required": false,
        "text": "",
+       "required": false,
        "isPrivateInfo": false,
        "readOnly": false,
        "placeHolder": "",
@@ -1691,8 +1691,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtHoshoninYubinNo_core",
-       "required": false,
        "text": "",
+       "required": false,
        "isPrivateInfo": false,
        "readOnly": false,
        "placeHolder": "",
@@ -1734,8 +1734,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtHoshoninJusho_core",
-       "required": false,
        "text": "",
+       "required": false,
        "isPrivateInfo": false,
        "readOnly": false,
        "placeHolder": "",
@@ -1777,8 +1777,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtHoshoninTelNo_core",
-       "required": false,
        "text": "",
+       "required": false,
        "isPrivateInfo": false,
        "readOnly": false,
        "placeHolder": "",
@@ -1823,8 +1823,8 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtHoshoninKinmuName_core",
-         "required": false,
          "text": "",
+         "required": false,
          "isPrivateInfo": false,
          "readOnly": false,
          "placeHolder": "",
@@ -1866,8 +1866,8 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtHoshoninKinmuJusho_core",
-         "required": false,
          "text": "",
+         "required": false,
          "isPrivateInfo": false,
          "readOnly": false,
          "placeHolder": "",
@@ -1909,8 +1909,8 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtHoshoninKinmuTelNo_core",
-         "required": false,
          "text": "",
+         "required": false,
          "isPrivateInfo": false,
          "readOnly": false,
          "placeHolder": "",
@@ -2037,7 +2037,6 @@
        "marginLeft": "1",
        "marginRight": "XS",
        "selectControlID": "chkSeikyuRyoshusho_core",
-       "required": false,
        "onClick": "",
        "dataSource": [
         {
@@ -2045,16 +2044,17 @@
          "value": "請求書・領収書有"
         }
        ],
+       "required": false,
        "onChange": "",
        "labelLText": "",
        "labelLWidth": "S",
        "labelLAlign": 2,
        "selectedItem": "",
-       "selectedItems": [],
        "newLineItemNumber": 2,
+       "spaceSize": "M",
+       "selectedItems": [],
        "minCheckedItem": 0,
        "maxCheckedItem": 2,
-       "spaceSize": "M",
        "isAllSelectable": false
       },
       {
@@ -2075,8 +2075,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtTeishutsuKanriNo_core",
-       "required": false,
        "text": "",
+       "required": false,
        "isPrivateInfo": false,
        "readOnly": false,
        "placeHolder": "",
@@ -2159,8 +2159,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "btnKashitsukeKakutei",
-     "text": "入力内容を確定する",
      "onClick": "",
+     "text": "入力内容を確定する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -2270,27 +2270,38 @@
    "visibleDivs": [
     {
      "visibleDiv": "KashitsukekinKihon",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "KashitsukekinKaigoKihon",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "KashitsukeShinseiList",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "KashitsukeShinseiKyotsu",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "KashitsukeShinseisho",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "KyufuhiKariireShinseishoPrintSetting",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
+    },
+    {
+     "visibleDiv": "KashitsukeShinseiListInfo",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
