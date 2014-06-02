@@ -94,6 +94,14 @@ public class ShokanShikyuTorokuShomeisho {
         選択
     }
 
+    private List<HashMap> getShokanShikyuTorokuShomeishoYaml() {
+        return YamlLoader.FOR_DBC.loadAsList(new RString("dbc0800000/ShokanShikyuTorokuShomeisho.yml"));
+    }
+
+    private HashMap getShokanShikyuTorokuShomeishoYamlId(int index) {
+        return YamlLoader.FOR_DBC.loadAsList(new RString("dbc0800000/ShokanShikyuTorokuShomeisho.yml")).get(index);
+    }
+
     /**
      * 支給申請書情報で証明書情報を追加するボタンを押下したときの処理です。
      *
@@ -163,7 +171,7 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     private void setTopData(ShokanShikyuTorokuShomeishoDiv panel) {
-        HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(0);
+        HashMap source = getShokanShikyuTorokuShomeishoYamlId(0);
         panel.getTxtShomeishoTeikyoYM().setValue(new RDate(source.get("提供年月").toString()));
         panel.getTxtShomeishoJigyoshaCode().setValue(new RString(source.get("事業者コード").toString()));
         panel.getTxtShomeishoJigyoshaName().setValue(new RString(source.get("事業者名").toString()));
@@ -213,16 +221,16 @@ public class ShokanShikyuTorokuShomeisho {
 
         HashMap source;
         RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
-        source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(1);
+        source = getShokanShikyuTorokuShomeishoYamlId(1);
         keikaku.getTxtShomeishoKihonJigyoshaCode().setValue(new RString(source.get("事業者コード").toString()));
         keikaku.getTxtShomeishoKihonJigyoshaName().setValue(new RString(source.get("事業者名").toString()));
         keikaku.getTxtShomeishoKihonKyufuritsu().setValue(new Decimal(source.get("保険給付率").toString()));
         if (date.isBefore(基本情報切替.H2104.getDate())) {
-            source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(2);
+            source = getShokanShikyuTorokuShomeishoYamlId(2);
             kikan.getTxtShomeishoKihonKaishiYMD().setValue(new RDate(source.get("開始日").toString()));
             kikan.getTxtShomeishoKihonChushiYMD().setValue(new RDate(source.get("中止日").toString()));
         } else {
-            source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(3);
+            source = getShokanShikyuTorokuShomeishoYamlId(3);
             nyutaisho.getTxtShomeishoKihonNyushoYMD().setValue(new RDate(source.get("入所日").toString()));
             nyutaisho.getTxtShomeishoKihonTaishoYMD().setValue(new RDate(source.get("退所日").toString()));
             nyutaisho.getTxtShomeishoKihonNyushoNissu().setValue(new Decimal(source.get("入所実日数").toString()));
@@ -311,7 +319,7 @@ public class ShokanShikyuTorokuShomeisho {
         DataGrid<dgServiceTeikyoShomeishoMeisaiList_Row> dgRow = meisaiList.getDgServiceTeikyoShomeishoMeisaiList();
         List<dgServiceTeikyoShomeishoMeisaiList_Row> dgRowList = dgRow.getDataSource();
 
-        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml"));
+        List<HashMap> sourceList = getShokanShikyuTorokuShomeishoYaml();
         dgRowList.clear();
         for (int i = 4; i < 7; i++) {
             dgRowList.add(create給付費明細一覧アイテム(
@@ -352,7 +360,7 @@ public class ShokanShikyuTorokuShomeisho {
                     getDgServiceTeikyoShomeishoMeisaiList().getActiveRowId();
             meisaiMeisai.getTxtKyufuhiSelectedIndex().setValue(new RString(String.valueOf(index)));
         }
-        HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(7);
+        HashMap source = getShokanShikyuTorokuShomeishoYamlId(7);
         meisaiMeisai.getTxtKyufuhiShuruiCode().setValue(new RString(source.get("サービス種類コード").toString()));
         meisaiMeisai.getTxtKyufuhiServiceCode().setValue(new RString(source.get("サービスコード").toString()));
         meisaiMeisai.getTxtKyufuhiServiceName().setValue(new RString(source.get("サービス名称").toString()));
@@ -510,7 +518,7 @@ public class ShokanShikyuTorokuShomeisho {
         DataGrid<dgServiceTeikyoShomeishoRyoyoList_Row> dgRow = ryoyoList.getDgServiceTeikyoShomeishoRyoyoList();
         List<dgServiceTeikyoShomeishoRyoyoList_Row> dgRowList = dgRow.getDataSource();
 
-        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml"));
+        List<HashMap> sourceList = getShokanShikyuTorokuShomeishoYaml();
         dgRowList.clear();
         for (int i = 8; i < 11; i++) {
             dgRowList.add(create療養費一覧アイテム(
@@ -553,10 +561,10 @@ public class ShokanShikyuTorokuShomeisho {
                     .getDgServiceTeikyoShomeishoRyoyoList().getActiveRowId();
             ryoyoMeisai.getTxtRyoyoSelectedIndex().setValue(new RString(String.valueOf(index)));
         }
-        HashMap sourceShikkan = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(11);
-        HashMap sourceKinkyuji = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(12);
-        HashMap sourceOshin = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(13);
-        HashMap sourceTensu = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(14);
+        HashMap sourceShikkan = getShokanShikyuTorokuShomeishoYamlId(11);
+        HashMap sourceKinkyuji = getShokanShikyuTorokuShomeishoYamlId(12);
+        HashMap sourceOshin = getShokanShikyuTorokuShomeishoYamlId(13);
+        HashMap sourceTensu = getShokanShikyuTorokuShomeishoYamlId(14);
         ShokanShikyuTorokuShomeishoRyoyoShikkanDiv shikkan = ryoyoMeisai.getShokanShikyuTorokuShomeishoRyoyoShikkan();
         ShokanShikyuTorokuShomeishoRyoyoKinkyujiDiv kinkyuji = ryoyoMeisai.getShokanShikyuTorokuShomeishoRyoyoKinkyuji();
         ShokanShikyuTorokuShomeishoRyoyoOshinTsuinDiv oshin = ryoyoMeisai.getShokanShikyuTorokuShomeishoRyoyoOshinTsuin();
@@ -830,7 +838,7 @@ public class ShokanShikyuTorokuShomeisho {
                 .getDgServiceTeikyoShomeishoShinryoList();
         List<dgServiceTeikyoShomeishoShinryoList_Row> dgRowListH1504 = dgRowH1504.getDataSource();
 
-        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml"));
+        List<HashMap> sourceList = getShokanShikyuTorokuShomeishoYaml();
         dgRowListH1503.clear();
         for (int i = 15; i < 18; i++) {
             dgRowListH1503.add(create特定診療費一覧H1503アイテム(
@@ -889,7 +897,7 @@ public class ShokanShikyuTorokuShomeisho {
         }
         RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
         if (date.isBefore(診療費切替.H1504.getDate())) {
-            HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(21);
+            HashMap source = getShokanShikyuTorokuShomeishoYamlId(21);
             ShokanShikyuTorokuShomeishoShinryoMeisaiH1503Div h1503div = shinryoMeisai
                     .getShokanShikyuTorokuShomeishoShinryoMeisaiH1503();
             h1503div.getTxtShinryohiShobyoNameH1503().setValue(new RString(source.get("傷病名").toString()));
@@ -902,7 +910,7 @@ public class ShokanShikyuTorokuShomeisho {
             h1503div.getTxtShinryohiGokeiTanisuH1503().setValue(new Decimal(source.get("合計単位数").toString()));
             h1503div.getTxtShinryohiTekiyoH1503().setValue(new RString(source.get("摘要").toString()));
         } else {
-            HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(22);
+            HashMap source = getShokanShikyuTorokuShomeishoYamlId(22);
             ShokanShikyuTorokuShomeishoShinryoMeisaiH1504Div h1504div = shinryoMeisai
                     .getShokanShikyuTorokuShomeishoShinryoMeisaiH1504();
             h1504div.getTxtShinryohiShobyoNameH1504().setValue(new RString(source.get("傷病名").toString()));
@@ -1196,7 +1204,7 @@ public class ShokanShikyuTorokuShomeisho {
                 .getDgServiceTeikyoShomeishoShokujiList();
         List<dgServiceTeikyoShomeishoShokujiList_Row> dgRowListH1504 = dgRowH1504.getDataSource();
 
-        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml"));
+        List<HashMap> sourceList = getShokanShikyuTorokuShomeishoYaml();
         dgRowListH1503.clear();
         for (int i = 23; i < 26; i++) {
             dgRowListH1503.add(create食事費用一覧H1503アイテム(
@@ -1259,7 +1267,7 @@ public class ShokanShikyuTorokuShomeisho {
         }
         RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
         if (date.isBefore(食事費用切替.H1504.getDate())) {
-            HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(29);
+            HashMap source = getShokanShikyuTorokuShomeishoYamlId(29);
             ShokanShikyuTorokuShomeishoShokujiMeisaiH1503Div h1503div = shokujiMeisai
                     .getShokanShikyuTorokuShomeishoShokujiMeisaiH1503();
             h1503div.getTxtShokujihiKihonNissu().setValue(new Decimal(source.get("基本食日数").toString()));
@@ -1274,7 +1282,7 @@ public class ShokanShikyuTorokuShomeisho {
             h1503div.getTxtShokujihiFutanGetsugaku().setValue(new Decimal(source.get("標準負担月額").toString()));
             h1503div.getTxtShokujihiSeikyugaku().setValue(new Decimal(source.get("食事提供請求額").toString()));
         } else {
-            HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(30);
+            HashMap source = getShokanShikyuTorokuShomeishoYamlId(30);
             ShokanShikyuTorokuShomeishoShokujiMeisaiH1504Div h1504div = shokujiMeisai
                     .getShokanShikyuTorokuShomeishoShokujiMeisaiH1504();
             h1504div.getTxtShokujihiShuruiCode().setValue(new RString(source.get("サービス種類コード").toString()));
@@ -1582,7 +1590,7 @@ public class ShokanShikyuTorokuShomeisho {
                 .getDgShokanShikyuTorokuShomeishoKeikakuList();
         List<dgShokanShikyuTorokuShomeishoKeikakuList_Row> dgRowListH2104 = dgRowH2104.getDataSource();
 
-        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml"));
+        List<HashMap> sourceList = getShokanShikyuTorokuShomeishoYaml();
         RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
         if (date.isBefore(計画費切替.H2104.getDate())) {
             keikakuH2103.getRadKeikakuhiShinsaHohoH2103().setSelectedItem(new RString("key0"));
@@ -1650,7 +1658,7 @@ public class ShokanShikyuTorokuShomeisho {
         }
         RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
         if (計画費切替.H2103.getDate().isBefore(date)) {
-            HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(36);
+            HashMap source = getShokanShikyuTorokuShomeishoYamlId(36);
             keikakuH2104Meisai.getTxtKeikakuhiShuruiCodeH2104().setValue(new RString(source.get("サービス種類コード").toString()));
             keikakuH2104Meisai.getTxtKeikakuhiServiceCodeH2104().setValue(new RString(source.get("サービスコード").toString()));
             keikakuH2104Meisai.getTxtKeikakuhiServiceNameH2104().setValue(new RString(source.get("サービス名称").toString()));
@@ -1833,7 +1841,7 @@ public class ShokanShikyuTorokuShomeisho {
                 .getDgServiceTeikyoShomeishoShukeiList();
         List<dgServiceTeikyoShomeishoShukeiList_Row> dgRowList = dgRow.getDataSource();
 
-        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml"));
+        List<HashMap> sourceList = getShokanShikyuTorokuShomeishoYaml();
         dgRowList.clear();
         for (int i = 37; i < 40; i++) {
             dgRowList.add(create請求額一覧アイテム(
@@ -1876,7 +1884,7 @@ public class ShokanShikyuTorokuShomeisho {
                     .getDgServiceTeikyoShomeishoShukeiList().getActiveRowId();
             meisai.getTxtShukeiSelectedIndex().setValue(new RString(String.valueOf(index)));
         }
-        HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(40);
+        HashMap source = getShokanShikyuTorokuShomeishoYamlId(40);
         meisai.getRadShukeiShinsaHoho().setSelectedItem(new RString("key0"));
         meisai.getTxtShukeiShuruiCode().setValue(new RString(source.get("サービス種類").toString()));
         meisai.getTxtShukeiShuruiName().setValue(new RString(source.get("サービス種類名").toString()));
@@ -2080,7 +2088,7 @@ public class ShokanShikyuTorokuShomeisho {
                 .getShokanShikyuTorokuShomeishoNyushoListInfo().getDgServiceTeikyoShomeishoNyushoList();
         List<dgServiceTeikyoShomeishoNyushoList_Row> dgRowList = dgRow.getDataSource();
 
-        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml"));
+        List<HashMap> sourceList = getShokanShikyuTorokuShomeishoYaml();
         dgRowList.clear();
         for (int i = 41; i < 44; i++) {
             dgRowList.add(create特定入所者費用一覧アイテム(
@@ -2124,7 +2132,7 @@ public class ShokanShikyuTorokuShomeisho {
                     .getDgServiceTeikyoShomeishoNyushoList().getActiveRowId();
             meisai.getTxtNyushoSelectedIndex().setValue(new RString(String.valueOf(index)));
         }
-        HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(44);
+        HashMap source = getShokanShikyuTorokuShomeishoYamlId(44);
         meisai.getTxtNyushohiShuruiCode().setValue(new RString(source.get("サービス種類コード").toString()));
         meisai.getTxtNyushohiServiceCode().setValue(new RString(source.get("サービスコード").toString()));
         meisai.getTxtNyushohiServiceName().setValue(new RString(source.get("サービス名").toString()));
@@ -2297,7 +2305,7 @@ public class ShokanShikyuTorokuShomeisho {
                 .getDgServiceTeikyoShomeishoShafukuList();
         List<dgServiceTeikyoShomeishoShafukuList_Row> dgRowList = dgRow.getDataSource();
 
-        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml"));
+        List<HashMap> sourceList = getShokanShikyuTorokuShomeishoYaml();
         dgRowList.clear();
         for (int i = 45; i < 48; i++) {
             dgRowList.add(create社福軽減額一覧アイテム(
@@ -2340,7 +2348,7 @@ public class ShokanShikyuTorokuShomeisho {
                     .getShokanShikyuTorokuShomeishoShafukuListInfo().getDgServiceTeikyoShomeishoShafukuList().getActiveRowId();
             meisai.getTxtShafukuSelectedIndex().setValue(new RString(String.valueOf(index)));
         }
-        HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(48);
+        HashMap source = getShokanShikyuTorokuShomeishoYamlId(48);
         meisai.getTxtShafukugakuFutanSogaku().setValue(new Decimal(source.get("受領すべき利用者負担の総額").toString()));
         meisai.getTxtShafukugakuKeigengaku().setValue(new Decimal(source.get("軽減額").toString()));
         meisai.getTxtShafukugakuKeigengoFutangaku().setValue(new Decimal(source.get("軽減後利用者負担額").toString()));

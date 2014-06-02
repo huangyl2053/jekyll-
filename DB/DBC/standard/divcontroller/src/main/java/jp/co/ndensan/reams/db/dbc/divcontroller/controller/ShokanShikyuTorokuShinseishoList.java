@@ -36,7 +36,7 @@ public class ShokanShikyuTorokuShinseishoList {
     }
 
     private void setShinseishoListData(ShokanShikyuTorokuShinseishoListDiv panel) {
-        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShinseishoList.yml"));
+        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("dbc0800000/ShokanShikyuTorokuShinseishoList.yml"));
 
         DataGrid<dgShokanShikyuShinseishoList_Row> dgListRow = panel.getShokanShikyuTorokuShinseishoListInfo().getDgShokanShikyuShinseishoList();
         List<dgShokanShikyuShinseishoList_Row> dgList = dgListRow.getDataSource();

@@ -28,6 +28,14 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
  */
 public class ShokanShikyuTorokuShinseisho {
 
+    private List<HashMap> getShokanShikyuTorokuShinseishoYaml() {
+        return YamlLoader.FOR_DBC.loadAsList(new RString("dbc0800000/ShokanShikyuTorokuShinseisho.yml"));
+    }
+
+    private HashMap getShokanShikyuTorokuShinseishoYamlId(int index) {
+        return YamlLoader.FOR_DBC.loadAsList(new RString("dbc0800000/ShokanShikyuTorokuShinseisho.yml")).get(index);
+    }
+
     /**
      * 申請書一覧で行を選択した時の支給申請書情報パネルの処理です。
      *
@@ -39,8 +47,8 @@ public class ShokanShikyuTorokuShinseisho {
         setShinseishoData(panel);
 
         eraseAnotherKozaJoho(panel, 口座情報.窓口払);
-        setKozaJohooEnable(panel, 口座情報.窓口払);
-        setKozaJohooData(panel, 口座情報.窓口払);
+        setKozaJohoEnable(panel, 口座情報.窓口払);
+        setKozaJohoData(panel, 口座情報.窓口払);
 
         setShomeishoData(panel);
         setShomeishoList(panel);
@@ -61,8 +69,8 @@ public class ShokanShikyuTorokuShinseisho {
         setShinseishoData(panel);
 
         eraseAnotherKozaJoho(panel, 口座情報.窓口払);
-        setKozaJohooEnable(panel, 口座情報.窓口払);
-        setKozaJohooData(panel, 口座情報.窓口払);
+        setKozaJohoEnable(panel, 口座情報.窓口払);
+        setKozaJohoData(panel, 口座情報.窓口払);
 
         setShomeishoData(panel);
         setShomeishoList(panel);
@@ -86,8 +94,8 @@ public class ShokanShikyuTorokuShinseisho {
      */
     public ResponseData<ShokanShikyuTorokuShinseishoDiv> onClickMado(ShokanShikyuTorokuShinseishoDiv panel) {
         eraseAnotherKozaJoho(panel, 口座情報.窓口払);
-        setKozaJohooEnable(panel, 口座情報.窓口払);
-        setKozaJohooData(panel, 口座情報.窓口払);
+        setKozaJohoEnable(panel, 口座情報.窓口払);
+        setKozaJohoData(panel, 口座情報.窓口払);
         ResponseData<ShokanShikyuTorokuShinseishoDiv> response = new ResponseData<>();
         response.data = panel;
         return response;
@@ -101,23 +109,23 @@ public class ShokanShikyuTorokuShinseisho {
      */
     public ResponseData<ShokanShikyuTorokuShinseishoDiv> onClickKoza(ShokanShikyuTorokuShinseishoDiv panel) {
         eraseAnotherKozaJoho(panel, 口座情報.口座払);
-        setKozaJohooEnable(panel, 口座情報.口座払);
-        setKozaJohooData(panel, 口座情報.口座払);
+        setKozaJohoEnable(panel, 口座情報.口座払);
+        setKozaJohoData(panel, 口座情報.口座払);
         ResponseData<ShokanShikyuTorokuShinseishoDiv> response = new ResponseData<>();
         response.data = panel;
         return response;
     }
 
     private void setTopData(ShokanShikyuTorokuShinseishoDiv panel) {
-        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShinseisho.yml"));
-        panel.getTxtShinseiTeikyoYM().setValue(new RDate(sourceList.get(0).get("提供年月").toString()));
-        panel.getTxtShinseiSeiriNo().setValue(new RString(sourceList.get(0).get("整理番号").toString()));
-        panel.getTxtShinseiInputKubun().setValue(new RString(sourceList.get(0).get("入力区分").toString()));
+        HashMap source = getShokanShikyuTorokuShinseishoYamlId(0);
+        panel.getTxtShinseiTeikyoYM().setValue(new RDate(source.get("提供年月").toString()));
+        panel.getTxtShinseiSeiriNo().setValue(new RString(source.get("整理番号").toString()));
+        panel.getTxtShinseiInputKubun().setValue(new RString(source.get("入力区分").toString()));
     }
 
     private void setShinseishoData(ShokanShikyuTorokuShinseishoDiv panel) {
         ShokanShikyuTorokuShinseiInfoDiv infoDiv = panel.getTabShokanShikyuTorokuShinseisho().getShokanShikyuTorokuShinseiInfo();
-        HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShinseisho.yml")).get(1);
+        HashMap source = getShokanShikyuTorokuShinseishoYamlId(1);
         infoDiv.getTxtShinseiShinseiYMD().setValue(new RDate(source.get("申請日").toString()));
         infoDiv.getTxtShinseiUketsukeYMD().setValue(new RDate(source.get("受付日").toString()));
         infoDiv.getRadShinseiShinseiKubun().setSelectedItem(new RString(source.get("申請書区分").toString()));
@@ -160,7 +168,7 @@ public class ShokanShikyuTorokuShinseisho {
         }
     }
 
-    private void setKozaJohooEnable(ShokanShikyuTorokuShinseishoDiv panel, 口座情報 kozaJoho) {
+    private void setKozaJohoEnable(ShokanShikyuTorokuShinseishoDiv panel, 口座情報 kozaJoho) {
         ShokanShikyuTorokuKozaInfoDiv infoDiv = panel.getTabShokanShikyuTorokuShinseisho().getShokanShikyuTorokuKozaInfo();
         ShokanShikyuTorokuKozaInfoMadoDiv mado = infoDiv.getShokanShikyuTorokuKozaInfoMado();
         ShokanShikyuTorokuKozaInfoKozaDiv koza = infoDiv.getShokanShikyuTorokuKozaInfoKoza();
@@ -189,13 +197,13 @@ public class ShokanShikyuTorokuShinseisho {
         }
     }
 
-    private void setKozaJohooData(ShokanShikyuTorokuShinseishoDiv panel, 口座情報 kozaJoho) {
+    private void setKozaJohoData(ShokanShikyuTorokuShinseishoDiv panel, 口座情報 kozaJoho) {
         ShokanShikyuTorokuKozaInfoDiv infoDiv = panel.getTabShokanShikyuTorokuShinseisho().getShokanShikyuTorokuKozaInfo();
         ShokanShikyuTorokuKozaInfoMadoDiv mado = infoDiv.getShokanShikyuTorokuKozaInfoMado();
         ShokanShikyuTorokuKozaInfoKozaDiv koza = infoDiv.getShokanShikyuTorokuKozaInfoKoza();
 
         if (kozaJoho.equals(口座情報.窓口払)) {
-            HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShinseisho.yml")).get(2);
+            HashMap source = getShokanShikyuTorokuShinseishoYamlId(2);
             mado.getTxtShinseiShiharaiBasho().setValue(new RString(source.get("支払場所").toString()));
             mado.getTxtShinseiKaishiYMD().setValue(new RDate(source.get("開始日").toString()));
             mado.getTxtShinseiKaishiH().setValue(new Decimal(source.get("開始時").toString()));
@@ -204,7 +212,7 @@ public class ShokanShikyuTorokuShinseisho {
             mado.getTxtShinseiShuryoH().setValue(new Decimal(source.get("終了時").toString()));
             mado.getTxtShinseiShuryoM().setValue(new Decimal(source.get("終了分").toString()));
         } else {
-            HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShinseisho.yml")).get(3);
+            HashMap source = getShokanShikyuTorokuShinseishoYamlId(3);
             koza.getTxtShinseiKinyuKikanCode().setValue(new RString(source.get("金融機関コード").toString()));
             koza.getTxtShinseiShitenCode().setValue(new RString(source.get("支店コード").toString()));
             koza.getTxtShinseiKozaShubetsu().setValue(new RString(source.get("口座種別").toString()));
@@ -218,7 +226,7 @@ public class ShokanShikyuTorokuShinseisho {
     private void setShomeishoData(ShokanShikyuTorokuShinseishoDiv panel) {
         ShokanShikyuTorokuShomeishoInfoDiv infoDiv = panel.getTabShokanShikyuTorokuShinseisho().
                 getShokanShikyuTorokuShomeishoInfo();
-        HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShinseisho.yml")).get(4);
+        HashMap source = getShokanShikyuTorokuShinseishoYamlId(4);
 
         infoDiv.getTxtShinseiTeikyoshoShinseiYMD().setValue(new RDate(source.get("申請日").toString()));
         infoDiv.getTxtShinseiJigyoshaCode().setValue(new RString(source.get("事業者コード").toString()));
@@ -230,7 +238,7 @@ public class ShokanShikyuTorokuShinseisho {
                 getShokanShikyuTorokuShomeishoInfo();
         List<dgServiceTeikyoShomeishoList_Row> dgRowList = infoDiv.getShokanShikyuTorokuShomeishoListInfo().
                 getDgServiceTeikyoShomeishoList().getDataSource();
-        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShinseisho.yml"));
+        List<HashMap> sourceList = getShokanShikyuTorokuShinseishoYaml();
         Button btnSelect = new Button();
         Button btnEdit = new Button();
         Button btnDelete = new Button();
