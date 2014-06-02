@@ -2880,11 +2880,11 @@
            "dataSource": [
             {
              "key": "key0",
-             "value": "value0"
+             "value": "1:居宅自己支援事業所"
             },
             {
              "key": "key1",
-             "value": "value1"
+             "value": "2:自己作成"
             }
            ],
            "onFocus": "",
@@ -3243,11 +3243,31 @@
            "dataSource": [
             {
              "key": "key0",
-             "value": "value0"
+             "value": "1:非該当"
             },
             {
-             "key": "key1",
-             "value": "value1"
+             "key": "key3",
+             "value": "3:医療機関入院"
+            },
+            {
+             "key": "key4",
+             "value": "4:死亡"
+            },
+            {
+             "key": "key5",
+             "value": "5:その他"
+            },
+            {
+             "key": "key6",
+             "value": "6:介護老人福祉施設入所"
+            },
+            {
+             "key": "key7",
+             "value": "7:介護老人保健施設入所"
+            },
+            {
+             "key": "key8",
+             "value": "8:介護療養型医療施設入院"
             }
            ],
            "onFocus": "",
@@ -3503,11 +3523,35 @@
            "dataSource": [
             {
              "key": "key0",
-             "value": "value0"
+             "value": "1:居宅"
             },
             {
-             "key": "key1",
-             "value": "value1"
+             "key": "key2",
+             "value": "2:医療機関"
+            },
+            {
+             "key": "key3",
+             "value": "3:介護老人福祉施設"
+            },
+            {
+             "key": "key4",
+             "value": "4:介護老人保健施設"
+            },
+            {
+             "key": "key5",
+             "value": "5:介護療養型医療施設"
+            },
+            {
+             "key": "key6",
+             "value": "6:認知症対応型共同生活介護"
+            },
+            {
+             "key": "key7",
+             "value": "7:特定施設入居者生活介護"
+            },
+            {
+             "key": "key8",
+             "value": "8:その他"
             }
            ],
            "onFocus": "",
@@ -3543,11 +3587,31 @@
            "dataSource": [
             {
              "key": "key0",
-             "value": "value0"
+             "value": "1:居宅"
             },
             {
-             "key": "key1",
-             "value": "value1"
+             "key": "key3",
+             "value": "3:医療機関入院"
+            },
+            {
+             "key": "key4",
+             "value": "4:死亡"
+            },
+            {
+             "key": "key5",
+             "value": "5:その他"
+            },
+            {
+             "key": "key6",
+             "value": "6:介護老人福祉施設入所"
+            },
+            {
+             "key": "key7",
+             "value": "7:介護老人保健施設入所"
+            },
+            {
+             "key": "key8",
+             "value": "8:介護療養型医療施設入院"
             }
            ],
            "onFocus": "",
@@ -9690,11 +9754,31 @@
            "dataSource": [
             {
              "key": "key0",
-             "value": "value0"
+             "value": "1:指定事業所"
             },
             {
-             "key": "key1",
-             "value": "value1"
+             "key": "key2",
+             "value": "2:基準該当事業所"
+            },
+            {
+             "key": "key3",
+             "value": "3:相当サービス事業所"
+            },
+            {
+             "key": "key4",
+             "value": "4:その他"
+            },
+            {
+             "key": "key5",
+             "value": "5:地域密着型事業所"
+            },
+            {
+             "key": "key6",
+             "value": "6:混在型事業所Ⅰ"
+            },
+            {
+             "key": "key7",
+             "value": "7:混在型事業所Ⅱ"
             }
            ],
            "onFocus": "",
@@ -10243,11 +10327,31 @@
              "dataSource": [
               {
                "key": "key0",
-               "value": "value0"
+               "value": "1:指定事業所"
               },
               {
-               "key": "key1",
-               "value": "value1"
+               "key": "key2",
+               "value": "2:基準該当事業所"
+              },
+              {
+               "key": "key3",
+               "value": "3:相当サービス事業所"
+              },
+              {
+               "key": "key4",
+               "value": "4:その他"
+              },
+              {
+               "key": "key5",
+               "value": "5:地域密着型事業所"
+              },
+              {
+               "key": "key6",
+               "value": "6:混在型事業所Ⅰ"
+              },
+              {
+               "key": "key7",
+               "value": "7:混在型事業所Ⅱ"
               }
              ],
              "onFocus": "",
@@ -13811,11 +13915,15 @@
            "dataSource": [
             {
              "key": "key0",
-             "value": "value0"
+             "value": "訪問介護"
             },
             {
              "key": "key1",
-             "value": "value1"
+             "value": "訪問入浴介護"
+            },
+            {
+             "key": "key2",
+             "value": "訪問看護"
             }
            ],
            "onFocus": "",
@@ -13851,11 +13959,11 @@
            "dataSource": [
             {
              "key": "key0",
-             "value": "value0"
+             "value": "90"
             },
             {
              "key": "key1",
-             "value": "value1"
+             "value": "70"
             }
            ],
            "onFocus": "",

@@ -114,6 +114,7 @@ public class ShokanShikyuTorokuShomeisho {
         setNyushoListData(panel);
         setShafukuListData(panel);
 
+        showKihon(panel);
         showKyufuhi(panel, 一覧明細表示.一覧表示);
         showRyoyo(panel, 一覧明細表示.一覧表示);
         showShinryo(panel, 一覧明細表示.一覧表示);
@@ -147,6 +148,7 @@ public class ShokanShikyuTorokuShomeisho {
         setNyushoListData(panel);
         setShafukuListData(panel);
 
+        showKihon(panel);
         showKyufuhi(panel, 一覧明細表示.一覧表示);
         showRyoyo(panel, 一覧明細表示.一覧表示);
         showShinryo(panel, 一覧明細表示.一覧表示);
@@ -170,24 +172,62 @@ public class ShokanShikyuTorokuShomeisho {
     }
 
     // !!!!!!!!!!!!!!!!!!!!!!↓↓ここから基本情報タブに関連するコード↓↓!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    private enum 基本情報切替 {
+
+        H2103(20090331),
+        H2104(20090401);
+        private final RDate date;
+
+        private 基本情報切替(int dateString) {
+            this.date = new RDate(dateString);
+        }
+
+        public RDate getDate() {
+            return date;
+        }
+    }
+
+    private void showKihon(ShokanShikyuTorokuShomeishoDiv panel) {
+        ShokanShikyuTorokuShomeishoKihonDiv kihon = panel.getTabShokanShikyuTorokuShomeisho()
+                .getShokanShikyuTorokuShomeishoKihon();
+        ShokanShikyuTorokuShomeishoKihonKeikakuDiv keikaku = kihon.getShokanShikyuTorokuShomeishoKihonKeikaku();
+        ShokanShikyuTorokuShomeishoKihonKikanDiv kikan = kihon.getShokanShikyuTorokuShomeishoKihonKikan();
+        ShokanShikyuTorokuShomeishoKihonNyutaishoDiv nyutaisho = kihon.getShokanShikyuTorokuShomeishoKihonNyutaisho();
+
+        RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
+        keikaku.setDisabled(false);
+        if (date.isBefore(基本情報切替.H2104.getDate())) {
+            kikan.setDisabled(false);
+            nyutaisho.setDisabled(true);
+        } else {
+            kikan.setDisabled(true);
+            nyutaisho.setDisabled(false);
+        }
+    }
+
     private void setKihonData(ShokanShikyuTorokuShomeishoDiv panel) {
         ShokanShikyuTorokuShomeishoKihonDiv kihon = panel.getTabShokanShikyuTorokuShomeisho().getShokanShikyuTorokuShomeishoKihon();
         ShokanShikyuTorokuShomeishoKihonKeikakuDiv keikaku = kihon.getShokanShikyuTorokuShomeishoKihonKeikaku();
         ShokanShikyuTorokuShomeishoKihonKikanDiv kikan = kihon.getShokanShikyuTorokuShomeishoKihonKikan();
         ShokanShikyuTorokuShomeishoKihonNyutaishoDiv nyutaisho = kihon.getShokanShikyuTorokuShomeishoKihonNyutaisho();
 
-        HashMap source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(1);
+        HashMap source;
+        RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
+        source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(1);
         keikaku.getTxtShomeishoKihonJigyoshaCode().setValue(new RString(source.get("事業者コード").toString()));
         keikaku.getTxtShomeishoKihonJigyoshaName().setValue(new RString(source.get("事業者名").toString()));
         keikaku.getTxtShomeishoKihonKyufuritsu().setValue(new Decimal(source.get("保険給付率").toString()));
-        source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(2);
-        kikan.getTxtShomeishoKihonKaishiYMD().setValue(new RDate(source.get("開始日").toString()));
-        kikan.getTxtShomeishoKihonChushiYMD().setValue(new RDate(source.get("中止日").toString()));
-        source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(3);
-        nyutaisho.getTxtShomeishoKihonNyushoYMD().setValue(new RDate(source.get("入所日").toString()));
-        nyutaisho.getTxtShomeishoKihonTaishoYMD().setValue(new RDate(source.get("退所日").toString()));
-        nyutaisho.getTxtShomeishoKihonNyushoNissu().setValue(new Decimal(source.get("入所実日数").toString()));
-        nyutaisho.getTxtShomeishoKihonGaihakuNissu().setValue(new Decimal(source.get("外泊日数").toString()));
+        if (date.isBefore(基本情報切替.H2104.getDate())) {
+            source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(2);
+            kikan.getTxtShomeishoKihonKaishiYMD().setValue(new RDate(source.get("開始日").toString()));
+            kikan.getTxtShomeishoKihonChushiYMD().setValue(new RDate(source.get("中止日").toString()));
+        } else {
+            source = YamlLoader.FOR_DBC.loadAsList(new RString("ShokanShikyuTorokuShomeisho.yml")).get(3);
+            nyutaisho.getTxtShomeishoKihonNyushoYMD().setValue(new RDate(source.get("入所日").toString()));
+            nyutaisho.getTxtShomeishoKihonTaishoYMD().setValue(new RDate(source.get("退所日").toString()));
+            nyutaisho.getTxtShomeishoKihonNyushoNissu().setValue(new Decimal(source.get("入所実日数").toString()));
+            nyutaisho.getTxtShomeishoKihonGaihakuNissu().setValue(new Decimal(source.get("外泊日数").toString()));
+        }
     }
     // !!!!!!!!!!!!!!!!!!!!!!↑↑ここまで基本情報タブに関連するコード↑↑!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
