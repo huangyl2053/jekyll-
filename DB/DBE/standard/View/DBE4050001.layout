@@ -144,8 +144,7 @@
        "textAlign": 0,
        "textKind": 0,
        "isComboBox": false,
-       "suggest": [],
-       "permitCharactor": "./_-"
+       "suggest": []
       },
       {
        "fieldName": "lblKara1",
@@ -212,8 +211,7 @@
        "textAlign": 0,
        "textKind": 0,
        "isComboBox": false,
-       "suggest": [],
-       "permitCharactor": "./_-"
+       "suggest": []
       },
       {
        "fieldName": "txtHihokenshaNo",
@@ -255,8 +253,7 @@
        "textAlign": 0,
        "textKind": 0,
        "isComboBox": false,
-       "suggest": [],
-       "permitCharactor": ""
+       "suggest": []
       },
       {
        "fieldName": "btnTaishoKensaku",
@@ -290,7 +287,7 @@
        "controlType": "Button",
        "width": "140",
        "visible": true,
-       "displayNone": false,
+       "displayNone": true,
        "disabled": false,
        "accessKey": "",
        "nextFocusFieldName": "",
@@ -397,7 +394,7 @@
           "cellDetails": {
            "cellType": 8,
            "text": "処理",
-           "onClick": "",
+           "onClick": "onClick_btnSentaku",
            "imageFileUrl": "",
            "imageWidth": "",
            "imageHeight": ""
@@ -560,17 +557,130 @@
           "resize": true,
           "isPrivateInfo": false,
           "sortKey": "調査票受領日"
+         },
+         {
+          "columnName": "保険者番号",
+          "dataName": "保険者番号",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 10,
+          "visible": false,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": "保険者番号"
+         },
+         {
+          "columnName": "被保険者区分",
+          "dataName": "被保険者区分",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 10,
+          "visible": false,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": "被保険者区分"
+         },
+         {
+          "columnName": "生年月日",
+          "dataName": "生年月日",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 10,
+          "visible": false,
+          "cellType": 7,
+          "cellDetails": {
+           "cellType": 7,
+           "ymdKubun": 2,
+           "displayFormat": 0,
+           "onChange": ""
+          },
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": "生年月日"
+         },
+         {
+          "columnName": "年齢",
+          "dataName": "年齢",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 10,
+          "visible": false,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": "年齢"
+         },
+         {
+          "columnName": "前回認定結果",
+          "dataName": "前回認定結果",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 10,
+          "visible": false,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": "前回認定結果"
+         },
+         {
+          "columnName": "前回認定期間開始日",
+          "dataName": "前回認定期間開始日",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 10,
+          "visible": false,
+          "cellType": 7,
+          "cellDetails": {
+           "cellType": 7,
+           "ymdKubun": 2,
+           "displayFormat": 0,
+           "onChange": ""
+          },
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": "前回認定期間開始日"
+         },
+         {
+          "columnName": "前回認定期間終了日",
+          "dataName": "前回認定期間終了日",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 10,
+          "visible": false,
+          "cellType": 7,
+          "cellDetails": {
+           "cellType": 7,
+           "ymdKubun": 2,
+           "displayFormat": 0,
+           "onChange": ""
+          },
+          "align": 0,
+          "resize": false,
+          "isPrivateInfo": false,
+          "sortKey": "前回認定期間終了日"
          }
         ]
        },
        "height": "M",
        "onSort": "",
-       "onSelect": "",
+       "onSelect": "onClick_btnSentaku",
        "onSelectByDblClick": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
-       "sortOrder": "",
+       "sortOrder": "氏名",
        "isAscending": true,
        "filterList": [],
        "activeRowId": -1
@@ -581,8 +691,8 @@
        "controlType": "Button",
        "width": "140",
        "visible": true,
-       "displayNone": false,
-       "disabled": false,
+       "displayNone": true,
+       "disabled": true,
        "accessKey": "",
        "nextFocusFieldName": "",
        "wrap": false,
@@ -695,9 +805,9 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "imgIkenshoTheRight",
-           "imageWidth": "800",
-           "imageHeight": "400",
-           "src": "/uz/uza/css/E0001.png"
+           "imageWidth": "200",
+           "imageHeight": "200",
+           "src": "/uz/uza/css/Edit.png"
           }
          ],
          "controlType": "TabPanel",
@@ -738,9 +848,9 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "imgIkenshoTheBack",
-           "imageWidth": "800",
-           "imageHeight": "400",
-           "src": "/uz/uza/css/E0001.png"
+           "imageWidth": "200",
+           "imageHeight": "200",
+           "src": "/uz/uza/css/Edit.png"
           }
          ],
          "controlType": "TabPanel",
@@ -1129,7 +1239,7 @@
        "fieldName": "btnImageToroku",
        "items": [],
        "controlType": "Button",
-       "width": "140",
+       "width": "150",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1143,7 +1253,7 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "btnImageToroku",
-       "text": "画像情報を登録する",
+       "text": "マスク情報を確定する",
        "onClick": "",
        "appearance": 0,
        "imageFileUrl": "",
@@ -1155,7 +1265,7 @@
        "fieldName": "btnBackIchiran",
        "items": [],
        "controlType": "Button",
-       "width": "140",
+       "width": "150",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1259,6 +1369,10 @@
     {
      "eventName": "onChange_txtSearchStYMD",
      "requestUrl": "dbe/db/dbe/ImageJohoMasking/onChange_txtSearchStYMD"
+    },
+    {
+     "eventName": "onClick_btnSentaku",
+     "requestUrl": "dbe/db/dbe/ImageJohoMasking/onClick_btnSentaku"
     }
    ],
    "hiddenInput": [],

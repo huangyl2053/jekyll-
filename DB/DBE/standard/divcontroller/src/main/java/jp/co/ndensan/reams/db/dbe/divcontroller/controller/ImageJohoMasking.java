@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgSearchResult_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
@@ -30,9 +31,9 @@ public class ImageJohoMasking {
     RString hokenshaMeisho;
 
     /**
-     * 審査会予定登録Divのロード時の処理を表します。
+     * イメージ情報マスキング処理Divのロード時の処理を表します。
      *
-     * @param div 審査会開催予定登録Div
+     * @param div イメージ情報マスキング処理Div
      * @return ResponseData
      */
     public ResponseData onLoadData(ImageJohoMaskingDiv div) {
@@ -48,6 +49,7 @@ public class ImageJohoMasking {
             hokenshaMeisho = new RString("電算市");
         }
 
+        div.getShoriTaishoshaKensakuShiji().getTxtSearchStYMD().setValue(FlexibleDate.getNowDate());
         div.getShoriTaishoshaKensakuShiji().getTxtHihokenshaNo().setDisplayNone(true);
 
         response.data = div;
@@ -57,7 +59,7 @@ public class ImageJohoMasking {
     /**
      * 検索指示Div上の検索対象ddlの選択内容を変更した時の処理内容を表します。
      *
-     * @param div 審査会開催予定登録Div
+     * @param div イメージ情報マスキング処理Div
      * @return ResponseData
      */
     public ResponseData onChange_ddlKensakuTaisho(ImageJohoMaskingDiv div) {
@@ -86,7 +88,7 @@ public class ImageJohoMasking {
     /**
      * 検索指示Div上の検索日付の開始日の内容を変更した時の処理内容を表します。
      *
-     * @param div 審査会開催予定登録Div
+     * @param div イメージ情報マスキング処理Div
      * @return ResponseData
      */
     public ResponseData onChange_txtSearchStYMD(ImageJohoMaskingDiv div) {
@@ -94,6 +96,7 @@ public class ImageJohoMasking {
 
         div.getShoriTaishoshaKensakuShiji().getTxtSearchEdYMD().setValue(
                 div.getShoriTaishoshaKensakuShiji().getTxtSearchStYMD().getValue());
+        div.getShoriTaishoshaKensakuShiji().getTxtHihokenshaNo().setDisplayNone(true);
 
         response.data = div;
         return response;
@@ -102,7 +105,7 @@ public class ImageJohoMasking {
     /**
      * 検索指示Div上の検索するボタンを押下した時の処理内容を表します。
      *
-     * @param div 審査会開催予定登録Div
+     * @param div イメージ情報マスキング処理Div
      * @return ResponseData
      */
     public ResponseData onClick_btnTaishoKensaku(ImageJohoMaskingDiv div) {
@@ -116,6 +119,35 @@ public class ImageJohoMasking {
             ymlData = new RString("dbe4050001/hizukeShiji.yml");
         }
         div.getShoriTaishoshaIchiran().getDgImageMaskShoriTaishosha().setDataSource(createRowSearchResultTestData(ymlData));
+
+        response.data = div;
+        return response;
+    }
+
+    /**
+     * 検索結果一覧DataGrid上の処理ボタンを押下した時の処理内容を表します。
+     *
+     * @param div イメージ情報マスキング処理Div
+     * @return ResponseData
+     */
+    public ResponseData onClick_btnSentaku(ImageJohoMaskingDiv div) {
+        ResponseData<ImageJohoMaskingDiv> response = new ResponseData<>();
+
+        dgImageMaskShoriTaishosha_Row dataRow = div.getShoriTaishoshaIchiran().getDgImageMaskShoriTaishosha().
+                getClickedItem();
+
+        div.getHihokenshaJoho().getTxtHokenshaNo().setValue(dataRow.get保険者番号());
+        div.getHihokenshaJoho().getTxtHokenshaMeisho().setValue(dataRow.get保険者());
+        div.getHihokenshaJoho().getTxtBirthDay().setValue(new RDate(dataRow.get生年月日().getValue().toString()));
+        div.getHihokenshaJoho().getTxtHihokenshaKubun().setValue(dataRow.get被保険者区分());
+        div.getHihokenshaJoho().getTxtHihokenshaNo().setValue(dataRow.get被保番号());
+        div.getHihokenshaJoho().getTxtHihokenshaShimei().setValue(dataRow.get氏名());
+        div.getHihokenshaJoho().getTxtNenrei().setValue(dataRow.get年齢());
+        div.getHihokenshaJoho().getTxtNinteiShinseiYMD().setValue(dataRow.get申請日().getValue());
+        div.getHihokenshaJoho().getTxtShinseiKubun().setValue(dataRow.get申請区分());
+        div.getHihokenshaJoho().getTxtZenYukokikanEnd().setValue(dataRow.get前回認定期間終了日().getValue());
+        div.getHihokenshaJoho().getTxtZenYukokikanStart().setValue(dataRow.get前回認定期間開始日().getValue());
+        div.getHihokenshaJoho().getTxtZenkaiYokaigodo().setValue(dataRow.get前回認定結果());
 
         response.data = div;
         return response;
@@ -140,9 +172,17 @@ public class ImageJohoMasking {
         TextBoxFlexibleDate ikenDate = toTextBoxFlexibleDate(new FlexibleDate(map.get("意見書受領日").toString()));
         TextBoxFlexibleDate chosaDate = toTextBoxFlexibleDate(new FlexibleDate(map.get("調査票受領日").toString()));
         TextBoxFlexibleDate shinsaDate = toTextBoxFlexibleDate(new FlexibleDate(map.get("審査予定日").toString()));
+        RString hokenshaNo = _toRString(map.get("保険者番号"));
+        RString hihokenshaKubun = _toRString(map.get("被保険者区分"));
+        TextBoxFlexibleDate umareDate = toTextBoxFlexibleDate(new FlexibleDate(map.get("生年月日").toString()));
+        RString nenrei = _toRString(map.get("年齢"));
+        RString zenkaiKekka = _toRString(map.get("前回認定結果"));
+        TextBoxFlexibleDate zenStartDate = toTextBoxFlexibleDate(new FlexibleDate(map.get("前回認定期間開始日").toString()));
+        TextBoxFlexibleDate zenEndDate = toTextBoxFlexibleDate(new FlexibleDate(map.get("前回認定期間終了日").toString()));
         Button btn = new Button();
         dgImageMaskShoriTaishosha_Row row = new dgImageMaskShoriTaishosha_Row(btn, hokenshaMeisho, hihokenshaNo, shimei,
-                shinseiDate, shinseiKubun, shinsaDate, maskKubun, ikenDate, chosaDate);
+                shinseiDate, shinseiKubun, shinsaDate, maskKubun, ikenDate, chosaDate, hokenshaNo, hihokenshaKubun,
+                umareDate, nenrei, zenkaiKekka, zenStartDate, zenEndDate);
         return row;
     }
 
