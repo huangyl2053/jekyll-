@@ -1,12 +1,13 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShisetsuNyutaishoInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgShisetsuNyutaishoRireki_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -31,6 +32,10 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel {
     private ShisetsuNyutaishoInputDiv ShisetsuNyutaishoInput;
     @JsonProperty("btnUpdateShisetsuNyutaisho")
     private Button btnUpdateShisetsuNyutaisho;
+    @JsonProperty("selectRow")
+    private RString selectRow;
+    @JsonProperty("inputMode")
+    private RString inputMode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -76,6 +81,26 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel {
     @JsonProperty("btnUpdateShisetsuNyutaisho")
     public void setBtnUpdateShisetsuNyutaisho(Button btnUpdateShisetsuNyutaisho) {
         this.btnUpdateShisetsuNyutaisho=btnUpdateShisetsuNyutaisho;
+    }
+
+    @JsonProperty("selectRow")
+    public RString getSelectRow() {
+        return selectRow;
+    }
+
+    @JsonProperty("selectRow")
+    public void setSelectRow(RString selectRow) {
+        this.selectRow=selectRow;
+    }
+
+    @JsonProperty("inputMode")
+    public RString getInputMode() {
+        return inputMode;
+    }
+
+    @JsonProperty("inputMode")
+    public void setInputMode(RString inputMode) {
+        this.inputMode=inputMode;
     }
 
 }

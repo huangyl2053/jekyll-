@@ -24,11 +24,12 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtSearchShimei_core",
+       "readOnly": false,
        "required": false,
-       "maxLength": 1000000000000,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": false,
        "placeHolder": "",
        "textKind": 0,
        "isPrivateInfo": false,
@@ -66,6 +67,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "ddlSearchGender_core",
        "required": false,
        "onFocus": "",
        "onBlur": "",
@@ -77,7 +79,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "selectedItem": "",
+       "selectedItem": "noData",
        "dataSource": [
         {
          "key": "noData",
@@ -110,11 +112,12 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtSearchDateOfBitrh_core",
+       "readOnly": false,
        "required": false,
        "maxLength": 1000000000000,
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": false,
        "placeHolder": "",
        "textKind": 0,
        "isPrivateInfo": false,
@@ -153,11 +156,12 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtShichoson_core",
+       "readOnly": false,
        "required": false,
-       "maxLength": 1000000000000,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": false,
        "placeHolder": "",
        "textKind": 0,
        "isPrivateInfo": false,
@@ -195,11 +199,12 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtSearchJuminCode_core",
+       "readOnly": false,
        "required": false,
-       "maxLength": 1000000000000,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": false,
        "placeHolder": "",
        "textKind": 0,
        "isPrivateInfo": false,
@@ -237,11 +242,12 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtSearchSetaiCode_core",
+       "readOnly": false,
        "required": false,
-       "maxLength": 1000000000000,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": false,
        "placeHolder": "",
        "textKind": 0,
        "isPrivateInfo": false,
@@ -277,6 +283,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "SearchShisetsuNyutaishoKanriCommonJoho",
      "onLoad": "",
      "title": "",
      "isOpen": true,
@@ -299,7 +306,9 @@
      "eraseBorderLeft": true,
      "backgroundColor": 0,
      "widthAuto": false,
-     "isGroupBox": false
+     "panelDisplay": 0,
+     "isGroupBox": false,
+     "readOnly": false
     },
     {
      "fieldName": "SearchShisetsuNyutaishoKanriDbJoho",
@@ -321,11 +330,12 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtSearchHihokenshaNo_core",
+       "readOnly": false,
        "required": false,
-       "maxLength": 1000000000000,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": false,
        "placeHolder": "",
        "textKind": 0,
        "isPrivateInfo": false,
@@ -361,6 +371,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "SearchShisetsuNyutaishoKanriDbJoho",
      "onLoad": "",
      "title": "",
      "isOpen": true,
@@ -383,95 +394,15 @@
      "eraseBorderLeft": true,
      "backgroundColor": 0,
      "widthAuto": false,
-     "isGroupBox": false
-    },
-    {
-     "fieldName": "SearchShisetsuNyutaishoKanriMaeShorisha",
-     "items": [
-      {
-       "fieldName": "ddlMaeShirishaRireki",
-       "items": [],
-       "controlType": "DropDownList",
-       "width": "M",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": true,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "required": false,
-       "onFocus": "",
-       "onBlur": "",
-       "onChange": "",
-       "text": "",
-       "labelLText": "前処理者履歴",
-       "labelRText": "",
-       "labelLWidth": "S",
-       "labelRWidth": "S",
-       "labelLAlign": 2,
-       "labelRAlign": 0,
-       "selectedItem": "",
-       "dataSource": [
-        {
-         "key": "noData",
-         "value": ""
-        },
-        {
-         "key": "data1",
-         "value": "喜屋武三郎"
-        }
-       ]
-      }
-     ],
-     "controlType": "Panel",
-     "width": "950",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "S",
-     "marginRight": "XS",
-     "onLoad": "",
-     "title": "",
-     "isOpen": true,
-     "canOpenAndClose": true,
-     "postParameterPanelNames": [
-      {
-       "postParameterPanelNames": "SearchShisetsuNyutaishoKanriMaeShorisha"
-      }
-     ],
-     "requestSettings": [],
-     "hiddenInput": [],
-     "onOpen": "",
-     "onClose": "",
-     "session": {},
-     "marginTop": "S",
-     "marginBottom": "XS",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
-     "backgroundColor": 0,
-     "widthAuto": false,
-     "isGroupBox": false
+     "panelDisplay": 0,
+     "isGroupBox": false,
+     "readOnly": false
     },
     {
      "fieldName": "btnSearchJushochiTokureiTaishosha",
      "items": [],
      "controlType": "Button",
-     "width": "M",
+     "width": "180",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -484,16 +415,18 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XL",
+     "selectControlID": "btnSearchJushochiTokureiTaishosha",
      "text": "以上の条件で検索する",
      "onClick": "onClick_btnSearchJushochiTokureiTaishosha",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     }
    ],
    "controlType": "Panel",
-   "width": "1200",
+   "width": "1100",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -504,8 +437,9 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
+   "marginLeft": "0",
+   "marginRight": "0",
+   "selectControlID": "SearchShisetsuNyutaishoKanriTaishosha",
    "onLoad": "",
    "title": "施設入退所管理対象者検索",
    "isOpen": true,
@@ -528,37 +462,15 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false
   },
   {
    "fieldName": "ShisetsuNyutaishoKanriTaishoGaitosha",
    "items": [
     {
-     "fieldName": "btnSelectJushochiTokureiTaishosha",
-     "items": [],
-     "controlType": "Button",
-     "width": "M",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 2,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XL",
-     "text": "対象者を選択する",
-     "onClick": "onClick_btnSelectJushochiTokureiTaishosha",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": ""
-    },
-    {
-     "fieldName": "dgJushochiTokureiTaishoGaitosha",
+     "fieldName": "dgShisetsuNyutaishoKanriGaitosha",
      "items": [],
      "controlType": "DataGrid",
      "width": "840",
@@ -574,20 +486,51 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "dgShisetsuNyutaishoKanriGaitosha",
      "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
+      "isShowHeader": true,
       "isShowFooter": true,
       "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": false,
+      "isShowSelectButtonColumn": false,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
       "header": {
        "combineColumns": [],
-       "frozenColumn": ""
+       "frozenColumn": "",
+       "headerHeight": 0
       },
       "columns": [
        {
+        "columnName": "",
+        "dataName": "btnSelect",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 20,
+        "visible": true,
+        "cellType": 8,
+        "cellDetails": {
+         "cellType": 8,
+         "text": "",
+         "onClick": "onClick_btnSelect",
+         "imageFileUrl": "/uz/uza/css/rireki_brue.png",
+         "imageWidth": "15",
+         "imageHeight": "15"
+        },
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "btnSelect"
+       },
+       {
         "columnName": "被保番号",
         "dataName": "hihokenshaNo",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 100,
         "visible": true,
         "cellType": 0,
@@ -602,6 +545,8 @@
        {
         "columnName": "氏名",
         "dataName": "shimei",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 200,
         "visible": true,
         "cellType": 0,
@@ -616,13 +561,18 @@
        {
         "columnName": "生年月日",
         "dataName": "dateOfBirth",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 100,
         "visible": true,
-        "cellType": 0,
+        "cellType": 7,
         "cellDetails": {
-         "cellType": 0
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": ""
         },
-        "align": 0,
+        "align": 1,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "dateOfBirth"
@@ -630,13 +580,15 @@
        {
         "columnName": "年齢",
         "dataName": "age",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 60,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
          "cellType": 0
         },
-        "align": 0,
+        "align": 2,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "age"
@@ -644,13 +596,15 @@
        {
         "columnName": "性別",
         "dataName": "gender",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 60,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
          "cellType": 0
         },
-        "align": 0,
+        "align": 1,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "gender"
@@ -658,6 +612,8 @@
        {
         "columnName": "住所",
         "dataName": "jusho",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 300,
         "visible": true,
         "cellType": 0,
@@ -672,8 +628,10 @@
      "height": "S",
      "onSort": "",
      "onSelect": "",
-     "onSelectByDblClick": "",
-     "onOnlyRow": "onOnlyRow_dgJushochiTokureiTaishoGaitosha",
+     "onSelectByDblClick": "onSelectByDblClick_dgShisetsuNyutaishoKanriGaitosha",
+     "onSelectOfModify": "",
+     "onSelectOfDelete": "",
+     "onOnlyRow": "onOnlyRow_dgShisetsuNyutaishoKanriGaitosha",
      "onNoRow": "",
      "onMultiRows": "",
      "sortOrder": "defaultDataName0",
@@ -683,19 +641,27 @@
     }
    ],
    "controlType": "Panel",
-   "width": "1200",
+   "width": "1100",
    "visible": true,
    "displayNone": false,
    "disabled": false,
    "accessKey": "",
    "nextFocusFieldName": "",
    "wrap": true,
-   "dependencies": [],
+   "dependencies": [
+    {
+     "dependTo": "",
+     "dependValue": "",
+     "expression": "",
+     "myCondition": ""
+    }
+   ],
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
+   "marginLeft": "0",
+   "marginRight": "0",
+   "selectControlID": "ShisetsuNyutaishoKanriTaishoGaitosha",
    "onLoad": "",
    "title": "該当者一覧",
    "isOpen": true,
@@ -703,6 +669,9 @@
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "ShisetsuNyutaishoKanriTaishoGaitosha"
+    },
+    {
+     "postParameterPanelNames": "SearchShisetsuNyutaishoKanriTaishosha"
     }
    ],
    "requestSettings": [
@@ -712,7 +681,7 @@
     },
     {
      "eventName": "onClick_btnSearchJushochiTokureiTaishosha",
-     "requestUrl": ""
+     "requestUrl": "dba/db/dba/ShisetsuNyutaishoKanriTaishoGaitosha/onClick_btnSearchJushochiTokureiTaishosha"
     }
    ],
    "hiddenInput": [],
@@ -727,7 +696,39 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false
+  },
+  {
+   "fieldName": "ShisetsuNyutaishoSaikinShorisha",
+   "items": [],
+   "controlType": "CommonChildDiv",
+   "width": "XS",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": 0,
+   "marginRight": 0,
+   "selectControlID": "ShisetsuNyutaishoSaikinShorisha",
+   "relation": [],
+   "marginTop": 0,
+   "marginBottom": 0,
+   "businessId": "URZ",
+   "controlName": "SaikinShorishaRireki",
+   "dataPassingForDialog": [],
+   "dialogOkEventNameForDialog": "",
+   "dialogCancelEventNameForDialog": "",
+   "btnSaikinShorishaHyoji_width": "S",
+   "onClick_btnSaikinShorishaHyoji": "onClick_btnSaikinShorishaHyoji",
+   "SaikinShorishaRireki_width": "1090"
   },
   {
    "fieldName": "ShisetsuNyutaishoKainriTaishoshaJoho",
@@ -749,6 +750,7 @@
      "authorityMode": 0,
      "marginLeft": 0,
      "marginRight": 0,
+     "selectControlID": "ShisetsuNyutaisyoKanriTaishoshaCommonJoho",
      "title": "",
      "relation": [],
      "canOpenAndClose": false,
@@ -805,11 +807,12 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtHihokenshaNo_core",
+       "readOnly": true,
        "required": false,
-       "maxLength": 1000000000000,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": false,
        "placeHolder": "",
        "textKind": 2,
        "isPrivateInfo": false,
@@ -829,7 +832,7 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "permitCharactor": "",
-       "formatLength": 1
+       "formatLength": "10"
       },
       {
        "fieldName": "txtYokaigodo",
@@ -848,11 +851,12 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtYokaigodo_core",
+       "readOnly": true,
        "required": false,
-       "maxLength": 1000000000000,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": false,
        "placeHolder": "",
        "textKind": 0,
        "isPrivateInfo": false,
@@ -867,7 +871,7 @@
        "value": "",
        "labelLText": "要介護度",
        "labelRText": "",
-       "labelLWidth": "60",
+       "labelLWidth": "70",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -890,7 +894,8 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "readOnly": false,
+       "selectControlID": "txtNinteiKikan_core",
+       "readOnly": true,
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
@@ -899,7 +904,7 @@
        "onKeyPress": "",
        "labelLText": "認定期間",
        "labelRText": "",
-       "labelLWidth": "60",
+       "labelLWidth": "70",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -913,7 +918,9 @@
        "fromText": "",
        "toText": "",
        "fromValue": "",
-       "toValue": ""
+       "toValue": "",
+       "fromSelectControlID": "txtNinteiKikanFrom",
+       "toSelectControlID": "txtNinteiKikanTo"
       },
       {
        "fieldName": "txtKyuHihokenshaNo",
@@ -932,11 +939,12 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtKyuHihokenshaNo_core",
+       "readOnly": true,
        "required": false,
-       "maxLength": 1000000000000,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": false,
        "placeHolder": "",
        "textKind": 2,
        "isPrivateInfo": false,
@@ -956,7 +964,7 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "permitCharactor": "",
-       "formatLength": 1
+       "formatLength": "10"
       },
       {
        "fieldName": "txtKyuShichoson",
@@ -975,11 +983,12 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtKyuShichoson_core",
+       "readOnly": true,
        "required": false,
-       "maxLength": 1000000000000,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": false,
        "placeHolder": "",
        "textKind": 0,
        "isPrivateInfo": false,
@@ -994,7 +1003,7 @@
        "value": "",
        "labelLText": "旧市町村",
        "labelRText": "",
-       "labelLWidth": "60",
+       "labelLWidth": "70",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -1002,7 +1011,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "1150",
+     "width": "1050",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1015,6 +1024,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "ShisetsuNyutaishoKanriTaishoshaDbJoho",
      "onLoad": "",
      "title": "",
      "isOpen": true,
@@ -1037,11 +1047,13 @@
      "eraseBorderLeft": true,
      "backgroundColor": 0,
      "widthAuto": false,
-     "isGroupBox": false
+     "panelDisplay": 0,
+     "isGroupBox": false,
+     "readOnly": false
     }
    ],
    "controlType": "Panel",
-   "width": "1200",
+   "width": "1100",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -1052,8 +1064,9 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
+   "marginLeft": "0",
+   "marginRight": "0",
+   "selectControlID": "ShisetsuNyutaishoKainriTaishoshaJoho",
    "onLoad": "",
    "title": "対象者情報",
    "isOpen": true,
@@ -1061,6 +1074,12 @@
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "ShisetsuNyutaishoKainriTaishoshaJoho"
+    },
+    {
+     "postParameterPanelNames": "ShisetsuNyutaishoKanriTaishoGaitosha"
+    },
+    {
+     "postParameterPanelNames": "ShisetsuNyutaishoSaikinShorisha"
     }
    ],
    "requestSettings": [
@@ -1069,11 +1088,19 @@
      "requestUrl": ""
     },
     {
-     "eventName": "onClick_btnSelectJushochiTokureiTaishosha",
+     "eventName": "onClick_btnSelect",
+     "requestUrl": "dba/db/dba/ShisetsuNyutaishoKanriTaishoshaJoho/onClick_btnSelect"
+    },
+    {
+     "eventName": "onOnlyRow_dgShisetsuNyutaishoKanriGaitosha",
      "requestUrl": ""
     },
     {
-     "eventName": "onOnlyRow_dgJushochiTokureiTaishoGaitosha",
+     "eventName": "onSelectByDblClick_dgShisetsuNyutaishoKanriGaitosha",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_btnSaikinShorishaHyoji",
      "requestUrl": ""
     }
    ],
@@ -1089,7 +1116,9 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false
   },
   {
    "fieldName": "ShisetsuNyutaishoIdo",
@@ -1111,6 +1140,7 @@
      "authorityMode": 0,
      "marginLeft": 0,
      "marginRight": 0,
+     "selectControlID": "ShisetsuNyutaishoKanri",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
@@ -1122,7 +1152,7 @@
     }
    ],
    "controlType": "Panel",
-   "width": "1200",
+   "width": "1100",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -1133,8 +1163,9 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
+   "marginLeft": "0",
+   "marginRight": "0",
+   "selectControlID": "ShisetsuNyutaishoIdo",
    "onLoad": "",
    "title": "施設入退所異動",
    "isOpen": true,
@@ -1142,6 +1173,12 @@
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "ShisetsuNyutaishoIdo"
+    },
+    {
+     "postParameterPanelNames": "ShisetsuNyutaishoKanriTaishoGaitosha"
+    },
+    {
+     "postParameterPanelNames": "ShisetsuNyutaishoSaikinShorisha"
     }
    ],
    "requestSettings": [
@@ -1150,11 +1187,19 @@
      "requestUrl": ""
     },
     {
-     "eventName": "onClick_btnSelectJushochiTokureiTaishosha",
+     "eventName": "onClick_btnSelect",
+     "requestUrl": "dba/db/dba/ShisetsuNyutaishoIdo/onClick_btnSelect"
+    },
+    {
+     "eventName": "onOnlyRow_dgShisetsuNyutaishoKanriGaitosha",
      "requestUrl": ""
     },
     {
-     "eventName": "onOnlyRow_dgJushochiTokureiTaishoGaitosha",
+     "eventName": "onSelectByDblClick_dgShisetsuNyutaishoKanriGaitosha",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_btnSaikinShorishaHyoji",
      "requestUrl": ""
     }
    ],
@@ -1170,7 +1215,9 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false
   },
   {
    "fieldName": "KyotsuPanel",
@@ -1179,7 +1226,7 @@
      "fieldName": "btnReturn",
      "items": [],
      "controlType": "Button",
-     "width": "180",
+     "width": "200",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1192,18 +1239,20 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnReturn",
      "text": "再検索を行う",
      "onClick": "",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     },
     {
-     "fieldName": "btnSaveJushochiTokurei",
+     "fieldName": "btnSaveShisetsuNyutaisho",
      "items": [],
      "controlType": "Button",
-     "width": "180",
+     "width": "200",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1216,16 +1265,18 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnSaveShisetsuNyutaisho",
      "text": "施設入退所情報を保存する",
      "onClick": "",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     }
    ],
    "controlType": "Panel",
-   "width": "M",
+   "width": "G2",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -1238,6 +1289,7 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "KyotsuPanel",
    "onLoad": "",
    "title": "",
    "isOpen": true,
@@ -1260,7 +1312,38 @@
    "eraseBorderLeft": true,
    "backgroundColor": 0,
    "widthAuto": true,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false
+  },
+  {
+   "fieldName": "Complete",
+   "items": [],
+   "controlType": "CommonChildDiv",
+   "width": "XS",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0",
+   "marginRight": "0",
+   "selectControlID": "Complete",
+   "relation": [],
+   "marginTop": 0,
+   "marginBottom": 0,
+   "businessId": "DBZ",
+   "controlName": "CompleteProcess",
+   "dataPassingForDialog": [],
+   "dialogOkEventNameForDialog": "",
+   "dialogCancelEventNameForDialog": "",
+   "lblCompleteMessage_text": "施設入退所異動履歴の登録が完了しました。",
+   "CompleteProcess_width": "1100"
   }
  ],
  "controlType": null,
@@ -1277,6 +1360,7 @@
  "authorityMode": 0,
  "marginLeft": "XS",
  "marginRight": "XS",
+ "selectControlID": "Page",
  "onLoad": "",
  "title": "介護保険施設入退所管理",
  "jsPathCollection": [],
@@ -1285,53 +1369,62 @@
   {
    "order": "1",
    "stateName": "対象者検索",
-   "showWizard": false,
+   "showWizard": true,
    "visibleDivs": [
     {
      "visibleDiv": "SearchShisetsuNyutaishoKanriTaishosha",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "SearchShisetsuNyutaishoKanriCommonJoho",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "SearchShisetsuNyutaishoKanriDbJoho",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "ShisetsuNyutaishoKanriTaishoGaitosha",
-     "panelState": "close"
+     "panelState": "close",
+     "fixedDiv": ""
+    },
+    {
+     "visibleDiv": "ShisetsuNyutaishoSaikinShorisha",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
    "events": [
-    {
-     "fieldName": "btnSelectJushochiTokureiTaishosha",
-     "event": "onClick",
-     "transition": "施設入退所管理"
-    },
-    {
-     "fieldName": "dgJushochiTokureiTaishoGaitosha",
-     "event": "onOnlyRow",
-     "transition": "施設入退所管理"
-    },
     {
      "fieldName": "btnReturn",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnSaveJushochiTokurei",
+     "fieldName": "ShisetsuNyutaishoSaikinShorisha_SaikinShorishaRireki_btnSaikinShorishaHyoji",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnSaveShisetsuNyutaisho",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgShisetsuNyutaishoKanriGaitosha[btnSelect]",
+     "event": "onClick",
+     "transition": "施設入退所管理"
     }
    ]
   },
   {
    "order": "2",
    "stateName": "施設入退所管理",
-   "showWizard": false,
+   "showWizard": true,
    "visibleDivs": [
     {
      "visibleDiv": "KyotsuPanel",
@@ -1361,24 +1454,59 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "btnSelectJushochiTokureiTaishosha",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgJushochiTokureiTaishoGaitosha",
-     "event": "onOnlyRow",
-     "transition": ""
-    },
-    {
      "fieldName": "btnReturn",
      "event": "onClick",
      "transition": "対象者検索"
     },
     {
-     "fieldName": "btnSaveJushochiTokurei",
+     "fieldName": "ShisetsuNyutaishoSaikinShorisha_SaikinShorishaRireki_btnSaikinShorishaHyoji",
      "event": "onClick",
-     "transition": "終了"
+     "transition": ""
+    },
+    {
+     "fieldName": "btnSaveShisetsuNyutaisho",
+     "event": "onClick",
+     "transition": "登録完了"
+    },
+    {
+     "fieldName": "dgShisetsuNyutaishoKanriGaitosha[btnSelect]",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
+  },
+  {
+   "order": "3",
+   "stateName": "登録完了",
+   "showWizard": true,
+   "visibleDivs": [
+    {
+     "visibleDiv": "Complete",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ShisetsuNyutaishoSaikinShorisha_SaikinShorishaRireki_btnSaikinShorishaHyoji",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnSaveShisetsuNyutaisho",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgShisetsuNyutaishoKanriGaitosha[btnSelect]",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   }
@@ -1389,7 +1517,11 @@
  "UIContainerEventMapping": [],
  "loadSequencePanelNames": [
   [
-   "SearchShisetsuNyutaishoKanriTaishosha"
+   "SearchShisetsuNyutaishoKanriTaishosha",
+   "ShisetsuNyutaishoKanriTaishoGaitosha",
+   "ShisetsuNyutaishoSaikinShorisha",
+   "ShisetsuNyutaishoIdo",
+   "ShisetsuNyutaishoKainriTaishoshaJoho"
   ],
   [
    "SearchShisetsuNyutaishoKanriCommonJoho"
@@ -1398,30 +1530,23 @@
    "SearchShisetsuNyutaishoKanriDbJoho"
   ],
   [
-   "SearchShisetsuNyutaishoKanriMaeShorisha"
-  ],
-  [
-   "ShisetsuNyutaishoKanriTaishoGaitosha"
-  ],
-  [
-   "ShisetsuNyutaishoKainriTaishoshaJoho"
-  ],
-  [
    "ShisetsuNyutaisyoKanriTaishoshaCommonJoho"
   ],
   [
    "ShisetsuNyutaishoKanriTaishoshaDbJoho"
   ],
   [
-   "ShisetsuNyutaishoIdo"
-  ],
-  [
    "ShisetsuNyutaishoKanri"
   ],
   [
    "KyotsuPanel"
+  ],
+  [
+   "Complete"
   ]
  ],
  "panelMargin": 1,
- "controlMargin": 1
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "commonButtonAreaData": []
 }

@@ -1,32 +1,27 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ShisetsuNyutaishoInput のクラスファイル 
+ * ShisetsuJoho のクラスファイル 
  * 
  * @author 自動生成
  */
-public class ShisetsuNyutaishoInputDiv extends Panel {
+public class ShisetsuJohoDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ddlTaishoJoho")
-    private DropDownList ddlTaishoJoho;
-    @JsonProperty("txtNyushoDate")
-    private TextBoxFlexibleDate txtNyushoDate;
-    @JsonProperty("txtTaishoDate")
-    private TextBoxFlexibleDate txtTaishoDate;
     @JsonProperty("radShisetsuShurui")
     private RadioButton radShisetsuShurui;
     @JsonProperty("txtShisetsuCode")
@@ -39,6 +34,10 @@ public class ShisetsuNyutaishoInputDiv extends Panel {
     private ButtonDialog btnJogaiShisetsuInputGuide;
     @JsonProperty("txtShisetsuMeisho")
     private TextBox txtShisetsuMeisho;
+    @JsonProperty("selectRow")
+    private RString selectRow;
+    @JsonProperty("inputMode")
+    private RString inputMode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -46,36 +45,6 @@ public class ShisetsuNyutaishoInputDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("ddlTaishoJoho")
-    public DropDownList getDdlTaishoJoho() {
-        return ddlTaishoJoho;
-    }
-
-    @JsonProperty("ddlTaishoJoho")
-    public void setDdlTaishoJoho(DropDownList ddlTaishoJoho) {
-        this.ddlTaishoJoho=ddlTaishoJoho;
-    }
-
-    @JsonProperty("txtNyushoDate")
-    public TextBoxFlexibleDate getTxtNyushoDate() {
-        return txtNyushoDate;
-    }
-
-    @JsonProperty("txtNyushoDate")
-    public void setTxtNyushoDate(TextBoxFlexibleDate txtNyushoDate) {
-        this.txtNyushoDate=txtNyushoDate;
-    }
-
-    @JsonProperty("txtTaishoDate")
-    public TextBoxFlexibleDate getTxtTaishoDate() {
-        return txtTaishoDate;
-    }
-
-    @JsonProperty("txtTaishoDate")
-    public void setTxtTaishoDate(TextBoxFlexibleDate txtTaishoDate) {
-        this.txtTaishoDate=txtTaishoDate;
-    }
-
     @JsonProperty("radShisetsuShurui")
     public RadioButton getRadShisetsuShurui() {
         return radShisetsuShurui;
@@ -134,6 +103,26 @@ public class ShisetsuNyutaishoInputDiv extends Panel {
     @JsonProperty("txtShisetsuMeisho")
     public void setTxtShisetsuMeisho(TextBox txtShisetsuMeisho) {
         this.txtShisetsuMeisho=txtShisetsuMeisho;
+    }
+
+    @JsonProperty("selectRow")
+    public RString getSelectRow() {
+        return selectRow;
+    }
+
+    @JsonProperty("selectRow")
+    public void setSelectRow(RString selectRow) {
+        this.selectRow=selectRow;
+    }
+
+    @JsonProperty("inputMode")
+    public RString getInputMode() {
+        return inputMode;
+    }
+
+    @JsonProperty("inputMode")
+    public void setInputMode(RString inputMode) {
+        this.inputMode=inputMode;
     }
 
 }
