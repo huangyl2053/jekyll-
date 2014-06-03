@@ -10,21 +10,21 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ButtonsToOperateNinteichosaIraiEntryContent のクラスファイル 
+ * NinteichosaIraiEntryTokusokuPublish のクラスファイル 
  * 
  * @author 自動生成
  */
-public class ButtonsToOperateNinteichosaIraiEntryContentDiv extends Panel {
+public class NinteichosaIraiEntryTokusokuPublishDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnToRepair")
-    private Button btnToRepair;
-    @JsonProperty("btnToEntryChosaIrai")
-    private Button btnToEntryChosaIrai;
+    @JsonProperty("btnToPublishTokusokujo")
+    private Button btnToPublishTokusokujo;
+    @JsonProperty("txtTokusokujoHakkoDate")
+    private TextBoxFlexibleDate txtTokusokujoHakkoDate;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,24 +32,24 @@ public class ButtonsToOperateNinteichosaIraiEntryContentDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("btnToRepair")
-    public Button getBtnToRepair() {
-        return btnToRepair;
+    @JsonProperty("btnToPublishTokusokujo")
+    public Button getBtnToPublishTokusokujo() {
+        return btnToPublishTokusokujo;
     }
 
-    @JsonProperty("btnToRepair")
-    public void setBtnToRepair(Button btnToRepair) {
-        this.btnToRepair=btnToRepair;
+    @JsonProperty("btnToPublishTokusokujo")
+    public void setBtnToPublishTokusokujo(Button btnToPublishTokusokujo) {
+        this.btnToPublishTokusokujo=btnToPublishTokusokujo;
     }
 
-    @JsonProperty("btnToEntryChosaIrai")
-    public Button getBtnToEntryChosaIrai() {
-        return btnToEntryChosaIrai;
+    @JsonProperty("txtTokusokujoHakkoDate")
+    public TextBoxFlexibleDate getTxtTokusokujoHakkoDate() {
+        return txtTokusokujoHakkoDate;
     }
 
-    @JsonProperty("btnToEntryChosaIrai")
-    public void setBtnToEntryChosaIrai(Button btnToEntryChosaIrai) {
-        this.btnToEntryChosaIrai=btnToEntryChosaIrai;
+    @JsonProperty("txtTokusokujoHakkoDate")
+    public void setTxtTokusokujoHakkoDate(TextBoxFlexibleDate txtTokusokujoHakkoDate) {
+        this.txtTokusokujoHakkoDate=txtTokusokujoHakkoDate;
     }
 
 }

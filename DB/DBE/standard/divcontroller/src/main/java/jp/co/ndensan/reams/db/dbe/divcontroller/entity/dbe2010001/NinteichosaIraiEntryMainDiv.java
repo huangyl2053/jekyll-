@@ -5,18 +5,20 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryPaperDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.ButtonsToOperateNinteichosaIraiEntryContentDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryRequestDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryTargetChosainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryTokusokuDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * NinteichosaIraiEntryContent のクラスファイル 
+ * NinteichosaIraiEntryMain のクラスファイル 
  * 
  * @author 自動生成
  */
-public class NinteichosaIraiEntryContentDiv extends Panel {
+public class NinteichosaIraiEntryMainDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,10 +29,10 @@ public class NinteichosaIraiEntryContentDiv extends Panel {
     private NinteichosaIraiEntryTargetChosainDiv NinteichosaIraiEntryTargetChosain;
     @JsonProperty("NinteichosaIraiEntryRequest")
     private NinteichosaIraiEntryRequestDiv NinteichosaIraiEntryRequest;
+    @JsonProperty("lblPadding1")
+    private Label lblPadding1;
     @JsonProperty("NinteichosaIraiEntryTokusoku")
     private NinteichosaIraiEntryTokusokuDiv NinteichosaIraiEntryTokusoku;
-    @JsonProperty("NinteichosaIraiEntryPaper")
-    private NinteichosaIraiEntryPaperDiv NinteichosaIraiEntryPaper;
     @JsonProperty("ButtonsToOperateNinteichosaIraiEntryContent")
     private ButtonsToOperateNinteichosaIraiEntryContentDiv ButtonsToOperateNinteichosaIraiEntryContent;
 
@@ -60,6 +62,16 @@ public class NinteichosaIraiEntryContentDiv extends Panel {
         this.NinteichosaIraiEntryRequest=NinteichosaIraiEntryRequest;
     }
 
+    @JsonProperty("lblPadding1")
+    public Label getLblPadding1() {
+        return lblPadding1;
+    }
+
+    @JsonProperty("lblPadding1")
+    public void setLblPadding1(Label lblPadding1) {
+        this.lblPadding1=lblPadding1;
+    }
+
     @JsonProperty("NinteichosaIraiEntryTokusoku")
     public NinteichosaIraiEntryTokusokuDiv getNinteichosaIraiEntryTokusoku() {
         return NinteichosaIraiEntryTokusoku;
@@ -68,16 +80,6 @@ public class NinteichosaIraiEntryContentDiv extends Panel {
     @JsonProperty("NinteichosaIraiEntryTokusoku")
     public void setNinteichosaIraiEntryTokusoku(NinteichosaIraiEntryTokusokuDiv NinteichosaIraiEntryTokusoku) {
         this.NinteichosaIraiEntryTokusoku=NinteichosaIraiEntryTokusoku;
-    }
-
-    @JsonProperty("NinteichosaIraiEntryPaper")
-    public NinteichosaIraiEntryPaperDiv getNinteichosaIraiEntryPaper() {
-        return NinteichosaIraiEntryPaper;
-    }
-
-    @JsonProperty("NinteichosaIraiEntryPaper")
-    public void setNinteichosaIraiEntryPaper(NinteichosaIraiEntryPaperDiv NinteichosaIraiEntryPaper) {
-        this.NinteichosaIraiEntryPaper=NinteichosaIraiEntryPaper;
     }
 
     @JsonProperty("ButtonsToOperateNinteichosaIraiEntryContent")
