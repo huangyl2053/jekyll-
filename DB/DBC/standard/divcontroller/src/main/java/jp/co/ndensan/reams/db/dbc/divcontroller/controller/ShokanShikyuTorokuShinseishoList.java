@@ -116,11 +116,11 @@ public class ShokanShikyuTorokuShinseishoList {
                 new RString(source.get("保険請求額合計").toString()),
                 new RString(source.get("自己負担額合計").toString())));
 
-        Collections.sort(dgRowList, new dateComparator());
+        Collections.sort(dgRowList, new DateComparator());
         dgRow.setDataSource(dgRowList);
     }
 
-    private static class dateComparator implements Comparator<dgShokanShikyuShinseishoList_Row> {
+    private static class DateComparator implements Comparator<dgShokanShikyuShinseishoList_Row> {
 
         @Override
         public int compare(dgShokanShikyuShinseishoList_Row o1, dgShokanShikyuShinseishoList_Row o2) {
