@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4060001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu May 29 19:45:02 JST 2014 
+ * Tue Jun 03 10:23:56 JST 2014 
  */
 
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class dgMiwariateTaishoshaIchiran_Row extends DataRow {
 
-    private RString hokenNo;
+    private RString hokensha;
     private RString hihokenNo;
     private RString shimei;
     private RString shimeiKana;
@@ -39,9 +39,9 @@ public class dgMiwariateTaishoshaIchiran_Row extends DataRow {
         super();
     }
 
-    public dgMiwariateTaishoshaIchiran_Row(RString hokenNo, RString hihokenNo, RString shimei, RString shimeiKana, RString shinseibi, RString shinseiKbn, RString seibetsu, RString ichijiHantei, RString kijunJikan, RString furiwakeKbn, RString iryokikan, RString shujii, RString chosakikan, RString chosain) {
+    public dgMiwariateTaishoshaIchiran_Row(RString hokensha, RString hihokenNo, RString shimei, RString shimeiKana, RString shinseibi, RString shinseiKbn, RString seibetsu, RString ichijiHantei, RString kijunJikan, RString furiwakeKbn, RString iryokikan, RString shujii, RString chosakikan, RString chosain) {
         super();
-        this.setOriginalData("hokenNo", hokenNo);
+        this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("hihokenNo", hihokenNo);
         this.setOriginalData("shimei", shimei);
         this.setOriginalData("shimeiKana", shimeiKana);
@@ -55,7 +55,7 @@ public class dgMiwariateTaishoshaIchiran_Row extends DataRow {
         this.setOriginalData("shujii", shujii);
         this.setOriginalData("chosakikan", chosakikan);
         this.setOriginalData("chosain", chosain);
-        this.hokenNo = hokenNo;
+        this.hokensha = hokensha;
         this.hihokenNo = hihokenNo;
         this.shimei = shimei;
         this.shimeiKana = shimeiKana;
@@ -71,8 +71,8 @@ public class dgMiwariateTaishoshaIchiran_Row extends DataRow {
         this.chosain = chosain;
     }
 
-    public RString getHokenNo() {
-        return hokenNo;
+    public RString getHokensha() {
+        return hokensha;
     }
 
     public RString getHihokenNo() {
@@ -127,9 +127,9 @@ public class dgMiwariateTaishoshaIchiran_Row extends DataRow {
         return chosain;
     }
 
-    public void setHokenNo(RString hokenNo) {
-        this.setOriginalData("hokenNo", hokenNo);
-        this.hokenNo = hokenNo;
+    public void setHokensha(RString hokensha) {
+        this.setOriginalData("hokensha", hokensha);
+        this.hokensha = hokensha;
     }
 
     public void setHihokenNo(RString hihokenNo) {

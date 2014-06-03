@@ -21,8 +21,8 @@ public class NinteiShinsakaiJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtShinsakaiYoteibi")
-    private TextBoxDate txtShinsakaiYoteibi;
+    @JsonProperty("txtKaisaikai")
+    private TextBoxCode txtKaisaikai;
     @JsonProperty("txtGogitaiNo")
     private TextBoxCode txtGogitaiNo;
     @JsonProperty("txtGogitaiMeisho")
@@ -33,6 +33,8 @@ public class NinteiShinsakaiJohoDiv extends Panel {
     private TextBoxNum txtSaidaiTeiin;
     @JsonProperty("chkDummyKbn")
     private CheckBoxList chkDummyKbn;
+    @JsonProperty("txtShinsakaiYoteibi")
+    private TextBoxDate txtShinsakaiYoteibi;
     @JsonProperty("txtKaisaiBasho")
     private TextBox txtKaisaiBasho;
     @JsonProperty("txtShuryoYoteiJikan")
@@ -48,14 +50,14 @@ public class NinteiShinsakaiJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("txtShinsakaiYoteibi")
-    public TextBoxDate getTxtShinsakaiYoteibi() {
-        return txtShinsakaiYoteibi;
+    @JsonProperty("txtKaisaikai")
+    public TextBoxCode getTxtKaisaikai() {
+        return txtKaisaikai;
     }
 
-    @JsonProperty("txtShinsakaiYoteibi")
-    public void setTxtShinsakaiYoteibi(TextBoxDate txtShinsakaiYoteibi) {
-        this.txtShinsakaiYoteibi=txtShinsakaiYoteibi;
+    @JsonProperty("txtKaisaikai")
+    public void setTxtKaisaikai(TextBoxCode txtKaisaikai) {
+        this.txtKaisaikai=txtKaisaikai;
     }
 
     @JsonProperty("txtGogitaiNo")
@@ -106,6 +108,16 @@ public class NinteiShinsakaiJohoDiv extends Panel {
     @JsonProperty("chkDummyKbn")
     public void setChkDummyKbn(CheckBoxList chkDummyKbn) {
         this.chkDummyKbn=chkDummyKbn;
+    }
+
+    @JsonProperty("txtShinsakaiYoteibi")
+    public TextBoxDate getTxtShinsakaiYoteibi() {
+        return txtShinsakaiYoteibi;
+    }
+
+    @JsonProperty("txtShinsakaiYoteibi")
+    public void setTxtShinsakaiYoteibi(TextBoxDate txtShinsakaiYoteibi) {
+        this.txtShinsakaiYoteibi=txtShinsakaiYoteibi;
     }
 
     @JsonProperty("txtKaisaiBasho")

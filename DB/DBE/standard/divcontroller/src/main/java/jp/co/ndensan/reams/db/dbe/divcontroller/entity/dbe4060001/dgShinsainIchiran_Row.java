@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4060001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu May 29 19:45:02 JST 2014 
+ * Tue Jun 03 16:36:31 JST 2014 
  */
 
 
@@ -24,33 +24,39 @@ public class dgShinsainIchiran_Row extends DataRow {
     private RString shinsainShimei;
     private RString shozokukikan;
     private RString seibetsu;
-    private RString shinsainShikaku;
+    private RString shinsainKbn;
     private RString shinsainJokyo;
     private RString shinsainKaishibi;
     private RString shinsainShuryobi;
+    private RString gogitaichoKbn;
+    private RString shukketsuKbn;
 
     public dgShinsainIchiran_Row() {
         super();
     }
 
-    public dgShinsainIchiran_Row(RString shinsainNo, RString shinsainShimei, RString shozokukikan, RString seibetsu, RString shinsainShikaku, RString shinsainJokyo, RString shinsainKaishibi, RString shinsainShuryobi) {
+    public dgShinsainIchiran_Row(RString shinsainNo, RString shinsainShimei, RString shozokukikan, RString seibetsu, RString shinsainKbn, RString shinsainJokyo, RString shinsainKaishibi, RString shinsainShuryobi, RString gogitaichoKbn, RString shukketsuKbn) {
         super();
         this.setOriginalData("shinsainNo", shinsainNo);
         this.setOriginalData("shinsainShimei", shinsainShimei);
         this.setOriginalData("shozokukikan", shozokukikan);
         this.setOriginalData("seibetsu", seibetsu);
-        this.setOriginalData("shinsainShikaku", shinsainShikaku);
+        this.setOriginalData("shinsainKbn", shinsainKbn);
         this.setOriginalData("shinsainJokyo", shinsainJokyo);
         this.setOriginalData("shinsainKaishibi", shinsainKaishibi);
         this.setOriginalData("shinsainShuryobi", shinsainShuryobi);
+        this.setOriginalData("gogitaichoKbn", gogitaichoKbn);
+        this.setOriginalData("shukketsuKbn", shukketsuKbn);
         this.shinsainNo = shinsainNo;
         this.shinsainShimei = shinsainShimei;
         this.shozokukikan = shozokukikan;
         this.seibetsu = seibetsu;
-        this.shinsainShikaku = shinsainShikaku;
+        this.shinsainKbn = shinsainKbn;
         this.shinsainJokyo = shinsainJokyo;
         this.shinsainKaishibi = shinsainKaishibi;
         this.shinsainShuryobi = shinsainShuryobi;
+        this.gogitaichoKbn = gogitaichoKbn;
+        this.shukketsuKbn = shukketsuKbn;
     }
 
     public RString getShinsainNo() {
@@ -69,8 +75,8 @@ public class dgShinsainIchiran_Row extends DataRow {
         return seibetsu;
     }
 
-    public RString getShinsainShikaku() {
-        return shinsainShikaku;
+    public RString getShinsainKbn() {
+        return shinsainKbn;
     }
 
     public RString getShinsainJokyo() {
@@ -83,6 +89,14 @@ public class dgShinsainIchiran_Row extends DataRow {
 
     public RString getShinsainShuryobi() {
         return shinsainShuryobi;
+    }
+
+    public RString getGogitaichoKbn() {
+        return gogitaichoKbn;
+    }
+
+    public RString getShukketsuKbn() {
+        return shukketsuKbn;
     }
 
     public void setShinsainNo(RString shinsainNo) {
@@ -105,9 +119,9 @@ public class dgShinsainIchiran_Row extends DataRow {
         this.seibetsu = seibetsu;
     }
 
-    public void setShinsainShikaku(RString shinsainShikaku) {
-        this.setOriginalData("shinsainShikaku", shinsainShikaku);
-        this.shinsainShikaku = shinsainShikaku;
+    public void setShinsainKbn(RString shinsainKbn) {
+        this.setOriginalData("shinsainKbn", shinsainKbn);
+        this.shinsainKbn = shinsainKbn;
     }
 
     public void setShinsainJokyo(RString shinsainJokyo) {
@@ -123,6 +137,16 @@ public class dgShinsainIchiran_Row extends DataRow {
     public void setShinsainShuryobi(RString shinsainShuryobi) {
         this.setOriginalData("shinsainShuryobi", shinsainShuryobi);
         this.shinsainShuryobi = shinsainShuryobi;
+    }
+
+    public void setGogitaichoKbn(RString gogitaichoKbn) {
+        this.setOriginalData("gogitaichoKbn", gogitaichoKbn);
+        this.gogitaichoKbn = gogitaichoKbn;
+    }
+
+    public void setShukketsuKbn(RString shukketsuKbn) {
+        this.setOriginalData("shukketsuKbn", shukketsuKbn);
+        this.shukketsuKbn = shukketsuKbn;
     }
 
 }
