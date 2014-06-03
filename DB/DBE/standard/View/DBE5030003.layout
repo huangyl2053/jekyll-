@@ -33,7 +33,7 @@
        "fieldName": "txtKaisaiDate",
        "items": [],
        "controlType": "TextBoxDate",
-       "width": "75",
+       "width": "80",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -91,7 +91,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "930",
+     "width": "980",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -173,7 +173,7 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "text": "抽出する",
-       "onClick": "",
+       "onClick": "onClick_btnToExtract",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
@@ -219,10 +219,10 @@
      "isGroupBox": false
     },
     {
-     "fieldName": "dbShinsakaiList",
+     "fieldName": "dgShinsakaiList",
      "items": [],
      "controlType": "DataGrid",
-     "width": "930",
+     "width": "980",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -249,17 +249,17 @@
       },
       "columns": [
        {
-        "columnName": "選択",
+        "columnName": "選<br>択",
         "dataName": "btnToDecide",
         "toolTip": "",
         "bgColor": 0,
-        "width": 50,
+        "width": 40,
         "visible": true,
         "cellType": 8,
         "cellDetails": {
          "cellType": 8,
-         "text": "...",
-         "onClick": "",
+         "text": "□",
+         "onClick": "onClick_btnToDecide",
          "imageFileUrl": "",
          "imageWidth": "",
          "imageHeight": ""
@@ -274,7 +274,7 @@
         "dataName": "kaisaiNo",
         "toolTip": "",
         "bgColor": 0,
-        "width": 110,
+        "width": 100,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -290,7 +290,7 @@
         "dataName": "txtKaisaiDate",
         "toolTip": "",
         "bgColor": 0,
-        "width": 75,
+        "width": 90,
         "visible": true,
         "cellType": 7,
         "cellDetails": {
@@ -303,22 +303,6 @@
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "txtKaisaiDate"
-       },
-       {
-        "columnName": "合議体番号",
-        "dataName": "gogitaiNo",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 110,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0
-        },
-        "align": 1,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "gogitaiNo"
        },
        {
         "columnName": "合議体名称",
@@ -341,7 +325,7 @@
         "dataName": "kaisaibasho",
         "toolTip": "",
         "bgColor": 0,
-        "width": 110,
+        "width": 270,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -371,7 +355,7 @@
         "dataName": "wariateNinzu",
         "toolTip": "",
         "bgColor": 0,
-        "width": 75,
+        "width": 90,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -418,14 +402,14 @@
      "onNoRow": "",
      "onMultiRows": "",
      "dataSource": [],
-     "sortOrder": "endTime",
+     "sortOrder": "kaisaibasho",
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1
     }
    ],
    "controlType": "Panel",
-   "width": "950",
+   "width": "1000",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -447,7 +431,16 @@
      "postParameterPanelNames": "HanteiResultsOutputTargetShinsakaiList"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_btnToExtract",
+     "requestUrl": "dbe/db/dbe/HanteiResultsOutputTargetShinsakaiList/onClick_btnToExtract"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -469,7 +462,7 @@
      "fieldName": "dgShinsakaiTargetPersons",
      "items": [],
      "controlType": "DataGrid",
-     "width": "1220",
+     "width": "980",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -484,20 +477,24 @@
      "marginRight": "XS",
      "gridSetting": {
       "rowHeight": 25,
-      "isMultiSelectable": true,
+      "isMultiSelectable": false,
       "isShowFooter": true,
-      "isShowFilter": false,
-      "isShowFilterButton": false,
+      "isShowFilter": true,
+      "isShowFilterButton": true,
       "isShowRowState": false,
       "header": {
        "combineColumns": [
         {
-         "combineColumnName": "前回",
+         "combineColumnName": "性",
          "combineItem": [
-          "latestYokaigodo",
-          "latestYukokikan",
-          "latestStartDate",
-          "latestEndDate"
+          "gender"
+         ]
+        },
+        {
+         "combineColumnName": "認定申請",
+         "combineItem": [
+          "shinseiDate",
+          "shinseiKubun"
          ]
         },
         {
@@ -509,18 +506,27 @@
           "startDate",
           "endDate"
          ]
+        },
+        {
+         "combineColumnName": "前回",
+         "combineItem": [
+          "latestYokaigodo",
+          "latestYukokikan",
+          "latestStartDate",
+          "latestEndDate"
+         ]
         }
        ],
        "frozenColumn": "",
-       "headerHeight": 0
+       "headerHeight": 1
       },
       "columns": [
        {
-        "columnName": "審査順",
+        "columnName": "順",
         "dataName": "shinsaOrder",
         "toolTip": "",
         "bgColor": 0,
-        "width": 75,
+        "width": 30,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -537,7 +543,7 @@
         "toolTip": "",
         "bgColor": 0,
         "width": 110,
-        "visible": true,
+        "visible": false,
         "cellType": 0,
         "cellDetails": {
          "cellType": 0
@@ -548,11 +554,25 @@
         "sortKey": "hokenshaNo"
        },
        {
+        "columnName": "保険者",
+        "dataName": "hokenshaMeisho",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "hokenshaMeisho"
+       },
+       {
         "columnName": "被保番号",
         "dataName": "hihokenshaNo",
         "toolTip": "",
         "bgColor": 0,
-        "width": 110,
+        "width": 85,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -564,11 +584,25 @@
         "sortKey": "hihokenshaNo"
        },
        {
+        "columnName": "区分",
+        "dataName": "hihokenshaKubun",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 60,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "hihokenshaKubun"
+       },
+       {
         "columnName": "氏名",
         "dataName": "shimei",
         "toolTip": "",
         "bgColor": 0,
-        "width": 0,
+        "width": 10,
         "visible": false,
         "cellType": 0,
         "cellDetails": {
@@ -584,7 +618,7 @@
         "dataName": "kanaShimei",
         "toolTip": "",
         "bgColor": 0,
-        "width": 0,
+        "width": 10,
         "visible": false,
         "cellType": 0,
         "cellDetails": {
@@ -610,25 +644,25 @@
         "sortKey": "kanaShimei"
        },
        {
-        "columnName": "性別",
+        "columnName": "別",
         "dataName": "gender",
         "toolTip": "",
         "bgColor": 0,
-        "width": 65,
+        "width": 30,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
-        "align": 0,
+        "align": 1,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "gender"
        },
        {
-        "columnName": "申請日",
+        "columnName": "日付",
         "dataName": "shinseiDate",
         "toolTip": "",
         "bgColor": 0,
-        "width": 75,
+        "width": 90,
         "visible": true,
         "cellType": 7,
         "cellDetails": {
@@ -643,81 +677,29 @@
         "sortKey": "shinseiDate"
        },
        {
-        "columnName": "要介護度",
-        "dataName": "latestYokaigodo",
+        "columnName": "区分",
+        "dataName": "shinseiKubun",
         "toolTip": "",
         "bgColor": 0,
-        "width": 85,
+        "width": 60,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
         "align": 1,
         "resize": false,
         "isPrivateInfo": false,
-        "sortKey": "latestYokaigodo"
+        "sortKey": "shinseiKubun"
        },
        {
-        "columnName": "有効期間",
-        "dataName": "latestYukokikan",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 85,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 2,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "latestYukokikan"
-       },
-       {
-        "columnName": "開始日",
-        "dataName": "latestStartDate",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 75,
-        "visible": true,
-        "cellType": 7,
-        "cellDetails": {
-         "cellType": 7,
-         "ymdKubun": 2,
-         "displayFormat": 0,
-         "onChange": ""
-        },
-        "align": 1,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "latestStartDate"
-       },
-       {
-        "columnName": "終了日",
-        "dataName": "latestEndDate",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 75,
-        "visible": true,
-        "cellType": 7,
-        "cellDetails": {
-         "cellType": 7,
-         "ymdKubun": 2,
-         "displayFormat": 0,
-         "onChange": ""
-        },
-        "align": 1,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "latestEndDate"
-       },
-       {
-        "columnName": "一次判定結果",
+        "columnName": "一次判定",
         "dataName": "ichijiHanteiResult",
         "toolTip": "",
         "bgColor": 0,
-        "width": 110,
+        "width": 80,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
-        "align": 0,
+        "align": 1,
         "resize": false,
         "isPrivateInfo": false,
         "sortKey": "ichijiHanteiResult"
@@ -727,25 +709,25 @@
         "dataName": "yokaigodo",
         "toolTip": "",
         "bgColor": 0,
-        "width": 85,
+        "width": 80,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
-        "align": 0,
+        "align": 1,
         "resize": false,
         "isPrivateInfo": false,
         "sortKey": "yokaigodo"
        },
        {
-        "columnName": "有効期間",
+        "columnName": "有効<br>期間",
         "dataName": "yukokikan",
         "toolTip": "",
         "bgColor": 0,
-        "width": 85,
+        "width": 45,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
-        "align": 2,
+        "align": 1,
         "resize": false,
         "isPrivateInfo": false,
         "sortKey": "yukokikan"
@@ -755,7 +737,7 @@
         "dataName": "startDate",
         "toolTip": "",
         "bgColor": 0,
-        "width": 75,
+        "width": 90,
         "visible": true,
         "cellType": 7,
         "cellDetails": {
@@ -774,7 +756,7 @@
         "dataName": "endDate",
         "toolTip": "",
         "bgColor": 0,
-        "width": 75,
+        "width": 90,
         "visible": true,
         "cellType": 7,
         "cellDetails": {
@@ -787,6 +769,72 @@
         "resize": false,
         "isPrivateInfo": false,
         "sortKey": "endDate"
+       },
+       {
+        "columnName": "要介護度",
+        "dataName": "latestYokaigodo",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "latestYokaigodo"
+       },
+       {
+        "columnName": "有効<br>期間",
+        "dataName": "latestYukokikan",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 45,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "latestYukokikan"
+       },
+       {
+        "columnName": "開始日",
+        "dataName": "latestStartDate",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": ""
+        },
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "latestStartDate"
+       },
+       {
+        "columnName": "終了日",
+        "dataName": "latestEndDate",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": ""
+        },
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "latestEndDate"
        }
       ]
      },
@@ -831,7 +879,7 @@
        "imageHeight": ""
       },
       {
-       "fieldName": "btnToPublishOnlySeiho",
+       "fieldName": "btnToReturnShinsakaiList",
        "items": [],
        "controlType": "Button",
        "width": "M",
@@ -847,7 +895,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "text": "生保のみ出力",
+       "text": "審査会一覧に戻る",
        "onClick": "",
        "appearance": 0,
        "imageFileUrl": "",
@@ -856,7 +904,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "1220",
+     "width": "980",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -895,7 +943,7 @@
     }
    ],
    "controlType": "Panel",
-   "width": "1240",
+   "width": "1000",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -917,7 +965,12 @@
      "postParameterPanelNames": "HanteiResultsOutputTargetPersons"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbe/db/dbe/HanteiResultsOutputTargetPersons/onLoad_PersonsDiv"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -975,10 +1028,20 @@
     {
      "fieldName": "btnToExtract",
      "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dbShinsakaiList",
+     "event": "onSelectByDblClick",
      "transition": "対象者"
     },
     {
-     "fieldName": "btnToPublish",
+     "fieldName": "dgShinsakaiList[btnToDecide]",
+     "event": "onClick",
+     "transition": "対象者"
+    },
+    {
+     "fieldName": "btnToReturnShinsakaiList",
      "event": "onClick",
      "transition": ""
     }
@@ -1006,7 +1069,17 @@
      "transition": ""
     },
     {
-     "fieldName": "btnToPublish",
+     "fieldName": "dbShinsakaiList",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgShinsakaiList[btnToDecide]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnToReturnShinsakaiList",
      "event": "onClick",
      "transition": "審査会"
     }

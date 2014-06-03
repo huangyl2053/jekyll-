@@ -32,7 +32,7 @@
      "fieldName": "radIkenshoShubetsu",
      "items": [],
      "controlType": "RadioButton",
-     "width": "130",
+     "width": "140",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -46,8 +46,11 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "onClick": "",
+     "required": false,
      "onChange": "",
-     "selectedItem": "kitei",
+     "labelLText": "",
+     "labelLWidth": "S",
+     "labelLAlign": 2,
      "dataSource": [
       {
        "key": "kitei",
@@ -58,12 +61,9 @@
        "value": "規定外"
       }
      ],
-     "required": false,
+     "selectedItem": "kitei",
      "newLineItemNumber": 2,
-     "spaceSize": 1,
-     "labelLText": "",
-     "labelLWidth": "S",
-     "labelLAlign": 2
+     "spaceSize": 1
     },
     {
      "fieldName": "lblTorikomiKekka",
@@ -105,11 +105,7 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "text": "",
-     "onChange": "",
      "required": false,
-     "labelLText": "エラー",
-     "labelLWidth": "S",
-     "labelLAlign": 2,
      "isPrivateInfo": false,
      "maxLength": 1000000000000,
      "minLength": 0,
@@ -121,11 +117,15 @@
      "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
+     "onChange": "",
      "onKeyPress": "",
      "suggest": [],
      "value": "",
+     "labelLText": "エラー",
      "labelRText": "件",
+     "labelLWidth": "S",
      "labelRWidth": "S",
+     "labelLAlign": 2,
      "labelRAlign": 0,
      "maxValue": 1.7976931348623157e+308,
      "minValue": 0,
@@ -135,7 +135,7 @@
      "permitCharactor": "+-,.\\"
     },
     {
-     "fieldName": "dgTorikomiKekka",
+     "fieldName": "dgIkenshoTorikomiKekka",
      "items": [],
      "controlType": "DataGrid",
      "width": "985",
@@ -151,7 +151,6 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -170,13 +169,13 @@
         "dataName": "select",
         "toolTip": "",
         "bgColor": 0,
-        "width": 45,
+        "width": 50,
         "visible": true,
         "cellType": 8,
         "cellDetails": {
          "cellType": 8,
-         "text": "...",
-         "onClick": "",
+         "text": "選択",
+         "onClick": "dispIkenshoKekkaShosai",
          "imageFileUrl": "",
          "imageWidth": "",
          "imageHeight": ""
@@ -313,7 +312,7 @@
         "dataName": "netakirido",
         "toolTip": "",
         "bgColor": 0,
-        "width": 95,
+        "width": 105,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -327,7 +326,7 @@
         "dataName": "ninchi",
         "toolTip": "",
         "bgColor": 0,
-        "width": 95,
+        "width": 105,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -341,7 +340,7 @@
         "dataName": "tankiKioku",
         "toolTip": "",
         "bgColor": 0,
-        "width": 100,
+        "width": 120,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -355,7 +354,7 @@
         "dataName": "ninchiNoryoku",
         "toolTip": "",
         "bgColor": 0,
-        "width": 100,
+        "width": 120,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -369,7 +368,7 @@
         "dataName": "dentatsuNoryoku",
         "toolTip": "",
         "bgColor": 0,
-        "width": 100,
+        "width": 120,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -383,7 +382,7 @@
         "dataName": "shokujiKoi",
         "toolTip": "",
         "bgColor": 0,
-        "width": 100,
+        "width": 120,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -401,7 +400,8 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "sortOrder": "tankiKioku",
+     "dataSource": [],
+     "sortOrder": "ninchi",
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1
@@ -454,7 +454,137 @@
      "postParameterPanelNames": "ShujiiIkenshoImageTorikomi"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_btnOcrTorikomi",
+     "requestUrl": "dbe/db/dbe/ShujiiIkenshoImageTorikomi/onClick_btnOcrTorikomi"
+    }
+   ],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "isGroupBox": false
+  },
+  {
+   "fieldName": "OcrSoftKido",
+   "items": [
+    {
+     "fieldName": "btnOcrDataNyuryoku",
+     "items": [],
+     "controlType": "Button",
+     "width": "90",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "onClick": "onClick_btnOcrTorikomi",
+     "text": "OCRを取込む",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
+    },
+    {
+     "fieldName": "lblOcrSoft",
+     "items": [],
+     "controlType": "Label",
+     "width": "220",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "text": "主治医意見書OCR取込みソフト",
+     "required": false,
+     "align": 2,
+     "isPrivateInfo": false
+    },
+    {
+     "fieldName": "btnCloseOcrSoft",
+     "items": [],
+     "controlType": "Button",
+     "width": "75",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "onClick": "",
+     "text": "一覧に戻る",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
+    }
+   ],
+   "controlType": "Panel",
+   "width": "728",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "onLoad": "",
+   "title": "主治医意見書OCRソフト",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "OcrSoftKido"
+    }
+   ],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_btnOcrTorikomi",
+     "requestUrl": "dbe/db/dbe/ChosaOcrTorikomi/onClick_btnOcrTorikomi"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -479,7 +609,7 @@
        "fieldName": "txtHokenNo",
        "items": [],
        "controlType": "TextBoxCode",
-       "width": "S",
+       "width": "50",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -493,11 +623,7 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "text": "",
-       "onChange": "",
        "required": false,
-       "labelLText": "保険者番号",
-       "labelLWidth": "80",
-       "labelLAlign": 2,
        "isPrivateInfo": false,
        "maxLength": 1000000000000,
        "minLength": 0,
@@ -509,20 +635,24 @@
        "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "suggest": [],
        "value": "",
+       "labelLText": "保険者番号",
        "labelRText": "",
+       "labelLWidth": "90",
        "labelRWidth": "S",
+       "labelLAlign": 2,
        "labelRAlign": 0,
        "permitCharactor": "",
-       "formatLength": 1
+       "formatLength": "6"
       },
       {
        "fieldName": "txtHihokenNo",
        "items": [],
        "controlType": "TextBoxCode",
-       "width": "S",
+       "width": "80",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -536,11 +666,7 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "text": "",
-       "onChange": "",
        "required": false,
-       "labelLText": "被保番号",
-       "labelLWidth": "60",
-       "labelLAlign": 2,
        "isPrivateInfo": false,
        "maxLength": 1000000000000,
        "minLength": 0,
@@ -552,20 +678,24 @@
        "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "suggest": [],
        "value": "",
+       "labelLText": "被保番号",
        "labelRText": "",
+       "labelLWidth": "65",
        "labelRWidth": "S",
+       "labelLAlign": 2,
        "labelRAlign": 0,
        "permitCharactor": "",
-       "formatLength": 1
+       "formatLength": "10"
       },
       {
        "fieldName": "txtShinseibi",
        "items": [],
        "controlType": "TextBoxDate",
-       "width": "S",
+       "width": "80",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -579,11 +709,7 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "text": "",
-       "onChange": "",
        "required": false,
-       "labelLText": "認定申請日",
-       "labelLWidth": "75",
-       "labelLAlign": 2,
        "isPrivateInfo": false,
        "readOnly": false,
        "placeHolder": "",
@@ -591,10 +717,14 @@
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "value": "",
+       "labelLText": "認定申請日",
        "labelRText": "",
+       "labelLWidth": "80",
        "labelRWidth": "S",
+       "labelLAlign": 2,
        "labelRAlign": 0,
        "permitCharactor": "./_-",
        "ymdKubun": 2,
@@ -604,7 +734,7 @@
        "fieldName": "btnShinseiJohoSearch",
        "items": [],
        "controlType": "Button",
-       "width": "135",
+       "width": "140",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -628,7 +758,7 @@
        "fieldName": "ddlShinseiKbn",
        "items": [],
        "controlType": "DropDownList",
-       "width": "115",
+       "width": "120",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -641,8 +771,16 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "required": false,
+       "onFocus": "",
+       "onBlur": "",
        "onChange": "",
-       "selectedItem": "",
+       "labelLText": "認定申請区分",
+       "labelRText": "",
+       "labelLWidth": "S",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
        "dataSource": [
         {
          "key": "shinki",
@@ -657,15 +795,7 @@
          "value": "変更申請"
         }
        ],
-       "required": false,
-       "labelLText": "認定申請区分",
-       "labelLWidth": "90",
-       "labelLAlign": 2,
-       "onFocus": "",
-       "onBlur": "",
-       "labelRText": "",
-       "labelRWidth": "S",
-       "labelRAlign": 0
+       "selectedItem": ""
       }
      ],
      "controlType": "Panel",
@@ -713,7 +843,7 @@
        "fieldName": "txtIryokikanNo",
        "items": [],
        "controlType": "TextBoxCode",
-       "width": "S",
+       "width": "85",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -727,11 +857,7 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "text": "",
-       "onChange": "",
        "required": false,
-       "labelLText": "医療機関",
-       "labelLWidth": "80",
-       "labelLAlign": 2,
        "isPrivateInfo": false,
        "maxLength": 1000000000000,
        "minLength": 0,
@@ -743,14 +869,18 @@
        "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "suggest": [],
        "value": "",
+       "labelLText": "医療機関",
        "labelRText": "",
+       "labelLWidth": "90",
        "labelRWidth": "S",
+       "labelLAlign": 2,
        "labelRAlign": 0,
        "permitCharactor": "",
-       "formatLength": 1
+       "formatLength": "10"
       },
       {
        "fieldName": "txtIryokikanMei",
@@ -767,14 +897,10 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "XS",
+       "marginLeft": "0",
        "marginRight": "XS",
        "text": "",
-       "onChange": "",
        "required": false,
-       "labelLText": "",
-       "labelLWidth": "S",
-       "labelLAlign": 2,
        "isPrivateInfo": false,
        "maxLength": 1000000000000,
        "minLength": 0,
@@ -786,11 +912,15 @@
        "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "suggest": [],
        "value": "",
+       "labelLText": "",
        "labelRText": "",
+       "labelLWidth": "S",
        "labelRWidth": "S",
+       "labelLAlign": 2,
        "labelRAlign": 0,
        "permitCharactor": ""
       },
@@ -818,7 +948,7 @@
        "fieldName": "txtIkenshoKinyubi",
        "items": [],
        "controlType": "TextBoxDate",
-       "width": "S",
+       "width": "90",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -832,11 +962,7 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "text": "",
-       "onChange": "",
        "required": false,
-       "labelLText": "意見書記入日",
-       "labelLWidth": "S",
-       "labelLAlign": 2,
        "isPrivateInfo": false,
        "readOnly": false,
        "placeHolder": "",
@@ -844,10 +970,14 @@
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "value": "",
+       "labelLText": "意見書記入日",
        "labelRText": "",
+       "labelLWidth": "S",
        "labelRWidth": "S",
+       "labelLAlign": 2,
        "labelRAlign": 0,
        "permitCharactor": "./_-",
        "ymdKubun": 2,
@@ -857,7 +987,7 @@
        "fieldName": "txtShujiiNo",
        "items": [],
        "controlType": "TextBoxCode",
-       "width": "S",
+       "width": "85",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -871,11 +1001,7 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "text": "",
-       "onChange": "",
        "required": false,
-       "labelLText": "主治医",
-       "labelLWidth": "80",
-       "labelLAlign": 2,
        "isPrivateInfo": false,
        "maxLength": 1000000000000,
        "minLength": 0,
@@ -887,14 +1013,18 @@
        "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "suggest": [],
        "value": "",
+       "labelLText": "主治医",
        "labelRText": "",
+       "labelLWidth": "90",
        "labelRWidth": "S",
+       "labelLAlign": 2,
        "labelRAlign": 0,
        "permitCharactor": "",
-       "formatLength": 1
+       "formatLength": "10"
       },
       {
        "fieldName": "txtShujiiMei",
@@ -911,14 +1041,10 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "XS",
+       "marginLeft": "0",
        "marginRight": "XS",
        "text": "",
-       "onChange": "",
        "required": false,
-       "labelLText": "",
-       "labelLWidth": "S",
-       "labelLAlign": 2,
        "isPrivateInfo": false,
        "maxLength": 1000000000000,
        "minLength": 0,
@@ -930,11 +1056,15 @@
        "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "suggest": [],
        "value": "",
+       "labelLText": "",
        "labelRText": "",
+       "labelLWidth": "S",
        "labelRWidth": "S",
+       "labelLAlign": 2,
        "labelRAlign": 0,
        "permitCharactor": ""
       },
@@ -962,7 +1092,7 @@
        "fieldName": "txtIkenshoJuryobi",
        "items": [],
        "controlType": "TextBoxDate",
-       "width": "S",
+       "width": "90",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -976,11 +1106,7 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "text": "",
-       "onChange": "",
        "required": false,
-       "labelLText": "意見書受領日",
-       "labelLWidth": "S",
-       "labelLAlign": 2,
        "isPrivateInfo": false,
        "readOnly": false,
        "placeHolder": "",
@@ -988,10 +1114,14 @@
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "value": "",
+       "labelLText": "意見書受領日",
        "labelRText": "",
+       "labelLWidth": "S",
        "labelRWidth": "S",
+       "labelLAlign": 2,
        "labelRAlign": 0,
        "permitCharactor": "./_-",
        "ymdKubun": 2,
@@ -1049,7 +1179,7 @@
            "fieldName": "lblNetakirido",
            "items": [],
            "controlType": "Label",
-           "width": "142",
+           "width": "145",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -1272,27 +1402,55 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "onChange": "",
-           "selectedItem": "",
-           "dataSource": [
-            {
-             "key": "key0",
-             "value": "value0"
-            },
-            {
-             "key": "key1",
-             "value": "value1"
-            }
-           ],
            "required": false,
-           "labelLText": "",
-           "labelLWidth": "S",
-           "labelLAlign": 2,
            "onFocus": "",
            "onBlur": "",
+           "onChange": "",
+           "labelLText": "",
            "labelRText": "",
+           "labelLWidth": "S",
            "labelRWidth": "S",
-           "labelRAlign": 0
+           "labelLAlign": 2,
+           "labelRAlign": 0,
+           "dataSource": [
+            {
+             "key": "1",
+             "value": "自立"
+            },
+            {
+             "key": "2",
+             "value": "J1"
+            },
+            {
+             "key": "3",
+             "value": "J2"
+            },
+            {
+             "key": "4",
+             "value": "A1"
+            },
+            {
+             "key": "5",
+             "value": "A2"
+            },
+            {
+             "key": "6",
+             "value": "B1"
+            },
+            {
+             "key": "7",
+             "value": "B2"
+            },
+            {
+             "key": "8",
+             "value": "C1"
+            },
+            {
+             "key": "9",
+             "value": "C2"
+            }
+           ],
+           "selectedItem": ""
           }
          ],
          "controlType": "TableCell",
@@ -1331,27 +1489,51 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "onChange": "",
-           "selectedItem": "",
-           "dataSource": [
-            {
-             "key": "key0",
-             "value": "value0"
-            },
-            {
-             "key": "key1",
-             "value": "value1"
-            }
-           ],
            "required": false,
-           "labelLText": "",
-           "labelLWidth": "S",
-           "labelLAlign": 2,
            "onFocus": "",
            "onBlur": "",
+           "onChange": "",
+           "labelLText": "",
            "labelRText": "",
+           "labelLWidth": "S",
            "labelRWidth": "S",
-           "labelRAlign": 0
+           "labelLAlign": 2,
+           "labelRAlign": 0,
+           "dataSource": [
+            {
+             "key": "1",
+             "value": "自立"
+            },
+            {
+             "key": "2",
+             "value": "I"
+            },
+            {
+             "key": "3",
+             "value": "Ⅱa"
+            },
+            {
+             "key": "4",
+             "value": "Ⅱb"
+            },
+            {
+             "key": "5",
+             "value": "Ⅲa"
+            },
+            {
+             "key": "6",
+             "value": "Ⅲb"
+            },
+            {
+             "key": "7",
+             "value": "Ⅳ"
+            },
+            {
+             "key": "8",
+             "value": "M"
+            }
+           ],
+           "selectedItem": ""
           }
          ],
          "controlType": "TableCell",
@@ -1390,27 +1572,27 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "onChange": "",
-           "selectedItem": "",
-           "dataSource": [
-            {
-             "key": "key0",
-             "value": "value0"
-            },
-            {
-             "key": "key1",
-             "value": "value1"
-            }
-           ],
            "required": false,
-           "labelLText": "",
-           "labelLWidth": "S",
-           "labelLAlign": 2,
            "onFocus": "",
            "onBlur": "",
+           "onChange": "",
+           "labelLText": "",
            "labelRText": "",
+           "labelLWidth": "S",
            "labelRWidth": "S",
-           "labelRAlign": 0
+           "labelLAlign": 2,
+           "labelRAlign": 0,
+           "dataSource": [
+            {
+             "key": "1",
+             "value": "問題なし"
+            },
+            {
+             "key": "2",
+             "value": "問題あり"
+            }
+           ],
+           "selectedItem": ""
           }
          ],
          "controlType": "TableCell",
@@ -1449,27 +1631,35 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "onChange": "",
-           "selectedItem": "",
-           "dataSource": [
-            {
-             "key": "key0",
-             "value": "value0"
-            },
-            {
-             "key": "key1",
-             "value": "value1"
-            }
-           ],
            "required": false,
-           "labelLText": "",
-           "labelLWidth": "S",
-           "labelLAlign": 2,
            "onFocus": "",
            "onBlur": "",
+           "onChange": "",
+           "labelLText": "",
            "labelRText": "",
+           "labelLWidth": "S",
            "labelRWidth": "S",
-           "labelRAlign": 0
+           "labelLAlign": 2,
+           "labelRAlign": 0,
+           "dataSource": [
+            {
+             "key": "1",
+             "value": "自立"
+            },
+            {
+             "key": "2",
+             "value": "いくらか困難"
+            },
+            {
+             "key": "3",
+             "value": "見守りが必要"
+            },
+            {
+             "key": "4",
+             "value": "判断できない"
+            }
+           ],
+           "selectedItem": ""
           }
          ],
          "controlType": "TableCell",
@@ -1508,27 +1698,35 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "onChange": "",
-           "selectedItem": "",
-           "dataSource": [
-            {
-             "key": "key0",
-             "value": "value0"
-            },
-            {
-             "key": "key1",
-             "value": "value1"
-            }
-           ],
            "required": false,
-           "labelLText": "",
-           "labelLWidth": "S",
-           "labelLAlign": 2,
            "onFocus": "",
            "onBlur": "",
+           "onChange": "",
+           "labelLText": "",
            "labelRText": "",
+           "labelLWidth": "S",
            "labelRWidth": "S",
-           "labelRAlign": 0
+           "labelLAlign": 2,
+           "labelRAlign": 0,
+           "dataSource": [
+            {
+             "key": "1",
+             "value": "伝えられる"
+            },
+            {
+             "key": "2",
+             "value": "いくらか困難"
+            },
+            {
+             "key": "3",
+             "value": "具体的要求に限られる"
+            },
+            {
+             "key": "4",
+             "value": "伝えられない"
+            }
+           ],
+           "selectedItem": ""
           }
          ],
          "controlType": "TableCell",
@@ -1609,27 +1807,27 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "onChange": "",
-           "selectedItem": "",
-           "dataSource": [
-            {
-             "key": "key0",
-             "value": "value0"
-            },
-            {
-             "key": "key1",
-             "value": "value1"
-            }
-           ],
            "required": false,
-           "labelLText": "",
-           "labelLWidth": "S",
-           "labelLAlign": 2,
            "onFocus": "",
            "onBlur": "",
+           "onChange": "",
+           "labelLText": "",
            "labelRText": "",
+           "labelLWidth": "S",
            "labelRWidth": "S",
-           "labelRAlign": 0
+           "labelLAlign": 2,
+           "labelRAlign": 0,
+           "dataSource": [
+            {
+             "key": "1",
+             "value": "自立"
+            },
+            {
+             "key": "2",
+             "value": "全面介助"
+            }
+           ],
+           "selectedItem": ""
           }
          ],
          "controlType": "TableCell",
@@ -1705,13 +1903,13 @@
      "isGroupBox": false
     },
     {
-     "fieldName": "IkenshoHyoji",
+     "fieldName": "IkenshoShosaiImageHyoji",
      "items": [
       {
        "fieldName": "txtHyojiBairitsu",
        "items": [],
        "controlType": "TextBoxNum",
-       "width": "XS",
+       "width": "30",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1725,13 +1923,9 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "text": "",
-       "onChange": "",
        "required": false,
-       "labelLText": "表示倍率",
-       "labelLWidth": "60",
-       "labelLAlign": 0,
        "isPrivateInfo": false,
-       "maxLength": 1000000000000,
+       "maxLength": "100",
        "minLength": 0,
        "textAlign": 2,
        "readOnly": false,
@@ -1741,11 +1935,15 @@
        "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
        "suggest": [],
        "value": "",
+       "labelLText": "表示倍率",
        "labelRText": "％",
+       "labelLWidth": "70",
        "labelRWidth": "S",
+       "labelLAlign": 0,
        "labelRAlign": 0,
        "maxValue": 1.7976931348623157e+308,
        "minValue": 0,
@@ -1778,7 +1976,7 @@
            "marginRight": "XS",
            "imageWidth": "950",
            "imageHeight": "350",
-           "src": ""
+           "src": "/uz/uza/css/E0001.png"
           }
          ],
          "controlType": "TabPanel",
@@ -1819,7 +2017,7 @@
            "marginRight": "XS",
            "imageWidth": "950",
            "imageHeight": "350",
-           "src": ""
+           "src": "/uz/uza/css/E0001.png"
           }
          ],
          "controlType": "TabPanel",
@@ -1861,7 +2059,7 @@
         "tplIkensho2"
        ],
        "isDraggable": false,
-       "selectedItemFieldName": "tplIkensho2"
+       "selectedItemFieldName": "tplIkensho1"
       }
      ],
      "controlType": "Panel",
@@ -1972,9 +2170,21 @@
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "IkenshoShosaiMain"
+    },
+    {
+     "postParameterPanelNames": "ShujiiIkenshoImageTorikomi"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "dispIkenshoKekkaShosai",
+     "requestUrl": "dbe/db/dbe/IkenshoShosaiMain/dispIkenshoKekkaShosai"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -2020,7 +2230,43 @@
     }
    ],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "btnIkenshoTorikomi",
+     "event": "onClick",
+     "transition": "OcrSoftKido"
+    },
+    {
+     "fieldName": "btnCloseOcrSoft",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnOcrDataNyuryoku",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgTorikomiKekka[select]",
+     "event": "onClick",
+     "transition": "IkenshoShosai"
+    },
+    {
+     "fieldName": "dgIkenshoTorikomiKekka[select]",
+     "event": "onClick",
+     "transition": "IkenshoShosai"
+    },
+    {
+     "fieldName": "btnToroku",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
   },
   {
    "order": "2",
@@ -2044,12 +2290,97 @@
      "panelState": "visible"
     },
     {
-     "visibleDiv": "IkenshoHyoji",
+     "visibleDiv": "IkenshoShosaiImageHyoji",
      "panelState": "visible"
     }
    ],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "btnIkenshoTorikomi",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCloseOcrSoft",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnOcrDataNyuryoku",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgTorikomiKekka[select]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgIkenshoTorikomiKekka[select]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnToroku",
+     "event": "onClick",
+     "transition": "IkenshoImageTorikomi"
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": "IkenshoImageTorikomi"
+    }
+   ]
+  },
+  {
+   "order": "3",
+   "stateName": "OcrSoftKido",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "OcrSoftKido",
+     "panelState": "visible"
+    }
+   ],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnIkenshoTorikomi",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCloseOcrSoft",
+     "event": "onClick",
+     "transition": "IkenshoImageTorikomi"
+    },
+    {
+     "fieldName": "btnOcrDataNyuryoku",
+     "event": "onClick",
+     "transition": "IkenshoImageTorikomi"
+    },
+    {
+     "fieldName": "dgTorikomiKekka[select]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgIkenshoTorikomiKekka[select]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnToroku",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
   }
  ],
  "currentState": "All",
@@ -2058,14 +2389,15 @@
  "UIContainerEventMapping": [],
  "loadSequencePanelNames": [
   [
-   "Ikensho5Komoku",
-   "IkenshoHyoji"
-  ],
-  [
-   "ShujiiIkenshoImageTorikomi"
-  ],
-  [
+   "ShujiiIkenshoImageTorikomi",
    "IkenshoShosaiMain"
+  ],
+  [
+   "Ikensho5Komoku",
+   "IkenshoShosaiImageHyoji"
+  ],
+  [
+   "OcrSoftKido"
   ],
   [
    "KihonJoho"

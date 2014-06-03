@@ -1,0 +1,37 @@
+## YAML Template.
+---
+
+-   hokenshaNo: "000001"
+    hihokenNo: "1111111111"
+    shinseibi: "平26.06.30"
+    shinseiKbn: "shinki"
+    chosaKikanNo: "0000000001"
+    chosainNo: "00000001"
+    chosaKikanMei: "電算調査機関１"
+    chosainMei: "電算調査員１"
+    chosaJissibi: "平26.07.07"
+    chosahyoJuryobi: "平26.07.09"
+
+-   hokenshaNo: "000001"
+    hihokenNo: "2222222222"
+    shinseibi: "平26.07.01"
+    shinseiKbn: "koshin"
+    chosaKikanNo: "0000000002"
+    chosainNo: "00000002"
+    chosaKikanMei: "電算調査機関２"
+    chosainMei: "電算調査員２"
+    chosaJissibi: "平26.07.08"
+    chosahyoJuryobi: "平26.07.10"
+
+-   hokenshaNo: "000001"
+    hihokenNo: "3333333333"
+    shinseibi: "平26.07.02"
+    shinseiKbn: "henko"
+    chosaKikanNo: "0000000003"
+    chosainNo: "00000003"
+    chosaKikanMei: "電算調査機関３"
+    chosainMei: "電算調査員３"
+    chosaJissibi: "平26.07.09"
+    chosahyoJuryobi: "平26.07.10"
+
+

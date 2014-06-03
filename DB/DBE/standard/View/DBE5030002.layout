@@ -5,34 +5,13 @@
    "fieldName": "TaishoShinsakai",
    "items": [
     {
-     "fieldName": "lblShinsakaiYoteibi",
+     "fieldName": "txtShinsakaiYoteibi",
      "items": [],
-     "controlType": "Label",
-     "width": "S",
+     "controlType": "TextBoxFlexibleDate",
+     "width": "100",
      "visible": true,
      "displayNone": false,
      "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "align": 2,
-     "text": "審査会予定日",
-     "isPrivateInfo": false
-    },
-    {
-     "fieldName": "txtShinsakaiYoteibi",
-     "items": [],
-     "controlType": "TextBoxDate",
-     "width": "120",
-     "visible": true,
-     "displayNone": false,
-     "disabled": true,
      "accessKey": "",
      "nextFocusFieldName": "",
      "wrap": false,
@@ -42,48 +21,27 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "text": "",
-     "isPrivateInfo": false,
      "required": false,
-     "readOnly": false,
+     "readOnly": true,
      "placeHolder": "",
      "textKind": 0,
+     "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "labelLText": "",
+     "text": "",
+     "labelLText": "審査会予定日",
      "labelRText": "",
      "labelLWidth": "S",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
      "ymdKubun": 2,
-     "displayFormat": 3,
-     "valueString": "",
+     "displayFormat": 0,
+     "value": "",
      "permitCharactor": "./_-"
-    },
-    {
-     "fieldName": "lblShinsakaiKaijo",
-     "items": [],
-     "controlType": "Label",
-     "width": "S",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "align": 2,
-     "text": "審査会会場",
-     "isPrivateInfo": false
     },
     {
      "fieldName": "ddlShinsakaiKaijo",
@@ -102,12 +60,12 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "text": "",
      "required": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
-     "labelLText": "",
+     "text": "",
+     "labelLText": "審査会会場",
      "labelRText": "",
      "labelLWidth": "S",
      "labelRWidth": "S",
@@ -117,19 +75,19 @@
      "dataSource": [
       {
        "key": "01",
-       "value": "市役所会議室１"
+       "value": "市役所第１会議室"
       },
       {
        "key": "02",
-       "value": "市役所会議室２"
+       "value": "市役所第２会議室"
       }
      ]
     },
     {
-     "fieldName": "lblShinsakaiKaisaibi",
+     "fieldName": "txtShinsakaiKaisaibi",
      "items": [],
-     "controlType": "Label",
-     "width": "S",
+     "controlType": "TextBoxFlexibleDate",
+     "width": "100",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -142,69 +100,27 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "align": 2,
-     "text": "審査会開催日",
-     "isPrivateInfo": false
-    },
-    {
-     "fieldName": "txtShinsakaiKaisaibi",
-     "items": [],
-     "controlType": "TextBoxDate",
-     "width": "120",
-     "visible": true,
-     "displayNone": false,
-     "disabled": true,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "text": "",
-     "isPrivateInfo": false,
      "required": false,
-     "readOnly": false,
+     "readOnly": true,
      "placeHolder": "",
      "textKind": 0,
+     "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "labelLText": "",
+     "text": "",
+     "labelLText": "審査会開催日",
      "labelRText": "",
      "labelLWidth": "S",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
      "ymdKubun": 2,
-     "displayFormat": 3,
-     "valueString": "",
+     "displayFormat": 0,
+     "value": "",
      "permitCharactor": "./_-"
-    },
-    {
-     "fieldName": "lblShinsaJikan",
-     "items": [],
-     "controlType": "Label",
-     "width": "S",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "align": 2,
-     "text": "審査時間",
-     "isPrivateInfo": false
     },
     {
      "fieldName": "txtShinsaStartTime",
@@ -223,29 +139,30 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "text": "",
-     "isPrivateInfo": false,
      "required": false,
      "readOnly": false,
      "placeHolder": "",
      "textKind": 0,
+     "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "labelLText": "",
+     "text": "",
+     "labelLText": "審査時間",
      "labelRText": "",
      "labelLWidth": "S",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
      "displayFormat": 1,
+     "value": "",
      "maxLength": 1000000000000,
      "minLength": 0,
      "textAlign": 0,
+     "isComboBox": false,
      "suggest": [],
-     "value": "",
      "timeKubun": 1,
      "permitCharactor": ""
     },
@@ -266,9 +183,10 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "align": 2,
+     "required": false,
+     "isPrivateInfo": false,
      "text": "～",
-     "isPrivateInfo": false
+     "align": 2
     },
     {
      "fieldName": "txtShinsaEndTime",
@@ -287,17 +205,17 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "text": "",
-     "isPrivateInfo": false,
      "required": false,
      "readOnly": false,
      "placeHolder": "",
      "textKind": 0,
+     "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
+     "text": "",
      "labelLText": "",
      "labelRText": "",
      "labelLWidth": "S",
@@ -305,34 +223,14 @@
      "labelLAlign": 2,
      "labelRAlign": 0,
      "displayFormat": 1,
+     "value": "",
      "maxLength": 1000000000000,
      "minLength": 0,
      "textAlign": 0,
+     "isComboBox": false,
      "suggest": [],
-     "value": "",
      "timeKubun": 1,
      "permitCharactor": ""
-    },
-    {
-     "fieldName": "lblGogitai",
-     "items": [],
-     "controlType": "Label",
-     "width": "S",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "align": 2,
-     "text": "合議体",
-     "isPrivateInfo": false
     },
     {
      "fieldName": "txtGogitai",
@@ -344,42 +242,43 @@
      "disabled": true,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": false,
+     "wrap": true,
      "dependencies": [],
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "text": "",
-     "isPrivateInfo": false,
      "required": false,
      "readOnly": false,
      "placeHolder": "",
      "textKind": 0,
+     "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "labelLText": "",
+     "text": "",
+     "labelLText": "合議体",
      "labelRText": "",
      "labelLWidth": "S",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "value": "",
      "maxLength": 1000000000000,
      "minLength": 0,
      "textAlign": 0,
+     "isComboBox": false,
      "suggest": [],
-     "value": "",
      "permitCharactor": ""
     },
     {
      "fieldName": "lblShinsaTiahshosha",
      "items": [],
      "controlType": "Label",
-     "width": "160",
+     "width": "137",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -392,9 +291,10 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "align": 2,
+     "required": false,
+     "isPrivateInfo": false,
      "text": "審査対象者",
-     "isPrivateInfo": false
+     "align": 2
     },
     {
      "fieldName": "txtShinsaTaishoshaSu",
@@ -413,28 +313,29 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "text": "",
-     "isPrivateInfo": false,
      "required": false,
      "readOnly": false,
      "placeHolder": "",
      "textKind": 2,
+     "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
+     "text": "",
      "labelLText": "",
      "labelRText": "",
      "labelLWidth": "S",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "value": "",
      "maxLength": 1000000000000,
      "minLength": 0,
      "textAlign": 2,
+     "isComboBox": false,
      "suggest": [],
-     "value": "",
      "maxValue": 1.7976931348623157e+308,
      "minValue": 0,
      "isCurrency": false,
@@ -459,9 +360,10 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "align": 2,
+     "required": false,
+     "isPrivateInfo": false,
      "text": "／",
-     "isPrivateInfo": false
+     "align": 2
     },
     {
      "fieldName": "txtShinsaTaishoMax",
@@ -480,28 +382,29 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "text": "",
-     "isPrivateInfo": false,
      "required": false,
      "readOnly": false,
      "placeHolder": "",
      "textKind": 2,
+     "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
+     "text": "",
      "labelLText": "",
      "labelRText": "",
      "labelLWidth": "S",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "value": "",
      "maxLength": 1000000000000,
      "minLength": 0,
      "textAlign": 2,
+     "isComboBox": false,
      "suggest": [],
-     "value": "",
      "maxValue": 1.7976931348623157e+308,
      "minValue": 0,
      "isCurrency": false,
@@ -511,7 +414,7 @@
     }
    ],
    "controlType": "Panel",
-   "width": "XL",
+   "width": "1000",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -519,7 +422,7 @@
    "nextFocusFieldName": "",
    "wrap": true,
    "dependencies": [],
-   "float": 1,
+   "float": 0,
    "toolTip": "",
    "authorityMode": 0,
    "marginLeft": "XS",
@@ -536,7 +439,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbe/db/dbe/TaishoShinsakai/getOnloadData"
+     "requestUrl": "dbe/db/dbe/TaishoShinsakai/onLoadData"
     }
    ],
    "hiddenInput": [],
@@ -550,7 +453,8 @@
    "eraseBorderRight": false,
    "eraseBorderLeft": false,
    "backgroundColor": 0,
-   "widthAuto": false
+   "widthAuto": false,
+   "isGroupBox": false
   },
   {
    "fieldName": "ShinsaTaishoshaItiran",
@@ -559,7 +463,7 @@
      "fieldName": "dgShinsaTaishoshaIchiran",
      "items": [],
      "controlType": "DataGrid",
-     "width": "850",
+     "width": "980",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -574,18 +478,43 @@
      "marginRight": "XS",
      "dataSource": [],
      "gridSetting": {
-      "rowHeight": null,
+      "rowHeight": 25,
       "isMultiSelectable": false,
       "isShowFooter": true,
       "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": false,
       "header": {
-       "combineColumns": [],
-       "frozenColumn": ""
+       "combineColumns": [
+        {
+         "combineColumnName": "前回",
+         "combineItem": [
+          "前回要介護度",
+          "前回有効期間",
+          "前回有効期間開始日",
+          "前回有効期間終了日"
+         ]
+        },
+        {
+         "combineColumnName": "今回",
+         "combineItem": [
+          "一次判定結果",
+          "認定結果",
+          "有効期間月数",
+          "開始日",
+          "終了日"
+         ]
+        }
+       ],
+       "frozenColumn": "",
+       "headerHeight": 1
       },
       "columns": [
        {
         "columnName": "選択",
         "dataName": "選択",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 50,
         "visible": true,
         "cellType": 8,
@@ -603,6 +532,8 @@
        {
         "columnName": "順",
         "dataName": "順",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 40,
         "visible": true,
         "cellType": 0,
@@ -613,25 +544,45 @@
         "sortKey": "順"
        },
        {
-        "columnName": "保険者",
-        "dataName": "保険者",
-        "width": 80,
+        "columnName": "保険者番号",
+        "dataName": "保険者番号",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 10,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "保険者番号"
+       },
+       {
+        "columnName": "市町村",
+        "dataName": "市町村",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 60,
         "visible": true,
         "cellType": 0,
         "cellDetails": "{\"cellType\":0}",
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "保険者"
+        "sortKey": "市町村"
        },
        {
         "columnName": "被保番号",
         "dataName": "被保番号",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 80,
         "visible": true,
         "cellType": 0,
-        "cellDetails": "{\"cellType\":0}",
-        "align": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 1,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "被保番号"
@@ -639,6 +590,8 @@
        {
         "columnName": "氏名",
         "dataName": "氏名",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 120,
         "visible": true,
         "cellType": 0,
@@ -651,6 +604,8 @@
        {
         "columnName": "カナ氏名",
         "dataName": "カナ氏名",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 120,
         "visible": true,
         "cellType": 0,
@@ -663,6 +618,8 @@
        {
         "columnName": "性別",
         "dataName": "性別",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 50,
         "visible": true,
         "cellType": 0,
@@ -675,19 +632,28 @@
        {
         "columnName": "申請日",
         "dataName": "申請日",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 80,
         "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 0,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": ""
+        },
+        "align": 1,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "申請日"
        },
        {
-        "columnName": "前回要介護度",
+        "columnName": "要介護度",
         "dataName": "前回要介護度",
-        "width": 120,
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -697,9 +663,11 @@
         "sortKey": "前回要介護度"
        },
        {
-        "columnName": "前回有効期間",
+        "columnName": "有効<br>期間",
         "dataName": "前回有効期間",
-        "width": 120,
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 50,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -709,32 +677,48 @@
         "sortKey": "前回有効期間"
        },
        {
-        "columnName": "前回有効期間開始日",
+        "columnName": "有効期間<br>開始日",
         "dataName": "前回有効期間開始日",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 80,
         "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 0,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": ""
+        },
+        "align": 1,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "前回有効期間開始日"
        },
        {
-        "columnName": "前回有効期間終了日",
+        "columnName": "有効期間<br>終了日",
         "dataName": "前回有効期間終了日",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 80,
         "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 0,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": ""
+        },
+        "align": 1,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "前回有効期間終了日"
        },
        {
-        "columnName": "一次判定結果",
+        "columnName": "一次判定<br>結果",
         "dataName": "一次判定結果",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 80,
         "visible": true,
         "cellType": 0,
@@ -747,6 +731,8 @@
        {
         "columnName": "認定結果",
         "dataName": "認定結果",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 80,
         "visible": true,
         "cellType": 0,
@@ -757,9 +743,11 @@
         "sortKey": "認定結果"
        },
        {
-        "columnName": "有効期間月数",
+        "columnName": "有効<br>期間",
         "dataName": "有効期間月数",
-        "width": 80,
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 50,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -771,11 +759,18 @@
        {
         "columnName": "開始日",
         "dataName": "開始日",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 80,
         "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 0,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": ""
+        },
+        "align": 1,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "開始日"
@@ -783,27 +778,77 @@
        {
         "columnName": "終了日",
         "dataName": "終了日",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 80,
         "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 0,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": ""
+        },
+        "align": 1,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "終了日"
+       },
+       {
+        "columnName": "申請区分",
+        "dataName": "申請区分",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 10,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "申請区分"
+       },
+       {
+        "columnName": "生年月日",
+        "dataName": "生年月日",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 10,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "生年月日"
+       },
+       {
+        "columnName": "年齢",
+        "dataName": "年齢",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 10,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "年齢"
        }
       ]
      },
      "height": "M",
      "onSort": "",
      "onSelect": "onClickNyuryoku",
+     "onSelectByDblClick": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
      "sortOrder": "カナ氏名",
      "isAscending": true,
      "filterList": [],
-     "clickedRowId": -1
+     "activeRowId": -1
     },
     {
      "fieldName": "btnModoru",
@@ -824,11 +869,14 @@
      "marginRight": "XS",
      "text": "対象審査会検索に戻る",
      "onClick": "",
-     "imageFileUrl": ""
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
     }
    ],
    "controlType": "Panel",
-   "width": "900",
+   "width": "1000",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -836,7 +884,7 @@
    "nextFocusFieldName": "",
    "wrap": true,
    "dependencies": [],
-   "float": 1,
+   "float": 0,
    "toolTip": "",
    "authorityMode": 0,
    "marginLeft": "XS",
@@ -853,11 +901,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbe/db/dbe/ShinsaTaishoshaItiran/getOnloadData"
-    },
-    {
-     "eventName": "onClickNyuryoku",
-     "requestUrl": "dbe/db/dbe/NinteiShinsaKekkaNyuryoku/getOnloadData"
+     "requestUrl": "dbe/db/dbe/ShinsaTaishoshaItiran/onLoadData"
     }
    ],
    "hiddenInput": [],
@@ -871,7 +915,8 @@
    "eraseBorderRight": false,
    "eraseBorderLeft": false,
    "backgroundColor": 0,
-   "widthAuto": false
+   "widthAuto": false,
+   "isGroupBox": false
   },
   {
    "fieldName": "NinteiShinsaKekkaNyuryoku",
@@ -926,7 +971,10 @@
      "controlName": "KaigoNinteiKekka",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": ""
+     "dialogCancelEventNameForDialog": "",
+     "selectDdlNijiHantei": "",
+     "selectDdlNinteiYukoTsukisu": "onSelect_ddlNinteiYukoTsukisu",
+     "selectDdlNinteiKubun": "onSelect_ddlNinteiKubun"
     },
     {
      "fieldName": "NyuryokuSeigyo",
@@ -949,8 +997,11 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "text": "入力内容で登録する",
-       "onClick": "btnTorokuClick",
-       "imageFileUrl": ""
+       "onClick": "onClick_btnToroku",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": ""
       },
       {
        "fieldName": "btnNext",
@@ -971,7 +1022,10 @@
        "marginRight": "XS",
        "text": "次の候補者を表示する",
        "onClick": "",
-       "imageFileUrl": ""
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": ""
       },
       {
        "fieldName": "btnBackIchiran",
@@ -992,11 +1046,14 @@
        "marginRight": "XS",
        "text": "対象者一覧に戻る",
        "onClick": "",
-       "imageFileUrl": ""
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": ""
       }
      ],
      "controlType": "Panel",
-     "width": "840",
+     "width": "800",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1043,11 +1100,12 @@
      "eraseBorderRight": false,
      "eraseBorderLeft": false,
      "backgroundColor": 0,
-     "widthAuto": false
+     "widthAuto": false,
+     "isGroupBox": false
     }
    ],
    "controlType": "Panel",
-   "width": "850",
+   "width": "1000",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -1055,7 +1113,7 @@
    "nextFocusFieldName": "",
    "wrap": true,
    "dependencies": [],
-   "float": 1,
+   "float": 0,
    "toolTip": "",
    "authorityMode": 0,
    "marginLeft": "XS",
@@ -1075,15 +1133,23 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbe/db/dbe/NinteiShinsaKekkaNyuryoku/getOnloadData"
+     "requestUrl": "dbe/db/dbe/NinteiShinsaKekkaNyuryoku/onLoadData"
     },
     {
-     "eventName": "btnTorokuClick",
+     "eventName": "onClick_btnToroku",
      "requestUrl": "dbe/db/dbe/NyuryokuSeigyo/btnTorokuClick"
     },
     {
      "eventName": "onClickNyuryoku",
-     "requestUrl": "dbe/db/dbe/NinteiShinsaKekkaNyuryoku/getOnloadData"
+     "requestUrl": "dbe/db/dbe/NinteiShinsaKekkaNyuryoku/onLoadData"
+    },
+    {
+     "eventName": "onSelect_ddlNinteiKubun",
+     "requestUrl": "dbe/db/dbe/NinteiShinsaKekkaNyuryoku/onSelect_ddlNinteiKubun"
+    },
+    {
+     "eventName": "onSelect_ddlNinteiYukoTsukisu",
+     "requestUrl": "dbe/db/dbe/NinteiShinsaKekkaNyuryoku/onSelect_ddlNinteiYukoTsukisu"
     }
    ],
    "hiddenInput": [],
@@ -1097,7 +1163,8 @@
    "eraseBorderRight": false,
    "eraseBorderLeft": false,
    "backgroundColor": 0,
-   "widthAuto": false
+   "widthAuto": false,
+   "isGroupBox": false
   }
  ],
  "controlType": null,
@@ -1214,5 +1281,7 @@
   [
    "NyuryokuSeigyo"
   ]
- ]
+ ],
+ "panelMargin": 1,
+ "controlMargin": 1
 }

@@ -1,0 +1,24 @@
+﻿{
+ "transitionList": [
+  {
+   "id": "0",
+   "layoutSubGyomuCode": "DBE",
+   "layoutName": "DBE5030001",
+   "eventName": "selectShinsakai",
+   "toLayoutSubGyomuCode": "DBE",
+   "toLayoutName": "DBE5020001",
+   "toEventName": ""
+  },
+  {
+   "id": "1",
+   "layoutSubGyomuCode": "DBE",
+   "layoutName": "DBE5020001",
+   "eventName": "returnIchiran",
+   "toLayoutSubGyomuCode": "DBE",
+   "toLayoutName": "DBE5030001",
+   "toEventName": ""
+  }
+ ],
+ "subGyomuCode": "DBE",
+ "uiContainerName": "DBEUC52000"
+}

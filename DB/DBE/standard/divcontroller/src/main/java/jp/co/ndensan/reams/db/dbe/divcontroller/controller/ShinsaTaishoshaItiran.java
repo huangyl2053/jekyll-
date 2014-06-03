@@ -6,14 +6,14 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.HihokenshaJohoDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NinteiKekkaNyuryokuDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NinteiShinsaKekkaNyuryokuDiv;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShinsaTaishoshaItiranDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.TaishoShinsakaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgShinsaTaishoshaIchiran_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
@@ -26,11 +26,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 public class ShinsaTaishoshaItiran {
 
     /**
+     * 審査会対象者一覧画面ロード時、一覧DIVの初期値の設定を行います。
      *
-     * @param div
-     * @return
+     * @param div 審査対象者一覧Div
+     * @return ResponseData
      */
-    public ResponseData getOnloadData(ShinsaTaishoshaItiranDiv div) {
+    public ResponseData onLoadData(ShinsaTaishoshaItiranDiv div) {
         ResponseData<ShinsaTaishoshaItiranDiv> response = new ResponseData<>();
 
         div.getDgShinsaTaishoshaIchiran().setDataSource(createRowSetaiTestData());
@@ -39,6 +40,12 @@ public class ShinsaTaishoshaItiran {
         return response;
     }
 
+    /**
+     * 対象者一覧データグリッド上で、選択行の選択ボタン押下時の設定処理を行います。
+     *
+     * @param taishoshaItiranDiv 審査対象者一覧Div
+     * @return ResponseData
+     */
     public ResponseData onClickNyuryoku(ShinsaTaishoshaItiranDiv taishoshaItiranDiv) {
         ResponseData<ShinsaTaishoshaItiranDiv> response = new ResponseData<>();
 
@@ -51,67 +58,51 @@ public class ShinsaTaishoshaItiran {
      */
     private List<dgShinsaTaishoshaIchiran_Row> createRowSetaiTestData() {
         List<dgShinsaTaishoshaIchiran_Row> arrayData = new ArrayList<>();
-        dgShinsaTaishoshaIchiran_Row item;
-
-        item = createRowKojinData("01", "電算市", "0000000001", "テスト　一郎", "テスト　イチロウ", "男",
-                "2014/04/01", "要支援１", "１２", "2013/06/01", "2014/05/31", "要支援２", " ", " ", "　", "　");
-        arrayData.add(item);
-        item = createRowKojinData("01", "電算市", "0000000032", "テスト　花子", "テスト　ハナコ", "女",
-                "2014/04/10", "要介護１", "２４", "2012/05/01", "2014/04/30", "要介護２", " ", " ", "　", "　");
-        arrayData.add(item);
+        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("ShinsaTaishoIchiranList.yml"));
+        for (Map info : targetSource) {
+            arrayData.add(toDgShinsaTaishoshaIchiran_Row(info));
+        }
 
         return arrayData;
     }
 
-    /**
-     *
-     * @param 順
-     * @param 保険者
-     * @param 被保番号
-     * @param 氏名
-     * @param カナ氏名
-     * @param 性別
-     * @param 申請日
-     * @param 前回要介護度
-     * @param 前回有効期間
-     * @param 前回開始日
-     * @param 前回終了日
-     * @param 一次判定結果
-     * @param 認定結果
-     * @param 有効期間月数
-     * @param 開始日
-     * @param 終了日
-     * @return
-     */
-    private dgShinsaTaishoshaIchiran_Row createRowKojinData(String 順, String 保険者, String 被保番号, String 氏名,
-            String カナ氏名, String 性別, String 申請日, String 前回要介護度, String 前回有効期間, String 前回開始日, String 前回終了日,
-            String 一次判定結果, String 認定結果, String 有効期間月数, String 開始日, String 終了日) {
+    private dgShinsaTaishoshaIchiran_Row toDgShinsaTaishoshaIchiran_Row(Map map) {
+        RString shichoson = _toRString(map.get("市町村"));
+        RString hokenshaNo = _toRString(map.get("保険者番号"));
+        RString hihoban = _toRString(map.get("被保番号"));
+        RString shimei = _toRString(map.get("氏名"));
+        RString kanaShimei = _toRString(map.get("カナ氏名"));
+        RString sex = _toRString(map.get("性別"));
+        TextBoxFlexibleDate shinseiDate = toTextBoxFlexibleDate(new FlexibleDate(map.get("申請日").toString()));
+        RString zenYokaigodo = _toRString(map.get("前回要介護度"));
+        RString zenYukokikan = _toRString(map.get("前回有効期間"));
+        TextBoxFlexibleDate zenStartDate = toTextBoxFlexibleDate(new FlexibleDate(map.get("前回有効期間開始日").toString()));
+        TextBoxFlexibleDate zenEndDate = toTextBoxFlexibleDate(new FlexibleDate(map.get("前回有効期間終了日").toString()));
+        RString ichijiHantei = _toRString(map.get("一次判定結果"));
+        RString shinseiKubun = _toRString(map.get("申請区分"));
+        RString seinenGappi = _toRString(map.get("生年月日"));
+        RString nenrei = _toRString(map.get("年齢"));
 
+        TextBoxFlexibleDate startDate = toTextBoxFlexibleDate(new FlexibleDate("00000000"));
+        TextBoxFlexibleDate endDate = toTextBoxFlexibleDate(new FlexibleDate("00000000"));
         Button btn = new Button();
+        dgShinsaTaishoshaIchiran_Row row = new dgShinsaTaishoshaIchiran_Row(btn, RString.EMPTY, hokenshaNo, shichoson,
+                hihoban, shimei, kanaShimei, sex, shinseiDate, zenYokaigodo, zenYukokikan, zenStartDate, zenEndDate, ichijiHantei,
+                RString.EMPTY, RString.EMPTY, startDate, endDate, shinseiKubun, seinenGappi, nenrei);
+        return row;
+    }
 
-        dgShinsaTaishoshaIchiran_Row rowKojinData = new dgShinsaTaishoshaIchiran_Row(btn,
-                RString.HALF_SPACE, RString.FULL_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE,
-                RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE,
-                RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE);
+    private RString _toRString(Object obj) {
+        if (obj == null) {
+            return RString.EMPTY;
+        }
+        return new RString(obj.toString());
+    }
 
-        rowKojinData.set順(new RString(順));
-        rowKojinData.set保険者(new RString(保険者));
-        rowKojinData.set被保番号(new RString(被保番号));
-        rowKojinData.set氏名(new RString(氏名));
-        rowKojinData.setカナ氏名(new RString(カナ氏名));
-        rowKojinData.set性別(new RString(性別));
-        rowKojinData.set申請日(new RString(申請日));
-        rowKojinData.set前回要介護度(new RString(前回要介護度));
-        rowKojinData.set有効期間月数(new RString(前回有効期間));
-        rowKojinData.set前回有効期間開始日(new RString(前回開始日));
-        rowKojinData.set前回有効期間終了日(new RString(前回終了日));
-        rowKojinData.set一次判定結果(new RString(一次判定結果));
-        rowKojinData.set認定結果(new RString(認定結果));
-        rowKojinData.set有効期間月数(new RString(有効期間月数));
-        rowKojinData.set開始日(new RString(開始日));
-        rowKojinData.set終了日(new RString(終了日));
-
-        return rowKojinData;
+    private TextBoxFlexibleDate toTextBoxFlexibleDate(FlexibleDate date) {
+        TextBoxFlexibleDate txtBox = new TextBoxFlexibleDate();
+        txtBox.setValue(date);
+        return txtBox;
     }
 
 }
