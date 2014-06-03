@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4060001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu May 29 19:39:16 JST 2014 
+ * Tue Jun 03 18:40:40 JST 2014 
  */
 
 
@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class dgNinteiShinsakaiIchiran_Row extends DataRow {
 
     private Button select;
+    private RString kaisaiNo;
     private RString yoteibi;
     private RString kaishiJikan;
     private RString shuryoJikan;
@@ -34,9 +35,10 @@ public class dgNinteiShinsakaiIchiran_Row extends DataRow {
         super();
     }
 
-    public dgNinteiShinsakaiIchiran_Row(Button select, RString yoteibi, RString kaishiJikan, RString shuryoJikan, RString gogitaiNo, RString gogitaiMeisho, RString yoteiTeiin, RString wariateNinzu) {
+    public dgNinteiShinsakaiIchiran_Row(Button select, RString kaisaiNo, RString yoteibi, RString kaishiJikan, RString shuryoJikan, RString gogitaiNo, RString gogitaiMeisho, RString yoteiTeiin, RString wariateNinzu) {
         super();
         this.setOriginalData("select", select);
+        this.setOriginalData("kaisaiNo", kaisaiNo);
         this.setOriginalData("yoteibi", yoteibi);
         this.setOriginalData("kaishiJikan", kaishiJikan);
         this.setOriginalData("shuryoJikan", shuryoJikan);
@@ -45,6 +47,7 @@ public class dgNinteiShinsakaiIchiran_Row extends DataRow {
         this.setOriginalData("yoteiTeiin", yoteiTeiin);
         this.setOriginalData("wariateNinzu", wariateNinzu);
         this.select = select;
+        this.kaisaiNo = kaisaiNo;
         this.yoteibi = yoteibi;
         this.kaishiJikan = kaishiJikan;
         this.shuryoJikan = shuryoJikan;
@@ -56,6 +59,10 @@ public class dgNinteiShinsakaiIchiran_Row extends DataRow {
 
     public Button getSelect() {
         return select;
+    }
+
+    public RString getKaisaiNo() {
+        return kaisaiNo;
     }
 
     public RString getYoteibi() {
@@ -89,6 +96,11 @@ public class dgNinteiShinsakaiIchiran_Row extends DataRow {
     public void setSelect(Button select) {
         this.setOriginalData("select", select);
         this.select = select;
+    }
+
+    public void setKaisaiNo(RString kaisaiNo) {
+        this.setOriginalData("kaisaiNo", kaisaiNo);
+        this.kaisaiNo = kaisaiNo;
     }
 
     public void setYoteibi(RString yoteibi) {
