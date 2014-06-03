@@ -49,14 +49,13 @@ public class ShinsakaiShiryoPublication {
         div.getPublicationTargetShinsakai().getTxtWariateNinzu().setValue(wariateNinzu);
         div.getPublicationTargetShinsakai().getTxtYoteiTeiin().setValue(yoteiTeiin);
 
-        div.getLatestPublication().getTxtOperationDate().setValue(FlexibleDate.EMPTY);
-        div.getLatestPublication().getTxtShoriKubun().setValue(RString.EMPTY);
-        div.getLatestPublication().getLatestShinsakai().getTxtLatestGogitaiName().setValue(RString.EMPTY);
-        div.getLatestPublication().getLatestShinsakai().getTxtLatestGogitaiNo().setValue(RString.EMPTY);
-        div.getLatestPublication().getLatestShinsakai().getTxtLatestShinsakaiKaijo().setValue(RString.EMPTY);
-        div.getLatestPublication().getLatestShinsakai().getTxtLatestShinsakaiKaisaiNo().setValue(RString.EMPTY);
-        div.getLatestPublication().getLatestShinsakai().getTxtLatestShinsakaiKaishiYoteiTime().setValue(null);
-        div.getLatestPublication().getLatestShinsakai().getTxtLatestShinsakaiYoteiDate().setValue(FlexibleDate.EMPTY);
+        if (dataRow.getShiryoSakuseiKubun().equalsIgnoreCase(new RString("済"))) {
+            div.getLatestPublication().getTxtOperationDate().setValue(new FlexibleDate("20140602"));
+            div.getLatestPublication().getTxtShoriKubun().setValue(new RString("全件"));
+        } else {
+            div.getLatestPublication().getTxtOperationDate().setValue(FlexibleDate.EMPTY);
+            div.getLatestPublication().getTxtShoriKubun().setValue(RString.EMPTY);
+        }
 
         div.getPublishingCondition1().getPublishingConditionForJimukyoku1().getTxtCopyNumForJimukyoku1().setValue(Decimal.ONE);
         div.getPublishingCondition1().getPublishingConditionForShinsakaiIin1().getTxtCopyNumForShinsakaiIin1().setValue(Decimal.ONE);
