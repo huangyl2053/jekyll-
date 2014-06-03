@@ -1,0 +1,82 @@
+## YAML Template.
+---
+##JukyushaIdoRenrakuhyoKihonJoho 受給者異動連絡票 
+- renrakuhyoIdoDate: 20140401
+  renrakuhyoHihoNo: "0000029068"
+  shikakuShutokuDate: 20000817
+  renrakuhyoHihoName: スギナミ　サンジ　コウニココウ
+  hihoBirthday: 19481028
+  shikakuSoshitsuDate: ""
+  shokisaiHokenshaNo: 202169
+  koikiHokenshaNo: ""
+  renrakuhyoSendYM: ""
+      
+##JukyushaIdoRenrakuhyoYokaigonintei 要介護認定
+## shinseiDate: ""
+- ninteiDateRangefromPlaceholder: 平26.04.01
+  ninteiDateRangetoPlaceholder: 平26.09.30
+
+##KyuHomonTsushoShikyuGendoKijungaku 支給限度基準額
+- kyuHomonTsushoShikyuGendoKijungaku: 26931
+  kyuHomonTsushoKanriTekiyoDateRangefromPlaceholder: 平26.04.01
+  kyuHomonTsushoKanriTekiyoDateRangetoPlaceholder: 平26.09.30
+  kyuTankiNyushoShikyuGendoKijungaku: ""
+  kyuTankiNyushoKanriTekiyoDateRangefromPlaceholder: ""
+  kyuTankiNyushoKanriTekiyoDateRangetoPlaceholder: ""
+      
+##JukyushaIdoRenrakuhyoKyotakuServicePlan 居宅サービス計画
+- shienJigyoshaNo: 1234567890
+  shienJigyoshaName: 計面支援事業者 
+  kyotakuServicePlanTekiyoDateRangefromPlaceholder: 平26.04.01
+  kyotakuServicePlanTekiyoDateRangetoPlaceholder: ""
+
+##JukyushaIdoRenrakuhyoGemmenGengaku
+##JukyushaIdoRenrakuhyoRiyoshaFutan  利用者負担
+- riyoshaFutanKyufuritsu: ""
+  riyoshaFutanTekiyoDateRangefromPlaceholder: "" 
+  riyoshaFutanTekiyoDateRangetoPlaceholder: "" 
+
+##JukyushaIdoRenrakuhyoFukushiHojinKeigen 社会福祉法人軽減情報
+- keigenritsu: "" 
+  keigenritsuTekiyoDateRangefromPlaceholder: ""
+  keigenritsuTekiyoDateRangetoPlaceholder: ""
+
+##JukyushaIdoRenrakuhyoHyojunFutan 標準負担
+- hyojunFutangaku: ""
+  hyojunFutanTekiyoDateRangefromPlaceholder: ""
+  hyojunFutanTekiyoDateRangetoPlaceholder: ""
+
+##JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi 特定入所者サービス費
+- shokuhiFutanGendogaku: ""
+  futanGendogakuTekiyoDateRangefromPlaceholder: ""
+  futanGendogakuTekiyoDateRangetoPlaceholder: ""
+  unitKoshitsuGendogaku: ""
+  junKoshitsuFutanGendogaku: ""
+  juraigataKoshitsuTokuyoFutanGendogaku: ""
+  uraigataKoshitsuRokenRyoyoFutanGendogaku: "" 
+  tashoshitsu: ""
+
+##JukyushaIdoRenrakuhyoKokiKoreiKokuho
+##JukyushaIdoRenrakuhyoKokiKorei 後期高齢
+- koreiHokenshaNo: ""
+  kokiKoreiHihokenshaNo: ""
+
+## JukyushaIdoRenrakuhyoKokuho 国保
+- kokuhoHokenshaNo: ""
+  kokuhoHihokenshashoNo: ""
+  kokuhoKojinNo: ""
+
+## JukyushaIdoRenrakuhyoKyufuSeigen 給付制限
+- kyufuritsuHikisageDateRangefromPlaceholder: ""
+  kyufuritsuHikisageDateRangetoPlaceholder: ""
+  shokanBaraikaDateRangefromPlaceholder: ""
+  shokanBaraikaDateRangetoPlaceholder: ""
+
+## JukyushaIdoRenrakuhyoNijiyoboJigyo 二次予防事業
+- nijiyoboJigyoYukoDateRangefromPlaceholder: ""
+  nijiyoboJigyoYukoDateRangetoPlaceholder: ""
+
+#JukyushaIdoRenrakuhyoRojinHoken 老人保健
+- rokenShichosonNo: ""
+  rokenJukyushaNo: ""
+  rokenKohiFutanshaNo: "" 

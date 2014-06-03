@@ -21,12 +21,8 @@ public class JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblNinteiShinseichuKubun")
-    private Label lblNinteiShinseichuKubun;
     @JsonProperty("radNinteiShinseichuKubun")
     private RadioButton radNinteiShinseichuKubun;
-    @JsonProperty("lblServiceKubun")
-    private Label lblServiceKubun;
     @JsonProperty("radServiceKubun")
     private RadioButton radServiceKubun;
     @JsonProperty("lblTokureiKeigenSochiTaisho")
@@ -56,16 +52,6 @@ public class JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblNinteiShinseichuKubun")
-    public Label getLblNinteiShinseichuKubun() {
-        return lblNinteiShinseichuKubun;
-    }
-
-    @JsonProperty("lblNinteiShinseichuKubun")
-    public void setLblNinteiShinseichuKubun(Label lblNinteiShinseichuKubun) {
-        this.lblNinteiShinseichuKubun=lblNinteiShinseichuKubun;
-    }
-
     @JsonProperty("radNinteiShinseichuKubun")
     public RadioButton getRadNinteiShinseichuKubun() {
         return radNinteiShinseichuKubun;
@@ -74,16 +60,6 @@ public class JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHiDiv extends Panel {
     @JsonProperty("radNinteiShinseichuKubun")
     public void setRadNinteiShinseichuKubun(RadioButton radNinteiShinseichuKubun) {
         this.radNinteiShinseichuKubun=radNinteiShinseichuKubun;
-    }
-
-    @JsonProperty("lblServiceKubun")
-    public Label getLblServiceKubun() {
-        return lblServiceKubun;
-    }
-
-    @JsonProperty("lblServiceKubun")
-    public void setLblServiceKubun(Label lblServiceKubun) {
-        this.lblServiceKubun=lblServiceKubun;
     }
 
     @JsonProperty("radServiceKubun")

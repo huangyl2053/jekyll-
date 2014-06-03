@@ -176,6 +176,10 @@ module DBC {
         {
          "key": "sonotaIdo",
          "value": "99:その他異動"
+        },
+        {
+         "key": "space",
+         "value": ""
         }
        ]
       },
@@ -492,7 +496,7 @@ module DBC {
        "width": "55",
        "visible": true,
        "displayNone": false,
-       "disabled": false,
+       "disabled": true,
        "accessKey": "",
        "nextFocusFieldName": "",
        "wrap": false,
@@ -536,7 +540,7 @@ module DBC {
        "width": "55",
        "visible": true,
        "displayNone": false,
-       "disabled": false,
+       "disabled": true,
        "accessKey": "",
        "nextFocusFieldName": "",
        "wrap": false,
@@ -622,7 +626,7 @@ module DBC {
        "fieldName": "radShinseiType",
        "items": [],
        "controlType": "RadioButton",
-       "width": "435",
+       "width": "550",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -658,6 +662,56 @@ module DBC {
         {
          "key": "shokken",
          "value": "4:職権　　　"
+        },
+        {
+         "key": "nashi",
+         "value": "選択無し"
+        }
+       ],
+       "onClick": "",
+       "newLineItemNumber": 5,
+       "spaceSize": "S"
+      },
+      {
+       "fieldName": "radHenkoShinseichuKubun",
+       "items": [],
+       "controlType": "RadioButton",
+       "width": "430 ",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "radHenkoShinseichuKubun_core",
+       "required": false,
+       "onChange": "",
+       "labelLText": "変更申請中区分",
+       "labelLWidth": "120",
+       "labelLAlign": 2,
+       "selectedItem": "shinseiNashi",
+       "dataSource": [
+        {
+         "key": "shinseiNashi",
+         "value": "1:申請無し　"
+        },
+        {
+         "key": "shinseiTyu",
+         "value": "2:申請中　　"
+        },
+        {
+         "key": "ketteiZumi",
+         "value": "3:決定済　　"
+        },
+        {
+         "key": "nashi",
+         "value": "選択無し"
         }
        ],
        "onClick": "",
@@ -694,7 +748,7 @@ module DBC {
        "text": "",
        "labelLText": "申請日 ",
        "labelRText": "",
-       "labelLWidth": "45",
+       "labelLWidth": "55",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -710,52 +764,10 @@ module DBC {
        "permitCharactor": "./_-"
       },
       {
-       "fieldName": "radHenkoShinseichuKubun",
-       "items": [],
-       "controlType": "RadioButton",
-       "width": "410",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "radHenkoShinseichuKubun_core",
-       "required": false,
-       "onChange": "",
-       "labelLText": "変更申請中区分",
-       "labelLWidth": "120",
-       "labelLAlign": 2,
-       "selectedItem": "shinseiNashi",
-       "dataSource": [
-        {
-         "key": "shinseiNashi",
-         "value": "1:申請無し　"
-        },
-        {
-         "key": "shinseiTyu",
-         "value": "2:申請中　　"
-        },
-        {
-         "key": "ketteiZumi",
-         "value": "3:決定済　　"
-        }
-       ],
-       "onClick": "",
-       "newLineItemNumber": 3,
-       "spaceSize": "S"
-      },
-      {
        "fieldName": "radMinashiYokaigoKubun",
        "items": [],
        "controlType": "RadioButton",
-       "width": "600",
+       "width": "800",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -787,10 +799,14 @@ module DBC {
         {
          "key": "yamuwoenai",
          "value": "3:やむを得ない事由"
+        },
+        {
+         "key": "nashi",
+         "value": "選択無し"
         }
        ],
        "onClick": "",
-       "newLineItemNumber": 3,
+       "newLineItemNumber": 4,
        "spaceSize": "S"
       },
       {
@@ -822,7 +838,7 @@ module DBC {
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "selectedItem": "yoshienKeikatekiYokaigo",
+       "selectedItem": "yokaigo1",
        "dataSource": [
         {
          "key": "higaito",
@@ -859,6 +875,10 @@ module DBC {
         {
          "key": "yokaigo5",
          "value": "25:要介護5"
+        },
+        {
+         "key": "space6",
+         "value": ""
         }
        ]
       },
@@ -1231,7 +1251,7 @@ module DBC {
        "fieldName": "radPlanSakuseiKubun",
        "items": [],
        "controlType": "RadioButton",
-       "width": "515",
+       "width": "600",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1250,7 +1270,7 @@ module DBC {
        "labelLText": "計画作成区分",
        "labelLWidth": "90",
        "labelLAlign": 2,
-       "selectedItem": "myself",
+       "selectedItem": "kyotakuShienJigyosha",
        "dataSource": [
         {
          "key": "kyotakuShienJigyosha",
@@ -1263,10 +1283,14 @@ module DBC {
         {
          "key": "kaigoyoboJigyosha",
          "value": "3:介護予防支援事業所作成"
+        },
+        {
+         "key": "selectNot",
+         "value": "選択無し"
         }
        ],
        "onClick": "",
-       "newLineItemNumber": 3,
+       "newLineItemNumber": 4,
        "spaceSize": "S"
       },
       {
@@ -1407,7 +1431,7 @@ module DBC {
        "fieldName": "radShokiboKyotakuServiceRiyoUmu",
        "items": [],
        "controlType": "RadioButton",
-       "width": "120",
+       "width": "200 ",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1435,10 +1459,14 @@ module DBC {
         {
          "key": "ari",
          "value": "あり"
+        },
+        {
+         "key": "selectNot",
+         "value": "選択無し"
         }
        ],
        "onClick": "",
-       "newLineItemNumber": 2,
+       "newLineItemNumber": 3,
        "spaceSize": "S"
       }
      ],
@@ -1489,7 +1517,7 @@ module DBC {
        "fieldName": "radGemmenShinseichuKubun",
        "items": [],
        "controlType": "RadioButton",
-       "width": "300",
+       "width": "400",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1508,7 +1536,7 @@ module DBC {
        "labelLText": "減免申請中区分",
        "labelLWidth": "105",
        "labelLAlign": 2,
-       "selectedItem": "shinseiNashi",
+       "selectedItem": "nashi",
        "dataSource": [
         {
          "key": "shinseiNashi",
@@ -1516,15 +1544,19 @@ module DBC {
         },
         {
          "key": "shinseiTyu",
-         "value": "2:申請中 "
+         "value": "2:申請中"
         },
         {
          "key": "ketteiZumi",
          "value": "3:決定済み"
+        },
+        {
+         "key": "nashi",
+         "value": "選択無し"
         }
        ],
        "onClick": "",
-       "newLineItemNumber": 3,
+       "newLineItemNumber": 4,
        "spaceSize": "S"
       },
       {
@@ -1537,13 +1569,13 @@ module DBC {
            "fieldName": "radRiyoshaFutanKubun",
            "items": [],
            "controlType": "RadioButton",
-           "width": "250",
+           "width": "350",
            "visible": true,
            "displayNone": false,
            "disabled": false,
            "accessKey": "",
            "nextFocusFieldName": "",
-           "wrap": false,
+           "wrap": true,
            "dependencies": [],
            "float": 0,
            "toolTip": "",
@@ -1556,74 +1588,30 @@ module DBC {
            "labelLText": "区分",
            "labelLWidth": "60",
            "labelLAlign": 2,
-           "selectedItem": "",
+           "selectedItem": "nashi",
            "dataSource": [
             {
              "key": "standard",
-             "value": "1:標準負担　"
+             "value": "1:標準負担"
             },
             {
              "key": "tokuteiStandard",
              "value": "2:特定標準負担"
+            },
+            {
+             "key": "nashi",
+             "value": "選択無し"
             }
            ],
            "onClick": "",
-           "newLineItemNumber": 2,
+           "newLineItemNumber": 3,
            "spaceSize": "S"
-          },
-          {
-           "fieldName": "txtRiyoshaFutanKyufuritsu",
-           "items": [],
-           "controlType": "TextBoxNum",
-           "width": "XS",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": false,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "0",
-           "marginRight": "XS",
-           "selectControlID": "txtRiyoshaFutanKyufuritsu_core",
-           "required": false,
-           "readOnly": false,
-           "placeHolder": "",
-           "isPrivateInfo": false,
-           "isPassword": false,
-           "onFocus": "",
-           "onBlur": "",
-           "onChange": "",
-           "onKeyPress": "",
-           "text": "",
-           "labelLText": "給付率",
-           "labelRText": "",
-           "labelLWidth": "45",
-           "labelRWidth": "S",
-           "labelLAlign": 2,
-           "labelRAlign": 0,
-           "value": "",
-           "maxLength": 100000000,
-           "minLength": 0,
-           "textAlign": 2,
-           "textKind": 2,
-           "isComboBox": false,
-           "suggest": [],
-           "permitCharactor": "+-,.",
-           "maxValue": 1.7976931348623157e+308,
-           "minValue": 0,
-           "isCurrency": false,
-           "isComma": false,
-           "decimalPointLength": 0
           },
           {
            "fieldName": "txtRiyoshaFutanTekiyoDateRange",
            "items": [],
            "controlType": "TextBoxDateRange",
-           "width": "80",
+           "width": "100",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -1663,10 +1651,58 @@ module DBC {
            "toValue": "",
            "fromSelectControlID": "txtRiyoshaFutanTekiyoDateRangeFrom",
            "toSelectControlID": "txtRiyoshaFutanTekiyoDateRangeTo"
+          },
+          {
+           "fieldName": "txtRiyoshaFutanKyufuritsu",
+           "items": [],
+           "controlType": "TextBoxNum",
+           "width": "XS",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": false,
+           "dependencies": [],
+           "float": 0,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "0",
+           "marginRight": "XS",
+           "selectControlID": "txtRiyoshaFutanKyufuritsu_core",
+           "required": false,
+           "readOnly": false,
+           "placeHolder": "",
+           "isPrivateInfo": false,
+           "isPassword": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
+           "onKeyPress": "",
+           "text": "",
+           "labelLText": "給付率",
+           "labelRText": "",
+           "labelLWidth": "45",
+           "labelRWidth": "S",
+           "labelLAlign": 0,
+           "labelRAlign": 0,
+           "value": "",
+           "maxLength": 100000000,
+           "minLength": 0,
+           "textAlign": 2,
+           "textKind": 2,
+           "isComboBox": false,
+           "suggest": [],
+           "permitCharactor": "+-,.",
+           "maxValue": 1.7976931348623157e+308,
+           "minValue": 0,
+           "isCurrency": false,
+           "isComma": false,
+           "decimalPointLength": 0
           }
          ],
          "controlType": "Panel",
-         "width": "475",
+         "width": "460",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1803,7 +1839,7 @@ module DBC {
           }
          ],
          "controlType": "Panel",
-         "width": "475",
+         "width": "460",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1846,10 +1882,10 @@ module DBC {
          "fieldName": "JukyushaIdoRenrakuhyoHyojunFutan",
          "items": [
           {
-           "fieldName": "lblHyojunFutanKubun",
+           "fieldName": "radHyojunFutanKubun",
            "items": [],
-           "controlType": "Label",
-           "width": "50",
+           "controlType": "RadioButton",
+           "width": "410",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -1860,38 +1896,15 @@ module DBC {
            "float": 0,
            "toolTip": "",
            "authorityMode": 0,
-           "marginLeft": "L",
-           "marginRight": "XS",
-           "selectControlID": "lblHyojunFutanKubun",
-           "required": false,
-           "isPrivateInfo": false,
-           "text": "区分",
-           "align": 2
-          },
-          {
-           "fieldName": "radHyojunFutanKubun",
-           "items": [],
-           "controlType": "RadioButton",
-           "width": "320",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": false,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "0",
+           "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "radHyojunFutanKubun_core",
            "required": false,
            "onChange": "",
-           "labelLText": "",
-           "labelLWidth": "S",
+           "labelLText": "区分",
+           "labelLWidth": "40",
            "labelLAlign": 2,
-           "selectedItem": "",
+           "selectedItem": "nashi",
            "dataSource": [
             {
              "key": "riyosha",
@@ -1900,10 +1913,14 @@ module DBC {
             {
              "key": "kyushochiNyushosha",
              "value": "2:旧措置入所者利用者負担"
+            },
+            {
+             "key": "nashi",
+             "value": "選択無し"
             }
            ],
            "onClick": "",
-           "newLineItemNumber": 2,
+           "newLineItemNumber": 3,
            "spaceSize": "S"
           },
           {
@@ -1981,7 +1998,7 @@ module DBC {
            "onKeyPress": "",
            "labelLText": "適用期間",
            "labelRText": "",
-           "labelLWidth": "60",
+           "labelLWidth": "70",
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
@@ -2001,7 +2018,7 @@ module DBC {
           }
          ],
          "controlType": "Panel",
-         "width": "475",
+         "width": "460",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -2042,7 +2059,7 @@ module DBC {
         }
        ],
        "controlType": "Panel",
-       "width": "485",
+       "width": "460",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -2085,33 +2102,10 @@ module DBC {
        "fieldName": "JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi",
        "items": [
         {
-         "fieldName": "lblNinteiShinseichuKubun",
-         "items": [],
-         "controlType": "Label",
-         "width": "135",
-         "visible": true,
-         "displayNone": false,
-         "disabled": false,
-         "accessKey": "",
-         "nextFocusFieldName": "",
-         "wrap": true,
-         "dependencies": [],
-         "float": 0,
-         "toolTip": "",
-         "authorityMode": 0,
-         "marginLeft": "XS",
-         "marginRight": "XS",
-         "selectControlID": "lblNinteiShinseichuKubun",
-         "required": false,
-         "isPrivateInfo": false,
-         "text": "認定申請中区分",
-         "align": 2
-        },
-        {
          "fieldName": "radNinteiShinseichuKubun",
          "items": [],
          "controlType": "RadioButton",
-         "width": "300",
+         "width": "370",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -2119,7 +2113,7 @@ module DBC {
          "nextFocusFieldName": "",
          "wrap": false,
          "dependencies": [],
-         "float": 0,
+         "float": 2,
          "toolTip": "",
          "authorityMode": 0,
          "marginLeft": "0",
@@ -2127,10 +2121,10 @@ module DBC {
          "selectControlID": "radNinteiShinseichuKubun_core",
          "required": false,
          "onChange": "",
-         "labelLText": "",
-         "labelLWidth": "S",
-         "labelLAlign": 2,
-         "selectedItem": "shinseiNashi",
+         "labelLText": "認定申請中区分",
+         "labelLWidth": "105",
+         "labelLAlign": 0,
+         "selectedItem": "nashi",
          "dataSource": [
           {
            "key": "shinseiNashi",
@@ -2143,40 +2137,21 @@ module DBC {
           {
            "key": "ketteiZumi",
            "value": "3:決定済み"
+          },
+          {
+           "key": "nashi",
+           "value": "選択無し"
           }
          ],
          "onClick": "",
-         "newLineItemNumber": 3,
+         "newLineItemNumber": 4,
          "spaceSize": "S"
-        },
-        {
-         "fieldName": "lblServiceKubun",
-         "items": [],
-         "controlType": "Label",
-         "width": "135",
-         "visible": true,
-         "displayNone": false,
-         "disabled": false,
-         "accessKey": "",
-         "nextFocusFieldName": "",
-         "wrap": true,
-         "dependencies": [],
-         "float": 0,
-         "toolTip": "",
-         "authorityMode": 0,
-         "marginLeft": "XS",
-         "marginRight": "XS",
-         "selectControlID": "lblServiceKubun",
-         "required": false,
-         "isPrivateInfo": false,
-         "text": "サービス区分",
-         "align": 2
         },
         {
          "fieldName": "radServiceKubun",
          "items": [],
          "controlType": "RadioButton",
-         "width": "285",
+         "width": "370",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -2184,7 +2159,7 @@ module DBC {
          "nextFocusFieldName": "",
          "wrap": false,
          "dependencies": [],
-         "float": 0,
+         "float": 2,
          "toolTip": "",
          "authorityMode": 0,
          "marginLeft": "0",
@@ -2192,10 +2167,10 @@ module DBC {
          "selectControlID": "radServiceKubun_core",
          "required": false,
          "onChange": "",
-         "labelLText": "",
-         "labelLWidth": "S",
+         "labelLText": "サービス区分",
+         "labelLWidth": "105",
          "labelLAlign": 2,
-         "selectedItem": "",
+         "selectedItem": "nashi",
          "dataSource": [
           {
            "key": "standard",
@@ -2204,6 +2179,10 @@ module DBC {
           {
            "key": "kyusochiNyushosha",
            "value": "2:旧措置入所者"
+          },
+          {
+           "key": "nashi",
+           "value": "選択無し"
           }
          ],
          "onClick": "",
@@ -2237,7 +2216,7 @@ module DBC {
          "fieldName": "radTokureiKeigenSochiTaisho",
          "items": [],
          "controlType": "RadioButton",
-         "width": "205",
+         "width": "280",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -2256,7 +2235,7 @@ module DBC {
          "labelLText": "",
          "labelLWidth": "S",
          "labelLAlign": 2,
-         "selectedItem": "nashi",
+         "selectedItem": "selectnashi",
          "dataSource": [
           {
            "key": "nashi",
@@ -2265,10 +2244,14 @@ module DBC {
           {
            "key": "ari",
            "value": "2:該当有り"
+          },
+          {
+           "key": "selectnashi",
+           "value": "選択無し"
           }
          ],
          "onClick": "",
-         "newLineItemNumber": 2,
+         "newLineItemNumber": 3,
          "spaceSize": "S"
         },
         {
@@ -2629,7 +2612,7 @@ module DBC {
         }
        ],
        "controlType": "Panel",
-       "width": "480",
+       "width": "500",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -2637,7 +2620,7 @@ module DBC {
        "nextFocusFieldName": "",
        "wrap": false,
        "dependencies": [],
-       "float": 0,
+       "float": 2,
        "toolTip": "",
        "authorityMode": 0,
        "marginLeft": "0",
@@ -3091,7 +3074,7 @@ module DBC {
        "fieldName": "radKohiFutanJogengakuGengakuUmu",
        "items": [],
        "controlType": "RadioButton",
-       "width": "105",
+       "width": "200",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -3110,7 +3093,7 @@ module DBC {
        "labelLText": "",
        "labelLWidth": "S",
        "labelLAlign": 2,
-       "selectedItem": "nashi",
+       "selectedItem": "selnashi",
        "dataSource": [
         {
          "key": "nashi",
@@ -3119,10 +3102,14 @@ module DBC {
         {
          "key": "ari",
          "value": "あり"
+        },
+        {
+         "key": "selnashi",
+         "value": "選択無し"
         }
        ],
        "onClick": "",
-       "newLineItemNumber": 2,
+       "newLineItemNumber": 3,
        "spaceSize": "S"
       },
       {
@@ -3263,7 +3250,7 @@ module DBC {
        "fieldName": "radNijiyoboJigyoKubun",
        "items": [],
        "controlType": "RadioButton",
-       "width": "170",
+       "width": "250",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -3282,7 +3269,7 @@ module DBC {
        "labelLText": "事業区分",
        "labelLWidth": "60",
        "labelLAlign": 2,
-       "selectedItem": "higaito",
+       "selectedItem": "selnashi",
        "dataSource": [
         {
          "key": "higaito",
@@ -3291,10 +3278,14 @@ module DBC {
         {
          "key": "gaito",
          "value": "2:該当"
+        },
+        {
+         "key": "selnashi",
+         "value": "選択無し"
         }
        ],
        "onClick": "",
-       "newLineItemNumber": 2,
+       "newLineItemNumber": 3,
        "spaceSize": "S"
       },
       {

@@ -21,6 +21,7 @@
      "authorityMode": 0,
      "marginLeft": 0,
      "marginRight": 0,
+     "selectControlID": "SearchConditionOfHihokensha",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
@@ -29,32 +30,8 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
-     "onClickBtnToSearch": "",
+     "onClickBtnToSearch": "onClick_BtnToSearch",
      "onClickBtnToClear": ""
-    },
-    {
-     "fieldName": "btnKari",
-     "items": [],
-     "controlType": "Button",
-     "width": "S",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "text": "仮ボタン",
-     "onClick": "onClick_btnKari",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": ""
     },
     {
      "fieldName": "SearchResultOfHihokensha",
@@ -73,30 +50,44 @@
      "authorityMode": 0,
      "marginLeft": 0,
      "marginRight": 0,
+     "selectControlID": "SearchResultOfHihokensha",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
+     "businessId": "DBZ",
+     "controlName": "SearchResultOfHihokensha",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "onClickBtnToResearch": "",
      "gridSetting": {
       "rowHeight": 50,
       "isMultiSelectable": false,
       "isShowFooter": true,
       "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": false,
       "header": {
        "combineColumns": [],
-       "frozenColumn": ""
+       "frozenColumn": "",
+       "headerHeight": 0
       },
       "columns": [
        {
         "columnName": "",
         "dataName": "btnToDecide",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 50,
         "visible": true,
         "cellType": 8,
         "cellDetails": {
          "cellType": 8,
          "text": "確定",
-         "onClick": "",
-         "imageFileUrl": ""
+         "onClick": "onClick_btnToDecide",
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": ""
         },
         "align": 0,
         "resize": false,
@@ -106,6 +97,8 @@
        {
         "columnName": "被保番号",
         "dataName": "hihokenshaNo",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 110,
         "visible": true,
         "cellType": 0,
@@ -120,6 +113,8 @@
        {
         "columnName": "識別コード",
         "dataName": "shikibetsuCode",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 110,
         "visible": true,
         "cellType": 0,
@@ -134,6 +129,8 @@
        {
         "columnName": "被保険者区分",
         "dataName": "hihokenshaKubun",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 110,
         "visible": true,
         "cellType": 0,
@@ -146,6 +143,8 @@
        {
         "columnName": "氏名",
         "dataName": "shimei",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 150,
         "visible": false,
         "cellType": 0,
@@ -160,6 +159,8 @@
        {
         "columnName": "カナ氏名",
         "dataName": "kanaShimsei",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 150,
         "visible": false,
         "cellType": 0,
@@ -172,6 +173,8 @@
        {
         "columnName": "氏名",
         "dataName": "shimeiAndKanaShimsei",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 150,
         "visible": true,
         "cellType": 0,
@@ -184,6 +187,8 @@
        {
         "columnName": "性別",
         "dataName": "gender",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 50,
         "visible": true,
         "cellType": 0,
@@ -198,6 +203,8 @@
        {
         "columnName": "生年月日",
         "dataName": "birthDay",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 110,
         "visible": true,
         "cellType": 6,
@@ -214,6 +221,8 @@
        {
         "columnName": "郵便番号",
         "dataName": "yubinNo",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 110,
         "visible": true,
         "cellType": 0,
@@ -226,6 +235,8 @@
        {
         "columnName": "住所",
         "dataName": "jusho",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 300,
         "visible": true,
         "cellType": 0,
@@ -238,6 +249,8 @@
        {
         "columnName": "個人番号",
         "dataName": "kojinNo",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 120,
         "visible": false,
         "cellType": 0,
@@ -250,6 +263,8 @@
        {
         "columnName": "住民種別",
         "dataName": "juminShubetsu",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 100,
         "visible": true,
         "cellType": 0,
@@ -262,6 +277,8 @@
        {
         "columnName": "世帯コード",
         "dataName": "setaiCode",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 110,
         "visible": true,
         "cellType": 0,
@@ -272,13 +289,7 @@
         "sortKey": "setaiCode"
        }
       ]
-     },
-     "businessId": "DBZ",
-     "controlName": "SearchResultOfHihokensha",
-     "dataPassingForDialog": [],
-     "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "onClickBtnToResearch": ""
+     }
     }
    ],
    "controlType": "Panel",
@@ -295,6 +306,7 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "SearchHihokensha",
    "onLoad": "",
    "title": "対象者検索",
    "isOpen": true,
@@ -304,7 +316,16 @@
      "postParameterPanelNames": "SearchHihokensha"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/SearchHihokensha/onLoad"
+    },
+    {
+     "eventName": "onClick_BtnToSearch",
+     "requestUrl": "dbc/db/dbc/SearchHihokensha/onClick_BtnToSearch"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -317,6 +338,7 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
+   "panelDisplay": 0,
    "isGroupBox": false
   },
   {
@@ -339,6 +361,7 @@
      "authorityMode": 0,
      "marginLeft": "-0.2",
      "marginRight": 0,
+     "selectControlID": "JukyushaIdoRenrakuhyo",
      "title": "受給者異動連絡票",
      "relation": [],
      "marginTop": 0,
@@ -364,6 +387,7 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "JukyushaIdoRenrakuhyoShinkiTorokuPanel",
    "onLoad": "",
    "title": "",
    "isOpen": true,
@@ -376,7 +400,16 @@
      "postParameterPanelNames": "SearchHihokensha"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_btnToDecide",
+     "requestUrl": "dbc/db/dbc/JukyushaIdoRenrakuhyoShinkiTorokuPanel/onClick_btnToDecide"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -389,6 +422,7 @@
    "eraseBorderLeft": true,
    "backgroundColor": 0,
    "widthAuto": true,
+   "panelDisplay": 0,
    "isGroupBox": false
   },
   {
@@ -411,10 +445,11 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "dummy",
      "required": false,
-     "isPrivateInfo": false,
+     "align": 2,
      "text": "dummy",
-     "align": 2
+     "isPrivateInfo": false
     }
    ],
    "controlType": "PanelPublish",
@@ -431,10 +466,11 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "OutputJukyushaIdoRenrakuhyo",
    "onLoad": "",
    "title": "受給者異動連絡票",
    "isOpen": true,
-   "canOpenAndClose": false,
+   "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "OutputJukyushaIdoRenrakuhyo"
@@ -453,11 +489,13 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
+   "panelDisplay": 0,
    "isGroupBox": false,
-   "isPublish": true
+   "isPublish": true,
+   "isEmptyControl": false
   },
   {
-   "fieldName": "KyotsuBtnPanel",
+   "fieldName": "KyotsuPanel",
    "items": [
     {
      "fieldName": "btnSave",
@@ -469,23 +507,25 @@
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": false,
+     "wrap": true,
      "dependencies": [],
-     "float": 2,
+     "float": 0,
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnSave",
      "text": "異動連絡票を保存する",
      "onClick": "onClick_btnSave",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     }
    ],
    "controlType": "Panel",
-   "width": "1000",
+   "width": "",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -493,18 +533,19 @@
    "nextFocusFieldName": "",
    "wrap": true,
    "dependencies": [],
-   "float": 0,
+   "float": 1,
    "toolTip": "",
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "KyotsuPanel",
    "onLoad": "",
    "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "KyotsuBtnPanel"
+     "postParameterPanelNames": "KyotsuPanel"
     }
    ],
    "requestSettings": [],
@@ -520,6 +561,7 @@
    "eraseBorderLeft": true,
    "backgroundColor": 0,
    "widthAuto": false,
+   "panelDisplay": 0,
    "isGroupBox": false
   }
  ],
@@ -537,6 +579,7 @@
  "authorityMode": 0,
  "marginLeft": "XS",
  "marginRight": "XS",
+ "selectControlID": "Page",
  "onLoad": "",
  "title": "受給者異動連絡票新規登録",
  "jsPathCollection": [],
@@ -566,6 +609,11 @@
      "fieldName": "btnKari",
      "event": "onClick",
      "transition": "連絡票変更"
+    },
+    {
+     "fieldName": "SearchResultOfHihokensha_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
+     "event": "onClick",
+     "transition": "連絡票変更"
     }
    ]
   },
@@ -576,29 +624,34 @@
    "visibleDivs": [
     {
      "visibleDiv": "JukyushaIdoRenrakuhyoShinkiTorokuPanel",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "JukyushaIdoRenrakuhyo",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
-     "visibleDiv": "KyotsuBtnPanel",
-     "panelState": "visible"
+     "visibleDiv": "KyotsuPanel",
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "OutputJukyushaIdoRenrakuhyo",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "PrintContentsSetting",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     }
    ],
    "validation": {},
    "events": [
     {
      "fieldName": "btnKari",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "SearchResultOfHihokensha_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
      "event": "onClick",
      "transition": ""
     }
@@ -627,7 +680,7 @@
    "OutputJukyushaIdoRenrakuhyo"
   ],
   [
-   "KyotsuBtnPanel"
+   "KyotsuPanel"
   ]
  ],
  "panelMargin": 1,

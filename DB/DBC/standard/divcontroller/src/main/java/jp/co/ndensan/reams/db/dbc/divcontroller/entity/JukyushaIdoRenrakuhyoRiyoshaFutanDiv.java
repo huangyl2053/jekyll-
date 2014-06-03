@@ -23,10 +23,10 @@ public class JukyushaIdoRenrakuhyoRiyoshaFutanDiv extends Panel {
      */
     @JsonProperty("radRiyoshaFutanKubun")
     private RadioButton radRiyoshaFutanKubun;
-    @JsonProperty("txtRiyoshaFutanKyufuritsu")
-    private TextBoxNum txtRiyoshaFutanKyufuritsu;
     @JsonProperty("txtRiyoshaFutanTekiyoDateRange")
     private TextBoxDateRange txtRiyoshaFutanTekiyoDateRange;
+    @JsonProperty("txtRiyoshaFutanKyufuritsu")
+    private TextBoxNum txtRiyoshaFutanKyufuritsu;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -44,16 +44,6 @@ public class JukyushaIdoRenrakuhyoRiyoshaFutanDiv extends Panel {
         this.radRiyoshaFutanKubun=radRiyoshaFutanKubun;
     }
 
-    @JsonProperty("txtRiyoshaFutanKyufuritsu")
-    public TextBoxNum getTxtRiyoshaFutanKyufuritsu() {
-        return txtRiyoshaFutanKyufuritsu;
-    }
-
-    @JsonProperty("txtRiyoshaFutanKyufuritsu")
-    public void setTxtRiyoshaFutanKyufuritsu(TextBoxNum txtRiyoshaFutanKyufuritsu) {
-        this.txtRiyoshaFutanKyufuritsu=txtRiyoshaFutanKyufuritsu;
-    }
-
     @JsonProperty("txtRiyoshaFutanTekiyoDateRange")
     public TextBoxDateRange getTxtRiyoshaFutanTekiyoDateRange() {
         return txtRiyoshaFutanTekiyoDateRange;
@@ -62,6 +52,16 @@ public class JukyushaIdoRenrakuhyoRiyoshaFutanDiv extends Panel {
     @JsonProperty("txtRiyoshaFutanTekiyoDateRange")
     public void setTxtRiyoshaFutanTekiyoDateRange(TextBoxDateRange txtRiyoshaFutanTekiyoDateRange) {
         this.txtRiyoshaFutanTekiyoDateRange=txtRiyoshaFutanTekiyoDateRange;
+    }
+
+    @JsonProperty("txtRiyoshaFutanKyufuritsu")
+    public TextBoxNum getTxtRiyoshaFutanKyufuritsu() {
+        return txtRiyoshaFutanKyufuritsu;
+    }
+
+    @JsonProperty("txtRiyoshaFutanKyufuritsu")
+    public void setTxtRiyoshaFutanKyufuritsu(TextBoxNum txtRiyoshaFutanKyufuritsu) {
+        this.txtRiyoshaFutanKyufuritsu=txtRiyoshaFutanKyufuritsu;
     }
 
 }
