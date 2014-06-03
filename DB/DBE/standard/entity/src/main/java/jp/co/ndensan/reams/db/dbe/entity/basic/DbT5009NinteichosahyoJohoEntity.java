@@ -7,15 +7,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
+import java.util.Objects;
 
 /**
- * 要介護認定調査票情報のエンティティクラスです。
+ * DbT5009NinteichosahyoJohoの項目定義クラスです
  *
- * @author N8156 宮本 康
+ * @author n8178 城間篤人
  */
 public class DbT5009NinteichosahyoJohoEntity implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Generated Code">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5009NinteichosahyoJoho");
@@ -133,8 +133,6 @@ public class DbT5009NinteichosahyoJohoEntity implements IDbAccessable {
     private RString ck_nitchuNoSeikatsuNiTsuite;
     private RString ck_gaishutsuHindoNiTsuite;
     private RString ck_jokyoHenka;
-    private Code ninchishoNichijoSeikatsuJiritsudoCode;
-    private Code shogaiNichijoSeikatsuJiritsudoCode;
 
     /**
      * getInsertDantaiCd
@@ -2054,41 +2052,23 @@ public class DbT5009NinteichosahyoJohoEntity implements IDbAccessable {
     }
 
     /**
-     * getNinchishoNichijoSeikatsuJiritsudoCode
+     * このエンティティの主キーが他の{@literal DbT5009NinteichosahyoJohoEntity}と等しいか判定します。
      *
-     * @return ninchishoNichijoSeikatsuJiritsudoCode
+     * @param other 比較するエンティティ
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT5009NinteichosahyoJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
-    public Code getNinchishoNichijoSeikatsuJiritsudoCode() {
-        return ninchishoNichijoSeikatsuJiritsudoCode;
-    }
-
-    /**
-     * setNinchishoNichijoSeikatsuJiritsudoCode
-     *
-     * @param ninchishoNichijoSeikatsuJiritsudoCode
-     * ninchishoNichijoSeikatsuJiritsudoCode
-     */
-    public void setNinchishoNichijoSeikatsuJiritsudoCode(Code ninchishoNichijoSeikatsuJiritsudoCode) {
-        this.ninchishoNichijoSeikatsuJiritsudoCode = ninchishoNichijoSeikatsuJiritsudoCode;
-    }
-
-    /**
-     * getShogaiNichijoSeikatsuJiritsudoCode
-     *
-     * @return shogaiNichijoSeikatsuJiritsudoCode
-     */
-    public Code getShogaiNichijoSeikatsuJiritsudoCode() {
-        return shogaiNichijoSeikatsuJiritsudoCode;
-    }
-
-    /**
-     * setShogaiNichijoSeikatsuJiritsudoCode
-     *
-     * @param shogaiNichijoSeikatsuJiritsudoCode
-     * shogaiNichijoSeikatsuJiritsudoCode
-     */
-    public void setShogaiNichijoSeikatsuJiritsudoCode(Code shogaiNichijoSeikatsuJiritsudoCode) {
-        this.shogaiNichijoSeikatsuJiritsudoCode = shogaiNichijoSeikatsuJiritsudoCode;
+    public boolean equalsPrimaryKeys(DbT5009NinteichosahyoJohoEntity other) {
+        if (other == null) {
+            return false;
+        }
+        if (!Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo)) {
+            return false;
+        }
+        if (this.ninteichosaRirekiNo != other.ninteichosaRirekiNo) {
+            return false;
+        }
+        return true;
     }
 // </editor-fold>
 }

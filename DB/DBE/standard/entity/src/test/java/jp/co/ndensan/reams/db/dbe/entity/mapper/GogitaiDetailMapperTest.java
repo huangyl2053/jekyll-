@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbe.business.ShinsakaiKaisaiBasho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiDate;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
@@ -40,7 +40,7 @@ public class GogitaiDetailMapperTest {
 
     private static GogitaiNo 合議体番号_1 = new GogitaiNo(1);
     private static RString 合議体名称_合議体1 = new RString("合議体1");
-    private static GogitaiYukoKikanKaishiYMD 開始年月日_19991212 = new GogitaiYukoKikanKaishiYMD("19991212");
+    private static GogitaiYukoKikanKaishiDate 開始年月日_19991212 = new GogitaiYukoKikanKaishiDate("19991212");
     private static FlexibleDate 終了年月日_20101212 = new FlexibleDate("20101212");
     private static Range<TimeString> 開始終了予定時刻_0830_1720 = new Range(new TimeString("0830"), new TimeString("1720"));
     private static ShinsakaiKaisaiBasho 審査会開催場所_山田家001 = create審査会開催場所Mock("山田家001");

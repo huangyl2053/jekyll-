@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -21,48 +23,79 @@ import org.junit.runner.RunWith;
 public class ShinsakaiIinShikakuCodeTest {
 
     private static ShinsakaiIinShikakuCode sut;
+    private static ShinsakaiIinShikakuCode sut2;
 
-    public static class コンストラクタ_コードを表す文字列を渡す場合のテスト extends DbeTestBase {
-
-        private RString code;
-
-        @Before
-        public void setUp() {
-            code = new RString("code");
-        }
+    public static class コンストラクタのテスト extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
-        public void コードにnullが渡されたとき_NullPointerExceptionが発生する() {
-            code = null;
-            sut = new ShinsakaiIinShikakuCode(code);
-        }
-
-        @Test(expected = IllegalArgumentException.class)
-        public void コードに20桁以上の値が渡されたとき_IllegalArgumentExceptionが返る() {
-            code = new RString("0123456789abcdefchijklmnopqlstrvwxyz");
-            sut = new ShinsakaiIinShikakuCode(code);
+        public void 引数にnullを渡したとき_NullPointerExceptionが発生する() {
+            sut = new ShinsakaiIinShikakuCode(null);
         }
     }
 
-    public static class コンストラクタ_コードを渡す場合のテスト extends DbeTestBase {
-
-        private Code code;
+    public static class compareToのテスト extends DbeTestBase {
 
         @Before
         public void setUp() {
-            code = new Code("code");
+            sut = new ShinsakaiIinShikakuCode(new Code("gogitaicho01"));
         }
 
-        @Test(expected = NullPointerException.class)
-        public void コードにnullが渡されたとき_NullPointerExceptionが発生する() {
-            code = null;
-            sut = new ShinsakaiIinShikakuCode(code);
+        @Test
+        public void 比較対象のほうが大きい場合_結果が0より小さくなる() {
+            sut2 = new ShinsakaiIinShikakuCode(new Code("gogitaicho02"));
+            assertThat(sut.compareTo(sut2) < 0, is(true));
         }
 
-        @Test(expected = IllegalArgumentException.class)
-        public void コードに20桁以上の値が渡されたとき_IllegalArgumentExceptionが返る() {
-            code = new Code("0123456789abcdefchijklmnopqlstrvwxyz");
-            sut = new ShinsakaiIinShikakuCode(code);
+        @Test
+        public void 比較対象と同じ値の場合_結果が0になる() {
+            sut2 = new ShinsakaiIinShikakuCode(new Code("gogitaicho01"));
+            assertThat(sut.compareTo(sut2) == 0, is(true));
+        }
+
+        @Test
+        public void 比較対象のほうが小さい場合_結果が0より大きくなる() {
+            sut2 = new ShinsakaiIinShikakuCode(new Code("gogitaicho00"));
+            assertThat(0 < sut.compareTo(sut2), is(true));
+        }
+    }
+
+    public static class equalsのテスト extends DbeTestBase {
+
+        @Before
+        public void setUp() {
+            sut = new ShinsakaiIinShikakuCode(new Code("12"));
+        }
+
+        @Test
+        public void nullが渡されたとき_falseが返る() {
+            assertThat(sut.equals(null), is(false));
+        }
+
+        @Test
+        public void 型の違うインスタンスが渡されたとき_falseが返る() {
+            assertThat(sut.equals(new RString("12")), is(false));
+        }
+
+        @Test
+        public void 値が一致しないインスタンスが渡されたとき_falseが返る() {
+            sut2 = new ShinsakaiIinShikakuCode(new Code("22"));
+            assertThat(sut.equals(sut2), is(false));
+        }
+
+        @Test
+        public void 値が一致するインスタンスが渡されたとき_trueが返る() {
+            sut2 = new ShinsakaiIinShikakuCode(new Code("12"));
+            assertThat(sut.equals(sut2), is(true));
+        }
+    }
+
+    public static class hashCodeのテスト extends DbeTestBase {
+
+        @Test
+        public void 値が一致するインスタンスのhashCodeは_同値になる() {
+            sut = new ShinsakaiIinShikakuCode(new Code("12"));
+            sut2 = new ShinsakaiIinShikakuCode(new Code("12"));
+            assertThat(sut.hashCode(), is(sut2.hashCode()));
         }
     }
 }

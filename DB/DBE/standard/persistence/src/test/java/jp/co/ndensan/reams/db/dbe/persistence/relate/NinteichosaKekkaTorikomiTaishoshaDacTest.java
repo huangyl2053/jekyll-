@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.relate;
 
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5001NinteiShinseiJohoEntityMock;
+import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinseiJohoTestHelper;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.helper.NinteiShinchokuJohoDacMock;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.helper.NinteiShinseiJohoDacMock;
@@ -16,12 +16,12 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.is;
+import org.junit.BeforeClass;
 
 /**
  * 認定調査結果取込対象者Dacのテストクラスです。
@@ -177,7 +177,7 @@ public class NinteichosaKekkaTorikomiTaishoshaDacTest extends DbeTestDacBase {
     }
 
     private static DbT5001NinteiShinseiJohoEntity create認定申請情報Entity(RString 申請書管理番号, ShoKisaiHokenshaNo 証記載保険者番号, RString 支所コード) {
-        DbT5001NinteiShinseiJohoEntity entity = DbT5001NinteiShinseiJohoEntityMock.getSpiedInstance();
+        DbT5001NinteiShinseiJohoEntity entity = NinteiShinseiJohoTestHelper.create認定申請情報Entity();
         entity.setShinseishoKanriNo(new ShinseishoKanriNo(申請書管理番号));
         entity.setShoKisaiHokenshaNo(証記載保険者番号);
         entity.setShishoCode(支所コード);

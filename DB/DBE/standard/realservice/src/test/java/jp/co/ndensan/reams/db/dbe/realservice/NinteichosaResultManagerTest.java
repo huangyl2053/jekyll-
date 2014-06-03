@@ -6,17 +6,18 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaResult;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbe.realservice.helper.NinteichosaKekkaEntityMock;
-import jp.co.ndensan.reams.db.dbe.realservice.helper.NinteichosaResultMock;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaKekkaEntityMock;
+import jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaResultMock;
 import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.NinteichosaKekkaDac;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
 import jp.co.ndensan.reams.ur.urf.realservice.INinteiChosainFinder;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -28,7 +29,7 @@ import static org.mockito.Mockito.*;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class NinteichosaResultManagerTest {
+public class NinteichosaResultManagerTest extends DbeTestBase {
 
     private static final int AS_調査結果あり = 1;
     private static final int AS_調査結果なし = 0;
@@ -37,7 +38,7 @@ public class NinteichosaResultManagerTest {
     private static final int AS_remove成功 = 1;
     private static final int AS_remove失敗 = 0;
 
-    public static class get認定調査結果 {
+    public static class get認定調査結果 extends DbeTestBase {
 
         @Test
         public void 調査結果ありの時_get認定調査結果は_該当の認定調査結果を返す() {
@@ -50,7 +51,7 @@ public class NinteichosaResultManagerTest {
         }
     }
 
-    public static class save認定調査結果 {
+    public static class save認定調査結果 extends DbeTestBase {
 
         @Test
         public void save成功の時_save認定調査結果は_TRUEを返す() {
@@ -63,7 +64,7 @@ public class NinteichosaResultManagerTest {
         }
     }
 
-    public static class remove認定調査結果 {
+    public static class remove認定調査結果 extends DbeTestBase {
 
         @Test
         public void remove成功の時_remove認定調査結果は_TRUEを返す() {

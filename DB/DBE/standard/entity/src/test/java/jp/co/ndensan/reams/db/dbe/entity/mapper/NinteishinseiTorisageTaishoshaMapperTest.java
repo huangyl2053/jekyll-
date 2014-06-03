@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisageTaishosha;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5001NinteiShinseiJohoEntityMock;
+import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinseiJohoTestHelper;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
@@ -47,8 +47,8 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
         @Override
         public void setUp() {
             申請書管理No = new ShinseishoKanriNo(new RString("0123"));
-            証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("A01200"));
-            被保険者No = new KaigoHihokenshaNo(new RString("DB0001"));
+            証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("101200"));
+            被保険者No = new KaigoHihokenshaNo(new RString("1234567890"));
             認定申請年月日 = new FlexibleDate(new RString("20120101"));
             認定申請区分コード_申請時 = NinteiShinseiKubunShinsei.新規申請;
             取下げ区分 = TorisageKubun.区分変更却下;
@@ -158,7 +158,7 @@ public class NinteishinseiTorisageTaishoshaMapperTest extends TestBase {
         }
 
         private DbT5001NinteiShinseiJohoEntity createMockEntity() {
-            return DbT5001NinteiShinseiJohoEntityMock.getSpiedInstance();
+            return NinteiShinseiJohoTestHelper.create認定申請情報Entity();
         }
 
         private NinteiShinseiTorisage create認定申請取下げ() {

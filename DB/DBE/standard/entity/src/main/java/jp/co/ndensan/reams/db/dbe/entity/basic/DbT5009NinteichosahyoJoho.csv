@@ -102,5 +102,3 @@ ck_catheter,bpchar,RString,,,,,A
 ck_nitchuNoSeikatsuNiTsuite,bpchar,RString,,,,,A
 ck_gaishutsuHindoNiTsuite,bpchar,RString,,,,,A
 ck_jokyoHenka,bpchar,RString,,,,,A
-ninchishoNichijoSeikatsuJiritsudoCode,UDD035Code,Code,,,,,A
-shogaiNichijoSeikatsuJiritsudoCode,UDD035Code,Code,,,,,A

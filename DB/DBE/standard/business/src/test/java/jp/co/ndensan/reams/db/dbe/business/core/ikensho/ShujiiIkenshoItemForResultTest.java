@@ -4,16 +4,16 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ikensho;
 
-import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoFactory;
 import jp.co.ndensan.reams.db.dbe.business.core.ChoiceItem;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.IAnswerResultItem;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.IShujiiIkenshoItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.IShujiiIkenshoItemSubGroup;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.IAnswerResultItem;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemSubGroupOf2009;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -27,7 +27,7 @@ import static org.junit.Assert.assertThat;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class ShujiiIkenshoItemForResultTest {
+public class ShujiiIkenshoItemForResultTest extends DbeTestBase {
 
     private static final int AS_NULL項目無し = 0;
     private static final int AS_意見書項目がNULL = 1;
@@ -35,7 +35,7 @@ public class ShujiiIkenshoItemForResultTest {
     private static final boolean AS_選択項目 = true;
     private static final boolean AS_入力項目 = false;
 
-    public static class コンストラクタ {
+    public static class コンストラクタ extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 意見書項目がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
@@ -48,7 +48,7 @@ public class ShujiiIkenshoItemForResultTest {
         }
     }
 
-    public static class is意見書結果項目 {
+    public static class is意見書結果項目 extends DbeTestBase {
 
         @Test
         public void 調査結果項目の時_is調査結果項目は_TRUEを返す() {
@@ -56,7 +56,7 @@ public class ShujiiIkenshoItemForResultTest {
         }
     }
 
-    public static class get意見書項目グループ {
+    public static class get意見書項目グループ extends DbeTestBase {
 
         @Test
         public void 意見書項目グループの設定がある時_get意見書項目グループは_設定値を返す() {
@@ -64,7 +64,7 @@ public class ShujiiIkenshoItemForResultTest {
         }
     }
 
-    public static class get意見書項目サブグループ {
+    public static class get意見書項目サブグループ extends DbeTestBase {
 
         @Test
         public void 意見書項目サブグループの設定がある時_get意見書項目サブグループは_設定値を返す() {
@@ -72,7 +72,7 @@ public class ShujiiIkenshoItemForResultTest {
         }
     }
 
-    public static class get意見書項目グループ内番号 {
+    public static class get意見書項目グループ内番号 extends DbeTestBase {
 
         @Test
         public void 意見書項目グループ内番号の設定がある時_get意見書項目グループ内番号は_設定値を返す() {
@@ -80,7 +80,7 @@ public class ShujiiIkenshoItemForResultTest {
         }
     }
 
-    public static class get意見書項目サブグループ内番号 {
+    public static class get意見書項目サブグループ内番号 extends DbeTestBase {
 
         @Test
         public void 意見書項目サブグループ内番号の設定がある時_get意見書項目サブグループ内番号は_設定値を返す() {
@@ -88,7 +88,7 @@ public class ShujiiIkenshoItemForResultTest {
         }
     }
 
-    public static class get意見書項目番号 {
+    public static class get意見書項目番号 extends DbeTestBase {
 
         @Test
         public void 意見書項目番号の設定がある時_get意見書項目番号は_設定値を返す() {
@@ -96,7 +96,7 @@ public class ShujiiIkenshoItemForResultTest {
         }
     }
 
-    public static class get意見書項目区分 {
+    public static class get意見書項目区分 extends DbeTestBase {
 
         @Test
         public void 意見書項目区分の設定がある時_get意見書項目区分は_設定値を返す() {
@@ -104,7 +104,7 @@ public class ShujiiIkenshoItemForResultTest {
         }
     }
 
-    public static class get表示項目 {
+    public static class get表示項目 extends DbeTestBase {
 
         @Test
         public void 表示名称の設定がある時_get表示名称は_設定値を返す() {
@@ -112,7 +112,7 @@ public class ShujiiIkenshoItemForResultTest {
         }
     }
 
-    public static class get回答項目 {
+    public static class get回答項目 extends DbeTestBase {
 
         @Test
         public void 選択肢が2択の時_get回答項目は_2件の選択肢を返す() {
@@ -125,7 +125,7 @@ public class ShujiiIkenshoItemForResultTest {
         }
     }
 
-    public static class get意見書結果 {
+    public static class get意見書結果 extends DbeTestBase {
 
         @Test
         public void 意見書結果の設定がある時_get意見書結果は_設定値を返す() {
@@ -133,7 +133,7 @@ public class ShujiiIkenshoItemForResultTest {
         }
     }
 
-    public static class get回答結果 {
+    public static class get回答結果 extends DbeTestBase {
 
         @Test
         public void 調査項目が選択形式の時_get回答結果は_該当の選択肢を返す() {

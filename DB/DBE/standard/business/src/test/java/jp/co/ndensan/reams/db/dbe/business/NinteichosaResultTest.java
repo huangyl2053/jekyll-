@@ -5,9 +5,10 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.business.helper.NinteichosaResultMock;
-import org.junit.Test;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Test;
 
 /**
  * 要介護認定調査の調査結果を扱うクラスのテストクラスです。
@@ -15,12 +16,12 @@ import org.junit.runner.RunWith;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class NinteichosaResultTest {
+public class NinteichosaResultTest extends DbeTestBase {
 
     private static final int AS_概況調査結果がNULL = 1;
     private static final int AS_基本調査結果がNULL = 2;
 
-    public static class コンストラクタ {
+    public static class コンストラクタ extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 概況調査結果がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {

@@ -4,26 +4,23 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.mapper;
 
+import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
+import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoIraiTaishosha;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiShinseiDate;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5001NinteiShinseiJohoEntityMock;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
-import jp.co.ndensan.reams.ur.urz.business.IDoctor;
+import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
+import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoMock;
+import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinseiJohoTestHelper;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import static org.mockito.Mockito.mock;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import static org.hamcrest.CoreMatchers.*;
+import org.junit.Before;
 
 /**
  * 主治医意見書作成依頼対象者のビジネスクラスとエンティティの変換を行うMapperのテストクラスです。
@@ -31,94 +28,91 @@ import static org.hamcrest.CoreMatchers.*;
  * @author N8187 久保田 英男
  */
 @RunWith(Enclosed.class)
-public class ShujiiIkenshoIraiTaishoshaMapperTest extends TestBase {
+public class ShujiiIkenshoIraiTaishoshaMapperTest extends DbeTestBase {
 
-    public static class ConstructorTest extends TestBase {
+    private static ShujiiIkenshoIraiTaishosha sut;
+    private static YokaigoninteiProgress 認定進捗情報;
+    private static NinteiShinseiJoho 認定申請情報;
+    private static IKojin 個人;
+    private static RString 氏名;
+    private static RString 住所;
+    private static KaigoIryoKikan 主治医医療機関;
+    private static KaigoDoctor 主治医;
 
-        private ShujiiIkenshoIraiTaishosha sut;
-        private DbT5001NinteiShinseiJohoEntity 認定申請情報Entity;
-        private IKojin 個人;
-        private RString 氏名;
-        private RString 住所;
-        private KaigoIryoKikan 主治医医療機関;
-        private IDoctor 主治医;
+    public static class ConstructorTest extends DbeTestBase {
 
-        @Override
-        protected void setUp() {
-            認定申請情報Entity = mock(DbT5001NinteiShinseiJohoEntity.class);
+        @Before
+        public void setUp() {
+            認定進捗情報 = mock(YokaigoninteiProgress.class);
+            認定申請情報 = mock(NinteiShinseiJoho.class);
             個人 = mock(IKojin.class);
             氏名 = new RString("あああ");
             住所 = new RString("長野市");
             主治医医療機関 = mock(KaigoIryoKikan.class);
-            主治医 = mock(IDoctor.class);
+            主治医 = mock(KaigoDoctor.class);
         }
 
         @Test(expected = NullPointerException.class)
-        public void コンストラクタの認定申請情報Entityに_Nullを指定した場合_NullPointerExceptionが発生する() {
-            認定申請情報Entity = null;
+        public void コンストラクタの認定進捗情報に_Nullを指定した場合_NullPointerExceptionが発生する() {
+            認定進捗情報 = null;
             sut = ShujiiIkenshoIraiTaishoshaMapper.toShujiiIkenshoIraiTaishosha(
-                    認定申請情報Entity, 個人, 氏名, 住所, 主治医医療機関, 主治医);
+                    認定進捗情報, 認定申請情報, 個人, 氏名, 住所, 主治医医療機関, 主治医);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void コンストラクタの認定申請情報に_Nullを指定した場合_NullPointerExceptionが発生する() {
+            認定申請情報 = null;
+            sut = ShujiiIkenshoIraiTaishoshaMapper.toShujiiIkenshoIraiTaishosha(
+                    認定進捗情報, 認定申請情報, 個人, 氏名, 住所, 主治医医療機関, 主治医);
         }
     }
 
-    public static class toShujiiIkenshoIraiTaishoshaTest extends TestBase {
+    public static class toShujiiIkenshoIraiTaishoshaTest extends DbeTestBase {
 
-        private ShujiiIkenshoIraiTaishosha sut;
-        private DbT5001NinteiShinseiJohoEntity 認定申請情報Entity;
-        private IKojin 個人;
-        private RString 氏名;
-        private RString 住所;
-        private KaigoIryoKikan 主治医医療機関;
-        private IDoctor 主治医;
-
-        @Override
-        protected void setUp() {
-            認定申請情報Entity = DbT5001NinteiShinseiJohoEntityMock.getSpiedInstance();
-            認定申請情報Entity.setShinseishoKanriNo(new ShinseishoKanriNo(new RString("0001")));
-            認定申請情報Entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(new RString("111111")));
-            認定申請情報Entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("0002")));
-            認定申請情報Entity.setNinteiShinseiYMD(new FlexibleDate(new RString("20140101")));
-            認定申請情報Entity.setNinteiShinseiShinseijiKubunCode(NinteiShinseiKubunShinsei.新規申請);
+        @Before
+        public void setUp() {
+            認定進捗情報 = NinteiShinchokuJohoMock.create認定進捗情報();
+            認定申請情報 = NinteiShinseiJohoTestHelper.create認定申請情報();
             個人 = mock(IKojin.class);
             氏名 = new RString("あああ");
             住所 = new RString("長野市");
             主治医医療機関 = mock(KaigoIryoKikan.class);
-            主治医 = mock(IDoctor.class);
+            主治医 = mock(KaigoDoctor.class);
         }
 
         @Test
-        public void 引き渡した_認定申請情報Entityの申請書管理番号_とtoShujiiIkenshoIraiTaishoshaの結果は一致する() {
+        public void 引き渡した_認定申請情報の申請書管理番号_とtoShujiiIkenshoIraiTaishoshaの結果は一致する() {
             sut = ShujiiIkenshoIraiTaishoshaMapper.toShujiiIkenshoIraiTaishosha(
-                    認定申請情報Entity, 個人, 氏名, 住所, 主治医医療機関, 主治医);
-            assertThat(sut.get申請書管理番号(), is(認定申請情報Entity.getShinseishoKanriNo()));
+                    認定進捗情報, 認定申請情報, 個人, 氏名, 住所, 主治医医療機関, 主治医);
+            assertThat(sut.get申請書管理番号(), is(認定申請情報.get申請書管理番号()));
         }
 
         @Test
-        public void 引き渡した_認定申請情報Entityの証記載保険者番号_とtoShujiiIkenshoIraiTaishoshaの結果は一致する() {
+        public void 引き渡した_認定申請情報の証記載保険者番号_とtoShujiiIkenshoIraiTaishoshaの結果は一致する() {
             sut = ShujiiIkenshoIraiTaishoshaMapper.toShujiiIkenshoIraiTaishosha(
-                    認定申請情報Entity, 個人, 氏名, 住所, 主治医医療機関, 主治医);
-            assertThat(sut.get証記載保険者番号(), is(認定申請情報Entity.getShoKisaiHokenshaNo()));
+                    認定進捗情報, 認定申請情報, 個人, 氏名, 住所, 主治医医療機関, 主治医);
+            assertThat(sut.get証記載保険者番号(), is(認定申請情報.get証記載保険者番号()));
         }
 
         @Test
-        public void 引き渡した_認定申請情報Entityの被保険者番号_とtoShujiiIkenshoIraiTaishoshaの結果は一致する() {
+        public void 引き渡した_認定申請情報の被保険者番号_とtoShujiiIkenshoIraiTaishoshaの結果は一致する() {
             sut = ShujiiIkenshoIraiTaishoshaMapper.toShujiiIkenshoIraiTaishosha(
-                    認定申請情報Entity, 個人, 氏名, 住所, 主治医医療機関, 主治医);
-            assertThat(sut.get被保険者番号(), is(認定申請情報Entity.getHihokenshaNo()));
+                    認定進捗情報, 認定申請情報, 個人, 氏名, 住所, 主治医医療機関, 主治医);
+            assertThat(sut.get被保険者番号(), is(認定申請情報.get介護被保険者番号()));
         }
 
         @Test
-        public void 引き渡した_認定申請情報Entityの認定申請年月日_とtoShujiiIkenshoIraiTaishoshaの結果は一致する() {
+        public void 引き渡した_認定申請情報の認定申請年月日_とtoShujiiIkenshoIraiTaishoshaの結果は一致する() {
             sut = ShujiiIkenshoIraiTaishoshaMapper.toShujiiIkenshoIraiTaishosha(
-                    認定申請情報Entity, 個人, 氏名, 住所, 主治医医療機関, 主治医);
-            assertThat(sut.get認定申請年月日(), is(認定申請情報Entity.getNinteiShinseiYMD()));
+                    認定進捗情報, 認定申請情報, 個人, 氏名, 住所, 主治医医療機関, 主治医);
+            assertThat(sut.get認定申請年月日(), is(認定申請情報.get認定申請年月日()));
         }
 
         @Test
-        public void 引き渡した_認定申請情報Entityの認定申請区分_とtoShujiiIkenshoIraiTaishoshaの結果は一致する() {
+        public void 引き渡した_認定申請情報の認定申請区分_とtoShujiiIkenshoIraiTaishoshaの結果は一致する() {
             sut = ShujiiIkenshoIraiTaishoshaMapper.toShujiiIkenshoIraiTaishosha(
-                    認定申請情報Entity, 個人, 氏名, 住所, 主治医医療機関, 主治医);
-            assertThat(sut.get認定申請区分(), is(認定申請情報Entity.getNinteiShinseiShinseijiKubunCode()));
+                    認定進捗情報, 認定申請情報, 個人, 氏名, 住所, 主治医医療機関, 主治医);
+            assertThat(sut.get認定申請区分(), is(認定申請情報.get認定申請区分_申請時()));
         }
     }
 }

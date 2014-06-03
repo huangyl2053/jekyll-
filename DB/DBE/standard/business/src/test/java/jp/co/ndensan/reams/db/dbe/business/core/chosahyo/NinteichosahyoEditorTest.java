@@ -4,19 +4,19 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.chosahyo;
 
-import jp.co.ndensan.reams.db.dbe.business.NinteichosahyoFactory;
 import java.util.EnumMap;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.INinteichosaItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.junit.Test;
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -25,14 +25,14 @@ import static org.junit.Assert.assertThat;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class NinteichosahyoEditorTest {
+public class NinteichosahyoEditorTest extends DbeTestBase {
 
     private static final INinteichosaItemKubun ITEM_KUBUN = NinteichosaItemKubunOfKihon.麻痺等の有無_左上肢;
     private static final RString STRING_VALUE = new RString("123");
     private static final int INT_VALUE = 123;
     private static final Code CODE_VALUE = new Code("123");
 
-    public static class setItem {
+    public static class setItem extends DbeTestBase {
 
         @Test
         public void 調査項目の指定がある時_setItemは_指定値を設定する() {
@@ -42,7 +42,7 @@ public class NinteichosahyoEditorTest {
         }
     }
 
-    public static class setResult_string {
+    public static class setResult_string extends DbeTestBase {
 
         @Test
         public void 調査結果の指定がある時_setResultは_指定値を設定する() {
@@ -52,7 +52,7 @@ public class NinteichosahyoEditorTest {
         }
     }
 
-    public static class setResult_int {
+    public static class setResult_int extends DbeTestBase {
 
         @Test
         public void 調査結果の指定がある時_setResultは_指定値を設定する() {
@@ -62,7 +62,7 @@ public class NinteichosahyoEditorTest {
         }
     }
 
-    public static class getResultByString {
+    public static class getResultByString extends DbeTestBase {
 
         @Test
         public void 調査結果の設定がある時_getResultByStringは_設定値を返す() {
@@ -72,7 +72,7 @@ public class NinteichosahyoEditorTest {
         }
     }
 
-    public static class getResultByInt {
+    public static class getResultByInt extends DbeTestBase {
 
         @Test
         public void 調査結果の設定がある時_getResultByIntは_設定値を返す() {
@@ -82,7 +82,7 @@ public class NinteichosahyoEditorTest {
         }
     }
 
-    public static class getResultByCode {
+    public static class getResultByCode extends DbeTestBase {
 
         @Test
         public void 調査結果の設定がある時_getResultByIntは_設定値を返す() {
@@ -92,7 +92,7 @@ public class NinteichosahyoEditorTest {
         }
     }
 
-    public static class isResultSet {
+    public static class isResultSet extends DbeTestBase {
 
         @Test
         public void 調査結果の設定がある時_isResultSetは_TRUEを返す() {
@@ -108,7 +108,7 @@ public class NinteichosahyoEditorTest {
         }
     }
 
-    public static class getNinteichosahyo {
+    public static class getNinteichosahyo extends DbeTestBase {
 
         @Test
         public void 調査票の設定がある時_getNinteichosahyoは_調査票のインスタンスを返す() {
@@ -127,6 +127,6 @@ public class NinteichosahyoEditorTest {
     }
 
     private static Ninteichosahyo createChosahyo() {
-        return NinteichosahyoFactory.create基本情報Instance(KoroshoIFKubun.V09A);
+        return NinteichosahyoFactory.create基本調査Instance(KoroshoIFKubun.V09A);
     }
 }

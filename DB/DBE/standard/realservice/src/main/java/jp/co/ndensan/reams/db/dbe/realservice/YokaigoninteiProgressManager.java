@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 
 import jp.co.ndensan.reams.db.dbe.business.YokaigoninteiProgress;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.NinteiShinchokuJohoMapper;
-import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinchokuJohoDac;
+import jp.co.ndensan.reams.db.dbe.persistence.basic.NinteiShinchokuJohoDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -16,13 +16,13 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class YokaigoninteiProgressManager {
 
-    private final INinteiShinchokuJohoDac ninteiShinchokuJohoDac;
+    private final NinteiShinchokuJohoDac ninteiShinchokuJohoDac;
 
     /**
      * デフォルトコンストラクタです。
      */
     public YokaigoninteiProgressManager() {
-        this.ninteiShinchokuJohoDac = InstanceProvider.create(INinteiShinchokuJohoDac.class);
+        this.ninteiShinchokuJohoDac = InstanceProvider.create(NinteiShinchokuJohoDac.class);
     }
 
     /**
@@ -31,7 +31,7 @@ public class YokaigoninteiProgressManager {
      * @param ninteiShinchokuJohoDac 認定進捗情報Dac
      */
     YokaigoninteiProgressManager(
-            INinteiShinchokuJohoDac ninteiShinchokuJohoDac) {
+            NinteiShinchokuJohoDac ninteiShinchokuJohoDac) {
         this.ninteiShinchokuJohoDac = ninteiShinchokuJohoDac;
     }
 

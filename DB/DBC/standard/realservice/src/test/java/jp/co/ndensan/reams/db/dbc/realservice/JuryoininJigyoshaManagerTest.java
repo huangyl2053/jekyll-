@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbc.entity.helper.JuryoininJigyoshaEntityMock;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.JuryoininJigyoshaDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
-import jp.co.ndensan.reams.ur.urf.definition.KaigoJigyoshaShubetsu;
 import jp.co.ndensan.reams.ur.urf.realservice.IKaigoJigyoshaFinder;
 import jp.co.ndensan.reams.ur.urz.business.IKoza;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
@@ -123,9 +122,8 @@ public class JuryoininJigyoshaManagerTest extends DbcTestBase {
 
     private static IKaigoJigyoshaFinder createJigyoshaFinderMock() {
         IKaigoJigyoshaFinder JigyoshaFinderMock = mock(IKaigoJigyoshaFinder.class);
-        //TODO n3317塚田萌　get特定の事業者種別かつ事業者番号の介護事業者の修正が完了したらKaigoJigyoshaShubetsuを消す
-        when(JigyoshaFinderMock.get特定の事業者種別かつ事業者番号の介護事業者(
-                any(KaigoJigyoshaShubetsu.class), any(RString.class))).
+        when(JigyoshaFinderMock.get特定の事業者番号の介護事業者(
+                any(RString.class))).
                 thenReturn(mock(IKaigoJigyosha.class));
 
         return JigyoshaFinderMock;

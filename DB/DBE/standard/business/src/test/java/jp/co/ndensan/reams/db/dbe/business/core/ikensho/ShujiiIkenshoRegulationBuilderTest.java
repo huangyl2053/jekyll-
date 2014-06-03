@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiI
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemSubGroupOf2009;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -28,9 +29,9 @@ import static org.junit.Assert.assertThat;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class ShujiiIkenshoRegulationBuilderTest {
+public class ShujiiIkenshoRegulationBuilderTest extends DbeTestBase {
 
-    public static class コンストラクタ {
+    public static class コンストラクタ extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 意見書定義がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
@@ -38,7 +39,7 @@ public class ShujiiIkenshoRegulationBuilderTest {
         }
     }
 
-    public static class set意見書項目グループ {
+    public static class set意見書項目グループ extends DbeTestBase {
 
         @Test
         public void 意見書項目グループの指定がある時_set意見書項目グループは_指定した意見書項目グループを設定する() {
@@ -91,7 +92,7 @@ public class ShujiiIkenshoRegulationBuilderTest {
         }
     }
 
-    public static class set意見書項目 {
+    public static class set意見書項目 extends DbeTestBase {
 
         @Test
         public void 意見書項目の指定がある時_set意見書項目は_指定した意見書項目グループを設定する() {

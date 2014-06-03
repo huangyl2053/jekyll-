@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ikensho;
 
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.junit.Test;
@@ -16,9 +17,9 @@ import static org.junit.Assert.assertThat;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class ShujiiIkenshoRegulationTest {
+public class ShujiiIkenshoRegulationTest extends DbeTestBase {
 
-    public static class get意見書定義 {
+    public static class get意見書定義 extends DbeTestBase {
 
         @Test
         public void 意見書定義に設定がある時_get意見書定義は_該当の意見書定義を返す() {

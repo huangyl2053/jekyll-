@@ -9,9 +9,10 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.mapper.ShujiiMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IShujiiDac;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.KaigoDoctorEntityMock;
-import org.junit.Test;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
@@ -22,9 +23,9 @@ import static org.mockito.Mockito.*;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class ShujiiManagerTest {
+public class ShujiiManagerTest extends DbeTestBase {
 
-    public static class save {
+    public static class save extends DbeTestBase {
 
         @Test
         public void 主治医情報の保存が成功した時_saveは_TRUEを返す() {
@@ -37,7 +38,7 @@ public class ShujiiManagerTest {
         }
     }
 
-    public static class saveAs有効 {
+    public static class saveAs有効 extends DbeTestBase {
 
         @Test
         public void 主治医情報の保存が成功した時_saveAs有効は_TRUEを返す() {
@@ -50,7 +51,7 @@ public class ShujiiManagerTest {
         }
     }
 
-    public static class saveAs無効 {
+    public static class saveAs無効 extends DbeTestBase {
 
         @Test
         public void 主治医情報の保存が成功した時_saveAs無効は_TRUEを返す() {
@@ -63,7 +64,7 @@ public class ShujiiManagerTest {
         }
     }
 
-    public static class saveAsNew {
+    public static class saveAsNew extends DbeTestBase {
 
         @Test
         public void 主治医情報の保存が成功した時_saveAsNewは_TRUEを返す() {
@@ -76,7 +77,7 @@ public class ShujiiManagerTest {
         }
     }
 
-    public static class remove {
+    public static class remove extends DbeTestBase {
 
         @Test
         public void 主治医情報の削除が成功した時_removeは_TRUEを返す() {

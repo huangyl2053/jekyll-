@@ -20,8 +20,8 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.*;
-import static jp.co.ndensan.reams.db.dbe.realservice.helper.KaigoNinteichosainTestHelper.*;
-import jp.co.ndensan.reams.db.dbe.realservice.helper.MockNinteichosaItakusakiJohoEntity;
+import static jp.co.ndensan.reams.db.dbe.entity.helper.KaigoNinteichosainTestHelper.*;
+import jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaItakusakiTestHelper;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -262,7 +262,7 @@ public class KaigoNinteichosainManagerTest extends TestBase {
     private static DbT7013ChosainJohoEntity createChosainEntity(ShoKisaiHokenshaNo 証記載保険者番号, KaigoJigyoshaNo 介護事業者番号, KaigoNinteichosainNo 介護調査員番号) {
         DbT7013ChosainJohoEntity entity = create認定調査員Entity();
         entity.setShoKisaiHokenshaNo(証記載保険者番号);
-        entity.setKaigoJigyoshaNo(介護事業者番号);
+        entity.setKaigoJigyoshaNo(介護事業者番号.value());
         entity.setKaigoChosainNo(介護調査員番号.value());
         return entity;
     }
@@ -270,7 +270,7 @@ public class KaigoNinteichosainManagerTest extends TestBase {
     private static DbT7013ChosainJohoEntity createChosainEntity(ShoKisaiHokenshaNo 証記載保険者番号, KaigoJigyoshaNo 介護事業者番号, KaigoNinteichosainNo 介護調査員番号, ChosainJokyo 調査員の状況) {
         DbT7013ChosainJohoEntity entity = create認定調査員Entity();
         entity.setShoKisaiHokenshaNo(証記載保険者番号);
-        entity.setKaigoJigyoshaNo(介護事業者番号);
+        entity.setKaigoJigyoshaNo(介護事業者番号.value());
         entity.setKaigoChosainNo(介護調査員番号.value());
         entity.setKaigoChosainJokyo(調査員の状況.is有効());
         return entity;
@@ -295,12 +295,12 @@ public class KaigoNinteichosainManagerTest extends TestBase {
 
     private static NinteichosaItakusakiDac createMockItakusakiDac() {
         NinteichosaItakusakiDac dac = mock(NinteichosaItakusakiDac.class);
-        when(dac.select(any(RString.class), any(KaigoJigyoshaNo.class), any(boolean.class))).thenReturn(createItakusakiEntity());
+        when(dac.select(any(ShoKisaiHokenshaNo.class), any(KaigoJigyoshaNo.class), any(boolean.class))).thenReturn(createItakusakiEntity());
         return dac;
     }
 
     private static DbT7010NinteichosaItakusakiJohoEntity createItakusakiEntity() {
-        DbT7010NinteichosaItakusakiJohoEntity entity = MockNinteichosaItakusakiJohoEntity.getSpiedInstance();
+        DbT7010NinteichosaItakusakiJohoEntity entity = NinteichosaItakusakiTestHelper.create認定調査委託先Entity();
         return entity;
     }
 }

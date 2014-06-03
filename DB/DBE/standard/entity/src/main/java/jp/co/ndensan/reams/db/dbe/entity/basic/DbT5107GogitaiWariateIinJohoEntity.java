@@ -9,6 +9,9 @@ import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import java.util.Objects;
+import jp.co.ndensan.reams.db.dbe.definition.DbeShubetsuKey;
 
 /**
  * DbT5107GogitaiWariateIinJohoの項目定義クラスです
@@ -16,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
  * @author n8178 城間篤人
  */
 public class DbT5107GogitaiWariateIinJohoEntity implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Generated Code">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5107GogitaiWariateIinJoho");
@@ -174,6 +177,24 @@ public class DbT5107GogitaiWariateIinJohoEntity implements IDbAccessable {
     }
 
     /**
+     * getShinsainKubunCodeMeisho
+     *
+     * @return Meisho
+     */
+    public RString getShinsainKubunCodeMeisho() {
+        return CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.認定審査員区分, shinsainKubunCode);
+    }
+
+    /**
+     * getShinsainKubunCodeRyakusho
+     *
+     * @return Ryakusho
+     */
+    public RString getShinsainKubunCodeRyakusho() {
+        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.認定審査員区分, shinsainKubunCode);
+    }
+
+    /**
      * getGogitaichoKubunCode
      *
      * @return gogitaichoKubunCode
@@ -190,27 +211,46 @@ public class DbT5107GogitaiWariateIinJohoEntity implements IDbAccessable {
     public void setGogitaichoKubunCode(Code gogitaichoKubunCode) {
         this.gogitaichoKubunCode = gogitaichoKubunCode;
     }
+
+    /**
+     * getGogitaichoKubunCodeMeisho
+     *
+     * @return Meisho
+     */
+    public RString getGogitaichoKubunCodeMeisho() {
+        return CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.合議体長区分, gogitaichoKubunCode);
+    }
+
+    /**
+     * getGogitaichoKubunCodeRyakusho
+     *
+     * @return Ryakusho
+     */
+    public RString getGogitaichoKubunCodeRyakusho() {
+        return CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援, DbeShubetsuKey.合議体長区分, gogitaichoKubunCode);
+    }
+
+    /**
+     * このエンティティの主キーが他の{@literal DbT5107GogitaiWariateIinJohoEntity}と等しいか判定します。
+     *
+     * @param other 比較するエンティティ
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT5107GogitaiWariateIinJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     */
+    public boolean equalsPrimaryKeys(DbT5107GogitaiWariateIinJohoEntity other) {
+        if (other == null) {
+            return false;
+        }
+        if (this.gogitaiNo != other.gogitaiNo) {
+            return false;
+        }
+        if (!Objects.equals(this.gogitaiYukoKikanKaishiYMD, other.gogitaiYukoKikanKaishiYMD)) {
+            return false;
+        }
+        if (!Objects.equals(this.shinsakaiIinCode, other.shinsakaiIinCode)) {
+            return false;
+        }
+        return true;
+    }
 // </editor-fold>
-
-    /**
-     * 審査会区分の名称をコードマスタから取得します。
-     *
-     * @return 審査会区分の名称
-     */
-    public RString getShinsainKubunName() {
-        //TODO n8178 城間篤人 コードマスタが用意されてから実装予定 2014年3月末
-        //return CodeMaster.getCodeMeisho(new RString("db01"), shinsainKubunCode.getColumnValue());
-        return new RString("審査員区分");
-    }
-
-    /**
-     * 合議体長区分の名称をコードマスタから取得します。
-     *
-     * @return 合議体区分の名称
-     */
-    public RString getGogitaichoKubunName() {
-        //TODO n8178 城間篤人 コードマスタが用意されてから実装予定 2014年3月末
-        //return CodeMaster.getCodeMeisho(new RString("db02"), gogitaichoKubunCode.getColumnValue());
-        return new RString("合議体長区分");
-    }
 }

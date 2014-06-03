@@ -9,7 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.Gogitai;
 import jp.co.ndensan.reams.db.dbe.business.GogitaiList;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiDate;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.relate.GogitaiWariateShinsakaiIinEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.GogitaiAndGogitaiWariateIinDac;
@@ -57,14 +57,14 @@ public class GogitaiManagerTest {
         @Test
         public void Dacから2件の有効な合議体エンティティを取得できたとき_2件の要素を持つ合議体Listが返る() {
             sut = new GogitaiManager(createGogitaiWariateIinDacMock(2), null);
-            GogitaiList result = sut.get有効合議体List(new GogitaiYukoKikanKaishiYMD("19991212"));
+            GogitaiList result = sut.get有効合議体List(new GogitaiYukoKikanKaishiDate("19991212"));
             assertThat(result.size(), is(2));
         }
 
         private GogitaiWariateShinsakaiIinDac createGogitaiWariateIinDacMock(int 件数) {
             GogitaiWariateShinsakaiIinDac dac = mock(GogitaiWariateShinsakaiIinDac.class);
             List<GogitaiWariateShinsakaiIinEntity> 合議体割当委員EntityList = create合議体割当委員EntityList(件数);
-            when(dac.select(any(GogitaiYukoKikanKaishiYMD.class))).thenReturn(合議体割当委員EntityList);
+            when(dac.select(any(GogitaiYukoKikanKaishiDate.class))).thenReturn(合議体割当委員EntityList);
             return dac;
         }
     }
@@ -125,10 +125,10 @@ public class GogitaiManagerTest {
 
     private static GogitaiWariateShinsakaiIinEntity create合議体割当委員Entity(int 合議体番号) {
         GogitaiWariateShinsakaiIinEntity entity = new GogitaiWariateShinsakaiIinEntity();
-        entity.set割当Entity(GogitaiMockEntityCreator.create合議体割当Entity(合議体番号, "iin01", "19991212", "19991231"));
-        entity.set合議体情報Entity(GogitaiMockEntityCreator.create合議体情報Entity(合議体番号, "19991212", "19991231", "basho1"));
-        entity.set委員Entity(GogitaiMockEntityCreator.create審査会委員Entity("iin01", "19800101"));
-        entity.set開催場所Entity(GogitaiMockEntityCreator.create開催場所Entity("basho1"));
+        entity.set割当Entity(GogitaiMockEntityCreator.create合議体割当EntitySpy(合議体番号, "iin01", "19991212", "19991231"));
+        entity.set合議体情報Entity(GogitaiMockEntityCreator.create合議体情報EntitySpy(合議体番号, "19991212", "19991231", "basho1"));
+        entity.set委員Entity(GogitaiMockEntityCreator.create審査会委員EntitySpy("iin01", "19800101"));
+        entity.set開催場所Entity(GogitaiMockEntityCreator.create開催場所EntitySpy("basho1"));
         return entity;
     }
 }

@@ -43,7 +43,7 @@ public class NinteiShinseiTorisageManagerTest extends TestBase {
 
     private static ShinseishoKanriNo 申請書管理No = new ShinseishoKanriNo(new RString("0123"));
     private static ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("A01200"));
-    private static KaigoHihokenshaNo 被保険者No = new KaigoHihokenshaNo(new RString("DB0001"));
+    private static KaigoHihokenshaNo 被保険者No = new KaigoHihokenshaNo(new RString("1234567890"));
     private static FlexibleDate 認定申請年月日 = new FlexibleDate(new RString("20120101"));
     private static NinteiShinseiKubunShinsei 認定申請区分コード_申請時 = NinteiShinseiKubunShinsei.新規申請;
     private static TorisageKubun 取下げ区分 = TorisageKubun.区分変更却下;

@@ -7,10 +7,11 @@ package jp.co.ndensan.reams.db.dbe.business;
 import jp.co.ndensan.reams.db.dbe.business.helper.NinteichosaResultMock;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Test;
 
 /**
  * 要介護認定調査の調査結果（概況調査基本）を扱うクラスのテストクラスです。
@@ -18,7 +19,7 @@ import org.junit.runner.RunWith;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class NinteichosaResultOfGaikyoKihonTest {
+public class NinteichosaResultOfGaikyoKihonTest extends DbeTestBase {
 
     private static final int AS_認定調査依頼区分がNULL = 1;
     private static final int AS_認定調査実施年月日がNULL = 2;
@@ -27,7 +28,7 @@ public class NinteichosaResultOfGaikyoKihonTest {
     private static final int AS_認定調査員がNULL = 5;
     private static final int AS_認定調査実施場所区分がNULL = 6;
 
-    public static class コンストラクタ {
+    public static class コンストラクタ extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 認定調査依頼区分がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {

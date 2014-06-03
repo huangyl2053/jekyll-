@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.Nintei
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemSubGroupOf2009;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -27,9 +28,9 @@ import static org.junit.Assert.assertThat;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class NinteichosahyoRegulationBuilderTest {
+public class NinteichosahyoRegulationBuilderTest extends DbeTestBase {
 
-    public static class コンストラクタ {
+    public static class コンストラクタ extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 調査票定義がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
@@ -37,7 +38,7 @@ public class NinteichosahyoRegulationBuilderTest {
         }
     }
 
-    public static class set調査項目グループ {
+    public static class set調査項目グループ extends DbeTestBase {
 
         @Test
         public void 調査項目グループの指定がある時_set調査項目グループは_指定した調査項目グループを設定する() {
@@ -90,7 +91,7 @@ public class NinteichosahyoRegulationBuilderTest {
         }
     }
 
-    public static class set調査項目 {
+    public static class set調査項目 extends DbeTestBase {
 
         @Test
         public void 調査項目の指定がある時_set調査項目は_指定した調査項目グループを設定する() {

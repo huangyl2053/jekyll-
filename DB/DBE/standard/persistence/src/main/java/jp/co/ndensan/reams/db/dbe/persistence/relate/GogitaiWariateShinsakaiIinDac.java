@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.relate;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiDate;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5102ShinsakaiIinJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5103GogitaiJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5104ShinsakaiKaisaiBashoJoho;
@@ -73,7 +73,7 @@ public class GogitaiWariateShinsakaiIinDac {
      * @return 合議体割当委員のList
      */
     @Transaction
-    public List<GogitaiWariateShinsakaiIinEntity> select(GogitaiYukoKikanKaishiYMD 合議体有効期間開始年月日) {
+    public List<GogitaiWariateShinsakaiIinEntity> select(GogitaiYukoKikanKaishiDate 合議体有効期間開始年月日) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5107GogitaiWariateIinJoho.class)
                 .leftJoin(DbT5102ShinsakaiIinJoho.class, using(DbT5107GogitaiWariateIinJoho.shinsakaiIinCode))
@@ -93,7 +93,7 @@ public class GogitaiWariateShinsakaiIinDac {
      * @return 合議体割当委員のList
      */
     @Transaction
-    public List<GogitaiWariateShinsakaiIinEntity> select(GogitaiNo 合議体番号, GogitaiYukoKikanKaishiYMD 合議体有効期間開始年月日) {
+    public List<GogitaiWariateShinsakaiIinEntity> select(GogitaiNo 合議体番号, GogitaiYukoKikanKaishiDate 合議体有効期間開始年月日) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT5107GogitaiWariateIinJoho.class)
                 .leftJoin(DbT5102ShinsakaiIinJoho.class, using(DbT5107GogitaiWariateIinJoho.shinsakaiIinCode))

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiDate;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiBashoCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
@@ -35,7 +35,7 @@ public class GogitaiDetailTest {
     private static GogitaiDetail sut2;
     private static GogitaiNo 合議体番号_1 = new GogitaiNo(1);
     private static RString 合議体名称_ABC = new RString("ABC");
-    private static GogitaiYukoKikanKaishiYMD 有効期間開始年月日_19990101 = new GogitaiYukoKikanKaishiYMD("19990101");
+    private static GogitaiYukoKikanKaishiDate 有効期間開始年月日_19990101 = new GogitaiYukoKikanKaishiDate("19990101");
     private static FlexibleDate 有効期間終了年月日_20100101 = new FlexibleDate("20100101");
     private static Range<TimeString> 開始終了予定時刻_0930_1730 = new Range<>(new TimeString("0930"), new TimeString("1730"));
     private static ShinsakaiKaisaiBasho 審査会開催場所_A001 = create審査会開催場所("A001");
@@ -174,7 +174,7 @@ public class GogitaiDetailTest {
 
         @Test
         public void 合議体有効期間開始年月日が同値で無い場合_falseを返す() {
-            sut2 = new GogitaiDetail(合議体番号_1, 合議体名称_ABC, new GogitaiYukoKikanKaishiYMD("20010101"), 有効期間終了年月日_20100101, 開始終了予定時刻_0930_1730, 審査会開催場所_A001,
+            sut2 = new GogitaiDetail(合議体番号_1, 合議体名称_ABC, new GogitaiYukoKikanKaishiDate("20010101"), 有効期間終了年月日_20100101, 開始終了予定時刻_0930_1730, 審査会開催場所_A001,
                     審査会予定定員_5, 審査会自動割当定員_4, 審査会委員定員_6, 精神科医師存在_存在, 合議体ダミー_正規);
             assertThat(sut1.equals(sut2), is(false));
         }

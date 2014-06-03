@@ -1,0 +1,6 @@
+﻿shinsakaiKaisaiBashoCode,varchar,RString,,,,,A
+shinsakaiKaisaiBashoMei,varchar,RString,,,,,A
+shinsakaiKaisaiChikuCode,UDD035Code,Code,SubGyomuCode.DBE認定支援,DbeShubetsuKey.,,,A
+shinsakaiKaisaiBashoJusho,UDD046AtenaJusho,AtenaJusho,,,,,A
+shinsakaiKaisaiBashoTelNo,UDD026TelNo,TelNo,,,,,A
+shinsakaiKaisaiBashoJokyo,bool,boolean,,,,,A

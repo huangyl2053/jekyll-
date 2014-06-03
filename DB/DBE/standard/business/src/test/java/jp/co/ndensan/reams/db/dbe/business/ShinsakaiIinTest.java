@@ -14,12 +14,12 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import org.junit.Test;
@@ -28,7 +28,6 @@ import static org.hamcrest.CoreMatchers.*;
 import org.junit.Before;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.mock;
 
 /**
  * 介護認定審査会委員のテストです。
@@ -65,7 +64,7 @@ public class ShinsakaiIinTest {
             氏名 = new AtenaMeisho(RString.EMPTY);
             カナ氏名 = new AtenaKanaMeisho(RString.EMPTY);
             性別 = Gender.MALE;
-            審査会委員資格 = new ShinsakaiIinShikaku(new ShinsakaiIinShikakuCode(new RString("A001")), new RString("資格of資格"));
+            審査会委員資格 = new ShinsakaiIinShikaku(new Code("A001"), new RString("資格of資格"), new RString("資格"));
             審査委員郵送区分 = ShinsainYusoKubun.所属機関;
             郵便番号 = new YubinNo(new RString("123-1234"));
             住所 = new AtenaJusho(RString.EMPTY);

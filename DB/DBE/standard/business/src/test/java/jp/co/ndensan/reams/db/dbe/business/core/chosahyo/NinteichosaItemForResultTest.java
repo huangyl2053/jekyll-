@@ -4,16 +4,16 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.chosahyo;
 
-import jp.co.ndensan.reams.db.dbe.business.NinteichosahyoFactory;
 import jp.co.ndensan.reams.db.dbe.business.core.ChoiceItem;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.IAnswerResultItem;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.INinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.INinteichosaItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemSubGroup;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.IAnswerResultItem;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -27,7 +27,7 @@ import static org.junit.Assert.assertThat;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class NinteichosaItemForResultTest {
+public class NinteichosaItemForResultTest extends DbeTestBase {
 
     private static final int AS_NULL項目無し = 0;
     private static final int AS_調査項目がNULL = 1;
@@ -35,7 +35,7 @@ public class NinteichosaItemForResultTest {
     private static final boolean AS_選択項目 = true;
     private static final boolean AS_入力項目 = false;
 
-    public static class コンストラクタ {
+    public static class コンストラクタ extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 調査項目がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
@@ -48,7 +48,7 @@ public class NinteichosaItemForResultTest {
         }
     }
 
-    public static class is調査結果項目 {
+    public static class is調査結果項目 extends DbeTestBase {
 
         @Test
         public void 調査結果項目の時_is調査結果項目は_TRUEを返す() {
@@ -56,7 +56,7 @@ public class NinteichosaItemForResultTest {
         }
     }
 
-    public static class get調査項目グループ {
+    public static class get調査項目グループ extends DbeTestBase {
 
         @Test
         public void 調査項目グループの設定がある時_get調査項目グループは_設定値を返す() {
@@ -64,7 +64,7 @@ public class NinteichosaItemForResultTest {
         }
     }
 
-    public static class get調査項目サブグループ {
+    public static class get調査項目サブグループ extends DbeTestBase {
 
         @Test
         public void 調査項目サブグループの設定がある時_get調査項目サブグループは_設定値を返す() {
@@ -72,7 +72,7 @@ public class NinteichosaItemForResultTest {
         }
     }
 
-    public static class get調査項目グループ内番号 {
+    public static class get調査項目グループ内番号 extends DbeTestBase {
 
         @Test
         public void 調査項目グループ内番号の設定がある時_get調査項目グループ内番号は_設定値を返す() {
@@ -80,7 +80,7 @@ public class NinteichosaItemForResultTest {
         }
     }
 
-    public static class get調査項目サブグループ内番号 {
+    public static class get調査項目サブグループ内番号 extends DbeTestBase {
 
         @Test
         public void 調査項目サブグループ内番号の設定がある時_get調査項目サブグループ内番号は_設定値を返す() {
@@ -88,7 +88,7 @@ public class NinteichosaItemForResultTest {
         }
     }
 
-    public static class get調査項目番号 {
+    public static class get調査項目番号 extends DbeTestBase {
 
         @Test
         public void 調査項目番号の設定がある時_get調査項目番号は_設定値を返す() {
@@ -96,7 +96,7 @@ public class NinteichosaItemForResultTest {
         }
     }
 
-    public static class get調査項目区分 {
+    public static class get調査項目区分 extends DbeTestBase {
 
         @Test
         public void 調査項目区分の設定がある時_get調査項目区分は_設定値を返す() {
@@ -104,7 +104,7 @@ public class NinteichosaItemForResultTest {
         }
     }
 
-    public static class get表示項目 {
+    public static class get表示項目 extends DbeTestBase {
 
         @Test
         public void 表示名称の設定がある時_get表示名称は_設定値を返す() {
@@ -112,7 +112,7 @@ public class NinteichosaItemForResultTest {
         }
     }
 
-    public static class get回答項目 {
+    public static class get回答項目 extends DbeTestBase {
 
         @Test
         public void 選択肢が3択の時_get回答項目は_3件の選択肢を返す() {
@@ -125,7 +125,7 @@ public class NinteichosaItemForResultTest {
         }
     }
 
-    public static class get調査結果 {
+    public static class get調査結果 extends DbeTestBase {
 
         @Test
         public void 調査結果の設定がある時_get調査結果は_設定値を返す() {
@@ -133,7 +133,7 @@ public class NinteichosaItemForResultTest {
         }
     }
 
-    public static class get回答結果 {
+    public static class get回答結果 extends DbeTestBase {
 
         @Test
         public void 調査項目が選択形式の時_get回答結果は_該当の選択肢を返す() {

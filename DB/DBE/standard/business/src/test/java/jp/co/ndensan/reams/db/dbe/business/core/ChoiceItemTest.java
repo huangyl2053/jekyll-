@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business.core;
 
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.IAnswerResultItem;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -21,9 +22,9 @@ import static org.junit.Assert.assertThat;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class ChoiceItemTest {
+public class ChoiceItemTest extends DbeTestBase {
 
-    public static class コンストラクタ {
+    public static class コンストラクタ extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 選択肢がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
@@ -31,7 +32,7 @@ public class ChoiceItemTest {
         }
     }
 
-    public static class toValue {
+    public static class toValue extends DbeTestBase {
 
         @Test
         public void 選択肢に_ないある_が設定されている時_toValueは_コード1指定で_ない_を返す() {
@@ -49,7 +50,7 @@ public class ChoiceItemTest {
         }
     }
 
-    public static class isWapperFor {
+    public static class isWapperFor extends DbeTestBase {
 
         @Test
         public void 選択項目を指定した時_isWapperForは_TRUEを返す() {
@@ -62,7 +63,7 @@ public class ChoiceItemTest {
         }
     }
 
-    public static class unwrap {
+    public static class unwrap extends DbeTestBase {
 
         @Test
         public void 選択項目を指定した時_unwrapは_選択項目のインスタンスを返す() {
@@ -70,7 +71,7 @@ public class ChoiceItemTest {
         }
     }
 
-    public static class asList {
+    public static class asList extends DbeTestBase {
 
         @Test
         public void 選択肢が0件の時_asListは_0件のリストを返す() {

@@ -4,10 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
 
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -17,9 +18,9 @@ import static org.junit.Assert.assertThat;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class IkenshoSakuseiTokusokuHohoTest {
+public class IkenshoSakuseiTokusokuHohoTest extends DbeTestBase {
 
-    public static class toValue {
+    public static class toValue extends DbeTestBase {
 
         @Test
         public void 引数が1の時_toValueは_督促状郵送を返す() {

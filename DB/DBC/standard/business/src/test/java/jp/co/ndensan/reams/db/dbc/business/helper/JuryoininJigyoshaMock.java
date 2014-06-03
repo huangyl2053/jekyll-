@@ -23,9 +23,11 @@ import jp.co.ndensan.reams.ur.urz.business._KinyuKikan;
 import jp.co.ndensan.reams.ur.urz.business._KinyuKikanShiten;
 import jp.co.ndensan.reams.ur.urz.business._Koza;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
+import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojinMeisho;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._Hojin;
+import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._HojinMeisho;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._ShikibetsuTaisho;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.YokinShubetsu;
 import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.HojinKeitai;
@@ -91,13 +93,14 @@ public class JuryoininJigyoshaMock {
 
     public static IHojin createHojin() {
         IShikibetsuTaisho 識別対象 = createShikibetsuTaisho();
+        IHojinMeisho 法人名称 = new _HojinMeisho(new AtenaMeisho("電算"), new AtenaKanaMeisho("デンサン"), HojinKeitai.株式会社, HojinKeitaiFuyoKubun.前に付与);
         AtenaMeisho 法人代表者氏名 = new AtenaMeisho(new RString("法人代表者氏名"));
         NinkaChienDantai 認可地縁団体 = null;
         FlexibleDate 認可地縁団体認可年月日 = new FlexibleDate("20131109");
 
         return new _Hojin(識別対象, HojinKeitai.有限会社,
                 HojinKeitaiFuyoKubun.付与しない, HojinKeitaiRyakushoKubun.正式名称,
-                法人代表者氏名, 認可地縁団体, 認可地縁団体認可年月日);
+                法人名称, 法人代表者氏名, 認可地縁団体, 認可地縁団体認可年月日);
     }
 
     private static IShikibetsuTaisho createShikibetsuTaisho() {

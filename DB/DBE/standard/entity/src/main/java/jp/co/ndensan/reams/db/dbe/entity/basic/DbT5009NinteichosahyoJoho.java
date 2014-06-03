@@ -3,12 +3,12 @@ package jp.co.ndensan.reams.db.dbe.entity.basic;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * 要介護認定調査票情報を表す列挙型です。
+ * DbT5009NinteichosahyoJohoの項目定義クラスです
  *
- * @author N8156 宮本 康
+ * @author n8178 城間篤人
  */
 public enum DbT5009NinteichosahyoJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Generated Code">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
 
     insertDantaiCd(2147483647, 0),
     insertTimestamp(29, 0),
@@ -121,9 +121,7 @@ public enum DbT5009NinteichosahyoJoho implements IColumnDefinition {
     ck_catheter(1, 0),
     ck_nitchuNoSeikatsuNiTsuite(1, 0),
     ck_gaishutsuHindoNiTsuite(1, 0),
-    ck_jokyoHenka(1, 0),
-    ninchishoNichijoSeikatsuJiritsudoCode(2147483647, 0),
-    shogaiNichijoSeikatsuJiritsudoCode(2147483647, 0);
+    ck_jokyoHenka(1, 0);
     private final int maxLength;
     private final int scale;
 

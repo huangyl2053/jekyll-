@@ -1,15 +1,13 @@
 package jp.co.ndensan.reams.db.dbe.entity.basic;
 
+import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -23,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
  *
  */
 public class DbT7013ChosainJohoEntity implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Generated Code">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7013ChosainJoho");
@@ -38,14 +36,14 @@ public class DbT7013ChosainJohoEntity implements IDbAccessable {
     @PrimaryKey
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     @PrimaryKey
-    private KaigoJigyoshaNo kaigoJigyoshaNo;
+    private RString kaigoJigyoshaNo;
     @PrimaryKey
     private RString kaigoChosainNo;
-    private JigyoshaNo jigyoshaNo;
+    private RString jigyoshaNo;
     private boolean kaigoChosainJokyo;
     private AtenaMeisho chosainShimei;
     private AtenaKanaMeisho chosainKanaShimei;
-    private Gender seibetsu;
+    private RString seibetsu;
     private Code chosainShikakuCode;
     private ChikuCode chikuCode;
     private YubinNo yubinNo;
@@ -120,7 +118,7 @@ public class DbT7013ChosainJohoEntity implements IDbAccessable {
      *
      * @return kaigoJigyoshaNo
      */
-    public KaigoJigyoshaNo getKaigoJigyoshaNo() {
+    public RString getKaigoJigyoshaNo() {
         return kaigoJigyoshaNo;
     }
 
@@ -129,7 +127,7 @@ public class DbT7013ChosainJohoEntity implements IDbAccessable {
      *
      * @param kaigoJigyoshaNo kaigoJigyoshaNo
      */
-    public void setKaigoJigyoshaNo(KaigoJigyoshaNo kaigoJigyoshaNo) {
+    public void setKaigoJigyoshaNo(RString kaigoJigyoshaNo) {
         this.kaigoJigyoshaNo = kaigoJigyoshaNo;
     }
 
@@ -156,7 +154,7 @@ public class DbT7013ChosainJohoEntity implements IDbAccessable {
      *
      * @return jigyoshaNo
      */
-    public JigyoshaNo getJigyoshaNo() {
+    public RString getJigyoshaNo() {
         return jigyoshaNo;
     }
 
@@ -165,7 +163,7 @@ public class DbT7013ChosainJohoEntity implements IDbAccessable {
      *
      * @param jigyoshaNo jigyoshaNo
      */
-    public void setJigyoshaNo(JigyoshaNo jigyoshaNo) {
+    public void setJigyoshaNo(RString jigyoshaNo) {
         this.jigyoshaNo = jigyoshaNo;
     }
 
@@ -228,7 +226,7 @@ public class DbT7013ChosainJohoEntity implements IDbAccessable {
      *
      * @return seibetsu
      */
-    public Gender getSeibetsu() {
+    public RString getSeibetsu() {
         return seibetsu;
     }
 
@@ -237,7 +235,7 @@ public class DbT7013ChosainJohoEntity implements IDbAccessable {
      *
      * @param seibetsu seibetsu
      */
-    public void setSeibetsu(Gender seibetsu) {
+    public void setSeibetsu(RString seibetsu) {
         this.seibetsu = seibetsu;
     }
 
@@ -329,6 +327,29 @@ public class DbT7013ChosainJohoEntity implements IDbAccessable {
      */
     public void setTelNo(TelNo telNo) {
         this.telNo = telNo;
+    }
+
+    /**
+     * このエンティティの主キーが他の{@literal DbT7013ChosainJohoEntity}と等しいか判定します。
+     *
+     * @param other 比較するエンティティ
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT7013ChosainJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     */
+    public boolean equalsPrimaryKeys(DbT7013ChosainJohoEntity other) {
+        if (other == null) {
+            return false;
+        }
+        if (!Objects.equals(this.shoKisaiHokenshaNo, other.shoKisaiHokenshaNo)) {
+            return false;
+        }
+        if (!Objects.equals(this.kaigoJigyoshaNo, other.kaigoJigyoshaNo)) {
+            return false;
+        }
+        if (!Objects.equals(this.kaigoChosainNo, other.kaigoChosainNo)) {
+            return false;
+        }
+        return true;
     }
 // </editor-fold>
 }

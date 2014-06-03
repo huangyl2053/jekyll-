@@ -21,15 +21,9 @@
             <artifactId>UrdDefinition</artifactId>
         </dependency>
         <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
-            <artifactId>UrzDefinition</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>DbzTestHelper</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>test</scope>
-            <type>jar</type>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

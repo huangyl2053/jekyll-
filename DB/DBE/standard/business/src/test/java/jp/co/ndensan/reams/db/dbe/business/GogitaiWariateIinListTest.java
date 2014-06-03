@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiDummyKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.GogitaiSeishinkaIshiSonzaiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
-import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiYMD;
+import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiDate;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -56,19 +56,19 @@ public class GogitaiWariateIinListTest {
 
         @Test
         public void 合議体番号1_有効期間開始年月日19990101を持つ合議体情報と_審査委員コード0001を指定したとき_対応する合議体割当委員が取得できる() {
-            GogitaiWariateIin result = sut.get合議体割当委員(new GogitaiNo(1), new GogitaiYukoKikanKaishiYMD("19990101"), create委員コード("0001"));
-            assertThat(result.get委員情報().get委員コード(), is(create委員コード("0001")));
+            GogitaiWariateIin result = sut.get合議体割当委員(new GogitaiNo(1), new GogitaiYukoKikanKaishiDate("19990101"), create委員コード("0001"));
+            assertThat(result.get委員情報().get審査会委員コード(), is(create委員コード("0001")));
         }
 
         @Test(expected = IllegalArgumentException.class)
         public void 指定した審査会委員コードに対応する合議体割当委員が存在しないとき_IllegalArgumentExceptionが発生する() {
-            GogitaiWariateIin result = sut.get合議体割当委員(new GogitaiNo(33), new GogitaiYukoKikanKaishiYMD("26641212"), create委員コード("9999"));
+            GogitaiWariateIin result = sut.get合議体割当委員(new GogitaiNo(33), new GogitaiYukoKikanKaishiDate("26641212"), create委員コード("9999"));
         }
 
         private GogitaiWariateIin create合議体割当委員(String str, GogitaiDetail 合議体情報) {
             ShinsakaiIin 審査会委員 = mock(ShinsakaiIin.class);
             ShinsakaiIinCode shinsakaiIinCode = create委員コード(str);
-            when(審査会委員.get委員コード()).thenReturn(shinsakaiIinCode);
+            when(審査会委員.get審査会委員コード()).thenReturn(shinsakaiIinCode);
 
             GogitaiWariateIin 割当委員 = mock(GogitaiWariateIin.class);
             when(割当委員.get委員情報()).thenReturn(審査会委員);
@@ -77,7 +77,7 @@ public class GogitaiWariateIinListTest {
         }
 
         private GogitaiDetail create合議体情報(int 合議体番号, String 開始年月日) {
-            return new GogitaiDetail(new GogitaiNo(合議体番号), RString.EMPTY, new GogitaiYukoKikanKaishiYMD(開始年月日),
+            return new GogitaiDetail(new GogitaiNo(合議体番号), RString.EMPTY, new GogitaiYukoKikanKaishiDate(開始年月日),
                     FlexibleDate.MAX, mock(Range.class), mock(ShinsakaiKaisaiBasho.class), 1, 2, 3,
                     GogitaiSeishinkaIshiSonzaiKubun.存在, GogitaiDummyKubun.ダミー);
         }

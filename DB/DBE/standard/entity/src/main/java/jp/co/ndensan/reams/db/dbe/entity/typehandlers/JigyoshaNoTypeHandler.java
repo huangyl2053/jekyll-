@@ -9,14 +9,8 @@ import org.apache.ibatis.type.JdbcType;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
-/**
- * 事業者番号のTypeHandlerです。
- *
- * @author n8178 城間篤人
- */
 public class JigyoshaNoTypeHandler extends BaseTypeHandler<JigyoshaNo> {
-// <editor-fold defaultstate="collapsed" desc="Generated Code">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, JigyoshaNo parameter, JdbcType jdbcType) throws SQLException {
         ps.setString(i, parameter == null ? null : parameter.getColumnValue().toString());
@@ -40,5 +34,6 @@ public class JigyoshaNoTypeHandler extends BaseTypeHandler<JigyoshaNo> {
     private RString getResultRString(String result) {
         return result == null ? null : new RString(result);
     }
+
 // </editor-fold>
 }

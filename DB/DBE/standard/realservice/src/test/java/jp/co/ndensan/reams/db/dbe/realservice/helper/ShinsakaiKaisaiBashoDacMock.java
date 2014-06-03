@@ -43,7 +43,11 @@ public class ShinsakaiKaisaiBashoDacMock extends ShinsakaiKaisaiBashoDac {
         entity.setShinsakaiKaisaiBashoTelNo(new TelNo(new RString("026-222-3333")));
         entity.setShinsakaiKaisaiBashoJokyo(true);
 
-        return spy(entity);
+        entity = spy(entity);
+        doReturn(new RString("meisho")).when(entity).getShinsakaiKaisaiChikuCodeMeisho();
+        doReturn(new RString("meisho")).when(entity).getShinsakaiKaisaiChikuCodeRyakusho();
+        return entity;
+
     }
 
     private DbT5104ShinsakaiKaisaiBashoJohoEntity createInstance(ShinsakaiKaisaiBashoCode 開催場所コード, RString 開催場所名称) {

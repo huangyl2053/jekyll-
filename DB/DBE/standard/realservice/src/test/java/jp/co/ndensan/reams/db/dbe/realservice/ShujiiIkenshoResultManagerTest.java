@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.realservice.helper.ShujiiIkenshoEntityMock;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.ShujiiIkenshoResultMock;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.ShujiiIkenshoSakuseiIraiMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -28,7 +29,7 @@ import static org.mockito.Mockito.*;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class ShujiiIkenshoResultManagerTest {
+public class ShujiiIkenshoResultManagerTest extends DbeTestBase {
 
     private static final int AS_意見書結果あり = 1;
     private static final int AS_意見書結果なし = 0;
@@ -37,7 +38,7 @@ public class ShujiiIkenshoResultManagerTest {
     private static final int AS_remove成功 = 1;
     private static final int AS_remove失敗 = 0;
 
-    public static class get主治医意見書結果 {
+    public static class get主治医意見書結果 extends DbeTestBase {
 
         @Test
         public void 意見書結果ありの時_get主治医意見書結果は_該当の意見書結果を返す() {
@@ -50,7 +51,7 @@ public class ShujiiIkenshoResultManagerTest {
         }
     }
 
-    public static class save主治医意見書結果 {
+    public static class save主治医意見書結果 extends DbeTestBase {
 
         @Test
         public void save成功の時_save主治医意見書結果は_TRUEを返す() {
@@ -63,7 +64,7 @@ public class ShujiiIkenshoResultManagerTest {
         }
     }
 
-    public static class remove主治医意見書結果 {
+    public static class remove主治医意見書結果 extends DbeTestBase {
 
         @Test
         public void remove成功の時_remove主治医意見書結果は_TRUEを返す() {

@@ -41,10 +41,10 @@ public class RenkeiyoDataSofuKirokuDacMock implements IRenkeiyoDataSofuKirokuDac
         shinseishokanriNo = mock(ShinseishoKanriNo.class);
         shinseishokanriNo = new ShinseishoKanriNo(new RString("100000001"));
         hihokennshaNo = mock(KaigoHihokenshaNo.class);
-        hihokennshaNo = new KaigoHihokenshaNo(new RString("H00000001"));
+        hihokennshaNo = new KaigoHihokenshaNo(new RString("1234567890"));
 
         entity.setShinseishoKanriNo(new RString("100000001"));
-        entity.setHihokenshaNo(new RString("H00000001"));
+        entity.setHihokenshaNo(new RString("1234567890"));
         entity.setNinteiShinseiShinseijiKubun(new RString("01"));
         entity.setHikiwatashiKubun(new RString("0"));
         entity.setHikiwatashiNichiji(RDateTime.of(2014, 03, 14, 18, 45, 05));

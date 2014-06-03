@@ -1,0 +1,59 @@
+## YAML Template.
+---
+- searchShimei: 電算　太郎
+  searchDateOfBirth: 20040421
+  searchShichosonCode: 1111111111
+  searchShikibetsuCode: 1111111112
+  searchSetaiCode: 1111111113
+  searchHihokenshaNo: 1111111114
+- hihokenshaNo: 1111111111
+  shimei: 電算　太郎
+  dateOfBirth: 19330325
+  age: 74
+  gender: 女
+  jusho: 長野県長野市1-2-3
+  shikibetsuCode: 1111111114
+- jutakuOwner:  電算　太郎
+  relationWithHihokensha: 長男
+- kaishuContents: 手すりの取り付け　３か所
+  kaishuJigyoshaName: 電算　建設（株）
+  kaishuTaishoAddress1: 長野県長野市1-2-3  
+  chakkoDueDate: 20140701
+  kanseiDueDate: 20140701
+  estimatedAmount: 50000
+- payTotalMae: 0
+  hokenSeikyuAmountMae: 0
+  riyoshaFutanAmountMae: 0
+  limitOverAmountMae: 0
+  payTotalNow: 0
+  hokenSeikyuAmountNow: 0
+  riyoshaFutanAmountNow: 0
+  limitOverAmountNow: 0
+- shinseiYMD: 20140701
+  uketsukeYMD: 20140701
+  shinseishaName: 電算　太郎
+  yubinNo: 999-9999
+  address: 長野県長野市1-2-3
+  telNo: 1234567890
+  jigyoshaNo: 1234567890
+- createDate: 20140701
+  creationJigyoshaNo: 電算　太郎
+  creationJigyoshaName: 電算　太郎
+  creatorKanaName: デンサン　タロウ
+  creatorName: 電算　太郎
+- kinyuKikanCode: 1234
+  kinyuKikanName: 電算 あじさい
+  kinyuBranchCode: 123
+  kinyuBranchName: 電算
+  kozaMeigininKanaName: デンサン　ダイスケ
+  kozaMeigininName: 電算　大輔
+- chakkoDueDate: 20140701
+  kanseiDueDate: 20140701
+  mitsumoriAmount: 50000
+  kaishuJigyosha: 電算　建設（株）
+- payTotalNow: 50000
+  hokenSeikyuAmountNow: 45000
+  riyoshaFutanAmountNow: 5000
+  limitOverAmountNow: 0
+- judgeDate: 20140710
+  shoninCondition: 承認します

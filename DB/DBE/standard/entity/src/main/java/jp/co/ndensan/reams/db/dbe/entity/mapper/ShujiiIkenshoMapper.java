@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoBase;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoDetails;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ShujiiIkenshoEditor;
-import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoFactory;
+import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ShujiiIkenshoFactory;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoResult;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IkenshoDoi;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
@@ -79,11 +79,13 @@ public final class ShujiiIkenshoMapper {
     }
 
     private static DbT5013ShujiiIkenshoShosaiJohoEntity toDbT5013ShujiiIkenshoShosaiJohoEntity(ShujiiIkenshoResult shujiiIkenshoResult) {
+
         ShujiiIkenshoEditor editor = new ShujiiIkenshoEditor(shujiiIkenshoResult.get詳細情報().get主治医意見書());
         DbT5013ShujiiIkenshoShosaiJohoEntity entity = new DbT5013ShujiiIkenshoShosaiJohoEntity();
         entity.setShinseishoKanriNo(shujiiIkenshoResult.get詳細情報().get申請書管理番号());
         entity.setIkenshoIraiRirekiNo(shujiiIkenshoResult.get詳細情報().get意見書履歴番号().value());
         entity.setKoroshoIfShikibetsuCode(shujiiIkenshoResult.get詳細情報().get厚労省IF識別区分().getCode());
+
         entity.setIk_shindamMei1(editor.getResultByString(ShujiiIkenshoItemKubun.診断名1));
         entity.setIk_hasshoYMD1(new FlexibleDate(editor.getResultByString(ShujiiIkenshoItemKubun.発症年月日1)));
         entity.setIk_shindamMei2(editor.getResultByString(ShujiiIkenshoItemKubun.診断名2));
@@ -388,5 +390,6 @@ public final class ShujiiIkenshoMapper {
         editor.setResult(ShujiiIkenshoItemKubun.看護職員の訪問による相談_支援, entity.getIk_kangoShokuiHomonUmu());
         return new ShujiiIkenshoDetails(
                 entity.getShinseishoKanriNo(), new IkenshosakuseiIraiRirekiNo(entity.getIkenshoIraiRirekiNo()), koroshoIFKubun, editor.getShujiiIkensho());
+
     }
 }
