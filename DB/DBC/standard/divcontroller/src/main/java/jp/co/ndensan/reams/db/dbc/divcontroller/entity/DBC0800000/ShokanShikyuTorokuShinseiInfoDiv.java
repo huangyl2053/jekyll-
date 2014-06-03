@@ -27,8 +27,8 @@ public class ShokanShikyuTorokuShinseiInfoDiv extends TabPanel {
     private TextBoxDate txtShinseiUketsukeYMD;
     @JsonProperty("radShinseiShinseiKubun")
     private RadioButton radShinseiShinseiKubun;
-    @JsonProperty("txtShinseiShokisaiNo")
-    private TextBoxCode txtShinseiShokisaiNo;
+    @JsonProperty("txtShinseiShokisai")
+    private TextBox txtShinseiShokisai;
     @JsonProperty("chkShinseiSaiso")
     private CheckBoxList chkShinseiSaiso;
     @JsonProperty("txtShinseiName")
@@ -82,14 +82,14 @@ public class ShokanShikyuTorokuShinseiInfoDiv extends TabPanel {
         this.radShinseiShinseiKubun=radShinseiShinseiKubun;
     }
 
-    @JsonProperty("txtShinseiShokisaiNo")
-    public TextBoxCode getTxtShinseiShokisaiNo() {
-        return txtShinseiShokisaiNo;
+    @JsonProperty("txtShinseiShokisai")
+    public TextBox getTxtShinseiShokisai() {
+        return txtShinseiShokisai;
     }
 
-    @JsonProperty("txtShinseiShokisaiNo")
-    public void setTxtShinseiShokisaiNo(TextBoxCode txtShinseiShokisaiNo) {
-        this.txtShinseiShokisaiNo=txtShinseiShokisaiNo;
+    @JsonProperty("txtShinseiShokisai")
+    public void setTxtShinseiShokisai(TextBox txtShinseiShokisai) {
+        this.txtShinseiShokisai=txtShinseiShokisai;
     }
 
     @JsonProperty("chkShinseiSaiso")

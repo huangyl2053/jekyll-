@@ -46,9 +46,9 @@ public class ShokanShikyuTorokuShinseisho {
         setTopData(panel);
         setShinseishoData(panel);
 
-        eraseAnotherKozaJoho(panel, 口座情報.窓口払);
-        setKozaJohoEnable(panel, 口座情報.窓口払);
-        setKozaJohoData(panel, 口座情報.窓口払);
+        eraseAnotherKozaJoho(panel, 口座情報.口座払);
+        setKozaJohoEnable(panel, 口座情報.口座払);
+        setKozaJohoData(panel, 口座情報.口座払);
 
         setShomeishoData(panel);
         setShomeishoList(panel);
@@ -59,7 +59,7 @@ public class ShokanShikyuTorokuShinseisho {
     }
 
     /**
-     * 申請書一覧で「申請書を追加する」ボタンを謳歌した時の支給申請書情報パネルの処理です。
+     * 申請書一覧で「申請書を追加する」ボタンを押下した時の支給申請書情報パネルの処理です。
      *
      * @param panel panel
      * @return ResponseData
@@ -68,12 +68,26 @@ public class ShokanShikyuTorokuShinseisho {
         setTopData(panel);
         setShinseishoData(panel);
 
-        eraseAnotherKozaJoho(panel, 口座情報.窓口払);
-        setKozaJohoEnable(panel, 口座情報.窓口払);
-        setKozaJohoData(panel, 口座情報.窓口払);
+        eraseAnotherKozaJoho(panel, 口座情報.口座払);
+        setKozaJohoEnable(panel, 口座情報.口座払);
+        setKozaJohoData(panel, 口座情報.口座払);
 
         setShomeishoData(panel);
         setShomeishoList(panel);
+
+        ResponseData<ShokanShikyuTorokuShinseishoDiv> response = new ResponseData<>();
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * サービス提供証明書情報で「証明書情報を確定する」ボタンを押下した時の支給申請書情報パネルの処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<ShokanShikyuTorokuShinseishoDiv> onClickShomeishoKakutei(ShokanShikyuTorokuShinseishoDiv panel) {
+        addShomeishoList(panel);
 
         ResponseData<ShokanShikyuTorokuShinseishoDiv> response = new ResponseData<>();
         response.data = panel;
@@ -129,7 +143,8 @@ public class ShokanShikyuTorokuShinseisho {
         infoDiv.getTxtShinseiShinseiYMD().setValue(new RDate(source.get("申請日").toString()));
         infoDiv.getTxtShinseiUketsukeYMD().setValue(new RDate(source.get("受付日").toString()));
         infoDiv.getRadShinseiShinseiKubun().setSelectedItem(new RString(source.get("申請書区分").toString()));
-        infoDiv.getTxtShinseiShokisaiNo().setValue(new RString(source.get("証記載保険者番号").toString()));
+//      南魚沼市デモでは証記載保険者は表示しない
+//        infoDiv.getTxtShinseiShokisai().setValue(new RString(source.get("証記載保険者").toString()));
         infoDiv.getTxtShinseiName().setValue(new RString(source.get("氏名").toString()));
         infoDiv.getTxtShinseiKana().setValue(new RString(source.get("カナ").toString()));
         infoDiv.getTxtShinseiTelNo().setValue(new RString(source.get("電話番号").toString()));
@@ -137,6 +152,10 @@ public class ShokanShikyuTorokuShinseisho {
         infoDiv.getTxtShinseiShiharaiGokei().setValue(new Decimal(source.get("支払金額合計").toString()));
         infoDiv.getTxtShinseiHokenGokei().setValue(new Decimal(source.get("保険請求額合計").toString()));
         infoDiv.getTxtShinseiJikoGokei().setValue(new Decimal(source.get("自己負担額合計").toString()));
+
+//      南魚沼市デモでは証記載保険者は表示しない
+        infoDiv.getTxtShinseiShokisai().setVisible(false);
+        infoDiv.getTxtShinseiShokisai().setDisplayNone(true);
     }
 
     /**
@@ -244,7 +263,7 @@ public class ShokanShikyuTorokuShinseisho {
         Button btnDelete = new Button();
         Button btnGokei = new Button();
         dgRowList.clear();
-        for (int i = 5; i < 8; i++) {
+        for (int i = 5; i < 6; i++) {
             dgRowList.add(new dgServiceTeikyoShomeishoList_Row(
                     btnSelect,
                     btnEdit,
@@ -253,6 +272,26 @@ public class ShokanShikyuTorokuShinseisho {
                     new RString(sourceList.get(i).get("事業者").toString()),
                     btnGokei));
         }
+        infoDiv.getShokanShikyuTorokuShomeishoListInfo().getDgServiceTeikyoShomeishoList().setDataSource(dgRowList);
+    }
+
+    private void addShomeishoList(ShokanShikyuTorokuShinseishoDiv panel) {
+        ShokanShikyuTorokuShomeishoInfoDiv infoDiv = panel.getTabShokanShikyuTorokuShinseisho().
+                getShokanShikyuTorokuShomeishoInfo();
+        List<dgServiceTeikyoShomeishoList_Row> dgRowList = infoDiv.getShokanShikyuTorokuShomeishoListInfo().
+                getDgServiceTeikyoShomeishoList().getDataSource();
+        HashMap source = getShokanShikyuTorokuShinseishoYamlId(8);
+        Button btnSelect = new Button();
+        Button btnEdit = new Button();
+        Button btnDelete = new Button();
+        Button btnGokei = new Button();
+        dgRowList.add(new dgServiceTeikyoShomeishoList_Row(
+                btnSelect,
+                btnEdit,
+                btnDelete,
+                new RString(source.get("サービス提供証明書").toString()),
+                new RString(source.get("事業者").toString()),
+                btnGokei));
         infoDiv.getShokanShikyuTorokuShomeishoListInfo().getDgServiceTeikyoShomeishoList().setDataSource(dgRowList);
     }
 }

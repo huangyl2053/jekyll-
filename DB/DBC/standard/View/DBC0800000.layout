@@ -441,6 +441,10 @@
     {
      "eventName": "onLoad",
      "requestUrl": "dbc/db/dbc/ShokanShikyuTorokuShinseishoList/onLoad"
+    },
+    {
+     "eventName": "onClickShinseiKakutei",
+     "requestUrl": "dbc/db/dbc/ShokanShikyuTorokuShinseishoList/onClickShinseiKakutei"
     }
    ],
    "hiddenInput": [],
@@ -613,7 +617,7 @@
      "isComboBox": false,
      "suggest": [],
      "permitCharactor": "",
-     "formatLength": 8
+     "formatLength": "10"
     },
     {
      "fieldName": "txtShinseiInputKubun",
@@ -783,9 +787,9 @@
          "spaceSize": "M"
         },
         {
-         "fieldName": "txtShinseiShokisaiNo",
+         "fieldName": "txtShinseiShokisai",
          "items": [],
-         "controlType": "TextBoxCode",
+         "controlType": "TextBox",
          "width": "80",
          "visible": true,
          "displayNone": false,
@@ -799,7 +803,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "txtShinseiShokisaiNo_core",
+         "selectControlID": "txtShinseiShokisai_core",
          "required": false,
          "text": "",
          "isPrivateInfo": false,
@@ -810,9 +814,9 @@
          "onBlur": "",
          "onChange": "",
          "onKeyPress": "",
-         "labelLText": "証記載保険者番号",
+         "labelLText": "証記載保険者",
          "labelRText": "",
-         "labelLWidth": "130",
+         "labelLWidth": "100",
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
@@ -820,11 +824,10 @@
          "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
-         "textKind": 2,
+         "textKind": 0,
          "isComboBox": false,
          "suggest": [],
-         "permitCharactor": "",
-         "formatLength": 8
+         "permitCharactor": ""
         },
         {
          "fieldName": "chkShinseiSaiso",
@@ -2197,7 +2200,7 @@
          "isComboBox": false,
          "suggest": [],
          "permitCharactor": "",
-         "formatLength": 8
+         "formatLength": "10"
         },
         {
          "fieldName": "btnShinseiJigyosha",
@@ -2523,6 +2526,10 @@
     {
      "eventName": "onClickKoza",
      "requestUrl": "dbc/db/dbc/ShokanShikyuTorokuShinseisho/onClickKoza"
+    },
+    {
+     "eventName": "onClickShomeishoKakutei",
+     "requestUrl": "dbc/db/dbc/ShokanShikyuTorokuShinseisho/onClickShomeishoKakutei"
     }
    ],
    "hiddenInput": [],
@@ -2588,7 +2595,7 @@
      "marginRight": "XS",
      "selectControlID": "btnShinseiKakutei",
      "text": "申請書情報を確定する",
-     "onClick": "",
+     "onClick": "onClickShinseiKakutei",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -2721,7 +2728,7 @@
      "isComboBox": false,
      "suggest": [],
      "permitCharactor": "",
-     "formatLength": 8
+     "formatLength": "10"
     },
     {
      "fieldName": "txtShomeishoJigyoshaName",
@@ -2978,7 +2985,7 @@
            "isComboBox": false,
            "suggest": [],
            "permitCharactor": "",
-           "formatLength": 8
+           "formatLength": "10"
           },
           {
            "fieldName": "btnShomeishoKihonJigyosha",
@@ -14022,7 +14029,7 @@
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
-           "isComma": false,
+           "isComma": true,
            "decimalPointLength": 0
           },
           {
@@ -14070,7 +14077,7 @@
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
-           "isComma": false,
+           "isComma": true,
            "decimalPointLength": 0
           },
           {
@@ -14118,7 +14125,7 @@
            "maxValue": 1.7976931348623157e+308,
            "minValue": 0,
            "isCurrency": false,
-           "isComma": false,
+           "isComma": true,
            "decimalPointLength": 0
           },
           {
@@ -14323,7 +14330,7 @@
       "ShokanShikyuTorokuShomeishoShafuku"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "ShokanShikyuTorokuShomeishoShafuku",
+     "selectedItemFieldName": "ShokanShikyuTorokuShomeishoKihon",
      "initialTab": 0
     }
    ],
@@ -14556,7 +14563,7 @@
      "marginRight": "XS",
      "selectControlID": "btnShomeishoKakutei",
      "text": "証明書情報を確定する",
-     "onClick": "",
+     "onClick": "onClickShomeishoKakutei",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -14679,12 +14686,17 @@
      "transition": ""
     },
     {
-     "fieldName": "btnShomeishoReturn",
+     "fieldName": "btnShomeishoKakutei",
      "event": "onClick",
      "transition": ""
     },
     {
      "fieldName": "btnShinseiReturn",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnShomeishoReturn",
      "event": "onClick",
      "transition": ""
     }
@@ -14752,7 +14764,7 @@
      "transition": "申請書一覧"
     },
     {
-     "fieldName": "btnShomeishoReturn",
+     "fieldName": "btnShomeishoKakutei",
      "event": "onClick",
      "transition": ""
     },
@@ -14760,6 +14772,11 @@
      "fieldName": "btnShinseiReturn",
      "event": "onClick",
      "transition": "申請書一覧"
+    },
+    {
+     "fieldName": "btnShomeishoReturn",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
@@ -14985,7 +15002,7 @@
      "transition": ""
     },
     {
-     "fieldName": "btnShomeishoReturn",
+     "fieldName": "btnShomeishoKakutei",
      "event": "onClick",
      "transition": "支給申請書情報"
     },
@@ -14993,6 +15010,11 @@
      "fieldName": "btnShinseiReturn",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnShomeishoReturn",
+     "event": "onClick",
+     "transition": "支給申請書情報"
     }
    ]
   }
