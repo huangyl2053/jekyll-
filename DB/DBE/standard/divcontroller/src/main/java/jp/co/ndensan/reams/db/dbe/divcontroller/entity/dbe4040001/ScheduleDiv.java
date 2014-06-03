@@ -5,6 +5,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4040001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4040001.GogitaiDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4040001.RegisterButtonDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;

@@ -5,15 +5,17 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4040001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4040001.ScheduleDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4040001.ShinakaiScheduleListDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4040001.ShinsakaiListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShinakaiScheduleEntry のクラスファイル 
+ * ShinsakaiScheduleEntry のクラスファイル 
  * 
  * @author 自動生成
  */
-public class ShinakaiScheduleEntryDiv extends Panel {
+public class ShinsakaiScheduleEntryDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,6 +26,8 @@ public class ShinakaiScheduleEntryDiv extends Panel {
     private ScheduleDiv Schedule;
     @JsonProperty("ShinsakaiList")
     private ShinsakaiListDiv ShinsakaiList;
+    @JsonProperty("ShinakaiScheduleList")
+    private ShinakaiScheduleListDiv ShinakaiScheduleList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -49,6 +53,16 @@ public class ShinakaiScheduleEntryDiv extends Panel {
     @JsonProperty("ShinsakaiList")
     public void setShinsakaiList(ShinsakaiListDiv ShinsakaiList) {
         this.ShinsakaiList=ShinsakaiList;
+    }
+
+    @JsonProperty("ShinakaiScheduleList")
+    public ShinakaiScheduleListDiv getShinakaiScheduleList() {
+        return ShinakaiScheduleList;
+    }
+
+    @JsonProperty("ShinakaiScheduleList")
+    public void setShinakaiScheduleList(ShinakaiScheduleListDiv ShinakaiScheduleList) {
+        this.ShinakaiScheduleList=ShinakaiScheduleList;
     }
 
 }

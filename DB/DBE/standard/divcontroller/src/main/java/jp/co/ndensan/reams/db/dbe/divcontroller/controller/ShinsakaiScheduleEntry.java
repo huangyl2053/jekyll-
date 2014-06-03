@@ -6,10 +6,12 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4040001.ShinakaiScheduleEntryDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4040001.ShinsakaiScheduleEntryDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4040001.dgShinakaiScheduleList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4040001.dgShinsakaiIinList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4040001.dgShinsakaiList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
@@ -25,12 +27,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  *
  * @author N1013 松本直樹
  */
-public class ShinsakaiScheduleEntity {
+public class ShinsakaiScheduleEntry {
 
     private static final int SELECT_0 = 0;
     private static final int SELECT_1 = 1;
     private static final int SELECT_2 = 2;
-    private static final int START_KAISAI_NO = 20;
+    private static final int START_KAISAI_NO = 26;
 
     /**
      * 審査会予定登録Divのロード時の処理を表します。
@@ -38,8 +40,12 @@ public class ShinsakaiScheduleEntity {
      * @param div 審査会開催予定登録Div
      * @return ResponseData
      */
-    public ResponseData onLoadData(ShinakaiScheduleEntryDiv div) {
-        ResponseData<ShinakaiScheduleEntryDiv> response = new ResponseData<>();
+    public ResponseData onLoadData(ShinsakaiScheduleEntryDiv div) {
+        ResponseData<ShinsakaiScheduleEntryDiv> response = new ResponseData<>();
+
+        div.getShinakaiScheduleList().getDgShinakaiScheduleList().setDataSource(createRowShinsakaiListTestData());
+        div.getShinakaiScheduleList().getDgShinakaiScheduleList().setSortOrder(new RString("shinsakaiNo"));
+        div.getShinakaiScheduleList().getDgShinakaiScheduleList().getSortOrder().toUpperCase();
 
         response.data = div;
         return response;
@@ -51,8 +57,8 @@ public class ShinsakaiScheduleEntity {
      * @param div 審査会開催予定登録Div
      * @return ResponseData
      */
-    public ResponseData onChange_ddlGogitai(ShinakaiScheduleEntryDiv div) {
-        ResponseData<ShinakaiScheduleEntryDiv> response = new ResponseData<>();
+    public ResponseData onChange_ddlGogitai(ShinsakaiScheduleEntryDiv div) {
+        ResponseData<ShinsakaiScheduleEntryDiv> response = new ResponseData<>();
 
         List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("dbe4040001/gogitai.yml"));
         Map map;
@@ -93,8 +99,8 @@ public class ShinsakaiScheduleEntity {
      * @param div 審査会開催予定登録Div
      * @return ResponseData
      */
-    public ResponseData onClick_btnToRegister(ShinakaiScheduleEntryDiv div) {
-        ResponseData<ShinakaiScheduleEntryDiv> response = new ResponseData<>();
+    public ResponseData onClick_btnToRegister(ShinsakaiScheduleEntryDiv div) {
+        ResponseData<ShinsakaiScheduleEntryDiv> response = new ResponseData<>();
 
         List<dgShinsakaiList_Row> arrayData = div.getShinsakaiList().getDgShinsakaiList().getDataSource();
 
@@ -128,13 +134,39 @@ public class ShinsakaiScheduleEntity {
     }
 
     /**
+     * 審査会Divの「審査会予定を登録する」ボタン押下時の処理を表します。
+     *
+     * @param div 審査会開催予定登録Div
+     * @return ResponseData
+     */
+    public ResponseData onClick_btnShinsakaiYoteiToroku(ShinsakaiScheduleEntryDiv div) {
+        ResponseData<ShinsakaiScheduleEntryDiv> response = new ResponseData<>();
+
+        List<dgShinsakaiList_Row> arrayData = div.getShinsakaiList().getDgShinsakaiList().getDataSource();
+        List<dgShinakaiScheduleList_Row> arrayScheduleData = div.getShinakaiScheduleList().
+                getDgShinakaiScheduleList().getDataSource();
+
+        for (dgShinsakaiList_Row row : arrayData) {
+            dgShinakaiScheduleList_Row ichiranRow = new dgShinakaiScheduleList_Row(row.getShinsakaiNo(), row.getKaisaiDate(),
+                    row.getStartTime(), row.getEndTime(), row.getKaisaiBasho(), row.getGogitai(), row.getYoteiTeiin(),
+                    new RString("0"), row.getMaxTeiin(), row.getAutoBindTeiin());
+            arrayScheduleData.add(ichiranRow);
+        }
+
+        div.getShinakaiScheduleList().getDgShinakaiScheduleList().setDataSource(arrayScheduleData);
+
+        response.data = div;
+        return response;
+    }
+
+    /**
      * 開催番号採番ボタン押下時の処理を表します。
      *
      * @param div 審査会開催予定登録Div
      * @return ResponseData
      */
-    public ResponseData onClick_btnNumberingKaisaiNo(ShinakaiScheduleEntryDiv div) {
-        ResponseData<ShinakaiScheduleEntryDiv> response = new ResponseData<>();
+    public ResponseData onClick_btnNumberingKaisaiNo(ShinsakaiScheduleEntryDiv div) {
+        ResponseData<ShinsakaiScheduleEntryDiv> response = new ResponseData<>();
 
         int kaisaiNo = START_KAISAI_NO;
         RString shinsakaiMei;
@@ -157,8 +189,8 @@ public class ShinsakaiScheduleEntity {
      * @param div 審査会開催予定登録Div
      * @return ResponseData
      */
-    public ResponseData onClick_btnToDelete(ShinakaiScheduleEntryDiv div) {
-        ResponseData<ShinakaiScheduleEntryDiv> response = new ResponseData<>();
+    public ResponseData onClick_btnToDelete(ShinsakaiScheduleEntryDiv div) {
+        ResponseData<ShinsakaiScheduleEntryDiv> response = new ResponseData<>();
 
         List<dgShinsakaiList_Row> shinsakaiData = div.getShinsakaiList().getDgShinsakaiList().getDataSource();
         List<dgShinsakaiList_Row> selectData = div.getShinsakaiList().getDgShinsakaiList().getSelectedItems();
@@ -184,6 +216,42 @@ public class ShinsakaiScheduleEntity {
         return response;
     }
 
+    /**
+     * 審査会開催予定一覧Divの「審査会予定を削除する」ボタン押下時の処理を表します。
+     *
+     * @param div 審査会開催予定登録Div
+     * @return ResponseData
+     */
+    public ResponseData onClick_btnRemoveShinsakai(ShinsakaiScheduleEntryDiv div) {
+        ResponseData<ShinsakaiScheduleEntryDiv> response = new ResponseData<>();
+
+        List<dgShinakaiScheduleList_Row> shinsakaiData = div.getShinakaiScheduleList().
+                getDgShinakaiScheduleList().getDataSource();
+        List<dgShinakaiScheduleList_Row> selectData = div.getShinakaiScheduleList().
+                getDgShinakaiScheduleList().getSelectedItems();
+        for (dgShinakaiScheduleList_Row row : shinsakaiData) {
+            for (dgShinakaiScheduleList_Row selectRow : selectData) {
+                if (row.toString().equalsIgnoreCase(selectRow.toString())
+                        && row.getWariateNinzu().equalsIgnoreCase(new RString("0"))) {
+                    row.setShinsakaiNo(RString.EMPTY);
+                }
+            }
+        }
+
+        List<dgShinakaiScheduleList_Row> arrayData = new ArrayList<>();
+        for (dgShinakaiScheduleList_Row row : shinsakaiData) {
+            if (row.getShinsakaiNo().equalsIgnoreCase(RString.EMPTY)) {
+                continue;
+            }
+            arrayData.add(row);
+        }
+
+        div.getShinakaiScheduleList().getDgShinakaiScheduleList().setDataSource(arrayData);
+
+        response.data = div;
+        return response;
+    }
+
     private List<dgShinsakaiIinList_Row> createRowGogitaiTestData(RString ymlData) {
         List<dgShinsakaiIinList_Row> arrayData = new ArrayList<>();
         List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(ymlData);
@@ -201,6 +269,32 @@ public class ShinsakaiScheduleEntity {
         RString kikan = _toRString(map.get("所属機関"));
         RString shikaku = _toRString(map.get("資格"));
         dgShinsakaiIinList_Row row = new dgShinsakaiIinList_Row(iinNo, shimei, shimei, shimei, sex, kikan, shikaku);
+        return row;
+    }
+
+    private List<dgShinakaiScheduleList_Row> createRowShinsakaiListTestData() {
+        List<dgShinakaiScheduleList_Row> arrayData = new ArrayList<>();
+        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("dbe4040001/ShinsakaiList.yml"));
+        for (Map info : targetSource) {
+            arrayData.add(toDgShinsakaiList(info));
+        }
+        return arrayData;
+
+    }
+
+    private dgShinakaiScheduleList_Row toDgShinsakaiList(Map map) {
+        RString kaisaiNo = _toRString(map.get("開催番号"));
+        TextBoxFlexibleDate kaisaiDate = toTextBoxFlexibleDate(new FlexibleDate(map.get("開催日").toString()));
+        RString startTime = _toRString(map.get("開始時間"));
+        RString endTime = _toRString(map.get("終了時間"));
+        RString basho = _toRString(map.get("開催場所"));
+        RString gogitai = _toRString(map.get("合議体"));
+        RString yoteiTeiin = _toRString(map.get("予定定員"));
+        RString wariate = _toRString(map.get("割当人数"));
+        RString maxTeiin = _toRString(map.get("最大定員"));
+        RString autoTeiin = _toRString(map.get("自動定員"));
+        dgShinakaiScheduleList_Row row = new dgShinakaiScheduleList_Row(kaisaiNo, kaisaiDate, startTime, endTime,
+                basho, gogitai, yoteiTeiin, wariate, maxTeiin, autoTeiin);
         return row;
     }
 
