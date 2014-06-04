@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.ChosairaiBindB
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.NinteichosaIraiByHandDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.RequestContentsDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.dgChosaItakusakiList_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgNinteichosaIraiListForByHand_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgShozokuChosainList_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ninteichosaIraiListForByHandCom.dgNinteichosaIraiListForByHand_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.shozokuChosainList.dgShozokuChosainList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil.Converter;
@@ -62,7 +62,7 @@ public class NinteichosaIraiByHand {
         }
 
         private void _init_dgChosaItakusakiList() {
-            div.getDgChosaItakusakiList().setDataSource(
+            div.getWaritsukesakiChosaItakusakiList().getDgChosaItakusakiList().setDataSource(
                     new DemoData().get調査委託先一覧());
         }
 

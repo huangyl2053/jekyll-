@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.ButtonsForBindingDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NinteichosaIraiListForByHandCom;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NinteichosaIraiListForByHandCom;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ninteichosaIraiListForByHandCom.NinteichosaIraiListForByHandCom;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ninteichosaIraiListForByHandCom.NinteichosaIraiListForByHandCom;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.RequestContentsDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 

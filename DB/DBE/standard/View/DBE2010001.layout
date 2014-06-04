@@ -119,7 +119,7 @@
      "marginRight": "XS",
      "selectControlID": "dgNinteichosaIraiList",
      "gridSetting": {
-      "rowHeight": 40,
+      "rowHeight": 25,
       "isMultiSelectable": true,
       "isShowFooter": true,
       "isShowFilter": false,
@@ -300,12 +300,12 @@
         "dataName": "氏名",
         "toolTip": "",
         "bgColor": 0,
-        "width": 0,
-        "visible": false,
+        "width": 200,
+        "visible": true,
         "cellType": 0,
         "cellDetails": "\"\\\"\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"cellType\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":0}\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\"\\\"\"",
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": "氏名"
        },
@@ -328,12 +328,12 @@
         "dataName": "氏名Withカナ",
         "toolTip": "",
         "bgColor": 0,
-        "width": 200,
-        "visible": true,
+        "width": 0,
+        "visible": false,
         "cellType": 0,
         "cellDetails": null,
         "align": 0,
-        "resize": true,
+        "resize": false,
         "isPrivateInfo": false,
         "sortKey": "カナ氏名"
        },
@@ -342,7 +342,7 @@
         "dataName": "認定申請日",
         "toolTip": "",
         "bgColor": 0,
-        "width": 81,
+        "width": 90,
         "visible": true,
         "cellType": 7,
         "cellDetails": {
@@ -357,7 +357,7 @@
         "sortKey": "認定申請日"
        },
        {
-        "columnName": "申請区分",
+        "columnName": "申請<br>区分",
         "dataName": "認定申請区分申請時",
         "toolTip": "",
         "bgColor": 0,
@@ -389,7 +389,7 @@
         "dataName": "調査依頼日",
         "toolTip": "",
         "bgColor": 0,
-        "width": 81,
+        "width": 90,
         "visible": true,
         "cellType": 7,
         "cellDetails": {
@@ -408,7 +408,7 @@
         "dataName": "調査依頼書発行日",
         "toolTip": "",
         "bgColor": 0,
-        "width": 81,
+        "width": 90,
         "visible": true,
         "cellType": 7,
         "cellDetails": {
@@ -427,7 +427,7 @@
         "dataName": "調査依頼完了日",
         "toolTip": "",
         "bgColor": 0,
-        "width": 81,
+        "width": 90,
         "visible": true,
         "cellType": 7,
         "cellDetails": {
@@ -446,7 +446,7 @@
         "dataName": "調査期限日",
         "toolTip": "",
         "bgColor": 0,
-        "width": 80,
+        "width": 90,
         "visible": true,
         "cellType": 7,
         "cellDetails": {
@@ -647,7 +647,7 @@
         "dataName": "督促年月日",
         "toolTip": "",
         "bgColor": 0,
-        "width": 81,
+        "width": 90,
         "visible": true,
         "cellType": 7,
         "cellDetails": {
@@ -684,7 +684,7 @@
         "visible": true,
         "cellType": 0,
         "cellDetails": "null",
-        "align": 0,
+        "align": 2,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "督促回数"
@@ -694,7 +694,7 @@
         "dataName": "督促期限日",
         "toolTip": "",
         "bgColor": 0,
-        "width": 81,
+        "width": 90,
         "visible": true,
         "cellType": 7,
         "cellDetails": {
@@ -713,7 +713,7 @@
         "dataName": "督促発行日",
         "toolTip": "",
         "bgColor": 0,
-        "width": 81,
+        "width": 90,
         "visible": true,
         "cellType": 7,
         "cellDetails": {
@@ -728,11 +728,11 @@
         "sortKey": "督促発行日"
        },
        {
-        "columnName": "郵便番号",
+        "columnName": "郵便<br>番号",
         "dataName": "郵便番号",
         "toolTip": "",
         "bgColor": 0,
-        "width": 100,
+        "width": 72,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -746,7 +746,7 @@
         "dataName": "住所",
         "toolTip": "",
         "bgColor": 0,
-        "width": 180,
+        "width": 250,
         "visible": true,
         "cellType": 0,
         "cellDetails": "\"\\\"\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"{\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"cellType\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\":0}\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\"\\\"\"",
@@ -788,7 +788,7 @@
         "dataName": "生年月日",
         "toolTip": "",
         "bgColor": 0,
-        "width": 81,
+        "width": 90,
         "visible": false,
         "cellType": 7,
         "cellDetails": {
@@ -860,7 +860,7 @@
      "onNoRow": "",
      "onMultiRows": "",
      "dataSource": [],
-     "sortOrder": "カナ氏名",
+     "sortOrder": "調査依頼区分",
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1
@@ -1651,7 +1651,7 @@
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": false,
+     "wrap": true,
      "dependencies": [],
      "float": 0,
      "toolTip": "",
@@ -2954,7 +2954,7 @@
      "onOpen": "",
      "onClose": "",
      "session": {},
-     "marginTop": "M",
+     "marginTop": "S",
      "marginBottom": "XS",
      "eraseBorderTop": true,
      "eraseBorderBottom": false,
@@ -3286,7 +3286,7 @@
    ]
   }
  ],
- "currentState": "All",
+ "currentState": "top",
  "id": "DBE2010001",
  "WFParameter": [],
  "UIContainerEventMapping": [

@@ -1,9 +1,9 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.shozokuChosainList;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue May 27 16:32:02 JST 2014 
+ * Wed Jun 04 11:25:18 JST 2014 
  */
 
 

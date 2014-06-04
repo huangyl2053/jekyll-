@@ -1,11 +1,11 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.ninteichosaIraiListForByHandCom;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgShozokuChosainList_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ninteichosaIraiListForByHandCom.dgNinteichosaIraiListForByHand_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CompositeControl;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -15,15 +15,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * 
  * @author 自動生成
  */
-public class ShozokuChosainListCom extends CompositeControl {
+public class NinteichosaIraiListForByHandCom extends CompositeControl {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("dgShozokuChosainList")
-    private DataGrid<dgShozokuChosainList_Row> dgShozokuChosainList;
+    @JsonProperty("dgNinteichosaIraiListForByHand")
+    private DataGrid<dgNinteichosaIraiListForByHand_Row> dgNinteichosaIraiListForByHand;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,14 +31,14 @@ public class ShozokuChosainListCom extends CompositeControl {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("dgShozokuChosainList")
-    public DataGrid<dgShozokuChosainList_Row> getDgShozokuChosainList() {
-        return dgShozokuChosainList;
+    @JsonProperty("dgNinteichosaIraiListForByHand")
+    public DataGrid<dgNinteichosaIraiListForByHand_Row> getDgNinteichosaIraiListForByHand() {
+        return dgNinteichosaIraiListForByHand;
     }
 
-    @JsonProperty("dgShozokuChosainList")
-    public void setDgShozokuChosainList(DataGrid<dgShozokuChosainList_Row> dgShozokuChosainList) {
-        this.dgShozokuChosainList=dgShozokuChosainList;
+    @JsonProperty("dgNinteichosaIraiListForByHand")
+    public void setDgNinteichosaIraiListForByHand(DataGrid<dgNinteichosaIraiListForByHand_Row> dgNinteichosaIraiListForByHand) {
+        this.dgNinteichosaIraiListForByHand=dgNinteichosaIraiListForByHand;
     }
 
 }
