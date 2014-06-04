@@ -1401,7 +1401,7 @@
        "controlType": "Panel",
        "width": "M",
        "visible": true,
-       "displayNone": false,
+       "displayNone": true,
        "disabled": false,
        "accessKey": "",
        "nextFocusFieldName": "",

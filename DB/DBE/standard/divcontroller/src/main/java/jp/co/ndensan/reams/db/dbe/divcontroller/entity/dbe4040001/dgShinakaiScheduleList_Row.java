@@ -14,12 +14,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 
 /**
- * dgShinsakaiList_Row のクラスファイル 
+ * dgShinakaiScheduleList_Row のクラスファイル 
  * 
  * @author 自動生成
  */
 
-public class dgShinsakaiList_Row extends DataRow {
+public class dgShinakaiScheduleList_Row extends DataRow {
 
     private RString shinsakaiNo;
     private TextBoxFlexibleDate kaisaiDate;
@@ -28,14 +28,15 @@ public class dgShinsakaiList_Row extends DataRow {
     private RString kaisaiBasho;
     private RString gogitai;
     private RString yoteiTeiin;
+    private RString wariateNinzu;
     private RString maxTeiin;
     private RString autoBindTeiin;
 
-    public dgShinsakaiList_Row() {
+    public dgShinakaiScheduleList_Row() {
         super();
     }
 
-    public dgShinsakaiList_Row(RString shinsakaiNo, TextBoxFlexibleDate kaisaiDate, RString startTime, RString endTime, RString kaisaiBasho, RString gogitai, RString yoteiTeiin, RString maxTeiin, RString autoBindTeiin) {
+    public dgShinakaiScheduleList_Row(RString shinsakaiNo, TextBoxFlexibleDate kaisaiDate, RString startTime, RString endTime, RString kaisaiBasho, RString gogitai, RString yoteiTeiin, RString wariateNinzu, RString maxTeiin, RString autoBindTeiin) {
         super();
         this.setOriginalData("shinsakaiNo", shinsakaiNo);
         this.setOriginalData("kaisaiDate", kaisaiDate);
@@ -44,6 +45,7 @@ public class dgShinsakaiList_Row extends DataRow {
         this.setOriginalData("kaisaiBasho", kaisaiBasho);
         this.setOriginalData("gogitai", gogitai);
         this.setOriginalData("yoteiTeiin", yoteiTeiin);
+        this.setOriginalData("wariateNinzu", wariateNinzu);
         this.setOriginalData("maxTeiin", maxTeiin);
         this.setOriginalData("autoBindTeiin", autoBindTeiin);
         this.shinsakaiNo = shinsakaiNo;
@@ -53,6 +55,7 @@ public class dgShinsakaiList_Row extends DataRow {
         this.kaisaiBasho = kaisaiBasho;
         this.gogitai = gogitai;
         this.yoteiTeiin = yoteiTeiin;
+        this.wariateNinzu = wariateNinzu;
         this.maxTeiin = maxTeiin;
         this.autoBindTeiin = autoBindTeiin;
     }
@@ -83,6 +86,10 @@ public class dgShinsakaiList_Row extends DataRow {
 
     public RString getYoteiTeiin() {
         return yoteiTeiin;
+    }
+
+    public RString getWariateNinzu() {
+        return wariateNinzu;
     }
 
     public RString getMaxTeiin() {
@@ -126,6 +133,11 @@ public class dgShinsakaiList_Row extends DataRow {
     public void setYoteiTeiin(RString yoteiTeiin) {
         this.setOriginalData("yoteiTeiin", yoteiTeiin);
         this.yoteiTeiin = yoteiTeiin;
+    }
+
+    public void setWariateNinzu(RString wariateNinzu) {
+        this.setOriginalData("wariateNinzu", wariateNinzu);
+        this.wariateNinzu = wariateNinzu;
     }
 
     public void setMaxTeiin(RString maxTeiin) {
