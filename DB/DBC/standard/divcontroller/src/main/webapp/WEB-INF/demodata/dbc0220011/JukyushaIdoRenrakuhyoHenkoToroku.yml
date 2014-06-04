@@ -1,10 +1,8 @@
 ## YAML Template.
 ---
 ##JukyushaIdoRenrakuhyoKihonJoho 受給者異動連絡票 
-- renrakuhyoIdoDate: 20140401
-  renrakuhyoHihoNo: "0000029068"
+- radHihoSex: woman　　
   shikakuShutokuDate: 20000817
-  renrakuhyoHihoName: スギナミ　サンジ　コウニココウ
   hihoBirthday: 19481028
   shikakuSoshitsuDate: ""
   shokisaiHokenshaNo: 202169

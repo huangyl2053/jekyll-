@@ -155,8 +155,12 @@ module DBC {
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "selectedItem": "koikinaiIdo",
+       "selectedItem": "shutoku",
        "dataSource": [
+        {
+         "key": "space",
+         "value": ""
+        },
         {
          "key": "shutoku",
          "value": "01:受給資格取得"
@@ -167,7 +171,7 @@ module DBC {
         },
         {
          "key": "koikinaiIdo",
-         "value": "03広域連合市町村間異動（政令市区間異動）"
+         "value": "03:広域連合市町村間異動（政令市区間異動）"
         },
         {
          "key": "shinki",
@@ -176,10 +180,6 @@ module DBC {
         {
          "key": "sonotaIdo",
          "value": "99:その他異動"
-        },
-        {
-         "key": "space",
-         "value": ""
         }
        ]
       },
@@ -841,7 +841,11 @@ module DBC {
        "selectedItem": "yokaigo1",
        "dataSource": [
         {
-         "key": "higaito",
+         "key": "space",
+         "value": ""
+        },
+        {
+         "key": "higaito ",
          "value": "01:非該当"
         },
         {
@@ -875,10 +879,6 @@ module DBC {
         {
          "key": "yokaigo5",
          "value": "25:要介護5"
-        },
-        {
-         "key": "space6",
-         "value": ""
         }
        ]
       },

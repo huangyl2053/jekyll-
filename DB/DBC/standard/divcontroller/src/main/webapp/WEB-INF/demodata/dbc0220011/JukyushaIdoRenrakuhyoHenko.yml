@@ -1,0 +1,5 @@
+## YAML Template.
+---
+- idoDateRangefromPlaceHolder: 平26.04.01
+  idoDateRangetoPlaceHolder: 平26.04.30
+  searchHihoNo: "0000029068"
