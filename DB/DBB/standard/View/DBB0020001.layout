@@ -2,7 +2,7 @@
  "fieldName": "Page",
  "items": [
   {
-   "fieldName": "IdoTaishoshaIchiranPanel",
+   "fieldName": "IdoTaishoshaIchiran",
    "items": [
     {
      "fieldName": "txtLastKeisanYMD",
@@ -22,29 +22,29 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtLastKeisanYMD_core",
-     "onChange": "",
      "required": false,
+     "maxLength": 100000000,
+     "minLength": 0,
+     "textAlign": 0,
+     "readOnly": false,
+     "placeHolder": "平26.06.05 18：05：20",
+     "textKind": 0,
+     "isPrivateInfo": false,
+     "isPassword": false,
+     "isComboBox": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "onKeyPress": "",
+     "text": "",
+     "suggest": [],
+     "value": "",
      "labelLText": "最終計算処理日時",
      "labelRText": "",
      "labelLWidth": "130",
      "labelRWidth": "S",
      "labelLAlign": 2,
-     "labelRAlign": 0,
-     "onFocus": "",
-     "onBlur": "",
-     "readOnly": false,
-     "placeHolder": "平26.06.05 18：05：20",
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "onKeyPress": "",
-     "text": "",
-     "value": "",
-     "maxLength": 100000000,
-     "minLength": 0,
-     "textAlign": 0,
-     "textKind": 0,
-     "isComboBox": false,
-     "suggest": []
+     "labelRAlign": 0
     },
     {
      "fieldName": "ddlTsuchishoMeisho",
@@ -64,8 +64,16 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "ddlTsuchishoMeisho_core",
-     "onChange": "",
-     "selectedItem": "",
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "onChange_TsuchishoChange",
+     "labelLText": "通知書名称",
+     "labelRText": "",
+     "labelLWidth": "85",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "selectedItem": "key0",
      "dataSource": [
       {
        "key": "key0",
@@ -79,15 +87,7 @@
        "key": "key2",
        "value": "決定・変更通知書"
       }
-     ],
-     "labelLText": "通知書名称",
-     "labelRText": "",
-     "labelLWidth": "85",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "onFocus": "",
-     "onBlur": ""
+     ]
     },
     {
      "fieldName": "ddlSakuseiYMD",
@@ -107,22 +107,22 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "ddlSakuseiYMD_core",
+     "onFocus": "",
+     "onBlur": "",
      "onChange": "",
-     "selectedItem": "",
-     "dataSource": [
-      {
-       "key": "key0",
-       "value": "平26.06.25 11:35:16"
-      }
-     ],
      "labelLText": "作成日時",
      "labelRText": "",
      "labelLWidth": "85",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "onFocus": "",
-     "onBlur": ""
+     "selectedItem": "",
+     "dataSource": [
+      {
+       "key": "key0",
+       "value": "平26.06.25 11:35:16"
+      }
+     ]
     },
     {
      "fieldName": "dgIdoTaishoshaIchiran",
@@ -165,14 +165,14 @@
         "visible": true,
         "cellType": 0,
         "cellDetails": "\"\\\"null\\\"\"",
-        "align": 1,
+        "align": 0,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtGaitoRenban"
+        "sortKey": ""
        },
        {
         "columnName": "被保番号",
-        "dataName": "txtHihoBango",
+        "dataName": "txtHihoNo",
         "toolTip": "",
         "bgColor": 0,
         "width": 90,
@@ -182,7 +182,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtHihoBango"
+        "sortKey": ""
        },
        {
         "columnName": "識別コード",
@@ -196,11 +196,11 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtShikibetsuCode"
+        "sortKey": ""
        },
        {
         "columnName": "通知書番号",
-        "dataName": "txtTsuchishoBango",
+        "dataName": "txtTsuchishoNo",
         "toolTip": "",
         "bgColor": 0,
         "width": 130,
@@ -210,11 +210,11 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtTsuchishoBango"
+        "sortKey": ""
        },
        {
         "columnName": "氏名",
-        "dataName": "txtKetsugo01",
+        "dataName": "txtShimei",
         "toolTip": "",
         "bgColor": 0,
         "width": 250,
@@ -224,39 +224,11 @@
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtKetsugo01"
-       },
-       {
-        "columnName": "氏名",
-        "dataName": "txtShimei",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 200,
-        "visible": false,
-        "cellType": 0,
-        "cellDetails": "\"\\\"\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"null\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\"\\\"\"",
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "txtKanaShimei"
-       },
-       {
-        "columnName": "カナ氏名",
-        "dataName": "txtKanaShimei",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 200,
-        "visible": false,
-        "cellType": 0,
-        "cellDetails": "\"\\\"\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"null\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"\\\\\\\\\\\\\\\"\\\\\\\"\\\"\"",
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "txtKanaShimei"
+        "sortKey": ""
        },
        {
         "columnName": "異動日",
-        "dataName": "txtIdobi",
+        "dataName": "txtIdoYMD",
         "toolTip": "",
         "bgColor": 0,
         "width": 90,
@@ -266,7 +238,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtIdobi"
+        "sortKey": ""
        },
        {
         "columnName": "異動事由",
@@ -280,63 +252,7 @@
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtIdoZiyu"
-       },
-       {
-        "columnName": "世帯コード",
-        "dataName": "txtSetaiCode",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 50,
-        "visible": false,
-        "cellType": 0,
-        "cellDetails": "null",
-        "align": 0,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "txtSetaiCode"
-       },
-       {
-        "columnName": "行政区",
-        "dataName": "txtGyoseiku",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 50,
-        "visible": false,
-        "cellType": 0,
-        "cellDetails": "null",
-        "align": 0,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "txtGyoseiku"
-       },
-       {
-        "columnName": "郵便番号",
-        "dataName": "txtYubinBango",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 50,
-        "visible": false,
-        "cellType": 0,
-        "cellDetails": "null",
-        "align": 0,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "txtYubinBango"
-       },
-       {
-        "columnName": "住所",
-        "dataName": "txtJusyo",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 50,
-        "visible": false,
-        "cellType": 0,
-        "cellDetails": "null",
-        "align": 0,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "txtJusyo"
+        "sortKey": ""
        },
        {
         "columnName": "次の作業",
@@ -364,10 +280,10 @@
           }
          ]
         },
-        "align": 0,
+        "align": 1,
         "resize": false,
         "isPrivateInfo": false,
-        "sortKey": "ddlNextSagyo"
+        "sortKey": ""
        }
       ]
      },
@@ -382,7 +298,60 @@
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1
+    }
+   ],
+   "controlType": "Panel",
+   "width": "1106",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0",
+   "marginRight": "0",
+   "selectControlID": "IdoTaishoshaIchiran",
+   "onLoad": "",
+   "title": "通知書発行後異動対象者一覧",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "IdoTaishoshaIchiran"
+    }
+   ],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbb/db/dbb/IdoTaishoshaIchiran/onLoad"
     },
+    {
+     "eventName": "onChange_TsuchishoChange",
+     "requestUrl": "dbb/db/dbb/IdoTaishoshaIchiran/onLoad"
+    }
+   ],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "XS",
+   "marginBottom": "XS",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false
+  },
+  {
+   "fieldName": "KyotsuPanel",
+   "items": [
     {
      "fieldName": "btnHozonIdoTaishoshaIchiran",
      "items": [],
@@ -451,47 +420,42 @@
     }
    ],
    "controlType": "Panel",
-   "width": "1106",
+   "width": "M",
    "visible": true,
    "displayNone": false,
    "disabled": false,
    "accessKey": "",
    "nextFocusFieldName": "",
-   "wrap": true,
+   "wrap": false,
    "dependencies": [],
-   "float": 0,
+   "float": 2,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "0",
-   "marginRight": "0",
-   "selectControlID": "IdoTaishoshaIchiranPanel",
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "selectControlID": "KyotsuPanel",
    "onLoad": "",
-   "title": "通知書発行後異動対象者一覧",
+   "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "IdoTaishoshaIchiranPanel"
+     "postParameterPanelNames": "KyotsuPanel"
     }
    ],
-   "requestSettings": [
-    {
-     "eventName": "onLoad",
-     "requestUrl": "dbb/db/dbb/IdoTaishoshaIchiranPanel/onLoad"
-    }
-   ],
+   "requestSettings": [],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "marginTop": "XS",
-   "marginBottom": "XS",
+   "marginTop": "Default",
+   "marginBottom": "Default",
    "eraseBorderTop": false,
    "eraseBorderBottom": false,
    "eraseBorderRight": false,
    "eraseBorderLeft": false,
    "backgroundColor": 0,
-   "widthAuto": false,
+   "widthAuto": true,
    "panelDisplay": 0,
    "isGroupBox": false
   }
@@ -522,20 +486,14 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "IdoTaishoshaIchiranPanel",
-     "panelState": "visible"
+     "visibleDiv": "IdoTaishoshaIchiran",
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
-     "visibleDiv": "JuminPanel",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "NushiJuminJoho",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "KaigoJuminJoho",
-     "panelState": "visible"
+     "visibleDiv": "KyotsuPanel",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
@@ -558,7 +516,7 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "IdoTaishoshaIchiranPanel",
+     "visibleDiv": "IdoTaishoshaIchiran",
      "panelState": "visible"
     },
     {
@@ -596,10 +554,18 @@
  "currentState": "All",
  "id": "DBB0020001",
  "WFParameter": [],
- "UIContainerEventMapping": [],
+ "UIContainerEventMapping": [
+  {
+   "alias": "",
+   "eventName": ""
+  }
+ ],
  "loadSequencePanelNames": [
   [
-   "IdoTaishoshaIchiranPanel"
+   "IdoTaishoshaIchiran"
+  ],
+  [
+   "KyotsuPanel"
   ]
  ],
  "panelMargin": 1,
