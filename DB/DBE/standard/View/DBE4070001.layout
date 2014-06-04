@@ -24,6 +24,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "lblKaisaiDateRange",
        "required": false,
        "align": 2,
        "text": "開催予定日",
@@ -46,6 +47,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtKaisaiDateRange_core",
        "isPrivateInfo": false,
        "readOnly": false,
        "isPassword": false,
@@ -69,7 +71,9 @@
        "labelLWidth": "S",
        "labelRWidth": "S",
        "labelLAlign": 2,
-       "labelRAlign": 0
+       "labelRAlign": 0,
+       "fromSelectControlID": "txtKaisaiDateRangeFrom",
+       "toSelectControlID": "txtKaisaiDateRangeTo"
       },
       {
        "fieldName": "ButtonsForShinsakaiSearch",
@@ -91,15 +95,17 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "btnToClearCriteria",
          "text": "条件をクリアする",
          "onClick": "",
          "appearance": 0,
          "imageFileUrl": "",
          "imageWidth": "",
-         "imageHeight": ""
+         "imageHeight": "",
+         "icon": 0
         },
         {
-         "fieldName": "btnToSeachShinsakai",
+         "fieldName": "btnToSearchShinsakai",
          "items": [],
          "controlType": "Button",
          "width": "M",
@@ -115,12 +121,14 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "btnToSearchShinsakai",
          "text": "検索する",
-         "onClick": "",
+         "onClick": "onClick_btnToSearchShinsakai",
          "appearance": 0,
          "imageFileUrl": "",
          "imageWidth": "",
-         "imageHeight": ""
+         "imageHeight": "",
+         "icon": 0
         }
        ],
        "controlType": "Panel",
@@ -137,6 +145,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "ButtonsForShinsakaiSearch",
        "onLoad": "",
        "title": "",
        "isOpen": true,
@@ -159,6 +168,7 @@
        "eraseBorderLeft": true,
        "backgroundColor": 0,
        "widthAuto": false,
+       "panelDisplay": 0,
        "isGroupBox": false
       }
      ],
@@ -176,6 +186,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "SearchCriteriaForShinsakai",
      "onLoad": "",
      "title": "検索条件",
      "isOpen": true,
@@ -198,6 +209,7 @@
      "eraseBorderLeft": false,
      "backgroundColor": 0,
      "widthAuto": false,
+     "panelDisplay": 0,
      "isGroupBox": false
     },
     {
@@ -220,6 +232,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "dgShinsakaiList",
        "gridSetting": {
         "rowHeight": 25,
         "isMultiSelectable": false,
@@ -244,7 +257,7 @@
           "cellDetails": {
            "cellType": 8,
            "text": "選択",
-           "onClick": "",
+           "onClick": "onClick_btnSentaku",
            "imageFileUrl": "",
            "imageWidth": "",
            "imageHeight": ""
@@ -259,7 +272,7 @@
           "dataName": "kaisaiYoteiDate",
           "toolTip": "",
           "bgColor": 0,
-          "width": 75,
+          "width": 90,
           "visible": true,
           "cellType": 7,
           "cellDetails": {
@@ -295,7 +308,7 @@
           "toolTip": "",
           "bgColor": 0,
           "width": 100,
-          "visible": true,
+          "visible": false,
           "cellType": 0,
           "cellDetails": {
            "cellType": 0
@@ -395,9 +408,9 @@
          }
         ]
        },
-       "height": "S",
+       "height": "M",
        "onSort": "",
-       "onSelect": "",
+       "onSelect": "onClick_btnSentaku",
        "onSelectByDblClick": "",
        "onOnlyRow": "",
        "onNoRow": "",
@@ -423,6 +436,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "ShinsakaiList",
      "onLoad": "",
      "title": "審査会一覧",
      "isOpen": true,
@@ -445,6 +459,7 @@
      "eraseBorderLeft": false,
      "backgroundColor": 0,
      "widthAuto": false,
+     "panelDisplay": 0,
      "isGroupBox": false
     }
    ],
@@ -462,6 +477,7 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "ShinsakaiSearch",
    "onLoad": "",
    "title": "審査会選択",
    "isOpen": true,
@@ -471,7 +487,16 @@
      "postParameterPanelNames": "ShinsakaiSearch"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbe/db/dbe/ShinsakaiSearch/onLoadData"
+    },
+    {
+     "eventName": "onClick_btnToSearchShinsakai",
+     "requestUrl": "dbe/db/dbe/ShinsakaiSearch/onClick_btnToSearchShinsakai"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -484,6 +509,7 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
+   "panelDisplay": 0,
    "isGroupBox": false
   },
   {
@@ -509,6 +535,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtShinsakaiKaisaiNo_core",
        "required": false,
        "text": "",
        "isPrivateInfo": false,
@@ -552,6 +579,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtShinsakaiYoteiDate_core",
        "required": false,
        "text": "",
        "isPrivateInfo": false,
@@ -591,6 +619,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtShinsakaiKaijo_core",
        "required": false,
        "text": "",
        "isPrivateInfo": false,
@@ -607,7 +636,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "maxLength": 1000000000000,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
        "placeHolder": "審査会会場",
@@ -633,6 +662,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "lblShinsakaiKaishiYoteiTime",
        "required": false,
        "align": 2,
        "text": "開始予定",
@@ -655,6 +685,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtShinsakaiKaishiYoteiTime_core",
        "required": false,
        "text": "",
        "isPrivateInfo": false,
@@ -665,14 +696,14 @@
        "onChange": "",
        "onKeyPress": "",
        "permitCharactor": "",
-       "displayFormat": 0,
+       "displayFormat": 1,
        "labelLText": "",
        "labelRText": "",
        "labelLWidth": "S",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "maxLength": 1000000000000,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
        "placeHolder": "12:34",
@@ -699,6 +730,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "lblShiryoSakusei",
        "required": false,
        "align": 2,
        "text": "資料作成",
@@ -721,6 +753,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtShiryoSakusei_core",
        "required": false,
        "text": "",
        "isPrivateInfo": false,
@@ -737,7 +770,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "maxLength": 1000000000000,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
        "placeHolder": "未済",
@@ -756,13 +789,14 @@
        "disabled": false,
        "accessKey": "",
        "nextFocusFieldName": "",
-       "wrap": false,
+       "wrap": true,
        "dependencies": [],
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtGogitaiNo_core",
        "required": false,
        "text": "",
        "isPrivateInfo": false,
@@ -806,6 +840,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtGogitaiName_core",
        "required": false,
        "text": "",
        "isPrivateInfo": false,
@@ -822,7 +857,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "maxLength": 1000000000000,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
        "placeHolder": "合議体名称",
@@ -848,6 +883,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "",
+       "selectControlID": "txtYoteiTeiin_core",
        "required": false,
        "text": "",
        "isPrivateInfo": false,
@@ -864,7 +900,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "maxLength": 1000000000000,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 2,
        "placeHolder": "99",
@@ -895,6 +931,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "lblYoteiTeiinUnit",
        "required": false,
        "align": 0,
        "text": "人",
@@ -917,6 +954,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "",
+       "selectControlID": "txtWariateNinzu_core",
        "required": false,
        "text": "",
        "isPrivateInfo": false,
@@ -933,7 +971,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "maxLength": 1000000000000,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 2,
        "placeHolder": "99",
@@ -964,6 +1002,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "lblWariateNinzuUnit",
        "required": false,
        "align": 0,
        "text": "人",
@@ -971,7 +1010,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "1110",
+     "width": "1090",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -984,10 +1023,11 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "PublicationTargetShinsakai",
      "onLoad": "",
      "title": "対象審査会",
      "isOpen": true,
-     "canOpenAndClose": true,
+     "canOpenAndClose": false,
      "postParameterPanelNames": [
       {
        "postParameterPanelNames": "PublicationTargetShinsakai"
@@ -1006,7 +1046,8 @@
      "eraseBorderLeft": false,
      "backgroundColor": 0,
      "widthAuto": false,
-     "isGroupBox": true
+     "panelDisplay": 1,
+     "isGroupBox": false
     },
     {
      "fieldName": "LatestPublication",
@@ -1028,6 +1069,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtOperationDate_core",
        "required": false,
        "text": "",
        "isPrivateInfo": false,
@@ -1046,7 +1088,7 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "placeHolder": "平26.05.15",
+       "placeHolder": "",
        "textKind": 0,
        "value": ""
       },
@@ -1067,6 +1109,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtShoriKubun_core",
        "required": false,
        "text": "",
        "isPrivateInfo": false,
@@ -1083,10 +1126,10 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "maxLength": 1000000000000,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "placeHolder": "全件発行",
+       "placeHolder": "",
        "textKind": 0,
        "isComboBox": false,
        "suggest": [],
@@ -1112,6 +1155,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "txtLatestShinsakaiKaisaiNo_core",
          "required": false,
          "text": "",
          "isPrivateInfo": false,
@@ -1131,7 +1175,7 @@
          "maxLength": "10",
          "minLength": "10",
          "textAlign": 0,
-         "placeHolder": "1234567890",
+         "placeHolder": "",
          "textKind": 2,
          "isComboBox": false,
          "suggest": [],
@@ -1155,6 +1199,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "txtLatestShinsakaiYoteiDate_core",
          "required": false,
          "text": "",
          "isPrivateInfo": false,
@@ -1173,7 +1218,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "placeHolder": "平26.05.15",
+         "placeHolder": "",
          "textKind": 0,
          "value": ""
         },
@@ -1194,6 +1239,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "txtLatestShinsakaiKaijo_core",
          "required": false,
          "text": "",
          "isPrivateInfo": false,
@@ -1210,10 +1256,10 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "maxLength": 1000000000000,
+         "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
-         "placeHolder": "審査会会場",
+         "placeHolder": "",
          "textKind": 0,
          "isComboBox": false,
          "suggest": [],
@@ -1236,6 +1282,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "txtLatestShinsakaiKaishiYoteiTime_core",
          "required": false,
          "text": "",
          "isPrivateInfo": false,
@@ -1246,17 +1293,17 @@
          "onChange": "",
          "onKeyPress": "",
          "permitCharactor": "",
-         "displayFormat": 0,
+         "displayFormat": 1,
          "labelLText": "開始予定",
          "labelRText": "",
          "labelLWidth": "S",
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "maxLength": 1000000000000,
+         "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
-         "placeHolder": "12:34",
+         "placeHolder": "",
          "textKind": 0,
          "isComboBox": false,
          "suggest": [],
@@ -1280,6 +1327,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "txtLatestGogitaiNo_core",
          "required": false,
          "text": "",
          "isPrivateInfo": false,
@@ -1299,7 +1347,7 @@
          "maxLength": "10",
          "minLength": "10",
          "textAlign": 0,
-         "placeHolder": "1234567890",
+         "placeHolder": "",
          "textKind": 2,
          "isComboBox": false,
          "suggest": [],
@@ -1323,6 +1371,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "txtLatestGogitaiName_core",
          "required": false,
          "text": "",
          "isPrivateInfo": false,
@@ -1339,10 +1388,10 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "maxLength": 1000000000000,
+         "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
-         "placeHolder": "合議体名称",
+         "placeHolder": "",
          "textKind": 0,
          "isComboBox": false,
          "suggest": [],
@@ -1356,13 +1405,14 @@
        "disabled": false,
        "accessKey": "",
        "nextFocusFieldName": "",
-       "wrap": false,
+       "wrap": true,
        "dependencies": [],
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "LatestShinsakai",
        "onLoad": "",
        "title": "審査会",
        "isOpen": true,
@@ -1385,11 +1435,12 @@
        "eraseBorderLeft": false,
        "backgroundColor": 0,
        "widthAuto": true,
-       "isGroupBox": true
+       "panelDisplay": 1,
+       "isGroupBox": false
       }
      ],
      "controlType": "Panel",
-     "width": "1110",
+     "width": "1090",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1402,6 +1453,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "LatestPublication",
      "onLoad": "",
      "title": "前回",
      "isOpen": true,
@@ -1424,6 +1476,7 @@
      "eraseBorderLeft": false,
      "backgroundColor": 0,
      "widthAuto": false,
+     "panelDisplay": 0,
      "isGroupBox": false
     },
     {
@@ -1446,12 +1499,14 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "btnToMask",
        "text": "資料をマスキングする",
        "onClick": "",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
-       "imageHeight": ""
+       "imageHeight": "",
+       "icon": 0
       },
       {
        "fieldName": "btnToChangeCondition2",
@@ -1470,12 +1525,14 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "btnToChangeCondition2",
        "text": "発行の範囲を指定する",
-       "onClick": "",
+       "onClick": "onClick_btnToChangeCondition2",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
-       "imageHeight": ""
+       "imageHeight": "",
+       "icon": 0
       },
       {
        "fieldName": "PublishingConditionForJimukyoku1",
@@ -1497,6 +1554,7 @@
          "authorityMode": 0,
          "marginLeft": "S",
          "marginRight": "XS",
+         "selectControlID": "txtCopyNumForJimukyoku1_core",
          "required": false,
          "text": "",
          "isPrivateInfo": false,
@@ -1513,7 +1571,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "maxLength": 1000000000000,
+         "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 2,
          "placeHolder": "99",
@@ -1531,7 +1589,7 @@
          "fieldName": "chkReportTypeForJimukyoku1",
          "items": [],
          "controlType": "CheckBoxList",
-         "width": "",
+         "width": "300",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1544,6 +1602,7 @@
          "authorityMode": 0,
          "marginLeft": "S",
          "marginRight": "XS",
+         "selectControlID": "chkReportTypeForJimukyoku1_core",
          "required": false,
          "onChange": "",
          "labelLText": "印刷帳票",
@@ -1585,12 +1644,12 @@
          "newLineItemNumber": 2,
          "minCheckedItem": 0,
          "maxCheckedItem": "10",
-         "spaceSize": 1,
+         "spaceSize": "M",
          "isAllSelectable": true
         }
        ],
        "controlType": "Panel",
-       "width": "540",
+       "width": "520",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1603,6 +1662,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "PublishingConditionForJimukyoku1",
        "onLoad": "",
        "title": "事務局用",
        "isOpen": true,
@@ -1625,7 +1685,8 @@
        "eraseBorderLeft": false,
        "backgroundColor": 0,
        "widthAuto": false,
-       "isGroupBox": true
+       "panelDisplay": 1,
+       "isGroupBox": false
       },
       {
        "fieldName": "PublishingConditionForShinsakaiIin1",
@@ -1647,6 +1708,7 @@
          "authorityMode": 0,
          "marginLeft": "S",
          "marginRight": "XS",
+         "selectControlID": "txtCopyNumForShinsakaiIin1_core",
          "required": false,
          "text": "",
          "isPrivateInfo": false,
@@ -1663,7 +1725,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "maxLength": 1000000000000,
+         "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 2,
          "placeHolder": "99",
@@ -1681,7 +1743,7 @@
          "fieldName": "chkReportTypeForShinsakaiIin1",
          "items": [],
          "controlType": "CheckBoxList",
-         "width": "",
+         "width": "300",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1694,6 +1756,7 @@
          "authorityMode": 0,
          "marginLeft": "S",
          "marginRight": "XS",
+         "selectControlID": "chkReportTypeForShinsakaiIin1_core",
          "required": false,
          "onChange": "",
          "labelLText": "印刷帳票",
@@ -1731,12 +1794,12 @@
          "newLineItemNumber": 2,
          "minCheckedItem": 0,
          "maxCheckedItem": "10",
-         "spaceSize": 1,
+         "spaceSize": "M",
          "isAllSelectable": true
         }
        ],
        "controlType": "Panel",
-       "width": "540",
+       "width": "520",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1749,6 +1812,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "PublishingConditionForShinsakaiIin1",
        "onLoad": "",
        "title": "委員用",
        "isOpen": true,
@@ -1771,7 +1835,8 @@
        "eraseBorderLeft": false,
        "backgroundColor": 0,
        "widthAuto": false,
-       "isGroupBox": true
+       "panelDisplay": 1,
+       "isGroupBox": false
       },
       {
        "fieldName": "ButtonsForPrint1",
@@ -1793,12 +1858,14 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "btnToPrintFromCondition1",
          "text": "作成条件から発行する",
          "onClick": "",
          "appearance": 0,
          "imageFileUrl": "",
          "imageWidth": "",
-         "imageHeight": ""
+         "imageHeight": "",
+         "icon": 0
         },
         {
          "fieldName": "btnToPrintAdditions",
@@ -1817,16 +1884,44 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "btnToPrintAdditions",
          "text": "追加分を発行する",
          "onClick": "",
          "appearance": 0,
          "imageFileUrl": "",
          "imageWidth": "",
-         "imageHeight": ""
+         "imageHeight": "",
+         "icon": 0
+        },
+        {
+         "fieldName": "btnToReturnIchiran",
+         "items": [],
+         "controlType": "Button",
+         "width": "M",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "selectControlID": "btnToReturnIchiran",
+         "text": "審査会一覧に戻る",
+         "onClick": "",
+         "appearance": 0,
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": "",
+         "icon": 0
         }
        ],
        "controlType": "Panel",
-       "width": "1100",
+       "width": "1080",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1839,6 +1934,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "ButtonsForPrint1",
        "onLoad": "",
        "title": "",
        "isOpen": true,
@@ -1861,11 +1957,12 @@
        "eraseBorderLeft": true,
        "backgroundColor": 0,
        "widthAuto": false,
+       "panelDisplay": 0,
        "isGroupBox": false
       }
      ],
      "controlType": "Panel",
-     "width": "1110",
+     "width": "1090",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1878,6 +1975,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "PublishingCondition1",
      "onLoad": "",
      "title": "作成条件(全件)",
      "isOpen": true,
@@ -1900,6 +1998,7 @@
      "eraseBorderLeft": false,
      "backgroundColor": 0,
      "widthAuto": false,
+     "panelDisplay": 0,
      "isGroupBox": false
     },
     {
@@ -1925,6 +2024,7 @@
          "authorityMode": 0,
          "marginLeft": "S",
          "marginRight": "XS",
+         "selectControlID": "ttxtCopyNumForJimukyoku2_core",
          "required": false,
          "text": "",
          "isPrivateInfo": false,
@@ -1941,7 +2041,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "maxLength": 1000000000000,
+         "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 2,
          "placeHolder": "99",
@@ -1959,7 +2059,7 @@
          "fieldName": "chkReportTypeForJimukyoku2",
          "items": [],
          "controlType": "CheckBoxList",
-         "width": "",
+         "width": "300",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1972,6 +2072,7 @@
          "authorityMode": 0,
          "marginLeft": "S",
          "marginRight": "XS",
+         "selectControlID": "chkReportTypeForJimukyoku2_core",
          "required": false,
          "onChange": "",
          "labelLText": "印刷帳票",
@@ -2001,7 +2102,7 @@
          "newLineItemNumber": 2,
          "minCheckedItem": 0,
          "maxCheckedItem": "10",
-         "spaceSize": 1,
+         "spaceSize": "M",
          "isAllSelectable": true
         },
         {
@@ -2024,6 +2125,7 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "lblPageRangeForJimukyoku",
            "required": false,
            "align": 2,
            "text": "資料番号",
@@ -2046,6 +2148,7 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "",
+           "selectControlID": "txtPageRangeForJimukyokuFrom_core",
            "required": false,
            "text": "",
            "isPrivateInfo": false,
@@ -2062,10 +2165,10 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "maxLength": 1000000000000,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 2,
-           "placeHolder": "99",
+           "placeHolder": "",
            "textKind": 2,
            "isComboBox": false,
            "suggest": [],
@@ -2093,6 +2196,7 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "lblPageRangeForJimukyokuWave",
            "required": false,
            "align": 2,
            "text": "～",
@@ -2115,6 +2219,7 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "",
+           "selectControlID": "txtPageRangeForJimukyokuTo_core",
            "required": false,
            "text": "",
            "isPrivateInfo": false,
@@ -2131,10 +2236,10 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "maxLength": 1000000000000,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 2,
-           "placeHolder": "99",
+           "placeHolder": "",
            "textKind": 2,
            "isComboBox": false,
            "suggest": [],
@@ -2162,6 +2267,7 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "lblPageRangeForJimukyoku2",
            "required": false,
            "align": 2,
            "text": "の範囲で発行する。",
@@ -2169,7 +2275,7 @@
           }
          ],
          "controlType": "Panel",
-         "width": "525",
+         "width": "505",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -2182,6 +2288,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "PageRangeForJimukyoku",
          "onLoad": "",
          "title": "",
          "isOpen": true,
@@ -2204,11 +2311,12 @@
          "eraseBorderLeft": true,
          "backgroundColor": 0,
          "widthAuto": false,
+         "panelDisplay": 0,
          "isGroupBox": false
         }
        ],
        "controlType": "Panel",
-       "width": "540",
+       "width": "520",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -2221,6 +2329,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "PublishingConditionForJimukyoku2",
        "onLoad": "",
        "title": "事務局用",
        "isOpen": true,
@@ -2243,7 +2352,8 @@
        "eraseBorderLeft": false,
        "backgroundColor": 0,
        "widthAuto": false,
-       "isGroupBox": true
+       "panelDisplay": 1,
+       "isGroupBox": false
       },
       {
        "fieldName": "PublishingConditionForShinsakaiIin2",
@@ -2265,6 +2375,7 @@
          "authorityMode": 0,
          "marginLeft": "S",
          "marginRight": "XS",
+         "selectControlID": "txtCopyNumForShinsakaiIin2_core",
          "required": false,
          "text": "",
          "isPrivateInfo": false,
@@ -2281,7 +2392,7 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "maxLength": 1000000000000,
+         "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 2,
          "placeHolder": "99",
@@ -2299,7 +2410,7 @@
          "fieldName": "chkReportTypeForShinsakaiIin2",
          "items": [],
          "controlType": "CheckBoxList",
-         "width": "",
+         "width": "300",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -2312,6 +2423,7 @@
          "authorityMode": 0,
          "marginLeft": "S",
          "marginRight": "XS",
+         "selectControlID": "chkReportTypeForShinsakaiIin2_core",
          "required": false,
          "onChange": "",
          "labelLText": "印刷帳票",
@@ -2337,7 +2449,7 @@
          "newLineItemNumber": 2,
          "minCheckedItem": 0,
          "maxCheckedItem": "10",
-         "spaceSize": 1,
+         "spaceSize": "M",
          "isAllSelectable": true
         },
         {
@@ -2360,6 +2472,7 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "lblPageRangeForShinsakaiIin",
            "required": false,
            "align": 2,
            "text": "資料番号",
@@ -2382,6 +2495,7 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "",
+           "selectControlID": "txtPageRangeAssignmentForShinsakaiIinFrom_core",
            "required": false,
            "text": "",
            "isPrivateInfo": false,
@@ -2398,10 +2512,10 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "maxLength": 1000000000000,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 2,
-           "placeHolder": "99",
+           "placeHolder": "",
            "textKind": 2,
            "isComboBox": false,
            "suggest": [],
@@ -2429,6 +2543,7 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "lblPageRangeForShinsakaiIinWave",
            "required": false,
            "align": 2,
            "text": "～",
@@ -2451,6 +2566,7 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "",
+           "selectControlID": "txtPageRangeAssignmentForShinsakaiIinTo_core",
            "required": false,
            "text": "",
            "isPrivateInfo": false,
@@ -2467,10 +2583,10 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "maxLength": 1000000000000,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 2,
-           "placeHolder": "99",
+           "placeHolder": "",
            "textKind": 2,
            "isComboBox": false,
            "suggest": [],
@@ -2498,6 +2614,7 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "lblPageRangeForShinsakaiIin2",
            "required": false,
            "align": 2,
            "text": "の範囲で発行する。",
@@ -2505,7 +2622,7 @@
           }
          ],
          "controlType": "Panel",
-         "width": "525",
+         "width": "505",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -2518,6 +2635,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "PageRangeAssignmentForShinsakaiIin",
          "onLoad": "",
          "title": "",
          "isOpen": true,
@@ -2540,11 +2658,12 @@
          "eraseBorderLeft": true,
          "backgroundColor": 0,
          "widthAuto": false,
+         "panelDisplay": 0,
          "isGroupBox": false
         }
        ],
        "controlType": "Panel",
-       "width": "540",
+       "width": "520",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -2557,6 +2676,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "PublishingConditionForShinsakaiIin2",
        "onLoad": "",
        "title": "委員用",
        "isOpen": true,
@@ -2579,7 +2699,8 @@
        "eraseBorderLeft": false,
        "backgroundColor": 0,
        "widthAuto": false,
-       "isGroupBox": true
+       "panelDisplay": 1,
+       "isGroupBox": false
       },
       {
        "fieldName": "ButtonsForPrint2",
@@ -2601,12 +2722,14 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "btnToReturn",
          "text": "戻る",
-         "onClick": "",
+         "onClick": "onClick_btnToReturn",
          "appearance": 0,
          "imageFileUrl": "",
          "imageWidth": "",
-         "imageHeight": ""
+         "imageHeight": "",
+         "icon": 0
         },
         {
          "fieldName": "btnToPrintFromCondition2",
@@ -2625,16 +2748,18 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "btnToPrintFromCondition2",
          "text": "作成条件から発行する",
          "onClick": "",
          "appearance": 0,
          "imageFileUrl": "",
          "imageWidth": "",
-         "imageHeight": ""
+         "imageHeight": "",
+         "icon": 0
         }
        ],
        "controlType": "Panel",
-       "width": "1100",
+       "width": "1080",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -2647,6 +2772,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "ButtonsForPrint2",
        "onLoad": "",
        "title": "",
        "isOpen": true,
@@ -2669,11 +2795,12 @@
        "eraseBorderLeft": true,
        "backgroundColor": 0,
        "widthAuto": false,
+       "panelDisplay": 0,
        "isGroupBox": false
       }
      ],
      "controlType": "Panel",
-     "width": "1110",
+     "width": "1090",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -2686,10 +2813,11 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "PublishingCondition2",
      "onLoad": "",
      "title": "作成条件(範囲指定)",
      "isOpen": true,
-     "canOpenAndClose": false,
+     "canOpenAndClose": true,
      "postParameterPanelNames": [
       {
        "postParameterPanelNames": "PublishingCondition1"
@@ -2708,11 +2836,12 @@
      "eraseBorderLeft": false,
      "backgroundColor": 0,
      "widthAuto": false,
+     "panelDisplay": 0,
      "isGroupBox": false
     }
    ],
    "controlType": "Panel",
-   "width": "1125",
+   "width": "1100",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -2725,16 +2854,37 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "ShinsakaiShiryoPublication",
    "onLoad": "",
    "title": "資料発行",
    "isOpen": true,
-   "canOpenAndClose": false,
+   "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "ShinsakaiShiryoPublication"
+    },
+    {
+     "postParameterPanelNames": "ShinsakaiSearch"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_btnSentaku",
+     "requestUrl": "dbe/db/dbe/ShinsakaiShiryoPublication/onClick_btnSentaku"
+    },
+    {
+     "eventName": "onClick_btnToChangeCondition2",
+     "requestUrl": "dbe/db/dbe/ShinsakaiShiryoPublication/onClick_btnToChangeCondition2"
+    },
+    {
+     "eventName": "onClick_btnToReturn",
+     "requestUrl": "dbe/db/dbe/ShinsakaiShiryoPublication/onClick_btnToReturn"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -2747,6 +2897,7 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
+   "panelDisplay": 0,
    "isGroupBox": false
   }
  ],
@@ -2764,6 +2915,7 @@
  "authorityMode": 0,
  "marginLeft": "XS",
  "marginRight": "XS",
+ "selectControlID": "Page",
  "onLoad": "",
  "title": "審査会資料作成",
  "jsPathCollection": [],
@@ -2812,6 +2964,16 @@
      "fieldName": "dgShinsakaiList[btnToSelect]",
      "event": "onClick",
      "transition": "全件"
+    },
+    {
+     "fieldName": "btnToChangeCondition2",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnToReturnIchiran",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
@@ -2874,6 +3036,16 @@
      "fieldName": "dgShinsakaiList[btnToSelect]",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnToChangeCondition2",
+     "event": "onClick",
+     "transition": "個別"
+    },
+    {
+     "fieldName": "btnToReturnIchiran",
+     "event": "onClick",
+     "transition": "検索"
     }
    ]
   },
@@ -2884,35 +3056,53 @@
    "visibleDivs": [
     {
      "visibleDiv": "ShinsakaiShiryoPublication",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "PublicationTargetShinsakai",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "PublishingCondition2",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "PublishingConditionForJimukyoku2",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "PageRangeForJimukyoku",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "PublishingConditionForShinsakaiIin2",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "PageRangeAssignmentForShinsakaiIin",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "ButtonsForPrint2",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
+    },
+    {
+     "visibleDiv": "LatestPublication",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "LatestShinsakai",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
@@ -2936,6 +3126,16 @@
      "fieldName": "dgShinsakaiList[btnToSelect]",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnToChangeCondition2",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnToReturnIchiran",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   }
@@ -2945,6 +3145,10 @@
  "WFParameter": [],
  "UIContainerEventMapping": [],
  "loadSequencePanelNames": [
+  [
+   "ShinsakaiSearch",
+   "ShinsakaiShiryoPublication"
+  ],
   [
    "PublishingCondition1",
    "PublishingCondition2"
@@ -2962,9 +3166,6 @@
    "PageRangeAssignmentForShinsakaiIin"
   ],
   [
-   "ShinsakaiSearch"
-  ],
-  [
    "SearchCriteriaForShinsakai"
   ],
   [
@@ -2972,9 +3173,6 @@
   ],
   [
    "ShinsakaiList"
-  ],
-  [
-   "ShinsakaiShiryoPublication"
   ],
   [
    "PublicationTargetShinsakai"

@@ -5,24 +5,31 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
+import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryContentDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryMainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryPaperDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryRequestContentDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryRequestDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryTargetChosainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryTargetDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryTargetLatestChosainDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryTokusokuContentDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryTokusokuDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryTokusokuPublishDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiListDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.dgNinteichosaIraiList_Row;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
  * NinteichosaIraiEntryDivを操作するためのクラスです。
@@ -30,6 +37,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
  * @author N3327 三浦 凌
  */
 public class NinteichosaIraiEntry {
+
+    private static final int NUM_OF_DAYS_IN_A_WEEK = 7;
 
     /**
      * ロード時の処理です。
@@ -39,100 +48,143 @@ public class NinteichosaIraiEntry {
      * @return ResponseData
      */
     public ResponseData<NinteichosaIraiEntryDiv> onLoad(NinteichosaIraiEntryDiv div, NinteichosaIraiListDiv div2) {
+        new NinteichosaTokusoku(div.getNinteichosaIraiEntryMain().getNinteichosaIraiEntryTokusoku()).onLoad();
         return onClick_btnToCallContinuousEntry(div, div2);
     }
 
     /**
      * btnToCallContinuousEntry押下時の処理です。
      *
-     * @param div NinteichosaIraiEntryDiv
-     * @param div2 NinteichosaIraiListDiv
+     * @param panel NinteichosaIraiEntryDiv
+     * @param allTargets NinteichosaIraiListDiv
      * @return ResponseData
      */
-    public ResponseData<NinteichosaIraiEntryDiv> onClick_btnToCallContinuousEntry(NinteichosaIraiEntryDiv div, NinteichosaIraiListDiv div2) {
+    public ResponseData<NinteichosaIraiEntryDiv> onClick_btnToCallContinuousEntry(NinteichosaIraiEntryDiv panel,
+            NinteichosaIraiListDiv allTargets) {
         ResponseData<NinteichosaIraiEntryDiv> response = new ResponseData<>();
-        if (selectedTargets(div2).isEmpty()) {
-            toDisplayNone(div, true);
+
+        List<dgNinteichosaIraiList_Row> selectedTargets = selectedTargetsFrom(allTargets);
+        if (selectedTargets.isEmpty()) {
+            changeMode_DisplayNone(panel, true);
         } else {
-            toDisplayNone(div, false);
-            NinteichosaIraiList.NinteichosaIraiListHolder.saveNinteichosaIraiList(
-                    div2.getDgNinteichosaIraiList().getSelectedItems());
-            div.getTxtCurrentIndex().setValue(new Decimal(0));
-            setUpPanelFromTargets(div, selectedTargets(div2));
+            changeMode_DisplayNone(panel, false);
+            init(panel, selectedTargets);
         }
-        response.data = div;
+
+        response.data = panel;
         return response;
     }
 
-    /**
-     * 対象者情報panelと、依頼入力panelの表示/非表示を設定します。
-     *
-     * @param div NinteichosaIraiEntryDiv
-     * @param isDisplayNone 非表示ならtrue、表示ならfalse。
-     */
-    private void toDisplayNone(NinteichosaIraiEntryDiv div, boolean isDisplayNone) {
-        div.getNinteichosaIraiEntryContent().setDisplayNone(isDisplayNone);
+    private void changeMode_DisplayNone(NinteichosaIraiEntryDiv div, boolean isDisplayNone) {
+        div.getNinteichosaIraiEntryMain().setDisplayNone(isDisplayNone);
         div.getNinteichosaIraiEntryTarget().setDisplayNone(isDisplayNone);
         div.getButtonsForNinteichosaIraiEntry().getBtnToCallNext().setVisible(!isDisplayNone);
+    }
+
+    private void init(NinteichosaIraiEntryDiv panel, List<dgNinteichosaIraiList_Row> selectedTargets) {
+        NinteichosaIraiList.NinteichosaIraiListHolder.saveNinteichosaIraiList(selectedTargets);
+        this.setCurrentTargetIndex(panel, 0);
+        this.setUpPanelFromTargets(panel, selectedTargets);
+        this.init_Tokusoku(panel);
+    }
+
+    private void init_Tokusoku(NinteichosaIraiEntryDiv panel) {
+        new NinteichosaTokusoku(panel.getNinteichosaIraiEntryMain().getNinteichosaIraiEntryTokusoku()).init();
+    }
+
+    private void setUpPanelFromTargets(NinteichosaIraiEntryDiv panel, List<dgNinteichosaIraiList_Row> targets) {
+        setNewTitle(panel, targets);
+        setUpPanelFromTargetInfo(panel, currentTarget(panel, targets));
+        stateChange_btnToCallNext(panel, targets);
+    }
+
+    private void setNewTitle(NinteichosaIraiEntryDiv panel, List<dgNinteichosaIraiList_Row> targets) {
+        panel.setTitle(composeNewTitle(panel, targets));
+    }
+
+    private RString composeNewTitle(NinteichosaIraiEntryDiv panel, List<dgNinteichosaIraiList_Row> targets) {
+        return new RString("認定調査依頼登録" + "(" + (getCurrentTargetIndex(panel) + 1) + "/" + targets.size() + ")");
+    }
+
+    private dgNinteichosaIraiList_Row currentTarget(NinteichosaIraiEntryDiv panel, List<dgNinteichosaIraiList_Row> targets) {
+        return targets.get(getCurrentTargetIndex(panel));
+    }
+
+    private void setUpPanelFromTargetInfo(NinteichosaIraiEntryDiv panel, dgNinteichosaIraiList_Row targetInfo) {
+        new NinteichosaIraiEntryTarget(panel.getNinteichosaIraiEntryTarget()).setTargetInfo(targetInfo);
+        new NinteichosaIraiEntryMain(panel.getNinteichosaIraiEntryMain()).setTargetInfo(targetInfo);
+    }
+
+    private void stateChange_btnToCallNext(NinteichosaIraiEntryDiv panel, List<dgNinteichosaIraiList_Row> targets) {
+        Button btnToCallNext = panel.getButtonsForNinteichosaIraiEntry().getBtnToCallNext();
+        if (isLastPerson(panel, targets)) {
+            btnToCallNext.setVisible(false);
+        } else {
+            btnToCallNext.setVisible(true);
+            btnToCallNext.setDisabled(true);
+        }
     }
 
     /**
      * btnToPublish押下時の処理です。
      *
-     * @param div NinteichosaIraiEntryDiv
-     * @param div2 NinteichosaIraiListDiv
+     * @param panel NinteichosaIraiEntryDiv
+     * @param xxx NinteichosaIraiListDiv
      * @return ResponseData
      */
-    public ResponseData<NinteichosaIraiEntryDiv> onClick_btnToPublishChohyo(NinteichosaIraiEntryDiv div, NinteichosaIraiListDiv div2) {
+    public ResponseData<NinteichosaIraiEntryDiv> onClick_btnToPublishChohyo(NinteichosaIraiEntryDiv panel, NinteichosaIraiListDiv xxx) {
         ResponseData<NinteichosaIraiEntryDiv> response = new ResponseData<>();
 
-        _onClick_btnToPublishChohyo(div);
+        _onClick_btnToPublishChohyo(panel);
 
-        response.data = div;
+        response.data = panel;
         return response;
     }
 
-    private void _onClick_btnToPublishChohyo(NinteichosaIraiEntryDiv div) {
-        NinteichosaIraiEntryPaperDiv paper = _ninteichosaIraiEntryPaper(div);
-        FlexibleDate nowDate = FlexibleDate.getNowDate();
-        if (NinteichosaIraiEntryPaper.selectsIraisho(paper)) {
-            _ninteichosaIraiEntryRequest(div).getTxtIraishoHakkoDate().setValue(nowDate);
-        }
-        if (NinteichosaIraiEntryPaper.selectsTokusokujo(paper)) {
-            _ninteichosaIraiEntryTokusoku(div).getTxtTokusokujoHakkoDate().setValue(nowDate);
-            _ninteichosaIraiEntryTokusoku(div).getDdlTokukuHoho().setSelectedItem(new RString("1"));
+    private void _onClick_btnToPublishChohyo(NinteichosaIraiEntryDiv panel) {
+        NinteichosaPaper paper = new NinteichosaPaper(panel
+                .getNinteichosaIraiEntryMain().getNinteichosaIraiEntryRequest().getNinteichosaIraiEntryPaper());
+        if (paper.isSelected依頼書()) {
+            FlexibleDate nowDate = FlexibleDate.getNowDate();
+            paper.set依頼書発行日(nowDate);
         }
     }
 
     /**
      * btnToEntryChosaIrai押下時の処理です。
      *
-     * @param div NinteichosaIraiEntryDiv
-     * @param div2 NinteichosaIraiListDiv
+     * @param panel NinteichosaIraiEntryDiv
+     * @param allTargets NinteichosaIraiListDiv
      * @return ResponseData
      */
-    public ResponseData<NinteichosaIraiEntryDiv> onClick_btnToEntryChosaIrai(NinteichosaIraiEntryDiv div, NinteichosaIraiListDiv div2) {
+    public ResponseData<NinteichosaIraiEntryDiv> onClick_btnToEntryChosaIrai(NinteichosaIraiEntryDiv panel, NinteichosaIraiListDiv allTargets) {
         ResponseData<NinteichosaIraiEntryDiv> response = new ResponseData<>();
 
-        List<dgNinteichosaIraiList_Row> list = NinteichosaIraiList.NinteichosaIraiListHolder.getNinteichosaIraiList();
-        int index = currentTargetIndex(div);
-        dgNinteichosaIraiList_Row target = selectedTargets(div2).get(index);
-        NinteichosaIraiEntryContent.setTargetInfoToPanel(target, div.getNinteichosaIraiEntryContent());
-        list.set(index, target);
-        NinteichosaIraiList.NinteichosaIraiListHolder.saveNinteichosaIraiList(list);
+        increase_TokusokuCount(panel, allTargets);
+        saveToViewState(panel, allTargets);
+        stateChange_btnToCallNext(panel, allTargets);
 
-        Button btnToCallNext = div.getButtonsForNinteichosaIraiEntry().getBtnToCallNext();
-
-        if (!isLast(div, selectedTargets(div2))) {
-            btnToCallNext.setDisabled(false);
-        }
-
-        response.data = div;
+        response.data = panel;
         return response;
     }
 
-    private boolean isLast(NinteichosaIraiEntryDiv div, List<dgNinteichosaIraiList_Row> targets) {
-        return currentTargetIndex(div) + 1 == targets.size();
+    private void saveToViewState(NinteichosaIraiEntryDiv panel, NinteichosaIraiListDiv allTargets) {
+        int index = getCurrentTargetIndex(panel);
+        dgNinteichosaIraiList_Row target = selectedTargetsFrom(allTargets).get(index);
+        List<dgNinteichosaIraiList_Row> list = NinteichosaIraiList.NinteichosaIraiListHolder.getNinteichosaIraiList();
+        list.set(index, modified(target, panel));
+        NinteichosaIraiList.NinteichosaIraiListHolder.saveNinteichosaIraiList(list);
+    }
+
+    private dgNinteichosaIraiList_Row modified(dgNinteichosaIraiList_Row target, NinteichosaIraiEntryDiv panel) {
+        return new NinteichosaIraiEntryMain(panel.getNinteichosaIraiEntryMain()).reflect(target);
+    }
+
+    private void stateChange_btnToCallNext(NinteichosaIraiEntryDiv panel, NinteichosaIraiListDiv allTargets) {
+        Button btnToCallNext = panel.getButtonsForNinteichosaIraiEntry().getBtnToCallNext();
+        if (!isLastPerson(panel, selectedTargetsFrom(allTargets))) {
+            btnToCallNext.setDisabled(false);
+        }
     }
 
     /**
@@ -145,206 +197,221 @@ public class NinteichosaIraiEntry {
     public ResponseData<NinteichosaIraiEntryDiv> onClick_btnToCallNext(NinteichosaIraiEntryDiv div, NinteichosaIraiListDiv div2) {
         ResponseData<NinteichosaIraiEntryDiv> response = new ResponseData<>();
 
-        div.getTxtCurrentIndex().setValue(new Decimal(currentTargetIndex(div) + 1));
-        setUpPanelFromTargets(div, selectedTargets(div2));
+        setCurrentTargetIndex(div, getCurrentTargetIndex(div) + 1);
+        setUpPanelFromTargets(div, selectedTargetsFrom(div2));
 
         response.data = div;
         return response;
     }
 
-    private void setUpPanelFromTargets(NinteichosaIraiEntryDiv panel, List<dgNinteichosaIraiList_Row> targets) {
-        panel.setTitle(newTitle(panel, targets));
-        dgNinteichosaIraiList_Row targetInfo = targets.get(currentTargetIndex(panel));
-        setUpPanelFromTargetInfo(panel, targetInfo);
+    /**
+     * radTokusoku
+     *
+     * @param div NinteichosaIraiEntryDiv
+     * @param div2 NinteichosaIraiListDiv
+     * @return ResponseData
+     */
+    public ResponseData<NinteichosaIraiEntryDiv> onChange_radTokusoku(NinteichosaIraiEntryDiv div, NinteichosaIraiListDiv div2) {
+        ResponseData<NinteichosaIraiEntryDiv> response = new ResponseData<>();
 
-        Button btnToCallNext = panel.getButtonsForNinteichosaIraiEntry().getBtnToCallNext();
-        if (isLast(panel, targets)) {
-            btnToCallNext.setVisible(false);
-        } else {
-            btnToCallNext.setVisible(true);
-            btnToCallNext.setDisabled(true);
-        }
-    }
+        new NinteichosaTokusoku(div.getNinteichosaIraiEntryMain().getNinteichosaIraiEntryTokusoku()).onChange_radTokusoku();
 
-    private RString newTitle(NinteichosaIraiEntryDiv div, List<dgNinteichosaIraiList_Row> targets) {
-        return new RString("認定調査依頼登録" + "(" + (currentTargetIndex(div) + 1) + "/" + targets.size() + ")");
-    }
-
-    private void setUpPanelFromTargetInfo(NinteichosaIraiEntryDiv panel, dgNinteichosaIraiList_Row targetInfo) {
-        NinteichosaIraiEntryTarget.initFromTargetInfo(panel.getNinteichosaIraiEntryTarget(), targetInfo);
-        NinteichosaIraiEntryContent.initPanelFromTargetInfo(panel.getNinteichosaIraiEntryContent(), targetInfo);
+        response.data = div;
+        return response;
     }
 
     /**
-     * NinteichosaIraiEntryTargetDivに対する操作です。
+     * ddlTokukuHoho
+     *
+     * @param div NinteichosaIraiEntryDiv
+     * @param div2 NinteichosaIraiListDiv
+     * @return ResponseData
      */
-    private static final class NinteichosaIraiEntryTarget {
+    public ResponseData<NinteichosaIraiEntryDiv> onChange_ddlTokukuHoho(NinteichosaIraiEntryDiv div, NinteichosaIraiListDiv div2) {
+        ResponseData<NinteichosaIraiEntryDiv> response = new ResponseData<>();
 
-        private static void initFromTargetInfo(NinteichosaIraiEntryTargetDiv panel, dgNinteichosaIraiList_Row targetInfo) {
-            _initPanelFromTargetInfo(panel, targetInfo);
-            NinteichosaIraiEntryTargetLatestChosain.
-                    initPanelFromTargetInfo(panel.getNinteichosaIraiEntryTargetLatestChosain(), targetInfo);
+        new NinteichosaTokusoku(div.getNinteichosaIraiEntryMain().getNinteichosaIraiEntryTokusoku()).onChange_ddlTokukuHoho();
+
+        response.data = div;
+        return response;
+    }
+
+    /**
+     * onClick_btnToPublishTokusokujo
+     *
+     * @param div NinteichosaIraiEntryDiv
+     * @param div2 NinteichosaIraiListDiv
+     * @return ResponseData
+     */
+    public ResponseData<NinteichosaIraiEntryDiv> onClick_btnToPublishTokusokujo(NinteichosaIraiEntryDiv div, NinteichosaIraiListDiv div2) {
+        ResponseData<NinteichosaIraiEntryDiv> response = new ResponseData<>();
+
+        new NinteichosaTokusoku(div.getNinteichosaIraiEntryMain().getNinteichosaIraiEntryTokusoku()).onClick_btnToPublishTokusokujo();
+
+        response.data = div;
+        return response;
+    }
+
+    private int getCurrentTargetIndex(NinteichosaIraiEntryDiv panel) {
+        return panel.getTxtCurrentIndex().getValue().intValue();
+    }
+
+    private void setCurrentTargetIndex(NinteichosaIraiEntryDiv panel, int index) {
+        panel.getTxtCurrentIndex().setValue(new Decimal(index));
+    }
+
+    private static List<dgNinteichosaIraiList_Row> selectedTargetsFrom(NinteichosaIraiListDiv div2) {
+        return div2.getDgNinteichosaIraiList().getSelectedItems();
+    }
+
+    private boolean isLastPerson(NinteichosaIraiEntryDiv div, List<dgNinteichosaIraiList_Row> targets) {
+        return getCurrentTargetIndex(div) + 1 == targets.size();
+    }
+
+    private void increase_TokusokuCount(NinteichosaIraiEntryDiv panel, NinteichosaIraiListDiv allTargets) {
+        dgNinteichosaIraiList_Row target = currentTarget(panel, selectedTargetsFrom(allTargets));
+        NinteichosaTokusoku tokusoku = new NinteichosaTokusoku(panel.getNinteichosaIraiEntryMain().getNinteichosaIraiEntryTokusoku());
+        RString tokusokuCount = tokusoku.getContent().getTokusokuCount().getValue();
+        if ((target.get督促回数().equals(tokusokuCount)) && (tokusoku.is督促する())) {
+            int value = Integer.parseInt(tokusokuCount.toString());
+            tokusoku.getContent().getTokusokuCount().setValue(new RString(String.valueOf(value + 1)));
+        }
+    }
+
+    /**
+     * 調査依頼対象者です。
+     */
+    private class NinteichosaIraiEntryTarget {
+
+        private final NinteichosaIraiEntryTargetDiv panel;
+        private final _LatestChosain latestChosain;
+
+        NinteichosaIraiEntryTarget(NinteichosaIraiEntryTargetDiv panel) {
+            this.panel = panel;
+            this.latestChosain = new _LatestChosain(
+                    this.panel.getNinteichosaIraiEntryTargetLatestChosain());
         }
 
-        private static void _initPanelFromTargetInfo(NinteichosaIraiEntryTargetDiv panel, dgNinteichosaIraiList_Row targetInfo) {
+        /**
+         * 個人の情報を設定します。
+         */
+        void setTargetInfo(dgNinteichosaIraiList_Row targetInfo) {
+            this._setTargetInfo(targetInfo);
+            latestChosain.setTargetInfo(targetInfo);
+        }
+
+        private void _setTargetInfo(dgNinteichosaIraiList_Row targetInfo) {
             panel.getTxtBirthDay().setValue(targetInfo.get生年月日().getValue());
             panel.getTxtGender().setValue(targetInfo.get性別());
             panel.getTxtHihokenshaNo().setValue(targetInfo.get被保険者番号());
             panel.getTxtJusho().setValue(targetInfo.get住所());
             panel.getTxtShikibetsuCode().setValue(targetInfo.get識別コード());
             panel.getTxtShimei().setValue(targetInfo.get氏名());
-            panel.getTxtYubinNo().setValue(new YubinNo(targetInfo.get郵便番号()));
         }
 
-        private static final class NinteichosaIraiEntryTargetLatestChosain {
+        private final class _LatestChosain {
 
-            private static void initPanelFromTargetInfo(NinteichosaIraiEntryTargetLatestChosainDiv panel, dgNinteichosaIraiList_Row targetInfo) {
-                panel.getTxtLatestChosaItakusakiCode().setValue(targetInfo.get前回調査委託先コード());
-                panel.getTxtLatestChosaItakusakiName().setValue(targetInfo.get前回調査委託先());
-                panel.getTxtLatestChosainCode().setValue(targetInfo.get前回調査員コード());
-                panel.getTxtLatestChosainCode().setValue(targetInfo.get前回調査員());
+            private final NinteichosaIraiEntryTargetLatestChosainDiv panel;
+
+            private _LatestChosain(NinteichosaIraiEntryTargetLatestChosainDiv panel) {
+                this.panel = panel;
             }
 
-        }
-    }
-
-    /**
-     * NinteichosaIraiEntryContentDivに対する操作です。
-     */
-    private static final class NinteichosaIraiEntryContent {
-
-        private static void initPanelFromTargetInfo(NinteichosaIraiEntryContentDiv panel, dgNinteichosaIraiList_Row targetInfo) {
-            NinteichosaIraiEntryTargetChosain.initPanelFromTargetInfo(panel.getNinteichosaIraiEntryTargetChosain(), targetInfo);
-            NinteichosaIraiEntryRequest.initPanelFromTargetInfo(panel.getNinteichosaIraiEntryRequest(), targetInfo);
-            NinteichosaIraiEntryTargetTokusoku.initPanelFromTargetInfo(panel.getNinteichosaIraiEntryTokusoku(), targetInfo);
-        }
-
-        private static void setTargetInfoToPanel(dgNinteichosaIraiList_Row targetInfo, NinteichosaIraiEntryContentDiv panel) {
-            NinteichosaIraiEntryTargetChosain.setTargetInfoToPanel(targetInfo, panel.getNinteichosaIraiEntryTargetChosain());
-            NinteichosaIraiEntryRequest.setTargetInfoToPanel(targetInfo, panel.getNinteichosaIraiEntryRequest());
-            NinteichosaIraiEntryTargetTokusoku.setTargetInfoToPanel(targetInfo, panel.getNinteichosaIraiEntryTokusoku());
-            targetInfo.set依頼書発行済(NinteichosaIraiEntryRequest.is依頼書発行済み(panel.getNinteichosaIraiEntryRequest()));
-            targetInfo.set依頼登録済(is依頼登録済(panel));
-        }
-
-        private static boolean is依頼登録済(NinteichosaIraiEntryContentDiv panel) {
-            return NinteichosaIraiEntryRequest.is登録済み(panel.getNinteichosaIraiEntryRequest())
-                    && NinteichosaIraiEntryTargetChosain.is登録済み(panel.getNinteichosaIraiEntryTargetChosain());
-        }
-
-        /**
-         * NinteichosaIraiEntryTargetChosainDivに対する操作です。
-         */
-        private static final class NinteichosaIraiEntryTargetChosain {
-
-            private static void initPanelFromTargetInfo(NinteichosaIraiEntryTargetChosainDiv panel, dgNinteichosaIraiList_Row target) {
-                panel.getTxtChosaItakusakiCode().setValue(target.get調査委託先コード());
-                panel.getTxtChosaItakusakiName().setValue(target.get調査委託先());
-                panel.getTxtChosainCode().setValue(target.get調査員コード());
-                panel.getTxtChosainName().setValue(target.get調査員());
-            }
-
-            private static void setTargetInfoToPanel(dgNinteichosaIraiList_Row targetInfo, NinteichosaIraiEntryTargetChosainDiv panel) {
-                targetInfo.set調査委託先コード(panel.getTxtChosaItakusakiCode().getValue());
-                targetInfo.set調査委託先(panel.getTxtChosaItakusakiName().getValue());
-                targetInfo.set調査員コード(panel.getTxtChosainCode().getValue());
-                targetInfo.set調査員(panel.getTxtChosainName().getValue());
-            }
-
-            private static boolean is登録済み(NinteichosaIraiEntryTargetChosainDiv div) {
-                return _isNotEmpty(div.getTxtChosaItakusakiCode().getValue())
-                        && _isNotEmpty(div.getTxtChosainCode().getValue());
-            }
-
-            private static boolean _isNotEmpty(Object obj) {
-                return !RString.EMPTY.equals(obj);
-            }
-        }
-
-        /**
-         * NinteichosaIraiEntryRequestDivに対する操作です。
-         */
-        private static final class NinteichosaIraiEntryRequest {
-
-            private static void initPanelFromTargetInfo(NinteichosaIraiEntryRequestDiv panel, dgNinteichosaIraiList_Row targetInfo) {
-                panel.getDdlChosaIraiKubun().setSelectedItem(_composeItemValue(targetInfo.get調査依頼区分()));
-                panel.getTxtChosaIraiDate().setValue(targetInfo.get調査依頼日().getValue());
-                panel.getTxtChosaKigenDate().setValue(targetInfo.get調査期限日().getValue());
-                panel.getTxtIraishoHakkoDate().setValue(targetInfo.get調査依頼書発行日().getValue());
-            }
-
-            private static RString _composeItemValue(RString value) {
-                return value.equals(RString.EMPTY) ? new RString("1") : value.substring(0, 1);
-            }
-
-            private static void setTargetInfoToPanel(dgNinteichosaIraiList_Row targetInfo, NinteichosaIraiEntryRequestDiv panel) {
-                targetInfo.set調査依頼区分(panel.getDdlChosaIraiKubun().getSelectedValue());
-                targetInfo.get調査依頼日().setValue(panel.getTxtChosaIraiDate().getValue());
-                targetInfo.get調査期限日().setValue(panel.getTxtChosaKigenDate().getValue());
-                targetInfo.get調査依頼書発行日().setValue(panel.getTxtIraishoHakkoDate().getValue());
-            }
-
-            private static boolean is登録済み(NinteichosaIraiEntryRequestDiv div) {
-                return _isNotNull(div.getTxtChosaIraiDate().getValue())
-                        && _isNotNull(div.getTxtChosaKigenDate().getValue());
-            }
-
-            private static boolean is依頼書発行済み(NinteichosaIraiEntryRequestDiv div) {
-                FlexibleDate iraishoHakkoDate = div.getTxtIraishoHakkoDate().getValue();
-                return _isNotNull(iraishoHakkoDate) && _isNotEmpty(iraishoHakkoDate);
-            }
-
-            private static boolean _isNotNull(Object obj) {
-                return obj == null;
-            }
-
-            private static boolean _isNotEmpty(FlexibleDate date) {
-                return !FlexibleDate.EMPTY.equals(date);
-            }
-        }
-
-        /**
-         * NinteichosaIraiEntryTargetTokusokuDivに対する操作です。
-         */
-        private static final class NinteichosaIraiEntryTargetTokusoku {
-
-            private static void initPanelFromTargetInfo(NinteichosaIraiEntryTokusokuDiv panel, dgNinteichosaIraiList_Row targetInfo) {
-                panel.getDdlTokukuHoho().setSelectedItem(_composeKey(targetInfo.get督促方法()));
-                panel.getTxtTokusokuCount().setValue(targetInfo.get督促回数());
-                panel.getTxtTokusokuDate().setValue(targetInfo.get督促年月日().getValue());
-                panel.getTxtTokusokujoHakkoDate().setValue(targetInfo.get督促発行日().getValue());
-                panel.getTxtTokusokuKigenDate().setValue(targetInfo.get督促期限日().getValue());
-            }
-
-            private static RString _composeKey(RString value) {
-                return value.equals(RString.EMPTY) ? new RString("0") : value.substring(0, 0);
-            }
-
-            private static void setTargetInfoToPanel(dgNinteichosaIraiList_Row targetInfo, NinteichosaIraiEntryTokusokuDiv panel) {
-                targetInfo.set督促方法(panel.getDdlTokukuHoho().getSelectedValue());
-                targetInfo.set督促回数(panel.getTxtTokusokuCount().getValue());
-                targetInfo.get督促年月日().setValue(panel.getTxtTokusokuDate().getValue());
-                targetInfo.get督促発行日().setValue(panel.getTxtTokusokujoHakkoDate().getValue());
-                targetInfo.get督促期限日().setValue(panel.getTxtTokusokuKigenDate().getValue());
+            private void setTargetInfo(dgNinteichosaIraiList_Row targetInfo) {
+                this.panel.getTxtLatestChosaItakusakiCode().setValue(targetInfo.get前回調査委託先コード());
+                this.panel.getTxtLatestChosaItakusakiName().setValue(targetInfo.get前回調査委託先());
+                this.panel.getTxtLatestChosainCode().setValue(targetInfo.get前回調査員コード());
+                this.panel.getTxtLatestChosainName().setValue(targetInfo.get前回調査員());
             }
         }
     }
 
     /**
-     * NinteichosaIraiEntryPaperDivに対する操作です。
+     * 調査員・調査委託先です。
      */
-    private static final class NinteichosaIraiEntryPaper {
+    private class NinteichosaChosain {
 
-        private static boolean selectsIraisho(NinteichosaIraiEntryPaperDiv div) {
-            return selects(new RString("依頼書"), div);
+        private final NinteichosaIraiEntryTargetChosainDiv panel;
+
+        NinteichosaChosain(NinteichosaIraiEntryTargetChosainDiv panel) {
+            this.panel = panel;
         }
 
-        private static boolean selectsTokusokujo(NinteichosaIraiEntryPaperDiv div) {
-            return selects(new RString("督促状"), div);
+        void setTargetInfo(dgNinteichosaIraiList_Row targetInfo) {
+            panel.getTxtChosaItakusakiCode().setValue(targetInfo.get調査委託先コード());
+            panel.getTxtChosaItakusakiName().setValue(targetInfo.get調査委託先());
+            panel.getTxtChosainCode().setValue(targetInfo.get調査員コード());
+            panel.getTxtChosainName().setValue(targetInfo.get調査員());
         }
 
-        private static boolean selects(RString value, NinteichosaIraiEntryPaperDiv div) {
-            for (KeyValueDataSource item : div.getChkPaperType().getSelectedItems()) {
+        dgNinteichosaIraiList_Row reflect(dgNinteichosaIraiList_Row targetInfo) {
+            targetInfo.set調査委託先コード(panel.getTxtChosaItakusakiCode().getValue());
+            targetInfo.set調査委託先(panel.getTxtChosaItakusakiName().getValue());
+            targetInfo.set調査員コード(panel.getTxtChosainCode().getValue());
+            targetInfo.set調査員(panel.getTxtChosainName().getValue());
+            return targetInfo;
+        }
+
+        private boolean is登録済み() {
+            return !(_isEmpty(panel.getTxtChosaItakusakiCode().getValue())
+                    || _isEmpty(panel.getTxtChosainCode().getValue()));
+        }
+
+        private boolean _isEmpty(RString rstr) {
+            return RString.EMPTY.equals(rstr);
+        }
+    }
+
+    /**
+     * 調査依頼書です。
+     */
+    private class NinteichosaPaper {
+
+        private final NinteichosaIraiEntryPaperDiv panel;
+
+        NinteichosaPaper(NinteichosaIraiEntryPaperDiv panel) {
+            this.panel = panel;
+        }
+
+        /**
+         * 依頼書がチェックされているとき、trueを返します。
+         *
+         * @return 依頼書がチェックされているとき、true
+         */
+        boolean isSelected依頼書() {
+            return _isSelected(new RString("依頼書"));
+        }
+
+        void setTargetInfo(dgNinteichosaIraiList_Row targetInfo) {
+            this.panel.getNinteichosaIraiEntryPaperPublish()
+                    .getTxtIraishoHakkoDate().setValue(targetInfo.get調査依頼書発行日().getValue());
+        }
+
+        dgNinteichosaIraiList_Row reflect(dgNinteichosaIraiList_Row targetInfo) {
+            targetInfo.get調査依頼書発行日().setValue(this.get依頼書発行日());
+            targetInfo.set依頼書発行済(this.is依頼書発行済み());
+            return targetInfo;
+        }
+
+        /**
+         * 指定の依頼書発行日を設定します。
+         *
+         * @param date 依頼書発行日
+         */
+        void set依頼書発行日(FlexibleDate date) {
+            panel.getNinteichosaIraiEntryPaperPublish().getTxtIraishoHakkoDate().setValue(date);
+        }
+
+        FlexibleDate get依頼書発行日() {
+            return panel.getNinteichosaIraiEntryPaperPublish().getTxtIraishoHakkoDate().getValue();
+        }
+
+        boolean is依頼書発行済み() {
+            return (this.get依頼書発行日() != null) && (this.get依頼書発行日() != FlexibleDate.EMPTY);
+        }
+
+        private boolean _isSelected(RString value) {
+            for (KeyValueDataSource item : this.panel.getChkPaperType().getSelectedItems()) {
                 if (item.getValue().contains(value)) {
                     return true;
                 }
@@ -353,23 +420,393 @@ public class NinteichosaIraiEntry {
         }
     }
 
-    private static int currentTargetIndex(NinteichosaIraiEntryDiv div) {
-        return div.getTxtCurrentIndex().getValue().intValue();
+    /**
+     * 認定調査依頼の主な項目です。
+     */
+    private class NinteichosaRequestContent {
+
+        private final NinteichosaIraiEntryRequestContentDiv panel;
+
+        NinteichosaRequestContent(NinteichosaIraiEntryRequestContentDiv panel) {
+            this.panel = panel;
+        }
+
+        void setTargetInfo(dgNinteichosaIraiList_Row targetInfo) {
+            this.chosaIraiKubun().setSelectedItem(_composeItemValue(targetInfo.get調査依頼区分()));
+            this.chosaIraiDate().setValue(targetInfo.get調査依頼日().getValue());
+            this.chosaKigenDate().setValue(targetInfo.get調査期限日().getValue());
+
+            if (_isNull(panel.getTxtChosaIraiDate().getValue())) {
+                this._setDefault_iraiDateAndKigenDate();
+            }
+        }
+
+        dgNinteichosaIraiList_Row reflect(dgNinteichosaIraiList_Row targetInfo) {
+            targetInfo.set調査依頼区分(this.chosaIraiKubun().getSelectedValue());
+            targetInfo.get調査依頼日().setValue(this.chosaIraiDate().getValue());
+            targetInfo.get調査期限日().setValue(this.chosaKigenDate().getValue());
+            return targetInfo;
+        }
+
+        private void _setDefault_iraiDateAndKigenDate() {
+            FlexibleDate nowDate = FlexibleDate.getNowDate();
+            this.chosaIraiDate().setValue(nowDate);
+            this.chosaKigenDate().setValue(nowDate.plusDay(NUM_OF_DAYS_IN_A_WEEK));
+        }
+
+        private boolean is登録済み() {
+            return !(_isNull(panel.getTxtChosaIraiDate().getValue())
+                    || _isNull(panel.getTxtChosaKigenDate().getValue()));
+        }
+
+        DropDownList chosaIraiKubun() {
+            return panel.getDdlChosaIraiKubun();
+        }
+
+        TextBoxFlexibleDate chosaIraiDate() {
+            return panel.getTxtChosaIraiDate();
+        }
+
+        TextBoxFlexibleDate chosaKigenDate() {
+            return panel.getTxtChosaKigenDate();
+        }
+
+        private RString _composeItemValue(RString value) {
+            return value.equals(RString.EMPTY) ? new RString("1") : value.substring(0, 1);
+        }
+
+        private boolean _isNull(Object obj) {
+            return obj == null;
+        }
+
     }
 
-    private static List<dgNinteichosaIraiList_Row> selectedTargets(NinteichosaIraiListDiv div2) {
-        return div2.getDgNinteichosaIraiList().getSelectedItems();
+    /**
+     * 認定調査の依頼です。
+     */
+    private class NinteichosaRequest {
+
+        private final NinteichosaRequestContent content;
+        private final NinteichosaPaper paper;
+
+        NinteichosaRequest(NinteichosaIraiEntryRequestDiv panel) {
+            this.content = new NinteichosaRequestContent(panel.getNinteichosaIraiEntryRequestContent());
+            this.paper = new NinteichosaPaper(panel.getNinteichosaIraiEntryPaper());
+        }
+
+        void setTargetInfo(dgNinteichosaIraiList_Row targetInfo) {
+            content.setTargetInfo(targetInfo);
+            paper.setTargetInfo(targetInfo);
+        }
+
+        dgNinteichosaIraiList_Row reflect(dgNinteichosaIraiList_Row targetInfo) {
+            return content.reflect(paper.reflect(targetInfo));
+        }
+
+        boolean is依頼書発行済み() {
+            return this.getPapger().is依頼書発行済み();
+        }
+
+        boolean is登録済み() {
+            return this.getContent().is登録済み();
+        }
+
+        NinteichosaRequestContent getContent() {
+            return this.content;
+        }
+
+        NinteichosaPaper getPapger() {
+            return this.paper;
+        }
+
     }
 
-    private static NinteichosaIraiEntryPaperDiv _ninteichosaIraiEntryPaper(NinteichosaIraiEntryDiv div) {
-        return div.getNinteichosaIraiEntryContent().getNinteichosaIraiEntryPaper();
+    /**
+     * 認定調査の督促です。
+     */
+    private static final class NinteichosaTokusoku {
+
+        private enum DataSource_radTokusoku {
+
+            しない("0", "しない"), する("1", "する");
+            private final RString theKey;
+            private final RString theValue;
+
+            private DataSource_radTokusoku(String key, String value) {
+                this.theKey = new RString(key);
+                this.theValue = new RString(value);
+            }
+
+            RString item() {
+                return this.theKey;
+            }
+
+            RString value() {
+                return this.theValue;
+            }
+
+            KeyValueDataSource toKeyValueDataSource() {
+                return new KeyValueDataSource(theKey, theValue);
+            }
+
+            static List<KeyValueDataSource> toList_KeyValueDataSource() {
+                List<KeyValueDataSource> list = new ArrayList<>();
+                for (DataSource_radTokusoku v : values()) {
+                    list.add(v.toKeyValueDataSource());
+                }
+                return list;
+            }
+        }
+
+        private enum TokusokuHoho {
+
+            なし("0"),
+            督促状("1"),
+            FAX("2"),
+            電話("3");
+            private final RString theKey;
+            private final RString theValue;
+
+            private TokusokuHoho(String key) {
+                this.theKey = new RString(key);
+                this.theValue = new RString(key + "：" + name());
+            }
+
+            RString item() {
+                return this.theKey;
+            }
+
+            RString value() {
+                return this.theValue;
+            }
+
+            KeyValueDataSource toKeyValueDataSource() {
+                return new KeyValueDataSource(theKey, theValue);
+            }
+
+            static List<KeyValueDataSource> toList_KeyValueDataSource() {
+                List<KeyValueDataSource> list = new ArrayList<>();
+                for (TokusokuHoho v : values()) {
+                    list.add(v.toKeyValueDataSource());
+                }
+                return list;
+            }
+        }
+        private final NinteichosaIraiEntryTokusokuDiv panel;
+        private final _Content content;
+
+        /**
+         * 新しいNinteichosaTokusokuを生成します。
+         */
+        NinteichosaTokusoku(NinteichosaIraiEntryTokusokuDiv panel) {
+            this.panel = panel;
+            this.content = new _Content(panel.getNinteichosaIraiEntryTokusokuContent());
+        }
+
+        /**
+         * onLoad時の処理です。
+         */
+        void onLoad() {
+            getRadTokusoku().setDataSource(DataSource_radTokusoku.toList_KeyValueDataSource());
+            this.content.getTokusokuHoho().setDataSource(TokusokuHoho.toList_KeyValueDataSource());
+            _init();
+        }
+
+        /**
+         * 画面表示時の初期処理です。
+         */
+        void init() {
+            _init();
+        }
+
+        void _init() {
+            getRadTokusoku().setSelectedItem(DataSource_radTokusoku.しない.item());
+            this.content.getTokusokuHoho().setSelectedItem(TokusokuHoho.なし.item());
+            this.content.setCanEdit(false);
+        }
+
+        /**
+         * 指定の対象者情報から、コントロールの値を初期化します。
+         *
+         * @param targetInfo 対象者情報
+         */
+        void setTargetInfo(dgNinteichosaIraiList_Row targetInfo) {
+            this.content.getTokusokuCount().setValue(targetInfo.get督促回数());
+        }
+
+        private RString _composeKey(RString value) {
+            return value.equals(RString.EMPTY) ? new RString("0") : value.substring(0, 0);
+        }
+
+        /**
+         * 指定の対象者情報に、コントロールの値を反映して返します。
+         *
+         * @param targetInfo 対象者情報
+         * @return コントロールの値を反映した対象者情報
+         */
+        dgNinteichosaIraiList_Row reflect(dgNinteichosaIraiList_Row targetInfo) {
+            return is督促する() ? _reflect(targetInfo) : targetInfo;
+        }
+
+        dgNinteichosaIraiList_Row _reflect(dgNinteichosaIraiList_Row targetInfo) {
+            targetInfo.set督促方法(this.content.getTokusokuHoho().getSelectedValue());
+            targetInfo.set督促回数(this.content.getTokusokuCount().getValue());
+            targetInfo.get督促年月日().setValue(this.content.getTokusokuDate().getValue());
+            if (this.content.is督促方法_督促状()) {
+                targetInfo.get督促発行日().setValue(this.content.getTokusokujoHakkoDate().getValue());
+            } else {
+                targetInfo.get督促発行日().setValue(null);
+            }
+            targetInfo.get督促期限日().setValue(this.content.getTokusokuKigenDate().getValue());
+            return targetInfo;
+        }
+
+        _Content getContent() {
+            return content;
+        }
+
+        private class _Content {
+
+            private final NinteichosaIraiEntryTokusokuContentDiv panel;
+            private final _Pablish pablish;
+
+            /**
+             * 新しい_Contentを生成します。
+             */
+            _Content(NinteichosaIraiEntryTokusokuContentDiv panel) {
+                this.panel = panel;
+                this.pablish = new _Pablish(panel.getNinteichosaIraiEntryTokusokuPublish());
+            }
+
+            DropDownList getTokusokuHoho() {
+                return this.panel.getDdlTokukuHoho();
+            }
+
+            boolean is督促方法_なし() {
+                return TokusokuHoho.なし.item().equals(this.getTokusokuHoho().getSelectedItem());
+            }
+
+            boolean is督促方法_督促状() {
+                return TokusokuHoho.督促状.item().equals(this.getTokusokuHoho().getSelectedItem());
+            }
+
+            TextBox getTokusokuCount() {
+                return this.panel.getTxtTokusokuCount();
+            }
+
+            void setCanEdit(boolean canEdit) {
+                this.panel.setDisabled(!canEdit);
+            }
+
+            TextBoxFlexibleDate getTokusokuDate() {
+                return this.panel.getTxtTokusokuDate();
+            }
+
+            TextBoxFlexibleDate getTokusokujoHakkoDate() {
+                return this.panel
+                        .getNinteichosaIraiEntryTokusokuPublish().getTxtTokusokujoHakkoDate();
+            }
+
+            TextBoxFlexibleDate getTokusokuKigenDate() {
+                return this.panel.getTxtTokusokuKigenDate();
+            }
+
+            _Pablish getPablishPanel() {
+                return this.pablish;
+            }
+
+            class _Pablish {
+
+                private final NinteichosaIraiEntryTokusokuPublishDiv panel;
+
+                _Pablish(NinteichosaIraiEntryTokusokuPublishDiv panel) {
+                    this.panel = panel;
+                }
+
+                void setCanPush_btnToPublishTokusokujo(boolean canPush) {
+                    this.panel.getBtnToPublishTokusokujo().setDisabled(!canPush);
+                }
+
+                void onClick_btnToPublishTokusokujo() {
+                    this.panel.getTxtTokusokujoHakkoDate().setValue(FlexibleDate.getNowDate());
+                }
+            }
+        }
+
+        RadioButton getRadTokusoku() {
+            return panel.getRadTokusoku();
+        }
+
+        void onChange_radTokusoku() {
+            if (is督促する()) {
+                _toBeEditable();
+            } else {
+                _toBeNonEditable();
+            }
+        }
+
+        boolean is督促する() {
+            return DataSource_radTokusoku.する.item().equals(getRadTokusoku().getSelectedItem());
+        }
+
+        private void _toBeEditable() {
+            this.content.setCanEdit(true);
+            if (this.content.is督促方法_なし()) {
+                this.content.getTokusokuHoho().setSelectedItem(TokusokuHoho.督促状.item());
+                this.content.getPablishPanel().setCanPush_btnToPublishTokusokujo(true);
+            }
+            FlexibleDate nowDate = FlexibleDate.getNowDate();
+            this.content.getTokusokuDate().setValue(nowDate);
+            this.content.getTokusokuKigenDate().setValue(nowDate.plusDay(NUM_OF_DAYS_IN_A_WEEK));
+        }
+
+        private void _toBeNonEditable() {
+            this.content.setCanEdit(false);
+        }
+
+        void onChange_ddlTokukuHoho() {
+            if (this.content.is督促方法_督促状()) {
+                this.content.getPablishPanel().setCanPush_btnToPublishTokusokujo(true);
+            } else {
+                this.content.getPablishPanel().setCanPush_btnToPublishTokusokujo(false);
+            }
+        }
+
+        void onClick_btnToPublishTokusokujo() {
+            this.content.getPablishPanel().onClick_btnToPublishTokusokujo();
+        }
+
     }
 
-    private static NinteichosaIraiEntryRequestDiv _ninteichosaIraiEntryRequest(NinteichosaIraiEntryDiv div) {
-        return div.getNinteichosaIraiEntryContent().getNinteichosaIraiEntryRequest();
+    /**
+     * 認定調査の依頼・督促をまとめて扱います。
+     */
+    private class NinteichosaIraiEntryMain {
+
+        private final NinteichosaRequest request;
+        private final NinteichosaTokusoku tokusoku;
+        private final NinteichosaChosain chosain;
+
+        NinteichosaIraiEntryMain(NinteichosaIraiEntryMainDiv panel) {
+            request = new NinteichosaRequest(panel.getNinteichosaIraiEntryRequest());
+            tokusoku = new NinteichosaTokusoku(panel.getNinteichosaIraiEntryTokusoku());
+            chosain = new NinteichosaChosain(panel.getNinteichosaIraiEntryTargetChosain());
+        }
+
+        void setTargetInfo(dgNinteichosaIraiList_Row targetInfo) {
+            chosain.setTargetInfo(targetInfo);
+            request.setTargetInfo(targetInfo);
+            tokusoku.setTargetInfo(targetInfo);
+        }
+
+        private dgNinteichosaIraiList_Row reflect(dgNinteichosaIraiList_Row targetInfo) {
+            targetInfo.set依頼登録済(is依頼登録済み());
+            return chosain.reflect(request.reflect(tokusoku.reflect(targetInfo)));
+        }
+
+        private boolean is依頼登録済み() {
+            return request.is登録済み() && chosain.is登録済み();
+        }
     }
 
-    private static NinteichosaIraiEntryTokusokuDiv _ninteichosaIraiEntryTokusoku(NinteichosaIraiEntryDiv div) {
-        return div.getNinteichosaIraiEntryContent().getNinteichosaIraiEntryTokusoku();
-    }
 }

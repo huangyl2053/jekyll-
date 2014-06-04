@@ -1685,7 +1685,7 @@
      "isGroupBox": false
     },
     {
-     "fieldName": "NinteichosaIraiEntryContent",
+     "fieldName": "NinteichosaIraiEntryMain",
      "items": [
       {
        "fieldName": "NinteichosaIraiEntryTargetChosain",
@@ -2431,7 +2431,7 @@
            "value": "する"
           }
          ],
-         "onChange": "",
+         "onChange": "onChange_radTokusoku",
          "labelLText": "",
          "labelLWidth": "XS",
          "labelLAlign": 2,
@@ -2481,7 +2481,7 @@
            "required": false,
            "onFocus": "",
            "onBlur": "",
-           "onChange": "",
+           "onChange": "onCange_ddlTokukuHoho",
            "labelLText": "督促方法",
            "labelRText": "",
            "labelLWidth": "S",
@@ -2634,7 +2634,7 @@
              "marginLeft": "XS",
              "marginRight": "XS",
              "selectControlID": "btnToPublishTokusokujo",
-             "onClick": "onClick_btnToPublishChohyo",
+             "onClick": "onClick_btnToPublishTokusokujo",
              "text": "督促状を発行する",
              "appearance": 0,
              "imageFileUrl": "",
@@ -2939,14 +2939,14 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "selectControlID": "NinteichosaIraiEntryContent",
+     "selectControlID": "NinteichosaIraiEntryMain",
      "onLoad": "",
      "title": "認定調査依頼",
      "isOpen": true,
      "canOpenAndClose": true,
      "postParameterPanelNames": [
       {
-       "postParameterPanelNames": "NinteichosaIraiEntryContent"
+       "postParameterPanelNames": "NinteichosaIraiEntryMain"
       }
      ],
      "requestSettings": [],
@@ -3109,6 +3109,18 @@
     {
      "eventName": "onClick_btnToCallContinuousEntry",
      "requestUrl": "dbe/db/dbe/NinteichosaIraiEntry/onClick_btnToCallContinuousEntry"
+    },
+    {
+     "eventName": "onChange_radTokusoku",
+     "requestUrl": "dbe/db/dbe/NinteichosaIraiEntry/onChange_radTokusoku"
+    },
+    {
+     "eventName": "onCange_ddlTokukuHoho",
+     "requestUrl": "dbe/db/dbe/NinteichosaIraiEntry/onChange_ddlTokukuHoho"
+    },
+    {
+     "eventName": "onClick_btnToPublishTokusokujo",
+     "requestUrl": "dbe/db/dbe/NinteichosaIraiEntry/onClick_btnToPublishTokusokujo"
     }
    ],
    "hiddenInput": [],
@@ -3190,69 +3202,73 @@
    "visibleDivs": [
     {
      "visibleDiv": "NinteichosaIraiEntry",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "NinteichosaIraiEntryTarget",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "NinteichosaIraiEntryTargetLatestChosain",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
-     "visibleDiv": "NinteichosaIraiEntryContent",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "NinteichosaIraiEntryRequestContent",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "NinteichosaIraiEntryTargetChosain",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "NinteichosaIraiEntryTargetLatestChosain",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "NinteichosaIraiEntryContent",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "NinteichosaIraiEntryRequestContent",
-     "panelState": "visible"
+     "visibleDiv": "NinteichosaIraiEntryMain",
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "NinteichosaIraiEntryTargetChosain",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": "No"
     },
     {
-     "visibleDiv": "ButtonsToOperateNinteichosaIraiEntryContent",
-     "panelState": "visible"
+     "visibleDiv": "NinteichosaIraiEntryRequest",
+     "panelState": "visible",
+     "fixedDiv": "No"
     },
     {
-     "visibleDiv": "NinteichosaIraiEntryTokusokuContent",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "ButtonsForNinteichosaIraiEntry",
-     "panelState": "visible"
+     "visibleDiv": "NinteichosaIraiEntryRequestContent",
+     "panelState": "visible",
+     "fixedDiv": "No"
     },
     {
      "visibleDiv": "NinteichosaIraiEntryPaper",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Panel6",
+     "visibleDiv": "NinteichosaIraiEntryPaperPublish",
      "panelState": "visible",
-     "fixedDiv": "false"
+     "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Panel6",
+     "visibleDiv": "NinteichosaIraiEntryTokusoku",
      "panelState": "visible",
-     "fixedDiv": "false"
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "NinteichosaIraiEntryTokusokuContent",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "NinteichosaIraiEntryTokusokuPublish",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ButtonsToOperateNinteichosaIraiEntryContent",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ButtonsForNinteichosaIraiEntry",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
@@ -3298,7 +3314,7 @@
    "NinteichosaIraiEntryTargetLatestChosain"
   ],
   [
-   "NinteichosaIraiEntryContent"
+   "NinteichosaIraiEntryMain"
   ],
   [
    "NinteichosaIraiEntryTargetChosain"

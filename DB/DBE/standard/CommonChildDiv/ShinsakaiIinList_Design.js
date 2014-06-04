@@ -27,7 +27,7 @@ var DBE;
                     "fieldName": "ShinsakaiIinList",
                     "items": [
                         {
-                            "fieldName": "dgShinsakaiIinList",
+                            "fieldName": "dgShinsakaiIinChildList",
                             "items": [],
                             "controlType": "DataGrid",
                             "width": "L",
@@ -43,6 +43,7 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "selectControlID": "dgShinsakaiIinChildList",
                             "gridSetting": {
                                 "rowHeight": 40,
                                 "isMultiSelectable": false,
@@ -195,7 +196,7 @@ var DBE;
                             "onNoRow": "",
                             "onMultiRows": "",
                             "dataSource": [],
-                            "sortOrder": "",
+                            "sortOrder": "gender",
                             "isAscending": true,
                             "filterList": [],
                             "activeRowId": -1
@@ -215,6 +216,7 @@ var DBE;
                     "authorityMode": 0,
                     "marginLeft": "XS",
                     "marginRight": "XS",
+                    "selectControlID": "ShinsakaiIinList",
                     "onLoad": "",
                     "title": "審査会委員一覧",
                     "marginTop": "Default",
@@ -242,6 +244,7 @@ var DBE;
                     "eraseBorderLeft": false,
                     "backgroundColor": 0,
                     "widthAuto": true,
+                    "panelDisplay": 0,
                     "isGroupBox": false
                 }
             ],
@@ -259,6 +262,7 @@ var DBE;
             "authorityMode": 0,
             "marginLeft": 0,
             "marginRight": 0,
+            "selectControlID": "defaultLayout",
             "relation": [],
             "businessId": "DBE",
             "controlName": "ShinsakaiIinList",

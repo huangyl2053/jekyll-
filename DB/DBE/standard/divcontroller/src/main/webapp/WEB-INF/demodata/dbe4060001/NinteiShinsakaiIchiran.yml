@@ -1,0 +1,26 @@
+## YAML Template.
+---
+
+-   yoteibi: "平26.07.07"
+    kaishiJikan: "18:00"
+    shuryoJikan: "19:00"
+    gogitaiNo: "01"
+    gogitaiMeisho: "介護認定審査会場０１"
+    yoteiTeiin: "30"
+    wariateNinzu: "25"
+
+-   yoteibi: "平26.07.04"
+    kaishiJikan: "19:00"
+    shuryoJikan: "20:00"
+    gogitaiNo: "05"
+    gogitaiMeisho: "介護認定審査会場０５"
+    yoteiTeiin: "28"
+    wariateNinzu: "27"
+
+-   yoteibi: "平26.07.03"
+    kaishiJikan: "20:00"
+    shuryoJikan: "21:00"
+    gogitaiNo: "04"
+    gogitaiMeisho: "介護認定審査会場０４"
+    yoteiTeiin: "26"
+    wariateNinzu: "25"
