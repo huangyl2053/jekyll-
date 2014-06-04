@@ -99,15 +99,15 @@
          "marginRight": "XS",
          "selectControlID": "comChosainList",
          "relation": [],
-         "businessId": "DBE",
-         "controlName": "ShozokuChosainListCom",
          "height": "120",
          "onSort": "",
          "onSelect": "",
          "onSelectByDblClick": "bind_SelectedChosain",
          "onOnlyRow": "",
          "onNoRow": "",
-         "onMultiRows": ""
+         "onMultiRows": "",
+         "businessId": "DBE",
+         "controlName": "ShozokuChosainListCom"
         },
         {
          "fieldName": "comChosainListAll",
@@ -128,15 +128,15 @@
          "marginRight": "XS",
          "selectControlID": "comChosainListAll",
          "relation": [],
-         "businessId": "DBE",
-         "controlName": "ShozokuChosainListCom",
          "height": "10",
          "onSort": "",
          "onSelect": "",
          "onSelectByDblClick": "",
          "onOnlyRow": "",
          "onNoRow": "",
-         "onMultiRows": ""
+         "onMultiRows": "",
+         "businessId": "DBE",
+         "controlName": "ShozokuChosainListCom"
         }
        ],
        "controlType": "Panel",
@@ -270,13 +270,6 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "dgChosaItakusakiList",
-         "height": "165",
-         "onSort": "",
-         "onSelect": "onSelect_dgChosaItakusakiList",
-         "onSelectByDblClick": "",
-         "onOnlyRow": "",
-         "onNoRow": "",
-         "onMultiRows": "",
          "gridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
@@ -287,7 +280,7 @@
           "header": {
            "combineColumns": [],
            "frozenColumn": "",
-           "headerHeight": 1
+           "headerHeight": 0
           },
           "columns": [
            {
@@ -323,7 +316,7 @@
             "sortKey": "chosaItakusakiName"
            },
            {
-            "columnName": "割付<br>定員",
+            "columnName": "定員",
             "dataName": "waritsukeTeiin",
             "toolTip": "",
             "bgColor": 0,
@@ -339,7 +332,7 @@
             "sortKey": "waritsukeTeiin"
            },
            {
-            "columnName": "割付<br>人数",
+            "columnName": "割付数",
             "dataName": "waritsukeNum",
             "toolTip": "",
             "bgColor": 0,
@@ -355,7 +348,7 @@
             "sortKey": "waritsukeNum"
            },
            {
-            "columnName": "割付<br>地区",
+            "columnName": "割付地区",
             "dataName": "waritsukeChiku",
             "toolTip": "",
             "bgColor": 0,
@@ -372,6 +365,13 @@
            }
           ]
          },
+         "height": "165",
+         "onSort": "",
+         "onSelect": "onSelect_dgChosaItakusakiList",
+         "onSelectByDblClick": "",
+         "onOnlyRow": "",
+         "onNoRow": "",
+         "onMultiRows": "",
          "dataSource": [],
          "sortOrder": "waritsukeNum",
          "isAscending": true,
@@ -499,23 +499,23 @@
            "value": "3：再調査"
           }
          ],
-         "onChange": "",
-         "selectedItem": "1",
          "required": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
          "labelLText": "依頼区分",
          "labelRText": "",
          "labelLWidth": "S",
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "onFocus": "",
-         "onBlur": ""
+         "selectedItem": "1"
         },
         {
          "fieldName": "txtChosaIraiDate",
          "items": [],
          "controlType": "TextBoxFlexibleDate",
-         "width": "75",
+         "width": "80",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -530,30 +530,31 @@
          "marginRight": "XS",
          "selectControlID": "txtChosaIraiDate_core",
          "text": "",
-         "onChange": "",
          "required": false,
+         "readOnly": false,
+         "placeHolder": "",
+         "isPrivateInfo": false,
+         "isPassword": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
+         "onKeyPress": "",
+         "value": "",
          "labelLText": "調査依頼日",
          "labelRText": "",
          "labelLWidth": "S",
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "onFocus": "",
-         "onBlur": "",
-         "readOnly": false,
-         "placeHolder": "",
-         "isPrivateInfo": false,
-         "isPassword": false,
-         "onKeyPress": "",
+         "permitCharactor": "./_-",
          "ymdKubun": 2,
-         "displayFormat": 0,
-         "value": ""
+         "displayFormat": 0
         },
         {
          "fieldName": "txtChosaKigenDate",
          "items": [],
          "controlType": "TextBoxFlexibleDate",
-         "width": "75",
+         "width": "80",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -568,24 +569,25 @@
          "marginRight": "XS",
          "selectControlID": "txtChosaKigenDate_core",
          "text": "",
-         "onChange": "",
          "required": false,
+         "readOnly": false,
+         "placeHolder": "",
+         "isPrivateInfo": false,
+         "isPassword": false,
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
+         "onKeyPress": "",
+         "value": "",
          "labelLText": "調査期限日",
          "labelRText": "",
          "labelLWidth": "S",
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "onFocus": "",
-         "onBlur": "",
-         "readOnly": false,
-         "placeHolder": "",
-         "isPrivateInfo": false,
-         "isPassword": false,
-         "onKeyPress": "",
+         "permitCharactor": "./_-",
          "ymdKubun": 2,
-         "displayFormat": 0,
-         "value": ""
+         "displayFormat": 0
         }
        ],
        "controlType": "Panel",
@@ -647,15 +649,6 @@
        "marginRight": "XS",
        "selectControlID": "comWaritukezumiList",
        "relation": [],
-       "businessId": "DBE",
-       "controlName": "NinteichosaIraiListForByHandCom",
-       "height": "190",
-       "onSort": "",
-       "onSelect": "",
-       "onSelectByDblClick": "",
-       "onOnlyRow": "",
-       "onNoRow": "",
-       "onMultiRows": "",
        "gridSetting": {
         "rowHeight": 40,
         "isMultiSelectable": false,
@@ -1234,7 +1227,16 @@
           "sortKey": "nyushoShisetsu"
          }
         ]
-       }
+       },
+       "height": "190",
+       "onSort": "",
+       "onSelect": "",
+       "onSelectByDblClick": "",
+       "onOnlyRow": "",
+       "onNoRow": "",
+       "onMultiRows": "",
+       "businessId": "DBE",
+       "controlName": "NinteichosaIraiListForByHandCom"
       },
       {
        "fieldName": "ButtonsForBinding",
@@ -1351,15 +1353,6 @@
        "marginRight": "XS",
        "selectControlID": "comMiwarituskeList",
        "relation": [],
-       "businessId": "DBE",
-       "controlName": "NinteichosaIraiListForByHandCom",
-       "height": "190",
-       "onSort": "",
-       "onSelect": "",
-       "onSelectByDblClick": "",
-       "onOnlyRow": "",
-       "onNoRow": "",
-       "onMultiRows": "",
        "gridSetting": {
         "rowHeight": 40,
         "isMultiSelectable": false,
@@ -1938,7 +1931,16 @@
           "sortKey": "nyushoShisetsu"
          }
         ]
-       }
+       },
+       "height": "190",
+       "onSort": "",
+       "onSelect": "",
+       "onSelectByDblClick": "",
+       "onOnlyRow": "",
+       "onNoRow": "",
+       "onMultiRows": "",
+       "businessId": "DBE",
+       "controlName": "NinteichosaIraiListForByHandCom"
       },
       {
        "fieldName": "comNinteichosaIraiListGod",
@@ -1959,15 +1961,6 @@
        "marginRight": "XS",
        "selectControlID": "comNinteichosaIraiListGod",
        "relation": [],
-       "businessId": "DBE",
-       "controlName": "NinteichosaIraiListForByHandCom",
-       "height": "10",
-       "onSort": "",
-       "onSelect": "",
-       "onSelectByDblClick": "",
-       "onOnlyRow": "",
-       "onNoRow": "",
-       "onMultiRows": "",
        "gridSetting": {
         "rowHeight": 40,
         "isMultiSelectable": false,
@@ -2546,7 +2539,16 @@
           "sortKey": "nyushoShisetsu"
          }
         ]
-       }
+       },
+       "height": "10",
+       "onSort": "",
+       "onSelect": "",
+       "onSelectByDblClick": "",
+       "onOnlyRow": "",
+       "onNoRow": "",
+       "onMultiRows": "",
+       "businessId": "DBE",
+       "controlName": "NinteichosaIraiListForByHandCom"
       }
      ],
      "controlType": "Panel",

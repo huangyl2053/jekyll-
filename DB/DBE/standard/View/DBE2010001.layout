@@ -666,12 +666,12 @@
         "dataName": "督促方法",
         "toolTip": "",
         "bgColor": 0,
-        "width": 0,
-        "visible": false,
+        "width": 100,
+        "visible": true,
         "cellType": 0,
         "cellDetails": null,
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": "督促方法"
        },
@@ -1949,7 +1949,7 @@
            "width": "120",
            "visible": true,
            "displayNone": false,
-           "disabled": false,
+           "disabled": true,
            "accessKey": "",
            "nextFocusFieldName": "",
            "wrap": false,
@@ -1975,7 +1975,7 @@
              "value": "3：再調査"
             }
            ],
-           "required": true,
+           "required": false,
            "onFocus": "",
            "onBlur": "",
            "onChange": "",
@@ -3286,7 +3286,7 @@
    ]
   }
  ],
- "currentState": "top",
+ "currentState": "All",
  "id": "DBE2010001",
  "WFParameter": [],
  "UIContainerEventMapping": [

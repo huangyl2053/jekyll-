@@ -83,18 +83,18 @@ public class NinteichosaIraiEntry {
 
     private void init(NinteichosaIraiEntryDiv panel, List<dgNinteichosaIraiList_Row> selectedTargets) {
         NinteichosaIraiList.NinteichosaIraiListHolder.saveNinteichosaIraiList(selectedTargets);
-        this.setCurrentTargetIndex(panel, 0);
-        this.setUpPanelFromTargets(panel, selectedTargets);
-        this.init_Tokusoku(panel);
+        setCurrentTargetIndex(panel, 0);
+        setUpPanelFromTargets(panel, selectedTargets);
     }
 
-    private void init_Tokusoku(NinteichosaIraiEntryDiv panel) {
+    private void setUpTokusoku(NinteichosaIraiEntryDiv panel) {
         new NinteichosaTokusoku(panel.getNinteichosaIraiEntryMain().getNinteichosaIraiEntryTokusoku()).init();
     }
 
     private void setUpPanelFromTargets(NinteichosaIraiEntryDiv panel, List<dgNinteichosaIraiList_Row> targets) {
         setNewTitle(panel, targets);
         setUpPanelFromTargetInfo(panel, currentTarget(panel, targets));
+        setUpTokusoku(panel);
         stateChange_btnToCallNext(panel, targets);
     }
 
