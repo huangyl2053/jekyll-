@@ -142,7 +142,7 @@ public class ShokanShikyuTorokuShinseisho {
         HashMap source = getShokanShikyuTorokuShinseishoYamlId(1);
         infoDiv.getTxtShinseiShinseiYMD().setValue(new RDate(source.get("申請日").toString()));
         infoDiv.getTxtShinseiUketsukeYMD().setValue(new RDate(source.get("受付日").toString()));
-        infoDiv.getRadShinseiShinseiKubun().setSelectedItem(new RString(source.get("申請書区分").toString()));
+        infoDiv.getRadShinseiShinseiKubun().setSelectedItem(new RString(source.get("申請者区分key").toString()));
 //      南魚沼市デモでは証記載保険者は表示しない
 //        infoDiv.getTxtShinseiShokisai().setValue(new RString(source.get("証記載保険者").toString()));
         infoDiv.getTxtShinseiName().setValue(new RString(source.get("氏名").toString()));

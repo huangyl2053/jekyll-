@@ -1709,7 +1709,7 @@
            "fieldName": "txtShinseiKinyuKikanCode",
            "items": [],
            "controlType": "TextBoxCode",
-           "width": "65",
+           "width": "40",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -1747,13 +1747,13 @@
            "isComboBox": false,
            "suggest": [],
            "permitCharactor": "",
-           "formatLength": 8
+           "formatLength": "4"
           },
           {
            "fieldName": "txtShinseiShitenCode",
            "items": [],
            "controlType": "TextBoxCode",
-           "width": "80",
+           "width": "35",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -1791,7 +1791,7 @@
            "isComboBox": false,
            "suggest": [],
            "permitCharactor": "",
-           "formatLength": 8
+           "formatLength": "3"
           },
           {
            "fieldName": "txtShinseiKozaShubetsu",
@@ -1871,7 +1871,7 @@
            "labelLAlign": 2,
            "labelRAlign": 0,
            "value": "",
-           "maxLength": 100000000,
+           "maxLength": "7",
            "minLength": 0,
            "textAlign": 2,
            "textKind": 2,
@@ -2478,7 +2478,7 @@
       "ShokanShikyuTorokuShomeishoInfo"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "ShokanShikyuTorokuShinseiInfo",
+     "selectedItemFieldName": "ShokanShikyuTorokuKozaInfo",
      "initialTab": 0
     }
    ],
