@@ -23,7 +23,7 @@
      "marginRight": "XS",
      "selectControlID": "ddlHokensha_core",
      "onChange": "",
-     "selectedItem": "",
+     "selectedItem": "key0",
      "dataSource": [
       {
        "key": "key0",
@@ -48,7 +48,7 @@
      "fieldName": "radSearchKubun",
      "items": [],
      "controlType": "RadioButton",
-     "width": "635",
+     "width": "800",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -63,7 +63,7 @@
      "marginRight": "XS",
      "selectControlID": "radSearchKubun_core",
      "onChange": "",
-     "selectedItem": "hihokenshaShitei",
+     "selectedItem": null,
      "dataSource": [
       {
        "key": "hihokenshaShitei",
@@ -79,7 +79,8 @@
      "labelLAlign": 2,
      "onClick": "",
      "newLineItemNumber": 2,
-     "spaceSize": "235"
+     "spaceSize": "210",
+     "icon": []
     },
     {
      "fieldName": "SearchHihokensha",
@@ -102,6 +103,7 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtHihoNo_core",
+       "readOnly": false,
        "onChange": "",
        "required": false,
        "labelLText": "被保番号",
@@ -115,7 +117,6 @@
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": false,
        "placeHolder": "",
        "textKind": 2,
        "isPrivateInfo": false,
@@ -147,12 +148,12 @@
        "marginRight": "XS",
        "selectControlID": "btnSearchHihokensha",
        "onClick": "",
+       "icon": 0,
        "text": "ButtonDialog1",
        "appearance": 2,
        "imageFileUrl": "/uz/uza/css/Link.jpg",
        "imageWidth": "20",
        "imageHeight": "20",
-       "icon": 0,
        "displayChildDivName": "",
        "dataPassing": [],
        "visibleCloseButton": true,
@@ -163,7 +164,7 @@
        "fieldName": "txtHihoName",
        "items": [],
        "controlType": "TextBox",
-       "width": "M",
+       "width": "200",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -177,6 +178,7 @@
        "marginLeft": "-0.2",
        "marginRight": "XS",
        "selectControlID": "txtHihoName_core",
+       "readOnly": false,
        "onChange": "",
        "required": false,
        "labelLText": "",
@@ -190,7 +192,6 @@
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": false,
        "placeHolder": "",
        "textKind": 0,
        "isPrivateInfo": false,
@@ -220,6 +221,7 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtTeikyoYMRange_core",
+       "readOnly": false,
        "onChange": "",
        "labelLText": "提供年月",
        "labelRText": "",
@@ -229,7 +231,6 @@
        "labelRAlign": 0,
        "onFocus": "",
        "onBlur": "",
-       "readOnly": false,
        "isPrivateInfo": false,
        "isPassword": false,
        "onKeyPress": "",
@@ -265,6 +266,7 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtShinseiYMRange_core",
+       "readOnly": false,
        "onChange": "",
        "labelLText": "申請年月",
        "labelRText": "",
@@ -274,7 +276,6 @@
        "labelRAlign": 0,
        "onFocus": "",
        "onBlur": "",
-       "readOnly": false,
        "isPrivateInfo": false,
        "isPassword": false,
        "onKeyPress": "",
@@ -310,6 +311,7 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtKetteiYMRange_core",
+       "readOnly": false,
        "onChange": "",
        "labelLText": "決定年月",
        "labelRText": "",
@@ -319,7 +321,6 @@
        "labelRAlign": 0,
        "onFocus": "",
        "onBlur": "",
-       "readOnly": false,
        "isPrivateInfo": false,
        "isPassword": false,
        "onKeyPress": "",
@@ -376,7 +377,8 @@
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
-     "isGroupBox": false
+     "isGroupBox": false,
+     "readOnly": false
     },
     {
      "fieldName": "SearchYM",
@@ -399,6 +401,7 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtTeikyoYM_core",
+       "readOnly": false,
        "onChange": "",
        "required": false,
        "labelLText": "提供年月",
@@ -409,7 +412,6 @@
        "labelRAlign": 0,
        "onFocus": "",
        "onBlur": "",
-       "readOnly": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
@@ -438,6 +440,7 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtShinseiYM_core",
+       "readOnly": false,
        "onChange": "",
        "required": false,
        "labelLText": "申請年月",
@@ -448,7 +451,6 @@
        "labelRAlign": 0,
        "onFocus": "",
        "onBlur": "",
-       "readOnly": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
@@ -477,6 +479,7 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtKetteiYM_core",
+       "readOnly": false,
        "onChange": "",
        "required": false,
        "labelLText": "決定年月",
@@ -487,7 +490,6 @@
        "labelRAlign": 0,
        "onFocus": "",
        "onBlur": "",
-       "readOnly": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
@@ -537,7 +539,8 @@
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
-     "isGroupBox": false
+     "isGroupBox": false,
+     "readOnly": false
     },
     {
      "fieldName": "btnClear",
@@ -558,12 +561,12 @@
      "marginRight": "XS",
      "selectControlID": "btnClear",
      "onClick": "onClick_btnClear",
+     "icon": 0,
      "text": "条件をクリアする",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0
+     "imageHeight": ""
     },
     {
      "fieldName": "btnSearch",
@@ -584,12 +587,12 @@
      "marginRight": "XS",
      "selectControlID": "btnSearch",
      "onClick": "onClick_btnSearch",
+     "icon": 0,
      "text": "該当者を検索する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0
+     "imageHeight": ""
     },
     {
      "fieldName": "btnKari",
@@ -610,12 +613,12 @@
      "marginRight": "XS",
      "selectControlID": "btnKari",
      "onClick": "onClick_btnKari",
+     "icon": 0,
      "text": "仮ボタン",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0
+     "imageHeight": ""
     }
    ],
    "controlType": "Panel",
@@ -665,7 +668,8 @@
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
-   "isGroupBox": false
+   "isGroupBox": false,
+   "readOnly": false
   },
   {
    "fieldName": "KogakuServicehiListPanel",
@@ -910,6 +914,9 @@
      "onSort": "",
      "onSelect": "",
      "onSelectByDblClick": "",
+     "onSelectBySelectButton": "",
+     "onSelectByModifyButton": "",
+     "onSelectByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -966,7 +973,8 @@
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
-   "isGroupBox": false
+   "isGroupBox": false,
+   "readOnly": false
   },
   {
    "fieldName": "KogakuServicehiInfoPanel",
@@ -1018,6 +1026,7 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtHihokenshaNo_core",
+         "readOnly": true,
          "onChange": "",
          "required": false,
          "labelLText": "",
@@ -1031,7 +1040,6 @@
          "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
-         "readOnly": true,
          "placeHolder": "",
          "textKind": 2,
          "isPrivateInfo": false,
@@ -1085,6 +1093,7 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtTsuchishoNo_core",
+         "readOnly": true,
          "onChange": "",
          "required": false,
          "labelLText": "",
@@ -1098,7 +1107,6 @@
          "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
-         "readOnly": true,
          "placeHolder": "",
          "textKind": 2,
          "isPrivateInfo": false,
@@ -1152,6 +1160,7 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtShikakuShutokuYMD_core",
+         "readOnly": true,
          "onChange": "",
          "required": false,
          "labelLText": "",
@@ -1165,7 +1174,6 @@
          "maxLength": 1.7976931348623157e+308,
          "minLength": 0,
          "textAlign": 0,
-         "readOnly": true,
          "placeHolder": "",
          "textKind": 0,
          "isPrivateInfo": false,
@@ -1197,6 +1205,7 @@
          "marginLeft": "5.2",
          "marginRight": "0",
          "selectControlID": "txtChoshuHoho_core",
+         "readOnly": true,
          "onChange": "",
          "required": false,
          "labelLText": "",
@@ -1210,7 +1219,6 @@
          "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
-         "readOnly": true,
          "placeHolder": "",
          "textKind": 0,
          "isPrivateInfo": false,
@@ -1263,6 +1271,7 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtKyuHihokenshaNo_core",
+         "readOnly": true,
          "onChange": "",
          "required": false,
          "labelLText": "",
@@ -1276,7 +1285,6 @@
          "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
-         "readOnly": true,
          "placeHolder": "",
          "textKind": 2,
          "isPrivateInfo": false,
@@ -1330,6 +1338,7 @@
          "marginLeft": "XS",
          "marginRight": "0",
          "selectControlID": "txtKyuShichosonCode_core",
+         "readOnly": true,
          "onChange": "",
          "required": false,
          "labelLText": "",
@@ -1343,7 +1352,6 @@
          "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
-         "readOnly": true,
          "placeHolder": "",
          "textKind": 2,
          "isPrivateInfo": false,
@@ -1374,6 +1382,7 @@
          "marginLeft": ".2",
          "marginRight": "XS",
          "selectControlID": "txtKyuShichosonName_core",
+         "readOnly": true,
          "onChange": "",
          "required": false,
          "labelLText": "",
@@ -1387,7 +1396,6 @@
          "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
-         "readOnly": true,
          "placeHolder": "",
          "textKind": 0,
          "isPrivateInfo": false,
@@ -1440,6 +1448,7 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtShikakuSoshitsuYMD_core",
+         "readOnly": true,
          "onChange": "",
          "required": false,
          "labelLText": "",
@@ -1453,7 +1462,6 @@
          "maxLength": 1.7976931348623157e+308,
          "minLength": 0,
          "textAlign": 0,
-         "readOnly": true,
          "placeHolder": "",
          "textKind": 0,
          "isPrivateInfo": false,
@@ -1508,6 +1516,7 @@
          "marginLeft": "XS",
          "marginRight": "0",
          "selectControlID": "txtShotokuDankai_core",
+         "readOnly": true,
          "onChange": "",
          "required": false,
          "labelLText": "",
@@ -1521,7 +1530,6 @@
          "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
-         "readOnly": true,
          "placeHolder": "",
          "textKind": 0,
          "isPrivateInfo": false,
@@ -1600,7 +1608,8 @@
        "backgroundColor": 0,
        "widthAuto": false,
        "panelDisplay": 0,
-       "isGroupBox": false
+       "isGroupBox": false,
+       "readOnly": false
       }
      ],
      "controlType": "Panel",
@@ -1647,7 +1656,8 @@
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
-     "isGroupBox": false
+     "isGroupBox": false,
+     "readOnly": false
     },
     {
      "fieldName": "hl2",
@@ -1711,6 +1721,7 @@
        "marginLeft": "XS",
        "marginRight": "0",
        "selectControlID": "txtNushiShikibetsuCode_core",
+       "readOnly": true,
        "onChange": "",
        "required": false,
        "labelLText": "",
@@ -1724,7 +1735,6 @@
        "maxLength": "15",
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": true,
        "placeHolder": "",
        "textKind": 2,
        "isPrivateInfo": false,
@@ -1755,6 +1765,7 @@
        "marginLeft": ".2",
        "marginRight": "XS",
        "selectControlID": "txtNushiName_core",
+       "readOnly": true,
        "onChange": "",
        "required": false,
        "labelLText": "",
@@ -1768,7 +1779,6 @@
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": true,
        "placeHolder": "",
        "textKind": 0,
        "isPrivateInfo": false,
@@ -1821,6 +1831,7 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtNushiSetaiCode_core",
+       "readOnly": true,
        "onChange": "",
        "required": false,
        "labelLText": "",
@@ -1834,7 +1845,6 @@
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": true,
        "placeHolder": "",
        "textKind": 2,
        "isPrivateInfo": false,
@@ -1888,6 +1898,7 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtNushiGyoseiku_core",
+       "readOnly": true,
        "onChange": "",
        "required": false,
        "labelLText": "",
@@ -1901,7 +1912,6 @@
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": true,
        "placeHolder": "",
        "textKind": 0,
        "isPrivateInfo": false,
@@ -1954,6 +1964,7 @@
        "marginLeft": "XS",
        "marginRight": "0",
        "selectControlID": "txtNushiYubinNo_core",
+       "readOnly": true,
        "onChange": "",
        "required": false,
        "labelLText": "",
@@ -1967,7 +1978,6 @@
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": true,
        "placeHolder": "",
        "textKind": 2,
        "isPrivateInfo": false,
@@ -1997,6 +2007,7 @@
        "marginLeft": ".2",
        "marginRight": "XS",
        "selectControlID": "txtNushiJusho_core",
+       "readOnly": true,
        "onChange": "",
        "required": false,
        "labelLText": "",
@@ -2010,7 +2021,6 @@
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": true,
        "placeHolder": "",
        "textKind": 0,
        "isPrivateInfo": false,
@@ -2147,7 +2157,8 @@
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
-     "isGroupBox": false
+     "isGroupBox": false,
+     "readOnly": false
     },
     {
      "fieldName": "btnShowSeteiJoho",
@@ -2168,12 +2179,12 @@
      "marginRight": "XS",
      "selectControlID": "btnShowSeteiJoho",
      "onClick": "btnShowSeteiJoho",
+     "icon": 0,
      "text": "世帯情報を表示する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0
+     "imageHeight": ""
     },
     {
      "fieldName": "btnShowTwo",
@@ -2194,12 +2205,12 @@
      "marginRight": "XS",
      "selectControlID": "btnShowTwo",
      "onClick": "onClick_btnShowTwo",
+     "icon": 0,
      "text": "並べて照会する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0
+     "imageHeight": ""
     },
     {
      "fieldName": "KogakuServiceDetail",
@@ -2275,7 +2286,8 @@
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
-   "isGroupBox": false
+   "isGroupBox": false,
+   "readOnly": false
   },
   {
    "fieldName": "KanshoTsuchiHakkoPanel",
@@ -2298,6 +2310,7 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtHakkoDate_core",
+     "readOnly": false,
      "onChange": "",
      "required": false,
      "labelLText": "発行日",
@@ -2308,7 +2321,6 @@
      "labelRAlign": 0,
      "onFocus": "",
      "onBlur": "",
-     "readOnly": false,
      "placeHolder": "",
      "isPrivateInfo": false,
      "isPassword": false,
@@ -2338,12 +2350,12 @@
      "marginRight": "XS",
      "selectControlID": "btnHakko",
      "onClick": "onClick_btnPublish",
+     "icon": 0,
      "text": "勧奨通知を発行する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0
+     "imageHeight": ""
     }
    ],
    "controlType": "Panel",
@@ -2384,7 +2396,8 @@
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
-   "isGroupBox": false
+   "isGroupBox": false,
+   "readOnly": false
   },
   {
    "fieldName": "CommonButton",
@@ -2408,12 +2421,12 @@
      "marginRight": "XS",
      "selectControlID": "btnReturn",
      "onClick": "onClick_ToSearchPanel",
+     "icon": 0,
      "text": "一覧に戻る",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0
+     "imageHeight": ""
     }
    ],
    "controlType": "Panel",
@@ -2454,7 +2467,8 @@
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
-   "isGroupBox": false
+   "isGroupBox": false,
+   "readOnly": false
   },
   {
    "fieldName": "ShowResultTwo",
@@ -2477,6 +2491,7 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtTeikyoYMShowTwo_core",
+     "readOnly": false,
      "onChange": "",
      "required": false,
      "labelLText": "提供年月",
@@ -2487,7 +2502,6 @@
      "labelRAlign": 0,
      "onFocus": "",
      "onBlur": "",
-     "readOnly": false,
      "placeHolder": "",
      "isPrivateInfo": false,
      "isPassword": false,
@@ -2516,6 +2530,7 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtSetaiShuyakuNo_core",
+     "readOnly": false,
      "onChange": "",
      "required": false,
      "labelLText": "世帯集約番号",
@@ -2529,7 +2544,6 @@
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
-     "readOnly": false,
      "placeHolder": "",
      "textKind": 2,
      "isPrivateInfo": false,
@@ -2578,6 +2592,7 @@
      "marginLeft": "XS",
      "marginRight": "0",
      "selectControlID": "txtHihoNoL_core",
+     "readOnly": false,
      "onChange": "",
      "required": false,
      "labelLText": "氏名",
@@ -2591,7 +2606,6 @@
      "maxLength": "15",
      "minLength": 0,
      "textAlign": 0,
-     "readOnly": false,
      "placeHolder": "",
      "textKind": 2,
      "isPrivateInfo": false,
@@ -2622,6 +2636,7 @@
      "marginLeft": ".2",
      "marginRight": "XS",
      "selectControlID": "txtHihoNameR_core",
+     "readOnly": false,
      "onChange": "",
      "required": false,
      "labelLText": "",
@@ -2635,7 +2650,6 @@
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
-     "readOnly": false,
      "placeHolder": "",
      "textKind": 0,
      "isPrivateInfo": false,
@@ -2665,6 +2679,7 @@
      "marginLeft": "12",
      "marginRight": "0",
      "selectControlID": "txtHihoNoR_core",
+     "readOnly": false,
      "onChange": "",
      "required": false,
      "labelLText": "氏名",
@@ -2678,7 +2693,6 @@
      "maxLength": "15",
      "minLength": 0,
      "textAlign": 0,
-     "readOnly": false,
      "placeHolder": "",
      "textKind": 2,
      "isPrivateInfo": false,
@@ -2709,6 +2723,7 @@
      "marginLeft": ".2",
      "marginRight": "XS",
      "selectControlID": "txtHihoNameL_core",
+     "readOnly": false,
      "onChange": "",
      "required": false,
      "labelLText": "",
@@ -2722,7 +2737,6 @@
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
-     "readOnly": false,
      "placeHolder": "",
      "textKind": 0,
      "isPrivateInfo": false,
@@ -2883,6 +2897,9 @@
        "onSort": "",
        "onSelect": "",
        "onSelectByDblClick": "",
+       "onSelectBySelectButton": "",
+       "onSelectByModifyButton": "",
+       "onSelectByDeleteButton": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
@@ -2909,6 +2926,7 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtBikoL_core",
+       "readOnly": false,
        "onChange": "",
        "required": false,
        "labelLText": "備考",
@@ -2922,7 +2940,6 @@
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": false,
        "placeHolder": "",
        "textKind": 0,
        "isPrivateInfo": false,
@@ -2952,6 +2969,7 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtUketsukeDateL_core",
+       "readOnly": false,
        "onChange": "",
        "required": false,
        "labelLText": "受付日",
@@ -2962,7 +2980,6 @@
        "labelRAlign": 0,
        "onFocus": "",
        "onBlur": "",
-       "readOnly": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
@@ -2991,6 +3008,7 @@
        "marginLeft": "8",
        "marginRight": "XS",
        "selectControlID": "txtKetteiDateL_core",
+       "readOnly": false,
        "onChange": "",
        "required": false,
        "labelLText": "決定日",
@@ -3001,7 +3019,6 @@
        "labelRAlign": 0,
        "onFocus": "",
        "onBlur": "",
-       "readOnly": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
@@ -3031,7 +3048,7 @@
        "marginRight": "XS",
        "selectControlID": "radShinsaMethodL_core",
        "onChange": "",
-       "selectedItem": "",
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "key0",
@@ -3047,7 +3064,8 @@
        "labelLAlign": 2,
        "onClick": "",
        "newLineItemNumber": 2,
-       "spaceSize": "M"
+       "spaceSize": "M",
+       "icon": []
       },
       {
        "fieldName": "txtShiharaiAmountL",
@@ -3067,6 +3085,7 @@
        "marginLeft": "1.6",
        "marginRight": "XS",
        "selectControlID": "txtShiharaiAmountL_core",
+       "readOnly": false,
        "onChange": "",
        "required": false,
        "labelLText": "本人支払額",
@@ -3080,7 +3099,6 @@
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 2,
-       "readOnly": false,
        "placeHolder": "",
        "textKind": 2,
        "isPrivateInfo": false,
@@ -3116,7 +3134,7 @@
        "marginRight": "XS",
        "selectControlID": "radShikyuKubunL_core",
        "onChange": "",
-       "selectedItem": "",
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "key0",
@@ -3132,7 +3150,8 @@
        "labelLAlign": 2,
        "onClick": "",
        "newLineItemNumber": 2,
-       "spaceSize": "M"
+       "spaceSize": "M",
+       "icon": []
       },
       {
        "fieldName": "txtShikyuAmountL",
@@ -3152,6 +3171,7 @@
        "marginLeft": "2.4",
        "marginRight": "XS",
        "selectControlID": "txtShikyuAmountL_core",
+       "readOnly": false,
        "onChange": "",
        "required": false,
        "labelLText": "支給金額",
@@ -3165,7 +3185,6 @@
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 2,
-       "readOnly": false,
        "placeHolder": "",
        "textKind": 2,
        "isPrivateInfo": false,
@@ -3200,6 +3219,7 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtFushikyuRiyuL_text_area",
+       "readOnly": false,
        "onChange": "",
        "required": false,
        "labelLText": "不支給理由",
@@ -3212,7 +3232,6 @@
        "onBlur": "",
        "maxLength": 100000000,
        "minLength": 0,
-       "readOnly": false,
        "placeHolder": "",
        "textKind": 0,
        "isPrivateInfo": false,
@@ -3242,7 +3261,7 @@
        "marginRight": "XS",
        "selectControlID": "radKogakuAutoShokanL_core",
        "onChange": "",
-       "selectedItem": "",
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "key0",
@@ -3258,7 +3277,8 @@
        "labelLAlign": 2,
        "onClick": "",
        "newLineItemNumber": 2,
-       "spaceSize": "S"
+       "spaceSize": "S",
+       "icon": []
       }
      ],
      "controlType": "Panel",
@@ -3299,7 +3319,8 @@
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 1,
-     "isGroupBox": false
+     "isGroupBox": false,
+     "readOnly": false
     },
     {
      "fieldName": "JudgementResultR",
@@ -3450,6 +3471,9 @@
        "onSort": "",
        "onSelect": "",
        "onSelectByDblClick": "",
+       "onSelectBySelectButton": "",
+       "onSelectByModifyButton": "",
+       "onSelectByDeleteButton": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
@@ -3476,6 +3500,7 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtBikoR_core",
+       "readOnly": false,
        "onChange": "",
        "required": false,
        "labelLText": "備考",
@@ -3489,7 +3514,6 @@
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": false,
        "placeHolder": "",
        "textKind": 0,
        "isPrivateInfo": false,
@@ -3519,6 +3543,7 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtUketsukeDateR_core",
+       "readOnly": false,
        "onChange": "",
        "required": false,
        "labelLText": "受付日",
@@ -3529,7 +3554,6 @@
        "labelRAlign": 0,
        "onFocus": "",
        "onBlur": "",
-       "readOnly": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
@@ -3558,6 +3582,7 @@
        "marginLeft": "8",
        "marginRight": "XS",
        "selectControlID": "txtKetteiDateR_core",
+       "readOnly": false,
        "onChange": "",
        "required": false,
        "labelLText": "決定日",
@@ -3568,7 +3593,6 @@
        "labelRAlign": 0,
        "onFocus": "",
        "onBlur": "",
-       "readOnly": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
@@ -3598,7 +3622,7 @@
        "marginRight": "XS",
        "selectControlID": "radShinsaMethodR_core",
        "onChange": "",
-       "selectedItem": "",
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "key0",
@@ -3614,7 +3638,8 @@
        "labelLAlign": 2,
        "onClick": "",
        "newLineItemNumber": 2,
-       "spaceSize": "M"
+       "spaceSize": "M",
+       "icon": []
       },
       {
        "fieldName": "txtShiharaiAmountR",
@@ -3634,6 +3659,7 @@
        "marginLeft": "1.6",
        "marginRight": "XS",
        "selectControlID": "txtShiharaiAmountR_core",
+       "readOnly": false,
        "onChange": "",
        "required": false,
        "labelLText": "本人支払額",
@@ -3647,7 +3673,6 @@
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 2,
-       "readOnly": false,
        "placeHolder": "",
        "textKind": 2,
        "isPrivateInfo": false,
@@ -3683,7 +3708,7 @@
        "marginRight": "XS",
        "selectControlID": "radShikyuKubunR_core",
        "onChange": "",
-       "selectedItem": "",
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "key0",
@@ -3699,7 +3724,8 @@
        "labelLAlign": 2,
        "onClick": "",
        "newLineItemNumber": 2,
-       "spaceSize": "M"
+       "spaceSize": "M",
+       "icon": []
       },
       {
        "fieldName": "txtShikyuAmountR",
@@ -3719,6 +3745,7 @@
        "marginLeft": "2.4",
        "marginRight": "XS",
        "selectControlID": "txtShikyuAmountR_core",
+       "readOnly": false,
        "onChange": "",
        "required": false,
        "labelLText": "支給金額",
@@ -3732,7 +3759,6 @@
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 2,
-       "readOnly": false,
        "placeHolder": "",
        "textKind": 2,
        "isPrivateInfo": false,
@@ -3767,6 +3793,7 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtFushikyuRiyuR_text_area",
+       "readOnly": false,
        "onChange": "",
        "required": false,
        "labelLText": "不支給理由",
@@ -3779,7 +3806,6 @@
        "onBlur": "",
        "maxLength": 100000000,
        "minLength": 0,
-       "readOnly": false,
        "placeHolder": "",
        "textKind": 0,
        "isPrivateInfo": false,
@@ -3809,7 +3835,7 @@
        "marginRight": "XS",
        "selectControlID": "radKogakuAutoShokanR_core",
        "onChange": "",
-       "selectedItem": "",
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "key0",
@@ -3825,7 +3851,8 @@
        "labelLAlign": 2,
        "onClick": "",
        "newLineItemNumber": 2,
-       "spaceSize": "S"
+       "spaceSize": "S",
+       "icon": []
       }
      ],
      "controlType": "Panel",
@@ -3866,7 +3893,8 @@
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 1,
-     "isGroupBox": false
+     "isGroupBox": false,
+     "readOnly": false
     },
     {
      "fieldName": "btnReturnShowOne",
@@ -3887,12 +3915,12 @@
      "marginRight": "XS",
      "selectControlID": "btnReturnShowOne",
      "onClick": "onClick_btnReturnShowOne",
+     "icon": 0,
      "text": "個人照会に戻る",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0
+     "imageHeight": ""
     }
    ],
    "controlType": "Panel",
@@ -3933,7 +3961,8 @@
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
-   "isGroupBox": false
+   "isGroupBox": false,
+   "readOnly": false
   }
  ],
  "controlType": null,
@@ -4171,5 +4200,7 @@
   ]
  ],
  "panelMargin": 1,
- "controlMargin": 1
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "commonButtonAreaData": []
 }

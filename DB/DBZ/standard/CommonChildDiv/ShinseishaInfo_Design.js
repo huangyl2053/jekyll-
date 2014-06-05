@@ -149,13 +149,13 @@ var DBZ;
 
         Object.defineProperty(ShinseishaInfo_Design.prototype, "txtJigyoshaNo_displayNone", {
             get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"])["displayNone"];
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["displayNone"];
             },
             set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"])["displayNone"] = value;
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["displayNone"] = value;
                 } else {
-                    this.layout.items[0].items[4]["displayNone"] = value;
+                    this.layout.items[0].items[3]["displayNone"] = value;
                     this.raisePropertyChanged(this.layout);
                 }
             },
@@ -241,7 +241,7 @@ var DBZ;
             editablePropertyInfo["eraseBorderLeft"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderLeft"];
             editablePropertyInfo["title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["title"];
             editablePropertyInfo["panelDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["panelDisplay"];
-            editablePropertyInfo["txtJigyoshaNo_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["txtJigyoshaNo_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["txtShinseishaName_labelLText"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).getEditablePropertyInfo()["labelLText"];
             editablePropertyInfo["txtYubinNo_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[9]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["txtAddress_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"]).getEditablePropertyInfo()["displayNone"];
@@ -272,8 +272,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtShinseiDate_core",
-                            "required": false,
                             "readOnly": false,
+                            "required": false,
                             "placeHolder": "",
                             "isPrivateInfo": false,
                             "isPassword": false,
@@ -284,7 +284,7 @@ var DBZ;
                             "text": "",
                             "labelLText": "申請日",
                             "labelRText": "",
-                            "labelLWidth": "80",
+                            "labelLWidth": "55",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
@@ -312,8 +312,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtUketsukeDate_core",
-                            "required": false,
                             "readOnly": false,
+                            "required": false,
                             "placeHolder": "",
                             "isPrivateInfo": false,
                             "isPassword": false,
@@ -324,7 +324,7 @@ var DBZ;
                             "text": "",
                             "labelLText": "受付日",
                             "labelRText": "",
-                            "labelLWidth": "48",
+                            "labelLWidth": "55",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
@@ -361,7 +361,7 @@ var DBZ;
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "selectedItem": "",
+                            "selectedItem": "key0",
                             "dataSource": [
                                 {
                                     "key": "key0",
@@ -372,6 +372,50 @@ var DBZ;
                                     "value": "value1"
                                 }
                             ]
+                        },
+                        {
+                            "fieldName": "txtJigyoshaNo",
+                            "items": [],
+                            "controlType": "TextBoxCode",
+                            "width": "85",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtJigyoshaNo_core",
+                            "readOnly": false,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "事業者",
+                            "labelRText": "",
+                            "labelLWidth": "55",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 2,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "permitCharactor": "",
+                            "formatLength": 1
                         },
                         {
                             "fieldName": "ddlShinseishaKubun",
@@ -396,11 +440,11 @@ var DBZ;
                             "onChange": "",
                             "labelLText": "区分",
                             "labelRText": "",
-                            "labelLWidth": "80",
+                            "labelLWidth": "55",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "selectedItem": "family",
+                            "selectedItem": "myself",
                             "dataSource": [
                                 {
                                     "key": "myself",
@@ -419,50 +463,6 @@ var DBZ;
                                     "value": "その他"
                                 }
                             ]
-                        },
-                        {
-                            "fieldName": "txtJigyoshaNo",
-                            "items": [],
-                            "controlType": "TextBoxCode",
-                            "width": "85",
-                            "visible": true,
-                            "displayNone": false,
-                            "disabled": false,
-                            "accessKey": "",
-                            "nextFocusFieldName": "",
-                            "wrap": true,
-                            "dependencies": [],
-                            "float": 0,
-                            "toolTip": "",
-                            "authorityMode": 0,
-                            "marginLeft": "XS",
-                            "marginRight": "XS",
-                            "selectControlID": "txtJigyoshaNo_core",
-                            "required": false,
-                            "readOnly": false,
-                            "placeHolder": "",
-                            "isPrivateInfo": false,
-                            "isPassword": false,
-                            "onFocus": "",
-                            "onBlur": "",
-                            "onChange": "",
-                            "onKeyPress": "",
-                            "text": "",
-                            "labelLText": "事業者",
-                            "labelRText": "",
-                            "labelLWidth": "80",
-                            "labelRWidth": "S",
-                            "labelLAlign": 2,
-                            "labelRAlign": 0,
-                            "value": "",
-                            "maxLength": 100000000,
-                            "minLength": 0,
-                            "textAlign": 0,
-                            "textKind": 2,
-                            "isComboBox": false,
-                            "suggest": [],
-                            "permitCharactor": "",
-                            "formatLength": 1
                         },
                         {
                             "fieldName": "btnSearchJigyosha",
@@ -508,8 +508,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtShinseishaName_core",
-                            "required": false,
                             "readOnly": false,
+                            "required": false,
                             "placeHolder": "",
                             "isPrivateInfo": false,
                             "isPassword": false,
@@ -520,7 +520,7 @@ var DBZ;
                             "text": "",
                             "labelLText": "氏名",
                             "labelRText": "",
-                            "labelLWidth": "80",
+                            "labelLWidth": "55",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
@@ -551,8 +551,8 @@ var DBZ;
                             "marginLeft": "4.4",
                             "marginRight": "XS",
                             "selectControlID": "txtTelNo_core",
-                            "required": false,
                             "readOnly": false,
+                            "required": false,
                             "placeHolder": "",
                             "isPrivateInfo": false,
                             "isPassword": false,
@@ -591,11 +591,11 @@ var DBZ;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "6",
+                            "marginLeft": "3.9",
                             "marginRight": "XS",
                             "selectControlID": "txtShinseishaNameKana_core",
-                            "required": false,
                             "readOnly": false,
+                            "required": false,
                             "placeHolder": "",
                             "isPrivateInfo": false,
                             "isPassword": false,
@@ -637,8 +637,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtYubinNo_core",
-                            "required": false,
                             "readOnly": false,
+                            "required": false,
                             "placeHolder": "",
                             "isPrivateInfo": false,
                             "isPassword": false,
@@ -649,7 +649,7 @@ var DBZ;
                             "text": "",
                             "labelLText": "住所",
                             "labelRText": "",
-                            "labelLWidth": "80",
+                            "labelLWidth": "55",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
@@ -666,7 +666,7 @@ var DBZ;
                             "fieldName": "txtAddress",
                             "items": [],
                             "controlType": "TextBox",
-                            "width": "561",
+                            "width": "565",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -674,14 +674,14 @@ var DBZ;
                             "nextFocusFieldName": "",
                             "wrap": false,
                             "dependencies": [],
-                            "float": 2,
+                            "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
                             "marginLeft": "-0.2",
                             "marginRight": "XS",
                             "selectControlID": "txtAddress_core",
-                            "required": false,
                             "readOnly": false,
+                            "required": false,
                             "placeHolder": "",
                             "isPrivateInfo": false,
                             "isPassword": false,
@@ -707,7 +707,7 @@ var DBZ;
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "765",
+                    "width": "755",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -744,7 +744,8 @@ var DBZ;
                     "backgroundColor": 0,
                     "widthAuto": false,
                     "panelDisplay": 1,
-                    "isGroupBox": false
+                    "isGroupBox": false,
+                    "readOnly": false
                 }
             ],
             "controlType": "CommonChildDiv",
