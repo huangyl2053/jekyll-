@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4060001.NinteiShinsaka
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4060001.dgNinteiShinsakaiIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 認定審査会一覧Divを制御します。
@@ -40,7 +41,7 @@ public class NinteiShinsakaiIchiran {
     }
 
     /**
-     * 対象者一覧に割り付けるボタン押下時の処理を表します。
+     * 審査会個別割当画面-登録ボタン押下時の処理を表します。
      *
      * @param panel NinteiShinsakaiIchiranDiv
      * @return ResponseData
@@ -48,7 +49,8 @@ public class NinteiShinsakaiIchiran {
     public ResponseData<NinteiShinsakaiIchiranDiv> onClick_BtnToroku(NinteiShinsakaiIchiranDiv panel) {
         ResponseData<NinteiShinsakaiIchiranDiv> response = new ResponseData<>();
 
-        panel.getDgNinteiShinsakaiIchiran().getClickedItem().setWariateNinzu(new RString(("7")));
+        RString wariateNinzu = (RString) ViewStateHolder.get("割当人数", RString.class);
+        panel.getDgNinteiShinsakaiIchiran().getClickedItem().setWariateNinzu(wariateNinzu);
 
         response.data = panel;
         return response;

@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 審査会対象者個別割当Divを制御します。
@@ -49,6 +50,10 @@ public class NinteiShinsakaiTaishoshaWariate {
         ResponseData<NinteiShinsakaiTaishoshaWariateDiv> response = new ResponseData<>();
         setNinteiShinsakaiTaishoshaWariateData(panel, panel2);
 
+        ViewStateHolder.put("割当人数", new RString(String.valueOf(
+                panel.getTabWariate().getTplTaishoshaWariate().
+                getDgWariatezumiTaishoshaIchiran().getDataSource().size())));
+
         response.data = panel;
         return response;
 
@@ -66,6 +71,9 @@ public class NinteiShinsakaiTaishoshaWariate {
         ResponseData<NinteiShinsakaiTaishoshaWariateDiv> response = new ResponseData<>();
 
         setTaishosha(panel, WARITSUKE);
+        ViewStateHolder.put("割当人数", new RString(String.valueOf(
+                panel.getTabWariate().getTplTaishoshaWariate().
+                getDgWariatezumiTaishoshaIchiran().getDataSource().size())));
 
         response.data = panel;
         return response;
@@ -84,6 +92,9 @@ public class NinteiShinsakaiTaishoshaWariate {
         ResponseData<NinteiShinsakaiTaishoshaWariateDiv> response = new ResponseData<>();
 
         setTaishosha(panel, KAIJO);
+        ViewStateHolder.put("割当人数", new RString(String.valueOf(
+                panel.getTabWariate().getTplTaishoshaWariate().
+                getDgWariatezumiTaishoshaIchiran().getDataSource().size())));
 
         response.data = panel;
         return response;
@@ -703,6 +714,7 @@ public class NinteiShinsakaiTaishoshaWariate {
                     selectedMiwariateData.get(i).getChosain().toString()
             ));
         }
+
         return wariatezumiTaishoshaIchiranData;
     }
 
@@ -732,11 +744,12 @@ public class NinteiShinsakaiTaishoshaWariate {
                     selectedWariatezumiData.get(i).getChosain().toString()
             ));
         }
+
         return miwariateTaishoshaIchiranData;
     }
 
     /*
-     *割当済み対象者一覧へ割付します。
+     *審査員構成一覧へ割付します。
      */
     private List setRowShinsainKoseiIchiran(
             List<dgShinsainKoseiIchiran_Row> shinsainKoseiIchiranData,
