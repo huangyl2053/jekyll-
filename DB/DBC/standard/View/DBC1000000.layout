@@ -21,6 +21,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtZenkaiTaishoYMD_core",
      "readOnly": true,
      "isPrivateInfo": false,
      "isPassword": false,
@@ -44,7 +45,9 @@
      "labelLWidth": "80",
      "labelRWidth": "S",
      "labelLAlign": 2,
-     "labelRAlign": 0
+     "labelRAlign": 0,
+     "fromSelectControlID": "txtZenkaiTaishoYMDFrom",
+     "toSelectControlID": "txtZenkaiTaishoYMDTo"
     },
     {
      "fieldName": "tblUketsukeKetteiYMD",
@@ -69,7 +72,8 @@
          "authorityMode": 0,
          "marginLeft": "1",
          "marginRight": "0",
-         "onChange": "",
+         "selectControlID": "radUketsukeKetteiYMD_core",
+         "onChange": "onChangeUketsukeKettei",
          "labelLText": "",
          "labelLWidth": "S",
          "labelLAlign": 2,
@@ -87,7 +91,7 @@
          "required": false,
          "onClick": "",
          "newLineItemNumber": 1,
-         "spaceSize": 0
+         "spaceSize": "0"
         }
        ],
        "controlType": "TableCell",
@@ -104,6 +108,7 @@
        "authorityMode": 0,
        "marginLeft": 0,
        "marginRight": 0,
+       "selectControlID": "celUketsukeKetteiRadio",
        "connectTd": "R1C1"
       },
       {
@@ -126,6 +131,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "txtUketsukeYMD_core",
          "readOnly": false,
          "isPrivateInfo": false,
          "isPassword": false,
@@ -149,7 +155,9 @@
          "labelLWidth": "S",
          "labelRWidth": "S",
          "labelLAlign": 2,
-         "labelRAlign": 0
+         "labelRAlign": 0,
+         "fromSelectControlID": "txtUketsukeYMDFrom",
+         "toSelectControlID": "txtUketsukeYMDTo"
         },
         {
          "fieldName": "txtKetteiYMD",
@@ -168,6 +176,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "txtKetteiYMD_core",
          "readOnly": false,
          "isPrivateInfo": false,
          "isPassword": false,
@@ -191,7 +200,9 @@
          "labelLWidth": "S",
          "labelRWidth": "S",
          "labelLAlign": 2,
-         "labelRAlign": 0
+         "labelRAlign": 0,
+         "fromSelectControlID": "txtKetteiYMDFrom",
+         "toSelectControlID": "txtKetteiYMDTo"
         }
        ],
        "controlType": "TableCell",
@@ -208,6 +219,7 @@
        "authorityMode": 0,
        "marginLeft": 0,
        "marginRight": 0,
+       "selectControlID": "celUketsukeKetteiText",
        "connectTd": "R1C2"
       }
      ],
@@ -225,6 +237,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "tblUketsukeKetteiYMD",
      "html": "<table>\n  <tbody>\n    <tr><td id='R1C1'></td><td id='R1C2'></td></tr>\n  </tbody>\n</table>\n"
     },
     {
@@ -244,6 +257,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "ddlInsho_core",
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
@@ -285,6 +299,7 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "ShokanShikyuKetteiTsuchishoJoken",
    "onLoad": "",
    "title": "抽出条件",
    "isOpen": true,
@@ -294,7 +309,16 @@
      "postParameterPanelNames": "ShokanShikyuKetteiTsuchishoJoken"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/ShokanShikyuKetteiTsuchishoJoken/onLoad"
+    },
+    {
+     "eventName": "onChangeUketsukeKettei",
+     "requestUrl": "dbc/db/dbc/ShokanShikyuKetteiTsuchishoJoken/onChangeUketsukeKettei"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -307,6 +331,7 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
+   "panelDisplay": 0,
    "isGroupBox": false
   },
   {
@@ -329,6 +354,7 @@
      "authorityMode": 0,
      "marginLeft": 0,
      "marginRight": 0,
+     "selectControlID": "ShokanShikyuKetteiTsuchishoPrintSetting",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
@@ -350,7 +376,7 @@
      "PrintContentsSetting_eraseBorderLeft": true
     },
     {
-     "fieldName": "ShokanShikyuKetteiTsuchishoOutputOrder",
+     "fieldName": "ShokanShikyuKetteiTsuchishoSettingOuputOrder",
      "items": [],
      "controlType": "CommonChildDiv",
      "width": "XS",
@@ -366,17 +392,15 @@
      "authorityMode": 0,
      "marginLeft": 0,
      "marginRight": 0,
-     "title": "出力順序",
+     "selectControlID": "ShokanShikyuKetteiTsuchishoSettingOuputOrder",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
-     "isGroupBox": true,
-     "businessId": "DBC",
-     "controlName": "OutputOrderAndNewpage",
+     "businessId": "URZ",
+     "controlName": "ChohyoShutsuryokujun",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "txtNewPageItem_displayNone": true
+     "dialogCancelEventNameForDialog": ""
     }
    ],
    "controlType": "PanelPublish",
@@ -393,6 +417,7 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "ShokanShikyuKetteiTsuchishoSetting",
    "onLoad": "",
    "title": "償還支給（不支給）決定通知書",
    "isOpen": true,
@@ -402,7 +427,12 @@
      "postParameterPanelNames": "ShokanShikyuKetteiTsuchishoSetting"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/ShokanShikyuKetteiTsuchishoSetting/onLoad"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -415,8 +445,10 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
+   "panelDisplay": 0,
    "isGroupBox": false,
-   "isPublish": true
+   "isPublish": true,
+   "isEmptyControl": false
   },
   {
    "fieldName": "ShokanShikyuKetteishaListSetting",
@@ -438,6 +470,7 @@
      "authorityMode": 0,
      "marginLeft": 0,
      "marginRight": 0,
+     "selectControlID": "ShokanShikyuKetteishaListPrintSetting",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
@@ -475,6 +508,7 @@
      "authorityMode": 0,
      "marginLeft": 0,
      "marginRight": 0,
+     "selectControlID": "ShokanShikyuKetteishaListPayDate",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
@@ -484,11 +518,11 @@
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
      "PaymentDate_title": "支払方法",
-     "PaymentDate_isGroupBox": true,
+     "PaymentDate_isGroupBox": false,
      "PaymentDate_canOpenAndClose": false
     },
     {
-     "fieldName": "ShokanShikyuKetteishaListOutputOrder",
+     "fieldName": "ShokanShikyuKetteishaListSettingOutputOrder",
      "items": [],
      "controlType": "CommonChildDiv",
      "width": "XS",
@@ -504,17 +538,15 @@
      "authorityMode": 0,
      "marginLeft": 0,
      "marginRight": 0,
-     "title": "出力順序・改頁",
+     "selectControlID": "ShokanShikyuKetteishaListSettingOutputOrder",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
-     "isGroupBox": true,
-     "businessId": "DBC",
-     "controlName": "OutputOrderAndNewpage",
+     "businessId": "URZ",
+     "controlName": "ChohyoShutsuryokujun",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "txtNewPageItem_displayNone": false
+     "dialogCancelEventNameForDialog": ""
     }
    ],
    "controlType": "PanelPublish",
@@ -531,6 +563,7 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "ShokanShikyuKetteishaListSetting",
    "onLoad": "",
    "title": "償還支給（不支給）決定者一覧表",
    "isOpen": true,
@@ -540,7 +573,12 @@
      "postParameterPanelNames": "ShokanShikyuKetteishaListSetting"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/ShokanShikyuKetteishaListSetting/onLoad"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -553,8 +591,10 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
+   "panelDisplay": 0,
    "isGroupBox": false,
-   "isPublish": true
+   "isPublish": true,
+   "isEmptyControl": false
   },
   {
    "fieldName": "ShokanShikyuKetteiTsuchishoKyotsu",
@@ -576,12 +616,14 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnCreate",
      "onClick": "",
      "text": "決定通知書を作成する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     }
    ],
    "controlType": "Panel",
@@ -598,6 +640,7 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "ShokanShikyuKetteiTsuchishoKyotsu",
    "onLoad": "",
    "title": "",
    "isOpen": true,
@@ -620,6 +663,7 @@
    "eraseBorderLeft": true,
    "backgroundColor": 0,
    "widthAuto": false,
+   "panelDisplay": 0,
    "isGroupBox": false
   }
  ],
@@ -637,6 +681,7 @@
  "authorityMode": 0,
  "marginLeft": "XS",
  "marginRight": "XS",
+ "selectControlID": "Page",
  "onLoad": "",
  "title": "償還支給（不支給）決定通知書一括作成",
  "jsPathCollection": [],
@@ -649,39 +694,48 @@
    "visibleDivs": [
     {
      "visibleDiv": "ShokanShikyuKetteiTsuchishoJoken",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "ShokanShikyuKetteiTsuchishoSetting",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "ShokanShikyuKetteiTsuchishoPrintSetting",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "ShokanShikyuKetteiTsuchishoOutputOrder",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "ShokanShikyuKetteishaListSetting",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "ShokanShikyuKetteishaListPrintSetting",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "ShokanShikyuKetteishaListPayDate",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "ShokanShikyuKetteishaListOutputOrder",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "ShokanShikyuKetteiTsuchishoKyotsu",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
+    },
+    {
+     "visibleDiv": "ShokanShikyuKetteiTsuchishoSettingOuputOrder",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ShokanShikyuKetteishaListSettingOutputOrder",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
@@ -703,7 +757,7 @@
    "ShokanShikyuKetteiTsuchishoPrintSetting"
   ],
   [
-   "ShokanShikyuKetteiTsuchishoOutputOrder"
+   "ShokanShikyuKetteiTsuchishoSettingOuputOrder"
   ],
   [
    "ShokanShikyuKetteishaListSetting"
@@ -715,7 +769,7 @@
    "ShokanShikyuKetteishaListPayDate"
   ],
   [
-   "ShokanShikyuKetteishaListOutputOrder"
+   "ShokanShikyuKetteishaListSettingOutputOrder"
   ],
   [
    "ShokanShikyuKetteiTsuchishoKyotsu"
