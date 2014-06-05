@@ -2794,8 +2794,8 @@
       "ShokanShikyuKetteiInfo"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "ShokanShikyuKetteiInfo",
-     "initialTab": 0
+     "selectedItemFieldName": "ShokanShikyuKetteiShinseiInfo",
+     "initialTab": "3"
     }
    ],
    "controlType": "Panel",

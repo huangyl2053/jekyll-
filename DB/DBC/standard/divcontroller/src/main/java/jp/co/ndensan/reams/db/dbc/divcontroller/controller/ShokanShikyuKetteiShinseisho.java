@@ -215,7 +215,7 @@ public class ShokanShikyuKetteiShinseisho {
         List<dgShokanShikyuKetteiInfoList_Row> dgRowList = infoDiv.getDgShokanShikyuKetteiInfoList().getDataSource();
         List<HashMap> sourceList = getShokanShikyuTorokuShinseishoYaml();
         dgRowList.clear();
-        for (int i = 10; i < 11; i++) {
+        for (int i = 11; i < 12; i++) {
             dgRowList.add(new dgShokanShikyuKetteiInfoList_Row(
                     new RString(sourceList.get(i).get("サービス種類").toString()),
                     new RString(sourceList.get(i).get("単位金額").toString()),
@@ -227,9 +227,9 @@ public class ShokanShikyuKetteiShinseisho {
 
     private void setKetteiInfoData(ShokanShikyuKetteiShinseishoDiv panel, 支給区分 shikyuKubun) {
         ShokanShikyuKetteiInfoDiv infoDiv = panel.getTabShokanShikyuKetteiShinseisho().getShokanShikyuKetteiInfo();
-        HashMap source = getShokanShikyuTorokuShinseishoYamlId(9);
 
         if (shikyuKubun.equals(支給区分.支給)) {
+            HashMap source = getShokanShikyuTorokuShinseishoYamlId(9);
             infoDiv.getTxtKetteiYMD().setValue(new RDate(source.get("決定日").toString()));
             infoDiv.getTxtKetteiZogenTanisu().setValue(new Decimal(source.get("増減単位数").toString()));
             infoDiv.getTxtKetteiZogenRiyu().setValue(new RString(source.get("増減理由").toString()));
@@ -239,6 +239,7 @@ public class ShokanShikyuKetteiShinseisho {
             infoDiv.getTxtKetteiJikoGokei().setValue(new Decimal(source.get("自己負担額合計").toString()));
             infoDiv.getTxtKetteiSagakuGokei().setValue(new Decimal(source.get("差額支払金額合計").toString()));
         } else {
+            HashMap source = getShokanShikyuTorokuShinseishoYamlId(10);
             infoDiv.getTxtKetteiYMD().setValue(new RDate(source.get("決定日").toString()));
             infoDiv.getTxtKetteiZogenTanisu().clearValue();
             infoDiv.getTxtKetteiZogenRiyu().clearValue();
@@ -254,15 +255,15 @@ public class ShokanShikyuKetteiShinseisho {
         ShokanShikyuKetteiInfoDiv infoDiv = panel.getTabShokanShikyuKetteiShinseisho().getShokanShikyuKetteiInfo();
         if (shikyuKubun.equals(支給区分.支給)) {
             infoDiv.getTxtKetteiYMD().setDisabled(false);
-            infoDiv.getTxtKetteiZogenTanisu().setDisabled(false);
+            infoDiv.getTxtKetteiZogenTanisu().setDisabled(true);
             infoDiv.getTxtKetteiZogenRiyu().setDisabled(false);
             infoDiv.getTxtKetteiFushikyuRiyu().setDisabled(true);
-            infoDiv.getTxtKetteiShiharaiGokei().setDisabled(false);
-            infoDiv.getTxtKetteiHokenGokei().setDisabled(false);
-            infoDiv.getTxtKetteiJikoGokei().setDisabled(false);
-            infoDiv.getTxtKetteiSagakuGokei().setDisabled(false);
+            infoDiv.getTxtKetteiShiharaiGokei().setDisabled(true);
+            infoDiv.getTxtKetteiHokenGokei().setDisabled(true);
+            infoDiv.getTxtKetteiJikoGokei().setDisabled(true);
+            infoDiv.getTxtKetteiSagakuGokei().setDisabled(true);
         } else {
-            infoDiv.getTxtKetteiYMD().setDisabled(true);
+            infoDiv.getTxtKetteiYMD().setDisabled(false);
             infoDiv.getTxtKetteiZogenTanisu().setDisabled(true);
             infoDiv.getTxtKetteiZogenRiyu().setDisabled(true);
             infoDiv.getTxtKetteiFushikyuRiyu().setDisabled(false);
