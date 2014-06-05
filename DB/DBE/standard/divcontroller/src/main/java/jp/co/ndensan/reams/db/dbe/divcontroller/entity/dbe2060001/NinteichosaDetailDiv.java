@@ -30,7 +30,7 @@ public class NinteichosaDetailDiv extends Panel {
     @JsonProperty("txtChosainName")
     private TextBox txtChosainName;
     @JsonProperty("txtChosaJisshiDate")
-    private TextBoxDate txtChosaJisshiDate;
+    private TextBoxFlexibleDate txtChosaJisshiDate;
     @JsonProperty("radChosaJisshiBasho")
     private RadioButton radChosaJisshiBasho;
     @JsonProperty("txtChosaJisshiBashoFreeInput")
@@ -83,12 +83,12 @@ public class NinteichosaDetailDiv extends Panel {
     }
 
     @JsonProperty("txtChosaJisshiDate")
-    public TextBoxDate getTxtChosaJisshiDate() {
+    public TextBoxFlexibleDate getTxtChosaJisshiDate() {
         return txtChosaJisshiDate;
     }
 
     @JsonProperty("txtChosaJisshiDate")
-    public void setTxtChosaJisshiDate(TextBoxDate txtChosaJisshiDate) {
+    public void setTxtChosaJisshiDate(TextBoxFlexibleDate txtChosaJisshiDate) {
         this.txtChosaJisshiDate=txtChosaJisshiDate;
     }
 

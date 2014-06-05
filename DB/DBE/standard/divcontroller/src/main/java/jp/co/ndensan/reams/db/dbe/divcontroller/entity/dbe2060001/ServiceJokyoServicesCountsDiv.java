@@ -5,8 +5,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ServiceWithCountCom;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ServiceWithCountCom;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.serviceWithCountCom.ServiceWithCountCom;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -65,14 +64,10 @@ public class ServiceJokyoServicesCountsDiv extends Panel {
     private ServiceWithCountCom comCountChiikiRojinHukushiShisetsuKaigo;
     @JsonProperty("comCountTeikiJunkaiHomonKaigo")
     private ServiceWithCountCom comCountTeikiJunkaiHomonKaigo;
-    @JsonProperty("lblNewLine2")
-    private Label lblNewLine2;
-    @JsonProperty("lblShichosonTokubetsuKyufu")
-    private Label lblShichosonTokubetsuKyufu;
+    @JsonProperty("lblSpace1")
+    private Label lblSpace1;
     @JsonProperty("txtShichosonTokubetsuKyufu")
     private TextBox txtShichosonTokubetsuKyufu;
-    @JsonProperty("lblZaitakuSeriviceOutsideKaigoKyufu")
-    private Label lblZaitakuSeriviceOutsideKaigoKyufu;
     @JsonProperty("txtZaitakuSeriviceOutsideKaigoKyufu")
     private TextBox txtZaitakuSeriviceOutsideKaigoKyufu;
 
@@ -292,24 +287,14 @@ public class ServiceJokyoServicesCountsDiv extends Panel {
         this.comCountTeikiJunkaiHomonKaigo=comCountTeikiJunkaiHomonKaigo;
     }
 
-    @JsonProperty("lblNewLine2")
-    public Label getLblNewLine2() {
-        return lblNewLine2;
+    @JsonProperty("lblSpace1")
+    public Label getLblSpace1() {
+        return lblSpace1;
     }
 
-    @JsonProperty("lblNewLine2")
-    public void setLblNewLine2(Label lblNewLine2) {
-        this.lblNewLine2=lblNewLine2;
-    }
-
-    @JsonProperty("lblShichosonTokubetsuKyufu")
-    public Label getLblShichosonTokubetsuKyufu() {
-        return lblShichosonTokubetsuKyufu;
-    }
-
-    @JsonProperty("lblShichosonTokubetsuKyufu")
-    public void setLblShichosonTokubetsuKyufu(Label lblShichosonTokubetsuKyufu) {
-        this.lblShichosonTokubetsuKyufu=lblShichosonTokubetsuKyufu;
+    @JsonProperty("lblSpace1")
+    public void setLblSpace1(Label lblSpace1) {
+        this.lblSpace1=lblSpace1;
     }
 
     @JsonProperty("txtShichosonTokubetsuKyufu")
@@ -320,16 +305,6 @@ public class ServiceJokyoServicesCountsDiv extends Panel {
     @JsonProperty("txtShichosonTokubetsuKyufu")
     public void setTxtShichosonTokubetsuKyufu(TextBox txtShichosonTokubetsuKyufu) {
         this.txtShichosonTokubetsuKyufu=txtShichosonTokubetsuKyufu;
-    }
-
-    @JsonProperty("lblZaitakuSeriviceOutsideKaigoKyufu")
-    public Label getLblZaitakuSeriviceOutsideKaigoKyufu() {
-        return lblZaitakuSeriviceOutsideKaigoKyufu;
-    }
-
-    @JsonProperty("lblZaitakuSeriviceOutsideKaigoKyufu")
-    public void setLblZaitakuSeriviceOutsideKaigoKyufu(Label lblZaitakuSeriviceOutsideKaigoKyufu) {
-        this.lblZaitakuSeriviceOutsideKaigoKyufu=lblZaitakuSeriviceOutsideKaigoKyufu;
     }
 
     @JsonProperty("txtZaitakuSeriviceOutsideKaigoKyufu")

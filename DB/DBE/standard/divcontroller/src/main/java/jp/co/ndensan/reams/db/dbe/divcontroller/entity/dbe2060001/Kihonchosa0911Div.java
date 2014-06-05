@@ -5,8 +5,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.KihonchosaResultInputCom;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.KihonchosaResultInputCom;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kihonchosaResultInputCom.KihonchosaResultInputCom;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kihonchosaResultInputCom.KihonchosaResultInputCom;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -31,10 +31,10 @@ public class Kihonchosa0911Div extends Panel {
     private KihonchosaResultInputCom comKihonchosaResult101d;
     @JsonProperty("comKihonchosaResult101e")
     private KihonchosaResultInputCom comKihonchosaResult101e;
-    @JsonProperty("comKihonchosaResult102b")
-    private KihonchosaResultInputCom comKihonchosaResult102b;
     @JsonProperty("comKihonchosaResult102a")
     private KihonchosaResultInputCom comKihonchosaResult102a;
+    @JsonProperty("comKihonchosaResult102b")
+    private KihonchosaResultInputCom comKihonchosaResult102b;
     @JsonProperty("comKihonchosaResult102c")
     private KihonchosaResultInputCom comKihonchosaResult102c;
     @JsonProperty("comKihonchosaResult102d")
@@ -110,16 +110,6 @@ public class Kihonchosa0911Div extends Panel {
         this.comKihonchosaResult101e=comKihonchosaResult101e;
     }
 
-    @JsonProperty("comKihonchosaResult102b")
-    public KihonchosaResultInputCom getComKihonchosaResult102b() {
-        return comKihonchosaResult102b;
-    }
-
-    @JsonProperty("comKihonchosaResult102b")
-    public void setComKihonchosaResult102b(KihonchosaResultInputCom comKihonchosaResult102b) {
-        this.comKihonchosaResult102b=comKihonchosaResult102b;
-    }
-
     @JsonProperty("comKihonchosaResult102a")
     public KihonchosaResultInputCom getComKihonchosaResult102a() {
         return comKihonchosaResult102a;
@@ -128,6 +118,16 @@ public class Kihonchosa0911Div extends Panel {
     @JsonProperty("comKihonchosaResult102a")
     public void setComKihonchosaResult102a(KihonchosaResultInputCom comKihonchosaResult102a) {
         this.comKihonchosaResult102a=comKihonchosaResult102a;
+    }
+
+    @JsonProperty("comKihonchosaResult102b")
+    public KihonchosaResultInputCom getComKihonchosaResult102b() {
+        return comKihonchosaResult102b;
+    }
+
+    @JsonProperty("comKihonchosaResult102b")
+    public void setComKihonchosaResult102b(KihonchosaResultInputCom comKihonchosaResult102b) {
+        this.comKihonchosaResult102b=comKihonchosaResult102b;
     }
 
     @JsonProperty("comKihonchosaResult102c")

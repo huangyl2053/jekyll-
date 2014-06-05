@@ -23,8 +23,8 @@ public class IchjiHanteiFromInputedChosaResultDiv extends Panel {
      */
     @JsonProperty("txtIchijiHanteiResult")
     private TextBox txtIchijiHanteiResult;
-    @JsonProperty("lblPadding2")
-    private Label lblPadding2;
+    @JsonProperty("lblSpace4")
+    private Label lblSpace4;
     @JsonProperty("btnIchjiHantei")
     private Button btnIchjiHantei;
 
@@ -44,14 +44,14 @@ public class IchjiHanteiFromInputedChosaResultDiv extends Panel {
         this.txtIchijiHanteiResult=txtIchijiHanteiResult;
     }
 
-    @JsonProperty("lblPadding2")
-    public Label getLblPadding2() {
-        return lblPadding2;
+    @JsonProperty("lblSpace4")
+    public Label getLblSpace4() {
+        return lblSpace4;
     }
 
-    @JsonProperty("lblPadding2")
-    public void setLblPadding2(Label lblPadding2) {
-        this.lblPadding2=lblPadding2;
+    @JsonProperty("lblSpace4")
+    public void setLblSpace4(Label lblSpace4) {
+        this.lblSpace4=lblSpace4;
     }
 
     @JsonProperty("btnIchjiHantei")

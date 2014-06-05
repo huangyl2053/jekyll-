@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.DataGridUtil;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -86,7 +87,16 @@ public class NinteichosaIraiList {
         ResponseData<NinteichosaIraiListDiv> response = new ResponseData<>();
 
         DataGrid<dgNinteichosaIraiList_Row> grid = div.getDgNinteichosaIraiList();
-        grid.setDataSource(DataGridUtil.unselectedItems(grid));
+
+        List<dgNinteichosaIraiList_Row> list = new ArrayList<>();
+        for (dgNinteichosaIraiList_Row selectedItem : grid.getSelectedItems()) {
+            if (selectedItem.get依頼書発行済()) {
+                selectedItem.get調査依頼完了日().setValue(FlexibleDate.getNowDate());
+            }
+            list.add(selectedItem);
+        }
+        list.addAll(DataGridUtil.unselectedItems(grid));
+        grid.setDataSource(list);
 
         response.data = div;
         return response;

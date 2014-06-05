@@ -182,7 +182,7 @@ module DBE {
    "isPrivateInfo": false,
    "maxLength": 100000000,
    "minLength": 0,
-   "textAlign": 0,
+   "textAlign": 2,
    "readOnly": false,
    "placeHolder": "",
    "textKind": 2,
@@ -224,7 +224,7 @@ module DBE {
    "labelLText": "",
    "labelLWidth": "S",
    "labelLAlign": 2,
-   "selectedItem": "",
+   "selectedItem": null,
    "dataSource": [
     {
      "key": "1",
@@ -237,7 +237,8 @@ module DBE {
    ],
    "onClick": "",
    "newLineItemNumber": 1,
-   "spaceSize": "M"
+   "spaceSize": "M",
+   "icon": []
   }
  ],
  "controlType": "CompositeControl",

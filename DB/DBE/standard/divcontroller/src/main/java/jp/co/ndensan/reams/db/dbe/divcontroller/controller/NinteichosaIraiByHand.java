@@ -79,12 +79,10 @@ public class NinteichosaIraiByHand {
      */
     private static final class ChosairaiBindByHandMain {
 
-        private final ChosairaiBindByHandMainDiv panel;
         private final RequestContents contents;
         private final DataGrids dataGrids;
 
         ChosairaiBindByHandMain(ChosairaiBindByHandMainDiv panel) {
-            this.panel = panel;
             this.dataGrids = new DataGrids(panel);
             this.contents = new RequestContents(panel.getRequestContents());
         }
@@ -224,7 +222,7 @@ public class NinteichosaIraiByHand {
     /**
      * demo用のデータを取得します。
      */
-    private static final class DemoData {
+    static final class DemoData {
 
         /**
          * デモ用データの種類の列挙型です。

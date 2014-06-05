@@ -20,6 +20,9 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIra
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryTokusokuPublishDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiListDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.dgNinteichosaIraiList_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.dgChosaItakusakiList_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.shozokuChosainList.dgShozokuChosainList_Row;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -29,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
@@ -279,9 +283,41 @@ public class NinteichosaIraiEntry {
     }
 
     /**
+     * txtChosaItakusakiCodeのonChange時の処理です。
+     *
+     * @param div NinteichosaIraiEntryDiv
+     * @param div2 NinteichosaIraiListDiv
+     * @return ResponseData
+     */
+    public ResponseData<NinteichosaIraiEntryDiv> onChange_txtChosaItakusakiCode(NinteichosaIraiEntryDiv div, NinteichosaIraiListDiv div2) {
+        ResponseData<NinteichosaIraiEntryDiv> response = new ResponseData<>();
+
+        new NinteichosaChosain(div.getNinteichosaIraiEntryMain().getNinteichosaIraiEntryTargetChosain()).onChange_txtChosaItakusakiCode();
+
+        response.data = div;
+        return response;
+    }
+
+    /**
+     * txtChosainCodeのonChange時の処理です。
+     *
+     * @param div NinteichosaIraiEntryDiv
+     * @param div2 NinteichosaIraiListDiv
+     * @return ResponseData
+     */
+    public ResponseData<NinteichosaIraiEntryDiv> onChange_txtChosainCode(NinteichosaIraiEntryDiv div, NinteichosaIraiListDiv div2) {
+        ResponseData<NinteichosaIraiEntryDiv> response = new ResponseData<>();
+
+        new NinteichosaChosain(div.getNinteichosaIraiEntryMain().getNinteichosaIraiEntryTargetChosain()).onChange_txtChosainCode();
+
+        response.data = div;
+        return response;
+    }
+
+    /**
      * 調査依頼対象者です。
      */
-    private class NinteichosaIraiEntryTarget {
+    private static final class NinteichosaIraiEntryTarget {
 
         private final NinteichosaIraiEntryTargetDiv panel;
         private final _LatestChosain latestChosain;
@@ -307,6 +343,9 @@ public class NinteichosaIraiEntry {
             panel.getTxtJusho().setValue(targetInfo.get住所());
             panel.getTxtShikibetsuCode().setValue(targetInfo.get識別コード());
             panel.getTxtShimei().setValue(targetInfo.get氏名());
+            panel.getTxtYubinNo().setValue(new YubinNo(targetInfo.get郵便番号()));
+            panel.getTxtShinseiDate().setValue(targetInfo.get認定申請日().getValue());
+            panel.getTxtShinseiKubun().setValue(targetInfo.get認定申請区分申請時());
         }
 
         private final class _LatestChosain {
@@ -329,7 +368,7 @@ public class NinteichosaIraiEntry {
     /**
      * 調査員・調査委託先です。
      */
-    private class NinteichosaChosain {
+    private static final class NinteichosaChosain {
 
         private final NinteichosaIraiEntryTargetChosainDiv panel;
 
@@ -338,17 +377,17 @@ public class NinteichosaIraiEntry {
         }
 
         void setTargetInfo(dgNinteichosaIraiList_Row targetInfo) {
-            panel.getTxtChosaItakusakiCode().setValue(targetInfo.get調査委託先コード());
-            panel.getTxtChosaItakusakiName().setValue(targetInfo.get調査委託先());
-            panel.getTxtChosainCode().setValue(targetInfo.get調査員コード());
-            panel.getTxtChosainName().setValue(targetInfo.get調査員());
+            _txtChosaItakusakiCode().setValue(targetInfo.get調査委託先コード());
+            _txtChosaItakusakiName().setValue(targetInfo.get調査委託先());
+            _txtChosainCode().setValue(targetInfo.get調査員コード());
+            _txtChosainName().setValue(targetInfo.get調査員());
         }
 
         dgNinteichosaIraiList_Row reflect(dgNinteichosaIraiList_Row targetInfo) {
-            targetInfo.set調査委託先コード(panel.getTxtChosaItakusakiCode().getValue());
-            targetInfo.set調査委託先(panel.getTxtChosaItakusakiName().getValue());
-            targetInfo.set調査員コード(panel.getTxtChosainCode().getValue());
-            targetInfo.set調査員(panel.getTxtChosainName().getValue());
+            targetInfo.set調査委託先コード(_txtChosaItakusakiCode().getValue());
+            targetInfo.set調査委託先(_txtChosaItakusakiName().getValue());
+            targetInfo.set調査員コード(_txtChosainCode().getValue());
+            targetInfo.set調査員(_txtChosainName().getValue());
             return targetInfo;
         }
 
@@ -360,12 +399,60 @@ public class NinteichosaIraiEntry {
         private boolean _isEmpty(RString rstr) {
             return RString.EMPTY.equals(rstr);
         }
+
+        void onChange_txtChosaItakusakiCode() {
+            RString chosaItakusakiCode = _txtChosaItakusakiCode().getValue();
+            for (dgChosaItakusakiList_Row itakusaki : _itakusakiList()) {
+                if (chosaItakusakiCode.equals(itakusaki.getChosaItakusakiNo())) {
+                    _txtChosaItakusakiName().setValue(itakusaki.getChosaItakusakiName());
+                    return;
+                }
+            }
+            _txtChosaItakusakiName().clearValue();
+        }
+
+        private List<dgChosaItakusakiList_Row> _itakusakiList() {
+            return new NinteichosaIraiByHand.DemoData().get調査委託先一覧();
+        }
+
+        private TextBoxCode _txtChosaItakusakiCode() {
+            return this.panel.getTxtChosaItakusakiCode();
+        }
+
+        private TextBox _txtChosaItakusakiName() {
+            return this.panel.getTxtChosaItakusakiName();
+        }
+
+        void onChange_txtChosainCode() {
+            RString chosainCode = _txtChosainCode().getValue();
+            RString chosaItakusakiCode = _txtChosaItakusakiCode().getValue();
+            for (dgShozokuChosainList_Row chosain : _chosainList()) {
+                if ((chosaItakusakiCode.equals(chosain.getChousaItakusakiNo()))
+                        && (chosainCode.equals(chosain.getChosainNo()))) {
+                    _txtChosainName().setValue(chosain.getChosainName());
+                    return;
+                }
+            }
+            _txtChosainName().clearValue();
+        }
+
+        private List<dgShozokuChosainList_Row> _chosainList() {
+            return new NinteichosaIraiByHand.DemoData().get所属調査員一覧();
+        }
+
+        private TextBoxCode _txtChosainCode() {
+            return this.panel.getTxtChosainCode();
+        }
+
+        private TextBox _txtChosainName() {
+            return this.panel.getTxtChosainName();
+        }
     }
 
     /**
      * 調査依頼書です。
      */
-    private class NinteichosaPaper {
+    private static final class NinteichosaPaper {
 
         private final NinteichosaIraiEntryPaperDiv panel;
 
@@ -423,7 +510,7 @@ public class NinteichosaIraiEntry {
     /**
      * 認定調査依頼の主な項目です。
      */
-    private class NinteichosaRequestContent {
+    private static final class NinteichosaRequestContent {
 
         private final NinteichosaIraiEntryRequestContentDiv panel;
 
@@ -484,7 +571,7 @@ public class NinteichosaIraiEntry {
     /**
      * 認定調査の依頼です。
      */
-    private class NinteichosaRequest {
+    private static final class NinteichosaRequest {
 
         private final NinteichosaRequestContent content;
         private final NinteichosaPaper paper;
@@ -591,6 +678,23 @@ public class NinteichosaIraiEntry {
                 }
                 return list;
             }
+
+            static List<KeyValueDataSource> toList_KeyValueDataSource_only_なし() {
+                List<KeyValueDataSource> list = new ArrayList<>();
+                list.add(なし.toKeyValueDataSource());
+                return list;
+            }
+
+            static List<KeyValueDataSource> toList_KeyValueDataSource_withoutなし() {
+                List<KeyValueDataSource> list = new ArrayList<>();
+                for (TokusokuHoho v : values()) {
+                    if (v == なし) {
+                        continue;
+                    }
+                    list.add(v.toKeyValueDataSource());
+                }
+                return list;
+            }
         }
         private final NinteichosaIraiEntryTokusokuDiv panel;
         private final _Content content;
@@ -608,7 +712,7 @@ public class NinteichosaIraiEntry {
          */
         void onLoad() {
             getRadTokusoku().setDataSource(DataSource_radTokusoku.toList_KeyValueDataSource());
-            this.content.getTokusokuHoho().setDataSource(TokusokuHoho.toList_KeyValueDataSource());
+            this.content.getTokusokuHoho().setDataSource(TokusokuHoho.toList_KeyValueDataSource_only_なし());
             _init();
         }
 
@@ -758,10 +862,13 @@ public class NinteichosaIraiEntry {
             FlexibleDate nowDate = FlexibleDate.getNowDate();
             this.content.getTokusokuDate().setValue(nowDate);
             this.content.getTokusokuKigenDate().setValue(nowDate.plusDay(NUM_OF_DAYS_IN_A_WEEK));
+            this.content.getTokusokuHoho().setDataSource(TokusokuHoho.toList_KeyValueDataSource_withoutなし());
         }
 
         private void _toBeNonEditable() {
             this.content.setCanEdit(false);
+            this.content.getTokusokuHoho().setDataSource(TokusokuHoho.toList_KeyValueDataSource_only_なし());
+            this.content.getTokusokuHoho().setSelectedItem(TokusokuHoho.なし.item());
         }
 
         void onChange_ddlTokukuHoho() {
@@ -781,7 +888,7 @@ public class NinteichosaIraiEntry {
     /**
      * 認定調査の依頼・督促をまとめて扱います。
      */
-    private class NinteichosaIraiEntryMain {
+    private static final class NinteichosaIraiEntryMain {
 
         private final NinteichosaRequest request;
         private final NinteichosaTokusoku tokusoku;

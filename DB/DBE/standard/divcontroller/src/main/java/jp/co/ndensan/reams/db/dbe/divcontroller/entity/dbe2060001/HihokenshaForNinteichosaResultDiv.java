@@ -23,22 +23,20 @@ public class HihokenshaForNinteichosaResultDiv extends Panel {
      */
     @JsonProperty("txtHihokenshaNo")
     private TextBoxCode txtHihokenshaNo;
-    @JsonProperty("txtHokenshaNo")
-    private TextBoxCode txtHokenshaNo;
+    @JsonProperty("txtShikibetsuCode")
+    private TextBoxCode txtShikibetsuCode;
     @JsonProperty("txtShinseiDate")
-    private TextBoxDate txtShinseiDate;
+    private TextBoxFlexibleDate txtShinseiDate;
     @JsonProperty("txtShinseiKubun")
     private TextBox txtShinseiKubun;
     @JsonProperty("txtHihokenshaName")
     private TextBox txtHihokenshaName;
     @JsonProperty("txtHihokenshaBirthDay")
-    private TextBoxDate txtHihokenshaBirthDay;
+    private TextBoxFlexibleDate txtHihokenshaBirthDay;
     @JsonProperty("txtHihokenshaAge")
     private TextBox txtHihokenshaAge;
     @JsonProperty("txtHihokenshaGender")
     private TextBox txtHihokenshaGender;
-    @JsonProperty("lblHihokenshaJusho")
-    private Label lblHihokenshaJusho;
     @JsonProperty("txtHihokenshaYubinNo")
     private TextBox txtHihokenshaYubinNo;
     @JsonProperty("txtHihokenshaJusho")
@@ -60,23 +58,23 @@ public class HihokenshaForNinteichosaResultDiv extends Panel {
         this.txtHihokenshaNo=txtHihokenshaNo;
     }
 
-    @JsonProperty("txtHokenshaNo")
-    public TextBoxCode getTxtHokenshaNo() {
-        return txtHokenshaNo;
+    @JsonProperty("txtShikibetsuCode")
+    public TextBoxCode getTxtShikibetsuCode() {
+        return txtShikibetsuCode;
     }
 
-    @JsonProperty("txtHokenshaNo")
-    public void setTxtHokenshaNo(TextBoxCode txtHokenshaNo) {
-        this.txtHokenshaNo=txtHokenshaNo;
+    @JsonProperty("txtShikibetsuCode")
+    public void setTxtShikibetsuCode(TextBoxCode txtShikibetsuCode) {
+        this.txtShikibetsuCode=txtShikibetsuCode;
     }
 
     @JsonProperty("txtShinseiDate")
-    public TextBoxDate getTxtShinseiDate() {
+    public TextBoxFlexibleDate getTxtShinseiDate() {
         return txtShinseiDate;
     }
 
     @JsonProperty("txtShinseiDate")
-    public void setTxtShinseiDate(TextBoxDate txtShinseiDate) {
+    public void setTxtShinseiDate(TextBoxFlexibleDate txtShinseiDate) {
         this.txtShinseiDate=txtShinseiDate;
     }
 
@@ -101,12 +99,12 @@ public class HihokenshaForNinteichosaResultDiv extends Panel {
     }
 
     @JsonProperty("txtHihokenshaBirthDay")
-    public TextBoxDate getTxtHihokenshaBirthDay() {
+    public TextBoxFlexibleDate getTxtHihokenshaBirthDay() {
         return txtHihokenshaBirthDay;
     }
 
     @JsonProperty("txtHihokenshaBirthDay")
-    public void setTxtHihokenshaBirthDay(TextBoxDate txtHihokenshaBirthDay) {
+    public void setTxtHihokenshaBirthDay(TextBoxFlexibleDate txtHihokenshaBirthDay) {
         this.txtHihokenshaBirthDay=txtHihokenshaBirthDay;
     }
 
@@ -128,16 +126,6 @@ public class HihokenshaForNinteichosaResultDiv extends Panel {
     @JsonProperty("txtHihokenshaGender")
     public void setTxtHihokenshaGender(TextBox txtHihokenshaGender) {
         this.txtHihokenshaGender=txtHihokenshaGender;
-    }
-
-    @JsonProperty("lblHihokenshaJusho")
-    public Label getLblHihokenshaJusho() {
-        return lblHihokenshaJusho;
-    }
-
-    @JsonProperty("lblHihokenshaJusho")
-    public void setLblHihokenshaJusho(Label lblHihokenshaJusho) {
-        this.lblHihokenshaJusho=lblHihokenshaJusho;
     }
 
     @JsonProperty("txtHihokenshaYubinNo")

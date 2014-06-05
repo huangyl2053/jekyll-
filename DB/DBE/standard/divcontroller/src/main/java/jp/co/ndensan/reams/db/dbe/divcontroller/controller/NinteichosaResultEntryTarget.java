@@ -91,8 +91,7 @@ public class NinteichosaResultEntryTarget {
 
         private <T> List<T> createList(DemoDataType type) {
             List<HashMap> dataFromYaml = YamlLoader.FOR_DBE.loadAsList(type.path());
-            YamlUtil.convertList(dataFromYaml, createConverter(type));
-            return new ArrayList<>();
+            return YamlUtil.convertList(dataFromYaml, createConverter(type));
         }
 
         private YamlUtil.Converter.IConverter createConverter(DemoDataType type) {
@@ -113,24 +112,31 @@ public class NinteichosaResultEntryTarget {
         }
 
         private dgNinteichosaResultTaishosha_Row toDgNinteichosaResultTaishosha_Row(Map map) {
-            RString shimei = YamlUtil.toRString(map.get(""));
-            RString kanaShimei = YamlUtil.toRString(map.get(""));
+            RString shimei = YamlUtil.toRString(map.get("氏名"));
+            RString kanaShimei = YamlUtil.toRString(map.get("カナ氏名"));
             return new dgNinteichosaResultTaishosha_Row(
                     new Button(),
-                    YamlUtil.toRString(map.get("被保番号")),
                     YamlUtil.toRString(map.get("保険者番号")),
+                    YamlUtil.toRString(map.get("保険者名")),
+                    YamlUtil.toRString(map.get("被保番号")),
+                    YamlUtil.toRString(map.get("識別コード")),
                     shimei,
                     kanaShimei,
                     DataGridUtil.lineFeedBetween(kanaShimei, shimei),
                     YamlUtil.toTextBoxFlexibleDate(map.get("申請日")),
                     YamlUtil.toRString(map.get("申請区分")),
                     YamlUtil.toTextBoxFlexibleDate(map.get("調査依頼日")),
+                    YamlUtil.toRString(map.get("調査委託先コード")),
+                    YamlUtil.toRString(map.get("調査委託先名")),
+                    YamlUtil.toRString(map.get("調査員コード")),
+                    YamlUtil.toRString(map.get("調査員氏名")),
                     YamlUtil.toTextBoxFlexibleDate(map.get("誕生日")),
                     YamlUtil.toRString(map.get("性別")),
                     YamlUtil.toRString(map.get("郵便番号")),
                     YamlUtil.toRString(map.get("住所")),
                     YamlUtil.toTextBoxFlexibleDate(map.get("受付日")),
-                    YamlUtil.toTextBoxFlexibleDate(map.get("データ入力日")));
+                    YamlUtil.toTextBoxFlexibleDate(map.get("データ入力日"))
+            );
         }
     }
 }

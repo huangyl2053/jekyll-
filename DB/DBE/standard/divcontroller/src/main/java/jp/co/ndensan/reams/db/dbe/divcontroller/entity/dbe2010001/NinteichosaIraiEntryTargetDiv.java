@@ -26,6 +26,10 @@ public class NinteichosaIraiEntryTargetDiv extends Panel {
     private TextBoxCode txtHihokenshaNo;
     @JsonProperty("txtShikibetsuCode")
     private TextBoxCode txtShikibetsuCode;
+    @JsonProperty("txtShinseiDate")
+    private TextBoxFlexibleDate txtShinseiDate;
+    @JsonProperty("txtShinseiKubun")
+    private TextBox txtShinseiKubun;
     @JsonProperty("txtShimei")
     private TextBox txtShimei;
     @JsonProperty("txtBirthDay")
@@ -63,6 +67,26 @@ public class NinteichosaIraiEntryTargetDiv extends Panel {
     @JsonProperty("txtShikibetsuCode")
     public void setTxtShikibetsuCode(TextBoxCode txtShikibetsuCode) {
         this.txtShikibetsuCode=txtShikibetsuCode;
+    }
+
+    @JsonProperty("txtShinseiDate")
+    public TextBoxFlexibleDate getTxtShinseiDate() {
+        return txtShinseiDate;
+    }
+
+    @JsonProperty("txtShinseiDate")
+    public void setTxtShinseiDate(TextBoxFlexibleDate txtShinseiDate) {
+        this.txtShinseiDate=txtShinseiDate;
+    }
+
+    @JsonProperty("txtShinseiKubun")
+    public TextBox getTxtShinseiKubun() {
+        return txtShinseiKubun;
+    }
+
+    @JsonProperty("txtShinseiKubun")
+    public void setTxtShinseiKubun(TextBox txtShinseiKubun) {
+        this.txtShinseiKubun=txtShinseiKubun;
     }
 
     @JsonProperty("txtShimei")

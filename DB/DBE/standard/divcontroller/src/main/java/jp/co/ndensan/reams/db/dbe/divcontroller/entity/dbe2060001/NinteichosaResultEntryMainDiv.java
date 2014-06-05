@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.HihokenshaForNinteichosaResultDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.NinteichosaDetailDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.ShisakaiWaritsukeKiboDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.tabNinteichosaResultDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -26,6 +27,8 @@ public class NinteichosaResultEntryMainDiv extends Panel {
     private HihokenshaForNinteichosaResultDiv HihokenshaForNinteichosaResult;
     @JsonProperty("NinteichosaDetail")
     private NinteichosaDetailDiv NinteichosaDetail;
+    @JsonProperty("ShisakaiWaritsukeKibo")
+    private ShisakaiWaritsukeKiboDiv ShisakaiWaritsukeKibo;
     @JsonProperty("tabNinteichosaResult")
     private tabNinteichosaResultDiv tabNinteichosaResult;
 
@@ -53,6 +56,16 @@ public class NinteichosaResultEntryMainDiv extends Panel {
     @JsonProperty("NinteichosaDetail")
     public void setNinteichosaDetail(NinteichosaDetailDiv NinteichosaDetail) {
         this.NinteichosaDetail=NinteichosaDetail;
+    }
+
+    @JsonProperty("ShisakaiWaritsukeKibo")
+    public ShisakaiWaritsukeKiboDiv getShisakaiWaritsukeKibo() {
+        return ShisakaiWaritsukeKibo;
+    }
+
+    @JsonProperty("ShisakaiWaritsukeKibo")
+    public void setShisakaiWaritsukeKibo(ShisakaiWaritsukeKiboDiv ShisakaiWaritsukeKibo) {
+        this.ShisakaiWaritsukeKibo=ShisakaiWaritsukeKibo;
     }
 
     @JsonProperty("tabNinteichosaResult")
