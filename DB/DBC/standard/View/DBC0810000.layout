@@ -2194,14 +2194,18 @@
             "bgColor": 0,
             "width": 45,
             "visible": true,
-            "cellType": 8,
+            "cellType": 11,
             "cellDetails": {
-             "cellType": 8,
+             "cellType": 11,
              "text": "合計",
-             "onClick": "",
              "imageFileUrl": "",
              "imageWidth": "",
-             "imageHeight": ""
+             "imageHeight": "",
+             "displayChildDivName": "DBC.ServiceTeikyoShomeishoGokei",
+             "visibleCloseButton": true,
+             "onBeforeOpenDialog": "",
+             "onOkClose": "",
+             "dataPassing": []
             },
             "align": 1,
             "resize": true,
@@ -2794,7 +2798,7 @@
       "ShokanShikyuKetteiInfo"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "ShokanShikyuKetteiShinseiInfo",
+     "selectedItemFieldName": "ShokanShikyuKetteiShomeishoInfo",
      "initialTab": "3"
     }
    ],
