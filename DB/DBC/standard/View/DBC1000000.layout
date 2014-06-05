@@ -286,7 +286,7 @@
     }
    ],
    "controlType": "Panel",
-   "width": "1000",
+   "width": "1040",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -404,7 +404,7 @@
     }
    ],
    "controlType": "PanelPublish",
-   "width": "1000",
+   "width": "1040",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -550,7 +550,7 @@
     }
    ],
    "controlType": "PanelPublish",
-   "width": "1000",
+   "width": "1040",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -597,7 +597,7 @@
    "isEmptyControl": false
   },
   {
-   "fieldName": "ShokanShikyuKetteiTsuchishoKyotsu",
+   "fieldName": "KyotsuPanel",
    "items": [
     {
      "fieldName": "btnCreate",
@@ -640,14 +640,14 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
-   "selectControlID": "ShokanShikyuKetteiTsuchishoKyotsu",
+   "selectControlID": "KyotsuPanel",
    "onLoad": "",
    "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "ShokanShikyuKetteiTsuchishoKyotsu"
+     "postParameterPanelNames": "KyotsuPanel"
     }
    ],
    "requestSettings": [],
@@ -723,7 +723,7 @@
      "fixedDiv": ""
     },
     {
-     "visibleDiv": "ShokanShikyuKetteiTsuchishoKyotsu",
+     "visibleDiv": "KyotsuPanel",
      "panelState": "visible",
      "fixedDiv": ""
     },
@@ -772,7 +772,7 @@
    "ShokanShikyuKetteishaListSettingOutputOrder"
   ],
   [
-   "ShokanShikyuKetteiTsuchishoKyotsu"
+   "KyotsuPanel"
   ]
  ],
  "panelMargin": 1,

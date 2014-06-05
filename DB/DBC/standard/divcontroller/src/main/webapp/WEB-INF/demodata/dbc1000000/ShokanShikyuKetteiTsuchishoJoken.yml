@@ -5,8 +5,8 @@
   前回対象終了日: 20140531
   受付決定key: "key0"
   受付開始日: 20140601
-  受付終了日: 20140620
-  決定開始日: 20140610
+  受付終了日: 20140630
+  決定開始日: 20140601
   決定終了日: 20140630
 - TsuchishoSettingPrintSettingId: 1
   発効日: 20140601
@@ -17,7 +17,7 @@
 - KetteishaListSettingPrintSettingId: 3
   発効日: 20140601
 - KetteishaListSettingPrintSettingId: 4
-  口座振替予定日: 20140701
+  口座振替予定日: 20140710
   窓口支払い期間開始日: 20140710
   窓口支払い期間終了日: 20140731
 - KetteishaListSettingOutputOrderId: 5
