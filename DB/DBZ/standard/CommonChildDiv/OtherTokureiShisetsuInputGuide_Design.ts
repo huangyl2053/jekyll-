@@ -53,8 +53,9 @@ module DBZ {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "radkannaiKubun_core",
      "onChange": "",
-     "selectedItem": "keyAll",
+     "selectedItem": null,
      "dataSource": [
       {
        "key": "keyAll",
@@ -72,16 +73,17 @@ module DBZ {
      "required": false,
      "onClick": "",
      "newLineItemNumber": 3,
-     "spaceSize": 1,
+     "spaceSize": "M",
      "labelLText": "管内・管外区分:",
      "labelLWidth": "120",
-     "labelLAlign": 2
+     "labelLAlign": 2,
+     "icon": []
     },
     {
      "fieldName": "btnSearchOtherShisetsu",
      "items": [],
      "controlType": "Button",
-     "width": "M",
+     "width": "260",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -94,7 +96,9 @@ module DBZ {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnSearchOtherShisetsu",
      "onClick": "onClick_btnSearchOtherShisetsu",
+     "icon": 0,
      "text": "該当する施設を表示する",
      "appearance": 0,
      "imageFileUrl": "",
@@ -121,41 +125,25 @@ module DBZ {
        "authorityMode": 0,
        "marginLeft": "S",
        "marginRight": "XS",
+       "selectControlID": "dgSearchResultOtherTokureiShisetsu",
        "dataSource": [],
        "gridSetting": {
         "rowHeight": 25,
         "isMultiSelectable": false,
+        "isShowHeader": true,
         "isShowFooter": true,
         "isShowFilter": false,
         "isShowFilterButton": false,
         "isShowRowState": false,
+        "isShowSelectButtonColumn": true,
+        "isShowModifyButtonColumn": false,
+        "isShowDeleteButtonColumn": false,
         "header": {
          "combineColumns": [],
          "frozenColumn": "",
          "headerHeight": 0
         },
         "columns": [
-         {
-          "columnName": "",
-          "dataName": "select",
-          "toolTip": "",
-          "bgColor": 0,
-          "width": 40,
-          "visible": true,
-          "cellType": 8,
-          "cellDetails": {
-           "cellType": 8,
-           "text": "■",
-           "onClick": "onClick_select",
-           "imageFileUrl": "",
-           "imageWidth": "",
-           "imageHeight": ""
-          },
-          "align": 0,
-          "resize": false,
-          "isPrivateInfo": false,
-          "sortKey": "select"
-         },
          {
           "columnName": "事業者コード",
           "dataName": "jigyoshaCode",
@@ -222,6 +210,9 @@ module DBZ {
        "onSort": "",
        "onSelect": "",
        "onSelectByDblClick": "",
+       "onSelectBySelectButton": "onSelectBySelectButton_dgSearchResultOtherTokureiShisetsu",
+       "onSelectByModifyButton": "",
+       "onSelectByDeleteButton": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
@@ -232,7 +223,7 @@ module DBZ {
       }
      ],
      "controlType": "Panel",
-     "width": "M",
+     "width": "G2",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -245,6 +236,7 @@ module DBZ {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "SearchResultOtherShisetsu",
      "onLoad": "",
      "title": "その他特例施設一覧",
      "marginTop": "XS",
@@ -267,13 +259,15 @@ module DBZ {
      "eraseBorderLeft": false,
      "backgroundColor": 0,
      "widthAuto": true,
-     "isGroupBox": false
+     "panelDisplay": 0,
+     "isGroupBox": false,
+     "readOnly": false
     },
     {
      "fieldName": "btnOtherShisetsuReturn",
      "items": [],
      "controlType": "Button",
-     "width": "80",
+     "width": "260",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -286,8 +280,10 @@ module DBZ {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnOtherShisetsuReturn",
      "onClick": "onClick_btnOtherShisetsuReturn",
-     "text": "キャンセル",
+     "icon": 0,
+     "text": "その他特例施設入力ガイドを閉じる",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -295,7 +291,7 @@ module DBZ {
     }
    ],
    "controlType": "Panel",
-   "width": "M",
+   "width": "G2",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -308,8 +304,9 @@ module DBZ {
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "OtherTokureiShisetsuInputGuide",
    "onLoad": "",
-   "title": "その他特例施設検索",
+   "title": "その他特例施設入力ガイド",
    "marginTop": "Default",
    "marginBottom": "Default",
    "isOpen": true,
@@ -329,8 +326,8 @@ module DBZ {
      "requestUrl": "dbz/db/dbz/OtherTokureiShisetsuInputGuide/onClick_btnSearchOtherShisetsu"
     },
     {
-     "eventName": "onClick_select",
-     "requestUrl": "dbz/db/dbz/OtherTokureiShisetsuInputGuide/onClick_select"
+     "eventName": "onSelectBySelectButton_dgSearchResultOtherTokureiShisetsu",
+     "requestUrl": "dbz/db/dbz/OtherTokureiShisetsuInputGuide/onSelectBySelectButton_dgSearchResultOtherTokureiShisetsu"
     }
    ],
    "hiddenInput": [
@@ -352,7 +349,9 @@ module DBZ {
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": true,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false
   }
  ],
  "controlType": "CommonChildDiv",
@@ -369,6 +368,7 @@ module DBZ {
  "authorityMode": 0,
  "marginLeft": 0,
  "marginRight": 0,
+ "selectControlID": "defaultLayout",
  "relation": [],
  "businessId": "DBZ",
  "controlName": "OtherTokureiShisetsuInputGuide",
@@ -385,7 +385,7 @@ module DBZ {
    "controlName": "OtherTokureiShisetsuInputGuide.shisetsuMeisho"
   }
  ],
- "dialogOkEventNameForDialog": "onClick_select",
+ "dialogOkEventNameForDialog": "onSelectBySelectButton_dgSearchResultOtherTokureiShisetsu",
  "dialogCancelEventNameForDialog": "onClick_btnOtherShisetsuReturn"
 }        
     }

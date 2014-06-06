@@ -1,15 +1,14 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.othertokureishisetsuinputguide;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed May 14 10:57:48 JST 2014 
+ * Fri Jun 06 19:51:39 JST 2014 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 
@@ -21,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class dgSearchResultOtherTokureiShisetsu_Row extends DataRow {
 
-    private Button select;
     private RString jigyoshaCode;
     private RString jigyoshaMeisho;
     private RString jigyosha;
@@ -31,22 +29,16 @@ public class dgSearchResultOtherTokureiShisetsu_Row extends DataRow {
         super();
     }
 
-    public dgSearchResultOtherTokureiShisetsu_Row(Button select, RString jigyoshaCode, RString jigyoshaMeisho, RString jigyosha, RString jusho) {
+    public dgSearchResultOtherTokureiShisetsu_Row(RString jigyoshaCode, RString jigyoshaMeisho, RString jigyosha, RString jusho) {
         super();
-        this.setOriginalData("select", select);
         this.setOriginalData("jigyoshaCode", jigyoshaCode);
         this.setOriginalData("jigyoshaMeisho", jigyoshaMeisho);
         this.setOriginalData("jigyosha", jigyosha);
         this.setOriginalData("jusho", jusho);
-        this.select = select;
         this.jigyoshaCode = jigyoshaCode;
         this.jigyoshaMeisho = jigyoshaMeisho;
         this.jigyosha = jigyosha;
         this.jusho = jusho;
-    }
-
-    public Button getSelect() {
-        return select;
     }
 
     public RString getJigyoshaCode() {
@@ -63,11 +55,6 @@ public class dgSearchResultOtherTokureiShisetsu_Row extends DataRow {
 
     public RString getJusho() {
         return jusho;
-    }
-
-    public void setSelect(Button select) {
-        this.setOriginalData("select", select);
-        this.select = select;
     }
 
     public void setJigyoshaCode(RString jigyoshaCode) {

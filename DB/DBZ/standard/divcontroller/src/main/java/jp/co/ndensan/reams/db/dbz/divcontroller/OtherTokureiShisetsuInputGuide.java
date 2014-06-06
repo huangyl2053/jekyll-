@@ -9,12 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.OtherTokureiShisetsuInputGuideDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgSearchResultOtherTokureiShisetsu_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.othertokureishisetsuinputguide.OtherTokureiShisetsuInputGuideDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.othertokureishisetsuinputguide.dgSearchResultOtherTokureiShisetsu_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 
 /**
  * その他特例施設を入力する際に使用する、入力補助のための共通子Divです。
@@ -62,8 +61,8 @@ public class OtherTokureiShisetsuInputGuide {
     }
 
     private dgSearchResultOtherTokureiShisetsu_Row createOtherShisetsuGridRow(Map 特例施設情報) {
-        dgSearchResultOtherTokureiShisetsu_Row row = new dgSearchResultOtherTokureiShisetsu_Row(new Button(),
-                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+        dgSearchResultOtherTokureiShisetsu_Row row = new dgSearchResultOtherTokureiShisetsu_Row(RString.EMPTY, RString.EMPTY,
+                RString.EMPTY, RString.EMPTY);
         row.setJigyoshaCode(new RString(特例施設情報.get("事業者コード").toString()));
         row.setJigyoshaMeisho(new RString(特例施設情報.get("事業者名称").toString()));
         row.setJusho(new RString(特例施設情報.get("住所").toString()));
@@ -79,7 +78,7 @@ public class OtherTokureiShisetsuInputGuide {
      * @param div OtherTokureiShisetsuInputGuideDiv
      * @return レスポンス
      */
-    public ResponseData onClick_select(OtherTokureiShisetsuInputGuideDiv div) {
+    public ResponseData onSelectBySelectButton_dgSearchResultOtherTokureiShisetsu(OtherTokureiShisetsuInputGuideDiv div) {
         ResponseData<OtherTokureiShisetsuInputGuideDiv> response = new ResponseData<>();
 
         dgSearchResultOtherTokureiShisetsu_Row row = div.getSearchResultOtherShisetsu().getDgSearchResultOtherTokureiShisetsu().getClickedItem();
