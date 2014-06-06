@@ -8,12 +8,11 @@ package jp.co.ndensan.reams.db.dbz.divcontroller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.TekiyoJogaiShisetsuInputGuideDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgTekiyoJogaiShisetsu_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.tekiyojogaishisetsuinputguide.TekiyoJogaiShisetsuInputGuideDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.tekiyojogaishisetsuinputguide.dgTekiyoJogaiShisetsu_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 
 /**
@@ -51,8 +50,7 @@ public class TekiyoJogaiShisetsuInputGuide {
     }
 
     private dgTekiyoJogaiShisetsu_Row createRowData(HashMap demoData) {
-        dgTekiyoJogaiShisetsu_Row row = new dgTekiyoJogaiShisetsu_Row(new Button(),
-                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+        dgTekiyoJogaiShisetsu_Row row = new dgTekiyoJogaiShisetsu_Row(RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
         row.setJigyoshaNo(new RString(demoData.get("事業者コード").toString()));
         row.setJigyoshaMeisho(new RString(demoData.get("事業者名称").toString()));
         row.setJigyosha(row.getJigyoshaNo().concat(":").concat(row.getJigyoshaMeisho()));
@@ -66,7 +64,7 @@ public class TekiyoJogaiShisetsuInputGuide {
      * @param inputGuide 適用除外施設入力ガイドDiv
      * @return レスポンス
      */
-    public ResponseData onClick_btnSelect(TekiyoJogaiShisetsuInputGuideDiv inputGuide) {
+    public ResponseData onSelectBySelectButton_dgTekiyoJogaiShisetsu(TekiyoJogaiShisetsuInputGuideDiv inputGuide) {
         ResponseData<TekiyoJogaiShisetsuInputGuideDiv> response = new ResponseData<>();
 
         dgTekiyoJogaiShisetsu_Row row = inputGuide.getDgTekiyoJogaiShisetsu().getClickedItem();
