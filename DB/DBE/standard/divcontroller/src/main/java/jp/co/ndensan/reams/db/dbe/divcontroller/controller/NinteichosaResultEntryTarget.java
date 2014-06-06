@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.NinteichosaResultEntryTargetDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.dgNinteichosaResultTaishosha_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.DataGridUtil;
@@ -33,7 +34,7 @@ public class NinteichosaResultEntryTarget {
      */
     public ResponseData<NinteichosaResultEntryTargetDiv> onLoad(NinteichosaResultEntryTargetDiv div) {
         ResponseData<NinteichosaResultEntryTargetDiv> response = new ResponseData<>();
-        System.out.println("a");
+
         div.getDgNinteichosaResultTaishosha().setDataSource(_findTarget());
 
         response.data = div;
@@ -112,30 +113,31 @@ public class NinteichosaResultEntryTarget {
         }
 
         private dgNinteichosaResultTaishosha_Row toDgNinteichosaResultTaishosha_Row(Map map) {
-            RString shimei = YamlUtil.toRString(map.get("氏名"));
-            RString kanaShimei = YamlUtil.toRString(map.get("カナ氏名"));
+            ControlGenerator cg = new ControlGenerator(map);
+            RString shimei = cg.getAsRString("氏名");
+            RString kanaShimei = cg.getAsRString("カナ氏名");
             return new dgNinteichosaResultTaishosha_Row(
                     new Button(),
-                    YamlUtil.toRString(map.get("保険者番号")),
-                    YamlUtil.toRString(map.get("保険者名")),
-                    YamlUtil.toRString(map.get("被保番号")),
-                    YamlUtil.toRString(map.get("識別コード")),
+                    cg.getAsRString("保険者番号"),
+                    cg.getAsRString("保険者名"),
+                    cg.getAsRString("被保番号"),
+                    cg.getAsRString("識別コード"),
                     shimei,
                     kanaShimei,
                     DataGridUtil.lineFeedBetween(kanaShimei, shimei),
-                    YamlUtil.toTextBoxFlexibleDate(map.get("申請日")),
-                    YamlUtil.toRString(map.get("申請区分")),
-                    YamlUtil.toTextBoxFlexibleDate(map.get("調査依頼日")),
-                    YamlUtil.toRString(map.get("調査委託先コード")),
-                    YamlUtil.toRString(map.get("調査委託先名")),
-                    YamlUtil.toRString(map.get("調査員コード")),
-                    YamlUtil.toRString(map.get("調査員氏名")),
-                    YamlUtil.toTextBoxFlexibleDate(map.get("誕生日")),
-                    YamlUtil.toRString(map.get("性別")),
-                    YamlUtil.toRString(map.get("郵便番号")),
-                    YamlUtil.toRString(map.get("住所")),
-                    YamlUtil.toTextBoxFlexibleDate(map.get("受付日")),
-                    YamlUtil.toTextBoxFlexibleDate(map.get("データ入力日"))
+                    cg.getAsTextBoxFlexibleDate("申請日"),
+                    cg.getAsRString("申請区分"),
+                    cg.getAsTextBoxFlexibleDate("調査依頼日"),
+                    cg.getAsRString("調査委託先コード"),
+                    cg.getAsRString("調査委託先名"),
+                    cg.getAsRString("調査員コード"),
+                    cg.getAsRString("調査員氏名"),
+                    cg.getAsTextBoxFlexibleDate("誕生日"),
+                    cg.getAsRString("性別"),
+                    cg.getAsRString("郵便番号"),
+                    cg.getAsRString("住所"),
+                    cg.getAsTextBoxFlexibleDate("受付日"),
+                    cg.getAsTextBoxFlexibleDate("データ入力日")
             );
         }
     }

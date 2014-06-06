@@ -9,13 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
- * Yaml用ユーティリティです。<br/>
- * Object型を、RString,boolean,TextBoxFlexibleDateなどへ変換するメソッドを提供します。<br/>
+ * YamlLoaderをより便利に使うためのユーティリティです。<br/>
  * また、YamlLoader#loadAsList()より取得できるListを、指定の型のオブジェクトを保持するListへ変換する
  * convertList()などを提供します。
  *
@@ -24,58 +20,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 public final class YamlUtil {
 
     private YamlUtil() {
-    }
-
-    /**
-     * Object.toString() をRStringへ変換して返します。 <br/>
-     * 引数がnullのときはRString.EMPTYを返します。
-     *
-     * @param obj Object
-     * @return obj.toString()の値を持ったRString
-     * @deprecated ControlGeneratorのほうが便利です。
-     */
-    @Deprecated
-    public static RString toRString(Object obj) {
-        if (obj == null) {
-            return RString.EMPTY;
-        }
-        return new RString(obj.toString());
-    }
-
-    /**
-     * Object.toString() が"true"のときtrueを返します。<br/>
-     * 引数nullのときはfalseを返します。
-     *
-     * @param obj Object
-     * @return Object.toString() が"true"のときtrue,それ以外false
-     * @deprecated ControlGeneratorのほうが便利です。
-     */
-    @Deprecated
-    public static boolean toBoolean(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        return Boolean.valueOf(obj.toString()).booleanValue();
-    }
-
-    /**
-     * Object.toString()と同値のFlexibleDateをもったTextBoxFlexibleDate返します。
-     * 引数がnullのときはFlexibleDate.EMPTYをもったTextBoxFlexibleDate返します。
-     *
-     * @param obj Object
-     * @return TextBoxFlexibleDate
-     * @deprecated ControlGeneratorのほうが便利です。
-     */
-    @Deprecated
-    public static TextBoxFlexibleDate toTextBoxFlexibleDate(Object obj) {
-        TextBoxFlexibleDate textBox = new TextBoxFlexibleDate();
-        RString date = toRString(obj);
-        if (date.equals(RString.EMPTY)) {
-            textBox.setValue(FlexibleDate.EMPTY);
-        } else {
-            textBox.setValue(new FlexibleDate(date));
-        }
-        return textBox;
     }
 
     /**
@@ -102,14 +46,14 @@ public final class YamlUtil {
      */
     public static <T> List<T> convertList(List<HashMap> dataFromYaml, Converter.IConverter<T> conveter) {
         List<T> list = new ArrayList<>();
-        for (HashMap map : dataFromYaml) {
+        for (Map map : dataFromYaml) {
             list.add(conveter.exec(map));
         }
         return list;
     }
 
     /**
-     * HashMapを変換するための定数やインターフェースを持ちます。
+     * YamlUtil#convertList()で使用する、Mapを変換するための定数やインターフェースを持ちます。
      */
     public static final class Converter {
 

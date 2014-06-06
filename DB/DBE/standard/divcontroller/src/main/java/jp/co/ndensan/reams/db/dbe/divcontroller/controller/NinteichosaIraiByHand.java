@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.RequestContent
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.dgChosaItakusakiList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ninteichosaIraiListForByHandCom.dgNinteichosaIraiListForByHand_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.shozokuChosainList.dgShozokuChosainList_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil.Converter;
@@ -327,61 +328,66 @@ public class NinteichosaIraiByHand {
         }
 
         private dgChosaItakusakiList_Row _to_dgChosaItakusakiList_Row(Map map) {
+            ControlGenerator cg = new ControlGenerator(map);
             return new dgChosaItakusakiList_Row(
-                    YamlUtil.toRString(map.get("調査委託先番号")),
-                    YamlUtil.toRString(map.get("調査委託先名称")),
-                    YamlUtil.toRString(map.get("割付定員")),
-                    YamlUtil.toRString(map.get("割付済み")),
-                    YamlUtil.toRString(map.get("割付地区査員番号")));
+                    cg.getAsRString("調査委託先番号"),
+                    cg.getAsRString("調査委託先名称"),
+                    cg.getAsRString("割付定員"),
+                    cg.getAsRString("割付済み"),
+                    cg.getAsRString("割付地区査員番号")
+            );
         }
 
         private dgShozokuChosainList_Row _to_dgShozokuChosainList_Row(Map map) {
+            ControlGenerator cg = new ControlGenerator(map);
             return new dgShozokuChosainList_Row(new Button(),
-                    YamlUtil.toRString(map.get("調査員番号")),
-                    YamlUtil.toRString(map.get("調査員氏名")),
-                    YamlUtil.toRString(map.get("割付済人数")),
-                    YamlUtil.toRString(map.get("地区")),
-                    YamlUtil.toRString(map.get("調査委託先番号")));
+                    cg.getAsRString("調査員番号"),
+                    cg.getAsRString("調査員氏名"),
+                    cg.getAsRString("割付済人数"),
+                    cg.getAsRString("地区"),
+                    cg.getAsRString("調査委託先番号")
+            );
         }
 
         private dgNinteichosaIraiListForByHand_Row _to_dgNinteichosaIraiListForByHand_Row(Map map) {
-            RString shimei = YamlUtil.toRString(map.get("氏名"));
-            RString kanaShimei = YamlUtil.toRString(map.get("カナ氏名"));
+            ControlGenerator cg = new ControlGenerator(map);
+            RString shimei = cg.getAsRString("氏名");
+            RString kanaShimei = cg.getAsRString("カナ氏名");
             return new dgNinteichosaIraiListForByHand_Row(
-                    YamlUtil.toBoolean(map.get("調査状況")),
-                    _compose調査状況(YamlUtil.toRString(map.get("調査状況"))),
+                    cg.getAsBooleanValue("調査状況"),
+                    _compose調査状況(cg.getAsRString("調査状況")),
                     new Button(),
-                    YamlUtil.toRString(map.get("保険者番号")),
-                    YamlUtil.toRString(map.get("市町村")),
-                    YamlUtil.toRString(map.get("支所コード")),
-                    YamlUtil.toRString(map.get("支所")),
-                    YamlUtil.toRString(map.get("被保番号")),
+                    cg.getAsRString("保険者番号"),
+                    cg.getAsRString("市町村"),
+                    cg.getAsRString("支所コード"),
+                    cg.getAsRString("支所"),
+                    cg.getAsRString("被保番号"),
                     shimei,
                     kanaShimei,
                     DataGridUtil.lineFeedBetween(kanaShimei, shimei),
-                    YamlUtil.toRString(map.get("認定申請区分")),
-                    YamlUtil.toTextBoxFlexibleDate(map.get("認定申請日")),
-                    YamlUtil.toRString(map.get("調査依頼区分")),
-                    YamlUtil.toTextBoxFlexibleDate(map.get("調査依頼日")),
-                    YamlUtil.toTextBoxFlexibleDate(map.get("調査期限日")),
-                    YamlUtil.toTextBoxFlexibleDate(map.get("依頼書発行日")),
-                    YamlUtil.toRString(map.get("調査委託先番号")),
-                    YamlUtil.toRString(map.get("調査委託先名")),
-                    YamlUtil.toRString(map.get("調査員番号")),
-                    YamlUtil.toRString(map.get("調査員名")),
-                    YamlUtil.toRString(map.get("前回調査委託先番号")),
-                    YamlUtil.toRString(map.get("前回調査委託先名")),
-                    YamlUtil.toRString(map.get("前回調査員番号")),
-                    YamlUtil.toRString(map.get("前回調査員名")),
-                    YamlUtil.toRString(map.get("前々回調査委託先番号")),
-                    YamlUtil.toRString(map.get("前々回調査委託先名")),
-                    YamlUtil.toRString(map.get("前々回調査員番号")),
-                    YamlUtil.toRString(map.get("前々回調査員名")),
-                    YamlUtil.toTextBoxFlexibleDate(map.get("督促日")),
-                    YamlUtil.toRString(map.get("督促回数")),
-                    YamlUtil.toRString(map.get("郵便番号")),
-                    YamlUtil.toRString(map.get("住所")),
-                    YamlUtil.toRString(map.get("入所施設"))
+                    cg.getAsRString("認定申請区分"),
+                    cg.getAsTextBoxFlexibleDate("認定申請日"),
+                    cg.getAsRString("調査依頼区分"),
+                    cg.getAsTextBoxFlexibleDate("調査依頼日"),
+                    cg.getAsTextBoxFlexibleDate("調査期限日"),
+                    cg.getAsTextBoxFlexibleDate("依頼書発行日"),
+                    cg.getAsRString("調査委託先番号"),
+                    cg.getAsRString("調査委託先名"),
+                    cg.getAsRString("調査員番号"),
+                    cg.getAsRString("調査員名"),
+                    cg.getAsRString("前回調査委託先番号"),
+                    cg.getAsRString("前回調査委託先名"),
+                    cg.getAsRString("前回調査員番号"),
+                    cg.getAsRString("前回調査員名"),
+                    cg.getAsRString("前々回調査委託先番号"),
+                    cg.getAsRString("前々回調査委託先名"),
+                    cg.getAsRString("前々回調査員番号"),
+                    cg.getAsRString("前々回調査員名"),
+                    cg.getAsTextBoxFlexibleDate("督促日"),
+                    cg.getAsRString("督促回数"),
+                    cg.getAsRString("郵便番号"),
+                    cg.getAsRString("住所"),
+                    cg.getAsRString("入所施設")
             );
         }
 

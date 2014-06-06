@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2050001.ShujiiIkenshoI
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2050001.ShujiiIkenshoRelatedReportTypeDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2050001.dgNinteichosaIraishoTargetPersons_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2050001.dgShujiiIkenshoIraishoTargetPersons_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil.Converter;
@@ -701,39 +702,43 @@ public class IraishoIkkatsuHakko {
         }
 
         private dgNinteichosaIraishoTargetPersons_Row _toDgNinteichosaIraishoTargetPersons_Row(Map map) {
-            RString shimei = YamlUtil.toRString(map.get("氏名"));
-            RString kanaShimei = YamlUtil.toRString(map.get("カナ氏名"));
+            ControlGenerator cg = new ControlGenerator(map);
+            RString shimei = cg.getAsRString("氏名");
+            RString kanaShimei = cg.getAsRString("カナ氏名");
             return new dgNinteichosaIraishoTargetPersons_Row(
-                    YamlUtil.toRString(map.get("調査委託先番号")),
-                    YamlUtil.toRString(map.get("調査委託先名称")),
-                    YamlUtil.toRString(map.get("調査員番号")),
-                    YamlUtil.toRString(map.get("調査員名称")),
-                    YamlUtil.toRString(map.get("被保番号")),
+                    cg.getAsRString("調査委託先番号"),
+                    cg.getAsRString("調査委託先名称"),
+                    cg.getAsRString("調査員番号"),
+                    cg.getAsRString("調査員名称"),
+                    cg.getAsRString("被保番号"),
                     shimei,
                     kanaShimei,
                     DataGridUtil.lineFeedBetween(kanaShimei, shimei),
-                    YamlUtil.toTextBoxFlexibleDate(map.get("申請日")),
-                    YamlUtil.toRString(map.get("申請区分")),
-                    YamlUtil.toTextBoxFlexibleDate(map.get("調査依頼日")),
-                    YamlUtil.toTextBoxFlexibleDate(map.get("調査依頼書発行日")));
+                    cg.getAsTextBoxFlexibleDate("申請日"),
+                    cg.getAsRString("申請区分"),
+                    cg.getAsTextBoxFlexibleDate("調査依頼日"),
+                    cg.getAsTextBoxFlexibleDate("調査依頼書発行日")
+            );
         }
 
         private dgShujiiIkenshoIraishoTargetPersons_Row _toDgShujiiIkenshoIraishoTargetPersons_Row(Map map) {
-            RString shimei = YamlUtil.toRString(map.get("氏名"));
-            RString kanaShimei = YamlUtil.toRString(map.get("カナ氏名"));
+            ControlGenerator cg = new ControlGenerator(map);
+            RString shimei = cg.getAsRString("氏名");
+            RString kanaShimei = cg.getAsRString("カナ氏名");
             return new dgShujiiIkenshoIraishoTargetPersons_Row(
-                    YamlUtil.toRString(map.get("医療機関番号")),
-                    YamlUtil.toRString(map.get("医療機関名称")),
-                    YamlUtil.toRString(map.get("主治医番号")),
-                    YamlUtil.toRString(map.get("主治医名称")),
-                    YamlUtil.toRString(map.get("被保番号")),
+                    cg.getAsRString("医療機関番号"),
+                    cg.getAsRString("医療機関名称"),
+                    cg.getAsRString("主治医番号"),
+                    cg.getAsRString("主治医名称"),
+                    cg.getAsRString("被保番号"),
                     shimei,
                     kanaShimei,
                     DataGridUtil.lineFeedBetween(kanaShimei, shimei),
-                    YamlUtil.toTextBoxFlexibleDate(map.get("申請日")),
-                    YamlUtil.toRString(map.get("申請区分")),
-                    YamlUtil.toTextBoxFlexibleDate(map.get("作成依頼日")),
-                    YamlUtil.toTextBoxFlexibleDate(map.get("作成依頼書発行日")));
+                    cg.getAsTextBoxFlexibleDate("申請日"),
+                    cg.getAsRString("申請区分"),
+                    cg.getAsTextBoxFlexibleDate("作成依頼日"),
+                    cg.getAsTextBoxFlexibleDate("作成依頼書発行日")
+            );
         }
     }
     //</editor-fold>
