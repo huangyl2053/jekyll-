@@ -59,7 +59,7 @@
          "fieldName": "radUketsukeKetteiYMD",
          "items": [],
          "controlType": "RadioButton",
-         "width": "65",
+         "width": "70",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -286,7 +286,7 @@
     }
    ],
    "controlType": "Panel",
-   "width": "1040",
+   "width": "1120",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -404,7 +404,7 @@
     }
    ],
    "controlType": "PanelPublish",
-   "width": "1040",
+   "width": "1120",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -509,17 +509,16 @@
      "marginLeft": 0,
      "marginRight": 0,
      "selectControlID": "ShokanShikyuKetteishaListPayDate",
+     "title": "支払方法",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
+     "panelDisplay": 1,
      "businessId": "DBC",
      "controlName": "PaymentDate",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "PaymentDate_title": "支払方法",
-     "PaymentDate_isGroupBox": false,
-     "PaymentDate_canOpenAndClose": false
+     "dialogCancelEventNameForDialog": ""
     },
     {
      "fieldName": "ShokanShikyuKetteishaListSettingOutputOrder",
@@ -550,7 +549,7 @@
     }
    ],
    "controlType": "PanelPublish",
-   "width": "1040",
+   "width": "1120",
    "visible": true,
    "displayNone": false,
    "disabled": false,
