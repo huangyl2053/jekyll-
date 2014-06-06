@@ -33,6 +33,20 @@ public class KonkaiShinsaKekkaDiv extends Panel {
     private TextBox txtShinsakaiMemo;
     @JsonProperty("txtYokaigoJyotaizorei")
     private TextBox txtYokaigoJyotaizorei;
+    @JsonProperty("txtTsuchiKbn")
+    private TextBox txtTsuchiKbn;
+    @JsonProperty("txtTsuchibi")
+    private TextBoxDate txtTsuchibi;
+    @JsonProperty("txtYukokikanKaishibi")
+    private TextBoxDate txtYukokikanKaishibi;
+    @JsonProperty("Label1")
+    private Label Label1;
+    @JsonProperty("txtYukokikanShuryobi")
+    private TextBoxDate txtYukokikanShuryobi;
+    @JsonProperty("txtNinteiKikan")
+    private TextBox txtNinteiKikan;
+    @JsonProperty("txtTsuchiRiyu")
+    private TextBox txtTsuchiRiyu;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -98,6 +112,76 @@ public class KonkaiShinsaKekkaDiv extends Panel {
     @JsonProperty("txtYokaigoJyotaizorei")
     public void setTxtYokaigoJyotaizorei(TextBox txtYokaigoJyotaizorei) {
         this.txtYokaigoJyotaizorei=txtYokaigoJyotaizorei;
+    }
+
+    @JsonProperty("txtTsuchiKbn")
+    public TextBox getTxtTsuchiKbn() {
+        return txtTsuchiKbn;
+    }
+
+    @JsonProperty("txtTsuchiKbn")
+    public void setTxtTsuchiKbn(TextBox txtTsuchiKbn) {
+        this.txtTsuchiKbn=txtTsuchiKbn;
+    }
+
+    @JsonProperty("txtTsuchibi")
+    public TextBoxDate getTxtTsuchibi() {
+        return txtTsuchibi;
+    }
+
+    @JsonProperty("txtTsuchibi")
+    public void setTxtTsuchibi(TextBoxDate txtTsuchibi) {
+        this.txtTsuchibi=txtTsuchibi;
+    }
+
+    @JsonProperty("txtYukokikanKaishibi")
+    public TextBoxDate getTxtYukokikanKaishibi() {
+        return txtYukokikanKaishibi;
+    }
+
+    @JsonProperty("txtYukokikanKaishibi")
+    public void setTxtYukokikanKaishibi(TextBoxDate txtYukokikanKaishibi) {
+        this.txtYukokikanKaishibi=txtYukokikanKaishibi;
+    }
+
+    @JsonProperty("Label1")
+    public Label getLabel1() {
+        return Label1;
+    }
+
+    @JsonProperty("Label1")
+    public void setLabel1(Label Label1) {
+        this.Label1=Label1;
+    }
+
+    @JsonProperty("txtYukokikanShuryobi")
+    public TextBoxDate getTxtYukokikanShuryobi() {
+        return txtYukokikanShuryobi;
+    }
+
+    @JsonProperty("txtYukokikanShuryobi")
+    public void setTxtYukokikanShuryobi(TextBoxDate txtYukokikanShuryobi) {
+        this.txtYukokikanShuryobi=txtYukokikanShuryobi;
+    }
+
+    @JsonProperty("txtNinteiKikan")
+    public TextBox getTxtNinteiKikan() {
+        return txtNinteiKikan;
+    }
+
+    @JsonProperty("txtNinteiKikan")
+    public void setTxtNinteiKikan(TextBox txtNinteiKikan) {
+        this.txtNinteiKikan=txtNinteiKikan;
+    }
+
+    @JsonProperty("txtTsuchiRiyu")
+    public TextBox getTxtTsuchiRiyu() {
+        return txtTsuchiRiyu;
+    }
+
+    @JsonProperty("txtTsuchiRiyu")
+    public void setTxtTsuchiRiyu(TextBox txtTsuchiRiyu) {
+        this.txtTsuchiRiyu=txtTsuchiRiyu;
     }
 
 }

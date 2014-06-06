@@ -53,7 +53,7 @@ var DBE;
                             "onBlur": "",
                             "onChange": "",
                             "onKeyPress": "",
-                            "text": "平26.05.15",
+                            "text": "",
                             "labelLText": "一次判定日",
                             "labelRText": "",
                             "labelLWidth": "80",
@@ -62,7 +62,7 @@ var DBE;
                             "labelRAlign": 0,
                             "ymdKubun": 2,
                             "displayFormat": 0,
-                            "value": "2014/05/15",
+                            "value": "",
                             "textKind": 0
                         },
                         {
