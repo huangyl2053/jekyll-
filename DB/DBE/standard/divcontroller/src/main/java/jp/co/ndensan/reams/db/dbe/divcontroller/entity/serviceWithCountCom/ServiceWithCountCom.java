@@ -29,6 +29,8 @@ public class ServiceWithCountCom extends CompositeControl {
     private TextBoxNum txtNum;
     @JsonProperty("lblUnit")
     private Label lblUnit;
+    @JsonProperty("radKaigoOrYobo")
+    private RadioButton radKaigoOrYobo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -74,6 +76,16 @@ public class ServiceWithCountCom extends CompositeControl {
     @JsonProperty("lblUnit")
     public void setLblUnit(Label lblUnit) {
         this.lblUnit=lblUnit;
+    }
+
+    @JsonProperty("radKaigoOrYobo")
+    public RadioButton getRadKaigoOrYobo() {
+        return radKaigoOrYobo;
+    }
+
+    @JsonProperty("radKaigoOrYobo")
+    public void setRadKaigoOrYobo(RadioButton radKaigoOrYobo) {
+        this.radKaigoOrYobo=radKaigoOrYobo;
     }
 
 }

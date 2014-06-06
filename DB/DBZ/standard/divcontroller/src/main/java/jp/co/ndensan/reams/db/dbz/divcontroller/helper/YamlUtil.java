@@ -32,7 +32,9 @@ public final class YamlUtil {
      *
      * @param obj Object
      * @return obj.toString()の値を持ったRString
+     * @deprecated ControlGeneratorのほうが便利です。
      */
+    @Deprecated
     public static RString toRString(Object obj) {
         if (obj == null) {
             return RString.EMPTY;
@@ -46,7 +48,9 @@ public final class YamlUtil {
      *
      * @param obj Object
      * @return Object.toString() が"true"のときtrue,それ以外false
+     * @deprecated ControlGeneratorのほうが便利です。
      */
+    @Deprecated
     public static boolean toBoolean(Object obj) {
         if (obj == null) {
             return false;
@@ -60,7 +64,9 @@ public final class YamlUtil {
      *
      * @param obj Object
      * @return TextBoxFlexibleDate
+     * @deprecated ControlGeneratorのほうが便利です。
      */
+    @Deprecated
     public static TextBoxFlexibleDate toTextBoxFlexibleDate(Object obj) {
         TextBoxFlexibleDate textBox = new TextBoxFlexibleDate();
         RString date = toRString(obj);
@@ -75,6 +81,19 @@ public final class YamlUtil {
     /**
      * YamlLoader#loadAsList()より取得できるListが保持するHashMapをIConverterにより変換し、
      * その変換後のオブジェクトを保持するListを返します。
+     * <pre>
+     * 使用例:
+     * <code>
+     * {@literal List<HashMap>} dataFromYaml = YamlLoader.loadAsList(new RString("fileName"));
+     *  {@literal List<dgXXXX_Row>} list = YamlUtil.convertList(dataFromYaml,
+     *          new YamlUtil.Converter.IConverter{@literal <dgXXXX_Row>}() {
+     *             {@literal @Override}
+     *              public dgXXXX_Row exec(Map map) {
+     *                  return to_dgXXXX_Row(map);
+     *              }
+     *          });
+     * <code/>
+     * <pre/>
      *
      * @param <T> 変換後のListが保持するオブジェクトの型
      * @param dataFromYaml YamlLoader#loadAsList()より取得できるList
@@ -83,7 +102,7 @@ public final class YamlUtil {
      */
     public static <T> List<T> convertList(List<HashMap> dataFromYaml, Converter.IConverter<T> conveter) {
         List<T> list = new ArrayList<>();
-        for (Map map : dataFromYaml) {
+        for (HashMap map : dataFromYaml) {
             list.add(conveter.exec(map));
         }
         return list;
@@ -100,28 +119,28 @@ public final class YamlUtil {
         /**
          * HashMapへ変換するIConverterです。
          */
-        public static final IConverter<HashMap> NO_CHANGE;
+        public static final IConverter<Map> NO_CHANGE;
 
         static {
-            NO_CHANGE = new IConverter<HashMap>() {
+            NO_CHANGE = new IConverter<Map>() {
 
                 @Override
-                public HashMap exec(Map map) {
-                    return new HashMap(map);
+                public Map exec(Map map) {
+                    return map;
                 }
 
             };
         }
 
         /**
-         * 指定の型へMapを変換します。
+         * 指定の型へHashMapを変換します。
          *
          * @param <T> 変換後の型
          */
         public interface IConverter<T> {
 
             /**
-             * MapをT型のオブジェクトへ変換して返します。
+             * HashMapをT型のオブジェクトへ変換して返します。
              *
              * @param map Map
              * @return T型のオブジェクト

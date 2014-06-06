@@ -196,6 +196,44 @@ var DBE;
                     "align": 0,
                     "text": "単位",
                     "isPrivateInfo": false
+                },
+                {
+                    "fieldName": "radKaigoOrYobo",
+                    "items": [],
+                    "controlType": "RadioButton",
+                    "width": "325",
+                    "visible": true,
+                    "displayNone": true,
+                    "disabled": true,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": true,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "XS",
+                    "marginRight": "XS",
+                    "selectControlID": "radKaigoOrYobo_core",
+                    "onChange": "",
+                    "labelLText": "",
+                    "labelLWidth": "S",
+                    "labelLAlign": 2,
+                    "selectedItem": "1",
+                    "dataSource": [
+                        {
+                            "key": "1",
+                            "value": "介護"
+                        },
+                        {
+                            "key": "2",
+                            "value": "予防"
+                        }
+                    ],
+                    "onClick": "",
+                    "newLineItemNumber": 2,
+                    "spaceSize": "M",
+                    "icon": []
                 }
             ],
             "controlType": "CompositeControl",
