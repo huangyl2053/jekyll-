@@ -185,6 +185,9 @@
      "onSort": "",
      "onSelect": "",
      "onSelectByDblClick": "",
+     "onSelectBySelectButton": "",
+     "onSelectByModifyButton": "",
+     "onSelectByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -263,7 +266,7 @@
    "marginRight": "XS",
    "selectControlID": "TaishoShinsakaiIchiran",
    "onLoad": "",
-   "title": "対象審査会一覧",
+   "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
@@ -278,11 +281,15 @@
     },
     {
      "eventName": "onClick_btnToroku",
-     "requestUrl": "dbe/db/dbe/TaishoShinsakai/onLoadData"
+     "requestUrl": "dbe/db/dbe/TaishoShinsakaiIchiran/onClick_btnToroku"
+    },
+    {
+     "eventName": "onOpen_TaishoShinsakaiIchiran",
+     "requestUrl": "dbe/db/dbe/TaishoShinsakaiIchiran/reLoadData"
     }
    ],
    "hiddenInput": [],
-   "onOpen": "",
+   "onOpen": "onOpen_TaishoShinsakaiIchiran",
    "onClose": "",
    "session": {},
    "marginTop": "XS",
@@ -294,7 +301,8 @@
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
-   "isGroupBox": false
+   "isGroupBox": false,
+   "readOnly": false
   }
  ],
  "controlType": null,
@@ -342,6 +350,10 @@
   {
    "alias": "selectShinsakai",
    "eventName": "btnSelect.onClick"
+  },
+  {
+   "alias": "reLoadData",
+   "eventName": "TaishoShinsakaiIchiran.onOpen"
   }
  ],
  "loadSequencePanelNames": [
@@ -350,5 +362,7 @@
   ]
  ],
  "panelMargin": 1,
- "controlMargin": 1
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "commonButtonAreaData": []
 }

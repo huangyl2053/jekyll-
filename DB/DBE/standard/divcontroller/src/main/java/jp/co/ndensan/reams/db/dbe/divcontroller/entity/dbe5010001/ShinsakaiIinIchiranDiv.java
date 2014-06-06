@@ -1,11 +1,11 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5010001;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgShinsakaiIinIchiran_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5010001.dgShinsakaiIinIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -26,8 +26,8 @@ public class ShinsakaiIinIchiranDiv extends Panel {
     private DataGrid<dgShinsakaiIinIchiran_Row> dgShinsakaiIinIchiran;
     @JsonProperty("btnIinCancel")
     private Button btnIinCancel;
-    @JsonProperty("btnIinSentaku")
-    private Button btnIinSentaku;
+    @JsonProperty("btnIinRegister")
+    private Button btnIinRegister;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -55,14 +55,14 @@ public class ShinsakaiIinIchiranDiv extends Panel {
         this.btnIinCancel=btnIinCancel;
     }
 
-    @JsonProperty("btnIinSentaku")
-    public Button getBtnIinSentaku() {
-        return btnIinSentaku;
+    @JsonProperty("btnIinRegister")
+    public Button getBtnIinRegister() {
+        return btnIinRegister;
     }
 
-    @JsonProperty("btnIinSentaku")
-    public void setBtnIinSentaku(Button btnIinSentaku) {
-        this.btnIinSentaku=btnIinSentaku;
+    @JsonProperty("btnIinRegister")
+    public void setBtnIinRegister(Button btnIinRegister) {
+        this.btnIinRegister=btnIinRegister;
     }
 
 }

@@ -6,19 +6,19 @@
    "layoutName": "DBE5030001",
    "eventName": "selectRow",
    "toLayoutSubGyomuCode": "DBE",
-   "toLayoutName": "DBE5020001",
+   "toLayoutName": "DBE5010001",
    "toEventName": ""
   },
   {
    "id": "1",
    "layoutSubGyomuCode": "DBE",
-   "layoutName": "DBE5020001",
+   "layoutName": "DBE5010001",
    "eventName": "returnIchiran",
    "toLayoutSubGyomuCode": "DBE",
    "toLayoutName": "DBE5030001",
-   "toEventName": ""
+   "toEventName": "reLoadData"
   }
  ],
  "subGyomuCode": "DBE",
- "uiContainerName": "DBEUC52000"
+ "uiContainerName": "DBEUC51000"
 }
