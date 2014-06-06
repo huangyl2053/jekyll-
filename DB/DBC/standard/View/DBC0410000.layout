@@ -96,7 +96,7 @@
      "fieldName": "dgKokuhorenTorikomiList",
      "items": [],
      "controlType": "DataGrid",
-     "width": "980",
+     "width": "1030",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -163,7 +163,7 @@
         "dataName": "txtSofuJoho",
         "toolTip": "",
         "bgColor": 0,
-        "width": 400,
+        "width": 440,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -238,7 +238,7 @@
        }
       ]
      },
-     "height": "325",
+     "height": "628",
      "onSort": "",
      "onSelect": "",
      "onSelectByDblClick": "",
@@ -246,7 +246,7 @@
      "onNoRow": "",
      "onMultiRows": "",
      "dataSource": [],
-     "sortOrder": "",
+     "sortOrder": "txtSofuJoho",
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1
@@ -276,7 +276,7 @@
     }
    ],
    "controlType": "Panel",
-   "width": "1000",
+   "width": "1050",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -833,7 +833,7 @@
    ]
   }
  ],
- "currentState": "All",
+ "currentState": "国保連情報取込一覧",
  "id": "DBC0410000",
  "WFParameter": [],
  "UIContainerEventMapping": [],

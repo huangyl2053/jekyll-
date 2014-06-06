@@ -50,7 +50,7 @@ public class KokuhorenTorikomiList {
 
         List<HashMap> sourceList = getYaml();
         dgRowList.clear();
-        for (int i = 1; i < 4; i++) {
+        for (int i = 1; i < 26; i++) {
             dgRowList.add(create国保連情報取込一覧アイテム(
                     sourceList.get(i).get("受取情報取り込み").toString(),
                     sourceList.get(i).get("送付情報").toString(),

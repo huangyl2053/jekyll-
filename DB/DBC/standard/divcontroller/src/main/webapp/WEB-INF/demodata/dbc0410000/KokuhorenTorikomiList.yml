@@ -23,3 +23,157 @@
   前々月: !!str －
   当月状態: !!str 処理なし
   当月処理日時: !!str ""
+- KokuhorenTorikomiListId: 4
+  受取情報取り込み:  !!str ""
+  送付情報: !!str "[112]給付管理票情報"
+  前月: !!str －
+  前々月: !!str －
+  当月状態: !!str 処理なし
+  当月処理日時: !!str ""
+- KokuhorenTorikomiListId: 5
+  受取情報取り込み:  !!str ""
+  送付情報: !!str "[114]給付実績更新結果情報"
+  前月: !!str －
+  前々月: !!str －
+  当月状態: !!str 処理なし
+  当月処理日時: !!str ""
+- KokuhorenTorikomiListId: 6
+  受取情報取り込み:  !!str ""
+  送付情報: !!str "[161]介護給付費等審査決定請求明細表情報"
+  前月: !!str －
+  前々月: !!str －
+  当月状態: !!str 処理なし
+  当月処理日時: !!str ""
+- KokuhorenTorikomiListId: 7
+  受取情報取り込み:  !!str ""
+  送付情報: !!str "[171]介護給付費過誤決定通知書情報"
+  前月: !!str －
+  前々月: !!str －
+  当月状態: !!str 処理なし
+  当月処理日時: !!str ""
+- KokuhorenTorikomiListId: 8
+  受取情報取り込み:  !!str ""
+  送付情報: !!str "[172]介護給付費再審査決定通知書情報"
+  前月: !!str －
+  前々月: !!str －
+  当月状態: !!str 処理なし
+  当月処理日時: !!str ""
+- KokuhorenTorikomiListId: 9
+  受取情報取り込み:  !!str ""
+  送付情報: !!str "[151]介護給付費等請求額通知書情報"
+  前月: !!str －
+  前々月: !!str －
+  当月状態: !!str 処理なし
+  当月処理日時: !!str ""
+- KokuhorenTorikomiListId: 10
+  受取情報取り込み:  !!str ""
+  送付情報: !!str "[651]介護給付費過誤決定通知書（公費）情報"
+  前月: !!str －
+  前々月: !!str －
+  当月状態: !!str 処理なし
+  当月処理日時: !!str ""
+- KokuhorenTorikomiListId: 11
+  受取情報取り込み:  !!str ""
+  送付情報: !!str "[652]介護給付費再審査決定通知書（公費）情報"
+  前月: !!str －
+  前々月: !!str －
+  当月状態: !!str 処理なし
+  当月処理日時: !!str ""
+- KokuhorenTorikomiListId: 12
+  受取情報取り込み:  !!str ""
+  送付情報: !!str "[631]介護給付費等請求額通知書（公費）情報"
+  前月: !!str －
+  前々月: !!str －
+  当月状態: !!str 処理なし
+  当月処理日時: !!str ""
+- KokuhorenTorikomiListId: 13
+  受取情報取り込み:  !!str ""
+  送付情報: !!str "[641]介護給付費公費受給者別一覧表情報"
+  前月: !!str －
+  前々月: !!str －
+  当月状態: !!str 処理なし
+  当月処理日時: !!str ""
+- KokuhorenTorikomiListId: 14
+  受取情報取り込み:  !!str "＊"
+  送付情報: !!str "[221]償還払支給決定者一覧情報"
+  前月: !!str ○
+  前々月: !!str ○
+  当月状態: !!str 処理前
+  当月処理日時: !!str ""
+- KokuhorenTorikomiListId: 15
+  受取情報取り込み:  !!str ""
+  送付情報: !!str "[222]償還払不支給決定者一覧情報"
+  前月: !!str －
+  前々月: !!str －
+  当月状態: !!str 処理なし
+  当月処理日時: !!str ""
+- KokuhorenTorikomiListId: 16
+  受取情報取り込み:  !!str ""
+  送付情報: !!str "[331]高額介護サービス費給付対象者一覧表情報"
+  前月: !!str －
+  前々月: !!str －
+  当月状態: !!str 処理なし
+  当月処理日時: !!str ""
+- KokuhorenTorikomiListId: 17
+  受取情報取り込み:  !!str ""
+  送付情報: !!str "[351]高額介護サービス費支給（不支給）決定者一覧情報"
+  前月: !!str －
+  前々月: !!str －
+  当月状態: !!str 処理なし
+  当月処理日時: !!str ""
+- KokuhorenTorikomiListId: 18
+  受取情報取り込み:  !!str ""
+  送付情報: !!str "[37J]高額合算自己負担額確認情報"
+  前月: !!str －
+  前々月: !!str －
+  当月状態: !!str 処理なし
+  当月処理日時: !!str ""
+- KokuhorenTorikomiListId: 19
+  受取情報取り込み:  !!str ""
+  送付情報: !!str "[37H]高額合算自己負担額証明書情報"
+  前月: !!str －
+  前々月: !!str －
+  当月状態: !!str 処理なし
+  当月処理日時: !!str ""
+- KokuhorenTorikomiListId: 20
+  受取情報取り込み:  !!str ""
+  送付情報: !!str "[386]高額合算支給額計算結果連絡票情報"
+  前月: !!str －
+  前々月: !!str －
+  当月状態: !!str 処理なし
+  当月処理日時: !!str ""
+- KokuhorenTorikomiListId: 21
+  受取情報取り込み:  !!str ""
+  送付情報: !!str "[38B・38G]高額合算支給（不支給）決定通知書情報"
+  前月: !!str －
+  前々月: !!str －
+  当月状態: !!str 処理なし
+  当月処理日時: !!str ""
+- KokuhorenTorikomiListId: 22
+  受取情報取り込み:  !!str ""
+  送付情報: !!str "[38P]高額合算給付実績情報"
+  前月: !!str －
+  前々月: !!str －
+  当月状態: !!str 処理なし
+  当月処理日時: !!str ""
+- KokuhorenTorikomiListId: 23
+  受取情報取り込み:  !!str ""
+  送付情報: !!str "[175]総合事業費過誤決定通知書情報"
+  前月: !!str －
+  前々月: !!str －
+  当月状態: !!str 処理なし
+  当月処理日時: !!str ""
+- KokuhorenTorikomiListId: 24
+  受取情報取り込み:  !!str ""
+  送付情報: !!str "[152]総合事業費請求額通知書情報"
+  前月: !!str －
+  前々月: !!str －
+  当月状態: !!str 処理なし
+  当月処理日時: !!str ""
+- KokuhorenTorikomiListId: 25
+  受取情報取り込み:  !!str ""
+  送付情報: !!str "[162]総合事業費審査決定請求明細表情報"
+  前月: !!str －
+  前々月: !!str －
+  当月状態: !!str 処理なし
+  当月処理日時: !!str ""
