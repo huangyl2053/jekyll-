@@ -1,0 +1,880 @@
+﻿{
+ "fieldName": "Page",
+ "items": [
+  {
+   "fieldName": "ShogaishaKojoTaishoshaListPanel",
+   "items": [
+    {
+     "fieldName": "txtNinteiDate",
+     "items": [],
+     "controlType": "TextBoxDate",
+     "width": "90",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "txtNinteiDate_core",
+     "readOnly": false,
+     "required": false,
+     "placeHolder": "",
+     "isPrivateInfo": false,
+     "isPassword": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "onKeyPress": "",
+     "text": "",
+     "labelLText": "認定日",
+     "labelRText": "",
+     "labelLWidth": "55",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "ymdKubun": 2,
+     "displayFormat": 0,
+     "value": "",
+     "textKind": 0,
+     "permitCharactor": "./_-"
+    },
+    {
+     "fieldName": "dgShogaishaKojoTahishosha",
+     "items": [],
+     "controlType": "DataGrid",
+     "width": "1090",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "dgShogaishaKojoTahishosha",
+     "gridSetting": {
+      "rowHeight": 25,
+      "isMultiSelectable": true,
+      "isShowHeader": true,
+      "isShowFooter": true,
+      "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": false,
+      "isShowSelectButtonColumn": false,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
+      "header": {
+       "combineColumns": [
+        {
+         "combineColumnName": "認定",
+         "combineItem": [
+          "txtNinteiKubun",
+          "txtNinteiContents"
+         ]
+        },
+        {
+         "combineColumnName": "資格喪失",
+         "combineItem": [
+          "txtSoshitsuJiyu",
+          "txtSoshitsuDate"
+         ]
+        }
+       ],
+       "frozenColumn": "",
+       "headerHeight": 0
+      },
+      "columns": [
+       {
+        "columnName": "被保番号",
+        "dataName": "txtHihoNo",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 100,
+        "visible": true,
+        "cellType": 4,
+        "cellDetails": {
+         "cellType": 4,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "formatLength": "10",
+         "onChange": ""
+        },
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "txtHihoNo"
+       },
+       {
+        "columnName": "氏名",
+        "dataName": "txtHihokenshaName",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 150,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtHihokenshaName"
+       },
+       {
+        "columnName": "区分",
+        "dataName": "txtNinteiKubun",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 100,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtNinteiKubun"
+       },
+       {
+        "columnName": "内容",
+        "dataName": "txtNinteiContents",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 240,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtNinteiContents"
+       },
+       {
+        "columnName": "日常生活自立度",
+        "dataName": "txtRank",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 130,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtRank"
+       },
+       {
+        "columnName": "障害者手帳あり",
+        "dataName": "txtShogaishaTechoUmu",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 130,
+        "visible": true,
+        "cellType": 2,
+        "cellDetails": {
+         "cellType": 2,
+         "disabled": false
+        },
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "txtShogaishaTechoUmu"
+       },
+       {
+        "columnName": "事由",
+        "dataName": "txtSoshitsuJiyu",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 100,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtSoshitsuJiyu"
+       },
+       {
+        "columnName": "喪失日",
+        "dataName": "txtSoshitsuDate",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 6,
+        "cellDetails": {
+         "cellType": 6,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": ""
+        },
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "txtSoshitsuDate"
+       }
+      ]
+     },
+     "height": "S",
+     "onSort": "",
+     "onSelect": "onSelect_OnClick",
+     "onSelectByDblClick": "",
+     "onSelectBySelectButton": "",
+     "onSelectByModifyButton": "",
+     "onSelectByDeleteButton": "",
+     "onOnlyRow": "",
+     "onNoRow": "",
+     "onMultiRows": "onSelect_OnClick",
+     "dataSource": [],
+     "sortOrder": "txtShogaishaTechoUmu",
+     "isAscending": true,
+     "filterList": [],
+     "activeRowId": -1
+    },
+    {
+     "fieldName": "MinashiShogaiTaishoNinzu",
+     "items": [
+      {
+       "fieldName": "txtTaishosha",
+       "items": [],
+       "controlType": "TextBoxNum",
+       "width": "50",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": true,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "txtTaishosha_core",
+       "readOnly": true,
+       "required": false,
+       "placeHolder": "",
+       "isPrivateInfo": false,
+       "isPassword": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
+       "onKeyPress": "",
+       "text": "",
+       "labelLText": "対象者",
+       "labelRText": "",
+       "labelLWidth": "55",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "value": "",
+       "maxLength": 100000000,
+       "minLength": 0,
+       "textAlign": 2,
+       "textKind": 2,
+       "isComboBox": false,
+       "suggest": [],
+       "maxValue": 1.7976931348623157e+308,
+       "minValue": 0,
+       "isCurrency": false,
+       "isComma": false,
+       "decimalPointLength": 0,
+       "permitCharactor": "+-,.\\"
+      },
+      {
+       "fieldName": "txtNinteisha",
+       "items": [],
+       "controlType": "TextBoxNum",
+       "width": "50",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "txtNinteisha_core",
+       "readOnly": true,
+       "required": false,
+       "placeHolder": "",
+       "isPrivateInfo": false,
+       "isPassword": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
+       "onKeyPress": "",
+       "text": "",
+       "labelLText": "認定者",
+       "labelRText": "",
+       "labelLWidth": "55",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "value": "",
+       "maxLength": 100000000,
+       "minLength": 0,
+       "textAlign": 2,
+       "textKind": 2,
+       "isComboBox": false,
+       "suggest": [],
+       "maxValue": 1.7976931348623157e+308,
+       "minValue": 0,
+       "isCurrency": false,
+       "isComma": false,
+       "decimalPointLength": 0,
+       "permitCharactor": "+-,.\\"
+      },
+      {
+       "fieldName": "txtHigaitosha",
+       "items": [],
+       "controlType": "TextBoxNum",
+       "width": "50",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "txtHigaitosha_core",
+       "readOnly": true,
+       "required": false,
+       "placeHolder": "",
+       "isPrivateInfo": false,
+       "isPassword": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
+       "onKeyPress": "",
+       "text": "",
+       "labelLText": "非該当者",
+       "labelRText": "",
+       "labelLWidth": "65",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "value": "",
+       "maxLength": 100000000,
+       "minLength": 0,
+       "textAlign": 2,
+       "textKind": 2,
+       "isComboBox": false,
+       "suggest": [],
+       "maxValue": 1.7976931348623157e+308,
+       "minValue": 0,
+       "isCurrency": false,
+       "isComma": false,
+       "decimalPointLength": 0,
+       "permitCharactor": "+-,.\\"
+      }
+     ],
+     "controlType": "Panel",
+     "width": "225",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "MinashiShogaiTaishoNinzu",
+     "onLoad": "",
+     "title": "",
+     "isOpen": true,
+     "canOpenAndClose": true,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "MinashiShogaiTaishoNinzu"
+      }
+     ],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "eraseBorderTop": true,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true,
+     "backgroundColor": 0,
+     "widthAuto": true,
+     "panelDisplay": 0,
+     "isGroupBox": false,
+     "readOnly": false
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G10",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0",
+   "marginRight": "XS",
+   "selectControlID": "ShogaishaKojoTaishoshaListPanel",
+   "onLoad": "",
+   "title": "障害者控除対象者一覧",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "ShogaishaKojoTaishoshaListPanel"
+    }
+   ],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/ShinsazumiShikyuShinseiListPanel/onLoad"
+    },
+    {
+     "eventName": "onClick_btnSearchShinsazumi",
+     "requestUrl": "dbc/db/dbc/ShinsazumiShikyuShinseiListPanel/onClick_btnSearchShinsazumi"
+    },
+    {
+     "eventName": "onSelect_OnClick",
+     "requestUrl": "dbc/db/dbc/ShinsazumiShikyuShinseiListPanel/onSelect_OnClick"
+    }
+   ],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": true
+  },
+  {
+   "fieldName": "OutputShogaishaKojoTaishoshaNinteishoPanel",
+   "items": [
+    {
+     "fieldName": "PrintContentsSetting",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": 0,
+     "marginRight": 0,
+     "selectControlID": "PrintContentsSetting",
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": 0,
+     "businessId": "DBZ",
+     "controlName": "PrintContentsSetting",
+     "dataPassingForDialog": [
+      {
+       "key": "",
+       "controlName": ""
+      }
+     ],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "txtSendData_displayNone": true,
+     "PrintContentsSetting_title": "",
+     "PrintContentsSetting_eraseBorderTop": true,
+     "PrintContentsSetting_eraseBorderBottom": true,
+     "PrintContentsSetting_eraseBorderRight": true,
+     "PrintContentsSetting_eraseBorderLeft": true
+    },
+    {
+     "fieldName": "OutputOrder",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": 0,
+     "marginRight": 0,
+     "selectControlID": "OutputOrder",
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": 0,
+     "businessId": "URZ",
+     "controlName": "ChohyoShutsuryokujun",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": ""
+    }
+   ],
+   "controlType": "PanelPublish",
+   "width": "G10",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0",
+   "marginRight": "XS",
+   "selectControlID": "OutputShogaishaKojoTaishoshaNinteishoPanel",
+   "onLoad": "",
+   "title": "障害者控除対象者認定書・出力一覧表",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "OutputShogaishaKojoTaishoshaNinteishoPanel"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "isPublish": true,
+   "isEmptyControl": false
+  },
+  {
+   "fieldName": "KyotsuButton",
+   "items": [
+    {
+     "fieldName": "btnSave",
+     "items": [],
+     "controlType": "Button",
+     "width": "M",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnSave",
+     "text": "対象者を保存する",
+     "onClick": "",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "icon": 0
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G10",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0",
+   "marginRight": "XS",
+   "selectControlID": "KyotsuButton",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "KyotsuButton"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false
+  },
+  {
+   "fieldName": "CompleteProcessPanel",
+   "items": [
+    {
+     "fieldName": "CompleteProcess",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": 0,
+     "marginRight": 0,
+     "selectControlID": "CompleteProcess",
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": 0,
+     "businessId": "DBZ",
+     "controlName": "CompleteProcess",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "lblCompleteMessage_text": "対象者の保存が完了しました。",
+     "CompleteProcess_width": "1100"
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G10",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "selectControlID": "CompleteProcessPanel",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "CompleteProcessPanel"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": true,
+   "eraseBorderBottom": true,
+   "eraseBorderRight": true,
+   "eraseBorderLeft": true,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false
+  }
+ ],
+ "controlType": null,
+ "width": "XS",
+ "visible": true,
+ "displayNone": false,
+ "disabled": false,
+ "accessKey": "",
+ "nextFocusFieldName": "",
+ "wrap": false,
+ "dependencies": [],
+ "float": 0,
+ "toolTip": "",
+ "authorityMode": 0,
+ "marginLeft": "XS",
+ "marginRight": "XS",
+ "selectControlID": "Page",
+ "onLoad": "",
+ "title": "障害者控除対象者一括認定",
+ "jsPathCollection": [],
+ "relation": [],
+ "stateTransition": [
+  {
+   "order": "1",
+   "stateName": "一括認定",
+   "showWizard": true,
+   "visibleDivs": [
+    {
+     "visibleDiv": "ShogaishaKojoTaishoshaListPanel",
+     "panelState": "readOnly visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "MinashiShogaiTaishoNinzu",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "OutputShogaishaKojoTaishoshaNinteishoPanel",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "PrintContentsSetting",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "OutputOrder",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KyotsuButton",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnSave",
+     "event": "onClick",
+     "transition": "保存完了"
+    }
+   ]
+  },
+  {
+   "order": "2",
+   "stateName": "保存完了",
+   "showWizard": true,
+   "visibleDivs": [
+    {
+     "visibleDiv": "CompleteProcessPanel",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "CompleteProcess",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnSave",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
+  }
+ ],
+ "currentState": "All",
+ "id": "DBD4030011",
+ "WFParameter": [],
+ "UIContainerEventMapping": [],
+ "loadSequencePanelNames": [
+  [
+   "ShogaishaKojoTaishoshaListPanel"
+  ],
+  [
+   "MinashiShogaiTaishoNinzu"
+  ],
+  [
+   "OutputShogaishaKojoTaishoshaNinteishoPanel"
+  ],
+  [
+   "PrintContentsSetting"
+  ],
+  [
+   "OutputOrder"
+  ],
+  [
+   "KyotsuButton"
+  ],
+  [
+   "CompleteProcessPanel"
+  ],
+  [
+   "CompleteProcess"
+  ]
+ ],
+ "panelMargin": 1,
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "commonButtonAreaData": []
+}
