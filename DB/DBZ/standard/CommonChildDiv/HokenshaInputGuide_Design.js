@@ -30,7 +30,7 @@ var DBZ;
                             "fieldName": "ddlHokenshaKenCode",
                             "items": [],
                             "controlType": "DropDownList",
-                            "width": "S",
+                            "width": "120",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -43,6 +43,7 @@ var DBZ;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "selectControlID": "ddlHokenshaKenCode_core",
                             "onChange": "",
                             "selectedItem": "20",
                             "dataSource": [
@@ -58,7 +59,7 @@ var DBZ;
                             "required": false,
                             "labelLText": "県コード",
                             "labelRText": "",
-                            "labelLWidth": "60",
+                            "labelLWidth": "70",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
@@ -83,12 +84,14 @@ var DBZ;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "selectControlID": "btnSearchGaitoHokensha",
                             "onClick": "onClick_btnSearchGaitoHokensha",
                             "text": "該当する保険者を表示する",
                             "appearance": 0,
                             "imageFileUrl": "",
                             "imageWidth": "",
-                            "imageHeight": ""
+                            "imageHeight": "",
+                            "icon": 0
                         },
                         {
                             "fieldName": "SearchResultHokensha",
@@ -110,41 +113,25 @@ var DBZ;
                                     "authorityMode": 0,
                                     "marginLeft": "S",
                                     "marginRight": "XS",
+                                    "selectControlID": "dgSearchResultHokensha",
                                     "dataSource": [],
                                     "gridSetting": {
                                         "rowHeight": 25,
                                         "isMultiSelectable": false,
+                                        "isShowHeader": true,
                                         "isShowFooter": true,
                                         "isShowFilter": false,
                                         "isShowFilterButton": false,
                                         "isShowRowState": false,
+                                        "isShowSelectButtonColumn": true,
+                                        "isShowModifyButtonColumn": false,
+                                        "isShowDeleteButtonColumn": false,
                                         "header": {
                                             "combineColumns": [],
                                             "frozenColumn": "",
                                             "headerHeight": 0
                                         },
                                         "columns": [
-                                            {
-                                                "columnName": "",
-                                                "dataName": "select",
-                                                "toolTip": "",
-                                                "bgColor": 0,
-                                                "width": 40,
-                                                "visible": true,
-                                                "cellType": 8,
-                                                "cellDetails": {
-                                                    "cellType": 8,
-                                                    "text": "■",
-                                                    "onClick": "onClick_select",
-                                                    "imageFileUrl": "",
-                                                    "imageWidth": "",
-                                                    "imageHeight": ""
-                                                },
-                                                "align": 1,
-                                                "resize": false,
-                                                "isPrivateInfo": false,
-                                                "sortKey": "select"
-                                            },
                                             {
                                                 "columnName": "保険者番号",
                                                 "dataName": "hokenshaNo",
@@ -195,6 +182,9 @@ var DBZ;
                                     "onSort": "",
                                     "onSelect": "",
                                     "onSelectByDblClick": "",
+                                    "onSelectBySelectButton": "onSelectBySelectButton_dgSearchResultHokensha",
+                                    "onSelectByModifyButton": "",
+                                    "onSelectByDeleteButton": "",
                                     "onOnlyRow": "",
                                     "onNoRow": "",
                                     "onMultiRows": "",
@@ -218,6 +208,7 @@ var DBZ;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "selectControlID": "SearchResultHokensha",
                             "onLoad": "",
                             "title": "保険者一覧",
                             "marginTop": "XS",
@@ -240,13 +231,15 @@ var DBZ;
                             "eraseBorderLeft": false,
                             "backgroundColor": 0,
                             "widthAuto": true,
-                            "isGroupBox": false
+                            "panelDisplay": 0,
+                            "isGroupBox": false,
+                            "readOnly": false
                         },
                         {
                             "fieldName": "btnHokenshaReturn",
                             "items": [],
                             "controlType": "Button",
-                            "width": "80",
+                            "width": "200",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -259,16 +252,18 @@ var DBZ;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "selectControlID": "btnHokenshaReturn",
                             "onClick": "onClick_btnHokenshaReturn",
-                            "text": "キャンセル",
+                            "text": "保険者入力ガイドを閉じる",
                             "appearance": 0,
                             "imageFileUrl": "",
                             "imageWidth": "",
-                            "imageHeight": ""
+                            "imageHeight": "",
+                            "icon": 0
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "M",
+                    "width": "460",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -281,6 +276,7 @@ var DBZ;
                     "authorityMode": 0,
                     "marginLeft": "XS",
                     "marginRight": "XS",
+                    "selectControlID": "HokenshaInputGuide",
                     "onLoad": "",
                     "title": "保険者入力ガイド",
                     "marginTop": "Default",
@@ -302,8 +298,8 @@ var DBZ;
                             "requestUrl": "dbz/db/dbz/HokenshaInputGuide/onClick_btnSearchGaitoHokensha"
                         },
                         {
-                            "eventName": "onClick_select",
-                            "requestUrl": "dbz/db/dbz/HokenshaInputGuide/onClick_select"
+                            "eventName": "onSelectBySelectButton_dgSearchResultHokensha",
+                            "requestUrl": "dbz/db/dbz/HokenshaInputGuide/onSelectBySelectButton_dgSearchResultHokensha"
                         }
                     ],
                     "hiddenInput": [
@@ -324,8 +320,10 @@ var DBZ;
                     "eraseBorderRight": false,
                     "eraseBorderLeft": false,
                     "backgroundColor": 0,
-                    "widthAuto": true,
-                    "isGroupBox": false
+                    "widthAuto": false,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -342,6 +340,7 @@ var DBZ;
             "authorityMode": 0,
             "marginLeft": 0,
             "marginRight": 0,
+            "selectControlID": "defaultLayout",
             "relation": [],
             "businessId": "DBZ",
             "controlName": "HokenshaInputGuide",
@@ -358,7 +357,7 @@ var DBZ;
                     "controlName": "HokenshaInputGuide.hokenshaMeisho"
                 }
             ],
-            "dialogOkEventNameForDialog": "onClick_select",
+            "dialogOkEventNameForDialog": "onSelectBySelectButton_dgSearchResultHokensha",
             "dialogCancelEventNameForDialog": "onClick_btnHokenshaReturn"
         };
         return HokenshaInputGuide_Design;

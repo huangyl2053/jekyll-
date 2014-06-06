@@ -10,12 +10,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.HokenshaInputGuideDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgSearchResultHokensha_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hokenshainputguide.HokenshaInputGuideDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hokenshainputguide.dgSearchResultHokensha_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 
 /**
@@ -69,7 +68,7 @@ public class HokenshaInputGuide {
     }
 
     private dgSearchResultHokensha_Row createHokenshaGridRow(Map hokensha) {
-        dgSearchResultHokensha_Row row = new dgSearchResultHokensha_Row(new Button(), RString.EMPTY, RString.EMPTY, RString.EMPTY);
+        dgSearchResultHokensha_Row row = new dgSearchResultHokensha_Row(RString.EMPTY, RString.EMPTY, RString.EMPTY);
         row.setHokenshaNo(new RString(hokensha.get("保険者番号").toString()));
         row.setHokenshaMeisho(new RString(hokensha.get("保険者名称").toString()));
         row.setHokensha(row.getHokenshaNo().concat(":").concat(row.getHokenshaMeisho()));
@@ -83,7 +82,7 @@ public class HokenshaInputGuide {
      * @param div HokenshaInputGuideDiv
      * @return レスポンス
      */
-    public ResponseData onClick_select(HokenshaInputGuideDiv div) {
+    public ResponseData onSelectBySelectButton_dgSearchResultHokensha(HokenshaInputGuideDiv div) {
         ResponseData<HokenshaInputGuideDiv> response = new ResponseData<>();
         setReturnedItem(div);
         response.data = div;

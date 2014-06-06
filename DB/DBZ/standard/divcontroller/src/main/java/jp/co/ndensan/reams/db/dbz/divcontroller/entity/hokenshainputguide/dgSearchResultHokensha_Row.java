@@ -1,15 +1,14 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hokenshainputguide;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon May 12 19:07:57 JST 2014 
+ * Fri Jun 06 19:00:13 JST 2014 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 
@@ -21,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class dgSearchResultHokensha_Row extends DataRow {
 
-    private Button select;
     private RString hokenshaNo;
     private RString hokenshaMeisho;
     private RString hokensha;
@@ -30,20 +28,14 @@ public class dgSearchResultHokensha_Row extends DataRow {
         super();
     }
 
-    public dgSearchResultHokensha_Row(Button select, RString hokenshaNo, RString hokenshaMeisho, RString hokensha) {
+    public dgSearchResultHokensha_Row(RString hokenshaNo, RString hokenshaMeisho, RString hokensha) {
         super();
-        this.setOriginalData("select", select);
         this.setOriginalData("hokenshaNo", hokenshaNo);
         this.setOriginalData("hokenshaMeisho", hokenshaMeisho);
         this.setOriginalData("hokensha", hokensha);
-        this.select = select;
         this.hokenshaNo = hokenshaNo;
         this.hokenshaMeisho = hokenshaMeisho;
         this.hokensha = hokensha;
-    }
-
-    public Button getSelect() {
-        return select;
     }
 
     public RString getHokenshaNo() {
@@ -56,11 +48,6 @@ public class dgSearchResultHokensha_Row extends DataRow {
 
     public RString getHokensha() {
         return hokensha;
-    }
-
-    public void setSelect(Button select) {
-        this.setOriginalData("select", select);
-        this.select = select;
     }
 
     public void setHokenshaNo(RString hokenshaNo) {
