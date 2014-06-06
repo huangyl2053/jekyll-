@@ -11,7 +11,7 @@ var DBC;
         function PaymentDate_Design($parentElement, isDesignMode, fieldName) {
             _super.call(this, $parentElement, isDesignMode, PaymentDate_Design.myLayout, fieldName);
         }
-        Object.defineProperty(PaymentDate_Design.prototype, "PaymentDate_title", {
+        Object.defineProperty(PaymentDate_Design.prototype, "title", {
             get: function () {
                 return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["title"];
             },
@@ -28,32 +28,15 @@ var DBC;
         });
 
 
-        Object.defineProperty(PaymentDate_Design.prototype, "PaymentDate_isGroupBox", {
+        Object.defineProperty(PaymentDate_Design.prototype, "panelDisplay", {
             get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["isGroupBox"];
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"];
             },
             set: function (value) {
                 if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["isGroupBox"] = value;
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"] = value;
                 } else {
-                    this.layout.items[0]["isGroupBox"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(PaymentDate_Design.prototype, "PaymentDate_canOpenAndClose", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["canOpenAndClose"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["canOpenAndClose"] = value;
-                } else {
-                    this.layout.items[0]["canOpenAndClose"] = value;
+                    this.layout.items[0]["panelDisplay"] = value;
                     this.raisePropertyChanged(this.layout);
                 }
             },
@@ -64,16 +47,14 @@ var DBC;
 
         PaymentDate_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
-            Uz.JSControlUtil.registProperty("PaymentDate_title");
-            Uz.JSControlUtil.registProperty("PaymentDate_isGroupBox");
-            Uz.JSControlUtil.registProperty("PaymentDate_canOpenAndClose");
+            Uz.JSControlUtil.registProperty("title");
+            Uz.JSControlUtil.registProperty("panelDisplay");
         };
 
         PaymentDate_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
-            editablePropertyInfo["PaymentDate_title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["title"];
-            editablePropertyInfo["PaymentDate_isGroupBox"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["isGroupBox"];
-            editablePropertyInfo["PaymentDate_canOpenAndClose"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["canOpenAndClose"];
+            editablePropertyInfo["title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["title"];
+            editablePropertyInfo["panelDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["panelDisplay"];
 
             return editablePropertyInfo;
         };
@@ -87,7 +68,7 @@ var DBC;
                             "fieldName": "txtKozaPaymentDate",
                             "items": [],
                             "controlType": "TextBoxDate",
-                            "width": "80",
+                            "width": "85",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -101,8 +82,8 @@ var DBC;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtKozaPaymentDate_core",
-                            "required": false,
                             "readOnly": false,
+                            "required": false,
                             "placeHolder": "",
                             "isPrivateInfo": false,
                             "isPassword": false,
@@ -113,7 +94,7 @@ var DBC;
                             "text": "",
                             "labelLText": "口座振込予定日",
                             "labelRText": "",
-                            "labelLWidth": "105",
+                            "labelLWidth": "120",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
@@ -126,7 +107,7 @@ var DBC;
                             "fieldName": "txtMadoguchiPaymentDateRange",
                             "items": [],
                             "controlType": "TextBoxDateRange",
-                            "width": "80",
+                            "width": "85",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -169,7 +150,7 @@ var DBC;
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "600",
+                    "width": "595",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -188,7 +169,7 @@ var DBC;
                     "marginTop": "Default",
                     "marginBottom": "Default",
                     "isOpen": true,
-                    "canOpenAndClose": false,
+                    "canOpenAndClose": true,
                     "postParameterPanelNames": [
                         {
                             "postParameterPanelNames": "PaymentDate"
@@ -205,8 +186,9 @@ var DBC;
                     "eraseBorderLeft": false,
                     "backgroundColor": 0,
                     "widthAuto": false,
-                    "panelDisplay": 1,
-                    "isGroupBox": false
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -233,17 +215,12 @@ var DBC;
                 {
                     "publicChildFieldName": "PaymentDate",
                     "publicChildProperty": "title",
-                    "newPropertyName": "PaymentDate_title"
+                    "newPropertyName": "title"
                 },
                 {
                     "publicChildFieldName": "PaymentDate",
-                    "publicChildProperty": "isGroupBox",
-                    "newPropertyName": "PaymentDate_isGroupBox"
-                },
-                {
-                    "publicChildFieldName": "PaymentDate",
-                    "publicChildProperty": "canOpenAndClose",
-                    "newPropertyName": "PaymentDate_canOpenAndClose"
+                    "publicChildProperty": "panelDisplay",
+                    "newPropertyName": "panelDisplay"
                 }
             ],
             "dataPassingForDialog": [],

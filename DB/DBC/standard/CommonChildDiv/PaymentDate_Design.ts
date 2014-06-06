@@ -8,11 +8,11 @@ module DBC {
      */
     export class PaymentDate_Design extends Uz.CommonChildDiv {
     
-        public get PaymentDate_title() {
+        public get title() {
             return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["title"];
         }
         
-        public set PaymentDate_title(value) {
+        public set title(value) {
             if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
                  Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["title"] = value;
@@ -22,30 +22,16 @@ module DBC {
             }
         }
         
-        public get PaymentDate_isGroupBox() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["isGroupBox"];
+        public get panelDisplay() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"];
         }
         
-        public set PaymentDate_isGroupBox(value) {
+        public set panelDisplay(value) {
             if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
                  Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["isGroupBox"] = value;
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"] = value;
             } else {
-                this.layout.items[0]["isGroupBox"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get PaymentDate_canOpenAndClose() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["canOpenAndClose"];
-        }
-        
-        public set PaymentDate_canOpenAndClose(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["canOpenAndClose"] = value;
-            } else {
-                this.layout.items[0]["canOpenAndClose"] = value;
+                this.layout.items[0]["panelDisplay"] = value;
                 this.raisePropertyChanged(this.layout);
             }
         }
@@ -60,9 +46,8 @@ module DBC {
          */
         public registProperty() {
             super.registProperty();
-            Uz.JSControlUtil.registProperty("PaymentDate_title");
-            Uz.JSControlUtil.registProperty("PaymentDate_isGroupBox");
-            Uz.JSControlUtil.registProperty("PaymentDate_canOpenAndClose");
+            Uz.JSControlUtil.registProperty("title");
+            Uz.JSControlUtil.registProperty("panelDisplay");
         }
         
         /**
@@ -72,9 +57,8 @@ module DBC {
          */
         public getEditablePropertyInfo(): any {
             var editablePropertyInfo = super.getEditablePropertyInfo();
-            editablePropertyInfo["PaymentDate_title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["title"];
-            editablePropertyInfo["PaymentDate_isGroupBox"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["isGroupBox"];
-            editablePropertyInfo["PaymentDate_canOpenAndClose"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["canOpenAndClose"];
+            editablePropertyInfo["title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["title"];
+            editablePropertyInfo["panelDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["panelDisplay"];
             
             return editablePropertyInfo;
         }
@@ -88,7 +72,7 @@ module DBC {
      "fieldName": "txtKozaPaymentDate",
      "items": [],
      "controlType": "TextBoxDate",
-     "width": "80",
+     "width": "85",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -102,8 +86,8 @@ module DBC {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtKozaPaymentDate_core",
-     "required": false,
      "readOnly": false,
+     "required": false,
      "placeHolder": "",
      "isPrivateInfo": false,
      "isPassword": false,
@@ -114,7 +98,7 @@ module DBC {
      "text": "",
      "labelLText": "口座振込予定日",
      "labelRText": "",
-     "labelLWidth": "105",
+     "labelLWidth": "120",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -127,7 +111,7 @@ module DBC {
      "fieldName": "txtMadoguchiPaymentDateRange",
      "items": [],
      "controlType": "TextBoxDateRange",
-     "width": "80",
+     "width": "85",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -170,7 +154,7 @@ module DBC {
     }
    ],
    "controlType": "Panel",
-   "width": "600",
+   "width": "595",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -189,7 +173,7 @@ module DBC {
    "marginTop": "Default",
    "marginBottom": "Default",
    "isOpen": true,
-   "canOpenAndClose": false,
+   "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "PaymentDate"
@@ -206,8 +190,9 @@ module DBC {
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
-   "panelDisplay": 1,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false
   }
  ],
  "controlType": "CommonChildDiv",
@@ -234,17 +219,12 @@ module DBC {
   {
    "publicChildFieldName": "PaymentDate",
    "publicChildProperty": "title",
-   "newPropertyName": "PaymentDate_title"
+   "newPropertyName": "title"
   },
   {
    "publicChildFieldName": "PaymentDate",
-   "publicChildProperty": "isGroupBox",
-   "newPropertyName": "PaymentDate_isGroupBox"
-  },
-  {
-   "publicChildFieldName": "PaymentDate",
-   "publicChildProperty": "canOpenAndClose",
-   "newPropertyName": "PaymentDate_canOpenAndClose"
+   "publicChildProperty": "panelDisplay",
+   "newPropertyName": "panelDisplay"
   }
  ],
  "dataPassingForDialog": [],
