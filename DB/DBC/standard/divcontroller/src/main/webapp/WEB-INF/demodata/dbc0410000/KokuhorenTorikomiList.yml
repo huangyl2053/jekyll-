@@ -1,0 +1,25 @@
+## YAML Template.
+---
+- KokuhorenTorikomiListShoriYMDId: 0
+  処理年月: 20140601
+- KokuhorenTorikomiListId: 1
+  受取情報取り込み:  !!str ""
+  送付情報: !!str "[533]受給者情報更新結果情報"
+  前月: !!str －
+  前々月: !!str －
+  当月状態: !!str 処理なし
+  当月処理日時: !!str ""
+- KokuhorenTorikomiListId: 2
+  受取情報取り込み:  !!str ""
+  送付情報: !!str "[5C3]共同処理用受給者情報更新結果"
+  前月: !!str －
+  前々月: !!str －
+  当月状態: !!str 処理なし
+  当月処理日時: !!str ""
+- KokuhorenTorikomiListId: 3
+  受取情報取り込み:  !!str ""
+  送付情報: !!str "[111]給付実績情報"
+  前月: !!str －
+  前々月: !!str －
+  当月状態: !!str 処理なし
+  当月処理日時: !!str ""
