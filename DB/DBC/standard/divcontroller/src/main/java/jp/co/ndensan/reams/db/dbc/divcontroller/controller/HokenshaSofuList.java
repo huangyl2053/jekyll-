@@ -50,7 +50,7 @@ public class HokenshaSofuList {
 
         List<HashMap> sourceList = getHokenshaSofuListYaml();
         dgRowList.clear();
-        for (int i = 1; i < 4; i++) {
+        for (int i = 1; i < 14; i++) {
             dgRowList.add(create保険者情報送付一覧アイテム(
                     sourceList.get(i).get("送付情報").toString(),
                     sourceList.get(i).get("前月").toString(),

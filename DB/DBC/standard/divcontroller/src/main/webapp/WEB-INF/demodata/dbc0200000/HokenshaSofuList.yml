@@ -20,3 +20,63 @@
   前々月: !!str －
   当月状態: !!str 処理前
   当月処理日時: !!str ""
+- HokenshaSofuListId: 4
+  送付情報: !!str "[211]償還連絡票情報"
+  前月: !!str ""
+  前々月: !!str ""
+  当月状態: !!str ""
+  当月処理日時: !!str ""
+- HokenshaSofuListId: 5
+  送付情報: !!str "[341]高額介護サービス費給付判定結果情報"
+  前月: !!str ""
+  前々月: !!str ""
+  当月状態: !!str ""
+  当月処理日時: !!str ""
+- HokenshaSofuListId: 6
+  送付情報: !!str "[113]給付実績情報"
+  前月: !!str －
+  前々月: !!str －
+  当月状態: !!str 処理済み
+  当月処理日時: !!str "平26.02.27 17:57:44"
+- HokenshaSofuListId: 7
+  送付情報: !!str "[173]過誤申立書情報"
+  前月: !!str ×
+  前々月: !!str ×
+  当月状態: !!str 処理前
+  当月処理日時: !!str ""
+- HokenshaSofuListId: 8
+  送付情報: !!str "[174]再審査申立書情報"
+  前月: !!str ×
+  前々月: !!str ×
+  当月状態: !!str 処理前
+  当月処理日時: !!str ""
+- HokenshaSofuListId: 9
+  送付情報: !!str "[371]高額合算支給申請書情報"
+  前月: !!str ×
+  前々月: !!str ×
+  当月状態: !!str 処理前
+  当月処理日時: !!str ""
+- HokenshaSofuListId: 10
+  送付情報: !!str "[37K]高額合算補正済自己負担額情報"
+  前月: !!str ×
+  前々月: !!str ×
+  当月状態: !!str 処理前
+  当月処理日時: !!str ""
+- HokenshaSofuListId: 11
+  送付情報: !!str "[381]高額合算計算結果連絡票情報"
+  前月: !!str －
+  前々月: !!str －
+  当月状態: !!str 処理なし
+  当月処理日時: !!str ""
+- HokenshaSofuListId: 12
+  送付情報: !!str "[38Q]高額合算給付実績情報"
+  前月: !!str ×
+  前々月: !!str ×
+  当月状態: !!str 処理前
+  当月処理日時: !!str ""
+- HokenshaSofuListId: 13
+  送付情報: !!str "[176]総合事業費過誤申立書情報"
+  前月: !!str －
+  前々月: !!str －
+  当月状態: !!str 処理なし
+  当月処理日時: !!str ""
