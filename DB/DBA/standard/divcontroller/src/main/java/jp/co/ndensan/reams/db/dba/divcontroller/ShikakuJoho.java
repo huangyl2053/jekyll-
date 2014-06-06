@@ -33,7 +33,6 @@ import jp.co.ndensan.reams.ur.ura.divcontroller.entity.tblAtenaSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
@@ -362,7 +361,7 @@ public class ShikakuJoho {
     }
 
     private dgShisetsuNyutaishoRireki_Row createShisetsuNyutaishoRowFromHashMap(HashMap seikatsuHogoData) {
-        dgShisetsuNyutaishoRireki_Row row = new dgShisetsuNyutaishoRireki_Row(new Button(), new Button(), new TextBoxFlexibleDate(),
+        dgShisetsuNyutaishoRireki_Row row = new dgShisetsuNyutaishoRireki_Row(new TextBoxFlexibleDate(),
                 new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY);
 

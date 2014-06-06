@@ -3,13 +3,12 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekik
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Jun 02 13:14:11 JST 2014 
+ * Fri Jun 06 21:05:10 JST 2014 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -22,8 +21,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class dgShisetsuNyutaishoRireki_Row extends DataRow {
 
-    private Button btnSelect;
-    private Button btnDelete;
     private TextBoxFlexibleDate nyushoDate;
     private TextBoxFlexibleDate taishoDate;
     private RString shisetsuCode;
@@ -38,10 +35,8 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
         super();
     }
 
-    public dgShisetsuNyutaishoRireki_Row(Button btnSelect, Button btnDelete, TextBoxFlexibleDate nyushoDate, TextBoxFlexibleDate taishoDate, RString shisetsuCode, RString shisetsuMeisho, RString shisetsu, RString taishoJohoKey, RString taishoJoho, RString shisetsuShuruiKey, RString shisetsuShurui) {
+    public dgShisetsuNyutaishoRireki_Row(TextBoxFlexibleDate nyushoDate, TextBoxFlexibleDate taishoDate, RString shisetsuCode, RString shisetsuMeisho, RString shisetsu, RString taishoJohoKey, RString taishoJoho, RString shisetsuShuruiKey, RString shisetsuShurui) {
         super();
-        this.setOriginalData("btnSelect", btnSelect);
-        this.setOriginalData("btnDelete", btnDelete);
         this.setOriginalData("nyushoDate", nyushoDate);
         this.setOriginalData("taishoDate", taishoDate);
         this.setOriginalData("shisetsuCode", shisetsuCode);
@@ -51,8 +46,6 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
         this.setOriginalData("taishoJoho", taishoJoho);
         this.setOriginalData("shisetsuShuruiKey", shisetsuShuruiKey);
         this.setOriginalData("shisetsuShurui", shisetsuShurui);
-        this.btnSelect = btnSelect;
-        this.btnDelete = btnDelete;
         this.nyushoDate = nyushoDate;
         this.taishoDate = taishoDate;
         this.shisetsuCode = shisetsuCode;
@@ -62,14 +55,6 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
         this.taishoJoho = taishoJoho;
         this.shisetsuShuruiKey = shisetsuShuruiKey;
         this.shisetsuShurui = shisetsuShurui;
-    }
-
-    public Button getBtnSelect() {
-        return btnSelect;
-    }
-
-    public Button getBtnDelete() {
-        return btnDelete;
     }
 
     public TextBoxFlexibleDate getNyushoDate() {
@@ -106,16 +91,6 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
 
     public RString getShisetsuShurui() {
         return shisetsuShurui;
-    }
-
-    public void setBtnSelect(Button btnSelect) {
-        this.setOriginalData("btnSelect", btnSelect);
-        this.btnSelect = btnSelect;
-    }
-
-    public void setBtnDelete(Button btnDelete) {
-        this.setOriginalData("btnDelete", btnDelete);
-        this.btnDelete = btnDelete;
     }
 
     public void setNyushoDate(TextBoxFlexibleDate nyushoDate) {

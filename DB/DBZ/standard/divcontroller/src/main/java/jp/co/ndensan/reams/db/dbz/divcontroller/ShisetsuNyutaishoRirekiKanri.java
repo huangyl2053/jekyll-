@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekika
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -29,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 public class ShisetsuNyutaishoRirekiKanri {
 
     private static final RString SHUSEI_MODE = new RString("shusei");
+    private static final RString DELETE_MODE = new RString("delete");
     private static final RString ADD_MODE = new RString("add");
     private static final RString NONE = RString.EMPTY;
 
@@ -39,7 +39,7 @@ public class ShisetsuNyutaishoRirekiKanri {
      * @param rirekiDiv 施設入退所履歴管理Div
      * @return レスポンス
      */
-    public ResponseData onClick_btnSelectShisetsuNyutaisho(ShisetsuNyutaishoRirekiKanriDiv rirekiDiv) {
+    public ResponseData onSelectByModifyButton_dgShisetsuNyutaishoRireki(ShisetsuNyutaishoRirekiKanriDiv rirekiDiv) {
         ResponseData<ShisetsuNyutaishoRirekiKanriDiv> response = new ResponseData<>();
 
         ShisetsuNyutaishoInputDiv inputDiv = rirekiDiv.getShisetsuNyutaishoInput();
@@ -82,7 +82,7 @@ public class ShisetsuNyutaishoRirekiKanri {
     }
 
     private dgShisetsuNyutaishoRireki_Row createNewRow() {
-        return new dgShisetsuNyutaishoRireki_Row(new Button(), new Button(), new TextBoxFlexibleDate(), new TextBoxFlexibleDate(),
+        return new dgShisetsuNyutaishoRireki_Row(new TextBoxFlexibleDate(), new TextBoxFlexibleDate(),
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
     }
 
@@ -107,6 +107,14 @@ public class ShisetsuNyutaishoRirekiKanri {
             setRirekiRow(row, inputDiv);
             if (!row.getRowState().equals(RowState.Added)) {
                 row.setRowState(RowState.Modified);
+            }
+        } else if (DELETE_MODE.equals(rirekiDiv.getInputMode())) {
+            int selectRow = Integer.parseInt(rirekiDiv.getSelectRow().toString());
+            row = grid.getDataSource().get(selectRow);
+            if (row.getRowState().equals(RowState.Added)) {
+                rirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().remove(selectRow);
+            } else {
+                row.setRowState(RowState.Deleted);
             }
         } else {
             row.setRowState(RowState.Added);
@@ -149,17 +157,16 @@ public class ShisetsuNyutaishoRirekiKanri {
      * @param rirekiDiv 施設入退所履歴管理Div
      * @return レスポンス
      */
-    public ResponseData onClick_btnDeleteShisetsuNyutaisho(ShisetsuNyutaishoRirekiKanriDiv rirekiDiv) {
+    public ResponseData onSelectByDeleteButton_dgShisetsuNyutaishoRireki(ShisetsuNyutaishoRirekiKanriDiv rirekiDiv) {
         ResponseData<ShisetsuNyutaishoRirekiKanriDiv> response = new ResponseData<>();
         dgShisetsuNyutaishoRireki_Row row = rirekiDiv.getDgShisetsuNyutaishoRireki().getClickedItem();
-        if (row.getRowState().equals(RowState.Deleted)) {
-            rirekiDiv.getDgShisetsuNyutaishoRireki().getClickedItem().setRowState(RowState.Unchanged);
-        } else if (row.getRowState().equals(RowState.Added)) {
-            int delIndex = rirekiDiv.getDgShisetsuNyutaishoRireki().getClickedRowId();
-            rirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().remove(delIndex);
-        } else {
-            rirekiDiv.getDgShisetsuNyutaishoRireki().getClickedItem().setRowState(RowState.Deleted);
-        }
+
+        ShisetsuNyutaishoInputDiv inputDiv = rirekiDiv.getShisetsuNyutaishoInput();
+        setInputMode(rirekiDiv, DELETE_MODE);
+        rirekiDiv.setSelectRow(new RString(Integer.toString(row.getId())));
+        setInputData(inputDiv, row);
+
+        setShowShisetsuShurui(rirekiDiv);
 
         response.data = rirekiDiv;
         return response;
@@ -192,6 +199,9 @@ public class ShisetsuNyutaishoRirekiKanri {
             rirekiDiv.getBtnUpdateShisetsuNyutaisho().setDisabled(false);
         } else if (ADD_MODE.equals(rirekiDiv.getInputMode())) {
             inputDiv.setDisabled(false);
+            rirekiDiv.getBtnUpdateShisetsuNyutaisho().setDisabled(false);
+        } else if (DELETE_MODE.equals(rirekiDiv.getInputMode())) {
+            inputDiv.setDisabled(true);
             rirekiDiv.getBtnUpdateShisetsuNyutaisho().setDisabled(false);
         } else {
             inputDiv.setDisabled(true);

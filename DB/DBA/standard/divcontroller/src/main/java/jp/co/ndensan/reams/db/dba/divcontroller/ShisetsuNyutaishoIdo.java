@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.ur.urz.divcontroller.entity.SaikinShorishaRirekiDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
@@ -112,7 +111,7 @@ public class ShisetsuNyutaishoIdo {
     }
 
     private dgShisetsuNyutaishoRireki_Row createIdoRirekiRow(HashMap gaitosha) {
-        dgShisetsuNyutaishoRireki_Row row = new dgShisetsuNyutaishoRireki_Row(new Button(), new Button(), new TextBoxFlexibleDate(),
+        dgShisetsuNyutaishoRireki_Row row = new dgShisetsuNyutaishoRireki_Row(new TextBoxFlexibleDate(),
                 new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
         row.getNyushoDate().setValue(new FlexibleDate(gaitosha.get("入所日").toString()));
         if (gaitosha.get("退所日") != null) {
