@@ -1,0 +1,22 @@
+## YAML Template.
+---
+- HokenshaSofuListShoriYMDId: 0
+  処理年月: 20140601
+- HokenshaSofuListId: 1
+  送付情報: !!str "[531]受給者異動連絡票情報"
+  前月: !!str ○
+  前々月: !!str ○
+  当月状態: !!str 処理前
+  当月処理日時: !!str "平26.02.27 10:45:35"
+- HokenshaSofuListId: 2
+  送付情報: !!str "[5C1]共同処理用受給者異動情報"
+  前月: !!str ×
+  前々月: !!str ×
+  当月状態: !!str 処理前
+  当月処理日時: !!str ""
+- HokenshaSofuListId: 3
+  送付情報: !!str "[821]給付管理票"
+  前月: !!str －
+  前々月: !!str －
+  当月状態: !!str 処理前
+  当月処理日時: !!str ""
