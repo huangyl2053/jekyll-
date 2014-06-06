@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -25,10 +25,10 @@ public class KagoMoshitateDiv extends Panel {
     private TextBoxCode txtJigyoshaNo;
     @JsonProperty("txtJigyoshaName")
     private TextBox txtJigyoshaName;
-    @JsonProperty("txtSendYM")
-    private TextBoxDate txtSendYM;
     @JsonProperty("txtMoshitateshaKubun")
     private TextBox txtMoshitateshaKubun;
+    @JsonProperty("txtSendYM")
+    private TextBoxDate txtSendYM;
     @JsonProperty("txtShokisaiHokenshaNo")
     private TextBoxCode txtShokisaiHokenshaNo;
     @JsonProperty("txtShokisaiHokenshaName")
@@ -70,16 +70,6 @@ public class KagoMoshitateDiv extends Panel {
         this.txtJigyoshaName=txtJigyoshaName;
     }
 
-    @JsonProperty("txtSendYM")
-    public TextBoxDate getTxtSendYM() {
-        return txtSendYM;
-    }
-
-    @JsonProperty("txtSendYM")
-    public void setTxtSendYM(TextBoxDate txtSendYM) {
-        this.txtSendYM=txtSendYM;
-    }
-
     @JsonProperty("txtMoshitateshaKubun")
     public TextBox getTxtMoshitateshaKubun() {
         return txtMoshitateshaKubun;
@@ -88,6 +78,16 @@ public class KagoMoshitateDiv extends Panel {
     @JsonProperty("txtMoshitateshaKubun")
     public void setTxtMoshitateshaKubun(TextBox txtMoshitateshaKubun) {
         this.txtMoshitateshaKubun=txtMoshitateshaKubun;
+    }
+
+    @JsonProperty("txtSendYM")
+    public TextBoxDate getTxtSendYM() {
+        return txtSendYM;
+    }
+
+    @JsonProperty("txtSendYM")
+    public void setTxtSendYM(TextBoxDate txtSendYM) {
+        this.txtSendYM=txtSendYM;
     }
 
     @JsonProperty("txtShokisaiHokenshaNo")

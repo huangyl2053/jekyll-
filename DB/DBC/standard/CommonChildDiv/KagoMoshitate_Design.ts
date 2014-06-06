@@ -1,7 +1,7 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
 
-module DBZ {
+module DBC {
     /**
      * 自動生成コードです。修正しないでください。
      * KagoMoshitateクラスのみで継承して使えます。
@@ -136,7 +136,7 @@ module DBZ {
      "fieldName": "txtJigyoshaNo",
      "items": [],
      "controlType": "TextBoxCode",
-     "width": "80",
+     "width": "90",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -220,6 +220,49 @@ module DBZ {
      "permitCharactor": ""
     },
     {
+     "fieldName": "txtMoshitateshaKubun",
+     "items": [],
+     "controlType": "TextBox",
+     "width": "100",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "txtMoshitateshaKubun_core",
+     "readOnly": true,
+     "required": false,
+     "maxLength": 100000000,
+     "minLength": 0,
+     "textAlign": 0,
+     "placeHolder": "2:保険者申立",
+     "textKind": 0,
+     "isPrivateInfo": false,
+     "isPassword": false,
+     "isComboBox": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "onKeyPress": "",
+     "text": "",
+     "suggest": [],
+     "value": "",
+     "labelLText": "申立者区分",
+     "labelRText": "",
+     "labelLWidth": "80",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "permitCharactor": ""
+    },
+    {
      "fieldName": "txtSendYM",
      "items": [],
      "controlType": "TextBoxDate",
@@ -251,7 +294,7 @@ module DBZ {
      "value": "",
      "labelLText": "送付年月",
      "labelRText": "",
-     "labelLWidth": "80",
+     "labelLWidth": "70",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -260,53 +303,10 @@ module DBZ {
      "displayFormat": 0
     },
     {
-     "fieldName": "txtMoshitateshaKubun",
-     "items": [],
-     "controlType": "TextBox",
-     "width": "120",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "txtMoshitateshaKubun_core",
-     "readOnly": true,
-     "required": false,
-     "maxLength": 100000000,
-     "minLength": 0,
-     "textAlign": 0,
-     "placeHolder": "",
-     "textKind": 0,
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "isComboBox": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
-     "text": "",
-     "suggest": [],
-     "value": "",
-     "labelLText": "申立者区分",
-     "labelRText": "",
-     "labelLWidth": "80",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "permitCharactor": ""
-    },
-    {
      "fieldName": "txtShokisaiHokenshaNo",
      "items": [],
      "controlType": "TextBoxCode",
-     "width": "50",
+     "width": "80",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -543,7 +543,7 @@ module DBZ {
      "selectedItem": "code02",
      "dataSource": [
       {
-       "key": "code00",
+       "key": "space",
        "value": ""
       },
       {
@@ -600,10 +600,6 @@ module DBZ {
       },
       {
        "key": "code69",
-       "value": "69:不正請求による実績取下げ（同月）"
-      },
-      {
-       "key": "code90",
        "value": "90:その他の事由による台帳過誤"
       },
       {
@@ -710,7 +706,7 @@ module DBZ {
  "marginRight": 0,
  "selectControlID": "defaultLayout",
  "relation": [],
- "businessId": "DBZ",
+ "businessId": "DBC",
  "controlName": "KagoMoshitate",
  "marginTop": 0,
  "marginBottom": 0,

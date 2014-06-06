@@ -8,7 +8,7 @@
      "fieldName": "txtJigyoshaNo",
      "items": [],
      "controlType": "TextBoxCode",
-     "width": "75",
+     "width": "80",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -21,11 +21,12 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtJigyoshaNo_core",
+     "readOnly": false,
      "required": true,
-     "maxLength": 1000000000000,
+     "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
-     "readOnly": false,
      "placeHolder": "",
      "textKind": 2,
      "isPrivateInfo": false,
@@ -40,7 +41,7 @@
      "value": "",
      "labelLText": "事業者",
      "labelRText": "",
-     "labelLWidth": "60",
+     "labelLWidth": "70",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -64,12 +65,14 @@
      "authorityMode": 0,
      "marginLeft": "-0.2",
      "marginRight": "-0.2",
+     "selectControlID": "btnSearchJigyosha",
      "text": "探",
      "onClick": "onClick_btnSearchJigyosha",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     },
     {
      "fieldName": "txtJigyoshaName",
@@ -88,11 +91,12 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtJigyoshaName_core",
+     "readOnly": false,
      "required": false,
-     "maxLength": 1000000000000,
+     "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
-     "readOnly": false,
      "placeHolder": "",
      "textKind": 0,
      "isPrivateInfo": false,
@@ -117,7 +121,7 @@
      "fieldName": "txtHihoNo",
      "items": [],
      "controlType": "TextBoxCode",
-     "width": "75",
+     "width": "80",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -130,11 +134,12 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtHihoNo_core",
+     "readOnly": false,
      "required": false,
-     "maxLength": 1000000000000,
+     "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
-     "readOnly": false,
      "placeHolder": "",
      "textKind": 2,
      "isPrivateInfo": false,
@@ -149,7 +154,7 @@
      "value": "",
      "labelLText": "被保番号",
      "labelRText": "",
-     "labelLWidth": "60",
+     "labelLWidth": "70",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -173,12 +178,14 @@
      "authorityMode": 0,
      "marginLeft": "-0.2",
      "marginRight": "-0.2",
+     "selectControlID": "btnSearchHihokensha",
      "text": "探",
      "onClick": "onClick_btnSearchHihokensha",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     },
     {
      "fieldName": "txtHihoName",
@@ -197,11 +204,12 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtHihoName_core",
+     "readOnly": false,
      "required": false,
-     "maxLength": 1000000000000,
+     "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
-     "readOnly": false,
      "placeHolder": "",
      "textKind": 0,
      "isPrivateInfo": false,
@@ -226,7 +234,7 @@
      "fieldName": "txtTeikyoYMRange",
      "items": [],
      "controlType": "TextBoxDateRange",
-     "width": "55",
+     "width": "60",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -239,6 +247,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtTeikyoYMRange_core",
      "readOnly": false,
      "isPrivateInfo": false,
      "isPassword": false,
@@ -248,7 +257,7 @@
      "onKeyPress": "",
      "labelLText": "提供年月",
      "labelRText": "",
-     "labelLWidth": "60",
+     "labelLWidth": "70",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -264,7 +273,9 @@
      "fromText": "",
      "toText": "",
      "fromValue": "",
-     "toValue": ""
+     "toValue": "",
+     "fromSelectControlID": "txtTeikyoYMRangeFrom",
+     "toSelectControlID": "txtTeikyoYMRangeTo"
     },
     {
      "fieldName": "ddlHokensha",
@@ -278,11 +289,12 @@
      "nextFocusFieldName": "",
      "wrap": false,
      "dependencies": [],
-     "float": 0,
+     "float": 2,
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "ddlHokensha_core",
      "required": false,
      "onFocus": "",
      "onBlur": "",
@@ -293,7 +305,7 @@
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "selectedItem": "",
+     "selectedItem": "key0",
      "dataSource": [
       {
        "key": "key0",
@@ -322,36 +334,14 @@
      "authorityMode": 0,
      "marginLeft": "XL",
      "marginRight": "XL",
+     "selectControlID": "btnSearch",
      "text": "給付実績を検索する",
      "onClick": "onClick_btnSearch",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
-    },
-    {
-     "fieldName": "btnKari",
-     "items": [],
-     "controlType": "Button",
-     "width": "M",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 2,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XL",
-     "text": "仮選択ボタン",
-     "onClick": "onClick_btnKari",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     }
    ],
    "controlType": "Panel",
@@ -368,6 +358,7 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "SearchToKyufujissekiPanel",
    "onLoad": "",
    "title": "給付実績検索条件",
    "isOpen": true,
@@ -377,7 +368,12 @@
      "postParameterPanelNames": "SearchToKyufujissekiPanel"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/SearchToKyufujissekiPanel/onLoad"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -390,7 +386,9 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false
   },
   {
    "fieldName": "KyufuJissekiGaitoshaListPanel",
@@ -412,14 +410,19 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "dgHihokenshaSearchGaitosha",
      "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
+      "isShowHeader": true,
       "isShowFooter": true,
       "isShowFilter": false,
       "isShowFilterButton": false,
       "isShowRowState": false,
+      "isShowSelectButtonColumn": false,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
       "header": {
        "combineColumns": [],
        "frozenColumn": "",
@@ -436,7 +439,7 @@
         "cellType": 2,
         "cellDetails": {
          "cellType": 2,
-         "disabled": false
+         "disabled": true
         },
         "align": 1,
         "resize": true,
@@ -469,7 +472,7 @@
         "dataName": "txtJigyoshaNo",
         "toolTip": "",
         "bgColor": 0,
-        "width": 75,
+        "width": 90,
         "visible": true,
         "cellType": 4,
         "cellDetails": {
@@ -505,7 +508,7 @@
         "dataName": "txtHihoNo",
         "toolTip": "",
         "bgColor": 0,
-        "width": 80,
+        "width": 90,
         "visible": true,
         "cellType": 4,
         "cellDetails": {
@@ -531,7 +534,7 @@
         "cellDetails": {
          "cellType": 0
         },
-        "align": 2,
+        "align": 0,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "txtHihoName"
@@ -557,7 +560,7 @@
         "dataName": "txtTeikyoYM",
         "toolTip": "",
         "bgColor": 0,
-        "width": 50,
+        "width": 60,
         "visible": true,
         "cellType": 6,
         "cellDetails": {
@@ -604,7 +607,7 @@
         "dataName": "txtShinsaYM",
         "toolTip": "",
         "bgColor": 0,
-        "width": 50,
+        "width": 60,
         "visible": true,
         "cellType": 6,
         "cellDetails": {
@@ -620,14 +623,17 @@
        }
       ]
      },
-     "height": "Auto",
+     "height": "M",
      "onSort": "",
      "onSelect": "",
      "onSelectByDblClick": "",
+     "onSelectBySelectButton": "",
+     "onSelectByModifyButton": "",
+     "onSelectByDeleteButton": "",
      "onOnlyRow": "onlyRow_HihokenshaSearchGaitoshaGrid",
      "onNoRow": "",
      "onMultiRows": "",
-     "sortOrder": "txtKyufuJissekiSakuseiKubun",
+     "sortOrder": "txtKyufuKubun",
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1
@@ -647,6 +653,7 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "KyufuJissekiGaitoshaListPanel",
    "onLoad": "",
    "title": "給付実績該当者一覧",
    "isOpen": true,
@@ -654,15 +661,20 @@
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "KyufuJissekiGaitoshaListPanel"
-    },
-    {
-     "postParameterPanelNames": "SearchToKyufujissekiPanel"
     }
    ],
    "requestSettings": [
     {
      "eventName": "onLoad",
      "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_btnSearch",
+     "requestUrl": "dbc/db/dbc/KyufuJissekiGaitoshaListPanel/onClick_btnSearch"
+    },
+    {
+     "eventName": "onClick_btnSettle",
+     "requestUrl": "dbc/db/dbc/KyufuJissekiGaitoshaListPanel/onClick_btnSettle"
     }
    ],
    "hiddenInput": [],
@@ -677,7 +689,9 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false
   },
   {
    "fieldName": "KagoMoshitatePanel",
@@ -705,11 +719,12 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "txt1_core",
+         "readOnly": true,
          "required": false,
-         "maxLength": 1000000000000,
+         "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
-         "readOnly": true,
          "placeHolder": "基本情報",
          "textKind": 0,
          "isPrivateInfo": false,
@@ -747,11 +762,12 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "txt2_core",
+         "readOnly": true,
          "required": false,
-         "maxLength": 1000000000000,
+         "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
-         "readOnly": true,
          "placeHolder": "",
          "textKind": 0,
          "isPrivateInfo": false,
@@ -789,11 +805,12 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "txt3_core",
+         "readOnly": true,
          "required": false,
-         "maxLength": 1000000000000,
+         "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
-         "readOnly": true,
          "placeHolder": "",
          "textKind": 0,
          "isPrivateInfo": false,
@@ -829,6 +846,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "KariKihonPanel",
        "onLoad": "",
        "title": "",
        "isOpen": true,
@@ -851,7 +869,9 @@
        "eraseBorderLeft": true,
        "backgroundColor": 0,
        "widthAuto": false,
-       "isGroupBox": false
+       "panelDisplay": 0,
+       "isGroupBox": false,
+       "readOnly": false
       },
       {
        "fieldName": "KariKaigoCommonPanel",
@@ -873,11 +893,12 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "txt4_core",
+         "readOnly": true,
          "required": false,
-         "maxLength": 1000000000000,
+         "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
-         "readOnly": true,
          "placeHolder": "介護共通情報",
          "textKind": 0,
          "isPrivateInfo": false,
@@ -915,11 +936,12 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "txt5_core",
+         "readOnly": true,
          "required": false,
-         "maxLength": 1000000000000,
+         "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 0,
-         "readOnly": true,
          "placeHolder": "",
          "textKind": 0,
          "isPrivateInfo": false,
@@ -955,6 +977,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "KariKaigoCommonPanel",
        "onLoad": "",
        "title": "",
        "isOpen": true,
@@ -977,7 +1000,9 @@
        "eraseBorderLeft": true,
        "backgroundColor": 0,
        "widthAuto": false,
-       "isGroupBox": false
+       "panelDisplay": 0,
+       "isGroupBox": false,
+       "readOnly": false
       }
      ],
      "controlType": "Panel",
@@ -994,6 +1019,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "Hihokensha",
      "onLoad": "",
      "title": "",
      "isOpen": true,
@@ -1016,7 +1042,9 @@
      "eraseBorderLeft": true,
      "backgroundColor": 0,
      "widthAuto": false,
-     "isGroupBox": false
+     "panelDisplay": 0,
+     "isGroupBox": false,
+     "readOnly": false
     },
     {
      "fieldName": "KagoMoshitateInfo",
@@ -1035,6 +1063,7 @@
      "authorityMode": 0,
      "marginLeft": 0,
      "marginRight": 0,
+     "selectControlID": "KagoMoshitateInfo",
      "title": "",
      "relation": [],
      "marginTop": 0,
@@ -1067,12 +1096,14 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnSettle",
      "text": "過誤申立情報を確定する",
      "onClick": "onClick_btnSettle",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     },
     {
      "fieldName": "btnCancel",
@@ -1091,12 +1122,14 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnCancel",
      "text": "過誤申立情報の入力をやめる",
      "onClick": "onClick_btnSave",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     }
    ],
    "controlType": "Panel",
@@ -1113,6 +1146,7 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "KagoMoshitatePanel",
    "onLoad": "",
    "title": "過誤申立書情報",
    "isOpen": true,
@@ -1120,9 +1154,21 @@
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "KagoMoshitatePanel"
+    },
+    {
+     "postParameterPanelNames": "KyufuJissekiGaitoshaListPanel"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_btnSelect",
+     "requestUrl": "dbc/db/dbc/KagoMoshitatePanel/onClick_btnSelect"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -1135,10 +1181,12 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false
   },
   {
-   "fieldName": "CommonButton",
+   "fieldName": "KyotsuPanel",
    "items": [
     {
      "fieldName": "btnSave",
@@ -1157,12 +1205,14 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnSave",
      "text": "過誤申立情報を保存する",
      "onClick": "onClick_btnSave",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     }
    ],
    "controlType": "Panel",
@@ -1179,13 +1229,14 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "KyotsuPanel",
    "onLoad": "",
    "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "CommonButton"
+     "postParameterPanelNames": "KyotsuPanel"
     }
    ],
    "requestSettings": [],
@@ -1201,7 +1252,9 @@
    "eraseBorderLeft": true,
    "backgroundColor": 0,
    "widthAuto": false,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false
   }
  ],
  "controlType": null,
@@ -1218,6 +1271,7 @@
  "authorityMode": 0,
  "marginLeft": "XS",
  "marginRight": "XS",
+ "selectControlID": "Page",
  "onLoad": "",
  "title": "介護給付費過誤申立書登録",
  "jsPathCollection": [],
@@ -1237,7 +1291,7 @@
      "panelState": "readOnly visible"
     },
     {
-     "visibleDiv": "CommonButton",
+     "visibleDiv": "KyotsuPanel",
      "panelState": "visible"
     }
    ],
@@ -1247,17 +1301,17 @@
    },
    "events": [
     {
-     "fieldName": "btnKari",
+     "fieldName": "dgHihokenshaSearchGaitosha[btnSelect]",
      "event": "onClick",
      "transition": "申請登録"
     },
     {
-     "fieldName": "btnCancel",
+     "fieldName": "btnSettle",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnSettle",
+     "fieldName": "btnCancel",
      "event": "onClick",
      "transition": ""
     }
@@ -1292,17 +1346,17 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "btnKari",
+     "fieldName": "dgHihokenshaSearchGaitosha[btnSelect]",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnCancel",
+     "fieldName": "btnSettle",
      "event": "onClick",
      "transition": "検索・一覧"
     },
     {
-     "fieldName": "btnSettle",
+     "fieldName": "btnCancel",
      "event": "onClick",
      "transition": "検索・一覧"
     }
@@ -1315,15 +1369,15 @@
  "UIContainerEventMapping": [],
  "loadSequencePanelNames": [
   [
-   "SearchToKyufujissekiPanel",
-   "KyufuJissekiGaitoshaListPanel"
+   "KyufuJissekiGaitoshaListPanel",
+   "KagoMoshitatePanel"
   ],
   [
    "KariKihonPanel",
    "KariKaigoCommonPanel"
   ],
   [
-   "KagoMoshitatePanel"
+   "SearchToKyufujissekiPanel"
   ],
   [
    "Hihokensha"
@@ -1332,9 +1386,11 @@
    "KagoMoshitateInfo"
   ],
   [
-   "CommonButton"
+   "KyotsuPanel"
   ]
  ],
  "panelMargin": 1,
- "controlMargin": 1
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "commonButtonAreaData": []
 }
