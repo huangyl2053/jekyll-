@@ -27,8 +27,8 @@ public class HonChoteiboDiv extends PanelPublish {
     private TextBoxTime txtChoteiboFromTime;
     @JsonProperty("lblChoteboTo")
     private Label lblChoteboTo;
-    @JsonProperty("Shuturyokujun1")
-    private Shuturyokujun1Div Shuturyokujun1;
+    @JsonProperty("ShutsuryokuJunHonChoteibo")
+    private ChohyoShutsuryokujunDiv ShutsuryokuJunHonChoteibo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -66,14 +66,14 @@ public class HonChoteiboDiv extends PanelPublish {
         this.lblChoteboTo=lblChoteboTo;
     }
 
-    @JsonProperty("Shuturyokujun1")
-    public Shuturyokujun1Div getShuturyokujun1() {
-        return Shuturyokujun1;
+    @JsonProperty("ShutsuryokuJunHonChoteibo")
+    public ChohyoShutsuryokujunDiv getShutsuryokuJunHonChoteibo() {
+        return ShutsuryokuJunHonChoteibo;
     }
 
-    @JsonProperty("Shuturyokujun1")
-    public void setShuturyokujun1(Shuturyokujun1Div Shuturyokujun1) {
-        this.Shuturyokujun1=Shuturyokujun1;
+    @JsonProperty("ShutsuryokuJunHonChoteibo")
+    public void setShutsuryokuJunHonChoteibo(ChohyoShutsuryokujunDiv ShutsuryokuJunHonChoteibo) {
+        this.ShutsuryokuJunHonChoteibo=ShutsuryokuJunHonChoteibo;
     }
 
 }

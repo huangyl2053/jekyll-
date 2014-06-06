@@ -24,11 +24,11 @@ public class HonKetteTsuchiDiv extends PanelPublish {
     @JsonProperty("txtKetteTsuchiHakkoYMD")
     private TextBoxDate txtKetteTsuchiHakkoYMD;
     @JsonProperty("btnKetteiTsuchiYousikiSettei")
-    private Button btnKetteiTsuchiYousikiSettei;
+    private ButtonDialog btnKetteiTsuchiYousikiSettei;
     @JsonProperty("txtKetteTsuchiBunshoNo")
-    private TextBoxDate txtKetteTsuchiBunshoNo;
-    @JsonProperty("Shuturyokujun4")
-    private Shuturyokujun4Div Shuturyokujun4;
+    private TextBox txtKetteTsuchiBunshoNo;
+    @JsonProperty("ShutsuryokuJunHonKetteTsuchi")
+    private ChohyoShutsuryokujunDiv ShutsuryokuJunHonKetteTsuchi;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -47,33 +47,33 @@ public class HonKetteTsuchiDiv extends PanelPublish {
     }
 
     @JsonProperty("btnKetteiTsuchiYousikiSettei")
-    public Button getBtnKetteiTsuchiYousikiSettei() {
+    public ButtonDialog getBtnKetteiTsuchiYousikiSettei() {
         return btnKetteiTsuchiYousikiSettei;
     }
 
     @JsonProperty("btnKetteiTsuchiYousikiSettei")
-    public void setBtnKetteiTsuchiYousikiSettei(Button btnKetteiTsuchiYousikiSettei) {
+    public void setBtnKetteiTsuchiYousikiSettei(ButtonDialog btnKetteiTsuchiYousikiSettei) {
         this.btnKetteiTsuchiYousikiSettei=btnKetteiTsuchiYousikiSettei;
     }
 
     @JsonProperty("txtKetteTsuchiBunshoNo")
-    public TextBoxDate getTxtKetteTsuchiBunshoNo() {
+    public TextBox getTxtKetteTsuchiBunshoNo() {
         return txtKetteTsuchiBunshoNo;
     }
 
     @JsonProperty("txtKetteTsuchiBunshoNo")
-    public void setTxtKetteTsuchiBunshoNo(TextBoxDate txtKetteTsuchiBunshoNo) {
+    public void setTxtKetteTsuchiBunshoNo(TextBox txtKetteTsuchiBunshoNo) {
         this.txtKetteTsuchiBunshoNo=txtKetteTsuchiBunshoNo;
     }
 
-    @JsonProperty("Shuturyokujun4")
-    public Shuturyokujun4Div getShuturyokujun4() {
-        return Shuturyokujun4;
+    @JsonProperty("ShutsuryokuJunHonKetteTsuchi")
+    public ChohyoShutsuryokujunDiv getShutsuryokuJunHonKetteTsuchi() {
+        return ShutsuryokuJunHonKetteTsuchi;
     }
 
-    @JsonProperty("Shuturyokujun4")
-    public void setShuturyokujun4(Shuturyokujun4Div Shuturyokujun4) {
-        this.Shuturyokujun4=Shuturyokujun4;
+    @JsonProperty("ShutsuryokuJunHonKetteTsuchi")
+    public void setShutsuryokuJunHonKetteTsuchi(ChohyoShutsuryokujunDiv ShutsuryokuJunHonKetteTsuchi) {
+        this.ShutsuryokuJunHonKetteTsuchi=ShutsuryokuJunHonKetteTsuchi;
     }
 
 }

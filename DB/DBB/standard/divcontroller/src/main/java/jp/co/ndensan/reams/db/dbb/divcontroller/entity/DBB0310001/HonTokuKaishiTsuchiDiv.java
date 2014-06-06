@@ -27,8 +27,8 @@ public class HonTokuKaishiTsuchiDiv extends PanelPublish {
     private Label lblTokuKaishiTsuchiDaikou;
     @JsonProperty("radTokuKaishiTsuchiTaisho")
     private RadioButton radTokuKaishiTsuchiTaisho;
-    @JsonProperty("Shuturyokujun2")
-    private Shuturyokujun2Div Shuturyokujun2;
+    @JsonProperty("ShutsuryokuJunHonTokuKaishiTsuchi")
+    private ChohyoShutsuryokujunDiv ShutsuryokuJunHonTokuKaishiTsuchi;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -66,14 +66,14 @@ public class HonTokuKaishiTsuchiDiv extends PanelPublish {
         this.radTokuKaishiTsuchiTaisho=radTokuKaishiTsuchiTaisho;
     }
 
-    @JsonProperty("Shuturyokujun2")
-    public Shuturyokujun2Div getShuturyokujun2() {
-        return Shuturyokujun2;
+    @JsonProperty("ShutsuryokuJunHonTokuKaishiTsuchi")
+    public ChohyoShutsuryokujunDiv getShutsuryokuJunHonTokuKaishiTsuchi() {
+        return ShutsuryokuJunHonTokuKaishiTsuchi;
     }
 
-    @JsonProperty("Shuturyokujun2")
-    public void setShuturyokujun2(Shuturyokujun2Div Shuturyokujun2) {
-        this.Shuturyokujun2=Shuturyokujun2;
+    @JsonProperty("ShutsuryokuJunHonTokuKaishiTsuchi")
+    public void setShutsuryokuJunHonTokuKaishiTsuchi(ChohyoShutsuryokujunDiv ShutsuryokuJunHonTokuKaishiTsuchi) {
+        this.ShutsuryokuJunHonTokuKaishiTsuchi=ShutsuryokuJunHonTokuKaishiTsuchi;
     }
 
 }

@@ -4,12 +4,12 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001.HonChoteiboDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001.HonTokuKaishiTsuchiDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001.HonFukadaichoDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001.HonNotsuDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001.HonKetteTsuchiDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001.HonChoteiboDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001.HonFukadaichoDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001.HonKetteTsuchiDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001.HonNotsuDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001.HonTokuKaishiTsuchiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -28,10 +28,10 @@ public class HonsanteiChohyoHakkoDiv extends Panel {
     private HonChoteiboDiv HonChoteibo;
     @JsonProperty("HonTokuKaishiTsuchi")
     private HonTokuKaishiTsuchiDiv HonTokuKaishiTsuchi;
-    @JsonProperty("HonNotsu")
-    private HonNotsuDiv HonNotsu;
     @JsonProperty("HonKetteTsuchi")
     private HonKetteTsuchiDiv HonKetteTsuchi;
+    @JsonProperty("HonNotsu")
+    private HonNotsuDiv HonNotsu;
     @JsonProperty("HonFukadaicho")
     private HonFukadaichoDiv HonFukadaicho;
 
@@ -61,16 +61,6 @@ public class HonsanteiChohyoHakkoDiv extends Panel {
         this.HonTokuKaishiTsuchi=HonTokuKaishiTsuchi;
     }
 
-    @JsonProperty("HonNotsu")
-    public HonNotsuDiv getHonNotsu() {
-        return HonNotsu;
-    }
-
-    @JsonProperty("HonNotsu")
-    public void setHonNotsu(HonNotsuDiv HonNotsu) {
-        this.HonNotsu=HonNotsu;
-    }
-
     @JsonProperty("HonKetteTsuchi")
     public HonKetteTsuchiDiv getHonKetteTsuchi() {
         return HonKetteTsuchi;
@@ -79,6 +69,16 @@ public class HonsanteiChohyoHakkoDiv extends Panel {
     @JsonProperty("HonKetteTsuchi")
     public void setHonKetteTsuchi(HonKetteTsuchiDiv HonKetteTsuchi) {
         this.HonKetteTsuchi=HonKetteTsuchi;
+    }
+
+    @JsonProperty("HonNotsu")
+    public HonNotsuDiv getHonNotsu() {
+        return HonNotsu;
+    }
+
+    @JsonProperty("HonNotsu")
+    public void setHonNotsu(HonNotsuDiv HonNotsu) {
+        this.HonNotsu=HonNotsu;
     }
 
     @JsonProperty("HonFukadaicho")

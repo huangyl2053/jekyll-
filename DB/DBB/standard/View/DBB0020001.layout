@@ -22,11 +22,11 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtLastKeisanYMD_core",
+     "readOnly": false,
      "required": false,
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
-     "readOnly": false,
      "placeHolder": "平26.06.05 18：05：20",
      "textKind": 0,
      "isPrivateInfo": false,
@@ -93,7 +93,7 @@
      "fieldName": "ddlSakuseiYMD",
      "items": [],
      "controlType": "DropDownList",
-     "width": "170",
+     "width": "180",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -116,7 +116,7 @@
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "selectedItem": "",
+     "selectedItem": "key0",
      "dataSource": [
       {
        "key": "key0",
@@ -291,6 +291,9 @@
      "onSort": "",
      "onSelect": "onClick_SentakuTaishoLord",
      "onSelectByDblClick": "",
+     "onSelectBySelectButton": "",
+     "onSelectByModifyButton": "",
+     "onSelectByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -347,7 +350,8 @@
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
-   "isGroupBox": false
+   "isGroupBox": false,
+   "readOnly": false
   },
   {
    "fieldName": "KyotsuPanel",
@@ -420,7 +424,7 @@
     }
    ],
    "controlType": "Panel",
-   "width": "M",
+   "width": "G2",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -457,7 +461,8 @@
    "backgroundColor": 0,
    "widthAuto": true,
    "panelDisplay": 0,
-   "isGroupBox": false
+   "isGroupBox": false,
+   "readOnly": false
   }
  ],
  "controlType": null,
@@ -569,5 +574,7 @@
   ]
  ],
  "panelMargin": 1,
- "controlMargin": 1
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "commonButtonAreaData": []
 }

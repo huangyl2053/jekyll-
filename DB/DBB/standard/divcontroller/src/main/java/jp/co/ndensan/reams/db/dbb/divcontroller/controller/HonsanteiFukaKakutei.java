@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller;
 
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001.HonsanteiFukaKakuteiDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310002.HonsanteiFukaKakuteiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

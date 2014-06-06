@@ -60,6 +60,6 @@ public class HonsanteiChohyoHakko {
 
     private void setHonKetteTsuchi(HonsanteiChohyoHakkoDiv honsanteiChohyoHakkoDiv) {
         honsanteiChohyoHakkoDiv.getHonKetteTsuchi().getTxtKetteTsuchiHakkoYMD().setValue(RDateTime.now().getDate());
-        honsanteiChohyoHakkoDiv.getHonKetteTsuchi().getTxtKetteTsuchiBunshoNo().setValue(RDate.MAX);
+        honsanteiChohyoHakkoDiv.getHonKetteTsuchi().getTxtKetteTsuchiBunshoNo().setValue(RString.EMPTY);
     }
 }

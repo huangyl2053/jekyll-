@@ -33,8 +33,8 @@ public class HonNotsuDiv extends PanelPublish {
     private RadioButton radNotsuSeikatsuHogo;
     @JsonProperty("radNotsuYamawake")
     private RadioButton radNotsuYamawake;
-    @JsonProperty("Shuturyokujun3")
-    private Shuturyokujun3Div Shuturyokujun3;
+    @JsonProperty("ShutsuryokuJunHonNotsu")
+    private ChohyoShutsuryokujunDiv ShutsuryokuJunHonNotsu;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -102,14 +102,14 @@ public class HonNotsuDiv extends PanelPublish {
         this.radNotsuYamawake=radNotsuYamawake;
     }
 
-    @JsonProperty("Shuturyokujun3")
-    public Shuturyokujun3Div getShuturyokujun3() {
-        return Shuturyokujun3;
+    @JsonProperty("ShutsuryokuJunHonNotsu")
+    public ChohyoShutsuryokujunDiv getShutsuryokuJunHonNotsu() {
+        return ShutsuryokuJunHonNotsu;
     }
 
-    @JsonProperty("Shuturyokujun3")
-    public void setShuturyokujun3(Shuturyokujun3Div Shuturyokujun3) {
-        this.Shuturyokujun3=Shuturyokujun3;
+    @JsonProperty("ShutsuryokuJunHonNotsu")
+    public void setShutsuryokuJunHonNotsu(ChohyoShutsuryokujunDiv ShutsuryokuJunHonNotsu) {
+        this.ShutsuryokuJunHonNotsu=ShutsuryokuJunHonNotsu;
     }
 
 }

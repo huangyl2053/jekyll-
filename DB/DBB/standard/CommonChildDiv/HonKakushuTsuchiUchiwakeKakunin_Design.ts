@@ -60,10 +60,14 @@ module DBB {
        "gridSetting": {
         "rowHeight": 25,
         "isMultiSelectable": false,
-        "isShowFooter": true,
+        "isShowHeader": true,
+        "isShowFooter": false,
         "isShowFilter": false,
         "isShowFilterButton": false,
         "isShowRowState": false,
+        "isShowSelectButtonColumn": false,
+        "isShowModifyButtonColumn": false,
+        "isShowDeleteButtonColumn": false,
         "header": {
          "combineColumns": [],
          "frozenColumn": "",
@@ -127,6 +131,9 @@ module DBB {
        "onSort": "",
        "onSelect": "",
        "onSelectByDblClick": "onSelect_Uchiwake",
+       "onSelectBySelectButton": "",
+       "onSelectByModifyButton": "",
+       "onSelectByDeleteButton": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
@@ -175,7 +182,8 @@ module DBB {
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 1,
-     "isGroupBox": false
+     "isGroupBox": false,
+     "readOnly": false
     },
     {
      "fieldName": "dgTsuchishoSettei",
@@ -196,12 +204,16 @@ module DBB {
      "marginRight": "XS",
      "selectControlID": "dgTsuchishoSettei",
      "gridSetting": {
-      "rowHeight": 25,
+      "rowHeight": 20,
       "isMultiSelectable": false,
-      "isShowFooter": true,
+      "isShowHeader": true,
+      "isShowFooter": false,
       "isShowFilter": false,
       "isShowFilterButton": false,
       "isShowRowState": false,
+      "isShowSelectButtonColumn": false,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
       "header": {
        "combineColumns": [],
        "frozenColumn": "",
@@ -328,6 +340,9 @@ module DBB {
      "onSort": "",
      "onSelect": "",
      "onSelectByDblClick": "",
+     "onSelectBySelectButton": "",
+     "onSelectByModifyButton": "",
+     "onSelectByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -355,11 +370,11 @@ module DBB {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtTsuchishoSetteiHozonMeisho_core",
+     "readOnly": false,
      "required": false,
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
-     "readOnly": false,
      "placeHolder": "",
      "textKind": 0,
      "isPrivateInfo": false,
@@ -509,7 +524,8 @@ module DBB {
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
-   "isGroupBox": false
+   "isGroupBox": false,
+   "readOnly": false
   }
  ],
  "controlType": "CommonChildDiv",

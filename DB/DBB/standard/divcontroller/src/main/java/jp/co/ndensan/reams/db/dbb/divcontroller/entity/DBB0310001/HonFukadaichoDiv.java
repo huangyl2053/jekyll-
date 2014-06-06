@@ -19,8 +19,8 @@ public class HonFukadaichoDiv extends PanelPublish {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("Shuturyokujun5")
-    private Shuturyokujun5Div Shuturyokujun5;
+    @JsonProperty("ShutsuryokuJunHonFukadaicho")
+    private ChohyoShutsuryokujunDiv ShutsuryokuJunHonFukadaicho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -28,14 +28,14 @@ public class HonFukadaichoDiv extends PanelPublish {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("Shuturyokujun5")
-    public Shuturyokujun5Div getShuturyokujun5() {
-        return Shuturyokujun5;
+    @JsonProperty("ShutsuryokuJunHonFukadaicho")
+    public ChohyoShutsuryokujunDiv getShutsuryokuJunHonFukadaicho() {
+        return ShutsuryokuJunHonFukadaicho;
     }
 
-    @JsonProperty("Shuturyokujun5")
-    public void setShuturyokujun5(Shuturyokujun5Div Shuturyokujun5) {
-        this.Shuturyokujun5=Shuturyokujun5;
+    @JsonProperty("ShutsuryokuJunHonFukadaicho")
+    public void setShutsuryokuJunHonFukadaicho(ChohyoShutsuryokujunDiv ShutsuryokuJunHonFukadaicho) {
+        this.ShutsuryokuJunHonFukadaicho=ShutsuryokuJunHonFukadaicho;
     }
 
 }
