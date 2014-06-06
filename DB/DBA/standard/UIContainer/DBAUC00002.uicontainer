@@ -1,0 +1,15 @@
+﻿{
+ "transitionList": [
+  {
+   "id": "0",
+   "layoutSubGyomuCode": "DBZ",
+   "layoutName": "DBZU020001",
+   "eventName": "decideToTaishosha",
+   "toLayoutSubGyomuCode": "DBA",
+   "toLayoutName": "DBA1010011",
+   "toEventName": "jutokuTekiyo"
+  }
+ ],
+ "subGyomuCode": "DBA",
+ "uiContainerName": "DBAUC00002"
+}
