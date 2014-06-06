@@ -8,13 +8,12 @@ package jp.co.ndensan.reams.db.dbz.divcontroller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.JigyoshaInputGuideDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgSearchResultJigyosha_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jigyoshainputguide.JigyoshaInputGuideDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jigyoshainputguide.dgSearchResultJigyosha_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
@@ -58,7 +57,7 @@ public class JigyoshaInputGuide {
     }
 
     private dgSearchResultJigyosha_Row createJigyoshaGridRow(HashMap jigyosha) {
-        dgSearchResultJigyosha_Row row = new dgSearchResultJigyosha_Row(new Button(), RString.EMPTY, RString.EMPTY, RString.EMPTY,
+        dgSearchResultJigyosha_Row row = new dgSearchResultJigyosha_Row(RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY);
         row.setJigyoshaCode(new RString(jigyosha.get("事業者コード").toString()));
         row.setJigyoshaMeisho(new RString(jigyosha.get("事業者名称").toString()));
@@ -79,7 +78,7 @@ public class JigyoshaInputGuide {
      * @param div JigyoshaInputGuideDiv
      * @return レスポンス
      */
-    public ResponseData onClick_select(JigyoshaInputGuideDiv div) {
+    public ResponseData onSelectBySelectButton_dgSearchResultJigyosha(JigyoshaInputGuideDiv div) {
         ResponseData<JigyoshaInputGuideDiv> response = new ResponseData<>();
 
         dgSearchResultJigyosha_Row row = div.getSearchResultJigyosha().getDgSearchResultJigyosha().getClickedItem();
