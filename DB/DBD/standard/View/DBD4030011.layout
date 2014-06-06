@@ -91,7 +91,7 @@
         }
        ],
        "frozenColumn": "",
-       "headerHeight": 0
+       "headerHeight": 1
       },
       "columns": [
        {
@@ -151,7 +151,7 @@
         "dataName": "txtNinteiContents",
         "toolTip": "",
         "bgColor": 0,
-        "width": 240,
+        "width": 230,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -163,11 +163,11 @@
         "sortKey": "txtNinteiContents"
        },
        {
-        "columnName": "日常生活自立度",
+        "columnName": "日常生活<br>自立度",
         "dataName": "txtRank",
         "toolTip": "",
         "bgColor": 0,
-        "width": 130,
+        "width": 80,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -179,11 +179,11 @@
         "sortKey": "txtRank"
        },
        {
-        "columnName": "障害者手帳あり",
+        "columnName": "障害者手帳<br>あり",
         "dataName": "txtShogaishaTechoUmu",
         "toolTip": "",
         "bgColor": 0,
-        "width": 130,
+        "width": 90,
         "visible": true,
         "cellType": 2,
         "cellDetails": {
@@ -229,6 +229,27 @@
         "resize": false,
         "isPrivateInfo": false,
         "sortKey": "txtSoshitsuDate"
+       },
+       {
+        "columnName": "送付先変更",
+        "dataName": "txtChangeSofusaki",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 100,
+        "visible": true,
+        "cellType": 8,
+        "cellDetails": {
+         "cellType": 8,
+         "text": "...",
+         "onClick": "",
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": ""
+        },
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "txtChangeSofusaki"
        }
       ]
      },
@@ -243,7 +264,7 @@
      "onNoRow": "",
      "onMultiRows": "onSelect_OnClick",
      "dataSource": [],
-     "sortOrder": "txtShogaishaTechoUmu",
+     "sortOrder": "txtRank",
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1
