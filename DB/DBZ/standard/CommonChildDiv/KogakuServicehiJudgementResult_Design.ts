@@ -150,6 +150,8 @@ module DBZ {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "dgJudgementResult",
+     "dataSource": [],
+     "height": "S",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -317,14 +319,15 @@ module DBZ {
        }
       ]
      },
-     "height": "S",
      "onSort": "",
      "onSelect": "",
      "onSelectByDblClick": "",
+     "onSelectBySelectButton": "",
+     "onSelectByModifyButton": "",
+     "onSelectByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "dataSource": [],
      "sortOrder": "txtKogakuShikyuAmount",
      "isAscending": true,
      "filterList": [],
@@ -351,8 +354,8 @@ module DBZ {
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtUketsukeDate_core",
-       "required": false,
        "readOnly": false,
+       "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
@@ -390,8 +393,8 @@ module DBZ {
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtHonninPaymentAmount_core",
-       "required": false,
        "readOnly": false,
+       "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
@@ -413,12 +416,12 @@ module DBZ {
        "textKind": 2,
        "isComboBox": false,
        "suggest": [],
+       "permitCharactor": "+-,.\\",
        "maxValue": 1.7976931348623157e+308,
        "minValue": 0,
        "isCurrency": false,
        "isComma": false,
-       "decimalPointLength": 0,
-       "permitCharactor": "+-,.\\"
+       "decimalPointLength": 0
       },
       {
        "fieldName": "txtKetteiDate",
@@ -438,8 +441,8 @@ module DBZ {
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtKetteiDate_core",
-       "required": false,
        "readOnly": false,
+       "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
@@ -477,6 +480,11 @@ module DBZ {
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "radShikyuKubun_core",
+       "onChange": "",
+       "labelLText": "支給区分",
+       "labelLWidth": "80",
+       "labelLAlign": 2,
+       "selectedItem": "shikyu",
        "dataSource": [
         {
          "key": "shikyu",
@@ -487,12 +495,8 @@ module DBZ {
          "value": "不支給"
         }
        ],
-       "onChange": "",
-       "labelLText": "支給区分",
-       "labelLWidth": "80",
-       "labelLAlign": 2,
-       "selectedItem": "shikyu",
        "onClick": "",
+       "icon": [],
        "newLineItemNumber": 2,
        "spaceSize": "S"
       },
@@ -514,8 +518,8 @@ module DBZ {
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtsetaiShuyakuNo_core",
-       "required": false,
        "readOnly": false,
+       "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
@@ -558,8 +562,8 @@ module DBZ {
        "marginLeft": "M",
        "marginRight": "XS",
        "selectControlID": "txtShikyuAmount_core",
-       "required": false,
        "readOnly": false,
+       "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
@@ -581,12 +585,12 @@ module DBZ {
        "textKind": 2,
        "isComboBox": false,
        "suggest": [],
+       "permitCharactor": "+-,.\\",
        "maxValue": 1.7976931348623157e+308,
        "minValue": 0,
        "isCurrency": false,
        "isComma": false,
-       "decimalPointLength": 0,
-       "permitCharactor": "+-,.\\"
+       "decimalPointLength": 0
       },
       {
        "fieldName": "radIsKogakuAutoShokan",
@@ -606,6 +610,11 @@ module DBZ {
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "radIsKogakuAutoShokan_core",
+       "onChange": "",
+       "labelLText": "高額自動償還",
+       "labelLWidth": "96",
+       "labelLAlign": 2,
+       "selectedItem": "ari",
        "dataSource": [
         {
          "key": "ari",
@@ -616,12 +625,8 @@ module DBZ {
          "value": "なし"
         }
        ],
-       "onChange": "",
-       "labelLText": "高額自動償還",
-       "labelLWidth": "96",
-       "labelLAlign": 2,
-       "selectedItem": "ari",
        "onClick": "",
+       "icon": [],
        "newLineItemNumber": 2,
        "spaceSize": "M"
       }
@@ -664,7 +669,8 @@ module DBZ {
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
-     "isGroupBox": false
+     "isGroupBox": false,
+     "readOnly": false
     },
     {
      "fieldName": "KogakuServicehiJudgementResultDetail2",
@@ -687,8 +693,8 @@ module DBZ {
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtBiko_core",
-       "required": false,
        "readOnly": false,
+       "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "isPassword": false,
@@ -730,6 +736,11 @@ module DBZ {
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "radJudgementMethod_core",
+       "onChange": "",
+       "labelLText": "審査方法",
+       "labelLWidth": "80",
+       "labelLAlign": 2,
+       "selectedItem": "shinsaZumi",
        "dataSource": [
         {
          "key": "mishinsa",
@@ -740,12 +751,8 @@ module DBZ {
          "value": "審査済み"
         }
        ],
-       "onChange": "",
-       "labelLText": "審査方法",
-       "labelLWidth": "80",
-       "labelLAlign": 2,
-       "selectedItem": "shinsaZumi",
        "onClick": "",
+       "icon": [],
        "newLineItemNumber": 2,
        "spaceSize": "S"
       },
@@ -767,9 +774,8 @@ module DBZ {
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtFushikyuRiyu_text_area",
-       "height": "XS",
-       "required": false,
        "readOnly": false,
+       "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
        "onFocus": "",
@@ -787,6 +793,7 @@ module DBZ {
        "maxLength": 100000000,
        "minLength": 0,
        "textKind": 0,
+       "height": "XS",
        "limitLength": 20,
        "countDisp": false
       }
@@ -829,7 +836,8 @@ module DBZ {
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
-     "isGroupBox": false
+     "isGroupBox": false,
+     "readOnly": false
     }
    ],
    "controlType": "Panel",
@@ -870,7 +878,8 @@ module DBZ {
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
-   "isGroupBox": false
+   "isGroupBox": false,
+   "readOnly": false
   }
  ],
  "controlType": "CommonChildDiv",
