@@ -425,7 +425,12 @@
      "postParameterPanelNames": "FukaRirekiAll"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbb/db/dbb/FukaRirekiAll/onLoad"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -440,7 +445,7 @@
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": false
+   "readOnly": true
   },
   {
    "fieldName": "FukaRireki",
@@ -755,7 +760,7 @@
    "selectControlID": "FukaRireki",
    "onLoad": "",
    "title": "賦課履歴一覧",
-   "isOpen": true,
+   "isOpen": false,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
@@ -14223,7 +14228,7 @@
    "selectControlID": "FukaShokaiGrandson",
    "onLoad": "",
    "title": "賦課照会",
-   "isOpen": true,
+   "isOpen": false,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
@@ -14274,20 +14279,24 @@
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "FukaShokai",
-     "panelState": "visible"
+     "visibleDiv": "JuminFukaShokai",
+     "panelState": "visible",
+     "fixedDiv": "Yes"
     },
     {
-     "visibleDiv": "JuminFukaShokai",
-     "panelState": "visible"
+     "visibleDiv": "FukaRirekiAll",
+     "panelState": "readOnly visible",
+     "fixedDiv": "No"
     },
     {
      "visibleDiv": "FukaRireki",
-     "panelState": "readOnly visible"
+     "panelState": "close",
+     "fixedDiv": "No"
     },
     {
      "visibleDiv": "FukaShokaiGrandson",
-     "panelState": "close"
+     "panelState": "close",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
@@ -14441,7 +14450,7 @@
    ]
   }
  ],
- "currentState": "All",
+ "currentState": "初期表示",
  "id": "DBB0320001",
  "WFParameter": [],
  "UIContainerEventMapping": [
