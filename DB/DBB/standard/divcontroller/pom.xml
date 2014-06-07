@@ -35,5 +35,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+           <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+           <artifactId>DbzDivController</artifactId>
+           <version>${project.version}</version>
+           <classifier>classes</classifier>
+        </dependency>
     </dependencies>
 </project>
