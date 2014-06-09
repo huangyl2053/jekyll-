@@ -1,8 +1,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.serviceWithCountCom.ServiceWithCountCom;
@@ -11,8 +10,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ServiceJokyoServicesCounts のクラスファイル 
- * 
+ * ServiceJokyoServicesCounts のクラスファイル
+ *
  * @author 自動生成
  */
 public class ServiceJokyoServicesCountsDiv extends Panel {
@@ -22,6 +21,7 @@ public class ServiceJokyoServicesCountsDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("comCountHomeHelp")
     private ServiceWithCountCom comCountHomeHelp;
     @JsonProperty("comCountTankiSeikatsuKaigo")
@@ -46,12 +46,12 @@ public class ServiceJokyoServicesCountsDiv extends Panel {
     private ServiceWithCountCom comCountTokuteiSeikatsuKaigo;
     @JsonProperty("comCountNinchishoTsushoKaigo")
     private ServiceWithCountCom comCountNinchishoTsushoKaigo;
-    @JsonProperty("comCountHukushiyoguTaiyo")
-    private ServiceWithCountCom comCountHukushiyoguTaiyo;
+    @JsonProperty("comCountFukushiyoguTaiyo")
+    private ServiceWithCountCom comCountFukushiyoguTaiyo;
     @JsonProperty("comCountNinchishoKyodoKaigo")
     private ServiceWithCountCom comCountNinchishoKyodoKaigo;
-    @JsonProperty("comCountHukushiyoguHanbai")
-    private ServiceWithCountCom comCountHukushiyoguHanbai;
+    @JsonProperty("comCountFukushiyoguHanbai")
+    private ServiceWithCountCom comCountFukushiyoguHanbai;
     @JsonProperty("comCountSmallTakinoKaigo")
     private ServiceWithCountCom comCountSmallTakinoKaigo;
     @JsonProperty("lblJutakuKaishu")
@@ -60,8 +60,8 @@ public class ServiceJokyoServicesCountsDiv extends Panel {
     private RadioButton radJutakuKaishu;
     @JsonProperty("comCountChiikiTokuteiShisetsuKaigo")
     private ServiceWithCountCom comCountChiikiTokuteiShisetsuKaigo;
-    @JsonProperty("comCountChiikiRojinHukushiShisetsuKaigo")
-    private ServiceWithCountCom comCountChiikiRojinHukushiShisetsuKaigo;
+    @JsonProperty("comCountChiikiRojinFukushiShisetsuKaigo")
+    private ServiceWithCountCom comCountChiikiRojinFukushiShisetsuKaigo;
     @JsonProperty("comCountTeikiJunkaiHomonKaigo")
     private ServiceWithCountCom comCountTeikiJunkaiHomonKaigo;
     @JsonProperty("lblSpace1")
@@ -84,7 +84,7 @@ public class ServiceJokyoServicesCountsDiv extends Panel {
 
     @JsonProperty("comCountHomeHelp")
     public void setComCountHomeHelp(ServiceWithCountCom comCountHomeHelp) {
-        this.comCountHomeHelp=comCountHomeHelp;
+        this.comCountHomeHelp = comCountHomeHelp;
     }
 
     @JsonProperty("comCountTankiSeikatsuKaigo")
@@ -94,7 +94,7 @@ public class ServiceJokyoServicesCountsDiv extends Panel {
 
     @JsonProperty("comCountTankiSeikatsuKaigo")
     public void setComCountTankiSeikatsuKaigo(ServiceWithCountCom comCountTankiSeikatsuKaigo) {
-        this.comCountTankiSeikatsuKaigo=comCountTankiSeikatsuKaigo;
+        this.comCountTankiSeikatsuKaigo = comCountTankiSeikatsuKaigo;
     }
 
     @JsonProperty("comCountHomonBathing")
@@ -104,7 +104,7 @@ public class ServiceJokyoServicesCountsDiv extends Panel {
 
     @JsonProperty("comCountHomonBathing")
     public void setComCountHomonBathing(ServiceWithCountCom comCountHomonBathing) {
-        this.comCountHomonBathing=comCountHomonBathing;
+        this.comCountHomonBathing = comCountHomonBathing;
     }
 
     @JsonProperty("comCountTankiRyoyoKaigo")
@@ -114,7 +114,7 @@ public class ServiceJokyoServicesCountsDiv extends Panel {
 
     @JsonProperty("comCountTankiRyoyoKaigo")
     public void setComCountTankiRyoyoKaigo(ServiceWithCountCom comCountTankiRyoyoKaigo) {
-        this.comCountTankiRyoyoKaigo=comCountTankiRyoyoKaigo;
+        this.comCountTankiRyoyoKaigo = comCountTankiRyoyoKaigo;
     }
 
     @JsonProperty("comCountHomonKango")
@@ -124,7 +124,7 @@ public class ServiceJokyoServicesCountsDiv extends Panel {
 
     @JsonProperty("comCountHomonKango")
     public void setComCountHomonKango(ServiceWithCountCom comCountHomonKango) {
-        this.comCountHomonKango=comCountHomonKango;
+        this.comCountHomonKango = comCountHomonKango;
     }
 
     @JsonProperty("comCountHomonRehabilitation")
@@ -134,7 +134,7 @@ public class ServiceJokyoServicesCountsDiv extends Panel {
 
     @JsonProperty("comCountHomonRehabilitation")
     public void setComCountHomonRehabilitation(ServiceWithCountCom comCountHomonRehabilitation) {
-        this.comCountHomonRehabilitation=comCountHomonRehabilitation;
+        this.comCountHomonRehabilitation = comCountHomonRehabilitation;
     }
 
     @JsonProperty("comCountYakanHomonKaigo")
@@ -144,7 +144,7 @@ public class ServiceJokyoServicesCountsDiv extends Panel {
 
     @JsonProperty("comCountYakanHomonKaigo")
     public void setComCountYakanHomonKaigo(ServiceWithCountCom comCountYakanHomonKaigo) {
-        this.comCountYakanHomonKaigo=comCountYakanHomonKaigo;
+        this.comCountYakanHomonKaigo = comCountYakanHomonKaigo;
     }
 
     @JsonProperty("comCountTsushoRehabilitation")
@@ -154,7 +154,7 @@ public class ServiceJokyoServicesCountsDiv extends Panel {
 
     @JsonProperty("comCountTsushoRehabilitation")
     public void setComCountTsushoRehabilitation(ServiceWithCountCom comCountTsushoRehabilitation) {
-        this.comCountTsushoRehabilitation=comCountTsushoRehabilitation;
+        this.comCountTsushoRehabilitation = comCountTsushoRehabilitation;
     }
 
     @JsonProperty("comCountRyoyoKanriShido")
@@ -164,7 +164,7 @@ public class ServiceJokyoServicesCountsDiv extends Panel {
 
     @JsonProperty("comCountRyoyoKanriShido")
     public void setComCountRyoyoKanriShido(ServiceWithCountCom comCountRyoyoKanriShido) {
-        this.comCountRyoyoKanriShido=comCountRyoyoKanriShido;
+        this.comCountRyoyoKanriShido = comCountRyoyoKanriShido;
     }
 
     @JsonProperty("comCountDayService")
@@ -174,7 +174,7 @@ public class ServiceJokyoServicesCountsDiv extends Panel {
 
     @JsonProperty("comCountDayService")
     public void setComCountDayService(ServiceWithCountCom comCountDayService) {
-        this.comCountDayService=comCountDayService;
+        this.comCountDayService = comCountDayService;
     }
 
     @JsonProperty("comCountTokuteiSeikatsuKaigo")
@@ -184,7 +184,7 @@ public class ServiceJokyoServicesCountsDiv extends Panel {
 
     @JsonProperty("comCountTokuteiSeikatsuKaigo")
     public void setComCountTokuteiSeikatsuKaigo(ServiceWithCountCom comCountTokuteiSeikatsuKaigo) {
-        this.comCountTokuteiSeikatsuKaigo=comCountTokuteiSeikatsuKaigo;
+        this.comCountTokuteiSeikatsuKaigo = comCountTokuteiSeikatsuKaigo;
     }
 
     @JsonProperty("comCountNinchishoTsushoKaigo")
@@ -194,17 +194,17 @@ public class ServiceJokyoServicesCountsDiv extends Panel {
 
     @JsonProperty("comCountNinchishoTsushoKaigo")
     public void setComCountNinchishoTsushoKaigo(ServiceWithCountCom comCountNinchishoTsushoKaigo) {
-        this.comCountNinchishoTsushoKaigo=comCountNinchishoTsushoKaigo;
+        this.comCountNinchishoTsushoKaigo = comCountNinchishoTsushoKaigo;
     }
 
-    @JsonProperty("comCountHukushiyoguTaiyo")
-    public ServiceWithCountCom getComCountHukushiyoguTaiyo() {
-        return comCountHukushiyoguTaiyo;
+    @JsonProperty("comCountFukushiyoguTaiyo")
+    public ServiceWithCountCom getComCountFukushiyoguTaiyo() {
+        return comCountFukushiyoguTaiyo;
     }
 
-    @JsonProperty("comCountHukushiyoguTaiyo")
-    public void setComCountHukushiyoguTaiyo(ServiceWithCountCom comCountHukushiyoguTaiyo) {
-        this.comCountHukushiyoguTaiyo=comCountHukushiyoguTaiyo;
+    @JsonProperty("comCountFukushiyoguTaiyo")
+    public void setComCountFukushiyoguTaiyo(ServiceWithCountCom comCountFukushiyoguTaiyo) {
+        this.comCountFukushiyoguTaiyo = comCountFukushiyoguTaiyo;
     }
 
     @JsonProperty("comCountNinchishoKyodoKaigo")
@@ -214,17 +214,17 @@ public class ServiceJokyoServicesCountsDiv extends Panel {
 
     @JsonProperty("comCountNinchishoKyodoKaigo")
     public void setComCountNinchishoKyodoKaigo(ServiceWithCountCom comCountNinchishoKyodoKaigo) {
-        this.comCountNinchishoKyodoKaigo=comCountNinchishoKyodoKaigo;
+        this.comCountNinchishoKyodoKaigo = comCountNinchishoKyodoKaigo;
     }
 
-    @JsonProperty("comCountHukushiyoguHanbai")
-    public ServiceWithCountCom getComCountHukushiyoguHanbai() {
-        return comCountHukushiyoguHanbai;
+    @JsonProperty("comCountFukushiyoguHanbai")
+    public ServiceWithCountCom getComCountFukushiyoguHanbai() {
+        return comCountFukushiyoguHanbai;
     }
 
-    @JsonProperty("comCountHukushiyoguHanbai")
-    public void setComCountHukushiyoguHanbai(ServiceWithCountCom comCountHukushiyoguHanbai) {
-        this.comCountHukushiyoguHanbai=comCountHukushiyoguHanbai;
+    @JsonProperty("comCountFukushiyoguHanbai")
+    public void setComCountFukushiyoguHanbai(ServiceWithCountCom comCountFukushiyoguHanbai) {
+        this.comCountFukushiyoguHanbai = comCountFukushiyoguHanbai;
     }
 
     @JsonProperty("comCountSmallTakinoKaigo")
@@ -234,7 +234,7 @@ public class ServiceJokyoServicesCountsDiv extends Panel {
 
     @JsonProperty("comCountSmallTakinoKaigo")
     public void setComCountSmallTakinoKaigo(ServiceWithCountCom comCountSmallTakinoKaigo) {
-        this.comCountSmallTakinoKaigo=comCountSmallTakinoKaigo;
+        this.comCountSmallTakinoKaigo = comCountSmallTakinoKaigo;
     }
 
     @JsonProperty("lblJutakuKaishu")
@@ -244,7 +244,7 @@ public class ServiceJokyoServicesCountsDiv extends Panel {
 
     @JsonProperty("lblJutakuKaishu")
     public void setLblJutakuKaishu(Label lblJutakuKaishu) {
-        this.lblJutakuKaishu=lblJutakuKaishu;
+        this.lblJutakuKaishu = lblJutakuKaishu;
     }
 
     @JsonProperty("radJutakuKaishu")
@@ -254,7 +254,7 @@ public class ServiceJokyoServicesCountsDiv extends Panel {
 
     @JsonProperty("radJutakuKaishu")
     public void setRadJutakuKaishu(RadioButton radJutakuKaishu) {
-        this.radJutakuKaishu=radJutakuKaishu;
+        this.radJutakuKaishu = radJutakuKaishu;
     }
 
     @JsonProperty("comCountChiikiTokuteiShisetsuKaigo")
@@ -264,17 +264,17 @@ public class ServiceJokyoServicesCountsDiv extends Panel {
 
     @JsonProperty("comCountChiikiTokuteiShisetsuKaigo")
     public void setComCountChiikiTokuteiShisetsuKaigo(ServiceWithCountCom comCountChiikiTokuteiShisetsuKaigo) {
-        this.comCountChiikiTokuteiShisetsuKaigo=comCountChiikiTokuteiShisetsuKaigo;
+        this.comCountChiikiTokuteiShisetsuKaigo = comCountChiikiTokuteiShisetsuKaigo;
     }
 
-    @JsonProperty("comCountChiikiRojinHukushiShisetsuKaigo")
-    public ServiceWithCountCom getComCountChiikiRojinHukushiShisetsuKaigo() {
-        return comCountChiikiRojinHukushiShisetsuKaigo;
+    @JsonProperty("comCountChiikiRojinFukushiShisetsuKaigo")
+    public ServiceWithCountCom getComCountChiikiRojinFukushiShisetsuKaigo() {
+        return comCountChiikiRojinFukushiShisetsuKaigo;
     }
 
-    @JsonProperty("comCountChiikiRojinHukushiShisetsuKaigo")
-    public void setComCountChiikiRojinHukushiShisetsuKaigo(ServiceWithCountCom comCountChiikiRojinHukushiShisetsuKaigo) {
-        this.comCountChiikiRojinHukushiShisetsuKaigo=comCountChiikiRojinHukushiShisetsuKaigo;
+    @JsonProperty("comCountChiikiRojinFukushiShisetsuKaigo")
+    public void setComCountChiikiRojinFukushiShisetsuKaigo(ServiceWithCountCom comCountChiikiRojinFukushiShisetsuKaigo) {
+        this.comCountChiikiRojinFukushiShisetsuKaigo = comCountChiikiRojinFukushiShisetsuKaigo;
     }
 
     @JsonProperty("comCountTeikiJunkaiHomonKaigo")
@@ -284,7 +284,7 @@ public class ServiceJokyoServicesCountsDiv extends Panel {
 
     @JsonProperty("comCountTeikiJunkaiHomonKaigo")
     public void setComCountTeikiJunkaiHomonKaigo(ServiceWithCountCom comCountTeikiJunkaiHomonKaigo) {
-        this.comCountTeikiJunkaiHomonKaigo=comCountTeikiJunkaiHomonKaigo;
+        this.comCountTeikiJunkaiHomonKaigo = comCountTeikiJunkaiHomonKaigo;
     }
 
     @JsonProperty("lblSpace1")
@@ -294,7 +294,7 @@ public class ServiceJokyoServicesCountsDiv extends Panel {
 
     @JsonProperty("lblSpace1")
     public void setLblSpace1(Label lblSpace1) {
-        this.lblSpace1=lblSpace1;
+        this.lblSpace1 = lblSpace1;
     }
 
     @JsonProperty("txtShichosonTokubetsuKyufu")
@@ -304,7 +304,7 @@ public class ServiceJokyoServicesCountsDiv extends Panel {
 
     @JsonProperty("txtShichosonTokubetsuKyufu")
     public void setTxtShichosonTokubetsuKyufu(TextBox txtShichosonTokubetsuKyufu) {
-        this.txtShichosonTokubetsuKyufu=txtShichosonTokubetsuKyufu;
+        this.txtShichosonTokubetsuKyufu = txtShichosonTokubetsuKyufu;
     }
 
     @JsonProperty("txtZaitakuSeriviceOutsideKaigoKyufu")
@@ -314,7 +314,7 @@ public class ServiceJokyoServicesCountsDiv extends Panel {
 
     @JsonProperty("txtZaitakuSeriviceOutsideKaigoKyufu")
     public void setTxtZaitakuSeriviceOutsideKaigoKyufu(TextBox txtZaitakuSeriviceOutsideKaigoKyufu) {
-        this.txtZaitakuSeriviceOutsideKaigoKyufu=txtZaitakuSeriviceOutsideKaigoKyufu;
+        this.txtZaitakuSeriviceOutsideKaigoKyufu = txtZaitakuSeriviceOutsideKaigoKyufu;
     }
 
 }

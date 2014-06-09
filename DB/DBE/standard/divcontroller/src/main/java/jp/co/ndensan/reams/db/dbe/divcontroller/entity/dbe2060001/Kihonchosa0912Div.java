@@ -6,7 +6,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kihonchosaResultInputCom.KihonchosaResultInputCom;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kihonchosaResultInputCom.KihonchosaResultInputCom;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**

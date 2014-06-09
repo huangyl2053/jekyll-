@@ -28,6 +28,8 @@ public class ServiceJokyoTabDiv extends TabPanel {
     private Label lblServiceKubun;
     @JsonProperty("radServiceKubun")
     private RadioButton radServiceKubun;
+    @JsonProperty("btnToCopyLatestServiceJokyo")
+    private Button btnToCopyLatestServiceJokyo;
     @JsonProperty("ServiceJokyoServicesCounts")
     private ServiceJokyoServicesCountsDiv ServiceJokyoServicesCounts;
     @JsonProperty("SeriveJokyoRiyoShisetsu")
@@ -59,6 +61,16 @@ public class ServiceJokyoTabDiv extends TabPanel {
     @JsonProperty("radServiceKubun")
     public void setRadServiceKubun(RadioButton radServiceKubun) {
         this.radServiceKubun=radServiceKubun;
+    }
+
+    @JsonProperty("btnToCopyLatestServiceJokyo")
+    public Button getBtnToCopyLatestServiceJokyo() {
+        return btnToCopyLatestServiceJokyo;
+    }
+
+    @JsonProperty("btnToCopyLatestServiceJokyo")
+    public void setBtnToCopyLatestServiceJokyo(Button btnToCopyLatestServiceJokyo) {
+        this.btnToCopyLatestServiceJokyo=btnToCopyLatestServiceJokyo;
     }
 
     @JsonProperty("ServiceJokyoServicesCounts")

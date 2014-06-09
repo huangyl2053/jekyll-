@@ -25,6 +25,8 @@ public class NinteichosaDetailDiv extends Panel {
     private TextBoxCode txtChosaItakusakiCode;
     @JsonProperty("txtChosaItakusakiName")
     private TextBox txtChosaItakusakiName;
+    @JsonProperty("btnToSearchChosaItakusaki")
+    private ButtonDialog btnToSearchChosaItakusaki;
     @JsonProperty("txtChosainCode")
     private TextBoxCode txtChosainCode;
     @JsonProperty("txtChosainName")
@@ -60,6 +62,16 @@ public class NinteichosaDetailDiv extends Panel {
     @JsonProperty("txtChosaItakusakiName")
     public void setTxtChosaItakusakiName(TextBox txtChosaItakusakiName) {
         this.txtChosaItakusakiName=txtChosaItakusakiName;
+    }
+
+    @JsonProperty("btnToSearchChosaItakusaki")
+    public ButtonDialog getBtnToSearchChosaItakusaki() {
+        return btnToSearchChosaItakusaki;
+    }
+
+    @JsonProperty("btnToSearchChosaItakusaki")
+    public void setBtnToSearchChosaItakusaki(ButtonDialog btnToSearchChosaItakusaki) {
+        this.btnToSearchChosaItakusaki=btnToSearchChosaItakusaki;
     }
 
     @JsonProperty("txtChosainCode")
