@@ -23,7 +23,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  * @author N1319
  */
 public class GaitoshaKensakuMain {
-     private static final RString FUKA_SHOKAI_GAITOSHA = new RString("FukaShokaiGaitoshaData.yml");
+
+    private static final RString FUKA_SHOKAI_GAITOSHA = new RString("FukaShokaiGaitoshaData.yml");
 
     public ResponseData<GaitoshaKensakuMainDiv> getOnLoadData(GaitoshaKensakuMainDiv panel) {
         ResponseData<GaitoshaKensakuMainDiv> response = new ResponseData<>();
@@ -36,7 +37,7 @@ public class GaitoshaKensakuMain {
         panel.getGaitoshaSentaku().getTxtFukanendo().setValue(new RDate(2014));
         List<dgdGaitoushaIchiran_Row> arrayData = createRowGaitoshaIchiranData();
         DataGrid<dgdGaitoushaIchiran_Row> grid = panel.getGaitoshaSentaku().getDgdGaitoushaIchiran();
-        grid.setDataSource(arrayData);        
+        grid.setDataSource(arrayData);
         response.data = panel;
         return response;
     }
