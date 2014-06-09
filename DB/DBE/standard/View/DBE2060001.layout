@@ -452,7 +452,7 @@
        "fieldName": "txtHihokenshaNo",
        "items": [],
        "controlType": "TextBoxCode",
-       "width": "75",
+       "width": "80",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -467,7 +467,6 @@
        "marginRight": "XS",
        "selectControlID": "txtHihokenshaNo_core",
        "readOnly": true,
-       "text": "",
        "required": false,
        "maxLength": "10",
        "minLength": "10",
@@ -481,6 +480,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "被保番号",
@@ -511,10 +511,9 @@
        "marginRight": "XS",
        "selectControlID": "txtShikibetsuCode_core",
        "readOnly": true,
-       "text": "",
        "required": false,
-       "maxLength": "10",
-       "minLength": "10",
+       "maxLength": "15",
+       "minLength": "15",
        "textAlign": 0,
        "placeHolder": "",
        "textKind": 2,
@@ -525,6 +524,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "識別コード",
@@ -534,13 +534,13 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "permitCharactor": "",
-       "formatLength": "10"
+       "formatLength": "15"
       },
       {
        "fieldName": "txtShinseiDate",
        "items": [],
        "controlType": "TextBoxFlexibleDate",
-       "width": "75",
+       "width": "80",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -555,7 +555,6 @@
        "marginRight": "XS",
        "selectControlID": "txtShinseiDate_core",
        "readOnly": true,
-       "text": "",
        "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
@@ -564,6 +563,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "value": "",
        "labelLText": "申請日",
        "labelRText": "",
@@ -594,11 +594,10 @@
        "marginRight": "XS",
        "selectControlID": "txtShinseiKubun_core",
        "readOnly": true,
-       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
-       "textAlign": 0,
+       "textAlign": 1,
        "placeHolder": "",
        "textKind": 0,
        "isPrivateInfo": false,
@@ -608,6 +607,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "申請区分",
@@ -622,7 +622,7 @@
        "fieldName": "txtHihokenshaName",
        "items": [],
        "controlType": "TextBox",
-       "width": "295",
+       "width": "301",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -637,7 +637,6 @@
        "marginRight": "XS",
        "selectControlID": "txtHihokenshaName_core",
        "readOnly": true,
-       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -651,6 +650,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "氏名",
@@ -665,7 +665,7 @@
        "fieldName": "txtHihokenshaBirthDay",
        "items": [],
        "controlType": "TextBoxFlexibleDate",
-       "width": "75",
+       "width": "80",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -680,7 +680,6 @@
        "marginRight": "XS",
        "selectControlID": "txtHihokenshaBirthDay_core",
        "readOnly": true,
-       "text": "",
        "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
@@ -689,6 +688,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "value": "",
        "labelLText": "生年月日",
        "labelRText": "",
@@ -705,7 +705,7 @@
        "items": [],
        "controlType": "TextBox",
        "width": "25",
-       "visible": true,
+       "visible": false,
        "displayNone": false,
        "disabled": false,
        "accessKey": "",
@@ -719,7 +719,6 @@
        "marginRight": "XS",
        "selectControlID": "txtHihokenshaAge_core",
        "readOnly": true,
-       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -733,6 +732,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "",
@@ -762,7 +762,6 @@
        "marginRight": "XS",
        "selectControlID": "txtHihokenshaGender_core",
        "readOnly": true,
-       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -776,6 +775,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "性別",
@@ -805,7 +805,6 @@
        "marginRight": "XS",
        "selectControlID": "txtHihokenshaYubinNo_core",
        "readOnly": true,
-       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -819,6 +818,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "〒",
@@ -848,7 +848,6 @@
        "marginRight": "XS",
        "selectControlID": "txtHihokenshaJusho_core",
        "readOnly": true,
-       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -862,6 +861,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "",
@@ -936,7 +936,6 @@
        "marginRight": "XS",
        "selectControlID": "txtChosaItakusakiCode_core",
        "readOnly": true,
-       "text": "",
        "required": false,
        "maxLength": "10",
        "minLength": "10",
@@ -950,6 +949,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "調査委託先",
@@ -980,7 +980,6 @@
        "marginRight": "XS",
        "selectControlID": "txtChosaItakusakiName_core",
        "readOnly": true,
-       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -994,6 +993,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "",
@@ -1003,6 +1003,37 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "permitCharactor": ""
+      },
+      {
+       "fieldName": "btnToSearchChosaItakusaki",
+       "items": [],
+       "controlType": "ButtonDialog",
+       "width": "S",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "btnToSearchChosaItakusaki",
+       "text": "ButtonDialog1",
+       "onClick": "",
+       "icon": 0,
+       "appearance": 2,
+       "imageFileUrl": "/uz/uza/css/Link.jpg",
+       "imageWidth": "20",
+       "imageHeight": "20",
+       "displayChildDivName": "",
+       "dataPassing": [],
+       "visibleCloseButton": true,
+       "onOkClose": "",
+       "onBeforeOpenDialog": ""
       },
       {
        "fieldName": "txtChosainCode",
@@ -1023,7 +1054,6 @@
        "marginRight": "XS",
        "selectControlID": "txtChosainCode_core",
        "readOnly": true,
-       "text": "",
        "required": false,
        "maxLength": "8",
        "minLength": "8",
@@ -1037,6 +1067,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "調査員",
@@ -1067,7 +1098,6 @@
        "marginRight": "XS",
        "selectControlID": "txtChosainName_core",
        "readOnly": true,
-       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -1081,11 +1111,12 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
-       "labelLText": "",
+       "labelLText": " ",
        "labelRText": "",
-       "labelLWidth": "S",
+       "labelLWidth": "11.5",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -1095,7 +1126,7 @@
        "fieldName": "txtChosaJisshiDate",
        "items": [],
        "controlType": "TextBoxFlexibleDate",
-       "width": "75",
+       "width": "80",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1110,7 +1141,6 @@
        "marginRight": "XS",
        "selectControlID": "txtChosaJisshiDate_core",
        "readOnly": false,
-       "text": "",
        "required": false,
        "placeHolder": "",
        "isPrivateInfo": false,
@@ -1119,6 +1149,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "value": "",
        "labelLText": "実施日",
        "labelRText": "",
@@ -1148,8 +1179,6 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "radChosaJisshiBasho_core",
-       "onClick": "",
-       "icon": [],
        "dataSource": [
         {
          "key": "1",
@@ -1165,13 +1194,15 @@
         }
        ],
        "required": false,
-       "onChange": "",
+       "onChange": "onChange_radChosaJisshiBasho",
        "labelLText": "実施場所",
-       "labelLWidth": "S",
+       "labelLWidth": "85",
        "labelLAlign": 2,
        "selectedItem": "1",
+       "onClick": "",
        "newLineItemNumber": 3,
-       "spaceSize": "M"
+       "spaceSize": "M",
+       "icon": []
       },
       {
        "fieldName": "txtChosaJisshiBashoFreeInput",
@@ -1192,7 +1223,6 @@
        "marginRight": "XS",
        "selectControlID": "txtChosaJisshiBashoFreeInput_core",
        "readOnly": false,
-       "text": "",
        "required": false,
        "maxLength": 100000000,
        "minLength": 0,
@@ -1206,6 +1236,7 @@
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
+       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "",
@@ -1279,8 +1310,6 @@
        "marginLeft": "S",
        "marginRight": "XS",
        "selectControlID": "radShinsakaiWaritsukeKibo_core",
-       "onClick": "",
-       "icon": [],
        "dataSource": [
         {
          "key": "1",
@@ -1300,8 +1329,10 @@
        "labelLWidth": "S",
        "labelLAlign": 2,
        "selectedItem": "1",
+       "onClick": "",
        "newLineItemNumber": 1,
-       "spaceSize": "M"
+       "spaceSize": "M",
+       "icon": []
       }
      ],
      "controlType": "Panel",
@@ -1372,9 +1403,9 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "lblItemNo",
-           "text": "1-1",
            "required": false,
            "isPrivateInfo": false,
+           "text": "1-1",
            "align": 2
           },
           {
@@ -1395,9 +1426,9 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "lblItemName",
-           "text": "麻痺(左上肢)",
            "required": false,
            "isPrivateInfo": false,
+           "text": "麻痺(左上肢)",
            "align": 0
           },
           {
@@ -1418,13 +1449,13 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "btnToEditTokkijiko",
-           "onClick": "",
            "text": "特記事項",
+           "onClick": "",
+           "icon": 0,
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
-           "imageHeight": "",
-           "icon": 0
+           "imageHeight": ""
           },
           {
            "fieldName": "lblSpace3",
@@ -1444,9 +1475,9 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "lblSpace3",
-           "text": "dummy",
            "required": false,
            "isPrivateInfo": false,
+           "text": "dummy",
            "align": 2
           },
           {
@@ -1467,8 +1498,6 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "radChoices_core",
-           "onClick": "",
-           "icon": [],
            "dataSource": [
             {
              "key": "1",
@@ -1485,8 +1514,10 @@
            "labelLWidth": "S",
            "labelLAlign": 2,
            "selectedItem": "1",
+           "onClick": "onChange_radChoices",
            "newLineItemNumber": 10,
-           "spaceSize": "M"
+           "spaceSize": "M",
+           "icon": []
           },
           {
            "fieldName": "btnSelectPrevious",
@@ -1506,13 +1537,13 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "btnSelectPrevious",
-           "onClick": "onClick_btnSelectPrevious",
            "text": "＜",
+           "onClick": "onClick_btnSelectPrevious",
+           "icon": 0,
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
-           "imageHeight": "",
-           "icon": 0
+           "imageHeight": ""
           },
           {
            "fieldName": "btnSelectNext",
@@ -1532,13 +1563,13 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "btnSelectNext",
-           "onClick": "onClick_btnSelectNext",
            "text": "＞",
+           "onClick": "onClick_btnSelectNext",
+           "icon": 0,
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
-           "imageHeight": "",
-           "icon": 0
+           "imageHeight": ""
           }
          ],
          "controlType": "Panel",
@@ -1583,6 +1614,32 @@
          "readOnly": false
         },
         {
+         "fieldName": "btnToCopyLatestKihonchosa",
+         "items": [],
+         "controlType": "Button",
+         "width": "120",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 2,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "2.4",
+         "selectControlID": "btnToCopyLatestKihonchosa",
+         "text": "前回を複写する",
+         "onClick": "",
+         "icon": 0,
+         "appearance": 0,
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": ""
+        },
+        {
          "fieldName": "IchjiHanteiFromInputedChosaResult",
          "items": [
           {
@@ -1604,7 +1661,6 @@
            "marginRight": "XS",
            "selectControlID": "txtIchijiHanteiResult_core",
            "readOnly": false,
-           "text": "",
            "required": false,
            "maxLength": 100000000,
            "minLength": 0,
@@ -1618,6 +1674,7 @@
            "onBlur": "",
            "onChange": "",
            "onKeyPress": "",
+           "text": "",
            "suggest": [],
            "value": "",
            "labelLText": "",
@@ -1629,30 +1686,7 @@
            "permitCharactor": ""
           },
           {
-           "fieldName": "lblSpace4",
-           "items": [],
-           "controlType": "Label",
-           "width": "XS",
-           "visible": false,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": true,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "XS",
-           "marginRight": "XS",
-           "selectControlID": "lblSpace4",
-           "text": "dummy",
-           "required": false,
-           "isPrivateInfo": false,
-           "align": 2
-          },
-          {
-           "fieldName": "btnIchjiHantei",
+           "fieldName": "btnIchijiHantei",
            "items": [],
            "controlType": "Button",
            "width": "120",
@@ -1668,14 +1702,14 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "selectControlID": "btnIchjiHantei",
-           "onClick": "",
+           "selectControlID": "btnIchijiHantei",
            "text": "一次判定を行う",
+           "onClick": "",
+           "icon": 0,
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
-           "imageHeight": "",
-           "icon": 0
+           "imageHeight": ""
           }
          ],
          "controlType": "Panel",
@@ -5482,9 +5516,9 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblServiceKubun",
-         "text": "現在のサービス区分",
          "required": false,
          "isPrivateInfo": false,
+         "text": "現在のサービス区分",
          "align": 2
         },
         {
@@ -5505,30 +5539,56 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "radServiceKubun_core",
-         "onClick": "",
-         "icon": [],
          "dataSource": [
           {
            "key": "1",
-           "value": "予防"
+           "value": "なし"
           },
           {
            "key": "2",
-           "value": "介護"
+           "value": "予防"
           },
           {
-           "key": "0",
-           "value": "なし"
+           "key": "3",
+           "value": "介護"
           }
          ],
          "required": false,
-         "onChange": "",
+         "onChange": "onChange_radServiceKubun",
          "labelLText": "",
          "labelLWidth": "S",
          "labelLAlign": 2,
          "selectedItem": null,
+         "onClick": "",
          "newLineItemNumber": 3,
-         "spaceSize": "M"
+         "spaceSize": "M",
+         "icon": []
+        },
+        {
+         "fieldName": "btnToCopyLatestServiceJokyo",
+         "items": [],
+         "controlType": "Button",
+         "width": "120",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 2,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "2.4",
+         "selectControlID": "btnToCopyLatestServiceJokyo",
+         "text": "前回を複写する",
+         "onClick": "",
+         "icon": 0,
+         "appearance": 0,
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": ""
         },
         {
          "fieldName": "ServiceJokyoServicesCounts",
@@ -5556,7 +5616,8 @@
            "controlName": "ServiceWithCountCom",
            "text_ServiceName": "訪問介護（ホームヘルプサービス）",
            "text_Frequency": "月",
-           "text_Unit": "回"
+           "text_Unit": "回",
+           "radKaigoOrYobo_dataSource": "2"
           },
           {
            "fieldName": "comCountTankiSeikatsuKaigo",
@@ -5581,7 +5642,8 @@
            "controlName": "ServiceWithCountCom",
            "text_ServiceName": "短期入所生活介護",
            "text_Frequency": "月",
-           "text_Unit": "回"
+           "text_Unit": "回",
+           "radKaigoOrYobo_dataSource": "2"
           },
           {
            "fieldName": "comCountHomonBathing",
@@ -5606,7 +5668,8 @@
            "controlName": "ServiceWithCountCom",
            "text_ServiceName": "訪問入浴介護",
            "text_Frequency": "月",
-           "text_Unit": "回"
+           "text_Unit": "回",
+           "radKaigoOrYobo_dataSource": "2"
           },
           {
            "fieldName": "comCountTankiRyoyoKaigo",
@@ -5631,7 +5694,8 @@
            "controlName": "ServiceWithCountCom",
            "text_ServiceName": "短期入所療養介護",
            "text_Frequency": "月",
-           "text_Unit": "回"
+           "text_Unit": "回",
+           "radKaigoOrYobo_dataSource": "2"
           },
           {
            "fieldName": "comCountHomonKango",
@@ -5656,7 +5720,8 @@
            "controlName": "ServiceWithCountCom",
            "text_ServiceName": "訪問看護",
            "text_Frequency": "月",
-           "text_Unit": "回"
+           "text_Unit": "回",
+           "radKaigoOrYobo_dataSource": "2"
           },
           {
            "fieldName": "comCountHomonRehabilitation",
@@ -5681,7 +5746,8 @@
            "controlName": "ServiceWithCountCom",
            "text_ServiceName": "訪問リハビリ",
            "text_Frequency": "月",
-           "text_Unit": "回"
+           "text_Unit": "回",
+           "radKaigoOrYobo_dataSource": "2"
           },
           {
            "fieldName": "comCountYakanHomonKaigo",
@@ -5706,7 +5772,8 @@
            "controlName": "ServiceWithCountCom",
            "text_ServiceName": "夜間対応型訪問介護",
            "text_Frequency": "月",
-           "text_Unit": "回"
+           "text_Unit": "回",
+           "radKaigoOrYobo_dataSource": "1"
           },
           {
            "fieldName": "comCountTsushoRehabilitation",
@@ -5731,7 +5798,8 @@
            "controlName": "ServiceWithCountCom",
            "text_ServiceName": "通所リハビリテーション（デイケア）",
            "text_Frequency": "月",
-           "text_Unit": "回"
+           "text_Unit": "回",
+           "radKaigoOrYobo_dataSource": "2"
           },
           {
            "fieldName": "comCountRyoyoKanriShido",
@@ -5756,7 +5824,8 @@
            "controlName": "ServiceWithCountCom",
            "text_ServiceName": "居宅療養型管理指導",
            "text_Frequency": "月",
-           "text_Unit": "回"
+           "text_Unit": "回",
+           "radKaigoOrYobo_dataSource": "2"
           },
           {
            "fieldName": "comCountDayService",
@@ -5781,7 +5850,8 @@
            "controlName": "ServiceWithCountCom",
            "text_ServiceName": "通所介護（デイサービス）",
            "text_Frequency": "月",
-           "text_Unit": "回"
+           "text_Unit": "回",
+           "radKaigoOrYobo_dataSource": "2"
           },
           {
            "fieldName": "comCountTokuteiSeikatsuKaigo",
@@ -5806,7 +5876,8 @@
            "controlName": "ServiceWithCountCom",
            "text_ServiceName": "特定施設入居者生活介護",
            "text_Frequency": "月",
-           "text_Unit": "回"
+           "text_Unit": "回",
+           "radKaigoOrYobo_dataSource": "2"
           },
           {
            "fieldName": "comCountNinchishoTsushoKaigo",
@@ -5831,10 +5902,11 @@
            "controlName": "ServiceWithCountCom",
            "text_ServiceName": "認知症対応型通所介護",
            "text_Frequency": "月",
-           "text_Unit": "回"
+           "text_Unit": "回",
+           "radKaigoOrYobo_dataSource": "2"
           },
           {
-           "fieldName": "comCountHukushiyoguTaiyo",
+           "fieldName": "comCountFukushiyoguTaiyo",
            "items": [],
            "controlType": "CompositeControl",
            "width": "XS",
@@ -5850,13 +5922,14 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "selectControlID": "comCountHukushiyoguTaiyo",
+           "selectControlID": "comCountFukushiyoguTaiyo",
            "relation": [],
            "businessId": "DBE",
            "controlName": "ServiceWithCountCom",
            "text_ServiceName": "福祉用具貸与",
-           "text_Frequency": "",
-           "text_Unit": "品目"
+           "text_Frequency": "月",
+           "text_Unit": "単位",
+           "radKaigoOrYobo_dataSource": "2"
           },
           {
            "fieldName": "comCountNinchishoKyodoKaigo",
@@ -5881,10 +5954,11 @@
            "controlName": "ServiceWithCountCom",
            "text_ServiceName": "認知症対応型共同生活介護",
            "text_Frequency": "月",
-           "text_Unit": "回"
+           "text_Unit": "回",
+           "radKaigoOrYobo_dataSource": "2"
           },
           {
-           "fieldName": "comCountHukushiyoguHanbai",
+           "fieldName": "comCountFukushiyoguHanbai",
            "items": [],
            "controlType": "CompositeControl",
            "width": "XS",
@@ -5900,13 +5974,14 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "selectControlID": "comCountHukushiyoguHanbai",
+           "selectControlID": "comCountFukushiyoguHanbai",
            "relation": [],
            "businessId": "DBE",
            "controlName": "ServiceWithCountCom",
            "text_ServiceName": "特定福祉用具販売",
-           "text_Frequency": "",
-           "text_Unit": "品目"
+           "text_Frequency": "月",
+           "text_Unit": "単位",
+           "radKaigoOrYobo_dataSource": "2"
           },
           {
            "fieldName": "comCountSmallTakinoKaigo",
@@ -5931,7 +6006,8 @@
            "controlName": "ServiceWithCountCom",
            "text_ServiceName": "小規模多機能型居宅介護",
            "text_Frequency": "月",
-           "text_Unit": "回"
+           "text_Unit": "回",
+           "radKaigoOrYobo_dataSource": "2"
           },
           {
            "fieldName": "lblJutakuKaishu",
@@ -5951,9 +6027,9 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "lblJutakuKaishu",
-           "text": "住宅改修",
            "required": false,
            "isPrivateInfo": false,
+           "text": "住宅改修",
            "align": 2
           },
           {
@@ -5974,8 +6050,6 @@
            "marginLeft": "XL",
            "marginRight": "XS",
            "selectControlID": "radJutakuKaishu_core",
-           "onClick": "",
-           "icon": [],
            "dataSource": [
             {
              "key": "1",
@@ -5992,8 +6066,10 @@
            "labelLWidth": "S",
            "labelLAlign": 2,
            "selectedItem": null,
+           "onClick": "",
            "newLineItemNumber": 2,
-           "spaceSize": "M"
+           "spaceSize": "M",
+           "icon": []
           },
           {
            "fieldName": "comCountChiikiTokuteiShisetsuKaigo",
@@ -6018,10 +6094,11 @@
            "controlName": "ServiceWithCountCom",
            "text_ServiceName": "地域密着型特定施設入居者生活介護",
            "text_Frequency": "月",
-           "text_Unit": "回"
+           "text_Unit": "回",
+           "radKaigoOrYobo_dataSource": "1"
           },
           {
-           "fieldName": "comCountChiikiRojinHukushiShisetsuKaigo",
+           "fieldName": "comCountChiikiRojinFukushiShisetsuKaigo",
            "items": [],
            "controlType": "CompositeControl",
            "width": "XS",
@@ -6037,13 +6114,14 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "selectControlID": "comCountChiikiRojinHukushiShisetsuKaigo",
+           "selectControlID": "comCountChiikiRojinFukushiShisetsuKaigo",
            "relation": [],
            "businessId": "DBE",
            "controlName": "ServiceWithCountCom",
            "text_ServiceName": "地域密着型介護老人福祉施設入所者生活介護",
            "text_Frequency": "月",
-           "text_Unit": "回"
+           "text_Unit": "単位",
+           "radKaigoOrYobo_dataSource": "1"
           },
           {
            "fieldName": "comCountTeikiJunkaiHomonKaigo",
@@ -6068,7 +6146,8 @@
            "controlName": "ServiceWithCountCom",
            "text_ServiceName": "定期巡回・随時対応型訪問介護看護",
            "text_Frequency": "月",
-           "text_Unit": "回"
+           "text_Unit": "回",
+           "radKaigoOrYobo_dataSource": null
           },
           {
            "fieldName": "lblSpace1",
@@ -6088,9 +6167,9 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "lblSpace1",
-           "text": "space",
            "required": false,
            "isPrivateInfo": false,
+           "text": "space",
            "align": 2
           },
           {
@@ -6112,7 +6191,6 @@
            "marginRight": "XS",
            "selectControlID": "txtShichosonTokubetsuKyufu_core",
            "readOnly": false,
-           "text": "",
            "required": false,
            "maxLength": 100000000,
            "minLength": 0,
@@ -6126,6 +6204,7 @@
            "onBlur": "",
            "onChange": "",
            "onKeyPress": "",
+           "text": "",
            "suggest": [],
            "value": "",
            "labelLText": "市町村特別給付",
@@ -6155,7 +6234,6 @@
            "marginRight": "XS",
            "selectControlID": "txtZaitakuSeriviceOutsideKaigoKyufu_core",
            "readOnly": false,
-           "text": "",
            "required": false,
            "maxLength": 100000000,
            "minLength": 0,
@@ -6169,6 +6247,7 @@
            "onBlur": "",
            "onChange": "",
            "onKeyPress": "",
+           "text": "",
            "suggest": [],
            "value": "",
            "labelLText": "介護保険給付以外の在宅サービス",
@@ -6242,8 +6321,6 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "radShisetsuType_core",
-           "onClick": "",
-           "icon": [],
            "dataSource": [
             {
              "key": "1",
@@ -6284,8 +6361,10 @@
            "labelLWidth": "S",
            "labelLAlign": 2,
            "selectedItem": null,
+           "onClick": "",
            "newLineItemNumber": 4,
-           "spaceSize": "M"
+           "spaceSize": "M",
+           "icon": []
           },
           {
            "fieldName": "lblSpace2",
@@ -6305,9 +6384,9 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "lblSpace2",
-           "text": "space",
            "required": false,
            "isPrivateInfo": false,
+           "text": "space",
            "align": 2
           },
           {
@@ -6328,9 +6407,9 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "lblShisetsuName",
-           "text": "名称",
            "required": false,
            "isPrivateInfo": false,
+           "text": "名称",
            "align": 2
           },
           {
@@ -6352,7 +6431,6 @@
            "marginRight": "XS",
            "selectControlID": "txtShisetsuName_core",
            "readOnly": false,
-           "text": "",
            "required": false,
            "maxLength": 100000000,
            "minLength": 0,
@@ -6366,6 +6444,7 @@
            "onBlur": "",
            "onChange": "",
            "onKeyPress": "",
+           "text": "",
            "suggest": [],
            "value": "",
            "labelLText": "",
@@ -6394,9 +6473,9 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "lblShisetsuJusho",
-           "text": "住所",
            "required": false,
            "isPrivateInfo": false,
+           "text": "住所",
            "align": 2
           },
           {
@@ -6418,7 +6497,6 @@
            "marginRight": "XS",
            "selectControlID": "txtShisetsuYubinNo_core",
            "readOnly": false,
-           "text": "",
            "required": false,
            "maxLength": 100000000,
            "minLength": 0,
@@ -6432,6 +6510,7 @@
            "onBlur": "",
            "onChange": "",
            "onKeyPress": "",
+           "text": "",
            "suggest": [],
            "value": "",
            "labelLText": "",
@@ -6461,7 +6540,6 @@
            "marginRight": "XS",
            "selectControlID": "txtShisetsuJusho_core",
            "readOnly": false,
-           "text": "",
            "required": false,
            "maxLength": 100000000,
            "minLength": 0,
@@ -6475,6 +6553,7 @@
            "onBlur": "",
            "onChange": "",
            "onKeyPress": "",
+           "text": "",
            "suggest": [],
            "value": "",
            "labelLText": "",
@@ -6503,9 +6582,9 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "lblShisetsuTelNo",
-           "text": "電話",
            "required": false,
            "isPrivateInfo": false,
+           "text": "電話",
            "align": 2
           },
           {
@@ -6527,7 +6606,6 @@
            "marginRight": "XS",
            "selectControlID": "txtShisetsuTelNo_core",
            "readOnly": false,
-           "text": "",
            "required": false,
            "maxLength": 100000000,
            "minLength": 0,
@@ -6541,6 +6619,7 @@
            "onBlur": "",
            "onChange": "",
            "onKeyPress": "",
+           "text": "",
            "suggest": [],
            "value": "",
            "labelLText": "",
@@ -6615,7 +6694,6 @@
            "marginRight": "XS",
            "selectControlID": "txtGaikyoTokki_text_area",
            "readOnly": false,
-           "text": "",
            "height": "S",
            "required": false,
            "maxLength": "200",
@@ -6627,6 +6705,7 @@
            "onBlur": "",
            "onChange": "",
            "onKeyPress": "",
+           "text": "",
            "value": "",
            "labelLText": "",
            "labelRText": "",
@@ -6920,14 +6999,85 @@
       "TokkijikoTab"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "TokkijikoTab",
+     "selectedItemFieldName": "ServiceJokyoTab",
      "initialTab": 0
+    },
+    {
+     "fieldName": "ButtonsForNinteichosaResultEntry",
+     "items": [
+      {
+       "fieldName": "btnToRegisterResult",
+       "items": [],
+       "controlType": "Button",
+       "width": "M",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 2,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "btnToRegisterResult",
+       "text": "調査結果を登録する",
+       "onClick": "",
+       "icon": 0,
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": ""
+      }
+     ],
+     "controlType": "Panel",
+     "width": "1070",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "ButtonsForNinteichosaResultEntry",
+     "onLoad": "",
+     "title": "",
+     "isOpen": true,
+     "canOpenAndClose": true,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "ButtonsForNinteichosaResultEntry"
+      }
+     ],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true,
+     "backgroundColor": 0,
+     "widthAuto": false,
+     "panelDisplay": 0,
+     "isGroupBox": false,
+     "readOnly": false
     }
    ],
    "controlType": "Panel",
    "width": "1090",
    "visible": true,
-   "displayNone": false,
+   "displayNone": true,
    "disabled": false,
    "accessKey": "",
    "nextFocusFieldName": "",
@@ -6959,6 +7109,14 @@
     {
      "eventName": "onStart_NinteichosaResultEntryMain",
      "requestUrl": "dbe/db/dbe/NinteichosaResultEntryMain/onStart_NinteichosaResultEntryMain"
+    },
+    {
+     "eventName": "onChange_radServiceKubun",
+     "requestUrl": "dbe/db/dbe/NinteichosaResultEntryMain/onChange_radServiceKubun"
+    },
+    {
+     "eventName": "onChange_radChosaJisshiBasho",
+     "requestUrl": "dbe/db/dbe/NinteichosaResultEntryMain/onChange_radChosaJisshiBasho"
     }
    ],
    "hiddenInput": [],
@@ -7009,6 +7167,26 @@
    "visibleDivs": [
     {
      "visibleDiv": "NinteichosaResultEntryTarget",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "NinteichosaResultEntryMain",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "NinteichosaDetail",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ShisakaiWaritsukeKibo",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ServiceJokyoServicesCounts",
      "panelState": "visible",
      "fixedDiv": "No"
     }
@@ -7146,6 +7324,11 @@
      "visibleDiv": "ShisakaiWaritsukeKibo",
      "panelState": "visible",
      "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ButtonsForNinteichosaResultEntry",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
@@ -7175,6 +7358,9 @@
   ],
   [
    "ShisakaiWaritsukeKibo"
+  ],
+  [
+   "ButtonsForNinteichosaResultEntry"
   ]
  ],
  "panelMargin": 1,

@@ -50,6 +50,20 @@ module DBE {
             }
         }
         
+        public get radKaigoOrYobo_dataSource() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[4]["fieldName"])["selectedItem"];
+        }
+        
+        public set radKaigoOrYobo_dataSource(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[4]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[4]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[4]["fieldName"])["selectedItem"] = value;
+            } else {
+                this.layout.items[4]["selectedItem"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, ServiceWithCountCom_Design.myLayout, fieldName);
         }
@@ -63,6 +77,7 @@ module DBE {
             Uz.JSControlUtil.registProperty("text_ServiceName");
             Uz.JSControlUtil.registProperty("text_Frequency");
             Uz.JSControlUtil.registProperty("text_Unit");
+            Uz.JSControlUtil.registProperty("radKaigoOrYobo_dataSource");
         }
         
         /**
@@ -75,6 +90,7 @@ module DBE {
             editablePropertyInfo["text_ServiceName"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["text"];
             editablePropertyInfo["text_Frequency"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[1]["fieldName"]).getEditablePropertyInfo()["text"];
             editablePropertyInfo["text_Unit"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[3]["fieldName"]).getEditablePropertyInfo()["text"];
+            editablePropertyInfo["radKaigoOrYobo_dataSource"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[4]["fieldName"]).getEditablePropertyInfo()["selectedItem"];
             
             return editablePropertyInfo;
         }
@@ -220,7 +236,7 @@ module DBE {
    "labelLText": "",
    "labelLWidth": "S",
    "labelLAlign": 2,
-   "selectedItem": "1",
+   "selectedItem": null,
    "dataSource": [
     {
      "key": "1",
@@ -270,6 +286,11 @@ module DBE {
    "publicChildFieldName": "lblUnit",
    "publicChildProperty": "text",
    "newPropertyName": "text_Unit"
+  },
+  {
+   "publicChildFieldName": "radKaigoOrYobo",
+   "publicChildProperty": "selectedItem",
+   "newPropertyName": "radKaigoOrYobo_dataSource"
   }
  ]
 }        
