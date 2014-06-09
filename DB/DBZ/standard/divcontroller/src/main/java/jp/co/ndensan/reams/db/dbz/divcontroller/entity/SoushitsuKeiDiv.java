@@ -23,10 +23,10 @@ public class SoushitsuKeiDiv extends Panel {
      */
     @JsonProperty("txtJukiShojoJiyu")
     private TextBox txtJukiShojoJiyu;
-    @JsonProperty("txtShojoIdoYmd")
-    private TextBoxFlexibleDate txtShojoIdoYmd;
     @JsonProperty("txtShojoTodokedeYmd")
     private TextBoxFlexibleDate txtShojoTodokedeYmd;
+    @JsonProperty("txtShojoIdoYmd")
+    private TextBoxFlexibleDate txtShojoIdoYmd;
     @JsonProperty("ddlShikakuSoshitsuJiyu")
     private DropDownList ddlShikakuSoshitsuJiyu;
     @JsonProperty("txtShikakuSoshitsuYmd")
@@ -50,16 +50,6 @@ public class SoushitsuKeiDiv extends Panel {
         this.txtJukiShojoJiyu=txtJukiShojoJiyu;
     }
 
-    @JsonProperty("txtShojoIdoYmd")
-    public TextBoxFlexibleDate getTxtShojoIdoYmd() {
-        return txtShojoIdoYmd;
-    }
-
-    @JsonProperty("txtShojoIdoYmd")
-    public void setTxtShojoIdoYmd(TextBoxFlexibleDate txtShojoIdoYmd) {
-        this.txtShojoIdoYmd=txtShojoIdoYmd;
-    }
-
     @JsonProperty("txtShojoTodokedeYmd")
     public TextBoxFlexibleDate getTxtShojoTodokedeYmd() {
         return txtShojoTodokedeYmd;
@@ -68,6 +58,16 @@ public class SoushitsuKeiDiv extends Panel {
     @JsonProperty("txtShojoTodokedeYmd")
     public void setTxtShojoTodokedeYmd(TextBoxFlexibleDate txtShojoTodokedeYmd) {
         this.txtShojoTodokedeYmd=txtShojoTodokedeYmd;
+    }
+
+    @JsonProperty("txtShojoIdoYmd")
+    public TextBoxFlexibleDate getTxtShojoIdoYmd() {
+        return txtShojoIdoYmd;
+    }
+
+    @JsonProperty("txtShojoIdoYmd")
+    public void setTxtShojoIdoYmd(TextBoxFlexibleDate txtShojoIdoYmd) {
+        this.txtShojoIdoYmd=txtShojoIdoYmd;
     }
 
     @JsonProperty("ddlShikakuSoshitsuJiyu")

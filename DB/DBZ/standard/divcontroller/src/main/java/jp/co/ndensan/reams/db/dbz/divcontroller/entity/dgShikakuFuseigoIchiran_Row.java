@@ -1,24 +1,29 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
-
 /**
- * このコードはツールによって生成されました。 このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
- * コードが再生成されるときに損失したりします。 Sat May 24 17:04:23 JST 2014
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
+ * コードが再生成されるときに損失したりします。
+ * Mon Jun 09 12:51:32 JST 2014 
  */
+
+
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
+
 /**
- * dgShikakuFuseigoIchiran_Row のクラスファイル
- *
+ * dgShikakuFuseigoIchiran_Row のクラスファイル 
+ * 
  * @author 自動生成
  */
+
 public class dgShikakuFuseigoIchiran_Row extends DataRow {
 
     private Boolean btnIgnore;
-    private Button btnModify;
+    private Button btnDecide;
     private RString txtHihoNo;
     private RString txtShikibetsuCode;
     private RString txtKetsugo01;
@@ -32,26 +37,31 @@ public class dgShikakuFuseigoIchiran_Row extends DataRow {
     private RString txtNenrei;
     private RString txtKetsugo04;
     private RString txtFuseigo;
-    private RString txtJutouJiyu;
-    private RString txtShutokuJiyu;
+    private RString txtJukiTorokuJiyu;
+    private RString txtShikakuShutokuJiyu;
     private RString txtKetsugo05;
-    private TextBoxFlexibleDate txtJutouYmd;
-    private TextBoxFlexibleDate txtShikakuGetYmd;
+    private TextBoxFlexibleDate txtJukiTorokuYmd;
+    private TextBoxFlexibleDate txtShikakuShutokuYmd;
     private RString txtKetsugo06;
-    private RString txtShojoJiyu;
-    private RString txtShikakuLostJiyu;
+    private RString txtJukiShojoJiyu;
+    private RString txtShikakuSoshitsuJiyu;
     private RString txtKetsugo07;
-    private TextBoxFlexibleDate txtShojoYmd;
-    private TextBoxFlexibleDate txtShikakuLostYmd;
+    private TextBoxFlexibleDate txtJukiShojoYmd;
+    private TextBoxFlexibleDate txtShikakuSoshitsuYmd;
     private RString txtKetsugo08;
+    private TextBoxFlexibleDate txtJukiTorokuTodokedeYmd;
+    private TextBoxFlexibleDate txtJukiShojoTodokedeYmd;
+    private TextBoxFlexibleDate txtShikakuShutokuTodokedeYmd;
+    private TextBoxFlexibleDate txtShikakuSoshitsuTodokedeYmd;
 
     public dgShikakuFuseigoIchiran_Row() {
         super();
     }
 
-    public dgShikakuFuseigoIchiran_Row(Boolean btnIgnore, RString txtHihoNo, RString txtShikibetsuCode, RString txtKetsugo01, RString txtKanaShimei, RString txtShimei, RString txtKetsugo02, RString txtJuminShu, TextBoxFlexibleDate txtSeiYmd, RString txtKetsugo03, RString txtSeibetsu, RString txtNenrei, RString txtKetsugo04, RString txtFuseigo, RString txtJutouJiyu, RString txtShutokuJiyu, RString txtKetsugo05, TextBoxFlexibleDate txtJutouYmd, TextBoxFlexibleDate txtShikakuGetYmd, RString txtKetsugo06, RString txtShojoJiyu, RString txtShikakuLostJiyu, RString txtKetsugo07, TextBoxFlexibleDate txtShojoYmd, TextBoxFlexibleDate txtShikakuLostYmd, RString txtKetsugo08) {
+    public dgShikakuFuseigoIchiran_Row(Boolean btnIgnore, Button btnDecide, RString txtHihoNo, RString txtShikibetsuCode, RString txtKetsugo01, RString txtKanaShimei, RString txtShimei, RString txtKetsugo02, RString txtJuminShu, TextBoxFlexibleDate txtSeiYmd, RString txtKetsugo03, RString txtSeibetsu, RString txtNenrei, RString txtKetsugo04, RString txtFuseigo, RString txtJukiTorokuJiyu, RString txtShikakuShutokuJiyu, RString txtKetsugo05, TextBoxFlexibleDate txtJukiTorokuYmd, TextBoxFlexibleDate txtShikakuShutokuYmd, RString txtKetsugo06, RString txtJukiShojoJiyu, RString txtShikakuSoshitsuJiyu, RString txtKetsugo07, TextBoxFlexibleDate txtJukiShojoYmd, TextBoxFlexibleDate txtShikakuSoshitsuYmd, RString txtKetsugo08, TextBoxFlexibleDate txtJukiTorokuTodokedeYmd, TextBoxFlexibleDate txtJukiShojoTodokedeYmd, TextBoxFlexibleDate txtShikakuShutokuTodokedeYmd, TextBoxFlexibleDate txtShikakuSoshitsuTodokedeYmd) {
         super();
         this.setOriginalData("btnIgnore", btnIgnore);
+        this.setOriginalData("btnDecide", btnDecide);
         this.setOriginalData("txtHihoNo", txtHihoNo);
         this.setOriginalData("txtShikibetsuCode", txtShikibetsuCode);
         this.setOriginalData("txtKetsugo01", txtKetsugo01);
@@ -65,20 +75,24 @@ public class dgShikakuFuseigoIchiran_Row extends DataRow {
         this.setOriginalData("txtNenrei", txtNenrei);
         this.setOriginalData("txtKetsugo04", txtKetsugo04);
         this.setOriginalData("txtFuseigo", txtFuseigo);
-        this.setOriginalData("txtJutouJiyu", txtJutouJiyu);
-        this.setOriginalData("txtShutokuJiyu", txtShutokuJiyu);
+        this.setOriginalData("txtJukiTorokuJiyu", txtJukiTorokuJiyu);
+        this.setOriginalData("txtShikakuShutokuJiyu", txtShikakuShutokuJiyu);
         this.setOriginalData("txtKetsugo05", txtKetsugo05);
-        this.setOriginalData("txtJutouYmd", txtJutouYmd);
-        this.setOriginalData("txtShikakuGetYmd", txtShikakuGetYmd);
+        this.setOriginalData("txtJukiTorokuYmd", txtJukiTorokuYmd);
+        this.setOriginalData("txtShikakuShutokuYmd", txtShikakuShutokuYmd);
         this.setOriginalData("txtKetsugo06", txtKetsugo06);
-        this.setOriginalData("txtShojoJiyu", txtShojoJiyu);
-        this.setOriginalData("txtShikakuLostJiyu", txtShikakuLostJiyu);
+        this.setOriginalData("txtJukiShojoJiyu", txtJukiShojoJiyu);
+        this.setOriginalData("txtShikakuSoshitsuJiyu", txtShikakuSoshitsuJiyu);
         this.setOriginalData("txtKetsugo07", txtKetsugo07);
-        this.setOriginalData("txtShojoYmd", txtShojoYmd);
-        this.setOriginalData("txtShikakuLostYmd", txtShikakuLostYmd);
+        this.setOriginalData("txtJukiShojoYmd", txtJukiShojoYmd);
+        this.setOriginalData("txtShikakuSoshitsuYmd", txtShikakuSoshitsuYmd);
         this.setOriginalData("txtKetsugo08", txtKetsugo08);
+        this.setOriginalData("txtJukiTorokuTodokedeYmd", txtJukiTorokuTodokedeYmd);
+        this.setOriginalData("txtJukiShojoTodokedeYmd", txtJukiShojoTodokedeYmd);
+        this.setOriginalData("txtShikakuShutokuTodokedeYmd", txtShikakuShutokuTodokedeYmd);
+        this.setOriginalData("txtShikakuSoshitsuTodokedeYmd", txtShikakuSoshitsuTodokedeYmd);
         this.btnIgnore = btnIgnore;
-        this.btnModify = btnModify;
+        this.btnDecide = btnDecide;
         this.txtHihoNo = txtHihoNo;
         this.txtShikibetsuCode = txtShikibetsuCode;
         this.txtKetsugo01 = txtKetsugo01;
@@ -92,26 +106,30 @@ public class dgShikakuFuseigoIchiran_Row extends DataRow {
         this.txtNenrei = txtNenrei;
         this.txtKetsugo04 = txtKetsugo04;
         this.txtFuseigo = txtFuseigo;
-        this.txtJutouJiyu = txtJutouJiyu;
-        this.txtShutokuJiyu = txtShutokuJiyu;
+        this.txtJukiTorokuJiyu = txtJukiTorokuJiyu;
+        this.txtShikakuShutokuJiyu = txtShikakuShutokuJiyu;
         this.txtKetsugo05 = txtKetsugo05;
-        this.txtJutouYmd = txtJutouYmd;
-        this.txtShikakuGetYmd = txtShikakuGetYmd;
+        this.txtJukiTorokuYmd = txtJukiTorokuYmd;
+        this.txtShikakuShutokuYmd = txtShikakuShutokuYmd;
         this.txtKetsugo06 = txtKetsugo06;
-        this.txtShojoJiyu = txtShojoJiyu;
-        this.txtShikakuLostJiyu = txtShikakuLostJiyu;
+        this.txtJukiShojoJiyu = txtJukiShojoJiyu;
+        this.txtShikakuSoshitsuJiyu = txtShikakuSoshitsuJiyu;
         this.txtKetsugo07 = txtKetsugo07;
-        this.txtShojoYmd = txtShojoYmd;
-        this.txtShikakuLostYmd = txtShikakuLostYmd;
+        this.txtJukiShojoYmd = txtJukiShojoYmd;
+        this.txtShikakuSoshitsuYmd = txtShikakuSoshitsuYmd;
         this.txtKetsugo08 = txtKetsugo08;
+        this.txtJukiTorokuTodokedeYmd = txtJukiTorokuTodokedeYmd;
+        this.txtJukiShojoTodokedeYmd = txtJukiShojoTodokedeYmd;
+        this.txtShikakuShutokuTodokedeYmd = txtShikakuShutokuTodokedeYmd;
+        this.txtShikakuSoshitsuTodokedeYmd = txtShikakuSoshitsuTodokedeYmd;
     }
 
     public Boolean getBtnIgnore() {
         return btnIgnore;
     }
 
-    public Button getBtnModify() {
-        return btnModify;
+    public Button getBtnDecide() {
+        return btnDecide;
     }
 
     public RString getTxtHihoNo() {
@@ -166,52 +184,68 @@ public class dgShikakuFuseigoIchiran_Row extends DataRow {
         return txtFuseigo;
     }
 
-    public RString getTxtJutouJiyu() {
-        return txtJutouJiyu;
+    public RString getTxtJukiTorokuJiyu() {
+        return txtJukiTorokuJiyu;
     }
 
-    public RString getTxtShutokuJiyu() {
-        return txtShutokuJiyu;
+    public RString getTxtShikakuShutokuJiyu() {
+        return txtShikakuShutokuJiyu;
     }
 
     public RString getTxtKetsugo05() {
         return txtKetsugo05;
     }
 
-    public TextBoxFlexibleDate getTxtJutouYmd() {
-        return txtJutouYmd;
+    public TextBoxFlexibleDate getTxtJukiTorokuYmd() {
+        return txtJukiTorokuYmd;
     }
 
-    public TextBoxFlexibleDate getTxtShikakuGetYmd() {
-        return txtShikakuGetYmd;
+    public TextBoxFlexibleDate getTxtShikakuShutokuYmd() {
+        return txtShikakuShutokuYmd;
     }
 
     public RString getTxtKetsugo06() {
         return txtKetsugo06;
     }
 
-    public RString getTxtShojoJiyu() {
-        return txtShojoJiyu;
+    public RString getTxtJukiShojoJiyu() {
+        return txtJukiShojoJiyu;
     }
 
-    public RString getTxtShikakuLostJiyu() {
-        return txtShikakuLostJiyu;
+    public RString getTxtShikakuSoshitsuJiyu() {
+        return txtShikakuSoshitsuJiyu;
     }
 
     public RString getTxtKetsugo07() {
         return txtKetsugo07;
     }
 
-    public TextBoxFlexibleDate getTxtShojoYmd() {
-        return txtShojoYmd;
+    public TextBoxFlexibleDate getTxtJukiShojoYmd() {
+        return txtJukiShojoYmd;
     }
 
-    public TextBoxFlexibleDate getTxtShikakuLostYmd() {
-        return txtShikakuLostYmd;
+    public TextBoxFlexibleDate getTxtShikakuSoshitsuYmd() {
+        return txtShikakuSoshitsuYmd;
     }
 
     public RString getTxtKetsugo08() {
         return txtKetsugo08;
+    }
+
+    public TextBoxFlexibleDate getTxtJukiTorokuTodokedeYmd() {
+        return txtJukiTorokuTodokedeYmd;
+    }
+
+    public TextBoxFlexibleDate getTxtJukiShojoTodokedeYmd() {
+        return txtJukiShojoTodokedeYmd;
+    }
+
+    public TextBoxFlexibleDate getTxtShikakuShutokuTodokedeYmd() {
+        return txtShikakuShutokuTodokedeYmd;
+    }
+
+    public TextBoxFlexibleDate getTxtShikakuSoshitsuTodokedeYmd() {
+        return txtShikakuSoshitsuTodokedeYmd;
     }
 
     public void setBtnIgnore(Boolean btnIgnore) {
@@ -219,9 +253,9 @@ public class dgShikakuFuseigoIchiran_Row extends DataRow {
         this.btnIgnore = btnIgnore;
     }
 
-    public void setBtnModify(Button btnModify) {
-        this.setOriginalData("btnModify", btnModify);
-        this.btnModify = btnModify;
+    public void setBtnDecide(Button btnDecide) {
+        this.setOriginalData("btnDecide", btnDecide);
+        this.btnDecide = btnDecide;
     }
 
     public void setTxtHihoNo(RString txtHihoNo) {
@@ -289,14 +323,14 @@ public class dgShikakuFuseigoIchiran_Row extends DataRow {
         this.txtFuseigo = txtFuseigo;
     }
 
-    public void setTxtJutouJiyu(RString txtJutouJiyu) {
-        this.setOriginalData("txtJutouJiyu", txtJutouJiyu);
-        this.txtJutouJiyu = txtJutouJiyu;
+    public void setTxtJukiTorokuJiyu(RString txtJukiTorokuJiyu) {
+        this.setOriginalData("txtJukiTorokuJiyu", txtJukiTorokuJiyu);
+        this.txtJukiTorokuJiyu = txtJukiTorokuJiyu;
     }
 
-    public void setTxtShutokuJiyu(RString txtShutokuJiyu) {
-        this.setOriginalData("txtShutokuJiyu", txtShutokuJiyu);
-        this.txtShutokuJiyu = txtShutokuJiyu;
+    public void setTxtShikakuShutokuJiyu(RString txtShikakuShutokuJiyu) {
+        this.setOriginalData("txtShikakuShutokuJiyu", txtShikakuShutokuJiyu);
+        this.txtShikakuShutokuJiyu = txtShikakuShutokuJiyu;
     }
 
     public void setTxtKetsugo05(RString txtKetsugo05) {
@@ -304,14 +338,14 @@ public class dgShikakuFuseigoIchiran_Row extends DataRow {
         this.txtKetsugo05 = txtKetsugo05;
     }
 
-    public void setTxtJutouYmd(TextBoxFlexibleDate txtJutouYmd) {
-        this.setOriginalData("txtJutouYmd", txtJutouYmd);
-        this.txtJutouYmd = txtJutouYmd;
+    public void setTxtJukiTorokuYmd(TextBoxFlexibleDate txtJukiTorokuYmd) {
+        this.setOriginalData("txtJukiTorokuYmd", txtJukiTorokuYmd);
+        this.txtJukiTorokuYmd = txtJukiTorokuYmd;
     }
 
-    public void setTxtShikakuGetYmd(TextBoxFlexibleDate txtShikakuGetYmd) {
-        this.setOriginalData("txtShikakuGetYmd", txtShikakuGetYmd);
-        this.txtShikakuGetYmd = txtShikakuGetYmd;
+    public void setTxtShikakuShutokuYmd(TextBoxFlexibleDate txtShikakuShutokuYmd) {
+        this.setOriginalData("txtShikakuShutokuYmd", txtShikakuShutokuYmd);
+        this.txtShikakuShutokuYmd = txtShikakuShutokuYmd;
     }
 
     public void setTxtKetsugo06(RString txtKetsugo06) {
@@ -319,14 +353,14 @@ public class dgShikakuFuseigoIchiran_Row extends DataRow {
         this.txtKetsugo06 = txtKetsugo06;
     }
 
-    public void setTxtShojoJiyu(RString txtShojoJiyu) {
-        this.setOriginalData("txtShojoJiyu", txtShojoJiyu);
-        this.txtShojoJiyu = txtShojoJiyu;
+    public void setTxtJukiShojoJiyu(RString txtJukiShojoJiyu) {
+        this.setOriginalData("txtJukiShojoJiyu", txtJukiShojoJiyu);
+        this.txtJukiShojoJiyu = txtJukiShojoJiyu;
     }
 
-    public void setTxtShikakuLostJiyu(RString txtShikakuLostJiyu) {
-        this.setOriginalData("txtShikakuLostJiyu", txtShikakuLostJiyu);
-        this.txtShikakuLostJiyu = txtShikakuLostJiyu;
+    public void setTxtShikakuSoshitsuJiyu(RString txtShikakuSoshitsuJiyu) {
+        this.setOriginalData("txtShikakuSoshitsuJiyu", txtShikakuSoshitsuJiyu);
+        this.txtShikakuSoshitsuJiyu = txtShikakuSoshitsuJiyu;
     }
 
     public void setTxtKetsugo07(RString txtKetsugo07) {
@@ -334,19 +368,39 @@ public class dgShikakuFuseigoIchiran_Row extends DataRow {
         this.txtKetsugo07 = txtKetsugo07;
     }
 
-    public void setTxtShojoYmd(TextBoxFlexibleDate txtShojoYmd) {
-        this.setOriginalData("txtShojoYmd", txtShojoYmd);
-        this.txtShojoYmd = txtShojoYmd;
+    public void setTxtJukiShojoYmd(TextBoxFlexibleDate txtJukiShojoYmd) {
+        this.setOriginalData("txtJukiShojoYmd", txtJukiShojoYmd);
+        this.txtJukiShojoYmd = txtJukiShojoYmd;
     }
 
-    public void setTxtShikakuLostYmd(TextBoxFlexibleDate txtShikakuLostYmd) {
-        this.setOriginalData("txtShikakuLostYmd", txtShikakuLostYmd);
-        this.txtShikakuLostYmd = txtShikakuLostYmd;
+    public void setTxtShikakuSoshitsuYmd(TextBoxFlexibleDate txtShikakuSoshitsuYmd) {
+        this.setOriginalData("txtShikakuSoshitsuYmd", txtShikakuSoshitsuYmd);
+        this.txtShikakuSoshitsuYmd = txtShikakuSoshitsuYmd;
     }
 
     public void setTxtKetsugo08(RString txtKetsugo08) {
         this.setOriginalData("txtKetsugo08", txtKetsugo08);
         this.txtKetsugo08 = txtKetsugo08;
+    }
+
+    public void setTxtJukiTorokuTodokedeYmd(TextBoxFlexibleDate txtJukiTorokuTodokedeYmd) {
+        this.setOriginalData("txtJukiTorokuTodokedeYmd", txtJukiTorokuTodokedeYmd);
+        this.txtJukiTorokuTodokedeYmd = txtJukiTorokuTodokedeYmd;
+    }
+
+    public void setTxtJukiShojoTodokedeYmd(TextBoxFlexibleDate txtJukiShojoTodokedeYmd) {
+        this.setOriginalData("txtJukiShojoTodokedeYmd", txtJukiShojoTodokedeYmd);
+        this.txtJukiShojoTodokedeYmd = txtJukiShojoTodokedeYmd;
+    }
+
+    public void setTxtShikakuShutokuTodokedeYmd(TextBoxFlexibleDate txtShikakuShutokuTodokedeYmd) {
+        this.setOriginalData("txtShikakuShutokuTodokedeYmd", txtShikakuShutokuTodokedeYmd);
+        this.txtShikakuShutokuTodokedeYmd = txtShikakuShutokuTodokedeYmd;
+    }
+
+    public void setTxtShikakuSoshitsuTodokedeYmd(TextBoxFlexibleDate txtShikakuSoshitsuTodokedeYmd) {
+        this.setOriginalData("txtShikakuSoshitsuTodokedeYmd", txtShikakuSoshitsuTodokedeYmd);
+        this.txtShikakuSoshitsuTodokedeYmd = txtShikakuSoshitsuTodokedeYmd;
     }
 
 }

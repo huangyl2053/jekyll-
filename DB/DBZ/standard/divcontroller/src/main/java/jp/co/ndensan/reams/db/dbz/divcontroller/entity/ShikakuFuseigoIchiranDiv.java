@@ -22,10 +22,6 @@ public class ShikakuFuseigoIchiranDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("chkIgnoreNoDisp")
-    private CheckBoxList chkIgnoreNoDisp;
-    @JsonProperty("lblDummy")
-    private Label lblDummy;
     @JsonProperty("dgShikakuFuseigoIchiran")
     private DataGrid<dgShikakuFuseigoIchiran_Row> dgShikakuFuseigoIchiran;
 
@@ -35,26 +31,6 @@ public class ShikakuFuseigoIchiranDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("chkIgnoreNoDisp")
-    public CheckBoxList getChkIgnoreNoDisp() {
-        return chkIgnoreNoDisp;
-    }
-
-    @JsonProperty("chkIgnoreNoDisp")
-    public void setChkIgnoreNoDisp(CheckBoxList chkIgnoreNoDisp) {
-        this.chkIgnoreNoDisp=chkIgnoreNoDisp;
-    }
-
-    @JsonProperty("lblDummy")
-    public Label getLblDummy() {
-        return lblDummy;
-    }
-
-    @JsonProperty("lblDummy")
-    public void setLblDummy(Label lblDummy) {
-        this.lblDummy=lblDummy;
-    }
-
     @JsonProperty("dgShikakuFuseigoIchiran")
     public DataGrid<dgShikakuFuseigoIchiran_Row> getDgShikakuFuseigoIchiran() {
         return dgShikakuFuseigoIchiran;

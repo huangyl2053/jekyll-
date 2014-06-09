@@ -28,9 +28,7 @@ public class ShikakuShuseiDiv extends Panel {
     @JsonProperty("txtHihoNo")
     private TextBoxCode txtHihoNo;
     @JsonProperty("txtShikibetsuCode")
-    private TextBoxShikibetsuCode txtShikibetsuCode;
-    @JsonProperty("txtAtenaKanaMeisho")
-    private TextBoxAtenaKanaMeisho txtAtenaKanaMeisho;
+    private TextBoxCode txtShikibetsuCode;
     @JsonProperty("txtJuminShubetsu")
     private TextBox txtJuminShubetsu;
     @JsonProperty("txtSeibetsu")
@@ -39,14 +37,18 @@ public class ShikakuShuseiDiv extends Panel {
     private TextBoxFlexibleDate txtUmareYmd;
     @JsonProperty("txtNenrei")
     private TextBox txtNenrei;
+    @JsonProperty("txtShimei")
+    private TextBox txtShimei;
     @JsonProperty("ShutokuKei")
     private ShutokuKeiDiv ShutokuKei;
     @JsonProperty("SoushitsuKei")
     private SoushitsuKeiDiv SoushitsuKei;
-    @JsonProperty("btnShikakuCancel")
-    private ButtonSubmit btnShikakuCancel;
-    @JsonProperty("btnShikakuSubmit")
-    private ButtonSubmit btnShikakuSubmit;
+    @JsonProperty("btnCancel")
+    private Button btnCancel;
+    @JsonProperty("btnCommit")
+    private Button btnCommit;
+    @JsonProperty("btnCommitDialog")
+    private ButtonDialog btnCommitDialog;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -75,23 +77,13 @@ public class ShikakuShuseiDiv extends Panel {
     }
 
     @JsonProperty("txtShikibetsuCode")
-    public TextBoxShikibetsuCode getTxtShikibetsuCode() {
+    public TextBoxCode getTxtShikibetsuCode() {
         return txtShikibetsuCode;
     }
 
     @JsonProperty("txtShikibetsuCode")
-    public void setTxtShikibetsuCode(TextBoxShikibetsuCode txtShikibetsuCode) {
+    public void setTxtShikibetsuCode(TextBoxCode txtShikibetsuCode) {
         this.txtShikibetsuCode=txtShikibetsuCode;
-    }
-
-    @JsonProperty("txtAtenaKanaMeisho")
-    public TextBoxAtenaKanaMeisho getTxtAtenaKanaMeisho() {
-        return txtAtenaKanaMeisho;
-    }
-
-    @JsonProperty("txtAtenaKanaMeisho")
-    public void setTxtAtenaKanaMeisho(TextBoxAtenaKanaMeisho txtAtenaKanaMeisho) {
-        this.txtAtenaKanaMeisho=txtAtenaKanaMeisho;
     }
 
     @JsonProperty("txtJuminShubetsu")
@@ -134,6 +126,16 @@ public class ShikakuShuseiDiv extends Panel {
         this.txtNenrei=txtNenrei;
     }
 
+    @JsonProperty("txtShimei")
+    public TextBox getTxtShimei() {
+        return txtShimei;
+    }
+
+    @JsonProperty("txtShimei")
+    public void setTxtShimei(TextBox txtShimei) {
+        this.txtShimei=txtShimei;
+    }
+
     @JsonProperty("ShutokuKei")
     public ShutokuKeiDiv getShutokuKei() {
         return ShutokuKei;
@@ -154,24 +156,34 @@ public class ShikakuShuseiDiv extends Panel {
         this.SoushitsuKei=SoushitsuKei;
     }
 
-    @JsonProperty("btnShikakuCancel")
-    public ButtonSubmit getBtnShikakuCancel() {
-        return btnShikakuCancel;
+    @JsonProperty("btnCancel")
+    public Button getBtnCancel() {
+        return btnCancel;
     }
 
-    @JsonProperty("btnShikakuCancel")
-    public void setBtnShikakuCancel(ButtonSubmit btnShikakuCancel) {
-        this.btnShikakuCancel=btnShikakuCancel;
+    @JsonProperty("btnCancel")
+    public void setBtnCancel(Button btnCancel) {
+        this.btnCancel=btnCancel;
     }
 
-    @JsonProperty("btnShikakuSubmit")
-    public ButtonSubmit getBtnShikakuSubmit() {
-        return btnShikakuSubmit;
+    @JsonProperty("btnCommit")
+    public Button getBtnCommit() {
+        return btnCommit;
     }
 
-    @JsonProperty("btnShikakuSubmit")
-    public void setBtnShikakuSubmit(ButtonSubmit btnShikakuSubmit) {
-        this.btnShikakuSubmit=btnShikakuSubmit;
+    @JsonProperty("btnCommit")
+    public void setBtnCommit(Button btnCommit) {
+        this.btnCommit=btnCommit;
+    }
+
+    @JsonProperty("btnCommitDialog")
+    public ButtonDialog getBtnCommitDialog() {
+        return btnCommitDialog;
+    }
+
+    @JsonProperty("btnCommitDialog")
+    public void setBtnCommitDialog(ButtonDialog btnCommitDialog) {
+        this.btnCommitDialog=btnCommitDialog;
     }
 
 }
