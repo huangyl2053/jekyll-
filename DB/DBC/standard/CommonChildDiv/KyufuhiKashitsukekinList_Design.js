@@ -113,6 +113,23 @@ var DBC;
         });
 
 
+        Object.defineProperty(KyufuhiKashitsukekinList_Design.prototype, "onClickAddButton", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onClick"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onClick"] = value;
+                } else {
+                    this.layout.items[0].items[0]["onClick"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
         KyufuhiKashitsukekinList_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
             Uz.JSControlUtil.registProperty("AddButtonVisible");
@@ -121,6 +138,7 @@ var DBC;
             Uz.JSControlUtil.registProperty("ListHeight");
             Uz.JSControlUtil.registProperty("ListOnSelect");
             Uz.JSControlUtil.registProperty("ListOnSelectByDblClick");
+            Uz.JSControlUtil.registProperty("onClickAddButton");
         };
 
         KyufuhiKashitsukekinList_Design.prototype.getEditablePropertyInfo = function () {
@@ -131,6 +149,7 @@ var DBC;
             editablePropertyInfo["ListHeight"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["height"];
             editablePropertyInfo["ListOnSelect"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onSelect"];
             editablePropertyInfo["ListOnSelectByDblClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onSelectByDblClick"];
+            editablePropertyInfo["onClickAddButton"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["onClick"];
 
             return editablePropertyInfo;
         };
@@ -158,8 +177,8 @@ var DBC;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "btnAdd",
-                            "text": "申請情報を追加する",
                             "onClick": "",
+                            "text": "申請情報を追加する",
                             "appearance": 0,
                             "imageFileUrl": "",
                             "imageWidth": "",
@@ -548,6 +567,11 @@ var DBC;
                     "publicChildFieldName": "dgKyufuhiKashitsukekinList",
                     "publicChildProperty": "onSelectByDblClick",
                     "newPropertyName": "ListOnSelectByDblClick"
+                },
+                {
+                    "publicChildFieldName": "btnAdd",
+                    "publicChildProperty": "onClick",
+                    "newPropertyName": "onClickAddButton"
                 }
             ],
             "dataPassingForDialog": [],
