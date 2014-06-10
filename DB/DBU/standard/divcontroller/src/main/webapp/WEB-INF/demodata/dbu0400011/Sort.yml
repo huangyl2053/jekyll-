@@ -1,0 +1,16 @@
+## YAML Template.
+---
+
+-  sort1: "保険者"
+   sort2: "住民種別"
+   sort3: "認定日"
+   sort4: "認定申請日"
+   sort5: "被保番号"
+   kaipage: "保険者"
+
+-  sort1: "保険者"
+   sort2: "住民種別"
+   sort3: "認定日"
+   sort4: "認定申請日"
+   sort5: "被保番号"
+   kaipage: "保険者"
