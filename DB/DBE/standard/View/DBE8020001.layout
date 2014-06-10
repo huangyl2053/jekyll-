@@ -870,7 +870,7 @@
      "items": [],
      "controlType": "Button",
      "width": "130",
-     "visible": true,
+     "visible": false,
      "displayNone": false,
      "disabled": false,
      "accessKey": "",
@@ -1191,8 +1191,8 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "onKeyPress": "",
-           "text": "平26.05.15",
-           "value": "2014/05/15",
+           "text": "",
+           "value": "",
            "permitCharactor": "./_-",
            "ymdKubun": 2,
            "displayFormat": 0
@@ -1252,8 +1252,8 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "onKeyPress": "",
-           "text": "平26.05.15",
-           "value": "2014/05/15",
+           "text": "",
+           "value": "",
            "permitCharactor": "./_-",
            "ymdKubun": 2,
            "displayFormat": 0
@@ -1357,8 +1357,8 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "onKeyPress": "",
-           "text": "平26.05.15",
-           "value": "2014/05/15",
+           "text": "",
+           "value": "",
            "permitCharactor": "./_-",
            "ymdKubun": 2,
            "displayFormat": 0
@@ -1418,8 +1418,8 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "onKeyPress": "",
-           "text": "平26.05.15",
-           "value": "2014/05/15",
+           "text": "",
+           "value": "",
            "permitCharactor": "./_-",
            "ymdKubun": 2,
            "displayFormat": 0
@@ -1787,8 +1787,8 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "onKeyPress": "",
-           "text": "平26.05.15",
-           "value": "2014/05/15",
+           "text": "",
+           "value": "",
            "permitCharactor": "./_-",
            "ymdKubun": 2,
            "displayFormat": 0
@@ -1848,8 +1848,8 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "onKeyPress": "",
-           "text": "平26.05.15",
-           "value": "2014/05/15",
+           "text": "",
+           "value": "",
            "permitCharactor": "./_-",
            "ymdKubun": 2,
            "displayFormat": 0
@@ -1909,8 +1909,8 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "onKeyPress": "",
-           "text": "平26.05.15",
-           "value": "2014/05/15",
+           "text": "",
+           "value": "",
            "permitCharactor": "./_-",
            "ymdKubun": 2,
            "displayFormat": 0
@@ -1970,8 +1970,8 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "onKeyPress": "",
-           "text": "平26.05.15",
-           "value": "2014/05/15",
+           "text": "",
+           "value": "",
            "permitCharactor": "./_-",
            "ymdKubun": 2,
            "displayFormat": 0
@@ -2031,8 +2031,8 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "onKeyPress": "",
-           "text": "平26.05.15",
-           "value": "2014/05/15",
+           "text": "",
+           "value": "",
            "permitCharactor": "./_-",
            "ymdKubun": 2,
            "displayFormat": 0
@@ -2092,8 +2092,8 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "onKeyPress": "",
-           "text": "平26.05.15",
-           "value": "2014/05/15",
+           "text": "",
+           "value": "",
            "permitCharactor": "./_-",
            "ymdKubun": 2,
            "displayFormat": 0
@@ -2153,8 +2153,8 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "onKeyPress": "",
-           "text": "平26.05.15",
-           "value": "2014/05/15",
+           "text": "",
+           "value": "",
            "permitCharactor": "./_-",
            "ymdKubun": 2,
            "displayFormat": 0
@@ -2214,8 +2214,8 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "onKeyPress": "",
-           "text": "平26.05.15",
-           "value": "2014/05/15",
+           "text": "",
+           "value": "",
            "permitCharactor": "./_-",
            "ymdKubun": 2,
            "displayFormat": 0
@@ -2275,8 +2275,8 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "onKeyPress": "",
-           "text": "平26.05.15",
-           "value": "2014/05/15",
+           "text": "",
+           "value": "",
            "permitCharactor": "./_-",
            "ymdKubun": 2,
            "displayFormat": 0
@@ -2336,8 +2336,8 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "onKeyPress": "",
-           "text": "平26.05.15",
-           "value": "2014/05/15",
+           "text": "",
+           "value": "",
            "permitCharactor": "./_-",
            "ymdKubun": 2,
            "displayFormat": 0
@@ -2397,8 +2397,8 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "onKeyPress": "",
-           "text": "平26.05.15",
-           "value": "2014/05/15",
+           "text": "",
+           "value": "",
            "permitCharactor": "./_-",
            "ymdKubun": 2,
            "displayFormat": 0
@@ -2458,8 +2458,8 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "onKeyPress": "",
-           "text": "平26.05.15",
-           "value": "2014/05/15",
+           "text": "",
+           "value": "",
            "permitCharactor": "./_-",
            "ymdKubun": 2,
            "displayFormat": 0
@@ -2519,8 +2519,8 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "onKeyPress": "",
-           "text": "平26.05.15",
-           "value": "2014/05/15",
+           "text": "",
+           "value": "",
            "permitCharactor": "./_-",
            "ymdKubun": 2,
            "displayFormat": 0
@@ -2580,8 +2580,8 @@
            "isPrivateInfo": false,
            "isPassword": false,
            "onKeyPress": "",
-           "text": "平26.05.15",
-           "value": "2014/05/15",
+           "text": "",
+           "value": "",
            "permitCharactor": "./_-",
            "ymdKubun": 2,
            "displayFormat": 0
@@ -3019,7 +3019,7 @@
              "suggest": [],
              "value": "",
              "permitCharactor": "",
-             "formatLength": 1
+             "formatLength": "6"
             },
             {
              "fieldName": "txtIryoHokenshaMei",
@@ -3614,8 +3614,8 @@
              "isPrivateInfo": false,
              "isPassword": false,
              "onKeyPress": "",
-             "text": "平26.05.15",
-             "value": "2014/05/15",
+             "text": "",
+             "value": "",
              "permitCharactor": "./_-",
              "ymdKubun": 2,
              "displayFormat": 0
@@ -3654,8 +3654,8 @@
              "isPrivateInfo": false,
              "isPassword": false,
              "onKeyPress": "",
-             "text": "平26.05.15",
-             "value": "2014/05/15",
+             "text": "",
+             "value": "",
              "permitCharactor": "./_-",
              "ymdKubun": 2,
              "displayFormat": 0
@@ -3737,8 +3737,8 @@
              "isPrivateInfo": false,
              "isPassword": false,
              "onKeyPress": "",
-             "text": "平26.05.15",
-             "value": "2014/05/15",
+             "text": "",
+             "value": "",
              "permitCharactor": "./_-",
              "ymdKubun": 2,
              "displayFormat": 0
@@ -3777,8 +3777,8 @@
              "isPrivateInfo": false,
              "isPassword": false,
              "onKeyPress": "",
-             "text": "平26.05.15",
-             "value": "2014/05/15",
+             "text": "",
+             "value": "",
              "permitCharactor": "./_-",
              "ymdKubun": 2,
              "displayFormat": 0
@@ -3817,8 +3817,8 @@
              "isPrivateInfo": false,
              "isPassword": false,
              "onKeyPress": "",
-             "text": "平26.05.15",
-             "value": "2014/05/15",
+             "text": "",
+             "value": "",
              "permitCharactor": "./_-",
              "ymdKubun": 2,
              "displayFormat": 0
@@ -4074,8 +4074,8 @@
              "isPrivateInfo": false,
              "isPassword": false,
              "onKeyPress": "",
-             "text": "平26.05.15",
-             "value": "2014/05/15",
+             "text": "",
+             "value": "",
              "permitCharactor": "./_-",
              "ymdKubun": 2,
              "displayFormat": 0
@@ -4157,8 +4157,8 @@
              "isPrivateInfo": false,
              "isPassword": false,
              "onKeyPress": "",
-             "text": "平26.05.15",
-             "value": "2014/05/15",
+             "text": "",
+             "value": "",
              "permitCharactor": "./_-",
              "ymdKubun": 2,
              "displayFormat": 0
@@ -4682,8 +4682,8 @@
                  "isPrivateInfo": false,
                  "isPassword": false,
                  "onKeyPress": "",
-                 "text": "平26.05.15",
-                 "value": "2014/05/15",
+                 "text": "",
+                 "value": "",
                  "permitCharactor": "./_-",
                  "ymdKubun": 2,
                  "displayFormat": 0
@@ -4730,7 +4730,7 @@
                  "suggest": [],
                  "value": "",
                  "permitCharactor": "",
-                 "formatLength": 1
+                 "formatLength": "6"
                 },
                 {
                  "fieldName": "txtKonkaiShinkiChosaJissiChikuMei",
@@ -4817,7 +4817,7 @@
                  "suggest": [],
                  "value": "",
                  "permitCharactor": "",
-                 "formatLength": 1
+                 "formatLength": "10"
                 },
                 {
                  "fieldName": "txtKonkaiShinkiChosakikanMei",
@@ -4947,7 +4947,7 @@
                  "suggest": [],
                  "value": "",
                  "permitCharactor": "",
-                 "formatLength": 1
+                 "formatLength": "8"
                 },
                 {
                  "fieldName": "txtKonkaiShinkiChosainMei",
@@ -5221,8 +5221,8 @@
                  "isPrivateInfo": false,
                  "isPassword": false,
                  "onKeyPress": "",
-                 "text": "平26.05.15",
-                 "value": "2014/05/15",
+                 "text": "",
+                 "value": "",
                  "permitCharactor": "./_-",
                  "ymdKubun": 2,
                  "displayFormat": 0
@@ -5269,7 +5269,7 @@
                  "suggest": [],
                  "value": "",
                  "permitCharactor": "",
-                 "formatLength": 1
+                 "formatLength": "6"
                 },
                 {
                  "fieldName": "txtKonkaiSaiChosaJissiChikuMei",
@@ -5356,7 +5356,7 @@
                  "suggest": [],
                  "value": "",
                  "permitCharactor": "",
-                 "formatLength": 1
+                 "formatLength": "10"
                 },
                 {
                  "fieldName": "txtKonkaiSaiChosakikanMei",
@@ -5486,7 +5486,7 @@
                  "suggest": [],
                  "value": "",
                  "permitCharactor": "",
-                 "formatLength": 1
+                 "formatLength": "8"
                 },
                 {
                  "fieldName": "txtKonkaiSaiChosainMei",
@@ -5848,8 +5848,8 @@
                  "isPrivateInfo": false,
                  "isPassword": false,
                  "onKeyPress": "",
-                 "text": "平26.05.15",
-                 "value": "2014/05/15",
+                 "text": "",
+                 "value": "",
                  "permitCharactor": "./_-",
                  "ymdKubun": 2,
                  "displayFormat": 0
@@ -5896,7 +5896,7 @@
                  "suggest": [],
                  "value": "",
                  "permitCharactor": "",
-                 "formatLength": 1
+                 "formatLength": "6"
                 },
                 {
                  "fieldName": "txtZenkaiShinkiChosaJissiChikuMei",
@@ -5983,7 +5983,7 @@
                  "suggest": [],
                  "value": "",
                  "permitCharactor": "",
-                 "formatLength": 1
+                 "formatLength": "10"
                 },
                 {
                  "fieldName": "txtZenkaiShinkiChosakikanMei",
@@ -6113,7 +6113,7 @@
                  "suggest": [],
                  "value": "",
                  "permitCharactor": "",
-                 "formatLength": 1
+                 "formatLength": "8"
                 },
                 {
                  "fieldName": "txtZenkaiShinkiChosainMei",
@@ -6387,8 +6387,8 @@
                  "isPrivateInfo": false,
                  "isPassword": false,
                  "onKeyPress": "",
-                 "text": "平26.05.15",
-                 "value": "2014/05/15",
+                 "text": "",
+                 "value": "",
                  "permitCharactor": "./_-",
                  "ymdKubun": 2,
                  "displayFormat": 0
@@ -6435,7 +6435,7 @@
                  "suggest": [],
                  "value": "",
                  "permitCharactor": "",
-                 "formatLength": 1
+                 "formatLength": "6"
                 },
                 {
                  "fieldName": "txtZenkaiSaiChosaJissiChikuMei",
@@ -6522,7 +6522,7 @@
                  "suggest": [],
                  "value": "",
                  "permitCharactor": "",
-                 "formatLength": 1
+                 "formatLength": "10"
                 },
                 {
                  "fieldName": "txtZenkaiSaiChosakikanMei",
@@ -6652,7 +6652,7 @@
                  "suggest": [],
                  "value": "",
                  "permitCharactor": "",
-                 "formatLength": 1
+                 "formatLength": "8"
                 },
                 {
                  "fieldName": "txtZenkaiSaiChosainMei",
@@ -7847,7 +7847,7 @@
             "tplTokkiJikoImage"
            ],
            "isDraggable": false,
-           "selectedItemFieldName": "tplTokkiJikoIchiran",
+           "selectedItemFieldName": "tplHomonChosaIraiJoho",
            "initialTab": 0
           }
          ],
@@ -8087,8 +8087,8 @@
                  "isPrivateInfo": false,
                  "isPassword": false,
                  "onKeyPress": "",
-                 "text": "平26.05.15",
-                 "value": "2014/05/15",
+                 "text": "",
+                 "value": "",
                  "permitCharactor": "./_-",
                  "ymdKubun": 2,
                  "displayFormat": 0
@@ -8127,8 +8127,8 @@
                  "isPrivateInfo": false,
                  "isPassword": false,
                  "onKeyPress": "",
-                 "text": "平26.05.15",
-                 "value": "2014/05/15",
+                 "text": "",
+                 "value": "",
                  "permitCharactor": "./_-",
                  "ymdKubun": 2,
                  "displayFormat": 0
@@ -8175,7 +8175,7 @@
                  "suggest": [],
                  "value": "",
                  "permitCharactor": "",
-                 "formatLength": 1
+                 "formatLength": "8"
                 },
                 {
                  "fieldName": "txtKonkaiShujiiMei",
@@ -8262,7 +8262,7 @@
                  "suggest": [],
                  "value": "",
                  "permitCharactor": "",
-                 "formatLength": 1
+                 "formatLength": "10"
                 },
                 {
                  "fieldName": "txtKonkaiIryokikanMei",
@@ -8773,8 +8773,8 @@
                  "isPrivateInfo": false,
                  "isPassword": false,
                  "onKeyPress": "",
-                 "text": "平26.05.15",
-                 "value": "2014/05/15",
+                 "text": "",
+                 "value": "",
                  "permitCharactor": "./_-",
                  "ymdKubun": 2,
                  "displayFormat": 0
@@ -8813,8 +8813,8 @@
                  "isPrivateInfo": false,
                  "isPassword": false,
                  "onKeyPress": "",
-                 "text": "平26.05.15",
-                 "value": "2014/05/15",
+                 "text": "",
+                 "value": "",
                  "permitCharactor": "./_-",
                  "ymdKubun": 2,
                  "displayFormat": 0
@@ -8861,7 +8861,7 @@
                  "suggest": [],
                  "value": "",
                  "permitCharactor": "",
-                 "formatLength": 1
+                 "formatLength": "8"
                 },
                 {
                  "fieldName": "txtZenkaiShujiiMei",
@@ -8948,7 +8948,7 @@
                  "suggest": [],
                  "value": "",
                  "permitCharactor": "",
-                 "formatLength": 1
+                 "formatLength": "10"
                 },
                 {
                  "fieldName": "txtZenkaiIryokikanMei",
@@ -9935,7 +9935,7 @@
                  "suggest": [],
                  "value": "",
                  "permitCharactor": "",
-                 "formatLength": 1
+                 "formatLength": "3"
                 },
                 {
                  "fieldName": "txtShinsakaiKaisaiYoteibi",
@@ -9971,8 +9971,8 @@
                  "isPrivateInfo": false,
                  "isPassword": false,
                  "onKeyPress": "",
-                 "text": "平26.05.15",
-                 "value": "2014/05/15",
+                 "text": "",
+                 "value": "",
                  "permitCharactor": "./_-",
                  "ymdKubun": 2,
                  "displayFormat": 0
@@ -10062,7 +10062,7 @@
                  "suggest": [],
                  "value": "",
                  "permitCharactor": "",
-                 "displayFormat": 0,
+                 "displayFormat": 1,
                  "timeKubun": 1
                 },
                 {
@@ -10189,7 +10189,7 @@
                  "suggest": [],
                  "value": "",
                  "permitCharactor": "",
-                 "displayFormat": 0,
+                 "displayFormat": 1,
                  "timeKubun": 1
                 },
                 {
@@ -10265,8 +10265,8 @@
                  "isPrivateInfo": false,
                  "isPassword": false,
                  "onKeyPress": "",
-                 "text": "平26.05.15",
-                 "value": "2014/05/15",
+                 "text": "",
+                 "value": "",
                  "permitCharactor": "./_-",
                  "ymdKubun": 2,
                  "displayFormat": 0
@@ -10320,7 +10320,7 @@
                  "fieldName": "dgShinsakaiIinJoho",
                  "items": [],
                  "controlType": "DataGrid",
-                 "width": "908",
+                 "width": "650",
                  "visible": true,
                  "displayNone": false,
                  "disabled": false,
@@ -10338,10 +10338,14 @@
                  "gridSetting": {
                   "rowHeight": 25,
                   "isMultiSelectable": false,
-                  "isShowFooter": true,
+                  "isShowHeader": true,
+                  "isShowFooter": false,
                   "isShowFilter": false,
                   "isShowFilterButton": false,
                   "isShowRowState": false,
+                  "isShowSelectButtonColumn": false,
+                  "isShowModifyButtonColumn": false,
+                  "isShowDeleteButtonColumn": false,
                   "header": {
                    "combineColumns": [],
                    "frozenColumn": "",
@@ -10397,38 +10401,6 @@
                     "sortKey": "gogitaichoKbn"
                    },
                    {
-                    "columnName": "出席<br>時間",
-                    "dataName": "shussekijikan",
-                    "toolTip": "",
-                    "bgColor": 0,
-                    "width": 65,
-                    "visible": true,
-                    "cellType": 0,
-                    "cellDetails": {
-                     "cellType": 0
-                    },
-                    "align": 1,
-                    "resize": true,
-                    "isPrivateInfo": false,
-                    "sortKey": "shussekijikan"
-                   },
-                   {
-                    "columnName": "退席<br>時間",
-                    "dataName": "taisekijikan",
-                    "toolTip": "",
-                    "bgColor": 0,
-                    "width": 65,
-                    "visible": true,
-                    "cellType": 0,
-                    "cellDetails": {
-                     "cellType": 0
-                    },
-                    "align": 1,
-                    "resize": true,
-                    "isPrivateInfo": false,
-                    "sortKey": "taisekijikan"
-                   },
-                   {
                     "columnName": "出欠<br>区分",
                     "dataName": "shukketsuKbn",
                     "toolTip": "",
@@ -10441,34 +10413,6 @@
                     "resize": true,
                     "isPrivateInfo": false,
                     "sortKey": "shukketsuKbn"
-                   },
-                   {
-                    "columnName": "遅刻<br>有無",
-                    "dataName": "chikokuUmu",
-                    "toolTip": "",
-                    "bgColor": 0,
-                    "width": 65,
-                    "visible": true,
-                    "cellType": 0,
-                    "cellDetails": null,
-                    "align": 1,
-                    "resize": true,
-                    "isPrivateInfo": false,
-                    "sortKey": "chikokuUmu"
-                   },
-                   {
-                    "columnName": "早退<br>有無",
-                    "dataName": "sotaiUmu",
-                    "toolTip": "",
-                    "bgColor": 0,
-                    "width": 65,
-                    "visible": true,
-                    "cellType": 0,
-                    "cellDetails": null,
-                    "align": 1,
-                    "resize": true,
-                    "isPrivateInfo": false,
-                    "sortKey": "sotaiUmu"
                    }
                   ]
                  },
@@ -10566,8 +10510,8 @@
                  "isPrivateInfo": false,
                  "isPassword": false,
                  "onKeyPress": "",
-                 "text": "平26.05.15",
-                 "value": "2014/05/15",
+                 "text": "",
+                 "value": "",
                  "permitCharactor": "./_-",
                  "ymdKubun": 2,
                  "displayFormat": 0
@@ -10614,7 +10558,7 @@
                  "suggest": [],
                  "value": "",
                  "permitCharactor": "",
-                 "displayFormat": 0,
+                 "displayFormat": 1,
                  "timeKubun": 1
                 },
                 {
@@ -10651,8 +10595,8 @@
                  "isPrivateInfo": false,
                  "isPassword": false,
                  "onKeyPress": "",
-                 "text": "平26.05.15",
-                 "value": "2014/05/15",
+                 "text": "",
+                 "value": "",
                  "permitCharactor": "./_-",
                  "ymdKubun": 2,
                  "displayFormat": 0
@@ -10699,7 +10643,7 @@
                  "suggest": [],
                  "value": "",
                  "permitCharactor": "",
-                 "displayFormat": 0,
+                 "displayFormat": 1,
                  "timeKubun": 1
                 },
                 {
@@ -10744,7 +10688,7 @@
                  "suggest": [],
                  "value": "",
                  "permitCharactor": "",
-                 "displayFormat": 0,
+                 "displayFormat": 1,
                  "timeKubun": 1
                 }
                ],
@@ -11071,52 +11015,7 @@
                  "suggest": [],
                  "value": "",
                  "permitCharactor": ""
-                }
-               ],
-               "controlType": "Panel",
-               "width": "970",
-               "visible": true,
-               "displayNone": false,
-               "disabled": false,
-               "accessKey": "",
-               "nextFocusFieldName": "",
-               "wrap": true,
-               "dependencies": [],
-               "float": 0,
-               "toolTip": "",
-               "authorityMode": 0,
-               "marginLeft": "XS",
-               "marginRight": "XS",
-               "selectControlID": "KonkaiShinsaKekka",
-               "onLoad": "",
-               "title": "",
-               "isOpen": true,
-               "canOpenAndClose": true,
-               "postParameterPanelNames": [
-                {
-                 "postParameterPanelNames": "IchijiHantei"
-                }
-               ],
-               "requestSettings": [],
-               "hiddenInput": [],
-               "onOpen": "",
-               "onClose": "",
-               "session": {},
-               "marginTop": "Default",
-               "marginBottom": "Default",
-               "eraseBorderTop": false,
-               "eraseBorderBottom": false,
-               "eraseBorderRight": false,
-               "eraseBorderLeft": false,
-               "backgroundColor": 0,
-               "widthAuto": false,
-               "panelDisplay": 0,
-               "isGroupBox": false,
-               "readOnly": false
-              },
-              {
-               "fieldName": "NinteiTsuchiJoho",
-               "items": [
+                },
                 {
                  "fieldName": "txtTsuchiKbn",
                  "items": [],
@@ -11140,7 +11039,7 @@
                  "required": false,
                  "labelLText": "通知区分",
                  "labelRText": "",
-                 "labelLWidth": "70",
+                 "labelLWidth": "115",
                  "labelRWidth": "S",
                  "labelLAlign": 2,
                  "labelRAlign": 0,
@@ -11194,8 +11093,8 @@
                  "isPrivateInfo": false,
                  "isPassword": false,
                  "onKeyPress": "",
-                 "text": "平26.05.15",
-                 "value": "2014/05/15",
+                 "text": "",
+                 "value": "",
                  "permitCharactor": "./_-",
                  "ymdKubun": 2,
                  "displayFormat": 0
@@ -11234,8 +11133,8 @@
                  "isPrivateInfo": false,
                  "isPassword": false,
                  "onKeyPress": "",
-                 "text": "平26.05.15",
-                 "value": "2014/05/15",
+                 "text": "",
+                 "value": "",
                  "permitCharactor": "./_-",
                  "ymdKubun": 2,
                  "displayFormat": 0
@@ -11297,11 +11196,54 @@
                  "isPrivateInfo": false,
                  "isPassword": false,
                  "onKeyPress": "",
-                 "text": "平26.05.15",
-                 "value": "2014/05/15",
+                 "text": "",
+                 "value": "",
                  "permitCharactor": "./_-",
                  "ymdKubun": 2,
                  "displayFormat": 0
+                },
+                {
+                 "fieldName": "txtNinteiKikan",
+                 "items": [],
+                 "controlType": "TextBox",
+                 "width": "60",
+                 "visible": true,
+                 "displayNone": false,
+                 "disabled": false,
+                 "accessKey": "",
+                 "nextFocusFieldName": "",
+                 "wrap": false,
+                 "dependencies": [],
+                 "float": 0,
+                 "toolTip": "",
+                 "authorityMode": 0,
+                 "marginLeft": "0",
+                 "marginRight": "XS",
+                 "selectControlID": "txtNinteiKikan_core",
+                 "readOnly": true,
+                 "onChange": "",
+                 "required": false,
+                 "labelLText": "",
+                 "labelRText": "",
+                 "labelLWidth": "115",
+                 "labelRWidth": "S",
+                 "labelLAlign": 2,
+                 "labelRAlign": 0,
+                 "onFocus": "",
+                 "onBlur": "",
+                 "maxLength": 100000000,
+                 "minLength": 0,
+                 "textAlign": 1,
+                 "placeHolder": "",
+                 "textKind": 0,
+                 "isPrivateInfo": false,
+                 "isPassword": false,
+                 "isComboBox": false,
+                 "onKeyPress": "",
+                 "text": "",
+                 "suggest": [],
+                 "value": "",
+                 "permitCharactor": ""
                 },
                 {
                  "fieldName": "txtTsuchiRiyu",
@@ -11313,7 +11255,7 @@
                  "disabled": false,
                  "accessKey": "",
                  "nextFocusFieldName": "",
-                 "wrap": false,
+                 "wrap": true,
                  "dependencies": [],
                  "float": 0,
                  "toolTip": "",
@@ -11326,7 +11268,7 @@
                  "required": false,
                  "labelLText": "認定理由",
                  "labelRText": "",
-                 "labelLWidth": "254",
+                 "labelLWidth": "300",
                  "labelRWidth": "S",
                  "labelLAlign": 2,
                  "labelRAlign": 0,
@@ -11361,9 +11303,9 @@
                "authorityMode": 0,
                "marginLeft": "XS",
                "marginRight": "XS",
-               "selectControlID": "NinteiTsuchiJoho",
+               "selectControlID": "KonkaiShinsaKekka",
                "onLoad": "",
-               "title": "認定通知情報",
+               "title": "",
                "isOpen": true,
                "canOpenAndClose": true,
                "postParameterPanelNames": [
@@ -11425,8 +11367,8 @@
                  "isPrivateInfo": false,
                  "isPassword": false,
                  "onKeyPress": "",
-                 "text": "平26.05.15",
-                 "value": "2014/05/15",
+                 "text": "",
+                 "value": "",
                  "permitCharactor": "./_-",
                  "ymdKubun": 2,
                  "displayFormat": 0
@@ -11821,7 +11763,7 @@
         "tplShinsakai"
        ],
        "isDraggable": false,
-       "selectedItemFieldName": "tplNinteiChosa",
+       "selectedItemFieldName": "tplKihonJoho",
        "initialTab": 0
       }
      ],
@@ -11973,38 +11915,7 @@
      "visibleDiv": "ShinseishaKensaku",
      "panelState": "visible",
      "fixedDiv": "No"
-    }
-   ],
-   "supplementInfo": "",
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "btnShinseishaKensaku",
-     "event": "onClick",
-     "transition": "検索結果一覧"
     },
-    {
-     "fieldName": "btnReShinseishaKensaku",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgKensakuKekka[select]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnReturn",
-     "event": "onClick",
-     "transition": ""
-    }
-   ]
-  },
-  {
-   "order": "2",
-   "stateName": "検索結果一覧",
-   "showWizard": false,
-   "visibleDivs": [
     {
      "visibleDiv": "ShinseishaKensakuResultIchiran",
      "panelState": "visible",
@@ -12015,14 +11926,9 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "btnShinseishaKensaku",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "btnReShinseishaKensaku",
      "event": "onClick",
-     "transition": "申請者検索"
+     "transition": ""
     },
     {
      "fieldName": "dgKensakuKekka[select]",
@@ -12037,7 +11943,7 @@
    ]
   },
   {
-   "order": "3",
+   "order": "2",
    "stateName": "個人状況照会",
    "showWizard": false,
    "visibleDivs": [
@@ -12187,11 +12093,6 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "NinteiTsuchiJoho",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
      "visibleDiv": "ZenkaiShinsaKekka",
      "panelState": "visible",
      "fixedDiv": "No"
@@ -12209,11 +12110,6 @@
    ],
    "validation": {},
    "events": [
-    {
-     "fieldName": "btnShinseishaKensaku",
-     "event": "onClick",
-     "transition": ""
-    },
     {
      "fieldName": "btnReShinseishaKensaku",
      "event": "onClick",

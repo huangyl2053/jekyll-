@@ -5,15 +5,20 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.KojinJokyoShokaiDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.dgShinsakaiIinJoho_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgIchijiHanteiKeikokuCode_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  * 個人状況照会Divを制御します。
@@ -71,6 +76,12 @@ public class KojinJokyoShokai {
 
         //認定調査タブの設定
         setNinteiChosaTab(panel);
+
+        //意見書タブの設定
+        setIkenshoTab(panel);
+
+        //審査会タブの設定
+        setShinsakaiTab(panel);
 
     }
 
@@ -641,7 +652,7 @@ public class KojinJokyoShokai {
                 getKonkaiHomonChosaIraiJoho().getTxtKonkaiSaiChosaBashoKbn().setValue(
                         new RString(mapKonkaiChosaIraiJoho.get("konkaiSaiChosaBashoKbn").toString()));
 
-        if (mapKonkaiChosaIraiJoho.get("konkaiShinkiChosaJissibi").toString().isEmpty()) {
+        if (mapKonkaiChosaIraiJoho.get("konkaiSaiChosaJissibi").toString().isEmpty()) {
             panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
                     getTabNinteiChosaKojinShokai().getTplHomonChosaIraiJoho().
                     getKonkaiHomonChosaIraiJoho().getTxtKonkaiSaiChosaJissibi().clearValue();
@@ -874,4 +885,686 @@ public class KojinJokyoShokai {
                 setValue(new RString(mapTokkiJikoIchiranJoho.get("tokkiChosaKomokuNaiyo2").toString()));
 
     }
+
+    /*
+     *意見書情報タブを設定します。
+     */
+    private void setIkenshoTab(KojinJokyoShokaiDiv panel) {
+
+        List<HashMap> IkenshoList = YamlLoader.FOR_DBE.loadAsList(
+                new RString("dbe8020001/Ikensho.yml"));
+
+        //今回主治医依頼情報の設定
+        HashMap mapKonkaiShujiiIraiJoho = IkenshoList.get(0);
+        setKonkaiShujiiIraiJoho(panel, mapKonkaiShujiiIraiJoho);
+
+        //前回主治医依頼情報の設定
+        HashMap mapZenkaiShujiiIraiJoho = IkenshoList.get(1);
+        setZenkaiShujiiIraiJoho(panel, mapZenkaiShujiiIraiJoho);
+
+    }
+
+    /*
+     *今回主治医依頼情報を設定します。
+     */
+    private void setKonkaiShujiiIraiJoho(KojinJokyoShokaiDiv panel, HashMap mapKonkaiShujiiIraiJoho) {
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                getKonkaiShujiiIraiJoho().getTxtKonkaiIkenshoSakuseiIraiRirekiNo().setValue(
+                        new RString(mapKonkaiShujiiIraiJoho.get("konkaiIkenshoSakuseiIraiRirekiNo").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                getKonkaiShujiiIraiJoho().getTxtKonkaiIkenshoIraiKbn().setValue(
+                        new RString(mapKonkaiShujiiIraiJoho.get("konkaiIkenshoIraiKbn").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                getKonkaiShujiiIraiJoho().getTxtKonkaiSakuseiKaisu().setValue(
+                        new RString(mapKonkaiShujiiIraiJoho.get("konkaiSakuseiKaisu").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                getKonkaiShujiiIraiJoho().getTxtKonkaiShujiiShiteiiKbn().setValue(
+                        new RString(mapKonkaiShujiiIraiJoho.get("konkaiShujiiShiteiiKbn").toString()));
+
+        if (mapKonkaiShujiiIraiJoho.get("konkaiIkenshoIraibi").toString().isEmpty()) {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                    getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                    getKonkaiShujiiIraiJoho().getTxtKonkaiIkenshoIraibi().clearValue();
+        } else {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                    getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                    getKonkaiShujiiIraiJoho().getTxtKonkaiIkenshoIraibi().setValue(
+                            new RDate(mapKonkaiShujiiIraiJoho.get("konkaiIkenshoIraibi").toString()));
+        }
+
+        if (mapKonkaiShujiiIraiJoho.get("konkaiIkenshoKinyubi").toString().isEmpty()) {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                    getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                    getKonkaiShujiiIraiJoho().getTxtKonkaiIkenshoKinyubi().clearValue();
+        } else {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                    getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                    getKonkaiShujiiIraiJoho().getTxtKonkaiIkenshoKinyubi().setValue(
+                            new RDate(mapKonkaiShujiiIraiJoho.get("konkaiIkenshoKinyubi").toString()));
+        }
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                getKonkaiShujiiIraiJoho().getTxtKonkaiShujiiCode().setValue(
+                        new RString(mapKonkaiShujiiIraiJoho.get("konkaiShujiiCode").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                getKonkaiShujiiIraiJoho().getTxtKonkaiShujiiMei().setValue(
+                        new RString(mapKonkaiShujiiIraiJoho.get("konkaiShujiiMei").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                getKonkaiShujiiIraiJoho().getTxtKonkaiIryokikanCode().setValue(
+                        new RString(mapKonkaiShujiiIraiJoho.get("konkaiIryokikanCode").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                getKonkaiShujiiIraiJoho().getTxtKonkaiIryokikanMei().setValue(
+                        new RString(mapKonkaiShujiiIraiJoho.get("konkaiIryokikanMei").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                getKonkaiShujiiIraiJoho().getTxtKonkaiIryokikanYubinNo().setValue(
+                        new YubinNo(mapKonkaiShujiiIraiJoho.get("konkaiIryokikanYubinNo").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                getKonkaiShujiiIraiJoho().getTxtKonkaiIryokikanJusho().setValue(
+                        new RString(mapKonkaiShujiiIraiJoho.get("konkaiIryokikanJusho").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                getKonkaiShujiiIraiJoho().getTxtKonkaiIryokikanTel().setValue(
+                        new RString(mapKonkaiShujiiIraiJoho.get("konkaiIryokikanTel").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                getKonkaiShujiiIraiJoho().getTxtKonkaiIryokikanFax().setValue(
+                        new RString(mapKonkaiShujiiIraiJoho.get("konkaiIryokikanFax").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                getKonkaiShujiiIraiJoho().getTxtKonkaiIryokikanDaihyoshaShimei().setValue(
+                        new RString(mapKonkaiShujiiIraiJoho.get("konkaiIryokikanDaihyoshaShimei").toString()));
+
+    }
+
+    /*
+     *前回主治医依頼情報を設定します。
+     */
+    private void setZenkaiShujiiIraiJoho(KojinJokyoShokaiDiv panel, HashMap mapZenkaiShujiiIraiJoho) {
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                getZenkaiShujiiIraiJoho().getTxtZenkaiIkenshoSakuseiIraiRirekiNo().setValue(
+                        new RString(mapZenkaiShujiiIraiJoho.get("zenkaiIkenshoSakuseiIraiRirekiNo").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                getZenkaiShujiiIraiJoho().getTxtZenkaiIkenshoIraiKbn().setValue(
+                        new RString(mapZenkaiShujiiIraiJoho.get("zenkaiIkenshoIraiKbn").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                getZenkaiShujiiIraiJoho().getTxtZenkaiSakuseiKaisua().setValue(
+                        new RString(mapZenkaiShujiiIraiJoho.get("zenkaiSakuseiKaisu").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                getZenkaiShujiiIraiJoho().getTxtZenkaiShujiiShiteiiKbn().setValue(
+                        new RString(mapZenkaiShujiiIraiJoho.get("zenkaiShujiiShiteiiKbn").toString()));
+
+        if (mapZenkaiShujiiIraiJoho.get("zenkaiIkenshoIraibi").toString().isEmpty()) {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                    getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                    getZenkaiShujiiIraiJoho().getTxtZenkaiIkenshoIraibi().clearValue();
+        } else {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                    getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                    getZenkaiShujiiIraiJoho().getTxtZenkaiIkenshoIraibi().setValue(
+                            new RDate(mapZenkaiShujiiIraiJoho.get("zenkaiIkenshoIraibi").toString()));
+        }
+
+        if (mapZenkaiShujiiIraiJoho.get("zenkaiIkenshoKinyubi").toString().isEmpty()) {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                    getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                    getZenkaiShujiiIraiJoho().getTxtZenkaiIkenshoKinyubi().clearValue();
+        } else {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                    getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                    getZenkaiShujiiIraiJoho().getTxtZenkaiIkenshoKinyubi().setValue(
+                            new RDate(mapZenkaiShujiiIraiJoho.get("zenkaiIkenshoKinyubi").toString()));
+        }
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                getZenkaiShujiiIraiJoho().getTxtZenkaiShujiiCode().setValue(
+                        new RString(mapZenkaiShujiiIraiJoho.get("zenkaiShujiiCode").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                getZenkaiShujiiIraiJoho().getTxtZenkaiShujiiMei().setValue(
+                        new RString(mapZenkaiShujiiIraiJoho.get("zenkaiShujiiMei").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                getZenkaiShujiiIraiJoho().getTxtZenkaiIryokikanCode().setValue(
+                        new RString(mapZenkaiShujiiIraiJoho.get("zenkaiIryokikanCode").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                getZenkaiShujiiIraiJoho().getTxtZenkaiIryokikanMei().setValue(
+                        new RString(mapZenkaiShujiiIraiJoho.get("zenkaiIryokikanMei").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                getZenkaiShujiiIraiJoho().getTxtZenkaiIryokikanYubinNo().setValue(
+                        new YubinNo(mapZenkaiShujiiIraiJoho.get("zenkaiIryokikanYubinNo").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                getZenkaiShujiiIraiJoho().getTxtZenkaiIryokikanJusho().setValue(
+                        new RString(mapZenkaiShujiiIraiJoho.get("zenkaiIryokikanJusho").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                getZenkaiShujiiIraiJoho().getTxtZenkaiIryokikanTel().setValue(
+                        new RString(mapZenkaiShujiiIraiJoho.get("zenkaiIryokikanTel").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                getZenkaiShujiiIraiJoho().getTxtZenkaiIryokikanFax().setValue(
+                        new RString(mapZenkaiShujiiIraiJoho.get("zenkaiIryokikanFax").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplIkensho().
+                getTabIkenshoKojinShokai().getTplShujiiIraiJoho().
+                getZenkaiShujiiIraiJoho().getTxtZenkaiIryokikanDaihyoshaShimei().setValue(
+                        new RString(mapZenkaiShujiiIraiJoho.get("zenkaiIryokikanDaihyoshaShimei").toString()));
+    }
+
+    /*
+     *審査会情報タブを設定します。
+     */
+    private void setShinsakaiTab(KojinJokyoShokaiDiv panel) {
+
+        List<HashMap> ShinsakaiList = YamlLoader.FOR_DBE.loadAsList(
+                new RString("dbe8020001/Shinsakai.yml"));
+
+        //一次判定情報の設定
+        HashMap mapIchijiHanteiJoho = ShinsakaiList.get(0);
+        setIchijiHanteiJoho(panel, mapIchijiHanteiJoho);
+
+        //審査会情報の設定
+        HashMap mapShinsakaiJoho = ShinsakaiList.get(1);
+        setShinsakaiJoho(panel, mapShinsakaiJoho);
+
+        //審査会結果情報の設定
+        HashMap mapShinsakaiKekkaJoho = ShinsakaiList.get(2);
+        setShinsakaiKekkaJoho(panel, mapShinsakaiKekkaJoho);
+
+    }
+
+    /*
+     *一次判定情報を設定します。
+     */
+    private void setIchijiHanteiJoho(KojinJokyoShokaiDiv panel, HashMap mapIchijiHanteiJoho) {
+
+        if (mapIchijiHanteiJoho.get("ichijiHanteibi").toString().isEmpty()) {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                    getTplIchijiHantei().getCcdIchijiHanteiJoho().getTxtIchijiHanteibi().clearValue();
+        } else {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                    getTplIchijiHantei().getCcdIchijiHanteiJoho().getTxtIchijiHanteibi().setValue(
+                            new RDate(mapIchijiHanteiJoho.get("ichijiHanteibi").toString()));
+        }
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                getTplIchijiHantei().getCcdIchijiHanteiJoho().getTxtIchijiHanteiKekka().setValue(
+                        new RString(mapIchijiHanteiJoho.get("kaigodo").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                getTplIchijiHantei().getCcdIchijiHanteiJoho().getTxtKijunJikan().setValue(
+                        new RString(mapIchijiHanteiJoho.get("kijunjikan").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                getTplIchijiHantei().getCcdIchijiHanteiJoho().getTblKijunJikan().getTxtShokuji().setValue(
+                        new RString(mapIchijiHanteiJoho.get("shokuji").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                getTplIchijiHantei().getCcdIchijiHanteiJoho().getTblKijunJikan().getTxtHaisetsu().setValue(
+                        new RString(mapIchijiHanteiJoho.get("haisetsu").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                getTplIchijiHantei().getCcdIchijiHanteiJoho().getTblKijunJikan().getTxtIdo().setValue(
+                        new RString(mapIchijiHanteiJoho.get("ido").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                getTplIchijiHantei().getCcdIchijiHanteiJoho().getTblKijunJikan().getTxtSeiketsuHoji().setValue(
+                        new RString(mapIchijiHanteiJoho.get("seiketsuhoji").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                getTplIchijiHantei().getCcdIchijiHanteiJoho().getTblKijunJikan().getTxtKansetsuCare().setValue(
+                        new RString(mapIchijiHanteiJoho.get("kansetsucare").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                getTplIchijiHantei().getCcdIchijiHanteiJoho().getTblKijunJikan().getTxtBpsdKanren().setValue(
+                        new RString(mapIchijiHanteiJoho.get("bpsd").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                getTplIchijiHantei().getCcdIchijiHanteiJoho().getTblKijunJikan().getTxtKinoKunren().setValue(
+                        new RString(mapIchijiHanteiJoho.get("kinokunren").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                getTplIchijiHantei().getCcdIchijiHanteiJoho().getTblKijunJikan().getTxtIryoKanren().setValue(
+                        new RString(mapIchijiHanteiJoho.get("iryokanren").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                getTplIchijiHantei().getCcdIchijiHanteiJoho().getTblKijunJikan().getTxtNinchishoKasan().setValue(
+                        new RString(mapIchijiHanteiJoho.get("ninchishokasan").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                getTplIchijiHantei().getCcdIchijiHanteiJoho().getTblTyukanHyokaKomokuTokuten().getTxtDai1gun().setValue(
+                        new RString(mapIchijiHanteiJoho.get("chukantokuten1").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                getTplIchijiHantei().getCcdIchijiHanteiJoho().getTblTyukanHyokaKomokuTokuten().getTxtDai2gun().setValue(
+                        new RString(mapIchijiHanteiJoho.get("chukantokuten2").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                getTplIchijiHantei().getCcdIchijiHanteiJoho().getTblTyukanHyokaKomokuTokuten().getTxtDai3gun().setValue(
+                        new RString(mapIchijiHanteiJoho.get("chukantokuten3").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                getTplIchijiHantei().getCcdIchijiHanteiJoho().getTblTyukanHyokaKomokuTokuten().getTxtDai4gun().setValue(
+                        new RString(mapIchijiHanteiJoho.get("chukantokuten4").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                getTplIchijiHantei().getCcdIchijiHanteiJoho().getTblTyukanHyokaKomokuTokuten().getTxtDai5gun().setValue(
+                        new RString(mapIchijiHanteiJoho.get("chukantokuten5").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                getTplIchijiHantei().getCcdIchijiHanteiJoho().getTxtJiritsudoChosa().setValue(
+                        new RString(mapIchijiHanteiJoho.get("jiritsudochosa").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                getTplIchijiHantei().getCcdIchijiHanteiJoho().getTxtJiritsudoIkensho().setValue(
+                        new RString(mapIchijiHanteiJoho.get("jiritsudoikensho").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                getTplIchijiHantei().getCcdIchijiHanteiJoho().getTxtGaizensei().setValue(
+                        new RString(mapIchijiHanteiJoho.get("gaizensei").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                getTplIchijiHantei().getCcdIchijiHanteiJoho().getTxtJyotaiAnteisei().setValue(
+                        new RString(mapIchijiHanteiJoho.get("anteisei").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                getTplIchijiHantei().getCcdIchijiHanteiJoho().getTxtKyufuKbn().setValue(
+                        new RString(mapIchijiHanteiJoho.get("kyufukbn").toString()));
+
+        //一次判定警告コード表示
+        if (mapIchijiHanteiJoho.get("keikokusu").toString().equals("0")) {
+            List<dgIchijiHanteiKeikokuCode_Row> arraydata = new ArrayList<>();
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                    getTplIchijiHantei().getCcdIchijiHanteiJoho().getDgIchijiHanteiKeikokuCode().setDataSource(arraydata);
+
+        } else {
+            List arraydata = createRowIchijiHanteiKeikokuCode(mapIchijiHanteiJoho);
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                    getTplIchijiHantei().getCcdIchijiHanteiJoho().getDgIchijiHanteiKeikokuCode().setDataSource(arraydata);
+        }
+
+    }
+
+    /*
+     *一次判定警告コードデータグリッド情報を設定します。
+     */
+    private List createRowIchijiHanteiKeikokuCode(HashMap IchijiHanteiKekka) {
+
+        List arrayDataList = new ArrayList();
+
+        for (int i = 1; i <= Integer.parseInt((String) IchijiHanteiKekka.get("keikokusu")); i++) {
+
+            String strKey1 = "keikokuno" + i;
+            String strKeikokuNo = (String) IchijiHanteiKekka.get(strKey1);
+
+            String strKey2 = "keikokucode" + i;
+            String strKeikokuCode = (String) IchijiHanteiKekka.get(strKey2);
+
+            String strKey3 = "keikokunaiyo" + i;
+            String strKeikokuNaiyo = (String) IchijiHanteiKekka.get(strKey3);
+
+            arrayDataList.add(createRowIchijiHanteiKeikokuCode(strKeikokuNo, strKeikokuCode, strKeikokuNaiyo));
+        }
+        return arrayDataList;
+    }
+
+    /*
+     *引数を元にデータグリッド内に挿入する一次判定警告コード一覧データを作成します。
+     */
+    private dgIchijiHanteiKeikokuCode_Row createRowIchijiHanteiKeikokuCode(
+            String KeikokuNo,
+            String KeikokuCode,
+            String KeikokuNaiyo
+    ) {
+
+        dgIchijiHanteiKeikokuCode_Row rowIchijiHanteiKeikokuCode = new dgIchijiHanteiKeikokuCode_Row(
+                new RString(KeikokuNo),
+                new RString(KeikokuCode),
+                new RString(KeikokuNaiyo)
+        );
+        return rowIchijiHanteiKeikokuCode;
+    }
+
+    /*
+     *審査会情報を設定します。
+     */
+    private void setShinsakaiJoho(KojinJokyoShokaiDiv panel, HashMap mapShinsakaiJoho) {
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                getTplShinsakaiJoho().getShinsakaiJoho().getTxtShinsakaiKaisaiNo().setValue(
+                        new RString(mapShinsakaiJoho.get("shinsakaiKaisaiNo").toString()));
+
+        if (mapShinsakaiJoho.get("shinsakaiKaisaiYoteibi").toString().isEmpty()) {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                    getTplShinsakaiJoho().getShinsakaiJoho().getTxtShinsakaiKaisaiYoteibi().clearValue();
+        } else {
+
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                    getTplShinsakaiJoho().getShinsakaiJoho().getTxtShinsakaiKaisaiYoteibi().setValue(
+                            new RDate(mapShinsakaiJoho.get("shinsakaiKaisaiYoteibi").toString()));
+        }
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                getTplShinsakaiJoho().getShinsakaiJoho().getTxtGogitai().setValue(
+                        new RString(mapShinsakaiJoho.get("gogitai").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                getTplShinsakaiJoho().getShinsakaiJoho().getTxtShinsakaiKaisaiBasho().setValue(
+                        new RString(mapShinsakaiJoho.get("shinsakaiKaisaiBasho").toString()));
+
+        if (mapShinsakaiJoho.get("shinsakaiShiryoSakuseibi").toString().isEmpty()) {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                    getTplShinsakaiJoho().getShinsakaiJoho().getTxtShinsakaiShiryoSakuseibi().clearValue();
+        } else {
+
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                    getTplShinsakaiJoho().getShinsakaiJoho().getTxtShinsakaiShiryoSakuseibi().setValue(
+                            new RDate(mapShinsakaiJoho.get("shinsakaiShiryoSakuseibi").toString()));
+        }
+
+        if (mapShinsakaiJoho.get("shinsakaiKaishiYoteiJikan").toString().isEmpty()) {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                    getTplShinsakaiJoho().getShinsakaiJoho().getTxtShinsakaiKaishiYoteiJikan().clearValue();
+        } else {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                    getTplShinsakaiJoho().getShinsakaiJoho().getTxtShinsakaiKaishiYoteiJikan().setValue(
+                            RTime.parse(mapShinsakaiJoho.get("shinsakaiKaishiYoteiJikan").toString()));
+        }
+
+        if (mapShinsakaiJoho.get("shinsakaiShuryoYoteiJikan").toString().isEmpty()) {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                    getTplShinsakaiJoho().getShinsakaiJoho().getTxtShinsakaiShuryoYoteiJikan().clearValue();
+        } else {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                    getTplShinsakaiJoho().getShinsakaiJoho().getTxtShinsakaiShuryoYoteiJikan().setValue(
+                            RTime.parse(mapShinsakaiJoho.get("shinsakaiShuryoYoteiJikan").toString()));
+        }
+
+        if (mapShinsakaiJoho.get("seishinkaiSonzaiKbn").toString().equals("1")) {
+            List<KeyValueDataSource> dataSource = new ArrayList<>();
+            dataSource.add(new KeyValueDataSource(new RString("1"), new RString("精神科医存在区分")));
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                    getTplShinsakaiJoho().getShinsakaiJoho().getChkSeishinkaiSonzaiKbn().setSelectedItems(dataSource);
+
+        }
+
+        if (mapShinsakaiJoho.get("gogitaiDummyKbn").toString().equals("1")) {
+            List<KeyValueDataSource> dataSource = new ArrayList<>();
+            dataSource.add(new KeyValueDataSource(new RString("1"), new RString("合議体ダミー区分")));
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                    getTplShinsakaiJoho().getShinsakaiJoho().getChkGogitaiDummyKbn().setSelectedItems(dataSource);
+
+        }
+
+        //審査委員情報表示
+        if (mapShinsakaiJoho.get("shinsainsu").toString().equals("0")) {
+            List<dgShinsakaiIinJoho_Row> arraydata = new ArrayList<>();
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                    getTplShinsakaiJoho().getShinsakaiIinJoho().getDgShinsakaiIinJoho().setDataSource(arraydata);
+
+        } else {
+            List arraydata = createRowShinsakaiIin(mapShinsakaiJoho);
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                    getTplShinsakaiJoho().getShinsakaiIinJoho().getDgShinsakaiIinJoho().setDataSource(arraydata);
+        }
+
+        if (mapShinsakaiJoho.get("shisakaiKaisaibi").toString().isEmpty()) {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                    getTplShinsakaiJoho().getShinsaKekkaJoho().getTxtShisakaiKaisaibi().clearValue();
+        } else {
+
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                    getTplShinsakaiJoho().getShinsaKekkaJoho().getTxtShisakaiKaisaibi().setValue(
+                            new RDate(mapShinsakaiJoho.get("shisakaiKaisaibi").toString()));
+        }
+
+        if (mapShinsakaiJoho.get("shinsakaiHanteibi").toString().isEmpty()) {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                    getTplShinsakaiJoho().getShinsaKekkaJoho().getTxtShinsakaiHanteibi().clearValue();
+        } else {
+
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                    getTplShinsakaiJoho().getShinsaKekkaJoho().getTxtShinsakaiHanteibi().setValue(
+                            new RDate(mapShinsakaiJoho.get("shinsakaiHanteibi").toString()));
+        }
+
+        if (mapShinsakaiJoho.get("shinsakaiKaishiJikan").toString().isEmpty()) {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                    getTplShinsakaiJoho().getShinsaKekkaJoho().getTxtShinsakaiKaishiJikan().clearValue();
+        } else {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                    getTplShinsakaiJoho().getShinsaKekkaJoho().getTxtShinsakaiKaishiJikan().setValue(
+                            RTime.parse(mapShinsakaiJoho.get("shinsakaiKaishiJikan").toString()));
+        }
+
+        if (mapShinsakaiJoho.get("shinsakaiShuryoJikan").toString().isEmpty()) {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                    getTplShinsakaiJoho().getShinsaKekkaJoho().getTxtShinsakaiShuryoJikan().clearValue();
+        } else {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                    getTplShinsakaiJoho().getShinsaKekkaJoho().getTxtShinsakaiShuryoJikan().setValue(
+                            RTime.parse(mapShinsakaiJoho.get("shinsakaiShuryoJikan").toString()));
+        }
+
+        if (mapShinsakaiJoho.get("shinsaHanteiJikan").toString().isEmpty()) {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                    getTplShinsakaiJoho().getShinsaKekkaJoho().getTxtShinsaHanteiJikan().clearValue();
+        } else {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
+                    getTplShinsakaiJoho().getShinsaKekkaJoho().getTxtShinsaHanteiJikan().setValue(
+                            RTime.parse(mapShinsakaiJoho.get("shinsaHanteiJikan").toString()));
+        }
+
+    }
+
+    /*
+     *審査会結果情報を設定します。
+     */
+    private void setShinsakaiKekkaJoho(KojinJokyoShokaiDiv panel, HashMap mapShinsakaiKekkaJoho) {
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().
+                getTabShinsakaiKojinShokai().getTplShinsakaiKekka().
+                getKonkaiShinsaKekka().getTxtYokaigoJotaiKbn().setValue(
+                        new RString(mapShinsakaiKekkaJoho.get("yokaigoJotaiKbn").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().
+                getTabShinsakaiKojinShokai().getTplShinsakaiKekka().
+                getKonkaiShinsaKekka().getTxtHenkoRiyu().setValue(
+                        new RString(mapShinsakaiKekkaJoho.get("henkoRiyu").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().
+                getTabShinsakaiKojinShokai().getTplShinsakaiKekka().
+                getKonkaiShinsaKekka().getTxtShinsakaiIkenShurui().setValue(
+                        new RString(mapShinsakaiKekkaJoho.get("shinsakaiIkenShurui").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().
+                getTabShinsakaiKojinShokai().getTplShinsakaiKekka().
+                getKonkaiShinsaKekka().getTxtShinsakaiIken().setValue(
+                        new RString(mapShinsakaiKekkaJoho.get("shinsakaiIken").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().
+                getTabShinsakaiKojinShokai().getTplShinsakaiKekka().
+                getKonkaiShinsaKekka().getTxtShinsakaiMemo().setValue(
+                        new RString(mapShinsakaiKekkaJoho.get("shinsakaiMemo").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().
+                getTabShinsakaiKojinShokai().getTplShinsakaiKekka().
+                getKonkaiShinsaKekka().getTxtYokaigoJyotaizorei().setValue(
+                        new RString(mapShinsakaiKekkaJoho.get("yokaigoJyotaizorei").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().
+                getTabShinsakaiKojinShokai().getTplShinsakaiKekka().
+                getKonkaiShinsaKekka().getTxtTsuchiKbn().setValue(
+                        new RString(mapShinsakaiKekkaJoho.get("tsuchiKbn").toString()));
+
+        if (mapShinsakaiKekkaJoho.get("tsuchibi").toString().isEmpty()) {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().
+                    getTabShinsakaiKojinShokai().getTplShinsakaiKekka().
+                    getKonkaiShinsaKekka().getTxtTsuchiKbn().clearValue();
+        } else {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().
+                    getTabShinsakaiKojinShokai().getTplShinsakaiKekka().
+                    getKonkaiShinsaKekka().getTxtTsuchibi().setValue(
+                            new RDate(mapShinsakaiKekkaJoho.get("tsuchibi").toString()));
+        }
+
+        if (mapShinsakaiKekkaJoho.get("yukokikanKaishibi").toString().isEmpty()) {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().
+                    getTabShinsakaiKojinShokai().getTplShinsakaiKekka().
+                    getKonkaiShinsaKekka().getTxtYukokikanKaishibi().clearValue();
+        } else {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().
+                    getTabShinsakaiKojinShokai().getTplShinsakaiKekka().
+                    getKonkaiShinsaKekka().getTxtYukokikanKaishibi().setValue(
+                            new RDate(mapShinsakaiKekkaJoho.get("yukokikanKaishibi").toString()));
+        }
+
+        if (mapShinsakaiKekkaJoho.get("yukokikanShuryobi").toString().isEmpty()) {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().
+                    getTabShinsakaiKojinShokai().getTplShinsakaiKekka().
+                    getKonkaiShinsaKekka().getTxtYukokikanShuryobi().clearValue();
+        } else {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().
+                    getTabShinsakaiKojinShokai().getTplShinsakaiKekka().
+                    getKonkaiShinsaKekka().getTxtYukokikanShuryobi().setValue(
+                            new RDate(mapShinsakaiKekkaJoho.get("yukokikanShuryobi").toString()));
+        }
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().
+                getTabShinsakaiKojinShokai().getTplShinsakaiKekka().
+                getKonkaiShinsaKekka().getTxtNinteiKikan().setValue(
+                        new RString(mapShinsakaiKekkaJoho.get("ninteikikan").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().
+                getTabShinsakaiKojinShokai().getTplShinsakaiKekka().
+                getKonkaiShinsaKekka().getTxtTsuchiRiyu().setValue(
+                        new RString(mapShinsakaiKekkaJoho.get("tsuchiRiyu").toString()));
+
+        if (mapShinsakaiKekkaJoho.get("zenkaiShinsakaiHanteibi").toString().isEmpty()) {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().
+                    getTabShinsakaiKojinShokai().getTplShinsakaiKekka().
+                    getZenkaiShinsaKekka().getTxtZenkaiShinsakaiHanteibi().clearValue();
+        } else {
+            panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().
+                    getTabShinsakaiKojinShokai().getTplShinsakaiKekka().
+                    getZenkaiShinsaKekka().getTxtZenkaiShinsakaiHanteibi().setValue(
+                            new RDate(mapShinsakaiKekkaJoho.get("zenkaiShinsakaiHanteibi").toString()));
+        }
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().
+                getTabShinsakaiKojinShokai().getTplShinsakaiKekka().
+                getZenkaiShinsaKekka().getTxtZenkaiYokaigoJotaiKbn().setValue(
+                        new RString(mapShinsakaiKekkaJoho.get("zenkaiYokaigoJotaiKbn").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().
+                getTabShinsakaiKojinShokai().getTplShinsakaiKekka().
+                getZenkaiShinsaKekka().getTxtZenkaiHenkoRiyu().setValue(
+                        new RString(mapShinsakaiKekkaJoho.get("zenkaiHenkoRiyu").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().
+                getTabShinsakaiKojinShokai().getTplShinsakaiKekka().
+                getZenkaiShinsaKekka().getTxtZenkaiShinsakaiIkenShurui().setValue(
+                        new RString(mapShinsakaiKekkaJoho.get("zenkaiShinsakaiIkenShurui").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().
+                getTabShinsakaiKojinShokai().getTplShinsakaiKekka().
+                getZenkaiShinsaKekka().getTxtZenkaiShinsakaiIken().setValue(
+                        new RString(mapShinsakaiKekkaJoho.get("zenkaiShinsakaiIken").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().
+                getTabShinsakaiKojinShokai().getTplShinsakaiKekka().
+                getZenkaiShinsaKekka().getTxtZenkaiShinsakaiMemo().setValue(
+                        new RString(mapShinsakaiKekkaJoho.get("zenkaiShinsakaiMemo").toString()));
+
+        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().
+                getTabShinsakaiKojinShokai().getTplShinsakaiKekka().
+                getZenkaiShinsaKekka().getTxtZenkaiYokaigoJyotaizorei().setValue(
+                        new RString(mapShinsakaiKekkaJoho.get("zenkaiYokaigoJyotaizorei").toString()));
+    }
+
+    /*
+     *審査会委員データグリッド情報を設定します。
+     */
+    private List createRowShinsakaiIin(HashMap shinsakaiIin) {
+
+        List arrayDataList = new ArrayList();
+
+        for (int i = 1; i <= Integer.parseInt((String) shinsakaiIin.get("shinsainsu")); i++) {
+
+            String strKey1 = "shinsakaiIin" + i;
+            String strShinsakaiIin = (String) shinsakaiIin.get(strKey1);
+
+            String strKey2 = "shinsainKbn" + i;
+            String strShinsainKbn = (String) shinsakaiIin.get(strKey2);
+
+            String strKey3 = "gogitaichoKbn" + i;
+            String strGogitaichoKbn = (String) shinsakaiIin.get(strKey3);
+
+            String strKey4 = "shukketsuKbn" + i;
+            String strShukketsuKbn = (String) shinsakaiIin.get(strKey4);
+
+            arrayDataList.add(createRowShinsakaiIin(strShinsakaiIin, strShinsainKbn, strGogitaichoKbn, strShukketsuKbn));
+        }
+        return arrayDataList;
+    }
+
+    /*
+     *引数を元にデータグリッド内に挿入する審査会委員一覧データを作成します。
+     */
+    private dgShinsakaiIinJoho_Row createRowShinsakaiIin(
+            String ShinsakaiIin,
+            String ShinsainKbn,
+            String GogitaichoKbn,
+            String ShukketsuKbn
+    ) {
+
+        dgShinsakaiIinJoho_Row rowShinsakaiIin = new dgShinsakaiIinJoho_Row(
+                new RString(ShinsakaiIin),
+                new RString(ShinsainKbn),
+                new RString(GogitaichoKbn),
+                new RString(ShukketsuKbn)
+        );
+        return rowShinsakaiIin;
+    }
+
 }

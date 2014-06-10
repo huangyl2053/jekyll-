@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8060001;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -21,16 +21,12 @@ public class NinteiShinseiGyomuShokaiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblHokensha")
-    private Label lblHokensha;
     @JsonProperty("txtHokensha")
     private TextBox txtHokensha;
     @JsonProperty("txtHokenshaMeisho")
     private TextBox txtHokenshaMeisho;
     @JsonProperty("lblNinteiSHinseiYmd")
     private Label lblNinteiSHinseiYmd;
-    @JsonProperty("lblNinteiShinseiYmdSt")
-    private Label lblNinteiShinseiYmdSt;
     @JsonProperty("txtNinteiShinseiYmdSt")
     private TextBoxDate txtNinteiShinseiYmdSt;
     @JsonProperty("lblKara")
@@ -39,22 +35,16 @@ public class NinteiShinseiGyomuShokaiDiv extends Panel {
     private TextBoxDate txtNinteiShinseiYmdEd;
     @JsonProperty("lblChohyoShiji")
     private Label lblChohyoShiji;
-    @JsonProperty("lblChohyomei1")
-    private Label lblChohyomei1;
     @JsonProperty("radNinteiShinseiMonitor")
     private RadioButton radNinteiShinseiMonitor;
-    @JsonProperty("lblChohyomei2")
-    private Label lblChohyomei2;
     @JsonProperty("radShinseishaIchiran")
     private RadioButton radShinseishaIchiran;
-    @JsonProperty("lblChohyomei3")
-    private Label lblChohyomei3;
     @JsonProperty("radShinseiKyakka")
     private RadioButton radShinseiKyakka;
-    @JsonProperty("btnCancel")
-    private Button btnCancel;
     @JsonProperty("btnChohyoOutput")
     private Button btnChohyoOutput;
+    @JsonProperty("btnCancel")
+    private Button btnCancel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -62,16 +52,6 @@ public class NinteiShinseiGyomuShokaiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblHokensha")
-    public Label getLblHokensha() {
-        return lblHokensha;
-    }
-
-    @JsonProperty("lblHokensha")
-    public void setLblHokensha(Label lblHokensha) {
-        this.lblHokensha=lblHokensha;
-    }
-
     @JsonProperty("txtHokensha")
     public TextBox getTxtHokensha() {
         return txtHokensha;
@@ -100,16 +80,6 @@ public class NinteiShinseiGyomuShokaiDiv extends Panel {
     @JsonProperty("lblNinteiSHinseiYmd")
     public void setLblNinteiSHinseiYmd(Label lblNinteiSHinseiYmd) {
         this.lblNinteiSHinseiYmd=lblNinteiSHinseiYmd;
-    }
-
-    @JsonProperty("lblNinteiShinseiYmdSt")
-    public Label getLblNinteiShinseiYmdSt() {
-        return lblNinteiShinseiYmdSt;
-    }
-
-    @JsonProperty("lblNinteiShinseiYmdSt")
-    public void setLblNinteiShinseiYmdSt(Label lblNinteiShinseiYmdSt) {
-        this.lblNinteiShinseiYmdSt=lblNinteiShinseiYmdSt;
     }
 
     @JsonProperty("txtNinteiShinseiYmdSt")
@@ -152,16 +122,6 @@ public class NinteiShinseiGyomuShokaiDiv extends Panel {
         this.lblChohyoShiji=lblChohyoShiji;
     }
 
-    @JsonProperty("lblChohyomei1")
-    public Label getLblChohyomei1() {
-        return lblChohyomei1;
-    }
-
-    @JsonProperty("lblChohyomei1")
-    public void setLblChohyomei1(Label lblChohyomei1) {
-        this.lblChohyomei1=lblChohyomei1;
-    }
-
     @JsonProperty("radNinteiShinseiMonitor")
     public RadioButton getRadNinteiShinseiMonitor() {
         return radNinteiShinseiMonitor;
@@ -170,16 +130,6 @@ public class NinteiShinseiGyomuShokaiDiv extends Panel {
     @JsonProperty("radNinteiShinseiMonitor")
     public void setRadNinteiShinseiMonitor(RadioButton radNinteiShinseiMonitor) {
         this.radNinteiShinseiMonitor=radNinteiShinseiMonitor;
-    }
-
-    @JsonProperty("lblChohyomei2")
-    public Label getLblChohyomei2() {
-        return lblChohyomei2;
-    }
-
-    @JsonProperty("lblChohyomei2")
-    public void setLblChohyomei2(Label lblChohyomei2) {
-        this.lblChohyomei2=lblChohyomei2;
     }
 
     @JsonProperty("radShinseishaIchiran")
@@ -192,16 +142,6 @@ public class NinteiShinseiGyomuShokaiDiv extends Panel {
         this.radShinseishaIchiran=radShinseishaIchiran;
     }
 
-    @JsonProperty("lblChohyomei3")
-    public Label getLblChohyomei3() {
-        return lblChohyomei3;
-    }
-
-    @JsonProperty("lblChohyomei3")
-    public void setLblChohyomei3(Label lblChohyomei3) {
-        this.lblChohyomei3=lblChohyomei3;
-    }
-
     @JsonProperty("radShinseiKyakka")
     public RadioButton getRadShinseiKyakka() {
         return radShinseiKyakka;
@@ -212,16 +152,6 @@ public class NinteiShinseiGyomuShokaiDiv extends Panel {
         this.radShinseiKyakka=radShinseiKyakka;
     }
 
-    @JsonProperty("btnCancel")
-    public Button getBtnCancel() {
-        return btnCancel;
-    }
-
-    @JsonProperty("btnCancel")
-    public void setBtnCancel(Button btnCancel) {
-        this.btnCancel=btnCancel;
-    }
-
     @JsonProperty("btnChohyoOutput")
     public Button getBtnChohyoOutput() {
         return btnChohyoOutput;
@@ -230,6 +160,16 @@ public class NinteiShinseiGyomuShokaiDiv extends Panel {
     @JsonProperty("btnChohyoOutput")
     public void setBtnChohyoOutput(Button btnChohyoOutput) {
         this.btnChohyoOutput=btnChohyoOutput;
+    }
+
+    @JsonProperty("btnCancel")
+    public Button getBtnCancel() {
+        return btnCancel;
+    }
+
+    @JsonProperty("btnCancel")
+    public void setBtnCancel(Button btnCancel) {
+        this.btnCancel=btnCancel;
     }
 
 }

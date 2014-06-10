@@ -21,30 +21,30 @@
      "authorityMode": 0,
      "marginLeft": "4",
      "marginRight": "XS",
+     "selectControlID": "txtHokensha_core",
+     "readOnly": true,
      "required": false,
-     "text": "",
+     "maxLength": 100000000,
+     "minLength": 0,
+     "textAlign": 0,
+     "placeHolder": "202020",
+     "textKind": 0,
      "isPrivateInfo": false,
+     "isPassword": false,
+     "isComboBox": false,
+     "onFocus": "",
+     "onBlur": "",
      "onChange": "",
+     "onKeyPress": "",
+     "text": "",
+     "suggest": [],
+     "value": "",
      "labelLText": "保険者",
      "labelRText": "",
      "labelLWidth": "S",
      "labelRWidth": "S",
      "labelLAlign": 2,
-     "labelRAlign": 0,
-     "onFocus": "",
-     "onBlur": "",
-     "readOnly": true,
-     "placeHolder": "202020",
-     "textKind": 0,
-     "isPassword": false,
-     "onKeyPress": "",
-     "value": "",
-     "maxLength": 1000000000000,
-     "minLength": 0,
-     "textAlign": 0,
-     "isComboBox": false,
-     "suggest": [],
-     "permitCharactor": ""
+     "labelRAlign": 0
     },
     {
      "fieldName": "txtHokenshaMeisho",
@@ -63,30 +63,30 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtHokenshaMeisho_core",
+     "readOnly": true,
      "required": false,
-     "text": "",
+     "maxLength": 100000000,
+     "minLength": 0,
+     "textAlign": 0,
+     "placeHolder": "電算町役場",
+     "textKind": 0,
      "isPrivateInfo": false,
+     "isPassword": false,
+     "isComboBox": false,
+     "onFocus": "",
+     "onBlur": "",
      "onChange": "",
+     "onKeyPress": "",
+     "text": "",
+     "suggest": [],
+     "value": "",
      "labelLText": "",
      "labelRText": "",
      "labelLWidth": "S",
      "labelRWidth": "S",
      "labelLAlign": 2,
-     "labelRAlign": 0,
-     "onFocus": "",
-     "onBlur": "",
-     "readOnly": true,
-     "placeHolder": "電算町役場",
-     "textKind": 0,
-     "isPassword": false,
-     "onKeyPress": "",
-     "value": "",
-     "maxLength": 1000000000000,
-     "minLength": 0,
-     "textAlign": 0,
-     "isComboBox": false,
-     "suggest": [],
-     "permitCharactor": ""
+     "labelRAlign": 0
     },
     {
      "fieldName": "lblNinteiSHinseiYmd",
@@ -105,10 +105,11 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "lblNinteiSHinseiYmd",
      "required": false,
-     "align": 2,
+     "isPrivateInfo": false,
      "text": "出力帳票要件日付",
-     "isPrivateInfo": false
+     "align": 2
     },
     {
      "fieldName": "txtNinteiShinseiYmdSt",
@@ -127,27 +128,27 @@
      "authorityMode": 0,
      "marginLeft": "4",
      "marginRight": "XS",
+     "selectControlID": "txtNinteiShinseiYmdSt_core",
+     "readOnly": false,
      "required": false,
-     "text": "",
+     "placeHolder": "平26.05.15",
+     "textKind": 0,
      "isPrivateInfo": false,
+     "isPassword": false,
+     "onFocus": "",
+     "onBlur": "",
      "onChange": "",
+     "onKeyPress": "",
+     "text": "",
+     "value": "",
      "labelLText": "範囲",
      "labelRText": "",
      "labelLWidth": "S",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "onFocus": "",
-     "onBlur": "",
-     "readOnly": false,
-     "placeHolder": "平26.05.15",
-     "textKind": 0,
-     "isPassword": false,
-     "onKeyPress": "",
      "ymdKubun": 2,
-     "displayFormat": 0,
-     "value": "",
-     "permitCharactor": "./_-"
+     "displayFormat": 0
     },
     {
      "fieldName": "lblKara",
@@ -166,10 +167,11 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "lblKara",
      "required": false,
-     "align": 1,
+     "isPrivateInfo": false,
      "text": "～",
-     "isPrivateInfo": false
+     "align": 1
     },
     {
      "fieldName": "txtNinteiShinseiYmdEd",
@@ -188,27 +190,27 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtNinteiShinseiYmdEd_core",
+     "readOnly": false,
      "required": false,
-     "text": "",
+     "placeHolder": "平26.05.15",
+     "textKind": 0,
      "isPrivateInfo": false,
+     "isPassword": false,
+     "onFocus": "",
+     "onBlur": "",
      "onChange": "",
+     "onKeyPress": "",
+     "text": "",
+     "value": "",
      "labelLText": "",
      "labelRText": "",
      "labelLWidth": "S",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "onFocus": "",
-     "onBlur": "",
-     "readOnly": false,
-     "placeHolder": "平26.05.15",
-     "textKind": 0,
-     "isPassword": false,
-     "onKeyPress": "",
      "ymdKubun": 2,
-     "displayFormat": 0,
-     "value": "",
-     "permitCharactor": "./_-"
+     "displayFormat": 0
     },
     {
      "fieldName": "lblChohyoShiji",
@@ -227,10 +229,11 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "lblChohyoShiji",
      "required": false,
-     "align": 2,
+     "isPrivateInfo": false,
      "text": "出力帳票指示",
-     "isPrivateInfo": false
+     "align": 2
     },
     {
      "fieldName": "radNinteiShinseiMonitor",
@@ -249,25 +252,27 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "radNinteiShinseiMonitor_core",
      "required": false,
      "onChange": "",
-     "selectedItem": "",
-     "dataSource": [
-      {
-       "key": "key0",
-       "value": "出力する"
-      },
-      {
-       "key": "key1",
-       "value": "出力しない"
-      }
-     ],
      "labelLText": "介護認定申請モニタリスト",
      "labelLWidth": "300",
      "labelLAlign": 2,
+     "selectedItem": "0",
+     "dataSource": [
+      {
+       "key": "0",
+       "value": "出力する"
+      },
+      {
+       "key": "1",
+       "value": "出力しない"
+      }
+     ],
      "onClick": "",
      "newLineItemNumber": 2,
-     "spaceSize": 1
+     "spaceSize": "M",
+     "icon": []
     },
     {
      "fieldName": "radShinseishaIchiran",
@@ -286,25 +291,27 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "radShinseishaIchiran_core",
      "required": false,
      "onChange": "",
-     "selectedItem": "",
-     "dataSource": [
-      {
-       "key": "key0",
-       "value": "出力する"
-      },
-      {
-       "key": "key1",
-       "value": "出力しない"
-      }
-     ],
      "labelLText": "要介護認定・要支援認定等申請者一覧",
      "labelLWidth": "300",
      "labelLAlign": 2,
+     "selectedItem": "0",
+     "dataSource": [
+      {
+       "key": "0",
+       "value": "出力する"
+      },
+      {
+       "key": "1",
+       "value": "出力しない"
+      }
+     ],
      "onClick": "",
      "newLineItemNumber": 2,
-     "spaceSize": 1
+     "spaceSize": "M",
+     "icon": []
     },
     {
      "fieldName": "radShinseiKyakka",
@@ -323,25 +330,27 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "radShinseiKyakka_core",
      "required": false,
      "onChange": "",
-     "selectedItem": "",
-     "dataSource": [
-      {
-       "key": "key0",
-       "value": "出力する"
-      },
-      {
-       "key": "key1",
-       "value": "出力しない"
-      }
-     ],
      "labelLText": "申請却下一覧",
      "labelLWidth": "300",
      "labelLAlign": 2,
+     "selectedItem": "0",
+     "dataSource": [
+      {
+       "key": "0",
+       "value": "出力する"
+      },
+      {
+       "key": "1",
+       "value": "出力しない"
+      }
+     ],
      "onClick": "",
      "newLineItemNumber": 2,
-     "spaceSize": 1
+     "spaceSize": "M",
+     "icon": []
     },
     {
      "fieldName": "btnChohyoOutput",
@@ -360,8 +369,10 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnChohyoOutput",
      "text": "指示帳票を出力する",
      "onClick": "",
+     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -384,8 +395,10 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnCancel",
      "text": "帳票出力を行わない",
      "onClick": "",
+     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -404,10 +417,11 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "XS",
+   "marginLeft": "0",
    "marginRight": "XS",
+   "selectControlID": "NinteiShinseiGyomuShokai",
    "onLoad": "",
-   "title": "申請業務関連帳票出力指示",
+   "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
@@ -415,7 +429,12 @@
      "postParameterPanelNames": "NinteiShinseiGyomuShokai"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbe/db/dbe/NinteiShinseiGyomuShokai/onLoadData"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -428,7 +447,9 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false
   }
  ],
  "controlType": null,
@@ -445,6 +466,7 @@
  "authorityMode": 0,
  "marginLeft": "XS",
  "marginRight": "XS",
+ "selectControlID": "Page",
  "onLoad": "",
  "title": "申請業務照会",
  "jsPathCollection": [],
@@ -474,5 +496,7 @@
   ]
  ],
  "panelMargin": 1,
- "controlMargin": 1
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "commonButtonAreaData": []
 }

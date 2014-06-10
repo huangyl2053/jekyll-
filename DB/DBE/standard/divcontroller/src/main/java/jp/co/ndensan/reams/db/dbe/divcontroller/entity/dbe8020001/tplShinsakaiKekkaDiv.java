@@ -6,7 +6,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.KonkaiShinsaKekkaDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.NinteiTsuchiJohoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.ZenkaiShinsaKekkaDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 
@@ -24,8 +23,6 @@ public class tplShinsakaiKekkaDiv extends TabPanel {
      */
     @JsonProperty("KonkaiShinsaKekka")
     private KonkaiShinsaKekkaDiv KonkaiShinsaKekka;
-    @JsonProperty("NinteiTsuchiJoho")
-    private NinteiTsuchiJohoDiv NinteiTsuchiJoho;
     @JsonProperty("ZenkaiShinsaKekka")
     private ZenkaiShinsaKekkaDiv ZenkaiShinsaKekka;
 
@@ -43,16 +40,6 @@ public class tplShinsakaiKekkaDiv extends TabPanel {
     @JsonProperty("KonkaiShinsaKekka")
     public void setKonkaiShinsaKekka(KonkaiShinsaKekkaDiv KonkaiShinsaKekka) {
         this.KonkaiShinsaKekka=KonkaiShinsaKekka;
-    }
-
-    @JsonProperty("NinteiTsuchiJoho")
-    public NinteiTsuchiJohoDiv getNinteiTsuchiJoho() {
-        return NinteiTsuchiJoho;
-    }
-
-    @JsonProperty("NinteiTsuchiJoho")
-    public void setNinteiTsuchiJoho(NinteiTsuchiJohoDiv NinteiTsuchiJoho) {
-        this.NinteiTsuchiJoho=NinteiTsuchiJoho;
     }
 
     @JsonProperty("ZenkaiShinsaKekka")

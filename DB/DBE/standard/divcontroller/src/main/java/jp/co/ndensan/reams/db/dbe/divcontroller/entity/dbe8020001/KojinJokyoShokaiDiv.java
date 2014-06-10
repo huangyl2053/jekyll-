@@ -25,8 +25,6 @@ public class KojinJokyoShokaiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnShinseishaSearch")
-    private Button btnShinseishaSearch;
     @JsonProperty("ccdHihokenshaJoho")
     private KaigoHihokenshaJohoDiv ccdHihokenshaJoho;
     @JsonProperty("ShinchokuKakunin")
@@ -42,16 +40,6 @@ public class KojinJokyoShokaiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("btnShinseishaSearch")
-    public Button getBtnShinseishaSearch() {
-        return btnShinseishaSearch;
-    }
-
-    @JsonProperty("btnShinseishaSearch")
-    public void setBtnShinseishaSearch(Button btnShinseishaSearch) {
-        this.btnShinseishaSearch=btnShinseishaSearch;
-    }
-
     @JsonProperty("ccdHihokenshaJoho")
     public KaigoHihokenshaJohoDiv getCcdHihokenshaJoho() {
         return ccdHihokenshaJoho;

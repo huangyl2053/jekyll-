@@ -1,12 +1,12 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5010001;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShinsakaiIinIchiranDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgShinsakaiShinsainIchiran_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5010001.ShinsakaiIinIchiranDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5010001.dgShinsakaiShinsainIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -23,50 +23,34 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblYoteibi")
-    private Label lblYoteibi;
+    @JsonProperty("txtShinsakaiMeisho")
+    private TextBox txtShinsakaiMeisho;
+    @JsonProperty("txtGogitai")
+    private TextBox txtGogitai;
+    @JsonProperty("txtYoteiTeiin")
+    private TextBoxNum txtYoteiTeiin;
+    @JsonProperty("txtJissiSu")
+    private TextBoxNum txtJissiSu;
     @JsonProperty("txtKaisaiYoteibi")
     private TextBoxFlexibleDate txtKaisaiYoteibi;
-    @JsonProperty("lblYoteiTime")
-    private Label lblYoteiTime;
     @JsonProperty("txtYoteiStartTime")
     private TextBoxTime txtYoteiStartTime;
     @JsonProperty("lblKara")
     private Label lblKara;
     @JsonProperty("txtYoteiEndTime")
     private TextBoxTime txtYoteiEndTime;
-    @JsonProperty("lblYoteiKaijo")
-    private Label lblYoteiKaijo;
     @JsonProperty("txtYoteiKaijo")
     private TextBox txtYoteiKaijo;
-    @JsonProperty("lblKaisaiBi")
-    private Label lblKaisaiBi;
     @JsonProperty("txtKaisaiBi")
     private TextBoxFlexibleDate txtKaisaiBi;
-    @JsonProperty("lblKaisaiTime")
-    private Label lblKaisaiTime;
     @JsonProperty("txtKaisaiStartTime")
     private TextBoxTime txtKaisaiStartTime;
     @JsonProperty("lblKara2")
     private Label lblKara2;
     @JsonProperty("txtKaisaiEndTime")
     private TextBoxTime txtKaisaiEndTime;
-    @JsonProperty("lblKaisaiKaijo")
-    private Label lblKaisaiKaijo;
     @JsonProperty("ddlKaisaiBasho")
     private DropDownList ddlKaisaiBasho;
-    @JsonProperty("lblGogitai")
-    private Label lblGogitai;
-    @JsonProperty("txtGogitai")
-    private TextBox txtGogitai;
-    @JsonProperty("lblYoteiTeiin")
-    private Label lblYoteiTeiin;
-    @JsonProperty("txtYoteiTeiin")
-    private TextBoxNum txtYoteiTeiin;
-    @JsonProperty("lblJissiNinzu")
-    private Label lblJissiNinzu;
-    @JsonProperty("txtJissiSu")
-    private TextBoxNum txtJissiSu;
     @JsonProperty("lblShinsaIn")
     private Label lblShinsaIn;
     @JsonProperty("btnAddIin")
@@ -77,8 +61,10 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     private DataGrid<dgShinsakaiShinsainIchiran_Row> dgShinsakaiShinsainIchiran;
     @JsonProperty("btnUpdate")
     private Button btnUpdate;
-    @JsonProperty("btnCancel")
-    private Button btnCancel;
+    @JsonProperty("btnReturn")
+    private Button btnReturn;
+    @JsonProperty("btnToCancel")
+    private Button btnToCancel;
     @JsonProperty("ShinsakaiIinIchiran")
     private ShinsakaiIinIchiranDiv ShinsakaiIinIchiran;
 
@@ -88,14 +74,44 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblYoteibi")
-    public Label getLblYoteibi() {
-        return lblYoteibi;
+    @JsonProperty("txtShinsakaiMeisho")
+    public TextBox getTxtShinsakaiMeisho() {
+        return txtShinsakaiMeisho;
     }
 
-    @JsonProperty("lblYoteibi")
-    public void setLblYoteibi(Label lblYoteibi) {
-        this.lblYoteibi=lblYoteibi;
+    @JsonProperty("txtShinsakaiMeisho")
+    public void setTxtShinsakaiMeisho(TextBox txtShinsakaiMeisho) {
+        this.txtShinsakaiMeisho=txtShinsakaiMeisho;
+    }
+
+    @JsonProperty("txtGogitai")
+    public TextBox getTxtGogitai() {
+        return txtGogitai;
+    }
+
+    @JsonProperty("txtGogitai")
+    public void setTxtGogitai(TextBox txtGogitai) {
+        this.txtGogitai=txtGogitai;
+    }
+
+    @JsonProperty("txtYoteiTeiin")
+    public TextBoxNum getTxtYoteiTeiin() {
+        return txtYoteiTeiin;
+    }
+
+    @JsonProperty("txtYoteiTeiin")
+    public void setTxtYoteiTeiin(TextBoxNum txtYoteiTeiin) {
+        this.txtYoteiTeiin=txtYoteiTeiin;
+    }
+
+    @JsonProperty("txtJissiSu")
+    public TextBoxNum getTxtJissiSu() {
+        return txtJissiSu;
+    }
+
+    @JsonProperty("txtJissiSu")
+    public void setTxtJissiSu(TextBoxNum txtJissiSu) {
+        this.txtJissiSu=txtJissiSu;
     }
 
     @JsonProperty("txtKaisaiYoteibi")
@@ -106,16 +122,6 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     @JsonProperty("txtKaisaiYoteibi")
     public void setTxtKaisaiYoteibi(TextBoxFlexibleDate txtKaisaiYoteibi) {
         this.txtKaisaiYoteibi=txtKaisaiYoteibi;
-    }
-
-    @JsonProperty("lblYoteiTime")
-    public Label getLblYoteiTime() {
-        return lblYoteiTime;
-    }
-
-    @JsonProperty("lblYoteiTime")
-    public void setLblYoteiTime(Label lblYoteiTime) {
-        this.lblYoteiTime=lblYoteiTime;
     }
 
     @JsonProperty("txtYoteiStartTime")
@@ -148,16 +154,6 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
         this.txtYoteiEndTime=txtYoteiEndTime;
     }
 
-    @JsonProperty("lblYoteiKaijo")
-    public Label getLblYoteiKaijo() {
-        return lblYoteiKaijo;
-    }
-
-    @JsonProperty("lblYoteiKaijo")
-    public void setLblYoteiKaijo(Label lblYoteiKaijo) {
-        this.lblYoteiKaijo=lblYoteiKaijo;
-    }
-
     @JsonProperty("txtYoteiKaijo")
     public TextBox getTxtYoteiKaijo() {
         return txtYoteiKaijo;
@@ -168,16 +164,6 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
         this.txtYoteiKaijo=txtYoteiKaijo;
     }
 
-    @JsonProperty("lblKaisaiBi")
-    public Label getLblKaisaiBi() {
-        return lblKaisaiBi;
-    }
-
-    @JsonProperty("lblKaisaiBi")
-    public void setLblKaisaiBi(Label lblKaisaiBi) {
-        this.lblKaisaiBi=lblKaisaiBi;
-    }
-
     @JsonProperty("txtKaisaiBi")
     public TextBoxFlexibleDate getTxtKaisaiBi() {
         return txtKaisaiBi;
@@ -186,16 +172,6 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     @JsonProperty("txtKaisaiBi")
     public void setTxtKaisaiBi(TextBoxFlexibleDate txtKaisaiBi) {
         this.txtKaisaiBi=txtKaisaiBi;
-    }
-
-    @JsonProperty("lblKaisaiTime")
-    public Label getLblKaisaiTime() {
-        return lblKaisaiTime;
-    }
-
-    @JsonProperty("lblKaisaiTime")
-    public void setLblKaisaiTime(Label lblKaisaiTime) {
-        this.lblKaisaiTime=lblKaisaiTime;
     }
 
     @JsonProperty("txtKaisaiStartTime")
@@ -228,16 +204,6 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
         this.txtKaisaiEndTime=txtKaisaiEndTime;
     }
 
-    @JsonProperty("lblKaisaiKaijo")
-    public Label getLblKaisaiKaijo() {
-        return lblKaisaiKaijo;
-    }
-
-    @JsonProperty("lblKaisaiKaijo")
-    public void setLblKaisaiKaijo(Label lblKaisaiKaijo) {
-        this.lblKaisaiKaijo=lblKaisaiKaijo;
-    }
-
     @JsonProperty("ddlKaisaiBasho")
     public DropDownList getDdlKaisaiBasho() {
         return ddlKaisaiBasho;
@@ -246,66 +212,6 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     @JsonProperty("ddlKaisaiBasho")
     public void setDdlKaisaiBasho(DropDownList ddlKaisaiBasho) {
         this.ddlKaisaiBasho=ddlKaisaiBasho;
-    }
-
-    @JsonProperty("lblGogitai")
-    public Label getLblGogitai() {
-        return lblGogitai;
-    }
-
-    @JsonProperty("lblGogitai")
-    public void setLblGogitai(Label lblGogitai) {
-        this.lblGogitai=lblGogitai;
-    }
-
-    @JsonProperty("txtGogitai")
-    public TextBox getTxtGogitai() {
-        return txtGogitai;
-    }
-
-    @JsonProperty("txtGogitai")
-    public void setTxtGogitai(TextBox txtGogitai) {
-        this.txtGogitai=txtGogitai;
-    }
-
-    @JsonProperty("lblYoteiTeiin")
-    public Label getLblYoteiTeiin() {
-        return lblYoteiTeiin;
-    }
-
-    @JsonProperty("lblYoteiTeiin")
-    public void setLblYoteiTeiin(Label lblYoteiTeiin) {
-        this.lblYoteiTeiin=lblYoteiTeiin;
-    }
-
-    @JsonProperty("txtYoteiTeiin")
-    public TextBoxNum getTxtYoteiTeiin() {
-        return txtYoteiTeiin;
-    }
-
-    @JsonProperty("txtYoteiTeiin")
-    public void setTxtYoteiTeiin(TextBoxNum txtYoteiTeiin) {
-        this.txtYoteiTeiin=txtYoteiTeiin;
-    }
-
-    @JsonProperty("lblJissiNinzu")
-    public Label getLblJissiNinzu() {
-        return lblJissiNinzu;
-    }
-
-    @JsonProperty("lblJissiNinzu")
-    public void setLblJissiNinzu(Label lblJissiNinzu) {
-        this.lblJissiNinzu=lblJissiNinzu;
-    }
-
-    @JsonProperty("txtJissiSu")
-    public TextBoxNum getTxtJissiSu() {
-        return txtJissiSu;
-    }
-
-    @JsonProperty("txtJissiSu")
-    public void setTxtJissiSu(TextBoxNum txtJissiSu) {
-        this.txtJissiSu=txtJissiSu;
     }
 
     @JsonProperty("lblShinsaIn")
@@ -358,14 +264,24 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
         this.btnUpdate=btnUpdate;
     }
 
-    @JsonProperty("btnCancel")
-    public Button getBtnCancel() {
-        return btnCancel;
+    @JsonProperty("btnReturn")
+    public Button getBtnReturn() {
+        return btnReturn;
     }
 
-    @JsonProperty("btnCancel")
-    public void setBtnCancel(Button btnCancel) {
-        this.btnCancel=btnCancel;
+    @JsonProperty("btnReturn")
+    public void setBtnReturn(Button btnReturn) {
+        this.btnReturn=btnReturn;
+    }
+
+    @JsonProperty("btnToCancel")
+    public Button getBtnToCancel() {
+        return btnToCancel;
+    }
+
+    @JsonProperty("btnToCancel")
+    public void setBtnToCancel(Button btnToCancel) {
+        this.btnToCancel=btnToCancel;
     }
 
     @JsonProperty("ShinsakaiIinIchiran")
