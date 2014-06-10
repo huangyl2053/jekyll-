@@ -29,31 +29,66 @@ public final class YamlLoader {
     /**
      * DBA用のYamlLoaderです。
      */
+    @Deprecated
     public static final YamlLoader FOR_DBA;
     /**
      * DBB用のYamlLoaderです。
      */
+    @Deprecated
     public static final YamlLoader FOR_DBB;
     /**
      * DBC用のYamlLoaderです。
      */
+    @Deprecated
     public static final YamlLoader FOR_DBC;
     /**
      * DBD用のYamlLoaderです。
      */
+    @Deprecated
     public static final YamlLoader FOR_DBD;
     /**
      * DBE用のYamlLoaderです。
      */
+    @Deprecated
     public static final YamlLoader FOR_DBE;
     /**
      * DBU用のYamlLoaderです。
      */
+    @Deprecated
     public static final YamlLoader FOR_DBU;
     /**
      * DBZ用のYamlLoaderです。
      */
+    @Deprecated
     public static final YamlLoader FOR_DBZ;
+    /**
+     * DBA用のYamlLoaderです。
+     */
+    public static final YamlLoader DBA;
+    /**
+     * DBB用のYamlLoaderです。
+     */
+    public static final YamlLoader DBB;
+    /**
+     * DBC用のYamlLoaderです。
+     */
+    public static final YamlLoader DBC;
+    /**
+     * DBD用のYamlLoaderです。
+     */
+    public static final YamlLoader DBD;
+    /**
+     * DBE用のYamlLoaderです。
+     */
+    public static final YamlLoader DBE;
+    /**
+     * DBU用のYamlLoaderです。
+     */
+    public static final YamlLoader DBU;
+    /**
+     * DBZ用のYamlLoaderです。
+     */
+    public static final YamlLoader DBZ;
 
     static {
         FOR_DBA = new YamlLoader(rootPathFor(new RString("dba")));
@@ -65,8 +100,22 @@ public final class YamlLoader {
         FOR_DBZ = new YamlLoader(rootPathFor(new RString("dbz")));
     }
 
+    static {
+        DBA = new YamlLoader(composeRootPath("dba"));
+        DBB = new YamlLoader(composeRootPath("dbb"));
+        DBC = new YamlLoader(composeRootPath("dbc"));
+        DBD = new YamlLoader(composeRootPath("dbd"));
+        DBE = new YamlLoader(composeRootPath("dbe"));
+        DBU = new YamlLoader(composeRootPath("dbu"));
+        DBZ = new YamlLoader(composeRootPath("dbz"));
+    }
+
     private static RString rootPathFor(RString projectName) {
         return new RString("db/" + projectName + "/demodata/");
+    }
+
+    private static RString composeRootPath(String projectName) {
+        return new RString("demodata/demodata/db/" + projectName + "/");
     }
     private final RString rootPath;
 
@@ -104,6 +153,7 @@ public final class YamlLoader {
     private Object load(RString fileName) {
         InputStream input = null;
         String urlHeader = ((_IServletControlData) _ControlDataHolder.getControlData()).getUrlHeader();
+        System.out.println("Header : " + urlHeader);
         try {
             URL url = new URL(urlHeader.concat(rootPath.toString()).concat(fileName.toString()));
             input = url.openStream();
