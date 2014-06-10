@@ -1209,7 +1209,7 @@
        "fieldName": "txtFukanendo",
        "items": [],
        "controlType": "TextBoxDate",
-       "width": "60",
+       "width": "35",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1241,7 +1241,7 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "permitCharactor": "./_-",
-       "ymdKubun": 2,
+       "ymdKubun": 0,
        "displayFormat": 0
       },
       {
@@ -1285,7 +1285,7 @@
           "dataName": "txtChoteiNendo",
           "toolTip": "",
           "bgColor": 0,
-          "width": 60,
+          "width": 40,
           "visible": true,
           "cellType": 0,
           "cellDetails": {
@@ -1301,7 +1301,7 @@
           "dataName": "txtTsuchiNo",
           "toolTip": "",
           "bgColor": 0,
-          "width": 150,
+          "width": 135,
           "visible": true,
           "cellType": 0,
           "cellDetails": {
@@ -1317,7 +1317,7 @@
           "dataName": "txtHihoNo",
           "toolTip": "",
           "bgColor": 0,
-          "width": 150,
+          "width": 90,
           "visible": true,
           "cellType": 0,
           "cellDetails": {
@@ -1333,7 +1333,7 @@
           "dataName": "txtName",
           "toolTip": "",
           "bgColor": 0,
-          "width": 150,
+          "width": 200,
           "visible": true,
           "cellType": 0,
           "cellDetails": {
@@ -1349,7 +1349,7 @@
           "dataName": "txtUmareYmd",
           "toolTip": "",
           "bgColor": 0,
-          "width": 100,
+          "width": 80,
           "visible": true,
           "cellType": 7,
           "cellDetails": {
@@ -1368,7 +1368,7 @@
           "dataName": "txtSeibetsu",
           "toolTip": "",
           "bgColor": 0,
-          "width": 60,
+          "width": 40,
           "visible": true,
           "cellType": 0,
           "cellDetails": null,
@@ -1396,7 +1396,7 @@
           "dataName": "txtJusho",
           "toolTip": "",
           "bgColor": 0,
-          "width": 200,
+          "width": 250,
           "visible": true,
           "cellType": 0,
           "cellDetails": null,
@@ -1410,7 +1410,7 @@
           "dataName": "txtShikbetsuCode",
           "toolTip": "",
           "bgColor": 0,
-          "width": 150,
+          "width": 120,
           "visible": true,
           "cellType": 0,
           "cellDetails": null,
@@ -1431,7 +1431,7 @@
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
-       "sortOrder": "txtHihoNo",
+       "sortOrder": "txtName",
        "isAscending": true,
        "filterList": [],
        "activeRowId": -1

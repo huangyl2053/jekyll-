@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
@@ -28,13 +29,16 @@ public class GaitoshaKensakuMain {
 
     public ResponseData<GaitoshaKensakuMainDiv> getOnLoadData(GaitoshaKensakuMainDiv panel) {
         ResponseData<GaitoshaKensakuMainDiv> response = new ResponseData<>();
+        panel.getKensakuShiji().getJokenNyuryoku().getRadFix().setSelectedItem(new RString("key0"));
+                panel.getKensakuShiji().getJokenNyuryoku().getAtenaShosaiJoken().getRadNaiGai().setSelectedItem(new RString("key0"));
+        panel.getKensakuShiji().getJokenNyuryoku().getTxtMaxGetKensu().setValue(new Decimal(100));
         response.data = panel;
         return response;
     }
 
     public ResponseData<GaitoshaKensakuMainDiv> onClick_BtnSearch(GaitoshaKensakuMainDiv panel) {
         ResponseData<GaitoshaKensakuMainDiv> response = new ResponseData<>();
-        panel.getGaitoshaSentaku().getTxtFukanendo().setValue(new RDate(2014));
+        panel.getGaitoshaSentaku().getTxtFukanendo().setValue(RDate.getNowDate());
         List<dgdGaitoushaIchiran_Row> arrayData = createRowGaitoshaIchiranData();
         DataGrid<dgdGaitoushaIchiran_Row> grid = panel.getGaitoshaSentaku().getDgdGaitoushaIchiran();
         grid.setDataSource(arrayData);
@@ -58,7 +62,7 @@ public class GaitoshaKensakuMain {
             row.setTxtName(cg.getAsRString("氏名"));
             row.setTxtUmareYmd(cg.getAsTextBoxFlexibleDate("生年月日"));
             row.setTxtSeibetsu(cg.getAsRString("性別"));
-            row.setTxtShubetsu(cg.getAsRString("住民種別"));
+            row.setTxtShubetsu(cg.getAsRString("種別"));
             row.setTxtJusho(cg.getAsRString("住所"));
             row.setTxtShikbetsuCode(cg.getAsRString("識別コード"));
 
