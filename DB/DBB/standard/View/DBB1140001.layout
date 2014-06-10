@@ -1,0 +1,475 @@
+﻿{
+ "fieldName": "Page",
+ "items": [
+  {
+   "fieldName": "ShotokushokaihyoIkkatu",
+   "items": [
+    {
+     "fieldName": "ddlShoriNendo",
+     "items": [],
+     "controlType": "DropDownList",
+     "width": "60",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "ddlShoriNendo_core",
+     "onChange": "",
+     "selectedItem": "key0",
+     "dataSource": [
+      {
+       "key": "key0",
+       "value": "平26"
+      },
+      {
+       "key": "key1",
+       "value": "平25"
+      },
+      {
+       "key": "key2",
+       "value": "平24"
+      }
+     ],
+     "required": false,
+     "labelLText": "処理年度",
+     "labelRText": "",
+     "labelLWidth": "70",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "onFocus": "",
+     "onBlur": ""
+    },
+    {
+     "fieldName": "linShotokushokai1",
+     "items": [],
+     "controlType": "HorizontalLine",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "linShotokushokai1",
+     "size": "Default"
+    },
+    {
+     "fieldName": "chkShuturyokuTaisho",
+     "items": [],
+     "controlType": "CheckBoxList",
+     "width": "L",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "chkShuturyokuTaisho_core",
+     "onChange": "",
+     "selectedItem": null,
+     "dataSource": [
+      {
+       "key": "key0",
+       "value": "1号被保険者および賦課基準日時点の世帯員"
+      },
+      {
+       "key": "key1",
+       "value": "受給者および世帯員（2号被保険者を含む）"
+      }
+     ],
+     "required": true,
+     "labelLText": "出力対象",
+     "labelLWidth": "70",
+     "labelLAlign": 2,
+     "onClick": "",
+     "selectedItems": [],
+     "newLineItemNumber": 1,
+     "minCheckedItem": 0,
+     "maxCheckedItem": 2,
+     "spaceSize": "M",
+     "isAllSelectable": true,
+     "icon": []
+    },
+    {
+     "fieldName": "ShotokushokaihyoShutsuryokuJun",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": 0,
+     "marginRight": 0,
+     "selectControlID": "ShotokushokaihyoShutsuryokuJun",
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": "1",
+     "businessId": "URZ",
+     "controlName": "ChohyoShutsuryokujun",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": ""
+    },
+    {
+     "fieldName": "chkSaihakko",
+     "items": [],
+     "controlType": "CheckBoxList",
+     "width": "150",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "chkSaihakko_core",
+     "onChange": "",
+     "selectedItem": null,
+     "dataSource": [
+      {
+       "key": "key0",
+       "value": "再発行する"
+      }
+     ],
+     "labelLText": "",
+     "labelLWidth": "S",
+     "labelLAlign": 2,
+     "onClick": "",
+     "selectedItems": [],
+     "newLineItemNumber": 2,
+     "minCheckedItem": 0,
+     "maxCheckedItem": 2,
+     "spaceSize": "M",
+     "isAllSelectable": false,
+     "icon": []
+    },
+    {
+     "fieldName": "dgSaihakko",
+     "items": [],
+     "controlType": "DataGrid",
+     "width": "500",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "L",
+     "marginRight": "XS",
+     "selectControlID": "dgSaihakko",
+     "dataSource": [],
+     "gridSetting": {
+      "rowHeight": 25,
+      "isMultiSelectable": true,
+      "isShowHeader": true,
+      "isShowFooter": false,
+      "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": false,
+      "isShowSelectButtonColumn": false,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
+      "header": {
+       "combineColumns": [],
+       "frozenColumn": "",
+       "headerHeight": 0
+      },
+      "columns": [
+       {
+        "columnName": "",
+        "dataName": "chkSentaku",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 40,
+        "visible": false,
+        "cellType": 2,
+        "cellDetails": {
+         "cellType": 2,
+         "disabled": false
+        },
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       },
+       {
+        "columnName": "処理年度",
+        "dataName": "txtShoriNendo",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "txtShoriNendo"
+       },
+       {
+        "columnName": "処理日時",
+        "dataName": "txtShoriNichiji",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 150,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "txtShoriNichiji"
+       },
+       {
+        "columnName": "発行件数",
+        "dataName": "txtHakkoKensu",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       },
+       {
+        "columnName": "ユーザ",
+        "dataName": "txtUser",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 140,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "txtUser"
+       }
+      ]
+     },
+     "height": "S",
+     "onSort": "",
+     "onSelect": "",
+     "onSelectByDblClick": "",
+     "onSelectBySelectButton": "",
+     "onSelectByModifyButton": "",
+     "onSelectByDeleteButton": "",
+     "onOnlyRow": "",
+     "onNoRow": "",
+     "onMultiRows": "",
+     "sortOrder": "",
+     "isAscending": true,
+     "filterList": [],
+     "activeRowId": -1
+    },
+    {
+     "fieldName": "btnHakko",
+     "items": [],
+     "controlType": "Button",
+     "width": "M",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnHakko",
+     "onClick": "",
+     "icon": 0,
+     "text": "発行する",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
+    }
+   ],
+   "controlType": "Panel",
+   "width": "1106",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0",
+   "marginRight": "XS",
+   "selectControlID": "ShotokushokaihyoIkkatu",
+   "onLoad": "",
+   "title": "所得照会票一括発行",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "ShotokushokaihyoIkkatu"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false
+  }
+ ],
+ "controlType": null,
+ "width": "XS",
+ "visible": true,
+ "displayNone": false,
+ "disabled": false,
+ "accessKey": "",
+ "nextFocusFieldName": "",
+ "wrap": false,
+ "dependencies": [],
+ "float": 0,
+ "toolTip": "",
+ "authorityMode": 0,
+ "marginLeft": "XS",
+ "marginRight": "XS",
+ "selectControlID": "Page",
+ "onLoad": "",
+ "title": "所得照会票一括発行",
+ "jsPathCollection": [],
+ "relation": [],
+ "stateTransition": [
+  {
+   "order": "1",
+   "stateName": "所得照会票一括発行",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "ShotokushokaihyoIkkatu",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ShotokushokaihyoShutsuryokuJun",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "validation": {},
+   "events": []
+  }
+ ],
+ "currentState": "所得照会票一括発行",
+ "id": "DBB1140001",
+ "WFParameter": [],
+ "UIContainerEventMapping": [],
+ "loadSequencePanelNames": [
+  [
+   "ShotokushokaihyoIkkatu"
+  ],
+  [
+   "ShotokushokaihyoShutsuryokuJun"
+  ]
+ ],
+ "panelMargin": 1,
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "btnHakko",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonComplete",
+     "buttonProperty": {
+      "fieldName": "Element1",
+      "items": [],
+      "controlType": "CommonButtonComplete",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "Element1",
+      "onClick": "",
+      "icon": 0,
+      "text": "完了",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "additionalText": "発行"
+     }
+    }
+   ],
+   "states": [],
+   "isFinishButtonOnTheRight": true
+  }
+ ]
+}
