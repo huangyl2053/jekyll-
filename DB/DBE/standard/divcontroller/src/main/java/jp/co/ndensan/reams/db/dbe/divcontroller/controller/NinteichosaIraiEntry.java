@@ -739,7 +739,7 @@ public class NinteichosaIraiEntry {
         }
 
         private RString _composeKey(RString value) {
-            return value.equals(RString.EMPTY) ? new RString("0") : value.substring(0, 0);
+            return value.equals(RString.EMPTY) ? new RString("0") : value.substring(0, 1);
         }
 
         /**

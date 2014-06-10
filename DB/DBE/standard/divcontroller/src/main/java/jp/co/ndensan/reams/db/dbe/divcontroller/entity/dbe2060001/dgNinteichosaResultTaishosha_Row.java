@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Jun 05 19:40:12 JST 2014 
+ * Tue Jun 10 11:57:16 JST 2014 
  */
 
 
@@ -33,10 +33,14 @@ public class dgNinteichosaResultTaishosha_Row extends DataRow {
     private TextBoxFlexibleDate shinseiDate;
     private RString shinseiKubun;
     private TextBoxFlexibleDate chosaIraiDate;
+    private TextBoxFlexibleDate chosaJisshiDate;
+    private TextBoxFlexibleDate chosaKanryoDate;
     private RString chosaItakusakiCode;
     private RString chosaItakusakiName;
     private RString chosainCode;
     private RString chosainName;
+    private RString chosaJisshiBashoType;
+    private RString chosaJisshiBashoOther;
     private TextBoxFlexibleDate birthDay;
     private RString gender;
     private RString yubinNo;
@@ -48,7 +52,7 @@ public class dgNinteichosaResultTaishosha_Row extends DataRow {
         super();
     }
 
-    public dgNinteichosaResultTaishosha_Row(Button btnToDecide, RString hokenshaNo, RString hokenshaName, RString hihokenshaNo, RString shikibetsuCode, RString shimei, RString kanaShimei, RString shimeiAndKanaShimei, TextBoxFlexibleDate shinseiDate, RString shinseiKubun, TextBoxFlexibleDate chosaIraiDate, RString chosaItakusakiCode, RString chosaItakusakiName, RString chosainCode, RString chosainName, TextBoxFlexibleDate birthDay, RString gender, RString yubinNo, RString jusho, TextBoxFlexibleDate receptionDate, TextBoxFlexibleDate dataInputDate) {
+    public dgNinteichosaResultTaishosha_Row(Button btnToDecide, RString hokenshaNo, RString hokenshaName, RString hihokenshaNo, RString shikibetsuCode, RString shimei, RString kanaShimei, RString shimeiAndKanaShimei, TextBoxFlexibleDate shinseiDate, RString shinseiKubun, TextBoxFlexibleDate chosaIraiDate, TextBoxFlexibleDate chosaJisshiDate, TextBoxFlexibleDate chosaKanryoDate, RString chosaItakusakiCode, RString chosaItakusakiName, RString chosainCode, RString chosainName, RString chosaJisshiBashoType, RString chosaJisshiBashoOther, TextBoxFlexibleDate birthDay, RString gender, RString yubinNo, RString jusho, TextBoxFlexibleDate receptionDate, TextBoxFlexibleDate dataInputDate) {
         super();
         this.setOriginalData("btnToDecide", btnToDecide);
         this.setOriginalData("hokenshaNo", hokenshaNo);
@@ -61,10 +65,14 @@ public class dgNinteichosaResultTaishosha_Row extends DataRow {
         this.setOriginalData("shinseiDate", shinseiDate);
         this.setOriginalData("shinseiKubun", shinseiKubun);
         this.setOriginalData("chosaIraiDate", chosaIraiDate);
+        this.setOriginalData("chosaJisshiDate", chosaJisshiDate);
+        this.setOriginalData("chosaKanryoDate", chosaKanryoDate);
         this.setOriginalData("chosaItakusakiCode", chosaItakusakiCode);
         this.setOriginalData("chosaItakusakiName", chosaItakusakiName);
         this.setOriginalData("chosainCode", chosainCode);
         this.setOriginalData("chosainName", chosainName);
+        this.setOriginalData("chosaJisshiBashoType", chosaJisshiBashoType);
+        this.setOriginalData("chosaJisshiBashoOther", chosaJisshiBashoOther);
         this.setOriginalData("birthDay", birthDay);
         this.setOriginalData("gender", gender);
         this.setOriginalData("yubinNo", yubinNo);
@@ -82,10 +90,14 @@ public class dgNinteichosaResultTaishosha_Row extends DataRow {
         this.shinseiDate = shinseiDate;
         this.shinseiKubun = shinseiKubun;
         this.chosaIraiDate = chosaIraiDate;
+        this.chosaJisshiDate = chosaJisshiDate;
+        this.chosaKanryoDate = chosaKanryoDate;
         this.chosaItakusakiCode = chosaItakusakiCode;
         this.chosaItakusakiName = chosaItakusakiName;
         this.chosainCode = chosainCode;
         this.chosainName = chosainName;
+        this.chosaJisshiBashoType = chosaJisshiBashoType;
+        this.chosaJisshiBashoOther = chosaJisshiBashoOther;
         this.birthDay = birthDay;
         this.gender = gender;
         this.yubinNo = yubinNo;
@@ -138,6 +150,14 @@ public class dgNinteichosaResultTaishosha_Row extends DataRow {
         return chosaIraiDate;
     }
 
+    public TextBoxFlexibleDate getChosaJisshiDate() {
+        return chosaJisshiDate;
+    }
+
+    public TextBoxFlexibleDate getChosaKanryoDate() {
+        return chosaKanryoDate;
+    }
+
     public RString getChosaItakusakiCode() {
         return chosaItakusakiCode;
     }
@@ -152,6 +172,14 @@ public class dgNinteichosaResultTaishosha_Row extends DataRow {
 
     public RString getChosainName() {
         return chosainName;
+    }
+
+    public RString getChosaJisshiBashoType() {
+        return chosaJisshiBashoType;
+    }
+
+    public RString getChosaJisshiBashoOther() {
+        return chosaJisshiBashoOther;
     }
 
     public TextBoxFlexibleDate getBirthDay() {
@@ -233,6 +261,16 @@ public class dgNinteichosaResultTaishosha_Row extends DataRow {
         this.chosaIraiDate = chosaIraiDate;
     }
 
+    public void setChosaJisshiDate(TextBoxFlexibleDate chosaJisshiDate) {
+        this.setOriginalData("chosaJisshiDate", chosaJisshiDate);
+        this.chosaJisshiDate = chosaJisshiDate;
+    }
+
+    public void setChosaKanryoDate(TextBoxFlexibleDate chosaKanryoDate) {
+        this.setOriginalData("chosaKanryoDate", chosaKanryoDate);
+        this.chosaKanryoDate = chosaKanryoDate;
+    }
+
     public void setChosaItakusakiCode(RString chosaItakusakiCode) {
         this.setOriginalData("chosaItakusakiCode", chosaItakusakiCode);
         this.chosaItakusakiCode = chosaItakusakiCode;
@@ -251,6 +289,16 @@ public class dgNinteichosaResultTaishosha_Row extends DataRow {
     public void setChosainName(RString chosainName) {
         this.setOriginalData("chosainName", chosainName);
         this.chosainName = chosainName;
+    }
+
+    public void setChosaJisshiBashoType(RString chosaJisshiBashoType) {
+        this.setOriginalData("chosaJisshiBashoType", chosaJisshiBashoType);
+        this.chosaJisshiBashoType = chosaJisshiBashoType;
+    }
+
+    public void setChosaJisshiBashoOther(RString chosaJisshiBashoOther) {
+        this.setOriginalData("chosaJisshiBashoOther", chosaJisshiBashoOther);
+        this.chosaJisshiBashoOther = chosaJisshiBashoOther;
     }
 
     public void setBirthDay(TextBoxFlexibleDate birthDay) {

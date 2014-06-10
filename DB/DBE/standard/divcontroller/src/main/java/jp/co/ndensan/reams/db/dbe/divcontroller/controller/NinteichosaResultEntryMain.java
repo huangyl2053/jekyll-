@@ -27,8 +27,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.ServiceJokyoTa
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.ShisakaiWaritsukeKiboDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.dgNinteichosaResultTaishosha_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.serviceWithCountCom.ServiceWithCountCom;
-import jp.co.ndensan.reams.ur.urz.business.DateOfBirthFactory;
-import jp.co.ndensan.reams.ur.urz.business.IDateOfBirth;
+//import jp.co.ndensan.reams.ur.urz.business.DateOfBirthFactory;
+//import jp.co.ndensan.reams.ur.urz.business.IDateOfBirth;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
@@ -54,7 +55,9 @@ public class NinteichosaResultEntryMain {
      */
     public ResponseData<NinteichosaResultEntryMainDiv> onLoad(NinteichosaResultEntryMainDiv div, NinteichosaResultEntryTargetDiv target) {
         ResponseData<NinteichosaResultEntryMainDiv> response = new ResponseData<>();
+
         _onLoad(div);
+
         response.data = div;
         return response;
     }
@@ -69,20 +72,40 @@ public class NinteichosaResultEntryMain {
      * NinteichosaResultEntryMainDivを表示した時の処理です。
      *
      * @param div NinteichosaResultEntryMainDiv
-     * @param target NinteichosaResultEntryTargetDiv
+     * @param targetList NinteichosaResultEntryTargetDiv
      * @return ResponseData
      */
-    public ResponseData<NinteichosaResultEntryMainDiv> onStart_NinteichosaResultEntryMain(NinteichosaResultEntryMainDiv div, NinteichosaResultEntryTargetDiv target) {
+    public ResponseData<NinteichosaResultEntryMainDiv> onStart_NinteichosaResultEntryMain(NinteichosaResultEntryMainDiv div, NinteichosaResultEntryTargetDiv targetList) {
         ResponseData<NinteichosaResultEntryMainDiv> response = new ResponseData<>();
 
         div.setDisplayNone(false);
 
-        dgNinteichosaResultTaishosha_Row targetInfo = target.getDgNinteichosaResultTaishosha().getClickedItem();
+        dgNinteichosaResultTaishosha_Row targetInfo = _extractSelectedTargetFrom(targetList);
+
+        System.out.println("after :" + targetInfo.getChosaJisshiBashoType());
+        System.out.println("after :" + RString.EMPTY.equals(targetInfo.getChosaJisshiBashoType()));
+
         new HihokenshaForNinteichosaResult(div).init(targetInfo);
         new NinteichosaDetail(div).init(targetInfo);
         new ShinsakaiWaritsukeKibo(div).init();
         new ServiceJokyoTab(div).init();
         new Kihonchosa09(div).init();
+
+        response.data = div;
+        return response;
+    }
+
+    /**
+     * btnToReturnをClickした時の処理です。
+     *
+     * @param div NinteichosaResultEntryMainDiv
+     * @param target NinteichosaResultEntryTargetDiv
+     * @return ResponseData
+     */
+    public ResponseData<NinteichosaResultEntryMainDiv> onClick_btnToReturn(NinteichosaResultEntryMainDiv div, NinteichosaResultEntryTargetDiv target) {
+        ResponseData<NinteichosaResultEntryMainDiv> response = new ResponseData<>();
+
+        div.setDisplayNone(true);
 
         response.data = div;
         return response;
@@ -120,6 +143,28 @@ public class NinteichosaResultEntryMain {
         return response;
     }
 
+    /**
+     * btnToRegisterResultをClickした時の処理です。
+     *
+     * @param div NinteichosaResultEntryMainDiv
+     * @param targetList NinteichosaResultEntryTargetDiv
+     * @return ResponseData
+     */
+    public ResponseData<NinteichosaResultEntryMainDiv> onClick_btnToRegisterResult(NinteichosaResultEntryMainDiv div, NinteichosaResultEntryTargetDiv targetList) {
+        ResponseData<NinteichosaResultEntryMainDiv> response = new ResponseData<>();
+
+        dgNinteichosaResultTaishosha_Row target = _extractSelectedTargetFrom(targetList);
+        new NinteichosaDetail(div).reflectPanelValueTo(target);
+        NinteichosaResultEntryTarget.Holder.save(target);
+
+        response.data = div;
+        return response;
+    }
+
+    private dgNinteichosaResultTaishosha_Row _extractSelectedTargetFrom(NinteichosaResultEntryTargetDiv div) {
+        return div.getDgNinteichosaResultTaishosha().getClickedItem();
+    }
+
     //<editor-fold defaultstate="collapsed" desc="HihokenshaForNinteichosaResult">
     /**
      * HihokenshaForNinteichosaResultDivを操作するためのクラスです。
@@ -145,10 +190,9 @@ public class NinteichosaResultEntryMain {
             panel.getTxtHihokenshaGender().setValue(targetInfo.getGender());
             panel.getTxtHihokenshaYubinNo().setValue(targetInfo.getYubinNo());
             panel.getTxtHihokenshaJusho().setValue(targetInfo.getJusho());
-            IDateOfBirth birthDay = DateOfBirthFactory.createInstance(targetInfo.getBirthDay().getValue());
-            panel.getTxtHihokenshaBirthDay().setValue(birthDay.toFlexibleDate());
-            System.out.println(birthDay.get年齢());
-            panel.getTxtHihokenshaAge().setValue(new RString(Integer.toString(birthDay.get年齢())));
+            panel.getTxtHihokenshaBirthDay().setValue(targetInfo.getBirthDay().getValue());
+//            IDateOfBirth birthDay = DateOfBirthFactory.createInstance(targetInfo.getBirthDay().getValue());
+//            panel.getTxtHihokenshaAge().setValue(new RString(Integer.toString(birthDay.get年齢())));
         }
     }
 //</editor-fold>
@@ -170,30 +214,48 @@ public class NinteichosaResultEntryMain {
         }
 
         public void init(dgNinteichosaResultTaishosha_Row targetInfo) {
-            _initWithTargetInfo(targetInfo);
-            _initControls();
+            _init_ChosaItakusakiAndChosain(targetInfo);
+            _init_ChosaJisshiBasho(targetInfo);
+            _init_ChosaJisshiDate(targetInfo);
         }
 
-        private void _initWithTargetInfo(dgNinteichosaResultTaishosha_Row targetInfo) {
-            panel.getTxtChosainCode().setValue(targetInfo.getChosainCode());
-            panel.getTxtChosainName().setValue(targetInfo.getChosainName());
-            panel.getTxtChosaItakusakiCode().setValue(targetInfo.getChosaItakusakiCode());
-            panel.getTxtChosaItakusakiName().setValue(targetInfo.getChosaItakusakiName());
+        private void _init_ChosaItakusakiAndChosain(dgNinteichosaResultTaishosha_Row targetInfo) {
+            _txtChosainCode().setValue(targetInfo.getChosainCode());
+            _txtChosainName().setValue(targetInfo.getChosainName());
+            _txtChosaItakusakiCode().setValue(targetInfo.getChosaItakusakiCode());
+            _txtChosaItakusakiName().setValue(targetInfo.getChosaItakusakiName());
         }
 
-        private void _initControls() {
-            _init_txtChosaJisshiBashoFreeInput();
-            _init_radChosaJisshiBasho();
-            _init_txtChosaJisshiDate();
+        private TextBoxCode _txtChosainCode() {
+            return this.panel.getTxtChosainCode();
         }
 
-        private void _init_txtChosaJisshiDate() {
-            _txtChosaJisshiDate().clearValue();
+        private TextBox _txtChosainName() {
+            return this.panel.getTxtChosainName();
         }
 
-        private void _init_txtChosaJisshiBashoFreeInput() {
-            _txtChosaJisshiBashoFreeInput().clearValue();
-            _txtChosaJisshiBashoFreeInput().setDisabled(true);
+        private TextBoxCode _txtChosaItakusakiCode() {
+            return this.panel.getTxtChosaItakusakiCode();
+        }
+
+        private TextBox _txtChosaItakusakiName() {
+            return this.panel.getTxtChosaItakusakiName();
+        }
+
+        private void _init_ChosaJisshiBasho(dgNinteichosaResultTaishosha_Row targetInfo) {
+            ChosaJisshiBasho place;
+            place = ChosaJisshiBasho.toValue(maybeRString(targetInfo.getChosaJisshiBashoType()).substring(0, 1));
+            _radChosaJisshiBasho().setSelectedItem(place.item());
+            if (place != ChosaJisshiBasho.その他) {
+                _txtChosaJisshiBashoFreeInput().clearValue();
+            } else {
+                _txtChosaJisshiBashoFreeInput().setValue(targetInfo.getChosaJisshiBashoOther());
+            }
+            _setDisable_txtChosaJisshiBashoFreeInput_when_調査実施場所(_is_not_その他());
+        }
+
+        private void _init_ChosaJisshiDate(dgNinteichosaResultTaishosha_Row targetInfo) {
+            _txtChosaJisshiDate().setValue(targetInfo.getChosaJisshiDate().getValue());
         }
 
         private TextBox _txtChosaJisshiBashoFreeInput() {
@@ -202,6 +264,13 @@ public class NinteichosaResultEntryMain {
 
         private TextBoxFlexibleDate _txtChosaJisshiDate() {
             return this.panel.getTxtChosaJisshiDate();
+        }
+
+        private RString maybeRString(RString rstr) {
+            if ((rstr == null) || (rstr.length() == 0)) {
+                return ChosaJisshiBasho.自宅.item();
+            }
+            return rstr;
         }
 
         /**
@@ -221,10 +290,12 @@ public class NinteichosaResultEntryMain {
             その他("9");
             private final RString theKey;
             private final RString theValue;
+            private final RString theValueWithCode;
 
             private ChosaJisshiBasho(String key) {
                 this.theKey = new RString(key);
                 this.theValue = new RString(name());
+                this.theValueWithCode = new RString(theKey + ":" + theValue);
             }
 
             public RString item() {
@@ -233,6 +304,10 @@ public class NinteichosaResultEntryMain {
 
             public RString value() {
                 return this.theValue;
+            }
+
+            public RString valueWithCode() {
+                return this.theValueWithCode;
             }
 
             public KeyValueDataSource toKeyValueDataSource() {
@@ -246,23 +321,48 @@ public class NinteichosaResultEntryMain {
                 }
                 return list;
             }
+
+            public static ChosaJisshiBasho toValue(RString key) {
+                for (ChosaJisshiBasho place : values()) {
+                    if (place.theKey.equals(key)) {
+                        return place;
+                    }
+                }
+                return その他;
+
+            }
         }
+
         //</editor-fold>
+        public void onChange_radChosaJisshiBasho() {
+            _setDisable_txtChosaJisshiBashoFreeInput_when_調査実施場所(_is_not_その他());
+        }
 
         private void _onLoad_radChosaJisshiBasho() {
             _radChosaJisshiBasho().setDataSource(ChosaJisshiBasho.toDataSource());
         }
 
-        private void _init_radChosaJisshiBasho() {
-            _radChosaJisshiBasho().setSelectedItem(ChosaJisshiBasho.自宅.item());
+        private void _setDisable_txtChosaJisshiBashoFreeInput_when_調査実施場所(boolean is_not_その他) {
+            _txtChosaJisshiBashoFreeInput().setDisabled(is_not_その他);
         }
 
-        public void onChange_radChosaJisshiBasho() {
-            if (ChosaJisshiBasho.その他.item().equals(_radChosaJisshiBasho().getSelectedItem())) {
-                _txtChosaJisshiBashoFreeInput().setDisabled(false);
+        private boolean _is_not_その他() {
+            return !ChosaJisshiBasho.その他.item().equals(_radChosaJisshiBasho().getSelectedItem());
+        }
+
+        public void reflectPanelValueTo(dgNinteichosaResultTaishosha_Row targetInfo) {
+            targetInfo.getChosaJisshiDate().setValue(_txtChosaJisshiDate().getValue());
+            ChosaJisshiBasho place = ChosaJisshiBasho.toValue(_radChosaJisshiBasho().getSelectedItem());
+            targetInfo.setChosaJisshiBashoType(place.valueWithCode());
+            if (place == ChosaJisshiBasho.その他) {
+                targetInfo.setChosaJisshiBashoOther(_txtChosaJisshiBashoFreeInput().getValue());
             } else {
-                _txtChosaJisshiBashoFreeInput().setDisabled(true);
+                targetInfo.setChosaJisshiBashoOther(RString.EMPTY);
             }
+            targetInfo.setChosaItakusakiCode(_txtChosainCode().getValue());
+            targetInfo.setChosaItakusakiName(_txtChosaItakusakiName().getValue());
+            targetInfo.setChosainCode(_txtChosainCode().getValue());
+            targetInfo.setChosainName(_txtChosainName().getValue());
         }
     }
     //</editor-fold>

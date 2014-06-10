@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.ButtonsForNint
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.HihokenshaForNinteichosaResultDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.NinteichosaDetailDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.ShisakaiWaritsukeKiboDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.tabNinteichosaResultDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
