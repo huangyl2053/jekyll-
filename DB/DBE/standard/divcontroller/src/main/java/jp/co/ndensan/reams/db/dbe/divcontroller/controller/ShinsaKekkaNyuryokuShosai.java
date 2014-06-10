@@ -7,12 +7,12 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShinsaKekkaNyuryokuShosaiDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShinsaShienTaishoshaIchiranDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgChosakekka1_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgChosakekka2_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgChosakekka3_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgShinsaTaishoshaIchiran1_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5020001.ShinsaKekkaNyuryokuShosaiDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5020001.ShinsaShienTaishoshaIchiranDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5020001.dgChosakekka1_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5020001.dgChosakekka2_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5020001.dgChosakekka3_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5020001.dgShinsaTaishoshaIchiran1_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -169,9 +169,11 @@ public class ShinsaKekkaNyuryokuShosai {
             div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtShinseiKubunHorei().setValue(RString.EMPTY);
             response.data = div;
         } else {
-            div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtNinteiYukoKikanStart().setValue(new FlexibleDate(dataRow.get認定期間開始日()));
+            div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtNinteiYukoKikanStart().
+                    setValue(new FlexibleDate(dataRow.get認定期間開始日()));
             div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtNinteiYukoKikanStart().setDisabled(false);
-            div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtNinteiYukoKikanEnd().setValue(new FlexibleDate("20160630"));
+            div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtNinteiYukoKikanEnd().
+                    setValue(new FlexibleDate("20160630"));
             div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtShinseiKubunHorei().setValue(new RString("更新"));
             if (div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getDdlNijiHanteiKekka()
                     .getSelectedValue().equalsIgnoreCase(new RString("要介護１"))) {
@@ -576,7 +578,7 @@ public class ShinsaKekkaNyuryokuShosai {
 
         Button btn = new Button();
         dgChosakekka2_Row rowChosakekka2Data = new dgChosakekka2_Row(
-                btn, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE);
+                btn, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE);
 
         btn.setDisabled(btnSelect);
         btn.setDisplayNone(btnSelect);
@@ -595,7 +597,7 @@ public class ShinsaKekkaNyuryokuShosai {
 
         Button btn = new Button();
         dgChosakekka3_Row rowChosakekka3Data = new dgChosakekka3_Row(
-                btn, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE);
+                btn, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE);
 
         btn.setDisabled(btnSelect);
         btn.setDisplayNone(btnSelect);

@@ -12,9 +12,10 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060005.ChosaKekkaShos
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060005.ChosaOcrTorikomiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060005.ChosaKekkaShuseiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060005.ChosaKekkaShosaiDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgChosakekka1_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgChosakekka2_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgChosakekka3_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060005.dgChosakekka1_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060005.dgChosakekka2_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060005.dgChosakekka3_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -30,10 +31,17 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
  */
 public class ChosaKekkaShosaiMain {
 
+    private static final RString CST_STR1 = new RString("1");
+    private static final RString CST_STR2 = new RString("2");
+    private static final RString CST_STR3 = new RString("3");
+    private static final RString CST_STR4 = new RString("4");
+    private static final RString CST_STR5 = new RString("5");
+    private static final RString CST_STR6 = new RString("6");
+
     /**
      * 調査票取込み対象者一覧データグリッド上の対象者選択時の処理を表します。
      *
-     * @param panel ChosaKekkaShosaiMainDiv,ChosaOcrTorikomiDiv
+     * @param panel chosaKekkaShosaiMainDiv,ChosaOcrTorikomiDiv
      * @param panel2 ChosaOcrTorikomiDiv
      * @return ResponseData
      */
@@ -55,7 +63,7 @@ public class ChosaKekkaShosaiMain {
      * 調査結果確認データグリッド上のボタン押下時の処理を表します。
      *
      * @param panel ChosaKekkaShuseiDiv
-     * @param panel2 ChosaKekkaShosaiDiv
+     * @param panel2 chosaKekkaShosaiDiv
      * @return ResponseData
      */
     public ResponseData<ChosaKekkaShuseiDiv> onClickChosaKekka(ChosaKekkaShuseiDiv panel, ChosaKekkaShosaiDiv panel2) {
@@ -103,30 +111,31 @@ public class ChosaKekkaShosaiMain {
      */
     private void setChosaKekkaShosaiData(ChosaKekkaShosaiMainDiv panel, int iSelectId) {
 
-        List<HashMap> ChosaKekkaShosai = YamlLoader.FOR_DBE.loadAsList(new RString("dbe2060005/ChosaKekkaShosaiMain.yml"));
+        List<HashMap> chosaKekkaShosai = YamlLoader.FOR_DBE.loadAsList(new RString("dbe2060005/ChosaKekkaShosaiMain.yml"));
 
-        HashMap hashMap = ChosaKekkaShosai.get(iSelectId);
-        String strHokensha = (String) hashMap.get("hokenshaNo");
-        String strHihokenNo = (String) hashMap.get("hihokenNo");
-        String strShinseibi = (String) hashMap.get("shinseibi");
-        String strShinseiKbn = (String) hashMap.get("shinseiKbn");
-        String strChosaKikanNo = (String) hashMap.get("chosaKikanNo");
-        String strChosainNo = (String) hashMap.get("chosainNo");
-        String strChosaKikanMei = (String) hashMap.get("chosaKikanMei");
-        String strChosainMei = (String) hashMap.get("chosainMei");
-        String strChosaJissibi = (String) hashMap.get("chosaJissibi");
-        String strChosahyoJuryobi = (String) hashMap.get("chosahyoJuryobi");
+//        HashMap hashMap = chosaKekkaShosai.get(iSelectId);
+        ControlGenerator cg = new ControlGenerator(chosaKekkaShosai.get(iSelectId));
+        RString strHokensha = cg.getAsRString("hokenshaNo");
+        RString strHihokenNo = cg.getAsRString("hihokenNo");
+        RDate strShinseibi = new RDate(cg.getAsRString("shinseibi").toString());
+        RString strShinseiKbn = cg.getAsRString("shinseiKbn");
+        RString strChosaKikanNo = cg.getAsRString("chosaKikanNo");
+        RString strChosainNo = cg.getAsRString("chosainNo");
+        RString strChosaKikanMei = cg.getAsRString("chosaKikanMei");
+        RString strChosainMei = cg.getAsRString("chosainMei");
+        RDate strChosaJissibi = new RDate(cg.getAsRString("chosaJissibi").toString());
+        RDate strChosahyoJuryobi = new RDate(cg.getAsRString("chosahyoJuryobi").toString());
 
-        panel.getKihonJoho().getTxtHokenNo().setValue(new RString(strHokensha));
-        panel.getKihonJoho().getTxtHihokenNo().setValue(new RString(strHihokenNo));
-        panel.getKihonJoho().getTxtShinseibi().setValue(new RDate(strShinseibi));
-        panel.getKihonJoho().getDdlShinseiKbn().setSelectedItem(new RString(strShinseiKbn));
-        panel.getChosaItakuJoho().getTxtChosakikanNo().setValue(new RString(strChosaKikanNo));
-        panel.getChosaItakuJoho().getTxtChosainNo().setValue(new RString(strChosainNo));
-        panel.getChosaItakuJoho().getTxtChosakikanMei().setValue(new RString(strChosaKikanMei));
-        panel.getChosaItakuJoho().getTxtChosainMei().setValue(new RString(strChosainMei));
-        panel.getChosaItakuJoho().getTxtChosaJissibi().setValue(new RDate(strChosaJissibi));
-        panel.getChosaItakuJoho().getTxtChosahyoJuryobi().setValue(new RDate(strChosahyoJuryobi));
+        panel.getKihonJoho().getTxtHokenNo().setValue(strHokensha);
+        panel.getKihonJoho().getTxtHihokenNo().setValue(strHihokenNo);
+        panel.getKihonJoho().getTxtShinseibi().setValue(strShinseibi);
+        panel.getKihonJoho().getDdlShinseiKbn().setSelectedItem(strShinseiKbn);
+        panel.getChosaItakuJoho().getTxtChosakikanNo().setValue(strChosaKikanNo);
+        panel.getChosaItakuJoho().getTxtChosainNo().setValue(strChosainNo);
+        panel.getChosaItakuJoho().getTxtChosakikanMei().setValue(strChosaKikanMei);
+        panel.getChosaItakuJoho().getTxtChosainMei().setValue(strChosainMei);
+        panel.getChosaItakuJoho().getTxtChosaJissibi().setValue(strChosaJissibi);
+        panel.getChosaItakuJoho().getTxtChosahyoJuryobi().setValue(strChosahyoJuryobi);
 
     }
 
@@ -412,32 +421,32 @@ public class ChosaKekkaShosaiMain {
     private List<KeyValueDataSource> createRadioButton1(RString s1, RString s2, RString s3, RString s4, RString s5, RString s6) {
         List<KeyValueDataSource> arrayData = new ArrayList<>();
         KeyValueDataSource keyValue = new KeyValueDataSource();
-        keyValue.setKey(new RString("1"));
+        keyValue.setKey(CST_STR1);
         keyValue.setValue(s1);
         arrayData.add(0, keyValue);
         KeyValueDataSource keyValue2 = new KeyValueDataSource();
-        keyValue2.setKey(new RString("2"));
+        keyValue2.setKey(CST_STR2);
         keyValue2.setValue(s2);
         arrayData.add(1, keyValue2);
         KeyValueDataSource keyValue3 = new KeyValueDataSource();
-        keyValue3.setKey(new RString("3"));
+        keyValue3.setKey(CST_STR3);
         keyValue3.setValue(s3);
         arrayData.add(2, keyValue3);
         if (s4 != null) {
             KeyValueDataSource keyValue4 = new KeyValueDataSource();
-            keyValue4.setKey(new RString("4"));
+            keyValue4.setKey(CST_STR4);
             keyValue4.setValue(s4);
             arrayData.add(3, keyValue4);
         }
         if (s5 != null) {
             KeyValueDataSource keyValue5 = new KeyValueDataSource();
-            keyValue5.setKey(new RString("5"));
+            keyValue5.setKey(CST_STR5);
             keyValue5.setValue(s5);
             arrayData.add(4, keyValue5);
         }
         if (s6 != null) {
             KeyValueDataSource keyValue6 = new KeyValueDataSource();
-            keyValue6.setKey(new RString("6"));
+            keyValue6.setKey(CST_STR6);
             keyValue6.setValue(s6);
             arrayData.add(5, keyValue6);
         }

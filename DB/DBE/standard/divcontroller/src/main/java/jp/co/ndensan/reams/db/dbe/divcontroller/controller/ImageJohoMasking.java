@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4050001.ImageJohoMaskingDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4050001.dgImageMaskShoriTaishosha_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgSearchResult_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5040002.dgSearchResult_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
