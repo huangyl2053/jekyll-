@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbu.divcontroller.entity.DBU0500011;
+package jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0500011;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため

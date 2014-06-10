@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbu.divcontroller;
 
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.DBU0500011.SearchResultShoKaishuKanriDiv;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.DBU0500011.ShoKaishuKanriTaishoshaDbJohoDiv;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.DBU0500011.ShoKaishuKanriTaishoshaJohoDiv;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0500011.SearchResultShoKaishuKanriDiv;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0500011.ShoKaishuKanriTaishoshaDbJohoDiv;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0500011.ShoKaishuKanriTaishoshaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;

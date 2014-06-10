@@ -1,20 +1,20 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgIchijiHanteiKeikokuCode_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.tblKijunJikanDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.tblTyukanHyokaKomokuTokutenDiv;
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * IchijiHanteiKekkaInfo のクラスファイル 
- * 
+ * IchijiHanteiKekkaInfo のクラスファイル
+ *
  * @author 自動生成
  */
 public class IchijiHanteiKekkaInfoDiv extends Panel {
@@ -24,6 +24,7 @@ public class IchijiHanteiKekkaInfoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtIchijiHanteibi")
     private TextBoxDate txtIchijiHanteibi;
     @JsonProperty("txtIchijiHanteiKekka")
@@ -68,7 +69,7 @@ public class IchijiHanteiKekkaInfoDiv extends Panel {
 
     @JsonProperty("txtIchijiHanteibi")
     public void setTxtIchijiHanteibi(TextBoxDate txtIchijiHanteibi) {
-        this.txtIchijiHanteibi=txtIchijiHanteibi;
+        this.txtIchijiHanteibi = txtIchijiHanteibi;
     }
 
     @JsonProperty("txtIchijiHanteiKekka")
@@ -78,7 +79,7 @@ public class IchijiHanteiKekkaInfoDiv extends Panel {
 
     @JsonProperty("txtIchijiHanteiKekka")
     public void setTxtIchijiHanteiKekka(TextBox txtIchijiHanteiKekka) {
-        this.txtIchijiHanteiKekka=txtIchijiHanteiKekka;
+        this.txtIchijiHanteiKekka = txtIchijiHanteiKekka;
     }
 
     @JsonProperty("txtKijunJikan")
@@ -88,7 +89,7 @@ public class IchijiHanteiKekkaInfoDiv extends Panel {
 
     @JsonProperty("txtKijunJikan")
     public void setTxtKijunJikan(TextBox txtKijunJikan) {
-        this.txtKijunJikan=txtKijunJikan;
+        this.txtKijunJikan = txtKijunJikan;
     }
 
     @JsonProperty("lblChukanHyokaKomokuTokuten")
@@ -98,7 +99,7 @@ public class IchijiHanteiKekkaInfoDiv extends Panel {
 
     @JsonProperty("lblChukanHyokaKomokuTokuten")
     public void setLblChukanHyokaKomokuTokuten(Label lblChukanHyokaKomokuTokuten) {
-        this.lblChukanHyokaKomokuTokuten=lblChukanHyokaKomokuTokuten;
+        this.lblChukanHyokaKomokuTokuten = lblChukanHyokaKomokuTokuten;
     }
 
     @JsonProperty("tblKijunJikan")
@@ -108,7 +109,7 @@ public class IchijiHanteiKekkaInfoDiv extends Panel {
 
     @JsonProperty("tblKijunJikan")
     public void setTblKijunJikan(tblKijunJikanDiv tblKijunJikan) {
-        this.tblKijunJikan=tblKijunJikan;
+        this.tblKijunJikan = tblKijunJikan;
     }
 
     @JsonProperty("tblTyukanHyokaKomokuTokuten")
@@ -118,7 +119,7 @@ public class IchijiHanteiKekkaInfoDiv extends Panel {
 
     @JsonProperty("tblTyukanHyokaKomokuTokuten")
     public void setTblTyukanHyokaKomokuTokuten(tblTyukanHyokaKomokuTokutenDiv tblTyukanHyokaKomokuTokuten) {
-        this.tblTyukanHyokaKomokuTokuten=tblTyukanHyokaKomokuTokuten;
+        this.tblTyukanHyokaKomokuTokuten = tblTyukanHyokaKomokuTokuten;
     }
 
     @JsonProperty("lblNichiJyotaiHyokaKekka")
@@ -128,7 +129,7 @@ public class IchijiHanteiKekkaInfoDiv extends Panel {
 
     @JsonProperty("lblNichiJyotaiHyokaKekka")
     public void setLblNichiJyotaiHyokaKekka(Label lblNichiJyotaiHyokaKekka) {
-        this.lblNichiJyotaiHyokaKekka=lblNichiJyotaiHyokaKekka;
+        this.lblNichiJyotaiHyokaKekka = lblNichiJyotaiHyokaKekka;
     }
 
     @JsonProperty("lblNinchiNichijyoSeikatsuJiritsudo")
@@ -138,7 +139,7 @@ public class IchijiHanteiKekkaInfoDiv extends Panel {
 
     @JsonProperty("lblNinchiNichijyoSeikatsuJiritsudo")
     public void setLblNinchiNichijyoSeikatsuJiritsudo(Label lblNinchiNichijyoSeikatsuJiritsudo) {
-        this.lblNinchiNichijyoSeikatsuJiritsudo=lblNinchiNichijyoSeikatsuJiritsudo;
+        this.lblNinchiNichijyoSeikatsuJiritsudo = lblNinchiNichijyoSeikatsuJiritsudo;
     }
 
     @JsonProperty("txtGaizensei")
@@ -148,7 +149,7 @@ public class IchijiHanteiKekkaInfoDiv extends Panel {
 
     @JsonProperty("txtGaizensei")
     public void setTxtGaizensei(TextBox txtGaizensei) {
-        this.txtGaizensei=txtGaizensei;
+        this.txtGaizensei = txtGaizensei;
     }
 
     @JsonProperty("txtJiritsudoChosa")
@@ -158,7 +159,7 @@ public class IchijiHanteiKekkaInfoDiv extends Panel {
 
     @JsonProperty("txtJiritsudoChosa")
     public void setTxtJiritsudoChosa(TextBox txtJiritsudoChosa) {
-        this.txtJiritsudoChosa=txtJiritsudoChosa;
+        this.txtJiritsudoChosa = txtJiritsudoChosa;
     }
 
     @JsonProperty("txtJyotaiAnteisei")
@@ -168,7 +169,7 @@ public class IchijiHanteiKekkaInfoDiv extends Panel {
 
     @JsonProperty("txtJyotaiAnteisei")
     public void setTxtJyotaiAnteisei(TextBox txtJyotaiAnteisei) {
-        this.txtJyotaiAnteisei=txtJyotaiAnteisei;
+        this.txtJyotaiAnteisei = txtJyotaiAnteisei;
     }
 
     @JsonProperty("txtJiritsudoIkensho")
@@ -178,7 +179,7 @@ public class IchijiHanteiKekkaInfoDiv extends Panel {
 
     @JsonProperty("txtJiritsudoIkensho")
     public void setTxtJiritsudoIkensho(TextBox txtJiritsudoIkensho) {
-        this.txtJiritsudoIkensho=txtJiritsudoIkensho;
+        this.txtJiritsudoIkensho = txtJiritsudoIkensho;
     }
 
     @JsonProperty("txtKyufuKbn")
@@ -188,7 +189,7 @@ public class IchijiHanteiKekkaInfoDiv extends Panel {
 
     @JsonProperty("txtKyufuKbn")
     public void setTxtKyufuKbn(TextBox txtKyufuKbn) {
-        this.txtKyufuKbn=txtKyufuKbn;
+        this.txtKyufuKbn = txtKyufuKbn;
     }
 
     @JsonProperty("lblIchijiHanteiKeikokuCode")
@@ -198,7 +199,7 @@ public class IchijiHanteiKekkaInfoDiv extends Panel {
 
     @JsonProperty("lblIchijiHanteiKeikokuCode")
     public void setLblIchijiHanteiKeikokuCode(Label lblIchijiHanteiKeikokuCode) {
-        this.lblIchijiHanteiKeikokuCode=lblIchijiHanteiKeikokuCode;
+        this.lblIchijiHanteiKeikokuCode = lblIchijiHanteiKeikokuCode;
     }
 
     @JsonProperty("dgIchijiHanteiKeikokuCode")
@@ -208,7 +209,7 @@ public class IchijiHanteiKekkaInfoDiv extends Panel {
 
     @JsonProperty("dgIchijiHanteiKeikokuCode")
     public void setDgIchijiHanteiKeikokuCode(DataGrid<dgIchijiHanteiKeikokuCode_Row> dgIchijiHanteiKeikokuCode) {
-        this.dgIchijiHanteiKeikokuCode=dgIchijiHanteiKeikokuCode;
+        this.dgIchijiHanteiKeikokuCode = dgIchijiHanteiKeikokuCode;
     }
 
 }

@@ -1,11 +1,11 @@
-package jp.co.ndensan.reams.db.dbu.divcontroller.entity.DBU0500011;
+package jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0500011;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.DBU0500011.ShoKaishuKanriTaishoshaDbJohoDiv;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0500011.ShoKaishuKanriTaishoshaDbJohoDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
