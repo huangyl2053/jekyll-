@@ -9,20 +9,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 //import static org.mockito.Mockito.*;
 
 /**
@@ -81,6 +83,130 @@ public class ControlGeneratorTest extends DbzTestBase {
             Map map = new HashMap();
             sut = new ControlGenerator(map);
             assertThat(sut.getAsBooleanValue(""), is(false));
+        }
+    }
+
+    public static class getAsRDate extends DbzTestBase {
+
+        private ControlGenerator sut;
+
+        @Test
+        public void getAsRDateは_コンストラクタ引数のMapから引数のkeyにより取得できる値から生成される_RDateを返す() {
+            Map map = new HashMap();
+            String key = "test";
+            String date = "20140606";
+            map.put(key, date);
+            sut = new ControlGenerator(map);
+            assertThat(sut.getAsRDate(key), is(new RDate(date)));
+        }
+
+        @Test
+        public void getAsRDateは_コンストラクタ引数のMapから引数のkeyにより取得できる値からRDateが生成できないとき_nullを返す() {
+            Map map = new HashMap();
+            String key = "test";
+            map.put(key, "日付じゃない");
+            sut = new ControlGenerator(map);
+            assertThat(sut.getAsRDate(key), is(nullValue()));
+        }
+
+        @Test
+        public void getAsRDateは_コンストラクタ引数のMapから引数のkeyにより取得できる値がないとき_nullを返す() {
+            Map map = new HashMap();
+            sut = new ControlGenerator(map);
+            assertThat(sut.getAsRDate(""), is(nullValue()));
+        }
+    }
+
+    public static class getAsFlexibleDate extends DbzTestBase {
+
+        private ControlGenerator sut;
+
+        @Test
+        public void getAsFlexibleDateは_コンストラクタ引数のMapから引数のkeyにより取得できる値から生成される_FlexibleDateを返す() {
+            Map map = new HashMap();
+            String key = "test";
+            String date = "20140606";
+            map.put(key, date);
+            sut = new ControlGenerator(map);
+            assertThat(sut.getAsFlexibleDate(key), is(new FlexibleDate(date)));
+        }
+
+        @Test
+        public void getAsFlexibleDateは_コンストラクタ引数のMapから引数のkeyにより取得できる値からRDateが生成できないとき_FlexibleDate_EMPTYを返す() {
+            Map map = new HashMap();
+            String key = "test";
+            map.put(key, "日付じゃない");
+            sut = new ControlGenerator(map);
+            assertThat(sut.getAsFlexibleDate(key), is(FlexibleDate.EMPTY));
+        }
+
+        @Test
+        public void getAsFlexibleDateは_コンストラクタ引数のMapから引数のkeyにより取得できる値がないとき_FlexibleDate_EMPTYを返す() {
+            Map map = new HashMap();
+            sut = new ControlGenerator(map);
+            assertThat(sut.getAsFlexibleDate(""), is(FlexibleDate.EMPTY));
+        }
+    }
+
+    public static class getAsDecimal extends DbzTestBase {
+
+        private ControlGenerator sut;
+
+        @Test
+        public void getAsDecimalは_コンストラクタ引数のMapから引数のkeyにより取得できる値から生成される_Decimalを返す() {
+            Map map = new HashMap();
+            String key = "test";
+            String num = "3333";
+            map.put(key, num);
+            sut = new ControlGenerator(map);
+            assertThat(sut.getAsDecimal(key), is(new Decimal(num)));
+        }
+
+        @Test
+        public void getAsDecimalは_コンストラクタ引数のMapから引数のkeyにより取得できる値からDecimalが生成できないとき_nullを返す() {
+            Map map = new HashMap();
+            String key = "test";
+            map.put(key, "数じゃない");
+            sut = new ControlGenerator(map);
+            assertThat(sut.getAsDecimal(key), is(nullValue()));
+        }
+
+        @Test
+        public void getAsDecimalは_コンストラクタ引数のMapから引数のkeyにより取得できる値がないとき_clearValueをもった_nullを返す() {
+            Map map = new HashMap();
+            sut = new ControlGenerator(map);
+            assertThat(sut.getAsDecimal(""), is(nullValue()));
+        }
+    }
+
+    public static class getAsYubinNo extends DbzTestBase {
+
+        private ControlGenerator sut;
+
+        @Test
+        public void getAsYubinNoは_コンストラクタ引数のMapから引数のkeyにより取得できる値から生成される_YubinNoを返す() {
+            Map map = new HashMap();
+            String key = "test";
+            String value = "333-3333";
+            map.put(key, value);
+            sut = new ControlGenerator(map);
+            assertThat(sut.getAsYubinNo(key), is(new YubinNo(value)));
+        }
+
+        @Test
+        public void getAsYubinNoは_コンストラクタ引数のMapから引数のkeyにより取得できる値からYubinNoが生成できないとき_nullを返す() {
+            Map map = new HashMap();
+            String key = "test";
+            map.put(key, "お手紙届かない…");
+            sut = new ControlGenerator(map);
+            assertThat(sut.getAsYubinNo(key), is(nullValue()));
+        }
+
+        @Test
+        public void getAsYubinNoは_コンストラクタ引数のMapから引数のkeyにより取得できる値がないとき_nullを返す() {
+            Map map = new HashMap();
+            sut = new ControlGenerator(map);
+            assertThat(sut.getAsYubinNo(""), is(nullValue()));
         }
     }
 
@@ -190,6 +316,43 @@ public class ControlGeneratorTest extends DbzTestBase {
 
         private TextBoxNum clearedTextBoxNum() {
             TextBoxNum txtBox = new TextBoxNum();
+            txtBox.clearValue();
+            return txtBox;
+        }
+    }
+
+    public static class getAsTextBoxYubinNo extends DbzTestBase {
+
+        private ControlGenerator sut;
+
+        @Test
+        public void getAsTextBoxYubinNoは_コンストラクタ引数のMapから引数のkeyにより取得できる値から生成されるYubinNoを持った_TextBoxYubinNoを返す() {
+            Map map = new HashMap();
+            String key = "test";
+            String value = "333-3333";
+            map.put(key, value);
+            sut = new ControlGenerator(map);
+            assertThat(sut.getAsTextBoxYubinNo(key).getValue(), is(new YubinNo(value)));
+        }
+
+        @Test
+        public void getAsTextBoxYubinNoは_コンストラクタ引数のMapから引数のkeyにより取得できる値からYubinNoが生成できないとき_clearValueを持った_TextBoxYubinNoを返す() {
+            Map map = new HashMap();
+            String key = "test";
+            map.put(key, "お手紙届かない…");
+            sut = new ControlGenerator(map);
+            assertThat(sut.getAsTextBoxYubinNo(key).getValue(), is(clearedTextBoxYubinNo().getValue()));
+        }
+
+        @Test
+        public void getAsTextBoxYubinNoは_コンストラクタ引数のMapから引数のkeyにより取得できる値がないとき_clearValueを持った_TextBoxYubinNoを返す() {
+            Map map = new HashMap();
+            sut = new ControlGenerator(map);
+            assertThat(sut.getAsTextBoxYubinNo("").getValue(), is(clearedTextBoxYubinNo().getValue()));
+        }
+
+        private TextBoxYubinNo clearedTextBoxYubinNo() {
+            TextBoxYubinNo txtBox = new TextBoxYubinNo();
             txtBox.clearValue();
             return txtBox;
         }

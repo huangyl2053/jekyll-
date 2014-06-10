@@ -36,8 +36,8 @@ public final class YamlUtil {
      *                  return to_dgXXXX_Row(map);
      *              }
      *          });
-     * <code/>
-     * <pre/>
+     * </code>
+     * </pre>
      *
      * @param <T> 変換後のListが保持するオブジェクトの型
      * @param dataFromYaml YamlLoader#loadAsList()より取得できるList
