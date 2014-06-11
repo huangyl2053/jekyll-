@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShikakuFuseigoIchiranDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShikakuFuseigoShuseiMainDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShikakuShuseiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgShikakuFuseigoIchiranForDemo_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgShikakuFuseigoIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -30,6 +30,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  */
 public class ShikakuFuseigoShuseiMain {
 
+    private static final List<dgShikakuFuseigoIchiran_Row> rows = new ArrayList<>();
+    private static final List<dgShikakuFuseigoIchiranForDemo_Row> kakushiRows = new ArrayList<>();
+
     /**
      * 画面が読み込まれた際の初期値をセットします。
      *
@@ -40,23 +43,26 @@ public class ShikakuFuseigoShuseiMain {
     public ResponseData<ShikakuFuseigoShuseiMainDiv> getOnLoadData(ShikakuFuseigoShuseiMainDiv panel) {
         ResponseData<ShikakuFuseigoShuseiMainDiv> response = new ResponseData<>();
         setFuseigoData(panel.getShikakuFuseigoIchiran());
+        onChange_chkMushi(panel);
         response.data = panel;
         return response;
     }
 
     private void setFuseigoData(ShikakuFuseigoIchiranDiv panel) {
-        List<dgShikakuFuseigoIchiran_Row> arrayData = createRowShikakuFuseigoTestData();
-        DataGrid<dgShikakuFuseigoIchiran_Row> grid = panel.getDgShikakuFuseigoIchiran();
+        List<dgShikakuFuseigoIchiranForDemo_Row> arrayData = createRowShikakuFuseigoTestData();
+        DataGrid<dgShikakuFuseigoIchiranForDemo_Row> grid = panel.getDgShikakuFuseigoIchiranForDemo();
         grid.setDataSource(arrayData);
     }
 
-    private List<dgShikakuFuseigoIchiran_Row> createRowShikakuFuseigoTestData() {
-        List<dgShikakuFuseigoIchiran_Row> arrayData = new ArrayList<>();
+    private List<dgShikakuFuseigoIchiranForDemo_Row> createRowShikakuFuseigoTestData() {
         dgShikakuFuseigoIchiran_Row item;
+        dgShikakuFuseigoIchiranForDemo_Row kakushiItem;
 
         List<HashMap> demoDataList = YamlLoader.FOR_DBZ.loadAsList(new RString("ShikakuFuseigoData.yml"));
         for (HashMap demoData : demoDataList) {
-            item = createRowShikakuFuseigoData(
+            kakushiItem = createRowShikakuFuseigoDataForDemo(
+                    demoData.get("無視判定").toString(),
+                    demoData.get("修正済").toString(),
                     demoData.get("被保番号").toString(),
                     demoData.get("識別コード").toString(),
                     demoData.get("カナ氏名").toString(),
@@ -77,20 +83,23 @@ public class ShikakuFuseigoShuseiMain {
                     demoData.get("住基登録届出日").toString(),
                     demoData.get("住基消除届出日").toString(),
                     demoData.get("資格取得届出日").toString(),
-                    demoData.get("資格喪失届出日").toString());
-            arrayData.add(item);
+                    demoData.get("資格喪失届出日").toString(),
+                    demoData.get("デモ用主キー").toString());
+            kakushiRows.add(kakushiItem);
         }
-        return arrayData;
+        return kakushiRows;
     }
 
-    private dgShikakuFuseigoIchiran_Row createRowShikakuFuseigoData(String 被保番号, String 識別コード, String カナ氏名, String 氏名, String 住民種別,
+    private dgShikakuFuseigoIchiran_Row createRowShikakuFuseigoData(String 無視判定, String 修正済, String 被保番号, String 識別コード, String カナ氏名, String 氏名, String 住民種別,
             String 生年月日, String 性別, String 年齢, String 不整合内容, String 住登事由, String 住登日, String 資格取得事由, String 資格取得日,
-            String 消除事由, String 消除日, String 資格喪失事由, String 資格喪失日, String 住基登録届出日, String 住基消除届出日, String 資格取得届出日, String 資格喪失届出日) {
-        dgShikakuFuseigoIchiran_Row row = new dgShikakuFuseigoIchiran_Row(false, new Button(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+            String 消除事由, String 消除日, String 資格喪失事由, String 資格喪失日, String 住基登録届出日, String 住基消除届出日, String 資格取得届出日, String 資格喪失届出日, String デモ用主キー) {
+        dgShikakuFuseigoIchiran_Row row = new dgShikakuFuseigoIchiran_Row(RString.EMPTY, new Button(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY,
-                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), new TextBoxFlexibleDate());
+                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY);
 
+        row.setTxtIgnore(new RString(無視判定));
+        row.setTxtShuseiZumi(new RString(修正済));
         row.setTxtHihoNo(new RString(被保番号));
         row.setTxtShikibetsuCode(new RString(識別コード));
         row.setTxtKanaShimei(new RString(カナ氏名));
@@ -112,8 +121,46 @@ public class ShikakuFuseigoShuseiMain {
         row.getTxtJukiShojoTodokedeYmd().setValue(new FlexibleDate(new RString(住基消除届出日)));
         row.getTxtShikakuShutokuTodokedeYmd().setValue(new FlexibleDate(new RString(資格取得届出日)));
         row.getTxtShikakuSoshitsuTodokedeYmd().setValue(new FlexibleDate(new RString(資格喪失届出日)));
+        row.setTxtDemoKey(new RString(デモ用主キー));
 
         createRowKetsugo(row);
+        return row;
+    }
+
+    private dgShikakuFuseigoIchiranForDemo_Row createRowShikakuFuseigoDataForDemo(String 無視判定, String 修正済, String 被保番号, String 識別コード, String カナ氏名, String 氏名, String 住民種別,
+            String 生年月日, String 性別, String 年齢, String 不整合内容, String 住登事由, String 住登日, String 資格取得事由, String 資格取得日,
+            String 消除事由, String 消除日, String 資格喪失事由, String 資格喪失日, String 住基登録届出日, String 住基消除届出日, String 資格取得届出日, String 資格喪失届出日, String デモ用主キー) {
+        dgShikakuFuseigoIchiranForDemo_Row row = new dgShikakuFuseigoIchiranForDemo_Row(RString.EMPTY, new Button(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY,
+                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY);
+
+        row.setTxtIgnore(new RString(無視判定));
+        row.setTxtShuseiZumi(new RString(修正済));
+        row.setTxtHihoNo(new RString(被保番号));
+        row.setTxtShikibetsuCode(new RString(識別コード));
+        row.setTxtKanaShimei(new RString(カナ氏名));
+        row.setTxtShimei(new RString(氏名));
+        row.setTxtJuminShu(new RString(住民種別));
+        row.getTxtSeiYmd().setValue(new FlexibleDate((new RString(生年月日))));
+        row.setTxtSeibetsu(new RString(性別));
+        row.setTxtNenrei(new RString(年齢));
+        row.setTxtFuseigo(new RString(不整合内容));
+        row.setTxtJukiTorokuJiyu(new RString(住登事由));
+        row.setTxtShikakuShutokuJiyu(new RString(資格取得事由));
+        row.getTxtJukiTorokuYmd().setValue(new FlexibleDate(new RString(住登日)));
+        row.getTxtShikakuShutokuYmd().setValue(new FlexibleDate(new RString(資格取得日)));
+        row.setTxtJukiShojoJiyu(new RString(消除事由));
+        row.setTxtShikakuSoshitsuJiyu(new RString(資格喪失事由));
+        row.getTxtJukiShojoYmd().setValue(new FlexibleDate(new RString(消除日)));
+        row.getTxtShikakuSoshitsuYmd().setValue(new FlexibleDate(new RString(資格喪失日)));
+        row.getTxtJukiTorokuTodokedeYmd().setValue(new FlexibleDate(new RString(住基登録届出日)));
+        row.getTxtJukiShojoTodokedeYmd().setValue(new FlexibleDate(new RString(住基消除届出日)));
+        row.getTxtShikakuShutokuTodokedeYmd().setValue(new FlexibleDate(new RString(資格取得届出日)));
+        row.getTxtShikakuSoshitsuTodokedeYmd().setValue(new FlexibleDate(new RString(資格喪失届出日)));
+        row.setTxtDemoKey(new RString(デモ用主キー));
+
+        createRowKetsugoForDemo(row);
         return row;
     }
 
@@ -128,8 +175,18 @@ public class ShikakuFuseigoShuseiMain {
         row.setTxtKetsugo05(row.getTxtJukiTorokuJiyu().concat(new RString("<br>")).concat(row.getTxtShikakuShutokuJiyu()).concat(new RString("  ")));
         row.setTxtKetsugo06(new FlexibleDate(row.getTxtJukiTorokuYmd().getValue().toString()).wareki().toDateString().concat(new RString("<br>")).concat(new FlexibleDate(row.getTxtShikakuShutokuYmd().getValue().toString()).wareki().toDateString()).concat(new RString("  ")));
         row.setTxtKetsugo07(row.getTxtJukiShojoJiyu().concat(new RString("<br>")).concat(row.getTxtShikakuSoshitsuJiyu()).concat(new RString("  ")));
-        row.setTxtKetsugo06(new FlexibleDate(row.getTxtJukiShojoYmd().getValue().toString()).wareki().toDateString().concat(new RString("<br>")).concat(new FlexibleDate(row.getTxtShikakuSoshitsuYmd().getValue().toString()).wareki().toDateString()).concat(new RString("  ")));
+        row.setTxtKetsugo08(new FlexibleDate(row.getTxtJukiShojoYmd().getValue().toString()).wareki().toDateString().concat(new RString("<br>")).concat(new FlexibleDate(row.getTxtShikakuSoshitsuYmd().getValue().toString()).wareki().toDateString()).concat(new RString("  ")));
+    }
 
+    private void createRowKetsugoForDemo(dgShikakuFuseigoIchiranForDemo_Row row) {
+        row.setTxtKetsugo01(row.getTxtHihoNo().concat(new RString("<br>")).concat(row.getTxtShikibetsuCode()).concat(new RString("  ")));
+        row.setTxtKetsugo02(row.getTxtKanaShimei().concat(new RString("<br>")).concat(row.getTxtShimei()).concat(new RString("  ")));
+        row.setTxtKetsugo03(row.getTxtJuminShu().concat(new RString("<br>")).concat(new FlexibleDate(row.getTxtSeiYmd().getValue().toString()).wareki().toDateString()).concat(new RString("  ")));
+        row.setTxtKetsugo04(row.getTxtSeibetsu().concat(new RString("<br>")).concat(row.getTxtNenrei()).concat(new RString("  ")));
+        row.setTxtKetsugo05(row.getTxtJukiTorokuJiyu().concat(new RString("<br>")).concat(row.getTxtShikakuShutokuJiyu()).concat(new RString("  ")));
+        row.setTxtKetsugo06(new FlexibleDate(row.getTxtJukiTorokuYmd().getValue().toString()).wareki().toDateString().concat(new RString("<br>")).concat(new FlexibleDate(row.getTxtShikakuShutokuYmd().getValue().toString()).wareki().toDateString()).concat(new RString("  ")));
+        row.setTxtKetsugo07(row.getTxtJukiShojoJiyu().concat(new RString("<br>")).concat(row.getTxtShikakuSoshitsuJiyu()).concat(new RString("  ")));
+        row.setTxtKetsugo08(new FlexibleDate(row.getTxtJukiShojoYmd().getValue().toString()).wareki().toDateString().concat(new RString("<br>")).concat(new FlexibleDate(row.getTxtShikakuSoshitsuYmd().getValue().toString()).wareki().toDateString()).concat(new RString("  ")));
     }
 
     /**
@@ -153,16 +210,125 @@ public class ShikakuFuseigoShuseiMain {
      */
     public ResponseData<ShikakuFuseigoShuseiMainDiv> onClick_BtnCommit(ShikakuFuseigoShuseiMainDiv panel) {
         ResponseData<ShikakuFuseigoShuseiMainDiv> response = new ResponseData<>();
-
-        List<dgShikakuFuseigoIchiran_Row> selectRow = panel.getShikakuFuseigoIchiran().getDgShikakuFuseigoIchiran().getDataSource();
-        ShikakuShuseiDiv shuseiPanel = panel.getShikakuShusei();
-        for (dgShikakuFuseigoIchiran_Row row : selectRow) {
-            if (row.getSelected()) {
-                row.setTxtShikakuShutokuJiyu(shuseiPanel.getShutokuKei().getDdlShikakuShutokuJiyu().getSelectedValue());
-                createRowKetsugo(row);
+        RString selectedRow = panel.getShikakuShusei().getTxtSelectedRow().getValue();
+        for (dgShikakuFuseigoIchiranForDemo_Row row : kakushiRows) {
+            if (row.getTxtDemoKey().equals(selectedRow)) {
+                if (!panel.getShikakuShusei().getChkMushi().getSelectedItems().isEmpty()) {
+                    row.setTxtIgnore(new RString("無視"));
+                } else {
+                    row.setTxtIgnore(new RString(""));
+                }
+                row.setTxtShuseiZumi(new RString("修正済"));
+                row.setTxtShikakuShutokuJiyu(panel.getShikakuShusei().getShutokuKei().getDdlShikakuShutokuJiyu().getSelectedValue());
+                row.setTxtShikakuShutokuYmd(panel.getShikakuShusei().getShutokuKei().getTxtShikakuShutokuYmd());
+                row.setTxtShikakuShutokuTodokedeYmd(panel.getShikakuShusei().getShutokuKei().getTxtShutokuTodokedeYmd());
+                row.setTxtShikakuSoshitsuJiyu(panel.getShikakuShusei().getSoushitsuKei().getDdlShikakuSoshitsuJiyu().getSelectedValue());
+                row.setTxtShikakuSoshitsuYmd(panel.getShikakuShusei().getSoushitsuKei().getTxtShikakuSoshitsuYmd());
+                row.setTxtShikakuSoshitsuTodokedeYmd(panel.getShikakuShusei().getSoushitsuKei().getTxtSoshitsuTodokedeYmd());
+                createRowKetsugoForDemo(row);
             }
         }
-        panel.getShikakuFuseigoIchiran().getDgShikakuFuseigoIchiran().setDataSource(selectRow);
+
+        onChange_chkMushi(panel);
+
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * 実際に画面に表示されているDataGridに表示するデータを返す（無視を含むデータ）。
+     *
+     * @param panel
+     */
+    private void showDataIncludedMushi(ShikakuFuseigoShuseiMainDiv panel) {
+        dgShikakuFuseigoIchiran_Row row;
+        rows.clear();
+        for (dgShikakuFuseigoIchiranForDemo_Row temp : kakushiRows) {
+            rows.add(createRowShikakuFuseigoData(
+                    temp.getTxtIgnore().toString(),
+                    temp.getTxtShuseiZumi().toString(),
+                    temp.getTxtHihoNo().toString(),
+                    temp.getTxtShikibetsuCode().toString(),
+                    temp.getTxtKanaShimei().toString(),
+                    temp.getTxtShimei().toString(),
+                    temp.getTxtJuminShu().toString(),
+                    temp.getTxtSeiYmd().getValue().toString(),
+                    temp.getTxtSeibetsu().toString(),
+                    temp.getTxtNenrei().toString(),
+                    temp.getTxtFuseigo().toString(),
+                    temp.getTxtJukiTorokuJiyu().toString(),
+                    temp.getTxtJukiTorokuYmd().getValue().toString(),
+                    temp.getTxtShikakuShutokuJiyu().toString(),
+                    temp.getTxtShikakuShutokuYmd().getValue().toString(),
+                    temp.getTxtJukiShojoJiyu().toString(),
+                    temp.getTxtJukiShojoYmd().getValue().toString(),
+                    temp.getTxtShikakuSoshitsuJiyu().toString(),
+                    temp.getTxtShikakuSoshitsuYmd().getValue().toString(),
+                    temp.getTxtJukiTorokuTodokedeYmd().getValue().toString(),
+                    temp.getTxtJukiShojoTodokedeYmd().getValue().toString(),
+                    temp.getTxtShikakuShutokuTodokedeYmd().getValue().toString(),
+                    temp.getTxtShikakuSoshitsuTodokedeYmd().getValue().toString(),
+                    temp.getTxtDemoKey().toString()));
+        }
+        DataGrid<dgShikakuFuseigoIchiran_Row> grid = panel.getShikakuFuseigoIchiran().getDgShikakuFuseigoIchiran();
+        grid.setDataSource(rows);
+    }
+
+    /**
+     * 実際に画面に表示されているDataGridに表示するデータを返す（無視は除くデータ）。
+     *
+     * @param panel
+     */
+    private void showDataNotIncludedMushi(ShikakuFuseigoShuseiMainDiv panel) {
+        dgShikakuFuseigoIchiran_Row row;
+        rows.clear();
+        for (dgShikakuFuseigoIchiranForDemo_Row temp : kakushiRows) {
+            if (!temp.getTxtIgnore().equals(new RString("無視"))) {
+                rows.add(createRowShikakuFuseigoData(
+                        temp.getTxtIgnore().toString(),
+                        temp.getTxtShuseiZumi().toString(),
+                        temp.getTxtHihoNo().toString(),
+                        temp.getTxtShikibetsuCode().toString(),
+                        temp.getTxtKanaShimei().toString(),
+                        temp.getTxtShimei().toString(),
+                        temp.getTxtJuminShu().toString(),
+                        temp.getTxtSeiYmd().getValue().toString(),
+                        temp.getTxtSeibetsu().toString(),
+                        temp.getTxtNenrei().toString(),
+                        temp.getTxtFuseigo().toString(),
+                        temp.getTxtJukiTorokuJiyu().toString(),
+                        temp.getTxtJukiTorokuYmd().getValue().toString(),
+                        temp.getTxtShikakuShutokuJiyu().toString(),
+                        temp.getTxtShikakuShutokuYmd().getValue().toString(),
+                        temp.getTxtJukiShojoJiyu().toString(),
+                        temp.getTxtJukiShojoYmd().getValue().toString(),
+                        temp.getTxtShikakuSoshitsuJiyu().toString(),
+                        temp.getTxtShikakuSoshitsuYmd().getValue().toString(),
+                        temp.getTxtJukiTorokuTodokedeYmd().getValue().toString(),
+                        temp.getTxtJukiShojoTodokedeYmd().getValue().toString(),
+                        temp.getTxtShikakuShutokuTodokedeYmd().getValue().toString(),
+                        temp.getTxtShikakuSoshitsuTodokedeYmd().getValue().toString(),
+                        temp.getTxtDemoKey().toString()));
+            }
+        }
+        DataGrid<dgShikakuFuseigoIchiran_Row> grid = panel.getShikakuFuseigoIchiran().getDgShikakuFuseigoIchiran();
+        grid.setDataSource(rows);
+    }
+
+    /**
+     * 無視チェックボックスの値が替わったとき
+     *
+     * @param panel
+     * @return
+     */
+    public ResponseData<ShikakuFuseigoShuseiMainDiv> onChange_chkMushi(ShikakuFuseigoShuseiMainDiv panel) {
+        ResponseData<ShikakuFuseigoShuseiMainDiv> response = new ResponseData<>();
+        DataGrid<dgShikakuFuseigoIchiran_Row> grid = panel.getShikakuFuseigoIchiran().getDgShikakuFuseigoIchiran();
+        if (panel.getShikakuFuseigoIchiran().getChkMushiBunHihyoji().getSelectedItems().isEmpty()) { // 無視するデータも含む場合
+            showDataIncludedMushi(panel);
+        } else {
+            showDataNotIncludedMushi(panel);
+        }
         response.data = panel;
         return response;
     }
@@ -191,9 +357,11 @@ public class ShikakuFuseigoShuseiMain {
         panel.getShikakuShusei().getSoushitsuKei().getTxtSoshitsuTodokedeYmd().setValue(selectRow.getTxtShikakuSoshitsuTodokedeYmd().getValue());
 
         DdlShikakuShutokuJiyu.onLoad(panel.getShikakuShusei().getShutokuKei().getDdlShikakuShutokuJiyu());
-        DdlShikakuShutokuJiyu.select(panel.getShikakuShusei().getShutokuKei().getDdlShikakuShutokuJiyu(), ShikakuShutokuJiyu.toValue(new RString("01")));
+        DdlShikakuShutokuJiyu.select(panel.getShikakuShusei().getShutokuKei().getDdlShikakuShutokuJiyu(), DdlShikakuShutokuJiyu.getShikakuShutokuJiyuCode(selectRow.getTxtShikakuShutokuJiyu()));
         DdlShikakuSoshitsuJiyu.onLoad(panel.getShikakuShusei().getSoushitsuKei().getDdlShikakuSoshitsuJiyu());
-        DdlShikakuSoshitsuJiyu.select(panel.getShikakuShusei().getSoushitsuKei().getDdlShikakuSoshitsuJiyu(), ShikakuSoshitsuJiyu.toValue(new RString("51")));
+        DdlShikakuSoshitsuJiyu.select(panel.getShikakuShusei().getSoushitsuKei().getDdlShikakuSoshitsuJiyu(), DdlShikakuSoshitsuJiyu.getShikakuSoshitsuJiyuCode(selectRow.getTxtShikakuSoshitsuJiyu()));
+
+        panel.getShikakuShusei().getTxtSelectedRow().setValue(selectRow.getTxtDemoKey());
     }
 
     private dgShikakuFuseigoIchiran_Row clickedItemOf(ShikakuFuseigoIchiranDiv fuseigoDiv) {
@@ -217,6 +385,15 @@ public class ShikakuFuseigoShuseiMain {
         public static void select(DropDownList ddl, ShikakuShutokuJiyu jiyu) {
             ddl.setSelectedItem(jiyu.getCode());
         }
+
+        public static ShikakuShutokuJiyu getShikakuShutokuJiyuCode(RString shikakuShutokuJiyu) {
+            for (ShikakuShutokuJiyu jiyu : ShikakuShutokuJiyu.values()) {
+                if (jiyu.getName().equals(shikakuShutokuJiyu)) {
+                    return jiyu;
+                }
+            }
+            return ShikakuShutokuJiyu.その他;
+        }
     }
 
     private static final class DdlShikakuSoshitsuJiyu {
@@ -235,6 +412,14 @@ public class ShikakuFuseigoShuseiMain {
         public static void select(DropDownList ddl, ShikakuSoshitsuJiyu jiyu) {
             ddl.setSelectedItem(jiyu.getCode());
         }
-    }
 
+        public static ShikakuSoshitsuJiyu getShikakuSoshitsuJiyuCode(RString shikakuSoshitsuJiyu) {
+            for (ShikakuSoshitsuJiyu jiyu : ShikakuSoshitsuJiyu.values()) {
+                if (jiyu.getName().equals(shikakuSoshitsuJiyu)) {
+                    return jiyu;
+                }
+            }
+            return ShikakuSoshitsuJiyu.その他;
+        }
+    }
 }

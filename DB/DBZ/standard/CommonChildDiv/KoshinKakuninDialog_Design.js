@@ -68,7 +68,7 @@ var DBZ;
                             "marginRight": "XS",
                             "selectControlID": "btnYes",
                             "text": "はい",
-                            "onClick": "",
+                            "onClick": "CloseOK",
                             "appearance": 0,
                             "imageFileUrl": "",
                             "imageWidth": "",
@@ -94,7 +94,7 @@ var DBZ;
                             "marginRight": "XS",
                             "selectControlID": "btnNo",
                             "text": "いいえ",
-                            "onClick": "",
+                            "onClick": "CloseCancel",
                             "appearance": 0,
                             "imageFileUrl": "",
                             "imageWidth": "",
@@ -128,7 +128,12 @@ var DBZ;
                             "postParameterPanelNames": "KoshinKakuninDialog"
                         }
                     ],
-                    "requestSettings": [],
+                    "requestSettings": [
+                        {
+                            "eventName": "onLoad",
+                            "requestUrl": "dbz/db/dbz/KoshinKakunin/onLoad"
+                        }
+                    ],
                     "hiddenInput": [],
                     "onOpen": "",
                     "onClose": "",
@@ -166,8 +171,8 @@ var DBZ;
             "marginBottom": 0,
             "originalProperty": [],
             "dataPassingForDialog": [],
-            "dialogOkEventNameForDialog": "",
-            "dialogCancelEventNameForDialog": ""
+            "dialogOkEventNameForDialog": "CloseOK",
+            "dialogCancelEventNameForDialog": "CloseCancel"
         };
         return KoshinKakuninDialog_Design;
     })(Uz.CommonChildDiv);

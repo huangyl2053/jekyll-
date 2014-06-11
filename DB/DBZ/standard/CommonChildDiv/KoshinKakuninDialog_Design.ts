@@ -78,7 +78,7 @@ module DBZ {
      "marginRight": "XS",
      "selectControlID": "btnYes",
      "text": "はい",
-     "onClick": "",
+     "onClick": "CloseOK",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -104,7 +104,7 @@ module DBZ {
      "marginRight": "XS",
      "selectControlID": "btnNo",
      "text": "いいえ",
-     "onClick": "",
+     "onClick": "CloseCancel",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -138,7 +138,12 @@ module DBZ {
      "postParameterPanelNames": "KoshinKakuninDialog"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbz/db/dbz/KoshinKakunin/onLoad"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -176,8 +181,8 @@ module DBZ {
  "marginBottom": 0,
  "originalProperty": [],
  "dataPassingForDialog": [],
- "dialogOkEventNameForDialog": "",
- "dialogCancelEventNameForDialog": ""
+ "dialogOkEventNameForDialog": "CloseOK",
+ "dialogCancelEventNameForDialog": "CloseCancel"
 }        
     }
 }

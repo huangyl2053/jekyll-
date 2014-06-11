@@ -23,6 +23,8 @@ public class ShikakuShuseiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("chkMushi")
+    private CheckBoxList chkMushi;
     @JsonProperty("txtFusugoNaiyo")
     private TextBox txtFusugoNaiyo;
     @JsonProperty("txtHihoNo")
@@ -37,6 +39,8 @@ public class ShikakuShuseiDiv extends Panel {
     private TextBoxFlexibleDate txtUmareYmd;
     @JsonProperty("txtNenrei")
     private TextBox txtNenrei;
+    @JsonProperty("txtSelectedRow")
+    private TextBox txtSelectedRow;
     @JsonProperty("txtShimei")
     private TextBox txtShimei;
     @JsonProperty("ShutokuKei")
@@ -45,8 +49,6 @@ public class ShikakuShuseiDiv extends Panel {
     private SoushitsuKeiDiv SoushitsuKei;
     @JsonProperty("btnCancel")
     private Button btnCancel;
-    @JsonProperty("btnCommit")
-    private Button btnCommit;
     @JsonProperty("btnCommitDialog")
     private ButtonDialog btnCommitDialog;
 
@@ -56,6 +58,16 @@ public class ShikakuShuseiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    @JsonProperty("chkMushi")
+    public CheckBoxList getChkMushi() {
+        return chkMushi;
+    }
+
+    @JsonProperty("chkMushi")
+    public void setChkMushi(CheckBoxList chkMushi) {
+        this.chkMushi=chkMushi;
+    }
+
     @JsonProperty("txtFusugoNaiyo")
     public TextBox getTxtFusugoNaiyo() {
         return txtFusugoNaiyo;
@@ -126,6 +138,16 @@ public class ShikakuShuseiDiv extends Panel {
         this.txtNenrei=txtNenrei;
     }
 
+    @JsonProperty("txtSelectedRow")
+    public TextBox getTxtSelectedRow() {
+        return txtSelectedRow;
+    }
+
+    @JsonProperty("txtSelectedRow")
+    public void setTxtSelectedRow(TextBox txtSelectedRow) {
+        this.txtSelectedRow=txtSelectedRow;
+    }
+
     @JsonProperty("txtShimei")
     public TextBox getTxtShimei() {
         return txtShimei;
@@ -164,16 +186,6 @@ public class ShikakuShuseiDiv extends Panel {
     @JsonProperty("btnCancel")
     public void setBtnCancel(Button btnCancel) {
         this.btnCancel=btnCancel;
-    }
-
-    @JsonProperty("btnCommit")
-    public Button getBtnCommit() {
-        return btnCommit;
-    }
-
-    @JsonProperty("btnCommit")
-    public void setBtnCommit(Button btnCommit) {
-        this.btnCommit=btnCommit;
     }
 
     @JsonProperty("btnCommitDialog")

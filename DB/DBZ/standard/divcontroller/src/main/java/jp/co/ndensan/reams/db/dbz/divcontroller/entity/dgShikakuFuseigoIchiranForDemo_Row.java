@@ -15,12 +15,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 
 /**
- * dgShikakuFuseigoIchiran_Row のクラスファイル 
+ * dgShikakuFuseigoIchiranForDemo_Row のクラスファイル 
  * 
  * @author 自動生成
  */
 
-public class dgShikakuFuseigoIchiran_Row extends DataRow {
+public class dgShikakuFuseigoIchiranForDemo_Row extends DataRow {
 
     private RString txtIgnore;
     private Button btnDecide;
@@ -56,11 +56,11 @@ public class dgShikakuFuseigoIchiran_Row extends DataRow {
     private TextBoxFlexibleDate txtShikakuSoshitsuTodokedeYmd;
     private RString txtDemoKey;
 
-    public dgShikakuFuseigoIchiran_Row() {
+    public dgShikakuFuseigoIchiranForDemo_Row() {
         super();
     }
 
-    public dgShikakuFuseigoIchiran_Row(RString txtIgnore, Button btnDecide, RString txtShuseiZumi, RString txtHihoNo, RString txtShikibetsuCode, RString txtKetsugo01, RString txtKanaShimei, RString txtShimei, RString txtKetsugo02, RString txtJuminShu, TextBoxFlexibleDate txtSeiYmd, RString txtKetsugo03, RString txtSeibetsu, RString txtNenrei, RString txtKetsugo04, RString txtFuseigo, RString txtJukiTorokuJiyu, RString txtShikakuShutokuJiyu, RString txtKetsugo05, TextBoxFlexibleDate txtJukiTorokuYmd, TextBoxFlexibleDate txtShikakuShutokuYmd, RString txtKetsugo06, RString txtJukiShojoJiyu, RString txtShikakuSoshitsuJiyu, RString txtKetsugo07, TextBoxFlexibleDate txtJukiShojoYmd, TextBoxFlexibleDate txtShikakuSoshitsuYmd, RString txtKetsugo08, TextBoxFlexibleDate txtJukiTorokuTodokedeYmd, TextBoxFlexibleDate txtJukiShojoTodokedeYmd, TextBoxFlexibleDate txtShikakuShutokuTodokedeYmd, TextBoxFlexibleDate txtShikakuSoshitsuTodokedeYmd, RString txtDemoKey) {
+    public dgShikakuFuseigoIchiranForDemo_Row(RString txtIgnore, Button btnDecide, RString txtShuseiZumi, RString txtHihoNo, RString txtShikibetsuCode, RString txtKetsugo01, RString txtKanaShimei, RString txtShimei, RString txtKetsugo02, RString txtJuminShu, TextBoxFlexibleDate txtSeiYmd, RString txtKetsugo03, RString txtSeibetsu, RString txtNenrei, RString txtKetsugo04, RString txtFuseigo, RString txtJukiTorokuJiyu, RString txtShikakuShutokuJiyu, RString txtKetsugo05, TextBoxFlexibleDate txtJukiTorokuYmd, TextBoxFlexibleDate txtShikakuShutokuYmd, RString txtKetsugo06, RString txtJukiShojoJiyu, RString txtShikakuSoshitsuJiyu, RString txtKetsugo07, TextBoxFlexibleDate txtJukiShojoYmd, TextBoxFlexibleDate txtShikakuSoshitsuYmd, RString txtKetsugo08, TextBoxFlexibleDate txtJukiTorokuTodokedeYmd, TextBoxFlexibleDate txtJukiShojoTodokedeYmd, TextBoxFlexibleDate txtShikakuShutokuTodokedeYmd, TextBoxFlexibleDate txtShikakuSoshitsuTodokedeYmd, RString txtDemoKey) {
         super();
         this.setOriginalData("txtIgnore", txtIgnore);
         this.setOriginalData("btnDecide", btnDecide);
