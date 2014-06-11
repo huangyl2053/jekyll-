@@ -287,10 +287,14 @@
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
+      "isShowHeader": true,
       "isShowFooter": true,
       "isShowFilter": false,
       "isShowFilterButton": false,
       "isShowRowState": false,
+      "isShowSelectButtonColumn": false,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
       "header": {
        "combineColumns": [],
        "frozenColumn": "",
@@ -308,7 +312,7 @@
         "cellDetails": {
          "cellType": 8,
          "text": "確認",
-         "onClick": "",
+         "onClick": "onClick_RirekiAll",
          "imageFileUrl": "",
          "imageWidth": "",
          "imageHeight": ""
@@ -361,7 +365,7 @@
         "cellDetails": {
          "cellType": 0
         },
-        "align": 1,
+        "align": 0,
         "resize": false,
         "isPrivateInfo": false,
         "sortKey": ""
@@ -377,6 +381,20 @@
         "cellDetails": {
          "cellType": 0
         },
+        "align": 2,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       },
+       {
+        "columnName": "",
+        "dataName": "txtTsuchishoNo",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 0,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
         "align": 0,
         "resize": false,
         "isPrivateInfo": false,
@@ -387,7 +405,7 @@
      "height": "175",
      "onSort": "",
      "onSelect": "",
-     "onSelectByDblClick": "",
+     "onSelectByDblClick": "onSelect_RirekiAll",
      "onSelectBySelectButton": "",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
@@ -445,7 +463,7 @@
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": true
+   "readOnly": false
   },
   {
    "fieldName": "FukaRireki",
@@ -514,10 +532,14 @@
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
+      "isShowHeader": true,
       "isShowFooter": true,
       "isShowFilter": false,
       "isShowFilterButton": false,
       "isShowRowState": false,
+      "isShowSelectButtonColumn": false,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
       "header": {
        "combineColumns": [],
        "frozenColumn": "",
@@ -728,8 +750,8 @@
      },
      "height": "Auto",
      "onSort": "",
-     "onSelect": "onClick_RirekiKakunin",
-     "onSelectByDblClick": "onClick_RirekiKakunin",
+     "onSelect": "",
+     "onSelectByDblClick": "onSelect_FukaRireki",
      "onSelectBySelectButton": "",
      "onSelectByModifyButton": "",
      "onSelectByDeleteButton": "",
@@ -760,14 +782,30 @@
    "selectControlID": "FukaRireki",
    "onLoad": "",
    "title": "賦課履歴一覧",
-   "isOpen": false,
-   "canOpenAndClose": true,
+   "isOpen": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "FukaRireki"
+    },
+    {
+     "postParameterPanelNames": "FukaRirekiAll"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_RirekiAll",
+     "requestUrl": "dbb/db/dbb/FukaRireki/onClick"
+    },
+    {
+     "eventName": "onSelect_RirekiAll",
+     "requestUrl": "dbb/db/dbb/FukaRireki/onSelect"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -2435,7 +2473,7 @@
     {
      "fieldName": "btnFukakonkyoKiwari",
      "items": [],
-     "controlType": "ButtonDialog",
+     "controlType": "Button",
      "width": "120",
      "visible": true,
      "displayNone": false,
@@ -2451,22 +2489,17 @@
      "marginRight": "XS",
      "selectControlID": "btnFukakonkyoKiwari",
      "text": "賦課根拠・期割",
-     "onClick": "",
+     "onClick": "onClick_btnFukakonkyoKiwari",
      "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": "",
-     "displayChildDivName": "",
-     "dataPassing": [],
-     "visibleCloseButton": true,
-     "onOkClose": "",
-     "onBeforeOpenDialog": ""
+     "imageHeight": ""
     },
     {
-     "fieldName": "btnSetaiinnShotoku",
+     "fieldName": "btnSetaiinShotoku",
      "items": [],
-     "controlType": "ButtonDialog",
+     "controlType": "Button",
      "width": "120",
      "visible": true,
      "displayNone": false,
@@ -2480,24 +2513,19 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "selectControlID": "btnSetaiinnShotoku",
+     "selectControlID": "btnSetaiinShotoku",
      "text": "世帯員所得",
-     "onClick": "",
+     "onClick": "onClick_btnSetaiinShotoku",
      "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": "",
-     "displayChildDivName": "",
-     "dataPassing": [],
-     "visibleCloseButton": true,
-     "onOkClose": "",
-     "onBeforeOpenDialog": ""
+     "imageHeight": ""
     },
     {
      "fieldName": "btnTokucho",
      "items": [],
-     "controlType": "ButtonDialog",
+     "controlType": "Button",
      "width": "120",
      "visible": true,
      "displayNone": false,
@@ -2513,17 +2541,12 @@
      "marginRight": "XS",
      "selectControlID": "btnTokucho",
      "text": "特別徴収",
-     "onClick": "",
+     "onClick": "onClick_btnTokucho",
      "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": "",
-     "displayChildDivName": "",
-     "dataPassing": [],
-     "visibleCloseButton": true,
-     "onOkClose": "",
-     "onBeforeOpenDialog": ""
+     "imageHeight": ""
     },
     {
      "fieldName": "btnGemmen",
@@ -5131,7 +5154,7 @@
        ],
        "btnSaihyojiVisible": false,
        "btnSaihyojiOnClick": "onClick_Saihyoji",
-       "chkIchiranAllOnClick": "",
+       "chkIchiranAllOnClick": "onChange_chkSetaiIchiranAll",
        "btnNarabeteHyojuVisible": true,
        "btnNarabeteHyojuOnClick": "onClick_Hikaku",
        "dgSetaishotokuGridSetting": {
@@ -5608,7 +5631,12 @@
        "postParameterPanelNames": "KobetuHakko"
       }
      ],
-     "requestSettings": [],
+     "requestSettings": [
+      {
+       "eventName": "onLoad",
+       "requestUrl": ""
+      }
+     ],
      "hiddenInput": [],
      "onOpen": "",
      "onClose": "",
@@ -5620,7 +5648,7 @@
      "eraseBorderRight": false,
      "eraseBorderLeft": false,
      "backgroundColor": 0,
-     "widthAuto": false,
+     "widthAuto": true,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false
@@ -5690,7 +5718,7 @@
        "marginRight": "XS",
        "selectControlID": "radChoshu_core",
        "required": false,
-       "onChange": "",
+       "onChange": "onChenge_radChoshu",
        "labelLText": "",
        "labelLWidth": "S",
        "labelLAlign": 2,
@@ -5708,7 +5736,7 @@
          "value": "翌年度"
         }
        ],
-       "selectedItem": null,
+       "selectedItem": "key1",
        "onClick": "",
        "newLineItemNumber": 3,
        "spaceSize": "M",
@@ -6683,7 +6711,7 @@
      "requestSettings": [
       {
        "eventName": "onLoad",
-       "requestUrl": "dbb/db/dbb/TokubetsuchoshuJoho/onLoad"
+       "requestUrl": ""
       }
      ],
      "hiddenInput": [],
@@ -14228,14 +14256,50 @@
    "selectControlID": "FukaShokaiGrandson",
    "onLoad": "",
    "title": "賦課照会",
-   "isOpen": false,
-   "canOpenAndClose": true,
+   "isOpen": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "FukaShokaiGrandson"
+    },
+    {
+     "postParameterPanelNames": "FukaRireki"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onSelect_FukaRireki",
+     "requestUrl": "dbb/db/dbb/FukaShokaiGrandson/onSelect"
+    },
+    {
+     "eventName": "onClick_btnFukakonkyoKiwari",
+     "requestUrl": "dbb/db/dbb/FukaShokaiGrandson/onClick_btnFukakonkyoKiwari"
+    },
+    {
+     "eventName": "onClick_btnSetaiinShotoku",
+     "requestUrl": "dbb/db/dbb/FukaShokaiGrandson/onClick_btnSetaiinnShotoku"
+    },
+    {
+     "eventName": "onChange_chkSetaiIchiranAll",
+     "requestUrl": "dbb/db/dbb/FukaShokaiGrandson/onChange_chkSetaiIchiranAll"
+    },
+    {
+     "eventName": "onClick_btnTokucho",
+     "requestUrl": "dbb/db/dbb/FukaShokaiGrandson/onClick_btnTokucho"
+    },
+    {
+     "eventName": "onChenge_radChoshu",
+     "requestUrl": "dbb/db/dbb/FukaShokaiGrandson/onClick_btnTokucho"
+    },
+    {
+     "eventName": "onClick_Hikaku",
+     "requestUrl": ""
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -14285,7 +14349,7 @@
     },
     {
      "visibleDiv": "FukaRirekiAll",
-     "panelState": "readOnly visible",
+     "panelState": "visible",
      "fixedDiv": "No"
     },
     {
@@ -14297,71 +14361,6 @@
      "visibleDiv": "FukaShokaiGrandson",
      "panelState": "close",
      "fixedDiv": "No"
-    }
-   ],
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "dgFukaRirekiFukaRireki",
-     "event": "onSelectByDblClick",
-     "transition": "履歴選択"
-    },
-    {
-     "fieldName": "dgFukaRirekiFukaRireki",
-     "event": "onSelect",
-     "transition": "履歴選択"
-    }
-   ]
-  },
-  {
-   "order": "2",
-   "stateName": "履歴選択",
-   "showWizard": false,
-   "visibleDivs": [
-    {
-     "visibleDiv": "FukaShokai",
-     "panelState": "visible",
-     "fixedDiv": ""
-    },
-    {
-     "visibleDiv": "JuminFukaShokai",
-     "panelState": "visible",
-     "fixedDiv": ""
-    },
-    {
-     "visibleDiv": "FukaRireki",
-     "panelState": "visible",
-     "fixedDiv": ""
-    },
-    {
-     "visibleDiv": "FukaShokaiGrandson",
-     "panelState": "visible",
-     "fixedDiv": ""
-    },
-    {
-     "visibleDiv": "SetaiinShotoku",
-     "panelState": "visible",
-     "fixedDiv": ""
-    },
-    {
-     "visibleDiv": "Tokucho",
-     "panelState": "visible",
-     "fixedDiv": ""
-    },
-    {
-     "visibleDiv": "NenkinHokenshaTotsugoJoho",
-     "panelState": "visible",
-     "fixedDiv": ""
-    },
-    {
-     "visibleDiv": "TokuChoIdoAndIrai",
-     "panelState": "visible",
-     "fixedDiv": ""
-    },
-    {
-     "visibleDiv": "TokuChoKekka",
-     "panelState": "visible",
-     "fixedDiv": ""
     },
     {
      "visibleDiv": "FukakonkyoAndKiwari",
@@ -14369,7 +14368,27 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "SetaiShotokuIchiran",
+     "visibleDiv": "SetaiinShotoku",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "Tokucho",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "NenkinHokenshaTotsugoJoho",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "TokuChoIdoAndIrai",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "TokuChoKekka",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -14389,7 +14408,52 @@
      "fixedDiv": "No"
     },
     {
+     "visibleDiv": "TokuKaishiTsuchiKobetsu",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KetteiTsuchiKobetsu",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "HenkoTsuchiKobetsu",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "NotsuKobetsu",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "GemmenTsuchiKobetsu",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ChoshuYuyoTsuchiKobetsu",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "YufuriKobetsu",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "FukadaichoKobetsu",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
      "visibleDiv": "FukaShokaiKiwarigaku",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "SetaiShotokuIchiran",
      "panelState": "visible",
      "fixedDiv": "No"
     }
@@ -14398,12 +14462,137 @@
    "events": [
     {
      "fieldName": "dgFukaRirekiFukaRireki",
-     "event": "onSelectByDblClick",
+     "event": "onSelectBySelectButton",
      "transition": "履歴選択"
+    }
+   ]
+  },
+  {
+   "order": "2",
+   "stateName": "履歴選択",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "JuminFukaShokai",
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
+     "visibleDiv": "FukaRirekiAll",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "FukaRireki",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "FukaShokaiGrandson",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "FukakonkyoAndKiwari",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "SetaiinShotoku",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "Tokucho",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "NenkinHokenshaTotsugoJoho",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "TokuChoIdoAndIrai",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "TokuChoKekka",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "InjiNaiyoSettei",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KobetsuHakkoChoteiJiyu",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KobetsuHakkoZengoSentaku",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "TokuKaishiTsuchiKobetsu",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KetteiTsuchiKobetsu",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "HenkoTsuchiKobetsu",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "NotsuKobetsu",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "GemmenTsuchiKobetsu",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ChoshuYuyoTsuchiKobetsu",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "YufuriKobetsu",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "FukadaichoKobetsu",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "FukaShokaiKiwarigaku",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "SetaiShotokuIchiran",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "validation": {},
+   "events": [
+    {
      "fieldName": "dgFukaRirekiFukaRireki",
-     "event": "onSelect",
+     "event": "onSelectBySelectButton",
      "transition": "履歴選択"
     }
    ]
@@ -14439,18 +14628,13 @@
    "events": [
     {
      "fieldName": "dgFukaRirekiFukaRireki",
-     "event": "onSelectByDblClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgFukaRirekiFukaRireki",
-     "event": "onSelect",
+     "event": "onSelectBySelectButton",
      "transition": ""
     }
    ]
   }
  ],
- "currentState": "初期表示",
+ "currentState": "All",
  "id": "DBB0320001",
  "WFParameter": [],
  "UIContainerEventMapping": [
@@ -14460,10 +14644,15 @@
   },
   {
    "alias": "hikakuShokai",
-   "eventName": "btnHikaku.onClick"
+   "eventName": "SetaiShotokuIchiran_SetaiShotokuIchiran_btnNarabeteHyoji.onClick"
   }
  ],
  "loadSequencePanelNames": [
+  [
+   "FukaRirekiAll",
+   "FukaRireki",
+   "FukaShokaiGrandson"
+  ],
   [
    "TokuKaishiTsuchiKobetsu",
    "KetteiTsuchiKobetsu",
@@ -14494,16 +14683,7 @@
    "JuminFukaShokai"
   ],
   [
-   "FukaRirekiAll"
-  ],
-  [
-   "FukaRireki"
-  ],
-  [
    "TsuchishoSakuseiKobetsu"
-  ],
-  [
-   "FukaShokaiGrandson"
   ],
   [
    "SetaiShotokuIchiran"

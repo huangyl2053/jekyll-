@@ -19,113 +19,95 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 
 /**
- *
- * @author n8211
+ * 全賦課履歴Divクラス
+ * @author n8211 田辺 紘一
  */
 public class FukaRirekiAll {
-    
-    public ResponseData<FukaRirekiAllDiv> onLoad(FukaRirekiAllDiv fukaRirekiAllDiv) {
+    public static final RString FUKARIREKIALL = new RString("FukaRirekiAll.yml");
+
+    /**
+     * 介護保険料賦課照会の初回ロード時に実行
+     * @param div 全賦課履歴Div
+     * @return 全賦課履歴Div
+     */
+    public ResponseData<FukaRirekiAllDiv> onLoad(FukaRirekiAllDiv div) {
+        
+        lordData(div, new RString("0000000000001901"));
+        
+        return returnResponse(div);
+    }
+
+    /**
+     * レスポンスデータのリターン
+     * @param div
+     * @return 
+     */
+    private ResponseData<FukaRirekiAllDiv> returnResponse(FukaRirekiAllDiv div) {
         ResponseData<FukaRirekiAllDiv> response = new ResponseData<>();
-
-        lordData(fukaRirekiAllDiv);
-
-        response.data = fukaRirekiAllDiv;
+        response.data = div;
         return response;
     }
 
     /**
-     * 実行メソッド群
+     * 初回ロード
      * @param fukaRirekiAllDiv 
      */
-    private void lordData(FukaRirekiAllDiv fukaRirekiAllDiv) {
-        List fukaRirekiFormatData = new ArrayList();
-        RString fukaRirekiFileName = new RString("FukaRirekiAll.yml");
+    private void lordData(FukaRirekiAllDiv div, RString tsuchishoNo) {
+        List formatList = new ArrayList();
         
-        List fukaRirekiData = setYamlData(fukaRirekiFileName);
+        List yamlList = getYamlList(tsuchishoNo);
         
-        for (int i = 0; i < fukaRirekiData.size(); i++) {
-            fukaRirekiFormatData.add(getFormatData((List)fukaRirekiData.get(i)));
+        for (int i = 0; i < yamlList.size(); i++) {
+            formatList.add(getFormatData((List)yamlList.get(i)));
         }
         
-        setRirekiAll(fukaRirekiAllDiv, fukaRirekiFormatData);
+        setRirekiAll(div, formatList);
     }
 
     /**
-     * 全賦課履歴 DataGrid に値をセット
+     * 全賦課履歴DataGrid に値をセット
      * @param formatData DataGrid にセットする値List
      */
-    private void setRirekiAll(FukaRirekiAllDiv fukaRirekiAllDiv, List formatData) {
+    private void setRirekiAll(FukaRirekiAllDiv div, List formatData) {
         
-        List dataGridAll = new ArrayList();
-        List dataGrid = new ArrayList();
-
+        List dataGridList = new ArrayList();
        
-        
         for (int i = 0; i < formatData.size(); i++) {
-            dataGrid = (List)formatData.get(i);
-            dgFukaRirekiAll_Row dRirekiAll_Row = createRirekiAllRow(fukaRirekiAllDiv, dataGrid);
+            List dataGridValue = (List)formatData.get(i);
+            dgFukaRirekiAll_Row row = createRowRirekiAll(dataGridValue);
         
-            dataGridAll.add(dRirekiAll_Row);
+            dataGridList.add(row);
         }
             
-        DataGrid<dgFukaRirekiAll_Row> grid = fukaRirekiAllDiv.getDgFukaRirekiAll();
-        grid.setDataSource(dataGridAll);
+        DataGrid<dgFukaRirekiAll_Row> grid = div.getDgFukaRirekiAll();
+        grid.setDataSource(dataGridList);
     }    
 
-    private dgFukaRirekiAll_Row createRirekiAllRow(FukaRirekiAllDiv fukaRirekiAllDiv, List dataGrid) {
-       dgFukaRirekiAll_Row dRirekiAll_Row =
-                new dgFukaRirekiAll_Row(new Button(), RString.EMPTY, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE);
+    /**
+     * DataGrid の 行を生成
+     * @param rowValue 行に代入するデータ
+     * @return 行データ
+     */
+    private dgFukaRirekiAll_Row createRowRirekiAll(List rowValue) {
+       dgFukaRirekiAll_Row row =
+                new dgFukaRirekiAll_Row(new Button(), RString.EMPTY, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.EMPTY);
+                        
+        row.setTxtChoteiNendo((RString)rowValue.get(0));
+        row.setTxtFukaNendo((RString)rowValue.get(1));
+        row.setTxtHokenryoDankai((RString)rowValue.get(2));
+        row.setTxtHokenryoNengaku((RString)rowValue.get(3));
+        row.setTxtTsuchishoNo((RString)rowValue.get(4));
         
-        dRirekiAll_Row.setTxtChoteiNendo((RString)dataGrid.get(0));
-        dRirekiAll_Row.setTxtFukaNendo((RString)dataGrid.get(1));
-        dRirekiAll_Row.setTxtHokenryoDankai(new RString(dataGrid.get(2).toString()));
-        dRirekiAll_Row.setTxtHokenryoNengaku(new RString(dataGrid.get(3).toString()));
-        
-        return dRirekiAll_Row;
+        return row;
     }
     
-    /**
-     * YamlLoader から データを取り込み、Listに格納
-     * @param yamlFileName Yamlファイル名
-     * @return YamlデータのList
-     */
-    private List setYamlData(RString yamlFileName) {
 
-        //Yaml データ読み込み
-        List<HashMap> fukaRirekiAll = YamlLoader.FOR_DBB.loadAsList(yamlFileName);
 
-        
-        //YamlData用List
-        List yamlDatalistAll = new ArrayList();
-        List getYamlDatalist = new ArrayList();
-        
-        for (int i = 1; i <= (int)fukaRirekiAll.get(0).get("データ数"); i++) {
-            ControlGenerator cg = new ControlGenerator(fukaRirekiAll.get(i));
-            
-            getYamlDatalist = getYamaData(cg);
-
-            yamlDatalistAll.add(getYamlDatalist);
-        }
-
-        return yamlDatalistAll;
-    }
-
-    private List getYamaData(ControlGenerator cg) {
-        
-        List yamlDatalist = new ArrayList();
-        
-        yamlDatalist.add(cg.getAsRString("調定年度"));
-        yamlDatalist.add(cg.getAsRString("賦課年度"));
-        yamlDatalist.add(cg.get("保険料段階"));
-        yamlDatalist.add(cg.get("保険料年額"));
-        
-        return yamlDatalist;
-    }
 
     /**
-     * List の 値を確認し、int なら setComma を実行
-     * @param listData
-     * @return 
+     * List の 値を確認し、必要なフォーマットを実行
+     * @param listData 対象List
+     * @return フォーマット完了List
      */
     private List getFormatData(List listData) {
         List checkData = new ArrayList();
@@ -149,24 +131,66 @@ public class FukaRirekiAll {
     }    
 
     /**
-     * int をカンマ付で String に変換
-     * @param intData
-     * @return 
+     * int かどうかチェック
+     * @param checkData 対象データ
+     * @return true or false
      */
-    private String setComma(int intData) {
-        NumberFormat isComma = NumberFormat.getNumberInstance();
-   
-        String commaData = isComma.format(intData);
+    private boolean intChecker(List checkData) {
+        return checkData.get(0).getClass().getName().equals("java.lang.Integer");
+    }
+
+    /**
+     * int をカンマ付(3桁毎)で RString に変換
+     * @param intValue 対象値
+     * @return 変換完了値
+     */
+    private RString setComma(int intValue) {
+        RString commaData = new RString(NumberFormat.getNumberInstance().format(intValue));
         
         return commaData;
     }
 
     /**
-     * int かどうかチェック
-     * @param checkData
-     * @return 
+     * YamlLoader から データを取り込み、Listに格納
+     * @param yamlFileName Yamlファイル名
+     * @return YamlデータのList
      */
-    private boolean intChecker(List checkData) {
-        return checkData.get(0).getClass().getName().equals("java.lang.Integer");
+    private List getYamlList(RString tsuchishoNo) {
+
+        //Yaml データ読み込み
+        List<HashMap> yamlArray = YamlLoader.DBB.loadAsList(FUKARIREKIALL);
+        
+        //YamlData用List
+        List yamlList = new ArrayList();
+        
+        for (int i = 0; i < yamlArray.get(0).size(); i++) {
+            ControlGenerator cg = new ControlGenerator(yamlArray.get(i));
+            
+            if (tsuchishoNo.contains(cg.getAsRString("通知書番号"))) {
+                List yamlValue = getYamlGenerate(cg);
+
+                yamlList.add(yamlValue);
+            }
+        }
+
+        return yamlList;
+    }
+
+    /**
+     * Yaml を List化
+     * @param cg 生成後のYamlデータ
+     * @return List化したYamlデータ
+     */
+    private List getYamlGenerate(ControlGenerator cg) {
+        
+        List yamlValue = new ArrayList();
+        
+        yamlValue.add(cg.getAsRString("調定年度"));
+        yamlValue.add(cg.getAsRString("賦課年度"));
+        yamlValue.add(cg.getAsRString("保険料段階"));
+        yamlValue.add(cg.get("保険料年額"));
+        yamlValue.add(cg.getAsRString("通知書番号"));
+        
+        return yamlValue;
     }
 }
