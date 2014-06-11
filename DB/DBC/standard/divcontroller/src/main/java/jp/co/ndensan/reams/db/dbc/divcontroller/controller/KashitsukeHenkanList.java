@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 public class KashitsukeHenkanList {
 
     private List<HashMap> getYaml() {
-        return YamlLoader.FOR_DBC.loadAsList(new RString("dbc1810000/KashitsukeHenkanList.yml"));
+        return YamlLoader.DBC.loadAsList(new RString("dbc1810000/KashitsukeHenkanList.yml"));
     }
 
     /**
