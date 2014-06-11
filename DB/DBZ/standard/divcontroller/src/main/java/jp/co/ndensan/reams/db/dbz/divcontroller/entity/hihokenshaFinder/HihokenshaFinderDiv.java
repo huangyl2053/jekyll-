@@ -1,16 +1,15 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.SearchCriteriaOfHihokenshaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.SearchCriteriaOfHokenshaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.SearchCriteriaOfKojinDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.ButtonsForHihokenshaFinderDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.SearchCriteriaOfHihokenshaDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.SearchCriteriaOfHokenshaDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.SearchCriteriaOfKojinDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * HihokenshaFinder のクラスファイル 
@@ -26,14 +25,12 @@ public class HihokenshaFinderDiv extends Panel {
      */
     @JsonProperty("SearchCriteriaOfHokensha")
     private SearchCriteriaOfHokenshaDiv SearchCriteriaOfHokensha;
-    @JsonProperty("SearchCriteriaOfKojin")
-    private SearchCriteriaOfKojinDiv SearchCriteriaOfKojin;
     @JsonProperty("SearchCriteriaOfHihokensha")
     private SearchCriteriaOfHihokenshaDiv SearchCriteriaOfHihokensha;
-    @JsonProperty("btnToSearch")
-    private Button btnToSearch;
-    @JsonProperty("btnToClear")
-    private Button btnToClear;
+    @JsonProperty("SearchCriteriaOfKojin")
+    private SearchCriteriaOfKojinDiv SearchCriteriaOfKojin;
+    @JsonProperty("ButtonsForHihokenshaFinder")
+    private ButtonsForHihokenshaFinderDiv ButtonsForHihokenshaFinder;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -51,16 +48,6 @@ public class HihokenshaFinderDiv extends Panel {
         this.SearchCriteriaOfHokensha=SearchCriteriaOfHokensha;
     }
 
-    @JsonProperty("SearchCriteriaOfKojin")
-    public SearchCriteriaOfKojinDiv getSearchCriteriaOfKojin() {
-        return SearchCriteriaOfKojin;
-    }
-
-    @JsonProperty("SearchCriteriaOfKojin")
-    public void setSearchCriteriaOfKojin(SearchCriteriaOfKojinDiv SearchCriteriaOfKojin) {
-        this.SearchCriteriaOfKojin=SearchCriteriaOfKojin;
-    }
-
     @JsonProperty("SearchCriteriaOfHihokensha")
     public SearchCriteriaOfHihokenshaDiv getSearchCriteriaOfHihokensha() {
         return SearchCriteriaOfHihokensha;
@@ -71,24 +58,24 @@ public class HihokenshaFinderDiv extends Panel {
         this.SearchCriteriaOfHihokensha=SearchCriteriaOfHihokensha;
     }
 
-    @JsonProperty("btnToSearch")
-    public Button getBtnToSearch() {
-        return btnToSearch;
+    @JsonProperty("SearchCriteriaOfKojin")
+    public SearchCriteriaOfKojinDiv getSearchCriteriaOfKojin() {
+        return SearchCriteriaOfKojin;
     }
 
-    @JsonProperty("btnToSearch")
-    public void setBtnToSearch(Button btnToSearch) {
-        this.btnToSearch=btnToSearch;
+    @JsonProperty("SearchCriteriaOfKojin")
+    public void setSearchCriteriaOfKojin(SearchCriteriaOfKojinDiv SearchCriteriaOfKojin) {
+        this.SearchCriteriaOfKojin=SearchCriteriaOfKojin;
     }
 
-    @JsonProperty("btnToClear")
-    public Button getBtnToClear() {
-        return btnToClear;
+    @JsonProperty("ButtonsForHihokenshaFinder")
+    public ButtonsForHihokenshaFinderDiv getButtonsForHihokenshaFinder() {
+        return ButtonsForHihokenshaFinder;
     }
 
-    @JsonProperty("btnToClear")
-    public void setBtnToClear(Button btnToClear) {
-        this.btnToClear=btnToClear;
+    @JsonProperty("ButtonsForHihokenshaFinder")
+    public void setButtonsForHihokenshaFinder(ButtonsForHihokenshaFinderDiv ButtonsForHihokenshaFinder) {
+        this.ButtonsForHihokenshaFinder=ButtonsForHihokenshaFinder;
     }
 
 }

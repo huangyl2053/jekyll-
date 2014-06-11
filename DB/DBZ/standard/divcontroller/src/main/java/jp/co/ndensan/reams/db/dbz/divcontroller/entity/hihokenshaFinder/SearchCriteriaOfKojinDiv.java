@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -21,46 +21,28 @@ public class SearchCriteriaOfKojinDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblShikibetsuCode")
-    private Label lblShikibetsuCode;
     @JsonProperty("txtShikibetsuCode")
     private TextBoxCode txtShikibetsuCode;
-    @JsonProperty("lblSetaiCode")
-    private Label lblSetaiCode;
     @JsonProperty("txtSetaiCode")
     private TextBoxCode txtSetaiCode;
-    @JsonProperty("lblKojinNo")
-    private Label lblKojinNo;
     @JsonProperty("txtKojinNo")
     private TextBoxCode txtKojinNo;
     @JsonProperty("lblJuminShubetsu")
     private Label lblJuminShubetsu;
     @JsonProperty("ddlJuminShubetsu")
     private DropDownList ddlJuminShubetsu;
-    @JsonProperty("lblShimei")
-    private Label lblShimei;
     @JsonProperty("txtShimei")
     private TextBox txtShimei;
-    @JsonProperty("lblGender")
-    private Label lblGender;
     @JsonProperty("chkGender")
     private CheckBoxList chkGender;
-    @JsonProperty("lblPadding")
-    private Label lblPadding;
     @JsonProperty("radSearchPatternOfShimei")
     private RadioButton radSearchPatternOfShimei;
     @JsonProperty("lblSearching")
     private Label lblSearching;
-    @JsonProperty("lblBirthDay")
-    private Label lblBirthDay;
     @JsonProperty("txtBirthDay")
-    private TextBoxDate txtBirthDay;
-    @JsonProperty("lblYubinNo")
-    private Label lblYubinNo;
+    private TextBoxFlexibleDate txtBirthDay;
     @JsonProperty("txtYubinNo")
     private TextBoxYubinNo txtYubinNo;
-    @JsonProperty("lblJusho")
-    private Label lblJusho;
     @JsonProperty("txtJusho")
     private TextBox txtJusho;
 
@@ -70,16 +52,6 @@ public class SearchCriteriaOfKojinDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblShikibetsuCode")
-    public Label getLblShikibetsuCode() {
-        return lblShikibetsuCode;
-    }
-
-    @JsonProperty("lblShikibetsuCode")
-    public void setLblShikibetsuCode(Label lblShikibetsuCode) {
-        this.lblShikibetsuCode=lblShikibetsuCode;
-    }
-
     @JsonProperty("txtShikibetsuCode")
     public TextBoxCode getTxtShikibetsuCode() {
         return txtShikibetsuCode;
@@ -90,16 +62,6 @@ public class SearchCriteriaOfKojinDiv extends Panel {
         this.txtShikibetsuCode=txtShikibetsuCode;
     }
 
-    @JsonProperty("lblSetaiCode")
-    public Label getLblSetaiCode() {
-        return lblSetaiCode;
-    }
-
-    @JsonProperty("lblSetaiCode")
-    public void setLblSetaiCode(Label lblSetaiCode) {
-        this.lblSetaiCode=lblSetaiCode;
-    }
-
     @JsonProperty("txtSetaiCode")
     public TextBoxCode getTxtSetaiCode() {
         return txtSetaiCode;
@@ -108,16 +70,6 @@ public class SearchCriteriaOfKojinDiv extends Panel {
     @JsonProperty("txtSetaiCode")
     public void setTxtSetaiCode(TextBoxCode txtSetaiCode) {
         this.txtSetaiCode=txtSetaiCode;
-    }
-
-    @JsonProperty("lblKojinNo")
-    public Label getLblKojinNo() {
-        return lblKojinNo;
-    }
-
-    @JsonProperty("lblKojinNo")
-    public void setLblKojinNo(Label lblKojinNo) {
-        this.lblKojinNo=lblKojinNo;
     }
 
     @JsonProperty("txtKojinNo")
@@ -150,16 +102,6 @@ public class SearchCriteriaOfKojinDiv extends Panel {
         this.ddlJuminShubetsu=ddlJuminShubetsu;
     }
 
-    @JsonProperty("lblShimei")
-    public Label getLblShimei() {
-        return lblShimei;
-    }
-
-    @JsonProperty("lblShimei")
-    public void setLblShimei(Label lblShimei) {
-        this.lblShimei=lblShimei;
-    }
-
     @JsonProperty("txtShimei")
     public TextBox getTxtShimei() {
         return txtShimei;
@@ -170,16 +112,6 @@ public class SearchCriteriaOfKojinDiv extends Panel {
         this.txtShimei=txtShimei;
     }
 
-    @JsonProperty("lblGender")
-    public Label getLblGender() {
-        return lblGender;
-    }
-
-    @JsonProperty("lblGender")
-    public void setLblGender(Label lblGender) {
-        this.lblGender=lblGender;
-    }
-
     @JsonProperty("chkGender")
     public CheckBoxList getChkGender() {
         return chkGender;
@@ -188,16 +120,6 @@ public class SearchCriteriaOfKojinDiv extends Panel {
     @JsonProperty("chkGender")
     public void setChkGender(CheckBoxList chkGender) {
         this.chkGender=chkGender;
-    }
-
-    @JsonProperty("lblPadding")
-    public Label getLblPadding() {
-        return lblPadding;
-    }
-
-    @JsonProperty("lblPadding")
-    public void setLblPadding(Label lblPadding) {
-        this.lblPadding=lblPadding;
     }
 
     @JsonProperty("radSearchPatternOfShimei")
@@ -220,34 +142,14 @@ public class SearchCriteriaOfKojinDiv extends Panel {
         this.lblSearching=lblSearching;
     }
 
-    @JsonProperty("lblBirthDay")
-    public Label getLblBirthDay() {
-        return lblBirthDay;
-    }
-
-    @JsonProperty("lblBirthDay")
-    public void setLblBirthDay(Label lblBirthDay) {
-        this.lblBirthDay=lblBirthDay;
-    }
-
     @JsonProperty("txtBirthDay")
-    public TextBoxDate getTxtBirthDay() {
+    public TextBoxFlexibleDate getTxtBirthDay() {
         return txtBirthDay;
     }
 
     @JsonProperty("txtBirthDay")
-    public void setTxtBirthDay(TextBoxDate txtBirthDay) {
+    public void setTxtBirthDay(TextBoxFlexibleDate txtBirthDay) {
         this.txtBirthDay=txtBirthDay;
-    }
-
-    @JsonProperty("lblYubinNo")
-    public Label getLblYubinNo() {
-        return lblYubinNo;
-    }
-
-    @JsonProperty("lblYubinNo")
-    public void setLblYubinNo(Label lblYubinNo) {
-        this.lblYubinNo=lblYubinNo;
     }
 
     @JsonProperty("txtYubinNo")
@@ -258,16 +160,6 @@ public class SearchCriteriaOfKojinDiv extends Panel {
     @JsonProperty("txtYubinNo")
     public void setTxtYubinNo(TextBoxYubinNo txtYubinNo) {
         this.txtYubinNo=txtYubinNo;
-    }
-
-    @JsonProperty("lblJusho")
-    public Label getLblJusho() {
-        return lblJusho;
-    }
-
-    @JsonProperty("lblJusho")
-    public void setLblJusho(Label lblJusho) {
-        this.lblJusho=lblJusho;
     }
 
     @JsonProperty("txtJusho")
