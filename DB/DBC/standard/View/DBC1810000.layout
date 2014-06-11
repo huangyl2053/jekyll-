@@ -56,7 +56,7 @@
         "cellDetails": {
          "cellType": 8,
          "text": "選",
-         "onClick": "",
+         "onClick": "onSelectedHenkanList",
          "imageFileUrl": "",
          "imageWidth": "",
          "imageHeight": ""
@@ -64,7 +64,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "btnSelect"
+        "sortKey": ""
        },
        {
         "columnName": "",
@@ -85,7 +85,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "btnDelete"
+        "sortKey": ""
        },
        {
         "columnName": "被保番号",
@@ -196,7 +196,7 @@
         "dataName": "txtServiceShurui",
         "toolTip": "",
         "bgColor": 0,
-        "width": 150,
+        "width": 170,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -293,7 +293,8 @@
      },
      "ListHeight": "509",
      "ListOnSelect": "",
-     "ListOnSelectByDblClick": ""
+     "ListOnSelectByDblClick": "",
+     "onClickAddButton": ""
     }
    ],
    "controlType": "Panel",
@@ -320,7 +321,12 @@
      "postParameterPanelNames": "KashitsukeHenkanList"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/KashitsukeHenkanList/onLoad"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -357,9 +363,9 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "lblKashitsukeHenkanKihon1",
+     "text": "<<基本情報１>>",
      "required": false,
      "align": 0,
-     "text": "<<基本情報１>>",
      "isPrivateInfo": false
     },
     {
@@ -380,9 +386,9 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "lblKashitsukeHenkanKihon2",
+     "text": "<<基本情報２>>",
      "required": false,
      "align": 0,
-     "text": "<<基本情報２>>",
      "isPrivateInfo": false
     },
     {
@@ -403,9 +409,9 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "lblKashitsukeHenkanKihon3",
+     "text": "<<基本情報３>>",
      "required": false,
      "align": 0,
-     "text": "<<基本情報３>>",
      "isPrivateInfo": false
     }
    ],
@@ -470,9 +476,9 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "lblKashitsukeHenkanKaigoKihon1",
+     "text": "<<介護基本情報１>>",
      "required": false,
      "align": 0,
-     "text": "<<介護基本情報１>>",
      "isPrivateInfo": false
     },
     {
@@ -493,9 +499,9 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "lblKashitsukeHenkanKaigoKihon2",
+     "text": "<<介護基本情報２>>",
      "required": false,
      "align": 0,
-     "text": "<<介護基本情報２>>",
      "isPrivateInfo": false
     }
    ],
@@ -560,8 +566,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtShinseiYMD_core",
-     "required": false,
      "text": "",
+     "required": false,
      "isPrivateInfo": false,
      "readOnly": true,
      "placeHolder": "",
@@ -645,8 +651,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtSeikyugaku_core",
-     "required": false,
      "text": "",
+     "required": false,
      "isPrivateInfo": false,
      "readOnly": true,
      "placeHolder": "",
@@ -693,8 +699,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtShinseiKingaku_core",
-     "required": false,
      "text": "",
+     "required": false,
      "isPrivateInfo": false,
      "readOnly": true,
      "placeHolder": "",
@@ -741,8 +747,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtService1_core",
-     "required": false,
      "text": "",
+     "required": false,
      "isPrivateInfo": false,
      "readOnly": true,
      "placeHolder": "",
@@ -784,8 +790,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtService2_core",
-     "required": false,
      "text": "",
+     "required": false,
      "isPrivateInfo": false,
      "readOnly": true,
      "placeHolder": "",
@@ -827,8 +833,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtService3_core",
-     "required": false,
      "text": "",
+     "required": false,
      "isPrivateInfo": false,
      "readOnly": true,
      "placeHolder": "",
@@ -870,8 +876,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtService4_core",
-     "required": false,
      "text": "",
+     "required": false,
      "isPrivateInfo": false,
      "readOnly": true,
      "placeHolder": "",
@@ -913,8 +919,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtKetteiYMD_core",
-     "required": false,
      "text": "",
+     "required": false,
      "isPrivateInfo": false,
      "readOnly": true,
      "placeHolder": "",
@@ -952,8 +958,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtShoninKubun_core",
-     "required": false,
      "text": "",
+     "required": false,
      "isPrivateInfo": false,
      "readOnly": true,
      "placeHolder": "",
@@ -995,8 +1001,8 @@
      "marginLeft": "0",
      "marginRight": "XS",
      "selectControlID": "txtKariukeYMD_core",
-     "required": false,
      "text": "",
+     "required": false,
      "isPrivateInfo": false,
      "readOnly": true,
      "placeHolder": "",
@@ -1034,8 +1040,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtEnchoShinseiYMD_core",
-     "required": false,
      "text": "",
+     "required": false,
      "isPrivateInfo": false,
      "readOnly": true,
      "placeHolder": "",
@@ -1118,8 +1124,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtMishokanKingaku_core",
-     "required": false,
      "text": "",
+     "required": false,
      "isPrivateInfo": false,
      "readOnly": true,
      "placeHolder": "",
@@ -1151,7 +1157,7 @@
     {
      "fieldName": "btnKashitsukeInfo",
      "items": [],
-     "controlType": "Button",
+     "controlType": "ButtonDialog",
      "width": "200",
      "visible": true,
      "displayNone": false,
@@ -1166,13 +1172,18 @@
      "marginLeft": "3",
      "marginRight": "XS",
      "selectControlID": "btnKashitsukeInfo",
-     "text": "貸付金の詳細情報を表示する",
      "onClick": "",
+     "text": "貸付金の詳細情報を表示する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0
+     "icon": 0,
+     "displayChildDivName": "DBC.KyufuhiKashitsukekinInfo",
+     "dataPassing": [],
+     "visibleCloseButton": true,
+     "onOkClose": "",
+     "onBeforeOpenDialog": ""
     },
     {
      "fieldName": "KashitsukeHenkanKeisan",
@@ -1195,8 +1206,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtEntaiNissu_core",
-       "required": false,
        "text": "",
+       "required": false,
        "isPrivateInfo": false,
        "readOnly": false,
        "placeHolder": "",
@@ -1243,8 +1254,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtRisokugaku_core",
-       "required": false,
        "text": "",
+       "required": false,
        "isPrivateInfo": false,
        "readOnly": false,
        "placeHolder": "",
@@ -1335,8 +1346,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtRisokuChoshuYMD_core",
-       "required": false,
        "text": "",
+       "required": false,
        "isPrivateInfo": false,
        "readOnly": false,
        "placeHolder": "",
@@ -1375,8 +1386,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtRisokuChoshugaku_core",
-       "required": false,
        "text": "",
+       "required": false,
        "isPrivateInfo": false,
        "readOnly": false,
        "placeHolder": "",
@@ -1467,7 +1478,6 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "radChoshuHoho_core",
-       "required": false,
        "onClick": "",
        "dataSource": [
         {
@@ -1479,6 +1489,7 @@
          "value": "充当償還"
         }
        ],
+       "required": false,
        "onChange": "",
        "labelLText": "徴収方法",
        "labelLWidth": "85",
@@ -1505,8 +1516,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtHenkanChoshuYMD_core",
-       "required": false,
        "text": "",
+       "required": false,
        "isPrivateInfo": false,
        "readOnly": false,
        "placeHolder": "",
@@ -1545,7 +1556,6 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "radKafusokuKekka_core",
-       "required": false,
        "onClick": "",
        "dataSource": [
         {
@@ -1561,6 +1571,7 @@
          "value": "差引支給額"
         }
        ],
+       "required": false,
        "onChange": "",
        "labelLText": "過不足結果",
        "labelLWidth": "85",
@@ -1587,8 +1598,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtHenkanChoshugaku_core",
-       "required": false,
        "text": "",
+       "required": false,
        "isPrivateInfo": false,
        "readOnly": false,
        "placeHolder": "",
@@ -1717,8 +1728,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtNofuKigen_core",
-       "required": false,
        "text": "",
+       "required": false,
        "isPrivateInfo": false,
        "readOnly": false,
        "placeHolder": "",
@@ -1757,8 +1768,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtShiharaiKigen_core",
-       "required": false,
        "text": "",
+       "required": false,
        "isPrivateInfo": false,
        "readOnly": false,
        "placeHolder": "",
@@ -1840,8 +1851,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "btnReturn",
-     "text": "貸付金一覧に戻る",
      "onClick": "",
+     "text": "貸付金一覧に戻る",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -1871,9 +1882,21 @@
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "KashitsukeHenkanInfo"
+    },
+    {
+     "postParameterPanelNames": "KashitsukeHenkanList"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onSelectedHenkanList",
+     "requestUrl": "dbc/db/dbc/KashitsukeHenkanInfo/onSelectedHenkanList"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -1890,7 +1913,7 @@
    "isGroupBox": false
   },
   {
-   "fieldName": "KashitsukeHenkanKyotsu",
+   "fieldName": "KyotsuPanel",
    "items": [
     {
      "fieldName": "btnHenkanSave",
@@ -1904,14 +1927,14 @@
      "nextFocusFieldName": "",
      "wrap": false,
      "dependencies": [],
-     "float": 2,
+     "float": 0,
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "btnHenkanSave",
-     "text": "入力内容を保存する",
      "onClick": "",
+     "text": "入力内容を保存する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -1933,14 +1956,14 @@
    "authorityMode": 0,
    "marginLeft": "0",
    "marginRight": "XS",
-   "selectControlID": "KashitsukeHenkanKyotsu",
+   "selectControlID": "KyotsuPanel",
    "onLoad": "",
    "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "KashitsukeHenkanKyotsu"
+     "postParameterPanelNames": "KyotsuPanel"
     }
    ],
    "requestSettings": [],
@@ -2070,7 +2093,23 @@
     }
    ],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "KashitsukeHenkanListInfo_KyufuhiKashitsukekinList_dgKyufuhiKashitsukekinList[btnSelect]",
+     "event": "onClick",
+     "transition": "給付費貸付金返還徴収情報"
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnHenkanSave",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
   },
   {
    "order": "2",
@@ -2118,13 +2157,29 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "KashitsukeHenkanKyotsu",
+     "visibleDiv": "KyotsuPanel",
      "panelState": "visible",
      "fixedDiv": "No"
     }
    ],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "KashitsukeHenkanListInfo_KyufuhiKashitsukekinList_dgKyufuhiKashitsukekinList[btnSelect]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": "給付費貸付金一覧"
+    },
+    {
+     "fieldName": "btnHenkanSave",
+     "event": "onClick",
+     "transition": "処理終了"
+    }
+   ]
   },
   {
    "order": "3",
@@ -2143,7 +2198,23 @@
     }
    ],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "KashitsukeHenkanListInfo_KyufuhiKashitsukekinList_dgKyufuhiKashitsukekinList[btnSelect]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnHenkanSave",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
   }
  ],
  "currentState": "All",
@@ -2152,7 +2223,8 @@
  "UIContainerEventMapping": [],
  "loadSequencePanelNames": [
   [
-   "KashitsukeHenkanList"
+   "KashitsukeHenkanList",
+   "KashitsukeHenkanInfo"
   ],
   [
    "KashitsukeHenkanListInfo"
@@ -2162,9 +2234,6 @@
   ],
   [
    "KashitsukekinKaigoKihon"
-  ],
-  [
-   "KashitsukeHenkanInfo"
   ],
   [
    "KashitsukeHenkanKeisan"
@@ -2182,7 +2251,7 @@
    "KashitsukeHenkanTsuchishoPrintSetting"
   ],
   [
-   "KashitsukeHenkanKyotsu"
+   "KyotsuPanel"
   ],
   [
    "KashitsukeHenkanInfoComplete"
