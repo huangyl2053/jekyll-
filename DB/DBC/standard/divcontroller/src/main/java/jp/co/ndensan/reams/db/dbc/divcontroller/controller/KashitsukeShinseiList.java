@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
-//import java.util.Collections;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -30,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class KashitsukeShinseiList {
 
-    private List<HashMap> getShokanShikyuTorokuShinseishoListYaml() {
+    private List<HashMap> getYaml() {
         return YamlLoader.FOR_DBC.loadAsList(new RString("dbc1800000/KashitsukeShinseiList.yml"));
     }
 
@@ -42,7 +41,7 @@ public class KashitsukeShinseiList {
      */
     public ResponseData<KashitsukeShinseiListDiv> onLoad(KashitsukeShinseiListDiv panel) {
         setKashitsukeShinseiListData(panel);
-        ControlGenerator cg = new ControlGenerator(getShokanShikyuTorokuShinseishoListYaml().get(4));
+        ControlGenerator cg = new ControlGenerator(getYaml().get(4));
         panel.getKashitsukeShinseisho().getKyufuhiKariireShinseishoPrintSetting().getTxtIssueDate().
                 setValue(new RDate(cg.getAsRString("発効日").toString()));
 
@@ -81,7 +80,7 @@ public class KashitsukeShinseiList {
         RString selectedIndex = (RString) ViewStateHolder.get("selectedIndex", RString.class);
         List<dgKyufuhiKashitsukekinList_Row> dgRowList = panel.getKashitsukeShinseiListInfo().getDgKyufuhiKashitsukekinList().getDataSource();
         if (selectedIndex.equals(new RString("-1"))) {
-            ControlGenerator cg = new ControlGenerator(getShokanShikyuTorokuShinseishoListYaml().get(3));
+            ControlGenerator cg = new ControlGenerator(getYaml().get(3));
             dgKyufuhiKashitsukekinList_Row row = create給付費貸付金一覧アイテム(
                     cg.getAsRString("被保番号"),
                     cg.getAsRString("被保険者氏名"),
@@ -123,7 +122,7 @@ public class KashitsukeShinseiList {
 
     private void setKashitsukeShinseiListData(KashitsukeShinseiListDiv panel) {
 
-        List<HashMap> sourceList = getShokanShikyuTorokuShinseishoListYaml();
+        List<HashMap> sourceList = getYaml();
         DataGrid<dgKyufuhiKashitsukekinList_Row> dgRow = panel.getKashitsukeShinseiListInfo().getDgKyufuhiKashitsukekinList();
         List<dgKyufuhiKashitsukekinList_Row> dgRowList = dgRow.getDataSource();
 

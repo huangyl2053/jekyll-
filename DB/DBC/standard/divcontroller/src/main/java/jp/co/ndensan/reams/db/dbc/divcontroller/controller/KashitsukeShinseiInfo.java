@@ -34,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class KashitsukeShinseiInfo {
 
-    private List<HashMap> getKashitsukeShinseiInfoYaml() {
+    private List<HashMap> getYaml() {
         return YamlLoader.FOR_DBC.loadAsList(new RString("dbc1800000/KashitsukeShinseiInfo.yml"));
     }
 
@@ -98,7 +98,7 @@ public class KashitsukeShinseiInfo {
     public ResponseData<KashitsukeShinseiInfoDiv> onClickShinseishaCopy(KashitsukeShinseiInfoDiv info, KashitsukeShinseiListDiv list) {
         ResponseData<KashitsukeShinseiInfoDiv> response = new ResponseData<>();
 
-        ControlGenerator cg = new ControlGenerator(getKashitsukeShinseiInfoYaml().get(6));
+        ControlGenerator cg = new ControlGenerator(getYaml().get(6));
 
         KashitsukeShinseishaDiv div = info.getKashitsukeShinseisha();
         div.getTxtShinseishaName().setValue(cg.getAsRString("氏名"));
@@ -114,7 +114,7 @@ public class KashitsukeShinseiInfo {
     private void setSummaryData(KashitsukeShinseiInfoDiv info, KashitsukeShinseiListDiv list) {
         int index = Integer.parseInt(info.getTxtKashitsukeShinseiListSelectedIndex().getValue().toString());
         if (index == -1) {
-            ControlGenerator cg = new ControlGenerator(getKashitsukeShinseiInfoYaml().get(0));
+            ControlGenerator cg = new ControlGenerator(getYaml().get(0));
 
             info.getTxtShinseiYMD().setValue(new RDate(cg.getAsRString("申請日").toString()));
             info.getTxtRiyoKikan().setFromValue(new RDate(cg.getAsRString("利用期間開始日").toString()));
@@ -133,7 +133,7 @@ public class KashitsukeShinseiInfo {
     }
 
     private void setServiceData(KashitsukeShinseiInfoDiv info) {
-        ControlGenerator cg = new ControlGenerator(getKashitsukeShinseiInfoYaml().get(1));
+        ControlGenerator cg = new ControlGenerator(getYaml().get(1));
 
         KashitsukeShinseiServiceDiv div = info.getKashitsukeShinseiService();
         KeyValueDataSource ds = new KeyValueDataSource(cg.getAsRString("key"), cg.getAsRString("value"));
@@ -143,7 +143,7 @@ public class KashitsukeShinseiInfo {
     }
 
     private void setShinseishaData(KashitsukeShinseiInfoDiv info) {
-        ControlGenerator cg = new ControlGenerator(getKashitsukeShinseiInfoYaml().get(2));
+        ControlGenerator cg = new ControlGenerator(getYaml().get(2));
 
         KashitsukeShinseishaDiv div = info.getKashitsukeShinseisha();
         div.getTxtShinseishaName().setValue(cg.getAsRString("氏名"));
@@ -155,7 +155,7 @@ public class KashitsukeShinseiInfo {
     }
 
     private void setHoshoninData(KashitsukeShinseiInfoDiv info) {
-        ControlGenerator cg = new ControlGenerator(getKashitsukeShinseiInfoYaml().get(3));
+        ControlGenerator cg = new ControlGenerator(getYaml().get(3));
 
         KashitsukeShinseiHoshoninDiv div = info.getKashitsukeShinseiHoshonin();
         div.getTxtHoshoninName().setValue(cg.getAsRString("氏名"));
@@ -169,7 +169,7 @@ public class KashitsukeShinseiInfo {
     }
 
     private void setHoshoninKinmusakiData(KashitsukeShinseiInfoDiv info) {
-        ControlGenerator cg = new ControlGenerator(getKashitsukeShinseiInfoYaml().get(4));
+        ControlGenerator cg = new ControlGenerator(getYaml().get(4));
 
         KashitsukeShinseiHoshoninKinmuDiv div = info.getKashitsukeShinseiHoshonin().getKashitsukeShinseiHoshoninKinmu();
         div.getTxtHoshoninKinmuName().setValue(cg.getAsRString("名称"));
@@ -178,7 +178,7 @@ public class KashitsukeShinseiInfo {
     }
 
     private void setTeishutsuData(KashitsukeShinseiInfoDiv info) {
-        ControlGenerator cg = new ControlGenerator(getKashitsukeShinseiInfoYaml().get(5));
+        ControlGenerator cg = new ControlGenerator(getYaml().get(5));
 
         KashitsukeShinseiTeishutsuDiv div = info.getKashitsukeShinseiTeishutsu();
         KeyValueDataSource ds = new KeyValueDataSource(cg.getAsRString("key"), cg.getAsRString("value"));
