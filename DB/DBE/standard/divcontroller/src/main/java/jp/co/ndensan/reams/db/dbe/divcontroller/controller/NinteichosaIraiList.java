@@ -12,13 +12,14 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiListDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.dgNinteichosaIraiList_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.DataGridUtil;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -38,7 +39,7 @@ public class NinteichosaIraiList {
         ResponseData<NinteichosaIraiListDiv> response = new ResponseData<>();
 
         DataGrid<dgNinteichosaIraiList_Row> dataGrid = div.getDgNinteichosaIraiList();
-        dataGrid.setDataSource(ChosaIraiTargets.DATA_SORCE);
+        dataGrid.setDataSource(new DemoData().get調査依頼対象者());
         NinteichosaIraiListHolder.saveNinteichosaIraiList(Collections.EMPTY_LIST);
 
         response.data = div;
@@ -87,7 +88,16 @@ public class NinteichosaIraiList {
         ResponseData<NinteichosaIraiListDiv> response = new ResponseData<>();
 
         DataGrid<dgNinteichosaIraiList_Row> grid = div.getDgNinteichosaIraiList();
-        grid.setDataSource(DataGridUtil.unselectedItems(grid));
+
+        List<dgNinteichosaIraiList_Row> list = new ArrayList<>();
+        for (dgNinteichosaIraiList_Row selectedItem : grid.getSelectedItems()) {
+            if (selectedItem.get依頼書発行済()) {
+                selectedItem.get調査依頼完了日().setValue(FlexibleDate.getNowDate());
+            }
+            list.add(selectedItem);
+        }
+        list.addAll(DataGridUtil.unselectedItems(grid));
+        grid.setDataSource(list);
 
         response.data = div;
         return response;
@@ -129,80 +139,90 @@ public class NinteichosaIraiList {
     /**
      * 調査依頼対象のデモ用データを持ちます。
      */
-    private static class ChosaIraiTargets {
+    private static final class DemoData {
 
-        private static final List<dgNinteichosaIraiList_Row> DATA_SORCE;
+        private final List<dgNinteichosaIraiList_Row> chosaIraiTargets;
 
-        static {
-            DATA_SORCE = new ArrayList<>();
-            try {
-                List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("dbeuc21000/ChosaIraiTargets.yml"));
-                for (Map target : targetSource) {
-                    DATA_SORCE.add(_to_dgNinteichosaIraiList_Row(target));
-                }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
+        /**
+         * デモデータを生成します。
+         */
+        DemoData() {
+            this.chosaIraiTargets = _createList();
         }
 
-        private static dgNinteichosaIraiList_Row _to_dgNinteichosaIraiList_Row(Map map) {
-            RString shimei = toRString(map.get("氏名"));
-            RString kanaShimei = toRString(map.get("カナ氏名"));
-            RString iraiDate = toRString(map.get("調査依頼日"));
-            boolean is依頼済 = !iraiDate.equals(RString.EMPTY);
-            RString iraishoHakkoDate = toRString(map.get("依頼書発行日"));
-            boolean is依頼書発行済 = !iraishoHakkoDate.equals(RString.EMPTY);
+        /**
+         * 調査依頼対象者を取得します。
+         *
+         * @return 調査依頼対象者
+         */
+        List<dgNinteichosaIraiList_Row> get調査依頼対象者() {
+            return this.chosaIraiTargets;
+        }
 
+        private List<dgNinteichosaIraiList_Row> _createList() {
+            List<HashMap> dataFromYaml = YamlLoader.DBE.loadAsList(new RString("dbeuc21000/ChosaIraiTargets.yml"));
+            return YamlUtil.convertList(dataFromYaml, _createConverter());
+        }
+
+        private YamlUtil.Converter.IConverter<dgNinteichosaIraiList_Row> _createConverter() {
+            return new YamlUtil.Converter.IConverter<dgNinteichosaIraiList_Row>() {
+
+                @Override
+                public dgNinteichosaIraiList_Row exec(Map map) {
+                    return _toDgNinteichosaIraiList_Row(map);
+                }
+            };
+        }
+
+        private dgNinteichosaIraiList_Row _toDgNinteichosaIraiList_Row(Map map) {
+            ControlGenerator cg = new ControlGenerator(map);
+            RString shimei = cg.getAsRString("氏名");
+            RString kanaShimei = cg.getAsRString("カナ氏名");
+            RString iraiDate = cg.getAsRString("依頼完了日");
+            boolean is依頼済 = !iraiDate.equals(RString.EMPTY);
+            RString iraishoHakkoDate = cg.getAsRString("依頼書発行日");
+            boolean is依頼書発行済 = !iraishoHakkoDate.equals(RString.EMPTY);
             return new dgNinteichosaIraiList_Row(
-                    toRString(map.get("保険者番号")), toRString(map.get("市町村")),
-                    toRString(map.get("市著コード")), toRString(map.get("支所")),
-                    toRString(map.get("被保番号")),
-                    toRString(map.get("識別コード")),
+                    cg.getAsRString("保険者番号"),
+                    cg.getAsRString("市町村"),
+                    cg.getAsRString("市著コード"),
+                    cg.getAsRString("支所"),
+                    cg.getAsRString("被保番号"),
+                    cg.getAsRString("識別コード"),
                     shimei, kanaShimei,
                     DataGridUtil.lineFeedBetween(kanaShimei, shimei),
-                    toTextBoxFlexibleDate(toRString(map.get("認定申請日"))),
-                    toRString(map.get("認定申請区分")),
-                    toRString(map.get("申請書管理番号")),
-                    toTextBoxFlexibleDate(iraiDate),
-                    toTextBoxFlexibleDate(iraishoHakkoDate),
-                    toTextBoxFlexibleDate(toRString(map.get("依頼完了日"))),
-                    toTextBoxFlexibleDate(toRString(map.get("調査期限日"))),
-                    toRString(map.get("調査依頼区分")),
-                    toRString(map.get("調査回数")),
-                    toRString(map.get("認定調査履歴番号")),
-                    toRString(map.get("調査委託先番号")), toRString(map.get("調査委託先名")),
-                    toRString(map.get("調査員番号")), toRString(map.get("調査員名")),
-                    toRString(map.get("前回調査委託先番号")), toRString(map.get("前回調査委託先名")),
-                    toRString(map.get("前回調査員番号")), toRString(map.get("前回調査員名")),
-                    toRString(map.get("審査会開催地区コード")), toRString(map.get("審査会開催地区")),
-                    toTextBoxFlexibleDate(toRString(map.get("督促日"))),
-                    toRString(map.get("督促方法")),
-                    toRString(map.get("督促回数")),
-                    toTextBoxFlexibleDate(toRString(map.get("督促期限"))),
-                    toTextBoxFlexibleDate(toRString(map.get("督促発行日"))),
-                    toRString(map.get("郵便番号")), toRString(map.get("住所")),
-                    toRString(map.get("入所施設")),
-                    toRString(map.get("性別")),
-                    toTextBoxFlexibleDate(toRString(map.get("生年月日"))),
-                    toRString(map.get("データ出力")),
+                    cg.getAsTextBoxFlexibleDate("認定申請日"),
+                    cg.getAsRString("認定申請区分"),
+                    cg.getAsRString("申請書管理番号"),
+                    cg.getAsTextBoxFlexibleDate("調査依頼日"),
+                    cg.getAsTextBoxFlexibleDate("依頼書発行日"),
+                    cg.getAsTextBoxFlexibleDate("依頼完了日"),
+                    cg.getAsTextBoxFlexibleDate("調査期限日"),
+                    cg.getAsRString("調査依頼区分"),
+                    cg.getAsRString("調査回数"),
+                    cg.getAsRString("認定調査履歴番号"),
+                    cg.getAsRString("調査委託先番号"),
+                    cg.getAsRString("調査委託先名"),
+                    cg.getAsRString("調査員番号"),
+                    cg.getAsRString("調査員名"),
+                    cg.getAsRString("前回調査委託先番号"),
+                    cg.getAsRString("前回調査委託先名"),
+                    cg.getAsRString("前回調査員番号"),
+                    cg.getAsRString("前回調査員名"),
+                    cg.getAsRString("審査会開催地区コード"),
+                    cg.getAsRString("審査会開催地区"),
+                    cg.getAsTextBoxFlexibleDate("督促日"),
+                    cg.getAsRString("督促方法"),
+                    cg.getAsRString("督促回数"),
+                    cg.getAsTextBoxFlexibleDate("督促期限"),
+                    cg.getAsTextBoxFlexibleDate("督促発行日"),
+                    cg.getAsRString("郵便番号"),
+                    cg.getAsRString("住所"),
+                    cg.getAsRString("入所施設"),
+                    cg.getAsRString("性別"),
+                    cg.getAsTextBoxFlexibleDate("生年月日"),
+                    cg.getAsRString("データ出力"),
                     is依頼済, is依頼書発行済);
-        }
-
-        private static RString toRString(Object obj) {
-            if (obj == null) {
-                return RString.EMPTY;
-            }
-            return new RString(obj.toString());
-        }
-
-        private static TextBoxFlexibleDate toTextBoxFlexibleDate(RString date) {
-            TextBoxFlexibleDate textBox = new TextBoxFlexibleDate();
-            if (RString.EMPTY.equals(date)) {
-                textBox.setValue(FlexibleDate.EMPTY);
-            } else {
-                textBox.setValue(new FlexibleDate(date));
-            }
-            return textBox;
         }
     }
 }

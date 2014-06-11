@@ -58,7 +58,7 @@ public class ShinsaTaishoshaItiran {
      */
     private List<dgShinsaTaishoshaIchiran_Row> createRowSetaiTestData() {
         List<dgShinsaTaishoshaIchiran_Row> arrayData = new ArrayList<>();
-        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("ShinsaTaishoIchiranList.yml"));
+        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("ShinsaTaishoIchiranList.yml"));
         for (Map info : targetSource) {
             arrayData.add(toDgShinsaTaishoshaIchiran_Row(info));
         }

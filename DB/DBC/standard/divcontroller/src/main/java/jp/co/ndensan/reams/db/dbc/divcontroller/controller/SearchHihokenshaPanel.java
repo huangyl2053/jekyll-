@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.SearchHihokenshaPanelDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.HihokenshaFinderDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgSearchResult_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
@@ -22,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 /**
  * 住宅改修費事申請登録 被保険者検索条件パネルです。
  *
- * @author n8223
+ * @author n8223 朴義一
  */
 public class SearchHihokenshaPanel {
 
@@ -35,10 +34,9 @@ public class SearchHihokenshaPanel {
     public ResponseData<SearchHihokenshaPanelDiv> onLoad(SearchHihokenshaPanelDiv panel) {
         ResponseData<SearchHihokenshaPanelDiv> response = new ResponseData<>();
 
-        
         //TO DO　被保険者の検索の内容を閉じる
         panel.getHihokenshaFinder().getSearchCriteriaOfHokensha().setIsOpen(false);
-       /////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////
         //TO DO  JutakuData1.xml ①
         List<HashMap> ymlData = ymlData();
 
@@ -52,23 +50,21 @@ public class SearchHihokenshaPanel {
         response.data = panel;
         return response;
     }
-    
-    
-      /**
+
+    /**
      * 住宅改修費事申請登録 被保険者検索条件情報の初期値をセットします。(被保険者検索に戻る時）
-     * 
+     *
      *
      * @param panel HihokenshaSearchPanelDiv
      * @return PanelDivのResponseData
      */
-        public ResponseData<SearchHihokenshaPanelDiv> onClick_btnReturnHihokensha(SearchHihokenshaPanelDiv panel) {
+    public ResponseData<SearchHihokenshaPanelDiv> onClick_btnReturnHihokensha(SearchHihokenshaPanelDiv panel) {
         ResponseData<SearchHihokenshaPanelDiv> response = new ResponseData<>();
 
-        
 //        //TO DO　被保険者の検索の内容を閉じる
         panel.getHihokenshaFinder().getSearchCriteriaOfHihokensha().setIsOpen(false);
-        
-       /////////////////////////////////////////////////////////////////////////////////////////
+
+        /////////////////////////////////////////////////////////////////////////////////////////
         //TO DO  JutakuData1.xml ①
         List<HashMap> ymlData = ymlData();
 
@@ -82,7 +78,6 @@ public class SearchHihokenshaPanel {
         response.data = panel;
         return response;
     }
-    
 
     /**
      * 住宅改修費事申請登録 検索結一覧情報をセットします。
@@ -114,44 +109,44 @@ public class SearchHihokenshaPanel {
         List<HashMap> ymlData = ymlData();
 
         //TO DO データを増える場合。
-      //  for (int i = 1; i < ymlData.size(); i++) {
-            HashMap hashMap = ymlData.get(1);
+        //  for (int i = 1; i < ymlData.size(); i++) {
+        HashMap hashMap = ymlData.get(1);
 
-            String hihokenshaNo = hashMap.get("hihokenshaNo").toString(); //被保番号
-            String shikibetsuCode = hashMap.get("shikibetsuCode").toString(); //識別コード
-            String hihokenshaKubun = hashMap.get("hihokenshaKubun").toString(); //被保険者区分
-            String shimeiAndKanaShimsei = hashMap.get("shimeiAndKanaShimsei").toString(); //氏名
-            String gender = hashMap.get("gender").toString(); //性別
-            String birthDay = hashMap.get("birthDay").toString();//生年月日
-            String yubinNo = hashMap.get("yubinNo").toString(); //郵便番号
-            String jusho = hashMap.get("jusho").toString(); // 住所
-            String juminShubetsu = hashMap.get("yubinNo").toString(); //住民種別
-            String setaiCode = hashMap.get("setaiCode").toString(); //世帯コード
+        String hihokenshaNo = hashMap.get("hihokenshaNo").toString(); //被保番号
+        String shikibetsuCode = hashMap.get("shikibetsuCode").toString(); //識別コード
+        String hihokenshaKubun = hashMap.get("hihokenshaKubun").toString(); //被保険者区分
+        String shimeiAndKanaShimsei = hashMap.get("shimeiAndKanaShimsei").toString(); //氏名
+        String gender = hashMap.get("gender").toString(); //性別
+        String birthDay = hashMap.get("birthDay").toString();//生年月日
+        String yubinNo = hashMap.get("yubinNo").toString(); //郵便番号
+        String jusho = hashMap.get("jusho").toString(); // 住所
+        String juminShubetsu = hashMap.get("yubinNo").toString(); //住民種別
+        String setaiCode = hashMap.get("setaiCode").toString(); //世帯コード
 /////////////////////////////////////////////////////////////////////////////////////////
-            
-            dgSearchResult_Row item;
 
-            item = createRowSearchHihokenshaiListData(
-                    hihokenshaNo,
-                    shikibetsuCode,
-                    hihokenshaKubun,
-                    shimeiAndKanaShimsei,
-                    gender,
-                    birthDay,
-                    yubinNo,
-                    jusho,
-                    juminShubetsu,
-                    setaiCode
-            );
-            arrayData.add(item);
-       // }
+        dgSearchResult_Row item;
+
+        item = createRowSearchHihokenshaiListData(
+                hihokenshaNo,
+                shikibetsuCode,
+                hihokenshaKubun,
+                shimeiAndKanaShimsei,
+                gender,
+                birthDay,
+                yubinNo,
+                jusho,
+                juminShubetsu,
+                setaiCode
+        );
+        arrayData.add(item);
+        // }
         return arrayData;
 
     }
 
     /*
-    * 引数を元にデータグリッド内に挿入する個人データを作成します。
-    */
+     * 引数を元にデータグリッド内に挿入する個人データを作成します。
+     */
     private dgSearchResult_Row createRowSearchHihokenshaiListData(String 被保番号,
             String 識別コード,
             String 被保険者区分,

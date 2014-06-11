@@ -21,12 +21,12 @@ public class TokkijikoCom extends CompositeControl {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblChosaItem")
-    private Label lblChosaItem;
     @JsonProperty("ddlChosaItem")
     private DropDownList ddlChosaItem;
     @JsonProperty("txtTokkijikoContent")
     private TextBoxMultiLine txtTokkijikoContent;
+    @JsonProperty("lblSpace")
+    private Label lblSpace;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -34,16 +34,6 @@ public class TokkijikoCom extends CompositeControl {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblChosaItem")
-    public Label getLblChosaItem() {
-        return lblChosaItem;
-    }
-
-    @JsonProperty("lblChosaItem")
-    public void setLblChosaItem(Label lblChosaItem) {
-        this.lblChosaItem=lblChosaItem;
-    }
-
     @JsonProperty("ddlChosaItem")
     public DropDownList getDdlChosaItem() {
         return ddlChosaItem;
@@ -62,6 +52,16 @@ public class TokkijikoCom extends CompositeControl {
     @JsonProperty("txtTokkijikoContent")
     public void setTxtTokkijikoContent(TextBoxMultiLine txtTokkijikoContent) {
         this.txtTokkijikoContent=txtTokkijikoContent;
+    }
+
+    @JsonProperty("lblSpace")
+    public Label getLblSpace() {
+        return lblSpace;
+    }
+
+    @JsonProperty("lblSpace")
+    public void setLblSpace(Label lblSpace) {
+        this.lblSpace=lblSpace;
     }
 
 }

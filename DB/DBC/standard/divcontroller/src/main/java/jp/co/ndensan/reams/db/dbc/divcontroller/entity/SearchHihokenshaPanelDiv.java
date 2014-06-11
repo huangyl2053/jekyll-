@@ -1,17 +1,16 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.HihokenshaFinderDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.SearchResultOfHihokenshaDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.HihokenshaFinderDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.SearchResultOfHihokenshaDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * SearchHihokenshaPanel のクラスファイル 
- * 
+ * SearchHihokenshaPanel のクラスファイル
+ *
  * @author 自動生成
  */
 public class SearchHihokenshaPanelDiv extends Panel {
@@ -21,6 +20,7 @@ public class SearchHihokenshaPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("HihokenshaFinder")
     private HihokenshaFinderDiv HihokenshaFinder;
     @JsonProperty("HihokenshaSearchResult")
@@ -39,7 +39,7 @@ public class SearchHihokenshaPanelDiv extends Panel {
 
     @JsonProperty("HihokenshaFinder")
     public void setHihokenshaFinder(HihokenshaFinderDiv HihokenshaFinder) {
-        this.HihokenshaFinder=HihokenshaFinder;
+        this.HihokenshaFinder = HihokenshaFinder;
     }
 
     @JsonProperty("HihokenshaSearchResult")
@@ -49,7 +49,7 @@ public class SearchHihokenshaPanelDiv extends Panel {
 
     @JsonProperty("HihokenshaSearchResult")
     public void setHihokenshaSearchResult(SearchResultOfHihokenshaDiv HihokenshaSearchResult) {
-        this.HihokenshaSearchResult=HihokenshaSearchResult;
+        this.HihokenshaSearchResult = HihokenshaSearchResult;
     }
 
 }
