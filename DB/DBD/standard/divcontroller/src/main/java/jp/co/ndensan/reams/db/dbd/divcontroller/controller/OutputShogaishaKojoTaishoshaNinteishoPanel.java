@@ -37,7 +37,7 @@ public class OutputShogaishaKojoTaishoshaNinteishoPanel {
     }
 
     private void setOutputOrder(OutputShogaishaKojoTaishoshaNinteishoPanelDiv panel) {
-        List<HashMap> targetSource = YamlLoader.FOR_DBD.loadAsList(new RString("OutputOrder.yml"));
+        List<HashMap> targetSource = YamlLoader.DBD.loadAsList(new RString("dbd4030011/OutputOrder.yml"));
 
         ControlGenerator cg = new ControlGenerator(targetSource.get(0));
         panel.getPrintContentsSetting().getTxtIssueDate().setValue(new RDate(cg.getAsRString("発行日").toString()));
