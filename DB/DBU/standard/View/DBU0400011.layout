@@ -687,15 +687,15 @@
     },
     {
      "eventName": "onClick_BtnSearchHakkoTaisho",
-     "requestUrl": "dbu/db/dbu/KyotsuPanel/onClick_BtnSearchHakkoTaisho"
+     "requestUrl": "dbu/db/dbu/IkkatsuHakkoKyotsuPanel/onClick_BtnSearchHakkoTaisho"
     },
     {
      "eventName": "onClose_HihokenshashoIkkatsuHakko",
-     "requestUrl": "dbu/db/dbu/KyotsuPanel/onClose_HihokenshashoIkkatsuHakko"
+     "requestUrl": "dbu/db/dbu/IkkatsuHakkoKyotsuPanel/onClose_HihokenshashoIkkatsuHakko"
     },
     {
      "eventName": "setBtnBatchControl",
-     "requestUrl": "dbu/db/dbu/KyotsuPanel/setBtnBatchControl"
+     "requestUrl": "dbu/db/dbu/IkkatsuHakkoKyotsuPanel/setBtnBatchControl"
     }
    ],
    "hiddenInput": [],

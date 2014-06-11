@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
  *
  * @author N9606 漢那 憲作
  */
-public class KyotsuPanel {
+public class IkkatsuHakkoKyotsuPanel {
 
     /**
      * 被保険者証一括発行画面-「被保険者証を発行する」ボタン制御を表します。

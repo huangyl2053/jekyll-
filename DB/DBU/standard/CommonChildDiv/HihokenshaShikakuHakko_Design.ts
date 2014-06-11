@@ -1,7 +1,7 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
 
-module DBZ {
+module DBU {
     /**
      * 自動生成コードです。修正しないでください。
      * HihokenshaShikakuHakkoクラスのみで継承して使えます。
@@ -36,34 +36,6 @@ module DBZ {
             }
         }
         
-        public get onBlur_txtKofuDate() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onBlur"];
-        }
-        
-        public set onBlur_txtKofuDate(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onBlur"] = value;
-            } else {
-                this.layout.items[0].items[1]["onBlur"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get onChange_ddlKofuJiyu() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"])["onChange"];
-        }
-        
-        public set onChange_ddlKofuJiyu(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"])["onChange"] = value;
-            } else {
-                this.layout.items[0].items[2]["onChange"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, HihokenshaShikakuHakko_Design.myLayout, fieldName);
         }
@@ -76,8 +48,6 @@ module DBZ {
             super.registProperty();
             Uz.JSControlUtil.registProperty("txtYukoKigen_displayNone");
             Uz.JSControlUtil.registProperty("radInjiIchi_displayNone");
-            Uz.JSControlUtil.registProperty("onBlur_txtKofuDate");
-            Uz.JSControlUtil.registProperty("onChange_ddlKofuJiyu");
         }
         
         /**
@@ -89,8 +59,6 @@ module DBZ {
             var editablePropertyInfo = super.getEditablePropertyInfo();
             editablePropertyInfo["txtYukoKigen_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["radInjiIchi_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["displayNone"];
-            editablePropertyInfo["onBlur_txtKofuDate"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onBlur"];
-            editablePropertyInfo["onChange_ddlKofuJiyu"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).getEditablePropertyInfo()["onChange"];
             
             return editablePropertyInfo;
         }
@@ -198,12 +166,8 @@ module DBZ {
      "marginRight": "XS",
      "selectControlID": "ddlKofuJiyu_core",
      "onChange": "",
-     "selectedItem": "notSelected",
+     "selectedItem": "shikakuShutoku",
      "dataSource": [
-      {
-       "key": "notSelected",
-       "value": ""
-      },
       {
        "key": "shikakuShutoku",
        "value": "資格取得"
@@ -544,7 +508,7 @@ module DBZ {
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
-         "isComma": true,
+         "isComma": false,
          "decimalPointLength": 0
         },
         {
@@ -744,7 +708,7 @@ module DBZ {
          "fieldName": "lblShinsakaiIken",
          "items": [],
          "controlType": "Label",
-         "width": "290",
+         "width": "295",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1374,7 +1338,7 @@ module DBZ {
          "fieldName": "lblShienJigyosha",
          "items": [],
          "controlType": "Label",
-         "width": "275",
+         "width": "280",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -2976,7 +2940,7 @@ module DBZ {
  "marginRight": 0,
  "selectControlID": "defaultLayout",
  "relation": [],
- "businessId": "DBZ",
+ "businessId": "DBU",
  "controlName": "HihokenshaShikakuHakko",
  "marginTop": 0,
  "marginBottom": 0,
@@ -2990,16 +2954,6 @@ module DBZ {
    "publicChildFieldName": "radInjiIchi",
    "publicChildProperty": "displayNone",
    "newPropertyName": "radInjiIchi_displayNone"
-  },
-  {
-   "publicChildFieldName": "txtKofuDate",
-   "publicChildProperty": "onBlur",
-   "newPropertyName": "onBlur_txtKofuDate"
-  },
-  {
-   "publicChildFieldName": "ddlKofuJiyu",
-   "publicChildProperty": "onChange",
-   "newPropertyName": "onChange_ddlKofuJiyu"
   }
  ],
  "dataPassingForDialog": [],

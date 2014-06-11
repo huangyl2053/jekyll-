@@ -4,8 +4,8 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-var DBZ;
-(function (DBZ) {
+var DBU;
+(function (DBU) {
     var HihokenshaShikakuHakko_Design = (function (_super) {
         __extends(HihokenshaShikakuHakko_Design, _super);
         function HihokenshaShikakuHakko_Design($parentElement, isDesignMode, fieldName) {
@@ -45,54 +45,16 @@ var DBZ;
         });
 
 
-        Object.defineProperty(HihokenshaShikakuHakko_Design.prototype, "onBlur_txtKofuDate", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onBlur"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onBlur"] = value;
-                } else {
-                    this.layout.items[0].items[1]["onBlur"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(HihokenshaShikakuHakko_Design.prototype, "onChange_ddlKofuJiyu", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"])["onChange"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"])["onChange"] = value;
-                } else {
-                    this.layout.items[0].items[2]["onChange"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
         HihokenshaShikakuHakko_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
             Uz.JSControlUtil.registProperty("txtYukoKigen_displayNone");
             Uz.JSControlUtil.registProperty("radInjiIchi_displayNone");
-            Uz.JSControlUtil.registProperty("onBlur_txtKofuDate");
-            Uz.JSControlUtil.registProperty("onChange_ddlKofuJiyu");
         };
 
         HihokenshaShikakuHakko_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
             editablePropertyInfo["txtYukoKigen_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["radInjiIchi_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["displayNone"];
-            editablePropertyInfo["onBlur_txtKofuDate"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onBlur"];
-            editablePropertyInfo["onChange_ddlKofuJiyu"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).getEditablePropertyInfo()["onChange"];
 
             return editablePropertyInfo;
         };
@@ -200,12 +162,8 @@ var DBZ;
                             "marginRight": "XS",
                             "selectControlID": "ddlKofuJiyu_core",
                             "onChange": "",
-                            "selectedItem": "notSelected",
+                            "selectedItem": "shikakuShutoku",
                             "dataSource": [
-                                {
-                                    "key": "notSelected",
-                                    "value": ""
-                                },
                                 {
                                     "key": "shikakuShutoku",
                                     "value": "資格取得"
@@ -546,7 +504,7 @@ var DBZ;
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
-                                            "isComma": true,
+                                            "isComma": false,
                                             "decimalPointLength": 0
                                         },
                                         {
@@ -746,7 +704,7 @@ var DBZ;
                                             "fieldName": "lblShinsakaiIken",
                                             "items": [],
                                             "controlType": "Label",
-                                            "width": "290",
+                                            "width": "295",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -1376,7 +1334,7 @@ var DBZ;
                                             "fieldName": "lblShienJigyosha",
                                             "items": [],
                                             "controlType": "Label",
-                                            "width": "275",
+                                            "width": "280",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -2978,7 +2936,7 @@ var DBZ;
             "marginRight": 0,
             "selectControlID": "defaultLayout",
             "relation": [],
-            "businessId": "DBZ",
+            "businessId": "DBU",
             "controlName": "HihokenshaShikakuHakko",
             "marginTop": 0,
             "marginBottom": 0,
@@ -2992,16 +2950,6 @@ var DBZ;
                     "publicChildFieldName": "radInjiIchi",
                     "publicChildProperty": "displayNone",
                     "newPropertyName": "radInjiIchi_displayNone"
-                },
-                {
-                    "publicChildFieldName": "txtKofuDate",
-                    "publicChildProperty": "onBlur",
-                    "newPropertyName": "onBlur_txtKofuDate"
-                },
-                {
-                    "publicChildFieldName": "ddlKofuJiyu",
-                    "publicChildProperty": "onChange",
-                    "newPropertyName": "onChange_ddlKofuJiyu"
                 }
             ],
             "dataPassingForDialog": [],
@@ -3010,5 +2958,5 @@ var DBZ;
         };
         return HihokenshaShikakuHakko_Design;
     })(Uz.CommonChildDiv);
-    DBZ.HihokenshaShikakuHakko_Design = HihokenshaShikakuHakko_Design;
-})(DBZ || (DBZ = {}));
+    DBU.HihokenshaShikakuHakko_Design = HihokenshaShikakuHakko_Design;
+})(DBU || (DBU = {}));

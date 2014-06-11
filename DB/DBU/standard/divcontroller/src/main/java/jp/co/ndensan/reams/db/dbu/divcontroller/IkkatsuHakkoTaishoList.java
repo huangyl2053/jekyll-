@@ -28,7 +28,6 @@ public class IkkatsuHakkoTaishoList {
      * 未発行検索条件画面-「一括作成対象を表示する」ボタン押下時の処理を表します。
      *
      * @param panel IkkatsuHakkoTaishoListDiv
-     * @param panel2 KyotsuPanelDiv
      * @return ResponseData
      */
     public ResponseData<IkkatsuHakkoTaishoListDiv> onClick_BtnSearchHakkoTaisho(
@@ -71,20 +70,20 @@ public class IkkatsuHakkoTaishoList {
             HashMap hashMap = IkkatsuHakkoTaishoList.get(i);
             ControlGenerator ymlData = new ControlGenerator(hashMap);
 
-            String strHihoNo = ymlData.getAsRString("hihoNo").toString();
-            String strHihokenshaShimei = ymlData.getAsRString("hihokenshaShimei").toString();
-            String shutokubi = ymlData.getAsRString("shutokubi").toString();
-            String henkobi = ymlData.getAsRString("henkobi").toString();
-            String ninteibi = ymlData.getAsRString("ninteibi").toString();
-            String strJuminShubetsu = ymlData.getAsRString("juminShubetsu").toString();
+            RString rsHihoNo = ymlData.getAsRString("hihoNo");
+            RString rsHihokenshaShimei = ymlData.getAsRString("hihokenshaShimei");
+            RString rsShutokubi = ymlData.getAsRString("shutokubi");
+            RString rsHenkobi = ymlData.getAsRString("henkobi");
+            RString rsNinteibi = ymlData.getAsRString("ninteibi");
+            RString rsJuminShubetsu = ymlData.getAsRString("juminShubetsu");
 
             arrayDataList.add(createRowIkkatsuHakkoTaishoList(
-                    strHihoNo,
-                    strHihokenshaShimei,
-                    shutokubi,
-                    henkobi,
-                    ninteibi,
-                    strJuminShubetsu
+                    rsHihoNo,
+                    rsHihokenshaShimei,
+                    rsShutokubi,
+                    rsHenkobi,
+                    rsNinteibi,
+                    rsJuminShubetsu
             ));
         }
         return arrayDataList;
@@ -94,20 +93,20 @@ public class IkkatsuHakkoTaishoList {
      *引数を元にデータグリッド内に挿入する一括発行対象者情報データを作成します。
      */
     private dgIkkatsuHakkoTaisho_Row createRowIkkatsuHakkoTaishoList(
-            String hihoNo,
-            String hihokenshaShimei,
-            String shutokubi,
-            String henkobi,
-            String ninteibi,
-            String strJuminShubetsu
+            RString hihoNo,
+            RString hihokenshaShimei,
+            RString shutokubi,
+            RString henkobi,
+            RString ninteibi,
+            RString strJuminShubetsu
     ) {
         dgIkkatsuHakkoTaisho_Row rowIkkatsuHakkoTaishoList = new dgIkkatsuHakkoTaisho_Row(
-                new RString(hihoNo),
-                new RString(hihokenshaShimei),
-                new RString(shutokubi),
-                new RString(henkobi),
-                new RString(ninteibi),
-                new RString(strJuminShubetsu)
+                hihoNo,
+                hihokenshaShimei,
+                shutokubi,
+                henkobi,
+                ninteibi,
+                strJuminShubetsu
         );
         return rowIkkatsuHakkoTaishoList;
     }
@@ -117,10 +116,10 @@ public class IkkatsuHakkoTaishoList {
      */
     private void setSortData(IkkatsuHakkoTaishoListDiv panel) {
 
-        List<HashMap> SortList = YamlLoader.FOR_DBU.loadAsList(
+        List<HashMap> sortList = YamlLoader.FOR_DBU.loadAsList(
                 new RString("dbu0400011/Sort.yml"));
 
-        HashMap hashMap = SortList.get(0);
+        HashMap hashMap = sortList.get(0);
         ControlGenerator ymlData = new ControlGenerator(hashMap);
 
         panel.getHihokenshashoIkkatsuHakko().getHihokenshashoOutputOrder().getTxt1().setValue(
@@ -141,7 +140,7 @@ public class IkkatsuHakkoTaishoList {
         panel.getHihokenshashoIkkatsuHakko().getHihokenshashoOutputOrder().getTxtNewPageItem().setValue(
                 ymlData.getAsRString("kaipage"));
 
-        HashMap hashMap1 = SortList.get(1);
+        HashMap hashMap1 = sortList.get(1);
         ControlGenerator ymlData1 = new ControlGenerator(hashMap1);
 
         panel.getHihokenshashoIkkatsuHakkoList().getHihokenshashoListOutputOrderAndNewPage().getTxt1().setValue(

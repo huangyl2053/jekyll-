@@ -1,0 +1,24 @@
+## YAML Template.
+---
+-  searchShimei: "電算"
+
+-  hihoNo: "1111111111"
+   shimei: "電算　一郎"
+   birthday: "昭10.04.01"
+   age: "79"
+   seibetsu: "男"
+   jusho: "電算市字電算１１１１－１"
+
+-  hihoNo: "2222222222"
+   shimei: "電算　二郎"
+   birthday: "昭11.05.01"
+   age: "78"
+   seibetsu: "男"
+   jusho: "電算市字電算２２２２－２"
+
+-  hihoNo: "3333333333"
+   shimei: "電算　三郎"
+   birthday: "昭12.06.01"
+   age: "77"
+   seibetsu: "男"
+   jusho: "電算市字電算３３３３－３"
