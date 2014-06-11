@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4060001.NinteiShinsakaiIchiranDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4060001.dgNinteiShinsakaiIchiran_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -62,10 +63,10 @@ public class NinteiShinsakaiIchiran {
      */
     private void setNinteiShinsakaiIchiranData(NinteiShinsakaiIchiranDiv panel) {
 
-        List<HashMap> NinteiShinsakaiIchiranData = YamlLoader.FOR_DBE.loadAsList(
+        List<HashMap> ninteiShinsakaiIchiranData = YamlLoader.DBE.loadAsList(
                 new RString("dbe4060001/NinteiShinsakaiIchiran.yml"));
 
-        List arraydata = createRowNinteiShinsakaiIchiran(NinteiShinsakaiIchiranData);
+        List arraydata = createRowNinteiShinsakaiIchiran(ninteiShinsakaiIchiranData);
         DataGrid grid = panel.getDgNinteiShinsakaiIchiran();
         grid.setDataSource(arraydata);
 
@@ -74,20 +75,21 @@ public class NinteiShinsakaiIchiran {
     /*
      *認定審査会一覧情報の初期値をセットします。
      */
-    private List createRowNinteiShinsakaiIchiran(List<HashMap> NinteiShinsakaiIchiranData) {
+    private List createRowNinteiShinsakaiIchiran(List<HashMap> ninteiShinsakaiIchiranData) {
 
         List arrayDataList = new ArrayList();
 
-        for (int i = 0; i < NinteiShinsakaiIchiranData.size(); i++) {
-            HashMap hashMap = NinteiShinsakaiIchiranData.get(i);
-            String strKaisaiNo = (String) hashMap.get("kaisaiNo");
-            String strYoteibi = (String) hashMap.get("yoteibi");
-            String strKaishiJikan = (String) hashMap.get("kaishiJikan");
-            String strShuryoJikan = (String) hashMap.get("shuryoJikan");
-            String strGogitaiNo = (String) hashMap.get("gogitaiNo");
-            String strGogitaiMeisho = (String) hashMap.get("gogitaiMeisho");
-            String strYoteiTeiin = (String) hashMap.get("yoteiTeiin");
-            String strWariateNinzu = (String) hashMap.get("wariateNinzu");
+        for (int i = 0; i < ninteiShinsakaiIchiranData.size(); i++) {
+            HashMap hashMap = ninteiShinsakaiIchiranData.get(i);
+            ControlGenerator cg = new ControlGenerator(hashMap);
+            RString strKaisaiNo = cg.getAsRString("kaisaiNo");
+            RString strYoteibi = cg.getAsRString("yoteibi");
+            RString strKaishiJikan = cg.getAsRString("kaishiJikan");
+            RString strShuryoJikan = cg.getAsRString("shuryoJikan");
+            RString strGogitaiNo = cg.getAsRString("gogitaiNo");
+            RString strGogitaiMeisho = cg.getAsRString("gogitaiMeisho");
+            RString strYoteiTeiin = cg.getAsRString("yoteiTeiin");
+            RString strWariateNinzu = cg.getAsRString("wariateNinzu");
 
             arrayDataList.add(createRowNinteiShinsakaiIchiran(
                     strKaisaiNo,
@@ -107,26 +109,17 @@ public class NinteiShinsakaiIchiran {
      *引数を元にデータグリッド内に挿入する認定審査会一覧データを作成します。
      */
     private dgNinteiShinsakaiIchiran_Row createRowNinteiShinsakaiIchiran(
-            String kaisaiNo,
-            String yoteibi,
-            String kaishiJikan,
-            String shuryoJikan,
-            String gogitaiNo,
-            String gogitaiMeisho,
-            String yoteiTeiin,
-            String wariateNinzu
+            RString kaisaiNo,
+            RString yoteibi,
+            RString kaishiJikan,
+            RString shuryoJikan,
+            RString gogitaiNo,
+            RString gogitaiMeisho,
+            RString yoteiTeiin,
+            RString wariateNinzu
     ) {
         dgNinteiShinsakaiIchiran_Row rowNinteiShinsakaiIchiranData = new dgNinteiShinsakaiIchiran_Row(
-                new Button(),
-                new RString(kaisaiNo),
-                new RString(yoteibi),
-                new RString(kaishiJikan),
-                new RString(shuryoJikan),
-                new RString(gogitaiNo),
-                new RString(gogitaiMeisho),
-                new RString(yoteiTeiin),
-                new RString(wariateNinzu)
-        );
+                new Button(), kaisaiNo, yoteibi, kaishiJikan, shuryoJikan, gogitaiNo, gogitaiMeisho, yoteiTeiin, wariateNinzu);
         return rowNinteiShinsakaiIchiranData;
     }
 

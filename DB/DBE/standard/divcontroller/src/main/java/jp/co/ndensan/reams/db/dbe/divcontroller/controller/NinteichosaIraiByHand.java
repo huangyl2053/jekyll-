@@ -285,7 +285,7 @@ public class NinteichosaIraiByHand {
         }
 
         private <T> List<T> _createList(DemoDataType type) {
-            List<HashMap> dataFromYaml = YamlLoader.FOR_DBE.loadAsList(type.getPath());
+            List<HashMap> dataFromYaml = YamlLoader.DBE.loadAsList(type.getPath());
             return YamlUtil.convertList(dataFromYaml, _createDataEditor(type));
         }
 

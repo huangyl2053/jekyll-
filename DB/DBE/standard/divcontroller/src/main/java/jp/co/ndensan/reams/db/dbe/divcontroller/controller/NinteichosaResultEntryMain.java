@@ -62,7 +62,7 @@ public class NinteichosaResultEntryMain {
         return response;
     }
 
-    public void _onLoad(NinteichosaResultEntryMainDiv div) {
+    private void _onLoad(NinteichosaResultEntryMainDiv div) {
         new NinteichosaDetail(div).onLoad();
         new ShinsakaiWaritsukeKibo(div).onLoad();
         new ServiceJokyoTab(div).onLoad();
@@ -75,7 +75,8 @@ public class NinteichosaResultEntryMain {
      * @param targetList NinteichosaResultEntryTargetDiv
      * @return ResponseData
      */
-    public ResponseData<NinteichosaResultEntryMainDiv> onStart_NinteichosaResultEntryMain(NinteichosaResultEntryMainDiv div, NinteichosaResultEntryTargetDiv targetList) {
+    public ResponseData<NinteichosaResultEntryMainDiv> onStart_NinteichosaResultEntryMain(NinteichosaResultEntryMainDiv div,
+            NinteichosaResultEntryTargetDiv targetList) {
         ResponseData<NinteichosaResultEntryMainDiv> response = new ResponseData<>();
 
         div.setDisplayNone(false);
@@ -102,7 +103,8 @@ public class NinteichosaResultEntryMain {
      * @param target NinteichosaResultEntryTargetDiv
      * @return ResponseData
      */
-    public ResponseData<NinteichosaResultEntryMainDiv> onClick_btnToReturn(NinteichosaResultEntryMainDiv div, NinteichosaResultEntryTargetDiv target) {
+    public ResponseData<NinteichosaResultEntryMainDiv> onClick_btnToReturn(NinteichosaResultEntryMainDiv div,
+            NinteichosaResultEntryTargetDiv target) {
         ResponseData<NinteichosaResultEntryMainDiv> response = new ResponseData<>();
 
         div.setDisplayNone(true);
@@ -118,7 +120,8 @@ public class NinteichosaResultEntryMain {
      * @param target NinteichosaResultEntryTargetDiv
      * @return ResponseData
      */
-    public ResponseData<NinteichosaResultEntryMainDiv> onChange_radServiceKubun(NinteichosaResultEntryMainDiv div, NinteichosaResultEntryTargetDiv target) {
+    public ResponseData<NinteichosaResultEntryMainDiv> onChange_radServiceKubun(NinteichosaResultEntryMainDiv div,
+            NinteichosaResultEntryTargetDiv target) {
         ResponseData<NinteichosaResultEntryMainDiv> response = new ResponseData<>();
 
         new ServiceJokyoTab(div).onChange_radサービス区分();
@@ -134,7 +137,8 @@ public class NinteichosaResultEntryMain {
      * @param target NinteichosaResultEntryTargetDiv
      * @return ResponseData
      */
-    public ResponseData<NinteichosaResultEntryMainDiv> onChange_radChosaJisshiBasho(NinteichosaResultEntryMainDiv div, NinteichosaResultEntryTargetDiv target) {
+    public ResponseData<NinteichosaResultEntryMainDiv> onChange_radChosaJisshiBasho(NinteichosaResultEntryMainDiv div,
+            NinteichosaResultEntryTargetDiv target) {
         ResponseData<NinteichosaResultEntryMainDiv> response = new ResponseData<>();
 
         new NinteichosaDetail(div).onChange_radChosaJisshiBasho();
@@ -150,7 +154,8 @@ public class NinteichosaResultEntryMain {
      * @param targetList NinteichosaResultEntryTargetDiv
      * @return ResponseData
      */
-    public ResponseData<NinteichosaResultEntryMainDiv> onClick_btnToRegisterResult(NinteichosaResultEntryMainDiv div, NinteichosaResultEntryTargetDiv targetList) {
+    public ResponseData<NinteichosaResultEntryMainDiv> onClick_btnToRegisterResult(NinteichosaResultEntryMainDiv div,
+            NinteichosaResultEntryTargetDiv targetList) {
         ResponseData<NinteichosaResultEntryMainDiv> response = new ResponseData<>();
 
         dgNinteichosaResultTaishosha_Row target = _extractSelectedTargetFrom(targetList);
@@ -529,8 +534,8 @@ public class NinteichosaResultEntryMain {
         //<editor-fold defaultstate="collapsed" desc="ServiceJokyoServicesCounts">
         private static final class ServiceJokyoServicesCounts {
 
-            final ServiceJokyoServicesCountsDiv panel;
-            final List<ServiceWithCountCom> countComs;
+            private final ServiceJokyoServicesCountsDiv panel;
+            private final List<ServiceWithCountCom> countComs;
 
             private ServiceJokyoServicesCounts(ServiceJokyoTabDiv tab) {
                 this.panel = tab.getServiceJokyoServicesCounts();

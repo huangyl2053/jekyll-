@@ -674,7 +674,7 @@ public class IraishoIkkatsuHakko {
         }
 
         private <T> List<T> _createList(DemoDataType type) {
-            List<HashMap> dataFromYaml = YamlLoader.FOR_DBE.loadAsList(type.path());
+            List<HashMap> dataFromYaml = YamlLoader.DBE.loadAsList(type.path());
             return YamlUtil.convertList(dataFromYaml, _createConverter(type));
         }
 

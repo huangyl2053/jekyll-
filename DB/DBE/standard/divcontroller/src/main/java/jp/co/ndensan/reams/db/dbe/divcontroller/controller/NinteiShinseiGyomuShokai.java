@@ -25,7 +25,7 @@ public class NinteiShinseiGyomuShokai {
     public ResponseData onLoadData(NinteiShinseiGyomuShokaiDiv div) {
         ResponseData<NinteiShinseiGyomuShokaiDiv> response = new ResponseData<>();
 
-        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("DemoCity.yml"));
+        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("DemoCity.yml"));
         Map map = targetSource.get(0);
         ControlGenerator ymlData = new ControlGenerator(map);
         div.getTxtHokensha().setValue(ymlData.getAsRString("保険者番号"));

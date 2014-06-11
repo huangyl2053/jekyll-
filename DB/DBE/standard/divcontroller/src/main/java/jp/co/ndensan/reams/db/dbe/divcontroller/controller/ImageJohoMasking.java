@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4050001.ImageJohoMaskingDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4050001.dgImageMaskShoriTaishosha_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5040002.dgSearchResult_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -27,8 +26,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  */
 public class ImageJohoMasking {
 
-    RString ymlData;
-    RString hokenshaMeisho;
+    private RString ymlData;
+    private RString hokenshaMeisho;
 
     /**
      * イメージ情報マスキング処理Divのロード時の処理を表します。
@@ -39,7 +38,7 @@ public class ImageJohoMasking {
     public ResponseData onLoadData(ImageJohoMaskingDiv div) {
         ResponseData<ImageJohoMaskingDiv> response = new ResponseData<>();
 
-        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("DemoCity.yml"));
+        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("DemoCity.yml"));
         Map map = targetSource.get(0);
         if (_toRString(map.get("保険者番号")).equalsIgnoreCase(new RString("152264"))) {
             div.getShoriTaishoshaKensakuShiji().getDdlHokensha().setSelectedItem(new RString("2"));
@@ -155,7 +154,7 @@ public class ImageJohoMasking {
 
     private List<dgImageMaskShoriTaishosha_Row> createRowSearchResultTestData(RString ymlData) {
         List<dgImageMaskShoriTaishosha_Row> arrayData = new ArrayList<>();
-        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(ymlData);
+        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(ymlData);
         for (Map info : targetSource) {
             arrayData.add(toDgImageMaskShoriTaishosha_Row(info));
         }

@@ -10,7 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.KojinJokyoShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.dgShinsakaiIinJoho_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgIchijiHanteiKeikokuCode_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe3010001.dgIchijiHanteiKeikokuCode_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -56,19 +57,19 @@ public class KojinJokyoShokai {
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().
                 getTplKihonJoho().getKazokuRenrakusaki().setIsOpen(false);
 
-        List<HashMap> HihokenshaShinchokuJohoList = YamlLoader.FOR_DBE.loadAsList(
+        List<HashMap> hihokenshaShinchokuJohoList = YamlLoader.DBE.loadAsList(
                 new RString("dbe8020001/HihokenshaShinchoku.yml"));
 
-        List<HashMap> CityJohoList = YamlLoader.FOR_DBE.loadAsList(
+        List<HashMap> cityJohoList = YamlLoader.DBE.loadAsList(
                 new RString("DemoCity.yml"));
 
         //被保険者情報の設定
-        HashMap mapCityJoho = CityJohoList.get(0);
-        HashMap mapHihokenshaJoho = HihokenshaShinchokuJohoList.get(0);
+        HashMap mapCityJoho = cityJohoList.get(0);
+        HashMap mapHihokenshaJoho = hihokenshaShinchokuJohoList.get(0);
         setHihokenshaJoho(panel, mapCityJoho, mapHihokenshaJoho);
 
         //進捗情報の設定
-        HashMap mapShinchokuJoho = HihokenshaShinchokuJohoList.get(1);
+        HashMap mapShinchokuJoho = hihokenshaShinchokuJohoList.get(1);
         setShinchokuJoho(panel, mapShinchokuJoho);
 
         //基本情報タブの設定
@@ -287,19 +288,19 @@ public class KojinJokyoShokai {
      */
     private void setKihonJohoTab(KojinJokyoShokaiDiv panel) {
 
-        List<HashMap> KihonJohoList = YamlLoader.FOR_DBE.loadAsList(
+        List<HashMap> kihonJohoList = YamlLoader.DBE.loadAsList(
                 new RString("dbe8020001/KihonJoho.yml"));
 
         //基本情報の設定
-        HashMap mapKihonJoho = KihonJohoList.get(0);
+        HashMap mapKihonJoho = kihonJohoList.get(0);
         setKihonJoho(panel, mapKihonJoho);
 
         //申請情報の設定
-        HashMap mapShinseiJoho = KihonJohoList.get(1);
+        HashMap mapShinseiJoho = kihonJohoList.get(1);
         setShinseiJoho(panel, mapShinseiJoho);
 
         //家族等連絡先の設定
-        HashMap mapKazokuRenrakusakiJoho = KihonJohoList.get(2);
+        HashMap mapKazokuRenrakusakiJoho = kihonJohoList.get(2);
         setKazokuRenrakusakiJoho(panel, mapKazokuRenrakusakiJoho);
 
     }
@@ -309,17 +310,15 @@ public class KojinJokyoShokai {
      */
     private void setKihonJoho(KojinJokyoShokaiDiv panel, HashMap mapKihonJoho) {
 
+        ControlGenerator cg = new ControlGenerator(mapKihonJoho);
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
-                getShinseishaShosaiJoho().getTxtHihokenshaKana().setValue(
-                        new RString(mapKihonJoho.get("hihokenshaKana").toString()));
+                getShinseishaShosaiJoho().getTxtHihokenshaKana().setValue(cg.getAsRString("hihokenshaKana"));
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
-                getShinseishaShosaiJoho().getTxtSeibetsu().setValue(
-                        new RString(mapKihonJoho.get("seibetsu").toString()));
+                getShinseishaShosaiJoho().getTxtSeibetsu().setValue(cg.getAsRString("seibetsu"));
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
-                getShinseishaShosaiJoho().getTxtTel().setValue(
-                        new RString(mapKihonJoho.get("tel").toString()));
+                getShinseishaShosaiJoho().getTxtTel().setValue(cg.getAsRString("tel"));
 
         if (mapKihonJoho.get("yubinNo").toString().isEmpty()) {
             panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
@@ -328,90 +327,71 @@ public class KojinJokyoShokai {
         } else {
 
             panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
-                    getShinseishaShosaiJoho().getTxtYubinNo().setValue(
-                            new YubinNo(mapKihonJoho.get("yubinNo").toString()));
+                    getShinseishaShosaiJoho().getTxtYubinNo().setValue(cg.getAsYubinNo("yubinNo"));
         }
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
-                getShinseishaShosaiJoho().getTxtJusho().setValue(
-                        new RString(mapKihonJoho.get("jusho").toString()));
+                getShinseishaShosaiJoho().getTxtJusho().setValue(cg.getAsRString("jusho"));
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
-                getShinseishaShosaiJoho().getTxtTokuteiShippei().setValue(
-                        new RString(mapKihonJoho.get("tokuteishippei").toString()));
+                getShinseishaShosaiJoho().getTxtTokuteiShippei().setValue(cg.getAsRString("tokuteishippei"));
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
-                getShinseishaShosaiJoho().getTxtIryoHokenShubetsu().setValue(
-                        new RString(mapKihonJoho.get("iryoHokenShubetsu").toString()));
+                getShinseishaShosaiJoho().getTxtIryoHokenShubetsu().setValue(cg.getAsRString("iryoHokenShubetsu"));
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
-                getShinseishaShosaiJoho().getTxtIryoHokenNo().setValue(
-                        new RString(mapKihonJoho.get("iryoHokenNo").toString()));
+                getShinseishaShosaiJoho().getTxtIryoHokenNo().setValue(cg.getAsRString("iryoHokenNo"));
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
-                getShinseishaShosaiJoho().getTxtIryoHokenshaMei().setValue(
-                        new RString(mapKihonJoho.get("iryoHokenshaMei").toString()));
+                getShinseishaShosaiJoho().getTxtIryoHokenshaMei().setValue(cg.getAsRString("iryoHokenshaMei"));
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
-                getShinseishaShosaiJoho().getTxtKigoBango().setValue(
-                        new RString(mapKihonJoho.get("kigoBango").toString()));
+                getShinseishaShosaiJoho().getTxtKigoBango().setValue(cg.getAsRString("kigoBango"));
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
-                getShinseishaShosaiJoho().getTxtShinseiDaikoKbn().setValue(
-                        new RString(mapKihonJoho.get("shinseiDaikoKbn").toString()));
+                getShinseishaShosaiJoho().getTxtShinseiDaikoKbn().setValue(cg.getAsRString("shinseiDaikoKbn"));
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
-                getShinseishaShosaiJoho().getTxtShinseiDaikoJigyosha().setValue(
-                        new RString(mapKihonJoho.get("shinseiDaikoJigyosha").toString()));
+                getShinseishaShosaiJoho().getTxtShinseiDaikoJigyosha().setValue(cg.getAsRString("shinseiDaikoJigyosha"));
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
-                getShinseishaShosaiJoho().getTxtJigyoshaKbn().setValue(
-                        new RString(mapKihonJoho.get("jigyoshaKbn").toString()));
+                getShinseishaShosaiJoho().getTxtJigyoshaKbn().setValue(cg.getAsRString("jigyoshaKbn"));
 
         if (mapKihonJoho.get("shinseishaYubinNo").toString().isEmpty()) {
             panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
                     getShinseishaShosaiJoho().getTxtShinseishaYubinNo().clearValue();
         } else {
             panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
-                    getShinseishaShosaiJoho().getTxtShinseishaYubinNo().setValue(
-                            new YubinNo(mapKihonJoho.get("shinseishaYubinNo").toString()));
+                    getShinseishaShosaiJoho().getTxtShinseishaYubinNo().setValue(cg.getAsYubinNo("shinseishaYubinNo"));
         }
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
-                getShinseishaShosaiJoho().getTxtShinseishaJusho().setValue(
-                        new RString(mapKihonJoho.get("shinseishaJusho").toString()));
+                getShinseishaShosaiJoho().getTxtShinseishaJusho().setValue(cg.getAsRString("shinseishaJusho"));
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
-                getShinseishaShosaiJoho().getTxtShinseishaTel().setValue(
-                        new RString(mapKihonJoho.get("shinseishaTel").toString()));
+                getShinseishaShosaiJoho().getTxtShinseishaTel().setValue(cg.getAsRString("shinseishaTel"));
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
-                getShinseishaShosaiJoho().getTxtShinseiRiyu().setValue(
-                        new RString(mapKihonJoho.get("shinseiRiyu").toString()));
+                getShinseishaShosaiJoho().getTxtShinseiRiyu().setValue(cg.getAsRString("shinseiRiyu"));
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
-                getShinseishaShosaiJoho().getTxtJohoTeikyoDoi().setValue(
-                        new RString(mapKihonJoho.get("johoTeikyoDoi").toString()));
+                getShinseishaShosaiJoho().getTxtJohoTeikyoDoi().setValue(cg.getAsRString("johoTeikyoDoi"));
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
-                getShinseishaShosaiJoho().getTxtEnkiTsuchiHakkoDoi().setValue(
-                        new RString(mapKihonJoho.get("enkiTsuchiHakkoDoi").toString()));
+                getShinseishaShosaiJoho().getTxtEnkiTsuchiHakkoDoi().setValue(cg.getAsRString("enkiTsuchiHakkoDoi"));
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
-                getShinseishaShosaiJoho().getTxtShisetsuNyushoUmu().setValue(
-                        new RString(mapKihonJoho.get("shisetsuNyushoUmu").toString()));
+                getShinseishaShosaiJoho().getTxtShisetsuNyushoUmu().setValue(cg.getAsRString("shisetsuNyushoUmu"));
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
-                getShinseishaShosaiJoho().getTxtShisetsuNyusho().setValue(
-                        new RString(mapKihonJoho.get("shisetsuNyusho").toString()));
+                getShinseishaShosaiJoho().getTxtShisetsuNyusho().setValue(cg.getAsRString("shisetsuNyusho"));
 
         if (mapKihonJoho.get("shisetsuNyushobi").toString().isEmpty()) {
             panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
                     getShinseishaShosaiJoho().getTxtShisetsuNyushobi().clearValue();
         } else {
             panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
-                    getShinseishaShosaiJoho().getTxtShisetsuNyushobi().setValue(
-                            new RDate(mapKihonJoho.get("shisetsuNyushobi").toString()));
+                    getShinseishaShosaiJoho().getTxtShisetsuNyushobi().setValue(cg.getAsRDate("shisetsuNyushobi"));
         }
 
         if (mapKihonJoho.get("shisetsuTaishobi").toString().isEmpty()) {
@@ -419,21 +399,18 @@ public class KojinJokyoShokai {
                     getShinseishaShosaiJoho().getTxtShisetsuTaishobi().clearValue();
         } else {
             panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
-                    getShinseishaShosaiJoho().getTxtShisetsuTaishobi().setValue(
-                            new RDate(mapKihonJoho.get("shisetsuTaishobi").toString()));
+                    getShinseishaShosaiJoho().getTxtShisetsuTaishobi().setValue(cg.getAsRDate("shisetsuTaishobi"));
         }
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
-                getShinseishaShosaiJoho().getTxtShichosonRenrakuJiko().setValue(
-                        new RString(mapKihonJoho.get("shichosonRenrakuJiko").toString()));
+                getShinseishaShosaiJoho().getTxtShichosonRenrakuJiko().setValue(cg.getAsRString("shichosonRenrakuJiko"));
 
         if (mapKihonJoho.get("ichijiHanteiJohoChushutsubi").toString().isEmpty()) {
             panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
                     getShinseishaShosaiJoho().getTxtIchijiHanteiJohoChushutsubi().clearValue();
         } else {
             panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
-                    getShinseishaShosaiJoho().getTxtIchijiHanteiJohoChushutsubi().setValue(
-                            new RDate(mapKihonJoho.get("ichijiHanteiJohoChushutsubi").toString()));
+                    getShinseishaShosaiJoho().getTxtIchijiHanteiJohoChushutsubi().setValue(cg.getAsRDate("ichijiHanteiJohoChushutsubi"));
         }
 
         if (mapKihonJoho.get("iraiJohoDataSoshinbi").toString().isEmpty()) {
@@ -442,8 +419,7 @@ public class KojinJokyoShokai {
 
         } else {
             panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
-                    getShinseishaShosaiJoho().getTxtIraiJohoDataSoshinbi().setValue(
-                            new RDate(mapKihonJoho.get("iraiJohoDataSoshinbi").toString()));
+                    getShinseishaShosaiJoho().getTxtIraiJohoDataSoshinbi().setValue(cg.getAsRDate("iraiJohoDataSoshinbi"));
         }
 
         if (mapKihonJoho.get("centerSoshinbi").toString().isEmpty()) {
@@ -452,13 +428,11 @@ public class KojinJokyoShokai {
 
         } else {
             panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
-                    getShinseishaShosaiJoho().getTxtCenterSoshinbi().setValue(
-                            new RDate(mapKihonJoho.get("centerSoshinbi").toString()));
+                    getShinseishaShosaiJoho().getTxtCenterSoshinbi().setValue(cg.getAsRDate("centerSoshinbi"));
         }
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplKihonJoho().
-                getShinseishaShosaiJoho().getTxtMemo().setValue(
-                        new RString(mapKihonJoho.get("memo").toString()));
+                getShinseishaShosaiJoho().getTxtMemo().setValue(cg.getAsRString("memo"));
 
     }
 
@@ -559,19 +533,19 @@ public class KojinJokyoShokai {
      */
     private void setNinteiChosaTab(KojinJokyoShokaiDiv panel) {
 
-        List<HashMap> NinteiChosaList = YamlLoader.FOR_DBE.loadAsList(
+        List<HashMap> ninteiChosaList = YamlLoader.DBE.loadAsList(
                 new RString("dbe8020001/NinteiChosa.yml"));
 
         //今回調査依頼情報の設定
-        HashMap mapKonkaiChosaIraiJoho = NinteiChosaList.get(0);
+        HashMap mapKonkaiChosaIraiJoho = ninteiChosaList.get(0);
         setKonkaiChosaIraiJoho(panel, mapKonkaiChosaIraiJoho);
 
         //前回調査依頼情報の設定
-        HashMap mapZenkaiChosaIraiJoho = NinteiChosaList.get(1);
+        HashMap mapZenkaiChosaIraiJoho = ninteiChosaList.get(1);
         setZenkaiChosaIraiJoho(panel, mapZenkaiChosaIraiJoho);
 
         //特記事項一覧情報の設定
-        HashMap mapTokkiJikoIchiranJoho = NinteiChosaList.get(2);
+        HashMap mapTokkiJikoIchiranJoho = ninteiChosaList.get(2);
         setTokkiJikoIchiranJoho(panel, mapTokkiJikoIchiranJoho);
 
     }
@@ -891,15 +865,15 @@ public class KojinJokyoShokai {
      */
     private void setIkenshoTab(KojinJokyoShokaiDiv panel) {
 
-        List<HashMap> IkenshoList = YamlLoader.FOR_DBE.loadAsList(
+        List<HashMap> ikenshoList = YamlLoader.DBE.loadAsList(
                 new RString("dbe8020001/Ikensho.yml"));
 
         //今回主治医依頼情報の設定
-        HashMap mapKonkaiShujiiIraiJoho = IkenshoList.get(0);
+        HashMap mapKonkaiShujiiIraiJoho = ikenshoList.get(0);
         setKonkaiShujiiIraiJoho(panel, mapKonkaiShujiiIraiJoho);
 
         //前回主治医依頼情報の設定
-        HashMap mapZenkaiShujiiIraiJoho = IkenshoList.get(1);
+        HashMap mapZenkaiShujiiIraiJoho = ikenshoList.get(1);
         setZenkaiShujiiIraiJoho(panel, mapZenkaiShujiiIraiJoho);
 
     }
@@ -1096,19 +1070,19 @@ public class KojinJokyoShokai {
      */
     private void setShinsakaiTab(KojinJokyoShokaiDiv panel) {
 
-        List<HashMap> ShinsakaiList = YamlLoader.FOR_DBE.loadAsList(
+        List<HashMap> shinsakaiList = YamlLoader.DBE.loadAsList(
                 new RString("dbe8020001/Shinsakai.yml"));
 
         //一次判定情報の設定
-        HashMap mapIchijiHanteiJoho = ShinsakaiList.get(0);
+        HashMap mapIchijiHanteiJoho = shinsakaiList.get(0);
         setIchijiHanteiJoho(panel, mapIchijiHanteiJoho);
 
         //審査会情報の設定
-        HashMap mapShinsakaiJoho = ShinsakaiList.get(1);
+        HashMap mapShinsakaiJoho = shinsakaiList.get(1);
         setShinsakaiJoho(panel, mapShinsakaiJoho);
 
         //審査会結果情報の設定
-        HashMap mapShinsakaiKekkaJoho = ShinsakaiList.get(2);
+        HashMap mapShinsakaiKekkaJoho = shinsakaiList.get(2);
         setShinsakaiKekkaJoho(panel, mapShinsakaiKekkaJoho);
 
     }
@@ -1124,7 +1098,7 @@ public class KojinJokyoShokai {
         } else {
             panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
                     getTplIchijiHantei().getCcdIchijiHanteiJoho().getTxtIchijiHanteibi().setValue(
-                            new RDate(mapIchijiHanteiJoho.get("ichijiHanteibi").toString()));
+                            new FlexibleDate(mapIchijiHanteiJoho.get("ichijiHanteibi").toString()));
         }
 
         panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplShinsakai().getTabShinsakaiKojinShokai().
@@ -1228,20 +1202,20 @@ public class KojinJokyoShokai {
     /*
      *一次判定警告コードデータグリッド情報を設定します。
      */
-    private List createRowIchijiHanteiKeikokuCode(HashMap IchijiHanteiKekka) {
+    private List createRowIchijiHanteiKeikokuCode(HashMap ichijiHanteiKekka) {
 
         List arrayDataList = new ArrayList();
 
-        for (int i = 1; i <= Integer.parseInt((String) IchijiHanteiKekka.get("keikokusu")); i++) {
+        for (int i = 1; i <= Integer.parseInt((String) ichijiHanteiKekka.get("keikokusu")); i++) {
+            ControlGenerator cg = new ControlGenerator(ichijiHanteiKekka);
+//            String strKey1 = "keikokuno" + i;
+            RString strKeikokuNo = cg.getAsRString("keikokuno" + i);
 
-            String strKey1 = "keikokuno" + i;
-            String strKeikokuNo = (String) IchijiHanteiKekka.get(strKey1);
+//            String strKey2 = "keikokucode" + i;
+            RString strKeikokuCode = cg.getAsRString("keikokucode" + i);
 
-            String strKey2 = "keikokucode" + i;
-            String strKeikokuCode = (String) IchijiHanteiKekka.get(strKey2);
-
-            String strKey3 = "keikokunaiyo" + i;
-            String strKeikokuNaiyo = (String) IchijiHanteiKekka.get(strKey3);
+//            String strKey3 = "keikokunaiyo" + i;
+            RString strKeikokuNaiyo = cg.getAsRString("keikokunaiyo" + i);
 
             arrayDataList.add(createRowIchijiHanteiKeikokuCode(strKeikokuNo, strKeikokuCode, strKeikokuNaiyo));
         }
@@ -1252,16 +1226,13 @@ public class KojinJokyoShokai {
      *引数を元にデータグリッド内に挿入する一次判定警告コード一覧データを作成します。
      */
     private dgIchijiHanteiKeikokuCode_Row createRowIchijiHanteiKeikokuCode(
-            String KeikokuNo,
-            String KeikokuCode,
-            String KeikokuNaiyo
+            RString keikokuNo,
+            RString keikokuCode,
+            RString keikokuNaiyo
     ) {
 
         dgIchijiHanteiKeikokuCode_Row rowIchijiHanteiKeikokuCode = new dgIchijiHanteiKeikokuCode_Row(
-                new RString(KeikokuNo),
-                new RString(KeikokuCode),
-                new RString(KeikokuNaiyo)
-        );
+                keikokuNo, keikokuCode, keikokuNaiyo);
         return rowIchijiHanteiKeikokuCode;
     }
 
@@ -1530,18 +1501,18 @@ public class KojinJokyoShokai {
         List arrayDataList = new ArrayList();
 
         for (int i = 1; i <= Integer.parseInt((String) shinsakaiIin.get("shinsainsu")); i++) {
+            ControlGenerator cg = new ControlGenerator(shinsakaiIin);
+//            String strKey1 = "shinsakaiIin" + i;
+            RString strShinsakaiIin = cg.getAsRString("shinsakaiIin" + i);
 
-            String strKey1 = "shinsakaiIin" + i;
-            String strShinsakaiIin = (String) shinsakaiIin.get(strKey1);
+//            String strKey2 = "shinsainKbn" + i;
+            RString strShinsainKbn = cg.getAsRString("shinsainKbn" + i);
 
-            String strKey2 = "shinsainKbn" + i;
-            String strShinsainKbn = (String) shinsakaiIin.get(strKey2);
+//            String strKey3 = "gogitaichoKbn" + i;
+            RString strGogitaichoKbn = cg.getAsRString("gogitaichoKbn" + i);
 
-            String strKey3 = "gogitaichoKbn" + i;
-            String strGogitaichoKbn = (String) shinsakaiIin.get(strKey3);
-
-            String strKey4 = "shukketsuKbn" + i;
-            String strShukketsuKbn = (String) shinsakaiIin.get(strKey4);
+//            String strKey4 = "shukketsuKbn" + i;
+            RString strShukketsuKbn = cg.getAsRString("shukketsuKbn" + i);
 
             arrayDataList.add(createRowShinsakaiIin(strShinsakaiIin, strShinsainKbn, strGogitaichoKbn, strShukketsuKbn));
         }
@@ -1552,18 +1523,14 @@ public class KojinJokyoShokai {
      *引数を元にデータグリッド内に挿入する審査会委員一覧データを作成します。
      */
     private dgShinsakaiIinJoho_Row createRowShinsakaiIin(
-            String ShinsakaiIin,
-            String ShinsainKbn,
-            String GogitaichoKbn,
-            String ShukketsuKbn
+            RString shinsakaiIin,
+            RString shinsainKbn,
+            RString gogitaichoKbn,
+            RString shukketsuKbn
     ) {
 
         dgShinsakaiIinJoho_Row rowShinsakaiIin = new dgShinsakaiIinJoho_Row(
-                new RString(ShinsakaiIin),
-                new RString(ShinsainKbn),
-                new RString(GogitaichoKbn),
-                new RString(ShukketsuKbn)
-        );
+                shinsakaiIin, shinsainKbn, gogitaichoKbn, shukketsuKbn);
         return rowShinsakaiIin;
     }
 

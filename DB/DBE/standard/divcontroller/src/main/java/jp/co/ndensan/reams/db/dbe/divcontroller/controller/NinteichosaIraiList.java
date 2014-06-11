@@ -160,7 +160,7 @@ public class NinteichosaIraiList {
         }
 
         private List<dgNinteichosaIraiList_Row> _createList() {
-            List<HashMap> dataFromYaml = YamlLoader.FOR_DBE.loadAsList(new RString("dbeuc21000/ChosaIraiTargets.yml"));
+            List<HashMap> dataFromYaml = YamlLoader.DBE.loadAsList(new RString("dbeuc21000/ChosaIraiTargets.yml"));
             return YamlUtil.convertList(dataFromYaml, _createConverter());
         }
 

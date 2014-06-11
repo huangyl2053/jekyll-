@@ -42,7 +42,7 @@ public class HanteiResultsOutputTargetShinsakaiList {
 
     private List<dgShinsakaiList_Row> createRowShinsakaiListTestData() {
         List<dgShinsakaiList_Row> arrayData = new ArrayList<>();
-        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("HanteiResultsOutputTargetShinsakaiList.yml"));
+        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("HanteiResultsOutputTargetShinsakaiList.yml"));
         for (Map info : targetSource) {
             arrayData.add(toDgShinsakaiList_Row(info));
         }

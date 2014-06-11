@@ -51,7 +51,7 @@ public class YokaigoninteiProgress {
 
     private List<dgYokaigoninteiProgress_Row> createRowSearchResultTestData(RString ymlFile) {
         List<dgYokaigoninteiProgress_Row> arrayData = new ArrayList<>();
-        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(ymlFile);
+        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(ymlFile);
         for (Map info : targetSource) {
             arrayData.add(toDgYokaigoninteiProgress_Row(info));
         }

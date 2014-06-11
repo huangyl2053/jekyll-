@@ -116,7 +116,7 @@ public class NinteichosaResultEntryTarget {
          */
         enum DemoDataType {
 
-            認定調査結果登録対象者(new RString("NinteichosaResultTaishosha.yml"));
+            認定調査結果登録対象者(new RString("NinteichosaResultEntryTargets.yml"));
             private final RString thePath;
 
             private DemoDataType(RString fileName) {
@@ -210,6 +210,9 @@ public class NinteichosaResultEntryTarget {
         }
     }
 
+    /**
+     * dgNinteichosaResultTaishosha_Row を一時的に保持できます。
+     */
     static final class Holder {
 
         private Holder() {

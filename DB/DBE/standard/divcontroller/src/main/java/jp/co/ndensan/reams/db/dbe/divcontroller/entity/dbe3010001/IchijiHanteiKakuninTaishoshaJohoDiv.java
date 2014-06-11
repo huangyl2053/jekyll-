@@ -28,7 +28,7 @@ public class IchijiHanteiKakuninTaishoshaJohoDiv extends Panel {
     @JsonProperty("txtHihokenshaName")
     private TextBox txtHihokenshaName;
     @JsonProperty("txtShinseibi")
-    private TextBoxDate txtShinseibi;
+    private TextBoxFlexibleDate txtShinseibi;
     @JsonProperty("txtShinseiKbnShin")
     private TextBox txtShinseiKbnShin;
 
@@ -69,12 +69,12 @@ public class IchijiHanteiKakuninTaishoshaJohoDiv extends Panel {
     }
 
     @JsonProperty("txtShinseibi")
-    public TextBoxDate getTxtShinseibi() {
+    public TextBoxFlexibleDate getTxtShinseibi() {
         return txtShinseibi;
     }
 
     @JsonProperty("txtShinseibi")
-    public void setTxtShinseibi(TextBoxDate txtShinseibi) {
+    public void setTxtShinseibi(TextBoxFlexibleDate txtShinseibi) {
         this.txtShinseibi=txtShinseibi;
     }
 

@@ -46,7 +46,7 @@ public class ShinsakaiKaisaiKekka {
         RString shinsakaiMeisho = (RString) ViewStateHolder.get("審査会番号", RString.class);
         div.getTxtShinsakaiMeisho().setValue(shinsakaiMeisho);
 
-        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("dbe5010001/gogitai.yml"));
+        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("dbe5010001/gogitai.yml"));
         Map map = targetSource.get(0);
         div.getTxtGogitai().setValue(_toRString(map.get("合議体")));
         div.getTxtKaisaiYoteibi().setValue(new FlexibleDate(map.get("開催予定日").toString()));
@@ -172,7 +172,7 @@ public class ShinsakaiKaisaiKekka {
 
     private List<dgShinsakaiShinsainIchiran_Row> createRowShinsakaiIchiranTestData() {
         List<dgShinsakaiShinsainIchiran_Row> arrayData = new ArrayList<>();
-        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("dbe5010001/gogitaiIin.yml"));
+        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("dbe5010001/gogitaiIin.yml"));
         int cntIinsu = 0;
         for (Map info : targetSource) {
             cntIinsu = ++cntIinsu;
@@ -204,7 +204,7 @@ public class ShinsakaiKaisaiKekka {
 
     private List<dgShinsakaiIinIchiran_Row> createRowShinsakaiIinIchiranTestData() {
         List<dgShinsakaiIinIchiran_Row> arrayData = new ArrayList<>();
-        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("dbe5010001/shinsain.yml"));
+        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("dbe5010001/shinsain.yml"));
         int cntIinsu = 0;
         for (Map info : targetSource) {
             cntIinsu = ++cntIinsu;

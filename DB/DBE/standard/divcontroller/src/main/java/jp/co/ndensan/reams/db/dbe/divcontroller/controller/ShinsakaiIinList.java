@@ -50,7 +50,7 @@ public class ShinsakaiIinList {
 
     private static List<dgShinsakaiIinChildList_Row> getListOfShinsakaiIin() {
         List<dgShinsakaiIinChildList_Row> list = new ArrayList<>();
-        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("ShinsakaiIinList/ShinsakaiIinList.yml"));
+        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("ShinsakaiIinList/ShinsakaiIinList.yml"));
         for (Map info : targetSource) {
             list.add(toDgShinsakaiIinChildList_Row(info));
         }

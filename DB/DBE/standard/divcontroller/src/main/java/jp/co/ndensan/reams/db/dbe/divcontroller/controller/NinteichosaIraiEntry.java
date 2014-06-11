@@ -348,7 +348,7 @@ public class NinteichosaIraiEntry {
             panel.getTxtShinseiKubun().setValue(targetInfo.get認定申請区分申請時());
         }
 
-        private final class _LatestChosain {
+        private static final class _LatestChosain {
 
             private final NinteichosaIraiEntryTargetLatestChosainDiv panel;
 
@@ -769,7 +769,7 @@ public class NinteichosaIraiEntry {
             return content;
         }
 
-        private class _Content {
+        private static final class _Content {
 
             private final NinteichosaIraiEntryTokusokuContentDiv panel;
             private final _Pablish pablish;

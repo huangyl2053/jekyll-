@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2070001.IkenshoShosaiMainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2070001.ShujiiIkenshoImageTorikomiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -45,41 +46,45 @@ public class IkenshoShosaiMain {
      */
     private void setIkenshoKekkaShosaiData(IkenshoShosaiMainDiv panel, ShujiiIkenshoImageTorikomiDiv panel2, int iSelectId) {
 
-        List<HashMap> IkenshoKekkaShosai = YamlLoader.FOR_DBE.loadAsList(new RString("dbe2070001/IkenshoKekkaShosaiMain.yml"));
+        List<HashMap> ikenshoKekkaShosai = YamlLoader.DBE.loadAsList(new RString("dbe2070001/IkenshoKekkaShosaiMain.yml"));
 
-        HashMap hashMap = IkenshoKekkaShosai.get(iSelectId);
+//        HashMap hashMap = ikenshoKekkaShosai.get(iSelectId);
+        ControlGenerator cg = new ControlGenerator(ikenshoKekkaShosai.get(iSelectId));
 
-        String strHokenshaNo = (String) hashMap.get("hokenshaNo");
-        String strShinseiKbn = (String) hashMap.get("shinseiKbn");
-        String strIryoKikanNo = (String) hashMap.get("iryoKikanNo");
-        String strShujiiNo = (String) hashMap.get("shujiiNo");
-        String strIryoKikanMei = (String) hashMap.get("iryoKikanMei");
-        String strShujiiMei = (String) hashMap.get("shujiiMei");
-        String strNetakirido = (String) hashMap.get("netakirido");
-        String strNinchi = (String) hashMap.get("ninchi");
-        String strTankiKioku = (String) hashMap.get("tankikioku");
-        String strNinchiNoryoku = (String) hashMap.get("ninchinoryoku");
-        String strDentatsuNoryoku = (String) hashMap.get("dentatsunoryoku");
-        String strShokujiKoi = (String) hashMap.get("shokujikoi");
+        RString strHokenshaNo = cg.getAsRString("hokenshaNo");
+        RString strShinseiKbn = cg.getAsRString("shinseiKbn");
+        RString strIryoKikanNo = cg.getAsRString("iryoKikanNo");
+        RString strShujiiNo = cg.getAsRString("shujiiNo");
+        RString strIryoKikanMei = cg.getAsRString("iryoKikanMei");
+        RString strShujiiMei = cg.getAsRString("shujiiMei");
+        RString strNetakirido = cg.getAsRString("netakirido");
+        RString strNinchi = cg.getAsRString("ninchi");
+        RString strTankiKioku = cg.getAsRString("tankikioku");
+        RString strNinchiNoryoku = cg.getAsRString("ninchinoryoku");
+        RString strDentatsuNoryoku = cg.getAsRString("dentatsunoryoku");
+        RString strShokujiKoi = cg.getAsRString("shokujikoi");
 
-        panel.getKihonJoho().getTxtHokenNo().setValue(new RString(strHokenshaNo));
+        panel.getKihonJoho().getTxtHokenNo().setValue(strHokenshaNo);
         panel.getKihonJoho().getTxtHihokenNo().setValue(panel2.getDgIkenshoTorikomiKekka().getActiveRow().getHihokenNo());
-        panel.getKihonJoho().getTxtShinseibi().setValue(new RDate(panel2.getDgIkenshoTorikomiKekka().getActiveRow().getShinseibi().toString()));
-        panel.getKihonJoho().getDdlShinseiKbn().setSelectedItem(new RString(strShinseiKbn));
+        panel.getKihonJoho().getTxtShinseibi().setValue(new RDate(panel2.getDgIkenshoTorikomiKekka().getActiveRow().
+                getShinseibi().toString()));
+        panel.getKihonJoho().getDdlShinseiKbn().setSelectedItem(strShinseiKbn);
 
-        panel.getIkenshoItakuJoho().getTxtIryokikanNo().setValue(new RString(strIryoKikanNo));
-        panel.getIkenshoItakuJoho().getTxtShujiiNo().setValue(new RString(strShujiiNo));
-        panel.getIkenshoItakuJoho().getTxtIryokikanMei().setValue(new RString(strIryoKikanMei));
-        panel.getIkenshoItakuJoho().getTxtShujiiMei().setValue(new RString(strShujiiMei));
-        panel.getIkenshoItakuJoho().getTxtIkenshoKinyubi().setValue(new RDate(panel2.getDgIkenshoTorikomiKekka().getActiveRow().getIkenshoKinyubi().toString()));
-        panel.getIkenshoItakuJoho().getTxtIkenshoJuryobi().setValue(new RDate(panel2.getDgIkenshoTorikomiKekka().getActiveRow().getIkenshoJuryobi().toString()));
+        panel.getIkenshoItakuJoho().getTxtIryokikanNo().setValue(strIryoKikanNo);
+        panel.getIkenshoItakuJoho().getTxtShujiiNo().setValue(strShujiiNo);
+        panel.getIkenshoItakuJoho().getTxtIryokikanMei().setValue(strIryoKikanMei);
+        panel.getIkenshoItakuJoho().getTxtShujiiMei().setValue(strShujiiMei);
+        panel.getIkenshoItakuJoho().getTxtIkenshoKinyubi().setValue(new RDate(panel2.getDgIkenshoTorikomiKekka().
+                getActiveRow().getIkenshoKinyubi().toString()));
+        panel.getIkenshoItakuJoho().getTxtIkenshoJuryobi().setValue(new RDate(panel2.getDgIkenshoTorikomiKekka().
+                getActiveRow().getIkenshoJuryobi().toString()));
 
-        panel.getIkensho5Komoku().getTblIkensho5Komoku().getDdlNetakirido().setSelectedItem(new RString(strNetakirido));
-        panel.getIkensho5Komoku().getTblIkensho5Komoku().getDdlNinchi().setSelectedItem(new RString(strNinchi));
-        panel.getIkensho5Komoku().getTblIkensho5Komoku().getDdlTankikioku().setSelectedItem(new RString(strTankiKioku));
-        panel.getIkensho5Komoku().getTblIkensho5Komoku().getDdlNinchiNoryoku().setSelectedItem(new RString(strNinchiNoryoku));
-        panel.getIkensho5Komoku().getTblIkensho5Komoku().getDdlDentatsuNoryoku().setSelectedItem(new RString(strDentatsuNoryoku));
-        panel.getIkensho5Komoku().getTblIkensho5Komoku().getDdlShokujiKoi().setSelectedItem(new RString(strShokujiKoi));
+        panel.getIkensho5Komoku().getTblIkensho5Komoku().getDdlNetakirido().setSelectedItem(strNetakirido);
+        panel.getIkensho5Komoku().getTblIkensho5Komoku().getDdlNinchi().setSelectedItem(strNinchi);
+        panel.getIkensho5Komoku().getTblIkensho5Komoku().getDdlTankikioku().setSelectedItem(strTankiKioku);
+        panel.getIkensho5Komoku().getTblIkensho5Komoku().getDdlNinchiNoryoku().setSelectedItem(strNinchiNoryoku);
+        panel.getIkensho5Komoku().getTblIkensho5Komoku().getDdlDentatsuNoryoku().setSelectedItem(strDentatsuNoryoku);
+        panel.getIkensho5Komoku().getTblIkensho5Komoku().getDdlShokujiKoi().setSelectedItem(strShokujiKoi);
 
     }
 

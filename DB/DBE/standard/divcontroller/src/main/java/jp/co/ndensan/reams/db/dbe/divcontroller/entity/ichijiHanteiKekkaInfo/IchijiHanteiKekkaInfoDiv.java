@@ -1,13 +1,12 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.ichijiHanteiKekkaInfo;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgIchijiHanteiKeikokuCode_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.tblKijunJikanDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.tblTyukanHyokaKomokuTokutenDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe3010001.dgIchijiHanteiKeikokuCode_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe3010001.dgIchijiHanteiKeikokuCode_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -25,7 +24,7 @@ public class IchijiHanteiKekkaInfoDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtIchijiHanteibi")
-    private TextBoxDate txtIchijiHanteibi;
+    private TextBoxFlexibleDate txtIchijiHanteibi;
     @JsonProperty("txtIchijiHanteiKekka")
     private TextBox txtIchijiHanteiKekka;
     @JsonProperty("txtKijunJikan")
@@ -62,12 +61,12 @@ public class IchijiHanteiKekkaInfoDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     @JsonProperty("txtIchijiHanteibi")
-    public TextBoxDate getTxtIchijiHanteibi() {
+    public TextBoxFlexibleDate getTxtIchijiHanteibi() {
         return txtIchijiHanteibi;
     }
 
     @JsonProperty("txtIchijiHanteibi")
-    public void setTxtIchijiHanteibi(TextBoxDate txtIchijiHanteibi) {
+    public void setTxtIchijiHanteibi(TextBoxFlexibleDate txtIchijiHanteibi) {
         this.txtIchijiHanteibi=txtIchijiHanteibi;
     }
 

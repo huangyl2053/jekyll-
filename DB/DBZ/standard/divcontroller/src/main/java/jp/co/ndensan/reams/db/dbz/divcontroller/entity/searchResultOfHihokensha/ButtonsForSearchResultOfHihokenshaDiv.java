@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -10,21 +10,19 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * SearchCriteriaOfHokensha のクラスファイル 
+ * ButtonsForSearchResultOfHihokensha のクラスファイル 
  * 
  * @author 自動生成
  */
-public class SearchCriteriaOfHokenshaDiv extends Panel {
+public class ButtonsForSearchResultOfHihokenshaDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblHokensha")
-    private Label lblHokensha;
-    @JsonProperty("ddlHokensha")
-    private DropDownList ddlHokensha;
+    @JsonProperty("btnToResearch")
+    private Button btnToResearch;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,24 +30,14 @@ public class SearchCriteriaOfHokenshaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblHokensha")
-    public Label getLblHokensha() {
-        return lblHokensha;
+    @JsonProperty("btnToResearch")
+    public Button getBtnToResearch() {
+        return btnToResearch;
     }
 
-    @JsonProperty("lblHokensha")
-    public void setLblHokensha(Label lblHokensha) {
-        this.lblHokensha=lblHokensha;
-    }
-
-    @JsonProperty("ddlHokensha")
-    public DropDownList getDdlHokensha() {
-        return ddlHokensha;
-    }
-
-    @JsonProperty("ddlHokensha")
-    public void setDdlHokensha(DropDownList ddlHokensha) {
-        this.ddlHokensha=ddlHokensha;
+    @JsonProperty("btnToResearch")
+    public void setBtnToResearch(Button btnToResearch) {
+        this.btnToResearch=btnToResearch;
     }
 
 }

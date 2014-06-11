@@ -60,7 +60,7 @@ public class ShinsakaiSearch {
 
     private List<dgShinsakaiList_Row> createRowSearchResultTestData(RString ymlData) {
         List<dgShinsakaiList_Row> arrayData = new ArrayList<>();
-        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(ymlData);
+        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(ymlData);
         for (Map info : targetSource) {
             arrayData.add(toDgShinsakaiList_Row(info));
         }

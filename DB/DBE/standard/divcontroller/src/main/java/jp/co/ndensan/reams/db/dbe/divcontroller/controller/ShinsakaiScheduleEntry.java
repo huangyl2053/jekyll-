@@ -59,7 +59,7 @@ public class ShinsakaiScheduleEntry {
     public ResponseData onChange_ddlGogitai(ShinsakaiScheduleEntryDiv div) {
         ResponseData<ShinsakaiScheduleEntryDiv> response = new ResponseData<>();
 
-        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("dbe4040001/gogitai.yml"));
+        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("dbe4040001/gogitai.yml"));
         Map map;
         RString ymlData;
         if (div.getSchedule().getDdlGogitai().getSelectedValue().equalsIgnoreCase(new RString("合議体01"))) {
@@ -253,7 +253,7 @@ public class ShinsakaiScheduleEntry {
 
     private List<dgShinsakaiIinList_Row> createRowGogitaiTestData(RString ymlData) {
         List<dgShinsakaiIinList_Row> arrayData = new ArrayList<>();
-        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(ymlData);
+        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(ymlData);
         for (Map info : targetSource) {
             arrayData.add(toDgShinsakaiIinList(info));
         }
@@ -273,7 +273,7 @@ public class ShinsakaiScheduleEntry {
 
     private List<dgShinakaiScheduleList_Row> createRowShinsakaiListTestData() {
         List<dgShinakaiScheduleList_Row> arrayData = new ArrayList<>();
-        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("dbe4040001/ShinsakaiList.yml"));
+        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("dbe4040001/ShinsakaiList.yml"));
         for (Map info : targetSource) {
             arrayData.add(toDgShinsakaiList(info));
         }

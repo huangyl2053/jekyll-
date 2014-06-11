@@ -44,7 +44,7 @@ public class ShinseishaKensakuResultIchiran {
      */
     private void setHihokenshaSearchListData(ShinseishaKensakuResultIchiranDiv panel) {
 
-        List<HashMap> HihokenshaSearchList = YamlLoader.FOR_DBE.loadAsList(
+        List<HashMap> HihokenshaSearchList = YamlLoader.DBE.loadAsList(
                 new RString("dbe8020001/HihokenshaSearchList.yml"));
 
         List arraydata = createRowHihokenshaSearchResultIchiran(HihokenshaSearchList);

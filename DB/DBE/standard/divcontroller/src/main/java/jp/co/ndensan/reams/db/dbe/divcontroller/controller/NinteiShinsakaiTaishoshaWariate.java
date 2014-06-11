@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4060001.dgWariatezumiT
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4060001.dgMiwariateTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4060001.dgShinsainKoseiIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4060001.dgShinsainIchiran_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -31,17 +32,17 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class NinteiShinsakaiTaishoshaWariate {
 
-    public static final int MIWARIATE = 0;
-    public static final int WARIATEZUMI = 1;
+    private static final int MIWARIATE = 0;
+    private static final int WARIATEZUMI = 1;
 
-    public static final int INIT = 0;
-    public static final int WARITSUKE = 1;
-    public static final int KAIJO = 2;
+    private static final int INIT = 0;
+    private static final int WARITSUKE = 1;
+    private static final int KAIJO = 2;
 
     /**
      * 審査会一覧データグリッド上の審査会選択時の処理を表します。
      *
-     * @param panel NinteiShinsakaiTaishoshaWariateDiv
+     * @param panel ninteiShinsakaiTaishoshaWariateDiv
      * @param panel2 NinteiShinsakaiIchiranDiv
      * @return ResponseData
      */
@@ -62,7 +63,7 @@ public class NinteiShinsakaiTaishoshaWariate {
     /**
      * 対象者一覧に割り付けるボタン押下時の処理を表します。
      *
-     * @param panel NinteiShinsakaiTaishoshaWariateDiv
+     * @param panel ninteiShinsakaiTaishoshaWariateDiv
      * @param panel2 NinteiShinsakaiIchiranDiv
      * @return ResponseData
      */
@@ -83,7 +84,7 @@ public class NinteiShinsakaiTaishoshaWariate {
     /**
      * 対象者一覧から解除するボタン押下時の処理を表します。
      *
-     * @param panel NinteiShinsakaiTaishoshaWariateDiv
+     * @param panel ninteiShinsakaiTaishoshaWariateDiv
      * @param panel2 NinteiShinsakaiIchiranDiv
      * @return ResponseData
      */
@@ -104,7 +105,7 @@ public class NinteiShinsakaiTaishoshaWariate {
     /**
      * 審査員構成一覧に割り付けるボタン押下時の処理を表します。
      *
-     * @param panel NinteiShinsakaiTaishoshaWariateDiv
+     * @param panel ninteiShinsakaiTaishoshaWariateDiv
      * @param panel2 NinteiShinsakaiIchiranDiv
      * @return ResponseData
      */
@@ -122,7 +123,7 @@ public class NinteiShinsakaiTaishoshaWariate {
     /**
      * 構成一覧から解除するボタン押下時の処理を表します。
      *
-     * @param panel NinteiShinsakaiTaishoshaWariateDiv
+     * @param panel ninteiShinsakaiTaishoshaWariateDiv
      * @param panel2 NinteiShinsakaiIchiranDiv
      * @return ResponseData
      */
@@ -143,14 +144,14 @@ public class NinteiShinsakaiTaishoshaWariate {
     private void setNinteiShinsakaiTaishoshaWariateData(
             NinteiShinsakaiTaishoshaWariateDiv panel, NinteiShinsakaiIchiranDiv panel2) {
 
-        List<HashMap> NinteiShinsakaiTaishoshaWariate = YamlLoader.FOR_DBE.loadAsList(
+        List<HashMap> ninteiShinsakaiTaishoshaWariate = YamlLoader.DBE.loadAsList(
                 new RString("dbe4060001/NinteiShinsakaiTaishoshaWariate.yml"));
-        HashMap hashMap = NinteiShinsakaiTaishoshaWariate.get(0);
-
-        String strKaisaiBasho = (String) hashMap.get("kaisaiBasho");
-        String strSaidaiTeiin = (String) hashMap.get("saidaiTeiin");
-        String strDummyKbn = (String) hashMap.get("dummyKbn");
-        String strKyukaiKbn = (String) hashMap.get("kyukaiKbn");
+        HashMap hashMap = ninteiShinsakaiTaishoshaWariate.get(0);
+        ControlGenerator cg = new ControlGenerator(hashMap);
+        RString strKaisaiBasho = cg.getAsRString("kaisaiBasho");
+        RString strSaidaiTeiin = cg.getAsRString("saidaiTeiin");
+        RString strDummyKbn = cg.getAsRString("dummyKbn");
+        RString strKyukaiKbn = cg.getAsRString("kyukaiKbn");
 
         //ヘッダー情報の設定
         panel.getNinteiShinsakaiJoho().getTxtKaisaikai().setValue(
@@ -165,8 +166,7 @@ public class NinteiShinsakaiTaishoshaWariate {
         panel.getNinteiShinsakaiJoho().getTxtGogitaiMeisho().setValue(
                 panel2.getDgNinteiShinsakaiIchiran().getActiveRow().getGogitaiMeisho());
 
-        panel.getNinteiShinsakaiJoho().getTxtKaisaiBasho().setValue(
-                new RString(strKaisaiBasho));
+        panel.getNinteiShinsakaiJoho().getTxtKaisaiBasho().setValue(strKaisaiBasho);
 
         panel.getNinteiShinsakaiJoho().getTxtKaishiYoteiJikan().setValue(
                 RTime.parse(panel2.getDgNinteiShinsakaiIchiran().getActiveRow().getKaishiJikan().toString()));
@@ -174,7 +174,7 @@ public class NinteiShinsakaiTaishoshaWariate {
         panel.getNinteiShinsakaiJoho().getTxtShuryoYoteiJikan().setValue(
                 RTime.parse(panel2.getDgNinteiShinsakaiIchiran().getActiveRow().getShuryoJikan().toString()));
 
-        panel.getNinteiShinsakaiJoho().getTxtSaidaiTeiin().setValue(new Decimal(strSaidaiTeiin));
+        panel.getNinteiShinsakaiJoho().getTxtSaidaiTeiin().setValue(new Decimal(strSaidaiTeiin.toString()));
 
         panel.getNinteiShinsakaiJoho().getTxtYoteiTeiin().setValue(
                 new Decimal(panel2.getDgNinteiShinsakaiIchiran().getActiveRow().getYoteiTeiin().toString()));
@@ -204,7 +204,7 @@ public class NinteiShinsakaiTaishoshaWariate {
     private void setTaishosha(NinteiShinsakaiTaishoshaWariateDiv panel, int iShoriKbn) {
 
         if (iShoriKbn == INIT) {
-            List<HashMap> taishoshaIchiranData = YamlLoader.FOR_DBE.loadAsList(
+            List<HashMap> taishoshaIchiranData = YamlLoader.DBE.loadAsList(
                     new RString("dbe4060001/TaishoshaIchiran.yml"));
 
             //割当済み対象者一覧の初期設定
@@ -473,7 +473,7 @@ public class NinteiShinsakaiTaishoshaWariate {
     private void setShinsain(NinteiShinsakaiTaishoshaWariateDiv panel, int iShoriKbn) {
 
         if (iShoriKbn == INIT) {
-            List<HashMap> shinsainIchiranData = YamlLoader.FOR_DBE.loadAsList(
+            List<HashMap> shinsainIchiranData = YamlLoader.DBE.loadAsList(
                     new RString("dbe4060001/ShinsainIchiran.yml"));
 
             //審査員構成一覧の初期設定

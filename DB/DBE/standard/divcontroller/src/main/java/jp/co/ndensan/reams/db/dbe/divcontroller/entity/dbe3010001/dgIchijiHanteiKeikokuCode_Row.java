@@ -1,9 +1,9 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe3010001;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jun 06 20:18:56 JST 2014 
+ * Wed Jun 11 08:34:17 JST 2014 
  */
 
 

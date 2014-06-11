@@ -59,7 +59,7 @@ public class ShujiiIkenshoImageTorikomi {
     private List createRowTorikomiKekkaData() {
 
         List arrayDataList = new ArrayList();
-        List<HashMap> TorikomiKekkaData = YamlLoader.FOR_DBE.loadAsList(new RString("dbe2070001/IkenshoOcrTorikomiIchiran.yml"));
+        List<HashMap> TorikomiKekkaData = YamlLoader.DBE.loadAsList(new RString("dbe2070001/IkenshoOcrTorikomiIchiran.yml"));
 
         strErrKensuu = (String) TorikomiKekkaData.get(0).get("errkensu");
         for (int i = 1; i < TorikomiKekkaData.size(); i++) {

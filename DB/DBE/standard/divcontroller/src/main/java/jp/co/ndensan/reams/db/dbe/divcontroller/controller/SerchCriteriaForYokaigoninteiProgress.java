@@ -30,7 +30,7 @@ public class SerchCriteriaForYokaigoninteiProgress {
     public ResponseData onLoad(SerchCriteriaForYokaigoninteiProgressDiv div) {
         ResponseData<SerchCriteriaForYokaigoninteiProgressDiv> response = new ResponseData<>();
 
-        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("DemoCity.yml"));
+        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("DemoCity.yml"));
         ControlGenerator cg = new ControlGenerator(targetSource.get(0));
         if (cg.getAsRString("保険者番号").equalsIgnoreCase(new RString("152264"))) {
             div.getDdlShichoson().setSelectedItem(new RString("2"));

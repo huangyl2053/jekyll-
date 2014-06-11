@@ -37,6 +37,9 @@ public class ChosaKekkaShosaiMain {
     private static final RString CST_STR4 = new RString("4");
     private static final RString CST_STR5 = new RString("5");
     private static final RString CST_STR6 = new RString("6");
+    private static final int BOTANSU_3 = 3;
+    private static final int BOTANSU_4 = 4;
+    private static final int BOTANSU_5 = 5;
 
     /**
      * 調査票取込み対象者一覧データグリッド上の対象者選択時の処理を表します。
@@ -111,7 +114,7 @@ public class ChosaKekkaShosaiMain {
      */
     private void setChosaKekkaShosaiData(ChosaKekkaShosaiMainDiv panel, int iSelectId) {
 
-        List<HashMap> chosaKekkaShosai = YamlLoader.FOR_DBE.loadAsList(new RString("dbe2060005/ChosaKekkaShosaiMain.yml"));
+        List<HashMap> chosaKekkaShosai = YamlLoader.DBE.loadAsList(new RString("dbe2060005/ChosaKekkaShosaiMain.yml"));
 
 //        HashMap hashMap = chosaKekkaShosai.get(iSelectId);
         ControlGenerator cg = new ControlGenerator(chosaKekkaShosai.get(iSelectId));
@@ -436,19 +439,19 @@ public class ChosaKekkaShosaiMain {
             KeyValueDataSource keyValue4 = new KeyValueDataSource();
             keyValue4.setKey(CST_STR4);
             keyValue4.setValue(s4);
-            arrayData.add(3, keyValue4);
+            arrayData.add(BOTANSU_3, keyValue4);
         }
         if (s5 != null) {
             KeyValueDataSource keyValue5 = new KeyValueDataSource();
             keyValue5.setKey(CST_STR5);
             keyValue5.setValue(s5);
-            arrayData.add(4, keyValue5);
+            arrayData.add(BOTANSU_4, keyValue5);
         }
         if (s6 != null) {
             KeyValueDataSource keyValue6 = new KeyValueDataSource();
             keyValue6.setKey(CST_STR6);
             keyValue6.setValue(s6);
-            arrayData.add(5, keyValue6);
+            arrayData.add(BOTANSU_5, keyValue6);
         }
 
         return arrayData;

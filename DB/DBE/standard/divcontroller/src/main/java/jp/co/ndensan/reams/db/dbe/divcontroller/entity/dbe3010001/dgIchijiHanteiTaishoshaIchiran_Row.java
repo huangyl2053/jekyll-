@@ -3,13 +3,14 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe3010001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed May 28 19:41:24 JST 2014 
+ * Tue Jun 10 20:31:04 JST 2014 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 
 /**
@@ -24,21 +25,21 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
     private RString hihokenNo;
     private RString hihokenshaName;
     private RString hihokenshaKana;
-    private RString shinseibi;
+    private TextBoxFlexibleDate shinseibi;
     private RString shinseiKbnShin;
-    private RString ichijiHanteiKanryobi;
-    private RString ichijiHanteibi;
+    private TextBoxFlexibleDate ichijiHanteiKanryobi;
+    private TextBoxFlexibleDate ichijiHanteibi;
     private RString ichijiHanteiKekka;
     private RString keikokuCode;
-    private RString chosaJissibi;
-    private RString ikenshoJuryobi;
+    private TextBoxFlexibleDate chosaJissibi;
+    private TextBoxFlexibleDate ikenshoJuryobi;
     private RString index;
 
     public dgIchijiHanteiTaishoshaIchiran_Row() {
         super();
     }
 
-    public dgIchijiHanteiTaishoshaIchiran_Row(RString hokensha, RString hihokenNo, RString hihokenshaName, RString hihokenshaKana, RString shinseibi, RString shinseiKbnShin, RString ichijiHanteiKanryobi, RString ichijiHanteibi, RString ichijiHanteiKekka, RString keikokuCode, RString chosaJissibi, RString ikenshoJuryobi, RString index) {
+    public dgIchijiHanteiTaishoshaIchiran_Row(RString hokensha, RString hihokenNo, RString hihokenshaName, RString hihokenshaKana, TextBoxFlexibleDate shinseibi, RString shinseiKbnShin, TextBoxFlexibleDate ichijiHanteiKanryobi, TextBoxFlexibleDate ichijiHanteibi, RString ichijiHanteiKekka, RString keikokuCode, TextBoxFlexibleDate chosaJissibi, TextBoxFlexibleDate ikenshoJuryobi, RString index) {
         super();
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("hihokenNo", hihokenNo);
@@ -84,7 +85,7 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
         return hihokenshaKana;
     }
 
-    public RString getShinseibi() {
+    public TextBoxFlexibleDate getShinseibi() {
         return shinseibi;
     }
 
@@ -92,11 +93,11 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
         return shinseiKbnShin;
     }
 
-    public RString getIchijiHanteiKanryobi() {
+    public TextBoxFlexibleDate getIchijiHanteiKanryobi() {
         return ichijiHanteiKanryobi;
     }
 
-    public RString getIchijiHanteibi() {
+    public TextBoxFlexibleDate getIchijiHanteibi() {
         return ichijiHanteibi;
     }
 
@@ -108,11 +109,11 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
         return keikokuCode;
     }
 
-    public RString getChosaJissibi() {
+    public TextBoxFlexibleDate getChosaJissibi() {
         return chosaJissibi;
     }
 
-    public RString getIkenshoJuryobi() {
+    public TextBoxFlexibleDate getIkenshoJuryobi() {
         return ikenshoJuryobi;
     }
 
@@ -140,7 +141,7 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
         this.hihokenshaKana = hihokenshaKana;
     }
 
-    public void setShinseibi(RString shinseibi) {
+    public void setShinseibi(TextBoxFlexibleDate shinseibi) {
         this.setOriginalData("shinseibi", shinseibi);
         this.shinseibi = shinseibi;
     }
@@ -150,12 +151,12 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
         this.shinseiKbnShin = shinseiKbnShin;
     }
 
-    public void setIchijiHanteiKanryobi(RString ichijiHanteiKanryobi) {
+    public void setIchijiHanteiKanryobi(TextBoxFlexibleDate ichijiHanteiKanryobi) {
         this.setOriginalData("ichijiHanteiKanryobi", ichijiHanteiKanryobi);
         this.ichijiHanteiKanryobi = ichijiHanteiKanryobi;
     }
 
-    public void setIchijiHanteibi(RString ichijiHanteibi) {
+    public void setIchijiHanteibi(TextBoxFlexibleDate ichijiHanteibi) {
         this.setOriginalData("ichijiHanteibi", ichijiHanteibi);
         this.ichijiHanteibi = ichijiHanteibi;
     }
@@ -170,12 +171,12 @@ public class dgIchijiHanteiTaishoshaIchiran_Row extends DataRow {
         this.keikokuCode = keikokuCode;
     }
 
-    public void setChosaJissibi(RString chosaJissibi) {
+    public void setChosaJissibi(TextBoxFlexibleDate chosaJissibi) {
         this.setOriginalData("chosaJissibi", chosaJissibi);
         this.chosaJissibi = chosaJissibi;
     }
 
-    public void setIkenshoJuryobi(RString ikenshoJuryobi) {
+    public void setIkenshoJuryobi(TextBoxFlexibleDate ikenshoJuryobi) {
         this.setOriginalData("ikenshoJuryobi", ikenshoJuryobi);
         this.ikenshoJuryobi = ikenshoJuryobi;
     }

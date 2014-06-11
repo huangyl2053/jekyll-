@@ -39,7 +39,7 @@ module DBE {
     {
      "fieldName": "txtIchijiHanteibi",
      "items": [],
-     "controlType": "TextBoxDate",
+     "controlType": "TextBoxFlexibleDate",
      "width": "80",
      "visible": true,
      "displayNone": false,
@@ -72,8 +72,7 @@ module DBE {
      "labelRAlign": 0,
      "ymdKubun": 2,
      "displayFormat": 0,
-     "value": "",
-     "textKind": 0
+     "value": ""
     },
     {
      "fieldName": "txtIchijiHanteiKekka",
