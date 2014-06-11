@@ -53,6 +53,7 @@ module DBZ {
      "authorityMode": 0,
      "marginLeft": "0",
      "marginRight": 0,
+     "selectControlID": "HihokenshaFinder",
      "relation": [],
      "businessId": "DBZ",
      "controlName": "HihokenshaFinder",
@@ -62,210 +63,219 @@ module DBZ {
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
-     "onClickBtnToSearch": "",
+     "onClickBtnToSearch": "onClickBtnToSearch_HihokenshaFinder",
      "onClickBtnToClear": ""
     },
     {
-     "fieldName": "SearchResultOfHihokensha",
+     "fieldName": "lblSearchResultOfHihokensha",
      "items": [],
-     "controlType": "CommonChildDiv",
-     "width": "XS",
+     "controlType": "Label",
+     "width": "180",
      "visible": true,
      "displayNone": false,
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": false,
+     "wrap": true,
      "dependencies": [],
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": 0,
-     "marginRight": 0,
-     "relation": [],
-     "businessId": "DBZ",
-     "controlName": "SearchResultOfHihokensha",
-     "marginTop": 0,
-     "marginBottom": 0,
-     "originalProperty": [],
-     "dataPassingForDialog": [],
-     "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "onClickBtnToResearch": "",
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "lblSearchResultOfHihokensha",
+     "required": false,
+     "align": 2,
+     "text": "被保険者検索該当者一覧",
+     "isPrivateInfo": false
+    },
+    {
+     "fieldName": "dgSearchResultOfHihokensha",
+     "items": [],
+     "controlType": "DataGrid",
+     "width": "1030",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "dgSearchResultOfHihokensha",
+     "dataSource": [],
      "gridSetting": {
-      "rowHeight": 50,
+      "rowHeight": 25,
       "isMultiSelectable": false,
+      "isShowHeader": true,
       "isShowFooter": true,
       "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": false,
+      "isShowSelectButtonColumn": false,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
       "header": {
        "combineColumns": [],
-       "frozenColumn": ""
+       "frozenColumn": "",
+       "headerHeight": 0
       },
       "columns": [
        {
-        "columnName": "",
+        "columnName": "選択",
         "dataName": "btnToDecide",
-        "width": 50,
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 40,
         "visible": true,
         "cellType": 8,
         "cellDetails": {
          "cellType": 8,
-         "text": "確定",
-         "onClick": "",
-         "imageFileUrl": ""
+         "text": "",
+         "onClick": "onClick_btnToDecide",
+         "imageFileUrl": "/uz/uza/css/images/finger.png",
+         "imageWidth": "20",
+         "imageHeight": "20"
         },
-        "align": 0,
+        "align": 1,
         "resize": false,
         "isPrivateInfo": false,
-        "sortKey": "btnToDecide"
+        "sortKey": ""
        },
        {
         "columnName": "被保番号",
         "dataName": "hihokenshaNo",
-        "width": 110,
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
          "cellType": 0
         },
-        "align": 0,
+        "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "hihokenshaNo"
+        "sortKey": ""
        },
        {
         "columnName": "識別コード",
         "dataName": "shikibetsuCode",
-        "width": 110,
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 120,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
          "cellType": 0
         },
-        "align": 0,
+        "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "shikibetsuCode"
+        "sortKey": ""
        },
        {
         "columnName": "被保険者区分",
         "dataName": "hihokenshaKubun",
-        "width": 110,
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 100,
         "visible": true,
         "cellType": 0,
-        "cellDetails": null,
+        "cellDetails": {
+         "cellType": 0
+        },
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "hihokenshaKubun"
+        "sortKey": ""
        },
        {
         "columnName": "氏名",
         "dataName": "shimei",
-        "width": 150,
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 180,
         "visible": false,
         "cellType": 0,
         "cellDetails": {
          "cellType": 0
         },
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "shimei"
+        "sortKey": ""
        },
        {
         "columnName": "カナ氏名",
         "dataName": "kanaShimsei",
-        "width": 150,
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 100,
         "visible": false,
         "cellType": 0,
         "cellDetails": null,
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "kanaShimsei"
+        "sortKey": ""
        },
        {
         "columnName": "氏名",
         "dataName": "shimeiAndKanaShimsei",
-        "width": 150,
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 250,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "kanaShimsei"
+        "sortKey": ""
        },
        {
         "columnName": "性別",
         "dataName": "gender",
-        "width": 50,
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 40,
         "visible": true,
         "cellType": 0,
-        "cellDetails": {
-         "cellType": 0
-        },
+        "cellDetails": null,
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "gender"
+        "sortKey": ""
        },
        {
         "columnName": "生年月日",
         "dataName": "birthDay",
-        "width": 110,
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
         "visible": true,
         "cellType": 6,
         "cellDetails": {
          "cellType": 6,
          "ymdKubun": 2,
-         "displayFormat": 3
+         "displayFormat": 0,
+         "onChange": ""
         },
-        "align": 0,
+        "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "birthDay"
+        "sortKey": ""
        },
        {
         "columnName": "郵便番号",
         "dataName": "yubinNo",
-        "width": 110,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "yubinNo"
-       },
-       {
-        "columnName": "住所",
-        "dataName": "jusho",
-        "width": 300,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "jusho"
-       },
-       {
-        "columnName": "個人番号",
-        "dataName": "kojinNo",
-        "width": 120,
-        "visible": false,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 0,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "kojinNo"
-       },
-       {
-        "columnName": "住民種別",
-        "dataName": "juminShubetsu",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 100,
         "visible": true,
         "cellType": 0,
@@ -273,26 +283,110 @@ module DBZ {
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "juminShubetsu"
+        "sortKey": ""
        },
        {
-        "columnName": "世帯コード",
-        "dataName": "setaiCode",
-        "width": 110,
+        "columnName": "住所",
+        "dataName": "jusho",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 250,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "setaiCode"
+        "sortKey": ""
+       },
+       {
+        "columnName": "個人番号",
+        "dataName": "kojinNo",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 100,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       },
+       {
+        "columnName": "住民種別",
+        "dataName": "juminShubetsu",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       },
+       {
+        "columnName": "世帯コード",
+        "dataName": "setaiCode",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": ""
        }
       ]
-     }
+     },
+     "height": "S",
+     "onSort": "",
+     "onSelect": "",
+     "onSelectByDblClick": "",
+     "onSelectBySelectButton": "",
+     "onSelectByModifyButton": "",
+     "onSelectByDeleteButton": "",
+     "onOnlyRow": "",
+     "onNoRow": "",
+     "onMultiRows": "",
+     "sortOrder": "defaultDataName3",
+     "isAscending": true,
+     "filterList": [],
+     "activeRowId": -1
+    },
+    {
+     "fieldName": "btnReturn",
+     "items": [],
+     "controlType": "Button",
+     "width": "210",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnReturn",
+     "text": "被保険者入力ガイドを閉じる",
+     "onClick": "onClick_btnReturn",
+     "icon": 0,
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
     }
    ],
    "controlType": "Panel",
-   "width": "1000",
+   "width": "1050",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -303,10 +397,11 @@ module DBZ {
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
+   "marginLeft": "0",
+   "marginRight": "0",
+   "selectControlID": "HihokenshaInputGuide",
    "onLoad": "",
-   "title": "被保険者入力補助",
+   "title": "被保険者入力補助ガイド",
    "marginTop": "Default",
    "marginBottom": "Default",
    "isOpen": true,
@@ -316,8 +411,30 @@ module DBZ {
      "postParameterPanelNames": "HihokenshaInputGuide"
     }
    ],
-   "requestSettings": [],
-   "hiddenInput": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClickBtnToSearch_HihokenshaFinder",
+     "requestUrl": "dbz/db/dbz/HihokenshaInputGuide/onClickBtnToSearch_HihokenshaFinder"
+    },
+    {
+     "eventName": "onClick_btnToDecide",
+     "requestUrl": "dbz/db/dbz/HihokenshaInputGuide/onClick_btnToDecide"
+    }
+   ],
+   "hiddenInput": [
+    {
+     "propertyName": "hihokenshaNo",
+     "value": ""
+    },
+    {
+     "propertyName": "hihokenshaMeisho",
+     "value": ""
+    }
+   ],
    "onOpen": "",
    "onClose": "",
    "session": {},
@@ -327,7 +444,9 @@ module DBZ {
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false
   }
  ],
  "controlType": "CommonChildDiv",
@@ -344,15 +463,25 @@ module DBZ {
  "authorityMode": 0,
  "marginLeft": 0,
  "marginRight": 0,
+ "selectControlID": "defaultLayout",
  "relation": [],
  "businessId": "DBZ",
  "controlName": "HihokenshaInputGuide",
  "marginTop": 0,
  "marginBottom": 0,
  "originalProperty": [],
- "dataPassingForDialog": [],
- "dialogOkEventNameForDialog": "",
- "dialogCancelEventNameForDialog": ""
+ "dataPassingForDialog": [
+  {
+   "key": "hihokenshaNo",
+   "controlName": "HihokenshaInputGuide.hihokenshaNo"
+  },
+  {
+   "key": "hihokenshaMeisho",
+   "controlName": "HihokenshaInputGuide.hihokenshaMeisho"
+  }
+ ],
+ "dialogOkEventNameForDialog": "onClick_btnToDecide",
+ "dialogCancelEventNameForDialog": "onClick_btnReturn"
 }        
     }
 }
