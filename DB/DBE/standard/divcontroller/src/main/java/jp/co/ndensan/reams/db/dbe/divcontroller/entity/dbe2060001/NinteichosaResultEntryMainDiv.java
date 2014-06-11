@@ -5,8 +5,10 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.ButtonsForNinteichosaResultEntryDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.HihokenshaForNinteichosaResultDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.NinteichosaDetailDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.ShisakaiWaritsukeKiboDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.tabNinteichosaResultDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -26,8 +28,12 @@ public class NinteichosaResultEntryMainDiv extends Panel {
     private HihokenshaForNinteichosaResultDiv HihokenshaForNinteichosaResult;
     @JsonProperty("NinteichosaDetail")
     private NinteichosaDetailDiv NinteichosaDetail;
+    @JsonProperty("ShisakaiWaritsukeKibo")
+    private ShisakaiWaritsukeKiboDiv ShisakaiWaritsukeKibo;
     @JsonProperty("tabNinteichosaResult")
     private tabNinteichosaResultDiv tabNinteichosaResult;
+    @JsonProperty("ButtonsForNinteichosaResultEntry")
+    private ButtonsForNinteichosaResultEntryDiv ButtonsForNinteichosaResultEntry;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -55,6 +61,16 @@ public class NinteichosaResultEntryMainDiv extends Panel {
         this.NinteichosaDetail=NinteichosaDetail;
     }
 
+    @JsonProperty("ShisakaiWaritsukeKibo")
+    public ShisakaiWaritsukeKiboDiv getShisakaiWaritsukeKibo() {
+        return ShisakaiWaritsukeKibo;
+    }
+
+    @JsonProperty("ShisakaiWaritsukeKibo")
+    public void setShisakaiWaritsukeKibo(ShisakaiWaritsukeKiboDiv ShisakaiWaritsukeKibo) {
+        this.ShisakaiWaritsukeKibo=ShisakaiWaritsukeKibo;
+    }
+
     @JsonProperty("tabNinteichosaResult")
     public tabNinteichosaResultDiv getTabNinteichosaResult() {
         return tabNinteichosaResult;
@@ -63,6 +79,16 @@ public class NinteichosaResultEntryMainDiv extends Panel {
     @JsonProperty("tabNinteichosaResult")
     public void setTabNinteichosaResult(tabNinteichosaResultDiv tabNinteichosaResult) {
         this.tabNinteichosaResult=tabNinteichosaResult;
+    }
+
+    @JsonProperty("ButtonsForNinteichosaResultEntry")
+    public ButtonsForNinteichosaResultEntryDiv getButtonsForNinteichosaResultEntry() {
+        return ButtonsForNinteichosaResultEntry;
+    }
+
+    @JsonProperty("ButtonsForNinteichosaResultEntry")
+    public void setButtonsForNinteichosaResultEntry(ButtonsForNinteichosaResultEntryDiv ButtonsForNinteichosaResultEntry) {
+        this.ButtonsForNinteichosaResultEntry=ButtonsForNinteichosaResultEntry;
     }
 
 }

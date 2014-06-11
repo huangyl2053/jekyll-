@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.ButtonsForNinteichosaResultEntryTargetDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.dgNinteichosaResultTaishosha_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -24,6 +25,8 @@ public class NinteichosaResultEntryTargetDiv extends Panel {
      */
     @JsonProperty("dgNinteichosaResultTaishosha")
     private DataGrid<dgNinteichosaResultTaishosha_Row> dgNinteichosaResultTaishosha;
+    @JsonProperty("ButtonsForNinteichosaResultEntryTarget")
+    private ButtonsForNinteichosaResultEntryTargetDiv ButtonsForNinteichosaResultEntryTarget;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -39,6 +42,16 @@ public class NinteichosaResultEntryTargetDiv extends Panel {
     @JsonProperty("dgNinteichosaResultTaishosha")
     public void setDgNinteichosaResultTaishosha(DataGrid<dgNinteichosaResultTaishosha_Row> dgNinteichosaResultTaishosha) {
         this.dgNinteichosaResultTaishosha=dgNinteichosaResultTaishosha;
+    }
+
+    @JsonProperty("ButtonsForNinteichosaResultEntryTarget")
+    public ButtonsForNinteichosaResultEntryTargetDiv getButtonsForNinteichosaResultEntryTarget() {
+        return ButtonsForNinteichosaResultEntryTarget;
+    }
+
+    @JsonProperty("ButtonsForNinteichosaResultEntryTarget")
+    public void setButtonsForNinteichosaResultEntryTarget(ButtonsForNinteichosaResultEntryTargetDiv ButtonsForNinteichosaResultEntryTarget) {
+        this.ButtonsForNinteichosaResultEntryTarget=ButtonsForNinteichosaResultEntryTarget;
     }
 
 }

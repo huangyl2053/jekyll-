@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShinsakaiIinListDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgShinsakaiIinList_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShinsakaiIinList.ShinsakaiIinListDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShinsakaiIinList.dgShinsakaiIinChildList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.DataGridUtil;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 
 /**
- * ShinsakaiIinListDivを操作します。
+ * ShinsakaiIinListDivを操作します。 (共有子Div DBE.ShinsakaiIinList)
  *
  * @author N3327 三浦 凌
  */
@@ -45,22 +45,22 @@ public class ShinsakaiIinList {
      * @param div ShinsakaiIinListDiv
      */
     public static void init(ShinsakaiIinListDiv div) {
-        div.getDgShinsakaiIinList().setDataSource(getListOfShinsakaiIin());
+        div.getDgShinsakaiIinChildList().setDataSource(getListOfShinsakaiIin());
     }
 
-    private static List<dgShinsakaiIinList_Row> getListOfShinsakaiIin() {
-        List<dgShinsakaiIinList_Row> list = new ArrayList<>();
-        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("ShinsakaiIinList.yml"));
+    private static List<dgShinsakaiIinChildList_Row> getListOfShinsakaiIin() {
+        List<dgShinsakaiIinChildList_Row> list = new ArrayList<>();
+        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("ShinsakaiIinList/ShinsakaiIinList.yml"));
         for (Map info : targetSource) {
-            list.add(toDgShinsakaiIinList_Row(info));
+            list.add(toDgShinsakaiIinChildList_Row(info));
         }
         return list;
     }
 
-    private static dgShinsakaiIinList_Row toDgShinsakaiIinList_Row(Map map) {
+    private static dgShinsakaiIinChildList_Row toDgShinsakaiIinChildList_Row(Map map) {
         RString shimei = _toRString(map.get("氏名"));
         RString kanaShimei = _toRString(map.get("カナ氏名"));
-        dgShinsakaiIinList_Row row = new dgShinsakaiIinList_Row(
+        dgShinsakaiIinChildList_Row row = new dgShinsakaiIinChildList_Row(
                 new Button(),
                 _toRString(map.get("審査会委員番号")),
                 shimei,

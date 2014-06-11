@@ -173,6 +173,7 @@ var DBE;
                     "authorityMode": 0,
                     "marginLeft": "XS",
                     "marginRight": "XS",
+                    "selectControlID": "dgShozokuChosainList",
                     "gridSetting": {
                         "rowHeight": 25,
                         "isMultiSelectable": false,
@@ -315,6 +316,7 @@ var DBE;
             "authorityMode": 0,
             "marginLeft": "XS",
             "marginRight": "XS",
+            "selectControlID": "defaultLayout",
             "relation": [],
             "businessId": "DBE",
             "controlName": "ShozokuChosainListCom",

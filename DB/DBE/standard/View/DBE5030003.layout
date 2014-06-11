@@ -24,6 +24,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "lblKaisaiDate",
        "required": false,
        "align": 2,
        "text": "開催日",
@@ -46,12 +47,12 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtKaisaiDate_core",
        "required": false,
        "text": "",
        "isPrivateInfo": false,
        "readOnly": false,
        "placeHolder": "",
-       "textKind": 0,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
@@ -84,6 +85,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "lblAfterThis",
        "required": false,
        "align": 2,
        "text": "以降",
@@ -104,6 +106,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "ShinsakaiExtractionCondition",
      "onLoad": "",
      "title": "抽出条件",
      "isOpen": true,
@@ -126,7 +129,8 @@
      "eraseBorderLeft": false,
      "backgroundColor": 0,
      "widthAuto": false,
-     "isGroupBox": true
+     "panelDisplay": 1,
+     "isGroupBox": false
     },
     {
      "fieldName": "SearchButtonsForShinsakaiExtraction",
@@ -148,12 +152,14 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "btnToClearConditon",
        "text": "条件をクリアする",
        "onClick": "",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
-       "imageHeight": ""
+       "imageHeight": "",
+       "icon": 0
       },
       {
        "fieldName": "btnToExtract",
@@ -172,12 +178,14 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "btnToExtract",
        "text": "抽出する",
        "onClick": "onClick_btnToExtract",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
-       "imageHeight": ""
+       "imageHeight": "",
+       "icon": 0
       }
      ],
      "controlType": "Panel",
@@ -194,6 +202,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "SearchButtonsForShinsakaiExtraction",
      "onLoad": "",
      "title": "",
      "isOpen": true,
@@ -216,6 +225,7 @@
      "eraseBorderLeft": true,
      "backgroundColor": 0,
      "widthAuto": false,
+     "panelDisplay": 0,
      "isGroupBox": false
     },
     {
@@ -235,6 +245,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "dgShinsakaiList",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -422,6 +433,7 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "HanteiResultsOutputTargetShinsakaiList",
    "onLoad": "",
    "title": "認定審査会一覧",
    "isOpen": true,
@@ -453,6 +465,7 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
+   "panelDisplay": 0,
    "isGroupBox": false
   },
   {
@@ -475,6 +488,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "dgShinsakaiTargetPersons",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -871,12 +885,14 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "btnToPublish",
        "text": "出力",
        "onClick": "",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
-       "imageHeight": ""
+       "imageHeight": "",
+       "icon": 0
       },
       {
        "fieldName": "btnToReturnShinsakaiList",
@@ -895,12 +911,14 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "btnToReturnShinsakaiList",
        "text": "審査会一覧に戻る",
        "onClick": "",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
-       "imageHeight": ""
+       "imageHeight": "",
+       "icon": 0
       }
      ],
      "controlType": "Panel",
@@ -917,6 +935,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "PublishingShinsakaiResults",
      "onLoad": "",
      "title": "",
      "isOpen": true,
@@ -939,6 +958,7 @@
      "eraseBorderLeft": true,
      "backgroundColor": 0,
      "widthAuto": false,
+     "panelDisplay": 0,
      "isGroupBox": false
     }
    ],
@@ -956,6 +976,7 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "HanteiResultsOutputTargetPersons",
    "onLoad": "",
    "title": "介護認定審査会対象者一覧",
    "isOpen": true,
@@ -983,6 +1004,7 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
+   "panelDisplay": 0,
    "isGroupBox": false
   }
  ],
@@ -1000,6 +1022,7 @@
  "authorityMode": 0,
  "marginLeft": "XS",
  "marginRight": "XS",
+ "selectControlID": "Page",
  "onLoad": "",
  "title": "判定結果一覧出力",
  "jsPathCollection": [],
