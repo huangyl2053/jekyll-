@@ -19,9 +19,11 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": 0,
-     "marginRight": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
      "selectControlID": "KashitsukeHenkanListInfo",
+     "helpMessageID": "",
+     "jpControlName": "",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
@@ -35,10 +37,16 @@
      "ListGridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
+      "isShowHeader": true,
       "isShowFooter": true,
       "isShowFilter": true,
       "isShowFilterButton": true,
       "isShowRowState": false,
+      "isShowSelectButtonColumn": true,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
       "header": {
        "combineColumns": [],
        "frozenColumn": "",
@@ -51,7 +59,7 @@
         "toolTip": "",
         "bgColor": 0,
         "width": 35,
-        "visible": true,
+        "visible": false,
         "cellType": 8,
         "cellDetails": {
          "cellType": 8,
@@ -213,7 +221,10 @@
         "width": 120,
         "visible": true,
         "cellType": 0,
-        "cellDetails": null,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 2,
         "resize": true,
         "isPrivateInfo": false,
@@ -227,7 +238,10 @@
         "width": 100,
         "visible": true,
         "cellType": 0,
-        "cellDetails": null,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
         "align": 2,
         "resize": true,
         "isPrivateInfo": false,
@@ -294,7 +308,10 @@
      "ListHeight": "509",
      "ListOnSelect": "",
      "ListOnSelectByDblClick": "",
-     "onClickAddButton": ""
+     "onClickAddButton": "",
+     "ListOnSelectBySelectButton": "onSelectedHenkanList",
+     "ListOnSelectByModifyButton": "",
+     "ListOnSelectByDeleteButton": ""
     }
    ],
    "controlType": "Panel",
@@ -312,6 +329,8 @@
    "marginLeft": "0",
    "marginRight": "XS",
    "selectControlID": "KashitsukeHenkanList",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "給付費貸付金一覧",
    "isOpen": true,
@@ -340,7 +359,9 @@
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
-   "isGroupBox": false
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
   },
   {
    "fieldName": "KashitsukeHenkanKihon",
@@ -363,10 +384,13 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "lblKashitsukeHenkanKihon1",
+     "helpMessageID": "",
+     "jpControlName": "",
      "text": "<<基本情報１>>",
      "required": false,
      "align": 0,
-     "isPrivateInfo": false
+     "isPrivateInfo": false,
+     "decorationClass": ""
     },
     {
      "fieldName": "lblKashitsukeHenkanKihon2",
@@ -386,10 +410,13 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "lblKashitsukeHenkanKihon2",
+     "helpMessageID": "",
+     "jpControlName": "",
      "text": "<<基本情報２>>",
      "required": false,
      "align": 0,
-     "isPrivateInfo": false
+     "isPrivateInfo": false,
+     "decorationClass": ""
     },
     {
      "fieldName": "lblKashitsukeHenkanKihon3",
@@ -409,14 +436,17 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "lblKashitsukeHenkanKihon3",
+     "helpMessageID": "",
+     "jpControlName": "",
      "text": "<<基本情報３>>",
      "required": false,
      "align": 0,
-     "isPrivateInfo": false
+     "isPrivateInfo": false,
+     "decorationClass": ""
     }
    ],
    "controlType": "Panel",
-   "width": "1000",
+   "width": "1030",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -430,6 +460,8 @@
    "marginLeft": "0",
    "marginRight": "XS",
    "selectControlID": "KashitsukeHenkanKihon",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "",
    "isOpen": true,
@@ -453,7 +485,9 @@
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
-   "isGroupBox": false
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
   },
   {
    "fieldName": "KashitsukekinKaigoKihon",
@@ -476,10 +510,13 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "lblKashitsukeHenkanKaigoKihon1",
+     "helpMessageID": "",
+     "jpControlName": "",
      "text": "<<介護基本情報１>>",
      "required": false,
      "align": 0,
-     "isPrivateInfo": false
+     "isPrivateInfo": false,
+     "decorationClass": ""
     },
     {
      "fieldName": "lblKashitsukeHenkanKaigoKihon2",
@@ -499,14 +536,17 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "lblKashitsukeHenkanKaigoKihon2",
+     "helpMessageID": "",
+     "jpControlName": "",
      "text": "<<介護基本情報２>>",
      "required": false,
      "align": 0,
-     "isPrivateInfo": false
+     "isPrivateInfo": false,
+     "decorationClass": ""
     }
    ],
    "controlType": "Panel",
-   "width": "1000",
+   "width": "1030",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -520,6 +560,8 @@
    "marginLeft": "0",
    "marginRight": "XS",
    "selectControlID": "KashitsukekinKaigoKihon",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "",
    "isOpen": true,
@@ -543,7 +585,9 @@
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
-   "isGroupBox": false
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
   },
   {
    "fieldName": "KashitsukeHenkanInfo",
@@ -566,10 +610,12 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtShinseiYMD_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": true,
      "text": "",
      "required": false,
      "isPrivateInfo": false,
-     "readOnly": true,
      "placeHolder": "",
      "isPassword": false,
      "onFocus": "",
@@ -606,8 +652,10 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtRiyoKikan_core",
-     "isPrivateInfo": false,
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": true,
+     "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
@@ -651,10 +699,13 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtSeikyugaku_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": true,
      "text": "",
      "required": false,
      "isPrivateInfo": false,
-     "readOnly": true,
+     "decorationClass": "",
      "placeHolder": "",
      "isPassword": false,
      "onFocus": "",
@@ -699,10 +750,13 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtShinseiKingaku_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": true,
      "text": "",
      "required": false,
      "isPrivateInfo": false,
-     "readOnly": true,
+     "decorationClass": "",
      "placeHolder": "",
      "isPassword": false,
      "onFocus": "",
@@ -747,10 +801,13 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtService1_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": true,
      "text": "",
      "required": false,
      "isPrivateInfo": false,
-     "readOnly": true,
+     "decorationClass": "",
      "placeHolder": "",
      "isPassword": false,
      "onFocus": "",
@@ -790,10 +847,13 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtService2_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": true,
      "text": "",
      "required": false,
      "isPrivateInfo": false,
-     "readOnly": true,
+     "decorationClass": "",
      "placeHolder": "",
      "isPassword": false,
      "onFocus": "",
@@ -833,10 +893,13 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtService3_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": true,
      "text": "",
      "required": false,
      "isPrivateInfo": false,
-     "readOnly": true,
+     "decorationClass": "",
      "placeHolder": "",
      "isPassword": false,
      "onFocus": "",
@@ -876,10 +939,13 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtService4_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": true,
      "text": "",
      "required": false,
      "isPrivateInfo": false,
-     "readOnly": true,
+     "decorationClass": "",
      "placeHolder": "",
      "isPassword": false,
      "onFocus": "",
@@ -919,10 +985,12 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtKetteiYMD_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": true,
      "text": "",
      "required": false,
      "isPrivateInfo": false,
-     "readOnly": true,
      "placeHolder": "",
      "isPassword": false,
      "onFocus": "",
@@ -958,10 +1026,13 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtShoninKubun_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": true,
      "text": "",
      "required": false,
      "isPrivateInfo": false,
-     "readOnly": true,
+     "decorationClass": "",
      "placeHolder": "",
      "isPassword": false,
      "onFocus": "",
@@ -1001,10 +1072,12 @@
      "marginLeft": "0",
      "marginRight": "XS",
      "selectControlID": "txtKariukeYMD_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": true,
      "text": "",
      "required": false,
      "isPrivateInfo": false,
-     "readOnly": true,
      "placeHolder": "",
      "isPassword": false,
      "onFocus": "",
@@ -1040,10 +1113,12 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtEnchoShinseiYMD_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": true,
      "text": "",
      "required": false,
      "isPrivateInfo": false,
-     "readOnly": true,
      "placeHolder": "",
      "isPassword": false,
      "onFocus": "",
@@ -1079,8 +1154,10 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtEnchoKikan_core",
-     "isPrivateInfo": false,
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": true,
+     "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
@@ -1124,10 +1201,13 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtMishokanKingaku_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": true,
      "text": "",
      "required": false,
      "isPrivateInfo": false,
-     "readOnly": true,
+     "decorationClass": "",
      "placeHolder": "",
      "isPassword": false,
      "onFocus": "",
@@ -1158,7 +1238,7 @@
      "fieldName": "btnKashitsukeInfo",
      "items": [],
      "controlType": "ButtonDialog",
-     "width": "200",
+     "width": "220",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1172,6 +1252,8 @@
      "marginLeft": "3",
      "marginRight": "XS",
      "selectControlID": "btnKashitsukeInfo",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onClick": "",
      "text": "貸付金の詳細情報を表示する",
      "appearance": 0,
@@ -1206,10 +1288,13 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtEntaiNissu_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
        "text": "",
        "required": false,
        "isPrivateInfo": false,
-       "readOnly": false,
+       "decorationClass": "",
        "placeHolder": "",
        "isPassword": false,
        "onFocus": "",
@@ -1254,10 +1339,13 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtRisokugaku_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
        "text": "",
        "required": false,
        "isPrivateInfo": false,
-       "readOnly": false,
+       "decorationClass": "",
        "placeHolder": "",
        "isPassword": false,
        "onFocus": "",
@@ -1286,7 +1374,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "190",
+     "width": "200",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1300,6 +1388,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "KashitsukeHenkanKeisan",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onLoad": "",
      "title": "延滞利息計算情報 ",
      "isOpen": true,
@@ -1323,7 +1413,9 @@
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 1,
-     "isGroupBox": false
+     "isGroupBox": false,
+     "readOnly": false,
+     "height": "Auto"
     },
     {
      "fieldName": "KashitsukeHenkanRisoku",
@@ -1346,10 +1438,12 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtRisokuChoshuYMD_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
        "text": "",
        "required": false,
        "isPrivateInfo": false,
-       "readOnly": false,
        "placeHolder": "",
        "isPassword": false,
        "onFocus": "",
@@ -1386,10 +1480,13 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtRisokuChoshugaku_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
        "text": "",
        "required": false,
        "isPrivateInfo": false,
-       "readOnly": false,
+       "decorationClass": "",
        "placeHolder": "",
        "isPassword": false,
        "onFocus": "",
@@ -1418,7 +1515,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "190",
+     "width": "210",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1432,6 +1529,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "KashitsukeHenkanRisoku",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onLoad": "",
      "title": "延滞利息金徴収情報 ",
      "isOpen": true,
@@ -1455,7 +1554,9 @@
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 1,
-     "isGroupBox": false
+     "isGroupBox": false,
+     "readOnly": false,
+     "height": "Auto"
     },
     {
      "fieldName": "KashitsukeHenkanChoshu",
@@ -1478,7 +1579,10 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "radChoshuHoho_core",
+       "helpMessageID": "",
+       "jpControlName": "",
        "onClick": "",
+       "icon": [],
        "dataSource": [
         {
          "key": "key0",
@@ -1496,7 +1600,8 @@
        "labelLAlign": 2,
        "selectedItem": "key0",
        "newLineItemNumber": 2,
-       "spaceSize": "S"
+       "spaceSize": "S",
+       "disabledItem": []
       },
       {
        "fieldName": "txtHenkanChoshuYMD",
@@ -1516,10 +1621,12 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtHenkanChoshuYMD_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
        "text": "",
        "required": false,
        "isPrivateInfo": false,
-       "readOnly": false,
        "placeHolder": "",
        "isPassword": false,
        "onFocus": "",
@@ -1556,7 +1663,10 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "radKafusokuKekka_core",
+       "helpMessageID": "",
+       "jpControlName": "",
        "onClick": "",
+       "icon": [],
        "dataSource": [
         {
          "key": "key0",
@@ -1578,7 +1688,8 @@
        "labelLAlign": 2,
        "selectedItem": "key0",
        "newLineItemNumber": 3,
-       "spaceSize": "S"
+       "spaceSize": "S",
+       "disabledItem": []
       },
       {
        "fieldName": "txtHenkanChoshugaku",
@@ -1598,10 +1709,13 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtHenkanChoshugaku_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
        "text": "",
        "required": false,
        "isPrivateInfo": false,
-       "readOnly": false,
+       "decorationClass": "",
        "placeHolder": "",
        "isPassword": false,
        "onFocus": "",
@@ -1644,6 +1758,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "KashitsukeHenkanChoshu",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onLoad": "",
      "title": "貸付金返還徴収情報",
      "isOpen": true,
@@ -1667,7 +1783,9 @@
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 1,
-     "isGroupBox": false
+     "isGroupBox": false,
+     "readOnly": false,
+     "height": "Auto"
     },
     {
      "fieldName": "KashitsukeHenkanTsuchisho",
@@ -1687,9 +1805,11 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "KashitsukeHenkanTsuchishoPrintSetting",
+       "helpMessageID": "",
+       "jpControlName": "",
        "relation": [],
        "marginTop": 0,
        "marginBottom": 0,
@@ -1728,10 +1848,12 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtNofuKigen_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
        "text": "",
        "required": false,
        "isPrivateInfo": false,
-       "readOnly": false,
        "placeHolder": "",
        "isPassword": false,
        "onFocus": "",
@@ -1768,10 +1890,12 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtShiharaiKigen_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
        "text": "",
        "required": false,
        "isPrivateInfo": false,
-       "readOnly": false,
        "placeHolder": "",
        "isPassword": false,
        "onFocus": "",
@@ -1792,7 +1916,7 @@
       }
      ],
      "controlType": "PanelPublish",
-     "width": "980",
+     "width": "1010",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1806,6 +1930,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "KashitsukeHenkanTsuchisho",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onLoad": "",
      "title": "給付費貸付金償還・返還通知書",
      "isOpen": true,
@@ -1830,6 +1956,8 @@
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
+     "readOnly": false,
+     "height": "Auto",
      "isPublish": true,
      "isEmptyControl": false
     },
@@ -1851,6 +1979,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "btnReturn",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onClick": "",
      "text": "貸付金一覧に戻る",
      "appearance": 0,
@@ -1861,7 +1991,7 @@
     }
    ],
    "controlType": "Panel",
-   "width": "1000",
+   "width": "1030",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -1875,6 +2005,8 @@
    "marginLeft": "0",
    "marginRight": "XS",
    "selectControlID": "KashitsukeHenkanInfo",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "給付費貸付金返還徴収情報",
    "isOpen": true,
@@ -1882,9 +2014,6 @@
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "KashitsukeHenkanInfo"
-    },
-    {
-     "postParameterPanelNames": "KashitsukeHenkanList"
     }
    ],
    "requestSettings": [
@@ -1910,77 +2039,9 @@
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
-   "isGroupBox": false
-  },
-  {
-   "fieldName": "KyotsuPanel",
-   "items": [
-    {
-     "fieldName": "btnHenkanSave",
-     "items": [],
-     "controlType": "Button",
-     "width": "150",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "btnHenkanSave",
-     "onClick": "",
-     "text": "入力内容を保存する",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0
-    }
-   ],
-   "controlType": "Panel",
-   "width": "1000",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": true,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "0",
-   "marginRight": "XS",
-   "selectControlID": "KyotsuPanel",
-   "onLoad": "",
-   "title": "",
-   "isOpen": true,
-   "canOpenAndClose": true,
-   "postParameterPanelNames": [
-    {
-     "postParameterPanelNames": "KyotsuPanel"
-    }
-   ],
-   "requestSettings": [],
-   "hiddenInput": [],
-   "onOpen": "",
-   "onClose": "",
-   "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
-   "backgroundColor": 0,
-   "widthAuto": false,
-   "panelDisplay": 0,
-   "isGroupBox": false
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
   },
   {
    "fieldName": "KashitsukeHenkanInfoComplete",
@@ -2000,9 +2061,11 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": 0,
-     "marginRight": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
      "selectControlID": "KashitsukeHenkanInfoCompleteInfo",
+     "helpMessageID": "",
+     "jpControlName": "",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
@@ -2030,6 +2093,8 @@
    "marginLeft": "0",
    "marginRight": "XS",
    "selectControlID": "KashitsukeHenkanInfoComplete",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "",
    "isOpen": true,
@@ -2053,7 +2118,9 @@
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
-   "isGroupBox": false
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
   }
  ],
  "controlType": null,
@@ -2071,6 +2138,8 @@
  "marginLeft": "XS",
  "marginRight": "XS",
  "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
  "onLoad": "",
  "title": "給付費貸付金返還徴収登録",
  "jsPathCollection": [],
@@ -2079,7 +2148,7 @@
   {
    "order": "1",
    "stateName": "給付費貸付金一覧",
-   "showWizard": false,
+   "showWizard": true,
    "visibleDivs": [
     {
      "visibleDiv": "KashitsukeHenkanList",
@@ -2100,12 +2169,22 @@
      "transition": "給付費貸付金返還徴収情報"
     },
     {
-     "fieldName": "btnReturn",
+     "fieldName": "KashitsukeHenkanListInfo_KyufuhiKashitsukekinList_dgKyufuhiKashitsukekinList",
+     "event": "onSelectBySelectButton",
+     "transition": "給付費貸付金返還徴収情報"
+    },
+    {
+     "fieldName": "btnHenkanSave",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnHenkanSave",
+     "fieldName": "HenkanSave",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
      "event": "onClick",
      "transition": ""
     }
@@ -2114,7 +2193,7 @@
   {
    "order": "2",
    "stateName": "給付費貸付金返還徴収情報",
-   "showWizard": false,
+   "showWizard": true,
    "visibleDivs": [
     {
      "visibleDiv": "KashitsukeHenkanKihon",
@@ -2170,21 +2249,31 @@
      "transition": ""
     },
     {
-     "fieldName": "btnReturn",
-     "event": "onClick",
-     "transition": "給付費貸付金一覧"
+     "fieldName": "KashitsukeHenkanListInfo_KyufuhiKashitsukekinList_dgKyufuhiKashitsukekinList",
+     "event": "onSelectBySelectButton",
+     "transition": ""
     },
     {
      "fieldName": "btnHenkanSave",
      "event": "onClick",
      "transition": "処理終了"
+    },
+    {
+     "fieldName": "HenkanSave",
+     "event": "onClick",
+     "transition": "処理終了"
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": "給付費貸付金一覧"
     }
    ]
   },
   {
    "order": "3",
    "stateName": "処理終了",
-   "showWizard": false,
+   "showWizard": true,
    "visibleDivs": [
     {
      "visibleDiv": "KashitsukeHenkanInfoComplete",
@@ -2205,12 +2294,22 @@
      "transition": ""
     },
     {
-     "fieldName": "btnReturn",
-     "event": "onClick",
+     "fieldName": "KashitsukeHenkanListInfo_KyufuhiKashitsukekinList_dgKyufuhiKashitsukekinList",
+     "event": "onSelectBySelectButton",
      "transition": ""
     },
     {
      "fieldName": "btnHenkanSave",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "HenkanSave",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
      "event": "onClick",
      "transition": ""
     }
@@ -2223,8 +2322,7 @@
  "UIContainerEventMapping": [],
  "loadSequencePanelNames": [
   [
-   "KashitsukeHenkanList",
-   "KashitsukeHenkanInfo"
+   "KashitsukeHenkanList"
   ],
   [
    "KashitsukeHenkanListInfo"
@@ -2234,6 +2332,9 @@
   ],
   [
    "KashitsukekinKaigoKihon"
+  ],
+  [
+   "KashitsukeHenkanInfo"
   ],
   [
    "KashitsukeHenkanKeisan"
@@ -2251,9 +2352,6 @@
    "KashitsukeHenkanTsuchishoPrintSetting"
   ],
   [
-   "KyotsuPanel"
-  ],
-  [
    "KashitsukeHenkanInfoComplete"
   ],
   [
@@ -2261,5 +2359,52 @@
   ]
  ],
  "panelMargin": 1,
- "controlMargin": 1
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "HenkanSummaryInfo",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "HenkanSave",
+      "items": [],
+      "controlType": "CommonButtonUpdate",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "HenkanSave",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "onClick": "",
+      "text": "入力内容を保存する",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "prefixText": "",
+      "suffixText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "給付費貸付金返還徴収情報"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  }
+ ]
 }

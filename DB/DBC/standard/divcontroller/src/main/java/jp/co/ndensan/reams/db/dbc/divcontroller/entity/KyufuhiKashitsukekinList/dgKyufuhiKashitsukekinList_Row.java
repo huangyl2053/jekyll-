@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufuhiKashitsukekinList
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jun 06 20:34:57 JST 2014 
+ * Thu Jun 12 17:13:46 JST 2014 
  */
 
 
@@ -40,6 +40,22 @@ public class dgKyufuhiKashitsukekinList_Row extends DataRow {
 
     public dgKyufuhiKashitsukekinList_Row() {
         super();
+        this.btnSelect = new Button();
+        this.btnDelete = new Button();
+        this.txtHihoNo = RString.EMPTY;
+        this.txtHihokenshaName = RString.EMPTY;
+        this.txtHihokenshaKana = RString.EMPTY;
+        this.txtUketsukeYMD = RString.EMPTY;
+        this.txtShinseiYMD = RString.EMPTY;
+        this.txtKaishiYMD = RString.EMPTY;
+        this.txtShuryoYMD = RString.EMPTY;
+        this.txtServiceShurui = RString.EMPTY;
+        this.txtSeikyugaku = RString.EMPTY;
+        this.txtShinseigaku = RString.EMPTY;
+        this.txtKetteiYMD = RString.EMPTY;
+        this.txtShonin = RString.EMPTY;
+        this.txtKariukeYMD = RString.EMPTY;
+        this.txtEnchoShinseiYMD = RString.EMPTY;
     }
 
     public dgKyufuhiKashitsukekinList_Row(Button btnSelect, Button btnDelete, RString txtHihoNo, RString txtHihokenshaName, RString txtHihokenshaKana, RString txtUketsukeYMD, RString txtShinseiYMD, RString txtKaishiYMD, RString txtShuryoYMD, RString txtServiceShurui, RString txtSeikyugaku, RString txtShinseigaku, RString txtKetteiYMD, RString txtShonin, RString txtKariukeYMD, RString txtEnchoShinseiYMD) {

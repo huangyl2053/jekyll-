@@ -106,6 +106,48 @@ module DBC {
             }
         }
         
+        public get ListOnSelectBySelectButton() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onSelectBySelectButton"];
+        }
+        
+        public set ListOnSelectBySelectButton(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onSelectBySelectButton"] = value;
+            } else {
+                this.layout.items[0].items[1]["onSelectBySelectButton"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get ListOnSelectByModifyButton() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onSelectByModifyButton"];
+        }
+        
+        public set ListOnSelectByModifyButton(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onSelectByModifyButton"] = value;
+            } else {
+                this.layout.items[0].items[1]["onSelectByModifyButton"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get ListOnSelectByDeleteButton() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onSelectByDeleteButton"];
+        }
+        
+        public set ListOnSelectByDeleteButton(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onSelectByDeleteButton"] = value;
+            } else {
+                this.layout.items[0].items[1]["onSelectByDeleteButton"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, KyufuhiKashitsukekinList_Design.myLayout, fieldName);
         }
@@ -123,6 +165,9 @@ module DBC {
             Uz.JSControlUtil.registProperty("ListOnSelect");
             Uz.JSControlUtil.registProperty("ListOnSelectByDblClick");
             Uz.JSControlUtil.registProperty("onClickAddButton");
+            Uz.JSControlUtil.registProperty("ListOnSelectBySelectButton");
+            Uz.JSControlUtil.registProperty("ListOnSelectByModifyButton");
+            Uz.JSControlUtil.registProperty("ListOnSelectByDeleteButton");
         }
         
         /**
@@ -139,6 +184,9 @@ module DBC {
             editablePropertyInfo["ListOnSelect"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onSelect"];
             editablePropertyInfo["ListOnSelectByDblClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onSelectByDblClick"];
             editablePropertyInfo["onClickAddButton"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["ListOnSelectBySelectButton"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onSelectBySelectButton"];
+            editablePropertyInfo["ListOnSelectByModifyButton"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onSelectByModifyButton"];
+            editablePropertyInfo["ListOnSelectByDeleteButton"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onSelectByDeleteButton"];
             
             return editablePropertyInfo;
         }
@@ -166,6 +214,8 @@ module DBC {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "btnAdd",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onClick": "",
      "text": "申請情報を追加する",
      "appearance": 0,
@@ -192,6 +242,9 @@ module DBC {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "dgKyufuhiKashitsukekinList",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "height": "209",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -451,10 +504,12 @@ module DBC {
        }
       ]
      },
-     "height": "209",
      "onSort": "",
      "onSelect": "",
      "onSelectByDblClick": "",
+     "onSelectBySelectButton": "",
+     "onSelectByModifyButton": "",
+     "onSelectByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -466,7 +521,7 @@ module DBC {
     }
    ],
    "controlType": "Panel",
-   "width": "M",
+   "width": "G2",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -480,6 +535,8 @@ module DBC {
    "marginLeft": "0",
    "marginRight": "0",
    "selectControlID": "KyufuhiKashitsukekinList",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "",
    "marginTop": "0",
@@ -503,7 +560,9 @@ module DBC {
    "backgroundColor": 0,
    "widthAuto": true,
    "panelDisplay": 0,
-   "isGroupBox": false
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
   }
  ],
  "controlType": "CommonChildDiv",
@@ -518,9 +577,11 @@ module DBC {
  "float": 0,
  "toolTip": "",
  "authorityMode": 0,
- "marginLeft": 0,
- "marginRight": 0,
+ "marginLeft": "0",
+ "marginRight": "0",
  "selectControlID": "defaultLayout",
+ "helpMessageID": "",
+ "jpControlName": "",
  "relation": [],
  "businessId": "DBC",
  "controlName": "KyufuhiKashitsukekinList",
@@ -561,6 +622,21 @@ module DBC {
    "publicChildFieldName": "btnAdd",
    "publicChildProperty": "onClick",
    "newPropertyName": "onClickAddButton"
+  },
+  {
+   "publicChildFieldName": "dgKyufuhiKashitsukekinList",
+   "publicChildProperty": "onSelectBySelectButton",
+   "newPropertyName": "ListOnSelectBySelectButton"
+  },
+  {
+   "publicChildFieldName": "dgKyufuhiKashitsukekinList",
+   "publicChildProperty": "onSelectByModifyButton",
+   "newPropertyName": "ListOnSelectByModifyButton"
+  },
+  {
+   "publicChildFieldName": "dgKyufuhiKashitsukekinList",
+   "publicChildProperty": "onSelectByDeleteButton",
+   "newPropertyName": "ListOnSelectByDeleteButton"
   }
  ],
  "dataPassingForDialog": [],
