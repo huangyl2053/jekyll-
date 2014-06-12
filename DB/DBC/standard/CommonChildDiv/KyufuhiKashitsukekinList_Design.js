@@ -130,6 +130,57 @@ var DBC;
         });
 
 
+        Object.defineProperty(KyufuhiKashitsukekinList_Design.prototype, "ListOnSelectBySelectButton", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onSelectBySelectButton"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onSelectBySelectButton"] = value;
+                } else {
+                    this.layout.items[0].items[1]["onSelectBySelectButton"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(KyufuhiKashitsukekinList_Design.prototype, "ListOnSelectByModifyButton", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onSelectByModifyButton"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onSelectByModifyButton"] = value;
+                } else {
+                    this.layout.items[0].items[1]["onSelectByModifyButton"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(KyufuhiKashitsukekinList_Design.prototype, "ListOnSelectByDeleteButton", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onSelectByDeleteButton"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onSelectByDeleteButton"] = value;
+                } else {
+                    this.layout.items[0].items[1]["onSelectByDeleteButton"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
         KyufuhiKashitsukekinList_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
             Uz.JSControlUtil.registProperty("AddButtonVisible");
@@ -139,6 +190,9 @@ var DBC;
             Uz.JSControlUtil.registProperty("ListOnSelect");
             Uz.JSControlUtil.registProperty("ListOnSelectByDblClick");
             Uz.JSControlUtil.registProperty("onClickAddButton");
+            Uz.JSControlUtil.registProperty("ListOnSelectBySelectButton");
+            Uz.JSControlUtil.registProperty("ListOnSelectByModifyButton");
+            Uz.JSControlUtil.registProperty("ListOnSelectByDeleteButton");
         };
 
         KyufuhiKashitsukekinList_Design.prototype.getEditablePropertyInfo = function () {
@@ -150,6 +204,9 @@ var DBC;
             editablePropertyInfo["ListOnSelect"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onSelect"];
             editablePropertyInfo["ListOnSelectByDblClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onSelectByDblClick"];
             editablePropertyInfo["onClickAddButton"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["ListOnSelectBySelectButton"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onSelectBySelectButton"];
+            editablePropertyInfo["ListOnSelectByModifyButton"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onSelectByModifyButton"];
+            editablePropertyInfo["ListOnSelectByDeleteButton"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onSelectByDeleteButton"];
 
             return editablePropertyInfo;
         };
@@ -177,6 +234,8 @@ var DBC;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "btnAdd",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "onClick": "",
                             "text": "申請情報を追加する",
                             "appearance": 0,
@@ -203,6 +262,9 @@ var DBC;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "dgKyufuhiKashitsukekinList",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "height": "209",
                             "gridSetting": {
                                 "rowHeight": 25,
                                 "isMultiSelectable": false,
@@ -462,10 +524,12 @@ var DBC;
                                     }
                                 ]
                             },
-                            "height": "209",
                             "onSort": "",
                             "onSelect": "",
                             "onSelectByDblClick": "",
+                            "onSelectBySelectButton": "",
+                            "onSelectByModifyButton": "",
+                            "onSelectByDeleteButton": "",
                             "onOnlyRow": "",
                             "onNoRow": "",
                             "onMultiRows": "",
@@ -477,7 +541,7 @@ var DBC;
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "M",
+                    "width": "G2",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -491,6 +555,8 @@ var DBC;
                     "marginLeft": "0",
                     "marginRight": "0",
                     "selectControlID": "KyufuhiKashitsukekinList",
+                    "helpMessageID": "",
+                    "jpControlName": "",
                     "onLoad": "",
                     "title": "",
                     "marginTop": "0",
@@ -514,7 +580,9 @@ var DBC;
                     "backgroundColor": 0,
                     "widthAuto": true,
                     "panelDisplay": 0,
-                    "isGroupBox": false
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto"
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -529,9 +597,11 @@ var DBC;
             "float": 0,
             "toolTip": "",
             "authorityMode": 0,
-            "marginLeft": 0,
-            "marginRight": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
             "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
             "relation": [],
             "businessId": "DBC",
             "controlName": "KyufuhiKashitsukekinList",
@@ -572,6 +642,21 @@ var DBC;
                     "publicChildFieldName": "btnAdd",
                     "publicChildProperty": "onClick",
                     "newPropertyName": "onClickAddButton"
+                },
+                {
+                    "publicChildFieldName": "dgKyufuhiKashitsukekinList",
+                    "publicChildProperty": "onSelectBySelectButton",
+                    "newPropertyName": "ListOnSelectBySelectButton"
+                },
+                {
+                    "publicChildFieldName": "dgKyufuhiKashitsukekinList",
+                    "publicChildProperty": "onSelectByModifyButton",
+                    "newPropertyName": "ListOnSelectByModifyButton"
+                },
+                {
+                    "publicChildFieldName": "dgKyufuhiKashitsukekinList",
+                    "publicChildProperty": "onSelectByDeleteButton",
+                    "newPropertyName": "ListOnSelectByDeleteButton"
                 }
             ],
             "dataPassingForDialog": [],
