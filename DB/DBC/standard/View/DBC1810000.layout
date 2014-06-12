@@ -332,7 +332,7 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "給付費貸付金一覧",
+   "title": "給付費貸付金申請一覧",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
@@ -1965,7 +1965,7 @@
      "fieldName": "btnReturn",
      "items": [],
      "controlType": "Button",
-     "width": "150",
+     "width": "130",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1982,7 +1982,7 @@
      "helpMessageID": "",
      "jpControlName": "",
      "onClick": "",
-     "text": "貸付金一覧に戻る",
+     "text": "申請検索に戻る",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -2147,7 +2147,7 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "給付費貸付金一覧",
+   "stateName": "申請検索",
    "showWizard": true,
    "visibleDivs": [
     {
@@ -2166,17 +2166,12 @@
     {
      "fieldName": "KashitsukeHenkanListInfo_KyufuhiKashitsukekinList_dgKyufuhiKashitsukekinList[btnSelect]",
      "event": "onClick",
-     "transition": "給付費貸付金返還徴収情報"
+     "transition": "返還徴収登録"
     },
     {
      "fieldName": "KashitsukeHenkanListInfo_KyufuhiKashitsukekinList_dgKyufuhiKashitsukekinList",
      "event": "onSelectBySelectButton",
-     "transition": "給付費貸付金返還徴収情報"
-    },
-    {
-     "fieldName": "btnHenkanSave",
-     "event": "onClick",
-     "transition": ""
+     "transition": "返還徴収登録"
     },
     {
      "fieldName": "HenkanSave",
@@ -2192,7 +2187,7 @@
   },
   {
    "order": "2",
-   "stateName": "給付費貸付金返還徴収情報",
+   "stateName": "返還徴収登録",
    "showWizard": true,
    "visibleDivs": [
     {
@@ -2254,25 +2249,20 @@
      "transition": ""
     },
     {
-     "fieldName": "btnHenkanSave",
-     "event": "onClick",
-     "transition": "処理終了"
-    },
-    {
      "fieldName": "HenkanSave",
      "event": "onClick",
-     "transition": "処理終了"
+     "transition": "登録処理完了"
     },
     {
      "fieldName": "btnReturn",
      "event": "onClick",
-     "transition": "給付費貸付金一覧"
+     "transition": "申請検索"
     }
    ]
   },
   {
    "order": "3",
-   "stateName": "処理終了",
+   "stateName": "登録処理完了",
    "showWizard": true,
    "visibleDivs": [
     {
@@ -2296,11 +2286,6 @@
     {
      "fieldName": "KashitsukeHenkanListInfo_KyufuhiKashitsukekinList_dgKyufuhiKashitsukekinList",
      "event": "onSelectBySelectButton",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnHenkanSave",
-     "event": "onClick",
      "transition": ""
     },
     {
@@ -2388,7 +2373,7 @@
       "helpMessageID": "",
       "jpControlName": "",
       "onClick": "",
-      "text": "入力内容を保存する",
+      "text": "入力内容を登録する",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
@@ -2401,7 +2386,7 @@
    ],
    "states": [
     {
-     "state": "給付費貸付金返還徴収情報"
+     "state": "返還徴収登録"
     }
    ],
    "isFinishButtonOnTheRight": false
