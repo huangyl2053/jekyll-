@@ -25,6 +25,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "ddlHokensha_core",
+       "helpMessageID": "",
+       "jpControlName": "",
        "onChange": "",
        "selectedItem": "1",
        "dataSource": [
@@ -45,7 +47,8 @@
        "labelLAlign": 2,
        "labelRAlign": 0,
        "onFocus": "",
-       "onBlur": ""
+       "onBlur": "",
+       "disabledItem": []
       },
       {
        "fieldName": "radShutsuryokuKubun",
@@ -65,6 +68,8 @@
        "marginLeft": "0",
        "marginRight": "XS",
        "selectControlID": "radShutsuryokuKubun_core",
+       "helpMessageID": "",
+       "jpControlName": "",
        "onChange": "onChange_radShutsuryokuKubun",
        "selectedItem": "0",
        "dataSource": [
@@ -84,6 +89,7 @@
        "onClick": "",
        "newLineItemNumber": 2,
        "spaceSize": "M",
+       "disabledItem": [],
        "icon": []
       },
       {
@@ -104,6 +110,8 @@
        "marginLeft": "0",
        "marginRight": "XS",
        "selectControlID": "txtNinteiKekkaKakuninKikan_core",
+       "helpMessageID": "",
+       "jpControlName": "",
        "readOnly": false,
        "onChange": "",
        "labelLText": "認定結果確定期間",
@@ -149,6 +157,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "btnHyoji",
+       "helpMessageID": "",
+       "jpControlName": "",
        "onClick": "onClick_btnHyoji",
        "icon": 0,
        "text": "対象被保険者を表示する",
@@ -159,7 +169,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "1000",
+     "width": "G11",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -173,6 +183,8 @@
      "marginLeft": "0",
      "marginRight": "XS",
      "selectControlID": "ShinsaKekkaSyutsuryokuJokenNyuryoku",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onLoad": "",
      "title": "検索条件",
      "isOpen": true,
@@ -197,7 +209,8 @@
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
-     "readOnly": false
+     "readOnly": false,
+     "height": "Auto"
     },
     {
      "fieldName": "ShinsaKekkaJohoSakuseiTishosha",
@@ -220,6 +233,9 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "dgTaishoshaIchiran",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "height": "M",
        "dataSource": [],
        "gridSetting": {
         "rowHeight": 25,
@@ -232,6 +248,8 @@
         "isShowSelectButtonColumn": false,
         "isShowModifyButtonColumn": false,
         "isShowDeleteButtonColumn": false,
+        "limitRowCount": 0,
+        "selectedRowCount": 0,
         "header": {
          "combineColumns": [],
          "frozenColumn": "",
@@ -322,7 +340,9 @@
            "cellType": 7,
            "ymdKubun": 2,
            "displayFormat": 0,
-           "onChange": ""
+           "onChange": "",
+           "isSetValueToToolTip": false,
+           "readOnly": true
           },
           "align": 1,
           "resize": true,
@@ -383,7 +403,9 @@
            "cellType": 7,
            "ymdKubun": 2,
            "displayFormat": 0,
-           "onChange": ""
+           "onChange": "",
+           "isSetValueToToolTip": false,
+           "readOnly": true
           },
           "align": 1,
           "resize": true,
@@ -402,7 +424,9 @@
            "cellType": 7,
            "ymdKubun": 2,
            "displayFormat": 0,
-           "onChange": ""
+           "onChange": "",
+           "isSetValueToToolTip": false,
+           "readOnly": true
           },
           "align": 1,
           "resize": true,
@@ -411,7 +435,6 @@
          }
         ]
        },
-       "height": "M",
        "onSort": "",
        "onSelect": "",
        "onSelectByDblClick": "",
@@ -444,6 +467,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "btnDataSakusei",
+       "helpMessageID": "",
+       "jpControlName": "",
        "onClick": "",
        "icon": 0,
        "text": "結果情報を出力する",
@@ -459,7 +484,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "1000",
+     "width": "G11",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -473,8 +498,10 @@
      "marginLeft": "0",
      "marginRight": "XS",
      "selectControlID": "ShinsaKekkaJohoSakuseiTishosha",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onLoad": "",
-     "title": "対象者",
+     "title": "",
      "isOpen": true,
      "canOpenAndClose": true,
      "postParameterPanelNames": [
@@ -497,11 +524,12 @@
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
-     "readOnly": false
+     "readOnly": false,
+     "height": "Auto"
     }
    ],
    "controlType": "Panel",
-   "width": "1010",
+   "width": "G11",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -515,6 +543,8 @@
    "marginLeft": "0",
    "marginRight": "XS",
    "selectControlID": "NinteishinsaKekkaOutput",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "",
    "isOpen": true,
@@ -556,7 +586,8 @@
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": false
+   "readOnly": false,
+   "height": "Auto"
   }
  ],
  "controlType": null,
@@ -574,6 +605,8 @@
  "marginLeft": "XS",
  "marginRight": "XS",
  "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
  "onLoad": "",
  "title": "認定審査結果情報出力",
  "jsPathCollection": [],
