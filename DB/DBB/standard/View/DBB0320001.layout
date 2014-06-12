@@ -2354,7 +2354,7 @@
    "toolTip": "",
    "authorityMode": 0,
    "marginLeft": "0",
-   "marginRight": "0",
+   "marginRight": "XS",
    "selectControlID": "TsuchishoSakuseiKobetsu",
    "helpMessageID": "",
    "jpControlName": "",
@@ -6456,7 +6456,8 @@
        },
        "dgSetaishotokuWidth": "1040",
        "dgSetaishotokuOnSelect": "onClick_SetaiKakunin",
-       "dgSetaishotokuDbClick": "onClick_SetaiKakunin"
+       "dgSetaishotokuDbClick": "onClick_SetaiKakunin",
+       "SetaiShotokuIchiranWidth": "G4"
       }
      ],
      "controlType": "Panel",
@@ -10788,7 +10789,7 @@
         }
        ],
        "controlType": "Panel",
-       "width": "865",
+       "width": "870",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -18801,7 +18802,7 @@
         }
        ],
        "controlType": "Panel",
-       "width": "865",
+       "width": "870",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -18846,7 +18847,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "G8",
+     "width": "890",
      "visible": true,
      "displayNone": false,
      "disabled": false,
