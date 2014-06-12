@@ -21,16 +21,21 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "ddlShichoson_core",
      "onChange": "",
-     "selectedItem": "",
+     "selectedItem": "1",
      "dataSource": [
       {
-       "key": "key0",
+       "key": "1",
        "value": "電算市"
+      },
+      {
+       "key": "2",
+       "value": "南魚沼市"
       }
      ],
      "required": false,
-     "labelLText": "市町村",
+     "labelLText": "保険者",
      "labelRText": "",
      "labelLWidth": "S",
      "labelRWidth": "S",
@@ -56,8 +61,9 @@
      "authorityMode": 0,
      "marginLeft": "S",
      "marginRight": "XS",
-     "onChange": "",
-     "selectedItem": "1",
+     "selectControlID": "radSearchType_core",
+     "onChange": "onChange_radSearchType",
+     "selectedItem": "2",
      "dataSource": [
       {
        "key": "1",
@@ -74,7 +80,8 @@
      "labelLAlign": 2,
      "onClick": "",
      "newLineItemNumber": 2,
-     "spaceSize": 1
+     "spaceSize": "M",
+     "icon": []
     },
     {
      "fieldName": "Hihokensha",
@@ -83,7 +90,7 @@
        "fieldName": "txtHihokenshaNo",
        "items": [],
        "controlType": "TextBoxCode",
-       "width": "75",
+       "width": "80",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -96,6 +103,8 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtHihokenshaNo_core",
+       "readOnly": false,
        "onChange": "",
        "required": false,
        "labelLText": "被保番号",
@@ -109,8 +118,7 @@
        "maxLength": "10",
        "minLength": "10",
        "textAlign": 0,
-       "readOnly": false,
-       "placeHolder": "1234567890",
+       "placeHolder": "",
        "textKind": 2,
        "isPrivateInfo": false,
        "isPassword": false,
@@ -126,7 +134,7 @@
        "fieldName": "txtShikibetsuCode",
        "items": [],
        "controlType": "TextBoxCode",
-       "width": "75",
+       "width": "80",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -139,6 +147,8 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtShikibetsuCode_core",
+       "readOnly": false,
        "onChange": "",
        "required": false,
        "labelLText": "識別コード",
@@ -152,8 +162,7 @@
        "maxLength": "10",
        "minLength": "10",
        "textAlign": 0,
-       "readOnly": false,
-       "placeHolder": "1234567890",
+       "placeHolder": "",
        "textKind": 2,
        "isPrivateInfo": false,
        "isPassword": false,
@@ -182,6 +191,8 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtHihokenshaShimei_core",
+       "readOnly": false,
        "onChange": "",
        "required": false,
        "labelLText": "氏名",
@@ -192,10 +203,9 @@
        "labelRAlign": 0,
        "onFocus": "",
        "onBlur": "",
-       "maxLength": 1000000000000,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": false,
        "placeHolder": "",
        "textKind": 0,
        "isPrivateInfo": false,
@@ -211,7 +221,7 @@
        "fieldName": "radShimeiSearchType",
        "items": [],
        "controlType": "RadioButton",
-       "width": "360",
+       "width": "420",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -224,8 +234,9 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "",
+       "selectControlID": "radShimeiSearchType_core",
        "onChange": "",
-       "selectedItem": "",
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "1",
@@ -250,7 +261,8 @@
        "labelLAlign": 2,
        "onClick": "",
        "newLineItemNumber": 4,
-       "spaceSize": 1
+       "spaceSize": "M",
+       "icon": []
       },
       {
        "fieldName": "lblShimeiSearchType",
@@ -269,6 +281,7 @@
        "authorityMode": 0,
        "marginLeft": "",
        "marginRight": "XS",
+       "selectControlID": "lblShimeiSearchType",
        "required": false,
        "isPrivateInfo": false,
        "text": "で検索する。",
@@ -276,7 +289,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "880",
+     "width": "1100",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -287,8 +300,9 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
+     "marginLeft": "0",
      "marginRight": "XS",
+     "selectControlID": "Hihokensha",
      "onLoad": "",
      "title": "被保険者",
      "isOpen": true,
@@ -311,7 +325,9 @@
      "eraseBorderLeft": false,
      "backgroundColor": 0,
      "widthAuto": false,
-     "isGroupBox": false
+     "panelDisplay": 0,
+     "isGroupBox": false,
+     "readOnly": false
     },
     {
      "fieldName": "StateOfProgress",
@@ -336,7 +352,8 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "onChange": "",
+         "selectControlID": "radDateRangeCriteriaType_core",
+         "onChange": "onChange_radDateRangeCriteriaType",
          "selectedItem": "0",
          "dataSource": [
           {
@@ -354,10 +371,6 @@
           {
            "key": "3",
            "value": "主治医意見書作成依頼日"
-          },
-          {
-           "key": "4",
-           "value": "認定有効期間終了日"
           }
          ],
          "required": false,
@@ -366,25 +379,28 @@
          "labelLAlign": 2,
          "onClick": "",
          "newLineItemNumber": 10,
-         "spaceSize": 1
+         "spaceSize": "M",
+         "icon": []
         },
         {
          "fieldName": "txtDateRangeCriteria",
          "items": [],
          "controlType": "TextBoxDateRange",
-         "width": "75",
+         "width": "80",
          "visible": true,
          "displayNone": false,
-         "disabled": false,
+         "disabled": true,
          "accessKey": "",
          "nextFocusFieldName": "",
-         "wrap": true,
+         "wrap": false,
          "dependencies": [],
          "float": 0,
          "toolTip": "",
          "authorityMode": 0,
          "marginLeft": "XL",
          "marginRight": "XS",
+         "selectControlID": "txtDateRangeCriteria_core",
+         "readOnly": false,
          "onChange": "",
          "labelLText": "",
          "labelRText": "",
@@ -394,7 +410,6 @@
          "labelRAlign": 0,
          "onFocus": "",
          "onBlur": "",
-         "readOnly": false,
          "isPrivateInfo": false,
          "isPassword": false,
          "onKeyPress": "",
@@ -410,11 +425,13 @@
          "fromText": "",
          "toText": "",
          "fromValue": "",
-         "toValue": ""
+         "toValue": "",
+         "fromSelectControlID": "txtDateRangeCriteriaFrom",
+         "toSelectControlID": "txtDateRangeCriteriaTo"
         }
        ],
        "controlType": "Panel",
-       "width": "855",
+       "width": "1090",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -425,8 +442,9 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "XS",
+       "marginLeft": "0",
        "marginRight": "S",
+       "selectControlID": "DateRanges",
        "onLoad": "",
        "title": "日付範囲",
        "isOpen": true,
@@ -449,7 +467,9 @@
        "eraseBorderLeft": false,
        "backgroundColor": 0,
        "widthAuto": false,
-       "isGroupBox": true
+       "panelDisplay": 1,
+       "isGroupBox": false,
+       "readOnly": false
       },
       {
        "fieldName": "Ninteichosa",
@@ -474,8 +494,9 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "chkNinteichosaIrai_core",
            "onChange": "",
-           "selectedItem": "",
+           "selectedItem": null,
            "dataSource": [
             {
              "key": "1",
@@ -492,15 +513,9 @@
            "labelLAlign": 2,
            "onClick": "",
            "newLineItemNumber": 2,
-           "spaceSize": 1,
-           "selectedItems": [
-            {
-             "key": "1"
-            },
-            {
-             "key": "0"
-            }
-           ],
+           "spaceSize": "M",
+           "icon": [],
+           "selectedItems": [],
            "minCheckedItem": 0,
            "maxCheckedItem": 2,
            "isAllSelectable": false
@@ -522,8 +537,9 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "chkNinteichosaJisshi_core",
            "onChange": "",
-           "selectedItem": "",
+           "selectedItem": null,
            "dataSource": [
             {
              "key": "1",
@@ -540,15 +556,9 @@
            "labelLAlign": 2,
            "onClick": "",
            "newLineItemNumber": 2,
-           "spaceSize": 1,
-           "selectedItems": [
-            {
-             "key": "1"
-            },
-            {
-             "key": "0"
-            }
-           ],
+           "spaceSize": "M",
+           "icon": [],
+           "selectedItems": [],
            "minCheckedItem": 0,
            "maxCheckedItem": 2,
            "isAllSelectable": false
@@ -570,8 +580,9 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "chkNinteichosaTokki_core",
            "onChange": "",
-           "selectedItem": "",
+           "selectedItem": null,
            "dataSource": [
             {
              "key": "1",
@@ -588,66 +599,12 @@
            "labelLAlign": 2,
            "onClick": "",
            "newLineItemNumber": 2,
-           "spaceSize": 1,
-           "selectedItems": [
-            {
-             "key": "1"
-            },
-            {
-             "key": "0"
-            }
-           ],
+           "spaceSize": "M",
+           "icon": [],
+           "selectedItems": [],
            "minCheckedItem": 0,
            "maxCheckedItem": 2,
            "isAllSelectable": false
-          },
-          {
-           "fieldName": "btnToSelectAll1",
-           "items": [],
-           "controlType": "Button",
-           "width": "59",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": true,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "XS",
-           "marginRight": "XS",
-           "text": "すべて　選択する",
-           "onClick": "",
-           "appearance": 0,
-           "imageFileUrl": "",
-           "imageWidth": "",
-           "imageHeight": ""
-          },
-          {
-           "fieldName": "btnToDeselectAll1",
-           "items": [],
-           "controlType": "Button",
-           "width": "59",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": false,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "XS",
-           "marginRight": "XS",
-           "text": "すべて　解除する",
-           "onClick": "",
-           "appearance": 0,
-           "imageFileUrl": "",
-           "imageWidth": "",
-           "imageHeight": ""
           }
          ],
          "controlType": "Panel",
@@ -664,6 +621,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "CheckBoxesForNinteichosa",
          "onLoad": "",
          "title": "",
          "isOpen": true,
@@ -686,7 +644,9 @@
          "eraseBorderLeft": false,
          "backgroundColor": 0,
          "widthAuto": false,
-         "isGroupBox": false
+         "panelDisplay": 0,
+         "isGroupBox": false,
+         "readOnly": false
         },
         {
          "fieldName": "txtOCRPaperID",
@@ -694,8 +654,8 @@
          "controlType": "TextBoxCode",
          "width": "23",
          "visible": true,
-         "displayNone": false,
-         "disabled": false,
+         "displayNone": true,
+         "disabled": true,
          "accessKey": "",
          "nextFocusFieldName": "",
          "wrap": true,
@@ -705,6 +665,8 @@
          "authorityMode": 0,
          "marginLeft": "S",
          "marginRight": "XS",
+         "selectControlID": "txtOCRPaperID_core",
+         "readOnly": false,
          "onChange": "",
          "required": false,
          "labelLText": "OCR帳票ID",
@@ -718,7 +680,6 @@
          "maxLength": "3",
          "minLength": "3",
          "textAlign": 0,
-         "readOnly": false,
          "placeHolder": "123",
          "textKind": 2,
          "isPrivateInfo": false,
@@ -746,6 +707,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "Ninteichosa",
        "onLoad": "",
        "title": "認定調査",
        "isOpen": true,
@@ -768,7 +730,9 @@
        "eraseBorderLeft": false,
        "backgroundColor": 0,
        "widthAuto": false,
-       "isGroupBox": true
+       "panelDisplay": 1,
+       "isGroupBox": false,
+       "readOnly": false
       },
       {
        "fieldName": "ShujiiIkensho",
@@ -793,8 +757,9 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "chkShujiiIkenshoIrai_core",
            "onChange": "",
-           "selectedItem": "",
+           "selectedItem": null,
            "dataSource": [
             {
              "key": "1",
@@ -811,15 +776,9 @@
            "labelLAlign": 2,
            "onClick": "",
            "newLineItemNumber": 2,
-           "spaceSize": 1,
-           "selectedItems": [
-            {
-             "key": "1"
-            },
-            {
-             "key": "0"
-            }
-           ],
+           "spaceSize": "M",
+           "icon": [],
+           "selectedItems": [],
            "minCheckedItem": 0,
            "maxCheckedItem": 2,
            "isAllSelectable": false
@@ -841,8 +800,9 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "chkShujiiIkenshoJuryo_core",
            "onChange": "",
-           "selectedItem": "",
+           "selectedItem": null,
            "dataSource": [
             {
              "key": "1",
@@ -859,15 +819,9 @@
            "labelLAlign": 2,
            "onClick": "",
            "newLineItemNumber": 2,
-           "spaceSize": 1,
-           "selectedItems": [
-            {
-             "key": "1"
-            },
-            {
-             "key": "0"
-            }
-           ],
+           "spaceSize": "M",
+           "icon": [],
+           "selectedItems": [],
            "minCheckedItem": 0,
            "maxCheckedItem": 2,
            "isAllSelectable": false
@@ -889,58 +843,11 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "lblPadding1",
            "required": false,
            "isPrivateInfo": false,
            "text": "",
            "align": 2
-          },
-          {
-           "fieldName": "btnToSelectAll2",
-           "items": [],
-           "controlType": "Button",
-           "width": "59",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": true,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "XS",
-           "marginRight": "XS",
-           "text": "すべて　選択する",
-           "onClick": "",
-           "appearance": 0,
-           "imageFileUrl": "",
-           "imageWidth": "",
-           "imageHeight": ""
-          },
-          {
-           "fieldName": "btnToDeselectAll2",
-           "items": [],
-           "controlType": "Button",
-           "width": "59",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": false,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "XS",
-           "marginRight": "XS",
-           "text": "すべて　解除する",
-           "onClick": "",
-           "appearance": 0,
-           "imageFileUrl": "",
-           "imageWidth": "",
-           "imageHeight": ""
           }
          ],
          "controlType": "Panel",
@@ -957,6 +864,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "CheckBoxesForShujiiIkensho",
          "onLoad": "",
          "title": "",
          "isOpen": true,
@@ -979,7 +887,9 @@
          "eraseBorderLeft": true,
          "backgroundColor": 0,
          "widthAuto": false,
-         "isGroupBox": false
+         "panelDisplay": 0,
+         "isGroupBox": false,
+         "readOnly": false
         }
        ],
        "controlType": "Panel",
@@ -996,6 +906,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "ShujiiIkensho",
        "onLoad": "",
        "title": "主治医意見書",
        "isOpen": true,
@@ -1018,7 +929,9 @@
        "eraseBorderLeft": false,
        "backgroundColor": 0,
        "widthAuto": false,
-       "isGroupBox": true
+       "panelDisplay": 1,
+       "isGroupBox": false,
+       "readOnly": false
       },
       {
        "fieldName": "IchijiHantei",
@@ -1043,8 +956,9 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "chkIchijiHanteiJisshi_core",
            "onChange": "",
-           "selectedItem": "",
+           "selectedItem": null,
            "dataSource": [
             {
              "key": "1",
@@ -1061,15 +975,9 @@
            "labelLAlign": 2,
            "onClick": "",
            "newLineItemNumber": 2,
-           "spaceSize": 1,
-           "selectedItems": [
-            {
-             "key": "1"
-            },
-            {
-             "key": "0"
-            }
-           ],
+           "spaceSize": "M",
+           "icon": [],
+           "selectedItems": [],
            "minCheckedItem": 0,
            "maxCheckedItem": 2,
            "isAllSelectable": false
@@ -1091,6 +999,7 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "lblPadding2",
            "required": false,
            "isPrivateInfo": false,
            "text": "",
@@ -1111,6 +1020,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "CheckBoxesForIchijiHantei",
          "onLoad": "",
          "title": "",
          "isOpen": true,
@@ -1133,7 +1043,9 @@
          "eraseBorderLeft": true,
          "backgroundColor": 0,
          "widthAuto": false,
-         "isGroupBox": false
+         "panelDisplay": 0,
+         "isGroupBox": false,
+         "readOnly": false
         }
        ],
        "controlType": "Panel",
@@ -1150,6 +1062,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "IchijiHantei",
        "onLoad": "",
        "title": "一次判定",
        "isOpen": true,
@@ -1172,7 +1085,9 @@
        "eraseBorderLeft": false,
        "backgroundColor": 0,
        "widthAuto": false,
-       "isGroupBox": true
+       "panelDisplay": 1,
+       "isGroupBox": false,
+       "readOnly": false
       },
       {
        "fieldName": "Shinsakai",
@@ -1197,8 +1112,9 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "chkShinsakaiWariate_core",
            "onChange": "",
-           "selectedItem": "",
+           "selectedItem": null,
            "dataSource": [
             {
              "key": "1",
@@ -1215,15 +1131,9 @@
            "labelLAlign": 2,
            "onClick": "",
            "newLineItemNumber": 2,
-           "spaceSize": 1,
-           "selectedItems": [
-            {
-             "key": "1"
-            },
-            {
-             "key": "0"
-            }
-           ],
+           "spaceSize": "M",
+           "icon": [],
+           "selectedItems": [],
            "minCheckedItem": 0,
            "maxCheckedItem": 2,
            "isAllSelectable": false
@@ -1245,8 +1155,9 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "chkShinsakaiJisshi_core",
            "onChange": "",
-           "selectedItem": "",
+           "selectedItem": null,
            "dataSource": [
             {
              "key": "1",
@@ -1263,15 +1174,9 @@
            "labelLAlign": 2,
            "onClick": "",
            "newLineItemNumber": 2,
-           "spaceSize": 1,
-           "selectedItems": [
-            {
-             "key": "1"
-            },
-            {
-             "key": "0"
-            }
-           ],
+           "spaceSize": "M",
+           "icon": [],
+           "selectedItems": [],
            "minCheckedItem": 0,
            "maxCheckedItem": 2,
            "isAllSelectable": false
@@ -1293,58 +1198,11 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "lblPadding3",
            "required": false,
            "isPrivateInfo": false,
            "text": "",
            "align": 2
-          },
-          {
-           "fieldName": "btnToSelectAll3",
-           "items": [],
-           "controlType": "Button",
-           "width": "59",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": true,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "XS",
-           "marginRight": "XS",
-           "text": "すべて　選択する",
-           "onClick": "",
-           "appearance": 0,
-           "imageFileUrl": "",
-           "imageWidth": "",
-           "imageHeight": ""
-          },
-          {
-           "fieldName": "btnToDeselectAll3",
-           "items": [],
-           "controlType": "Button",
-           "width": "59",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": false,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "XS",
-           "marginRight": "XS",
-           "text": "すべて　解除する",
-           "onClick": "",
-           "appearance": 0,
-           "imageFileUrl": "",
-           "imageWidth": "",
-           "imageHeight": ""
           }
          ],
          "controlType": "Panel",
@@ -1361,6 +1219,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "CheckBoxesForShinsakai",
          "onLoad": "",
          "title": "",
          "isOpen": true,
@@ -1383,7 +1242,9 @@
          "eraseBorderLeft": true,
          "backgroundColor": 0,
          "widthAuto": false,
-         "isGroupBox": false
+         "panelDisplay": 0,
+         "isGroupBox": false,
+         "readOnly": false
         }
        ],
        "controlType": "Panel",
@@ -1400,6 +1261,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "Shinsakai",
        "onLoad": "",
        "title": "審査会",
        "isOpen": true,
@@ -1422,11 +1284,13 @@
        "eraseBorderLeft": false,
        "backgroundColor": 0,
        "widthAuto": false,
-       "isGroupBox": true
+       "panelDisplay": 1,
+       "isGroupBox": false,
+       "readOnly": false
       }
      ],
      "controlType": "Panel",
-     "width": "880",
+     "width": "1100",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1437,8 +1301,9 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
+     "marginLeft": "0",
      "marginRight": "XS",
+     "selectControlID": "StateOfProgress",
      "onLoad": "",
      "title": "進捗状況",
      "isOpen": true,
@@ -1461,7 +1326,9 @@
      "eraseBorderLeft": false,
      "backgroundColor": 0,
      "widthAuto": false,
-     "isGroupBox": false
+     "panelDisplay": 0,
+     "isGroupBox": false,
+     "readOnly": false
     },
     {
      "fieldName": "SearchButton",
@@ -1483,8 +1350,9 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "chkSearchOption_core",
        "onChange": "",
-       "selectedItem": "",
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "1",
@@ -1505,7 +1373,8 @@
        "labelLAlign": 2,
        "onClick": "",
        "newLineItemNumber": 3,
-       "spaceSize": 1,
+       "spaceSize": "M",
+       "icon": [],
        "selectedItems": [],
        "minCheckedItem": 0,
        "maxCheckedItem": "3",
@@ -1528,8 +1397,10 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "btnToSearch",
+       "onClick": "onClick_btnToSearch",
+       "icon": 0,
        "text": "検索する",
-       "onClick": "",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
@@ -1537,7 +1408,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "880",
+     "width": "1100",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1548,8 +1419,9 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
+     "marginLeft": "0",
      "marginRight": "XS",
+     "selectControlID": "SearchButton",
      "onLoad": "",
      "title": "",
      "isOpen": true,
@@ -1572,7 +1444,9 @@
      "eraseBorderLeft": true,
      "backgroundColor": 0,
      "widthAuto": false,
-     "isGroupBox": false
+     "panelDisplay": 0,
+     "isGroupBox": false,
+     "readOnly": false
     },
     {
      "fieldName": "LatestPerson",
@@ -1594,8 +1468,9 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "ddlLatestPerson_core",
        "onChange": "",
-       "selectedItem": "",
+       "selectedItem": "0",
        "dataSource": [
         {
          "key": "0",
@@ -1629,8 +1504,10 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "text": "表示する",
+       "selectControlID": "btnToShowLatestPerson",
        "onClick": "",
+       "icon": 0,
+       "text": "表示する",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
@@ -1638,7 +1515,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "880",
+     "width": "1100",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1649,11 +1526,12 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
+     "marginLeft": "0",
      "marginRight": "XS",
+     "selectControlID": "LatestPerson",
      "onLoad": "",
      "title": "最近処理者",
-     "isOpen": true,
+     "isOpen": false,
      "canOpenAndClose": true,
      "postParameterPanelNames": [
       {
@@ -1673,11 +1551,13 @@
      "eraseBorderLeft": false,
      "backgroundColor": 0,
      "widthAuto": false,
-     "isGroupBox": false
+     "panelDisplay": 0,
+     "isGroupBox": false,
+     "readOnly": false
     }
    ],
    "controlType": "Panel",
-   "width": "900",
+   "width": "1106",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -1688,10 +1568,11 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "XS",
+   "marginLeft": "0",
    "marginRight": "XS",
+   "selectControlID": "SerchCriteriaForYokaigoninteiProgress",
    "onLoad": "",
-   "title": "検索条件",
+   "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
@@ -1699,7 +1580,20 @@
      "postParameterPanelNames": "SerchCriteriaForYokaigoninteiProgress"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbe/db/dbe/SerchCriteriaForYokaigoninteiProgress/onLoad"
+    },
+    {
+     "eventName": "onChange_radSearchType",
+     "requestUrl": "dbe/db/dbe/SerchCriteriaForYokaigoninteiProgress/onChange_radSearchType"
+    },
+    {
+     "eventName": "onChange_radDateRangeCriteriaType",
+     "requestUrl": "dbe/db/dbe/SerchCriteriaForYokaigoninteiProgress/onChange_radDateRangeCriteriaType"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -1712,16 +1606,18 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false
   },
   {
    "fieldName": "YokaigoninteiProgress",
    "items": [
     {
-     "fieldName": "dgYokaigoninteiProgress",
+     "fieldName": "btnToOutputShinchokuIchiran",
      "items": [],
-     "controlType": "DataGrid",
-     "width": "880",
+     "controlType": "Button",
+     "width": "M",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1734,30 +1630,87 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnToOutputShinchokuIchiran",
+     "onClick": "",
+     "icon": 0,
+     "text": "進捗状況一覧を出力する",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
+    },
+    {
+     "fieldName": "btnToOutputKojinJokyohyo",
+     "items": [],
+     "controlType": "Button",
+     "width": "M",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnToOutputKojinJokyohyo",
+     "onClick": "",
+     "icon": 0,
+     "text": "個人状況票を出力する",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
+    },
+    {
+     "fieldName": "dgYokaigoninteiProgress",
+     "items": [],
+     "controlType": "DataGrid",
+     "width": "1100",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0",
+     "marginRight": "XS",
+     "selectControlID": "dgYokaigoninteiProgress",
      "dataSource": [],
      "gridSetting": {
-      "rowHeight": 40,
+      "rowHeight": 25,
       "isMultiSelectable": false,
+      "isShowHeader": true,
       "isShowFooter": true,
       "isShowFilter": false,
       "isShowFilterButton": false,
       "isShowRowState": false,
+      "isShowSelectButtonColumn": false,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
       "header": {
        "combineColumns": [
-        {
-         "combineColumnName": "保険者",
-         "combineItem": [
-          "shokisaiHokenshaNo",
-          "shichosonName"
-         ]
-        },
         {
          "combineColumnName": "被保険者",
          "combineItem": [
           "hihokenshaNo",
           "shimei",
           "kanaShimei",
-          "shimeiAndKanaShimei"
+          "shimeiAndKanaShimei",
+          "shikaku"
+         ]
+        },
+        {
+         "combineColumnName": "申請",
+         "combineItem": [
+          "shinseiKubun"
          ]
         },
         {
@@ -1769,14 +1722,14 @@
          ]
         },
         {
-         "combineColumnName": "主治医意見書",
+         "combineColumnName": "意見書",
          "combineItem": [
           "shujiiIkenshoIrai",
           "shujiiIkenshoJuryo"
          ]
         },
         {
-         "combineColumnName": "一次判定",
+         "combineColumnName": "一次",
          "combineItem": [
           "ichijiHanteiJisshi"
          ]
@@ -1786,15 +1739,6 @@
          "combineItem": [
           "shinsakaiWariate",
           "shinsakaiJisshi"
-         ]
-        },
-        {
-         "combineColumnName": "被保険者",
-         "combineItem": [
-          "yubinNo",
-          "jusho",
-          "gender",
-          "birthDate"
          ]
         },
         {
@@ -1833,69 +1777,41 @@
           "gogitai",
           "yokaigoDo"
          ]
+        },
+        {
+         "combineColumnName": "被保険者",
+         "combineItem": [
+          "yubinNo",
+          "jusho",
+          "gender",
+          "birthDate"
+         ]
         }
        ],
        "frozenColumn": "",
-       "headerHeight": 1
+       "headerHeight": 0
       },
       "columns": [
        {
-        "columnName": "証記載<br>保険者番号",
-        "dataName": "shokisaiHokenshaNo",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 120,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0
-        },
-        "align": 1,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "shokisaiHokenshaNo"
-       },
-       {
-        "columnName": "市町村",
-        "dataName": "shichosonName",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 100,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": {
-         "cellType": 0
-        },
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "shichosonName"
-       },
-       {
-        "columnName": "申請日",
-        "dataName": "shinseiDate",
+        "columnName": "保険者",
+        "dataName": "hokensha",
         "toolTip": "",
         "bgColor": 0,
         "width": 80,
         "visible": true,
-        "cellType": 7,
-        "cellDetails": {
-         "cellType": 7,
-         "ymdKubun": 2,
-         "displayFormat": 0,
-         "onChange": ""
-        },
-        "align": 1,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "shinseiDate"
+        "sortKey": "hokensha"
        },
        {
         "columnName": "被保番号",
         "dataName": "hihokenshaNo",
         "toolTip": "",
         "bgColor": 0,
-        "width": 100,
+        "width": 80,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -1953,11 +1869,58 @@
         "sortKey": "kanaShimei"
        },
        {
+        "columnName": "資格",
+        "dataName": "shikaku",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 60,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "shikaku"
+       },
+       {
+        "columnName": "申請日",
+        "dataName": "shinseiDate",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
+        "visible": true,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": ""
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "shinseiDate"
+       },
+       {
+        "columnName": "区分",
+        "dataName": "shinseiKubun",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "shinseiKubun"
+       },
+       {
         "columnName": "依頼",
         "dataName": "ninteichosaIrai",
         "toolTip": "",
         "bgColor": 0,
-        "width": 70,
+        "width": 40,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -1971,7 +1934,7 @@
         "dataName": "ninteichosaJisshi",
         "toolTip": "",
         "bgColor": 0,
-        "width": 70,
+        "width": 40,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -1985,7 +1948,7 @@
         "dataName": "ninteichosaTokki",
         "toolTip": "",
         "bgColor": 0,
-        "width": 70,
+        "width": 40,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -1999,7 +1962,7 @@
         "dataName": "shujiiIkenshoIrai",
         "toolTip": "",
         "bgColor": 0,
-        "width": 70,
+        "width": 40,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -2013,7 +1976,7 @@
         "dataName": "shujiiIkenshoJuryo",
         "toolTip": "",
         "bgColor": 0,
-        "width": 70,
+        "width": 40,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -2023,11 +1986,11 @@
         "sortKey": "shujiiIkenshoJuryo"
        },
        {
-        "columnName": "実施",
+        "columnName": "判定",
         "dataName": "ichijiHanteiJisshi",
         "toolTip": "",
         "bgColor": 0,
-        "width": 70,
+        "width": 40,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -2041,7 +2004,7 @@
         "dataName": "shinsakaiWariate",
         "toolTip": "",
         "bgColor": 0,
-        "width": 70,
+        "width": 40,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -2055,7 +2018,7 @@
         "dataName": "shinsakaiJisshi",
         "toolTip": "",
         "bgColor": 0,
-        "width": 70,
+        "width": 40,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -2063,67 +2026,6 @@
         "resize": false,
         "isPrivateInfo": false,
         "sortKey": "shinsakaiJisshi"
-       },
-       {
-        "columnName": "郵便番号",
-        "dataName": "yubinNo",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 100,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "yubinNo"
-       },
-       {
-        "columnName": "住所",
-        "dataName": "jusho",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 150,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 0,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "jusho"
-       },
-       {
-        "columnName": "性別",
-        "dataName": "gender",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 60,
-        "visible": true,
-        "cellType": 0,
-        "cellDetails": null,
-        "align": 1,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "gender"
-       },
-       {
-        "columnName": "生年月日",
-        "dataName": "birthDate",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 90,
-        "visible": true,
-        "cellType": 7,
-        "cellDetails": {
-         "cellType": 7,
-         "ymdKubun": 2,
-         "displayFormat": 0,
-         "onChange": ""
-        },
-        "align": 1,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "birthDate"
        },
        {
         "columnName": "依頼日",
@@ -2389,7 +2291,7 @@
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
-        "align": 0,
+        "align": 1,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "gogitai"
@@ -2399,7 +2301,7 @@
         "dataName": "yokaigoDo",
         "toolTip": "",
         "bgColor": 0,
-        "width": 100,
+        "width": 80,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -2407,24 +2309,88 @@
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "yokaigoDo"
+       },
+       {
+        "columnName": "郵便番号",
+        "dataName": "yubinNo",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 70,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "yubinNo"
+       },
+       {
+        "columnName": "住所",
+        "dataName": "jusho",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 150,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "jusho"
+       },
+       {
+        "columnName": "性別",
+        "dataName": "gender",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 40,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "gender"
+       },
+       {
+        "columnName": "生年月日",
+        "dataName": "birthDate",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
+        "visible": true,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": ""
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "birthDate"
        }
       ]
      },
-     "height": "520",
+     "height": "350",
      "onSort": "",
      "onSelect": "",
      "onSelectByDblClick": "",
+     "onSelectBySelectButton": "",
+     "onSelectByModifyButton": "",
+     "onSelectByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "sortOrder": "ninteichosaTokki",
+     "sortOrder": "shujiiIkenshoJuryo",
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1
     }
    ],
    "controlType": "Panel",
-   "width": "900",
+   "width": "1106",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -2435,18 +2401,31 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "XS",
+   "marginLeft": "0",
    "marginRight": "XS",
+   "selectControlID": "YokaigoninteiProgress",
    "onLoad": "",
-   "title": "進捗状況一覧",
+   "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "YokaigoninteiProgress"
+    },
+    {
+     "postParameterPanelNames": "SerchCriteriaForYokaigoninteiProgress"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_btnToSearch",
+     "requestUrl": "dbe/db/dbe/YokaigoninteiProgress/onClick_btnToSearch"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -2459,7 +2438,9 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false
   }
  ],
  "controlType": null,
@@ -2476,6 +2457,7 @@
  "authorityMode": 0,
  "marginLeft": "XS",
  "marginRight": "XS",
+ "selectControlID": "Page",
  "onLoad": "",
  "title": "要介護認定進捗状況照会",
  "jsPathCollection": [],
@@ -2488,66 +2470,85 @@
    "visibleDivs": [
     {
      "visibleDiv": "SerchCriteriaForYokaigoninteiProgress",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "Hihokensha",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "DateRanges",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "Ninteichosa",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "CheckBoxesForNinteichosa",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "ShujiiIkensho",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "IchijiHantei",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "Shinsakai",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "SearchButton",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "YokaigoninteiProgress",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "StateOfProgress",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "CheckBoxesForShujiiIkensho",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "CheckBoxesForIchijiHantei",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "CheckBoxesForShinsakai",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
+    },
+    {
+     "visibleDiv": "LatestPerson",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
    "events": []
   }
  ],
- "currentState": "main",
+ "currentState": "All",
  "id": "DBE8010001",
  "WFParameter": [],
  "UIContainerEventMapping": [],
@@ -2559,7 +2560,8 @@
    "Shinsakai"
   ],
   [
-   "SerchCriteriaForYokaigoninteiProgress"
+   "SerchCriteriaForYokaigoninteiProgress",
+   "YokaigoninteiProgress"
   ],
   [
    "Hihokensha"
@@ -2587,11 +2589,10 @@
   ],
   [
    "LatestPerson"
-  ],
-  [
-   "YokaigoninteiProgress"
   ]
  ],
  "panelMargin": 1,
- "controlMargin": 1
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "commonButtonAreaData": []
 }

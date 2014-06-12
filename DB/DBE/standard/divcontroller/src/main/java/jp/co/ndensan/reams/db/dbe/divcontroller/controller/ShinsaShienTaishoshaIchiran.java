@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.KaniShinsakaiKaisaiKekkaDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShinsaShienTaishoshaIchiranDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgShinsaTaishoshaIchiran1_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5020001.KaniShinsakaiKaisaiKekkaDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5020001.ShinsaShienTaishoshaIchiranDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5020001.dgShinsaTaishoshaIchiran1_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -63,7 +63,7 @@ public class ShinsaShienTaishoshaIchiran {
     private static List<dgShinsaTaishoshaIchiran1_Row> createRowTaishoIchiran1TestData() {
         List<dgShinsaTaishoshaIchiran1_Row> arrayData = new ArrayList<>();
 
-        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("ShinsakaiShinsaTaishoshaList.yml"));
+        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("ShinsakaiShinsaTaishoshaList.yml"));
         for (Map info : targetSource) {
             arrayData.add(toDgShinsaTaishoshaIchiran1_Row(info));
         }

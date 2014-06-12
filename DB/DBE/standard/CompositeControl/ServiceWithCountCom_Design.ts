@@ -50,6 +50,20 @@ module DBE {
             }
         }
         
+        public get radKaigoOrYobo_dataSource() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[4]["fieldName"])["selectedItem"];
+        }
+        
+        public set radKaigoOrYobo_dataSource(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[4]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[4]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[4]["fieldName"])["selectedItem"] = value;
+            } else {
+                this.layout.items[4]["selectedItem"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, ServiceWithCountCom_Design.myLayout, fieldName);
         }
@@ -63,6 +77,7 @@ module DBE {
             Uz.JSControlUtil.registProperty("text_ServiceName");
             Uz.JSControlUtil.registProperty("text_Frequency");
             Uz.JSControlUtil.registProperty("text_Unit");
+            Uz.JSControlUtil.registProperty("radKaigoOrYobo_dataSource");
         }
         
         /**
@@ -75,6 +90,7 @@ module DBE {
             editablePropertyInfo["text_ServiceName"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["text"];
             editablePropertyInfo["text_Frequency"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[1]["fieldName"]).getEditablePropertyInfo()["text"];
             editablePropertyInfo["text_Unit"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[3]["fieldName"]).getEditablePropertyInfo()["text"];
+            editablePropertyInfo["radKaigoOrYobo_dataSource"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[4]["fieldName"]).getEditablePropertyInfo()["selectedItem"];
             
             return editablePropertyInfo;
         }
@@ -98,6 +114,7 @@ module DBE {
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "",
+   "selectControlID": "lblServiceName",
    "required": false,
    "align": 2,
    "text": "サービス名称",
@@ -120,6 +137,7 @@ module DBE {
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "",
+   "selectControlID": "lblFrequency",
    "required": false,
    "align": 2,
    "text": "月",
@@ -142,6 +160,7 @@ module DBE {
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "txtNum_core",
    "required": false,
    "text": "",
    "isPrivateInfo": false,
@@ -152,6 +171,7 @@ module DBE {
    "placeHolder": "",
    "textKind": 2,
    "isPassword": false,
+   "isComboBox": false,
    "onFocus": "",
    "onBlur": "",
    "onChange": "",
@@ -175,7 +195,7 @@ module DBE {
    "fieldName": "lblUnit",
    "items": [],
    "controlType": "Label",
-   "width": "30",
+   "width": "32",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -188,10 +208,49 @@ module DBE {
    "authorityMode": 0,
    "marginLeft": "",
    "marginRight": "XS",
+   "selectControlID": "lblUnit",
    "required": false,
    "align": 0,
    "text": "単位",
    "isPrivateInfo": false
+  },
+  {
+   "fieldName": "radKaigoOrYobo",
+   "items": [],
+   "controlType": "RadioButton",
+   "width": "325",
+   "visible": true,
+   "displayNone": true,
+   "disabled": true,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "selectControlID": "radKaigoOrYobo_core",
+   "onChange": "",
+   "labelLText": "",
+   "labelLWidth": "S",
+   "labelLAlign": 2,
+   "selectedItem": null,
+   "dataSource": [
+    {
+     "key": "1",
+     "value": "介護"
+    },
+    {
+     "key": "2",
+     "value": "予防"
+    }
+   ],
+   "onClick": "",
+   "newLineItemNumber": 2,
+   "spaceSize": "M",
+   "icon": []
   }
  ],
  "controlType": "CompositeControl",
@@ -208,6 +267,7 @@ module DBE {
  "authorityMode": 0,
  "marginLeft": "XS",
  "marginRight": "XS",
+ "selectControlID": "defaultLayout",
  "relation": [],
  "businessId": "DBE",
  "controlName": "ServiceWithCountCom",
@@ -226,6 +286,11 @@ module DBE {
    "publicChildFieldName": "lblUnit",
    "publicChildProperty": "text",
    "newPropertyName": "text_Unit"
+  },
+  {
+   "publicChildFieldName": "radKaigoOrYobo",
+   "publicChildProperty": "selectedItem",
+   "newPropertyName": "radKaigoOrYobo_dataSource"
   }
  ]
 }        
