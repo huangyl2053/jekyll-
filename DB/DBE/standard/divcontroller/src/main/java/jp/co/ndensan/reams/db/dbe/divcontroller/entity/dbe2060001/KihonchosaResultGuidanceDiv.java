@@ -27,8 +27,8 @@ public class KihonchosaResultGuidanceDiv extends Panel {
     private Label lblItemName;
     @JsonProperty("btnToEditTokkijiko")
     private Button btnToEditTokkijiko;
-    @JsonProperty("lblPaddingItemNo")
-    private Label lblPaddingItemNo;
+    @JsonProperty("lblSpace3")
+    private Label lblSpace3;
     @JsonProperty("radChoices")
     private RadioButton radChoices;
     @JsonProperty("btnSelectPrevious")
@@ -72,14 +72,14 @@ public class KihonchosaResultGuidanceDiv extends Panel {
         this.btnToEditTokkijiko=btnToEditTokkijiko;
     }
 
-    @JsonProperty("lblPaddingItemNo")
-    public Label getLblPaddingItemNo() {
-        return lblPaddingItemNo;
+    @JsonProperty("lblSpace3")
+    public Label getLblSpace3() {
+        return lblSpace3;
     }
 
-    @JsonProperty("lblPaddingItemNo")
-    public void setLblPaddingItemNo(Label lblPaddingItemNo) {
-        this.lblPaddingItemNo=lblPaddingItemNo;
+    @JsonProperty("lblSpace3")
+    public void setLblSpace3(Label lblSpace3) {
+        this.lblSpace3=lblSpace3;
     }
 
     @JsonProperty("radChoices")

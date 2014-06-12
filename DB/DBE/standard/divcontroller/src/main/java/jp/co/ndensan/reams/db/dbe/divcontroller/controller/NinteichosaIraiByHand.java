@@ -8,14 +8,14 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NinteichosaIraiListForByHandCom;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.ChosaItakusakiAndChosainListDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.ChosairaiBindByHandMainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.NinteichosaIraiByHandDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.RequestContentsDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.dgChosaItakusakiList_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgNinteichosaIraiListForByHand_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgShozokuChosainList_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ninteichosaIraiListForByHandCom.dgNinteichosaIraiListForByHand_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.shozokuChosainList.dgShozokuChosainList_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil.Converter;
@@ -42,8 +42,8 @@ public class NinteichosaIraiByHand {
     public ResponseData<NinteichosaIraiByHandDiv> onLoad(NinteichosaIraiByHandDiv div) {
         ResponseData<NinteichosaIraiByHandDiv> response = new ResponseData<>();
 
-        ChosairaiBindByHandMain.onLoad(div.getChosairaiBindByHandMain());
-        ChosaItakusakiAndChosainList.onLoad(div.getChosaItakusakiAndChosainList());
+        new ChosairaiBindByHandMain(div.getChosairaiBindByHandMain()).onLoad();
+        new ChosaItakusakiAndChosainList(div.getChosaItakusakiAndChosainList()).onLoad();
 
         response.data = div;
         return response;
@@ -51,17 +51,25 @@ public class NinteichosaIraiByHand {
 
     private static final class ChosaItakusakiAndChosainList {
 
-        private static void onLoad(ChosaItakusakiAndChosainListDiv div) {
-            init_dgChosaItakusakiList(div);
-            init_comChosainListAll(div);
+        private final ChosaItakusakiAndChosainListDiv div;
+
+        ChosaItakusakiAndChosainList(ChosaItakusakiAndChosainListDiv div) {
+            this.div = div;
         }
 
-        private static void init_dgChosaItakusakiList(ChosaItakusakiAndChosainListDiv div) {
-            div.getDgChosaItakusakiList().setDataSource(DemoData.ITAKUSAKI_LIST);
+        private void onLoad() {
+            _init_dgChosaItakusakiList();
+            _init_comChosainListAll();
         }
 
-        private static void init_comChosainListAll(ChosaItakusakiAndChosainListDiv div) {
-            div.getShozokuChosainList().getComChosainListAll().getDgShozokuChosainList().setDataSource(DemoData.CHOSAIN_LIST);
+        private void _init_dgChosaItakusakiList() {
+            div.getWaritsukesakiChosaItakusakiList().getDgChosaItakusakiList().setDataSource(
+                    new DemoData().get調査委託先一覧());
+        }
+
+        private void _init_comChosainListAll() {
+            div.getShozokuChosainList().getComChosainListAll().getDgShozokuChosainList().setDataSource(
+                    new DemoData().get所属調査員一覧());
         }
 
     }
@@ -72,9 +80,17 @@ public class NinteichosaIraiByHand {
      */
     private static final class ChosairaiBindByHandMain {
 
-        private static void onLoad(ChosairaiBindByHandMainDiv div) {
-            DataGrids.onLoad(div);
-            RequestContents.onLoad(div.getRequestContents());
+        private final RequestContents contents;
+        private final DataGrids dataGrids;
+
+        ChosairaiBindByHandMain(ChosairaiBindByHandMainDiv panel) {
+            this.dataGrids = new DataGrids(panel);
+            this.contents = new RequestContents(panel.getRequestContents());
+        }
+
+        void onLoad() {
+            contents.onLoad();
+            dataGrids.onLoad();
         }
 
         /**
@@ -82,13 +98,18 @@ public class NinteichosaIraiByHand {
          */
         private static final class RequestContents {
 
+            private final RequestContentsDiv panel;
+
+            RequestContents(RequestContentsDiv panel) {
+                this.panel = panel;
+            }
             private static final int NUM_OF_A_WEEK = 7;
 
-            private static void onLoad(RequestContentsDiv div) {
-                div.getDdlIraiKubun().setSelectedItem(new RString("1"));
+            private void onLoad() {
+                panel.getDdlIraiKubun().setSelectedItem(new RString("1"));
                 FlexibleDate nowDate = FlexibleDate.getNowDate();
-                div.getTxtChosaIraiDate().setValue(nowDate);
-                div.getTxtChosaKigenDate().setValue(nowDate.plusDay(NUM_OF_A_WEEK));
+                panel.getTxtChosaIraiDate().setValue(nowDate);
+                panel.getTxtChosaKigenDate().setValue(nowDate.plusDay(NUM_OF_A_WEEK));
             }
         }
 
@@ -97,19 +118,25 @@ public class NinteichosaIraiByHand {
          */
         private static final class DataGrids {
 
-            private static void onLoad(ChosairaiBindByHandMainDiv div) {
-                setGridSetting(div);
-                init_comNinteichosaIraiListGod(div);
+            private final ChosairaiBindByHandMainDiv panel;
+
+            DataGrids(ChosairaiBindByHandMainDiv panel) {
+                this.panel = panel;
             }
 
-            private static void setGridSetting(ChosairaiBindByHandMainDiv div) {
-                setSettingToWariatezumiList(div.getComWaritukezumiList());
-                setSettingToMiwarituskeList(div.getComMiwarituskeList());
+            private void onLoad() {
+                setGridSetting();
+                _init_comNinteichosaIraiListGod();
             }
 
-            private static void init_comNinteichosaIraiListGod(ChosairaiBindByHandMainDiv div) {
-                div.getComNinteichosaIraiListGod().getDgNinteichosaIraiListForByHand()
-                        .setDataSource(DemoData.TARGET_LIST);
+            private void setGridSetting() {
+                _setGridSetting_WariatezumiList();
+                _setGridSetting_MiwarituskeList();
+            }
+
+            private void _init_comNinteichosaIraiListGod() {
+                panel.getComNinteichosaIraiListGod().getDgNinteichosaIraiListForByHand().setDataSource(
+                        new DemoData().get依頼者一覧());
             }
 
             enum Column {
@@ -159,33 +186,33 @@ public class NinteichosaIraiByHand {
                 }
             }
 
-            private static void setSettingToWariatezumiList(NinteichosaIraiListForByHandCom com) {
+            void _setGridSetting_WariatezumiList() {
                 DataGridSetting setting
-                        = com.getDgNinteichosaIraiListForByHand().getGridSetting();
-                hideColumn(setting, Column.chosaItakusakiNo2TA);
-                hideColumn(setting, Column.chosaItakusakiName2TA);
-                hideColumn(setting, Column.chosainNo2TA);
-                hideColumn(setting, Column.chosainName2TA);
+                        = panel.getComWaritukezumiList().getDgNinteichosaIraiListForByHand().getGridSetting();
+                _hideColumn(setting, Column.chosaItakusakiNo2TA);
+                _hideColumn(setting, Column.chosaItakusakiName2TA);
+                _hideColumn(setting, Column.chosainNo2TA);
+                _hideColumn(setting, Column.chosainName2TA);
             }
 
-            private static void setSettingToMiwarituskeList(NinteichosaIraiListForByHandCom com) {
+            void _setGridSetting_MiwarituskeList() {
                 DataGridSetting setting
-                        = com.getDgNinteichosaIraiListForByHand().getGridSetting();
-                hideColumn(setting, Column.chosaJokyo);
-                hideColumn(setting, Column.btnToShowDetail);
-                hideColumn(setting, Column.chosaIraiKubun);
-                hideColumn(setting, Column.chosaIraiDate);
-                hideColumn(setting, Column.chosaKigenDate);
-                hideColumn(setting, Column.iraishoHakkoDate);
-                hideColumn(setting, Column.chosaItakusakiNo);
-                hideColumn(setting, Column.chosaItakusakiName);
-                hideColumn(setting, Column.chosainNo);
-                hideColumn(setting, Column.chosainName);
-                hideColumn(setting, Column.tokusokuDate);
-                hideColumn(setting, Column.tokusokuCount);
+                        = panel.getComMiwarituskeList().getDgNinteichosaIraiListForByHand().getGridSetting();
+                _hideColumn(setting, Column.chosaJokyo);
+                _hideColumn(setting, Column.btnToShowDetail);
+                _hideColumn(setting, Column.chosaIraiKubun);
+                _hideColumn(setting, Column.chosaIraiDate);
+                _hideColumn(setting, Column.chosaKigenDate);
+                _hideColumn(setting, Column.iraishoHakkoDate);
+                _hideColumn(setting, Column.chosaItakusakiNo);
+                _hideColumn(setting, Column.chosaItakusakiName);
+                _hideColumn(setting, Column.chosainNo);
+                _hideColumn(setting, Column.chosainName);
+                _hideColumn(setting, Column.tokusokuDate);
+                _hideColumn(setting, Column.tokusokuCount);
             }
 
-            private static void hideColumn(DataGridSetting setting, Column item) {
+            private void _hideColumn(DataGridSetting setting, Column item) {
                 setting.getColumn(item.dataName()).setVisible(false);
             }
         }
@@ -196,8 +223,11 @@ public class NinteichosaIraiByHand {
     /**
      * demo用のデータを取得します。
      */
-    private static final class DemoData {
+    static final class DemoData {
 
+        /**
+         * デモ用データの種類の列挙型です。
+         */
         private enum DemoDataType {
 
             依頼者一覧("ChosaIraiTargets.yml"),
@@ -214,29 +244,59 @@ public class NinteichosaIraiByHand {
             }
         }
 
-        private static final List<dgNinteichosaIraiListForByHand_Row> TARGET_LIST;
-        private static final List<dgShozokuChosainList_Row> CHOSAIN_LIST;
-        private static final List<dgChosaItakusakiList_Row> ITAKUSAKI_LIST;
+        private final List<dgNinteichosaIraiListForByHand_Row> targetList;
+        private final List<dgShozokuChosainList_Row> chosainList;
+        private final List<dgChosaItakusakiList_Row> chosaItakusakiList;
 
-        static {
-            TARGET_LIST = createList(DemoDataType.依頼者一覧);
-            CHOSAIN_LIST = createList(DemoDataType.所属調査員一覧);
-            ITAKUSAKI_LIST = createList(DemoDataType.調査委託先一覧);
+        /**
+         * DemoDataを生成します。
+         */
+        DemoData() {
+            targetList = _createList(DemoDataType.依頼者一覧);
+            chosainList = _createList(DemoDataType.所属調査員一覧);
+            chosaItakusakiList = _createList(DemoDataType.調査委託先一覧);
         }
 
-        private static <T> List<T> createList(DemoDataType type) {
-            List<HashMap> dataFromYaml = YamlLoader.FOR_DBE.loadAsList(type.getPath());
-            return YamlUtil.convertList(dataFromYaml, createDataEditor(type));
+        /**
+         * 依頼者一覧を取得します。
+         *
+         * @return 依頼者一覧
+         */
+        List<dgNinteichosaIraiListForByHand_Row> get依頼者一覧() {
+            return this.targetList;
         }
 
-        private static Converter.IConverter createDataEditor(DemoDataType type) {
+        /**
+         * 所属調査員一覧を取得します。
+         *
+         * @return 所属調査員一覧
+         */
+        List<dgShozokuChosainList_Row> get所属調査員一覧() {
+            return this.chosainList;
+        }
+
+        /**
+         * 調査委託先一覧を取得します。
+         *
+         * @return 調査委託先一覧
+         */
+        List<dgChosaItakusakiList_Row> get調査委託先一覧() {
+            return this.chosaItakusakiList;
+        }
+
+        private <T> List<T> _createList(DemoDataType type) {
+            List<HashMap> dataFromYaml = YamlLoader.DBE.loadAsList(type.getPath());
+            return YamlUtil.convertList(dataFromYaml, _createDataEditor(type));
+        }
+
+        private Converter.IConverter _createDataEditor(DemoDataType type) {
             switch (type) {
                 case 依頼者一覧:
                     return new Converter.IConverter<dgNinteichosaIraiListForByHand_Row>() {
 
                         @Override
                         public dgNinteichosaIraiListForByHand_Row exec(Map map) {
-                            return to_dgNinteichosaIraiListForByHand_Row(map);
+                            return _to_dgNinteichosaIraiListForByHand_Row(map);
 
                         }
 
@@ -246,7 +306,7 @@ public class NinteichosaIraiByHand {
 
                         @Override
                         public dgShozokuChosainList_Row exec(Map map) {
-                            return to_dgShozokuChosainList_Row(map);
+                            return _to_dgShozokuChosainList_Row(map);
 
                         }
 
@@ -256,7 +316,7 @@ public class NinteichosaIraiByHand {
 
                         @Override
                         public dgChosaItakusakiList_Row exec(Map map) {
-                            return to_dgChosaItakusakiList_Row(map);
+                            return _to_dgChosaItakusakiList_Row(map);
 
                         }
 
@@ -267,66 +327,71 @@ public class NinteichosaIraiByHand {
 
         }
 
-        private static dgChosaItakusakiList_Row to_dgChosaItakusakiList_Row(Map map) {
+        private dgChosaItakusakiList_Row _to_dgChosaItakusakiList_Row(Map map) {
+            ControlGenerator cg = new ControlGenerator(map);
             return new dgChosaItakusakiList_Row(
-                    YamlUtil.toRString(map.get("調査委託先番号")),
-                    YamlUtil.toRString(map.get("調査委託先名称")),
-                    YamlUtil.toRString(map.get("割付定員")),
-                    YamlUtil.toRString(map.get("割付済み")),
-                    YamlUtil.toRString(map.get("割付地区査員番号")));
-        }
-
-        private static dgShozokuChosainList_Row to_dgShozokuChosainList_Row(Map map) {
-            return new dgShozokuChosainList_Row(new Button(),
-                    YamlUtil.toRString(map.get("調査員番号")),
-                    YamlUtil.toRString(map.get("調査員氏名")),
-                    YamlUtil.toRString(map.get("割付済人数")),
-                    YamlUtil.toRString(map.get("地区")),
-                    YamlUtil.toRString(map.get("調査委託先番号")));
-        }
-
-        private static dgNinteichosaIraiListForByHand_Row to_dgNinteichosaIraiListForByHand_Row(Map map) {
-            RString shimei = YamlUtil.toRString(map.get("氏名"));
-            RString kanaShimei = YamlUtil.toRString(map.get("カナ氏名"));
-            return new dgNinteichosaIraiListForByHand_Row(
-                    YamlUtil.toBoolean(map.get("調査状況")),
-                    compose調査状況(YamlUtil.toRString(map.get("調査状況"))),
-                    new Button(),
-                    YamlUtil.toRString(map.get("保険者番号")),
-                    YamlUtil.toRString(map.get("市町村")),
-                    YamlUtil.toRString(map.get("支所コード")),
-                    YamlUtil.toRString(map.get("支所")),
-                    YamlUtil.toRString(map.get("被保番号")),
-                    shimei,
-                    kanaShimei,
-                    DataGridUtil.lineFeedBetween(kanaShimei, shimei),
-                    YamlUtil.toRString(map.get("認定申請区分")),
-                    YamlUtil.toTextBoxFlexibleDate(map.get("認定申請日")),
-                    YamlUtil.toRString(map.get("調査依頼区分")),
-                    YamlUtil.toTextBoxFlexibleDate(map.get("調査依頼日")),
-                    YamlUtil.toTextBoxFlexibleDate(map.get("調査期限日")),
-                    YamlUtil.toTextBoxFlexibleDate(map.get("依頼書発行日")),
-                    YamlUtil.toRString(map.get("調査委託先番号")),
-                    YamlUtil.toRString(map.get("調査委託先名")),
-                    YamlUtil.toRString(map.get("調査員番号")),
-                    YamlUtil.toRString(map.get("調査員名")),
-                    YamlUtil.toRString(map.get("前回調査委託先番号")),
-                    YamlUtil.toRString(map.get("前回調査委託先名")),
-                    YamlUtil.toRString(map.get("前回調査員番号")),
-                    YamlUtil.toRString(map.get("前回調査員名")),
-                    YamlUtil.toRString(map.get("前々回調査委託先番号")),
-                    YamlUtil.toRString(map.get("前々回調査委託先名")),
-                    YamlUtil.toRString(map.get("前々回調査員番号")),
-                    YamlUtil.toRString(map.get("前々回調査員名")),
-                    YamlUtil.toTextBoxFlexibleDate(map.get("督促日")),
-                    YamlUtil.toRString(map.get("督促回数")),
-                    YamlUtil.toRString(map.get("郵便番号")),
-                    YamlUtil.toRString(map.get("住所")),
-                    YamlUtil.toRString(map.get("入所施設"))
+                    cg.getAsRString("調査委託先番号"),
+                    cg.getAsRString("調査委託先名称"),
+                    cg.getAsRString("割付定員"),
+                    cg.getAsRString("割付済み"),
+                    cg.getAsRString("割付地区査員番号")
             );
         }
 
-        private static RString compose調査状況(RString rstr) {
+        private dgShozokuChosainList_Row _to_dgShozokuChosainList_Row(Map map) {
+            ControlGenerator cg = new ControlGenerator(map);
+            return new dgShozokuChosainList_Row(new Button(),
+                    cg.getAsRString("調査員番号"),
+                    cg.getAsRString("調査員氏名"),
+                    cg.getAsRString("割付済人数"),
+                    cg.getAsRString("地区"),
+                    cg.getAsRString("調査委託先番号")
+            );
+        }
+
+        private dgNinteichosaIraiListForByHand_Row _to_dgNinteichosaIraiListForByHand_Row(Map map) {
+            ControlGenerator cg = new ControlGenerator(map);
+            RString shimei = cg.getAsRString("氏名");
+            RString kanaShimei = cg.getAsRString("カナ氏名");
+            return new dgNinteichosaIraiListForByHand_Row(
+                    cg.getAsBooleanValue("調査状況"),
+                    _compose調査状況(cg.getAsRString("調査状況")),
+                    new Button(),
+                    cg.getAsRString("保険者番号"),
+                    cg.getAsRString("市町村"),
+                    cg.getAsRString("支所コード"),
+                    cg.getAsRString("支所"),
+                    cg.getAsRString("被保番号"),
+                    shimei,
+                    kanaShimei,
+                    DataGridUtil.lineFeedBetween(kanaShimei, shimei),
+                    cg.getAsRString("認定申請区分"),
+                    cg.getAsTextBoxFlexibleDate("認定申請日"),
+                    cg.getAsRString("調査依頼区分"),
+                    cg.getAsTextBoxFlexibleDate("調査依頼日"),
+                    cg.getAsTextBoxFlexibleDate("調査期限日"),
+                    cg.getAsTextBoxFlexibleDate("依頼書発行日"),
+                    cg.getAsRString("調査委託先番号"),
+                    cg.getAsRString("調査委託先名"),
+                    cg.getAsRString("調査員番号"),
+                    cg.getAsRString("調査員名"),
+                    cg.getAsRString("前回調査委託先番号"),
+                    cg.getAsRString("前回調査委託先名"),
+                    cg.getAsRString("前回調査員番号"),
+                    cg.getAsRString("前回調査員名"),
+                    cg.getAsRString("前々回調査委託先番号"),
+                    cg.getAsRString("前々回調査委託先名"),
+                    cg.getAsRString("前々回調査員番号"),
+                    cg.getAsRString("前々回調査員名"),
+                    cg.getAsTextBoxFlexibleDate("督促日"),
+                    cg.getAsRString("督促回数"),
+                    cg.getAsRString("郵便番号"),
+                    cg.getAsRString("住所"),
+                    cg.getAsRString("入所施設")
+            );
+        }
+
+        private static RString _compose調査状況(RString rstr) {
             if (rstr.equals(new RString("true"))) {
                 return new RString("済");
             } else {

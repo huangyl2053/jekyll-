@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryPaperPublishDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -21,10 +22,10 @@ public class NinteichosaIraiEntryPaperDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnToPublishChohyo")
-    private Button btnToPublishChohyo;
     @JsonProperty("chkPaperType")
     private CheckBoxList chkPaperType;
+    @JsonProperty("NinteichosaIraiEntryPaperPublish")
+    private NinteichosaIraiEntryPaperPublishDiv NinteichosaIraiEntryPaperPublish;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,16 +33,6 @@ public class NinteichosaIraiEntryPaperDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("btnToPublishChohyo")
-    public Button getBtnToPublishChohyo() {
-        return btnToPublishChohyo;
-    }
-
-    @JsonProperty("btnToPublishChohyo")
-    public void setBtnToPublishChohyo(Button btnToPublishChohyo) {
-        this.btnToPublishChohyo=btnToPublishChohyo;
-    }
-
     @JsonProperty("chkPaperType")
     public CheckBoxList getChkPaperType() {
         return chkPaperType;
@@ -50,6 +41,16 @@ public class NinteichosaIraiEntryPaperDiv extends Panel {
     @JsonProperty("chkPaperType")
     public void setChkPaperType(CheckBoxList chkPaperType) {
         this.chkPaperType=chkPaperType;
+    }
+
+    @JsonProperty("NinteichosaIraiEntryPaperPublish")
+    public NinteichosaIraiEntryPaperPublishDiv getNinteichosaIraiEntryPaperPublish() {
+        return NinteichosaIraiEntryPaperPublish;
+    }
+
+    @JsonProperty("NinteichosaIraiEntryPaperPublish")
+    public void setNinteichosaIraiEntryPaperPublish(NinteichosaIraiEntryPaperPublishDiv NinteichosaIraiEntryPaperPublish) {
+        this.NinteichosaIraiEntryPaperPublish=NinteichosaIraiEntryPaperPublish;
     }
 
 }

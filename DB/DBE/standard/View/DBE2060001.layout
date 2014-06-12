@@ -8,52 +8,87 @@
      "fieldName": "dgNinteichosaResultTaishosha",
      "items": [],
      "controlType": "DataGrid",
-     "width": "1240",
+     "width": "1070",
      "visible": true,
      "displayNone": false,
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": false,
+     "wrap": true,
      "dependencies": [],
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "dgNinteichosaResultTaishosha",
      "gridSetting": {
-      "rowHeight": 40,
-      "isMultiSelectable": false,
+      "rowHeight": 25,
+      "isMultiSelectable": true,
+      "isShowHeader": true,
       "isShowFooter": true,
       "isShowFilter": false,
       "isShowFilterButton": false,
       "isShowRowState": false,
+      "isShowSelectButtonColumn": false,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
       "header": {
        "combineColumns": [],
        "frozenColumn": "",
-       "headerHeight": 0
+       "headerHeight": 1
       },
       "columns": [
        {
-        "columnName": "",
+        "columnName": "選択",
         "dataName": "btnToDecide",
         "toolTip": "",
         "bgColor": 0,
-        "width": 60,
+        "width": 50,
         "visible": true,
         "cellType": 8,
         "cellDetails": {
          "cellType": 8,
-         "text": "確定",
-         "onClick": "",
-         "imageFileUrl": "",
-         "imageWidth": "",
-         "imageHeight": ""
+         "text": "...",
+         "onClick": "onStart_NinteichosaResultEntryMain",
+         "imageFileUrl": "/uz/uza/css/images/finger.png",
+         "imageWidth": "16",
+         "imageHeight": "18"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "btnToDecide"
+       },
+       {
+        "columnName": "保険者番号",
+        "dataName": "hokenshaNo",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 0,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
         },
         "align": 1,
         "resize": false,
         "isPrivateInfo": false,
-        "sortKey": "btnToDecide"
+        "sortKey": "hokenshaNo"
+       },
+       {
+        "columnName": "市町村",
+        "dataName": "hokenshaName",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 105,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "hokenshaName"
        },
        {
         "columnName": "被保番号",
@@ -72,20 +107,18 @@
         "sortKey": "hihokenshaNo"
        },
        {
-        "columnName": "保険者番号",
-        "dataName": "hokenshaNo",
+        "columnName": "識別コード",
+        "dataName": "shikibetsuCode",
         "toolTip": "",
         "bgColor": 0,
-        "width": 105,
-        "visible": true,
+        "width": 0,
+        "visible": false,
         "cellType": 0,
-        "cellDetails": {
-         "cellType": 0
-        },
+        "cellDetails": null,
         "align": 1,
-        "resize": true,
+        "resize": false,
         "isPrivateInfo": false,
-        "sortKey": "hokenshaNo"
+        "sortKey": "shikibetsuCode"
        },
        {
         "columnName": "氏名",
@@ -93,13 +126,13 @@
         "toolTip": "",
         "bgColor": 0,
         "width": 150,
-        "visible": false,
+        "visible": true,
         "cellType": 0,
         "cellDetails": {
          "cellType": 0
         },
         "align": 0,
-        "resize": false,
+        "resize": true,
         "isPrivateInfo": false,
         "sortKey": "shimei"
        },
@@ -125,13 +158,13 @@
         "toolTip": "",
         "bgColor": 0,
         "width": 150,
-        "visible": true,
+        "visible": false,
         "cellType": 0,
         "cellDetails": {
          "cellType": 0
         },
         "align": 0,
-        "resize": true,
+        "resize": false,
         "isPrivateInfo": false,
         "sortKey": "shimeiAndKanaShimei"
        },
@@ -140,7 +173,7 @@
         "dataName": "shinseiDate",
         "toolTip": "",
         "bgColor": 0,
-        "width": 85,
+        "width": 95,
         "visible": true,
         "cellType": 7,
         "cellDetails": {
@@ -169,11 +202,11 @@
         "sortKey": "shinseiKubun"
        },
        {
-        "columnName": "調査依頼日",
+        "columnName": "調査<br>依頼日",
         "dataName": "chosaIraiDate",
         "toolTip": "",
         "bgColor": 0,
-        "width": 110,
+        "width": 95,
         "visible": true,
         "cellType": 7,
         "cellDetails": {
@@ -188,11 +221,133 @@
         "sortKey": "chosaIraiDate"
        },
        {
+        "columnName": "調査<br>実施日",
+        "dataName": "chosaJisshiDate",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 95,
+        "visible": true,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": ""
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "chosaJisshiDate"
+       },
+       {
+        "columnName": "調査<br>完了日",
+        "dataName": "chosaKanryoDate",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 95,
+        "visible": true,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": ""
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "chosaKanryoDate"
+       },
+       {
+        "columnName": "調査委託先",
+        "dataName": "chosaItakusakiCode",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 0,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "chosaItakusakiCode"
+       },
+       {
+        "columnName": "調査委託先",
+        "dataName": "chosaItakusakiName",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 100,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "chosaItakusakiName"
+       },
+       {
+        "columnName": "調査員",
+        "dataName": "chosainCode",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 0,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "chosainCode"
+       },
+       {
+        "columnName": "調査員",
+        "dataName": "chosainName",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 100,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "chosainName"
+       },
+       {
+        "columnName": "調査実施場所",
+        "dataName": "chosaJisshiBashoType",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 100,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "chosaJisshiBashoType"
+       },
+       {
+        "columnName": "その他",
+        "dataName": "chosaJisshiBashoOther",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 100,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "chosaJisshiBashoOther"
+       },
+       {
         "columnName": "生年月日",
         "dataName": "birthDay",
         "toolTip": "",
         "bgColor": 0,
-        "width": 100,
+        "width": 95,
         "visible": true,
         "cellType": 7,
         "cellDetails": {
@@ -241,7 +396,7 @@
         "dataName": "jusho",
         "toolTip": "",
         "bgColor": 0,
-        "width": 100,
+        "width": 200,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -255,7 +410,7 @@
         "dataName": "receptionDate",
         "toolTip": "",
         "bgColor": 0,
-        "width": 85,
+        "width": 95,
         "visible": true,
         "cellType": 7,
         "cellDetails": {
@@ -270,11 +425,11 @@
         "sortKey": "receptionDate"
        },
        {
-        "columnName": "データ入力日",
+        "columnName": "データ<br>入力日",
         "dataName": "dataInputDate",
         "toolTip": "",
         "bgColor": 0,
-        "width": 120,
+        "width": 95,
         "visible": true,
         "cellType": 7,
         "cellDetails": {
@@ -290,22 +445,96 @@
        }
       ]
      },
-     "height": "M",
+     "height": "520",
      "onSort": "",
      "onSelect": "",
      "onSelectByDblClick": "",
+     "onSelectBySelectButton": "",
+     "onSelectByModifyButton": "",
+     "onSelectByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
      "dataSource": [],
-     "sortOrder": "shimeiAndKanaShimei",
+     "sortOrder": "shimei",
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1
+    },
+    {
+     "fieldName": "ButtonsForNinteichosaResultEntryTarget",
+     "items": [
+      {
+       "fieldName": "btnToFinish",
+       "items": [],
+       "controlType": "Button",
+       "width": "M",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 2,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "btnToFinish",
+       "onClick": "onClick_btnToFinish",
+       "text": "調査を完了とする",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
+       "icon": 0
+      }
+     ],
+     "controlType": "Panel",
+     "width": "1070",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "ButtonsForNinteichosaResultEntryTarget",
+     "onLoad": "",
+     "title": "",
+     "isOpen": true,
+     "canOpenAndClose": true,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "ButtonsForNinteichosaResultEntryTarget"
+      }
+     ],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true,
+     "backgroundColor": 0,
+     "widthAuto": false,
+     "panelDisplay": 0,
+     "isGroupBox": false,
+     "readOnly": false
     }
    ],
    "controlType": "Panel",
-   "width": "1260",
+   "width": "1090",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -318,6 +547,7 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "NinteichosaResultEntryTarget",
    "onLoad": "",
    "title": "対象者一覧",
    "isOpen": true,
@@ -331,6 +561,14 @@
     {
      "eventName": "onLoad",
      "requestUrl": "dbe/db/dbe/NinteichosaResultEntryTarget/onLoad"
+    },
+    {
+     "eventName": "onClick_btnToReturn",
+     "requestUrl": "dbe/db/dbe/NinteichosaResultEntryTarget/onClick_btnToReturn"
+    },
+    {
+     "eventName": "onClick_btnToFinish",
+     "requestUrl": "dbe/db/dbe/NinteichosaResultEntryTarget/onClick_btnToFinish"
     }
    ],
    "hiddenInput": [],
@@ -345,7 +583,9 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": true,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false
   },
   {
    "fieldName": "NinteichosaResultEntryMain",
@@ -354,32 +594,10 @@
      "fieldName": "HihokenshaForNinteichosaResult",
      "items": [
       {
-       "fieldName": "lblHihokenshaNo",
-       "items": [],
-       "controlType": "Label",
-       "width": "64",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "required": false,
-       "align": 2,
-       "text": "被保番号",
-       "isPrivateInfo": false
-      },
-      {
        "fieldName": "txtHihokenshaNo",
        "items": [],
        "controlType": "TextBoxCode",
-       "width": "75",
+       "width": "80",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -392,15 +610,16 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "required": false,
+       "selectControlID": "txtHihokenshaNo_core",
+       "readOnly": true,
        "text": "",
-       "isPrivateInfo": false,
+       "required": false,
        "maxLength": "10",
        "minLength": "10",
        "textAlign": 0,
-       "readOnly": true,
        "placeHolder": "",
        "textKind": 2,
+       "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
        "onFocus": "",
@@ -409,7 +628,7 @@
        "onKeyPress": "",
        "suggest": [],
        "value": "",
-       "labelLText": "",
+       "labelLText": "被保番号",
        "labelRText": "",
        "labelLWidth": "S",
        "labelRWidth": "S",
@@ -419,32 +638,10 @@
        "formatLength": "10"
       },
       {
-       "fieldName": "lblHokenshaNo",
-       "items": [],
-       "controlType": "Label",
-       "width": "145",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "required": false,
-       "align": 2,
-       "text": "保険者番号",
-       "isPrivateInfo": false
-      },
-      {
-       "fieldName": "txtHokenshaNo",
+       "fieldName": "txtShikibetsuCode",
        "items": [],
        "controlType": "TextBoxCode",
-       "width": "45",
+       "width": "120",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -457,15 +654,16 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "required": false,
-       "text": "",
-       "isPrivateInfo": false,
-       "maxLength": "10",
-       "minLength": "10",
-       "textAlign": 0,
+       "selectControlID": "txtShikibetsuCode_core",
        "readOnly": true,
+       "text": "",
+       "required": false,
+       "maxLength": "15",
+       "minLength": "15",
+       "textAlign": 0,
        "placeHolder": "",
        "textKind": 2,
+       "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
        "onFocus": "",
@@ -474,42 +672,20 @@
        "onKeyPress": "",
        "suggest": [],
        "value": "",
-       "labelLText": "",
+       "labelLText": "識別コード",
        "labelRText": "",
-       "labelLWidth": "S",
+       "labelLWidth": "81",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
        "permitCharactor": "",
-       "formatLength": "6"
-      },
-      {
-       "fieldName": "lblShinseiDate",
-       "items": [],
-       "controlType": "Label",
-       "width": "S",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "required": false,
-       "align": 2,
-       "text": "申請日",
-       "isPrivateInfo": false
+       "formatLength": "15"
       },
       {
        "fieldName": "txtShinseiDate",
        "items": [],
-       "controlType": "TextBoxDate",
-       "width": "75",
+       "controlType": "TextBoxFlexibleDate",
+       "width": "80",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -522,21 +698,21 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "required": false,
-       "text": "",
-       "isPrivateInfo": false,
+       "selectControlID": "txtShinseiDate_core",
        "readOnly": true,
+       "text": "",
+       "required": false,
        "placeHolder": "",
-       "textKind": 0,
+       "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
        "value": "",
-       "labelLText": "",
+       "labelLText": "申請日",
        "labelRText": "",
-       "labelLWidth": "S",
+       "labelLWidth": "70",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -545,32 +721,10 @@
        "displayFormat": 0
       },
       {
-       "fieldName": "lblShinseiKubun",
-       "items": [],
-       "controlType": "Label",
-       "width": "103",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "required": false,
-       "align": 2,
-       "text": "申請区分",
-       "isPrivateInfo": false
-      },
-      {
        "fieldName": "txtShinseiKubun",
        "items": [],
        "controlType": "TextBox",
-       "width": "S",
+       "width": "48",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -583,15 +737,16 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "required": false,
-       "text": "",
-       "isPrivateInfo": false,
-       "maxLength": 1000000000000,
-       "minLength": 0,
-       "textAlign": 0,
+       "selectControlID": "txtShinseiKubun_core",
        "readOnly": true,
+       "text": "",
+       "required": false,
+       "maxLength": 100000000,
+       "minLength": 0,
+       "textAlign": 1,
        "placeHolder": "",
        "textKind": 0,
+       "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
        "onFocus": "",
@@ -600,7 +755,7 @@
        "onKeyPress": "",
        "suggest": [],
        "value": "",
-       "labelLText": "",
+       "labelLText": "申請区分",
        "labelRText": "",
        "labelLWidth": "S",
        "labelRWidth": "S",
@@ -609,10 +764,10 @@
        "permitCharactor": ""
       },
       {
-       "fieldName": "lblHihokenshaName",
+       "fieldName": "txtHihokenshaName",
        "items": [],
-       "controlType": "Label",
-       "width": "64",
+       "controlType": "TextBox",
+       "width": "301",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -625,37 +780,16 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "required": false,
-       "align": 2,
-       "text": "氏名",
-       "isPrivateInfo": false
-      },
-      {
-       "fieldName": "txtHihokenshaName",
-       "items": [],
-       "controlType": "TextBox",
-       "width": "295",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "required": false,
+       "selectControlID": "txtHihokenshaName_core",
+       "readOnly": true,
        "text": "",
-       "isPrivateInfo": false,
-       "maxLength": 1000000000000,
+       "required": false,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": true,
        "placeHolder": "",
        "textKind": 0,
+       "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
        "onFocus": "",
@@ -664,7 +798,7 @@
        "onKeyPress": "",
        "suggest": [],
        "value": "",
-       "labelLText": "",
+       "labelLText": "氏名",
        "labelRText": "",
        "labelLWidth": "S",
        "labelRWidth": "S",
@@ -673,32 +807,10 @@
        "permitCharactor": ""
       },
       {
-       "fieldName": "lblHihokenshaBirthDay",
-       "items": [],
-       "controlType": "Label",
-       "width": "S",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "required": false,
-       "align": 2,
-       "text": "生年月日",
-       "isPrivateInfo": false
-      },
-      {
        "fieldName": "txtHihokenshaBirthDay",
        "items": [],
-       "controlType": "TextBoxDate",
-       "width": "75",
+       "controlType": "TextBoxFlexibleDate",
+       "width": "80",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -711,21 +823,21 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "required": false,
-       "text": "",
-       "isPrivateInfo": false,
+       "selectControlID": "txtHihokenshaBirthDay_core",
        "readOnly": true,
+       "text": "",
+       "required": false,
        "placeHolder": "",
-       "textKind": 0,
+       "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
        "value": "",
-       "labelLText": "",
+       "labelLText": "生年月日",
        "labelRText": "",
-       "labelLWidth": "S",
+       "labelLWidth": "70",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
@@ -738,7 +850,7 @@
        "items": [],
        "controlType": "TextBox",
        "width": "25",
-       "visible": true,
+       "visible": false,
        "displayNone": false,
        "disabled": false,
        "accessKey": "",
@@ -750,15 +862,16 @@
        "authorityMode": 0,
        "marginLeft": "",
        "marginRight": "XS",
-       "required": false,
-       "text": "",
-       "isPrivateInfo": false,
-       "maxLength": 1000000000000,
-       "minLength": 0,
-       "textAlign": 0,
+       "selectControlID": "txtHihokenshaAge_core",
        "readOnly": true,
+       "text": "",
+       "required": false,
+       "maxLength": 100000000,
+       "minLength": 0,
+       "textAlign": 2,
        "placeHolder": "",
        "textKind": 0,
+       "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
        "onFocus": "",
@@ -768,62 +881,18 @@
        "suggest": [],
        "value": "",
        "labelLText": "",
-       "labelRText": "",
+       "labelRText": "歳",
        "labelLWidth": "S",
-       "labelRWidth": "S",
+       "labelRWidth": "16",
        "labelLAlign": 2,
        "labelRAlign": 0,
        "permitCharactor": ""
-      },
-      {
-       "fieldName": "lblHihokenshaAge",
-       "items": [],
-       "controlType": "Label",
-       "width": "16",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "",
-       "marginRight": "XS",
-       "required": false,
-       "align": 0,
-       "text": "歳",
-       "isPrivateInfo": false
-      },
-      {
-       "fieldName": "lblHihokenshaGender",
-       "items": [],
-       "controlType": "Label",
-       "width": "XS",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "required": false,
-       "align": 2,
-       "text": "性別",
-       "isPrivateInfo": false
       },
       {
        "fieldName": "txtHihokenshaGender",
        "items": [],
        "controlType": "TextBox",
-       "width": "16",
+       "width": "48",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -836,15 +905,16 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "required": false,
-       "text": "",
-       "isPrivateInfo": false,
-       "maxLength": 1000000000000,
-       "minLength": 0,
-       "textAlign": 0,
+       "selectControlID": "txtHihokenshaGender_core",
        "readOnly": true,
+       "text": "",
+       "required": false,
+       "maxLength": 100000000,
+       "minLength": 0,
+       "textAlign": 1,
        "placeHolder": "",
        "textKind": 0,
+       "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
        "onFocus": "",
@@ -853,19 +923,19 @@
        "onKeyPress": "",
        "suggest": [],
        "value": "",
-       "labelLText": "",
+       "labelLText": "性別",
        "labelRText": "",
-       "labelLWidth": "S",
+       "labelLWidth": "53",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
        "permitCharactor": ""
       },
       {
-       "fieldName": "lblHihokenshaJusho",
+       "fieldName": "txtHihokenshaYubinNo",
        "items": [],
-       "controlType": "Label",
-       "width": "64",
+       "controlType": "TextBox",
+       "width": "65",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -878,37 +948,16 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "required": false,
-       "align": 2,
-       "text": "住所",
-       "isPrivateInfo": false
-      },
-      {
-       "fieldName": "txtHihokenshaYubinNo",
-       "items": [],
-       "controlType": "TextBox",
-       "width": "60",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "required": false,
+       "selectControlID": "txtHihokenshaYubinNo_core",
+       "readOnly": true,
        "text": "",
-       "isPrivateInfo": false,
-       "maxLength": 1000000000000,
+       "required": false,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": true,
        "placeHolder": "",
        "textKind": 0,
+       "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
        "onFocus": "",
@@ -917,7 +966,7 @@
        "onKeyPress": "",
        "suggest": [],
        "value": "",
-       "labelLText": "",
+       "labelLText": "〒",
        "labelRText": "",
        "labelLWidth": "S",
        "labelRWidth": "S",
@@ -942,15 +991,16 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "required": false,
+       "selectControlID": "txtHihokenshaJusho_core",
+       "readOnly": true,
        "text": "",
-       "isPrivateInfo": false,
-       "maxLength": 1000000000000,
+       "required": false,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": true,
        "placeHolder": "",
        "textKind": 0,
+       "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
        "onFocus": "",
@@ -969,7 +1019,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "1240",
+     "width": "1070",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -982,6 +1032,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "HihokenshaForNinteichosaResult",
      "onLoad": "",
      "title": "被保険者",
      "isOpen": true,
@@ -1004,38 +1055,18 @@
      "eraseBorderLeft": false,
      "backgroundColor": 0,
      "widthAuto": false,
-     "isGroupBox": true
+     "panelDisplay": 1,
+     "isGroupBox": false,
+     "readOnly": false
     },
     {
      "fieldName": "NinteichosaDetail",
      "items": [
       {
-       "fieldName": "lblShozokuKikan",
-       "items": [],
-       "controlType": "Label",
-       "width": "S",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": true,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "required": false,
-       "align": 2,
-       "text": "調査機関",
-       "isPrivateInfo": false
-      },
-      {
        "fieldName": "txtChosaItakusakiCode",
        "items": [],
        "controlType": "TextBoxCode",
-       "width": "75",
+       "width": "78",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1048,15 +1079,16 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "required": false,
+       "selectControlID": "txtChosaItakusakiCode_core",
+       "readOnly": false,
        "text": "",
-       "isPrivateInfo": false,
+       "required": false,
        "maxLength": "10",
        "minLength": "10",
        "textAlign": 0,
-       "readOnly": true,
        "placeHolder": "",
        "textKind": 2,
+       "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
        "onFocus": "",
@@ -1065,7 +1097,7 @@
        "onKeyPress": "",
        "suggest": [],
        "value": "",
-       "labelLText": "",
+       "labelLText": "調査委託先",
        "labelRText": "",
        "labelLWidth": "S",
        "labelRWidth": "S",
@@ -1091,15 +1123,16 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "required": false,
+       "selectControlID": "txtChosaItakusakiName_core",
+       "readOnly": false,
        "text": "",
-       "isPrivateInfo": false,
-       "maxLength": 1000000000000,
+       "required": false,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": true,
        "placeHolder": "",
        "textKind": 0,
+       "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
        "onFocus": "",
@@ -1117,9 +1150,9 @@
        "permitCharactor": ""
       },
       {
-       "fieldName": "lblChosaJisshiDate",
+       "fieldName": "btnToSearchChosaItakusaki",
        "items": [],
-       "controlType": "Label",
+       "controlType": "ButtonDialog",
        "width": "S",
        "visible": true,
        "displayNone": false,
@@ -1133,55 +1166,25 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "required": false,
-       "align": 2,
-       "text": "調査実施日",
-       "isPrivateInfo": false
+       "selectControlID": "btnToSearchChosaItakusaki",
+       "onClick": "",
+       "text": "ButtonDialog1",
+       "appearance": 2,
+       "imageFileUrl": "/uz/uza/css/Link.jpg",
+       "imageWidth": "20",
+       "imageHeight": "20",
+       "icon": 0,
+       "displayChildDivName": "",
+       "dataPassing": [],
+       "visibleCloseButton": true,
+       "onOkClose": "",
+       "onBeforeOpenDialog": ""
       },
       {
-       "fieldName": "txtChosaJisshiDate",
+       "fieldName": "txtChosainCode",
        "items": [],
-       "controlType": "TextBoxDate",
-       "width": "75",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "required": false,
-       "text": "",
-       "isPrivateInfo": false,
-       "readOnly": false,
-       "placeHolder": "",
-       "textKind": 0,
-       "isPassword": false,
-       "onFocus": "",
-       "onBlur": "",
-       "onChange": "",
-       "onKeyPress": "",
-       "value": "",
-       "labelLText": "",
-       "labelRText": "",
-       "labelLWidth": "S",
-       "labelRWidth": "S",
-       "labelLAlign": 2,
-       "labelRAlign": 0,
-       "permitCharactor": "./_-",
-       "ymdKubun": 2,
-       "displayFormat": 0
-      },
-      {
-       "fieldName": "lblChosain",
-       "items": [],
-       "controlType": "Label",
-       "width": "S",
+       "controlType": "TextBoxCode",
+       "width": "65",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1194,37 +1197,16 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "required": false,
-       "align": 2,
-       "text": "調査員",
-       "isPrivateInfo": false
-      },
-      {
-       "fieldName": "txtChosainCode",
-       "items": [],
-       "controlType": "TextBoxCode",
-       "width": "75",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "required": false,
+       "selectControlID": "txtChosainCode_core",
+       "readOnly": false,
        "text": "",
-       "isPrivateInfo": false,
-       "maxLength": "10",
-       "minLength": "10",
+       "required": false,
+       "maxLength": "8",
+       "minLength": "8",
        "textAlign": 0,
-       "readOnly": true,
        "placeHolder": "",
        "textKind": 2,
+       "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
        "onFocus": "",
@@ -1233,14 +1215,14 @@
        "onKeyPress": "",
        "suggest": [],
        "value": "",
-       "labelLText": "",
+       "labelLText": "調査員",
        "labelRText": "",
        "labelLWidth": "S",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
        "permitCharactor": "",
-       "formatLength": "10"
+       "formatLength": "8"
       },
       {
        "fieldName": "txtChosainName",
@@ -1259,15 +1241,16 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "required": false,
+       "selectControlID": "txtChosainName_core",
+       "readOnly": false,
        "text": "",
-       "isPrivateInfo": false,
-       "maxLength": 1000000000000,
+       "required": false,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": true,
        "placeHolder": "",
        "textKind": 0,
+       "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
        "onFocus": "",
@@ -1276,35 +1259,52 @@
        "onKeyPress": "",
        "suggest": [],
        "value": "",
-       "labelLText": "",
+       "labelLText": " ",
        "labelRText": "",
-       "labelLWidth": "S",
+       "labelLWidth": "11.5",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
        "permitCharactor": ""
       },
       {
-       "fieldName": "lblChosaJisshiBasho",
+       "fieldName": "txtChosaJisshiDate",
        "items": [],
-       "controlType": "Label",
-       "width": "243",
+       "controlType": "TextBoxFlexibleDate",
+       "width": "80",
        "visible": true,
        "displayNone": false,
        "disabled": false,
        "accessKey": "",
        "nextFocusFieldName": "",
-       "wrap": false,
+       "wrap": true,
        "dependencies": [],
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtChosaJisshiDate_core",
+       "readOnly": false,
+       "text": "",
        "required": false,
-       "align": 2,
-       "text": "調査実施場所",
-       "isPrivateInfo": false
+       "placeHolder": "",
+       "isPrivateInfo": false,
+       "isPassword": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
+       "onKeyPress": "",
+       "value": "",
+       "labelLText": "実施日",
+       "labelRText": "",
+       "labelLWidth": "S",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "permitCharactor": "./_-",
+       "ymdKubun": 2,
+       "displayFormat": 0
       },
       {
        "fieldName": "radChosaJisshiBasho",
@@ -1323,6 +1323,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "radChosaJisshiBasho_core",
        "dataSource": [
         {
          "key": "1",
@@ -1337,15 +1338,16 @@
          "value": "その他"
         }
        ],
+       "onClick": "",
+       "icon": [],
        "required": false,
-       "onChange": "",
-       "labelLText": "",
-       "labelLWidth": "S",
+       "onChange": "onChange_radChosaJisshiBasho",
+       "labelLText": "実施場所",
+       "labelLWidth": "85",
        "labelLAlign": 2,
        "selectedItem": "1",
-       "onClick": "",
        "newLineItemNumber": 3,
-       "spaceSize": 1
+       "spaceSize": "M"
       },
       {
        "fieldName": "txtChosaJisshiBashoFreeInput",
@@ -1364,15 +1366,16 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "required": false,
+       "selectControlID": "txtChosaJisshiBashoFreeInput_core",
+       "readOnly": false,
        "text": "",
-       "isPrivateInfo": false,
-       "maxLength": 1000000000000,
+       "required": false,
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": false,
        "placeHolder": "",
        "textKind": 0,
+       "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
        "onFocus": "",
@@ -1391,7 +1394,7 @@
       }
      ],
      "controlType": "Panel",
-     "width": "1240",
+     "width": "800",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1404,8 +1407,9 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "NinteichosaDetail",
      "onLoad": "",
-     "title": "調査実施内容",
+     "title": "実施内容",
      "isOpen": true,
      "canOpenAndClose": false,
      "postParameterPanelNames": [
@@ -1426,7 +1430,96 @@
      "eraseBorderLeft": false,
      "backgroundColor": 0,
      "widthAuto": false,
-     "isGroupBox": true
+     "panelDisplay": 1,
+     "isGroupBox": false,
+     "readOnly": false
+    },
+    {
+     "fieldName": "ShisakaiWaritsukeKibo",
+     "items": [
+      {
+       "fieldName": "radShinsakaiWaritsukeKibo",
+       "items": [],
+       "controlType": "RadioButton",
+       "width": "230",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "S",
+       "marginRight": "XS",
+       "selectControlID": "radShinsakaiWaritsukeKibo_core",
+       "dataSource": [
+        {
+         "key": "1",
+         "value": "なし"
+        },
+        {
+         "key": "2",
+         "value": "直近の審査会"
+        },
+        {
+         "key": "3",
+         "value": "精神科医のいる審査会"
+        }
+       ],
+       "onClick": "",
+       "icon": [],
+       "onChange": "",
+       "labelLText": "",
+       "labelLWidth": "S",
+       "labelLAlign": 2,
+       "selectedItem": "1",
+       "newLineItemNumber": 1,
+       "spaceSize": "M"
+      }
+     ],
+     "controlType": "Panel",
+     "width": "255",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "ShisakaiWaritsukeKibo",
+     "onLoad": "",
+     "title": "審査会割付希望",
+     "isOpen": true,
+     "canOpenAndClose": false,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "ShisakaiWaritsukeKibo"
+      }
+     ],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
+     "backgroundColor": 0,
+     "widthAuto": true,
+     "panelDisplay": 1,
+     "isGroupBox": false,
+     "readOnly": false
     },
     {
      "fieldName": "tabNinteichosaResult",
@@ -1454,10 +1547,11 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
-           "align": 2,
+           "selectControlID": "lblItemNo",
            "text": "1-1",
-           "isPrivateInfo": false
+           "required": false,
+           "isPrivateInfo": false,
+           "align": 2
           },
           {
            "fieldName": "lblItemName",
@@ -1476,10 +1570,11 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "lblItemName",
+           "text": "麻痺(左上肢)",
            "required": false,
-           "align": 0,
-           "text": "麻痺等の有無(左上肢)",
-           "isPrivateInfo": false
+           "isPrivateInfo": false,
+           "align": 0
           },
           {
            "fieldName": "btnToEditTokkijiko",
@@ -1498,15 +1593,17 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "btnToEditTokkijiko",
+           "onClick": "",
            "text": "特記事項",
-           "onClick": "onClick_btnToEditTokkijiko",
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
-           "imageHeight": ""
+           "imageHeight": "",
+           "icon": 0
           },
           {
-           "fieldName": "lblPaddingItemNo",
+           "fieldName": "lblSpace3",
            "items": [],
            "controlType": "Label",
            "width": "XS",
@@ -1522,16 +1619,17 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
-           "align": 2,
+           "selectControlID": "lblSpace3",
            "text": "dummy",
-           "isPrivateInfo": false
+           "required": false,
+           "isPrivateInfo": false,
+           "align": 2
           },
           {
            "fieldName": "radChoices",
            "items": [],
            "controlType": "RadioButton",
-           "width": "1000",
+           "width": "780",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -1544,25 +1642,27 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "radChoices_core",
            "dataSource": [
             {
-             "key": "0",
-             "value": "0：なし"
+             "key": "1",
+             "value": "1：なし"
             },
             {
-             "key": "1",
-             "value": "1：あり"
+             "key": "2",
+             "value": "2：あり"
             }
            ],
+           "onClick": "onChange_radChoices",
+           "icon": [],
            "required": false,
            "onChange": "onChange_radChoices",
            "labelLText": "",
            "labelLWidth": "S",
            "labelLAlign": 2,
-           "selectedItem": "",
-           "onClick": "",
+           "selectedItem": "1",
            "newLineItemNumber": 10,
-           "spaceSize": 1
+           "spaceSize": "M"
           },
           {
            "fieldName": "btnSelectPrevious",
@@ -1581,12 +1681,14 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "text": "＜",
+           "selectControlID": "btnSelectPrevious",
            "onClick": "onClick_btnSelectPrevious",
+           "text": "＜",
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
-           "imageHeight": ""
+           "imageHeight": "",
+           "icon": 0
           },
           {
            "fieldName": "btnSelectNext",
@@ -1605,16 +1707,18 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "text": "＞",
+           "selectControlID": "btnSelectNext",
            "onClick": "onClick_btnSelectNext",
+           "text": "＞",
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
-           "imageHeight": ""
+           "imageHeight": "",
+           "icon": 0
           }
          ],
          "controlType": "Panel",
-         "width": "M",
+         "width": "860",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1622,11 +1726,12 @@
          "nextFocusFieldName": "",
          "wrap": true,
          "dependencies": [],
-         "float": 1,
+         "float": 0,
          "toolTip": "",
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "KihonchosaResultGuidance",
          "onLoad": "",
          "title": "基本調査項目",
          "isOpen": true,
@@ -1648,8 +1753,150 @@
          "eraseBorderRight": false,
          "eraseBorderLeft": false,
          "backgroundColor": 0,
-         "widthAuto": true,
-         "isGroupBox": true
+         "widthAuto": false,
+         "panelDisplay": 1,
+         "isGroupBox": false,
+         "readOnly": false
+        },
+        {
+         "fieldName": "btnToCopyLatestKihonchosa",
+         "items": [],
+         "controlType": "Button",
+         "width": "130",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 2,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "2.4",
+         "selectControlID": "btnToCopyLatestKihonchosa",
+         "onClick": "",
+         "text": "前回値を複写する",
+         "appearance": 0,
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": "",
+         "icon": 0
+        },
+        {
+         "fieldName": "IchjiHanteiFromInputedChosaResult",
+         "items": [
+          {
+           "fieldName": "txtIchijiHanteiResult",
+           "items": [],
+           "controlType": "TextBox",
+           "width": "100",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": true,
+           "dependencies": [],
+           "float": 1,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "1.5",
+           "marginRight": "XS",
+           "selectControlID": "txtIchijiHanteiResult_core",
+           "readOnly": false,
+           "text": "",
+           "required": false,
+           "maxLength": 100000000,
+           "minLength": 0,
+           "textAlign": 1,
+           "placeHolder": "",
+           "textKind": 0,
+           "isPrivateInfo": false,
+           "isPassword": false,
+           "isComboBox": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
+           "onKeyPress": "",
+           "suggest": [],
+           "value": "",
+           "labelLText": "",
+           "labelRText": "",
+           "labelLWidth": "S",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
+           "permitCharactor": ""
+          },
+          {
+           "fieldName": "btnIchijiHantei",
+           "items": [],
+           "controlType": "Button",
+           "width": "120",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": true,
+           "dependencies": [],
+           "float": 1,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "selectControlID": "btnIchijiHantei",
+           "onClick": "",
+           "text": "一次判定を行う",
+           "appearance": 0,
+           "imageFileUrl": "",
+           "imageWidth": "",
+           "imageHeight": "",
+           "icon": 0
+          }
+         ],
+         "controlType": "Panel",
+         "width": "160",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "selectControlID": "IchjiHanteiFromInputedChosaResult",
+         "onLoad": "",
+         "title": "一次判定",
+         "isOpen": true,
+         "canOpenAndClose": false,
+         "postParameterPanelNames": [
+          {
+           "postParameterPanelNames": "IchjiHanteiFromInputedChosaResult"
+          }
+         ],
+         "requestSettings": [],
+         "hiddenInput": [],
+         "onOpen": "",
+         "onClose": "",
+         "session": {},
+         "marginTop": "Default",
+         "marginBottom": "Default",
+         "eraseBorderTop": false,
+         "eraseBorderBottom": false,
+         "eraseBorderRight": false,
+         "eraseBorderLeft": false,
+         "backgroundColor": 0,
+         "widthAuto": false,
+         "panelDisplay": 1,
+         "isGroupBox": false,
+         "readOnly": false
         },
         {
          "fieldName": "Kihonchosa09",
@@ -1677,20 +1924,21 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult101a",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
                "text_ItemNo": "1-1",
-               "text_ItemName": "麻痺等の有無(左上肢)",
+               "text_ItemName": "麻痺(左上肢)",
                "visible_ItemNo": true,
                "dataSource_Choices": [
                 {
-                 "key": "0",
-                 "value": "0：なし"
+                 "key": "1",
+                 "value": "1：なし"
                 },
                 {
-                 "key": "1",
-                 "value": "1：あり"
+                 "key": "2",
+                 "value": "2：あり"
                 }
                ],
                "onFocus_Answer": "onFocus_txtAnswer"
@@ -1712,20 +1960,21 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult101b",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
                "text_ItemNo": "1-1",
-               "text_ItemName": "麻痺等の有無(右上肢)",
+               "text_ItemName": "麻痺(右上肢)",
                "visible_ItemNo": false,
                "dataSource_Choices": [
                 {
-                 "key": "0",
-                 "value": "0：なし"
+                 "key": "1",
+                 "value": "1：なし"
                 },
                 {
-                 "key": "1",
-                 "value": "1：あり"
+                 "key": "2",
+                 "value": "2：あり"
                 }
                ],
                "onFocus_Answer": "onFocus_txtAnswer"
@@ -1747,20 +1996,21 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult101c",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
                "text_ItemNo": "1-1",
-               "text_ItemName": "麻痺等の有無(左下肢)",
+               "text_ItemName": "麻痺(左下肢)",
                "visible_ItemNo": false,
                "dataSource_Choices": [
                 {
-                 "key": "0",
-                 "value": "0：なし"
+                 "key": "1",
+                 "value": "1：なし"
                 },
                 {
-                 "key": "1",
-                 "value": "1：あり"
+                 "key": "2",
+                 "value": "2：あり"
                 }
                ],
                "onFocus_Answer": "onFocus_txtAnswer"
@@ -1782,20 +2032,21 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult101d",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
                "text_ItemNo": "1-1",
-               "text_ItemName": "麻痺等の有無(右下肢)",
+               "text_ItemName": "麻痺(右下肢)",
                "visible_ItemNo": false,
                "dataSource_Choices": [
                 {
-                 "key": "0",
-                 "value": "0：なし"
+                 "key": "1",
+                 "value": "1：なし"
                 },
                 {
-                 "key": "1",
-                 "value": "1：あり"
+                 "key": "2",
+                 "value": "2：あり"
                 }
                ],
                "onFocus_Answer": "onFocus_txtAnswer"
@@ -1817,20 +2068,21 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult101e",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
                "text_ItemNo": "1-1",
-               "text_ItemName": "麻痺等の有無(その他)",
+               "text_ItemName": "麻痺(その他)",
                "visible_ItemNo": false,
                "dataSource_Choices": [
                 {
-                 "key": "0",
-                 "value": "0：なし"
+                 "key": "1",
+                 "value": "1：なし"
                 },
                 {
-                 "key": "1",
-                 "value": "1：あり"
+                 "key": "2",
+                 "value": "2：あり"
                 }
                ],
                "onFocus_Answer": "onFocus_txtAnswer"
@@ -1852,20 +2104,21 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult102a",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
                "text_ItemNo": "1-2",
-               "text_ItemName": "拘縮の有無(　肩　)",
+               "text_ItemName": "拘縮(　肩　)",
                "visible_ItemNo": true,
                "dataSource_Choices": [
                 {
-                 "key": "0",
-                 "value": "0：なし"
+                 "key": "1",
+                 "value": "1：なし"
                 },
                 {
-                 "key": "1",
-                 "value": "1：あり"
+                 "key": "2",
+                 "value": "2：あり"
                 }
                ],
                "onFocus_Answer": "onFocus_txtAnswer"
@@ -1887,20 +2140,21 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult102b",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
                "text_ItemNo": "1-2",
-               "text_ItemName": "拘縮の有無(　股　)",
+               "text_ItemName": "拘縮(　股　)",
                "visible_ItemNo": false,
                "dataSource_Choices": [
                 {
-                 "key": "0",
-                 "value": "0：なし"
+                 "key": "1",
+                 "value": "1：なし"
                 },
                 {
-                 "key": "1",
-                 "value": "1：あり"
+                 "key": "2",
+                 "value": "2：あり"
                 }
                ],
                "onFocus_Answer": "onFocus_txtAnswer"
@@ -1922,20 +2176,21 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult102c",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
                "text_ItemNo": "1-2",
-               "text_ItemName": "拘縮の有無(　膝　)",
+               "text_ItemName": "拘縮(　膝　)",
                "visible_ItemNo": false,
                "dataSource_Choices": [
                 {
-                 "key": "0",
-                 "value": "0：なし"
+                 "key": "1",
+                 "value": "1：なし"
                 },
                 {
-                 "key": "1",
-                 "value": "1：あり"
+                 "key": "2",
+                 "value": "2：あり"
                 }
                ],
                "onFocus_Answer": "onFocus_txtAnswer"
@@ -1957,20 +2212,21 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult102d",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
                "text_ItemNo": "1-2",
-               "text_ItemName": "拘縮の有無(その他)",
+               "text_ItemName": "拘縮(その他)",
                "visible_ItemNo": false,
                "dataSource_Choices": [
                 {
-                 "key": "0",
-                 "value": "0：なし"
+                 "key": "1",
+                 "value": "1：なし"
                 },
                 {
-                 "key": "1",
-                 "value": "1：あり"
+                 "key": "2",
+                 "value": "2：あり"
                 }
                ],
                "onFocus_Answer": "onFocus_txtAnswer"
@@ -1992,6 +2248,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult103",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -2031,6 +2288,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult104",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -2070,6 +2328,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult105",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -2113,6 +2372,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult106",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -2152,6 +2412,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult107",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -2191,6 +2452,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult108",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -2230,6 +2492,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult109",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -2254,7 +2517,7 @@
               }
              ],
              "controlType": "Panel",
-             "width": "M",
+             "width": "G2",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -2267,10 +2530,11 @@
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "Kihonchosa0911",
              "onLoad": "",
              "title": "",
              "isOpen": true,
-             "canOpenAndClose": false,
+             "canOpenAndClose": true,
              "postParameterPanelNames": [
               {
                "postParameterPanelNames": "KihonchosaLeft2"
@@ -2285,15 +2549,17 @@
              "marginBottom": "Default",
              "eraseBorderTop": false,
              "eraseBorderBottom": true,
-             "eraseBorderRight": false,
-             "eraseBorderLeft": false,
+             "eraseBorderRight": true,
+             "eraseBorderLeft": true,
              "backgroundColor": 0,
              "widthAuto": true,
-             "isGroupBox": false
+             "panelDisplay": 0,
+             "isGroupBox": false,
+             "readOnly": false
             }
            ],
            "controlType": "Panel",
-           "width": "M",
+           "width": "G2",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -2306,6 +2572,7 @@
            "authorityMode": 0,
            "marginLeft": "",
            "marginRight": "",
+           "selectControlID": "Kihonchosa09Left",
            "onLoad": "",
            "title": "",
            "isOpen": true,
@@ -2325,10 +2592,12 @@
            "eraseBorderTop": true,
            "eraseBorderBottom": true,
            "eraseBorderRight": true,
-           "eraseBorderLeft": true,
+           "eraseBorderLeft": false,
            "backgroundColor": 0,
            "widthAuto": true,
-           "isGroupBox": false
+           "panelDisplay": 0,
+           "isGroupBox": false,
+           "readOnly": false
           },
           {
            "fieldName": "Kihonchosa09CenterLeft",
@@ -2353,6 +2622,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult110",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -2396,6 +2666,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult111",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -2435,6 +2706,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult112",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -2482,6 +2754,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult113",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -2514,7 +2787,7 @@
               }
              ],
              "controlType": "Panel",
-             "width": "M",
+             "width": "G2",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -2527,6 +2800,7 @@
              "authorityMode": 0,
              "marginLeft": "",
              "marginRight": "XS",
+             "selectControlID": "Kihonchosa0912",
              "onLoad": "",
              "title": "",
              "isOpen": true,
@@ -2545,11 +2819,13 @@
              "marginBottom": "Default",
              "eraseBorderTop": true,
              "eraseBorderBottom": false,
-             "eraseBorderRight": false,
+             "eraseBorderRight": true,
              "eraseBorderLeft": false,
              "backgroundColor": 0,
              "widthAuto": true,
-             "isGroupBox": false
+             "panelDisplay": 0,
+             "isGroupBox": false,
+             "readOnly": false
             },
             {
              "fieldName": "Kihonchosa0921",
@@ -2571,6 +2847,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult201",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -2614,6 +2891,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult202",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -2657,6 +2935,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult203",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -2696,6 +2975,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult204",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -2739,6 +3019,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult205",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -2782,6 +3063,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult206",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -2825,6 +3107,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult207",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -2864,6 +3147,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult208",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -2903,6 +3187,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult209",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -2942,6 +3227,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult210",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -2985,6 +3271,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult211",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -3028,6 +3315,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult212",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -3052,7 +3340,7 @@
               }
              ],
              "controlType": "Panel",
-             "width": "M",
+             "width": "G2",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -3065,6 +3353,7 @@
              "authorityMode": 0,
              "marginLeft": "",
              "marginRight": "XS",
+             "selectControlID": "Kihonchosa0921",
              "onLoad": "",
              "title": "",
              "isOpen": true,
@@ -3083,15 +3372,17 @@
              "marginBottom": "Default",
              "eraseBorderTop": false,
              "eraseBorderBottom": false,
-             "eraseBorderRight": false,
+             "eraseBorderRight": true,
              "eraseBorderLeft": false,
              "backgroundColor": 0,
              "widthAuto": true,
-             "isGroupBox": false
+             "panelDisplay": 0,
+             "isGroupBox": false,
+             "readOnly": false
             }
            ],
            "controlType": "Panel",
-           "width": "M",
+           "width": "G2",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -3104,6 +3395,7 @@
            "authorityMode": 0,
            "marginLeft": "",
            "marginRight": "",
+           "selectControlID": "Kihonchosa09CenterLeft",
            "onLoad": "",
            "title": "",
            "isOpen": true,
@@ -3126,7 +3418,9 @@
            "eraseBorderLeft": true,
            "backgroundColor": 0,
            "widthAuto": true,
-           "isGroupBox": false
+           "panelDisplay": 0,
+           "isGroupBox": false,
+           "readOnly": false
           },
           {
            "fieldName": "Kihonchosa09Center",
@@ -3151,6 +3445,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult301",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -3194,11 +3489,12 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult302",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
                "text_ItemNo": "3-2",
-               "text_ItemName": "毎日の日課を理解",
+               "text_ItemName": "日課の理解",
                "visible_ItemNo": true,
                "dataSource_Choices": [
                 {
@@ -3229,11 +3525,12 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult303",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
                "text_ItemNo": "3-3",
-               "text_ItemName": "生年月日や年齢を言う",
+               "text_ItemName": "生年月日や年齢",
                "visible_ItemNo": true,
                "dataSource_Choices": [
                 {
@@ -3264,6 +3561,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult304",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -3299,11 +3597,12 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult305",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
                "text_ItemNo": "3-5",
-               "text_ItemName": "自分の名前を言う",
+               "text_ItemName": "名前を言う",
                "visible_ItemNo": true,
                "dataSource_Choices": [
                 {
@@ -3334,11 +3633,12 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult306",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
                "text_ItemNo": "3-6",
-               "text_ItemName": "今の季節を理解する",
+               "text_ItemName": "今の季節の理解",
                "visible_ItemNo": true,
                "dataSource_Choices": [
                 {
@@ -3369,6 +3669,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult307",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -3404,6 +3705,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult308",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -3443,11 +3745,12 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult309",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
                "text_ItemNo": "3-9",
-               "text_ItemName": "外出すると戻れない",
+               "text_ItemName": "外出/戻れない",
                "visible_ItemNo": true,
                "dataSource_Choices": [
                 {
@@ -3467,7 +3770,7 @@
               }
              ],
              "controlType": "Panel",
-             "width": "M",
+             "width": "G2",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -3480,6 +3783,7 @@
              "authorityMode": 0,
              "marginLeft": "",
              "marginRight": "XS",
+             "selectControlID": "Kihonchosa0931",
              "onLoad": "",
              "title": "",
              "isOpen": true,
@@ -3498,11 +3802,13 @@
              "marginBottom": "Default",
              "eraseBorderTop": false,
              "eraseBorderBottom": false,
-             "eraseBorderRight": false,
+             "eraseBorderRight": true,
              "eraseBorderLeft": false,
              "backgroundColor": 0,
              "widthAuto": true,
-             "isGroupBox": false
+             "panelDisplay": 0,
+             "isGroupBox": false,
+             "readOnly": false
             },
             {
              "fieldName": "Kihonchosa0941",
@@ -3524,6 +3830,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult401",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -3563,6 +3870,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult402",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -3602,6 +3910,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult403",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -3641,6 +3950,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult404",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -3680,6 +3990,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult405",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -3719,6 +4030,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult406",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -3758,6 +4070,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult407",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -3782,7 +4095,7 @@
               }
              ],
              "controlType": "Panel",
-             "width": "M",
+             "width": "G2",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -3795,10 +4108,11 @@
              "authorityMode": 0,
              "marginLeft": "",
              "marginRight": "XS",
+             "selectControlID": "Kihonchosa0941",
              "onLoad": "",
              "title": "",
              "isOpen": true,
-             "canOpenAndClose": false,
+             "canOpenAndClose": true,
              "postParameterPanelNames": [
               {
                "postParameterPanelNames": "Kihonchosa0941"
@@ -3813,15 +4127,17 @@
              "marginBottom": "Default",
              "eraseBorderTop": false,
              "eraseBorderBottom": true,
-             "eraseBorderRight": false,
+             "eraseBorderRight": true,
              "eraseBorderLeft": false,
              "backgroundColor": 0,
              "widthAuto": true,
-             "isGroupBox": false
+             "panelDisplay": 0,
+             "isGroupBox": false,
+             "readOnly": false
             }
            ],
            "controlType": "Panel",
-           "width": "M",
+           "width": "G2",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -3834,6 +4150,7 @@
            "authorityMode": 0,
            "marginLeft": "",
            "marginRight": "",
+           "selectControlID": "Kihonchosa09Center",
            "onLoad": "",
            "title": "",
            "isOpen": true,
@@ -3856,7 +4173,9 @@
            "eraseBorderLeft": true,
            "backgroundColor": 0,
            "widthAuto": true,
-           "isGroupBox": false
+           "panelDisplay": 0,
+           "isGroupBox": false,
+           "readOnly": false
           },
           {
            "fieldName": "Kihonchosa09CenterRight",
@@ -3881,6 +4200,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult408",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -3920,6 +4240,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult409",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -3959,6 +4280,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult410",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -3998,6 +4320,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult411",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -4037,6 +4360,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult412",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -4076,11 +4400,12 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult413",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
                "text_ItemNo": "4-13",
-               "text_ItemName": "独り言・独り笑い",
+               "text_ItemName": "独り言/独り笑い",
                "visible_ItemNo": true,
                "dataSource_Choices": [
                 {
@@ -4115,11 +4440,12 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult414",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
                "text_ItemNo": "4-14",
-               "text_ItemName": "自分勝手に行動する",
+               "text_ItemName": "自分勝手な行動",
                "visible_ItemNo": true,
                "dataSource_Choices": [
                 {
@@ -4154,6 +4480,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult415",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -4178,7 +4505,7 @@
               }
              ],
              "controlType": "Panel",
-             "width": "M",
+             "width": "G2",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -4191,10 +4518,11 @@
              "authorityMode": 0,
              "marginLeft": "",
              "marginRight": "XS",
+             "selectControlID": "Kihonchosa0942",
              "onLoad": "",
              "title": "",
              "isOpen": true,
-             "canOpenAndClose": false,
+             "canOpenAndClose": true,
              "postParameterPanelNames": [
               {
                "postParameterPanelNames": "Kihonchosa0941"
@@ -4209,11 +4537,13 @@
              "marginBottom": "Default",
              "eraseBorderTop": true,
              "eraseBorderBottom": false,
-             "eraseBorderRight": false,
+             "eraseBorderRight": true,
              "eraseBorderLeft": false,
              "backgroundColor": 0,
              "widthAuto": true,
-             "isGroupBox": false
+             "panelDisplay": 0,
+             "isGroupBox": false,
+             "readOnly": false
             },
             {
              "fieldName": "Kihonchosa0951",
@@ -4235,6 +4565,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult501",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -4274,6 +4605,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult502",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -4313,6 +4645,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult503",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -4356,6 +4689,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult504",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -4395,6 +4729,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult505",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -4438,6 +4773,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult506",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -4466,7 +4802,7 @@
               }
              ],
              "controlType": "Panel",
-             "width": "M",
+             "width": "G2",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -4479,6 +4815,7 @@
              "authorityMode": 0,
              "marginLeft": "",
              "marginRight": "XS",
+             "selectControlID": "Kihonchosa0951",
              "onLoad": "",
              "title": "",
              "isOpen": true,
@@ -4497,15 +4834,17 @@
              "marginBottom": "Default",
              "eraseBorderTop": false,
              "eraseBorderBottom": false,
-             "eraseBorderRight": false,
+             "eraseBorderRight": true,
              "eraseBorderLeft": false,
              "backgroundColor": 0,
              "widthAuto": true,
-             "isGroupBox": false
+             "panelDisplay": 0,
+             "isGroupBox": false,
+             "readOnly": false
             }
            ],
            "controlType": "Panel",
-           "width": "M",
+           "width": "G2",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -4518,6 +4857,7 @@
            "authorityMode": 0,
            "marginLeft": "",
            "marginRight": "",
+           "selectControlID": "Kihonchosa09CenterRight",
            "onLoad": "",
            "title": "",
            "isOpen": true,
@@ -4540,7 +4880,9 @@
            "eraseBorderLeft": true,
            "backgroundColor": 0,
            "widthAuto": true,
-           "isGroupBox": false
+           "panelDisplay": 0,
+           "isGroupBox": false,
+           "readOnly": false
           },
           {
            "fieldName": "Kihonchosa09Right",
@@ -4565,6 +4907,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult601",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -4573,12 +4916,12 @@
                "visible_ItemNo": true,
                "dataSource_Choices": [
                 {
-                 "key": "0",
-                 "value": "0：なし"
+                 "key": "1",
+                 "value": "1：なし"
                 },
                 {
-                 "key": "1",
-                 "value": "1：あり"
+                 "key": "2",
+                 "value": "2：あり"
                 }
                ],
                "onFocus_Answer": "onFocus_txtAnswer"
@@ -4600,6 +4943,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult602",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -4608,12 +4952,12 @@
                "visible_ItemNo": true,
                "dataSource_Choices": [
                 {
-                 "key": "0",
-                 "value": "0：なし"
+                 "key": "1",
+                 "value": "1：なし"
                 },
                 {
-                 "key": "1",
-                 "value": "1：あり"
+                 "key": "2",
+                 "value": "2：あり"
                 }
                ],
                "onFocus_Answer": "onFocus_txtAnswer"
@@ -4635,6 +4979,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult603",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -4643,12 +4988,12 @@
                "visible_ItemNo": true,
                "dataSource_Choices": [
                 {
-                 "key": "0",
-                 "value": "0：なし"
+                 "key": "1",
+                 "value": "1：なし"
                 },
                 {
-                 "key": "1",
-                 "value": "1：あり"
+                 "key": "2",
+                 "value": "2：あり"
                 }
                ],
                "onFocus_Answer": "onFocus_txtAnswer"
@@ -4670,6 +5015,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult604",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -4678,12 +5024,12 @@
                "visible_ItemNo": true,
                "dataSource_Choices": [
                 {
-                 "key": "0",
-                 "value": "0：なし"
+                 "key": "1",
+                 "value": "1：なし"
                 },
                 {
-                 "key": "1",
-                 "value": "1：あり"
+                 "key": "2",
+                 "value": "2：あり"
                 }
                ],
                "onFocus_Answer": "onFocus_txtAnswer"
@@ -4705,6 +5051,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult605",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -4713,12 +5060,12 @@
                "visible_ItemNo": true,
                "dataSource_Choices": [
                 {
-                 "key": "0",
-                 "value": "0：なし"
+                 "key": "1",
+                 "value": "1：なし"
                 },
                 {
-                 "key": "1",
-                 "value": "1：あり"
+                 "key": "2",
+                 "value": "2：あり"
                 }
                ],
                "onFocus_Answer": "onFocus_txtAnswer"
@@ -4740,6 +5087,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult606",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -4748,12 +5096,12 @@
                "visible_ItemNo": true,
                "dataSource_Choices": [
                 {
-                 "key": "0",
-                 "value": "0：なし"
+                 "key": "1",
+                 "value": "1：なし"
                 },
                 {
-                 "key": "1",
-                 "value": "1：あり"
+                 "key": "2",
+                 "value": "2：あり"
                 }
                ],
                "onFocus_Answer": "onFocus_txtAnswer"
@@ -4775,6 +5123,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult607",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -4783,12 +5132,12 @@
                "visible_ItemNo": true,
                "dataSource_Choices": [
                 {
-                 "key": "0",
-                 "value": "0：なし"
+                 "key": "1",
+                 "value": "1：なし"
                 },
                 {
-                 "key": "1",
-                 "value": "1：あり"
+                 "key": "2",
+                 "value": "2：あり"
                 }
                ],
                "onFocus_Answer": "onFocus_txtAnswer"
@@ -4810,6 +5159,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult608",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -4818,12 +5168,12 @@
                "visible_ItemNo": true,
                "dataSource_Choices": [
                 {
-                 "key": "0",
-                 "value": "0：なし"
+                 "key": "1",
+                 "value": "1：なし"
                 },
                 {
-                 "key": "1",
-                 "value": "1：あり"
+                 "key": "2",
+                 "value": "2：あり"
                 }
                ],
                "onFocus_Answer": "onFocus_txtAnswer"
@@ -4845,6 +5195,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult610",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -4853,12 +5204,12 @@
                "visible_ItemNo": true,
                "dataSource_Choices": [
                 {
-                 "key": "0",
-                 "value": "0：なし"
+                 "key": "1",
+                 "value": "1：なし"
                 },
                 {
-                 "key": "1",
-                 "value": "1：あり"
+                 "key": "2",
+                 "value": "2：あり"
                 }
                ],
                "onFocus_Answer": "onFocus_txtAnswer"
@@ -4880,6 +5231,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult609",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -4888,12 +5240,12 @@
                "visible_ItemNo": true,
                "dataSource_Choices": [
                 {
-                 "key": "0",
-                 "value": "0：なし"
+                 "key": "1",
+                 "value": "1：なし"
                 },
                 {
-                 "key": "1",
-                 "value": "1：あり"
+                 "key": "2",
+                 "value": "2：あり"
                 }
                ],
                "onFocus_Answer": "onFocus_txtAnswer"
@@ -4915,6 +5267,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult611",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -4923,12 +5276,12 @@
                "visible_ItemNo": true,
                "dataSource_Choices": [
                 {
-                 "key": "0",
-                 "value": "0：なし"
+                 "key": "1",
+                 "value": "1：なし"
                 },
                 {
-                 "key": "1",
-                 "value": "1：あり"
+                 "key": "2",
+                 "value": "2：あり"
                 }
                ],
                "onFocus_Answer": "onFocus_txtAnswer"
@@ -4950,6 +5303,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult612",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -4958,19 +5312,19 @@
                "visible_ItemNo": true,
                "dataSource_Choices": [
                 {
-                 "key": "0",
-                 "value": "0：なし"
+                 "key": "1",
+                 "value": "1：なし"
                 },
                 {
-                 "key": "1",
-                 "value": "1：あり"
+                 "key": "2",
+                 "value": "2：あり"
                 }
                ],
                "onFocus_Answer": "onFocus_txtAnswer"
               }
              ],
              "controlType": "Panel",
-             "width": "M",
+             "width": "G2",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -4983,10 +5337,11 @@
              "authorityMode": 0,
              "marginLeft": "",
              "marginRight": "XS",
+             "selectControlID": "Kihonchosa0961",
              "onLoad": "",
              "title": "",
              "isOpen": true,
-             "canOpenAndClose": false,
+             "canOpenAndClose": true,
              "postParameterPanelNames": [
               {
                "postParameterPanelNames": "Kihonchosa0941"
@@ -5001,11 +5356,13 @@
              "marginBottom": "Default",
              "eraseBorderTop": false,
              "eraseBorderBottom": false,
-             "eraseBorderRight": false,
+             "eraseBorderRight": true,
              "eraseBorderLeft": false,
              "backgroundColor": 0,
              "widthAuto": true,
-             "isGroupBox": false
+             "panelDisplay": 0,
+             "isGroupBox": false,
+             "readOnly": false
             },
             {
              "fieldName": "Kihonchosa0971",
@@ -5027,6 +5384,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult702",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -5035,40 +5393,40 @@
                "visible_ItemNo": true,
                "dataSource_Choices": [
                 {
-                 "key": "0",
-                 "value": "0：自立"
-                },
-                {
                  "key": "1",
-                 "value": "1：J1"
+                 "value": "1：自立"
                 },
                 {
                  "key": "2",
-                 "value": "2：J2"
+                 "value": "2：J1"
                 },
                 {
                  "key": "3",
-                 "value": "3：A1"
+                 "value": "3：J2"
                 },
                 {
                  "key": "4",
-                 "value": "4：A2"
+                 "value": "4：A1"
                 },
                 {
                  "key": "5",
-                 "value": "5：B1"
+                 "value": "5：A2"
                 },
                 {
                  "key": "6",
-                 "value": "6：B2"
+                 "value": "6：B1"
                 },
                 {
                  "key": "7",
-                 "value": "7：C1"
+                 "value": "7：B2"
                 },
                 {
                  "key": "8",
-                 "value": "8：C2"
+                 "value": "8：C1"
+                },
+                {
+                 "key": "9",
+                 "value": "9：C2"
                 }
                ],
                "onFocus_Answer": "onFocus_txtAnswer"
@@ -5090,6 +5448,7 @@
                "authorityMode": 0,
                "marginLeft": "",
                "marginRight": "",
+               "selectControlID": "comKihonchosaResult701",
                "relation": [],
                "businessId": "DBE",
                "controlName": "KihonchosaResultInputCom",
@@ -5098,47 +5457,47 @@
                "visible_ItemNo": true,
                "dataSource_Choices": [
                 {
-                 "key": "0",
-                 "value": "0：自立"
-                },
-                {
                  "key": "1",
-                 "value": "1：Ⅰ"
+                 "value": "1：自立"
                 },
                 {
                  "key": "2",
-                 "value": "2：Ⅱ"
+                 "value": "2：Ⅰ"
                 },
                 {
                  "key": "3",
-                 "value": "3：Ⅱa"
+                 "value": "3：Ⅱ"
                 },
                 {
                  "key": "4",
-                 "value": "4：Ⅱb"
+                 "value": "4：Ⅱa"
                 },
                 {
                  "key": "5",
-                 "value": "5：Ⅲa"
+                 "value": "5：Ⅱb"
                 },
                 {
                  "key": "6",
-                 "value": "6：Ⅲb"
+                 "value": "6：Ⅲa"
                 },
                 {
                  "key": "7",
-                 "value": "7：Ⅳ"
+                 "value": "7：Ⅲb"
                 },
                 {
                  "key": "8",
-                 "value": "8：Ｍ"
+                 "value": "8：Ⅳ"
+                },
+                {
+                 "key": "9",
+                 "value": "9：Ｍ"
                 }
                ],
                "onFocus_Answer": "onFocus_txtAnswer"
               }
              ],
              "controlType": "Panel",
-             "width": "M",
+             "width": "G2",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -5151,6 +5510,7 @@
              "authorityMode": 0,
              "marginLeft": "",
              "marginRight": "XS",
+             "selectControlID": "Kihonchosa0971",
              "onLoad": "",
              "title": "",
              "isOpen": true,
@@ -5169,15 +5529,17 @@
              "marginBottom": "Default",
              "eraseBorderTop": false,
              "eraseBorderBottom": false,
-             "eraseBorderRight": false,
+             "eraseBorderRight": true,
              "eraseBorderLeft": false,
              "backgroundColor": 0,
              "widthAuto": true,
-             "isGroupBox": false
+             "panelDisplay": 0,
+             "isGroupBox": false,
+             "readOnly": false
             }
            ],
            "controlType": "Panel",
-           "width": "M",
+           "width": "G2",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -5190,6 +5552,7 @@
            "authorityMode": 0,
            "marginLeft": "",
            "marginRight": "",
+           "selectControlID": "Kihonchosa09Right",
            "onLoad": "",
            "title": "",
            "isOpen": true,
@@ -5208,15 +5571,17 @@
            "marginBottom": "Default",
            "eraseBorderTop": true,
            "eraseBorderBottom": true,
-           "eraseBorderRight": true,
+           "eraseBorderRight": false,
            "eraseBorderLeft": true,
            "backgroundColor": 0,
            "widthAuto": true,
-           "isGroupBox": false
+           "panelDisplay": 0,
+           "isGroupBox": false,
+           "readOnly": false
           }
          ],
          "controlType": "Panel",
-         "width": "M",
+         "width": "1060",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -5224,11 +5589,12 @@
          "nextFocusFieldName": "",
          "wrap": true,
          "dependencies": [],
-         "float": 1,
+         "float": 0,
          "toolTip": "",
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "Kihonchosa09",
          "onLoad": "",
          "title": "",
          "isOpen": true,
@@ -5250,8 +5616,10 @@
          "eraseBorderRight": true,
          "eraseBorderLeft": true,
          "backgroundColor": 0,
-         "widthAuto": true,
-         "isGroupBox": false
+         "widthAuto": false,
+         "panelDisplay": 0,
+         "isGroupBox": false,
+         "readOnly": false
         }
        ],
        "controlType": "TabPanel",
@@ -5268,6 +5636,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "KihonchosaResultInputTab",
        "title": "基本調査",
        "onActive": ""
       },
@@ -5291,10 +5660,11 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "required": false,
-         "align": 2,
+         "selectControlID": "lblServiceKubun",
          "text": "現在のサービス区分",
-         "isPrivateInfo": false
+         "required": false,
+         "isPrivateInfo": false,
+         "align": 2
         },
         {
          "fieldName": "radServiceKubun",
@@ -5313,57 +5683,63 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "radServiceKubun_core",
          "dataSource": [
           {
            "key": "1",
-           "value": "予防"
+           "value": "なし"
           },
           {
            "key": "2",
-           "value": "介護"
+           "value": "予防"
           },
           {
-           "key": "0",
-           "value": "なし"
+           "key": "3",
+           "value": "介護"
           }
          ],
+         "onClick": "",
+         "icon": [],
          "required": false,
-         "onChange": "",
+         "onChange": "onChange_radServiceKubun",
          "labelLText": "",
          "labelLWidth": "S",
          "labelLAlign": 2,
-         "selectedItem": "0",
-         "onClick": "",
+         "selectedItem": null,
          "newLineItemNumber": 3,
-         "spaceSize": 1
+         "spaceSize": "M"
         },
         {
-         "fieldName": "lblNewLine1",
+         "fieldName": "btnToCopyLatestServiceJokyo",
          "items": [],
-         "controlType": "Label",
-         "width": "S",
-         "visible": false,
+         "controlType": "Button",
+         "width": "130",
+         "visible": true,
          "displayNone": false,
          "disabled": false,
          "accessKey": "",
          "nextFocusFieldName": "",
-         "wrap": true,
+         "wrap": false,
          "dependencies": [],
-         "float": 0,
+         "float": 2,
          "toolTip": "",
          "authorityMode": 0,
          "marginLeft": "XS",
-         "marginRight": "XS",
-         "required": false,
-         "align": 2,
-         "text": "newLine",
-         "isPrivateInfo": false
+         "marginRight": "2.4",
+         "selectControlID": "btnToCopyLatestServiceJokyo",
+         "onClick": "",
+         "text": "前回値を複写する",
+         "appearance": 0,
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": "",
+         "icon": 0
         },
         {
          "fieldName": "ServiceJokyoServicesCounts",
          "items": [
           {
-           "fieldName": "comCountHomeHelp",
+           "fieldName": "comCountTankiSeikatsuKaigo",
            "items": [],
            "controlType": "CompositeControl",
            "width": "XS",
@@ -5379,15 +5755,17 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "comCountTankiSeikatsuKaigo",
            "relation": [],
            "businessId": "DBE",
            "controlName": "ServiceWithCountCom",
-           "text_ServiceName": "訪問介護（ホームヘルプサービス）",
+           "text_ServiceName": "短期入所生活介護",
            "text_Frequency": "月",
-           "text_Unit": "回"
+           "text_Unit": "日",
+           "radKaigoOrYobo_dataSource": "2"
           },
           {
-           "fieldName": "comCountTankiSeikatsuKaigo",
+           "fieldName": "comCountHomeHelp",
            "items": [],
            "controlType": "CompositeControl",
            "width": "XS",
@@ -5403,36 +5781,14 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "comCountHomeHelp",
            "relation": [],
            "businessId": "DBE",
            "controlName": "ServiceWithCountCom",
-           "text_ServiceName": "短期入所生活介護",
+           "text_ServiceName": "訪問介護（ホームヘルプサービス）",
            "text_Frequency": "月",
-           "text_Unit": "回"
-          },
-          {
-           "fieldName": "comCountHomonBathing",
-           "items": [],
-           "controlType": "CompositeControl",
-           "width": "XS",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": true,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "XS",
-           "marginRight": "XS",
-           "relation": [],
-           "businessId": "DBE",
-           "controlName": "ServiceWithCountCom",
-           "text_ServiceName": "訪問入浴介護",
-           "text_Frequency": "月",
-           "text_Unit": "回"
+           "text_Unit": "回",
+           "radKaigoOrYobo_dataSource": "2"
           },
           {
            "fieldName": "comCountTankiRyoyoKaigo",
@@ -5444,19 +5800,21 @@
            "disabled": false,
            "accessKey": "",
            "nextFocusFieldName": "",
-           "wrap": false,
+           "wrap": true,
            "dependencies": [],
            "float": 0,
            "toolTip": "",
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "comCountTankiRyoyoKaigo",
            "relation": [],
            "businessId": "DBE",
            "controlName": "ServiceWithCountCom",
            "text_ServiceName": "短期入所療養介護",
            "text_Frequency": "月",
-           "text_Unit": "回"
+           "text_Unit": "日",
+           "radKaigoOrYobo_dataSource": "2"
           },
           {
            "fieldName": "comCountHomonKango",
@@ -5468,139 +5826,21 @@
            "disabled": false,
            "accessKey": "",
            "nextFocusFieldName": "",
-           "wrap": true,
+           "wrap": false,
            "dependencies": [],
            "float": 0,
            "toolTip": "",
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "comCountHomonKango",
            "relation": [],
            "businessId": "DBE",
            "controlName": "ServiceWithCountCom",
            "text_ServiceName": "訪問看護",
            "text_Frequency": "月",
-           "text_Unit": "回"
-          },
-          {
-           "fieldName": "comCountHomonRehabilitation",
-           "items": [],
-           "controlType": "CompositeControl",
-           "width": "XS",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": false,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "XS",
-           "marginRight": "XS",
-           "relation": [],
-           "businessId": "DBE",
-           "controlName": "ServiceWithCountCom",
-           "text_ServiceName": "訪問リハビリ",
-           "text_Frequency": "月",
-           "text_Unit": "回"
-          },
-          {
-           "fieldName": "comCountYakanHomonKaigo",
-           "items": [],
-           "controlType": "CompositeControl",
-           "width": "XS",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": true,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "XS",
-           "marginRight": "XS",
-           "relation": [],
-           "businessId": "DBE",
-           "controlName": "ServiceWithCountCom",
-           "text_ServiceName": "夜間対応型訪問介護",
-           "text_Frequency": "月",
-           "text_Unit": "回"
-          },
-          {
-           "fieldName": "comCountTsushoRehabilitation",
-           "items": [],
-           "controlType": "CompositeControl",
-           "width": "XS",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": false,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "XS",
-           "marginRight": "XS",
-           "relation": [],
-           "businessId": "DBE",
-           "controlName": "ServiceWithCountCom",
-           "text_ServiceName": "通所リハビリテーション（デイケア）",
-           "text_Frequency": "月",
-           "text_Unit": "回"
-          },
-          {
-           "fieldName": "comCountRyoyoKanriShido",
-           "items": [],
-           "controlType": "CompositeControl",
-           "width": "XS",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": true,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "XS",
-           "marginRight": "XS",
-           "relation": [],
-           "businessId": "DBE",
-           "controlName": "ServiceWithCountCom",
-           "text_ServiceName": "居宅療養型管理指導",
-           "text_Frequency": "月",
-           "text_Unit": "回"
-          },
-          {
-           "fieldName": "comCountDayService",
-           "items": [],
-           "controlType": "CompositeControl",
-           "width": "XS",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": false,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "XS",
-           "marginRight": "XS",
-           "relation": [],
-           "businessId": "DBE",
-           "controlName": "ServiceWithCountCom",
-           "text_ServiceName": "通所介護（デイサービス）",
-           "text_Frequency": "月",
-           "text_Unit": "回"
+           "text_Unit": "回",
+           "radKaigoOrYobo_dataSource": "2"
           },
           {
            "fieldName": "comCountTokuteiSeikatsuKaigo",
@@ -5619,12 +5859,40 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "comCountTokuteiSeikatsuKaigo",
            "relation": [],
            "businessId": "DBE",
            "controlName": "ServiceWithCountCom",
            "text_ServiceName": "特定施設入居者生活介護",
            "text_Frequency": "月",
-           "text_Unit": "回"
+           "text_Unit": "日",
+           "radKaigoOrYobo_dataSource": "2"
+          },
+          {
+           "fieldName": "comCountHomonRehabilitation",
+           "items": [],
+           "controlType": "CompositeControl",
+           "width": "XS",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": false,
+           "dependencies": [],
+           "float": 0,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "selectControlID": "comCountHomonRehabilitation",
+           "relation": [],
+           "businessId": "DBE",
+           "controlName": "ServiceWithCountCom",
+           "text_ServiceName": "訪問リハビリ",
+           "text_Frequency": "月",
+           "text_Unit": "回",
+           "radKaigoOrYobo_dataSource": "2"
           },
           {
            "fieldName": "comCountNinchishoTsushoKaigo",
@@ -5643,15 +5911,17 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "comCountNinchishoTsushoKaigo",
            "relation": [],
            "businessId": "DBE",
            "controlName": "ServiceWithCountCom",
            "text_ServiceName": "認知症対応型通所介護",
            "text_Frequency": "月",
-           "text_Unit": "回"
+           "text_Unit": "日",
+           "radKaigoOrYobo_dataSource": "2"
           },
           {
-           "fieldName": "comCountHukushiyoguTaiyo",
+           "fieldName": "comCountHomonBathing",
            "items": [],
            "controlType": "CompositeControl",
            "width": "XS",
@@ -5667,12 +5937,14 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "comCountHomonBathing",
            "relation": [],
            "businessId": "DBE",
            "controlName": "ServiceWithCountCom",
-           "text_ServiceName": "福祉用具貸与",
-           "text_Frequency": "",
-           "text_Unit": "品目"
+           "text_ServiceName": "訪問入浴介護",
+           "text_Frequency": "月",
+           "text_Unit": "回",
+           "radKaigoOrYobo_dataSource": "2"
           },
           {
            "fieldName": "comCountNinchishoKyodoKaigo",
@@ -5691,15 +5963,17 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "comCountNinchishoKyodoKaigo",
            "relation": [],
            "businessId": "DBE",
            "controlName": "ServiceWithCountCom",
            "text_ServiceName": "認知症対応型共同生活介護",
            "text_Frequency": "月",
-           "text_Unit": "回"
+           "text_Unit": "日",
+           "radKaigoOrYobo_dataSource": "2"
           },
           {
-           "fieldName": "comCountHukushiyoguHanbai",
+           "fieldName": "comCountDayService",
            "items": [],
            "controlType": "CompositeControl",
            "width": "XS",
@@ -5715,12 +5989,14 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "comCountDayService",
            "relation": [],
            "businessId": "DBE",
            "controlName": "ServiceWithCountCom",
-           "text_ServiceName": "特定福祉用具販売",
-           "text_Frequency": "",
-           "text_Unit": "品目"
+           "text_ServiceName": "通所介護（デイサービス）",
+           "text_Frequency": "月",
+           "text_Unit": "回",
+           "radKaigoOrYobo_dataSource": "2"
           },
           {
            "fieldName": "comCountSmallTakinoKaigo",
@@ -5732,25 +6008,27 @@
            "disabled": false,
            "accessKey": "",
            "nextFocusFieldName": "",
-           "wrap": false,
+           "wrap": true,
            "dependencies": [],
            "float": 0,
            "toolTip": "",
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "comCountSmallTakinoKaigo",
            "relation": [],
            "businessId": "DBE",
            "controlName": "ServiceWithCountCom",
            "text_ServiceName": "小規模多機能型居宅介護",
            "text_Frequency": "月",
-           "text_Unit": "回"
+           "text_Unit": "日",
+           "radKaigoOrYobo_dataSource": "2"
           },
           {
-           "fieldName": "lblJutakuKaishu",
+           "fieldName": "comCountTsushoRehabilitation",
            "items": [],
-           "controlType": "Label",
-           "width": "330",
+           "controlType": "CompositeControl",
+           "width": "XS",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -5763,16 +6041,46 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
-           "align": 2,
-           "text": "住宅改修",
-           "isPrivateInfo": false
+           "selectControlID": "comCountTsushoRehabilitation",
+           "relation": [],
+           "businessId": "DBE",
+           "controlName": "ServiceWithCountCom",
+           "text_ServiceName": "通所リハビリテーション（デイケア）",
+           "text_Frequency": "月",
+           "text_Unit": "回",
+           "radKaigoOrYobo_dataSource": "2"
           },
           {
-           "fieldName": "radJutakuKaishu",
+           "fieldName": "comCountTeikiJunkaiHomonKaigo",
            "items": [],
-           "controlType": "RadioButton",
-           "width": "120",
+           "controlType": "CompositeControl",
+           "width": "XS",
+           "visible": true,
+           "displayNone": true,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": true,
+           "dependencies": [],
+           "float": 0,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "selectControlID": "comCountTeikiJunkaiHomonKaigo",
+           "relation": [],
+           "businessId": "DBE",
+           "controlName": "ServiceWithCountCom",
+           "text_ServiceName": "定期巡回・随時対応型訪問介護看護",
+           "text_Frequency": "月",
+           "text_Unit": "回",
+           "radKaigoOrYobo_dataSource": null
+          },
+          {
+           "fieldName": "comCountRyoyoKanriShido",
+           "items": [],
+           "controlType": "CompositeControl",
+           "width": "XS",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -5783,27 +6091,68 @@
            "float": 0,
            "toolTip": "",
            "authorityMode": 0,
-           "marginLeft": "XL",
+           "marginLeft": "XS",
            "marginRight": "XS",
-           "dataSource": [
-            {
-             "key": "1",
-             "value": "あり"
-            },
-            {
-             "key": "0",
-             "value": "なし"
-            }
-           ],
-           "required": false,
-           "onChange": "",
-           "labelLText": "",
-           "labelLWidth": "S",
-           "labelLAlign": 2,
-           "selectedItem": "0",
-           "onClick": "",
-           "newLineItemNumber": 2,
-           "spaceSize": 1
+           "selectControlID": "comCountRyoyoKanriShido",
+           "relation": [],
+           "businessId": "DBE",
+           "controlName": "ServiceWithCountCom",
+           "text_ServiceName": "居宅療養型管理指導",
+           "text_Frequency": "月",
+           "text_Unit": "回",
+           "radKaigoOrYobo_dataSource": "2"
+          },
+          {
+           "fieldName": "comCountYakanHomonKaigo",
+           "items": [],
+           "controlType": "CompositeControl",
+           "width": "XS",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": true,
+           "dependencies": [],
+           "float": 0,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "selectControlID": "comCountYakanHomonKaigo",
+           "relation": [],
+           "businessId": "DBE",
+           "controlName": "ServiceWithCountCom",
+           "text_ServiceName": "夜間対応型訪問介護",
+           "text_Frequency": "月",
+           "text_Unit": "日",
+           "radKaigoOrYobo_dataSource": "1"
+          },
+          {
+           "fieldName": "comCountFukushiyoguHanbai",
+           "items": [],
+           "controlType": "CompositeControl",
+           "width": "XS",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": false,
+           "dependencies": [],
+           "float": 0,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "selectControlID": "comCountFukushiyoguHanbai",
+           "relation": [],
+           "businessId": "DBE",
+           "controlName": "ServiceWithCountCom",
+           "text_ServiceName": "特定福祉用具販売",
+           "text_Frequency": "月",
+           "text_Unit": "品目",
+           "radKaigoOrYobo_dataSource": "2"
           },
           {
            "fieldName": "comCountChiikiTokuteiShisetsuKaigo",
@@ -5822,39 +6171,17 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "comCountChiikiTokuteiShisetsuKaigo",
            "relation": [],
            "businessId": "DBE",
            "controlName": "ServiceWithCountCom",
            "text_ServiceName": "地域密着型特定施設入居者生活介護",
            "text_Frequency": "月",
-           "text_Unit": "回"
+           "text_Unit": "日",
+           "radKaigoOrYobo_dataSource": "1"
           },
           {
-           "fieldName": "comCountChiikiRojinHukushiShisetsuKaigo",
-           "items": [],
-           "controlType": "CompositeControl",
-           "width": "XS",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": true,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "XS",
-           "marginRight": "XS",
-           "relation": [],
-           "businessId": "DBE",
-           "controlName": "ServiceWithCountCom",
-           "text_ServiceName": "地域密着型介護老人福祉施設入所者生活介護",
-           "text_Frequency": "月",
-           "text_Unit": "回"
-          },
-          {
-           "fieldName": "comCountTeikiJunkaiHomonKaigo",
+           "fieldName": "comCountFukushiyoguTaiyo",
            "items": [],
            "controlType": "CompositeControl",
            "width": "XS",
@@ -5870,15 +6197,105 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "comCountFukushiyoguTaiyo",
            "relation": [],
            "businessId": "DBE",
            "controlName": "ServiceWithCountCom",
-           "text_ServiceName": "定期巡回・随時対応型訪問介護看護",
+           "text_ServiceName": "福祉用具貸与",
            "text_Frequency": "月",
-           "text_Unit": "回"
+           "text_Unit": "品目",
+           "radKaigoOrYobo_dataSource": "2"
           },
           {
-           "fieldName": "lblNewLine2",
+           "fieldName": "comCountChiikiRojinFukushiShisetsuKaigo",
+           "items": [],
+           "controlType": "CompositeControl",
+           "width": "XS",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": true,
+           "dependencies": [],
+           "float": 0,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "selectControlID": "comCountChiikiRojinFukushiShisetsuKaigo",
+           "relation": [],
+           "businessId": "DBE",
+           "controlName": "ServiceWithCountCom",
+           "text_ServiceName": "地域密着型介護老人福祉施設入所者生活介護",
+           "text_Frequency": "月",
+           "text_Unit": "日",
+           "radKaigoOrYobo_dataSource": "1"
+          },
+          {
+           "fieldName": "lblJutakuKaishu",
+           "items": [],
+           "controlType": "Label",
+           "width": "330",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": false,
+           "dependencies": [],
+           "float": 0,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "selectControlID": "lblJutakuKaishu",
+           "text": "住宅改修",
+           "required": false,
+           "isPrivateInfo": false,
+           "align": 2
+          },
+          {
+           "fieldName": "radJutakuKaishu",
+           "items": [],
+           "controlType": "RadioButton",
+           "width": "120",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": false,
+           "dependencies": [],
+           "float": 0,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XL",
+           "marginRight": "XS",
+           "selectControlID": "radJutakuKaishu_core",
+           "dataSource": [
+            {
+             "key": "1",
+             "value": "あり"
+            },
+            {
+             "key": "0",
+             "value": "なし"
+            }
+           ],
+           "onClick": "",
+           "icon": [],
+           "required": false,
+           "onChange": "",
+           "labelLText": "",
+           "labelLWidth": "S",
+           "labelLAlign": 2,
+           "selectedItem": null,
+           "newLineItemNumber": 2,
+           "spaceSize": "M"
+          },
+          {
+           "fieldName": "lblSpace1",
            "items": [],
            "controlType": "Label",
            "width": "S",
@@ -5894,38 +6311,17 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "lblSpace1",
+           "text": "space",
            "required": false,
-           "align": 2,
-           "text": "newLine",
-           "isPrivateInfo": false
-          },
-          {
-           "fieldName": "lblShichosonTokubetsuKyufu",
-           "items": [],
-           "controlType": "Label",
-           "width": "250",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": true,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "XS",
-           "marginRight": "XS",
-           "required": false,
-           "align": 2,
-           "text": "市町村特別給付",
-           "isPrivateInfo": false
+           "isPrivateInfo": false,
+           "align": 2
           },
           {
            "fieldName": "txtShichosonTokubetsuKyufu",
            "items": [],
            "controlType": "TextBox",
-           "width": "XL",
+           "width": "750",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -5938,15 +6334,16 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
+           "selectControlID": "txtShichosonTokubetsuKyufu_core",
+           "readOnly": false,
            "text": "",
-           "isPrivateInfo": false,
-           "maxLength": 1000000000000,
+           "required": false,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 0,
-           "readOnly": false,
            "placeHolder": "",
            "textKind": 0,
+           "isPrivateInfo": false,
            "isPassword": false,
            "isComboBox": false,
            "onFocus": "",
@@ -5955,41 +6352,19 @@
            "onKeyPress": "",
            "suggest": [],
            "value": "",
-           "labelLText": "",
+           "labelLText": "市町村特別給付",
            "labelRText": "",
-           "labelLWidth": "S",
+           "labelLWidth": "250",
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
            "permitCharactor": ""
           },
           {
-           "fieldName": "lblZaitakuSeriviceOutsideKaigoKyufu",
-           "items": [],
-           "controlType": "Label",
-           "width": "250",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": true,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "XS",
-           "marginRight": "XS",
-           "required": false,
-           "align": 2,
-           "text": "介護保険給付以外の在宅サービス",
-           "isPrivateInfo": false
-          },
-          {
            "fieldName": "txtZaitakuSeriviceOutsideKaigoKyufu",
            "items": [],
            "controlType": "TextBox",
-           "width": "XL",
+           "width": "750",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -6002,15 +6377,16 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
+           "selectControlID": "txtZaitakuSeriviceOutsideKaigoKyufu_core",
+           "readOnly": false,
            "text": "",
-           "isPrivateInfo": false,
-           "maxLength": 1000000000000,
+           "required": false,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 0,
-           "readOnly": false,
            "placeHolder": "",
            "textKind": 0,
+           "isPrivateInfo": false,
            "isPassword": false,
            "isComboBox": false,
            "onFocus": "",
@@ -6019,9 +6395,9 @@
            "onKeyPress": "",
            "suggest": [],
            "value": "",
-           "labelLText": "",
+           "labelLText": "介護保険給付以外の在宅サービス",
            "labelRText": "",
-           "labelLWidth": "S",
+           "labelLWidth": "250",
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
@@ -6029,7 +6405,7 @@
           }
          ],
          "controlType": "Panel",
-         "width": "1200",
+         "width": "1060",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -6042,6 +6418,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "ServiceJokyoServicesCounts",
          "onLoad": "",
          "title": "利用回数",
          "isOpen": true,
@@ -6064,7 +6441,9 @@
          "eraseBorderLeft": false,
          "backgroundColor": 0,
          "widthAuto": false,
-         "isGroupBox": true
+         "panelDisplay": 1,
+         "isGroupBox": false,
+         "readOnly": false
         },
         {
          "fieldName": "SeriveJokyoRiyoShisetsu",
@@ -6086,6 +6465,7 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "radShisetsuType_core",
            "dataSource": [
             {
              "key": "1",
@@ -6118,20 +6498,25 @@
             {
              "key": "8",
              "value": "その他の施設"
+            },
+            {
+             "key": "9",
+             "value": "居宅（施設利用なし）"
             }
            ],
+           "onClick": "",
+           "icon": [],
            "required": false,
            "onChange": "",
            "labelLText": "",
            "labelLWidth": "S",
            "labelLAlign": 2,
-           "selectedItem": "",
-           "onClick": "",
-           "newLineItemNumber": 4,
-           "spaceSize": 1
+           "selectedItem": null,
+           "newLineItemNumber": 5,
+           "spaceSize": "M"
           },
           {
-           "fieldName": "lblNewLine3",
+           "fieldName": "lblSpace2",
            "items": [],
            "controlType": "Label",
            "width": "S",
@@ -6147,10 +6532,11 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "lblSpace2",
+           "text": "space",
            "required": false,
-           "align": 2,
-           "text": "newLine",
-           "isPrivateInfo": false
+           "isPrivateInfo": false,
+           "align": 2
           },
           {
            "fieldName": "lblShisetsuName",
@@ -6169,10 +6555,11 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
-           "align": 2,
+           "selectControlID": "lblShisetsuName",
            "text": "名称",
-           "isPrivateInfo": false
+           "required": false,
+           "isPrivateInfo": false,
+           "align": 2
           },
           {
            "fieldName": "txtShisetsuName",
@@ -6191,15 +6578,16 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
+           "selectControlID": "txtShisetsuName_core",
+           "readOnly": false,
            "text": "",
-           "isPrivateInfo": false,
-           "maxLength": 1000000000000,
+           "required": false,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 0,
-           "readOnly": false,
            "placeHolder": "",
            "textKind": 0,
+           "isPrivateInfo": false,
            "isPassword": false,
            "isComboBox": false,
            "onFocus": "",
@@ -6233,10 +6621,11 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
-           "align": 2,
+           "selectControlID": "lblShisetsuJusho",
            "text": "住所",
-           "isPrivateInfo": false
+           "required": false,
+           "isPrivateInfo": false,
+           "align": 2
           },
           {
            "fieldName": "txtShisetsuYubinNo",
@@ -6255,15 +6644,16 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
+           "selectControlID": "txtShisetsuYubinNo_core",
+           "readOnly": false,
            "text": "",
-           "isPrivateInfo": false,
-           "maxLength": 1000000000000,
+           "required": false,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 0,
-           "readOnly": false,
            "placeHolder": "",
            "textKind": 0,
+           "isPrivateInfo": false,
            "isPassword": false,
            "isComboBox": false,
            "onFocus": "",
@@ -6297,15 +6687,16 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
+           "selectControlID": "txtShisetsuJusho_core",
+           "readOnly": false,
            "text": "",
-           "isPrivateInfo": false,
-           "maxLength": 1000000000000,
+           "required": false,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 0,
-           "readOnly": false,
            "placeHolder": "",
            "textKind": 0,
+           "isPrivateInfo": false,
            "isPassword": false,
            "isComboBox": false,
            "onFocus": "",
@@ -6339,10 +6730,11 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
-           "align": 2,
+           "selectControlID": "lblShisetsuTelNo",
            "text": "電話",
-           "isPrivateInfo": false
+           "required": false,
+           "isPrivateInfo": false,
+           "align": 2
           },
           {
            "fieldName": "txtShisetsuTelNo",
@@ -6361,15 +6753,16 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
-           "required": false,
+           "selectControlID": "txtShisetsuTelNo_core",
+           "readOnly": false,
            "text": "",
-           "isPrivateInfo": false,
-           "maxLength": 1000000000000,
+           "required": false,
+           "maxLength": 100000000,
            "minLength": 0,
            "textAlign": 0,
-           "readOnly": false,
            "placeHolder": "",
            "textKind": 0,
+           "isPrivateInfo": false,
            "isPassword": false,
            "isComboBox": false,
            "onFocus": "",
@@ -6388,7 +6781,7 @@
           }
          ],
          "controlType": "Panel",
-         "width": "1200",
+         "width": "1060",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -6401,6 +6794,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "SeriveJokyoRiyoShisetsu",
          "onLoad": "",
          "title": "利用施設",
          "isOpen": true,
@@ -6423,7 +6817,9 @@
          "eraseBorderLeft": false,
          "backgroundColor": 0,
          "widthAuto": false,
-         "isGroupBox": true
+         "panelDisplay": 1,
+         "isGroupBox": false,
+         "readOnly": false
         },
         {
          "fieldName": "SericeJokyoTokkijiko",
@@ -6432,7 +6828,7 @@
            "fieldName": "txtGaikyoTokki",
            "items": [],
            "controlType": "TextBoxMultiLine",
-           "width": "XL",
+           "width": "1040",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -6445,15 +6841,16 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "txtGaikyoTokki_text_area",
+           "readOnly": false,
            "height": "S",
-           "required": false,
            "text": "",
-           "isPrivateInfo": false,
+           "required": false,
            "maxLength": "200",
            "minLength": "0",
-           "readOnly": false,
            "placeHolder": "",
            "textKind": 0,
+           "isPrivateInfo": false,
            "onFocus": "",
            "onBlur": "",
            "onChange": "",
@@ -6470,7 +6867,7 @@
           }
          ],
          "controlType": "Panel",
-         "width": "1200",
+         "width": "1060",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -6483,6 +6880,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "SericeJokyoTokkijiko",
          "onLoad": "",
          "title": "調査対象の主訴、家族状況、居住環境",
          "isOpen": true,
@@ -6505,7 +6903,9 @@
          "eraseBorderLeft": false,
          "backgroundColor": 0,
          "widthAuto": false,
-         "isGroupBox": true
+         "panelDisplay": 1,
+         "isGroupBox": false,
+         "readOnly": false
         }
        ],
        "controlType": "TabPanel",
@@ -6522,6 +6922,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "ServiceJokyoTab",
        "title": "サービス状況",
        "onActive": ""
       },
@@ -6545,6 +6946,7 @@
          "authorityMode": 0,
          "marginLeft": "M",
          "marginRight": "XS",
+         "selectControlID": "comTokkijiko1",
          "relation": [],
          "businessId": "DBE",
          "controlName": "TokkijikoCom"
@@ -6566,6 +6968,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "comTokkijiko2",
          "relation": [],
          "businessId": "DBE",
          "controlName": "TokkijikoCom"
@@ -6587,6 +6990,7 @@
          "authorityMode": 0,
          "marginLeft": "M",
          "marginRight": "XS",
+         "selectControlID": "comTokkijiko3",
          "relation": [],
          "businessId": "DBE",
          "controlName": "TokkijikoCom"
@@ -6608,6 +7012,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "comTokkijiko4",
          "relation": [],
          "businessId": "DBE",
          "controlName": "TokkijikoCom"
@@ -6629,6 +7034,7 @@
          "authorityMode": 0,
          "marginLeft": "M",
          "marginRight": "XS",
+         "selectControlID": "comTokkijiko5",
          "relation": [],
          "businessId": "DBE",
          "controlName": "TokkijikoCom"
@@ -6650,6 +7056,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "comTokkijiko6",
          "relation": [],
          "businessId": "DBE",
          "controlName": "TokkijikoCom"
@@ -6671,6 +7078,7 @@
          "authorityMode": 0,
          "marginLeft": "M",
          "marginRight": "XS",
+         "selectControlID": "comTokkijiko7",
          "relation": [],
          "businessId": "DBE",
          "controlName": "TokkijikoCom"
@@ -6692,6 +7100,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "comTokkijiko8",
          "relation": [],
          "businessId": "DBE",
          "controlName": "TokkijikoCom"
@@ -6711,12 +7120,13 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "TokkijikoTab",
        "title": "特記事項",
        "onActive": ""
       }
      ],
      "controlType": "TabContainer",
-     "width": "1230",
+     "width": "1070",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -6729,6 +7139,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "tabNinteichosaResult",
      "onChange": "",
      "selectedItem": null,
      "tabpanelPosition": [
@@ -6737,13 +7148,111 @@
       "TokkijikoTab"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "ServiceJokyoTab"
+     "selectedItemFieldName": "ServiceJokyoTab",
+     "initialTab": 0
+    },
+    {
+     "fieldName": "ButtonsForNinteichosaResultEntry",
+     "items": [
+      {
+       "fieldName": "btnToRegisterResult",
+       "items": [],
+       "controlType": "Button",
+       "width": "M",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 2,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "btnToRegisterResult",
+       "onClick": "onClick_btnToRegisterResult",
+       "text": "調査結果を登録する",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
+       "icon": 0
+      },
+      {
+       "fieldName": "btnToReturn",
+       "items": [],
+       "controlType": "Button",
+       "width": "M",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "btnToReturn",
+       "onClick": "onClick_btnToReturn",
+       "text": "一覧へ戻る",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
+       "icon": 0
+      }
+     ],
+     "controlType": "Panel",
+     "width": "1075",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "ButtonsForNinteichosaResultEntry",
+     "onLoad": "",
+     "title": "",
+     "isOpen": true,
+     "canOpenAndClose": true,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "ButtonsForNinteichosaResultEntry"
+      }
+     ],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true,
+     "backgroundColor": 0,
+     "widthAuto": false,
+     "panelDisplay": 0,
+     "isGroupBox": false,
+     "readOnly": false
     }
    ],
    "controlType": "Panel",
-   "width": "M",
+   "width": "1090",
    "visible": true,
-   "displayNone": false,
+   "displayNone": true,
    "disabled": false,
    "accessKey": "",
    "nextFocusFieldName": "",
@@ -6754,7 +7263,8 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
-   "onLoad": "",
+   "selectControlID": "NinteichosaResultEntryMain",
+   "onLoad": "onLoad_NinteichosaResultEntryMain",
    "title": "認定調査結果",
    "isOpen": true,
    "canOpenAndClose": true,
@@ -6770,6 +7280,30 @@
     {
      "eventName": "onLoad",
      "requestUrl": "dbe/db/dbe/NinteichosaResultEntryMain/onLoad"
+    },
+    {
+     "eventName": "onStart_NinteichosaResultEntryMain",
+     "requestUrl": "dbe/db/dbe/NinteichosaResultEntryMain/onStart_NinteichosaResultEntryMain"
+    },
+    {
+     "eventName": "onChange_radServiceKubun",
+     "requestUrl": "dbe/db/dbe/NinteichosaResultEntryMain/onChange_radServiceKubun"
+    },
+    {
+     "eventName": "onChange_radChosaJisshiBasho",
+     "requestUrl": "dbe/db/dbe/NinteichosaResultEntryMain/onChange_radChosaJisshiBasho"
+    },
+    {
+     "eventName": "onClick_btnToReturn",
+     "requestUrl": "dbe/db/dbe/NinteichosaResultEntryMain/onClick_btnToReturn"
+    },
+    {
+     "eventName": "onClick_btnToRegisterResult",
+     "requestUrl": "dbe/db/dbe/NinteichosaResultEntryMain/onClick_btnToRegisterResult"
+    },
+    {
+     "eventName": "",
+     "requestUrl": ""
     }
    ],
    "hiddenInput": [],
@@ -6783,8 +7317,10 @@
    "eraseBorderRight": false,
    "eraseBorderLeft": false,
    "backgroundColor": 0,
-   "widthAuto": true,
-   "isGroupBox": false
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false
   }
  ],
  "controlType": null,
@@ -6801,6 +7337,7 @@
  "authorityMode": 0,
  "marginLeft": "XS",
  "marginRight": "XS",
+ "selectControlID": "Page",
  "onLoad": "",
  "title": "認定調査結果登録",
  "jsPathCollection": [
@@ -6812,12 +7349,38 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "一覧",
+   "stateName": "スタート",
    "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "NinteichosaResultEntryTarget",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "NinteichosaResultEntryMain",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "NinteichosaDetail",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ShisakaiWaritsukeKibo",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ServiceJokyoServicesCounts",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ButtonsForNinteichosaResultEntryTarget",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
@@ -6826,6 +7389,11 @@
      "fieldName": "dgNinteichosaResultTaishosha[btnToDecide]",
      "event": "onClick",
      "transition": "入力"
+    },
+    {
+     "fieldName": "btnToReturn",
+     "event": "onClick",
+     "transition": "スタート"
     }
    ]
   },
@@ -6836,91 +7404,128 @@
    "visibleDivs": [
     {
      "visibleDiv": "NinteichosaResultEntryMain",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "KihonchosaResultGuidance",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "Kihonchosa09",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "Kihonchosa09Left",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "Kihonchosa0911",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "Kihonchosa09CenterLeft",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "Kihonchosa0912",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "Kihonchosa0921",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "Kihonchosa09Center",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "Kihonchosa0931",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "Kihonchosa0941",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "Kihonchosa09CenterRight",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "Kihonchosa0942",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "Kihonchosa0951",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "Kihonchosa09Right",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "Kihonchosa0961",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "Kihonchosa0971",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "ServiceJokyoServicesCounts",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "SeriveJokyoRiyoShisetsu",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "SericeJokyoTokkijiko",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "HihokenshaForNinteichosaResult",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "NinteichosaDetail",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
+    },
+    {
+     "visibleDiv": "IchjiHanteiFromInputedChosaResult",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ShisakaiWaritsukeKibo",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ButtonsForNinteichosaResultEntry",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
@@ -6929,11 +7534,47 @@
      "fieldName": "dgNinteichosaResultTaishosha[btnToDecide]",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnToReturn",
+     "event": "onClick",
+     "transition": "一覧"
+    }
+   ]
+  },
+  {
+   "order": "3",
+   "stateName": "一覧",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "NinteichosaResultEntryTarget",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ButtonsForNinteichosaResultEntryTarget",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "dgNinteichosaResultTaishosha[btnToDecide]",
+     "event": "onClick",
+     "transition": "入力"
+    },
+    {
+     "fieldName": "btnToReturn",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   }
  ],
- "currentState": "All",
+ "currentState": "一覧",
  "id": "DBE2060001",
  "WFParameter": [],
  "UIContainerEventMapping": [],
@@ -6943,12 +7584,23 @@
    "NinteichosaResultEntryMain"
   ],
   [
+   "ButtonsForNinteichosaResultEntryTarget"
+  ],
+  [
    "HihokenshaForNinteichosaResult"
   ],
   [
    "NinteichosaDetail"
+  ],
+  [
+   "ShisakaiWaritsukeKibo"
+  ],
+  [
+   "ButtonsForNinteichosaResultEntry"
   ]
  ],
  "panelMargin": 1,
- "controlMargin": 1
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "commonButtonAreaData": []
 }
