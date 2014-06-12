@@ -63,7 +63,7 @@
      "marginRight": "XS",
      "selectControlID": "radSearchKubun_core",
      "onChange": "",
-     "selectedItem": "hihokenshaShitei",
+     "selectedItem": null,
      "dataSource": [
       {
        "key": "hihokenshaShitei",
@@ -2258,7 +2258,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbc/db/dbc/KogakuServicehiInfoPanel/onLoad"
+     "requestUrl": ""
     },
     {
      "eventName": "onClick_btnReturnShowOne",

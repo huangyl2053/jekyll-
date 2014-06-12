@@ -4,8 +4,8 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-var DBZ;
-(function (DBZ) {
+var DBC;
+(function (DBC) {
     var KogakuServicehiDetail_Design = (function (_super) {
         __extends(KogakuServicehiDetail_Design, _super);
         function KogakuServicehiDetail_Design($parentElement, isDesignMode, fieldName) {
@@ -147,23 +147,6 @@ var DBZ;
         });
 
 
-        Object.defineProperty(KogakuServicehiDetail_Design.prototype, "onClick_radPayMethod", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1].items[0]["fieldName"])["onClick_radPayMethod"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1].items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1].items[0]["fieldName"])["onClick_radPayMethod"] = value;
-                } else {
-                    this.layout.items[0].items[1].items[1].items[0]["onClick_radPayMethod"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
         KogakuServicehiDetail_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
             Uz.JSControlUtil.registProperty("title");
@@ -174,7 +157,6 @@ var DBZ;
             Uz.JSControlUtil.registProperty("panelDisplay");
             Uz.JSControlUtil.registProperty("tplJudgementResult_title");
             Uz.JSControlUtil.registProperty("tplKetteiJoho_visible");
-            Uz.JSControlUtil.registProperty("onClick_radPayMethod");
         };
 
         KogakuServicehiDetail_Design.prototype.getEditablePropertyInfo = function () {
@@ -187,7 +169,6 @@ var DBZ;
             editablePropertyInfo["panelDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["panelDisplay"];
             editablePropertyInfo["tplJudgementResult_title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[2]["fieldName"]).getEditablePropertyInfo()["title"];
             editablePropertyInfo["tplKetteiJoho_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[3]["fieldName"]).getEditablePropertyInfo()["visible"];
-            editablePropertyInfo["onClick_radPayMethod"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1].items[0]["fieldName"]).getEditablePropertyInfo()["onClick_radPayMethod"];
 
             return editablePropertyInfo;
         };
@@ -327,7 +308,7 @@ var DBZ;
                                             "maxValue": 1.7976931348623157e+308,
                                             "minValue": 0,
                                             "isCurrency": false,
-                                            "isComma": true,
+                                            "isComma": false,
                                             "decimalPointLength": 0
                                         },
                                         {
@@ -426,8 +407,7 @@ var DBZ;
                                             "eraseBorderRight": true,
                                             "eraseBorderLeft": true,
                                             "panelDisplay": 0,
-                                            "KozaPayment_title": "口座払い",
-                                            "onClick_radPayMethod": "onClick_radPayMethod"
+                                            "KozaPayment_title": "口座払い"
                                         }
                                     ],
                                     "controlType": "TabPanel",
@@ -550,7 +530,7 @@ var DBZ;
                                 "tplKetteiJoho"
                             ],
                             "isDraggable": false,
-                            "selectedItemFieldName": "tplShinseisha",
+                            "selectedItemFieldName": "tplKoza",
                             "initialTab": "0"
                         }
                     ],
@@ -612,7 +592,7 @@ var DBZ;
             "marginRight": 0,
             "selectControlID": "defaultLayout",
             "relation": [],
-            "businessId": "DBZ",
+            "businessId": "DBC",
             "controlName": "KogakuServicehiDetail",
             "marginTop": 0,
             "marginBottom": 0,
@@ -656,11 +636,6 @@ var DBZ;
                     "publicChildFieldName": "tplKetteiJoho",
                     "publicChildProperty": "visible",
                     "newPropertyName": "tplKetteiJoho_visible"
-                },
-                {
-                    "publicChildFieldName": "PaymentMethod",
-                    "publicChildProperty": "onClick_radPayMethod",
-                    "newPropertyName": "onClick_radPayMethod"
                 }
             ],
             "dataPassingForDialog": [],
@@ -669,5 +644,5 @@ var DBZ;
         };
         return KogakuServicehiDetail_Design;
     })(Uz.CommonChildDiv);
-    DBZ.KogakuServicehiDetail_Design = KogakuServicehiDetail_Design;
-})(DBZ || (DBZ = {}));
+    DBC.KogakuServicehiDetail_Design = KogakuServicehiDetail_Design;
+})(DBC || (DBC = {}));

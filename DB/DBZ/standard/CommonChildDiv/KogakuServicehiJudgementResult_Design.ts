@@ -155,10 +155,14 @@ module DBZ {
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
+      "isShowHeader": true,
       "isShowFooter": true,
       "isShowFilter": false,
       "isShowFilterButton": false,
       "isShowRowState": false,
+      "isShowSelectButtonColumn": false,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
       "header": {
        "combineColumns": [],
        "frozenColumn": "",
@@ -420,7 +424,7 @@ module DBZ {
        "maxValue": 1.7976931348623157e+308,
        "minValue": 0,
        "isCurrency": false,
-       "isComma": false,
+       "isComma": true,
        "decimalPointLength": 0
       },
       {
@@ -484,7 +488,7 @@ module DBZ {
        "labelLText": "支給区分",
        "labelLWidth": "80",
        "labelLAlign": 2,
-       "selectedItem": "shikyu",
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "shikyu",
@@ -589,7 +593,7 @@ module DBZ {
        "maxValue": 1.7976931348623157e+308,
        "minValue": 0,
        "isCurrency": false,
-       "isComma": false,
+       "isComma": true,
        "decimalPointLength": 0
       },
       {
@@ -614,7 +618,7 @@ module DBZ {
        "labelLText": "高額自動償還",
        "labelLWidth": "96",
        "labelLAlign": 2,
-       "selectedItem": "ari",
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "ari",
@@ -740,7 +744,7 @@ module DBZ {
        "labelLText": "審査方法",
        "labelLWidth": "80",
        "labelLAlign": 2,
-       "selectedItem": "shinsaZumi",
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "mishinsa",

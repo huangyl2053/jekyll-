@@ -1,7 +1,7 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
 
-module DBZ {
+module DBC {
     /**
      * 自動生成コードです。修正しないでください。
      * KogakuServicehiDetailクラスのみで継承して使えます。
@@ -120,20 +120,6 @@ module DBZ {
             }
         }
         
-        public get onClick_radPayMethod() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1].items[0]["fieldName"])["onClick_radPayMethod"];
-        }
-        
-        public set onClick_radPayMethod(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1].items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1].items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1].items[0]["fieldName"])["onClick_radPayMethod"] = value;
-            } else {
-                this.layout.items[0].items[1].items[1].items[0]["onClick_radPayMethod"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, KogakuServicehiDetail_Design.myLayout, fieldName);
         }
@@ -152,7 +138,6 @@ module DBZ {
             Uz.JSControlUtil.registProperty("panelDisplay");
             Uz.JSControlUtil.registProperty("tplJudgementResult_title");
             Uz.JSControlUtil.registProperty("tplKetteiJoho_visible");
-            Uz.JSControlUtil.registProperty("onClick_radPayMethod");
         }
         
         /**
@@ -170,7 +155,6 @@ module DBZ {
             editablePropertyInfo["panelDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["panelDisplay"];
             editablePropertyInfo["tplJudgementResult_title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[2]["fieldName"]).getEditablePropertyInfo()["title"];
             editablePropertyInfo["tplKetteiJoho_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[3]["fieldName"]).getEditablePropertyInfo()["visible"];
-            editablePropertyInfo["onClick_radPayMethod"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1].items[0]["fieldName"]).getEditablePropertyInfo()["onClick_radPayMethod"];
             
             return editablePropertyInfo;
         }
@@ -310,7 +294,7 @@ module DBZ {
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
-         "isComma": true,
+         "isComma": false,
          "decimalPointLength": 0
         },
         {
@@ -409,8 +393,7 @@ module DBZ {
          "eraseBorderRight": true,
          "eraseBorderLeft": true,
          "panelDisplay": 0,
-         "KozaPayment_title": "口座払い",
-         "onClick_radPayMethod": "onClick_radPayMethod"
+         "KozaPayment_title": "口座払い"
         }
        ],
        "controlType": "TabPanel",
@@ -533,7 +516,7 @@ module DBZ {
       "tplKetteiJoho"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "tplShinseisha",
+     "selectedItemFieldName": "tplKoza",
      "initialTab": "0"
     }
    ],
@@ -595,7 +578,7 @@ module DBZ {
  "marginRight": 0,
  "selectControlID": "defaultLayout",
  "relation": [],
- "businessId": "DBZ",
+ "businessId": "DBC",
  "controlName": "KogakuServicehiDetail",
  "marginTop": 0,
  "marginBottom": 0,
@@ -639,11 +622,6 @@ module DBZ {
    "publicChildFieldName": "tplKetteiJoho",
    "publicChildProperty": "visible",
    "newPropertyName": "tplKetteiJoho_visible"
-  },
-  {
-   "publicChildFieldName": "PaymentMethod",
-   "publicChildProperty": "onClick_radPayMethod",
-   "newPropertyName": "onClick_radPayMethod"
   }
  ],
  "dataPassingForDialog": [],

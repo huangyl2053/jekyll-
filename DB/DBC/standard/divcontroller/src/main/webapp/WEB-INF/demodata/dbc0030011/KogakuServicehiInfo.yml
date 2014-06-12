@@ -1,0 +1,21 @@
+## YAML Template. 高額介護サービス費情報
+--- 
+- hihokenshaNo: "0000029068"
+  tsuchishoNo: 1234567890
+  shikakuShutokuYMD: 20140601
+  choshuHoho: 介護 南魚
+  kyuHihokenshaNo: "1000029068"
+  kyuShichosonCode: 15226
+  kyuShichosonName: 南魚沼市
+  shikakuSoshitsuYMD: 20140701
+  shotokuDankai: 06 
+##
+  nushiShikibetsuCode: "00000152269"
+  nushiName: 介護 南魚
+  nushiSetaiCode: 1234567890
+  nushiGyoseiku: 南魚沼市
+  nushiYubinNo: 9999999
+  nushiJusho: 南魚沼市99町999-9
+## 
+  teikyoYM: 201407
+  hakkoDate: 20140601
