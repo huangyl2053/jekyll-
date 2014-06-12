@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.ShinseiJohoInp
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.ShisetsuRerekiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.dgKankeiIin_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.dgShisetsuRereki_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgSearchResult_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.dgSearchResult_Row;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiYukoKubun;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;

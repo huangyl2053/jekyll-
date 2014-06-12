@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jun 11 11:01:11 JST 2014 
+ * Thu Jun 12 19:19:38 JST 2014 
  */
 
 
@@ -26,6 +26,8 @@ public class dgShiteiServiceShurui_Row extends DataRow {
 
     public dgShiteiServiceShurui_Row() {
         super();
+        this.Ｎｏ = new TextBoxNum();
+        this.サービス種類 = RString.EMPTY;
     }
 
     public dgShiteiServiceShurui_Row(TextBoxNum Ｎｏ, RString サービス種類) {

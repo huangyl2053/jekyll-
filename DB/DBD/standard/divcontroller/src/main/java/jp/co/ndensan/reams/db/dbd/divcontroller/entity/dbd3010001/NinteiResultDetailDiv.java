@@ -24,7 +24,7 @@ public class NinteiResultDetailDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtNinteiYMD")
-    private TextBoxDate txtNinteiYMD;
+    private TextBoxFlexibleDate txtNinteiYMD;
     @JsonProperty("txtYokaigodoCode")
     private TextBoxCode txtYokaigodoCode;
     @JsonProperty("txtYokaigodo")
@@ -47,12 +47,12 @@ public class NinteiResultDetailDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     @JsonProperty("txtNinteiYMD")
-    public TextBoxDate getTxtNinteiYMD() {
+    public TextBoxFlexibleDate getTxtNinteiYMD() {
         return txtNinteiYMD;
     }
 
     @JsonProperty("txtNinteiYMD")
-    public void setTxtNinteiYMD(TextBoxDate txtNinteiYMD) {
+    public void setTxtNinteiYMD(TextBoxFlexibleDate txtNinteiYMD) {
         this.txtNinteiYMD=txtNinteiYMD;
     }
 

@@ -30,11 +30,11 @@ public class NinteichosaDetailDiv extends Panel {
     @JsonProperty("txtNinteiChosain")
     private TextBox txtNinteiChosain;
     @JsonProperty("txtNinteichosaJissiYMD")
-    private TextBoxDate txtNinteichosaJissiYMD;
+    private TextBoxFlexibleDate txtNinteichosaJissiYMD;
     @JsonProperty("txtNinteichosaJuryoYMD")
-    private TextBoxDate txtNinteichosaJuryoYMD;
+    private TextBoxFlexibleDate txtNinteichosaJuryoYMD;
     @JsonProperty("txtNinteichosaKanryoYMD")
-    private TextBoxDate txtNinteichosaKanryoYMD;
+    private TextBoxFlexibleDate txtNinteichosaKanryoYMD;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -83,32 +83,32 @@ public class NinteichosaDetailDiv extends Panel {
     }
 
     @JsonProperty("txtNinteichosaJissiYMD")
-    public TextBoxDate getTxtNinteichosaJissiYMD() {
+    public TextBoxFlexibleDate getTxtNinteichosaJissiYMD() {
         return txtNinteichosaJissiYMD;
     }
 
     @JsonProperty("txtNinteichosaJissiYMD")
-    public void setTxtNinteichosaJissiYMD(TextBoxDate txtNinteichosaJissiYMD) {
+    public void setTxtNinteichosaJissiYMD(TextBoxFlexibleDate txtNinteichosaJissiYMD) {
         this.txtNinteichosaJissiYMD=txtNinteichosaJissiYMD;
     }
 
     @JsonProperty("txtNinteichosaJuryoYMD")
-    public TextBoxDate getTxtNinteichosaJuryoYMD() {
+    public TextBoxFlexibleDate getTxtNinteichosaJuryoYMD() {
         return txtNinteichosaJuryoYMD;
     }
 
     @JsonProperty("txtNinteichosaJuryoYMD")
-    public void setTxtNinteichosaJuryoYMD(TextBoxDate txtNinteichosaJuryoYMD) {
+    public void setTxtNinteichosaJuryoYMD(TextBoxFlexibleDate txtNinteichosaJuryoYMD) {
         this.txtNinteichosaJuryoYMD=txtNinteichosaJuryoYMD;
     }
 
     @JsonProperty("txtNinteichosaKanryoYMD")
-    public TextBoxDate getTxtNinteichosaKanryoYMD() {
+    public TextBoxFlexibleDate getTxtNinteichosaKanryoYMD() {
         return txtNinteichosaKanryoYMD;
     }
 
     @JsonProperty("txtNinteichosaKanryoYMD")
-    public void setTxtNinteichosaKanryoYMD(TextBoxDate txtNinteichosaKanryoYMD) {
+    public void setTxtNinteichosaKanryoYMD(TextBoxFlexibleDate txtNinteichosaKanryoYMD) {
         this.txtNinteichosaKanryoYMD=txtNinteichosaKanryoYMD;
     }
 

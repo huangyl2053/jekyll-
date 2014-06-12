@@ -23,6 +23,8 @@ public class HihokenshaDiv extends Panel {
      */
     @JsonProperty("lblHihokenshaJoho")
     private Label lblHihokenshaJoho;
+    @JsonProperty("txtHihokenshaNo")
+    private TextBox txtHihokenshaNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -38,6 +40,16 @@ public class HihokenshaDiv extends Panel {
     @JsonProperty("lblHihokenshaJoho")
     public void setLblHihokenshaJoho(Label lblHihokenshaJoho) {
         this.lblHihokenshaJoho=lblHihokenshaJoho;
+    }
+
+    @JsonProperty("txtHihokenshaNo")
+    public TextBox getTxtHihokenshaNo() {
+        return txtHihokenshaNo;
+    }
+
+    @JsonProperty("txtHihokenshaNo")
+    public void setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
+        this.txtHihokenshaNo=txtHihokenshaNo;
     }
 
 }

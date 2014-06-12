@@ -30,11 +30,11 @@ public class ShujiiIkenshoDetailDiv extends Panel {
     @JsonProperty("txtShujiiMeisho")
     private TextBox txtShujiiMeisho;
     @JsonProperty("txtShujiiIkenshoKinyuYMD")
-    private TextBoxDate txtShujiiIkenshoKinyuYMD;
+    private TextBoxFlexibleDate txtShujiiIkenshoKinyuYMD;
     @JsonProperty("txtShujiiIkenshoJuryoYMD")
-    private TextBoxDate txtShujiiIkenshoJuryoYMD;
+    private TextBoxFlexibleDate txtShujiiIkenshoJuryoYMD;
     @JsonProperty("txtShujiiIkenshoKanryoYMD")
-    private TextBoxDate txtShujiiIkenshoKanryoYMD;
+    private TextBoxFlexibleDate txtShujiiIkenshoKanryoYMD;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -83,32 +83,32 @@ public class ShujiiIkenshoDetailDiv extends Panel {
     }
 
     @JsonProperty("txtShujiiIkenshoKinyuYMD")
-    public TextBoxDate getTxtShujiiIkenshoKinyuYMD() {
+    public TextBoxFlexibleDate getTxtShujiiIkenshoKinyuYMD() {
         return txtShujiiIkenshoKinyuYMD;
     }
 
     @JsonProperty("txtShujiiIkenshoKinyuYMD")
-    public void setTxtShujiiIkenshoKinyuYMD(TextBoxDate txtShujiiIkenshoKinyuYMD) {
+    public void setTxtShujiiIkenshoKinyuYMD(TextBoxFlexibleDate txtShujiiIkenshoKinyuYMD) {
         this.txtShujiiIkenshoKinyuYMD=txtShujiiIkenshoKinyuYMD;
     }
 
     @JsonProperty("txtShujiiIkenshoJuryoYMD")
-    public TextBoxDate getTxtShujiiIkenshoJuryoYMD() {
+    public TextBoxFlexibleDate getTxtShujiiIkenshoJuryoYMD() {
         return txtShujiiIkenshoJuryoYMD;
     }
 
     @JsonProperty("txtShujiiIkenshoJuryoYMD")
-    public void setTxtShujiiIkenshoJuryoYMD(TextBoxDate txtShujiiIkenshoJuryoYMD) {
+    public void setTxtShujiiIkenshoJuryoYMD(TextBoxFlexibleDate txtShujiiIkenshoJuryoYMD) {
         this.txtShujiiIkenshoJuryoYMD=txtShujiiIkenshoJuryoYMD;
     }
 
     @JsonProperty("txtShujiiIkenshoKanryoYMD")
-    public TextBoxDate getTxtShujiiIkenshoKanryoYMD() {
+    public TextBoxFlexibleDate getTxtShujiiIkenshoKanryoYMD() {
         return txtShujiiIkenshoKanryoYMD;
     }
 
     @JsonProperty("txtShujiiIkenshoKanryoYMD")
-    public void setTxtShujiiIkenshoKanryoYMD(TextBoxDate txtShujiiIkenshoKanryoYMD) {
+    public void setTxtShujiiIkenshoKanryoYMD(TextBoxFlexibleDate txtShujiiIkenshoKanryoYMD) {
         this.txtShujiiIkenshoKanryoYMD=txtShujiiIkenshoKanryoYMD;
     }
 

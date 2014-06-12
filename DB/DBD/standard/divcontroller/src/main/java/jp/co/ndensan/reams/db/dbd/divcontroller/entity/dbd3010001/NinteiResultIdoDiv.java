@@ -24,9 +24,9 @@ public class NinteiResultIdoDiv extends Panel {
     @JsonProperty("txtNinteiResultIdoJiyu")
     private TextBox txtNinteiResultIdoJiyu;
     @JsonProperty("txtNinteiResultIdoYMD")
-    private TextBoxDate txtNinteiResultIdoYMD;
+    private TextBoxFlexibleDate txtNinteiResultIdoYMD;
     @JsonProperty("txtNinteiSoshitsuYMD")
-    private TextBoxDate txtNinteiSoshitsuYMD;
+    private TextBoxFlexibleDate txtNinteiSoshitsuYMD;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -45,22 +45,22 @@ public class NinteiResultIdoDiv extends Panel {
     }
 
     @JsonProperty("txtNinteiResultIdoYMD")
-    public TextBoxDate getTxtNinteiResultIdoYMD() {
+    public TextBoxFlexibleDate getTxtNinteiResultIdoYMD() {
         return txtNinteiResultIdoYMD;
     }
 
     @JsonProperty("txtNinteiResultIdoYMD")
-    public void setTxtNinteiResultIdoYMD(TextBoxDate txtNinteiResultIdoYMD) {
+    public void setTxtNinteiResultIdoYMD(TextBoxFlexibleDate txtNinteiResultIdoYMD) {
         this.txtNinteiResultIdoYMD=txtNinteiResultIdoYMD;
     }
 
     @JsonProperty("txtNinteiSoshitsuYMD")
-    public TextBoxDate getTxtNinteiSoshitsuYMD() {
+    public TextBoxFlexibleDate getTxtNinteiSoshitsuYMD() {
         return txtNinteiSoshitsuYMD;
     }
 
     @JsonProperty("txtNinteiSoshitsuYMD")
-    public void setTxtNinteiSoshitsuYMD(TextBoxDate txtNinteiSoshitsuYMD) {
+    public void setTxtNinteiSoshitsuYMD(TextBoxFlexibleDate txtNinteiSoshitsuYMD) {
         this.txtNinteiSoshitsuYMD=txtNinteiSoshitsuYMD;
     }
 

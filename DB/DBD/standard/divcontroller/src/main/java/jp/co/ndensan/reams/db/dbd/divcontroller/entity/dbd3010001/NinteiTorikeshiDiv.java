@@ -24,7 +24,7 @@ public class NinteiTorikeshiDiv extends Panel {
     @JsonProperty("txtNinteiTorikeshiRiyu")
     private TextBox txtNinteiTorikeshiRiyu;
     @JsonProperty("txtTorikeshiYMD")
-    private TextBoxDate txtTorikeshiYMD;
+    private TextBoxFlexibleDate txtTorikeshiYMD;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -43,12 +43,12 @@ public class NinteiTorikeshiDiv extends Panel {
     }
 
     @JsonProperty("txtTorikeshiYMD")
-    public TextBoxDate getTxtTorikeshiYMD() {
+    public TextBoxFlexibleDate getTxtTorikeshiYMD() {
         return txtTorikeshiYMD;
     }
 
     @JsonProperty("txtTorikeshiYMD")
-    public void setTxtTorikeshiYMD(TextBoxDate txtTorikeshiYMD) {
+    public void setTxtTorikeshiYMD(TextBoxFlexibleDate txtTorikeshiYMD) {
         this.txtTorikeshiYMD=txtTorikeshiYMD;
     }
 

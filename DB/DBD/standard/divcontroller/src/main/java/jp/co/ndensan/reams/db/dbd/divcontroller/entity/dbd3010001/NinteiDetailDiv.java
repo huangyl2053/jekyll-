@@ -27,7 +27,7 @@ public class NinteiDetailDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtNinteiShinseiYMD")
-    private TextBoxDate txtNinteiShinseiYMD;
+    private TextBoxFlexibleDate txtNinteiShinseiYMD;
     @JsonProperty("txtNinteiShinseiKubunShinseiji")
     private TextBox txtNinteiShinseiKubunShinseiji;
     @JsonProperty("txtNinteiShinseiKubunHorei")
@@ -35,11 +35,11 @@ public class NinteiDetailDiv extends Panel {
     @JsonProperty("txtNinteiShinseiYukoKubun")
     private TextBox txtNinteiShinseiYukoKubun;
     @JsonProperty("txtIchijiHanteiYMD")
-    private TextBoxDate txtIchijiHanteiYMD;
+    private TextBoxFlexibleDate txtIchijiHanteiYMD;
     @JsonProperty("txtIchijiHanteiResult")
     private TextBox txtIchijiHanteiResult;
     @JsonProperty("txtIchijiHanteiKanryoYMD")
-    private TextBoxDate txtIchijiHanteiKanryoYMD;
+    private TextBoxFlexibleDate txtIchijiHanteiKanryoYMD;
     @JsonProperty("NinteiResultDetail")
     private NinteiResultDetailDiv NinteiResultDetail;
     @JsonProperty("NinteichosaDetail")
@@ -58,12 +58,12 @@ public class NinteiDetailDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     @JsonProperty("txtNinteiShinseiYMD")
-    public TextBoxDate getTxtNinteiShinseiYMD() {
+    public TextBoxFlexibleDate getTxtNinteiShinseiYMD() {
         return txtNinteiShinseiYMD;
     }
 
     @JsonProperty("txtNinteiShinseiYMD")
-    public void setTxtNinteiShinseiYMD(TextBoxDate txtNinteiShinseiYMD) {
+    public void setTxtNinteiShinseiYMD(TextBoxFlexibleDate txtNinteiShinseiYMD) {
         this.txtNinteiShinseiYMD=txtNinteiShinseiYMD;
     }
 
@@ -98,12 +98,12 @@ public class NinteiDetailDiv extends Panel {
     }
 
     @JsonProperty("txtIchijiHanteiYMD")
-    public TextBoxDate getTxtIchijiHanteiYMD() {
+    public TextBoxFlexibleDate getTxtIchijiHanteiYMD() {
         return txtIchijiHanteiYMD;
     }
 
     @JsonProperty("txtIchijiHanteiYMD")
-    public void setTxtIchijiHanteiYMD(TextBoxDate txtIchijiHanteiYMD) {
+    public void setTxtIchijiHanteiYMD(TextBoxFlexibleDate txtIchijiHanteiYMD) {
         this.txtIchijiHanteiYMD=txtIchijiHanteiYMD;
     }
 
@@ -118,12 +118,12 @@ public class NinteiDetailDiv extends Panel {
     }
 
     @JsonProperty("txtIchijiHanteiKanryoYMD")
-    public TextBoxDate getTxtIchijiHanteiKanryoYMD() {
+    public TextBoxFlexibleDate getTxtIchijiHanteiKanryoYMD() {
         return txtIchijiHanteiKanryoYMD;
     }
 
     @JsonProperty("txtIchijiHanteiKanryoYMD")
-    public void setTxtIchijiHanteiKanryoYMD(TextBoxDate txtIchijiHanteiKanryoYMD) {
+    public void setTxtIchijiHanteiKanryoYMD(TextBoxFlexibleDate txtIchijiHanteiKanryoYMD) {
         this.txtIchijiHanteiKanryoYMD=txtIchijiHanteiKanryoYMD;
     }
 
