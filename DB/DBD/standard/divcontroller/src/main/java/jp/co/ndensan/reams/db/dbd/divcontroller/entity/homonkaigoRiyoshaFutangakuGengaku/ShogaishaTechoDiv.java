@@ -21,8 +21,8 @@ public class ShogaishaTechoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("chkShogakushaTechoUmu")
-    private RadioButton chkShogakushaTechoUmu;
+    @JsonProperty("txtHasShogaishaTecho")
+    private TextBox txtHasShogaishaTecho;
     @JsonProperty("txtShogaishaTechoTokyu")
     private TextBox txtShogaishaTechoTokyu;
     @JsonProperty("txtShogaishaTechoNo")
@@ -34,14 +34,14 @@ public class ShogaishaTechoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("chkShogakushaTechoUmu")
-    public RadioButton getChkShogakushaTechoUmu() {
-        return chkShogakushaTechoUmu;
+    @JsonProperty("txtHasShogaishaTecho")
+    public TextBox getTxtHasShogaishaTecho() {
+        return txtHasShogaishaTecho;
     }
 
-    @JsonProperty("chkShogakushaTechoUmu")
-    public void setChkShogakushaTechoUmu(RadioButton chkShogakushaTechoUmu) {
-        this.chkShogakushaTechoUmu=chkShogakushaTechoUmu;
+    @JsonProperty("txtHasShogaishaTecho")
+    public void setTxtHasShogaishaTecho(TextBox txtHasShogaishaTecho) {
+        this.txtHasShogaishaTecho=txtHasShogaishaTecho;
     }
 
     @JsonProperty("txtShogaishaTechoTokyu")

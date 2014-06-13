@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.futanGendogakuNintei;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Jun 12 16:56:32 JST 2014 
+ * Fri Jun 13 15:05:26 JST 2014 
  */
 
 
@@ -11,6 +11,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.futanGendogakuNintei;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 
 /**
@@ -28,7 +29,17 @@ public class dgFutanGendogakuNinteiList_Row extends DataRow {
     private TextBoxFlexibleDate yukoKigen;
     private RString shinseiRiyu;
     private RString fushoninRiyu;
-    private RString riyoshaFutanDankai;
+    private RString futanDankai;
+    private RString kyushochisha;
+    private RString kyoshitsuType;
+    private RString kyokaiso;
+    private RString gekihenKanwa;
+    private TextBoxNum shokuhi;
+    private TextBoxNum unitKoshitsu;
+    private TextBoxNum unitJunKoshitsu;
+    private TextBoxNum tashoshitsu;
+    private TextBoxNum juraigataKoshitsuTokuyo;
+    private TextBoxNum juraigataKoshitsuRoken;
 
     public dgFutanGendogakuNinteiList_Row() {
         super();
@@ -39,10 +50,20 @@ public class dgFutanGendogakuNinteiList_Row extends DataRow {
         this.yukoKigen = new TextBoxFlexibleDate();
         this.shinseiRiyu = RString.EMPTY;
         this.fushoninRiyu = RString.EMPTY;
-        this.riyoshaFutanDankai = RString.EMPTY;
+        this.futanDankai = RString.EMPTY;
+        this.kyushochisha = RString.EMPTY;
+        this.kyoshitsuType = RString.EMPTY;
+        this.kyokaiso = RString.EMPTY;
+        this.gekihenKanwa = RString.EMPTY;
+        this.shokuhi = new TextBoxNum();
+        this.unitKoshitsu = new TextBoxNum();
+        this.unitJunKoshitsu = new TextBoxNum();
+        this.tashoshitsu = new TextBoxNum();
+        this.juraigataKoshitsuTokuyo = new TextBoxNum();
+        this.juraigataKoshitsuRoken = new TextBoxNum();
     }
 
-    public dgFutanGendogakuNinteiList_Row(TextBoxFlexibleDate shinseiDate, TextBoxFlexibleDate ketteiDate, RString ketteiKubun, TextBoxFlexibleDate tekiyoDate, TextBoxFlexibleDate yukoKigen, RString shinseiRiyu, RString fushoninRiyu, RString riyoshaFutanDankai) {
+    public dgFutanGendogakuNinteiList_Row(TextBoxFlexibleDate shinseiDate, TextBoxFlexibleDate ketteiDate, RString ketteiKubun, TextBoxFlexibleDate tekiyoDate, TextBoxFlexibleDate yukoKigen, RString shinseiRiyu, RString fushoninRiyu, RString futanDankai, RString kyushochisha, RString kyoshitsuType, RString kyokaiso, RString gekihenKanwa, TextBoxNum shokuhi, TextBoxNum unitKoshitsu, TextBoxNum unitJunKoshitsu, TextBoxNum tashoshitsu, TextBoxNum juraigataKoshitsuTokuyo, TextBoxNum juraigataKoshitsuRoken) {
         super();
         this.setOriginalData("shinseiDate", shinseiDate);
         this.setOriginalData("ketteiDate", ketteiDate);
@@ -51,7 +72,17 @@ public class dgFutanGendogakuNinteiList_Row extends DataRow {
         this.setOriginalData("yukoKigen", yukoKigen);
         this.setOriginalData("shinseiRiyu", shinseiRiyu);
         this.setOriginalData("fushoninRiyu", fushoninRiyu);
-        this.setOriginalData("riyoshaFutanDankai", riyoshaFutanDankai);
+        this.setOriginalData("futanDankai", futanDankai);
+        this.setOriginalData("kyushochisha", kyushochisha);
+        this.setOriginalData("kyoshitsuType", kyoshitsuType);
+        this.setOriginalData("kyokaiso", kyokaiso);
+        this.setOriginalData("gekihenKanwa", gekihenKanwa);
+        this.setOriginalData("shokuhi", shokuhi);
+        this.setOriginalData("unitKoshitsu", unitKoshitsu);
+        this.setOriginalData("unitJunKoshitsu", unitJunKoshitsu);
+        this.setOriginalData("tashoshitsu", tashoshitsu);
+        this.setOriginalData("juraigataKoshitsuTokuyo", juraigataKoshitsuTokuyo);
+        this.setOriginalData("juraigataKoshitsuRoken", juraigataKoshitsuRoken);
         this.shinseiDate = shinseiDate;
         this.ketteiDate = ketteiDate;
         this.ketteiKubun = ketteiKubun;
@@ -59,7 +90,17 @@ public class dgFutanGendogakuNinteiList_Row extends DataRow {
         this.yukoKigen = yukoKigen;
         this.shinseiRiyu = shinseiRiyu;
         this.fushoninRiyu = fushoninRiyu;
-        this.riyoshaFutanDankai = riyoshaFutanDankai;
+        this.futanDankai = futanDankai;
+        this.kyushochisha = kyushochisha;
+        this.kyoshitsuType = kyoshitsuType;
+        this.kyokaiso = kyokaiso;
+        this.gekihenKanwa = gekihenKanwa;
+        this.shokuhi = shokuhi;
+        this.unitKoshitsu = unitKoshitsu;
+        this.unitJunKoshitsu = unitJunKoshitsu;
+        this.tashoshitsu = tashoshitsu;
+        this.juraigataKoshitsuTokuyo = juraigataKoshitsuTokuyo;
+        this.juraigataKoshitsuRoken = juraigataKoshitsuRoken;
     }
 
     public TextBoxFlexibleDate getShinseiDate() {
@@ -90,8 +131,48 @@ public class dgFutanGendogakuNinteiList_Row extends DataRow {
         return fushoninRiyu;
     }
 
-    public RString getRiyoshaFutanDankai() {
-        return riyoshaFutanDankai;
+    public RString getFutanDankai() {
+        return futanDankai;
+    }
+
+    public RString getKyushochisha() {
+        return kyushochisha;
+    }
+
+    public RString getKyoshitsuType() {
+        return kyoshitsuType;
+    }
+
+    public RString getKyokaiso() {
+        return kyokaiso;
+    }
+
+    public RString getGekihenKanwa() {
+        return gekihenKanwa;
+    }
+
+    public TextBoxNum getShokuhi() {
+        return shokuhi;
+    }
+
+    public TextBoxNum getUnitKoshitsu() {
+        return unitKoshitsu;
+    }
+
+    public TextBoxNum getUnitJunKoshitsu() {
+        return unitJunKoshitsu;
+    }
+
+    public TextBoxNum getTashoshitsu() {
+        return tashoshitsu;
+    }
+
+    public TextBoxNum getJuraigataKoshitsuTokuyo() {
+        return juraigataKoshitsuTokuyo;
+    }
+
+    public TextBoxNum getJuraigataKoshitsuRoken() {
+        return juraigataKoshitsuRoken;
     }
 
     public void setShinseiDate(TextBoxFlexibleDate shinseiDate) {
@@ -129,9 +210,59 @@ public class dgFutanGendogakuNinteiList_Row extends DataRow {
         this.fushoninRiyu = fushoninRiyu;
     }
 
-    public void setRiyoshaFutanDankai(RString riyoshaFutanDankai) {
-        this.setOriginalData("riyoshaFutanDankai", riyoshaFutanDankai);
-        this.riyoshaFutanDankai = riyoshaFutanDankai;
+    public void setFutanDankai(RString futanDankai) {
+        this.setOriginalData("futanDankai", futanDankai);
+        this.futanDankai = futanDankai;
+    }
+
+    public void setKyushochisha(RString kyushochisha) {
+        this.setOriginalData("kyushochisha", kyushochisha);
+        this.kyushochisha = kyushochisha;
+    }
+
+    public void setKyoshitsuType(RString kyoshitsuType) {
+        this.setOriginalData("kyoshitsuType", kyoshitsuType);
+        this.kyoshitsuType = kyoshitsuType;
+    }
+
+    public void setKyokaiso(RString kyokaiso) {
+        this.setOriginalData("kyokaiso", kyokaiso);
+        this.kyokaiso = kyokaiso;
+    }
+
+    public void setGekihenKanwa(RString gekihenKanwa) {
+        this.setOriginalData("gekihenKanwa", gekihenKanwa);
+        this.gekihenKanwa = gekihenKanwa;
+    }
+
+    public void setShokuhi(TextBoxNum shokuhi) {
+        this.setOriginalData("shokuhi", shokuhi);
+        this.shokuhi = shokuhi;
+    }
+
+    public void setUnitKoshitsu(TextBoxNum unitKoshitsu) {
+        this.setOriginalData("unitKoshitsu", unitKoshitsu);
+        this.unitKoshitsu = unitKoshitsu;
+    }
+
+    public void setUnitJunKoshitsu(TextBoxNum unitJunKoshitsu) {
+        this.setOriginalData("unitJunKoshitsu", unitJunKoshitsu);
+        this.unitJunKoshitsu = unitJunKoshitsu;
+    }
+
+    public void setTashoshitsu(TextBoxNum tashoshitsu) {
+        this.setOriginalData("tashoshitsu", tashoshitsu);
+        this.tashoshitsu = tashoshitsu;
+    }
+
+    public void setJuraigataKoshitsuTokuyo(TextBoxNum juraigataKoshitsuTokuyo) {
+        this.setOriginalData("juraigataKoshitsuTokuyo", juraigataKoshitsuTokuyo);
+        this.juraigataKoshitsuTokuyo = juraigataKoshitsuTokuyo;
+    }
+
+    public void setJuraigataKoshitsuRoken(TextBoxNum juraigataKoshitsuRoken) {
+        this.setOriginalData("juraigataKoshitsuRoken", juraigataKoshitsuRoken);
+        this.juraigataKoshitsuRoken = juraigataKoshitsuRoken;
     }
 
 }

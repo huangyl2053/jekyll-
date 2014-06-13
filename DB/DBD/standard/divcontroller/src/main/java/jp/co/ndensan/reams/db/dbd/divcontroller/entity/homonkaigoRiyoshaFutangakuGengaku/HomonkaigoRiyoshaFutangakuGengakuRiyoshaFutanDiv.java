@@ -31,8 +31,8 @@ public class HomonkaigoRiyoshaFutangakuGengakuRiyoshaFutanDiv extends Panel {
     private TextBoxFlexibleDate txtYukokigenDate;
     @JsonProperty("txtKyufuRitsu")
     private TextBoxNum txtKyufuRitsu;
-    @JsonProperty("txtHishoninRiyu")
-    private TextBoxMultiLine txtHishoninRiyu;
+    @JsonProperty("txtFushoninRiyu")
+    private TextBoxMultiLine txtFushoninRiyu;
     @JsonProperty("txtKohiFutanshaNo")
     private TextBoxCode txtKohiFutanshaNo;
     @JsonProperty("txtKohiJukyushaNo")
@@ -94,14 +94,14 @@ public class HomonkaigoRiyoshaFutangakuGengakuRiyoshaFutanDiv extends Panel {
         this.txtKyufuRitsu=txtKyufuRitsu;
     }
 
-    @JsonProperty("txtHishoninRiyu")
-    public TextBoxMultiLine getTxtHishoninRiyu() {
-        return txtHishoninRiyu;
+    @JsonProperty("txtFushoninRiyu")
+    public TextBoxMultiLine getTxtFushoninRiyu() {
+        return txtFushoninRiyu;
     }
 
-    @JsonProperty("txtHishoninRiyu")
-    public void setTxtHishoninRiyu(TextBoxMultiLine txtHishoninRiyu) {
-        this.txtHishoninRiyu=txtHishoninRiyu;
+    @JsonProperty("txtFushoninRiyu")
+    public void setTxtFushoninRiyu(TextBoxMultiLine txtFushoninRiyu) {
+        this.txtFushoninRiyu=txtFushoninRiyu;
     }
 
     @JsonProperty("txtKohiFutanshaNo")

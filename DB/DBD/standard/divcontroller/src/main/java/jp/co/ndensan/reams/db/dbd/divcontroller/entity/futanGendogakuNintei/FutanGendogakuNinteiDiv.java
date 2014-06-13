@@ -23,6 +23,8 @@ public class FutanGendogakuNinteiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("txtHiddenHihokenshaNo")
+    private TextBox txtHiddenHihokenshaNo;
     @JsonProperty("dgFutanGendogakuNinteiList")
     private DataGrid<dgFutanGendogakuNinteiList_Row> dgFutanGendogakuNinteiList;
     @JsonProperty("FutanGendogakuNinteiDetail")
@@ -34,6 +36,16 @@ public class FutanGendogakuNinteiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    @JsonProperty("txtHiddenHihokenshaNo")
+    public TextBox getTxtHiddenHihokenshaNo() {
+        return txtHiddenHihokenshaNo;
+    }
+
+    @JsonProperty("txtHiddenHihokenshaNo")
+    public void setTxtHiddenHihokenshaNo(TextBox txtHiddenHihokenshaNo) {
+        this.txtHiddenHihokenshaNo=txtHiddenHihokenshaNo;
+    }
+
     @JsonProperty("dgFutanGendogakuNinteiList")
     public DataGrid<dgFutanGendogakuNinteiList_Row> getDgFutanGendogakuNinteiList() {
         return dgFutanGendogakuNinteiList;

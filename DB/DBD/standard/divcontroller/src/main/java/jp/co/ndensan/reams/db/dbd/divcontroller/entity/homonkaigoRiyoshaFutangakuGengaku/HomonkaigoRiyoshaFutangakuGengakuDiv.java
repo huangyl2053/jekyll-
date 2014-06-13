@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.homonkaigoRiyoshaFutanga
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.homonkaigoRiyoshaFutangakuGengaku.HomonkaigoRiyoshaFutangakuGengakuDetailDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.homonkaigoRiyoshaFutangakuGengaku.dgTaishoshaList_Row;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.homonkaigoRiyoshaFutangakuGengaku.dgHomonkaigoRiyoshaFutangakuGengakuList_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -23,8 +23,10 @@ public class HomonkaigoRiyoshaFutangakuGengakuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("dgTaishoshaList")
-    private DataGrid<dgTaishoshaList_Row> dgTaishoshaList;
+    @JsonProperty("txtHiddenHihokenshaNo")
+    private TextBox txtHiddenHihokenshaNo;
+    @JsonProperty("dgHomonkaigoRiyoshaFutangakuGengakuList")
+    private DataGrid<dgHomonkaigoRiyoshaFutangakuGengakuList_Row> dgHomonkaigoRiyoshaFutangakuGengakuList;
     @JsonProperty("HomonkaigoRiyoshaFutangakuGengakuDetail")
     private HomonkaigoRiyoshaFutangakuGengakuDetailDiv HomonkaigoRiyoshaFutangakuGengakuDetail;
 
@@ -34,14 +36,24 @@ public class HomonkaigoRiyoshaFutangakuGengakuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("dgTaishoshaList")
-    public DataGrid<dgTaishoshaList_Row> getDgTaishoshaList() {
-        return dgTaishoshaList;
+    @JsonProperty("txtHiddenHihokenshaNo")
+    public TextBox getTxtHiddenHihokenshaNo() {
+        return txtHiddenHihokenshaNo;
     }
 
-    @JsonProperty("dgTaishoshaList")
-    public void setDgTaishoshaList(DataGrid<dgTaishoshaList_Row> dgTaishoshaList) {
-        this.dgTaishoshaList=dgTaishoshaList;
+    @JsonProperty("txtHiddenHihokenshaNo")
+    public void setTxtHiddenHihokenshaNo(TextBox txtHiddenHihokenshaNo) {
+        this.txtHiddenHihokenshaNo=txtHiddenHihokenshaNo;
+    }
+
+    @JsonProperty("dgHomonkaigoRiyoshaFutangakuGengakuList")
+    public DataGrid<dgHomonkaigoRiyoshaFutangakuGengakuList_Row> getDgHomonkaigoRiyoshaFutangakuGengakuList() {
+        return dgHomonkaigoRiyoshaFutangakuGengakuList;
+    }
+
+    @JsonProperty("dgHomonkaigoRiyoshaFutangakuGengakuList")
+    public void setDgHomonkaigoRiyoshaFutangakuGengakuList(DataGrid<dgHomonkaigoRiyoshaFutangakuGengakuList_Row> dgHomonkaigoRiyoshaFutangakuGengakuList) {
+        this.dgHomonkaigoRiyoshaFutangakuGengakuList=dgHomonkaigoRiyoshaFutangakuGengakuList;
     }
 
     @JsonProperty("HomonkaigoRiyoshaFutangakuGengakuDetail")

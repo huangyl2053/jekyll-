@@ -29,7 +29,7 @@ public class HyojunFutangakuGengakuData {
      * @return DemoData
      */
     public IDemoData<dgHyojunFutangakuGengakuList_Row> get標準負担額減額履歴Of(RString hihokenshaNo) {
-        List<HashMap> dataFromYaml = YamlLoader.DBD.loadAsList(new RString("HyojunFutangakuGengaku/" + hihokenshaNo + ".yml"));
+        List<HashMap> dataFromYaml = YamlLoader.DBD.loadAsList(composeYAMLFilePathOf(hihokenshaNo));
         return new DemoData<>(dataFromYaml, new YamlUtil.Converter.IConverter<dgHyojunFutangakuGengakuList_Row>() {
             @Override
             public dgHyojunFutangakuGengakuList_Row exec(Map map) {
@@ -53,10 +53,14 @@ public class HyojunFutangakuGengakuData {
 
     public boolean exists標準負担額減額履歴Of(RString hihokenshaNo) {
         try {
-            YamlLoader.DBD.loadAsList(new RString("HyojunFutangakuGengaku/" + hihokenshaNo + ".yml"));
+            YamlLoader.DBD.loadAsList(composeYAMLFilePathOf(hihokenshaNo));
         } catch (SystemException e) {
             return false;
         }
         return true;
+    }
+
+    private RString composeYAMLFilePathOf(RString hihokenshaNo) {
+        return new RString("HyojunFutangakuGengaku/" + hihokenshaNo + ".yml");
     }
 }

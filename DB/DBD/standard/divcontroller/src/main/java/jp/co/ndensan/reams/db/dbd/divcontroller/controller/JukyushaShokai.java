@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.divcontroller.demodata.FutanGendogakuNinteiData;
+import jp.co.ndensan.reams.db.dbd.divcontroller.demodata.HomonkaigoRiyoshaFutangakuGengakuData;
 import jp.co.ndensan.reams.db.dbd.divcontroller.demodata.HyojunFutangakuGengakuData;
 import jp.co.ndensan.reams.db.dbd.divcontroller.demodata.JukyushaData;
 import jp.co.ndensan.reams.db.dbd.divcontroller.demodata.RiyoshaFutangakuGemmenData;
@@ -62,17 +63,19 @@ public class JukyushaShokai {
         div.getNinteiRireki().getDgNinteiRireki().setDataSource(searchHistroyOfClickedHihokensha(targets));
         RString hihokenshaNo = clickedItem(targets).getHihokenshaNo();
         div.getHihokensha().getTxtHihokenshaNo().setValue(hihokenshaNo);
-        initButtonsShosaiShiji(div.getButtonsShosaiShiji(), hihokenshaNo);
+        _init_ButtonsShosaiShiji(div.getButtonsShosaiShiji(), hihokenshaNo);
         return _createResponseData(div);
     }
 
-    private void initButtonsShosaiShiji(ButtonsShosaiShijiDiv div, RString hihokenshaNo) {
+    private void _init_ButtonsShosaiShiji(ButtonsShosaiShijiDiv div, RString hihokenshaNo) {
         toBeAbleToPushOrNot_button(div.getBtnFutangendogakuNintei(),
                 !new FutanGendogakuNinteiData().exists負担限度額認定履歴of(hihokenshaNo));
         toBeAbleToPushOrNot_button(div.getBtnHyojunFutangakuGengaku(),
                 !new HyojunFutangakuGengakuData().exists標準負担額減額履歴Of(hihokenshaNo));
         toBeAbleToPushOrNot_button(div.getBtnRiyoshaFutangakuGemmen(),
                 !new RiyoshaFutangakuGemmenData().exists利用者負担額減免履歴Of(hihokenshaNo));
+        toBeAbleToPushOrNot_button(div.getBtnHomonKaigoRiyoshaFutangakuGengaku(),
+                !new HomonkaigoRiyoshaFutangakuGengakuData().exsits訪問介護利用者負担額減額履歴(hihokenshaNo));
     }
 
     private void toBeAbleToPushOrNot_button(ButtonDialog btn, boolean disable) {

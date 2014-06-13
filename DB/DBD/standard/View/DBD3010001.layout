@@ -62,28 +62,41 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
-     "onClick_btnToResearch": "",
+     "onClickBtnToResearch": "",
      "gridSetting": {
       "rowHeight": 50,
       "isMultiSelectable": false,
+      "isShowHeader": true,
       "isShowFooter": true,
       "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": false,
+      "isShowSelectButtonColumn": false,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
       "header": {
        "combineColumns": [],
-       "frozenColumn": ""
+       "frozenColumn": "",
+       "headerHeight": 0
       },
       "columns": [
        {
         "columnName": "",
         "dataName": "btnToDecide",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 50,
         "visible": true,
         "cellType": 8,
         "cellDetails": {
          "cellType": 8,
          "text": "確定",
-         "onClick": "",
-         "imageFileUrl": ""
+         "onClick": "onClick_btnToDecide",
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": ""
         },
         "align": 0,
         "resize": false,
@@ -93,6 +106,8 @@
        {
         "columnName": "被保番号",
         "dataName": "hihokenshaNo",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 110,
         "visible": true,
         "cellType": 0,
@@ -107,6 +122,8 @@
        {
         "columnName": "識別コード",
         "dataName": "shikibetsuCode",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 110,
         "visible": true,
         "cellType": 0,
@@ -121,6 +138,8 @@
        {
         "columnName": "被保険者区分",
         "dataName": "hihokenshaKubun",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 110,
         "visible": true,
         "cellType": 0,
@@ -133,6 +152,8 @@
        {
         "columnName": "氏名",
         "dataName": "shimei",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 150,
         "visible": false,
         "cellType": 0,
@@ -147,6 +168,8 @@
        {
         "columnName": "カナ氏名",
         "dataName": "kanaShimsei",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 150,
         "visible": false,
         "cellType": 0,
@@ -159,6 +182,8 @@
        {
         "columnName": "氏名",
         "dataName": "shimeiAndKanaShimsei",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 150,
         "visible": true,
         "cellType": 0,
@@ -171,6 +196,8 @@
        {
         "columnName": "性別",
         "dataName": "gender",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 50,
         "visible": true,
         "cellType": 0,
@@ -185,6 +212,8 @@
        {
         "columnName": "生年月日",
         "dataName": "birthDay",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 110,
         "visible": true,
         "cellType": 6,
@@ -201,6 +230,8 @@
        {
         "columnName": "郵便番号",
         "dataName": "yubinNo",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 110,
         "visible": true,
         "cellType": 0,
@@ -213,6 +244,8 @@
        {
         "columnName": "住所",
         "dataName": "jusho",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 300,
         "visible": true,
         "cellType": 0,
@@ -225,6 +258,8 @@
        {
         "columnName": "個人番号",
         "dataName": "kojinNo",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 120,
         "visible": false,
         "cellType": 0,
@@ -237,6 +272,8 @@
        {
         "columnName": "住民種別",
         "dataName": "juminShubetsu",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 100,
         "visible": true,
         "cellType": 0,
@@ -249,6 +286,8 @@
        {
         "columnName": "世帯コード",
         "dataName": "setaiCode",
+        "toolTip": "",
+        "bgColor": 0,
         "width": 110,
         "visible": true,
         "cellType": 0,
@@ -527,7 +566,7 @@
        "width": "150",
        "visible": true,
        "displayNone": false,
-       "disabled": false,
+       "disabled": true,
        "accessKey": "",
        "nextFocusFieldName": "",
        "wrap": true,
@@ -565,7 +604,7 @@
        "width": "150",
        "visible": true,
        "displayNone": false,
-       "disabled": false,
+       "disabled": true,
        "accessKey": "",
        "nextFocusFieldName": "",
        "wrap": false,
@@ -603,7 +642,7 @@
        "width": "150",
        "visible": true,
        "displayNone": false,
-       "disabled": false,
+       "disabled": true,
        "accessKey": "",
        "nextFocusFieldName": "",
        "wrap": false,
@@ -624,7 +663,12 @@
        "imageWidth": "",
        "imageHeight": "",
        "displayChildDivName": "DBD.HomonkaigoRiyoshaFutangakuGengaku",
-       "dataPassing": [],
+       "dataPassing": [
+        {
+         "key": "hihokenshaNo",
+         "controlName": "txtHihokenshaNo"
+        }
+       ],
        "visibleCloseButton": true,
        "onOkClose": "",
        "onBeforeOpenDialog": ""
@@ -636,7 +680,7 @@
        "width": "150",
        "visible": true,
        "displayNone": false,
-       "disabled": false,
+       "disabled": true,
        "accessKey": "",
        "nextFocusFieldName": "",
        "wrap": false,
@@ -656,8 +700,13 @@
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
-       "displayChildDivName": "DBD.FutangendogakuNintei",
-       "dataPassing": [],
+       "displayChildDivName": "DBD.FutanGendogakuNintei",
+       "dataPassing": [
+        {
+         "key": "hihokenshaNo",
+         "controlName": "txtHihokenshaNo"
+        }
+       ],
        "visibleCloseButton": true,
        "onOkClose": "",
        "onBeforeOpenDialog": ""
@@ -669,7 +718,7 @@
        "width": "150",
        "visible": true,
        "displayNone": false,
-       "disabled": false,
+       "disabled": true,
        "accessKey": "",
        "nextFocusFieldName": "",
        "wrap": false,
@@ -702,7 +751,7 @@
        "width": "150",
        "visible": true,
        "displayNone": false,
-       "disabled": false,
+       "disabled": true,
        "accessKey": "",
        "nextFocusFieldName": "",
        "wrap": true,
@@ -1815,7 +1864,7 @@
              "required": false,
              "labelLText": "異動日",
              "labelRText": "",
-             "labelLWidth": "S",
+             "labelLWidth": "80",
              "labelRWidth": "S",
              "labelLAlign": 2,
              "labelRAlign": 0,
@@ -1856,7 +1905,7 @@
              "required": false,
              "labelLText": "喪失日",
              "labelRText": "",
-             "labelLWidth": "S",
+             "labelLWidth": "80",
              "labelRWidth": "S",
              "labelLAlign": 2,
              "labelRAlign": 0,
@@ -1991,7 +2040,7 @@
              "required": false,
              "labelLText": "取消日",
              "labelRText": "",
-             "labelLWidth": "S",
+             "labelLWidth": "80",
              "labelRWidth": "S",
              "labelLAlign": 2,
              "labelRAlign": 0,

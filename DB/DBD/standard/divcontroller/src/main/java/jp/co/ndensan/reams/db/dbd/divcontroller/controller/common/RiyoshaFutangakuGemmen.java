@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 
 /**
+ * RiyoshaFutangakuGemmenDivを操作します。
  *
  * @author N3327 三浦 凌
  */
@@ -45,14 +46,14 @@ public class RiyoshaFutangakuGemmen {
     public ResponseData<RiyoshaFutangakuGemmenDiv> onSelect_dgRiyoshaFutangakuGemmenList(RiyoshaFutangakuGemmenDiv div) {
         for (dgRiyoshaFutangakuGemmenList_Row row : _list(div).getDataSource()) {
             if (row.getSelected()) {
-                dressWithRowValue(div, row);
+                setUp(div, row);
                 break;
             }
         }
         return _createResponseData(div);
     }
 
-    private void dressWithRowValue(RiyoshaFutangakuGemmenDiv div, dgRiyoshaFutangakuGemmenList_Row rowValue) {
+    private void setUp(RiyoshaFutangakuGemmenDiv div, dgRiyoshaFutangakuGemmenList_Row rowValue) {
         div.getRiyoshaFutangakuGemmenDetail().getTxtShinseiDate().setValue(rowValue.getShinseiDate().getValue());
         _riyoshaFutan(div).getTxtFushoninRiyu().setValue(rowValue.getFushoninRiyu());
         _riyoshaFutan(div).getTxtKyufuRitsu().setValue(rowValue.getKyufuRitsu().getValue());

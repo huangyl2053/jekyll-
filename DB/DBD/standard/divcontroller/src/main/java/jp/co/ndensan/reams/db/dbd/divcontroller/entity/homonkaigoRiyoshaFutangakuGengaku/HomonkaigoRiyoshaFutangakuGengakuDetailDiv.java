@@ -6,10 +6,9 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.homonkaigoRiyoshaFutanga
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.homonkaigoRiyoshaFutangakuGengaku.HomonkaigoRiyoshaFutangakuGengakuRiyoshaFutanDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.homonkaigoRiyoshaFutangakuGengaku.HomonkaigoRiyoshaFutangakuGengakuShinseiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.homonkaigoRiyoshaFutangakuGengaku.ShogaishaTechoDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * HomonkaigoRiyoshaFutangakuGengakuDetail のクラスファイル 
@@ -23,12 +22,8 @@ public class HomonkaigoRiyoshaFutangakuGengakuDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtShinseiDate")
-    private TextBoxFlexibleDate txtShinseiDate;
-    @JsonProperty("txtShinseiRiyu")
-    private TextBox txtShinseiRiyu;
-    @JsonProperty("txtHobetsuKubun")
-    private TextBox txtHobetsuKubun;
+    @JsonProperty("HomonkaigoRiyoshaFutangakuGengakuShinsei")
+    private HomonkaigoRiyoshaFutangakuGengakuShinseiDiv HomonkaigoRiyoshaFutangakuGengakuShinsei;
     @JsonProperty("ShogaishaTecho")
     private ShogaishaTechoDiv ShogaishaTecho;
     @JsonProperty("HomonkaigoRiyoshaFutangakuGengakuRiyoshaFutan")
@@ -40,34 +35,14 @@ public class HomonkaigoRiyoshaFutangakuGengakuDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("txtShinseiDate")
-    public TextBoxFlexibleDate getTxtShinseiDate() {
-        return txtShinseiDate;
+    @JsonProperty("HomonkaigoRiyoshaFutangakuGengakuShinsei")
+    public HomonkaigoRiyoshaFutangakuGengakuShinseiDiv getHomonkaigoRiyoshaFutangakuGengakuShinsei() {
+        return HomonkaigoRiyoshaFutangakuGengakuShinsei;
     }
 
-    @JsonProperty("txtShinseiDate")
-    public void setTxtShinseiDate(TextBoxFlexibleDate txtShinseiDate) {
-        this.txtShinseiDate=txtShinseiDate;
-    }
-
-    @JsonProperty("txtShinseiRiyu")
-    public TextBox getTxtShinseiRiyu() {
-        return txtShinseiRiyu;
-    }
-
-    @JsonProperty("txtShinseiRiyu")
-    public void setTxtShinseiRiyu(TextBox txtShinseiRiyu) {
-        this.txtShinseiRiyu=txtShinseiRiyu;
-    }
-
-    @JsonProperty("txtHobetsuKubun")
-    public TextBox getTxtHobetsuKubun() {
-        return txtHobetsuKubun;
-    }
-
-    @JsonProperty("txtHobetsuKubun")
-    public void setTxtHobetsuKubun(TextBox txtHobetsuKubun) {
-        this.txtHobetsuKubun=txtHobetsuKubun;
+    @JsonProperty("HomonkaigoRiyoshaFutangakuGengakuShinsei")
+    public void setHomonkaigoRiyoshaFutangakuGengakuShinsei(HomonkaigoRiyoshaFutangakuGengakuShinseiDiv HomonkaigoRiyoshaFutangakuGengakuShinsei) {
+        this.HomonkaigoRiyoshaFutangakuGengakuShinsei=HomonkaigoRiyoshaFutangakuGengakuShinsei;
     }
 
     @JsonProperty("ShogaishaTecho")

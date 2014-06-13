@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 
 /**
- * 共有子Div『HyojunFutangakuGengaku』を操作します。
+ * HyojunFutangakuGengakuDivを操作します。
  *
  * @author N3327 三浦 凌
  */
@@ -48,14 +48,14 @@ public class HyojunFutangakuGengaku {
     public ResponseData<HyojunFutangakuGengakuDiv> onSelect_dgHyojunFutangakuGengakuList(HyojunFutangakuGengakuDiv div) {
         for (dgHyojunFutangakuGengakuList_Row row : _list(div).getDataSource()) {
             if (row.getSelected()) {
-                dressWithRowValue(div, row);
+                setUp(div, row);
                 break;
             }
         }
         return _createResponseData(div);
     }
 
-    private void dressWithRowValue(HyojunFutangakuGengakuDiv div, dgHyojunFutangakuGengakuList_Row rowValue) {
+    private void setUp(HyojunFutangakuGengakuDiv div, dgHyojunFutangakuGengakuList_Row rowValue) {
         div.getHyojunFutangakuGemmenDetail().getTxtShinseiDate().setValue(rowValue.getShinseiDate().getValue());
         _riyoshaFutan(div).getTxtFushoninRiyu().setValue(rowValue.getFushoninRiyu());
         _riyoshaFutan(div).getTxtFutangaku().setValue(rowValue.getFutangaku().getValue());
