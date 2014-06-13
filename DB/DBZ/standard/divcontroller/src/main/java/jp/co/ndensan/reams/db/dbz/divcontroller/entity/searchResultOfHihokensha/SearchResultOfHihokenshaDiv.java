@@ -6,8 +6,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.ButtonsForSearchResultOfHihokenshaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgSearchResult_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgSearchResult_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.dgSearchResult_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;

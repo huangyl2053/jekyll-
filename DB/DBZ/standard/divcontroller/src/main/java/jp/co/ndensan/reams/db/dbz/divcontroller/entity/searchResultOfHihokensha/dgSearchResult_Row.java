@@ -1,9 +1,9 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jun 10 19:59:43 JST 2014 
+ * Fri Jun 13 14:16:29 JST 2014 
  */
 
 
@@ -39,6 +39,20 @@ public class dgSearchResult_Row extends DataRow {
 
     public dgSearchResult_Row() {
         super();
+        this.btnToDecide = new Button();
+        this.hihokenshaNo = RString.EMPTY;
+        this.shikibetsuCode = RString.EMPTY;
+        this.hihokenshaKubun = RString.EMPTY;
+        this.shimei = RString.EMPTY;
+        this.kanaShimsei = RString.EMPTY;
+        this.shimeiAndKanaShimsei = RString.EMPTY;
+        this.gender = RString.EMPTY;
+        this.birthDay = new TextBoxDate();
+        this.yubinNo = RString.EMPTY;
+        this.jusho = RString.EMPTY;
+        this.kojinNo = RString.EMPTY;
+        this.juminShubetsu = RString.EMPTY;
+        this.setaiCode = RString.EMPTY;
     }
 
     public dgSearchResult_Row(Button btnToDecide, RString hihokenshaNo, RString shikibetsuCode, RString hihokenshaKubun, RString shimei, RString kanaShimsei, RString shimeiAndKanaShimsei, RString gender, TextBoxDate birthDay, RString yubinNo, RString jusho, RString kojinNo, RString juminShubetsu, RString setaiCode) {
