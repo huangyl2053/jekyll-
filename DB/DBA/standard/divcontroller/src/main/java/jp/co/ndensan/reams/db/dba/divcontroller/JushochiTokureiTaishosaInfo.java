@@ -11,7 +11,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.DbCommonInfoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.JushochiTokureiTaishosaInfoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.helper.YamlLoader;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.tblAtenaSimpleDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -37,27 +37,27 @@ public class JushochiTokureiTaishosaInfo {
         HashMap demoData = demoDataList.get(0);
 
         ResponseData<JushochiTokureiTaishosaInfoDiv> response = new ResponseData<>();
-        setAtenaJoho(div.getAtenaJoho().getTblAtenaSimple(), demoData);
+        setAtenaJoho(div.getAtenaJoho(), demoData);
         setDbCommonInfo(div.getDbCommonInfo(), demoData);
         response.data = div;
         return response;
     }
 
-    private void setAtenaJoho(tblAtenaSimpleDiv tblAtenaSimple, Map demoData) {
+    private void setAtenaJoho(AtenaShokaiSimpleDiv atena, Map demoData) {
 
-        tblAtenaSimple.getTxtAtenaKanaMeisho().setValue(new RString(demoData.get("カナ氏名").toString()));
-        tblAtenaSimple.getTxtAtenaMeisho().setValue(new RString(demoData.get("氏名").toString()));
-        tblAtenaSimple.getTxtGyoseiku().setValue(new RString(demoData.get("行政区").toString()));
-        tblAtenaSimple.getTxtJuminJotai().setValue(new RString(demoData.get("住民状態").toString()));
-        tblAtenaSimple.getTxtJuminShubetsu().setValue(new RString(demoData.get("住民種別").toString()));
-        tblAtenaSimple.getTxtJusho().setValue(new RString(demoData.get("住所").toString()));
-        tblAtenaSimple.getTxtKojinHojinCode().setValue(new RString(demoData.get("個人法人コード").toString()));
-        tblAtenaSimple.getTxtNenrei().setValue(new RString(demoData.get("氏名").toString()));
-        tblAtenaSimple.getTxtSeibetsu().setValue(new RString(demoData.get("性別").toString()));
-        tblAtenaSimple.getTxtSeinengappiYMD().setValue(new RDate(demoData.get("生年月日").toString()));
-        tblAtenaSimple.getTxtSetaiCode().setValue(new RString(demoData.get("世帯コード").toString()));
-        tblAtenaSimple.getTxtShikibetsuCode().setValue(new RString(demoData.get("識別コード").toString()));
-        tblAtenaSimple.getTxtYubinNo().setValue(new YubinNo(demoData.get("郵便番号").toString()));
+        atena.getTxtAtenaKanaMeisho().setValue(new RString(demoData.get("カナ氏名").toString()));
+        atena.getTxtAtenaMeisho().setValue(new RString(demoData.get("氏名").toString()));
+        atena.getTxtGyoseiku().setValue(new RString(demoData.get("行政区").toString()));
+        atena.getTxtJuminJotai().setValue(new RString(demoData.get("住民状態").toString()));
+        atena.getTxtNihonjinGaikokujin().setValue(new RString(demoData.get("住民種別").toString()));
+        atena.getTxtJusho().setValue(new RString(demoData.get("住所").toString()));
+        atena.getTxtKojinHojinCode().setValue(new RString(demoData.get("個人法人コード").toString()));
+        atena.getTxtNenrei().setValue(new RString(demoData.get("氏名").toString()));
+        atena.getTxtSeibetsu().setValue(new RString(demoData.get("性別").toString()));
+        atena.getTxtSeinengappiYMD().setValue(new RDate(demoData.get("生年月日").toString()));
+        atena.getTxtSetaiCode().setValue(new RString(demoData.get("世帯コード").toString()));
+        atena.getTxtShikibetsuCode().setValue(new RString(demoData.get("識別コード").toString()));
+        atena.getTxtYubinNo().setValue(new YubinNo(demoData.get("郵便番号").toString()));
     }
 
     private void setDbCommonInfo(DbCommonInfoDiv dbCommonInfo, Map demoData) {

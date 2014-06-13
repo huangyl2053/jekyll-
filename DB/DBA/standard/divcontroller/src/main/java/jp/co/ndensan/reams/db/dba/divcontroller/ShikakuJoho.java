@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.tplShikakuJoho
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.tplShisetsuNyutaishoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.tblAtenaSimpleDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -551,7 +551,7 @@ public class ShikakuJoho {
 
         if (tplShikakuJoho.getOtherShichosonJoho().isVisible()) {
             OtherShichosonJohoDiv other = tplShikakuJoho.getOtherShichosonJoho();
-            tblAtenaSimpleDiv atenaJoho = taishoshaJoho.getShikakuShutokuTaishoshaCommonJoho().getTblAtenaSimple();
+            AtenaShokaiSimpleDiv atenaJoho = taishoshaJoho.getShikakuShutokuTaishoshaCommonJoho();
             ShikakuShutokuTaishoshaDbJohoDiv dbJoho = taishoshaJoho.getShikakuShutokuTaishoshaDbJoho();
             row.setKyuHokensha(dbJoho.getTxtKyuShichoson().getValue());
             row.setSaikofuKubun(null);

@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.ShikakuShutokuTaishoshaDbJohoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.ShikakuShutokuTaishoshaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.tblAtenaSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -51,12 +52,12 @@ public class ShikakuShutokuTaishoshaJoho {
     }
 
     private void setAtenaJoho(ShikakuShutokuTaishoshaJohoDiv taishoshaJohoDiv, HashMap taishoshaData) {
-        tblAtenaSimpleDiv commonJoho = taishoshaJohoDiv.getShikakuShutokuTaishoshaCommonJoho().getTblAtenaSimple();
+        AtenaShokaiSimpleDiv commonJoho = taishoshaJohoDiv.getShikakuShutokuTaishoshaCommonJoho();
         commonJoho.getTxtAtenaKanaMeisho().setValue(new RString(taishoshaData.get("カナ氏名").toString()));
         commonJoho.getTxtAtenaMeisho().setValue(new RString(taishoshaData.get("氏名").toString()));
         commonJoho.getTxtGyoseiku().setValue(new RString(taishoshaData.get("行政区").toString()));
         commonJoho.getTxtJuminJotai().setValue(new RString(taishoshaData.get("住民状態").toString()));
-        commonJoho.getTxtJuminShubetsu().setValue(new RString(taishoshaData.get("住民種別").toString()));
+        commonJoho.getTxtNihonjinGaikokujin().setValue(new RString(taishoshaData.get("住民種別").toString()));
         commonJoho.getTxtJusho().setValue(new RString(taishoshaData.get("住所").toString()));
         commonJoho.getTxtKojinHojinCode().setValue(new RString(taishoshaData.get("個人法人コード").toString()));
         commonJoho.getTxtNenrei().setValue(new RString(taishoshaData.get("年齢").toString()));
