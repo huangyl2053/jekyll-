@@ -24,10 +24,7 @@ public class JukyushaShokaiTargetSearch {
      * @return ResponseData
      */
     public ResponseData<JukyushaShokaiTargetSearchDiv> onLoad(JukyushaShokaiTargetSearchDiv div) {
-        ResponseData<JukyushaShokaiTargetSearchDiv> response = new ResponseData<>();
-
-        response.data = div;
-        return response;
+        return _createResponseData(div);
     }
 
     /**
@@ -37,12 +34,13 @@ public class JukyushaShokaiTargetSearch {
      * @return ResponseData
      */
     public ResponseData<JukyushaShokaiTargetSearchDiv> onClick_btnToSearch(JukyushaShokaiTargetSearchDiv div) {
-        ResponseData<JukyushaShokaiTargetSearchDiv> response = new ResponseData<>();
-
         SearchResultOfHihokensha.setSearchResult(div.getSearchResult(), new JukyushaData().getAll().asConvertedType());
+        return _createResponseData(div);
+    }
 
+    private ResponseData<JukyushaShokaiTargetSearchDiv> _createResponseData(JukyushaShokaiTargetSearchDiv div) {
+        ResponseData<JukyushaShokaiTargetSearchDiv> response = new ResponseData<>();
         response.data = div;
         return response;
     }
-
 }

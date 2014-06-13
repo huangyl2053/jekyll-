@@ -432,7 +432,7 @@
        "controlType": "TextBox",
        "width": "80",
        "visible": false,
-       "displayNone": false,
+       "displayNone": true,
        "disabled": false,
        "accessKey": "",
        "nextFocusFieldName": "",
@@ -446,7 +446,7 @@
        "selectControlID": "txtHihokenshaNo_core",
        "helpMessageID": "",
        "jpControlName": "",
-       "readOnly": false,
+       "readOnly": true,
        "onChange": "",
        "required": false,
        "labelLText": "",
@@ -586,7 +586,12 @@
        "imageWidth": "",
        "imageHeight": "",
        "displayChildDivName": "DBD.RiyoshaFutangakuGemmen",
-       "dataPassing": [],
+       "dataPassing": [
+        {
+         "key": "hihokenshaNo",
+         "controlName": "txtHihokenshaNo"
+        }
+       ],
        "visibleCloseButton": true,
        "onOkClose": "",
        "onBeforeOpenDialog": ""

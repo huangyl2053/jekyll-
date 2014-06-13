@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 
 /**
  * 標準負担額減額のデモデータです。
@@ -48,5 +49,14 @@ public class HyojunFutangakuGengakuData {
                         cg.getAsRString("承認しない理由"));
             }
         });
+    }
+
+    public boolean exists標準負担額減額履歴Of(RString hihokenshaNo) {
+        try {
+            YamlLoader.DBD.loadAsList(new RString("HyojunFutangakuGengaku/" + hihokenshaNo + ".yml"));
+        } catch (SystemException e) {
+            return false;
+        }
+        return true;
     }
 }

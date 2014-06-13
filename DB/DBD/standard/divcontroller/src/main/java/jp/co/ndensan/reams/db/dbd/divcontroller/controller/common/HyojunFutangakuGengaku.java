@@ -28,13 +28,11 @@ public class HyojunFutangakuGengaku {
      * @return ResponseData
      */
     public ResponseData<HyojunFutangakuGengakuDiv> onLoad(HyojunFutangakuGengakuDiv div) {
-        ResponseData<HyojunFutangakuGengakuDiv> response = new ResponseData<>();
 
         RString hihokenshaNo = div.getTxtHiddenHihokenshaNo().getValue();
         _list(div).setDataSource(search標準負担額減額履歴(hihokenshaNo));
 
-        response.data = div;
-        return response;
+        return _createResponseData(div);
     }
 
     private List<dgHyojunFutangakuGengakuList_Row> search標準負担額減額履歴(RString hihokenshaNo) {
@@ -48,15 +46,13 @@ public class HyojunFutangakuGengaku {
      * @return ResponseData
      */
     public ResponseData<HyojunFutangakuGengakuDiv> onSelect_dgHyojunFutangakuGengakuList(HyojunFutangakuGengakuDiv div) {
-        ResponseData<HyojunFutangakuGengakuDiv> response = new ResponseData<>();
         for (dgHyojunFutangakuGengakuList_Row row : _list(div).getDataSource()) {
             if (row.getSelected()) {
                 dressWithRowValue(div, row);
                 break;
             }
         }
-        response.data = div;
-        return response;
+        return _createResponseData(div);
     }
 
     private void dressWithRowValue(HyojunFutangakuGengakuDiv div, dgHyojunFutangakuGengakuList_Row rowValue) {
@@ -76,5 +72,11 @@ public class HyojunFutangakuGengaku {
 
     private HyojunFutangakuGemmenRiyoshaFutanDiv _riyoshaFutan(HyojunFutangakuGengakuDiv div) {
         return div.getHyojunFutangakuGemmenDetail().getHyojunFutangakuGemmenRiyoshaFutan();
+    }
+
+    private ResponseData<HyojunFutangakuGengakuDiv> _createResponseData(HyojunFutangakuGengakuDiv div) {
+        ResponseData<HyojunFutangakuGengakuDiv> response = new ResponseData<>();
+        response.data = div;
+        return response;
     }
 }

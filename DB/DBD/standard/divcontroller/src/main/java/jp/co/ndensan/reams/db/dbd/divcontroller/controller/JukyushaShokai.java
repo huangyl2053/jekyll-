@@ -8,7 +8,11 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbd.divcontroller.demodata.FutanGendogakuNinteiData;
+import jp.co.ndensan.reams.db.dbd.divcontroller.demodata.HyojunFutangakuGengakuData;
 import jp.co.ndensan.reams.db.dbd.divcontroller.demodata.JukyushaData;
+import jp.co.ndensan.reams.db.dbd.divcontroller.demodata.RiyoshaFutangakuGemmenData;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.ButtonsShosaiShijiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.IryoHokenDetailDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.JukyushaShokaiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.JukyushaShokaiTargetSearchDiv;
@@ -29,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.lang.DateRoundingType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 
 /**
  *
@@ -44,10 +49,7 @@ public class JukyushaShokai {
      * @return ResponseData
      */
     public ResponseData<JukyushaShokaiDiv> onLoad(JukyushaShokaiDiv div, JukyushaShokaiTargetSearchDiv targets) {
-        ResponseData<JukyushaShokaiDiv> response = new ResponseData<>();
-
-        response.data = div;
-        return response;
+        return _createResponseData(div);
     }
 
     /**
@@ -57,13 +59,24 @@ public class JukyushaShokai {
      * @return ResponseData
      */
     public ResponseData<JukyushaShokaiDiv> onStart(JukyushaShokaiDiv div, JukyushaShokaiTargetSearchDiv targets) {
-        ResponseData<JukyushaShokaiDiv> response = new ResponseData<>();
-
         div.getNinteiRireki().getDgNinteiRireki().setDataSource(searchHistroyOfClickedHihokensha(targets));
-        div.getHihokensha().getTxtHihokenshaNo().setValue(clickedItem(targets).getHihokenshaNo());
-        
-        response.data = div;
-        return response;
+        RString hihokenshaNo = clickedItem(targets).getHihokenshaNo();
+        div.getHihokensha().getTxtHihokenshaNo().setValue(hihokenshaNo);
+        initButtonsShosaiShiji(div.getButtonsShosaiShiji(), hihokenshaNo);
+        return _createResponseData(div);
+    }
+
+    private void initButtonsShosaiShiji(ButtonsShosaiShijiDiv div, RString hihokenshaNo) {
+        toBeAbleToPushOrNot_button(div.getBtnFutangendogakuNintei(),
+                !new FutanGendogakuNinteiData().exists負担限度額認定履歴of(hihokenshaNo));
+        toBeAbleToPushOrNot_button(div.getBtnHyojunFutangakuGengaku(),
+                !new HyojunFutangakuGengakuData().exists標準負担額減額履歴Of(hihokenshaNo));
+        toBeAbleToPushOrNot_button(div.getBtnRiyoshaFutangakuGemmen(),
+                !new RiyoshaFutangakuGemmenData().exists利用者負担額減免履歴Of(hihokenshaNo));
+    }
+
+    private void toBeAbleToPushOrNot_button(ButtonDialog btn, boolean disable) {
+        btn.setDisabled(disable);
     }
 
     private List<dgNinteiRireki_Row> searchHistroyOfClickedHihokensha(JukyushaShokaiTargetSearchDiv targets) {
@@ -81,22 +94,18 @@ public class JukyushaShokai {
      * @return ResponseData
      */
     public ResponseData<JukyushaShokaiDiv> onStart_Detail(JukyushaShokaiDiv div, JukyushaShokaiTargetSearchDiv targets) {
-        ResponseData<JukyushaShokaiDiv> response = new ResponseData<>();
-
         List<HashMap> history = new JukyushaData().get履歴Of(clickedItem(targets).getHihokenshaNo()).asRow();
         dgNinteiRireki_Row clicked = div.getNinteiRireki().getDgNinteiRireki().getClickedItem();
         for (Map map : history) {
             if (clicked.getNinteiShinseiDate().getValue().toString().equals(map.get("認定申請日").toString())) {
-                setUp(div, new ControlGenerator(map));
+                setUp_Details(div, new ControlGenerator(map));
                 break;
             }
         }
-
-        response.data = div;
-        return response;
+        return _createResponseData(div);
     }
 
-    private void setUp(JukyushaShokaiDiv div, ControlGenerator cg) {
+    private void setUp_Details(JukyushaShokaiDiv div, ControlGenerator cg) {
         _setUp_NinteiDetail(div.getNinteiDetail(), cg);
     }
 
@@ -197,4 +206,10 @@ public class JukyushaShokai {
         }
     }
     //</editor-fold>
+
+    private ResponseData<JukyushaShokaiDiv> _createResponseData(JukyushaShokaiDiv div) {
+        ResponseData<JukyushaShokaiDiv> response = new ResponseData<>();
+        response.data = div;
+        return response;
+    }
 }
