@@ -23,8 +23,8 @@ public class SeriveJokyoRiyoShisetsuDiv extends Panel {
      */
     @JsonProperty("radShisetsuType")
     private RadioButton radShisetsuType;
-    @JsonProperty("lblNewLine3")
-    private Label lblNewLine3;
+    @JsonProperty("lblSpace2")
+    private Label lblSpace2;
     @JsonProperty("lblShisetsuName")
     private Label lblShisetsuName;
     @JsonProperty("txtShisetsuName")
@@ -56,14 +56,14 @@ public class SeriveJokyoRiyoShisetsuDiv extends Panel {
         this.radShisetsuType=radShisetsuType;
     }
 
-    @JsonProperty("lblNewLine3")
-    public Label getLblNewLine3() {
-        return lblNewLine3;
+    @JsonProperty("lblSpace2")
+    public Label getLblSpace2() {
+        return lblSpace2;
     }
 
-    @JsonProperty("lblNewLine3")
-    public void setLblNewLine3(Label lblNewLine3) {
-        this.lblNewLine3=lblNewLine3;
+    @JsonProperty("lblSpace2")
+    public void setLblSpace2(Label lblSpace2) {
+        this.lblSpace2=lblSpace2;
     }
 
     @JsonProperty("lblShisetsuName")

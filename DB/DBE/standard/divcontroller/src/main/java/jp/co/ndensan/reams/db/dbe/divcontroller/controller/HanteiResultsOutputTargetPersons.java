@@ -41,7 +41,7 @@ public class HanteiResultsOutputTargetPersons {
 
     private List<dgShinsakaiTargetPersons_Row> createRowTargetPersonTestData() {
         List<dgShinsakaiTargetPersons_Row> arrayData = new ArrayList<>();
-        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("HanteiResultsOutputTargetPersons.yml"));
+        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("HanteiResultsOutputTargetPersons.yml"));
         for (Map info : targetSource) {
             arrayData.add(toDgShinsakaiTargetPersons_Row(info));
         }

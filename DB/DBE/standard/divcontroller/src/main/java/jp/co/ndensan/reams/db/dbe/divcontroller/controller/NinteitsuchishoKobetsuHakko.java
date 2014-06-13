@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NinteitsuchishoKobetsuHakkoDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgSearchResult_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5040002.NinteitsuchishoKobetsuHakkoDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5040002.dgSearchResult_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -34,7 +34,7 @@ public class NinteitsuchishoKobetsuHakko {
     public ResponseData onLoad(NinteitsuchishoKobetsuHakkoDiv div) {
         ResponseData<NinteitsuchishoKobetsuHakkoDiv> response = new ResponseData<>();
 
-        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("DemoCity.yml"));
+        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("DemoCity.yml"));
         Map map = targetSource.get(0);
         if (_toRString(map.get("保険者番号")).equalsIgnoreCase(new RString("152264"))) {
             div.getNinteitsuchishoKobetsuHakkoTargetSearch().getDdlHokensha().setSelectedItem(new RString("2"));
@@ -80,7 +80,7 @@ public class NinteitsuchishoKobetsuHakko {
 
     private List<dgSearchResult_Row> createRowSearchResultTestData(RString ymlFile) {
         List<dgSearchResult_Row> arrayData = new ArrayList<>();
-        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(ymlFile);
+        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(ymlFile);
         for (Map info : targetSource) {
             arrayData.add(toDgSearchResult_Row(info));
         }

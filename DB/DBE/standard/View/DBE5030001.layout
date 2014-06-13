@@ -21,6 +21,7 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "dgShinsakaiIchiran",
      "gridSetting": {
       "rowHeight": 30,
       "isMultiSelectable": false,
@@ -82,7 +83,7 @@
         "cellDetails": {
          "cellType": 0
         },
-        "align": 0,
+        "align": 1,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "合議体"
@@ -92,7 +93,7 @@
         "dataName": "審査会会場",
         "toolTip": "",
         "bgColor": 0,
-        "width": 110,
+        "width": 120,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -108,7 +109,7 @@
         "dataName": "審査開催日",
         "toolTip": "",
         "bgColor": 0,
-        "width": 110,
+        "width": 100,
         "visible": true,
         "cellType": 7,
         "cellDetails": {
@@ -127,11 +128,11 @@
         "dataName": "審査開始",
         "toolTip": "",
         "bgColor": 0,
-        "width": 90,
+        "width": 85,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
-        "align": 0,
+        "align": 1,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "審査開始"
@@ -141,11 +142,11 @@
         "dataName": "審査終了",
         "toolTip": "",
         "bgColor": 0,
-        "width": 90,
+        "width": 85,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
-        "align": 0,
+        "align": 1,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "審査終了"
@@ -155,11 +156,11 @@
         "dataName": "対象人数",
         "toolTip": "",
         "bgColor": 0,
-        "width": 90,
+        "width": 85,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
-        "align": 0,
+        "align": 2,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "対象人数"
@@ -169,11 +170,11 @@
         "dataName": "審査会状況",
         "toolTip": "",
         "bgColor": 0,
-        "width": 110,
+        "width": 100,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
-        "align": 0,
+        "align": 1,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "審査会状況"
@@ -184,6 +185,9 @@
      "onSort": "",
      "onSelect": "",
      "onSelectByDblClick": "",
+     "onSelectBySelectButton": "",
+     "onSelectByModifyButton": "",
+     "onSelectByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -210,12 +214,14 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "onClick": "",
+     "selectControlID": "btnClose",
      "text": "メニューに戻る",
+     "onClick": "",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     },
     {
      "fieldName": "btnSelect",
@@ -234,12 +240,14 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "onClick": "",
+     "selectControlID": "btnSelect",
      "text": "選択した審査会の入力を行う",
+     "onClick": "",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     }
    ],
    "controlType": "Panel",
@@ -256,8 +264,9 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "TaishoShinsakaiIchiran",
    "onLoad": "",
-   "title": "対象審査会一覧",
+   "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
@@ -272,11 +281,15 @@
     },
     {
      "eventName": "onClick_btnToroku",
-     "requestUrl": "dbe/db/dbe/TaishoShinsakai/onLoadData"
+     "requestUrl": "dbe/db/dbe/TaishoShinsakaiIchiran/onClick_btnToroku"
+    },
+    {
+     "eventName": "reLoadData",
+     "requestUrl": "dbe/db/dbe/TaishoShinsakaiIchiran/reLoadData"
     }
    ],
    "hiddenInput": [],
-   "onOpen": "",
+   "onOpen": "onOpen_TaishoShinsakaiIchiran",
    "onClose": "",
    "session": {},
    "marginTop": "XS",
@@ -287,7 +300,9 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false
   }
  ],
  "controlType": null,
@@ -304,6 +319,7 @@
  "authorityMode": 0,
  "marginLeft": "XS",
  "marginRight": "XS",
+ "selectControlID": "Page",
  "onLoad": "",
  "title": "介護認定審査会一覧",
  "jsPathCollection": [],
@@ -342,5 +358,7 @@
   ]
  ],
  "panelMargin": 1,
- "controlMargin": 1
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "commonButtonAreaData": []
 }

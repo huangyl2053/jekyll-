@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0500011.ShoKaishuKanri
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.tblAtenaSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -54,20 +53,19 @@ public class ShoKaishuKanriTaishoshaJoho {
     }
 
     private void setTaishoshaCommonData(AtenaShokaiSimpleDiv taishoshaCommonJoho, ControlGenerator generator) {
-        tblAtenaSimpleDiv atena = taishoshaCommonJoho.getTblAtenaSimple();
-        atena.getTxtAtenaKanaMeisho().setValue(generator.getAsRString("カナ氏名"));
-        atena.getTxtAtenaMeisho().setValue(generator.getAsRString("氏名"));
-        atena.getTxtGyoseiku().setValue(generator.getAsRString("行政区"));
-        atena.getTxtJuminJotai().setValue(generator.getAsRString("住民状態"));
-        atena.getTxtJuminShubetsu().setValue(generator.getAsRString("住民種別"));
-        atena.getTxtJusho().setValue(generator.getAsRString("住所"));
-        atena.getTxtKojinHojinCode().setValue(generator.getAsRString("個人法人コード"));
-        atena.getTxtNenrei().setValue(generator.getAsRString("年齢"));
-        atena.getTxtSeibetsu().setValue(generator.getAsRString("性別"));
-        atena.getTxtSeinengappiYMD().setValue(generator.getAsRDate("生年月日"));
-        atena.getTxtSetaiCode().setValue(generator.getAsRString("世帯コード"));
-        atena.getTxtShikibetsuCode().setValue(generator.getAsRString("識別コード"));
-        atena.getTxtYubinNo().setValue(new YubinNo(generator.getAsRString("郵便番号")));
+        taishoshaCommonJoho.getTxtAtenaKanaMeisho().setValue(generator.getAsRString("カナ氏名"));
+        taishoshaCommonJoho.getTxtAtenaMeisho().setValue(generator.getAsRString("氏名"));
+        taishoshaCommonJoho.getTxtGyoseiku().setValue(generator.getAsRString("行政区"));
+        taishoshaCommonJoho.getTxtJuminJotai().setValue(generator.getAsRString("住民状態"));
+        taishoshaCommonJoho.getTxtNihonjinGaikokujin().setValue(generator.getAsRString("住民種別"));
+        taishoshaCommonJoho.getTxtJusho().setValue(generator.getAsRString("住所"));
+        taishoshaCommonJoho.getTxtKojinHojinCode().setValue(generator.getAsRString("個人法人コード"));
+        taishoshaCommonJoho.getTxtNenrei().setValue(generator.getAsRString("年齢"));
+        taishoshaCommonJoho.getTxtSeibetsu().setValue(generator.getAsRString("性別"));
+        taishoshaCommonJoho.getTxtSeinengappiYMD().setValue(generator.getAsRDate("生年月日"));
+        taishoshaCommonJoho.getTxtSetaiCode().setValue(generator.getAsRString("世帯コード"));
+        taishoshaCommonJoho.getTxtShikibetsuCode().setValue(generator.getAsRString("識別コード"));
+        taishoshaCommonJoho.getTxtYubinNo().setValue(new YubinNo(generator.getAsRString("郵便番号")));
     }
 
     private void setTaishoshaDbData(ShoKaishuKanriTaishoshaDbJohoDiv taishoshaDbJoho, ControlGenerator generator) {
