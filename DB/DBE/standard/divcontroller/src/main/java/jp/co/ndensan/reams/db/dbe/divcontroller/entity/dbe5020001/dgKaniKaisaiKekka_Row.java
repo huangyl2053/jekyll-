@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5020001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Jun 09 13:22:52 JST 2014 
+ * Fri Jun 13 11:57:22 JST 2014 
  */
 
 
@@ -27,6 +27,10 @@ public class dgKaniKaisaiKekka_Row extends DataRow {
 
     public dgKaniKaisaiKekka_Row() {
         super();
+        this.委員長 = false;
+        this.出欠 = false;
+        this.氏名 = RString.EMPTY;
+        this.資格 = RString.EMPTY;
     }
 
     public dgKaniKaisaiKekka_Row(Boolean 委員長, Boolean 出欠, RString 氏名, RString 資格) {

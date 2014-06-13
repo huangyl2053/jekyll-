@@ -69,6 +69,7 @@ public class ShinsaTaishoshaItiran {
 
     private dgShinsaTaishoshaIchiran_Row toDgShinsaTaishoshaIchiran_Row(Map map) {
         ControlGenerator cg = new ControlGenerator(map);
+        RString no = cg.getAsRString("Ｎｏ");
         RString shichoson = cg.getAsRString("市町村");
         RString hokenshaNo = cg.getAsRString("保険者番号");
         RString hihoban = cg.getAsRString("被保番号");
@@ -85,10 +86,10 @@ public class ShinsaTaishoshaItiran {
         RString seinenGappi = cg.getAsRString("生年月日");
         RString nenrei = cg.getAsRString("年齢");
 
-        TextBoxFlexibleDate startDate = toTextBoxFlexibleDate(new FlexibleDate("00000000"));
-        TextBoxFlexibleDate endDate = toTextBoxFlexibleDate(new FlexibleDate("00000000"));
+        TextBoxFlexibleDate startDate = toTextBoxFlexibleDate(new FlexibleDate(RString.EMPTY));
+        TextBoxFlexibleDate endDate = toTextBoxFlexibleDate(new FlexibleDate(RString.EMPTY));
         Button btn = new Button();
-        dgShinsaTaishoshaIchiran_Row row = new dgShinsaTaishoshaIchiran_Row(btn, RString.EMPTY, hokenshaNo, shichoson,
+        dgShinsaTaishoshaIchiran_Row row = new dgShinsaTaishoshaIchiran_Row(btn, no, hokenshaNo, shichoson,
                 hihoban, shimei, kanaShimei, sex, shinseiDate, zenYokaigodo, zenYukokikan, zenStartDate, zenEndDate, ichijiHantei,
                 RString.EMPTY, RString.EMPTY, startDate, endDate, shinseiKubun, seinenGappi, nenrei);
         return row;

@@ -5,10 +5,10 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5030002;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.KaigoHihokenshaJohoDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.KaigoHihokenshaJohoDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.KaigoNinteiKekkaDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.KaigoNinteiKekkaDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kaigoHihokenshaJoho.KaigoHihokenshaJohoDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kaigoHihokenshaJoho.KaigoHihokenshaJohoDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kaigoNinteiKekka.KaigoNinteiKekkaDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kaigoNinteiKekka.KaigoNinteiKekkaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NyuryokuSeigyoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NyuryokuSeigyoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;

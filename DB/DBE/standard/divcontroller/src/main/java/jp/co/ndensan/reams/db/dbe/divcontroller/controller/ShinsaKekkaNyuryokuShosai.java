@@ -56,12 +56,16 @@ public class ShinsaKekkaNyuryokuShosai {
         div.getTabChosaKekka().getTabChosaKekkaShosai().getDgChosakekka1().setDataSource(createRowChosaKekkaTest1Data());
         div.getTabChosaKekka().getTabChosaKekkaShosai().getDgChosakekka2().setDataSource(createRowChosaKekkaTest2Data());
         div.getTabChosaKekka().getTabChosaKekkaShosai().getDgChosakekka3().setDataSource(createRowChosaKekkaTest3Data());
-        div.getShinsaTaishoshaShosai().getTxtShinseiKubun().setValue(dataRow.get申請());
-        div.getShinsaTaishoshaShosai().getTxtHihokenshaKubun().setValue(dataRow.get被保険者区分());
-        div.getShinsaTaishoshaShosai().getTxtNenrei().setValue(dataRow.get年齢());
-        div.getShinsaTaishoshaShosai().getTxtSeibetsu().setValue(dataRow.get性別());
-        div.getShinsaTaishoshaShosai().getTxtZenIchiji().setValue(dataRow.get前一次());
-        div.getShinsaTaishoshaShosai().getTxtZenNiji().setValue(dataRow.get前二次());
+        div.getTblShinsaTaishoshaShosai().getTxtShinseiKubun().setValue(dataRow.get申請());
+        div.getTblShinsaTaishoshaShosai().getTxtHihokenshaKubun().setValue(dataRow.get被保険者区分());
+        div.getTblShinsaTaishoshaShosai().getTxtNenrei().setValue(dataRow.get年齢());
+        div.getTblShinsaTaishoshaShosai().getTxtSeibetsu().setValue(dataRow.get性別());
+        div.getTblShinsaTaishoshaShosai().getTxtZenIchiji().setValue(dataRow.get前一次());
+        div.getTblShinsaTaishoshaShosai().getTxtZenNiji().setValue(dataRow.get前二次());
+        div.getTblShinsaTaishoshaShosai().getBtnIchijiHanteiKakuninuttonDialog1().setText(dataRow.get一次());
+        div.getTblShinsaTaishoshaShosai().getTxtKijunJikan().setValue(new RString("48.0"));
+
+        div.getTblSaiIchijiHanteiKekka().setDisplayNone(true);
 
         div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getDdlNinteiKubun().setSelectedItem(new RString("認定"));
         div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtIchijiHanteiKekka().setValue(dataRow.get一次());
@@ -100,6 +104,9 @@ public class ShinsaKekkaNyuryokuShosai {
         div.getTabChosaKekka().getTabShinsaKekka().getZenkaiNinteiKekka().getTxtNinteiYukoKikanEnd().setValue(new FlexibleDate("20140630"));
         div.getTabChosaKekka().getTabShinsaKekka().getZenkaiNinteiKekka().getTxtShinsakaiIken().setValue(new RString("・認定有効期間を２年間とする"));
         div.getTabChosaKekka().getTabShinsaKekka().getZenkaiNinteiKekka().setTitle(new RString("前回認定結果"));
+        div.getTabChosaKekka().getTabShinsaKekka().getZenkaiNinteiKekka().getTxtNinteibi().setRequired(false);
+        div.getTabChosaKekka().getTabShinsaKekka().getZenkaiNinteiKekka().getDdlNijiHanteiKekka().setRequired(false);
+        div.getTabChosaKekka().getTabShinsaKekka().getZenkaiNinteiKekka().getDdlNinteiKubun().setRequired(false);
 
         div.getTabChosaKekka().getTabShinsaKekka().getZenZenkaiNinteiKekka().setDisabled(true);
         div.getTabChosaKekka().getTabShinsaKekka().getZenZenkaiNinteiKekka().getDdlNinteiKubun().setSelectedItem(new RString("認定"));
@@ -108,6 +115,9 @@ public class ShinsaKekkaNyuryokuShosai {
         div.getTabChosaKekka().getTabShinsaKekka().getZenZenkaiNinteiKekka().getTxtNinteibi().setValue(new FlexibleDate("20110628"));
         div.getTabChosaKekka().getTabShinsaKekka().getZenZenkaiNinteiKekka().getTxtShinseibi().setValue(new FlexibleDate("20110616"));
         div.getTabChosaKekka().getTabShinsaKekka().getZenZenkaiNinteiKekka().getTxtShinseiKubunShinsei().setValue(new RString("新規"));
+        div.getTabChosaKekka().getTabShinsaKekka().getZenZenkaiNinteiKekka().getTxtNinteibi().setRequired(false);
+        div.getTabChosaKekka().getTabShinsaKekka().getZenZenkaiNinteiKekka().getDdlNijiHanteiKekka().setRequired(false);
+        div.getTabChosaKekka().getTabShinsaKekka().getZenZenkaiNinteiKekka().getDdlNinteiKubun().setRequired(false);
 
         List<KeyValueDataSource> arrayData2 = new ArrayList<>();
         KeyValueDataSource keyValue2 = new KeyValueDataSource();
@@ -120,6 +130,15 @@ public class ShinsaKekkaNyuryokuShosai {
         div.getTabChosaKekka().getTabShinsaKekka().getZenZenkaiNinteiKekka().getTxtNinteiYukoKikanStart().setValue(new FlexibleDate("20110701"));
         div.getTabChosaKekka().getTabShinsaKekka().getZenZenkaiNinteiKekka().getTxtNinteiYukoKikanEnd().setValue(new FlexibleDate("20120630"));
         div.getTabChosaKekka().getTabShinsaKekka().getZenZenkaiNinteiKekka().setTitle(new RString("前々回認定結果"));
+
+        response.data = div;
+        return response;
+    }
+
+    public ResponseData onClick_btnIchijiHantei(ShinsaKekkaNyuryokuShosaiDiv div, ShinsaShienTaishoshaIchiranDiv ichiranDiv) {
+        ResponseData<ShinsaKekkaNyuryokuShosaiDiv> response = new ResponseData<>();
+
+        div.getTblSaiIchijiHanteiKekka().setDisplayNone(false);
 
         response.data = div;
         return response;

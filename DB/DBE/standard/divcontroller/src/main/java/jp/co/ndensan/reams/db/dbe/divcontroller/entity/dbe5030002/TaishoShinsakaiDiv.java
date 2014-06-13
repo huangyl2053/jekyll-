@@ -21,6 +21,14 @@ public class TaishoShinsakaiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("txtShinsakaiNo")
+    private TextBox txtShinsakaiNo;
+    @JsonProperty("txtGogitai")
+    private TextBox txtGogitai;
+    @JsonProperty("txtShinsaTaishoshaSu")
+    private TextBoxNum txtShinsaTaishoshaSu;
+    @JsonProperty("txtShinsaTaishoMax")
+    private TextBoxNum txtShinsaTaishoMax;
     @JsonProperty("txtShinsakaiYoteibi")
     private TextBoxFlexibleDate txtShinsakaiYoteibi;
     @JsonProperty("ddlShinsakaiKaijo")
@@ -33,16 +41,6 @@ public class TaishoShinsakaiDiv extends Panel {
     private Label lblKara01;
     @JsonProperty("txtShinsaEndTime")
     private TextBoxTime txtShinsaEndTime;
-    @JsonProperty("txtGogitai")
-    private TextBox txtGogitai;
-    @JsonProperty("lblShinsaTiahshosha")
-    private Label lblShinsaTiahshosha;
-    @JsonProperty("txtShinsaTaishoshaSu")
-    private TextBoxNum txtShinsaTaishoshaSu;
-    @JsonProperty("lblSura01")
-    private Label lblSura01;
-    @JsonProperty("txtShinsaTaishoMax")
-    private TextBoxNum txtShinsaTaishoMax;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -50,6 +48,46 @@ public class TaishoShinsakaiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    @JsonProperty("txtShinsakaiNo")
+    public TextBox getTxtShinsakaiNo() {
+        return txtShinsakaiNo;
+    }
+
+    @JsonProperty("txtShinsakaiNo")
+    public void setTxtShinsakaiNo(TextBox txtShinsakaiNo) {
+        this.txtShinsakaiNo=txtShinsakaiNo;
+    }
+
+    @JsonProperty("txtGogitai")
+    public TextBox getTxtGogitai() {
+        return txtGogitai;
+    }
+
+    @JsonProperty("txtGogitai")
+    public void setTxtGogitai(TextBox txtGogitai) {
+        this.txtGogitai=txtGogitai;
+    }
+
+    @JsonProperty("txtShinsaTaishoshaSu")
+    public TextBoxNum getTxtShinsaTaishoshaSu() {
+        return txtShinsaTaishoshaSu;
+    }
+
+    @JsonProperty("txtShinsaTaishoshaSu")
+    public void setTxtShinsaTaishoshaSu(TextBoxNum txtShinsaTaishoshaSu) {
+        this.txtShinsaTaishoshaSu=txtShinsaTaishoshaSu;
+    }
+
+    @JsonProperty("txtShinsaTaishoMax")
+    public TextBoxNum getTxtShinsaTaishoMax() {
+        return txtShinsaTaishoMax;
+    }
+
+    @JsonProperty("txtShinsaTaishoMax")
+    public void setTxtShinsaTaishoMax(TextBoxNum txtShinsaTaishoMax) {
+        this.txtShinsaTaishoMax=txtShinsaTaishoMax;
+    }
+
     @JsonProperty("txtShinsakaiYoteibi")
     public TextBoxFlexibleDate getTxtShinsakaiYoteibi() {
         return txtShinsakaiYoteibi;
@@ -108,56 +146,6 @@ public class TaishoShinsakaiDiv extends Panel {
     @JsonProperty("txtShinsaEndTime")
     public void setTxtShinsaEndTime(TextBoxTime txtShinsaEndTime) {
         this.txtShinsaEndTime=txtShinsaEndTime;
-    }
-
-    @JsonProperty("txtGogitai")
-    public TextBox getTxtGogitai() {
-        return txtGogitai;
-    }
-
-    @JsonProperty("txtGogitai")
-    public void setTxtGogitai(TextBox txtGogitai) {
-        this.txtGogitai=txtGogitai;
-    }
-
-    @JsonProperty("lblShinsaTiahshosha")
-    public Label getLblShinsaTiahshosha() {
-        return lblShinsaTiahshosha;
-    }
-
-    @JsonProperty("lblShinsaTiahshosha")
-    public void setLblShinsaTiahshosha(Label lblShinsaTiahshosha) {
-        this.lblShinsaTiahshosha=lblShinsaTiahshosha;
-    }
-
-    @JsonProperty("txtShinsaTaishoshaSu")
-    public TextBoxNum getTxtShinsaTaishoshaSu() {
-        return txtShinsaTaishoshaSu;
-    }
-
-    @JsonProperty("txtShinsaTaishoshaSu")
-    public void setTxtShinsaTaishoshaSu(TextBoxNum txtShinsaTaishoshaSu) {
-        this.txtShinsaTaishoshaSu=txtShinsaTaishoshaSu;
-    }
-
-    @JsonProperty("lblSura01")
-    public Label getLblSura01() {
-        return lblSura01;
-    }
-
-    @JsonProperty("lblSura01")
-    public void setLblSura01(Label lblSura01) {
-        this.lblSura01=lblSura01;
-    }
-
-    @JsonProperty("txtShinsaTaishoMax")
-    public TextBoxNum getTxtShinsaTaishoMax() {
-        return txtShinsaTaishoMax;
-    }
-
-    @JsonProperty("txtShinsaTaishoMax")
-    public void setTxtShinsaTaishoMax(TextBoxNum txtShinsaTaishoMax) {
-        this.txtShinsaTaishoMax=txtShinsaTaishoMax;
     }
 
 }

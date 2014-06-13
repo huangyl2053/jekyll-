@@ -1,9 +1,9 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe3010001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.ichijiHanteiKekkaInfo;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jun 11 08:34:17 JST 2014 
+ * Fri Jun 13 09:47:54 JST 2014 
  */
 
 
@@ -26,6 +26,9 @@ public class dgIchijiHanteiKeikokuCode_Row extends DataRow {
 
     public dgIchijiHanteiKeikokuCode_Row() {
         super();
+        this.no = RString.EMPTY;
+        this.code = RString.EMPTY;
+        this.setsumei = RString.EMPTY;
     }
 
     public dgIchijiHanteiKeikokuCode_Row(RString no, RString code, RString setsumei) {

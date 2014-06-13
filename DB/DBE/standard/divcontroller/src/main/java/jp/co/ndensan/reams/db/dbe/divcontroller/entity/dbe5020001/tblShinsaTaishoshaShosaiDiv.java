@@ -12,11 +12,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ShinsaTaishoshaShosai のクラスファイル 
+ * tblShinsaTaishoshaShosai のクラスファイル 
  * 
  * @author 自動生成
  */
-public class ShinsaTaishoshaShosaiDiv extends TablePanel {
+public class tblShinsaTaishoshaShosaiDiv extends TablePanel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,27 +24,27 @@ public class ShinsaTaishoshaShosaiDiv extends TablePanel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("tblNenrei")
-    private tblNenreiAtShinsaTaishoshaShosai tblNenrei;
+    private tblNenreiAttblShinsaTaishoshaShosai tblNenrei;
     @JsonProperty("tblSex")
-    private tblSexAtShinsaTaishoshaShosai tblSex;
+    private tblSexAttblShinsaTaishoshaShosai tblSex;
     @JsonProperty("tblHihokenshaKubun")
-    private tblHihokenshaKubunAtShinsaTaishoshaShosai tblHihokenshaKubun;
+    private tblHihokenshaKubunAttblShinsaTaishoshaShosai tblHihokenshaKubun;
     @JsonProperty("tblShinseiKubun")
-    private tblShinseiKubunAtShinsaTaishoshaShosai tblShinseiKubun;
+    private tblShinseiKubunAttblShinsaTaishoshaShosai tblShinseiKubun;
     @JsonProperty("tblGaikyo")
-    private tblGaikyoAtShinsaTaishoshaShosai tblGaikyo;
+    private tblGaikyoAttblShinsaTaishoshaShosai tblGaikyo;
     @JsonProperty("tblNetakiri")
-    private tblNetakiriAtShinsaTaishoshaShosai tblNetakiri;
+    private tblNetakiriAttblShinsaTaishoshaShosai tblNetakiri;
     @JsonProperty("tblNinchi")
-    private tblNinchiAtShinsaTaishoshaShosai tblNinchi;
+    private tblNinchiAttblShinsaTaishoshaShosai tblNinchi;
     @JsonProperty("tblZenIchiji")
-    private tblZenIchijiAtShinsaTaishoshaShosai tblZenIchiji;
+    private tblZenIchijiAttblShinsaTaishoshaShosai tblZenIchiji;
     @JsonProperty("tblZenNiji")
-    private tblZenNijiAtShinsaTaishoshaShosai tblZenNiji;
+    private tblZenNijiAttblShinsaTaishoshaShosai tblZenNiji;
     @JsonProperty("tblIchijiHantei")
-    private tblIchijiHanteiAtShinsaTaishoshaShosai tblIchijiHantei;
+    private tblIchijiHanteiAttblShinsaTaishoshaShosai tblIchijiHantei;
     @JsonProperty("tblKijunJikan")
-    private tblKijunJikanAtShinsaTaishoshaShosai tblKijunJikan;
+    private tblKijunJikanAttblShinsaTaishoshaShosai tblKijunJikan;
 
     /*
      * [ Helperの作成 ]
@@ -96,8 +96,8 @@ public class ShinsaTaishoshaShosaiDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnIchijiHanteiKakunin() {
-        return this.tblIchijiHantei.getBtnIchijiHanteiKakunin();
+    public ButtonDialog getBtnIchijiHanteiKakuninuttonDialog1() {
+        return this.tblIchijiHantei.getBtnIchijiHanteiKakuninuttonDialog1();
     }
 
     @JsonIgnore
@@ -112,112 +112,112 @@ public class ShinsaTaishoshaShosaiDiv extends TablePanel {
      * フィールド名のGetterとSetter を作成
      */
     @JsonProperty("tblNenrei")
-    private tblNenreiAtShinsaTaishoshaShosai getTblNenrei() {
+    private tblNenreiAttblShinsaTaishoshaShosai getTblNenrei() {
         return tblNenrei;
     }
 
     @JsonProperty("tblNenrei")
-    private void setTblNenrei(tblNenreiAtShinsaTaishoshaShosai tblNenrei) {
+    private void setTblNenrei(tblNenreiAttblShinsaTaishoshaShosai tblNenrei) {
         this.tblNenrei=tblNenrei;
     }
 
     @JsonProperty("tblSex")
-    private tblSexAtShinsaTaishoshaShosai getTblSex() {
+    private tblSexAttblShinsaTaishoshaShosai getTblSex() {
         return tblSex;
     }
 
     @JsonProperty("tblSex")
-    private void setTblSex(tblSexAtShinsaTaishoshaShosai tblSex) {
+    private void setTblSex(tblSexAttblShinsaTaishoshaShosai tblSex) {
         this.tblSex=tblSex;
     }
 
     @JsonProperty("tblHihokenshaKubun")
-    private tblHihokenshaKubunAtShinsaTaishoshaShosai getTblHihokenshaKubun() {
+    private tblHihokenshaKubunAttblShinsaTaishoshaShosai getTblHihokenshaKubun() {
         return tblHihokenshaKubun;
     }
 
     @JsonProperty("tblHihokenshaKubun")
-    private void setTblHihokenshaKubun(tblHihokenshaKubunAtShinsaTaishoshaShosai tblHihokenshaKubun) {
+    private void setTblHihokenshaKubun(tblHihokenshaKubunAttblShinsaTaishoshaShosai tblHihokenshaKubun) {
         this.tblHihokenshaKubun=tblHihokenshaKubun;
     }
 
     @JsonProperty("tblShinseiKubun")
-    private tblShinseiKubunAtShinsaTaishoshaShosai getTblShinseiKubun() {
+    private tblShinseiKubunAttblShinsaTaishoshaShosai getTblShinseiKubun() {
         return tblShinseiKubun;
     }
 
     @JsonProperty("tblShinseiKubun")
-    private void setTblShinseiKubun(tblShinseiKubunAtShinsaTaishoshaShosai tblShinseiKubun) {
+    private void setTblShinseiKubun(tblShinseiKubunAttblShinsaTaishoshaShosai tblShinseiKubun) {
         this.tblShinseiKubun=tblShinseiKubun;
     }
 
     @JsonProperty("tblGaikyo")
-    private tblGaikyoAtShinsaTaishoshaShosai getTblGaikyo() {
+    private tblGaikyoAttblShinsaTaishoshaShosai getTblGaikyo() {
         return tblGaikyo;
     }
 
     @JsonProperty("tblGaikyo")
-    private void setTblGaikyo(tblGaikyoAtShinsaTaishoshaShosai tblGaikyo) {
+    private void setTblGaikyo(tblGaikyoAttblShinsaTaishoshaShosai tblGaikyo) {
         this.tblGaikyo=tblGaikyo;
     }
 
     @JsonProperty("tblNetakiri")
-    private tblNetakiriAtShinsaTaishoshaShosai getTblNetakiri() {
+    private tblNetakiriAttblShinsaTaishoshaShosai getTblNetakiri() {
         return tblNetakiri;
     }
 
     @JsonProperty("tblNetakiri")
-    private void setTblNetakiri(tblNetakiriAtShinsaTaishoshaShosai tblNetakiri) {
+    private void setTblNetakiri(tblNetakiriAttblShinsaTaishoshaShosai tblNetakiri) {
         this.tblNetakiri=tblNetakiri;
     }
 
     @JsonProperty("tblNinchi")
-    private tblNinchiAtShinsaTaishoshaShosai getTblNinchi() {
+    private tblNinchiAttblShinsaTaishoshaShosai getTblNinchi() {
         return tblNinchi;
     }
 
     @JsonProperty("tblNinchi")
-    private void setTblNinchi(tblNinchiAtShinsaTaishoshaShosai tblNinchi) {
+    private void setTblNinchi(tblNinchiAttblShinsaTaishoshaShosai tblNinchi) {
         this.tblNinchi=tblNinchi;
     }
 
     @JsonProperty("tblZenIchiji")
-    private tblZenIchijiAtShinsaTaishoshaShosai getTblZenIchiji() {
+    private tblZenIchijiAttblShinsaTaishoshaShosai getTblZenIchiji() {
         return tblZenIchiji;
     }
 
     @JsonProperty("tblZenIchiji")
-    private void setTblZenIchiji(tblZenIchijiAtShinsaTaishoshaShosai tblZenIchiji) {
+    private void setTblZenIchiji(tblZenIchijiAttblShinsaTaishoshaShosai tblZenIchiji) {
         this.tblZenIchiji=tblZenIchiji;
     }
 
     @JsonProperty("tblZenNiji")
-    private tblZenNijiAtShinsaTaishoshaShosai getTblZenNiji() {
+    private tblZenNijiAttblShinsaTaishoshaShosai getTblZenNiji() {
         return tblZenNiji;
     }
 
     @JsonProperty("tblZenNiji")
-    private void setTblZenNiji(tblZenNijiAtShinsaTaishoshaShosai tblZenNiji) {
+    private void setTblZenNiji(tblZenNijiAttblShinsaTaishoshaShosai tblZenNiji) {
         this.tblZenNiji=tblZenNiji;
     }
 
     @JsonProperty("tblIchijiHantei")
-    private tblIchijiHanteiAtShinsaTaishoshaShosai getTblIchijiHantei() {
+    private tblIchijiHanteiAttblShinsaTaishoshaShosai getTblIchijiHantei() {
         return tblIchijiHantei;
     }
 
     @JsonProperty("tblIchijiHantei")
-    private void setTblIchijiHantei(tblIchijiHanteiAtShinsaTaishoshaShosai tblIchijiHantei) {
+    private void setTblIchijiHantei(tblIchijiHanteiAttblShinsaTaishoshaShosai tblIchijiHantei) {
         this.tblIchijiHantei=tblIchijiHantei;
     }
 
     @JsonProperty("tblKijunJikan")
-    private tblKijunJikanAtShinsaTaishoshaShosai getTblKijunJikan() {
+    private tblKijunJikanAttblShinsaTaishoshaShosai getTblKijunJikan() {
         return tblKijunJikan;
     }
 
     @JsonProperty("tblKijunJikan")
-    private void setTblKijunJikan(tblKijunJikanAtShinsaTaishoshaShosai tblKijunJikan) {
+    private void setTblKijunJikan(tblKijunJikanAttblShinsaTaishoshaShosai tblKijunJikan) {
         this.tblKijunJikan=tblKijunJikan;
     }
 
@@ -227,7 +227,7 @@ public class ShinsaTaishoshaShosaiDiv extends TablePanel {
  * 
  * @author 自動生成
  */
-class tblNenreiAtShinsaTaishoshaShosai extends TableCell {
+class tblNenreiAttblShinsaTaishoshaShosai extends TableCell {
     @JsonProperty("txtNenrei")
     private TextBox txtNenrei;
 
@@ -247,7 +247,7 @@ class tblNenreiAtShinsaTaishoshaShosai extends TableCell {
  * 
  * @author 自動生成
  */
-class tblSexAtShinsaTaishoshaShosai extends TableCell {
+class tblSexAttblShinsaTaishoshaShosai extends TableCell {
     @JsonProperty("txtSeibetsu")
     private TextBox txtSeibetsu;
 
@@ -267,7 +267,7 @@ class tblSexAtShinsaTaishoshaShosai extends TableCell {
  * 
  * @author 自動生成
  */
-class tblHihokenshaKubunAtShinsaTaishoshaShosai extends TableCell {
+class tblHihokenshaKubunAttblShinsaTaishoshaShosai extends TableCell {
     @JsonProperty("txtHihokenshaKubun")
     private TextBox txtHihokenshaKubun;
 
@@ -287,7 +287,7 @@ class tblHihokenshaKubunAtShinsaTaishoshaShosai extends TableCell {
  * 
  * @author 自動生成
  */
-class tblShinseiKubunAtShinsaTaishoshaShosai extends TableCell {
+class tblShinseiKubunAttblShinsaTaishoshaShosai extends TableCell {
     @JsonProperty("txtShinseiKubun")
     private TextBox txtShinseiKubun;
 
@@ -307,7 +307,7 @@ class tblShinseiKubunAtShinsaTaishoshaShosai extends TableCell {
  * 
  * @author 自動生成
  */
-class tblGaikyoAtShinsaTaishoshaShosai extends TableCell {
+class tblGaikyoAttblShinsaTaishoshaShosai extends TableCell {
     @JsonProperty("btnGaikyo")
     private Button btnGaikyo;
 
@@ -327,7 +327,7 @@ class tblGaikyoAtShinsaTaishoshaShosai extends TableCell {
  * 
  * @author 自動生成
  */
-class tblNetakiriAtShinsaTaishoshaShosai extends TableCell {
+class tblNetakiriAttblShinsaTaishoshaShosai extends TableCell {
     @JsonProperty("btnNetakiri")
     private Button btnNetakiri;
 
@@ -347,7 +347,7 @@ class tblNetakiriAtShinsaTaishoshaShosai extends TableCell {
  * 
  * @author 自動生成
  */
-class tblNinchiAtShinsaTaishoshaShosai extends TableCell {
+class tblNinchiAttblShinsaTaishoshaShosai extends TableCell {
     @JsonProperty("btnNinchi")
     private Button btnNinchi;
 
@@ -367,7 +367,7 @@ class tblNinchiAtShinsaTaishoshaShosai extends TableCell {
  * 
  * @author 自動生成
  */
-class tblZenIchijiAtShinsaTaishoshaShosai extends TableCell {
+class tblZenIchijiAttblShinsaTaishoshaShosai extends TableCell {
     @JsonProperty("txtZenIchiji")
     private TextBox txtZenIchiji;
 
@@ -387,7 +387,7 @@ class tblZenIchijiAtShinsaTaishoshaShosai extends TableCell {
  * 
  * @author 自動生成
  */
-class tblZenNijiAtShinsaTaishoshaShosai extends TableCell {
+class tblZenNijiAttblShinsaTaishoshaShosai extends TableCell {
     @JsonProperty("txtZenNiji")
     private TextBox txtZenNiji;
 
@@ -407,18 +407,18 @@ class tblZenNijiAtShinsaTaishoshaShosai extends TableCell {
  * 
  * @author 自動生成
  */
-class tblIchijiHanteiAtShinsaTaishoshaShosai extends TableCell {
-    @JsonProperty("btnIchijiHanteiKakunin")
-    private ButtonDialog btnIchijiHanteiKakunin;
+class tblIchijiHanteiAttblShinsaTaishoshaShosai extends TableCell {
+    @JsonProperty("btnIchijiHanteiKakuninuttonDialog1")
+    private ButtonDialog btnIchijiHanteiKakuninuttonDialog1;
 
-    @JsonProperty("btnIchijiHanteiKakunin")
-    public ButtonDialog getBtnIchijiHanteiKakunin() {
-        return btnIchijiHanteiKakunin;
+    @JsonProperty("btnIchijiHanteiKakuninuttonDialog1")
+    public ButtonDialog getBtnIchijiHanteiKakuninuttonDialog1() {
+        return btnIchijiHanteiKakuninuttonDialog1;
     }
 
-    @JsonProperty("btnIchijiHanteiKakunin")
-    public void setBtnIchijiHanteiKakunin(ButtonDialog btnIchijiHanteiKakunin) {
-        this.btnIchijiHanteiKakunin=btnIchijiHanteiKakunin;
+    @JsonProperty("btnIchijiHanteiKakuninuttonDialog1")
+    public void setBtnIchijiHanteiKakuninuttonDialog1(ButtonDialog btnIchijiHanteiKakuninuttonDialog1) {
+        this.btnIchijiHanteiKakuninuttonDialog1=btnIchijiHanteiKakuninuttonDialog1;
     }
 
 }
@@ -427,7 +427,7 @@ class tblIchijiHanteiAtShinsaTaishoshaShosai extends TableCell {
  * 
  * @author 自動生成
  */
-class tblKijunJikanAtShinsaTaishoshaShosai extends TableCell {
+class tblKijunJikanAttblShinsaTaishoshaShosai extends TableCell {
     @JsonProperty("txtKijunJikan")
     private TextBox txtKijunJikan;
 

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5030002;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jun 11 15:48:45 JST 2014 
+ * Fri Jun 13 18:57:06 JST 2014 
  */
 
 
@@ -22,265 +22,286 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 public class dgShinsaTaishoshaIchiran_Row extends DataRow {
 
-    private Button 選択;
-    private RString 順;
-    private RString 保険者番号;
-    private RString 市町村;
-    private RString 被保番号;
-    private RString 氏名;
-    private RString カナ氏名;
-    private RString 性別;
-    private TextBoxFlexibleDate 申請日;
-    private RString 前回要介護度;
-    private RString 前回有効期間;
-    private TextBoxFlexibleDate 前回有効期間開始日;
-    private TextBoxFlexibleDate 前回有効期間終了日;
-    private RString 一次判定結果;
-    private RString 認定結果;
-    private RString 有効期間月数;
-    private TextBoxFlexibleDate 開始日;
-    private TextBoxFlexibleDate 終了日;
-    private RString 申請区分;
-    private RString 生年月日;
-    private RString 年齢;
+    private Button select;
+    private RString shinsaJun;
+    private RString hokenshaNo;
+    private RString shichoson;
+    private RString hihokenshaNo;
+    private RString shimei;
+    private RString kanaShimei;
+    private RString sex;
+    private TextBoxFlexibleDate shinseibi;
+    private RString beforeYokaigodo;
+    private RString beforeYukoKikan;
+    private TextBoxFlexibleDate beforeYukoStartDate;
+    private TextBoxFlexibleDate beforeYukoEndDate;
+    private RString ichijiHantei;
+    private RString ninteiResult;
+    private RString yukoKikan;
+    private TextBoxFlexibleDate yukoStartDate;
+    private TextBoxFlexibleDate yukoEndDate;
+    private RString shinseiKubun;
+    private RString seinengappi;
+    private RString nenrei;
 
     public dgShinsaTaishoshaIchiran_Row() {
         super();
+        this.select = new Button();
+        this.shinsaJun = RString.EMPTY;
+        this.hokenshaNo = RString.EMPTY;
+        this.shichoson = RString.EMPTY;
+        this.hihokenshaNo = RString.EMPTY;
+        this.shimei = RString.EMPTY;
+        this.kanaShimei = RString.EMPTY;
+        this.sex = RString.EMPTY;
+        this.shinseibi = new TextBoxFlexibleDate();
+        this.beforeYokaigodo = RString.EMPTY;
+        this.beforeYukoKikan = RString.EMPTY;
+        this.beforeYukoStartDate = new TextBoxFlexibleDate();
+        this.beforeYukoEndDate = new TextBoxFlexibleDate();
+        this.ichijiHantei = RString.EMPTY;
+        this.ninteiResult = RString.EMPTY;
+        this.yukoKikan = RString.EMPTY;
+        this.yukoStartDate = new TextBoxFlexibleDate();
+        this.yukoEndDate = new TextBoxFlexibleDate();
+        this.shinseiKubun = RString.EMPTY;
+        this.seinengappi = RString.EMPTY;
+        this.nenrei = RString.EMPTY;
     }
 
-    public dgShinsaTaishoshaIchiran_Row(Button 選択, RString 順, RString 保険者番号, RString 市町村, RString 被保番号, RString 氏名, RString カナ氏名, RString 性別, TextBoxFlexibleDate 申請日, RString 前回要介護度, RString 前回有効期間, TextBoxFlexibleDate 前回有効期間開始日, TextBoxFlexibleDate 前回有効期間終了日, RString 一次判定結果, RString 認定結果, RString 有効期間月数, TextBoxFlexibleDate 開始日, TextBoxFlexibleDate 終了日, RString 申請区分, RString 生年月日, RString 年齢) {
+    public dgShinsaTaishoshaIchiran_Row(Button select, RString shinsaJun, RString hokenshaNo, RString shichoson, RString hihokenshaNo, RString shimei, RString kanaShimei, RString sex, TextBoxFlexibleDate shinseibi, RString beforeYokaigodo, RString beforeYukoKikan, TextBoxFlexibleDate beforeYukoStartDate, TextBoxFlexibleDate beforeYukoEndDate, RString ichijiHantei, RString ninteiResult, RString yukoKikan, TextBoxFlexibleDate yukoStartDate, TextBoxFlexibleDate yukoEndDate, RString shinseiKubun, RString seinengappi, RString nenrei) {
         super();
-        this.setOriginalData("選択", 選択);
-        this.setOriginalData("順", 順);
-        this.setOriginalData("保険者番号", 保険者番号);
-        this.setOriginalData("市町村", 市町村);
-        this.setOriginalData("被保番号", 被保番号);
-        this.setOriginalData("氏名", 氏名);
-        this.setOriginalData("カナ氏名", カナ氏名);
-        this.setOriginalData("性別", 性別);
-        this.setOriginalData("申請日", 申請日);
-        this.setOriginalData("前回要介護度", 前回要介護度);
-        this.setOriginalData("前回有効期間", 前回有効期間);
-        this.setOriginalData("前回有効期間開始日", 前回有効期間開始日);
-        this.setOriginalData("前回有効期間終了日", 前回有効期間終了日);
-        this.setOriginalData("一次判定結果", 一次判定結果);
-        this.setOriginalData("認定結果", 認定結果);
-        this.setOriginalData("有効期間月数", 有効期間月数);
-        this.setOriginalData("開始日", 開始日);
-        this.setOriginalData("終了日", 終了日);
-        this.setOriginalData("申請区分", 申請区分);
-        this.setOriginalData("生年月日", 生年月日);
-        this.setOriginalData("年齢", 年齢);
-        this.選択 = 選択;
-        this.順 = 順;
-        this.保険者番号 = 保険者番号;
-        this.市町村 = 市町村;
-        this.被保番号 = 被保番号;
-        this.氏名 = 氏名;
-        this.カナ氏名 = カナ氏名;
-        this.性別 = 性別;
-        this.申請日 = 申請日;
-        this.前回要介護度 = 前回要介護度;
-        this.前回有効期間 = 前回有効期間;
-        this.前回有効期間開始日 = 前回有効期間開始日;
-        this.前回有効期間終了日 = 前回有効期間終了日;
-        this.一次判定結果 = 一次判定結果;
-        this.認定結果 = 認定結果;
-        this.有効期間月数 = 有効期間月数;
-        this.開始日 = 開始日;
-        this.終了日 = 終了日;
-        this.申請区分 = 申請区分;
-        this.生年月日 = 生年月日;
-        this.年齢 = 年齢;
+        this.setOriginalData("select", select);
+        this.setOriginalData("shinsaJun", shinsaJun);
+        this.setOriginalData("hokenshaNo", hokenshaNo);
+        this.setOriginalData("shichoson", shichoson);
+        this.setOriginalData("hihokenshaNo", hihokenshaNo);
+        this.setOriginalData("shimei", shimei);
+        this.setOriginalData("kanaShimei", kanaShimei);
+        this.setOriginalData("sex", sex);
+        this.setOriginalData("shinseibi", shinseibi);
+        this.setOriginalData("beforeYokaigodo", beforeYokaigodo);
+        this.setOriginalData("beforeYukoKikan", beforeYukoKikan);
+        this.setOriginalData("beforeYukoStartDate", beforeYukoStartDate);
+        this.setOriginalData("beforeYukoEndDate", beforeYukoEndDate);
+        this.setOriginalData("ichijiHantei", ichijiHantei);
+        this.setOriginalData("ninteiResult", ninteiResult);
+        this.setOriginalData("yukoKikan", yukoKikan);
+        this.setOriginalData("yukoStartDate", yukoStartDate);
+        this.setOriginalData("yukoEndDate", yukoEndDate);
+        this.setOriginalData("shinseiKubun", shinseiKubun);
+        this.setOriginalData("seinengappi", seinengappi);
+        this.setOriginalData("nenrei", nenrei);
+        this.select = select;
+        this.shinsaJun = shinsaJun;
+        this.hokenshaNo = hokenshaNo;
+        this.shichoson = shichoson;
+        this.hihokenshaNo = hihokenshaNo;
+        this.shimei = shimei;
+        this.kanaShimei = kanaShimei;
+        this.sex = sex;
+        this.shinseibi = shinseibi;
+        this.beforeYokaigodo = beforeYokaigodo;
+        this.beforeYukoKikan = beforeYukoKikan;
+        this.beforeYukoStartDate = beforeYukoStartDate;
+        this.beforeYukoEndDate = beforeYukoEndDate;
+        this.ichijiHantei = ichijiHantei;
+        this.ninteiResult = ninteiResult;
+        this.yukoKikan = yukoKikan;
+        this.yukoStartDate = yukoStartDate;
+        this.yukoEndDate = yukoEndDate;
+        this.shinseiKubun = shinseiKubun;
+        this.seinengappi = seinengappi;
+        this.nenrei = nenrei;
     }
 
-    public Button get選択() {
-        return 選択;
+    public Button getSelect() {
+        return select;
     }
 
-    public RString get順() {
-        return 順;
+    public RString getShinsaJun() {
+        return shinsaJun;
     }
 
-    public RString get保険者番号() {
-        return 保険者番号;
+    public RString getHokenshaNo() {
+        return hokenshaNo;
     }
 
-    public RString get市町村() {
-        return 市町村;
+    public RString getShichoson() {
+        return shichoson;
     }
 
-    public RString get被保番号() {
-        return 被保番号;
+    public RString getHihokenshaNo() {
+        return hihokenshaNo;
     }
 
-    public RString get氏名() {
-        return 氏名;
+    public RString getShimei() {
+        return shimei;
     }
 
-    public RString getカナ氏名() {
-        return カナ氏名;
+    public RString getKanaShimei() {
+        return kanaShimei;
     }
 
-    public RString get性別() {
-        return 性別;
+    public RString getSex() {
+        return sex;
     }
 
-    public TextBoxFlexibleDate get申請日() {
-        return 申請日;
+    public TextBoxFlexibleDate getShinseibi() {
+        return shinseibi;
     }
 
-    public RString get前回要介護度() {
-        return 前回要介護度;
+    public RString getBeforeYokaigodo() {
+        return beforeYokaigodo;
     }
 
-    public RString get前回有効期間() {
-        return 前回有効期間;
+    public RString getBeforeYukoKikan() {
+        return beforeYukoKikan;
     }
 
-    public TextBoxFlexibleDate get前回有効期間開始日() {
-        return 前回有効期間開始日;
+    public TextBoxFlexibleDate getBeforeYukoStartDate() {
+        return beforeYukoStartDate;
     }
 
-    public TextBoxFlexibleDate get前回有効期間終了日() {
-        return 前回有効期間終了日;
+    public TextBoxFlexibleDate getBeforeYukoEndDate() {
+        return beforeYukoEndDate;
     }
 
-    public RString get一次判定結果() {
-        return 一次判定結果;
+    public RString getIchijiHantei() {
+        return ichijiHantei;
     }
 
-    public RString get認定結果() {
-        return 認定結果;
+    public RString getNinteiResult() {
+        return ninteiResult;
     }
 
-    public RString get有効期間月数() {
-        return 有効期間月数;
+    public RString getYukoKikan() {
+        return yukoKikan;
     }
 
-    public TextBoxFlexibleDate get開始日() {
-        return 開始日;
+    public TextBoxFlexibleDate getYukoStartDate() {
+        return yukoStartDate;
     }
 
-    public TextBoxFlexibleDate get終了日() {
-        return 終了日;
+    public TextBoxFlexibleDate getYukoEndDate() {
+        return yukoEndDate;
     }
 
-    public RString get申請区分() {
-        return 申請区分;
+    public RString getShinseiKubun() {
+        return shinseiKubun;
     }
 
-    public RString get生年月日() {
-        return 生年月日;
+    public RString getSeinengappi() {
+        return seinengappi;
     }
 
-    public RString get年齢() {
-        return 年齢;
+    public RString getNenrei() {
+        return nenrei;
     }
 
-    public void set選択(Button 選択) {
-        this.setOriginalData("選択", 選択);
-        this.選択 = 選択;
+    public void setSelect(Button select) {
+        this.setOriginalData("select", select);
+        this.select = select;
     }
 
-    public void set順(RString 順) {
-        this.setOriginalData("順", 順);
-        this.順 = 順;
+    public void setShinsaJun(RString shinsaJun) {
+        this.setOriginalData("shinsaJun", shinsaJun);
+        this.shinsaJun = shinsaJun;
     }
 
-    public void set保険者番号(RString 保険者番号) {
-        this.setOriginalData("保険者番号", 保険者番号);
-        this.保険者番号 = 保険者番号;
+    public void setHokenshaNo(RString hokenshaNo) {
+        this.setOriginalData("hokenshaNo", hokenshaNo);
+        this.hokenshaNo = hokenshaNo;
     }
 
-    public void set市町村(RString 市町村) {
-        this.setOriginalData("市町村", 市町村);
-        this.市町村 = 市町村;
+    public void setShichoson(RString shichoson) {
+        this.setOriginalData("shichoson", shichoson);
+        this.shichoson = shichoson;
     }
 
-    public void set被保番号(RString 被保番号) {
-        this.setOriginalData("被保番号", 被保番号);
-        this.被保番号 = 被保番号;
+    public void setHihokenshaNo(RString hihokenshaNo) {
+        this.setOriginalData("hihokenshaNo", hihokenshaNo);
+        this.hihokenshaNo = hihokenshaNo;
     }
 
-    public void set氏名(RString 氏名) {
-        this.setOriginalData("氏名", 氏名);
-        this.氏名 = 氏名;
+    public void setShimei(RString shimei) {
+        this.setOriginalData("shimei", shimei);
+        this.shimei = shimei;
     }
 
-    public void setカナ氏名(RString カナ氏名) {
-        this.setOriginalData("カナ氏名", カナ氏名);
-        this.カナ氏名 = カナ氏名;
+    public void setKanaShimei(RString kanaShimei) {
+        this.setOriginalData("kanaShimei", kanaShimei);
+        this.kanaShimei = kanaShimei;
     }
 
-    public void set性別(RString 性別) {
-        this.setOriginalData("性別", 性別);
-        this.性別 = 性別;
+    public void setSex(RString sex) {
+        this.setOriginalData("sex", sex);
+        this.sex = sex;
     }
 
-    public void set申請日(TextBoxFlexibleDate 申請日) {
-        this.setOriginalData("申請日", 申請日);
-        this.申請日 = 申請日;
+    public void setShinseibi(TextBoxFlexibleDate shinseibi) {
+        this.setOriginalData("shinseibi", shinseibi);
+        this.shinseibi = shinseibi;
     }
 
-    public void set前回要介護度(RString 前回要介護度) {
-        this.setOriginalData("前回要介護度", 前回要介護度);
-        this.前回要介護度 = 前回要介護度;
+    public void setBeforeYokaigodo(RString beforeYokaigodo) {
+        this.setOriginalData("beforeYokaigodo", beforeYokaigodo);
+        this.beforeYokaigodo = beforeYokaigodo;
     }
 
-    public void set前回有効期間(RString 前回有効期間) {
-        this.setOriginalData("前回有効期間", 前回有効期間);
-        this.前回有効期間 = 前回有効期間;
+    public void setBeforeYukoKikan(RString beforeYukoKikan) {
+        this.setOriginalData("beforeYukoKikan", beforeYukoKikan);
+        this.beforeYukoKikan = beforeYukoKikan;
     }
 
-    public void set前回有効期間開始日(TextBoxFlexibleDate 前回有効期間開始日) {
-        this.setOriginalData("前回有効期間開始日", 前回有効期間開始日);
-        this.前回有効期間開始日 = 前回有効期間開始日;
+    public void setBeforeYukoStartDate(TextBoxFlexibleDate beforeYukoStartDate) {
+        this.setOriginalData("beforeYukoStartDate", beforeYukoStartDate);
+        this.beforeYukoStartDate = beforeYukoStartDate;
     }
 
-    public void set前回有効期間終了日(TextBoxFlexibleDate 前回有効期間終了日) {
-        this.setOriginalData("前回有効期間終了日", 前回有効期間終了日);
-        this.前回有効期間終了日 = 前回有効期間終了日;
+    public void setBeforeYukoEndDate(TextBoxFlexibleDate beforeYukoEndDate) {
+        this.setOriginalData("beforeYukoEndDate", beforeYukoEndDate);
+        this.beforeYukoEndDate = beforeYukoEndDate;
     }
 
-    public void set一次判定結果(RString 一次判定結果) {
-        this.setOriginalData("一次判定結果", 一次判定結果);
-        this.一次判定結果 = 一次判定結果;
+    public void setIchijiHantei(RString ichijiHantei) {
+        this.setOriginalData("ichijiHantei", ichijiHantei);
+        this.ichijiHantei = ichijiHantei;
     }
 
-    public void set認定結果(RString 認定結果) {
-        this.setOriginalData("認定結果", 認定結果);
-        this.認定結果 = 認定結果;
+    public void setNinteiResult(RString ninteiResult) {
+        this.setOriginalData("ninteiResult", ninteiResult);
+        this.ninteiResult = ninteiResult;
     }
 
-    public void set有効期間月数(RString 有効期間月数) {
-        this.setOriginalData("有効期間月数", 有効期間月数);
-        this.有効期間月数 = 有効期間月数;
+    public void setYukoKikan(RString yukoKikan) {
+        this.setOriginalData("yukoKikan", yukoKikan);
+        this.yukoKikan = yukoKikan;
     }
 
-    public void set開始日(TextBoxFlexibleDate 開始日) {
-        this.setOriginalData("開始日", 開始日);
-        this.開始日 = 開始日;
+    public void setYukoStartDate(TextBoxFlexibleDate yukoStartDate) {
+        this.setOriginalData("yukoStartDate", yukoStartDate);
+        this.yukoStartDate = yukoStartDate;
     }
 
-    public void set終了日(TextBoxFlexibleDate 終了日) {
-        this.setOriginalData("終了日", 終了日);
-        this.終了日 = 終了日;
+    public void setYukoEndDate(TextBoxFlexibleDate yukoEndDate) {
+        this.setOriginalData("yukoEndDate", yukoEndDate);
+        this.yukoEndDate = yukoEndDate;
     }
 
-    public void set申請区分(RString 申請区分) {
-        this.setOriginalData("申請区分", 申請区分);
-        this.申請区分 = 申請区分;
+    public void setShinseiKubun(RString shinseiKubun) {
+        this.setOriginalData("shinseiKubun", shinseiKubun);
+        this.shinseiKubun = shinseiKubun;
     }
 
-    public void set生年月日(RString 生年月日) {
-        this.setOriginalData("生年月日", 生年月日);
-        this.生年月日 = 生年月日;
+    public void setSeinengappi(RString seinengappi) {
+        this.setOriginalData("seinengappi", seinengappi);
+        this.seinengappi = seinengappi;
     }
 
-    public void set年齢(RString 年齢) {
-        this.setOriginalData("年齢", 年齢);
-        this.年齢 = 年齢;
+    public void setNenrei(RString nenrei) {
+        this.setOriginalData("nenrei", nenrei);
+        this.nenrei = nenrei;
     }
 
 }
