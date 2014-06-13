@@ -43,44 +43,44 @@ public class HihokenshashoHakkoTaishoshaJoho {
         ControlGenerator ymlData = new ControlGenerator(hashMap);
 
         //対象者情報の出力
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTblAtenaSimple().getTxtAtenaMeisho().
+        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtAtenaMeisho().
                 setValue(panel2.getDgHihokenshashoHakkoTaishoGaitosha().getClickedItem().getShimei());
 
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTblAtenaSimple().getTxtAtenaKanaMeisho().
+        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtAtenaKanaMeisho().
                 setValue(ymlData.getAsRString("shimeikana"));
 
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTblAtenaSimple().getTxtJusho().
+        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtJusho().
                 setValue(panel2.getDgHihokenshashoHakkoTaishoGaitosha().getClickedItem().getJusho());
 
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTblAtenaSimple().getTxtSeinengappiYMD().
+        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtSeinengappiYMD().
                 setValue(new RDate(panel2.getDgHihokenshashoHakkoTaishoGaitosha().getClickedItem().
                                 getDateOfBirth().toString()));
 
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTblAtenaSimple().getTxtNenrei().
+        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtNenrei().
                 setValue(ymlData.getAsRString("nenrei"));
 
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTblAtenaSimple().getTxtSeibetsu().
+        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtSeibetsu().
                 setValue(panel2.getDgHihokenshashoHakkoTaishoGaitosha().getClickedItem().getGender());
 
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTblAtenaSimple().getTxtGyoseiku().
+        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtGyoseiku().
                 setValue(ymlData.getAsRString("gyoseiku"));
 
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTblAtenaSimple().getTxtYubinNo().
+        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtYubinNo().
                 setValue(new YubinNo(ymlData.getAsRString("yubinno")));
 
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTblAtenaSimple().getTxtJuminShubetsu().
+        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtNihonjinGaikokujin().
                 setValue(ymlData.getAsRString("juminshubetsu"));
 
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTblAtenaSimple().getTxtJuminJotai().
+        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtJuminJotai().
                 setValue(ymlData.getAsRString("juminjotai"));
 
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTblAtenaSimple().getTxtShikibetsuCode().
+        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtShikibetsuCode().
                 setValue(ymlData.getAsRString("shikibetsucode"));
 
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTblAtenaSimple().getTxtKojinHojinCode().
+        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtKojinHojinCode().
                 setValue(ymlData.getAsRString("kojincode"));
 
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTblAtenaSimple().getTxtSetaiCode().
+        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtSetaiCode().
                 setValue(ymlData.getAsRString("setaicode"));
 
         panel.getHihokenshashoHakkoTaishoshaDbJoho().getTxtHihokenshaNo().
