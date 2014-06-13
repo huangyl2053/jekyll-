@@ -42,8 +42,10 @@ var DBZ;
                             "toolTip": "",
                             "authorityMode": 0,
                             "marginLeft": "0",
-                            "marginRight": 0,
+                            "marginRight": "0",
                             "selectControlID": "HihokenshaFinder",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "relation": [],
                             "businessId": "DBZ",
                             "controlName": "HihokenshaFinder",
@@ -53,8 +55,7 @@ var DBZ;
                             "dataPassingForDialog": [],
                             "dialogOkEventNameForDialog": "",
                             "dialogCancelEventNameForDialog": "",
-                            "onClickBtnToSearch": "onClickBtnToSearch_HihokenshaFinder",
-                            "onClickBtnToClear": ""
+                            "onClick_BtnToSearch": "onClickBtnToSearch_HihokenshaFinder"
                         },
                         {
                             "fieldName": "lblSearchResultOfHihokensha",
@@ -74,16 +75,19 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "lblSearchResultOfHihokensha",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "required": false,
-                            "align": 2,
+                            "isPrivateInfo": false,
                             "text": "被保険者検索該当者一覧",
-                            "isPrivateInfo": false
+                            "decorationClass": "",
+                            "align": 2
                         },
                         {
                             "fieldName": "dgSearchResultOfHihokensha",
                             "items": [],
                             "controlType": "DataGrid",
-                            "width": "1030",
+                            "width": "1090",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -97,6 +101,9 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "dgSearchResultOfHihokensha",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "height": "S",
                             "dataSource": [],
                             "gridSetting": {
                                 "rowHeight": 25,
@@ -109,6 +116,8 @@ var DBZ;
                                 "isShowSelectButtonColumn": false,
                                 "isShowModifyButtonColumn": false,
                                 "isShowDeleteButtonColumn": false,
+                                "limitRowCount": 0,
+                                "selectedRowCount": 0,
                                 "header": {
                                     "combineColumns": [],
                                     "frozenColumn": "",
@@ -179,7 +188,7 @@ var DBZ;
                                         "cellDetails": {
                                             "cellType": 0
                                         },
-                                        "align": 0,
+                                        "align": 1,
                                         "resize": true,
                                         "isPrivateInfo": false,
                                         "sortKey": ""
@@ -237,7 +246,7 @@ var DBZ;
                                         "visible": true,
                                         "cellType": 0,
                                         "cellDetails": null,
-                                        "align": 0,
+                                        "align": 1,
                                         "resize": true,
                                         "isPrivateInfo": false,
                                         "sortKey": ""
@@ -254,7 +263,9 @@ var DBZ;
                                             "cellType": 6,
                                             "ymdKubun": 2,
                                             "displayFormat": 0,
-                                            "onChange": ""
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
                                         },
                                         "align": 1,
                                         "resize": true,
@@ -270,7 +281,7 @@ var DBZ;
                                         "visible": true,
                                         "cellType": 0,
                                         "cellDetails": null,
-                                        "align": 0,
+                                        "align": 1,
                                         "resize": true,
                                         "isPrivateInfo": false,
                                         "sortKey": ""
@@ -333,7 +344,6 @@ var DBZ;
                                     }
                                 ]
                             },
-                            "height": "S",
                             "onSort": "",
                             "onSelect": "",
                             "onSelectByDblClick": "",
@@ -366,6 +376,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "btnReturn",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "text": "被保険者入力ガイドを閉じる",
                             "onClick": "onClick_btnReturn",
                             "icon": 0,
@@ -376,7 +388,7 @@ var DBZ;
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "1050",
+                    "width": "G12",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -390,6 +402,8 @@ var DBZ;
                     "marginLeft": "0",
                     "marginRight": "0",
                     "selectControlID": "HihokenshaInputGuide",
+                    "helpMessageID": "",
+                    "jpControlName": "",
                     "onLoad": "",
                     "title": "被保険者入力補助ガイド",
                     "marginTop": "Default",
@@ -436,7 +450,8 @@ var DBZ;
                     "widthAuto": false,
                     "panelDisplay": 0,
                     "isGroupBox": false,
-                    "readOnly": false
+                    "readOnly": false,
+                    "height": "Auto"
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -451,9 +466,11 @@ var DBZ;
             "float": 0,
             "toolTip": "",
             "authorityMode": 0,
-            "marginLeft": 0,
-            "marginRight": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
             "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
             "relation": [],
             "businessId": "DBZ",
             "controlName": "HihokenshaInputGuide",
