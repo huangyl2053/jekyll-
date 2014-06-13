@@ -211,7 +211,7 @@
    "height": "Auto"
   },
   {
-   "fieldName": "KyufuKanrihyoSerach",
+   "fieldName": "KyufuKanrihyoSearch",
    "items": [
     {
      "fieldName": "txtHihokenshaNo",
@@ -573,7 +573,7 @@
    "authorityMode": 0,
    "marginLeft": "0",
    "marginRight": "XS",
-   "selectControlID": "KyufuKanrihyoSerach",
+   "selectControlID": "KyufuKanrihyoSearch",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -582,17 +582,17 @@
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "KyufuKanrihyoSerach"
+     "postParameterPanelNames": "KyufuKanrihyoSearch"
     }
    ],
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbc/db/dbc/KyufuKanrihyoSerach/onLoad"
+     "requestUrl": "dbc/db/dbc/KyufuKanrihyoSearch/onLoad"
     },
     {
      "eventName": "onClickClear",
-     "requestUrl": "dbc/db/dbc/KyufuKanrihyoSerach/onClickClear"
+     "requestUrl": "dbc/db/dbc/KyufuKanrihyoSearch/onClickClear"
     }
    ],
    "hiddenInput": [],
@@ -683,25 +683,6 @@
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "btnSelect"
-       },
-       {
-        "columnName": "",
-        "dataName": "txtTaishoYMInvisible",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 0,
-        "visible": false,
-        "cellType": 6,
-        "cellDetails": {
-         "cellType": 6,
-         "ymdKubun": 1,
-         "displayFormat": 0,
-         "onChange": ""
-        },
-        "align": 1,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "txtTaishoYMInvisible"
        },
        {
         "columnName": "対象年月",
@@ -1700,7 +1681,7 @@
    "showWizard": true,
    "visibleDivs": [
     {
-     "visibleDiv": "KyufuKanrihyoSerach",
+     "visibleDiv": "KyufuKanrihyoSearch",
      "panelState": "visible"
     },
     {
@@ -1748,7 +1729,7 @@
    "showWizard": true,
    "visibleDivs": [
     {
-     "visibleDiv": "KyufuKanrihyoSerach",
+     "visibleDiv": "KyufuKanrihyoSearch",
      "panelState": "close"
     },
     {
@@ -1893,7 +1874,7 @@
    "KyufuKanrihyoKaigoShikakuKihon"
   ],
   [
-   "KyufuKanrihyoSerach"
+   "KyufuKanrihyoSearch"
   ],
   [
    "KyufuKanrihyoInfoKyotaku"

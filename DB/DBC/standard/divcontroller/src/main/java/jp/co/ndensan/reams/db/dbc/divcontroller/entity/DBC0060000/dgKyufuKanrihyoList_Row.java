@@ -1,16 +1,15 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0060000;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu May 22 14:32:12 JST 2014 
+ * Fri Jun 13 14:33:05 JST 2014 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 
@@ -23,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class dgKyufuKanrihyoList_Row extends DataRow {
 
     private Button btnSelect;
-    private TextBoxDate txtTaishoYMInvisible;
     private RString txtTaishoYM;
     private RString txtSakuseiKubun;
     private RString txtHihoNo;
@@ -33,12 +31,18 @@ public class dgKyufuKanrihyoList_Row extends DataRow {
 
     public dgKyufuKanrihyoList_Row() {
         super();
+        this.btnSelect = new Button();
+        this.txtTaishoYM = RString.EMPTY;
+        this.txtSakuseiKubun = RString.EMPTY;
+        this.txtHihoNo = RString.EMPTY;
+        this.txtHihokenshaName = RString.EMPTY;
+        this.txtJigyosha = RString.EMPTY;
+        this.txtShinsaYM = RString.EMPTY;
     }
 
-    public dgKyufuKanrihyoList_Row(Button btnSelect, TextBoxDate txtTaishoYMInvisible, RString txtTaishoYM, RString txtSakuseiKubun, RString txtHihoNo, RString txtHihokenshaName, RString txtJigyosha, RString txtShinsaYM) {
+    public dgKyufuKanrihyoList_Row(Button btnSelect, RString txtTaishoYM, RString txtSakuseiKubun, RString txtHihoNo, RString txtHihokenshaName, RString txtJigyosha, RString txtShinsaYM) {
         super();
         this.setOriginalData("btnSelect", btnSelect);
-        this.setOriginalData("txtTaishoYMInvisible", txtTaishoYMInvisible);
         this.setOriginalData("txtTaishoYM", txtTaishoYM);
         this.setOriginalData("txtSakuseiKubun", txtSakuseiKubun);
         this.setOriginalData("txtHihoNo", txtHihoNo);
@@ -46,7 +50,6 @@ public class dgKyufuKanrihyoList_Row extends DataRow {
         this.setOriginalData("txtJigyosha", txtJigyosha);
         this.setOriginalData("txtShinsaYM", txtShinsaYM);
         this.btnSelect = btnSelect;
-        this.txtTaishoYMInvisible = txtTaishoYMInvisible;
         this.txtTaishoYM = txtTaishoYM;
         this.txtSakuseiKubun = txtSakuseiKubun;
         this.txtHihoNo = txtHihoNo;
@@ -57,10 +60,6 @@ public class dgKyufuKanrihyoList_Row extends DataRow {
 
     public Button getBtnSelect() {
         return btnSelect;
-    }
-
-    public TextBoxDate getTxtTaishoYMInvisible() {
-        return txtTaishoYMInvisible;
     }
 
     public RString getTxtTaishoYM() {
@@ -90,11 +89,6 @@ public class dgKyufuKanrihyoList_Row extends DataRow {
     public void setBtnSelect(Button btnSelect) {
         this.setOriginalData("btnSelect", btnSelect);
         this.btnSelect = btnSelect;
-    }
-
-    public void setTxtTaishoYMInvisible(TextBoxDate txtTaishoYMInvisible) {
-        this.setOriginalData("txtTaishoYMInvisible", txtTaishoYMInvisible);
-        this.txtTaishoYMInvisible = txtTaishoYMInvisible;
     }
 
     public void setTxtTaishoYM(RString txtTaishoYM) {

@@ -8,12 +8,13 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0060000.KyufuKanrihyoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0060000.KyufuKanrihyoListDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0060000.dgKyufuKanrihyoList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufuKanrihyoInfo.KyufuKanrihyoInfoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufuKanrihyoListDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgKyufuKanrihyoList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufuKanrihyoInfo.dgMeisaiList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -51,9 +52,9 @@ public class KyufuKanrihyo {
     }
 
     private 対象期間区切 kugiriHantei(dgKyufuKanrihyoList_Row row) {
-        if (row.getTxtTaishoYMInvisible().getValue().getYearMonth().isBefore(new RDate("20020101").getYearMonth())) {
+        if (new FlexibleDate(row.getTxtTaishoYM().replace(".", "").concat("01")).getYearMonth().isBefore(new FlexibleDate("20020101").getYearMonth())) {
             return 対象期間区切.H1204_H1312;
-        } else if (row.getTxtTaishoYMInvisible().getValue().getYearMonth().isBefore(new RDate("20060401").getYearMonth())) {
+        } else if (new FlexibleDate(row.getTxtTaishoYM().replace(".", "").concat("01")).getYearMonth().isBefore(new FlexibleDate("20060401").getYearMonth())) {
             return 対象期間区切.H1401_H1803;
         } else {
             return 対象期間区切.H1804_;
@@ -61,10 +62,10 @@ public class KyufuKanrihyo {
     }
 
     private void setData(KyufuKanrihyoDiv panel, dgKyufuKanrihyoList_Row row, 対象期間区切 kugiri) {
-        panel.getTxtTaishoYM().setValue(row.getTxtTaishoYMInvisible().getValue());
+        panel.getTxtTaishoYM().setValue(new RDate(new FlexibleDate(row.getTxtTaishoYM().replace(".", "").concat("01")).toString()));
         panel.getTxtKaigoJotai().setValue(new RString("要介護１"));
         panel.getTxtHokenshaNo().setValue(row.getTxtHihoNo());
-        panel.getTxtShinsaYM().setValue(row.getTxtTaishoYMInvisible().getValue());
+        panel.getTxtShinsaYM().setValue(new RDate(new FlexibleDate(row.getTxtTaishoYM().replace(".", "").concat("01")).toString()));
         if (kugiri.equals(対象期間区切.H1204_H1312)) {
             KyufuKanrihyoInfoDiv homon = panel.getTabKyufuKanrihyo().getKyufuKanrihyoHomonTsusho().getKyufuKanrihyoInfoHomonTsusho();
             KyufuKanrihyoInfoDiv tanki = panel.getTabKyufuKanrihyo().getKyufuKanrihyoTankiNyusho().getKyufuKanrihyoInfoTankiNyusho();
@@ -87,7 +88,7 @@ public class KyufuKanrihyo {
         List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("dbc0060000/KyufuKanrihyoSummary.yml"));
         HashMap source = sourceList.get(index);
         div.getTxtSakuseiKubun().setValue(row.getTxtSakuseiKubun());
-        div.getTxtSakuseiYMD().setValue(row.getTxtTaishoYMInvisible().getValue());
+        div.getTxtSakuseiYMD().setValue(new RDate(new FlexibleDate(row.getTxtTaishoYM().replace(".", "").concat("01")).toString()));
         div.getTxtZengetsuNissu().setValue(new Decimal(source.get("前月までの給付計画日数").toString()));
         div.getTxtKeikakuSakuseiKubun().setValue(new RString(source.get("計画作成区分").toString()));
         div.getTxtShienJigyoshaNo().setValue(new RString(source.get("支援事業者番号").toString()));
