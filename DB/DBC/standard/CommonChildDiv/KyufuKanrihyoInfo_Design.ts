@@ -909,10 +909,16 @@ module DBC {
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
+      "isShowHeader": true,
       "isShowFooter": true,
       "isShowFilter": false,
       "isShowFilterButton": false,
       "isShowRowState": false,
+      "isShowSelectButtonColumn": false,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
       "header": {
        "combineColumns": [],
        "frozenColumn": "",
@@ -938,7 +944,7 @@ module DBC {
         "dataName": "txtServiceShurui",
         "toolTip": "",
         "bgColor": 0,
-        "width": 200,
+        "width": 170,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -970,7 +976,7 @@ module DBC {
         "dataName": "txtJigyosha",
         "toolTip": "",
         "bgColor": 0,
-        "width": 500,
+        "width": 450,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -986,7 +992,7 @@ module DBC {
         "dataName": "txtJigyoshaKubun",
         "toolTip": "",
         "bgColor": 0,
-        "width": 300,
+        "width": 270,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -1009,7 +1015,7 @@ module DBC {
      "onNoRow": "",
      "onMultiRows": "",
      "dataSource": [],
-     "sortOrder": "txtNo",
+     "sortOrder": "txtJigyoshaKubun",
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1

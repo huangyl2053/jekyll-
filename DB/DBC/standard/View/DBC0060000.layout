@@ -152,10 +152,10 @@
      "canOpenAndClose": false,
      "marginTop": 0,
      "marginBottom": 0,
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorderTop": true,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true,
      "businessId": "DBZ",
      "controlName": "KaigoShikakuKihon",
      "dataPassingForDialog": [],
@@ -721,7 +721,7 @@
         "dataName": "txtHihoNo",
         "toolTip": "",
         "bgColor": 0,
-        "width": 100,
+        "width": 90,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -737,7 +737,7 @@
         "dataName": "txtHihokenshaName",
         "toolTip": "",
         "bgColor": 0,
-        "width": 400,
+        "width": 270,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -751,7 +751,7 @@
         "dataName": "txtJigyosha",
         "toolTip": "",
         "bgColor": 0,
-        "width": 400,
+        "width": 410,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -1143,7 +1143,7 @@
             "dataName": "txtServiceShurui",
             "toolTip": "",
             "bgColor": 0,
-            "width": 200,
+            "width": 170,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -1175,7 +1175,7 @@
             "dataName": "txtJigyosha",
             "toolTip": "",
             "bgColor": 0,
-            "width": 500,
+            "width": 450,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -1191,7 +1191,7 @@
             "dataName": "txtJigyoshaKubun",
             "toolTip": "",
             "bgColor": 0,
-            "width": 300,
+            "width": 270,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -1204,7 +1204,7 @@
            }
           ]
          },
-         "MeisaiListHeight": "375",
+         "MeisaiListHeight": "175",
          "MeisaiListOnSort": "",
          "MeisaiListOnSelect": "",
          "MeisaiListOnSelectByDblClick": "",
@@ -1279,10 +1279,16 @@
          "MeisaiListGridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
+          "isShowHeader": true,
           "isShowFooter": true,
           "isShowFilter": false,
           "isShowFilterButton": false,
           "isShowRowState": false,
+          "isShowSelectButtonColumn": false,
+          "isShowModifyButtonColumn": false,
+          "isShowDeleteButtonColumn": false,
+          "limitRowCount": 0,
+          "selectedRowCount": 0,
           "header": {
            "combineColumns": [],
            "frozenColumn": "",
@@ -1308,7 +1314,7 @@
             "dataName": "txtServiceShurui",
             "toolTip": "",
             "bgColor": 0,
-            "width": 200,
+            "width": 170,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -1340,7 +1346,7 @@
             "dataName": "txtJigyosha",
             "toolTip": "",
             "bgColor": 0,
-            "width": 500,
+            "width": 450,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -1356,7 +1362,7 @@
             "dataName": "txtJigyoshaKubun",
             "toolTip": "",
             "bgColor": 0,
-            "width": 300,
+            "width": 270,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -1369,7 +1375,7 @@
            }
           ]
          },
-         "MeisaiListHeight": "375",
+         "MeisaiListHeight": "175",
          "MeisaiListOnSort": "",
          "MeisaiListOnSelect": "",
          "MeisaiListOnSelectByDblClick": "",
@@ -1469,10 +1475,16 @@
      "MeisaiListGridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
+      "isShowHeader": true,
       "isShowFooter": true,
       "isShowFilter": false,
       "isShowFilterButton": false,
       "isShowRowState": false,
+      "isShowSelectButtonColumn": false,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
       "header": {
        "combineColumns": [],
        "frozenColumn": "",
@@ -1498,7 +1510,7 @@
         "dataName": "txtServiceShurui",
         "toolTip": "",
         "bgColor": 0,
-        "width": 200,
+        "width": 170,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -1530,7 +1542,7 @@
         "dataName": "txtJigyosha",
         "toolTip": "",
         "bgColor": 0,
-        "width": 500,
+        "width": 450,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -1546,7 +1558,7 @@
         "dataName": "txtJigyoshaKubun",
         "toolTip": "",
         "bgColor": 0,
-        "width": 300,
+        "width": 270,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -1677,7 +1689,7 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "検索",
+   "stateName": "管理票検索",
    "showWizard": true,
    "visibleDivs": [
     {
@@ -1694,7 +1706,7 @@
     {
      "fieldName": "btnSearch",
      "event": "onClick",
-     "transition": "給付管理票情報一覧"
+     "transition": "管理票一覧"
     },
     {
      "fieldName": "btnResearch",
@@ -1725,7 +1737,7 @@
   },
   {
    "order": "2",
-   "stateName": "給付管理票情報一覧",
+   "stateName": "管理票一覧",
    "showWizard": true,
    "visibleDivs": [
     {
@@ -1747,22 +1759,22 @@
     {
      "fieldName": "btnResearch",
      "event": "onClick",
-     "transition": "検索"
+     "transition": "管理票検索"
     },
     {
      "fieldName": "dgKyufuKanrihyoList[btnSelect]",
      "event": "onClick",
-     "transition": "給付管理票"
+     "transition": "給付管理票情報"
     },
     {
      "fieldName": "dgKyufuKanrihyoList",
      "event": "onSelectByDblClick",
-     "transition": "給付管理票"
+     "transition": "給付管理票情報"
     },
     {
      "fieldName": "dgKyufuKanrihyoList",
      "event": "onSelectBySelectButton",
-     "transition": "給付管理票"
+     "transition": "給付管理票情報"
     },
     {
      "fieldName": "btnReturn",
@@ -1773,7 +1785,7 @@
   },
   {
    "order": "3",
-   "stateName": "給付管理票",
+   "stateName": "給付管理票情報",
    "showWizard": true,
    "visibleDivs": [
     {
@@ -1847,7 +1859,7 @@
     {
      "fieldName": "btnReturn",
      "event": "onClick",
-     "transition": "給付管理票情報一覧"
+     "transition": "管理票一覧"
     }
    ]
   }
