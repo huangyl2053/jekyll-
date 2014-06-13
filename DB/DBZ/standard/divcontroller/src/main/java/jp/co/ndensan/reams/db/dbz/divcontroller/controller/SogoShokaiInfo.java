@@ -90,30 +90,30 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
  */
 public class SogoShokaiInfo {
 
-    private final int TYPE_SHIKAKU = 1;
-    private final int TYPE_JUKYU = 2;
-    private final int TYPE_KYUFU = 3;
-    private final int TYPE_FUKA = 4;
-    private final int TYPE_JUMIN = 5;
+    private static final int TYPE_SHIKAKU = 1;
+    private static final int TYPE_JUKYU = 2;
+    private static final int TYPE_KYUFU = 3;
+    private static final int TYPE_FUKA = 4;
+    private static final int TYPE_JUMIN = 5;
 
-    private final RString YML_SHIKAKU_TOKUSO = new RString("dbz0010000/ShikakuTokusoData.yml");
-    private final RString YML_IRYO_HOKEN_KANYU = new RString("dbz0010000/IryoHokenKanyuData.yml");
-    private final RString YML_TAJUSHOCHI_TOKUREI = new RString("dbz0010000/TajushochiTokureiData.yml");
-    private final RString YML_JOGAI_TEKIYO = new RString("dbz0010000/JogaiTekiyoData.yml");
-    private final RString YML_NINTEI = new RString("dbz0010000/NinteiData.yml");
-    private final RString YML_GENMEN_GENGAKU = new RString("dbz0010000/GenmenGengakuData.yml");
-    private final RString YML_SHISETSU_NYUSHO = new RString("dbz0010000/ShisetsuNyushoData.yml");
-    private final RString YML_KYUFU_SEIGEN = new RString("dbz0010000/KyufuSeigenData.yml");
-    private final RString YML_SERVICE_KEIKAKU = new RString("dbz0010000/ServiceKeikakuData.yml");
-    private final RString YML_KOGAKU_SERVICE = new RString("dbz0010000/KogakuServiceData.yml");
-    private final RString YML_SHOKAN_BARAI = new RString("dbz0010000/ShokanBaraiData.yml");
-    private final RString YML_FUKUSHI_YOGU_KONYUHI = new RString("dbz0010000/FukushiYoguKonyuhiData.yml");
-    private final RString YML_FUKUSHI_YOGU_KONYUHI_MEISAI = new RString("dbz0010000/FukushiYoguKonyuhiMeisaiData.yml");
-    private final RString YML_KAGO_MOUSHITATESHO = new RString("dbz0010000/KagoMoushitateshoData.yml");
-    private final RString YML_SAISHINSA_MOUSHITATESHO = new RString("dbz0010000/SaishinsaMoushitateshoData.yml");
-    private final RString YML_FUKA = new RString("dbz0010000/FukaData.yml");
-    private final RString YML_KYOKAISO_KANRI = new RString("dbz0010000/KyokaisoKanriData.yml");
-    private final RString YML_SOGO_JIGYO_TAISHOSHA = new RString("dbz0010000/SogoJigyoTaishoshaData.yml");
+    private static final RString YML_SHIKAKU_TOKUSO = new RString("dbz0010000/ShikakuTokusoData.yml");
+    private static final RString YML_IRYO_HOKEN_KANYU = new RString("dbz0010000/IryoHokenKanyuData.yml");
+    private static final RString YML_TAJUSHOCHI_TOKUREI = new RString("dbz0010000/TajushochiTokureiData.yml");
+    private static final RString YML_JOGAI_TEKIYO = new RString("dbz0010000/JogaiTekiyoData.yml");
+    private static final RString YML_NINTEI = new RString("dbz0010000/NinteiData.yml");
+    private static final RString YML_GENMEN_GENGAKU = new RString("dbz0010000/GenmenGengakuData.yml");
+    private static final RString YML_SHISETSU_NYUSHO = new RString("dbz0010000/ShisetsuNyushoData.yml");
+    private static final RString YML_KYUFU_SEIGEN = new RString("dbz0010000/KyufuSeigenData.yml");
+    private static final RString YML_SERVICE_KEIKAKU = new RString("dbz0010000/ServiceKeikakuData.yml");
+    private static final RString YML_KOGAKU_SERVICE = new RString("dbz0010000/KogakuServiceData.yml");
+    private static final RString YML_SHOKAN_BARAI = new RString("dbz0010000/ShokanBaraiData.yml");
+    private static final RString YML_YOGU_KONYUHI = new RString("dbz0010000/FukushiYoguKonyuhiData.yml");
+    private static final RString YML_YOGU_KONYUHI_MEISAI = new RString("dbz0010000/FukushiYoguKonyuhiMeisaiData.yml");
+    private static final RString YML_KAGO_MOUSHITATE = new RString("dbz0010000/KagoMoushitateshoData.yml");
+    private static final RString YML_SAISHIN_MOUSHITATE = new RString("dbz0010000/SaishinsaMoushitateshoData.yml");
+    private static final RString YML_FUKA = new RString("dbz0010000/FukaData.yml");
+    private static final RString YML_KYOKAISO_KANRI = new RString("dbz0010000/KyokaisoKanriData.yml");
+    private static final RString YML_SOGO_JIGYO_TAISHOSHA = new RString("dbz0010000/SogoJigyoTaishoshaData.yml");
 
     /**
      * 画面ロード時の処理です。
@@ -211,6 +211,204 @@ public class SogoShokaiInfo {
         return response;
     }
 
+    /**
+     * 医療保険加入情報ロード時の処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<SogoShokaiIryoHokenKanyuInfoDiv> onLoad_IryoHokenKanyuInfo(SogoShokaiIryoHokenKanyuInfoDiv panel) {
+        ResponseData<SogoShokaiIryoHokenKanyuInfoDiv> response = new ResponseData<>();
+
+        setIryoHokenKanyuInfo(panel);
+
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * 認定情報ロード時の処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<SogoShokaiNinteiInfoDiv> onLoad_NinteiInfo(SogoShokaiNinteiInfoDiv panel) {
+        ResponseData<SogoShokaiNinteiInfoDiv> response = new ResponseData<>();
+
+        setJukyuNinteiDetailInfo(panel);
+
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * 減免・減額情報ロード時の処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<SogoShokaiGenmenGengakuInfoDiv> onLoad_GenmenGengakuInfo(SogoShokaiGenmenGengakuInfoDiv panel) {
+        ResponseData<SogoShokaiGenmenGengakuInfoDiv> response = new ResponseData<>();
+
+        setJukyuGenmenGengakuDetailInfo(panel);
+
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * 施設入所情報ロード時の処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<SogoShokaiShisetsuNyushoInfoDiv> onLoad_ShisetsuNyushoInfo(SogoShokaiShisetsuNyushoInfoDiv panel) {
+        ResponseData<SogoShokaiShisetsuNyushoInfoDiv> response = new ResponseData<>();
+
+        setJukyuShisetsuNyushoDetailInfo(panel);
+
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * 給付制限情報ロード時の処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<SogoShokaiKyufuSeigenInfoDiv> onLoad_KyufuSeigenInfo(SogoShokaiKyufuSeigenInfoDiv panel) {
+        ResponseData<SogoShokaiKyufuSeigenInfoDiv> response = new ResponseData<>();
+
+        setJukyuKyufuSeigenDetailInfo(panel);
+
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * 居宅サービス計画情報ロード時の処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<SogoShokaiKyotakuServiceKeikakuInfoDiv> onLoad_KyotakuServiceKeikakuInfo(SogoShokaiKyotakuServiceKeikakuInfoDiv panel) {
+        ResponseData<SogoShokaiKyotakuServiceKeikakuInfoDiv> response = new ResponseData<>();
+
+        setKyufuKyotakuServiceKeikakuDetailInfo(panel);
+
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * 高額介護サービス費情報ロード時の処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<SogoShokaiKogakuKaigoServicehiInfoDiv> onLoad_KogakuKaigoServicehiInfo(SogoShokaiKogakuKaigoServicehiInfoDiv panel) {
+        ResponseData<SogoShokaiKogakuKaigoServicehiInfoDiv> response = new ResponseData<>();
+
+        setKyufuKogakuKaigoServiceDetailInfo(panel);
+
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * 福祉用具購入費情報ロード時の処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<SogoShokaiFukushiYoguKonyuhiInfoDiv> onLoad_FukushiYoguKonyuhiInfo(SogoShokaiFukushiYoguKonyuhiInfoDiv panel) {
+        ResponseData<SogoShokaiFukushiYoguKonyuhiInfoDiv> response = new ResponseData<>();
+
+        setFukushiYoguKonyuhiDetailInfo(panel, 0);
+
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * 福祉用具購入費明細情報選択時の処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<SogoShokaiFukushiYoguKonyuhiInfoDiv> onClick_btnSelectYoguKonyuhi(SogoShokaiFukushiYoguKonyuhiInfoDiv panel) {
+        ResponseData<SogoShokaiFukushiYoguKonyuhiInfoDiv> response = new ResponseData<>();
+
+        setFukushiYoguKonyuhiDetailInfo(panel, panel.getDgYoguSeikyuDetail().getClickedRowId());
+
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * 住宅改修費情報ロード時の処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<SogoShokaiJutakuKaishuhiInfoDiv> onLoad_JutakuKaishuhiInfo(SogoShokaiJutakuKaishuhiInfoDiv panel) {
+        ResponseData<SogoShokaiJutakuKaishuhiInfoDiv> response = new ResponseData<>();
+
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * 過誤申立情報ロード時の処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<SogoShokaiKagoMoushitateInfoDiv> onLoad_KagoMoushitateInfo(SogoShokaiKagoMoushitateInfoDiv panel) {
+        ResponseData<SogoShokaiKagoMoushitateInfoDiv> response = new ResponseData<>();
+
+        setKyufuKagoMoushitateshoDetailInfo(panel);
+
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * 再審査申立情報ロード時の処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<SogoShokaiSaishinsaMoushitateInfoDiv> onLoad_SaishinsaMoushitateInfo(SogoShokaiSaishinsaMoushitateInfoDiv panel) {
+        ResponseData<SogoShokaiSaishinsaMoushitateInfoDiv> response = new ResponseData<>();
+
+        setKyufuSaishinsaMoushitateshoDetailInfo(panel);
+
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * 賦課情報ロード時の処理です。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData<SogoShokaiFukaInfoDiv> onLoad_FukaInfo(SogoShokaiFukaInfoDiv panel) {
+        ResponseData<SogoShokaiFukaInfoDiv> response = new ResponseData<>();
+
+        setFukaDetailInfo(panel);
+
+        response.data = panel;
+        return response;
+    }
+
+    // Yamlデータを取得する
+    private List<HashMap> getYamlData(RString yamlName) {
+        return YamlLoader.DBZ.loadAsList(yamlName);
+    }
+
     // 総合照会の情報を切り替える
     private void setSogoShokaiInfo(SogoShokaiInfoDiv panel, int type) {
 
@@ -265,6 +463,8 @@ public class SogoShokaiInfo {
                 panel.getSogoShokaiJumin().setVisible(true);
                 panel.getSogoShokaiJumin().setDisplayNone(false);
                 break;
+            default:
+                break;
         }
 
     }
@@ -276,9 +476,32 @@ public class SogoShokaiInfo {
         setShikakuJogaiInfo(panel.getTplSogoShokaiShikakuJogai());
     }
 
+    // 受給情報を設定する
+    private void setJukyuInfo(tabSogoShokaiJukyuDiv panel) {
+        setJukyuNinteiInfo(panel.getTplSogoShokaiJukyuNintei());
+        setJukyuGenmenGengakuInfo(panel.getTplSogoShokaiJukyuGenmenGengaku());
+        setJukyuShisetsuNyushoInfo(panel.getTplSogoShokaiJukyuShisetsuNyusho());
+        setJukyuKyufuSeigenInfo(panel.getTplSogoShokaiJukyuKyufuSeigen());
+    }
+
+    // 給付情報を設定する
+    private void setKyufuInfo(tabSogoShokaiKyufuDiv panel) {
+        setKyufuKyotakuServiceKeikakuInfo(panel.getTplSogoShokaiKyufuKyotakuServiceKeikaku());
+        setKyufuKogakuKaigoServiceInfo(panel.getTplSogoShokaiKyufuKogakuKaigoService());
+        setKyufuShokanBaraiInfo(panel.getTplSogoShokaiKyufuShokanBarai());
+        setKyufuKagoMoushitateshoInfo(panel.getTplSogoShokaiKyufuKagoMoushitatesho());
+        setKyufuSaishinsaMoushitateshoInfo(panel.getTplSogoShokaiKyufuSaishinsaMoushitatesho());
+    }
+
+    // 住民情報を設定する
+    private void setJuminInfo(SogoShokaiJuminDiv panel) {
+        setJuminKyokaiKanriInfo(panel.getSogoShokaiJuminKyokaiKanri());
+        setJuminSogoJigyoInfo(panel.getSogoShokaiJuminSogoJigyo());
+    }
+
     // 資格：介護資格得喪情報を設定する
     private void setShikakuTokusoInfo(tplSogoShokaiShikakuTokusoDiv panel) {
-        List<HashMap> mapList = YamlLoader.FOR_DBZ.loadAsList(YML_SHIKAKU_TOKUSO);
+        List<HashMap> mapList = getYamlData(YML_SHIKAKU_TOKUSO);
         List<dgSogoShokaiShikakuTokusoList_Row> list = new ArrayList<>();
         for (int index = 0; index < mapList.size(); index++) {
             HashMap map = mapList.get(index);
@@ -318,7 +541,7 @@ public class SogoShokaiInfo {
             String soshitsuJiyu,
             String soshitsuTodokedeYMD,
             String soshitsuYMD,
-            String ichigoHihokenshaNenreiTotatsuYMD,
+            String ichigoTotatsuYMD,
             String henkoJiyu,
             String henkoTodokedeYMD,
             String henkoYMD,
@@ -328,7 +551,7 @@ public class SogoShokaiInfo {
             String jushochitokureiKaijoJiyu,
             String kaijoTodokedeYMD,
             String kaijoYMD,
-            String koikinaiTokureiSochimotoHokensha,
+            String koikinaiTokureiHokensha,
             String kyuHokensha,
             String saikofuKubun,
             String saikohuJiyu,
@@ -341,7 +564,7 @@ public class SogoShokaiInfo {
                 new RString(soshitsuJiyu),
                 new RString(soshitsuTodokedeYMD),
                 new RString(soshitsuYMD),
-                new RString(ichigoHihokenshaNenreiTotatsuYMD),
+                new RString(ichigoTotatsuYMD),
                 new RString(henkoJiyu),
                 new RString(henkoTodokedeYMD),
                 new RString(henkoYMD),
@@ -351,23 +574,16 @@ public class SogoShokaiInfo {
                 new RString(jushochitokureiKaijoJiyu),
                 new RString(kaijoTodokedeYMD),
                 new RString(kaijoYMD),
-                new RString(koikinaiTokureiSochimotoHokensha),
+                new RString(koikinaiTokureiHokensha),
                 new RString(kyuHokensha),
                 new RString(saikofuKubun),
                 new RString(saikohuJiyu),
                 new RString(chohyoKofuRirekiID));
     }
 
-    /**
-     * 医療保険加入情報ロード時の処理です。
-     *
-     * @param panel panel
-     * @return ResponseData
-     */
-    public ResponseData<SogoShokaiIryoHokenKanyuInfoDiv> onLoad_IryoHokenKanyuInfo(SogoShokaiIryoHokenKanyuInfoDiv panel) {
-        ResponseData<SogoShokaiIryoHokenKanyuInfoDiv> response = new ResponseData<>();
-
-        List<HashMap> mapList = YamlLoader.FOR_DBZ.loadAsList(YML_IRYO_HOKEN_KANYU);
+    // 資格：医療保険加入情報を設定する
+    private void setIryoHokenKanyuInfo(SogoShokaiIryoHokenKanyuInfoDiv panel) {
+        List<HashMap> mapList = getYamlData(YML_IRYO_HOKEN_KANYU);
         List<dgSogoShokaiHokenKanyuList_Row> list = new ArrayList<>();
         for (int index = 0; index < mapList.size(); index++) {
             HashMap map = mapList.get(index);
@@ -379,9 +595,6 @@ public class SogoShokaiInfo {
             ));
         }
         panel.getDgSogoShokaiHokenKanyuList().setDataSource(list);
-
-        response.data = panel;
-        return response;
     }
 
     // 医療保険加入情報を作成する
@@ -399,17 +612,17 @@ public class SogoShokaiInfo {
 
     // 資格：他市町村住所地特例情報を設定する
     private void setShikakuTokureiInfo(tplSogoShokaiShikakuTokureiDiv panel) {
-        List<HashMap> mapList = YamlLoader.FOR_DBZ.loadAsList(YML_TAJUSHOCHI_TOKUREI);
+        List<HashMap> mapList = getYamlData(YML_TAJUSHOCHI_TOKUREI);
         List<dgSogoShokaiShikakuTokureiList_Row> list = new ArrayList<>();
         for (int index = 0; index < mapList.size(); index++) {
             HashMap map = mapList.get(index);
             list.add(createShikakuTokureiListRow(
                     map.get("適用事由").toString(),
                     map.get("適用日").toString(),
-                    map.get("届出日").toString(),
+                    map.get("適用届出日").toString(),
                     map.get("解除事由").toString(),
                     map.get("解除日").toString(),
-                    map.get("届出日").toString(),
+                    map.get("解除届出日").toString(),
                     map.get("保険者").toString(),
                     map.get("被保番号").toString(),
                     map.get("入所日").toString(),
@@ -452,17 +665,17 @@ public class SogoShokaiInfo {
 
     // 資格：除外適用情報を設定する
     private void setShikakuJogaiInfo(tplSogoShokaiShikakuJogaiDiv panel) {
-        List<HashMap> mapList = YamlLoader.FOR_DBZ.loadAsList(YML_JOGAI_TEKIYO);
+        List<HashMap> mapList = getYamlData(YML_JOGAI_TEKIYO);
         List<dgSogoShokaiShikakuJogaiList_Row> list = new ArrayList<>();
         for (int index = 0; index < mapList.size(); index++) {
             HashMap map = mapList.get(index);
             list.add(createShikakuJogaiListRow(
                     map.get("適用事由").toString(),
                     map.get("適用日").toString(),
-                    map.get("届出日").toString(),
+                    map.get("適用届出日").toString(),
                     map.get("解除事由").toString(),
-                    map.get("適用日").toString(),
-                    map.get("届出日").toString(),
+                    map.get("解除適用日").toString(),
+                    map.get("解除届出日").toString(),
                     map.get("入所日").toString(),
                     map.get("退所日").toString(),
                     map.get("施設").toString()));
@@ -493,17 +706,9 @@ public class SogoShokaiInfo {
                 new RString(shisetsu));
     }
 
-    // 受給情報を設定する
-    private void setJukyuInfo(tabSogoShokaiJukyuDiv panel) {
-        setJukyuNinteiInfo(panel.getTplSogoShokaiJukyuNintei());
-        setJukyuGenmenGengakuInfo(panel.getTplSogoShokaiJukyuGenmenGengaku());
-        setJukyuShisetsuNyushoInfo(panel.getTplSogoShokaiJukyuShisetsuNyusho());
-        setJukyuKyufuSeigenInfo(panel.getTplSogoShokaiJukyuKyufuSeigen());
-    }
-
     // 受給：認定情報を設定する
     private void setJukyuNinteiInfo(tplSogoShokaiJukyuNinteiDiv panel) {
-        List<HashMap> mapList = YamlLoader.FOR_DBZ.loadAsList(YML_NINTEI);
+        List<HashMap> mapList = getYamlData(YML_NINTEI);
         List<dgSogoShokaiJukyuNinteiList_Row> list = new ArrayList<>();
         for (int index = 0; index < mapList.size(); index++) {
             HashMap map = mapList.get(index);
@@ -519,36 +724,9 @@ public class SogoShokaiInfo {
         panel.getDgSogoShokaiJukyuNinteiList().setDataSource(list);
     }
 
-    // 受給：認定情報を作成する
-    private dgSogoShokaiJukyuNinteiList_Row createJukyuNinteiListRow(
-            String txtShinseiYMD,
-            String txtShinseiKubun,
-            String txtShinseiYukoKubun,
-            String txtNinteiYMD,
-            String txtJotaiKubun,
-            String txtYukoKaishiYMD,
-            String txtYukoShuryoYMD) {
-        return new dgSogoShokaiJukyuNinteiList_Row(
-                new ButtonDialog(),
-                new RString(txtShinseiYMD),
-                new RString(txtShinseiKubun),
-                new RString(txtShinseiYukoKubun),
-                new RString(txtNinteiYMD),
-                new RString(txtJotaiKubun),
-                new RString(txtYukoKaishiYMD),
-                new RString(txtYukoShuryoYMD));
-    }
-
-    /**
-     * 認定情報ロード時の処理です。
-     *
-     * @param panel panel
-     * @return ResponseData
-     */
-    public ResponseData<SogoShokaiNinteiInfoDiv> onLoad_NinteiInfo(SogoShokaiNinteiInfoDiv panel) {
-        ResponseData<SogoShokaiNinteiInfoDiv> response = new ResponseData<>();
-
-        HashMap map = YamlLoader.FOR_DBZ.loadAsList(YML_NINTEI).get(0);
+    // 受給：認定詳細情報を設定する
+    private void setJukyuNinteiDetailInfo(SogoShokaiNinteiInfoDiv panel) {
+        HashMap map = getYamlData(YML_NINTEI).get(0);
         panel.getTxtNinteiShinseiYMD().setValue(new RDate(map.get("申請日").toString()));
         panel.getTxtNinteiShinseiKubun().setValue(new RString(map.get("申請区分(法令)").toString()));
         panel.getTxtNinteiYukoKubun().setValue(new RString(map.get("申請有効区分").toString()));
@@ -575,14 +753,31 @@ public class SogoShokaiInfo {
         panel.getTxtNinteiTorikeshiRiyu().setValue(new RString(map.get("取消理由").toString()));
         panel.getTxtNinteiTorikeshiYMD().setValue(new RDate(map.get("取消日").toString()));
         panel.getTxtNinteiTokuteiShippei().setValue(new RString(map.get("特定疾病").toString()));
+    }
 
-        response.data = panel;
-        return response;
+    // 受給：認定情報を作成する
+    private dgSogoShokaiJukyuNinteiList_Row createJukyuNinteiListRow(
+            String txtShinseiYMD,
+            String txtShinseiKubun,
+            String txtShinseiYukoKubun,
+            String txtNinteiYMD,
+            String txtJotaiKubun,
+            String txtYukoKaishiYMD,
+            String txtYukoShuryoYMD) {
+        return new dgSogoShokaiJukyuNinteiList_Row(
+                new ButtonDialog(),
+                new RString(txtShinseiYMD),
+                new RString(txtShinseiKubun),
+                new RString(txtShinseiYukoKubun),
+                new RString(txtNinteiYMD),
+                new RString(txtJotaiKubun),
+                new RString(txtYukoKaishiYMD),
+                new RString(txtYukoShuryoYMD));
     }
 
     // 受給：減免・減額情報を設定する
     private void setJukyuGenmenGengakuInfo(tplSogoShokaiJukyuGenmenGengakuDiv panel) {
-        List<HashMap> mapList = YamlLoader.FOR_DBZ.loadAsList(YML_GENMEN_GENGAKU);
+        List<HashMap> mapList = getYamlData(YML_GENMEN_GENGAKU);
         List<dgSogoShokaiJukyuGenmenGengakuList_Row> list = new ArrayList<>();
         for (int index = 0; index < mapList.size(); index++) {
             HashMap map = mapList.get(index);
@@ -597,34 +792,9 @@ public class SogoShokaiInfo {
         panel.getDgSogoShokaiJukyuGenmenGengakuList().setDataSource(list);
     }
 
-    // 受給：減免・減額情報を作成する
-    private dgSogoShokaiJukyuGenmenGengakuList_Row createJukyuGenmenGengakuListRow(
-            String txtTekiyoKaishiYMD,
-            String txtYukoKigen,
-            String txtKetteiYMD,
-            String txtKetteiKubun,
-            String txtShinseiYMD,
-            String txtGenmenGengakuShurui) {
-        return new dgSogoShokaiJukyuGenmenGengakuList_Row(
-                new ButtonDialog(),
-                new RString(txtTekiyoKaishiYMD),
-                new RString(txtYukoKigen),
-                new RString(txtKetteiYMD),
-                new RString(txtKetteiKubun),
-                new RString(txtShinseiYMD),
-                new RString(txtGenmenGengakuShurui));
-    }
-
-    /**
-     * 減免・減額情報ロード時の処理です。
-     *
-     * @param panel panel
-     * @return ResponseData
-     */
-    public ResponseData<SogoShokaiGenmenGengakuInfoDiv> onLoad_GenmenGengakuInfo(SogoShokaiGenmenGengakuInfoDiv panel) {
-        ResponseData<SogoShokaiGenmenGengakuInfoDiv> response = new ResponseData<>();
-
-        HashMap map = YamlLoader.FOR_DBZ.loadAsList(YML_GENMEN_GENGAKU).get(0);
+    // 受給：減免・減額詳細情報を設定する
+    private void setJukyuGenmenGengakuDetailInfo(SogoShokaiGenmenGengakuInfoDiv panel) {
+        HashMap map = getYamlData(YML_GENMEN_GENGAKU).get(0);
         panel.getTxtGenmenShinseiYMD().setValue(new RDate(map.get("申請日").toString()));
         panel.getTxtGenmenKyuSochiUmu().setValue(new RString(map.get("旧措置者有無").toString()));
 
@@ -661,14 +831,29 @@ public class SogoShokaiInfo {
         futanDiv.getTxtGenmenFutanFutangaku().setValue(new Decimal(map.get("負担額").toString()));
 
         panel.getTxtGenmenFutanHyojunKubun().setValue(new RString(map.get("標準負担区分").toString()));
+    }
 
-        response.data = panel;
-        return response;
+    // 受給：減免・減額情報を作成する
+    private dgSogoShokaiJukyuGenmenGengakuList_Row createJukyuGenmenGengakuListRow(
+            String txtTekiyoKaishiYMD,
+            String txtYukoKigen,
+            String txtKetteiYMD,
+            String txtKetteiKubun,
+            String txtShinseiYMD,
+            String txtGenmenGengakuShurui) {
+        return new dgSogoShokaiJukyuGenmenGengakuList_Row(
+                new ButtonDialog(),
+                new RString(txtTekiyoKaishiYMD),
+                new RString(txtYukoKigen),
+                new RString(txtKetteiYMD),
+                new RString(txtKetteiKubun),
+                new RString(txtShinseiYMD),
+                new RString(txtGenmenGengakuShurui));
     }
 
     // 受給：施設入所情報を設定する
     private void setJukyuShisetsuNyushoInfo(tplSogoShokaiJukyuShisetsuNyushoDiv panel) {
-        List<HashMap> mapList = YamlLoader.FOR_DBZ.loadAsList(YML_SHISETSU_NYUSHO);
+        List<HashMap> mapList = getYamlData(YML_SHISETSU_NYUSHO);
         List<dgSogoShokaiJukyuShisetsuNyushoList_Row> list = new ArrayList<>();
         for (int index = 0; index < mapList.size(); index++) {
             HashMap map = mapList.get(index);
@@ -682,6 +867,18 @@ public class SogoShokaiInfo {
             ));
         }
         panel.getDgSogoShokaiJukyuShisetsuNyushoList().setDataSource(list);
+    }
+
+    // 受給：施設入所詳細情報を設定する
+    private void setJukyuShisetsuNyushoDetailInfo(SogoShokaiShisetsuNyushoInfoDiv panel) {
+        HashMap map = getYamlData(YML_SHISETSU_NYUSHO).get(0);
+        panel.getTxtShisetsuBunrui().setValue(new RString(map.get("施設分類").toString()));
+        panel.getTxtShisetsuNyushoYMD().setValue(new RDate(map.get("入所日").toString()));
+        panel.getTxtShisetsuTaishoYMD().setValue(new RDate(map.get("退所日").toString()));
+        panel.getTxtShisetsuName().setValue(new RString(map.get("施設名称").toString()));
+        panel.getTxtShisetsuJigyoshaNo().setValue(new RString(map.get("事業者コード").toString()));
+        panel.getTxtShisetsuJigyoshaName().setValue(new RString(map.get("事業者名称").toString()));
+        panel.getTxtShisetsuJigyoshaJusho().setValue(new RString(map.get("所在地").toString()));
     }
 
     // 受給：施設入所情報を作成する
@@ -702,31 +899,9 @@ public class SogoShokaiInfo {
                 new RString(txtShozaichi));
     }
 
-    /**
-     * 施設入所情報ロード時の処理です。
-     *
-     * @param panel panel
-     * @return ResponseData
-     */
-    public ResponseData<SogoShokaiShisetsuNyushoInfoDiv> onLoad_ShisetsuNyushoInfo(SogoShokaiShisetsuNyushoInfoDiv panel) {
-        ResponseData<SogoShokaiShisetsuNyushoInfoDiv> response = new ResponseData<>();
-
-        HashMap map = YamlLoader.FOR_DBZ.loadAsList(YML_SHISETSU_NYUSHO).get(0);
-        panel.getTxtShisetsuBunrui().setValue(new RString(map.get("施設分類").toString()));
-        panel.getTxtShisetsuNyushoYMD().setValue(new RDate(map.get("入所日").toString()));
-        panel.getTxtShisetsuTaishoYMD().setValue(new RDate(map.get("退所日").toString()));
-        panel.getTxtShisetsuName().setValue(new RString(map.get("施設名称").toString()));
-        panel.getTxtShisetsuJigyoshaNo().setValue(new RString(map.get("事業者コード").toString()));
-        panel.getTxtShisetsuJigyoshaName().setValue(new RString(map.get("事業者名称").toString()));
-        panel.getTxtShisetsuJigyoshaJusho().setValue(new RString(map.get("所在地").toString()));
-
-        response.data = panel;
-        return response;
-    }
-
     // 受給：給付制限情報を設定する
     private void setJukyuKyufuSeigenInfo(tplSogoShokaiJukyuKyufuSeigenDiv panel) {
-        List<HashMap> mapList = YamlLoader.FOR_DBZ.loadAsList(YML_KYUFU_SEIGEN);
+        List<HashMap> mapList = getYamlData(YML_KYUFU_SEIGEN);
         List<dgSogoShokaiJukyuKyufuSeigenList_Row> list = new ArrayList<>();
         for (int index = 0; index < mapList.size(); index++) {
             HashMap map = mapList.get(index);
@@ -741,6 +916,32 @@ public class SogoShokaiInfo {
             ));
         }
         panel.getDgSogoShokaiJukyuKyufuSeigenList().setDataSource(list);
+    }
+
+    // 受給：給付制限詳細情報を設定する
+    private void setJukyuKyufuSeigenDetailInfo(SogoShokaiKyufuSeigenInfoDiv panel) {
+        HashMap map = getYamlData(YML_KYUFU_SEIGEN).get(0);
+        panel.getTxtSeigenTorokuJokyo().setValue(new RString(map.get("登録状況").toString()));
+        panel.getTxtSeigenShuryoJokyo().setValue(new RString(map.get("終了状況").toString()));
+
+        SogoShokaiKyufuSeigenHenkoDiv henkoDiv = panel.getSogoShokaiKyufuSeigenHenko();
+        henkoDiv.getTxtSeigenHenkoYokokuTorokuYMD().setValue(new RDate(map.get("予告登録日").toString()));
+        henkoDiv.getTxtSeigenHenkoKetteiYMD().setValue(new RDate(map.get("変更決定日").toString()));
+        henkoDiv.getTxtSeigenHenkoSashitomeSyuryoYMD().setValue(new RDate(map.get("一時差止終了日").toString()));
+        henkoDiv.getTxtSeigenHenkoTekiyoShuryoYMD().setValue(new RDate(map.get("変更適用終了日").toString()));
+
+        panel.getTxtSeigenTainoKojoKetteiYMD().setValue(new RDate(map.get("滞納控除決定日").toString()));
+        panel.getTxtSeigenChoshuShometsuKikan().setFromValue(new RDate(map.get("徴収権消滅開始日").toString()));
+        panel.getTxtSeigenChoshuShometsuKikan().setToValue(new RDate(map.get("徴収権消滅終了日").toString()));
+        panel.getTxtSeigenNofuzumiKikan().setFromValue(new RDate(map.get("納付済開始日").toString()));
+        panel.getTxtSeigenNofuzumiKikan().setToValue(new RDate(map.get("納付済終了日").toString()));
+
+        SogoShokaiKyufuSeigenGengakuDiv gengakuDiv = panel.getSogoShokaiKyufuSeigenGengaku();
+        gengakuDiv.getTxtSeigenGengakuKikan().setFromValue(new RDate(map.get("減額開始日").toString()));
+        gengakuDiv.getTxtSeigenGengakuKikan().setToValue(new RDate(map.get("減額終了日").toString()));
+        gengakuDiv.getTxtSeigenGengakuKetteiYMD().setValue(new RDate(map.get("減額決定日").toString()));
+        gengakuDiv.getTxtSeigenGengakuTekiyoKikan().setFromValue(new RDate(map.get("減額適用開始日").toString()));
+        gengakuDiv.getTxtSeigenGengakuTekiyoKikan().setToValue(new RDate(map.get("減額適用終了日").toString()));
     }
 
     // 受給：給付制限情報を作成する
@@ -763,54 +964,9 @@ public class SogoShokaiInfo {
                 new RString(txtGengakuKaishiYMD));
     }
 
-    /**
-     * 給付制限情報ロード時の処理です。
-     *
-     * @param panel panel
-     * @return ResponseData
-     */
-    public ResponseData<SogoShokaiKyufuSeigenInfoDiv> onLoad_KyufuSeigenInfo(SogoShokaiKyufuSeigenInfoDiv panel) {
-        ResponseData<SogoShokaiKyufuSeigenInfoDiv> response = new ResponseData<>();
-
-        HashMap map = YamlLoader.FOR_DBZ.loadAsList(YML_KYUFU_SEIGEN).get(0);
-        panel.getTxtSeigenTorokuJokyo().setValue(new RString(map.get("登録状況").toString()));
-        panel.getTxtSeigenShuryoJokyo().setValue(new RString(map.get("終了状況").toString()));
-
-        SogoShokaiKyufuSeigenHenkoDiv henkoDiv = panel.getSogoShokaiKyufuSeigenHenko();
-        henkoDiv.getTxtSeigenHenkoYokokuTorokuYMD().setValue(new RDate(map.get("予告登録日").toString()));
-        henkoDiv.getTxtSeigenHenkoKetteiYMD().setValue(new RDate(map.get("変更決定日").toString()));
-        henkoDiv.getTxtSeigenHenkoSashitomeSyuryoYMD().setValue(new RDate(map.get("一時差止終了日").toString()));
-        henkoDiv.getTxtSeigenHenkoTekiyoShuryoYMD().setValue(new RDate(map.get("変更適用終了日").toString()));
-
-        panel.getTxtSeigenTainoKojoKetteiYMD().setValue(new RDate(map.get("滞納控除決定日").toString()));
-        panel.getTxtSeigenChoshuShometsuKikan().setFromValue(new RDate(map.get("徴収権消滅開始日").toString()));
-        panel.getTxtSeigenChoshuShometsuKikan().setToValue(new RDate(map.get("徴収権消滅終了日").toString()));
-        panel.getTxtSeigenNofuzumiKikan().setFromValue(new RDate(map.get("納付済開始日").toString()));
-        panel.getTxtSeigenNofuzumiKikan().setToValue(new RDate(map.get("納付済終了日").toString()));
-
-        SogoShokaiKyufuSeigenGengakuDiv gengakuDiv = panel.getSogoShokaiKyufuSeigenGengaku();
-        gengakuDiv.getTxtSeigenGengakuKikan().setFromValue(new RDate(map.get("減額開始日").toString()));
-        gengakuDiv.getTxtSeigenGengakuKikan().setToValue(new RDate(map.get("減額終了日").toString()));
-        gengakuDiv.getTxtSeigenGengakuKetteiYMD().setValue(new RDate(map.get("減額決定日").toString()));
-        gengakuDiv.getTxtSeigenGengakuTekiyoKikan().setFromValue(new RDate(map.get("減額適用開始日").toString()));
-        gengakuDiv.getTxtSeigenGengakuTekiyoKikan().setToValue(new RDate(map.get("減額適用終了日").toString()));
-
-        response.data = panel;
-        return response;
-    }
-
-    // 給付情報を設定する
-    private void setKyufuInfo(tabSogoShokaiKyufuDiv panel) {
-        setKyufuKyotakuServiceKeikakuInfo(panel.getTplSogoShokaiKyufuKyotakuServiceKeikaku());
-        setKyufuKogakuKaigoServiceInfo(panel.getTplSogoShokaiKyufuKogakuKaigoService());
-        setKyufuShokanBaraiInfo(panel.getTplSogoShokaiKyufuShokanBarai());
-        setKyufuKagoMoushitateshoInfo(panel.getTplSogoShokaiKyufuKagoMoushitatesho());
-        setKyufuSaishinsaMoushitateshoInfo(panel.getTplSogoShokaiKyufuSaishinsaMoushitatesho());
-    }
-
     // 給付：居宅サービス計画情報を設定する
     private void setKyufuKyotakuServiceKeikakuInfo(tplSogoShokaiKyufuKyotakuServiceKeikakuDiv panel) {
-        List<HashMap> mapList = YamlLoader.FOR_DBZ.loadAsList(YML_SERVICE_KEIKAKU);
+        List<HashMap> mapList = getYamlData(YML_SERVICE_KEIKAKU);
         List<dgSogoShokaiKyufuKyotakuServiceKeikakuList_Row> list = new ArrayList<>();
         for (int index = 0; index < mapList.size(); index++) {
             HashMap map = mapList.get(index);
@@ -822,6 +978,21 @@ public class SogoShokaiInfo {
             ));
         }
         panel.getDgSogoShokaiKyufuKyotakuServiceKeikakuList().setDataSource(list);
+    }
+
+    // 給付：居宅サービス計画詳細情報を設定する
+    private void setKyufuKyotakuServiceKeikakuDetailInfo(SogoShokaiKyotakuServiceKeikakuInfoDiv panel) {
+        HashMap map = getYamlData(YML_SERVICE_KEIKAKU).get(0);
+        panel.getTxtKeikakuTodokedeYMD().setValue(new RDate(map.get("届出日").toString()));
+        panel.getTxtKeikakuHenkoYMD().setValue(new RDate(map.get("変更日").toString()));
+        panel.getTxtKeikakuJigyoshaShurui().setValue(new RString(map.get("事業者種類").toString()));
+        panel.getTxtKeikakuJigyoshaNo().setValue(new RString(map.get("事業者コード").toString()));
+        panel.getTxtKeikakuJigyoshaName().setValue(new RString(map.get("事業者名称").toString()));
+        panel.getTxtKeikakuServiceShurui().setValue(new RString(map.get("サービス種類").toString()));
+        panel.getTxtKeikakuSakuseiKubun().setValue(new RString(map.get("計画作成区分").toString()));
+        panel.getTxtKeikakuYM().setValue(new RDate(map.get("計画年月").toString()));
+        panel.getTxtKeikakuKikan().setFromValue(new RDate(map.get("適用開始日").toString()));
+        panel.getTxtKeikakuKikan().setToValue(new RDate(map.get("適用終了日").toString()));
     }
 
     // 給付：居宅サービス計画情報を作成する
@@ -838,34 +1009,9 @@ public class SogoShokaiInfo {
                 new RString(txtHenkoYMD));
     }
 
-    /**
-     * 居宅サービス計画情報ロード時の処理です。
-     *
-     * @param panel panel
-     * @return ResponseData
-     */
-    public ResponseData<SogoShokaiKyotakuServiceKeikakuInfoDiv> onLoad_KyotakuServiceKeikakuInfo(SogoShokaiKyotakuServiceKeikakuInfoDiv panel) {
-        ResponseData<SogoShokaiKyotakuServiceKeikakuInfoDiv> response = new ResponseData<>();
-
-        HashMap map = YamlLoader.FOR_DBZ.loadAsList(YML_SERVICE_KEIKAKU).get(0);
-        panel.getTxtKeikakuTodokedeYMD().setValue(new RDate(map.get("届出日").toString()));
-        panel.getTxtKeikakuHenkoYMD().setValue(new RDate(map.get("変更日").toString()));
-        panel.getTxtKeikakuJigyoshaShurui().setValue(new RString(map.get("事業者種類").toString()));
-        panel.getTxtKeikakuJigyoshaNo().setValue(new RString(map.get("事業者コード").toString()));
-        panel.getTxtKeikakuJigyoshaName().setValue(new RString(map.get("事業者名称").toString()));
-        panel.getTxtKeikakuServiceShurui().setValue(new RString(map.get("サービス種類").toString()));
-        panel.getTxtKeikakuSakuseiKubun().setValue(new RString(map.get("計画作成区分").toString()));
-        panel.getTxtKeikakuYM().setValue(new RDate(map.get("計画年月").toString()));
-        panel.getTxtKeikakuKikan().setFromValue(new RDate(map.get("適用開始日").toString()));
-        panel.getTxtKeikakuKikan().setToValue(new RDate(map.get("適用終了日").toString()));
-
-        response.data = panel;
-        return response;
-    }
-
     // 給付：高額介護サービス情報を設定する
     private void setKyufuKogakuKaigoServiceInfo(tplSogoShokaiKyufuKogakuKaigoServiceDiv panel) {
-        List<HashMap> mapList = YamlLoader.FOR_DBZ.loadAsList(YML_KOGAKU_SERVICE);
+        List<HashMap> mapList = getYamlData(YML_KOGAKU_SERVICE);
         List<dgSogoShokaiKyufuKogakuKaigoServiceList_Row> list = new ArrayList<>();
         for (int index = 0; index < mapList.size(); index++) {
             HashMap map = mapList.get(index);
@@ -877,28 +1023,9 @@ public class SogoShokaiInfo {
         panel.getDgSogoShokaiKyufuKogakuKaigoServiceList().setDataSource(list);
     }
 
-    // 給付：高額介護サービス情報を作成する
-    private dgSogoShokaiKyufuKogakuKaigoServiceList_Row createKyufuKogakuKaigoServiceListRow(
-            String txtTeikyoYM,
-            String txtShinseiYMD,
-            String txtKetteiYMD) {
-        return new dgSogoShokaiKyufuKogakuKaigoServiceList_Row(
-                new ButtonDialog(),
-                new RString(txtTeikyoYM),
-                new RString(txtShinseiYMD),
-                new RString(txtKetteiYMD));
-    }
-
-    /**
-     * 高額介護サービス費情報ロード時の処理です。
-     *
-     * @param panel panel
-     * @return ResponseData
-     */
-    public ResponseData<SogoShokaiKogakuKaigoServicehiInfoDiv> onLoad_KogakuKaigoServicehiInfo(SogoShokaiKogakuKaigoServicehiInfoDiv panel) {
-        ResponseData<SogoShokaiKogakuKaigoServicehiInfoDiv> response = new ResponseData<>();
-
-        HashMap map = YamlLoader.FOR_DBZ.loadAsList(YML_KOGAKU_SERVICE).get(0);
+    // 給付：高額介護サービス詳細情報を設定する
+    private void setKyufuKogakuKaigoServiceDetailInfo(SogoShokaiKogakuKaigoServicehiInfoDiv panel) {
+        HashMap map = getYamlData(YML_KOGAKU_SERVICE).get(0);
         panel.getTxtKogakuTeikyoYM().setValue(new RDate(map.get("提供年月").toString()));
         panel.getTxtKogakuShinseiYMD().setValue(new RDate(map.get("申請日").toString()));
         panel.getTxtKogakuShiharaigaku().setValue(new Decimal(map.get("本人支払額").toString()));
@@ -933,14 +1060,23 @@ public class SogoShokaiInfo {
         SogoShokaiKogakuKokuhorenSofuDiv sofuDiv = panel.getSogoShokaiKogakuKokuhorenSofu();
         sofuDiv.getTxtKogakuKokuhorenSofuYM().setValue(new RDate(map.get("送付年月").toString()));
         sofuDiv.getTxtKogakuKokuhorenUketoriYM().setValue(new RDate(map.get("決定受取年月").toString()));
+    }
 
-        response.data = panel;
-        return response;
+    // 給付：高額介護サービス情報を作成する
+    private dgSogoShokaiKyufuKogakuKaigoServiceList_Row createKyufuKogakuKaigoServiceListRow(
+            String txtTeikyoYM,
+            String txtShinseiYMD,
+            String txtKetteiYMD) {
+        return new dgSogoShokaiKyufuKogakuKaigoServiceList_Row(
+                new ButtonDialog(),
+                new RString(txtTeikyoYM),
+                new RString(txtShinseiYMD),
+                new RString(txtKetteiYMD));
     }
 
     // 給付：償還払情報を設定する
     private void setKyufuShokanBaraiInfo(tplSogoShokaiKyufuShokanBaraiDiv panel) {
-        List<HashMap> mapList = YamlLoader.FOR_DBZ.loadAsList(YML_SHOKAN_BARAI);
+        List<HashMap> mapList = getYamlData(YML_SHOKAN_BARAI);
         List<dgSogoShokaiKyufuShokanBaraiList_Row> list = new ArrayList<>();
         for (int index = 0; index < mapList.size(); index++) {
             HashMap map = mapList.get(index);
@@ -976,39 +1112,9 @@ public class SogoShokaiInfo {
                 new RString(txtJikoFutanGokei));
     }
 
-    /**
-     * 福祉用具購入費情報ロード時の処理です。
-     *
-     * @param panel panel
-     * @return ResponseData
-     */
-    public ResponseData<SogoShokaiFukushiYoguKonyuhiInfoDiv> onLoad_FukushiYoguKonyuhiInfo(SogoShokaiFukushiYoguKonyuhiInfoDiv panel) {
-        ResponseData<SogoShokaiFukushiYoguKonyuhiInfoDiv> response = new ResponseData<>();
-
-        createFukushiYoguKonyuhiInfo(panel, 0);
-
-        response.data = panel;
-        return response;
-    }
-
-    /**
-     * 福祉用具購入費明細情報選択時の処理です。
-     *
-     * @param panel panel
-     * @return ResponseData
-     */
-    public ResponseData<SogoShokaiFukushiYoguKonyuhiInfoDiv> onClick_btnSelectYoguKonyuhi(SogoShokaiFukushiYoguKonyuhiInfoDiv panel) {
-        ResponseData<SogoShokaiFukushiYoguKonyuhiInfoDiv> response = new ResponseData<>();
-
-        createFukushiYoguKonyuhiInfo(panel, panel.getDgYoguSeikyuDetail().getClickedRowId());
-
-        response.data = panel;
-        return response;
-    }
-
-    // 福祉用具購入費情報を作成する
-    private void createFukushiYoguKonyuhiInfo(SogoShokaiFukushiYoguKonyuhiInfoDiv panel, int meisaiIndex) {
-        HashMap map = YamlLoader.FOR_DBZ.loadAsList(YML_FUKUSHI_YOGU_KONYUHI).get(0);
+    // 給付：福祉用具購入費詳細情報を設定する
+    private void setFukushiYoguKonyuhiDetailInfo(SogoShokaiFukushiYoguKonyuhiInfoDiv panel, int meisaiIndex) {
+        HashMap map = getYamlData(YML_YOGU_KONYUHI).get(0);
         panel.getTxtTeikyoYM().setValue(new RDate(map.get("提供年月").toString()));
         panel.getTxtSeiriNo().setValue(new RString(map.get("整理番号").toString()));
         panel.getTxtKyufuritsu().setValue(new Decimal(map.get("給付率").toString()));
@@ -1023,7 +1129,7 @@ public class SogoShokaiInfo {
         summaryDiv.getTxtYoguRiyoshaFutanAmountNow().setValue(new Decimal(map.get("今回利用者負担額").toString()));
         summaryDiv.getTxtYoguLimitOverAmountNow().setValue(new Decimal(map.get("今回限度超過額").toString()));
 
-        List<HashMap> mapList = YamlLoader.FOR_DBZ.loadAsList(YML_FUKUSHI_YOGU_KONYUHI_MEISAI);
+        List<HashMap> mapList = getYamlData(YML_YOGU_KONYUHI_MEISAI);
         List<dgYoguSeikyuDetail_Row> list = new ArrayList<>();
         for (int index = 0; index < mapList.size(); index++) {
             HashMap meisaiMap = mapList.get(index);
@@ -1065,22 +1171,9 @@ public class SogoShokaiInfo {
                 new RString(txtShinsaMethod));
     }
 
-    /**
-     * 住宅改修費情報ロード時の処理です。
-     *
-     * @param panel panel
-     * @return ResponseData
-     */
-    public ResponseData<SogoShokaiJutakuKaishuhiInfoDiv> onLoad_JutakuKaishuhiInfo(SogoShokaiJutakuKaishuhiInfoDiv panel) {
-        ResponseData<SogoShokaiJutakuKaishuhiInfoDiv> response = new ResponseData<>();
-
-        response.data = panel;
-        return response;
-    }
-
     // 給付：過誤申立書情報を設定する
     private void setKyufuKagoMoushitateshoInfo(tplSogoShokaiKyufuKagoMoushitateshoDiv panel) {
-        List<HashMap> mapList = YamlLoader.FOR_DBZ.loadAsList(YML_KAGO_MOUSHITATESHO);
+        List<HashMap> mapList = getYamlData(YML_KAGO_MOUSHITATE);
         List<dgSogoShokaiKyufuKagoMoushitateshoList_Row> list = new ArrayList<>();
         for (int index = 0; index < mapList.size(); index++) {
             HashMap map = mapList.get(index);
@@ -1093,30 +1186,9 @@ public class SogoShokaiInfo {
         panel.getDgSogoShokaiKyufuKagoMoushitateshoList().setDataSource(list);
     }
 
-    // 給付：過誤申立書情報を作成する
-    private dgSogoShokaiKyufuKagoMoushitateshoList_Row createKyufuKagoMoushitateshoListRow(
-            String txtMoushitateYMD,
-            String txtJigyosha,
-            String txtTeikyoYM,
-            String txtRiyu) {
-        return new dgSogoShokaiKyufuKagoMoushitateshoList_Row(
-                new ButtonDialog(),
-                new RString(txtMoushitateYMD),
-                new RString(txtJigyosha),
-                new RString(txtTeikyoYM),
-                new RString(txtRiyu));
-    }
-
-    /**
-     * 過誤申立情報ロード時の処理です。
-     *
-     * @param panel panel
-     * @return ResponseData
-     */
-    public ResponseData<SogoShokaiKagoMoushitateInfoDiv> onLoad_KagoMoushitateInfo(SogoShokaiKagoMoushitateInfoDiv panel) {
-        ResponseData<SogoShokaiKagoMoushitateInfoDiv> response = new ResponseData<>();
-
-        HashMap map = YamlLoader.FOR_DBZ.loadAsList(YML_KAGO_MOUSHITATESHO).get(0);
+    // 給付：過誤申立書明細情報を設定する
+    private void setKyufuKagoMoushitateshoDetailInfo(SogoShokaiKagoMoushitateInfoDiv panel) {
+        HashMap map = getYamlData(YML_KAGO_MOUSHITATE).get(0);
         panel.getTxtKagoTaishoYM().setValue(new RDate(map.get("対象年月").toString()));
         panel.getTxtKagoMoshitateYMD().setValue(new RDate(map.get("申立日").toString()));
         panel.getTxtKagoTeikyoYM().setValue(new RDate(map.get("サービス提供年月").toString()));
@@ -1138,14 +1210,25 @@ public class SogoShokaiInfo {
         kohiDiv.getTxtKagoKohiHokenshaNo().setValue(new RString(map.get("証記載保険者番号").toString()));
         kohiDiv.getTxtKagoKohiTanisu().setValue(new Decimal(map.get("公費単位数").toString()));
         kohiDiv.getTxtKagoKohiFutangaku().setValue(new Decimal(map.get("公費負担額").toString()));
+    }
 
-        response.data = panel;
-        return response;
+    // 給付：過誤申立書情報を作成する
+    private dgSogoShokaiKyufuKagoMoushitateshoList_Row createKyufuKagoMoushitateshoListRow(
+            String txtMoushitateYMD,
+            String txtJigyosha,
+            String txtTeikyoYM,
+            String txtRiyu) {
+        return new dgSogoShokaiKyufuKagoMoushitateshoList_Row(
+                new ButtonDialog(),
+                new RString(txtMoushitateYMD),
+                new RString(txtJigyosha),
+                new RString(txtTeikyoYM),
+                new RString(txtRiyu));
     }
 
     // 給付：再審査申立書情報を設定する
     private void setKyufuSaishinsaMoushitateshoInfo(tplSogoShokaiKyufuSaishinsaMoushitateshoDiv panel) {
-        List<HashMap> mapList = YamlLoader.FOR_DBZ.loadAsList(YML_SAISHINSA_MOUSHITATESHO);
+        List<HashMap> mapList = getYamlData(YML_SAISHIN_MOUSHITATE);
         List<dgSogoShokaiKyufuSaishinsaMoushitateshoList_Row> list = new ArrayList<>();
         for (int index = 0; index < mapList.size(); index++) {
             HashMap map = mapList.get(index);
@@ -1161,34 +1244,9 @@ public class SogoShokaiInfo {
         panel.getDgSogoShokaiKyufuSaishinsaMoushitateshoList().setDataSource(list);
     }
 
-    // 給付：再審査申立書情報を作成する
-    private dgSogoShokaiKyufuSaishinsaMoushitateshoList_Row createKyufuSaishinsaMoushitateshoListRow(
-            String txtMoushitateYMD,
-            String txtJigyosha,
-            String txtTeikyoYM,
-            String txtService,
-            String txtTanisu,
-            String txtRiyu) {
-        return new dgSogoShokaiKyufuSaishinsaMoushitateshoList_Row(
-                new ButtonDialog(),
-                new RString(txtMoushitateYMD),
-                new RString(txtJigyosha),
-                new RString(txtTeikyoYM),
-                new RString(txtService),
-                new RString(txtTanisu),
-                new RString(txtRiyu));
-    }
-
-    /**
-     * 再審査申立情報ロード時の処理です。
-     *
-     * @param panel panel
-     * @return ResponseData
-     */
-    public ResponseData<SogoShokaiSaishinsaMoushitateInfoDiv> onLoad_SaishinsaMoushitateInfo(SogoShokaiSaishinsaMoushitateInfoDiv panel) {
-        ResponseData<SogoShokaiSaishinsaMoushitateInfoDiv> response = new ResponseData<>();
-
-        HashMap map = YamlLoader.FOR_DBZ.loadAsList(YML_SAISHINSA_MOUSHITATESHO).get(0);
+    // 給付：再審査申立書詳細情報を設定する
+    private void setKyufuSaishinsaMoushitateshoDetailInfo(SogoShokaiSaishinsaMoushitateInfoDiv panel) {
+        HashMap map = getYamlData(YML_SAISHIN_MOUSHITATE).get(0);
         panel.getTxtSaishinsaTaishoYM().setValue(new RDate(map.get("対象年月").toString()));
         panel.getTxtSaishinsaMoshitateYMD().setValue(new RDate(map.get("申立日").toString()));
         panel.getTxtSaishinsaTeikyoYM().setValue(new RDate(map.get("サービス提供年月").toString()));
@@ -1223,14 +1281,29 @@ public class SogoShokaiInfo {
         kohiDiv.getTxtSaishinsaKohiKetteiTanisu().setValue(new Decimal(map.get("公費決定単位数").toString()));
         kohiDiv.getTxtSaishinsaKohiChoseiTanisu().setValue(new Decimal(map.get("公費調整単位数").toString()));
         kohiDiv.getTxtSaishinsaKohiFutangaku().setValue(new Decimal(map.get("公費負担額").toString()));
+    }
 
-        response.data = panel;
-        return response;
+    // 給付：再審査申立書情報を作成する
+    private dgSogoShokaiKyufuSaishinsaMoushitateshoList_Row createKyufuSaishinsaMoushitateshoListRow(
+            String txtMoushitateYMD,
+            String txtJigyosha,
+            String txtTeikyoYM,
+            String txtService,
+            String txtTanisu,
+            String txtRiyu) {
+        return new dgSogoShokaiKyufuSaishinsaMoushitateshoList_Row(
+                new ButtonDialog(),
+                new RString(txtMoushitateYMD),
+                new RString(txtJigyosha),
+                new RString(txtTeikyoYM),
+                new RString(txtService),
+                new RString(txtTanisu),
+                new RString(txtRiyu));
     }
 
     // 賦課情報を設定する
     private void setFukaInfo(SogoShokaiFukaDiv panel) {
-        List<HashMap> mapList = YamlLoader.FOR_DBZ.loadAsList(YML_FUKA);
+        List<HashMap> mapList = getYamlData(YML_FUKA);
         List<dgSogoShokaiFukaList_Row> list = new ArrayList<>();
         for (int index = 0; index < mapList.size(); index++) {
             HashMap map = mapList.get(index);
@@ -1243,30 +1316,9 @@ public class SogoShokaiInfo {
         panel.getDgSogoShokaiFukaList().setDataSource(list);
     }
 
-    // 賦課情報を作成する
-    private dgSogoShokaiFukaList_Row createFukaListRow(
-            String txtChoteiNendo,
-            String txtFukaNendo,
-            String txtKoseiTsuki,
-            String txtRiyu) {
-        return new dgSogoShokaiFukaList_Row(
-                new ButtonDialog(),
-                new RString(txtChoteiNendo),
-                new RString(txtFukaNendo),
-                new RString(txtKoseiTsuki),
-                new RString(txtRiyu));
-    }
-
-    /**
-     * 賦課情報ロード時の処理です。
-     *
-     * @param panel panel
-     * @return ResponseData
-     */
-    public ResponseData<SogoShokaiFukaInfoDiv> onLoad_FukaInfo(SogoShokaiFukaInfoDiv panel) {
-        ResponseData<SogoShokaiFukaInfoDiv> response = new ResponseData<>();
-
-        HashMap map = YamlLoader.FOR_DBZ.loadAsList(YML_FUKA).get(0);
+    // 賦課詳細情報を設定する
+    private void setFukaDetailInfo(SogoShokaiFukaInfoDiv panel) {
+        HashMap map = getYamlData(YML_FUKA).get(0);
         panel.getTxtFukaChoteiNendo().setValue(new RDate(map.get("調定年度").toString()));
         panel.getTxtFukaChoteiJiyu().setValue(new RString(map.get("調定事由").toString()));
         panel.getTxtFukaFukaNendo().setValue(new RDate(map.get("賦課年度").toString()));
@@ -1314,20 +1366,25 @@ public class SogoShokaiInfo {
         SogoShokaiFukaTokubetsuChoshuDiv choshuDiv = panel.getSogoShokaiFukaTokubetsuChoshu();
         choshuDiv.getTxtFukaTokubetsuChoshuNenkin().setValue(new RString(map.get("対象年金").toString()));
         choshuDiv.getTxtFukaTokubetsuChoshuGimusha().setValue(new RString(map.get("義務者").toString()));
-
-        response.data = panel;
-        return response;
     }
 
-    // 住民情報を設定する
-    private void setJuminInfo(SogoShokaiJuminDiv panel) {
-        setJuminKyokaiKanriInfo(panel.getSogoShokaiJuminKyokaiKanri());
-        setJuminSogoJigyoInfo(panel.getSogoShokaiJuminSogoJigyo());
+    // 賦課情報を作成する
+    private dgSogoShokaiFukaList_Row createFukaListRow(
+            String txtChoteiNendo,
+            String txtFukaNendo,
+            String txtKoseiTsuki,
+            String txtRiyu) {
+        return new dgSogoShokaiFukaList_Row(
+                new ButtonDialog(),
+                new RString(txtChoteiNendo),
+                new RString(txtFukaNendo),
+                new RString(txtKoseiTsuki),
+                new RString(txtRiyu));
     }
 
     // 住民：境界層管理情報を設定する
     private void setJuminKyokaiKanriInfo(SogoShokaiJuminKyokaiKanriDiv panel) {
-        List<HashMap> mapList = YamlLoader.FOR_DBZ.loadAsList(YML_KYOKAISO_KANRI);
+        List<HashMap> mapList = getYamlData(YML_KYOKAISO_KANRI);
         List<dgSogoShokaiJuminKyokaiKanriList_Row> list = new ArrayList<>();
         for (int index = 0; index < mapList.size(); index++) {
             HashMap map = mapList.get(index);
@@ -1348,7 +1405,7 @@ public class SogoShokaiInfo {
 
     // 住民：総合事業対象者情報を設定する
     private void setJuminSogoJigyoInfo(SogoShokaiJuminSogoJigyoDiv panel) {
-        HashMap map = YamlLoader.FOR_DBZ.loadAsList(YML_SOGO_JIGYO_TAISHOSHA).get(0);
+        HashMap map = getYamlData(YML_SOGO_JIGYO_TAISHOSHA).get(0);
         panel.getTxtJigyoNijiKikan().setFromValue(new RDate(map.get("二次予防有効開始日").toString()));
         panel.getTxtJigyoNijiKikan().setToValue(new RDate(map.get("二次予防有効終了日").toString()));
         panel.getTxtJigyoNijiYoboHanteiYMD().setValue(new RDate(map.get("二次予防判定日").toString()));
@@ -1376,5 +1433,4 @@ public class SogoShokaiInfo {
                 new RString(txtShotokuDankai),
                 new RString(txtKetteiYMD));
     }
-
 }

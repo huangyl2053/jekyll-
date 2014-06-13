@@ -25,8 +25,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  */
 public class SogoShokaiSearch {
 
-    private final RString YML_SEARCH = new RString("dbz0010000/SearchData.yml");
-    private final RString YML_SEARCH_RESULT = new RString("dbz0010000/SearchResultData.yml");
+    private static final RString YML_SEARCH = new RString("dbz0010000/SearchData.yml");
+    private static final RString YML_SEARCH_RESULT = new RString("dbz0010000/SearchResultData.yml");
 
     /**
      * 画面ロード時の処理です。
@@ -37,10 +37,7 @@ public class SogoShokaiSearch {
     public ResponseData<SogoShokaiSearchDiv> onLoad(SogoShokaiSearchDiv panel) {
         ResponseData<SogoShokaiSearchDiv> response = new ResponseData<>();
 
-        HashMap map = YamlLoader.FOR_DBZ.loadAsList(YML_SEARCH).get(0);
-        SearchCriteriaOfKojinDiv kojinDiv = panel.getSogoShokaiSearchInfo().getSearchCriteriaOfKojin();
-        kojinDiv.getTxtShimei().setValue(new RString(map.get("氏名").toString()));
-        kojinDiv.getRadSearchPatternOfShimei().setSelectedItem(new RString("key0"));
+        setSerachInfo(panel);
 
         response.data = panel;
         return response;
@@ -55,7 +52,28 @@ public class SogoShokaiSearch {
     public ResponseData<SogoShokaiSearchDiv> onClick_btnSearch(SogoShokaiSearchDiv panel) {
         ResponseData<SogoShokaiSearchDiv> response = new ResponseData<>();
 
-        List<HashMap> mapList = YamlLoader.FOR_DBZ.loadAsList(YML_SEARCH_RESULT);
+        setSearchResultInfo(panel);
+
+        response.data = panel;
+        return response;
+    }
+
+    // Yamlデータを取得する
+    private List<HashMap> getYamlData(RString yamlName) {
+        return YamlLoader.DBZ.loadAsList(yamlName);
+    }
+
+    // 検索条件情報を設定する
+    private void setSerachInfo(SogoShokaiSearchDiv panel) {
+        HashMap map = getYamlData(YML_SEARCH).get(0);
+        SearchCriteriaOfKojinDiv kojinDiv = panel.getSogoShokaiSearchInfo().getSearchCriteriaOfKojin();
+        kojinDiv.getTxtShimei().setValue(new RString(map.get("氏名").toString()));
+        kojinDiv.getRadSearchPatternOfShimei().setSelectedItem(new RString("key0"));
+    }
+
+    // 該当者一覧情報を設定する
+    private void setSearchResultInfo(SogoShokaiSearchDiv panel) {
+        List<HashMap> mapList = getYamlData(YML_SEARCH_RESULT);
         List<dgSearchResult_Row> list = new ArrayList<>();
         for (int index = 0; index < mapList.size(); index++) {
             HashMap map = mapList.get(index);
@@ -76,9 +94,6 @@ public class SogoShokaiSearch {
             ));
         }
         panel.getSogoShokaiGaitoshaListInfo().getDgSearchResult().setDataSource(list);
-
-        response.data = panel;
-        return response;
     }
 
     // 該当者情報を作成する

@@ -621,7 +621,7 @@
               "dataName": "shutokuYMD",
               "toolTip": "",
               "bgColor": 0,
-              "width": 80,
+              "width": 90,
               "visible": true,
               "cellType": 0,
               "cellDetails": {
@@ -667,7 +667,7 @@
               "dataName": "soshitsuYMD",
               "toolTip": "",
               "bgColor": 0,
-              "width": 80,
+              "width": 90,
               "visible": true,
               "cellType": 0,
               "cellDetails": {
@@ -729,7 +729,7 @@
               "dataName": "henkoYMD",
               "toolTip": "",
               "bgColor": 0,
-              "width": 80,
+              "width": 90,
               "visible": true,
               "cellType": 0,
               "cellDetails": {
@@ -775,7 +775,7 @@
               "dataName": "tekiyoYMD",
               "toolTip": "",
               "bgColor": 0,
-              "width": 80,
+              "width": 90,
               "visible": true,
               "cellType": 0,
               "cellDetails": {
@@ -821,7 +821,7 @@
               "dataName": "kaijoYMD",
               "toolTip": "",
               "bgColor": 0,
-              "width": 80,
+              "width": 90,
               "visible": true,
               "cellType": 0,
               "cellDetails": {
@@ -855,7 +855,7 @@
               "visible": true,
               "cellType": 0,
               "cellDetails": null,
-              "align": 2,
+              "align": 0,
               "resize": true,
               "isPrivateInfo": false,
               "sortKey": "kyuHokensha"
@@ -897,7 +897,7 @@
               "visible": true,
               "cellType": 0,
               "cellDetails": null,
-              "align": 2,
+              "align": 1,
               "resize": true,
               "isPrivateInfo": false,
               "sortKey": "chohyoKofuRirekiID"
@@ -975,6 +975,8 @@
             "isShowSelectButtonColumn": false,
             "isShowModifyButtonColumn": false,
             "isShowDeleteButtonColumn": false,
+            "limitRowCount": 0,
+            "selectedRowCount": 0,
             "header": {
              "combineColumns": [
               {
@@ -1035,7 +1037,7 @@
               "dataName": "tekiyoDate",
               "toolTip": "",
               "bgColor": 0,
-              "width": 80,
+              "width": 90,
               "visible": true,
               "cellType": 0,
               "cellDetails": {
@@ -1051,7 +1053,7 @@
               "dataName": "tekiyoTodokedeDate",
               "toolTip": "",
               "bgColor": 0,
-              "width": 80,
+              "width": 90,
               "visible": true,
               "cellType": 0,
               "cellDetails": {
@@ -1083,7 +1085,7 @@
               "dataName": "kaijoDate",
               "toolTip": "",
               "bgColor": 0,
-              "width": 80,
+              "width": 90,
               "visible": true,
               "cellType": 0,
               "cellDetails": {
@@ -1099,7 +1101,7 @@
               "dataName": "kaijoTodokedeDate",
               "toolTip": "",
               "bgColor": 0,
-              "width": 80,
+              "width": 90,
               "visible": true,
               "cellType": 0,
               "cellDetails": {
@@ -1143,7 +1145,7 @@
               "dataName": "nyushoDate",
               "toolTip": "",
               "bgColor": 0,
-              "width": 80,
+              "width": 90,
               "visible": true,
               "cellType": 0,
               "cellDetails": {
@@ -1159,7 +1161,7 @@
               "dataName": "taishoDate",
               "toolTip": "",
               "bgColor": 0,
-              "width": 80,
+              "width": 90,
               "visible": true,
               "cellType": 0,
               "cellDetails": {
@@ -1263,10 +1265,16 @@
            "gridSetting": {
             "rowHeight": 25,
             "isMultiSelectable": false,
+            "isShowHeader": true,
             "isShowFooter": true,
             "isShowFilter": false,
             "isShowFilterButton": false,
             "isShowRowState": false,
+            "isShowSelectButtonColumn": false,
+            "isShowModifyButtonColumn": false,
+            "isShowDeleteButtonColumn": false,
+            "limitRowCount": 0,
+            "selectedRowCount": 0,
             "header": {
              "combineColumns": [
               {
@@ -1303,7 +1311,7 @@
               "dataName": "tekiyoJiyu",
               "toolTip": "",
               "bgColor": 0,
-              "width": 80,
+              "width": 100,
               "visible": true,
               "cellType": 0,
               "cellDetails": {
@@ -1319,7 +1327,7 @@
               "dataName": "tekiyoDate",
               "toolTip": "",
               "bgColor": 0,
-              "width": 80,
+              "width": 90,
               "visible": true,
               "cellType": 0,
               "cellDetails": {
@@ -1335,7 +1343,7 @@
               "dataName": "tekiyoTodokedeDate",
               "toolTip": "",
               "bgColor": 0,
-              "width": 80,
+              "width": 90,
               "visible": true,
               "cellType": 0,
               "cellDetails": {
@@ -1351,7 +1359,7 @@
               "dataName": "kaijoJiyu",
               "toolTip": "",
               "bgColor": 0,
-              "width": 80,
+              "width": 100,
               "visible": true,
               "cellType": 0,
               "cellDetails": null,
@@ -1365,7 +1373,7 @@
               "dataName": "kaijoDate",
               "toolTip": "",
               "bgColor": 0,
-              "width": 80,
+              "width": 90,
               "visible": true,
               "cellType": 0,
               "cellDetails": {
@@ -1381,7 +1389,7 @@
               "dataName": "kaijoTodokedeDate",
               "toolTip": "",
               "bgColor": 0,
-              "width": 80,
+              "width": 90,
               "visible": true,
               "cellType": 0,
               "cellDetails": {
@@ -1397,7 +1405,7 @@
               "dataName": "nyushoDate",
               "toolTip": "",
               "bgColor": 0,
-              "width": 80,
+              "width": 90,
               "visible": true,
               "cellType": 0,
               "cellDetails": {
@@ -1413,7 +1421,7 @@
               "dataName": "taishoDate",
               "toolTip": "",
               "bgColor": 0,
-              "width": 80,
+              "width": 90,
               "visible": true,
               "cellType": 0,
               "cellDetails": {
@@ -4341,12 +4349,12 @@
     {
      "fieldName": "SogoShokaiGaitoshaListInfo_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
      "event": "onClick",
-     "transition": ""
+     "transition": "該当者検索"
     },
     {
      "fieldName": "SogoShokaiGaitoshaListInfo_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
      "event": "onClick",
-     "transition": ""
+     "transition": "総合照会"
     },
     {
      "fieldName": "btnGaitoshaReturn",
@@ -4381,7 +4389,7 @@
     {
      "fieldName": "SogoShokaiSearchInfo_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
      "event": "onClick",
-     "transition": ""
+     "transition": "該当者一覧"
     },
     {
      "fieldName": "SogoShokaiGaitoshaListInfo_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
