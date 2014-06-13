@@ -8,15 +8,15 @@ package jp.co.ndensan.reams.db.dbu.divcontroller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0410011.HihokenshashoHakkoTaishoGaitoshaDiv;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0410011.SearchHihokenshashoHakkoTaishoshaDiv;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0410011.dgHihokenshashoHakkoTaishoGaitosha_Row;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0410011.SearchHihokenshashoHakkoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgSearchResult_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * 被保険者証発行該当者一覧Divを制御します。
@@ -28,36 +28,43 @@ public class HihokenshashoHakkoTaishoGaitosha {
     /**
      * 被保険者証発行対象者検索条件画面-「以上の条件で検索する」ボタン押下時の処理を表します。
      *
-     * @param panel HihokenshashoHakkoTaishoGaitoshaDiv
-     * @param panel2 SearchHihokenshashoHakkoTaishoshaDiv
+     * @param panel SearchHihokenshashoHakkoDiv
      * @return ResponseData
      */
-    public ResponseData<HihokenshashoHakkoTaishoGaitoshaDiv> onClick_BtnSearchHihokenshashoHakkoTaishosha(
-            HihokenshashoHakkoTaishoGaitoshaDiv panel, SearchHihokenshashoHakkoTaishoshaDiv panel2) {
-        ResponseData<HihokenshashoHakkoTaishoGaitoshaDiv> response = new ResponseData<>();
+    public ResponseData<SearchHihokenshashoHakkoDiv> onClick_BtnSearchHihokenshashoHakkoTaishosha(
+            SearchHihokenshashoHakkoDiv panel) {
+        ResponseData<SearchHihokenshashoHakkoDiv> response = new ResponseData<>();
 
-        setHihokenshashoHakkoTaishoshaData(panel, panel2);
-        panel.setIsOpen(true);
+        setHihokenshashoHakkoTaishoshaData(panel);
+
+        //該当者一覧パネルをオープン
+        panel.getCcdHihokenshashoHakkoTaishoGaitosha().setIsOpen(true);
+
+        panel.getCcdHihokenshashoHakkoTaishoGaitosha().getButtonsForSearchResultOfHihokensha().
+                getBtnToResearch().setDisplayNone(true);
+
+        List<dgSearchResult_Row> arrayList = panel.getCcdHihokenshashoHakkoTaishoGaitosha().getDgSearchResult().getDataSource();
+        for (int i = 0; i < arrayList.size(); i++) {
+            dgSearchResult_Row searchResult_Row = arrayList.get(i);
+
+            searchResult_Row.getBirthDay().setReadOnly(true);
+        }
 
         response.data = panel;
         return response;
-        
+
     }
 
     /*
      *被保険者証発行対象者情報を設定します。
      */
-    private void setHihokenshashoHakkoTaishoshaData(HihokenshashoHakkoTaishoGaitoshaDiv panel,
-            SearchHihokenshashoHakkoTaishoshaDiv panel2) {
+    private void setHihokenshashoHakkoTaishoshaData(SearchHihokenshashoHakkoDiv panel) {
 
-        List<HashMap> hihokenshashoHakkoTaishoshaList = YamlLoader.FOR_DBU.loadAsList(
+        List<HashMap> hihokenshashoHakkoTaishoshaList = YamlLoader.DBU.loadAsList(
                 new RString("dbu0410011/HihokenshashoHakkoTaishoshaList.yml"));
 
-        RString selectedItemData = panel2.getSearchHihokenshashoHakkoTaishoshaMaeShorisha().
-                getDdlMaeShirishaRireki().getSelectedItem();
-
-        List arraydata = createRowHihokenshashoHakkoTaishoshaList(hihokenshashoHakkoTaishoshaList, selectedItemData);
-        DataGrid grid = panel.getDgHihokenshashoHakkoTaishoGaitosha();
+        List arraydata = createRowHihokenshashoHakkoTaishoshaList(hihokenshashoHakkoTaishoshaList);
+        DataGrid grid = panel.getCcdHihokenshashoHakkoTaishoGaitosha().getDgSearchResult();
         grid.setDataSource(arraydata);
 
     }
@@ -66,7 +73,7 @@ public class HihokenshashoHakkoTaishoGaitosha {
      *被保険者証発行対象者情報の初期値をセットします。
      */
     private List createRowHihokenshashoHakkoTaishoshaList(
-            List<HashMap> hihokenshashoHakkoTaishoshaList, RString selectedData) {
+            List<HashMap> hihokenshashoHakkoTaishoshaList) {
 
         List arrayDataList = new ArrayList();
 
@@ -75,23 +82,35 @@ public class HihokenshashoHakkoTaishoGaitosha {
             ControlGenerator ymlData = new ControlGenerator(hashMap);
 
             RString rsHihoNo = ymlData.getAsRString("hihoNo");
+            RString rsShikibetsuCode = ymlData.getAsRString("shikibetsuCode");
+            RString rsHihokenshaKbn = ymlData.getAsRString("hihokenshaKbn");
             RString rsShimei = ymlData.getAsRString("shimei");
-            RString rsBirthday = ymlData.getAsRString("birthday");
-            RString rsAge = ymlData.getAsRString("age");
+            RString rsKanashimei = ymlData.getAsRString("kanashimei");
+            RString rsShimeiAndKanaShimei = ymlData.getAsRString("shimeiAndKanaShimei");
             RString rsSeibetsu = ymlData.getAsRString("seibetsu");
+            TextBoxDate tdBirthday = ymlData.getAsTextBoxDate("birthday");
+            RString rsYubinNo = ymlData.getAsRString("yubinNo");
             RString rsJusho = ymlData.getAsRString("jusho");
+            RString rsKojinNo = ymlData.getAsRString("kojinNo");
+            RString rsJuminShubetsu = ymlData.getAsRString("juminShubetsu");
+            RString rsSetaiCode = ymlData.getAsRString("setaiCode");
 
-            if ("0".equals(selectedData.toString())
-                    || String.valueOf(i).equals(selectedData.toString())) {
-                arrayDataList.add(createRowHihokenshashoHakkoTaishoshaList(
-                        rsHihoNo,
-                        rsShimei,
-                        rsBirthday,
-                        rsAge,
-                        rsSeibetsu,
-                        rsJusho
-                ));
-            }
+            arrayDataList.add(createRowHihokenshashoHakkoTaishoshaList(
+                    rsHihoNo,
+                    rsShikibetsuCode,
+                    rsHihokenshaKbn,
+                    rsShimei,
+                    rsKanashimei,
+                    rsShimeiAndKanaShimei,
+                    rsSeibetsu,
+                    tdBirthday,
+                    rsYubinNo,
+                    rsJusho,
+                    rsKojinNo,
+                    rsJuminShubetsu,
+                    rsSetaiCode
+            ));
+
         }
         return arrayDataList;
     }
@@ -99,23 +118,37 @@ public class HihokenshashoHakkoTaishoGaitosha {
     /*
      *引数を元にデータグリッド内に挿入する被保険者証発行対象者情報データを作成します。
      */
-    private dgHihokenshashoHakkoTaishoGaitosha_Row createRowHihokenshashoHakkoTaishoshaList(
+    private dgSearchResult_Row createRowHihokenshashoHakkoTaishoshaList(
             RString hihoNo,
+            RString shikibetsuCode,
+            RString hihokenshaKbn,
             RString shimei,
-            RString birthday,
-            RString age,
+            RString kanashimei,
+            RString shimeiAndKanaShimei,
             RString seibetsu,
-            RString jusho
+            TextBoxDate birthday,
+            RString yubinNo,
+            RString jusho,
+            RString kojinNo,
+            RString juminShubetsu,
+            RString setaiCode
     ) {
-        dgHihokenshashoHakkoTaishoGaitosha_Row rowHihokenshashoHakkoTaishoshaList
-                = new dgHihokenshashoHakkoTaishoGaitosha_Row(
+        dgSearchResult_Row rowHihokenshashoHakkoTaishoshaList
+                = new dgSearchResult_Row(
                         new Button(),
                         hihoNo,
+                        shikibetsuCode,
+                        hihokenshaKbn,
                         shimei,
-                        birthday,
-                        age,
+                        kanashimei,
+                        shimeiAndKanaShimei,
                         seibetsu,
-                        jusho
+                        birthday,
+                        yubinNo,
+                        jusho,
+                        kojinNo,
+                        juminShubetsu,
+                        setaiCode
                 );
         return rowHihokenshashoHakkoTaishoshaList;
     }

@@ -7,13 +7,12 @@ package jp.co.ndensan.reams.db.dbu.divcontroller;
 
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0410011.HihokenshashoHakkoTaishoGaitoshaDiv;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0410011.SearchHihokenshashoHakkoDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0410011.HihokenshashoHakkoTaishoshaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -31,75 +30,145 @@ public class HihokenshashoHakkoTaishoshaJoho {
      * @return ResponseData
      */
     public ResponseData<HihokenshashoHakkoTaishoshaJohoDiv> dispTaishoshaJoho(
-            HihokenshashoHakkoTaishoshaJohoDiv panel, HihokenshashoHakkoTaishoGaitoshaDiv panel2) {
+            HihokenshashoHakkoTaishoshaJohoDiv panel, SearchHihokenshashoHakkoDiv panel2) {
         ResponseData<HihokenshashoHakkoTaishoshaJohoDiv> response = new ResponseData<>();
 
-        List<HashMap> hihokenshashoHakkoTaishoshaJohoList = YamlLoader.FOR_DBU.loadAsList(
+        List<HashMap> hihokenshashoHakkoTaishoshaJohoList = YamlLoader.DBU.loadAsList(
                 new RString("dbu0410011/HihokenshashoHakkoTaishoshaJoho.yml"));
 
         HashMap hashMap = hihokenshashoHakkoTaishoshaJohoList.get(
-                panel2.getDgHihokenshashoHakkoTaishoGaitosha().getClickedRowId());
+                panel2.getCcdHihokenshashoHakkoTaishoGaitosha().getDgSearchResult().getClickedRowId());
 
         ControlGenerator ymlData = new ControlGenerator(hashMap);
 
         //対象者情報の出力
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTblAtenaSimple().getTxtAtenaMeisho().
-                setValue(panel2.getDgHihokenshashoHakkoTaishoGaitosha().getClickedItem().getShimei());
+        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtAtenaMeisho().
+                setValue(panel2.getCcdHihokenshashoHakkoTaishoGaitosha().getDgSearchResult().getClickedItem().getShimei());
 
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTblAtenaSimple().getTxtAtenaKanaMeisho().
-                setValue(ymlData.getAsRString("shimeikana"));
+        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtAtenaKanaMeisho().
+                setValue(panel2.getCcdHihokenshashoHakkoTaishoGaitosha().getDgSearchResult().getClickedItem().getKanaShimsei());
 
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTblAtenaSimple().getTxtJusho().
-                setValue(panel2.getDgHihokenshashoHakkoTaishoGaitosha().getClickedItem().getJusho());
+        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtJusho().
+                setValue(panel2.getCcdHihokenshashoHakkoTaishoGaitosha().getDgSearchResult().getClickedItem().getJusho());
 
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTblAtenaSimple().getTxtSeinengappiYMD().
-                setValue(new RDate(panel2.getDgHihokenshashoHakkoTaishoGaitosha().getClickedItem().
-                                getDateOfBirth().toString()));
+        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtSeinengappiYMD().
+                setValue(panel2.getCcdHihokenshashoHakkoTaishoGaitosha().getDgSearchResult().
+                        getClickedItem().getBirthDay().getValue());
 
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTblAtenaSimple().getTxtNenrei().
+        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtNenrei().
                 setValue(ymlData.getAsRString("nenrei"));
 
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTblAtenaSimple().getTxtSeibetsu().
-                setValue(panel2.getDgHihokenshashoHakkoTaishoGaitosha().getClickedItem().getGender());
+        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtSeibetsu().
+                setValue(panel2.getCcdHihokenshashoHakkoTaishoGaitosha().getDgSearchResult().
+                        getClickedItem().getGender());
 
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTblAtenaSimple().getTxtGyoseiku().
+        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtGyoseiku().
                 setValue(ymlData.getAsRString("gyoseiku"));
 
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTblAtenaSimple().getTxtYubinNo().
-                setValue(new YubinNo(ymlData.getAsRString("yubinno")));
+        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtYubinNo().
+                setValue(new YubinNo(panel2.getCcdHihokenshashoHakkoTaishoGaitosha().getDgSearchResult().
+                                getClickedItem().getYubinNo()));
 
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTblAtenaSimple().getTxtJuminShubetsu().
-                setValue(ymlData.getAsRString("juminshubetsu"));
+        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtNihonjinGaikokujin().
+                setValue(ymlData.getAsRString("nihonjingaikokujin"));
 
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTblAtenaSimple().getTxtJuminJotai().
+        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtJuminJotai().
                 setValue(ymlData.getAsRString("juminjotai"));
 
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTblAtenaSimple().getTxtShikibetsuCode().
-                setValue(ymlData.getAsRString("shikibetsucode"));
+        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtShikibetsuCode().
+                setValue(panel2.getCcdHihokenshashoHakkoTaishoGaitosha().getDgSearchResult().
+                        getClickedItem().getShikibetsuCode());
 
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTblAtenaSimple().getTxtKojinHojinCode().
-                setValue(ymlData.getAsRString("kojincode"));
+        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtKojinHojinCode().
+                setValue(panel2.getCcdHihokenshashoHakkoTaishoGaitosha().getDgSearchResult().
+                        getClickedItem().getKojinNo());
 
-        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTblAtenaSimple().getTxtSetaiCode().
-                setValue(ymlData.getAsRString("setaicode"));
+        panel.getHihokenshashoHakkoTaishoshaCommonJoho().getTxtSetaiCode().
+                setValue(panel2.getCcdHihokenshashoHakkoTaishoGaitosha().getDgSearchResult().
+                        getClickedItem().getSetaiCode());
 
-        panel.getHihokenshashoHakkoTaishoshaDbJoho().getTxtHihokenshaNo().
-                setValue(panel2.getDgHihokenshashoHakkoTaishoGaitosha().getClickedItem().getHihokenshaNo());
+        //介護資格基本情報
+        panel.getCcdKaigoShikakuKihon().getTxtHihokenshaNo().
+                setValue(panel2.getCcdHihokenshashoHakkoTaishoGaitosha().getDgSearchResult().
+                        getClickedItem().getHihokenshaNo());
 
-        panel.getHihokenshashoHakkoTaishoshaDbJoho().getTxtKyuHihokenshaNo().
-                setValue(ymlData.getAsRString("kyuhihono"));
+        if (ymlData.getAsRString("shutokuymd").toString().isEmpty()) {
+            panel.getCcdKaigoShikakuKihon().getTxtShutokuYmd().clearValue();
+        } else {
+            panel.getCcdKaigoShikakuKihon().getTxtShutokuYmd().
+                    setValue(ymlData.getAsRDate("shutokuymd"));
+        }
 
-        panel.getHihokenshashoHakkoTaishoshaDbJoho().getTxtYokaigodo().
-                setValue(ymlData.getAsRString("kaigodo"));
+        if (ymlData.getAsRString("shutokujiyu").toString().isEmpty()) {
+            panel.getCcdKaigoShikakuKihon().getTxtShutokuJiyu().clearValue();
+        } else {
+            panel.getCcdKaigoShikakuKihon().getTxtShutokuJiyu().
+                    setValue(ymlData.getAsRString("shutokujiyu"));
+        }
 
-        panel.getHihokenshashoHakkoTaishoshaDbJoho().getTxtNinteiKikan().
-                setFromValue(new RDate(ymlData.getAsRString("ninteikikanfrom").toString()));
+        if (ymlData.getAsRString("shikakuJotai").toString().isEmpty()) {
+            panel.getCcdKaigoShikakuKihon().getTxtShikakuJotai().clearValue();
+        } else {
+            panel.getCcdKaigoShikakuKihon().getTxtShikakuJotai().
+                    setValue(ymlData.getAsRString("shikakuJotai"));
+        }
 
-        panel.getHihokenshashoHakkoTaishoshaDbJoho().getTxtNinteiKikan().
-                setToValue(new RDate(ymlData.getAsRString("ninteikikanto").toString()));
+        if (ymlData.getAsRString("soshitsuymd").toString().isEmpty()) {
+            panel.getCcdKaigoShikakuKihon().getTxtSoshitsuYmd().clearValue();
+        } else {
+            panel.getCcdKaigoShikakuKihon().getTxtSoshitsuYmd().
+                    setValue(ymlData.getAsRDate("soshitsuymd"));
+        }
 
-        panel.getHihokenshashoHakkoTaishoshaDbJoho().getTxtKyuShichoson().
-                setValue(ymlData.getAsRString("kyushichoson"));
+        if (ymlData.getAsRString("soshitsujiyu").toString().isEmpty()) {
+            panel.getCcdKaigoShikakuKihon().getTxtSoshitsuJiyu().clearValue();
+        } else {
+            panel.getCcdKaigoShikakuKihon().getTxtSoshitsuJiyu().
+                    setValue(ymlData.getAsRString("soshitsujiyu"));
+        }
+
+        if (ymlData.getAsRString("jutokukaijo").toString().isEmpty()) {
+            panel.getCcdKaigoShikakuKihon().getTxtJutokuKaijo().clearValue();
+        } else {
+            panel.getCcdKaigoShikakuKihon().getTxtJutokuKaijo().
+                    setValue(ymlData.getAsRDate("jutokukaijo"));
+        }
+
+        if (ymlData.getAsRString("jutokutekiyo").toString().isEmpty()) {
+            panel.getCcdKaigoShikakuKihon().getTxtJutokuTekiyo().clearValue();
+        } else {
+            panel.getCcdKaigoShikakuKihon().getTxtJutokuTekiyo().
+                    setValue(ymlData.getAsRDate("jutokutekiyo"));
+        }
+
+        if (ymlData.getAsRString("kaigodo").toString().isEmpty()) {
+            panel.getCcdKaigoShikakuKihon().getTxtYokaigoJotaiKubun().clearValue();
+        } else {
+            panel.getCcdKaigoShikakuKihon().getTxtYokaigoJotaiKubun().
+                    setValue(ymlData.getAsRString("kaigodo"));
+        }
+
+        if (ymlData.getAsRString("kyusochinyusho").toString().isEmpty()) {
+            panel.getCcdKaigoShikakuKihon().getTxtKyuSochiNyusho().clearValue();
+        } else {
+            panel.getCcdKaigoShikakuKihon().getTxtKyuSochiNyusho().
+                    setValue(ymlData.getAsRString("kyusochinyusho"));
+        }
+
+        if (ymlData.getAsRString("ninteikikanfrom").toString().isEmpty()) {
+
+            panel.getCcdKaigoShikakuKihon().getTxtNinteiKaishiYmd().clearValue();
+        } else {
+            panel.getCcdKaigoShikakuKihon().getTxtNinteiKaishiYmd().
+                    setValue(ymlData.getAsRDate("ninteikikanfrom"));
+        }
+
+        if (ymlData.getAsRString("ninteikikanto").toString().isEmpty()) {
+            panel.getCcdKaigoShikakuKihon().getTxtNinteiShuryoYmd().clearValue();
+        } else {
+            panel.getCcdKaigoShikakuKihon().getTxtNinteiShuryoYmd().
+                    setValue(ymlData.getAsRDate("ninteikikanto"));
+        }
 
         response.data = panel;
         return response;

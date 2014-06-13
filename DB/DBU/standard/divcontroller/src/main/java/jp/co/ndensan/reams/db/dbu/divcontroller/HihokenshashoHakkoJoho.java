@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 被保険者証発行情報Divを制御します。
@@ -34,7 +33,7 @@ public class HihokenshashoHakkoJoho {
             HihokenshashoHakkoJohoDiv panel) {
         ResponseData<HihokenshashoHakkoJohoDiv> response = new ResponseData<>();
 
-        List<HashMap> hihokenshashoHakkoJohoList = YamlLoader.FOR_DBU.loadAsList(
+        List<HashMap> hihokenshashoHakkoJohoList = YamlLoader.DBU.loadAsList(
                 new RString("dbu0410011/HihokenshashoHakkoJoho.yml"));
 
         HashMap hashMap = hihokenshashoHakkoJohoList.get(0);

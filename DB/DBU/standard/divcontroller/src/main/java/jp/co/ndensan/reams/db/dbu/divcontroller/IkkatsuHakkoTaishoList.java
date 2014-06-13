@@ -48,7 +48,7 @@ public class IkkatsuHakkoTaishoList {
      */
     private void setIkkatsuHakkoTaishoData(IkkatsuHakkoTaishoListDiv panel) {
 
-        List<HashMap> IkkatsuHakkoTaishoList = YamlLoader.FOR_DBU.loadAsList(
+        List<HashMap> IkkatsuHakkoTaishoList = YamlLoader.DBU.loadAsList(
                 new RString("dbu0400011/IkkatsuHakkoTaishoList.yml"));
 
         List arraydata = createRowIkkatsuHakkoTaishoList(IkkatsuHakkoTaishoList);
@@ -116,7 +116,7 @@ public class IkkatsuHakkoTaishoList {
      */
     private void setSortData(IkkatsuHakkoTaishoListDiv panel) {
 
-        List<HashMap> sortList = YamlLoader.FOR_DBU.loadAsList(
+        List<HashMap> sortList = YamlLoader.DBU.loadAsList(
                 new RString("dbu0400011/Sort.yml"));
 
         HashMap hashMap = sortList.get(0);
