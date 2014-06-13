@@ -21,28 +21,18 @@ public class TaishoShinsakaiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblShinsakaiYoteibi")
-    private Label lblShinsakaiYoteibi;
     @JsonProperty("txtShinsakaiYoteibi")
-    private TextBoxDate txtShinsakaiYoteibi;
-    @JsonProperty("lblShinsakaiKaijo")
-    private Label lblShinsakaiKaijo;
+    private TextBoxFlexibleDate txtShinsakaiYoteibi;
     @JsonProperty("ddlShinsakaiKaijo")
     private DropDownList ddlShinsakaiKaijo;
-    @JsonProperty("lblShinsakaiKaisaibi")
-    private Label lblShinsakaiKaisaibi;
     @JsonProperty("txtShinsakaiKaisaibi")
-    private TextBoxDate txtShinsakaiKaisaibi;
-    @JsonProperty("lblShinsaJikan")
-    private Label lblShinsaJikan;
+    private TextBoxFlexibleDate txtShinsakaiKaisaibi;
     @JsonProperty("txtShinsaStartTime")
     private TextBoxTime txtShinsaStartTime;
     @JsonProperty("lblKara01")
     private Label lblKara01;
     @JsonProperty("txtShinsaEndTime")
     private TextBoxTime txtShinsaEndTime;
-    @JsonProperty("lblGogitai")
-    private Label lblGogitai;
     @JsonProperty("txtGogitai")
     private TextBox txtGogitai;
     @JsonProperty("lblShinsaTiahshosha")
@@ -60,34 +50,14 @@ public class TaishoShinsakaiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblShinsakaiYoteibi")
-    public Label getLblShinsakaiYoteibi() {
-        return lblShinsakaiYoteibi;
-    }
-
-    @JsonProperty("lblShinsakaiYoteibi")
-    public void setLblShinsakaiYoteibi(Label lblShinsakaiYoteibi) {
-        this.lblShinsakaiYoteibi=lblShinsakaiYoteibi;
-    }
-
     @JsonProperty("txtShinsakaiYoteibi")
-    public TextBoxDate getTxtShinsakaiYoteibi() {
+    public TextBoxFlexibleDate getTxtShinsakaiYoteibi() {
         return txtShinsakaiYoteibi;
     }
 
     @JsonProperty("txtShinsakaiYoteibi")
-    public void setTxtShinsakaiYoteibi(TextBoxDate txtShinsakaiYoteibi) {
+    public void setTxtShinsakaiYoteibi(TextBoxFlexibleDate txtShinsakaiYoteibi) {
         this.txtShinsakaiYoteibi=txtShinsakaiYoteibi;
-    }
-
-    @JsonProperty("lblShinsakaiKaijo")
-    public Label getLblShinsakaiKaijo() {
-        return lblShinsakaiKaijo;
-    }
-
-    @JsonProperty("lblShinsakaiKaijo")
-    public void setLblShinsakaiKaijo(Label lblShinsakaiKaijo) {
-        this.lblShinsakaiKaijo=lblShinsakaiKaijo;
     }
 
     @JsonProperty("ddlShinsakaiKaijo")
@@ -100,34 +70,14 @@ public class TaishoShinsakaiDiv extends Panel {
         this.ddlShinsakaiKaijo=ddlShinsakaiKaijo;
     }
 
-    @JsonProperty("lblShinsakaiKaisaibi")
-    public Label getLblShinsakaiKaisaibi() {
-        return lblShinsakaiKaisaibi;
-    }
-
-    @JsonProperty("lblShinsakaiKaisaibi")
-    public void setLblShinsakaiKaisaibi(Label lblShinsakaiKaisaibi) {
-        this.lblShinsakaiKaisaibi=lblShinsakaiKaisaibi;
-    }
-
     @JsonProperty("txtShinsakaiKaisaibi")
-    public TextBoxDate getTxtShinsakaiKaisaibi() {
+    public TextBoxFlexibleDate getTxtShinsakaiKaisaibi() {
         return txtShinsakaiKaisaibi;
     }
 
     @JsonProperty("txtShinsakaiKaisaibi")
-    public void setTxtShinsakaiKaisaibi(TextBoxDate txtShinsakaiKaisaibi) {
+    public void setTxtShinsakaiKaisaibi(TextBoxFlexibleDate txtShinsakaiKaisaibi) {
         this.txtShinsakaiKaisaibi=txtShinsakaiKaisaibi;
-    }
-
-    @JsonProperty("lblShinsaJikan")
-    public Label getLblShinsaJikan() {
-        return lblShinsaJikan;
-    }
-
-    @JsonProperty("lblShinsaJikan")
-    public void setLblShinsaJikan(Label lblShinsaJikan) {
-        this.lblShinsaJikan=lblShinsaJikan;
     }
 
     @JsonProperty("txtShinsaStartTime")
@@ -158,16 +108,6 @@ public class TaishoShinsakaiDiv extends Panel {
     @JsonProperty("txtShinsaEndTime")
     public void setTxtShinsaEndTime(TextBoxTime txtShinsaEndTime) {
         this.txtShinsaEndTime=txtShinsaEndTime;
-    }
-
-    @JsonProperty("lblGogitai")
-    public Label getLblGogitai() {
-        return lblGogitai;
-    }
-
-    @JsonProperty("lblGogitai")
-    public void setLblGogitai(Label lblGogitai) {
-        this.lblGogitai=lblGogitai;
     }
 
     @JsonProperty("txtGogitai")

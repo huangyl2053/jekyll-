@@ -2,7 +2,7 @@
  "fieldName": "Page",
  "items": [
   {
-   "fieldName": "ShinakaiScheduleEntry",
+   "fieldName": "ShinsakaiScheduleEntry",
    "items": [
     {
      "fieldName": "Schedule",
@@ -24,6 +24,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "lblGogitaiNo",
        "required": false,
        "align": 2,
        "text": "合議体番号",
@@ -33,7 +34,7 @@
        "fieldName": "ddlGogitai",
        "items": [],
        "controlType": "DropDownList",
-       "width": "M",
+       "width": "S",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -46,45 +47,55 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "ddlGogitai_core",
        "required": false,
-       "onFocus": "",
-       "onBlur": "",
-       "onChange": "",
+       "onChange": "onChange_ddlGogitai",
+       "selectedItem": "0",
+       "dataSource": [
+        {
+         "key": "0",
+         "value": ""
+        },
+        {
+         "key": "1",
+         "value": "合議体01"
+        },
+        {
+         "key": "2",
+         "value": "合議体02"
+        },
+        {
+         "key": "3",
+         "value": "合議体03"
+        }
+       ],
        "labelLText": "",
        "labelRText": "",
        "labelLWidth": "S",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "dataSource": [
-        {
-         "key": "0",
-         "value": "--- 合議体名称を選択 ---"
-        },
-        {
-         "key": "1",
-         "value": ""
-        }
-       ],
-       "selectedItem": ""
+       "onFocus": "",
+       "onBlur": ""
       },
       {
        "fieldName": "lblKaisaiBasho",
        "items": [],
        "controlType": "Label",
-       "width": "S",
+       "width": "80",
        "visible": true,
        "displayNone": false,
        "disabled": false,
        "accessKey": "",
        "nextFocusFieldName": "",
-       "wrap": true,
+       "wrap": false,
        "dependencies": [],
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "lblKaisaiBasho",
        "required": false,
        "align": 2,
        "text": "開催場所",
@@ -107,45 +118,51 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "ddlKaisaiBasho_core",
        "required": false,
-       "onFocus": "",
-       "onBlur": "",
        "onChange": "",
+       "selectedItem": "0",
+       "dataSource": [
+        {
+         "key": "0",
+         "value": ""
+        },
+        {
+         "key": "1",
+         "value": "市役所第１会議室"
+        },
+        {
+         "key": "2",
+         "value": "市役所第２会議室"
+        }
+       ],
        "labelLText": "",
        "labelRText": "",
        "labelLWidth": "S",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "dataSource": [
-        {
-         "key": "key0",
-         "value": "value0"
-        },
-        {
-         "key": "key1",
-         "value": "value1"
-        }
-       ],
-       "selectedItem": ""
+       "onFocus": "",
+       "onBlur": ""
       },
       {
        "fieldName": "lblYoteiTime",
        "items": [],
        "controlType": "Label",
-       "width": "S",
+       "width": "80",
        "visible": true,
        "displayNone": false,
        "disabled": false,
        "accessKey": "",
        "nextFocusFieldName": "",
-       "wrap": true,
+       "wrap": false,
        "dependencies": [],
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "lblYoteiTime",
        "required": false,
        "align": 2,
        "text": "予定時間",
@@ -168,30 +185,31 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtYoteiTimeFrom_core",
        "required": false,
        "text": "",
        "isPrivateInfo": false,
-       "readOnly": false,
-       "placeHolder": "12：30",
-       "textKind": 0,
-       "isPassword": false,
-       "onFocus": "",
-       "onBlur": "",
        "onChange": "",
-       "onKeyPress": "",
        "labelLText": "",
        "labelRText": "",
        "labelLWidth": "S",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "displayFormat": 0,
-       "value": "",
-       "maxLength": 1000000000000,
+       "onFocus": "",
+       "onBlur": "",
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
+       "readOnly": false,
+       "placeHolder": "12：30",
+       "textKind": 0,
+       "isPassword": false,
        "isComboBox": false,
+       "onKeyPress": "",
        "suggest": [],
+       "value": "",
+       "displayFormat": 1,
        "timeKubun": 1,
        "permitCharactor": ""
       },
@@ -212,6 +230,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "lblYoteiTimeWave",
        "required": false,
        "align": 2,
        "text": "～",
@@ -234,30 +253,31 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtYoteiTimeTo_core",
        "required": false,
        "text": "",
        "isPrivateInfo": false,
-       "readOnly": false,
-       "placeHolder": "12：30",
-       "textKind": 0,
-       "isPassword": false,
-       "onFocus": "",
-       "onBlur": "",
        "onChange": "",
-       "onKeyPress": "",
        "labelLText": "",
        "labelRText": "",
        "labelLWidth": "S",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "displayFormat": 0,
-       "value": "",
-       "maxLength": 1000000000000,
+       "onFocus": "",
+       "onBlur": "",
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
+       "readOnly": false,
+       "placeHolder": "12：30",
+       "textKind": 0,
+       "isPassword": false,
        "isComboBox": false,
+       "onKeyPress": "",
        "suggest": [],
+       "value": "",
+       "displayFormat": 1,
        "timeKubun": 1,
        "permitCharactor": ""
       },
@@ -278,6 +298,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "lblKaisaiDate",
        "required": false,
        "align": 2,
        "text": "開催日",
@@ -300,26 +321,27 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "txtKaisaiDate_core",
        "required": false,
        "text": "",
        "isPrivateInfo": false,
-       "readOnly": false,
-       "placeHolder": "",
-       "textKind": 0,
-       "isPassword": false,
-       "onFocus": "",
-       "onBlur": "",
        "onChange": "",
-       "onKeyPress": "",
        "labelLText": "",
        "labelRText": "",
        "labelLWidth": "S",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "ymdKubun": 2,
-       "displayFormat": 0,
+       "onFocus": "",
+       "onBlur": "",
+       "readOnly": false,
+       "placeHolder": "",
+       "textKind": 0,
+       "isPassword": false,
+       "onKeyPress": "",
        "value": "",
+       "displayFormat": 0,
+       "ymdKubun": 2,
        "permitCharactor": "./_-"
       },
       {
@@ -332,13 +354,14 @@
        "disabled": false,
        "accessKey": "",
        "nextFocusFieldName": "",
-       "wrap": true,
+       "wrap": false,
        "dependencies": [],
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "lblYoteiTeiin",
        "required": false,
        "align": 2,
        "text": "予定定員",
@@ -361,29 +384,30 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "",
+       "selectControlID": "txtYoteiTeiin_core",
        "required": false,
        "text": "",
        "isPrivateInfo": false,
-       "readOnly": false,
-       "placeHolder": "99",
-       "textKind": 2,
-       "isPassword": false,
-       "onFocus": "",
-       "onBlur": "",
        "onChange": "",
-       "onKeyPress": "",
        "labelLText": "",
        "labelRText": "",
        "labelLWidth": "S",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "value": "",
-       "maxLength": 1000000000000,
+       "onFocus": "",
+       "onBlur": "",
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 2,
+       "readOnly": false,
+       "placeHolder": "99",
+       "textKind": 2,
+       "isPassword": false,
        "isComboBox": false,
+       "onKeyPress": "",
        "suggest": [],
+       "value": "",
        "maxValue": 1.7976931348623157e+308,
        "minValue": 0,
        "isCurrency": false,
@@ -408,6 +432,7 @@
        "authorityMode": 0,
        "marginLeft": "",
        "marginRight": "XS",
+       "selectControlID": "lblYoteiTeiinUnit",
        "required": false,
        "align": 2,
        "text": "人",
@@ -430,6 +455,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "lblMaxTeiin",
        "required": false,
        "align": 2,
        "text": "最大定員",
@@ -452,29 +478,30 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "",
+       "selectControlID": "txtMaxTeiin_core",
        "required": false,
        "text": "",
        "isPrivateInfo": false,
-       "readOnly": false,
-       "placeHolder": "99",
-       "textKind": 2,
-       "isPassword": false,
-       "onFocus": "",
-       "onBlur": "",
        "onChange": "",
-       "onKeyPress": "",
        "labelLText": "",
        "labelRText": "",
        "labelLWidth": "S",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "value": "",
-       "maxLength": 1000000000000,
+       "onFocus": "",
+       "onBlur": "",
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 2,
+       "readOnly": false,
+       "placeHolder": "99",
+       "textKind": 2,
+       "isPassword": false,
        "isComboBox": false,
+       "onKeyPress": "",
        "suggest": [],
+       "value": "",
        "maxValue": 1.7976931348623157e+308,
        "minValue": 0,
        "isCurrency": false,
@@ -499,6 +526,7 @@
        "authorityMode": 0,
        "marginLeft": "",
        "marginRight": "XS",
+       "selectControlID": "lblMaxTeiinUnit",
        "required": false,
        "align": 2,
        "text": "人",
@@ -521,6 +549,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "lblAutoBindTeiin",
        "required": false,
        "align": 2,
        "text": "自動割当定員",
@@ -543,29 +572,30 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "",
+       "selectControlID": "txtAutoBindTeiin_core",
        "required": false,
        "text": "",
        "isPrivateInfo": false,
-       "readOnly": false,
-       "placeHolder": "99",
-       "textKind": 2,
-       "isPassword": false,
-       "onFocus": "",
-       "onBlur": "",
        "onChange": "",
-       "onKeyPress": "",
        "labelLText": "",
        "labelRText": "",
        "labelLWidth": "S",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "value": "",
-       "maxLength": 1000000000000,
+       "onFocus": "",
+       "onBlur": "",
+       "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 2,
+       "readOnly": false,
+       "placeHolder": "99",
+       "textKind": 2,
+       "isPassword": false,
        "isComboBox": false,
+       "onKeyPress": "",
        "suggest": [],
+       "value": "",
        "maxValue": 1.7976931348623157e+308,
        "minValue": 0,
        "isCurrency": false,
@@ -590,6 +620,7 @@
        "authorityMode": 0,
        "marginLeft": "",
        "marginRight": "XS",
+       "selectControlID": "lblAutoBindTeiinUnit",
        "required": false,
        "align": 2,
        "text": "人",
@@ -618,12 +649,14 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "btnToAddShinsakaiIin",
            "text": "追加する",
            "onClick": "",
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
            "imageHeight": "",
+           "icon": 0,
            "displayChildDivName": "DBE.ShinsakaiIinList",
            "dataPassing": [
             {
@@ -652,12 +685,14 @@
            "authorityMode": 0,
            "marginLeft": "XS",
            "marginRight": "XS",
+           "selectControlID": "btnToDeliteShinsakaiIin",
            "text": "削除する",
            "onClick": "",
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
-           "imageHeight": ""
+           "imageHeight": "",
+           "icon": 0
           }
          ],
          "controlType": "Panel",
@@ -674,6 +709,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "OperationForShinsakaiIinList",
          "onLoad": "",
          "title": "",
          "isOpen": true,
@@ -696,13 +732,14 @@
          "eraseBorderLeft": true,
          "backgroundColor": 0,
          "widthAuto": false,
+         "panelDisplay": 0,
          "isGroupBox": false
         },
         {
          "fieldName": "dgShinsakaiIinList",
          "items": [],
          "controlType": "DataGrid",
-         "width": "560",
+         "width": "740",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -715,6 +752,8 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "dgShinsakaiIinList",
+         "dataSource": [],
          "gridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
@@ -838,14 +877,13 @@
            }
           ]
          },
-         "height": "S",
+         "height": "180",
          "onSort": "",
          "onSelect": "",
          "onSelectByDblClick": "",
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
-         "dataSource": [],
          "sortOrder": "shikaku",
          "isAscending": true,
          "filterList": [],
@@ -853,21 +891,22 @@
         }
        ],
        "controlType": "Panel",
-       "width": "580",
+       "width": "760",
        "visible": true,
        "displayNone": false,
        "disabled": false,
        "accessKey": "",
        "nextFocusFieldName": "",
-       "wrap": false,
+       "wrap": true,
        "dependencies": [],
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "Gogitai",
        "onLoad": "",
-       "title": "審査員",
+       "title": "",
        "isOpen": true,
        "canOpenAndClose": false,
        "postParameterPanelNames": [
@@ -888,7 +927,8 @@
        "eraseBorderLeft": false,
        "backgroundColor": 0,
        "widthAuto": false,
-       "isGroupBox": true
+       "panelDisplay": 1,
+       "isGroupBox": false
       },
       {
        "fieldName": "RegisterButton",
@@ -903,23 +943,25 @@
          "disabled": false,
          "accessKey": "",
          "nextFocusFieldName": "",
-         "wrap": false,
+         "wrap": true,
          "dependencies": [],
-         "float": 2,
+         "float": 1,
          "toolTip": "",
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "btnToRegister",
          "text": "スケジュールを登録する",
-         "onClick": "",
+         "onClick": "onClick_btnToRegister",
          "appearance": 0,
          "imageFileUrl": "",
          "imageWidth": "",
-         "imageHeight": ""
+         "imageHeight": "",
+         "icon": 0
         }
        ],
        "controlType": "Panel",
-       "width": "580",
+       "width": "760",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -932,6 +974,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "RegisterButton",
        "onLoad": "",
        "title": "",
        "isOpen": true,
@@ -954,11 +997,12 @@
        "eraseBorderLeft": true,
        "backgroundColor": 0,
        "widthAuto": false,
+       "panelDisplay": 0,
        "isGroupBox": false
       }
      ],
      "controlType": "Panel",
-     "width": "600",
+     "width": "800",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -971,8 +1015,9 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "Schedule",
      "onLoad": "",
-     "title": "スケジュール",
+     "title": "",
      "isOpen": true,
      "canOpenAndClose": false,
      "postParameterPanelNames": [
@@ -980,7 +1025,12 @@
        "postParameterPanelNames": "Schedule"
       }
      ],
-     "requestSettings": [],
+     "requestSettings": [
+      {
+       "eventName": "onLoad",
+       "requestUrl": ""
+      }
+     ],
      "hiddenInput": [],
      "onOpen": "",
      "onClose": "",
@@ -993,7 +1043,8 @@
      "eraseBorderLeft": false,
      "backgroundColor": 0,
      "widthAuto": false,
-     "isGroupBox": true
+     "panelDisplay": 1,
+     "isGroupBox": false
     },
     {
      "fieldName": "ShinsakaiList",
@@ -1002,7 +1053,7 @@
        "fieldName": "OperationForShinsakaiList",
        "items": [
         {
-         "fieldName": "btnToDelite",
+         "fieldName": "btnToDelete",
          "items": [],
          "controlType": "Button",
          "width": "M",
@@ -1018,12 +1069,40 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "btnToDelete",
          "text": "選択した審査会を削除する",
-         "onClick": "",
+         "onClick": "onClick_btnToDelete",
          "appearance": 0,
          "imageFileUrl": "",
          "imageWidth": "",
-         "imageHeight": ""
+         "imageHeight": "",
+         "icon": 0
+        },
+        {
+         "fieldName": "btnNumberingKaisaiNo",
+         "items": [],
+         "controlType": "Button",
+         "width": "M",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "selectControlID": "btnNumberingKaisaiNo",
+         "text": "開催番号を採番する",
+         "onClick": "onClick_btnNumberingKaisaiNo",
+         "appearance": 0,
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": "",
+         "icon": 0
         }
        ],
        "controlType": "Panel",
@@ -1040,6 +1119,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "OperationForShinsakaiList",
        "onLoad": "",
        "title": "",
        "isOpen": true,
@@ -1062,13 +1142,14 @@
        "eraseBorderLeft": true,
        "backgroundColor": 0,
        "widthAuto": false,
+       "panelDisplay": 0,
        "isGroupBox": false
       },
       {
        "fieldName": "dgShinsakaiList",
        "items": [],
        "controlType": "DataGrid",
-       "width": "580",
+       "width": "760",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -1081,6 +1162,8 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "dgShinsakaiList",
+       "dataSource": [],
        "gridSetting": {
         "rowHeight": 25,
         "isMultiSelectable": false,
@@ -1099,7 +1182,7 @@
           "dataName": "shinsakaiNo",
           "toolTip": "",
           "bgColor": 0,
-          "width": 110,
+          "width": 100,
           "visible": true,
           "cellType": 0,
           "cellDetails": null,
@@ -1113,7 +1196,7 @@
           "dataName": "kaisaiDate",
           "toolTip": "",
           "bgColor": 0,
-          "width": 110,
+          "width": 90,
           "visible": true,
           "cellType": 7,
           "cellDetails": {
@@ -1132,7 +1215,7 @@
           "dataName": "startTime",
           "toolTip": "",
           "bgColor": 0,
-          "width": 90,
+          "width": 80,
           "visible": true,
           "cellType": 0,
           "cellDetails": {
@@ -1148,7 +1231,7 @@
           "dataName": "endTime",
           "toolTip": "",
           "bgColor": 0,
-          "width": 90,
+          "width": 80,
           "visible": true,
           "cellType": 0,
           "cellDetails": {
@@ -1164,7 +1247,7 @@
           "dataName": "kaisaiBasho",
           "toolTip": "",
           "bgColor": 0,
-          "width": 150,
+          "width": 120,
           "visible": true,
           "cellType": 0,
           "cellDetails": {
@@ -1180,7 +1263,7 @@
           "dataName": "gogitai",
           "toolTip": "",
           "bgColor": 0,
-          "width": 150,
+          "width": 90,
           "visible": true,
           "cellType": 0,
           "cellDetails": {
@@ -1196,7 +1279,7 @@
           "dataName": "yoteiTeiin",
           "toolTip": "",
           "bgColor": 0,
-          "width": 70,
+          "width": 60,
           "visible": true,
           "cellType": 0,
           "cellDetails": null,
@@ -1210,7 +1293,7 @@
           "dataName": "maxTeiin",
           "toolTip": "",
           "bgColor": 0,
-          "width": 70,
+          "width": 60,
           "visible": true,
           "cellType": 0,
           "cellDetails": null,
@@ -1220,11 +1303,11 @@
           "sortKey": "maxTeiin"
          },
          {
-          "columnName": "自動割当<br>定員",
+          "columnName": "自動<br>定員",
           "dataName": "autoBindTeiin",
           "toolTip": "",
           "bgColor": 0,
-          "width": 70,
+          "width": 60,
           "visible": true,
           "cellType": 0,
           "cellDetails": null,
@@ -1235,22 +1318,73 @@
          }
         ]
        },
-       "height": "500",
+       "height": "200",
        "onSort": "",
        "onSelect": "",
        "onSelectByDblClick": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
-       "dataSource": [],
-       "sortOrder": "endTime",
+       "sortOrder": "yoteiTeiin",
        "isAscending": true,
        "filterList": [],
        "activeRowId": -1
+      },
+      {
+       "fieldName": "btnShinsakaiYoteiToroku",
+       "items": [],
+       "controlType": "Button",
+       "width": "M",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 2,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "btnShinsakaiYoteiToroku",
+       "text": "審査会予定を登録する",
+       "onClick": "onClick_btnShinsakaiYoteiToroku",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
+       "icon": 0
+      },
+      {
+       "fieldName": "btnCancel",
+       "items": [],
+       "controlType": "Button",
+       "width": "M",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "btnCancel",
+       "text": "審査会開催予定一覧に戻る",
+       "onClick": "",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
+       "icon": 0
       }
      ],
      "controlType": "Panel",
-     "width": "600",
+     "width": "800",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1263,8 +1397,9 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "ShinsakaiList",
      "onLoad": "",
-     "title": "審査会一覧",
+     "title": "審査会",
      "isOpen": true,
      "canOpenAndClose": true,
      "postParameterPanelNames": [
@@ -1285,11 +1420,307 @@
      "eraseBorderLeft": false,
      "backgroundColor": 0,
      "widthAuto": false,
+     "panelDisplay": 0,
+     "isGroupBox": false
+    },
+    {
+     "fieldName": "ShinakaiScheduleList",
+     "items": [
+      {
+       "fieldName": "btnAddShinsakai",
+       "items": [],
+       "controlType": "Button",
+       "width": "150",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "btnAddShinsakai",
+       "text": "審査会予定を追加する",
+       "onClick": "",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
+       "icon": 0
+      },
+      {
+       "fieldName": "btnRemoveShinsakai",
+       "items": [],
+       "controlType": "Button",
+       "width": "150",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "btnRemoveShinsakai",
+       "text": "審査会予定を削除する",
+       "onClick": "onClick_btnRemoveShinsakai",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
+       "icon": 0
+      },
+      {
+       "fieldName": "dgShinakaiScheduleList",
+       "items": [],
+       "controlType": "DataGrid",
+       "width": "790",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": true,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "dgShinakaiScheduleList",
+       "dataSource": [],
+       "gridSetting": {
+        "rowHeight": 25,
+        "isMultiSelectable": false,
+        "isShowFooter": true,
+        "isShowFilter": false,
+        "isShowFilterButton": false,
+        "isShowRowState": false,
+        "header": {
+         "combineColumns": [],
+         "frozenColumn": "",
+         "headerHeight": 1
+        },
+        "columns": [
+         {
+          "columnName": "開催番号",
+          "dataName": "shinsakaiNo",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 95,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": {
+           "cellType": 0
+          },
+          "align": 1,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "shinsakaiNo"
+         },
+         {
+          "columnName": "開催日",
+          "dataName": "kaisaiDate",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 90,
+          "visible": true,
+          "cellType": 7,
+          "cellDetails": {
+           "cellType": 7,
+           "ymdKubun": 2,
+           "displayFormat": 0,
+           "onChange": ""
+          },
+          "align": 1,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "kaisaiDate"
+         },
+         {
+          "columnName": "開始時間",
+          "dataName": "startTime",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 80,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": {
+           "cellType": 0
+          },
+          "align": 1,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "startTime"
+         },
+         {
+          "columnName": "終了時間",
+          "dataName": "endTime",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 80,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": {
+           "cellType": 0
+          },
+          "align": 1,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "endTime"
+         },
+         {
+          "columnName": "開催場所",
+          "dataName": "kaisaiBasho",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 115,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": {
+           "cellType": 0
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "kaisaiBasho"
+         },
+         {
+          "columnName": "合議体",
+          "dataName": "gogitai",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 85,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "gogitai"
+         },
+         {
+          "columnName": "予定<br>定員",
+          "dataName": "yoteiTeiin",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 60,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 2,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "yoteiTeiin"
+         },
+         {
+          "columnName": "割当<br>人数",
+          "dataName": "wariateNinzu",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 60,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 2,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "wariateNinzu"
+         },
+         {
+          "columnName": "最大<br>定員",
+          "dataName": "maxTeiin",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 60,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 2,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "maxTeiin"
+         },
+         {
+          "columnName": "自動<br>定員",
+          "dataName": "autoBindTeiin",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 60,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 2,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "autoBindTeiin"
+         }
+        ]
+       },
+       "height": "570",
+       "onSort": "",
+       "onSelect": "",
+       "onSelectByDblClick": "",
+       "onOnlyRow": "",
+       "onNoRow": "",
+       "onMultiRows": "",
+       "sortOrder": "kaisaiBasho",
+       "isAscending": true,
+       "filterList": [],
+       "activeRowId": -1
+      }
+     ],
+     "controlType": "Panel",
+     "width": "800",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "ShinakaiScheduleList",
+     "onLoad": "",
+     "title": "審査会開催予定一覧",
+     "isOpen": true,
+     "canOpenAndClose": true,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "ShinakaiScheduleList"
+      }
+     ],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
+     "backgroundColor": 0,
+     "widthAuto": true,
+     "panelDisplay": 0,
      "isGroupBox": false
     }
    ],
    "controlType": "Panel",
-   "width": "M",
+   "width": "820",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -1302,16 +1733,46 @@
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "ShinsakaiScheduleEntry",
    "onLoad": "",
-   "title": "審査会開催予定登録",
+   "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "ShinakaiScheduleEntry"
+     "postParameterPanelNames": "ShinsakaiScheduleEntry"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbe/db/dbe/ShinsakaiScheduleEntry/onLoadData"
+    },
+    {
+     "eventName": "onChange_ddlGogitai",
+     "requestUrl": "dbe/db/dbe/ShinsakaiScheduleEntry/onChange_ddlGogitai"
+    },
+    {
+     "eventName": "onClick_btnToRegister",
+     "requestUrl": "dbe/db/dbe/ShinsakaiScheduleEntry/onClick_btnToRegister"
+    },
+    {
+     "eventName": "onClick_btnNumberingKaisaiNo",
+     "requestUrl": "dbe/db/dbe/ShinsakaiScheduleEntry/onClick_btnNumberingKaisaiNo"
+    },
+    {
+     "eventName": "onClick_btnToDelete",
+     "requestUrl": "dbe/db/dbe/ShinsakaiScheduleEntry/onClick_btnToDelete"
+    },
+    {
+     "eventName": "onClick_btnShinsakaiYoteiToroku",
+     "requestUrl": "dbe/db/dbe/ShinsakaiScheduleEntry/onClick_btnShinsakaiYoteiToroku"
+    },
+    {
+     "eventName": "onClick_btnRemoveShinsakai",
+     "requestUrl": "dbe/db/dbe/ShinsakaiScheduleEntry/onClick_btnRemoveShinsakai"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -1323,7 +1784,8 @@
    "eraseBorderRight": false,
    "eraseBorderLeft": false,
    "backgroundColor": 0,
-   "widthAuto": true,
+   "widthAuto": false,
+   "panelDisplay": 0,
    "isGroupBox": false
   }
  ],
@@ -1341,6 +1803,7 @@
  "authorityMode": 0,
  "marginLeft": "XS",
  "marginRight": "XS",
+ "selectControlID": "Page",
  "onLoad": "",
  "title": "審査会開催予定登録",
  "jsPathCollection": [],
@@ -1348,44 +1811,98 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "まいｎ",
+   "stateName": "一覧",
    "showWizard": false,
    "visibleDivs": [
     {
-     "visibleDiv": "ShinakaiScheduleEntry",
-     "panelState": "visible"
+     "visibleDiv": "ShinsakaiScheduleEntry",
+     "panelState": "visible",
+     "fixedDiv": "No"
     },
     {
-     "visibleDiv": "Schedule",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "Gogitai",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "OperationForShinsakaiIinList",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "RegisterButton",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "ShinsakaiList",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "OperationForShinsakaiList",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "ommonChildDiv1",
-     "panelState": "visible"
+     "visibleDiv": "ShinakaiScheduleList",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "btnAddShinsakai",
+     "event": "onClick",
+     "transition": "登録"
+    },
+    {
+     "fieldName": "btnShinsakaiYoteiToroku",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCancel",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
+  },
+  {
+   "order": "2",
+   "stateName": "登録",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "ShinsakaiScheduleEntry",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "Schedule",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "Gogitai",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "OperationForShinsakaiIinList",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "RegisterButton",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ShinsakaiList",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "OperationForShinsakaiList",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnAddShinsakai",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnShinsakaiYoteiToroku",
+     "event": "onClick",
+     "transition": "一覧"
+    },
+    {
+     "fieldName": "btnCancel",
+     "event": "onClick",
+     "transition": "一覧"
+    }
+   ]
   }
  ],
  "currentState": "All",
@@ -1394,7 +1911,7 @@
  "UIContainerEventMapping": [],
  "loadSequencePanelNames": [
   [
-   "ShinakaiScheduleEntry"
+   "ShinsakaiScheduleEntry"
   ],
   [
    "Schedule"
@@ -1413,6 +1930,9 @@
   ],
   [
    "OperationForShinsakaiList"
+  ],
+  [
+   "ShinakaiScheduleList"
   ]
  ],
  "panelMargin": 1,

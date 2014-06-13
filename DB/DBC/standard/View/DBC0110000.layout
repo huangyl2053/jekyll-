@@ -45,6 +45,7 @@
      "marginRight": "XS",
      "text": "検索する",
      "onClick": "",
+     "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": ""
@@ -147,6 +148,7 @@
      "height": "XS",
      "onSort": "",
      "onSelect": "",
+     "onSelectByDblClick": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
@@ -154,7 +156,7 @@
      "sortOrder": "defaultDataName4",
      "isAscending": true,
      "filterList": [],
-     "clickedRowId": -1
+     "activeRowId": -1
     }
    ],
    "controlType": "Panel",
@@ -396,7 +398,7 @@
      "fieldName": "tabKyotakuServiceJikoSakuseiTodokede",
      "items": [
       {
-       "fieldName": "KyotakuServiceRireki",
+       "fieldName": "tplKyotakuJikoTodokedeDetailRireki",
        "items": [
         {
          "fieldName": "KyotakuJikoTodokedeRirekiList",
@@ -419,7 +421,8 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "text": "新規届出を追加する",
-           "onClick": "",
+           "onClick": "onClickTodokedeNew",
+           "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
            "imageHeight": ""
@@ -442,13 +445,14 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "text": "変更届出を追加する",
-           "onClick": "",
+           "onClick": "onClickTodokedeModify",
+           "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
            "imageHeight": ""
           },
           {
-           "fieldName": "dgRirekiList",
+           "fieldName": "dgKyotakuJikoTodokedeRirekiList",
            "items": [],
            "controlType": "DataGrid",
            "width": "945",
@@ -472,7 +476,16 @@
             "isShowFilterButton": false,
             "isShowRowState": false,
             "header": {
-             "combineColumns": [],
+             "combineColumns": [
+              {
+               "combineColumnName": "計画適用期間",
+               "combineItem": [
+                "txtKeikakuTekiyoKaishiYMDInvisible",
+                "txtKeikakuTekiyoKaishiYMD",
+                "txtKeikakuTekiyoShuryoYMD"
+               ]
+              }
+             ],
              "frozenColumn": "",
              "headerHeight": 0
             },
@@ -488,7 +501,7 @@
               "cellDetails": {
                "cellType": 8,
                "text": "選択",
-               "onClick": "",
+               "onClick": "onClickTodokedeSelect",
                "imageFileUrl": "",
                "imageWidth": "",
                "imageHeight": ""
@@ -515,11 +528,30 @@
               "sortKey": "txtJotai"
              },
              {
-              "columnName": "計画適用開始日",
+              "columnName": "",
+              "dataName": "txtKeikakuTekiyoKaishiYMDInvisible",
+              "toolTip": "",
+              "bgColor": 0,
+              "width": 0,
+              "visible": false,
+              "cellType": 6,
+              "cellDetails": {
+               "cellType": 6,
+               "ymdKubun": 2,
+               "displayFormat": 0,
+               "onChange": ""
+              },
+              "align": 1,
+              "resize": false,
+              "isPrivateInfo": false,
+              "sortKey": "txtKeikakuTekiyoKaishiYMDInvisible"
+             },
+             {
+              "columnName": "開始日",
               "dataName": "txtKeikakuTekiyoKaishiYMD",
               "toolTip": "",
               "bgColor": 0,
-              "width": 130,
+              "width": 90,
               "visible": true,
               "cellType": 0,
               "cellDetails": {
@@ -531,11 +563,11 @@
               "sortKey": "txtKeikakuTekiyoKaishiYMD"
              },
              {
-              "columnName": "計画適用終了日",
+              "columnName": "終了日",
               "dataName": "txtKeikakuTekiyoShuryoYMD",
               "toolTip": "",
               "bgColor": 0,
-              "width": 130,
+              "width": 90,
               "visible": true,
               "cellType": 0,
               "cellDetails": {
@@ -551,7 +583,7 @@
               "dataName": "txtTodokedeYMD",
               "toolTip": "",
               "bgColor": 0,
-              "width": 70,
+              "width": 90,
               "visible": true,
               "cellType": 0,
               "cellDetails": {
@@ -567,7 +599,7 @@
               "dataName": "txtTodokedeKubun",
               "toolTip": "",
               "bgColor": 0,
-              "width": 90,
+              "width": 80,
               "visible": true,
               "cellType": 0,
               "cellDetails": null,
@@ -581,6 +613,7 @@
            "height": "175",
            "onSort": "",
            "onSelect": "",
+           "onSelectByDblClick": "",
            "onOnlyRow": "",
            "onNoRow": "",
            "onMultiRows": "",
@@ -588,7 +621,7 @@
            "sortOrder": "defaultDataName4",
            "isAscending": true,
            "filterList": [],
-           "clickedRowId": -1
+           "activeRowId": -1
           }
          ],
          "controlType": "Panel",
@@ -652,13 +685,13 @@
            "required": false,
            "text": "",
            "isPrivateInfo": false,
-           "onChange": "",
            "readOnly": false,
            "placeHolder": "",
            "textKind": 0,
            "isPassword": false,
            "onFocus": "",
            "onBlur": "",
+           "onChange": "",
            "onKeyPress": "",
            "labelLText": "届出日",
            "labelRText": "",
@@ -691,13 +724,13 @@
            "required": false,
            "text": "",
            "isPrivateInfo": false,
-           "onChange": "",
            "readOnly": true,
            "placeHolder": "",
            "textKind": 0,
            "isPassword": false,
            "onFocus": "",
            "onBlur": "",
+           "onChange": "",
            "onKeyPress": "",
            "labelLText": "届出区分",
            "labelRText": "",
@@ -706,12 +739,12 @@
            "labelLAlign": 2,
            "labelRAlign": 0,
            "value": "",
+           "permitCharactor": "",
            "maxLength": 1000000000000,
            "minLength": 0,
            "textAlign": 0,
            "isComboBox": false,
-           "suggest": [],
-           "permitCharactor": ""
+           "suggest": []
           },
           {
            "fieldName": "txtTaishoYMD",
@@ -733,13 +766,13 @@
            "required": false,
            "text": "",
            "isPrivateInfo": false,
-           "onChange": "",
            "readOnly": false,
            "placeHolder": "",
            "textKind": 0,
            "isPassword": false,
            "onFocus": "",
            "onBlur": "",
+           "onChange": "",
            "onKeyPress": "",
            "labelLText": "対象年月",
            "labelRText": "",
@@ -772,13 +805,13 @@
            "required": false,
            "text": "",
            "isPrivateInfo": false,
-           "onChange": "",
            "readOnly": false,
            "placeHolder": "",
            "textKind": 0,
            "isPassword": false,
            "onFocus": "",
            "onBlur": "",
+           "onChange": "",
            "onKeyPress": "",
            "labelLText": "計画作成日",
            "labelRText": "",
@@ -809,11 +842,11 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "isPrivateInfo": false,
-           "onChange": "",
            "readOnly": false,
            "isPassword": false,
            "onFocus": "",
            "onBlur": "",
+           "onChange": "",
            "onKeyPress": "",
            "labelLText": "適用期間",
            "labelRText": "",
@@ -832,6 +865,48 @@
            "toText": "",
            "fromValue": "",
            "toValue": ""
+          },
+          {
+           "fieldName": "txtRirekiListSelectIndex",
+           "items": [],
+           "controlType": "TextBox",
+           "width": "1",
+           "visible": false,
+           "displayNone": true,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": false,
+           "dependencies": [],
+           "float": 0,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "required": false,
+           "text": "",
+           "isPrivateInfo": false,
+           "readOnly": false,
+           "placeHolder": "",
+           "textKind": 0,
+           "isPassword": false,
+           "onFocus": "",
+           "onBlur": "",
+           "onChange": "",
+           "onKeyPress": "",
+           "labelLText": "",
+           "labelRText": "",
+           "labelLWidth": "S",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
+           "value": "",
+           "permitCharactor": "",
+           "maxLength": 1000000000000,
+           "minLength": 0,
+           "textAlign": 0,
+           "isComboBox": false,
+           "suggest": []
           },
           {
            "fieldName": "KyotakuJikoTodokedesha",
@@ -856,13 +931,13 @@
              "required": false,
              "text": "",
              "isPrivateInfo": false,
-             "onChange": "",
              "readOnly": false,
              "placeHolder": "",
              "textKind": 0,
              "isPassword": false,
              "onFocus": "",
              "onBlur": "",
+             "onChange": "",
              "onKeyPress": "",
              "labelLText": "氏名(漢字)",
              "labelRText": "",
@@ -871,12 +946,12 @@
              "labelLAlign": 2,
              "labelRAlign": 0,
              "value": "",
+             "permitCharactor": "",
              "maxLength": 1000000000000,
              "minLength": 0,
              "textAlign": 0,
              "isComboBox": false,
-             "suggest": [],
-             "permitCharactor": ""
+             "suggest": []
             },
             {
              "fieldName": "ddlKankeiKubun",
@@ -918,16 +993,16 @@
                "value": "ケアマネージャ"
               }
              ],
-             "onChange": "",
-             "selectedItem": "",
              "onFocus": "",
              "onBlur": "",
+             "onChange": "",
              "labelLText": "関係区分",
              "labelRText": "",
              "labelLWidth": "60",
              "labelRWidth": "S",
              "labelLAlign": 2,
-             "labelRAlign": 0
+             "labelRAlign": 0,
+             "selectedItem": ""
             },
             {
              "fieldName": "txtKana",
@@ -949,13 +1024,13 @@
              "required": false,
              "text": "",
              "isPrivateInfo": false,
-             "onChange": "",
              "readOnly": false,
              "placeHolder": "",
              "textKind": 0,
              "isPassword": false,
              "onFocus": "",
              "onBlur": "",
+             "onChange": "",
              "onKeyPress": "",
              "labelLText": "(カナ)",
              "labelRText": "",
@@ -964,12 +1039,12 @@
              "labelLAlign": 2,
              "labelRAlign": 0,
              "value": "",
+             "permitCharactor": "",
              "maxLength": 1000000000000,
              "minLength": 0,
              "textAlign": 0,
              "isComboBox": false,
              "suggest": [],
-             "permitCharactor": "",
              "kanjiInField": "txtName",
              "kanaType": 0
             },
@@ -993,13 +1068,13 @@
              "required": false,
              "text": "",
              "isPrivateInfo": false,
-             "onChange": "",
              "readOnly": false,
              "placeHolder": "",
              "textKind": 0,
              "isPassword": false,
              "onFocus": "",
              "onBlur": "",
+             "onChange": "",
              "onKeyPress": "",
              "labelLText": "電話番号",
              "labelRText": "",
@@ -1008,12 +1083,12 @@
              "labelLAlign": 2,
              "labelRAlign": 0,
              "value": "",
+             "permitCharactor": "",
              "maxLength": 1000000000000,
              "minLength": 0,
              "textAlign": 0,
              "isComboBox": false,
-             "suggest": [],
-             "permitCharactor": ""
+             "suggest": []
             },
             {
              "fieldName": "txtYubinNo",
@@ -1035,75 +1110,33 @@
              "required": false,
              "text": "",
              "isPrivateInfo": false,
-             "onChange": "",
              "readOnly": false,
              "placeHolder": "",
              "textKind": 2,
              "isPassword": false,
              "onFocus": "",
              "onBlur": "",
+             "onChange": "",
              "onKeyPress": "",
-             "labelLText": "〒",
+             "labelLText": "住所",
              "labelRText": "",
              "labelLWidth": "80",
              "labelRWidth": "S",
              "labelLAlign": 2,
              "labelRAlign": 0,
              "value": "",
+             "permitCharactor": "",
              "maxLength": 1000000000000,
              "minLength": 0,
              "textAlign": 0,
              "isComboBox": false,
-             "suggest": [],
-             "permitCharactor": ""
-            },
-            {
-             "fieldName": "txtJushoCode",
-             "items": [],
-             "controlType": "TextBox",
-             "width": "70",
-             "visible": true,
-             "displayNone": false,
-             "disabled": false,
-             "accessKey": "",
-             "nextFocusFieldName": "",
-             "wrap": false,
-             "dependencies": [],
-             "float": 0,
-             "toolTip": "",
-             "authorityMode": 0,
-             "marginLeft": "XS",
-             "marginRight": "XS",
-             "required": false,
-             "text": "",
-             "isPrivateInfo": false,
-             "onChange": "",
-             "readOnly": false,
-             "placeHolder": "",
-             "textKind": 0,
-             "isPassword": false,
-             "onFocus": "",
-             "onBlur": "",
-             "onKeyPress": "",
-             "labelLText": "住所",
-             "labelRText": "",
-             "labelLWidth": "30",
-             "labelRWidth": "S",
-             "labelLAlign": 2,
-             "labelRAlign": 0,
-             "value": "",
-             "maxLength": 1000000000000,
-             "minLength": 0,
-             "textAlign": 0,
-             "isComboBox": false,
-             "suggest": [],
-             "permitCharactor": ""
+             "suggest": []
             },
             {
              "fieldName": "txtJusho",
              "items": [],
              "controlType": "TextBox",
-             "width": "601",
+             "width": "590",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -1119,13 +1152,13 @@
              "required": false,
              "text": "",
              "isPrivateInfo": false,
-             "onChange": "",
              "readOnly": false,
              "placeHolder": "",
              "textKind": 0,
              "isPassword": false,
              "onFocus": "",
              "onBlur": "",
+             "onChange": "",
              "onKeyPress": "",
              "labelLText": "",
              "labelRText": "",
@@ -1134,12 +1167,12 @@
              "labelLAlign": 2,
              "labelRAlign": 0,
              "value": "",
+             "permitCharactor": "",
              "maxLength": 1000000000000,
              "minLength": 0,
              "textAlign": 0,
              "isComboBox": false,
-             "suggest": [],
-             "permitCharactor": ""
+             "suggest": []
             }
            ],
            "controlType": "Panel",
@@ -1203,13 +1236,13 @@
              "required": false,
              "text": "",
              "isPrivateInfo": false,
-             "onChange": "",
              "readOnly": false,
              "placeHolder": "",
              "textKind": 0,
              "isPassword": false,
              "onFocus": "",
              "onBlur": "",
+             "onChange": "",
              "onKeyPress": "",
              "labelLText": "変更日",
              "labelRText": "",
@@ -1242,13 +1275,13 @@
              "required": false,
              "text": "",
              "isPrivateInfo": false,
-             "onChange": "",
              "readOnly": false,
              "placeHolder": "",
              "textKind": 0,
              "isPassword": false,
              "onFocus": "",
              "onBlur": "",
+             "onChange": "",
              "onKeyPress": "",
              "labelLText": "変更事由",
              "labelRText": "",
@@ -1257,12 +1290,12 @@
              "labelLAlign": 2,
              "labelRAlign": 0,
              "value": "",
+             "permitCharactor": "",
              "maxLength": 1000000000000,
              "minLength": 0,
              "textAlign": 0,
              "isComboBox": false,
-             "suggest": [],
-             "permitCharactor": ""
+             "suggest": []
             }
            ],
            "controlType": "Panel",
@@ -1321,13 +1354,14 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "text": "届出明細を削除する",
-           "onClick": "",
+           "onClick": "onClickTodokedeDelete",
+           "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
            "imageHeight": ""
           },
           {
-           "fieldName": "txtTodokedeTeisei",
+           "fieldName": "btnTodokedeTeisei",
            "items": [],
            "controlType": "Button",
            "width": "150",
@@ -1344,7 +1378,8 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "text": "届出明細を訂正する",
-           "onClick": "",
+           "onClick": "onClickTodokedeTeisei",
+           "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
            "imageHeight": ""
@@ -1367,7 +1402,32 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "text": "届出明細を確定する",
-           "onClick": "",
+           "onClick": "onClickTodokedeKakutei",
+           "appearance": 0,
+           "imageFileUrl": "",
+           "imageWidth": "",
+           "imageHeight": ""
+          },
+          {
+           "fieldName": "btnTodokedeClear",
+           "items": [],
+           "controlType": "Button",
+           "width": "150",
+           "visible": true,
+           "displayNone": false,
+           "disabled": false,
+           "accessKey": "",
+           "nextFocusFieldName": "",
+           "wrap": false,
+           "dependencies": [],
+           "float": 0,
+           "toolTip": "",
+           "authorityMode": 0,
+           "marginLeft": "XS",
+           "marginRight": "XS",
+           "text": "届出明細をクリアする",
+           "onClick": "onClickTodokedeClear",
+           "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
            "imageHeight": ""
@@ -1430,7 +1490,7 @@
        "onActive": ""
       },
       {
-       "fieldName": "ShoruiJokyo",
+       "fieldName": "tplKyotakuJikoTodokedeDetailShorui",
        "items": [
         {
          "fieldName": "KyotakuJikoTodokedeShoruiList",
@@ -1491,6 +1551,7 @@
            "height": "XS",
            "onSort": "",
            "onSelect": "",
+           "onSelectByDblClick": "",
            "onOnlyRow": "",
            "onNoRow": "",
            "onMultiRows": "",
@@ -1498,7 +1559,7 @@
            "sortOrder": "defaultDataName4",
            "isAscending": true,
            "filterList": [],
-           "clickedRowId": -1
+           "activeRowId": -1
           }
          ],
          "controlType": "Panel",
@@ -1639,11 +1700,11 @@
      "onChange": "",
      "selectedItem": null,
      "tabpanelPosition": [
-      "KyotakuServiceRireki",
-      "ShoruiJokyo"
+      "tplKyotakuJikoTodokedeDetailRireki",
+      "tplKyotakuJikoTodokedeDetailShorui"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "KyotakuServiceRireki"
+     "selectedItemFieldName": "tplKyotakuJikoTodokedeDetailRireki"
     },
     {
      "fieldName": "btnReturn",
@@ -1664,29 +1725,7 @@
      "marginRight": "XS",
      "text": "該当者一覧に戻る",
      "onClick": "",
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": ""
-    },
-    {
-     "fieldName": "btnTodokedeSave",
-     "items": [],
-     "controlType": "Button",
-     "width": "150",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 2,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "text": "届出を保存する",
-     "onClick": "",
+     "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": ""
@@ -1715,6 +1754,105 @@
      "postParameterPanelNames": "KyotakuJikoTodokedeDetail"
     }
    ],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoTodokedeDetail/getOnLoadData"
+    },
+    {
+     "eventName": "onClickTodokedeNew",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoTodokedeDetail/onClickTodokedeNew"
+    },
+    {
+     "eventName": "onClickTodokedeModify",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoTodokedeDetail/onClickTodokedeModify"
+    },
+    {
+     "eventName": "onClickTodokedeSelect",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoTodokedeDetail/onClickTodokedeSelect"
+    },
+    {
+     "eventName": "onClickTodokedeDelete",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoTodokedeDetail/onClickTodokedeDelete"
+    },
+    {
+     "eventName": "onClickTodokedeClear",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoTodokedeDetail/onClickTodokedeClear"
+    },
+    {
+     "eventName": "onClickTodokedeKakutei",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoTodokedeDetail/onClickTodokedeKakutei"
+    },
+    {
+     "eventName": "onClickTodokedeTeisei",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoTodokedeDetail/onClickTodokedeTeisei"
+    }
+   ],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": true,
+   "isGroupBox": false
+  },
+  {
+   "fieldName": "KyotsuPanel",
+   "items": [
+    {
+     "fieldName": "btnTodokedeSave",
+     "items": [],
+     "controlType": "Button",
+     "width": "150",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "text": "届出を保存する",
+     "onClick": "",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
+    }
+   ],
+   "controlType": "Panel",
+   "width": "M",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "KyotsuPanel"
+    }
+   ],
    "requestSettings": [],
    "hiddenInput": [],
    "onOpen": "",
@@ -1727,7 +1865,7 @@
    "eraseBorderRight": false,
    "eraseBorderLeft": false,
    "backgroundColor": 0,
-   "widthAuto": false,
+   "widthAuto": true,
    "isGroupBox": false
   }
  ],
@@ -1765,7 +1903,48 @@
     }
    ],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "btnSearch",
+     "event": "onClick",
+     "transition": "居宅サービス自己作成届出一覧"
+    },
+    {
+     "fieldName": "btnTodokedeNew",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnTodokedeModify",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgRirekiList[btnSelect]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnTodokedeDelete",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnTodokedeTeisei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnTodokedeKakutei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
   },
   {
    "order": "2",
@@ -1782,11 +1961,52 @@
     }
    ],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "btnSearch",
+     "event": "onClick",
+     "transition": "居宅サービス自己作成届出一覧"
+    },
+    {
+     "fieldName": "btnTodokedeNew",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnTodokedeModify",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgRirekiList[btnSelect]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnTodokedeDelete",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnTodokedeTeisei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnTodokedeKakutei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
   },
   {
    "order": "3",
-   "stateName": "居宅サービス自己作成届出",
+   "stateName": "居宅サービス自己作成届出一覧",
    "showWizard": false,
    "visibleDivs": [
     {
@@ -1807,6 +2027,96 @@
     },
     {
      "visibleDiv": "KyotakuJikoTodokedeMeisai",
+     "panelState": "close"
+    },
+    {
+     "visibleDiv": "KyotakuJikoTodokedeShoruiList",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "KyotakuJikoTodokedeShoruiMeisai",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "KyotakuJikoTodokedesha",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "KyotakuJikoTodokedeHenkoNaiyo",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "KyotsuPanel",
+     "panelState": "visible"
+    }
+   ],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnSearch",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnTodokedeNew",
+     "event": "onClick",
+     "transition": "居宅サービス自己作成届出明細"
+    },
+    {
+     "fieldName": "btnTodokedeModify",
+     "event": "onClick",
+     "transition": "居宅サービス自己作成届出明細"
+    },
+    {
+     "fieldName": "dgRirekiList[btnSelect]",
+     "event": "onClick",
+     "transition": "居宅サービス自己作成届出明細"
+    },
+    {
+     "fieldName": "btnTodokedeDelete",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnTodokedeTeisei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnTodokedeKakutei",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": "個人検索条件"
+    }
+   ]
+  },
+  {
+   "order": "4",
+   "stateName": "居宅サービス自己作成届出明細",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "KyotakuJikoTodokedeDetail",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "KyotakuJikoTodokedeKihon",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "KyotakuJikoTodokedeKaigoKihon",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "KyotakuJikoTodokedeRirekiList",
+     "panelState": "close"
+    },
+    {
+     "visibleDiv": "KyotakuJikoTodokedeMeisai",
      "panelState": "visible"
     },
     {
@@ -1824,13 +2134,58 @@
     {
      "visibleDiv": "KyotakuJikoTodokedeHenkoNaiyo",
      "panelState": "visible"
+    },
+    {
+     "visibleDiv": "KyotsuPanel",
+     "panelState": "visible"
     }
    ],
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "btnSearch",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnTodokedeNew",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnTodokedeModify",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgRirekiList[btnSelect]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnTodokedeDelete",
+     "event": "onClick",
+     "transition": "居宅サービス自己作成届出一覧"
+    },
+    {
+     "fieldName": "btnTodokedeTeisei",
+     "event": "onClick",
+     "transition": "居宅サービス自己作成届出一覧"
+    },
+    {
+     "fieldName": "btnTodokedeKakutei",
+     "event": "onClick",
+     "transition": "居宅サービス自己作成届出一覧"
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": "個人検索条件"
+    }
+   ]
   }
  ],
- "currentState": "居宅サービス自己作成届出",
+ "currentState": "All",
  "id": "DBC0110000",
  "WFParameter": [],
  "UIContainerEventMapping": [],
@@ -1849,6 +2204,9 @@
   ],
   [
    "KyotakuJikoTodokedeKaigoKihon"
+  ],
+  [
+   "KyotsuPanel"
   ]
  ],
  "panelMargin": 1,

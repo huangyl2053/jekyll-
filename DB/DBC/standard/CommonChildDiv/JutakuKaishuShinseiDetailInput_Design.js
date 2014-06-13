@@ -200,7 +200,7 @@ var DBC;
                                         "cellDetails": {
                                             "cellType": 8,
                                             "text": "修正",
-                                            "onClick": "",
+                                            "onClick": "onClick_btnModify",
                                             "imageFileUrl": "",
                                             "imageWidth": "",
                                             "imageHeight": ""
@@ -344,12 +344,12 @@ var DBC;
                             "height": "240",
                             "onSort": "",
                             "onSelect": "",
-                            "onSelectByDblClick": "",
+                            "onSelectByDblClick": "onClick_btnModify",
                             "onOnlyRow": "",
                             "onNoRow": "",
                             "onMultiRows": "",
                             "dataSource": [],
-                            "sortOrder": "btnDelete",
+                            "sortOrder": "txtKaishuJigyosha",
                             "isAscending": true,
                             "filterList": [],
                             "activeRowId": -1

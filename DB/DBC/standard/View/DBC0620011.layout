@@ -1,0 +1,1024 @@
+﻿{
+ "fieldName": "Page",
+ "items": [
+  {
+   "fieldName": "YoguKonyuhiShikyuShinseiShinsazumiSearchPanel",
+   "items": [
+    {
+     "fieldName": "YoguKonyuhiShikyuShinseiShinsazumiSearchCondition",
+     "items": [
+      {
+       "fieldName": "txtShinsaDateRange",
+       "items": [],
+       "controlType": "TextBoxDateRange",
+       "width": "80",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "readOnly": false,
+       "isPrivateInfo": false,
+       "isPassword": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
+       "onKeyPress": "",
+       "permitCharactor": "",
+       "fromPlaceHolder": "平26.07.01",
+       "toPlaceHolder": "平26.07.31",
+       "ymdKubun": 2,
+       "displayFormat": 0,
+       "minDate": "",
+       "maxDate": "",
+       "fromText": "",
+       "toText": "",
+       "fromValue": "",
+       "toValue": "",
+       "labelLText": "審査日",
+       "labelRText": "",
+       "labelLWidth": "45",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0
+      },
+      {
+       "fieldName": "ddlHokensha",
+       "items": [],
+       "controlType": "DropDownList",
+       "width": "M",
+       "visible": false,
+       "displayNone": true,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
+       "labelLText": "保険者",
+       "labelRText": "",
+       "labelLWidth": "S",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "selectedItem": "",
+       "dataSource": [
+        {
+         "key": "key0",
+         "value": "大町市"
+        },
+        {
+         "key": "key1",
+         "value": "白馬村"
+        }
+       ],
+       "required": false
+      },
+      {
+       "fieldName": "btnSearchShinsazumi",
+       "items": [],
+       "controlType": "Button",
+       "width": "M",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "onClick": "onClick_btnSearchShinsazumi",
+       "text": "審査済分を検索する",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": ""
+      }
+     ],
+     "controlType": "Panel",
+     "width": "985",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "onLoad": "",
+     "title": "審査済支給申請検索条件",
+     "isOpen": true,
+     "canOpenAndClose": true,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "YoguKonyuhiShikyuShinseiShinsazumiSearchCondition"
+      }
+     ],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
+     "backgroundColor": 0,
+     "widthAuto": false,
+     "isGroupBox": false
+    },
+    {
+     "fieldName": "YoguKonyuhiShikyuShinseiShinsazumiResultList",
+     "items": [
+      {
+       "fieldName": "txtKetteiDate",
+       "items": [],
+       "controlType": "TextBoxDate",
+       "width": "80",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "readOnly": false,
+       "isPrivateInfo": false,
+       "isPassword": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
+       "onKeyPress": "",
+       "permitCharactor": "./_-",
+       "ymdKubun": 2,
+       "displayFormat": 0,
+       "labelLText": "決定日",
+       "labelRText": "",
+       "labelLWidth": "45",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "required": false,
+       "text": "",
+       "placeHolder": "",
+       "textKind": 0,
+       "value": ""
+      },
+      {
+       "fieldName": "dgYoguKonyuhiKetteiMishinsaShikyuShinseiList",
+       "items": [],
+       "controlType": "DataGrid",
+       "width": "970",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": true,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "dataSource": [],
+       "gridSetting": {
+        "rowHeight": 25,
+        "isMultiSelectable": true,
+        "isShowFooter": true,
+        "isShowFilter": false,
+        "isShowFilterButton": false,
+        "isShowRowState": false,
+        "header": {
+         "combineColumns": [],
+         "frozenColumn": "",
+         "headerHeight": 0
+        },
+        "columns": [
+         {
+          "columnName": "支給申請日",
+          "dataName": "txtShikyuShinseiDate",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 100,
+          "visible": true,
+          "cellType": 6,
+          "cellDetails": {
+           "cellType": 6,
+           "ymdKubun": 2,
+           "displayFormat": 0,
+           "onChange": ""
+          },
+          "align": 1,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtShikyuShinseiDate"
+         },
+         {
+          "columnName": "提供年月",
+          "dataName": "txtTenkyoYM",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 80,
+          "visible": true,
+          "cellType": 6,
+          "cellDetails": {
+           "cellType": 6,
+           "ymdKubun": 1,
+           "displayFormat": 0,
+           "onChange": ""
+          },
+          "align": 1,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtTenkyoYM"
+         },
+         {
+          "columnName": "被保番号",
+          "dataName": "txtHihoNo",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 100,
+          "visible": true,
+          "cellType": 4,
+          "cellDetails": {
+           "cellType": 4,
+           "maxLength": "1000000000000",
+           "minLength": "0",
+           "formatLength": "10",
+           "onChange": ""
+          },
+          "align": 1,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtHihoNo"
+         },
+         {
+          "columnName": "氏名",
+          "dataName": "txtHihoName",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 150,
+          "visible": true,
+          "cellType": 1,
+          "cellDetails": {
+           "cellType": 1,
+           "maxLength": "1000000000000",
+           "minLength": "0",
+           "textAlign": 0,
+           "onChange": ""
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtHihoName"
+         },
+         {
+          "columnName": "保険請求額",
+          "dataName": "txtHokenSeikyuAmount",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 100,
+          "visible": true,
+          "cellType": 5,
+          "cellDetails": {
+           "cellType": 5,
+           "maxLength": "1000000000000",
+           "minLength": "0",
+           "maxValue": "1.7976931348623157e+308",
+           "minValue": "0",
+           "isCurrency": false,
+           "isComma": true,
+           "decimalPointLength": "0",
+           "onChange": ""
+          },
+          "align": 2,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtHokenSeikyuAmount"
+         },
+         {
+          "columnName": "利用者負担額",
+          "dataName": "txtRiyoshaFutanAmount",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 110,
+          "visible": true,
+          "cellType": 5,
+          "cellDetails": {
+           "cellType": 5,
+           "maxLength": "1000000000000",
+           "minLength": "0",
+           "maxValue": "1.7976931348623157e+308",
+           "minValue": "0",
+           "isCurrency": false,
+           "isComma": true,
+           "decimalPointLength": "0",
+           "onChange": ""
+          },
+          "align": 2,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtRiyoshaFutanAmount"
+         },
+         {
+          "columnName": "限度超過額",
+          "dataName": "txtLimitOverAmount",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 100,
+          "visible": true,
+          "cellType": 5,
+          "cellDetails": {
+           "cellType": 5,
+           "maxLength": "1000000000000",
+           "minLength": "0",
+           "maxValue": "1.7976931348623157e+308",
+           "minValue": "0",
+           "isCurrency": false,
+           "isComma": true,
+           "decimalPointLength": "0",
+           "onChange": ""
+          },
+          "align": 2,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtLimitOverAmount"
+         },
+         {
+          "columnName": "審査結果",
+          "dataName": "txtShinsaResult",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 100,
+          "visible": true,
+          "cellType": 1,
+          "cellDetails": {
+           "cellType": 1,
+           "maxLength": "1000000000000",
+           "minLength": "0",
+           "textAlign": 0,
+           "onChange": ""
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtShinsaResult"
+         },
+         {
+          "columnName": "審査日",
+          "dataName": "txtShinsaDate",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 80,
+          "visible": true,
+          "cellType": 6,
+          "cellDetails": {
+           "cellType": 6,
+           "ymdKubun": 2,
+           "displayFormat": 0,
+           "onChange": ""
+          },
+          "align": 1,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtShinsaDate"
+         },
+         {
+          "columnName": "整理番号",
+          "dataName": "txtSeiriNo",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 100,
+          "visible": true,
+          "cellType": 1,
+          "cellDetails": {
+           "cellType": 1,
+           "maxLength": "1000000000000",
+           "minLength": "0",
+           "textAlign": 0,
+           "onChange": ""
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtSeiriNo"
+         }
+        ]
+       },
+       "height": "M",
+       "onSort": "",
+       "onSelect": "",
+       "onSelectByDblClick": "",
+       "onOnlyRow": "",
+       "onNoRow": "",
+       "onMultiRows": "",
+       "sortOrder": "txtShinsaDate",
+       "isAscending": true,
+       "filterList": [],
+       "activeRowId": -1
+      }
+     ],
+     "controlType": "Panel",
+     "width": "985",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "onLoad": "",
+     "title": "審査済支給申請一覧",
+     "isOpen": true,
+     "canOpenAndClose": true,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "YoguKonyuhiShikyuShinseiShinsazumiResultList"
+      }
+     ],
+     "requestSettings": [
+      {
+       "eventName": "onLoad",
+       "requestUrl": ""
+      }
+     ],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
+     "backgroundColor": 0,
+     "widthAuto": false,
+     "isGroupBox": false
+    }
+   ],
+   "controlType": "Panel",
+   "width": "1000",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "onLoad": "",
+   "title": "審査済支給申請検索",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "YoguKonyuhiShikyuShinseiShinsazumiSearchPanel"
+    }
+   ],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/YoguKonyuhiShikyuShinseiShinsazumiSearchPanel/onLoad"
+    },
+    {
+     "eventName": "onClick_btnSearchShinsazumi",
+     "requestUrl": "dbc/db/dbc/YoguKonyuhiShikyuShinseiShinsazumiSearchPanel/onClick_btnSearchMishinsa"
+    }
+   ],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": true,
+   "eraseBorderBottom": true,
+   "eraseBorderRight": true,
+   "eraseBorderLeft": true,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "isGroupBox": false
+  },
+  {
+   "fieldName": "YoguKonyuhiShikyuOutputReport",
+   "items": [
+    {
+     "fieldName": "YoguKonyuhiShikyuKetteishaList",
+     "items": [
+      {
+       "fieldName": "YoguKonyuhiShikyuKetteishaListHakkoDate",
+       "items": [],
+       "controlType": "CommonChildDiv",
+       "width": "XS",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": 0,
+       "marginRight": 0,
+       "relation": [],
+       "marginTop": 0,
+       "marginBottom": 0,
+       "businessId": "DBZ",
+       "controlName": "PrintContentsSetting",
+       "dataPassingForDialog": [],
+       "dialogOkEventNameForDialog": "",
+       "dialogCancelEventNameForDialog": "",
+       "txtSendData_displayNone": true,
+       "PrintContentsSetting_title": "",
+       "PrintContentsSetting_eraseBorderTop": true,
+       "PrintContentsSetting_eraseBorderBottom": true,
+       "PrintContentsSetting_eraseBorderRight": true,
+       "PrintContentsSetting_eraseBorderLeft": true
+      },
+      {
+       "fieldName": "OutputOrderForKetteishaList",
+       "items": [],
+       "controlType": "CommonChildDiv",
+       "width": "XS",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": 0,
+       "marginRight": 0,
+       "title": "出力順序・改頁",
+       "relation": [],
+       "marginTop": 0,
+       "marginBottom": 0,
+       "isGroupBox": true,
+       "businessId": "DBC",
+       "controlName": "OutputOrderAndNewpage",
+       "dataPassingForDialog": [],
+       "dialogOkEventNameForDialog": "",
+       "dialogCancelEventNameForDialog": "",
+       "txtNewPageItem_displayNone": false
+      }
+     ],
+     "controlType": "PanelPublish",
+     "width": "990",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "onLoad": "",
+     "title": "償還払支給（不支給）決定者一覧表",
+     "isOpen": true,
+     "canOpenAndClose": false,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "YoguKonyuhiShikyuKetteishaList"
+      }
+     ],
+     "requestSettings": [
+      {
+       "eventName": "onLoad",
+       "requestUrl": "dbc/db/dbc/YoguKonyuhiShikyuKetteishaList/onLoad"
+      }
+     ],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
+     "backgroundColor": 0,
+     "widthAuto": false,
+     "isGroupBox": false,
+     "isPublish": true
+    },
+    {
+     "fieldName": "YoguKonyuhiShikyuKetteiTsuchisho",
+     "items": [
+      {
+       "fieldName": "YoguKonyuhiShikyuKetteiTsuchishoHakkoDate",
+       "items": [],
+       "controlType": "CommonChildDiv",
+       "width": "XS",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": 0,
+       "marginRight": 0,
+       "relation": [],
+       "marginTop": 0,
+       "marginBottom": 0,
+       "businessId": "DBZ",
+       "controlName": "PrintContentsSetting",
+       "dataPassingForDialog": [],
+       "dialogOkEventNameForDialog": "",
+       "dialogCancelEventNameForDialog": "",
+       "txtSendData_displayNone": true,
+       "PrintContentsSetting_title": "",
+       "PrintContentsSetting_eraseBorderTop": true,
+       "PrintContentsSetting_eraseBorderBottom": true,
+       "PrintContentsSetting_eraseBorderRight": true,
+       "PrintContentsSetting_eraseBorderLeft": true
+      },
+      {
+       "fieldName": "PaymentDate",
+       "items": [],
+       "controlType": "CommonChildDiv",
+       "width": "XS",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": true,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": 0,
+       "marginRight": 0,
+       "relation": [],
+       "marginTop": 0,
+       "marginBottom": 0,
+       "businessId": "DBC",
+       "controlName": "PaymentDate",
+       "dataPassingForDialog": [],
+       "dialogOkEventNameForDialog": "",
+       "dialogCancelEventNameForDialog": "",
+       "PaymentDate_title": "支払方法",
+       "PaymentDate_isGroupBox": true,
+       "PaymentDate_canOpenAndClose": false
+      },
+      {
+       "fieldName": "OutputOrderForTsuchisho",
+       "items": [],
+       "controlType": "CommonChildDiv",
+       "width": "XS",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": 0,
+       "marginRight": 0,
+       "title": "出力順序",
+       "relation": [],
+       "marginTop": 0,
+       "marginBottom": 0,
+       "isGroupBox": true,
+       "businessId": "DBC",
+       "controlName": "OutputOrderAndNewpage",
+       "dataPassingForDialog": [],
+       "dialogOkEventNameForDialog": "",
+       "dialogCancelEventNameForDialog": "",
+       "txtNewPageItem_displayNone": true
+      }
+     ],
+     "controlType": "PanelPublish",
+     "width": "990",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "onLoad": "",
+     "title": "償還払支給（不支給）決定通知書",
+     "isOpen": true,
+     "canOpenAndClose": true,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "YoguKonyuhiShikyuKetteiTsuchisho"
+      }
+     ],
+     "requestSettings": [
+      {
+       "eventName": "onLoad",
+       "requestUrl": "dbc/db/dbc/YoguKonyuhiShikyuKetteiTsuchisho/onLoad"
+      }
+     ],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
+     "backgroundColor": 0,
+     "widthAuto": false,
+     "isGroupBox": false,
+     "isPublish": true
+    }
+   ],
+   "controlType": "Panel",
+   "width": "1000",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "YoguKonyuhiShikyuOutputReport"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": true,
+   "eraseBorderBottom": true,
+   "eraseBorderRight": true,
+   "eraseBorderLeft": true,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "isGroupBox": false
+  },
+  {
+   "fieldName": "YoguKonyuhiShikyuShinseiShinsazumiCommonButtonArea",
+   "items": [
+    {
+     "fieldName": "btnIkkatsuKetteiSave",
+     "items": [],
+     "controlType": "Button",
+     "width": "M",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "onClick": "onClick_btnIkkatsuKetteiSave",
+     "text": "支給申請を一括決定登録する",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
+    }
+   ],
+   "controlType": "Panel",
+   "width": "220",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "YoguKonyuhiShikyuShinseiShinsazumiCommonButtonArea"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": true,
+   "eraseBorderBottom": true,
+   "eraseBorderRight": true,
+   "eraseBorderLeft": true,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "isGroupBox": false
+  }
+ ],
+ "controlType": null,
+ "width": "XS",
+ "visible": true,
+ "displayNone": false,
+ "disabled": false,
+ "accessKey": "",
+ "nextFocusFieldName": "",
+ "wrap": false,
+ "dependencies": [],
+ "float": 0,
+ "toolTip": "",
+ "authorityMode": 0,
+ "marginLeft": "XS",
+ "marginRight": "XS",
+ "onLoad": "",
+ "title": "福祉用具購入費支給申請決定",
+ "jsPathCollection": [],
+ "relation": [],
+ "stateTransition": [
+  {
+   "order": "1",
+   "stateName": "一括決定",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "YoguKonyuhiShikyuShinseiShinsazumiSearchPanel",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "YoguKonyuhiShikyuShinseiShinsazumiSearchCondition",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "YoguKonyuhiShikyuShinseiShinsazumiResultList",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "YoguKonyuhiShikyuShinseiShinsazumiCommonButtonArea",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "YoguKonyuhiShikyuKetteishaList",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "YoguKonyuhiShikyuKetteiTsuchisho",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "YoguKonyuhiShikyuKetteishaListHakkoDate",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "YoguKonyuhiShikyuKetteiTsuchishoHakkoDate",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "PaymentDate",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "YoguKonyuhiShikyuOutputReport",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "OutputOrderForKetteishaList",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "OutputOrderForTsuchisho",
+     "panelState": "visible"
+    }
+   ],
+   "validation": {},
+   "events": []
+  }
+ ],
+ "currentState": "All",
+ "id": "DBC0620011",
+ "WFParameter": [],
+ "UIContainerEventMapping": [
+  {
+   "alias": "onClick_btnIkkatsuKetteiSave",
+   "eventName": "btnIkkatsuKetteiSave.onClick"
+  }
+ ],
+ "loadSequencePanelNames": [
+  [
+   "YoguKonyuhiShikyuShinseiShinsazumiSearchPanel"
+  ],
+  [
+   "YoguKonyuhiShikyuShinseiShinsazumiSearchCondition"
+  ],
+  [
+   "YoguKonyuhiShikyuShinseiShinsazumiResultList"
+  ],
+  [
+   "YoguKonyuhiShikyuOutputReport"
+  ],
+  [
+   "YoguKonyuhiShikyuKetteishaList"
+  ],
+  [
+   "YoguKonyuhiShikyuKetteishaListHakkoDate"
+  ],
+  [
+   "OutputOrderForKetteishaList"
+  ],
+  [
+   "YoguKonyuhiShikyuKetteiTsuchisho"
+  ],
+  [
+   "YoguKonyuhiShikyuKetteiTsuchishoHakkoDate"
+  ],
+  [
+   "PaymentDate"
+  ],
+  [
+   "OutputOrderForTsuchisho"
+  ],
+  [
+   "YoguKonyuhiShikyuShinseiShinsazumiCommonButtonArea"
+  ]
+ ],
+ "panelMargin": 1,
+ "controlMargin": 1
+}

@@ -78,8 +78,8 @@ var DBZ;
                                         "sortKey": "btnSelect"
                                     },
                                     {
-                                        "columnName": "事業者コード",
-                                        "dataName": "defaultDataName1",
+                                        "columnName": "事業者番号",
+                                        "dataName": "jigyoshaNo",
                                         "toolTip": "",
                                         "bgColor": 0,
                                         "width": 120,
@@ -91,11 +91,11 @@ var DBZ;
                                         "align": 0,
                                         "resize": true,
                                         "isPrivateInfo": false,
-                                        "sortKey": "defaultDataName1"
+                                        "sortKey": "jigyoshaNo"
                                     },
                                     {
                                         "columnName": "事業者名称",
-                                        "dataName": "defaultDataName2",
+                                        "dataName": "jigyoshaMeisho",
                                         "toolTip": "",
                                         "bgColor": 0,
                                         "width": 200,
@@ -107,11 +107,11 @@ var DBZ;
                                         "align": 0,
                                         "resize": true,
                                         "isPrivateInfo": false,
-                                        "sortKey": "defaultDataName2"
+                                        "sortKey": "jigyoshaMeisho"
                                     },
                                     {
                                         "columnName": "事業者",
-                                        "dataName": "defaultDataName3",
+                                        "dataName": "jigyosha",
                                         "toolTip": "",
                                         "bgColor": 0,
                                         "width": 300,
@@ -123,11 +123,11 @@ var DBZ;
                                         "align": 0,
                                         "resize": true,
                                         "isPrivateInfo": false,
-                                        "sortKey": "defaultDataName3"
+                                        "sortKey": "jigyosha"
                                     },
                                     {
                                         "columnName": "住所",
-                                        "dataName": "defaultDataName4",
+                                        "dataName": "jusho",
                                         "toolTip": "",
                                         "bgColor": 0,
                                         "width": 300,
@@ -139,14 +139,14 @@ var DBZ;
                                         "align": 0,
                                         "resize": true,
                                         "isPrivateInfo": false,
-                                        "sortKey": "defaultDataName4"
+                                        "sortKey": "jusho"
                                     }
                                 ]
                             },
                             "height": "S",
                             "onSort": "",
                             "onSelect": "",
-                            "onSelectByDblClick": "",
+                            "onSelectByDblClick": "onClick_btnSelect",
                             "onOnlyRow": "",
                             "onNoRow": "",
                             "onMultiRows": "",
@@ -206,7 +206,16 @@ var DBZ;
                             "postParameterPanelNames": "TekiyoJogaiShisetsuInputGuide"
                         }
                     ],
-                    "requestSettings": [],
+                    "requestSettings": [
+                        {
+                            "eventName": "onLoad",
+                            "requestUrl": "dbz/db/dbz/TekiyoJogaiShisetsuInputGuide/onLoad"
+                        },
+                        {
+                            "eventName": "onClick_btnSelect",
+                            "requestUrl": "dbz/db/dbz/TekiyoJogaiShisetsuInputGuide/onClick_btnSelect"
+                        }
+                    ],
                     "hiddenInput": [
                         {
                             "propertyName": "shisetsuCode",

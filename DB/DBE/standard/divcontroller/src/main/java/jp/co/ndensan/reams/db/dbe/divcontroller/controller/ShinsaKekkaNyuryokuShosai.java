@@ -7,19 +7,19 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NinteiChosaKekkaDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShinsaKekkaNyuryokuShosaiDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShinsaShienTaishoshaIchiranDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgChosakekka1_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgChosakekka2_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgChosakekka3_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgShinsaTaishoshaIchiran1_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5020001.ShinsaKekkaNyuryokuShosaiDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5020001.ShinsaShienTaishoshaIchiranDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5020001.dgChosakekka1_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5020001.dgChosakekka2_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5020001.dgChosakekka3_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5020001.dgShinsaTaishoshaIchiran1_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 審査会支援での、審査結果入力支援用画面を編集します。
@@ -27,6 +27,17 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
  * @author N1013 松本直樹
  */
 public class ShinsaKekkaNyuryokuShosai {
+
+    static final int TSUKISU_5 = 5;
+    static final int TSUKISU_6 = 6;
+    static final int TSUKISU_11 = 11;
+    static final int TSUKISU_12 = 12;
+    static final int TSUKISU_23 = 23;
+    static final int TSUKISU_24 = 24;
+    static final int BOTANSU_3 = 3;
+    static final int BOTANSU_4 = 4;
+    static final int BOTANSU_5 = 5;
+    static final int SELECT_IDX = 0;
 
     /**
      * 審査結果入力支援用画面ロード時、画面表示内容を設定します。
@@ -38,37 +49,39 @@ public class ShinsaKekkaNyuryokuShosai {
     public ResponseData onLoadData(ShinsaKekkaNyuryokuShosaiDiv div, ShinsaShienTaishoshaIchiranDiv ichiranDiv) {
         ResponseData<ShinsaKekkaNyuryokuShosaiDiv> response = new ResponseData<>();
 
-        dgShinsaTaishoshaIchiran1_Row dataRow = ichiranDiv.getDgShinsaTaishoshaIchiran1().getClickedItem();
+        dgShinsaTaishoshaIchiran1_Row dataRow = ichiranDiv.getDgShinsaTaishoshaIchiran1().getSelectedItems().get(SELECT_IDX);
+        RString nijiHantei = RString.EMPTY;
+        ViewStateHolder.put("判定結果", nijiHantei);
 
         div.getTabChosaKekka().getTabChosaKekkaShosai().getDgChosakekka1().setDataSource(createRowChosaKekkaTest1Data());
         div.getTabChosaKekka().getTabChosaKekkaShosai().getDgChosakekka2().setDataSource(createRowChosaKekkaTest2Data());
         div.getTabChosaKekka().getTabChosaKekkaShosai().getDgChosakekka3().setDataSource(createRowChosaKekkaTest3Data());
-        div.getShinsaTaishoshaShosai().getTxtShinseiKubun()
-                .setValue(new RString("更新"));
-        // .setValue(dataRow.get申請());
-        div.getShinsaTaishoshaShosai().getTxtHihokenshaKubun().setValue(new RString("１号"));
-        div.getShinsaTaishoshaShosai().getTxtNenrei().setValue(new RString("75才"));
-        div.getShinsaTaishoshaShosai().getTxtSeibetsu().setValue(new RString("男"));
-        div.getShinsaTaishoshaShosai().getTxtZenIchiji().setValue(new RString("介１"));
-        div.getShinsaTaishoshaShosai().getTxtZenNiji().setValue(new RString("介１"));
+        div.getShinsaTaishoshaShosai().getTxtShinseiKubun().setValue(dataRow.get申請());
+        div.getShinsaTaishoshaShosai().getTxtHihokenshaKubun().setValue(dataRow.get被保険者区分());
+        div.getShinsaTaishoshaShosai().getTxtNenrei().setValue(dataRow.get年齢());
+        div.getShinsaTaishoshaShosai().getTxtSeibetsu().setValue(dataRow.get性別());
+        div.getShinsaTaishoshaShosai().getTxtZenIchiji().setValue(dataRow.get前一次());
+        div.getShinsaTaishoshaShosai().getTxtZenNiji().setValue(dataRow.get前二次());
 
         div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getDdlNinteiKubun().setSelectedItem(new RString("認定"));
-        div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtIchijiHanteiKekka().setValue(new RString("要介護２"));
+        div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtIchijiHanteiKekka().setValue(dataRow.get一次());
         div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtNinteibi().setValue(FlexibleDate.getNowDate());
-        div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtShinseibi().setValue(new RDate("20140605"));
-        div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtShinseiKubunShinsei().setValue(new RString("更新"));
-        div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtNinteiYukoKikanStart().setValue(new FlexibleDate("20140701"));
-        div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtNinteiYukoKikanEnd().setValue(new FlexibleDate("20160630"));
+        div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtShinseibi().setValue(new FlexibleDate(dataRow.get申請日()));
+        div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtShinseiKubunShinsei().setValue(dataRow.get申請());
+        div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtNinteiYukoKikanStart().setValue(new FlexibleDate(RString.EMPTY));
+        div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtNinteiYukoKikanEnd().setValue(new FlexibleDate(RString.EMPTY));
+        div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getDdlNijiHanteiKekka().setSelectedItem(new RString("01"));
+        div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtShinsakaiIken().setValue(RString.EMPTY);
         div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().setTitle(new RString("今回認定結果"));
 
         div.getTabChosaKekka().getTabShinsaKekka().getZenkaiNinteiKekka().setDisabled(true);
         div.getTabChosaKekka().getTabShinsaKekka().getZenkaiNinteiKekka().getDdlNinteiKubun().setSelectedItem(new RString("認定"));
-        div.getTabChosaKekka().getTabShinsaKekka().getZenkaiNinteiKekka().getTxtIchijiHanteiKekka().setValue(new RString("要介護１"));
+        div.getTabChosaKekka().getTabShinsaKekka().getZenkaiNinteiKekka().getTxtIchijiHanteiKekka().setValue(new RString("要支援２"));
 
         List<KeyValueDataSource> arrayData = new ArrayList<>();
         KeyValueDataSource keyValue = new KeyValueDataSource();
         keyValue.setKey(new RString("1"));
-        keyValue.setValue(new RString("要介護１"));
+        keyValue.setValue(new RString("要支援１"));
         arrayData.add(0, keyValue);
 
         div.getTabChosaKekka().getTabShinsaKekka().getZenkaiNinteiKekka().getDdlNijiHanteiKekka().setDataSource(arrayData);
@@ -81,24 +94,25 @@ public class ShinsaKekkaNyuryokuShosai {
         div.getTabChosaKekka().getTabShinsaKekka().getZenkaiNinteiKekka().getDdlJotaiZo().setDataSource(arrayData1);
 
         div.getTabChosaKekka().getTabShinsaKekka().getZenkaiNinteiKekka().getTxtNinteibi().setValue(new FlexibleDate("20120630"));
-        div.getTabChosaKekka().getTabShinsaKekka().getZenkaiNinteiKekka().getTxtShinseibi().setValue(new RDate("20120618"));
+        div.getTabChosaKekka().getTabShinsaKekka().getZenkaiNinteiKekka().getTxtShinseibi().setValue(new FlexibleDate("20120618"));
         div.getTabChosaKekka().getTabShinsaKekka().getZenkaiNinteiKekka().getTxtShinseiKubunShinsei().setValue(new RString("更新"));
         div.getTabChosaKekka().getTabShinsaKekka().getZenkaiNinteiKekka().getTxtNinteiYukoKikanStart().setValue(new FlexibleDate("20120701"));
         div.getTabChosaKekka().getTabShinsaKekka().getZenkaiNinteiKekka().getTxtNinteiYukoKikanEnd().setValue(new FlexibleDate("20140630"));
+        div.getTabChosaKekka().getTabShinsaKekka().getZenkaiNinteiKekka().getTxtShinsakaiIken().setValue(new RString("・認定有効期間を２年間とする"));
         div.getTabChosaKekka().getTabShinsaKekka().getZenkaiNinteiKekka().setTitle(new RString("前回認定結果"));
 
         div.getTabChosaKekka().getTabShinsaKekka().getZenZenkaiNinteiKekka().setDisabled(true);
         div.getTabChosaKekka().getTabShinsaKekka().getZenZenkaiNinteiKekka().getDdlNinteiKubun().setSelectedItem(new RString("認定"));
-        div.getTabChosaKekka().getTabShinsaKekka().getZenZenkaiNinteiKekka().getTxtIchijiHanteiKekka().setValue(new RString("要介護１"));
+        div.getTabChosaKekka().getTabShinsaKekka().getZenZenkaiNinteiKekka().getTxtIchijiHanteiKekka().setValue(new RString("要支援１"));
         div.getTabChosaKekka().getTabShinsaKekka().getZenZenkaiNinteiKekka().getDdlNijiHanteiKekka().setDataSource(arrayData);
         div.getTabChosaKekka().getTabShinsaKekka().getZenZenkaiNinteiKekka().getTxtNinteibi().setValue(new FlexibleDate("20110628"));
-        div.getTabChosaKekka().getTabShinsaKekka().getZenZenkaiNinteiKekka().getTxtShinseibi().setValue(new RDate("20110616"));
+        div.getTabChosaKekka().getTabShinsaKekka().getZenZenkaiNinteiKekka().getTxtShinseibi().setValue(new FlexibleDate("20110616"));
         div.getTabChosaKekka().getTabShinsaKekka().getZenZenkaiNinteiKekka().getTxtShinseiKubunShinsei().setValue(new RString("新規"));
 
         List<KeyValueDataSource> arrayData2 = new ArrayList<>();
         KeyValueDataSource keyValue2 = new KeyValueDataSource();
         keyValue2.setKey(new RString("1"));
-        keyValue2.setValue(new RString("１２ヶ月"));
+        keyValue2.setValue(new RString("１２"));
         arrayData2.add(0, keyValue2);
         div.getTabChosaKekka().getTabShinsaKekka().getZenZenkaiNinteiKekka().getDdlNinteiYukoTsukisu().setDataSource(arrayData2);
         div.getTabChosaKekka().getTabShinsaKekka().getZenZenkaiNinteiKekka().getDdlJotaiZo().setDataSource(arrayData1);
@@ -112,14 +126,38 @@ public class ShinsaKekkaNyuryokuShosai {
     }
 
     /**
+     * 審査結果登録タブの編集内容を登録するボタン押下時の設定内容です。
+     *
+     * @param div 審査結果入力詳細Div
+     * @param ichiranDiv 審査会対象者一覧Div
+     * @return ResponseData
+     */
+    public ResponseData onClickBtnUpdate(ShinsaKekkaNyuryokuShosaiDiv div, ShinsaShienTaishoshaIchiranDiv ichiranDiv) {
+        ResponseData<ShinsaShienTaishoshaIchiranDiv> response = new ResponseData<>();
+        RString nijiHantei;
+        RString yukoTsukisu;
+
+//        dgShinsaTaishoshaIchiran1_Row dataRow = ichiranDiv.getDgShinsaTaishoshaIchiran1().getClickedItem();
+        nijiHantei = div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getDdlNijiHanteiKekka().getSelectedValue();
+        yukoTsukisu = div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getDdlNinteiYukoTsukisu().getSelectedValue();
+        ViewStateHolder.put("判定結果", nijiHantei);
+        ViewStateHolder.put("有効月数", yukoTsukisu);
+
+        response.data = ichiranDiv;
+        return response;
+    }
+
+    /**
      * 審査結果入力タブの今回認定結果情報タブの二次判定結果ドロップダウンリストの選択時の動きを表します。
      *
      * @param div 審査結果入力詳細Div
      * @param ichiranDiv 審査対象者一覧Div
      * @return ResponseData
      */
-    public ResponseData selectDdlNijiHanteiKekka(ShinsaKekkaNyuryokuShosaiDiv div, ShinsaShienTaishoshaIchiranDiv ichiranDiv) {
+    public ResponseData onSelect_DdlNijiHanteiKekka(ShinsaKekkaNyuryokuShosaiDiv div, ShinsaShienTaishoshaIchiranDiv ichiranDiv) {
         ResponseData<ShinsaKekkaNyuryokuShosaiDiv> response = new ResponseData<>();
+
+        dgShinsaTaishoshaIchiran1_Row dataRow = ichiranDiv.getDgShinsaTaishoshaIchiran1().getSelectedItems().get(SELECT_IDX);
 
         if (div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getDdlNijiHanteiKekka()
                 .getSelectedValue().equalsIgnoreCase(new RString("非該当"))) {
@@ -131,9 +169,11 @@ public class ShinsaKekkaNyuryokuShosai {
             div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtShinseiKubunHorei().setValue(RString.EMPTY);
             response.data = div;
         } else {
-            div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtNinteiYukoKikanStart().setValue(new FlexibleDate("20140701"));
+            div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtNinteiYukoKikanStart().
+                    setValue(new FlexibleDate(dataRow.get認定期間開始日()));
             div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtNinteiYukoKikanStart().setDisabled(false);
-            div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtNinteiYukoKikanEnd().setValue(new FlexibleDate("20160630"));
+            div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtNinteiYukoKikanEnd().
+                    setValue(new FlexibleDate("20160630"));
             div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtShinseiKubunHorei().setValue(new RString("更新"));
             if (div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getDdlNijiHanteiKekka()
                     .getSelectedValue().equalsIgnoreCase(new RString("要介護１"))) {
@@ -143,7 +183,7 @@ public class ShinsaKekkaNyuryokuShosai {
                 div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getDdlJotaiZo().setDisabled(true);
                 div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getDdlJotaiZo().setDisplayNone(true);
             }
-            response = ddlNinteiYukoTsukisuSelect(div, ichiranDiv);
+            response = onSelect_ddlNinteiYukoTsukisu(div, ichiranDiv);
         }
         return response;
     }
@@ -155,7 +195,7 @@ public class ShinsaKekkaNyuryokuShosai {
      * @param ichiranDiv 審査対象者一覧Div
      * @return ResponseData
      */
-    public ResponseData ddlNinteiKubunSelect(ShinsaKekkaNyuryokuShosaiDiv div, ShinsaShienTaishoshaIchiranDiv ichiranDiv) {
+    public ResponseData onSelect_ddlNinteiKubun(ShinsaKekkaNyuryokuShosaiDiv div, ShinsaShienTaishoshaIchiranDiv ichiranDiv) {
         ResponseData<ShinsaKekkaNyuryokuShosaiDiv> response = new ResponseData<>();
 
         if (div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getDdlNinteiKubun().getSelectedValue().equalsIgnoreCase("再調査")) {
@@ -176,16 +216,46 @@ public class ShinsaKekkaNyuryokuShosai {
      * @param ichiranDiv 審査対象者一覧Div
      * @return ResponseData
      */
-    public ResponseData ddlNinteiYukoTsukisuSelect(ShinsaKekkaNyuryokuShosaiDiv div, ShinsaShienTaishoshaIchiranDiv ichiranDiv) {
+    public ResponseData onSelect_ddlNinteiYukoTsukisu(ShinsaKekkaNyuryokuShosaiDiv div, ShinsaShienTaishoshaIchiranDiv ichiranDiv) {
         ResponseData<ShinsaKekkaNyuryokuShosaiDiv> response = new ResponseData<>();
 
-        if (div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getDdlNinteiYukoTsukisu().getSelectedValue().equalsIgnoreCase("６ヶ月")) {
-            div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtNinteiYukoKikanEnd().setValue(new FlexibleDate("20141231"));
-        } else if (div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getDdlNinteiYukoTsukisu().getSelectedValue().equalsIgnoreCase("１２ヶ月")) {
-            div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtNinteiYukoKikanEnd().setValue(new FlexibleDate("20150630"));
-        } else if (div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getDdlNinteiYukoTsukisu().getSelectedValue().equalsIgnoreCase("２４ヶ月")) {
-            div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtNinteiYukoKikanEnd().setValue(new FlexibleDate("20160630"));
+        FlexibleDate startYmd;
+        FlexibleDate endYmd;
+
+        startYmd = div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtNinteiYukoKikanStart().getValue();
+        endYmd = startYmd;
+
+        if (div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().
+                getDdlNinteiYukoTsukisu().getSelectedValue().equalsIgnoreCase("６")) {
+            div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtShinsakaiIken().
+                    setValue(RString.EMPTY);
+            if (startYmd.getDayValue() == 1) {
+                endYmd = startYmd.plusMonth(TSUKISU_5);
+            } else {
+                endYmd = startYmd.plusMonth(TSUKISU_6);
+            }
+        } else if (div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().
+                getDdlNinteiYukoTsukisu().getSelectedValue().equalsIgnoreCase("１２")) {
+            div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtShinsakaiIken().
+                    setValue(RString.EMPTY);
+            if (startYmd.getDayValue() == 1) {
+                endYmd = startYmd.plusMonth(TSUKISU_11);
+            } else {
+                endYmd = startYmd.plusMonth(TSUKISU_12);
+            }
+        } else if (div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().
+                getDdlNinteiYukoTsukisu().getSelectedValue().equalsIgnoreCase("２４")) {
+            div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtShinsakaiIken().
+                    setValue(new RString("・認定有効期間を２年間とする"));
+            if (startYmd.getDayValue() == 1) {
+                endYmd = startYmd.plusMonth(TSUKISU_23);
+            } else {
+                endYmd = startYmd.plusMonth(TSUKISU_24);
+            }
         }
+
+        endYmd = new FlexibleDate(endYmd.getYearValue(), endYmd.getMonthValue(), endYmd.getLastDay());
+        div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtNinteiYukoKikanEnd().setValue(endYmd);
 
         response.data = div;
         return response;
@@ -255,19 +325,19 @@ public class ShinsaKekkaNyuryokuShosai {
             KeyValueDataSource keyValue4 = new KeyValueDataSource();
             keyValue4.setKey(new RString("4"));
             keyValue4.setValue(s4);
-            arrayData.add(3, keyValue4);
+            arrayData.add(BOTANSU_3, keyValue4);
         }
         if (s5 != null) {
             KeyValueDataSource keyValue5 = new KeyValueDataSource();
             keyValue5.setKey(new RString("5"));
             keyValue5.setValue(s5);
-            arrayData.add(4, keyValue5);
+            arrayData.add(BOTANSU_4, keyValue5);
         }
         if (s6 != null) {
             KeyValueDataSource keyValue6 = new KeyValueDataSource();
             keyValue6.setKey(new RString("6"));
             keyValue6.setValue(s6);
-            arrayData.add(5, keyValue6);
+            arrayData.add(BOTANSU_5, keyValue6);
         }
 
         return arrayData;
@@ -277,71 +347,73 @@ public class ShinsaKekkaNyuryokuShosai {
         List<dgChosakekka1_Row> arrayData = new ArrayList<>();
         dgChosakekka1_Row item;
 
-        item = createRowChosakekka1Data(false, " ", "1群", "身体機能", "計：", "");
+//        item = createRowChosakekka1Data(true, " ", "1群", "身体機能", "計：", "", DataGridCellBgColor.bgColorLightGray);
+        item = createRowChosakekka1Data(true, " ", "1群", "身体機能", "　", "", DataGridCellBgColor.bgColorLightGray);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "1-1", "左上肢麻痺", "　", "");
+        item = createRowChosakekka1Data(false, " ", "1-1", "左上肢麻痺", "　", "", DataGridCellBgColor.bgColorLightBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "1-2", "右上肢麻痺", "ある", "");
+        item = createRowChosakekka1Data(false, " ", "1-2", "右上肢麻痺", "ある", "", DataGridCellBgColor.bgColorLightBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "1-3", "左下肢麻痺", "　", "");
+        item = createRowChosakekka1Data(false, " ", "1-3", "左下肢麻痺", "　", "", DataGridCellBgColor.bgColorLightBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "1-4", "右下肢麻痺", "　", "");
+        item = createRowChosakekka1Data(false, " ", "1-4", "右下肢麻痺", "　", "", DataGridCellBgColor.bgColorLightBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "2-1", "肩関節拘縮", "ある", "");
+        item = createRowChosakekka1Data(false, " ", "2-1", "肩関節拘縮", "ある", "", DataGridCellBgColor.bgColorLightBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "2-2", "股関節拘縮", "ある", "");
+        item = createRowChosakekka1Data(false, " ", "2-2", "股関節拘縮", "ある", "", DataGridCellBgColor.bgColorLightBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "2-3", "膝関節拘縮", "　", "");
+        item = createRowChosakekka1Data(false, " ", "2-3", "膝関節拘縮", "　", "", DataGridCellBgColor.bgColorLightBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "2-4", "その他拘縮", "　", "");
+        item = createRowChosakekka1Data(false, " ", "2-4", "その他拘縮", "　", "", DataGridCellBgColor.bgColorLightBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "3", "寝返り", "つかまれば可", "1");
+        item = createRowChosakekka1Data(false, " ", "3", "寝返り", "つかまれば可", "1", DataGridCellBgColor.bgColorLightBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "4", "起き上がり", "つかまれば可", "1");
+        item = createRowChosakekka1Data(false, " ", "4", "起き上がり", "つかまれば可", "1", DataGridCellBgColor.bgColorLightBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "5", "座位保持", "　", "2");
+        item = createRowChosakekka1Data(false, " ", "5", "座位保持", "　", "2", DataGridCellBgColor.bgColorLightBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "6", "両足での立位", "　", "3");
+        item = createRowChosakekka1Data(false, " ", "6", "両足での立位", "　", "3", DataGridCellBgColor.bgColorLightBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "7", "歩行", "　", "1");
+        item = createRowChosakekka1Data(false, " ", "7", "歩行", "　", "1", DataGridCellBgColor.bgColorLightBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "8", "立ち上がり", "　", "1");
+        item = createRowChosakekka1Data(false, " ", "8", "立ち上がり", "　", "1", DataGridCellBgColor.bgColorLightBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "9", "片足での立位", "支えが必要", "3");
+        item = createRowChosakekka1Data(false, " ", "9", "片足での立位", "支えが必要", "3", DataGridCellBgColor.bgColorLightBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "10", "洗身", "　", "4");
+        item = createRowChosakekka1Data(false, " ", "10", "洗身", "　", "4", DataGridCellBgColor.bgColorLightBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "11", "つめ切り", "一部介助", "5");
+        item = createRowChosakekka1Data(false, " ", "11", "つめ切り", "一部介助", "5", DataGridCellBgColor.bgColorLightBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "12", "視力", "　", "6");
+        item = createRowChosakekka1Data(false, " ", "12", "視力", "　", "6", DataGridCellBgColor.bgColorLightBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "13", "聴力", "　", "7");
+        item = createRowChosakekka1Data(false, " ", "13", "聴力", "　", "7", DataGridCellBgColor.bgColorLightBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(false, " ", "2群", "生活機能", "計：　", "");
+//        item = createRowChosakekka1Data(true, " ", "2群", "生活機能", "計：　", "", DataGridCellBgColor.bgColorLightGray);
+        item = createRowChosakekka1Data(true, " ", "2群", "生活機能", "　　", "", DataGridCellBgColor.bgColorLightGray);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "1", "移乗", "見守り等", "1");
+        item = createRowChosakekka1Data(false, " ", "1", "移乗", "見守り等", "1", DataGridCellBgColor.bgColorBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "2", "移動", "　", "1");
+        item = createRowChosakekka1Data(false, " ", "2", "移動", "　", "1", DataGridCellBgColor.bgColorBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "3", "えん下", "　", "1");
+        item = createRowChosakekka1Data(false, " ", "3", "えん下", "　", "1", DataGridCellBgColor.bgColorBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "4", "食事摂取", "　", "1");
+        item = createRowChosakekka1Data(false, " ", "4", "食事摂取", "　", "1", DataGridCellBgColor.bgColorBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "5", "排尿", "　", "1");
+        item = createRowChosakekka1Data(false, " ", "5", "排尿", "　", "1", DataGridCellBgColor.bgColorBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "6", "排便", "見守り等", "1");
+        item = createRowChosakekka1Data(false, " ", "6", "排便", "見守り等", "1", DataGridCellBgColor.bgColorBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "7", "口腔清潔", "　", "1");
+        item = createRowChosakekka1Data(false, " ", "7", "口腔清潔", "　", "1", DataGridCellBgColor.bgColorBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "8", "洗顔", "　", "1");
+        item = createRowChosakekka1Data(false, " ", "8", "洗顔", "　", "1", DataGridCellBgColor.bgColorBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "9", "整髪", "　", "1");
+        item = createRowChosakekka1Data(false, " ", "9", "整髪", "　", "1", DataGridCellBgColor.bgColorBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "10", "上衣の着脱", "見守り等", "1");
+        item = createRowChosakekka1Data(false, " ", "10", "上衣の着脱", "見守り等", "1", DataGridCellBgColor.bgColorBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "11", "ズボン等の着脱", "　", "1");
+        item = createRowChosakekka1Data(false, " ", "11", "ズボン等の着脱", "　", "1", DataGridCellBgColor.bgColorBlue);
         arrayData.add(item);
-        item = createRowChosakekka1Data(true, " ", "12", "外出頻度", "　", "1");
+        item = createRowChosakekka1Data(false, " ", "12", "外出頻度", "　", "1", DataGridCellBgColor.bgColorBlue);
         arrayData.add(item);
 
         return arrayData;
@@ -351,71 +423,74 @@ public class ShinsaKekkaNyuryokuShosai {
         List<dgChosakekka2_Row> arrayData = new ArrayList<>();
         dgChosakekka2_Row item;
 
-        item = createRowChosakekka2Data(" ", "3群", "認知機能", "計：");
+//        item = createRowChosakekka2Data(true, " ", "3群", "認知機能", "計：", DataGridCellBgColor.bgColorLightGray);
+        item = createRowChosakekka2Data(true, " ", "3群", "認知機能", "　", DataGridCellBgColor.bgColorLightGray);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "1", "意思の伝達", "　");
+        item = createRowChosakekka2Data(false, " ", "1", "意思の伝達", "　", DataGridCellBgColor.bgColorLightGreen);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "2", "日課を理解", "　");
+        item = createRowChosakekka2Data(false, " ", "2", "日課を理解", "　", DataGridCellBgColor.bgColorLightGreen);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "3", "生年月日をいう", "　");
+        item = createRowChosakekka2Data(false, " ", "3", "生年月日をいう", "　", DataGridCellBgColor.bgColorLightGreen);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "4", "短期記憶", "　");
+        item = createRowChosakekka2Data(false, " ", "4", "短期記憶", "　", DataGridCellBgColor.bgColorLightGreen);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "5", "自分の名前", "　");
+        item = createRowChosakekka2Data(false, " ", "5", "自分の名前", "　", DataGridCellBgColor.bgColorLightGreen);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "6", "今の季節を理解", "　");
+        item = createRowChosakekka2Data(false, " ", "6", "今の季節を理解", "　", DataGridCellBgColor.bgColorLightGreen);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "7", "場所の理解", "　");
+        item = createRowChosakekka2Data(false, " ", "7", "場所の理解", "　", DataGridCellBgColor.bgColorLightGreen);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "8", "徘徊", "　");
+        item = createRowChosakekka2Data(false, " ", "8", "徘徊", "　", DataGridCellBgColor.bgColorLightGreen);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "9", "外出戻れず", "　");
+        item = createRowChosakekka2Data(false, " ", "9", "外出戻れず", "　", DataGridCellBgColor.bgColorLightGreen);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "4群", "精神・行動障害", "計：");
+//        item = createRowChosakekka2Data(true, " ", "4群", "精神・行動障害", "計：", DataGridCellBgColor.bgColorLightGray);
+        item = createRowChosakekka2Data(true, " ", "4群", "精神・行動障害", "　", DataGridCellBgColor.bgColorLightGray);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "1", "被害的", "　");
+        item = createRowChosakekka2Data(false, " ", "1", "被害的", "　", DataGridCellBgColor.bgColorGreen);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "2", "作話", "　");
+        item = createRowChosakekka2Data(false, " ", "2", "作話", "　", DataGridCellBgColor.bgColorGreen);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "3", "感情が不安定", "　");
+        item = createRowChosakekka2Data(false, " ", "3", "感情が不安定", "　", DataGridCellBgColor.bgColorGreen);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "4", "昼夜逆転", "　");
+        item = createRowChosakekka2Data(false, " ", "4", "昼夜逆転", "　", DataGridCellBgColor.bgColorGreen);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "5", "同じ話をする", "　");
+        item = createRowChosakekka2Data(false, " ", "5", "同じ話をする", "　", DataGridCellBgColor.bgColorGreen);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "6", "大声を出す", "　");
+        item = createRowChosakekka2Data(false, " ", "6", "大声を出す", "　", DataGridCellBgColor.bgColorGreen);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "7", "介護に抵抗", "　");
+        item = createRowChosakekka2Data(false, " ", "7", "介護に抵抗", "　", DataGridCellBgColor.bgColorGreen);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "8", "落ち着きなし", "　");
+        item = createRowChosakekka2Data(false, " ", "8", "落ち着きなし", "　", DataGridCellBgColor.bgColorGreen);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "9", "一人で出たがる", "　");
+        item = createRowChosakekka2Data(false, " ", "9", "一人で出たがる", "　", DataGridCellBgColor.bgColorGreen);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "10", "収集癖", "　");
+        item = createRowChosakekka2Data(false, " ", "10", "収集癖", "　", DataGridCellBgColor.bgColorGreen);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "11", "物等を壊す", "　");
+        item = createRowChosakekka2Data(false, " ", "11", "物等を壊す", "　", DataGridCellBgColor.bgColorGreen);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "12", "ひどい物忘れ", "　");
+        item = createRowChosakekka2Data(false, " ", "12", "ひどい物忘れ", "　", DataGridCellBgColor.bgColorGreen);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "13", "独り言独り笑い", "　");
+        item = createRowChosakekka2Data(false, " ", "13", "独り言独り笑い", "　", DataGridCellBgColor.bgColorGreen);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "14", "勝手に行動", "　");
+        item = createRowChosakekka2Data(false, " ", "14", "勝手に行動", "　", DataGridCellBgColor.bgColorGreen);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "15", "話がまとまらず", "　");
+        item = createRowChosakekka2Data(false, " ", "15", "話がまとまらず", "　", DataGridCellBgColor.bgColorGreen);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "5群", "社会への適応", "計：");
+//        item = createRowChosakekka2Data(true, " ", "5群", "社会への適応", "計：", DataGridCellBgColor.bgColorLightGray);
+        item = createRowChosakekka2Data(true, " ", "5群", "社会への適応", "　", DataGridCellBgColor.bgColorLightGray);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "1", "薬の内服", "　");
+        item = createRowChosakekka2Data(false, " ", "1", "薬の内服", "　", DataGridCellBgColor.bgColorLightYellow);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "2", "金銭の管理", "　");
+        item = createRowChosakekka2Data(false, " ", "2", "金銭の管理", "　", DataGridCellBgColor.bgColorLightYellow);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "3", "意思決定", "　");
+        item = createRowChosakekka2Data(false, " ", "3", "意思決定", "　", DataGridCellBgColor.bgColorLightYellow);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "4", "集団への不適応", "　");
+        item = createRowChosakekka2Data(false, " ", "4", "集団への不適応", "　", DataGridCellBgColor.bgColorLightYellow);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "5", "買い物", "　");
+        item = createRowChosakekka2Data(false, " ", "5", "買い物", "　", DataGridCellBgColor.bgColorLightYellow);
         arrayData.add(item);
-        item = createRowChosakekka2Data(" ", "6", "簡単な調理", "　");
+        item = createRowChosakekka2Data(false, " ", "6", "簡単な調理", "　", DataGridCellBgColor.bgColorLightYellow);
         arrayData.add(item);
 
         return arrayData;
@@ -425,115 +500,113 @@ public class ShinsaKekkaNyuryokuShosai {
         List<dgChosakekka3_Row> arrayData = new ArrayList<>();
         dgChosakekka3_Row item;
 
-        item = createRowChosakekka3Data(" ", "　", "特別な医療", "　");
+        item = createRowChosakekka3Data(true, " ", "　", "特別な医療", "　", DataGridCellBgColor.bgColorLightGray);
         arrayData.add(item);
-        item = createRowChosakekka3Data(" ", "　", "点滴の管理", "　");
+        item = createRowChosakekka3Data(false, " ", "　", "点滴の管理", "　", DataGridCellBgColor.bgColorYellow);
         arrayData.add(item);
-        item = createRowChosakekka3Data(" ", "　", "中心静脈栄養", "　");
+        item = createRowChosakekka3Data(false, " ", "　", "中心静脈栄養", "　", DataGridCellBgColor.bgColorYellow);
         arrayData.add(item);
-        item = createRowChosakekka3Data(" ", "　", "透析", "　");
+        item = createRowChosakekka3Data(false, " ", "　", "透析", "　", DataGridCellBgColor.bgColorYellow);
         arrayData.add(item);
-        item = createRowChosakekka3Data(" ", "　", "ストーマの処置", "　");
+        item = createRowChosakekka3Data(false, " ", "　", "ストーマの処置", "　", DataGridCellBgColor.bgColorYellow);
         arrayData.add(item);
-        item = createRowChosakekka3Data(" ", "　", "酸素療法", "　");
+        item = createRowChosakekka3Data(false, " ", "　", "酸素療法", "　", DataGridCellBgColor.bgColorYellow);
         arrayData.add(item);
-        item = createRowChosakekka3Data(" ", "　", "レスピレーター", "　");
+        item = createRowChosakekka3Data(false, " ", "　", "レスピレーター", "　", DataGridCellBgColor.bgColorYellow);
         arrayData.add(item);
-        item = createRowChosakekka3Data(" ", "　", "気管切開", "　");
+        item = createRowChosakekka3Data(false, " ", "　", "気管切開", "　", DataGridCellBgColor.bgColorYellow);
         arrayData.add(item);
-        item = createRowChosakekka3Data(" ", "　", "疼痛の看護", "　");
+        item = createRowChosakekka3Data(false, " ", "　", "疼痛の看護", "　", DataGridCellBgColor.bgColorYellow);
         arrayData.add(item);
-        item = createRowChosakekka3Data(" ", "　", "経菅栄養", "　");
+        item = createRowChosakekka3Data(false, " ", "　", "経菅栄養", "　", DataGridCellBgColor.bgColorYellow);
         arrayData.add(item);
-        item = createRowChosakekka3Data(" ", "　", "モニター測定", "　");
+        item = createRowChosakekka3Data(false, " ", "　", "モニター測定", "　", DataGridCellBgColor.bgColorYellow);
         arrayData.add(item);
-        item = createRowChosakekka3Data(" ", "　", "じょくそうの処置", "　");
+        item = createRowChosakekka3Data(false, " ", "　", "じょくそうの処置", "　", DataGridCellBgColor.bgColorYellow);
         arrayData.add(item);
-        item = createRowChosakekka3Data(" ", "　", "カテーテル", "　");
+        item = createRowChosakekka3Data(false, " ", "　", "カテーテル", "　", DataGridCellBgColor.bgColorYellow);
         arrayData.add(item);
-        item = createRowChosakekka3Data(" ", "　", "自立度", "　");
+        item = createRowChosakekka3Data(true, " ", "　", "自立度", "　", DataGridCellBgColor.bgColorLightGray);
         arrayData.add(item);
-        item = createRowChosakekka3Data(" ", "1", "調寝たきり度", "J2");
+        item = createRowChosakekka3Data(false, " ", "1", "調寝たきり度", "J2", DataGridCellBgColor.bgColorLightRed);
         arrayData.add(item);
-        item = createRowChosakekka3Data(" ", "2", "意寝たきり度", "J2");
+        item = createRowChosakekka3Data(false, " ", "2", "意寝たきり度", "J2", DataGridCellBgColor.bgColorLightRed);
         arrayData.add(item);
-        item = createRowChosakekka3Data(" ", "3", "調認知症度", "Ⅰ");
+        item = createRowChosakekka3Data(false, " ", "3", "調認知症度", "Ⅰ", DataGridCellBgColor.bgColorLightRed);
         arrayData.add(item);
-        item = createRowChosakekka3Data(" ", "4", "意認知症度", "Ⅰ");
+        item = createRowChosakekka3Data(false, " ", "4", "意認知症度", "Ⅰ", DataGridCellBgColor.bgColorLightRed);
         arrayData.add(item);
-        item = createRowChosakekka3Data(" ", "　", "　", "　");
-        arrayData.add(item);
-        item = createRowChosakekka3Data(" ", "　", "主治医意見書", "　");
-        arrayData.add(item);
-        item = createRowChosakekka3Data(" ", "1", "短期記録", "問題なし");
-        arrayData.add(item);
-        item = createRowChosakekka3Data(" ", "2", "認知能力", "自立");
-        arrayData.add(item);
-        item = createRowChosakekka3Data(" ", "3", "伝達能力", "伝えられる");
-        arrayData.add(item);
-        item = createRowChosakekka3Data(" ", "4", "食事行為", "自立");
-        arrayData.add(item);
-//        item = createRowChosakekka3Data(" ", "　", "　", "　");
+//        item = createRowChosakekka3Data(true, " ", "　", "　", "　", DataGridCellBgColor.bgColorNormal);
 //        arrayData.add(item);
-//        item = createRowChosakekka3Data(" ", "　", "　", "　");
-//        arrayData.add(item);
-//        item = createRowChosakekka3Data(" ", "　", "　", "　");
-//        arrayData.add(item);
-//        item = createRowChosakekka3Data(" ", "　", "　", "　");
-//        arrayData.add(item);
-//        item = createRowChosakekka3Data(" ", "　", "　", "　");
-//        arrayData.add(item);
-//        item = createRowChosakekka3Data(" ", "　", "　", "　");
-//        arrayData.add(item);
-//        item = createRowChosakekka3Data(" ", "　", "　", "　");
-//        arrayData.add(item);
-//        item = createRowChosakekka3Data(" ", "　", "　", "　");
-//        arrayData.add(item);
-//        item = createRowChosakekka3Data(" ", "　", "　", "　");
-//        arrayData.add(item);
+        item = createRowChosakekka3Data(true, " ", "　", "主治医意見書", "　", DataGridCellBgColor.bgColorLightGray);
+        arrayData.add(item);
+        item = createRowChosakekka3Data(false, " ", "1", "短期記録", "問題なし", DataGridCellBgColor.bgColorRed);
+        arrayData.add(item);
+        item = createRowChosakekka3Data(false, " ", "2", "認知能力", "自立", DataGridCellBgColor.bgColorRed);
+        arrayData.add(item);
+        item = createRowChosakekka3Data(false, " ", "3", "伝達能力", "伝えられる", DataGridCellBgColor.bgColorRed);
+        arrayData.add(item);
+        item = createRowChosakekka3Data(false, " ", "4", "食事行為", "自立", DataGridCellBgColor.bgColorRed);
+        arrayData.add(item);
 
         return arrayData;
     }
 
-    private dgChosakekka1_Row createRowChosakekka1Data(boolean btnSelect, String チェック, String 群, String 内容, String 結果, String 選択肢) {
+    private dgChosakekka1_Row createRowChosakekka1Data(boolean btnSelect, String チェック, String 群, String 内容, String 結果, String 選択肢,
+            DataGridCellBgColor bgColor) {
 
         Button btn = new Button();
         dgChosakekka1_Row rowChosakekka1Data = new dgChosakekka1_Row(
                 btn, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE);
 
         btn.setDisabled(btnSelect);
+        btn.setDisplayNone(btnSelect);
         btn.setText(RString.EMPTY);
         rowChosakekka1Data.set編集(btn);
+        rowChosakekka1Data.setチェック(new RString(チェック));
         rowChosakekka1Data.set群(new RString(群));
         rowChosakekka1Data.set内容(new RString(内容));
         rowChosakekka1Data.set結果(new RString(結果));
         rowChosakekka1Data.set選択肢(new RString(選択肢));
+        rowChosakekka1Data.setRowBgColor(bgColor);
 
         return rowChosakekka1Data;
     }
 
-    private dgChosakekka2_Row createRowChosakekka2Data(String チェック, String 群, String 内容, String 結果) {
+    private dgChosakekka2_Row createRowChosakekka2Data(boolean btnSelect, String チェック, String 群, String 内容, String 結果,
+            DataGridCellBgColor bgColor) {
 
         Button btn = new Button();
         dgChosakekka2_Row rowChosakekka2Data = new dgChosakekka2_Row(
-                btn, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE);
+                btn, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE);
 
+        btn.setDisabled(btnSelect);
+        btn.setDisplayNone(btnSelect);
+        btn.setText(RString.EMPTY);
+        rowChosakekka2Data.setチェック(new RString(チェック));
         rowChosakekka2Data.set群(new RString(群));
         rowChosakekka2Data.set内容(new RString(内容));
         rowChosakekka2Data.set結果(new RString(結果));
+        rowChosakekka2Data.setRowBgColor(bgColor);
 
         return rowChosakekka2Data;
     }
 
-    private dgChosakekka3_Row createRowChosakekka3Data(String チェック, String 群, String 内容, String 結果) {
+    private dgChosakekka3_Row createRowChosakekka3Data(boolean btnSelect, String チェック, String 群, String 内容, String 結果,
+            DataGridCellBgColor bgColor) {
 
         Button btn = new Button();
         dgChosakekka3_Row rowChosakekka3Data = new dgChosakekka3_Row(
-                btn, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE);
+                btn, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE);
 
+        btn.setDisabled(btnSelect);
+        btn.setDisplayNone(btnSelect);
+        btn.setText(RString.EMPTY);
+        rowChosakekka3Data.setチェック(new RString(チェック));
         rowChosakekka3Data.set群(new RString(群));
         rowChosakekka3Data.set内容(new RString(内容));
         rowChosakekka3Data.set結果(new RString(結果));
+        rowChosakekka3Data.setRowBgColor(bgColor);
 
         return rowChosakekka3Data;
     }
