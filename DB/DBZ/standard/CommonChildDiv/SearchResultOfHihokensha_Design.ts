@@ -22,20 +22,6 @@ module DBZ {
             }
         }
         
-        public get gridSetting() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["gridSetting"];
-        }
-        
-        public set gridSetting(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["gridSetting"] = value;
-            } else {
-                this.layout.items[0].items[0]["gridSetting"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, SearchResultOfHihokensha_Design.myLayout, fieldName);
         }
@@ -47,7 +33,6 @@ module DBZ {
         public registProperty() {
             super.registProperty();
             Uz.JSControlUtil.registProperty("onClickBtnToResearch");
-            Uz.JSControlUtil.registProperty("gridSetting");
         }
         
         /**
@@ -58,7 +43,6 @@ module DBZ {
         public getEditablePropertyInfo(): any {
             var editablePropertyInfo = super.getEditablePropertyInfo();
             editablePropertyInfo["onClickBtnToResearch"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[0]["fieldName"]).getEditablePropertyInfo()["onClick"];
-            editablePropertyInfo["gridSetting"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["gridSetting"];
             
             return editablePropertyInfo;
         }
@@ -501,11 +485,6 @@ module DBZ {
    "publicChildFieldName": "btnToResearch",
    "publicChildProperty": "onClick",
    "newPropertyName": "onClickBtnToResearch"
-  },
-  {
-   "publicChildFieldName": "dgSearchResult",
-   "publicChildProperty": "gridSetting",
-   "newPropertyName": "gridSetting"
   }
  ],
  "dataPassingForDialog": [],
