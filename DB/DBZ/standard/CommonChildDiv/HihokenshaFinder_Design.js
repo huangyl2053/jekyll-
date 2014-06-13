@@ -54,7 +54,7 @@ var DBZ;
                                     "controlType": "DropDownList",
                                     "width": "M",
                                     "visible": true,
-                                    "displayNone": false,
+                                    "displayNone": true,
                                     "disabled": false,
                                     "accessKey": "",
                                     "nextFocusFieldName": "",
@@ -66,6 +66,8 @@ var DBZ;
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
                                     "selectControlID": "ddlHokensha_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
                                     "onChange": "",
                                     "selectedItem": "key0",
                                     "dataSource": [
@@ -83,7 +85,8 @@ var DBZ;
                                     "labelRAlign": 0,
                                     "onFocus": "",
                                     "onBlur": "",
-                                    "text": ""
+                                    "text": "",
+                                    "disabledItem": []
                                 }
                             ],
                             "controlType": "Panel",
@@ -101,6 +104,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "SearchCriteriaOfHokensha",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "onLoad": "",
                             "title": "",
                             "marginTop": "XS",
@@ -125,7 +130,8 @@ var DBZ;
                             "widthAuto": true,
                             "panelDisplay": 0,
                             "isGroupBox": false,
-                            "readOnly": false
+                            "readOnly": false,
+                            "height": "Auto"
                         },
                         {
                             "fieldName": "SearchCriteriaOfHihokensha",
@@ -148,6 +154,8 @@ var DBZ;
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
                                     "selectControlID": "txtHihokenshaNo_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
                                     "readOnly": false,
                                     "onChange": "",
                                     "required": false,
@@ -171,6 +179,7 @@ var DBZ;
                                     "text": "",
                                     "suggest": [],
                                     "value": "",
+                                    "decorationClass": "",
                                     "permitCharactor": "",
                                     "formatLength": "10"
                                 },
@@ -192,6 +201,8 @@ var DBZ;
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
                                     "selectControlID": "chkHihokenshaKubun_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
                                     "onChange": "",
                                     "selectedItem": null,
                                     "dataSource": [
@@ -219,6 +230,8 @@ var DBZ;
                                     "maxCheckedItem": "3",
                                     "spaceSize": "M",
                                     "isAllSelectable": false,
+                                    "isAllSelectableBreakLine": false,
+                                    "disabledItem": [],
                                     "icon": []
                                 }
                             ],
@@ -237,6 +250,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "SearchCriteriaOfHihokensha",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "onLoad": "",
                             "title": "被保険者",
                             "marginTop": "XS",
@@ -266,7 +281,8 @@ var DBZ;
                             "widthAuto": false,
                             "panelDisplay": 1,
                             "isGroupBox": false,
-                            "readOnly": false
+                            "readOnly": false,
+                            "height": "Auto"
                         },
                         {
                             "fieldName": "SearchCriteriaOfKojin",
@@ -289,6 +305,8 @@ var DBZ;
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
                                     "selectControlID": "txtShikibetsuCode_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
                                     "readOnly": false,
                                     "onChange": "",
                                     "required": false,
@@ -312,6 +330,7 @@ var DBZ;
                                     "text": "",
                                     "suggest": [],
                                     "value": "",
+                                    "decorationClass": "",
                                     "permitCharactor": "",
                                     "formatLength": ""
                                 },
@@ -333,6 +352,8 @@ var DBZ;
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
                                     "selectControlID": "txtSetaiCode_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
                                     "readOnly": false,
                                     "onChange": "",
                                     "required": false,
@@ -356,6 +377,7 @@ var DBZ;
                                     "text": "",
                                     "suggest": [],
                                     "value": "",
+                                    "decorationClass": "",
                                     "permitCharactor": "",
                                     "formatLength": 1
                                 },
@@ -377,6 +399,8 @@ var DBZ;
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
                                     "selectControlID": "txtKojinNo_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
                                     "readOnly": false,
                                     "onChange": "",
                                     "required": false,
@@ -400,6 +424,7 @@ var DBZ;
                                     "text": "",
                                     "suggest": [],
                                     "value": "",
+                                    "decorationClass": "",
                                     "permitCharactor": "",
                                     "formatLength": "12"
                                 },
@@ -421,9 +446,12 @@ var DBZ;
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
                                     "selectControlID": "lblJuminShubetsu",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
                                     "required": false,
                                     "isPrivateInfo": false,
                                     "text": "住民種別",
+                                    "decorationClass": "",
                                     "align": 2
                                 },
                                 {
@@ -444,6 +472,8 @@ var DBZ;
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
                                     "selectControlID": "ddlJuminShubetsu_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
                                     "onChange": "",
                                     "selectedItem": "key0",
                                     "dataSource": [
@@ -469,7 +499,8 @@ var DBZ;
                                     "labelRAlign": 0,
                                     "onFocus": "",
                                     "onBlur": "",
-                                    "text": ""
+                                    "text": "",
+                                    "disabledItem": []
                                 },
                                 {
                                     "fieldName": "txtShimei",
@@ -489,6 +520,8 @@ var DBZ;
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
                                     "selectControlID": "txtShimei_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
                                     "readOnly": false,
                                     "onChange": "",
                                     "required": false,
@@ -512,6 +545,7 @@ var DBZ;
                                     "text": "",
                                     "suggest": [],
                                     "value": "",
+                                    "decorationClass": "",
                                     "permitCharactor": ""
                                 },
                                 {
@@ -532,6 +566,8 @@ var DBZ;
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
                                     "selectControlID": "chkGender_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
                                     "onChange": "",
                                     "selectedItem": null,
                                     "dataSource": [
@@ -555,6 +591,8 @@ var DBZ;
                                     "maxCheckedItem": 2,
                                     "spaceSize": "M",
                                     "isAllSelectable": false,
+                                    "isAllSelectableBreakLine": false,
+                                    "disabledItem": [],
                                     "icon": []
                                 },
                                 {
@@ -575,6 +613,8 @@ var DBZ;
                                     "marginLeft": "XS",
                                     "marginRight": "0",
                                     "selectControlID": "radSearchPatternOfShimei_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
                                     "onChange": "",
                                     "selectedItem": null,
                                     "dataSource": [
@@ -602,6 +642,7 @@ var DBZ;
                                     "onClick": "",
                                     "newLineItemNumber": 4,
                                     "spaceSize": "M",
+                                    "disabledItem": [],
                                     "icon": []
                                 },
                                 {
@@ -622,9 +663,12 @@ var DBZ;
                                     "marginLeft": "0",
                                     "marginRight": "XS",
                                     "selectControlID": "lblSearching",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
                                     "required": false,
                                     "isPrivateInfo": false,
                                     "text": "で検索する。",
+                                    "decorationClass": "",
                                     "align": 2
                                 },
                                 {
@@ -645,6 +689,8 @@ var DBZ;
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
                                     "selectControlID": "txtBirthDay_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
                                     "readOnly": false,
                                     "onChange": "",
                                     "required": false,
@@ -684,6 +730,8 @@ var DBZ;
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
                                     "selectControlID": "txtYubinNo_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
                                     "readOnly": false,
                                     "onChange": "",
                                     "required": false,
@@ -707,13 +755,14 @@ var DBZ;
                                     "text": "",
                                     "suggest": [],
                                     "value": "",
+                                    "decorationClass": "",
                                     "permitCharactor": ""
                                 },
                                 {
                                     "fieldName": "txtJusho",
                                     "items": [],
                                     "controlType": "TextBox",
-                                    "width": "XL",
+                                    "width": "920",
                                     "visible": true,
                                     "displayNone": false,
                                     "disabled": false,
@@ -727,6 +776,8 @@ var DBZ;
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
                                     "selectControlID": "txtJusho_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
                                     "readOnly": false,
                                     "onChange": "",
                                     "required": false,
@@ -750,6 +801,7 @@ var DBZ;
                                     "text": "",
                                     "suggest": [],
                                     "value": "",
+                                    "decorationClass": "",
                                     "permitCharactor": ""
                                 }
                             ],
@@ -768,6 +820,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "SearchCriteriaOfKojin",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "onLoad": "",
                             "title": "個人",
                             "marginTop": "XS",
@@ -797,7 +851,8 @@ var DBZ;
                             "widthAuto": false,
                             "panelDisplay": 1,
                             "isGroupBox": false,
-                            "readOnly": false
+                            "readOnly": false,
+                            "height": "Auto"
                         },
                         {
                             "fieldName": "ButtonsForHihokenshaFinder",
@@ -820,6 +875,8 @@ var DBZ;
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
                                     "selectControlID": "btnToClear",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
                                     "text": "条件をクリアする",
                                     "onClick": "",
                                     "icon": 0,
@@ -846,6 +903,8 @@ var DBZ;
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
                                     "selectControlID": "btnToSearch",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
                                     "text": "検索する",
                                     "onClick": "",
                                     "icon": 0,
@@ -870,6 +929,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "ButtonsForHihokenshaFinder",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "onLoad": "",
                             "title": "",
                             "marginTop": "Default",
@@ -894,7 +955,8 @@ var DBZ;
                             "widthAuto": false,
                             "panelDisplay": 0,
                             "isGroupBox": false,
-                            "readOnly": false
+                            "readOnly": false,
+                            "height": "Auto"
                         }
                     ],
                     "controlType": "Panel",
@@ -912,6 +974,8 @@ var DBZ;
                     "marginLeft": "XS",
                     "marginRight": "XS",
                     "selectControlID": "HihokenshaFinder",
+                    "helpMessageID": "",
+                    "jpControlName": "",
                     "onLoad": "",
                     "title": "検索条件",
                     "marginTop": "XS",
@@ -945,7 +1009,8 @@ var DBZ;
                     "widthAuto": false,
                     "panelDisplay": 0,
                     "isGroupBox": false,
-                    "readOnly": false
+                    "readOnly": false,
+                    "height": "Auto"
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -960,9 +1025,11 @@ var DBZ;
             "float": 0,
             "toolTip": "",
             "authorityMode": 0,
-            "marginLeft": 0,
-            "marginRight": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
             "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
             "relation": [],
             "businessId": "DBZ",
             "controlName": "HihokenshaFinder",
