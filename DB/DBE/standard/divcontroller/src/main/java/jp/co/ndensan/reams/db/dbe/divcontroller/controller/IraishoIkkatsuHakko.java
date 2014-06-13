@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2050001.ShujiiIkenshoI
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2050001.ShujiiIkenshoRelatedReportTypeDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2050001.dgNinteichosaIraishoTargetPersons_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2050001.dgShujiiIkenshoIraishoTargetPersons_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil.Converter;
@@ -125,6 +126,12 @@ public class IraishoIkkatsuHakko {
         return response;
     }
 
+    /**
+     * 入力値をクリアします。
+     *
+     * @param div IraishoIkkatsuHakkoDiv
+     * @return ResponseData
+     */
     public ResponseData<IraishoIkkatsuHakkoDiv> clear(IraishoIkkatsuHakkoDiv div) {
         ResponseData<IraishoIkkatsuHakkoDiv> response = new ResponseData<>();
 
@@ -133,30 +140,6 @@ public class IraishoIkkatsuHakko {
 
         response.data = div;
         return response;
-    }
-
-    private void _clearNinteichosaIraiIkkatuHakkoTab(NinteichosaIraiIkkatuHakkoTabDiv div) {
-        NinteichosaIraishoPublishingOptions.clear(div.getNinteichosaIraishoPublishingOptions());
-        NinteichosaIraishoTargetPersons.clear(div.getNinteichosaIraishoTargetPersons());
-        NinteichosaIraishoRelatedDates.clear(div.getNinteichosaIraishoRelatedDates());
-    }
-
-    private void _clearIkenshoIraiIkkatuHakkoTab(IkenshoIraiIkkatuHakkoTabDiv div) {
-        ShujiiIkenshoIraishoPublishingOptions.clear(div.getShujiiIkenshoIraishoPublishingOptions());
-        ShujiiIkenshoIraishoTargetPersons.clear(div.getShujiiIkenshoIraishoTargetPersons());
-        ShujiiIkenshoIraishoRelatedDates.clear(div.getShujiiIkenshoIraishoRelatedDates());
-    }
-
-    private NinteichosaIraishoTargetPersonsDiv _ninteichosaIraishoTargetPersons(IraishoIkkatsuHakkoDiv div) {
-        return div.getTabIraishoIkkatsuHakko()
-                .getNinteichosaIraiIkkatuHakkoTab()
-                .getNinteichosaIraishoTargetPersons();
-    }
-
-    private ShujiiIkenshoIraishoTargetPersonsDiv _shujiiIkenshoIraishoTargetPersons(IraishoIkkatsuHakkoDiv div) {
-        return div.getTabIraishoIkkatsuHakko()
-                .getIkenshoIraiIkkatuHakkoTab()
-                .getShujiiIkenshoIraishoTargetPersons();
     }
 
     /**
@@ -191,6 +174,7 @@ public class IraishoIkkatsuHakko {
         }
     }
 
+    //<editor-fold defaultstate="collapsed" desc="NinteichosaIraishoPublishingOptions">
     /**
      * NinteichosaIraishoPublishingOptionsDivに対する操作です。
      */
@@ -245,6 +229,7 @@ public class IraishoIkkatsuHakko {
             }
         }
     }
+//</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="NinteichosaIraishoTargetPersons">
     /**
@@ -288,7 +273,7 @@ public class IraishoIkkatsuHakko {
         private static List<dgNinteichosaIraishoTargetPersons_Row>
                 _extractDataSourceFromSearhcCriteria(NinteichosaIraishoTargetPersonsDiv div) {
             List<dgNinteichosaIraishoTargetPersons_Row> list = new ArrayList<>();
-            for (dgNinteichosaIraishoTargetPersons_Row target : DemoData.CHOSA_IRAISHO_TARGETS) {
+            for (dgNinteichosaIraishoTargetPersons_Row target : new DemoData().get調査依頼対象者()) {
                 if (SearchCriteriaForNinteichosa._fulfilsConditon(_searchCriteria(div), target)) {
                     list.add(target);
                 }
@@ -362,6 +347,7 @@ public class IraishoIkkatsuHakko {
     }
     //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="NinteichosaIraishoRelatedDates">
     /**
      * NinteichosaIraishoRelatedDatesDivに対する操作です。
      */
@@ -381,7 +367,9 @@ public class IraishoIkkatsuHakko {
             div.getTxtShoriDateOfChosa().clearValue();
         }
     }
+//</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="ShujiiIkenshoIraishoPublishingOptions">
     /**
      * ShujiiIkenshoIraishoPublishingOptionsDivに対する操作です。
      */
@@ -436,6 +424,7 @@ public class IraishoIkkatsuHakko {
             }
         }
     }
+//</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="ShujiiIkenshoIraishoTargetPersonsDiv">
     /**
@@ -479,7 +468,7 @@ public class IraishoIkkatsuHakko {
         private static List<dgShujiiIkenshoIraishoTargetPersons_Row>
                 _extractDataSourceFromSearhcCriteria(ShujiiIkenshoIraishoTargetPersonsDiv div) {
             List<dgShujiiIkenshoIraishoTargetPersons_Row> list = new ArrayList<>();
-            for (dgShujiiIkenshoIraishoTargetPersons_Row target : DemoData.SAKUSEI_IRAISHO_TARGETS) {
+            for (dgShujiiIkenshoIraishoTargetPersons_Row target : new DemoData().get作成依頼対象者()) {
                 if (SearchCriteriaForShujiiIkensho._fulfilsConditon(_searchCriteria(div), target)) {
                     list.add(target);
                 }
@@ -553,6 +542,7 @@ public class IraishoIkkatsuHakko {
     }
     //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="ShujiiIkenshoIraishoRelatedDates">
     /**
      * ShujiiIkenshoIraishoRelatedDatesDivに対する操作です。
      */
@@ -571,6 +561,31 @@ public class IraishoIkkatsuHakko {
             div.getTxtKigenDateOfIkensho().clearValue();
             div.getTxtShoriDateOfIkensho().clearValue();
         }
+    }
+//</editor-fold>
+
+    private void _clearNinteichosaIraiIkkatuHakkoTab(NinteichosaIraiIkkatuHakkoTabDiv div) {
+        NinteichosaIraishoPublishingOptions.clear(div.getNinteichosaIraishoPublishingOptions());
+        NinteichosaIraishoTargetPersons.clear(div.getNinteichosaIraishoTargetPersons());
+        NinteichosaIraishoRelatedDates.clear(div.getNinteichosaIraishoRelatedDates());
+    }
+
+    private void _clearIkenshoIraiIkkatuHakkoTab(IkenshoIraiIkkatuHakkoTabDiv div) {
+        ShujiiIkenshoIraishoPublishingOptions.clear(div.getShujiiIkenshoIraishoPublishingOptions());
+        ShujiiIkenshoIraishoTargetPersons.clear(div.getShujiiIkenshoIraishoTargetPersons());
+        ShujiiIkenshoIraishoRelatedDates.clear(div.getShujiiIkenshoIraishoRelatedDates());
+    }
+
+    private NinteichosaIraishoTargetPersonsDiv _ninteichosaIraishoTargetPersons(IraishoIkkatsuHakkoDiv div) {
+        return div.getTabIraishoIkkatsuHakko()
+                .getNinteichosaIraiIkkatuHakkoTab()
+                .getNinteichosaIraishoTargetPersons();
+    }
+
+    private ShujiiIkenshoIraishoTargetPersonsDiv _shujiiIkenshoIraishoTargetPersons(IraishoIkkatsuHakkoDiv div) {
+        return div.getTabIraishoIkkatsuHakko()
+                .getIkenshoIraiIkkatuHakkoTab()
+                .getShujiiIkenshoIraishoTargetPersons();
     }
 
     private static FlexibleDate _toFlexibleDate_From(TextBoxDateRange txtBoxRange) {
@@ -603,8 +618,14 @@ public class IraishoIkkatsuHakko {
     }
 
     //<editor-fold defaultstate="collapsed" desc="DemoData">
+    /**
+     * デモ用のデータです。
+     */
     private static class DemoData {
 
+        /**
+         * デモ用データの種類の列挙型です。
+         */
         private enum DemoDataType {
 
             調査依頼書対象(new RString("IraishoIkkatsuHakkoTargets.yml")),
@@ -623,23 +644,41 @@ public class IraishoIkkatsuHakko {
         /**
          * 調査依頼対象者
          */
-        static final List<dgNinteichosaIraishoTargetPersons_Row> CHOSA_IRAISHO_TARGETS;
+        private final List<dgNinteichosaIraishoTargetPersons_Row> choraIraiTargets;
         /**
          * 作成依頼対象者
          */
-        static final List<dgShujiiIkenshoIraishoTargetPersons_Row> SAKUSEI_IRAISHO_TARGETS;
+        private final List<dgShujiiIkenshoIraishoTargetPersons_Row> sakuseiIraiTargets;
 
-        static {
-            CHOSA_IRAISHO_TARGETS = _createList(DemoDataType.調査依頼書対象);
-            SAKUSEI_IRAISHO_TARGETS = _createList(DemoDataType.作成依頼書対象);
+        DemoData() {
+            choraIraiTargets = _createList(DemoDataType.調査依頼書対象);
+            sakuseiIraiTargets = _createList(DemoDataType.作成依頼書対象);
         }
 
-        private static <T> List<T> _createList(DemoDataType type) {
-            List<HashMap> dataFromYaml = YamlLoader.FOR_DBE.loadAsList(type.path());
+        /**
+         * 調査依頼対象者を返します。
+         *
+         * @return 調査依頼対象者
+         */
+        List<dgNinteichosaIraishoTargetPersons_Row> get調査依頼対象者() {
+            return this.choraIraiTargets;
+        }
+
+        /**
+         * 作成依頼対象者を返します。
+         *
+         * @return 作成依頼対象者
+         */
+        List<dgShujiiIkenshoIraishoTargetPersons_Row> get作成依頼対象者() {
+            return this.sakuseiIraiTargets;
+        }
+
+        private <T> List<T> _createList(DemoDataType type) {
+            List<HashMap> dataFromYaml = YamlLoader.DBE.loadAsList(type.path());
             return YamlUtil.convertList(dataFromYaml, _createConverter(type));
         }
 
-        private static Converter.IConverter _createConverter(DemoDataType type) {
+        private Converter.IConverter _createConverter(DemoDataType type) {
             switch (type) {
                 case 調査依頼書対象:
                     return new Converter.IConverter<dgNinteichosaIraishoTargetPersons_Row>() {
@@ -662,40 +701,44 @@ public class IraishoIkkatsuHakko {
             }
         }
 
-        private static dgNinteichosaIraishoTargetPersons_Row _toDgNinteichosaIraishoTargetPersons_Row(Map map) {
-            RString shimei = YamlUtil.toRString(map.get("氏名"));
-            RString kanaShimei = YamlUtil.toRString(map.get("カナ氏名"));
+        private dgNinteichosaIraishoTargetPersons_Row _toDgNinteichosaIraishoTargetPersons_Row(Map map) {
+            ControlGenerator cg = new ControlGenerator(map);
+            RString shimei = cg.getAsRString("氏名");
+            RString kanaShimei = cg.getAsRString("カナ氏名");
             return new dgNinteichosaIraishoTargetPersons_Row(
-                    YamlUtil.toRString(map.get("調査委託先番号")),
-                    YamlUtil.toRString(map.get("調査委託先名称")),
-                    YamlUtil.toRString(map.get("調査員番号")),
-                    YamlUtil.toRString(map.get("調査員名称")),
-                    YamlUtil.toRString(map.get("被保番号")),
+                    cg.getAsRString("調査委託先番号"),
+                    cg.getAsRString("調査委託先名称"),
+                    cg.getAsRString("調査員番号"),
+                    cg.getAsRString("調査員名称"),
+                    cg.getAsRString("被保番号"),
                     shimei,
                     kanaShimei,
                     DataGridUtil.lineFeedBetween(kanaShimei, shimei),
-                    YamlUtil.toTextBoxFlexibleDate(map.get("申請日")),
-                    YamlUtil.toRString(map.get("申請区分")),
-                    YamlUtil.toTextBoxFlexibleDate(map.get("調査依頼日")),
-                    YamlUtil.toTextBoxFlexibleDate(map.get("調査依頼書発行日")));
+                    cg.getAsTextBoxFlexibleDate("申請日"),
+                    cg.getAsRString("申請区分"),
+                    cg.getAsTextBoxFlexibleDate("調査依頼日"),
+                    cg.getAsTextBoxFlexibleDate("調査依頼書発行日")
+            );
         }
 
-        private static dgShujiiIkenshoIraishoTargetPersons_Row _toDgShujiiIkenshoIraishoTargetPersons_Row(Map map) {
-            RString shimei = YamlUtil.toRString(map.get("氏名"));
-            RString kanaShimei = YamlUtil.toRString(map.get("カナ氏名"));
+        private dgShujiiIkenshoIraishoTargetPersons_Row _toDgShujiiIkenshoIraishoTargetPersons_Row(Map map) {
+            ControlGenerator cg = new ControlGenerator(map);
+            RString shimei = cg.getAsRString("氏名");
+            RString kanaShimei = cg.getAsRString("カナ氏名");
             return new dgShujiiIkenshoIraishoTargetPersons_Row(
-                    YamlUtil.toRString(map.get("医療機関番号")),
-                    YamlUtil.toRString(map.get("医療機関名称")),
-                    YamlUtil.toRString(map.get("主治医番号")),
-                    YamlUtil.toRString(map.get("主治医名称")),
-                    YamlUtil.toRString(map.get("被保番号")),
+                    cg.getAsRString("医療機関番号"),
+                    cg.getAsRString("医療機関名称"),
+                    cg.getAsRString("主治医番号"),
+                    cg.getAsRString("主治医名称"),
+                    cg.getAsRString("被保番号"),
                     shimei,
                     kanaShimei,
                     DataGridUtil.lineFeedBetween(kanaShimei, shimei),
-                    YamlUtil.toTextBoxFlexibleDate(map.get("申請日")),
-                    YamlUtil.toRString(map.get("申請区分")),
-                    YamlUtil.toTextBoxFlexibleDate(map.get("作成依頼日")),
-                    YamlUtil.toTextBoxFlexibleDate(map.get("作成依頼書発行日")));
+                    cg.getAsTextBoxFlexibleDate("申請日"),
+                    cg.getAsRString("申請区分"),
+                    cg.getAsTextBoxFlexibleDate("作成依頼日"),
+                    cg.getAsTextBoxFlexibleDate("作成依頼書発行日")
+            );
         }
     }
     //</editor-fold>

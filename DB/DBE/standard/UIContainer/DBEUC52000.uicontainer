@@ -4,7 +4,7 @@
    "id": "0",
    "layoutSubGyomuCode": "DBE",
    "layoutName": "DBE5030001",
-   "eventName": "selectShinsakai",
+   "eventName": "selectRow",
    "toLayoutSubGyomuCode": "DBE",
    "toLayoutName": "DBE5020001",
    "toEventName": ""

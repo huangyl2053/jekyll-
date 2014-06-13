@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryTokusokuContentDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -21,18 +22,14 @@ public class NinteichosaIraiEntryTokusokuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ddlTokukuHoho")
-    private DropDownList ddlTokukuHoho;
-    @JsonProperty("txtTokusokuCount")
-    private TextBox txtTokusokuCount;
-    @JsonProperty("lblTokusokuCountUnit")
-    private Label lblTokusokuCountUnit;
-    @JsonProperty("txtTokusokuDate")
-    private TextBoxFlexibleDate txtTokusokuDate;
-    @JsonProperty("txtTokusokuKigenDate")
-    private TextBoxFlexibleDate txtTokusokuKigenDate;
-    @JsonProperty("txtTokusokujoHakkoDate")
-    private TextBoxFlexibleDate txtTokusokujoHakkoDate;
+    @JsonProperty("lblTokusoku")
+    private Label lblTokusoku;
+    @JsonProperty("radTokusoku")
+    private RadioButton radTokusoku;
+    @JsonProperty("NinteichosaIraiEntryTokusokuContent")
+    private NinteichosaIraiEntryTokusokuContentDiv NinteichosaIraiEntryTokusokuContent;
+    @JsonProperty("lblPadding2")
+    private Label lblPadding2;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -40,64 +37,44 @@ public class NinteichosaIraiEntryTokusokuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("ddlTokukuHoho")
-    public DropDownList getDdlTokukuHoho() {
-        return ddlTokukuHoho;
+    @JsonProperty("lblTokusoku")
+    public Label getLblTokusoku() {
+        return lblTokusoku;
     }
 
-    @JsonProperty("ddlTokukuHoho")
-    public void setDdlTokukuHoho(DropDownList ddlTokukuHoho) {
-        this.ddlTokukuHoho=ddlTokukuHoho;
+    @JsonProperty("lblTokusoku")
+    public void setLblTokusoku(Label lblTokusoku) {
+        this.lblTokusoku=lblTokusoku;
     }
 
-    @JsonProperty("txtTokusokuCount")
-    public TextBox getTxtTokusokuCount() {
-        return txtTokusokuCount;
+    @JsonProperty("radTokusoku")
+    public RadioButton getRadTokusoku() {
+        return radTokusoku;
     }
 
-    @JsonProperty("txtTokusokuCount")
-    public void setTxtTokusokuCount(TextBox txtTokusokuCount) {
-        this.txtTokusokuCount=txtTokusokuCount;
+    @JsonProperty("radTokusoku")
+    public void setRadTokusoku(RadioButton radTokusoku) {
+        this.radTokusoku=radTokusoku;
     }
 
-    @JsonProperty("lblTokusokuCountUnit")
-    public Label getLblTokusokuCountUnit() {
-        return lblTokusokuCountUnit;
+    @JsonProperty("NinteichosaIraiEntryTokusokuContent")
+    public NinteichosaIraiEntryTokusokuContentDiv getNinteichosaIraiEntryTokusokuContent() {
+        return NinteichosaIraiEntryTokusokuContent;
     }
 
-    @JsonProperty("lblTokusokuCountUnit")
-    public void setLblTokusokuCountUnit(Label lblTokusokuCountUnit) {
-        this.lblTokusokuCountUnit=lblTokusokuCountUnit;
+    @JsonProperty("NinteichosaIraiEntryTokusokuContent")
+    public void setNinteichosaIraiEntryTokusokuContent(NinteichosaIraiEntryTokusokuContentDiv NinteichosaIraiEntryTokusokuContent) {
+        this.NinteichosaIraiEntryTokusokuContent=NinteichosaIraiEntryTokusokuContent;
     }
 
-    @JsonProperty("txtTokusokuDate")
-    public TextBoxFlexibleDate getTxtTokusokuDate() {
-        return txtTokusokuDate;
+    @JsonProperty("lblPadding2")
+    public Label getLblPadding2() {
+        return lblPadding2;
     }
 
-    @JsonProperty("txtTokusokuDate")
-    public void setTxtTokusokuDate(TextBoxFlexibleDate txtTokusokuDate) {
-        this.txtTokusokuDate=txtTokusokuDate;
-    }
-
-    @JsonProperty("txtTokusokuKigenDate")
-    public TextBoxFlexibleDate getTxtTokusokuKigenDate() {
-        return txtTokusokuKigenDate;
-    }
-
-    @JsonProperty("txtTokusokuKigenDate")
-    public void setTxtTokusokuKigenDate(TextBoxFlexibleDate txtTokusokuKigenDate) {
-        this.txtTokusokuKigenDate=txtTokusokuKigenDate;
-    }
-
-    @JsonProperty("txtTokusokujoHakkoDate")
-    public TextBoxFlexibleDate getTxtTokusokujoHakkoDate() {
-        return txtTokusokujoHakkoDate;
-    }
-
-    @JsonProperty("txtTokusokujoHakkoDate")
-    public void setTxtTokusokujoHakkoDate(TextBoxFlexibleDate txtTokusokujoHakkoDate) {
-        this.txtTokusokujoHakkoDate=txtTokusokujoHakkoDate;
+    @JsonProperty("lblPadding2")
+    public void setLblPadding2(Label lblPadding2) {
+        this.lblPadding2=lblPadding2;
     }
 
 }
