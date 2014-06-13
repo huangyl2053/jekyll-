@@ -739,7 +739,12 @@
        "imageWidth": "",
        "imageHeight": "",
        "displayChildDivName": "DBD.ShakaiFukushiHojinKeigen",
-       "dataPassing": [],
+       "dataPassing": [
+        {
+         "key": "hihokenshaNo",
+         "controlName": "txtHihokenshaNo"
+        }
+       ],
        "visibleCloseButton": true,
        "onOkClose": "",
        "onBeforeOpenDialog": ""

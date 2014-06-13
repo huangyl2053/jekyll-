@@ -30,13 +30,13 @@ public class ShakaiFukushiHojinKeigenRiyoshaFutanDiv extends Panel {
     @JsonProperty("txtYukokigenDate")
     private TextBoxFlexibleDate txtYukokigenDate;
     @JsonProperty("txtKeigenJiyu")
-    private TextBoxCode txtKeigenJiyu;
-    @JsonProperty("lblGengakuRitsuBunshi")
-    private TextBoxNum lblGengakuRitsuBunshi;
-    @JsonProperty("lblGengakuRitsuVinculum")
-    private Label lblGengakuRitsuVinculum;
-    @JsonProperty("txtGengakuRitsuBunbo")
-    private TextBoxNum txtGengakuRitsuBunbo;
+    private TextBox txtKeigenJiyu;
+    @JsonProperty("txtKeigenRitsuBunshi")
+    private TextBoxNum txtKeigenRitsuBunshi;
+    @JsonProperty("lblIKeigenRitsuVinculum")
+    private Label lblIKeigenRitsuVinculum;
+    @JsonProperty("txtKeigenRitsuBunbo")
+    private TextBoxNum txtKeigenRitsuBunbo;
     @JsonProperty("txtFushoninRiyu")
     private TextBoxMultiLine txtFushoninRiyu;
     @JsonProperty("txtKakuninNo")
@@ -89,43 +89,43 @@ public class ShakaiFukushiHojinKeigenRiyoshaFutanDiv extends Panel {
     }
 
     @JsonProperty("txtKeigenJiyu")
-    public TextBoxCode getTxtKeigenJiyu() {
+    public TextBox getTxtKeigenJiyu() {
         return txtKeigenJiyu;
     }
 
     @JsonProperty("txtKeigenJiyu")
-    public void setTxtKeigenJiyu(TextBoxCode txtKeigenJiyu) {
+    public void setTxtKeigenJiyu(TextBox txtKeigenJiyu) {
         this.txtKeigenJiyu=txtKeigenJiyu;
     }
 
-    @JsonProperty("lblGengakuRitsuBunshi")
-    public TextBoxNum getLblGengakuRitsuBunshi() {
-        return lblGengakuRitsuBunshi;
+    @JsonProperty("txtKeigenRitsuBunshi")
+    public TextBoxNum getTxtKeigenRitsuBunshi() {
+        return txtKeigenRitsuBunshi;
     }
 
-    @JsonProperty("lblGengakuRitsuBunshi")
-    public void setLblGengakuRitsuBunshi(TextBoxNum lblGengakuRitsuBunshi) {
-        this.lblGengakuRitsuBunshi=lblGengakuRitsuBunshi;
+    @JsonProperty("txtKeigenRitsuBunshi")
+    public void setTxtKeigenRitsuBunshi(TextBoxNum txtKeigenRitsuBunshi) {
+        this.txtKeigenRitsuBunshi=txtKeigenRitsuBunshi;
     }
 
-    @JsonProperty("lblGengakuRitsuVinculum")
-    public Label getLblGengakuRitsuVinculum() {
-        return lblGengakuRitsuVinculum;
+    @JsonProperty("lblIKeigenRitsuVinculum")
+    public Label getLblIKeigenRitsuVinculum() {
+        return lblIKeigenRitsuVinculum;
     }
 
-    @JsonProperty("lblGengakuRitsuVinculum")
-    public void setLblGengakuRitsuVinculum(Label lblGengakuRitsuVinculum) {
-        this.lblGengakuRitsuVinculum=lblGengakuRitsuVinculum;
+    @JsonProperty("lblIKeigenRitsuVinculum")
+    public void setLblIKeigenRitsuVinculum(Label lblIKeigenRitsuVinculum) {
+        this.lblIKeigenRitsuVinculum=lblIKeigenRitsuVinculum;
     }
 
-    @JsonProperty("txtGengakuRitsuBunbo")
-    public TextBoxNum getTxtGengakuRitsuBunbo() {
-        return txtGengakuRitsuBunbo;
+    @JsonProperty("txtKeigenRitsuBunbo")
+    public TextBoxNum getTxtKeigenRitsuBunbo() {
+        return txtKeigenRitsuBunbo;
     }
 
-    @JsonProperty("txtGengakuRitsuBunbo")
-    public void setTxtGengakuRitsuBunbo(TextBoxNum txtGengakuRitsuBunbo) {
-        this.txtGengakuRitsuBunbo=txtGengakuRitsuBunbo;
+    @JsonProperty("txtKeigenRitsuBunbo")
+    public void setTxtKeigenRitsuBunbo(TextBoxNum txtKeigenRitsuBunbo) {
+        this.txtKeigenRitsuBunbo=txtKeigenRitsuBunbo;
     }
 
     @JsonProperty("txtFushoninRiyu")

@@ -26,10 +26,10 @@ public class ShakaiFukushiHojinKeigenDetailDiv extends Panel {
     private TextBoxFlexibleDate txtShinseiDate;
     @JsonProperty("ShakaiFukushiHojinKeigenRiyoshaFutan")
     private ShakaiFukushiHojinKeigenRiyoshaFutanDiv ShakaiFukushiHojinKeigenRiyoshaFutan;
-    @JsonProperty("txtKyotakuServiceGentei")
-    private TextBox txtKyotakuServiceGentei;
-    @JsonProperty("txtlblKyojuhiShokujiOnly")
-    private TextBox txtlblKyojuhiShokujiOnly;
+    @JsonProperty("txtKyotakuServiceOnly")
+    private TextBox txtKyotakuServiceOnly;
+    @JsonProperty("txtKyojuhiShokujiOnly")
+    private TextBox txtKyojuhiShokujiOnly;
     @JsonProperty("txtUnitPrivateRoomOnly")
     private TextBox txtUnitPrivateRoomOnly;
 
@@ -59,24 +59,24 @@ public class ShakaiFukushiHojinKeigenDetailDiv extends Panel {
         this.ShakaiFukushiHojinKeigenRiyoshaFutan=ShakaiFukushiHojinKeigenRiyoshaFutan;
     }
 
-    @JsonProperty("txtKyotakuServiceGentei")
-    public TextBox getTxtKyotakuServiceGentei() {
-        return txtKyotakuServiceGentei;
+    @JsonProperty("txtKyotakuServiceOnly")
+    public TextBox getTxtKyotakuServiceOnly() {
+        return txtKyotakuServiceOnly;
     }
 
-    @JsonProperty("txtKyotakuServiceGentei")
-    public void setTxtKyotakuServiceGentei(TextBox txtKyotakuServiceGentei) {
-        this.txtKyotakuServiceGentei=txtKyotakuServiceGentei;
+    @JsonProperty("txtKyotakuServiceOnly")
+    public void setTxtKyotakuServiceOnly(TextBox txtKyotakuServiceOnly) {
+        this.txtKyotakuServiceOnly=txtKyotakuServiceOnly;
     }
 
-    @JsonProperty("txtlblKyojuhiShokujiOnly")
-    public TextBox getTxtlblKyojuhiShokujiOnly() {
-        return txtlblKyojuhiShokujiOnly;
+    @JsonProperty("txtKyojuhiShokujiOnly")
+    public TextBox getTxtKyojuhiShokujiOnly() {
+        return txtKyojuhiShokujiOnly;
     }
 
-    @JsonProperty("txtlblKyojuhiShokujiOnly")
-    public void setTxtlblKyojuhiShokujiOnly(TextBox txtlblKyojuhiShokujiOnly) {
-        this.txtlblKyojuhiShokujiOnly=txtlblKyojuhiShokujiOnly;
+    @JsonProperty("txtKyojuhiShokujiOnly")
+    public void setTxtKyojuhiShokujiOnly(TextBox txtKyojuhiShokujiOnly) {
+        this.txtKyojuhiShokujiOnly=txtKyojuhiShokujiOnly;
     }
 
     @JsonProperty("txtUnitPrivateRoomOnly")

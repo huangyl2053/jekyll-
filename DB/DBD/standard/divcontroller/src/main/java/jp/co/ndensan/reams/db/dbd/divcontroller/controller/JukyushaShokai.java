@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.demodata.HomonkaigoRiyoshaFutang
 import jp.co.ndensan.reams.db.dbd.divcontroller.demodata.HyojunFutangakuGengakuData;
 import jp.co.ndensan.reams.db.dbd.divcontroller.demodata.JukyushaData;
 import jp.co.ndensan.reams.db.dbd.divcontroller.demodata.RiyoshaFutangakuGemmenData;
+import jp.co.ndensan.reams.db.dbd.divcontroller.demodata.ShakaiFukushiHojinKeigenData;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.ButtonsShosaiShijiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.IryoHokenDetailDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.JukyushaShokaiDiv;
@@ -76,6 +77,8 @@ public class JukyushaShokai {
                 !new RiyoshaFutangakuGemmenData().exists利用者負担額減免履歴Of(hihokenshaNo));
         toBeAbleToPushOrNot_button(div.getBtnHomonKaigoRiyoshaFutangakuGengaku(),
                 !new HomonkaigoRiyoshaFutangakuGengakuData().exsits訪問介護利用者負担額減額履歴(hihokenshaNo));
+        toBeAbleToPushOrNot_button(div.getBtnShakaiFukushiHojinKeigen(),
+                !new ShakaiFukushiHojinKeigenData().exists社会福祉法人軽減履歴Of(hihokenshaNo));
     }
 
     private void toBeAbleToPushOrNot_button(ButtonDialog btn, boolean disable) {
