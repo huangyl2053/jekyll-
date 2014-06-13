@@ -177,8 +177,8 @@ module DBZ {
      "selectControlID": "btnClose",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "閉じる",
      "onClick": "onClick_btnClose",
+     "text": "閉じる",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
@@ -217,7 +217,7 @@ module DBZ {
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbz/db/dbz/SogoShokaiInfo/onLoad_IryoHokenKanyuInfo"
+     "requestUrl": "dbu/db/dbu/SogoShokaiInfo/onLoad_IryoHokenKanyuInfo"
     }
    ],
    "hiddenInput": [],
