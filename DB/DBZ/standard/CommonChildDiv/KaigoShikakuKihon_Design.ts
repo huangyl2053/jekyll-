@@ -121,15 +121,15 @@ module DBZ {
         }
         
         public get btnNinteiRireki_visible() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"])["visible"];
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"])["visible"];
         }
         
         public set btnNinteiRireki_visible(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"])["visible"] = value;
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"])["visible"] = value;
             } else {
-                this.layout.items[0].items[12]["visible"] = value;
+                this.layout.items[0].items[11]["visible"] = value;
                 this.raisePropertyChanged(this.layout);
             }
         }
@@ -170,7 +170,7 @@ module DBZ {
             editablePropertyInfo["eraseBorderLeft"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderLeft"];
             editablePropertyInfo["backGroundColor"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["backgroundColor"];
             editablePropertyInfo["btnHihoRireki_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).getEditablePropertyInfo()["visible"];
-            editablePropertyInfo["btnNinteiRireki_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"]).getEditablePropertyInfo()["visible"];
+            editablePropertyInfo["btnNinteiRireki_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"]).getEditablePropertyInfo()["visible"];
             
             return editablePropertyInfo;
         }
@@ -205,7 +205,7 @@ module DBZ {
      "maxLength": "10",
      "minLength": 0,
      "textAlign": 0,
-     "placeHolder": "1234567890",
+     "placeHolder": "",
      "textKind": 2,
      "isPrivateInfo": false,
      "isPassword": false,
@@ -219,11 +219,12 @@ module DBZ {
      "value": "",
      "labelLText": "被保番号",
      "labelRText": "",
-     "labelLWidth": "65",
+     "labelLWidth": "75",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": ""
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "txtShutokuYmd",
@@ -247,7 +248,7 @@ module DBZ {
      "jpControlName": "",
      "readOnly": true,
      "required": false,
-     "placeHolder": "平12.04.01",
+     "placeHolder": "",
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
@@ -258,12 +259,13 @@ module DBZ {
      "value": "",
      "labelLText": "資格取得",
      "labelRText": "",
-     "labelLWidth": "80",
+     "labelLWidth": "75",
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
      "ymdKubun": 2,
-     "displayFormat": 0
+     "displayFormat": 0,
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "txtShutokuJiyu",
@@ -290,7 +292,7 @@ module DBZ {
      "maxLength": "5",
      "minLength": 0,
      "textAlign": 0,
-     "placeHolder": "年齢到達",
+     "placeHolder": "",
      "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
@@ -304,11 +306,12 @@ module DBZ {
      "value": "",
      "labelLText": "取得事由",
      "labelRText": "",
-     "labelLWidth": "80",
+     "labelLWidth": "75",
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": ""
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "txtJutokuTekiyo",
@@ -332,7 +335,7 @@ module DBZ {
      "jpControlName": "",
      "readOnly": true,
      "required": false,
-     "placeHolder": "平21.11.15",
+     "placeHolder": "",
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
@@ -343,12 +346,13 @@ module DBZ {
      "value": "",
      "labelLText": "住特開始",
      "labelRText": "",
-     "labelLWidth": "80",
+     "labelLWidth": "75",
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
      "ymdKubun": 2,
-     "displayFormat": 0
+     "displayFormat": 0,
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "txtYokaigoJotaiKubun",
@@ -375,7 +379,7 @@ module DBZ {
      "maxLength": "6",
      "minLength": 0,
      "textAlign": 0,
-     "placeHolder": "要介護５",
+     "placeHolder": "",
      "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
@@ -387,19 +391,20 @@ module DBZ {
      "text": "",
      "suggest": [],
      "value": "",
-     "labelLText": "要介護認定",
+     "labelLText": "要介護状態",
      "labelRText": "",
-     "labelLWidth": "95",
+     "labelLWidth": "90",
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": ""
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
-     "fieldName": "txtNinteiKaishiYmd",
+     "fieldName": "txtKyuSochiNyusho",
      "items": [],
-     "controlType": "TextBoxDate",
-     "width": "85",
+     "controlType": "TextBox",
+     "width": "20",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -412,28 +417,34 @@ module DBZ {
      "authorityMode": 0,
      "marginLeft": "0",
      "marginRight": "0",
-     "selectControlID": "txtNinteiKaishiYmd_core",
+     "selectControlID": "txtKyuSochiNyusho_core",
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
      "required": false,
-     "placeHolder": "平25.04.01",
+     "maxLength": "1",
+     "minLength": 0,
+     "textAlign": 0,
+     "placeHolder": "",
+     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
+     "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
      "text": "",
+     "suggest": [],
      "value": "",
-     "labelLText": "開始",
+     "labelLText": "旧措置入所",
      "labelRText": "",
-     "labelLWidth": "50",
+     "labelLWidth": "113",
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "ymdKubun": 2,
-     "displayFormat": 0
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "btnHihoRireki",
@@ -451,16 +462,16 @@ module DBZ {
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "0",
-     "marginRight": "-0.1",
+     "marginRight": "0.6",
      "selectControlID": "btnHihoRireki",
      "helpMessageID": "",
      "jpControlName": "",
      "text": "被保履歴",
+     "imageWidth": "",
+     "imageHeight": "",
      "onClick": "",
      "appearance": 0,
      "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": "",
      "icon": 0,
      "displayChildDivName": "",
      "dataPassing": [],
@@ -493,7 +504,7 @@ module DBZ {
      "maxLength": "5",
      "minLength": 0,
      "textAlign": 0,
-     "placeHolder": "資格喪失者",
+     "placeHolder": "",
      "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
@@ -507,11 +518,12 @@ module DBZ {
      "value": "",
      "labelLText": "資格状態",
      "labelRText": "",
-     "labelLWidth": "65",
+     "labelLWidth": "75",
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": ""
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "txtSoshitsuYmd",
@@ -535,7 +547,7 @@ module DBZ {
      "jpControlName": "",
      "readOnly": true,
      "required": false,
-     "placeHolder": "平26.07.02",
+     "placeHolder": "",
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
@@ -546,12 +558,13 @@ module DBZ {
      "value": "",
      "labelLText": "資格喪失",
      "labelRText": "",
-     "labelLWidth": "80",
+     "labelLWidth": "75",
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
      "ymdKubun": 2,
-     "displayFormat": 0
+     "displayFormat": 0,
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "txtSoshitsuJiyu",
@@ -578,7 +591,7 @@ module DBZ {
      "maxLength": "5",
      "minLength": 0,
      "textAlign": 0,
-     "placeHolder": "転出",
+     "placeHolder": "",
      "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
@@ -592,11 +605,12 @@ module DBZ {
      "value": "",
      "labelLText": "喪失事由",
      "labelRText": "",
-     "labelLWidth": "80",
+     "labelLWidth": "75",
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "decorationClass": ""
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "txtJutokuKaijo",
@@ -620,7 +634,7 @@ module DBZ {
      "jpControlName": "",
      "readOnly": true,
      "required": false,
-     "placeHolder": "平24.03.15",
+     "placeHolder": "",
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
@@ -631,57 +645,13 @@ module DBZ {
      "value": "",
      "labelLText": "住特終了",
      "labelRText": "",
-     "labelLWidth": "80",
+     "labelLWidth": "75",
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
      "ymdKubun": 2,
-     "displayFormat": 0
-    },
-    {
-     "fieldName": "txtKyuSochiNyusho",
-     "items": [],
-     "controlType": "TextBox",
-     "width": "20",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "txtKyuSochiNyusho_core",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "readOnly": true,
-     "required": false,
-     "maxLength": "1",
-     "minLength": 0,
-     "textAlign": 0,
-     "placeHolder": "有",
-     "textKind": 0,
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "isComboBox": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
-     "text": "",
-     "suggest": [],
-     "value": "",
-     "labelLText": "旧措置入所",
-     "labelRText": "",
-     "labelLWidth": "95",
-     "labelRWidth": "0",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "decorationClass": ""
+     "displayFormat": 0,
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "btnNinteiRireki",
@@ -699,16 +669,16 @@ module DBZ {
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "0",
-     "marginRight": "-0.1",
+     "marginRight": "0.6",
      "selectControlID": "btnNinteiRireki",
      "helpMessageID": "",
      "jpControlName": "",
      "text": "認定履歴",
+     "imageWidth": "",
+     "imageHeight": "",
      "onClick": "",
      "appearance": 0,
      "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": "",
      "icon": 0,
      "displayChildDivName": "",
      "dataPassing": [],
@@ -717,9 +687,9 @@ module DBZ {
      "onBeforeOpenDialog": ""
     },
     {
-     "fieldName": "txtNinteiShuryoYmd",
+     "fieldName": "txtNinteiKikan",
      "items": [],
-     "controlType": "TextBoxDate",
+     "controlType": "TextBoxDateRange",
      "width": "85",
      "visible": true,
      "displayNone": false,
@@ -733,28 +703,35 @@ module DBZ {
      "authorityMode": 0,
      "marginLeft": "0",
      "marginRight": "0",
-     "selectControlID": "txtNinteiShuryoYmd_core",
+     "selectControlID": "txtNinteiKikan_core",
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": true,
-     "required": false,
-     "placeHolder": "平27.03.31",
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
-     "text": "",
-     "value": "",
-     "labelLText": "終了",
+     "labelLText": "認定期間",
      "labelRText": "",
-     "labelLWidth": "130",
+     "labelLWidth": "90",
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
      "ymdKubun": 2,
-     "displayFormat": 0
+     "displayFormat": 0,
+     "permitCharactor": "",
+     "fromPlaceHolder": "",
+     "toPlaceHolder": "",
+     "minDate": "",
+     "maxDate": "",
+     "fromText": "",
+     "toText": "",
+     "fromValue": "",
+     "toValue": "",
+     "fromSelectControlID": "txtNinteiKikanFrom",
+     "toSelectControlID": "txtNinteiKikanTo"
     }
    ],
    "controlType": "Panel",
