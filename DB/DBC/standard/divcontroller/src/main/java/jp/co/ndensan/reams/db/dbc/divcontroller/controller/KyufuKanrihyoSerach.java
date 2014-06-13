@@ -47,7 +47,7 @@ public class KyufuKanrihyoSerach {
     }
 
     private void setDemoData(KyufuKanrihyoSerachDiv panel) {
-        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("KyufuKanrihyoSerach.yml"));
+        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("dbc0060000/KyufuKanrihyoSerach.yml"));
         panel.getTxtHihokenshaNo().setValue(new RString(sourceList.get(0).get("保険者番号").toString()));
         panel.getTxtHihokenshaName().setValue(new RString(sourceList.get(0).get("保険者名").toString()));
         panel.getTxtJigyoshaNo().setValue(new RString(sourceList.get(0).get("事業者番号").toString()));

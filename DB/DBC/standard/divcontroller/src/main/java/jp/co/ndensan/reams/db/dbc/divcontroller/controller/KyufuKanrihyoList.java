@@ -55,7 +55,7 @@ public class KyufuKanrihyoList {
 
     private void setDemoData(KyufuKanrihyoListDiv panel) {
         List<dgKyufuKanrihyoList_Row> dgList = panel.getDgKyufuKanrihyoList().getDataSource();
-        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("KyufuKanrihyoList.yml"));
+        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("dbc0060000/KyufuKanrihyoList.yml"));
         dgList = bindYamlData(dgList, sourceList);
         Collections.sort(dgList, new DateComparator());
         panel.getDgKyufuKanrihyoList().setDataSource(dgList);

@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufuKanrihyoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufuKanrihyoInfoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0060000.KyufuKanrihyoDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufuKanrihyoInfo.KyufuKanrihyoInfoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufuKanrihyoListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgKyufuKanrihyoList_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgMeisaiList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufuKanrihyoInfo.dgMeisaiList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -84,7 +84,7 @@ public class KyufuKanrihyo {
     }
 
     private void bindInfoDiv(KyufuKanrihyoInfoDiv div, dgKyufuKanrihyoList_Row row, int index) {
-        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("KyufuKanrihyoSummary.yml"));
+        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("dbc0060000/KyufuKanrihyoSummary.yml"));
         HashMap source = sourceList.get(index);
         div.getTxtSakuseiKubun().setValue(row.getTxtSakuseiKubun());
         div.getTxtSakuseiYMD().setValue(row.getTxtTaishoYMInvisible().getValue());
@@ -106,7 +106,7 @@ public class KyufuKanrihyo {
 
     private void bindInfoGrid(KyufuKanrihyoInfoDiv div) {
         List<dgMeisaiList_Row> dgRowList = div.getDgMeisaiList().getDataSource();
-        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("KyufuKanrihyoDataGrid.yml"));
+        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("dbc0060000/KyufuKanrihyoDataGrid.yml"));
         dgRowList.clear();
         for (HashMap source : sourceList) {
             dgRowList.add(new dgMeisaiList_Row(

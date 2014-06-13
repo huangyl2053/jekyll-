@@ -1,9 +1,9 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufuKanrihyoInfo;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu May 22 16:35:34 JST 2014 
+ * Fri Jun 13 11:52:43 JST 2014 
  */
 
 
@@ -28,6 +28,11 @@ public class dgMeisaiList_Row extends DataRow {
 
     public dgMeisaiList_Row() {
         super();
+        this.txtNo = RString.EMPTY;
+        this.txtServiceShurui = RString.EMPTY;
+        this.txtTanisu = RString.EMPTY;
+        this.txtJigyosha = RString.EMPTY;
+        this.txtJigyoshaKubun = RString.EMPTY;
     }
 
     public dgMeisaiList_Row(RString txtNo, RString txtServiceShurui, RString txtTanisu, RString txtJigyosha, RString txtJigyoshaKubun) {
