@@ -121,15 +121,15 @@ module DBZ {
         }
         
         public get btnNinteiRireki_visible() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"])["visible"];
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"])["visible"];
         }
         
         public set btnNinteiRireki_visible(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"])["visible"] = value;
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"])["visible"] = value;
             } else {
-                this.layout.items[0].items[11]["visible"] = value;
+                this.layout.items[0].items[12]["visible"] = value;
                 this.raisePropertyChanged(this.layout);
             }
         }
@@ -170,7 +170,7 @@ module DBZ {
             editablePropertyInfo["eraseBorderLeft"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderLeft"];
             editablePropertyInfo["backGroundColor"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["backgroundColor"];
             editablePropertyInfo["btnHihoRireki_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).getEditablePropertyInfo()["visible"];
-            editablePropertyInfo["btnNinteiRireki_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"]).getEditablePropertyInfo()["visible"];
+            editablePropertyInfo["btnNinteiRireki_visible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"]).getEditablePropertyInfo()["visible"];
             
             return editablePropertyInfo;
         }
@@ -219,7 +219,7 @@ module DBZ {
      "value": "",
      "labelLText": "被保番号",
      "labelRText": "",
-     "labelLWidth": "75",
+     "labelLWidth": "74",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -259,7 +259,7 @@ module DBZ {
      "value": "",
      "labelLText": "資格取得",
      "labelRText": "",
-     "labelLWidth": "75",
+     "labelLWidth": "74",
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -306,7 +306,7 @@ module DBZ {
      "value": "",
      "labelLText": "取得事由",
      "labelRText": "",
-     "labelLWidth": "75",
+     "labelLWidth": "74",
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -346,7 +346,7 @@ module DBZ {
      "value": "",
      "labelLText": "住特開始",
      "labelRText": "",
-     "labelLWidth": "75",
+     "labelLWidth": "74",
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -393,7 +393,7 @@ module DBZ {
      "value": "",
      "labelLText": "要介護状態",
      "labelRText": "",
-     "labelLWidth": "90",
+     "labelLWidth": "89",
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -439,7 +439,7 @@ module DBZ {
      "value": "",
      "labelLText": "旧措置入所",
      "labelRText": "",
-     "labelLWidth": "113",
+     "labelLWidth": "112",
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -450,7 +450,7 @@ module DBZ {
      "fieldName": "btnHihoRireki",
      "items": [],
      "controlType": "ButtonDialog",
-     "width": "80",
+     "width": "74",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -462,16 +462,16 @@ module DBZ {
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "0",
-     "marginRight": "0.3",
+     "marginRight": "0.8",
      "selectControlID": "btnHihoRireki",
      "helpMessageID": "",
      "jpControlName": "",
      "text": "被保履歴",
-     "imageWidth": "",
-     "imageHeight": "",
      "onClick": "",
      "appearance": 0,
      "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
      "icon": 0,
      "displayChildDivName": "",
      "dataPassing": [],
@@ -518,7 +518,7 @@ module DBZ {
      "value": "",
      "labelLText": "資格状態",
      "labelRText": "",
-     "labelLWidth": "75",
+     "labelLWidth": "74",
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -558,7 +558,7 @@ module DBZ {
      "value": "",
      "labelLText": "資格喪失",
      "labelRText": "",
-     "labelLWidth": "75",
+     "labelLWidth": "74",
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -605,7 +605,7 @@ module DBZ {
      "value": "",
      "labelLText": "喪失事由",
      "labelRText": "",
-     "labelLWidth": "75",
+     "labelLWidth": "74",
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -645,46 +645,13 @@ module DBZ {
      "value": "",
      "labelLText": "住特終了",
      "labelRText": "",
-     "labelLWidth": "75",
+     "labelLWidth": "74",
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
      "ymdKubun": 2,
      "displayFormat": 0,
      "permitCharactor": "./_-"
-    },
-    {
-     "fieldName": "btnNinteiRireki",
-     "items": [],
-     "controlType": "ButtonDialog",
-     "width": "80",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 2,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0.3",
-     "selectControlID": "btnNinteiRireki",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "text": "認定履歴",
-     "imageWidth": "",
-     "imageHeight": "",
-     "onClick": "",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "icon": 0,
-     "displayChildDivName": "",
-     "dataPassing": [],
-     "visibleCloseButton": true,
-     "onOkClose": "",
-     "onBeforeOpenDialog": ""
     },
     {
      "fieldName": "txtNinteiKikan",
@@ -715,7 +682,7 @@ module DBZ {
      "onKeyPress": "",
      "labelLText": "認定期間",
      "labelRText": "",
-     "labelLWidth": "90",
+     "labelLWidth": "89",
      "labelRWidth": "0",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -724,6 +691,7 @@ module DBZ {
      "permitCharactor": "",
      "fromPlaceHolder": "",
      "toPlaceHolder": "",
+     "isHolizontal": false,
      "minDate": "",
      "maxDate": "",
      "fromText": "",
@@ -732,6 +700,39 @@ module DBZ {
      "toValue": "",
      "fromSelectControlID": "txtNinteiKikanFrom",
      "toSelectControlID": "txtNinteiKikanTo"
+    },
+    {
+     "fieldName": "btnNinteiRireki",
+     "items": [],
+     "controlType": "ButtonDialog",
+     "width": "74",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0",
+     "marginRight": "0.8",
+     "selectControlID": "btnNinteiRireki",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "text": "認定履歴",
+     "onClick": "",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "icon": 0,
+     "displayChildDivName": "",
+     "dataPassing": [],
+     "visibleCloseButton": true,
+     "onOkClose": "",
+     "onBeforeOpenDialog": ""
     }
    ],
    "controlType": "Panel",

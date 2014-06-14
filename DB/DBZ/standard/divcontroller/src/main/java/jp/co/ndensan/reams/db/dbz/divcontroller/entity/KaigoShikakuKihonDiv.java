@@ -43,10 +43,10 @@ public class KaigoShikakuKihonDiv extends Panel {
     private TextBox txtSoshitsuJiyu;
     @JsonProperty("txtJutokuKaijo")
     private TextBoxDate txtJutokuKaijo;
-    @JsonProperty("btnNinteiRireki")
-    private ButtonDialog btnNinteiRireki;
     @JsonProperty("txtNinteiKikan")
     private TextBoxDateRange txtNinteiKikan;
+    @JsonProperty("btnNinteiRireki")
+    private ButtonDialog btnNinteiRireki;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -164,16 +164,6 @@ public class KaigoShikakuKihonDiv extends Panel {
         this.txtJutokuKaijo=txtJutokuKaijo;
     }
 
-    @JsonProperty("btnNinteiRireki")
-    public ButtonDialog getBtnNinteiRireki() {
-        return btnNinteiRireki;
-    }
-
-    @JsonProperty("btnNinteiRireki")
-    public void setBtnNinteiRireki(ButtonDialog btnNinteiRireki) {
-        this.btnNinteiRireki=btnNinteiRireki;
-    }
-
     @JsonProperty("txtNinteiKikan")
     public TextBoxDateRange getTxtNinteiKikan() {
         return txtNinteiKikan;
@@ -182,6 +172,16 @@ public class KaigoShikakuKihonDiv extends Panel {
     @JsonProperty("txtNinteiKikan")
     public void setTxtNinteiKikan(TextBoxDateRange txtNinteiKikan) {
         this.txtNinteiKikan=txtNinteiKikan;
+    }
+
+    @JsonProperty("btnNinteiRireki")
+    public ButtonDialog getBtnNinteiRireki() {
+        return btnNinteiRireki;
+    }
+
+    @JsonProperty("btnNinteiRireki")
+    public void setBtnNinteiRireki(ButtonDialog btnNinteiRireki) {
+        this.btnNinteiRireki=btnNinteiRireki;
     }
 
 }
