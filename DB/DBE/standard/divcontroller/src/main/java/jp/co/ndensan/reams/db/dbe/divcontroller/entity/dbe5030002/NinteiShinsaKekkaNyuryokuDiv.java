@@ -9,8 +9,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kaigoHihokenshaJoho.Kaigo
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kaigoHihokenshaJoho.KaigoHihokenshaJohoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kaigoNinteiKekka.KaigoNinteiKekkaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kaigoNinteiKekka.KaigoNinteiKekkaDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NyuryokuSeigyoDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NyuryokuSeigyoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**

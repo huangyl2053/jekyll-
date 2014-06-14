@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5030002.ShinsaTaishoshaItiranDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5030002.ShinsaTaishoshaIchiranDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5030002.dgShinsaTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 審査会審査対象者一覧の情報を編集します。
@@ -32,11 +33,11 @@ public class ShinsaTaishoshaItiran {
      * @param div 審査対象者一覧Div
      * @return ResponseData
      */
-    public ResponseData onLoadData(ShinsaTaishoshaItiranDiv div) {
-        ResponseData<ShinsaTaishoshaItiranDiv> response = new ResponseData<>();
+    public ResponseData onLoadData(ShinsaTaishoshaIchiranDiv div) {
+        ResponseData<ShinsaTaishoshaIchiranDiv> response = new ResponseData<>();
 
         div.getDgShinsaTaishoshaIchiran().setDataSource(createRowSetaiTestData());
-
+        
         response.data = div;
         return response;
     }
@@ -44,13 +45,48 @@ public class ShinsaTaishoshaItiran {
     /**
      * 対象者一覧データグリッド上で、選択行の選択ボタン押下時の設定処理を行います。
      *
-     * @param taishoshaItiranDiv 審査対象者一覧Div
+     * @param div 審査対象者一覧Div
      * @return ResponseData
      */
-    public ResponseData onClickNyuryoku(ShinsaTaishoshaItiranDiv taishoshaItiranDiv) {
-        ResponseData<ShinsaTaishoshaItiranDiv> response = new ResponseData<>();
+    public ResponseData onClickNyuryoku(ShinsaTaishoshaIchiranDiv div) {
+        ResponseData<ShinsaTaishoshaIchiranDiv> response = new ResponseData<>();
 
-        response.data = taishoshaItiranDiv;
+        response.data = div;
+        return response;
+    }
+
+    /**
+     * 認定審査結果入力Div上の登録ボタン押下時の処理を表します。
+     *
+     * @param div 審査対象者一覧Div
+     * @return ResponseData
+     */
+    public ResponseData onClick_btnToroku(ShinsaTaishoshaIchiranDiv div) {
+        ResponseData<ShinsaTaishoshaIchiranDiv> response = new ResponseData<>();
+
+        RString nijiHantei = (RString) ViewStateHolder.get("二次判定結果", RString.class);
+        RString nijiHanteiCd = (RString) ViewStateHolder.get("二次判定コード", RString.class);
+        RString yukoTsukisu = (RString) ViewStateHolder.get("認定月数", RString.class);
+        RString yukoTsukisuCd = (RString) ViewStateHolder.get("認定月数コード", RString.class);
+        FlexibleDate yukoStartDate = (FlexibleDate) ViewStateHolder.get("有効開始日", FlexibleDate.class);
+        FlexibleDate yukoEndDate = (FlexibleDate) ViewStateHolder.get("有効終了日", FlexibleDate.class);
+        RString hihoNo = (RString) ViewStateHolder.get("被保番号", RString.class);
+        RString iken = (RString) ViewStateHolder.get("審査会意見", RString.class);
+
+        List<dgShinsaTaishoshaIchiran_Row> arrayData = div.getDgShinsaTaishoshaIchiran().getSelectedItems();
+        for (dgShinsaTaishoshaIchiran_Row list : arrayData) {
+            if (list.getHihokenshaNo().equalsIgnoreCase(hihoNo)) {
+                list.setNinteiResult(nijiHantei);
+                list.setYukoKikan(yukoTsukisu);
+                list.getYukoStartDate().setValue(yukoStartDate);
+                list.getYukoEndDate().setValue(yukoEndDate);
+                list.setYukoKikanItem(yukoTsukisuCd);
+                list.setNinteiResultItem(nijiHanteiCd);
+                list.setShinsakaiIken(iken);
+            }
+        }
+
+        response.data = div;
         return response;
     }
 
@@ -91,7 +127,8 @@ public class ShinsaTaishoshaItiran {
         Button btn = new Button();
         dgShinsaTaishoshaIchiran_Row row = new dgShinsaTaishoshaIchiran_Row(btn, no, hokenshaNo, shichoson,
                 hihoban, shimei, kanaShimei, sex, shinseiDate, zenYokaigodo, zenYukokikan, zenStartDate, zenEndDate, ichijiHantei,
-                RString.EMPTY, RString.EMPTY, startDate, endDate, shinseiKubun, seinenGappi, nenrei);
+                RString.EMPTY, RString.EMPTY, startDate, endDate, shinseiKubun, seinenGappi, nenrei, RString.EMPTY,
+                RString.EMPTY, RString.EMPTY);
         return row;
     }
 

@@ -11,11 +11,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ShinsaTaishoshaItiran のクラスファイル 
+ * ShinsaTaishoshaIchiran のクラスファイル 
  * 
  * @author 自動生成
  */
-public class ShinsaTaishoshaItiranDiv extends Panel {
+public class ShinsaTaishoshaIchiranDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

@@ -135,6 +135,13 @@ public class ShinsaKekkaNyuryokuShosai {
         return response;
     }
 
+    /**
+     * 調査結果確認タブ内の「一次判定を行う」ボタン押下時の処理を表します。
+     *
+     * @param div 審査結果入力詳細Div
+     * @param ichiranDiv 審査会対象者一覧Div
+     * @return ResponseData
+     */
     public ResponseData onClick_btnIchijiHantei(ShinsaKekkaNyuryokuShosaiDiv div, ShinsaShienTaishoshaIchiranDiv ichiranDiv) {
         ResponseData<ShinsaKekkaNyuryokuShosaiDiv> response = new ResponseData<>();
 

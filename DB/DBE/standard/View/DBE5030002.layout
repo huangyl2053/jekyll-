@@ -498,7 +498,7 @@
    "height": "Auto"
   },
   {
-   "fieldName": "ShinsaTaishoshaItiran",
+   "fieldName": "ShinsaTaishoshaIchiran",
    "items": [
     {
      "fieldName": "dgShinsaTaishoshaIchiran",
@@ -876,6 +876,48 @@
         "resize": false,
         "isPrivateInfo": false,
         "sortKey": "nenrei"
+       },
+       {
+        "columnName": "認定結果コード",
+        "dataName": "ninteiResultItem",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 10,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "ninteiResultItem"
+       },
+       {
+        "columnName": "有効期間コード",
+        "dataName": "yukoKikanItem",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 10,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "yukoKikanItem"
+       },
+       {
+        "columnName": "審査会意見",
+        "dataName": "shinsakaiIken",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 10,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "shinsakaiIken"
        }
       ]
      },
@@ -936,7 +978,7 @@
    "authorityMode": 0,
    "marginLeft": "0",
    "marginRight": "XS",
-   "selectControlID": "ShinsaTaishoshaItiran",
+   "selectControlID": "ShinsaTaishoshaIchiran",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -945,13 +987,17 @@
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "ShinsaTaishoshaItiran"
+     "postParameterPanelNames": "ShinsaTaishoshaIchiran"
     }
    ],
    "requestSettings": [
     {
      "eventName": "onLoad",
      "requestUrl": "dbe/db/dbe/ShinsaTaishoshaItiran/onLoadData"
+    },
+    {
+     "eventName": "onClick_btnToroku",
+     "requestUrl": "dbe/db/dbe/ShinsaTaishoshaItiran/onClick_btnToroku"
     }
    ],
    "hiddenInput": [],
@@ -1041,14 +1087,14 @@
       {
        "fieldName": "btnToroku",
        "items": [],
-       "controlType": "Button",
+       "controlType": "ButtonDialog",
        "width": "170",
        "visible": true,
        "displayNone": false,
        "disabled": false,
        "accessKey": "",
        "nextFocusFieldName": "",
-       "wrap": true,
+       "wrap": false,
        "dependencies": [],
        "float": 2,
        "toolTip": "",
@@ -1059,12 +1105,17 @@
        "helpMessageID": "",
        "jpControlName": "",
        "text": "入力内容で登録する",
-       "onClick": "onClick_btnToroku",
+       "onClick": "",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
        "imageHeight": "",
-       "icon": 0
+       "icon": 0,
+       "displayChildDivName": "DBE.DataOutputInfomation",
+       "dataPassing": [],
+       "visibleCloseButton": true,
+       "onOkClose": "",
+       "onBeforeOpenDialog": "onClick_btnToroku"
       },
       {
        "fieldName": "btnNext",
@@ -1115,7 +1166,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "text": "対象者一覧に戻る",
-       "onClick": "",
+       "onClick": "onClick_btnBackIchiran",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
@@ -1153,14 +1204,6 @@
       {
        "eventName": "onLoad",
        "requestUrl": ""
-      },
-      {
-       "eventName": "btnTorokuClick",
-       "requestUrl": "dbe/db/dbe/NyuryokuSeigyo/btnTorokuClick"
-      },
-      {
-       "eventName": "btnBackIchiranClick",
-       "requestUrl": "dbe/db/dbe/NyuryokuSeigyo/btnBackIchiranClick"
       }
      ],
      "hiddenInput": [],
@@ -1207,17 +1250,13 @@
      "postParameterPanelNames": "NinteiShinsaKekkaNyuryoku"
     },
     {
-     "postParameterPanelNames": "ShinsaTaishoshaItiran"
+     "postParameterPanelNames": "ShinsaTaishoshaIchiran"
     }
    ],
    "requestSettings": [
     {
      "eventName": "onLoad",
      "requestUrl": "dbe/db/dbe/NinteiShinsaKekkaNyuryoku/onLoadData"
-    },
-    {
-     "eventName": "onClick_btnToroku",
-     "requestUrl": "dbe/db/dbe/NyuryokuSeigyo/btnTorokuClick"
     },
     {
      "eventName": "onClickNyuryoku",
@@ -1236,12 +1275,12 @@
      "requestUrl": "dbe/db/dbe/NinteiShinsaKekkaNyuryoku/onSelect_ddlNijiHanteiKekka"
     },
     {
-     "eventName": "onClick_btnToroku",
-     "requestUrl": "dbe/db/dbe/NinteiShinsaKekkaNyuryoku/onClick_btnToroku"
-    },
-    {
      "eventName": "onClick_btnNext",
      "requestUrl": "dbe/db/dbe/NinteiShinsaKekkaNyuryoku/onClick_btnNext"
+    },
+    {
+     "eventName": "onClick_btnBackIchiran",
+     "requestUrl": "dbe/db/dbe/NinteiShinsaKekkaNyuryoku/onClick_btnBackIchiran"
     }
    ],
    "hiddenInput": [],
@@ -1294,7 +1333,7 @@
      "panelState": "visible"
     },
     {
-     "visibleDiv": "ShinsaTaishoshaItiran",
+     "visibleDiv": "ShinsaTaishoshaIchiran",
      "panelState": "visible"
     }
    ],
@@ -1374,7 +1413,7 @@
  ],
  "loadSequencePanelNames": [
   [
-   "ShinsaTaishoshaItiran",
+   "ShinsaTaishoshaIchiran",
    "NinteiShinsaKekkaNyuryoku"
   ],
   [
