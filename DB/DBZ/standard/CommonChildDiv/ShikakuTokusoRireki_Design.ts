@@ -771,7 +771,7 @@ module DBZ {
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbz/db/dbz/ShikakuTokusoRireki/onLoad"
+     "requestUrl": ""
     },
     {
      "eventName": "onClick_btnJutokuTekiyo",

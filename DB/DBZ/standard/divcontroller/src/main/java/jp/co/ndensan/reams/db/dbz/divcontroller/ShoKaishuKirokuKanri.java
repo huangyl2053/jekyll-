@@ -5,15 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.ShoKaishuKirokuKanriDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.dgShoKaishuJokyo_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
  * 証回収履歴管理を行う享有子DivのControllerです。
@@ -27,9 +21,8 @@ public class ShoKaishuKirokuKanri {
      *
      * @param kanriDiv 証回収記録管理Div
      * @param mode モード
-     * @return レスポンス
      */
-    public static ShoKaishuKirokuKanriDiv setMode(ShoKaishuKirokuKanriDiv kanriDiv, ModeType mode) {
+    public static void setMode(ShoKaishuKirokuKanriDiv kanriDiv, ModeType mode) {
 
         kanriDiv.setMode(mode.toValue());
         if (ModeType.SHOKAI_MODE.toValue().equals(kanriDiv.getMode())) {
@@ -39,7 +32,6 @@ public class ShoKaishuKirokuKanri {
         } else {
 
         }
-        return kanriDiv;
     }
 
     public ResponseData onClick_btnSelect(ShoKaishuKirokuKanriDiv kanriDiv) {

@@ -6,9 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.iryohokenrireki.IryoHokenRirekiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.ShikakuTokusoRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
  * 医療保険履歴をグリッドで表示する共有子DivのDivControllerです。
@@ -18,16 +16,15 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 public class IryoHokenRireki {
 
     /**
-     * ロード時に、内部でも持っているモードに合わせて、コントロールの表示非表示を切り替えます。<br/>
+     * 引数から渡されたモードに合わせて、コントロールの表示非表示を切り替えます。<br/>
      * 照会モードが設定されていた場合、グリッド上の修正・削除ボタンが非表示になります。
      *
      * @param rirekiDiv 医療保険履歴Div
-     * @return レスポンス
+     * @param mode モード
      */
-    public ResponseData onLoad(IryoHokenRirekiDiv rirekiDiv) {
-        ResponseData<IryoHokenRirekiDiv> response = new ResponseData<>();
+    public static void setMode(IryoHokenRirekiDiv rirekiDiv, ModeType mode) {
 
-        rirekiDiv.setMode(ModeType.SHOKAI_MODE.toValue());
+        rirekiDiv.setMode(mode.toValue());
         if (ModeType.SHOKAI_MODE.toValue().equals(rirekiDiv.getMode())) {
             rirekiDiv.getDgIryoHokenRireki().getGridSetting().setIsShowDeleteButtonColumn(false);
             rirekiDiv.getDgIryoHokenRireki().getGridSetting().setIsShowModifyButtonColumn(false);
@@ -35,9 +32,6 @@ public class IryoHokenRireki {
             rirekiDiv.getDgIryoHokenRireki().getGridSetting().setIsShowDeleteButtonColumn(true);
             rirekiDiv.getDgIryoHokenRireki().getGridSetting().setIsShowModifyButtonColumn(true);
         }
-
-        response.data = rirekiDiv;
-        return response;
     }
 
 }

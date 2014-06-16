@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.dgSetaiJoho_Ro
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.dgShinseishoTodokede_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.ShisetsuNyutaishoRirekiKanri;
 import jp.co.ndensan.reams.db.dbz.divcontroller.ShoKaishuKirokuKanri;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.IryoHokenRireki;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShikakuTokusoRireki;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.iryohokenrireki.dgIryoHokenRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
@@ -70,7 +72,8 @@ public class HihokenshaShokaiPanelSelect {
 
         ShoKaishuKirokuKanri.setMode(selectDiv.getHihokenshaShokaiShoKofuKaishu().getShoKofuKaishuKiroku(), ModeType.SHOKAI_MODE);
         ShisetsuNyutaishoRirekiKanri.setMode(selectDiv.getHihokenshaShokaiShisetsuNyutaisho().getShisetsuNyutaishoRireki(), ModeType.SHOKAI_MODE);
-
+        ShikakuTokusoRireki.setMode(selectDiv.getHihokenshaShokaiShikakuTokuso().getShikakuTokusoRireki(), ModeType.SHOKAI_MODE);
+        IryoHokenRireki.setMode(selectDiv.getHihokenshaShokaiIryoHoken().getIryoHokenRireki(), ModeType.SHOKAI_MODE);
         response.data = selectDiv;
         return response;
     }
@@ -209,7 +212,8 @@ public class HihokenshaShokaiPanelSelect {
      * @param searchDiv 検索Div
      * @return 生活保護情報Div
      */
-    private HihokenshaShokaiSeikatsuHogoDiv setSeikatsuHogoDiv(HihokenshaShokaiSeikatsuHogoDiv seikatsuHogoDiv, HihokenshaShokaiTaishoSearchDiv searchDiv) {
+    private HihokenshaShokaiSeikatsuHogoDiv setSeikatsuHogoDiv(HihokenshaShokaiSeikatsuHogoDiv seikatsuHogoDiv,
+            HihokenshaShokaiTaishoSearchDiv searchDiv) {
 
         RString shikibetsuCode = searchDiv.getSearchResult().getDgSearchResult().getClickedItem().getShikibetsuCode();
         setSeikatsuHogoJoho(seikatsuHogoDiv.getDgSeikatsuHogoRireki(), shikibetsuCode);
@@ -235,7 +239,8 @@ public class HihokenshaShokaiPanelSelect {
     }
 
     private dgSeikatsuHogoRireki_Row createSeikatsuHogoRirekiRow(ControlGenerator generator) {
-        dgSeikatsuHogoRireki_Row row = new dgSeikatsuHogoRireki_Row(RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY);
+        dgSeikatsuHogoRireki_Row row = new dgSeikatsuHogoRireki_Row(RString.EMPTY, new TextBoxFlexibleDate(),
+                new TextBoxFlexibleDate(), RString.EMPTY);
 
         row.setJukyushaNo(generator.getAsRString("受給者番号"));
         row.getHaishiYMD().setValue(generator.getAsFlexibleDate("開始日"));
@@ -254,7 +259,8 @@ public class HihokenshaShokaiPanelSelect {
      * @param searchDiv 検索Div
      * @return 老齢福祉年金Div
      */
-    private HihokenshaShokaiRofukuNenkinDiv setRofukuNenkinDiv(HihokenshaShokaiRofukuNenkinDiv rofukuNenkinDiv, HihokenshaShokaiTaishoSearchDiv searchDiv) {
+    private HihokenshaShokaiRofukuNenkinDiv setRofukuNenkinDiv(HihokenshaShokaiRofukuNenkinDiv rofukuNenkinDiv,
+            HihokenshaShokaiTaishoSearchDiv searchDiv) {
 
         RString shikibetsuCode = searchDiv.getSearchResult().getDgSearchResult().getClickedItem().getShikibetsuCode();
         setRofukuNenkinJoho(rofukuNenkinDiv.getDgRoreiFukushiRireki(), shikibetsuCode);
@@ -348,7 +354,8 @@ public class HihokenshaShokaiPanelSelect {
      * @param searchDiv 検索Div
      * @return 施設入退所Div
      */
-    private HihokenshaShokaiShisetsuNyutaishoDiv setNyutaishoDiv(HihokenshaShokaiShisetsuNyutaishoDiv nyutaishoDiv, HihokenshaShokaiTaishoSearchDiv searchDiv) {
+    private HihokenshaShokaiShisetsuNyutaishoDiv setNyutaishoDiv(HihokenshaShokaiShisetsuNyutaishoDiv nyutaishoDiv,
+            HihokenshaShokaiTaishoSearchDiv searchDiv) {
 
         RString hihokenshaNo = searchDiv.getSearchResult().getDgSearchResult().getClickedItem().getHihokenshaNo();
         setNyutaishoJoho(nyutaishoDiv.getShisetsuNyutaishoRireki().getDgShisetsuNyutaishoRireki(), hihokenshaNo);
@@ -399,7 +406,8 @@ public class HihokenshaShokaiPanelSelect {
      * @param searchDiv 検索Div
      * @return 証交付回収Div
      */
-    private HihokenshaShokaiShoKofuKaishuDiv setShoKofuKaishuDiv(HihokenshaShokaiShoKofuKaishuDiv nyutaishoDiv, HihokenshaShokaiTaishoSearchDiv searchDiv) {
+    private HihokenshaShokaiShoKofuKaishuDiv setShoKofuKaishuDiv(HihokenshaShokaiShoKofuKaishuDiv nyutaishoDiv,
+            HihokenshaShokaiTaishoSearchDiv searchDiv) {
 
         RString hihokenshaNo = searchDiv.getSearchResult().getDgSearchResult().getClickedItem().getHihokenshaNo();
         setShoKofuKaishuJoho(nyutaishoDiv.getShoKofuKaishuKiroku().getShoKaishuJokyoList().getDgShoKaishuJokyo(), hihokenshaNo);
@@ -447,7 +455,8 @@ public class HihokenshaShokaiPanelSelect {
      * @param searchDiv 検索Div
      * @return 申請届出Div
      */
-    private HihokenshaShokaiShinseiTodokedeDiv setShinseiTodokedeDiv(HihokenshaShokaiShinseiTodokedeDiv todokedeDiv, HihokenshaShokaiTaishoSearchDiv searchDiv) {
+    private HihokenshaShokaiShinseiTodokedeDiv setShinseiTodokedeDiv(HihokenshaShokaiShinseiTodokedeDiv todokedeDiv,
+            HihokenshaShokaiTaishoSearchDiv searchDiv) {
 
         RString shikibetsuCode = searchDiv.getSearchResult().getDgSearchResult().getClickedItem().getShikibetsuCode();
         setTodokedeJoho(todokedeDiv.getDgShinseishoTodokede(), shikibetsuCode);

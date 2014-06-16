@@ -317,7 +317,7 @@ module DBZ {
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbz/db/dbz/IryoHokenRireki/onLoad"
+     "requestUrl": ""
     }
    ],
    "hiddenInput": [
