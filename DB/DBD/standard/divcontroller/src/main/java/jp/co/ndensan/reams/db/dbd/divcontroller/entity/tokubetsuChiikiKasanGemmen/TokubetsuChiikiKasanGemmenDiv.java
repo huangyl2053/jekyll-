@@ -23,6 +23,8 @@ public class TokubetsuChiikiKasanGemmenDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("txtHiddenHihokenshaNo")
+    private TextBox txtHiddenHihokenshaNo;
     @JsonProperty("dgTokubetsuChiikiKasanGemmenList")
     private DataGrid<dgTokubetsuChiikiKasanGemmenList_Row> dgTokubetsuChiikiKasanGemmenList;
     @JsonProperty("TokubetsuChiikiKasanGemmenDetail")
@@ -34,6 +36,16 @@ public class TokubetsuChiikiKasanGemmenDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    @JsonProperty("txtHiddenHihokenshaNo")
+    public TextBox getTxtHiddenHihokenshaNo() {
+        return txtHiddenHihokenshaNo;
+    }
+
+    @JsonProperty("txtHiddenHihokenshaNo")
+    public void setTxtHiddenHihokenshaNo(TextBox txtHiddenHihokenshaNo) {
+        this.txtHiddenHihokenshaNo=txtHiddenHihokenshaNo;
+    }
+
     @JsonProperty("dgTokubetsuChiikiKasanGemmenList")
     public DataGrid<dgTokubetsuChiikiKasanGemmenList_Row> getDgTokubetsuChiikiKasanGemmenList() {
         return dgTokubetsuChiikiKasanGemmenList;

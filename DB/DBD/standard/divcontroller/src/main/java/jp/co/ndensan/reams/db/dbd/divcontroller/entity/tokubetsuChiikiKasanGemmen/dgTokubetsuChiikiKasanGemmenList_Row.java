@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.tokubetsuChiikiKasanGemm
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Jun 12 15:57:45 JST 2014 
+ * Fri Jun 13 19:56:40 JST 2014 
  */
 
 
@@ -11,6 +11,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.tokubetsuChiikiKasanGemm
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 
 /**
@@ -27,7 +28,7 @@ public class dgTokubetsuChiikiKasanGemmenList_Row extends DataRow {
     private TextBoxFlexibleDate yukoKigen;
     private RString ketteiKubun;
     private TextBoxFlexibleDate ketteiDate;
-    private RString gengakuRitsu;
+    private TextBoxNum gengakuRitsu;
     private RString fushoninRiyu;
 
     public dgTokubetsuChiikiKasanGemmenList_Row() {
@@ -38,11 +39,11 @@ public class dgTokubetsuChiikiKasanGemmenList_Row extends DataRow {
         this.yukoKigen = new TextBoxFlexibleDate();
         this.ketteiKubun = RString.EMPTY;
         this.ketteiDate = new TextBoxFlexibleDate();
-        this.gengakuRitsu = RString.EMPTY;
+        this.gengakuRitsu = new TextBoxNum();
         this.fushoninRiyu = RString.EMPTY;
     }
 
-    public dgTokubetsuChiikiKasanGemmenList_Row(RString kakuninNo, TextBoxFlexibleDate shinseiDate, TextBoxFlexibleDate tekiyoDate, TextBoxFlexibleDate yukoKigen, RString ketteiKubun, TextBoxFlexibleDate ketteiDate, RString gengakuRitsu, RString fushoninRiyu) {
+    public dgTokubetsuChiikiKasanGemmenList_Row(RString kakuninNo, TextBoxFlexibleDate shinseiDate, TextBoxFlexibleDate tekiyoDate, TextBoxFlexibleDate yukoKigen, RString ketteiKubun, TextBoxFlexibleDate ketteiDate, TextBoxNum gengakuRitsu, RString fushoninRiyu) {
         super();
         this.setOriginalData("kakuninNo", kakuninNo);
         this.setOriginalData("shinseiDate", shinseiDate);
@@ -86,7 +87,7 @@ public class dgTokubetsuChiikiKasanGemmenList_Row extends DataRow {
         return ketteiDate;
     }
 
-    public RString getGengakuRitsu() {
+    public TextBoxNum getGengakuRitsu() {
         return gengakuRitsu;
     }
 
@@ -124,7 +125,7 @@ public class dgTokubetsuChiikiKasanGemmenList_Row extends DataRow {
         this.ketteiDate = ketteiDate;
     }
 
-    public void setGengakuRitsu(RString gengakuRitsu) {
+    public void setGengakuRitsu(TextBoxNum gengakuRitsu) {
         this.setOriginalData("gengakuRitsu", gengakuRitsu);
         this.gengakuRitsu = gengakuRitsu;
     }

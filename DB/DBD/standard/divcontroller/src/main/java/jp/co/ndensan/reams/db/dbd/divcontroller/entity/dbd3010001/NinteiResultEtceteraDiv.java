@@ -12,11 +12,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * NinteiResultOther のクラスファイル 
+ * NinteiResultEtcetera のクラスファイル 
  * 
  * @author 自動生成
  */
-public class NinteiResultOtherDiv extends Panel {
+public class NinteiResultEtceteraDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

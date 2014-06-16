@@ -6,10 +6,10 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.ButtonsBottomOfDetailDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.IryoHokenDetailDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.NinteiResultDetailDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.NinteichosaDetailDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.ShujiiIkenshoDetailDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.IryoHokenDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.NinteiResultDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.NinteichosaDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.ShujiiIkenshoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -40,14 +40,14 @@ public class NinteiDetailDiv extends Panel {
     private TextBox txtIchijiHanteiResult;
     @JsonProperty("txtIchijiHanteiKanryoYMD")
     private TextBoxFlexibleDate txtIchijiHanteiKanryoYMD;
-    @JsonProperty("NinteiResultDetail")
-    private NinteiResultDetailDiv NinteiResultDetail;
-    @JsonProperty("NinteichosaDetail")
-    private NinteichosaDetailDiv NinteichosaDetail;
-    @JsonProperty("ShujiiIkenshoDetail")
-    private ShujiiIkenshoDetailDiv ShujiiIkenshoDetail;
-    @JsonProperty("IryoHokenDetail")
-    private IryoHokenDetailDiv IryoHokenDetail;
+    @JsonProperty("NinteiResult")
+    private NinteiResultDiv NinteiResult;
+    @JsonProperty("Ninteichosa")
+    private NinteichosaDiv Ninteichosa;
+    @JsonProperty("ShujiiIkensho")
+    private ShujiiIkenshoDiv ShujiiIkensho;
+    @JsonProperty("IryoHoken")
+    private IryoHokenDiv IryoHoken;
     @JsonProperty("ButtonsBottomOfDetail")
     private ButtonsBottomOfDetailDiv ButtonsBottomOfDetail;
 
@@ -127,44 +127,44 @@ public class NinteiDetailDiv extends Panel {
         this.txtIchijiHanteiKanryoYMD=txtIchijiHanteiKanryoYMD;
     }
 
-    @JsonProperty("NinteiResultDetail")
-    public NinteiResultDetailDiv getNinteiResultDetail() {
-        return NinteiResultDetail;
+    @JsonProperty("NinteiResult")
+    public NinteiResultDiv getNinteiResult() {
+        return NinteiResult;
     }
 
-    @JsonProperty("NinteiResultDetail")
-    public void setNinteiResultDetail(NinteiResultDetailDiv NinteiResultDetail) {
-        this.NinteiResultDetail=NinteiResultDetail;
+    @JsonProperty("NinteiResult")
+    public void setNinteiResult(NinteiResultDiv NinteiResult) {
+        this.NinteiResult=NinteiResult;
     }
 
-    @JsonProperty("NinteichosaDetail")
-    public NinteichosaDetailDiv getNinteichosaDetail() {
-        return NinteichosaDetail;
+    @JsonProperty("Ninteichosa")
+    public NinteichosaDiv getNinteichosa() {
+        return Ninteichosa;
     }
 
-    @JsonProperty("NinteichosaDetail")
-    public void setNinteichosaDetail(NinteichosaDetailDiv NinteichosaDetail) {
-        this.NinteichosaDetail=NinteichosaDetail;
+    @JsonProperty("Ninteichosa")
+    public void setNinteichosa(NinteichosaDiv Ninteichosa) {
+        this.Ninteichosa=Ninteichosa;
     }
 
-    @JsonProperty("ShujiiIkenshoDetail")
-    public ShujiiIkenshoDetailDiv getShujiiIkenshoDetail() {
-        return ShujiiIkenshoDetail;
+    @JsonProperty("ShujiiIkensho")
+    public ShujiiIkenshoDiv getShujiiIkensho() {
+        return ShujiiIkensho;
     }
 
-    @JsonProperty("ShujiiIkenshoDetail")
-    public void setShujiiIkenshoDetail(ShujiiIkenshoDetailDiv ShujiiIkenshoDetail) {
-        this.ShujiiIkenshoDetail=ShujiiIkenshoDetail;
+    @JsonProperty("ShujiiIkensho")
+    public void setShujiiIkensho(ShujiiIkenshoDiv ShujiiIkensho) {
+        this.ShujiiIkensho=ShujiiIkensho;
     }
 
-    @JsonProperty("IryoHokenDetail")
-    public IryoHokenDetailDiv getIryoHokenDetail() {
-        return IryoHokenDetail;
+    @JsonProperty("IryoHoken")
+    public IryoHokenDiv getIryoHoken() {
+        return IryoHoken;
     }
 
-    @JsonProperty("IryoHokenDetail")
-    public void setIryoHokenDetail(IryoHokenDetailDiv IryoHokenDetail) {
-        this.IryoHokenDetail=IryoHokenDetail;
+    @JsonProperty("IryoHoken")
+    public void setIryoHoken(IryoHokenDiv IryoHoken) {
+        this.IryoHoken=IryoHoken;
     }
 
     @JsonProperty("ButtonsBottomOfDetail")

@@ -5,18 +5,18 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.NinteiResultOtherDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.NinteiResultEtceteraDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.ShiteiServiceIchiranDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * NinteiResultDetail のクラスファイル 
+ * NinteiResult のクラスファイル 
  * 
  * @author 自動生成
  */
-public class NinteiResultDetailDiv extends Panel {
+public class NinteiResultDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -35,8 +35,8 @@ public class NinteiResultDetailDiv extends Panel {
     private TextBoxFlexibleDate txtNinteiYukoKaishiYMD;
     @JsonProperty("txtNinteiYukoShuryoYMD")
     private TextBoxFlexibleDate txtNinteiYukoShuryoYMD;
-    @JsonProperty("NinteiResultOther")
-    private NinteiResultOtherDiv NinteiResultOther;
+    @JsonProperty("NinteiResultEtcetera")
+    private NinteiResultEtceteraDiv NinteiResultEtcetera;
     @JsonProperty("ShiteiServiceIchiran")
     private ShiteiServiceIchiranDiv ShiteiServiceIchiran;
 
@@ -106,14 +106,14 @@ public class NinteiResultDetailDiv extends Panel {
         this.txtNinteiYukoShuryoYMD=txtNinteiYukoShuryoYMD;
     }
 
-    @JsonProperty("NinteiResultOther")
-    public NinteiResultOtherDiv getNinteiResultOther() {
-        return NinteiResultOther;
+    @JsonProperty("NinteiResultEtcetera")
+    public NinteiResultEtceteraDiv getNinteiResultEtcetera() {
+        return NinteiResultEtcetera;
     }
 
-    @JsonProperty("NinteiResultOther")
-    public void setNinteiResultOther(NinteiResultOtherDiv NinteiResultOther) {
-        this.NinteiResultOther=NinteiResultOther;
+    @JsonProperty("NinteiResultEtcetera")
+    public void setNinteiResultEtcetera(NinteiResultEtceteraDiv NinteiResultEtcetera) {
+        this.NinteiResultEtcetera=NinteiResultEtcetera;
     }
 
     @JsonProperty("ShiteiServiceIchiran")

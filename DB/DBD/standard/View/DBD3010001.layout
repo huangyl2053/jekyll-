@@ -363,37 +363,10 @@
    "fieldName": "JukyushaShokai",
    "items": [
     {
-     "fieldName": "HihokenshaAtena",
-     "items": [
-      {
-       "fieldName": "lblKihonJohoTitle",
-       "items": [],
-       "controlType": "Label",
-       "width": "S",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "lblKihonJohoTitle",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "required": false,
-       "isPrivateInfo": false,
-       "text": "基本情報",
-       "decorationClass": "",
-       "align": 2
-      }
-     ],
-     "controlType": "Panel",
-     "width": "1098",
+     "fieldName": "kaigoAtena",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -404,157 +377,144 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "HihokenshaAtena",
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "kaigoAtena",
      "helpMessageID": "",
      "jpControlName": "",
-     "onLoad": "",
-     "title": "基本情報",
-     "isOpen": true,
-     "canOpenAndClose": true,
-     "postParameterPanelNames": [
-      {
-       "postParameterPanelNames": "HihokenshaAtena"
-      }
-     ],
-     "requestSettings": [],
-     "hiddenInput": [],
-     "onOpen": "",
-     "onClose": "",
-     "session": {},
-     "marginTop": "Default",
-     "marginBottom": "Default",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
-     "backgroundColor": 0,
-     "widthAuto": false,
-     "panelDisplay": 0,
-     "isGroupBox": false,
-     "readOnly": false,
-     "height": "Auto"
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": 0,
+     "businessId": "DBZ",
+     "controlName": "KaigoAtenaInfo",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "atenaInfo_title": "",
+     "atenaInfo_canOpenAndClose": true,
+     "atenaInfo_eraseBorderTop": true,
+     "atenaInfo_eraseBorderBottom": true,
+     "atenaInfo_eraseBorderRight": true,
+     "atenaInfo_eraseBorderLeft": true,
+     "AtenaKanaMeisho_visible": true,
+     "AtenaMisho_visible": true,
+     "SeinengappiYMD_visible": true,
+     "Nenrei_visible": true,
+     "Seibetsu_visible": true,
+     "JuminShubetsu_Visible": true,
+     "NihonjinGaikokujin_visible": true,
+     "JuminJotai_visible": true,
+     "YubinNo_visible": true,
+     "Jusho_visible": true,
+     "Gyoseiku_visible": true,
+     "ShikibetsuCode_visible": true,
+     "KojinHojinCode_visible": true,
+     "SetaiCode_visible": true,
+     "lblButtonMargin_displayNone": true,
+     "btnMemo_DisplayNone": true,
+     "btnDainosha_displayNone": true,
+     "btnSofusaki_displayNone": true,
+     "btnDainoSofusakiKakunin_displayNone": true,
+     "btnKoza_displayNone": true,
+     "btnRenrakusaki_displayNone": true,
+     "btnShosai_displayNone": true,
+     "btnAtenaRireki_displayNone": true,
+     "btnSetaiIchiran_displayNone": true,
+     "btnDoitsunin_displayNone": true,
+     "btnToriatsukaiChui_displayNone": true,
+     "btnEltax_displayNone": true,
+     "btnShiyoJokyo_displayNone": true,
+     "btnAtesakiKakunin_displayNone": true,
+     "SubGyomuCode": "",
+     "JukiYusennKubun": "1",
+     "AgeArrivalDay": "1",
+     "SubGyomuUmu": "0",
+     "SubGyomuSearchUmu": "0",
+     "DainoninHyojiUmu": "1"
     },
     {
-     "fieldName": "Hihokensha",
-     "items": [
-      {
-       "fieldName": "lblHihokenshaJoho",
-       "items": [],
-       "controlType": "Label",
-       "width": "S",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "lblHihokenshaJoho",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "required": false,
-       "isPrivateInfo": false,
-       "text": "被保険者情報",
-       "decorationClass": "",
-       "align": 2
-      },
-      {
-       "fieldName": "txtHihokenshaNo",
-       "items": [],
-       "controlType": "TextBox",
-       "width": "80",
-       "visible": false,
-       "displayNone": true,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "txtHihokenshaNo_core",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "readOnly": true,
-       "onChange": "",
-       "required": false,
-       "labelLText": "",
-       "labelRText": "",
-       "labelLWidth": "S",
-       "labelRWidth": "S",
-       "labelLAlign": 2,
-       "labelRAlign": 0,
-       "onFocus": "",
-       "onBlur": "",
-       "maxLength": 100000000,
-       "minLength": 0,
-       "textAlign": 0,
-       "placeHolder": "",
-       "textKind": 0,
-       "isPrivateInfo": false,
-       "isPassword": false,
-       "isComboBox": false,
-       "onKeyPress": "",
-       "text": "",
-       "suggest": [],
-       "value": "",
-       "decorationClass": "",
-       "permitCharactor": ""
-      }
-     ],
-     "controlType": "Panel",
-     "width": "1098",
+     "fieldName": "kaigoShikaku",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
      "visible": true,
      "displayNone": false,
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": true,
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "kaigoShikaku",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "title": "",
+     "relation": [],
+     "canOpenAndClose": true,
+     "marginTop": 0,
+     "marginBottom": 0,
+     "eraseBorderTop": true,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true,
+     "businessId": "DBZ",
+     "controlName": "KaigoShikakuKihon",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "backGroundColor": 0,
+     "btnHihoRireki_visible": true,
+     "btnNinteiRireki_visible": true
+    },
+    {
+     "fieldName": "txtHihokenshaNo",
+     "items": [],
+     "controlType": "TextBox",
+     "width": "80",
+     "visible": false,
+     "displayNone": true,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
      "dependencies": [],
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "selectControlID": "Hihokensha",
+     "selectControlID": "txtHihokenshaNo_core",
      "helpMessageID": "",
      "jpControlName": "",
-     "onLoad": "",
-     "title": "被保険者情報",
-     "isOpen": true,
-     "canOpenAndClose": true,
-     "postParameterPanelNames": [
-      {
-       "postParameterPanelNames": "Hihokensha"
-      }
-     ],
-     "requestSettings": [],
-     "hiddenInput": [],
-     "onOpen": "",
-     "onClose": "",
-     "session": {},
-     "marginTop": "Default",
-     "marginBottom": "Default",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
-     "backgroundColor": 0,
-     "widthAuto": false,
-     "panelDisplay": 0,
-     "isGroupBox": false,
-     "readOnly": false,
-     "height": "Auto"
+     "readOnly": true,
+     "onChange": "",
+     "required": false,
+     "labelLText": "",
+     "labelRText": "",
+     "labelLWidth": "S",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "onFocus": "",
+     "onBlur": "",
+     "maxLength": 100000000,
+     "minLength": 0,
+     "textAlign": 0,
+     "placeHolder": "",
+     "textKind": 0,
+     "isPrivateInfo": false,
+     "isPassword": false,
+     "isComboBox": false,
+     "onKeyPress": "",
+     "text": "",
+     "suggest": [],
+     "value": "",
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "ButtonsShosaiShiji",
@@ -777,7 +737,12 @@
        "imageWidth": "",
        "imageHeight": "",
        "displayChildDivName": "DBD.TokubetsuChiikiKasanGemmen",
-       "dataPassing": [],
+       "dataPassing": [
+        {
+         "key": "hihokenshaNo",
+         "controlName": "txtHihokenshaNo"
+        }
+       ],
        "visibleCloseButton": true,
        "onOkClose": "",
        "onBeforeOpenDialog": ""
@@ -1485,7 +1450,7 @@
        "displayFormat": 0
       },
       {
-       "fieldName": "NinteiResultDetail",
+       "fieldName": "NinteiResult",
        "items": [
         {
          "fieldName": "txtNinteiYMD",
@@ -1750,7 +1715,7 @@
          "displayFormat": 0
         },
         {
-         "fieldName": "NinteiResultOther",
+         "fieldName": "NinteiResultEtcetera",
          "items": [
           {
            "fieldName": "txtShinsakaiIken",
@@ -2167,7 +2132,7 @@
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
-         "selectControlID": "NinteiResultOther",
+         "selectControlID": "NinteiResultEtcetera",
          "helpMessageID": "",
          "jpControlName": "",
          "onLoad": "",
@@ -2176,7 +2141,7 @@
          "canOpenAndClose": true,
          "postParameterPanelNames": [
           {
-           "postParameterPanelNames": "NinteiResultOther"
+           "postParameterPanelNames": "NinteiResultEtcetera"
           }
          ],
          "requestSettings": [],
@@ -2225,10 +2190,16 @@
            "gridSetting": {
             "rowHeight": 25,
             "isMultiSelectable": false,
+            "isShowHeader": true,
             "isShowFooter": true,
             "isShowFilter": false,
             "isShowFilterButton": false,
             "isShowRowState": false,
+            "isShowSelectButtonColumn": false,
+            "isShowModifyButtonColumn": false,
+            "isShowDeleteButtonColumn": false,
+            "limitRowCount": 0,
+            "selectedRowCount": 0,
             "header": {
              "combineColumns": [],
              "frozenColumn": "",
@@ -2236,32 +2207,30 @@
             },
             "columns": [
              {
-              "columnName": "Ｎｏ",
-              "dataName": "Ｎｏ",
+              "columnName": "No",
+              "dataName": "serviceNo",
               "toolTip": "",
               "bgColor": 0,
-              "width": 60,
+              "width": 40,
               "visible": true,
-              "cellType": 5,
+              "cellType": 4,
               "cellDetails": {
-               "cellType": 5,
-               "maxLength": "50",
+               "cellType": 4,
+               "maxLength": "3",
                "minLength": "0",
-               "maxValue": "999",
-               "minValue": "0",
-               "isCurrency": false,
-               "isComma": false,
-               "decimalPointLength": "0",
-               "onChange": ""
+               "formatLength": "3",
+               "onChange": "",
+               "isSetValueToToolTip": false,
+               "readOnly": true
               },
               "align": 1,
               "resize": true,
               "isPrivateInfo": false,
-              "sortKey": "Ｎｏ"
+              "sortKey": "serviceNo"
              },
              {
               "columnName": "サービス種類",
-              "dataName": "サービス種類",
+              "dataName": "serviceType",
               "toolTip": "",
               "bgColor": 0,
               "width": 300,
@@ -2273,7 +2242,7 @@
               "align": 0,
               "resize": true,
               "isPrivateInfo": false,
-              "sortKey": "サービス種類"
+              "sortKey": "serviceType"
              }
             ]
            },
@@ -2330,7 +2299,7 @@
          "eraseBorderRight": false,
          "eraseBorderLeft": false,
          "backgroundColor": 0,
-         "widthAuto": false,
+         "widthAuto": true,
          "panelDisplay": 1,
          "isGroupBox": false,
          "readOnly": false,
@@ -2351,7 +2320,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "selectControlID": "NinteiResultDetail",
+       "selectControlID": "NinteiResult",
        "helpMessageID": "",
        "jpControlName": "",
        "onLoad": "",
@@ -2360,7 +2329,7 @@
        "canOpenAndClose": false,
        "postParameterPanelNames": [
         {
-         "postParameterPanelNames": "NinteiResultDetail"
+         "postParameterPanelNames": "NinteiResult"
         }
        ],
        "requestSettings": [],
@@ -2382,7 +2351,7 @@
        "height": "Auto"
       },
       {
-       "fieldName": "NinteichosaDetail",
+       "fieldName": "Ninteichosa",
        "items": [
         {
          "fieldName": "txtNinteiChosaItakusakiCode",
@@ -2708,7 +2677,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "selectControlID": "NinteichosaDetail",
+       "selectControlID": "Ninteichosa",
        "helpMessageID": "",
        "jpControlName": "",
        "onLoad": "",
@@ -2717,7 +2686,7 @@
        "canOpenAndClose": true,
        "postParameterPanelNames": [
         {
-         "postParameterPanelNames": "NinteichosaDetail"
+         "postParameterPanelNames": "Ninteichosa"
         }
        ],
        "requestSettings": [],
@@ -2739,7 +2708,7 @@
        "height": "Auto"
       },
       {
-       "fieldName": "ShujiiIkenshoDetail",
+       "fieldName": "ShujiiIkensho",
        "items": [
         {
          "fieldName": "txtShujiiIryokikanCode",
@@ -3065,7 +3034,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "selectControlID": "ShujiiIkenshoDetail",
+       "selectControlID": "ShujiiIkensho",
        "helpMessageID": "",
        "jpControlName": "",
        "onLoad": "",
@@ -3074,7 +3043,7 @@
        "canOpenAndClose": true,
        "postParameterPanelNames": [
         {
-         "postParameterPanelNames": "ShujiiIkenshoDetail"
+         "postParameterPanelNames": "ShujiiIkensho"
         }
        ],
        "requestSettings": [],
@@ -3096,7 +3065,7 @@
        "height": "Auto"
       },
       {
-       "fieldName": "IryoHokenDetail",
+       "fieldName": "IryoHoken",
        "items": [
         {
          "fieldName": "txtIryoHokenShubetsu",
@@ -3302,7 +3271,7 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "selectControlID": "IryoHokenDetail",
+       "selectControlID": "IryoHoken",
        "helpMessageID": "",
        "jpControlName": "",
        "onLoad": "",
@@ -3311,7 +3280,7 @@
        "canOpenAndClose": true,
        "postParameterPanelNames": [
         {
-         "postParameterPanelNames": "IryoHokenDetail"
+         "postParameterPanelNames": "IryoHoken"
         }
        ],
        "requestSettings": [],
@@ -3356,7 +3325,7 @@
          "helpMessageID": "",
          "jpControlName": "",
          "text": "認定履歴一覧に戻る",
-         "onClick": "",
+         "onClick": "onClick_btnToReturnNinteiRireki",
          "icon": 0,
          "appearance": 0,
          "imageFileUrl": "",
@@ -3500,6 +3469,10 @@
     {
      "eventName": "onClick_btnDetail",
      "requestUrl": "dbd/db/dbd/JukyushaShokai/onStart_Detail"
+    },
+    {
+     "eventName": "onClick_btnToReturnNinteiRireki",
+     "requestUrl": "dbd/db/dbd/JukyushaShokai/onClick_btnToReturnNinteiRireki"
     }
    ],
    "hiddenInput": [],
@@ -3594,23 +3567,28 @@
    "visibleDivs": [
     {
      "visibleDiv": "JukyushaShokai",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "HihokenshaAtena",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "Hihokensha",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "NinteiRireki",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "ButtonsShosaiShiji",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
+    },
+    {
+     "visibleDiv": "kaigoAtena",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "kaigoShikaku",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
@@ -3648,22 +3626,12 @@
      "fixedDiv": ""
     },
     {
-     "visibleDiv": "HihokenshaAtena",
-     "panelState": "visible",
-     "fixedDiv": ""
-    },
-    {
-     "visibleDiv": "Hihokensha",
-     "panelState": "visible",
-     "fixedDiv": ""
-    },
-    {
      "visibleDiv": "NinteiDetail",
      "panelState": "visible",
      "fixedDiv": ""
     },
     {
-     "visibleDiv": "NinteiResultDetail",
+     "visibleDiv": "NinteiResult",
      "panelState": "visible",
      "fixedDiv": ""
     },
@@ -3673,22 +3641,22 @@
      "fixedDiv": ""
     },
     {
-     "visibleDiv": "NinteichosaDetail",
+     "visibleDiv": "Ninteichosa",
      "panelState": "visible",
      "fixedDiv": ""
     },
     {
-     "visibleDiv": "ShujiiIkenshoDetail",
+     "visibleDiv": "ShujiiIkensho",
      "panelState": "visible",
      "fixedDiv": ""
     },
     {
-     "visibleDiv": "IryoHokenDetail",
+     "visibleDiv": "IryoHoken",
      "panelState": "visible",
      "fixedDiv": ""
     },
     {
-     "visibleDiv": "NinteiResultOther",
+     "visibleDiv": "NinteiResultEtcetera",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -3704,6 +3672,16 @@
     },
     {
      "visibleDiv": "ButtonsBottomOfDetail",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "kaigoAtena",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "kaigoShikaku",
      "panelState": "visible",
      "fixedDiv": "No"
     }
@@ -3789,10 +3767,10 @@
    "searchResult"
   ],
   [
-   "HihokenshaAtena"
+   "kaigoAtena"
   ],
   [
-   "Hihokensha"
+   "kaigoShikaku"
   ],
   [
    "ButtonsShosaiShiji"
@@ -3804,10 +3782,10 @@
    "NinteiDetail"
   ],
   [
-   "NinteiResultDetail"
+   "NinteiResult"
   ],
   [
-   "NinteiResultOther"
+   "NinteiResultEtcetera"
   ],
   [
    "NinteiResultIdo"
@@ -3819,13 +3797,13 @@
    "ShiteiServiceIchiran"
   ],
   [
-   "NinteichosaDetail"
+   "Ninteichosa"
   ],
   [
-   "ShujiiIkenshoDetail"
+   "ShujiiIkensho"
   ],
   [
-   "IryoHokenDetail"
+   "IryoHoken"
   ],
   [
    "ButtonsBottomOfDetail"
