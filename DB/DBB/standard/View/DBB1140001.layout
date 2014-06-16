@@ -22,6 +22,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "ddlShoriNendo_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onChange": "",
      "selectedItem": "key0",
      "dataSource": [
@@ -46,7 +48,8 @@
      "labelLAlign": 2,
      "labelRAlign": 0,
      "onFocus": "",
-     "onBlur": ""
+     "onBlur": "",
+     "disabledItem": []
     },
     {
      "fieldName": "linShotokushokai1",
@@ -64,6 +67,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "linShotokushokai1",
+     "helpMessageID": "",
+     "jpControlName": "",
      "size": "Default"
     },
     {
@@ -84,6 +89,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "chkShuturyokuTaisho_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onChange": "",
      "selectedItem": null,
      "dataSource": [
@@ -107,6 +114,8 @@
      "maxCheckedItem": 2,
      "spaceSize": "M",
      "isAllSelectable": true,
+     "isAllSelectableBreakLine": false,
+     "disabledItem": [],
      "icon": []
     },
     {
@@ -124,9 +133,11 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": 0,
-     "marginRight": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
      "selectControlID": "ShotokushokaihyoShutsuryokuJun",
+     "helpMessageID": "",
+     "jpControlName": "",
      "relation": [],
      "marginTop": 0,
      "marginBottom": "1",
@@ -134,7 +145,8 @@
      "controlName": "ChohyoShutsuryokujun",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": ""
+     "dialogCancelEventNameForDialog": "",
+     "ChohyoShutsuryokujun_width": "G12"
     },
     {
      "fieldName": "chkSaihakko",
@@ -154,6 +166,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "chkSaihakko_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onChange": "",
      "selectedItem": null,
      "dataSource": [
@@ -172,13 +186,15 @@
      "maxCheckedItem": 2,
      "spaceSize": "M",
      "isAllSelectable": false,
+     "isAllSelectableBreakLine": false,
+     "disabledItem": [],
      "icon": []
     },
     {
      "fieldName": "dgSaihakko",
      "items": [],
      "controlType": "DataGrid",
-     "width": "500",
+     "width": "540",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -192,6 +208,9 @@
      "marginLeft": "L",
      "marginRight": "XS",
      "selectControlID": "dgSaihakko",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "height": "M",
      "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
@@ -204,6 +223,8 @@
       "isShowSelectButtonColumn": false,
       "isShowModifyButtonColumn": false,
       "isShowDeleteButtonColumn": false,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
       "header": {
        "combineColumns": [],
        "frozenColumn": "",
@@ -248,7 +269,7 @@
         "dataName": "txtShoriNichiji",
         "toolTip": "",
         "bgColor": 0,
-        "width": 150,
+        "width": 170,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -280,7 +301,7 @@
         "dataName": "txtUser",
         "toolTip": "",
         "bgColor": 0,
-        "width": 140,
+        "width": 160,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -293,7 +314,6 @@
        }
       ]
      },
-     "height": "S",
      "onSort": "",
      "onSelect": "",
      "onSelectByDblClick": "",
@@ -307,36 +327,10 @@
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1
-    },
-    {
-     "fieldName": "btnHakko",
-     "items": [],
-     "controlType": "Button",
-     "width": "M",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 2,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "btnHakko",
-     "onClick": "",
-     "icon": 0,
-     "text": "発行する",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": ""
     }
    ],
    "controlType": "Panel",
-   "width": "1106",
+   "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -350,6 +344,8 @@
    "marginLeft": "0",
    "marginRight": "XS",
    "selectControlID": "ShotokushokaihyoIkkatu",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "所得照会票一括発行",
    "isOpen": true,
@@ -374,7 +370,8 @@
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": false
+   "readOnly": false,
+   "height": "Auto"
   }
  ],
  "controlType": null,
@@ -392,6 +389,8 @@
  "marginLeft": "XS",
  "marginRight": "XS",
  "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
  "onLoad": "",
  "title": "所得照会票一括発行",
  "jsPathCollection": [],
@@ -418,7 +417,7 @@
    "events": []
   }
  ],
- "currentState": "所得照会票一括発行",
+ "currentState": "All",
  "id": "DBB1140001",
  "WFParameter": [],
  "UIContainerEventMapping": [],
@@ -435,12 +434,12 @@
  "supplementInfoAllSet": "",
  "commonButtonAreaData": [
   {
-   "commonButtonAreaId": "btnHakko",
+   "commonButtonAreaId": "ShotokushokaiIkkatsu",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonComplete",
+     "buttonKind": "CommonButtonReportPublish",
      "buttonProperty": {
-      "fieldName": "Element1",
+      "fieldName": "btnHakko",
       "items": [],
       "controlType": "CommonButtonComplete",
       "width": "S",
@@ -456,19 +455,35 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "Element1",
+      "selectControlID": "btnHakko",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "postParameterPanelNames": [],
+      "text": "完了",
       "onClick": "",
       "icon": 0,
-      "text": "完了",
       "appearance": 0,
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
-      "additionalText": "発行"
+      "additionalText": "",
+      "validateUrl": "",
+      "sourceCreateUrl": "",
+      "afterPrintUrl": "",
+      "isModal": true,
+      "isInstruction": true,
+      "isPreview": false,
+      "printable": false,
+      "copiesChangeable": false,
+      "progressVisible": false
      }
     }
    ],
-   "states": [],
+   "states": [
+    {
+     "state": "所得照会票一括発行"
+    }
+   ],
    "isFinishButtonOnTheRight": true
   }
  ]
