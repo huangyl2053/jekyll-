@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -157,17 +158,17 @@ public class HihokenshashoHakkoTaishoshaJoho {
 
         if (ymlData.getAsRString("ninteikikanfrom").toString().isEmpty()) {
 
-            panel.getCcdKaigoShikakuKihon().getTxtNinteiKaishiYmd().clearValue();
+            panel.getCcdKaigoShikakuKihon().getTxtNinteiKikan().clearFromValue();
         } else {
-            panel.getCcdKaigoShikakuKihon().getTxtNinteiKaishiYmd().
-                    setValue(ymlData.getAsRDate("ninteikikanfrom"));
+            panel.getCcdKaigoShikakuKihon().getTxtNinteiKikan().
+                    setFromValue(ymlData.getAsRDate("ninteikikanfrom"));
         }
 
         if (ymlData.getAsRString("ninteikikanto").toString().isEmpty()) {
-            panel.getCcdKaigoShikakuKihon().getTxtNinteiShuryoYmd().clearValue();
+            panel.getCcdKaigoShikakuKihon().getTxtNinteiKikan().clearToValue();
         } else {
-            panel.getCcdKaigoShikakuKihon().getTxtNinteiShuryoYmd().
-                    setValue(ymlData.getAsRDate("ninteikikanto"));
+            panel.getCcdKaigoShikakuKihon().getTxtNinteiKikan().
+                    setToValue(ymlData.getAsRDate("ninteikikanto"));
         }
 
         response.data = panel;
