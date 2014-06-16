@@ -8,7 +8,7 @@
      "fieldName": "txtSofuYM",
      "items": [],
      "controlType": "TextBoxDate",
-     "width": "S",
+     "width": "60",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -21,10 +21,12 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "required": false,
+     "selectControlID": "txtSofuYM_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": false,
+     "required": false,
      "placeHolder": "",
-     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
@@ -34,7 +36,7 @@
      "text": "",
      "labelLText": "送付年月",
      "labelRText": "",
-     "labelLWidth": "60",
+     "labelLWidth": "80",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
@@ -59,6 +61,9 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "ddlShichosonName_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "required": false,
      "onFocus": "",
      "onBlur": "",
@@ -70,7 +75,7 @@
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "selectedItem": "",
+     "selectedItem": "key0",
      "dataSource": [
       {
        "key": "key0",
@@ -99,11 +104,16 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnSearchSofuzumi",
+     "helpMessageID": "",
+     "jpControlName": "",
      "text": "送付年月を指定して表示する",
      "onClick": "onClick_btnSofuzumi",
+     "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     },
     {
      "fieldName": "btnSearchMisofu",
@@ -122,11 +132,16 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnSearchMisofu",
+     "helpMessageID": "",
+     "jpControlName": "",
      "text": "未送付情報を表示する",
      "onClick": "onClick_btnMisofu",
+     "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     },
     {
      "fieldName": "SofuIchiran",
@@ -135,7 +150,7 @@
        "fieldName": "dgSofuIchiran",
        "items": [],
        "controlType": "DataGrid",
-       "width": "1200",
+       "width": "1098",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -146,20 +161,30 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
+       "marginLeft": "0",
+       "marginRight": "0",
+       "selectControlID": "dgSofuIchiran",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "height": "530",
        "dataSource": [],
        "gridSetting": {
         "rowHeight": 25,
         "isMultiSelectable": false,
+        "isShowHeader": true,
         "isShowFooter": true,
         "isShowFilter": true,
-        "isShowFilterButton": false,
+        "isShowFilterButton": true,
         "isShowRowState": false,
+        "isShowSelectButtonColumn": false,
+        "isShowModifyButtonColumn": false,
+        "isShowDeleteButtonColumn": false,
+        "limitRowCount": 0,
+        "selectedRowCount": 0,
         "header": {
          "combineColumns": [],
          "frozenColumn": "",
-         "headerHeight": 0
+         "headerHeight": 1
         },
         "columns": [
          {
@@ -169,14 +194,12 @@
           "bgColor": 0,
           "width": 95,
           "visible": true,
-          "cellType": 4,
+          "cellType": 0,
           "cellDetails": {
-           "cellType": 4,
-           "maxLength": "1.7976931348623157e+308",
-           "minLength": "0",
-           "formatLength": "10"
+           "cellType": 0,
+           "isSetValueToToolTip": false
           },
-          "align": 0,
+          "align": 1,
           "resize": true,
           "isPrivateInfo": false,
           "sortKey": "txtJigyoshaNo"
@@ -188,12 +211,10 @@
           "bgColor": 0,
           "width": 150,
           "visible": true,
-          "cellType": 1,
+          "cellType": 0,
           "cellDetails": {
-           "cellType": 1,
-           "maxLength": "1.7976931348623157e+308",
-           "minLength": "0",
-           "textAlign": 0
+           "cellType": 0,
+           "isSetValueToToolTip": false
           },
           "align": 0,
           "resize": true,
@@ -205,16 +226,14 @@
           "dataName": "txtHihoNo",
           "toolTip": "",
           "bgColor": 0,
-          "width": 85,
+          "width": 95,
           "visible": true,
-          "cellType": 4,
+          "cellType": 0,
           "cellDetails": {
-           "cellType": 4,
-           "maxLength": "1.7976931348623157e+308",
-           "minLength": "0",
-           "formatLength": "10"
+           "cellType": 0,
+           "isSetValueToToolTip": false
           },
-          "align": 0,
+          "align": 1,
           "resize": true,
           "isPrivateInfo": false,
           "sortKey": "txtHihoNo"
@@ -226,12 +245,10 @@
           "bgColor": 0,
           "width": 140,
           "visible": true,
-          "cellType": 1,
+          "cellType": 0,
           "cellDetails": {
-           "cellType": 1,
-           "maxLength": "1.7976931348623157e+308",
-           "minLength": "0",
-           "textAlign": 0
+           "cellType": 0,
+           "isSetValueToToolTip": false
           },
           "align": 0,
           "resize": true,
@@ -243,14 +260,12 @@
           "dataName": "txtMoshitateshaKubun",
           "toolTip": "",
           "bgColor": 0,
-          "width": 150,
+          "width": 140,
           "visible": true,
-          "cellType": 4,
+          "cellType": 0,
           "cellDetails": {
-           "cellType": 4,
-           "maxLength": "1.7976931348623157e+308",
-           "minLength": "0",
-           "formatLength": "1"
+           "cellType": 0,
+           "isSetValueToToolTip": false
           },
           "align": 0,
           "resize": true,
@@ -264,12 +279,10 @@
           "bgColor": 0,
           "width": 100,
           "visible": true,
-          "cellType": 1,
+          "cellType": 0,
           "cellDetails": {
-           "cellType": 1,
-           "maxLength": "1.7976931348623157e+308",
-           "minLength": "0",
-           "textAlign": 0
+           "cellType": 0,
+           "isSetValueToToolTip": false
           },
           "align": 0,
           "resize": true,
@@ -283,12 +296,10 @@
           "bgColor": 0,
           "width": 100,
           "visible": true,
-          "cellType": 1,
+          "cellType": 0,
           "cellDetails": {
-           "cellType": 1,
-           "maxLength": "1.7976931348623157e+308",
-           "minLength": "0",
-           "textAlign": 0
+           "cellType": 0,
+           "isSetValueToToolTip": false
           },
           "align": 0,
           "resize": true,
@@ -296,19 +307,22 @@
           "sortKey": "txtMoshitateRiyu"
          },
          {
-          "columnName": "サービス提供年月",
+          "columnName": "サービス<br>提供年月",
           "dataName": "txtServiceTeikyoYM",
           "toolTip": "",
           "bgColor": 0,
-          "width": 145,
+          "width": 80,
           "visible": true,
-          "cellType": 6,
+          "cellType": 0,
           "cellDetails": {
            "cellType": 6,
            "ymdKubun": 1,
-           "displayFormat": 0
+           "displayFormat": 0,
+           "onChange": "",
+           "isSetValueToToolTip": false,
+           "readOnly": true
           },
-          "align": 0,
+          "align": 1,
           "resize": true,
           "isPrivateInfo": false,
           "sortKey": "txtServiceTeikyoYM"
@@ -320,52 +334,52 @@
           "bgColor": 0,
           "width": 80,
           "visible": true,
-          "cellType": 6,
+          "cellType": 0,
           "cellDetails": {
-           "cellType": 6,
-           "ymdKubun": 2,
-           "displayFormat": 0
+           "cellType": 0,
+           "isSetValueToToolTip": false
           },
-          "align": 0,
+          "align": 1,
           "resize": true,
           "isPrivateInfo": false,
           "sortKey": "txtMoshitateYMD"
          },
          {
-          "columnName": "証記載保険者番号",
+          "columnName": "証記載<br>保険者番号",
           "dataName": "txtShokisaiHokenshaNo",
           "toolTip": "",
           "bgColor": 0,
-          "width": 145,
+          "width": 115,
           "visible": true,
-          "cellType": 4,
+          "cellType": 0,
           "cellDetails": {
-           "cellType": 4,
-           "maxLength": "1.7976931348623157e+308",
-           "minLength": "0",
-           "formatLength": "6"
+           "cellType": 0,
+           "isSetValueToToolTip": false
           },
-          "align": 0,
+          "align": 1,
           "resize": true,
           "isPrivateInfo": false,
           "sortKey": "txtShokisaiHokenshaNo"
          }
         ]
        },
-       "height": "530",
        "onSort": "",
        "onSelect": "",
+       "onSelectByDblClick": "",
+       "onSelectBySelectButton": "",
+       "onSelectByModifyButton": "",
+       "onSelectByDeleteButton": "",
        "onOnlyRow": "",
        "onNoRow": "",
        "onMultiRows": "",
-       "sortOrder": "txtHihoName",
+       "sortOrder": "txtShokisaiHokenshaNo",
        "isAscending": true,
        "filterList": [],
-       "clickedRowId": -1
+       "activeRowId": -1
       }
      ],
      "controlType": "Panel",
-     "width": "M",
+     "width": "G2",
      "visible": true,
      "displayNone": false,
      "disabled": true,
@@ -378,6 +392,9 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "SofuIchiran",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onLoad": "",
      "title": "",
      "isOpen": true,
@@ -400,11 +417,14 @@
      "eraseBorderLeft": true,
      "backgroundColor": 0,
      "widthAuto": true,
-     "isGroupBox": false
+     "panelDisplay": 0,
+     "isGroupBox": false,
+     "readOnly": false,
+     "height": "Auto"
     }
    ],
    "controlType": "Panel",
-   "width": "M",
+   "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -415,12 +435,15 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
+   "marginLeft": "0",
+   "marginRight": "0",
+   "selectControlID": "Sofujoho",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "過誤申立書送付情報",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "Sofujoho"
@@ -444,15 +467,18 @@
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "marginTop": "XS",
-   "marginBottom": "XS",
+   "marginTop": "0",
+   "marginBottom": "0",
    "eraseBorderTop": false,
    "eraseBorderBottom": false,
    "eraseBorderRight": false,
    "eraseBorderLeft": false,
    "backgroundColor": 0,
-   "widthAuto": true,
-   "isGroupBox": false
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
   }
  ],
  "controlType": null,
@@ -469,6 +495,9 @@
  "authorityMode": 0,
  "marginLeft": "XS",
  "marginRight": "XS",
+ "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
  "onLoad": "",
  "title": "過誤申立書送付情報照会",
  "jsPathCollection": [],
@@ -476,8 +505,8 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "照会",
-   "showWizard": false,
+   "stateName": "過誤申立書照会",
+   "showWizard": true,
    "visibleDivs": [
     {
      "visibleDiv": "Sofujoho",
@@ -505,5 +534,7 @@
   ]
  ],
  "panelMargin": 1,
- "controlMargin": 1
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "commonButtonAreaData": []
 }
