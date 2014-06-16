@@ -79,8 +79,8 @@
   hokenshaMoshitateRiyu: 02:請求誤りによる実績取り下げ
   hokenshaServiceTeikyoYM: 平26.04
   hokenshaServiceType: 11:訪問介護
-  hokenshaTanisu: 3,000
-  hkenshaFutangaku: 100,000
+  hokenshaTanisu: 3000
+  hkenshaFutangaku: 100000
 - hokenshaJigyoshaNo: "0000000007"
   hokenshaJigyoshaName: 電算事業者7
   hokenshaHihoNo: "0000000017"
@@ -99,8 +99,8 @@
   hokenshaMoshitateRiyu: 02:請求誤りによる実績取り下げ
   hokenshaServiceTeikyoYM: 平26.04
   hokenshaServiceType: 11:訪問介護
-  hokenshaTanisu: 3,000
-  hkenshaFutangaku: 100,000
+  hokenshaTanisu: 3000
+  hkenshaFutangaku: 100000
 - hokenshaJigyoshaNo: "0000000009"
   hokenshaJigyoshaName: 電算事業者9
   hokenshaHihoNo: "0000000019"
@@ -144,8 +144,8 @@
   kohiMoshitateRiyu: 02:請求誤りによる実績取り下げ
   kohiServiceTeikyoYM: 平26.04
   kohiServiceType: 11:訪問介護
-  hokenshaTanisu: 5000
-  hkenshaFutangaku: 100000
+  kohiTanisu: 2000
+  kohiFutangaku: 100000
   kohiJukyushaNo: "0000001"
   kohiFutanshaNo: "00000001"
 - kohiJigyoshaNo: "2000000001"
@@ -156,8 +156,8 @@
   kohiMoshitateRiyu: 02:請求誤りによる実績取り下げ
   kohiServiceTeikyoYM: 平26.04
   kohiServiceType: 11:訪問介護
-  hokenshaTanisu: 4000
-  hkenshaFutangaku: 100000
+  kohiTanisu: 2000
+  kohiFutangaku: 100000
   kohiJukyushaNo: "0000001"
   kohiFutanshaNo: "00000001"
 - kohiJigyoshaNo: "3000000001"
@@ -168,8 +168,8 @@
   kohiMoshitateRiyu: 02:請求誤りによる実績取り下げ
   kohiServiceTeikyoYM: 平26.04
   kohiServiceType: 11:訪問介護
-  hokenshaTanisu: 3000
-  hkenshaFutangaku: 100000
+  kohiTanisu: 2000
+  kohiFutangaku: 100000
   kohiJukyushaNo: "0000001"
   kohiFutanshaNo: "00000001"
 - kohiJigyoshaNo: "4000000001"
@@ -180,7 +180,7 @@
   kohiMoshitateRiyu: 02:請求誤りによる実績取り下げ
   kohiServiceTeikyoYM: 平26.04
   kohiServiceType: 11:訪問介護
-  hokenshaTanisu: 2000
-  hkenshaFutangaku: 100000
+  kohiTanisu: 2000
+  kohiFutangaku: 100000
   kohiJukyushaNo: "0000001"
   kohiFutanshaNo: "00000001"

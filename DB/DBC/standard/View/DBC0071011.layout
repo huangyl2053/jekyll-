@@ -402,11 +402,11 @@
            "nextFocusFieldName": "",
            "wrap": true,
            "dependencies": [],
-           "float": 1,
+           "float": 0,
            "toolTip": "",
            "authorityMode": 0,
-           "marginLeft": ".1",
-           "marginRight": "0.1",
+           "marginLeft": "XS",
+           "marginRight": "XS",
            "selectControlID": "txtHokenshaCell11_core",
            "helpMessageID": "",
            "jpControlName": "",
@@ -1555,7 +1555,7 @@
         "header": {
          "combineColumns": [],
          "frozenColumn": "",
-         "headerHeight": 1
+         "headerHeight": 0
         },
         "columns": [
          {
@@ -1661,7 +1661,7 @@
           "sortKey": "txtHokenshaMoshitateRiyu"
          },
          {
-          "columnName": "サービス<br>提供年月",
+          "columnName": "サービス提供年月",
           "dataName": "txtHokenshaServiceTeikyoYM",
           "toolTip": "",
           "bgColor": 0,
@@ -1800,7 +1800,7 @@
      "onLoad": "",
      "title": "保険者情報",
      "isOpen": true,
-     "canOpenAndClose": false,
+     "canOpenAndClose": true,
      "postParameterPanelNames": [
       {
        "postParameterPanelNames": "KetteiHokensha"
@@ -2965,7 +2965,7 @@
         "header": {
          "combineColumns": [],
          "frozenColumn": "",
-         "headerHeight": 1
+         "headerHeight": 0
         },
         "columns": [
          {
@@ -3071,7 +3071,7 @@
           "sortKey": "txtKohiMoshitateRiyu"
          },
          {
-          "columnName": "サービス<br>提供年月",
+          "columnName": "サービス提供年月",
           "dataName": "txtKohiServiceTeikyoYM",
           "toolTip": "",
           "bgColor": 0,
@@ -3191,7 +3191,7 @@
           "sortKey": "txtKohiFutanshaNo"
          },
          {
-          "columnName": "証記載<br>保険者番号",
+          "columnName": "証記載保険者番号",
           "dataName": "txtHokenshaShokisaiHokenshaNo",
           "toolTip": "",
           "bgColor": 0,
@@ -3244,7 +3244,7 @@
      "onLoad": "",
      "title": "公費負担者情報",
      "isOpen": true,
-     "canOpenAndClose": false,
+     "canOpenAndClose": true,
      "postParameterPanelNames": [
       {
        "postParameterPanelNames": "KetteiKohi"
@@ -3289,7 +3289,7 @@
    "onLoad": "",
    "title": "過誤決定情報",
    "isOpen": true,
-   "canOpenAndClose": false,
+   "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "Ketteijoho"
@@ -3348,7 +3348,7 @@
   {
    "order": "1",
    "stateName": "過誤決定取込情報照会",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "Ketteijoho",

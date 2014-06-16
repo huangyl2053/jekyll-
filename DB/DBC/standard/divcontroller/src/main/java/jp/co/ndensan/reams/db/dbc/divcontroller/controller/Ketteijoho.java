@@ -45,12 +45,15 @@ public class Ketteijoho {
 
         //setDefault取扱年月
         setDefault(panel, NEWYMLNAME);
+       
+        panel.getKetteiHokensha().getTxtKetteiHokenshaSakuseiYMD().clearValue();
+        panel.getKetteiKohi().getTxtKetteiKohiSakuseiYMD().clearValue();
 
-        setHokenshaCellData(panel, NEWYMLNAME);
-        setHokenshaListData(panel, NEWYMLNAME);
-
-        setKohiCellData(panel, NEWYMLNAME);
-        setKohiListData(panel, NEWYMLNAME);
+//        setHokenshaCellData(panel, NEWYMLNAME);
+//        setHokenshaListData(panel, NEWYMLNAME);
+//
+//        setKohiCellData(panel, NEWYMLNAME);
+//        setKohiListData(panel, NEWYMLNAME);
 
         response.data = panel;
 
@@ -65,6 +68,7 @@ public class Ketteijoho {
         ControlGenerator ymlDt = new ControlGenerator(hashMap);
 
         panel.getTxtToriatsukaiYM().setValue(ymlDt.getAsRDate("toriatsukaiYM"));
+        
         panel.getKetteiHokensha().getTxtKetteiHokenshaSakuseiYMD().setValue(ymlDt.getAsRDate("ketteiHokenshaSakuseiYMD"));
         panel.getKetteiKohi().getTxtKetteiKohiSakuseiYMD().setValue(ymlDt.getAsRDate("ketteiKohiSakuseiYMD"));
 
