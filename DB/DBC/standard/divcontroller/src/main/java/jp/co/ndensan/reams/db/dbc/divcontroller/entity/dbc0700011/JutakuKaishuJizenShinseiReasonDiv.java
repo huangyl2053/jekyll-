@@ -1,17 +1,15 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0700011;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * JutakuKaishuJizenShinseiReason のクラスファイル 
- * 
+ * JutakuKaishuJizenShinseiReason のクラスファイル
+ *
  * @author 自動生成
  */
 public class JutakuKaishuJizenShinseiReasonDiv extends Panel {
@@ -21,6 +19,7 @@ public class JutakuKaishuJizenShinseiReasonDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtCreateDate")
     private TextBoxDate txtCreateDate;
     @JsonProperty("txtCreationJigyoshaNo")
@@ -47,7 +46,7 @@ public class JutakuKaishuJizenShinseiReasonDiv extends Panel {
 
     @JsonProperty("txtCreateDate")
     public void setTxtCreateDate(TextBoxDate txtCreateDate) {
-        this.txtCreateDate=txtCreateDate;
+        this.txtCreateDate = txtCreateDate;
     }
 
     @JsonProperty("txtCreationJigyoshaNo")
@@ -57,7 +56,7 @@ public class JutakuKaishuJizenShinseiReasonDiv extends Panel {
 
     @JsonProperty("txtCreationJigyoshaNo")
     public void setTxtCreationJigyoshaNo(TextBoxCode txtCreationJigyoshaNo) {
-        this.txtCreationJigyoshaNo=txtCreationJigyoshaNo;
+        this.txtCreationJigyoshaNo = txtCreationJigyoshaNo;
     }
 
     @JsonProperty("btnSearchCreationJigyoshaName")
@@ -67,7 +66,7 @@ public class JutakuKaishuJizenShinseiReasonDiv extends Panel {
 
     @JsonProperty("btnSearchCreationJigyoshaName")
     public void setBtnSearchCreationJigyoshaName(Button btnSearchCreationJigyoshaName) {
-        this.btnSearchCreationJigyoshaName=btnSearchCreationJigyoshaName;
+        this.btnSearchCreationJigyoshaName = btnSearchCreationJigyoshaName;
     }
 
     @JsonProperty("txtCreationJigyoshaName")
@@ -77,7 +76,7 @@ public class JutakuKaishuJizenShinseiReasonDiv extends Panel {
 
     @JsonProperty("txtCreationJigyoshaName")
     public void setTxtCreationJigyoshaName(TextBox txtCreationJigyoshaName) {
-        this.txtCreationJigyoshaName=txtCreationJigyoshaName;
+        this.txtCreationJigyoshaName = txtCreationJigyoshaName;
     }
 
     @JsonProperty("txtCreatorKanaName")
@@ -87,7 +86,7 @@ public class JutakuKaishuJizenShinseiReasonDiv extends Panel {
 
     @JsonProperty("txtCreatorKanaName")
     public void setTxtCreatorKanaName(TextBox txtCreatorKanaName) {
-        this.txtCreatorKanaName=txtCreatorKanaName;
+        this.txtCreatorKanaName = txtCreatorKanaName;
     }
 
     @JsonProperty("txtCreatorName")
@@ -97,7 +96,7 @@ public class JutakuKaishuJizenShinseiReasonDiv extends Panel {
 
     @JsonProperty("txtCreatorName")
     public void setTxtCreatorName(TextBox txtCreatorName) {
-        this.txtCreatorName=txtCreatorName;
+        this.txtCreatorName = txtCreatorName;
     }
 
 }

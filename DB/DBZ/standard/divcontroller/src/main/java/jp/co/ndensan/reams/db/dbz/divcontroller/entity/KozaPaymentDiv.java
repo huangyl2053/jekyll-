@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -10,11 +10,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * JutakuKaishuJizenShinseiKozaInfo のクラスファイル 
+ * KozaPayment のクラスファイル 
  * 
  * @author 自動生成
  */
-public class JutakuKaishuJizenShinseiKozaInfoDiv extends Panel {
+public class KozaPaymentDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,18 +25,18 @@ public class JutakuKaishuJizenShinseiKozaInfoDiv extends Panel {
     private TextBoxCode txtKinyuKikanCode;
     @JsonProperty("txtKinyuKikanName")
     private TextBox txtKinyuKikanName;
-    @JsonProperty("radKozaType")
-    private RadioButton radKozaType;
-    @JsonProperty("txtKozaMeigininKanaName")
-    private TextBox txtKozaMeigininKanaName;
-    @JsonProperty("txtKinyuBranchCode")
-    private TextBoxCode txtKinyuBranchCode;
-    @JsonProperty("txtKinyuBranchName")
-    private TextBox txtKinyuBranchName;
+    @JsonProperty("radKozaShubetsu")
+    private RadioButton radKozaShubetsu;
+    @JsonProperty("txtKozaMeigininKana")
+    private TextBox txtKozaMeigininKana;
+    @JsonProperty("txtKinyuKikanBrunchCode")
+    private TextBoxCode txtKinyuKikanBrunchCode;
+    @JsonProperty("txtKinyuKikanBrunchName")
+    private TextBox txtKinyuKikanBrunchName;
     @JsonProperty("txtKozaNo")
     private TextBoxCode txtKozaNo;
-    @JsonProperty("txtKozaMeigininName")
-    private TextBox txtKozaMeigininName;
+    @JsonProperty("txtKozaMeiginin")
+    private TextBox txtKozaMeiginin;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -64,44 +64,44 @@ public class JutakuKaishuJizenShinseiKozaInfoDiv extends Panel {
         this.txtKinyuKikanName=txtKinyuKikanName;
     }
 
-    @JsonProperty("radKozaType")
-    public RadioButton getRadKozaType() {
-        return radKozaType;
+    @JsonProperty("radKozaShubetsu")
+    public RadioButton getRadKozaShubetsu() {
+        return radKozaShubetsu;
     }
 
-    @JsonProperty("radKozaType")
-    public void setRadKozaType(RadioButton radKozaType) {
-        this.radKozaType=radKozaType;
+    @JsonProperty("radKozaShubetsu")
+    public void setRadKozaShubetsu(RadioButton radKozaShubetsu) {
+        this.radKozaShubetsu=radKozaShubetsu;
     }
 
-    @JsonProperty("txtKozaMeigininKanaName")
-    public TextBox getTxtKozaMeigininKanaName() {
-        return txtKozaMeigininKanaName;
+    @JsonProperty("txtKozaMeigininKana")
+    public TextBox getTxtKozaMeigininKana() {
+        return txtKozaMeigininKana;
     }
 
-    @JsonProperty("txtKozaMeigininKanaName")
-    public void setTxtKozaMeigininKanaName(TextBox txtKozaMeigininKanaName) {
-        this.txtKozaMeigininKanaName=txtKozaMeigininKanaName;
+    @JsonProperty("txtKozaMeigininKana")
+    public void setTxtKozaMeigininKana(TextBox txtKozaMeigininKana) {
+        this.txtKozaMeigininKana=txtKozaMeigininKana;
     }
 
-    @JsonProperty("txtKinyuBranchCode")
-    public TextBoxCode getTxtKinyuBranchCode() {
-        return txtKinyuBranchCode;
+    @JsonProperty("txtKinyuKikanBrunchCode")
+    public TextBoxCode getTxtKinyuKikanBrunchCode() {
+        return txtKinyuKikanBrunchCode;
     }
 
-    @JsonProperty("txtKinyuBranchCode")
-    public void setTxtKinyuBranchCode(TextBoxCode txtKinyuBranchCode) {
-        this.txtKinyuBranchCode=txtKinyuBranchCode;
+    @JsonProperty("txtKinyuKikanBrunchCode")
+    public void setTxtKinyuKikanBrunchCode(TextBoxCode txtKinyuKikanBrunchCode) {
+        this.txtKinyuKikanBrunchCode=txtKinyuKikanBrunchCode;
     }
 
-    @JsonProperty("txtKinyuBranchName")
-    public TextBox getTxtKinyuBranchName() {
-        return txtKinyuBranchName;
+    @JsonProperty("txtKinyuKikanBrunchName")
+    public TextBox getTxtKinyuKikanBrunchName() {
+        return txtKinyuKikanBrunchName;
     }
 
-    @JsonProperty("txtKinyuBranchName")
-    public void setTxtKinyuBranchName(TextBox txtKinyuBranchName) {
-        this.txtKinyuBranchName=txtKinyuBranchName;
+    @JsonProperty("txtKinyuKikanBrunchName")
+    public void setTxtKinyuKikanBrunchName(TextBox txtKinyuKikanBrunchName) {
+        this.txtKinyuKikanBrunchName=txtKinyuKikanBrunchName;
     }
 
     @JsonProperty("txtKozaNo")
@@ -114,14 +114,14 @@ public class JutakuKaishuJizenShinseiKozaInfoDiv extends Panel {
         this.txtKozaNo=txtKozaNo;
     }
 
-    @JsonProperty("txtKozaMeigininName")
-    public TextBox getTxtKozaMeigininName() {
-        return txtKozaMeigininName;
+    @JsonProperty("txtKozaMeiginin")
+    public TextBox getTxtKozaMeiginin() {
+        return txtKozaMeiginin;
     }
 
-    @JsonProperty("txtKozaMeigininName")
-    public void setTxtKozaMeigininName(TextBox txtKozaMeigininName) {
-        this.txtKozaMeigininName=txtKozaMeigininName;
+    @JsonProperty("txtKozaMeiginin")
+    public void setTxtKozaMeiginin(TextBox txtKozaMeiginin) {
+        this.txtKozaMeiginin=txtKozaMeiginin;
     }
 
 }

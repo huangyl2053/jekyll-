@@ -121,15 +121,15 @@ module DBZ {
         }
         
         public get txtJigyoshaNo_displayNone() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["displayNone"];
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"])["displayNone"];
         }
         
         public set txtJigyoshaNo_displayNone(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["displayNone"] = value;
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"])["displayNone"] = value;
             } else {
-                this.layout.items[0].items[3]["displayNone"] = value;
+                this.layout.items[0].items[4]["displayNone"] = value;
                 this.raisePropertyChanged(this.layout);
             }
         }
@@ -215,7 +215,7 @@ module DBZ {
             editablePropertyInfo["eraseBorderLeft"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderLeft"];
             editablePropertyInfo["title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["title"];
             editablePropertyInfo["panelDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["panelDisplay"];
-            editablePropertyInfo["txtJigyoshaNo_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["txtJigyoshaNo_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["txtShinseishaName_labelLText"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).getEditablePropertyInfo()["labelLText"];
             editablePropertyInfo["txtYubinNo_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[9]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["txtAddress_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"]).getEditablePropertyInfo()["displayNone"];
@@ -246,6 +246,8 @@ module DBZ {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtShinseiDate_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": false,
      "required": false,
      "placeHolder": "",
@@ -286,6 +288,8 @@ module DBZ {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtUketsukeDate_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": false,
      "required": false,
      "placeHolder": "",
@@ -326,6 +330,8 @@ module DBZ {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "ddlHokensha_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
@@ -348,50 +354,6 @@ module DBZ {
      ]
     },
     {
-     "fieldName": "txtJigyoshaNo",
-     "items": [],
-     "controlType": "TextBoxCode",
-     "width": "85",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "txtJigyoshaNo_core",
-     "readOnly": false,
-     "required": false,
-     "placeHolder": "",
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
-     "text": "",
-     "labelLText": "事業者",
-     "labelRText": "",
-     "labelLWidth": "55",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "value": "",
-     "maxLength": 100000000,
-     "minLength": 0,
-     "textAlign": 0,
-     "textKind": 2,
-     "isComboBox": false,
-     "suggest": [],
-     "permitCharactor": "",
-     "formatLength": 1
-    },
-    {
      "fieldName": "ddlShinseishaKubun",
      "items": [],
      "controlType": "DropDownList",
@@ -409,6 +371,8 @@ module DBZ {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "ddlShinseishaKubun_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
@@ -439,6 +403,53 @@ module DBZ {
      ]
     },
     {
+     "fieldName": "txtJigyoshaNo",
+     "items": [],
+     "controlType": "TextBoxCode",
+     "width": "85",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "txtJigyoshaNo_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": false,
+     "required": false,
+     "placeHolder": "",
+     "isPrivateInfo": false,
+     "isPassword": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "onKeyPress": "",
+     "text": "",
+     "labelLText": "事業者",
+     "labelRText": "",
+     "labelLWidth": "55",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "value": "",
+     "maxLength": 100000000,
+     "minLength": 0,
+     "textAlign": 0,
+     "textKind": 2,
+     "isComboBox": false,
+     "suggest": [],
+     "decorationClass": "",
+     "permitCharactor": "",
+     "formatLength": "10"
+    },
+    {
      "fieldName": "btnSearchJigyosha",
      "items": [],
      "controlType": "Button",
@@ -456,6 +467,8 @@ module DBZ {
      "marginLeft": "-0.2",
      "marginRight": "XS",
      "selectControlID": "btnSearchJigyosha",
+     "helpMessageID": "",
+     "jpControlName": "",
      "text": "Button1",
      "onClick": "",
      "appearance": 2,
@@ -482,6 +495,8 @@ module DBZ {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtShinseishaName_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": false,
      "required": false,
      "placeHolder": "",
@@ -505,6 +520,7 @@ module DBZ {
      "textKind": 0,
      "isComboBox": false,
      "suggest": [],
+     "decorationClass": "",
      "permitCharactor": ""
     },
     {
@@ -522,9 +538,11 @@ module DBZ {
      "float": 2,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "4.4",
+     "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtTelNo_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": false,
      "required": false,
      "placeHolder": "",
@@ -548,6 +566,7 @@ module DBZ {
      "textKind": 0,
      "isComboBox": false,
      "suggest": [],
+     "decorationClass": "",
      "permitCharactor": ""
     },
     {
@@ -568,6 +587,8 @@ module DBZ {
      "marginLeft": "3.9",
      "marginRight": "XS",
      "selectControlID": "txtShinseishaNameKana_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": false,
      "required": false,
      "placeHolder": "",
@@ -591,6 +612,7 @@ module DBZ {
      "textKind": 0,
      "isComboBox": false,
      "suggest": [],
+     "decorationClass": "",
      "permitCharactor": ""
     },
     {
@@ -611,6 +633,8 @@ module DBZ {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtYubinNo_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": false,
      "required": false,
      "placeHolder": "",
@@ -634,13 +658,14 @@ module DBZ {
      "textKind": 2,
      "isComboBox": false,
      "suggest": [],
+     "decorationClass": "",
      "permitCharactor": ""
     },
     {
      "fieldName": "txtAddress",
      "items": [],
      "controlType": "TextBox",
-     "width": "565",
+     "width": "L",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -654,6 +679,8 @@ module DBZ {
      "marginLeft": "-0.2",
      "marginRight": "XS",
      "selectControlID": "txtAddress_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": false,
      "required": false,
      "placeHolder": "",
@@ -677,11 +704,12 @@ module DBZ {
      "textKind": 0,
      "isComboBox": false,
      "suggest": [],
+     "decorationClass": "",
      "permitCharactor": ""
     }
    ],
    "controlType": "Panel",
-   "width": "755",
+   "width": "705",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -695,6 +723,8 @@ module DBZ {
    "marginLeft": "XS",
    "marginRight": "XS",
    "selectControlID": "ShinseishaInfo",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "申請者情報",
    "marginTop": "Default",
@@ -719,7 +749,8 @@ module DBZ {
    "widthAuto": false,
    "panelDisplay": 1,
    "isGroupBox": false,
-   "readOnly": false
+   "readOnly": false,
+   "height": "Auto"
   }
  ],
  "controlType": "CommonChildDiv",
@@ -734,9 +765,11 @@ module DBZ {
  "float": 0,
  "toolTip": "",
  "authorityMode": 0,
- "marginLeft": 0,
- "marginRight": 0,
+ "marginLeft": "0",
+ "marginRight": "0",
  "selectControlID": "defaultLayout",
+ "helpMessageID": "",
+ "jpControlName": "",
  "relation": [],
  "businessId": "DBZ",
  "controlName": "ShinseishaInfo",

@@ -1,42 +1,39 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuJizenShinseiKozaInfoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuJizenShinseiReasonDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuZizenShinseiDetailDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShinseishaInfoDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0700011;
 
 /**
- * JutakuKaishuJizenShinseiContents のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KozaPayment.KozaPaymentDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShinseishaInfo.ShinseishaInfoDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * JutakuKaishuJizenShinseiContentsPanel のクラスファイル
+ *
  * @author 自動生成
  */
-public class JutakuKaishuJizenShinseiContentsDiv extends Panel {
+public class JutakuKaishuJizenShinseiContentsPanelDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtJutakuOwner")
     private TextBox txtJutakuOwner;
     @JsonProperty("txtRelationWithHihokensha")
     private TextBox txtRelationWithHihokensha;
     @JsonProperty("JutakuKaishuZizenShinseiDetail")
     private JutakuKaishuZizenShinseiDetailDiv JutakuKaishuZizenShinseiDetail;
-    @JsonProperty("JutakuKaishuJizenShinseiSha")
-    private ShinseishaInfoDiv JutakuKaishuJizenShinseiSha;
+    @JsonProperty("JutakuKaishuJizenShinseisha")
+    private ShinseishaInfoDiv JutakuKaishuJizenShinseisha;
     @JsonProperty("JutakuKaishuJizenShinseiReason")
     private JutakuKaishuJizenShinseiReasonDiv JutakuKaishuJizenShinseiReason;
     @JsonProperty("JutakuKaishuJizenShinseiKozaInfo")
-    private JutakuKaishuJizenShinseiKozaInfoDiv JutakuKaishuJizenShinseiKozaInfo;
+    private KozaPaymentDiv JutakuKaishuJizenShinseiKoza;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -51,7 +48,7 @@ public class JutakuKaishuJizenShinseiContentsDiv extends Panel {
 
     @JsonProperty("txtJutakuOwner")
     public void setTxtJutakuOwner(TextBox txtJutakuOwner) {
-        this.txtJutakuOwner=txtJutakuOwner;
+        this.txtJutakuOwner = txtJutakuOwner;
     }
 
     @JsonProperty("txtRelationWithHihokensha")
@@ -61,7 +58,7 @@ public class JutakuKaishuJizenShinseiContentsDiv extends Panel {
 
     @JsonProperty("txtRelationWithHihokensha")
     public void setTxtRelationWithHihokensha(TextBox txtRelationWithHihokensha) {
-        this.txtRelationWithHihokensha=txtRelationWithHihokensha;
+        this.txtRelationWithHihokensha = txtRelationWithHihokensha;
     }
 
     @JsonProperty("JutakuKaishuZizenShinseiDetail")
@@ -71,17 +68,17 @@ public class JutakuKaishuJizenShinseiContentsDiv extends Panel {
 
     @JsonProperty("JutakuKaishuZizenShinseiDetail")
     public void setJutakuKaishuZizenShinseiDetail(JutakuKaishuZizenShinseiDetailDiv JutakuKaishuZizenShinseiDetail) {
-        this.JutakuKaishuZizenShinseiDetail=JutakuKaishuZizenShinseiDetail;
+        this.JutakuKaishuZizenShinseiDetail = JutakuKaishuZizenShinseiDetail;
     }
 
-    @JsonProperty("JutakuKaishuJizenShinseiSha")
-    public ShinseishaInfoDiv getJutakuKaishuJizenShinseiSha() {
-        return JutakuKaishuJizenShinseiSha;
+    @JsonProperty("JutakuKaishuJizenShinseisha")
+    public ShinseishaInfoDiv getJutakuKaishuJizenShinseisha() {
+        return JutakuKaishuJizenShinseisha;
     }
 
-    @JsonProperty("JutakuKaishuJizenShinseiSha")
-    public void setJutakuKaishuJizenShinseiSha(ShinseishaInfoDiv JutakuKaishuJizenShinseiSha) {
-        this.JutakuKaishuJizenShinseiSha=JutakuKaishuJizenShinseiSha;
+    @JsonProperty("JutakuKaishuJizenShinseisha")
+    public void setJutakuKaishuJizenShinseisha(ShinseishaInfoDiv JutakuKaishuJizenShinseisha) {
+        this.JutakuKaishuJizenShinseisha = JutakuKaishuJizenShinseisha;
     }
 
     @JsonProperty("JutakuKaishuJizenShinseiReason")
@@ -91,17 +88,16 @@ public class JutakuKaishuJizenShinseiContentsDiv extends Panel {
 
     @JsonProperty("JutakuKaishuJizenShinseiReason")
     public void setJutakuKaishuJizenShinseiReason(JutakuKaishuJizenShinseiReasonDiv JutakuKaishuJizenShinseiReason) {
-        this.JutakuKaishuJizenShinseiReason=JutakuKaishuJizenShinseiReason;
+        this.JutakuKaishuJizenShinseiReason = JutakuKaishuJizenShinseiReason;
     }
 
     @JsonProperty("JutakuKaishuJizenShinseiKozaInfo")
-    public JutakuKaishuJizenShinseiKozaInfoDiv getJutakuKaishuJizenShinseiKozaInfo() {
-        return JutakuKaishuJizenShinseiKozaInfo;
+    public KozaPaymentDiv getJutakuKaishuJizenShinseiKozaInfo() {
+        return JutakuKaishuJizenShinseiKoza;
     }
 
     @JsonProperty("JutakuKaishuJizenShinseiKozaInfo")
-    public void setJutakuKaishuJizenShinseiKozaInfo(JutakuKaishuJizenShinseiKozaInfoDiv JutakuKaishuJizenShinseiKozaInfo) {
-        this.JutakuKaishuJizenShinseiKozaInfo=JutakuKaishuJizenShinseiKozaInfo;
+    public void setJutakuKaishuJizenShinseiKozaInfo(KozaPaymentDiv JutakuKaishuJizenShinseiKoza) {
+        this.JutakuKaishuJizenShinseiKoza = JutakuKaishuJizenShinseiKoza;
     }
-
 }

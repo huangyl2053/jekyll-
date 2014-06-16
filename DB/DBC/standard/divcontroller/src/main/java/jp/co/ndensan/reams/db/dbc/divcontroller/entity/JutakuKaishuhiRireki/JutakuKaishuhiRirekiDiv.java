@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuhiRireki;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -10,19 +10,21 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * JutakuKaishuJizenShinseiResetInfo のクラスファイル 
+ * JutakuKaishuhiRireki のクラスファイル 
  * 
  * @author 自動生成
  */
-public class JutakuKaishuJizenShinseiResetInfoDiv extends Panel {
+public class JutakuKaishuhiRirekiDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("chkResetInfo")
-    private CheckBoxList chkResetInfo;
+    @JsonProperty("dgJutakuKaishuRireki")
+    private DataGrid<dgJutakuKaishuRireki_Row> dgJutakuKaishuRireki;
+    @JsonProperty("btnClose")
+    private Button btnClose;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -30,14 +32,24 @@ public class JutakuKaishuJizenShinseiResetInfoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("chkResetInfo")
-    public CheckBoxList getChkResetInfo() {
-        return chkResetInfo;
+    @JsonProperty("dgJutakuKaishuRireki")
+    public DataGrid<dgJutakuKaishuRireki_Row> getDgJutakuKaishuRireki() {
+        return dgJutakuKaishuRireki;
     }
 
-    @JsonProperty("chkResetInfo")
-    public void setChkResetInfo(CheckBoxList chkResetInfo) {
-        this.chkResetInfo=chkResetInfo;
+    @JsonProperty("dgJutakuKaishuRireki")
+    public void setDgJutakuKaishuRireki(DataGrid<dgJutakuKaishuRireki_Row> dgJutakuKaishuRireki) {
+        this.dgJutakuKaishuRireki=dgJutakuKaishuRireki;
+    }
+
+    @JsonProperty("btnClose")
+    public Button getBtnClose() {
+        return btnClose;
+    }
+
+    @JsonProperty("btnClose")
+    public void setBtnClose(Button btnClose) {
+        this.btnClose=btnClose;
     }
 
 }
