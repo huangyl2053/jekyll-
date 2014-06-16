@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0060000;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoAtenaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -22,6 +23,8 @@ public class KyufuKanrihyoKihonDiv extends Panel {
      */
     @JsonProperty("KyufuKanrihyoKaigoAtena")
     private KaigoAtenaInfoDiv KyufuKanrihyoKaigoAtena;
+    @JsonProperty("KyufuKanrihyoKaigoKihon")
+    private KaigoShikakuKihonDiv KyufuKanrihyoKaigoKihon;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,6 +40,16 @@ public class KyufuKanrihyoKihonDiv extends Panel {
     @JsonProperty("KyufuKanrihyoKaigoAtena")
     public void setKyufuKanrihyoKaigoAtena(KaigoAtenaInfoDiv KyufuKanrihyoKaigoAtena) {
         this.KyufuKanrihyoKaigoAtena=KyufuKanrihyoKaigoAtena;
+    }
+
+    @JsonProperty("KyufuKanrihyoKaigoKihon")
+    public KaigoShikakuKihonDiv getKyufuKanrihyoKaigoKihon() {
+        return KyufuKanrihyoKaigoKihon;
+    }
+
+    @JsonProperty("KyufuKanrihyoKaigoKihon")
+    public void setKyufuKanrihyoKaigoKihon(KaigoShikakuKihonDiv KyufuKanrihyoKaigoKihon) {
+        this.KyufuKanrihyoKaigoKihon=KyufuKanrihyoKaigoKihon;
     }
 
 }
