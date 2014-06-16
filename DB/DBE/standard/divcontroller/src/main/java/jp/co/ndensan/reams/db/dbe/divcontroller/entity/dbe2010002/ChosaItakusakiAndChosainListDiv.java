@@ -5,12 +5,9 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.ButtonsForWaritsukeChosaItakusakiListDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.ShozokuChosainListDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.dgChosaItakusakiList_Row;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010002.WaritsukesakiChosaItakusakiListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * ChosaItakusakiAndChosainList のクラスファイル 
@@ -24,14 +21,10 @@ public class ChosaItakusakiAndChosainListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ButtonsForWaritsukeChosaItakusakiList")
-    private ButtonsForWaritsukeChosaItakusakiListDiv ButtonsForWaritsukeChosaItakusakiList;
-    @JsonProperty("dgChosaItakusakiList")
-    private DataGrid<dgChosaItakusakiList_Row> dgChosaItakusakiList;
     @JsonProperty("ShozokuChosainList")
     private ShozokuChosainListDiv ShozokuChosainList;
-    @JsonProperty("lblPadding")
-    private Label lblPadding;
+    @JsonProperty("WaritsukesakiChosaItakusakiList")
+    private WaritsukesakiChosaItakusakiListDiv WaritsukesakiChosaItakusakiList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -39,26 +32,6 @@ public class ChosaItakusakiAndChosainListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("ButtonsForWaritsukeChosaItakusakiList")
-    public ButtonsForWaritsukeChosaItakusakiListDiv getButtonsForWaritsukeChosaItakusakiList() {
-        return ButtonsForWaritsukeChosaItakusakiList;
-    }
-
-    @JsonProperty("ButtonsForWaritsukeChosaItakusakiList")
-    public void setButtonsForWaritsukeChosaItakusakiList(ButtonsForWaritsukeChosaItakusakiListDiv ButtonsForWaritsukeChosaItakusakiList) {
-        this.ButtonsForWaritsukeChosaItakusakiList=ButtonsForWaritsukeChosaItakusakiList;
-    }
-
-    @JsonProperty("dgChosaItakusakiList")
-    public DataGrid<dgChosaItakusakiList_Row> getDgChosaItakusakiList() {
-        return dgChosaItakusakiList;
-    }
-
-    @JsonProperty("dgChosaItakusakiList")
-    public void setDgChosaItakusakiList(DataGrid<dgChosaItakusakiList_Row> dgChosaItakusakiList) {
-        this.dgChosaItakusakiList=dgChosaItakusakiList;
-    }
-
     @JsonProperty("ShozokuChosainList")
     public ShozokuChosainListDiv getShozokuChosainList() {
         return ShozokuChosainList;
@@ -69,14 +42,14 @@ public class ChosaItakusakiAndChosainListDiv extends Panel {
         this.ShozokuChosainList=ShozokuChosainList;
     }
 
-    @JsonProperty("lblPadding")
-    public Label getLblPadding() {
-        return lblPadding;
+    @JsonProperty("WaritsukesakiChosaItakusakiList")
+    public WaritsukesakiChosaItakusakiListDiv getWaritsukesakiChosaItakusakiList() {
+        return WaritsukesakiChosaItakusakiList;
     }
 
-    @JsonProperty("lblPadding")
-    public void setLblPadding(Label lblPadding) {
-        this.lblPadding=lblPadding;
+    @JsonProperty("WaritsukesakiChosaItakusakiList")
+    public void setWaritsukesakiChosaItakusakiList(WaritsukesakiChosaItakusakiListDiv WaritsukesakiChosaItakusakiList) {
+        this.WaritsukesakiChosaItakusakiList=WaritsukesakiChosaItakusakiList;
     }
 
 }

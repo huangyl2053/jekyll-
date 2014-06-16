@@ -5,9 +5,9 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryPaperDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2010001.NinteichosaIraiEntryRequestContentDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * NinteichosaIraiEntryRequest のクラスファイル 
@@ -21,14 +21,10 @@ public class NinteichosaIraiEntryRequestDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ddlChosaIraiKubun")
-    private DropDownList ddlChosaIraiKubun;
-    @JsonProperty("txtChosaIraiDate")
-    private TextBoxFlexibleDate txtChosaIraiDate;
-    @JsonProperty("txtChosaKigenDate")
-    private TextBoxFlexibleDate txtChosaKigenDate;
-    @JsonProperty("txtIraishoHakkoDate")
-    private TextBoxFlexibleDate txtIraishoHakkoDate;
+    @JsonProperty("NinteichosaIraiEntryRequestContent")
+    private NinteichosaIraiEntryRequestContentDiv NinteichosaIraiEntryRequestContent;
+    @JsonProperty("NinteichosaIraiEntryPaper")
+    private NinteichosaIraiEntryPaperDiv NinteichosaIraiEntryPaper;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -36,44 +32,24 @@ public class NinteichosaIraiEntryRequestDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("ddlChosaIraiKubun")
-    public DropDownList getDdlChosaIraiKubun() {
-        return ddlChosaIraiKubun;
+    @JsonProperty("NinteichosaIraiEntryRequestContent")
+    public NinteichosaIraiEntryRequestContentDiv getNinteichosaIraiEntryRequestContent() {
+        return NinteichosaIraiEntryRequestContent;
     }
 
-    @JsonProperty("ddlChosaIraiKubun")
-    public void setDdlChosaIraiKubun(DropDownList ddlChosaIraiKubun) {
-        this.ddlChosaIraiKubun=ddlChosaIraiKubun;
+    @JsonProperty("NinteichosaIraiEntryRequestContent")
+    public void setNinteichosaIraiEntryRequestContent(NinteichosaIraiEntryRequestContentDiv NinteichosaIraiEntryRequestContent) {
+        this.NinteichosaIraiEntryRequestContent=NinteichosaIraiEntryRequestContent;
     }
 
-    @JsonProperty("txtChosaIraiDate")
-    public TextBoxFlexibleDate getTxtChosaIraiDate() {
-        return txtChosaIraiDate;
+    @JsonProperty("NinteichosaIraiEntryPaper")
+    public NinteichosaIraiEntryPaperDiv getNinteichosaIraiEntryPaper() {
+        return NinteichosaIraiEntryPaper;
     }
 
-    @JsonProperty("txtChosaIraiDate")
-    public void setTxtChosaIraiDate(TextBoxFlexibleDate txtChosaIraiDate) {
-        this.txtChosaIraiDate=txtChosaIraiDate;
-    }
-
-    @JsonProperty("txtChosaKigenDate")
-    public TextBoxFlexibleDate getTxtChosaKigenDate() {
-        return txtChosaKigenDate;
-    }
-
-    @JsonProperty("txtChosaKigenDate")
-    public void setTxtChosaKigenDate(TextBoxFlexibleDate txtChosaKigenDate) {
-        this.txtChosaKigenDate=txtChosaKigenDate;
-    }
-
-    @JsonProperty("txtIraishoHakkoDate")
-    public TextBoxFlexibleDate getTxtIraishoHakkoDate() {
-        return txtIraishoHakkoDate;
-    }
-
-    @JsonProperty("txtIraishoHakkoDate")
-    public void setTxtIraishoHakkoDate(TextBoxFlexibleDate txtIraishoHakkoDate) {
-        this.txtIraishoHakkoDate=txtIraishoHakkoDate;
+    @JsonProperty("NinteichosaIraiEntryPaper")
+    public void setNinteichosaIraiEntryPaper(NinteichosaIraiEntryPaperDiv NinteichosaIraiEntryPaper) {
+        this.NinteichosaIraiEntryPaper=NinteichosaIraiEntryPaper;
     }
 
 }

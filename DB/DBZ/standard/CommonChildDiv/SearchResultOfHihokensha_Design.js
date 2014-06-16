@@ -13,13 +13,13 @@ var DBZ;
         }
         Object.defineProperty(SearchResultOfHihokensha_Design.prototype, "onClickBtnToResearch", {
             get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onClick"];
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[0]["fieldName"])["onClick"];
             },
             set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onClick"] = value;
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[0]["fieldName"])["onClick"] = value;
                 } else {
-                    this.layout.items[0].items[1]["onClick"] = value;
+                    this.layout.items[0].items[1].items[0]["onClick"] = value;
                     this.raisePropertyChanged(this.layout);
                 }
             },
@@ -53,7 +53,7 @@ var DBZ;
 
         SearchResultOfHihokensha_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
-            editablePropertyInfo["onClickBtnToResearch"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["onClickBtnToResearch"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[0]["fieldName"]).getEditablePropertyInfo()["onClick"];
             editablePropertyInfo["gridSetting"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["gridSetting"];
 
             return editablePropertyInfo;
@@ -68,7 +68,7 @@ var DBZ;
                             "fieldName": "dgSearchResult",
                             "items": [],
                             "controlType": "DataGrid",
-                            "width": "980",
+                            "width": "1075",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -76,11 +76,13 @@ var DBZ;
                             "nextFocusFieldName": "",
                             "wrap": true,
                             "dependencies": [],
-                            "float": 1,
+                            "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
+                            "selectControlID": "dgSearchResult",
+                            "dataSource": [],
                             "gridSetting": {
                                 "rowHeight": 50,
                                 "isMultiSelectable": false,
@@ -281,20 +283,50 @@ var DBZ;
                             "height": "S",
                             "onSort": "",
                             "onSelect": "",
+                            "onSelectByDblClick": "",
+                            "onSelectBySelectButton": "",
+                            "onSelectByModifyButton": "",
+                            "onSelectByDeleteButton": "",
                             "onOnlyRow": "",
                             "onNoRow": "",
                             "onMultiRows": "",
-                            "dataSource": [],
                             "sortOrder": "yubinNoAndJusho",
                             "isAscending": true,
                             "filterList": [],
-                            "clickedRowId": -1
+                            "activeRowId": -1
                         },
                         {
-                            "fieldName": "btnToResearch",
-                            "items": [],
-                            "controlType": "Button",
-                            "width": "M",
+                            "fieldName": "ButtonsForSearchResultOfHihokensha",
+                            "items": [
+                                {
+                                    "fieldName": "btnToResearch",
+                                    "items": [],
+                                    "controlType": "Button",
+                                    "width": "M",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "btnToResearch",
+                                    "text": "再検索する",
+                                    "onClick": "",
+                                    "icon": 0,
+                                    "appearance": 0,
+                                    "imageFileUrl": "",
+                                    "imageWidth": "",
+                                    "imageHeight": ""
+                                }
+                            ],
+                            "controlType": "Panel",
+                            "width": "1075",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -307,13 +339,36 @@ var DBZ;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
-                            "onClick": "",
-                            "text": "再検索する",
-                            "imageFileUrl": ""
+                            "selectControlID": "ButtonsForSearchResultOfHihokensha",
+                            "onLoad": "",
+                            "title": "",
+                            "marginTop": "Default",
+                            "marginBottom": "Default",
+                            "isOpen": true,
+                            "canOpenAndClose": true,
+                            "postParameterPanelNames": [
+                                {
+                                    "postParameterPanelNames": "ButtonsForSearchResultOfHihokensha"
+                                }
+                            ],
+                            "requestSettings": [],
+                            "hiddenInput": [],
+                            "onOpen": "",
+                            "onClose": "",
+                            "session": {},
+                            "eraseBorderTop": true,
+                            "eraseBorderBottom": true,
+                            "eraseBorderRight": true,
+                            "eraseBorderLeft": true,
+                            "backgroundColor": 0,
+                            "widthAuto": false,
+                            "panelDisplay": 0,
+                            "isGroupBox": false,
+                            "readOnly": false
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "M",
+                    "width": "1090",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -321,11 +376,12 @@ var DBZ;
                     "nextFocusFieldName": "",
                     "wrap": true,
                     "dependencies": [],
-                    "float": 1,
+                    "float": 0,
                     "toolTip": "",
                     "authorityMode": 0,
                     "marginLeft": "XS",
                     "marginRight": "XS",
+                    "selectControlID": "SearchResultOfHihokensha",
                     "onLoad": "",
                     "title": "検索結果",
                     "marginTop": "XS",
@@ -352,7 +408,10 @@ var DBZ;
                     "eraseBorderRight": false,
                     "eraseBorderLeft": false,
                     "backgroundColor": 0,
-                    "widthAuto": true
+                    "widthAuto": false,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -369,6 +428,7 @@ var DBZ;
             "authorityMode": 0,
             "marginLeft": 0,
             "marginRight": 0,
+            "selectControlID": "defaultLayout",
             "relation": [],
             "businessId": "DBZ",
             "controlName": "SearchResultOfHihokensha",
