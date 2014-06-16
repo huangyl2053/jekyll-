@@ -25,6 +25,16 @@
             <artifactId>UrzRealService</artifactId>
         </dependency>
         <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzDivController</artifactId>
+            <classifier>classes</classifier>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.ura</groupId>
+            <artifactId>UraDivController</artifactId>
+            <classifier>classes</classifier>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbzRealService</artifactId>
             <version>${project.version}</version>
