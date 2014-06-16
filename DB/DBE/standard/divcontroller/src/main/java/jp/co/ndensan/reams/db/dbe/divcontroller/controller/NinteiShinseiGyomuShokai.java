@@ -22,6 +22,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class NinteiShinseiGyomuShokai {
 
+    /**
+     * 認定申請情報照会Divをロードした時の処理を表します。
+     *
+     * @param div 認定申請情報照会Div
+     * @return ResponseData
+     */
     public ResponseData onLoadData(NinteiShinseiGyomuShokaiDiv div) {
         ResponseData<NinteiShinseiGyomuShokaiDiv> response = new ResponseData<>();
 
