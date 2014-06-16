@@ -593,7 +593,7 @@
       "isMultiSelectable": false,
       "isShowHeader": true,
       "isShowFooter": true,
-      "isShowFilter": true,
+      "isShowFilter": false,
       "isShowFilterButton": true,
       "isShowRowState": false,
       "isShowSelectButtonColumn": true,
