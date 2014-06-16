@@ -23,6 +23,27 @@ public class SearchShoKaishuKanri {
     private final static RString HIHOKENSHA_DATA = new RString("dbu0500011/HihokenshaData.yml");
 
     /**
+     * 未発行検索条件画面の初期処理を表します。
+     *
+     * @param searchDiv SearchShoKaishuKanriDiv
+     * @return ResponseData
+     */
+    public ResponseData<SearchShoKaishuKanriDiv> onLoad(SearchShoKaishuKanriDiv searchDiv) {
+        ResponseData<SearchShoKaishuKanriDiv> response = new ResponseData<>();
+
+        searchDiv.getTxtSearchHihokenshaMeisho().setValue(RString.EMPTY);
+        HashMap yamlData = YamlLoader.DBU.loadAsList(HIHOKENSHA_DATA).get(0);
+        ControlGenerator generator = new ControlGenerator(yamlData);
+        searchDiv.getTxtSearchHihokenshaNo().setValue(generator.getAsRString("被保番号"));
+        searchDiv.getTxtSearchHihokenshaMeisho().setValue(generator.getAsRString("氏名"));
+        searchDiv.getRadSearchKohushoShurui().setSelectedItem(new RString("hihokenshasho"));
+
+        response.data = searchDiv;
+        return response;
+
+    }
+
+    /**
      * 検索対象の被保険者番号を入力し、フォーカスをはずした際に実行されます。<br/>
      * 入力した被保険者番号に対応する被保険者が存在していた場合
      *

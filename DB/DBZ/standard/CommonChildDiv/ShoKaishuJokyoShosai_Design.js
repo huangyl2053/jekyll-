@@ -11,12 +11,164 @@ var DBZ;
         function ShoKaishuJokyoShosai_Design($parentElement, isDesignMode, fieldName) {
             _super.call(this, $parentElement, isDesignMode, ShoKaishuJokyoShosai_Design.myLayout, fieldName);
         }
+        Object.defineProperty(ShoKaishuJokyoShosai_Design.prototype, "ShoKaishuJokyoShosai_title", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["title"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["title"] = value;
+                } else {
+                    this.layout.items[0]["title"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShoKaishuJokyoShosai_Design.prototype, "ShoKaishuJokyoShosai_width", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["width"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["width"] = value;
+                } else {
+                    this.layout.items[0]["width"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShoKaishuJokyoShosai_Design.prototype, "ShoKaishuJokyoShosai_canOpenAndClose", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["canOpenAndClose"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["canOpenAndClose"] = value;
+                } else {
+                    this.layout.items[0]["canOpenAndClose"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShoKaishuJokyoShosai_Design.prototype, "ShoKaishuJokyoShosai_eraseBorderTop", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderTop"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderTop"] = value;
+                } else {
+                    this.layout.items[0]["eraseBorderTop"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShoKaishuJokyoShosai_Design.prototype, "ShoKaishuJokyoShosai_eraseBorderBottom", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderBottom"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderBottom"] = value;
+                } else {
+                    this.layout.items[0]["eraseBorderBottom"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShoKaishuJokyoShosai_Design.prototype, "ShoKaishuJokyoShosai_eraseBorderRight", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderRight"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderRight"] = value;
+                } else {
+                    this.layout.items[0]["eraseBorderRight"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShoKaishuJokyoShosai_Design.prototype, "ShoKaishuJokyoShosai_eraseBorderLeft", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderLeft"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderLeft"] = value;
+                } else {
+                    this.layout.items[0]["eraseBorderLeft"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShoKaishuJokyoShosai_Design.prototype, "ShoKaishuJokyoShosai_panelDisplay", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"] = value;
+                } else {
+                    this.layout.items[0]["panelDisplay"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
         ShoKaishuJokyoShosai_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
+            Uz.JSControlUtil.registProperty("ShoKaishuJokyoShosai_title");
+            Uz.JSControlUtil.registProperty("ShoKaishuJokyoShosai_width");
+            Uz.JSControlUtil.registProperty("ShoKaishuJokyoShosai_canOpenAndClose");
+            Uz.JSControlUtil.registProperty("ShoKaishuJokyoShosai_eraseBorderTop");
+            Uz.JSControlUtil.registProperty("ShoKaishuJokyoShosai_eraseBorderBottom");
+            Uz.JSControlUtil.registProperty("ShoKaishuJokyoShosai_eraseBorderRight");
+            Uz.JSControlUtil.registProperty("ShoKaishuJokyoShosai_eraseBorderLeft");
+            Uz.JSControlUtil.registProperty("ShoKaishuJokyoShosai_panelDisplay");
         };
 
         ShoKaishuJokyoShosai_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+            editablePropertyInfo["ShoKaishuJokyoShosai_title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["title"];
+            editablePropertyInfo["ShoKaishuJokyoShosai_width"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["width"];
+            editablePropertyInfo["ShoKaishuJokyoShosai_canOpenAndClose"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["canOpenAndClose"];
+            editablePropertyInfo["ShoKaishuJokyoShosai_eraseBorderTop"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderTop"];
+            editablePropertyInfo["ShoKaishuJokyoShosai_eraseBorderBottom"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderBottom"];
+            editablePropertyInfo["ShoKaishuJokyoShosai_eraseBorderRight"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderRight"];
+            editablePropertyInfo["ShoKaishuJokyoShosai_eraseBorderLeft"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderLeft"];
+            editablePropertyInfo["ShoKaishuJokyoShosai_panelDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["panelDisplay"];
 
             return editablePropertyInfo;
         };
@@ -460,15 +612,15 @@ var DBZ;
                     "float": 0,
                     "toolTip": "",
                     "authorityMode": 0,
-                    "marginLeft": "XS",
-                    "marginRight": "XS",
+                    "marginLeft": "0",
+                    "marginRight": "0",
                     "selectControlID": "ShoKaishuJokyoShosai",
                     "helpMessageID": "",
                     "jpControlName": "",
                     "onLoad": "",
                     "title": "証類交付情報",
-                    "marginTop": "Default",
-                    "marginBottom": "Default",
+                    "marginTop": "0",
+                    "marginBottom": "0",
                     "isOpen": true,
                     "canOpenAndClose": true,
                     "postParameterPanelNames": [
@@ -515,7 +667,48 @@ var DBZ;
             "controlName": "ShoKaishuJokyoShosai",
             "marginTop": 0,
             "marginBottom": 0,
-            "originalProperty": [],
+            "originalProperty": [
+                {
+                    "publicChildFieldName": "ShoKaishuJokyoShosai",
+                    "publicChildProperty": "title",
+                    "newPropertyName": "ShoKaishuJokyoShosai_title"
+                },
+                {
+                    "publicChildFieldName": "ShoKaishuJokyoShosai",
+                    "publicChildProperty": "width",
+                    "newPropertyName": "ShoKaishuJokyoShosai_width"
+                },
+                {
+                    "publicChildFieldName": "ShoKaishuJokyoShosai",
+                    "publicChildProperty": "canOpenAndClose",
+                    "newPropertyName": "ShoKaishuJokyoShosai_canOpenAndClose"
+                },
+                {
+                    "publicChildFieldName": "ShoKaishuJokyoShosai",
+                    "publicChildProperty": "eraseBorderTop",
+                    "newPropertyName": "ShoKaishuJokyoShosai_eraseBorderTop"
+                },
+                {
+                    "publicChildFieldName": "ShoKaishuJokyoShosai",
+                    "publicChildProperty": "eraseBorderBottom",
+                    "newPropertyName": "ShoKaishuJokyoShosai_eraseBorderBottom"
+                },
+                {
+                    "publicChildFieldName": "ShoKaishuJokyoShosai",
+                    "publicChildProperty": "eraseBorderRight",
+                    "newPropertyName": "ShoKaishuJokyoShosai_eraseBorderRight"
+                },
+                {
+                    "publicChildFieldName": "ShoKaishuJokyoShosai",
+                    "publicChildProperty": "eraseBorderLeft",
+                    "newPropertyName": "ShoKaishuJokyoShosai_eraseBorderLeft"
+                },
+                {
+                    "publicChildFieldName": "ShoKaishuJokyoShosai",
+                    "publicChildProperty": "panelDisplay",
+                    "newPropertyName": "ShoKaishuJokyoShosai_panelDisplay"
+                }
+            ],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
             "dialogCancelEventNameForDialog": ""

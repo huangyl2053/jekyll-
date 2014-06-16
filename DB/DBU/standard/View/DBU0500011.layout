@@ -329,7 +329,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": ""
+     "requestUrl": "dbu/db/dbu/SearchShoKaishuKanri/onLoad"
     },
     {
      "eventName": "onBlur_txtSearchHihokenshaNo",
@@ -777,9 +777,9 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "基本情報",
+   "title": "",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "ShoKaishuKanriTaishoshaJoho"
@@ -839,13 +839,21 @@
      "helpMessageID": "",
      "jpControlName": "",
      "relation": [],
-     "marginTop": 0,
+     "marginTop": "-0.3",
      "marginBottom": 0,
      "businessId": "DBZ",
      "controlName": "ShoKaishuJokyoShosai",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": ""
+     "dialogCancelEventNameForDialog": "",
+     "ShoKaishuJokyoShosai_title": "",
+     "ShoKaishuJokyoShosai_width": "1111",
+     "ShoKaishuJokyoShosai_canOpenAndClose": false,
+     "ShoKaishuJokyoShosai_eraseBorderTop": true,
+     "ShoKaishuJokyoShosai_eraseBorderBottom": true,
+     "ShoKaishuJokyoShosai_eraseBorderRight": true,
+     "ShoKaishuJokyoShosai_eraseBorderLeft": true,
+     "ShoKaishuJokyoShosai_panelDisplay": 2
     }
    ],
    "controlType": "Panel",
@@ -1009,7 +1017,7 @@
  "helpMessageID": "",
  "jpControlName": "",
  "onLoad": "",
- "title": "証回収記録管理",
+ "title": "回収記録登録",
  "jsPathCollection": [],
  "relation": [],
  "stateTransition": [
@@ -1040,17 +1048,17 @@
     {
      "fieldName": "SearchResultShoKaishuJokyoList_ShoKaishuJokyoList_dgShoKaishuJokyo",
      "event": "onSelectByDblClick",
-     "transition": "証回収記録管理"
+     "transition": "回収記録登録"
     },
     {
      "fieldName": "SearchResultShoKaishuJokyoList_ShoKaishuJokyoList_dgShoKaishuJokyo",
      "event": "onSelectBySelectButton",
-     "transition": "証回収記録管理"
+     "transition": "回収記録登録"
     },
     {
      "fieldName": "SearchResultShoKaishuJokyoList_ShoKaishuJokyoList_dgShoKaishuJokyo[btnSelect]",
      "event": "onClick",
-     "transition": "証回収記録管理"
+     "transition": "回収記録登録"
     },
     {
      "fieldName": "btnReSearch",
@@ -1066,7 +1074,7 @@
   },
   {
    "order": "2",
-   "stateName": "証回収記録管理",
+   "stateName": "回収記録登録",
    "showWizard": true,
    "visibleDivs": [
     {
@@ -1278,10 +1286,7 @@
    ],
    "states": [
     {
-     "state": "証回収記録管理"
-    },
-    {
-     "state": "処理完了"
+     "state": "回収記録登録"
     }
    ],
    "isFinishButtonOnTheRight": false

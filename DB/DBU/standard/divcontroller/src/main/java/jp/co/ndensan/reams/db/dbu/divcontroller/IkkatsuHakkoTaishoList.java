@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0400011.IkkatsuHakkoTaishoListDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0400011.dgIkkatsuHakkoTaisho_Row;
@@ -37,7 +38,8 @@ public class IkkatsuHakkoTaishoList {
         setIkkatsuHakkoTaishoData(panel);
 
         setSortData(panel);
-
+        panel.setIsOpen(true);
+        
         response.data = panel;
         return response;
 
@@ -51,7 +53,12 @@ public class IkkatsuHakkoTaishoList {
         List<HashMap> IkkatsuHakkoTaishoList = YamlLoader.DBU.loadAsList(
                 new RString("dbu0400011/IkkatsuHakkoTaishoList.yml"));
 
-        List arraydata = createRowIkkatsuHakkoTaishoList(IkkatsuHakkoTaishoList);
+        List<dgIkkatsuHakkoTaisho_Row> arraydata = createRowIkkatsuHakkoTaishoList(IkkatsuHakkoTaishoList);
+        for (Iterator<dgIkkatsuHakkoTaisho_Row> it = arraydata.iterator(); it.hasNext();) {
+
+            dgIkkatsuHakkoTaisho_Row ikkatsuHakkoTaisho_Row = it.next();
+            ikkatsuHakkoTaisho_Row.setSelected(Boolean.TRUE);
+        }
         DataGrid grid = panel.getDgIkkatsuHakkoTaisho();
         grid.setDataSource(arraydata);
 

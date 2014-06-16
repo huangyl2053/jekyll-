@@ -22,7 +22,15 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "chkHakkoTaishoSearchCondition_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "required": false,
      "onChange": "",
+     "labelLText": "",
+     "labelLWidth": "65",
+     "labelLAlign": 2,
+     "onClick": "",
+     "icon": [],
      "selectedItem": null,
      "dataSource": [
       {
@@ -38,18 +46,14 @@
        "value": "要介護認定者"
       }
      ],
-     "required": false,
-     "onClick": "",
-     "selectedItems": [],
      "newLineItemNumber": 4,
+     "spaceSize": "M",
+     "disabledItem": [],
+     "selectedItems": [],
      "minCheckedItem": "1",
      "maxCheckedItem": "3",
-     "spaceSize": "M",
-     "labelLText": "",
-     "labelLWidth": "65",
-     "labelLAlign": 2,
      "isAllSelectable": true,
-     "icon": []
+     "isAllSelectableBreakLine": false
     },
     {
      "fieldName": "btnSearchHakkoTaisho",
@@ -69,17 +73,19 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "btnSearchHakkoTaisho",
-     "onClick": "onClick_BtnSearchHakkoTaisho",
-     "icon": 0,
+     "helpMessageID": "",
+     "jpControlName": "",
      "text": "一括作成対象を表示する",
+     "onClick": "onClick_BtnSearchHakkoTaisho",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": ""
+     "imageHeight": "",
+     "icon": 0
     }
    ],
    "controlType": "Panel",
-   "width": "1050",
+   "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -90,9 +96,11 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
+   "marginLeft": "0",
+   "marginRight": "0",
    "selectControlID": "SearchMihakkoHihokenshasho",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "未発行検索条件",
    "isOpen": true,
@@ -112,8 +120,8 @@
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
+   "marginTop": "0",
+   "marginBottom": "0",
    "eraseBorderTop": false,
    "eraseBorderBottom": false,
    "eraseBorderRight": false,
@@ -122,7 +130,8 @@
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": false
+   "readOnly": false,
+   "height": "Auto"
   },
   {
    "fieldName": "IkkatsuHakkoTaishoList",
@@ -145,6 +154,9 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "dgIkkatsuHakkoTaisho",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "height": "S",
      "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
@@ -257,7 +269,6 @@
        }
       ]
      },
-     "height": "S",
      "onSort": "",
      "onSelect": "setBtnBatchControl",
      "onSelectByDblClick": "",
@@ -293,26 +304,29 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtKofuDate_core",
+       "helpMessageID": "",
+       "jpControlName": "",
        "readOnly": false,
-       "onChange": "",
        "required": false,
-       "labelLText": "交付日",
-       "labelLWidth": "55",
-       "labelLAlign": 2,
-       "text": "",
        "placeHolder": "",
+       "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
+       "onChange": "",
        "onKeyPress": "",
-       "labelRText": "",
-       "labelRWidth": "S",
-       "labelRAlign": 0,
-       "ymdKubun": 2,
-       "displayFormat": 0,
+       "text": "",
        "value": "",
-       "textKind": 0
+       "labelLText": "交付日",
+       "labelRText": "",
+       "labelLWidth": "55",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "permitCharactor": "./_-",
+       "ymdKubun": 2,
+       "displayFormat": 0
       },
       {
        "fieldName": "chkTest",
@@ -329,10 +343,18 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "XS",
+       "marginLeft": "1",
        "marginRight": "XS",
        "selectControlID": "chkTest_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "required": false,
        "onChange": "",
+       "labelLText": "",
+       "labelLWidth": "XS",
+       "labelLAlign": 2,
+       "onClick": "",
+       "icon": [],
        "selectedItem": null,
        "dataSource": [
         {
@@ -340,18 +362,14 @@
          "value": "テスト出力"
         }
        ],
-       "required": false,
-       "onClick": "",
-       "selectedItems": [],
        "newLineItemNumber": 1,
+       "spaceSize": "M",
+       "disabledItem": [],
+       "selectedItems": [],
        "minCheckedItem": 0,
        "maxCheckedItem": "1",
-       "spaceSize": "M",
-       "labelLText": "",
-       "labelLWidth": "S",
-       "labelLAlign": 2,
        "isAllSelectable": false,
-       "icon": []
+       "isAllSelectableBreakLine": false
       },
       {
        "fieldName": "lblTestHosoku",
@@ -368,12 +386,15 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
+       "marginLeft": "S",
        "marginRight": "0",
        "selectControlID": "lblTestHosoku",
+       "helpMessageID": "",
+       "jpControlName": "",
        "required": false,
-       "text": "※テスト出力を行う場合、帳票発行履歴に登録されません。",
        "isPrivateInfo": false,
+       "text": "※テスト出力を行う場合、帳票発行履歴に登録されません。",
+       "decorationClass": "",
        "align": 0
       }
      ],
@@ -392,6 +413,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "ShutsuryokuJoho",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onLoad": "",
      "title": "出力情報",
      "isOpen": true,
@@ -416,7 +439,8 @@
      "widthAuto": false,
      "panelDisplay": 1,
      "isGroupBox": false,
-     "readOnly": false
+     "readOnly": false,
+     "height": "Auto"
     },
     {
      "fieldName": "HihokenshashoIkkatsuHakko",
@@ -439,6 +463,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "HihokenshashoOutputOrder",
+       "helpMessageID": "",
+       "jpControlName": "",
        "title": "出力順序・改頁",
        "relation": [],
        "marginTop": 0,
@@ -467,6 +493,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "HihokenshashoIkkatsuHakko",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onLoad": "",
      "title": "被保険者証",
      "isOpen": true,
@@ -492,6 +520,7 @@
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
+     "height": "Auto",
      "isPublish": true,
      "isEmptyControl": false
     },
@@ -516,6 +545,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "HihokenshashoListOutputOrderAndNewPage",
+       "helpMessageID": "",
+       "jpControlName": "",
        "title": "出力順序・改頁",
        "relation": [],
        "marginTop": 0,
@@ -544,6 +575,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "HihokenshashoIkkatsuHakkoList",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onLoad": "",
      "title": "被保険者証発行一覧表",
      "isOpen": true,
@@ -569,12 +602,13 @@
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
+     "height": "Auto",
      "isPublish": false,
      "isEmptyControl": false
     }
    ],
    "controlType": "Panel",
-   "width": "1050",
+   "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -585,9 +619,11 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
+   "marginLeft": "0",
+   "marginRight": "0",
    "selectControlID": "IkkatsuHakkoTaishoList",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "一括作成対象者一覧",
    "isOpen": true,
@@ -611,8 +647,8 @@
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
+   "marginTop": "0",
+   "marginBottom": "0",
    "eraseBorderTop": false,
    "eraseBorderBottom": false,
    "eraseBorderRight": false,
@@ -621,98 +657,8 @@
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": false
-  },
-  {
-   "fieldName": "KyotsuPanel",
-   "items": [
-    {
-     "fieldName": "btnBatch",
-     "items": [],
-     "controlType": "Button",
-     "width": "180",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 2,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "-9.5",
-     "selectControlID": "btnBatch",
-     "onClick": "",
-     "icon": 0,
-     "text": "被保険者証を発行する",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": ""
-    }
-   ],
-   "controlType": "Panel",
-   "width": "G2",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": true,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
-   "selectControlID": "KyotsuPanel",
-   "onLoad": "",
-   "title": "",
-   "isOpen": true,
-   "canOpenAndClose": true,
-   "postParameterPanelNames": [
-    {
-     "postParameterPanelNames": "KyotsuPanel"
-    },
-    {
-     "postParameterPanelNames": "IkkatsuHakkoTaishoList"
-    }
-   ],
-   "requestSettings": [
-    {
-     "eventName": "onLoad",
-     "requestUrl": ""
-    },
-    {
-     "eventName": "onClick_BtnSearchHakkoTaisho",
-     "requestUrl": "dbu/db/dbu/IkkatsuHakkoKyotsuPanel/onClick_BtnSearchHakkoTaisho"
-    },
-    {
-     "eventName": "onClose_HihokenshashoIkkatsuHakko",
-     "requestUrl": "dbu/db/dbu/IkkatsuHakkoKyotsuPanel/onClose_HihokenshashoIkkatsuHakko"
-    },
-    {
-     "eventName": "setBtnBatchControl",
-     "requestUrl": "dbu/db/dbu/IkkatsuHakkoKyotsuPanel/setBtnBatchControl"
-    }
-   ],
-   "hiddenInput": [],
-   "onOpen": "",
-   "onClose": "",
-   "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
-   "backgroundColor": 0,
-   "widthAuto": true,
-   "panelDisplay": 0,
-   "isGroupBox": false,
-   "readOnly": false
+   "readOnly": false,
+   "height": "Auto"
   }
  ],
  "controlType": null,
@@ -730,6 +676,8 @@
  "marginLeft": "XS",
  "marginRight": "XS",
  "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
  "onLoad": "",
  "title": "被保険者証一括発行",
  "jsPathCollection": [],
@@ -738,39 +686,42 @@
   {
    "order": "1",
    "stateName": "被保険者証一括発行",
-   "showWizard": false,
+   "showWizard": true,
    "visibleDivs": [
     {
      "visibleDiv": "SearchMihakkoHihokenshasho",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "IkkatsuHakkoTaishoList",
-     "panelState": "close"
+     "panelState": "close",
+     "fixedDiv": "No"
     },
     {
      "visibleDiv": "ShutsuryokuJoho",
-     "panelState": "visible"
-    },
-    {
-     "visibleDiv": "KyotsuPanel",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "HihokenshashoIkkatsuHakko",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "HihokenshashoIkkatsuHakkoList",
-     "panelState": "close"
+     "panelState": "close",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "HihokenshashoOutputOrder",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "HihokenshashoListOutputOrderAndNewPage",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     }
    ],
    "validation": {},
@@ -783,11 +734,10 @@
  "UIContainerEventMapping": [],
  "loadSequencePanelNames": [
   [
-   "IkkatsuHakkoTaishoList",
-   "KyotsuPanel"
+   "SearchMihakkoHihokenshasho"
   ],
   [
-   "SearchMihakkoHihokenshasho"
+   "IkkatsuHakkoTaishoList"
   ],
   [
    "ShutsuryokuJoho"
@@ -808,5 +758,50 @@
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
- "commonButtonAreaData": []
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "commonBtn",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnHakko",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnHakko",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "被保険者証を発行する",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "prefixText": "",
+      "suffixText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "被保険者証一括発行"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  }
+ ]
 }
