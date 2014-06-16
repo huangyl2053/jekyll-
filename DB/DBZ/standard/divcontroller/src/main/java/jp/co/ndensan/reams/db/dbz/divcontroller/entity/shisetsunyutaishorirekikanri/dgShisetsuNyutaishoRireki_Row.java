@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekik
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jun 06 21:05:10 JST 2014 
+ * Mon Jun 16 09:35:45 JST 2014 
  */
 
 
@@ -33,6 +33,15 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
 
     public dgShisetsuNyutaishoRireki_Row() {
         super();
+        this.nyushoDate = new TextBoxFlexibleDate();
+        this.taishoDate = new TextBoxFlexibleDate();
+        this.shisetsuCode = RString.EMPTY;
+        this.shisetsuMeisho = RString.EMPTY;
+        this.shisetsu = RString.EMPTY;
+        this.taishoJohoKey = RString.EMPTY;
+        this.taishoJoho = RString.EMPTY;
+        this.shisetsuShuruiKey = RString.EMPTY;
+        this.shisetsuShurui = RString.EMPTY;
     }
 
     public dgShisetsuNyutaishoRireki_Row(TextBoxFlexibleDate nyushoDate, TextBoxFlexibleDate taishoDate, RString shisetsuCode, RString shisetsuMeisho, RString shisetsu, RString taishoJohoKey, RString taishoJoho, RString shisetsuShuruiKey, RString shisetsuShurui) {

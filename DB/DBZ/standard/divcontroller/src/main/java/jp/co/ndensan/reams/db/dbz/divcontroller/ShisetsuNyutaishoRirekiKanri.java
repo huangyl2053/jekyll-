@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJoho
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
@@ -31,6 +32,27 @@ public class ShisetsuNyutaishoRirekiKanri {
     private static final RString DELETE_MODE = new RString("delete");
     private static final RString ADD_MODE = new RString("add");
     private static final RString NONE = RString.EMPTY;
+
+    /**
+     * 入力モードに合わせて、コントロールの表示非表示を切り替えます。
+     *
+     * @param rirekiDiv 施設入退所履歴管理Div
+     * @param mode モード
+     * @return レスポンス
+     */
+    public static ShisetsuNyutaishoRirekiKanriDiv setMode(ShisetsuNyutaishoRirekiKanriDiv rirekiDiv, ModeType mode) {
+        rirekiDiv.setInputMode(mode.toValue());
+        if (ModeType.SHOKAI_MODE.toValue().equals(rirekiDiv.getInputMode())) {
+            rirekiDiv.getBtnAddShisetsuNyutaisho().setDisplayNone(true);
+            rirekiDiv.getBtnUpdateShisetsuNyutaisho().setDisplayNone(true);
+            rirekiDiv.getDgShisetsuNyutaishoRireki().getGridSetting().setIsShowDeleteButtonColumn(false);
+            rirekiDiv.getDgShisetsuNyutaishoRireki().getGridSetting().setIsShowModifyButtonColumn(false);
+            rirekiDiv.getShisetsuNyutaishoInput().setDisplayNone(true);
+        } else {
+
+        }
+        return rirekiDiv;
+    }
 
     /**
      * 施設入退所履歴グリッドから、修正したい行を選択した際に実行されます。<br/>
