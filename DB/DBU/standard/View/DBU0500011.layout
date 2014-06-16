@@ -905,10 +905,41 @@
    "height": "Auto"
   },
   {
-   "fieldName": "ccdKanryoMessage",
-   "items": [],
-   "controlType": "CommonChildDiv",
-   "width": "XS",
+   "fieldName": "KanryoMessagePnl",
+   "items": [
+    {
+     "fieldName": "ccdKanryoMessage",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "ccdKanryoMessage",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": 0,
+     "businessId": "URZ",
+     "controlName": "KanryoMessage",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "KanryoMessage_width": "G12"
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -921,18 +952,43 @@
    "authorityMode": 0,
    "marginLeft": "0",
    "marginRight": "0",
-   "selectControlID": "ccdKanryoMessage",
+   "selectControlID": "KanryoMessagePnl",
    "helpMessageID": "",
    "jpControlName": "",
-   "relation": [],
-   "marginTop": 0,
-   "marginBottom": 0,
-   "businessId": "URZ",
-   "controlName": "KanryoMessage",
-   "dataPassingForDialog": [],
-   "dialogOkEventNameForDialog": "",
-   "dialogCancelEventNameForDialog": "",
-   "KanryoMessage_width": "G12"
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "KanryoMessagePnl"
+    },
+    {
+     "postParameterPanelNames": "ShoKaishuKanriTaishoshaJoho"
+    }
+   ],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbu/db/dbu/ShoKaishuKanriKanryoMessage/onLoad"
+    }
+   ],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "0",
+   "marginBottom": "0",
+   "eraseBorderTop": true,
+   "eraseBorderBottom": true,
+   "eraseBorderRight": true,
+   "eraseBorderLeft": true,
+   "backgroundColor": 0,
+   "widthAuto": true,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
   }
  ],
  "controlType": null,
@@ -1077,6 +1133,11 @@
      "visibleDiv": "ccdKanryoMessage",
      "panelState": "visible",
      "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KanryoMessagePnl",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "supplementInfo": "",
@@ -1118,8 +1179,12 @@
   [
    "SearchShoKaishuKanri",
    "SearchResultShoKaishuKanri",
-   "ShoKaishuJokyo",
-   "ShoKaishuKanriTaishoshaJoho"
+   "ShoKaishuKanriTaishoshaJoho",
+   "KanryoMessagePnl"
+  ],
+  [
+   "SearchResultShoKaishuKanri",
+   "ShoKaishuJokyo"
   ],
   [
    "SearchResultShoKaishuJokyoList"
