@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+//import jp.co.ndensan.reams.ur.urz.divcontroller.entity.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
 
 /**
@@ -19,8 +20,8 @@ public class HonFukadaichoDiv extends PanelPublish {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ShutsuryokuJunHonFukadaicho")
-    private ChohyoShutsuryokujunDiv ShutsuryokuJunHonFukadaicho;
+//    @JsonProperty("ShutsuryokuJunHonFukadaicho")
+//    private ChohyoShutsuryokujunDiv ShutsuryokuJunHonFukadaicho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -28,14 +29,14 @@ public class HonFukadaichoDiv extends PanelPublish {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("ShutsuryokuJunHonFukadaicho")
-    public ChohyoShutsuryokujunDiv getShutsuryokuJunHonFukadaicho() {
-        return ShutsuryokuJunHonFukadaicho;
-    }
-
-    @JsonProperty("ShutsuryokuJunHonFukadaicho")
-    public void setShutsuryokuJunHonFukadaicho(ChohyoShutsuryokujunDiv ShutsuryokuJunHonFukadaicho) {
-        this.ShutsuryokuJunHonFukadaicho=ShutsuryokuJunHonFukadaicho;
-    }
+//    @JsonProperty("ShutsuryokuJunHonFukadaicho")
+//    public ChohyoShutsuryokujunDiv getShutsuryokuJunHonFukadaicho() {
+//        return ShutsuryokuJunHonFukadaicho;
+//    }
+//
+//    @JsonProperty("ShutsuryokuJunHonFukadaicho")
+//    public void setShutsuryokuJunHonFukadaicho(ChohyoShutsuryokujunDiv ShutsuryokuJunHonFukadaicho) {
+//        this.ShutsuryokuJunHonFukadaicho=ShutsuryokuJunHonFukadaicho;
+//    }
 
 }

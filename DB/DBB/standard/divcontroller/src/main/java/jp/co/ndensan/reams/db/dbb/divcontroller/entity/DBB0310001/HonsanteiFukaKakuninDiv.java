@@ -5,9 +5,10 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001.HonsanteiKanrijohoDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001.HonsanteiShoriKakuninDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001.HonsanteiShoriNaiyoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * HonsanteiFukaKakunin のクラスファイル 
@@ -21,8 +22,8 @@ public class HonsanteiFukaKakuninDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtFukaNendo")
-    private TextBox txtFukaNendo;
+    @JsonProperty("HonsanteiShoriNaiyo")
+    private HonsanteiShoriNaiyoDiv HonsanteiShoriNaiyo;
     @JsonProperty("HonsanteiShoriKakunin")
     private HonsanteiShoriKakuninDiv HonsanteiShoriKakunin;
     @JsonProperty("HonsanteiKanrijoho")
@@ -34,14 +35,14 @@ public class HonsanteiFukaKakuninDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("txtFukaNendo")
-    public TextBox getTxtFukaNendo() {
-        return txtFukaNendo;
+    @JsonProperty("HonsanteiShoriNaiyo")
+    public HonsanteiShoriNaiyoDiv getHonsanteiShoriNaiyo() {
+        return HonsanteiShoriNaiyo;
     }
 
-    @JsonProperty("txtFukaNendo")
-    public void setTxtFukaNendo(TextBox txtFukaNendo) {
-        this.txtFukaNendo=txtFukaNendo;
+    @JsonProperty("HonsanteiShoriNaiyo")
+    public void setHonsanteiShoriNaiyo(HonsanteiShoriNaiyoDiv HonsanteiShoriNaiyo) {
+        this.HonsanteiShoriNaiyo=HonsanteiShoriNaiyo;
     }
 
     @JsonProperty("HonsanteiShoriKakunin")

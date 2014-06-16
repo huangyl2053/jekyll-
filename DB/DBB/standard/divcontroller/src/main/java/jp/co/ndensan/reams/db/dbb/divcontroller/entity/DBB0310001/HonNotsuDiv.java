@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+//import jp.co.ndensan.reams.ur.urz.divcontroller.entity.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -33,8 +34,8 @@ public class HonNotsuDiv extends PanelPublish {
     private RadioButton radNotsuSeikatsuHogo;
     @JsonProperty("radNotsuYamawake")
     private RadioButton radNotsuYamawake;
-    @JsonProperty("ShutsuryokuJunHonNotsu")
-    private ChohyoShutsuryokujunDiv ShutsuryokuJunHonNotsu;
+//    @JsonProperty("ShutsuryokuJunHonNotsu")
+//    private ChohyoShutsuryokujunDiv ShutsuryokuJunHonNotsu;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -102,14 +103,14 @@ public class HonNotsuDiv extends PanelPublish {
         this.radNotsuYamawake=radNotsuYamawake;
     }
 
-    @JsonProperty("ShutsuryokuJunHonNotsu")
-    public ChohyoShutsuryokujunDiv getShutsuryokuJunHonNotsu() {
-        return ShutsuryokuJunHonNotsu;
-    }
-
-    @JsonProperty("ShutsuryokuJunHonNotsu")
-    public void setShutsuryokuJunHonNotsu(ChohyoShutsuryokujunDiv ShutsuryokuJunHonNotsu) {
-        this.ShutsuryokuJunHonNotsu=ShutsuryokuJunHonNotsu;
-    }
+//    @JsonProperty("ShutsuryokuJunHonNotsu")
+//    public ChohyoShutsuryokujunDiv getShutsuryokuJunHonNotsu() {
+//        return ShutsuryokuJunHonNotsu;
+//    }
+//
+//    @JsonProperty("ShutsuryokuJunHonNotsu")
+//    public void setShutsuryokuJunHonNotsu(ChohyoShutsuryokujunDiv ShutsuryokuJunHonNotsu) {
+//        this.ShutsuryokuJunHonNotsu=ShutsuryokuJunHonNotsu;
+//    }
 
 }
