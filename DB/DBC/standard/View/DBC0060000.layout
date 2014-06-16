@@ -5,7 +5,7 @@
    "fieldName": "KyufuKanrihyoKihon",
    "items": [
     {
-     "fieldName": "KyufuKanrihyoAtena",
+     "fieldName": "KyufuKanrihyoKaigoAtena",
      "items": [],
      "controlType": "CommonChildDiv",
      "width": "XS",
@@ -14,41 +14,36 @@
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": true,
+     "wrap": false,
      "dependencies": [],
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "0",
      "marginRight": "0",
-     "selectControlID": "KyufuKanrihyoAtena",
+     "selectControlID": "KyufuKanrihyoKaigoAtena",
      "helpMessageID": "",
      "jpControlName": "",
-     "title": "",
      "relation": [],
-     "canOpenAndClose": true,
      "marginTop": 0,
      "marginBottom": 0,
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
-     "businessId": "URA",
-     "controlName": "AtenaShokaiSimple",
-     "dataPassingForDialog": [
-      {
-       "key": "",
-       "controlName": ""
-      }
-     ],
+     "businessId": "DBZ",
+     "controlName": "KaigoAtenaInfo",
+     "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "atenaInfo_title": "",
+     "atenaInfo_canOpenAndClose": true,
+     "atenaInfo_eraseBorderTop": true,
+     "atenaInfo_eraseBorderBottom": true,
+     "atenaInfo_eraseBorderRight": true,
+     "atenaInfo_eraseBorderLeft": true,
      "AtenaKanaMeisho_visible": true,
-     "AtenaMeisho_visible": true,
+     "AtenaMisho_visible": true,
      "SeinengappiYMD_visible": true,
      "Nenrei_visible": true,
      "Seibetsu_visible": true,
-     "JuminShubetsu_visible": true,
+     "JuminShubetsu_Visible": true,
      "NihonjinGaikokujin_visible": true,
      "JuminJotai_visible": true,
      "YubinNo_visible": true,
@@ -58,8 +53,8 @@
      "KojinHojinCode_visible": true,
      "SetaiCode_visible": true,
      "lblButtonMargin_displayNone": false,
-     "btnMemo_displayNone": false,
-     "btnDainosya_displayNone": false,
+     "btnMemo_DisplayNone": false,
+     "btnDainosha_displayNone": false,
      "btnSofusaki_displayNone": false,
      "btnDainoSofusakiKakunin_displayNone": false,
      "btnKoza_displayNone": false,
@@ -72,7 +67,7 @@
      "btnEltax_displayNone": false,
      "btnShiyoJokyo_displayNone": false,
      "btnAtesakiKakunin_displayNone": false,
-     "SubGyomuCode": "",
+     "SubGyomuCode": "DBC",
      "JukiYusennKubun": "1",
      "AgeArrivalDay": "1",
      "SubGyomuUmu": "0",
@@ -106,7 +101,12 @@
      "postParameterPanelNames": "KyufuKanrihyoKihon"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/KyufuKanrihyoKihon/onLoad"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -118,7 +118,7 @@
    "eraseBorderRight": false,
    "eraseBorderLeft": false,
    "backgroundColor": 0,
-   "widthAuto": false,
+   "widthAuto": true,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
@@ -149,7 +149,7 @@
      "jpControlName": "",
      "title": "",
      "relation": [],
-     "canOpenAndClose": false,
+     "canOpenAndClose": true,
      "marginTop": 0,
      "marginBottom": 0,
      "eraseBorderTop": true,
@@ -192,7 +192,12 @@
      "postParameterPanelNames": "KyufuKanrihyoKaigoKihon"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/KyufuKanrihyoKaigoKihon/onLoad"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -204,7 +209,7 @@
    "eraseBorderRight": false,
    "eraseBorderLeft": false,
    "backgroundColor": 0,
-   "widthAuto": false,
+   "widthAuto": true,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
@@ -1417,7 +1422,7 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
+     "marginLeft": "0",
      "marginRight": "XS",
      "selectControlID": "tabKyufuKanrihyo",
      "helpMessageID": "",
@@ -1816,10 +1821,15 @@
     {
      "visibleDiv": "KyufuKanrihyoKaigoKihon",
      "panelState": "visible",
-     "fixedDiv": ""
+     "fixedDiv": "No"
     },
     {
-     "visibleDiv": "KyufuKanrihyoAtena",
+     "visibleDiv": "KyufuKanrihyoKaigoAtena",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KyufuKanrihyoKaigoKihon",
      "panelState": "visible",
      "fixedDiv": "No"
     },
@@ -1877,7 +1887,7 @@
    "KyufuKanrihyoKihon"
   ],
   [
-   "KyufuKanrihyoAtena"
+   "KyufuKanrihyoKaigoAtena"
   ],
   [
    "KyufuKanrihyoKaigoKihon"
