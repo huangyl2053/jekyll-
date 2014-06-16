@@ -5,8 +5,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.KihonchosaResultInputCom;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.KihonchosaResultInputCom;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kihonchosaResultInputCom.KihonchosaResultInputCom;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**

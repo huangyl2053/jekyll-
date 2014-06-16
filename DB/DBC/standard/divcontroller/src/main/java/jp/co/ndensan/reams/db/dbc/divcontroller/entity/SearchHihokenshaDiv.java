@@ -1,19 +1,18 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.HihokenshaFinderDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.SearchResultOfHihokenshaDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.HihokenshaFinderDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.SearchResultOfHihokenshaDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * SearchHihokensha のクラスファイル 
- * 
+ * SearchHihokensha のクラスファイル
+ *
  * @author 自動生成
  */
 public class SearchHihokenshaDiv extends Panel {
@@ -23,6 +22,7 @@ public class SearchHihokenshaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("SearchConditionOfHihokensha")
     private HihokenshaFinderDiv SearchConditionOfHihokensha;
     @JsonProperty("btnKari")
@@ -43,7 +43,7 @@ public class SearchHihokenshaDiv extends Panel {
 
     @JsonProperty("SearchConditionOfHihokensha")
     public void setSearchConditionOfHihokensha(HihokenshaFinderDiv SearchConditionOfHihokensha) {
-        this.SearchConditionOfHihokensha=SearchConditionOfHihokensha;
+        this.SearchConditionOfHihokensha = SearchConditionOfHihokensha;
     }
 
     @JsonProperty("btnKari")
@@ -53,7 +53,7 @@ public class SearchHihokenshaDiv extends Panel {
 
     @JsonProperty("btnKari")
     public void setBtnKari(Button btnKari) {
-        this.btnKari=btnKari;
+        this.btnKari = btnKari;
     }
 
     @JsonProperty("SearchResultOfHihokensha")
@@ -63,7 +63,7 @@ public class SearchHihokenshaDiv extends Panel {
 
     @JsonProperty("SearchResultOfHihokensha")
     public void setSearchResultOfHihokensha(SearchResultOfHihokenshaDiv SearchResultOfHihokensha) {
-        this.SearchResultOfHihokensha=SearchResultOfHihokensha;
+        this.SearchResultOfHihokensha = SearchResultOfHihokensha;
     }
 
 }
