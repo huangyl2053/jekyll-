@@ -1,0 +1,93 @@
+## YAML Template.
+---
+- sofuYM: 201407
+- jigyoshaNo: "0000000001"
+  jigyoshaName: 電算事業者1
+  hihoNo: "0123456789"
+  hihoName: 電算 一郎
+  moshitateshaKubun: 1:サービス事業所等申立
+  style: 10:居宅サービス介護給付費明細書(訪問介護)
+  moshitateRiyu: 02:請求誤りのよる実績取り下げ
+  serviceTeikyoYM: 平26.08
+  moshitateYMD: 平26.07.01
+  shokisaiHokenshaNo: "000001"
+- jigyoshaNo: "0000000002"
+  jigyoshaName: 電算事業者2
+  hihoNo: "0123456799"
+  hihoName: 電算 蓮
+  moshitateshaKubun: 1:サービス事業所等申立
+  style: 11:介護予防サービス介護給付費明細書(介護予防訪問介護)
+  moshitateRiyu: 99:その他事由による実績の取り下げ
+  serviceTeikyoYM: 平26.08
+  moshitateYMD: 平26.07.01
+  shokisaiHokenshaNo: "000002"
+- jigyoshaNo: "0000000003"
+  jigyoshaName: 電算事業者3
+  hihoNo: "0123456999"
+  hihoName: 電算 優
+  moshitateshaKubun: 1:サービス事業所等申立
+  style: 50:施設サービス等介護給付費明細書（介護老人福祉施設)
+  moshitateRiyu: 29:時効による公費負担者申立の取り下げ
+  serviceTeikyoYM: 平26.08
+  moshitateYMD: 平26.07.01
+  shokisaiHokenshaNo: "000003"
+- jigyoshaNo: "0000000004" 
+  jigyoshaName: 電算事業者4
+  hihoNo: "0123459999"
+  hihoName: 電算 仁
+  moshitateshaKubun: 1:サービス事業所等申立
+  style: 居宅介護支援介護給付費明細書
+  moshitateRiyu: 32:給付管理票取消による実績の取り下げ
+  serviceTeikyoYM: 平26.08
+  moshitateYMD: 平26.07.01
+  shokisaiHokenshaNo: "000004"
+- jigyoshaNo: "0000000005" 
+  jigyoshaName: 電算事業者5
+  hihoNo: "0123499999"
+  hihoName: 電算 太陽
+  moshitateshaKubun: 1:サービス事業所等申立
+  style: 施設サービス等介護給付費明細書
+  moshitateRiyu: 90:その他事由による台帳過誤
+  serviceTeikyoYM: 平26.08
+  moshitateYMD: 平26.07.01
+  shokisaiHokenshaNo: "000005"
+- jigyoshaNo: "0000000006"
+  jigyoshaName: 電算事業者6
+  hihoNo: "0123999999"
+  hihoName: 電算 大
+  moshitateshaKubun: 1:サービス事業所等申立
+  style: 介護予防支援介護給付費明細書(介護予防支援)
+  moshitateRiyu: 90:その他事由による台帳過誤
+  serviceTeikyoYM: 平26.08
+  moshitateYMD: 平26.07.01
+  shokisaiHokenshaNo: "000006"
+- jigyoshaNo: "0000000007"
+  jigyoshaName: 電算事業者7
+  hihoNo: "0129999999"
+  hihoName: 電算 圭
+  moshitateshaKubun: 1:サービス事業所等申立
+  style: 居宅介護支援介護給付費明細書
+  moshitateRiyu: 02:台帳誤り修正による過誤調整
+  serviceTeikyoYM: 平26.08
+  moshitateYMD: 平26.07.01
+  shokisaiHokenshaNo: "000007"
+- jigyoshaNo: "0000000010"
+  jigyoshaName: 電算事業者8
+  hihoNo: "0199999999"
+  hihoName: 電算 真也
+  moshitateshaKubun: 1:サービス事業所等申立
+  style: 居宅サービス介護給付費明細書(病院又は診療所における短期入所療養介護)
+  moshitateRiyu: 02:請求誤りによる実績取り下げ(短期入所生活介護)
+  serviceTeikyoYM: 平26.08
+  moshitateYMD: 平26.07.01
+  shokisaiHokenshaNo: "000008"
+- jigyoshaNo: "0000000011"
+  jigyoshaName: 電算事業者9
+  hihoNo: "0999999999"
+  hihoName: 電算 康介
+  moshitateshaKubun: 1:サービス事業所等申立
+  style: 施設サービス等介護給付費明細書(介護老人保健施設)
+  moshitateRiyu: 02:請求誤りによる実績取り下げ(短期入所生活介護)
+  serviceTeikyoYM: 平26.08
+  moshitateYMD: 平26.07.01
+  shokisaiHokenshaNo: "000009"
