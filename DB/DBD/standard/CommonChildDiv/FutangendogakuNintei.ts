@@ -1,7 +1,7 @@
-/// <reference path='FutangendogakuNintei_Design.ts' />
+/// <reference path='FutanGendogakuNintei_Design.ts' />
 module DBD
 {
-    export class FutangendogakuNintei extends FutangendogakuNintei_Design
+    export class FutanGendogakuNintei extends FutanGendogakuNintei_Design
     {
     }
 }
