@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jun 11 10:24:58 JST 2014 
+ * Mon Jun 16 11:44:46 JST 2014 
  */
 
 
@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class dgFukaRirekiFukaRireki_Row extends DataRow {
 
-    private Button btnKakunin;
     private Button btnMaeHikaku;
     private RString txtTsuchishoNo;
     private RString txtChoteiNendo;
@@ -32,16 +31,25 @@ public class dgFukaRirekiFukaRireki_Row extends DataRow {
     private RString txtHokenryoGaku;
     private RString txtTokubetsuChoshu;
     private RString txtFutsuChoshu;
-    private RString txtDataNo;
     private RString txtShikibetsuCode;
 
     public dgFukaRirekiFukaRireki_Row() {
         super();
+        this.btnMaeHikaku = new Button();
+        this.txtTsuchishoNo = RString.EMPTY;
+        this.txtChoteiNendo = RString.EMPTY;
+        this.txtRirekiNo = RString.EMPTY;
+        this.txtKoseiYMD = RString.EMPTY;
+        this.txtKoseiM = RString.EMPTY;
+        this.txtHokenryoDankai = RString.EMPTY;
+        this.txtHokenryoGaku = RString.EMPTY;
+        this.txtTokubetsuChoshu = RString.EMPTY;
+        this.txtFutsuChoshu = RString.EMPTY;
+        this.txtShikibetsuCode = RString.EMPTY;
     }
 
-    public dgFukaRirekiFukaRireki_Row(Button btnKakunin, Button btnMaeHikaku, RString txtTsuchishoNo, RString txtChoteiNendo, RString txtRirekiNo, RString txtKoseiYMD, RString txtKoseiM, RString txtHokenryoDankai, RString txtHokenryoGaku, RString txtTokubetsuChoshu, RString txtFutsuChoshu, RString txtDataNo, RString txtShikibetsuCode) {
+    public dgFukaRirekiFukaRireki_Row(Button btnMaeHikaku, RString txtTsuchishoNo, RString txtChoteiNendo, RString txtRirekiNo, RString txtKoseiYMD, RString txtKoseiM, RString txtHokenryoDankai, RString txtHokenryoGaku, RString txtTokubetsuChoshu, RString txtFutsuChoshu, RString txtShikibetsuCode) {
         super();
-        this.setOriginalData("btnKakunin", btnKakunin);
         this.setOriginalData("btnMaeHikaku", btnMaeHikaku);
         this.setOriginalData("txtTsuchishoNo", txtTsuchishoNo);
         this.setOriginalData("txtChoteiNendo", txtChoteiNendo);
@@ -52,9 +60,7 @@ public class dgFukaRirekiFukaRireki_Row extends DataRow {
         this.setOriginalData("txtHokenryoGaku", txtHokenryoGaku);
         this.setOriginalData("txtTokubetsuChoshu", txtTokubetsuChoshu);
         this.setOriginalData("txtFutsuChoshu", txtFutsuChoshu);
-        this.setOriginalData("txtDataNo", txtDataNo);
         this.setOriginalData("txtShikibetsuCode", txtShikibetsuCode);
-        this.btnKakunin = btnKakunin;
         this.btnMaeHikaku = btnMaeHikaku;
         this.txtTsuchishoNo = txtTsuchishoNo;
         this.txtChoteiNendo = txtChoteiNendo;
@@ -65,12 +71,7 @@ public class dgFukaRirekiFukaRireki_Row extends DataRow {
         this.txtHokenryoGaku = txtHokenryoGaku;
         this.txtTokubetsuChoshu = txtTokubetsuChoshu;
         this.txtFutsuChoshu = txtFutsuChoshu;
-        this.txtDataNo = txtDataNo;
         this.txtShikibetsuCode = txtShikibetsuCode;
-    }
-
-    public Button getBtnKakunin() {
-        return btnKakunin;
     }
 
     public Button getBtnMaeHikaku() {
@@ -113,17 +114,8 @@ public class dgFukaRirekiFukaRireki_Row extends DataRow {
         return txtFutsuChoshu;
     }
 
-    public RString getTxtDataNo() {
-        return txtDataNo;
-    }
-
     public RString getTxtShikibetsuCode() {
         return txtShikibetsuCode;
-    }
-
-    public void setBtnKakunin(Button btnKakunin) {
-        this.setOriginalData("btnKakunin", btnKakunin);
-        this.btnKakunin = btnKakunin;
     }
 
     public void setBtnMaeHikaku(Button btnMaeHikaku) {
@@ -174,11 +166,6 @@ public class dgFukaRirekiFukaRireki_Row extends DataRow {
     public void setTxtFutsuChoshu(RString txtFutsuChoshu) {
         this.setOriginalData("txtFutsuChoshu", txtFutsuChoshu);
         this.txtFutsuChoshu = txtFutsuChoshu;
-    }
-
-    public void setTxtDataNo(RString txtDataNo) {
-        this.setOriginalData("txtDataNo", txtDataNo);
-        this.txtDataNo = txtDataNo;
     }
 
     public void setTxtShikibetsuCode(RString txtShikibetsuCode) {

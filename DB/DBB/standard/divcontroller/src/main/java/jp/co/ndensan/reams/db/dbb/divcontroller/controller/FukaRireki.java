@@ -74,7 +74,7 @@ public class FukaRireki {
         
         List rirekiKey = getRirekiKey(fukaRirekiAllDiv, mode);
         
-        List fukaRirekiData = setYamlData(rirekiKey);
+        List fukaRirekiData = getYamlDataList(rirekiKey);
         
         for (int i = 0; i < fukaRirekiData.size(); i++) {
             fukaRirekiFormatData.add(getFormatData((List)fukaRirekiData.get(i)));
@@ -104,10 +104,12 @@ public class FukaRireki {
 
     private dgFukaRirekiFukaRireki_Row createRowRirekiAll(FukaRirekiDiv fukaRirekiDiv, List dataGrid) {
         dgFukaRirekiFukaRireki_Row row = 
-                new dgFukaRirekiFukaRireki_Row(new Button(), new Button()
+                new dgFukaRirekiFukaRireki_Row(new Button()
                         , RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY
-                        , RString.HALF_SPACE, RString.HALF_SPACE, RString.EMPTY, RString.HALF_SPACE, RString.EMPTY, RString.EMPTY);
+                        , RString.EMPTY, RString.HALF_SPACE, RString.EMPTY, RString.EMPTY, RString.EMPTY);
 
+        
+        
         RStringBuilder buf = new RStringBuilder();
         fukaRirekiDiv.getTxtFukaNendoFukaRireki().setValue((RString)dataGrid.get(0));
         row.setTxtTsuchishoNo((RString)dataGrid.get(1));
@@ -121,8 +123,7 @@ public class FukaRireki {
         row.setTxtHokenryoGaku((RString)dataGrid.get(7));
         row.setTxtTokubetsuChoshu((RString)dataGrid.get(8));
         row.setTxtFutsuChoshu((RString)dataGrid.get(9));
-        row.setTxtDataNo((RString)dataGrid.get(10));
-        row.setTxtShikibetsuCode((RString)dataGrid.get(11));
+//        row.setTxtShikibetsuCode((RString)dataGrid.get(11));
         
         return row;
     }
@@ -132,7 +133,7 @@ public class FukaRireki {
      * @param yamlFileName Yamlファイル名
      * @return YamlデータのList
      */
-    private List setYamlData(List keyList) {
+    private List getYamlDataList(List keyList) {
 
         //Yaml データ読み込み
         List<HashMap> fukaRireki = YamlLoader.DBB.loadAsList(FUKARIREKI);

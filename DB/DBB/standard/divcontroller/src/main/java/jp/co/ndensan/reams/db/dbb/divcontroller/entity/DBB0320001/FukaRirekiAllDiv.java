@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.dgFukaRirekiAll_Row;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -24,6 +25,8 @@ public class FukaRirekiAllDiv extends Panel {
      */
     @JsonProperty("dgFukaRirekiAll")
     private DataGrid<dgFukaRirekiAll_Row> dgFukaRirekiAll;
+    @JsonProperty("mode")
+    private RString mode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -39,6 +42,16 @@ public class FukaRirekiAllDiv extends Panel {
     @JsonProperty("dgFukaRirekiAll")
     public void setDgFukaRirekiAll(DataGrid<dgFukaRirekiAll_Row> dgFukaRirekiAll) {
         this.dgFukaRirekiAll=dgFukaRirekiAll;
+    }
+
+    @JsonProperty("mode")
+    public RString getMode() {
+        return mode;
+    }
+
+    @JsonProperty("mode")
+    public void setMode(RString mode) {
+        this.mode=mode;
     }
 
 }

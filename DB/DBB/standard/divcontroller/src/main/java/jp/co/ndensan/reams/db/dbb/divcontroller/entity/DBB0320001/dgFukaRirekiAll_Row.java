@@ -3,13 +3,12 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jun 10 16:28:33 JST 2014 
+ * Mon Jun 16 11:44:43 JST 2014 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 
@@ -21,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class dgFukaRirekiAll_Row extends DataRow {
 
-    private Button btnKakunin;
     private RString txtChoteiNendo;
     private RString txtFukaNendo;
     private RString txtHokenryoDankai;
@@ -30,26 +28,25 @@ public class dgFukaRirekiAll_Row extends DataRow {
 
     public dgFukaRirekiAll_Row() {
         super();
+        this.txtChoteiNendo = RString.EMPTY;
+        this.txtFukaNendo = RString.EMPTY;
+        this.txtHokenryoDankai = RString.EMPTY;
+        this.txtHokenryoNengaku = RString.EMPTY;
+        this.txtTsuchishoNo = RString.EMPTY;
     }
 
-    public dgFukaRirekiAll_Row(Button btnKakunin, RString txtChoteiNendo, RString txtFukaNendo, RString txtHokenryoDankai, RString txtHokenryoNengaku, RString txtTsuchishoNo) {
+    public dgFukaRirekiAll_Row(RString txtChoteiNendo, RString txtFukaNendo, RString txtHokenryoDankai, RString txtHokenryoNengaku, RString txtTsuchishoNo) {
         super();
-        this.setOriginalData("btnKakunin", btnKakunin);
         this.setOriginalData("txtChoteiNendo", txtChoteiNendo);
         this.setOriginalData("txtFukaNendo", txtFukaNendo);
         this.setOriginalData("txtHokenryoDankai", txtHokenryoDankai);
         this.setOriginalData("txtHokenryoNengaku", txtHokenryoNengaku);
         this.setOriginalData("txtTsuchishoNo", txtTsuchishoNo);
-        this.btnKakunin = btnKakunin;
         this.txtChoteiNendo = txtChoteiNendo;
         this.txtFukaNendo = txtFukaNendo;
         this.txtHokenryoDankai = txtHokenryoDankai;
         this.txtHokenryoNengaku = txtHokenryoNengaku;
         this.txtTsuchishoNo = txtTsuchishoNo;
-    }
-
-    public Button getBtnKakunin() {
-        return btnKakunin;
     }
 
     public RString getTxtChoteiNendo() {
@@ -70,11 +67,6 @@ public class dgFukaRirekiAll_Row extends DataRow {
 
     public RString getTxtTsuchishoNo() {
         return txtTsuchishoNo;
-    }
-
-    public void setBtnKakunin(Button btnKakunin) {
-        this.setOriginalData("btnKakunin", btnKakunin);
-        this.btnKakunin = btnKakunin;
     }
 
     public void setTxtChoteiNendo(RString txtChoteiNendo) {

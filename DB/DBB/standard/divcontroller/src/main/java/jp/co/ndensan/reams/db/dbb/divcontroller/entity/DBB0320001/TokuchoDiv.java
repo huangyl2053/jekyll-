@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.NenkinHokenshaTotsugoJohoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.TokuChoIdoAndIraiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.TokuChoKekkaDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -46,6 +47,8 @@ public class TokuchoDiv extends Panel {
     private TokuChoIdoAndIraiDiv TokuChoIdoAndIrai;
     @JsonProperty("TokuChoKekka")
     private TokuChoKekkaDiv TokuChoKekka;
+    @JsonProperty("mode")
+    private RString mode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -161,6 +164,16 @@ public class TokuchoDiv extends Panel {
     @JsonProperty("TokuChoKekka")
     public void setTokuChoKekka(TokuChoKekkaDiv TokuChoKekka) {
         this.TokuChoKekka=TokuChoKekka;
+    }
+
+    @JsonProperty("mode")
+    public RString getMode() {
+        return mode;
+    }
+
+    @JsonProperty("mode")
+    public void setMode(RString mode) {
+        this.mode=mode;
     }
 
 }

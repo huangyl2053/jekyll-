@@ -30,7 +30,20 @@ public class FukaRirekiAll {
      * @param div 全賦課履歴Div
      * @return 全賦課履歴Div
      */
-    public ResponseData<FukaRirekiAllDiv> onLoad(FukaRirekiAllDiv div) {
+    public ResponseData<FukaRirekiAllDiv> onLoad_shokai(FukaRirekiAllDiv div) {
+        
+        div.setDisplayNone(false);
+        
+        lordData(div, new RString("0000000000001901"));
+        
+        return returnResponse(div);
+    }
+    
+    public ResponseData<FukaRirekiAllDiv> onLoad_chohyo(FukaRirekiAllDiv div) {
+
+        div.setDisplayNone(false);
+
+//        div
         
         lordData(div, new RString("0000000000001901"));
         
@@ -90,7 +103,7 @@ public class FukaRirekiAll {
      */
     private dgFukaRirekiAll_Row createRowRirekiAll(List rowValue) {
        dgFukaRirekiAll_Row row =
-                new dgFukaRirekiAll_Row(new Button(), RString.EMPTY, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.EMPTY);
+                new dgFukaRirekiAll_Row(RString.EMPTY, RString.HALF_SPACE, RString.HALF_SPACE, RString.HALF_SPACE, RString.EMPTY);
                         
         row.setTxtChoteiNendo((RString)rowValue.get(0));
         row.setTxtFukaNendo((RString)rowValue.get(1));

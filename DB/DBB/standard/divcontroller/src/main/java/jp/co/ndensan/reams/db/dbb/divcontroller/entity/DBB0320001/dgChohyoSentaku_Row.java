@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sat Jun 07 15:57:35 JST 2014 
+ * Mon Jun 16 11:44:55 JST 2014 
  */
 
 
@@ -24,6 +24,7 @@ public class dgChohyoSentaku_Row extends DataRow {
 
     public dgChohyoSentaku_Row() {
         super();
+        this.txtChohyoSentaku = RString.EMPTY;
     }
 
     public dgChohyoSentaku_Row(RString txtChohyoSentaku) {

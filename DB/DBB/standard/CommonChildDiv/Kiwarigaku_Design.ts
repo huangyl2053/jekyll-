@@ -2358,9 +2358,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku1",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R1C1"
       },
       {
@@ -2384,10 +2386,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTokucho",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "特別徴収",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -2402,9 +2407,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku2",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R1C2"
       },
       {
@@ -2428,10 +2435,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTsuki",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "月",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -2446,9 +2456,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku4",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R2C1"
       },
       {
@@ -2472,10 +2484,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTokuchoKi",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "期",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -2490,9 +2505,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku5",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R2C2"
       },
       {
@@ -2516,10 +2533,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTokuKibetsuGaku",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "期別額",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -2534,9 +2554,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku6",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R2C3"
       },
       {
@@ -2560,10 +2582,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTsuki1",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "4月",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -2578,9 +2603,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku7",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R3C1"
       },
       {
@@ -2604,10 +2631,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTokuchoKi1",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "1期",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -2622,9 +2652,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku8",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R3C2"
       },
       {
@@ -2648,10 +2680,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTokuKibetsuGaku1",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "123,456",
-         "isPrivateInfo": false
+         "text": "",
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -2666,9 +2701,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku9",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R3C3"
       },
       {
@@ -2692,10 +2729,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFucho",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "普通徴収",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -2710,9 +2750,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku3",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R1C6"
       },
       {
@@ -2736,10 +2778,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTokuNofuGaku",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "納付額",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -2754,9 +2799,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku10",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R2C4"
       },
       {
@@ -2780,10 +2827,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKi",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "期",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -2798,9 +2848,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku11",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R2C5"
       },
       {
@@ -2824,10 +2876,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKibetsuGaku",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "期別額",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -2842,9 +2897,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku12",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R2C6"
       },
       {
@@ -2868,10 +2925,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoNofuGaku",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "納付額",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -2886,9 +2946,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku13",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R2C7"
       },
       {
@@ -2912,10 +2974,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTokuNofuGaku1",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
-         "isPrivateInfo": false
+         "text": "",
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -2930,9 +2995,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku17",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R3C4"
       },
       {
@@ -2956,10 +3023,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKi1",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "1期",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -2974,9 +3044,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku18",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R3C5"
       },
       {
@@ -3000,10 +3072,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKibetsuGaku1",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -3018,9 +3093,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku19",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R3C6"
       },
       {
@@ -3044,10 +3121,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoNofuGaku1",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -3062,9 +3142,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku20",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R3C7"
       },
       {
@@ -3088,10 +3170,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTsuki2",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "5月",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -3106,9 +3191,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku24",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R4C1"
       },
       {
@@ -3126,9 +3213,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku25",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R4C2"
       },
       {
@@ -3146,9 +3235,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku26",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R4C3"
       },
       {
@@ -3166,9 +3257,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku27",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R4C4"
       },
       {
@@ -3192,10 +3285,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKi2",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "1期",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -3210,9 +3306,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku28",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R4C5"
       },
       {
@@ -3236,10 +3334,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKibetsuGaku2",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -3254,9 +3355,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku29",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R4C6"
       },
       {
@@ -3280,10 +3383,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoNofuGaku2",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -3298,9 +3404,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku30",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R4C7"
       },
       {
@@ -3324,10 +3432,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTsuki3",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "6月",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -3342,9 +3453,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku34",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R5C1"
       },
       {
@@ -3368,10 +3481,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTokuchoKi2",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "2期",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -3386,9 +3502,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku35",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R5C2"
       },
       {
@@ -3412,10 +3530,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTokuKibetsuGaku2",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
-         "isPrivateInfo": false
+         "text": "",
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -3430,9 +3551,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku36",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R5C3"
       },
       {
@@ -3456,10 +3579,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTokuNofuGaku2",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -3474,9 +3600,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku37",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R5C4"
       },
       {
@@ -3500,10 +3628,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKi3",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "1期",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -3518,9 +3649,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku38",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R5C5"
       },
       {
@@ -3544,10 +3677,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKibetsuGaku3",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -3562,9 +3698,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku39",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R5C6"
       },
       {
@@ -3588,10 +3726,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoNofuGaku3",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -3606,9 +3747,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku40",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R5C7"
       },
       {
@@ -3632,10 +3775,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTsuki4",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "7月",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -3650,9 +3796,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku44",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R6C1"
       },
       {
@@ -3670,9 +3818,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku45",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R6C2"
       },
       {
@@ -3690,9 +3840,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku46",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R6C3"
       },
       {
@@ -3710,9 +3862,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku47",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R6C4"
       },
       {
@@ -3736,10 +3890,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKi4",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "1期",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -3754,9 +3911,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku48",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R6C5"
       },
       {
@@ -3780,10 +3939,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKibetsuGaku4",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -3798,9 +3960,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku49",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R6C6"
       },
       {
@@ -3824,10 +3988,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoNofuGaku4",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -3842,9 +4009,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku50",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R6C7"
       },
       {
@@ -3868,10 +4037,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTsuki5",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "8月",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -3886,9 +4058,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku54",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R7C1"
       },
       {
@@ -3912,10 +4086,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTokuchoKi3",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "3期",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -3930,9 +4107,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku55",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R7C2"
       },
       {
@@ -3956,10 +4135,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTokuKibetsuGaku3",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
-         "isPrivateInfo": false
+         "text": "",
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -3974,9 +4156,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku56",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R7C3"
       },
       {
@@ -4000,10 +4184,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTokuNofuGaku3",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -4018,9 +4205,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku57",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R7C4"
       },
       {
@@ -4044,10 +4233,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKi5",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "1期",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -4062,9 +4254,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku58",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R7C5"
       },
       {
@@ -4088,10 +4282,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKibetsuGaku5",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -4106,9 +4303,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku59",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R7C6"
       },
       {
@@ -4132,10 +4331,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoNofuGaku5",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -4150,9 +4352,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku60",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R7C7"
       },
       {
@@ -4176,10 +4380,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTsuki6",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "9月",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -4194,9 +4401,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku64",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R8C1"
       },
       {
@@ -4214,9 +4423,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku65",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R8C2"
       },
       {
@@ -4234,9 +4445,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku66",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R8C3"
       },
       {
@@ -4254,9 +4467,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku67",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R8C4"
       },
       {
@@ -4280,10 +4495,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKi6",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "1期",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -4298,9 +4516,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku68",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R8C5"
       },
       {
@@ -4324,10 +4544,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKibetsuGaku6",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -4342,9 +4565,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku69",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R8C6"
       },
       {
@@ -4368,10 +4593,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoNofuGaku6",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -4386,9 +4614,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku70",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R8C7"
       },
       {
@@ -4412,10 +4642,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTsuki7",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "10月",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -4430,9 +4663,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku74",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R9C1"
       },
       {
@@ -4456,10 +4691,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTokuchoKi4",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "4期",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -4474,9 +4712,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku75",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R9C2"
       },
       {
@@ -4500,10 +4740,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTokuKibetsuGaku4",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
-         "isPrivateInfo": false
+         "text": "",
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -4518,9 +4761,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku76",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R9C3"
       },
       {
@@ -4544,10 +4789,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTokuNofuGaku4",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -4562,9 +4810,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku77",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R9C4"
       },
       {
@@ -4588,10 +4838,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKi7",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "1期",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -4606,9 +4859,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku78",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R9C5"
       },
       {
@@ -4632,10 +4887,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKibetsuGaku7",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -4650,9 +4908,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku79",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R9C6"
       },
       {
@@ -4676,10 +4936,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoNofuGaku7",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -4694,9 +4957,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku80",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R9C7"
       },
       {
@@ -4720,10 +4985,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTsuki8",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "11月",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -4738,9 +5006,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku84",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R10C1"
       },
       {
@@ -4758,9 +5028,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku85",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R10C2"
       },
       {
@@ -4778,9 +5050,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku86",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R10C3"
       },
       {
@@ -4798,9 +5072,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku87",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R10C4"
       },
       {
@@ -4824,10 +5100,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKi8",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "1期",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -4842,9 +5121,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku88",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R10C5"
       },
       {
@@ -4868,10 +5149,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKibetsuGaku8",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -4886,9 +5170,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku89",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R10C6"
       },
       {
@@ -4912,10 +5198,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoNofuGaku8",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -4930,9 +5219,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku90",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R10C7"
       },
       {
@@ -4956,10 +5247,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTsuki9",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "12月",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -4974,9 +5268,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku94",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R11C1"
       },
       {
@@ -5000,10 +5296,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTokuchoKi5",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "5期",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -5018,9 +5317,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku95",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R11C2"
       },
       {
@@ -5044,10 +5345,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTokuKibetsuGaku5",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
-         "isPrivateInfo": false
+         "text": "",
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -5062,9 +5366,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku96",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R11C3"
       },
       {
@@ -5088,10 +5394,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTokuNofuGaku5",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -5106,9 +5415,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku97",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R11C4"
       },
       {
@@ -5132,10 +5443,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKi9",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "1期",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -5150,9 +5464,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku98",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R11C5"
       },
       {
@@ -5176,10 +5492,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKibetsuGaku9",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -5194,9 +5513,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku99",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R11C6"
       },
       {
@@ -5220,10 +5541,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoNofuGaku9",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -5238,9 +5562,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku100",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R11C7"
       },
       {
@@ -5264,10 +5590,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTsuki10",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "1月",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -5282,9 +5611,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku104",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R12C1"
       },
       {
@@ -5302,9 +5633,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku105",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R12C2"
       },
       {
@@ -5322,9 +5655,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku106",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R12C3"
       },
       {
@@ -5342,9 +5677,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku107",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R12C4"
       },
       {
@@ -5368,10 +5705,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKi10",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "1期",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -5386,9 +5726,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku108",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R12C5"
       },
       {
@@ -5412,10 +5754,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKibetsuGaku10",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -5430,9 +5775,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku109",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R12C6"
       },
       {
@@ -5456,10 +5803,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoNofuGaku10",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -5474,9 +5824,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku110",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R12C7"
       },
       {
@@ -5500,10 +5852,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTsuki11",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "2月",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -5518,9 +5873,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku114",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R13C1"
       },
       {
@@ -5544,10 +5901,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTokuchoKi6",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "6期",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -5562,9 +5922,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku115",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R13C2"
       },
       {
@@ -5588,10 +5950,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTokuKibetsuGaku6",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
-         "isPrivateInfo": false
+         "text": "",
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -5606,9 +5971,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku116",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R13C3"
       },
       {
@@ -5632,10 +5999,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTokuNofuGaku6",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -5650,9 +6020,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku117",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R13C4"
       },
       {
@@ -5676,10 +6048,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKi11",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "1期",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -5694,9 +6069,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku118",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R13C5"
       },
       {
@@ -5720,10 +6097,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKibetsuGaku11",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -5738,9 +6118,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku119",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R13C6"
       },
       {
@@ -5764,10 +6146,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoNofuGaku11",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -5782,9 +6167,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku120",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R13C7"
       },
       {
@@ -5808,10 +6195,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTsuki12",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "3月",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -5826,9 +6216,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku124",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R14C1"
       },
       {
@@ -5846,9 +6238,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku125",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R14C2"
       },
       {
@@ -5866,9 +6260,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku126",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R14C3"
       },
       {
@@ -5886,9 +6282,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku127",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R14C4"
       },
       {
@@ -5912,10 +6310,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKi12",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "1期",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -5930,9 +6331,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku128",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R14C5"
       },
       {
@@ -5956,10 +6359,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKibetsuGaku12",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -5974,9 +6380,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku129",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R14C6"
       },
       {
@@ -6000,10 +6408,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoNofuGaku12",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -6018,9 +6429,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku130",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R14C7"
       },
       {
@@ -6044,10 +6457,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTsuki13",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "4月",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -6062,9 +6478,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku134",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R15C1"
       },
       {
@@ -6082,9 +6500,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku135",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R15C2"
       },
       {
@@ -6102,9 +6522,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku136",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R15C3"
       },
       {
@@ -6122,9 +6544,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku137",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R15C4"
       },
       {
@@ -6148,10 +6572,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKi13",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "1期",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -6166,9 +6593,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku138",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R15C5"
       },
       {
@@ -6192,10 +6621,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKibetsuGaku13",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -6210,9 +6642,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku139",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R15C6"
       },
       {
@@ -6236,10 +6670,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoNofuGaku13",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -6254,9 +6691,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku140",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R15C7"
       },
       {
@@ -6280,10 +6719,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTsuki14",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "5月",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -6298,9 +6740,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku144",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R16C1"
       },
       {
@@ -6318,9 +6762,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku145",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R16C2"
       },
       {
@@ -6338,9 +6784,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku146",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R16C3"
       },
       {
@@ -6358,9 +6806,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku147",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R16C4"
       },
       {
@@ -6384,10 +6834,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKi14",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "14期",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -6402,9 +6855,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku148",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R16C5"
       },
       {
@@ -6428,10 +6883,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKibetsuGaku14",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -6446,9 +6904,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku149",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R16C6"
       },
       {
@@ -6472,10 +6932,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoNofuGaku14",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -6490,9 +6953,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku150",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R16C7"
       },
       {
@@ -6516,10 +6981,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTsuki15",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 1,
          "text": "合計",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -6534,9 +7002,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku154",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R17C1"
       },
       {
@@ -6554,9 +7024,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku155",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R17C2"
       },
       {
@@ -6580,10 +7052,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTokuKibetsuGakuKei",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
-         "text": "12,345",
-         "isPrivateInfo": false
+         "text": "",
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -6598,9 +7073,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku156",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R17C3"
       },
       {
@@ -6624,10 +7101,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblTokuNofuGakuKei",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -6642,9 +7122,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku157",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R17C4"
       },
       {
@@ -6662,9 +7144,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku158",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R17C5"
       },
       {
@@ -6688,10 +7172,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoKibetsuGakuKei",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -6706,9 +7193,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku159",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R17C6"
       },
       {
@@ -6732,10 +7221,13 @@ module DBB {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblFuchoNofuGakuKei",
+         "helpMessageID": "",
+         "jpControlName": "",
          "required": false,
          "align": 2,
          "text": "12,345",
-         "isPrivateInfo": false
+         "isPrivateInfo": false,
+         "decorationClass": ""
         }
        ],
        "controlType": "TableCell",
@@ -6750,9 +7242,11 @@ module DBB {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": 0,
-       "marginRight": 0,
+       "marginLeft": "0",
+       "marginRight": "0",
        "selectControlID": "celKiwarigaku160",
+       "helpMessageID": "",
+       "jpControlName": "",
        "connectTd": "R17C7"
       }
      ],
@@ -6771,11 +7265,13 @@ module DBB {
      "marginLeft": "0",
      "marginRight": "0",
      "selectControlID": "tblKiwariGaku",
-     "html": "<table border=\"1\">\n  <tbody>\n    <tr bgcolor=\"lightgrey\"><td id='R1C1'></td><td colspan=\"3\" id='R1C2'></td><td colspan=\"3\"  id='R1C6'></td></tr>\n    <tr bgcolor=\"lightgrey\" ><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td><td id='R2C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R3C1'></td><td id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td><td id='R3C5'></td><td id='R3C6'></td><td id='R3C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R4C1'></td><td id='R4C2'></td><td id='R4C3'></td><td id='R4C4'></td><td id='R4C5'></td><td id='R4C6'></td><td id='R4C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R5C1'></td><td id='R5C2'></td><td id='R5C3'></td><td id='R5C4'></td><td id='R5C5'></td><td id='R5C6'></td><td id='R5C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R6C1'></td><td id='R6C2'></td><td id='R6C3'></td><td id='R6C4'></td><td id='R6C5'></td><td id='R6C6'></td><td id='R6C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R7C1'></td><td id='R7C2'></td><td id='R7C3'></td><td id='R7C4'></td><td id='R7C5'></td><td id='R7C6'></td><td id='R7C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R8C1'></td><td id='R8C2'></td><td id='R8C3'></td><td id='R8C4'></td><td id='R8C5'></td><td id='R8C6'></td><td id='R8C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R9C1'></td><td id='R9C2'></td><td id='R9C3'></td><td id='R9C4'></td><td id='R9C5'></td><td id='R9C6'></td><td id='R9C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R10C1'></td><td id='R10C2'></td><td id='R10C3'></td><td id='R10C4'></td><td id='R10C5'></td><td id='R10C6'></td><td id='R10C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R11C1'></td><td id='R11C2'></td><td id='R11C3'></td><td id='R11C4'></td><td id='R11C5'></td><td id='R11C6'></td><td id='R11C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R12C1'></td><td id='R12C2'></td><td id='R12C3'></td><td id='R12C4'></td><td id='R12C5'></td><td id='R12C6'></td><td id='R12C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R13C1'></td><td id='R13C2'></td><td id='R13C3'></td><td id='R13C4'></td><td id='R13C5'></td><td id='R13C6'></td><td id='R13C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R14C1'></td><td id='R14C2'></td><td id='R14C3'></td><td id='R14C4'></td><td id='R14C5'></td><td id='R14C6'></td><td id='R14C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R15C1'></td><td id='R15C2'></td><td id='R15C3'></td><td id='R15C4'></td><td id='R15C5'></td><td id='R15C6'></td><td id='R15C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R16C1'></td><td id='R16C2'></td><td id='R16C3'></td><td id='R16C4'></td><td id='R16C5'></td><td id='R16C6'></td><td id='R16C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R17C1'></td><td id='R17C2'></td><td id='R17C3'></td><td id='R17C4'></td><td id='R17C5'></td><td id='R17C6'></td><td id='R17C7'></td></tr>\n  </tbody>\n</table>\n"
+     "helpMessageID": "",
+     "jpControlName": "",
+     "html": "<table border=\"1\">\n  <tbody>\n    <tr bgcolor=\"lightgrey\"><td id='R1C1'></td><td colspan=\"3\" id='R1C2'></td><td colspan=\"3\"  id='R1C6'></td></tr>\n    <tr bgcolor=\"lightgrey\" ><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td><td id='R2C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R3C1'></td><td bgcolor=\"lightgrey\" id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td><td bgcolor=\"lightgrey\" id='R3C5'></td><td id='R3C6'></td><td id='R3C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R4C1'></td><td bgcolor=\"lightgrey\" id='R4C2'></td><td id='R4C3'></td><td id='R4C4'></td><td bgcolor=\"lightgrey\" id='R4C5'></td><td id='R4C6'></td><td id='R4C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R5C1'></td><td bgcolor=\"lightgrey\" id='R5C2'></td><td id='R5C3'></td><td id='R5C4'></td><td bgcolor=\"lightgrey\" id='R5C5'></td><td id='R5C6'></td><td id='R5C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R6C1'></td><td bgcolor=\"lightgrey\" id='R6C2'></td><td id='R6C3'></td><td id='R6C4'></td><td bgcolor=\"lightgrey\" id='R6C5'></td><td id='R6C6'></td><td id='R6C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R7C1'></td><td bgcolor=\"lightgrey\" id='R7C2'></td><td id='R7C3'></td><td id='R7C4'></td><td bgcolor=\"lightgrey\" id='R7C5'></td><td id='R7C6'></td><td id='R7C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R8C1'></td><td bgcolor=\"lightgrey\" id='R8C2'></td><td id='R8C3'></td><td id='R8C4'></td><td bgcolor=\"lightgrey\" id='R8C5'></td><td id='R8C6'></td><td id='R8C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R9C1'></td><td bgcolor=\"lightgrey\" id='R9C2'></td><td id='R9C3'></td><td id='R9C4'></td><td bgcolor=\"lightgrey\" id='R9C5'></td><td id='R9C6'></td><td id='R9C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R10C1'></td><td bgcolor=\"lightgrey\" id='R10C2'></td><td id='R10C3'></td><td id='R10C4'></td><td bgcolor=\"lightgrey\" id='R10C5'></td><td id='R10C6'></td><td id='R10C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R11C1'></td><td bgcolor=\"lightgrey\" id='R11C2'></td><td id='R11C3'></td><td id='R11C4'></td><td bgcolor=\"lightgrey\" id='R11C5'></td><td id='R11C6'></td><td id='R11C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R12C1'></td><td bgcolor=\"lightgrey\" id='R12C2'></td><td id='R12C3'></td><td id='R12C4'></td><td bgcolor=\"lightgrey\" id='R12C5'></td><td id='R12C6'></td><td id='R12C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R13C1'></td><td bgcolor=\"lightgrey\" id='R13C2'></td><td id='R13C3'></td><td id='R13C4'></td><td bgcolor=\"lightgrey\" id='R13C5'></td><td id='R13C6'></td><td id='R13C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R14C1'></td><td bgcolor=\"lightgrey\" id='R14C2'></td><td id='R14C3'></td><td id='R14C4'></td><td bgcolor=\"lightgrey\" id='R14C5'></td><td id='R14C6'></td><td id='R14C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R15C1'></td><td bgcolor=\"lightgrey\" id='R15C2'></td><td id='R15C3'></td><td id='R15C4'></td><td bgcolor=\"lightgrey\" id='R15C5'></td><td id='R15C6'></td><td id='R15C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R16C1'></td><td bgcolor=\"lightgrey\" id='R16C2'></td><td id='R16C3'></td><td id='R16C4'></td><td bgcolor=\"lightgrey\" id='R16C5'></td><td id='R16C6'></td><td id='R16C7'></td></tr>\n    <tr><td bgcolor=\"lightgrey\" id='R17C1'></td><td bgcolor=\"lightgrey\" id='R17C2'></td><td id='R17C3'></td><td id='R17C4'></td><td bgcolor=\"lightgrey\" id='R17C5'></td><td id='R17C6'></td><td id='R17C7'></td></tr>\n  </tbody>\n</table>\n"
     }
    ],
    "controlType": "Panel",
-   "width": "M",
+   "width": "G2",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -6789,6 +7285,8 @@ module DBB {
    "marginLeft": "0",
    "marginRight": "0",
    "selectControlID": "Kiwarigaku",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "",
    "marginTop": "0",
@@ -6812,7 +7310,9 @@ module DBB {
    "backgroundColor": 0,
    "widthAuto": true,
    "panelDisplay": 0,
-   "isGroupBox": false
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
   }
  ],
  "controlType": "CommonChildDiv",
@@ -6827,9 +7327,11 @@ module DBB {
  "float": 0,
  "toolTip": "",
  "authorityMode": 0,
- "marginLeft": 0,
- "marginRight": 0,
+ "marginLeft": "0",
+ "marginRight": "0",
  "selectControlID": "defaultLayout",
+ "helpMessageID": "",
+ "jpControlName": "",
  "relation": [],
  "businessId": "DBB",
  "controlName": "Kiwarigaku",

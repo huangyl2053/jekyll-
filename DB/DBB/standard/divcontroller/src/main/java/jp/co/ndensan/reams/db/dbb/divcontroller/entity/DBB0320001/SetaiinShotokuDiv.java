@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.SetaiShotokuIchiran.SetaiShotokuIchiranDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -22,6 +23,8 @@ public class SetaiinShotokuDiv extends Panel {
      */
     @JsonProperty("SetaiShotokuIchiran")
     private SetaiShotokuIchiranDiv SetaiShotokuIchiran;
+    @JsonProperty("mode")
+    private RString mode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,6 +40,16 @@ public class SetaiinShotokuDiv extends Panel {
     @JsonProperty("SetaiShotokuIchiran")
     public void setSetaiShotokuIchiran(SetaiShotokuIchiranDiv SetaiShotokuIchiran) {
         this.SetaiShotokuIchiran=SetaiShotokuIchiran;
+    }
+
+    @JsonProperty("mode")
+    public RString getMode() {
+        return mode;
+    }
+
+    @JsonProperty("mode")
+    public void setMode(RString mode) {
+        this.mode=mode;
     }
 
 }

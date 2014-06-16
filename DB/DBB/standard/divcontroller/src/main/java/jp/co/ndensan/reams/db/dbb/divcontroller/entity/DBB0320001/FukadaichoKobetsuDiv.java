@@ -21,8 +21,8 @@ public class FukadaichoKobetsuDiv extends PanelPublish {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblDummy")
-    private Label lblDummy;
+    @JsonProperty("dummyLabelDaicho")
+    private Label dummyLabelDaicho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -30,14 +30,14 @@ public class FukadaichoKobetsuDiv extends PanelPublish {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblDummy")
-    public Label getLblDummy() {
-        return lblDummy;
+    @JsonProperty("dummyLabelDaicho")
+    public Label getDummyLabelDaicho() {
+        return dummyLabelDaicho;
     }
 
-    @JsonProperty("lblDummy")
-    public void setLblDummy(Label lblDummy) {
-        this.lblDummy=lblDummy;
+    @JsonProperty("dummyLabelDaicho")
+    public void setDummyLabelDaicho(Label dummyLabelDaicho) {
+        this.dummyLabelDaicho=dummyLabelDaicho;
     }
 
 }

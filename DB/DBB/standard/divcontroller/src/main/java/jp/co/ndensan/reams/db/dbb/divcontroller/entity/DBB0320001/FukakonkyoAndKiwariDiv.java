@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.tblFukaKonkyoDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -22,6 +23,8 @@ public class FukakonkyoAndKiwariDiv extends Panel {
      */
     @JsonProperty("tblFukaKonkyo")
     private tblFukaKonkyoDiv tblFukaKonkyo;
+    @JsonProperty("mode")
+    private RString mode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,6 +40,16 @@ public class FukakonkyoAndKiwariDiv extends Panel {
     @JsonProperty("tblFukaKonkyo")
     public void setTblFukaKonkyo(tblFukaKonkyoDiv tblFukaKonkyo) {
         this.tblFukaKonkyo=tblFukaKonkyo;
+    }
+
+    @JsonProperty("mode")
+    public RString getMode() {
+        return mode;
+    }
+
+    @JsonProperty("mode")
+    public void setMode(RString mode) {
+        this.mode=mode;
     }
 
 }
