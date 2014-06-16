@@ -12,8 +12,10 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil.Converter.IConverter;
 
 /**
+ * demo用のデータを扱います。
  *
  * @author N3327 三浦 凌
+ * @param <T> 変換させたい型
  */
 class DemoData<T> implements IDemoData<T> {
 

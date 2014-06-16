@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.common;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.divcontroller.demodata.HomonkaigoRiyoshaFutangakuGengakuData;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.homonkaigoRiyoshaFutangakuGengaku.HomonkaigoRiyoshaFutangakuGengakuDetailDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.homonkaigoRiyoshaFutangakuGengaku.HomonkaigoRiyoshaFutangakuGengakuDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.homonkaigoRiyoshaFutangakuGengaku.HomonkaigoRiyoshaFutangakuGengakuRiyoshaFutanDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.homonkaigoRiyoshaFutangakuGengaku.HomonkaigoRiyoshaFutangakuGengakuShinseiDiv;

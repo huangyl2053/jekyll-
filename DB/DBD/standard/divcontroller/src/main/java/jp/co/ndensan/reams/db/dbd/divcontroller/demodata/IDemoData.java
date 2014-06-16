@@ -9,13 +9,24 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
+ * デモデータです。
  *
  * @author N3327 三浦 凌
- * @param <T>
+ * @param <T> 変換後の型
  */
 public interface IDemoData<T> {
 
+    /**
+     * デモデータを任意の型のlistで返します。
+     *
+     * @return デモデータ
+     */
     List<T> asConvertedType();
 
+    /**
+     * デモデータをHashMapのlistで返します。
+     *
+     * @return デモデータ
+     */
     List<HashMap> asRow();
 }

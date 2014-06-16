@@ -17,11 +17,18 @@ import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
+ * 社会福祉法人軽減のデモデータです。
  *
  * @author N3327 三浦 凌
  */
 public class ShakaiFukushiHojinKeigenData {
 
+    /**
+     * 社会福祉法人軽減の履歴を返します。
+     *
+     * @param hihokenshaNo 被保険者番号
+     * @return 社会福祉法人軽減の履歴
+     */
     public IDemoData<dgShakaiFukushiHojinKeigenList_Row>
             get社会福祉法人軽減履歴Of(RString hihokenshaNo) {
         List<HashMap> dataFromYaml = YamlLoader.DBD.loadAsList(composeYAMLFilePathOf(hihokenshaNo));

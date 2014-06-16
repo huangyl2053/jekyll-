@@ -31,11 +31,12 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.ShiteiServiceI
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.ShujiiIkenshoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.dgNinteiRireki_Row;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.dgShiteiServiceShurui_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.AtenaShokaiSimpleAdapter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.dgSearchResult_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.YoKaigoJotaiKubun;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.DateRoundingType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -68,6 +69,8 @@ public class JukyushaShokai {
     public ResponseData<JukyushaShokaiDiv> onStart(JukyushaShokaiDiv div, JukyushaShokaiTargetSearchDiv targets) {
         div.getNinteiRireki().getDgNinteiRireki().setDataSource(searchHistroyOfClickedHihokensha(targets));
         RString hihokenshaNo = clickedItem(targets).getHihokenshaNo();
+        RString shikibetsuCode = clickedItem(targets).getShikibetsuCode();
+        AtenaShokaiSimpleAdapter.setDemoData(div.getKaigoAtena(), new ShikibetsuCode(shikibetsuCode));
         div.getTxtHihokenshaNo().setValue(hihokenshaNo);
         _init_ButtonsShosaiShiji(div.getButtonsShosaiShiji(), hihokenshaNo);
         return _createResponseData(div);
@@ -205,7 +208,7 @@ public class JukyushaShokai {
 
     private static class Ninteichosa {
 
-        NinteichosaDiv div;
+        private final NinteichosaDiv div;
 
         public Ninteichosa(JukyushaShokaiDiv div) {
             this.div = div.getNinteiDetail().getNinteichosa();
@@ -261,7 +264,7 @@ public class JukyushaShokai {
         }
     }
 
-    private static final class IryoHoken {
+    private static class IryoHoken {
 
         private final IryoHokenDiv div;
 
@@ -321,7 +324,14 @@ public class JukyushaShokai {
         }
 
         private FlexibleDate calculateYukoKikanShuryoDate(FlexibleDate date, int yukoKikanTsukisu) {
-            return date.plusMonth(yukoKikanTsukisu).plusDay(31, DateRoundingType.同月の暦上日);
+            FlexibleDate yukoKikanShuryoDate;
+            if (date.getDayValue() == 1) {
+                yukoKikanShuryoDate = date.plusMonth(yukoKikanTsukisu - 1);
+            } else {
+                yukoKikanShuryoDate = date.plusMonth(yukoKikanTsukisu);
+            }
+            return new FlexibleDate(yukoKikanShuryoDate.getYearMonth().toDateString()
+                    + String.valueOf(yukoKikanShuryoDate.getLastDay()));
         }
 
         private YoKaigoJotaiKubun toYoKaigoJotaiKubun(RString rstr) {
@@ -350,7 +360,7 @@ public class JukyushaShokai {
 
     }
 
-    private static final class NinteiResultOther {
+    private static class NinteiResultOther {
 
         private final NinteiResultEtceteraDiv div;
 
@@ -389,7 +399,7 @@ public class JukyushaShokai {
         }
     }
 
-    private static final class ShiteiServiceIchiran {
+    private static class ShiteiServiceIchiran {
 
         private final ShiteiServiceIchiranDiv div;
 

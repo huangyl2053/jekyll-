@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.demodata;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +21,6 @@ import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.Jum
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.DateRoundingType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -120,7 +118,14 @@ public class JukyushaData {
             }
 
             private FlexibleDate calculateYukoKikanShuryoDate(FlexibleDate date, int yukoKikanTsukisu) {
-                return date.plusMonth(yukoKikanTsukisu).plusDay(31, DateRoundingType.同月の暦上日);
+                FlexibleDate yukoKikanShuryoDate;
+                if (date.getDayValue() == 1) {
+                    yukoKikanShuryoDate = date.plusMonth(yukoKikanTsukisu - 1);
+                } else {
+                    yukoKikanShuryoDate = date.plusMonth(yukoKikanTsukisu);
+                }
+                return new FlexibleDate(yukoKikanShuryoDate.getYearMonth().toDateString()
+                        + String.valueOf(yukoKikanShuryoDate.getLastDay()));
             }
         });
     }

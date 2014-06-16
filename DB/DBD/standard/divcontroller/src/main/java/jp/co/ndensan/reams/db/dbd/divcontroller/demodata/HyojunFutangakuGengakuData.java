@@ -51,6 +51,12 @@ public class HyojunFutangakuGengakuData {
         });
     }
 
+    /**
+     * 標準負担額減額の履歴が存在するかどうかを返します。
+     *
+     * @param hihokenshaNo 被保険者番号
+     * @return あればtrue。
+     */
     public boolean exists標準負担額減額履歴Of(RString hihokenshaNo) {
         try {
             YamlLoader.DBD.loadAsList(composeYAMLFilePathOf(hihokenshaNo));
