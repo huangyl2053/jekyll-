@@ -1,9 +1,9 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue May 27 11:43:07 JST 2014 
+ * Mon Jun 16 20:19:53 JST 2014 
  */
 
 
@@ -33,6 +33,14 @@ public class dgKyotakuKeikakuTodokedeRirekiList_Row extends DataRow {
 
     public dgKyotakuKeikakuTodokedeRirekiList_Row() {
         super();
+        this.btnSelect = new Button();
+        this.txtJotai = RString.EMPTY;
+        this.txtKeikakuTekiyoKaishiYMDInvisible = new TextBoxDate();
+        this.txtKeikakuTekiyoKaishiYMD = RString.EMPTY;
+        this.txtKeikakuTekiyoShuryoYMD = RString.EMPTY;
+        this.txtTodokedeYMD = RString.EMPTY;
+        this.txtTodokedeKubun = RString.EMPTY;
+        this.txtKeikakuIraiJigyosha = RString.EMPTY;
     }
 
     public dgKyotakuKeikakuTodokedeRirekiList_Row(Button btnSelect, RString txtJotai, TextBoxDate txtKeikakuTekiyoKaishiYMDInvisible, RString txtKeikakuTekiyoKaishiYMD, RString txtKeikakuTekiyoShuryoYMD, RString txtTodokedeYMD, RString txtTodokedeKubun, RString txtKeikakuIraiJigyosha) {
