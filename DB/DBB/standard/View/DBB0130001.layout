@@ -25,6 +25,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtChoteiNendo_core",
+       "helpMessageID": "",
+       "jpControlName": "",
        "readOnly": true,
        "required": false,
        "maxLength": 100000000,
@@ -47,7 +49,8 @@
        "labelLWidth": "120",
        "labelRWidth": "S",
        "labelLAlign": 2,
-       "labelRAlign": 0
+       "labelRAlign": 0,
+       "decorationClass": ""
       },
       {
        "fieldName": "txtFukaNendo",
@@ -67,6 +70,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtFukaNendo_core",
+       "helpMessageID": "",
+       "jpControlName": "",
        "readOnly": true,
        "required": false,
        "maxLength": 100000000,
@@ -89,7 +94,8 @@
        "labelLWidth": "120",
        "labelRWidth": "S",
        "labelLAlign": 2,
-       "labelRAlign": 0
+       "labelRAlign": 0,
+       "decorationClass": ""
       }
      ],
      "controlType": "Panel",
@@ -107,6 +113,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "Heijunka8ShoriNaiyo",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onLoad": "",
      "title": "今回処理内容",
      "isOpen": true,
@@ -131,7 +139,8 @@
      "widthAuto": false,
      "panelDisplay": 1,
      "isGroupBox": false,
-     "readOnly": false
+     "readOnly": false,
+     "height": "Auto"
     },
     {
      "fieldName": "Heijunka8ShoriKakunin",
@@ -154,6 +163,9 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "dgHeijunka8ShoriKakunin1",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "height": "Auto",
        "gridSetting": {
         "rowHeight": 25,
         "isMultiSelectable": false,
@@ -221,7 +233,6 @@
          }
         ]
        },
-       "height": "Auto",
        "onSort": "",
        "onSelect": "",
        "onSelectByDblClick": "",
@@ -255,9 +266,12 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "lblShoriKakunin1",
+       "helpMessageID": "",
+       "jpControlName": "",
        "required": false,
        "isPrivateInfo": false,
        "text": "※算定処理は上記処理がすべて完了してから行います。",
+       "decorationClass": "",
        "align": 0
       }
      ],
@@ -276,6 +290,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "Heijunka8ShoriKakunin",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onLoad": "",
      "title": "処理状況",
      "isOpen": true,
@@ -300,7 +316,8 @@
      "widthAuto": false,
      "panelDisplay": 1,
      "isGroupBox": false,
-     "readOnly": false
+     "readOnly": false,
+     "height": "Auto"
     },
     {
      "fieldName": "Heijunka8KeisanHoho",
@@ -323,6 +340,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtKeisanHohoZougaku_core",
+       "helpMessageID": "",
+       "jpControlName": "",
        "readOnly": true,
        "required": false,
        "maxLength": 100000000,
@@ -345,7 +364,8 @@
        "labelLWidth": "50",
        "labelRWidth": "S",
        "labelLAlign": 2,
-       "labelRAlign": 0
+       "labelRAlign": 0,
+       "decorationClass": ""
       },
       {
        "fieldName": "txtKeisanHohoGengaku",
@@ -365,6 +385,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtKeisanHohoGengaku_core",
+       "helpMessageID": "",
+       "jpControlName": "",
        "readOnly": true,
        "required": false,
        "maxLength": 100000000,
@@ -387,11 +409,12 @@
        "labelLWidth": "50",
        "labelRWidth": "S",
        "labelLAlign": 2,
-       "labelRAlign": 0
+       "labelRAlign": 0,
+       "decorationClass": ""
       }
      ],
      "controlType": "Panel",
-     "width": "990",
+     "width": "940",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -405,6 +428,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "Heijunka8KeisanHoho",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onLoad": "",
      "title": "平準化計算方法",
      "isOpen": true,
@@ -429,11 +454,12 @@
      "widthAuto": false,
      "panelDisplay": 1,
      "isGroupBox": false,
-     "readOnly": false
+     "readOnly": false,
+     "height": "Auto"
     }
    ],
    "controlType": "Panel",
-   "width": "1106",
+   "width": "G11",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -447,6 +473,8 @@
    "marginLeft": "0",
    "marginRight": "XS",
    "selectControlID": "HeijunkaAugustKeisan",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "特別徴収平準化計算（8月分）",
    "isOpen": true,
@@ -476,104 +504,8 @@
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": false
-  },
-  {
-   "fieldName": "Kyotsupanel",
-   "items": [
-    {
-     "fieldName": "btnHonsanteiFukaYoyaku",
-     "items": [],
-     "controlType": "Button",
-     "width": "M",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "btnHonsanteiFukaYoyaku",
-     "text": "算定処理を行う（予約）",
-     "onClick": "",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0
-    },
-    {
-     "fieldName": "btnHonsanteiFuka",
-     "items": [],
-     "controlType": "Button",
-     "width": "M",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "btnHonsanteiFuka",
-     "text": "算定処理を行う",
-     "onClick": "",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0
-    }
-   ],
-   "controlType": "Panel",
-   "width": "G2",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": true,
-   "dependencies": [],
-   "float": 2,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
-   "selectControlID": "Kyotsupanel",
-   "onLoad": "",
-   "title": "",
-   "isOpen": true,
-   "canOpenAndClose": true,
-   "postParameterPanelNames": [
-    {
-     "postParameterPanelNames": "Kyotsupanel"
-    }
-   ],
-   "requestSettings": [],
-   "hiddenInput": [],
-   "onOpen": "",
-   "onClose": "",
-   "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
-   "backgroundColor": 0,
-   "widthAuto": true,
-   "panelDisplay": 0,
-   "isGroupBox": false,
-   "readOnly": false
+   "readOnly": false,
+   "height": "Auto"
   }
  ],
  "controlType": null,
@@ -591,6 +523,8 @@
  "marginLeft": "XS",
  "marginRight": "XS",
  "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
  "onLoad": "",
  "title": "特別徴収平準化計算（特別徴収8月分）",
  "jsPathCollection": [],
@@ -627,7 +561,7 @@
    "events": []
   }
  ],
- "currentState": "All",
+ "currentState": "平準化計算",
  "id": "DBB0130001",
  "WFParameter": [],
  "UIContainerEventMapping": [],
@@ -643,13 +577,88 @@
   ],
   [
    "Heijunka8KeisanHoho"
-  ],
-  [
-   "Kyotsupanel"
   ]
  ],
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
- "commonButtonAreaData": []
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "HeijunkaKeisan",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnKeisan",
+      "items": [],
+      "controlType": "CommonButtonComplete",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnKeisan",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "算定処理を行う",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "prefixText": "",
+      "suffixText": ""
+     }
+    },
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnKeisanYoyaku",
+      "items": [],
+      "controlType": "CommonButtonConfirm",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnKeisanYoyaku",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "算定処理を行う（予約）",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "prefixText": "",
+      "suffixText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "平準化計算"
+    }
+   ],
+   "isFinishButtonOnTheRight": true
+  }
+ ]
 }
