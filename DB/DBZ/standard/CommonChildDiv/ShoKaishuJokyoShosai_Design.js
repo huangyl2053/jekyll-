@@ -44,6 +44,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtKofuShoShurui_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": true,
                             "required": false,
                             "maxLength": 100000000,
@@ -66,7 +68,8 @@ var DBZ;
                             "labelLWidth": "85",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
-                            "labelRAlign": 0
+                            "labelRAlign": 0,
+                            "decorationClass": ""
                         },
                         {
                             "fieldName": "txtKofuDate",
@@ -86,6 +89,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtKofuDate_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": true,
                             "required": false,
                             "placeHolder": "",
@@ -125,6 +130,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtYukoKigen_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": true,
                             "required": false,
                             "placeHolder": "",
@@ -164,6 +171,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtKofuJiyu_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": true,
                             "required": false,
                             "maxLength": 100000000,
@@ -186,7 +195,8 @@ var DBZ;
                             "labelLWidth": "85",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
-                            "labelRAlign": 0
+                            "labelRAlign": 0,
+                            "decorationClass": ""
                         },
                         {
                             "fieldName": "txtKofuRiyu",
@@ -206,6 +216,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtKofuRiyu_text_area",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": true,
                             "height": "40",
                             "required": false,
@@ -247,6 +259,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtKaishuDate_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": false,
                             "required": false,
                             "placeHolder": "",
@@ -286,92 +300,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "ddlKaishuJiyu_core",
-                            "dataSource": [
-                                {
-                                    "key": "00",
-                                    "value": "転出"
-                                },
-                                {
-                                    "key": "01",
-                                    "value": "受給者転入"
-                                },
-                                {
-                                    "key": "02",
-                                    "value": "死亡"
-                                },
-                                {
-                                    "key": "03",
-                                    "value": "紛失等"
-                                },
-                                {
-                                    "key": "04",
-                                    "value": "汚損等"
-                                },
-                                {
-                                    "key": "05",
-                                    "value": "証記載内容変更"
-                                },
-                                {
-                                    "key": "06",
-                                    "value": "居宅サービス計画届出"
-                                },
-                                {
-                                    "key": "07",
-                                    "value": "医療保険脱退"
-                                },
-                                {
-                                    "key": "08",
-                                    "value": "適用除外施設入所"
-                                },
-                                {
-                                    "key": "09",
-                                    "value": "住所地特例適用"
-                                },
-                                {
-                                    "key": "10",
-                                    "value": "住所地特例変更"
-                                },
-                                {
-                                    "key": "11",
-                                    "value": "住所地特例解除"
-                                },
-                                {
-                                    "key": "12",
-                                    "value": "住所地特例終了"
-                                },
-                                {
-                                    "key": "13",
-                                    "value": "支払方法変更"
-                                },
-                                {
-                                    "key": "14",
-                                    "value": "支払方法変更終了"
-                                },
-                                {
-                                    "key": "15",
-                                    "value": "保険給付差止"
-                                },
-                                {
-                                    "key": "16",
-                                    "value": "保険給付差止終了"
-                                },
-                                {
-                                    "key": "17",
-                                    "value": "滞納保険料控除"
-                                },
-                                {
-                                    "key": "18",
-                                    "value": "給付額減額"
-                                },
-                                {
-                                    "key": "19",
-                                    "value": "給付額減額免除"
-                                },
-                                {
-                                    "key": "20",
-                                    "value": "給付額減額終了"
-                                }
-                            ],
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "required": false,
                             "onFocus": "",
                             "onBlur": "",
@@ -382,7 +312,97 @@ var DBZ;
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "selectedItem": "00"
+                            "selectedItem": "00",
+                            "dataSource": [
+                                {
+                                    "key": "00",
+                                    "value": ""
+                                },
+                                {
+                                    "key": "01",
+                                    "value": "転出"
+                                },
+                                {
+                                    "key": "02",
+                                    "value": "受給者転入"
+                                },
+                                {
+                                    "key": "03",
+                                    "value": "死亡"
+                                },
+                                {
+                                    "key": "04",
+                                    "value": "紛失等"
+                                },
+                                {
+                                    "key": "05",
+                                    "value": "汚損等"
+                                },
+                                {
+                                    "key": "06",
+                                    "value": "証記載内容変更"
+                                },
+                                {
+                                    "key": "07",
+                                    "value": "居宅サービス計画届出"
+                                },
+                                {
+                                    "key": "08",
+                                    "value": "医療保険脱退"
+                                },
+                                {
+                                    "key": "09",
+                                    "value": "適用除外施設入所"
+                                },
+                                {
+                                    "key": "10",
+                                    "value": "住所地特例適用"
+                                },
+                                {
+                                    "key": "11",
+                                    "value": "住所地特例変更"
+                                },
+                                {
+                                    "key": "12",
+                                    "value": "住所地特例解除"
+                                },
+                                {
+                                    "key": "13",
+                                    "value": "住所地特例終了"
+                                },
+                                {
+                                    "key": "14",
+                                    "value": "支払方法変更"
+                                },
+                                {
+                                    "key": "15",
+                                    "value": "支払方法変更終了"
+                                },
+                                {
+                                    "key": "16",
+                                    "value": "保険給付差止"
+                                },
+                                {
+                                    "key": "17",
+                                    "value": "保険給付差止終了"
+                                },
+                                {
+                                    "key": "18",
+                                    "value": "滞納保険料控除"
+                                },
+                                {
+                                    "key": "19",
+                                    "value": "給付額減額"
+                                },
+                                {
+                                    "key": "20",
+                                    "value": "給付額減額免除"
+                                },
+                                {
+                                    "key": "21",
+                                    "value": "給付額減額終了"
+                                }
+                            ]
                         },
                         {
                             "fieldName": "txtKaishuRiyu",
@@ -402,6 +422,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtKaishuRiyu_text_area",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": false,
                             "height": "40",
                             "required": false,
@@ -441,6 +463,8 @@ var DBZ;
                     "marginLeft": "XS",
                     "marginRight": "XS",
                     "selectControlID": "ShoKaishuJokyoShosai",
+                    "helpMessageID": "",
+                    "jpControlName": "",
                     "onLoad": "",
                     "title": "証類交付情報",
                     "marginTop": "Default",
@@ -465,7 +489,8 @@ var DBZ;
                     "widthAuto": false,
                     "panelDisplay": 0,
                     "isGroupBox": false,
-                    "readOnly": false
+                    "readOnly": false,
+                    "height": "Auto"
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -480,9 +505,11 @@ var DBZ;
             "float": 0,
             "toolTip": "",
             "authorityMode": 0,
-            "marginLeft": 0,
-            "marginRight": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
             "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
             "relation": [],
             "businessId": "DBZ",
             "controlName": "ShoKaishuJokyoShosai",

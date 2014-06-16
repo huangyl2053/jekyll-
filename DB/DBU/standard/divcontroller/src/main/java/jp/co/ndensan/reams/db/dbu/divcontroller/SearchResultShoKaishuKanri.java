@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  */
 public class SearchResultShoKaishuKanri {
 
-    private final static RString SHO_KOFU_DATA = new RString("DBU0500011/ShoKofuData.yml");
+    private final static RString SHO_KOFU_DATA = new RString("dbu0500011/ShoKofuData.yml");
 
     /**
      * 検索ボタンをクリックした際に実行されます。<br/>
@@ -54,7 +54,7 @@ public class SearchResultShoKaishuKanri {
     }
 
     private List<HashMap> getShoKofuDataList(SearchResultShoKaishuKanriDiv searchResultDiv) {
-        List<HashMap> yamlDataList = YamlLoader.FOR_DBU.loadAsList(SHO_KOFU_DATA);
+        List<HashMap> yamlDataList = YamlLoader.DBU.loadAsList(SHO_KOFU_DATA);
         List<HashMap> shoKofuDataList = new ArrayList<>();
         for (HashMap yamlData : yamlDataList) {
             RString hihokenshaNo = searchResultDiv.getHihokenshaNo();

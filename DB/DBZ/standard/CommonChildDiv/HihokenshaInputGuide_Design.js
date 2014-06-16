@@ -418,7 +418,7 @@ var DBZ;
                     "requestSettings": [
                         {
                             "eventName": "onLoad",
-                            "requestUrl": ""
+                            "requestUrl": "dbz/db/dbz/HihokenshaInputGuide/onLoad"
                         },
                         {
                             "eventName": "onClickBtnToSearch_HihokenshaFinder",

@@ -5,7 +5,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0500011;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0500011.ShoKaishuKanriTaishoshaDbJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -23,8 +23,8 @@ public class ShoKaishuKanriTaishoshaJohoDiv extends Panel {
      */
     @JsonProperty("ShoKaishuKanriTaishoshaCommonJoho")
     private AtenaShokaiSimpleDiv ShoKaishuKanriTaishoshaCommonJoho;
-    @JsonProperty("ShoKaishuKanriTaishoshaDbJoho")
-    private ShoKaishuKanriTaishoshaDbJohoDiv ShoKaishuKanriTaishoshaDbJoho;
+    @JsonProperty("ccdKaigoShikakuKihon")
+    private KaigoShikakuKihonDiv ccdKaigoShikakuKihon;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -42,14 +42,14 @@ public class ShoKaishuKanriTaishoshaJohoDiv extends Panel {
         this.ShoKaishuKanriTaishoshaCommonJoho=ShoKaishuKanriTaishoshaCommonJoho;
     }
 
-    @JsonProperty("ShoKaishuKanriTaishoshaDbJoho")
-    public ShoKaishuKanriTaishoshaDbJohoDiv getShoKaishuKanriTaishoshaDbJoho() {
-        return ShoKaishuKanriTaishoshaDbJoho;
+    @JsonProperty("ccdKaigoShikakuKihon")
+    public KaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
+        return ccdKaigoShikakuKihon;
     }
 
-    @JsonProperty("ShoKaishuKanriTaishoshaDbJoho")
-    public void setShoKaishuKanriTaishoshaDbJoho(ShoKaishuKanriTaishoshaDbJohoDiv ShoKaishuKanriTaishoshaDbJoho) {
-        this.ShoKaishuKanriTaishoshaDbJoho=ShoKaishuKanriTaishoshaDbJoho;
+    @JsonProperty("ccdKaigoShikakuKihon")
+    public void setCcdKaigoShikakuKihon(KaigoShikakuKihonDiv ccdKaigoShikakuKihon) {
+        this.ccdKaigoShikakuKihon=ccdKaigoShikakuKihon;
     }
 
 }

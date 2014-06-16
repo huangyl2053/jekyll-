@@ -28,6 +28,31 @@ public class HihokenshaInputGuide {
     private final static RString HIHOKENSHA_DATA = new RString("hihokenshaInputGuide/HihokenshaData.yml");
 
     /**
+     * 被保険者入力補助ガイドの初期処理を表示します。
+     *
+     * @param inputGuideDiv 被保険者入力補助ガイド
+     * @return レスポンス
+     */
+    public ResponseData onLoad(HihokenshaInputGuideDiv inputGuideDiv) {
+        ResponseData<HihokenshaInputGuideDiv> response = new ResponseData<>();
+
+        List<HashMap> yamlDataList = YamlLoader.DBZ.loadAsList(HIHOKENSHA_DATA);
+        HashMap hashMap = yamlDataList.get(0);
+        ControlGenerator ymlData = new ControlGenerator(hashMap);
+
+        //検索キー氏名の初期値設定
+        inputGuideDiv.getHihokenshaFinder().getSearchCriteriaOfKojin().getTxtShimei().
+                setValue(ymlData.getAsRString("検索条件氏名"));
+
+        //前方一致を初期選択とする
+        inputGuideDiv.getHihokenshaFinder().getSearchCriteriaOfKojin().getRadSearchPatternOfShimei().
+                setSelectedItem(new RString("key0"));
+
+        response.data = inputGuideDiv;
+        return response;
+    }
+
+    /**
      * 検索ボタンを押した際に実行されます。<br/>
      * 該当者一覧に、検索条件に該当した被保険者の情報を表示します。
      *
@@ -44,7 +69,8 @@ public class HihokenshaInputGuide {
     }
 
     private void setSearchResult(DataGrid<dgSearchResultOfHihokensha_Row> dgSearchResult) {
-        List<HashMap> yamlDataList = YamlLoader.FOR_DBZ.loadAsList(HIHOKENSHA_DATA);
+        List<HashMap> yamlDataList = YamlLoader.DBZ.loadAsList(HIHOKENSHA_DATA);
+        yamlDataList.remove(0);
         List<dgSearchResultOfHihokensha_Row> hihokenshaSearchResultList = new ArrayList<>();
         for (HashMap yamlData : yamlDataList) {
             ControlGenerator generator = new ControlGenerator(yamlData);

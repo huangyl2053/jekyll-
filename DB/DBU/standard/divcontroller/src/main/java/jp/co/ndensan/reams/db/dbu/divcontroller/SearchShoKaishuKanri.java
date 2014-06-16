@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class SearchShoKaishuKanri {
 
-    private final static RString HIHOKENSHA_DATA = new RString("DBU0500011/HihokenshaData.yml");
+    private final static RString HIHOKENSHA_DATA = new RString("dbu0500011/HihokenshaData.yml");
 
     /**
      * 検索対象の被保険者番号を入力し、フォーカスをはずした際に実行されます。<br/>
@@ -33,7 +33,7 @@ public class SearchShoKaishuKanri {
         ResponseData<SearchShoKaishuKanriDiv> response = new ResponseData<>();
 
         searchDiv.getTxtSearchHihokenshaMeisho().setValue(RString.EMPTY);
-        List<HashMap> yamlDataList = YamlLoader.FOR_DBU.loadAsList(HIHOKENSHA_DATA);
+        List<HashMap> yamlDataList = YamlLoader.DBU.loadAsList(HIHOKENSHA_DATA);
         for (HashMap yamlData : yamlDataList) {
             ControlGenerator generator = new ControlGenerator(yamlData);
             RString hihokenshaNo = searchDiv.getTxtSearchHihokenshaNo().getValue();
