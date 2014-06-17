@@ -22,10 +22,13 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "lblHonsanteiKakuteiMsg",
+     "helpMessageID": "",
+     "jpControlName": "",
      "required": false,
      "align": 0,
      "text": "本算定賦課処理の結果を確定します。",
-     "isPrivateInfo": false
+     "isPrivateInfo": false,
+     "decorationClass": ""
     },
     {
      "fieldName": "HonsanteiShoriNichiji",
@@ -48,13 +51,16 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtKakuteiFukaNendo_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": true,
        "required": false,
        "text": "",
        "isPrivateInfo": false,
+       "decorationClass": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": true,
        "placeHolder": "平26",
        "textKind": 0,
        "isPassword": false,
@@ -90,13 +96,16 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "txtHonsanteiShoriNichiji_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": true,
        "required": false,
        "text": "",
        "isPrivateInfo": false,
+       "decorationClass": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
-       "readOnly": true,
        "placeHolder": "平26.06.01 00：00：00",
        "textKind": 0,
        "isPassword": false,
@@ -127,9 +136,11 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XL",
+     "marginLeft": "2.5",
      "marginRight": "XS",
      "selectControlID": "HonsanteiShoriNichiji",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onLoad": "",
      "title": "",
      "isOpen": true,
@@ -153,37 +164,13 @@
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 1,
-     "isGroupBox": false
-    },
-    {
-     "fieldName": "btnHonsanteiKakutei",
-     "items": [],
-     "controlType": "Button",
-     "width": "M",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 2,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "btnHonsanteiKakutei",
-     "text": "算定結果を確定する",
-     "onClick": "",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0
+     "isGroupBox": false,
+     "readOnly": false,
+     "height": "Auto"
     }
    ],
    "controlType": "Panel",
-   "width": "500",
+   "width": "G6",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -197,10 +184,12 @@
    "marginLeft": "0",
    "marginRight": "XS",
    "selectControlID": "HonsanteiFukaKakutei",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
-   "title": "本算定賦課確定",
+   "title": "",
    "isOpen": true,
-   "canOpenAndClose": true,
+   "canOpenAndClose": false,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "HonsanteiFukaKakutei"
@@ -225,7 +214,9 @@
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
-   "isGroupBox": false
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
   }
  ],
  "controlType": null,
@@ -243,6 +234,8 @@
  "marginLeft": "XS",
  "marginRight": "XS",
  "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
  "onLoad": "",
  "title": "本算定賦課確定",
  "jsPathCollection": [],
@@ -268,7 +261,7 @@
    "events": []
   }
  ],
- "currentState": "All",
+ "currentState": "初期",
  "id": "DBB0310002",
  "WFParameter": [],
  "UIContainerEventMapping": [],
@@ -281,5 +274,52 @@
   ]
  ],
  "panelMargin": 1,
- "controlMargin": 1
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "HonsanteiKakutei",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnHonsanteiKakutei",
+      "items": [],
+      "controlType": "CommonButtonComplete",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnHonsanteiKakutei",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "算定結果を確定する",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "prefixText": "",
+      "suffixText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "初期"
+    }
+   ],
+   "isFinishButtonOnTheRight": true
+  }
+ ]
 }
