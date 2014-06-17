@@ -15,41 +15,27 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
+ * 受給者異動連絡票変更登録 対象者一覧のコントローラークラスです。
  *
- * @author n8223
+ * @author n8156 宮本 康
  */
 public class JukyushaIdoRenrakuhyoHenkoSearchResultListPanel {
 
-    /**
-     * 受給者異動連絡票変更登録　修正状況を設定する。
-     *
-     * @param panel JukyushaIdoRenrakuhyoHenkoSearchConditionPanel
-     * @return PanelDivのResponseData
-     */
-    public ResponseData<JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv> onClick_btnUpdate(JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv panel) {
-        ResponseData<JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv> response = new ResponseData<>();
-
-        panel.getDgJukyushaIdoRenrakuhyoHenkoSearchResult().getClickedItem().setRowState(RowState.Modified);
-
-        response.data = panel;
-        return response;
-
-    }
+    private static final RString YML_NAME = new RString("dbc0220011/JukyushaIdoRenrakuhyoHenkoSearchResultList.yml");
 
     /**
-     * 受給者異動連絡票変更登録　対象者一覧の内容をセットします。
+     * 検索時の処理です。
      *
-     * @param panel JukyushaIdoRenrakuhyoHenkoSearchConditionPanel
-     * @return PanelDivのResponseData
+     * @param panel panel
+     * @return ResponseData
      */
-    public ResponseData<JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv> onClick_btnSearch(JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv panel) {
+    public ResponseData<JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv> onClick_btnSearch(
+            JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv panel) {
         ResponseData<JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv> response = new ResponseData<>();
 
         setJukyushaIdoRenrakuhyoHenkoSearchResult(panel);
@@ -59,94 +45,47 @@ public class JukyushaIdoRenrakuhyoHenkoSearchResultListPanel {
 
     }
 
-    /*
-     * 受給者異動連絡票変更登録 対象者一覧の内容を設定する。
-     */
     private void setJukyushaIdoRenrakuhyoHenkoSearchResult(JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv panel) {
-
-        List<dgJukyushaIdoRenrakuhyoHenkoSearchResult_Row> arraydata = createRowJukyushaIdoRenrakuhyoHenkoSearchResultTestData();
-        DataGrid<dgJukyushaIdoRenrakuhyoHenkoSearchResult_Row> grid = panel.getDgJukyushaIdoRenrakuhyoHenkoSearchResult();
-
-        grid.setDataSource(arraydata);
-
-    }
-
-    private List<dgJukyushaIdoRenrakuhyoHenkoSearchResult_Row> createRowJukyushaIdoRenrakuhyoHenkoSearchResultTestData() {
-        List<dgJukyushaIdoRenrakuhyoHenkoSearchResult_Row> arrayData = new ArrayList<>();
-
-        List<HashMap> ymlData = ymlData();
-
-        //TO DO データを増える場合。
-        for (int i = 0; i < ymlData.size(); i++) {
-            HashMap hashMap = ymlData.get(i);
-            hashMap(hashMap, arrayData);
+        List<HashMap> mapList = getYmlData();
+        List<dgJukyushaIdoRenrakuhyoHenkoSearchResult_Row> list = new ArrayList<>();
+        for (int index = 0; index < mapList.size(); index++) {
+            HashMap map = mapList.get(index);
+            list.add(createJukyushaIdoRenrakuhyoHenkoSearchResultRow(
+                    map.get("異動日").toString(),
+                    map.get("被保番号").toString(),
+                    map.get("カナ氏名").toString(),
+                    map.get("送付年月").toString()));
         }
-
-        return arrayData;
+        panel.getDgJukyushaIdoRenrakuhyoHenkoSearchResult().setDataSource(list);
     }
 
-    private void hashMap(HashMap hashMap, List<dgJukyushaIdoRenrakuhyoHenkoSearchResult_Row> arrayData) {
-        //TO DO DataGrid
-        //異動日
-        String resultIdoDate = hashMap.get("resultIdoDate").toString();
-        //被保番号
-        String resultHihoNo = hashMap.get("resultHihoNo").toString();
-        //カナ氏名
-        String resultHihoName = hashMap.get("resultHihoName").toString();
-        //送付年月
-        String renrakuhyoSendYM = hashMap.get("renrakuhyoSendYM").toString();
-        //削除データ
+    private dgJukyushaIdoRenrakuhyoHenkoSearchResult_Row createJukyushaIdoRenrakuhyoHenkoSearchResultRow(
+            String txtResultIdoDate,
+            String txtResultHihoNo,
+            String txtResultHihoName,
+            String txtResultSendYM) {
 
-        dgJukyushaIdoRenrakuhyoHenkoSearchResult_Row item;
+        TextBoxDate resultIdoDate = new TextBoxDate();
+        TextBoxCode resultHihoNo = new TextBoxCode();
+        TextBox resultHihoName = new TextBox();
+        TextBoxDate resultSendYM = new TextBoxDate();
 
-        item = createRowJukyushaIdoRenrakuhyoHenkoSearchListData(
+        resultIdoDate.setValue(new RDate(txtResultIdoDate));
+        resultHihoNo.setValue(new RString(txtResultHihoNo));
+        resultHihoName.setValue(new RString(txtResultHihoName));
+        resultSendYM.setValue(new RDate(txtResultSendYM));
+
+        return new dgJukyushaIdoRenrakuhyoHenkoSearchResult_Row(
+                new Button(),
+                new Button(),
                 resultIdoDate,
                 resultHihoNo,
                 resultHihoName,
-                renrakuhyoSendYM
-        );
-        arrayData.add(item);
+                resultSendYM,
+                true);
     }
 
-    /*
-     *引数を元にデータグリッド内に挿入する個人データを作成します。
-     */
-    private dgJukyushaIdoRenrakuhyoHenkoSearchResult_Row createRowJukyushaIdoRenrakuhyoHenkoSearchListData(
-            String 異動日,
-            String 被保番号,
-            String カナ氏名,
-            String 送付年月
-    ) {
-
-        dgJukyushaIdoRenrakuhyoHenkoSearchResult_Row rowJukyushaIdoRenrakuhyoHenkoSearchResulListData;
-        rowJukyushaIdoRenrakuhyoHenkoSearchResulListData = new dgJukyushaIdoRenrakuhyoHenkoSearchResult_Row(
-                new Button(),
-                new Button(),
-                new TextBoxDate(),
-                new TextBoxCode(),
-                new TextBox(),
-                new TextBoxDate(),
-                new Boolean(false)
-        );
-
-        rowJukyushaIdoRenrakuhyoHenkoSearchResulListData.getTxtResultIdoDate().setValue(new RDate(異動日));
-        rowJukyushaIdoRenrakuhyoHenkoSearchResulListData.getTxtResultHihoNo().setValue(new RString(被保番号));
-        rowJukyushaIdoRenrakuhyoHenkoSearchResulListData.getTxtResultHihoName().setValue(new RString(カナ氏名));
-        rowJukyushaIdoRenrakuhyoHenkoSearchResulListData.getTxtResultSendYM().setValue(new RDate(送付年月));
-
-        //入力不可
-        rowJukyushaIdoRenrakuhyoHenkoSearchResulListData.getTxtResultIdoDate().setReadOnly(true);
-        rowJukyushaIdoRenrakuhyoHenkoSearchResulListData.getTxtResultHihoNo().setReadOnly(true);
-        rowJukyushaIdoRenrakuhyoHenkoSearchResulListData.getTxtResultHihoName().setReadOnly(true);
-        rowJukyushaIdoRenrakuhyoHenkoSearchResulListData.getTxtResultSendYM().setReadOnly(true);
-
-        return rowJukyushaIdoRenrakuhyoHenkoSearchResulListData;
-
+    private List<HashMap> getYmlData() {
+        return YamlLoader.DBC.loadAsList(YML_NAME);
     }
-
-    private List<HashMap> ymlData() {
-        return YamlLoader.DBC.loadAsList(new RString("dbc0220011/JukyushaIdoRenrakuhyoHenkoSearchResultList.yml"));
-
-    }
-
 }

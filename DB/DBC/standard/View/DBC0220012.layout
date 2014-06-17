@@ -1,0 +1,257 @@
+﻿{
+ "fieldName": "Page",
+ "items": [
+  {
+   "fieldName": "JukyushaIdoRenrakuhyoHenkoTorokuPanel",
+   "items": [
+    {
+     "fieldName": "JukyushaIdoRenrakuhyo",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "JukyushaIdoRenrakuhyo",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "title": "受給者異動連絡票",
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": 0,
+     "businessId": "DBC",
+     "controlName": "JukyushaIdoRenrakuhyo",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": ""
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G12",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0",
+   "marginRight": "0",
+   "selectControlID": "JukyushaIdoRenrakuhyoHenkoTorokuPanel",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "JukyushaIdoRenrakuhyoHenkoTorokuPanel"
+    }
+   ],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/JukyushaIdoRenrakuhyoHenkoTorokuPanel/onLoad"
+    }
+   ],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": true,
+   "eraseBorderBottom": true,
+   "eraseBorderRight": true,
+   "eraseBorderLeft": true,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
+  }
+ ],
+ "controlType": null,
+ "width": "XS",
+ "visible": true,
+ "displayNone": false,
+ "disabled": false,
+ "accessKey": "",
+ "nextFocusFieldName": "",
+ "wrap": false,
+ "dependencies": [],
+ "float": 0,
+ "toolTip": "",
+ "authorityMode": 0,
+ "marginLeft": "XS",
+ "marginRight": "XS",
+ "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
+ "onLoad": "",
+ "title": "受給者異動連絡票変更登録",
+ "jsPathCollection": [],
+ "relation": [],
+ "stateTransition": [
+  {
+   "order": "1",
+   "stateName": "連絡票変更",
+   "showWizard": true,
+   "visibleDivs": [
+    {
+     "visibleDiv": "JukyushaIdoRenrakuhyoHenkoTorokuPanel",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "JukyushaIdoRenrakuhyo",
+     "panelState": "visible"
+    }
+   ],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnSearch",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnResearch",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgJukyushaIdoRenrakuhyoHenkoSearchResult",
+     "event": "onSelectByModifyButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnUpdate",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnCancel",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
+  }
+ ],
+ "currentState": "All",
+ "id": "DBC0220012",
+ "WFParameter": [],
+ "UIContainerEventMapping": [
+  {
+   "alias": "update",
+   "eventName": "btnUpdate.onClick"
+  },
+  {
+   "alias": "cancel",
+   "eventName": "btnCancel.onClick"
+  }
+ ],
+ "loadSequencePanelNames": [
+  [
+   "JukyushaIdoRenrakuhyoHenkoTorokuPanel"
+  ],
+  [
+   "JukyushaIdoRenrakuhyo"
+  ]
+ ],
+ "panelMargin": 1,
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "1",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnCancel",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnCancel",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "変更内容を破棄する",
+      "onClick": "onClick_btnCancel",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "prefixText": "",
+      "suffixText": ""
+     }
+    },
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnUpdate",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnUpdate",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "変更内容を確定する",
+      "onClick": "onClick_btnUpdate",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "prefixText": "",
+      "suffixText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "連絡票変更"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  }
+ ]
+}

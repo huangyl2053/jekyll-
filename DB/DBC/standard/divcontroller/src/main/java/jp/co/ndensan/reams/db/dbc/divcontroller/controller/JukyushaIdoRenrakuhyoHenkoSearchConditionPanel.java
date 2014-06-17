@@ -14,16 +14,19 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 受給者異動連絡票変更登録 検索条件のコントローラークラスです。
  *
- * @author n8223
+ * @author n8156 宮本 康
  */
 public class JukyushaIdoRenrakuhyoHenkoSearchConditionPanel {
 
+    private static final RString YML_NAME = new RString("dbc0220011/JukyushaIdoRenrakuhyoHenko.yml");
+
     /**
-     * 受給者異動連絡票変更登録　対象者検索条件の内容をセットします。
+     * 画面ロード時の処理です。
      *
-     * @param panel JukyushaIdoRenrakuhyoHenkoSearchConditionPanel
-     * @return PanelDivのResponseData
+     * @param panel panel
+     * @return ResponseData
      */
     public ResponseData<JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv> onLoad(JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv panel) {
         ResponseData<JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv> response = new ResponseData<>();
@@ -34,35 +37,14 @@ public class JukyushaIdoRenrakuhyoHenkoSearchConditionPanel {
         return response;
     }
 
-    /*
-     * 受給者異動連絡票変更登録 対象者検索条件の内容を設定する。
-     */
-    private void setJukyushaIdoRenrakuhyoHenkoSearchCondition(JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv panel) {
-
-        List<HashMap> ymlData = ymlData();
-
-        //異動日
-        String idoDateRangefromPlaceHolder = ymlData.get(0).get("idoDateRangefromPlaceHolder").toString();
-        String idoDateRangetoPlaceHolder = ymlData.get(0).get("idoDateRangetoPlaceHolder").toString();
-
-        //被保番号
-        String searchHihoNo = ymlData.get(0).get("searchHihoNo").toString();
-
-     //削除データ検索
-        //chkIsSearchDeletedData
-        panel.getTxtIdoDateRange().setFromValue(new RDate(idoDateRangefromPlaceHolder));
-        panel.getTxtIdoDateRange().setToValue(new RDate(idoDateRangetoPlaceHolder));
-        panel.getTxtSearchHihoNo().setValue(new RString(searchHihoNo));
-
-    }
-
     /**
-     * 受給者異動連絡票変更登録　対象者検索条件の内容をセットします。
+     * 条件クリア時の処理です。
      *
-     * @param panel JukyushaIdoRenrakuhyoHenkoSearchConditionPanel
-     * @return PanelDivのResponseData
+     * @param panel panel
+     * @return ResponseData
      */
-    public ResponseData<JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv> onClick_btnClearSearchCondition(JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv panel) {
+    public ResponseData<JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv> onClick_btnClearSearchCondition(
+            JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv panel) {
         ResponseData<JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv> response = new ResponseData<>();
 
         setClearSearchCondition(panel);
@@ -71,20 +53,20 @@ public class JukyushaIdoRenrakuhyoHenkoSearchConditionPanel {
         return response;
     }
 
-    /**
-     * 受給者異動連絡票変更登録　条件をクリアする。
-     *
-     * @param panel JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv
-     * @return PanelDivのResponseData
-     */
+    private void setJukyushaIdoRenrakuhyoHenkoSearchCondition(JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv panel) {
+        HashMap map = getYmlData().get(0);
+        panel.getTxtIdoDateRange().setFromValue(new RDate(map.get("異動日開始").toString()));
+        panel.getTxtIdoDateRange().setToValue(new RDate(map.get("異動日終了").toString()));
+        panel.getTxtSearchHihoNo().setValue(new RString(map.get("被保番号").toString()));
+    }
+
     private void setClearSearchCondition(JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv panel) {
         panel.getTxtIdoDateRange().clearFromValue();
         panel.getTxtIdoDateRange().clearToValue();
         panel.getTxtSearchHihoNo().clearValue();
     }
 
-    private List<HashMap> ymlData() {
-        return YamlLoader.DBC.loadAsList(new RString("dbc0220011/JukyushaIdoRenrakuhyoHenko.yml"));
+    private List<HashMap> getYmlData() {
+        return YamlLoader.DBC.loadAsList(YML_NAME);
     }
-
 }
