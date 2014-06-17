@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0060000;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -10,11 +10,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * KyufuKanrihyoSerach のクラスファイル 
+ * KyufuKanrihyoSearch のクラスファイル 
  * 
  * @author 自動生成
  */
-public class KyufuKanrihyoSerachDiv extends Panel {
+public class KyufuKanrihyoSearchDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

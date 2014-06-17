@@ -9,14 +9,14 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufuKanrihyoListDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgKyufuKanrihyoList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0060000.KyufuKanrihyoListDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0060000.dgKyufuKanrihyoList_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * 給付管理票情報照会の検索Panelのコントロールクラスです。
@@ -24,6 +24,10 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
  * @author N8187 久保田 英男
  */
 public class KyufuKanrihyoList {
+
+    private List<HashMap> getYaml() {
+        return YamlLoader.DBC.loadAsList(new RString("dbc0060000/KyufuKanrihyoList.yml"));
+    }
 
     /**
      * KyufuKanrihyoSerachで検索ボタンが押された時の処理。
@@ -55,24 +59,23 @@ public class KyufuKanrihyoList {
 
     private void setDemoData(KyufuKanrihyoListDiv panel) {
         List<dgKyufuKanrihyoList_Row> dgList = panel.getDgKyufuKanrihyoList().getDataSource();
-        List<HashMap> sourceList = YamlLoader.FOR_DBC.loadAsList(new RString("KyufuKanrihyoList.yml"));
-        dgList = bindYamlData(dgList, sourceList);
+        dgList = bindYamlData(dgList);
         Collections.sort(dgList, new DateComparator());
         panel.getDgKyufuKanrihyoList().setDataSource(dgList);
     }
 
-    private List<dgKyufuKanrihyoList_Row> bindYamlData(List<dgKyufuKanrihyoList_Row> dgList, List<HashMap> sourceList) {
+    private List<dgKyufuKanrihyoList_Row> bindYamlData(List<dgKyufuKanrihyoList_Row> dgList) {
         dgList.clear();
         Button btn = new Button();
-        for (HashMap source : sourceList) {
+        for (int index = 0; index < 3; index++) {
+            ControlGenerator cg = new ControlGenerator(getYaml().get(index));
             dgList.add(create給付管理票(btn,
-                    source.get("対象年月Invisible").toString(),
-                    source.get("対象年月").toString(),
-                    source.get("作成区分").toString(),
-                    source.get("保険者番号").toString(),
-                    source.get("保険者名").toString(),
-                    source.get("事業者").toString(),
-                    source.get("審査年月日").toString()));
+                    cg.getAsRString("対象年月"),
+                    cg.getAsRString("作成区分"),
+                    cg.getAsRString("保険者番号"),
+                    cg.getAsRString("保険者名"),
+                    cg.getAsRString("事業者"),
+                    cg.getAsRString("審査年月日")));
         }
         return dgList;
     }
@@ -81,32 +84,28 @@ public class KyufuKanrihyoList {
 
         @Override
         public int compare(dgKyufuKanrihyoList_Row o1, dgKyufuKanrihyoList_Row o2) {
-            return o2.getTxtTaishoYMInvisible().getValue().compareTo(o1.getTxtTaishoYMInvisible().getValue());
+            return new FlexibleDate(o2.getTxtTaishoYM().replace(".", "").concat("01")).
+                    compareTo(new FlexibleDate(o1.getTxtTaishoYM().replace(".", "").concat("01")));
         }
     }
 
     private dgKyufuKanrihyoList_Row create給付管理票(
             Button btnSelect,
-            String txtTaishoYMInvisible,
-            String txtTaishoYM,
-            String txtSakuseiKubun,
-            String txtHihoNo,
-            String txtHihokenshaName,
-            String txtJigyosha,
-            String txtShinsaYM
+            RString txtTaishoYM,
+            RString txtSakuseiKubun,
+            RString txtHihoNo,
+            RString txtHihokenshaName,
+            RString txtJigyosha,
+            RString txtShinsaYM
     ) {
-        TextBoxDate txtBoxDate = new TextBoxDate();
-        txtBoxDate.setValue(new RDate(txtTaishoYMInvisible));
-
         return new dgKyufuKanrihyoList_Row(
                 btnSelect,
-                txtBoxDate,
-                new RString(txtTaishoYM),
-                new RString(txtSakuseiKubun),
-                new RString(txtHihoNo),
-                new RString(txtHihokenshaName),
-                new RString(txtJigyosha),
-                new RString(txtShinsaYM)
+                txtTaishoYM,
+                txtSakuseiKubun,
+                txtHihoNo,
+                txtHihokenshaName,
+                txtJigyosha,
+                txtShinsaYM
         );
     }
 }

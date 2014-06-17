@@ -5,10 +5,10 @@
    "fieldName": "KyufuKanrihyoKihon",
    "items": [
     {
-     "fieldName": "lblKihon1",
+     "fieldName": "KyufuKanrihyoKaigoAtena",
      "items": [],
-     "controlType": "Label",
-     "width": "M",
+     "controlType": "CommonChildDiv",
+     "width": "XS",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -19,60 +19,102 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "required": false,
-     "align": 0,
-     "text": "<<基本情報１>>",
-     "isPrivateInfo": false
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "KyufuKanrihyoKaigoAtena",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": 0,
+     "businessId": "DBZ",
+     "controlName": "KaigoAtenaInfo",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "atenaInfo_title": "",
+     "atenaInfo_canOpenAndClose": true,
+     "atenaInfo_eraseBorderTop": true,
+     "atenaInfo_eraseBorderBottom": true,
+     "atenaInfo_eraseBorderRight": true,
+     "atenaInfo_eraseBorderLeft": true,
+     "AtenaKanaMeisho_visible": true,
+     "AtenaMisho_visible": true,
+     "SeinengappiYMD_visible": true,
+     "Nenrei_visible": true,
+     "Seibetsu_visible": true,
+     "JuminShubetsu_Visible": true,
+     "NihonjinGaikokujin_visible": true,
+     "JuminJotai_visible": true,
+     "YubinNo_visible": true,
+     "Jusho_visible": true,
+     "Gyoseiku_visible": true,
+     "ShikibetsuCode_visible": true,
+     "KojinHojinCode_visible": true,
+     "SetaiCode_visible": true,
+     "lblButtonMargin_displayNone": false,
+     "btnMemo_DisplayNone": false,
+     "btnDainosha_displayNone": false,
+     "btnSofusaki_displayNone": false,
+     "btnDainoSofusakiKakunin_displayNone": false,
+     "btnKoza_displayNone": false,
+     "btnRenrakusaki_displayNone": false,
+     "btnShosai_displayNone": false,
+     "btnAtenaRireki_displayNone": false,
+     "btnSetaiIchiran_displayNone": false,
+     "btnDoitsunin_displayNone": false,
+     "btnToriatsukaiChui_displayNone": false,
+     "btnEltax_displayNone": false,
+     "btnShiyoJokyo_displayNone": false,
+     "btnAtesakiKakunin_displayNone": false,
+     "SubGyomuCode": "DBC",
+     "JukiYusennKubun": "1",
+     "AgeArrivalDay": "1",
+     "SubGyomuUmu": "0",
+     "SubGyomuSearchUmu": "0",
+     "DainoninHyojiUmu": "1"
     },
     {
-     "fieldName": "lblKihon2",
+     "fieldName": "KyufuKanrihyoKaigoKihon",
      "items": [],
-     "controlType": "Label",
-     "width": "M",
+     "controlType": "CommonChildDiv",
+     "width": "XS",
      "visible": true,
      "displayNone": false,
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": true,
+     "wrap": false,
      "dependencies": [],
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "required": false,
-     "align": 0,
-     "text": "<<基本情報２>>",
-     "isPrivateInfo": false
-    },
-    {
-     "fieldName": "lblKihon3",
-     "items": [],
-     "controlType": "Label",
-     "width": "M",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "required": false,
-     "align": 0,
-     "text": "<<基本情報３>>",
-     "isPrivateInfo": false
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "KyufuKanrihyoKaigoKihon",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "title": "",
+     "relation": [],
+     "canOpenAndClose": true,
+     "marginTop": 0,
+     "marginBottom": 0,
+     "eraseBorderTop": true,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true,
+     "businessId": "DBZ",
+     "controlName": "KaigoShikakuKihon",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "backGroundColor": 0,
+     "btnHihoRireki_visible": true,
+     "btnNinteiRireki_visible": true
     }
    ],
    "controlType": "Panel",
-   "width": "1260",
+   "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -83,8 +125,11 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "XS",
+   "marginLeft": "0",
    "marginRight": "XS",
+   "selectControlID": "KyufuKanrihyoKihon",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "",
    "isOpen": true,
@@ -94,7 +139,12 @@
      "postParameterPanelNames": "KyufuKanrihyoKihon"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/KyufuKanrihyoKihon/onLoad"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -107,96 +157,13 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
   },
   {
-   "fieldName": "KyufuKanrihyoKaigoKihon",
-   "items": [
-    {
-     "fieldName": "lblKaigoKihon1",
-     "items": [],
-     "controlType": "Label",
-     "width": "M",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "required": false,
-     "align": 0,
-     "text": "<<介護基本情報１>>",
-     "isPrivateInfo": false
-    },
-    {
-     "fieldName": "lblKaigoKihon2",
-     "items": [],
-     "controlType": "Label",
-     "width": "M",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "required": false,
-     "align": 0,
-     "text": "<<介護基本情報２>>",
-     "isPrivateInfo": false
-    }
-   ],
-   "controlType": "Panel",
-   "width": "1260",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": true,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
-   "onLoad": "",
-   "title": "",
-   "isOpen": true,
-   "canOpenAndClose": true,
-   "postParameterPanelNames": [
-    {
-     "postParameterPanelNames": "KyufuKanrihyoKaigoKihon"
-    }
-   ],
-   "requestSettings": [],
-   "hiddenInput": [],
-   "onOpen": "",
-   "onClose": "",
-   "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
-   "backgroundColor": 0,
-   "widthAuto": false,
-   "isGroupBox": false
-  },
-  {
-   "fieldName": "KyufuKanrihyoSerach",
+   "fieldName": "KyufuKanrihyoSearch",
    "items": [
     {
      "fieldName": "txtHihokenshaNo",
@@ -215,29 +182,33 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtHihokenshaNo_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": false,
      "required": false,
-     "text": "",
-     "isPrivateInfo": false,
-     "maxLength": 1000000000000,
+     "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
-     "readOnly": false,
      "placeHolder": "",
      "textKind": 2,
+     "isPrivateInfo": false,
      "isPassword": false,
      "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
+     "text": "",
      "suggest": [],
      "value": "",
      "labelLText": "被保険者",
      "labelRText": "",
-     "labelLWidth": "90",
+     "labelLWidth": "S",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "decorationClass": "",
      "permitCharactor": "",
      "formatLength": "8"
     },
@@ -245,7 +216,7 @@
      "fieldName": "btnHihokensha",
      "items": [],
      "controlType": "Button",
-     "width": "15",
+     "width": "20",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -258,12 +229,16 @@
      "authorityMode": 0,
      "marginLeft": "0",
      "marginRight": "XS",
+     "selectControlID": "btnHihokensha",
+     "helpMessageID": "",
+     "jpControlName": "",
      "text": "照",
+     "imageWidth": "",
+     "imageHeight": "",
      "onClick": "",
      "appearance": 0,
      "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": ""
+     "icon": 0
     },
     {
      "fieldName": "txtHihokenshaName",
@@ -282,21 +257,24 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtHihokenshaName_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": true,
      "required": false,
-     "text": "",
-     "isPrivateInfo": false,
-     "maxLength": 1000000000000,
+     "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
-     "readOnly": true,
      "placeHolder": "",
      "textKind": 0,
+     "isPrivateInfo": false,
      "isPassword": false,
      "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
+     "text": "",
      "suggest": [],
      "value": "",
      "labelLText": "",
@@ -305,6 +283,7 @@
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "decorationClass": "",
      "permitCharactor": ""
     },
     {
@@ -324,29 +303,33 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtJigyoshaNo_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": false,
      "required": false,
-     "text": "",
-     "isPrivateInfo": false,
-     "maxLength": 1000000000000,
+     "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
-     "readOnly": false,
      "placeHolder": "",
      "textKind": 2,
+     "isPrivateInfo": false,
      "isPassword": false,
      "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
+     "text": "",
      "suggest": [],
      "value": "",
      "labelLText": "支援事業者",
      "labelRText": "",
-     "labelLWidth": "90",
+     "labelLWidth": "S",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "decorationClass": "",
      "permitCharactor": "",
      "formatLength": "10"
     },
@@ -354,7 +337,7 @@
      "fieldName": "btnJigyosha",
      "items": [],
      "controlType": "Button",
-     "width": "15",
+     "width": "20",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -367,12 +350,16 @@
      "authorityMode": 0,
      "marginLeft": "0",
      "marginRight": "XS",
+     "selectControlID": "btnJigyosha",
+     "helpMessageID": "",
+     "jpControlName": "",
      "text": "照",
+     "imageWidth": "",
+     "imageHeight": "",
      "onClick": "",
      "appearance": 0,
      "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": ""
+     "icon": 0
     },
     {
      "fieldName": "txtJigyoshaName",
@@ -391,21 +378,24 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtJigyoshaName_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": true,
      "required": false,
-     "text": "",
-     "isPrivateInfo": false,
-     "maxLength": 1000000000000,
+     "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
-     "readOnly": true,
      "placeHolder": "",
      "textKind": 0,
+     "isPrivateInfo": false,
      "isPassword": false,
      "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
+     "text": "",
      "suggest": [],
      "value": "",
      "labelLText": "",
@@ -414,6 +404,7 @@
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "decorationClass": "",
      "permitCharactor": ""
     },
     {
@@ -433,8 +424,11 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "isPrivateInfo": false,
+     "selectControlID": "txtSearchKyufuTaishoKikan_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": false,
+     "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
@@ -442,27 +436,29 @@
      "onKeyPress": "",
      "labelLText": "給付対象期間",
      "labelRText": "",
-     "labelLWidth": "90",
+     "labelLWidth": "S",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "ymdKubun": 1,
+     "displayFormat": 0,
      "permitCharactor": "",
      "fromPlaceHolder": "",
      "toPlaceHolder": "",
-     "ymdKubun": 1,
-     "displayFormat": 0,
      "minDate": "",
      "maxDate": "",
      "fromText": "",
      "toText": "",
      "fromValue": "",
-     "toValue": ""
+     "toValue": "",
+     "fromSelectControlID": "txtSearchKyufuTaishoKikanFrom",
+     "toSelectControlID": "txtSearchKyufuTaishoKikanTo"
     },
     {
      "fieldName": "btnClear",
      "items": [],
      "controlType": "Button",
-     "width": "120",
+     "width": "140",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -475,12 +471,16 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnClear",
+     "helpMessageID": "",
+     "jpControlName": "",
      "text": "条件をクリアする",
+     "imageWidth": "",
+     "imageHeight": "",
      "onClick": "onClickClear",
      "appearance": 0,
      "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": ""
+     "icon": 0
     },
     {
      "fieldName": "btnSearch",
@@ -499,16 +499,20 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnSearch",
+     "helpMessageID": "",
+     "jpControlName": "",
      "text": "検索する",
+     "imageWidth": "",
+     "imageHeight": "",
      "onClick": "onClickSearch",
      "appearance": 0,
      "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": ""
+     "icon": 0
     }
    ],
    "controlType": "Panel",
-   "width": "1260",
+   "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -519,25 +523,28 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "XS",
+   "marginLeft": "0",
    "marginRight": "XS",
+   "selectControlID": "KyufuKanrihyoSearch",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "検索条件",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "KyufuKanrihyoSerach"
+     "postParameterPanelNames": "KyufuKanrihyoSearch"
     }
    ],
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbc/db/dbc/KyufuKanrihyoSerach/onLoad"
+     "requestUrl": "dbc/db/dbc/KyufuKanrihyoSearch/onLoad"
     },
     {
      "eventName": "onClickClear",
-     "requestUrl": "dbc/db/dbc/KyufuKanrihyoSerach/onClickClear"
+     "requestUrl": "dbc/db/dbc/KyufuKanrihyoSearch/onClickClear"
     }
    ],
    "hiddenInput": [],
@@ -552,7 +559,10 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
   },
   {
    "fieldName": "KyufuKanrihyoList",
@@ -561,7 +571,7 @@
      "fieldName": "dgKyufuKanrihyoList",
      "items": [],
      "controlType": "DataGrid",
-     "width": "1240",
+     "width": "1100",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -574,13 +584,23 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "dgKyufuKanrihyoList",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "height": "300",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
+      "isShowHeader": true,
       "isShowFooter": true,
-      "isShowFilter": true,
+      "isShowFilter": false,
       "isShowFilterButton": true,
       "isShowRowState": false,
+      "isShowSelectButtonColumn": true,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
       "header": {
        "combineColumns": [
         {
@@ -601,7 +621,7 @@
         "toolTip": "",
         "bgColor": 0,
         "width": 35,
-        "visible": true,
+        "visible": false,
         "cellType": 8,
         "cellDetails": {
          "cellType": 8,
@@ -615,25 +635,6 @@
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": "btnSelect"
-       },
-       {
-        "columnName": "",
-        "dataName": "txtTaishoYMInvisible",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 0,
-        "visible": false,
-        "cellType": 6,
-        "cellDetails": {
-         "cellType": 6,
-         "ymdKubun": 1,
-         "displayFormat": 0,
-         "onChange": ""
-        },
-        "align": 1,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": "txtTaishoYMInvisible"
        },
        {
         "columnName": "対象年月",
@@ -672,7 +673,7 @@
         "dataName": "txtHihoNo",
         "toolTip": "",
         "bgColor": 0,
-        "width": 100,
+        "width": 90,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -688,7 +689,7 @@
         "dataName": "txtHihokenshaName",
         "toolTip": "",
         "bgColor": 0,
-        "width": 400,
+        "width": 270,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -702,7 +703,7 @@
         "dataName": "txtJigyosha",
         "toolTip": "",
         "bgColor": 0,
-        "width": 400,
+        "width": 410,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
@@ -729,15 +730,17 @@
        }
       ]
      },
-     "height": "300",
      "onSort": "",
      "onSelect": "",
      "onSelectByDblClick": "onSelectKyufuKanrihyoList",
+     "onSelectBySelectButton": "onSelectKyufuKanrihyoList",
+     "onSelectByModifyButton": "",
+     "onSelectByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
      "dataSource": [],
-     "sortOrder": "defaultDataName4",
+     "sortOrder": "txtShinsaYM",
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1
@@ -754,21 +757,25 @@
      "nextFocusFieldName": "",
      "wrap": true,
      "dependencies": [],
-     "float": 2,
+     "float": 0,
      "toolTip": "",
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnResearch",
+     "helpMessageID": "",
+     "jpControlName": "",
      "text": "再検索する",
+     "imageWidth": "",
+     "imageHeight": "",
      "onClick": "onClickResearch",
      "appearance": 0,
      "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": ""
+     "icon": 0
     }
    ],
    "controlType": "Panel",
-   "width": "1260",
+   "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -779,8 +786,11 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "XS",
+   "marginLeft": "0",
    "marginRight": "XS",
+   "selectControlID": "KyufuKanrihyoList",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "給付管理票情報一覧",
    "isOpen": true,
@@ -816,7 +826,10 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
   },
   {
    "fieldName": "KyufuKanrihyo",
@@ -838,27 +851,30 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "required": false,
-     "text": "",
-     "isPrivateInfo": false,
+     "selectControlID": "txtTaishoYM_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": true,
+     "required": false,
      "placeHolder": "",
      "textKind": 0,
+     "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
+     "text": "",
      "value": "",
      "labelLText": "対象年月",
      "labelRText": "",
-     "labelLWidth": "60",
+     "labelLWidth": "70",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "permitCharactor": "./_-",
      "ymdKubun": 1,
-     "displayFormat": 0
+     "displayFormat": 0,
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "txtKaigoJotai",
@@ -877,29 +893,33 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtKaigoJotai_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": true,
      "required": false,
-     "text": "",
-     "isPrivateInfo": false,
-     "maxLength": 1000000000000,
+     "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
-     "readOnly": true,
      "placeHolder": "",
      "textKind": 0,
+     "isPrivateInfo": false,
      "isPassword": false,
      "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
+     "text": "",
      "suggest": [],
      "value": "",
      "labelLText": "要介護状態",
      "labelRText": "",
-     "labelLWidth": "75",
+     "labelLWidth": "85",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "decorationClass": "",
      "permitCharactor": ""
     },
     {
@@ -919,29 +939,33 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtHokenshaNo_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": true,
      "required": false,
-     "text": "",
-     "isPrivateInfo": false,
-     "maxLength": 1000000000000,
+     "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
-     "readOnly": true,
      "placeHolder": "",
      "textKind": 2,
+     "isPrivateInfo": false,
      "isPassword": false,
      "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
+     "text": "",
      "suggest": [],
      "value": "",
      "labelLText": "保険者番号",
      "labelRText": "",
-     "labelLWidth": "75",
+     "labelLWidth": "85",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "decorationClass": "",
      "permitCharactor": "",
      "formatLength": "8"
     },
@@ -962,27 +986,30 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "required": false,
-     "text": "",
-     "isPrivateInfo": false,
+     "selectControlID": "txtShinsaYM_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": true,
+     "required": false,
      "placeHolder": "",
      "textKind": 0,
+     "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
      "onChange": "",
      "onKeyPress": "",
+     "text": "",
      "value": "",
      "labelLText": "審査年月",
      "labelRText": "",
-     "labelLWidth": "60",
+     "labelLWidth": "70",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "permitCharactor": "./_-",
      "ymdKubun": 1,
-     "displayFormat": 0
+     "displayFormat": 0,
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "tabKyufuKanrihyo",
@@ -1005,8 +1032,11 @@
          "float": 0,
          "toolTip": "",
          "authorityMode": 0,
-         "marginLeft": 0,
-         "marginRight": 0,
+         "marginLeft": "0",
+         "marginRight": "0",
+         "selectControlID": "KyufuKanrihyoInfoHomonTsusho",
+         "helpMessageID": "",
+         "jpControlName": "",
          "relation": [],
          "marginTop": 0,
          "marginBottom": 0,
@@ -1030,10 +1060,16 @@
          "MeisaiListGridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
+          "isShowHeader": true,
           "isShowFooter": true,
           "isShowFilter": false,
           "isShowFilterButton": false,
           "isShowRowState": false,
+          "isShowSelectButtonColumn": false,
+          "isShowModifyButtonColumn": false,
+          "isShowDeleteButtonColumn": false,
+          "limitRowCount": 0,
+          "selectedRowCount": 0,
           "header": {
            "combineColumns": [],
            "frozenColumn": "",
@@ -1059,7 +1095,7 @@
             "dataName": "txtServiceShurui",
             "toolTip": "",
             "bgColor": 0,
-            "width": 200,
+            "width": 170,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -1091,7 +1127,7 @@
             "dataName": "txtJigyosha",
             "toolTip": "",
             "bgColor": 0,
-            "width": 500,
+            "width": 450,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -1107,7 +1143,7 @@
             "dataName": "txtJigyoshaKubun",
             "toolTip": "",
             "bgColor": 0,
-            "width": 300,
+            "width": 270,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -1120,7 +1156,13 @@
            }
           ]
          },
-         "MeisaiListHeight": "375"
+         "MeisaiListHeight": "175",
+         "MeisaiListOnSort": "",
+         "MeisaiListOnSelect": "",
+         "MeisaiListOnSelectByDblClick": "",
+         "MeisaiListOnSelectBySelectButton": "",
+         "MeisaiListOnSelectbyModifyButton": "",
+         "MeisaiListOnSelectByDeleteButton": ""
         }
        ],
        "controlType": "TabPanel",
@@ -1137,6 +1179,9 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "KyufuKanrihyoHomonTsusho",
+       "helpMessageID": "",
+       "jpControlName": "",
        "title": "訪問通所",
        "onActive": ""
       },
@@ -1158,8 +1203,11 @@
          "float": 0,
          "toolTip": "",
          "authorityMode": 0,
-         "marginLeft": 0,
-         "marginRight": 0,
+         "marginLeft": "0",
+         "marginRight": "0",
+         "selectControlID": "KyufuKanrihyoInfoTankiNyusho",
+         "helpMessageID": "",
+         "jpControlName": "",
          "relation": [],
          "marginTop": 0,
          "marginBottom": 0,
@@ -1183,10 +1231,16 @@
          "MeisaiListGridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
+          "isShowHeader": true,
           "isShowFooter": true,
           "isShowFilter": false,
           "isShowFilterButton": false,
           "isShowRowState": false,
+          "isShowSelectButtonColumn": false,
+          "isShowModifyButtonColumn": false,
+          "isShowDeleteButtonColumn": false,
+          "limitRowCount": 0,
+          "selectedRowCount": 0,
           "header": {
            "combineColumns": [],
            "frozenColumn": "",
@@ -1212,7 +1266,7 @@
             "dataName": "txtServiceShurui",
             "toolTip": "",
             "bgColor": 0,
-            "width": 200,
+            "width": 170,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -1244,7 +1298,7 @@
             "dataName": "txtJigyosha",
             "toolTip": "",
             "bgColor": 0,
-            "width": 500,
+            "width": 450,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -1260,7 +1314,7 @@
             "dataName": "txtJigyoshaKubun",
             "toolTip": "",
             "bgColor": 0,
-            "width": 300,
+            "width": 270,
             "visible": true,
             "cellType": 0,
             "cellDetails": {
@@ -1273,7 +1327,13 @@
            }
           ]
          },
-         "MeisaiListHeight": "375"
+         "MeisaiListHeight": "175",
+         "MeisaiListOnSort": "",
+         "MeisaiListOnSelect": "",
+         "MeisaiListOnSelectByDblClick": "",
+         "MeisaiListOnSelectBySelectButton": "",
+         "MeisaiListOnSelectbyModifyButton": "",
+         "MeisaiListOnSelectByDeleteButton": ""
         }
        ],
        "controlType": "TabPanel",
@@ -1290,12 +1350,15 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "KyufuKanrihyoTankiNyusho",
+       "helpMessageID": "",
+       "jpControlName": "",
        "title": "短期入所",
        "onActive": ""
       }
      ],
      "controlType": "TabContainer",
-     "width": "1240",
+     "width": "1100",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1306,8 +1369,11 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "tabKyufuKanrihyo",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onChange": "",
      "selectedItem": null,
      "tabpanelPosition": [
@@ -1315,7 +1381,8 @@
       "KyufuKanrihyoTankiNyusho"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "KyufuKanrihyoHomonTsusho"
+     "selectedItemFieldName": "KyufuKanrihyoHomonTsusho",
+     "initialTab": 0
     },
     {
      "fieldName": "KyufuKanrihyoInfoKyotaku",
@@ -1332,8 +1399,11 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": 0,
-     "marginRight": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "KyufuKanrihyoInfoKyotaku",
+     "helpMessageID": "",
+     "jpControlName": "",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
@@ -1357,10 +1427,16 @@
      "MeisaiListGridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
+      "isShowHeader": true,
       "isShowFooter": true,
       "isShowFilter": false,
       "isShowFilterButton": false,
       "isShowRowState": false,
+      "isShowSelectButtonColumn": false,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
       "header": {
        "combineColumns": [],
        "frozenColumn": "",
@@ -1386,7 +1462,7 @@
         "dataName": "txtServiceShurui",
         "toolTip": "",
         "bgColor": 0,
-        "width": 200,
+        "width": 170,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -1418,7 +1494,7 @@
         "dataName": "txtJigyosha",
         "toolTip": "",
         "bgColor": 0,
-        "width": 500,
+        "width": 450,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -1434,7 +1510,7 @@
         "dataName": "txtJigyoshaKubun",
         "toolTip": "",
         "bgColor": 0,
-        "width": 300,
+        "width": 270,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -1447,13 +1523,19 @@
        }
       ]
      },
-     "MeisaiListHeight": "175"
+     "MeisaiListHeight": "175",
+     "MeisaiListOnSort": "",
+     "MeisaiListOnSelect": "",
+     "MeisaiListOnSelectByDblClick": "",
+     "MeisaiListOnSelectBySelectButton": "",
+     "MeisaiListOnSelectbyModifyButton": "",
+     "MeisaiListOnSelectByDeleteButton": ""
     },
     {
      "fieldName": "btnReturn",
      "items": [],
      "controlType": "Button",
-     "width": "180",
+     "width": "210",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -1466,16 +1548,20 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "btnReturn",
+     "helpMessageID": "",
+     "jpControlName": "",
      "text": "給付管理票情報一覧に戻る",
+     "imageWidth": "",
+     "imageHeight": "",
      "onClick": "",
      "appearance": 0,
      "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": ""
+     "icon": 0
     }
    ],
    "controlType": "Panel",
-   "width": "1260",
+   "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -1486,8 +1572,11 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
+   "marginLeft": "0",
+   "marginRight": "0",
+   "selectControlID": "KyufuKanrihyo",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "給付管理票情報",
    "isOpen": true,
@@ -1522,7 +1611,10 @@
    "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
   }
  ],
  "controlType": null,
@@ -1539,6 +1631,9 @@
  "authorityMode": 0,
  "marginLeft": "XS",
  "marginRight": "XS",
+ "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
  "onLoad": "",
  "title": "給付管理票情報照会",
  "jsPathCollection": [],
@@ -1546,11 +1641,11 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "検索",
-   "showWizard": false,
+   "stateName": "管理票検索",
+   "showWizard": true,
    "visibleDivs": [
     {
-     "visibleDiv": "KyufuKanrihyoSerach",
+     "visibleDiv": "KyufuKanrihyoSearch",
      "panelState": "visible"
     },
     {
@@ -1563,7 +1658,7 @@
     {
      "fieldName": "btnSearch",
      "event": "onClick",
-     "transition": "給付管理票情報一覧"
+     "transition": "管理票一覧"
     },
     {
      "fieldName": "btnResearch",
@@ -1571,12 +1666,22 @@
      "transition": ""
     },
     {
-     "fieldName": "btnReturn",
+     "fieldName": "dgKyufuKanrihyoList[btnSelect]",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "dgKyufuKanrihyoList[btnSelect]",
+     "fieldName": "dgKyufuKanrihyoList",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgKyufuKanrihyoList",
+     "event": "onSelectBySelectButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
      "event": "onClick",
      "transition": ""
     }
@@ -1584,11 +1689,11 @@
   },
   {
    "order": "2",
-   "stateName": "給付管理票情報一覧",
-   "showWizard": false,
+   "stateName": "管理票一覧",
+   "showWizard": true,
    "visibleDivs": [
     {
-     "visibleDiv": "KyufuKanrihyoSerach",
+     "visibleDiv": "KyufuKanrihyoSearch",
      "panelState": "close"
     },
     {
@@ -1606,48 +1711,79 @@
     {
      "fieldName": "btnResearch",
      "event": "onClick",
-     "transition": "検索"
+     "transition": "管理票検索"
+    },
+    {
+     "fieldName": "dgKyufuKanrihyoList[btnSelect]",
+     "event": "onClick",
+     "transition": "給付管理票情報"
+    },
+    {
+     "fieldName": "dgKyufuKanrihyoList",
+     "event": "onSelectByDblClick",
+     "transition": "給付管理票情報"
+    },
+    {
+     "fieldName": "dgKyufuKanrihyoList",
+     "event": "onSelectBySelectButton",
+     "transition": "給付管理票情報"
     },
     {
      "fieldName": "btnReturn",
      "event": "onClick",
      "transition": ""
-    },
-    {
-     "fieldName": "dgKyufuKanrihyoList[btnSelect]",
-     "event": "onClick",
-     "transition": "給付管理票"
     }
    ]
   },
   {
    "order": "3",
-   "stateName": "給付管理票",
-   "showWizard": false,
+   "stateName": "給付管理票情報",
+   "showWizard": true,
    "visibleDivs": [
     {
      "visibleDiv": "KyufuKanrihyo",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "KyufuKanrihyoInfoHomonTsusho",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "KyufuKanrihyoInfoTankiNyusho",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "KyufuKanrihyoInfoKyotaku",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "KyufuKanrihyoKihon",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": ""
     },
     {
      "visibleDiv": "KyufuKanrihyoKaigoKihon",
-     "panelState": "visible"
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KyufuKanrihyoKaigoAtena",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KyufuKanrihyoKaigoKihon",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KyufuKanrihyoKaigoKihon",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
@@ -1663,14 +1799,24 @@
      "transition": ""
     },
     {
-     "fieldName": "btnReturn",
-     "event": "onClick",
-     "transition": "給付管理票情報一覧"
-    },
-    {
      "fieldName": "dgKyufuKanrihyoList[btnSelect]",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "dgKyufuKanrihyoList",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgKyufuKanrihyoList",
+     "event": "onSelectBySelectButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": "管理票一覧"
     }
    ]
   }
@@ -1688,15 +1834,20 @@
    "KyufuKanrihyoKihon"
   ],
   [
+   "KyufuKanrihyoKaigoAtena"
+  ],
+  [
    "KyufuKanrihyoKaigoKihon"
   ],
   [
-   "KyufuKanrihyoSerach"
+   "KyufuKanrihyoSearch"
   ],
   [
    "KyufuKanrihyoInfoKyotaku"
   ]
  ],
  "panelMargin": 1,
- "controlMargin": 1
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "commonButtonAreaData": []
 }
