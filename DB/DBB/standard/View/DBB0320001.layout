@@ -563,11 +563,19 @@
     {
      "eventName": "onClick_btnDemoShokai",
      "requestUrl": "dbb/db/dbb/FukaRirekiAll/onLoad_shokai"
+    },
+    {
+     "eventName": "onClick_SetaiKakunin",
+     "requestUrl": "dbb/db/dbb/FukaRirekiAll/onSelect_dgSetaiShotoku"
     }
    ],
    "hiddenInput": [
     {
      "propertyName": "mode",
+     "value": ""
+    },
+    {
+     "propertyName": "loadShikibetsuCode",
      "value": ""
     }
    ],
@@ -892,8 +900,8 @@
    "jpControlName": "",
    "onLoad": "",
    "title": "賦課履歴一覧",
-   "isOpen": false,
-   "canOpenAndClose": false,
+   "isOpen": true,
+   "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "FukaRireki"
@@ -2857,7 +2865,7 @@
      "controlType": "ButtonDialog",
      "width": "120",
      "visible": true,
-     "displayNone": false,
+     "displayNone": true,
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
@@ -2904,8 +2912,8 @@
    "jpControlName": "",
    "onLoad": "",
    "title": "賦課照会",
-   "isOpen": false,
-   "canOpenAndClose": false,
+   "isOpen": true,
+   "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "FukaShokaiGrandson"
@@ -4122,11 +4130,11 @@
              "selectControlID": "lblHonninKazeiValue",
              "helpMessageID": "",
              "jpControlName": "",
-             "text": "非課税",
+             "text": "",
              "required": false,
              "isPrivateInfo": false,
              "decorationClass": "",
-             "align": 1
+             "align": 0
             },
             {
              "fieldName": "lblZenHokenryoDankaiValue",
@@ -4148,11 +4156,11 @@
              "selectControlID": "lblZenHokenryoDankaiValue",
              "helpMessageID": "",
              "jpControlName": "",
-             "text": "第5段階特例",
+             "text": "",
              "required": false,
              "isPrivateInfo": false,
              "decorationClass": "",
-             "align": 1
+             "align": 0
             }
            ],
            "controlType": "TableCell",
@@ -4197,11 +4205,11 @@
              "selectControlID": "lblSetaiKazeiValue",
              "helpMessageID": "",
              "jpControlName": "",
-             "text": "非課税",
+             "text": "",
              "required": false,
              "isPrivateInfo": false,
              "decorationClass": "",
-             "align": 1
+             "align": 0
             },
             {
              "fieldName": "lblZenHokenryoritsuValue",
@@ -4223,7 +4231,7 @@
              "selectControlID": "lblZenHokenryoritsuValue",
              "helpMessageID": "",
              "jpControlName": "",
-             "text": "12,345,678",
+             "text": "",
              "required": false,
              "isPrivateInfo": false,
              "decorationClass": "",
@@ -4400,7 +4408,7 @@
              "required": false,
              "isPrivateInfo": false,
              "decorationClass": "",
-             "align": 1
+             "align": 0
             }
            ],
            "controlType": "TableCell",
@@ -4855,7 +4863,7 @@
              "required": false,
              "isPrivateInfo": false,
              "decorationClass": "",
-             "align": 0
+             "align": 1
             }
            ],
            "controlType": "TableCell",
@@ -5702,20 +5710,20 @@
          "TokuNofuGakuVisible12": true,
          "TokuNofuGakuVisible13": true,
          "TokuNofuGakuVisible14": true,
-         "FuchoKiText1": "1期",
-         "FuchoKiText2": "1期",
+         "FuchoKiText1": "",
+         "FuchoKiText2": "",
          "FuchoKiText3": "1期",
-         "FuchoKiText4": "1期",
-         "FuchoKiText5": "1期",
-         "FuchoKiText6": "1期",
-         "FuchoKiText7": "1期",
-         "FuchoKiText8": "1期",
-         "FuchoKiText9": "1期",
-         "FuchoKiText10": "1期",
-         "FuchoKiText11": "1期",
-         "FuchoKiText12": "1期",
-         "FuchoKiText13": "1期",
-         "FuchoKiText14": "14期",
+         "FuchoKiText4": "2期",
+         "FuchoKiText5": "3期",
+         "FuchoKiText6": "4期",
+         "FuchoKiText7": "5期",
+         "FuchoKiText8": "6期",
+         "FuchoKiText9": "7期",
+         "FuchoKiText10": "8期",
+         "FuchoKiText11": "9期",
+         "FuchoKiText12": "10期",
+         "FuchoKiText13": "",
+         "FuchoKiText14": "",
          "FuchoKiVisible1": true,
          "FuchoKiVisible2": true,
          "FuchoKiVisible3": true,
@@ -5760,18 +5768,18 @@
          "FuchoKibetsuGakuVisible14": true,
          "FuchoNofuGakuText1": "",
          "FuchoNofuGakuText2": "",
-         "FuchoNofuGakuText3": "12,345",
-         "FuchoNofuGakuText4": "12,345",
-         "FuchoNofuGakuText5": "12,345",
-         "FuchoNofuGakuText6": "12,345",
-         "FuchoNofuGakuText7": "12,345",
-         "FuchoNofuGakuText8": "12,345",
-         "FuchoNofuGakuText9": "12,345",
-         "FuchoNofuGakuText10": "12,345",
-         "FuchoNofuGakuText11": "12,345",
-         "FuchoNofuGakuText12": "12,345",
-         "FuchoNofuGakuText13": "12,345",
-         "FuchoNofuGakuText14": "12,345",
+         "FuchoNofuGakuText3": "",
+         "FuchoNofuGakuText4": "",
+         "FuchoNofuGakuText5": "",
+         "FuchoNofuGakuText6": "",
+         "FuchoNofuGakuText7": "",
+         "FuchoNofuGakuText8": "",
+         "FuchoNofuGakuText9": "",
+         "FuchoNofuGakuText10": "",
+         "FuchoNofuGakuText11": "",
+         "FuchoNofuGakuText12": "",
+         "FuchoNofuGakuText13": "",
+         "FuchoNofuGakuText14": "",
          "FuchoNofuGakuVisible1": true,
          "FuchoNofuGakuVisible2": true,
          "FuchoNofuGakuVisible3": true,
@@ -5932,14 +5940,14 @@
      "txtKijunYmdReadOnly": true,
      "txtKazeiNendoVisible": true,
      "txtKazeiNendoReadOnly": true,
-     "ddlKazeiNendoVisible": false,
+     "ddlKazeiNendoVisible": true,
      "ddlKazeiNendoDataSource": [
       {
        "key": "key0",
        "value": "平26"
       }
      ],
-     "btnSaihyojiVisible": false,
+     "btnSaihyojiVisible": true,
      "btnSaihyojiOnClick": "onClick_Saihyoji",
      "chkIchiranAllOnClick": "onChange_chkSetaiIchiranAll",
      "btnNarabeteHyojuVisible": true,
@@ -5952,9 +5960,11 @@
       "isShowFilter": false,
       "isShowFilterButton": false,
       "isShowRowState": false,
-      "isShowSelectButtonColumn": false,
+      "isShowSelectButtonColumn": true,
       "isShowModifyButtonColumn": false,
       "isShowDeleteButtonColumn": false,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
       "header": {
        "combineColumns": [
         {
@@ -6037,27 +6047,6 @@
        "headerHeight": 0
       },
       "columns": [
-       {
-        "columnName": "",
-        "dataName": "btnMeisai",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 60,
-        "visible": true,
-        "cellType": 8,
-        "cellDetails": {
-         "cellType": 8,
-         "text": "確定",
-         "onClick": "onClick_Kakutei",
-         "imageFileUrl": "",
-         "imageWidth": "",
-         "imageHeight": ""
-        },
-        "align": 1,
-        "resize": false,
-        "isPrivateInfo": false,
-        "sortKey": ""
-       },
        {
         "columnName": "識別コード",
         "dataName": "txtShikibetsuCode",
@@ -6337,7 +6326,7 @@
         "toolTip": "",
         "bgColor": 0,
         "width": 100,
-        "visible": false,
+        "visible": true,
         "cellType": 0,
         "cellDetails": null,
         "align": 1,
@@ -6390,9 +6379,13 @@
       ]
      },
      "dgSetaishotokuWidth": "1040",
-     "dgSetaishotokuOnSelect": "onClick_SetaiKakunin",
+     "dgSetaishotokuOnSelect": "",
      "dgSetaishotokuDbClick": "onClick_SetaiKakunin",
-     "txtSetaiCodeVisible": false
+     "dgSetaishotokuBySelectButton": "onClick_SetaiKakunin",
+     "ddlKazeiNendoDisplayNone": true,
+     "btnNarabeteHyoJiDisplayNone": false,
+     "txtSetaiCodeDisyplayNone": true,
+     "btnSaihyojiDisplayNone": true
     }
    ],
    "controlType": "Panel",
@@ -6414,7 +6407,7 @@
    "jpControlName": "",
    "onLoad": "",
    "title": "世帯員所得情報",
-   "isOpen": false,
+   "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
@@ -6436,6 +6429,10 @@
     {
      "eventName": "onClick_btnSetaiinShotoku",
      "requestUrl": "dbb/db/dbb/SetaiinShotoku/onClick_btnSetaiinnShotoku"
+    },
+    {
+     "eventName": "onClick_Hikaku",
+     "requestUrl": "dbb/db/dbb/SetaiinShotoku/onClick_DisplayedAligned"
     }
    ],
    "hiddenInput": [
@@ -6765,7 +6762,7 @@
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
-     "placeHolder": "平26.04",
+     "placeHolder": "",
      "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
@@ -7549,7 +7546,7 @@
    "controlType": "Panel",
    "width": "G12",
    "visible": true,
-   "displayNone": false,
+   "displayNone": true,
    "disabled": false,
    "accessKey": "",
    "nextFocusFieldName": "",
@@ -18944,6 +18941,16 @@
      "fieldName": "btnGemmen",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "SetaiShotokuIchiran_SetaiShotokuIchiran_dgSetaiShotoku",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "SetaiShotokuIchiran_SetaiShotokuIchiran_dgSetaiShotoku",
+     "event": "onSelectBySelectButton",
+     "transition": ""
     }
    ]
   },
@@ -19028,7 +19035,7 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "SetaiShotokuIchiran",
+     "visibleDiv": "11",
      "panelState": "visible",
      "fixedDiv": "No"
     }
@@ -19085,6 +19092,16 @@
     {
      "fieldName": "btnGemmen",
      "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "SetaiShotokuIchiran_SetaiShotokuIchiran_dgSetaiShotoku",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "SetaiShotokuIchiran_SetaiShotokuIchiran_dgSetaiShotoku",
+     "event": "onSelectBySelectButton",
      "transition": ""
     }
    ]
@@ -19165,6 +19182,16 @@
     {
      "fieldName": "btnGemmen",
      "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "SetaiShotokuIchiran_SetaiShotokuIchiran_dgSetaiShotoku",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "SetaiShotokuIchiran_SetaiShotokuIchiran_dgSetaiShotoku",
+     "event": "onSelectBySelectButton",
      "transition": ""
     }
    ]
@@ -19251,6 +19278,16 @@
      "fieldName": "btnGemmen",
      "event": "onClick",
      "transition": "明細減免"
+    },
+    {
+     "fieldName": "SetaiShotokuIchiran_SetaiShotokuIchiran_dgSetaiShotoku",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "SetaiShotokuIchiran_SetaiShotokuIchiran_dgSetaiShotoku",
+     "event": "onSelectBySelectButton",
+     "transition": ""
     }
    ]
   },
@@ -19348,6 +19385,16 @@
      "fieldName": "btnGemmen",
      "event": "onClick",
      "transition": "明細減免"
+    },
+    {
+     "fieldName": "SetaiShotokuIchiran_SetaiShotokuIchiran_dgSetaiShotoku",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "SetaiShotokuIchiran_SetaiShotokuIchiran_dgSetaiShotoku",
+     "event": "onSelectBySelectButton",
+     "transition": ""
     }
    ]
   },
@@ -19440,6 +19487,16 @@
      "fieldName": "btnGemmen",
      "event": "onClick",
      "transition": "明細減免"
+    },
+    {
+     "fieldName": "SetaiShotokuIchiran_SetaiShotokuIchiran_dgSetaiShotoku",
+     "event": "onSelectByDblClick",
+     "transition": "照会"
+    },
+    {
+     "fieldName": "SetaiShotokuIchiran_SetaiShotokuIchiran_dgSetaiShotoku",
+     "event": "onSelectBySelectButton",
+     "transition": "照会"
     }
    ]
   },
@@ -19542,6 +19599,16 @@
      "fieldName": "btnGemmen",
      "event": "onClick",
      "transition": "明細減免"
+    },
+    {
+     "fieldName": "SetaiShotokuIchiran_SetaiShotokuIchiran_dgSetaiShotoku",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "SetaiShotokuIchiran_SetaiShotokuIchiran_dgSetaiShotoku",
+     "event": "onSelectBySelectButton",
+     "transition": ""
     }
    ]
   },
@@ -19638,6 +19705,16 @@
     {
      "fieldName": "btnGemmen",
      "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "SetaiShotokuIchiran_SetaiShotokuIchiran_dgSetaiShotoku",
+     "event": "onSelectByDblClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "SetaiShotokuIchiran_SetaiShotokuIchiran_dgSetaiShotoku",
+     "event": "onSelectBySelectButton",
      "transition": ""
     }
    ]

@@ -266,6 +266,91 @@ var DBZ;
         });
 
 
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "dgSetaishotokuBySelectButton", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"])["onSelectBySelectButton"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"])["onSelectBySelectButton"] = value;
+                } else {
+                    this.layout.items[0].items[8]["onSelectBySelectButton"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "ddlKazeiNendoDisplayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[2]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "btnNarabeteHyoJiDisplayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[7]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "txtSetaiCodeDisyplayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[4]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "btnSaihyojiDisplayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[3]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
         SetaiShotokuIchiran_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
             Uz.JSControlUtil.registProperty("txtKijunYmdVisible");
@@ -283,6 +368,11 @@ var DBZ;
             Uz.JSControlUtil.registProperty("dgSetaishotokuWidth");
             Uz.JSControlUtil.registProperty("dgSetaishotokuOnSelect");
             Uz.JSControlUtil.registProperty("dgSetaishotokuDbClick");
+            Uz.JSControlUtil.registProperty("dgSetaishotokuBySelectButton");
+            Uz.JSControlUtil.registProperty("ddlKazeiNendoDisplayNone");
+            Uz.JSControlUtil.registProperty("btnNarabeteHyoJiDisplayNone");
+            Uz.JSControlUtil.registProperty("txtSetaiCodeDisyplayNone");
+            Uz.JSControlUtil.registProperty("btnSaihyojiDisplayNone");
         };
 
         SetaiShotokuIchiran_Design.prototype.getEditablePropertyInfo = function () {
@@ -302,6 +392,11 @@ var DBZ;
             editablePropertyInfo["dgSetaishotokuWidth"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]).getEditablePropertyInfo()["width"];
             editablePropertyInfo["dgSetaishotokuOnSelect"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]).getEditablePropertyInfo()["onSelect"];
             editablePropertyInfo["dgSetaishotokuDbClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]).getEditablePropertyInfo()["onSelectByDblClick"];
+            editablePropertyInfo["dgSetaishotokuBySelectButton"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]).getEditablePropertyInfo()["onSelectBySelectButton"];
+            editablePropertyInfo["ddlKazeiNendoDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["btnNarabeteHyoJiDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["txtSetaiCodeDisyplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["btnSaihyojiDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["displayNone"];
 
             return editablePropertyInfo;
         };
@@ -329,8 +424,10 @@ var DBZ;
                             "marginLeft": "0",
                             "marginRight": "XS",
                             "selectControlID": "txtSetaiIchiranKijunYMD_core",
-                            "required": false,
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": true,
+                            "required": false,
                             "placeHolder": "",
                             "isPrivateInfo": false,
                             "isPassword": false,
@@ -368,8 +465,10 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtSetaiIchiranKazeiNendo_core",
-                            "required": false,
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": true,
+                            "required": false,
                             "placeHolder": "",
                             "isPrivateInfo": false,
                             "isPassword": false,
@@ -391,6 +490,7 @@ var DBZ;
                             "textKind": 0,
                             "isComboBox": false,
                             "suggest": [],
+                            "decorationClass": "",
                             "permitCharactor": ""
                         },
                         {
@@ -411,6 +511,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "ddlSetaiIchiranKazeiNendo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "onFocus": "",
                             "onBlur": "",
                             "onChange": "",
@@ -420,13 +522,14 @@ var DBZ;
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "selectedItem": "",
+                            "selectedItem": "key0",
                             "dataSource": [
                                 {
                                     "key": "key0",
                                     "value": "平26"
                                 }
-                            ]
+                            ],
+                            "disabledItem": []
                         },
                         {
                             "fieldName": "btnSaiHyoji",
@@ -446,6 +549,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "btnSaiHyoji",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "text": "再表示する",
                             "onClick": "onClick_Saihyoji",
                             "appearance": 0,
@@ -472,8 +577,10 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtSetaiIchiranSetaiCode_core",
-                            "required": false,
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": true,
+                            "required": false,
                             "placeHolder": "",
                             "isPrivateInfo": false,
                             "isPassword": false,
@@ -495,6 +602,7 @@ var DBZ;
                             "textKind": 2,
                             "isComboBox": false,
                             "suggest": [],
+                            "decorationClass": "",
                             "permitCharactor": "",
                             "formatLength": 1
                         },
@@ -516,11 +624,13 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "chkSetaiIchiranAll_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "onChange": "",
                             "labelLText": "",
                             "labelLWidth": "S",
                             "labelLAlign": 2,
-                            "selectedItem": "",
+                            "selectedItem": null,
                             "dataSource": [
                                 {
                                     "key": "key0",
@@ -528,12 +638,15 @@ var DBZ;
                                 }
                             ],
                             "onClick": "",
+                            "icon": [],
                             "selectedItems": [],
                             "newLineItemNumber": 1,
                             "minCheckedItem": 0,
                             "maxCheckedItem": 2,
                             "spaceSize": "M",
-                            "isAllSelectable": false
+                            "isAllSelectable": false,
+                            "isAllSelectableBreakLine": false,
+                            "disabledItem": []
                         },
                         {
                             "fieldName": "lblSetaiIchiranMsg",
@@ -553,9 +666,12 @@ var DBZ;
                             "marginLeft": "0",
                             "marginRight": "XS",
                             "selectControlID": "lblSetaiIchiranMsg",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "required": false,
                             "isPrivateInfo": false,
                             "text": "※基準日時点の世帯員を表示しています。",
+                            "decorationClass": "",
                             "align": 0
                         },
                         {
@@ -576,6 +692,8 @@ var DBZ;
                             "marginLeft": "0",
                             "marginRight": "XS",
                             "selectControlID": "btnNarabeteHyoji",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "text": "並べて表示する",
                             "onClick": "onClick_Hikaku",
                             "appearance": 0,
@@ -602,15 +720,24 @@ var DBZ;
                             "marginLeft": "0",
                             "marginRight": "0",
                             "selectControlID": "dgSetaiShotoku",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "height": "Auto",
                             "dataSource": [],
                             "selectedItems": [],
                             "gridSetting": {
                                 "rowHeight": 40,
                                 "isMultiSelectable": true,
+                                "isShowHeader": true,
                                 "isShowFooter": true,
                                 "isShowFilter": false,
                                 "isShowFilterButton": false,
                                 "isShowRowState": false,
+                                "isShowSelectButtonColumn": true,
+                                "isShowModifyButtonColumn": false,
+                                "isShowDeleteButtonColumn": false,
+                                "limitRowCount": 0,
+                                "selectedRowCount": 0,
                                 "header": {
                                     "combineColumns": [
                                         {
@@ -693,27 +820,6 @@ var DBZ;
                                     "headerHeight": 0
                                 },
                                 "columns": [
-                                    {
-                                        "columnName": "",
-                                        "dataName": "btnMeisai",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 60,
-                                        "visible": true,
-                                        "cellType": 8,
-                                        "cellDetails": {
-                                            "cellType": 8,
-                                            "text": "確定",
-                                            "onClick": "onClick_Kakutei",
-                                            "imageFileUrl": "",
-                                            "imageWidth": "",
-                                            "imageHeight": ""
-                                        },
-                                        "align": 1,
-                                        "resize": false,
-                                        "isPrivateInfo": false,
-                                        "sortKey": ""
-                                    },
                                     {
                                         "columnName": "識別コード",
                                         "dataName": "txtShikibetsuCode",
@@ -1045,10 +1151,12 @@ var DBZ;
                                     }
                                 ]
                             },
-                            "height": "Auto",
                             "onSort": "",
                             "onSelect": "onClick_SetaiKakunin",
                             "onSelectByDblClick": "onClick_SetaiKakunin",
+                            "onSelectBySelectButton": "",
+                            "onSelectByModifyButton": "",
+                            "onSelectByDeleteButton": "",
                             "onOnlyRow": "",
                             "onNoRow": "",
                             "onMultiRows": "",
@@ -1059,7 +1167,7 @@ var DBZ;
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "L",
+                    "width": "G4",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -1073,6 +1181,8 @@ var DBZ;
                     "marginLeft": "XS",
                     "marginRight": "XS",
                     "selectControlID": "SetaiShotokuIchiran",
+                    "helpMessageID": "",
+                    "jpControlName": "",
                     "onLoad": "",
                     "title": "",
                     "marginTop": "Default",
@@ -1096,7 +1206,9 @@ var DBZ;
                     "backgroundColor": 0,
                     "widthAuto": true,
                     "panelDisplay": 0,
-                    "isGroupBox": false
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto"
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -1111,9 +1223,11 @@ var DBZ;
             "float": 0,
             "toolTip": "",
             "authorityMode": 0,
-            "marginLeft": 0,
-            "marginRight": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
             "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
             "relation": [],
             "businessId": "DBZ",
             "controlName": "SetaiShotokuIchiran",
@@ -1194,6 +1308,31 @@ var DBZ;
                     "publicChildFieldName": "dgSetaiShotoku",
                     "publicChildProperty": "onSelectByDblClick",
                     "newPropertyName": "dgSetaishotokuDbClick"
+                },
+                {
+                    "publicChildFieldName": "dgSetaiShotoku",
+                    "publicChildProperty": "onSelectBySelectButton",
+                    "newPropertyName": "dgSetaishotokuBySelectButton"
+                },
+                {
+                    "publicChildFieldName": "ddlSetaiIchiranKazeiNendo",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "ddlKazeiNendoDisplayNone"
+                },
+                {
+                    "publicChildFieldName": "btnNarabeteHyoji",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "btnNarabeteHyoJiDisplayNone"
+                },
+                {
+                    "publicChildFieldName": "txtSetaiIchiranSetaiCode",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "txtSetaiCodeDisyplayNone"
+                },
+                {
+                    "publicChildFieldName": "btnSaiHyoji",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "btnSaihyojiDisplayNone"
                 }
             ],
             "dataPassingForDialog": [],
