@@ -25,8 +25,6 @@ public class JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHiDiv extends Panel {
     private RadioButton radNinteiShinseichuKubun;
     @JsonProperty("radServiceKubun")
     private RadioButton radServiceKubun;
-    @JsonProperty("lblTokureiKeigenSochiTaisho")
-    private Label lblTokureiKeigenSochiTaisho;
     @JsonProperty("radTokureiKeigenSochiTaisho")
     private RadioButton radTokureiKeigenSochiTaisho;
     @JsonProperty("txtShokuhiFutanGendogaku")
@@ -70,16 +68,6 @@ public class JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHiDiv extends Panel {
     @JsonProperty("radServiceKubun")
     public void setRadServiceKubun(RadioButton radServiceKubun) {
         this.radServiceKubun=radServiceKubun;
-    }
-
-    @JsonProperty("lblTokureiKeigenSochiTaisho")
-    public Label getLblTokureiKeigenSochiTaisho() {
-        return lblTokureiKeigenSochiTaisho;
-    }
-
-    @JsonProperty("lblTokureiKeigenSochiTaisho")
-    public void setLblTokureiKeigenSochiTaisho(Label lblTokureiKeigenSochiTaisho) {
-        this.lblTokureiKeigenSochiTaisho=lblTokureiKeigenSochiTaisho;
     }
 
     @JsonProperty("radTokureiKeigenSochiTaisho")
