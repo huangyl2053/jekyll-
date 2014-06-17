@@ -18,10 +18,8 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.KyotakuKeikaku
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.dgKyotakuKeikakuTodokedeRirekiList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
@@ -84,16 +82,9 @@ public class KyotakuKeikakuTodokedeDetail {
         }
     }
 
-//    /**
-//     * 履歴一覧の適用開始日を降順でソートするためのクラス。
-//     */
-//    private static class DateComparator implements Comparator<dgKyotakuKeikakuTodokedeRirekiList_Row> {
-//
-//        @Override
-//        public int compare(dgKyotakuKeikakuTodokedeRirekiList_Row o1, dgKyotakuKeikakuTodokedeRirekiList_Row o2) {
-//            return o2.getTxtKeikakuTekiyoKaishiYMDInvisible().getValue().compareTo(o1.getTxtKeikakuTekiyoKaishiYMDInvisible().getValue());
-//        }
-//    }
+    /**
+     * 履歴一覧の適用開始日を降順でソートするためのクラス。
+     */
     private static class DateComparator implements Comparator<dgKyotakuKeikakuTodokedeRirekiList_Row> {
 
         @Override
@@ -347,10 +338,6 @@ public class KyotakuKeikakuTodokedeDetail {
         KyotakuKeikakuTodokedeJigyoshaDiv jigyosha = meisai.getKyotakuKeikakuTodokedeJigyosha();
         KyotakuKeikakuTodokedeHenkoNaiyoDiv henkoNaiyo = meisai.getKyotakuKeikakuTodokedeHenkoNaiyo();
 
-//        initMeisai(panel);
-//        if (pattern.equals(画面表示.初期表示)) {
-//            meisai.getTxtTodokedeKubun().clearValue();
-//        } else
         if (pattern.equals(画面表示.新規届出)) {
             btnVisible(meisai.getBtnTodokedeKakutei());
             btnVisible(meisai.getBtnTodokedeClear());
@@ -383,62 +370,13 @@ public class KyotakuKeikakuTodokedeDetail {
                 || pattern.equals(画面表示.変更届出)
                 || pattern.equals(画面表示.届出内容修正)) {
 
-//            todokedesha.getTxtTodokedeshaName().setValue(new RString("電算　太郎"));
-//            todokedesha.getTxtTodokedeshaKana().setValue(new RString("ﾃﾞﾝｻﾝ ﾀﾛｳ"));
-//            todokedesha.getTxtTodokedeshaTelNo().setValue(new RString("123-456-7890"));
-//            todokedesha.getTxtTodokedeshaYubinNo().setValue(new YubinNo("381-0001"));
-//            todokedesha.getTxtTodokedeshaJusho().setValue(new RString("長野市七瀬中町1111-11"));
-//
-//            jigyosha.getRadKeikakuSakuseiKubun().setSelectedItem(new RString("key0"));
             jigyosha.getTxtItakuJigyoshaCode().setVisible(false);
             jigyosha.getTxtItakuJigyoshaCode().setDisplayNone(true);
             jigyosha.getBtnItakuJigyosha().setVisible(false);
             jigyosha.getBtnItakuJigyosha().setDisplayNone(true);
             jigyosha.getTxtItakuJigyoshaName().setVisible(false);
             jigyosha.getTxtItakuJigyoshaName().setDisplayNone(true);
-//            jigyosha.getTxtServiceShurui1().setValue(new RString("居宅介護"));
-//            jigyosha.getTxtServiceShurui2().setValue(new RString("小規模介護"));
-
-//            if (pattern.equals(画面表示.新規届出)) {
-//                meisai.getTxtTodokedeYMD().setValue(new RDate("20140601"));
-//                meisai.getTxtTekiyoKikan().setFromValue(new RDate("20140601"));
-//
-//                jigyosha.getTxtJigyoshaCode().setValue(new RString("1111111111"));
-//                jigyosha.getTxtJigyoshaName().setValue(new RString("電算介護調査センター"));
-//                jigyosha.getTxtJigyoshaYubinNo().setValue(new YubinNo("381-0001"));
-//                jigyosha.getTxtJigyoshaJusho().setValue(new RString("長野市緑町３丁目14-15"));
-//                jigyosha.getTxtKanrishaName().setValue(new RString("電算　次郎"));
-//                jigyosha.getTxtJigyoshaTelNo().setValue(new RString("123-456-7899"));
-//                jigyosha.getTxtItakuJigyoshaCode().setValue(new RString("7777777777"));
-//                jigyosha.getTxtItakuJigyoshaName().setValue(new RString("電算介護サービスセンター"));
-//            } else if (pattern.equals(画面表示.変更届出)) {
-//                meisai.getTxtTodokedeYMD().setValue(new RDate("20140701"));
-//                meisai.getTxtTekiyoKikan().setFromValue(new RDate("20140701"));
-//
-//                jigyosha.getTxtJigyoshaCode().setValue(new RString("3333333333"));
-//                jigyosha.getTxtJigyoshaName().setValue(new RString("県町介護調査センター"));
-//                jigyosha.getTxtJigyoshaYubinNo().setValue(new YubinNo("381-0028"));
-//                jigyosha.getTxtJigyoshaJusho().setValue(new RString("長野市県町15-3"));
-//                jigyosha.getTxtKanrishaName().setValue(new RString("県町　太郎"));
-//                jigyosha.getTxtJigyoshaTelNo().setValue(new RString("123-456-8888"));
-//                jigyosha.getTxtItakuJigyoshaCode().setValue(new RString("8888888888"));
-//                jigyosha.getTxtItakuJigyoshaName().setValue(new RString("県町介護サービスセンター"));
-//            } else if (pattern.equals(画面表示.届出内容修正)) {
-//                meisai.getTxtTodokedeYMD().setValue(new RDate("20130601"));
-//                meisai.getTxtTekiyoKikan().setFromValue(new RDate("20130601"));
-//                meisai.getTxtTekiyoKikan().setToValue(new RDate("20140531"));
-//
-//                jigyosha.getTxtJigyoshaCode().setValue(new RString("2222222222"));
-//                jigyosha.getTxtJigyoshaName().setValue(new RString("新町介護調査センター"));
-//                jigyosha.getTxtJigyoshaYubinNo().setValue(new YubinNo("391-0012"));
-//                jigyosha.getTxtJigyoshaJusho().setValue(new RString("長野市新町大字乙1-7"));
-//                jigyosha.getTxtKanrishaName().setValue(new RString("新町　太郎"));
-//                jigyosha.getTxtJigyoshaTelNo().setValue(new RString("123-498-9999"));
-//                jigyosha.getTxtItakuJigyoshaCode().setValue(new RString("9999999999"));
-//                jigyosha.getTxtItakuJigyoshaName().setValue(new RString("新町介護サービスセンター"));
-//            }
         }
-
     }
 
     /**
@@ -460,100 +398,52 @@ public class KyotakuKeikakuTodokedeDetail {
         KyotakuKeikakuTodokedeHenkoNaiyoDiv henkoNaiyo = meisai.getKyotakuKeikakuTodokedeHenkoNaiyo();
 
         initMeisai(panel);
+        ControlGenerator cg = new ControlGenerator(getYaml().get(4));
         if (pattern.equals(画面表示.初期表示)) {
             meisai.getTxtTodokedeKubun().clearValue();
         } else if (pattern.equals(画面表示.新規届出)) {
-//            btnVisible(meisai.getBtnTodokedeKakutei());
-//            btnVisible(meisai.getBtnTodokedeClear());
-//            btnInvisible(meisai.getBtnTodokedeDelete());
-//            btnInvisible(meisai.getBtnTodokedeTeisei());
-//            henkoNaiyo.setVisible(false);
-//            henkoNaiyo.setDisplayNone(true);
-            meisai.getTxtTodokedeKubun().setValue(new RString("新規"));
+            cg = new ControlGenerator(getYaml().get(5));
+            meisai.getTxtTodokedeKubun().setValue(cg.getAsRString("届出区分"));
         } else if (pattern.equals(画面表示.変更届出)) {
-//            btnVisible(meisai.getBtnTodokedeKakutei());
-//            btnVisible(meisai.getBtnTodokedeClear());
-//            btnInvisible(meisai.getBtnTodokedeDelete());
-//            btnInvisible(meisai.getBtnTodokedeTeisei());
-//            henkoNaiyo.setVisible(true);
-//            henkoNaiyo.setDisplayNone(false);
-            meisai.getTxtTodokedeKubun().setValue(new RString("変更"));
-            henkoNaiyo.getTxtHenkoYMD().setValue(new RDate("20140701"));
-            henkoNaiyo.getTxtHenkoJiyu().setValue(new RString("介護者の希望により変更する。"));
+            cg = new ControlGenerator(getYaml().get(6));
+            meisai.getTxtTodokedeKubun().setValue(cg.getAsRString("届出区分"));
         } else if (pattern.equals(画面表示.届出内容修正)) {
-//            btnInvisible(meisai.getBtnTodokedeKakutei());
-//            btnInvisible(meisai.getBtnTodokedeClear());
-//            btnVisible(meisai.getBtnTodokedeDelete());
-//            btnVisible(meisai.getBtnTodokedeTeisei());
+            cg = new ControlGenerator(getYaml().get(7));
             meisai.getTxtTodokedeKubun().setValue(selectRow.getTxtTodokedeKubun());
-            if (!selectRow.getTxtTodokedeKubun().equals(new RString("新規"))) {
-//                henkoNaiyo.setVisible(false);
-//                henkoNaiyo.setDisplayNone(true);
-//            } else {
-//                henkoNaiyo.setVisible(true);
-//                henkoNaiyo.setDisplayNone(false);
-                henkoNaiyo.getTxtHenkoYMD().setValue(new RDate("20140701"));
-                henkoNaiyo.getTxtHenkoJiyu().setValue(new RString("介護者の希望により変更する。"));
-            }
         }
 
         if (pattern.equals(画面表示.新規届出)
                 || pattern.equals(画面表示.変更届出)
                 || pattern.equals(画面表示.届出内容修正)) {
 
-            todokedesha.getTxtTodokedeshaName().setValue(new RString("電算　太郎"));
-            todokedesha.getTxtTodokedeshaKana().setValue(new RString("ﾃﾞﾝｻﾝ ﾀﾛｳ"));
-            todokedesha.getTxtTodokedeshaTelNo().setValue(new RString("123-456-7890"));
-            todokedesha.getTxtTodokedeshaYubinNo().setValue(new YubinNo("381-0001"));
-            todokedesha.getTxtTodokedeshaJusho().setValue(new RString("長野市七瀬中町1111-11"));
+            meisai.getTxtTodokedeYMD().setValue(cg.getAsRDate("届出日"));
+            meisai.getTxtTekiyoKikan().setFromValue(cg.getAsRDate("適用期間開始日"));
+            if (pattern.equals(画面表示.届出内容修正)) {
+                meisai.getTxtTekiyoKikan().setToValue(cg.getAsRDate("適用期間終了日"));
+            }
 
-            jigyosha.getRadKeikakuSakuseiKubun().setSelectedItem(new RString("key0"));
-//            jigyosha.getTxtItakuJigyoshaCode().setVisible(false);
-//            jigyosha.getTxtItakuJigyoshaCode().setDisplayNone(true);
-//            jigyosha.getBtnItakuJigyosha().setVisible(false);
-//            jigyosha.getBtnItakuJigyosha().setDisplayNone(true);
-//            jigyosha.getTxtItakuJigyoshaName().setVisible(false);
-//            jigyosha.getTxtItakuJigyoshaName().setDisplayNone(true);
-            jigyosha.getTxtServiceShurui1().setValue(new RString("居宅介護"));
-            jigyosha.getTxtServiceShurui2().setValue(new RString("小規模介護"));
+            todokedesha.getTxtTodokedeshaName().setValue(cg.getAsRString("届出者氏名"));
+            todokedesha.getTxtTodokedeshaKana().setValue(cg.getAsRString("届出者カナ"));
+            todokedesha.getTxtTodokedeshaTelNo().setValue(cg.getAsRString("届出者電話番号"));
+            todokedesha.getTxtTodokedeshaYubinNo().setValue(cg.getAsYubinNo("届出者郵便番号"));
+            todokedesha.getTxtTodokedeshaJusho().setValue(cg.getAsRString("届出者住所"));
 
-            if (pattern.equals(画面表示.新規届出)) {
-                meisai.getTxtTodokedeYMD().setValue(new RDate("20140601"));
-                meisai.getTxtTekiyoKikan().setFromValue(new RDate("20140601"));
+            jigyosha.getRadKeikakuSakuseiKubun().setSelectedItem(cg.getAsRString("事業者作成区分"));
+            jigyosha.getTxtJigyoshaCode().setValue(cg.getAsRString("事業者コード"));
+            jigyosha.getTxtJigyoshaName().setValue(cg.getAsRString("事業者名"));
+            jigyosha.getTxtServiceShurui1().setValue(cg.getAsRString("事業者サービス種類１"));
+            jigyosha.getTxtServiceShurui2().setValue(cg.getAsRString("事業者サービス種類２"));
+            jigyosha.getTxtKanrishaName().setValue(cg.getAsRString("事業者管理者名"));
+            jigyosha.getTxtJigyoshaTelNo().setValue(cg.getAsRString("事業者電話番号"));
+            jigyosha.getTxtJigyoshaYubinNo().setValue(cg.getAsYubinNo("事業者郵便番号"));
+            jigyosha.getTxtJigyoshaJusho().setValue(cg.getAsRString("事業者住所"));
+            jigyosha.getTxtItakuJigyoshaCode().setValue(cg.getAsRString("委託先事業者コード"));
+            jigyosha.getTxtItakuJigyoshaName().setValue(cg.getAsRString("委託先事業者名"));
 
-                jigyosha.getTxtJigyoshaCode().setValue(new RString("1111111111"));
-                jigyosha.getTxtJigyoshaName().setValue(new RString("電算介護調査センター"));
-                jigyosha.getTxtJigyoshaYubinNo().setValue(new YubinNo("381-0001"));
-                jigyosha.getTxtJigyoshaJusho().setValue(new RString("長野市緑町３丁目14-15"));
-                jigyosha.getTxtKanrishaName().setValue(new RString("電算　次郎"));
-                jigyosha.getTxtJigyoshaTelNo().setValue(new RString("123-456-7899"));
-                jigyosha.getTxtItakuJigyoshaCode().setValue(new RString("7777777777"));
-                jigyosha.getTxtItakuJigyoshaName().setValue(new RString("電算介護サービスセンター"));
-            } else if (pattern.equals(画面表示.変更届出)) {
-                meisai.getTxtTodokedeYMD().setValue(new RDate("20140701"));
-                meisai.getTxtTekiyoKikan().setFromValue(new RDate("20140701"));
-
-                jigyosha.getTxtJigyoshaCode().setValue(new RString("3333333333"));
-                jigyosha.getTxtJigyoshaName().setValue(new RString("県町介護調査センター"));
-                jigyosha.getTxtJigyoshaYubinNo().setValue(new YubinNo("381-0028"));
-                jigyosha.getTxtJigyoshaJusho().setValue(new RString("長野市県町15-3"));
-                jigyosha.getTxtKanrishaName().setValue(new RString("県町　太郎"));
-                jigyosha.getTxtJigyoshaTelNo().setValue(new RString("123-456-8888"));
-                jigyosha.getTxtItakuJigyoshaCode().setValue(new RString("8888888888"));
-                jigyosha.getTxtItakuJigyoshaName().setValue(new RString("県町介護サービスセンター"));
-            } else if (pattern.equals(画面表示.届出内容修正)) {
-                meisai.getTxtTodokedeYMD().setValue(new RDate("20130601"));
-                meisai.getTxtTekiyoKikan().setFromValue(new RDate("20130601"));
-                meisai.getTxtTekiyoKikan().setToValue(new RDate("20140531"));
-
-                jigyosha.getTxtJigyoshaCode().setValue(new RString("2222222222"));
-                jigyosha.getTxtJigyoshaName().setValue(new RString("新町介護調査センター"));
-                jigyosha.getTxtJigyoshaYubinNo().setValue(new YubinNo("391-0012"));
-                jigyosha.getTxtJigyoshaJusho().setValue(new RString("長野市新町大字乙1-7"));
-                jigyosha.getTxtKanrishaName().setValue(new RString("新町　太郎"));
-                jigyosha.getTxtJigyoshaTelNo().setValue(new RString("123-498-9999"));
-                jigyosha.getTxtItakuJigyoshaCode().setValue(new RString("9999999999"));
-                jigyosha.getTxtItakuJigyoshaName().setValue(new RString("新町介護サービスセンター"));
+            if (pattern.equals(画面表示.変更届出)
+                    || (pattern.equals(画面表示.届出内容修正) && !selectRow.getTxtTodokedeKubun().equals(new RString("新規")))) {
+                henkoNaiyo.getTxtHenkoYMD().setValue(cg.getAsRDate("変更日"));
+                henkoNaiyo.getTxtHenkoJiyu().setValue(cg.getAsRString("変更事由"));
             }
         }
     }
