@@ -9,9 +9,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.KaniShinsakaiKaisaiKekkaDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShinsaShienTaishoshaIchiranDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgShinsaTaishoshaIchiran1_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5020001.KaniShinsakaiKaisaiKekkaDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5020001.ShinsaShienTaishoshaIchiranDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5020001.dgShinsaTaishoshaIchiran1_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -63,7 +64,7 @@ public class ShinsaShienTaishoshaIchiran {
     private static List<dgShinsaTaishoshaIchiran1_Row> createRowTaishoIchiran1TestData() {
         List<dgShinsaTaishoshaIchiran1_Row> arrayData = new ArrayList<>();
 
-        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("ShinsakaiShinsaTaishoshaList.yml"));
+        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("dbe5020001/ShinsakaiShinsaTaishoshaList.yml"));
         for (Map info : targetSource) {
             arrayData.add(toDgShinsaTaishoshaIchiran1_Row(info));
         }
@@ -72,31 +73,25 @@ public class ShinsaShienTaishoshaIchiran {
     }
 
     private static dgShinsaTaishoshaIchiran1_Row toDgShinsaTaishoshaIchiran1_Row(Map map) {
-        RString shinseiKubun = _toRString(map.get("申請区分"));
-        RString jokyo = _toRString(map.get("状況"));
-        RString zenIchiji = _toRString(map.get("前回一次"));
-        RString zenNiji = _toRString(map.get("前回二次"));
-        RString ichijiHantei = _toRString(map.get("一次判定"));
-        RString nijiHantei = _toRString(map.get("二次判定"));
-        RString zenKikan = _toRString(map.get("前回期間"));
-        RString kikan = _toRString(map.get("今回期間"));
-        RString nenrei = _toRString(map.get("年齢"));
-        RString sex = _toRString(map.get("性別"));
-        RString hihoKubun = _toRString(map.get("被保険者区分"));
-        RString shinseibi = _toRString(map.get("申請日"));
-        RString ninteiStartDay = _toRString(map.get("認定有効期間開始日"));
+        ControlGenerator cg = new ControlGenerator(map);
+        RString shinseiKubun = cg.getAsRString("申請区分");
+        RString jokyo = cg.getAsRString("状況");
+        RString zenIchiji = cg.getAsRString("前回一次");
+        RString zenNiji = cg.getAsRString("前回二次");
+        RString ichijiHantei = cg.getAsRString("一次判定");
+        RString nijiHantei = cg.getAsRString("二次判定");
+        RString zenKikan = cg.getAsRString("前回期間");
+        RString kikan = cg.getAsRString("今回期間");
+        RString nenrei = cg.getAsRString("年齢");
+        RString sex = cg.getAsRString("性別");
+        RString hihoKubun = cg.getAsRString("被保険者区分");
+        RString shinseibi = cg.getAsRString("申請日");
+        RString ninteiStartDay = cg.getAsRString("認定有効期間開始日");
 
         dgShinsaTaishoshaIchiran1_Row row = new dgShinsaTaishoshaIchiran1_Row(shinseiKubun,
                 jokyo, zenIchiji, zenNiji, ichijiHantei, nijiHantei, zenKikan, kikan,
                 nenrei, sex, hihoKubun, shinseibi, ninteiStartDay);
         return row;
-    }
-
-    private static RString _toRString(Object obj) {
-        if (obj == null) {
-            return RString.EMPTY;
-        }
-        return new RString(obj.toString());
     }
 
 }

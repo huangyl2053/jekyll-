@@ -7,14 +7,13 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.TaishoShinsakaiDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5030002.TaishoShinsakaiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 対象審査会の情報を編集します。
@@ -31,31 +30,26 @@ public class TaishoShinsakai {
      */
     public ResponseData onLoadData(TaishoShinsakaiDiv div) {
         ResponseData<TaishoShinsakaiDiv> response = new ResponseData<>();
-        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("ShinsaKekkaTaishoShinsakai.yml"));
-        Map map = targetSource.get(0);
+        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("dbe5030002/ShinsaKekkaTaishoShinsakai.yml"));
+        ControlGenerator cg = new ControlGenerator(targetSource.get(0));
 
-        System.out.println(_toRString(map.get("合議体")));
-        div.getTxtGogitai().setValue(_toRString(map.get("合議体")));
-        int startTimeHour = new Integer(map.get("開始時間時").toString());
-        int startTimeMin = new Integer(map.get("開始時間分").toString());
+        div.getTxtGogitai().setValue(cg.getAsRString("合議体"));
+        int startTimeHour = new Integer(cg.getAsRString("開始時間時").toString());
+        int startTimeMin = new Integer(cg.getAsRString("開始時間分").toString());
         div.getTxtShinsaStartTime().setValue(RTime.of(startTimeHour, startTimeMin));
-        int endTimeHour = new Integer(map.get("終了時間時").toString());
-        int endTimeMin = new Integer(map.get("終了時間分").toString());
+        int endTimeHour = new Integer(cg.getAsRString("終了時間時").toString());
+        int endTimeMin = new Integer(cg.getAsRString("終了時間分").toString());
         div.getTxtShinsaEndTime().setValue(RTime.of(endTimeHour, endTimeMin));
-        div.getTxtShinsaTaishoshaSu().setValue(new Decimal(map.get("対象人数").toString()));
-        div.getTxtShinsaTaishoMax().setValue(new Decimal(map.get("可能人数").toString()));
-        div.getTxtShinsakaiYoteibi().setValue(new FlexibleDate(map.get("開催予定日").toString()));
-        div.getTxtShinsakaiKaisaibi().setValue(new FlexibleDate(map.get("開催日").toString()));
+        div.getTxtShinsaTaishoshaSu().setValue(cg.getAsDecimal("対象人数"));
+        div.getTxtShinsaTaishoMax().setValue(cg.getAsDecimal("可能人数"));
+        div.getTxtShinsakaiYoteibi().setValue(cg.getAsFlexibleDate("開催予定日"));
+        div.getTxtShinsakaiKaisaibi().setValue(cg.getAsFlexibleDate("開催日"));
+
+        RString shinsakaiMeisho = (RString) ViewStateHolder.get("審査会番号", RString.class);
+        div.getTxtShinsakaiNo().setValue(shinsakaiMeisho);
 
         response.data = div;
         return response;
-    }
-
-    private static RString _toRString(Object obj) {
-        if (obj == null) {
-            return RString.EMPTY;
-        }
-        return new RString(obj.toString());
     }
 
 }

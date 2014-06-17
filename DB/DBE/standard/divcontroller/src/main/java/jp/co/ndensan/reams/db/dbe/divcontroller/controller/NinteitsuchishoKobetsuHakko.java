@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NinteitsuchishoKobetsuHakkoDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgSearchResult_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5040002.NinteitsuchishoKobetsuHakkoDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5040002.dgSearchResult_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
@@ -34,16 +34,16 @@ public class NinteitsuchishoKobetsuHakko {
     public ResponseData onLoad(NinteitsuchishoKobetsuHakkoDiv div) {
         ResponseData<NinteitsuchishoKobetsuHakkoDiv> response = new ResponseData<>();
 
-        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("DemoCity.yml"));
-        Map map = targetSource.get(0);
-        if (_toRString(map.get("保険者番号")).equalsIgnoreCase(new RString("152264"))) {
+        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("DemoCity.yml"));
+        ControlGenerator cg = new ControlGenerator(targetSource.get(0));
+        if (cg.getAsRString("保険者番号").equalsIgnoreCase(new RString("152264"))) {
             div.getNinteitsuchishoKobetsuHakkoTargetSearch().getDdlHokensha().setSelectedItem(new RString("2"));
-            div.getNinteitsuchishoKobetsuHakkoTargetList().getTxtHokenshaNo().setValue(_toRString(map.get("保険者番号")));
-            div.getNinteitsuchishoKobetsuHakkoTargetList().getTxtHokensaName().setValue(_toRString(map.get("保険者名称")));
+            div.getNinteitsuchishoKobetsuHakkoTargetList().getTxtHokenshaNo().setValue(cg.getAsRString("保険者番号"));
+            div.getNinteitsuchishoKobetsuHakkoTargetList().getTxtHokensaName().setValue(cg.getAsRString("保険者名称"));
         } else {
             div.getNinteitsuchishoKobetsuHakkoTargetSearch().getDdlHokensha().setSelectedItem(new RString("1"));
-            div.getNinteitsuchishoKobetsuHakkoTargetList().getTxtHokenshaNo().setValue(_toRString(map.get("保険者番号")));
-            div.getNinteitsuchishoKobetsuHakkoTargetList().getTxtHokensaName().setValue(_toRString(map.get("保険者名称")));
+            div.getNinteitsuchishoKobetsuHakkoTargetList().getTxtHokenshaNo().setValue(cg.getAsRString("保険者番号"));
+            div.getNinteitsuchishoKobetsuHakkoTargetList().getTxtHokensaName().setValue(cg.getAsRString("保険者名称"));
         }
 
         List<KeyValueDataSource> keyList = new ArrayList<>();
@@ -67,9 +67,9 @@ public class NinteitsuchishoKobetsuHakko {
         RString ymlFile;
 
         if (div.getNinteitsuchishoKobetsuHakkoTargetSearch().getHihokensha().getTxtHihokenshaNo().getValue().equalsIgnoreCase(RString.EMPTY)) {
-            ymlFile = new RString("NinteitsuchishoKobetsuHakkoTargetList_All.yml");
+            ymlFile = new RString("dbe5040002/NinteitsuchishoKobetsuHakkoTargetList_All.yml");
         } else {
-            ymlFile = new RString("NinteitsuchishoKobetsuHakkoTargetList_Kobetsu.yml");
+            ymlFile = new RString("dbe5040002/NinteitsuchishoKobetsuHakkoTargetList_Kobetsu.yml");
         }
 
         div.getNinteitsuchishoKobetsuHakkoTargetList().getDgSearchResult().setDataSource(createRowSearchResultTestData(ymlFile));
@@ -80,7 +80,7 @@ public class NinteitsuchishoKobetsuHakko {
 
     private List<dgSearchResult_Row> createRowSearchResultTestData(RString ymlFile) {
         List<dgSearchResult_Row> arrayData = new ArrayList<>();
-        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(ymlFile);
+        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(ymlFile);
         for (Map info : targetSource) {
             arrayData.add(toDgSearchResult_Row(info));
         }
@@ -89,39 +89,27 @@ public class NinteitsuchishoKobetsuHakko {
     }
 
     private dgSearchResult_Row toDgSearchResult_Row(Map map) {
-        RString shikibetsuCode = _toRString(map.get("識別コード"));
-        RString hihokenshaNo = _toRString(map.get("被保険者番号"));
-        RString shimei = _toRString(map.get("漢字氏名"));
-        RString kanaShimei = _toRString(map.get("カナ氏名"));
-        RString shimeiAndKanaShimei = _toRString(map.get("氏名"));
-        RString gender = _toRString(map.get("性別"));
-        TextBoxFlexibleDate birthDay = toTextBoxFlexibleDate(new FlexibleDate(map.get("誕生日").toString()));
-        TextBoxFlexibleDate shinseiDate = toTextBoxFlexibleDate(new FlexibleDate(map.get("申請日").toString()));
-        RString shinseiKubunShinsei = _toRString(map.get("申請区分申請"));
-        RString shinseiKubunHorei = _toRString(map.get("申請区分法令"));
-        TextBoxFlexibleDate ninteiDate = toTextBoxFlexibleDate(new FlexibleDate(map.get("認定日").toString()));
-        RString yokaigodo = _toRString(map.get("要介護度"));
-        RString yukokikan = _toRString(map.get("有効期間月数"));
-        TextBoxFlexibleDate startDate = toTextBoxFlexibleDate(new FlexibleDate(map.get("有効期間開始日").toString()));
-        TextBoxFlexibleDate endDate = toTextBoxFlexibleDate(new FlexibleDate(map.get("有効期間終了日").toString()));
+        ControlGenerator cg = new ControlGenerator(map);
+        RString shikibetsuCode = cg.getAsRString("識別コード");
+        RString hihokenshaNo = cg.getAsRString("被保険者番号");
+        RString shimei = cg.getAsRString("漢字氏名");
+        RString kanaShimei = cg.getAsRString("カナ氏名");
+        RString shimeiAndKanaShimei = cg.getAsRString("氏名");
+        RString gender = cg.getAsRString("性別");
+        TextBoxFlexibleDate birthDay = cg.getAsTextBoxFlexibleDate("誕生日");
+        TextBoxFlexibleDate shinseiDate = cg.getAsTextBoxFlexibleDate("申請日");
+        RString shinseiKubunShinsei = cg.getAsRString("申請区分申請");
+        RString shinseiKubunHorei = cg.getAsRString("申請区分法令");
+        TextBoxFlexibleDate ninteiDate = cg.getAsTextBoxFlexibleDate("認定日");
+        RString yokaigodo = cg.getAsRString("要介護度");
+        RString yukokikan = cg.getAsRString("有効期間月数");
+        TextBoxFlexibleDate startDate = cg.getAsTextBoxFlexibleDate("有効期間開始日");
+        TextBoxFlexibleDate endDate = cg.getAsTextBoxFlexibleDate("有効期間終了日");
 
         dgSearchResult_Row row = new dgSearchResult_Row(shikibetsuCode, hihokenshaNo, shimei,
                 kanaShimei, shimeiAndKanaShimei, gender, birthDay, shinseiDate, shinseiKubunShinsei, shinseiKubunHorei, ninteiDate,
                 yokaigodo, yukokikan, startDate, endDate);
         return row;
-    }
-
-    private RString _toRString(Object obj) {
-        if (obj == null) {
-            return RString.EMPTY;
-        }
-        return new RString(obj.toString());
-    }
-
-    private TextBoxFlexibleDate toTextBoxFlexibleDate(FlexibleDate date) {
-        TextBoxFlexibleDate txtBox = new TextBoxFlexibleDate();
-        txtBox.setValue(date);
-        return txtBox;
     }
 
 }

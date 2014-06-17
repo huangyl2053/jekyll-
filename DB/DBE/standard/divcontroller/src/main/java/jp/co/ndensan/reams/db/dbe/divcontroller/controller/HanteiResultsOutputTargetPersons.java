@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5030003.HanteiResultsOutputTargetPersonsDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5030003.dgShinsakaiTargetPersons_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
@@ -41,7 +41,7 @@ public class HanteiResultsOutputTargetPersons {
 
     private List<dgShinsakaiTargetPersons_Row> createRowTargetPersonTestData() {
         List<dgShinsakaiTargetPersons_Row> arrayData = new ArrayList<>();
-        List<HashMap> targetSource = YamlLoader.FOR_DBE.loadAsList(new RString("HanteiResultsOutputTargetPersons.yml"));
+        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("dbe5030003/HanteiResultsOutputTargetPersons.yml"));
         for (Map info : targetSource) {
             arrayData.add(toDgShinsakaiTargetPersons_Row(info));
         }
@@ -50,44 +50,32 @@ public class HanteiResultsOutputTargetPersons {
     }
 
     private dgShinsakaiTargetPersons_Row toDgShinsakaiTargetPersons_Row(Map map) {
-        RString jun = _toRString(map.get("順"));
-        RString hokenshaNo = _toRString(map.get("保険者"));
-        RString hokenshaMeisho = _toRString(map.get("保険者名称"));
-        RString hihokenshaNo = _toRString(map.get("被保番号"));
-        RString hihokenshaKubun = _toRString(map.get("区分"));
-        RString shimei = _toRString(map.get("漢字氏名"));
-        RString kanaShimei = _toRString(map.get("カナ氏名"));
-        RString shimeiAndKanaShimei = _toRString(map.get("氏名"));
-        RString gender = _toRString(map.get("性別"));
-        TextBoxFlexibleDate shinseiDate = toTextBoxFlexibleDate(new FlexibleDate(map.get("申請日").toString()));
-        RString shinseiKubun = _toRString(map.get("申請区分"));
-        RString ichijiHanteiResult = _toRString(map.get("一次判定結果"));
-        RString yokaigodo = _toRString(map.get("要介護度"));
-        RString yukokikan = _toRString(map.get("有効期間月数"));
-        TextBoxFlexibleDate startDate = toTextBoxFlexibleDate(new FlexibleDate(map.get("有効期間開始日").toString()));
-        TextBoxFlexibleDate endDate = toTextBoxFlexibleDate(new FlexibleDate(map.get("有効期間終了日").toString()));
-        RString latestYokaigodo = _toRString(map.get("前回要介護度"));
-        RString latestYukokikan = _toRString(map.get("前回有効期間"));
-        TextBoxFlexibleDate latestStartDate = toTextBoxFlexibleDate(new FlexibleDate(map.get("前回有効開始日").toString()));
-        TextBoxFlexibleDate latestEndDate = toTextBoxFlexibleDate(new FlexibleDate(map.get("前回有効終了日").toString()));
+        ControlGenerator cg = new ControlGenerator(map);
+        RString jun = cg.getAsRString("順");
+        RString hokenshaNo = cg.getAsRString("保険者");
+        RString hokenshaMeisho = cg.getAsRString("保険者名称");
+        RString hihokenshaNo = cg.getAsRString("被保番号");
+        RString hihokenshaKubun = cg.getAsRString("区分");
+        RString shimei = cg.getAsRString("漢字氏名");
+        RString kanaShimei = cg.getAsRString("カナ氏名");
+        RString shimeiAndKanaShimei = cg.getAsRString("氏名");
+        RString gender = cg.getAsRString("性別");
+        TextBoxFlexibleDate shinseiDate = cg.getAsTextBoxFlexibleDate("申請日");
+        RString shinseiKubun = cg.getAsRString("申請区分");
+        RString ichijiHanteiResult = cg.getAsRString("一次判定結果");
+        RString yokaigodo = cg.getAsRString("要介護度");
+        RString yukokikan = cg.getAsRString("有効期間月数");
+        TextBoxFlexibleDate startDate = cg.getAsTextBoxFlexibleDate("有効期間開始日");
+        TextBoxFlexibleDate endDate = cg.getAsTextBoxFlexibleDate("有効期間終了日");
+        RString latestYokaigodo = cg.getAsRString("前回要介護度");
+        RString latestYukokikan = cg.getAsRString("前回有効期間");
+        TextBoxFlexibleDate latestStartDate = cg.getAsTextBoxFlexibleDate("前回有効開始日");
+        TextBoxFlexibleDate latestEndDate = cg.getAsTextBoxFlexibleDate("前回有効終了日");
 
         dgShinsakaiTargetPersons_Row row = new dgShinsakaiTargetPersons_Row(jun, hokenshaNo, hokenshaMeisho, hihokenshaNo, hihokenshaKubun, shimei,
                 kanaShimei, shimeiAndKanaShimei, gender, shinseiDate, shinseiKubun, ichijiHanteiResult, yokaigodo, yukokikan, startDate, endDate,
                 latestYokaigodo, latestYukokikan, latestStartDate, latestEndDate);
         return row;
-    }
-
-    private RString _toRString(Object obj) {
-        if (obj == null) {
-            return RString.EMPTY;
-        }
-        return new RString(obj.toString());
-    }
-
-    private TextBoxFlexibleDate toTextBoxFlexibleDate(FlexibleDate date) {
-        TextBoxFlexibleDate txtBox = new TextBoxFlexibleDate();
-        txtBox.setValue(date);
-        return txtBox;
     }
 
 }

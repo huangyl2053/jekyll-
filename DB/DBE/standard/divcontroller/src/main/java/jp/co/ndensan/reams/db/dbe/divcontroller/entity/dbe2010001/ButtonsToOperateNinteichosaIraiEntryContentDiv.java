@@ -21,10 +21,10 @@ public class ButtonsToOperateNinteichosaIraiEntryContentDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnToEntryChosaIrai")
-    private Button btnToEntryChosaIrai;
     @JsonProperty("btnToRepair")
     private Button btnToRepair;
+    @JsonProperty("btnToEntryChosaIrai")
+    private Button btnToEntryChosaIrai;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,16 +32,6 @@ public class ButtonsToOperateNinteichosaIraiEntryContentDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("btnToEntryChosaIrai")
-    public Button getBtnToEntryChosaIrai() {
-        return btnToEntryChosaIrai;
-    }
-
-    @JsonProperty("btnToEntryChosaIrai")
-    public void setBtnToEntryChosaIrai(Button btnToEntryChosaIrai) {
-        this.btnToEntryChosaIrai=btnToEntryChosaIrai;
-    }
-
     @JsonProperty("btnToRepair")
     public Button getBtnToRepair() {
         return btnToRepair;
@@ -50,6 +40,16 @@ public class ButtonsToOperateNinteichosaIraiEntryContentDiv extends Panel {
     @JsonProperty("btnToRepair")
     public void setBtnToRepair(Button btnToRepair) {
         this.btnToRepair=btnToRepair;
+    }
+
+    @JsonProperty("btnToEntryChosaIrai")
+    public Button getBtnToEntryChosaIrai() {
+        return btnToEntryChosaIrai;
+    }
+
+    @JsonProperty("btnToEntryChosaIrai")
+    public void setBtnToEntryChosaIrai(Button btnToEntryChosaIrai) {
+        this.btnToEntryChosaIrai=btnToEntryChosaIrai;
     }
 
 }
