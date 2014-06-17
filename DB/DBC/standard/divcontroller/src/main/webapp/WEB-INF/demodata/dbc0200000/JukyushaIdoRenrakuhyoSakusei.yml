@@ -1,6 +1,0 @@
-## YAML Template.
----
-- JukyushaIdoRenrakuhyoSakuseiId: 0
-  処理対象年月: 20140601
-  再処理区分: !!str 未処理
-  ファイル名: !!str ファイル１

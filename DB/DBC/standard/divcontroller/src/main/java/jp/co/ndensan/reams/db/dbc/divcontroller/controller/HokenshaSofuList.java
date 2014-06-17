@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 public class HokenshaSofuList {
 
     private List<HashMap> getHokenshaSofuListYaml() {
-        return YamlLoader.FOR_DBC.loadAsList(new RString("dbc0200000/HokenshaSofuList.yml"));
+        return YamlLoader.DBC.loadAsList(new RString("dbc0200000/HokenshaSofuList.yml"));
     }
 
     /**
@@ -50,7 +50,7 @@ public class HokenshaSofuList {
 
         List<HashMap> sourceList = getHokenshaSofuListYaml();
         dgRowList.clear();
-        for (int i = 1; i < 14; i++) {
+        for (int i = 1; i < sourceList.size(); i++) {
             dgRowList.add(create保険者情報送付一覧アイテム(
                     sourceList.get(i).get("送付情報").toString(),
                     sourceList.get(i).get("前月").toString(),

@@ -22,8 +22,10 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtShoriYM_core",
-     "required": false,
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": false,
+     "required": false,
      "placeHolder": "",
      "isPrivateInfo": false,
      "isPassword": false,
@@ -41,7 +43,8 @@
      "ymdKubun": 1,
      "displayFormat": 0,
      "value": "2009/01/31",
-     "textKind": 0
+     "textKind": 0,
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "lblHokenshaSofuList",
@@ -61,9 +64,12 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "lblHokenshaSofuList",
+     "helpMessageID": "",
+     "jpControlName": "",
      "required": false,
      "isPrivateInfo": false,
      "text": "○…処理済み、×…未処理、－…処理なし",
+     "decorationClass": "",
      "align": 2
     },
     {
@@ -84,19 +90,21 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "btnDisplay",
+     "helpMessageID": "",
+     "jpControlName": "",
      "text": "表示する",
      "onClick": "",
+     "icon": 0,
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0
+     "imageHeight": ""
     },
     {
      "fieldName": "dgHokenshaSofuList",
      "items": [],
      "controlType": "DataGrid",
-     "width": "980",
+     "width": "910",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -110,40 +118,29 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "dgHokenshaSofuList",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "height": "442",
+     "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
+      "isShowHeader": true,
       "isShowFooter": true,
       "isShowFilter": false,
       "isShowFilterButton": false,
       "isShowRowState": false,
+      "isShowSelectButtonColumn": true,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
       "header": {
        "combineColumns": [],
        "frozenColumn": "",
        "headerHeight": 0
       },
       "columns": [
-       {
-        "columnName": "",
-        "dataName": "btnSelect",
-        "toolTip": "",
-        "bgColor": 0,
-        "width": 35,
-        "visible": true,
-        "cellType": 8,
-        "cellDetails": {
-         "cellType": 8,
-         "text": "選",
-         "onClick": "onSelectHokenshaSofuList",
-         "imageFileUrl": "",
-         "imageWidth": "",
-         "imageHeight": ""
-        },
-        "align": 1,
-        "resize": true,
-        "isPrivateInfo": false,
-        "sortKey": "btnSelect"
-       },
        {
         "columnName": "送付情報",
         "dataName": "txtSofuJoho",
@@ -158,14 +155,14 @@
         "align": 0,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtSofuJoho"
+        "sortKey": ""
        },
        {
         "columnName": "前々月",
         "dataName": "txtZenZengetsu",
         "toolTip": "",
         "bgColor": 0,
-        "width": 100,
+        "width": 90,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -174,14 +171,14 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtZenZengetsu"
+        "sortKey": ""
        },
        {
         "columnName": "前月",
         "dataName": "txtZengetsu",
         "toolTip": "",
         "bgColor": 0,
-        "width": 100,
+        "width": 90,
         "visible": true,
         "cellType": 0,
         "cellDetails": {
@@ -190,7 +187,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtZengetsu"
+        "sortKey": ""
        },
        {
         "columnName": "当月状態",
@@ -206,32 +203,33 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtTogetsuJotai"
+        "sortKey": ""
        },
        {
         "columnName": "当月処理日時",
         "dataName": "txtShoriNichiji",
         "toolTip": "",
         "bgColor": 0,
-        "width": 200,
+        "width": 180,
         "visible": true,
         "cellType": 0,
         "cellDetails": null,
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtShoriNichiji"
+        "sortKey": ""
        }
       ]
      },
-     "height": "378",
      "onSort": "",
      "onSelect": "",
-     "onSelectByDblClick": "",
+     "onSelectByDblClick": "onSelectHokenshaSofuList",
+     "onSelectBySelectButton": "onSelectHokenshaSofuList",
+     "onSelectByModifyButton": "",
+     "onSelectByDeleteButton": "",
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "dataSource": [],
      "sortOrder": "",
      "isAscending": true,
      "filterList": [],
@@ -239,7 +237,7 @@
     }
    ],
    "controlType": "Panel",
-   "width": "1000",
+   "width": "G10",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -250,11 +248,13 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
+   "marginLeft": "0",
+   "marginRight": "0",
    "selectControlID": "HokenshaSofuList",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
-   "title": "保険者情報送付一覧",
+   "title": "送付一覧",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
@@ -281,7 +281,9 @@
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
-   "isGroupBox": false
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
   },
   {
    "fieldName": "JukyushaIdoRenrakuhyoSakusei",
@@ -304,8 +306,10 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtShoriTaishoYM_core",
-     "required": false,
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": true,
+     "required": false,
      "placeHolder": "",
      "isPrivateInfo": false,
      "isPassword": false,
@@ -323,7 +327,8 @@
      "ymdKubun": 1,
      "displayFormat": 0,
      "value": "",
-     "textKind": 0
+     "textKind": 0,
+     "permitCharactor": "./_-"
     },
     {
      "fieldName": "txtSaiShoriKubun",
@@ -343,8 +348,10 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtSaiShoriKubun_core",
-     "required": false,
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": true,
+     "required": false,
      "placeHolder": "",
      "isPrivateInfo": false,
      "isPassword": false,
@@ -365,7 +372,9 @@
      "textAlign": 0,
      "textKind": 0,
      "isComboBox": false,
-     "suggest": []
+     "suggest": [],
+     "decorationClass": "",
+     "permitCharactor": ""
     },
     {
      "fieldName": "txtFileName",
@@ -385,8 +394,10 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtFileName_core",
-     "required": false,
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": true,
+     "required": false,
      "placeHolder": "",
      "isPrivateInfo": false,
      "isPassword": false,
@@ -407,11 +418,13 @@
      "textAlign": 0,
      "textKind": 0,
      "isComboBox": false,
-     "suggest": []
+     "suggest": [],
+     "decorationClass": "",
+     "permitCharactor": ""
     }
    ],
    "controlType": "Panel",
-   "width": "1120",
+   "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -422,9 +435,11 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
+   "marginLeft": "0",
+   "marginRight": "0",
    "selectControlID": "JukyushaIdoRenrakuhyoSakusei",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "受給者異動連絡票情報作成",
    "isOpen": true,
@@ -457,7 +472,9 @@
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
-   "isGroupBox": false
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
   },
   {
    "fieldName": "JukyushaIdoSofuTaishoshaList",
@@ -477,9 +494,11 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": 0,
-     "marginRight": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
      "selectControlID": "JukyushaIdoSofuTaishoshaListPrintSetting",
+     "helpMessageID": "",
+     "jpControlName": "",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
@@ -515,9 +534,11 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": 0,
-     "marginRight": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
      "selectControlID": "JukyushaIdoSofuTaishoshaListOutputOrder",
+     "helpMessageID": "",
+     "jpControlName": "",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
@@ -525,11 +546,12 @@
      "controlName": "ChohyoShutsuryokujun",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": ""
+     "dialogCancelEventNameForDialog": "",
+     "ChohyoShutsuryokujun_width": "G12"
     }
    ],
    "controlType": "PanelPublish",
-   "width": "1120",
+   "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -540,9 +562,11 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
+   "marginLeft": "0",
+   "marginRight": "0",
    "selectControlID": "JukyushaIdoSofuTaishoshaList",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "受給者異動情報送付対象者リスト",
    "isOpen": true,
@@ -576,104 +600,10 @@
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto",
    "isPublish": true,
    "isEmptyControl": false
-  },
-  {
-   "fieldName": "KyotsuPanel",
-   "items": [
-    {
-     "fieldName": "btnExec",
-     "items": [],
-     "controlType": "Button",
-     "width": "140",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "btnExec",
-     "text": "連絡票を作成する",
-     "onClick": "",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0
-    },
-    {
-     "fieldName": "btnReturn",
-     "items": [],
-     "controlType": "Button",
-     "width": "140",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "btnReturn",
-     "text": "送付一覧に戻る",
-     "onClick": "",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0
-    }
-   ],
-   "controlType": "Panel",
-   "width": "1000",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": true,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
-   "selectControlID": "KyotsuPanel",
-   "onLoad": "",
-   "title": "",
-   "isOpen": true,
-   "canOpenAndClose": true,
-   "postParameterPanelNames": [
-    {
-     "postParameterPanelNames": "KyotsuPanel"
-    }
-   ],
-   "requestSettings": [],
-   "hiddenInput": [],
-   "onOpen": "",
-   "onClose": "",
-   "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
-   "backgroundColor": 0,
-   "widthAuto": false,
-   "panelDisplay": 0,
-   "isGroupBox": false
   }
  ],
  "controlType": null,
@@ -691,6 +621,8 @@
  "marginLeft": "XS",
  "marginRight": "XS",
  "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
  "onLoad": "",
  "title": "保険者情報送付",
  "jsPathCollection": [],
@@ -698,8 +630,8 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "保険者情報送付一覧",
-   "showWizard": false,
+   "stateName": "送付一覧",
+   "showWizard": true,
    "visibleDivs": [
     {
      "visibleDiv": "HokenshaSofuList",
@@ -709,9 +641,14 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "dgHokenshaSofuList[btnSelect]",
-     "event": "onClick",
-     "transition": "受給者異動連絡票作成"
+     "fieldName": "dgHokenshaSofuList",
+     "event": "onSelectBySelectButton",
+     "transition": "連絡票作成"
+    },
+    {
+     "fieldName": "dgHokenshaSofuList",
+     "event": "onSelectByDblClick",
+     "transition": "連絡票作成"
     },
     {
      "fieldName": "btnReturn",
@@ -722,8 +659,8 @@
   },
   {
    "order": "2",
-   "stateName": "受給者異動連絡票作成",
-   "showWizard": false,
+   "stateName": "連絡票作成",
+   "showWizard": true,
    "visibleDivs": [
     {
      "visibleDiv": "JukyushaIdoSofuTaishoshaList",
@@ -749,14 +686,19 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "dgHokenshaSofuList[btnSelect]",
-     "event": "onClick",
+     "fieldName": "dgHokenshaSofuList",
+     "event": "onSelectBySelectButton",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgHokenshaSofuList",
+     "event": "onSelectByDblClick",
      "transition": ""
     },
     {
      "fieldName": "btnReturn",
      "event": "onClick",
-     "transition": "保険者情報送付一覧"
+     "transition": "送付一覧"
     }
    ]
   }
@@ -780,11 +722,88 @@
   ],
   [
    "JukyushaIdoSofuTaishoshaListOutputOrder"
-  ],
-  [
-   "KyotsuPanel"
   ]
  ],
  "panelMargin": 1,
- "controlMargin": 1
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "1",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnReturn",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnReturn",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "送付一覧へ",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "prefixText": "",
+      "suffixText": ""
+     }
+    },
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnExec",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnExec",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "連絡票を作成する",
+      "onClick": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "prefixText": "",
+      "suffixText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "連絡票作成"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  }
+ ]
 }

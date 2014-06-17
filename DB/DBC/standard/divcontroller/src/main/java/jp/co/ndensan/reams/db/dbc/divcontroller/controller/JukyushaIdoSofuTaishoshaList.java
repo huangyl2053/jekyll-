@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class JukyushaIdoSofuTaishoshaList {
 
     private List<HashMap> getYaml() {
-        return YamlLoader.FOR_DBC.loadAsList(new RString("dbc0200000/JukyushaIdoSofuTaishoshaList.yml"));
+        return YamlLoader.DBC.loadAsList(new RString("dbc0200000/JukyushaIdoSofuTaishoshaList.yml"));
     }
 
     /**
