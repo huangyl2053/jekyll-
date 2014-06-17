@@ -1,0 +1,512 @@
+﻿{
+ "fieldName": "Page",
+ "items": [
+  {
+   "fieldName": "TokuchoIdoJohoSakusei",
+   "items": [
+    {
+     "fieldName": "dgTokuchoIdoJoho",
+     "items": [],
+     "controlType": "DataGrid",
+     "width": "680",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "dgTokuchoIdoJoho",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "height": "Auto",
+     "gridSetting": {
+      "rowHeight": 30,
+      "isMultiSelectable": false,
+      "isShowHeader": true,
+      "isShowFooter": false,
+      "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": false,
+      "isShowSelectButtonColumn": false,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
+      "header": {
+       "combineColumns": [
+        {
+         "combineColumnName": "通知内容",
+         "combineItem": [
+          "txtShikakuSoshutsu",
+          "txtJutoku",
+          "txtKarichoshuGakuShusei",
+          "txtTsuikaIrai"
+         ]
+        }
+       ],
+       "frozenColumn": "",
+       "headerHeight": 1
+      },
+      "columns": [
+       {
+        "columnName": "",
+        "dataName": "chkTaisho",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 60,
+        "visible": true,
+        "cellType": 2,
+        "cellDetails": {
+         "cellType": 2,
+         "disabled": false,
+         "onChange": ""
+        },
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       },
+       {
+        "columnName": "月",
+        "dataName": "txtTsuki",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 60,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 8,
+         "text": "作成する",
+         "onClick": "",
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": ""
+        },
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       },
+       {
+        "columnName": "処理日時",
+        "dataName": "txtShoriNichiji",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 200,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       },
+       {
+        "columnName": "資格喪失等",
+        "dataName": "txtShikakuSoshutsu",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       },
+       {
+        "columnName": "住所地特例<br>該当者",
+        "dataName": "txtJutoku",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       },
+       {
+        "columnName": "仮徴収額<br>変更",
+        "dataName": "txtKarichoshuGakuShusei",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       },
+       {
+        "columnName": "特徴追加<br>依頼",
+        "dataName": "txtTsuikaIrai",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": ""
+       }
+      ]
+     },
+     "onSort": "",
+     "onSelect": "",
+     "onSelectByDblClick": "",
+     "onSelectBySelectButton": "",
+     "onSelectByModifyButton": "",
+     "onSelectByDeleteButton": "",
+     "onOnlyRow": "",
+     "onNoRow": "",
+     "onMultiRows": "",
+     "dataSource": [],
+     "sortOrder": "",
+     "isAscending": true,
+     "filterList": [],
+     "activeRowId": -1
+    },
+    {
+     "fieldName": "linTokuchoIdoJojo",
+     "items": [],
+     "controlType": "HorizontalLine",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "linTokuchoIdoJojo",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "size": "Default"
+    },
+    {
+     "fieldName": "chkSaisakusei",
+     "items": [],
+     "controlType": "CheckBoxList",
+     "width": "M",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "chkSaisakusei_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "dataSource": [
+      {
+       "key": "key0",
+       "value": "再作成する"
+      }
+     ],
+     "onChange": "",
+     "selectedItem": null,
+     "onClick": "",
+     "selectedItems": [],
+     "newLineItemNumber": 1,
+     "minCheckedItem": 0,
+     "maxCheckedItem": 2,
+     "spaceSize": "M",
+     "labelLText": "",
+     "labelLWidth": "S",
+     "labelLAlign": 2,
+     "isAllSelectable": false,
+     "isAllSelectableBreakLine": false,
+     "disabledItem": [],
+     "icon": []
+    },
+    {
+     "fieldName": "TokuchoIdoJohoSaiSakusei",
+     "items": [
+      {
+       "fieldName": "lblSaiSakuseiMsg1",
+       "items": [],
+       "controlType": "Label",
+       "width": "L",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "lblSaiSakuseiMsg1",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "required": false,
+       "align": 0,
+       "text": "再作成を行います。",
+       "isPrivateInfo": false,
+       "decorationClass": ""
+      },
+      {
+       "fieldName": "lblSaiSakuseiMsg2",
+       "items": [],
+       "controlType": "Label",
+       "width": "L",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "lblSaiSakuseiMsg2",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "required": false,
+       "align": 0,
+       "text": "再作成の原因への対応を行ってから処理を実行してください。",
+       "isPrivateInfo": false,
+       "decorationClass": ""
+      }
+     ],
+     "controlType": "Panel",
+     "width": "G9",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "Default",
+     "marginRight": "XS",
+     "selectControlID": "TokuchoIdoJohoSaiSakusei",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onLoad": "",
+     "title": "",
+     "isOpen": true,
+     "canOpenAndClose": false,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "TokuchoIdoJohoSaiSakusei"
+      }
+     ],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
+     "backgroundColor": 1,
+     "widthAuto": false,
+     "panelDisplay": 2,
+     "isGroupBox": false,
+     "readOnly": false,
+     "height": "Auto"
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G10",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0",
+   "marginRight": "Default",
+   "selectControlID": "TokuchoIdoJohoSakusei",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": false,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "TokuchoIdoJohoSakusei"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
+  }
+ ],
+ "controlType": null,
+ "width": "XS",
+ "visible": true,
+ "displayNone": false,
+ "disabled": false,
+ "accessKey": "",
+ "nextFocusFieldName": "",
+ "wrap": false,
+ "dependencies": [],
+ "float": 0,
+ "toolTip": "",
+ "authorityMode": 0,
+ "marginLeft": "XS",
+ "marginRight": "XS",
+ "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
+ "onLoad": "",
+ "title": "特別徴収異動情報作成",
+ "jsPathCollection": [],
+ "relation": [],
+ "stateTransition": [
+  {
+   "order": "1",
+   "stateName": "特徴異動情報",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "TokuchoIdoJohoSakusei",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "TokuchoIdoJohoSaiSakusei",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "supplementInfoPostParamData": [],
+   "validation": {},
+   "events": []
+  }
+ ],
+ "currentState": "特徴異動情報",
+ "id": "DBB2110001",
+ "WFParameter": [],
+ "UIContainerEventMapping": [],
+ "loadSequencePanelNames": [
+  [
+   "TokuchoIdoJohoSakusei"
+  ],
+  [
+   "TokuchoIdoJohoSaiSakusei"
+  ]
+ ],
+ "panelMargin": 1,
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "TokuchoIdoJoho",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnSakusei",
+      "items": [],
+      "controlType": "CommonButtonUpdate",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnSakusei",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "postParameterPanelNames": [],
+      "onClick": "",
+      "icon": 0,
+      "text": "特徴異動情報を作成する",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "prefixText": "",
+      "suffixText": "",
+      "validateUrl": "",
+      "sourceCreateUrl": "",
+      "afterPrintUrl": "",
+      "isModal": true,
+      "isInstruction": true,
+      "isPreview": false,
+      "printable": false,
+      "copiesChangeable": false,
+      "progressVisible": false
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "特徴異動情報"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  }
+ ]
+}
