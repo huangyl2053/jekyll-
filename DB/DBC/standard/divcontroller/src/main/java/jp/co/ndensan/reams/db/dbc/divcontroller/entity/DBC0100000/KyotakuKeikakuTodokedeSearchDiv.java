@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -10,21 +10,21 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * KyotakuKeikakuTodokedeKaigoKihon のクラスファイル 
+ * KyotakuKeikakuTodokedeSearch のクラスファイル 
  * 
  * @author 自動生成
  */
-public class KyotakuKeikakuTodokedeKaigoKihonDiv extends Panel {
+public class KyotakuKeikakuTodokedeSearchDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblKaigoKihon1")
-    private Label lblKaigoKihon1;
-    @JsonProperty("lblKaigoKihon2")
-    private Label lblKaigoKihon2;
+    @JsonProperty("lblSearch")
+    private Label lblSearch;
+    @JsonProperty("btnSearch")
+    private Button btnSearch;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,24 +32,24 @@ public class KyotakuKeikakuTodokedeKaigoKihonDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblKaigoKihon1")
-    public Label getLblKaigoKihon1() {
-        return lblKaigoKihon1;
+    @JsonProperty("lblSearch")
+    public Label getLblSearch() {
+        return lblSearch;
     }
 
-    @JsonProperty("lblKaigoKihon1")
-    public void setLblKaigoKihon1(Label lblKaigoKihon1) {
-        this.lblKaigoKihon1=lblKaigoKihon1;
+    @JsonProperty("lblSearch")
+    public void setLblSearch(Label lblSearch) {
+        this.lblSearch=lblSearch;
     }
 
-    @JsonProperty("lblKaigoKihon2")
-    public Label getLblKaigoKihon2() {
-        return lblKaigoKihon2;
+    @JsonProperty("btnSearch")
+    public Button getBtnSearch() {
+        return btnSearch;
     }
 
-    @JsonProperty("lblKaigoKihon2")
-    public void setLblKaigoKihon2(Label lblKaigoKihon2) {
-        this.lblKaigoKihon2=lblKaigoKihon2;
+    @JsonProperty("btnSearch")
+    public void setBtnSearch(Button btnSearch) {
+        this.btnSearch=btnSearch;
     }
 
 }
