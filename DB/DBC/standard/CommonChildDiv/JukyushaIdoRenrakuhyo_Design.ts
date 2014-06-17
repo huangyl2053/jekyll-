@@ -111,7 +111,7 @@ module DBC {
        "labelLText": "異動区分",
        "labelLWidth": "70",
        "labelLAlign": 2,
-       "selectedItem": "new",
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "new",
@@ -359,7 +359,7 @@ module DBC {
        "labelLText": "性別",
        "labelLWidth": "40",
        "labelLAlign": 2,
-       "selectedItem": "man",
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "man",
@@ -731,7 +731,7 @@ module DBC {
        "labelLText": "申請種別",
        "labelLWidth": "260",
        "labelLAlign": 2,
-       "selectedItem": "new",
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "new",
@@ -861,7 +861,7 @@ module DBC {
        "labelLText": "変更申請中区分",
        "labelLWidth": "142",
        "labelLAlign": 2,
-       "selectedItem": "shinseiNashi",
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "shinseiNashi",
@@ -958,7 +958,7 @@ module DBC {
        "labelLText": "みなし区分",
        "labelLWidth": "110",
        "labelLAlign": 2,
-       "selectedItem": "normal",
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "normal",
@@ -1352,7 +1352,7 @@ module DBC {
        "labelLText": "計画作成区分",
        "labelLWidth": "105",
        "labelLAlign": 2,
-       "selectedItem": "kyotakuShienJigyosha",
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "kyotakuShienJigyosha",
@@ -1544,7 +1544,7 @@ module DBC {
        "labelLText": "小規模居宅サービス利用",
        "labelLWidth": "180",
        "labelLAlign": 2,
-       "selectedItem": "nashi",
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "nashi",
@@ -1638,7 +1638,7 @@ module DBC {
        "labelLText": "減免申請中区分",
        "labelLWidth": "120",
        "labelLAlign": 2,
-       "selectedItem": "shinseiNashi",
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "shinseiNashi",
@@ -1694,7 +1694,7 @@ module DBC {
            "labelLText": "区分",
            "labelLWidth": "55",
            "labelLAlign": 2,
-           "selectedItem": "standard",
+           "selectedItem": null,
            "dataSource": [
             {
              "key": "standard",
@@ -2032,7 +2032,7 @@ module DBC {
            "labelLText": "区分",
            "labelLWidth": "55",
            "labelLAlign": 2,
-           "selectedItem": "riyosha",
+           "selectedItem": null,
            "dataSource": [
             {
              "key": "riyosha",
@@ -2198,7 +2198,7 @@ module DBC {
         }
        ],
        "controlType": "Panel",
-       "width": "460",
+       "width": "540",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -2269,7 +2269,7 @@ module DBC {
          "labelLText": "認定申請中区分",
          "labelLWidth": "155",
          "labelLAlign": 2,
-         "selectedItem": "shinseiNashi",
+         "selectedItem": null,
          "dataSource": [
           {
            "key": "shinseiNashi",
@@ -2319,7 +2319,7 @@ module DBC {
          "labelLText": "サービス区分",
          "labelLWidth": "155",
          "labelLAlign": 2,
-         "selectedItem": "standard",
+         "selectedItem": null,
          "dataSource": [
           {
            "key": "standard",
@@ -2365,7 +2365,7 @@ module DBC {
          "labelLText": "特例減額措置対象",
          "labelLWidth": "155",
          "labelLAlign": 2,
-         "selectedItem": "nashi",
+         "selectedItem": null,
          "dataSource": [
           {
            "key": "nashi",
@@ -2865,7 +2865,7 @@ module DBC {
          "fieldName": "txtKokiKoreiHokenshaNo",
          "items": [],
          "controlType": "TextBoxCode",
-         "width": "60",
+         "width": "65",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -2912,7 +2912,7 @@ module DBC {
          "fieldName": "txtKokiKoreiHihokenshaNo",
          "items": [],
          "controlType": "TextBoxCode",
-         "width": "60",
+         "width": "65",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -3007,7 +3007,7 @@ module DBC {
          "fieldName": "txtKokuhoHokenshaNo",
          "items": [],
          "controlType": "TextBoxCode",
-         "width": "60",
+         "width": "65",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -3054,7 +3054,7 @@ module DBC {
          "fieldName": "txtKokuhoHihokenshashoNo",
          "items": [],
          "controlType": "TextBoxCode",
-         "width": "150",
+         "width": "162",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -3101,7 +3101,7 @@ module DBC {
          "fieldName": "txtKokuhoKojinNo",
          "items": [],
          "controlType": "TextBoxCode",
-         "width": "75",
+         "width": "80",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -3146,7 +3146,7 @@ module DBC {
         }
        ],
        "controlType": "Panel",
-       "width": "645",
+       "width": "710",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -3154,11 +3154,11 @@ module DBC {
        "nextFocusFieldName": "",
        "wrap": false,
        "dependencies": [],
-       "float": 0,
+       "float": 2,
        "toolTip": "",
        "authorityMode": 0,
        "marginLeft": "XS",
-       "marginRight": "XS",
+       "marginRight": "S",
        "selectControlID": "JukyushaIdoRenrakuhyoKokuho",
        "helpMessageID": "",
        "jpControlName": "",
@@ -3262,7 +3262,7 @@ module DBC {
        "labelLText": "公費負担上限額減額(生活保護等)",
        "labelLWidth": "245",
        "labelLAlign": 2,
-       "selectedItem": "nashi",
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "nashi",
@@ -3450,7 +3450,7 @@ module DBC {
        "labelLText": "事業区分",
        "labelLWidth": "70",
        "labelLAlign": 2,
-       "selectedItem": "higaito",
+       "selectedItem": null,
        "dataSource": [
         {
          "key": "higaito",
@@ -3570,7 +3570,7 @@ module DBC {
        "fieldName": "RokenShichosonNo",
        "items": [],
        "controlType": "TextBoxCode",
-       "width": "70",
+       "width": "65",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -3617,7 +3617,7 @@ module DBC {
        "fieldName": "RokenJukyushaNo",
        "items": [],
        "controlType": "TextBoxCode",
-       "width": "70",
+       "width": "65",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -3664,7 +3664,7 @@ module DBC {
        "fieldName": "RokenKohiFutanshaNo",
        "items": [],
        "controlType": "TextBoxCode",
-       "width": "70",
+       "width": "65",
        "visible": true,
        "displayNone": false,
        "disabled": false,
