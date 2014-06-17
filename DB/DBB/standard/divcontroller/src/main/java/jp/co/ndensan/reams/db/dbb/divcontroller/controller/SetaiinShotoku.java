@@ -10,6 +10,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.FukaRirekiAllDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.FukaRirekiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.SetaiinShotokuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.dgFukaRirekiFukaRireki_Row;
@@ -30,14 +31,13 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @author n8211
  */
 public class SetaiinShotoku {
-    public static final RString SETAISHOTOKU = new RString("SetaiShotoku.yml");
-    public static final RString OTHER = new RString("other.yml");    
+    private static final RString SETAISHOTOKU = new RString("SetaiShotoku.yml");
+    private static final RString OTHER = new RString("other.yml");    
     
     public ResponseData<SetaiinShotokuDiv> onClick_btnSetaiinnShotoku(SetaiinShotokuDiv div, FukaRirekiDiv rirekiDiv) {
 
         div.setDisplayNone(false);
         
-//        setProperty_SetaiinShotku(div);
         loadSetaiinShotoku(div, rirekiDiv, new RString("onClick"));
         
         return returnResponse(div);
@@ -53,6 +53,45 @@ public class SetaiinShotoku {
 
         return returnResponse(div);
     }
+    
+
+    /**
+     * 比較画面にデータを渡す
+     * @param div
+     * @param fukaRirekiDiv
+     * @return 
+     */
+    public ResponseData<SetaiinShotokuDiv>  onClick_DisplayedAligned(SetaiinShotokuDiv div, FukaRirekiDiv fukaRirekiDiv) {
+        //ViewStateに格納
+        ViewStateHolder.put("世帯所得", div);
+        ViewStateHolder.put("mode", new RString("displayedAligned"));
+        
+        return  returnResponse(div);
+    }
+    
+    /**
+     * 比較画面にデータを渡す
+     * @param div
+     * @param fukaRirekiDiv
+     * @return 
+     */
+    public ResponseData<SetaiinShotokuDiv>  onClick_ComparedWithPrevious(SetaiinShotokuDiv div, FukaRirekiDiv fukaRirekiDiv) {
+        //ViewStateに格納
+        ViewStateHolder.put("賦課履歴", fukaRirekiDiv);
+        ViewStateHolder.put("mode", new RString("comparedWithPrevious"));
+        
+        return  returnResponse(div);
+    }    
+    
+    
+//    public ResponseData<SetaiinShotokuDiv> onSelect_dgSetaiShotoku(SetaiinShotokuDiv div, FukaRirekiDiv rirekiDiv) {
+//        
+//        List<dgSetaiShotoku_Row> selected = div.getSetaiShotokuIchiran().getDgSetaiShotoku().getSelectedItems();
+//
+//        rirekiAllDiv.setLoadShikibetsuCode(selected.get(0).getTxtShikibetsuCode());
+//
+//        return returnResponse(div);
+//    } 
     
     /**
      * イベント処理後のレスポンスデータをリターン
@@ -100,39 +139,7 @@ public class SetaiinShotoku {
         
         return keyList;
     }    
-
-    /**
-     * 比較画面にデータを渡す
-     * @param div
-     * @param fukaRirekiDiv
-     * @return 
-     */
-    public ResponseData<SetaiinShotokuDiv>  onClick_DisplayedAligned(SetaiinShotokuDiv div, FukaRirekiDiv fukaRirekiDiv) {
-        //ViewStateに格納
-        ViewStateHolder.put("賦課照会", div);
-        ViewStateHolder.put("賦課履歴", fukaRirekiDiv);
-        ViewStateHolder.put("簡易モード", new Boolean(true));
-        ViewStateHolder.put("mode", new RString("displayedAligned"));
-        
-        return  returnResponse(div);
-    }
-    
-    /**
-     * 比較画面にデータを渡す
-     * @param div
-     * @param fukaRirekiDiv
-     * @return 
-     */
-    public ResponseData<SetaiinShotokuDiv>  onClick_ComparedWithPrevious(SetaiinShotokuDiv div, FukaRirekiDiv fukaRirekiDiv) {
-        //ViewStateに格納
-        ViewStateHolder.put("賦課照会", div);
-        ViewStateHolder.put("賦課履歴", fukaRirekiDiv);
-        ViewStateHolder.put("簡易モード", new Boolean(true));
-        ViewStateHolder.put("mode", new RString("comparedWithPrevious"));
-        
-        return  returnResponse(div);
-    }    
-
+ 
     /**
      * 最新世帯表示のチェックボックスを判断し、一部列の表示、非表示の切り替え
      * @param div 

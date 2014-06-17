@@ -27,6 +27,8 @@ public class FukaRirekiAllDiv extends Panel {
     private DataGrid<dgFukaRirekiAll_Row> dgFukaRirekiAll;
     @JsonProperty("mode")
     private RString mode;
+    @JsonProperty("loadShikibetsuCode")
+    private RString loadShikibetsuCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -52,6 +54,16 @@ public class FukaRirekiAllDiv extends Panel {
     @JsonProperty("mode")
     public void setMode(RString mode) {
         this.mode=mode;
+    }
+
+    @JsonProperty("loadShikibetsuCode")
+    public RString getLoadShikibetsuCode() {
+        return loadShikibetsuCode;
+    }
+
+    @JsonProperty("loadShikibetsuCode")
+    public void setLoadShikibetsuCode(RString loadShikibetsuCode) {
+        this.loadShikibetsuCode=loadShikibetsuCode;
     }
 
 }

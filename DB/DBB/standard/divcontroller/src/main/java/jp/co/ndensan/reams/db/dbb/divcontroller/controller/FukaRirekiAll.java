@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 
 /**
@@ -23,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
  * @author n8211 田辺 紘一
  */
 public class FukaRirekiAll {
-    public static final RString FUKARIREKIALL = new RString("FukaRirekiAll.yml");
+    private static final RString FUKARIREKIALL = new RString("FukaRirekiAll.yml");
 
     /**
      * 介護保険料賦課照会の初回ロード時に実行
@@ -34,22 +33,46 @@ public class FukaRirekiAll {
         
         div.setDisplayNone(false);
         
+        RString loadShikibetsuCode;
+        if (div.getLoadShikibetsuCode().length() < 1) {
+            loadShikibetsuCode = new RString("0000000000001901");
+        } else {
+            loadShikibetsuCode = div.getLoadShikibetsuCode();
+        }
+        
+        lordData(div, loadShikibetsuCode);
+
+        return returnResponse(div);
+    }
+    
+    /**
+     * 帳票モード用
+     * @param div
+     * @return 
+     */
+    public ResponseData<FukaRirekiAllDiv> onLoad_chohyo(FukaRirekiAllDiv div) {
+
+        div.setDisplayNone(false);
+        
         lordData(div, new RString("0000000000001901"));
         
         return returnResponse(div);
     }
     
-    public ResponseData<FukaRirekiAllDiv> onLoad_chohyo(FukaRirekiAllDiv div) {
+    /**
+     * 世帯員一覧から情報取得しロード（循環参照回避が出来なかった為）
+     * @param div
+     * @return 
+     */
+    public ResponseData<FukaRirekiAllDiv> onSelect_dgSetaiShotoku(FukaRirekiAllDiv div) {
 
         div.setDisplayNone(false);
 
-//        div
-        
-        lordData(div, new RString("0000000000001901"));
+        lordData(div, new RString("0000000000002701"));
         
         return returnResponse(div);
     }
-
+    
     /**
      * レスポンスデータのリターン
      * @param div
@@ -176,7 +199,7 @@ public class FukaRirekiAll {
         //YamlData用List
         List yamlList = new ArrayList();
         
-        for (int i = 0; i < yamlArray.get(0).size(); i++) {
+        for (int i = 0; i < yamlArray.size(); i++) {
             ControlGenerator cg = new ControlGenerator(yamlArray.get(i));
             
             if (tsuchishoNo.contains(cg.getAsRString("通知書番号"))) {

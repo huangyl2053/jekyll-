@@ -33,6 +33,8 @@ public class Tokucho {
         
     public ResponseData<TokuchoDiv> onClick_btnTokucho(TokuchoDiv div, FukaRirekiDiv rirekiDiv) {
         
+        div.setDisplayNone(false);
+        
         loadTokucho(div, rirekiDiv);
 
         return returnResponse(div);
@@ -101,7 +103,7 @@ public class Tokucho {
             checkData.add(listData.get(i));
             
             if (checkData.get(0) == null) {
-                formatData.add("");
+                formatData.add(new RString(""));
             } else {
                 boolean intCheck = intChecker(checkData);
 

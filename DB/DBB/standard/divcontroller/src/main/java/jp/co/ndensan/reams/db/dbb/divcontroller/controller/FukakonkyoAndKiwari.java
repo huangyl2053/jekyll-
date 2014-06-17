@@ -29,8 +29,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  * @author n8211
  */
 public class FukakonkyoAndKiwari {
-    
-    public static final RString FUKAKONKYO = new RString("FukaKonkyo.yml");
+    private static final RString FUKAKONKYO = new RString("FukaKonkyo.yml");
 
     public ResponseData<FukakonkyoAndKiwariDiv> onSelect(FukakonkyoAndKiwariDiv div, FukaRirekiDiv rirekiDiv) {
 
@@ -188,7 +187,7 @@ public class FukakonkyoAndKiwari {
         yamlDatalist.add(cg.getAsRString("老年終了日"));
         yamlDatalist.add(cg.getAsRString("住所地特例"));
         
-        if (key.isEmpty()) {
+        if (!key.isEmpty()) {
             yamlDatalist.add(key);
             yamlDatalist.add(cg.getAsRString("本人課税"));
             yamlDatalist.add(cg.getAsRString("世帯課税"));
@@ -377,6 +376,7 @@ public class FukakonkyoAndKiwari {
         setTokuNofugaku(tKiwariGaku, (List)formatData.get(4));    
         setKikan(tFukaKonkyo.getTblKikan(), (List)formatData.get(5));
         setNengaku(tFukaKonkyo.getFukakonkyoNengaku(), (List)formatData.get(6));
+        setChoteiJiyu(tFukaKonkyo, (List) formatData.get(7));
     }
 
     private void setKonkyo(tblFukakonkyoMeisaiDiv konkyoDiv, List formatData) {
@@ -397,7 +397,7 @@ public class FukakonkyoAndKiwari {
         // 住所地特例
         
         RString key = (RString)formatData.get(8);
-        if (key == null) { 
+        if (key != null) { 
             // 本人課税
             konkyoDiv.getLblHonninKazei().setDisplayNone(false);
             konkyoDiv.getLblZenHokenryoDankai().setDisplayNone(true);
@@ -510,9 +510,20 @@ public class FukakonkyoAndKiwari {
 
     private void setNengaku(FukakonkyoNengakuDiv fukakonkyoNengaku, List formatData) {
         
-        fukakonkyoNengaku.getTxtNenkanHokenryo().setValue(new Decimal(formatData.get(0).toString()));
-        fukakonkyoNengaku.getTxtGemmen().setValue(new Decimal(formatData.get(1).toString()));
-        fukakonkyoNengaku.getTxtNenkanHokenryo().setValue(new Decimal(formatData.get(2).toString()));
+        RString 計算上年間保険料 = (RString) formatData.get(0);
+        RString 減免額 = (RString) formatData.get(1);
+        RString 確定年間保険料 = (RString) formatData.get(2);
+        
+        if (計算上年間保険料.length() > 0) fukakonkyoNengaku.getTxtKeisanjoNenkanHokenryo().setValue(new Decimal(formatData.get(0).toString()));
+        if (減免額.length() > 0) fukakonkyoNengaku.getTxtGemmen().setValue(new Decimal(formatData.get(1).toString()));
+        if (確定年間保険料.length() > 0) fukakonkyoNengaku.getTxtNenkanHokenryo().setValue(new Decimal(formatData.get(2).toString()));
+    }
+
+    private void setChoteiJiyu(tblFukaKonkyoDiv tFukaKonkyo, List formatData) {
+        tFukaKonkyo.getTxtFukashokaiChoteiJiyu1().setValue((RString) formatData.get(0));
+        tFukaKonkyo.getTxtFukashokaiChoteiJiyu2().setValue((RString) formatData.get(1));
+        tFukaKonkyo.getTxtFukashokaiChoteiJiyu3().setValue((RString) formatData.get(2));
+        tFukaKonkyo.getTxtFukashokaiChoteiJiyu4().setValue((RString) formatData.get(3));
     }
 
     
