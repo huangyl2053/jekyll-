@@ -5,10 +5,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.dgTaishoshaList_Row;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.SearchResultOfHihokenshaDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * KyotakuKeikakuTodokedeList のクラスファイル 
@@ -22,8 +20,8 @@ public class KyotakuKeikakuTodokedeListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("dgTaishoshaList")
-    private DataGrid<dgTaishoshaList_Row> dgTaishoshaList;
+    @JsonProperty("KyotakuKeikakuTodokedeHihokenshaList")
+    private SearchResultOfHihokenshaDiv KyotakuKeikakuTodokedeHihokenshaList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,14 +29,14 @@ public class KyotakuKeikakuTodokedeListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("dgTaishoshaList")
-    public DataGrid<dgTaishoshaList_Row> getDgTaishoshaList() {
-        return dgTaishoshaList;
+    @JsonProperty("KyotakuKeikakuTodokedeHihokenshaList")
+    public SearchResultOfHihokenshaDiv getKyotakuKeikakuTodokedeHihokenshaList() {
+        return KyotakuKeikakuTodokedeHihokenshaList;
     }
 
-    @JsonProperty("dgTaishoshaList")
-    public void setDgTaishoshaList(DataGrid<dgTaishoshaList_Row> dgTaishoshaList) {
-        this.dgTaishoshaList=dgTaishoshaList;
+    @JsonProperty("KyotakuKeikakuTodokedeHihokenshaList")
+    public void setKyotakuKeikakuTodokedeHihokenshaList(SearchResultOfHihokenshaDiv KyotakuKeikakuTodokedeHihokenshaList) {
+        this.KyotakuKeikakuTodokedeHihokenshaList=KyotakuKeikakuTodokedeHihokenshaList;
     }
 
 }

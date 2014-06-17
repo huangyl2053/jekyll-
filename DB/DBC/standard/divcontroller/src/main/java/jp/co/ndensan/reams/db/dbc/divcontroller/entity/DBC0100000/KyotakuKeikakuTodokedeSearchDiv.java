@@ -5,9 +5,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.HihokenshaFinderDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * KyotakuKeikakuTodokedeSearch のクラスファイル 
@@ -21,10 +20,8 @@ public class KyotakuKeikakuTodokedeSearchDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblSearch")
-    private Label lblSearch;
-    @JsonProperty("btnSearch")
-    private Button btnSearch;
+    @JsonProperty("KyotakuKeikakuTodokedeHihokenshaFinder")
+    private HihokenshaFinderDiv KyotakuKeikakuTodokedeHihokenshaFinder;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,24 +29,14 @@ public class KyotakuKeikakuTodokedeSearchDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblSearch")
-    public Label getLblSearch() {
-        return lblSearch;
+    @JsonProperty("KyotakuKeikakuTodokedeHihokenshaFinder")
+    public HihokenshaFinderDiv getKyotakuKeikakuTodokedeHihokenshaFinder() {
+        return KyotakuKeikakuTodokedeHihokenshaFinder;
     }
 
-    @JsonProperty("lblSearch")
-    public void setLblSearch(Label lblSearch) {
-        this.lblSearch=lblSearch;
-    }
-
-    @JsonProperty("btnSearch")
-    public Button getBtnSearch() {
-        return btnSearch;
-    }
-
-    @JsonProperty("btnSearch")
-    public void setBtnSearch(Button btnSearch) {
-        this.btnSearch=btnSearch;
+    @JsonProperty("KyotakuKeikakuTodokedeHihokenshaFinder")
+    public void setKyotakuKeikakuTodokedeHihokenshaFinder(HihokenshaFinderDiv KyotakuKeikakuTodokedeHihokenshaFinder) {
+        this.KyotakuKeikakuTodokedeHihokenshaFinder=KyotakuKeikakuTodokedeHihokenshaFinder;
     }
 
 }

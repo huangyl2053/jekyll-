@@ -16,8 +16,11 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.KyotakuKeikaku
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.KyotakuKeikakuTodokedeRirekiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.KyotakuKeikakuTodokedeshaDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.dgKyotakuKeikakuTodokedeRirekiList_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
+import jp.co.ndensan.reams.ur.ura.divcontroller.controller.AtenaShokaiSimple;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -26,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 
 /**
- * 居宅サービス計画作成依頼届出をコントロールするクラスです。
+ * 居宅サービス計画作成依頼届出情報登録の居宅サービス計画作成依頼届出のコントロールです。
  *
  * @author N8187 久保田 英男
  */
@@ -44,6 +47,8 @@ public class KyotakuKeikakuTodokedeDetail {
      */
     public ResponseData onLoad(KyotakuKeikakuTodokedeDetailDiv panel) {
         ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
+        setAtenaData(panel);
+        setKihonData(panel);
         setRirekiList(panel);
         setMeisaiDefaultData(panel);
         response.data = panel;
@@ -64,12 +69,32 @@ public class KyotakuKeikakuTodokedeDetail {
         削除
     }
 
-    /**
-     * 履歴一覧のデータ設定
-     */
+    private void setAtenaData(KyotakuKeikakuTodokedeDetailDiv panel) {
+        ControlGenerator cg = new ControlGenerator(getYaml().get(0));
+        AtenaShokaiSimple.setData(panel.getKyotakuKeikakuTodokedeKihon().getKyotakuKeikakuTodokedeKihonAtena().getAtenaInfo(),
+                new ShikibetsuCode(cg.getAsRString("識別コード")));
+    }
+
+    private void setKihonData(KyotakuKeikakuTodokedeDetailDiv panel) {
+        ControlGenerator cg = new ControlGenerator(getYaml().get(1));
+        KaigoShikakuKihonDiv kihon = panel.getKyotakuKeikakuTodokedeKihon().getKyotakuKeikakuTodokedeKaigoKihon();
+        kihon.getTxtHihokenshaNo().setValue(cg.getAsRString("被保番号"));
+        kihon.getTxtShikakuJotai().setValue(cg.getAsRString("資格状態"));
+        kihon.getTxtShutokuYmd().setValue(cg.getAsRDate("取得日"));
+        kihon.getTxtSoshitsuYmd().setValue(cg.getAsRDate("喪失日"));
+        kihon.getTxtShutokuJiyu().setValue(cg.getAsRString("取得事由"));
+        kihon.getTxtSoshitsuJiyu().setValue(cg.getAsRString("喪失事由"));
+        kihon.getTxtJutokuTekiyo().setValue(cg.getAsRDate("住特開始"));
+        kihon.getTxtJutokuKaijo().setValue(cg.getAsRDate("住特終了"));
+        kihon.getTxtYokaigoJotaiKubun().setValue(cg.getAsRString("要介護度"));
+        kihon.getTxtNinteiKikan().setFromValue(cg.getAsRDate("認定開始日"));
+        kihon.getTxtNinteiKikan().setToValue(cg.getAsRDate("認定終了日"));
+        kihon.getTxtKyuSochiNyusho().setValue(cg.getAsRString("旧措置入所"));
+    }
+
     private void setRirekiList(KyotakuKeikakuTodokedeDetailDiv panel) {
         Button btn = new Button();
-        for (int i = 0; i < 2; i++) {
+        for (int i = 3; i < 5; i++) {
             ControlGenerator cg = new ControlGenerator(getYaml().get(i));
             add履歴(panel, create履歴(
                     btn,
@@ -147,8 +172,8 @@ public class KyotakuKeikakuTodokedeDetail {
      * @param panel panel
      */
     private void setMeisaiDefaultData(KyotakuKeikakuTodokedeDetailDiv panel) {
-        showMeisai(panel, 画面表示.初期表示);
         setMeisaiData(panel, 画面表示.初期表示);
+        showMeisai(panel, 画面表示.初期表示);
     }
 
     /**
@@ -159,8 +184,8 @@ public class KyotakuKeikakuTodokedeDetail {
      */
     public ResponseData onClickTodokedeNew(KyotakuKeikakuTodokedeDetailDiv panel) {
         ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
-        showMeisai(panel, 画面表示.新規届出);
         setMeisaiData(panel, 画面表示.新規届出);
+        showMeisai(panel, 画面表示.新規届出);
         response.data = panel;
         return response;
     }
@@ -173,8 +198,8 @@ public class KyotakuKeikakuTodokedeDetail {
      */
     public ResponseData onClickTodokedeModify(KyotakuKeikakuTodokedeDetailDiv panel) {
         ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
-        showMeisai(panel, 画面表示.変更届出);
         setMeisaiData(panel, 画面表示.変更届出);
+        showMeisai(panel, 画面表示.変更届出);
         response.data = panel;
         return response;
     }
@@ -187,13 +212,13 @@ public class KyotakuKeikakuTodokedeDetail {
      */
     public ResponseData onClickTodokedeSelect(KyotakuKeikakuTodokedeDetailDiv panel) {
         ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
-        showMeisai(panel, 画面表示.届出内容修正);
-        setMeisaiData(panel, 画面表示.届出内容修正);
         int selectRowindex = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().getTplKyotakuKeikakuTodokedeDetailRireki().
-                getKyotakuKeikakuTodokedeRirekiList().getDgKyotakuKeikakuTodokedeRirekiList().getActiveRowId();
+                getKyotakuKeikakuTodokedeRirekiList().getDgKyotakuKeikakuTodokedeRirekiList().getClickedRowId();
         RString index = new RString(String.valueOf(selectRowindex));
         panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().getTplKyotakuKeikakuTodokedeDetailRireki().
                 getKyotakuKeikakuTodokedeMeisai().getTxtRirekiListSelectIndex().setValue(index);
+        setMeisaiData(panel, 画面表示.届出内容修正);
+        showMeisai(panel, 画面表示.届出内容修正);
 
         response.data = panel;
         return response;
@@ -210,6 +235,7 @@ public class KyotakuKeikakuTodokedeDetail {
         int index = Integer.valueOf(panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
                 getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeMeisai().getTxtRirekiListSelectIndex().getValue().toString());
         modify履歴(panel, index, 修正削除.削除);
+        initMeisai(panel);
         response.data = panel;
         return response;
     }
@@ -240,9 +266,9 @@ public class KyotakuKeikakuTodokedeDetail {
                 getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeMeisai().getTxtTodokedeKubun().getValue();
         ControlGenerator cg;
         if (new RString("新規").equals(kubun)) {
-            cg = new ControlGenerator(getYaml().get(2));
+            cg = new ControlGenerator(getYaml().get(5));
         } else {
-            cg = new ControlGenerator(getYaml().get(3));
+            cg = new ControlGenerator(getYaml().get(6));
         }
         add履歴(panel, create履歴(
                 btn,
@@ -252,6 +278,7 @@ public class KyotakuKeikakuTodokedeDetail {
                 cg.getAsRString("届出日"),
                 kubun,
                 cg.getAsRString("計画依頼事業者")));
+        initMeisai(panel);
         response.data = panel;
         return response;
     }
@@ -267,6 +294,7 @@ public class KyotakuKeikakuTodokedeDetail {
         int index = Integer.valueOf(panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
                 getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeMeisai().getTxtRirekiListSelectIndex().getValue().toString());
         modify履歴(panel, index, 修正削除.修正);
+        initMeisai(panel);
 
         response.data = panel;
         return response;
@@ -334,7 +362,6 @@ public class KyotakuKeikakuTodokedeDetail {
                 getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeRirekiList().getDgKyotakuKeikakuTodokedeRirekiList();
         dgKyotakuKeikakuTodokedeRirekiList_Row selectRow = rirekiList.getClickedItem();
 
-        KyotakuKeikakuTodokedeshaDiv todokedesha = meisai.getKyotakuKeikakuTodokedesha();
         KyotakuKeikakuTodokedeJigyoshaDiv jigyosha = meisai.getKyotakuKeikakuTodokedeJigyosha();
         KyotakuKeikakuTodokedeHenkoNaiyoDiv henkoNaiyo = meisai.getKyotakuKeikakuTodokedeHenkoNaiyo();
 
@@ -397,18 +424,17 @@ public class KyotakuKeikakuTodokedeDetail {
         KyotakuKeikakuTodokedeJigyoshaDiv jigyosha = meisai.getKyotakuKeikakuTodokedeJigyosha();
         KyotakuKeikakuTodokedeHenkoNaiyoDiv henkoNaiyo = meisai.getKyotakuKeikakuTodokedeHenkoNaiyo();
 
-        initMeisai(panel);
-        ControlGenerator cg = new ControlGenerator(getYaml().get(4));
+        ControlGenerator cg = new ControlGenerator(getYaml().get(7));
         if (pattern.equals(画面表示.初期表示)) {
             meisai.getTxtTodokedeKubun().clearValue();
         } else if (pattern.equals(画面表示.新規届出)) {
-            cg = new ControlGenerator(getYaml().get(5));
+            cg = new ControlGenerator(getYaml().get(8));
             meisai.getTxtTodokedeKubun().setValue(cg.getAsRString("届出区分"));
         } else if (pattern.equals(画面表示.変更届出)) {
-            cg = new ControlGenerator(getYaml().get(6));
+            cg = new ControlGenerator(getYaml().get(9));
             meisai.getTxtTodokedeKubun().setValue(cg.getAsRString("届出区分"));
         } else if (pattern.equals(画面表示.届出内容修正)) {
-            cg = new ControlGenerator(getYaml().get(7));
+            cg = new ControlGenerator(getYaml().get(10));
             meisai.getTxtTodokedeKubun().setValue(selectRow.getTxtTodokedeKubun());
         }
 
