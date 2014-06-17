@@ -26,8 +26,6 @@ public class HonsanteiFukaKakuteiDiv extends Panel {
     private Label lblHonsanteiKakuteiMsg;
     @JsonProperty("HonsanteiShoriNichiji")
     private HonsanteiShoriNichijiDiv HonsanteiShoriNichiji;
-    @JsonProperty("btnHonsanteiKakutei")
-    private Button btnHonsanteiKakutei;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -53,16 +51,6 @@ public class HonsanteiFukaKakuteiDiv extends Panel {
     @JsonProperty("HonsanteiShoriNichiji")
     public void setHonsanteiShoriNichiji(HonsanteiShoriNichijiDiv HonsanteiShoriNichiji) {
         this.HonsanteiShoriNichiji=HonsanteiShoriNichiji;
-    }
-
-    @JsonProperty("btnHonsanteiKakutei")
-    public Button getBtnHonsanteiKakutei() {
-        return btnHonsanteiKakutei;
-    }
-
-    @JsonProperty("btnHonsanteiKakutei")
-    public void setBtnHonsanteiKakutei(Button btnHonsanteiKakutei) {
-        this.btnHonsanteiKakutei=btnHonsanteiKakutei;
     }
 
 }

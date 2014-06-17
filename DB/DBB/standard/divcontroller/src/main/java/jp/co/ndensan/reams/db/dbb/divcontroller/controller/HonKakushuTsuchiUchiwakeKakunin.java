@@ -80,7 +80,7 @@ public class HonKakushuTsuchiUchiwakeKakunin {
     private void setHonKakushuTsuchiUchiwakeSentaku(HonKakushuTsuchiUchiwakeKakuninDiv honKakushuTsuchiUchiwakeKakuninDiv) {
         HonKakushuTsuchiUchiwakeSentakuDiv uchiwakeSentakuDiv = honKakushuTsuchiUchiwakeKakuninDiv.getHonKakushuTsuchiUchiwakeSentaku();
         
-        List<HashMap> uchiwakeHohoData = YamlLoader.FOR_DBB.loadAsList(new RString("HonKakushuTsuchiUchiwakeKakunin/Uchiwake.yml"));
+        List<HashMap> uchiwakeHohoData = YamlLoader.DBB.loadAsList(new RString("HonKakushuTsuchiUchiwakeKakunin/Uchiwake.yml"));
         
         List<dgKakushuTsuchiUchiwakeSentaku_Row> arrayData = new ArrayList<>();
         dgKakushuTsuchiUchiwakeSentaku_Row item;
@@ -100,7 +100,7 @@ public class HonKakushuTsuchiUchiwakeKakunin {
     }
 
     private void setDgTsuchishoSettei(HonKakushuTsuchiUchiwakeKakuninDiv honKakushuTsuchiUchiwakeKakuninDiv, RString No) {
-        List<HashMap> tsuchishoSetteiData = YamlLoader.FOR_DBB.loadAsList(new RString("HonKakushuTsuchiUchiwakeKakunin/TsuchishoSettei.yml"));
+        List<HashMap> tsuchishoSetteiData = YamlLoader.DBB.loadAsList(new RString("HonKakushuTsuchiUchiwakeKakunin/TsuchishoSettei.yml"));
         
         List<dgTsuchishoSettei_Row> arrayData = new ArrayList<>();
         dgTsuchishoSettei_Row item;

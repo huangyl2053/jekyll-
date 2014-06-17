@@ -5,23 +5,24 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0310001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-//import jp.co.ndensan.reams.ur.urz.divcontroller.entity.ChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * HonFukadaicho のクラスファイル 
+ * HonsanteiFukaPankuzu のクラスファイル 
  * 
  * @author 自動生成
  */
-public class HonFukadaichoDiv extends PanelPublish {
+public class HonsanteiFukaPankuzuDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-//    @JsonProperty("ShutsuryokuJunHonFukadaicho")
-//    private ChohyoShutsuryokujunDiv ShutsuryokuJunHonFukadaicho;
+    @JsonProperty("txtHonsanteiFukaPankuzu")
+    private TextBox txtHonsanteiFukaPankuzu;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -29,14 +30,14 @@ public class HonFukadaichoDiv extends PanelPublish {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-//    @JsonProperty("ShutsuryokuJunHonFukadaicho")
-//    public ChohyoShutsuryokujunDiv getShutsuryokuJunHonFukadaicho() {
-//        return ShutsuryokuJunHonFukadaicho;
-//    }
+    @JsonProperty("txtHonsanteiFukaPankuzu")
+    public TextBox getTxtHonsanteiFukaPankuzu() {
+        return txtHonsanteiFukaPankuzu;
+    }
 
-//    @JsonProperty("ShutsuryokuJunHonFukadaicho")
-//    public void setShutsuryokuJunHonFukadaicho(ChohyoShutsuryokujunDiv ShutsuryokuJunHonFukadaicho) {
-//        this.ShutsuryokuJunHonFukadaicho=ShutsuryokuJunHonFukadaicho;
-//    }
+    @JsonProperty("txtHonsanteiFukaPankuzu")
+    public void setTxtHonsanteiFukaPankuzu(TextBox txtHonsanteiFukaPankuzu) {
+        this.txtHonsanteiFukaPankuzu=txtHonsanteiFukaPankuzu;
+    }
 
 }

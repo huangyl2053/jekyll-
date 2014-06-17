@@ -82,7 +82,7 @@
        "fieldName": "txtHonsanteiShoriNichiji",
        "items": [],
        "controlType": "TextBox",
-       "width": "160",
+       "width": "180",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -261,7 +261,7 @@
    "events": []
   }
  ],
- "currentState": "初期",
+ "currentState": "All",
  "id": "DBB0310002",
  "WFParameter": [],
  "UIContainerEventMapping": [],

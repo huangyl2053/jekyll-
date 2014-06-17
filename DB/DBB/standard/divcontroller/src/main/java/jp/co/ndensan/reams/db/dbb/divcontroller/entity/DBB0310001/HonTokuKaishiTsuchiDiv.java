@@ -71,7 +71,7 @@ public class HonTokuKaishiTsuchiDiv extends PanelPublish {
 //    public ChohyoShutsuryokujunDiv getShutsuryokuJunHonTokuKaishiTsuchi() {
 //        return ShutsuryokuJunHonTokuKaishiTsuchi;
 //    }
-//
+
 //    @JsonProperty("ShutsuryokuJunHonTokuKaishiTsuchi")
 //    public void setShutsuryokuJunHonTokuKaishiTsuchi(ChohyoShutsuryokujunDiv ShutsuryokuJunHonTokuKaishiTsuchi) {
 //        this.ShutsuryokuJunHonTokuKaishiTsuchi=ShutsuryokuJunHonTokuKaishiTsuchi;

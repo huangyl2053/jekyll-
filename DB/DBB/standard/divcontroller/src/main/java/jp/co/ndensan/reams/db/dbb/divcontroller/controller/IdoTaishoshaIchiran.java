@@ -6,12 +6,9 @@
 
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller;
 
-import java.security.KeyException;
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import javax.xml.crypto.dsig.keyinfo.KeyValue;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0020001.IdoTaishoshaIchiranDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0020001.dgIdoTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
@@ -36,7 +33,7 @@ public class IdoTaishoshaIchiran {
     }
 
     private void setParam(IdoTaishoshaIchiranDiv idoTaishoshaIchiranPanelDiv) {
-        List<HashMap> idoTaishoshaData = YamlLoader.FOR_DBB.loadAsList(new RString("DBB0020001/IdoTaishosha.yml"));
+        List<HashMap> idoTaishoshaData = YamlLoader.DBB.loadAsList(new RString("DBB0020001/IdoTaishosha.yml"));
         
         String 最終計算処理日時 = (String) idoTaishoshaData.get(0).get("最終計算処理日時");
         
@@ -74,7 +71,7 @@ public class IdoTaishoshaIchiran {
 
     private void setTokuchoKaishiTsuchisho(IdoTaishoshaIchiranDiv idoTaishoshaIchiranPanelDiv) {
 
-        List<HashMap> idoTaishoshaData = YamlLoader.FOR_DBB.loadAsList(new RString("DBB0020001/IdoTaishosha.yml"));
+        List<HashMap> idoTaishoshaData = YamlLoader.DBB.loadAsList(new RString("DBB0020001/IdoTaishosha.yml"));
         
         List<dgIdoTaishoshaIchiran_Row> arrayData = new ArrayList<>();
         dgIdoTaishoshaIchiran_Row item;
@@ -99,7 +96,7 @@ public class IdoTaishoshaIchiran {
 
     private void setNonyuTsuchisho(IdoTaishoshaIchiranDiv idoTaishoshaIchiranPanelDiv) {
 
-        List<HashMap> idoTaishoshaData = YamlLoader.FOR_DBB.loadAsList(new RString("DBB0020001/IdoTaishosha.yml"));
+        List<HashMap> idoTaishoshaData = YamlLoader.DBB.loadAsList(new RString("DBB0020001/IdoTaishosha.yml"));
         
         List<dgIdoTaishoshaIchiran_Row> arrayData = new ArrayList<>();
         dgIdoTaishoshaIchiran_Row item;
@@ -124,7 +121,7 @@ public class IdoTaishoshaIchiran {
 
     private void setKetteiHenkoTsuchisho(IdoTaishoshaIchiranDiv idoTaishoshaIchiranPanelDiv) {
 
-        List<HashMap> idoTaishoshaData = YamlLoader.FOR_DBB.loadAsList(new RString("DBB0020001/IdoTaishosha.yml"));
+        List<HashMap> idoTaishoshaData = YamlLoader.DBB.loadAsList(new RString("DBB0020001/IdoTaishosha.yml"));
         
         List<dgIdoTaishoshaIchiran_Row> arrayData = new ArrayList<>();
         dgIdoTaishoshaIchiran_Row item;

@@ -66,7 +66,7 @@ public class HonKetteTsuchiDiv extends PanelPublish {
     public void setTxtKetteTsuchiBunshoNo(TextBox txtKetteTsuchiBunshoNo) {
         this.txtKetteTsuchiBunshoNo=txtKetteTsuchiBunshoNo;
     }
-
+//
 //    @JsonProperty("ShutsuryokuJunHonKetteTsuchi")
 //    public ChohyoShutsuryokujunDiv getShutsuryokuJunHonKetteTsuchi() {
 //        return ShutsuryokuJunHonKetteTsuchi;

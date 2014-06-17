@@ -28,7 +28,7 @@ public class HonsanteiFukaKakutei {
     }
 
     private void setParam(HonsanteiFukaKakuteiDiv honsanteiFukaKakuteiDiv) {
-        List<HashMap> fukaKakuteiData = YamlLoader.FOR_DBB.loadAsList(new RString("FukaKakutei.yml"));
+        List<HashMap> fukaKakuteiData = YamlLoader.DBB.loadAsList(new RString("DBB0310002/FukaKakutei.yml"));
         
         
         String 処理日 = (String) fukaKakuteiData.get(0).get("処理日");

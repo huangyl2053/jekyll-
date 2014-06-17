@@ -156,10 +156,16 @@
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
+      "isShowHeader": true,
       "isShowFooter": true,
       "isShowFilter": false,
       "isShowFilterButton": false,
       "isShowRowState": false,
+      "isShowSelectButtonColumn": false,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
       "header": {
        "combineColumns": [],
        "frozenColumn": "",
@@ -175,7 +181,7 @@
         "visible": true,
         "cellType": 0,
         "cellDetails": "\"\\\"null\\\"\"",
-        "align": 0,
+        "align": 2,
         "resize": true,
         "isPrivateInfo": false,
         "sortKey": ""
