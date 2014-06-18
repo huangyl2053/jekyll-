@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320003.FukaHikakuFukakijun3Div;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320003.FukaHikakuHokenryo3Div;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320003.FukaHikakuKibetsuGaku3Div;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320003.tblChoteiJiyu4Div;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320003.tblChoteiJiyu3Div;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -47,8 +47,8 @@ public class HonSantei1Div extends Panel {
     private Label lblShimei3;
     @JsonProperty("txtShimei3")
     private TextBox txtShimei3;
-    @JsonProperty("tblChoteiJiyu4")
-    private tblChoteiJiyu4Div tblChoteiJiyu4;
+    @JsonProperty("tblChoteiJiyu3")
+    private tblChoteiJiyu3Div tblChoteiJiyu3;
     @JsonProperty("FukaHikakuFukakijun3")
     private FukaHikakuFukakijun3Div FukaHikakuFukakijun3;
     @JsonProperty("FukaHikakuHokenryo3")
@@ -172,14 +172,14 @@ public class HonSantei1Div extends Panel {
         this.txtShimei3=txtShimei3;
     }
 
-    @JsonProperty("tblChoteiJiyu4")
-    public tblChoteiJiyu4Div getTblChoteiJiyu4() {
-        return tblChoteiJiyu4;
+    @JsonProperty("tblChoteiJiyu3")
+    public tblChoteiJiyu3Div getTblChoteiJiyu3() {
+        return tblChoteiJiyu3;
     }
 
-    @JsonProperty("tblChoteiJiyu4")
-    public void setTblChoteiJiyu4(tblChoteiJiyu4Div tblChoteiJiyu4) {
-        this.tblChoteiJiyu4=tblChoteiJiyu4;
+    @JsonProperty("tblChoteiJiyu3")
+    public void setTblChoteiJiyu3(tblChoteiJiyu3Div tblChoteiJiyu3) {
+        this.tblChoteiJiyu3=tblChoteiJiyu3;
     }
 
     @JsonProperty("FukaHikakuFukakijun3")

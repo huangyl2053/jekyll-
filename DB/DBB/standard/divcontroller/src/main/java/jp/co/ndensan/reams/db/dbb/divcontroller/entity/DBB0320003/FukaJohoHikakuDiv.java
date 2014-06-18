@@ -9,7 +9,9 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320003.HonSantei1Div;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320003.HonSantei2Div;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320003.KariSantei1Div;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320003.KariSantei2Div;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * FukaJohoHikaku のクラスファイル 
@@ -27,10 +29,14 @@ public class FukaJohoHikakuDiv extends Panel {
     private KariSantei1Div KariSantei1;
     @JsonProperty("KariSantei2")
     private KariSantei2Div KariSantei2;
-    @JsonProperty("HonSantei2")
-    private HonSantei2Div HonSantei2;
     @JsonProperty("HonSantei1")
     private HonSantei1Div HonSantei1;
+    @JsonProperty("HonSantei2")
+    private HonSantei2Div HonSantei2;
+    @JsonProperty("kariButton")
+    private Button kariButton;
+    @JsonProperty("kariLoad")
+    private Button kariLoad;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -58,6 +64,16 @@ public class FukaJohoHikakuDiv extends Panel {
         this.KariSantei2=KariSantei2;
     }
 
+    @JsonProperty("HonSantei1")
+    public HonSantei1Div getHonSantei1() {
+        return HonSantei1;
+    }
+
+    @JsonProperty("HonSantei1")
+    public void setHonSantei1(HonSantei1Div HonSantei1) {
+        this.HonSantei1=HonSantei1;
+    }
+
     @JsonProperty("HonSantei2")
     public HonSantei2Div getHonSantei2() {
         return HonSantei2;
@@ -68,14 +84,24 @@ public class FukaJohoHikakuDiv extends Panel {
         this.HonSantei2=HonSantei2;
     }
 
-    @JsonProperty("HonSantei1")
-    public HonSantei1Div getHonSantei1() {
-        return HonSantei1;
+    @JsonProperty("kariButton")
+    public Button getKariButton() {
+        return kariButton;
     }
 
-    @JsonProperty("HonSantei1")
-    public void setHonSantei1(HonSantei1Div HonSantei1) {
-        this.HonSantei1=HonSantei1;
+    @JsonProperty("kariButton")
+    public void setKariButton(Button kariButton) {
+        this.kariButton=kariButton;
+    }
+
+    @JsonProperty("kariLoad")
+    public Button getKariLoad() {
+        return kariLoad;
+    }
+
+    @JsonProperty("kariLoad")
+    public void setKariLoad(Button kariLoad) {
+        this.kariLoad=kariLoad;
     }
 
 }
