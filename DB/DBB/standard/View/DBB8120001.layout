@@ -185,7 +185,6 @@
      "helpMessageID": "",
      "jpControlName": "",
      "height": "Auto",
-     "dataSource": [],
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -310,6 +309,7 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
+     "dataSource": [],
      "sortOrder": "",
      "isAscending": true,
      "filterList": [],
@@ -335,7 +335,7 @@
    "jpControlName": "",
    "onLoad": "",
    "title": "即時賦課更正履歴",
-   "isOpen": false,
+   "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
@@ -527,7 +527,6 @@
      "labelRWidth": "S",
      "labelLAlign": 1,
      "labelRAlign": 0,
-     "selectedItem": "7",
      "dataSource": [
       {
        "key": "7",
@@ -537,7 +536,8 @@
        "key": "8",
        "value": "3期（8月）"
       }
-     ]
+     ],
+     "selectedItem": "7"
     },
     {
      "fieldName": "tabSokujiKousei",
@@ -2036,7 +2036,6 @@
            "labelRWidth": "S",
            "labelLAlign": 2,
            "labelRAlign": 0,
-           "selectedItem": "key0",
            "dataSource": [
             {
              "key": "key0",
@@ -2046,7 +2045,8 @@
              "key": "key1",
              "value": "平27"
             }
-           ]
+           ],
+           "selectedItem": "key0"
           },
           {
            "fieldName": "tblKiwarigaku",

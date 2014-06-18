@@ -21,10 +21,16 @@ public class SokujikouseiKeyDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("lblFukaNendo")
+    private Label lblFukaNendo;
     @JsonProperty("txtFukaNendo")
     private TextBox txtFukaNendo;
+    @JsonProperty("lblChoteiYMD")
+    private Label lblChoteiYMD;
     @JsonProperty("txtChoteiYMD")
     private TextBoxDate txtChoteiYMD;
+    @JsonProperty("lblKoseiTsuki")
+    private Label lblKoseiTsuki;
     @JsonProperty("ddlKoseiTsuki")
     private DropDownList ddlKoseiTsuki;
 
@@ -34,6 +40,16 @@ public class SokujikouseiKeyDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    @JsonProperty("lblFukaNendo")
+    public Label getLblFukaNendo() {
+        return lblFukaNendo;
+    }
+
+    @JsonProperty("lblFukaNendo")
+    public void setLblFukaNendo(Label lblFukaNendo) {
+        this.lblFukaNendo=lblFukaNendo;
+    }
+
     @JsonProperty("txtFukaNendo")
     public TextBox getTxtFukaNendo() {
         return txtFukaNendo;
@@ -44,6 +60,16 @@ public class SokujikouseiKeyDiv extends Panel {
         this.txtFukaNendo=txtFukaNendo;
     }
 
+    @JsonProperty("lblChoteiYMD")
+    public Label getLblChoteiYMD() {
+        return lblChoteiYMD;
+    }
+
+    @JsonProperty("lblChoteiYMD")
+    public void setLblChoteiYMD(Label lblChoteiYMD) {
+        this.lblChoteiYMD=lblChoteiYMD;
+    }
+
     @JsonProperty("txtChoteiYMD")
     public TextBoxDate getTxtChoteiYMD() {
         return txtChoteiYMD;
@@ -52,6 +78,16 @@ public class SokujikouseiKeyDiv extends Panel {
     @JsonProperty("txtChoteiYMD")
     public void setTxtChoteiYMD(TextBoxDate txtChoteiYMD) {
         this.txtChoteiYMD=txtChoteiYMD;
+    }
+
+    @JsonProperty("lblKoseiTsuki")
+    public Label getLblKoseiTsuki() {
+        return lblKoseiTsuki;
+    }
+
+    @JsonProperty("lblKoseiTsuki")
+    public void setLblKoseiTsuki(Label lblKoseiTsuki) {
+        this.lblKoseiTsuki=lblKoseiTsuki;
     }
 
     @JsonProperty("ddlKoseiTsuki")

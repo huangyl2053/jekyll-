@@ -45,25 +45,25 @@ public class SokujiFukaKouseiMain {
         
         tabSokujiKouseiDiv tabSokujiKouseiDiv = sokujiFukaKouseiMainDiv.getTabSokujiKousei();
 
-        List<HashMap> fukaKoseiData = YamlLoader.FOR_DBB.loadAsList(new RString("DBB8120001/FukaKosei.yml"));
-        List<HashMap> fukaKonkyoData = YamlLoader.FOR_DBB.loadAsList(new RString("DBB8120001/FukaKonkyo.yml"));
-        List<HashMap> kiwarigakuData = YamlLoader.FOR_DBB.loadAsList(new RString("DBB8120001/Kiwarigaku.yml"));
-        List<HashMap> santeiKisoData = YamlLoader.FOR_DBB.loadAsList(new RString("DBB8120001/SanteiKiso.yml"));
-        List<HashMap> choteiZiyuData = YamlLoader.FOR_DBB.loadAsList(new RString("DBB8120001/ChoteiZiyu.yml"));
+        List<HashMap> fukaKoseiData = YamlLoader.DBB.loadAsList(new RString("DBB8120001/FukaKosei.yml"));
+        List<HashMap> fukaKonkyoData = YamlLoader.DBB.loadAsList(new RString("DBB8120001/FukaKonkyo.yml"));
+        List<HashMap> kiwarigakuData = YamlLoader.DBB.loadAsList(new RString("DBB8120001/Kiwarigaku.yml"));
+        List<HashMap> santeiKisoData = YamlLoader.DBB.loadAsList(new RString("DBB8120001/SanteiKiso.yml"));
+        List<HashMap> choteiJiyuData = YamlLoader.DBB.loadAsList(new RString("DBB8120001/ChoteiJiyu.yml"));
         
         setSokujikouseiKey(sokujiFukaKouseiMainDiv, fukaKoseiData);
         setSokujikouseiFukakonkyo(tabSokujiKouseiDiv, fukaKonkyoData);
         setKiwarigaku(tabSokujiKouseiDiv, kiwarigakuData, sokujiFukaKouseiMainDiv);
         setSanteiKiso(tabSokujiKouseiDiv, santeiKisoData);
-        setChoteiZiyu(tabSokujiKouseiDiv, choteiZiyuData);
+        setChoteiJiyu(tabSokujiKouseiDiv, choteiJiyuData);
     }
 
 
     private void setSokujikouseiKey(SokujiFukaKouseiMainDiv sokujiFukaKouseiMainDiv, List<HashMap> fukaKoseiData) {
         String 賦課年度 = (String) fukaKoseiData.get(0).get("賦課年度");
 
-        sokujiFukaKouseiMainDiv.getSokujikouseiKey().getTxtFukaNendo().setValue(new RString(賦課年度));
-        sokujiFukaKouseiMainDiv.getSokujikouseiKey().getTxtChoteiYMD().setValue(RDateTime.now().getDate());
+        sokujiFukaKouseiMainDiv.getTxtFukaNendo().setValue(new RString(賦課年度));
+        sokujiFukaKouseiMainDiv.getTxtChoteiYMD().setValue(RDateTime.now().getDate());
     }
 
     private void setSokujikouseiFukakonkyo(tabSokujiKouseiDiv taSokujiKouseiDiv, List<HashMap> kosei) {
@@ -340,7 +340,7 @@ public class SokujiFukaKouseiMain {
         }
         
 
-        RString 選択月 = sokujiFukaKouseiMainDiv.getSokujikouseiKey().getDdlKoseiTsuki().getSelectedItem();
+        RString 選択月 = sokujiFukaKouseiMainDiv.getDdlKoseiTsuki().getSelectedItem();
 
         NumberFormat isComma = NumberFormat.getNumberInstance();
         
@@ -794,13 +794,13 @@ public class SokujiFukaKouseiMain {
         tplSanteinokisoAtoDiv.getLblHokenryoGakuAto1().setText(new RString(保険料額_後));
     }
 
-    private void setChoteiZiyu(tabSokujiKouseiDiv tabSokujiKouseiDiv, List<HashMap> choteiZiyuData) {
+    private void setChoteiJiyu(tabSokujiKouseiDiv tabSokujiKouseiDiv, List<HashMap> choteiJiyuData) {
         SokujikouseiJiyuDiv sokujikouseiJiyuDiv = tabSokujiKouseiDiv.getSokujiKoseiTab2().getSokujikouseiJiyu();
         
-        String 調定事由1 = (String) choteiZiyuData.get(0).get("調定事由1");
-        String 調定事由2 = (String) choteiZiyuData.get(0).get("調定事由2");
-        String 調定事由3 = (String) choteiZiyuData.get(0).get("調定事由3");
-        String 調定事由4 = (String) choteiZiyuData.get(0).get("調定事由4");
+        String 調定事由1 = (String) choteiJiyuData.get(0).get("調定事由1");
+        String 調定事由2 = (String) choteiJiyuData.get(0).get("調定事由2");
+        String 調定事由3 = (String) choteiJiyuData.get(0).get("調定事由3");
+        String 調定事由4 = (String) choteiJiyuData.get(0).get("調定事由4");
         
         sokujikouseiJiyuDiv.getTxtChoteiJiyu1().setValue(new RString(調定事由1));
         sokujikouseiJiyuDiv.getTxtChoteiJiyu2().setValue(new RString(調定事由2));

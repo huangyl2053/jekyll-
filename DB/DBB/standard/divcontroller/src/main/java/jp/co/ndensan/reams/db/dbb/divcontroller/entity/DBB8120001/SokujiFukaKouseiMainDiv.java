@@ -5,7 +5,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB8120001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB8120001.SokujikouseiKeyDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB8120001.tabSokujiKouseiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -22,8 +22,14 @@ public class SokujiFukaKouseiMainDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("SokujikouseiKey")
-    private SokujikouseiKeyDiv SokujikouseiKey;
+    @JsonProperty("txtChoteiNendo")
+    private TextBox txtChoteiNendo;
+    @JsonProperty("txtFukaNendo")
+    private TextBox txtFukaNendo;
+    @JsonProperty("txtChoteiYMD")
+    private TextBoxDate txtChoteiYMD;
+    @JsonProperty("ddlKoseiTsuki")
+    private DropDownList ddlKoseiTsuki;
     @JsonProperty("tabSokujiKousei")
     private tabSokujiKouseiDiv tabSokujiKousei;
     @JsonProperty("btnHozon")
@@ -35,14 +41,44 @@ public class SokujiFukaKouseiMainDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("SokujikouseiKey")
-    public SokujikouseiKeyDiv getSokujikouseiKey() {
-        return SokujikouseiKey;
+    @JsonProperty("txtChoteiNendo")
+    public TextBox getTxtChoteiNendo() {
+        return txtChoteiNendo;
     }
 
-    @JsonProperty("SokujikouseiKey")
-    public void setSokujikouseiKey(SokujikouseiKeyDiv SokujikouseiKey) {
-        this.SokujikouseiKey=SokujikouseiKey;
+    @JsonProperty("txtChoteiNendo")
+    public void setTxtChoteiNendo(TextBox txtChoteiNendo) {
+        this.txtChoteiNendo=txtChoteiNendo;
+    }
+
+    @JsonProperty("txtFukaNendo")
+    public TextBox getTxtFukaNendo() {
+        return txtFukaNendo;
+    }
+
+    @JsonProperty("txtFukaNendo")
+    public void setTxtFukaNendo(TextBox txtFukaNendo) {
+        this.txtFukaNendo=txtFukaNendo;
+    }
+
+    @JsonProperty("txtChoteiYMD")
+    public TextBoxDate getTxtChoteiYMD() {
+        return txtChoteiYMD;
+    }
+
+    @JsonProperty("txtChoteiYMD")
+    public void setTxtChoteiYMD(TextBoxDate txtChoteiYMD) {
+        this.txtChoteiYMD=txtChoteiYMD;
+    }
+
+    @JsonProperty("ddlKoseiTsuki")
+    public DropDownList getDdlKoseiTsuki() {
+        return ddlKoseiTsuki;
+    }
+
+    @JsonProperty("ddlKoseiTsuki")
+    public void setDdlKoseiTsuki(DropDownList ddlKoseiTsuki) {
+        this.ddlKoseiTsuki=ddlKoseiTsuki;
     }
 
     @JsonProperty("tabSokujiKousei")
