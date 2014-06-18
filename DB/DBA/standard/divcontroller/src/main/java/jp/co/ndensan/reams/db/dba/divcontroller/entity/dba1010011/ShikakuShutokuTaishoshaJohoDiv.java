@@ -5,8 +5,8 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.ShikakuShutokuTaishoshaDbJohoDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoAtenaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -21,10 +21,10 @@ public class ShikakuShutokuTaishoshaJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ShikakuShutokuTaishoshaCommonJoho")
-    private AtenaShokaiSimpleDiv ShikakuShutokuTaishoshaCommonJoho;
-    @JsonProperty("ShikakuShutokuTaishoshaDbJoho")
-    private ShikakuShutokuTaishoshaDbJohoDiv ShikakuShutokuTaishoshaDbJoho;
+    @JsonProperty("ShikakuShutokuCommonJoho")
+    private KaigoAtenaInfoDiv ShikakuShutokuCommonJoho;
+    @JsonProperty("ShikakuShutokuDbJoho")
+    private KaigoShikakuKihonDiv ShikakuShutokuDbJoho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,24 +32,24 @@ public class ShikakuShutokuTaishoshaJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("ShikakuShutokuTaishoshaCommonJoho")
-    public AtenaShokaiSimpleDiv getShikakuShutokuTaishoshaCommonJoho() {
-        return ShikakuShutokuTaishoshaCommonJoho;
+    @JsonProperty("ShikakuShutokuCommonJoho")
+    public KaigoAtenaInfoDiv getShikakuShutokuCommonJoho() {
+        return ShikakuShutokuCommonJoho;
     }
 
-    @JsonProperty("ShikakuShutokuTaishoshaCommonJoho")
-    public void setShikakuShutokuTaishoshaCommonJoho(AtenaShokaiSimpleDiv ShikakuShutokuTaishoshaCommonJoho) {
-        this.ShikakuShutokuTaishoshaCommonJoho=ShikakuShutokuTaishoshaCommonJoho;
+    @JsonProperty("ShikakuShutokuCommonJoho")
+    public void setShikakuShutokuCommonJoho(KaigoAtenaInfoDiv ShikakuShutokuCommonJoho) {
+        this.ShikakuShutokuCommonJoho=ShikakuShutokuCommonJoho;
     }
 
-    @JsonProperty("ShikakuShutokuTaishoshaDbJoho")
-    public ShikakuShutokuTaishoshaDbJohoDiv getShikakuShutokuTaishoshaDbJoho() {
-        return ShikakuShutokuTaishoshaDbJoho;
+    @JsonProperty("ShikakuShutokuDbJoho")
+    public KaigoShikakuKihonDiv getShikakuShutokuDbJoho() {
+        return ShikakuShutokuDbJoho;
     }
 
-    @JsonProperty("ShikakuShutokuTaishoshaDbJoho")
-    public void setShikakuShutokuTaishoshaDbJoho(ShikakuShutokuTaishoshaDbJohoDiv ShikakuShutokuTaishoshaDbJoho) {
-        this.ShikakuShutokuTaishoshaDbJoho=ShikakuShutokuTaishoshaDbJoho;
+    @JsonProperty("ShikakuShutokuDbJoho")
+    public void setShikakuShutokuDbJoho(KaigoShikakuKihonDiv ShikakuShutokuDbJoho) {
+        this.ShikakuShutokuDbJoho=ShikakuShutokuDbJoho;
     }
 
 }

@@ -10,11 +10,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShikakuJoho のクラスファイル 
+ * ShikakuShutokuJoho のクラスファイル 
  * 
  * @author 自動生成
  */
-public class ShikakuJohoDiv extends Panel {
+public class ShikakuShutokuJohoDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

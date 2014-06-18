@@ -5,26 +5,23 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigokanryomessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * SelectShikakuKanri のクラスファイル 
+ * ShikakuShutokuComplete のクラスファイル 
  * 
  * @author 自動生成
  */
-public class SelectShikakuKanriDiv extends Panel {
+public class ShikakuShutokuCompleteDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnShikakuShutoku")
-    private Button btnShikakuShutoku;
-    @JsonProperty("btnJutokuTekiyo")
-    private Button btnJutokuTekiyo;
+    @JsonProperty("Complete")
+    private KaigoKanryoMessageDiv Complete;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,24 +29,14 @@ public class SelectShikakuKanriDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("btnShikakuShutoku")
-    public Button getBtnShikakuShutoku() {
-        return btnShikakuShutoku;
+    @JsonProperty("Complete")
+    public KaigoKanryoMessageDiv getComplete() {
+        return Complete;
     }
 
-    @JsonProperty("btnShikakuShutoku")
-    public void setBtnShikakuShutoku(Button btnShikakuShutoku) {
-        this.btnShikakuShutoku=btnShikakuShutoku;
-    }
-
-    @JsonProperty("btnJutokuTekiyo")
-    public Button getBtnJutokuTekiyo() {
-        return btnJutokuTekiyo;
-    }
-
-    @JsonProperty("btnJutokuTekiyo")
-    public void setBtnJutokuTekiyo(Button btnJutokuTekiyo) {
-        this.btnJutokuTekiyo=btnJutokuTekiyo;
+    @JsonProperty("Complete")
+    public void setComplete(KaigoKanryoMessageDiv Complete) {
+        this.Complete=Complete;
     }
 
 }

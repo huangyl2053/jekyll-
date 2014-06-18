@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Jun 05 13:15:16 JST 2014 
+ * Tue Jun 17 18:47:54 JST 2014 
  */
 
 
@@ -29,6 +29,11 @@ public class dgSeikatsuHogoRireki_Row extends DataRow {
 
     public dgSeikatsuHogoRireki_Row() {
         super();
+        this.kaishiDate = new TextBoxFlexibleDate();
+        this.shuryoDate = new TextBoxFlexibleDate();
+        this.seihoShubetsuKey = RString.EMPTY;
+        this.seihoShubetsu = RString.EMPTY;
+        this.jukyushaNo = RString.EMPTY;
     }
 
     public dgSeikatsuHogoRireki_Row(TextBoxFlexibleDate kaishiDate, TextBoxFlexibleDate shuryoDate, RString seihoShubetsuKey, RString seihoShubetsu, RString jukyushaNo) {

@@ -10,11 +10,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ShikakuShutoku のクラスファイル 
+ * ShikakuShutokuInput のクラスファイル 
  * 
  * @author 自動生成
  */
-public class ShikakuShutokuDiv extends Panel {
+public class ShikakuShutokuInputDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Jun 05 13:14:57 JST 2014 
+ * Tue Jun 17 18:47:51 JST 2014 
  */
 
 
@@ -27,6 +27,9 @@ public class dgRohukuNenkinRireki_Row extends DataRow {
 
     public dgRohukuNenkinRireki_Row() {
         super();
+        this.kaishiDate = new TextBoxFlexibleDate();
+        this.shuryoDate = new TextBoxFlexibleDate();
+        this.jukyushaNo = RString.EMPTY;
     }
 
     public dgRohukuNenkinRireki_Row(TextBoxFlexibleDate kaishiDate, TextBoxFlexibleDate shuryoDate, RString jukyushaNo) {

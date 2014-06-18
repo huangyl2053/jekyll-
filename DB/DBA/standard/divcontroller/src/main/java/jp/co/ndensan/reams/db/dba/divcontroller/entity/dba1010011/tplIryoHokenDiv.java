@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.IryoHokenInputDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.dgIryoHokenRireki_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.iryohokenrireki.IryoHokenRirekiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -25,8 +25,8 @@ public class tplIryoHokenDiv extends TabPanel {
      */
     @JsonProperty("btnAddIryoHoken")
     private Button btnAddIryoHoken;
-    @JsonProperty("dgIryoHokenRireki")
-    private DataGrid<dgIryoHokenRireki_Row> dgIryoHokenRireki;
+    @JsonProperty("IryoHokenRireki")
+    private IryoHokenRirekiDiv IryoHokenRireki;
     @JsonProperty("IryoHokenInput")
     private IryoHokenInputDiv IryoHokenInput;
     @JsonProperty("btnUpdateIryoHoken")
@@ -48,14 +48,14 @@ public class tplIryoHokenDiv extends TabPanel {
         this.btnAddIryoHoken=btnAddIryoHoken;
     }
 
-    @JsonProperty("dgIryoHokenRireki")
-    public DataGrid<dgIryoHokenRireki_Row> getDgIryoHokenRireki() {
-        return dgIryoHokenRireki;
+    @JsonProperty("IryoHokenRireki")
+    public IryoHokenRirekiDiv getIryoHokenRireki() {
+        return IryoHokenRireki;
     }
 
-    @JsonProperty("dgIryoHokenRireki")
-    public void setDgIryoHokenRireki(DataGrid<dgIryoHokenRireki_Row> dgIryoHokenRireki) {
-        this.dgIryoHokenRireki=dgIryoHokenRireki;
+    @JsonProperty("IryoHokenRireki")
+    public void setIryoHokenRireki(IryoHokenRirekiDiv IryoHokenRireki) {
+        this.IryoHokenRireki=IryoHokenRireki;
     }
 
     @JsonProperty("IryoHokenInput")
