@@ -25,10 +25,10 @@
      "helpMessageID": "",
      "jpControlName": "",
      "required": false,
-     "isPrivateInfo": false,
+     "align": 0,
      "text": "特別徴収平準化処理の結果を確定します。",
-     "decorationClass": "",
-     "align": 0
+     "isPrivateInfo": false,
+     "decorationClass": ""
     },
     {
      "fieldName": "HeijunkaKakuteiShoriNaiyo",
@@ -55,19 +55,20 @@
        "jpControlName": "",
        "readOnly": true,
        "required": false,
+       "text": "",
+       "isPrivateInfo": false,
+       "decorationClass": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
        "placeHolder": "平26",
        "textKind": 0,
-       "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "賦課年度",
@@ -76,7 +77,6 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
        "permitCharactor": ""
       },
       {
@@ -101,19 +101,20 @@
        "jpControlName": "",
        "readOnly": true,
        "required": false,
+       "text": "",
+       "isPrivateInfo": false,
+       "decorationClass": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 0,
        "placeHolder": "平26.06.01 11:10:22",
        "textKind": 0,
-       "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "処理日時",
@@ -122,7 +123,6 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
        "permitCharactor": ""
       }
      ],
@@ -194,10 +194,10 @@
        "helpMessageID": "",
        "jpControlName": "",
        "required": false,
-       "isPrivateInfo": true,
+       "align": 0,
        "text": "平準化前と平準化後の期別保険料額が指定した値（差額）以下の場合は、平準化の対象外となります。",
-       "decorationClass": "",
-       "align": 0
+       "isPrivateInfo": true,
+       "decorationClass": ""
       },
       {
        "fieldName": "lblHeijunkaMsg3",
@@ -220,10 +220,10 @@
        "helpMessageID": "",
        "jpControlName": "",
        "required": false,
-       "isPrivateInfo": false,
+       "align": 0,
        "text": "差額設定による平準化対象件数を確認し、計算結果を確定してください。",
-       "decorationClass": "",
-       "align": 0
+       "isPrivateInfo": false,
+       "decorationClass": ""
       },
       {
        "fieldName": "linHeijunka",
@@ -267,19 +267,20 @@
        "jpControlName": "",
        "readOnly": false,
        "required": false,
+       "text": "",
+       "isPrivateInfo": false,
+       "decorationClass": "",
        "maxLength": 100000000,
        "minLength": 0,
        "textAlign": 2,
        "placeHolder": "",
        "textKind": 2,
-       "isPrivateInfo": false,
        "isPassword": false,
        "isComboBox": false,
        "onFocus": "",
        "onBlur": "",
        "onChange": "",
        "onKeyPress": "",
-       "text": "",
        "suggest": [],
        "value": "",
        "labelLText": "すべての保険料段階に同じ差額を設定する",
@@ -288,7 +289,6 @@
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
-       "decorationClass": "",
        "maxValue": 1.7976931348623157e+308,
        "minValue": 0,
        "isCurrency": false,
@@ -317,7 +317,7 @@
        "helpMessageID": "",
        "jpControlName": "",
        "text": "設定する",
-       "onClick": "",
+       "onClick": "onClick_btnSagakuSettei",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
@@ -565,7 +565,16 @@
      "postParameterPanelNames": "HeijunkaKakutei"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbb/db/dbb/HeijunkaKakutei/onLoad_HeijunkaKakutei"
+    },
+    {
+     "eventName": "onClick_btnSagakuSettei",
+     "requestUrl": "dbb/db/dbb/HeijunkaKakutei/onClick_btnSagakuSettei"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -629,10 +638,48 @@
    ],
    "supplementInfo": "",
    "validation": {},
-   "events": []
+   "events": [
+    {
+     "fieldName": "btnSagakuSettei",
+     "event": "onClick",
+     "transition": "平準化差額確認"
+    }
+   ]
+  },
+  {
+   "order": "2",
+   "stateName": "平準化差額確認",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "HeijunkaKakutei",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "HeijunkaKakuteiShoriNaiyo",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "HeijunkaSagakuKakunin",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "supplementInfoPostParamData": [],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnSagakuSettei",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
   }
  ],
- "currentState": "平準化確定",
+ "currentState": "All",
  "id": "DBB0130002",
  "WFParameter": [],
  "UIContainerEventMapping": [],

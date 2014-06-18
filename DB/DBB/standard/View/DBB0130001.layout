@@ -487,7 +487,7 @@
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbb/db/dbb/HonsanteiFukaKakunin/onLoad"
+     "requestUrl": "dbb/db/dbb/HeijunkaAugustKeisan/onLoad_HeijunkaAugustKeisan"
     }
    ],
    "hiddenInput": [],
@@ -561,7 +561,7 @@
    "events": []
   }
  ],
- "currentState": "平準化計算",
+ "currentState": "All",
  "id": "DBB0130001",
  "WFParameter": [],
  "UIContainerEventMapping": [],
