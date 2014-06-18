@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0040011;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -33,8 +33,6 @@ public class JukyushaIdoRenrakuhyoSearchConditionDiv extends Panel {
     private CheckBoxList chkIsSearchDeletedData;
     @JsonProperty("lblIsSearchDeletedData")
     private Label lblIsSearchDeletedData;
-    @JsonProperty("txtGetDataMaxNum")
-    private TextBoxNum txtGetDataMaxNum;
     @JsonProperty("lblSearchCondition")
     private Label lblSearchCondition;
     @JsonProperty("btnClearSearchCondition")
@@ -106,16 +104,6 @@ public class JukyushaIdoRenrakuhyoSearchConditionDiv extends Panel {
     @JsonProperty("lblIsSearchDeletedData")
     public void setLblIsSearchDeletedData(Label lblIsSearchDeletedData) {
         this.lblIsSearchDeletedData=lblIsSearchDeletedData;
-    }
-
-    @JsonProperty("txtGetDataMaxNum")
-    public TextBoxNum getTxtGetDataMaxNum() {
-        return txtGetDataMaxNum;
-    }
-
-    @JsonProperty("txtGetDataMaxNum")
-    public void setTxtGetDataMaxNum(TextBoxNum txtGetDataMaxNum) {
-        this.txtGetDataMaxNum=txtGetDataMaxNum;
     }
 
     @JsonProperty("lblSearchCondition")

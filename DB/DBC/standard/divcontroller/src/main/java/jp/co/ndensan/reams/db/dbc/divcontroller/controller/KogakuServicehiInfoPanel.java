@@ -43,7 +43,7 @@ public class KogakuServicehiInfoPanel {
      */
     public ResponseData<KogakuServicehiInfoPanelDiv> onLoad(KogakuServicehiInfoPanelDiv panel) {
         ResponseData<KogakuServicehiInfoPanelDiv> response = new ResponseData<>();
-
+        
 //        //高額介護サービス費情報 
 //        setKogakuServicehiInfo(panel);
 //        
@@ -323,21 +323,19 @@ public class KogakuServicehiInfoPanel {
      */
     public ResponseData<KogakuServicehiInfoPanelDiv> onClick_btnReturnShowOne(KogakuServicehiInfoPanelDiv panel) {
         ResponseData<KogakuServicehiInfoPanelDiv> response = new ResponseData<>();
-
+                
         //口座払いので表示 
-        setKozaPaymentVisible(panel);
-
+        //setKozaPaymentVisible(panel);
         //高額介護サービス費情報 
-        setKogakuServicehiInfo(panel);
-
+        //setKogakuServicehiInfo(panel);
         //申請者情報 TAB
-        setKogakuServicehiInfoPanelShinseisha(panel);
+        //setKogakuServicehiInfoPanelShinseisha(panel);
         //口座情報 TAB
-        setKogakuServicehiInfoPanelPaymentMethod(panel);
+        //setKogakuServicehiInfoPanelPaymentMethod(panel);
         //高額決定情報 TAB
-        KogakuServiceDetaildgJudgementinfo(panel);
+        //KogakuServiceDetaildgJudgementinfo(panel);
         //高額決定情報 TAB     dgJudgementResult
-        KogakuServiceDetaildgJudgementResult(panel);
+        //KogakuServiceDetaildgJudgementResult(panel);
 
         response.data = panel;
         return response;
@@ -393,7 +391,7 @@ public class KogakuServicehiInfoPanel {
                 getTplKoza().getPaymentMethod().
                 getRadPayMethod().getSelectedValue().toString()) {
             case PayToJuryoinin:
-                //受領委任払い 非表示に設定する
+                //受領委任払い 表示に設定する
                 panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
                         getTplKoza().getPaymentMethod().getJuryoininJoho().setVisible(true);
                 panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
@@ -417,7 +415,7 @@ public class KogakuServicehiInfoPanel {
                         getTplKoza().getPaymentMethod().getJuryoininJoho().setVisible(true);
                 panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
                         getTplKoza().getPaymentMethod().getJuryoininJoho().setDisplayNone(true);
-                //口座払い 非表示に設定する
+                //口座払い 表示に設定する
                 panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
                         getTplKoza().getPaymentMethod().getKozaPayment().setVisible(true);
                 panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
@@ -441,7 +439,7 @@ public class KogakuServicehiInfoPanel {
                         getTplKoza().getPaymentMethod().getKozaPayment().setVisible(true);
                 panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
                         getTplKoza().getPaymentMethod().getKozaPayment().setDisplayNone(true);
-                //窓口払い　 非表示に設定する
+                //窓口払い　 表示に設定する
                 panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
                         getTplKoza().getPaymentMethod().getMadoguchiPayment().setVisible(true);
                 panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
@@ -455,27 +453,28 @@ public class KogakuServicehiInfoPanel {
                 getTplKoza().getPaymentMethod().
                 getRadPayMethod().setSelectedItem(new RString("payToKoza"));
         
-       if( panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-                getTplKoza().getPaymentMethod().getRadPayMethod().getSelectedValue().toString().equals(PayToKoza)){
-        //受領委任払い 非表示に設定する
-        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-                getTplKoza().getPaymentMethod().getJuryoininJoho().setVisible(true);
-        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-                getTplKoza().getPaymentMethod().getJuryoininJoho().setDisplayNone(true);
+        if (panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+                getTplKoza().getPaymentMethod().getRadPayMethod().getSelectedValue().toString().equals(PayToKoza)) {
 
-        //口座払い 非表示に設定する
-        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-                getTplKoza().getPaymentMethod().getKozaPayment().setVisible(true);
-        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-                getTplKoza().getPaymentMethod().getKozaPayment().setDisplayNone(false);
+                //受領委任払い 非表示に設定する
+                panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+                        getTplKoza().getPaymentMethod().getJuryoininJoho().setVisible(true);
+                panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+                        getTplKoza().getPaymentMethod().getJuryoininJoho().setDisplayNone(true);
 
-        //窓口払い　 非表示に設定する
-        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-                getTplKoza().getPaymentMethod().getMadoguchiPayment().setVisible(true);
-        panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
-                getTplKoza().getPaymentMethod().getMadoguchiPayment().setDisplayNone(true);
+                //口座払い 表示に設定する
+                panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+                        getTplKoza().getPaymentMethod().getKozaPayment().setVisible(true);
+                panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+                        getTplKoza().getPaymentMethod().getKozaPayment().setDisplayNone(false);
 
-       }
+                //窓口払い　 非表示に設定する
+                panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+                        getTplKoza().getPaymentMethod().getMadoguchiPayment().setVisible(true);
+                panel.getKogakuServiceDetail().getTabKogakuServicehiDetail().
+                        getTplKoza().getPaymentMethod().getMadoguchiPayment().setDisplayNone(true);
+
+        }
        
     }
 

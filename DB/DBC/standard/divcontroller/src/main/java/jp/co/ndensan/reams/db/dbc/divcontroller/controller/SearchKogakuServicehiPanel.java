@@ -51,7 +51,7 @@ public class SearchKogakuServicehiPanel {
 
         setSearchKogakuServicehiInfo(panel);
         setSearchYMClear(panel);
-        
+
         response.data = panel;
         return response;
     }
@@ -92,7 +92,9 @@ public class SearchKogakuServicehiPanel {
      */
     public ResponseData<SearchKogakuServicehiPanelDiv> onClick_radSearchKubun(SearchKogakuServicehiPanelDiv panel) {
         ResponseData<SearchKogakuServicehiPanelDiv> response = new ResponseData<>();
+        
         List<HashMap> ymlData = ymlData("dbc0030011/KogakuServicehiSearchKogakuServicehi.yml");
+        
         switch (panel.getRadSearchKubun().getSelectedValue().toString()) {
             case HihokenshaShitei:
                 //被保険者を指定して検索する。
@@ -112,14 +114,13 @@ public class SearchKogakuServicehiPanel {
                         ymlData.get(0).get("ketteiYMRangefrom").toString()));
                 panel.getSearchKogakuHihokensha().getTxtKetteiYMRange().setToValue(new RDate(
                         ymlData.get(0).get("ketteiYMRangeto").toString()));
-                
+
                 //clear 
                 setSearchYMClear(panel);
 
-                
                 break;
             case YMShitei:
-                
+
                 //年月を指定して検索する。
                 panel.getSearchYM().getTxtTeikyoYM().setValue(new RDate(
                         ymlData.get(1).get("teikyoYM").toString()));
@@ -127,11 +128,10 @@ public class SearchKogakuServicehiPanel {
                         ymlData.get(1).get("shinseiYM").toString()));
                 panel.getSearchYM().getTxtKetteiYM().setValue(new RDate(
                         ymlData.get(1).get("ketteiYM").toString()));
-                
+
                 //clear 
                 setSearchKogakuHihokenshaClear(panel);
 
-                
                 break;
         }
 
@@ -160,15 +160,8 @@ public class SearchKogakuServicehiPanel {
 
     }
 
-    
-    
-    
     private List<HashMap> ymlData(String ymlData) {
         return YamlLoader.FOR_DBC.loadAsList(new RString(ymlData));
     }
-
-
-
-
 
 }

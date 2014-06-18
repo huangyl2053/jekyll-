@@ -3,16 +3,14 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0030011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jun 10 15:28:30 JST 2014 
+ * Wed Jun 18 11:25:36 JST 2014 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 
@@ -25,12 +23,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 public class dgKogakuServicehiRireki_Row extends DataRow {
 
     private Button btnSelect;
-    private TextBoxCode txtHihoNo;
+    private RString txtHihoNo;
     private RString txtHihoName;
-    private TextBoxDate txtTeikyoYM;
+    private RString txtTeikyoYM;
     private TextBoxNum txtKogakuShikyuAmount;
-    private TextBoxDate txtShinseiDate;
-    private TextBoxDate txtKetteiDate;
+    private RString txtShinseiDate;
+    private RString txtKetteiDate;
     private RString txtShikyuKubun;
     private TextBoxNum txtShikyuKingaku;
     private RString txtKogakuAutoShokan;
@@ -38,9 +36,20 @@ public class dgKogakuServicehiRireki_Row extends DataRow {
 
     public dgKogakuServicehiRireki_Row() {
         super();
+        this.btnSelect = new Button();
+        this.txtHihoNo = RString.EMPTY;
+        this.txtHihoName = RString.EMPTY;
+        this.txtTeikyoYM = RString.EMPTY;
+        this.txtKogakuShikyuAmount = new TextBoxNum();
+        this.txtShinseiDate = RString.EMPTY;
+        this.txtKetteiDate = RString.EMPTY;
+        this.txtShikyuKubun = RString.EMPTY;
+        this.txtShikyuKingaku = new TextBoxNum();
+        this.txtKogakuAutoShokan = RString.EMPTY;
+        this.txtHokensha = RString.EMPTY;
     }
 
-    public dgKogakuServicehiRireki_Row(Button btnSelect, TextBoxCode txtHihoNo, RString txtHihoName, TextBoxDate txtTeikyoYM, TextBoxNum txtKogakuShikyuAmount, TextBoxDate txtShinseiDate, TextBoxDate txtKetteiDate, RString txtShikyuKubun, TextBoxNum txtShikyuKingaku, RString txtKogakuAutoShokan, RString txtHokensha) {
+    public dgKogakuServicehiRireki_Row(Button btnSelect, RString txtHihoNo, RString txtHihoName, RString txtTeikyoYM, TextBoxNum txtKogakuShikyuAmount, RString txtShinseiDate, RString txtKetteiDate, RString txtShikyuKubun, TextBoxNum txtShikyuKingaku, RString txtKogakuAutoShokan, RString txtHokensha) {
         super();
         this.setOriginalData("btnSelect", btnSelect);
         this.setOriginalData("txtHihoNo", txtHihoNo);
@@ -70,7 +79,7 @@ public class dgKogakuServicehiRireki_Row extends DataRow {
         return btnSelect;
     }
 
-    public TextBoxCode getTxtHihoNo() {
+    public RString getTxtHihoNo() {
         return txtHihoNo;
     }
 
@@ -78,7 +87,7 @@ public class dgKogakuServicehiRireki_Row extends DataRow {
         return txtHihoName;
     }
 
-    public TextBoxDate getTxtTeikyoYM() {
+    public RString getTxtTeikyoYM() {
         return txtTeikyoYM;
     }
 
@@ -86,11 +95,11 @@ public class dgKogakuServicehiRireki_Row extends DataRow {
         return txtKogakuShikyuAmount;
     }
 
-    public TextBoxDate getTxtShinseiDate() {
+    public RString getTxtShinseiDate() {
         return txtShinseiDate;
     }
 
-    public TextBoxDate getTxtKetteiDate() {
+    public RString getTxtKetteiDate() {
         return txtKetteiDate;
     }
 
@@ -115,7 +124,7 @@ public class dgKogakuServicehiRireki_Row extends DataRow {
         this.btnSelect = btnSelect;
     }
 
-    public void setTxtHihoNo(TextBoxCode txtHihoNo) {
+    public void setTxtHihoNo(RString txtHihoNo) {
         this.setOriginalData("txtHihoNo", txtHihoNo);
         this.txtHihoNo = txtHihoNo;
     }
@@ -125,7 +134,7 @@ public class dgKogakuServicehiRireki_Row extends DataRow {
         this.txtHihoName = txtHihoName;
     }
 
-    public void setTxtTeikyoYM(TextBoxDate txtTeikyoYM) {
+    public void setTxtTeikyoYM(RString txtTeikyoYM) {
         this.setOriginalData("txtTeikyoYM", txtTeikyoYM);
         this.txtTeikyoYM = txtTeikyoYM;
     }
@@ -135,12 +144,12 @@ public class dgKogakuServicehiRireki_Row extends DataRow {
         this.txtKogakuShikyuAmount = txtKogakuShikyuAmount;
     }
 
-    public void setTxtShinseiDate(TextBoxDate txtShinseiDate) {
+    public void setTxtShinseiDate(RString txtShinseiDate) {
         this.setOriginalData("txtShinseiDate", txtShinseiDate);
         this.txtShinseiDate = txtShinseiDate;
     }
 
-    public void setTxtKetteiDate(TextBoxDate txtKetteiDate) {
+    public void setTxtKetteiDate(RString txtKetteiDate) {
         this.setOriginalData("txtKetteiDate", txtKetteiDate);
         this.txtKetteiDate = txtKetteiDate;
     }

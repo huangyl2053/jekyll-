@@ -6,15 +6,20 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoSearchConditionDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoSearchPanelDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgJukyushaIdoRenrakuhyoSearchResult_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0070011.dgSofuIchiran_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0040011.JukyushaIdoRenrakuhyoSearchConditionDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0040011.JukyushaIdoRenrakuhyoSearchPanelDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0040011.dgJukyushaIdoRenrakuhyoSearchResult_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
@@ -23,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  * 受給者異動連絡票情報照会の検索パネルです。
  *
  * @author N3317 塚田 萌
+ * @author n8823 ymldata
  */
 public class JukyushaIdoRenrakuhyoSearchPanel {
 
@@ -38,12 +44,24 @@ public class JukyushaIdoRenrakuhyoSearchPanel {
         searchPanel.getJukyushaIdoRenrakuhyoSearchResultIchiran().setIsOpen(false);
         clearSearchCondtion(searchPanel.getJukyushaIdoRenrakuhyoSearchCondition());
 
-        searchPanel.getJukyushaIdoRenrakuhyoSearchCondition().getTxtSearchHihoNo().setValue(new RString("0000000001"));
-        searchPanel.getJukyushaIdoRenrakuhyoSearchCondition().getTxtIdoDateRange().setFromValue(new RDate("20130101"));
-        searchPanel.getJukyushaIdoRenrakuhyoSearchCondition().getTxtIdoDateRange().setToValue(new RDate("20140701"));
+        //2014.6.16 ymlData 適用
+        setJukyushaIdoRenrakuhyoSearchCondition(searchPanel);
+
         ResponseData<JukyushaIdoRenrakuhyoSearchPanelDiv> response = new ResponseData<>();
         response.data = searchPanel;
         return response;
+    }
+
+    private void setJukyushaIdoRenrakuhyoSearchCondition(JukyushaIdoRenrakuhyoSearchPanelDiv searchPanel) {
+        List<HashMap> ymlData = ymlData("dbc0040011/JukyushaIdoRenrakuhyoSearchCondition.yml");
+
+        HashMap hashMap = ymlData.get(0);
+        ControlGenerator ymlDt = new ControlGenerator(hashMap);
+
+        searchPanel.getJukyushaIdoRenrakuhyoSearchCondition().getTxtSearchHihoNo().setValue(ymlDt.getAsRString("searchHihoNo"));
+        searchPanel.getJukyushaIdoRenrakuhyoSearchCondition().getTxtIdoDateRange().setFromValue(ymlDt.getAsRDate("idoDateRangefrom"));
+        searchPanel.getJukyushaIdoRenrakuhyoSearchCondition().getTxtIdoDateRange().setToValue(ymlDt.getAsRDate("idoDateRangeto"));
+
     }
 
     /**
@@ -55,7 +73,7 @@ public class JukyushaIdoRenrakuhyoSearchPanel {
     public ResponseData<JukyushaIdoRenrakuhyoSearchPanelDiv> onClick_btnSearch(JukyushaIdoRenrakuhyoSearchPanelDiv searchPanel) {
 
         searchPanel.getJukyushaIdoRenrakuhyoSearchResultIchiran().setIsOpen(true);
-        set連絡票検索結果一覧(searchPanel);
+        setJukyushaIdoRenrakuhyoSearchResultList(searchPanel);
 
         ResponseData<JukyushaIdoRenrakuhyoSearchPanelDiv> response = new ResponseData<>();
         response.data = searchPanel;
@@ -87,53 +105,79 @@ public class JukyushaIdoRenrakuhyoSearchPanel {
      * @return
      */
     public ResponseData<JukyushaIdoRenrakuhyoSearchPanelDiv> onClick_dgDetail_show(JukyushaIdoRenrakuhyoSearchPanelDiv searchPanel) {
+
         ResponseData<JukyushaIdoRenrakuhyoSearchPanelDiv> response = new ResponseData<>();
+
         response.data = searchPanel;
         return response;
     }
 
     private void clearSearchCondtion(JukyushaIdoRenrakuhyoSearchConditionDiv searchConditionDiv) {
-        searchConditionDiv.getTxtIdoDateRange().setFromValue(null);
-        searchConditionDiv.getTxtIdoDateRange().setToValue(null);
-        searchConditionDiv.getTxtSearchHihoNo().setValue(RString.EMPTY);
+        searchConditionDiv.getTxtIdoDateRange().clearFromValue();
+        searchConditionDiv.getTxtIdoDateRange().clearToValue();
+        searchConditionDiv.getTxtSearchHihoNo().clearValue();
     }
 
-    private void set連絡票検索結果一覧(JukyushaIdoRenrakuhyoSearchPanelDiv searchPanel) {
-        searchPanel.getJukyushaIdoRenrakuhyoSearchResultIchiran().
-                getDgJukyushaIdoRenrakuhyoSearchResult().setDataSource(createData(searchPanel.getJukyushaIdoRenrakuhyoSearchCondition()));
+    private void setJukyushaIdoRenrakuhyoSearchResultList(JukyushaIdoRenrakuhyoSearchPanelDiv searchPanel) {
+        List<dgJukyushaIdoRenrakuhyoSearchResult_Row> arraydata = createTestData(searchPanel);
+
+        DataGrid<dgJukyushaIdoRenrakuhyoSearchResult_Row> grid = searchPanel.getJukyushaIdoRenrakuhyoSearchResultIchiran().getDgJukyushaIdoRenrakuhyoSearchResult();
+        grid.setDataSource(arraydata);
+
     }
 
-    private List<dgJukyushaIdoRenrakuhyoSearchResult_Row> createData(JukyushaIdoRenrakuhyoSearchConditionDiv searchConditionDiv) {
-        List<dgJukyushaIdoRenrakuhyoSearchResult_Row> testDataList;
-        testDataList = createTestData();
-
-        return testDataList;
-    }
-
-    private List<dgJukyushaIdoRenrakuhyoSearchResult_Row> createTestData() {
+    private List<dgJukyushaIdoRenrakuhyoSearchResult_Row> createTestData(JukyushaIdoRenrakuhyoSearchPanelDiv searchPanel) {
         List<dgJukyushaIdoRenrakuhyoSearchResult_Row> list = new ArrayList<>();
-        dgJukyushaIdoRenrakuhyoSearchResult_Row row;
+        List<HashMap> ymlData = ymlData("dbc0040011/JukyushaIdoRenrakuhyoSearchResultIchiran.yml");
 
-        row = createRow("20130101", "0000000001", "デンサン　イチロウ", "20111010");
-        list.add(row);
-        row = createRow("20130202", "0000000001", "デンサン　イチロウ", "20111010");
-        list.add(row);
-        row = createRow("20140301", "0000000001", "デンサン　イチロウ", "20111010");
-        list.add(row);
+        //TO DO データを増える場合。 
+        for (int i = 0; i < ymlData.size(); i++) {
 
+            HashMap hashMap = ymlData.get(i);
+            ControlGenerator ymlDt = new ControlGenerator(hashMap);
+
+            list.add(createRow(
+                    ymlDt.getAsRString("resultIdoDate"),
+                    ymlDt.getAsRString("resultHihoNo"),
+                    ymlDt.getAsRString("resultHihoName"),
+                    ymlDt.getAsRString("resultSendYM")
+            ));
+
+        }
         return list;
+
     }
 
-    private dgJukyushaIdoRenrakuhyoSearchResult_Row createRow(String 異動日, String 被保番号, String 氏名, String 送付年月) {
+    private dgJukyushaIdoRenrakuhyoSearchResult_Row createRow(
+            RString resultIdoDate,
+            RString resultHihoNo,
+            RString resultHihoName,
+            RString resultSendYM) {
 
-        dgJukyushaIdoRenrakuhyoSearchResult_Row row = new dgJukyushaIdoRenrakuhyoSearchResult_Row(
-                new Button(), new TextBoxFlexibleDate(), new TextBoxCode(), new TextBox(), new TextBoxFlexibleDate());
+        dgJukyushaIdoRenrakuhyoSearchResult_Row rowJukyushaIdoRenrakuhyoSearchResultList;
+        rowJukyushaIdoRenrakuhyoSearchResultList = new dgJukyushaIdoRenrakuhyoSearchResult_Row(
+                new Button(),
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY
+        );
 
-        row.getTxtResultIdoDate().setValue(new FlexibleDate(異動日));
-        row.getTxtResultHihoNo().setValue(new RString(被保番号));
-        row.getTxtResultHihoName().setValue(new RString(氏名));
-        row.getTxtResultSendYM().setValue(new FlexibleDate(送付年月));
+        rowJukyushaIdoRenrakuhyoSearchResultList.setTxtResultIdoDate(setWareki(resultIdoDate));
+        rowJukyushaIdoRenrakuhyoSearchResultList.setTxtResultHihoNo(resultHihoNo);
+        rowJukyushaIdoRenrakuhyoSearchResultList.setTxtResultHihoName(resultHihoName);
+        rowJukyushaIdoRenrakuhyoSearchResultList.setTxtResultSendYM(setWareki(resultSendYM));
 
-        return row;
+        return rowJukyushaIdoRenrakuhyoSearchResultList;
+    }
+
+    
+    private RString setWareki(RString wareki) {
+         FlexibleDate warekiYmd = new FlexibleDate(wareki);
+        return warekiYmd.wareki().toDateString();
+    }
+    
+    private List<HashMap> ymlData(String ymlName) {
+        return YamlLoader.DBC.loadAsList(new RString(ymlName));
     }
 }

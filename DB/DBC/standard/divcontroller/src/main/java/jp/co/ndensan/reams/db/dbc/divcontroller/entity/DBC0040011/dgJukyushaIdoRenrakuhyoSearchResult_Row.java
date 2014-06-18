@@ -1,18 +1,16 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0040011;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu May 08 11:22:59 JST 2014 
+ * Tue Jun 17 15:08:19 JST 2014 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 
 /**
@@ -24,16 +22,21 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 public class dgJukyushaIdoRenrakuhyoSearchResult_Row extends DataRow {
 
     private Button btnShowDetail;
-    private TextBoxFlexibleDate txtResultIdoDate;
-    private TextBoxCode txtResultHihoNo;
-    private TextBox txtResultHihoName;
-    private TextBoxFlexibleDate txtResultSendYM;
+    private RString txtResultIdoDate;
+    private RString txtResultHihoNo;
+    private RString txtResultHihoName;
+    private RString txtResultSendYM;
 
     public dgJukyushaIdoRenrakuhyoSearchResult_Row() {
         super();
+        this.btnShowDetail = new Button();
+        this.txtResultIdoDate = RString.EMPTY;
+        this.txtResultHihoNo = RString.EMPTY;
+        this.txtResultHihoName = RString.EMPTY;
+        this.txtResultSendYM = RString.EMPTY;
     }
 
-    public dgJukyushaIdoRenrakuhyoSearchResult_Row(Button btnShowDetail, TextBoxFlexibleDate txtResultIdoDate, TextBoxCode txtResultHihoNo, TextBox txtResultHihoName, TextBoxFlexibleDate txtResultSendYM) {
+    public dgJukyushaIdoRenrakuhyoSearchResult_Row(Button btnShowDetail, RString txtResultIdoDate, RString txtResultHihoNo, RString txtResultHihoName, RString txtResultSendYM) {
         super();
         this.setOriginalData("btnShowDetail", btnShowDetail);
         this.setOriginalData("txtResultIdoDate", txtResultIdoDate);
@@ -51,19 +54,19 @@ public class dgJukyushaIdoRenrakuhyoSearchResult_Row extends DataRow {
         return btnShowDetail;
     }
 
-    public TextBoxFlexibleDate getTxtResultIdoDate() {
+    public RString getTxtResultIdoDate() {
         return txtResultIdoDate;
     }
 
-    public TextBoxCode getTxtResultHihoNo() {
+    public RString getTxtResultHihoNo() {
         return txtResultHihoNo;
     }
 
-    public TextBox getTxtResultHihoName() {
+    public RString getTxtResultHihoName() {
         return txtResultHihoName;
     }
 
-    public TextBoxFlexibleDate getTxtResultSendYM() {
+    public RString getTxtResultSendYM() {
         return txtResultSendYM;
     }
 
@@ -72,22 +75,22 @@ public class dgJukyushaIdoRenrakuhyoSearchResult_Row extends DataRow {
         this.btnShowDetail = btnShowDetail;
     }
 
-    public void setTxtResultIdoDate(TextBoxFlexibleDate txtResultIdoDate) {
+    public void setTxtResultIdoDate(RString txtResultIdoDate) {
         this.setOriginalData("txtResultIdoDate", txtResultIdoDate);
         this.txtResultIdoDate = txtResultIdoDate;
     }
 
-    public void setTxtResultHihoNo(TextBoxCode txtResultHihoNo) {
+    public void setTxtResultHihoNo(RString txtResultHihoNo) {
         this.setOriginalData("txtResultHihoNo", txtResultHihoNo);
         this.txtResultHihoNo = txtResultHihoNo;
     }
 
-    public void setTxtResultHihoName(TextBox txtResultHihoName) {
+    public void setTxtResultHihoName(RString txtResultHihoName) {
         this.setOriginalData("txtResultHihoName", txtResultHihoName);
         this.txtResultHihoName = txtResultHihoName;
     }
 
-    public void setTxtResultSendYM(TextBoxFlexibleDate txtResultSendYM) {
+    public void setTxtResultSendYM(RString txtResultSendYM) {
         this.setOriginalData("txtResultSendYM", txtResultSendYM);
         this.txtResultSendYM = txtResultSendYM;
     }

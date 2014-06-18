@@ -1,0 +1,14 @@
+## YAML Template.
+---
+- resultIdoDate: 20140701
+  resultHihoNo: "0000000001"
+  resultHihoName: 電算 太郎
+  resultSendYM:  201407  
+- resultIdoDate: 20140801
+  resultHihoNo: "0000000002"
+  resultHihoName: 電算 司
+  resultSendYM:  201408
+- resultIdoDate: 20140901
+  resultHihoNo: "0000000003"
+  resultHihoName: 電算 大志
+  resultSendYM:  201409

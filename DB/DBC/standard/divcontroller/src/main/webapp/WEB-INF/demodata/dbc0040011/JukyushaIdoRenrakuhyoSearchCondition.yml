@@ -1,0 +1,5 @@
+## YAML Template.
+---
+- searchHihoNo: "0000000001"
+  idoDateRangefrom: 20140701
+  idoDateRangeto: 20140901
