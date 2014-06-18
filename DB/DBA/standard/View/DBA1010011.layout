@@ -539,99 +539,6 @@
            "permitCharactor": "./_-",
            "ymdKubun": 2,
            "displayFormat": 0
-          },
-          {
-           "fieldName": "ddlHihokenshaKubun",
-           "items": [],
-           "controlType": "DropDownList",
-           "width": "65",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": false,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "XS",
-           "marginRight": "XS",
-           "selectControlID": "ddlHihokenshaKubun_core",
-           "helpMessageID": "",
-           "jpControlName": "",
-           "readOnly": false,
-           "onChange": "",
-           "selectedItem": "dai1Go",
-           "dataSource": [
-            {
-             "key": "dai1Go",
-             "value": "第1号"
-            },
-            {
-             "key": "dai2Go",
-             "value": "第2号"
-            }
-           ],
-           "required": false,
-           "labelLText": "被保区分",
-           "labelRText": "",
-           "labelLWidth": "70",
-           "labelRWidth": "S",
-           "labelLAlign": 2,
-           "labelRAlign": 0,
-           "onFocus": "",
-           "onBlur": "",
-           "disabledItem": []
-          },
-          {
-           "fieldName": "txtNenreiTotatsuDate",
-           "items": [],
-           "controlType": "TextBoxFlexibleDate",
-           "width": "S",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": false,
-           "dependencies": [
-            {
-             "dependTo": "ddlHihokenshaKubun",
-             "dependValue": "dai2Go",
-             "expression": "isSelected",
-             "myCondition": "disabled"
-            }
-           ],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "XS",
-           "marginRight": "XS",
-           "selectControlID": "txtNenreiTotatsuDate_core",
-           "helpMessageID": "",
-           "jpControlName": "",
-           "readOnly": false,
-           "onChange": "",
-           "required": false,
-           "labelLText": "1号年齢到達日",
-           "labelRText": "",
-           "labelLWidth": "110",
-           "labelRWidth": "　",
-           "labelLAlign": 2,
-           "labelRAlign": 0,
-           "onFocus": "",
-           "onBlur": "",
-           "placeHolder": "",
-           "textKind": 0,
-           "isPrivateInfo": false,
-           "isPassword": false,
-           "onKeyPress": "",
-           "text": "",
-           "value": "",
-           "permitCharactor": "./_-",
-           "ymdKubun": 2,
-           "displayFormat": 0
           }
          ],
          "controlType": "Panel",
@@ -2317,6 +2224,10 @@
     },
     {
      "propertyName": "iryoHokenSelectRow",
+     "value": ""
+    },
+    {
+     "propertyName": "dateOfBirth",
      "value": ""
     }
    ],

@@ -27,10 +27,6 @@ public class ShikakuShutokuInputDiv extends Panel {
     private TextBoxFlexibleDate txtShutokuDate;
     @JsonProperty("txtShutokuTodokedeDate")
     private TextBoxFlexibleDate txtShutokuTodokedeDate;
-    @JsonProperty("ddlHihokenshaKubun")
-    private DropDownList ddlHihokenshaKubun;
-    @JsonProperty("txtNenreiTotatsuDate")
-    private TextBoxFlexibleDate txtNenreiTotatsuDate;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -66,26 +62,6 @@ public class ShikakuShutokuInputDiv extends Panel {
     @JsonProperty("txtShutokuTodokedeDate")
     public void setTxtShutokuTodokedeDate(TextBoxFlexibleDate txtShutokuTodokedeDate) {
         this.txtShutokuTodokedeDate=txtShutokuTodokedeDate;
-    }
-
-    @JsonProperty("ddlHihokenshaKubun")
-    public DropDownList getDdlHihokenshaKubun() {
-        return ddlHihokenshaKubun;
-    }
-
-    @JsonProperty("ddlHihokenshaKubun")
-    public void setDdlHihokenshaKubun(DropDownList ddlHihokenshaKubun) {
-        this.ddlHihokenshaKubun=ddlHihokenshaKubun;
-    }
-
-    @JsonProperty("txtNenreiTotatsuDate")
-    public TextBoxFlexibleDate getTxtNenreiTotatsuDate() {
-        return txtNenreiTotatsuDate;
-    }
-
-    @JsonProperty("txtNenreiTotatsuDate")
-    public void setTxtNenreiTotatsuDate(TextBoxFlexibleDate txtNenreiTotatsuDate) {
-        this.txtNenreiTotatsuDate=txtNenreiTotatsuDate;
     }
 
 }

@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.tplRofukuNenki
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.tplSeikatsuHogoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.tplShikakuJohoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.tplShisetsuNyutaishoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgSearchResult_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.iryohokenrireki.dgIryoHokenRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
@@ -65,12 +66,15 @@ public class ShikakuShutokuJoho {
     public ResponseData onClick_btnToDecide(ShikakuShutokuJohoDiv shikakuJohoDiv, ShikakuShutokuSearchDiv searchDiv) {
         ResponseData<ShikakuShutokuJohoDiv> response = new ResponseData<>();
 
-        RString shikibetsuCode = searchDiv.getSearchResultOfHihokensha().getDgSearchResult().getClickedItem().getShikibetsuCode();
+        dgSearchResult_Row row = searchDiv.getSearchResultOfHihokensha().getDgSearchResult().getClickedItem();
+        RString shikibetsuCode = row.getShikibetsuCode();
         setShikakuJoho(shikakuJohoDiv, shikibetsuCode);
         setIryoHoken(shikakuJohoDiv, shikibetsuCode);
         setRofukuNenkin(shikakuJohoDiv, shikibetsuCode);
         setSeikatsuHogo(shikakuJohoDiv, shikibetsuCode);
         setShisetsuNyutaisho(shikakuJohoDiv, shikibetsuCode);
+
+        shikakuJohoDiv.setDateOfBirth(row.getBirthDay().getValue().toDateString());
 
         response.data = shikakuJohoDiv;
         return response;
@@ -438,14 +442,16 @@ public class ShikakuShutokuJoho {
         int selectRowNum;
         dgShikakuShutokuRireki_Row selectRow;
 
+        FlexibleDate dateOfBirth = new FlexibleDate(shikakuJohoDiv.getDateOfBirth());
+
         if (shikakuJohoDiv.getShikakuInputMode().equals(SHIKAKU_ADD)) {
-            dgShikakuShutokuRireki_Row row = createShikakuShutokuRirekiRowFromInputValue(tplShikakuJoho);
+            dgShikakuShutokuRireki_Row row = createShikakuShutokuRirekiRowFromInputValue(tplShikakuJoho, dateOfBirth);
             row.setRowState(RowState.Added);
             tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getDataSource().add(0, row);
         } else if (shikakuJohoDiv.getShikakuInputMode().equals(SHIKAKU_MODIFY)) {
             selectRowNum = Integer.parseInt(shikakuJohoDiv.getShikakuSelectRow().toString());
             selectRow = tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getDataSource().get(selectRowNum);
-            setShikakuShutokuRirekiRowFromInputValue(tplShikakuJoho, selectRow);
+            setShikakuShutokuRirekiRowFromInputValue(tplShikakuJoho, selectRow, dateOfBirth);
             if (selectRow.getRowState().equals(RowState.Added)) {
             } else {
                 selectRow.setRowState(RowState.Modified);
@@ -466,18 +472,19 @@ public class ShikakuShutokuJoho {
         return response;
     }
 
-    private dgShikakuShutokuRireki_Row createShikakuShutokuRirekiRowFromInputValue(tplShikakuJohoDiv tplShikakuJoho) {
+    private dgShikakuShutokuRireki_Row createShikakuShutokuRirekiRowFromInputValue(tplShikakuJohoDiv tplShikakuJoho, FlexibleDate dateOfBirth) {
         dgShikakuShutokuRireki_Row row = new dgShikakuShutokuRireki_Row(new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY,
                 RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(),
                 new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(),
                 RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY);
-        setShikakuShutokuRirekiRowFromInputValue(tplShikakuJoho, row);
+        setShikakuShutokuRirekiRowFromInputValue(tplShikakuJoho, row, dateOfBirth);
         return row;
     }
 
-    private void setShikakuShutokuRirekiRowFromInputValue(tplShikakuJohoDiv tplShikakuJoho, dgShikakuShutokuRireki_Row row) {
+    private void setShikakuShutokuRirekiRowFromInputValue(tplShikakuJohoDiv tplShikakuJoho,
+            dgShikakuShutokuRireki_Row row, FlexibleDate dateOfBirth) {
 
         ShikakuShutokuInputDiv shutoku = tplShikakuJoho.getShikakuShutokuInput();
         row.getShutokuTodokedeDate().setValue(shutoku.getTxtShutokuTodokedeDate().getValue());
@@ -485,9 +492,14 @@ public class ShikakuShutokuJoho {
         row.setShutokuJiyu(shutoku.getDdlShikakuShutokuJiyu().getSelectedValue());
         row.setShutokuJiyuKey(shutoku.getDdlShikakuShutokuJiyu().getSelectedItem());
 
-        row.setHihokenshaKubunKey(shutoku.getDdlHihokenshaKubun().getSelectedItem());
-        row.setHihokenshaKubun(shutoku.getDdlHihokenshaKubun().getSelectedValue());
-        row.getNenreiTotatsuDate().setValue(shutoku.getTxtNenreiTotatsuDate().getValue());
+        FlexibleDate nenreiTotatsuDate = dateOfBirth.plusYear(65);
+        if (nenreiTotatsuDate.isBefore(row.getShutokuDate().getValue())) {
+            row.setHihokenshaKubun(new RString("第1号"));
+            row.getNenreiTotatsuDate().setValue(nenreiTotatsuDate);
+        } else {
+            row.setHihokenshaKubun(new RString("第2号"));
+            row.getNenreiTotatsuDate().setValue(null);
+        }
 
     }
 
@@ -506,8 +518,6 @@ public class ShikakuShutokuJoho {
         shikakuShutoku.getDdlShikakuShutokuJiyu().setSelectedItem(ddlShikakuShutokuJiyu);
         shikakuShutoku.getTxtShutokuDate().setValue(ShutokuDate);
         shikakuShutoku.getTxtShutokuTodokedeDate().setValue(ShutokuTodokedeDate);
-        shikakuShutoku.getDdlHihokenshaKubun().setSelectedItem(ddlHihokenshaKubun);
-        shikakuShutoku.getTxtNenreiTotatsuDate().setValue(nenreiTotatsuDate);
     }
 
     /**
