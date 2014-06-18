@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
@@ -43,6 +44,20 @@ public class FukaRireki {
         lordData(rirekiDiv, rirekiAllDiv, "click");
 
         return returnResponse(rirekiDiv);
+    }
+        
+    /**
+     * 比較画面にデータを渡す
+     * @param div
+     * @param fukaRirekiDiv
+     * @return 
+     */
+    public ResponseData<FukaRirekiDiv>  onClick_ComparedWithPrevious(FukaRirekiDiv div, FukaRirekiAllDiv rirekiAllDiv) {
+        //ViewStateに格納
+        ViewStateHolder.put("賦課履歴", div);
+        ViewStateHolder.put("mode", new RString("comparedWithPrevious"));
+        
+        return  returnResponse(div);
     }
     
     /**
@@ -123,7 +138,7 @@ public class FukaRireki {
         row.setTxtHokenryoGaku((RString)dataGrid.get(7));
         row.setTxtTokubetsuChoshu((RString)dataGrid.get(8));
         row.setTxtFutsuChoshu((RString)dataGrid.get(9));
-//        row.setTxtShikibetsuCode((RString)dataGrid.get(11));
+        row.setTxtShikibetsuCode((RString)dataGrid.get(11));
         
         return row;
     }

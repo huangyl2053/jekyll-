@@ -695,7 +695,7 @@
         "cellDetails": {
          "cellType": 8,
          "text": "前履歴と比較",
-         "onClick": "",
+         "onClick": "onClick_MaeHikaku",
          "imageFileUrl": "",
          "imageWidth": "",
          "imageHeight": ""
@@ -922,6 +922,10 @@
     {
      "eventName": "onSelect_RirekiAll",
      "requestUrl": "dbb/db/dbb/FukaRireki/onSelect"
+    },
+    {
+     "eventName": "onClick_MaeHikaku",
+     "requestUrl": "dbb/db/dbb/FukaRireki/onClick_ComparedWithPrevious"
     }
    ],
    "hiddenInput": [

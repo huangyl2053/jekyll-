@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320003.FukaHikakuZenn
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320003.FukaJohoHikakuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.SetaiinShotokuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.dgFukaRirekiFukaRireki_Row;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320003.FukaHikakuKibetsuGaku1Div;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320003.FukaHikakuKibetsuGaku2Div;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320003.HonSantei1Div;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320003.HonSantei2Div;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320003.KariSantei1Div;
@@ -106,7 +108,14 @@ public class FukaHikaku {
         }
         
         for (int i = 0; i < loadData.size(); i++) {
-             setHonSantei(div,  (List) loadData.get(0));
+             List nowLoad = (List) loadData.get(i);
+             List nowKihon = (List) nowLoad.get(0);
+             RString 状態 = (RString) nowKihon.get(0);
+             if (状態.contains("本")) {
+                 setHonSantei(div,  (List) loadData.get(i));
+             } else if (状態.contains("仮")) {
+                 setKariSantei(div, (List) loadData.get(i));
+             }
         }
     }
 
@@ -135,7 +144,6 @@ public class FukaHikaku {
     private List getMaeHikakuMode(FukaRirekiDiv rirekiDiv){
 
         List 比較情報 = new ArrayList();
-        List 全比較情報 = new ArrayList();
         
         //取得したデータグリッド
         DataGrid<dgFukaRirekiFukaRireki_Row> dataGridFukarireki = rirekiDiv.getDgFukaRirekiFukaRireki();
@@ -144,46 +152,38 @@ public class FukaHikaku {
             dgFukaRirekiFukaRireki_Row clicked = dataGridFukarireki.getClickedItem();
             int clickedRowId = dataGridFukarireki.getClickedRowId();
 
-            List key = new ArrayList();
-
-//                識別コード.add(clicked.getTxtShikibetsuCode());
-//                識別コード.add(clicked.getTxtShikibetsuCode());
-//                賦課年度.add(rirekiDiv.getTxtFukaNendoFukaRireki());
-//                賦課年度.add(rirekiDiv.getTxtFukaNendoFukaRireki());
-//                調定年度.add(clicked.getTxtChoteiNendo());
-//
-//                List<dgFukaRirekiFukaRireki_Row> dataSource = dataGridFukarireki.getDataSource();
-//                調定年度.add(dataSource.get(clickedRowId+1).getTxtChoteiNendo());
-
-            if (clicked.getTxtHokenryoDankai() != null) {
-                比較情報.add("本");
+            RString jotai;
+            if (dataGridFukarireki.getDataSource().get(clickedRowId+i).getTxtHokenryoDankai().length() > 0) {
+                jotai = new RString( "本");
             } else {
-                比較情報.add("仮");
+                jotai = new RString("仮");
             }
 
-            全比較情報.add(比較情報);
+            比較情報.add(getYamlDataHonsantei(clicked.getTxtShikibetsuCode(), jotai));
         }        
         
-        return 全比較情報;
+        return 比較情報;
     }
-
+    
     /**
      * 本算定の基本情報を含むYamlデータを必要箇所のみ取得
      * @param yamlFileName
-     * @param key
+     * @param key 識別コード
+     * @param key2 状態（本 or 仮）
      * @return 
      */
     private List getYamlDataHonsantei(RString key, RString key2) {
  
-        List keyList = new ArrayList();
-        List getYamlKihon = new ArrayList();
-        List getYamlFukaKijun;
+        List keyList = null;
+        List getYamlKihon = null;
+        List getYamlZennendo = null;
         List getYamlHokenryogaku;
-        List getYamlKibetsugaku = new ArrayList();
+        List getYamlFukaKijun;
         List getYamlDataList = new ArrayList();
         
         List yamlKihonFormatData = null;
         List yamlFukaKijunFormatData = null;
+        List yamlZennendFormatData = null;
         List yamlHokenryogakuFormatData = null;
         List yamlKibetsugakuFormatData = new ArrayList();
         
@@ -217,6 +217,7 @@ public class FukaHikaku {
             key5 = (RString) keyList.get(2);
                     
             if (key.contains(cg.getAsRString("識別コード"))
+                    & key2.contains(cg.getAsRString("状態"))
                     & key3.contains(cg.getAsRString("調定年度"))
                     & key4.contains(cg.getAsRString("賦課年度"))
                     & key5.contains(cg.getAsRString("通知書番号"))) {
@@ -237,6 +238,7 @@ public class FukaHikaku {
                 
             if (key.contains(cg.getAsRString("識別コード"))) {
                 
+                // 氏名  を追加
                 getYamlKihon = getYamlListShimei(cg, getYamlKihon);
 
                 break;
@@ -258,11 +260,17 @@ public class FukaHikaku {
                 // 調定事由 を追加
                 getYamlKihon = getYamlListChoteiJiyu(cg, getYamlKihon);
                 
-                // 資格取得日 資格喪失日 合計所得金額 年金収入額 本人課税 世帯課税 世帯員数  を追加
-                getYamlFukaKijun = getYamlFukaKijun(cg);
+                // 本算定時　資格取得日 資格喪失日 合計所得金額 年金収入額 本人課税 世帯課税 世帯員数  を追加
+                // 仮算定時  資格取得日 資格喪失日
+                getYamlFukaKijun = getYamlFukaKijun(cg, key2);
                 
-                // 保険料段階 計算上年間保険料額 減免額 確定年間保険料額  を追加
-                getYamlHokenryogaku = getYamlHokenryogaku(cg);
+                if (key2.contains("仮") ) {
+                    getYamlZennendo = getYamlListZennendo(cg);
+                }
+                
+                // 本算定時  保険料段階 計算上年間保険料額 減免額 確定年間保険料額  を追加
+                // 仮算定時  減免額　暫定保険料合計額(確定年間保険料額)
+                getYamlHokenryogaku = getYamlHokenryogaku(cg, key2);
 
                 // 特徴 期別額 を追加
                 List getYamlListTokuchoKibetsugaku = getYamlListTokuchoKibetsugaku(cg);
@@ -279,6 +287,9 @@ public class FukaHikaku {
                 // データをフォーマット
                 yamlKihonFormatData= getFormatData(getYamlKihon);
                 yamlFukaKijunFormatData = getFormatData(getYamlFukaKijun);
+                if (key2.contains("仮")) {
+                    yamlZennendFormatData = getFormatData(getYamlZennendo);
+                }
                 yamlHokenryogakuFormatData = getFormatData(getYamlHokenryogaku);
                 yamlKibetsugakuFormatData.add(getFormatData(getYamlListTokuchoKibetsugaku));
                 yamlKibetsugakuFormatData.add(getFormatData(getYamlListTokuchoNofugaku));
@@ -291,6 +302,9 @@ public class FukaHikaku {
         
         getYamlDataList.add(yamlKihonFormatData);
         getYamlDataList.add(yamlFukaKijunFormatData);
+        if (key2.contains("仮")) {
+            getYamlDataList.add(yamlZennendFormatData);
+        }
         getYamlDataList.add(yamlHokenryogakuFormatData);
         getYamlDataList.add(yamlKibetsugakuFormatData);
         
@@ -340,6 +354,17 @@ public class FukaHikaku {
         return yamlKihon;
     }
 
+    
+    private List getYamlListZennendo(ControlGenerator cg) {
+        List yamlValue = new ArrayList();
+        
+        yamlValue.add(cg.getAsRString("保険料段階_前年"));
+        yamlValue.add(cg.get("保険料率_前年"));
+        yamlValue.add(cg.get("年額保険料_前年"));
+        
+        return yamlValue;
+    }
+    
     private List getYamlListFuchoKibetsugaku(ControlGenerator cg) {
         List yamlValue = new ArrayList();
         
@@ -412,30 +437,38 @@ public class FukaHikaku {
         return yamlValue;
     }
 
-    private List getYamlFukaKijun(ControlGenerator cg) {
+    private List getYamlFukaKijun(ControlGenerator cg, RString key) {
         List yamlValue = new ArrayList();
         
         yamlValue.add(cg.getAsRDate("資格取得日"));
         yamlValue.add(cg.getAsRDate("資格喪失日"));
-        yamlValue.add(cg.get("合計所得"));
-        yamlValue.add(cg.get("年金収入額"));
-        yamlValue.add(cg.getAsRString("本人課税"));
-        yamlValue.add(cg.getAsRString("世帯課税"));
-        yamlValue.add(cg.getAsRString("世帯員数"));
 
+        if (key.contains("本")) {
+            yamlValue.add(cg.get("合計所得"));
+            yamlValue.add(cg.get("年金収入額"));
+            yamlValue.add(cg.getAsRString("本人課税"));
+            yamlValue.add(cg.getAsRString("世帯課税"));
+            yamlValue.add(cg.getAsRString("世帯員数"));
+        }
+        
         return yamlValue;
     }
 
-    private List getYamlHokenryogaku(ControlGenerator cg) {
+    private List getYamlHokenryogaku(ControlGenerator cg, RString key) {
         List yamlValue = new ArrayList();
         
-        yamlValue.add(cg.getAsRString("保険料段階"));
-        yamlValue.add(cg.getAsRString("境界層変更"));
-        yamlValue.add(cg.get("計算上年間保険料額"));
-        yamlValue.add(cg.get("減免額"));
-        yamlValue.add(cg.get("確定年間保険料額"));
-        yamlValue.add(cg.get("特徴歳出還付額"));
-        yamlValue.add(cg.get("普徴歳出還付額"));
+        if (key.contains("本")) {
+            yamlValue.add(0, cg.getAsRString("保険料段階"));
+            yamlValue.add(1, cg.getAsRString("境界層変更"));
+            yamlValue.add(2, cg.get("計算上年間保険料額"));
+            yamlValue.add(3, cg.get("減免額"));
+            yamlValue.add(4, cg.get("確定年間保険料額"));
+            yamlValue.add(5, cg.get("特徴歳出還付額"));
+            yamlValue.add(6, cg.get("普徴歳出還付額"));
+        } else {
+            yamlValue.add(cg.get("減免額"));
+            yamlValue.add(cg.get("確定年間保険料額"));
+        }
         
         return yamlValue;
     }
@@ -501,92 +534,192 @@ public class FukaHikaku {
         return commaData;
     }
      
-    private void setKariSanteiParam(FukaJohoHikakuDiv div, List<HashMap> fukaShokaiData, int yamlNo) {
+    private void setKariSantei(FukaJohoHikakuDiv div,  List hikakuData) {
         
         KariSantei1Div kariSantei1 = div.getKariSantei1();
         FukaHikakuFukakijun1Div fukakijunKari1 = kariSantei1.getFukaHikakuFukakijun1();
         FukaHikakuZennendo1Div zennendoKari1 = kariSantei1.getFukaHikakuZennendo1();
         FukaHikakuZanteiGaku1Div zanteiGaku1 = kariSantei1.getFukaHikakuZanteiGaku1();
+        FukaHikakuKibetsuGaku1Div kibetsuGaku1 = kariSantei1.getFukaHikakuKibetsuGaku1();
 
         KariSantei2Div kariSantei2 = div.getKariSantei2();
         FukaHikakuFukakijun2Div fukakijunKari2 = kariSantei2.getFukaHikakuFukakijun2();
         FukaHikakuZennendo2Div zennendoKari2 = kariSantei2.getFukaHikakuZennendo2();
         FukaHikakuZanteiGaku2Div zanteiGaku2 = kariSantei2.getFukaHikakuZanteiGaku2();
+        FukaHikakuKibetsuGaku2Div kibetsuGaku2 = kariSantei2.getFukaHikakuKibetsuGaku2();
 
         if (kariSantei1.getTxtChoteiNendo1().getValue().length() <= 0) {
 
             kariSantei1.setDisplayNone(false);
 
-            String 調定年度 = (String)fukaShokaiData.get(yamlNo).get("調定年度");
-            String 賦課年度 = (String)fukaShokaiData.get(yamlNo).get("賦課年度");
-            String 通知書番号 = (String)fukaShokaiData.get(yamlNo).get("通知書番号");
-            String 更正日時 = (String)fukaShokaiData.get(yamlNo).get("更正日時");
-            String 更正月 = (String)fukaShokaiData.get(yamlNo).get("更正月");
-            String 氏名 = (String)fukaShokaiData.get(yamlNo).get("氏名");
+            List kihon = (List) hikakuData.get(0);
+            kariSantei1.getTxtChoteiNendo1().setValue((RString) kihon.get(1));
+            kariSantei1.getTxtFukaNendo1().setValue((RString) kihon.get(2));
+            kariSantei1.getTxtTsuchiNo1().setValue((RString) kihon.get(3));
+            kariSantei1.getTxtKoseiYMD1().setValue((RString) kihon.get(4));
+            kariSantei1.getTxtKoseiYM1().setValue((RString) kihon.get(5));
+            kariSantei1.getTxtShimei1().setValue((RString) kihon.get(6));
+            kariSantei1.getTblChoteiJiyu1().getTxtChoteiJiyu11().setValue((RString) kihon.get(7));
+            kariSantei1.getTblChoteiJiyu1().getTxtChoteiJiyu12().setValue((RString) kihon.get(8));
+            kariSantei1.getTblChoteiJiyu1().getTxtChoteiJiyu13().setValue((RString) kihon.get(9));
+            kariSantei1.getTblChoteiJiyu1().getTxtChoteiJiyu14().setValue((RString) kihon.get(10));
+            
+            List fukaKijun = (List) hikakuData.get(1);
+            List checkData = new ArrayList();
+            checkData.add(0, fukaKijun.get(0));
+            Boolean 資格取得日 = rDateChecker(checkData);
+            checkData.add(0, fukaKijun.get(1));
+            Boolean 資格喪失日 = rDateChecker(checkData);
+            if (資格取得日 == true) fukakijunKari1.getTxtShikakuShutokuYMD1().setValue((RDate) fukaKijun.get(0));
+            if (資格喪失日 == true) fukakijunKari1.getTxtShikakuSoshitsuYMD1().setValue((RDate) fukaKijun.get(1));
+            
+            List zennendo = (List) hikakuData.get(2);
+            zennendoKari1.getTxtHokenryoDankai1().setValue((RString) zennendo.get(0));
+            zennendoKari1.getTxtHokenryoRitsu1().setValue((RString) zennendo.get(1));
+            zennendoKari1.getTxtNengakuHokensryo1().setValue((RString) zennendo.get(2));
 
-            if (調定年度 != null) kariSantei1.getTxtChoteiNendo1().setValue(new RString(調定年度));
-            if (賦課年度 != null) kariSantei1.getTxtFukaNendo1().setValue(new RString(賦課年度));
-            if (通知書番号 != null) kariSantei1.getTxtTsuchiNo1().setValue(new RString(通知書番号));
-            if (更正日時 != null) kariSantei1.getTxtKoseiYMD1().setValue(new RString(更正日時));
-            if (更正月 != null) kariSantei1.getTxtKoseiYM1().setValue(new RString(更正月));
-            if (氏名 != null) kariSantei1.getTxtShimei1().setValue(new RString(氏名));
+            List zanteiHokenryogaku = (List) hikakuData.get(3);
+            zanteiGaku1.getTxtGemmenGaku1().setValue((RString) zanteiHokenryogaku.get(0));
+            zanteiGaku1.getTxtGemmenGaku1().setValue((RString) zanteiHokenryogaku.get(1));
+            
+            List kibetsugaku = (List) hikakuData.get(4);
+            List tokuchoKibetsu = (List) kibetsugaku.get(0);
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblTokuKibetsuGaku1().setText((RString) tokuchoKibetsu.get(0));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblTokuKibetsuGaku2().setText((RString) tokuchoKibetsu.get(1));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblTokuKibetsuGaku3().setText((RString) tokuchoKibetsu.get(2));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblTokuKibetsuGaku4().setText((RString) tokuchoKibetsu.get(3));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblTokuKibetsuGaku5().setText((RString) tokuchoKibetsu.get(4));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblTokuKibetsuGaku6().setText((RString) tokuchoKibetsu.get(5));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblTokuKibetsuGakuKei().setText((RString) tokuchoKibetsu.get(6));
+                    
+            List tokuchoNofugaku = (List) kibetsugaku.get(1);
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblTokuNofuGaku1().setText((RString) tokuchoNofugaku.get(0));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblTokuNofuGaku2().setText((RString) tokuchoNofugaku.get(1));            
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblTokuNofuGaku3().setText((RString) tokuchoNofugaku.get(2));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblTokuNofuGaku4().setText((RString) tokuchoNofugaku.get(3));            
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblTokuNofuGaku5().setText((RString) tokuchoNofugaku.get(4));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblTokuNofuGaku6().setText((RString) tokuchoNofugaku.get(5));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblTokuNofuGakuKei().setText((RString) tokuchoNofugaku.get(6));
 
-            String 資格取得日 = (String)fukaShokaiData.get(yamlNo).get("資格取得日");
-            String 資格喪失日 = (String)fukaShokaiData.get(yamlNo).get("資格喪失日");
-
-            if (資格取得日 != null) fukakijunKari1.getTxtShikakuShutokuYMD1().setValue(new RDate(資格取得日));
-            if (資格喪失日 != null) fukakijunKari1.getTxtShikakuSoshitsuYMD1().setValue(new RDate(資格喪失日));
-
-            String 保険料段階 = (String)fukaShokaiData.get(yamlNo).get("保険料段階");
-            String 保険料率 = (String)fukaShokaiData.get(yamlNo).get("保険料率");
-            String 年額保険料 = (String)fukaShokaiData.get(yamlNo).get("年額保険料");
-
-            if (保険料段階 != null) zennendoKari1.getTxtHokenryoDankai1().setValue(new RString(保険料段階));
-            if (保険料率 != null) zennendoKari1.getTxtHokenryoRitsu1().setValue(new RString(保険料率));
-            if (年額保険料 != null) zennendoKari1.getTxtNengakuHokensryo1().setValue(new RString(年額保険料));
-
-            String 減免額 = (String)fukaShokaiData.get(yamlNo).get("減免額");
-            String 暫定保険料額合計 = (String)fukaShokaiData.get(yamlNo).get("暫定保険料額合計");
-
-            if (減免額 != null) zanteiGaku1.getTxtGemmenGaku1().setValue(new RString(減免額));
-            if (暫定保険料額合計 != null) zanteiGaku1.getTxtGemmenGaku1().setValue(new RString(暫定保険料額合計));
+            List fuchoKibetsu = (List) kibetsugaku.get(2);
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoKibetsuGaku1().setText((RString) fuchoKibetsu.get(0));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoKibetsuGaku2().setText((RString) fuchoKibetsu.get(1));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoKibetsuGaku3().setText((RString) fuchoKibetsu.get(2));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoKibetsuGaku4().setText((RString) fuchoKibetsu.get(3));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoKibetsuGaku5().setText((RString) fuchoKibetsu.get(4));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoKibetsuGaku6().setText((RString) fuchoKibetsu.get(5));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoKibetsuGaku7().setText((RString) fuchoKibetsu.get(6));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoKibetsuGaku8().setText((RString) fuchoKibetsu.get(7));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoKibetsuGaku9().setText((RString) fuchoKibetsu.get(8));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoKibetsuGaku10().setText((RString) fuchoKibetsu.get(9));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoKibetsuGaku11().setText((RString) fuchoKibetsu.get(10));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoKibetsuGaku11().setText((RString) fuchoKibetsu.get(11));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoKibetsuGaku12().setText((RString) fuchoKibetsu.get(12));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoKibetsuGaku13().setText((RString) fuchoKibetsu.get(13));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoKibetsuGakuKei().setText((RString) fuchoKibetsu.get(14));
+            
+            List fuchoNofugaku = (List) kibetsugaku.get(3);
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoNofuGaku1().setText((RString) fuchoNofugaku.get(0));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoNofuGaku2().setText((RString) fuchoNofugaku.get(1));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoNofuGaku3().setText((RString) fuchoNofugaku.get(2));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoNofuGaku4().setText((RString) fuchoNofugaku.get(3));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoNofuGaku5().setText((RString) fuchoNofugaku.get(4));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoNofuGaku6().setText((RString) fuchoNofugaku.get(5));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoNofuGaku7().setText((RString) fuchoNofugaku.get(6));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoNofuGaku8().setText((RString) fuchoNofugaku.get(7));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoNofuGaku9().setText((RString) fuchoNofugaku.get(8));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoNofuGaku10().setText((RString) fuchoNofugaku.get(9));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoNofuGaku11().setText((RString) fuchoNofugaku.get(10));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoNofuGaku12().setText((RString) fuchoNofugaku.get(11));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoNofuGaku13().setText((RString) fuchoNofugaku.get(12));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoNofuGaku14().setText((RString) fuchoNofugaku.get(13));
+            kibetsuGaku1.getTblFukaHikakuKibetsuGaku1().getTblKiwariGaku().getLblFuchoNofuGakuKei().setText((RString) fuchoNofugaku.get(14));
             
         } else {
             kariSantei2.setDisplayNone(false);
             
-            String 調定年度 = (String)fukaShokaiData.get(yamlNo).get("調定年度");
-            String 賦課年度 = (String)fukaShokaiData.get(yamlNo).get("賦課年度");
-            String 通知書番号 = (String)fukaShokaiData.get(yamlNo).get("通知書番号");
-            String 更正日時 = (String)fukaShokaiData.get(yamlNo).get("更正日時");
-            String 更正月 = (String)fukaShokaiData.get(yamlNo).get("更正月");
-            String 氏名 = (String)fukaShokaiData.get(yamlNo).get("氏名");
+            List kihon = (List) hikakuData.get(0);
+            kariSantei2.getTxtChoteiNendo2().setValue((RString) kihon.get(1));
+            kariSantei2.getTxtFukaNendo2().setValue((RString) kihon.get(2));
+            kariSantei2.getTxtTsuchiNo2().setValue((RString) kihon.get(3));
+            kariSantei2.getTxtKoseiYMD2().setValue((RString) kihon.get(4));
+            kariSantei2.getTxtKoseiYM2().setValue((RString) kihon.get(5));
+            kariSantei2.getTxtShimei2().setValue((RString) kihon.get(6));
+            kariSantei2.getTblChoteiJiyu2().getTxtChoteiJiyu21().setValue((RString) kihon.get(7));
+            kariSantei2.getTblChoteiJiyu2().getTxtChoteiJiyu22().setValue((RString) kihon.get(8));
+            kariSantei2.getTblChoteiJiyu2().getTxtChoteiJiyu23().setValue((RString) kihon.get(9));
+            kariSantei2.getTblChoteiJiyu2().getTxtChoteiJiyu24().setValue((RString) kihon.get(10));
 
-            if (調定年度 != null) kariSantei2.getTxtChoteiNendo2().setValue(new RString(調定年度));
-            if (賦課年度 != null) kariSantei2.getTxtFukaNendo2().setValue(new RString(賦課年度));
-            if (通知書番号 != null) kariSantei2.getTxtTsuchiNo2().setValue(new RString(通知書番号));
-            if (更正日時 != null) kariSantei2.getTxtKoseiYMD2().setValue(new RString(更正日時));
-            if (更正月 != null) kariSantei2.getTxtKoseiYM2().setValue(new RString(更正月));
-            if (氏名 != null) kariSantei2.getTxtShimei2().setValue(new RString(氏名));
+            List fukaKijun = (List) hikakuData.get(1);
+            List checkData = new ArrayList();
+            checkData.add(0, fukaKijun.get(0));
+            Boolean 資格取得日 = rDateChecker(checkData);
+            checkData.add(0, fukaKijun.get(1));
+            Boolean 資格喪失日 = rDateChecker(checkData);
+            if (資格取得日 == true) fukakijunKari2.getTxtShikakuShutokuYMD2().setValue((RDate) fukaKijun.get(0));
+            if (資格取得日 == true) fukakijunKari2.getTxtShikakuSoshitsuYMD2().setValue((RDate) fukaKijun.get(1));
 
-            String 資格取得日 = (String)fukaShokaiData.get(yamlNo).get("資格取得日");
-            String 資格喪失日 = (String)fukaShokaiData.get(yamlNo).get("資格喪失日");
+            List zennendo = (List) hikakuData.get(2);
+            zennendoKari2.getTxtHokenryoDankai2().setValue((RString) zennendo.get(0));
+            zennendoKari2.getTxtHokenryoRitsu2().setValue((RString) zennendo.get(1));
+            zennendoKari2.getTxtNengakuHokensryo2().setValue((RString) zennendo.get(2));
 
-            if (資格取得日 != null) fukakijunKari2.getTxtShikakuShutokuYMD2().setValue(new RDate(資格取得日));
-            if (資格喪失日 != null) fukakijunKari2.getTxtShikakuSoshitsuYMD2().setValue(new RDate(資格喪失日));
+            List zanteiHokenryogaku = (List) hikakuData.get(3);
+            zanteiGaku2.getTxtGemmenGaku2().setValue((RString) zanteiHokenryogaku.get(0));
+            zanteiGaku2.getTxtGemmenGaku2().setValue((RString) zanteiHokenryogaku.get(1));
 
-            String 保険料段階 = (String)fukaShokaiData.get(yamlNo).get("保険料段階");
-            String 保険料率 = (String)fukaShokaiData.get(yamlNo).get("保険料率");
-            String 年額保険料 = (String)fukaShokaiData.get(yamlNo).get("年額保険料");
+            List kibetsugaku = (List) hikakuData.get(4);
+            List tokuchoKibetsu = (List) kibetsugaku.get(0);
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblTokuKibetsuGaku1().setText((RString) tokuchoKibetsu.get(0));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblTokuKibetsuGaku2().setText((RString) tokuchoKibetsu.get(1));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblTokuKibetsuGaku3().setText((RString) tokuchoKibetsu.get(2));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblTokuKibetsuGaku4().setText((RString) tokuchoKibetsu.get(3));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblTokuKibetsuGaku5().setText((RString) tokuchoKibetsu.get(4));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblTokuKibetsuGaku6().setText((RString) tokuchoKibetsu.get(5));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblTokuKibetsuGakuKei().setText((RString) tokuchoKibetsu.get(6));
+                    
+            List tokuchoNofugaku = (List) kibetsugaku.get(1);
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblTokuNofuGaku1().setText((RString) tokuchoNofugaku.get(0));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblTokuNofuGaku2().setText((RString) tokuchoNofugaku.get(1));            
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblTokuNofuGaku3().setText((RString) tokuchoNofugaku.get(2));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblTokuNofuGaku4().setText((RString) tokuchoNofugaku.get(3));            
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblTokuNofuGaku5().setText((RString) tokuchoNofugaku.get(4));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblTokuNofuGaku6().setText((RString) tokuchoNofugaku.get(5));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblTokuNofuGakuKei().setText((RString) tokuchoNofugaku.get(6));
 
-            if (保険料段階 != null) zennendoKari2.getTxtHokenryoDankai2().setValue(new RString(保険料段階));
-            if (保険料率 != null) zennendoKari2.getTxtHokenryoRitsu2().setValue(new RString(保険料率));
-            if (年額保険料 != null) zennendoKari2.getTxtNengakuHokensryo2().setValue(new RString(年額保険料));
-
-            String 減免額 = (String)fukaShokaiData.get(yamlNo).get("減免額");
-            String 暫定保険料額合計 = (String)fukaShokaiData.get(yamlNo).get("暫定保険料額合計");
-
-            if (減免額 != null) zanteiGaku2.getTxtGemmenGaku2().setValue(new RString(減免額));
-            if (暫定保険料額合計 != null) zanteiGaku2.getTxtGemmenGaku2().setValue(new RString(暫定保険料額合計));
+            List fuchoKibetsu = (List) kibetsugaku.get(2);
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoKibetsuGaku1().setText((RString) fuchoKibetsu.get(0));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoKibetsuGaku2().setText((RString) fuchoKibetsu.get(1));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoKibetsuGaku3().setText((RString) fuchoKibetsu.get(2));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoKibetsuGaku4().setText((RString) fuchoKibetsu.get(3));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoKibetsuGaku5().setText((RString) fuchoKibetsu.get(4));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoKibetsuGaku6().setText((RString) fuchoKibetsu.get(5));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoKibetsuGaku7().setText((RString) fuchoKibetsu.get(6));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoKibetsuGaku8().setText((RString) fuchoKibetsu.get(7));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoKibetsuGaku9().setText((RString) fuchoKibetsu.get(8));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoKibetsuGaku10().setText((RString) fuchoKibetsu.get(9));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoKibetsuGaku11().setText((RString) fuchoKibetsu.get(10));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoKibetsuGaku11().setText((RString) fuchoKibetsu.get(11));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoKibetsuGaku12().setText((RString) fuchoKibetsu.get(12));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoKibetsuGaku13().setText((RString) fuchoKibetsu.get(13));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoKibetsuGakuKei().setText((RString) fuchoKibetsu.get(14));
+            
+            List fuchoNofugaku = (List) kibetsugaku.get(3);
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoNofuGaku1().setText((RString) fuchoNofugaku.get(0));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoNofuGaku2().setText((RString) fuchoNofugaku.get(1));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoNofuGaku3().setText((RString) fuchoNofugaku.get(2));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoNofuGaku4().setText((RString) fuchoNofugaku.get(3));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoNofuGaku5().setText((RString) fuchoNofugaku.get(4));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoNofuGaku6().setText((RString) fuchoNofugaku.get(5));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoNofuGaku7().setText((RString) fuchoNofugaku.get(6));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoNofuGaku8().setText((RString) fuchoNofugaku.get(7));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoNofuGaku9().setText((RString) fuchoNofugaku.get(8));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoNofuGaku10().setText((RString) fuchoNofugaku.get(9));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoNofuGaku11().setText((RString) fuchoNofugaku.get(10));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoNofuGaku12().setText((RString) fuchoNofugaku.get(11));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoNofuGaku13().setText((RString) fuchoNofugaku.get(12));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoNofuGaku14().setText((RString) fuchoNofugaku.get(13));
+            kibetsuGaku2.getTblFukaHikakuKibetsuGaku2().getTblKiwariGaku().getLblFuchoNofuGakuKei().setText((RString) fuchoNofugaku.get(14));
         }
     }
 
@@ -648,6 +781,7 @@ public class FukaHikaku {
             kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblTokuKibetsuGaku4().setText((RString) tokuchoKibetsu.get(3));
             kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblTokuKibetsuGaku5().setText((RString) tokuchoKibetsu.get(4));
             kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblTokuKibetsuGaku6().setText((RString) tokuchoKibetsu.get(5));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblTokuKibetsuGakuKei().setText((RString) tokuchoKibetsu.get(6));
                     
             List tokuchoNofugaku = (List) kibetsugaku.get(1);
             kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblTokuNofuGaku1().setText((RString) tokuchoNofugaku.get(0));
@@ -656,51 +790,57 @@ public class FukaHikaku {
             kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblTokuNofuGaku4().setText((RString) tokuchoNofugaku.get(3));            
             kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblTokuNofuGaku5().setText((RString) tokuchoNofugaku.get(4));
             kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblTokuNofuGaku6().setText((RString) tokuchoNofugaku.get(5));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblTokuNofuGakuKei().setText((RString) tokuchoNofugaku.get(6));
 
             List fuchoKibetsu = (List) kibetsugaku.get(2);
             kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku1().setText((RString) fuchoKibetsu.get(0));
             kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku2().setText((RString) fuchoKibetsu.get(1));
-            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku3().setText((RString) fuchoKibetsu.get(3));
-            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku4().setText((RString) fuchoKibetsu.get(4));
-            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku5().setText((RString) fuchoKibetsu.get(5));
-            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku6().setText((RString) fuchoKibetsu.get(6));
-            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku7().setText((RString) fuchoKibetsu.get(7));
-            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku8().setText((RString) fuchoKibetsu.get(8));
-            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku9().setText((RString) fuchoKibetsu.get(9));
-            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku10().setText((RString) fuchoKibetsu.get(10));
-            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku11().setText((RString) fuchoKibetsu.get(11));
-            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku12().setText((RString) fuchoKibetsu.get(12));
-            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku13().setText((RString) fuchoKibetsu.get(13));
-            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku14().setText((RString) fuchoKibetsu.get(14));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku3().setText((RString) fuchoKibetsu.get(2));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku4().setText((RString) fuchoKibetsu.get(3));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku5().setText((RString) fuchoKibetsu.get(4));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku6().setText((RString) fuchoKibetsu.get(5));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku7().setText((RString) fuchoKibetsu.get(6));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku8().setText((RString) fuchoKibetsu.get(7));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku9().setText((RString) fuchoKibetsu.get(8));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku10().setText((RString) fuchoKibetsu.get(9));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku11().setText((RString) fuchoKibetsu.get(10));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku12().setText((RString) fuchoKibetsu.get(11));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku13().setText((RString) fuchoKibetsu.get(12));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku14().setText((RString) fuchoKibetsu.get(13));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGakuKei().setText((RString) fuchoKibetsu.get(14));
             
             List fuchoNofugaku = (List) kibetsugaku.get(3);
-            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku1().setText((RString) fuchoNofugaku.get(0));
-            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku2().setText((RString) fuchoNofugaku.get(1));
-            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku3().setText((RString) fuchoNofugaku.get(2));
-            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku4().setText((RString) fuchoNofugaku.get(3));
-            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku5().setText((RString) fuchoNofugaku.get(4));
-            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku6().setText((RString) fuchoNofugaku.get(5));
-            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku7().setText((RString) fuchoNofugaku.get(6));
-            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku8().setText((RString) fuchoNofugaku.get(7));
-            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku9().setText((RString) fuchoNofugaku.get(8));
-            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku10().setText((RString) fuchoNofugaku.get(9));
-            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku11().setText((RString) fuchoNofugaku.get(10));
-            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku12().setText((RString) fuchoNofugaku.get(11));
-            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku13().setText((RString) fuchoNofugaku.get(12));
-            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku14().setText((RString) fuchoNofugaku.get(13));
-            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoKibetsuGaku14().setText((RString) fuchoNofugaku.get(14));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoNofuGaku1().setText((RString) fuchoNofugaku.get(0));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoNofuGaku2().setText((RString) fuchoNofugaku.get(1));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoNofuGaku3().setText((RString) fuchoNofugaku.get(2));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoNofuGaku4().setText((RString) fuchoNofugaku.get(3));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoNofuGaku5().setText((RString) fuchoNofugaku.get(4));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoNofuGaku6().setText((RString) fuchoNofugaku.get(5));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoNofuGaku7().setText((RString) fuchoNofugaku.get(6));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoNofuGaku8().setText((RString) fuchoNofugaku.get(7));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoNofuGaku9().setText((RString) fuchoNofugaku.get(8));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoNofuGaku10().setText((RString) fuchoNofugaku.get(9));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoNofuGaku11().setText((RString) fuchoNofugaku.get(10));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoNofuGaku12().setText((RString) fuchoNofugaku.get(11));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoNofuGaku13().setText((RString) fuchoNofugaku.get(12));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoNofuGaku14().setText((RString) fuchoNofugaku.get(13));
+            kibetsuGaku3.getTblFukaHikakuKibetsuGaku3().getTblKiwariGaku().getLblFuchoNofuGakuKei().setText((RString) fuchoNofugaku.get(14));
         } else {
 
             honSantei2.setDisplayNone(false);
 
             List kihon = (List) hikakuData.get(0);
-            honSantei2.getTxtChoteiNendo4().setValue((RString) kihon.get(0));
-            honSantei2.getTxtFukaNendo4().setValue((RString) kihon.get(1));
-            honSantei2.getTxtTsuchiNo4().setValue((RString) kihon.get(2));
-            honSantei2.getTxtKoseiYMD4().setValue((RString) kihon.get(3));
-            honSantei2.getTxtKoseiYM4().setValue((RString) kihon.get(4));
-            honSantei2.getTxtShimei4().setValue((RString) kihon.get(5));
-            
+            honSantei2.getTxtChoteiNendo4().setValue((RString) kihon.get(1));
+            honSantei2.getTxtFukaNendo4().setValue((RString) kihon.get(2));
+            honSantei2.getTxtTsuchiNo4().setValue((RString) kihon.get(3));
+            honSantei2.getTxtKoseiYMD4().setValue((RString) kihon.get(4));
+            honSantei2.getTxtKoseiYM4().setValue((RString) kihon.get(5));
+            honSantei2.getTxtShimei4().setValue((RString) kihon.get(6));
+            honSantei2.getTblChoteiJiyu4().getTxtChoteiJiyu41().setValue((RString) kihon.get(7));
+            honSantei2.getTblChoteiJiyu4().getTxtChoteiJiyu42().setValue((RString) kihon.get(8));
+            honSantei2.getTblChoteiJiyu4().getTxtChoteiJiyu43().setValue((RString) kihon.get(9));
+            honSantei2.getTblChoteiJiyu4().getTxtChoteiJiyu44().setValue((RString) kihon.get(10));
+
             List fukaKijun = (List) hikakuData.get(1);
             List checkData = new ArrayList();
             checkData.add(0, fukaKijun.get(0));
@@ -732,6 +872,7 @@ public class FukaHikaku {
             kibetsuGaku4.getTblFukaHikakuKibetsuGaku4().getTblKiwariGaku().getLblTokuKibetsuGaku4().setText((RString) tokuchoKibetsu.get(3));            
             kibetsuGaku4.getTblFukaHikakuKibetsuGaku4().getTblKiwariGaku().getLblTokuKibetsuGaku5().setText((RString) tokuchoKibetsu.get(4));
             kibetsuGaku4.getTblFukaHikakuKibetsuGaku4().getTblKiwariGaku().getLblTokuKibetsuGaku6().setText((RString) tokuchoKibetsu.get(5));
+            kibetsuGaku4.getTblFukaHikakuKibetsuGaku4().getTblKiwariGaku().getLblTokuKibetsuGakuKei().setText((RString) tokuchoKibetsu.get(6));
             
             List tokuchoNofugaku = (List) kibetsugaku.get(1);
             kibetsuGaku4.getTblFukaHikakuKibetsuGaku4().getTblKiwariGaku().getLblTokuNofuGaku1().setText((RString) tokuchoNofugaku.get(0));
@@ -740,6 +881,7 @@ public class FukaHikaku {
             kibetsuGaku4.getTblFukaHikakuKibetsuGaku4().getTblKiwariGaku().getLblTokuNofuGaku4().setText((RString) tokuchoNofugaku.get(3));
             kibetsuGaku4.getTblFukaHikakuKibetsuGaku4().getTblKiwariGaku().getLblTokuNofuGaku5().setText((RString) tokuchoNofugaku.get(4));
             kibetsuGaku4.getTblFukaHikakuKibetsuGaku4().getTblKiwariGaku().getLblTokuNofuGaku6().setText((RString) tokuchoNofugaku.get(5));
+            kibetsuGaku4.getTblFukaHikakuKibetsuGaku4().getTblKiwariGaku().getLblTokuNofuGakuKei().setText((RString) tokuchoNofugaku.get(6));
 
             List fuchoKibetsu = (List) kibetsugaku.get(2);
             kibetsuGaku4.getTblFukaHikakuKibetsuGaku4().getTblKiwariGaku().getLblFuchoKibetsuGaku1().setText((RString) fuchoKibetsu.get(0));
@@ -754,9 +896,9 @@ public class FukaHikaku {
             kibetsuGaku4.getTblFukaHikakuKibetsuGaku4().getTblKiwariGaku().getLblFuchoKibetsuGaku10().setText((RString) fuchoKibetsu.get(9));            
             kibetsuGaku4.getTblFukaHikakuKibetsuGaku4().getTblKiwariGaku().getLblFuchoKibetsuGaku11().setText((RString) fuchoKibetsu.get(10));
             kibetsuGaku4.getTblFukaHikakuKibetsuGaku4().getTblKiwariGaku().getLblFuchoKibetsuGaku12().setText((RString) fuchoKibetsu.get(11));
-            kibetsuGaku4.getTblFukaHikakuKibetsuGaku4().getTblKiwariGaku().getLblFuchoKibetsuGaku12().setText((RString) fuchoKibetsu.get(12));
-            kibetsuGaku4.getTblFukaHikakuKibetsuGaku4().getTblKiwariGaku().getLblFuchoKibetsuGaku12().setText((RString) fuchoKibetsu.get(13));        
-            kibetsuGaku4.getTblFukaHikakuKibetsuGaku4().getTblKiwariGaku().getLblFuchoKibetsuGaku12().setText((RString) fuchoKibetsu.get(14));
+            kibetsuGaku4.getTblFukaHikakuKibetsuGaku4().getTblKiwariGaku().getLblFuchoKibetsuGaku13().setText((RString) fuchoKibetsu.get(12));
+            kibetsuGaku4.getTblFukaHikakuKibetsuGaku4().getTblKiwariGaku().getLblFuchoKibetsuGaku14().setText((RString) fuchoKibetsu.get(13));        
+            kibetsuGaku4.getTblFukaHikakuKibetsuGaku4().getTblKiwariGaku().getLblFuchoKibetsuGakuKei().setText((RString) fuchoKibetsu.get(14));
             
             List fuchoNofugaku = (List) kibetsugaku.get(3);
             kibetsuGaku4.getTblFukaHikakuKibetsuGaku4().getTblKiwariGaku().getLblFuchoNofuGaku1().setText((RString) fuchoNofugaku.get(0));
@@ -773,6 +915,7 @@ public class FukaHikaku {
             kibetsuGaku4.getTblFukaHikakuKibetsuGaku4().getTblKiwariGaku().getLblFuchoNofuGaku12().setText((RString) fuchoNofugaku.get(11));
             kibetsuGaku4.getTblFukaHikakuKibetsuGaku4().getTblKiwariGaku().getLblFuchoNofuGaku13().setText((RString) fuchoNofugaku.get(12));
             kibetsuGaku4.getTblFukaHikakuKibetsuGaku4().getTblKiwariGaku().getLblFuchoNofuGaku14().setText((RString) fuchoNofugaku.get(13)); 
+            kibetsuGaku4.getTblFukaHikakuKibetsuGaku4().getTblKiwariGaku().getLblFuchoNofuGakuKei().setText((RString) fuchoNofugaku.get(14)); 
         }
     }   
 }
