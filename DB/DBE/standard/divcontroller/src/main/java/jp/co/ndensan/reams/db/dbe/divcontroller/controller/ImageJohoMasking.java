@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4050001.ImageJohoMaskingDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4050001.dgImageMaskShoriTaishosha_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -39,8 +40,8 @@ public class ImageJohoMasking {
         ResponseData<ImageJohoMaskingDiv> response = new ResponseData<>();
 
         List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("DemoCity.yml"));
-        Map map = targetSource.get(0);
-        if (_toRString(map.get("保険者番号")).equalsIgnoreCase(new RString("152264"))) {
+        ControlGenerator cg = new ControlGenerator(targetSource.get(0));
+        if (cg.getAsRString("保険者番号").equalsIgnoreCase(new RString("152264"))) {
             div.getShoriTaishoshaKensakuShiji().getDdlHokensha().setSelectedItem(new RString("2"));
             hokenshaMeisho = new RString("南魚沼市");
         } else {
@@ -163,39 +164,27 @@ public class ImageJohoMasking {
     }
 
     private dgImageMaskShoriTaishosha_Row toDgImageMaskShoriTaishosha_Row(Map map) {
-        RString hihokenshaNo = _toRString(map.get("被保番号"));
-        RString shimei = _toRString(map.get("氏名"));
-        TextBoxFlexibleDate shinseiDate = toTextBoxFlexibleDate(new FlexibleDate(map.get("申請日").toString()));
-        RString shinseiKubun = _toRString(map.get("申請区分"));
-        RString maskKubun = _toRString(map.get("マスク処理"));
-        TextBoxFlexibleDate ikenDate = toTextBoxFlexibleDate(new FlexibleDate(map.get("意見書受領日").toString()));
-        TextBoxFlexibleDate chosaDate = toTextBoxFlexibleDate(new FlexibleDate(map.get("調査票受領日").toString()));
-        TextBoxFlexibleDate shinsaDate = toTextBoxFlexibleDate(new FlexibleDate(map.get("審査予定日").toString()));
-        RString hokenshaNo = _toRString(map.get("保険者番号"));
-        RString hihokenshaKubun = _toRString(map.get("被保険者区分"));
-        TextBoxFlexibleDate umareDate = toTextBoxFlexibleDate(new FlexibleDate(map.get("生年月日").toString()));
-        RString nenrei = _toRString(map.get("年齢"));
-        RString zenkaiKekka = _toRString(map.get("前回認定結果"));
-        TextBoxFlexibleDate zenStartDate = toTextBoxFlexibleDate(new FlexibleDate(map.get("前回認定期間開始日").toString()));
-        TextBoxFlexibleDate zenEndDate = toTextBoxFlexibleDate(new FlexibleDate(map.get("前回認定期間終了日").toString()));
+        ControlGenerator cg = new ControlGenerator(map);
+        RString hihokenshaNo = cg.getAsRString("被保番号");
+        RString shimei = cg.getAsRString("氏名");
+        TextBoxFlexibleDate shinseiDate = cg.getAsTextBoxFlexibleDate("申請日");
+        RString shinseiKubun = cg.getAsRString("申請区分");
+        RString maskKubun = cg.getAsRString("マスク処理");
+        TextBoxFlexibleDate ikenDate = cg.getAsTextBoxFlexibleDate("意見書受領日");
+        TextBoxFlexibleDate chosaDate = cg.getAsTextBoxFlexibleDate("調査票受領日");
+        TextBoxFlexibleDate shinsaDate = cg.getAsTextBoxFlexibleDate("審査予定日");
+        RString hokenshaNo = cg.getAsRString("保険者番号");
+        RString hihokenshaKubun = cg.getAsRString("被保険者区分");
+        TextBoxFlexibleDate umareDate = cg.getAsTextBoxFlexibleDate("生年月日");
+        RString nenrei = cg.getAsRString("年齢");
+        RString zenkaiKekka = cg.getAsRString("前回認定結果");
+        TextBoxFlexibleDate zenStartDate = cg.getAsTextBoxFlexibleDate("前回認定期間開始日");
+        TextBoxFlexibleDate zenEndDate = cg.getAsTextBoxFlexibleDate("前回認定期間終了日");
         Button btn = new Button();
         dgImageMaskShoriTaishosha_Row row = new dgImageMaskShoriTaishosha_Row(btn, hokenshaMeisho, hihokenshaNo, shimei,
                 shinseiDate, shinseiKubun, shinsaDate, maskKubun, ikenDate, chosaDate, hokenshaNo, hihokenshaKubun,
                 umareDate, nenrei, zenkaiKekka, zenStartDate, zenEndDate);
         return row;
-    }
-
-    private RString _toRString(Object obj) {
-        if (obj == null) {
-            return RString.EMPTY;
-        }
-        return new RString(obj.toString());
-    }
-
-    private TextBoxFlexibleDate toTextBoxFlexibleDate(FlexibleDate date) {
-        TextBoxFlexibleDate txtBox = new TextBoxFlexibleDate();
-        txtBox.setValue(date);
-        return txtBox;
     }
 
 }

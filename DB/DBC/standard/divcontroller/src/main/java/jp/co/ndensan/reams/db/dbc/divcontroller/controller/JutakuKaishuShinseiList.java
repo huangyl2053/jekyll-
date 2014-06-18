@@ -11,7 +11,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.SearchHihokenshaPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgJutakuKaishuShinseiList_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgSearchResult_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.dgSearchResult_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  * 住宅改修費事申請登録 申請内容のパネルです。
  *
  * @author n8223
- */ 
+ */
 public class JutakuKaishuShinseiList {
 
     /**
@@ -36,9 +36,9 @@ public class JutakuKaishuShinseiList {
     public ResponseData<JutakuKaishuShinseiListDiv> onClick_btnToDecide(JutakuKaishuShinseiListDiv panel) {
         ResponseData<JutakuKaishuShinseiListDiv> response = new ResponseData<>();
 
-        //TO DO 
+        //TO DO
         String ymlDataName = "JutakuData_1.yml";
-        
+
         setJutakuKaishuShinseiList(panel, ymlDataName);
 
         response.data = panel;
@@ -55,21 +55,21 @@ public class JutakuKaishuShinseiList {
     public ResponseData<JutakuKaishuShinseiListDiv> onClick_btnAddShinseiContents(JutakuKaishuShinseiListDiv panel) {
         ResponseData<JutakuKaishuShinseiListDiv> response = new ResponseData<>();
 
-        //TO DO 
+        //TO DO
         int selRowId = panel.getDgJutakuKaishuShinseiList().getClickedRowId();
-        
+
         System.out.println("+++selRowId++++" + selRowId);
-        
+
         String ymlDataName;
 
         ///////////////////////////////////////////////////////////
-        if (selRowId >= 0 ) {
+        if (selRowId >= 0) {
             ymlDataName = "JutakuData_1_2.yml";
         } else {
             ymlDataName = "JutakuData_2.yml";
         }
         ///////////////////////////////////////////////////////////
-        
+
         setJutakuKaishuShinseiList(panel, ymlDataName);
 
         response.data = panel;
@@ -107,12 +107,12 @@ public class JutakuKaishuShinseiList {
                 hashMap(hashMap, arrayData);
             }
 
-        } else if(ymlDataName.equals("JutakuData_1.yml")) {
+        } else if (ymlDataName.equals("JutakuData_1.yml")) {
 
             HashMap hashMap = ymlData.get(2);
             hashMap(hashMap, arrayData);
 
-        } else if(ymlDataName.equals("JutakuData_1_2.yml")) {
+        } else if (ymlDataName.equals("JutakuData_1_2.yml")) {
 
             HashMap hashMap = ymlData.get(2);
             hashMap(hashMap, arrayData);

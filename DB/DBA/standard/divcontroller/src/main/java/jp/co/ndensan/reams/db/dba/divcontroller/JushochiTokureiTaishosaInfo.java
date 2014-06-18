@@ -11,7 +11,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.DbCommonInfoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.JushochiTokureiTaishosaInfoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.helper.YamlLoader;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.tblAtenaSimpleDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -37,19 +37,19 @@ public class JushochiTokureiTaishosaInfo {
         HashMap demoData = demoDataList.get(0);
 
         ResponseData<JushochiTokureiTaishosaInfoDiv> response = new ResponseData<>();
-        setAtenaJoho(div.getAtenaJoho().getTblAtenaSimple(), demoData);
+        setAtenaJoho(div.getAtenaJoho(), demoData);
         setDbCommonInfo(div.getDbCommonInfo(), demoData);
         response.data = div;
         return response;
     }
 
-    private void setAtenaJoho(tblAtenaSimpleDiv tblAtenaSimple, Map demoData) {
+    private void setAtenaJoho(AtenaShokaiSimpleDiv tblAtenaSimple, Map demoData) {
 
         tblAtenaSimple.getTxtAtenaKanaMeisho().setValue(new RString(demoData.get("カナ氏名").toString()));
         tblAtenaSimple.getTxtAtenaMeisho().setValue(new RString(demoData.get("氏名").toString()));
         tblAtenaSimple.getTxtGyoseiku().setValue(new RString(demoData.get("行政区").toString()));
         tblAtenaSimple.getTxtJuminJotai().setValue(new RString(demoData.get("住民状態").toString()));
-        tblAtenaSimple.getTxtJuminShubetsu().setValue(new RString(demoData.get("住民種別").toString()));
+        tblAtenaSimple.getTxtJuminJotai().setValue(new RString(demoData.get("住民種別").toString()));
         tblAtenaSimple.getTxtJusho().setValue(new RString(demoData.get("住所").toString()));
         tblAtenaSimple.getTxtKojinHojinCode().setValue(new RString(demoData.get("個人法人コード").toString()));
         tblAtenaSimple.getTxtNenrei().setValue(new RString(demoData.get("氏名").toString()));
