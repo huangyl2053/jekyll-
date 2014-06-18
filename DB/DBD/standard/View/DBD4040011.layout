@@ -32,7 +32,7 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
-     "onClick_BtnToSearch": ""
+     "onClick_BtnToSearch": "onClick_btnSearch"
     },
     {
      "fieldName": "ShogaishaKojoTaishoshaList",
@@ -62,7 +62,7 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
-     "onClick_btnToResearch": "",
+     "onClickBtnToResearch": "",
      "gridSetting": {
       "rowHeight": 50,
       "isMultiSelectable": false,
@@ -424,7 +424,7 @@
      "btnEltax_displayNone": false,
      "btnShiyoJokyo_displayNone": false,
      "btnAtesakiKakunin_displayNone": false,
-     "SubGyomuCode": "",
+     "SubGyomuCode": "DBD",
      "JukiYusennKubun": "1",
      "AgeArrivalDay": "1",
      "SubGyomuUmu": "0",
@@ -1070,7 +1070,12 @@
        "postParameterPanelNames": "ShogaishaKojoNinteishoHakko"
       }
      ],
-     "requestSettings": [],
+     "requestSettings": [
+      {
+       "eventName": "onLoad",
+       "requestUrl": ""
+      }
+     ],
      "hiddenInput": [],
      "onOpen": "",
      "onClose": "",
@@ -1192,33 +1197,23 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "ShogaishaKojoTaishoshaNinteishoHakkoListInfo_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
+     "fieldName": "ReturnToSearch",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "ShogaishaKojoTaishoshaNinteishoHakkoSearchInfo_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
+     "fieldName": "ShogaishaKojoTaishoshaSearch_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
      "event": "onClick",
      "transition": "該当者一覧"
     },
     {
-     "fieldName": "ShogaishaKojoTaishoshaNinteishoHakkoListInfo_SearchResultOfHihokensha_dgSearchResult",
+     "fieldName": "ShogaishaKojoTaishoshaList_SearchResultOfHihokensha_dgSearchResult",
      "event": "onSelectByDblClick",
      "transition": ""
     },
     {
-     "fieldName": "ShogaishaKojoTaishoshaNinteishoHakkoListInfo_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": "個人検索"
-    },
-    {
-     "fieldName": "ShogaishaKojoTaishoshaNinteishoHakkoListInfo_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelect",
-     "transition": ""
-    },
-    {
-     "fieldName": "ReturnToSearch",
-     "event": "onClick",
+     "fieldName": "ShogaishaKojoTaishoshaList_SearchResultOfHihokensha_dgSearchResult",
+     "event": "onSelectBySelectButton",
      "transition": ""
     }
    ]
@@ -1247,34 +1242,24 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "ShogaishaKojoTaishoshaNinteishoHakkoListInfo_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": "障害者控除情報"
-    },
-    {
-     "fieldName": "ShogaishaKojoTaishoshaNinteishoHakkoSearchInfo_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
+     "fieldName": "ReturnToSearch",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "ShogaishaKojoTaishoshaNinteishoHakkoListInfo_SearchResultOfHihokensha_dgSearchResult",
+     "fieldName": "ShogaishaKojoTaishoshaSearch_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "ShogaishaKojoTaishoshaList_SearchResultOfHihokensha_dgSearchResult",
      "event": "onSelectByDblClick",
      "transition": "障害者控除情報"
     },
     {
-     "fieldName": "ShogaishaKojoTaishoshaNinteishoHakkoListInfo_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": "個人検索"
-    },
-    {
-     "fieldName": "ShogaishaKojoTaishoshaNinteishoHakkoListInfo_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelect",
+     "fieldName": "ShogaishaKojoTaishoshaList_SearchResultOfHihokensha_dgSearchResult",
+     "event": "onSelectBySelectButton",
      "transition": "障害者控除情報"
-    },
-    {
-     "fieldName": "ReturnToSearch",
-     "event": "onClick",
-     "transition": ""
     }
    ]
   },
@@ -1342,34 +1327,24 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "ShogaishaKojoTaishoshaNinteishoHakkoListInfo_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
+     "fieldName": "ReturnToSearch",
+     "event": "onClick",
+     "transition": "個人検索"
+    },
+    {
+     "fieldName": "ShogaishaKojoTaishoshaSearch_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "ShogaishaKojoTaishoshaNinteishoHakkoSearchInfo_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "ShogaishaKojoTaishoshaNinteishoHakkoListInfo_SearchResultOfHihokensha_dgSearchResult",
+     "fieldName": "ShogaishaKojoTaishoshaList_SearchResultOfHihokensha_dgSearchResult",
      "event": "onSelectByDblClick",
      "transition": ""
     },
     {
-     "fieldName": "ShogaishaKojoTaishoshaNinteishoHakkoListInfo_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
+     "fieldName": "ShogaishaKojoTaishoshaList_SearchResultOfHihokensha_dgSearchResult",
+     "event": "onSelectBySelectButton",
      "transition": ""
-    },
-    {
-     "fieldName": "ShogaishaKojoTaishoshaNinteishoHakkoListInfo_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelect",
-     "transition": ""
-    },
-    {
-     "fieldName": "ReturnToSearch",
-     "event": "onClick",
-     "transition": "個人検索"
     }
    ]
   }
