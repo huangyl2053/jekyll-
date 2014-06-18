@@ -17,10 +17,10 @@ public enum NinteichosaItemGroup implements INinteichosaItemGroup {
      * 調査項目グループが「なし」であることを表します。
      */
     なし("", "", "", false);
-    private RString no;
-    private RString name;
-    private RString shortName;
-    private boolean kihonChosaGroup;
+    private final RString no;
+    private final RString name;
+    private final RString shortName;
+    private final boolean kihonChosaGroup;
 
     private NinteichosaItemGroup(String no, String name, String shortName, boolean kihonChosaGroup) {
         this.no = new RString(no);

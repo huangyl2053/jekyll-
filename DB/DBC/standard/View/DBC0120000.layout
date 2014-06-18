@@ -1,0 +1,2502 @@
+﻿{
+ "fieldName": "Page",
+ "items": [
+  {
+   "fieldName": "KyotakuJikoRiyohyoSearch",
+   "items": [
+    {
+     "fieldName": "lblSearch",
+     "items": [],
+     "controlType": "Label",
+     "width": "S",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "required": false,
+     "align": 0,
+     "text": "<<検索条件>>",
+     "isPrivateInfo": false
+    },
+    {
+     "fieldName": "btnSearch",
+     "items": [],
+     "controlType": "Button",
+     "width": "100",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "text": "検索する",
+     "onClick": "",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
+    }
+   ],
+   "controlType": "Panel",
+   "width": "1260",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "onLoad": "",
+   "title": "(共通) DBZ0010001 個人検索条件",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "KyotakuJikoRiyohyoSearch"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "isGroupBox": false
+  },
+  {
+   "fieldName": "KyotakuJikoRiyohyoList",
+   "items": [
+    {
+     "fieldName": "dgTaishoshaList",
+     "items": [],
+     "controlType": "DataGrid",
+     "width": "1240",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "gridSetting": {
+      "rowHeight": 25,
+      "isMultiSelectable": false,
+      "isShowFooter": true,
+      "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": false,
+      "header": {
+       "combineColumns": [],
+       "frozenColumn": "",
+       "headerHeight": 0
+      },
+      "columns": [
+       {
+        "columnName": "",
+        "dataName": "btnSelect",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 50,
+        "visible": true,
+        "cellType": 8,
+        "cellDetails": {
+         "cellType": 8,
+         "text": "選択",
+         "onClick": "",
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": ""
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "btnSelect"
+       }
+      ]
+     },
+     "height": "XS",
+     "onSort": "",
+     "onSelect": "",
+     "onSelectByDblClick": "",
+     "onOnlyRow": "",
+     "onNoRow": "",
+     "onMultiRows": "",
+     "dataSource": [],
+     "sortOrder": "defaultDataName4",
+     "isAscending": true,
+     "filterList": [],
+     "activeRowId": -1
+    }
+   ],
+   "controlType": "Panel",
+   "width": "1260",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "onLoad": "",
+   "title": "(共通) DBZ0010002 該当者一覧",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "KyotakuJikoRiyohyoList"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "isGroupBox": false
+  },
+  {
+   "fieldName": "KyotakuJikoRiyohyoKihon",
+   "items": [
+    {
+     "fieldName": "lblKihon1",
+     "items": [],
+     "controlType": "Label",
+     "width": "M",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "required": false,
+     "align": 0,
+     "text": "<<基本情報１>>",
+     "isPrivateInfo": false
+    },
+    {
+     "fieldName": "lblKihon2",
+     "items": [],
+     "controlType": "Label",
+     "width": "M",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "required": false,
+     "align": 0,
+     "text": "<<基本情報２>>",
+     "isPrivateInfo": false
+    },
+    {
+     "fieldName": "lblKihon3",
+     "items": [],
+     "controlType": "Label",
+     "width": "M",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "required": false,
+     "align": 0,
+     "text": "<<基本情報３>>",
+     "isPrivateInfo": false
+    }
+   ],
+   "controlType": "Panel",
+   "width": "1260",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "KyotakuJikoRiyohyoKihon"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "isGroupBox": false
+  },
+  {
+   "fieldName": "KyotakuJikoRiyohyoKaigoKihon",
+   "items": [
+    {
+     "fieldName": "lblKaigoKihon1",
+     "items": [],
+     "controlType": "Label",
+     "width": "M",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "required": false,
+     "align": 0,
+     "text": "<<介護基本情報１>>",
+     "isPrivateInfo": false
+    },
+    {
+     "fieldName": "lblKaigoKihon2",
+     "items": [],
+     "controlType": "Label",
+     "width": "M",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "required": false,
+     "align": 0,
+     "text": "<<介護基本情報２>>",
+     "isPrivateInfo": false
+    }
+   ],
+   "controlType": "Panel",
+   "width": "1260",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "KyotakuJikoRiyohyoKaigoKihon"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "isGroupBox": false
+  },
+  {
+   "fieldName": "KyotakuJikoRiyohyoRireki",
+   "items": [
+    {
+     "fieldName": "KyotakuJikoRiyohyoRirekiList",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": 0,
+     "marginRight": 0,
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": 0,
+     "businessId": "DBC",
+     "controlName": "ServiceRiyohyoRirekiList",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "RirekiListGridSetting": {
+      "rowHeight": 25,
+      "isMultiSelectable": false,
+      "isShowFooter": true,
+      "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": false,
+      "header": {
+       "combineColumns": [
+        {
+         "combineColumnName": "計画適用期間",
+         "combineItem": [
+          "txtTekiyoKaishiYMD",
+          "txtTekiyoShuryoYMD"
+         ]
+        }
+       ],
+       "frozenColumn": "",
+       "headerHeight": 0
+      },
+      "columns": [
+       {
+        "columnName": "",
+        "dataName": "btnSelect",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 35,
+        "visible": true,
+        "cellType": 8,
+        "cellDetails": {
+         "cellType": 8,
+         "text": "選",
+         "onClick": "",
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": ""
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "btnSelect"
+       },
+       {
+        "columnName": "",
+        "dataName": "txtTodokedeYMDInvisible",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 0,
+        "visible": false,
+        "cellType": 6,
+        "cellDetails": {
+         "cellType": 6,
+         "ymdKubun": 2,
+         "displayFormat": 5,
+         "onChange": ""
+        },
+        "align": 1,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "txtTodokedeYMDInvisible"
+       },
+       {
+        "columnName": "届出日",
+        "dataName": "txtTodokedeYMD",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtTodokedeYMD"
+       },
+       {
+        "columnName": "届出区分",
+        "dataName": "txtTodokedeKubun",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 70,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtTodokedeKubun"
+       },
+       {
+        "columnName": "開始日",
+        "dataName": "txtTekiyoKaishiYMD",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtTekiyoKaishiYMD"
+       },
+       {
+        "columnName": "終了日",
+        "dataName": "txtTekiyoShuryoYMD",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtTekiyoShuryoYMD"
+       }
+      ]
+     },
+     "RirekiListHeight": "400"
+    },
+    {
+     "fieldName": "btnGaitoshaReturn",
+     "items": [],
+     "controlType": "Button",
+     "width": "180",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "text": "該当者一覧に戻る",
+     "onClick": "",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
+    }
+   ],
+   "controlType": "Panel",
+   "width": "1260",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "onLoad": "",
+   "title": "履歴一覧",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "KyotakuJikoRiyohyoRireki"
+    }
+   ],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoRiyohyoRireki/getOnLoadData"
+    }
+   ],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "isGroupBox": false
+  },
+  {
+   "fieldName": "KyotakuJikoRiyohyo",
+   "items": [
+    {
+     "fieldName": "KyotakuJikoRiyohyoInfo",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": 0,
+     "marginRight": 0,
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": 0,
+     "businessId": "DBC",
+     "controlName": "ServiceRiyohyoInfo",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "BeppyoMeisaiVisible": true,
+     "BeppyoMeisaiDisplayNone": false,
+     "BeppyoGokeiVisible": true,
+     "BeppyoGokeiDisplayNone": false,
+     "BeppyoRiyoNissuVisible": true,
+     "BeppyoRiyoNissuDisplayNone": false,
+     "KeikakuJigyoshaCodeVisible": false,
+     "KeikakuJigyoshaCodeDisplayNone": true,
+     "KeikakuJigyoshaNameVisible": false,
+     "KeikakuJigyoshaNameDisplayNone": true,
+     "ZengetsuCopyOnClick": "onClickZengetsuCopy",
+     "RiyohyoMeisaiAddOnClick": "onClickRiyohyoMeisaiAdd",
+     "BeppyoMeisaiNewOnClick": "onClickBeppyoMeisaiNew",
+     "BeppyoGokeiNewOnClick": "onClickBeppyoGokeiNew",
+     "BeppyoMeisaiKakuteiOnClick": "onClickBeppyoMeisaiKakutei",
+     "BeppyoGokeiKakuteiOnClick": "onClickBeppyoGokeiKakutei",
+     "ServiceRiyohyoListGridSetting": {
+      "rowHeight": 25,
+      "isMultiSelectable": false,
+      "isShowFooter": true,
+      "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": true,
+      "header": {
+       "combineColumns": [
+        {
+         "combineColumnName": "提供時間帯",
+         "combineItem": [
+          "txtKaishi",
+          "txtShuryo"
+         ]
+        },
+        {
+         "combineColumnName": "日",
+         "combineItem": [
+          "txtYoJitsu"
+         ]
+        },
+        {
+         "combineColumnName": "1",
+         "combineItem": [
+          "txtDay1"
+         ]
+        },
+        {
+         "combineColumnName": "2",
+         "combineItem": [
+          "txtDay2"
+         ]
+        },
+        {
+         "combineColumnName": "3",
+         "combineItem": [
+          "txtDay3"
+         ]
+        },
+        {
+         "combineColumnName": "4",
+         "combineItem": [
+          "txtDay4"
+         ]
+        },
+        {
+         "combineColumnName": "5",
+         "combineItem": [
+          "txtDay5"
+         ]
+        },
+        {
+         "combineColumnName": "6",
+         "combineItem": [
+          "txtDay6"
+         ]
+        },
+        {
+         "combineColumnName": "7",
+         "combineItem": [
+          "txtDay7"
+         ]
+        },
+        {
+         "combineColumnName": "8",
+         "combineItem": [
+          "txtDay8"
+         ]
+        },
+        {
+         "combineColumnName": "9",
+         "combineItem": [
+          "txtDay9"
+         ]
+        },
+        {
+         "combineColumnName": "10",
+         "combineItem": [
+          "txtDay10"
+         ]
+        },
+        {
+         "combineColumnName": "11",
+         "combineItem": [
+          "txtDay11"
+         ]
+        },
+        {
+         "combineColumnName": "12",
+         "combineItem": [
+          "txtDay12"
+         ]
+        },
+        {
+         "combineColumnName": "13",
+         "combineItem": [
+          "txtDay13"
+         ]
+        },
+        {
+         "combineColumnName": "14",
+         "combineItem": [
+          "txtDay14"
+         ]
+        },
+        {
+         "combineColumnName": "15",
+         "combineItem": [
+          "txtDay15"
+         ]
+        },
+        {
+         "combineColumnName": "16",
+         "combineItem": [
+          "txtDay16"
+         ]
+        },
+        {
+         "combineColumnName": "17",
+         "combineItem": [
+          "txtDay17"
+         ]
+        },
+        {
+         "combineColumnName": "18",
+         "combineItem": [
+          "txtDay18"
+         ]
+        },
+        {
+         "combineColumnName": "19",
+         "combineItem": [
+          "txtDay19"
+         ]
+        },
+        {
+         "combineColumnName": "20",
+         "combineItem": [
+          "txtDay20"
+         ]
+        },
+        {
+         "combineColumnName": "21",
+         "combineItem": [
+          "txtDay21"
+         ]
+        },
+        {
+         "combineColumnName": "22",
+         "combineItem": [
+          "txtDay22"
+         ]
+        },
+        {
+         "combineColumnName": "23",
+         "combineItem": [
+          "txtDay23"
+         ]
+        },
+        {
+         "combineColumnName": "24",
+         "combineItem": [
+          "txtDay24"
+         ]
+        },
+        {
+         "combineColumnName": "25",
+         "combineItem": [
+          "txtDay25"
+         ]
+        },
+        {
+         "combineColumnName": "26",
+         "combineItem": [
+          "txtDay26"
+         ]
+        },
+        {
+         "combineColumnName": "27",
+         "combineItem": [
+          "txtDay27"
+         ]
+        },
+        {
+         "combineColumnName": "28",
+         "combineItem": [
+          "txtDay28"
+         ]
+        },
+        {
+         "combineColumnName": "29",
+         "combineItem": [
+          "txtDay29"
+         ]
+        },
+        {
+         "combineColumnName": "30",
+         "combineItem": [
+          "txtDay30"
+         ]
+        },
+        {
+         "combineColumnName": "31",
+         "combineItem": [
+          "txtDay31"
+         ]
+        },
+        {
+         "combineColumnName": "合計",
+         "combineItem": [
+          "txtGokei"
+         ]
+        }
+       ],
+       "frozenColumn": "txtYoJitsu",
+       "headerHeight": 0
+      },
+      "columns": [
+       {
+        "columnName": "",
+        "dataName": "btnDelete",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 35,
+        "visible": true,
+        "cellType": 8,
+        "cellDetails": {
+         "cellType": 8,
+         "text": "削",
+         "onClick": "onClickServiceRiyohyoListDelete",
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": ""
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "btnDelete"
+       },
+       {
+        "columnName": "開始",
+        "dataName": "txtKaishi",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 60,
+        "visible": true,
+        "cellType": 1,
+        "cellDetails": {
+         "cellType": 1,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "textAlign": 1
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtKaishi"
+       },
+       {
+        "columnName": "終了",
+        "dataName": "txtShuryo",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 60,
+        "visible": true,
+        "cellType": 1,
+        "cellDetails": {
+         "cellType": 1,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "textAlign": 1
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtShuryo"
+       },
+       {
+        "columnName": "",
+        "dataName": "btnService",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 35,
+        "visible": true,
+        "cellType": 8,
+        "cellDetails": {
+         "cellType": 8,
+         "text": "照",
+         "onClick": "",
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": ""
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "btnService"
+       },
+       {
+        "columnName": "サービス内容",
+        "dataName": "txtService",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 200,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtService"
+       },
+       {
+        "columnName": "",
+        "dataName": "btnJigyosha",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 35,
+        "visible": true,
+        "cellType": 8,
+        "cellDetails": {
+         "cellType": 8,
+         "text": "照",
+         "onClick": "",
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": ""
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "btnJigyosha"
+       },
+       {
+        "columnName": "サービス事業者",
+        "dataName": "txtJigyosha",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 280,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtJigyosha"
+       },
+       {
+        "columnName": "曜",
+        "dataName": "txtYoJitsu",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtYoJitsu"
+       },
+       {
+        "columnName": "日",
+        "dataName": "txtDay1",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay1"
+       },
+       {
+        "columnName": "月",
+        "dataName": "txtDay2",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay2"
+       },
+       {
+        "columnName": "火",
+        "dataName": "txtDay3",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay3"
+       },
+       {
+        "columnName": "水",
+        "dataName": "txtDay4",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay4"
+       },
+       {
+        "columnName": "木",
+        "dataName": "txtDay5",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay5"
+       },
+       {
+        "columnName": "金",
+        "dataName": "txtDay6",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay6"
+       },
+       {
+        "columnName": "土",
+        "dataName": "txtDay7",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay7"
+       },
+       {
+        "columnName": "日",
+        "dataName": "txtDay8",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay8"
+       },
+       {
+        "columnName": "月",
+        "dataName": "txtDay9",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay9"
+       },
+       {
+        "columnName": "火",
+        "dataName": "txtDay10",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay10"
+       },
+       {
+        "columnName": "水",
+        "dataName": "txtDay11",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay11"
+       },
+       {
+        "columnName": "木",
+        "dataName": "txtDay12",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay12"
+       },
+       {
+        "columnName": "金",
+        "dataName": "txtDay13",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay13"
+       },
+       {
+        "columnName": "土",
+        "dataName": "txtDay14",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay14"
+       },
+       {
+        "columnName": "日",
+        "dataName": "txtDay15",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay15"
+       },
+       {
+        "columnName": "月",
+        "dataName": "txtDay16",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay16"
+       },
+       {
+        "columnName": "火",
+        "dataName": "txtDay17",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay17"
+       },
+       {
+        "columnName": "水",
+        "dataName": "txtDay18",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay18"
+       },
+       {
+        "columnName": "木",
+        "dataName": "txtDay19",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay19"
+       },
+       {
+        "columnName": "金",
+        "dataName": "txtDay20",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay20"
+       },
+       {
+        "columnName": "土",
+        "dataName": "txtDay21",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay21"
+       },
+       {
+        "columnName": "日",
+        "dataName": "txtDay22",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay22"
+       },
+       {
+        "columnName": "月",
+        "dataName": "txtDay23",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay23"
+       },
+       {
+        "columnName": "火",
+        "dataName": "txtDay24",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay24"
+       },
+       {
+        "columnName": "水",
+        "dataName": "txtDay25",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay25"
+       },
+       {
+        "columnName": "木",
+        "dataName": "txtDay26",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay26"
+       },
+       {
+        "columnName": "金",
+        "dataName": "txtDay27",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay27"
+       },
+       {
+        "columnName": "土",
+        "dataName": "txtDay28",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay28"
+       },
+       {
+        "columnName": "日",
+        "dataName": "txtDay29",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay29"
+       },
+       {
+        "columnName": "月",
+        "dataName": "txtDay30",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay30"
+       },
+       {
+        "columnName": "火",
+        "dataName": "txtDay31",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 30,
+        "visible": true,
+        "cellType": 5,
+        "cellDetails": {
+         "cellType": 5,
+         "maxLength": "1000000000000",
+         "minLength": "0",
+         "maxValue": "1.7976931348623157e+308",
+         "minValue": "0",
+         "isCurrency": false,
+         "isComma": false,
+         "decimalPointLength": "0"
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtDay31"
+       },
+       {
+        "columnName": "",
+        "dataName": "txtGokei",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 40,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 2,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtGokei"
+       }
+      ]
+     },
+     "ServiceRiyohyoBeppyoListGridSetting": {
+      "rowHeight": 25,
+      "isMultiSelectable": false,
+      "isShowFooter": true,
+      "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": true,
+      "header": {
+       "combineColumns": [],
+       "frozenColumn": "txtService",
+       "headerHeight": 1
+      },
+      "columns": [
+       {
+        "columnName": "",
+        "dataName": "btnSelect",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 35,
+        "visible": true,
+        "cellType": 8,
+        "cellDetails": {
+         "cellType": 8,
+         "text": "選",
+         "onClick": "onClickServiceRiyohyoBeppyoListSelect",
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": ""
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "btnSelect"
+       },
+       {
+        "columnName": "",
+        "dataName": "btnDelete",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 35,
+        "visible": true,
+        "cellType": 8,
+        "cellDetails": {
+         "cellType": 8,
+         "text": "削",
+         "onClick": "onClickServiceRiyohyoBeppyoListDelete",
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": ""
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "btnDelete"
+       },
+       {
+        "columnName": "事業者",
+        "dataName": "txtJigyosha",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 280,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtJigyosha"
+       },
+       {
+        "columnName": "サービス",
+        "dataName": "txtService",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 200,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtService"
+       },
+       {
+        "columnName": "単位",
+        "dataName": "txtTani",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 2,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtTani"
+       },
+       {
+        "columnName": "割引適用<br>後率",
+        "dataName": "txtWaribikigoRitsu",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 2,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtWaribikigoRitsu"
+       },
+       {
+        "columnName": "割引適用<br>後単位",
+        "dataName": "txtWaribikigoTani",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 2,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtWaribikigoTani"
+       },
+       {
+        "columnName": "回数",
+        "dataName": "txtKaisu",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 60,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 2,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtKaisu"
+       },
+       {
+        "columnName": "サービス<br>単位",
+        "dataName": "txtServiceTani",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 2,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtServiceTani"
+       },
+       {
+        "columnName": "種類限度<br>超過単位",
+        "dataName": "txtShuruiGendoChokaTani",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 2,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtShuruiGendoChokaTani"
+       },
+       {
+        "columnName": "種類限度<br>内単位",
+        "dataName": "txtShuruiGendonaiTani",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 2,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtShuruiGendonaiTani"
+       },
+       {
+        "columnName": "区分限度<br>超過単位",
+        "dataName": "txtKubunGendoChokaTani",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 2,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtKubunGendoChokaTani"
+       },
+       {
+        "columnName": "区分限度<br>内単位",
+        "dataName": "txtKubunGendonaiTani",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 2,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtKubunGendonaiTani"
+       },
+       {
+        "columnName": "単位数<br>単価",
+        "dataName": "txtTanisuTanka",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 2,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtTanisuTanka"
+       },
+       {
+        "columnName": "費用<br>総額",
+        "dataName": "txtHiyoSogaku",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 2,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtHiyoSogaku"
+       },
+       {
+        "columnName": "給付<br>率",
+        "dataName": "txtKyufuritsu",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 60,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 2,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtKyufuritsu"
+       },
+       {
+        "columnName": "保険<br>給付額",
+        "dataName": "txtHokenFutangaku",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 80,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 2,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtHokenFutangaku"
+       },
+       {
+        "columnName": "利用者負担額<br>(保険対象)",
+        "dataName": "txtRiyoshaFutangakuHoken",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 100,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 2,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtRiyoshaFutangakuHoken"
+       },
+       {
+        "columnName": "利用者負担額<br>(全額)",
+        "dataName": "txtRiyoshaFutangakuZengaku",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 100,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 2,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "txtRiyoshaFutangakuZengaku"
+       }
+      ]
+     }
+    },
+    {
+     "fieldName": "btnReturn",
+     "items": [],
+     "controlType": "Button",
+     "width": "180",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "text": "履歴一覧に戻る",
+     "onClick": "",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
+    },
+    {
+     "fieldName": "txtBeppyoListSelectIndex",
+     "items": [],
+     "controlType": "TextBox",
+     "width": "1",
+     "visible": false,
+     "displayNone": true,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "required": false,
+     "text": "",
+     "isPrivateInfo": false,
+     "readOnly": false,
+     "placeHolder": "",
+     "textKind": 0,
+     "isPassword": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onChange": "",
+     "onKeyPress": "",
+     "labelLText": "",
+     "labelRText": "",
+     "labelLWidth": "S",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "value": "",
+     "permitCharactor": "",
+     "maxLength": 1000000000000,
+     "minLength": 0,
+     "textAlign": 0,
+     "isComboBox": false,
+     "suggest": []
+    }
+   ],
+   "controlType": "Panel",
+   "width": "1260",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "onLoad": "",
+   "title": "居宅サービス自己作成サービス利用票",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "KyotakuJikoRiyohyo"
+    }
+   ],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoRiyohyo/getOnLoadData"
+    },
+    {
+     "eventName": "onClickZengetsuCopy",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoRiyohyo/onClickZengetsuCopy"
+    },
+    {
+     "eventName": "onClickRiyohyoMeisaiAdd",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoRiyohyo/onClickRiyohyoMeisaiAdd"
+    },
+    {
+     "eventName": "onClickBeppyoMeisaiNew",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoRiyohyo/onClickBeppyoMeisaiNew"
+    },
+    {
+     "eventName": "onClickBeppyoGokeiNew",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoRiyohyo/onClickBeppyoGokeiNew"
+    },
+    {
+     "eventName": "onClickBeppyoMeisaiKakutei",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoRiyohyo/onClickBeppyoMeisaiKakutei"
+    },
+    {
+     "eventName": "onClickBeppyoGokeiKakutei",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoRiyohyo/onClickBeppyoGokeiKakutei"
+    },
+    {
+     "eventName": "onClickServiceRiyohyoListDelete",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoRiyohyo/onClickServiceRiyohyoListDelete"
+    },
+    {
+     "eventName": "onClickServiceRiyohyoBeppyoListSelect",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoRiyohyo/onClickServiceRiyohyoBeppyoListSelect"
+    },
+    {
+     "eventName": "onClickServiceRiyohyoBeppyoListDelete",
+     "requestUrl": "dbc/db/dbc/KyotakuJikoRiyohyo/onClickServiceRiyohyoBeppyoListDelete"
+    }
+   ],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "isGroupBox": false
+  },
+  {
+   "fieldName": "KyotsuPanel",
+   "items": [
+    {
+     "fieldName": "btnRiyohyoSave",
+     "items": [],
+     "controlType": "Button",
+     "width": "180",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "text": "サービス利用票を保存する",
+     "onClick": "",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": ""
+    }
+   ],
+   "controlType": "Panel",
+   "width": "M",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "KyotsuPanel"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": true,
+   "isGroupBox": false
+  }
+ ],
+ "controlType": null,
+ "width": "XS",
+ "visible": true,
+ "displayNone": false,
+ "disabled": false,
+ "accessKey": "",
+ "nextFocusFieldName": "",
+ "wrap": false,
+ "dependencies": [],
+ "float": 0,
+ "toolTip": "",
+ "authorityMode": 0,
+ "marginLeft": "XS",
+ "marginRight": "XS",
+ "onLoad": "",
+ "title": "居宅サービス自己作成サービス利用票登録",
+ "jsPathCollection": [],
+ "relation": [],
+ "stateTransition": [
+  {
+   "order": "1",
+   "stateName": "個人検索条件",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "KyotakuJikoRiyohyoSearch",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "KyotakuJikoRiyohyoList",
+     "panelState": "close"
+    }
+   ],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnSearch",
+     "event": "onClick",
+     "transition": "履歴"
+    },
+    {
+     "fieldName": "btnGaitoshaReturn",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList[btnSelect]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
+  },
+  {
+   "order": "2",
+   "stateName": "該当者一覧",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "KyotakuJikoRiyohyoSearch",
+     "panelState": "close"
+    },
+    {
+     "visibleDiv": "KyotakuJikoRiyohyoList",
+     "panelState": "visible"
+    }
+   ],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnSearch",
+     "event": "onClick",
+     "transition": "履歴"
+    },
+    {
+     "fieldName": "btnGaitoshaReturn",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList[btnSelect]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
+  },
+  {
+   "order": "3",
+   "stateName": "履歴",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "KyotakuJikoRiyohyoKihon",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "KyotakuJikoRiyohyoKaigoKihon",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "KyotakuJikoRiyohyoRireki",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "KyotakuJikoRiyohyoRirekiList",
+     "panelState": "visible"
+    }
+   ],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnSearch",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnGaitoshaReturn",
+     "event": "onClick",
+     "transition": "個人検索条件"
+    },
+    {
+     "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList[btnSelect]",
+     "event": "onClick",
+     "transition": "サービス利用票"
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
+  },
+  {
+   "order": "4",
+   "stateName": "サービス利用票",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "KyotakuJikoRiyohyoKihon",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "KyotakuJikoRiyohyoKaigoKihon",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "KyotakuJikoRiyohyo",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "KyotakuJikoRiyohyoInfo",
+     "panelState": "visible"
+    },
+    {
+     "visibleDiv": "KyotsuPanel",
+     "panelState": "visible"
+    }
+   ],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnSearch",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnGaitoshaReturn",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "KyotakuJikoRiyohyoRirekiList_ServiceRiyohyoRirekiList_dgServiceRiyohyoRirekiList[btnSelect]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": "履歴"
+    }
+   ]
+  }
+ ],
+ "currentState": "All",
+ "id": "DBC0120000",
+ "WFParameter": [],
+ "UIContainerEventMapping": [],
+ "loadSequencePanelNames": [
+  [
+   "KyotakuJikoRiyohyoSearch"
+  ],
+  [
+   "KyotakuJikoRiyohyoList"
+  ],
+  [
+   "KyotakuJikoRiyohyoKihon"
+  ],
+  [
+   "KyotakuJikoRiyohyoKaigoKihon"
+  ],
+  [
+   "KyotakuJikoRiyohyoRireki"
+  ],
+  [
+   "KyotakuJikoRiyohyoRirekiList"
+  ],
+  [
+   "KyotakuJikoRiyohyo"
+  ],
+  [
+   "KyotakuJikoRiyohyoInfo"
+  ],
+  [
+   "KyotsuPanel"
+  ]
+ ],
+ "panelMargin": 1,
+ "controlMargin": 1
+}

@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ikensho;
 
-import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoFactory;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemGroupOf2009;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;

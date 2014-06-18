@@ -11,22 +11,22 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.YokaigoOrYoshienKubu
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.YokaigoninteiShinseiKubun;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.HihokenshaSearchForShinsei.ForDemo;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.YokaigoninteiShinseishaKubun;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.HihokenshaOutlineDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.HihokenshaSearchForShinseiDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.HihokenshaShujiiDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.KankeiIinDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.LatestNinteiResultDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.N2HihokenshaDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NinteiShinseiJigyoshaDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NinteiShinseishaDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NinteiShinseishaTudukigaraDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NinteichosainAdvanceEntryDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NyuinNyushoDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShinseiJohoInputDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShisetsuRerekiDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgKankeiIin_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgShisetsuRereki_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgSearchResult_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.HihokenshaOutlineDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.HihokenshaSearchForShinseiDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.HihokenshaShujiiDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.KankeiIinDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.LatestNinteiResultDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.N2HihokenshaDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.NinteiShinseiJigyoshaDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.NinteiShinseishaDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.NinteiShinseishaTudukigaraDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.NinteichosainAdvanceEntryDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.NyuinNyushoDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.ShinseiJohoInputDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.ShisetsuRerekiDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.dgKankeiIin_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.dgShisetsuRereki_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.dgSearchResult_Row;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiYukoKubun;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -226,7 +226,7 @@ public class ShinseiJohoInput {
          * @param div NinteiShinseishaDiv
          */
         public static void clear(NinteiShinseishaDiv div) {
-            _setUpItem(div, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, true, true);
+            _setUpItem(div, RString.EMPTY, RString.EMPTY, null, RString.EMPTY, true, true);
         }
 
         /**
@@ -259,11 +259,11 @@ public class ShinseiJohoInput {
 
         private static void _onChange_radShinseishaKubun_本人(NinteiShinseishaDiv div, dgSearchResult_Row hihokensha) {
             _setUpItem(div, hihokensha.getShimei(), hihokensha.getKanaShimsei(),
-                    hihokensha.getYubinNo(), hihokensha.getJusho(), false, false);
+                    new YubinNo(hihokensha.getYubinNo()), hihokensha.getJusho(), false, false);
         }
 
         private static void _onChange_radShinseishaKubun_家族(NinteiShinseishaDiv div, dgSearchResult_Row hihokensha) {
-            _setUpItem(div, null, null, hihokensha.getYubinNo(), hihokensha.getJusho(), true, false);
+            _setUpItem(div, null, null, new YubinNo(hihokensha.getYubinNo()), hihokensha.getJusho(), true, false);
         }
 
         private static void _onChange_radShinseishaKubun_施設職員(NinteiShinseishaDiv div) {
@@ -275,11 +275,11 @@ public class ShinseiJohoInput {
         }
 
         private static void _setUpItem(NinteiShinseishaDiv div,
-                RString name, RString kanaName, RString yubinNo, RString jusho, boolean isFamily, boolean isJighosya) {
+                RString name, RString kanaName, YubinNo yubinNo, RString jusho, boolean isFamily, boolean isJighosya) {
 
             div.getTxtShinseishaName().setValue(name);
             div.getTxtShinseishaNameKana().setValue(kanaName);
-            div.getTxtYubinNo().setValue(new YubinNo(yubinNo));
+            div.getTxtYubinNo().setValue(yubinNo);
             div.getTxtShinseishaJusho().setValue(jusho);
 
             div.getNinteiShinseishaTudukigara().setDisplayNone(!isFamily);
@@ -590,11 +590,11 @@ public class ShinseiJohoInput {
             }
 
             private static dgShisetsuRereki_Row createDgShisetsuRereki(RString name, RDate startDate, RDate endDate) {
-                TextBoxDate ForStartDate = new TextBoxDate();
-                ForStartDate.setValue(startDate);
-                TextBoxDate ForEndDate = new TextBoxDate();
-                ForEndDate.setValue(endDate);
-                return new dgShisetsuRereki_Row(new Button(), name, ForStartDate, ForEndDate);
+                TextBoxDate forStartDate = new TextBoxDate();
+                forStartDate.setValue(startDate);
+                TextBoxDate forEndDate = new TextBoxDate();
+                forEndDate.setValue(endDate);
+                return new dgShisetsuRereki_Row(new Button(), name, forStartDate, forEndDate);
             }
         }
     }

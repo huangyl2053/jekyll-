@@ -1,0 +1,966 @@
+var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBE;
+(function (DBE) {
+    var KaigoNinteiKekka_Design = (function (_super) {
+        __extends(KaigoNinteiKekka_Design, _super);
+        function KaigoNinteiKekka_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, KaigoNinteiKekka_Design.myLayout, fieldName);
+        }
+        Object.defineProperty(KaigoNinteiKekka_Design.prototype, "selectDdlNijiHantei", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"])["onChange"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"])["onChange"] = value;
+                } else {
+                    this.layout.items[0].items[7]["onChange"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(KaigoNinteiKekka_Design.prototype, "selectDdlNinteiYukoTsukisu", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"])["onChange"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"])["onChange"] = value;
+                } else {
+                    this.layout.items[0].items[12]["onChange"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(KaigoNinteiKekka_Design.prototype, "selectDdlNinteiKubun", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["onChange"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["onChange"] = value;
+                } else {
+                    this.layout.items[0].items[3]["onChange"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        KaigoNinteiKekka_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+            Uz.JSControlUtil.registProperty("selectDdlNijiHantei");
+            Uz.JSControlUtil.registProperty("selectDdlNinteiYukoTsukisu");
+            Uz.JSControlUtil.registProperty("selectDdlNinteiKubun");
+        };
+
+        KaigoNinteiKekka_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+            editablePropertyInfo["selectDdlNijiHantei"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]).getEditablePropertyInfo()["onChange"];
+            editablePropertyInfo["selectDdlNinteiYukoTsukisu"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"]).getEditablePropertyInfo()["onChange"];
+            editablePropertyInfo["selectDdlNinteiKubun"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["onChange"];
+
+            return editablePropertyInfo;
+        };
+        KaigoNinteiKekka_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "KaigoNinteiKekka",
+                    "items": [
+                        {
+                            "fieldName": "txtShinseibi",
+                            "items": [],
+                            "controlType": "TextBoxFlexibleDate",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtShinseibi_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "申請日",
+                            "labelRText": "",
+                            "labelLWidth": "100",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "textKind": 0
+                        },
+                        {
+                            "fieldName": "txtShinseiKubunShinsei",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "60",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtShinseiKubunShinsei_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "区分変更",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "申請区分（申請時）",
+                            "labelRText": "",
+                            "labelLWidth": "178",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": ""
+                        },
+                        {
+                            "fieldName": "txtShinseiKubunHorei",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "60",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtShinseiKubunHorei_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "申請区分（法令）",
+                            "labelRText": "",
+                            "labelLWidth": "138",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": ""
+                        },
+                        {
+                            "fieldName": "ddlNinteiKubun",
+                            "items": [],
+                            "controlType": "DropDownList",
+                            "width": "75",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "ddlNinteiKubun_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "required": true,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "text": "",
+                            "labelLText": "認定区分",
+                            "labelRText": "",
+                            "labelLWidth": "100",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "selectedItem": "01",
+                            "dataSource": [
+                                {
+                                    "key": "01",
+                                    "value": "認定"
+                                },
+                                {
+                                    "key": "02",
+                                    "value": "再調査"
+                                },
+                                {
+                                    "key": "03",
+                                    "value": "再審査"
+                                },
+                                {
+                                    "key": "09",
+                                    "value": "却下"
+                                },
+                                {
+                                    "key": "11",
+                                    "value": "区却"
+                                }
+                            ]
+                        },
+                        {
+                            "fieldName": "txtIchijiHanteiKekka",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "60",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtIchijiHanteiKekka_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "要介護５",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "一次判定結果",
+                            "labelRText": "",
+                            "labelLWidth": "185",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": ""
+                        },
+                        {
+                            "fieldName": "ddlTokuteiShippei",
+                            "items": [],
+                            "controlType": "DropDownList",
+                            "width": "M",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "ddlTokuteiShippei_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "required": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "text": "",
+                            "labelLText": "特定疾病",
+                            "labelRText": "",
+                            "labelLWidth": "138",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "selectedItem": "",
+                            "dataSource": [
+                                {
+                                    "key": "",
+                                    "value": ""
+                                },
+                                {
+                                    "key": "01",
+                                    "value": "筋萎縮性側索硬化症"
+                                },
+                                {
+                                    "key": "02",
+                                    "value": "後縦靭帯骨化症"
+                                }
+                            ]
+                        },
+                        {
+                            "fieldName": "txtNinteibi",
+                            "items": [],
+                            "controlType": "TextBoxFlexibleDate",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNinteibi_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": true,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "認定日",
+                            "labelRText": "",
+                            "labelLWidth": "100",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "maxLength": 1000000000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "suggest": []
+                        },
+                        {
+                            "fieldName": "ddlNijiHanteiKekka",
+                            "items": [],
+                            "controlType": "DropDownList",
+                            "width": "85",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "ddlNijiHanteiKekka_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "required": true,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "text": "",
+                            "labelLText": "二次判定結果",
+                            "labelRText": "",
+                            "labelLWidth": "178",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "selectedItem": "01",
+                            "dataSource": [
+                                {
+                                    "key": "01",
+                                    "value": ""
+                                },
+                                {
+                                    "key": "12",
+                                    "value": "要支援１"
+                                },
+                                {
+                                    "key": "13",
+                                    "value": "要支援２"
+                                },
+                                {
+                                    "key": "21",
+                                    "value": "要介護１"
+                                },
+                                {
+                                    "key": "22",
+                                    "value": "要介護２"
+                                },
+                                {
+                                    "key": "23",
+                                    "value": "要介護３"
+                                },
+                                {
+                                    "key": "24",
+                                    "value": "要介護４"
+                                },
+                                {
+                                    "key": "25",
+                                    "value": "要介護５"
+                                },
+                                {
+                                    "key": "31",
+                                    "value": "非該当"
+                                }
+                            ]
+                        },
+                        {
+                            "fieldName": "ddlJotaiZo",
+                            "items": [],
+                            "controlType": "DropDownList",
+                            "width": "M",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "ddlJotaiZo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "required": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "text": "",
+                            "labelLText": "状態像例",
+                            "labelRText": "",
+                            "labelLWidth": "115",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "selectedItem": "",
+                            "dataSource": [
+                                {
+                                    "key": "",
+                                    "value": ""
+                                },
+                                {
+                                    "key": "01",
+                                    "value": "01:認知機能の低下等"
+                                },
+                                {
+                                    "key": "02",
+                                    "value": "02:不安定な状態"
+                                }
+                            ]
+                        },
+                        {
+                            "fieldName": "txtNinteiYukoKikanStart",
+                            "items": [],
+                            "controlType": "TextBoxFlexibleDate",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNinteiYukoKikanStart_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "認定期間",
+                            "labelRText": "",
+                            "labelLWidth": "100",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "maxLength": 1000000000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "suggest": []
+                        },
+                        {
+                            "fieldName": "lblKara3",
+                            "items": [],
+                            "controlType": "Label",
+                            "width": "20",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "lblKara3",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "required": false,
+                            "isPrivateInfo": false,
+                            "text": "～",
+                            "decorationClass": "",
+                            "align": 1
+                        },
+                        {
+                            "fieldName": "txtNinteiYukoKikanEnd",
+                            "items": [],
+                            "controlType": "TextBoxFlexibleDate",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": true,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtNinteiYukoKikanEnd_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "",
+                            "labelRText": "",
+                            "labelLWidth": "S",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "maxLength": 1000000000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "suggest": []
+                        },
+                        {
+                            "fieldName": "ddlNinteiYukoTsukisu",
+                            "items": [],
+                            "controlType": "DropDownList",
+                            "width": "60",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0",
+                            "marginRight": "0",
+                            "selectControlID": "ddlNinteiYukoTsukisu_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "required": true,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "text": "",
+                            "labelLText": "",
+                            "labelRText": "ヶ月",
+                            "labelLWidth": "2",
+                            "labelRWidth": "40",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "selectedItem": "0",
+                            "dataSource": [
+                                {
+                                    "key": "0",
+                                    "value": ""
+                                },
+                                {
+                                    "key": "24",
+                                    "value": "２４"
+                                },
+                                {
+                                    "key": "12",
+                                    "value": "１２"
+                                },
+                                {
+                                    "key": "06",
+                                    "value": "６"
+                                },
+                                {
+                                    "key": "01",
+                                    "value": "１"
+                                }
+                            ]
+                        },
+                        {
+                            "fieldName": "lblShinsakaiIken",
+                            "items": [],
+                            "controlType": "Label",
+                            "width": "100",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "14",
+                            "selectControlID": "lblShinsakaiIken",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "required": false,
+                            "isPrivateInfo": false,
+                            "text": "■審査会意見",
+                            "decorationClass": "",
+                            "align": 2
+                        },
+                        {
+                            "fieldName": "btnShinsaIkenTeikei",
+                            "items": [],
+                            "controlType": "ButtonDialog",
+                            "width": "50",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnShinsaIkenTeikei",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "text": "定型文",
+                            "onClick": "",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "displayChildDivName": "",
+                            "dataPassing": [],
+                            "visibleCloseButton": true,
+                            "onOkClose": "",
+                            "onBeforeOpenDialog": ""
+                        },
+                        {
+                            "fieldName": "lblShinsakaiMemo",
+                            "items": [],
+                            "controlType": "Label",
+                            "width": "100",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "2",
+                            "marginRight": "15",
+                            "selectControlID": "lblShinsakaiMemo",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "required": false,
+                            "isPrivateInfo": false,
+                            "text": "■審査会メモ",
+                            "decorationClass": "",
+                            "align": 2
+                        },
+                        {
+                            "fieldName": "txtShinsakaiIken",
+                            "items": [],
+                            "controlType": "TextBoxMultiLine",
+                            "width": "410",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0.5",
+                            "marginRight": "XS",
+                            "selectControlID": "txtShinsakaiIken_text_area",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "height": "40",
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "",
+                            "labelRText": "",
+                            "labelLWidth": "S",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": "200",
+                            "minLength": 0,
+                            "textKind": 0,
+                            "limitLength": "200",
+                            "countDisp": false
+                        },
+                        {
+                            "fieldName": "txtShinsakaiMemo",
+                            "items": [],
+                            "controlType": "TextBoxMultiLine",
+                            "width": "415",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtShinsakaiMemo_text_area",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "height": "40",
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "",
+                            "labelRText": "",
+                            "labelLWidth": "S",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textKind": 0,
+                            "limitLength": "200",
+                            "countDisp": false
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "G10",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": true,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "0",
+                    "marginRight": "XS",
+                    "selectControlID": "KaigoNinteiKekka",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "認定結果",
+                    "marginTop": "XS",
+                    "marginBottom": "XS",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "NinteiKekkaNyuryoku"
+                        }
+                    ],
+                    "requestSettings": [
+                        {
+                            "eventName": "onLoad",
+                            "requestUrl": ""
+                        }
+                    ],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorderTop": false,
+                    "eraseBorderBottom": false,
+                    "eraseBorderRight": false,
+                    "eraseBorderLeft": false,
+                    "backgroundColor": 0,
+                    "widthAuto": false,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto"
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "businessId": "DBE",
+            "controlName": "KaigoNinteiKekka",
+            "marginTop": 0,
+            "marginBottom": 0,
+            "originalProperty": [
+                {
+                    "publicChildFieldName": "ddlNijiHanteiKekka",
+                    "publicChildProperty": "onChange",
+                    "newPropertyName": "selectDdlNijiHantei"
+                },
+                {
+                    "publicChildFieldName": "ddlNinteiYukoTsukisu",
+                    "publicChildProperty": "onChange",
+                    "newPropertyName": "selectDdlNinteiYukoTsukisu"
+                },
+                {
+                    "publicChildFieldName": "ddlNinteiKubun",
+                    "publicChildProperty": "onChange",
+                    "newPropertyName": "selectDdlNinteiKubun"
+                }
+            ],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": ""
+        };
+        return KaigoNinteiKekka_Design;
+    })(Uz.CommonChildDiv);
+    DBE.KaigoNinteiKekka_Design = KaigoNinteiKekka_Design;
+})(DBE || (DBE = {}));

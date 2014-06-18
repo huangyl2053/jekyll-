@@ -5,8 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.util;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 
 /**
  * DataGrid用のユーティリティです。
@@ -33,5 +37,20 @@ public final class DataGridUtil {
      */
     public static RString lineFeedBetween(RString str1, RString str2) {
         return new RStringBuilder(str1).append(LINE_FEED).append(str2).toRString();
+    }
+
+    /**
+     * 選択されていない行を取得します。
+     *
+     * @param <T> DataRow
+     * @param grid DataGrid
+     * @return dataSourceからselectedItemsを除いた非選択行のlist
+     */
+    public static <T extends DataRow> List<T> unselectedItems(DataGrid<T> grid) {
+        List<T> list = new ArrayList<>(grid.getDataSource());
+        for (T item : grid.getSelectedItems()) {
+            list.remove(item);
+        }
+        return list;
     }
 }

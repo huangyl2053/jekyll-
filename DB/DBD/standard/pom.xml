@@ -15,6 +15,10 @@
     </parent>
 
     <properties>
+        <jp.co.ndensan.reams.uzVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.uzVersion>
+        <jp.co.ndensan.reams.urVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.urVersion>
+        <jp.co.ndensan.reams.dbzVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.dbzVersion>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <modules>
@@ -26,5 +30,14 @@
         <module>realservice</module>
         <module>divcontroller</module>
     </modules>
-    
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>jp.ndensan.reams.db.dbz</groupId>
+                <artifactId>DbzTestHelper</artifactId>
+                <version>${jp.co.ndensan.reams.dbzVersion}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>

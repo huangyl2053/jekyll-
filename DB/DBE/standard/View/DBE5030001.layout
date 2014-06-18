@@ -1,0 +1,383 @@
+﻿{
+ "fieldName": "Page",
+ "items": [
+  {
+   "fieldName": "TaishoShinsakaiIchiran",
+   "items": [
+    {
+     "fieldName": "dgShinsakaiIchiran",
+     "items": [],
+     "controlType": "DataGrid",
+     "width": "800",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "dgShinsakaiIchiran",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "height": "M",
+     "dataSource": [],
+     "gridSetting": {
+      "rowHeight": 30,
+      "isMultiSelectable": false,
+      "isShowHeader": true,
+      "isShowFooter": true,
+      "isShowFilter": true,
+      "isShowFilterButton": false,
+      "isShowRowState": false,
+      "isShowSelectButtonColumn": false,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
+      "header": {
+       "combineColumns": [],
+       "frozenColumn": "",
+       "headerHeight": 0
+      },
+      "columns": [
+       {
+        "columnName": "登録",
+        "dataName": "toroku",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 50,
+        "visible": true,
+        "cellType": 8,
+        "cellDetails": {
+         "cellType": 8,
+         "text": "□",
+         "onClick": "onClick_btnToroku",
+         "imageFileUrl": "/uz/uza/css/Link.jpg",
+         "imageWidth": "",
+         "imageHeight": ""
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "toroku"
+       },
+       {
+        "columnName": "審査会名",
+        "dataName": "審査会名",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 90,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "審査会名"
+       },
+       {
+        "columnName": "合議体",
+        "dataName": "合議体",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 65,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "合議体"
+       },
+       {
+        "columnName": "審査会会場",
+        "dataName": "審査会会場",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 120,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "審査会会場"
+       },
+       {
+        "columnName": "審査開催日",
+        "dataName": "審査開催日",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 100,
+        "visible": true,
+        "cellType": 7,
+        "cellDetails": {
+         "cellType": 7,
+         "ymdKubun": 2,
+         "displayFormat": 0,
+         "onChange": "",
+         "isSetValueToToolTip": true,
+         "readOnly": true
+        },
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "審査開催日"
+       },
+       {
+        "columnName": "審査開始",
+        "dataName": "審査開始",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 85,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "審査開始"
+       },
+       {
+        "columnName": "審査終了",
+        "dataName": "審査終了",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 85,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "審査終了"
+       },
+       {
+        "columnName": "対象人数",
+        "dataName": "対象人数",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 85,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 2,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "対象人数"
+       },
+       {
+        "columnName": "審査会状況",
+        "dataName": "審査会状況",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 100,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": null,
+        "align": 1,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "審査会状況"
+       }
+      ]
+     },
+     "onSort": "",
+     "onSelect": "",
+     "onSelectByDblClick": "",
+     "onSelectBySelectButton": "",
+     "onSelectByModifyButton": "",
+     "onSelectByDeleteButton": "",
+     "onOnlyRow": "",
+     "onNoRow": "",
+     "onMultiRows": "",
+     "sortOrder": "審査会状況",
+     "isAscending": true,
+     "filterList": [],
+     "activeRowId": -1
+    },
+    {
+     "fieldName": "btnSelect",
+     "items": [],
+     "controlType": "Button",
+     "width": "220",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnSelect",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "text": "選択した審査会の入力を行う",
+     "onClick": "",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "icon": 0
+    },
+    {
+     "fieldName": "btnClose",
+     "items": [],
+     "controlType": "Button",
+     "width": "220",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnClose",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "text": "メニューに戻る",
+     "onClick": "",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "icon": 0
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G9",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "XS",
+   "marginRight": "XS",
+   "selectControlID": "TaishoShinsakaiIchiran",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "TaishoShinsakaiIchiran"
+    }
+   ],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbe/db/dbe/TaishoShinsakaiIchiran/onLoadData"
+    },
+    {
+     "eventName": "onClick_btnToroku",
+     "requestUrl": "dbe/db/dbe/TaishoShinsakaiIchiran/onClick_btnToroku"
+    },
+    {
+     "eventName": "reLoadData",
+     "requestUrl": "dbe/db/dbe/TaishoShinsakaiIchiran/reLoadData"
+    }
+   ],
+   "hiddenInput": [],
+   "onOpen": "onOpen_TaishoShinsakaiIchiran",
+   "onClose": "",
+   "session": {},
+   "marginTop": "XS",
+   "marginBottom": "XS",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
+  }
+ ],
+ "controlType": null,
+ "width": "XS",
+ "visible": true,
+ "displayNone": false,
+ "disabled": false,
+ "accessKey": "",
+ "nextFocusFieldName": "",
+ "wrap": false,
+ "dependencies": [],
+ "float": 0,
+ "toolTip": "",
+ "authorityMode": 0,
+ "marginLeft": "XS",
+ "marginRight": "XS",
+ "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
+ "onLoad": "",
+ "title": "介護認定審査会一覧",
+ "jsPathCollection": [],
+ "relation": [],
+ "stateTransition": [
+  {
+   "order": "1",
+   "stateName": "対象一覧",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "TaishoShinsakaiIchiran",
+     "panelState": "visible"
+    }
+   ],
+   "validation": {},
+   "events": []
+  }
+ ],
+ "currentState": "All",
+ "id": "DBE5030001",
+ "WFParameter": [],
+ "UIContainerEventMapping": [
+  {
+   "alias": "selectRow",
+   "eventName": "dgShinsakaiIchiran[toroku].onClick"
+  },
+  {
+   "alias": "selectShinsakai",
+   "eventName": "btnSelect.onClick"
+  }
+ ],
+ "loadSequencePanelNames": [
+  [
+   "TaishoShinsakaiIchiran"
+  ]
+ ],
+ "panelMargin": 1,
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "commonButtonAreaData": []
+}

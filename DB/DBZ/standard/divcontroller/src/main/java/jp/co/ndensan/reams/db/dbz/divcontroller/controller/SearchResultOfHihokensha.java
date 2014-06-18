@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.SearchResultOfHihokenshaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgSearchResult_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.SearchResultOfHihokenshaDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.dgSearchResult_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.DataGridUtil;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
@@ -62,7 +62,7 @@ public final class SearchResultOfHihokensha {
                 DataGridUtil.lineFeedBetween(hihokensha.kanaShimei(), hihokensha.shimei()),
                 hihokensha.gender(),
                 forBrithDay,
-                hihokensha.yubinNo(),
+                hihokensha.yubinNo().value(),
                 hihokensha.jusho(),
                 hihokensha.kojinNo(),
                 hihokensha.juminShubetsu(),

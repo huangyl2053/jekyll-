@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -76,7 +77,7 @@ public interface IHihokenshaForSearchResult {
      *
      * @return 郵便番号
      */
-    RString yubinNo();
+    YubinNo yubinNo();
 
     /**
      * 個人番号を返します。
