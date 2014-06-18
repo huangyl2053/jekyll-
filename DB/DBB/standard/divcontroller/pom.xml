@@ -42,15 +42,10 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
-            <artifactId>DbzDivController</artifactId>
-            <version>${project.version}</version>
-            <classifier>classes</classifier>
-        </dependency>
-        <dependency>
-            <groupId>org.yaml</groupId>
-            <artifactId>snakeyaml</artifactId>
-            <version>1.13</version>
+           <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+           <artifactId>DbzDivController</artifactId>
+           <version>${project.version}</version>
+           <classifier>classes</classifier>
         </dependency>
     </dependencies>
 </project>
