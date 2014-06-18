@@ -32,7 +32,7 @@ public class ShikakuShutokuSearch {
      * 検索ボタンが押された際に実行されます。<br/>
      * 検索条件にしたがって対象者を検索し、その結果をグリッドに表示します。
      *
-     * @param searchDiv 被保険者照会対象者検索Div
+     * @param searchDiv 対象者検索Div
      * @return レスポンス
      */
     public ResponseData onClick_btnToSearch(ShikakuShutokuSearchDiv searchDiv) {
@@ -79,7 +79,7 @@ public class ShikakuShutokuSearch {
      * 再検索ボタンが押された際に実行されます。<br/>
      * グリッドに表示した検索結果を削除します。
      *
-     * @param searchDiv 被保険者照会対象者検索Div
+     * @param searchDiv 対象者検索Div
      * @return レスポンス
      */
     public ResponseData onClick_btnToResearch(ShikakuShutokuSearchDiv searchDiv) {
