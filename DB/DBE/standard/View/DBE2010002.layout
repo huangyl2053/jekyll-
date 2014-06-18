@@ -31,6 +31,8 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "btnToBindSelectedChosain",
+           "helpMessageID": "",
+           "jpControlName": "",
            "onClick": "bind_SelectedChosain",
            "text": "調査員を割付ける",
            "appearance": 0,
@@ -41,7 +43,7 @@
           }
          ],
          "controlType": "Panel",
-         "width": "M",
+         "width": "G2",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -55,6 +57,8 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "ButtonsForWaritsukeChosainList",
+         "helpMessageID": "",
+         "jpControlName": "",
          "onLoad": "",
          "title": "",
          "isOpen": true,
@@ -71,14 +75,13 @@
          "session": {},
          "marginTop": "Default",
          "marginBottom": "Default",
-         "eraseBorderTop": true,
-         "eraseBorderBottom": true,
-         "eraseBorderRight": true,
-         "eraseBorderLeft": true,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": true,
          "panelDisplay": 0,
-         "isGroupBox": false
+         "isGroupBox": false,
+         "readOnly": false,
+         "height": "Auto"
         },
         {
          "fieldName": "comChosainList",
@@ -98,6 +101,8 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "comChosainList",
+         "helpMessageID": "",
+         "jpControlName": "",
          "relation": [],
          "height": "120",
          "onSort": "",
@@ -127,6 +132,8 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "comChosainListAll",
+         "helpMessageID": "",
+         "jpControlName": "",
          "relation": [],
          "height": "10",
          "onSort": "",
@@ -154,6 +161,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "ShozokuChosainList",
+       "helpMessageID": "",
+       "jpControlName": "",
        "onLoad": "",
        "title": "所属調査員",
        "isOpen": true,
@@ -170,14 +179,13 @@
        "session": {},
        "marginTop": "Default",
        "marginBottom": "Default",
-       "eraseBorderTop": false,
-       "eraseBorderBottom": false,
-       "eraseBorderRight": false,
-       "eraseBorderLeft": false,
+       "eraseBorder": false,
        "backgroundColor": 0,
        "widthAuto": true,
        "panelDisplay": 1,
-       "isGroupBox": false
+       "isGroupBox": false,
+       "readOnly": false,
+       "height": "Auto"
       },
       {
        "fieldName": "WaritsukesakiChosaItakusakiList",
@@ -203,6 +211,8 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "btnToAddChosaItakusaki",
+           "helpMessageID": "",
+           "jpControlName": "",
            "onClick": "",
            "text": "調査委託先/調査員を追加する",
            "appearance": 0,
@@ -227,6 +237,8 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "ButtonsForWaritsukeChosaItakusakiList",
+         "helpMessageID": "",
+         "jpControlName": "",
          "onLoad": "",
          "title": "",
          "isOpen": true,
@@ -243,14 +255,13 @@
          "session": {},
          "marginTop": "Default",
          "marginBottom": "Default",
-         "eraseBorderTop": true,
-         "eraseBorderBottom": true,
-         "eraseBorderRight": true,
-         "eraseBorderLeft": true,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": true,
          "panelDisplay": 0,
-         "isGroupBox": false
+         "isGroupBox": false,
+         "readOnly": false,
+         "height": "Auto"
         },
         {
          "fieldName": "dgChosaItakusakiList",
@@ -270,13 +281,23 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "dgChosaItakusakiList",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "readOnly": false,
+         "height": "165",
          "gridSetting": {
           "rowHeight": 25,
           "isMultiSelectable": false,
+          "isShowHeader": true,
           "isShowFooter": true,
           "isShowFilter": false,
           "isShowFilterButton": false,
           "isShowRowState": false,
+          "isShowSelectButtonColumn": false,
+          "isShowModifyButtonColumn": false,
+          "isShowDeleteButtonColumn": false,
+          "limitRowCount": 0,
+          "selectedRowCount": 0,
           "header": {
            "combineColumns": [],
            "frozenColumn": "",
@@ -292,7 +313,8 @@
             "visible": true,
             "cellType": 0,
             "cellDetails": {
-             "cellType": 0
+             "cellType": 0,
+             "isSetValueToToolTip": false
             },
             "align": 1,
             "resize": true,
@@ -308,7 +330,8 @@
             "visible": true,
             "cellType": 0,
             "cellDetails": {
-             "cellType": 0
+             "cellType": 0,
+             "isSetValueToToolTip": false
             },
             "align": 0,
             "resize": true,
@@ -324,7 +347,8 @@
             "visible": true,
             "cellType": 0,
             "cellDetails": {
-             "cellType": 0
+             "cellType": 0,
+             "isSetValueToToolTip": false
             },
             "align": 2,
             "resize": true,
@@ -340,7 +364,8 @@
             "visible": true,
             "cellType": 0,
             "cellDetails": {
-             "cellType": 0
+             "cellType": 0,
+             "isSetValueToToolTip": false
             },
             "align": 2,
             "resize": true,
@@ -356,7 +381,8 @@
             "visible": true,
             "cellType": 0,
             "cellDetails": {
-             "cellType": 0
+             "cellType": 0,
+             "isSetValueToToolTip": false
             },
             "align": 0,
             "resize": true,
@@ -365,15 +391,17 @@
            }
           ]
          },
-         "height": "165",
          "onSort": "",
          "onSelect": "onSelect_dgChosaItakusakiList",
          "onSelectByDblClick": "",
+         "onSelectBySelectButton": "",
+         "onSelectByModifyButton": "",
+         "onSelectByDeleteButton": "",
          "onOnlyRow": "",
          "onNoRow": "",
          "onMultiRows": "",
          "dataSource": [],
-         "sortOrder": "waritsukeNum",
+         "sortOrder": "waritsukeChiku",
          "isAscending": true,
          "filterList": [],
          "activeRowId": -1
@@ -394,6 +422,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "WaritsukesakiChosaItakusakiList",
+       "helpMessageID": "",
+       "jpControlName": "",
        "onLoad": "",
        "title": "",
        "isOpen": true,
@@ -410,14 +440,13 @@
        "session": {},
        "marginTop": "Default",
        "marginBottom": "Default",
-       "eraseBorderTop": true,
-       "eraseBorderBottom": true,
-       "eraseBorderRight": true,
-       "eraseBorderLeft": true,
+       "eraseBorder": false,
        "backgroundColor": 0,
        "widthAuto": false,
        "panelDisplay": 0,
-       "isGroupBox": false
+       "isGroupBox": false,
+       "readOnly": false,
+       "height": "Auto"
       }
      ],
      "controlType": "Panel",
@@ -435,6 +464,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "ChosaItakusakiAndChosainList",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onLoad": "",
      "title": "調査委託先/調査員",
      "isOpen": true,
@@ -451,14 +482,13 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 1,
-     "isGroupBox": false
+     "isGroupBox": false,
+     "readOnly": false,
+     "height": "Auto"
     },
     {
      "fieldName": "ChosairaiBindByHandMain",
@@ -484,6 +514,9 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "ddlIraiKubun_core",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "readOnly": false,
          "text": "",
          "dataSource": [
           {
@@ -509,7 +542,8 @@
          "labelRWidth": "S",
          "labelLAlign": 2,
          "labelRAlign": 0,
-         "selectedItem": "1"
+         "selectedItem": "1",
+         "disabledItem": []
         },
         {
          "fieldName": "txtChosaIraiDate",
@@ -529,9 +563,11 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtChosaIraiDate_core",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "readOnly": false,
          "text": "",
          "required": false,
-         "readOnly": false,
          "placeHolder": "",
          "isPrivateInfo": false,
          "isPassword": false,
@@ -568,9 +604,11 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtChosaKigenDate_core",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "readOnly": false,
          "text": "",
          "required": false,
-         "readOnly": false,
          "placeHolder": "",
          "isPrivateInfo": false,
          "isPassword": false,
@@ -605,6 +643,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "RequestContents",
+       "helpMessageID": "",
+       "jpControlName": "",
        "onLoad": "",
        "title": "",
        "isOpen": true,
@@ -621,14 +661,13 @@
        "session": {},
        "marginTop": "Default",
        "marginBottom": "Default",
-       "eraseBorderTop": true,
-       "eraseBorderBottom": true,
-       "eraseBorderRight": true,
-       "eraseBorderLeft": true,
+       "eraseBorder": false,
        "backgroundColor": 0,
        "widthAuto": false,
        "panelDisplay": 0,
-       "isGroupBox": false
+       "isGroupBox": false,
+       "readOnly": false,
+       "height": "Auto"
       },
       {
        "fieldName": "comWaritukezumiList",
@@ -648,7 +687,10 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "comWaritukezumiList",
+       "helpMessageID": "",
+       "jpControlName": "",
        "relation": [],
+       "height": "190",
        "gridSetting": {
         "rowHeight": 40,
         "isMultiSelectable": false,
@@ -1228,7 +1270,6 @@
          }
         ]
        },
-       "height": "190",
        "onSort": "",
        "onSelect": "",
        "onSelectByDblClick": "",
@@ -1259,6 +1300,8 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "btnToFree",
+         "helpMessageID": "",
+         "jpControlName": "",
          "onClick": "onClick_btnToFree",
          "text": "↓　調査依頼を解除する",
          "appearance": 0,
@@ -1285,6 +1328,8 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "btnToBind",
+         "helpMessageID": "",
+         "jpControlName": "",
          "onClick": "onClick_btnToBind",
          "text": "調査依頼を割付ける　↑",
          "appearance": 0,
@@ -1309,6 +1354,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "ButtonsForBinding",
+       "helpMessageID": "",
+       "jpControlName": "",
        "onLoad": "",
        "title": "",
        "isOpen": true,
@@ -1325,14 +1372,13 @@
        "session": {},
        "marginTop": "Default",
        "marginBottom": "Default",
-       "eraseBorderTop": true,
-       "eraseBorderBottom": true,
-       "eraseBorderRight": true,
-       "eraseBorderLeft": true,
+       "eraseBorder": false,
        "backgroundColor": 0,
        "widthAuto": false,
        "panelDisplay": 0,
-       "isGroupBox": false
+       "isGroupBox": false,
+       "readOnly": false,
+       "height": "Auto"
       },
       {
        "fieldName": "comMiwarituskeList",
@@ -1352,7 +1398,10 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "comMiwarituskeList",
+       "helpMessageID": "",
+       "jpControlName": "",
        "relation": [],
+       "height": "190",
        "gridSetting": {
         "rowHeight": 40,
         "isMultiSelectable": false,
@@ -1932,7 +1981,6 @@
          }
         ]
        },
-       "height": "190",
        "onSort": "",
        "onSelect": "",
        "onSelectByDblClick": "",
@@ -1960,7 +2008,10 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "comNinteichosaIraiListGod",
+       "helpMessageID": "",
+       "jpControlName": "",
        "relation": [],
+       "height": "10",
        "gridSetting": {
         "rowHeight": 40,
         "isMultiSelectable": false,
@@ -2540,7 +2591,6 @@
          }
         ]
        },
-       "height": "10",
        "onSort": "",
        "onSelect": "",
        "onSelectByDblClick": "",
@@ -2566,6 +2616,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "ChosairaiBindByHandMain",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onLoad": "",
      "title": "",
      "isOpen": true,
@@ -2582,14 +2634,13 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
-     "isGroupBox": false
+     "isGroupBox": false,
+     "readOnly": false,
+     "height": "Auto"
     },
     {
      "fieldName": "ButtonsForNinteichosaIraiByHand",
@@ -2612,6 +2663,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "btToRegister",
+       "helpMessageID": "",
+       "jpControlName": "",
        "postParameterPanelNames": [
         {
          "postParameterPanelNames": "Panel17"
@@ -2644,6 +2697,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "ButtonsForNinteichosaIraiByHand",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onLoad": "",
      "title": "",
      "isOpen": true,
@@ -2660,18 +2715,17 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
-     "isGroupBox": false
+     "isGroupBox": false,
+     "readOnly": false,
+     "height": "Auto"
     }
    ],
    "controlType": "Panel",
-   "width": "M",
+   "width": "G2",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -2685,6 +2739,8 @@
    "marginLeft": "XS",
    "marginRight": "XS",
    "selectControlID": "NinteichosaIraiByHand",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "onLoad_NinteichosaIraiByHand",
    "title": "認定調査依頼登録",
    "isOpen": true,
@@ -2706,14 +2762,13 @@
    "session": {},
    "marginTop": "XS",
    "marginBottom": "XS",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": true,
    "panelDisplay": 0,
-   "isGroupBox": false
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
   }
  ],
  "controlType": null,
@@ -2731,6 +2786,8 @@
  "marginLeft": "XS",
  "marginRight": "XS",
  "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
  "onLoad": "",
  "title": "認定調査依頼（手動）",
  "jsPathCollection": [
@@ -2837,5 +2894,8 @@
   ]
  ],
  "panelMargin": 1,
- "controlMargin": 1
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
+ "commonButtonAreaData": []
 }

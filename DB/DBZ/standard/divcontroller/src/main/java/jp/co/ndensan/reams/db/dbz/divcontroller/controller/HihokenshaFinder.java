@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
 import java.util.Collections;
+import jp.co.ndensan.reams.db.dbz.divcontroller.demodata.KoikiKoseiShichosonData;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.HihokenshaFinderDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.SearchCriteriaOfHihokenshaDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.SearchCriteriaOfHokenshaDiv;
@@ -20,40 +21,94 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public final class HihokenshaFinder {
 
-    private final Criterias criterias;
+    public enum Mode {
 
-    HihokenshaFinder() {
-        this.criterias = new Criterias();
+        NORMAL("1"),
+        KOIKI("2");
+        private final RString value;
+
+        private Mode(String value) {
+            this.value = new RString(value);
+        }
+
+        public RString value() {
+            return this.value;
+        }
     }
+    private final Criterias criterias = new Criterias();
 
+    /**
+     * onLoad
+     *
+     * @param div HihokenshaFinderDiv
+     * @return ResponseData
+     */
     public ResponseData<HihokenshaFinderDiv> onLoad(HihokenshaFinderDiv div) {
-        ResponseData<HihokenshaFinderDiv> response = new ResponseData<>();
-        _init(div);
-        response.data = div;
-        return response;
+        init(div);
+        setMode(Mode.NORMAL, div);
+        return _createResponseData(div);
     }
 
-    private void _init(HihokenshaFinderDiv div) {
+    private void init(HihokenshaFinderDiv div) {
+        init_ddlHokensha(div);
+        init_SearchCriteriaDetail(div);
+    }
 
+    private void init_ddlHokensha(HihokenshaFinderDiv div) {
+        div.getSearchCriteriaOfHokensha().getDdlHokensha().
+                setDataSource(new KoikiKoseiShichosonData().get広域構成市町村().asKeyValueDataSources());
+    }
+
+    private void init_SearchCriteriaDetail(HihokenshaFinderDiv div) {
+        div.getSearchCriteriaDetail().setIsOpen(false);
+    }
+
+    /**
+     * onClick btnToClear
+     *
+     * @param div HihokenshaFinderDiv
+     * @return ResponseData
+     */
+    public ResponseData<HihokenshaFinderDiv> onClick_btnToClear(HihokenshaFinderDiv div) {
+        criterias.clearAll(div);
+        return _createResponseData(div);
+    }
+
+    /**
+     * HihokenshaFiderのモードを切り替えます。
+     *
+     * @param mode Mode
+     * @param div HihokemnshaFinderDiv
+     */
+    public static void setMode(Mode mode, HihokenshaFinderDiv div) {
+        switch (mode) {
+            case NORMAL:
+                changeToNormalMode(div);
+                break;
+            case KOIKI:
+                changeToKoinkiMode(div);
+                break;
+            default:
+                changeToNormalMode(div);
+                break;
+        }
+    }
+
+    private static void changeToNormalMode(HihokenshaFinderDiv div) {
+        div.getSearchCriteriaOfHokensha().getDdlHokensha().setDisplayNone(false);
+    }
+
+    private static void changeToKoinkiMode(HihokenshaFinderDiv div) {
+        div.getSearchCriteriaOfHokensha().getDdlHokensha().setDisplayNone(true);
     }
 
     /**
      * 内包する編集可能なUI部品の設定値をクリアします。
      *
-     * @param div クリアされた{@link HihokenshaFinderDiv HihokenshaFinderDiv}
+     * @param div HihokenshaFinderDiv
      */
     public static void clear(HihokenshaFinderDiv div) {
-        new Criterias().clear(div);
-    }
-
-    //btnToClear
-    public ResponseData<HihokenshaFinderDiv> onClick_btnToClear(HihokenshaFinderDiv div) {
-        ResponseData<HihokenshaFinderDiv> response = new ResponseData<>();
-
-        criterias.clear(div);
-
-        response.data = div;
-        return response;
+        new Criterias().clearAll(div);
     }
 
     private static class Criterias {
@@ -61,7 +116,7 @@ public final class HihokenshaFinder {
         private Criterias() {
         }
 
-        private void clear(HihokenshaFinderDiv div) {
+        private void clearAll(HihokenshaFinderDiv div) {
             clear(div.getSearchCriteriaOfHihokensha());
             clear(div.getSearchCriteriaOfHokensha());
             clear(div.getSearchCriteriaOfKojin());
@@ -69,7 +124,6 @@ public final class HihokenshaFinder {
 
         private void clear(SearchCriteriaOfHihokenshaDiv div) {
             div.getTxtHihokenshaNo().clearValue();
-            div.getChkHihokenshaKubun().setSelectedItems(Collections.EMPTY_LIST);
         }
 
         private void clear(SearchCriteriaOfHokenshaDiv div) {
@@ -85,8 +139,15 @@ public final class HihokenshaFinder {
             div.getTxtShimei().clearValue();
             div.getTxtYubinNo().clearValue();
             div.getChkGender().setSelectedItems(Collections.EMPTY_LIST);
-            div.getRadSearchPatternOfShimei().setSelectedItem(RString.EMPTY);
-            div.getDdlJuminShubetsu().setSelectedItem(RString.EMPTY);
+            //TODO n3327 三浦 凌 値決めうちを修正する。
+            div.getDdlJuminShubetsu().setSelectedItem(new RString("key0"));
+            div.getDdlSearchPatternForName().setSelectedItem(new RString("1"));
         }
+    }
+
+    private ResponseData<HihokenshaFinderDiv> _createResponseData(HihokenshaFinderDiv div) {
+        ResponseData<HihokenshaFinderDiv> response = new ResponseData<>();
+        response.data = div;
+        return response;
     }
 }

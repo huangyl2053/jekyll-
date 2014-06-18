@@ -163,13 +163,21 @@ module DBE {
    "marginLeft": "XS",
    "marginRight": "XS",
    "selectControlID": "dgNinteichosaIraiListForByHand",
+   "helpMessageID": "",
+   "jpControlName": "",
    "gridSetting": {
     "rowHeight": 25,
     "isMultiSelectable": false,
+    "isShowHeader": true,
     "isShowFooter": true,
     "isShowFilter": false,
     "isShowFilterButton": true,
     "isShowRowState": false,
+    "isShowSelectButtonColumn": false,
+    "isShowModifyButtonColumn": false,
+    "isShowDeleteButtonColumn": false,
+    "limitRowCount": 0,
+    "selectedRowCount": 0,
     "header": {
      "combineColumns": [
       {
@@ -254,7 +262,8 @@ module DBE {
       "cellType": 2,
       "cellDetails": {
        "cellType": 2,
-       "disabled": false
+       "disabled": true,
+       "onChange": ""
       },
       "align": 0,
       "resize": false,
@@ -269,7 +278,10 @@ module DBE {
       "width": 75,
       "visible": true,
       "cellType": 0,
-      "cellDetails": null,
+      "cellDetails": {
+       "cellType": 0,
+       "isSetValueToToolTip": false
+      },
       "align": 1,
       "resize": true,
       "isPrivateInfo": false,
@@ -304,7 +316,10 @@ module DBE {
       "width": 75,
       "visible": false,
       "cellType": 0,
-      "cellDetails": null,
+      "cellDetails": {
+       "cellType": 0,
+       "isSetValueToToolTip": false
+      },
       "align": 1,
       "resize": false,
       "isPrivateInfo": false,
@@ -318,7 +333,10 @@ module DBE {
       "width": 75,
       "visible": true,
       "cellType": 0,
-      "cellDetails": null,
+      "cellDetails": {
+       "cellType": 0,
+       "isSetValueToToolTip": false
+      },
       "align": 0,
       "resize": true,
       "isPrivateInfo": false,
@@ -332,7 +350,10 @@ module DBE {
       "width": 0,
       "visible": false,
       "cellType": 0,
-      "cellDetails": null,
+      "cellDetails": {
+       "cellType": 0,
+       "isSetValueToToolTip": false
+      },
       "align": 1,
       "resize": false,
       "isPrivateInfo": false,
@@ -346,7 +367,10 @@ module DBE {
       "width": 75,
       "visible": false,
       "cellType": 0,
-      "cellDetails": null,
+      "cellDetails": {
+       "cellType": 0,
+       "isSetValueToToolTip": false
+      },
       "align": 0,
       "resize": false,
       "isPrivateInfo": false,
@@ -360,7 +384,10 @@ module DBE {
       "width": 100,
       "visible": true,
       "cellType": 0,
-      "cellDetails": "\"{\\\"cellType\\\":0}\"",
+      "cellDetails": {
+       "cellType": 0,
+       "isSetValueToToolTip": false
+      },
       "align": 1,
       "resize": true,
       "isPrivateInfo": false,
@@ -374,7 +401,10 @@ module DBE {
       "width": 120,
       "visible": true,
       "cellType": 0,
-      "cellDetails": "\"{\\\"cellType\\\":0}\"",
+      "cellDetails": {
+       "cellType": 0,
+       "isSetValueToToolTip": false
+      },
       "align": 0,
       "resize": true,
       "isPrivateInfo": false,
@@ -388,7 +418,10 @@ module DBE {
       "width": 0,
       "visible": false,
       "cellType": 0,
-      "cellDetails": null,
+      "cellDetails": {
+       "cellType": 0,
+       "isSetValueToToolTip": false
+      },
       "align": 0,
       "resize": false,
       "isPrivateInfo": false,
@@ -402,7 +435,10 @@ module DBE {
       "width": 0,
       "visible": false,
       "cellType": 0,
-      "cellDetails": null,
+      "cellDetails": {
+       "cellType": 0,
+       "isSetValueToToolTip": false
+      },
       "align": 0,
       "resize": false,
       "isPrivateInfo": false,
@@ -417,7 +453,8 @@ module DBE {
       "visible": true,
       "cellType": 0,
       "cellDetails": {
-       "cellType": 0
+       "cellType": 0,
+       "isSetValueToToolTip": false
       },
       "align": 0,
       "resize": true,
@@ -436,7 +473,9 @@ module DBE {
        "cellType": 7,
        "ymdKubun": 2,
        "displayFormat": 0,
-       "onChange": ""
+       "onChange": "",
+       "isSetValueToToolTip": false,
+       "readOnly": true
       },
       "align": 1,
       "resize": true,
@@ -451,7 +490,10 @@ module DBE {
       "width": 80,
       "visible": true,
       "cellType": 0,
-      "cellDetails": null,
+      "cellDetails": {
+       "cellType": 0,
+       "isSetValueToToolTip": false
+      },
       "align": 0,
       "resize": true,
       "isPrivateInfo": false,
@@ -469,7 +511,9 @@ module DBE {
        "cellType": 7,
        "ymdKubun": 2,
        "displayFormat": 0,
-       "onChange": ""
+       "onChange": "",
+       "isSetValueToToolTip": false,
+       "readOnly": true
       },
       "align": 1,
       "resize": true,
@@ -488,7 +532,9 @@ module DBE {
        "cellType": 7,
        "ymdKubun": 2,
        "displayFormat": 0,
-       "onChange": ""
+       "onChange": "",
+       "isSetValueToToolTip": false,
+       "readOnly": true
       },
       "align": 1,
       "resize": true,
@@ -507,7 +553,9 @@ module DBE {
        "cellType": 7,
        "ymdKubun": 2,
        "displayFormat": 0,
-       "onChange": ""
+       "onChange": "",
+       "isSetValueToToolTip": false,
+       "readOnly": true
       },
       "align": 1,
       "resize": true,
@@ -522,7 +570,10 @@ module DBE {
       "width": 0,
       "visible": false,
       "cellType": 0,
-      "cellDetails": null,
+      "cellDetails": {
+       "cellType": 0,
+       "isSetValueToToolTip": false
+      },
       "align": 0,
       "resize": false,
       "isPrivateInfo": false,
@@ -536,7 +587,10 @@ module DBE {
       "width": 120,
       "visible": true,
       "cellType": 0,
-      "cellDetails": "\"{\\\"cellType\\\":0}\"",
+      "cellDetails": {
+       "cellType": 0,
+       "isSetValueToToolTip": false
+      },
       "align": 0,
       "resize": true,
       "isPrivateInfo": false,
@@ -550,7 +604,10 @@ module DBE {
       "width": 0,
       "visible": false,
       "cellType": 0,
-      "cellDetails": null,
+      "cellDetails": {
+       "cellType": 0,
+       "isSetValueToToolTip": false
+      },
       "align": 0,
       "resize": false,
       "isPrivateInfo": false,
@@ -564,7 +621,10 @@ module DBE {
       "width": 90,
       "visible": true,
       "cellType": 0,
-      "cellDetails": "null",
+      "cellDetails": {
+       "cellType": 0,
+       "isSetValueToToolTip": false
+      },
       "align": 0,
       "resize": true,
       "isPrivateInfo": false,
@@ -578,7 +638,10 @@ module DBE {
       "width": 0,
       "visible": false,
       "cellType": 0,
-      "cellDetails": null,
+      "cellDetails": {
+       "cellType": 0,
+       "isSetValueToToolTip": false
+      },
       "align": 0,
       "resize": false,
       "isPrivateInfo": false,
@@ -592,7 +655,10 @@ module DBE {
       "width": 120,
       "visible": true,
       "cellType": 0,
-      "cellDetails": "\"null\"",
+      "cellDetails": {
+       "cellType": 0,
+       "isSetValueToToolTip": false
+      },
       "align": 0,
       "resize": true,
       "isPrivateInfo": false,
@@ -606,7 +672,10 @@ module DBE {
       "width": 0,
       "visible": false,
       "cellType": 0,
-      "cellDetails": null,
+      "cellDetails": {
+       "cellType": 0,
+       "isSetValueToToolTip": false
+      },
       "align": 0,
       "resize": false,
       "isPrivateInfo": false,
@@ -620,7 +689,10 @@ module DBE {
       "width": 90,
       "visible": true,
       "cellType": 0,
-      "cellDetails": "\"null\"",
+      "cellDetails": {
+       "cellType": 0,
+       "isSetValueToToolTip": false
+      },
       "align": 0,
       "resize": true,
       "isPrivateInfo": false,
@@ -634,7 +706,10 @@ module DBE {
       "width": 0,
       "visible": false,
       "cellType": 0,
-      "cellDetails": null,
+      "cellDetails": {
+       "cellType": 0,
+       "isSetValueToToolTip": false
+      },
       "align": 0,
       "resize": false,
       "isPrivateInfo": false,
@@ -648,7 +723,10 @@ module DBE {
       "width": 120,
       "visible": true,
       "cellType": 0,
-      "cellDetails": null,
+      "cellDetails": {
+       "cellType": 0,
+       "isSetValueToToolTip": false
+      },
       "align": 0,
       "resize": true,
       "isPrivateInfo": false,
@@ -662,7 +740,10 @@ module DBE {
       "width": 0,
       "visible": false,
       "cellType": 0,
-      "cellDetails": null,
+      "cellDetails": {
+       "cellType": 0,
+       "isSetValueToToolTip": false
+      },
       "align": 0,
       "resize": false,
       "isPrivateInfo": false,
@@ -676,7 +757,10 @@ module DBE {
       "width": 90,
       "visible": true,
       "cellType": 0,
-      "cellDetails": null,
+      "cellDetails": {
+       "cellType": 0,
+       "isSetValueToToolTip": false
+      },
       "align": 0,
       "resize": false,
       "isPrivateInfo": false,
@@ -694,7 +778,9 @@ module DBE {
        "cellType": 7,
        "ymdKubun": 2,
        "displayFormat": 0,
-       "onChange": ""
+       "onChange": "",
+       "isSetValueToToolTip": false,
+       "readOnly": true
       },
       "align": 1,
       "resize": true,
@@ -709,7 +795,10 @@ module DBE {
       "width": 0,
       "visible": false,
       "cellType": 0,
-      "cellDetails": null,
+      "cellDetails": {
+       "cellType": 0,
+       "isSetValueToToolTip": false
+      },
       "align": 0,
       "resize": true,
       "isPrivateInfo": false,
@@ -723,7 +812,10 @@ module DBE {
       "width": 75,
       "visible": true,
       "cellType": 0,
-      "cellDetails": null,
+      "cellDetails": {
+       "cellType": 0,
+       "isSetValueToToolTip": false
+      },
       "align": 1,
       "resize": true,
       "isPrivateInfo": false,
@@ -737,7 +829,10 @@ module DBE {
       "width": 180,
       "visible": true,
       "cellType": 0,
-      "cellDetails": "\"{\\\"cellType\\\":0}\"",
+      "cellDetails": {
+       "cellType": 0,
+       "isSetValueToToolTip": false
+      },
       "align": 0,
       "resize": true,
       "isPrivateInfo": false,
@@ -751,7 +846,10 @@ module DBE {
       "width": 100,
       "visible": true,
       "cellType": 0,
-      "cellDetails": null,
+      "cellDetails": {
+       "cellType": 0,
+       "isSetValueToToolTip": false
+      },
       "align": 0,
       "resize": true,
       "isPrivateInfo": false,
@@ -763,14 +861,18 @@ module DBE {
    "onSort": "",
    "onSelect": "",
    "onSelectByDblClick": "",
+   "onSelectBySelectButton": "",
+   "onSelectByModifyButton": "",
+   "onSelectByDeleteButton": "",
    "onOnlyRow": "",
    "onNoRow": "",
    "onMultiRows": "",
    "dataSource": [],
-   "sortOrder": "chosaItakusakiName",
+   "sortOrder": "chosaIraiKubun",
    "isAscending": true,
    "filterList": [],
-   "activeRowId": -1
+   "activeRowId": -1,
+   "readOnly": false
   }
  ],
  "controlType": "CompositeControl",
@@ -788,6 +890,8 @@ module DBE {
  "marginLeft": "XS",
  "marginRight": "XS",
  "selectControlID": "defaultLayout",
+ "helpMessageID": "",
+ "jpControlName": "",
  "relation": [],
  "businessId": "DBE",
  "controlName": "NinteichosaIraiListForByHandCom",

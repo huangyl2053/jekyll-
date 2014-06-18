@@ -9,15 +9,15 @@ module DBZ {
     export class HihokenshaFinder_Design extends Uz.CommonChildDiv {
     
         public get onClick_BtnToSearch() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"] + "_" + this.layout.items[0].items[3].items[1]["fieldName"])["onClick"];
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"] + "_" + this.layout.items[0].items[4].items[1]["fieldName"])["onClick"];
         }
         
         public set onClick_BtnToSearch(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"] + "_" + this.layout.items[0].items[3].items[1]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"] + "_" + this.layout.items[0].items[3].items[1]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"] + "_" + this.layout.items[0].items[3].items[1]["fieldName"])["onClick"] = value;
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"] + "_" + this.layout.items[0].items[4].items[1]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"] + "_" + this.layout.items[0].items[4].items[1]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"] + "_" + this.layout.items[0].items[4].items[1]["fieldName"])["onClick"] = value;
             } else {
-                this.layout.items[0].items[3].items[1]["onClick"] = value;
+                this.layout.items[0].items[4].items[1]["onClick"] = value;
                 this.raisePropertyChanged(this.layout);
             }
         }
@@ -42,7 +42,7 @@ module DBZ {
          */
         public getEditablePropertyInfo(): any {
             var editablePropertyInfo = super.getEditablePropertyInfo();
-            editablePropertyInfo["onClick_BtnToSearch"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"] + "_" + this.layout.items[0].items[3].items[1]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["onClick_BtnToSearch"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"] + "_" + this.layout.items[0].items[4].items[1]["fieldName"]).getEditablePropertyInfo()["onClick"];
             
             return editablePropertyInfo;
         }
@@ -76,11 +76,15 @@ module DBZ {
        "helpMessageID": "",
        "jpControlName": "",
        "onChange": "",
-       "selectedItem": "key0",
+       "selectedItem": "1",
        "dataSource": [
         {
-         "key": "key0",
-         "value": "指定なし"
+         "key": "1",
+         "value": "電算市"
+        },
+        {
+         "key": "2",
+         "value": "南魚沼市"
         }
        ],
        "required": false,
@@ -147,7 +151,7 @@ module DBZ {
        "fieldName": "txtHihokenshaNo",
        "items": [],
        "controlType": "TextBoxCode",
-       "width": "75",
+       "width": "82",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -191,10 +195,10 @@ module DBZ {
        "formatLength": "10"
       },
       {
-       "fieldName": "chkHihokenshaKubun",
+       "fieldName": "txtTuchishoNo",
        "items": [],
-       "controlType": "CheckBoxList",
-       "width": "L",
+       "controlType": "TextBoxCode",
+       "width": "130",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -207,39 +211,35 @@ module DBZ {
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "selectControlID": "chkHihokenshaKubun_core",
+       "selectControlID": "txtTuchishoNo_core",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "onChange": "",
-       "selectedItem": null,
-       "dataSource": [
-        {
-         "key": "no1",
-         "value": "第1号被保険者"
-        },
-        {
-         "key": "no2",
-         "value": "第2号被保険者"
-        },
-        {
-         "key": "other",
-         "value": "その他"
-        }
-       ],
        "required": false,
-       "labelLText": "被保険者区分",
+       "labelLText": "通知書番号",
+       "labelRText": "",
        "labelLWidth": "S",
+       "labelRWidth": "S",
        "labelLAlign": 2,
-       "onClick": "",
-       "selectedItems": [],
-       "newLineItemNumber": 3,
-       "minCheckedItem": 0,
-       "maxCheckedItem": "3",
-       "spaceSize": "M",
-       "isAllSelectable": false,
-       "isAllSelectableBreakLine": false,
-       "disabledItem": [],
-       "icon": []
+       "labelRAlign": 0,
+       "onFocus": "",
+       "onBlur": "",
+       "maxLength": "16",
+       "minLength": "1",
+       "textAlign": 0,
+       "placeHolder": "",
+       "textKind": 2,
+       "isPrivateInfo": false,
+       "isPassword": false,
+       "isComboBox": false,
+       "onKeyPress": "",
+       "text": "",
+       "suggest": [],
+       "value": "",
+       "decorationClass": "",
+       "permitCharactor": "",
+       "formatLength": "16"
       }
      ],
      "controlType": "Panel",
@@ -556,9 +556,9 @@ module DBZ {
        "permitCharactor": ""
       },
       {
-       "fieldName": "chkGender",
+       "fieldName": "ddlSearchPatternForName",
        "items": [],
-       "controlType": "CheckBoxList",
+       "controlType": "DropDownList",
        "width": "S",
        "visible": true,
        "displayNone": false,
@@ -572,152 +572,38 @@ module DBZ {
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "selectControlID": "chkGender_core",
+       "selectControlID": "ddlSearchPatternForName_core",
        "helpMessageID": "",
        "jpControlName": "",
        "onChange": "",
-       "selectedItem": null,
+       "selectedItem": "1",
        "dataSource": [
         {
-         "key": "man",
-         "value": "男"
-        },
-        {
-         "key": "woman",
-         "value": "女"
-        }
-       ],
-       "required": false,
-       "labelLText": "　　　　　　性別",
-       "labelLWidth": "150",
-       "labelLAlign": 1,
-       "onClick": "",
-       "selectedItems": [],
-       "newLineItemNumber": 2,
-       "minCheckedItem": 0,
-       "maxCheckedItem": 2,
-       "spaceSize": "M",
-       "isAllSelectable": false,
-       "isAllSelectableBreakLine": false,
-       "disabledItem": [],
-       "icon": []
-      },
-      {
-       "fieldName": "radSearchPatternOfShimei",
-       "items": [],
-       "controlType": "RadioButton",
-       "width": "400",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": true,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "0",
-       "selectControlID": "radSearchPatternOfShimei_core",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "onChange": "",
-       "selectedItem": null,
-       "dataSource": [
-        {
-         "key": "key0",
+         "key": "1",
          "value": "前方一致"
         },
         {
-         "key": "key1",
+         "key": "2",
          "value": "後方一致"
         },
         {
-         "key": "key2",
+         "key": "3",
          "value": "完全一致"
         },
         {
-         "key": "key3",
+         "key": "4",
          "value": "部分一致"
         }
        ],
-       "required": false,
-       "labelLText": "　",
-       "labelLWidth": "S",
-       "labelLAlign": 2,
-       "onClick": "",
-       "newLineItemNumber": 4,
-       "spaceSize": "M",
-       "disabledItem": [],
-       "icon": []
-      },
-      {
-       "fieldName": "lblSearching",
-       "items": [],
-       "controlType": "Label",
-       "width": "S",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "XS",
-       "selectControlID": "lblSearching",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "required": false,
-       "isPrivateInfo": false,
-       "text": "で検索する。",
-       "decorationClass": "",
-       "align": 2
-      },
-      {
-       "fieldName": "txtBirthDay",
-       "items": [],
-       "controlType": "TextBoxFlexibleDate",
-       "width": "S",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "txtBirthDay_core",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "readOnly": false,
-       "onChange": "",
-       "required": false,
-       "labelLText": "生年月日",
-       "labelRText": "",
+       "labelLText": "",
+       "labelRText": "で検索する。",
        "labelLWidth": "S",
        "labelRWidth": "S",
        "labelLAlign": 2,
        "labelRAlign": 0,
        "onFocus": "",
        "onBlur": "",
-       "placeHolder": "",
-       "isPrivateInfo": false,
-       "isPassword": false,
-       "onKeyPress": "",
-       "text": "",
-       "value": "",
-       "permitCharactor": "./_-",
-       "ymdKubun": 2,
-       "displayFormat": 0
+       "disabledItem": []
       },
       {
        "fieldName": "txtYubinNo",
@@ -764,6 +650,94 @@ module DBZ {
        "value": "",
        "decorationClass": "",
        "permitCharactor": ""
+      },
+      {
+       "fieldName": "txtBirthDay",
+       "items": [],
+       "controlType": "TextBoxFlexibleDate",
+       "width": "S",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "txtBirthDay_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
+       "onChange": "",
+       "required": false,
+       "labelLText": "生年月日",
+       "labelRText": "",
+       "labelLWidth": "170",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "onFocus": "",
+       "onBlur": "",
+       "placeHolder": "",
+       "isPrivateInfo": false,
+       "isPassword": false,
+       "onKeyPress": "",
+       "text": "",
+       "value": "",
+       "permitCharactor": "./_-",
+       "ymdKubun": 2,
+       "displayFormat": 0
+      },
+      {
+       "fieldName": "chkGender",
+       "items": [],
+       "controlType": "CheckBoxList",
+       "width": "S",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "chkGender_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "onChange": "",
+       "selectedItem": null,
+       "dataSource": [
+        {
+         "key": "man",
+         "value": "男"
+        },
+        {
+         "key": "woman",
+         "value": "女"
+        }
+       ],
+       "required": false,
+       "labelLText": "性別",
+       "labelLWidth": "110",
+       "labelLAlign": 2,
+       "onClick": "",
+       "selectedItems": [],
+       "newLineItemNumber": 2,
+       "minCheckedItem": 0,
+       "maxCheckedItem": 2,
+       "spaceSize": "M",
+       "isAllSelectable": false,
+       "isAllSelectableBreakLine": false,
+       "disabledItem": [],
+       "icon": []
       },
       {
        "fieldName": "txtJusho",
@@ -862,13 +836,13 @@ module DBZ {
      "height": "Auto"
     },
     {
-     "fieldName": "ButtonsForHihokenshaFinder",
+     "fieldName": "SearchCriteriaDetail",
      "items": [
       {
-       "fieldName": "btnToClear",
+       "fieldName": "chkMinashiNigo",
        "items": [],
-       "controlType": "Button",
-       "width": "M",
+       "controlType": "CheckBoxList",
+       "width": "XS",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -881,11 +855,101 @@ module DBZ {
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "chkMinashiNigo_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "onChange": "",
+       "selectedItem": null,
+       "dataSource": [
+        {
+         "key": "1",
+         "value": "含む"
+        }
+       ],
+       "labelLText": "みなし2号",
+       "labelLWidth": "S",
+       "labelLAlign": 2,
+       "onClick": "",
+       "selectedItems": [],
+       "newLineItemNumber": 2,
+       "minCheckedItem": 0,
+       "maxCheckedItem": 2,
+       "spaceSize": "M",
+       "isAllSelectable": false,
+       "isAllSelectableBreakLine": false,
+       "disabledItem": [],
+       "icon": []
+      }
+     ],
+     "controlType": "Panel",
+     "width": "1075",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "SearchCriteriaDetail",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onLoad": "",
+     "title": "詳細",
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "isOpen": false,
+     "canOpenAndClose": true,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "SearchCriteriaDetail"
+      }
+     ],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
+     "backgroundColor": 0,
+     "widthAuto": false,
+     "panelDisplay": 2,
+     "isGroupBox": false,
+     "readOnly": false,
+     "height": "Auto"
+    },
+    {
+     "fieldName": "ButtonsForHihokenshaFinder",
+     "items": [
+      {
+       "fieldName": "btnToClear",
+       "items": [],
+       "controlType": "Button",
+       "width": "M",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": true,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
        "selectControlID": "btnToClear",
        "helpMessageID": "",
        "jpControlName": "",
        "text": "条件をクリアする",
-       "onClick": "",
+       "onClick": "onClick_btnToClear",
        "icon": 0,
        "appearance": 0,
        "imageFileUrl": "",
@@ -964,6 +1028,36 @@ module DBZ {
      "isGroupBox": false,
      "readOnly": false,
      "height": "Auto"
+    },
+    {
+     "fieldName": "saikinShorisha",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "saikinShorisha",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "relation": [],
+     "businessId": "DBZ",
+     "controlName": "KaigoSaikinShorishaRireki",
+     "marginTop": 0,
+     "marginBottom": 0,
+     "originalProperty": [],
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": ""
     }
    ],
    "controlType": "Panel",
