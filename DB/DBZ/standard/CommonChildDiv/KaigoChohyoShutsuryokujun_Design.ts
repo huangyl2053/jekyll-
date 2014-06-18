@@ -4,9 +4,9 @@
 module DBZ {
     /**
      * 自動生成コードです。修正しないでください。
-     * ChohyoShutsuryokujunクラスのみで継承して使えます。
+     * KaigoChohyoShutsuryokujunクラスのみで継承して使えます。
      */
-    export class ChohyoShutsuryokujun_Design extends Uz.CommonChildDiv {
+    export class KaigoChohyoShutsuryokujun_Design extends Uz.CommonChildDiv {
     
         public get ChohyoShutsuryokujun_width() {
             return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["ChohyoShutsuryokujun_width"];
@@ -23,7 +23,7 @@ module DBZ {
         }
         
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
-            super($parentElement, isDesignMode, ChohyoShutsuryokujun_Design.myLayout, fieldName);
+            super($parentElement, isDesignMode, KaigoChohyoShutsuryokujun_Design.myLayout, fieldName);
         }
         
         /**
@@ -50,7 +50,7 @@ module DBZ {
  "fieldName": "defaultLayout",
  "items": [
   {
-   "fieldName": "ChohyoShutsuryokujun",
+   "fieldName": "KaigoChohyoShutsuryokujun",
    "items": [
     {
      "fieldName": "ccdChohyoShutsuryokujun",
@@ -75,8 +75,8 @@ module DBZ {
      "relation": [],
      "businessId": "URZ",
      "controlName": "ChohyoShutsuryokujun",
-     "marginTop": 0,
-     "marginBottom": 0,
+     "marginTop": "-0.4",
+     "marginBottom": "-0.4",
      "originalProperty": [],
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
@@ -98,7 +98,7 @@ module DBZ {
    "authorityMode": 0,
    "marginLeft": "0",
    "marginRight": "0",
-   "selectControlID": "ChohyoShutsuryokujun",
+   "selectControlID": "KaigoChohyoShutsuryokujun",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
@@ -109,7 +109,7 @@ module DBZ {
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "ChohyoShutsuryokujun"
+     "postParameterPanelNames": "KaigoChohyoShutsuryokujun"
     }
    ],
    "requestSettings": [],
@@ -148,7 +148,7 @@ module DBZ {
  "jpControlName": "",
  "relation": [],
  "businessId": "DBZ",
- "controlName": "ChohyoShutsuryokujun",
+ "controlName": "KaigoChohyoShutsuryokujun",
  "marginTop": 0,
  "marginBottom": 0,
  "originalProperty": [

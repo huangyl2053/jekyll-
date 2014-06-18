@@ -24,13 +24,7 @@
      "selectControlID": "chkHakkoTaishoSearchCondition_core",
      "helpMessageID": "",
      "jpControlName": "",
-     "required": false,
      "onChange": "",
-     "labelLText": "",
-     "labelLWidth": "65",
-     "labelLAlign": 2,
-     "onClick": "",
-     "icon": [],
      "selectedItem": null,
      "dataSource": [
       {
@@ -46,14 +40,20 @@
        "value": "要介護認定者"
       }
      ],
-     "newLineItemNumber": 4,
-     "spaceSize": "M",
-     "disabledItem": [],
+     "required": false,
+     "onClick": "",
      "selectedItems": [],
+     "newLineItemNumber": 4,
      "minCheckedItem": "1",
      "maxCheckedItem": "3",
+     "spaceSize": "M",
+     "labelLText": "",
+     "labelLWidth": "65",
+     "labelLAlign": 2,
      "isAllSelectable": true,
-     "isAllSelectableBreakLine": false
+     "isAllSelectableBreakLine": false,
+     "disabledItem": [],
+     "icon": []
     },
     {
      "fieldName": "btnSearchHakkoTaisho",
@@ -75,13 +75,13 @@
      "selectControlID": "btnSearchHakkoTaisho",
      "helpMessageID": "",
      "jpControlName": "",
-     "text": "一括作成対象を表示する",
      "onClick": "onClick_BtnSearchHakkoTaisho",
+     "icon": 0,
+     "text": "一括作成対象を表示する",
      "appearance": 0,
      "imageFileUrl": "",
      "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0
+     "imageHeight": ""
     }
    ],
    "controlType": "Panel",
@@ -307,26 +307,25 @@
        "helpMessageID": "",
        "jpControlName": "",
        "readOnly": false,
+       "onChange": "",
        "required": false,
+       "labelLText": "交付日",
+       "labelLWidth": "55",
+       "labelLAlign": 2,
+       "text": "",
        "placeHolder": "",
-       "textKind": 0,
        "isPrivateInfo": false,
        "isPassword": false,
        "onFocus": "",
        "onBlur": "",
-       "onChange": "",
        "onKeyPress": "",
-       "text": "",
-       "value": "",
-       "labelLText": "交付日",
        "labelRText": "",
-       "labelLWidth": "55",
        "labelRWidth": "S",
-       "labelLAlign": 2,
        "labelRAlign": 0,
-       "permitCharactor": "./_-",
        "ymdKubun": 2,
-       "displayFormat": 0
+       "displayFormat": 0,
+       "value": "",
+       "textKind": 0
       },
       {
        "fieldName": "chkTest",
@@ -348,13 +347,7 @@
        "selectControlID": "chkTest_core",
        "helpMessageID": "",
        "jpControlName": "",
-       "required": false,
        "onChange": "",
-       "labelLText": "",
-       "labelLWidth": "XS",
-       "labelLAlign": 2,
-       "onClick": "",
-       "icon": [],
        "selectedItem": null,
        "dataSource": [
         {
@@ -362,14 +355,20 @@
          "value": "テスト出力"
         }
        ],
-       "newLineItemNumber": 1,
-       "spaceSize": "M",
-       "disabledItem": [],
+       "required": false,
+       "onClick": "",
        "selectedItems": [],
+       "newLineItemNumber": 1,
        "minCheckedItem": 0,
        "maxCheckedItem": "1",
+       "spaceSize": "M",
+       "labelLText": "",
+       "labelLWidth": "XS",
+       "labelLAlign": 2,
        "isAllSelectable": false,
-       "isAllSelectableBreakLine": false
+       "isAllSelectableBreakLine": false,
+       "disabledItem": [],
+       "icon": []
       },
       {
        "fieldName": "lblTestHosoku",
@@ -392,10 +391,10 @@
        "helpMessageID": "",
        "jpControlName": "",
        "required": false,
-       "isPrivateInfo": false,
        "text": "※テスト出力を行う場合、帳票発行履歴に登録されません。",
-       "decorationClass": "",
-       "align": 0
+       "isPrivateInfo": false,
+       "align": 0,
+       "decorationClass": ""
       }
      ],
      "controlType": "Panel",
@@ -446,7 +445,7 @@
      "fieldName": "HihokenshashoIkkatsuHakko",
      "items": [
       {
-       "fieldName": "HihokenshashoOutputOrder",
+       "fieldName": "hihokenshaShoShutsuryokuJun",
        "items": [],
        "controlType": "CommonChildDiv",
        "width": "XS",
@@ -455,31 +454,29 @@
        "disabled": false,
        "accessKey": "",
        "nextFocusFieldName": "",
-       "wrap": true,
+       "wrap": false,
        "dependencies": [],
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "HihokenshashoOutputOrder",
+       "marginLeft": "0",
+       "marginRight": "0",
+       "selectControlID": "hihokenshaShoShutsuryokuJun",
        "helpMessageID": "",
        "jpControlName": "",
-       "title": "出力順序・改頁",
        "relation": [],
-       "marginTop": 0,
+       "marginTop": "-0.25",
        "marginBottom": 0,
-       "isGroupBox": false,
-       "businessId": "DBC",
-       "controlName": "OutputOrderAndNewpage",
+       "businessId": "DBZ",
+       "controlName": "KaigoChohyoShutsuryokujun",
        "dataPassingForDialog": [],
        "dialogOkEventNameForDialog": "",
        "dialogCancelEventNameForDialog": "",
-       "txtNewPageItem_displayNone": true
+       "ChohyoShutsuryokujun_width": "1114"
       }
      ],
-     "controlType": "PanelPublish",
-     "width": "1020",
+     "controlType": "Panel",
+     "width": "G2",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -490,8 +487,8 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
+     "marginLeft": "-0.07",
+     "marginRight": "0",
      "selectControlID": "HihokenshashoIkkatsuHakko",
      "helpMessageID": "",
      "jpControlName": "",
@@ -506,29 +503,27 @@
      ],
      "requestSettings": [],
      "hiddenInput": [],
-     "onOpen": "setBtnBatchControl",
-     "onClose": "onClose_HihokenshashoIkkatsuHakko",
+     "onOpen": "",
+     "onClose": "",
      "session": {},
      "marginTop": "Default",
-     "marginBottom": "S",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "marginBottom": "0",
+     "eraseBorderTop": true,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true,
      "backgroundColor": 0,
-     "widthAuto": false,
+     "widthAuto": true,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto",
-     "isPublish": true,
-     "isEmptyControl": false
+     "height": "Auto"
     },
     {
      "fieldName": "HihokenshashoIkkatsuHakkoList",
      "items": [
       {
-       "fieldName": "HihokenshashoListOutputOrderAndNewPage",
+       "fieldName": "hihokenshaShoListShutsuryokuJun",
        "items": [],
        "controlType": "CommonChildDiv",
        "width": "XS",
@@ -537,31 +532,29 @@
        "disabled": false,
        "accessKey": "",
        "nextFocusFieldName": "",
-       "wrap": true,
+       "wrap": false,
        "dependencies": [],
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "HihokenshashoListOutputOrderAndNewPage",
+       "marginLeft": "0",
+       "marginRight": "0",
+       "selectControlID": "hihokenshaShoListShutsuryokuJun",
        "helpMessageID": "",
        "jpControlName": "",
-       "title": "出力順序・改頁",
        "relation": [],
-       "marginTop": 0,
+       "marginTop": "-0.25",
        "marginBottom": 0,
-       "isGroupBox": false,
-       "businessId": "DBC",
-       "controlName": "OutputOrderAndNewpage",
+       "businessId": "DBZ",
+       "controlName": "KaigoChohyoShutsuryokujun",
        "dataPassingForDialog": [],
        "dialogOkEventNameForDialog": "",
        "dialogCancelEventNameForDialog": "",
-       "txtNewPageItem_displayNone": false
+       "ChohyoShutsuryokujun_width": "1114"
       }
      ],
      "controlType": "PanelPublish",
-     "width": "1020",
+     "width": "G12",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -572,8 +565,8 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
+     "marginLeft": "-0.07",
+     "marginRight": "0",
      "selectControlID": "HihokenshashoIkkatsuHakkoList",
      "helpMessageID": "",
      "jpControlName": "",
@@ -591,14 +584,14 @@
      "onOpen": "",
      "onClose": "",
      "session": {},
-     "marginTop": "Default",
-     "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "marginTop": "-0.4",
+     "marginBottom": "0",
+     "eraseBorderTop": true,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true,
      "backgroundColor": 0,
-     "widthAuto": false,
+     "widthAuto": true,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
@@ -658,7 +651,7 @@
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "273"
   }
  ],
  "controlType": null,
@@ -686,7 +679,7 @@
   {
    "order": "1",
    "stateName": "被保険者証一括発行",
-   "showWizard": true,
+   "showWizard": false,
    "visibleDivs": [
     {
      "visibleDiv": "SearchMihakkoHihokenshasho",
@@ -704,24 +697,24 @@
      "fixedDiv": ""
     },
     {
-     "visibleDiv": "HihokenshashoIkkatsuHakko",
-     "panelState": "visible",
-     "fixedDiv": ""
-    },
-    {
      "visibleDiv": "HihokenshashoIkkatsuHakkoList",
      "panelState": "close",
      "fixedDiv": ""
     },
     {
-     "visibleDiv": "HihokenshashoOutputOrder",
+     "visibleDiv": "hihokenshaShoShutsuryokuJun",
      "panelState": "visible",
-     "fixedDiv": ""
+     "fixedDiv": "No"
     },
     {
-     "visibleDiv": "HihokenshashoListOutputOrderAndNewPage",
+     "visibleDiv": "hihokenshaShoListShutsuryokuJun",
      "panelState": "visible",
-     "fixedDiv": ""
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "HihokenshashoIkkatsuHakko",
+     "panelState": "visible",
+     "fixedDiv": "No"
     }
    ],
    "validation": {},
@@ -746,13 +739,13 @@
    "HihokenshashoIkkatsuHakko"
   ],
   [
-   "HihokenshashoOutputOrder"
+   "hihokenshaShoShutsuryokuJun"
   ],
   [
    "HihokenshashoIkkatsuHakkoList"
   ],
   [
-   "HihokenshashoListOutputOrderAndNewPage"
+   "hihokenshaShoListShutsuryokuJun"
   ]
  ],
  "panelMargin": 1,

@@ -38,8 +38,17 @@ public class IkkatsuHakkoTaishoList {
         setIkkatsuHakkoTaishoData(panel);
 
         setSortData(panel);
+
         panel.setIsOpen(true);
-        
+        panel.getHihokenshashoIkkatsuHakko().getHihokenshaShoShutsuryokuJun().
+                getCcdChohyoShutsuryokujun().setCanOpenAndClose(false);
+        panel.getHihokenshashoIkkatsuHakkoList().getHihokenshaShoListShutsuryokuJun().
+                getCcdChohyoShutsuryokujun().setCanOpenAndClose(false);
+        panel.getHihokenshashoIkkatsuHakko().getHihokenshaShoShutsuryokuJun().
+                getCcdChohyoShutsuryokujun().setTitle(RString.EMPTY);
+        panel.getHihokenshashoIkkatsuHakkoList().getHihokenshaShoListShutsuryokuJun().
+                getCcdChohyoShutsuryokujun().setTitle(RString.EMPTY);
+
         response.data = panel;
         return response;
 
@@ -129,45 +138,26 @@ public class IkkatsuHakkoTaishoList {
         HashMap hashMap = sortList.get(0);
         ControlGenerator ymlData = new ControlGenerator(hashMap);
 
-        panel.getHihokenshashoIkkatsuHakko().getHihokenshashoOutputOrder().getTxt1().setValue(
-                ymlData.getAsRString("sort1"));
+        panel.getHihokenshashoIkkatsuHakko().getHihokenshaShoShutsuryokuJun().getCcdChohyoShutsuryokujun().getTxtSort().
+                setValue(ymlData.getAsRString("sort"));
 
-        panel.getHihokenshashoIkkatsuHakko().getHihokenshashoOutputOrder().getTxt2().setValue(
-                ymlData.getAsRString("sort2"));
+        panel.getHihokenshashoIkkatsuHakko().getHihokenshaShoShutsuryokuJun().getCcdChohyoShutsuryokujun().getTxtSortName().
+                setValue(ymlData.getAsRString("sortname"));
 
-        panel.getHihokenshashoIkkatsuHakko().getHihokenshashoOutputOrder().getTxt3().setValue(
-                ymlData.getAsRString("sort3"));
+        panel.getHihokenshashoIkkatsuHakko().getHihokenshaShoShutsuryokuJun().getCcdChohyoShutsuryokujun().getTxtKaiPage().
+                setValue(ymlData.getAsRString("kaipage"));
 
-        panel.getHihokenshashoIkkatsuHakko().getHihokenshashoOutputOrder().getTxt4().setValue(
-                ymlData.getAsRString("sort4"));
+        hashMap = sortList.get(1);
+        ymlData = new ControlGenerator(hashMap);
 
-        panel.getHihokenshashoIkkatsuHakko().getHihokenshashoOutputOrder().getTxt5().setValue(
-                ymlData.getAsRString("sort5"));
+        panel.getHihokenshashoIkkatsuHakkoList().getHihokenshaShoListShutsuryokuJun().getCcdChohyoShutsuryokujun().getTxtSort().
+                setValue(ymlData.getAsRString("sort"));
 
-        panel.getHihokenshashoIkkatsuHakko().getHihokenshashoOutputOrder().getTxtNewPageItem().setValue(
-                ymlData.getAsRString("kaipage"));
+        panel.getHihokenshashoIkkatsuHakkoList().getHihokenshaShoListShutsuryokuJun().getCcdChohyoShutsuryokujun().getTxtSortName().
+                setValue(ymlData.getAsRString("sortname"));
 
-        HashMap hashMap1 = sortList.get(1);
-        ControlGenerator ymlData1 = new ControlGenerator(hashMap1);
-
-        panel.getHihokenshashoIkkatsuHakkoList().getHihokenshashoListOutputOrderAndNewPage().getTxt1().setValue(
-                ymlData1.getAsRString("sort1"));
-
-        panel.getHihokenshashoIkkatsuHakkoList().getHihokenshashoListOutputOrderAndNewPage().getTxt2().setValue(
-                ymlData1.getAsRString("sort2"));
-
-        panel.getHihokenshashoIkkatsuHakkoList().getHihokenshashoListOutputOrderAndNewPage().getTxt3().setValue(
-                ymlData1.getAsRString("sort3"));
-
-        panel.getHihokenshashoIkkatsuHakkoList().getHihokenshashoListOutputOrderAndNewPage().getTxt4().setValue(
-                ymlData1.getAsRString("sort4"));
-
-        panel.getHihokenshashoIkkatsuHakkoList().getHihokenshashoListOutputOrderAndNewPage().getTxt5().setValue(
-                ymlData1.getAsRString("sort5"));
-
-        panel.getHihokenshashoIkkatsuHakkoList().getHihokenshashoListOutputOrderAndNewPage().
-                getTxtNewPageItem().setValue(ymlData1.getAsRString("kaipage"));
-
+        panel.getHihokenshashoIkkatsuHakkoList().getHihokenshaShoListShutsuryokuJun().getCcdChohyoShutsuryokujun().getTxtKaiPage().
+                setValue(ymlData.getAsRString("kaipage"));
     }
 
 }

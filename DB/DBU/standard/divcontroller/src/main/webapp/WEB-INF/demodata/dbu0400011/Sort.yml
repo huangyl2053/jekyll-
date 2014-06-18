@@ -1,16 +1,10 @@
 ## YAML Template.
 ---
 
--  sort1: "保険者"
-   sort2: "住民種別"
-   sort3: "認定日"
-   sort4: "認定申請日"
-   sort5: "被保番号"
+-  sort: "保険者 -> 認定日 -> 被保番号"
+   sortname: "帳票出力順設定１"
    kaipage: "保険者"
 
--  sort1: "保険者"
-   sort2: "住民種別"
-   sort3: "認定日"
-   sort4: "認定申請日"
-   sort5: "被保番号"
+-  sort: "保険者 -> 認定日 -> 被保番号"
+   sortname: "帳票出力順設定１"
    kaipage: "保険者"

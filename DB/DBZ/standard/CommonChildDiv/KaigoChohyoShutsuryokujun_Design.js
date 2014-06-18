@@ -6,12 +6,12 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBZ;
 (function (DBZ) {
-    var ChohyoShutsuryokujun_Design = (function (_super) {
-        __extends(ChohyoShutsuryokujun_Design, _super);
-        function ChohyoShutsuryokujun_Design($parentElement, isDesignMode, fieldName) {
-            _super.call(this, $parentElement, isDesignMode, ChohyoShutsuryokujun_Design.myLayout, fieldName);
+    var KaigoChohyoShutsuryokujun_Design = (function (_super) {
+        __extends(KaigoChohyoShutsuryokujun_Design, _super);
+        function KaigoChohyoShutsuryokujun_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, KaigoChohyoShutsuryokujun_Design.myLayout, fieldName);
         }
-        Object.defineProperty(ChohyoShutsuryokujun_Design.prototype, "ChohyoShutsuryokujun_width", {
+        Object.defineProperty(KaigoChohyoShutsuryokujun_Design.prototype, "ChohyoShutsuryokujun_width", {
             get: function () {
                 return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["ChohyoShutsuryokujun_width"];
             },
@@ -28,22 +28,22 @@ var DBZ;
         });
 
 
-        ChohyoShutsuryokujun_Design.prototype.registProperty = function () {
+        KaigoChohyoShutsuryokujun_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
             Uz.JSControlUtil.registProperty("ChohyoShutsuryokujun_width");
         };
 
-        ChohyoShutsuryokujun_Design.prototype.getEditablePropertyInfo = function () {
+        KaigoChohyoShutsuryokujun_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
             editablePropertyInfo["ChohyoShutsuryokujun_width"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["ChohyoShutsuryokujun_width"];
 
             return editablePropertyInfo;
         };
-        ChohyoShutsuryokujun_Design.myLayout = {
+        KaigoChohyoShutsuryokujun_Design.myLayout = {
             "fieldName": "defaultLayout",
             "items": [
                 {
-                    "fieldName": "ChohyoShutsuryokujun",
+                    "fieldName": "KaigoChohyoShutsuryokujun",
                     "items": [
                         {
                             "fieldName": "ccdChohyoShutsuryokujun",
@@ -68,8 +68,8 @@ var DBZ;
                             "relation": [],
                             "businessId": "URZ",
                             "controlName": "ChohyoShutsuryokujun",
-                            "marginTop": 0,
-                            "marginBottom": 0,
+                            "marginTop": "-0.4",
+                            "marginBottom": "-0.4",
                             "originalProperty": [],
                             "dataPassingForDialog": [],
                             "dialogOkEventNameForDialog": "",
@@ -91,7 +91,7 @@ var DBZ;
                     "authorityMode": 0,
                     "marginLeft": "0",
                     "marginRight": "0",
-                    "selectControlID": "ChohyoShutsuryokujun",
+                    "selectControlID": "KaigoChohyoShutsuryokujun",
                     "helpMessageID": "",
                     "jpControlName": "",
                     "onLoad": "",
@@ -102,7 +102,7 @@ var DBZ;
                     "canOpenAndClose": true,
                     "postParameterPanelNames": [
                         {
-                            "postParameterPanelNames": "ChohyoShutsuryokujun"
+                            "postParameterPanelNames": "KaigoChohyoShutsuryokujun"
                         }
                     ],
                     "requestSettings": [],
@@ -141,7 +141,7 @@ var DBZ;
             "jpControlName": "",
             "relation": [],
             "businessId": "DBZ",
-            "controlName": "ChohyoShutsuryokujun",
+            "controlName": "KaigoChohyoShutsuryokujun",
             "marginTop": 0,
             "marginBottom": 0,
             "originalProperty": [
@@ -155,7 +155,7 @@ var DBZ;
             "dialogOkEventNameForDialog": "",
             "dialogCancelEventNameForDialog": ""
         };
-        return ChohyoShutsuryokujun_Design;
+        return KaigoChohyoShutsuryokujun_Design;
     })(Uz.CommonChildDiv);
-    DBZ.ChohyoShutsuryokujun_Design = ChohyoShutsuryokujun_Design;
+    DBZ.KaigoChohyoShutsuryokujun_Design = KaigoChohyoShutsuryokujun_Design;
 })(DBZ || (DBZ = {}));

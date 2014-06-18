@@ -6,12 +6,12 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBZ;
 (function (DBZ) {
-    var ChohyoShutsuryokujun = (function (_super) {
-        __extends(ChohyoShutsuryokujun, _super);
-        function ChohyoShutsuryokujun() {
+    var KaigoChohyoShutsuryokujun = (function (_super) {
+        __extends(KaigoChohyoShutsuryokujun, _super);
+        function KaigoChohyoShutsuryokujun() {
             _super.apply(this, arguments);
         }
-        return ChohyoShutsuryokujun;
-    })(DBZ.ChohyoShutsuryokujun_Design);
-    DBZ.ChohyoShutsuryokujun = ChohyoShutsuryokujun;
+        return KaigoChohyoShutsuryokujun;
+    })(DBZ.KaigoChohyoShutsuryokujun_Design);
+    DBZ.KaigoChohyoShutsuryokujun = KaigoChohyoShutsuryokujun;
 })(DBZ || (DBZ = {}));

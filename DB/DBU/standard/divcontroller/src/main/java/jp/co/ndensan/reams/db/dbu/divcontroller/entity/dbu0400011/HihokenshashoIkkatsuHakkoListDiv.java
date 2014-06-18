@@ -4,7 +4,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0400011;
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.OutputOrderAndNewpageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.chohyoShutsuryokujun.KaigoChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
 
 /**
@@ -20,8 +20,8 @@ public class HihokenshashoIkkatsuHakkoListDiv extends PanelPublish {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
 
-    @JsonProperty("HihokenshashoListOutputOrderAndNewPage")
-    private OutputOrderAndNewpageDiv HihokenshashoListOutputOrderAndNewPage;
+    @JsonProperty("hihokenshaShoListShutsuryokuJun")
+    private KaigoChohyoShutsuryokujunDiv hihokenshaShoListShutsuryokuJun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -29,14 +29,14 @@ public class HihokenshashoIkkatsuHakkoListDiv extends PanelPublish {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("HihokenshashoListOutputOrderAndNewPage")
-    public OutputOrderAndNewpageDiv getHihokenshashoListOutputOrderAndNewPage() {
-        return HihokenshashoListOutputOrderAndNewPage;
+    @JsonProperty("hihokenshaShoListShutsuryokuJun")
+    public KaigoChohyoShutsuryokujunDiv getHihokenshaShoListShutsuryokuJun() {
+        return hihokenshaShoListShutsuryokuJun;
     }
 
-    @JsonProperty("HihokenshashoListOutputOrderAndNewPage")
-    public void setHihokenshashoListOutputOrderAndNewPage(OutputOrderAndNewpageDiv HihokenshashoListOutputOrderAndNewPage) {
-        this.HihokenshashoListOutputOrderAndNewPage = HihokenshashoListOutputOrderAndNewPage;
+    @JsonProperty("hihokenshaShoListShutsuryokuJun")
+    public void setHihokenshaShoListShutsuryokuJun(KaigoChohyoShutsuryokujunDiv hihokenshaShoListShutsuryokuJun) {
+        this.hihokenshaShoListShutsuryokuJun = hihokenshaShoListShutsuryokuJun;
     }
 
 }

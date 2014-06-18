@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0400011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Jun 09 20:02:47 JST 2014 
+ * Tue Jun 17 21:24:54 JST 2014 
  */
 
 
@@ -29,6 +29,12 @@ public class dgIkkatsuHakkoTaisho_Row extends DataRow {
 
     public dgIkkatsuHakkoTaisho_Row() {
         super();
+        this.hihokenshaNo = RString.EMPTY;
+        this.hihokenshaMeisho = RString.EMPTY;
+        this.shutokuDate = RString.EMPTY;
+        this.henkoDate = RString.EMPTY;
+        this.yokaigoNinteiDate = RString.EMPTY;
+        this.juminShubetsu = RString.EMPTY;
     }
 
     public dgIkkatsuHakkoTaisho_Row(RString hihokenshaNo, RString hihokenshaMeisho, RString shutokuDate, RString henkoDate, RString yokaigoNinteiDate, RString juminShubetsu) {
