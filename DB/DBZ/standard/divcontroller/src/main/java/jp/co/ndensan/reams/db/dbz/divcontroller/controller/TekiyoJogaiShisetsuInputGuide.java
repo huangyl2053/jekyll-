@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.divcontroller;
+package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
  */
 public class TekiyoJogaiShisetsuInputGuide {
 
-    private static final RString TEKIYO_JOGAI_SHISETSU = new RString("TekiyoJogaiShisetsuData.yml");
+    private static final RString TEKIYO_JOGAI_SHISETSU = new RString("shisetsuJoho/tekiyoJogaiShisetsuData.yml");
 
     /**
      * ガイドの呼び出し時に、除外施設を検索して表示します。
@@ -40,7 +40,7 @@ public class TekiyoJogaiShisetsuInputGuide {
     }
 
     private void setTekiyoJogaiShisetsuData(DataGrid<dgTekiyoJogaiShisetsu_Row> dgTekiyoJogaiShisetsu) {
-        List<HashMap> demoDataList = YamlLoader.FOR_DBZ.loadAsList(TEKIYO_JOGAI_SHISETSU);
+        List<HashMap> demoDataList = YamlLoader.DBZ.loadAsList(TEKIYO_JOGAI_SHISETSU);
         List<dgTekiyoJogaiShisetsu_Row> tekiyhoJogaiShisetsuList = new ArrayList<>();
 
         for (HashMap demoData : demoDataList) {

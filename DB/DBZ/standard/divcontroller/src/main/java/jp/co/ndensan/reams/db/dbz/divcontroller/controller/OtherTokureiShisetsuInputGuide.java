@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.divcontroller;
+package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class OtherTokureiShisetsuInputGuide {
 
-    private static final RString OTHER_SHISETSU_DATA_SOURCE = new RString("OtherShisetsuData.yml");
+    private static final RString OTHER_SHISETSU_DATA_SOURCE = new RString("shisetsuJoho/otherShisetsuData.yml");
 
     /**
      * その他特例施設を検索し、その情報をグリッドに設定します。
@@ -51,7 +51,7 @@ public class OtherTokureiShisetsuInputGuide {
     private List<dgSearchResultOtherTokureiShisetsu_Row> createOtherShisetsuGridRowList(String 検索条件) {
         List<dgSearchResultOtherTokureiShisetsu_Row> otherShisetsuGridRowList = new ArrayList<>();
 
-        Map<String, List> 特例施設List = YamlLoader.FOR_DBZ.loadAsMap(OTHER_SHISETSU_DATA_SOURCE);
+        Map<String, List> 特例施設List = YamlLoader.DBZ.loadAsMap(OTHER_SHISETSU_DATA_SOURCE);
         List<HashMap> 検索結果List = 特例施設List.get(検索条件);
 
         for (HashMap 特例施設情報 : 検索結果List) {

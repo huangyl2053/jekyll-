@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.jigyoshainputguide;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jun 06 19:30:20 JST 2014 
+ * Wed Jun 18 21:14:15 JST 2014 
  */
 
 
@@ -32,6 +32,14 @@ public class dgSearchResultJigyosha_Row extends DataRow {
 
     public dgSearchResultJigyosha_Row() {
         super();
+        this.jigyoshaCode = RString.EMPTY;
+        this.jigyoshaMeisho = RString.EMPTY;
+        this.jigyosha = RString.EMPTY;
+        this.jusho = RString.EMPTY;
+        this.service = RString.EMPTY;
+        this.ninteiKaishiDate = new TextBoxFlexibleDate();
+        this.ninteiShuryoDate = new TextBoxFlexibleDate();
+        this.keigenTaisho = RString.EMPTY;
     }
 
     public dgSearchResultJigyosha_Row(RString jigyoshaCode, RString jigyoshaMeisho, RString jigyosha, RString jusho, RString service, TextBoxFlexibleDate ninteiKaishiDate, TextBoxFlexibleDate ninteiShuryoDate, RString keigenTaisho) {

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.divcontroller;
+package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,9 +22,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
  */
 public class ShisetsuJoho {
 
-    private static final RString JIGYOSHA_DATA_SOURCE = new RString("ShisetsuData.yml");
-    private static final RString OTHER_SHISETSU_DATA_SOURCE = new RString("OtherShisetsuData.yml");
-    private static final RString TEKIYO_JOGAI_SHISETSU = new RString("TekiyoJogaiShisetsuData.yml");
+    private static final RString JIGYOSHA_DATA_SOURCE = new RString("shisetsuJoho/shisetsuData.yml");
+    private static final RString OTHER_SHISETSU_DATA_SOURCE = new RString("shisetsuJoho/otherShisetsuData.yml");
+    private static final RString TEKIYO_JOGAI_SHISETSU = new RString("shisetsuJoho/tekiyoJogaiShisetsuData.yml");
 
     /**
      * 施設種類ラジオボタンの選択項目が変更された際に実行します。<br/>
@@ -87,7 +87,7 @@ public class ShisetsuJoho {
     }
 
     private void setJigyoshaMeisho(ShisetsuJohoDiv div) {
-        List<HashMap> jigyoshaList = YamlLoader.FOR_DBZ.loadAsList(JIGYOSHA_DATA_SOURCE);
+        List<HashMap> jigyoshaList = YamlLoader.DBZ.loadAsList(JIGYOSHA_DATA_SOURCE);
         RString 施設コード = div.getTxtShisetsuCode().getValue();
         div.getTxtShisetsuMeisho().setValue(RString.EMPTY);
         for (HashMap jigyosha : jigyoshaList) {
@@ -98,7 +98,7 @@ public class ShisetsuJoho {
     }
 
     private void setMatchOtherShisetsu(ShisetsuJohoDiv div) {
-        Map<String, List<HashMap>> 全特例施設 = YamlLoader.FOR_DBZ.loadAsMap(OTHER_SHISETSU_DATA_SOURCE);
+        Map<String, List<HashMap>> 全特例施設 = YamlLoader.DBZ.loadAsMap(OTHER_SHISETSU_DATA_SOURCE);
         List<HashMap> 施設List = new ArrayList<>();
         RString 施設コード = div.getTxtShisetsuCode().getValue();
 
@@ -121,7 +121,7 @@ public class ShisetsuJoho {
     }
 
     private void setTekiyoJogaiShisetsuMeisho(ShisetsuJohoDiv div) {
-        List<HashMap> shisetsuList = YamlLoader.FOR_DBZ.loadAsList(TEKIYO_JOGAI_SHISETSU);
+        List<HashMap> shisetsuList = YamlLoader.DBZ.loadAsList(TEKIYO_JOGAI_SHISETSU);
         RString jigyoshaCode = div.getTxtShisetsuCode().getValue();
         div.getTxtShisetsuMeisho().setValue(RString.EMPTY);
         for (HashMap shisetsuJoho : shisetsuList) {

@@ -44,6 +44,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "radJigyoshaSearchType_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "onChange": "",
                             "selectedItem": null,
                             "dataSource": [
@@ -71,6 +73,7 @@ var DBZ;
                             "labelLText": "",
                             "labelLWidth": "S",
                             "labelLAlign": 2,
+                            "disabledItem": [],
                             "icon": []
                         },
                         {
@@ -91,6 +94,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "txtJigyoshaCode_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "readOnly": false,
                             "onChange": "",
                             "required": false,
@@ -113,7 +118,8 @@ var DBZ;
                             "value": "",
                             "labelRText": "※前方一致",
                             "labelRWidth": "S",
-                            "labelRAlign": 0
+                            "labelRAlign": 0,
+                            "decorationClass": ""
                         },
                         {
                             "fieldName": "btnSearchJigyosha",
@@ -133,6 +139,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "btnSearchJigyosha",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "onClick": "onClick_btnSearchJigyosha",
                             "icon": 0,
                             "text": "該当する事業者を表示する",
@@ -162,6 +170,9 @@ var DBZ;
                                     "marginLeft": "0",
                                     "marginRight": "0",
                                     "selectControlID": "dgSearchResultJigyosha",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "height": "S",
                                     "dataSource": [],
                                     "gridSetting": {
                                         "rowHeight": 25,
@@ -174,6 +185,8 @@ var DBZ;
                                         "isShowSelectButtonColumn": true,
                                         "isShowModifyButtonColumn": false,
                                         "isShowDeleteButtonColumn": false,
+                                        "limitRowCount": 0,
+                                        "selectedRowCount": 0,
                                         "header": {
                                             "combineColumns": [],
                                             "frozenColumn": "",
@@ -266,7 +279,9 @@ var DBZ;
                                                     "cellType": 7,
                                                     "ymdKubun": 2,
                                                     "displayFormat": 0,
-                                                    "onChange": ""
+                                                    "onChange": "",
+                                                    "isSetValueToToolTip": false,
+                                                    "readOnly": true
                                                 },
                                                 "align": 1,
                                                 "resize": true,
@@ -285,7 +300,9 @@ var DBZ;
                                                     "cellType": 7,
                                                     "ymdKubun": 2,
                                                     "displayFormat": 0,
-                                                    "onChange": ""
+                                                    "onChange": "",
+                                                    "isSetValueToToolTip": false,
+                                                    "readOnly": true
                                                 },
                                                 "align": 1,
                                                 "resize": true,
@@ -308,7 +325,6 @@ var DBZ;
                                             }
                                         ]
                                     },
-                                    "height": "S",
                                     "onSort": "",
                                     "onSelect": "",
                                     "onSelectByDblClick": "",
@@ -339,6 +355,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "SearchResultJigyosha",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "onLoad": "",
                             "title": "事業者一覧",
                             "marginTop": "XS",
@@ -363,7 +381,8 @@ var DBZ;
                             "widthAuto": false,
                             "panelDisplay": 0,
                             "isGroupBox": false,
-                            "readOnly": false
+                            "readOnly": false,
+                            "height": "Auto"
                         },
                         {
                             "fieldName": "btnKaigoHokenShisetsuReturn",
@@ -383,6 +402,8 @@ var DBZ;
                             "marginLeft": "XS",
                             "marginRight": "XS",
                             "selectControlID": "btnKaigoHokenShisetsuReturn",
+                            "helpMessageID": "",
+                            "jpControlName": "",
                             "onClick": "onClick_btnKaigoHokenShisetsuReturn",
                             "icon": 0,
                             "text": "事業者入力ガイドを閉じる",
@@ -407,6 +428,8 @@ var DBZ;
                     "marginLeft": "0",
                     "marginRight": "0",
                     "selectControlID": "JigyoshaInputGuide",
+                    "helpMessageID": "",
+                    "jpControlName": "",
                     "onLoad": "",
                     "title": "事業者入力ガイド",
                     "marginTop": "Default",
@@ -453,7 +476,8 @@ var DBZ;
                     "widthAuto": false,
                     "panelDisplay": 0,
                     "isGroupBox": false,
-                    "readOnly": false
+                    "readOnly": false,
+                    "height": "Auto"
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -468,9 +492,11 @@ var DBZ;
             "float": 0,
             "toolTip": "",
             "authorityMode": 0,
-            "marginLeft": 0,
-            "marginRight": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
             "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
             "relation": [],
             "businessId": "DBZ",
             "controlName": "JigyoshaInputGuide",
