@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller;
 
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0500011.KanryoMessagePnlDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.KanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0500011.ShoKaishuKanriTaishoshaJohoDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
@@ -27,10 +28,13 @@ public class ShoKaishuKanriKanryoMessage {
             KanryoMessagePnlDiv panel, ShoKaishuKanriTaishoshaJohoDiv panel2) {
         ResponseData<KanryoMessagePnlDiv> response = new ResponseData<>();
 
-        panel.getCcdKanryoMessage().getLblTaishoMessage1().setText(
+        KanryoMessageDiv kanryoMsgDiv = new KanryoMessageDiv();
+        kanryoMsgDiv.getLblTaishoMessage1().setText(
                 panel2.getCcdKaigoShikakuKihon().getTxtHihokenshaNo().getValue());
-        panel.getCcdKanryoMessage().getLblTaishoMessage2().setText(
+        kanryoMsgDiv.getLblTaishoMessage2().setText(
                 panel2.getShoKaishuKanriTaishoshaCommonJoho().getTxtAtenaMeisho().getValue());
+
+        panel.getCcdKaigoKanryoMessage().setKanryoMessage(kanryoMsgDiv);
 
         response.data = panel;
         return response;

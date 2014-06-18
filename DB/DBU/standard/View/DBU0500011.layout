@@ -916,7 +916,7 @@
    "fieldName": "KanryoMessagePnl",
    "items": [
     {
-     "fieldName": "ccdKanryoMessage",
+     "fieldName": "ccdKaigoKanryoMessage",
      "items": [],
      "controlType": "CommonChildDiv",
      "width": "XS",
@@ -932,14 +932,14 @@
      "authorityMode": 0,
      "marginLeft": "0",
      "marginRight": "0",
-     "selectControlID": "ccdKanryoMessage",
+     "selectControlID": "ccdKaigoKanryoMessage",
      "helpMessageID": "",
      "jpControlName": "",
      "relation": [],
      "marginTop": 0,
      "marginBottom": 0,
-     "businessId": "URZ",
-     "controlName": "KanryoMessage",
+     "businessId": "DBZ",
+     "controlName": "KaigoKanryoMessage",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
@@ -953,7 +953,7 @@
    "disabled": false,
    "accessKey": "",
    "nextFocusFieldName": "",
-   "wrap": false,
+   "wrap": true,
    "dependencies": [],
    "float": 0,
    "toolTip": "",
@@ -1138,12 +1138,12 @@
    "showWizard": true,
    "visibleDivs": [
     {
-     "visibleDiv": "ccdKanryoMessage",
+     "visibleDiv": "KanryoMessagePnl",
      "panelState": "visible",
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "KanryoMessagePnl",
+     "visibleDiv": "ccdKaigoKanryoMessage",
      "panelState": "visible",
      "fixedDiv": "No"
     }
@@ -1207,7 +1207,7 @@
    "ShoKaishuJokyoShosai"
   ],
   [
-   "ccdKanryoMessage"
+   "ccdKaigoKanryoMessage"
   ]
  ],
  "panelMargin": 1,

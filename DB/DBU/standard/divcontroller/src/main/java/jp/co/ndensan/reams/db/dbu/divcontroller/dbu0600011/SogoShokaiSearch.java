@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0600011.SogoShokaiSearchDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgSearchResult_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.dgSearchResult_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.SearchCriteriaOfKojinDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -68,7 +68,7 @@ public class SogoShokaiSearch {
         HashMap map = getYamlData(YML_SEARCH).get(0);
         SearchCriteriaOfKojinDiv kojinDiv = panel.getSogoShokaiSearchInfo().getSearchCriteriaOfKojin();
         kojinDiv.getTxtShimei().setValue(new RString(map.get("氏名").toString()));
-        kojinDiv.getRadSearchPatternOfShimei().setSelectedItem(new RString("key0"));
+        //kojinDiv.getRadSearchPatternOfShimei().setSelectedItem(new RString("key0"));
     }
 
     // 該当者一覧情報を設定する

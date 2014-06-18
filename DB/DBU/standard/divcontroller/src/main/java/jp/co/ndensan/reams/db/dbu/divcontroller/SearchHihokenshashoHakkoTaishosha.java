@@ -5,13 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0410011.SearchHihokenshashoHakkoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
-import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+//import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -75,19 +75,17 @@ public class SearchHihokenshashoHakkoTaishosha {
         //前方一致を初期選択とする
         panel.getCcdSearchHihokenshashoHakkoTaishosha().getSearchCriteriaOfKojin().getRadSearchPatternOfShimei().setSelectedItem(new RString("key0"));
 
-        List<KeyValueDataSource> dataSource = new ArrayList<>();
-        dataSource.add(new KeyValueDataSource(new RString("0"), RString.EMPTY));
-        for (int i = 1; i < hihokenshashoHakkoTaishoshaList.size(); i++) {
-            hashMap = hihokenshashoHakkoTaishoshaList.get(i);
-            ymlData = new ControlGenerator(hashMap);
-
-            dataSource.add(new KeyValueDataSource(new RString(String.valueOf(i)), ymlData.getAsRString("shimei")));
-        }
-
-        //最近処理対象者の設定
-        panel.getCcdSaikinShorishaRireki().getDdlSaikinShorisha().setDataSource(dataSource);
-        panel.getCcdSaikinShorishaRireki().getDdlSaikinShorisha().setSelectedItem(new RString("0"));
-
+//        //最近処理対象者の設定
+//        List<KeyValueDataSource> dataSource = new ArrayList<>();
+//        dataSource.add(new KeyValueDataSource(new RString("0"), RString.EMPTY));
+//        for (int i = 1; i < hihokenshashoHakkoTaishoshaList.size(); i++) {
+//            hashMap = hihokenshashoHakkoTaishoshaList.get(i);
+//            ymlData = new ControlGenerator(hashMap);
+//
+//            dataSource.add(new KeyValueDataSource(new RString(String.valueOf(i)), ymlData.getAsRString("shimei")));
+//        }
+//
+//        panel.getCcdSearchHihokenshashoHakkoTaishosha().getDdlSaikinShorisha().setDataSource(dataSource);
+//        panel.getCcdSearchHihokenshashoHakkoTaishosha().getDdlSaikinShorisha().setSelectedItem(new RString("0"));
     }
-
 }

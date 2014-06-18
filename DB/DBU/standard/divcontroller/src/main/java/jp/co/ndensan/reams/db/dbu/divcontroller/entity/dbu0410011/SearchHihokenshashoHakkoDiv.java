@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0410011;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.HihokenshaFinderDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.SearchResultOfHihokenshaDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.SaikinShorishaRirekiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -24,8 +23,6 @@ public class SearchHihokenshashoHakkoDiv extends Panel {
      */
     @JsonProperty("ccdSearchHihokenshashoHakkoTaishosha")
     private HihokenshaFinderDiv ccdSearchHihokenshashoHakkoTaishosha;
-    @JsonProperty("ccdSaikinShorishaRireki")
-    private SaikinShorishaRirekiDiv ccdSaikinShorishaRireki;
     @JsonProperty("ccdHihokenshashoHakkoTaishoGaitosha")
     private SearchResultOfHihokenshaDiv ccdHihokenshashoHakkoTaishoGaitosha;
 
@@ -43,16 +40,6 @@ public class SearchHihokenshashoHakkoDiv extends Panel {
     @JsonProperty("ccdSearchHihokenshashoHakkoTaishosha")
     public void setCcdSearchHihokenshashoHakkoTaishosha(HihokenshaFinderDiv ccdSearchHihokenshashoHakkoTaishosha) {
         this.ccdSearchHihokenshashoHakkoTaishosha=ccdSearchHihokenshashoHakkoTaishosha;
-    }
-
-    @JsonProperty("ccdSaikinShorishaRireki")
-    public SaikinShorishaRirekiDiv getCcdSaikinShorishaRireki() {
-        return ccdSaikinShorishaRireki;
-    }
-
-    @JsonProperty("ccdSaikinShorishaRireki")
-    public void setCcdSaikinShorishaRireki(SaikinShorishaRirekiDiv ccdSaikinShorishaRireki) {
-        this.ccdSaikinShorishaRireki=ccdSaikinShorishaRireki;
     }
 
     @JsonProperty("ccdHihokenshashoHakkoTaishoGaitosha")

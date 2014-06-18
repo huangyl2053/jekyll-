@@ -5,7 +5,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0500011;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.KanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigokanryomessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -20,8 +20,8 @@ public class KanryoMessagePnlDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdKanryoMessage")
-    private KanryoMessageDiv ccdKanryoMessage;
+    @JsonProperty("ccdKaigoKanryoMessage")
+    private KaigoKanryoMessageDiv ccdKaigoKanryoMessage;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -29,14 +29,14 @@ public class KanryoMessagePnlDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("ccdKanryoMessage")
-    public KanryoMessageDiv getCcdKanryoMessage() {
-        return ccdKanryoMessage;
+    @JsonProperty("ccdKaigoKanryoMessage")
+    public KaigoKanryoMessageDiv getCcdKaigoKanryoMessage() {
+        return ccdKaigoKanryoMessage;
     }
 
-    @JsonProperty("ccdKanryoMessage")
-    public void setCcdKanryoMessage(KanryoMessageDiv ccdKanryoMessage) {
-        this.ccdKanryoMessage=ccdKanryoMessage;
+    @JsonProperty("ccdKaigoKanryoMessage")
+    public void setCcdKaigoKanryoMessage(KaigoKanryoMessageDiv ccdKaigoKanryoMessage) {
+        this.ccdKaigoKanryoMessage=ccdKaigoKanryoMessage;
     }
 
 }

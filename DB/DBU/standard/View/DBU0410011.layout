@@ -35,41 +35,6 @@
      "onClick_BtnToSearch": "onClick_btnSearch"
     },
     {
-     "fieldName": "ccdSaikinShorishaRireki",
-     "items": [],
-     "controlType": "CommonChildDiv",
-     "width": "XS",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "ccdSaikinShorishaRireki",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "relation": [],
-     "marginTop": 0,
-     "marginBottom": 0,
-     "businessId": "URZ",
-     "controlName": "SaikinShorishaRireki",
-     "dataPassingForDialog": [],
-     "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "isOneCondition": "0",
-     "SaikinShorishaRireki_width": "1090",
-     "SaikinShorishaRireki_marginLeft": "XS",
-     "ddlSaikinShorisha_marginLeft": "XL",
-     "btnSaikinShorishaHyoji_width": "S",
-     "onClick_btnSaikinShorishaHyoji": "onClick_btnSaikinShorishaHyoji"
-    },
-    {
      "fieldName": "ccdHihokenshashoHakkoTaishoGaitosha",
      "items": [],
      "controlType": "CommonChildDiv",
@@ -702,11 +667,6 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "ccdSaikinShorishaRireki",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
      "visibleDiv": "ccdHihokenshashoHakkoTaishoGaitosha",
      "panelState": "close",
      "fixedDiv": "No"
@@ -793,9 +753,6 @@
   ],
   [
    "ccdSearchHihokenshashoHakkoTaishosha"
-  ],
-  [
-   "ccdSaikinShorishaRireki"
   ],
   [
    "ccdHihokenshashoHakkoTaishoGaitosha"

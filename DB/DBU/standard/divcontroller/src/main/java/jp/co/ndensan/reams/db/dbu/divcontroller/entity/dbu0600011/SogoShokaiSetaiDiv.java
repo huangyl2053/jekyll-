@@ -21,10 +21,8 @@ public class SogoShokaiSetaiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblSetai1")
-    private Label lblSetai1;
-    @JsonProperty("lblSetai2")
-    private Label lblSetai2;
+    @JsonProperty("lblSetaiInfo")
+    private Label lblSetaiInfo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,24 +30,14 @@ public class SogoShokaiSetaiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblSetai1")
-    public Label getLblSetai1() {
-        return lblSetai1;
+    @JsonProperty("lblSetaiInfo")
+    public Label getLblSetaiInfo() {
+        return lblSetaiInfo;
     }
 
-    @JsonProperty("lblSetai1")
-    public void setLblSetai1(Label lblSetai1) {
-        this.lblSetai1=lblSetai1;
-    }
-
-    @JsonProperty("lblSetai2")
-    public Label getLblSetai2() {
-        return lblSetai2;
-    }
-
-    @JsonProperty("lblSetai2")
-    public void setLblSetai2(Label lblSetai2) {
-        this.lblSetai2=lblSetai2;
+    @JsonProperty("lblSetaiInfo")
+    public void setLblSetaiInfo(Label lblSetaiInfo) {
+        this.lblSetaiInfo=lblSetaiInfo;
     }
 
 }

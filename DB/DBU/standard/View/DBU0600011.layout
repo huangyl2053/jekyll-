@@ -105,8 +105,8 @@
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
+   "marginTop": "0",
+   "marginBottom": "0",
    "eraseBorderTop": false,
    "eraseBorderBottom": false,
    "eraseBorderRight": false,
@@ -222,9 +222,21 @@
    "postParameterPanelNames": [
     {
      "postParameterPanelNames": "SogoShokaiKihon"
+    },
+    {
+     "postParameterPanelNames": "SogoShokaiSearch"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_btnToDecide",
+     "requestUrl": "dbu/db/dbu/SogoShokaiKihon/dispTaishoshaJoho"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -246,10 +258,10 @@
    "fieldName": "SogoShokaiSetai",
    "items": [
     {
-     "fieldName": "lblSetai1",
+     "fieldName": "lblSetaiInfo",
      "items": [],
      "controlType": "Label",
-     "width": "M",
+     "width": "1099",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -262,38 +274,12 @@
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
-     "selectControlID": "lblSetai1",
+     "selectControlID": "lblSetaiInfo",
      "helpMessageID": "",
      "jpControlName": "",
      "required": false,
      "isPrivateInfo": false,
-     "text": "<<世帯情報１>>",
-     "decorationClass": "",
-     "align": 0
-    },
-    {
-     "fieldName": "lblSetai2",
-     "items": [],
-     "controlType": "Label",
-     "width": "M",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "lblSetai2",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "required": false,
-     "isPrivateInfo": false,
-     "text": "<<世帯情報２>>",
+     "text": "<世帯情報>",
      "decorationClass": "",
      "align": 0
     }
@@ -329,14 +315,14 @@
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
+   "marginTop": "-0.3",
+   "marginBottom": "0",
    "eraseBorderTop": false,
    "eraseBorderBottom": false,
    "eraseBorderRight": false,
    "eraseBorderLeft": false,
    "backgroundColor": 0,
-   "widthAuto": false,
+   "widthAuto": true,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
@@ -4202,8 +4188,8 @@
      "items": [],
      "controlType": "Button",
      "width": "180",
-     "visible": true,
-     "displayNone": false,
+     "visible": false,
+     "displayNone": true,
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
@@ -4360,6 +4346,11 @@
      "fieldName": "btnGaitoshaReturn",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnReSearch",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
@@ -4403,6 +4394,11 @@
     },
     {
      "fieldName": "btnGaitoshaReturn",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReSearch",
      "event": "onClick",
      "transition": ""
     }
@@ -4492,6 +4488,11 @@
      "fieldName": "btnGaitoshaReturn",
      "event": "onClick",
      "transition": "該当者検索"
+    },
+    {
+     "fieldName": "btnReSearch",
+     "event": "onClick",
+     "transition": "該当者検索"
     }
    ]
   }
@@ -4502,20 +4503,18 @@
  "UIContainerEventMapping": [],
  "loadSequencePanelNames": [
   [
-   "SogoShokaiShunoInfo",
-   "SogoShokaiJumin"
+   "SogoShokaiSearch",
+   "SogoShokaiKihon"
   ],
   [
-   "SogoShokaiSearch"
+   "SogoShokaiShunoInfo",
+   "SogoShokaiJumin"
   ],
   [
    "SogoShokaiSearchInfo"
   ],
   [
    "SogoShokaiGaitoshaListInfo"
-  ],
-  [
-   "SogoShokaiKihon"
   ],
   [
    "SogoShokaiKihonInfo"
@@ -4548,5 +4547,50 @@
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
- "commonButtonAreaData": []
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "commonBtn",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonFree",
+     "buttonProperty": {
+      "fieldName": "btnReSearch",
+      "items": [],
+      "controlType": "CommonButtonFree",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnReSearch",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "該当者検索に戻る",
+      "onClick": "",
+      "icon": 0,
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "prefixText": "",
+      "suffixText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "総合照会"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  }
+ ]
 }
