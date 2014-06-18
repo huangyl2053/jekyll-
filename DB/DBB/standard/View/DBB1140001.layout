@@ -24,7 +24,7 @@
      "selectControlID": "ddlShoriNendo_core",
      "helpMessageID": "",
      "jpControlName": "",
-     "onChange": "",
+     "onChange": "onChange_ddlShoriNendo",
      "selectedItem": "key0",
      "dataSource": [
       {
@@ -75,7 +75,7 @@
      "fieldName": "chkShuturyokuTaisho",
      "items": [],
      "controlType": "CheckBoxList",
-     "width": "L",
+     "width": "360",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -108,9 +108,22 @@
      "labelLWidth": "70",
      "labelLAlign": 2,
      "onClick": "",
-     "selectedItems": [],
+     "selectedItems": [
+      {
+       "key": "isAllSelect",
+       "value": "(すべて選択)"
+      },
+      {
+       "key": "key0",
+       "value": "1号被保険者および賦課基準日時点の世帯員"
+      },
+      {
+       "key": "key1",
+       "value": "受給者および世帯員（2号被保険者を含む）"
+      }
+     ],
      "newLineItemNumber": 1,
-     "minCheckedItem": 0,
+     "minCheckedItem": "0",
      "maxCheckedItem": 2,
      "spaceSize": "M",
      "isAllSelectable": true,
@@ -355,7 +368,16 @@
      "postParameterPanelNames": "ShotokushokaihyoIkkatu"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbb/db/dbb/ShotokushokaihyoIkkatu/onLoad_HeijunkaAugustKeisan"
+    },
+    {
+     "eventName": "onChange_ddlShoriNendo",
+     "requestUrl": "dbb/db/dbb/ShotokushokaihyoIkkatu/onChange_ddlShoriNendo"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
