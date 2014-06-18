@@ -55,10 +55,9 @@ public class ShikakuFuseigoShuseiMain {
     }
 
     private List<dgShikakuFuseigoIchiranForDemo_Row> createRowShikakuFuseigoTestData() {
-        dgShikakuFuseigoIchiran_Row item;
         dgShikakuFuseigoIchiranForDemo_Row kakushiItem;
 
-        List<HashMap> demoDataList = YamlLoader.FOR_DBZ.loadAsList(new RString("ShikakuFuseigoData.yml"));
+        List<HashMap> demoDataList = YamlLoader.DBZ.loadAsList(new RString("DBZA010001/ShikakuFuseigoData.yml"));
         for (HashMap demoData : demoDataList) {
             kakushiItem = createRowShikakuFuseigoDataForDemo(
                     demoData.get("無視判定").toString(),
