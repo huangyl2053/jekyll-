@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
  * @author n8211
  */
 public class FukaRireki {
-    public static final RString FUKARIREKI = new RString("FukaRireki.yml");
+    private static final RString FUKARIREKI = new RString("FukaRireki.yml");
     
     public ResponseData<FukaRirekiDiv> onSelect(FukaRirekiDiv rirekiDiv, FukaRirekiAllDiv rirekiAllDiv) {
         panelActivatedFukaRireki(rirekiDiv);

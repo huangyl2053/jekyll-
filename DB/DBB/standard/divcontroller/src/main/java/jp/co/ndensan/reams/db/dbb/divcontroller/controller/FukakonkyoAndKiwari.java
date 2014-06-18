@@ -282,7 +282,7 @@ public class FukakonkyoAndKiwari {
 
         yamlDatalist.add(cg.getAsRString("期間"));
         yamlDatalist.add(cg.getAsRString("月数"));
-        yamlDatalist.add(cg.getAsRString("保険料段階区分"));
+        yamlDatalist.add(cg.getAsRString("保険料段階"));
         yamlDatalist.add(cg.get("保険料率"));
         yamlDatalist.add(cg.get("保険料算出額"));
         yamlDatalist.add(cg.get("保険料額"));
