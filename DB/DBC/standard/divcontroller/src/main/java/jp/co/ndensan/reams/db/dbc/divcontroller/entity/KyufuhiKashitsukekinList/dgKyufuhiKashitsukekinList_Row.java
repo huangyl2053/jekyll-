@@ -3,13 +3,12 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufuhiKashitsukekinList
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Jun 12 17:13:46 JST 2014 
+ * Wed Jun 18 14:52:21 JST 2014 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 
@@ -21,8 +20,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class dgKyufuhiKashitsukekinList_Row extends DataRow {
 
-    private Button btnSelect;
-    private Button btnDelete;
     private RString txtHihoNo;
     private RString txtHihokenshaName;
     private RString txtHihokenshaKana;
@@ -40,8 +37,6 @@ public class dgKyufuhiKashitsukekinList_Row extends DataRow {
 
     public dgKyufuhiKashitsukekinList_Row() {
         super();
-        this.btnSelect = new Button();
-        this.btnDelete = new Button();
         this.txtHihoNo = RString.EMPTY;
         this.txtHihokenshaName = RString.EMPTY;
         this.txtHihokenshaKana = RString.EMPTY;
@@ -58,10 +53,8 @@ public class dgKyufuhiKashitsukekinList_Row extends DataRow {
         this.txtEnchoShinseiYMD = RString.EMPTY;
     }
 
-    public dgKyufuhiKashitsukekinList_Row(Button btnSelect, Button btnDelete, RString txtHihoNo, RString txtHihokenshaName, RString txtHihokenshaKana, RString txtUketsukeYMD, RString txtShinseiYMD, RString txtKaishiYMD, RString txtShuryoYMD, RString txtServiceShurui, RString txtSeikyugaku, RString txtShinseigaku, RString txtKetteiYMD, RString txtShonin, RString txtKariukeYMD, RString txtEnchoShinseiYMD) {
+    public dgKyufuhiKashitsukekinList_Row(RString txtHihoNo, RString txtHihokenshaName, RString txtHihokenshaKana, RString txtUketsukeYMD, RString txtShinseiYMD, RString txtKaishiYMD, RString txtShuryoYMD, RString txtServiceShurui, RString txtSeikyugaku, RString txtShinseigaku, RString txtKetteiYMD, RString txtShonin, RString txtKariukeYMD, RString txtEnchoShinseiYMD) {
         super();
-        this.setOriginalData("btnSelect", btnSelect);
-        this.setOriginalData("btnDelete", btnDelete);
         this.setOriginalData("txtHihoNo", txtHihoNo);
         this.setOriginalData("txtHihokenshaName", txtHihokenshaName);
         this.setOriginalData("txtHihokenshaKana", txtHihokenshaKana);
@@ -76,8 +69,6 @@ public class dgKyufuhiKashitsukekinList_Row extends DataRow {
         this.setOriginalData("txtShonin", txtShonin);
         this.setOriginalData("txtKariukeYMD", txtKariukeYMD);
         this.setOriginalData("txtEnchoShinseiYMD", txtEnchoShinseiYMD);
-        this.btnSelect = btnSelect;
-        this.btnDelete = btnDelete;
         this.txtHihoNo = txtHihoNo;
         this.txtHihokenshaName = txtHihokenshaName;
         this.txtHihokenshaKana = txtHihokenshaKana;
@@ -92,14 +83,6 @@ public class dgKyufuhiKashitsukekinList_Row extends DataRow {
         this.txtShonin = txtShonin;
         this.txtKariukeYMD = txtKariukeYMD;
         this.txtEnchoShinseiYMD = txtEnchoShinseiYMD;
-    }
-
-    public Button getBtnSelect() {
-        return btnSelect;
-    }
-
-    public Button getBtnDelete() {
-        return btnDelete;
     }
 
     public RString getTxtHihoNo() {
@@ -156,16 +139,6 @@ public class dgKyufuhiKashitsukekinList_Row extends DataRow {
 
     public RString getTxtEnchoShinseiYMD() {
         return txtEnchoShinseiYMD;
-    }
-
-    public void setBtnSelect(Button btnSelect) {
-        this.setOriginalData("btnSelect", btnSelect);
-        this.btnSelect = btnSelect;
-    }
-
-    public void setBtnDelete(Button btnDelete) {
-        this.setOriginalData("btnDelete", btnDelete);
-        this.btnDelete = btnDelete;
     }
 
     public void setTxtHihoNo(RString txtHihoNo) {

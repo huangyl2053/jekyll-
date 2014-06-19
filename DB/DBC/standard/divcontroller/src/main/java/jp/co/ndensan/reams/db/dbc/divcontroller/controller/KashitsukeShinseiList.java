@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -30,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class KashitsukeShinseiList {
 
     private List<HashMap> getYaml() {
-        return YamlLoader.FOR_DBC.loadAsList(new RString("dbc1800000/KashitsukeShinseiList.yml"));
+        return YamlLoader.DBC.loadAsList(new RString("dbc1800000/KashitsukeShinseiList.yml"));
     }
 
     /**
@@ -163,11 +162,7 @@ public class KashitsukeShinseiList {
             RString txtKariukeYMD,
             RString txtEnchoShinseiYMD
     ) {
-        Button btnSelect = new Button();
-        Button btnDelete = new Button();
         dgKyufuhiKashitsukekinList_Row item = new dgKyufuhiKashitsukekinList_Row(
-                btnSelect,
-                btnDelete,
                 txtHihoNo,
                 txtHihokenshaName,
                 txtHihokenshaKana,

@@ -84,11 +84,7 @@ public class KashitsukeHenkanList {
             RString txtKariukeYMD,
             RString txtEnchoShinseiYMD
     ) {
-        Button btnSelect = new Button();
-        Button btnDelete = new Button();
         dgKyufuhiKashitsukekinList_Row item = new dgKyufuhiKashitsukekinList_Row(
-                btnSelect,
-                btnDelete,
                 txtHihoNo,
                 txtHihokenshaName,
                 txtHihokenshaKana,

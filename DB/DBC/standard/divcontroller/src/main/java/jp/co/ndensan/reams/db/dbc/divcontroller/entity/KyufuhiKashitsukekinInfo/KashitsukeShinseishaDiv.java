@@ -29,10 +29,10 @@ public class KashitsukeShinseishaDiv extends Panel {
     private TextBox txtShinseishaKankei;
     @JsonProperty("txtShinseishaYubinNo")
     private TextBoxYubinNo txtShinseishaYubinNo;
-    @JsonProperty("txtShinseishaJusho")
-    private TextBox txtShinseishaJusho;
     @JsonProperty("txtShinseishaTelNo")
     private TextBox txtShinseishaTelNo;
+    @JsonProperty("txtShinseishaJusho")
+    private TextBox txtShinseishaJusho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -80,16 +80,6 @@ public class KashitsukeShinseishaDiv extends Panel {
         this.txtShinseishaYubinNo=txtShinseishaYubinNo;
     }
 
-    @JsonProperty("txtShinseishaJusho")
-    public TextBox getTxtShinseishaJusho() {
-        return txtShinseishaJusho;
-    }
-
-    @JsonProperty("txtShinseishaJusho")
-    public void setTxtShinseishaJusho(TextBox txtShinseishaJusho) {
-        this.txtShinseishaJusho=txtShinseishaJusho;
-    }
-
     @JsonProperty("txtShinseishaTelNo")
     public TextBox getTxtShinseishaTelNo() {
         return txtShinseishaTelNo;
@@ -98,6 +88,16 @@ public class KashitsukeShinseishaDiv extends Panel {
     @JsonProperty("txtShinseishaTelNo")
     public void setTxtShinseishaTelNo(TextBox txtShinseishaTelNo) {
         this.txtShinseishaTelNo=txtShinseishaTelNo;
+    }
+
+    @JsonProperty("txtShinseishaJusho")
+    public TextBox getTxtShinseishaJusho() {
+        return txtShinseishaJusho;
+    }
+
+    @JsonProperty("txtShinseishaJusho")
+    public void setTxtShinseishaJusho(TextBox txtShinseishaJusho) {
+        this.txtShinseishaJusho=txtShinseishaJusho;
     }
 
 }

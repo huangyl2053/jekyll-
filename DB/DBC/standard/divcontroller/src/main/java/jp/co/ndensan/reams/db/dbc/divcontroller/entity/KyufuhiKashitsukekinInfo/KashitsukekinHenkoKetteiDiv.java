@@ -23,10 +23,10 @@ public class KashitsukekinHenkoKetteiDiv extends Panel {
      */
     @JsonProperty("txtHenkoShoninKubun")
     private TextBox txtHenkoShoninKubun;
-    @JsonProperty("txtHenkoKetteiYMD")
-    private TextBoxDate txtHenkoKetteiYMD;
     @JsonProperty("txtHenkogoKigen")
     private TextBoxDate txtHenkogoKigen;
+    @JsonProperty("txtHenkoKetteiYMD")
+    private TextBoxDate txtHenkoKetteiYMD;
     @JsonProperty("txtHenkoFushoninRiyu")
     private TextBox txtHenkoFushoninRiyu;
 
@@ -46,16 +46,6 @@ public class KashitsukekinHenkoKetteiDiv extends Panel {
         this.txtHenkoShoninKubun=txtHenkoShoninKubun;
     }
 
-    @JsonProperty("txtHenkoKetteiYMD")
-    public TextBoxDate getTxtHenkoKetteiYMD() {
-        return txtHenkoKetteiYMD;
-    }
-
-    @JsonProperty("txtHenkoKetteiYMD")
-    public void setTxtHenkoKetteiYMD(TextBoxDate txtHenkoKetteiYMD) {
-        this.txtHenkoKetteiYMD=txtHenkoKetteiYMD;
-    }
-
     @JsonProperty("txtHenkogoKigen")
     public TextBoxDate getTxtHenkogoKigen() {
         return txtHenkogoKigen;
@@ -64,6 +54,16 @@ public class KashitsukekinHenkoKetteiDiv extends Panel {
     @JsonProperty("txtHenkogoKigen")
     public void setTxtHenkogoKigen(TextBoxDate txtHenkogoKigen) {
         this.txtHenkogoKigen=txtHenkogoKigen;
+    }
+
+    @JsonProperty("txtHenkoKetteiYMD")
+    public TextBoxDate getTxtHenkoKetteiYMD() {
+        return txtHenkoKetteiYMD;
+    }
+
+    @JsonProperty("txtHenkoKetteiYMD")
+    public void setTxtHenkoKetteiYMD(TextBoxDate txtHenkoKetteiYMD) {
+        this.txtHenkoKetteiYMD=txtHenkoKetteiYMD;
     }
 
     @JsonProperty("txtHenkoFushoninRiyu")

@@ -35,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class KashitsukeShinseiInfo {
 
     private List<HashMap> getYaml() {
-        return YamlLoader.FOR_DBC.loadAsList(new RString("dbc1800000/KashitsukeShinseiInfo.yml"));
+        return YamlLoader.DBC.loadAsList(new RString("dbc1800000/KashitsukeShinseiInfo.yml"));
     }
 
     /**
