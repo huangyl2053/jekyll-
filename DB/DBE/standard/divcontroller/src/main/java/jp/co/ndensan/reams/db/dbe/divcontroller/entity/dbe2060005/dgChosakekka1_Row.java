@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060005;
 
 
 
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

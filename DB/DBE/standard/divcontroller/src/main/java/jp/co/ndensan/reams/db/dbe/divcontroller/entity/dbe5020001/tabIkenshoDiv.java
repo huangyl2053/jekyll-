@@ -21,8 +21,8 @@ public class tabIkenshoDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("imgIkensho")
-    private StaticImage imgIkensho;
+    @JsonProperty("imgShujiiIkensho")
+    private StaticImage imgShujiiIkensho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -30,14 +30,14 @@ public class tabIkenshoDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("imgIkensho")
-    public StaticImage getImgIkensho() {
-        return imgIkensho;
+    @JsonProperty("imgShujiiIkensho")
+    public StaticImage getImgShujiiIkensho() {
+        return imgShujiiIkensho;
     }
 
-    @JsonProperty("imgIkensho")
-    public void setImgIkensho(StaticImage imgIkensho) {
-        this.imgIkensho=imgIkensho;
+    @JsonProperty("imgShujiiIkensho")
+    public void setImgShujiiIkensho(StaticImage imgShujiiIkensho) {
+        this.imgShujiiIkensho=imgShujiiIkensho;
     }
 
 }

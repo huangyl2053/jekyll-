@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.dgServiceJokyo_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -21,8 +22,10 @@ public class GaikyoChosaServiceJokyoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblGaikyoChosaServiceJokyo")
-    private Label lblGaikyoChosaServiceJokyo;
+    @JsonProperty("radGenzaiService")
+    private RadioButton radGenzaiService;
+    @JsonProperty("dgServiceJokyo")
+    private DataGrid<dgServiceJokyo_Row> dgServiceJokyo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -30,14 +33,24 @@ public class GaikyoChosaServiceJokyoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblGaikyoChosaServiceJokyo")
-    public Label getLblGaikyoChosaServiceJokyo() {
-        return lblGaikyoChosaServiceJokyo;
+    @JsonProperty("radGenzaiService")
+    public RadioButton getRadGenzaiService() {
+        return radGenzaiService;
     }
 
-    @JsonProperty("lblGaikyoChosaServiceJokyo")
-    public void setLblGaikyoChosaServiceJokyo(Label lblGaikyoChosaServiceJokyo) {
-        this.lblGaikyoChosaServiceJokyo=lblGaikyoChosaServiceJokyo;
+    @JsonProperty("radGenzaiService")
+    public void setRadGenzaiService(RadioButton radGenzaiService) {
+        this.radGenzaiService=radGenzaiService;
+    }
+
+    @JsonProperty("dgServiceJokyo")
+    public DataGrid<dgServiceJokyo_Row> getDgServiceJokyo() {
+        return dgServiceJokyo;
+    }
+
+    @JsonProperty("dgServiceJokyo")
+    public void setDgServiceJokyo(DataGrid<dgServiceJokyo_Row> dgServiceJokyo) {
+        this.dgServiceJokyo=dgServiceJokyo;
     }
 
 }
