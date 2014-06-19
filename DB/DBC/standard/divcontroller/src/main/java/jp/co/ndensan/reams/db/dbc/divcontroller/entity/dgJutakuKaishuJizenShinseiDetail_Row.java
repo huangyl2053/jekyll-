@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Jun 19 10:38:58 JST 2014 
+ * Thu Jun 19 18:18:37 JST 2014 
  */
 
 
@@ -22,8 +22,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class dgJutakuKaishuJizenShinseiDetail_Row extends DataRow {
 
-    private TextBoxDate txtChakkoDueDate;
-    private TextBoxDate txtKanseiDueDate;
+    private TextBoxDate txtChakkoDate;
+    private TextBoxDate txtKanseiDate;
     private TextBoxNum txtMitsumoriAmount;
     private RString txtKaishuJigyosha;
     private RString txtTaishoJutakuAddress;
@@ -31,36 +31,36 @@ public class dgJutakuKaishuJizenShinseiDetail_Row extends DataRow {
 
     public dgJutakuKaishuJizenShinseiDetail_Row() {
         super();
-        this.txtChakkoDueDate = new TextBoxDate();
-        this.txtKanseiDueDate = new TextBoxDate();
+        this.txtChakkoDate = new TextBoxDate();
+        this.txtKanseiDate = new TextBoxDate();
         this.txtMitsumoriAmount = new TextBoxNum();
         this.txtKaishuJigyosha = RString.EMPTY;
         this.txtTaishoJutakuAddress = RString.EMPTY;
         this.txtKaishuContents = RString.EMPTY;
     }
 
-    public dgJutakuKaishuJizenShinseiDetail_Row(TextBoxDate txtChakkoDueDate, TextBoxDate txtKanseiDueDate, TextBoxNum txtMitsumoriAmount, RString txtKaishuJigyosha, RString txtTaishoJutakuAddress, RString txtKaishuContents) {
+    public dgJutakuKaishuJizenShinseiDetail_Row(TextBoxDate txtChakkoDate, TextBoxDate txtKanseiDate, TextBoxNum txtMitsumoriAmount, RString txtKaishuJigyosha, RString txtTaishoJutakuAddress, RString txtKaishuContents) {
         super();
-        this.setOriginalData("txtChakkoDueDate", txtChakkoDueDate);
-        this.setOriginalData("txtKanseiDueDate", txtKanseiDueDate);
+        this.setOriginalData("txtChakkoDate", txtChakkoDate);
+        this.setOriginalData("txtKanseiDate", txtKanseiDate);
         this.setOriginalData("txtMitsumoriAmount", txtMitsumoriAmount);
         this.setOriginalData("txtKaishuJigyosha", txtKaishuJigyosha);
         this.setOriginalData("txtTaishoJutakuAddress", txtTaishoJutakuAddress);
         this.setOriginalData("txtKaishuContents", txtKaishuContents);
-        this.txtChakkoDueDate = txtChakkoDueDate;
-        this.txtKanseiDueDate = txtKanseiDueDate;
+        this.txtChakkoDate = txtChakkoDate;
+        this.txtKanseiDate = txtKanseiDate;
         this.txtMitsumoriAmount = txtMitsumoriAmount;
         this.txtKaishuJigyosha = txtKaishuJigyosha;
         this.txtTaishoJutakuAddress = txtTaishoJutakuAddress;
         this.txtKaishuContents = txtKaishuContents;
     }
 
-    public TextBoxDate getTxtChakkoDueDate() {
-        return txtChakkoDueDate;
+    public TextBoxDate getTxtChakkoDate() {
+        return txtChakkoDate;
     }
 
-    public TextBoxDate getTxtKanseiDueDate() {
-        return txtKanseiDueDate;
+    public TextBoxDate getTxtKanseiDate() {
+        return txtKanseiDate;
     }
 
     public TextBoxNum getTxtMitsumoriAmount() {
@@ -79,14 +79,14 @@ public class dgJutakuKaishuJizenShinseiDetail_Row extends DataRow {
         return txtKaishuContents;
     }
 
-    public void setTxtChakkoDueDate(TextBoxDate txtChakkoDueDate) {
-        this.setOriginalData("txtChakkoDueDate", txtChakkoDueDate);
-        this.txtChakkoDueDate = txtChakkoDueDate;
+    public void setTxtChakkoDate(TextBoxDate txtChakkoDate) {
+        this.setOriginalData("txtChakkoDate", txtChakkoDate);
+        this.txtChakkoDate = txtChakkoDate;
     }
 
-    public void setTxtKanseiDueDate(TextBoxDate txtKanseiDueDate) {
-        this.setOriginalData("txtKanseiDueDate", txtKanseiDueDate);
-        this.txtKanseiDueDate = txtKanseiDueDate;
+    public void setTxtKanseiDate(TextBoxDate txtKanseiDate) {
+        this.setOriginalData("txtKanseiDate", txtKanseiDate);
+        this.txtKanseiDate = txtKanseiDate;
     }
 
     public void setTxtMitsumoriAmount(TextBoxNum txtMitsumoriAmount) {

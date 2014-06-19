@@ -4,8 +4,13 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiDetailDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiReasonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KozaPayment.KozaPaymentDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShinseishaInfo.ShinseishaInfoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * JutakuKaishuShinseiContents のクラスファイル
@@ -26,6 +31,8 @@ public class JutakuKaishuShinseiContentsDiv extends Panel {
     private TextBoxCode txtSeiriNo;
     @JsonProperty("ddlHokensha")
     private DropDownList ddlHokensha;
+    @JsonProperty("btnShowJizenShinsei")
+    private ButtonDialog btnShowJizenShinsei;
     @JsonProperty("txtJutakuOwner")
     private TextBox txtJutakuOwner;
     @JsonProperty("txtRelationWithHihokensha")
@@ -37,7 +44,7 @@ public class JutakuKaishuShinseiContentsDiv extends Panel {
     @JsonProperty("JutakuKaishuShinseiReason")
     private JutakuKaishuShinseiReasonDiv JutakuKaishuShinseiReason;
     @JsonProperty("JutakuKaishuShinseiKozaInfo")
-    private JutakuKaishuShinseiKozaInfoDiv JutakuKaishuShinseiKozaInfo;
+    private KozaPaymentDiv JutakuKaishuShinseiKozaInfo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -73,6 +80,16 @@ public class JutakuKaishuShinseiContentsDiv extends Panel {
     @JsonProperty("ddlHokensha")
     public void setDdlHokensha(DropDownList ddlHokensha) {
         this.ddlHokensha = ddlHokensha;
+    }
+
+    @JsonProperty("btnShowJizenShinsei")
+    public ButtonDialog getBtnShowJizenShinsei() {
+        return btnShowJizenShinsei;
+    }
+
+    @JsonProperty("btnShowJizenShinsei")
+    public void setBtnShowJizenShinsei(ButtonDialog btnShowJizenShinsei) {
+        this.btnShowJizenShinsei = btnShowJizenShinsei;
     }
 
     @JsonProperty("txtJutakuOwner")
@@ -126,12 +143,12 @@ public class JutakuKaishuShinseiContentsDiv extends Panel {
     }
 
     @JsonProperty("JutakuKaishuShinseiKozaInfo")
-    public JutakuKaishuShinseiKozaInfoDiv getJutakuKaishuShinseiKozaInfo() {
+    public KozaPaymentDiv getJutakuKaishuShinseiKozaInfo() {
         return JutakuKaishuShinseiKozaInfo;
     }
 
     @JsonProperty("JutakuKaishuShinseiKozaInfo")
-    public void setJutakuKaishuShinseiKozaInfo(JutakuKaishuShinseiKozaInfoDiv JutakuKaishuShinseiKozaInfo) {
+    public void setJutakuKaishuShinseiKozaInfo(KozaPaymentDiv JutakuKaishuShinseiKozaInfo) {
         this.JutakuKaishuShinseiKozaInfo = JutakuKaishuShinseiKozaInfo;
     }
 

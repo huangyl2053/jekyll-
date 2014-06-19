@@ -19,9 +19,21 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3317 塚田 萌
  */
-public class KaigoShikakuKihon {
+public final class KaigoShikakuKihon {
 
+    private KaigoShikakuKihon() {
+    }
+
+    /**
+     * 宛名情報、介護資格基本情報のYamlデータをセットします。
+     *
+     * @param atenaDiv KaigoAtenaInfoDiv
+     * @param kaigoDiv KaigoShikakuKihonDiv
+     * @param 識別コード ShikibetsuCode
+     * @param rowId YamlデータのrowId
+     */
     public static void setData(KaigoAtenaInfoDiv atenaDiv, KaigoShikakuKihonDiv kaigoDiv, ShikibetsuCode 識別コード, int rowId) {
+
         AtenaShokaiSimple.setData(atenaDiv.getAtenaInfo(), 識別コード);
 
         List<HashMap> targetSource = YamlLoader.DBZ.loadAsList(new RString("KaigoShikakuKihon.yml"));

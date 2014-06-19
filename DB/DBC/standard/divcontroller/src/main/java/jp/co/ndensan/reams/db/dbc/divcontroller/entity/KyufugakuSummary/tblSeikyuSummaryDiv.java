@@ -83,13 +83,13 @@ public class tblSeikyuSummaryDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtPayTotalMae() {
-        return this.cel22.getTxtPayTotalMae();
+    public TextBoxNum getTxtHiyoTotalMae() {
+        return this.cel22.getTxtHiyoTotalMae();
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtHokenSeikyuAmountMae() {
-        return this.cel23.getTxtHokenSeikyuAmountMae();
+    public TextBoxNum getTxtHokenTaishoHiyoMae() {
+        return this.cel23.getTxtHokenTaishoHiyoMae();
     }
 
     @JsonIgnore
@@ -98,13 +98,13 @@ public class tblSeikyuSummaryDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtPayTotalNow() {
-        return this.cel32.getTxtPayTotalNow();
+    public TextBoxNum getTxtHiyoTotalNow() {
+        return this.cel32.getTxtHiyoTotalNow();
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtHokenSeikyuAmountNow() {
-        return this.cel33.getTxtHokenSeikyuAmountNow();
+    public TextBoxNum getTxtHokenTaishoHiyoNow() {
+        return this.cel33.getTxtHokenTaishoHiyoNow();
     }
 
     @JsonIgnore
@@ -118,23 +118,23 @@ public class tblSeikyuSummaryDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtRiyoshaFutanAmountMae() {
-        return this.cel24.getTxtRiyoshaFutanAmountMae();
+    public TextBoxNum getTxtHokenKyufuAmountMae() {
+        return this.cel24.getTxtHokenKyufuAmountMae();
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtLimitOverAmountMae() {
-        return this.cel25.getTxtLimitOverAmountMae();
+    public TextBoxNum getTxtRiyoshaFutanAmountMae() {
+        return this.cel25.getTxtRiyoshaFutanAmountMae();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtHokenKyufuAmountNow() {
+        return this.cel34.getTxtHokenKyufuAmountNow();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtRiyoshaFutanAmountNow() {
-        return this.cel34.getTxtRiyoshaFutanAmountNow();
-    }
-
-    @JsonIgnore
-    public TextBoxNum getTxtLimitOverAmountNow() {
-        return this.cel35.getTxtLimitOverAmountNow();
+        return this.cel35.getTxtRiyoshaFutanAmountNow();
     }
 
     @JsonIgnore
@@ -410,17 +410,17 @@ class cel21AttblSeikyuSummary extends TableCell {
  * @author 自動生成
  */
 class cel22AttblSeikyuSummary extends TableCell {
-    @JsonProperty("txtPayTotalMae")
-    private TextBoxNum txtPayTotalMae;
+    @JsonProperty("txtHiyoTotalMae")
+    private TextBoxNum txtHiyoTotalMae;
 
-    @JsonProperty("txtPayTotalMae")
-    public TextBoxNum getTxtPayTotalMae() {
-        return txtPayTotalMae;
+    @JsonProperty("txtHiyoTotalMae")
+    public TextBoxNum getTxtHiyoTotalMae() {
+        return txtHiyoTotalMae;
     }
 
-    @JsonProperty("txtPayTotalMae")
-    public void setTxtPayTotalMae(TextBoxNum txtPayTotalMae) {
-        this.txtPayTotalMae=txtPayTotalMae;
+    @JsonProperty("txtHiyoTotalMae")
+    public void setTxtHiyoTotalMae(TextBoxNum txtHiyoTotalMae) {
+        this.txtHiyoTotalMae=txtHiyoTotalMae;
     }
 
 }
@@ -430,17 +430,17 @@ class cel22AttblSeikyuSummary extends TableCell {
  * @author 自動生成
  */
 class cel23AttblSeikyuSummary extends TableCell {
-    @JsonProperty("txtHokenSeikyuAmountMae")
-    private TextBoxNum txtHokenSeikyuAmountMae;
+    @JsonProperty("txtHokenTaishoHiyoMae")
+    private TextBoxNum txtHokenTaishoHiyoMae;
 
-    @JsonProperty("txtHokenSeikyuAmountMae")
-    public TextBoxNum getTxtHokenSeikyuAmountMae() {
-        return txtHokenSeikyuAmountMae;
+    @JsonProperty("txtHokenTaishoHiyoMae")
+    public TextBoxNum getTxtHokenTaishoHiyoMae() {
+        return txtHokenTaishoHiyoMae;
     }
 
-    @JsonProperty("txtHokenSeikyuAmountMae")
-    public void setTxtHokenSeikyuAmountMae(TextBoxNum txtHokenSeikyuAmountMae) {
-        this.txtHokenSeikyuAmountMae=txtHokenSeikyuAmountMae;
+    @JsonProperty("txtHokenTaishoHiyoMae")
+    public void setTxtHokenTaishoHiyoMae(TextBoxNum txtHokenTaishoHiyoMae) {
+        this.txtHokenTaishoHiyoMae=txtHokenTaishoHiyoMae;
     }
 
 }
@@ -470,17 +470,17 @@ class cel31AttblSeikyuSummary extends TableCell {
  * @author 自動生成
  */
 class cel32AttblSeikyuSummary extends TableCell {
-    @JsonProperty("txtPayTotalNow")
-    private TextBoxNum txtPayTotalNow;
+    @JsonProperty("txtHiyoTotalNow")
+    private TextBoxNum txtHiyoTotalNow;
 
-    @JsonProperty("txtPayTotalNow")
-    public TextBoxNum getTxtPayTotalNow() {
-        return txtPayTotalNow;
+    @JsonProperty("txtHiyoTotalNow")
+    public TextBoxNum getTxtHiyoTotalNow() {
+        return txtHiyoTotalNow;
     }
 
-    @JsonProperty("txtPayTotalNow")
-    public void setTxtPayTotalNow(TextBoxNum txtPayTotalNow) {
-        this.txtPayTotalNow=txtPayTotalNow;
+    @JsonProperty("txtHiyoTotalNow")
+    public void setTxtHiyoTotalNow(TextBoxNum txtHiyoTotalNow) {
+        this.txtHiyoTotalNow=txtHiyoTotalNow;
     }
 
 }
@@ -490,17 +490,17 @@ class cel32AttblSeikyuSummary extends TableCell {
  * @author 自動生成
  */
 class cel33AttblSeikyuSummary extends TableCell {
-    @JsonProperty("txtHokenSeikyuAmountNow")
-    private TextBoxNum txtHokenSeikyuAmountNow;
+    @JsonProperty("txtHokenTaishoHiyoNow")
+    private TextBoxNum txtHokenTaishoHiyoNow;
 
-    @JsonProperty("txtHokenSeikyuAmountNow")
-    public TextBoxNum getTxtHokenSeikyuAmountNow() {
-        return txtHokenSeikyuAmountNow;
+    @JsonProperty("txtHokenTaishoHiyoNow")
+    public TextBoxNum getTxtHokenTaishoHiyoNow() {
+        return txtHokenTaishoHiyoNow;
     }
 
-    @JsonProperty("txtHokenSeikyuAmountNow")
-    public void setTxtHokenSeikyuAmountNow(TextBoxNum txtHokenSeikyuAmountNow) {
-        this.txtHokenSeikyuAmountNow=txtHokenSeikyuAmountNow;
+    @JsonProperty("txtHokenTaishoHiyoNow")
+    public void setTxtHokenTaishoHiyoNow(TextBoxNum txtHokenTaishoHiyoNow) {
+        this.txtHokenTaishoHiyoNow=txtHokenTaishoHiyoNow;
     }
 
 }
@@ -550,6 +550,26 @@ class cel15AttblSeikyuSummary extends TableCell {
  * @author 自動生成
  */
 class cel24AttblSeikyuSummary extends TableCell {
+    @JsonProperty("txtHokenKyufuAmountMae")
+    private TextBoxNum txtHokenKyufuAmountMae;
+
+    @JsonProperty("txtHokenKyufuAmountMae")
+    public TextBoxNum getTxtHokenKyufuAmountMae() {
+        return txtHokenKyufuAmountMae;
+    }
+
+    @JsonProperty("txtHokenKyufuAmountMae")
+    public void setTxtHokenKyufuAmountMae(TextBoxNum txtHokenKyufuAmountMae) {
+        this.txtHokenKyufuAmountMae=txtHokenKyufuAmountMae;
+    }
+
+}
+/**
+ * cel25 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class cel25AttblSeikyuSummary extends TableCell {
     @JsonProperty("txtRiyoshaFutanAmountMae")
     private TextBoxNum txtRiyoshaFutanAmountMae;
 
@@ -565,31 +585,31 @@ class cel24AttblSeikyuSummary extends TableCell {
 
 }
 /**
- * cel25 のクラスファイル 
- * 
- * @author 自動生成
- */
-class cel25AttblSeikyuSummary extends TableCell {
-    @JsonProperty("txtLimitOverAmountMae")
-    private TextBoxNum txtLimitOverAmountMae;
-
-    @JsonProperty("txtLimitOverAmountMae")
-    public TextBoxNum getTxtLimitOverAmountMae() {
-        return txtLimitOverAmountMae;
-    }
-
-    @JsonProperty("txtLimitOverAmountMae")
-    public void setTxtLimitOverAmountMae(TextBoxNum txtLimitOverAmountMae) {
-        this.txtLimitOverAmountMae=txtLimitOverAmountMae;
-    }
-
-}
-/**
  * cel34 のクラスファイル 
  * 
  * @author 自動生成
  */
 class cel34AttblSeikyuSummary extends TableCell {
+    @JsonProperty("txtHokenKyufuAmountNow")
+    private TextBoxNum txtHokenKyufuAmountNow;
+
+    @JsonProperty("txtHokenKyufuAmountNow")
+    public TextBoxNum getTxtHokenKyufuAmountNow() {
+        return txtHokenKyufuAmountNow;
+    }
+
+    @JsonProperty("txtHokenKyufuAmountNow")
+    public void setTxtHokenKyufuAmountNow(TextBoxNum txtHokenKyufuAmountNow) {
+        this.txtHokenKyufuAmountNow=txtHokenKyufuAmountNow;
+    }
+
+}
+/**
+ * cel35 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class cel35AttblSeikyuSummary extends TableCell {
     @JsonProperty("txtRiyoshaFutanAmountNow")
     private TextBoxNum txtRiyoshaFutanAmountNow;
 
@@ -601,26 +621,6 @@ class cel34AttblSeikyuSummary extends TableCell {
     @JsonProperty("txtRiyoshaFutanAmountNow")
     public void setTxtRiyoshaFutanAmountNow(TextBoxNum txtRiyoshaFutanAmountNow) {
         this.txtRiyoshaFutanAmountNow=txtRiyoshaFutanAmountNow;
-    }
-
-}
-/**
- * cel35 のクラスファイル 
- * 
- * @author 自動生成
- */
-class cel35AttblSeikyuSummary extends TableCell {
-    @JsonProperty("txtLimitOverAmountNow")
-    private TextBoxNum txtLimitOverAmountNow;
-
-    @JsonProperty("txtLimitOverAmountNow")
-    public TextBoxNum getTxtLimitOverAmountNow() {
-        return txtLimitOverAmountNow;
-    }
-
-    @JsonProperty("txtLimitOverAmountNow")
-    public void setTxtLimitOverAmountNow(TextBoxNum txtLimitOverAmountNow) {
-        this.txtLimitOverAmountNow=txtLimitOverAmountNow;
     }
 
 }

@@ -3,13 +3,12 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue May 27 10:59:56 JST 2014 
+ * Thu Jun 19 11:01:58 JST 2014 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 
@@ -21,8 +20,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class dgJutakuKaishuShinseiList_Row extends DataRow {
 
-    private Button btnShowDetail;
-    private RString txtState;
     private RString txtShinseiKubun;
     private RString txtTeikyoYM;
     private RString txtShinseiDate;
@@ -35,12 +32,19 @@ public class dgJutakuKaishuShinseiList_Row extends DataRow {
 
     public dgJutakuKaishuShinseiList_Row() {
         super();
+        this.txtShinseiKubun = RString.EMPTY;
+        this.txtTeikyoYM = RString.EMPTY;
+        this.txtShinseiDate = RString.EMPTY;
+        this.txtShinsaResult = RString.EMPTY;
+        this.txtShinsaDate = RString.EMPTY;
+        this.txtShikyuKubun = RString.EMPTY;
+        this.txtKetteiDate = RString.EMPTY;
+        this.txtSeiriNo = RString.EMPTY;
+        this.txtJizenShinsei = RString.EMPTY;
     }
 
-    public dgJutakuKaishuShinseiList_Row(Button btnShowDetail, RString txtState, RString txtShinseiKubun, RString txtTeikyoYM, RString txtShinseiDate, RString txtShinsaResult, RString txtShinsaDate, RString txtShikyuKubun, RString txtKetteiDate, RString txtSeiriNo, RString txtJizenShinsei) {
+    public dgJutakuKaishuShinseiList_Row(RString txtShinseiKubun, RString txtTeikyoYM, RString txtShinseiDate, RString txtShinsaResult, RString txtShinsaDate, RString txtShikyuKubun, RString txtKetteiDate, RString txtSeiriNo, RString txtJizenShinsei) {
         super();
-        this.setOriginalData("btnShowDetail", btnShowDetail);
-        this.setOriginalData("txtState", txtState);
         this.setOriginalData("txtShinseiKubun", txtShinseiKubun);
         this.setOriginalData("txtTeikyoYM", txtTeikyoYM);
         this.setOriginalData("txtShinseiDate", txtShinseiDate);
@@ -50,8 +54,6 @@ public class dgJutakuKaishuShinseiList_Row extends DataRow {
         this.setOriginalData("txtKetteiDate", txtKetteiDate);
         this.setOriginalData("txtSeiriNo", txtSeiriNo);
         this.setOriginalData("txtJizenShinsei", txtJizenShinsei);
-        this.btnShowDetail = btnShowDetail;
-        this.txtState = txtState;
         this.txtShinseiKubun = txtShinseiKubun;
         this.txtTeikyoYM = txtTeikyoYM;
         this.txtShinseiDate = txtShinseiDate;
@@ -61,14 +63,6 @@ public class dgJutakuKaishuShinseiList_Row extends DataRow {
         this.txtKetteiDate = txtKetteiDate;
         this.txtSeiriNo = txtSeiriNo;
         this.txtJizenShinsei = txtJizenShinsei;
-    }
-
-    public Button getBtnShowDetail() {
-        return btnShowDetail;
-    }
-
-    public RString getTxtState() {
-        return txtState;
     }
 
     public RString getTxtShinseiKubun() {
@@ -105,16 +99,6 @@ public class dgJutakuKaishuShinseiList_Row extends DataRow {
 
     public RString getTxtJizenShinsei() {
         return txtJizenShinsei;
-    }
-
-    public void setBtnShowDetail(Button btnShowDetail) {
-        this.setOriginalData("btnShowDetail", btnShowDetail);
-        this.btnShowDetail = btnShowDetail;
-    }
-
-    public void setTxtState(RString txtState) {
-        this.setOriginalData("txtState", txtState);
-        this.txtState = txtState;
     }
 
     public void setTxtShinseiKubun(RString txtShinseiKubun) {

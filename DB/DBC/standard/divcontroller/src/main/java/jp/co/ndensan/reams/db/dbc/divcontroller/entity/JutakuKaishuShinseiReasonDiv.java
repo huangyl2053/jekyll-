@@ -23,16 +23,16 @@ public class JutakuKaishuShinseiReasonDiv extends Panel {
      */
     @JsonProperty("txtCreateDate")
     private TextBoxDate txtCreateDate;
+    @JsonProperty("txtCreatorKanaName")
+    private TextBox txtCreatorKanaName;
+    @JsonProperty("txtCreatorName")
+    private TextBox txtCreatorName;
     @JsonProperty("txtCreationJigyoshaNo")
     private TextBoxCode txtCreationJigyoshaNo;
     @JsonProperty("btnSearchCreationJigyoshaName")
     private Button btnSearchCreationJigyoshaName;
     @JsonProperty("txtCreationJigyoshaName")
     private TextBox txtCreationJigyoshaName;
-    @JsonProperty("txtCreatorKanaName")
-    private TextBox txtCreatorKanaName;
-    @JsonProperty("txtCreatorName")
-    private TextBox txtCreatorName;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -48,6 +48,26 @@ public class JutakuKaishuShinseiReasonDiv extends Panel {
     @JsonProperty("txtCreateDate")
     public void setTxtCreateDate(TextBoxDate txtCreateDate) {
         this.txtCreateDate=txtCreateDate;
+    }
+
+    @JsonProperty("txtCreatorKanaName")
+    public TextBox getTxtCreatorKanaName() {
+        return txtCreatorKanaName;
+    }
+
+    @JsonProperty("txtCreatorKanaName")
+    public void setTxtCreatorKanaName(TextBox txtCreatorKanaName) {
+        this.txtCreatorKanaName=txtCreatorKanaName;
+    }
+
+    @JsonProperty("txtCreatorName")
+    public TextBox getTxtCreatorName() {
+        return txtCreatorName;
+    }
+
+    @JsonProperty("txtCreatorName")
+    public void setTxtCreatorName(TextBox txtCreatorName) {
+        this.txtCreatorName=txtCreatorName;
     }
 
     @JsonProperty("txtCreationJigyoshaNo")
@@ -78,26 +98,6 @@ public class JutakuKaishuShinseiReasonDiv extends Panel {
     @JsonProperty("txtCreationJigyoshaName")
     public void setTxtCreationJigyoshaName(TextBox txtCreationJigyoshaName) {
         this.txtCreationJigyoshaName=txtCreationJigyoshaName;
-    }
-
-    @JsonProperty("txtCreatorKanaName")
-    public TextBox getTxtCreatorKanaName() {
-        return txtCreatorKanaName;
-    }
-
-    @JsonProperty("txtCreatorKanaName")
-    public void setTxtCreatorKanaName(TextBox txtCreatorKanaName) {
-        this.txtCreatorKanaName=txtCreatorKanaName;
-    }
-
-    @JsonProperty("txtCreatorName")
-    public TextBox getTxtCreatorName() {
-        return txtCreatorName;
-    }
-
-    @JsonProperty("txtCreatorName")
-    public void setTxtCreatorName(TextBox txtCreatorName) {
-        this.txtCreatorName=txtCreatorName;
     }
 
 }

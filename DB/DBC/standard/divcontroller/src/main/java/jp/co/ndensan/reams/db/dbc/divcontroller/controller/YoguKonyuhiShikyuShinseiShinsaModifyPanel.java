@@ -129,10 +129,10 @@ public class YoguKonyuhiShikyuShinseiShinsaModifyPanel {
      */
     private void setSummaryMae(YoguKonyuhiShikyuShinseiShinsaModifyPanelDiv panel) {
 
-        panel.getYoguKonyuhiShikyuShinseiShinsaSeikyuDetail().getSeikyuSummary().getTblSeikyuSummary().getTxtPayTotalMae().setValue(Decimal.ZERO);
-        panel.getYoguKonyuhiShikyuShinseiShinsaSeikyuDetail().getSeikyuSummary().getTblSeikyuSummary().getTxtHokenSeikyuAmountMae().setValue(Decimal.ZERO);
+        panel.getYoguKonyuhiShikyuShinseiShinsaSeikyuDetail().getSeikyuSummary().getTblSeikyuSummary().getTxtHiyoTotalMae().setValue(Decimal.ZERO);
+        panel.getYoguKonyuhiShikyuShinseiShinsaSeikyuDetail().getSeikyuSummary().getTblSeikyuSummary().getTxtHokenTaishoHiyoMae().setValue(Decimal.ZERO);
+        panel.getYoguKonyuhiShikyuShinseiShinsaSeikyuDetail().getSeikyuSummary().getTblSeikyuSummary().getTxtHokenKyufuAmountMae().setValue(Decimal.ZERO);
         panel.getYoguKonyuhiShikyuShinseiShinsaSeikyuDetail().getSeikyuSummary().getTblSeikyuSummary().getTxtRiyoshaFutanAmountMae().setValue(Decimal.ZERO);
-        panel.getYoguKonyuhiShikyuShinseiShinsaSeikyuDetail().getSeikyuSummary().getTblSeikyuSummary().getTxtLimitOverAmountMae().setValue(Decimal.ZERO);
 
     }
 
@@ -140,17 +140,16 @@ public class YoguKonyuhiShikyuShinseiShinsaModifyPanel {
      今回の支払状況の値を設定します。
      */
     private void setSummaryNowData(YoguKonyuhiShikyuShinseiShinsaModifyPanelDiv panel) {
-        panel.getYoguKonyuhiShikyuShinseiShinsaSeikyuDetail().getSeikyuSummary().getTblSeikyuSummary().getTxtPayTotalNow().setValue(new Decimal(50000));
-        panel.getYoguKonyuhiShikyuShinseiShinsaSeikyuDetail().getSeikyuSummary().getTblSeikyuSummary().getTxtHokenSeikyuAmountNow().setValue(new Decimal(45000));
-        panel.getYoguKonyuhiShikyuShinseiShinsaSeikyuDetail().getSeikyuSummary().getTblSeikyuSummary().getTxtRiyoshaFutanAmountNow().setValue(new Decimal(5000));
-        //計算　合計-10万　> 0  合計 
-        //計算　合計-10万　<= 0 0 
-        panel.getYoguKonyuhiShikyuShinseiShinsaSeikyuDetail().getSeikyuSummary().getTblSeikyuSummary().getTxtLimitOverAmountNow().setValue(Decimal.ZERO);
+        panel.getYoguKonyuhiShikyuShinseiShinsaSeikyuDetail().getSeikyuSummary().getTblSeikyuSummary().getTxtHiyoTotalNow().setValue(new Decimal(50000));
+        panel.getYoguKonyuhiShikyuShinseiShinsaSeikyuDetail().getSeikyuSummary().getTblSeikyuSummary().getTxtHokenTaishoHiyoNow().setValue(new Decimal(45000));
+        panel.getYoguKonyuhiShikyuShinseiShinsaSeikyuDetail().getSeikyuSummary().getTblSeikyuSummary().getTxtHokenKyufuAmountNow().setValue(new Decimal(5000));
+        //計算　合計-10万　> 0  合計
+        //計算　合計-10万　<= 0 0
+        panel.getYoguKonyuhiShikyuShinseiShinsaSeikyuDetail().getSeikyuSummary().getTblSeikyuSummary().getTxtRiyoshaFutanAmountNow().setValue(Decimal.ZERO);
 
     }
 
-    
-     /*
+    /*
      * 福祉用具購入費支給審査 請求明細の修正ボタンを押下後、 詳細内容が表示する。
      */
     public ResponseData<YoguKonyuhiShikyuShinseiShinsaModifyPanelDiv> onClick_dgMeisai_modify(YoguKonyuhiShikyuShinseiShinsaModifyPanelDiv panel) {
@@ -168,6 +167,5 @@ public class YoguKonyuhiShikyuShinseiShinsaModifyPanel {
         response.data = panel;
         return response;
     }
-    
-    
+
 }

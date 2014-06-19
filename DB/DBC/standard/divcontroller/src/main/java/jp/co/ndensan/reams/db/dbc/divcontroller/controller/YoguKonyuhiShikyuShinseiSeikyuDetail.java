@@ -29,7 +29,6 @@ public class YoguKonyuhiShikyuShinseiSeikyuDetail {
     public ResponseData<YoguKonyuhiShikyuShinseiSeikyuDetailDiv> onClick_btnAddSeikyuDetail(YoguKonyuhiShikyuShinseiSeikyuDetailDiv panel) {
         ResponseData<YoguKonyuhiShikyuShinseiSeikyuDetailDiv> response = new ResponseData<>();
 
-        
         setSeikyuDetailData(panel);
         setSummaryMae(panel);
         setSummaryNowData(panel);
@@ -44,10 +43,10 @@ public class YoguKonyuhiShikyuShinseiSeikyuDetail {
      */
     private void setSummaryMae(YoguKonyuhiShikyuShinseiSeikyuDetailDiv panel) {
 
-        panel.getSeikyuSummary().getTblSeikyuSummary().getTxtPayTotalMae().setValue(Decimal.ZERO);
-        panel.getSeikyuSummary().getTblSeikyuSummary().getTxtHokenSeikyuAmountMae().setValue(Decimal.ZERO);
+        panel.getSeikyuSummary().getTblSeikyuSummary().getTxtHiyoTotalMae().setValue(Decimal.ZERO);
+        panel.getSeikyuSummary().getTblSeikyuSummary().getTxtHokenTaishoHiyoMae().setValue(Decimal.ZERO);
+        panel.getSeikyuSummary().getTblSeikyuSummary().getTxtHokenKyufuAmountMae().setValue(Decimal.ZERO);
         panel.getSeikyuSummary().getTblSeikyuSummary().getTxtRiyoshaFutanAmountMae().setValue(Decimal.ZERO);
-        panel.getSeikyuSummary().getTblSeikyuSummary().getTxtLimitOverAmountMae().setValue(Decimal.ZERO);
 
     }
 
@@ -56,12 +55,12 @@ public class YoguKonyuhiShikyuShinseiSeikyuDetail {
      */
     private void setSummaryNowData(YoguKonyuhiShikyuShinseiSeikyuDetailDiv panel) {
 
-        panel.getSeikyuSummary().getTblSeikyuSummary().getTxtPayTotalNow().setValue(new Decimal(50000));
-        panel.getSeikyuSummary().getTblSeikyuSummary().getTxtHokenSeikyuAmountNow().setValue(new Decimal(45000));
-        panel.getSeikyuSummary().getTblSeikyuSummary().getTxtRiyoshaFutanAmountNow().setValue(new Decimal(5000));
-        //計算　合計-10万　> 0  合計 
-        //計算　合計-10万　<= 0 0 
-        panel.getSeikyuSummary().getTblSeikyuSummary().getTxtLimitOverAmountNow().setValue(Decimal.ZERO);
+        panel.getSeikyuSummary().getTblSeikyuSummary().getTxtHiyoTotalNow().setValue(new Decimal(50000));
+        panel.getSeikyuSummary().getTblSeikyuSummary().getTxtHokenTaishoHiyoNow().setValue(new Decimal(45000));
+        panel.getSeikyuSummary().getTblSeikyuSummary().getTxtHokenKyufuAmountNow().setValue(new Decimal(5000));
+        //計算　合計-10万　> 0  合計
+        //計算　合計-10万　<= 0 0
+        panel.getSeikyuSummary().getTblSeikyuSummary().getTxtRiyoshaFutanAmountNow().setValue(Decimal.ZERO);
 
     }
 
@@ -112,7 +111,7 @@ public class YoguKonyuhiShikyuShinseiSeikyuDetail {
 
         dgSeikyuDetail_Row rowSeikyuDetaiData = new dgSeikyuDetail_Row(
                 new Button(), new Button(), new TextBox(), new TextBoxDate(), new TextBox(), new TextBox(), new TextBoxNum(), new TextBox());
-        
+
         rowSeikyuDetaiData.getTxtRowState().setValue(new RString(状態));
         rowSeikyuDetaiData.getTxtBuyYMD().setValue(new RDate(購入日));
         rowSeikyuDetaiData.getTxtShumoku().setValue(new RString(種目));

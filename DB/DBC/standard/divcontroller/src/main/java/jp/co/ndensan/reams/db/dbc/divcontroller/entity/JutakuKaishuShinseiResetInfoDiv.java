@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufugakuSummary.KyufugakuSummaryDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -21,6 +22,8 @@ public class JutakuKaishuShinseiResetInfoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("JutakuKaishuShinseiKyufugakuSummary")
+    private KyufugakuSummaryDiv JutakuKaishuShinseiKyufugakuSummary;
     @JsonProperty("chkResetInfo")
     private CheckBoxList chkResetInfo;
 
@@ -30,6 +33,16 @@ public class JutakuKaishuShinseiResetInfoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    @JsonProperty("JutakuKaishuShinseiKyufugakuSummary")
+    public KyufugakuSummaryDiv getJutakuKaishuShinseiKyufugakuSummary() {
+        return JutakuKaishuShinseiKyufugakuSummary;
+    }
+
+    @JsonProperty("JutakuKaishuShinseiKyufugakuSummary")
+    public void setJutakuKaishuShinseiKyufugakuSummary(KyufugakuSummaryDiv JutakuKaishuShinseiKyufugakuSummary) {
+        this.JutakuKaishuShinseiKyufugakuSummary=JutakuKaishuShinseiKyufugakuSummary;
+    }
+
     @JsonProperty("chkResetInfo")
     public CheckBoxList getChkResetInfo() {
         return chkResetInfo;
