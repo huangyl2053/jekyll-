@@ -5,10 +5,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0030011;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0030011.KogakuKaigoJuminJohoDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoAtenaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * KogakuJumin のクラスファイル 
@@ -22,10 +21,10 @@ public class KogakuJuminDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("KogakuKaigoJuminJoho")
-    private KogakuKaigoJuminJohoDiv KogakuKaigoJuminJoho;
-    @JsonProperty("hl2")
-    private HorizontalLine hl2;
+    @JsonProperty("CommonKogakuNushiJuminJohoChildDiv1")
+    private KaigoAtenaInfoDiv CommonKogakuNushiJuminJohoChildDiv1;
+    @JsonProperty("CommonKogakuKaigoJuminJohoChildDiv2")
+    private KaigoShikakuKihonDiv CommonKogakuKaigoJuminJohoChildDiv2;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -33,24 +32,24 @@ public class KogakuJuminDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("KogakuKaigoJuminJoho")
-    public KogakuKaigoJuminJohoDiv getKogakuKaigoJuminJoho() {
-        return KogakuKaigoJuminJoho;
+    @JsonProperty("CommonKogakuNushiJuminJohoChildDiv1")
+    public KaigoAtenaInfoDiv getCommonKogakuNushiJuminJohoChildDiv1() {
+        return CommonKogakuNushiJuminJohoChildDiv1;
     }
 
-    @JsonProperty("KogakuKaigoJuminJoho")
-    public void setKogakuKaigoJuminJoho(KogakuKaigoJuminJohoDiv KogakuKaigoJuminJoho) {
-        this.KogakuKaigoJuminJoho=KogakuKaigoJuminJoho;
+    @JsonProperty("CommonKogakuNushiJuminJohoChildDiv1")
+    public void setCommonKogakuNushiJuminJohoChildDiv1(KaigoAtenaInfoDiv CommonKogakuNushiJuminJohoChildDiv1) {
+        this.CommonKogakuNushiJuminJohoChildDiv1=CommonKogakuNushiJuminJohoChildDiv1;
     }
 
-    @JsonProperty("hl2")
-    public HorizontalLine getHl2() {
-        return hl2;
+    @JsonProperty("CommonKogakuKaigoJuminJohoChildDiv2")
+    public KaigoShikakuKihonDiv getCommonKogakuKaigoJuminJohoChildDiv2() {
+        return CommonKogakuKaigoJuminJohoChildDiv2;
     }
 
-    @JsonProperty("hl2")
-    public void setHl2(HorizontalLine hl2) {
-        this.hl2=hl2;
+    @JsonProperty("CommonKogakuKaigoJuminJohoChildDiv2")
+    public void setCommonKogakuKaigoJuminJohoChildDiv2(KaigoShikakuKihonDiv CommonKogakuKaigoJuminJohoChildDiv2) {
+        this.CommonKogakuKaigoJuminJohoChildDiv2=CommonKogakuKaigoJuminJohoChildDiv2;
     }
 
 }

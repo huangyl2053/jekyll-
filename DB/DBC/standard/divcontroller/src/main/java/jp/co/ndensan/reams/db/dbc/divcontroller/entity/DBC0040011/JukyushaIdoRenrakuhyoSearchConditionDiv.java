@@ -25,18 +25,16 @@ public class JukyushaIdoRenrakuhyoSearchConditionDiv extends Panel {
     private TextBoxDateRange txtIdoDateRange;
     @JsonProperty("txtSearchHihoNo")
     private TextBoxCode txtSearchHihoNo;
-    @JsonProperty("btnSearchHihokensha")
-    private Button btnSearchHihokensha;
-    @JsonProperty("ddlShichosonCode")
-    private DropDownList ddlShichosonCode;
+    @JsonProperty("btnHihokenshaInputGuide")
+    private ButtonDialog btnHihokenshaInputGuide;
     @JsonProperty("chkIsSearchDeletedData")
     private CheckBoxList chkIsSearchDeletedData;
-    @JsonProperty("lblIsSearchDeletedData")
-    private Label lblIsSearchDeletedData;
     @JsonProperty("lblSearchCondition")
     private Label lblSearchCondition;
     @JsonProperty("btnClearSearchCondition")
     private Button btnClearSearchCondition;
+    @JsonProperty("ddlShichosonCode")
+    private DropDownList ddlShichosonCode;
     @JsonProperty("btnSearch")
     private Button btnSearch;
 
@@ -66,24 +64,14 @@ public class JukyushaIdoRenrakuhyoSearchConditionDiv extends Panel {
         this.txtSearchHihoNo=txtSearchHihoNo;
     }
 
-    @JsonProperty("btnSearchHihokensha")
-    public Button getBtnSearchHihokensha() {
-        return btnSearchHihokensha;
+    @JsonProperty("btnHihokenshaInputGuide")
+    public ButtonDialog getBtnHihokenshaInputGuide() {
+        return btnHihokenshaInputGuide;
     }
 
-    @JsonProperty("btnSearchHihokensha")
-    public void setBtnSearchHihokensha(Button btnSearchHihokensha) {
-        this.btnSearchHihokensha=btnSearchHihokensha;
-    }
-
-    @JsonProperty("ddlShichosonCode")
-    public DropDownList getDdlShichosonCode() {
-        return ddlShichosonCode;
-    }
-
-    @JsonProperty("ddlShichosonCode")
-    public void setDdlShichosonCode(DropDownList ddlShichosonCode) {
-        this.ddlShichosonCode=ddlShichosonCode;
+    @JsonProperty("btnHihokenshaInputGuide")
+    public void setBtnHihokenshaInputGuide(ButtonDialog btnHihokenshaInputGuide) {
+        this.btnHihokenshaInputGuide=btnHihokenshaInputGuide;
     }
 
     @JsonProperty("chkIsSearchDeletedData")
@@ -94,16 +82,6 @@ public class JukyushaIdoRenrakuhyoSearchConditionDiv extends Panel {
     @JsonProperty("chkIsSearchDeletedData")
     public void setChkIsSearchDeletedData(CheckBoxList chkIsSearchDeletedData) {
         this.chkIsSearchDeletedData=chkIsSearchDeletedData;
-    }
-
-    @JsonProperty("lblIsSearchDeletedData")
-    public Label getLblIsSearchDeletedData() {
-        return lblIsSearchDeletedData;
-    }
-
-    @JsonProperty("lblIsSearchDeletedData")
-    public void setLblIsSearchDeletedData(Label lblIsSearchDeletedData) {
-        this.lblIsSearchDeletedData=lblIsSearchDeletedData;
     }
 
     @JsonProperty("lblSearchCondition")
@@ -124,6 +102,16 @@ public class JukyushaIdoRenrakuhyoSearchConditionDiv extends Panel {
     @JsonProperty("btnClearSearchCondition")
     public void setBtnClearSearchCondition(Button btnClearSearchCondition) {
         this.btnClearSearchCondition=btnClearSearchCondition;
+    }
+
+    @JsonProperty("ddlShichosonCode")
+    public DropDownList getDdlShichosonCode() {
+        return ddlShichosonCode;
+    }
+
+    @JsonProperty("ddlShichosonCode")
+    public void setDdlShichosonCode(DropDownList ddlShichosonCode) {
+        this.ddlShichosonCode=ddlShichosonCode;
     }
 
     @JsonProperty("btnSearch")
