@@ -64,38 +64,54 @@ public class KogakuServicehiInfoPanel {
         List<HashMap> ymlData = ymlData("dbc0030011/KogakuServicehiInfo.yml");
 
         //高額介護サービス費情報  (被保険者番号～所得段階）
-        panel.getKogakuNushiJuminJoho().getKogakuJumin().getKogakuKaigoJuminJoho().getTxtHihokenshaNo().setValue(new RString(
-                ymlData.get(0).get("hihokenshaNo").toString()));
-        panel.getKogakuNushiJuminJoho().getKogakuJumin().getKogakuKaigoJuminJoho().getTxtTsuchishoNo().setValue(new RString(
-                ymlData.get(0).get("tsuchishoNo").toString()));
-        panel.getKogakuNushiJuminJoho().getKogakuJumin().getKogakuKaigoJuminJoho().getTxtShikakuShutokuYMD().setValue(new FlexibleDate(
-                ymlData.get(0).get("shikakuShutokuYMD").toString()));
-        panel.getKogakuNushiJuminJoho().getKogakuJumin().getKogakuKaigoJuminJoho().getTxtChoshuHoho().setValue(new RString(
-                ymlData.get(0).get("choshuHoho").toString()));
-        panel.getKogakuNushiJuminJoho().getKogakuJumin().getKogakuKaigoJuminJoho().getTxtKyuHihokenshaNo().setValue(new RString(
-                ymlData.get(0).get("kyuHihokenshaNo").toString()));
-        panel.getKogakuNushiJuminJoho().getKogakuJumin().getKogakuKaigoJuminJoho().getTxtKyuShichosonCode().setValue(new RString(
-                ymlData.get(0).get("kyuShichosonCode").toString()));
-        panel.getKogakuNushiJuminJoho().getKogakuJumin().getKogakuKaigoJuminJoho().getTxtKyuShichosonName().setValue(new RString(
-                ymlData.get(0).get("kyuShichosonName").toString()));
-        panel.getKogakuNushiJuminJoho().getKogakuJumin().getKogakuKaigoJuminJoho().getTxtShikakuSoshitsuYMD().setValue(new FlexibleDate(
-                ymlData.get(0).get("shikakuSoshitsuYMD").toString()));
-        panel.getKogakuNushiJuminJoho().getKogakuJumin().getKogakuKaigoJuminJoho().getTxtShotokuDankai().setValue(new RString(
-                ymlData.get(0).get("shotokuDankai").toString()));
-
-        //高額介護サービス費情報  (氏名～住所）
-        panel.getKogakuNushiJuminJoho().getTxtNushiShikibetsuCode().setValue(new RString(
-                ymlData.get(0).get("nushiShikibetsuCode").toString()));
-        panel.getKogakuNushiJuminJoho().getTxtNushiName().setValue(new RString(
-                ymlData.get(0).get("nushiName").toString()));
-        panel.getKogakuNushiJuminJoho().getTxtNushiSetaiCode().setValue(new RString(
-                ymlData.get(0).get("nushiSetaiCode").toString()));
-        panel.getKogakuNushiJuminJoho().getTxtNushiGyoseiku().setValue(new RString(
-                ymlData.get(0).get("nushiGyoseiku").toString()));
-        panel.getKogakuNushiJuminJoho().getTxtNushiYubinNo().setValue(new YubinNo(
-                ymlData.get(0).get("nushiYubinNo").toString()));
-        panel.getKogakuNushiJuminJoho().getTxtNushiJusho().setValue(new RString(
-                ymlData.get(0).get("nushiJusho").toString()));
+        
+        //氏名漢字～個人番号
+        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuNushiJuminJohoChildDiv1().getAtenaInfo().getTxtAtenaMeisho().setValue(new RString(
+        ymlData.get(0).get("atenaMeisho").toString()));
+        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuNushiJuminJohoChildDiv1().getAtenaInfo().getTxtAtenaKanaMeisho().setValue(new RString(
+        ymlData.get(0).get("atenaKanMeisho").toString()));
+        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuNushiJuminJohoChildDiv1().getAtenaInfo().getTxtSeinengappiYMD().setValue(new RDate(
+        ymlData.get(0).get("seinengappiYmd").toString()));
+        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuNushiJuminJohoChildDiv1().getAtenaInfo().getTxtNenrei().setValue(new RString( 
+        ymlData.get(0).get("nenrei").toString()));
+        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuNushiJuminJohoChildDiv1().getAtenaInfo().getTxtSeibetsu().setValue(new RString( 
+        ymlData.get(0).get("seibetsu").toString()));
+        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuNushiJuminJohoChildDiv1().getAtenaInfo().getTxtNihonjinGaikokujin().setValue(new RString( 
+        ymlData.get(0).get("nihonjinGaikokujin").toString()));
+        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuNushiJuminJohoChildDiv1().getAtenaInfo().getTxtJusho().setValue(new RString( 
+        ymlData.get(0).get("jusho").toString()));
+        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuNushiJuminJohoChildDiv1().getAtenaInfo().getTxtGyoseiku().setValue(new RString( 
+        ymlData.get(0).get("gyoseiku").toString()));
+        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuNushiJuminJohoChildDiv1().getAtenaInfo().getTxtShikibetsuCode().setValue(new RString( 
+        ymlData.get(0).get("shikibetsuCode").toString()));
+        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuNushiJuminJohoChildDiv1().getAtenaInfo().getTxtYubinNo().setValue(new YubinNo(
+        ymlData.get(0).get("yubinNo").toString()));
+        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuNushiJuminJohoChildDiv1().getAtenaInfo().getTxtJuminJotai().setValue(new RString(
+        ymlData.get(0).get("juminJotai").toString()));
+        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuNushiJuminJohoChildDiv1().getAtenaInfo().getTxtSetaiCode().setValue(new RString(
+        ymlData.get(0).get("setaiCode").toString()));
+        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuNushiJuminJohoChildDiv1().getAtenaInfo().getTxtKojinHojinCode().setValue(new RString(
+        ymlData.get(0).get("kojinHojinCode").toString()));
+        
+        //資格取得 ～　認定期間
+        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuKaigoJuminJohoChildDiv2().getTxtHihokenshaNo().setValue(new RString(
+        ymlData.get(0).get("hihokenshaNo").toString()));         
+        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuKaigoJuminJohoChildDiv2().getTxtShutokuYmd().setValue(new RDate(
+        ymlData.get(0).get("shotokuYmd").toString()));                
+        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuKaigoJuminJohoChildDiv2().getTxtShutokuJiyu().setValue(new RString(
+        ymlData.get(0).get("shotokuJiyu").toString()));                
+        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuKaigoJuminJohoChildDiv2().getTxtJutokuTekiyo().setValue(new RDate(
+        ymlData.get(0).get("jutokuTekiyo").toString()));                
+        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuKaigoJuminJohoChildDiv2().getTxtYokaigoJotaiKubun().setValue(new RString(
+        ymlData.get(0).get("yokaigojotaiKubun").toString()));                
+        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuKaigoJuminJohoChildDiv2().getTxtShikakuJotai().setValue(new RString(
+        ymlData.get(0).get("shikakuJotai").toString()));                
+        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuKaigoJuminJohoChildDiv2().getTxtJutokuKaijo().setValue(new RDate(
+        ymlData.get(0).get("jutokuKaijo").toString()));          
+        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuKaigoJuminJohoChildDiv2().getTxtNinteiKikan().setFromValue(new RDate(
+        ymlData.get(0).get("niteikikanfrom").toString())); 
+        panel.getKogakuNushiJuminJoho().getKogakuJumin().getCommonKogakuKaigoJuminJohoChildDiv2().getTxtNinteiKikan().setToValue(new RDate(
+        ymlData.get(0).get("niteikikanto").toString())); 
 
         panel.getKogakuServiceDetail().getTxtTeikyoYM().setValue(new RDate(
                 ymlData.get(0).get("teikyoYM").toString()));

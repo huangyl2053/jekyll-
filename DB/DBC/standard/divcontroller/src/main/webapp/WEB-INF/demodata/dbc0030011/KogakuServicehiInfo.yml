@@ -1,21 +1,29 @@
 ## YAML Template. 高額介護サービス費情報
 --- 
-- hihokenshaNo: "0000029068"
-  tsuchishoNo: 1234567890
-  shikakuShutokuYMD: 20140601
-  choshuHoho: 介護 南魚
-  kyuHihokenshaNo: "1000029068"
-  kyuShichosonCode: 15226
-  kyuShichosonName: 南魚沼市
-  shikakuSoshitsuYMD: 20140701
-  shotokuDankai: 06 
-##
-  nushiShikibetsuCode: "00000152269"
-  nushiName: 介護 南魚
-  nushiSetaiCode: 1234567890
-  nushiGyoseiku: 南魚沼市
-  nushiYubinNo: 9999999
-  nushiJusho: 南魚沼市99町999-9
+#CommonChildDiv1
+- atenaMeisho: 介護 南魚
+  atenaKanMeisho: カイゴ　ミナミ
+  seinengappiYmd: "19400101"
+  nenrei: 74
+  seibetsu: 男
+  nihonjinGaikokujin: 日本人
+  juminJotai: 住民
+  gyoseiku: 南魚沼市
+  shikibetsuCode: 000001234500001
+  yubinNo: 123-1234
+  jusho: 南魚沼市田原１２３４－５   
+  setaiCode: 1234567890
+  kojinHojinCode: "0123456789"
+ ## CommonChildDiv2
+  hihokenshaNo: "0000029068"
+  shotokuYmd: 20140601
+  shotokuJiyu: 介護認定
+  jutokuTekiyo: "平25.01.01"
+  yokaigojotaiKubun: 要支援2
+  shikakuJotai: 取得
+  jutokuKaijo: "平25.01.01"
+  niteikikanfrom: "20130601"    
+  niteikikanto: "20140531"
 ## 
   teikyoYM: 201407
   hakkoDate: 20140601
