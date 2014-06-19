@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 public class KyotakuKeikakuTodokedeList {
 
     private List<HashMap> getYaml() {
-        return YamlLoader.FOR_DBC.loadAsList(new RString("dbc0100000/KyotakuKeikakuTodokedeSearch.yml"));
+        return YamlLoader.DBC.loadAsList(new RString("dbc0100000/KyotakuKeikakuTodokedeSearch.yml"));
     }
 
     /**
@@ -45,7 +45,7 @@ public class KyotakuKeikakuTodokedeList {
         SearchResultOfHihokenshaDiv hihokensha = panel.getKyotakuKeikakuTodokedeHihokenshaList();
         List<dgSearchResult_Row> dgList = hihokensha.getDgSearchResult().getDataSource();
         dgList.clear();
-        for (int index = 0; index < 2; index++) {
+        for (int index = 1; index < 3; index++) {
             dgList.add(createHihokenshaData(index));
         }
         hihokensha.getDgSearchResult().setDataSource(dgList);
