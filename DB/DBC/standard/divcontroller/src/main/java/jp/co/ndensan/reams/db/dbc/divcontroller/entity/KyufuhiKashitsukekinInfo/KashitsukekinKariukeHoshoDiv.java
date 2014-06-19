@@ -27,10 +27,10 @@ public class KashitsukekinKariukeHoshoDiv extends Panel {
     private TextBoxKana txtKariukeHoshoKana;
     @JsonProperty("txtKariukeHoshoYubinNo")
     private TextBoxYubinNo txtKariukeHoshoYubinNo;
-    @JsonProperty("txtKariukeHoshoJusho")
-    private TextBox txtKariukeHoshoJusho;
     @JsonProperty("txtKariukeHoshoTelNo")
     private TextBox txtKariukeHoshoTelNo;
+    @JsonProperty("txtKariukeHoshoJusho")
+    private TextBox txtKariukeHoshoJusho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -68,16 +68,6 @@ public class KashitsukekinKariukeHoshoDiv extends Panel {
         this.txtKariukeHoshoYubinNo=txtKariukeHoshoYubinNo;
     }
 
-    @JsonProperty("txtKariukeHoshoJusho")
-    public TextBox getTxtKariukeHoshoJusho() {
-        return txtKariukeHoshoJusho;
-    }
-
-    @JsonProperty("txtKariukeHoshoJusho")
-    public void setTxtKariukeHoshoJusho(TextBox txtKariukeHoshoJusho) {
-        this.txtKariukeHoshoJusho=txtKariukeHoshoJusho;
-    }
-
     @JsonProperty("txtKariukeHoshoTelNo")
     public TextBox getTxtKariukeHoshoTelNo() {
         return txtKariukeHoshoTelNo;
@@ -86,6 +76,16 @@ public class KashitsukekinKariukeHoshoDiv extends Panel {
     @JsonProperty("txtKariukeHoshoTelNo")
     public void setTxtKariukeHoshoTelNo(TextBox txtKariukeHoshoTelNo) {
         this.txtKariukeHoshoTelNo=txtKariukeHoshoTelNo;
+    }
+
+    @JsonProperty("txtKariukeHoshoJusho")
+    public TextBox getTxtKariukeHoshoJusho() {
+        return txtKariukeHoshoJusho;
+    }
+
+    @JsonProperty("txtKariukeHoshoJusho")
+    public void setTxtKariukeHoshoJusho(TextBox txtKariukeHoshoJusho) {
+        this.txtKariukeHoshoJusho=txtKariukeHoshoJusho;
     }
 
 }

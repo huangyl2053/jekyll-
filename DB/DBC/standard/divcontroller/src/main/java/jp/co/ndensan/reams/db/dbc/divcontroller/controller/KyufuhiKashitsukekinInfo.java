@@ -39,7 +39,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KyufuhiKashitsukekinInfo {
 
     private List<HashMap> getYaml() {
-        return YamlLoader.FOR_DBC.loadAsList(new RString("KyufuhiKashitsukekinInfo/KyufuhiKashitsukekinInfo.yml"));
+        return YamlLoader.DBC.loadAsList(new RString("KyufuhiKashitsukekinInfo/KyufuhiKashitsukekinInfo.yml"));
     }
 
     private enum 支払方法 {

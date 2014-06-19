@@ -5,7 +5,10 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufuhiKashitsukekinInfo
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufuhiKashitsukekinInfo.tabKashitsukekinInfoDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * KyufuhiKashitsukekinInfo のクラスファイル 
@@ -21,6 +24,8 @@ public class KyufuhiKashitsukekinInfoDiv extends Panel {
      */
     @JsonProperty("tabKashitsukekinInfo")
     private tabKashitsukekinInfoDiv tabKashitsukekinInfo;
+    @JsonProperty("btnClose")
+    private Button btnClose;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -36,6 +41,16 @@ public class KyufuhiKashitsukekinInfoDiv extends Panel {
     @JsonProperty("tabKashitsukekinInfo")
     public void setTabKashitsukekinInfo(tabKashitsukekinInfoDiv tabKashitsukekinInfo) {
         this.tabKashitsukekinInfo=tabKashitsukekinInfo;
+    }
+
+    @JsonProperty("btnClose")
+    public Button getBtnClose() {
+        return btnClose;
+    }
+
+    @JsonProperty("btnClose")
+    public void setBtnClose(Button btnClose) {
+        this.btnClose=btnClose;
     }
 
 }
