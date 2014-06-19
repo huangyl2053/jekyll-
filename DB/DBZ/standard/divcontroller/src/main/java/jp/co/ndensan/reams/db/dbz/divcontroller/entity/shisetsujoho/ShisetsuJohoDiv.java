@@ -1,7 +1,8 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho;
-
 /**
- * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、再生成時には損失するため
+ * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -10,8 +11,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ShisetsuJoho のクラスファイル
- *
+ * ShisetsuJoho のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class ShisetsuJohoDiv extends Panel {
@@ -21,7 +22,6 @@ public class ShisetsuJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-
     @JsonProperty("radShisetsuShurui")
     private RadioButton radShisetsuShurui;
     @JsonProperty("txtShisetsuCode")
@@ -52,7 +52,7 @@ public class ShisetsuJohoDiv extends Panel {
 
     @JsonProperty("radShisetsuShurui")
     public void setRadShisetsuShurui(RadioButton radShisetsuShurui) {
-        this.radShisetsuShurui = radShisetsuShurui;
+        this.radShisetsuShurui=radShisetsuShurui;
     }
 
     @JsonProperty("txtShisetsuCode")
@@ -62,7 +62,7 @@ public class ShisetsuJohoDiv extends Panel {
 
     @JsonProperty("txtShisetsuCode")
     public void setTxtShisetsuCode(TextBoxCode txtShisetsuCode) {
-        this.txtShisetsuCode = txtShisetsuCode;
+        this.txtShisetsuCode=txtShisetsuCode;
     }
 
     @JsonProperty("btnJigyoshaInputGuide")
@@ -72,7 +72,7 @@ public class ShisetsuJohoDiv extends Panel {
 
     @JsonProperty("btnJigyoshaInputGuide")
     public void setBtnJigyoshaInputGuide(ButtonDialog btnJigyoshaInputGuide) {
-        this.btnJigyoshaInputGuide = btnJigyoshaInputGuide;
+        this.btnJigyoshaInputGuide=btnJigyoshaInputGuide;
     }
 
     @JsonProperty("btnOtherTokureiShisetsuInputGuide")
@@ -82,7 +82,7 @@ public class ShisetsuJohoDiv extends Panel {
 
     @JsonProperty("btnOtherTokureiShisetsuInputGuide")
     public void setBtnOtherTokureiShisetsuInputGuide(ButtonDialog btnOtherTokureiShisetsuInputGuide) {
-        this.btnOtherTokureiShisetsuInputGuide = btnOtherTokureiShisetsuInputGuide;
+        this.btnOtherTokureiShisetsuInputGuide=btnOtherTokureiShisetsuInputGuide;
     }
 
     @JsonProperty("btnJogaiShisetsuInputGuide")
@@ -92,7 +92,7 @@ public class ShisetsuJohoDiv extends Panel {
 
     @JsonProperty("btnJogaiShisetsuInputGuide")
     public void setBtnJogaiShisetsuInputGuide(ButtonDialog btnJogaiShisetsuInputGuide) {
-        this.btnJogaiShisetsuInputGuide = btnJogaiShisetsuInputGuide;
+        this.btnJogaiShisetsuInputGuide=btnJogaiShisetsuInputGuide;
     }
 
     @JsonProperty("txtShisetsuMeisho")
@@ -102,7 +102,7 @@ public class ShisetsuJohoDiv extends Panel {
 
     @JsonProperty("txtShisetsuMeisho")
     public void setTxtShisetsuMeisho(TextBox txtShisetsuMeisho) {
-        this.txtShisetsuMeisho = txtShisetsuMeisho;
+        this.txtShisetsuMeisho=txtShisetsuMeisho;
     }
 
     @JsonProperty("selectRow")
@@ -112,7 +112,7 @@ public class ShisetsuJohoDiv extends Panel {
 
     @JsonProperty("selectRow")
     public void setSelectRow(RString selectRow) {
-        this.selectRow = selectRow;
+        this.selectRow=selectRow;
     }
 
     @JsonProperty("inputMode")
@@ -122,7 +122,7 @@ public class ShisetsuJohoDiv extends Panel {
 
     @JsonProperty("inputMode")
     public void setInputMode(RString inputMode) {
-        this.inputMode = inputMode;
+        this.inputMode=inputMode;
     }
 
 }

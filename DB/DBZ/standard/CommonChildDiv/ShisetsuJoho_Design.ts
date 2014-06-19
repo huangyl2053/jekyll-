@@ -137,7 +137,7 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "onChange": "onChange_radShisetsuShurui",
-     "selectedItem": "kaigoHokenShisetsu",
+     "selectedItem": null,
      "dataSource": [
       {
        "key": "kaigoHokenShisetsu",
@@ -233,8 +233,8 @@ module DBZ {
      "icon": 0,
      "text": "■",
      "appearance": 2,
-     "imageFileUrl": "/uz/uza/css/rireki_brue.png",
-     "imageWidth": "15",
+     "imageFileUrl": "/uz/uza/css/Link.jpg",
+     "imageWidth": "20",
      "imageHeight": "15",
      "displayChildDivName": "DBZ.JigyoshaInputGuide",
      "dataPassing": [
@@ -275,8 +275,8 @@ module DBZ {
      "icon": 0,
      "text": "■",
      "appearance": 2,
-     "imageFileUrl": "/uz/uza/css/rireki_brue.png",
-     "imageWidth": "15",
+     "imageFileUrl": "/uz/uza/css/Link.jpg",
+     "imageWidth": "20",
      "imageHeight": "15",
      "displayChildDivName": "DBZ.OtherTokureiShisetsuInputGuide",
      "dataPassing": [
@@ -317,8 +317,8 @@ module DBZ {
      "icon": 0,
      "text": "■",
      "appearance": 2,
-     "imageFileUrl": "/uz/uza/css/rireki_brue.png",
-     "imageWidth": "15",
+     "imageFileUrl": "/uz/uza/css/Link.jpg",
+     "imageWidth": "20",
      "imageHeight": "15",
      "displayChildDivName": "DBZ.TekiyoJogaiShisetsuInputGuide",
      "dataPassing": [
@@ -383,7 +383,7 @@ module DBZ {
     }
    ],
    "controlType": "Panel",
-   "width": "900",
+   "width": "800",
    "visible": true,
    "displayNone": false,
    "disabled": false,
