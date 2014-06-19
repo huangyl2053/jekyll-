@@ -1,21 +1,15 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiDetailDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiKozaInfoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiReasonDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShinseishaInfoDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * JutakuKaishuShinseiContents のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * JutakuKaishuShinseiContents のクラスファイル
+ *
  * @author 自動生成
  */
 public class JutakuKaishuShinseiContentsDiv extends Panel {
@@ -25,6 +19,7 @@ public class JutakuKaishuShinseiContentsDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtTeikyoYM")
     private TextBoxDate txtTeikyoYM;
     @JsonProperty("txtSeiriNo")
@@ -57,7 +52,7 @@ public class JutakuKaishuShinseiContentsDiv extends Panel {
 
     @JsonProperty("txtTeikyoYM")
     public void setTxtTeikyoYM(TextBoxDate txtTeikyoYM) {
-        this.txtTeikyoYM=txtTeikyoYM;
+        this.txtTeikyoYM = txtTeikyoYM;
     }
 
     @JsonProperty("txtSeiriNo")
@@ -67,7 +62,7 @@ public class JutakuKaishuShinseiContentsDiv extends Panel {
 
     @JsonProperty("txtSeiriNo")
     public void setTxtSeiriNo(TextBoxCode txtSeiriNo) {
-        this.txtSeiriNo=txtSeiriNo;
+        this.txtSeiriNo = txtSeiriNo;
     }
 
     @JsonProperty("ddlHokensha")
@@ -77,7 +72,7 @@ public class JutakuKaishuShinseiContentsDiv extends Panel {
 
     @JsonProperty("ddlHokensha")
     public void setDdlHokensha(DropDownList ddlHokensha) {
-        this.ddlHokensha=ddlHokensha;
+        this.ddlHokensha = ddlHokensha;
     }
 
     @JsonProperty("txtJutakuOwner")
@@ -87,7 +82,7 @@ public class JutakuKaishuShinseiContentsDiv extends Panel {
 
     @JsonProperty("txtJutakuOwner")
     public void setTxtJutakuOwner(TextBox txtJutakuOwner) {
-        this.txtJutakuOwner=txtJutakuOwner;
+        this.txtJutakuOwner = txtJutakuOwner;
     }
 
     @JsonProperty("txtRelationWithHihokensha")
@@ -97,7 +92,7 @@ public class JutakuKaishuShinseiContentsDiv extends Panel {
 
     @JsonProperty("txtRelationWithHihokensha")
     public void setTxtRelationWithHihokensha(TextBox txtRelationWithHihokensha) {
-        this.txtRelationWithHihokensha=txtRelationWithHihokensha;
+        this.txtRelationWithHihokensha = txtRelationWithHihokensha;
     }
 
     @JsonProperty("JutakuKaishuShinseiDetail")
@@ -107,7 +102,7 @@ public class JutakuKaishuShinseiContentsDiv extends Panel {
 
     @JsonProperty("JutakuKaishuShinseiDetail")
     public void setJutakuKaishuShinseiDetail(JutakuKaishuShinseiDetailDiv JutakuKaishuShinseiDetail) {
-        this.JutakuKaishuShinseiDetail=JutakuKaishuShinseiDetail;
+        this.JutakuKaishuShinseiDetail = JutakuKaishuShinseiDetail;
     }
 
     @JsonProperty("JutakuKaishuShinseisha")
@@ -117,7 +112,7 @@ public class JutakuKaishuShinseiContentsDiv extends Panel {
 
     @JsonProperty("JutakuKaishuShinseisha")
     public void setJutakuKaishuShinseisha(ShinseishaInfoDiv JutakuKaishuShinseisha) {
-        this.JutakuKaishuShinseisha=JutakuKaishuShinseisha;
+        this.JutakuKaishuShinseisha = JutakuKaishuShinseisha;
     }
 
     @JsonProperty("JutakuKaishuShinseiReason")
@@ -127,7 +122,7 @@ public class JutakuKaishuShinseiContentsDiv extends Panel {
 
     @JsonProperty("JutakuKaishuShinseiReason")
     public void setJutakuKaishuShinseiReason(JutakuKaishuShinseiReasonDiv JutakuKaishuShinseiReason) {
-        this.JutakuKaishuShinseiReason=JutakuKaishuShinseiReason;
+        this.JutakuKaishuShinseiReason = JutakuKaishuShinseiReason;
     }
 
     @JsonProperty("JutakuKaishuShinseiKozaInfo")
@@ -137,7 +132,7 @@ public class JutakuKaishuShinseiContentsDiv extends Panel {
 
     @JsonProperty("JutakuKaishuShinseiKozaInfo")
     public void setJutakuKaishuShinseiKozaInfo(JutakuKaishuShinseiKozaInfoDiv JutakuKaishuShinseiKozaInfo) {
-        this.JutakuKaishuShinseiKozaInfo=JutakuKaishuShinseiKozaInfo;
+        this.JutakuKaishuShinseiKozaInfo = JutakuKaishuShinseiKozaInfo;
     }
 
 }

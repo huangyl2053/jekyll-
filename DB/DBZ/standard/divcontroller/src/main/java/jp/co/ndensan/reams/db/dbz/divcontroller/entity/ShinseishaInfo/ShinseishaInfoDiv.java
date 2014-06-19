@@ -23,22 +23,24 @@ public class ShinseishaInfoDiv extends Panel {
      */
     @JsonProperty("txtShinseiDate")
     private TextBoxDate txtShinseiDate;
-    @JsonProperty("txtUketsukeDate")
-    private TextBoxDate txtUketsukeDate;
-    @JsonProperty("ddlHokensha")
-    private DropDownList ddlHokensha;
     @JsonProperty("ddlShinseishaKubun")
     private DropDownList ddlShinseishaKubun;
+    @JsonProperty("txtUketsukeDate")
+    private TextBoxDate txtUketsukeDate;
     @JsonProperty("txtJigyoshaNo")
     private TextBoxCode txtJigyoshaNo;
     @JsonProperty("btnSearchJigyosha")
     private Button btnSearchJigyosha;
+    @JsonProperty("btnCopyToHonninInfo")
+    private Button btnCopyToHonninInfo;
+    @JsonProperty("ddlHokensha")
+    private DropDownList ddlHokensha;
     @JsonProperty("txtShinseishaName")
     private TextBox txtShinseishaName;
-    @JsonProperty("txtTelNo")
-    private TextBox txtTelNo;
     @JsonProperty("txtShinseishaNameKana")
     private TextBox txtShinseishaNameKana;
+    @JsonProperty("txtTelNo")
+    private TextBox txtTelNo;
     @JsonProperty("txtYubinNo")
     private TextBoxYubinNo txtYubinNo;
     @JsonProperty("txtAddress")
@@ -60,26 +62,6 @@ public class ShinseishaInfoDiv extends Panel {
         this.txtShinseiDate=txtShinseiDate;
     }
 
-    @JsonProperty("txtUketsukeDate")
-    public TextBoxDate getTxtUketsukeDate() {
-        return txtUketsukeDate;
-    }
-
-    @JsonProperty("txtUketsukeDate")
-    public void setTxtUketsukeDate(TextBoxDate txtUketsukeDate) {
-        this.txtUketsukeDate=txtUketsukeDate;
-    }
-
-    @JsonProperty("ddlHokensha")
-    public DropDownList getDdlHokensha() {
-        return ddlHokensha;
-    }
-
-    @JsonProperty("ddlHokensha")
-    public void setDdlHokensha(DropDownList ddlHokensha) {
-        this.ddlHokensha=ddlHokensha;
-    }
-
     @JsonProperty("ddlShinseishaKubun")
     public DropDownList getDdlShinseishaKubun() {
         return ddlShinseishaKubun;
@@ -88,6 +70,16 @@ public class ShinseishaInfoDiv extends Panel {
     @JsonProperty("ddlShinseishaKubun")
     public void setDdlShinseishaKubun(DropDownList ddlShinseishaKubun) {
         this.ddlShinseishaKubun=ddlShinseishaKubun;
+    }
+
+    @JsonProperty("txtUketsukeDate")
+    public TextBoxDate getTxtUketsukeDate() {
+        return txtUketsukeDate;
+    }
+
+    @JsonProperty("txtUketsukeDate")
+    public void setTxtUketsukeDate(TextBoxDate txtUketsukeDate) {
+        this.txtUketsukeDate=txtUketsukeDate;
     }
 
     @JsonProperty("txtJigyoshaNo")
@@ -110,6 +102,26 @@ public class ShinseishaInfoDiv extends Panel {
         this.btnSearchJigyosha=btnSearchJigyosha;
     }
 
+    @JsonProperty("btnCopyToHonninInfo")
+    public Button getBtnCopyToHonninInfo() {
+        return btnCopyToHonninInfo;
+    }
+
+    @JsonProperty("btnCopyToHonninInfo")
+    public void setBtnCopyToHonninInfo(Button btnCopyToHonninInfo) {
+        this.btnCopyToHonninInfo=btnCopyToHonninInfo;
+    }
+
+    @JsonProperty("ddlHokensha")
+    public DropDownList getDdlHokensha() {
+        return ddlHokensha;
+    }
+
+    @JsonProperty("ddlHokensha")
+    public void setDdlHokensha(DropDownList ddlHokensha) {
+        this.ddlHokensha=ddlHokensha;
+    }
+
     @JsonProperty("txtShinseishaName")
     public TextBox getTxtShinseishaName() {
         return txtShinseishaName;
@@ -120,16 +132,6 @@ public class ShinseishaInfoDiv extends Panel {
         this.txtShinseishaName=txtShinseishaName;
     }
 
-    @JsonProperty("txtTelNo")
-    public TextBox getTxtTelNo() {
-        return txtTelNo;
-    }
-
-    @JsonProperty("txtTelNo")
-    public void setTxtTelNo(TextBox txtTelNo) {
-        this.txtTelNo=txtTelNo;
-    }
-
     @JsonProperty("txtShinseishaNameKana")
     public TextBox getTxtShinseishaNameKana() {
         return txtShinseishaNameKana;
@@ -138,6 +140,16 @@ public class ShinseishaInfoDiv extends Panel {
     @JsonProperty("txtShinseishaNameKana")
     public void setTxtShinseishaNameKana(TextBox txtShinseishaNameKana) {
         this.txtShinseishaNameKana=txtShinseishaNameKana;
+    }
+
+    @JsonProperty("txtTelNo")
+    public TextBox getTxtTelNo() {
+        return txtTelNo;
+    }
+
+    @JsonProperty("txtTelNo")
+    public void setTxtTelNo(TextBox txtTelNo) {
+        this.txtTelNo=txtTelNo;
     }
 
     @JsonProperty("txtYubinNo")

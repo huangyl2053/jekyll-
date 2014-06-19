@@ -9,85 +9,29 @@ module DBZ {
     export class ShinseishaInfo_Design extends Uz.CommonChildDiv {
     
         public get btnSearch_displayNone() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["displayNone"];
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"])["displayNone"];
         }
         
         public set btnSearch_displayNone(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["displayNone"] = value;
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"])["displayNone"] = value;
             } else {
-                this.layout.items[0].items[5]["displayNone"] = value;
+                this.layout.items[0].items[4]["displayNone"] = value;
                 this.raisePropertyChanged(this.layout);
             }
         }
         
         public get txtUkestukeDate_displayNone() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["displayNone"];
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"])["displayNone"];
         }
         
         public set txtUkestukeDate_displayNone(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["displayNone"] = value;
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"])["displayNone"] = value;
             } else {
-                this.layout.items[0].items[1]["displayNone"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get eraseBorderTop() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderTop"];
-        }
-        
-        public set eraseBorderTop(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderTop"] = value;
-            } else {
-                this.layout.items[0]["eraseBorderTop"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get eraseBorderBottom() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderBottom"];
-        }
-        
-        public set eraseBorderBottom(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderBottom"] = value;
-            } else {
-                this.layout.items[0]["eraseBorderBottom"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get eraseBorderRight() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderRight"];
-        }
-        
-        public set eraseBorderRight(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderRight"] = value;
-            } else {
-                this.layout.items[0]["eraseBorderRight"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get eraseBorderLeft() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderLeft"];
-        }
-        
-        public set eraseBorderLeft(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderLeft"] = value;
-            } else {
-                this.layout.items[0]["eraseBorderLeft"] = value;
+                this.layout.items[0].items[2]["displayNone"] = value;
                 this.raisePropertyChanged(this.layout);
             }
         }
@@ -120,58 +64,72 @@ module DBZ {
             }
         }
         
-        public get txtJigyoshaNo_displayNone() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"])["displayNone"];
+        public get txtJigyoshaNo_disabled() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["disabled"];
         }
         
-        public set txtJigyoshaNo_displayNone(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"])["displayNone"] = value;
+        public set txtJigyoshaNo_disabled(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["disabled"] = value;
             } else {
-                this.layout.items[0].items[4]["displayNone"] = value;
+                this.layout.items[0].items[3]["disabled"] = value;
                 this.raisePropertyChanged(this.layout);
             }
         }
         
         public get txtShinseishaName_labelLText() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"])["labelLText"];
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"])["labelLText"];
         }
         
         public set txtShinseishaName_labelLText(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"])["labelLText"] = value;
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"])["labelLText"] = value;
             } else {
-                this.layout.items[0].items[6]["labelLText"] = value;
+                this.layout.items[0].items[7]["labelLText"] = value;
                 this.raisePropertyChanged(this.layout);
             }
         }
         
         public get txtYubinNo_displayNone() {
-            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[9]["fieldName"])["displayNone"];
-        }
-        
-        public set txtYubinNo_displayNone(value) {
-            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[9]["fieldName"]).length > 0 && 
-                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[9]["fieldName"]) != undefined ) {
-                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[9]["fieldName"])["displayNone"] = value;
-            } else {
-                this.layout.items[0].items[9]["displayNone"] = value;
-                this.raisePropertyChanged(this.layout);
-            }
-        }
-        
-        public get txtAddress_displayNone() {
             return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"])["displayNone"];
         }
         
-        public set txtAddress_displayNone(value) {
+        public set txtYubinNo_displayNone(value) {
             if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"]).length > 0 && 
                  Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"]) != undefined ) {
                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"])["displayNone"] = value;
             } else {
                 this.layout.items[0].items[10]["displayNone"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get txtAddress_displayNone() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"])["displayNone"];
+        }
+        
+        public set txtAddress_displayNone(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"])["displayNone"] = value;
+            } else {
+                this.layout.items[0].items[11]["displayNone"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get btnCopy_displayNone() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["displayNone"];
+        }
+        
+        public set btnCopy_displayNone(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["displayNone"] = value;
+            } else {
+                this.layout.items[0].items[5]["displayNone"] = value;
                 this.raisePropertyChanged(this.layout);
             }
         }
@@ -188,16 +146,13 @@ module DBZ {
             super.registProperty();
             Uz.JSControlUtil.registProperty("btnSearch_displayNone");
             Uz.JSControlUtil.registProperty("txtUkestukeDate_displayNone");
-            Uz.JSControlUtil.registProperty("eraseBorderTop");
-            Uz.JSControlUtil.registProperty("eraseBorderBottom");
-            Uz.JSControlUtil.registProperty("eraseBorderRight");
-            Uz.JSControlUtil.registProperty("eraseBorderLeft");
             Uz.JSControlUtil.registProperty("title");
             Uz.JSControlUtil.registProperty("panelDisplay");
-            Uz.JSControlUtil.registProperty("txtJigyoshaNo_displayNone");
+            Uz.JSControlUtil.registProperty("txtJigyoshaNo_disabled");
             Uz.JSControlUtil.registProperty("txtShinseishaName_labelLText");
             Uz.JSControlUtil.registProperty("txtYubinNo_displayNone");
             Uz.JSControlUtil.registProperty("txtAddress_displayNone");
+            Uz.JSControlUtil.registProperty("btnCopy_displayNone");
         }
         
         /**
@@ -207,18 +162,15 @@ module DBZ {
          */
         public getEditablePropertyInfo(): any {
             var editablePropertyInfo = super.getEditablePropertyInfo();
-            editablePropertyInfo["btnSearch_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).getEditablePropertyInfo()["displayNone"];
-            editablePropertyInfo["txtUkestukeDate_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["displayNone"];
-            editablePropertyInfo["eraseBorderTop"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderTop"];
-            editablePropertyInfo["eraseBorderBottom"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderBottom"];
-            editablePropertyInfo["eraseBorderRight"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderRight"];
-            editablePropertyInfo["eraseBorderLeft"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderLeft"];
+            editablePropertyInfo["btnSearch_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["txtUkestukeDate_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["title"];
             editablePropertyInfo["panelDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["panelDisplay"];
-            editablePropertyInfo["txtJigyoshaNo_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).getEditablePropertyInfo()["displayNone"];
-            editablePropertyInfo["txtShinseishaName_labelLText"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).getEditablePropertyInfo()["labelLText"];
-            editablePropertyInfo["txtYubinNo_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[9]["fieldName"]).getEditablePropertyInfo()["displayNone"];
-            editablePropertyInfo["txtAddress_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["txtJigyoshaNo_disabled"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["disabled"];
+            editablePropertyInfo["txtShinseishaName_labelLText"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]).getEditablePropertyInfo()["labelLText"];
+            editablePropertyInfo["txtYubinNo_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[10]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["txtAddress_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["btnCopy_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             
             return editablePropertyInfo;
         }
@@ -232,7 +184,7 @@ module DBZ {
      "fieldName": "txtShinseiDate",
      "items": [],
      "controlType": "TextBoxDate",
-     "width": "90",
+     "width": "85",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -249,109 +201,26 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
+     "onChange": "",
      "required": false,
      "placeHolder": "",
+     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
      "onBlur": "",
-     "onChange": "",
      "onKeyPress": "",
      "text": "",
+     "value": "",
      "labelLText": "申請日",
      "labelRText": "",
      "labelLWidth": "55",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
+     "permitCharactor": "./_-",
      "ymdKubun": 2,
-     "displayFormat": 0,
-     "value": "",
-     "textKind": 0,
-     "permitCharactor": "./_-"
-    },
-    {
-     "fieldName": "txtUketsukeDate",
-     "items": [],
-     "controlType": "TextBoxDate",
-     "width": "90",
-     "visible": true,
-     "displayNone": true,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "txtUketsukeDate_core",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "readOnly": false,
-     "required": false,
-     "placeHolder": "",
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
-     "text": "",
-     "labelLText": "受付日",
-     "labelRText": "",
-     "labelLWidth": "55",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "ymdKubun": 2,
-     "displayFormat": 0,
-     "value": "",
-     "textKind": 0,
-     "permitCharactor": "./_-"
-    },
-    {
-     "fieldName": "ddlHokensha",
-     "items": [],
-     "controlType": "DropDownList",
-     "width": "120",
-     "visible": true,
-     "displayNone": true,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 2,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "ddlHokensha_core",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "labelLText": "保険者",
-     "labelRText": "",
-     "labelLWidth": "48",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "selectedItem": "key0",
-     "dataSource": [
-      {
-       "key": "key0",
-       "value": "value0"
-      },
-      {
-       "key": "key1",
-       "value": "value1"
-      }
-     ]
+     "displayFormat": 0
     },
     {
      "fieldName": "ddlShinseishaKubun",
@@ -363,26 +232,28 @@ module DBZ {
      "disabled": false,
      "accessKey": "",
      "nextFocusFieldName": "",
-     "wrap": true,
+     "wrap": false,
      "dependencies": [],
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
+     "marginLeft": "0",
      "marginRight": "XS",
      "selectControlID": "ddlShinseishaKubun_core",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
+     "onChange": "",
+     "selectedItem": "myself",
+     "required": false,
      "onFocus": "",
      "onBlur": "",
-     "onChange": "",
-     "labelLText": "区分",
+     "labelLText": "申請者区分",
      "labelRText": "",
-     "labelLWidth": "55",
+     "labelLWidth": "90",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "selectedItem": "myself",
      "dataSource": [
       {
        "key": "myself",
@@ -400,7 +271,50 @@ module DBZ {
        "key": "other",
        "value": "その他"
       }
-     ]
+     ],
+     "disabledItem": []
+    },
+    {
+     "fieldName": "txtUketsukeDate",
+     "items": [],
+     "controlType": "TextBoxDate",
+     "width": "90",
+     "visible": true,
+     "displayNone": true,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "2.3",
+     "marginRight": "XS",
+     "selectControlID": "txtUketsukeDate_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": false,
+     "onChange": "",
+     "required": false,
+     "placeHolder": "",
+     "textKind": 0,
+     "isPrivateInfo": false,
+     "isPassword": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onKeyPress": "",
+     "text": "",
+     "value": "",
+     "labelLText": "受付日",
+     "labelRText": "",
+     "labelLWidth": "55",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "permitCharactor": "./_-",
+     "ymdKubun": 2,
+     "displayFormat": 0
     },
     {
      "fieldName": "txtJigyoshaNo",
@@ -423,28 +337,28 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
+     "onChange": "",
      "required": false,
+     "maxLength": 100000000,
+     "minLength": 0,
+     "textAlign": 0,
      "placeHolder": "",
+     "textKind": 2,
      "isPrivateInfo": false,
      "isPassword": false,
+     "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
-     "onChange": "",
      "onKeyPress": "",
      "text": "",
+     "suggest": [],
+     "value": "",
      "labelLText": "事業者",
      "labelRText": "",
      "labelLWidth": "55",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "value": "",
-     "maxLength": 100000000,
-     "minLength": 0,
-     "textAlign": 0,
-     "textKind": 2,
-     "isComboBox": false,
-     "suggest": [],
      "decorationClass": "",
      "permitCharactor": "",
      "formatLength": "10"
@@ -464,8 +378,8 @@ module DBZ {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "-0.2",
-     "marginRight": "XS",
+     "marginLeft": "0",
+     "marginRight": "0",
      "selectControlID": "btnSearchJigyosha",
      "helpMessageID": "",
      "jpControlName": "",
@@ -478,10 +392,81 @@ module DBZ {
      "icon": 0
     },
     {
+     "fieldName": "btnCopyToHonninInfo",
+     "items": [],
+     "controlType": "Button",
+     "width": "M",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "0",
+     "selectControlID": "btnCopyToHonninInfo",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "text": "本人情報をコピーする",
+     "onClick": "onClick_btnCopyToHonninInfo",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "icon": 0
+    },
+    {
+     "fieldName": "ddlHokensha",
+     "items": [],
+     "controlType": "DropDownList",
+     "width": "120",
+     "visible": true,
+     "displayNone": true,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "ddlHokensha_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": false,
+     "onChange": "",
+     "selectedItem": "key0",
+     "onFocus": "",
+     "onBlur": "",
+     "labelLText": "保険者",
+     "labelRText": "",
+     "labelLWidth": "48",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
+     "dataSource": [
+      {
+       "key": "key0",
+       "value": "value0"
+      },
+      {
+       "key": "key1",
+       "value": "value1"
+      }
+     ],
+     "disabledItem": []
+    },
+    {
      "fieldName": "txtShinseishaName",
      "items": [],
      "controlType": "TextBox",
-     "width": "400",
+     "width": "355",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -498,74 +483,28 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
+     "onChange": "",
      "required": false,
+     "maxLength": 100000000,
+     "minLength": 0,
+     "textAlign": 0,
      "placeHolder": "",
+     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
+     "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
-     "onChange": "",
      "onKeyPress": "",
      "text": "",
+     "suggest": [],
+     "value": "",
      "labelLText": "氏名",
      "labelRText": "",
      "labelLWidth": "55",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "value": "",
-     "maxLength": 100000000,
-     "minLength": 0,
-     "textAlign": 0,
-     "textKind": 0,
-     "isComboBox": false,
-     "suggest": [],
-     "decorationClass": "",
-     "permitCharactor": ""
-    },
-    {
-     "fieldName": "txtTelNo",
-     "items": [],
-     "controlType": "TextBox",
-     "width": "120",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 2,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "txtTelNo_core",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "readOnly": false,
-     "required": false,
-     "placeHolder": "",
-     "isPrivateInfo": false,
-     "isPassword": false,
-     "onFocus": "",
-     "onBlur": "",
-     "onChange": "",
-     "onKeyPress": "",
-     "text": "",
-     "labelLText": "電話番号",
-     "labelRText": "",
-     "labelLWidth": "64",
-     "labelRWidth": "S",
-     "labelLAlign": 2,
-     "labelRAlign": 0,
-     "value": "",
-     "maxLength": 100000000,
-     "minLength": 0,
-     "textAlign": 0,
-     "textKind": 0,
-     "isComboBox": false,
-     "suggest": [],
      "decorationClass": "",
      "permitCharactor": ""
     },
@@ -573,7 +512,7 @@ module DBZ {
      "fieldName": "txtShinseishaNameKana",
      "items": [],
      "controlType": "TextBox",
-     "width": "400",
+     "width": "355",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -590,28 +529,74 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
+     "onChange": "",
      "required": false,
+     "maxLength": 100000000,
+     "minLength": 0,
+     "textAlign": 0,
      "placeHolder": "",
+     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
+     "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
-     "onChange": "",
      "onKeyPress": "",
      "text": "",
+     "suggest": [],
+     "value": "",
      "labelLText": "",
      "labelRText": "",
      "labelLWidth": "80",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "value": "",
+     "decorationClass": "",
+     "permitCharactor": ""
+    },
+    {
+     "fieldName": "txtTelNo",
+     "items": [],
+     "controlType": "TextBox",
+     "width": "S",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0.3",
+     "marginRight": "XS",
+     "selectControlID": "txtTelNo_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": false,
+     "onChange": "",
+     "required": false,
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
+     "placeHolder": "",
      "textKind": 0,
+     "isPrivateInfo": false,
+     "isPassword": false,
      "isComboBox": false,
+     "onFocus": "",
+     "onBlur": "",
+     "onKeyPress": "",
+     "text": "",
      "suggest": [],
+     "value": "",
+     "labelLText": "電話番号",
+     "labelRText": "",
+     "labelLWidth": "70",
+     "labelRWidth": "S",
+     "labelLAlign": 2,
+     "labelRAlign": 0,
      "decorationClass": "",
      "permitCharactor": ""
     },
@@ -636,28 +621,28 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
+     "onChange": "",
      "required": false,
+     "maxLength": 100000000,
+     "minLength": 0,
+     "textAlign": 0,
      "placeHolder": "",
+     "textKind": 2,
      "isPrivateInfo": false,
      "isPassword": false,
+     "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
-     "onChange": "",
      "onKeyPress": "",
      "text": "",
+     "suggest": [],
+     "value": "",
      "labelLText": "住所",
      "labelRText": "",
      "labelLWidth": "55",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "value": "",
-     "maxLength": 100000000,
-     "minLength": 0,
-     "textAlign": 0,
-     "textKind": 2,
-     "isComboBox": false,
-     "suggest": [],
      "decorationClass": "",
      "permitCharactor": ""
     },
@@ -665,7 +650,7 @@ module DBZ {
      "fieldName": "txtAddress",
      "items": [],
      "controlType": "TextBox",
-     "width": "L",
+     "width": "435",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -682,34 +667,34 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
+     "onChange": "",
      "required": false,
+     "maxLength": 100000000,
+     "minLength": 0,
+     "textAlign": 0,
      "placeHolder": "",
+     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
+     "isComboBox": false,
      "onFocus": "",
      "onBlur": "",
-     "onChange": "",
      "onKeyPress": "",
      "text": "",
+     "suggest": [],
+     "value": "",
      "labelLText": "",
      "labelRText": "",
      "labelLWidth": "S",
      "labelRWidth": "S",
      "labelLAlign": 2,
      "labelRAlign": 0,
-     "value": "",
-     "maxLength": 100000000,
-     "minLength": 0,
-     "textAlign": 0,
-     "textKind": 0,
-     "isComboBox": false,
-     "suggest": [],
      "decorationClass": "",
      "permitCharactor": ""
     }
    ],
    "controlType": "Panel",
-   "width": "705",
+   "width": "637",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -720,7 +705,7 @@ module DBZ {
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "XS",
+   "marginLeft": "0",
    "marginRight": "XS",
    "selectControlID": "ShinseishaInfo",
    "helpMessageID": "",
@@ -788,26 +773,6 @@ module DBZ {
   },
   {
    "publicChildFieldName": "ShinseishaInfo",
-   "publicChildProperty": "eraseBorderTop",
-   "newPropertyName": "eraseBorderTop"
-  },
-  {
-   "publicChildFieldName": "ShinseishaInfo",
-   "publicChildProperty": "eraseBorderBottom",
-   "newPropertyName": "eraseBorderBottom"
-  },
-  {
-   "publicChildFieldName": "ShinseishaInfo",
-   "publicChildProperty": "eraseBorderRight",
-   "newPropertyName": "eraseBorderRight"
-  },
-  {
-   "publicChildFieldName": "ShinseishaInfo",
-   "publicChildProperty": "eraseBorderLeft",
-   "newPropertyName": "eraseBorderLeft"
-  },
-  {
-   "publicChildFieldName": "ShinseishaInfo",
    "publicChildProperty": "title",
    "newPropertyName": "title"
   },
@@ -818,8 +783,8 @@ module DBZ {
   },
   {
    "publicChildFieldName": "txtJigyoshaNo",
-   "publicChildProperty": "displayNone",
-   "newPropertyName": "txtJigyoshaNo_displayNone"
+   "publicChildProperty": "disabled",
+   "newPropertyName": "txtJigyoshaNo_disabled"
   },
   {
    "publicChildFieldName": "txtShinseishaName",
@@ -835,6 +800,11 @@ module DBZ {
    "publicChildFieldName": "txtAddress",
    "publicChildProperty": "displayNone",
    "newPropertyName": "txtAddress_displayNone"
+  },
+  {
+   "publicChildFieldName": "btnCopyToHonninInfo",
+   "publicChildProperty": "displayNone",
+   "newPropertyName": "btnCopy_displayNone"
   }
  ],
  "dataPassingForDialog": [],

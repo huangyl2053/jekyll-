@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0700011;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため

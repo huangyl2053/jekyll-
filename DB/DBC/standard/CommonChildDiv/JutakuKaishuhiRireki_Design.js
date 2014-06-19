@@ -46,8 +46,8 @@ var DBC;
                             "selectControlID": "dgJutakuKaishuRireki",
                             "helpMessageID": "",
                             "jpControlName": "",
-                            "height": "M",
-                            "dataSource": [],
+                            "readOnly": true,
+                            "height": "Auto",
                             "gridSetting": {
                                 "rowHeight": 25,
                                 "isMultiSelectable": false,
@@ -312,6 +312,7 @@ var DBC;
                             "onOnlyRow": "",
                             "onNoRow": "",
                             "onMultiRows": "",
+                            "dataSource": [],
                             "sortOrder": "txtTaishoJutakuAddress",
                             "isAscending": true,
                             "filterList": [],
@@ -337,8 +338,8 @@ var DBC;
                             "selectControlID": "btnClose",
                             "helpMessageID": "",
                             "jpControlName": "",
-                            "text": "閉じる",
                             "onClick": "onClick_btnClose",
+                            "text": "閉じる",
                             "appearance": 0,
                             "imageFileUrl": "",
                             "imageWidth": "",
@@ -374,15 +375,17 @@ var DBC;
                             "postParameterPanelNames": "JutakuKaishuhiRireki"
                         }
                     ],
-                    "requestSettings": [],
+                    "requestSettings": [
+                        {
+                            "eventName": "onLoad",
+                            "requestUrl": "dbc/db/dbc/JutakuKaishuhiRireki/onLoad"
+                        }
+                    ],
                     "hiddenInput": [],
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorderTop": false,
-                    "eraseBorderBottom": false,
-                    "eraseBorderRight": false,
-                    "eraseBorderLeft": false,
+                    "eraseBorder": false,
                     "backgroundColor": 0,
                     "widthAuto": false,
                     "panelDisplay": 0,
@@ -416,7 +419,9 @@ var DBC;
             "originalProperty": [],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
-            "dialogCancelEventNameForDialog": "onClick_btnClose"
+            "dialogCancelEventNameForDialog": "onClick_btnClose",
+            "canTransferEvent": true,
+            "heightForDialog": "M"
         };
         return JutakuKaishuhiRireki_Design;
     })(Uz.CommonChildDiv);

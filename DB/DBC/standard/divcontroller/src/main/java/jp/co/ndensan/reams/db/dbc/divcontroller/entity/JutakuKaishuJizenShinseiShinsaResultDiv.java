@@ -1,31 +1,26 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0700011;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufugakuSummary.KyufugakuSummaryDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * JutakuKaishuJizenShinseiShinsaResultPanel のクラスファイル 
+ * JutakuKaishuJizenShinseiShinsaResult のクラスファイル 
  * 
  * @author 自動生成
  */
-public class JutakuKaishuJizenShinseiShinsaResultPanelDiv extends Panel {
+public class JutakuKaishuJizenShinseiShinsaResultDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("JutakuJizenShinseiKyufugakuSummary")
-    private KyufugakuSummaryDiv JutakuJizenShinseiKyufugakuSummary;
-    @JsonProperty("hl")
-    private HorizontalLine hl;
     @JsonProperty("txtJudgeDate")
     private TextBoxDate txtJudgeDate;
     @JsonProperty("radJudgeKubun")
@@ -34,8 +29,6 @@ public class JutakuKaishuJizenShinseiShinsaResultPanelDiv extends Panel {
     private TextBoxMultiLine txtShoninCondition;
     @JsonProperty("txtFushoninReason")
     private TextBoxMultiLine txtFushoninReason;
-    @JsonProperty("chkResetInfo")
-    private CheckBoxList chkResetInfo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -43,26 +36,6 @@ public class JutakuKaishuJizenShinseiShinsaResultPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("JutakuJizenShinseiKyufugakuSummary")
-    public KyufugakuSummaryDiv getJutakuJizenShinseiKyufugakuSummary() {
-        return JutakuJizenShinseiKyufugakuSummary;
-    }
-
-    @JsonProperty("JutakuJizenShinseiKyufugakuSummary")
-    public void setJutakuJizenShinseiKyufugakuSummary(KyufugakuSummaryDiv JutakuJizenShinseiKyufugakuSummary) {
-        this.JutakuJizenShinseiKyufugakuSummary=JutakuJizenShinseiKyufugakuSummary;
-    }
-
-    @JsonProperty("hl")
-    public HorizontalLine getHl() {
-        return hl;
-    }
-
-    @JsonProperty("hl")
-    public void setHl(HorizontalLine hl) {
-        this.hl=hl;
-    }
-
     @JsonProperty("txtJudgeDate")
     public TextBoxDate getTxtJudgeDate() {
         return txtJudgeDate;
@@ -101,16 +74,6 @@ public class JutakuKaishuJizenShinseiShinsaResultPanelDiv extends Panel {
     @JsonProperty("txtFushoninReason")
     public void setTxtFushoninReason(TextBoxMultiLine txtFushoninReason) {
         this.txtFushoninReason=txtFushoninReason;
-    }
-
-    @JsonProperty("chkResetInfo")
-    public CheckBoxList getChkResetInfo() {
-        return chkResetInfo;
-    }
-
-    @JsonProperty("chkResetInfo")
-    public void setChkResetInfo(CheckBoxList chkResetInfo) {
-        this.chkResetInfo=chkResetInfo;
     }
 
 }

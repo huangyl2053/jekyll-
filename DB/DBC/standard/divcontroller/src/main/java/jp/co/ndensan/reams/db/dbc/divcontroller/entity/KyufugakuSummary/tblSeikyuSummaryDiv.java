@@ -55,6 +55,8 @@ public class tblSeikyuSummaryDiv extends TablePanel {
     private cel35AttblSeikyuSummary cel35;
     @JsonProperty("cel36")
     private cel36AttblSeikyuSummary cel36;
+    @JsonProperty("cell26")
+    private cell26AttblSeikyuSummary cell26;
 
     /*
      * [ Helperの作成 ]
@@ -138,6 +140,11 @@ public class tblSeikyuSummaryDiv extends TablePanel {
     @JsonIgnore
     public Button getBtnLimitOverCheck() {
         return this.cel36.getBtnLimitOverCheck();
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnRireki() {
+        return this.cell26.getBtnRireki();
     }
 
     /*
@@ -304,6 +311,16 @@ public class tblSeikyuSummaryDiv extends TablePanel {
     @JsonProperty("cel36")
     private void setCel36(cel36AttblSeikyuSummary cel36) {
         this.cel36=cel36;
+    }
+
+    @JsonProperty("cell26")
+    private cell26AttblSeikyuSummary getCell26() {
+        return cell26;
+    }
+
+    @JsonProperty("cell26")
+    private void setCell26(cell26AttblSeikyuSummary cell26) {
+        this.cell26=cell26;
     }
 
 }
@@ -624,6 +641,26 @@ class cel36AttblSeikyuSummary extends TableCell {
     @JsonProperty("btnLimitOverCheck")
     public void setBtnLimitOverCheck(Button btnLimitOverCheck) {
         this.btnLimitOverCheck=btnLimitOverCheck;
+    }
+
+}
+/**
+ * cell26 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class cell26AttblSeikyuSummary extends TableCell {
+    @JsonProperty("btnRireki")
+    private ButtonDialog btnRireki;
+
+    @JsonProperty("btnRireki")
+    public ButtonDialog getBtnRireki() {
+        return btnRireki;
+    }
+
+    @JsonProperty("btnRireki")
+    public void setBtnRireki(ButtonDialog btnRireki) {
+        this.btnRireki=btnRireki;
     }
 
 }

@@ -31,7 +31,6 @@ public class JutakuKaishuJizenShoninKetteiTsuchishoPanel {
         List<HashMap> targetSource = YamlLoader.DBZ.loadAsList(new RString("ReportPublish.yml"));
         ControlGenerator cg = new ControlGenerator(targetSource.get(0));
         panel.getTxtHakkoDate().setValue(cg.getAsRDate("発行日"));
-
         response.data = panel;
         return response;
     }
