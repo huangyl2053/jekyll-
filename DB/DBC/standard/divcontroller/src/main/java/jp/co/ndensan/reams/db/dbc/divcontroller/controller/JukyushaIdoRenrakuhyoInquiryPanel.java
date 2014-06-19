@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 
 /**
@@ -88,13 +89,48 @@ public class JukyushaIdoRenrakuhyoInquiryPanel {
         HashMap hashMap = null;
         //## set基本情報 
         //①対象者一覧から選択した内容をもとに基本情報に設定する
+        
         //異動日
-
         inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().
                 getTxtRenrakuhyoIdoDate().setValue(new FlexibleDate(
                                 setSeireki(searchPanel.getJukyushaIdoRenrakuhyoSearchResultIchiran().
                                         getDgJukyushaIdoRenrakuhyoSearchResult().getClickedItem().getTxtResultIdoDate())));
+      
+        //異動区分
+        for (int i = 0; i < inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getRadRenrakuhyoIdoKubun().getDataSource().size(); i++) {
+            
+            System.out.print("asdfasdfasdfasdfsda" +
+                    inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getRadRenrakuhyoIdoKubun().getDataSource().get(i).getValue().toString());
 
+            if (inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getRadRenrakuhyoIdoKubun().getDataSource().get(i).getValue().toString().
+                    equals(searchPanel.getJukyushaIdoRenrakuhyoSearchResultIchiran().
+                            getDgJukyushaIdoRenrakuhyoSearchResult().getClickedItem().getTxtRenrakuhyoIdoKubun().toString())) {
+
+                inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().
+                        getRadRenrakuhyoIdoKubun().setSelectedItem(
+                                inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getRadRenrakuhyoIdoKubun().getDataSource().get(i).getKey());
+                break;
+            }
+        }
+
+        //異動事由        
+        for (int i = 0; i < inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getDdlIdoJiyu().getDataSource().size(); i++) {
+
+                        System.out.print("asdfasdfasdfasdfsda" +
+                    inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getDdlIdoJiyu().getDataSource().get(i).getValue().toString());
+            
+            if (inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getDdlIdoJiyu().getDataSource().get(i).getValue().toString().
+                    equals(searchPanel.getJukyushaIdoRenrakuhyoSearchResultIchiran().
+                            getDgJukyushaIdoRenrakuhyoSearchResult().getClickedItem().getTxtDdlIdoJiyu().toString())) {
+
+                inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().
+                        getDdlIdoJiyu().setSelectedItem(
+                                inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getDdlIdoJiyu().getDataSource().get(i).getKey());
+                 break;
+            }
+        }
+        
+        
         //被保険番号
         inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().
                 getTxtRenrakuhyoHihoNo().setValue(new RString(
@@ -186,8 +222,13 @@ public class JukyushaIdoRenrakuhyoInquiryPanel {
         
         //##setRadio
         //異動区分
-        inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().
-                getRadRenrakuhyoIdoKubun().setSelectedItem(ymlDt.getAsRString("radRenrakuhyoIdoKubun"));
+        //inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().
+        //        getRadRenrakuhyoIdoKubun().setSelectedItem(ymlDt.getAsRString("radRenrakuhyoIdoKubun"));
+
+        //異動事由区分
+        //inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getDdlIdoJiyu()
+        //       .setSelectedItem(ymlDt.getAsRString("radRenrakuhyoIdoKubun"));
+
         //性別
         inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().
                 getRadHihoSex().setSelectedItem(ymlDt.getAsRString("radHihoSex"));
