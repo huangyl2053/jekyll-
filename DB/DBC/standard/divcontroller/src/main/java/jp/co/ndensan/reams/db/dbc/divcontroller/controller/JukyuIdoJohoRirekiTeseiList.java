@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0200001.JukyuIdoJohoRirekiTeseiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0200001.dgJukyuIdoJohoRirekiTeseiList_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -46,26 +47,26 @@ public class JukyuIdoJohoRirekiTeseiList {
         List<HashMap> mapList = getYamlData(YML_RIREKI_TEISEI_LIST);
         List<dgJukyuIdoJohoRirekiTeseiList_Row> list = new ArrayList<>();
         for (int index = 0; index < mapList.size(); index++) {
-            HashMap map = mapList.get(index);
+            ControlGenerator cg = new ControlGenerator(mapList.get(index));
             list.add(createJukyuIdoJohoRirekiTeseiListRow(
-                    map.get("被保番号").toString(),
-                    map.get("被保険者氏名").toString(),
-                    map.get("異動日").toString(),
-                    map.get("項目").toString()
+                    cg.getAsRString("被保番号"),
+                    cg.getAsRString("被保険者氏名"),
+                    cg.getAsRString("異動日"),
+                    cg.getAsRString("項目")
             ));
         }
         panel.getDgJukyuIdoJohoRirekiTeseiList().setDataSource(list);
     }
 
     private dgJukyuIdoJohoRirekiTeseiList_Row createJukyuIdoJohoRirekiTeseiListRow(
-            String txtHihoNo,
-            String txtHihokenshaName,
-            String txtIdoYMD,
-            String txtKomoku) {
+            RString txtHihoNo,
+            RString txtHihokenshaName,
+            RString txtIdoYMD,
+            RString txtKomoku) {
         return new dgJukyuIdoJohoRirekiTeseiList_Row(
-                new RString(txtHihoNo),
-                new RString(txtHihokenshaName),
-                new RString(txtIdoYMD),
-                new RString(txtKomoku));
+                txtHihoNo,
+                txtHihokenshaName,
+                txtIdoYMD,
+                txtKomoku);
     }
 }

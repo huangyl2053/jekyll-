@@ -200,7 +200,7 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "訂正一覧",
+   "stateName": "履歴訂正一覧",
    "showWizard": true,
    "visibleDivs": [
     {

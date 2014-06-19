@@ -9,9 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0200000.HokenshaSofuListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0200000.dgHokenshaSofuList_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
@@ -36,8 +36,8 @@ public class HokenshaSofuList {
     public ResponseData<HokenshaSofuListDiv> onLoad(HokenshaSofuListDiv panel) {
         ResponseData<HokenshaSofuListDiv> response = new ResponseData<>();
 
-        HashMap source = getHokenshaSofuListYaml().get(0);
-        panel.getTxtShoriYM().setValue(new RDate(source.get("処理年月").toString()));
+        ControlGenerator cg = new ControlGenerator(getHokenshaSofuListYaml().get(0));
+        panel.getTxtShoriYM().setValue(cg.getAsRDate("処理年月"));
         setHokenshaSofuList(panel);
 
         response.data = panel;
@@ -51,30 +51,31 @@ public class HokenshaSofuList {
         List<HashMap> sourceList = getHokenshaSofuListYaml();
         dgRowList.clear();
         for (int i = 1; i < sourceList.size(); i++) {
+            ControlGenerator cg = new ControlGenerator(sourceList.get(i));
             dgRowList.add(create保険者情報送付一覧アイテム(
-                    sourceList.get(i).get("送付情報").toString(),
-                    sourceList.get(i).get("前月").toString(),
-                    sourceList.get(i).get("前々月").toString(),
-                    sourceList.get(i).get("当月状態").toString(),
-                    sourceList.get(i).get("当月処理日時").toString()));
+                    cg.getAsRString("送付情報"),
+                    cg.getAsRString("前月"),
+                    cg.getAsRString("前々月"),
+                    cg.getAsRString("当月状態"),
+                    cg.getAsRString("当月処理日時")));
         }
         dgRow.setDataSource(dgRowList);
     }
 
     private dgHokenshaSofuList_Row create保険者情報送付一覧アイテム(
-            String txtSofuJoho,
-            String txtZenZengetsu,
-            String txtZengetsu,
-            String txtTogetsuJotai,
-            String txtShoriNichiji
+            RString txtSofuJoho,
+            RString txtZenZengetsu,
+            RString txtZengetsu,
+            RString txtTogetsuJotai,
+            RString txtShoriNichiji
     ) {
         Button btnSelect = new Button();
         return new dgHokenshaSofuList_Row(
                 btnSelect,
-                new RString(txtSofuJoho),
-                new RString(txtZenZengetsu),
-                new RString(txtZengetsu),
-                new RString(txtTogetsuJotai),
-                new RString(txtShoriNichiji));
+                txtSofuJoho,
+                txtZenZengetsu,
+                txtZengetsu,
+                txtTogetsuJotai,
+                txtShoriNichiji);
     }
 }

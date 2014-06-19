@@ -6,22 +6,13 @@
    "layoutName": "DBC0200001",
    "eventName": "modify",
    "toLayoutSubGyomuCode": "DBC",
-   "toLayoutName": "DBC0220012",
-   "toEventName": ""
-  },
-  {
-   "id": "1",
-   "layoutSubGyomuCode": "DBC",
-   "layoutName": "DBC0220012",
-   "eventName": "update",
-   "toLayoutSubGyomuCode": "DBC",
-   "toLayoutName": "DBC0200001",
+   "toLayoutName": "DBC0200002",
    "toEventName": ""
   },
   {
    "id": "2",
    "layoutSubGyomuCode": "DBC",
-   "layoutName": "DBC0220012",
+   "layoutName": "DBC0200002",
    "eventName": "cancel",
    "toLayoutSubGyomuCode": "DBC",
    "toLayoutName": "DBC0200001",

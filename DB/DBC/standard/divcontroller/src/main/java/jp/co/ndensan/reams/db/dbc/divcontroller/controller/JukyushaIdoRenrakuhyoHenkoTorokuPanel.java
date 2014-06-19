@@ -22,12 +22,10 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoRoji
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoShikyugendoKijungakuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JukyushaIdoRenrakuhyoYokaigoninteiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 受給者異動連絡票変更登録 受給者異動連絡票のコントローラークラスです。
@@ -66,112 +64,112 @@ public class JukyushaIdoRenrakuhyoHenkoTorokuPanel {
 
         List<HashMap> ymlData = getYmlData();
 
-        HashMap map = ymlData.get(YML_IDX_KIHON);
+        ControlGenerator cg = new ControlGenerator(ymlData.get(YML_IDX_KIHON));
         JukyushaIdoRenrakuhyoKihonJohoDiv kihonJohoDiv = panel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho();
-        kihonJohoDiv.getTxtRenrakuhyoIdoDate().setValue(new FlexibleDate(map.get("異動日").toString()));
-        kihonJohoDiv.getRadRenrakuhyoIdoKubun().setSelectedItem(new RString(map.get("異動区分").toString()));
-        kihonJohoDiv.getDdlIdoJiyu().setSelectedItem(new RString(map.get("異動事由").toString()));
-        kihonJohoDiv.getTxtRenrakuhyoHihoNo().setValue(new RString(map.get("被保番号").toString()));
-        kihonJohoDiv.getTxtRenrakuhyoHihoName().setValue(new RString(map.get("カナ氏名").toString()));
-        kihonJohoDiv.getTxtHihoBirthday().setValue(new FlexibleDate(map.get("生年月日").toString()));
-        kihonJohoDiv.getRadHihoSex().setSelectedItem(new RString(map.get("性別").toString()));
-        kihonJohoDiv.getTxtShikakuShutokuDate().setValue(new FlexibleDate(map.get("資格取得日").toString()));
-        kihonJohoDiv.getTxtShikakuSoshitsuDate().setValue(new FlexibleDate(map.get("資格喪失日").toString()));
-        kihonJohoDiv.getTxtShokisaiHokenshaNo().setValue(new RString(map.get("証記載保険者番号").toString()));
-        kihonJohoDiv.getTxtKoikiHokenshaNo().setValue(new RString(map.get("広域保険者番号").toString()));
-        kihonJohoDiv.getTxtRenrakuhyoSendYM().setValue(new FlexibleDate(map.get("送付年月").toString()));
+        kihonJohoDiv.getTxtRenrakuhyoIdoDate().setValue(cg.getAsFlexibleDate("異動日"));
+        kihonJohoDiv.getRadRenrakuhyoIdoKubun().setSelectedItem(cg.getAsRString("異動区分"));
+        kihonJohoDiv.getDdlIdoJiyu().setSelectedItem(cg.getAsRString("異動事由"));
+        kihonJohoDiv.getTxtRenrakuhyoHihoNo().setValue(cg.getAsRString("被保番号"));
+        kihonJohoDiv.getTxtRenrakuhyoHihoName().setValue(cg.getAsRString("カナ氏名"));
+        kihonJohoDiv.getTxtHihoBirthday().setValue(cg.getAsFlexibleDate("生年月日"));
+        kihonJohoDiv.getRadHihoSex().setSelectedItem(cg.getAsRString("性別"));
+        kihonJohoDiv.getTxtShikakuShutokuDate().setValue(cg.getAsFlexibleDate("資格取得日"));
+        kihonJohoDiv.getTxtShikakuSoshitsuDate().setValue(cg.getAsFlexibleDate("資格喪失日"));
+        kihonJohoDiv.getTxtShokisaiHokenshaNo().setValue(cg.getAsRString("証記載保険者番号"));
+        kihonJohoDiv.getTxtKoikiHokenshaNo().setValue(cg.getAsRString("広域保険者番号"));
+        kihonJohoDiv.getTxtRenrakuhyoSendYM().setValue(cg.getAsFlexibleDate("送付年月"));
 
-        map = ymlData.get(YML_IDX_YOKAIGO_NINTEI);
+        cg = new ControlGenerator(ymlData.get(YML_IDX_YOKAIGO_NINTEI));
         JukyushaIdoRenrakuhyoYokaigoninteiDiv ninteiDiv = panel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoYokaigonintei();
-        ninteiDiv.getTxtShinseiDate().setValue(new FlexibleDate(map.get("申請日").toString()));
-        ninteiDiv.getDdlYokaigoJotaiKubun().setSelectedItem(new RString(map.get("状態区分").toString()));
-        ninteiDiv.getTxtNinteiDateRange().setFromValue(new RDate(map.get("認定開始日").toString()));
-        ninteiDiv.getTxtNinteiDateRange().setToValue(new RDate(map.get("認定終了日").toString()));
-        ninteiDiv.getRadShinseiType().setSelectedItem(new RString(map.get("申請種別").toString()));
-        ninteiDiv.getRadHenkoShinseichuKubun().setSelectedItem(new RString(map.get("変更申請中区分").toString()));
-        ninteiDiv.getRadMinashiYokaigoKubun().setSelectedItem(new RString(map.get("みなし区分").toString()));
+        ninteiDiv.getTxtShinseiDate().setValue(cg.getAsFlexibleDate("申請日"));
+        ninteiDiv.getDdlYokaigoJotaiKubun().setSelectedItem(cg.getAsRString("状態区分"));
+        ninteiDiv.getTxtNinteiDateRange().setFromValue(cg.getAsRDate("認定開始日"));
+        ninteiDiv.getTxtNinteiDateRange().setToValue(cg.getAsRDate("認定終了日"));
+        ninteiDiv.getRadShinseiType().setSelectedItem(cg.getAsRString("申請種別"));
+        ninteiDiv.getRadHenkoShinseichuKubun().setSelectedItem(cg.getAsRString("変更申請中区分"));
+        ninteiDiv.getRadMinashiYokaigoKubun().setSelectedItem(cg.getAsRString("みなし区分"));
 
-        map = ymlData.get(YML_IDX_SHIKYU_GENDO_KIJUN);
+        cg = new ControlGenerator(ymlData.get(YML_IDX_SHIKYU_GENDO_KIJUN));
         JukyushaIdoRenrakuhyoShikyugendoKijungakuDiv jungakuDiv = panel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoShikyugendoKijungaku();
-        jungakuDiv.getTxtKyuHomonTsushoShikyuGendoKijungaku().setValue(new Decimal(map.get("旧訪問通所基準額").toString()));
-        jungakuDiv.getTxtKyuHomonTsushoKanriTekiyoDateRange().setFromValue(new RDate(map.get("旧訪問通所適用開始日").toString()));
-        jungakuDiv.getTxtKyuHomonTsushoKanriTekiyoDateRange().setToValue(new RDate(map.get("旧訪問通所適用終了日").toString()));
-        jungakuDiv.getTxtKyuTankiNyushoShikyuGendoKijungaku().setValue(new Decimal(map.get("旧短期入所基準額").toString()));
-        jungakuDiv.getTxtKyuTankiNyushoKanriTekiyoDateRange().setFromValue(new RDate(map.get("旧短期入所適用開始日").toString()));
-        jungakuDiv.getTxtKyuTankiNyushoKanriTekiyoDateRange().setToValue(new RDate(map.get("旧短期入所適用終了日").toString()));
+        jungakuDiv.getTxtKyuHomonTsushoShikyuGendoKijungaku().setValue(cg.getAsDecimal("旧訪問通所基準額"));
+        jungakuDiv.getTxtKyuHomonTsushoKanriTekiyoDateRange().setFromValue(cg.getAsRDate("旧訪問通所適用開始日"));
+        jungakuDiv.getTxtKyuHomonTsushoKanriTekiyoDateRange().setToValue(cg.getAsRDate("旧訪問通所適用終了日"));
+        jungakuDiv.getTxtKyuTankiNyushoShikyuGendoKijungaku().setValue(cg.getAsDecimal("旧短期入所基準額"));
+        jungakuDiv.getTxtKyuTankiNyushoKanriTekiyoDateRange().setFromValue(cg.getAsRDate("旧短期入所適用開始日"));
+        jungakuDiv.getTxtKyuTankiNyushoKanriTekiyoDateRange().setToValue(cg.getAsRDate("旧短期入所適用終了日"));
 
-        map = ymlData.get(YML_IDX_SERVICE_KEIKAKU);
+        cg = new ControlGenerator(ymlData.get(YML_IDX_SERVICE_KEIKAKU));
         JukyushaIdoRenrakuhyoKyotakuServicePlanDiv planDiv = panel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKyotakuServicePlan();
-        planDiv.getRadPlanSakuseiKubun().setSelectedItem(new RString(map.get("計画作成区分").toString()));
-        planDiv.getTxtShienJigyoshaNo().setValue(new RString(map.get("支援事業者コード").toString()));
-        planDiv.getTxtShienJigyoshaName().setValue(new RString(map.get("支援事業者名").toString()));
-        planDiv.getTxtKyotakuServicePlanTekiyoDateRange().setFromValue(new RDate(map.get("適用開始日").toString()));
-        planDiv.getTxtKyotakuServicePlanTekiyoDateRange().setToValue(new RDate(map.get("適用終了日").toString()));
-        planDiv.getRadShokiboKyotakuServiceRiyoUmu().setSelectedItem(new RString(map.get("小規模居宅サービス利用").toString()));
+        planDiv.getRadPlanSakuseiKubun().setSelectedItem(cg.getAsRString("計画作成区分"));
+        planDiv.getTxtShienJigyoshaNo().setValue(cg.getAsRString("支援事業者コード"));
+        planDiv.getTxtShienJigyoshaName().setValue(cg.getAsRString("支援事業者名"));
+        planDiv.getTxtKyotakuServicePlanTekiyoDateRange().setFromValue(cg.getAsRDate("適用開始日"));
+        planDiv.getTxtKyotakuServicePlanTekiyoDateRange().setToValue(cg.getAsRDate("適用終了日"));
+        planDiv.getRadShokiboKyotakuServiceRiyoUmu().setSelectedItem(cg.getAsRString("小規模居宅サービス利用"));
 
-        map = ymlData.get(YML_IDX_GENMEN_GENGAKU);
+        cg = new ControlGenerator(ymlData.get(YML_IDX_GENMEN_GENGAKU));
         JukyushaIdoRenrakuhyoGemmenGengakuDiv gengakuDiv = panel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoGemmenGengaku();
-        gengakuDiv.getRadGemmenShinseichuKubun().setSelectedItem(new RString(map.get("減免申請中区分").toString()));
+        gengakuDiv.getRadGemmenShinseichuKubun().setSelectedItem(cg.getAsRString("減免申請中区分"));
         JukyushaIdoRenrakuhyoRiyoshaFutanDiv riyoshaFutanDiv
                 = gengakuDiv.getJukyushaIdoRenrakuhyoGemmenGengakuSub().getJukyushaIdoRenrakuhyoRiyoshaFutan();
-        riyoshaFutanDiv.getRadRiyoshaFutanKubun().setSelectedItem(new RString(map.get("利用者負担区分").toString()));
-        riyoshaFutanDiv.getTxtRiyoshaFutanKyufuritsu().setValue(new Decimal(map.get("利用者負担給付率").toString()));
-        riyoshaFutanDiv.getTxtRiyoshaFutanTekiyoDateRange().setFromValue(new RDate(map.get("利用者負担適用開始日").toString()));
-        riyoshaFutanDiv.getTxtRiyoshaFutanTekiyoDateRange().setToValue(new RDate(map.get("利用者負担適用終了日").toString()));
+        riyoshaFutanDiv.getRadRiyoshaFutanKubun().setSelectedItem(cg.getAsRString("利用者負担区分"));
+        riyoshaFutanDiv.getTxtRiyoshaFutanKyufuritsu().setValue(cg.getAsDecimal("利用者負担給付率"));
+        riyoshaFutanDiv.getTxtRiyoshaFutanTekiyoDateRange().setFromValue(cg.getAsRDate("利用者負担適用開始日"));
+        riyoshaFutanDiv.getTxtRiyoshaFutanTekiyoDateRange().setToValue(cg.getAsRDate("利用者負担適用終了日"));
         JukyushaIdoRenrakuhyoFukushiHojinKeigenDiv shafukuKeigenDiv
                 = gengakuDiv.getJukyushaIdoRenrakuhyoGemmenGengakuSub().getJukyushaIdoRenrakuhyoFukushiHojinKeigen();
-        shafukuKeigenDiv.getTxtKeigenritsu().setValue(new Decimal(map.get("社福法人軽軽減率").toString()));
-        shafukuKeigenDiv.getTxtKeigenritsuTekiyoDateRange().setFromValue(new RDate(map.get("社福法人軽減適用開始日").toString()));
-        shafukuKeigenDiv.getTxtKeigenritsuTekiyoDateRange().setToValue(new RDate(map.get("社福法人軽減適用終了日").toString()));
+        shafukuKeigenDiv.getTxtKeigenritsu().setValue(cg.getAsDecimal("社福法人軽軽減率"));
+        shafukuKeigenDiv.getTxtKeigenritsuTekiyoDateRange().setFromValue(cg.getAsRDate("社福法人軽減適用開始日"));
+        shafukuKeigenDiv.getTxtKeigenritsuTekiyoDateRange().setToValue(cg.getAsRDate("社福法人軽減適用終了日"));
         JukyushaIdoRenrakuhyoHyojunFutanDiv hyojunFutanDiv
                 = gengakuDiv.getJukyushaIdoRenrakuhyoGemmenGengakuSub().getJukyushaIdoRenrakuhyoHyojunFutan();
-        hyojunFutanDiv.getRadHyojunFutanKubun().setSelectedItem(new RString(map.get("標準負担区分").toString()));
-        hyojunFutanDiv.getTxtHyojunFutangaku().setValue(new Decimal(map.get("標準負担額").toString()));
-        hyojunFutanDiv.getTxtHyojunFutanTekiyoDateRange().setFromValue(new RDate(map.get("標準負担適用開始日").toString()));
-        hyojunFutanDiv.getTxtHyojunFutanTekiyoDateRange().setToValue(new RDate(map.get("標準負担適用終了日").toString()));
+        hyojunFutanDiv.getRadHyojunFutanKubun().setSelectedItem(cg.getAsRString("標準負担区分"));
+        hyojunFutanDiv.getTxtHyojunFutangaku().setValue(cg.getAsDecimal("標準負担額"));
+        hyojunFutanDiv.getTxtHyojunFutanTekiyoDateRange().setFromValue(cg.getAsRDate("標準負担適用開始日"));
+        hyojunFutanDiv.getTxtHyojunFutanTekiyoDateRange().setToValue(cg.getAsRDate("標準負担適用終了日"));
         JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHiDiv serviceHiDiv = gengakuDiv.getJukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi();
-        serviceHiDiv.getRadNinteiShinseichuKubun().setSelectedItem(new RString(map.get("認定申請中区分").toString()));
-        serviceHiDiv.getRadServiceKubun().setSelectedItem(new RString(map.get("サービス区分").toString()));
-        serviceHiDiv.getRadTokureiKeigenSochiTaisho().setSelectedItem(new RString(map.get("特例減額措置対象").toString()));
-        serviceHiDiv.getTxtShokuhiFutanGendogaku().setValue(new Decimal(map.get("食費負担限度額").toString()));
-        serviceHiDiv.getTxtFutanGendogakuTekiyoDateRange().setFromValue(new RDate(map.get("負担限度額適用開始日").toString()));
-        serviceHiDiv.getTxtFutanGendogakuTekiyoDateRange().setToValue(new RDate(map.get("負担限度額適用終了日").toString()));
-        serviceHiDiv.getTxtUnitKoshitsuGendogaku().setValue(new Decimal(map.get("ユニット型個室").toString()));
-        serviceHiDiv.getTxtUnitJunKoshitsuFutanGendogaku().setValue(new Decimal(map.get("ユニット型準個室").toString()));
-        serviceHiDiv.getTxtJuraigataKoshitsuTokuyoFutanGendogaku().setValue(new Decimal(map.get("従来型個室(特養等)").toString()));
-        serviceHiDiv.getTxtJuraigataKoshitsuRokenRyoyoFutanGendogaku().setValue(new Decimal(map.get("従来型個室(老健、療養等)").toString()));
-        serviceHiDiv.getTxtTashoshitsu().setValue(new Decimal(map.get("多床室").toString()));
+        serviceHiDiv.getRadNinteiShinseichuKubun().setSelectedItem(cg.getAsRString("認定申請中区分"));
+        serviceHiDiv.getRadServiceKubun().setSelectedItem(cg.getAsRString("サービス区分"));
+        serviceHiDiv.getRadTokureiKeigenSochiTaisho().setSelectedItem(cg.getAsRString("特例減額措置対象"));
+        serviceHiDiv.getTxtShokuhiFutanGendogaku().setValue(cg.getAsDecimal("食費負担限度額"));
+        serviceHiDiv.getTxtFutanGendogakuTekiyoDateRange().setFromValue(cg.getAsRDate("負担限度額適用開始日"));
+        serviceHiDiv.getTxtFutanGendogakuTekiyoDateRange().setToValue(cg.getAsRDate("負担限度額適用終了日"));
+        serviceHiDiv.getTxtUnitKoshitsuGendogaku().setValue(cg.getAsDecimal("ユニット型個室"));
+        serviceHiDiv.getTxtUnitJunKoshitsuFutanGendogaku().setValue(cg.getAsDecimal("ユニット型準個室"));
+        serviceHiDiv.getTxtJuraigataKoshitsuTokuyoFutanGendogaku().setValue(cg.getAsDecimal("従来型個室(特養等)"));
+        serviceHiDiv.getTxtJuraigataKoshitsuRokenRyoyoFutanGendogaku().setValue(cg.getAsDecimal("従来型個室(老健、療養等)"));
+        serviceHiDiv.getTxtTashoshitsu().setValue(cg.getAsDecimal("多床室"));
 
-        map = ymlData.get(YML_IDX_KOKI_KOREI_KOKUHO);
+        cg = new ControlGenerator(ymlData.get(YML_IDX_KOKI_KOREI_KOKUHO));
         JukyushaIdoRenrakuhyoKokiKoreiDiv koreiDiv
                 = panel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKokiKoreiKokuho().getJukyushaIdoRenrakuhyoKokiKorei();
-        koreiDiv.getTxtKokiKoreiHokenshaNo().setValue(new RString(map.get("後期高齢保険者番号").toString()));
-        koreiDiv.getTxtKokiKoreiHihokenshaNo().setValue(new RString(map.get("後期高齢被保番号").toString()));
+        koreiDiv.getTxtKokiKoreiHokenshaNo().setValue(cg.getAsRString("後期高齢保険者番号"));
+        koreiDiv.getTxtKokiKoreiHihokenshaNo().setValue(cg.getAsRString("後期高齢被保番号"));
         JukyushaIdoRenrakuhyoKokuhoDiv kokuhoDiv
                 = panel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKokiKoreiKokuho().getJukyushaIdoRenrakuhyoKokuho();
-        kokuhoDiv.getTxtKokuhoHokenshaNo().setValue(new RString(map.get("国保保険者番号").toString()));
-        kokuhoDiv.getTxtKokuhoHihokenshashoNo().setValue(new RString(map.get("国保被保険者証番号").toString()));
-        kokuhoDiv.getTxtKokuhoKojinNo().setValue(new RString(map.get("国保個人番号").toString()));
+        kokuhoDiv.getTxtKokuhoHokenshaNo().setValue(cg.getAsRString("国保保険者番号"));
+        kokuhoDiv.getTxtKokuhoHihokenshashoNo().setValue(cg.getAsRString("国保被保険者証番号"));
+        kokuhoDiv.getTxtKokuhoKojinNo().setValue(cg.getAsRString("国保個人番号"));
 
-        map = ymlData.get(YML_IDX_KYUFU_SEIGEN);
+        cg = new ControlGenerator(ymlData.get(YML_IDX_KYUFU_SEIGEN));
         JukyushaIdoRenrakuhyoKyufuSeigenDiv seigenDiv = panel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKyufuSeigen();
-        seigenDiv.getRadKohiFutanJogengakuGengakuUmu().setSelectedItem(new RString(map.get("生活保護等").toString()));
-        seigenDiv.getTxtShokanBaraikaDateRange().setFromValue(new RDate(map.get("償還払化開始日").toString()));
-        seigenDiv.getTxtShokanBaraikaDateRange().setToValue(new RDate(map.get("償還払化終了日").toString()));
-        seigenDiv.getTxtKyufuritsuHikisageDateRange().setFromValue(new RDate(map.get("給付率引下げ開始日").toString()));
-        seigenDiv.getTxtKyufuritsuHikisageDateRange().setToValue(new RDate(map.get("給付率引下げ終了日").toString()));
+        seigenDiv.getRadKohiFutanJogengakuGengakuUmu().setSelectedItem(cg.getAsRString("生活保護等"));
+        seigenDiv.getTxtShokanBaraikaDateRange().setFromValue(cg.getAsRDate("償還払化開始日"));
+        seigenDiv.getTxtShokanBaraikaDateRange().setToValue(cg.getAsRDate("償還払化終了日"));
+        seigenDiv.getTxtKyufuritsuHikisageDateRange().setFromValue(cg.getAsRDate("給付率引下げ開始日"));
+        seigenDiv.getTxtKyufuritsuHikisageDateRange().setToValue(cg.getAsRDate("給付率引下げ終了日"));
 
-        map = ymlData.get(YML_IDX_NIJI_YOBO_JIGYO);
+        cg = new ControlGenerator(ymlData.get(YML_IDX_NIJI_YOBO_JIGYO));
         JukyushaIdoRenrakuhyoNijiyoboJigyoDiv jigyoDiv = panel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoNijiyoboJigyo();
-        jigyoDiv.getRadNijiyoboJigyoKubun().setSelectedItem(new RString(map.get("事業区分").toString()));
-        jigyoDiv.getTxtNijiyoboJigyoYukoDateRange().setFromValue(new RDate(map.get("事業有効開始日").toString()));
-        jigyoDiv.getTxtNijiyoboJigyoYukoDateRange().setToValue(new RDate(map.get("事業有効終了日").toString()));
+        jigyoDiv.getRadNijiyoboJigyoKubun().setSelectedItem(cg.getAsRString("事業区分"));
+        jigyoDiv.getTxtNijiyoboJigyoYukoDateRange().setFromValue(cg.getAsRDate("事業有効開始日"));
+        jigyoDiv.getTxtNijiyoboJigyoYukoDateRange().setToValue(cg.getAsRDate("事業有効終了日"));
 
-        map = ymlData.get(YML_IDX_ROJIN_HOKEN);
+        cg = new ControlGenerator(ymlData.get(YML_IDX_ROJIN_HOKEN));
         JukyushaIdoRenrakuhyoRojinHokenDiv rojinHokenDiv = panel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoRojinHoken();
-        rojinHokenDiv.getRokenShichosonNo().setValue(new RString(map.get("市町村番号").toString()));
-        rojinHokenDiv.getRokenJukyushaNo().setValue(new RString(map.get("受給者番号").toString()));
-        rojinHokenDiv.getRokenKohiFutanshaNo().setValue(new RString(map.get("公費負担番号").toString()));
+        rojinHokenDiv.getRokenShichosonNo().setValue(cg.getAsRString("市町村番号"));
+        rojinHokenDiv.getRokenJukyushaNo().setValue(cg.getAsRString("受給者番号"));
+        rojinHokenDiv.getRokenKohiFutanshaNo().setValue(cg.getAsRString("公費負担番号"));
     }
 
     private List<HashMap> getYmlData() {

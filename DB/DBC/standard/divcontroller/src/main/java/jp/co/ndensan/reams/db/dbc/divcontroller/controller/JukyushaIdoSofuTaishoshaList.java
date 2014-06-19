@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0200000.JukyushaIdoSofuTaishoshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -39,11 +39,10 @@ public class JukyushaIdoSofuTaishoshaList {
     }
 
     private void setJukyushaIdoRenrakuhyoSakusei(JukyushaIdoSofuTaishoshaListDiv panel) {
-        HashMap source = getYaml().get(0);
-
-        panel.getJukyushaIdoSofuTaishoshaListPrintSetting().getTxtIssueDate().setValue(new RDate(source.get("発効日").toString()));
-        panel.getJukyushaIdoSofuTaishoshaListOutputOrder().getTxtSortName().setValue(new RString(source.get("出力順名称").toString()));
-        panel.getJukyushaIdoSofuTaishoshaListOutputOrder().getTxtKaiPage().setValue(new RString(source.get("改頁").toString()));
-        panel.getJukyushaIdoSofuTaishoshaListOutputOrder().getTxtSort().setValue(new RString(source.get("出力順").toString()));
+        ControlGenerator cg = new ControlGenerator(getYaml().get(0));
+        panel.getJukyushaIdoSofuTaishoshaListPrintSetting().getTxtIssueDate().setValue(cg.getAsRDate("発効日"));
+        panel.getJukyushaIdoSofuTaishoshaListOutputOrder().getTxtSortName().setValue(cg.getAsRString("出力順名称"));
+        panel.getJukyushaIdoSofuTaishoshaListOutputOrder().getTxtKaiPage().setValue(cg.getAsRString("改頁"));
+        panel.getJukyushaIdoSofuTaishoshaListOutputOrder().getTxtSort().setValue(cg.getAsRString("出力順"));
     }
 }
