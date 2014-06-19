@@ -1,14 +1,12 @@
-package jp.co.ndensan.reams.db.dba.divcontroller.entity;
+package jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.KaijoJiyuInputDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.ShisetsuJohoInputDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.SochimotoJohoInputDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.TekiyoJiyuInputDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.ShisetsuJohoInputDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.SochimotoJohoInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;

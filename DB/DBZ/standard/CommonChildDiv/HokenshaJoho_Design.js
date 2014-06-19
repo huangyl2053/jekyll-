@@ -163,7 +163,7 @@ var DBZ;
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "G2",
+                    "width": "400",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -209,11 +209,11 @@ var DBZ;
                     "eraseBorderRight": true,
                     "eraseBorderLeft": true,
                     "backgroundColor": 0,
-                    "widthAuto": true,
+                    "widthAuto": false,
                     "panelDisplay": 0,
                     "isGroupBox": false,
                     "readOnly": false,
-                    "height": "Auto"
+                    "height": "XS"
                 }
             ],
             "controlType": "CommonChildDiv",

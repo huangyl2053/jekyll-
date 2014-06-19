@@ -1,23 +1,21 @@
-package jp.co.ndensan.reams.db.dba.divcontroller.entity;
+package jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.JutokuJohoInputDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.ShisetsuHenkoInputDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dgJushochiTokureiRireki_Row;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.dgJushochiTokureiRireki_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * TekiyoJoho のクラスファイル 
+ * TajutokuTekiyoJoho のクラスファイル 
  * 
  * @author 自動生成
  */
-public class TekiyoJohoDiv extends Panel {
+public class TajutokuTekiyoJohoDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

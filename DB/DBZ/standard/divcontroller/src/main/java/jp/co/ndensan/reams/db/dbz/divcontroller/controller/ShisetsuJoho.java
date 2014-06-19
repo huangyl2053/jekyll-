@@ -27,6 +27,37 @@ public class ShisetsuJoho {
     private static final RString TEKIYO_JOGAI_SHISETSU = new RString("shisetsuJoho/tekiyoJogaiShisetsuData.yml");
 
     /**
+     * 引数から渡された施設情報Divの表示を変更します。<br/>
+     * ここでは、住所地特例登録処理などの処理からの使用を想定しており、入力ガイド起動ボタンとラジオボタンに表示される情報を
+     * 介護保険施設とその他特例施設に限定します。
+     *
+     * @param div 施設情報Div
+     */
+    public static void setJutokuMode(ShisetsuJohoDiv div) {
+        div.getRadShisetsuShurui().setDataSource(div.getRadShisetsuShurui().getDataSource().subList(0, 2));
+        div.getRadShisetsuShurui().setSelectedItem(new RString("kaigoHokenShisetsu"));
+        div.getBtnJigyoshaInputGuide().setDisplayNone(false);
+        div.getBtnOtherTokureiShisetsuInputGuide().setDisplayNone(true);
+        div.getBtnJogaiShisetsuInputGuide().setDisplayNone(true);
+    }
+
+    /**
+     * 引数から渡された施設情報Divの表示を変更します。<br/>
+     * ここでは、その他特例施設入居による適用などの処理からの使用を想定しており、入力ガイド起動ボタンとラジオボタンに表示される情報を
+     * 適用除外施設に限定します。
+     *
+     * @param div 施設情報Div
+     */
+    public static void setTekiyoJogaiMode(ShisetsuJohoDiv div) {
+        div.getRadShisetsuShurui().setDataSource(div.getRadShisetsuShurui().getDataSource().subList(2, 3));
+        div.getRadShisetsuShurui().setSelectedItem(new RString("tekiyoJogaiShisetsu"));
+        div.getBtnJigyoshaInputGuide().setDisplayNone(true);
+        div.getBtnOtherTokureiShisetsuInputGuide().setDisplayNone(true);
+        div.getBtnJogaiShisetsuInputGuide().setDisplayNone(false);
+
+    }
+
+    /**
      * 施設種類ラジオボタンの選択項目が変更された際に実行します。<br/>
      * 選択された項目に合わせて、必要な入力補助ダイアログを表示します。
      *

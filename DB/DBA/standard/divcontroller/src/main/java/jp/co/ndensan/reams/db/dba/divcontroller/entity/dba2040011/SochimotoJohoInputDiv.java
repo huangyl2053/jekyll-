@@ -1,10 +1,11 @@
-package jp.co.ndensan.reams.db.dba.divcontroller.entity;
+package jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hokenshajoho.HokenshaJohoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -23,12 +24,8 @@ public class SochimotoJohoInputDiv extends Panel {
      */
     @JsonProperty("txtSochimotoHihokenshaNo")
     private TextBoxCode txtSochimotoHihokenshaNo;
-    @JsonProperty("txtSochimotoHokenshaNo")
-    private TextBoxCode txtSochimotoHokenshaNo;
-    @JsonProperty("btnHokenshaSelect")
-    private ButtonDialog btnHokenshaSelect;
-    @JsonProperty("txtSochimotoHokenshaMeisho")
-    private TextBox txtSochimotoHokenshaMeisho;
+    @JsonProperty("HokenshaJoho")
+    private HokenshaJohoDiv HokenshaJoho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -46,34 +43,14 @@ public class SochimotoJohoInputDiv extends Panel {
         this.txtSochimotoHihokenshaNo=txtSochimotoHihokenshaNo;
     }
 
-    @JsonProperty("txtSochimotoHokenshaNo")
-    public TextBoxCode getTxtSochimotoHokenshaNo() {
-        return txtSochimotoHokenshaNo;
+    @JsonProperty("HokenshaJoho")
+    public HokenshaJohoDiv getHokenshaJoho() {
+        return HokenshaJoho;
     }
 
-    @JsonProperty("txtSochimotoHokenshaNo")
-    public void setTxtSochimotoHokenshaNo(TextBoxCode txtSochimotoHokenshaNo) {
-        this.txtSochimotoHokenshaNo=txtSochimotoHokenshaNo;
-    }
-
-    @JsonProperty("btnHokenshaSelect")
-    public ButtonDialog getBtnHokenshaSelect() {
-        return btnHokenshaSelect;
-    }
-
-    @JsonProperty("btnHokenshaSelect")
-    public void setBtnHokenshaSelect(ButtonDialog btnHokenshaSelect) {
-        this.btnHokenshaSelect=btnHokenshaSelect;
-    }
-
-    @JsonProperty("txtSochimotoHokenshaMeisho")
-    public TextBox getTxtSochimotoHokenshaMeisho() {
-        return txtSochimotoHokenshaMeisho;
-    }
-
-    @JsonProperty("txtSochimotoHokenshaMeisho")
-    public void setTxtSochimotoHokenshaMeisho(TextBox txtSochimotoHokenshaMeisho) {
-        this.txtSochimotoHokenshaMeisho=txtSochimotoHokenshaMeisho;
+    @JsonProperty("HokenshaJoho")
+    public void setHokenshaJoho(HokenshaJohoDiv HokenshaJoho) {
+        this.HokenshaJoho=HokenshaJoho;
     }
 
 }

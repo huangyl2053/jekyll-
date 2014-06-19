@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.divcontroller.helper;
+package jp.co.ndensan.reams.db.dba.divcontroller.controller.helper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,9 +33,9 @@ public final class TekiyoJogaiValueSetter {
      * @param tekiyoJogaiTorokuDiv tekiyoJogaiTorokuDiv
      */
     public static void setDefaultValue(TekiyoJogaiTorokuDiv tekiyoJogaiTorokuDiv) {
-        Map<String, HashMap> defaultDataMap = YamlLoader.loadAsMap(DEFALUT_INPUT_DATA_SOURCE);
-        HashMap defaultData = defaultDataMap.get("初期値");
-        setValue(tekiyoJogaiTorokuDiv, defaultData);
+//        Map<String, HashMap> defaultDataMap = YamlLoader.loadAsMap(DEFALUT_INPUT_DATA_SOURCE);
+//        HashMap defaultData = defaultDataMap.get("初期値");
+//        setValue(tekiyoJogaiTorokuDiv, defaultData);
     }
 
     /**
@@ -44,17 +44,17 @@ public final class TekiyoJogaiValueSetter {
      * @param tekiyoJogaiTorokuDiv tekiyoJogaiTorokuDiv
      */
     public static void clear(TekiyoJogaiTorokuDiv tekiyoJogaiTorokuDiv) {
-        Map<String, HashMap> defaultDataMap = YamlLoader.loadAsMap(DEFALUT_INPUT_DATA_SOURCE);
-        HashMap defaultData = defaultDataMap.get("クリア");
-        setValue(tekiyoJogaiTorokuDiv, defaultData);
+//        Map<String, HashMap> defaultDataMap = YamlLoader.loadAsMap(DEFALUT_INPUT_DATA_SOURCE);
+//        HashMap defaultData = defaultDataMap.get("クリア");
+//        setValue(tekiyoJogaiTorokuDiv, defaultData);
     }
 
     private static void setValue(TekiyoJogaiTorokuDiv tekiyoJogaiTorokuDiv, HashMap defaultData) {
-        JogaishaTekiyoInputDiv jogaishaTekiyoInput = tekiyoJogaiTorokuDiv.getJogaishaTekiyoInput();
-        jogaishaTekiyoInput.getTxtTekiyoDate().setValue(new FlexibleDate(defaultData.get("適用日").toString()));
-        jogaishaTekiyoInput.getTxtTekiyoTodokedeDate().setValue(new FlexibleDate(defaultData.get("適用届出日").toString()));
-        jogaishaTekiyoInput.getTxtShisetsuNyushoDate().setValue(new FlexibleDate(defaultData.get("入所日").toString()));
-        jogaishaTekiyoInput.getTxtNyushoShisetsuCode().setValue(new RString(defaultData.get("施設コード").toString()));
-        jogaishaTekiyoInput.getTxtNyushoShisetsuMeisho().setValue(new RString(defaultData.get("施設名称").toString()));
+//        JogaishaTekiyoInputDiv jogaishaTekiyoInput = tekiyoJogaiTorokuDiv.getJogaishaTekiyoInput();
+//        jogaishaTekiyoInput.getTxtTekiyoDate().setValue(new FlexibleDate(defaultData.get("適用日").toString()));
+//        jogaishaTekiyoInput.getTxtTekiyoTodokedeDate().setValue(new FlexibleDate(defaultData.get("適用届出日").toString()));
+//        jogaishaTekiyoInput.getTxtShisetsuNyushoDate().setValue(new FlexibleDate(defaultData.get("入所日").toString()));
+//        jogaishaTekiyoInput.getTxtNyushoShisetsuCode().setValue(new RString(defaultData.get("施設コード").toString()));
+//        jogaishaTekiyoInput.getTxtNyushoShisetsuMeisho().setValue(new RString(defaultData.get("施設名称").toString()));
     }
 }
