@@ -36,7 +36,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 public class KyotakuKeikakuTodokedeDetail {
 
     private List<HashMap> getYaml() {
-        return YamlLoader.FOR_DBC.loadAsList(new RString("dbc0100000/KyotakuKeikakuTodokedeDetail.yml"));
+        return YamlLoader.DBC.loadAsList(new RString("dbc0100000/KyotakuKeikakuTodokedeDetail.yml"));
     }
 
     /**
@@ -180,7 +180,7 @@ public class KyotakuKeikakuTodokedeDetail {
      * 新規届出を追加するボタン押下時の処理
      *
      * @param panel panel
-     * @return KyotakuKeikakuTodokedeDetailDiv
+     * @return ResponseData
      */
     public ResponseData onClickTodokedeNew(KyotakuKeikakuTodokedeDetailDiv panel) {
         ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
@@ -194,7 +194,7 @@ public class KyotakuKeikakuTodokedeDetail {
      * 変更届出を追加するボタン押下時の処理
      *
      * @param panel panel
-     * @return KyotakuKeikakuTodokedeDetailDiv
+     * @return ResponseData
      */
     public ResponseData onClickTodokedeModify(KyotakuKeikakuTodokedeDetailDiv panel) {
         ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
@@ -208,7 +208,7 @@ public class KyotakuKeikakuTodokedeDetail {
      * 履歴一覧で選択ボタン押下時の処理
      *
      * @param panel panel
-     * @return KyotakuKeikakuTodokedeDetailDiv
+     * @return ResponseData
      */
     public ResponseData onClickTodokedeSelect(KyotakuKeikakuTodokedeDetailDiv panel) {
         ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
@@ -228,7 +228,7 @@ public class KyotakuKeikakuTodokedeDetail {
      * 届出明細を削除するボタン押下時の処理
      *
      * @param panel panel
-     * @return KyotakuKeikakuTodokedeDetailDiv
+     * @return ResponseData
      */
     public ResponseData onClickTodokedeDelete(KyotakuKeikakuTodokedeDetailDiv panel) {
         ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
@@ -244,7 +244,7 @@ public class KyotakuKeikakuTodokedeDetail {
      * 届出明細をクリアするボタン押下時の処理
      *
      * @param panel panel
-     * @return KyotakuKeikakuTodokedeDetailDiv
+     * @return ResponseData
      */
     public ResponseData onClickTodokedeClear(KyotakuKeikakuTodokedeDetailDiv panel) {
         ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
@@ -257,7 +257,7 @@ public class KyotakuKeikakuTodokedeDetail {
      * 届出明細を確定するボタン押下時の処理
      *
      * @param panel panel
-     * @return KyotakuKeikakuTodokedeDetailDiv
+     * @return ResponseData
      */
     public ResponseData onClickTodokedeKakutei(KyotakuKeikakuTodokedeDetailDiv panel) {
         ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
@@ -287,7 +287,7 @@ public class KyotakuKeikakuTodokedeDetail {
      * 届出明細を訂正するボタン押下時の処理
      *
      * @param panel panel
-     * @return KyotakuKeikakuTodokedeDetailDiv
+     * @return ResponseData
      */
     public ResponseData onClickTodokedeTeisei(KyotakuKeikakuTodokedeDetailDiv panel) {
         ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
@@ -304,7 +304,7 @@ public class KyotakuKeikakuTodokedeDetail {
      * 計画作成区分の選択を変更したときに委託先事業者の表示を切り替える。
      *
      * @param panel panel
-     * @return KyotakuKeikakuTodokedeDetailDiv
+     * @return ResponseData
      */
     public ResponseData onChangeRadKeikakuSakuseiKubun(KyotakuKeikakuTodokedeDetailDiv panel) {
         ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();

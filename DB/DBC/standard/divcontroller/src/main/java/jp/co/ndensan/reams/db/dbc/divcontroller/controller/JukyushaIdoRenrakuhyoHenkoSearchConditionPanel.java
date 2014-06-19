@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0220011.JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -54,10 +54,10 @@ public class JukyushaIdoRenrakuhyoHenkoSearchConditionPanel {
     }
 
     private void setJukyushaIdoRenrakuhyoHenkoSearchCondition(JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv panel) {
-        HashMap map = getYmlData().get(0);
-        panel.getTxtIdoDateRange().setFromValue(new RDate(map.get("異動日開始").toString()));
-        panel.getTxtIdoDateRange().setToValue(new RDate(map.get("異動日終了").toString()));
-        panel.getTxtSearchHihoNo().setValue(new RString(map.get("被保番号").toString()));
+        ControlGenerator cg = new ControlGenerator(getYmlData().get(0));
+        panel.getTxtIdoDateRange().setFromValue(cg.getAsRDate("異動日開始"));
+        panel.getTxtIdoDateRange().setToValue(cg.getAsRDate("異動日終了"));
+        panel.getTxtSearchHihoNo().setValue(cg.getAsRString("被保番号"));
     }
 
     private void setClearSearchCondition(JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv panel) {

@@ -61,7 +61,12 @@
      "postParameterPanelNames": "KyotakuKeikakuTodokedeSearch"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/KyotakuKeikakuTodokedeSearch/onLoad"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -2463,8 +2468,8 @@
      "transition": ""
     },
     {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectBySelectButton",
+     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
+     "event": "onClick",
      "transition": ""
     },
     {
@@ -2478,8 +2483,8 @@
      "transition": ""
     },
     {
-     "fieldName": "btnTodokedeModify",
-     "event": "onClick",
+     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
+     "event": "onSelectBySelectButton",
      "transition": ""
     },
     {
@@ -2504,6 +2509,11 @@
     },
     {
      "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnTodokedeModify",
      "event": "onClick",
      "transition": ""
     }
@@ -2543,8 +2553,8 @@
      "transition": "該当者検索"
     },
     {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectBySelectButton",
+     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
+     "event": "onClick",
      "transition": "届出一覧"
     },
     {
@@ -2558,9 +2568,9 @@
      "transition": ""
     },
     {
-     "fieldName": "btnTodokedeModify",
-     "event": "onClick",
-     "transition": ""
+     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
+     "event": "onSelectBySelectButton",
+     "transition": "届出一覧"
     },
     {
      "fieldName": "dgKyotakuKeikakuTodokedeRirekiList",
@@ -2584,6 +2594,11 @@
     },
     {
      "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnTodokedeModify",
      "event": "onClick",
      "transition": ""
     }
@@ -2663,8 +2678,8 @@
      "transition": ""
     },
     {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectBySelectButton",
+     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
+     "event": "onClick",
      "transition": ""
     },
     {
@@ -2678,9 +2693,9 @@
      "transition": "届出明細"
     },
     {
-     "fieldName": "btnTodokedeModify",
-     "event": "onClick",
-     "transition": "届出明細"
+     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
+     "event": "onSelectBySelectButton",
+     "transition": ""
     },
     {
      "fieldName": "dgKyotakuKeikakuTodokedeRirekiList",
@@ -2706,6 +2721,11 @@
      "fieldName": "btnReturn",
      "event": "onClick",
      "transition": "該当者一覧"
+    },
+    {
+     "fieldName": "btnTodokedeModify",
+     "event": "onClick",
+     "transition": "届出明細"
     }
    ]
   },
@@ -2773,8 +2793,8 @@
      "transition": ""
     },
     {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectBySelectButton",
+     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
+     "event": "onClick",
      "transition": ""
     },
     {
@@ -2788,8 +2808,8 @@
      "transition": ""
     },
     {
-     "fieldName": "btnTodokedeModify",
-     "event": "onClick",
+     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
+     "event": "onSelectBySelectButton",
      "transition": ""
     },
     {
@@ -2816,11 +2836,16 @@
      "fieldName": "btnReturn",
      "event": "onClick",
      "transition": "該当者一覧"
+    },
+    {
+     "fieldName": "btnTodokedeModify",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   }
  ],
- "currentState": "届出明細",
+ "currentState": "All",
  "id": "DBC0100000",
  "WFParameter": [],
  "UIContainerEventMapping": [],

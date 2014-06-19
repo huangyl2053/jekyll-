@@ -10,9 +10,9 @@ import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0220011.JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgJukyushaIdoRenrakuhyoHenkoSearchResult_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
@@ -49,39 +49,28 @@ public class JukyushaIdoRenrakuhyoHenkoSearchResultListPanel {
         List<HashMap> mapList = getYmlData();
         List<dgJukyushaIdoRenrakuhyoHenkoSearchResult_Row> list = new ArrayList<>();
         for (int index = 0; index < mapList.size(); index++) {
-            HashMap map = mapList.get(index);
+            ControlGenerator cg = new ControlGenerator(mapList.get(index));
             list.add(createJukyushaIdoRenrakuhyoHenkoSearchResultRow(
-                    map.get("異動日").toString(),
-                    map.get("被保番号").toString(),
-                    map.get("カナ氏名").toString(),
-                    map.get("送付年月").toString()));
+                    cg.getAsTextBoxDate("異動日"),
+                    cg.getAsTextBoxCode("被保番号"),
+                    cg.getAsTextBox("カナ氏名"),
+                    cg.getAsTextBoxDate("送付年月")));
         }
         panel.getDgJukyushaIdoRenrakuhyoHenkoSearchResult().setDataSource(list);
     }
 
     private dgJukyushaIdoRenrakuhyoHenkoSearchResult_Row createJukyushaIdoRenrakuhyoHenkoSearchResultRow(
-            String txtResultIdoDate,
-            String txtResultHihoNo,
-            String txtResultHihoName,
-            String txtResultSendYM) {
-
-        TextBoxDate resultIdoDate = new TextBoxDate();
-        TextBoxCode resultHihoNo = new TextBoxCode();
-        TextBox resultHihoName = new TextBox();
-        TextBoxDate resultSendYM = new TextBoxDate();
-
-        resultIdoDate.setValue(new RDate(txtResultIdoDate));
-        resultHihoNo.setValue(new RString(txtResultHihoNo));
-        resultHihoName.setValue(new RString(txtResultHihoName));
-        resultSendYM.setValue(new RDate(txtResultSendYM));
-
+            TextBoxDate txtResultIdoDate,
+            TextBoxCode txtResultHihoNo,
+            TextBox txtResultHihoName,
+            TextBoxDate txtResultSendYM) {
         return new dgJukyushaIdoRenrakuhyoHenkoSearchResult_Row(
                 new Button(),
                 new Button(),
-                resultIdoDate,
-                resultHihoNo,
-                resultHihoName,
-                resultSendYM,
+                txtResultIdoDate,
+                txtResultHihoNo,
+                txtResultHihoName,
+                txtResultSendYM,
                 true);
     }
 
