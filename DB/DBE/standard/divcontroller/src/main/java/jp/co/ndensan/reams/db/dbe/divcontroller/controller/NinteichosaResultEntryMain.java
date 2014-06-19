@@ -83,9 +83,6 @@ public class NinteichosaResultEntryMain {
 
         dgNinteichosaResultTaishosha_Row targetInfo = _extractSelectedTargetFrom(targetList);
 
-        System.out.println("after :" + targetInfo.getChosaJisshiBashoType());
-        System.out.println("after :" + RString.EMPTY.equals(targetInfo.getChosaJisshiBashoType()));
-
         new HihokenshaForNinteichosaResult(div).init(targetInfo);
         new NinteichosaDetail(div).init(targetInfo);
         new ShinsakaiWaritsukeKibo(div).init();

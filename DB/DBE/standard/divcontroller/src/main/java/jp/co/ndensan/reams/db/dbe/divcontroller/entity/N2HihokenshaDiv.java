@@ -1,11 +1,11 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.IryohokenshaDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.IryohokenshaDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -24,12 +24,10 @@ public class N2HihokenshaDiv extends Panel {
      */
     @JsonProperty("Iryohokensha")
     private IryohokenshaDiv Iryohokensha;
-    @JsonProperty("lblTokuteiShippei")
-    private Label lblTokuteiShippei;
     @JsonProperty("txtTokuteiShippei")
     private TextBox txtTokuteiShippei;
-    @JsonProperty("imgToSearchTokuteiShippei")
-    private StaticImage imgToSearchTokuteiShippei;
+    @JsonProperty("btnSearchTokuteiShippei")
+    private ButtonDialog btnSearchTokuteiShippei;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -47,16 +45,6 @@ public class N2HihokenshaDiv extends Panel {
         this.Iryohokensha=Iryohokensha;
     }
 
-    @JsonProperty("lblTokuteiShippei")
-    public Label getLblTokuteiShippei() {
-        return lblTokuteiShippei;
-    }
-
-    @JsonProperty("lblTokuteiShippei")
-    public void setLblTokuteiShippei(Label lblTokuteiShippei) {
-        this.lblTokuteiShippei=lblTokuteiShippei;
-    }
-
     @JsonProperty("txtTokuteiShippei")
     public TextBox getTxtTokuteiShippei() {
         return txtTokuteiShippei;
@@ -67,14 +55,14 @@ public class N2HihokenshaDiv extends Panel {
         this.txtTokuteiShippei=txtTokuteiShippei;
     }
 
-    @JsonProperty("imgToSearchTokuteiShippei")
-    public StaticImage getImgToSearchTokuteiShippei() {
-        return imgToSearchTokuteiShippei;
+    @JsonProperty("btnSearchTokuteiShippei")
+    public ButtonDialog getBtnSearchTokuteiShippei() {
+        return btnSearchTokuteiShippei;
     }
 
-    @JsonProperty("imgToSearchTokuteiShippei")
-    public void setImgToSearchTokuteiShippei(StaticImage imgToSearchTokuteiShippei) {
-        this.imgToSearchTokuteiShippei=imgToSearchTokuteiShippei;
+    @JsonProperty("btnSearchTokuteiShippei")
+    public void setBtnSearchTokuteiShippei(ButtonDialog btnSearchTokuteiShippei) {
+        this.btnSearchTokuteiShippei=btnSearchTokuteiShippei;
     }
 
 }

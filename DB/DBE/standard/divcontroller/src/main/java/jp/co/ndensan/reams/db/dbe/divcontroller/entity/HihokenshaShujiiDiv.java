@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -21,22 +21,18 @@ public class HihokenshaShujiiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblIryokikan")
-    private Label lblIryokikan;
     @JsonProperty("txtIryokikanCode")
     private TextBoxCode txtIryokikanCode;
     @JsonProperty("txtIryokikanName")
     private TextBox txtIryokikanName;
-    @JsonProperty("imgToSearchShujii")
-    private StaticImage imgToSearchShujii;
-    @JsonProperty("lblShujii")
-    private Label lblShujii;
+    @JsonProperty("btnSearchShujii")
+    private ButtonDialog btnSearchShujii;
     @JsonProperty("txtShujiiCode")
     private TextBoxCode txtShujiiCode;
     @JsonProperty("txtShujiiName")
     private TextBox txtShujiiName;
-    @JsonProperty("imgPadding1")
-    private StaticImage imgPadding1;
+    @JsonProperty("lblSpace1")
+    private Label lblSpace1;
     @JsonProperty("btnToCopyLatestShujii")
     private Button btnToCopyLatestShujii;
 
@@ -46,16 +42,6 @@ public class HihokenshaShujiiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblIryokikan")
-    public Label getLblIryokikan() {
-        return lblIryokikan;
-    }
-
-    @JsonProperty("lblIryokikan")
-    public void setLblIryokikan(Label lblIryokikan) {
-        this.lblIryokikan=lblIryokikan;
-    }
-
     @JsonProperty("txtIryokikanCode")
     public TextBoxCode getTxtIryokikanCode() {
         return txtIryokikanCode;
@@ -76,24 +62,14 @@ public class HihokenshaShujiiDiv extends Panel {
         this.txtIryokikanName=txtIryokikanName;
     }
 
-    @JsonProperty("imgToSearchShujii")
-    public StaticImage getImgToSearchShujii() {
-        return imgToSearchShujii;
+    @JsonProperty("btnSearchShujii")
+    public ButtonDialog getBtnSearchShujii() {
+        return btnSearchShujii;
     }
 
-    @JsonProperty("imgToSearchShujii")
-    public void setImgToSearchShujii(StaticImage imgToSearchShujii) {
-        this.imgToSearchShujii=imgToSearchShujii;
-    }
-
-    @JsonProperty("lblShujii")
-    public Label getLblShujii() {
-        return lblShujii;
-    }
-
-    @JsonProperty("lblShujii")
-    public void setLblShujii(Label lblShujii) {
-        this.lblShujii=lblShujii;
+    @JsonProperty("btnSearchShujii")
+    public void setBtnSearchShujii(ButtonDialog btnSearchShujii) {
+        this.btnSearchShujii=btnSearchShujii;
     }
 
     @JsonProperty("txtShujiiCode")
@@ -116,14 +92,14 @@ public class HihokenshaShujiiDiv extends Panel {
         this.txtShujiiName=txtShujiiName;
     }
 
-    @JsonProperty("imgPadding1")
-    public StaticImage getImgPadding1() {
-        return imgPadding1;
+    @JsonProperty("lblSpace1")
+    public Label getLblSpace1() {
+        return lblSpace1;
     }
 
-    @JsonProperty("imgPadding1")
-    public void setImgPadding1(StaticImage imgPadding1) {
-        this.imgPadding1=imgPadding1;
+    @JsonProperty("lblSpace1")
+    public void setLblSpace1(Label lblSpace1) {
+        this.lblSpace1=lblSpace1;
     }
 
     @JsonProperty("btnToCopyLatestShujii")

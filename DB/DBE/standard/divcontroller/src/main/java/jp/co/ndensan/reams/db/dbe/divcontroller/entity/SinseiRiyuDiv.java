@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -21,6 +21,8 @@ public class SinseiRiyuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("btnTeikeibun")
+    private ButtonDialog btnTeikeibun;
     @JsonProperty("txtShinseiRiyu")
     private TextBoxMultiLine txtShinseiRiyu;
 
@@ -30,6 +32,16 @@ public class SinseiRiyuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    @JsonProperty("btnTeikeibun")
+    public ButtonDialog getBtnTeikeibun() {
+        return btnTeikeibun;
+    }
+
+    @JsonProperty("btnTeikeibun")
+    public void setBtnTeikeibun(ButtonDialog btnTeikeibun) {
+        this.btnTeikeibun=btnTeikeibun;
+    }
+
     @JsonProperty("txtShinseiRiyu")
     public TextBoxMultiLine getTxtShinseiRiyu() {
         return txtShinseiRiyu;

@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -21,16 +21,12 @@ public class NinteiShinseiJigyoshaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblJigyosha")
-    private Label lblJigyosha;
-    @JsonProperty("txtJigyoshaName")
-    private TextBox txtJigyoshaName;
-    @JsonProperty("imgToSearchJigyosha")
-    private StaticImage imgToSearchJigyosha;
-    @JsonProperty("lblJigyoshaKubun")
-    private Label lblJigyoshaKubun;
     @JsonProperty("txtJigyoshaCode")
     private TextBoxCode txtJigyoshaCode;
+    @JsonProperty("txtJigyoshaName")
+    private TextBox txtJigyoshaName;
+    @JsonProperty("btnSearchJigyosha")
+    private ButtonDialog btnSearchJigyosha;
     @JsonProperty("ddlJigyoshaKubun")
     private DropDownList ddlJigyoshaKubun;
 
@@ -40,14 +36,14 @@ public class NinteiShinseiJigyoshaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblJigyosha")
-    public Label getLblJigyosha() {
-        return lblJigyosha;
+    @JsonProperty("txtJigyoshaCode")
+    public TextBoxCode getTxtJigyoshaCode() {
+        return txtJigyoshaCode;
     }
 
-    @JsonProperty("lblJigyosha")
-    public void setLblJigyosha(Label lblJigyosha) {
-        this.lblJigyosha=lblJigyosha;
+    @JsonProperty("txtJigyoshaCode")
+    public void setTxtJigyoshaCode(TextBoxCode txtJigyoshaCode) {
+        this.txtJigyoshaCode=txtJigyoshaCode;
     }
 
     @JsonProperty("txtJigyoshaName")
@@ -60,34 +56,14 @@ public class NinteiShinseiJigyoshaDiv extends Panel {
         this.txtJigyoshaName=txtJigyoshaName;
     }
 
-    @JsonProperty("imgToSearchJigyosha")
-    public StaticImage getImgToSearchJigyosha() {
-        return imgToSearchJigyosha;
+    @JsonProperty("btnSearchJigyosha")
+    public ButtonDialog getBtnSearchJigyosha() {
+        return btnSearchJigyosha;
     }
 
-    @JsonProperty("imgToSearchJigyosha")
-    public void setImgToSearchJigyosha(StaticImage imgToSearchJigyosha) {
-        this.imgToSearchJigyosha=imgToSearchJigyosha;
-    }
-
-    @JsonProperty("lblJigyoshaKubun")
-    public Label getLblJigyoshaKubun() {
-        return lblJigyoshaKubun;
-    }
-
-    @JsonProperty("lblJigyoshaKubun")
-    public void setLblJigyoshaKubun(Label lblJigyoshaKubun) {
-        this.lblJigyoshaKubun=lblJigyoshaKubun;
-    }
-
-    @JsonProperty("txtJigyoshaCode")
-    public TextBoxCode getTxtJigyoshaCode() {
-        return txtJigyoshaCode;
-    }
-
-    @JsonProperty("txtJigyoshaCode")
-    public void setTxtJigyoshaCode(TextBoxCode txtJigyoshaCode) {
-        this.txtJigyoshaCode=txtJigyoshaCode;
+    @JsonProperty("btnSearchJigyosha")
+    public void setBtnSearchJigyosha(ButtonDialog btnSearchJigyosha) {
+        this.btnSearchJigyosha=btnSearchJigyosha;
     }
 
     @JsonProperty("ddlJigyoshaKubun")
