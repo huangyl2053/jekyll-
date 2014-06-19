@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0110000;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -10,23 +10,21 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * KyotakuJikoTodokedeKihon のクラスファイル 
+ * KyotakuJikoTodokedeKaigoKihon のクラスファイル 
  * 
  * @author 自動生成
  */
-public class KyotakuJikoTodokedeKihonDiv extends Panel {
+public class KyotakuJikoTodokedeKaigoKihonDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblKihon1")
-    private Label lblKihon1;
-    @JsonProperty("lblKihon2")
-    private Label lblKihon2;
-    @JsonProperty("lblKihon3")
-    private Label lblKihon3;
+    @JsonProperty("lblKaigoKihon1")
+    private Label lblKaigoKihon1;
+    @JsonProperty("lblKaigoKihon2")
+    private Label lblKaigoKihon2;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -34,34 +32,24 @@ public class KyotakuJikoTodokedeKihonDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblKihon1")
-    public Label getLblKihon1() {
-        return lblKihon1;
+    @JsonProperty("lblKaigoKihon1")
+    public Label getLblKaigoKihon1() {
+        return lblKaigoKihon1;
     }
 
-    @JsonProperty("lblKihon1")
-    public void setLblKihon1(Label lblKihon1) {
-        this.lblKihon1=lblKihon1;
+    @JsonProperty("lblKaigoKihon1")
+    public void setLblKaigoKihon1(Label lblKaigoKihon1) {
+        this.lblKaigoKihon1=lblKaigoKihon1;
     }
 
-    @JsonProperty("lblKihon2")
-    public Label getLblKihon2() {
-        return lblKihon2;
+    @JsonProperty("lblKaigoKihon2")
+    public Label getLblKaigoKihon2() {
+        return lblKaigoKihon2;
     }
 
-    @JsonProperty("lblKihon2")
-    public void setLblKihon2(Label lblKihon2) {
-        this.lblKihon2=lblKihon2;
-    }
-
-    @JsonProperty("lblKihon3")
-    public Label getLblKihon3() {
-        return lblKihon3;
-    }
-
-    @JsonProperty("lblKihon3")
-    public void setLblKihon3(Label lblKihon3) {
-        this.lblKihon3=lblKihon3;
+    @JsonProperty("lblKaigoKihon2")
+    public void setLblKaigoKihon2(Label lblKaigoKihon2) {
+        this.lblKaigoKihon2=lblKaigoKihon2;
     }
 
 }
