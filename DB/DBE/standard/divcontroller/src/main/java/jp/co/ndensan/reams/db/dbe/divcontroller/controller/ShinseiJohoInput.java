@@ -13,20 +13,20 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.YokaigoninteiShinsei
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosainData.Chosain;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ShujiiData.Doctor;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.YokaigoninteiShinseishaData;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.HihokenshaOutlineDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.HihokenshaSearchForShinseiDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.HihokenshaShujiiDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.KankeiIinDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.LatestNinteiResultDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.N2HihokenshaDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NinteiShinseiJigyoshaDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NinteiShinseishaDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NinteichosainAdvanceEntryDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NyuinNyushoDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShichosonRenrakuJikoDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShinseiJohoInputDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgKankeiIin_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dgShisetsuRereki_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.HihokenshaOutlineDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.HihokenshaSearchForShinseiDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.HihokenshaShujiiDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.KankeiIinDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.LatestNinteiResultDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.N2HihokenshaDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.NinteiShinseiJigyoshaDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.NinteiShinseishaDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.NinteichosainAdvanceEntryDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.NyuinNyushoDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.ShichosonRenrakuJikoDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.ShinseiJohoInputDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.dgKankeiIin_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.dgShisetsuRereki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.dgSearchResult_Row;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -639,7 +639,7 @@ public class ShinseiJohoInput {
             div.getIryohokensha().getTxtIryohokenKigo().clearValue();
             div.getIryohokensha().getTxtIryohokenshaName().clearValue();
             div.getIryohokensha().getTxtIryohokenshaNo().clearValue();
-            div.getTxtTokuteiShippei().clearValue();
+            div.getDdltTokuteiShippei().setSelectedItem(new RString("00"));
         }
     }
 

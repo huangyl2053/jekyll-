@@ -1,11 +1,11 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.NinteiShinseiJigyoshaDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.NinteiShinseiJigyoshaDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -34,10 +34,10 @@ public class NinteiShinseishaDiv extends Panel {
     private TextBox txtShinseishaJusho;
     @JsonProperty("txtShinseishaTelNo")
     private TextBox txtShinseishaTelNo;
-    @JsonProperty("btnSetaiin")
-    private ButtonDialog btnSetaiin;
     @JsonProperty("ddlShinseishaTsuzukigara")
     private DropDownList ddlShinseishaTsuzukigara;
+    @JsonProperty("btnSetaiin")
+    private ButtonDialog btnSetaiin;
     @JsonProperty("NinteiShinseiJigyosha")
     private NinteiShinseiJigyoshaDiv NinteiShinseiJigyosha;
 
@@ -107,16 +107,6 @@ public class NinteiShinseishaDiv extends Panel {
         this.txtShinseishaTelNo=txtShinseishaTelNo;
     }
 
-    @JsonProperty("btnSetaiin")
-    public ButtonDialog getBtnSetaiin() {
-        return btnSetaiin;
-    }
-
-    @JsonProperty("btnSetaiin")
-    public void setBtnSetaiin(ButtonDialog btnSetaiin) {
-        this.btnSetaiin=btnSetaiin;
-    }
-
     @JsonProperty("ddlShinseishaTsuzukigara")
     public DropDownList getDdlShinseishaTsuzukigara() {
         return ddlShinseishaTsuzukigara;
@@ -125,6 +115,16 @@ public class NinteiShinseishaDiv extends Panel {
     @JsonProperty("ddlShinseishaTsuzukigara")
     public void setDdlShinseishaTsuzukigara(DropDownList ddlShinseishaTsuzukigara) {
         this.ddlShinseishaTsuzukigara=ddlShinseishaTsuzukigara;
+    }
+
+    @JsonProperty("btnSetaiin")
+    public ButtonDialog getBtnSetaiin() {
+        return btnSetaiin;
+    }
+
+    @JsonProperty("btnSetaiin")
+    public void setBtnSetaiin(ButtonDialog btnSetaiin) {
+        this.btnSetaiin=btnSetaiin;
     }
 
     @JsonProperty("NinteiShinseiJigyosha")

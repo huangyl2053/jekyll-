@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.YokaigoninteiShinseishaData;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.HihokenshaSearchForShinseiDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.HihokenshaSearchForShinseiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.HihokenshaFinder;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.SearchResultOfHihokensha;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;

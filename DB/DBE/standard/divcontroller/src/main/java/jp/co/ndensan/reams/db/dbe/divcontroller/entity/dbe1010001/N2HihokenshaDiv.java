@@ -1,11 +1,11 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.IryohokenshaDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.IryohokenshaDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -24,10 +24,8 @@ public class N2HihokenshaDiv extends Panel {
      */
     @JsonProperty("Iryohokensha")
     private IryohokenshaDiv Iryohokensha;
-    @JsonProperty("txtTokuteiShippei")
-    private TextBox txtTokuteiShippei;
-    @JsonProperty("btnSearchTokuteiShippei")
-    private ButtonDialog btnSearchTokuteiShippei;
+    @JsonProperty("ddltTokuteiShippei")
+    private DropDownList ddltTokuteiShippei;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -45,24 +43,14 @@ public class N2HihokenshaDiv extends Panel {
         this.Iryohokensha=Iryohokensha;
     }
 
-    @JsonProperty("txtTokuteiShippei")
-    public TextBox getTxtTokuteiShippei() {
-        return txtTokuteiShippei;
+    @JsonProperty("ddltTokuteiShippei")
+    public DropDownList getDdltTokuteiShippei() {
+        return ddltTokuteiShippei;
     }
 
-    @JsonProperty("txtTokuteiShippei")
-    public void setTxtTokuteiShippei(TextBox txtTokuteiShippei) {
-        this.txtTokuteiShippei=txtTokuteiShippei;
-    }
-
-    @JsonProperty("btnSearchTokuteiShippei")
-    public ButtonDialog getBtnSearchTokuteiShippei() {
-        return btnSearchTokuteiShippei;
-    }
-
-    @JsonProperty("btnSearchTokuteiShippei")
-    public void setBtnSearchTokuteiShippei(ButtonDialog btnSearchTokuteiShippei) {
-        this.btnSearchTokuteiShippei=btnSearchTokuteiShippei;
+    @JsonProperty("ddltTokuteiShippei")
+    public void setDdltTokuteiShippei(DropDownList ddltTokuteiShippei) {
+        this.ddltTokuteiShippei=ddltTokuteiShippei;
     }
 
 }

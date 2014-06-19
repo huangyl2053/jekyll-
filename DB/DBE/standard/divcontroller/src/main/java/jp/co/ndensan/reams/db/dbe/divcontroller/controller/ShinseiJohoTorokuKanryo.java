@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShinseiJohoInputDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ShinseiJohoTorokuKanryoDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.ShinseiJohoInputDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001.ShinseiJohoTorokuKanryoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoKanryoMessage;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

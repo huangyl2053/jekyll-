@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -25,14 +25,14 @@ public class HihokenshaShujiiDiv extends Panel {
     private TextBoxCode txtIryokikanCode;
     @JsonProperty("txtIryokikanName")
     private TextBox txtIryokikanName;
-    @JsonProperty("btnSearchShujii")
-    private ButtonDialog btnSearchShujii;
-    @JsonProperty("btnToCopyLatestShujii")
-    private Button btnToCopyLatestShujii;
     @JsonProperty("txtShujiiCode")
     private TextBoxCode txtShujiiCode;
     @JsonProperty("txtShujiiName")
     private TextBox txtShujiiName;
+    @JsonProperty("btnSearchShujii")
+    private ButtonDialog btnSearchShujii;
+    @JsonProperty("btnToCopyLatestShujii")
+    private Button btnToCopyLatestShujii;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -60,26 +60,6 @@ public class HihokenshaShujiiDiv extends Panel {
         this.txtIryokikanName=txtIryokikanName;
     }
 
-    @JsonProperty("btnSearchShujii")
-    public ButtonDialog getBtnSearchShujii() {
-        return btnSearchShujii;
-    }
-
-    @JsonProperty("btnSearchShujii")
-    public void setBtnSearchShujii(ButtonDialog btnSearchShujii) {
-        this.btnSearchShujii=btnSearchShujii;
-    }
-
-    @JsonProperty("btnToCopyLatestShujii")
-    public Button getBtnToCopyLatestShujii() {
-        return btnToCopyLatestShujii;
-    }
-
-    @JsonProperty("btnToCopyLatestShujii")
-    public void setBtnToCopyLatestShujii(Button btnToCopyLatestShujii) {
-        this.btnToCopyLatestShujii=btnToCopyLatestShujii;
-    }
-
     @JsonProperty("txtShujiiCode")
     public TextBoxCode getTxtShujiiCode() {
         return txtShujiiCode;
@@ -98,6 +78,26 @@ public class HihokenshaShujiiDiv extends Panel {
     @JsonProperty("txtShujiiName")
     public void setTxtShujiiName(TextBox txtShujiiName) {
         this.txtShujiiName=txtShujiiName;
+    }
+
+    @JsonProperty("btnSearchShujii")
+    public ButtonDialog getBtnSearchShujii() {
+        return btnSearchShujii;
+    }
+
+    @JsonProperty("btnSearchShujii")
+    public void setBtnSearchShujii(ButtonDialog btnSearchShujii) {
+        this.btnSearchShujii=btnSearchShujii;
+    }
+
+    @JsonProperty("btnToCopyLatestShujii")
+    public Button getBtnToCopyLatestShujii() {
+        return btnToCopyLatestShujii;
+    }
+
+    @JsonProperty("btnToCopyLatestShujii")
+    public void setBtnToCopyLatestShujii(Button btnToCopyLatestShujii) {
+        this.btnToCopyLatestShujii=btnToCopyLatestShujii;
     }
 
 }
