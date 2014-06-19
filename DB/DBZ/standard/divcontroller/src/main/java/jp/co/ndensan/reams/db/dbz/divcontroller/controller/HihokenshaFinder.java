@@ -95,11 +95,11 @@ public final class HihokenshaFinder {
     }
 
     private static void changeToNormalMode(HihokenshaFinderDiv div) {
-        div.getSearchCriteriaOfHokensha().getDdlHokensha().setDisplayNone(false);
+        div.getSearchCriteriaOfHokensha().getDdlHokensha().setDisplayNone(true);
     }
 
     private static void changeToKoinkiMode(HihokenshaFinderDiv div) {
-        div.getSearchCriteriaOfHokensha().getDdlHokensha().setDisplayNone(true);
+        div.getSearchCriteriaOfHokensha().getDdlHokensha().setDisplayNone(false);
     }
 
     /**

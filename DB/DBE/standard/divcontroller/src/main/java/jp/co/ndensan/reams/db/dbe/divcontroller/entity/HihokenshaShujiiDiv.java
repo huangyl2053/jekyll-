@@ -27,14 +27,12 @@ public class HihokenshaShujiiDiv extends Panel {
     private TextBox txtIryokikanName;
     @JsonProperty("btnSearchShujii")
     private ButtonDialog btnSearchShujii;
+    @JsonProperty("btnToCopyLatestShujii")
+    private Button btnToCopyLatestShujii;
     @JsonProperty("txtShujiiCode")
     private TextBoxCode txtShujiiCode;
     @JsonProperty("txtShujiiName")
     private TextBox txtShujiiName;
-    @JsonProperty("lblSpace1")
-    private Label lblSpace1;
-    @JsonProperty("btnToCopyLatestShujii")
-    private Button btnToCopyLatestShujii;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -72,6 +70,16 @@ public class HihokenshaShujiiDiv extends Panel {
         this.btnSearchShujii=btnSearchShujii;
     }
 
+    @JsonProperty("btnToCopyLatestShujii")
+    public Button getBtnToCopyLatestShujii() {
+        return btnToCopyLatestShujii;
+    }
+
+    @JsonProperty("btnToCopyLatestShujii")
+    public void setBtnToCopyLatestShujii(Button btnToCopyLatestShujii) {
+        this.btnToCopyLatestShujii=btnToCopyLatestShujii;
+    }
+
     @JsonProperty("txtShujiiCode")
     public TextBoxCode getTxtShujiiCode() {
         return txtShujiiCode;
@@ -90,26 +98,6 @@ public class HihokenshaShujiiDiv extends Panel {
     @JsonProperty("txtShujiiName")
     public void setTxtShujiiName(TextBox txtShujiiName) {
         this.txtShujiiName=txtShujiiName;
-    }
-
-    @JsonProperty("lblSpace1")
-    public Label getLblSpace1() {
-        return lblSpace1;
-    }
-
-    @JsonProperty("lblSpace1")
-    public void setLblSpace1(Label lblSpace1) {
-        this.lblSpace1=lblSpace1;
-    }
-
-    @JsonProperty("btnToCopyLatestShujii")
-    public Button getBtnToCopyLatestShujii() {
-        return btnToCopyLatestShujii;
-    }
-
-    @JsonProperty("btnToCopyLatestShujii")
-    public void setBtnToCopyLatestShujii(Button btnToCopyLatestShujii) {
-        this.btnToCopyLatestShujii=btnToCopyLatestShujii;
     }
 
 }

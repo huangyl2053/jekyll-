@@ -34,10 +34,10 @@ public class NinteiShinseishaDiv extends Panel {
     private TextBox txtShinseishaJusho;
     @JsonProperty("txtShinseishaTelNo")
     private TextBox txtShinseishaTelNo;
-    @JsonProperty("ddlShinseishaTsuzukigara")
-    private DropDownList ddlShinseishaTsuzukigara;
     @JsonProperty("btnSetaiin")
     private ButtonDialog btnSetaiin;
+    @JsonProperty("ddlShinseishaTsuzukigara")
+    private DropDownList ddlShinseishaTsuzukigara;
     @JsonProperty("NinteiShinseiJigyosha")
     private NinteiShinseiJigyoshaDiv NinteiShinseiJigyosha;
 
@@ -107,16 +107,6 @@ public class NinteiShinseishaDiv extends Panel {
         this.txtShinseishaTelNo=txtShinseishaTelNo;
     }
 
-    @JsonProperty("ddlShinseishaTsuzukigara")
-    public DropDownList getDdlShinseishaTsuzukigara() {
-        return ddlShinseishaTsuzukigara;
-    }
-
-    @JsonProperty("ddlShinseishaTsuzukigara")
-    public void setDdlShinseishaTsuzukigara(DropDownList ddlShinseishaTsuzukigara) {
-        this.ddlShinseishaTsuzukigara=ddlShinseishaTsuzukigara;
-    }
-
     @JsonProperty("btnSetaiin")
     public ButtonDialog getBtnSetaiin() {
         return btnSetaiin;
@@ -125,6 +115,16 @@ public class NinteiShinseishaDiv extends Panel {
     @JsonProperty("btnSetaiin")
     public void setBtnSetaiin(ButtonDialog btnSetaiin) {
         this.btnSetaiin=btnSetaiin;
+    }
+
+    @JsonProperty("ddlShinseishaTsuzukigara")
+    public DropDownList getDdlShinseishaTsuzukigara() {
+        return ddlShinseishaTsuzukigara;
+    }
+
+    @JsonProperty("ddlShinseishaTsuzukigara")
+    public void setDdlShinseishaTsuzukigara(DropDownList ddlShinseishaTsuzukigara) {
+        this.ddlShinseishaTsuzukigara=ddlShinseishaTsuzukigara;
     }
 
     @JsonProperty("NinteiShinseiJigyosha")

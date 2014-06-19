@@ -19,61 +19,30 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 public class HihokenshaSearchForShinsei {
 
     /**
+     * onLoad
+     *
+     * @param panel HihokenshaSearchForShinseiDiv
+     * @return ResponseData
+     */
+    public ResponseData<HihokenshaSearchForShinseiDiv> onLoad(HihokenshaSearchForShinseiDiv panel) {
+        HihokenshaFinder.setMode(HihokenshaFinder.Mode.NORMAL, panel.getSearchCriteriaForShinsei());
+        return _createResponseData(panel);
+    }
+
+    /**
      * 検索ボタン押下時の処理です。
      *
      * @param panel HihokenshaSearchForShinseiDiv
      * @return ResponseData
      */
     public ResponseData<HihokenshaSearchForShinseiDiv> onClickBtnToSearch(HihokenshaSearchForShinseiDiv panel) {
-        ResponseData<HihokenshaSearchForShinseiDiv> response = new ResponseData<>();
-
         SearchResultOfHihokensha.setSearchResult(panel.getSearchResultForShinsei(),
                 new YokaigoninteiShinseishaData().get要介護認定申請者List().asConvetedType());
-
-        response.data = panel;
-        return response;
+        return _createResponseData(panel);
     }
 
-    /**
-     * 検索条件クリアボタン押下時の処理です。
-     *
-     * @param panel HihokenshaSearchForShinseiDiv
-     * @return ResponseData
-     */
-    public ResponseData<HihokenshaSearchForShinseiDiv> onClickBtnToClear(HihokenshaSearchForShinseiDiv panel) {
+    private ResponseData<HihokenshaSearchForShinseiDiv> _createResponseData(HihokenshaSearchForShinseiDiv panel) {
         ResponseData<HihokenshaSearchForShinseiDiv> response = new ResponseData<>();
-
-        HihokenshaFinder.clear(panel.getSearchCriteriaForShinsei());
-
-        response.data = panel;
-        return response;
-    }
-
-    /**
-     * 再建策ボタン押下時の処理です。
-     *
-     * @param panel HihokenshaSearchForShinseiDiv
-     * @return ResponseData
-     */
-    public ResponseData<HihokenshaSearchForShinseiDiv> onClickBtnToResearch(HihokenshaSearchForShinseiDiv panel) {
-        ResponseData<HihokenshaSearchForShinseiDiv> response = new ResponseData<>();
-
-        HihokenshaFinder.clear(panel.getSearchCriteriaForShinsei());
-        SearchResultOfHihokensha.clear(panel.getSearchResultForShinsei());
-
-        response.data = panel;
-        return response;
-    }
-
-    /**
-     * データグリッド内の確定ボタン押下時の処理です。
-     *
-     * @param panel HihokenshaSearchForShinseiDiv
-     * @return ResponseData
-     */
-    public ResponseData<HihokenshaSearchForShinseiDiv> onClickBtnToDecideOfGridData(HihokenshaSearchForShinseiDiv panel) {
-        ResponseData<HihokenshaSearchForShinseiDiv> response = new ResponseData<>();
-
         response.data = panel;
         return response;
     }
