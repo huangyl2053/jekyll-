@@ -8,36 +8,41 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kihonchosaResultInputCom.KihonchosaResultInputCom;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.HihokenshaForNinteichosaResultDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.Kihonchosa0911Div;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.Kihonchosa0912Div;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.Kihonchosa0921Div;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.Kihonchosa0931Div;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.Kihonchosa0941Div;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.Kihonchosa0942Div;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.Kihonchosa0951Div;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.Kihonchosa0961Div;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.Kihonchosa0971Div;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.Kihonchosa09Div;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.NinteichosaDetailDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.NinteichosaResultEntryMainDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.HihokenshaForNinteichosaResultDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.Kihonchosa0911Div;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.Kihonchosa0912Div;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.Kihonchosa0921Div;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.Kihonchosa0931Div;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.Kihonchosa0941Div;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.Kihonchosa0942Div;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.Kihonchosa0951Div;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.Kihonchosa0961Div;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.Kihonchosa0971Div;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.Kihonchosa09Div;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.NinteichosaDetailDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.NinteichosaResultEntryMainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.NinteichosaResultEntryTargetDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.ServiceJokyoServicesCountsDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.ServiceJokyoTabDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.ShisakaiWaritsukeKiboDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.ServiceJokyoServicesCountsDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.ServiceJokyoTabDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.ShisakaiWaritsukeKiboDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.dgNinteichosaResultTaishosha_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.serviceWithCountCom.ServiceWithCountCom;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.tokkijikoCom.TokkijikoCom;
 //import jp.co.ndensan.reams.ur.urz.business.DateOfBirthFactory;
 //import jp.co.ndensan.reams.ur.urz.business.IDateOfBirth;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ControlRepeater;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 
 /**
  * NinteichosaResultEntryMainDivを制御します。
@@ -50,117 +55,138 @@ public class NinteichosaResultEntryMain {
      * ロード時の処理です。
      *
      * @param div NinteichosaResultEntryMainDiv
-     * @param target NinteichosaResultEntryTargetDiv
      * @return ResponseData
      */
-    public ResponseData<NinteichosaResultEntryMainDiv> onLoad(NinteichosaResultEntryMainDiv div, NinteichosaResultEntryTargetDiv target) {
-        ResponseData<NinteichosaResultEntryMainDiv> response = new ResponseData<>();
-
-        _onLoad(div);
-
-        response.data = div;
-        return response;
-    }
-
-    private void _onLoad(NinteichosaResultEntryMainDiv div) {
-        new NinteichosaDetail(div).onLoad();
-        new ShinsakaiWaritsukeKibo(div).onLoad();
-        new ServiceJokyoTab(div).onLoad();
+    public ResponseData<NinteichosaResultEntryMainDiv> onLoad(NinteichosaResultEntryMainDiv div) {
+        return onStart_NinteichosaResultEntryMain(div);
     }
 
     /**
      * NinteichosaResultEntryMainDivを表示した時の処理です。
      *
      * @param div NinteichosaResultEntryMainDiv
-     * @param targetList NinteichosaResultEntryTargetDiv
      * @return ResponseData
      */
-    public ResponseData<NinteichosaResultEntryMainDiv> onStart_NinteichosaResultEntryMain(NinteichosaResultEntryMainDiv div,
-            NinteichosaResultEntryTargetDiv targetList) {
-        ResponseData<NinteichosaResultEntryMainDiv> response = new ResponseData<>();
-
-        div.setDisplayNone(false);
-
-        dgNinteichosaResultTaishosha_Row targetInfo = _extractSelectedTargetFrom(targetList);
-
+    public ResponseData<NinteichosaResultEntryMainDiv> onStart_NinteichosaResultEntryMain(NinteichosaResultEntryMainDiv div) {
+        dgNinteichosaResultTaishosha_Row targetInfo = targetInfo();
         new HihokenshaForNinteichosaResult(div).init(targetInfo);
         new NinteichosaDetail(div).init(targetInfo);
         new ShinsakaiWaritsukeKibo(div).init();
         new ServiceJokyoTab(div).init();
         new Kihonchosa09(div).init();
-
-        response.data = div;
-        return response;
+        return _createResponseData(div);
     }
 
-    /**
-     * btnToReturnをClickした時の処理です。
-     *
-     * @param div NinteichosaResultEntryMainDiv
-     * @param target NinteichosaResultEntryTargetDiv
-     * @return ResponseData
-     */
-    public ResponseData<NinteichosaResultEntryMainDiv> onClick_btnToReturn(NinteichosaResultEntryMainDiv div,
-            NinteichosaResultEntryTargetDiv target) {
-        ResponseData<NinteichosaResultEntryMainDiv> response = new ResponseData<>();
-
-        div.setDisplayNone(true);
-
-        response.data = div;
-        return response;
+    private dgNinteichosaResultTaishosha_Row targetInfo() {
+        return NinteichosaResultEntryTarget.Holder.get();
     }
 
     /**
      * radServiceKubunを変更した時の処理です。
      *
      * @param div NinteichosaResultEntryMainDiv
-     * @param target NinteichosaResultEntryTargetDiv
      * @return ResponseData
      */
-    public ResponseData<NinteichosaResultEntryMainDiv> onChange_radServiceKubun(NinteichosaResultEntryMainDiv div,
-            NinteichosaResultEntryTargetDiv target) {
-        ResponseData<NinteichosaResultEntryMainDiv> response = new ResponseData<>();
-
+    public ResponseData<NinteichosaResultEntryMainDiv> onChange_radServiceKubun(NinteichosaResultEntryMainDiv div) {
         new ServiceJokyoTab(div).onChange_radサービス区分();
-
-        response.data = div;
-        return response;
+        return _createResponseData(div);
     }
 
     /**
      * radChosaJisshiBashoをClickした時の処理です。
      *
      * @param div NinteichosaResultEntryMainDiv
-     * @param target NinteichosaResultEntryTargetDiv
      * @return ResponseData
      */
-    public ResponseData<NinteichosaResultEntryMainDiv> onChange_radChosaJisshiBasho(NinteichosaResultEntryMainDiv div,
-            NinteichosaResultEntryTargetDiv target) {
-        ResponseData<NinteichosaResultEntryMainDiv> response = new ResponseData<>();
-
+    public ResponseData<NinteichosaResultEntryMainDiv> onChange_radChosaJisshiBasho(NinteichosaResultEntryMainDiv div) {
         new NinteichosaDetail(div).onChange_radChosaJisshiBasho();
-
-        response.data = div;
-        return response;
+        return _createResponseData(div);
     }
 
     /**
      * btnToRegisterResultをClickした時の処理です。
      *
      * @param div NinteichosaResultEntryMainDiv
-     * @param targetList NinteichosaResultEntryTargetDiv
      * @return ResponseData
      */
-    public ResponseData<NinteichosaResultEntryMainDiv> onClick_btnToRegisterResult(NinteichosaResultEntryMainDiv div,
-            NinteichosaResultEntryTargetDiv targetList) {
-        ResponseData<NinteichosaResultEntryMainDiv> response = new ResponseData<>();
-
-        dgNinteichosaResultTaishosha_Row target = _extractSelectedTargetFrom(targetList);
+    public ResponseData<NinteichosaResultEntryMainDiv> onClick_btnToRegisterResult(NinteichosaResultEntryMainDiv div) {
+        dgNinteichosaResultTaishosha_Row target = targetInfo();
         new NinteichosaDetail(div).reflectPanelValueTo(target);
         NinteichosaResultEntryTarget.Holder.save(target);
+        return _createResponseData(div);
+    }
 
-        response.data = div;
-        return response;
+    //onClick_btnAddTokkijiko
+    public ResponseData<NinteichosaResultEntryMainDiv> onClick_btnAddTokkijiko(NinteichosaResultEntryMainDiv div) {
+        ControlRepeater<TokkijikoCom> rep = div.getTabNinteichosaResult().getTokkijikoTab().getRepTokkijikoCom();
+        List<TokkijikoCom> repeateData = rep.getRepeateData();
+        TokkijikoCom newOne = new TokkijikoComFactroy(repeateData.get(0)).createTokkijikoCom();
+        if (isEvenNumber(repeateData.size())) {
+            newOne.setWrap(true);
+        }
+        repeateData.add(newOne);
+        rep.setRepeateData(repeateData);
+        return _createResponseData(div);
+    }
+
+    private class TokkijikoComFactroy {
+
+        private final TokkijikoCom copyOrigin;
+
+        private TokkijikoComFactroy(TokkijikoCom com) {
+            this.copyOrigin = com;
+        }
+
+        private TokkijikoCom createTokkijikoCom() {
+            TokkijikoCom tokkijikoCom = new TokkijikoCom();
+            tokkijikoCom.setDdlChosaItem(createDdlChosaItem());
+            tokkijikoCom.setLblSpace(createLblSpace());
+            tokkijikoCom.setTxtTokkijikoContent(createTxtTokkijikoContent());
+            tokkijikoCom.setDisplayNone(false);
+            tokkijikoCom.setDisabled(false);
+            tokkijikoCom.setVisible(true);
+            tokkijikoCom.setWrap(false);
+            return tokkijikoCom;
+        }
+
+        private DropDownList createDdlChosaItem() {
+            DropDownList sample = copyOrigin.getDdlChosaItem();
+            DropDownList chosaItem = new DropDownList();
+            chosaItem.setLabelLText(sample.getLabelLText());
+            chosaItem.setDataSource(sample.getDataSource());
+            chosaItem.setDisplayNone(sample.isDisabled());
+            chosaItem.setDisabled(sample.isDisabled());
+            chosaItem.setVisible(sample.isVisible());
+            chosaItem.setWrap(sample.isWrap());
+            return chosaItem;
+        }
+
+        private Label createLblSpace() {
+            Label sample = copyOrigin.getLblSpace();
+            Label space = new Label();
+            space.setText(sample.getText());
+            space.setDisplayNone(sample.isDisplayNone());
+            space.setVisible(sample.isVisible());
+            space.setWrap(sample.isWrap());
+            return space;
+        }
+
+        private TextBoxMultiLine createTxtTokkijikoContent() {
+            TextBoxMultiLine sample = copyOrigin.getTxtTokkijikoContent();
+            TextBoxMultiLine content = new TextBoxMultiLine();
+            content.setCountDisp(sample.getCountDisp());
+            content.setDisplayNone(sample.isDisplayNone());
+            content.setReadOnly(sample.isReadOnly());
+            content.setDisabled(sample.isDisabled());
+            content.setValue(RString.EMPTY);
+            content.setVisible(sample.isVisible());
+            content.setWrap(sample.isWrap());
+            return content;
+        }
+    }
+
+    private boolean isEvenNumber(int targetNum) {
+        return targetNum % 2 == 0;
     }
 
     private dgNinteichosaResultTaishosha_Row _extractSelectedTargetFrom(NinteichosaResultEntryTargetDiv div) {
@@ -197,7 +223,7 @@ public class NinteichosaResultEntryMain {
 //            panel.getTxtHihokenshaAge().setValue(new RString(Integer.toString(birthDay.get年齢())));
         }
     }
-//</editor-fold>
+    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="NinteichosaDetail">
     /**
@@ -212,7 +238,7 @@ public class NinteichosaResultEntryMain {
         }
 
         public void onLoad() {
-            _onLoad_radChosaJisshiBasho();
+            //_onLoad_radChosaJisshiBasho();
         }
 
         public void init(dgNinteichosaResultTaishosha_Row targetInfo) {
@@ -340,10 +366,9 @@ public class NinteichosaResultEntryMain {
             _setDisable_txtChosaJisshiBashoFreeInput_when_調査実施場所(_is_not_その他());
         }
 
-        private void _onLoad_radChosaJisshiBasho() {
-            _radChosaJisshiBasho().setDataSource(ChosaJisshiBasho.toDataSource());
-        }
-
+//        private void _onLoad_radChosaJisshiBasho() {
+//            _radChosaJisshiBasho().setDataSource(ChosaJisshiBasho.toDataSource());
+//        }
         private void _setDisable_txtChosaJisshiBashoFreeInput_when_調査実施場所(boolean is_not_その他) {
             _txtChosaJisshiBashoFreeInput().setDisabled(is_not_その他);
         }
@@ -413,7 +438,7 @@ public class NinteichosaResultEntryMain {
         }
 
         public void onLoad() {
-            _onLoad_rad審査会割付希望();
+            //_onLoad_rad審査会割付希望();
         }
 
         public void init() {
@@ -429,16 +454,15 @@ public class NinteichosaResultEntryMain {
             return this.panel.getRadShinsakaiWaritsukeKibo();
         }
 
-        private void _onLoad_rad審査会割付希望() {
-            _radShinsakaiWaritsukeKibo().setDataSource(ShinsakaiWaritsukeKiboType.toList_KeyValueDataSource());
-        }
-
+//        private void _onLoad_rad審査会割付希望() {
+//            _radShinsakaiWaritsukeKibo().setDataSource(ShinsakaiWaritsukeKiboType.toList_KeyValueDataSource());
+//        }
         private void _init_rad審査会割付希望() {
             _radShinsakaiWaritsukeKibo().setSelectedItem(ShinsakaiWaritsukeKiboType.なし.item());
         }
 
     }
-//</editor-fold>
+    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="ServiceJokyoTab">
     private static final class ServiceJokyoTab {
@@ -452,8 +476,8 @@ public class NinteichosaResultEntryMain {
         }
 
         public void onLoad() {
-            _onLoad_radサービス区分();
-            this.利用回数.onLoad();
+            //_onLoad_radサービス区分();
+            //this.利用回数.onLoad();
         }
 
         public void init() {
@@ -473,7 +497,7 @@ public class NinteichosaResultEntryMain {
         //<editor-fold defaultstate="collapsed" desc="ServiceKubun">
         enum ServiceKubun {
 
-            なし("1"), 介護("2"), 予防("3");
+            なし("0"), 介護("1"), 予防("2");
             private final RString theKey;
             private final RString theValue;
 
@@ -514,10 +538,9 @@ public class NinteichosaResultEntryMain {
         }
         //</editor-fold>
 
-        private void _onLoad_radサービス区分() {
-            _radServiceKubun().setDataSource(ServiceKubun.toList_KeyValueDataSource());
-        }
-
+//        private void _onLoad_radサービス区分() {
+//            _radServiceKubun().setDataSource(ServiceKubun.toList_KeyValueDataSource());
+//        }
         private void _init_radサービス区分() {
             _radServiceKubun().setSelectedItem(ServiceKubun.なし.item());
         }
@@ -564,7 +587,7 @@ public class NinteichosaResultEntryMain {
             }
 
             public void onLoad() {
-                _onLoad_radJutakuKaishu();
+                //_onLoad_radJutakuKaishu();
             }
 
             public void init() {
@@ -637,7 +660,7 @@ public class NinteichosaResultEntryMain {
             //<editor-fold defaultstate="collapsed" desc="JutakuKaishu">
             enum JutakuKaishu {
 
-                なし("1"), あり("2");
+                あり("1"), なし("0"),;
                 private final RString theKey;
                 private final RString theValue;
 
@@ -666,7 +689,7 @@ public class NinteichosaResultEntryMain {
                     return list;
                 }
             }
-//</editor-fold>
+            //</editor-fold>
 
             private void _onLoad_radJutakuKaishu() {
                 _radJutakuKaishu().setDataSource(JutakuKaishu.toList_KeyValueDataSource());
@@ -868,4 +891,9 @@ public class NinteichosaResultEntryMain {
     }
 //</editor-fold>
 
+    private ResponseData<NinteichosaResultEntryMainDiv> _createResponseData(NinteichosaResultEntryMainDiv div) {
+        ResponseData<NinteichosaResultEntryMainDiv> response = new ResponseData<>();
+        response.data = div;
+        return response;
+    }
 }

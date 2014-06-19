@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -10,19 +10,21 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * SericeJokyoTokkijiko のクラスファイル 
+ * ButtonsForNinteichosaResultEntry のクラスファイル 
  * 
  * @author 自動生成
  */
-public class SericeJokyoTokkijikoDiv extends Panel {
+public class ButtonsForNinteichosaResultEntryDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtGaikyoTokki")
-    private TextBoxMultiLine txtGaikyoTokki;
+    @JsonProperty("btnToRegisterResult")
+    private Button btnToRegisterResult;
+    @JsonProperty("btnToReturn")
+    private Button btnToReturn;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -30,14 +32,24 @@ public class SericeJokyoTokkijikoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("txtGaikyoTokki")
-    public TextBoxMultiLine getTxtGaikyoTokki() {
-        return txtGaikyoTokki;
+    @JsonProperty("btnToRegisterResult")
+    public Button getBtnToRegisterResult() {
+        return btnToRegisterResult;
     }
 
-    @JsonProperty("txtGaikyoTokki")
-    public void setTxtGaikyoTokki(TextBoxMultiLine txtGaikyoTokki) {
-        this.txtGaikyoTokki=txtGaikyoTokki;
+    @JsonProperty("btnToRegisterResult")
+    public void setBtnToRegisterResult(Button btnToRegisterResult) {
+        this.btnToRegisterResult=btnToRegisterResult;
+    }
+
+    @JsonProperty("btnToReturn")
+    public Button getBtnToReturn() {
+        return btnToReturn;
+    }
+
+    @JsonProperty("btnToReturn")
+    public void setBtnToReturn(Button btnToReturn) {
+        this.btnToReturn=btnToReturn;
     }
 
 }

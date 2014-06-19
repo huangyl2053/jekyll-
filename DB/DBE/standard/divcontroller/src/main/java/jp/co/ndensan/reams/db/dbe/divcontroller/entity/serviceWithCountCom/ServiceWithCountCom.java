@@ -23,12 +23,8 @@ public class ServiceWithCountCom extends CompositeControl {
      */
     @JsonProperty("lblServiceName")
     private Label lblServiceName;
-    @JsonProperty("lblFrequency")
-    private Label lblFrequency;
     @JsonProperty("txtNum")
     private TextBoxNum txtNum;
-    @JsonProperty("lblUnit")
-    private Label lblUnit;
     @JsonProperty("radKaigoOrYobo")
     private RadioButton radKaigoOrYobo;
 
@@ -48,16 +44,6 @@ public class ServiceWithCountCom extends CompositeControl {
         this.lblServiceName=lblServiceName;
     }
 
-    @JsonProperty("lblFrequency")
-    public Label getLblFrequency() {
-        return lblFrequency;
-    }
-
-    @JsonProperty("lblFrequency")
-    public void setLblFrequency(Label lblFrequency) {
-        this.lblFrequency=lblFrequency;
-    }
-
     @JsonProperty("txtNum")
     public TextBoxNum getTxtNum() {
         return txtNum;
@@ -66,16 +52,6 @@ public class ServiceWithCountCom extends CompositeControl {
     @JsonProperty("txtNum")
     public void setTxtNum(TextBoxNum txtNum) {
         this.txtNum=txtNum;
-    }
-
-    @JsonProperty("lblUnit")
-    public Label getLblUnit() {
-        return lblUnit;
-    }
-
-    @JsonProperty("lblUnit")
-    public void setLblUnit(Label lblUnit) {
-        this.lblUnit=lblUnit;
     }
 
     @JsonProperty("radKaigoOrYobo")

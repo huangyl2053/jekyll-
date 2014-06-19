@@ -1,13 +1,13 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.KihonchosaResultInputTabDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.ServiceJokyoTabDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.TokkijikoTabDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.KihonchosaResultInputTabDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.ServiceJokyoTabDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.TokkijikoTabDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
 
 /**

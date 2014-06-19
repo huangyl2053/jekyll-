@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -23,20 +23,14 @@ public class SeriveJokyoRiyoShisetsuDiv extends Panel {
      */
     @JsonProperty("radShisetsuType")
     private RadioButton radShisetsuType;
-    @JsonProperty("lblSpace2")
-    private Label lblSpace2;
-    @JsonProperty("lblShisetsuName")
-    private Label lblShisetsuName;
+    @JsonProperty("linRiyoShisetsu")
+    private HorizontalLine linRiyoShisetsu;
     @JsonProperty("txtShisetsuName")
     private TextBox txtShisetsuName;
-    @JsonProperty("lblShisetsuJusho")
-    private Label lblShisetsuJusho;
     @JsonProperty("txtShisetsuYubinNo")
-    private TextBox txtShisetsuYubinNo;
+    private TextBoxYubinNo txtShisetsuYubinNo;
     @JsonProperty("txtShisetsuJusho")
     private TextBox txtShisetsuJusho;
-    @JsonProperty("lblShisetsuTelNo")
-    private Label lblShisetsuTelNo;
     @JsonProperty("txtShisetsuTelNo")
     private TextBox txtShisetsuTelNo;
 
@@ -56,24 +50,14 @@ public class SeriveJokyoRiyoShisetsuDiv extends Panel {
         this.radShisetsuType=radShisetsuType;
     }
 
-    @JsonProperty("lblSpace2")
-    public Label getLblSpace2() {
-        return lblSpace2;
+    @JsonProperty("linRiyoShisetsu")
+    public HorizontalLine getLinRiyoShisetsu() {
+        return linRiyoShisetsu;
     }
 
-    @JsonProperty("lblSpace2")
-    public void setLblSpace2(Label lblSpace2) {
-        this.lblSpace2=lblSpace2;
-    }
-
-    @JsonProperty("lblShisetsuName")
-    public Label getLblShisetsuName() {
-        return lblShisetsuName;
-    }
-
-    @JsonProperty("lblShisetsuName")
-    public void setLblShisetsuName(Label lblShisetsuName) {
-        this.lblShisetsuName=lblShisetsuName;
+    @JsonProperty("linRiyoShisetsu")
+    public void setLinRiyoShisetsu(HorizontalLine linRiyoShisetsu) {
+        this.linRiyoShisetsu=linRiyoShisetsu;
     }
 
     @JsonProperty("txtShisetsuName")
@@ -86,23 +70,13 @@ public class SeriveJokyoRiyoShisetsuDiv extends Panel {
         this.txtShisetsuName=txtShisetsuName;
     }
 
-    @JsonProperty("lblShisetsuJusho")
-    public Label getLblShisetsuJusho() {
-        return lblShisetsuJusho;
-    }
-
-    @JsonProperty("lblShisetsuJusho")
-    public void setLblShisetsuJusho(Label lblShisetsuJusho) {
-        this.lblShisetsuJusho=lblShisetsuJusho;
-    }
-
     @JsonProperty("txtShisetsuYubinNo")
-    public TextBox getTxtShisetsuYubinNo() {
+    public TextBoxYubinNo getTxtShisetsuYubinNo() {
         return txtShisetsuYubinNo;
     }
 
     @JsonProperty("txtShisetsuYubinNo")
-    public void setTxtShisetsuYubinNo(TextBox txtShisetsuYubinNo) {
+    public void setTxtShisetsuYubinNo(TextBoxYubinNo txtShisetsuYubinNo) {
         this.txtShisetsuYubinNo=txtShisetsuYubinNo;
     }
 
@@ -114,16 +88,6 @@ public class SeriveJokyoRiyoShisetsuDiv extends Panel {
     @JsonProperty("txtShisetsuJusho")
     public void setTxtShisetsuJusho(TextBox txtShisetsuJusho) {
         this.txtShisetsuJusho=txtShisetsuJusho;
-    }
-
-    @JsonProperty("lblShisetsuTelNo")
-    public Label getLblShisetsuTelNo() {
-        return lblShisetsuTelNo;
-    }
-
-    @JsonProperty("lblShisetsuTelNo")
-    public void setLblShisetsuTelNo(Label lblShisetsuTelNo) {
-        this.lblShisetsuTelNo=lblShisetsuTelNo;
     }
 
     @JsonProperty("txtShisetsuTelNo")

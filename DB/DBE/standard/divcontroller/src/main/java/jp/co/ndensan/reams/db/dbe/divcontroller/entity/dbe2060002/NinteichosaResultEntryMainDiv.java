@@ -1,15 +1,15 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.ButtonsForNinteichosaResultEntryDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.HihokenshaForNinteichosaResultDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.NinteichosaDetailDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.ShisakaiWaritsukeKiboDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001.tabNinteichosaResultDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.ButtonsForNinteichosaResultEntryDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.HihokenshaForNinteichosaResultDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.NinteichosaDetailDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.ShisakaiWaritsukeKiboDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060002.tabNinteichosaResultDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**

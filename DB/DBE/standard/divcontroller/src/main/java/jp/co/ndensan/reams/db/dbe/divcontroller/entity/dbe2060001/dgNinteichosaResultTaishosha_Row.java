@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jun 10 11:57:16 JST 2014 
+ * Thu Jun 19 16:16:59 JST 2014 
  */
 
 
@@ -50,6 +50,31 @@ public class dgNinteichosaResultTaishosha_Row extends DataRow {
 
     public dgNinteichosaResultTaishosha_Row() {
         super();
+        this.btnToDecide = new Button();
+        this.hokenshaNo = RString.EMPTY;
+        this.hokenshaName = RString.EMPTY;
+        this.hihokenshaNo = RString.EMPTY;
+        this.shikibetsuCode = RString.EMPTY;
+        this.shimei = RString.EMPTY;
+        this.kanaShimei = RString.EMPTY;
+        this.shimeiAndKanaShimei = RString.EMPTY;
+        this.shinseiDate = new TextBoxFlexibleDate();
+        this.shinseiKubun = RString.EMPTY;
+        this.chosaIraiDate = new TextBoxFlexibleDate();
+        this.chosaJisshiDate = new TextBoxFlexibleDate();
+        this.chosaKanryoDate = new TextBoxFlexibleDate();
+        this.chosaItakusakiCode = RString.EMPTY;
+        this.chosaItakusakiName = RString.EMPTY;
+        this.chosainCode = RString.EMPTY;
+        this.chosainName = RString.EMPTY;
+        this.chosaJisshiBashoType = RString.EMPTY;
+        this.chosaJisshiBashoOther = RString.EMPTY;
+        this.birthDay = new TextBoxFlexibleDate();
+        this.gender = RString.EMPTY;
+        this.yubinNo = RString.EMPTY;
+        this.jusho = RString.EMPTY;
+        this.receptionDate = new TextBoxFlexibleDate();
+        this.dataInputDate = new TextBoxFlexibleDate();
     }
 
     public dgNinteichosaResultTaishosha_Row(Button btnToDecide, RString hokenshaNo, RString hokenshaName, RString hihokenshaNo, RString shikibetsuCode, RString shimei, RString kanaShimei, RString shimeiAndKanaShimei, TextBoxFlexibleDate shinseiDate, RString shinseiKubun, TextBoxFlexibleDate chosaIraiDate, TextBoxFlexibleDate chosaJisshiDate, TextBoxFlexibleDate chosaKanryoDate, RString chosaItakusakiCode, RString chosaItakusakiName, RString chosainCode, RString chosainName, RString chosaJisshiBashoType, RString chosaJisshiBashoOther, TextBoxFlexibleDate birthDay, RString gender, RString yubinNo, RString jusho, TextBoxFlexibleDate receptionDate, TextBoxFlexibleDate dataInputDate) {

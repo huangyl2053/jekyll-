@@ -30,13 +30,13 @@ var DBE;
 
         Object.defineProperty(ServiceWithCountCom_Design.prototype, "text_Frequency", {
             get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[1]["fieldName"])["text"];
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[1]["fieldName"])["labelLText"];
             },
             set: function (value) {
                 if ($("#" + this.fieldName + "_" + this.layout.items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[1]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[1]["fieldName"])["text"] = value;
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[1]["fieldName"])["labelLText"] = value;
                 } else {
-                    this.layout.items[1]["text"] = value;
+                    this.layout.items[1]["labelLText"] = value;
                     this.raisePropertyChanged(this.layout);
                 }
             },
@@ -47,13 +47,13 @@ var DBE;
 
         Object.defineProperty(ServiceWithCountCom_Design.prototype, "text_Unit", {
             get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[3]["fieldName"])["text"];
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[1]["fieldName"])["labelRText"];
             },
             set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[3]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[3]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[3]["fieldName"])["text"] = value;
+                if ($("#" + this.fieldName + "_" + this.layout.items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[1]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[1]["fieldName"])["labelRText"] = value;
                 } else {
-                    this.layout.items[3]["text"] = value;
+                    this.layout.items[1]["labelRText"] = value;
                     this.raisePropertyChanged(this.layout);
                 }
             },
@@ -64,13 +64,13 @@ var DBE;
 
         Object.defineProperty(ServiceWithCountCom_Design.prototype, "radKaigoOrYobo_dataSource", {
             get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[4]["fieldName"])["selectedItem"];
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[2]["fieldName"])["selectedItem"];
             },
             set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[4]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[4]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[4]["fieldName"])["selectedItem"] = value;
+                if ($("#" + this.fieldName + "_" + this.layout.items[2]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[2]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[2]["fieldName"])["selectedItem"] = value;
                 } else {
-                    this.layout.items[4]["selectedItem"] = value;
+                    this.layout.items[2]["selectedItem"] = value;
                     this.raisePropertyChanged(this.layout);
                 }
             },
@@ -90,9 +90,9 @@ var DBE;
         ServiceWithCountCom_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
             editablePropertyInfo["text_ServiceName"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["text"];
-            editablePropertyInfo["text_Frequency"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[1]["fieldName"]).getEditablePropertyInfo()["text"];
-            editablePropertyInfo["text_Unit"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[3]["fieldName"]).getEditablePropertyInfo()["text"];
-            editablePropertyInfo["radKaigoOrYobo_dataSource"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[4]["fieldName"]).getEditablePropertyInfo()["selectedItem"];
+            editablePropertyInfo["text_Frequency"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[1]["fieldName"]).getEditablePropertyInfo()["labelLText"];
+            editablePropertyInfo["text_Unit"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[1]["fieldName"]).getEditablePropertyInfo()["labelRText"];
+            editablePropertyInfo["radKaigoOrYobo_dataSource"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[2]["fieldName"]).getEditablePropertyInfo()["selectedItem"];
 
             return editablePropertyInfo;
         };
@@ -103,7 +103,7 @@ var DBE;
                     "fieldName": "lblServiceName",
                     "items": [],
                     "controlType": "Label",
-                    "width": "325",
+                    "width": "400",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -117,39 +117,19 @@ var DBE;
                     "marginLeft": "XS",
                     "marginRight": "",
                     "selectControlID": "lblServiceName",
+                    "helpMessageID": "",
+                    "jpControlName": "",
                     "required": false,
                     "align": 2,
                     "text": "サービス名称",
-                    "isPrivateInfo": false
-                },
-                {
-                    "fieldName": "lblFrequency",
-                    "items": [],
-                    "controlType": "Label",
-                    "width": "30",
-                    "visible": true,
-                    "displayNone": false,
-                    "disabled": false,
-                    "accessKey": "",
-                    "nextFocusFieldName": "",
-                    "wrap": false,
-                    "dependencies": [],
-                    "float": 0,
-                    "toolTip": "",
-                    "authorityMode": 0,
-                    "marginLeft": "XS",
-                    "marginRight": "",
-                    "selectControlID": "lblFrequency",
-                    "required": false,
-                    "align": 2,
-                    "text": "月",
-                    "isPrivateInfo": false
+                    "isPrivateInfo": false,
+                    "decorationClass": ""
                 },
                 {
                     "fieldName": "txtNum",
                     "items": [],
                     "controlType": "TextBoxNum",
-                    "width": "XS",
+                    "width": "24",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -161,16 +141,19 @@ var DBE;
                     "toolTip": "",
                     "authorityMode": 0,
                     "marginLeft": "XS",
-                    "marginRight": "XS",
+                    "marginRight": "0",
                     "selectControlID": "txtNum_core",
+                    "helpMessageID": "",
+                    "jpControlName": "",
                     "required": false,
                     "text": "",
                     "isPrivateInfo": false,
+                    "decorationClass": "",
                     "maxLength": "3",
                     "minLength": 0,
                     "textAlign": 2,
                     "readOnly": false,
-                    "placeHolder": "",
+                    "placeHolder": "123",
                     "textKind": 2,
                     "isPassword": false,
                     "isComboBox": false,
@@ -180,10 +163,10 @@ var DBE;
                     "onKeyPress": "",
                     "suggest": [],
                     "value": "",
-                    "labelLText": "",
-                    "labelRText": "",
-                    "labelLWidth": "S",
-                    "labelRWidth": "S",
+                    "labelLText": "月",
+                    "labelRText": "単位",
+                    "labelLWidth": "30",
+                    "labelRWidth": "32",
                     "labelLAlign": 2,
                     "labelRAlign": 0,
                     "maxValue": "999",
@@ -192,29 +175,6 @@ var DBE;
                     "isComma": false,
                     "decimalPointLength": 0,
                     "permitCharactor": "+-,.\\"
-                },
-                {
-                    "fieldName": "lblUnit",
-                    "items": [],
-                    "controlType": "Label",
-                    "width": "32",
-                    "visible": true,
-                    "displayNone": false,
-                    "disabled": false,
-                    "accessKey": "",
-                    "nextFocusFieldName": "",
-                    "wrap": false,
-                    "dependencies": [],
-                    "float": 0,
-                    "toolTip": "",
-                    "authorityMode": 0,
-                    "marginLeft": "",
-                    "marginRight": "XS",
-                    "selectControlID": "lblUnit",
-                    "required": false,
-                    "align": 0,
-                    "text": "単位",
-                    "isPrivateInfo": false
                 },
                 {
                     "fieldName": "radKaigoOrYobo",
@@ -234,6 +194,8 @@ var DBE;
                     "marginLeft": "XS",
                     "marginRight": "XS",
                     "selectControlID": "radKaigoOrYobo_core",
+                    "helpMessageID": "",
+                    "jpControlName": "",
                     "onChange": "",
                     "labelLText": "",
                     "labelLWidth": "S",
@@ -252,6 +214,7 @@ var DBE;
                     "onClick": "",
                     "newLineItemNumber": 2,
                     "spaceSize": "M",
+                    "disabledItem": [],
                     "icon": []
                 }
             ],
@@ -270,6 +233,8 @@ var DBE;
             "marginLeft": "XS",
             "marginRight": "XS",
             "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
             "relation": [],
             "businessId": "DBE",
             "controlName": "ServiceWithCountCom",
@@ -280,13 +245,13 @@ var DBE;
                     "newPropertyName": "text_ServiceName"
                 },
                 {
-                    "publicChildFieldName": "lblFrequency",
-                    "publicChildProperty": "text",
+                    "publicChildFieldName": "txtNum",
+                    "publicChildProperty": "labelLText",
                     "newPropertyName": "text_Frequency"
                 },
                 {
-                    "publicChildFieldName": "lblUnit",
-                    "publicChildProperty": "text",
+                    "publicChildFieldName": "txtNum",
+                    "publicChildProperty": "labelRText",
                     "newPropertyName": "text_Unit"
                 },
                 {
