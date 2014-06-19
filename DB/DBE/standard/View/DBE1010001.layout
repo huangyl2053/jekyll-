@@ -32,7 +32,7 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
-     "onClick_BtnToSearch": "onClickBtnToSearch"
+     "onClick_BtnToSearch": "onClick_btnToSearch"
     },
     {
      "fieldName": "SearchResultForShinsei",
@@ -281,7 +281,7 @@
    "jpControlName": "",
    "onLoad": "",
    "title": "認定申請対象者検索",
-   "isOpen": false,
+   "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
@@ -294,8 +294,8 @@
      "requestUrl": "dbe/db/dbe/HihokenshaSearchForShinsei/onLoad"
     },
     {
-     "eventName": "onClickBtnToSearch",
-     "requestUrl": "dbe/db/dbe/HihokenshaSearchForShinsei/onClickBtnToSearch"
+     "eventName": "onClick_btnToSearch",
+     "requestUrl": "dbe/db/dbe/HihokenshaSearchForShinsei/onClick_btnToSearch"
     }
    ],
    "hiddenInput": [],
@@ -2332,56 +2332,10 @@
        "height": "Auto"
       },
       {
-       "fieldName": "txtTokuteiShippei",
+       "fieldName": "ddltTokuteiShippei",
        "items": [],
-       "controlType": "TextBox",
+       "controlType": "DropDownList",
        "width": "L",
-       "visible": true,
-       "displayNone": false,
-       "disabled": false,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 0,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "S",
-       "marginRight": "XS",
-       "selectControlID": "txtTokuteiShippei_core",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "readOnly": true,
-       "onChange": "",
-       "required": false,
-       "labelLText": "特定疾病",
-       "labelRText": "",
-       "labelLWidth": "S",
-       "labelRWidth": "S",
-       "labelLAlign": 2,
-       "labelRAlign": 0,
-       "onFocus": "",
-       "onBlur": "",
-       "maxLength": 100000000,
-       "minLength": 0,
-       "textAlign": 0,
-       "placeHolder": "",
-       "textKind": 0,
-       "isPrivateInfo": false,
-       "isPassword": false,
-       "isComboBox": false,
-       "onKeyPress": "",
-       "text": "",
-       "suggest": [],
-       "value": "",
-       "decorationClass": "",
-       "permitCharactor": ""
-      },
-      {
-       "fieldName": "btnSearchTokuteiShippei",
-       "items": [],
-       "controlType": "ButtonDialog",
-       "width": "S",
        "visible": true,
        "displayNone": false,
        "disabled": false,
@@ -2394,21 +2348,90 @@
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
-       "selectControlID": "btnSearchTokuteiShippei",
+       "selectControlID": "ddltTokuteiShippei_core",
        "helpMessageID": "",
        "jpControlName": "",
-       "text": "ButtonDialog1",
-       "onClick": "",
-       "icon": 0,
-       "appearance": 2,
-       "imageFileUrl": "/uz/uza/css/Link.jpg",
-       "imageWidth": "",
-       "imageHeight": "",
-       "displayChildDivName": "",
-       "dataPassing": [],
-       "visibleCloseButton": true,
-       "onOkClose": "",
-       "onBeforeOpenDialog": ""
+       "onChange": "",
+       "selectedItem": "00",
+       "dataSource": [
+        {
+         "key": "00",
+         "value": "選択なし"
+        },
+        {
+         "key": "01",
+         "value": "末期がん"
+        },
+        {
+         "key": "02",
+         "value": "筋萎縮性側索硬化症"
+        },
+        {
+         "key": "03",
+         "value": "後縦靭帯骨化症"
+        },
+        {
+         "key": "04",
+         "value": "骨折を伴う骨粗しょう症"
+        },
+        {
+         "key": "05",
+         "value": "多系統萎縮症"
+        },
+        {
+         "key": "06",
+         "value": "初老期における認知症"
+        },
+        {
+         "key": "07",
+         "value": "脊髄小脳変性症"
+        },
+        {
+         "key": "08",
+         "value": "脊柱管狭窄症"
+        },
+        {
+         "key": "09",
+         "value": "早老症"
+        },
+        {
+         "key": "10",
+         "value": "糖尿病性神経障害、糖尿病性腎症および糖尿病性網膜症"
+        },
+        {
+         "key": "11",
+         "value": "脳血管疾患（外傷性を除く）"
+        },
+        {
+         "key": "12",
+         "value": "進行性核上性麻痺、大脳皮質基底核変性症およびパーキンソン病"
+        },
+        {
+         "key": "13",
+         "value": "閉塞性動脈硬化症"
+        },
+        {
+         "key": "14",
+         "value": "関節リウマチ"
+        },
+        {
+         "key": "15",
+         "value": "慢性閉塞性肺疾患"
+        },
+        {
+         "key": "16",
+         "value": "両側の膝関節または股関節に著しい変形を伴う変形性関節症"
+        }
+       ],
+       "labelLText": "特定疾病",
+       "labelRText": "",
+       "labelLWidth": "S",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "onFocus": "",
+       "onBlur": "",
+       "disabledItem": []
       }
      ],
      "controlType": "Panel",
