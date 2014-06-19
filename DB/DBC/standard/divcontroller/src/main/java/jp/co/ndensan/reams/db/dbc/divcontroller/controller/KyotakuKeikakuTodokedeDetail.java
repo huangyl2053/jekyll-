@@ -114,7 +114,8 @@ public class KyotakuKeikakuTodokedeDetail {
 
         @Override
         public int compare(dgKyotakuKeikakuTodokedeRirekiList_Row o1, dgKyotakuKeikakuTodokedeRirekiList_Row o2) {
-            return new FlexibleDate(o2.getTxtKeikakuTekiyoKaishiYMD().replace(".", "")).compareTo(new FlexibleDate(o1.getTxtKeikakuTekiyoKaishiYMD().replace(".", "")));
+            return new FlexibleDate(o2.getTxtKeikakuTekiyoKaishiYMD().replace(".", "")).
+                    compareTo(new FlexibleDate(o1.getTxtKeikakuTekiyoKaishiYMD().replace(".", "")));
         }
     }
 
