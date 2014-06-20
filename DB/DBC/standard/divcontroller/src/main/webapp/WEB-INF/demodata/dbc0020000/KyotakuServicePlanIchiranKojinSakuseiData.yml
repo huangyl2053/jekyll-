@@ -1,0 +1,10 @@
+## YAML Template.　setKojinSakuseiData
+---
+- JikoSakuseiTishoYM: "01"
+  JikoSakuseiCreateYMD: "01"
+  JikoSakuseiTodokedeYMD: "01"
+  JikoSakuseiYoukaigodo: "要介護度３"
+- TodokedeStatus: "新規申請"
+  PlanSakuseiKubun: "居宅支援"
+  TaishoYMInvisibleConcat: "01"
+  TaishoYMInvisibleIsBefore: "20020101"

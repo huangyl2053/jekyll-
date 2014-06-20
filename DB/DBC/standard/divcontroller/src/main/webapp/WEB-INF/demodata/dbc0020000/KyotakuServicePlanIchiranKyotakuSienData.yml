@@ -1,0 +1,15 @@
+## YAML Template. setKyotakuSienData
+---
+- JigyoshaSakuseiTodokedeKubun: 新規
+  JigyoshaSakuseiKubun: 居宅介護支援事業所作成 
+  JigyoshaSakuseiJigyoshaNo: 1234567890
+  JigyoshaSakuseiJigyoshaName: 電算サービスセンター
+  JigyoshaSakuseiCategory1: 居宅介護
+  JigyoshaSakuseiCategory2: 小規模介護
+  JigyoshaSakuseiYubinNo: 381-0010
+  JigyoshaSakuseiJusho: 長野県長野市鶴賀七瀬中町276-6
+  JigyoshaSakuseiKanrisha: 電算 十郎"   
+  JigyoshaSakuseiTelNo: 123-456-7890    
+  JigyoshaSakuseiItakusakiNo: 1234567890
+  JigyoshaSakuseiItakusakiName: 介護施設
+  JigyoshaSakuseiModifyRiyu: 資格喪失
