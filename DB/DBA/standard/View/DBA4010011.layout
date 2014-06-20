@@ -35,41 +35,6 @@
      "onClick_BtnToSearch": "onClick_BtnToSearch"
     },
     {
-     "fieldName": "SaikinShokaiHihokensha",
-     "items": [],
-     "controlType": "CommonChildDiv",
-     "width": "XS",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": true,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "SaikinShokaiHihokensha",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "relation": [],
-     "marginTop": 0,
-     "marginBottom": 0,
-     "businessId": "URZ",
-     "controlName": "SaikinShorishaRireki",
-     "dataPassingForDialog": [],
-     "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "isOneCondition": "0",
-     "SaikinShorishaRireki_width": "1090",
-     "SaikinShorishaRireki_marginLeft": "XS",
-     "ddlSaikinShorisha_marginLeft": "XL",
-     "btnSaikinShorishaHyoji_width": "S",
-     "onClick_btnSaikinShorishaHyoji": "onClick_btnSaikinShorishaHyoji"
-    },
-    {
      "fieldName": "SearchResult",
      "items": [],
      "controlType": "CommonChildDiv",
@@ -1976,11 +1941,6 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "SaikinShokaiHihokensha",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
      "visibleDiv": "SearchResult",
      "panelState": "close",
      "fixedDiv": "No"
@@ -2070,11 +2030,6 @@
     {
      "visibleDiv": "HihokenshaFinder",
      "panelState": "close",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "SaikinShokaiHihokensha",
-     "panelState": "visible",
      "fixedDiv": "No"
     },
     {
@@ -3011,9 +2966,6 @@
   ],
   [
    "HihokenshaFinder"
-  ],
-  [
-   "SaikinShokaiHihokensha"
   ],
   [
    "SearchResult"

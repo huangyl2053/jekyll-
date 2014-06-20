@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.divcontroller.controller.helper.TajutokuJohoValueSetter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.JutokuJohoInputDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.ShisetsuJohoInputDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2040011.SochimotoJohoInputDiv;

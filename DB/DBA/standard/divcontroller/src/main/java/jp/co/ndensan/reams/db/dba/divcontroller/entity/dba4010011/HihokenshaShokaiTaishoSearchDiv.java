@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.HihokenshaFinderDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.SearchResultOfHihokenshaDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.SaikinShorishaRirekiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -24,8 +23,6 @@ public class HihokenshaShokaiTaishoSearchDiv extends Panel {
      */
     @JsonProperty("HihokenshaFinder")
     private HihokenshaFinderDiv HihokenshaFinder;
-    @JsonProperty("SaikinShokaiHihokensha")
-    private SaikinShorishaRirekiDiv SaikinShokaiHihokensha;
     @JsonProperty("SearchResult")
     private SearchResultOfHihokenshaDiv SearchResult;
 
@@ -43,16 +40,6 @@ public class HihokenshaShokaiTaishoSearchDiv extends Panel {
     @JsonProperty("HihokenshaFinder")
     public void setHihokenshaFinder(HihokenshaFinderDiv HihokenshaFinder) {
         this.HihokenshaFinder=HihokenshaFinder;
-    }
-
-    @JsonProperty("SaikinShokaiHihokensha")
-    public SaikinShorishaRirekiDiv getSaikinShokaiHihokensha() {
-        return SaikinShokaiHihokensha;
-    }
-
-    @JsonProperty("SaikinShokaiHihokensha")
-    public void setSaikinShokaiHihokensha(SaikinShorishaRirekiDiv SaikinShokaiHihokensha) {
-        this.SaikinShokaiHihokensha=SaikinShokaiHihokensha;
     }
 
     @JsonProperty("SearchResult")
