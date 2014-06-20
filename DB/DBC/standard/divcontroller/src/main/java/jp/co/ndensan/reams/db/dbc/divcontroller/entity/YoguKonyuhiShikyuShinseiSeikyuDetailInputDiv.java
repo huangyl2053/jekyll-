@@ -39,8 +39,8 @@ public class YoguKonyuhiShikyuShinseiSeikyuDetailInputDiv extends Panel {
     private RadioButton radShinsaMethod;
     @JsonProperty("btnClear")
     private Button btnClear;
-    @JsonProperty("btnAddSeikyuDetail")
-    private Button btnAddSeikyuDetail;
+    @JsonProperty("btnModifyDetail")
+    private Button btnModifyDetail;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -138,14 +138,14 @@ public class YoguKonyuhiShikyuShinseiSeikyuDetailInputDiv extends Panel {
         this.btnClear=btnClear;
     }
 
-    @JsonProperty("btnAddSeikyuDetail")
-    public Button getBtnAddSeikyuDetail() {
-        return btnAddSeikyuDetail;
+    @JsonProperty("btnModifyDetail")
+    public Button getBtnModifyDetail() {
+        return btnModifyDetail;
     }
 
-    @JsonProperty("btnAddSeikyuDetail")
-    public void setBtnAddSeikyuDetail(Button btnAddSeikyuDetail) {
-        this.btnAddSeikyuDetail=btnAddSeikyuDetail;
+    @JsonProperty("btnModifyDetail")
+    public void setBtnModifyDetail(Button btnModifyDetail) {
+        this.btnModifyDetail=btnModifyDetail;
     }
 
 }
