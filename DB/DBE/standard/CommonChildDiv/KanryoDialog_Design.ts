@@ -18,6 +18,7 @@ module DBE {
          */
         public registProperty() {
             super.registProperty();
+            Uz.JSControlUtil.registProperty("KanryoMessage_width");
         }
         
         /**
@@ -37,10 +38,108 @@ module DBE {
    "fieldName": "KanryoDialog",
    "items": [
     {
-     "fieldName": "kanryoMassage",
-     "items": [],
-     "controlType": "CommonChildDiv",
-     "width": "XS",
+     "fieldName": "SuccessInfo",
+     "items": [
+      {
+       "fieldName": "imgSuccess",
+       "items": [],
+       "controlType": "StaticImage",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "imgSuccess",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "src": "/ur/urz/img/KanryoMessage.png",
+       "imageWidth": "35",
+       "imageHeight": "30"
+      },
+      {
+       "fieldName": "WrapMessageMain",
+       "items": [
+        {
+         "fieldName": "lblMessageMain",
+         "items": [],
+         "controlType": "Label",
+         "width": "M",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "selectControlID": "lblMessageMain",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "required": false,
+         "align": 0,
+         "text": "処理は正常に行われました。",
+         "isPrivateInfo": false,
+         "decorationClass": ""
+        }
+       ],
+       "controlType": "Panel",
+       "width": "G2",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "WrapMessageMain",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "onLoad": "",
+       "title": "",
+       "marginTop": "Default",
+       "marginBottom": "Default",
+       "isOpen": true,
+       "canOpenAndClose": true,
+       "postParameterPanelNames": [
+        {
+         "postParameterPanelNames": "WrapMessageMain"
+        }
+       ],
+       "requestSettings": [],
+       "hiddenInput": [],
+       "onOpen": "",
+       "onClose": "",
+       "session": {},
+       "eraseBorderTop": true,
+       "eraseBorderBottom": true,
+       "eraseBorderRight": true,
+       "eraseBorderLeft": true,
+       "backgroundColor": 4,
+       "widthAuto": true,
+       "panelDisplay": 0,
+       "isGroupBox": false,
+       "readOnly": false,
+       "height": "Auto"
+      }
+     ],
+     "controlType": "Panel",
+     "width": "346",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -51,25 +150,69 @@ module DBE {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "kanryoMassage",
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "SuccessInfo",
      "helpMessageID": "",
      "jpControlName": "",
-     "relation": [],
-     "businessId": "DBZ",
-     "controlName": "KaigoKanryoMessage",
-     "marginTop": 0,
-     "marginBottom": 0,
-     "originalProperty": [],
-     "dataPassingForDialog": [],
-     "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "KanryoMessage_width": "G11"
+     "onLoad": "",
+     "title": "",
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "isOpen": true,
+     "canOpenAndClose": true,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "SuccessInfo"
+      }
+     ],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
+     "backgroundColor": 4,
+     "widthAuto": false,
+     "panelDisplay": 0,
+     "isGroupBox": false,
+     "readOnly": false,
+     "height": "Auto"
+    },
+    {
+     "fieldName": "btnClose",
+     "items": [],
+     "controlType": "Button",
+     "width": "S",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 2,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnClose",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "text": "閉じる",
+     "onClick": "onClick_btnClose",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "icon": 0
     }
    ],
    "controlType": "Panel",
-   "width": "G11",
+   "width": "G4",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -99,17 +242,21 @@ module DBE {
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbe/db/dbe/KanryoDialog/onLoad"
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_btnClose",
+     "requestUrl": "dbe/db/dbe/KanryoDialog/onClick_btnClose"
     }
    ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -140,10 +287,16 @@ module DBE {
  "controlName": "KanryoDialog",
  "marginTop": 0,
  "marginBottom": 0,
- "originalProperty": [],
+ "originalProperty": [
+  {
+   "publicChildFieldName": "KanryoMessage",
+   "publicChildProperty": "KanryoMessage_width",
+   "newPropertyName": "KanryoMessage_width"
+  }
+ ],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
- "dialogCancelEventNameForDialog": ""
+ "dialogCancelEventNameForDialog": "onClick_btnClose"
 }        
     }
 }

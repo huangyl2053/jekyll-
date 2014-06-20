@@ -5,27 +5,27 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.kanryoDialog;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kanryoDialog.SuccessInfoDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kanryoDialog.WrapMessageMainDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * KanryoDialog のクラスファイル 
+ * SuccessInfo のクラスファイル 
  * 
  * @author 自動生成
  */
-public class KanryoDialogDiv extends Panel {
+public class SuccessInfoDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("SuccessInfo")
-    private SuccessInfoDiv SuccessInfo;
-    @JsonProperty("btnClose")
-    private Button btnClose;
+    @JsonProperty("imgSuccess")
+    private StaticImage imgSuccess;
+    @JsonProperty("WrapMessageMain")
+    private WrapMessageMainDiv WrapMessageMain;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -33,24 +33,24 @@ public class KanryoDialogDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("SuccessInfo")
-    public SuccessInfoDiv getSuccessInfo() {
-        return SuccessInfo;
+    @JsonProperty("imgSuccess")
+    public StaticImage getImgSuccess() {
+        return imgSuccess;
     }
 
-    @JsonProperty("SuccessInfo")
-    public void setSuccessInfo(SuccessInfoDiv SuccessInfo) {
-        this.SuccessInfo=SuccessInfo;
+    @JsonProperty("imgSuccess")
+    public void setImgSuccess(StaticImage imgSuccess) {
+        this.imgSuccess=imgSuccess;
     }
 
-    @JsonProperty("btnClose")
-    public Button getBtnClose() {
-        return btnClose;
+    @JsonProperty("WrapMessageMain")
+    public WrapMessageMainDiv getWrapMessageMain() {
+        return WrapMessageMain;
     }
 
-    @JsonProperty("btnClose")
-    public void setBtnClose(Button btnClose) {
-        this.btnClose=btnClose;
+    @JsonProperty("WrapMessageMain")
+    public void setWrapMessageMain(WrapMessageMainDiv WrapMessageMain) {
+        this.WrapMessageMain=WrapMessageMain;
     }
 
 }

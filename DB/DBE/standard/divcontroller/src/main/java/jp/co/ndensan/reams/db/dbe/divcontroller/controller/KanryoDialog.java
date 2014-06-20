@@ -6,9 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.kanryoDialog.KanryoDialogDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoKanryoMessage;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
@@ -23,9 +21,16 @@ public class KanryoDialog {
      * @return ResponseData
      */
     public ResponseData<KanryoDialogDiv> onLoad(KanryoDialogDiv div) {
-        KaigoKanryoMessage.setMessage(div.getKanryoMassage(),
-                new RString("処理は正常に終了しました。"), RString.EMPTY, RString.EMPTY);
-        div.setVisible(true);
+        return _createResponseData(div);
+    }
+
+    /**
+     * onClick btnClose
+     *
+     * @param div KanryoDialogDiv
+     * @return ResponseData
+     */
+    public ResponseData<KanryoDialogDiv> onClick_btnClose(KanryoDialogDiv div) {
         return _createResponseData(div);
     }
 

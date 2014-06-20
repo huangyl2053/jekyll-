@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ChosaItakusakiData {
 
-    private static final RString FILE_NAME = new RString("Chosain/ChosaItakusaki.yml");
+    private static final RString FILE_NAME = new RString("ChosaKikanDialog/ChosaKikanList.yml");
 
     public static final class ChosaItakusaki {
 
@@ -51,7 +51,7 @@ public class ChosaItakusakiData {
             @Override
             public ChosaItakusaki exec(Map map) {
                 ControlGenerator cg = new ControlGenerator(map);
-                return new ChosaItakusaki(cg.getAsRString("調査委託先番号"), cg.getAsRString("調査委託先名称"));
+                return new ChosaItakusaki(cg.getAsRString("機関番号"), cg.getAsRString("機関名称"));
             }
         });
     }
