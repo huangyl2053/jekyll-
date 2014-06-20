@@ -5,24 +5,26 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2020011;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * SearchShisetsuNyutaishoKanriDbJoho のクラスファイル 
+ * ShisetsuNyutaishoKanriTaishoshaJoho のクラスファイル 
  * 
  * @author 自動生成
  */
-public class SearchShisetsuNyutaishoKanriDbJohoDiv extends Panel {
+public class ShisetsuNyutaishoKanriTaishoshaJohoDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtSearchHihokenshaNo")
-    private TextBox txtSearchHihokenshaNo;
+    @JsonProperty("AtenaJoho")
+    private AtenaShokaiSimpleDiv AtenaJoho;
+    @JsonProperty("KaigoJoho")
+    private KaigoShikakuKihonDiv KaigoJoho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -30,14 +32,24 @@ public class SearchShisetsuNyutaishoKanriDbJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("txtSearchHihokenshaNo")
-    public TextBox getTxtSearchHihokenshaNo() {
-        return txtSearchHihokenshaNo;
+    @JsonProperty("AtenaJoho")
+    public AtenaShokaiSimpleDiv getAtenaJoho() {
+        return AtenaJoho;
     }
 
-    @JsonProperty("txtSearchHihokenshaNo")
-    public void setTxtSearchHihokenshaNo(TextBox txtSearchHihokenshaNo) {
-        this.txtSearchHihokenshaNo=txtSearchHihokenshaNo;
+    @JsonProperty("AtenaJoho")
+    public void setAtenaJoho(AtenaShokaiSimpleDiv AtenaJoho) {
+        this.AtenaJoho=AtenaJoho;
+    }
+
+    @JsonProperty("KaigoJoho")
+    public KaigoShikakuKihonDiv getKaigoJoho() {
+        return KaigoJoho;
+    }
+
+    @JsonProperty("KaigoJoho")
+    public void setKaigoJoho(KaigoShikakuKihonDiv KaigoJoho) {
+        this.KaigoJoho=KaigoJoho;
     }
 
 }

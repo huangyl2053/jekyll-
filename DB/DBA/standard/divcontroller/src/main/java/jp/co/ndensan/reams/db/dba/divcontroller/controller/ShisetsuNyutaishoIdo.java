@@ -3,21 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.divcontroller;
+package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2020011.ShisetsuNyutaishoIdoDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2020011.ShisetsuNyutaishoKanriTaishoGaitoshaDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2020011.dgShisetsuNyutaishoKanriGaitosha_Row;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2020011.ShisetsuNyutaishoKanriTaishoshaSearchDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgSearchResult_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.SaikinShorishaRirekiDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -32,29 +32,26 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  */
 public class ShisetsuNyutaishoIdo {
 
-    private static final RString SHISETSU_NYUTAISHO_RIREKI = new RString("DBA2010011/ShisetsuNyutaishoRireki.yml");
+    private static final RString SHISETSU_NYUTAISHO_RIREKI = new RString("DBA2020011/shisetsuNyutaisho.yml");
 
     /**
      * 該当者検索画面でグリッドから対象者を選択した際に実行されます。
      *
      * @param idoRirekiDiv 施設入退所異動履歴Div
-     * @param gaitoshaDiv 該当者Div
-     * @param saikinShorishaDiv 最近処理者Div
+     * @param searchDiv 対象者検索Div
      * @return レスポンス
      */
-    public ResponseData onClick_btnSelect(ShisetsuNyutaishoIdoDiv idoRirekiDiv,
-            ShisetsuNyutaishoKanriTaishoGaitoshaDiv gaitoshaDiv,
-            SaikinShorishaRirekiDiv saikinShorishaDiv) {
+    public ResponseData onClick_btnToDecide(ShisetsuNyutaishoIdoDiv idoRirekiDiv, ShisetsuNyutaishoKanriTaishoshaSearchDiv searchDiv) {
         ResponseData<ShisetsuNyutaishoIdoDiv> response = new ResponseData<>();
 
-        DataGrid<dgShisetsuNyutaishoKanriGaitosha_Row> gaitoshaGrid = gaitoshaDiv.getDgShisetsuNyutaishoKanriGaitosha();
-        dgShisetsuNyutaishoKanriGaitosha_Row row = gaitoshaGrid.getClickedItem();
+        dgSearchResult_Row row = searchDiv.getSearchResult().getDgSearchResult().getClickedItem();
         ShisetsuNyutaishoRirekiKanriDiv rirekiKanriDiv = idoRirekiDiv.getShisetsuNyutaishoKanri();
-        List<HashMap> idoRirekiList = getIdoRireki(row);
+        List<HashMap> idoRirekiList = getIdoRireki(row.getHihokenshaNo());
         setIdoRirekiGrid(rirekiKanriDiv.getDgShisetsuNyutaishoRireki(), idoRirekiList);
 
         setDdlTaishoShisetsu(idoRirekiDiv);
         setRadShisetsuShurui(idoRirekiDiv);
+
         if (idoRirekiList.isEmpty()) {
             rirekiKanriDiv.getShisetsuNyutaishoInput().setDisabled(false);
             rirekiKanriDiv.getBtnUpdateShisetsuNyutaisho().setDisabled(false);
@@ -92,10 +89,11 @@ public class ShisetsuNyutaishoIdo {
         inputDiv.getDdlTaishoJoho().setDataSource(sourceList);
     }
 
-    private List<HashMap> getIdoRireki(dgShisetsuNyutaishoKanriGaitosha_Row row) {
-        List<HashMap> gaitoshaRirekiList = YamlLoader.FOR_DBA.loadAsList(SHISETSU_NYUTAISHO_RIREKI);
+    private List<HashMap> getIdoRireki(RString hihokenshaNo) {
+        List<HashMap> gaitoshaRirekiList = YamlLoader.DBA.loadAsList(SHISETSU_NYUTAISHO_RIREKI);
         for (HashMap gaitoshaRireki : gaitoshaRirekiList) {
-            if (gaitoshaRireki.get("被保番号").toString().equals(row.getHihokenshaNo().toString())) {
+            ControlGenerator generator = new ControlGenerator(gaitoshaRireki);
+            if (generator.getAsRString("被保番号").equals(hihokenshaNo)) {
                 return (List<HashMap>) gaitoshaRireki.get("異動履歴");
             }
         }
@@ -126,56 +124,4 @@ public class ShisetsuNyutaishoIdo {
         row.setTaishoJoho(new RString(gaitosha.get("対象情報").toString()));
         return row;
     }
-
-    /**
-     * 該当者検索画面で、グリッドに表示された該当者が一人しかいない場合に実行されます。
-     *
-     * @param idoRirekiDiv 施設入退所異動履歴Div
-     * @param gaitoshaDiv 該当者Div
-     * @param saikinShorishaDiv 最近処理者Div
-     * @return レスポンス
-     */
-    public ResponseData onOnlyRow_dgShisetsuNyutaishoKanriGaitosha(ShisetsuNyutaishoIdoDiv idoRirekiDiv,
-            ShisetsuNyutaishoKanriTaishoGaitoshaDiv gaitoshaDiv,
-            SaikinShorishaRirekiDiv saikinShorishaDiv) {
-        ResponseData<ShisetsuNyutaishoIdoDiv> response = new ResponseData<>();
-
-        response.data = idoRirekiDiv;
-        return response;
-    }
-
-    /**
-     * 該当者検索画面で、グリッドから対象者をダブルクリックで選択した際に実行されます。
-     *
-     * @param idoRirekiDiv 施設入退所異動履歴Div
-     * @param gaitoshaDiv 該当者Div
-     * @param saikinShorishaDiv 最近処理者Div
-     * @return レスポンス
-     */
-    public ResponseData onSelectByDblClick_dgShisetsuNyutaishoKanriGaitosha(ShisetsuNyutaishoIdoDiv idoRirekiDiv,
-            ShisetsuNyutaishoKanriTaishoGaitoshaDiv gaitoshaDiv,
-            SaikinShorishaRirekiDiv saikinShorishaDiv) {
-        ResponseData<ShisetsuNyutaishoIdoDiv> response = new ResponseData<>();
-
-        response.data = idoRirekiDiv;
-        return response;
-    }
-
-    /**
-     * 該当者検索画面で、最近処理者Divから対象者を選択した際に実行されます。
-     *
-     * @param idoRirekiDiv 施設入退所異動履歴Div
-     * @param gaitoshaDiv 該当者Div
-     * @param saikinShorishaDiv 最近処理者Div
-     * @return レスポンス
-     */
-    public ResponseData onClick_btnSaikinShorishaHyoji(ShisetsuNyutaishoIdoDiv idoRirekiDiv,
-            ShisetsuNyutaishoKanriTaishoGaitoshaDiv gaitoshaDiv,
-            SaikinShorishaRirekiDiv saikinShorishaDiv) {
-        ResponseData<ShisetsuNyutaishoIdoDiv> response = new ResponseData<>();
-
-        response.data = idoRirekiDiv;
-        return response;
-    }
-
 }
