@@ -47,7 +47,7 @@ public class KyotakuJikoRiyohyo {
      * @param panel 履歴一覧
      * @return ResponseData
      */
-    public ResponseData getOnLoadData(KyotakuJikoRiyohyoDiv panel) {
+    public ResponseData onLoad(KyotakuJikoRiyohyoDiv panel) {
         ResponseData<KyotakuJikoRiyohyoDiv> response = new ResponseData<>();
         setRiyohyoData(panel);
         setRiyohyoBeppyoVisible(panel, 別票画面表示.初期表示);
