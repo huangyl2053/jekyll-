@@ -6,9 +6,12 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.SetaiJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgSetaiJoho_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
@@ -38,31 +41,53 @@ public class SetaiJoho {
     }
 
     private List<dgSetaiJoho_Row> create世帯情報() {
+        
+        List<HashMap> ymlData = ymlData("dbc0020000/KyotakuServicePlanIchiranSetaiJoin.yml");
         List<dgSetaiJoho_Row> arrayData = new ArrayList<>();
         dgSetaiJoho_Row item;
-
-        item = create世帯("電算　次郎", "男", "昭52.02.21", "子", "123456789012");
+        
+        for (int i = 0; i < ymlData.size(); i++) {
+            
+            HashMap hashMap = ymlData.get(i);
+            ControlGenerator ymlDt = new ControlGenerator(hashMap); 
+            
+             item = create世帯(
+             ymlDt.getAsRString("SetaiName"),
+             ymlDt.getAsRString("SetaiGender"),
+             ymlDt.getAsRString("SetaiBirthDay"),
+             ymlDt.getAsRString("SetaiTsuzukiGara"),
+             ymlDt.getAsRString("SetaiShikibetsuCode")        
+                   );
+             
         arrayData.add(item);
-        item = create世帯("電算　三郎", "男", "昭54.02.21", "子", "123456789013");
-        arrayData.add(item);
+        }
+        
+//        item = create世帯("電算　次郎", "男", "昭52.02.21", "子", "123456789012");
+//        arrayData.add(item);
+//        item = create世帯("電算　三郎", "男", "昭54.02.21", "子", "123456789013");
+//        arrayData.add(item);
 
         return arrayData;
     }
 
     private dgSetaiJoho_Row create世帯(
-            String name,
-            String gender,
-            String birthDay,
-            String tsuzukiGara,
-            String JuminCode) {
+            RString name,
+            RString gender,
+            RString birthDay,
+            RString tsuzukiGara,
+            RString JuminCode) {
         dgSetaiJoho_Row rowData = new dgSetaiJoho_Row(
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
 
-        rowData.setSetaiName(new RString(name));
-        rowData.setSetaiGender(new RString(gender));
-        rowData.setSetaiBirthDay(new RString(birthDay));
-        rowData.setSetaiTsuzukiGara(new RString(tsuzukiGara));
-        rowData.setSetaiShikibetsuCode(new RString(JuminCode));
+        rowData.setSetaiName(name);
+        rowData.setSetaiGender(gender);
+        rowData.setSetaiBirthDay(birthDay);
+        rowData.setSetaiTsuzukiGara(tsuzukiGara);
+        rowData.setSetaiShikibetsuCode(JuminCode);
         return rowData;
+    }
+    
+      private List<HashMap> ymlData(String ymlName) {
+        return YamlLoader.DBC.loadAsList(new RString(ymlName));
     }
 }

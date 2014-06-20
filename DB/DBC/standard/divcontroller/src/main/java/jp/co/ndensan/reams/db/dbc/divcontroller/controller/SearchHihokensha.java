@@ -1,11 +1,10 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.SearchHihokenshaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgSearchResult_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.dgSearchResult_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -19,15 +18,14 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author n8223
  */
 public class SearchHihokensha {
-        
-        /**
-     * 受給者異動連絡票新規登録  被保険者検索条件情報の初期値をセットします。（初期画面）
+
+    /**
+     * 受給者異動連絡票新規登録 被保険者検索条件情報の初期値をセットします。（初期画面）
      *
      * @param panel HihokenshaSearchPanelDiv
      * @return PanelDivのResponseData
@@ -35,12 +33,12 @@ public class SearchHihokensha {
     public ResponseData<SearchHihokenshaDiv> onLoad(SearchHihokenshaDiv panel) {
         ResponseData<SearchHihokenshaDiv> response = new ResponseData<>();
 
-         panel.getSearchConditionOfHihokensha().getSearchCriteriaOfHokensha().setIsOpen(false);
-         List<HashMap> ymlData = ymlData();
-         
-         String hihokenshaNo = ymlData.get(0).get("hihokenshaNo").toString();
-         panel.getSearchConditionOfHihokensha().getSearchCriteriaOfHihokensha().getTxtHihokenshaNo().setValue(new RString(hihokenshaNo));
-         
+        panel.getSearchConditionOfHihokensha().getSearchCriteriaOfHokensha().setIsOpen(false);
+        List<HashMap> ymlData = ymlData();
+
+        String hihokenshaNo = ymlData.get(0).get("hihokenshaNo").toString();
+        panel.getSearchConditionOfHihokensha().getSearchCriteriaOfHihokensha().getTxtHihokenshaNo().setValue(new RString(hihokenshaNo));
+
         response.data = panel;
         return response;
     }
@@ -71,42 +69,42 @@ public class SearchHihokensha {
         List<dgSearchResult_Row> arrayData = new ArrayList<>();
 
         List<HashMap> ymlData = ymlData();
-            HashMap hashMap = ymlData.get(1);
+        HashMap hashMap = ymlData.get(1);
 
-            String hihokenshaNo = hashMap.get("hihokenshaNo").toString(); //被保番号
-            String shikibetsuCode = hashMap.get("shikibetsuCode").toString(); //識別コード
-            String hihokenshaKubun = hashMap.get("hihokenshaKubun").toString(); //被保険者区分
-            String shimeiAndKanaShimsei = hashMap.get("shimeiAndKanaShimsei").toString(); //氏名
-            String gender = hashMap.get("gender").toString(); //性別
-            String birthDay = hashMap.get("birthDay").toString();//生年月日
-            String yubinNo = hashMap.get("yubinNo").toString(); //郵便番号
-            String jusho = hashMap.get("jusho").toString(); // 住所
-            String juminShubetsu = hashMap.get("yubinNo").toString(); //住民種別
-            String setaiCode = hashMap.get("setaiCode").toString(); //世帯コード
-            
-            dgSearchResult_Row item;
+        String hihokenshaNo = hashMap.get("hihokenshaNo").toString(); //被保番号
+        String shikibetsuCode = hashMap.get("shikibetsuCode").toString(); //識別コード
+        String hihokenshaKubun = hashMap.get("hihokenshaKubun").toString(); //被保険者区分
+        String shimeiAndKanaShimsei = hashMap.get("shimeiAndKanaShimsei").toString(); //氏名
+        String gender = hashMap.get("gender").toString(); //性別
+        String birthDay = hashMap.get("birthDay").toString();//生年月日
+        String yubinNo = hashMap.get("yubinNo").toString(); //郵便番号
+        String jusho = hashMap.get("jusho").toString(); // 住所
+        String juminShubetsu = hashMap.get("yubinNo").toString(); //住民種別
+        String setaiCode = hashMap.get("setaiCode").toString(); //世帯コード
 
-            item = createRowSearchHihokenshaiListData(
-                    hihokenshaNo,
-                    shikibetsuCode,
-                    hihokenshaKubun,
-                    shimeiAndKanaShimsei,
-                    gender,
-                    birthDay,
-                    yubinNo,
-                    jusho,
-                    juminShubetsu,
-                    setaiCode
-            );
-            arrayData.add(item);
-       // }
+        dgSearchResult_Row item;
+
+        item = createRowSearchHihokenshaiListData(
+                hihokenshaNo,
+                shikibetsuCode,
+                hihokenshaKubun,
+                shimeiAndKanaShimsei,
+                gender,
+                birthDay,
+                yubinNo,
+                jusho,
+                juminShubetsu,
+                setaiCode
+        );
+        arrayData.add(item);
+        // }
         return arrayData;
 
     }
 
     /*
-    * 引数を元にデータグリッド内に挿入する個人データを作成します。
-    */
+     * 引数を元にデータグリッド内に挿入する個人データを作成します。
+     */
     private dgSearchResult_Row createRowSearchHihokenshaiListData(String 被保番号,
             String 識別コード,
             String 被保険者区分,
@@ -150,10 +148,8 @@ public class SearchHihokensha {
         return rowHihokenshaiListData;
 
     }
-    
-    
+
     private List<HashMap> ymlData() {
         return YamlLoader.FOR_DBC.loadAsList(new RString("JukyushaIdoRenrakuhyoSearchConditionOfHihokensha.yml"));
     }
 }
-

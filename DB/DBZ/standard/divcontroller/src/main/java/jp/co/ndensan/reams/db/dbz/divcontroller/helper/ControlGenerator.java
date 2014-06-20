@@ -151,7 +151,8 @@ public class ControlGenerator {
         } else {
             textBoxDate.setValue(date);
         }
-        textBoxDate.setDisabled(true);
+        //textBoxDate.setDisabled(true);
+        textBoxDate.setReadOnly(true);
         return textBoxDate;
     }
 
@@ -169,7 +170,8 @@ public class ControlGenerator {
         } else {
             textBoxFlexibleDate.setValue(date);
         }
-        textBoxFlexibleDate.setDisabled(true);
+        //textBoxFlexibleDate.setDisabled(true);
+        textBoxFlexibleDate.setReadOnly(true);
         return textBoxFlexibleDate;
     }
 
@@ -187,7 +189,8 @@ public class ControlGenerator {
         } else {
             textBoxNum.setValue(num);
         }
-        textBoxNum.setDisabled(true);
+        //textBoxNum.setDisabled(true);
+        textBoxNum.setReadOnly(true);
         return textBoxNum;
     }
 
@@ -205,7 +208,8 @@ public class ControlGenerator {
         } else {
             textBoxYubinNo.setValue(yubinNo);
         }
-        textBoxYubinNo.setDisabled(true);
+        //textBoxYubinNo.setDisabled(true);
+        textBoxYubinNo.setReadOnly(true);
         return textBoxYubinNo;
     }
 
@@ -218,7 +222,8 @@ public class ControlGenerator {
     public TextBox getAsTextBox(String key) {
         TextBox textBox = new TextBox();
         textBox.setValue(this.getAsRString(key));
-        textBox.setDisabled(true);
+        //textBox.setDisabled(true);
+        textBox.setReadOnly(true);
         return textBox;
     }
 
@@ -235,7 +240,8 @@ public class ControlGenerator {
         } catch (NullPointerException ex) {
             textBox.clearValue();
         }
-        textBox.setDisabled(true);
+        //textBox.setDisabled(true);
+        textBox.setReadOnly(true);
         return textBox;
     }
 
@@ -248,6 +254,7 @@ public class ControlGenerator {
     public TextBoxMultiLine getTextBoxMultiLine(String key) {
         TextBoxMultiLine textBox = new TextBoxMultiLine();
         textBox.setValue(this.getAsRString(key));
+        textBox.setReadOnly(true);
         return textBox;
     }
 }

@@ -8,14 +8,13 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyotakuJikoRiyohyoRirekiDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoRirekiListDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgServiceRiyohyoRirekiList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0120000.KyotakuJikoRiyohyoRirekiDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoRirekiList.ServiceRiyohyoRirekiListDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoRirekiList.dgServiceRiyohyoRirekiList_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * 居宅サービス自己作成サービス利用票登録の履歴一覧をコントロールするクラスです。
@@ -57,23 +56,31 @@ public class KyotakuJikoRiyohyoRireki {
     /**
      * 履歴一覧の届出日を降順でソートするためのクラス。
      */
+//    private static class DateComparator implements Comparator<dgServiceRiyohyoRirekiList_Row> {
+//
+//        @Override
+//        public int compare(dgServiceRiyohyoRirekiList_Row o1, dgServiceRiyohyoRirekiList_Row o2) {
+//            return o2.getTxtTodokedeYMDInvisible().getValue().compareTo(o1.getTxtTodokedeYMDInvisible().getValue());
+//        }
+//    }
     private static class DateComparator implements Comparator<dgServiceRiyohyoRirekiList_Row> {
 
         @Override
         public int compare(dgServiceRiyohyoRirekiList_Row o1, dgServiceRiyohyoRirekiList_Row o2) {
-            return o2.getTxtTodokedeYMDInvisible().getValue().compareTo(o1.getTxtTodokedeYMDInvisible().getValue());
+            return new FlexibleDate(o2.getTxtTodokedeYMD().replace(".", "")).
+                    compareTo(new FlexibleDate(o1.getTxtTodokedeYMD().replace(".", "")));
         }
     }
 
     private dgServiceRiyohyoRirekiList_Row create履歴(Button btn, String txtJotai, String txtTodokedeYMDInvisible, String txtTodokedeYMD,
             String txtTodokedeKubun, String txtTekiyoKaishiYMD, String txtTekiyoShuryoYMD, String txtIraiJigyosha) {
 
-        TextBoxDate txtBoxTodokedeYMDInvisible = new TextBoxDate();
-        txtBoxTodokedeYMDInvisible.setValue(new RDate(txtTodokedeYMDInvisible));
+//        TextBoxDate txtBoxTodokedeYMDInvisible = new TextBoxDate();
+//        txtBoxTodokedeYMDInvisible.setValue(new RDate(txtTodokedeYMDInvisible));
         return new dgServiceRiyohyoRirekiList_Row(
                 btn,
                 new RString(txtJotai),
-                txtBoxTodokedeYMDInvisible,
+                //                txtBoxTodokedeYMDInvisible,
                 new RString(txtTodokedeYMD),
                 new RString(txtTodokedeKubun),
                 new RString(txtTekiyoKaishiYMD),

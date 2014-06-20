@@ -36,6 +36,34 @@ module DBZ {
             }
         }
         
+        public get onBlur_txtKofuDate() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onBlur"];
+        }
+        
+        public set onBlur_txtKofuDate(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onBlur"] = value;
+            } else {
+                this.layout.items[0].items[1]["onBlur"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get onChange_ddlKofuJiyu() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"])["onChange"];
+        }
+        
+        public set onChange_ddlKofuJiyu(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"])["onChange"] = value;
+            } else {
+                this.layout.items[0].items[2]["onChange"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
         constructor($parentElement: JQuery, isDesignMode: bool, fieldName: string) {
             super($parentElement, isDesignMode, HihokenshaShikakuHakko_Design.myLayout, fieldName);
         }
@@ -48,6 +76,8 @@ module DBZ {
             super.registProperty();
             Uz.JSControlUtil.registProperty("txtYukoKigen_displayNone");
             Uz.JSControlUtil.registProperty("radInjiIchi_displayNone");
+            Uz.JSControlUtil.registProperty("onBlur_txtKofuDate");
+            Uz.JSControlUtil.registProperty("onChange_ddlKofuJiyu");
         }
         
         /**
@@ -59,6 +89,8 @@ module DBZ {
             var editablePropertyInfo = super.getEditablePropertyInfo();
             editablePropertyInfo["txtYukoKigen_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["radInjiIchi_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["onBlur_txtKofuDate"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onBlur"];
+            editablePropertyInfo["onChange_ddlKofuJiyu"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).getEditablePropertyInfo()["onChange"];
             
             return editablePropertyInfo;
         }
@@ -85,8 +117,9 @@ module DBZ {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "radInjiIchi_core",
      "onChange": "",
-     "selectedItem": "upside",
+     "selectedItem": null,
      "dataSource": [
       {
        "key": "upside",
@@ -100,10 +133,11 @@ module DBZ {
      "required": false,
      "onClick": "",
      "newLineItemNumber": 2,
-     "spaceSize": 1,
+     "spaceSize": "M",
      "labelLText": "印字位置:",
-     "labelLWidth": "70",
-     "labelLAlign": 2
+     "labelLWidth": "80",
+     "labelLAlign": 2,
+     "icon": []
     },
     {
      "fieldName": "txtKofuDate",
@@ -122,14 +156,14 @@ module DBZ {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtKofuDate_core",
+     "readOnly": false,
      "onChange": "",
      "required": false,
      "labelLText": "交付日",
      "labelLWidth": "60",
      "labelLAlign": 2,
-     "readOnly": false,
      "placeHolder": "",
-     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
@@ -142,6 +176,7 @@ module DBZ {
      "ymdKubun": 2,
      "displayFormat": 0,
      "value": "",
+     "textKind": 0,
      "permitCharactor": "./_-"
     },
     {
@@ -161,9 +196,14 @@ module DBZ {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "ddlKofuJiyu_core",
      "onChange": "",
-     "selectedItem": "",
+     "selectedItem": "notSelected",
      "dataSource": [
+      {
+       "key": "notSelected",
+       "value": ""
+      },
       {
        "key": "shikakuShutoku",
        "value": "資格取得"
@@ -211,7 +251,7 @@ module DBZ {
      ],
      "required": false,
      "labelLText": "交付事由",
-     "labelLWidth": "60",
+     "labelLWidth": "70",
      "labelLAlign": 2,
      "onFocus": "",
      "onBlur": "",
@@ -236,14 +276,14 @@ module DBZ {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtYukoKigen_core",
+     "readOnly": false,
      "onChange": "",
      "required": false,
      "labelLText": "有効期限",
-     "labelLWidth": "145",
+     "labelLWidth": "155",
      "labelLAlign": 2,
-     "readOnly": false,
      "placeHolder": "",
-     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
@@ -256,6 +296,7 @@ module DBZ {
      "ymdKubun": 2,
      "displayFormat": 0,
      "value": "",
+     "textKind": 0,
      "permitCharactor": "./_-"
     },
     {
@@ -275,14 +316,14 @@ module DBZ {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtHokensha_core",
+     "readOnly": true,
      "onChange": "",
      "required": false,
      "labelLText": "保険者",
      "labelLWidth": "60",
      "labelLAlign": 2,
-     "readOnly": true,
      "placeHolder": "",
-     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
@@ -293,9 +334,10 @@ module DBZ {
      "labelRWidth": "S",
      "labelRAlign": 0,
      "value": "",
-     "maxLength": 1000000000000,
+     "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
+     "textKind": 0,
      "isComboBox": false,
      "suggest": [],
      "permitCharactor": ""
@@ -317,14 +359,14 @@ module DBZ {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtYokaigodo_core",
+     "readOnly": true,
      "onChange": "",
      "required": false,
      "labelLText": "要介護状態",
-     "labelLWidth": "75",
+     "labelLWidth": "85",
      "labelLAlign": 2,
-     "readOnly": true,
      "placeHolder": "",
-     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
@@ -335,9 +377,10 @@ module DBZ {
      "labelRWidth": "S",
      "labelRAlign": 0,
      "value": "",
-     "maxLength": 1000000000000,
+     "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
+     "textKind": 0,
      "isComboBox": false,
      "suggest": [],
      "permitCharactor": ""
@@ -359,11 +402,12 @@ module DBZ {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtNinteiYukoKikan_core",
+     "readOnly": true,
      "onChange": "",
      "labelLText": "認定有効期間",
-     "labelLWidth": "90",
+     "labelLWidth": "100",
      "labelLAlign": 2,
-     "readOnly": true,
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
@@ -382,7 +426,9 @@ module DBZ {
      "fromText": "",
      "toText": "",
      "fromValue": "",
-     "toValue": ""
+     "toValue": "",
+     "fromSelectControlID": "txtNinteiYukoKikanFrom",
+     "toSelectControlID": "txtNinteiYukoKikanTo"
     },
     {
      "fieldName": "txtShinseiDate",
@@ -401,14 +447,14 @@ module DBZ {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "txtShinseiDate_core",
+     "readOnly": true,
      "onChange": "",
      "required": false,
      "labelLText": "申請日",
-     "labelLWidth": "45",
+     "labelLWidth": "55",
      "labelLAlign": 2,
-     "readOnly": true,
      "placeHolder": "",
-     "textKind": 0,
      "isPrivateInfo": false,
      "isPassword": false,
      "onFocus": "",
@@ -421,6 +467,7 @@ module DBZ {
      "ymdKubun": 2,
      "displayFormat": 0,
      "value": "",
+     "textKind": 0,
      "permitCharactor": "./_-"
     },
     {
@@ -433,7 +480,7 @@ module DBZ {
          "fieldName": "lblKubunShikyuGendoGaku",
          "items": [],
          "controlType": "Label",
-         "width": "105",
+         "width": "115",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -446,6 +493,7 @@ module DBZ {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "lblKubunShikyuGendoGaku",
          "required": false,
          "isPrivateInfo": false,
          "text": "区分支給限度額",
@@ -468,14 +516,14 @@ module DBZ {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "txtKubunShikyuGendoKijunGaku_core",
+         "readOnly": true,
          "onChange": "",
          "required": false,
          "labelLText": "基準額",
-         "labelLWidth": "45",
+         "labelLWidth": "55",
          "labelLAlign": 2,
-         "readOnly": true,
          "placeHolder": "",
-         "textKind": 2,
          "isPrivateInfo": false,
          "isPassword": false,
          "onFocus": "",
@@ -486,16 +534,17 @@ module DBZ {
          "labelRWidth": "S",
          "labelRAlign": 0,
          "value": "",
-         "maxLength": 1000000000000,
+         "maxLength": 100000000,
          "minLength": 0,
          "textAlign": 2,
+         "textKind": 2,
          "isComboBox": false,
          "suggest": [],
          "permitCharactor": "+-,.\\",
          "maxValue": 1.7976931348623157e+308,
          "minValue": 0,
          "isCurrency": false,
-         "isComma": false,
+         "isComma": true,
          "decimalPointLength": 0
         },
         {
@@ -515,11 +564,12 @@ module DBZ {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "txtKyuhuYukoKikan_core",
+         "readOnly": true,
          "onChange": "",
          "labelLText": "有効期間",
-         "labelLWidth": "60",
+         "labelLWidth": "70",
          "labelLAlign": 2,
-         "readOnly": true,
          "isPrivateInfo": false,
          "isPassword": false,
          "onFocus": "",
@@ -538,7 +588,9 @@ module DBZ {
          "fromText": "",
          "toText": "",
          "fromValue": "",
-         "toValue": ""
+         "toValue": "",
+         "fromSelectControlID": "txtKyuhuYukoKikanFrom",
+         "toSelectControlID": "txtKyuhuYukoKikanTo"
         },
         {
          "fieldName": "ShuruiShikyuGendoKijungaku",
@@ -560,6 +612,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": "0",
            "marginRight": "XS",
+           "selectControlID": "dgShuruiShikyuGendoKijunGaku",
            "dataSource": [],
            "gridSetting": {
             "rowHeight": 25,
@@ -612,6 +665,9 @@ module DBZ {
            "onSort": "",
            "onSelect": "",
            "onSelectByDblClick": "",
+           "onSelectBySelectButton": "",
+           "onSelectByModifyButton": "",
+           "onSelectByDeleteButton": "",
            "onOnlyRow": "",
            "onNoRow": "",
            "onMultiRows": "",
@@ -622,7 +678,7 @@ module DBZ {
           }
          ],
          "controlType": "Panel",
-         "width": "M",
+         "width": "G2",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -635,6 +691,7 @@ module DBZ {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "ShuruiShikyuGendoKijungaku",
          "onLoad": "",
          "title": "うち種類支給限度基準額",
          "marginTop": "Default",
@@ -657,7 +714,9 @@ module DBZ {
          "eraseBorderLeft": false,
          "backgroundColor": 0,
          "widthAuto": true,
-         "isGroupBox": true
+         "panelDisplay": 1,
+         "isGroupBox": false,
+         "readOnly": false
         }
        ],
        "controlType": "TabPanel",
@@ -674,6 +733,7 @@ module DBZ {
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "tplGendoGaku",
        "title": "限度額",
        "onActive": ""
       },
@@ -684,7 +744,7 @@ module DBZ {
          "fieldName": "lblShinsakaiIken",
          "items": [],
          "controlType": "Label",
-         "width": "265",
+         "width": "290",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -697,6 +757,7 @@ module DBZ {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "lblShinsakaiIken",
          "required": false,
          "isPrivateInfo": false,
          "text": "認定審査会意見及びサービス種類の指定",
@@ -719,14 +780,14 @@ module DBZ {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "txtShinsakaiIken_text_area",
+         "readOnly": true,
          "onChange": "",
          "required": false,
          "labelLText": "",
          "labelLWidth": "XS",
          "labelLAlign": 2,
-         "readOnly": true,
          "placeHolder": "",
-         "textKind": 0,
          "isPrivateInfo": false,
          "onFocus": "",
          "onBlur": "",
@@ -738,6 +799,7 @@ module DBZ {
          "value": "",
          "maxLength": 100000000,
          "minLength": 0,
+         "textKind": 0,
          "height": "100",
          "limitLength": "198",
          "countDisp": true
@@ -757,6 +819,7 @@ module DBZ {
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "tplShinsakaiIken",
        "title": "審査会意見",
        "onActive": ""
       },
@@ -767,7 +830,7 @@ module DBZ {
          "fieldName": "lblKyufuSeigen",
          "items": [],
          "controlType": "Label",
-         "width": "60",
+         "width": "70",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -780,6 +843,7 @@ module DBZ {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "lblKyufuSeigen",
          "required": false,
          "isPrivateInfo": false,
          "text": "給付制限",
@@ -795,7 +859,7 @@ module DBZ {
              "fieldName": "lblKyufuSeigenNaiyo",
              "items": [],
              "controlType": "Label",
-             "width": "60",
+             "width": "70",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -808,6 +872,7 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "lblKyufuSeigenNaiyo",
              "required": false,
              "isPrivateInfo": false,
              "text": "制限内容",
@@ -828,6 +893,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celKyufuSeigenNaiyoTitle",
            "connectTd": "R1C1"
           },
           {
@@ -837,7 +903,7 @@ module DBZ {
              "fieldName": "lblKyufuSeigenKikan",
              "items": [],
              "controlType": "Label",
-             "width": "60",
+             "width": "70",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -850,6 +916,7 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "lblKyufuSeigenKikan",
              "required": false,
              "isPrivateInfo": false,
              "text": "制限期間",
@@ -870,6 +937,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celKyufuSeigenKikanTitle",
            "connectTd": "R1C2"
           },
           {
@@ -892,14 +960,14 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "txtKyufuSeigenNaiyo1_core",
+             "readOnly": true,
              "onChange": "",
              "required": false,
              "labelLText": "",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "readOnly": true,
              "placeHolder": "",
-             "textKind": 0,
              "isPrivateInfo": false,
              "isPassword": false,
              "onFocus": "",
@@ -910,9 +978,10 @@ module DBZ {
              "labelRWidth": "S",
              "labelRAlign": 0,
              "value": "",
-             "maxLength": 1000000000000,
+             "maxLength": 100000000,
              "minLength": 0,
              "textAlign": 0,
+             "textKind": 0,
              "isComboBox": false,
              "suggest": [],
              "permitCharactor": ""
@@ -932,6 +1001,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celKyufuSeigenNaiyo1",
            "connectTd": "R2C1"
           },
           {
@@ -954,11 +1024,12 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "txtKyufuSeigenKikan1_core",
+             "readOnly": true,
              "onChange": "",
              "labelLText": "",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "readOnly": true,
              "isPrivateInfo": false,
              "isPassword": false,
              "onFocus": "",
@@ -977,7 +1048,9 @@ module DBZ {
              "fromText": "",
              "toText": "",
              "fromValue": "",
-             "toValue": ""
+             "toValue": "",
+             "fromSelectControlID": "txtKyufuSeigenKikan1From",
+             "toSelectControlID": "txtKyufuSeigenKikan1To"
             }
            ],
            "controlType": "TableCell",
@@ -994,6 +1067,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celKyufuSeigenKikan1",
            "connectTd": "R2C2"
           },
           {
@@ -1016,14 +1090,14 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "txtKyufuSeigenNaiyo2_core",
+             "readOnly": true,
              "onChange": "",
              "required": false,
              "labelLText": "",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "readOnly": true,
              "placeHolder": "",
-             "textKind": 0,
              "isPrivateInfo": false,
              "isPassword": false,
              "onFocus": "",
@@ -1034,9 +1108,10 @@ module DBZ {
              "labelRWidth": "S",
              "labelRAlign": 0,
              "value": "",
-             "maxLength": 1000000000000,
+             "maxLength": 100000000,
              "minLength": 0,
              "textAlign": 0,
+             "textKind": 0,
              "isComboBox": false,
              "suggest": [],
              "permitCharactor": ""
@@ -1056,6 +1131,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celKyufuSeigenNaiyo2",
            "connectTd": "R3C1"
           },
           {
@@ -1078,11 +1154,12 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "txtKyufuSeigenKikan2_core",
+             "readOnly": true,
              "onChange": "",
              "labelLText": "",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "readOnly": true,
              "isPrivateInfo": false,
              "isPassword": false,
              "onFocus": "",
@@ -1101,7 +1178,9 @@ module DBZ {
              "fromText": "",
              "toText": "",
              "fromValue": "",
-             "toValue": ""
+             "toValue": "",
+             "fromSelectControlID": "txtKyufuSeigenKikan2From",
+             "toSelectControlID": "txtKyufuSeigenKikan2To"
             }
            ],
            "controlType": "TableCell",
@@ -1118,6 +1197,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celKyufuSeigenKikan2",
            "connectTd": "R3C2"
           },
           {
@@ -1140,14 +1220,14 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "txtKyufuSeigenNaiyo3_core",
+             "readOnly": true,
              "onChange": "",
              "required": false,
              "labelLText": "",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "readOnly": true,
              "placeHolder": "",
-             "textKind": 0,
              "isPrivateInfo": false,
              "isPassword": false,
              "onFocus": "",
@@ -1158,9 +1238,10 @@ module DBZ {
              "labelRWidth": "S",
              "labelRAlign": 0,
              "value": "",
-             "maxLength": 1000000000000,
+             "maxLength": 100000000,
              "minLength": 0,
              "textAlign": 0,
+             "textKind": 0,
              "isComboBox": false,
              "suggest": [],
              "permitCharactor": ""
@@ -1180,6 +1261,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celKyufuSeigenNaiyo3",
            "connectTd": "R4C1"
           },
           {
@@ -1202,11 +1284,12 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "txtKyufuSeigenKikan3_core",
+             "readOnly": true,
              "onChange": "",
              "labelLText": "",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "readOnly": true,
              "isPrivateInfo": false,
              "isPassword": false,
              "onFocus": "",
@@ -1225,7 +1308,9 @@ module DBZ {
              "fromText": "",
              "toText": "",
              "fromValue": "",
-             "toValue": ""
+             "toValue": "",
+             "fromSelectControlID": "txtKyufuSeigenKikan3From",
+             "toSelectControlID": "txtKyufuSeigenKikan3To"
             }
            ],
            "controlType": "TableCell",
@@ -1242,6 +1327,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celKyufuSeigenKikan3",
            "connectTd": "R4C2"
           }
          ],
@@ -1259,6 +1345,7 @@ module DBZ {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "tblKyuhuSeigen",
          "html": "<table border='1'>\n  <tbody>\n    <tr><td id='R1C1'></td><td id='R1C2'></td></tr>\n    <tr><td id='R2C1'></td><td id='R2C2'></td></tr>\n    <tr><td id='R3C1'></td><td id='R3C2'></td></tr>\n    <tr><td id='R4C1'></td><td id='R4C2'></td></tr>\n  </tbody>\n</table>\n"
         }
        ],
@@ -1276,6 +1363,7 @@ module DBZ {
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "tplKyufuSeigen",
        "title": "給付制限",
        "onActive": ""
       },
@@ -1286,7 +1374,7 @@ module DBZ {
          "fieldName": "lblShienJigyosha",
          "items": [],
          "controlType": "Label",
-         "width": "250",
+         "width": "275",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1299,6 +1387,7 @@ module DBZ {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "lblShienJigyosha",
          "required": false,
          "isPrivateInfo": false,
          "text": "居住介護支援事業者及び事業者の名称",
@@ -1314,7 +1403,7 @@ module DBZ {
              "fieldName": "lblJigyosha",
              "items": [],
              "controlType": "Label",
-             "width": "45",
+             "width": "55",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -1327,6 +1416,7 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "lblJigyosha",
              "required": false,
              "isPrivateInfo": false,
              "text": "事業者",
@@ -1347,6 +1437,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celJigyoshaTitle",
            "connectTd": "R1C1"
           },
           {
@@ -1356,7 +1447,7 @@ module DBZ {
              "fieldName": "lblTodokedeDate",
              "items": [],
              "controlType": "Label",
-             "width": "45",
+             "width": "55",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -1369,6 +1460,7 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "lblTodokedeDate",
              "required": false,
              "isPrivateInfo": false,
              "text": "届出日",
@@ -1389,6 +1481,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celTodokedeDateTitle",
            "connectTd": "R1C2"
           },
           {
@@ -1411,14 +1504,14 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "txtJigyosha1_core",
+             "readOnly": true,
              "onChange": "",
              "required": false,
              "labelLText": "",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "readOnly": true,
              "placeHolder": "",
-             "textKind": 0,
              "isPrivateInfo": false,
              "isPassword": false,
              "onFocus": "",
@@ -1429,9 +1522,10 @@ module DBZ {
              "labelRWidth": "S",
              "labelRAlign": 0,
              "value": "",
-             "maxLength": 1000000000000,
+             "maxLength": 100000000,
              "minLength": 0,
              "textAlign": 0,
+             "textKind": 0,
              "isComboBox": false,
              "suggest": [],
              "permitCharactor": ""
@@ -1451,6 +1545,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celJigyosha1",
            "connectTd": "R2C1"
           },
           {
@@ -1473,14 +1568,14 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "txtTodokedeDate1_core",
+             "readOnly": true,
              "onChange": "",
              "required": false,
              "labelLText": "",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "readOnly": true,
              "placeHolder": "",
-             "textKind": 0,
              "isPrivateInfo": false,
              "isPassword": false,
              "onFocus": "",
@@ -1493,6 +1588,7 @@ module DBZ {
              "ymdKubun": 2,
              "displayFormat": 0,
              "value": "",
+             "textKind": 0,
              "permitCharactor": "./_-"
             }
            ],
@@ -1510,6 +1606,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celTodokedeDate1",
            "connectTd": "R2C2"
           },
           {
@@ -1532,14 +1629,14 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "txtJigyosha2_core",
+             "readOnly": true,
              "onChange": "",
              "required": false,
              "labelLText": "",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "readOnly": true,
              "placeHolder": "",
-             "textKind": 0,
              "isPrivateInfo": false,
              "isPassword": false,
              "onFocus": "",
@@ -1550,9 +1647,10 @@ module DBZ {
              "labelRWidth": "S",
              "labelRAlign": 0,
              "value": "",
-             "maxLength": 1000000000000,
+             "maxLength": 100000000,
              "minLength": 0,
              "textAlign": 0,
+             "textKind": 0,
              "isComboBox": false,
              "suggest": [],
              "permitCharactor": ""
@@ -1572,6 +1670,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celJigyosha2",
            "connectTd": "R3C1"
           },
           {
@@ -1594,14 +1693,14 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "txtTodokedeDate2_core",
+             "readOnly": true,
              "onChange": "",
              "required": false,
              "labelLText": "",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "readOnly": true,
              "placeHolder": "",
-             "textKind": 0,
              "isPrivateInfo": false,
              "isPassword": false,
              "onFocus": "",
@@ -1614,6 +1713,7 @@ module DBZ {
              "ymdKubun": 2,
              "displayFormat": 0,
              "value": "",
+             "textKind": 0,
              "permitCharactor": "./_-"
             }
            ],
@@ -1631,6 +1731,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celTodokedeDate2",
            "connectTd": "R3C2"
           },
           {
@@ -1653,14 +1754,14 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "txtJigyosha3_core",
+             "readOnly": true,
              "onChange": "",
              "required": false,
              "labelLText": "",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "readOnly": true,
              "placeHolder": "",
-             "textKind": 0,
              "isPrivateInfo": false,
              "isPassword": false,
              "onFocus": "",
@@ -1671,9 +1772,10 @@ module DBZ {
              "labelRWidth": "S",
              "labelRAlign": 0,
              "value": "",
-             "maxLength": 1000000000000,
+             "maxLength": 100000000,
              "minLength": 0,
              "textAlign": 0,
+             "textKind": 0,
              "isComboBox": false,
              "suggest": [],
              "permitCharactor": ""
@@ -1693,6 +1795,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celJigyosha3",
            "connectTd": "R4C1"
           },
           {
@@ -1715,14 +1818,14 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "txtTodokedeDate3_core",
+             "readOnly": true,
              "onChange": "",
              "required": false,
              "labelLText": "",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "readOnly": true,
              "placeHolder": "",
-             "textKind": 0,
              "isPrivateInfo": false,
              "isPassword": false,
              "onFocus": "",
@@ -1735,6 +1838,7 @@ module DBZ {
              "ymdKubun": 2,
              "displayFormat": 0,
              "value": "",
+             "textKind": 0,
              "permitCharactor": "./_-"
             }
            ],
@@ -1752,6 +1856,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celTodokedeDate3",
            "connectTd": "R4C2"
           }
          ],
@@ -1769,6 +1874,7 @@ module DBZ {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "tblJigyosha",
          "html": "<table border='1'>\n  <tbody>\n    <tr><td id='R1C1'></td><td id='R1C2'></td></tr>\n    <tr><td id='R2C1'></td><td id='R2C2'></td></tr>\n    <tr><td id='R3C1'></td><td id='R3C2'></td></tr>\n    <tr><td id='R4C1'></td><td id='R4C2'></td></tr>\n  </tbody>\n</table>\n"
         }
        ],
@@ -1786,6 +1892,7 @@ module DBZ {
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "tplShienJigyosha",
        "title": "支援事業者",
        "onActive": ""
       },
@@ -1796,7 +1903,7 @@ module DBZ {
          "fieldName": "lblKaigoHokensha",
          "items": [],
          "controlType": "Label",
-         "width": "105",
+         "width": "115",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1809,6 +1916,7 @@ module DBZ {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "lblKaigoHokensha",
          "required": false,
          "isPrivateInfo": false,
          "text": "介護保険施設等",
@@ -1824,7 +1932,7 @@ module DBZ {
              "fieldName": "lblShisetsuNyushoDate",
              "items": [],
              "controlType": "Label",
-             "width": "45",
+             "width": "55",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -1837,6 +1945,7 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "lblShisetsuNyushoDate",
              "required": false,
              "isPrivateInfo": false,
              "text": "入所日",
@@ -1857,6 +1966,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celShisetsuNyushoDateTitle",
            "connectTd": "R1C1"
           },
           {
@@ -1866,7 +1976,7 @@ module DBZ {
              "fieldName": "lblShisetsuTaishoDate",
              "items": [],
              "controlType": "Label",
-             "width": "45",
+             "width": "55",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -1879,6 +1989,7 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "lblShisetsuTaishoDate",
              "required": false,
              "isPrivateInfo": false,
              "text": "退所日",
@@ -1899,6 +2010,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celShisetsuTaishoDateTitle",
            "connectTd": "R1C2"
           },
           {
@@ -1908,7 +2020,7 @@ module DBZ {
              "fieldName": "lblNyushoShisetsu",
              "items": [],
              "controlType": "Label",
-             "width": "60",
+             "width": "70",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -1921,6 +2033,7 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "lblNyushoShisetsu",
              "required": false,
              "isPrivateInfo": false,
              "text": "入所施設",
@@ -1941,6 +2054,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celNyushoShisetsuTitle",
            "connectTd": "R1C3"
           },
           {
@@ -1963,14 +2077,14 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "txtShisetsuNyushoDate1_core",
+             "readOnly": true,
              "onChange": "",
              "required": false,
              "labelLText": "",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "readOnly": true,
              "placeHolder": "",
-             "textKind": 0,
              "isPrivateInfo": false,
              "isPassword": false,
              "onFocus": "",
@@ -1983,6 +2097,7 @@ module DBZ {
              "ymdKubun": 2,
              "displayFormat": 0,
              "value": "",
+             "textKind": 0,
              "permitCharactor": "./_-"
             }
            ],
@@ -2000,6 +2115,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celShisetsuNyushoDate1",
            "connectTd": "R2C1"
           },
           {
@@ -2022,14 +2138,14 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "txtShisetsuTaishoDate1_core",
+             "readOnly": true,
              "onChange": "",
              "required": false,
              "labelLText": "",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "readOnly": true,
              "placeHolder": "",
-             "textKind": 0,
              "isPrivateInfo": false,
              "isPassword": false,
              "onFocus": "",
@@ -2042,6 +2158,7 @@ module DBZ {
              "ymdKubun": 2,
              "displayFormat": 0,
              "value": "",
+             "textKind": 0,
              "permitCharactor": "./_-"
             }
            ],
@@ -2059,6 +2176,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celShisetsuTaishoDate1",
            "connectTd": "R2C2"
           },
           {
@@ -2081,14 +2199,14 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "txtNyushoShisetsu1_core",
+             "readOnly": true,
              "onChange": "",
              "required": false,
              "labelLText": "",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "readOnly": true,
              "placeHolder": "",
-             "textKind": 0,
              "isPrivateInfo": false,
              "isPassword": false,
              "onFocus": "",
@@ -2099,9 +2217,10 @@ module DBZ {
              "labelRWidth": "S",
              "labelRAlign": 0,
              "value": "",
-             "maxLength": 1000000000000,
+             "maxLength": 100000000,
              "minLength": 0,
              "textAlign": 0,
+             "textKind": 0,
              "isComboBox": false,
              "suggest": [],
              "permitCharactor": ""
@@ -2121,6 +2240,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celNyushoShisetsu1",
            "connectTd": "R2C3"
           },
           {
@@ -2143,14 +2263,14 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "txtShisetsuNyushoDate2_core",
+             "readOnly": true,
              "onChange": "",
              "required": false,
              "labelLText": "",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "readOnly": true,
              "placeHolder": "",
-             "textKind": 0,
              "isPrivateInfo": false,
              "isPassword": false,
              "onFocus": "",
@@ -2163,6 +2283,7 @@ module DBZ {
              "ymdKubun": 2,
              "displayFormat": 0,
              "value": "",
+             "textKind": 0,
              "permitCharactor": "./_-"
             }
            ],
@@ -2180,6 +2301,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celShisetsuNyushoDate2",
            "connectTd": "R3C1"
           },
           {
@@ -2202,14 +2324,14 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "txtShisetsuTaishoDate2_core",
+             "readOnly": true,
              "onChange": "",
              "required": false,
              "labelLText": "",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "readOnly": true,
              "placeHolder": "",
-             "textKind": 0,
              "isPrivateInfo": false,
              "isPassword": false,
              "onFocus": "",
@@ -2222,6 +2344,7 @@ module DBZ {
              "ymdKubun": 2,
              "displayFormat": 0,
              "value": "",
+             "textKind": 0,
              "permitCharactor": "./_-"
             }
            ],
@@ -2239,6 +2362,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celShisetsuTaishoDate2",
            "connectTd": "R3C2"
           },
           {
@@ -2261,14 +2385,14 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "txtNyushoShisetsu2_core",
+             "readOnly": true,
              "onChange": "",
              "required": false,
              "labelLText": "",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "readOnly": true,
              "placeHolder": "",
-             "textKind": 0,
              "isPrivateInfo": false,
              "isPassword": false,
              "onFocus": "",
@@ -2279,9 +2403,10 @@ module DBZ {
              "labelRWidth": "S",
              "labelRAlign": 0,
              "value": "",
-             "maxLength": 1000000000000,
+             "maxLength": 100000000,
              "minLength": 0,
              "textAlign": 0,
+             "textKind": 0,
              "isComboBox": false,
              "suggest": [],
              "permitCharactor": ""
@@ -2301,6 +2426,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celNyushoShisetsu2",
            "connectTd": "R3C3"
           },
           {
@@ -2310,7 +2436,7 @@ module DBZ {
              "fieldName": "lblShisetsuShurui",
              "items": [],
              "controlType": "Label",
-             "width": "60",
+             "width": "70",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -2323,6 +2449,7 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "lblShisetsuShurui",
              "required": false,
              "isPrivateInfo": false,
              "text": "施設種類",
@@ -2343,6 +2470,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celShisetsuShuruiTitle",
            "connectTd": "R1C5"
           },
           {
@@ -2365,14 +2493,14 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "txtShisetsuShurui1_core",
+             "readOnly": true,
              "onChange": "",
              "required": false,
              "labelLText": "",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "readOnly": true,
              "placeHolder": "",
-             "textKind": 0,
              "isPrivateInfo": false,
              "isPassword": false,
              "onFocus": "",
@@ -2383,9 +2511,10 @@ module DBZ {
              "labelRWidth": "S",
              "labelRAlign": 0,
              "value": "",
-             "maxLength": 1000000000000,
+             "maxLength": 100000000,
              "minLength": 0,
              "textAlign": 0,
+             "textKind": 0,
              "isComboBox": false,
              "suggest": [],
              "permitCharactor": ""
@@ -2405,6 +2534,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celShisetsuShurui1",
            "connectTd": "R2C5"
           },
           {
@@ -2427,14 +2557,14 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "txtShisetsuShurui2_core",
+             "readOnly": true,
              "onChange": "",
              "required": false,
              "labelLText": "",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "readOnly": true,
              "placeHolder": "",
-             "textKind": 0,
              "isPrivateInfo": false,
              "isPassword": false,
              "onFocus": "",
@@ -2445,9 +2575,10 @@ module DBZ {
              "labelRWidth": "S",
              "labelRAlign": 0,
              "value": "",
-             "maxLength": 1000000000000,
+             "maxLength": 100000000,
              "minLength": 0,
              "textAlign": 0,
+             "textKind": 0,
              "isComboBox": false,
              "suggest": [],
              "permitCharactor": ""
@@ -2467,6 +2598,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celShisetsuShurui2",
            "connectTd": "R3C5"
           },
           {
@@ -2489,14 +2621,14 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "txtShisetsuNyushoDate3_core",
+             "readOnly": true,
              "onChange": "",
              "required": false,
              "labelLText": "",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "readOnly": true,
              "placeHolder": "",
-             "textKind": 0,
              "isPrivateInfo": false,
              "isPassword": false,
              "onFocus": "",
@@ -2509,6 +2641,7 @@ module DBZ {
              "ymdKubun": 2,
              "displayFormat": 0,
              "value": "",
+             "textKind": 0,
              "permitCharactor": "./_-"
             }
            ],
@@ -2526,6 +2659,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celShisetsuNyushoDate3",
            "connectTd": "R4C1"
           },
           {
@@ -2548,14 +2682,14 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "txtShisetsuTaishoDate3_core",
+             "readOnly": true,
              "onChange": "",
              "required": false,
              "labelLText": "",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "readOnly": true,
              "placeHolder": "",
-             "textKind": 0,
              "isPrivateInfo": false,
              "isPassword": false,
              "onFocus": "",
@@ -2568,6 +2702,7 @@ module DBZ {
              "ymdKubun": 2,
              "displayFormat": 0,
              "value": "",
+             "textKind": 0,
              "permitCharactor": "./_-"
             }
            ],
@@ -2585,6 +2720,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celShisetsuTaishoDate3",
            "connectTd": "R4C2"
           },
           {
@@ -2607,14 +2743,14 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "txtNyushoShisetsu3_core",
+             "readOnly": true,
              "onChange": "",
              "required": false,
              "labelLText": "",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "readOnly": true,
              "placeHolder": "",
-             "textKind": 0,
              "isPrivateInfo": false,
              "isPassword": false,
              "onFocus": "",
@@ -2625,9 +2761,10 @@ module DBZ {
              "labelRWidth": "S",
              "labelRAlign": 0,
              "value": "",
-             "maxLength": 1000000000000,
+             "maxLength": 100000000,
              "minLength": 0,
              "textAlign": 0,
+             "textKind": 0,
              "isComboBox": false,
              "suggest": [],
              "permitCharactor": ""
@@ -2647,6 +2784,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celNyushoShisetsu3",
            "connectTd": "R4C3"
           },
           {
@@ -2669,14 +2807,14 @@ module DBZ {
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
+             "selectControlID": "txtShisetsuShurui3_core",
+             "readOnly": true,
              "onChange": "",
              "required": false,
              "labelLText": "",
              "labelLWidth": "S",
              "labelLAlign": 2,
-             "readOnly": true,
              "placeHolder": "",
-             "textKind": 0,
              "isPrivateInfo": false,
              "isPassword": false,
              "onFocus": "",
@@ -2687,9 +2825,10 @@ module DBZ {
              "labelRWidth": "S",
              "labelRAlign": 0,
              "value": "",
-             "maxLength": 1000000000000,
+             "maxLength": 100000000,
              "minLength": 0,
              "textAlign": 0,
+             "textKind": 0,
              "isComboBox": false,
              "suggest": [],
              "permitCharactor": ""
@@ -2709,6 +2848,7 @@ module DBZ {
            "authorityMode": 0,
            "marginLeft": 0,
            "marginRight": 0,
+           "selectControlID": "celShisetsuShurui3",
            "connectTd": "R4C5"
           }
          ],
@@ -2726,6 +2866,7 @@ module DBZ {
          "authorityMode": 0,
          "marginLeft": "XS",
          "marginRight": "XS",
+         "selectControlID": "tblShisetsuNyutaisho",
          "html": "<table border='1'>\n  <tbody>\n    <tr><td id='R1C5'></td><td id='R1C3'></td><td id='R1C1'></td><td id='R1C2'></td></tr>\n    <tr><td id='R2C5'></td><td id='R2C3'></td><td id='R2C1'></td><td id='R2C2'></td></tr>\n    <tr><td id='R3C5'></td><td id='R3C3'></td><td id='R3C1'></td><td id='R3C2'></td></tr>\n    <tr><td id='R4C5'></td><td id='R4C3'></td><td id='R4C1'></td><td id='R4C2'></td></tr>\n  </tbody>\n</table>\n"
         }
        ],
@@ -2743,6 +2884,7 @@ module DBZ {
        "authorityMode": 0,
        "marginLeft": "XS",
        "marginRight": "XS",
+       "selectControlID": "tplShisetsuNyutaisho",
        "title": "施設入退所",
        "onActive": ""
       }
@@ -2761,6 +2903,7 @@ module DBZ {
      "authorityMode": 0,
      "marginLeft": "XS",
      "marginRight": "XS",
+     "selectControlID": "tabHihokenshaShikakuShosai",
      "onChange": "",
      "selectedItem": null,
      "tabpanelPosition": [
@@ -2771,7 +2914,8 @@ module DBZ {
       "tplShisetsuNyutaisho"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "tplGendoGaku"
+     "selectedItemFieldName": "tplGendoGaku",
+     "initialTab": 0
     }
    ],
    "controlType": "Panel",
@@ -2788,6 +2932,7 @@ module DBZ {
    "authorityMode": 0,
    "marginLeft": "XS",
    "marginRight": "XS",
+   "selectControlID": "HihokenshaShikakuHakko",
    "onLoad": "",
    "title": "",
    "marginTop": "Default",
@@ -2810,7 +2955,9 @@ module DBZ {
    "eraseBorderLeft": true,
    "backgroundColor": 0,
    "widthAuto": false,
-   "isGroupBox": false
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false
   }
  ],
  "controlType": "CommonChildDiv",
@@ -2827,6 +2974,7 @@ module DBZ {
  "authorityMode": 0,
  "marginLeft": 0,
  "marginRight": 0,
+ "selectControlID": "defaultLayout",
  "relation": [],
  "businessId": "DBZ",
  "controlName": "HihokenshaShikakuHakko",
@@ -2842,6 +2990,16 @@ module DBZ {
    "publicChildFieldName": "radInjiIchi",
    "publicChildProperty": "displayNone",
    "newPropertyName": "radInjiIchi_displayNone"
+  },
+  {
+   "publicChildFieldName": "txtKofuDate",
+   "publicChildProperty": "onBlur",
+   "newPropertyName": "onBlur_txtKofuDate"
+  },
+  {
+   "publicChildFieldName": "ddlKofuJiyu",
+   "publicChildProperty": "onChange",
+   "newPropertyName": "onChange_ddlKofuJiyu"
   }
  ],
  "dataPassingForDialog": [],

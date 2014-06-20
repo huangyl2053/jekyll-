@@ -22,7 +22,7 @@ public class KyotakuServiceSearch {
      * @param panel
      * @return ResponseData
      */
-    public ResponseData getOnLoadData(KyotakuServiceSearchDiv panel) {
+    public ResponseData getOnLoad(KyotakuServiceSearchDiv panel) {
         ResponseData<KyotakuServiceSearchDiv> response = new ResponseData<>();
         // TODO N8187 久保田英男 デモ用に初期値を設定。デモ後に削除する。
         panel.getTxtSearchName().setValue(new RString("電算 太郎"));
