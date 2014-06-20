@@ -74,6 +74,8 @@ public class NinteichosaIraiList {
     public ResponseData<NinteichosaIraiListDiv> onClick_btnToEntryChosaIrai(NinteichosaIraiListDiv div) {
         ResponseData<NinteichosaIraiListDiv> response = new ResponseData<>();
 
+        div.getButtonsForNinteichosaIraiListBottom().getBtnToComplete().setDisabled(false);
+
         response.data = div;
         return response;
     }
@@ -91,7 +93,7 @@ public class NinteichosaIraiList {
 
         List<dgNinteichosaIraiList_Row> list = new ArrayList<>();
         for (dgNinteichosaIraiList_Row selectedItem : grid.getSelectedItems()) {
-            if (selectedItem.get依頼書発行済()) {
+            if (selectedItem.get依頼登録済()) {
                 selectedItem.get調査依頼完了日().setValue(FlexibleDate.getNowDate());
             }
             list.add(selectedItem);

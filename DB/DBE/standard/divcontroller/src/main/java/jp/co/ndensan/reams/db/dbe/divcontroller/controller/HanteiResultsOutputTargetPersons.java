@@ -62,8 +62,10 @@ public class HanteiResultsOutputTargetPersons {
         RString gender = cg.getAsRString("性別");
         TextBoxFlexibleDate shinseiDate = cg.getAsTextBoxFlexibleDate("申請日");
         RString shinseiKubun = cg.getAsRString("申請区分");
+        RString shinseiKubunHorei = cg.getAsRString("申請区分法令");
         RString ichijiHanteiResult = cg.getAsRString("一次判定結果");
         RString yokaigodo = cg.getAsRString("要介護度");
+        RString ninteiKubun = cg.getAsRString("認定区分");
         RString yukokikan = cg.getAsRString("有効期間月数");
         TextBoxFlexibleDate startDate = cg.getAsTextBoxFlexibleDate("有効期間開始日");
         TextBoxFlexibleDate endDate = cg.getAsTextBoxFlexibleDate("有効期間終了日");
@@ -73,8 +75,8 @@ public class HanteiResultsOutputTargetPersons {
         TextBoxFlexibleDate latestEndDate = cg.getAsTextBoxFlexibleDate("前回有効終了日");
 
         dgShinsakaiTargetPersons_Row row = new dgShinsakaiTargetPersons_Row(jun, hokenshaNo, hokenshaMeisho, hihokenshaNo, hihokenshaKubun, shimei,
-                kanaShimei, shimeiAndKanaShimei, gender, shinseiDate, shinseiKubun, ichijiHanteiResult, yokaigodo, yukokikan, startDate, endDate,
-                latestYokaigodo, latestYukokikan, latestStartDate, latestEndDate);
+                kanaShimei, shimeiAndKanaShimei, gender, shinseiDate, shinseiKubun, shinseiKubunHorei, ichijiHanteiResult, ninteiKubun, yokaigodo,
+                yukokikan, startDate, endDate, latestYokaigodo, latestYukokikan, latestStartDate, latestEndDate);
         return row;
     }
 

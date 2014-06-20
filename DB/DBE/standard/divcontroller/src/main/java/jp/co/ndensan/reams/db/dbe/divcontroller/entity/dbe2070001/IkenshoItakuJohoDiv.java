@@ -23,18 +23,18 @@ public class IkenshoItakuJohoDiv extends Panel {
      */
     @JsonProperty("txtIryokikanNo")
     private TextBoxCode txtIryokikanNo;
+    @JsonProperty("btnToSearchKikan")
+    private ButtonDialog btnToSearchKikan;
     @JsonProperty("txtIryokikanMei")
     private TextBox txtIryokikanMei;
-    @JsonProperty("imgIryokikanSearch")
-    private StaticImage imgIryokikanSearch;
     @JsonProperty("txtIkenshoKinyubi")
     private TextBoxDate txtIkenshoKinyubi;
     @JsonProperty("txtShujiiNo")
     private TextBoxCode txtShujiiNo;
+    @JsonProperty("btnToSerchShujii")
+    private ButtonDialog btnToSerchShujii;
     @JsonProperty("txtShujiiMei")
     private TextBox txtShujiiMei;
-    @JsonProperty("imgShujiiSearch")
-    private StaticImage imgShujiiSearch;
     @JsonProperty("txtIkenshoJuryobi")
     private TextBoxDate txtIkenshoJuryobi;
 
@@ -54,6 +54,16 @@ public class IkenshoItakuJohoDiv extends Panel {
         this.txtIryokikanNo=txtIryokikanNo;
     }
 
+    @JsonProperty("btnToSearchKikan")
+    public ButtonDialog getBtnToSearchKikan() {
+        return btnToSearchKikan;
+    }
+
+    @JsonProperty("btnToSearchKikan")
+    public void setBtnToSearchKikan(ButtonDialog btnToSearchKikan) {
+        this.btnToSearchKikan=btnToSearchKikan;
+    }
+
     @JsonProperty("txtIryokikanMei")
     public TextBox getTxtIryokikanMei() {
         return txtIryokikanMei;
@@ -62,16 +72,6 @@ public class IkenshoItakuJohoDiv extends Panel {
     @JsonProperty("txtIryokikanMei")
     public void setTxtIryokikanMei(TextBox txtIryokikanMei) {
         this.txtIryokikanMei=txtIryokikanMei;
-    }
-
-    @JsonProperty("imgIryokikanSearch")
-    public StaticImage getImgIryokikanSearch() {
-        return imgIryokikanSearch;
-    }
-
-    @JsonProperty("imgIryokikanSearch")
-    public void setImgIryokikanSearch(StaticImage imgIryokikanSearch) {
-        this.imgIryokikanSearch=imgIryokikanSearch;
     }
 
     @JsonProperty("txtIkenshoKinyubi")
@@ -94,6 +94,16 @@ public class IkenshoItakuJohoDiv extends Panel {
         this.txtShujiiNo=txtShujiiNo;
     }
 
+    @JsonProperty("btnToSerchShujii")
+    public ButtonDialog getBtnToSerchShujii() {
+        return btnToSerchShujii;
+    }
+
+    @JsonProperty("btnToSerchShujii")
+    public void setBtnToSerchShujii(ButtonDialog btnToSerchShujii) {
+        this.btnToSerchShujii=btnToSerchShujii;
+    }
+
     @JsonProperty("txtShujiiMei")
     public TextBox getTxtShujiiMei() {
         return txtShujiiMei;
@@ -102,16 +112,6 @@ public class IkenshoItakuJohoDiv extends Panel {
     @JsonProperty("txtShujiiMei")
     public void setTxtShujiiMei(TextBox txtShujiiMei) {
         this.txtShujiiMei=txtShujiiMei;
-    }
-
-    @JsonProperty("imgShujiiSearch")
-    public StaticImage getImgShujiiSearch() {
-        return imgShujiiSearch;
-    }
-
-    @JsonProperty("imgShujiiSearch")
-    public void setImgShujiiSearch(StaticImage imgShujiiSearch) {
-        this.imgShujiiSearch=imgShujiiSearch;
     }
 
     @JsonProperty("txtIkenshoJuryobi")

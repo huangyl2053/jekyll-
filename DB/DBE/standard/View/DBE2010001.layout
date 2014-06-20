@@ -97,7 +97,10 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorder": false,
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
@@ -995,34 +998,6 @@
      "fieldName": "ButtonsForNinteichosaIraiListBottom",
      "items": [
       {
-       "fieldName": "btnToComplete",
-       "items": [],
-       "controlType": "Button",
-       "width": "M",
-       "visible": true,
-       "displayNone": false,
-       "disabled": true,
-       "accessKey": "",
-       "nextFocusFieldName": "",
-       "wrap": false,
-       "dependencies": [],
-       "float": 2,
-       "toolTip": "",
-       "authorityMode": 0,
-       "marginLeft": "XS",
-       "marginRight": "XS",
-       "selectControlID": "btnToComplete",
-       "helpMessageID": "",
-       "jpControlName": "",
-       "onClick": "onClick_btnToComplete",
-       "text": "完了日を登録する",
-       "appearance": 0,
-       "imageFileUrl": "",
-       "imageWidth": "",
-       "imageHeight": "",
-       "icon": 0
-      },
-      {
        "fieldName": "btnToPublishIraisho",
        "items": [],
        "controlType": "Button",
@@ -1072,6 +1047,34 @@
        "jpControlName": "",
        "onClick": "",
        "text": "データ出力を行う",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
+       "icon": 0
+      },
+      {
+       "fieldName": "btnToComplete",
+       "items": [],
+       "controlType": "Button",
+       "width": "M",
+       "visible": true,
+       "displayNone": false,
+       "disabled": true,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 2,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "btnToComplete",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "onClick": "onClick_btnToComplete",
+       "text": "完了日を登録する",
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
@@ -1140,7 +1143,10 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorder": false,
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
@@ -1167,7 +1173,7 @@
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
-   "title": "認定調査依頼一覧",
+   "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
@@ -1199,7 +1205,10 @@
    "session": {},
    "marginTop": "XS",
    "marginBottom": "XS",
-   "eraseBorder": false,
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -1895,7 +1904,10 @@
        "session": {},
        "marginTop": "Default",
        "marginBottom": "S",
-       "eraseBorder": false,
+       "eraseBorderTop": false,
+       "eraseBorderBottom": false,
+       "eraseBorderRight": false,
+       "eraseBorderLeft": false,
        "backgroundColor": 0,
        "widthAuto": false,
        "panelDisplay": 1,
@@ -1937,7 +1949,10 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorder": false,
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 1,
@@ -1967,7 +1982,7 @@
          "toolTip": "",
          "authorityMode": 0,
          "marginLeft": "XS",
-         "marginRight": "XS",
+         "marginRight": "0",
          "selectControlID": "txtChosaItakusakiCode_core",
          "helpMessageID": "",
          "jpControlName": "",
@@ -1999,6 +2014,56 @@
          "formatLength": "10"
         },
         {
+         "fieldName": "btnToSearchChosaItakusaki",
+         "items": [],
+         "controlType": "ButtonDialog",
+         "width": "XS",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "selectControlID": "btnToSearchChosaItakusaki",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "onClick": "",
+         "text": "",
+         "appearance": 2,
+         "imageFileUrl": "/uz/uza/css/Link.jpg",
+         "imageWidth": "25",
+         "imageHeight": "15",
+         "icon": 0,
+         "displayChildDivName": "DBE.ChosaKikanDialog",
+         "dataPassing": [
+          {
+           "key": "chosaItakusakiCode",
+           "controlName": "txtChosaItakusakiCode"
+          },
+          {
+           "key": "chosaItakusakiName",
+           "controlName": "txtChosaItakusakiName"
+          },
+          {
+           "key": "chosainCode",
+           "controlName": "txtChosainCode"
+          },
+          {
+           "key": "chosainName",
+           "controlName": "txtChosainName"
+          }
+         ],
+         "visibleCloseButton": true,
+         "onOkClose": "",
+         "onBeforeOpenDialog": ""
+        },
+        {
          "fieldName": "txtChosaItakusakiName",
          "items": [],
          "controlType": "TextBox",
@@ -2013,7 +2078,7 @@
          "float": 0,
          "toolTip": "",
          "authorityMode": 0,
-         "marginLeft": "XS",
+         "marginLeft": "0",
          "marginRight": "XS",
          "selectControlID": "txtChosaItakusakiName_core",
          "helpMessageID": "",
@@ -2043,56 +2108,6 @@
          "labelRAlign": 0,
          "decorationClass": "",
          "permitCharactor": ""
-        },
-        {
-         "fieldName": "btnToSearchChosaItakusaki",
-         "items": [],
-         "controlType": "ButtonDialog",
-         "width": "XS",
-         "visible": true,
-         "displayNone": false,
-         "disabled": false,
-         "accessKey": "",
-         "nextFocusFieldName": "",
-         "wrap": false,
-         "dependencies": [],
-         "float": 0,
-         "toolTip": "",
-         "authorityMode": 0,
-         "marginLeft": "XS",
-         "marginRight": "XS",
-         "selectControlID": "btnToSearchChosaItakusaki",
-         "helpMessageID": "",
-         "jpControlName": "",
-         "onClick": "",
-         "text": "",
-         "appearance": 2,
-         "imageFileUrl": "/uz/uza/css/Link.jpg",
-         "imageWidth": "20",
-         "imageHeight": "20",
-         "icon": 0,
-         "displayChildDivName": "DBE.ChosaKikanDialog",
-         "dataPassing": [
-          {
-           "key": "chosaItakusakiCode",
-           "controlName": "txtChosaItakusakiCode"
-          },
-          {
-           "key": "chosaItakusakiName",
-           "controlName": "txtChosaItakusakiName"
-          },
-          {
-           "key": "chosainCode",
-           "controlName": "txtChosainCode"
-          },
-          {
-           "key": "chosainName",
-           "controlName": "txtChosainName"
-          }
-         ],
-         "visibleCloseButton": true,
-         "onOkClose": "",
-         "onBeforeOpenDialog": ""
         },
         {
          "fieldName": "txtChosainCode",
@@ -2221,7 +2236,10 @@
        "session": {},
        "marginTop": "Default",
        "marginBottom": "Default",
-       "eraseBorder": false,
+       "eraseBorderTop": false,
+       "eraseBorderBottom": false,
+       "eraseBorderRight": false,
+       "eraseBorderLeft": false,
        "backgroundColor": 0,
        "widthAuto": false,
        "panelDisplay": 1,
@@ -2402,7 +2420,10 @@
          "session": {},
          "marginTop": "Default",
          "marginBottom": "Default",
-         "eraseBorder": false,
+         "eraseBorderTop": false,
+         "eraseBorderBottom": false,
+         "eraseBorderRight": false,
+         "eraseBorderLeft": false,
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 1,
@@ -2417,7 +2438,7 @@
            "fieldName": "chkPaperType",
            "items": [],
            "controlType": "CheckBoxList",
-           "width": "380",
+           "width": "400",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -2439,11 +2460,11 @@
            "dataSource": [
             {
              "key": "1",
-             "value": "依頼書　　　　"
+             "value": "調査票　　　"
             },
             {
              "key": "2",
-             "value": "調査票"
+             "value": "概況特記　　　"
             },
             {
              "key": "3",
@@ -2451,6 +2472,10 @@
             },
             {
              "key": "4",
+             "value": "依頼書　　　"
+            },
+            {
+             "key": "5",
              "value": "差異チェック票"
             }
            ],
@@ -2465,7 +2490,7 @@
            "minCheckedItem": 0,
            "maxCheckedItem": "10",
            "spaceSize": "M",
-           "isAllSelectable": true,
+           "isAllSelectable": false,
            "isAllSelectableBreakLine": false,
            "disabledItem": []
           },
@@ -2576,7 +2601,10 @@
            "session": {},
            "marginTop": "Default",
            "marginBottom": "Default",
-           "eraseBorder": false,
+           "eraseBorderTop": false,
+           "eraseBorderBottom": false,
+           "eraseBorderRight": false,
+           "eraseBorderLeft": false,
            "backgroundColor": 0,
            "widthAuto": false,
            "panelDisplay": 0,
@@ -2618,7 +2646,10 @@
          "session": {},
          "marginTop": "Default",
          "marginBottom": "Default",
-         "eraseBorder": false,
+         "eraseBorderTop": false,
+         "eraseBorderBottom": false,
+         "eraseBorderRight": false,
+         "eraseBorderLeft": false,
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 1,
@@ -2660,7 +2691,10 @@
        "session": {},
        "marginTop": "Default",
        "marginBottom": "Default",
-       "eraseBorder": false,
+       "eraseBorderTop": false,
+       "eraseBorderBottom": false,
+       "eraseBorderRight": false,
+       "eraseBorderLeft": false,
        "backgroundColor": 0,
        "widthAuto": true,
        "panelDisplay": 0,
@@ -3057,7 +3091,10 @@
            "session": {},
            "marginTop": "Default",
            "marginBottom": "Default",
-           "eraseBorder": false,
+           "eraseBorderTop": false,
+           "eraseBorderBottom": false,
+           "eraseBorderRight": false,
+           "eraseBorderLeft": false,
            "backgroundColor": 0,
            "widthAuto": false,
            "panelDisplay": 0,
@@ -3099,7 +3136,10 @@
          "session": {},
          "marginTop": "Default",
          "marginBottom": "Default",
-         "eraseBorder": false,
+         "eraseBorderTop": false,
+         "eraseBorderBottom": false,
+         "eraseBorderRight": false,
+         "eraseBorderLeft": false,
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 1,
@@ -3167,7 +3207,10 @@
        "session": {},
        "marginTop": "Default",
        "marginBottom": "Default",
-       "eraseBorder": false,
+       "eraseBorderTop": false,
+       "eraseBorderBottom": false,
+       "eraseBorderRight": false,
+       "eraseBorderLeft": false,
        "backgroundColor": 0,
        "widthAuto": true,
        "panelDisplay": 0,
@@ -3268,7 +3311,10 @@
        "session": {},
        "marginTop": "Default",
        "marginBottom": "Default",
-       "eraseBorder": false,
+       "eraseBorderTop": false,
+       "eraseBorderBottom": false,
+       "eraseBorderRight": false,
+       "eraseBorderLeft": false,
        "backgroundColor": 0,
        "widthAuto": false,
        "panelDisplay": 0,
@@ -3310,7 +3356,10 @@
      "session": {},
      "marginTop": "S",
      "marginBottom": "XS",
-     "eraseBorder": false,
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
@@ -3411,7 +3460,10 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorder": false,
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
@@ -3497,7 +3549,10 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorder": false,
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -3530,8 +3585,8 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "top",
-   "showWizard": false,
+   "stateName": "対象者一覧",
+   "showWizard": true,
    "visibleDivs": [
     {
      "visibleDiv": "NinteichosaIraiList",
@@ -3551,19 +3606,19 @@
     {
      "fieldName": "btnToCallContinuousEntry",
      "event": "onClick",
-     "transition": "entry"
+     "transition": "依頼入力"
     },
     {
      "fieldName": "btnToReturn",
      "event": "onClick",
-     "transition": ""
+     "transition": "対象者一覧"
     }
    ]
   },
   {
    "order": "2",
-   "stateName": "entry",
-   "showWizard": false,
+   "stateName": "依頼入力",
+   "showWizard": true,
    "visibleDivs": [
     {
      "visibleDiv": "NinteichosaIraiEntry",
@@ -3641,12 +3696,12 @@
     {
      "fieldName": "btnToCallContinuousEntry",
      "event": "onClick",
-     "transition": ""
+     "transition": "依頼入力"
     },
     {
      "fieldName": "btnToReturn",
      "event": "onClick",
-     "transition": "top"
+     "transition": "対象者一覧"
     }
    ]
   }
@@ -3715,6 +3770,5 @@
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
- "supplementInfoAllPostParam": [],
  "commonButtonAreaData": []
 }

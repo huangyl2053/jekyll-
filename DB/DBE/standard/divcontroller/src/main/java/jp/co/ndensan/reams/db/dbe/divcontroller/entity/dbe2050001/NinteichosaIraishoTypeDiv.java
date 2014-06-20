@@ -21,8 +21,8 @@ public class NinteichosaIraishoTypeDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("radNinteichosaIraishoType")
-    private RadioButton radNinteichosaIraishoType;
+    @JsonProperty("chkNinteichosaIraiReportType")
+    private CheckBoxList chkNinteichosaIraiReportType;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -30,14 +30,14 @@ public class NinteichosaIraishoTypeDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("radNinteichosaIraishoType")
-    public RadioButton getRadNinteichosaIraishoType() {
-        return radNinteichosaIraishoType;
+    @JsonProperty("chkNinteichosaIraiReportType")
+    public CheckBoxList getChkNinteichosaIraiReportType() {
+        return chkNinteichosaIraiReportType;
     }
 
-    @JsonProperty("radNinteichosaIraishoType")
-    public void setRadNinteichosaIraishoType(RadioButton radNinteichosaIraishoType) {
-        this.radNinteichosaIraishoType=radNinteichosaIraishoType;
+    @JsonProperty("chkNinteichosaIraiReportType")
+    public void setChkNinteichosaIraiReportType(CheckBoxList chkNinteichosaIraiReportType) {
+        this.chkNinteichosaIraiReportType=chkNinteichosaIraiReportType;
     }
 
 }

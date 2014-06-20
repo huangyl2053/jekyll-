@@ -207,7 +207,7 @@ public class IraishoIkkatsuHakko {
              * @param div NinteichosaIraishoTypeDiv
              */
             static void clear(NinteichosaIraishoTypeDiv div) {
-                div.getRadNinteichosaIraishoType().setSelectedItem(RString.EMPTY);
+                div.getChkNinteichosaIraiReportType().setSelectedItems(Collections.EMPTY_LIST);
             }
         }
 
@@ -402,7 +402,7 @@ public class IraishoIkkatsuHakko {
              * @param div ShujiiIkenshoIraishoTypeDiv
              */
             static void clear(ShujiiIkenshoIraishoTypeDiv div) {
-                div.getRadShujiiIkenshoIraishoType().setSelectedItem(RString.EMPTY);
+                div.getChkShujiiIkenshoIraiReportType().setSelectedItems(Collections.EMPTY_LIST);
             }
         }
 

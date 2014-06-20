@@ -180,9 +180,9 @@ var DBE;
                         "rowHeight": 25,
                         "isMultiSelectable": false,
                         "isShowHeader": true,
-                        "isShowFooter": true,
+                        "isShowFooter": false,
                         "isShowFilter": false,
-                        "isShowFilterButton": true,
+                        "isShowFilterButton": false,
                         "isShowRowState": false,
                         "isShowSelectButtonColumn": false,
                         "isShowModifyButtonColumn": false,
@@ -191,6 +191,12 @@ var DBE;
                         "selectedRowCount": 0,
                         "header": {
                             "combineColumns": [
+                                {
+                                    "combineColumnName": "調査",
+                                    "combineItem": [
+                                        "chosaJokyo"
+                                    ]
+                                },
                                 {
                                     "combineColumnName": "被保険者",
                                     "combineItem": [
@@ -212,7 +218,12 @@ var DBE;
                                     "combineItem": [
                                         "chosaIraiKubun",
                                         "chosaIraiDate",
-                                        "chosaKigenDate",
+                                        "chosaKigenDate"
+                                    ]
+                                },
+                                {
+                                    "combineColumnName": "依頼書",
+                                    "combineItem": [
                                         "iraishoHakkoDate"
                                     ]
                                 },
@@ -260,7 +271,7 @@ var DBE;
                                 }
                             ],
                             "frozenColumn": "",
-                            "headerHeight": 1
+                            "headerHeight": 0
                         },
                         "columns": [
                             {
@@ -282,7 +293,7 @@ var DBE;
                                 "sortKey": "chosaKanryoFlag"
                             },
                             {
-                                "columnName": "調査<br>状況",
+                                "columnName": "状況",
                                 "dataName": "chosaJokyo",
                                 "toolTip": "",
                                 "bgColor": 0,
@@ -553,7 +564,7 @@ var DBE;
                                 "sortKey": "chosaKigenDate"
                             },
                             {
-                                "columnName": "依頼書<br>発行日",
+                                "columnName": "発行日",
                                 "dataName": "iraishoHakkoDate",
                                 "toolTip": "",
                                 "bgColor": 0,
@@ -799,7 +810,7 @@ var DBE;
                                 "sortKey": "tokusokuDate"
                             },
                             {
-                                "columnName": "督促<br>回数",
+                                "columnName": "回数",
                                 "dataName": "tokusokuCount",
                                 "toolTip": "",
                                 "bgColor": 0,
@@ -816,7 +827,7 @@ var DBE;
                                 "sortKey": "tokusokuCount"
                             },
                             {
-                                "columnName": "郵便<br>番号",
+                                "columnName": "番号",
                                 "dataName": "yubinNo",
                                 "toolTip": "",
                                 "bgColor": 0,
@@ -868,7 +879,7 @@ var DBE;
                             }
                         ]
                     },
-                    "height": "230",
+                    "height": "220",
                     "onSort": "",
                     "onSelect": "",
                     "onSelectByDblClick": "",
@@ -882,8 +893,7 @@ var DBE;
                     "sortOrder": "chosaIraiKubun",
                     "isAscending": true,
                     "filterList": [],
-                    "activeRowId": -1,
-                    "readOnly": false
+                    "activeRowId": -1
                 }
             ],
             "controlType": "CompositeControl",

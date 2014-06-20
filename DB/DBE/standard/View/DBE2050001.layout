@@ -17,10 +17,10 @@
            "fieldName": "NinteichosaIraishoType",
            "items": [
             {
-             "fieldName": "radNinteichosaIraishoType",
+             "fieldName": "chkNinteichosaIraiReportType",
              "items": [],
-             "controlType": "RadioButton",
-             "width": "130",
+             "controlType": "CheckBoxList",
+             "width": "380",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -33,30 +33,42 @@
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
-             "selectControlID": "radNinteichosaIraishoType_core",
+             "selectControlID": "chkNinteichosaIraiReportType_core",
+             "helpMessageID": "",
+             "jpControlName": "",
              "onChange": "",
-             "selectedItem": "1",
+             "labelLText": "",
+             "labelLWidth": "S",
+             "labelLAlign": 2,
+             "onClick": "",
+             "icon": [],
              "dataSource": [
               {
+               "key": "0",
+               "value": "調査依頼書（単票）"
+              },
+              {
                "key": "1",
-               "value": "単票"
+               "value": "調査依頼書（一覧表）"
               },
               {
                "key": "2",
-               "value": "一覧票"
+               "value": "要介護認定調査一覧表"
               }
              ],
-             "required": false,
-             "onClick": "",
-             "newLineItemNumber": 1,
+             "selectedItem": null,
+             "newLineItemNumber": 2,
              "spaceSize": "M",
-             "labelLText": "",
-             "labelLWidth": "S",
-             "labelLAlign": 2
+             "disabledItem": [],
+             "selectedItems": [],
+             "minCheckedItem": 0,
+             "maxCheckedItem": "3",
+             "isAllSelectable": false,
+             "isAllSelectableBreakLine": false
             }
            ],
            "controlType": "Panel",
-           "width": "240",
+           "width": "400",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -70,6 +82,8 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "NinteichosaIraishoType",
+           "helpMessageID": "",
+           "jpControlName": "",
            "onLoad": "",
            "title": "認定調査依頼書",
            "isOpen": true,
@@ -93,7 +107,9 @@
            "backgroundColor": 0,
            "widthAuto": false,
            "panelDisplay": 1,
-           "isGroupBox": false
+           "isGroupBox": false,
+           "readOnly": false,
+           "height": "Auto"
           },
           {
            "fieldName": "NinteichosaRelatedReportType",
@@ -102,7 +118,7 @@
              "fieldName": "chkNinteichosaRelatedReportType",
              "items": [],
              "controlType": "CheckBoxList",
-             "width": "750",
+             "width": "640",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -116,8 +132,15 @@
              "marginLeft": "XS",
              "marginRight": "XS",
              "selectControlID": "chkNinteichosaRelatedReportType_core",
+             "helpMessageID": "",
+             "jpControlName": "",
+             "required": false,
              "onChange": "",
-             "selectedItem": "",
+             "labelLText": "",
+             "labelLWidth": "S",
+             "labelLAlign": 2,
+             "onClick": "",
+             "icon": [],
              "dataSource": [
               {
                "key": "1",
@@ -125,11 +148,11 @@
               },
               {
                "key": "2",
-               "value": "概況調査　　　　　"
+               "value": "概況調査　　　　"
               },
               {
                "key": "3",
-               "value": "差異チェック票"
+               "value": "差異チェック票　"
               },
               {
                "key": "4",
@@ -142,27 +165,21 @@
               {
                "key": "6",
                "value": "要介護認定調査資料"
-              },
-              {
-               "key": "7",
-               "value": "要介護認定調査一覧表"
               }
              ],
-             "required": false,
-             "onClick": "",
+             "selectedItem": null,
              "newLineItemNumber": 4,
              "spaceSize": "M",
-             "labelLText": "",
-             "labelLWidth": "S",
-             "labelLAlign": 2,
+             "disabledItem": [],
              "selectedItems": [],
              "minCheckedItem": 0,
              "maxCheckedItem": "10",
-             "isAllSelectable": true
+             "isAllSelectable": false,
+             "isAllSelectableBreakLine": false
             }
            ],
            "controlType": "Panel",
-           "width": "786",
+           "width": "650",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -176,6 +193,8 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "NinteichosaRelatedReportType",
+           "helpMessageID": "",
+           "jpControlName": "",
            "onLoad": "",
            "title": "認定調査票",
            "isOpen": true,
@@ -197,13 +216,15 @@
            "eraseBorderRight": false,
            "eraseBorderLeft": false,
            "backgroundColor": 0,
-           "widthAuto": false,
+           "widthAuto": true,
            "panelDisplay": 1,
-           "isGroupBox": false
+           "isGroupBox": false,
+           "readOnly": false,
+           "height": "Auto"
           }
          ],
          "controlType": "Panel",
-         "width": "1060",
+         "width": "1100",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -214,9 +235,11 @@
          "float": 0,
          "toolTip": "",
          "authorityMode": 0,
-         "marginLeft": "XS",
+         "marginLeft": "0",
          "marginRight": "XS",
          "selectControlID": "NinteichosaIraishoPublishingOptions",
+         "helpMessageID": "",
+         "jpControlName": "",
          "onLoad": "",
          "title": "発行内容",
          "isOpen": true,
@@ -240,7 +263,9 @@
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 0,
-         "isGroupBox": false
+         "isGroupBox": false,
+         "readOnly": false,
+         "height": "Auto"
         },
         {
          "fieldName": "NinteichosaIraishoTargetPersons",
@@ -266,30 +291,32 @@
              "marginLeft": "XS",
              "marginRight": "XS",
              "selectControlID": "txtChosaIraiDateRange_core",
-             "onChange": "",
-             "labelLText": "調査依頼日",
-             "labelLWidth": "S",
-             "labelLAlign": 2,
+             "helpMessageID": "",
+             "jpControlName": "",
              "readOnly": false,
              "isPrivateInfo": false,
              "isPassword": false,
              "onFocus": "",
              "onBlur": "",
+             "onChange": "",
              "onKeyPress": "",
+             "labelLText": "調査依頼日",
+             "labelRText": "",
+             "labelLWidth": "S",
+             "labelRWidth": "S",
+             "labelLAlign": 2,
+             "labelRAlign": 0,
+             "ymdKubun": 2,
+             "displayFormat": 0,
              "permitCharactor": "",
              "fromPlaceHolder": "",
              "toPlaceHolder": "",
-             "ymdKubun": 2,
-             "displayFormat": 0,
              "minDate": "",
              "maxDate": "",
              "fromText": "",
              "toText": "",
              "fromValue": "",
              "toValue": "",
-             "labelRText": "",
-             "labelRWidth": "S",
-             "labelRAlign": 0,
              "fromSelectControlID": "txtChosaIraiDateRangeFrom",
              "toSelectControlID": "txtChosaIraiDateRangeTo"
             },
@@ -311,30 +338,32 @@
              "marginLeft": "XS",
              "marginRight": "XS",
              "selectControlID": "txtShinseiDateRangeOfChosa_core",
-             "onChange": "",
-             "labelLText": "認定申請日",
-             "labelLWidth": "S",
-             "labelLAlign": 2,
+             "helpMessageID": "",
+             "jpControlName": "",
              "readOnly": false,
              "isPrivateInfo": false,
              "isPassword": false,
              "onFocus": "",
              "onBlur": "",
+             "onChange": "",
              "onKeyPress": "",
+             "labelLText": "認定申請日",
+             "labelRText": "",
+             "labelLWidth": "S",
+             "labelRWidth": "S",
+             "labelLAlign": 2,
+             "labelRAlign": 0,
+             "ymdKubun": 2,
+             "displayFormat": 0,
              "permitCharactor": "",
              "fromPlaceHolder": "",
              "toPlaceHolder": "",
-             "ymdKubun": 2,
-             "displayFormat": 0,
              "minDate": "",
              "maxDate": "",
              "fromText": "",
              "toText": "",
              "fromValue": "",
              "toValue": "",
-             "labelRText": "",
-             "labelRWidth": "S",
-             "labelRAlign": 0,
              "fromSelectControlID": "txtShinseiDateRangeOfChosaFrom",
              "toSelectControlID": "txtShinseiDateRangeOfChosaTo"
             },
@@ -356,8 +385,15 @@
              "marginLeft": "XS",
              "marginRight": "XS",
              "selectControlID": "chkNinteichosaIraishoHakkoExistence_core",
+             "helpMessageID": "",
+             "jpControlName": "",
+             "required": false,
              "onChange": "",
-             "selectedItem": "",
+             "labelLText": "依頼書発行",
+             "labelLWidth": "S",
+             "labelLAlign": 2,
+             "onClick": "",
+             "icon": [],
              "dataSource": [
               {
                "key": "1",
@@ -368,28 +404,19 @@
                "value": "未済"
               }
              ],
-             "required": false,
-             "onClick": "",
+             "selectedItem": null,
              "newLineItemNumber": 2,
              "spaceSize": "M",
-             "labelLText": "依頼書発行",
-             "labelLWidth": "S",
-             "labelLAlign": 2,
-             "selectedItems": [
-              {
-               "key": "1"
-              },
-              {
-               "key": "0"
-              }
-             ],
+             "disabledItem": [],
+             "selectedItems": [],
              "minCheckedItem": 0,
-             "maxCheckedItem": 2,
-             "isAllSelectable": false
+             "maxCheckedItem": "3",
+             "isAllSelectable": false,
+             "isAllSelectableBreakLine": false
             }
            ],
            "controlType": "Panel",
-           "width": "1040",
+           "width": "1080",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -403,6 +430,8 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "SerachCriteriaForNinteichosaIraishoTargetPersons",
+           "helpMessageID": "",
+           "jpControlName": "",
            "onLoad": "",
            "title": "検索条件",
            "isOpen": true,
@@ -426,7 +455,9 @@
            "backgroundColor": 0,
            "widthAuto": false,
            "panelDisplay": 1,
-           "isGroupBox": false
+           "isGroupBox": false,
+           "readOnly": false,
+           "height": "Auto"
           },
           {
            "fieldName": "SerachButtonsForNinteichosaIraishoTargetPersons",
@@ -449,8 +480,10 @@
              "marginLeft": "XS",
              "marginRight": "XS",
              "selectControlID": "btnToClearCriteriaOfChosa",
-             "onClick": "btnToClearCriteriaOfChosa",
+             "helpMessageID": "",
+             "jpControlName": "",
              "text": "条件をクリアする",
+             "onClick": "btnToClearCriteriaOfChosa",
              "appearance": 0,
              "imageFileUrl": "",
              "imageWidth": "",
@@ -475,8 +508,10 @@
              "marginLeft": "XS",
              "marginRight": "XS",
              "selectControlID": "btnToSearchOfChosa",
-             "onClick": "onClick_btnToSearchOfChosa",
+             "helpMessageID": "",
+             "jpControlName": "",
              "text": "検索する",
+             "onClick": "onClick_btnToSearchOfChosa",
              "appearance": 0,
              "imageFileUrl": "",
              "imageWidth": "",
@@ -485,7 +520,7 @@
             }
            ],
            "controlType": "Panel",
-           "width": "1040",
+           "width": "1080",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -499,6 +534,8 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "SerachButtonsForNinteichosaIraishoTargetPersons",
+           "helpMessageID": "",
+           "jpControlName": "",
            "onLoad": "",
            "title": "",
            "isOpen": true,
@@ -522,13 +559,15 @@
            "backgroundColor": 0,
            "widthAuto": false,
            "panelDisplay": 0,
-           "isGroupBox": false
+           "isGroupBox": false,
+           "readOnly": false,
+           "height": "Auto"
           },
           {
            "fieldName": "dgNinteichosaIraishoTargetPersons",
            "items": [],
            "controlType": "DataGrid",
-           "width": "1043",
+           "width": "1070",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -542,14 +581,22 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "dgNinteichosaIraishoTargetPersons",
-           "dataSource": [],
+           "helpMessageID": "",
+           "jpControlName": "",
+           "height": "210",
            "gridSetting": {
             "rowHeight": 25,
             "isMultiSelectable": true,
+            "isShowHeader": true,
             "isShowFooter": true,
             "isShowFilter": false,
             "isShowFilterButton": false,
             "isShowRowState": false,
+            "isShowSelectButtonColumn": false,
+            "isShowModifyButtonColumn": false,
+            "isShowDeleteButtonColumn": false,
+            "limitRowCount": 0,
+            "selectedRowCount": 0,
             "header": {
              "combineColumns": [
               {
@@ -585,13 +632,18 @@
               {
                "combineColumnName": "認定調査",
                "combineItem": [
-                "chosaIraiDate",
+                "chosaIraiDate"
+               ]
+              },
+              {
+               "combineColumnName": "依頼書",
+               "combineItem": [
                 "iraishoHakkoDate"
                ]
               }
              ],
              "frozenColumn": "",
-             "headerHeight": 1
+             "headerHeight": 0
             },
             "columns": [
              {
@@ -602,7 +654,10 @@
               "width": 90,
               "visible": true,
               "cellType": 0,
-              "cellDetails": null,
+              "cellDetails": {
+               "cellType": 0,
+               "isSetValueToToolTip": false
+              },
               "align": 1,
               "resize": true,
               "isPrivateInfo": false,
@@ -726,7 +781,9 @@
                "cellType": 7,
                "ymdKubun": 2,
                "displayFormat": 0,
-               "onChange": ""
+               "onChange": "",
+               "isSetValueToToolTip": false,
+               "readOnly": true
               },
               "align": 1,
               "resize": true,
@@ -759,7 +816,9 @@
                "cellType": 7,
                "ymdKubun": 2,
                "displayFormat": 0,
-               "onChange": ""
+               "onChange": "",
+               "isSetValueToToolTip": false,
+               "readOnly": true
               },
               "align": 1,
               "resize": true,
@@ -767,7 +826,7 @@
               "sortKey": "chosaIraiDate"
              },
              {
-              "columnName": "依頼書<br>発行日",
+              "columnName": "発行日",
               "dataName": "iraishoHakkoDate",
               "toolTip": "",
               "bgColor": 0,
@@ -778,7 +837,9 @@
                "cellType": 7,
                "ymdKubun": 2,
                "displayFormat": 0,
-               "onChange": ""
+               "onChange": "",
+               "isSetValueToToolTip": false,
+               "readOnly": true
               },
               "align": 1,
               "resize": true,
@@ -787,13 +848,16 @@
              }
             ]
            },
-           "height": "210",
            "onSort": "",
            "onSelect": "",
            "onSelectByDblClick": "",
+           "onSelectBySelectButton": "",
+           "onSelectByModifyButton": "",
+           "onSelectByDeleteButton": "",
            "onOnlyRow": "",
            "onNoRow": "",
            "onMultiRows": "",
+           "dataSource": [],
            "sortOrder": "hihokenshaNo",
            "isAscending": true,
            "filterList": [],
@@ -801,7 +865,7 @@
           }
          ],
          "controlType": "Panel",
-         "width": "1060",
+         "width": "1100",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -812,9 +876,11 @@
          "float": 0,
          "toolTip": "",
          "authorityMode": 0,
-         "marginLeft": "XS",
+         "marginLeft": "0",
          "marginRight": "XS",
          "selectControlID": "NinteichosaIraishoTargetPersons",
+         "helpMessageID": "",
+         "jpControlName": "",
          "onLoad": "",
          "title": "対象者",
          "isOpen": true,
@@ -843,7 +909,9 @@
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 0,
-         "isGroupBox": false
+         "isGroupBox": false,
+         "readOnly": false,
+         "height": "Auto"
         },
         {
          "fieldName": "NinteichosaIraishoRelatedDates",
@@ -866,26 +934,28 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "txtShoriDateOfChosa_core",
-           "onChange": "",
-           "required": false,
-           "labelLText": "発行処理日",
-           "labelLWidth": "S",
-           "labelLAlign": 2,
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": false,
+           "required": false,
+           "text": "",
            "isPrivateInfo": false,
+           "placeHolder": "",
            "isPassword": false,
            "onFocus": "",
            "onBlur": "",
+           "onChange": "",
            "onKeyPress": "",
-           "permitCharactor": "./_-",
+           "labelLText": "発行処理日",
+           "labelRText": "",
+           "labelLWidth": "S",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
            "ymdKubun": 2,
            "displayFormat": 0,
-           "labelRText": "",
-           "labelRWidth": "S",
-           "labelRAlign": 0,
-           "text": "",
-           "placeHolder": "",
-           "value": ""
+           "value": "",
+           "permitCharactor": "./_-"
           },
           {
            "fieldName": "txtHakkoDateOfChosa",
@@ -905,26 +975,28 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "txtHakkoDateOfChosa_core",
-           "onChange": "",
-           "required": false,
-           "labelLText": "発行日",
-           "labelLWidth": "S",
-           "labelLAlign": 2,
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": false,
+           "required": false,
+           "text": "",
            "isPrivateInfo": false,
+           "placeHolder": "",
            "isPassword": false,
            "onFocus": "",
            "onBlur": "",
+           "onChange": "",
            "onKeyPress": "",
-           "permitCharactor": "./_-",
+           "labelLText": "発行日",
+           "labelRText": "",
+           "labelLWidth": "S",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
            "ymdKubun": 2,
            "displayFormat": 0,
-           "labelRText": "",
-           "labelRWidth": "S",
-           "labelRAlign": 0,
-           "text": "",
-           "placeHolder": "",
-           "value": ""
+           "value": "",
+           "permitCharactor": "./_-"
           },
           {
            "fieldName": "txtKigenDateOfChosa",
@@ -944,30 +1016,32 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "txtKigenDateOfChosa_core",
-           "onChange": "",
-           "required": false,
-           "labelLText": "期限日",
-           "labelLWidth": "S",
-           "labelLAlign": 2,
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": false,
+           "required": false,
+           "text": "",
            "isPrivateInfo": false,
+           "placeHolder": "",
            "isPassword": false,
            "onFocus": "",
            "onBlur": "",
+           "onChange": "",
            "onKeyPress": "",
-           "permitCharactor": "./_-",
+           "labelLText": "期限日",
+           "labelRText": "",
+           "labelLWidth": "S",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
            "ymdKubun": 2,
            "displayFormat": 0,
-           "labelRText": "",
-           "labelRWidth": "S",
-           "labelRAlign": 0,
-           "text": "",
-           "placeHolder": "",
-           "value": ""
+           "value": "",
+           "permitCharactor": "./_-"
           }
          ],
          "controlType": "Panel",
-         "width": "1060",
+         "width": "1100",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -978,9 +1052,11 @@
          "float": 0,
          "toolTip": "",
          "authorityMode": 0,
-         "marginLeft": "XS",
+         "marginLeft": "0",
          "marginRight": "XS",
          "selectControlID": "NinteichosaIraishoRelatedDates",
+         "helpMessageID": "",
+         "jpControlName": "",
          "onLoad": "",
          "title": "帳票出力内容",
          "isOpen": true,
@@ -1004,7 +1080,9 @@
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 0,
-         "isGroupBox": false
+         "isGroupBox": false,
+         "readOnly": false,
+         "height": "Auto"
         },
         {
          "fieldName": "btnToPublishOfChosa",
@@ -1024,8 +1102,10 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "btnToPublishOfChosa",
-         "onClick": "",
+         "helpMessageID": "",
+         "jpControlName": "",
          "text": "帳票を発行する",
+         "onClick": "",
          "appearance": 0,
          "imageFileUrl": "",
          "imageWidth": "",
@@ -1048,6 +1128,8 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "NinteichosaIraiIkkatuHakkoTab",
+       "helpMessageID": "",
+       "jpControlName": "",
        "title": "認定調査依頼書",
        "onActive": ""
       },
@@ -1061,10 +1143,10 @@
            "fieldName": "ShujiiIkenshoIraishoType",
            "items": [
             {
-             "fieldName": "radShujiiIkenshoIraishoType",
+             "fieldName": "chkShujiiIkenshoIraiReportType",
              "items": [],
-             "controlType": "RadioButton",
-             "width": "130",
+             "controlType": "CheckBoxList",
+             "width": "650",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -1077,30 +1159,58 @@
              "authorityMode": 0,
              "marginLeft": "XS",
              "marginRight": "XS",
-             "selectControlID": "radShujiiIkenshoIraishoType_core",
+             "selectControlID": "chkShujiiIkenshoIraiReportType_core",
+             "helpMessageID": "",
+             "jpControlName": "",
              "onChange": "",
-             "selectedItem": "1",
+             "labelLText": "",
+             "labelLWidth": "S",
+             "labelLAlign": 2,
+             "onClick": "",
+             "icon": [],
              "dataSource": [
               {
+               "key": "0",
+               "value": "依頼書（単票）　　　"
+              },
+              {
                "key": "1",
-               "value": "単票"
+               "value": "依頼書（一覧表）"
               },
               {
                "key": "2",
-               "value": "一覧票"
+               "value": "指定医依頼書"
+              },
+              {
+               "key": "3",
+               "value": "作成依頼一覧"
+              },
+              {
+               "key": "4",
+               "value": "意見書提出依頼一覧　"
+              },
+              {
+               "key": "5",
+               "value": "依頼者履歴一覧　"
+              },
+              {
+               "key": "6",
+               "value": "診断命令書"
               }
              ],
-             "required": false,
-             "onClick": "",
-             "newLineItemNumber": 1,
+             "selectedItem": null,
+             "newLineItemNumber": 4,
              "spaceSize": "M",
-             "labelLText": "",
-             "labelLWidth": "S",
-             "labelLAlign": 2
+             "disabledItem": [],
+             "selectedItems": [],
+             "minCheckedItem": 0,
+             "maxCheckedItem": "8",
+             "isAllSelectable": false,
+             "isAllSelectableBreakLine": false
             }
            ],
            "controlType": "Panel",
-           "width": "240",
+           "width": "700",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -1114,6 +1224,8 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "ShujiiIkenshoIraishoType",
+           "helpMessageID": "",
+           "jpControlName": "",
            "onLoad": "",
            "title": "意見書作成依頼書",
            "isOpen": true,
@@ -1137,7 +1249,9 @@
            "backgroundColor": 0,
            "widthAuto": false,
            "panelDisplay": 1,
-           "isGroupBox": false
+           "isGroupBox": false,
+           "readOnly": false,
+           "height": "Auto"
           },
           {
            "fieldName": "ShujiiIkenshoRelatedReportType",
@@ -1146,7 +1260,7 @@
              "fieldName": "chkShujiiIkenshoRelatedReportType",
              "items": [],
              "controlType": "CheckBoxList",
-             "width": "750",
+             "width": "300",
              "visible": true,
              "displayNone": false,
              "disabled": false,
@@ -1160,8 +1274,15 @@
              "marginLeft": "XS",
              "marginRight": "XS",
              "selectControlID": "chkShujiiIkenshoRelatedReportType_core",
+             "helpMessageID": "",
+             "jpControlName": "",
+             "required": false,
              "onChange": "",
-             "selectedItem": "",
+             "labelLText": "",
+             "labelLWidth": "S",
+             "labelLAlign": 2,
+             "onClick": "",
+             "icon": [],
              "dataSource": [
               {
                "key": "1",
@@ -1170,43 +1291,21 @@
               {
                "key": "2",
                "value": "作成料請求書　　　　"
-              },
-              {
-               "key": "3",
-               "value": "指定医依頼兼主治医意見書"
-              },
-              {
-               "key": "4",
-               "value": "診断命令書　"
-              },
-              {
-               "key": "5",
-               "value": "作成依頼一覧表"
-              },
-              {
-               "key": "6",
-               "value": "意見書提出依頼一覧表"
-              },
-              {
-               "key": "7",
-               "value": "依頼者履歴一覧"
               }
              ],
-             "required": false,
-             "onClick": "",
-             "newLineItemNumber": 4,
+             "selectedItem": null,
+             "newLineItemNumber": 2,
              "spaceSize": "M",
-             "labelLText": "",
-             "labelLWidth": "S",
-             "labelLAlign": 2,
+             "disabledItem": [],
              "selectedItems": [],
              "minCheckedItem": 0,
-             "maxCheckedItem": "10",
-             "isAllSelectable": true
+             "maxCheckedItem": "3",
+             "isAllSelectable": false,
+             "isAllSelectableBreakLine": false
             }
            ],
            "controlType": "Panel",
-           "width": "786",
+           "width": "350",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -1220,6 +1319,8 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "ShujiiIkenshoRelatedReportType",
+           "helpMessageID": "",
+           "jpControlName": "",
            "onLoad": "",
            "title": "意見書",
            "isOpen": true,
@@ -1243,11 +1344,13 @@
            "backgroundColor": 0,
            "widthAuto": false,
            "panelDisplay": 1,
-           "isGroupBox": false
+           "isGroupBox": false,
+           "readOnly": false,
+           "height": "Auto"
           }
          ],
          "controlType": "Panel",
-         "width": "1060",
+         "width": "1100",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1258,9 +1361,11 @@
          "float": 0,
          "toolTip": "",
          "authorityMode": 0,
-         "marginLeft": "XS",
+         "marginLeft": "0",
          "marginRight": "XS",
          "selectControlID": "ShujiiIkenshoIraishoPublishingOptions",
+         "helpMessageID": "",
+         "jpControlName": "",
          "onLoad": "",
          "title": "発行内容",
          "isOpen": true,
@@ -1284,7 +1389,9 @@
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 0,
-         "isGroupBox": false
+         "isGroupBox": false,
+         "readOnly": false,
+         "height": "Auto"
         },
         {
          "fieldName": "ShujiiIkenshoIraishoTargetPersons",
@@ -1310,30 +1417,32 @@
              "marginLeft": "XS",
              "marginRight": "XS",
              "selectControlID": "txtSakuseiIraiDateRange_core",
-             "onChange": "",
-             "labelLText": "作成依頼日",
-             "labelLWidth": "S",
-             "labelLAlign": 2,
+             "helpMessageID": "",
+             "jpControlName": "",
              "readOnly": false,
              "isPrivateInfo": false,
              "isPassword": false,
              "onFocus": "",
              "onBlur": "",
+             "onChange": "",
              "onKeyPress": "",
+             "labelLText": "作成依頼日",
+             "labelRText": "",
+             "labelLWidth": "S",
+             "labelRWidth": "S",
+             "labelLAlign": 2,
+             "labelRAlign": 0,
+             "ymdKubun": 2,
+             "displayFormat": 0,
              "permitCharactor": "",
              "fromPlaceHolder": "",
              "toPlaceHolder": "",
-             "ymdKubun": 2,
-             "displayFormat": 0,
              "minDate": "",
              "maxDate": "",
              "fromText": "",
              "toText": "",
              "fromValue": "",
              "toValue": "",
-             "labelRText": "",
-             "labelRWidth": "S",
-             "labelRAlign": 0,
              "fromSelectControlID": "txtSakuseiIraiDateRangeFrom",
              "toSelectControlID": "txtSakuseiIraiDateRangeTo"
             },
@@ -1355,30 +1464,32 @@
              "marginLeft": "XS",
              "marginRight": "XS",
              "selectControlID": "txtShinseiDateRangeOfIkensho_core",
-             "onChange": "",
-             "labelLText": "認定申請日",
-             "labelLWidth": "S",
-             "labelLAlign": 2,
+             "helpMessageID": "",
+             "jpControlName": "",
              "readOnly": false,
              "isPrivateInfo": false,
              "isPassword": false,
              "onFocus": "",
              "onBlur": "",
+             "onChange": "",
              "onKeyPress": "",
+             "labelLText": "認定申請日",
+             "labelRText": "",
+             "labelLWidth": "S",
+             "labelRWidth": "S",
+             "labelLAlign": 2,
+             "labelRAlign": 0,
+             "ymdKubun": 2,
+             "displayFormat": 0,
              "permitCharactor": "",
              "fromPlaceHolder": "",
              "toPlaceHolder": "",
-             "ymdKubun": 2,
-             "displayFormat": 0,
              "minDate": "",
              "maxDate": "",
              "fromText": "",
              "toText": "",
              "fromValue": "",
              "toValue": "",
-             "labelRText": "",
-             "labelRWidth": "S",
-             "labelRAlign": 0,
              "fromSelectControlID": "txtShinseiDateRangeOfIkenshoFrom",
              "toSelectControlID": "txtShinseiDateRangeOfIkenshoTo"
             },
@@ -1400,8 +1511,15 @@
              "marginLeft": "XS",
              "marginRight": "XS",
              "selectControlID": "chkIkenshoIraishoHakkoExistence_core",
+             "helpMessageID": "",
+             "jpControlName": "",
+             "required": false,
              "onChange": "",
-             "selectedItem": "",
+             "labelLText": "依頼書発行",
+             "labelLWidth": "S",
+             "labelLAlign": 2,
+             "onClick": "",
+             "icon": [],
              "dataSource": [
               {
                "key": "1",
@@ -1412,28 +1530,19 @@
                "value": "未済"
               }
              ],
-             "required": false,
-             "onClick": "",
+             "selectedItem": null,
              "newLineItemNumber": 2,
              "spaceSize": "M",
-             "labelLText": "依頼書発行",
-             "labelLWidth": "S",
-             "labelLAlign": 2,
-             "selectedItems": [
-              {
-               "key": "1"
-              },
-              {
-               "key": "0"
-              }
-             ],
+             "disabledItem": [],
+             "selectedItems": [],
              "minCheckedItem": 0,
-             "maxCheckedItem": 2,
-             "isAllSelectable": false
+             "maxCheckedItem": "3",
+             "isAllSelectable": false,
+             "isAllSelectableBreakLine": false
             }
            ],
            "controlType": "Panel",
-           "width": "1040",
+           "width": "1080",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -1447,6 +1556,8 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "SerachCriteriaForShujiiIkenshoIraishoTargetPersons",
+           "helpMessageID": "",
+           "jpControlName": "",
            "onLoad": "",
            "title": "検索条件",
            "isOpen": true,
@@ -1470,7 +1581,9 @@
            "backgroundColor": 0,
            "widthAuto": false,
            "panelDisplay": 1,
-           "isGroupBox": false
+           "isGroupBox": false,
+           "readOnly": false,
+           "height": "Auto"
           },
           {
            "fieldName": "SearchButtonsForShujiiIkenshoIraishoTargetPersons",
@@ -1493,8 +1606,10 @@
              "marginLeft": "XS",
              "marginRight": "XS",
              "selectControlID": "btnToClearCriteriaOfIkensho",
-             "onClick": "btnToClearCriteriaOfIkensho",
+             "helpMessageID": "",
+             "jpControlName": "",
              "text": "条件をクリアする",
+             "onClick": "btnToClearCriteriaOfIkensho",
              "appearance": 0,
              "imageFileUrl": "",
              "imageWidth": "",
@@ -1519,8 +1634,10 @@
              "marginLeft": "XS",
              "marginRight": "XS",
              "selectControlID": "btnToSearchOfIkensho",
-             "onClick": "onClick_btnToSearchOfIkensho",
+             "helpMessageID": "",
+             "jpControlName": "",
              "text": "検索する",
+             "onClick": "onClick_btnToSearchOfIkensho",
              "appearance": 0,
              "imageFileUrl": "",
              "imageWidth": "",
@@ -1529,7 +1646,7 @@
             }
            ],
            "controlType": "Panel",
-           "width": "1040",
+           "width": "1080",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -1543,6 +1660,8 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "SearchButtonsForShujiiIkenshoIraishoTargetPersons",
+           "helpMessageID": "",
+           "jpControlName": "",
            "onLoad": "",
            "title": "",
            "isOpen": true,
@@ -1566,13 +1685,15 @@
            "backgroundColor": 0,
            "widthAuto": false,
            "panelDisplay": 0,
-           "isGroupBox": false
+           "isGroupBox": false,
+           "readOnly": false,
+           "height": "Auto"
           },
           {
            "fieldName": "dgShujiiIkenshoIraishoTargetPersons",
            "items": [],
            "controlType": "DataGrid",
-           "width": "1043",
+           "width": "1080",
            "visible": true,
            "displayNone": false,
            "disabled": false,
@@ -1586,14 +1707,22 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "dgShujiiIkenshoIraishoTargetPersons",
-           "dataSource": [],
+           "helpMessageID": "",
+           "jpControlName": "",
+           "height": "210",
            "gridSetting": {
             "rowHeight": 25,
             "isMultiSelectable": true,
+            "isShowHeader": true,
             "isShowFooter": true,
             "isShowFilter": false,
             "isShowFilterButton": false,
             "isShowRowState": false,
+            "isShowSelectButtonColumn": false,
+            "isShowModifyButtonColumn": false,
+            "isShowDeleteButtonColumn": false,
+            "limitRowCount": 0,
+            "selectedRowCount": 0,
             "header": {
              "combineColumns": [
               {
@@ -1627,15 +1756,20 @@
                ]
               },
               {
-               "combineColumnName": "主治医意見書",
+               "combineColumnName": "意見書",
                "combineItem": [
-                "sakuseiIraiDate",
+                "sakuseiIraiDate"
+               ]
+              },
+              {
+               "combineColumnName": "依頼書",
+               "combineItem": [
                 "iraishoHakkoDate"
                ]
               }
              ],
              "frozenColumn": "",
-             "headerHeight": 1
+             "headerHeight": 0
             },
             "columns": [
              {
@@ -1763,14 +1897,16 @@
               "dataName": "shinseiDate",
               "toolTip": "",
               "bgColor": 0,
-              "width": 81,
+              "width": 90,
               "visible": true,
               "cellType": 7,
               "cellDetails": {
                "cellType": 7,
                "ymdKubun": 2,
                "displayFormat": 0,
-               "onChange": ""
+               "onChange": "",
+               "isSetValueToToolTip": false,
+               "readOnly": true
               },
               "align": 1,
               "resize": true,
@@ -1796,14 +1932,16 @@
               "dataName": "sakuseiIraiDate",
               "toolTip": "",
               "bgColor": 0,
-              "width": 81,
+              "width": 90,
               "visible": true,
               "cellType": 7,
               "cellDetails": {
                "cellType": 7,
                "ymdKubun": 2,
                "displayFormat": 0,
-               "onChange": ""
+               "onChange": "",
+               "isSetValueToToolTip": false,
+               "readOnly": true
               },
               "align": 1,
               "resize": true,
@@ -1811,18 +1949,20 @@
               "sortKey": "sakuseiIraiDate"
              },
              {
-              "columnName": "依頼書<br>発行日",
+              "columnName": "発行日",
               "dataName": "iraishoHakkoDate",
               "toolTip": "",
               "bgColor": 0,
-              "width": 81,
+              "width": 90,
               "visible": true,
               "cellType": 7,
               "cellDetails": {
                "cellType": 7,
                "ymdKubun": 2,
                "displayFormat": 0,
-               "onChange": ""
+               "onChange": "",
+               "isSetValueToToolTip": false,
+               "readOnly": true
               },
               "align": 1,
               "resize": true,
@@ -1831,13 +1971,16 @@
              }
             ]
            },
-           "height": "210",
            "onSort": "",
            "onSelect": "",
            "onSelectByDblClick": "",
+           "onSelectBySelectButton": "",
+           "onSelectByModifyButton": "",
+           "onSelectByDeleteButton": "",
            "onOnlyRow": "",
            "onNoRow": "",
            "onMultiRows": "",
+           "dataSource": [],
            "sortOrder": "hihokenshaNo",
            "isAscending": true,
            "filterList": [],
@@ -1845,7 +1988,7 @@
           }
          ],
          "controlType": "Panel",
-         "width": "1060",
+         "width": "1100",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -1856,9 +1999,11 @@
          "float": 0,
          "toolTip": "",
          "authorityMode": 0,
-         "marginLeft": "XS",
+         "marginLeft": "0",
          "marginRight": "XS",
          "selectControlID": "ShujiiIkenshoIraishoTargetPersons",
+         "helpMessageID": "",
+         "jpControlName": "",
          "onLoad": "",
          "title": "対象者",
          "isOpen": true,
@@ -1882,7 +2027,9 @@
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 0,
-         "isGroupBox": false
+         "isGroupBox": false,
+         "readOnly": false,
+         "height": "Auto"
         },
         {
          "fieldName": "ShujiiIkenshoIraishoRelatedDates",
@@ -1905,26 +2052,28 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "txtShoriDateOfIkensho_core",
-           "onChange": "",
-           "required": false,
-           "labelLText": "発行処理日",
-           "labelLWidth": "S",
-           "labelLAlign": 2,
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": false,
+           "required": false,
+           "text": "",
            "isPrivateInfo": false,
+           "placeHolder": "",
            "isPassword": false,
            "onFocus": "",
            "onBlur": "",
+           "onChange": "",
            "onKeyPress": "",
-           "permitCharactor": "./_-",
+           "labelLText": "発行処理日",
+           "labelRText": "",
+           "labelLWidth": "S",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
            "ymdKubun": 2,
            "displayFormat": 0,
-           "labelRText": "",
-           "labelRWidth": "S",
-           "labelRAlign": 0,
-           "text": "",
-           "placeHolder": "",
-           "value": ""
+           "value": "",
+           "permitCharactor": "./_-"
           },
           {
            "fieldName": "txtHakkoDateOfIkensho",
@@ -1944,26 +2093,28 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "txtHakkoDateOfIkensho_core",
-           "onChange": "",
-           "required": false,
-           "labelLText": "発行日",
-           "labelLWidth": "S",
-           "labelLAlign": 2,
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": false,
+           "required": false,
+           "text": "",
            "isPrivateInfo": false,
+           "placeHolder": "",
            "isPassword": false,
            "onFocus": "",
            "onBlur": "",
+           "onChange": "",
            "onKeyPress": "",
-           "permitCharactor": "./_-",
+           "labelLText": "発行日",
+           "labelRText": "",
+           "labelLWidth": "S",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
            "ymdKubun": 2,
            "displayFormat": 0,
-           "labelRText": "",
-           "labelRWidth": "S",
-           "labelRAlign": 0,
-           "text": "",
-           "placeHolder": "",
-           "value": ""
+           "value": "",
+           "permitCharactor": "./_-"
           },
           {
            "fieldName": "txtKigenDateOfIkensho",
@@ -1983,30 +2134,32 @@
            "marginLeft": "XS",
            "marginRight": "XS",
            "selectControlID": "txtKigenDateOfIkensho_core",
-           "onChange": "",
-           "required": false,
-           "labelLText": "期限日",
-           "labelLWidth": "S",
-           "labelLAlign": 2,
+           "helpMessageID": "",
+           "jpControlName": "",
            "readOnly": false,
+           "required": false,
+           "text": "",
            "isPrivateInfo": false,
+           "placeHolder": "",
            "isPassword": false,
            "onFocus": "",
            "onBlur": "",
+           "onChange": "",
            "onKeyPress": "",
-           "permitCharactor": "./_-",
+           "labelLText": "期限日",
+           "labelRText": "",
+           "labelLWidth": "S",
+           "labelRWidth": "S",
+           "labelLAlign": 2,
+           "labelRAlign": 0,
            "ymdKubun": 2,
            "displayFormat": 0,
-           "labelRText": "",
-           "labelRWidth": "S",
-           "labelRAlign": 0,
-           "text": "",
-           "placeHolder": "",
-           "value": ""
+           "value": "",
+           "permitCharactor": "./_-"
           }
          ],
          "controlType": "Panel",
-         "width": "1060",
+         "width": "1100",
          "visible": true,
          "displayNone": false,
          "disabled": false,
@@ -2017,9 +2170,11 @@
          "float": 0,
          "toolTip": "",
          "authorityMode": 0,
-         "marginLeft": "XS",
+         "marginLeft": "0",
          "marginRight": "XS",
          "selectControlID": "ShujiiIkenshoIraishoRelatedDates",
+         "helpMessageID": "",
+         "jpControlName": "",
          "onLoad": "",
          "title": "帳票出力内容",
          "isOpen": true,
@@ -2043,7 +2198,9 @@
          "backgroundColor": 0,
          "widthAuto": false,
          "panelDisplay": 0,
-         "isGroupBox": false
+         "isGroupBox": false,
+         "readOnly": false,
+         "height": "Auto"
         },
         {
          "fieldName": "btnToPublishOfIkensho",
@@ -2063,8 +2220,10 @@
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "btnToPublishOfIkensho",
-         "onClick": "",
+         "helpMessageID": "",
+         "jpControlName": "",
          "text": "帳票を発行する",
+         "onClick": "",
          "appearance": 0,
          "imageFileUrl": "",
          "imageWidth": "",
@@ -2087,12 +2246,14 @@
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "IkenshoIraiIkkatuHakkoTab",
+       "helpMessageID": "",
+       "jpControlName": "",
        "title": "主治医意見書作成依頼書",
        "onActive": ""
       }
      ],
      "controlType": "TabContainer",
-     "width": "1070",
+     "width": "1100",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -2103,9 +2264,11 @@
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "XS",
+     "marginLeft": "0",
      "marginRight": "XS",
      "selectControlID": "tabIraishoIkkatsuHakko",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onChange": "clearAll",
      "selectedItem": null,
      "tabpanelPosition": [
@@ -2113,12 +2276,12 @@
       "IkenshoIraiIkkatuHakkoTab"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "IkenshoIraiIkkatuHakkoTab",
+     "selectedItemFieldName": "NinteichosaIraiIkkatuHakkoTab",
      "initialTab": 0
     }
    ],
    "controlType": "Panel",
-   "width": "1092",
+   "width": "G12",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -2129,11 +2292,13 @@
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "XS",
+   "marginLeft": "0",
    "marginRight": "XS",
    "selectControlID": "IraishoIkkatsuHakko",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
-   "title": "依頼書一括発行",
+   "title": "",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
@@ -2180,7 +2345,9 @@
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
-   "isGroupBox": false
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto"
   }
  ],
  "controlType": null,
@@ -2198,6 +2365,8 @@
  "marginLeft": "XS",
  "marginRight": "XS",
  "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
  "onLoad": "",
  "title": "依頼書一括発行",
  "jsPathCollection": [],
@@ -2283,5 +2452,7 @@
   ]
  ],
  "panelMargin": 1,
- "controlMargin": 1
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "commonButtonAreaData": []
 }

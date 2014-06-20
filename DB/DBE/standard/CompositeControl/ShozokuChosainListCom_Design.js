@@ -180,7 +180,7 @@ var DBE;
                         "rowHeight": 25,
                         "isMultiSelectable": false,
                         "isShowHeader": true,
-                        "isShowFooter": true,
+                        "isShowFooter": false,
                         "isShowFilter": false,
                         "isShowFilterButton": false,
                         "isShowRowState": false,
@@ -192,7 +192,7 @@ var DBE;
                         "header": {
                             "combineColumns": [],
                             "frozenColumn": "",
-                            "headerHeight": 1
+                            "headerHeight": 0
                         },
                         "columns": [
                             {
@@ -251,7 +251,7 @@ var DBE;
                                 "sortKey": "chosainName"
                             },
                             {
-                                "columnName": "割付済<br>人数",
+                                "columnName": "割付数",
                                 "dataName": "waritsukeNum",
                                 "toolTip": "",
                                 "bgColor": 0,
@@ -303,7 +303,7 @@ var DBE;
                             }
                         ]
                     },
-                    "height": "181",
+                    "height": "150",
                     "onSort": "",
                     "onSelect": "",
                     "onSelectByDblClick": "",
@@ -314,11 +314,10 @@ var DBE;
                     "onNoRow": "",
                     "onMultiRows": "",
                     "dataSource": [],
-                    "sortOrder": "調査員コード",
+                    "sortOrder": "chosainName",
                     "isAscending": true,
                     "filterList": [],
-                    "activeRowId": -1,
-                    "readOnly": false
+                    "activeRowId": -1
                 }
             ],
             "controlType": "CompositeControl",
