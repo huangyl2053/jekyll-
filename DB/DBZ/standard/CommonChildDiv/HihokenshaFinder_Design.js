@@ -13,13 +13,64 @@ var DBZ;
         }
         Object.defineProperty(HihokenshaFinder_Design.prototype, "onClick_BtnToSearch", {
             get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"] + "_" + this.layout.items[0].items[4].items[1]["fieldName"])["onClick"];
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"] + "_" + this.layout.items[0].items[5].items[1]["fieldName"])["onClick"];
             },
             set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"] + "_" + this.layout.items[0].items[4].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"] + "_" + this.layout.items[0].items[4].items[1]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"] + "_" + this.layout.items[0].items[4].items[1]["fieldName"])["onClick"] = value;
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"] + "_" + this.layout.items[0].items[5].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"] + "_" + this.layout.items[0].items[5].items[1]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"] + "_" + this.layout.items[0].items[5].items[1]["fieldName"])["onClick"] = value;
                 } else {
-                    this.layout.items[0].items[4].items[1]["onClick"] = value;
+                    this.layout.items[0].items[5].items[1]["onClick"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(HihokenshaFinder_Design.prototype, "displayNone_txtTsuchishoNo", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[1].items[1]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(HihokenshaFinder_Design.prototype, "displayNone_ddlFukaNendo", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"] + "_" + this.layout.items[0].items[3].items[0]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"] + "_" + this.layout.items[0].items[3].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"] + "_" + this.layout.items[0].items[3].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"] + "_" + this.layout.items[0].items[3].items[0]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[3].items[0]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(HihokenshaFinder_Design.prototype, "displayNone_SearchCriteriaDetail", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[4]["displayNone"] = value;
                     this.raisePropertyChanged(this.layout);
                 }
             },
@@ -31,11 +82,17 @@ var DBZ;
         HihokenshaFinder_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
             Uz.JSControlUtil.registProperty("onClick_BtnToSearch");
+            Uz.JSControlUtil.registProperty("displayNone_txtTsuchishoNo");
+            Uz.JSControlUtil.registProperty("displayNone_ddlFukaNendo");
+            Uz.JSControlUtil.registProperty("displayNone_SearchCriteriaDetail");
         };
 
         HihokenshaFinder_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
-            editablePropertyInfo["onClick_BtnToSearch"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"] + "_" + this.layout.items[0].items[4].items[1]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["onClick_BtnToSearch"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"] + "_" + this.layout.items[0].items[5].items[1]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["displayNone_txtTsuchishoNo"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[1]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["displayNone_ddlFukaNendo"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"] + "_" + this.layout.items[0].items[3].items[0]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["displayNone_SearchCriteriaDetail"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).getEditablePropertyInfo()["displayNone"];
 
             return editablePropertyInfo;
         };
@@ -829,6 +886,147 @@ var DBZ;
                             "height": "Auto"
                         },
                         {
+                            "fieldName": "SearchCriteriaOfOther",
+                            "items": [
+                                {
+                                    "fieldName": "ddlFukaNendo",
+                                    "items": [],
+                                    "controlType": "DropDownList",
+                                    "width": "60",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "ddlFukaNendo_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "onChange": "",
+                                    "selectedItem": "key0",
+                                    "dataSource": [
+                                        {
+                                            "key": "key0",
+                                            "value": "平26"
+                                        },
+                                        {
+                                            "key": "key1",
+                                            "value": "平26"
+                                        }
+                                    ],
+                                    "labelLText": "賦課年度　",
+                                    "labelRText": "",
+                                    "labelLWidth": "80",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 1,
+                                    "labelRAlign": 0,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "disabledItem": []
+                                },
+                                {
+                                    "fieldName": "txtMaxNumber",
+                                    "items": [],
+                                    "controlType": "TextBoxNum",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 2,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtMaxNumber_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "onChange": "",
+                                    "required": false,
+                                    "labelLText": "最大表示件数",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 1,
+                                    "labelRAlign": 0,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 2,
+                                    "placeHolder": "",
+                                    "textKind": 2,
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "isComboBox": false,
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "suggest": [],
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "permitCharactor": "+-,.\\",
+                                    "maxValue": 1.7976931348623157e+308,
+                                    "minValue": 0,
+                                    "isCurrency": false,
+                                    "isComma": false,
+                                    "decimalPointLength": 0
+                                }
+                            ],
+                            "controlType": "Panel",
+                            "width": "1075",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "SearchCriteriaOfOther",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onLoad": "",
+                            "title": "",
+                            "marginTop": "Default",
+                            "marginBottom": "Default",
+                            "isOpen": true,
+                            "canOpenAndClose": false,
+                            "postParameterPanelNames": [
+                                {
+                                    "postParameterPanelNames": "SearchCriteriaOfOther"
+                                }
+                            ],
+                            "requestSettings": [],
+                            "hiddenInput": [],
+                            "onOpen": "",
+                            "onClose": "",
+                            "session": {},
+                            "eraseBorderTop": false,
+                            "eraseBorderBottom": false,
+                            "eraseBorderRight": false,
+                            "eraseBorderLeft": false,
+                            "backgroundColor": 0,
+                            "widthAuto": false,
+                            "panelDisplay": 1,
+                            "isGroupBox": false,
+                            "readOnly": false,
+                            "height": "Auto"
+                        },
+                        {
                             "fieldName": "SearchCriteriaDetail",
                             "items": [
                                 {
@@ -1134,6 +1332,21 @@ var DBZ;
                     "publicChildFieldName": "btnToSearch",
                     "publicChildProperty": "onClick",
                     "newPropertyName": "onClick_BtnToSearch"
+                },
+                {
+                    "publicChildFieldName": "txtTuchishoNo",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "displayNone_txtTsuchishoNo"
+                },
+                {
+                    "publicChildFieldName": "ddlFukaNendo",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "displayNone_ddlFukaNendo"
+                },
+                {
+                    "publicChildFieldName": "SearchCriteriaDetail",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "displayNone_SearchCriteriaDetail"
                 }
             ],
             "dataPassingForDialog": [],

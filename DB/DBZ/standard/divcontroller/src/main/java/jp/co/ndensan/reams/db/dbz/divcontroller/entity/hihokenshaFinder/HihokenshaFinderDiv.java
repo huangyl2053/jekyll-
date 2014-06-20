@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.SearchCr
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.SearchCriteriaOfHihokenshaDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.SearchCriteriaOfHokenshaDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.SearchCriteriaOfKojinDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.SearchCriteriaOfOtherDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -32,6 +33,8 @@ public class HihokenshaFinderDiv extends Panel {
     private SearchCriteriaOfHihokenshaDiv SearchCriteriaOfHihokensha;
     @JsonProperty("SearchCriteriaOfKojin")
     private SearchCriteriaOfKojinDiv SearchCriteriaOfKojin;
+    @JsonProperty("SearchCriteriaOfOther")
+    private SearchCriteriaOfOtherDiv SearchCriteriaOfOther;
     @JsonProperty("SearchCriteriaDetail")
     private SearchCriteriaDetailDiv SearchCriteriaDetail;
     @JsonProperty("ButtonsForHihokenshaFinder")
@@ -73,6 +76,16 @@ public class HihokenshaFinderDiv extends Panel {
     @JsonProperty("SearchCriteriaOfKojin")
     public void setSearchCriteriaOfKojin(SearchCriteriaOfKojinDiv SearchCriteriaOfKojin) {
         this.SearchCriteriaOfKojin=SearchCriteriaOfKojin;
+    }
+
+    @JsonProperty("SearchCriteriaOfOther")
+    public SearchCriteriaOfOtherDiv getSearchCriteriaOfOther() {
+        return SearchCriteriaOfOther;
+    }
+
+    @JsonProperty("SearchCriteriaOfOther")
+    public void setSearchCriteriaOfOther(SearchCriteriaOfOtherDiv SearchCriteriaOfOther) {
+        this.SearchCriteriaOfOther=SearchCriteriaOfOther;
     }
 
     @JsonProperty("SearchCriteriaDetail")
