@@ -229,7 +229,7 @@ public class JukyushaIdoRenrakuhyoSearchPanel {
         rowJukyushaIdoRenrakuhyoSearchResultList.setTxtDdlIdoJiyu(ddlIdoJiyu);
         rowJukyushaIdoRenrakuhyoSearchResultList.setTxtResultHihoNo(resultHihoNo);
         rowJukyushaIdoRenrakuhyoSearchResultList.setTxtResultHihoName(resultHihoName);
-        rowJukyushaIdoRenrakuhyoSearchResultList.setTxtResultSendYM(setWareki(resultSendYM));
+        rowJukyushaIdoRenrakuhyoSearchResultList.setTxtResultSendYM(setWareki(resultSendYM).substring(0, 6));
         rowJukyushaIdoRenrakuhyoSearchResultList.setTxtDeleteFlg(deleteFlg);
 
         return rowJukyushaIdoRenrakuhyoSearchResultList;
