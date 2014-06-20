@@ -153,7 +153,7 @@ var DBE;
                     "minLength": 0,
                     "textAlign": 2,
                     "readOnly": false,
-                    "placeHolder": "123",
+                    "placeHolder": "",
                     "textKind": 2,
                     "isPassword": false,
                     "isComboBox": false,

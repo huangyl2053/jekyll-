@@ -21,10 +21,10 @@ public class ButtonsForNinteichosaResultEntryDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnToRegisterResult")
-    private Button btnToRegisterResult;
     @JsonProperty("btnToReturn")
     private Button btnToReturn;
+    @JsonProperty("btnToRegisterResult")
+    private ButtonDialog btnToRegisterResult;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,16 +32,6 @@ public class ButtonsForNinteichosaResultEntryDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("btnToRegisterResult")
-    public Button getBtnToRegisterResult() {
-        return btnToRegisterResult;
-    }
-
-    @JsonProperty("btnToRegisterResult")
-    public void setBtnToRegisterResult(Button btnToRegisterResult) {
-        this.btnToRegisterResult=btnToRegisterResult;
-    }
-
     @JsonProperty("btnToReturn")
     public Button getBtnToReturn() {
         return btnToReturn;
@@ -50,6 +40,16 @@ public class ButtonsForNinteichosaResultEntryDiv extends Panel {
     @JsonProperty("btnToReturn")
     public void setBtnToReturn(Button btnToReturn) {
         this.btnToReturn=btnToReturn;
+    }
+
+    @JsonProperty("btnToRegisterResult")
+    public ButtonDialog getBtnToRegisterResult() {
+        return btnToRegisterResult;
+    }
+
+    @JsonProperty("btnToRegisterResult")
+    public void setBtnToRegisterResult(ButtonDialog btnToRegisterResult) {
+        this.btnToRegisterResult=btnToRegisterResult;
     }
 
 }
