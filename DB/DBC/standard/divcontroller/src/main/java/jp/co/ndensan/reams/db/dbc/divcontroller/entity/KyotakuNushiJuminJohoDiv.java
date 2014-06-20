@@ -5,9 +5,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoAtenaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * KyotakuNushiJuminJoho のクラスファイル 
@@ -21,32 +21,10 @@ public class KyotakuNushiJuminJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblNushiName")
-    private Label lblNushiName;
-    @JsonProperty("txtNushiShikibetsuCode")
-    private TextBoxCode txtNushiShikibetsuCode;
-    @JsonProperty("txtNushiName")
-    private TextBox txtNushiName;
-    @JsonProperty("lblNushiSetaiCode")
-    private Label lblNushiSetaiCode;
-    @JsonProperty("txtNushiSetaiCode")
-    private TextBoxCode txtNushiSetaiCode;
-    @JsonProperty("lblNushiGyoseiku")
-    private Label lblNushiGyoseiku;
-    @JsonProperty("txtNushiGyoseiku")
-    private TextBox txtNushiGyoseiku;
-    @JsonProperty("lblNushiJusho")
-    private Label lblNushiJusho;
-    @JsonProperty("txtNushiYubinNo")
-    private TextBoxYubinNo txtNushiYubinNo;
-    @JsonProperty("txtNushiJusho")
-    private TextBox txtNushiJusho;
-    @JsonProperty("imgNushiTaino")
-    private StaticImage imgNushiTaino;
-    @JsonProperty("imgNushiSofusaki")
-    private StaticImage imgNushiSofusaki;
-    @JsonProperty("imgNushiKoza")
-    private StaticImage imgNushiKoza;
+    @JsonProperty("CommonKyotakuJuminChildDiv1")
+    private KaigoAtenaInfoDiv CommonKyotakuJuminChildDiv1;
+    @JsonProperty("CommonKyotakuJuminChildDiv2")
+    private KaigoShikakuKihonDiv CommonKyotakuJuminChildDiv2;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -54,134 +32,24 @@ public class KyotakuNushiJuminJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblNushiName")
-    public Label getLblNushiName() {
-        return lblNushiName;
+    @JsonProperty("CommonKyotakuJuminChildDiv1")
+    public KaigoAtenaInfoDiv getCommonKyotakuJuminChildDiv1() {
+        return CommonKyotakuJuminChildDiv1;
     }
 
-    @JsonProperty("lblNushiName")
-    public void setLblNushiName(Label lblNushiName) {
-        this.lblNushiName=lblNushiName;
+    @JsonProperty("CommonKyotakuJuminChildDiv1")
+    public void setCommonKyotakuJuminChildDiv1(KaigoAtenaInfoDiv CommonKyotakuJuminChildDiv1) {
+        this.CommonKyotakuJuminChildDiv1=CommonKyotakuJuminChildDiv1;
     }
 
-    @JsonProperty("txtNushiShikibetsuCode")
-    public TextBoxCode getTxtNushiShikibetsuCode() {
-        return txtNushiShikibetsuCode;
+    @JsonProperty("CommonKyotakuJuminChildDiv2")
+    public KaigoShikakuKihonDiv getCommonKyotakuJuminChildDiv2() {
+        return CommonKyotakuJuminChildDiv2;
     }
 
-    @JsonProperty("txtNushiShikibetsuCode")
-    public void setTxtNushiShikibetsuCode(TextBoxCode txtNushiShikibetsuCode) {
-        this.txtNushiShikibetsuCode=txtNushiShikibetsuCode;
-    }
-
-    @JsonProperty("txtNushiName")
-    public TextBox getTxtNushiName() {
-        return txtNushiName;
-    }
-
-    @JsonProperty("txtNushiName")
-    public void setTxtNushiName(TextBox txtNushiName) {
-        this.txtNushiName=txtNushiName;
-    }
-
-    @JsonProperty("lblNushiSetaiCode")
-    public Label getLblNushiSetaiCode() {
-        return lblNushiSetaiCode;
-    }
-
-    @JsonProperty("lblNushiSetaiCode")
-    public void setLblNushiSetaiCode(Label lblNushiSetaiCode) {
-        this.lblNushiSetaiCode=lblNushiSetaiCode;
-    }
-
-    @JsonProperty("txtNushiSetaiCode")
-    public TextBoxCode getTxtNushiSetaiCode() {
-        return txtNushiSetaiCode;
-    }
-
-    @JsonProperty("txtNushiSetaiCode")
-    public void setTxtNushiSetaiCode(TextBoxCode txtNushiSetaiCode) {
-        this.txtNushiSetaiCode=txtNushiSetaiCode;
-    }
-
-    @JsonProperty("lblNushiGyoseiku")
-    public Label getLblNushiGyoseiku() {
-        return lblNushiGyoseiku;
-    }
-
-    @JsonProperty("lblNushiGyoseiku")
-    public void setLblNushiGyoseiku(Label lblNushiGyoseiku) {
-        this.lblNushiGyoseiku=lblNushiGyoseiku;
-    }
-
-    @JsonProperty("txtNushiGyoseiku")
-    public TextBox getTxtNushiGyoseiku() {
-        return txtNushiGyoseiku;
-    }
-
-    @JsonProperty("txtNushiGyoseiku")
-    public void setTxtNushiGyoseiku(TextBox txtNushiGyoseiku) {
-        this.txtNushiGyoseiku=txtNushiGyoseiku;
-    }
-
-    @JsonProperty("lblNushiJusho")
-    public Label getLblNushiJusho() {
-        return lblNushiJusho;
-    }
-
-    @JsonProperty("lblNushiJusho")
-    public void setLblNushiJusho(Label lblNushiJusho) {
-        this.lblNushiJusho=lblNushiJusho;
-    }
-
-    @JsonProperty("txtNushiYubinNo")
-    public TextBoxYubinNo getTxtNushiYubinNo() {
-        return txtNushiYubinNo;
-    }
-
-    @JsonProperty("txtNushiYubinNo")
-    public void setTxtNushiYubinNo(TextBoxYubinNo txtNushiYubinNo) {
-        this.txtNushiYubinNo=txtNushiYubinNo;
-    }
-
-    @JsonProperty("txtNushiJusho")
-    public TextBox getTxtNushiJusho() {
-        return txtNushiJusho;
-    }
-
-    @JsonProperty("txtNushiJusho")
-    public void setTxtNushiJusho(TextBox txtNushiJusho) {
-        this.txtNushiJusho=txtNushiJusho;
-    }
-
-    @JsonProperty("imgNushiTaino")
-    public StaticImage getImgNushiTaino() {
-        return imgNushiTaino;
-    }
-
-    @JsonProperty("imgNushiTaino")
-    public void setImgNushiTaino(StaticImage imgNushiTaino) {
-        this.imgNushiTaino=imgNushiTaino;
-    }
-
-    @JsonProperty("imgNushiSofusaki")
-    public StaticImage getImgNushiSofusaki() {
-        return imgNushiSofusaki;
-    }
-
-    @JsonProperty("imgNushiSofusaki")
-    public void setImgNushiSofusaki(StaticImage imgNushiSofusaki) {
-        this.imgNushiSofusaki=imgNushiSofusaki;
-    }
-
-    @JsonProperty("imgNushiKoza")
-    public StaticImage getImgNushiKoza() {
-        return imgNushiKoza;
-    }
-
-    @JsonProperty("imgNushiKoza")
-    public void setImgNushiKoza(StaticImage imgNushiKoza) {
-        this.imgNushiKoza=imgNushiKoza;
+    @JsonProperty("CommonKyotakuJuminChildDiv2")
+    public void setCommonKyotakuJuminChildDiv2(KaigoShikakuKihonDiv CommonKyotakuJuminChildDiv2) {
+        this.CommonKyotakuJuminChildDiv2=CommonKyotakuJuminChildDiv2;
     }
 
 }

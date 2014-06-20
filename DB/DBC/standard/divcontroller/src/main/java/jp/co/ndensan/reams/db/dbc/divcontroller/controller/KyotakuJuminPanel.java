@@ -35,76 +35,69 @@ public class KyotakuJuminPanel {
 
         //初期値を設定したいものに値を入れる。値をセットしなければ空欄
         List<HashMap> ymlData = ymlData("dbc0020000/KyotakuServicePlanIchiranCommonChild.yml");
-        
+
         HashMap hashMap = ymlData.get(0);
         ControlGenerator ymlDt = new ControlGenerator(hashMap);
 
         //高額介護サービス費情報  (被保険者番号～所得段階）
-        
         //氏名漢字～個人番号
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtAtenaMeisho().setValue(
-        ymlDt.getAsRString("atenaMeisho"));
+                ymlDt.getAsRString("atenaMeisho"));
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtAtenaKanaMeisho().setValue(
-        ymlDt.getAsRString("atenaKanMeisho"));
+                ymlDt.getAsRString("atenaKanMeisho"));
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtSeinengappiYMD().setValue(
-        ymlDt.getAsRDate("seinengappiYmd"));
-        
+                ymlDt.getAsRDate("seinengappiYmd"));
+
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtNenrei().setValue(
-        ymlDt.getAsRString("nenrei"));         
+                ymlDt.getAsRString("nenrei"));
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtSeibetsu().setValue(
-        ymlDt.getAsRString("seibetsu"));         
-        
+                ymlDt.getAsRString("seibetsu"));
+
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtNihonjinGaikokujin().setValue(
-        ymlDt.getAsRString("nihonjinGaikokujin"));                
+                ymlDt.getAsRString("nihonjinGaikokujin"));
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtJusho().setValue(
-        ymlDt.getAsRString("jusho"));        
+                ymlDt.getAsRString("jusho"));
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtGyoseiku().setValue(
-        ymlDt.getAsRString("gyoseiku"));        
-        
+                ymlDt.getAsRString("gyoseiku"));
+
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtShikibetsuCode().setValue(
-        ymlDt.getAsRString("shikibetsuCode"));         
+                ymlDt.getAsRString("shikibetsuCode"));
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtYubinNo().setValue(
-        ymlDt.getAsYubinNo("yubinNoe"));
+                ymlDt.getAsYubinNo("yubinNoe"));
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtJuminJotai().setValue(
-        ymlDt.getAsRString("juminJotai"));
-        
+                ymlDt.getAsRString("juminJotai"));
+
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtSetaiCode().setValue(
-        ymlDt.getAsRString("setaiCode"));        
+                ymlDt.getAsRString("setaiCode"));
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtKojinHojinCode().setValue(
-        ymlDt.getAsRString("kojinHojinCode"));                
-        
-        
+                ymlDt.getAsRString("kojinHojinCode"));
+
         //資格取得 ～　認定期間
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().getTxtHihokenshaNo().setValue(
-        ymlDt.getAsRString("hihokenshaNo"));          
+                ymlDt.getAsRString("hihokenshaNo"));
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().getTxtShutokuYmd().setValue(
-        ymlDt.getAsRDate("shotokuYmd"));               
+                ymlDt.getAsRDate("shotokuYmd"));
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().getTxtShutokuJiyu().setValue(
-        ymlDt.getAsRString("shotokuJiyu"));    
+                ymlDt.getAsRString("shotokuJiyu"));
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().getTxtJutokuTekiyo().setValue(
-        ymlDt.getAsRDate("jutokuTekiyo"));          
-                      
+                ymlDt.getAsRDate("jutokuTekiyo"));
+
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().getTxtYokaigoJotaiKubun().setValue(
-        ymlDt.getAsRString("yokaigojotaiKubun"));
+                ymlDt.getAsRString("yokaigojotaiKubun"));
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().getTxtShikakuJotai().setValue(
-        ymlDt.getAsRString("shikakuJotai"));
+                ymlDt.getAsRString("shikakuJotai"));
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().getTxtJutokuKaijo().setValue(
-        ymlDt.getAsRDate("jutokuKaijo"));          
-       
-        
+                ymlDt.getAsRDate("jutokuKaijo"));
+
        // panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().getTxtNinteiKaishiYmd().
-                
-                
-      //  ymlDt.getAsRDate("niteikikanfrom"));           
-       // panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().gett
-       // ymlDt.getAsRDate("niteikikanto"));
-        
+      //  ymlDt.getAsRDate("niteikikanfrom"));
+        // panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().gett
+        // ymlDt.getAsRDate("niteikikanto"));
         response.data = panel;
         return response;
     }
-    
-    
-        private List<HashMap> ymlData(String ymlName) {
+
+    private List<HashMap> ymlData(String ymlName) {
         return YamlLoader.DBC.loadAsList(new RString(ymlName));
     }
 

@@ -1,9 +1,9 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoInfo;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon May 19 16:42:38 JST 2014 
+ * Thu Jun 19 20:49:42 JST 2014 
  */
 
 
@@ -43,6 +43,25 @@ public class dgServiceRiyohyoBeppyoList_Row extends DataRow {
 
     public dgServiceRiyohyoBeppyoList_Row() {
         super();
+        this.btnSelect = new Button();
+        this.btnDelete = new Button();
+        this.txtJigyosha = RString.EMPTY;
+        this.txtService = RString.EMPTY;
+        this.txtTani = RString.EMPTY;
+        this.txtWaribikigoRitsu = RString.EMPTY;
+        this.txtWaribikigoTani = RString.EMPTY;
+        this.txtKaisu = RString.EMPTY;
+        this.txtServiceTani = RString.EMPTY;
+        this.txtShuruiGendoChokaTani = RString.EMPTY;
+        this.txtShuruiGendonaiTani = RString.EMPTY;
+        this.txtKubunGendoChokaTani = RString.EMPTY;
+        this.txtKubunGendonaiTani = RString.EMPTY;
+        this.txtTanisuTanka = RString.EMPTY;
+        this.txtHiyoSogaku = RString.EMPTY;
+        this.txtKyufuritsu = RString.EMPTY;
+        this.txtHokenFutangaku = RString.EMPTY;
+        this.txtRiyoshaFutangakuHoken = RString.EMPTY;
+        this.txtRiyoshaFutangakuZengaku = RString.EMPTY;
     }
 
     public dgServiceRiyohyoBeppyoList_Row(Button btnSelect, Button btnDelete, RString txtJigyosha, RString txtService, RString txtTani, RString txtWaribikigoRitsu, RString txtWaribikigoTani, RString txtKaisu, RString txtServiceTani, RString txtShuruiGendoChokaTani, RString txtShuruiGendonaiTani, RString txtKubunGendoChokaTani, RString txtKubunGendonaiTani, RString txtTanisuTanka, RString txtHiyoSogaku, RString txtKyufuritsu, RString txtHokenFutangaku, RString txtRiyoshaFutangakuHoken, RString txtRiyoshaFutangakuZengaku) {

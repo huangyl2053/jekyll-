@@ -1,9 +1,9 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoInfo;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon May 19 16:42:38 JST 2014 
+ * Thu Jun 19 20:49:42 JST 2014 
  */
 
 
@@ -66,6 +66,46 @@ public class dgServiceRiyohyoList_Row extends DataRow {
 
     public dgServiceRiyohyoList_Row() {
         super();
+        this.btnDelete = new Button();
+        this.txtKaishi = new TextBox();
+        this.txtShuryo = new TextBox();
+        this.btnService = new Button();
+        this.txtService = RString.EMPTY;
+        this.btnJigyosha = new Button();
+        this.txtJigyosha = RString.EMPTY;
+        this.txtYoJitsu = RString.EMPTY;
+        this.txtDay1 = new TextBoxNum();
+        this.txtDay2 = new TextBoxNum();
+        this.txtDay3 = new TextBoxNum();
+        this.txtDay4 = new TextBoxNum();
+        this.txtDay5 = new TextBoxNum();
+        this.txtDay6 = new TextBoxNum();
+        this.txtDay7 = new TextBoxNum();
+        this.txtDay8 = new TextBoxNum();
+        this.txtDay9 = new TextBoxNum();
+        this.txtDay10 = new TextBoxNum();
+        this.txtDay11 = new TextBoxNum();
+        this.txtDay12 = new TextBoxNum();
+        this.txtDay13 = new TextBoxNum();
+        this.txtDay14 = new TextBoxNum();
+        this.txtDay15 = new TextBoxNum();
+        this.txtDay16 = new TextBoxNum();
+        this.txtDay17 = new TextBoxNum();
+        this.txtDay18 = new TextBoxNum();
+        this.txtDay19 = new TextBoxNum();
+        this.txtDay20 = new TextBoxNum();
+        this.txtDay21 = new TextBoxNum();
+        this.txtDay22 = new TextBoxNum();
+        this.txtDay23 = new TextBoxNum();
+        this.txtDay24 = new TextBoxNum();
+        this.txtDay25 = new TextBoxNum();
+        this.txtDay26 = new TextBoxNum();
+        this.txtDay27 = new TextBoxNum();
+        this.txtDay28 = new TextBoxNum();
+        this.txtDay29 = new TextBoxNum();
+        this.txtDay30 = new TextBoxNum();
+        this.txtDay31 = new TextBoxNum();
+        this.txtGokei = RString.EMPTY;
     }
 
     public dgServiceRiyohyoList_Row(Button btnDelete, TextBox txtKaishi, TextBox txtShuryo, Button btnService, RString txtService, Button btnJigyosha, RString txtJigyosha, RString txtYoJitsu, TextBoxNum txtDay1, TextBoxNum txtDay2, TextBoxNum txtDay3, TextBoxNum txtDay4, TextBoxNum txtDay5, TextBoxNum txtDay6, TextBoxNum txtDay7, TextBoxNum txtDay8, TextBoxNum txtDay9, TextBoxNum txtDay10, TextBoxNum txtDay11, TextBoxNum txtDay12, TextBoxNum txtDay13, TextBoxNum txtDay14, TextBoxNum txtDay15, TextBoxNum txtDay16, TextBoxNum txtDay17, TextBoxNum txtDay18, TextBoxNum txtDay19, TextBoxNum txtDay20, TextBoxNum txtDay21, TextBoxNum txtDay22, TextBoxNum txtDay23, TextBoxNum txtDay24, TextBoxNum txtDay25, TextBoxNum txtDay26, TextBoxNum txtDay27, TextBoxNum txtDay28, TextBoxNum txtDay29, TextBoxNum txtDay30, TextBoxNum txtDay31, RString txtGokei) {
