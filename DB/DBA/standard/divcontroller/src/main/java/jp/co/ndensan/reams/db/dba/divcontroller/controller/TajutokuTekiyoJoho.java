@@ -46,7 +46,6 @@ public class TajutokuTekiyoJoho {
 
         RString hihokenshaNo = searchDiv.getSearchResult().getDgSearchResult().getClickedItem().getHihokenshaNo();
         setTajutokuJoho(tajutokuDiv.getDgJushochiTokureiRireki(), hihokenshaNo);
-        TajutokuJohoValueSetter.setDefaultValue(tajutokuDiv.getJutokuJohoInput());
         ShisetsuJoho.setJutokuMode(tajutokuDiv.getJutokuJohoInput().getShisetsuJohoInput().getShisetsuJoho());
         response.data = tajutokuDiv;
         return response;
