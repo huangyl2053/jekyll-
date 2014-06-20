@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4060001;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4060001.NinteiShinsakaiJohoDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4060001.tabWariateDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;

@@ -23,8 +23,6 @@ public class NinteiShinsakaiJohoDiv extends Panel {
      */
     @JsonProperty("txtKaisaikai")
     private TextBoxCode txtKaisaikai;
-    @JsonProperty("txtGogitaiNo")
-    private TextBoxCode txtGogitaiNo;
     @JsonProperty("txtGogitaiMeisho")
     private TextBox txtGogitaiMeisho;
     @JsonProperty("txtKaishiYoteiJikan")
@@ -58,16 +56,6 @@ public class NinteiShinsakaiJohoDiv extends Panel {
     @JsonProperty("txtKaisaikai")
     public void setTxtKaisaikai(TextBoxCode txtKaisaikai) {
         this.txtKaisaikai=txtKaisaikai;
-    }
-
-    @JsonProperty("txtGogitaiNo")
-    public TextBoxCode getTxtGogitaiNo() {
-        return txtGogitaiNo;
-    }
-
-    @JsonProperty("txtGogitaiNo")
-    public void setTxtGogitaiNo(TextBoxCode txtGogitaiNo) {
-        this.txtGogitaiNo=txtGogitaiNo;
     }
 
     @JsonProperty("txtGogitaiMeisho")

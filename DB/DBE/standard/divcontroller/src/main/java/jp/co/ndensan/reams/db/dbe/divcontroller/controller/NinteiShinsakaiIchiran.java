@@ -88,6 +88,7 @@ public class NinteiShinsakaiIchiran {
             RString strShuryoJikan = cg.getAsRString("shuryoJikan");
             RString strGogitaiNo = cg.getAsRString("gogitaiNo");
             RString strGogitaiMeisho = cg.getAsRString("gogitaiMeisho");
+            RString strKaisaiBasho = cg.getAsRString("KaisaiBasho");
             RString strYoteiTeiin = cg.getAsRString("yoteiTeiin");
             RString strWariateNinzu = cg.getAsRString("wariateNinzu");
 
@@ -98,6 +99,7 @@ public class NinteiShinsakaiIchiran {
                     strShuryoJikan,
                     strGogitaiNo,
                     strGogitaiMeisho,
+                    strKaisaiBasho,
                     strYoteiTeiin,
                     strWariateNinzu
             ));
@@ -115,11 +117,13 @@ public class NinteiShinsakaiIchiran {
             RString shuryoJikan,
             RString gogitaiNo,
             RString gogitaiMeisho,
+            RString kaisaiBasho,
             RString yoteiTeiin,
             RString wariateNinzu
     ) {
         dgNinteiShinsakaiIchiran_Row rowNinteiShinsakaiIchiranData = new dgNinteiShinsakaiIchiran_Row(
-                new Button(), kaisaiNo, yoteibi, kaishiJikan, shuryoJikan, gogitaiNo, gogitaiMeisho, yoteiTeiin, wariateNinzu);
+                new Button(), yoteibi, kaisaiNo, gogitaiNo, gogitaiMeisho, yoteiTeiin, wariateNinzu, kaisaiBasho,
+                kaishiJikan, shuryoJikan);
         return rowNinteiShinsakaiIchiranData;
     }
 

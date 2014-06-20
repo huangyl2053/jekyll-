@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5040002;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Jun 09 13:01:39 JST 2014 
+ * Fri Jun 20 15:45:19 JST 2014 
  */
 
 
@@ -39,6 +39,21 @@ public class dgSearchResult_Row extends DataRow {
 
     public dgSearchResult_Row() {
         super();
+        this.shikibetsuCode = RString.EMPTY;
+        this.hihokenshaNo = RString.EMPTY;
+        this.shimei = RString.EMPTY;
+        this.kanaShimei = RString.EMPTY;
+        this.shimeiAndKanashimei = RString.EMPTY;
+        this.gender = RString.EMPTY;
+        this.birthDay = new TextBoxFlexibleDate();
+        this.shinseiDate = new TextBoxFlexibleDate();
+        this.shinseiKubunShinsei = RString.EMPTY;
+        this.shinseiKubunHorei = RString.EMPTY;
+        this.ninteiDate = new TextBoxFlexibleDate();
+        this.yokaigodo = RString.EMPTY;
+        this.yukokikanTukisu = RString.EMPTY;
+        this.ninteiStartDate = new TextBoxFlexibleDate();
+        this.ninteiEndDate = new TextBoxFlexibleDate();
     }
 
     public dgSearchResult_Row(RString shikibetsuCode, RString hihokenshaNo, RString shimei, RString kanaShimei, RString shimeiAndKanashimei, RString gender, TextBoxFlexibleDate birthDay, TextBoxFlexibleDate shinseiDate, RString shinseiKubunShinsei, RString shinseiKubunHorei, TextBoxFlexibleDate ninteiDate, RString yokaigodo, RString yukokikanTukisu, TextBoxFlexibleDate ninteiStartDate, TextBoxFlexibleDate ninteiEndDate) {

@@ -30,6 +30,8 @@ public class tabChosaKekkaShosaiDiv extends TabPanel {
     private DataGrid<dgChosakekka2_Row> dgChosakekka2;
     @JsonProperty("dgChosakekka3")
     private DataGrid<dgChosakekka3_Row> dgChosakekka3;
+    @JsonProperty("btnReturnFirst")
+    private Button btnReturnFirst;
     @JsonProperty("btnIchijiHantei")
     private Button btnIchijiHantei;
 
@@ -67,6 +69,16 @@ public class tabChosaKekkaShosaiDiv extends TabPanel {
     @JsonProperty("dgChosakekka3")
     public void setDgChosakekka3(DataGrid<dgChosakekka3_Row> dgChosakekka3) {
         this.dgChosakekka3=dgChosakekka3;
+    }
+
+    @JsonProperty("btnReturnFirst")
+    public Button getBtnReturnFirst() {
+        return btnReturnFirst;
+    }
+
+    @JsonProperty("btnReturnFirst")
+    public void setBtnReturnFirst(Button btnReturnFirst) {
+        this.btnReturnFirst=btnReturnFirst;
     }
 
     @JsonProperty("btnIchijiHantei")

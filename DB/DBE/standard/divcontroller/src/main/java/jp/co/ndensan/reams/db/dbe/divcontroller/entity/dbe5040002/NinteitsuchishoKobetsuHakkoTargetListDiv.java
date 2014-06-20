@@ -23,12 +23,8 @@ public class NinteitsuchishoKobetsuHakkoTargetListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblHokenshaNo")
-    private Label lblHokenshaNo;
-    @JsonProperty("txtHokenshaNo")
-    private TextBoxCode txtHokenshaNo;
-    @JsonProperty("txtHokensaName")
-    private TextBox txtHokensaName;
+    @JsonProperty("chkHakkoShoruiType")
+    private CheckBoxList chkHakkoShoruiType;
     @JsonProperty("dgSearchResult")
     private DataGrid<dgSearchResult_Row> dgSearchResult;
     @JsonProperty("PublishButton")
@@ -40,34 +36,14 @@ public class NinteitsuchishoKobetsuHakkoTargetListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblHokenshaNo")
-    public Label getLblHokenshaNo() {
-        return lblHokenshaNo;
+    @JsonProperty("chkHakkoShoruiType")
+    public CheckBoxList getChkHakkoShoruiType() {
+        return chkHakkoShoruiType;
     }
 
-    @JsonProperty("lblHokenshaNo")
-    public void setLblHokenshaNo(Label lblHokenshaNo) {
-        this.lblHokenshaNo=lblHokenshaNo;
-    }
-
-    @JsonProperty("txtHokenshaNo")
-    public TextBoxCode getTxtHokenshaNo() {
-        return txtHokenshaNo;
-    }
-
-    @JsonProperty("txtHokenshaNo")
-    public void setTxtHokenshaNo(TextBoxCode txtHokenshaNo) {
-        this.txtHokenshaNo=txtHokenshaNo;
-    }
-
-    @JsonProperty("txtHokensaName")
-    public TextBox getTxtHokensaName() {
-        return txtHokensaName;
-    }
-
-    @JsonProperty("txtHokensaName")
-    public void setTxtHokensaName(TextBox txtHokensaName) {
-        this.txtHokensaName=txtHokensaName;
+    @JsonProperty("chkHakkoShoruiType")
+    public void setChkHakkoShoruiType(CheckBoxList chkHakkoShoruiType) {
+        this.chkHakkoShoruiType=chkHakkoShoruiType;
     }
 
     @JsonProperty("dgSearchResult")

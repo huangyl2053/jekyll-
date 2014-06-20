@@ -23,8 +23,6 @@ public class PublishButtonDiv extends Panel {
      */
     @JsonProperty("btnToPublish")
     private Button btnToPublish;
-    @JsonProperty("chkHakkoShoruiType")
-    private CheckBoxList chkHakkoShoruiType;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -40,16 +38,6 @@ public class PublishButtonDiv extends Panel {
     @JsonProperty("btnToPublish")
     public void setBtnToPublish(Button btnToPublish) {
         this.btnToPublish=btnToPublish;
-    }
-
-    @JsonProperty("chkHakkoShoruiType")
-    public CheckBoxList getChkHakkoShoruiType() {
-        return chkHakkoShoruiType;
-    }
-
-    @JsonProperty("chkHakkoShoruiType")
-    public void setChkHakkoShoruiType(CheckBoxList chkHakkoShoruiType) {
-        this.chkHakkoShoruiType=chkHakkoShoruiType;
     }
 
 }

@@ -50,12 +50,15 @@ public class NinteiShinsaKekkaNyuryoku {
         div.getHihokenshaJoho().getTxtHokenshaNo().setValue(dataRow.getHokenshaNo());
         div.getHihokenshaJoho().getTxtHokenshaMeisho().setValue(dataRow.getShichoson());
         div.getHihokenshaJoho().getTxtNenrei().setValue(dataRow.getNenrei());
-        div.getHihokenshaJoho().getTxtShinseiKubun().setValue(dataRow.getShinseiKubun());
-        div.getHihokenshaJoho().getTxtNinteiShinseiYMD().setValue(dataRow.getShinseibi().getValue());
+//        div.getHihokenshaJoho().getTxtShinseiKubun().setValue(dataRow.getShinseiKubun());
+//        div.getHihokenshaJoho().getTxtNinteiShinseiYMD().setValue(dataRow.getShinseibi().getValue());
+        div.getHihokenshaJoho().getTxtShinseiKubun().setDisplayNone(true);
+        div.getHihokenshaJoho().getTxtNinteiShinseiYMD().setDisplayNone(true);
         div.getHihokenshaJoho().getTxtZenkaiYokaigodo().setValue(dataRow.getBeforeYokaigodo());
         div.getHihokenshaJoho().getTxtZenYukokikanStart().setValue(dataRow.getBeforeYukoStartDate().getValue());
         div.getHihokenshaJoho().getTxtZenYukokikanEnd().setValue(dataRow.getBeforeYukoEndDate().getValue());
 
+        div.getNinteiKekkaNyuryoku().getTxtShinsaJun().setValue(dataRow.getShinsaJun());
         div.getNinteiKekkaNyuryoku().getTxtShinseibi().setValue(dataRow.getShinseibi().getValue());
         div.getNinteiKekkaNyuryoku().getTxtShinseiKubunShinsei().setValue(dataRow.getShinseiKubun());
         div.getNinteiKekkaNyuryoku().getTxtIchijiHanteiKekka().setValue(dataRow.getIchijiHantei());

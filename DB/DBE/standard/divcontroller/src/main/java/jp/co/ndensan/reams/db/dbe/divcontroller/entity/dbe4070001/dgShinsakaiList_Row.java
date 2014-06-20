@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4070001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Jun 02 20:06:00 JST 2014 
+ * Fri Jun 20 19:13:23 JST 2014 
  */
 
 
@@ -31,13 +31,25 @@ public class dgShinsakaiList_Row extends DataRow {
     private RString wariateNinzu;
     private RString shinsakaiKaijo;
     private RString kaishiYoteiTime;
+    private RString endYoteiTime;
     private RString shiryoSakuseiKubun;
 
     public dgShinsakaiList_Row() {
         super();
+        this.btnToSelect = new Button();
+        this.kaisaiYoteiDate = new TextBoxFlexibleDate();
+        this.kaisaiNo = RString.EMPTY;
+        this.gogitaiNo = RString.EMPTY;
+        this.gogitaiName = RString.EMPTY;
+        this.yoteiTeiin = RString.EMPTY;
+        this.wariateNinzu = RString.EMPTY;
+        this.shinsakaiKaijo = RString.EMPTY;
+        this.kaishiYoteiTime = RString.EMPTY;
+        this.endYoteiTime = RString.EMPTY;
+        this.shiryoSakuseiKubun = RString.EMPTY;
     }
 
-    public dgShinsakaiList_Row(Button btnToSelect, TextBoxFlexibleDate kaisaiYoteiDate, RString kaisaiNo, RString gogitaiNo, RString gogitaiName, RString yoteiTeiin, RString wariateNinzu, RString shinsakaiKaijo, RString kaishiYoteiTime, RString shiryoSakuseiKubun) {
+    public dgShinsakaiList_Row(Button btnToSelect, TextBoxFlexibleDate kaisaiYoteiDate, RString kaisaiNo, RString gogitaiNo, RString gogitaiName, RString yoteiTeiin, RString wariateNinzu, RString shinsakaiKaijo, RString kaishiYoteiTime, RString endYoteiTime, RString shiryoSakuseiKubun) {
         super();
         this.setOriginalData("btnToSelect", btnToSelect);
         this.setOriginalData("kaisaiYoteiDate", kaisaiYoteiDate);
@@ -48,6 +60,7 @@ public class dgShinsakaiList_Row extends DataRow {
         this.setOriginalData("wariateNinzu", wariateNinzu);
         this.setOriginalData("shinsakaiKaijo", shinsakaiKaijo);
         this.setOriginalData("kaishiYoteiTime", kaishiYoteiTime);
+        this.setOriginalData("endYoteiTime", endYoteiTime);
         this.setOriginalData("shiryoSakuseiKubun", shiryoSakuseiKubun);
         this.btnToSelect = btnToSelect;
         this.kaisaiYoteiDate = kaisaiYoteiDate;
@@ -58,6 +71,7 @@ public class dgShinsakaiList_Row extends DataRow {
         this.wariateNinzu = wariateNinzu;
         this.shinsakaiKaijo = shinsakaiKaijo;
         this.kaishiYoteiTime = kaishiYoteiTime;
+        this.endYoteiTime = endYoteiTime;
         this.shiryoSakuseiKubun = shiryoSakuseiKubun;
     }
 
@@ -95,6 +109,10 @@ public class dgShinsakaiList_Row extends DataRow {
 
     public RString getKaishiYoteiTime() {
         return kaishiYoteiTime;
+    }
+
+    public RString getEndYoteiTime() {
+        return endYoteiTime;
     }
 
     public RString getShiryoSakuseiKubun() {
@@ -144,6 +162,11 @@ public class dgShinsakaiList_Row extends DataRow {
     public void setKaishiYoteiTime(RString kaishiYoteiTime) {
         this.setOriginalData("kaishiYoteiTime", kaishiYoteiTime);
         this.kaishiYoteiTime = kaishiYoteiTime;
+    }
+
+    public void setEndYoteiTime(RString endYoteiTime) {
+        this.setOriginalData("endYoteiTime", endYoteiTime);
+        this.endYoteiTime = endYoteiTime;
     }
 
     public void setShiryoSakuseiKubun(RString shiryoSakuseiKubun) {

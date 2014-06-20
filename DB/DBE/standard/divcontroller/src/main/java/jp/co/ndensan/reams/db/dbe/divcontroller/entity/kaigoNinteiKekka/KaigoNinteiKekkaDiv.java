@@ -27,6 +27,8 @@ public class KaigoNinteiKekkaDiv extends Panel {
     private TextBox txtShinseiKubunShinsei;
     @JsonProperty("txtShinseiKubunHorei")
     private TextBox txtShinseiKubunHorei;
+    @JsonProperty("txtShinsaJun")
+    private TextBox txtShinsaJun;
     @JsonProperty("ddlNinteiKubun")
     private DropDownList ddlNinteiKubun;
     @JsonProperty("txtIchijiHanteiKekka")
@@ -92,6 +94,16 @@ public class KaigoNinteiKekkaDiv extends Panel {
     @JsonProperty("txtShinseiKubunHorei")
     public void setTxtShinseiKubunHorei(TextBox txtShinseiKubunHorei) {
         this.txtShinseiKubunHorei=txtShinseiKubunHorei;
+    }
+
+    @JsonProperty("txtShinsaJun")
+    public TextBox getTxtShinsaJun() {
+        return txtShinsaJun;
+    }
+
+    @JsonProperty("txtShinsaJun")
+    public void setTxtShinsaJun(TextBox txtShinsaJun) {
+        this.txtShinsaJun=txtShinsaJun;
     }
 
     @JsonProperty("ddlNinteiKubun")

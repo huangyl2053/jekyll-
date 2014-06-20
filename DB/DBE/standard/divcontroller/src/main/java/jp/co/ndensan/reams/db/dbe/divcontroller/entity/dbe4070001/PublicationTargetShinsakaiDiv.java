@@ -27,12 +27,8 @@ public class PublicationTargetShinsakaiDiv extends Panel {
     private TextBoxFlexibleDate txtShinsakaiYoteiDate;
     @JsonProperty("txtShinsakaiKaijo")
     private TextBox txtShinsakaiKaijo;
-    @JsonProperty("lblShinsakaiKaishiYoteiTime")
-    private Label lblShinsakaiKaishiYoteiTime;
     @JsonProperty("txtShinsakaiKaishiYoteiTime")
     private TextBoxTime txtShinsakaiKaishiYoteiTime;
-    @JsonProperty("lblShiryoSakusei")
-    private Label lblShiryoSakusei;
     @JsonProperty("txtShiryoSakusei")
     private TextBox txtShiryoSakusei;
     @JsonProperty("txtGogitaiNo")
@@ -41,12 +37,8 @@ public class PublicationTargetShinsakaiDiv extends Panel {
     private TextBox txtGogitaiName;
     @JsonProperty("txtYoteiTeiin")
     private TextBoxNum txtYoteiTeiin;
-    @JsonProperty("lblYoteiTeiinUnit")
-    private Label lblYoteiTeiinUnit;
     @JsonProperty("txtWariateNinzu")
     private TextBoxNum txtWariateNinzu;
-    @JsonProperty("lblWariateNinzuUnit")
-    private Label lblWariateNinzuUnit;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -84,16 +76,6 @@ public class PublicationTargetShinsakaiDiv extends Panel {
         this.txtShinsakaiKaijo=txtShinsakaiKaijo;
     }
 
-    @JsonProperty("lblShinsakaiKaishiYoteiTime")
-    public Label getLblShinsakaiKaishiYoteiTime() {
-        return lblShinsakaiKaishiYoteiTime;
-    }
-
-    @JsonProperty("lblShinsakaiKaishiYoteiTime")
-    public void setLblShinsakaiKaishiYoteiTime(Label lblShinsakaiKaishiYoteiTime) {
-        this.lblShinsakaiKaishiYoteiTime=lblShinsakaiKaishiYoteiTime;
-    }
-
     @JsonProperty("txtShinsakaiKaishiYoteiTime")
     public TextBoxTime getTxtShinsakaiKaishiYoteiTime() {
         return txtShinsakaiKaishiYoteiTime;
@@ -102,16 +84,6 @@ public class PublicationTargetShinsakaiDiv extends Panel {
     @JsonProperty("txtShinsakaiKaishiYoteiTime")
     public void setTxtShinsakaiKaishiYoteiTime(TextBoxTime txtShinsakaiKaishiYoteiTime) {
         this.txtShinsakaiKaishiYoteiTime=txtShinsakaiKaishiYoteiTime;
-    }
-
-    @JsonProperty("lblShiryoSakusei")
-    public Label getLblShiryoSakusei() {
-        return lblShiryoSakusei;
-    }
-
-    @JsonProperty("lblShiryoSakusei")
-    public void setLblShiryoSakusei(Label lblShiryoSakusei) {
-        this.lblShiryoSakusei=lblShiryoSakusei;
     }
 
     @JsonProperty("txtShiryoSakusei")
@@ -154,16 +126,6 @@ public class PublicationTargetShinsakaiDiv extends Panel {
         this.txtYoteiTeiin=txtYoteiTeiin;
     }
 
-    @JsonProperty("lblYoteiTeiinUnit")
-    public Label getLblYoteiTeiinUnit() {
-        return lblYoteiTeiinUnit;
-    }
-
-    @JsonProperty("lblYoteiTeiinUnit")
-    public void setLblYoteiTeiinUnit(Label lblYoteiTeiinUnit) {
-        this.lblYoteiTeiinUnit=lblYoteiTeiinUnit;
-    }
-
     @JsonProperty("txtWariateNinzu")
     public TextBoxNum getTxtWariateNinzu() {
         return txtWariateNinzu;
@@ -172,16 +134,6 @@ public class PublicationTargetShinsakaiDiv extends Panel {
     @JsonProperty("txtWariateNinzu")
     public void setTxtWariateNinzu(TextBoxNum txtWariateNinzu) {
         this.txtWariateNinzu=txtWariateNinzu;
-    }
-
-    @JsonProperty("lblWariateNinzuUnit")
-    public Label getLblWariateNinzuUnit() {
-        return lblWariateNinzuUnit;
-    }
-
-    @JsonProperty("lblWariateNinzuUnit")
-    public void setLblWariateNinzuUnit(Label lblWariateNinzuUnit) {
-        this.lblWariateNinzuUnit=lblWariateNinzuUnit;
     }
 
 }

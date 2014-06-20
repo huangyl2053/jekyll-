@@ -66,7 +66,9 @@ public class ShinsaKekkaNyuryokuShosai {
         div.getTblShinsaTaishoshaShosai().getTxtKijunJikan().setValue(new RString("48.0"));
 
         div.getTblSaiIchijiHanteiKekka().setDisplayNone(true);
+        div.getTabChosaKekka().getTabChosaKekkaShosai().getBtnReturnFirst().setDisabled(true);
 
+        div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtShinsaJun().setDisplayNone(true);
         div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getDdlNinteiKubun().setSelectedItem(new RString("認定"));
         div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtIchijiHanteiKekka().setValue(dataRow.get一次());
         div.getTabChosaKekka().getTabShinsaKekka().getNinteiKekkaNyuryoku().getTxtNinteibi().setValue(FlexibleDate.getNowDate());
@@ -146,6 +148,7 @@ public class ShinsaKekkaNyuryokuShosai {
         ResponseData<ShinsaKekkaNyuryokuShosaiDiv> response = new ResponseData<>();
 
         div.getTblSaiIchijiHanteiKekka().setDisplayNone(false);
+        div.getTabChosaKekka().getTabChosaKekkaShosai().getBtnReturnFirst().setDisabled(false);
 
         response.data = div;
         return response;

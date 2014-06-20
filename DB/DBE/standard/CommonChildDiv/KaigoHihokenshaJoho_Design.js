@@ -467,7 +467,7 @@ var DBE;
                             "value": "",
                             "labelLText": "前回認定結果",
                             "labelRText": "",
-                            "labelLWidth": "105",
+                            "labelLWidth": "133",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,

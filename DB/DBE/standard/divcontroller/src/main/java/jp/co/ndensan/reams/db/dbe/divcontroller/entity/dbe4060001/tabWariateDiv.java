@@ -5,6 +5,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4060001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4060001.tplShinsainWariateDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe4060001.tplTaishoshaWariateDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
 
 /**
