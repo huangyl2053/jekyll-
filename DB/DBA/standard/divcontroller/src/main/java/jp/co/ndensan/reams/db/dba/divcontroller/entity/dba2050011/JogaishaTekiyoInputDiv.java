@@ -1,10 +1,11 @@
-package jp.co.ndensan.reams.db.dba.divcontroller.entity;
+package jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2050011;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -29,12 +30,8 @@ public class JogaishaTekiyoInputDiv extends Panel {
     private TextBoxFlexibleDate txtTekiyoDate;
     @JsonProperty("txtTekiyoTodokedeDate")
     private TextBoxFlexibleDate txtTekiyoTodokedeDate;
-    @JsonProperty("txtNyushoShisetsuCode")
-    private TextBoxCode txtNyushoShisetsuCode;
-    @JsonProperty("btnNyushoShisetsuInputGuide")
-    private ButtonDialog btnNyushoShisetsuInputGuide;
-    @JsonProperty("txtNyushoShisetsuMeisho")
-    private TextBox txtNyushoShisetsuMeisho;
+    @JsonProperty("JogaishaTekiyoJogaiShisetsu")
+    private ShisetsuJohoDiv JogaishaTekiyoJogaiShisetsu;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -82,34 +79,14 @@ public class JogaishaTekiyoInputDiv extends Panel {
         this.txtTekiyoTodokedeDate=txtTekiyoTodokedeDate;
     }
 
-    @JsonProperty("txtNyushoShisetsuCode")
-    public TextBoxCode getTxtNyushoShisetsuCode() {
-        return txtNyushoShisetsuCode;
+    @JsonProperty("JogaishaTekiyoJogaiShisetsu")
+    public ShisetsuJohoDiv getJogaishaTekiyoJogaiShisetsu() {
+        return JogaishaTekiyoJogaiShisetsu;
     }
 
-    @JsonProperty("txtNyushoShisetsuCode")
-    public void setTxtNyushoShisetsuCode(TextBoxCode txtNyushoShisetsuCode) {
-        this.txtNyushoShisetsuCode=txtNyushoShisetsuCode;
-    }
-
-    @JsonProperty("btnNyushoShisetsuInputGuide")
-    public ButtonDialog getBtnNyushoShisetsuInputGuide() {
-        return btnNyushoShisetsuInputGuide;
-    }
-
-    @JsonProperty("btnNyushoShisetsuInputGuide")
-    public void setBtnNyushoShisetsuInputGuide(ButtonDialog btnNyushoShisetsuInputGuide) {
-        this.btnNyushoShisetsuInputGuide=btnNyushoShisetsuInputGuide;
-    }
-
-    @JsonProperty("txtNyushoShisetsuMeisho")
-    public TextBox getTxtNyushoShisetsuMeisho() {
-        return txtNyushoShisetsuMeisho;
-    }
-
-    @JsonProperty("txtNyushoShisetsuMeisho")
-    public void setTxtNyushoShisetsuMeisho(TextBox txtNyushoShisetsuMeisho) {
-        this.txtNyushoShisetsuMeisho=txtNyushoShisetsuMeisho;
+    @JsonProperty("JogaishaTekiyoJogaiShisetsu")
+    public void setJogaishaTekiyoJogaiShisetsu(ShisetsuJohoDiv JogaishaTekiyoJogaiShisetsu) {
+        this.JogaishaTekiyoJogaiShisetsu=JogaishaTekiyoJogaiShisetsu;
     }
 
 }

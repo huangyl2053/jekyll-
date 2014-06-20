@@ -1,10 +1,11 @@
-package jp.co.ndensan.reams.db.dba.divcontroller.entity;
+package jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2050011;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -23,12 +24,8 @@ public class JogaiShisetsuHenkoInputDiv extends Panel {
      */
     @JsonProperty("txtShisetsuHenkoDate")
     private TextBoxFlexibleDate txtShisetsuHenkoDate;
-    @JsonProperty("txtHenkoShisetsuCode")
-    private TextBoxCode txtHenkoShisetsuCode;
-    @JsonProperty("btnHenkoShisetsuInputGuide")
-    private ButtonDialog btnHenkoShisetsuInputGuide;
-    @JsonProperty("txtHenkoShisetsuMeisho")
-    private TextBox txtHenkoShisetsuMeisho;
+    @JsonProperty("ShisetsuHenkoJogaiShisetsu")
+    private ShisetsuJohoDiv ShisetsuHenkoJogaiShisetsu;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -46,34 +43,14 @@ public class JogaiShisetsuHenkoInputDiv extends Panel {
         this.txtShisetsuHenkoDate=txtShisetsuHenkoDate;
     }
 
-    @JsonProperty("txtHenkoShisetsuCode")
-    public TextBoxCode getTxtHenkoShisetsuCode() {
-        return txtHenkoShisetsuCode;
+    @JsonProperty("ShisetsuHenkoJogaiShisetsu")
+    public ShisetsuJohoDiv getShisetsuHenkoJogaiShisetsu() {
+        return ShisetsuHenkoJogaiShisetsu;
     }
 
-    @JsonProperty("txtHenkoShisetsuCode")
-    public void setTxtHenkoShisetsuCode(TextBoxCode txtHenkoShisetsuCode) {
-        this.txtHenkoShisetsuCode=txtHenkoShisetsuCode;
-    }
-
-    @JsonProperty("btnHenkoShisetsuInputGuide")
-    public ButtonDialog getBtnHenkoShisetsuInputGuide() {
-        return btnHenkoShisetsuInputGuide;
-    }
-
-    @JsonProperty("btnHenkoShisetsuInputGuide")
-    public void setBtnHenkoShisetsuInputGuide(ButtonDialog btnHenkoShisetsuInputGuide) {
-        this.btnHenkoShisetsuInputGuide=btnHenkoShisetsuInputGuide;
-    }
-
-    @JsonProperty("txtHenkoShisetsuMeisho")
-    public TextBox getTxtHenkoShisetsuMeisho() {
-        return txtHenkoShisetsuMeisho;
-    }
-
-    @JsonProperty("txtHenkoShisetsuMeisho")
-    public void setTxtHenkoShisetsuMeisho(TextBox txtHenkoShisetsuMeisho) {
-        this.txtHenkoShisetsuMeisho=txtHenkoShisetsuMeisho;
+    @JsonProperty("ShisetsuHenkoJogaiShisetsu")
+    public void setShisetsuHenkoJogaiShisetsu(ShisetsuJohoDiv ShisetsuHenkoJogaiShisetsu) {
+        this.ShisetsuHenkoJogaiShisetsu=ShisetsuHenkoJogaiShisetsu;
     }
 
 }
