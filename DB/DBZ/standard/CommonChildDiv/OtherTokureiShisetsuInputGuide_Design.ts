@@ -54,8 +54,10 @@ module DBZ {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "radkannaiKubun_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onChange": "",
-     "selectedItem": null,
+     "selectedItem": "keyAll",
      "dataSource": [
       {
        "key": "keyAll",
@@ -77,6 +79,7 @@ module DBZ {
      "labelLText": "管内・管外区分:",
      "labelLWidth": "120",
      "labelLAlign": 2,
+     "disabledItem": [],
      "icon": []
     },
     {
@@ -97,6 +100,8 @@ module DBZ {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "btnSearchOtherShisetsu",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onClick": "onClick_btnSearchOtherShisetsu",
      "icon": 0,
      "text": "該当する施設を表示する",
@@ -126,6 +131,9 @@ module DBZ {
        "marginLeft": "S",
        "marginRight": "XS",
        "selectControlID": "dgSearchResultOtherTokureiShisetsu",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "height": "S",
        "dataSource": [],
        "gridSetting": {
         "rowHeight": 25,
@@ -206,7 +214,6 @@ module DBZ {
          }
         ]
        },
-       "height": "S",
        "onSort": "",
        "onSelect": "",
        "onSelectByDblClick": "",
@@ -237,6 +244,8 @@ module DBZ {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "SearchResultOtherShisetsu",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onLoad": "",
      "title": "その他特例施設一覧",
      "marginTop": "XS",
@@ -261,7 +270,8 @@ module DBZ {
      "widthAuto": true,
      "panelDisplay": 0,
      "isGroupBox": false,
-     "readOnly": false
+     "readOnly": false,
+     "height": "Auto"
     },
     {
      "fieldName": "btnOtherShisetsuReturn",
@@ -281,6 +291,8 @@ module DBZ {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "btnOtherShisetsuReturn",
+     "helpMessageID": "",
+     "jpControlName": "",
      "onClick": "onClick_btnOtherShisetsuReturn",
      "icon": 0,
      "text": "その他特例施設入力ガイドを閉じる",
@@ -305,6 +317,8 @@ module DBZ {
    "marginLeft": "XS",
    "marginRight": "XS",
    "selectControlID": "OtherTokureiShisetsuInputGuide",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "その他特例施設入力ガイド",
    "marginTop": "Default",
@@ -351,7 +365,8 @@ module DBZ {
    "widthAuto": true,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": false
+   "readOnly": false,
+   "height": "Auto"
   }
  ],
  "controlType": "CommonChildDiv",
@@ -366,9 +381,11 @@ module DBZ {
  "float": 0,
  "toolTip": "",
  "authorityMode": 0,
- "marginLeft": 0,
- "marginRight": 0,
+ "marginLeft": "0",
+ "marginRight": "0",
  "selectControlID": "defaultLayout",
+ "helpMessageID": "",
+ "jpControlName": "",
  "relation": [],
  "businessId": "DBZ",
  "controlName": "OtherTokureiShisetsuInputGuide",

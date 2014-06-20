@@ -59,7 +59,8 @@ public class ShisetsuJoho {
 
     /**
      * 施設種類ラジオボタンの選択項目が変更された際に実行します。<br/>
-     * 選択された項目に合わせて、必要な入力補助ダイアログを表示します。
+     * 選択された項目に合わせて、必要な入力補助ダイアログを表示します。また、既に施設コードと名称が入力されていた場合、
+     * 既に入力されている情報を削除し、施設種類と施設情報に不整合が出ないようにします。
      *
      * @param div 施設情報Div
      * @return レスポンス
@@ -67,6 +68,9 @@ public class ShisetsuJoho {
     public ResponseData onChange_radShisetsuShurui(ShisetsuJohoDiv div) {
         ResponseData<ShisetsuJohoDiv> response = new ResponseData<>();
         setShowShisetsuInputGuide(div);
+
+        div.getTxtShisetsuCode().setValue(null);
+        div.getTxtShisetsuMeisho().setValue(null);
         response.data = div;
         return response;
     }

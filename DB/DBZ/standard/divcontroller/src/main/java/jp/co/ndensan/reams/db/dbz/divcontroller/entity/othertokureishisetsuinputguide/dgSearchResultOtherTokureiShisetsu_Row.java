@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.othertokureishisetsuinpu
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jun 06 19:51:39 JST 2014 
+ * Fri Jun 20 14:16:28 JST 2014 
  */
 
 
@@ -27,6 +27,10 @@ public class dgSearchResultOtherTokureiShisetsu_Row extends DataRow {
 
     public dgSearchResultOtherTokureiShisetsu_Row() {
         super();
+        this.jigyoshaCode = RString.EMPTY;
+        this.jigyoshaMeisho = RString.EMPTY;
+        this.jigyosha = RString.EMPTY;
+        this.jusho = RString.EMPTY;
     }
 
     public dgSearchResultOtherTokureiShisetsu_Row(RString jigyoshaCode, RString jigyoshaMeisho, RString jigyosha, RString jusho) {
