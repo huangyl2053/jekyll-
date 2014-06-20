@@ -21,14 +21,14 @@ public class KihonJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("btnShinseiJohoSearch")
+    private Button btnShinseiJohoSearch;
     @JsonProperty("txtHokenNo")
     private TextBoxCode txtHokenNo;
     @JsonProperty("txtHihokenNo")
     private TextBoxCode txtHihokenNo;
     @JsonProperty("txtShinseibi")
     private TextBoxDate txtShinseibi;
-    @JsonProperty("btnShinseiJohoSearch")
-    private Button btnShinseiJohoSearch;
     @JsonProperty("ddlShinseiKbn")
     private DropDownList ddlShinseiKbn;
 
@@ -38,6 +38,16 @@ public class KihonJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    @JsonProperty("btnShinseiJohoSearch")
+    public Button getBtnShinseiJohoSearch() {
+        return btnShinseiJohoSearch;
+    }
+
+    @JsonProperty("btnShinseiJohoSearch")
+    public void setBtnShinseiJohoSearch(Button btnShinseiJohoSearch) {
+        this.btnShinseiJohoSearch=btnShinseiJohoSearch;
+    }
+
     @JsonProperty("txtHokenNo")
     public TextBoxCode getTxtHokenNo() {
         return txtHokenNo;
@@ -66,16 +76,6 @@ public class KihonJohoDiv extends Panel {
     @JsonProperty("txtShinseibi")
     public void setTxtShinseibi(TextBoxDate txtShinseibi) {
         this.txtShinseibi=txtShinseibi;
-    }
-
-    @JsonProperty("btnShinseiJohoSearch")
-    public Button getBtnShinseiJohoSearch() {
-        return btnShinseiJohoSearch;
-    }
-
-    @JsonProperty("btnShinseiJohoSearch")
-    public void setBtnShinseiJohoSearch(Button btnShinseiJohoSearch) {
-        this.btnShinseiJohoSearch=btnShinseiJohoSearch;
     }
 
     @JsonProperty("ddlShinseiKbn")

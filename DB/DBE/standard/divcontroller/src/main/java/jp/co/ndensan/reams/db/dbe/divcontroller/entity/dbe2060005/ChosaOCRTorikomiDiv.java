@@ -1,28 +1,29 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060005;
-
 /**
- * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、再生成時には損失するため
+ * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2060005.dgChosahyoTorikomiKekka_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ChosaOcrTorikomi のクラスファイル
- *
+ * ChosaOCRTorikomi のクラスファイル 
+ * 
  * @author 自動生成
  */
-public class ChosaOcrTorikomiDiv extends Panel {
+public class ChosaOCRTorikomiDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-
-    @JsonProperty("btnOcrTorikomi")
-    private Button btnOcrTorikomi;
+    @JsonProperty("btnOCRTorikomi")
+    private Button btnOCRTorikomi;
     @JsonProperty("lblTorikomiKekka")
     private Label lblTorikomiKekka;
     @JsonProperty("txtErrKensu")
@@ -38,14 +39,14 @@ public class ChosaOcrTorikomiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("btnOcrTorikomi")
-    public Button getBtnOcrTorikomi() {
-        return btnOcrTorikomi;
+    @JsonProperty("btnOCRTorikomi")
+    public Button getBtnOCRTorikomi() {
+        return btnOCRTorikomi;
     }
 
-    @JsonProperty("btnOcrTorikomi")
-    public void setBtnOcrTorikomi(Button btnOcrTorikomi) {
-        this.btnOcrTorikomi = btnOcrTorikomi;
+    @JsonProperty("btnOCRTorikomi")
+    public void setBtnOCRTorikomi(Button btnOCRTorikomi) {
+        this.btnOCRTorikomi=btnOCRTorikomi;
     }
 
     @JsonProperty("lblTorikomiKekka")
@@ -55,7 +56,7 @@ public class ChosaOcrTorikomiDiv extends Panel {
 
     @JsonProperty("lblTorikomiKekka")
     public void setLblTorikomiKekka(Label lblTorikomiKekka) {
-        this.lblTorikomiKekka = lblTorikomiKekka;
+        this.lblTorikomiKekka=lblTorikomiKekka;
     }
 
     @JsonProperty("txtErrKensu")
@@ -65,7 +66,7 @@ public class ChosaOcrTorikomiDiv extends Panel {
 
     @JsonProperty("txtErrKensu")
     public void setTxtErrKensu(TextBoxNum txtErrKensu) {
-        this.txtErrKensu = txtErrKensu;
+        this.txtErrKensu=txtErrKensu;
     }
 
     @JsonProperty("dgChosahyoTorikomiKekka")
@@ -75,7 +76,7 @@ public class ChosaOcrTorikomiDiv extends Panel {
 
     @JsonProperty("dgChosahyoTorikomiKekka")
     public void setDgChosahyoTorikomiKekka(DataGrid<dgChosahyoTorikomiKekka_Row> dgChosahyoTorikomiKekka) {
-        this.dgChosahyoTorikomiKekka = dgChosahyoTorikomiKekka;
+        this.dgChosahyoTorikomiKekka=dgChosahyoTorikomiKekka;
     }
 
     @JsonProperty("btnSave")
@@ -85,7 +86,7 @@ public class ChosaOcrTorikomiDiv extends Panel {
 
     @JsonProperty("btnSave")
     public void setBtnSave(ButtonSubmit btnSave) {
-        this.btnSave = btnSave;
+        this.btnSave=btnSave;
     }
 
 }
