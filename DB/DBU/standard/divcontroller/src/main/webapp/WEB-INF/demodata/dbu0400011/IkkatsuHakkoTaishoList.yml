@@ -1,0 +1,37 @@
+## YAML Template.
+---
+
+-  hihoNo: "1111111111"
+   hihokenshaShimei: "電算　一郎"
+   shutokubi: "平26.06.02"
+   henkobi: "平26.06.03"
+   ninteibi: "平26.06.23"
+   juminShubetsu: "住民(日本人)"
+
+-  hihoNo: "2222222222"
+   hihokenshaShimei: "電算　二郎"
+   shutokubi: "平26.06.03"
+   henkobi: "平26.06.04"
+   ninteibi: "平26.06.24"
+   juminShubetsu: "住民(日本人)"
+
+-  hihoNo: "3333333333"
+   hihokenshaShimei: "電算　三郎"
+   shutokubi: "平26.06.04"
+   henkobi: "平26.06.05"
+   ninteibi: "平26.06.25"
+   juminShubetsu: "住民(外国人)"
+
+-  hihoNo: "4444444444"
+   hihokenshaShimei: "電算　四郎"
+   shutokubi: "平26.06.05"
+   henkobi: "平26.06.06"
+   ninteibi: "平26.06.26"
+   juminShubetsu: "転出"
+
+-  hihoNo: "5555555555"
+   hihokenshaShimei: "電算　五郎"
+   shutokubi: "平26.06.06"
+   henkobi: "平26.06.09"
+   ninteibi: "平26.06.27"
+   juminShubetsu: "住登外"

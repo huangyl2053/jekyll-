@@ -21,8 +21,8 @@ public class ShoKaishuJokyoShosaiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txt")
-    private TextBox txt;
+    @JsonProperty("txtKofuShoShurui")
+    private TextBox txtKofuShoShurui;
     @JsonProperty("txtKofuDate")
     private TextBoxFlexibleDate txtKofuDate;
     @JsonProperty("txtYukoKigen")
@@ -44,14 +44,14 @@ public class ShoKaishuJokyoShosaiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("txt")
-    public TextBox getTxt() {
-        return txt;
+    @JsonProperty("txtKofuShoShurui")
+    public TextBox getTxtKofuShoShurui() {
+        return txtKofuShoShurui;
     }
 
-    @JsonProperty("txt")
-    public void setTxt(TextBox txt) {
-        this.txt=txt;
+    @JsonProperty("txtKofuShoShurui")
+    public void setTxtKofuShoShurui(TextBox txtKofuShoShurui) {
+        this.txtKofuShoShurui=txtKofuShoShurui;
     }
 
     @JsonProperty("txtKofuDate")
