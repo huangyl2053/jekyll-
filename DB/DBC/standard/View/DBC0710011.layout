@@ -568,7 +568,7 @@
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "sortOrder": "txtTeikyoYM",
+     "sortOrder": "txtShikyuKubun",
      "isAscending": true,
      "filterList": [],
      "activeRowId": -1
@@ -635,7 +635,7 @@
     },
     {
      "eventName": "onClick_btnAddShinseiContents",
-     "requestUrl": "dbc/db/dbc/JutakuKaishuShinseiList/onClick_btnAddShinsei"
+     "requestUrl": "dbc/db/dbc/JutakuKaishuShinseiList/onClick_btnAddShinseiContents"
     }
    ],
    "hiddenInput": [],
@@ -1517,12 +1517,12 @@
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "XS",
+       "marginLeft": "0",
        "marginRight": "0",
        "selectControlID": "JutakuKaishuShinseiKozaInfo",
        "helpMessageID": "",
        "jpControlName": "",
-       "title": "口座振替申請情報",
+       "title": "支払方法",
        "relation": [],
        "marginTop": 0,
        "marginBottom": 0,
@@ -1532,10 +1532,13 @@
        "eraseBorderLeft": false,
        "panelDisplay": 1,
        "businessId": "DBZ",
-       "controlName": "KozaPayment",
+       "controlName": "PaymentMethod",
        "dataPassingForDialog": [],
        "dialogOkEventNameForDialog": "",
-       "dialogCancelEventNameForDialog": ""
+       "dialogCancelEventNameForDialog": "",
+       "KozaPayment_title": "",
+       "onClick_radPayMethod": "onClick_radPayMethod",
+       "Juryoinin_displayNone": true
       }
      ],
      "controlType": "Panel",
@@ -2049,7 +2052,7 @@
     {
      "fieldName": "dgJutakuKaishuShinseiList",
      "event": "onSelectBySelectButton",
-     "transition": ""
+     "transition": "申請登録"
     }
    ]
   },
@@ -2115,6 +2118,11 @@
     },
     {
      "visibleDiv": "JutakuKaishuShinseiInfoPanel",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "JutakuKaishuShinseiKozaInfo",
      "panelState": "visible",
      "fixedDiv": "No"
     }

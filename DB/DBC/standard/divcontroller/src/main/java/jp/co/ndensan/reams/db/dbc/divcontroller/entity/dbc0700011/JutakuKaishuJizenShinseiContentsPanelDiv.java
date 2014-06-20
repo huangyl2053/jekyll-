@@ -5,9 +5,10 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0700011;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0700011.JutakuKaishuJizenShinseiReasonDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0700011.JutakuKaishuZizenShinseiDetailDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KozaPayment.KozaPaymentDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0700011.JutakuKaishuJizenShinseiDetailDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuJizenShinseiReasonDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuJizenShinseiReasonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.PaymentMethod.PaymentMethodDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShinseishaInfo.ShinseishaInfoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -29,14 +30,14 @@ public class JutakuKaishuJizenShinseiContentsPanelDiv extends Panel {
     private TextBox txtJutakuOwner;
     @JsonProperty("txtRelationWithHihokensha")
     private TextBox txtRelationWithHihokensha;
-    @JsonProperty("JutakuKaishuZizenShinseiDetail")
-    private JutakuKaishuZizenShinseiDetailDiv JutakuKaishuZizenShinseiDetail;
+    @JsonProperty("JutakuKaishuJizenShinseiDetail")
+    private JutakuKaishuJizenShinseiDetailDiv JutakuKaishuJizenShinseiDetail;
     @JsonProperty("JutakuKaishuJizenShinseisha")
     private ShinseishaInfoDiv JutakuKaishuJizenShinseisha;
     @JsonProperty("JutakuKaishuJizenShinseiReason")
     private JutakuKaishuJizenShinseiReasonDiv JutakuKaishuJizenShinseiReason;
     @JsonProperty("JutakuKaishuJizenShinseiKoza")
-    private KozaPaymentDiv JutakuKaishuJizenShinseiKoza;
+    private PaymentMethodDiv JutakuKaishuJizenShinseiKoza;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -64,14 +65,14 @@ public class JutakuKaishuJizenShinseiContentsPanelDiv extends Panel {
         this.txtRelationWithHihokensha=txtRelationWithHihokensha;
     }
 
-    @JsonProperty("JutakuKaishuZizenShinseiDetail")
-    public JutakuKaishuZizenShinseiDetailDiv getJutakuKaishuZizenShinseiDetail() {
-        return JutakuKaishuZizenShinseiDetail;
+    @JsonProperty("JutakuKaishuJizenShinseiDetail")
+    public JutakuKaishuJizenShinseiDetailDiv getJutakuKaishuJizenShinseiDetail() {
+        return JutakuKaishuJizenShinseiDetail;
     }
 
-    @JsonProperty("JutakuKaishuZizenShinseiDetail")
-    public void setJutakuKaishuZizenShinseiDetail(JutakuKaishuZizenShinseiDetailDiv JutakuKaishuZizenShinseiDetail) {
-        this.JutakuKaishuZizenShinseiDetail=JutakuKaishuZizenShinseiDetail;
+    @JsonProperty("JutakuKaishuJizenShinseiDetail")
+    public void setJutakuKaishuJizenShinseiDetail(JutakuKaishuJizenShinseiDetailDiv JutakuKaishuJizenShinseiDetail) {
+        this.JutakuKaishuJizenShinseiDetail=JutakuKaishuJizenShinseiDetail;
     }
 
     @JsonProperty("JutakuKaishuJizenShinseisha")
@@ -95,12 +96,12 @@ public class JutakuKaishuJizenShinseiContentsPanelDiv extends Panel {
     }
 
     @JsonProperty("JutakuKaishuJizenShinseiKoza")
-    public KozaPaymentDiv getJutakuKaishuJizenShinseiKoza() {
+    public PaymentMethodDiv getJutakuKaishuJizenShinseiKoza() {
         return JutakuKaishuJizenShinseiKoza;
     }
 
     @JsonProperty("JutakuKaishuJizenShinseiKoza")
-    public void setJutakuKaishuJizenShinseiKoza(KozaPaymentDiv JutakuKaishuJizenShinseiKoza) {
+    public void setJutakuKaishuJizenShinseiKoza(PaymentMethodDiv JutakuKaishuJizenShinseiKoza) {
         this.JutakuKaishuJizenShinseiKoza=JutakuKaishuJizenShinseiKoza;
     }
 

@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 
 /**
  * 住宅改修費事申請登録 申請内容のパネルです。
@@ -48,7 +49,7 @@ public class JutakuKaishuShinseiList {
      * @param panel JutakuKaishuShinseiListDiv
      * @return PanelDivのResponseData
      */
-    public ResponseData<JutakuKaishuShinseiListDiv> onClick_btnAddShinsei(JutakuKaishuShinseiListDiv panel) {
+    public ResponseData<JutakuKaishuShinseiListDiv> onClick_btnAddShinseiContents(JutakuKaishuShinseiListDiv panel) {
         ResponseData<JutakuKaishuShinseiListDiv> response = new ResponseData<>();
 
         //TO DO
@@ -178,6 +179,9 @@ public class JutakuKaishuShinseiList {
                 RString.EMPTY
         );
 
+        if (isAddRow(状態)) {
+            rowJutakuKaishuShinseiListData.setRowState(RowState.Added);
+        }
         rowJutakuKaishuShinseiListData.setTxtShinseiKubun(new RString(申請区分));
         rowJutakuKaishuShinseiListData.setTxtTeikyoYM(new RString(提供年月));
         rowJutakuKaishuShinseiListData.setTxtShinseiDate(new RString(申請日));
@@ -190,6 +194,10 @@ public class JutakuKaishuShinseiList {
 
         return rowJutakuKaishuShinseiListData;
 
+    }
+
+    private boolean isAddRow(String 状態) {
+        return 状態.equals("追加");
     }
 
     // TO DO  JutakuData１.xml ①

@@ -136,7 +136,7 @@ module DBC {
          "permitCharactor": ""
         },
         {
-         "fieldName": "JutakuKaishuZizenShinseiDetail",
+         "fieldName": "JutakuKaishuJizenShinseiDetailForTab",
          "items": [
           {
            "fieldName": "dgJutakuKaishuJizenShinseiDetail",
@@ -318,7 +318,7 @@ module DBC {
          "authorityMode": 0,
          "marginLeft": "0",
          "marginRight": "XS",
-         "selectControlID": "JutakuKaishuZizenShinseiDetail",
+         "selectControlID": "JutakuKaishuJizenShinseiDetailForTab",
          "helpMessageID": "",
          "jpControlName": "",
          "onLoad": "",
@@ -329,7 +329,7 @@ module DBC {
          "canOpenAndClose": false,
          "postParameterPanelNames": [
           {
-           "postParameterPanelNames": "JutakuKaishuZizenShinseiDetail"
+           "postParameterPanelNames": "JutakuKaishuJizenShinseiDetailForTab"
           }
          ],
          "requestSettings": [],

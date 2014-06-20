@@ -5,8 +5,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuJizenShinseiDetailForTabDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuJizenShinseiReasonDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuZizenShinseiDetailDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KozaPayment.KozaPaymentDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShinseishaInfo.ShinseishaInfoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -29,8 +29,8 @@ public class tplJizenShinseiContentsDiv extends TabPanel {
     private TextBox txtJutakuOwner;
     @JsonProperty("txtRelationWithHihokensha")
     private TextBox txtRelationWithHihokensha;
-    @JsonProperty("JutakuKaishuZizenShinseiDetail")
-    private JutakuKaishuZizenShinseiDetailDiv JutakuKaishuZizenShinseiDetail;
+    @JsonProperty("JutakuKaishuJizenShinseiDetailForTab")
+    private JutakuKaishuJizenShinseiDetailForTabDiv JutakuKaishuJizenShinseiDetailForTab;
     @JsonProperty("JutakuKaishuJizenShinseisha")
     private ShinseishaInfoDiv JutakuKaishuJizenShinseisha;
     @JsonProperty("JutakuKaishuJizenShinseiReason")
@@ -64,14 +64,14 @@ public class tplJizenShinseiContentsDiv extends TabPanel {
         this.txtRelationWithHihokensha=txtRelationWithHihokensha;
     }
 
-    @JsonProperty("JutakuKaishuZizenShinseiDetail")
-    public JutakuKaishuZizenShinseiDetailDiv getJutakuKaishuZizenShinseiDetail() {
-        return JutakuKaishuZizenShinseiDetail;
+    @JsonProperty("JutakuKaishuJizenShinseiDetailForTab")
+    public JutakuKaishuJizenShinseiDetailForTabDiv getJutakuKaishuJizenShinseiDetailForTab() {
+        return JutakuKaishuJizenShinseiDetailForTab;
     }
 
-    @JsonProperty("JutakuKaishuZizenShinseiDetail")
-    public void setJutakuKaishuZizenShinseiDetail(JutakuKaishuZizenShinseiDetailDiv JutakuKaishuZizenShinseiDetail) {
-        this.JutakuKaishuZizenShinseiDetail=JutakuKaishuZizenShinseiDetail;
+    @JsonProperty("JutakuKaishuJizenShinseiDetailForTab")
+    public void setJutakuKaishuJizenShinseiDetailForTab(JutakuKaishuJizenShinseiDetailForTabDiv JutakuKaishuJizenShinseiDetailForTab) {
+        this.JutakuKaishuJizenShinseiDetailForTab=JutakuKaishuJizenShinseiDetailForTab;
     }
 
     @JsonProperty("JutakuKaishuJizenShinseisha")

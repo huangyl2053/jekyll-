@@ -126,7 +126,7 @@ var DBC;
                                             "permitCharactor": ""
                                         },
                                         {
-                                            "fieldName": "JutakuKaishuZizenShinseiDetail",
+                                            "fieldName": "JutakuKaishuJizenShinseiDetailForTab",
                                             "items": [
                                                 {
                                                     "fieldName": "dgJutakuKaishuJizenShinseiDetail",
@@ -308,7 +308,7 @@ var DBC;
                                             "authorityMode": 0,
                                             "marginLeft": "0",
                                             "marginRight": "XS",
-                                            "selectControlID": "JutakuKaishuZizenShinseiDetail",
+                                            "selectControlID": "JutakuKaishuJizenShinseiDetailForTab",
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "onLoad": "",
@@ -319,7 +319,7 @@ var DBC;
                                             "canOpenAndClose": false,
                                             "postParameterPanelNames": [
                                                 {
-                                                    "postParameterPanelNames": "JutakuKaishuZizenShinseiDetail"
+                                                    "postParameterPanelNames": "JutakuKaishuJizenShinseiDetailForTab"
                                                 }
                                             ],
                                             "requestSettings": [],

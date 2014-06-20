@@ -6,12 +6,12 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBZ;
 (function (DBZ) {
-    var KozaPayment_Design = (function (_super) {
-        __extends(KozaPayment_Design, _super);
-        function KozaPayment_Design($parentElement, isDesignMode, fieldName) {
-            _super.call(this, $parentElement, isDesignMode, KozaPayment_Design.myLayout, fieldName);
+    var MadoguchiPayment_Design = (function (_super) {
+        __extends(MadoguchiPayment_Design, _super);
+        function MadoguchiPayment_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, MadoguchiPayment_Design.myLayout, fieldName);
         }
-        Object.defineProperty(KozaPayment_Design.prototype, "title", {
+        Object.defineProperty(MadoguchiPayment_Design.prototype, "title", {
             get: function () {
                 return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["title"];
             },
@@ -28,7 +28,7 @@ var DBZ;
         });
 
 
-        Object.defineProperty(KozaPayment_Design.prototype, "eraseBorderTop", {
+        Object.defineProperty(MadoguchiPayment_Design.prototype, "eraseBorderTop", {
             get: function () {
                 return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderTop"];
             },
@@ -45,7 +45,7 @@ var DBZ;
         });
 
 
-        Object.defineProperty(KozaPayment_Design.prototype, "eraseBorderBottom", {
+        Object.defineProperty(MadoguchiPayment_Design.prototype, "eraseBorderBottom", {
             get: function () {
                 return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderBottom"];
             },
@@ -62,7 +62,7 @@ var DBZ;
         });
 
 
-        Object.defineProperty(KozaPayment_Design.prototype, "eraseBorderRight", {
+        Object.defineProperty(MadoguchiPayment_Design.prototype, "eraseBorderRight", {
             get: function () {
                 return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderRight"];
             },
@@ -79,7 +79,7 @@ var DBZ;
         });
 
 
-        Object.defineProperty(KozaPayment_Design.prototype, "eraseBorderLeft", {
+        Object.defineProperty(MadoguchiPayment_Design.prototype, "eraseBorderLeft", {
             get: function () {
                 return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorderLeft"];
             },
@@ -96,7 +96,7 @@ var DBZ;
         });
 
 
-        Object.defineProperty(KozaPayment_Design.prototype, "panelDisplay", {
+        Object.defineProperty(MadoguchiPayment_Design.prototype, "panelDisplay", {
             get: function () {
                 return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"];
             },
@@ -113,7 +113,7 @@ var DBZ;
         });
 
 
-        KozaPayment_Design.prototype.registProperty = function () {
+        MadoguchiPayment_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
             Uz.JSControlUtil.registProperty("title");
             Uz.JSControlUtil.registProperty("eraseBorderTop");
@@ -123,7 +123,7 @@ var DBZ;
             Uz.JSControlUtil.registProperty("panelDisplay");
         };
 
-        KozaPayment_Design.prototype.getEditablePropertyInfo = function () {
+        MadoguchiPayment_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
             editablePropertyInfo["title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["title"];
             editablePropertyInfo["eraseBorderTop"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorderTop"];
@@ -134,17 +134,17 @@ var DBZ;
 
             return editablePropertyInfo;
         };
-        KozaPayment_Design.myLayout = {
+        MadoguchiPayment_Design.myLayout = {
             "fieldName": "defaultLayout",
             "items": [
                 {
-                    "fieldName": "KozaPayment",
+                    "fieldName": "MadoguchiPayment",
                     "items": [
                         {
-                            "fieldName": "txtKinyuKikanCode",
+                            "fieldName": "txtShiharaiBasho",
                             "items": [],
-                            "controlType": "TextBoxCode",
-                            "width": "32",
+                            "controlType": "TextBox",
+                            "width": "445",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -157,179 +157,40 @@ var DBZ;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
-                            "selectControlID": "txtKinyuKikanCode_core",
+                            "selectControlID": "txtShiharaiBasho_core",
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": false,
                             "required": false,
                             "maxLength": 100000000,
                             "minLength": 0,
-                            "textAlign": 0,
                             "placeHolder": "",
-                            "textKind": 2,
+                            "textKind": 0,
                             "isPrivateInfo": false,
-                            "isPassword": false,
-                            "isComboBox": false,
                             "onFocus": "",
                             "onBlur": "",
                             "onChange": "",
                             "onKeyPress": "",
-                            "text": "",
-                            "suggest": [],
                             "value": "",
-                            "labelLText": "金融機関",
+                            "labelLText": "支払場所",
                             "labelRText": "",
                             "labelLWidth": "70",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "decorationClass": "",
-                            "permitCharactor": "",
-                            "formatLength": "4"
-                        },
-                        {
-                            "fieldName": "txtKinyuKikanName",
-                            "items": [],
-                            "controlType": "TextBox",
-                            "width": "M",
-                            "visible": true,
-                            "displayNone": false,
-                            "disabled": false,
-                            "accessKey": "",
-                            "nextFocusFieldName": "",
-                            "wrap": false,
-                            "dependencies": [],
-                            "float": 0,
-                            "toolTip": "",
-                            "authorityMode": 0,
-                            "marginLeft": "-0.2",
-                            "marginRight": "XS",
-                            "selectControlID": "txtKinyuKikanName_core",
-                            "helpMessageID": "",
-                            "jpControlName": "",
-                            "readOnly": false,
-                            "required": false,
-                            "maxLength": 100000000,
-                            "minLength": 0,
                             "textAlign": 0,
-                            "placeHolder": "",
-                            "textKind": 0,
-                            "isPrivateInfo": false,
                             "isPassword": false,
                             "isComboBox": false,
-                            "onFocus": "",
-                            "onBlur": "",
-                            "onChange": "",
-                            "onKeyPress": "",
                             "text": "",
                             "suggest": [],
-                            "value": "",
-                            "labelLText": "",
-                            "labelRText": "",
-                            "labelLWidth": "S",
-                            "labelRWidth": "S",
-                            "labelLAlign": 2,
-                            "labelRAlign": 0,
                             "decorationClass": "",
                             "permitCharactor": ""
                         },
                         {
-                            "fieldName": "radKozaShubetsu",
+                            "fieldName": "txtShiharaiKaishiDate",
                             "items": [],
-                            "controlType": "RadioButton",
-                            "width": "210",
-                            "visible": true,
-                            "displayNone": false,
-                            "disabled": false,
-                            "accessKey": "",
-                            "nextFocusFieldName": "",
-                            "wrap": false,
-                            "dependencies": [],
-                            "float": 0,
-                            "toolTip": "",
-                            "authorityMode": 0,
-                            "marginLeft": "XS",
-                            "marginRight": "XS",
-                            "selectControlID": "radKozaShubetsu_core",
-                            "helpMessageID": "",
-                            "jpControlName": "",
-                            "required": false,
-                            "onChange": "",
-                            "labelLText": "口座種別",
-                            "labelLWidth": "70",
-                            "labelLAlign": 2,
-                            "selectedItem": "futsu",
-                            "dataSource": [
-                                {
-                                    "key": "futsu",
-                                    "value": "普通"
-                                },
-                                {
-                                    "key": "toza",
-                                    "value": "当座"
-                                },
-                                {
-                                    "key": "other",
-                                    "value": "その他"
-                                }
-                            ],
-                            "onClick": "",
-                            "newLineItemNumber": 3,
-                            "spaceSize": "S",
-                            "disabledItem": [],
-                            "icon": []
-                        },
-                        {
-                            "fieldName": "txtKozaMeigininKana",
-                            "items": [],
-                            "controlType": "TextBox",
-                            "width": "260",
-                            "visible": true,
-                            "displayNone": false,
-                            "disabled": false,
-                            "accessKey": "",
-                            "nextFocusFieldName": "",
-                            "wrap": false,
-                            "dependencies": [],
-                            "float": 0,
-                            "toolTip": "",
-                            "authorityMode": 0,
-                            "marginLeft": "0",
-                            "marginRight": "XS",
-                            "selectControlID": "txtKozaMeigininKana_core",
-                            "helpMessageID": "",
-                            "jpControlName": "",
-                            "readOnly": false,
-                            "required": false,
-                            "maxLength": 100000000,
-                            "minLength": 0,
-                            "textAlign": 0,
-                            "placeHolder": "",
-                            "textKind": 0,
-                            "isPrivateInfo": false,
-                            "isPassword": false,
-                            "isComboBox": false,
-                            "onFocus": "",
-                            "onBlur": "",
-                            "onChange": "",
-                            "onKeyPress": "",
-                            "text": "",
-                            "suggest": [],
-                            "value": "",
-                            "labelLText": "口座名義人",
-                            "labelRText": "",
-                            "labelLWidth": "90",
-                            "labelRWidth": "S",
-                            "labelLAlign": 2,
-                            "labelRAlign": 0,
-                            "decorationClass": "",
-                            "permitCharactor": ""
-                        },
-                        {
-                            "fieldName": "txtKinyuKikanBrunchCode",
-                            "items": [],
-                            "controlType": "TextBoxCode",
-                            "width": "32",
+                            "controlType": "TextBoxDate",
+                            "width": "90",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -342,41 +203,35 @@ var DBZ;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
-                            "selectControlID": "txtKinyuKikanBrunchCode_core",
+                            "selectControlID": "txtShiharaiKaishiDate_core",
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": false,
                             "required": false,
-                            "maxLength": 100000000,
-                            "minLength": 0,
-                            "textAlign": 0,
                             "placeHolder": "",
-                            "textKind": 2,
                             "isPrivateInfo": false,
-                            "isPassword": false,
-                            "isComboBox": false,
                             "onFocus": "",
                             "onBlur": "",
                             "onChange": "",
                             "onKeyPress": "",
-                            "text": "",
-                            "suggest": [],
                             "value": "",
-                            "labelLText": "支店",
+                            "labelLText": "開始日",
                             "labelRText": "",
                             "labelLWidth": "70",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "decorationClass": "",
-                            "permitCharactor": "",
-                            "formatLength": "3"
+                            "isPassword": false,
+                            "text": "",
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "permitCharactor": "./_-"
                         },
                         {
-                            "fieldName": "txtKinyuKikanBrunchName",
+                            "fieldName": "txtShiharaiKaishiDay",
                             "items": [],
                             "controlType": "TextBox",
-                            "width": "M",
+                            "width": "30",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -387,42 +242,42 @@ var DBZ;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "-0.2",
+                            "marginLeft": "-0.5",
                             "marginRight": "XS",
-                            "selectControlID": "txtKinyuKikanBrunchName_core",
+                            "selectControlID": "txtShiharaiKaishiDay_core",
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": false,
                             "required": false,
                             "maxLength": 100000000,
                             "minLength": 0,
-                            "textAlign": 0,
                             "placeHolder": "",
                             "textKind": 0,
                             "isPrivateInfo": false,
-                            "isPassword": false,
-                            "isComboBox": false,
                             "onFocus": "",
                             "onBlur": "",
                             "onChange": "",
                             "onKeyPress": "",
-                            "text": "",
-                            "suggest": [],
                             "value": "",
-                            "labelLText": "",
-                            "labelRText": "",
-                            "labelLWidth": "S",
-                            "labelRWidth": "S",
+                            "labelLText": "（",
+                            "labelRText": "）",
+                            "labelLWidth": "13",
+                            "labelRWidth": "13",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
+                            "textAlign": 1,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "text": "",
+                            "suggest": [],
                             "decorationClass": "",
                             "permitCharactor": ""
                         },
                         {
-                            "fieldName": "txtKozaNo",
+                            "fieldName": "txtShiharaiKaishiTime",
                             "items": [],
-                            "controlType": "TextBoxCode",
-                            "width": "60",
+                            "controlType": "TextBoxTime",
+                            "width": "50",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -435,41 +290,83 @@ var DBZ;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
-                            "selectControlID": "txtKozaNo_core",
+                            "selectControlID": "txtShiharaiKaishiTime_core",
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": false,
                             "required": false,
                             "maxLength": 100000000,
                             "minLength": 0,
-                            "textAlign": 0,
                             "placeHolder": "",
-                            "textKind": 2,
+                            "textKind": 0,
                             "isPrivateInfo": false,
-                            "isPassword": false,
-                            "isComboBox": false,
                             "onFocus": "",
                             "onBlur": "",
                             "onChange": "",
                             "onKeyPress": "",
-                            "text": "",
-                            "suggest": [],
                             "value": "",
-                            "labelLText": "口座番号",
+                            "labelLText": "開始時間",
                             "labelRText": "",
                             "labelLWidth": "70",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
+                            "textAlign": 0,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "text": "",
+                            "suggest": [],
                             "decorationClass": "",
+                            "displayFormat": 1,
                             "permitCharactor": "",
-                            "formatLength": "7"
+                            "timeKubun": 1
                         },
                         {
-                            "fieldName": "txtKozaMeiginin",
+                            "fieldName": "txtShiharaiShuryoDate",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "90",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtShiharaiShuryoDate_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "value": "",
+                            "labelLText": "終了日",
+                            "labelRText": "",
+                            "labelLWidth": "70",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "isPassword": false,
+                            "text": "",
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "permitCharactor": "./_-"
+                        },
+                        {
+                            "fieldName": "txtShiharaiShuryoDay",
                             "items": [],
                             "controlType": "TextBox",
-                            "width": "260",
+                            "width": "30",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -480,40 +377,88 @@ var DBZ;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "14.8",
+                            "marginLeft": "-0.5",
                             "marginRight": "XS",
-                            "selectControlID": "txtKozaMeiginin_core",
+                            "selectControlID": "txtShiharaiShuryoDay_core",
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": false,
                             "required": false,
                             "maxLength": 100000000,
                             "minLength": 0,
-                            "textAlign": 0,
                             "placeHolder": "",
                             "textKind": 0,
                             "isPrivateInfo": false,
-                            "isPassword": false,
-                            "isComboBox": false,
                             "onFocus": "",
                             "onBlur": "",
                             "onChange": "",
                             "onKeyPress": "",
+                            "value": "",
+                            "labelLText": "（",
+                            "labelRText": "）",
+                            "labelLWidth": "13",
+                            "labelRWidth": "13",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "textAlign": 1,
+                            "isPassword": false,
+                            "isComboBox": false,
                             "text": "",
                             "suggest": [],
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtShiharaiShuryoTime",
+                            "items": [],
+                            "controlType": "TextBoxTime",
+                            "width": "50",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtShiharaiShuryoTime_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
                             "value": "",
-                            "labelLText": "",
+                            "labelLText": "終了時間",
                             "labelRText": "",
-                            "labelLWidth": "80",
+                            "labelLWidth": "70",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
+                            "textAlign": 0,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "text": "",
+                            "suggest": [],
                             "decorationClass": "",
-                            "permitCharactor": ""
+                            "displayFormat": 1,
+                            "permitCharactor": "",
+                            "timeKubun": 1
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "1040",
+                    "width": "543",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -525,12 +470,12 @@ var DBZ;
                     "toolTip": "",
                     "authorityMode": 0,
                     "marginLeft": "0",
-                    "marginRight": "0",
-                    "selectControlID": "KozaPayment",
+                    "marginRight": "XS",
+                    "selectControlID": "MadoguchiPayment",
                     "helpMessageID": "",
                     "jpControlName": "",
                     "onLoad": "",
-                    "title": "口座払い",
+                    "title": "窓口払い",
                     "marginTop": "Default",
                     "marginBottom": "Default",
                     "isOpen": true,
@@ -551,7 +496,7 @@ var DBZ;
                     "eraseBorderLeft": false,
                     "backgroundColor": 0,
                     "widthAuto": false,
-                    "panelDisplay": 0,
+                    "panelDisplay": 1,
                     "isGroupBox": false,
                     "readOnly": false,
                     "height": "Auto"
@@ -576,37 +521,37 @@ var DBZ;
             "jpControlName": "",
             "relation": [],
             "businessId": "DBZ",
-            "controlName": "KozaPayment",
+            "controlName": "MadoguchiPayment",
             "marginTop": 0,
             "marginBottom": 0,
             "originalProperty": [
                 {
-                    "publicChildFieldName": "KozaPayment",
+                    "publicChildFieldName": "MadoguchiPayment",
                     "publicChildProperty": "title",
                     "newPropertyName": "title"
                 },
                 {
-                    "publicChildFieldName": "KozaPayment",
+                    "publicChildFieldName": "MadoguchiPayment",
                     "publicChildProperty": "eraseBorderTop",
                     "newPropertyName": "eraseBorderTop"
                 },
                 {
-                    "publicChildFieldName": "KozaPayment",
+                    "publicChildFieldName": "MadoguchiPayment",
                     "publicChildProperty": "eraseBorderBottom",
                     "newPropertyName": "eraseBorderBottom"
                 },
                 {
-                    "publicChildFieldName": "KozaPayment",
+                    "publicChildFieldName": "MadoguchiPayment",
                     "publicChildProperty": "eraseBorderRight",
                     "newPropertyName": "eraseBorderRight"
                 },
                 {
-                    "publicChildFieldName": "KozaPayment",
+                    "publicChildFieldName": "MadoguchiPayment",
                     "publicChildProperty": "eraseBorderLeft",
                     "newPropertyName": "eraseBorderLeft"
                 },
                 {
-                    "publicChildFieldName": "KozaPayment",
+                    "publicChildFieldName": "MadoguchiPayment",
                     "publicChildProperty": "panelDisplay",
                     "newPropertyName": "panelDisplay"
                 }
@@ -615,7 +560,7 @@ var DBZ;
             "dialogOkEventNameForDialog": "",
             "dialogCancelEventNameForDialog": ""
         };
-        return KozaPayment_Design;
+        return MadoguchiPayment_Design;
     })(Uz.CommonChildDiv);
-    DBZ.KozaPayment_Design = KozaPayment_Design;
+    DBZ.MadoguchiPayment_Design = MadoguchiPayment_Design;
 })(DBZ || (DBZ = {}));

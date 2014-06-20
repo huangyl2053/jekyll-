@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
@@ -29,6 +30,20 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * @author n8223 朴
  */
 public class JutakuKaishuShinseiInfoPanel {
+
+    public ResponseData<JutakuKaishuShinseiInfoPanelDiv> onLoad(
+            JutakuKaishuShinseiInfoPanelDiv panel, JutakuKaishuShinseiListDiv panel1) {
+        ResponseData<JutakuKaishuShinseiInfoPanelDiv> response = new ResponseData<>();
+
+        if (is事前申請あり(panel1.getDgJutakuKaishuShinseiList().getClickedRowId())) {
+            panel.getJutakuKaishuShinseiContents().getBtnShowJizenShinsei().setDisplayNone(true);
+        } else {
+            panel.getJutakuKaishuShinseiContents().getBtnShowJizenShinsei().setDisplayNone(false);
+        }
+
+        response.data = panel;
+        return response;
+    }
 
     /**
      * 住宅改修費申請登録 支給一覧の行を選択してから事前申請内容の情報を表示する。（事前申請用ボタン押下）
@@ -88,6 +103,8 @@ public class JutakuKaishuShinseiInfoPanel {
             JutakuKaishuShinseiInfoPanelDiv panel, JutakuKaishuShinseiListDiv panel1) {
         ResponseData<JutakuKaishuShinseiInfoPanelDiv> response = new ResponseData<>();
 
+        panel.getJutakuKaishuShinseiContents().getBtnShowJizenShinsei().setDisplayNone(true);
+
         //支給内容をクリア処理が行う
         setClearJutakuKaishuShinseiInfoPanelDiv(panel);
         //追加するデータ
@@ -124,7 +141,8 @@ public class JutakuKaishuShinseiInfoPanel {
             ymlDataName = "JutakuData_2_2.yml";
         }
 
-        List<dgJutakuKaishuDetail_Row> arraydata = createRowShikyuShinseiAddTestData(panel, ymlDataName);
+        List<dgJutakuKaishuDetail_Row> arraydata = createRowShikyuShinseiAddTestData(
+                panel, panel1.getDgJutakuKaishuShinseiList().getClickedRowId(), ymlDataName);
         DataGrid<dgJutakuKaishuDetail_Row> grid = panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiDetail().
                 getJutakuKaishuShinseiDetailInput().getDgJutakuKaishuDetail();
         grid.setDataSource(arraydata);
@@ -424,19 +442,20 @@ public class JutakuKaishuShinseiInfoPanel {
 
         //TO DO  JutakuData.xml Write　③
         //初期値を設定したいものに値を入れる。値をセットしなければ空欄
-        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getTxtKinyuKikanCode().setValue(new RString(kinyuKikanCode));
-        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getTxtKinyuKikanName().setValue(new RString(kinyuKikanName));
-        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getTxtKinyuKikanBrunchCode().setValue(new RString(kinyuBranchCode));
-        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getTxtKinyuKikanBrunchName().setValue(new RString(kinyuBranchName));
-        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getTxtKozaMeigininKana().setValue(new RString(kozaMeigininKanaName));
-        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getTxtKozaMeiginin().setValue(new RString(kozaMeigininName));
+        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getKozaPayment().getTxtKinyuKikanCode().setValue(new RString(kinyuKikanCode));
+        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getKozaPayment().getTxtKinyuKikanName().setValue(new RString(kinyuKikanName));
+        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getKozaPayment().getTxtKinyuKikanBrunchCode().setValue(new RString(kinyuBranchCode));
+        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getKozaPayment().getTxtKinyuKikanBrunchName().setValue(new RString(kinyuBranchName));
+        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getKozaPayment().getTxtKozaMeigininKana().setValue(new RString(kozaMeigininKanaName));
+        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getKozaPayment().getTxtKozaMeiginin().setValue(new RString(kozaMeigininName));
 
     }
 
     /*
      住宅改修明細をセットします。
      */
-    private List<dgJutakuKaishuDetail_Row> createRowShikyuShinseiAddTestData(JutakuKaishuShinseiInfoPanelDiv panel, String ymlDataName) {
+    private List<dgJutakuKaishuDetail_Row> createRowShikyuShinseiAddTestData(
+            JutakuKaishuShinseiInfoPanelDiv panel, int rowId, String ymlDataName) {
 
         List<dgJutakuKaishuDetail_Row> arrayData = new ArrayList<>();
 
@@ -448,15 +467,20 @@ public class JutakuKaishuShinseiInfoPanel {
         String kanseiDueDate = ymlData.get(0).get("kanseiDueDate").toString();
         String mitsumoriAmount = ymlData.get(0).get("mitsumoriAmount").toString();
         String kaishuJigyosha = ymlData.get(0).get("kaishuJigyosha").toString();
+        String kaishuTaishoAddress = ymlData.get(0).get("kaishuTaishoAddress").toString();
+        String kaishuNaiyo = ymlData.get(0).get("kaishuNaiyo").toString();
 
         //TO DO  JutakuData.xml Write　③
         //初期値を設定したいものに値を入れる。値をセットしなければ空欄
         dgJutakuKaishuDetail_Row item;
         item = createRowShikyuShinseiListAddData(
+                rowId,
                 chakkoDueDate,
                 kanseiDueDate,
                 mitsumoriAmount,
-                kaishuJigyosha
+                kaishuJigyosha,
+                kaishuTaishoAddress,
+                kaishuNaiyo
         );
 
         arrayData.add(item);
@@ -469,11 +493,13 @@ public class JutakuKaishuShinseiInfoPanel {
      * 引数を元にデータグリッド内に挿入する支給申請データを作成します。
      */
     private dgJutakuKaishuDetail_Row createRowShikyuShinseiListAddData(
+            int rowId,
             String 着工予定日,
             String 完成予定日,
             String 見積金額,
-            String 事業者
-    ) {
+            String 事業者,
+            String 改修住宅住所,
+            String 改修内容) {
 
         dgJutakuKaishuDetail_Row rowShikyuShinseiListData = new dgJutakuKaishuDetail_Row(
                 new TextBoxDate(), new TextBoxDate(), new TextBoxNum(), RString.EMPTY, RString.EMPTY, RString.EMPTY);
@@ -482,13 +508,26 @@ public class JutakuKaishuShinseiInfoPanel {
         rowShikyuShinseiListData.getTxtKanseiDueDate().setValue(new RDate(完成予定日));
         rowShikyuShinseiListData.getTxtMitsumoriAmount().setValue(new Decimal(見積金額));
         rowShikyuShinseiListData.setTxtKaishuJigyosha(new RString(事業者));
+        rowShikyuShinseiListData.setTxtKaishuJigyosha(new RString(改修住宅住所));
+        rowShikyuShinseiListData.setTxtKaishuJigyosha(new RString(改修内容));
+
+        if (is事前申請あり(rowId)) {
+            rowShikyuShinseiListData.setRowState(RowState.Modified);
+        } else {
+            rowShikyuShinseiListData.setRowState(RowState.Added);
+        }
 
         return rowShikyuShinseiListData;
     }
 
+    private boolean is事前申請あり(int rowId) {
+//デモでは事前申請ありデータはrowId=0で固定にする。
+        return (rowId == 0);
+    }
     /*
      * 今回の支払状況の値を設定します。
      */
+
     private void setSummaryAddNowData(JutakuKaishuShinseiInfoPanelDiv panel, String ymlDataName) {
 
         //TO DO  JutakuData1.xml ①
@@ -625,12 +664,12 @@ public class JutakuKaishuShinseiInfoPanel {
         panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().getTxtCreatorName().clearValue();
 
         //口座振替申請情報 clear
-        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getTxtKinyuKikanCode().clearValue();
-        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getTxtKinyuKikanName().clearValue();
-        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getTxtKinyuKikanBrunchCode().clearValue();
-        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getTxtKinyuKikanBrunchName().clearValue();
-        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getTxtKozaMeigininKana().clearValue();
-        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getTxtKozaMeiginin().clearValue();
+        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getKozaPayment().getTxtKinyuKikanCode().clearValue();
+        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getKozaPayment().getTxtKinyuKikanName().clearValue();
+        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getKozaPayment().getTxtKinyuKikanBrunchCode().clearValue();
+        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getKozaPayment().getTxtKinyuKikanBrunchName().clearValue();
+        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getKozaPayment().getTxtKozaMeigininKana().clearValue();
+        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getKozaPayment().getTxtKozaMeiginin().clearValue();
     }
 
     // TO DO  JutakuData１.xml ①

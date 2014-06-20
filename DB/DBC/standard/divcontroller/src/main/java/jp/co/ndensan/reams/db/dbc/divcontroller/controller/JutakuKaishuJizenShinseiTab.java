@@ -93,7 +93,7 @@ public class JutakuKaishuJizenShinseiTab {
     }
 
     private void set住宅改修明細List(JutakuKaishuJizenShinseiTabDiv panel) {
-        panel.getTabJizenShinsei().getTplJizenShinseiContents().getJutakuKaishuZizenShinseiDetail()
+        panel.getTabJizenShinsei().getTplJizenShinseiContents().getJutakuKaishuJizenShinseiDetailForTab()
                 .getDgJutakuKaishuJizenShinseiDetail().setDataSource(get住宅改修明細List());
     }
 

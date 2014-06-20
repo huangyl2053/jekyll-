@@ -129,7 +129,7 @@ module DBC {
       "isShowFooter": true,
       "isShowFilter": false,
       "isShowFilterButton": false,
-      "isShowRowState": false,
+      "isShowRowState": true,
       "isShowSelectButtonColumn": false,
       "isShowModifyButtonColumn": true,
       "isShowDeleteButtonColumn": true,

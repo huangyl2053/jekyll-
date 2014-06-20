@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiDetai
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Jun 19 09:25:51 JST 2014 
+ * Fri Jun 20 14:08:41 JST 2014 
  */
 
 
