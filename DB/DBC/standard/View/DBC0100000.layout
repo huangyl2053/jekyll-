@@ -65,7 +65,274 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
-     "onClickBtnToResearch": "onClickBtnToResearch"
+     "onClickBtnToResearch": "onClickBtnToResearch",
+     "gridSetting": {
+      "rowHeight": 50,
+      "isMultiSelectable": false,
+      "isShowHeader": true,
+      "isShowFooter": true,
+      "isShowFilter": false,
+      "isShowFilterButton": false,
+      "isShowRowState": false,
+      "isShowSelectButtonColumn": true,
+      "isShowModifyButtonColumn": false,
+      "isShowDeleteButtonColumn": false,
+      "limitRowCount": 0,
+      "selectedRowCount": 0,
+      "header": {
+       "combineColumns": [],
+       "frozenColumn": "",
+       "headerHeight": 0
+      },
+      "columns": [
+       {
+        "columnName": "",
+        "dataName": "btnToDecide",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 50,
+        "visible": false,
+        "cellType": 8,
+        "cellDetails": {
+         "cellType": 8,
+         "text": "確定",
+         "onClick": "",
+         "imageFileUrl": "",
+         "imageWidth": "",
+         "imageHeight": ""
+        },
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "btnToDecide"
+       },
+       {
+        "columnName": "被保番号",
+        "dataName": "hihokenshaNo",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 110,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "hihokenshaNo"
+       },
+       {
+        "columnName": "識別コード",
+        "dataName": "shikibetsuCode",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 110,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "shikibetsuCode"
+       },
+       {
+        "columnName": "被保険者区分",
+        "dataName": "hihokenshaKubun",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 110,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "hihokenshaKubun"
+       },
+       {
+        "columnName": "氏名",
+        "dataName": "shimei",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 150,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "shimei"
+       },
+       {
+        "columnName": "カナ氏名",
+        "dataName": "kanaShimsei",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 150,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "kanaShimsei"
+       },
+       {
+        "columnName": "氏名",
+        "dataName": "shimeiAndKanaShimsei",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 150,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "kanaShimsei"
+       },
+       {
+        "columnName": "性別",
+        "dataName": "gender",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 50,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "gender"
+       },
+       {
+        "columnName": "生年月日",
+        "dataName": "birthDay",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 110,
+        "visible": true,
+        "cellType": 6,
+        "cellDetails": {
+         "cellType": 6,
+         "ymdKubun": 2,
+         "displayFormat": 3,
+         "onChange": "",
+         "isSetValueToToolTip": false,
+         "readOnly": true
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "birthDay"
+       },
+       {
+        "columnName": "郵便番号",
+        "dataName": "yubinNo",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 110,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "yubinNo"
+       },
+       {
+        "columnName": "住所",
+        "dataName": "jusho",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 300,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "jusho"
+       },
+       {
+        "columnName": "個人番号",
+        "dataName": "kojinNo",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 120,
+        "visible": false,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 0,
+        "resize": false,
+        "isPrivateInfo": false,
+        "sortKey": "kojinNo"
+       },
+       {
+        "columnName": "住民種別",
+        "dataName": "juminShubetsu",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 100,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "juminShubetsu"
+       },
+       {
+        "columnName": "世帯コード",
+        "dataName": "setaiCode",
+        "toolTip": "",
+        "bgColor": 0,
+        "width": 110,
+        "visible": true,
+        "cellType": 0,
+        "cellDetails": {
+         "cellType": 0,
+         "isSetValueToToolTip": false
+        },
+        "align": 0,
+        "resize": true,
+        "isPrivateInfo": false,
+        "sortKey": "setaiCode"
+       }
+      ]
+     }
     }
    ],
    "controlType": "Panel",
@@ -2353,7 +2620,7 @@
     },
     {
      "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectByDblClick",
+     "event": "onSelectBySelectButton",
      "transition": "届出一覧"
     },
     {
@@ -2367,9 +2634,9 @@
      "transition": ""
     },
     {
-     "fieldName": "dgKyotakuKeikakuTodokedeRirekiList",
-     "event": "onSelectBySelectButton",
-     "transition": ""
+     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
+     "event": "onSelectByDblClick",
+     "transition": "届出一覧"
     },
     {
      "fieldName": "btnTodokedeTeisei",
@@ -2394,6 +2661,11 @@
     {
      "fieldName": "todokedeSaveBtn",
      "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgKyotakuKeikakuTodokedeRirekiList",
+     "event": "onSelectBySelectButton",
      "transition": ""
     }
    ]
@@ -2468,7 +2740,7 @@
     },
     {
      "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectByDblClick",
+     "event": "onSelectBySelectButton",
      "transition": ""
     },
     {
@@ -2482,9 +2754,9 @@
      "transition": "明細登録"
     },
     {
-     "fieldName": "dgKyotakuKeikakuTodokedeRirekiList",
-     "event": "onSelectBySelectButton",
-     "transition": "明細登録"
+     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
+     "event": "onSelectByDblClick",
+     "transition": ""
     },
     {
      "fieldName": "btnTodokedeTeisei",
@@ -2510,6 +2782,11 @@
      "fieldName": "todokedeSaveBtn",
      "event": "onClick",
      "transition": "更新完了"
+    },
+    {
+     "fieldName": "dgKyotakuKeikakuTodokedeRirekiList",
+     "event": "onSelectBySelectButton",
+     "transition": "明細登録"
     }
    ]
   },
@@ -2573,7 +2850,7 @@
     },
     {
      "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectByDblClick",
+     "event": "onSelectBySelectButton",
      "transition": ""
     },
     {
@@ -2587,8 +2864,8 @@
      "transition": ""
     },
     {
-     "fieldName": "dgKyotakuKeikakuTodokedeRirekiList",
-     "event": "onSelectBySelectButton",
+     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
+     "event": "onSelectByDblClick",
      "transition": ""
     },
     {
@@ -2614,6 +2891,11 @@
     {
      "fieldName": "todokedeSaveBtn",
      "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgKyotakuKeikakuTodokedeRirekiList",
+     "event": "onSelectBySelectButton",
      "transition": ""
     }
    ]
@@ -2645,7 +2927,7 @@
     },
     {
      "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectByDblClick",
+     "event": "onSelectBySelectButton",
      "transition": ""
     },
     {
@@ -2659,8 +2941,8 @@
      "transition": ""
     },
     {
-     "fieldName": "dgKyotakuKeikakuTodokedeRirekiList",
-     "event": "onSelectBySelectButton",
+     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
+     "event": "onSelectByDblClick",
      "transition": ""
     },
     {
@@ -2686,6 +2968,11 @@
     {
      "fieldName": "todokedeSaveBtn",
      "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "dgKyotakuKeikakuTodokedeRirekiList",
+     "event": "onSelectBySelectButton",
      "transition": ""
     }
    ]
