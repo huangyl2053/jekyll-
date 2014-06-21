@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.ur.ura.divcontroller.controller.AtenaShokaiSimple;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
@@ -133,15 +134,23 @@ public class KyotakuKeikakuTodokedeDetail {
                 getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeRirekiList();
         List<dgKyotakuKeikakuTodokedeRirekiList_Row> dgList = rirekiList.getDgKyotakuKeikakuTodokedeRirekiList().getDataSource();
         dgKyotakuKeikakuTodokedeRirekiList_Row currentRow = dgList.get(index);
+        KyotakuKeikakuTodokedeMeisaiDiv meisai = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
+                getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeMeisai();
+        dgKyotakuKeikakuTodokedeRirekiList_Row newRow;
 
-        dgKyotakuKeikakuTodokedeRirekiList_Row newRow = create履歴(
+        RString 計画適用期間開始日 = new FlexibleDate(meisai.getTxtTekiyoKikan().getFromValue().toDateString()).wareki().toDateString();
+        RString 計画適用期間終了日 = new FlexibleDate(meisai.getTxtTekiyoKikan().getToValue().toDateString()).wareki().toDateString();
+        RString 届出日 = new FlexibleDate(meisai.getTxtTodokedeYMD().getValue().toDateString()).wareki().toDateString();
+        RString 計画依頼事業者 = meisai.getKyotakuKeikakuTodokedeJigyosha().getTxtJigyoshaCode().getValue().
+                concat(":").concat(meisai.getKyotakuKeikakuTodokedeJigyosha().getTxtJigyoshaName().getValue());
+        newRow = create履歴(
                 currentRow.getBtnSelect(),
                 new RString(kubun.toString()),
-                currentRow.getTxtKeikakuTekiyoKaishiYMD(),
-                currentRow.getTxtKeikakuTekiyoShuryoYMD(),
-                currentRow.getTxtTodokedeYMD(),
+                計画適用期間開始日,
+                計画適用期間終了日,
+                届出日,
                 currentRow.getTxtTodokedeKubun(),
-                currentRow.getTxtKeikakuIraiJigyosha());
+                計画依頼事業者);
         dgList.remove(index);
         dgList.add(index, newRow);
         Collections.sort(dgList, new DateComparator());
@@ -263,6 +272,8 @@ public class KyotakuKeikakuTodokedeDetail {
     public ResponseData onClickTodokedeKakutei(KyotakuKeikakuTodokedeDetailDiv panel) {
         ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
         Button btn = new Button();
+        KyotakuKeikakuTodokedeMeisaiDiv meisai = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
+                getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeMeisai();
         RString kubun = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
                 getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeMeisai().getTxtTodokedeKubun().getValue();
         ControlGenerator cg;
@@ -271,14 +282,21 @@ public class KyotakuKeikakuTodokedeDetail {
         } else {
             cg = new ControlGenerator(getYaml().get(6));
         }
+
+        RString 計画適用期間開始日 = new FlexibleDate(meisai.getTxtTekiyoKikan().getFromValue().toDateString()).wareki().toDateString();
+        RString 計画適用期間終了日 = new FlexibleDate(meisai.getTxtTekiyoKikan().getToValue().toDateString()).wareki().toDateString();
+        RString 届出日 = new FlexibleDate(meisai.getTxtTodokedeYMD().getValue().toDateString()).wareki().toDateString();
+        RString 計画依頼事業者 = meisai.getKyotakuKeikakuTodokedeJigyosha().getTxtJigyoshaCode().getValue().
+                concat(":").concat(meisai.getKyotakuKeikakuTodokedeJigyosha().getTxtJigyoshaName().getValue());
+
         add履歴(panel, create履歴(
                 btn,
                 cg.getAsRString("状態"),
-                cg.getAsRString("計画適用期間開始日"),
-                cg.getAsRString("計画適用期間終了日"),
-                cg.getAsRString("届出日"),
+                計画適用期間開始日,
+                計画適用期間終了日,
+                届出日,
                 kubun,
-                cg.getAsRString("計画依頼事業者")));
+                計画依頼事業者));
         initMeisai(panel);
         response.data = panel;
         return response;
@@ -481,10 +499,13 @@ public class KyotakuKeikakuTodokedeDetail {
                 || pattern.equals(画面表示.変更届出)
                 || pattern.equals(画面表示.届出内容修正)) {
 
-            meisai.getTxtTodokedeYMD().setValue(cg.getAsRDate("届出日"));
-            meisai.getTxtTekiyoKikan().setFromValue(cg.getAsRDate("適用期間開始日"));
             if (pattern.equals(画面表示.届出内容修正)) {
-                meisai.getTxtTekiyoKikan().setToValue(cg.getAsRDate("適用期間終了日"));
+                meisai.getTxtTodokedeYMD().setValue(new RDate(selectRow.getTxtTodokedeYMD().toString()));
+                meisai.getTxtTekiyoKikan().setFromValue(new RDate(selectRow.getTxtKeikakuTekiyoKaishiYMD().toString()));
+                meisai.getTxtTekiyoKikan().setToValue(new RDate(selectRow.getTxtKeikakuTekiyoShuryoYMD().toString()));
+            } else {
+                meisai.getTxtTodokedeYMD().setValue(cg.getAsRDate("届出日"));
+                meisai.getTxtTekiyoKikan().setFromValue(cg.getAsRDate("適用期間開始日"));
             }
 
             todokedesha.getTxtTodokedeshaName().setValue(cg.getAsRString("届出者氏名"));
@@ -494,8 +515,15 @@ public class KyotakuKeikakuTodokedeDetail {
             todokedesha.getTxtTodokedeshaJusho().setValue(cg.getAsRString("届出者住所"));
 
             jigyosha.getRadKeikakuSakuseiKubun().setSelectedItem(cg.getAsRString("事業者作成区分"));
-            jigyosha.getTxtJigyoshaCode().setValue(cg.getAsRString("事業者コード"));
-            jigyosha.getTxtJigyoshaName().setValue(cg.getAsRString("事業者名"));
+            if (pattern.equals(画面表示.届出内容修正)) {
+                RString 事業者コード = selectRow.getTxtKeikakuIraiJigyosha().substring(0, 10);
+                RString 事業者名 = selectRow.getTxtKeikakuIraiJigyosha().substring(11);
+                jigyosha.getTxtJigyoshaCode().setValue(事業者コード);
+                jigyosha.getTxtJigyoshaName().setValue(事業者名);
+            } else {
+                jigyosha.getTxtJigyoshaCode().setValue(cg.getAsRString("事業者コード"));
+                jigyosha.getTxtJigyoshaName().setValue(cg.getAsRString("事業者名"));
+            }
             jigyosha.getTxtServiceShurui1().setValue(cg.getAsRString("事業者サービス種類１"));
             jigyosha.getTxtServiceShurui2().setValue(cg.getAsRString("事業者サービス種類２"));
             jigyosha.getTxtKanrishaName().setValue(cg.getAsRString("事業者管理者名"));

@@ -1967,7 +1967,7 @@
          "jpControlName": "",
          "onLoad": "",
          "title": "計画届出明細",
-         "isOpen": false,
+         "isOpen": true,
          "canOpenAndClose": true,
          "postParameterPanelNames": [
           {
@@ -2382,12 +2382,12 @@
      "transition": ""
     },
     {
-     "fieldName": "btnReturn",
+     "fieldName": "btnTodokedeKakutei",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnTodokedeKakutei",
+     "fieldName": "btnReturn",
      "event": "onClick",
      "transition": ""
     },
@@ -2484,7 +2484,7 @@
     {
      "fieldName": "dgKyotakuKeikakuTodokedeRirekiList",
      "event": "onSelectBySelectButton",
-     "transition": "届出明細"
+     "transition": "明細登録"
     },
     {
      "fieldName": "btnTodokedeTeisei",
@@ -2497,14 +2497,14 @@
      "transition": ""
     },
     {
-     "fieldName": "btnReturn",
-     "event": "onClick",
-     "transition": "該当者検索"
-    },
-    {
      "fieldName": "btnTodokedeKakutei",
      "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": "該当者検索"
     },
     {
      "fieldName": "todokedeSaveBtn",
@@ -2602,14 +2602,14 @@
      "transition": "届出一覧"
     },
     {
-     "fieldName": "btnReturn",
-     "event": "onClick",
-     "transition": "該当者検索"
-    },
-    {
      "fieldName": "btnTodokedeKakutei",
      "event": "onClick",
      "transition": "届出一覧"
+    },
+    {
+     "fieldName": "btnReturn",
+     "event": "onClick",
+     "transition": "該当者検索"
     },
     {
      "fieldName": "todokedeSaveBtn",
@@ -2674,12 +2674,12 @@
      "transition": ""
     },
     {
-     "fieldName": "btnReturn",
+     "fieldName": "btnTodokedeKakutei",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnTodokedeKakutei",
+     "fieldName": "btnReturn",
      "event": "onClick",
      "transition": ""
     },
