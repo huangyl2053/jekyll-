@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -21,24 +21,14 @@ public class IryohokenshaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblIryohokenType")
-    private Label lblIryohokenType;
     @JsonProperty("ddlIryohokenType")
     private DropDownList ddlIryohokenType;
-    @JsonProperty("lblIryohokenshaNo")
-    private Label lblIryohokenshaNo;
     @JsonProperty("txtIryohokenshaNo")
     private TextBoxCode txtIryohokenshaNo;
-    @JsonProperty("lblIryohokenshaName")
-    private Label lblIryohokenshaName;
     @JsonProperty("txtIryohokenshaName")
     private TextBox txtIryohokenshaName;
-    @JsonProperty("lblIryohokenKigo")
-    private Label lblIryohokenKigo;
     @JsonProperty("txtIryohokenKigo")
     private TextBoxCode txtIryohokenKigo;
-    @JsonProperty("lblIryohokenBango")
-    private Label lblIryohokenBango;
     @JsonProperty("txtIryohokenBango")
     private TextBoxCode txtIryohokenBango;
 
@@ -48,16 +38,6 @@ public class IryohokenshaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblIryohokenType")
-    public Label getLblIryohokenType() {
-        return lblIryohokenType;
-    }
-
-    @JsonProperty("lblIryohokenType")
-    public void setLblIryohokenType(Label lblIryohokenType) {
-        this.lblIryohokenType=lblIryohokenType;
-    }
-
     @JsonProperty("ddlIryohokenType")
     public DropDownList getDdlIryohokenType() {
         return ddlIryohokenType;
@@ -66,16 +46,6 @@ public class IryohokenshaDiv extends Panel {
     @JsonProperty("ddlIryohokenType")
     public void setDdlIryohokenType(DropDownList ddlIryohokenType) {
         this.ddlIryohokenType=ddlIryohokenType;
-    }
-
-    @JsonProperty("lblIryohokenshaNo")
-    public Label getLblIryohokenshaNo() {
-        return lblIryohokenshaNo;
-    }
-
-    @JsonProperty("lblIryohokenshaNo")
-    public void setLblIryohokenshaNo(Label lblIryohokenshaNo) {
-        this.lblIryohokenshaNo=lblIryohokenshaNo;
     }
 
     @JsonProperty("txtIryohokenshaNo")
@@ -88,16 +58,6 @@ public class IryohokenshaDiv extends Panel {
         this.txtIryohokenshaNo=txtIryohokenshaNo;
     }
 
-    @JsonProperty("lblIryohokenshaName")
-    public Label getLblIryohokenshaName() {
-        return lblIryohokenshaName;
-    }
-
-    @JsonProperty("lblIryohokenshaName")
-    public void setLblIryohokenshaName(Label lblIryohokenshaName) {
-        this.lblIryohokenshaName=lblIryohokenshaName;
-    }
-
     @JsonProperty("txtIryohokenshaName")
     public TextBox getTxtIryohokenshaName() {
         return txtIryohokenshaName;
@@ -108,16 +68,6 @@ public class IryohokenshaDiv extends Panel {
         this.txtIryohokenshaName=txtIryohokenshaName;
     }
 
-    @JsonProperty("lblIryohokenKigo")
-    public Label getLblIryohokenKigo() {
-        return lblIryohokenKigo;
-    }
-
-    @JsonProperty("lblIryohokenKigo")
-    public void setLblIryohokenKigo(Label lblIryohokenKigo) {
-        this.lblIryohokenKigo=lblIryohokenKigo;
-    }
-
     @JsonProperty("txtIryohokenKigo")
     public TextBoxCode getTxtIryohokenKigo() {
         return txtIryohokenKigo;
@@ -126,16 +76,6 @@ public class IryohokenshaDiv extends Panel {
     @JsonProperty("txtIryohokenKigo")
     public void setTxtIryohokenKigo(TextBoxCode txtIryohokenKigo) {
         this.txtIryohokenKigo=txtIryohokenKigo;
-    }
-
-    @JsonProperty("lblIryohokenBango")
-    public Label getLblIryohokenBango() {
-        return lblIryohokenBango;
-    }
-
-    @JsonProperty("lblIryohokenBango")
-    public void setLblIryohokenBango(Label lblIryohokenBango) {
-        this.lblIryohokenBango=lblIryohokenBango;
     }
 
     @JsonProperty("txtIryohokenBango")

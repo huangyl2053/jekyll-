@@ -10,21 +10,19 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * SearchCriteriaOfHihokensha のクラスファイル 
+ * SearchCriteriaDetail のクラスファイル 
  * 
  * @author 自動生成
  */
-public class SearchCriteriaOfHihokenshaDiv extends Panel {
+public class SearchCriteriaDetailDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtHihokenshaNo")
-    private TextBoxCode txtHihokenshaNo;
-    @JsonProperty("txtTuchishoNo")
-    private TextBoxCode txtTuchishoNo;
+    @JsonProperty("chkMinashiNigo")
+    private CheckBoxList chkMinashiNigo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,24 +30,14 @@ public class SearchCriteriaOfHihokenshaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("txtHihokenshaNo")
-    public TextBoxCode getTxtHihokenshaNo() {
-        return txtHihokenshaNo;
+    @JsonProperty("chkMinashiNigo")
+    public CheckBoxList getChkMinashiNigo() {
+        return chkMinashiNigo;
     }
 
-    @JsonProperty("txtHihokenshaNo")
-    public void setTxtHihokenshaNo(TextBoxCode txtHihokenshaNo) {
-        this.txtHihokenshaNo=txtHihokenshaNo;
-    }
-
-    @JsonProperty("txtTuchishoNo")
-    public TextBoxCode getTxtTuchishoNo() {
-        return txtTuchishoNo;
-    }
-
-    @JsonProperty("txtTuchishoNo")
-    public void setTxtTuchishoNo(TextBoxCode txtTuchishoNo) {
-        this.txtTuchishoNo=txtTuchishoNo;
+    @JsonProperty("chkMinashiNigo")
+    public void setChkMinashiNigo(CheckBoxList chkMinashiNigo) {
+        this.chkMinashiNigo=chkMinashiNigo;
     }
 
 }

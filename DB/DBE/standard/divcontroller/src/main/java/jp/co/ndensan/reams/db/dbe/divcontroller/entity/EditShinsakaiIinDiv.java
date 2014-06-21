@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -21,18 +21,12 @@ public class EditShinsakaiIinDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblKankeiIinCode")
-    private Label lblKankeiIinCode;
     @JsonProperty("txtKankeiIinCode")
     private TextBoxCode txtKankeiIinCode;
-    @JsonProperty("imgToSearchShinsakaiIin")
-    private StaticImage imgToSearchShinsakaiIin;
-    @JsonProperty("lblKankeiIinName")
-    private Label lblKankeiIinName;
+    @JsonProperty("btnSearchShinsakaiIin")
+    private ButtonDialog btnSearchShinsakaiIin;
     @JsonProperty("txtKankeiIinName")
     private TextBox txtKankeiIinName;
-    @JsonProperty("lblShozokuKikan")
-    private Label lblShozokuKikan;
     @JsonProperty("txtShozokuKikan")
     private TextBox txtShozokuKikan;
 
@@ -42,16 +36,6 @@ public class EditShinsakaiIinDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblKankeiIinCode")
-    public Label getLblKankeiIinCode() {
-        return lblKankeiIinCode;
-    }
-
-    @JsonProperty("lblKankeiIinCode")
-    public void setLblKankeiIinCode(Label lblKankeiIinCode) {
-        this.lblKankeiIinCode=lblKankeiIinCode;
-    }
-
     @JsonProperty("txtKankeiIinCode")
     public TextBoxCode getTxtKankeiIinCode() {
         return txtKankeiIinCode;
@@ -62,24 +46,14 @@ public class EditShinsakaiIinDiv extends Panel {
         this.txtKankeiIinCode=txtKankeiIinCode;
     }
 
-    @JsonProperty("imgToSearchShinsakaiIin")
-    public StaticImage getImgToSearchShinsakaiIin() {
-        return imgToSearchShinsakaiIin;
+    @JsonProperty("btnSearchShinsakaiIin")
+    public ButtonDialog getBtnSearchShinsakaiIin() {
+        return btnSearchShinsakaiIin;
     }
 
-    @JsonProperty("imgToSearchShinsakaiIin")
-    public void setImgToSearchShinsakaiIin(StaticImage imgToSearchShinsakaiIin) {
-        this.imgToSearchShinsakaiIin=imgToSearchShinsakaiIin;
-    }
-
-    @JsonProperty("lblKankeiIinName")
-    public Label getLblKankeiIinName() {
-        return lblKankeiIinName;
-    }
-
-    @JsonProperty("lblKankeiIinName")
-    public void setLblKankeiIinName(Label lblKankeiIinName) {
-        this.lblKankeiIinName=lblKankeiIinName;
+    @JsonProperty("btnSearchShinsakaiIin")
+    public void setBtnSearchShinsakaiIin(ButtonDialog btnSearchShinsakaiIin) {
+        this.btnSearchShinsakaiIin=btnSearchShinsakaiIin;
     }
 
     @JsonProperty("txtKankeiIinName")
@@ -90,16 +64,6 @@ public class EditShinsakaiIinDiv extends Panel {
     @JsonProperty("txtKankeiIinName")
     public void setTxtKankeiIinName(TextBox txtKankeiIinName) {
         this.txtKankeiIinName=txtKankeiIinName;
-    }
-
-    @JsonProperty("lblShozokuKikan")
-    public Label getLblShozokuKikan() {
-        return lblShozokuKikan;
-    }
-
-    @JsonProperty("lblShozokuKikan")
-    public void setLblShozokuKikan(Label lblShozokuKikan) {
-        this.lblShozokuKikan=lblShozokuKikan;
     }
 
     @JsonProperty("txtShozokuKikan")

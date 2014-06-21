@@ -6,9 +6,13 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.ButtonsForHihokenshaFinderDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoSaikinShorishaRirekiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoSaikinShorishaRirekiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.SearchCriteriaDetailDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.SearchCriteriaOfHihokenshaDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.SearchCriteriaOfHokenshaDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.SearchCriteriaOfKojinDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.SearchCriteriaOfOtherDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -29,8 +33,14 @@ public class HihokenshaFinderDiv extends Panel {
     private SearchCriteriaOfHihokenshaDiv SearchCriteriaOfHihokensha;
     @JsonProperty("SearchCriteriaOfKojin")
     private SearchCriteriaOfKojinDiv SearchCriteriaOfKojin;
+    @JsonProperty("SearchCriteriaOfOther")
+    private SearchCriteriaOfOtherDiv SearchCriteriaOfOther;
+    @JsonProperty("SearchCriteriaDetail")
+    private SearchCriteriaDetailDiv SearchCriteriaDetail;
     @JsonProperty("ButtonsForHihokenshaFinder")
     private ButtonsForHihokenshaFinderDiv ButtonsForHihokenshaFinder;
+    @JsonProperty("saikinShorisha")
+    private KaigoSaikinShorishaRirekiDiv saikinShorisha;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -68,6 +78,26 @@ public class HihokenshaFinderDiv extends Panel {
         this.SearchCriteriaOfKojin=SearchCriteriaOfKojin;
     }
 
+    @JsonProperty("SearchCriteriaOfOther")
+    public SearchCriteriaOfOtherDiv getSearchCriteriaOfOther() {
+        return SearchCriteriaOfOther;
+    }
+
+    @JsonProperty("SearchCriteriaOfOther")
+    public void setSearchCriteriaOfOther(SearchCriteriaOfOtherDiv SearchCriteriaOfOther) {
+        this.SearchCriteriaOfOther=SearchCriteriaOfOther;
+    }
+
+    @JsonProperty("SearchCriteriaDetail")
+    public SearchCriteriaDetailDiv getSearchCriteriaDetail() {
+        return SearchCriteriaDetail;
+    }
+
+    @JsonProperty("SearchCriteriaDetail")
+    public void setSearchCriteriaDetail(SearchCriteriaDetailDiv SearchCriteriaDetail) {
+        this.SearchCriteriaDetail=SearchCriteriaDetail;
+    }
+
     @JsonProperty("ButtonsForHihokenshaFinder")
     public ButtonsForHihokenshaFinderDiv getButtonsForHihokenshaFinder() {
         return ButtonsForHihokenshaFinder;
@@ -76,6 +106,16 @@ public class HihokenshaFinderDiv extends Panel {
     @JsonProperty("ButtonsForHihokenshaFinder")
     public void setButtonsForHihokenshaFinder(ButtonsForHihokenshaFinderDiv ButtonsForHihokenshaFinder) {
         this.ButtonsForHihokenshaFinder=ButtonsForHihokenshaFinder;
+    }
+
+    @JsonProperty("saikinShorisha")
+    public KaigoSaikinShorishaRirekiDiv getSaikinShorisha() {
+        return saikinShorisha;
+    }
+
+    @JsonProperty("saikinShorisha")
+    public void setSaikinShorisha(KaigoSaikinShorishaRirekiDiv saikinShorisha) {
+        this.saikinShorisha=saikinShorisha;
     }
 
 }

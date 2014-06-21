@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -10,21 +10,19 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * SearchCriteriaOfHihokensha のクラスファイル 
+ * ShichosonRenrakuJiko のクラスファイル 
  * 
  * @author 自動生成
  */
-public class SearchCriteriaOfHihokenshaDiv extends Panel {
+public class ShichosonRenrakuJikoDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtHihokenshaNo")
-    private TextBoxCode txtHihokenshaNo;
-    @JsonProperty("txtTuchishoNo")
-    private TextBoxCode txtTuchishoNo;
+    @JsonProperty("txtShichosonRenrakuJiko")
+    private TextBoxMultiLine txtShichosonRenrakuJiko;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,24 +30,14 @@ public class SearchCriteriaOfHihokenshaDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("txtHihokenshaNo")
-    public TextBoxCode getTxtHihokenshaNo() {
-        return txtHihokenshaNo;
+    @JsonProperty("txtShichosonRenrakuJiko")
+    public TextBoxMultiLine getTxtShichosonRenrakuJiko() {
+        return txtShichosonRenrakuJiko;
     }
 
-    @JsonProperty("txtHihokenshaNo")
-    public void setTxtHihokenshaNo(TextBoxCode txtHihokenshaNo) {
-        this.txtHihokenshaNo=txtHihokenshaNo;
-    }
-
-    @JsonProperty("txtTuchishoNo")
-    public TextBoxCode getTxtTuchishoNo() {
-        return txtTuchishoNo;
-    }
-
-    @JsonProperty("txtTuchishoNo")
-    public void setTxtTuchishoNo(TextBoxCode txtTuchishoNo) {
-        this.txtTuchishoNo=txtTuchishoNo;
+    @JsonProperty("txtShichosonRenrakuJiko")
+    public void setTxtShichosonRenrakuJiko(TextBoxMultiLine txtShichosonRenrakuJiko) {
+        this.txtShichosonRenrakuJiko=txtShichosonRenrakuJiko;
     }
 
 }

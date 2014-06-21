@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -21,24 +21,20 @@ public class NinteichosainAdvanceEntryDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblChosaItakusaki")
-    private Label lblChosaItakusaki;
     @JsonProperty("txtChosaItakusakiCode")
     private TextBoxCode txtChosaItakusakiCode;
     @JsonProperty("txtChosaItakusakiName")
     private TextBox txtChosaItakusakiName;
-    @JsonProperty("imgToSearchNinteichosain")
-    private StaticImage imgToSearchNinteichosain;
+    @JsonProperty("btnSearchNinteichosain")
+    private ButtonDialog btnSearchNinteichosain;
     @JsonProperty("btnToCopyLatestItakusaki")
     private Button btnToCopyLatestItakusaki;
-    @JsonProperty("lblNinteichosain")
-    private Label lblNinteichosain;
     @JsonProperty("txtNinteichosainCode")
     private TextBoxCode txtNinteichosainCode;
     @JsonProperty("txtNinteichosainName")
     private TextBox txtNinteichosainName;
-    @JsonProperty("imgPadding2")
-    private StaticImage imgPadding2;
+    @JsonProperty("lblSpace2")
+    private Label lblSpace2;
     @JsonProperty("btnToCopyLatestNinteichosain")
     private Button btnToCopyLatestNinteichosain;
 
@@ -48,16 +44,6 @@ public class NinteichosainAdvanceEntryDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("lblChosaItakusaki")
-    public Label getLblChosaItakusaki() {
-        return lblChosaItakusaki;
-    }
-
-    @JsonProperty("lblChosaItakusaki")
-    public void setLblChosaItakusaki(Label lblChosaItakusaki) {
-        this.lblChosaItakusaki=lblChosaItakusaki;
-    }
-
     @JsonProperty("txtChosaItakusakiCode")
     public TextBoxCode getTxtChosaItakusakiCode() {
         return txtChosaItakusakiCode;
@@ -78,14 +64,14 @@ public class NinteichosainAdvanceEntryDiv extends Panel {
         this.txtChosaItakusakiName=txtChosaItakusakiName;
     }
 
-    @JsonProperty("imgToSearchNinteichosain")
-    public StaticImage getImgToSearchNinteichosain() {
-        return imgToSearchNinteichosain;
+    @JsonProperty("btnSearchNinteichosain")
+    public ButtonDialog getBtnSearchNinteichosain() {
+        return btnSearchNinteichosain;
     }
 
-    @JsonProperty("imgToSearchNinteichosain")
-    public void setImgToSearchNinteichosain(StaticImage imgToSearchNinteichosain) {
-        this.imgToSearchNinteichosain=imgToSearchNinteichosain;
+    @JsonProperty("btnSearchNinteichosain")
+    public void setBtnSearchNinteichosain(ButtonDialog btnSearchNinteichosain) {
+        this.btnSearchNinteichosain=btnSearchNinteichosain;
     }
 
     @JsonProperty("btnToCopyLatestItakusaki")
@@ -96,16 +82,6 @@ public class NinteichosainAdvanceEntryDiv extends Panel {
     @JsonProperty("btnToCopyLatestItakusaki")
     public void setBtnToCopyLatestItakusaki(Button btnToCopyLatestItakusaki) {
         this.btnToCopyLatestItakusaki=btnToCopyLatestItakusaki;
-    }
-
-    @JsonProperty("lblNinteichosain")
-    public Label getLblNinteichosain() {
-        return lblNinteichosain;
-    }
-
-    @JsonProperty("lblNinteichosain")
-    public void setLblNinteichosain(Label lblNinteichosain) {
-        this.lblNinteichosain=lblNinteichosain;
     }
 
     @JsonProperty("txtNinteichosainCode")
@@ -128,14 +104,14 @@ public class NinteichosainAdvanceEntryDiv extends Panel {
         this.txtNinteichosainName=txtNinteichosainName;
     }
 
-    @JsonProperty("imgPadding2")
-    public StaticImage getImgPadding2() {
-        return imgPadding2;
+    @JsonProperty("lblSpace2")
+    public Label getLblSpace2() {
+        return lblSpace2;
     }
 
-    @JsonProperty("imgPadding2")
-    public void setImgPadding2(StaticImage imgPadding2) {
-        this.imgPadding2=imgPadding2;
+    @JsonProperty("lblSpace2")
+    public void setLblSpace2(Label lblSpace2) {
+        this.lblSpace2=lblSpace2;
     }
 
     @JsonProperty("btnToCopyLatestNinteichosain")
