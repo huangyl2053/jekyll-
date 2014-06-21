@@ -39,8 +39,8 @@ public class KonkaiShinsaKekkaDiv extends Panel {
     private TextBoxDate txtTsuchibi;
     @JsonProperty("txtYukokikanKaishibi")
     private TextBoxDate txtYukokikanKaishibi;
-    @JsonProperty("lblKara")
-    private Label lblKara;
+    @JsonProperty("Label1")
+    private Label Label1;
     @JsonProperty("txtYukokikanShuryobi")
     private TextBoxDate txtYukokikanShuryobi;
     @JsonProperty("txtNinteiKikan")
@@ -144,14 +144,14 @@ public class KonkaiShinsaKekkaDiv extends Panel {
         this.txtYukokikanKaishibi=txtYukokikanKaishibi;
     }
 
-    @JsonProperty("lblKara")
-    public Label getLblKara() {
-        return lblKara;
+    @JsonProperty("Label1")
+    public Label getLabel1() {
+        return Label1;
     }
 
-    @JsonProperty("lblKara")
-    public void setLblKara(Label lblKara) {
-        this.lblKara=lblKara;
+    @JsonProperty("Label1")
+    public void setLabel1(Label Label1) {
+        this.Label1=Label1;
     }
 
     @JsonProperty("txtYukokikanShuryobi")

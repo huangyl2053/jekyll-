@@ -6,9 +6,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.tabIkenshoKojinShokaiDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * tplIkensho のクラスファイル 
@@ -24,8 +22,6 @@ public class tplIkenshoDiv extends TabPanel {
      */
     @JsonProperty("tabIkenshoKojinShokai")
     private tabIkenshoKojinShokaiDiv tabIkenshoKojinShokai;
-    @JsonProperty("btnToShowIkenshoImage")
-    private ButtonDialog btnToShowIkenshoImage;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -41,16 +37,6 @@ public class tplIkenshoDiv extends TabPanel {
     @JsonProperty("tabIkenshoKojinShokai")
     public void setTabIkenshoKojinShokai(tabIkenshoKojinShokaiDiv tabIkenshoKojinShokai) {
         this.tabIkenshoKojinShokai=tabIkenshoKojinShokai;
-    }
-
-    @JsonProperty("btnToShowIkenshoImage")
-    public ButtonDialog getBtnToShowIkenshoImage() {
-        return btnToShowIkenshoImage;
-    }
-
-    @JsonProperty("btnToShowIkenshoImage")
-    public void setBtnToShowIkenshoImage(ButtonDialog btnToShowIkenshoImage) {
-        this.btnToShowIkenshoImage=btnToShowIkenshoImage;
     }
 
 }

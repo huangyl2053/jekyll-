@@ -174,21 +174,13 @@ var DBE;
                     "marginLeft": "XS",
                     "marginRight": "XS",
                     "selectControlID": "dgShozokuChosainList",
-                    "helpMessageID": "",
-                    "jpControlName": "",
                     "gridSetting": {
                         "rowHeight": 25,
                         "isMultiSelectable": false,
-                        "isShowHeader": true,
                         "isShowFooter": true,
                         "isShowFilter": false,
                         "isShowFilterButton": false,
                         "isShowRowState": false,
-                        "isShowSelectButtonColumn": false,
-                        "isShowModifyButtonColumn": false,
-                        "isShowDeleteButtonColumn": false,
-                        "limitRowCount": 0,
-                        "selectedRowCount": 0,
                         "header": {
                             "combineColumns": [],
                             "frozenColumn": "",
@@ -225,8 +217,7 @@ var DBE;
                                 "visible": true,
                                 "cellType": 0,
                                 "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
+                                    "cellType": 0
                                 },
                                 "align": 1,
                                 "resize": true,
@@ -242,8 +233,7 @@ var DBE;
                                 "visible": true,
                                 "cellType": 0,
                                 "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
+                                    "cellType": 0
                                 },
                                 "align": 0,
                                 "resize": true,
@@ -259,8 +249,7 @@ var DBE;
                                 "visible": true,
                                 "cellType": 0,
                                 "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
+                                    "cellType": 0
                                 },
                                 "align": 2,
                                 "resize": true,
@@ -276,8 +265,7 @@ var DBE;
                                 "visible": true,
                                 "cellType": 0,
                                 "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
+                                    "cellType": 0
                                 },
                                 "align": 0,
                                 "resize": true,
@@ -292,10 +280,7 @@ var DBE;
                                 "width": 0,
                                 "visible": false,
                                 "cellType": 0,
-                                "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
-                                },
+                                "cellDetails": null,
                                 "align": 0,
                                 "resize": false,
                                 "isPrivateInfo": false,
@@ -307,9 +292,6 @@ var DBE;
                     "onSort": "",
                     "onSelect": "",
                     "onSelectByDblClick": "",
-                    "onSelectBySelectButton": "",
-                    "onSelectByModifyButton": "",
-                    "onSelectByDeleteButton": "",
                     "onOnlyRow": "",
                     "onNoRow": "",
                     "onMultiRows": "",
@@ -317,8 +299,7 @@ var DBE;
                     "sortOrder": "調査員コード",
                     "isAscending": true,
                     "filterList": [],
-                    "activeRowId": -1,
-                    "readOnly": false
+                    "activeRowId": -1
                 }
             ],
             "controlType": "CompositeControl",
@@ -336,8 +317,6 @@ var DBE;
             "marginLeft": "XS",
             "marginRight": "XS",
             "selectControlID": "defaultLayout",
-            "helpMessageID": "",
-            "jpControlName": "",
             "relation": [],
             "businessId": "DBE",
             "controlName": "ShozokuChosainListCom",

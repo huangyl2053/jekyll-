@@ -54,8 +54,6 @@ module DBE {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtIchijiHanteibi_core",
-     "helpMessageID": "",
-     "jpControlName": "",
      "readOnly": true,
      "required": false,
      "placeHolder": "",
@@ -94,8 +92,6 @@ module DBE {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtIchijiHanteiKekka_core",
-     "helpMessageID": "",
-     "jpControlName": "",
      "readOnly": true,
      "required": false,
      "placeHolder": "",
@@ -118,8 +114,7 @@ module DBE {
      "textAlign": 1,
      "textKind": 0,
      "isComboBox": false,
-     "suggest": [],
-     "decorationClass": ""
+     "suggest": []
     },
     {
      "fieldName": "txtKijunJikan",
@@ -139,8 +134,6 @@ module DBE {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtKijunJikan_core",
-     "helpMessageID": "",
-     "jpControlName": "",
      "readOnly": true,
      "required": false,
      "placeHolder": "",
@@ -163,8 +156,7 @@ module DBE {
      "textAlign": 1,
      "textKind": 0,
      "isComboBox": false,
-     "suggest": [],
-     "decorationClass": ""
+     "suggest": []
     },
     {
      "fieldName": "lblChukanHyokaKomokuTokuten",
@@ -184,12 +176,9 @@ module DBE {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "lblChukanHyokaKomokuTokuten",
-     "helpMessageID": "",
-     "jpControlName": "",
      "required": false,
      "isPrivateInfo": false,
      "text": "中間評価項目得点",
-     "decorationClass": "",
      "align": 2
     },
     {
@@ -216,12 +205,9 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblShokuji",
-         "helpMessageID": "",
-         "jpControlName": "",
          "required": false,
          "isPrivateInfo": false,
          "text": "食事<br><br>",
-         "decorationClass": "",
          "align": 1
         }
        ],
@@ -237,11 +223,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celShokujiHeader",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R1C1"
       },
       {
@@ -265,12 +249,9 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblHaisetsu",
-         "helpMessageID": "",
-         "jpControlName": "",
          "required": false,
          "isPrivateInfo": false,
          "text": "排泄<br><br>",
-         "decorationClass": "",
          "align": 1
         }
        ],
@@ -286,11 +267,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celHaisetsuHeader",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R1C2"
       },
       {
@@ -314,8 +293,6 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtShokuji_core",
-         "helpMessageID": "",
-         "jpControlName": "",
          "readOnly": true,
          "required": false,
          "placeHolder": "",
@@ -338,8 +315,7 @@ module DBE {
          "textAlign": 1,
          "textKind": 0,
          "isComboBox": false,
-         "suggest": [],
-         "decorationClass": ""
+         "suggest": []
         }
        ],
        "controlType": "TableCell",
@@ -354,11 +330,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celShokuji",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R2C1"
       },
       {
@@ -382,8 +356,6 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtHaisetsu_core",
-         "helpMessageID": "",
-         "jpControlName": "",
          "readOnly": true,
          "required": false,
          "placeHolder": "",
@@ -406,8 +378,7 @@ module DBE {
          "textAlign": 1,
          "textKind": 0,
          "isComboBox": false,
-         "suggest": [],
-         "decorationClass": ""
+         "suggest": []
         }
        ],
        "controlType": "TableCell",
@@ -422,11 +393,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celHaisetsu",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R2C2"
       },
       {
@@ -450,12 +419,9 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblIdo",
-         "helpMessageID": "",
-         "jpControlName": "",
          "required": false,
          "isPrivateInfo": false,
          "text": "移動<br><br>",
-         "decorationClass": "",
          "align": 1
         }
        ],
@@ -471,11 +437,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celIdoHeader",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R1C3"
       },
       {
@@ -499,12 +463,9 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblSeiketsuhoji",
-         "helpMessageID": "",
-         "jpControlName": "",
          "required": false,
          "isPrivateInfo": false,
          "text": "清潔<br>保持",
-         "decorationClass": "",
          "align": 1
         }
        ],
@@ -520,11 +481,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celSeiketsuHojiHeader",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R1C4"
       },
       {
@@ -548,12 +507,9 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblKansetsuCare",
-         "helpMessageID": "",
-         "jpControlName": "",
          "required": false,
          "isPrivateInfo": false,
          "text": "関節<br>ケア",
-         "decorationClass": "",
          "align": 1
         }
        ],
@@ -569,11 +525,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celKansetsuCareHeader",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R1C5"
       },
       {
@@ -597,12 +551,9 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblBpsdKanren",
-         "helpMessageID": "",
-         "jpControlName": "",
          "required": false,
          "isPrivateInfo": false,
          "text": "BPSD<br>関連",
-         "decorationClass": "",
          "align": 1
         }
        ],
@@ -618,11 +569,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celBpsdKanrenHeader",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R1C6"
       },
       {
@@ -646,12 +595,9 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblKinoKunren",
-         "helpMessageID": "",
-         "jpControlName": "",
          "required": false,
          "isPrivateInfo": false,
          "text": "機能<br>訓練",
-         "decorationClass": "",
          "align": 1
         }
        ],
@@ -667,11 +613,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celKinoKunrenHeader",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R1C7"
       },
       {
@@ -695,12 +639,9 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblIryoKanren",
-         "helpMessageID": "",
-         "jpControlName": "",
          "required": false,
          "isPrivateInfo": false,
          "text": "医療<br>関連",
-         "decorationClass": "",
          "align": 1
         }
        ],
@@ -716,11 +657,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celIryoKanrenHeader",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R1C8"
       },
       {
@@ -744,12 +683,9 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblNinchishoKasan",
-         "helpMessageID": "",
-         "jpControlName": "",
          "required": false,
          "isPrivateInfo": false,
          "text": "認知症<br>加算",
-         "decorationClass": "",
          "align": 1
         }
        ],
@@ -765,11 +701,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celNinchishoKasanHeader",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R1C9"
       },
       {
@@ -793,8 +727,6 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtIdo_core",
-         "helpMessageID": "",
-         "jpControlName": "",
          "readOnly": true,
          "required": false,
          "placeHolder": "",
@@ -817,8 +749,7 @@ module DBE {
          "textAlign": 1,
          "textKind": 0,
          "isComboBox": false,
-         "suggest": [],
-         "decorationClass": ""
+         "suggest": []
         }
        ],
        "controlType": "TableCell",
@@ -833,11 +764,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celIdo",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R2C3"
       },
       {
@@ -861,8 +790,6 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtSeiketsuHoji_core",
-         "helpMessageID": "",
-         "jpControlName": "",
          "readOnly": true,
          "required": false,
          "placeHolder": "",
@@ -885,8 +812,7 @@ module DBE {
          "textAlign": 1,
          "textKind": 0,
          "isComboBox": false,
-         "suggest": [],
-         "decorationClass": ""
+         "suggest": []
         }
        ],
        "controlType": "TableCell",
@@ -901,11 +827,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celSeiketsuHoji",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R2C4"
       },
       {
@@ -929,8 +853,6 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtKansetsuCare_core",
-         "helpMessageID": "",
-         "jpControlName": "",
          "readOnly": true,
          "required": false,
          "placeHolder": "",
@@ -953,8 +875,7 @@ module DBE {
          "textAlign": 1,
          "textKind": 0,
          "isComboBox": false,
-         "suggest": [],
-         "decorationClass": ""
+         "suggest": []
         }
        ],
        "controlType": "TableCell",
@@ -969,11 +890,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celKansetsuCare",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R2C5"
       },
       {
@@ -997,8 +916,6 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtBpsdKanren_core",
-         "helpMessageID": "",
-         "jpControlName": "",
          "readOnly": true,
          "required": false,
          "placeHolder": "",
@@ -1021,8 +938,7 @@ module DBE {
          "textAlign": 1,
          "textKind": 0,
          "isComboBox": false,
-         "suggest": [],
-         "decorationClass": ""
+         "suggest": []
         }
        ],
        "controlType": "TableCell",
@@ -1037,11 +953,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celBpsdKanren",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R2C6"
       },
       {
@@ -1065,8 +979,6 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtKinoKunren_core",
-         "helpMessageID": "",
-         "jpControlName": "",
          "readOnly": true,
          "required": false,
          "placeHolder": "",
@@ -1089,8 +1001,7 @@ module DBE {
          "textAlign": 1,
          "textKind": 0,
          "isComboBox": false,
-         "suggest": [],
-         "decorationClass": ""
+         "suggest": []
         }
        ],
        "controlType": "TableCell",
@@ -1105,11 +1016,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celKinoKunren",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R2C7"
       },
       {
@@ -1133,8 +1042,6 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtIryoKanren_core",
-         "helpMessageID": "",
-         "jpControlName": "",
          "readOnly": true,
          "required": false,
          "placeHolder": "",
@@ -1157,8 +1064,7 @@ module DBE {
          "textAlign": 1,
          "textKind": 0,
          "isComboBox": false,
-         "suggest": [],
-         "decorationClass": ""
+         "suggest": []
         }
        ],
        "controlType": "TableCell",
@@ -1173,11 +1079,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celIryoKanren",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R2C8"
       },
       {
@@ -1201,8 +1105,6 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtNinchishoKasan_core",
-         "helpMessageID": "",
-         "jpControlName": "",
          "readOnly": true,
          "required": false,
          "placeHolder": "",
@@ -1225,8 +1127,7 @@ module DBE {
          "textAlign": 1,
          "textKind": 0,
          "isComboBox": false,
-         "suggest": [],
-         "decorationClass": ""
+         "suggest": []
         }
        ],
        "controlType": "TableCell",
@@ -1241,11 +1142,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celNinchishoKasan",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R2C9"
       }
      ],
@@ -1264,8 +1163,6 @@ module DBE {
      "marginLeft": "2",
      "marginRight": "XS",
      "selectControlID": "tblKijunJikan",
-     "helpMessageID": "",
-     "jpControlName": "",
      "html": "<table>\n  <tbody>\n    <tr><td id='R1C1'></td><td id='R1C2'></td><td id='R1C3'></td><td id='R1C4'></td><td id='R1C5'></td><td id='R1C6'></td><td id='R1C7'></td><td id='R1C8'></td><td id='R1C9'></td></tr>\n    <tr><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td><td id='R2C7'></td><td id='R2C8'></td><td id='R2C9'></td></tr>\n  </tbody>\n</table>\n"
     },
     {
@@ -1292,12 +1189,9 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblDai1gun",
-         "helpMessageID": "",
-         "jpControlName": "",
          "required": false,
          "isPrivateInfo": false,
          "text": "第１群<br><br>",
-         "decorationClass": "",
          "align": 1
         }
        ],
@@ -1313,11 +1207,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celDai1gunHeader",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R1C1"
       },
       {
@@ -1341,12 +1233,9 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblDai2gun",
-         "helpMessageID": "",
-         "jpControlName": "",
          "required": false,
          "isPrivateInfo": false,
          "text": "第２群<br><br>",
-         "decorationClass": "",
          "align": 1
         }
        ],
@@ -1362,11 +1251,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celDai2gunHeader",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R1C2"
       },
       {
@@ -1390,8 +1277,6 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtDai1gun_core",
-         "helpMessageID": "",
-         "jpControlName": "",
          "readOnly": true,
          "required": false,
          "placeHolder": "",
@@ -1414,8 +1299,7 @@ module DBE {
          "textAlign": 1,
          "textKind": 0,
          "isComboBox": false,
-         "suggest": [],
-         "decorationClass": ""
+         "suggest": []
         }
        ],
        "controlType": "TableCell",
@@ -1430,11 +1314,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celDai1gun",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R2C1"
       },
       {
@@ -1458,8 +1340,6 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtDai2gun_core",
-         "helpMessageID": "",
-         "jpControlName": "",
          "readOnly": true,
          "required": false,
          "placeHolder": "",
@@ -1482,8 +1362,7 @@ module DBE {
          "textAlign": 1,
          "textKind": 0,
          "isComboBox": false,
-         "suggest": [],
-         "decorationClass": ""
+         "suggest": []
         }
        ],
        "controlType": "TableCell",
@@ -1498,11 +1377,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celDai2gun",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R2C2"
       },
       {
@@ -1526,12 +1403,9 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblDai3gun",
-         "helpMessageID": "",
-         "jpControlName": "",
          "required": false,
          "isPrivateInfo": false,
          "text": "第３群<br><br>",
-         "decorationClass": "",
          "align": 1
         }
        ],
@@ -1547,11 +1421,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celDai3gunHeader",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R1C3"
       },
       {
@@ -1575,12 +1447,9 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblDai4gun",
-         "helpMessageID": "",
-         "jpControlName": "",
          "required": false,
          "isPrivateInfo": false,
          "text": "第４群<br><br>",
-         "decorationClass": "",
          "align": 1
         }
        ],
@@ -1596,11 +1465,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celDai4gunHeader",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R1C4"
       },
       {
@@ -1624,12 +1491,9 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblDai5gun",
-         "helpMessageID": "",
-         "jpControlName": "",
          "required": false,
          "isPrivateInfo": false,
          "text": "第５群<br><br>",
-         "decorationClass": "",
          "align": 1
         }
        ],
@@ -1645,11 +1509,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celDai5gunHeader",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R1C5"
       },
       {
@@ -1673,12 +1535,9 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblDai6gun",
-         "helpMessageID": "",
-         "jpControlName": "",
          "required": false,
          "isPrivateInfo": false,
          "text": "第６群<br><br>",
-         "decorationClass": "",
          "align": 1
         }
        ],
@@ -1694,11 +1553,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celDai6gunHeader",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R1C6"
       },
       {
@@ -1722,12 +1579,9 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "lblDai7gun",
-         "helpMessageID": "",
-         "jpControlName": "",
          "required": false,
          "isPrivateInfo": false,
          "text": "第７群<br><br>",
-         "decorationClass": "",
          "align": 1
         }
        ],
@@ -1743,11 +1597,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celDai7gunHeader",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R1C7"
       },
       {
@@ -1771,8 +1623,6 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtDai3gun_core",
-         "helpMessageID": "",
-         "jpControlName": "",
          "readOnly": true,
          "required": false,
          "placeHolder": "",
@@ -1795,8 +1645,7 @@ module DBE {
          "textAlign": 1,
          "textKind": 0,
          "isComboBox": false,
-         "suggest": [],
-         "decorationClass": ""
+         "suggest": []
         }
        ],
        "controlType": "TableCell",
@@ -1811,11 +1660,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celDai3gun",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R2C3"
       },
       {
@@ -1839,8 +1686,6 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtDai4gun_core",
-         "helpMessageID": "",
-         "jpControlName": "",
          "readOnly": true,
          "required": false,
          "placeHolder": "",
@@ -1863,8 +1708,7 @@ module DBE {
          "textAlign": 1,
          "textKind": 0,
          "isComboBox": false,
-         "suggest": [],
-         "decorationClass": ""
+         "suggest": []
         }
        ],
        "controlType": "TableCell",
@@ -1879,11 +1723,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celDai4gun",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R2C4"
       },
       {
@@ -1907,8 +1749,6 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtDai5gun_core",
-         "helpMessageID": "",
-         "jpControlName": "",
          "readOnly": true,
          "required": false,
          "placeHolder": "",
@@ -1931,8 +1771,7 @@ module DBE {
          "textAlign": 1,
          "textKind": 0,
          "isComboBox": false,
-         "suggest": [],
-         "decorationClass": ""
+         "suggest": []
         }
        ],
        "controlType": "TableCell",
@@ -1947,11 +1786,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celDai5gun",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R2C5"
       },
       {
@@ -1975,8 +1812,6 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtDai6gun_core",
-         "helpMessageID": "",
-         "jpControlName": "",
          "readOnly": true,
          "required": false,
          "placeHolder": "",
@@ -1999,8 +1834,7 @@ module DBE {
          "textAlign": 2,
          "textKind": 0,
          "isComboBox": false,
-         "suggest": [],
-         "decorationClass": ""
+         "suggest": []
         }
        ],
        "controlType": "TableCell",
@@ -2015,11 +1849,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celDai6gun",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R2C6"
       },
       {
@@ -2043,8 +1875,6 @@ module DBE {
          "marginLeft": "XS",
          "marginRight": "XS",
          "selectControlID": "txtDai7gun_core",
-         "helpMessageID": "",
-         "jpControlName": "",
          "readOnly": true,
          "required": false,
          "placeHolder": "",
@@ -2067,8 +1897,7 @@ module DBE {
          "textAlign": 1,
          "textKind": 0,
          "isComboBox": false,
-         "suggest": [],
-         "decorationClass": ""
+         "suggest": []
         }
        ],
        "controlType": "TableCell",
@@ -2083,11 +1912,9 @@ module DBE {
        "float": 0,
        "toolTip": "",
        "authorityMode": 0,
-       "marginLeft": "0",
-       "marginRight": "0",
+       "marginLeft": 0,
+       "marginRight": 0,
        "selectControlID": "celDai7gun",
-       "helpMessageID": "",
-       "jpControlName": "",
        "connectTd": "R2C7"
       }
      ],
@@ -2106,8 +1933,6 @@ module DBE {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "tblTyukanHyokaKomokuTokuten",
-     "helpMessageID": "",
-     "jpControlName": "",
      "html": "<table>\n  <tbody>\n    <tr><td id='R1C1'></td><td id='R1C2'></td><td id='R1C3'></td><td id='R1C4'></td><td id='R1C5'></td><td id='R1C6'></td><td id='R1C7'></td></tr>\n    <tr><td id='R2C1'></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td><td id='R2C6'></td><td id='R2C7'></td></tr>\n  </tbody>\n</table>\n"
     },
     {
@@ -2128,12 +1953,9 @@ module DBE {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "lblNichiJyotaiHyokaKekka",
-     "helpMessageID": "",
-     "jpControlName": "",
      "required": false,
      "isPrivateInfo": false,
      "text": "認知機能・状態の安定性の評価結果",
-     "decorationClass": "",
      "align": 2
     },
     {
@@ -2154,12 +1976,9 @@ module DBE {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "lblNinchiNichijyoSeikatsuJiritsudo",
-     "helpMessageID": "",
-     "jpControlName": "",
      "required": false,
      "isPrivateInfo": false,
      "text": "認知症高齢者の日常生活自立度",
-     "decorationClass": "",
      "align": 2
     },
     {
@@ -2180,8 +1999,6 @@ module DBE {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtGaizensei_core",
-     "helpMessageID": "",
-     "jpControlName": "",
      "readOnly": true,
      "required": false,
      "placeHolder": "",
@@ -2204,8 +2021,7 @@ module DBE {
      "textAlign": 1,
      "textKind": 0,
      "isComboBox": false,
-     "suggest": [],
-     "decorationClass": ""
+     "suggest": []
     },
     {
      "fieldName": "txtJiritsudoChosa",
@@ -2225,8 +2041,6 @@ module DBE {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtJiritsudoChosa_core",
-     "helpMessageID": "",
-     "jpControlName": "",
      "readOnly": true,
      "required": false,
      "placeHolder": "",
@@ -2249,8 +2063,7 @@ module DBE {
      "textAlign": 1,
      "textKind": 0,
      "isComboBox": false,
-     "suggest": [],
-     "decorationClass": ""
+     "suggest": []
     },
     {
      "fieldName": "txtJyotaiAnteisei",
@@ -2270,8 +2083,6 @@ module DBE {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtJyotaiAnteisei_core",
-     "helpMessageID": "",
-     "jpControlName": "",
      "readOnly": true,
      "required": false,
      "placeHolder": "",
@@ -2294,8 +2105,7 @@ module DBE {
      "textAlign": 1,
      "textKind": 0,
      "isComboBox": false,
-     "suggest": [],
-     "decorationClass": ""
+     "suggest": []
     },
     {
      "fieldName": "txtJiritsudoIkensho",
@@ -2315,8 +2125,6 @@ module DBE {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtJiritsudoIkensho_core",
-     "helpMessageID": "",
-     "jpControlName": "",
      "readOnly": true,
      "required": false,
      "placeHolder": "",
@@ -2339,8 +2147,7 @@ module DBE {
      "textAlign": 1,
      "textKind": 0,
      "isComboBox": false,
-     "suggest": [],
-     "decorationClass": ""
+     "suggest": []
     },
     {
      "fieldName": "txtKyufuKbn",
@@ -2360,8 +2167,6 @@ module DBE {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtKyufuKbn_core",
-     "helpMessageID": "",
-     "jpControlName": "",
      "readOnly": true,
      "required": false,
      "placeHolder": "",
@@ -2384,8 +2189,7 @@ module DBE {
      "textAlign": 1,
      "textKind": 0,
      "isComboBox": false,
-     "suggest": [],
-     "decorationClass": ""
+     "suggest": []
     },
     {
      "fieldName": "lblIchijiHanteiKeikokuCode",
@@ -2405,12 +2209,9 @@ module DBE {
      "marginLeft": "2",
      "marginRight": "XS",
      "selectControlID": "lblIchijiHanteiKeikokuCode",
-     "helpMessageID": "",
-     "jpControlName": "",
      "required": false,
      "isPrivateInfo": false,
      "text": "一次判定警告コード",
-     "decorationClass": "",
      "align": 0
     },
     {
@@ -2431,9 +2232,6 @@ module DBE {
      "marginLeft": "2",
      "marginRight": "XS",
      "selectControlID": "dgIchijiHanteiKeikokuCode",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "height": "175",
      "gridSetting": {
       "rowHeight": 25,
       "isMultiSelectable": false,
@@ -2495,6 +2293,7 @@ module DBE {
        }
       ]
      },
+     "height": "175",
      "onSort": "",
      "onSelect": "",
      "onSelectByDblClick": "",
@@ -2518,33 +2317,26 @@ module DBE {
    "disabled": false,
    "accessKey": "",
    "nextFocusFieldName": "",
-   "wrap": false,
+   "wrap": true,
    "dependencies": [],
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "Default",
-   "marginRight": "Default",
+   "marginLeft": "XS",
+   "marginRight": "XS",
    "selectControlID": "IchijiHanteiKekkaInfo",
-   "helpMessageID": "",
-   "jpControlName": "",
    "onLoad": "",
-   "title": "一次判定結果確認",
+   "title": "",
    "marginTop": "Default",
    "marginBottom": "Default",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
     {
-     "postParameterPanelNames": "IchijiHanteiKekkaInfo"
+     "postParameterPanelNames": "IchijiHantei"
     }
    ],
-   "requestSettings": [
-    {
-     "eventName": "onLoad",
-     "requestUrl": "dbe/db/dbe/IchijiHanteiKekkaInfo/onLoad"
-    }
-   ],
+   "requestSettings": [],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
@@ -2557,8 +2349,7 @@ module DBE {
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": false,
-   "height": "Auto"
+   "readOnly": false
   }
  ],
  "controlType": "CommonChildDiv",
@@ -2573,11 +2364,9 @@ module DBE {
  "float": 0,
  "toolTip": "",
  "authorityMode": 0,
- "marginLeft": "0",
- "marginRight": "0",
+ "marginLeft": 0,
+ "marginRight": 0,
  "selectControlID": "defaultLayout",
- "helpMessageID": "",
- "jpControlName": "",
  "relation": [],
  "businessId": "DBE",
  "controlName": "IchijiHanteiKekkaInfo",

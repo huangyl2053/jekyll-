@@ -8,11 +8,9 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.KojinJokyoShokaiDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.dgServiceJokyo_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.dgShinsakaiIinJoho_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.ichijiHanteiKekkaInfo.dgIchijiHanteiKeikokuCode_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe3010001.dgIchijiHanteiKeikokuCode_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -550,37 +548,6 @@ public class KojinJokyoShokai {
         HashMap mapTokkiJikoIchiranJoho = ninteiChosaList.get(2);
         setTokkiJikoIchiranJoho(panel, mapTokkiJikoIchiranJoho);
 
-        panel.getKojinJokyoShokaiSub().getTabKojinJokyoShokai().getTplNinteiChosa().
-                getTabNinteiChosaKojinShokai().getTplGaikyoChosa().getGaikyoChosaServiceJokyo().
-                getDgServiceJokyo().setDataSource(createRowServiceJokyo());
-    }
-
-    private List<dgServiceJokyo_Row> createRowServiceJokyo() {
-        List<HashMap> targetSource = YamlLoader.DBE.loadAsList(
-                new RString("dbe8020001/NinteiGaikyoChosa.yml"));
-        List<dgServiceJokyo_Row> arrayData = new ArrayList<>();
-        for (Map info : targetSource) {
-            arrayData.add(toDgServiceJokyo_Row(info));
-        }
-
-        return arrayData;
-    }
-
-    private dgServiceJokyo_Row toDgServiceJokyo_Row(Map map) {
-        ControlGenerator cg = new ControlGenerator(map);
-        RString strService1 = cg.getAsRString("ServiceMeisho1");
-        RString strKubun1 = cg.getAsRString("kubun1");
-        RString strKaisu1 = cg.getAsRString("ServiceKaisu1");
-        RString strTani1 = cg.getAsRString("tani1");
-        RString strService2 = cg.getAsRString("ServiceMeisho2");
-        RString strKubun2 = cg.getAsRString("kubun2");
-        RString strKaisu2 = cg.getAsRString("ServiceKaisu2");
-        RString strTani2 = cg.getAsRString("tani2");
-
-        dgServiceJokyo_Row row = new dgServiceJokyo_Row(strService1, strKubun1,
-                strKaisu1, strTani1, strService2, strKubun2, strKaisu2, strTani2);
-
-        return row;
     }
 
     /*

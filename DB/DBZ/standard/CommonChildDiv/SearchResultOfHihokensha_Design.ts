@@ -8,16 +8,30 @@ module DBZ {
      */
     export class SearchResultOfHihokensha_Design extends Uz.CommonChildDiv {
     
-        public get onClick_btnToResearch() {
+        public get onClickBtnToResearch() {
             return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[0]["fieldName"])["onClick"];
         }
         
-        public set onClick_btnToResearch(value) {
+        public set onClickBtnToResearch(value) {
             if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[0]["fieldName"]).length > 0 && 
                  Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[0]["fieldName"]) != undefined ) {
                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[0]["fieldName"])["onClick"] = value;
             } else {
                 this.layout.items[0].items[1].items[0]["onClick"] = value;
+                this.raisePropertyChanged(this.layout);
+            }
+        }
+        
+        public get gridSetting() {
+            return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["gridSetting"];
+        }
+        
+        public set gridSetting(value) {
+            if ( $("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && 
+                 Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined ) {
+                Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["gridSetting"] = value;
+            } else {
+                this.layout.items[0].items[0]["gridSetting"] = value;
                 this.raisePropertyChanged(this.layout);
             }
         }
@@ -32,7 +46,8 @@ module DBZ {
          */
         public registProperty() {
             super.registProperty();
-            Uz.JSControlUtil.registProperty("onClick_btnToResearch");
+            Uz.JSControlUtil.registProperty("onClickBtnToResearch");
+            Uz.JSControlUtil.registProperty("gridSetting");
         }
         
         /**
@@ -42,7 +57,8 @@ module DBZ {
          */
         public getEditablePropertyInfo(): any {
             var editablePropertyInfo = super.getEditablePropertyInfo();
-            editablePropertyInfo["onClick_btnToResearch"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[0]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["onClickBtnToResearch"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"] + "_" + this.layout.items[0].items[1].items[0]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["gridSetting"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["gridSetting"];
             
             return editablePropertyInfo;
         }
@@ -70,38 +86,28 @@ module DBZ {
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "dgSearchResult",
+     "dataSource": [],
      "gridSetting": {
-      "rowHeight": 40,
+      "rowHeight": 50,
       "isMultiSelectable": false,
-      "isShowHeader": true,
       "isShowFooter": true,
       "isShowFilter": false,
-      "isShowFilterButton": false,
-      "isShowRowState": false,
-      "isShowSelectButtonColumn": false,
-      "isShowModifyButtonColumn": false,
-      "isShowDeleteButtonColumn": false,
       "header": {
        "combineColumns": [],
-       "frozenColumn": "",
-       "headerHeight": 0
+       "frozenColumn": ""
       },
       "columns": [
        {
         "columnName": "",
         "dataName": "btnToDecide",
-        "toolTip": "",
-        "bgColor": 0,
         "width": 50,
         "visible": true,
         "cellType": 8,
         "cellDetails": {
          "cellType": 8,
          "text": "確定",
-         "onClick": "onClick_btnToDecide",
-         "imageFileUrl": "",
-         "imageWidth": "",
-         "imageHeight": ""
+         "onClick": "",
+         "imageFileUrl": ""
         },
         "align": 0,
         "resize": false,
@@ -111,8 +117,6 @@ module DBZ {
        {
         "columnName": "被保番号",
         "dataName": "hihokenshaNo",
-        "toolTip": "",
-        "bgColor": 0,
         "width": 110,
         "visible": true,
         "cellType": 0,
@@ -127,8 +131,6 @@ module DBZ {
        {
         "columnName": "識別コード",
         "dataName": "shikibetsuCode",
-        "toolTip": "",
-        "bgColor": 0,
         "width": 110,
         "visible": true,
         "cellType": 0,
@@ -143,8 +145,6 @@ module DBZ {
        {
         "columnName": "被保険者区分",
         "dataName": "hihokenshaKubun",
-        "toolTip": "",
-        "bgColor": 0,
         "width": 110,
         "visible": true,
         "cellType": 0,
@@ -157,8 +157,6 @@ module DBZ {
        {
         "columnName": "氏名",
         "dataName": "shimei",
-        "toolTip": "",
-        "bgColor": 0,
         "width": 150,
         "visible": false,
         "cellType": 0,
@@ -173,8 +171,6 @@ module DBZ {
        {
         "columnName": "カナ氏名",
         "dataName": "kanaShimsei",
-        "toolTip": "",
-        "bgColor": 0,
         "width": 150,
         "visible": false,
         "cellType": 0,
@@ -187,8 +183,6 @@ module DBZ {
        {
         "columnName": "氏名",
         "dataName": "shimeiAndKanaShimsei",
-        "toolTip": "",
-        "bgColor": 0,
         "width": 150,
         "visible": true,
         "cellType": 0,
@@ -201,8 +195,6 @@ module DBZ {
        {
         "columnName": "性別",
         "dataName": "gender",
-        "toolTip": "",
-        "bgColor": 0,
         "width": 50,
         "visible": true,
         "cellType": 0,
@@ -217,8 +209,6 @@ module DBZ {
        {
         "columnName": "生年月日",
         "dataName": "birthDay",
-        "toolTip": "",
-        "bgColor": 0,
         "width": 110,
         "visible": true,
         "cellType": 6,
@@ -235,8 +225,6 @@ module DBZ {
        {
         "columnName": "郵便番号",
         "dataName": "yubinNo",
-        "toolTip": "",
-        "bgColor": 0,
         "width": 110,
         "visible": true,
         "cellType": 0,
@@ -249,8 +237,6 @@ module DBZ {
        {
         "columnName": "住所",
         "dataName": "jusho",
-        "toolTip": "",
-        "bgColor": 0,
         "width": 300,
         "visible": true,
         "cellType": 0,
@@ -263,8 +249,6 @@ module DBZ {
        {
         "columnName": "個人番号",
         "dataName": "kojinNo",
-        "toolTip": "",
-        "bgColor": 0,
         "width": 120,
         "visible": false,
         "cellType": 0,
@@ -277,8 +261,6 @@ module DBZ {
        {
         "columnName": "住民種別",
         "dataName": "juminShubetsu",
-        "toolTip": "",
-        "bgColor": 0,
         "width": 100,
         "visible": true,
         "cellType": 0,
@@ -291,8 +273,6 @@ module DBZ {
        {
         "columnName": "世帯コード",
         "dataName": "setaiCode",
-        "toolTip": "",
-        "bgColor": 0,
         "width": 110,
         "visible": true,
         "cellType": 0,
@@ -314,7 +294,6 @@ module DBZ {
      "onOnlyRow": "",
      "onNoRow": "",
      "onMultiRows": "",
-     "dataSource": [],
      "sortOrder": "yubinNoAndJusho",
      "isAscending": true,
      "filterList": [],
@@ -341,13 +320,13 @@ module DBZ {
        "marginLeft": "XS",
        "marginRight": "XS",
        "selectControlID": "btnToResearch",
-       "onClick": "",
        "text": "再検索する",
+       "onClick": "",
+       "icon": 0,
        "appearance": 0,
        "imageFileUrl": "",
        "imageWidth": "",
-       "imageHeight": "",
-       "icon": 0
+       "imageHeight": ""
       }
      ],
      "controlType": "Panel",
@@ -463,7 +442,12 @@ module DBZ {
   {
    "publicChildFieldName": "btnToResearch",
    "publicChildProperty": "onClick",
-   "newPropertyName": "onClick_btnToResearch"
+   "newPropertyName": "onClickBtnToResearch"
+  },
+  {
+   "publicChildFieldName": "dgSearchResult",
+   "publicChildProperty": "gridSetting",
+   "newPropertyName": "gridSetting"
   }
  ],
  "dataPassingForDialog": [],

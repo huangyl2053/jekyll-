@@ -6,12 +6,12 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBD;
 (function (DBD) {
-    var FutanGendogakuNintei = (function (_super) {
-        __extends(FutanGendogakuNintei, _super);
-        function FutanGendogakuNintei() {
+    var FutangendogakuNintei = (function (_super) {
+        __extends(FutangendogakuNintei, _super);
+        function FutangendogakuNintei() {
             _super.apply(this, arguments);
         }
-        return FutanGendogakuNintei;
-    })(DBD.FutanGendogakuNintei_Design);
-    DBD.FutanGendogakuNintei = FutanGendogakuNintei;
+        return FutangendogakuNintei;
+    })(DBD.FutangendogakuNintei_Design);
+    DBD.FutangendogakuNintei = FutangendogakuNintei;
 })(DBD || (DBD = {}));

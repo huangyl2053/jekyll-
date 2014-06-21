@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.tplGaikyoChosa
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.tplHomonChosaIraiJohoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.tplKihonChosaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.tplTokkiJikoIchiranDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.tplTokkiJikoImageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
 
 /**
@@ -31,6 +32,8 @@ public class tabNinteiChosaKojinShokaiDiv extends TabContainer {
     private tplKihonChosaDiv tplKihonChosa;
     @JsonProperty("tplTokkiJikoIchiran")
     private tplTokkiJikoIchiranDiv tplTokkiJikoIchiran;
+    @JsonProperty("tplTokkiJikoImage")
+    private tplTokkiJikoImageDiv tplTokkiJikoImage;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -76,6 +79,16 @@ public class tabNinteiChosaKojinShokaiDiv extends TabContainer {
     @JsonProperty("tplTokkiJikoIchiran")
     public void setTplTokkiJikoIchiran(tplTokkiJikoIchiranDiv tplTokkiJikoIchiran) {
         this.tplTokkiJikoIchiran=tplTokkiJikoIchiran;
+    }
+
+    @JsonProperty("tplTokkiJikoImage")
+    public tplTokkiJikoImageDiv getTplTokkiJikoImage() {
+        return tplTokkiJikoImage;
+    }
+
+    @JsonProperty("tplTokkiJikoImage")
+    public void setTplTokkiJikoImage(tplTokkiJikoImageDiv tplTokkiJikoImage) {
+        this.tplTokkiJikoImage=tplTokkiJikoImage;
     }
 
 }

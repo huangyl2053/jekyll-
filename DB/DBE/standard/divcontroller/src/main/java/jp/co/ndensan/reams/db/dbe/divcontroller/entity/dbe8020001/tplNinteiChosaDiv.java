@@ -6,9 +6,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.tabNinteiChosaKojinShokaiDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * tplNinteiChosa のクラスファイル 
@@ -24,8 +22,6 @@ public class tplNinteiChosaDiv extends TabPanel {
      */
     @JsonProperty("tabNinteiChosaKojinShokai")
     private tabNinteiChosaKojinShokaiDiv tabNinteiChosaKojinShokai;
-    @JsonProperty("btnToShowTokkiImage")
-    private ButtonDialog btnToShowTokkiImage;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -41,16 +37,6 @@ public class tplNinteiChosaDiv extends TabPanel {
     @JsonProperty("tabNinteiChosaKojinShokai")
     public void setTabNinteiChosaKojinShokai(tabNinteiChosaKojinShokaiDiv tabNinteiChosaKojinShokai) {
         this.tabNinteiChosaKojinShokai=tabNinteiChosaKojinShokai;
-    }
-
-    @JsonProperty("btnToShowTokkiImage")
-    public ButtonDialog getBtnToShowTokkiImage() {
-        return btnToShowTokkiImage;
-    }
-
-    @JsonProperty("btnToShowTokkiImage")
-    public void setBtnToShowTokkiImage(ButtonDialog btnToShowTokkiImage) {
-        this.btnToShowTokkiImage=btnToShowTokkiImage;
     }
 
 }

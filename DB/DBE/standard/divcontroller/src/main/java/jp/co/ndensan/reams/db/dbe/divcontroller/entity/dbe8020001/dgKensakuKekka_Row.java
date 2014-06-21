@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Jun 16 19:21:00 JST 2014 
+ * Thu Jun 05 15:28:42 JST 2014 
  */
 
 
@@ -36,18 +36,6 @@ public class dgKensakuKekka_Row extends DataRow {
 
     public dgKensakuKekka_Row() {
         super();
-        this.select = new Button();
-        this.hokensha = RString.EMPTY;
-        this.hihokenNo = RString.EMPTY;
-        this.shinseibi = RString.EMPTY;
-        this.shinseiKbn = RString.EMPTY;
-        this.hihokenshaKbn = RString.EMPTY;
-        this.shimei = RString.EMPTY;
-        this.umareYmd = RString.EMPTY;
-        this.seibetsu = RString.EMPTY;
-        this.yubinNo = RString.EMPTY;
-        this.jusho = RString.EMPTY;
-        this.tel = RString.EMPTY;
     }
 
     public dgKensakuKekka_Row(Button select, RString hokensha, RString hihokenNo, RString shinseibi, RString shinseiKbn, RString hihokenshaKbn, RString shimei, RString umareYmd, RString seibetsu, RString yubinNo, RString jusho, RString tel) {

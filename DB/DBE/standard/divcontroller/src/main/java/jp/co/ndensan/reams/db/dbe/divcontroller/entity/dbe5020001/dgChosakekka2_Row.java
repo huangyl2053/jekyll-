@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe5020001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jun 13 11:57:35 JST 2014 
+ * Mon Jun 09 13:23:19 JST 2014 
  */
 
 
@@ -30,12 +30,6 @@ public class dgChosakekka2_Row extends DataRow {
 
     public dgChosakekka2_Row() {
         super();
-        this.編集 = new Button();
-        this.チェック = RString.EMPTY;
-        this.群 = RString.EMPTY;
-        this.内容 = RString.EMPTY;
-        this.結果 = RString.EMPTY;
-        this.選択肢 = RString.EMPTY;
     }
 
     public dgChosakekka2_Row(Button 編集, RString チェック, RString 群, RString 内容, RString 結果, RString 選択肢) {

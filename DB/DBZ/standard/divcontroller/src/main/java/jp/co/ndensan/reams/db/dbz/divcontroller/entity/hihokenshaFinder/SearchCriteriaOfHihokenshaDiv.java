@@ -23,8 +23,8 @@ public class SearchCriteriaOfHihokenshaDiv extends Panel {
      */
     @JsonProperty("txtHihokenshaNo")
     private TextBoxCode txtHihokenshaNo;
-    @JsonProperty("txtTuchishoNo")
-    private TextBoxCode txtTuchishoNo;
+    @JsonProperty("chkHihokenshaKubun")
+    private CheckBoxList chkHihokenshaKubun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -42,14 +42,14 @@ public class SearchCriteriaOfHihokenshaDiv extends Panel {
         this.txtHihokenshaNo=txtHihokenshaNo;
     }
 
-    @JsonProperty("txtTuchishoNo")
-    public TextBoxCode getTxtTuchishoNo() {
-        return txtTuchishoNo;
+    @JsonProperty("chkHihokenshaKubun")
+    public CheckBoxList getChkHihokenshaKubun() {
+        return chkHihokenshaKubun;
     }
 
-    @JsonProperty("txtTuchishoNo")
-    public void setTxtTuchishoNo(TextBoxCode txtTuchishoNo) {
-        this.txtTuchishoNo=txtTuchishoNo;
+    @JsonProperty("chkHihokenshaKubun")
+    public void setChkHihokenshaKubun(CheckBoxList chkHihokenshaKubun) {
+        this.chkHihokenshaKubun=chkHihokenshaKubun;
     }
 
 }

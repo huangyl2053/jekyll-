@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.dgKensakuKekka_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.ShinseishaKensakuResultIchiranDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -45,10 +44,10 @@ public class ShinseishaKensakuResultIchiran {
      */
     private void setHihokenshaSearchListData(ShinseishaKensakuResultIchiranDiv panel) {
 
-        List<HashMap> hihokenshaSearchList = YamlLoader.DBE.loadAsList(
+        List<HashMap> HihokenshaSearchList = YamlLoader.DBE.loadAsList(
                 new RString("dbe8020001/HihokenshaSearchList.yml"));
 
-        List arraydata = createRowHihokenshaSearchResultIchiran(hihokenshaSearchList);
+        List arraydata = createRowHihokenshaSearchResultIchiran(HihokenshaSearchList);
         DataGrid grid = panel.getDgKensakuKekka();
         grid.setDataSource(arraydata);
 
@@ -57,24 +56,23 @@ public class ShinseishaKensakuResultIchiran {
     /*
      *被保険者検索結果一覧情報を取得します。
      */
-    private List createRowHihokenshaSearchResultIchiran(List<HashMap> hihokenshaSearchListData) {
+    private List createRowHihokenshaSearchResultIchiran(List<HashMap> HihokenshaSearchListData) {
 
         List arrayDataList = new ArrayList();
 
-        for (int i = 0; i < hihokenshaSearchListData.size(); i++) {
-//            HashMap hashMap = hihokenshaSearchListData.get(i);
-            ControlGenerator cg = new ControlGenerator(hihokenshaSearchListData.get(i));
-            RString strHokensha = cg.getAsRString("hokensha");
-            RString strHihokenNo = cg.getAsRString("hihokenNo");
-            RString strShinseibi = cg.getAsRString("shinseibi");
-            RString strShinseiKbn = cg.getAsRString("shinseiKbn");
-            RString strHihokenshaKbn = cg.getAsRString("hihokenshaKbn");
-            RString strShimei = cg.getAsRString("shimei");
-            RString strUmareYmd = cg.getAsRString("umareYmd");
-            RString strSeibetsu = cg.getAsRString("seibetsu");
-            RString strYubinNo = cg.getAsRString("yubinNo");
-            RString strJusho = cg.getAsRString("jusho");
-            RString strTel = cg.getAsRString("tel");
+        for (int i = 0; i < HihokenshaSearchListData.size(); i++) {
+            HashMap hashMap = HihokenshaSearchListData.get(i);
+            String strHokensha = (String) hashMap.get("hokensha");
+            String strHihokenNo = (String) hashMap.get("hihokenNo");
+            String strShinseibi = (String) hashMap.get("shinseibi");
+            String strShinseiKbn = (String) hashMap.get("shinseiKbn");
+            String strHihokenshaKbn = (String) hashMap.get("hihokenshaKbn");
+            String strShimei = (String) hashMap.get("shimei");
+            String strUmareYmd = (String) hashMap.get("umareYmd");
+            String strSeibetsu = (String) hashMap.get("seibetsu");
+            String strYubinNo = (String) hashMap.get("yubinNo");
+            String strJusho = (String) hashMap.get("jusho");
+            String strTel = (String) hashMap.get("tel");
 
             arrayDataList.add(createRowHihokenshaSearchResultIchiran(
                     strHokensha,
@@ -97,21 +95,32 @@ public class ShinseishaKensakuResultIchiran {
      *引数を元にデータグリッド内に挿入する被保険者検索結果一覧データを作成します。
      */
     private dgKensakuKekka_Row createRowHihokenshaSearchResultIchiran(
-            RString hokensha,
-            RString hihokenNo,
-            RString shinseibi,
-            RString shinseiKbn,
-            RString hihokenshaKbn,
-            RString shimei,
-            RString umareYmd,
-            RString seibetsu,
-            RString yubinNo,
-            RString jusho,
-            RString tel
+            String hokensha,
+            String hihokenNo,
+            String shinseibi,
+            String shinseiKbn,
+            String hihokenshaKbn,
+            String shimei,
+            String umareYmd,
+            String seibetsu,
+            String yubinNo,
+            String jusho,
+            String tel
     ) {
         dgKensakuKekka_Row rowHihokenshaSearchResultIchiranData = new dgKensakuKekka_Row(
-                new Button(), hokensha, hihokenNo, shinseibi, shinseiKbn, hihokenshaKbn,
-                shimei, umareYmd, seibetsu, yubinNo, jusho, tel);
+                new Button(),
+                new RString(hokensha),
+                new RString(hihokenNo),
+                new RString(shinseibi),
+                new RString(shinseiKbn),
+                new RString(hihokenshaKbn),
+                new RString(shimei),
+                new RString(umareYmd),
+                new RString(seibetsu),
+                new RString(yubinNo),
+                new RString(jusho),
+                new RString(tel)
+        );
         return rowHihokenshaSearchResultIchiranData;
     }
 

@@ -174,21 +174,13 @@ var DBE;
                     "marginLeft": "XS",
                     "marginRight": "XS",
                     "selectControlID": "dgNinteichosaIraiListForByHand",
-                    "helpMessageID": "",
-                    "jpControlName": "",
                     "gridSetting": {
                         "rowHeight": 25,
                         "isMultiSelectable": false,
-                        "isShowHeader": true,
                         "isShowFooter": true,
                         "isShowFilter": false,
                         "isShowFilterButton": true,
                         "isShowRowState": false,
-                        "isShowSelectButtonColumn": false,
-                        "isShowModifyButtonColumn": false,
-                        "isShowDeleteButtonColumn": false,
-                        "limitRowCount": 0,
-                        "selectedRowCount": 0,
                         "header": {
                             "combineColumns": [
                                 {
@@ -273,8 +265,7 @@ var DBE;
                                 "cellType": 2,
                                 "cellDetails": {
                                     "cellType": 2,
-                                    "disabled": true,
-                                    "onChange": ""
+                                    "disabled": false
                                 },
                                 "align": 0,
                                 "resize": false,
@@ -289,10 +280,7 @@ var DBE;
                                 "width": 75,
                                 "visible": true,
                                 "cellType": 0,
-                                "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
-                                },
+                                "cellDetails": null,
                                 "align": 1,
                                 "resize": true,
                                 "isPrivateInfo": false,
@@ -327,10 +315,7 @@ var DBE;
                                 "width": 75,
                                 "visible": false,
                                 "cellType": 0,
-                                "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
-                                },
+                                "cellDetails": null,
                                 "align": 1,
                                 "resize": false,
                                 "isPrivateInfo": false,
@@ -344,10 +329,7 @@ var DBE;
                                 "width": 75,
                                 "visible": true,
                                 "cellType": 0,
-                                "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
-                                },
+                                "cellDetails": null,
                                 "align": 0,
                                 "resize": true,
                                 "isPrivateInfo": false,
@@ -361,10 +343,7 @@ var DBE;
                                 "width": 0,
                                 "visible": false,
                                 "cellType": 0,
-                                "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
-                                },
+                                "cellDetails": null,
                                 "align": 1,
                                 "resize": false,
                                 "isPrivateInfo": false,
@@ -378,10 +357,7 @@ var DBE;
                                 "width": 75,
                                 "visible": false,
                                 "cellType": 0,
-                                "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
-                                },
+                                "cellDetails": null,
                                 "align": 0,
                                 "resize": false,
                                 "isPrivateInfo": false,
@@ -395,10 +371,7 @@ var DBE;
                                 "width": 100,
                                 "visible": true,
                                 "cellType": 0,
-                                "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
-                                },
+                                "cellDetails": "\"{\\\"cellType\\\":0}\"",
                                 "align": 1,
                                 "resize": true,
                                 "isPrivateInfo": false,
@@ -412,10 +385,7 @@ var DBE;
                                 "width": 120,
                                 "visible": true,
                                 "cellType": 0,
-                                "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
-                                },
+                                "cellDetails": "\"{\\\"cellType\\\":0}\"",
                                 "align": 0,
                                 "resize": true,
                                 "isPrivateInfo": false,
@@ -429,10 +399,7 @@ var DBE;
                                 "width": 0,
                                 "visible": false,
                                 "cellType": 0,
-                                "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
-                                },
+                                "cellDetails": null,
                                 "align": 0,
                                 "resize": false,
                                 "isPrivateInfo": false,
@@ -446,10 +413,7 @@ var DBE;
                                 "width": 0,
                                 "visible": false,
                                 "cellType": 0,
-                                "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
-                                },
+                                "cellDetails": null,
                                 "align": 0,
                                 "resize": false,
                                 "isPrivateInfo": false,
@@ -464,8 +428,7 @@ var DBE;
                                 "visible": true,
                                 "cellType": 0,
                                 "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
+                                    "cellType": 0
                                 },
                                 "align": 0,
                                 "resize": true,
@@ -484,9 +447,7 @@ var DBE;
                                     "cellType": 7,
                                     "ymdKubun": 2,
                                     "displayFormat": 0,
-                                    "onChange": "",
-                                    "isSetValueToToolTip": false,
-                                    "readOnly": true
+                                    "onChange": ""
                                 },
                                 "align": 1,
                                 "resize": true,
@@ -501,10 +462,7 @@ var DBE;
                                 "width": 80,
                                 "visible": true,
                                 "cellType": 0,
-                                "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
-                                },
+                                "cellDetails": null,
                                 "align": 0,
                                 "resize": true,
                                 "isPrivateInfo": false,
@@ -522,9 +480,7 @@ var DBE;
                                     "cellType": 7,
                                     "ymdKubun": 2,
                                     "displayFormat": 0,
-                                    "onChange": "",
-                                    "isSetValueToToolTip": false,
-                                    "readOnly": true
+                                    "onChange": ""
                                 },
                                 "align": 1,
                                 "resize": true,
@@ -543,9 +499,7 @@ var DBE;
                                     "cellType": 7,
                                     "ymdKubun": 2,
                                     "displayFormat": 0,
-                                    "onChange": "",
-                                    "isSetValueToToolTip": false,
-                                    "readOnly": true
+                                    "onChange": ""
                                 },
                                 "align": 1,
                                 "resize": true,
@@ -564,9 +518,7 @@ var DBE;
                                     "cellType": 7,
                                     "ymdKubun": 2,
                                     "displayFormat": 0,
-                                    "onChange": "",
-                                    "isSetValueToToolTip": false,
-                                    "readOnly": true
+                                    "onChange": ""
                                 },
                                 "align": 1,
                                 "resize": true,
@@ -581,10 +533,7 @@ var DBE;
                                 "width": 0,
                                 "visible": false,
                                 "cellType": 0,
-                                "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
-                                },
+                                "cellDetails": null,
                                 "align": 0,
                                 "resize": false,
                                 "isPrivateInfo": false,
@@ -598,10 +547,7 @@ var DBE;
                                 "width": 120,
                                 "visible": true,
                                 "cellType": 0,
-                                "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
-                                },
+                                "cellDetails": "\"{\\\"cellType\\\":0}\"",
                                 "align": 0,
                                 "resize": true,
                                 "isPrivateInfo": false,
@@ -615,10 +561,7 @@ var DBE;
                                 "width": 0,
                                 "visible": false,
                                 "cellType": 0,
-                                "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
-                                },
+                                "cellDetails": null,
                                 "align": 0,
                                 "resize": false,
                                 "isPrivateInfo": false,
@@ -632,10 +575,7 @@ var DBE;
                                 "width": 90,
                                 "visible": true,
                                 "cellType": 0,
-                                "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
-                                },
+                                "cellDetails": "null",
                                 "align": 0,
                                 "resize": true,
                                 "isPrivateInfo": false,
@@ -649,10 +589,7 @@ var DBE;
                                 "width": 0,
                                 "visible": false,
                                 "cellType": 0,
-                                "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
-                                },
+                                "cellDetails": null,
                                 "align": 0,
                                 "resize": false,
                                 "isPrivateInfo": false,
@@ -666,10 +603,7 @@ var DBE;
                                 "width": 120,
                                 "visible": true,
                                 "cellType": 0,
-                                "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
-                                },
+                                "cellDetails": "\"null\"",
                                 "align": 0,
                                 "resize": true,
                                 "isPrivateInfo": false,
@@ -683,10 +617,7 @@ var DBE;
                                 "width": 0,
                                 "visible": false,
                                 "cellType": 0,
-                                "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
-                                },
+                                "cellDetails": null,
                                 "align": 0,
                                 "resize": false,
                                 "isPrivateInfo": false,
@@ -700,10 +631,7 @@ var DBE;
                                 "width": 90,
                                 "visible": true,
                                 "cellType": 0,
-                                "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
-                                },
+                                "cellDetails": "\"null\"",
                                 "align": 0,
                                 "resize": true,
                                 "isPrivateInfo": false,
@@ -717,10 +645,7 @@ var DBE;
                                 "width": 0,
                                 "visible": false,
                                 "cellType": 0,
-                                "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
-                                },
+                                "cellDetails": null,
                                 "align": 0,
                                 "resize": false,
                                 "isPrivateInfo": false,
@@ -734,10 +659,7 @@ var DBE;
                                 "width": 120,
                                 "visible": true,
                                 "cellType": 0,
-                                "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
-                                },
+                                "cellDetails": null,
                                 "align": 0,
                                 "resize": true,
                                 "isPrivateInfo": false,
@@ -751,10 +673,7 @@ var DBE;
                                 "width": 0,
                                 "visible": false,
                                 "cellType": 0,
-                                "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
-                                },
+                                "cellDetails": null,
                                 "align": 0,
                                 "resize": false,
                                 "isPrivateInfo": false,
@@ -768,10 +687,7 @@ var DBE;
                                 "width": 90,
                                 "visible": true,
                                 "cellType": 0,
-                                "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
-                                },
+                                "cellDetails": null,
                                 "align": 0,
                                 "resize": false,
                                 "isPrivateInfo": false,
@@ -789,9 +705,7 @@ var DBE;
                                     "cellType": 7,
                                     "ymdKubun": 2,
                                     "displayFormat": 0,
-                                    "onChange": "",
-                                    "isSetValueToToolTip": false,
-                                    "readOnly": true
+                                    "onChange": ""
                                 },
                                 "align": 1,
                                 "resize": true,
@@ -806,10 +720,7 @@ var DBE;
                                 "width": 0,
                                 "visible": false,
                                 "cellType": 0,
-                                "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
-                                },
+                                "cellDetails": null,
                                 "align": 0,
                                 "resize": true,
                                 "isPrivateInfo": false,
@@ -823,10 +734,7 @@ var DBE;
                                 "width": 75,
                                 "visible": true,
                                 "cellType": 0,
-                                "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
-                                },
+                                "cellDetails": null,
                                 "align": 1,
                                 "resize": true,
                                 "isPrivateInfo": false,
@@ -840,10 +748,7 @@ var DBE;
                                 "width": 180,
                                 "visible": true,
                                 "cellType": 0,
-                                "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
-                                },
+                                "cellDetails": "\"{\\\"cellType\\\":0}\"",
                                 "align": 0,
                                 "resize": true,
                                 "isPrivateInfo": false,
@@ -857,10 +762,7 @@ var DBE;
                                 "width": 100,
                                 "visible": true,
                                 "cellType": 0,
-                                "cellDetails": {
-                                    "cellType": 0,
-                                    "isSetValueToToolTip": false
-                                },
+                                "cellDetails": null,
                                 "align": 0,
                                 "resize": true,
                                 "isPrivateInfo": false,
@@ -872,18 +774,14 @@ var DBE;
                     "onSort": "",
                     "onSelect": "",
                     "onSelectByDblClick": "",
-                    "onSelectBySelectButton": "",
-                    "onSelectByModifyButton": "",
-                    "onSelectByDeleteButton": "",
                     "onOnlyRow": "",
                     "onNoRow": "",
                     "onMultiRows": "",
                     "dataSource": [],
-                    "sortOrder": "chosaIraiKubun",
+                    "sortOrder": "chosaItakusakiName",
                     "isAscending": true,
                     "filterList": [],
-                    "activeRowId": -1,
-                    "readOnly": false
+                    "activeRowId": -1
                 }
             ],
             "controlType": "CompositeControl",
@@ -901,8 +799,6 @@ var DBE;
             "marginLeft": "XS",
             "marginRight": "XS",
             "selectControlID": "defaultLayout",
-            "helpMessageID": "",
-            "jpControlName": "",
             "relation": [],
             "businessId": "DBE",
             "controlName": "NinteichosaIraiListForByHandCom",

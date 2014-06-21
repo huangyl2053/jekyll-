@@ -153,6 +153,7 @@ public final class YamlLoader {
     private Object load(RString fileName) {
         InputStream input = null;
         String urlHeader = ((_IServletControlData) _ControlDataHolder.getControlData()).getUrlHeader();
+        System.out.println("Header : " + urlHeader);
         try {
             URL url = new URL(urlHeader.concat(rootPath.toString()).concat(fileName.toString()));
             input = url.openStream();
