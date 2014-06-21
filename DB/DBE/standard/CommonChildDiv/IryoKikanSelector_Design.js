@@ -6,34 +6,34 @@ var __extends = this.__extends || function (d, b) {
 };
 var DBE;
 (function (DBE) {
-    var ChosaItakusakiSelector_Design = (function (_super) {
-        __extends(ChosaItakusakiSelector_Design, _super);
-        function ChosaItakusakiSelector_Design($parentElement, isDesignMode, fieldName) {
-            _super.call(this, $parentElement, isDesignMode, ChosaItakusakiSelector_Design.myLayout, fieldName);
+    var IryoKikanSelector_Design = (function (_super) {
+        __extends(IryoKikanSelector_Design, _super);
+        function IryoKikanSelector_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, IryoKikanSelector_Design.myLayout, fieldName);
         }
-        ChosaItakusakiSelector_Design.prototype.registProperty = function () {
+        IryoKikanSelector_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
         };
 
-        ChosaItakusakiSelector_Design.prototype.getEditablePropertyInfo = function () {
+        IryoKikanSelector_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
 
             return editablePropertyInfo;
         };
-        ChosaItakusakiSelector_Design.myLayout = {
+        IryoKikanSelector_Design.myLayout = {
             "fieldName": "defaultLayout",
             "items": [
                 {
-                    "fieldName": "ChosaItakusakiSelector",
+                    "fieldName": "IryoKikanSelector",
                     "items": [
                         {
-                            "fieldName": "ChosaItakusaki",
+                            "fieldName": "IryoKikan",
                             "items": [
                                 {
-                                    "fieldName": "ChosaItakusakiList",
+                                    "fieldName": "IryoKikanList",
                                     "items": [
                                         {
-                                            "fieldName": "btnToMentenanceChosaKikan",
+                                            "fieldName": "btnToMentenanceIryoKikan",
                                             "items": [],
                                             "controlType": "Button",
                                             "width": "200",
@@ -49,20 +49,19 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
-                                            "selectControlID": "btnToMentenanceChosaKikan",
+                                            "selectControlID": "btnToMentenanceIryoKikan",
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "onClick": "",
-                                            "text": "調査委託先情報を修正する",
+                                            "text": "医療機関情報を修正する",
                                             "appearance": 0,
                                             "imageFileUrl": "",
                                             "imageWidth": "",
                                             "imageHeight": "",
-                                            "icon": 0,
-                                            "heightTextBoxMatches": false
+                                            "icon": 0
                                         },
                                         {
-                                            "fieldName": "dgChosaItakusakiList",
+                                            "fieldName": "dgIryoKikanList",
                                             "items": [],
                                             "controlType": "DataGrid",
                                             "width": "370",
@@ -78,10 +77,9 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
-                                            "selectControlID": "dgChosaItakusakiList",
+                                            "selectControlID": "dgIryoKikanList",
                                             "helpMessageID": "",
                                             "jpControlName": "",
-                                            "readOnly": false,
                                             "height": "220",
                                             "gridSetting": {
                                                 "rowHeight": 25,
@@ -104,7 +102,7 @@ var DBE;
                                                 "columns": [
                                                     {
                                                         "columnName": "番号",
-                                                        "dataName": "chosaItakusakiNo",
+                                                        "dataName": "IryoKikanNo",
                                                         "toolTip": "",
                                                         "bgColor": 0,
                                                         "width": 82,
@@ -116,11 +114,11 @@ var DBE;
                                                         "align": 1,
                                                         "resize": true,
                                                         "isPrivateInfo": false,
-                                                        "sortKey": "chosaItakusakiNo"
+                                                        "sortKey": "IryoKikanNo"
                                                     },
                                                     {
                                                         "columnName": "名称",
-                                                        "dataName": "chosaItakusakiName",
+                                                        "dataName": "iryoKikanName",
                                                         "toolTip": "",
                                                         "bgColor": 0,
                                                         "width": 230,
@@ -132,21 +130,21 @@ var DBE;
                                                         "align": 0,
                                                         "resize": true,
                                                         "isPrivateInfo": false,
-                                                        "sortKey": "chosaItakusakiName"
+                                                        "sortKey": "iryoKikanName"
                                                     }
                                                 ]
                                             },
                                             "onSort": "",
-                                            "onSelect": "onSelect_dgChosaItakusakiList",
-                                            "onSelectByDblClick": "onSelectByDC_ChosaItakusaki",
-                                            "onSelectBySelectButton": "onSelectBySB_ChosaItakusaki",
+                                            "onSelect": "onSelect_dgIryoKikanList",
+                                            "onSelectByDblClick": "onSelectByDC_IryoKikan",
+                                            "onSelectBySelectButton": "onSelectBySB_IryoKikan",
                                             "onSelectByModifyButton": "",
                                             "onSelectByDeleteButton": "",
                                             "onOnlyRow": "",
                                             "onNoRow": "",
                                             "onMultiRows": "",
                                             "dataSource": [],
-                                            "sortOrder": "chosaItakusakiName",
+                                            "sortOrder": "iryoKikanName",
                                             "isAscending": true,
                                             "filterList": [],
                                             "activeRowId": -1
@@ -166,7 +164,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": "0",
                                     "marginRight": "0",
-                                    "selectControlID": "ChosaItakusakiList",
+                                    "selectControlID": "IryoKikanList",
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "onLoad": "",
@@ -177,7 +175,7 @@ var DBE;
                                     "canOpenAndClose": false,
                                     "postParameterPanelNames": [
                                         {
-                                            "postParameterPanelNames": "ChosaItakusakiList"
+                                            "postParameterPanelNames": "IryoKikanList"
                                         }
                                     ],
                                     "requestSettings": [],
@@ -185,7 +183,10 @@ var DBE;
                                     "onOpen": "",
                                     "onClose": "",
                                     "session": {},
-                                    "eraseBorder": false,
+                                    "eraseBorderTop": true,
+                                    "eraseBorderBottom": true,
+                                    "eraseBorderRight": true,
+                                    "eraseBorderLeft": true,
                                     "backgroundColor": 0,
                                     "widthAuto": true,
                                     "panelDisplay": 0,
@@ -194,10 +195,10 @@ var DBE;
                                     "height": "Auto"
                                 },
                                 {
-                                    "fieldName": "Chosain",
+                                    "fieldName": "Ishi",
                                     "items": [
                                         {
-                                            "fieldName": "spaChosain",
+                                            "fieldName": "spaIshi",
                                             "items": [],
                                             "controlType": "Space",
                                             "visible": true,
@@ -211,16 +212,16 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
-                                            "selectControlID": "spaChosain",
+                                            "selectControlID": "spaIshi",
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "spaceCount": 1
                                         },
                                         {
-                                            "fieldName": "ChosainList",
+                                            "fieldName": "IshiList",
                                             "items": [
                                                 {
-                                                    "fieldName": "dgChosainList",
+                                                    "fieldName": "dgIshiList",
                                                     "items": [],
                                                     "controlType": "DataGrid",
                                                     "width": "290",
@@ -236,10 +237,9 @@ var DBE;
                                                     "authorityMode": 0,
                                                     "marginLeft": "XS",
                                                     "marginRight": "XS",
-                                                    "selectControlID": "dgChosainList",
+                                                    "selectControlID": "dgIshiList",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
-                                                    "readOnly": false,
                                                     "height": "190",
                                                     "gridSetting": {
                                                         "rowHeight": 25,
@@ -262,7 +262,7 @@ var DBE;
                                                         "columns": [
                                                             {
                                                                 "columnName": "番号",
-                                                                "dataName": "chosainNo",
+                                                                "dataName": "IshiNo",
                                                                 "toolTip": "",
                                                                 "bgColor": 0,
                                                                 "width": 82,
@@ -274,11 +274,11 @@ var DBE;
                                                                 "align": 1,
                                                                 "resize": true,
                                                                 "isPrivateInfo": false,
-                                                                "sortKey": "chosainNo"
+                                                                "sortKey": "IshiNo"
                                                             },
                                                             {
                                                                 "columnName": "氏名",
-                                                                "dataName": "chosainName",
+                                                                "dataName": "ishiName",
                                                                 "toolTip": "",
                                                                 "bgColor": 0,
                                                                 "width": 150,
@@ -290,21 +290,21 @@ var DBE;
                                                                 "align": 0,
                                                                 "resize": true,
                                                                 "isPrivateInfo": false,
-                                                                "sortKey": "chosainName"
+                                                                "sortKey": "ishiName"
                                                             }
                                                         ]
                                                     },
                                                     "onSort": "",
                                                     "onSelect": "",
-                                                    "onSelectByDblClick": "onSelectByDC_Chosain",
-                                                    "onSelectBySelectButton": "onSelectBySB_Chosain",
+                                                    "onSelectByDblClick": "onSelectByDC_Ishi",
+                                                    "onSelectBySelectButton": "onSelectBySB_Ishi",
                                                     "onSelectByModifyButton": "",
                                                     "onSelectByDeleteButton": "",
                                                     "onOnlyRow": "",
                                                     "onNoRow": "",
                                                     "onMultiRows": "",
                                                     "dataSource": [],
-                                                    "sortOrder": "chosainMeisho",
+                                                    "sortOrder": "IshiMeisho",
                                                     "isAscending": true,
                                                     "filterList": [],
                                                     "activeRowId": -1
@@ -324,21 +324,21 @@ var DBE;
                                             "authorityMode": 0,
                                             "marginLeft": "XS",
                                             "marginRight": "XS",
-                                            "selectControlID": "ChosainList",
+                                            "selectControlID": "IshiList",
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "onLoad": "",
-                                            "title": "所属調査員",
+                                            "title": "所属医師",
                                             "marginTop": "Default",
                                             "marginBottom": "Default",
                                             "isOpen": true,
                                             "canOpenAndClose": false,
                                             "postParameterPanelNames": [
                                                 {
-                                                    "postParameterPanelNames": "ChosainList"
+                                                    "postParameterPanelNames": "IshiList"
                                                 },
                                                 {
-                                                    "postParameterPanelNames": "ChosaItakusakiList"
+                                                    "postParameterPanelNames": "IryoKikanList"
                                                 }
                                             ],
                                             "requestSettings": [
@@ -347,15 +347,18 @@ var DBE;
                                                     "requestUrl": ""
                                                 },
                                                 {
-                                                    "eventName": "onSelect_dgChosaItakusakiList",
-                                                    "requestUrl": "dbe/db/dbe/ChosaItakusakiSelector/onSelect_dgChosaItakusakiList"
+                                                    "eventName": "onSelect_dgIryoKikanList",
+                                                    "requestUrl": "dbe/db/dbe/IryoKikanSelector/onSelect_dgIryoKikanList"
                                                 }
                                             ],
                                             "hiddenInput": [],
                                             "onOpen": "",
                                             "onClose": "",
                                             "session": {},
-                                            "eraseBorder": false,
+                                            "eraseBorderTop": false,
+                                            "eraseBorderBottom": false,
+                                            "eraseBorderRight": false,
+                                            "eraseBorderLeft": false,
                                             "backgroundColor": 0,
                                             "widthAuto": true,
                                             "panelDisplay": 1,
@@ -378,7 +381,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": "XS",
                                     "marginRight": "0",
-                                    "selectControlID": "Chosain",
+                                    "selectControlID": "Ishi",
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "onLoad": "",
@@ -389,7 +392,7 @@ var DBE;
                                     "canOpenAndClose": true,
                                     "postParameterPanelNames": [
                                         {
-                                            "postParameterPanelNames": "Chosain"
+                                            "postParameterPanelNames": "Ishi"
                                         }
                                     ],
                                     "requestSettings": [],
@@ -397,7 +400,10 @@ var DBE;
                                     "onOpen": "",
                                     "onClose": "",
                                     "session": {},
-                                    "eraseBorder": false,
+                                    "eraseBorderTop": true,
+                                    "eraseBorderBottom": true,
+                                    "eraseBorderRight": true,
+                                    "eraseBorderLeft": true,
                                     "backgroundColor": 0,
                                     "widthAuto": true,
                                     "panelDisplay": 0,
@@ -420,18 +426,18 @@ var DBE;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
-                            "selectControlID": "ChosaItakusaki",
+                            "selectControlID": "IryoKikan",
                             "helpMessageID": "",
                             "jpControlName": "",
                             "onLoad": "",
-                            "title": "調査委託先",
+                            "title": "医療機関",
                             "marginTop": "Default",
                             "marginBottom": "Default",
                             "isOpen": true,
                             "canOpenAndClose": false,
                             "postParameterPanelNames": [
                                 {
-                                    "postParameterPanelNames": "ChosaItakusaki"
+                                    "postParameterPanelNames": "IryoKikan"
                                 }
                             ],
                             "requestSettings": [],
@@ -439,7 +445,10 @@ var DBE;
                             "onOpen": "",
                             "onClose": "",
                             "session": {},
-                            "eraseBorder": false,
+                            "eraseBorderTop": false,
+                            "eraseBorderBottom": false,
+                            "eraseBorderRight": false,
+                            "eraseBorderLeft": false,
                             "backgroundColor": 0,
                             "widthAuto": false,
                             "panelDisplay": 1,
@@ -451,7 +460,7 @@ var DBE;
                             "fieldName": "SelectedContents",
                             "items": [
                                 {
-                                    "fieldName": "txtChosaItakusakiCode",
+                                    "fieldName": "txtiryoKikanCode",
                                     "items": [],
                                     "controlType": "TextBoxCode",
                                     "width": "82",
@@ -467,7 +476,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
-                                    "selectControlID": "txtChosaItakusakiCode_core",
+                                    "selectControlID": "txtiryoKikanCode_core",
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "readOnly": true,
@@ -487,7 +496,7 @@ var DBE;
                                     "onKeyPress": "",
                                     "suggest": [],
                                     "value": "",
-                                    "labelLText": "調査委託先",
+                                    "labelLText": "医療機関",
                                     "labelRText": "",
                                     "labelLWidth": "S",
                                     "labelRWidth": "S",
@@ -498,7 +507,7 @@ var DBE;
                                     "formatLength": "10"
                                 },
                                 {
-                                    "fieldName": "txtChosaItakusakiName",
+                                    "fieldName": "txtiryoKikanName",
                                     "items": [],
                                     "controlType": "TextBox",
                                     "width": "250",
@@ -514,7 +523,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": "0",
                                     "marginRight": "XS",
-                                    "selectControlID": "txtChosaItakusakiName_core",
+                                    "selectControlID": "txtiryoKikanName_core",
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "readOnly": true,
@@ -544,7 +553,7 @@ var DBE;
                                     "permitCharactor": ""
                                 },
                                 {
-                                    "fieldName": "txtChosainCode",
+                                    "fieldName": "txtishiCode",
                                     "items": [],
                                     "controlType": "TextBoxCode",
                                     "width": "65",
@@ -560,7 +569,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
-                                    "selectControlID": "txtChosainCode_core",
+                                    "selectControlID": "txtishiCode_core",
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "readOnly": true,
@@ -580,7 +589,7 @@ var DBE;
                                     "onKeyPress": "",
                                     "suggest": [],
                                     "value": "",
-                                    "labelLText": "調査員",
+                                    "labelLText": "医師",
                                     "labelRText": "",
                                     "labelLWidth": "S",
                                     "labelRWidth": "S",
@@ -591,7 +600,7 @@ var DBE;
                                     "formatLength": "8"
                                 },
                                 {
-                                    "fieldName": "txtChosainName",
+                                    "fieldName": "txtishiName",
                                     "items": [],
                                     "controlType": "TextBox",
                                     "width": "150",
@@ -607,7 +616,7 @@ var DBE;
                                     "authorityMode": 0,
                                     "marginLeft": "0",
                                     "marginRight": "XS",
-                                    "selectControlID": "txtChosainName_core",
+                                    "selectControlID": "txtishiName_core",
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "readOnly": true,
@@ -670,7 +679,10 @@ var DBE;
                             "onOpen": "",
                             "onClose": "",
                             "session": {},
-                            "eraseBorder": false,
+                            "eraseBorderTop": false,
+                            "eraseBorderBottom": false,
+                            "eraseBorderRight": false,
+                            "eraseBorderLeft": false,
                             "backgroundColor": 0,
                             "widthAuto": false,
                             "panelDisplay": 0,
@@ -704,8 +716,7 @@ var DBE;
                             "imageFileUrl": "",
                             "imageWidth": "",
                             "imageHeight": "",
-                            "icon": 0,
-                            "heightTextBoxMatches": false
+                            "icon": 0
                         },
                         {
                             "fieldName": "btnSelectAndClose",
@@ -733,8 +744,7 @@ var DBE;
                             "imageFileUrl": "",
                             "imageWidth": "",
                             "imageHeight": "",
-                            "icon": 0,
-                            "heightTextBoxMatches": false
+                            "icon": 0
                         }
                     ],
                     "controlType": "Panel",
@@ -751,72 +761,75 @@ var DBE;
                     "authorityMode": 0,
                     "marginLeft": "Default",
                     "marginRight": "Default",
-                    "selectControlID": "ChosaItakusakiSelector",
+                    "selectControlID": "IryoKikanSelector",
                     "helpMessageID": "",
                     "jpControlName": "",
                     "onLoad": "",
-                    "title": "調査委託先選択",
+                    "title": "医療機関選択",
                     "marginTop": "Default",
                     "marginBottom": "Default",
                     "isOpen": true,
                     "canOpenAndClose": true,
                     "postParameterPanelNames": [
                         {
-                            "postParameterPanelNames": "ChosaItakusakiSelector"
+                            "postParameterPanelNames": "IryoKikanSelector"
                         }
                     ],
                     "requestSettings": [
                         {
                             "eventName": "onLoad",
-                            "requestUrl": "dbe/db/dbe/ChosaItakusakiSelector/onLoad"
+                            "requestUrl": "dbe/db/dbe/IryoKikanSelector/onLoad"
                         },
                         {
-                            "eventName": "onSelectByDC_ChosaItakusaki",
-                            "requestUrl": "dbe/db/dbe/ChosaItakusakiSelector/onSelectByDC_ChosaItakusaki"
+                            "eventName": "onSelectByDC_IryoKikan",
+                            "requestUrl": "dbe/db/dbe/IryoKikanSelector/onSelectByDC_IryoKikan"
                         },
                         {
-                            "eventName": "onSelectBySB_ChosaItakusaki",
-                            "requestUrl": "dbe/db/dbe/ChosaItakusakiSelector/onSelectBySB_ChosaItakusaki"
+                            "eventName": "onSelectBySB_IryoKikan",
+                            "requestUrl": "dbe/db/dbe/IryoKikanSelector/onSelectBySB_IryoKikan"
                         },
                         {
-                            "eventName": "onSelectByDC_Chosain",
-                            "requestUrl": "dbe/db/dbe/ChosaItakusakiSelector/onSelectByDC_Chosain"
+                            "eventName": "onSelectByDC_Ishi",
+                            "requestUrl": "dbe/db/dbe/IryoKikanSelector/onSelectByDC_Ishi"
                         },
                         {
-                            "eventName": "onSelectBySB_Chosain",
-                            "requestUrl": "dbe/db/dbe/ChosaItakusakiSelector/onSelectBySB_Chosain"
+                            "eventName": "onSelectBySB_Ishi",
+                            "requestUrl": "dbe/db/dbe/IryoKikanSelector/onSelectBySB_Ishi"
                         },
                         {
                             "eventName": "onClick_btnSelectAndClose",
-                            "requestUrl": "dbe/db/dbe/ChosaItakusakiSelector/onClick_btnSelectAndClose"
+                            "requestUrl": "dbe/db/dbe/IryoKikanSelector/onClick_btnSelectAndClose"
                         },
                         {
                             "eventName": "onClick_btnNonSelectReturn",
-                            "requestUrl": "dbe/db/dbe/ChosaItakusakiSelector/onClick_btnNonSelectReturn"
+                            "requestUrl": "dbe/db/dbe/IryoKikanSelector/onClick_btnNonSelectReturn"
                         }
                     ],
                     "hiddenInput": [
                         {
-                            "propertyName": "chosaItakusakiCode",
+                            "propertyName": "iryoKikanCode",
                             "value": ""
                         },
                         {
-                            "propertyName": "chosaItakusakiName",
+                            "propertyName": "iryoKikanName",
                             "value": ""
                         },
                         {
-                            "propertyName": "chosainCode",
+                            "propertyName": "ishiCode",
                             "value": ""
                         },
                         {
-                            "propertyName": "chosainName",
+                            "propertyName": "ishiName",
                             "value": ""
                         }
                     ],
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorder": false,
+                    "eraseBorderTop": false,
+                    "eraseBorderBottom": false,
+                    "eraseBorderRight": false,
+                    "eraseBorderLeft": false,
                     "backgroundColor": 0,
                     "widthAuto": false,
                     "panelDisplay": 0,
@@ -844,34 +857,32 @@ var DBE;
             "jpControlName": "",
             "relation": [],
             "businessId": "DBE",
-            "controlName": "ChosaItakusakiSelector",
+            "controlName": "IryoKikanSelector",
             "marginTop": 0,
             "marginBottom": 0,
             "originalProperty": [],
             "dataPassingForDialog": [
                 {
-                    "key": "chosaItakusakiCode",
-                    "controlName": "ChosaItakusakiSelector.chosaItakusakiCode"
+                    "key": "iryoKikanCode",
+                    "controlName": "IryoKikanSelector.iryoKikanCode"
                 },
                 {
-                    "key": "chosaItakusakiName",
-                    "controlName": "ChosaItakusakiSelector.chosaItakusakiName"
+                    "key": "iryoKikanName",
+                    "controlName": "IryoKikanSelector.iryoKikanName"
                 },
                 {
-                    "key": "chosainCode",
-                    "controlName": "ChosaItakusakiSelector.chosainCode"
+                    "key": "ishiCode",
+                    "controlName": "IryoKikanSelector.ishiCode"
                 },
                 {
-                    "key": "chosainName",
-                    "controlName": "ChosaItakusakiSelector.chosainName"
+                    "key": "ishiName",
+                    "controlName": "IryoKikanSelector.ishiName"
                 }
             ],
             "dialogOkEventNameForDialog": "onClick_btnSelectAndClose",
-            "dialogCancelEventNameForDialog": "onClick_btnNonSelectReturn",
-            "canTransferEvent": true,
-            "heightForDialog": "M"
+            "dialogCancelEventNameForDialog": "onClick_btnNonSelectReturn"
         };
-        return ChosaItakusakiSelector_Design;
+        return IryoKikanSelector_Design;
     })(Uz.CommonChildDiv);
-    DBE.ChosaItakusakiSelector_Design = ChosaItakusakiSelector_Design;
+    DBE.IryoKikanSelector_Design = IryoKikanSelector_Design;
 })(DBE || (DBE = {}));

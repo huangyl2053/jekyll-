@@ -74,4 +74,27 @@ public class ShujiiData {
         }
         return Doctor.EMPTY;
     }
+
+    /**
+     * 医療機関コードから、医師の一覧を取得します。
+     *
+     * @param iryoKikanCode 医療機関コード
+     * @return 医師のリスト
+     */
+    public IDemoData<Doctor> get医師ListOf(final RString iryoKikanCode) {
+        List<HashMap> dataFromYaml = YamlLoader.DBE.loadAsList(composeFileName(iryoKikanCode));
+        return new DemoData<>(dataFromYaml, new YamlUtil.Converter.IConverter<Doctor>() {
+            @Override
+            public Doctor exec(Map map) {
+                ControlGenerator cg = new ControlGenerator(map);
+                return new Doctor(cg.getAsRString("医師番号"), cg.getAsRString("医師名"),
+                        new ShujiiIryoKikanData().get医療機関From(iryoKikanCode));
+            }
+        });
+    }
+
+    private static RString composeFileName(RString iryoKikanCode) {
+        return new RString("IryoKikanDialog/IshiList" + iryoKikanCode + ".yml");
+    }
+
 }

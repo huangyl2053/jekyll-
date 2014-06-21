@@ -116,10 +116,7 @@ var DBE;
                                     "onOpen": "",
                                     "onClose": "",
                                     "session": {},
-                                    "eraseBorderTop": true,
-                                    "eraseBorderBottom": true,
-                                    "eraseBorderRight": true,
-                                    "eraseBorderLeft": true,
+                                    "eraseBorder": false,
                                     "backgroundColor": 4,
                                     "widthAuto": true,
                                     "panelDisplay": 0,
@@ -161,10 +158,7 @@ var DBE;
                             "onOpen": "",
                             "onClose": "",
                             "session": {},
-                            "eraseBorderTop": false,
-                            "eraseBorderBottom": false,
-                            "eraseBorderRight": false,
-                            "eraseBorderLeft": false,
+                            "eraseBorder": false,
                             "backgroundColor": 4,
                             "widthAuto": false,
                             "panelDisplay": 0,
@@ -195,10 +189,11 @@ var DBE;
                             "imageWidth": "",
                             "imageHeight": "",
                             "text": "閉じる",
-                            "onClick": "onClick_btnClose",
+                            "onClick": "CloseOK",
                             "appearance": 0,
                             "imageFileUrl": "",
-                            "icon": 0
+                            "icon": 0,
+                            "heightTextBoxMatches": false
                         }
                     ],
                     "controlType": "Panel",
@@ -243,10 +238,7 @@ var DBE;
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorderTop": false,
-                    "eraseBorderBottom": false,
-                    "eraseBorderRight": false,
-                    "eraseBorderLeft": false,
+                    "eraseBorder": false,
                     "backgroundColor": 0,
                     "widthAuto": false,
                     "panelDisplay": 0,
@@ -286,7 +278,9 @@ var DBE;
             ],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
-            "dialogCancelEventNameForDialog": "onClick_btnClose"
+            "dialogCancelEventNameForDialog": "onClick_btnClose",
+            "canTransferEvent": true,
+            "heightForDialog": "M"
         };
         return KanryoDialog_Design;
     })(Uz.CommonChildDiv);

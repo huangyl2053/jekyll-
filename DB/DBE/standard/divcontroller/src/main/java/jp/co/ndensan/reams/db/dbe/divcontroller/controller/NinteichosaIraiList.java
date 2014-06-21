@@ -93,7 +93,7 @@ public class NinteichosaIraiList {
 
         List<dgNinteichosaIraiList_Row> list = new ArrayList<>();
         for (dgNinteichosaIraiList_Row selectedItem : grid.getSelectedItems()) {
-            if (selectedItem.get依頼登録済()) {
+            if (selectedItem.get依頼書発行済()) {
                 selectedItem.get調査依頼完了日().setValue(FlexibleDate.getNowDate());
             }
             list.add(selectedItem);
