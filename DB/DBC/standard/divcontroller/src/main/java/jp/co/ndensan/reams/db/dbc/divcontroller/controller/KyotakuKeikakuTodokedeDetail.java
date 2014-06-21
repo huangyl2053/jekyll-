@@ -309,6 +309,12 @@ public class KyotakuKeikakuTodokedeDetail {
      */
     public ResponseData onChangeRadKeikakuSakuseiKubun(KyotakuKeikakuTodokedeDetailDiv panel) {
         ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
+        changeRadKeikakuSakuseiKubun(panel);
+        response.data = panel;
+        return response;
+    }
+
+    private void changeRadKeikakuSakuseiKubun(KyotakuKeikakuTodokedeDetailDiv panel) {
         KyotakuKeikakuTodokedeJigyoshaDiv jigyosha = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
                 getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeMeisai().getKyotakuKeikakuTodokedeJigyosha();
         RadioButton rad = jigyosha.getRadKeikakuSakuseiKubun();
@@ -327,8 +333,6 @@ public class KyotakuKeikakuTodokedeDetail {
             jigyosha.getTxtItakuJigyoshaName().setVisible(true);
             jigyosha.getTxtItakuJigyoshaName().setDisplayNone(false);
         }
-        response.data = panel;
-        return response;
     }
 
     /**
@@ -398,12 +402,8 @@ public class KyotakuKeikakuTodokedeDetail {
                 || pattern.equals(画面表示.変更届出)
                 || pattern.equals(画面表示.届出内容修正)) {
 
-            jigyosha.getTxtItakuJigyoshaCode().setVisible(false);
-            jigyosha.getTxtItakuJigyoshaCode().setDisplayNone(true);
-            jigyosha.getBtnItakuJigyosha().setVisible(false);
-            jigyosha.getBtnItakuJigyosha().setDisplayNone(true);
-            jigyosha.getTxtItakuJigyoshaName().setVisible(false);
-            jigyosha.getTxtItakuJigyoshaName().setDisplayNone(true);
+            changeRadKeikakuSakuseiKubun(panel);
+
         }
     }
 

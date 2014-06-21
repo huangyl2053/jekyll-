@@ -32,7 +32,40 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
-     "onClick_BtnToSearch": ""
+     "onClick_BtnToSearch": "onClickBtnToSearch",
+     "displayNone_txtTsuchishoNo": false,
+     "displayNone_ddlFukaNendo": false,
+     "displayNone_SearchCriteriaDetail": false
+    },
+    {
+     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0",
+     "marginRight": "0",
+     "selectControlID": "KyotakuKeikakuTodokedeHihokenshaList",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "relation": [],
+     "marginTop": 0,
+     "marginBottom": 0,
+     "businessId": "DBZ",
+     "controlName": "SearchResultOfHihokensha",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "onClickBtnToResearch": "onClickBtnToResearch"
     }
    ],
    "controlType": "Panel",
@@ -65,89 +98,14 @@
     {
      "eventName": "onLoad",
      "requestUrl": "dbc/db/dbc/KyotakuKeikakuTodokedeSearch/onLoad"
-    }
-   ],
-   "hiddenInput": [],
-   "onOpen": "",
-   "onClose": "",
-   "session": {},
-   "marginTop": "Default",
-   "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
-   "backgroundColor": 0,
-   "widthAuto": false,
-   "panelDisplay": 0,
-   "isGroupBox": false,
-   "readOnly": false,
-   "height": "Auto"
-  },
-  {
-   "fieldName": "KyotakuKeikakuTodokedeList",
-   "items": [
+    },
     {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList",
-     "items": [],
-     "controlType": "CommonChildDiv",
-     "width": "XS",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 0,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
-     "selectControlID": "KyotakuKeikakuTodokedeHihokenshaList",
-     "helpMessageID": "",
-     "jpControlName": "",
-     "relation": [],
-     "marginTop": 0,
-     "marginBottom": 0,
-     "businessId": "DBZ",
-     "controlName": "SearchResultOfHihokensha",
-     "dataPassingForDialog": [],
-     "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": "",
-     "onClickBtnToResearch": ""
-    }
-   ],
-   "controlType": "Panel",
-   "width": "G12",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": true,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "XS",
-   "marginRight": "XS",
-   "selectControlID": "KyotakuKeikakuTodokedeList",
-   "helpMessageID": "",
-   "jpControlName": "",
-   "onLoad": "",
-   "title": "(共通) DBZ0010002 該当者一覧",
-   "isOpen": true,
-   "canOpenAndClose": true,
-   "postParameterPanelNames": [
+     "eventName": "onClickBtnToSearch",
+     "requestUrl": "dbc/db/dbc/KyotakuKeikakuTodokedeSearch/onClickBtnToSearch"
+    },
     {
-     "postParameterPanelNames": "KyotakuKeikakuTodokedeList"
-    }
-   ],
-   "requestSettings": [
-    {
-     "eventName": "onLoad",
-     "requestUrl": "dbc/db/dbc/KyotakuKeikakuTodokedeList/onLoad"
+     "eventName": "onClickBtnToResearch",
+     "requestUrl": "dbc/db/dbc/KyotakuKeikakuTodokedeSearch/onClickBtnToResearch"
     }
    ],
    "hiddenInput": [],
@@ -589,7 +547,7 @@
          "jpControlName": "",
          "onLoad": "",
          "title": "履歴一覧",
-         "isOpen": false,
+         "isOpen": true,
          "canOpenAndClose": true,
          "postParameterPanelNames": [
           {
@@ -1157,7 +1115,7 @@
              "helpMessageID": "",
              "jpControlName": "",
              "onChange": "onChangeRadKeikakuSakuseiKubun",
-             "selectedItem": null,
+             "selectedItem": "key1",
              "dataSource": [
               {
                "key": "key0",
@@ -2059,198 +2017,33 @@
        "fieldName": "tplKyotakuKeikakuTodokedeDetailShorui",
        "items": [
         {
-         "fieldName": "KyotakuKeikakuTodokedeShoruiList",
-         "items": [
-          {
-           "fieldName": "dgShoruiJokyoList",
-           "items": [],
-           "controlType": "DataGrid",
-           "width": "960",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": false,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "0",
-           "marginRight": "XS",
-           "selectControlID": "dgShoruiJokyoList",
-           "helpMessageID": "",
-           "jpControlName": "",
-           "height": "XS",
-           "dataSource": [],
-           "gridSetting": {
-            "rowHeight": 25,
-            "isMultiSelectable": false,
-            "isShowFooter": true,
-            "isShowFilter": false,
-            "isShowFilterButton": false,
-            "isShowRowState": false,
-            "header": {
-             "combineColumns": [],
-             "frozenColumn": "",
-             "headerHeight": 0
-            },
-            "columns": [
-             {
-              "columnName": "",
-              "dataName": "btnSelect",
-              "toolTip": "",
-              "bgColor": 0,
-              "width": 50,
-              "visible": true,
-              "cellType": 8,
-              "cellDetails": {
-               "cellType": 8,
-               "text": "選択",
-               "onClick": "",
-               "imageFileUrl": "",
-               "imageWidth": "",
-               "imageHeight": ""
-              },
-              "align": 1,
-              "resize": true,
-              "isPrivateInfo": false,
-              "sortKey": "btnSelect"
-             }
-            ]
-           },
-           "onSort": "",
-           "onSelect": "",
-           "onSelectByDblClick": "",
-           "onSelectBySelectButton": "",
-           "onSelectByModifyButton": "",
-           "onSelectByDeleteButton": "",
-           "onOnlyRow": "",
-           "onNoRow": "",
-           "onMultiRows": "",
-           "sortOrder": "defaultDataName4",
-           "isAscending": true,
-           "filterList": [],
-           "activeRowId": -1
-          }
-         ],
-         "controlType": "Panel",
-         "width": "960",
+         "fieldName": "KyotakuKeikakuTodokedeShoruiJyokyo",
+         "items": [],
+         "controlType": "CommonChildDiv",
+         "width": "XS",
          "visible": true,
          "displayNone": false,
          "disabled": false,
          "accessKey": "",
          "nextFocusFieldName": "",
-         "wrap": true,
+         "wrap": false,
          "dependencies": [],
          "float": 0,
          "toolTip": "",
          "authorityMode": 0,
-         "marginLeft": "XS",
-         "marginRight": "XS",
-         "selectControlID": "KyotakuKeikakuTodokedeShoruiList",
+         "marginLeft": "0",
+         "marginRight": "0",
+         "selectControlID": "KyotakuKeikakuTodokedeShoruiJyokyo",
          "helpMessageID": "",
          "jpControlName": "",
-         "onLoad": "",
-         "title": "(共通) DBZ0030004 状況一覧",
-         "isOpen": true,
-         "canOpenAndClose": true,
-         "postParameterPanelNames": [
-          {
-           "postParameterPanelNames": "KyotakuKeikakuTodokedeMeisai"
-          }
-         ],
-         "requestSettings": [],
-         "hiddenInput": [],
-         "onOpen": "",
-         "onClose": "",
-         "session": {},
-         "marginTop": "Default",
-         "marginBottom": "Default",
-         "eraseBorderTop": true,
-         "eraseBorderBottom": true,
-         "eraseBorderRight": true,
-         "eraseBorderLeft": true,
-         "backgroundColor": 0,
-         "widthAuto": false,
-         "panelDisplay": 0,
-         "isGroupBox": false,
-         "readOnly": false,
-         "height": "Auto"
-        },
-        {
-         "fieldName": "KyotakuKeikakuTodokedeShoruiMeisai",
-         "items": [
-          {
-           "fieldName": "lblKyotakuServiceKeikakuSakuseiIraiTodokedeShoruiJokyo",
-           "items": [],
-           "controlType": "Label",
-           "width": "M",
-           "visible": true,
-           "displayNone": false,
-           "disabled": false,
-           "accessKey": "",
-           "nextFocusFieldName": "",
-           "wrap": false,
-           "dependencies": [],
-           "float": 0,
-           "toolTip": "",
-           "authorityMode": 0,
-           "marginLeft": "XS",
-           "marginRight": "XS",
-           "selectControlID": "lblKyotakuServiceKeikakuSakuseiIraiTodokedeShoruiJokyo",
-           "helpMessageID": "",
-           "jpControlName": "",
-           "required": false,
-           "isPrivateInfo": false,
-           "text": "<<詳細表示＆回収情報登録>>",
-           "decorationClass": "",
-           "align": 0
-          }
-         ],
-         "controlType": "Panel",
-         "width": "960",
-         "visible": true,
-         "displayNone": false,
-         "disabled": false,
-         "accessKey": "",
-         "nextFocusFieldName": "",
-         "wrap": true,
-         "dependencies": [],
-         "float": 0,
-         "toolTip": "",
-         "authorityMode": 0,
-         "marginLeft": "XS",
-         "marginRight": "XS",
-         "selectControlID": "KyotakuKeikakuTodokedeShoruiMeisai",
-         "helpMessageID": "",
-         "jpControlName": "",
-         "onLoad": "",
-         "title": "(共通) DBZ0030003 状況表示",
-         "isOpen": true,
-         "canOpenAndClose": true,
-         "postParameterPanelNames": [
-          {
-           "postParameterPanelNames": "KyotakuKeikakuTodokedeShoruiList"
-          }
-         ],
-         "requestSettings": [],
-         "hiddenInput": [],
-         "onOpen": "",
-         "onClose": "",
-         "session": {},
-         "marginTop": "S",
-         "marginBottom": "Default",
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false,
-         "backgroundColor": 0,
-         "widthAuto": false,
-         "panelDisplay": 0,
-         "isGroupBox": false,
-         "readOnly": false,
-         "height": "Auto"
+         "relation": [],
+         "marginTop": 0,
+         "marginBottom": 0,
+         "businessId": "DBZ",
+         "controlName": "ShoKaishuKirokuKanri",
+         "dataPassingForDialog": [],
+         "dialogOkEventNameForDialog": "",
+         "dialogCancelEventNameForDialog": ""
         }
        ],
        "controlType": "TabPanel",
@@ -2450,91 +2243,6 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "KyotakuKeikakuTodokedeList",
-     "panelState": "close",
-     "fixedDiv": "No"
-    }
-   ],
-   "validation": {},
-   "events": [
-    {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaFinder_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": "該当者一覧"
-    },
-    {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectByDblClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnTodokedeNew",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectBySelectButton",
-     "transition": ""
-    },
-    {
-     "fieldName": "dgKyotakuKeikakuTodokedeRirekiList",
-     "event": "onSelectBySelectButton",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnTodokedeDelete",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnTodokedeTeisei",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnTodokedeKakutei",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnReturn",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnTodokedeModify",
-     "event": "onClick",
-     "transition": ""
-    }
-   ]
-  },
-  {
-   "order": "2",
-   "stateName": "該当者一覧",
-   "showWizard": false,
-   "visibleDivs": [
-    {
-     "visibleDiv": "KyotakuKeikakuTodokedeSearch",
-     "panelState": "close",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "KyotakuKeikakuTodokedeList",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
      "visibleDiv": "KyotakuKeikakuTodokedeHihokenshaList",
      "panelState": "visible",
      "fixedDiv": "No"
@@ -2543,16 +2251,6 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaFinder_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": "該当者検索"
-    },
-    {
      "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
      "event": "onClick",
      "transition": "届出一覧"
@@ -2568,18 +2266,13 @@
      "transition": ""
     },
     {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectBySelectButton",
-     "transition": "届出一覧"
+     "fieldName": "btnTodokedeModify",
+     "event": "onClick",
+     "transition": ""
     },
     {
      "fieldName": "dgKyotakuKeikakuTodokedeRirekiList",
      "event": "onSelectBySelectButton",
-     "transition": ""
-    },
-    {
-     "fieldName": "btnTodokedeDelete",
-     "event": "onClick",
      "transition": ""
     },
     {
@@ -2588,7 +2281,7 @@
      "transition": ""
     },
     {
-     "fieldName": "btnTodokedeKakutei",
+     "fieldName": "btnTodokedeDelete",
      "event": "onClick",
      "transition": ""
     },
@@ -2598,14 +2291,14 @@
      "transition": ""
     },
     {
-     "fieldName": "btnTodokedeModify",
+     "fieldName": "btnTodokedeKakutei",
      "event": "onClick",
      "transition": ""
     }
    ]
   },
   {
-   "order": "3",
+   "order": "2",
    "stateName": "届出一覧",
    "showWizard": true,
    "visibleDivs": [
@@ -2668,16 +2361,6 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaFinder_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
      "event": "onClick",
      "transition": ""
@@ -2690,12 +2373,12 @@
     {
      "fieldName": "btnTodokedeNew",
      "event": "onClick",
-     "transition": "届出明細"
+     "transition": "明細登録"
     },
     {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectBySelectButton",
-     "transition": ""
+     "fieldName": "btnTodokedeModify",
+     "event": "onClick",
+     "transition": "明細登録"
     },
     {
      "fieldName": "dgKyotakuKeikakuTodokedeRirekiList",
@@ -2703,35 +2386,30 @@
      "transition": "届出明細"
     },
     {
-     "fieldName": "btnTodokedeDelete",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "btnTodokedeTeisei",
      "event": "onClick",
      "transition": ""
     },
     {
-     "fieldName": "btnTodokedeKakutei",
+     "fieldName": "btnTodokedeDelete",
      "event": "onClick",
      "transition": ""
     },
     {
      "fieldName": "btnReturn",
      "event": "onClick",
-     "transition": "該当者一覧"
+     "transition": "該当者検索"
     },
     {
-     "fieldName": "btnTodokedeModify",
+     "fieldName": "btnTodokedeKakutei",
      "event": "onClick",
-     "transition": "届出明細"
+     "transition": ""
     }
    ]
   },
   {
-   "order": "4",
-   "stateName": "届出明細",
+   "order": "3",
+   "stateName": "明細登録",
    "showWizard": true,
    "visibleDivs": [
     {
@@ -2783,16 +2461,6 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaFinder_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
      "event": "onClick",
      "transition": ""
@@ -2808,8 +2476,8 @@
      "transition": ""
     },
     {
-     "fieldName": "KyotakuKeikakuTodokedeHihokenshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectBySelectButton",
+     "fieldName": "btnTodokedeModify",
+     "event": "onClick",
      "transition": ""
     },
     {
@@ -2818,29 +2486,24 @@
      "transition": ""
     },
     {
-     "fieldName": "btnTodokedeDelete",
-     "event": "onClick",
-     "transition": "届出一覧"
-    },
-    {
      "fieldName": "btnTodokedeTeisei",
      "event": "onClick",
      "transition": "届出一覧"
     },
     {
-     "fieldName": "btnTodokedeKakutei",
+     "fieldName": "btnTodokedeDelete",
      "event": "onClick",
      "transition": "届出一覧"
     },
     {
      "fieldName": "btnReturn",
      "event": "onClick",
-     "transition": "該当者一覧"
+     "transition": "該当者検索"
     },
     {
-     "fieldName": "btnTodokedeModify",
+     "fieldName": "btnTodokedeKakutei",
      "event": "onClick",
-     "transition": ""
+     "transition": "届出一覧"
     }
    ]
   }
@@ -2855,9 +2518,6 @@
   ],
   [
    "KyotakuKeikakuTodokedeHihokenshaFinder"
-  ],
-  [
-   "KyotakuKeikakuTodokedeList"
   ],
   [
    "KyotakuKeikakuTodokedeHihokenshaList"
