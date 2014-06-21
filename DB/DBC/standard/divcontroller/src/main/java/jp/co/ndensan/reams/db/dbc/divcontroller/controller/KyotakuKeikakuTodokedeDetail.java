@@ -314,6 +314,44 @@ public class KyotakuKeikakuTodokedeDetail {
         return response;
     }
 
+    /**
+     * 事業者コードからフォーカスを外したときに名称等をセットする。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData onBlurJigyoshaCode(KyotakuKeikakuTodokedeDetailDiv panel) {
+        ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
+        KyotakuKeikakuTodokedeJigyoshaDiv jigyosha = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
+                getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeMeisai().getKyotakuKeikakuTodokedeJigyosha();
+        ControlGenerator cg = new ControlGenerator(getYaml().get(11));
+        jigyosha.getTxtJigyoshaName().setValue(cg.getAsRString("事業者名"));
+        jigyosha.getTxtServiceShurui1().setValue(cg.getAsRString("事業者サービス種類１"));
+        jigyosha.getTxtServiceShurui2().setValue(cg.getAsRString("事業者サービス種類２"));
+        jigyosha.getTxtKanrishaName().setValue(cg.getAsRString("事業者管理者名"));
+        jigyosha.getTxtJigyoshaTelNo().setValue(cg.getAsRString("事業者電話番号"));
+        jigyosha.getTxtJigyoshaYubinNo().setValue(cg.getAsYubinNo("事業者郵便番号"));
+        jigyosha.getTxtJigyoshaJusho().setValue(cg.getAsRString("事業者住所"));
+        response.data = panel;
+        return response;
+    }
+
+    /**
+     * 委託先事業者コードからフォーカスを外したときに名称等をセットする。
+     *
+     * @param panel panel
+     * @return ResponseData
+     */
+    public ResponseData onBlurItakuJigyoshaCode(KyotakuKeikakuTodokedeDetailDiv panel) {
+        ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
+        KyotakuKeikakuTodokedeJigyoshaDiv jigyosha = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
+                getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeMeisai().getKyotakuKeikakuTodokedeJigyosha();
+        ControlGenerator cg = new ControlGenerator(getYaml().get(11));
+        jigyosha.getTxtItakuJigyoshaName().setValue(cg.getAsRString("委託先事業者名"));
+        response.data = panel;
+        return response;
+    }
+
     private void changeRadKeikakuSakuseiKubun(KyotakuKeikakuTodokedeDetailDiv panel) {
         KyotakuKeikakuTodokedeJigyoshaDiv jigyosha = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
                 getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeMeisai().getKyotakuKeikakuTodokedeJigyosha();
