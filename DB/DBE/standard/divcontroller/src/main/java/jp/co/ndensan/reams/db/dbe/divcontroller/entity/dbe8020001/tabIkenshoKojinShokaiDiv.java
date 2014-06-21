@@ -5,8 +5,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.tplIkenshoImage1Div;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.tplIkenshoImage2Div;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.tplIkenshoKomokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe8020001.tplShujiiIraiJohoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
@@ -27,10 +25,6 @@ public class tabIkenshoKojinShokaiDiv extends TabContainer {
     private tplShujiiIraiJohoDiv tplShujiiIraiJoho;
     @JsonProperty("tplIkenshoKomoku")
     private tplIkenshoKomokuDiv tplIkenshoKomoku;
-    @JsonProperty("tplIkenshoImage1")
-    private tplIkenshoImage1Div tplIkenshoImage1;
-    @JsonProperty("tplIkenshoImage2")
-    private tplIkenshoImage2Div tplIkenshoImage2;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -56,26 +50,6 @@ public class tabIkenshoKojinShokaiDiv extends TabContainer {
     @JsonProperty("tplIkenshoKomoku")
     public void setTplIkenshoKomoku(tplIkenshoKomokuDiv tplIkenshoKomoku) {
         this.tplIkenshoKomoku=tplIkenshoKomoku;
-    }
-
-    @JsonProperty("tplIkenshoImage1")
-    public tplIkenshoImage1Div getTplIkenshoImage1() {
-        return tplIkenshoImage1;
-    }
-
-    @JsonProperty("tplIkenshoImage1")
-    public void setTplIkenshoImage1(tplIkenshoImage1Div tplIkenshoImage1) {
-        this.tplIkenshoImage1=tplIkenshoImage1;
-    }
-
-    @JsonProperty("tplIkenshoImage2")
-    public tplIkenshoImage2Div getTplIkenshoImage2() {
-        return tplIkenshoImage2;
-    }
-
-    @JsonProperty("tplIkenshoImage2")
-    public void setTplIkenshoImage2(tplIkenshoImage2Div tplIkenshoImage2) {
-        this.tplIkenshoImage2=tplIkenshoImage2;
     }
 
 }

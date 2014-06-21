@@ -33,16 +33,14 @@ public class SearchCriteriaOfKojinDiv extends Panel {
     private DropDownList ddlJuminShubetsu;
     @JsonProperty("txtShimei")
     private TextBox txtShimei;
-    @JsonProperty("chkGender")
-    private CheckBoxList chkGender;
-    @JsonProperty("radSearchPatternOfShimei")
-    private RadioButton radSearchPatternOfShimei;
-    @JsonProperty("lblSearching")
-    private Label lblSearching;
-    @JsonProperty("txtBirthDay")
-    private TextBoxFlexibleDate txtBirthDay;
+    @JsonProperty("ddlSearchPatternForName")
+    private DropDownList ddlSearchPatternForName;
     @JsonProperty("txtYubinNo")
     private TextBoxYubinNo txtYubinNo;
+    @JsonProperty("txtBirthDay")
+    private TextBoxFlexibleDate txtBirthDay;
+    @JsonProperty("chkGender")
+    private CheckBoxList chkGender;
     @JsonProperty("txtJusho")
     private TextBox txtJusho;
 
@@ -112,34 +110,24 @@ public class SearchCriteriaOfKojinDiv extends Panel {
         this.txtShimei=txtShimei;
     }
 
-    @JsonProperty("chkGender")
-    public CheckBoxList getChkGender() {
-        return chkGender;
+    @JsonProperty("ddlSearchPatternForName")
+    public DropDownList getDdlSearchPatternForName() {
+        return ddlSearchPatternForName;
     }
 
-    @JsonProperty("chkGender")
-    public void setChkGender(CheckBoxList chkGender) {
-        this.chkGender=chkGender;
+    @JsonProperty("ddlSearchPatternForName")
+    public void setDdlSearchPatternForName(DropDownList ddlSearchPatternForName) {
+        this.ddlSearchPatternForName=ddlSearchPatternForName;
     }
 
-    @JsonProperty("radSearchPatternOfShimei")
-    public RadioButton getRadSearchPatternOfShimei() {
-        return radSearchPatternOfShimei;
+    @JsonProperty("txtYubinNo")
+    public TextBoxYubinNo getTxtYubinNo() {
+        return txtYubinNo;
     }
 
-    @JsonProperty("radSearchPatternOfShimei")
-    public void setRadSearchPatternOfShimei(RadioButton radSearchPatternOfShimei) {
-        this.radSearchPatternOfShimei=radSearchPatternOfShimei;
-    }
-
-    @JsonProperty("lblSearching")
-    public Label getLblSearching() {
-        return lblSearching;
-    }
-
-    @JsonProperty("lblSearching")
-    public void setLblSearching(Label lblSearching) {
-        this.lblSearching=lblSearching;
+    @JsonProperty("txtYubinNo")
+    public void setTxtYubinNo(TextBoxYubinNo txtYubinNo) {
+        this.txtYubinNo=txtYubinNo;
     }
 
     @JsonProperty("txtBirthDay")
@@ -152,14 +140,14 @@ public class SearchCriteriaOfKojinDiv extends Panel {
         this.txtBirthDay=txtBirthDay;
     }
 
-    @JsonProperty("txtYubinNo")
-    public TextBoxYubinNo getTxtYubinNo() {
-        return txtYubinNo;
+    @JsonProperty("chkGender")
+    public CheckBoxList getChkGender() {
+        return chkGender;
     }
 
-    @JsonProperty("txtYubinNo")
-    public void setTxtYubinNo(TextBoxYubinNo txtYubinNo) {
-        this.txtYubinNo=txtYubinNo;
+    @JsonProperty("chkGender")
+    public void setChkGender(CheckBoxList chkGender) {
+        this.chkGender=chkGender;
     }
 
     @JsonProperty("txtJusho")

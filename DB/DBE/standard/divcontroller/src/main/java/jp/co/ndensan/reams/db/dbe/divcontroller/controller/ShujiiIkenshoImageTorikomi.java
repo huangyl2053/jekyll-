@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2070001.ShujiiIkenshoImageTorikomiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe2070001.dgIkenshoTorikomiKekka_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -24,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
  */
 public class ShujiiIkenshoImageTorikomi {
 
-    String strErrKensuu;
+    private RString strErrKensuu;
 
     /**
      * OCR取込みボタン押下時の処理を表します。
@@ -50,7 +51,7 @@ public class ShujiiIkenshoImageTorikomi {
         List arraydata = createRowTorikomiKekkaData();
         DataGrid grid = panel.getDgIkenshoTorikomiKekka();
         grid.setDataSource(arraydata);
-        panel.getTxtErrKensu().setValue(new Decimal(strErrKensuu));
+        panel.getTxtErrKensu().setValue(new Decimal(strErrKensuu.toString()));
     }
 
     /*
@@ -59,25 +60,26 @@ public class ShujiiIkenshoImageTorikomi {
     private List createRowTorikomiKekkaData() {
 
         List arrayDataList = new ArrayList();
-        List<HashMap> TorikomiKekkaData = YamlLoader.DBE.loadAsList(new RString("dbe2070001/IkenshoOcrTorikomiIchiran.yml"));
-
-        strErrKensuu = (String) TorikomiKekkaData.get(0).get("errkensu");
-        for (int i = 1; i < TorikomiKekkaData.size(); i++) {
-            HashMap hashMap = TorikomiKekkaData.get(i);
-            String strNo = (String) hashMap.get("bango");
-            String strOkng = (String) hashMap.get("okng");
-            String strHokensha = (String) hashMap.get("hokensha");
-            String strHihokenNo = (String) hashMap.get("hihokenNo");
-            String strShinseibi = (String) hashMap.get("shinseibi");
-            String strShinseiKbn = (String) hashMap.get("shinseiKbn");
-            String strChosaJissibi = (String) hashMap.get("ikenshoKinyubi");
-            String strChosahyoJuryobi = (String) hashMap.get("ikenshoJuryobi");
-            String strNetakirido = (String) hashMap.get("netakirido");
-            String strNinchi = (String) hashMap.get("ninchi");
-            String strTankiKioku = (String) hashMap.get("tankiKioku");
-            String strNinchiNoryoku = (String) hashMap.get("ninchiNoryoku");
-            String strDentatsuNoryoku = (String) hashMap.get("dentatsuNoryoku");
-            String strShokujiKoi = (String) hashMap.get("shokujiKoi");
+        List<HashMap> torikomiKekkaData = YamlLoader.DBE.loadAsList(new RString("dbe2070001/IkenshoOcrTorikomiIchiran.yml"));
+        ControlGenerator cg = new ControlGenerator(torikomiKekkaData.get(0));
+        strErrKensuu = cg.getAsRString("errkensu");
+        for (int i = 1; i < torikomiKekkaData.size(); i++) {
+            ControlGenerator cg1 = new ControlGenerator(torikomiKekkaData.get(i));
+//            HashMap hashMap = torikomiKekkaData.get(i);
+            RString strNo = cg1.getAsRString("bango");
+            RString strOkng = cg1.getAsRString("okng");
+            RString strHokensha = cg1.getAsRString("hokensha");
+            RString strHihokenNo = cg1.getAsRString("hihokenNo");
+            RString strShinseibi = cg1.getAsRString("shinseibi");
+            RString strShinseiKbn = cg1.getAsRString("shinseiKbn");
+            RString strChosaJissibi = cg1.getAsRString("ikenshoKinyubi");
+            RString strChosahyoJuryobi = cg1.getAsRString("ikenshoJuryobi");
+            RString strNetakirido = cg1.getAsRString("netakirido");
+            RString strNinchi = cg1.getAsRString("ninchi");
+            RString strTankiKioku = cg1.getAsRString("tankiKioku");
+            RString strNinchiNoryoku = cg1.getAsRString("ninchiNoryoku");
+            RString strDentatsuNoryoku = cg1.getAsRString("dentatsuNoryoku");
+            RString strShokujiKoi = cg1.getAsRString("shokujiKoi");
 
             arrayDataList.add(createRowTorikomiKekkaData(
                     strNo,
@@ -104,39 +106,25 @@ public class ShujiiIkenshoImageTorikomi {
      *引数を元にデータグリッド内に挿入する意見書取込み結果データを作成します。
      */
     private dgIkenshoTorikomiKekka_Row createRowTorikomiKekkaData(
-            String no,
-            String okng,
-            String hokensha,
-            String hihokenNo,
-            String shinseibi,
-            String shinseiKbn,
-            String ikenshoKinyubi,
-            String ikenshoJuryobi,
-            String netakirido,
-            String ninchi,
-            String tankiKioku,
-            String ninchiNoryoku,
-            String dentatsuNoryoku,
-            String shokujiKoi
+            RString no,
+            RString okng,
+            RString hokensha,
+            RString hihokenNo,
+            RString shinseibi,
+            RString shinseiKbn,
+            RString ikenshoKinyubi,
+            RString ikenshoJuryobi,
+            RString netakirido,
+            RString ninchi,
+            RString tankiKioku,
+            RString ninchiNoryoku,
+            RString dentatsuNoryoku,
+            RString shokujiKoi
     ) {
 
         dgIkenshoTorikomiKekka_Row rowTorikomiKekkaData = new dgIkenshoTorikomiKekka_Row(
-                new Button(),
-                new RString(no),
-                new RString(okng),
-                new RString(hokensha),
-                new RString(hihokenNo),
-                new RString(shinseibi),
-                new RString(shinseiKbn),
-                new RString(ikenshoKinyubi),
-                new RString(ikenshoJuryobi),
-                new RString(netakirido),
-                new RString(ninchi),
-                new RString(tankiKioku),
-                new RString(ninchiNoryoku),
-                new RString(dentatsuNoryoku),
-                new RString(shokujiKoi)
-        );
+                new Button(), no, okng, hokensha, hihokenNo, shinseibi, shinseiKbn, ikenshoKinyubi,
+                ikenshoJuryobi, netakirido, ninchi, tankiKioku, ninchiNoryoku, dentatsuNoryoku, shokujiKoi);
         return rowTorikomiKekkaData;
     }
 

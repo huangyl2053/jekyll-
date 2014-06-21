@@ -221,7 +221,8 @@ public class NinteiShinsakaiTaishoshaWariate {
             List<dgMiwariateTaishoshaIchiran_Row> selectedMiwariateData
                     = panel.getTabWariate().getTplTaishoshaWariate().getDgMiwariateTaishoshaIchiran().getSelectedItems();
 
-            if (selectedMiwariateData.isEmpty() == false) {
+//            if (selectedMiwariateData.isEmpty() == false) {
+            if (!selectedMiwariateData.isEmpty()) {
 
                 //割付済み対象者一覧の再設定
                 DataGrid dgWariatezumiList = panel.getTabWariate().getTplTaishoshaWariate().getDgWariatezumiTaishoshaIchiran();
@@ -231,9 +232,9 @@ public class NinteiShinsakaiTaishoshaWariate {
 
                 //未割付対象者一覧の再設定
                 DataGrid dgMiwariateList = panel.getTabWariate().getTplTaishoshaWariate().getDgMiwariateTaishoshaIchiran();
-                List<dgMiwariateTaishoshaIchiran_Row> MiwariateData = dgMiwariateList.getDataSource();
+                List<dgMiwariateTaishoshaIchiran_Row> miwariateData = dgMiwariateList.getDataSource();
                 List<dgMiwariateTaishoshaIchiran_Row> newMiwariateData = new ArrayList<>();
-                for (dgMiwariateTaishoshaIchiran_Row row : MiwariateData) {
+                for (dgMiwariateTaishoshaIchiran_Row row : miwariateData) {
                     boolean bSelectFlg = false;
                     for (dgMiwariateTaishoshaIchiran_Row selectRow : selectedMiwariateData) {
                         if (row.toString().equalsIgnoreCase(selectRow.toString())) {
@@ -251,7 +252,7 @@ public class NinteiShinsakaiTaishoshaWariate {
             List<dgWariatezumiTaishoshaIchiran_Row> selectedWariatezumiData
                     = panel.getTabWariate().getTplTaishoshaWariate().getDgWariatezumiTaishoshaIchiran().getSelectedItems();
 
-            if (selectedWariatezumiData.isEmpty() == false) {
+            if (!selectedWariatezumiData.isEmpty()) {
 
                 //未割付対象者一覧の再設定
                 DataGrid dgMiWariateList = panel.getTabWariate().getTplTaishoshaWariate().getDgMiwariateTaishoshaIchiran();
@@ -306,31 +307,32 @@ public class NinteiShinsakaiTaishoshaWariate {
     /*
      *割当済み対象者情報の初期値をセットします。
      */
-    private List createRowTaishoshaIchiran(List<HashMap> TaishoshaIchiranData, int iList) {
+    private List createRowTaishoshaIchiran(List<HashMap> taishoshaIchiranData, int iList) {
 
         int iShinsaNo = 1;
         List arrayDataList = new ArrayList();
 
-        for (int i = 0; i < TaishoshaIchiranData.size(); i++) {
+        for (int i = 0; i < taishoshaIchiranData.size(); i++) {
 
-            HashMap hashMap = TaishoshaIchiranData.get(i);
-            String strWariatezumi = (String) hashMap.get("wariatezumi");
-            if (iList == WARIATEZUMI && Integer.parseInt(strWariatezumi) == WARIATEZUMI) {
-                String strShinsaNo = String.valueOf(iShinsaNo);
-                String strHokensha = (String) hashMap.get("hokensha");
-                String strHihoNo = (String) hashMap.get("hihoNo");
-                String strShimei = (String) hashMap.get("shimei");
-                String strKana = (String) hashMap.get("kana");
-                String strShinseibi = (String) hashMap.get("shinseibi");
-                String strShinseiKbn = (String) hashMap.get("shinseiKbn");
-                String strSeibetsu = (String) hashMap.get("seibetsu");
-                String strIchijiHantei = (String) hashMap.get("ichijiHantei");
-                String strKijunJikan = (String) hashMap.get("kijunJikan");
-                String strFuriwakeKbn = (String) hashMap.get("furiwakeKbn");
-                String strIryoKikanMei = (String) hashMap.get("iryoKikanMei");
-                String strShujiiMei = (String) hashMap.get("shujiiMei");
-                String strChosaKikanMei = (String) hashMap.get("chosaKikanMei");
-                String strChosainMei = (String) hashMap.get("chosainMei");
+//            HashMap hashMap = taishoshaIchiranData.get(i);
+            ControlGenerator cg = new ControlGenerator(taishoshaIchiranData.get(i));
+            RString strWariatezumi = cg.getAsRString("wariatezumi");
+            if (iList == WARIATEZUMI && Integer.parseInt(strWariatezumi.toString()) == WARIATEZUMI) {
+                RString strShinsaNo = new RString(String.valueOf(iShinsaNo));
+                RString strHokensha = cg.getAsRString("hokensha");
+                RString strHihoNo = cg.getAsRString("hihoNo");
+                RString strShimei = cg.getAsRString("shimei");
+                RString strKana = cg.getAsRString("kana");
+                RString strShinseibi = cg.getAsRString("shinseibi");
+                RString strShinseiKbn = cg.getAsRString("shinseiKbn");
+                RString strSeibetsu = cg.getAsRString("seibetsu");
+                RString strIchijiHantei = cg.getAsRString("ichijiHantei");
+                RString strKijunJikan = cg.getAsRString("kijunJikan");
+                RString strFuriwakeKbn = cg.getAsRString("furiwakeKbn");
+                RString strIryoKikanMei = cg.getAsRString("iryoKikanMei");
+                RString strShujiiMei = cg.getAsRString("shujiiMei");
+                RString strChosaKikanMei = cg.getAsRString("chosaKikanMei");
+                RString strChosainMei = cg.getAsRString("chosainMei");
 
                 arrayDataList.add(createRowWariatezumiTaishoshaIchiran(
                         strShinsaNo,
@@ -351,21 +353,21 @@ public class NinteiShinsakaiTaishoshaWariate {
                 ));
                 iShinsaNo = iShinsaNo + 1;
 
-            } else if (iList == MIWARIATE && Integer.parseInt(strWariatezumi) == MIWARIATE) {
-                String strHokensha = (String) hashMap.get("hokensha");
-                String strHihoNo = (String) hashMap.get("hihoNo");
-                String strShimei = (String) hashMap.get("shimei");
-                String strKana = (String) hashMap.get("kana");
-                String strShinseibi = (String) hashMap.get("shinseibi");
-                String strShinseiKbn = (String) hashMap.get("shinseiKbn");
-                String strSeibetsu = (String) hashMap.get("seibetsu");
-                String strIchijiHantei = (String) hashMap.get("ichijiHantei");
-                String strKijunJikan = (String) hashMap.get("kijunJikan");
-                String strFuriwakeKbn = (String) hashMap.get("furiwakeKbn");
-                String strIryoKikanMei = (String) hashMap.get("iryoKikanMei");
-                String strShujiiMei = (String) hashMap.get("shujiiMei");
-                String strChosaKikanMei = (String) hashMap.get("chosaKikanMei");
-                String strChosainMei = (String) hashMap.get("chosainMei");
+            } else if (iList == MIWARIATE && Integer.parseInt(strWariatezumi.toString()) == MIWARIATE) {
+                RString strHokensha = cg.getAsRString("hokensha");
+                RString strHihoNo = cg.getAsRString("hihoNo");
+                RString strShimei = cg.getAsRString("shimei");
+                RString strKana = cg.getAsRString("kana");
+                RString strShinseibi = cg.getAsRString("shinseibi");
+                RString strShinseiKbn = cg.getAsRString("shinseiKbn");
+                RString strSeibetsu = cg.getAsRString("seibetsu");
+                RString strIchijiHantei = cg.getAsRString("ichijiHantei");
+                RString strKijunJikan = cg.getAsRString("kijunJikan");
+                RString strFuriwakeKbn = cg.getAsRString("furiwakeKbn");
+                RString strIryoKikanMei = cg.getAsRString("iryoKikanMei");
+                RString strShujiiMei = cg.getAsRString("shujiiMei");
+                RString strChosaKikanMei = cg.getAsRString("chosaKikanMei");
+                RString strChosainMei = cg.getAsRString("chosainMei");
 
                 arrayDataList.add(createRowMiwariateTaishoshaIchiran(
                         strHokensha,
@@ -393,39 +395,25 @@ public class NinteiShinsakaiTaishoshaWariate {
      *引数を元にデータグリッド内に挿入する割当済み対象者一覧データを作成します。
      */
     private dgWariatezumiTaishoshaIchiran_Row createRowWariatezumiTaishoshaIchiran(
-            String shinsaNo,
-            String hokensha,
-            String hihoNo,
-            String shimei,
-            String kana,
-            String shinseibi,
-            String shinseiKbn,
-            String seibetsu,
-            String ichijiHantei,
-            String kijunJikan,
-            String furiwakeKbn,
-            String iryoKikanMei,
-            String shujiiMei,
-            String chosaKikanMei,
-            String chosainMei
+            RString shinsaNo,
+            RString hokensha,
+            RString hihoNo,
+            RString shimei,
+            RString kana,
+            RString shinseibi,
+            RString shinseiKbn,
+            RString seibetsu,
+            RString ichijiHantei,
+            RString kijunJikan,
+            RString furiwakeKbn,
+            RString iryoKikanMei,
+            RString shujiiMei,
+            RString chosaKikanMei,
+            RString chosainMei
     ) {
         dgWariatezumiTaishoshaIchiran_Row rowWariatezumiTaishoshaIchiranData = new dgWariatezumiTaishoshaIchiran_Row(
-                new RString(shinsaNo),
-                new RString(hokensha),
-                new RString(hihoNo),
-                new RString(shimei),
-                new RString(kana),
-                new RString(shinseibi),
-                new RString(shinseiKbn),
-                new RString(seibetsu),
-                new RString(ichijiHantei),
-                new RString(kijunJikan),
-                new RString(furiwakeKbn),
-                new RString(iryoKikanMei),
-                new RString(shujiiMei),
-                new RString(chosaKikanMei),
-                new RString(chosainMei)
-        );
+                shinsaNo, hokensha, hihoNo, shimei, kana, shinseibi, shinseiKbn, seibetsu, ichijiHantei, kijunJikan, furiwakeKbn,
+                iryoKikanMei, shujiiMei, chosaKikanMei, chosainMei);
         return rowWariatezumiTaishoshaIchiranData;
     }
 
@@ -433,37 +421,24 @@ public class NinteiShinsakaiTaishoshaWariate {
      *引数を元にデータグリッド内に挿入する未割当対象者一覧データを作成します。
      */
     private dgMiwariateTaishoshaIchiran_Row createRowMiwariateTaishoshaIchiran(
-            String hokensha,
-            String hihoNo,
-            String shimei,
-            String kana,
-            String shinseibi,
-            String shinseiKbn,
-            String seibetsu,
-            String ichijiHantei,
-            String kijunJikan,
-            String furiwakeKbn,
-            String iryoKikanMei,
-            String shujiiMei,
-            String chosaKikanMei,
-            String chosainMei
+            RString hokensha,
+            RString hihoNo,
+            RString shimei,
+            RString kana,
+            RString shinseibi,
+            RString shinseiKbn,
+            RString seibetsu,
+            RString ichijiHantei,
+            RString kijunJikan,
+            RString furiwakeKbn,
+            RString iryoKikanMei,
+            RString shujiiMei,
+            RString chosaKikanMei,
+            RString chosainMei
     ) {
         dgMiwariateTaishoshaIchiran_Row rowMiwariateTaishoshaIchiranData = new dgMiwariateTaishoshaIchiran_Row(
-                new RString(hokensha),
-                new RString(hihoNo),
-                new RString(shimei),
-                new RString(kana),
-                new RString(shinseibi),
-                new RString(shinseiKbn),
-                new RString(seibetsu),
-                new RString(ichijiHantei),
-                new RString(kijunJikan),
-                new RString(furiwakeKbn),
-                new RString(iryoKikanMei),
-                new RString(shujiiMei),
-                new RString(chosaKikanMei),
-                new RString(chosainMei)
-        );
+                hokensha, hihoNo, shimei, kana, shinseibi, shinseiKbn, seibetsu, ichijiHantei, kijunJikan, furiwakeKbn,
+                iryoKikanMei, shujiiMei, chosaKikanMei, chosainMei);
         return rowMiwariateTaishoshaIchiranData;
     }
 
@@ -490,7 +465,7 @@ public class NinteiShinsakaiTaishoshaWariate {
             List<dgShinsainIchiran_Row> selectedShinsainData
                     = panel.getTabWariate().getTplShinsainWariate().getDgShinsainIchiran().getSelectedItems();
 
-            if (selectedShinsainData.isEmpty() == false) {
+            if (!selectedShinsainData.isEmpty()) {
 
                 //審査員構成一覧の再設定
                 DataGrid dgShinsainKoseiList = panel.getTabWariate().getTplShinsainWariate().getDgShinsainKoseiIchiran();
@@ -521,7 +496,7 @@ public class NinteiShinsakaiTaishoshaWariate {
             List<dgShinsainKoseiIchiran_Row> selectedShinsainKoseiData
                     = panel.getTabWariate().getTplShinsainWariate().getDgShinsainKoseiIchiran().getSelectedItems();
 
-            if (selectedShinsainKoseiData.isEmpty() == false) {
+            if (!selectedShinsainKoseiData.isEmpty()) {
 
                 //審査員一覧の再設定
                 DataGrid dgShinsainList = panel.getTabWariate().getTplShinsainWariate().getDgShinsainIchiran();
@@ -582,19 +557,20 @@ public class NinteiShinsakaiTaishoshaWariate {
 
         for (int i = 0; i < shinsainIchiranData.size(); i++) {
 
-            HashMap hashMap = shinsainIchiranData.get(i);
-            String strWariatezumi = (String) hashMap.get("wariatezumi");
-            String strShinsainNo = (String) hashMap.get("shinsainNo");
-            String strShinsainShimei = (String) hashMap.get("shinsainShimei");
-            String strShozokukikan = (String) hashMap.get("shozokukikan");
-            String strSeibetsu = (String) hashMap.get("seibetsu");
-            String strShinsainKbn = (String) hashMap.get("shinsainKbn");
-            String strGogitaichoKbn = (String) hashMap.get("gogitaichoKbn");
-            String strShukketsuKbn = (String) hashMap.get("shukketsuKbn");
-            String strShinsainJokyo = (String) hashMap.get("shinsainJokyo");
-            String strShinsainKaishibi = (String) hashMap.get("shinsainKaishibi");
-            String strShinsainShuryobi = (String) hashMap.get("shinsainShuryobi");
-            if (iList == WARIATEZUMI && Integer.parseInt(strWariatezumi) == WARIATEZUMI) {
+//            HashMap hashMap = shinsainIchiranData.get(i);
+            ControlGenerator cg = new ControlGenerator(shinsainIchiranData.get(i));
+            RString strWariatezumi = cg.getAsRString("wariatezumi");
+            RString strShinsainNo = cg.getAsRString("shinsainNo");
+            RString strShinsainShimei = cg.getAsRString("shinsainShimei");
+            RString strShozokukikan = cg.getAsRString("shozokukikan");
+            RString strSeibetsu = cg.getAsRString("seibetsu");
+            RString strShinsainKbn = cg.getAsRString("shinsainKbn");
+            RString strGogitaichoKbn = cg.getAsRString("gogitaichoKbn");
+            RString strShukketsuKbn = cg.getAsRString("shukketsuKbn");
+            RString strShinsainJokyo = cg.getAsRString("shinsainJokyo");
+            RString strShinsainKaishibi = cg.getAsRString("shinsainKaishibi");
+            RString strShinsainShuryobi = cg.getAsRString("shinsainShuryobi");
+            if (iList == WARIATEZUMI && Integer.parseInt(strWariatezumi.toString()) == WARIATEZUMI) {
                 arrayDataList.add(createRowShinsainKoseiIchiran(
                         strShinsainNo,
                         strShinsainShimei,
@@ -607,7 +583,7 @@ public class NinteiShinsakaiTaishoshaWariate {
                         strShinsainKaishibi,
                         strShinsainShuryobi
                 ));
-            } else if (iList == MIWARIATE && Integer.parseInt(strWariatezumi) == MIWARIATE) {
+            } else if (iList == MIWARIATE && Integer.parseInt(strWariatezumi.toString()) == MIWARIATE) {
 
                 arrayDataList.add(createRowShinsainIchiran(
                         strShinsainNo,
@@ -631,29 +607,20 @@ public class NinteiShinsakaiTaishoshaWariate {
      *引数を元にデータグリッド内に挿入する審査員構成一覧データを作成します。
      */
     private dgShinsainKoseiIchiran_Row createRowShinsainKoseiIchiran(
-            String shinsainNo,
-            String shinsainShimei,
-            String shozokukikan,
-            String seibetsu,
-            String shinsainKbn,
-            String gogitaichoKbn,
-            String shukketsuKbn,
-            String shinsainJokyo,
-            String shinsainKaishibi,
-            String shinsainShuryobi
+            RString shinsainNo,
+            RString shinsainShimei,
+            RString shozokukikan,
+            RString seibetsu,
+            RString shinsainKbn,
+            RString gogitaichoKbn,
+            RString shukketsuKbn,
+            RString shinsainJokyo,
+            RString shinsainKaishibi,
+            RString shinsainShuryobi
     ) {
         dgShinsainKoseiIchiran_Row rowShinsainKoseiIchiran = new dgShinsainKoseiIchiran_Row(
-                new RString(shinsainNo),
-                new RString(shinsainShimei),
-                new RString(shozokukikan),
-                new RString(seibetsu),
-                new RString(shinsainKbn),
-                new RString(gogitaichoKbn),
-                new RString(shukketsuKbn),
-                new RString(shinsainJokyo),
-                new RString(shinsainKaishibi),
-                new RString(shinsainShuryobi)
-        );
+                shinsainNo, shinsainShimei, shozokukikan, seibetsu, shinsainKbn, gogitaichoKbn,
+                shukketsuKbn, shinsainJokyo, shinsainKaishibi, shinsainShuryobi);
         return rowShinsainKoseiIchiran;
     }
 
@@ -661,29 +628,20 @@ public class NinteiShinsakaiTaishoshaWariate {
      *引数を元にデータグリッド内に挿入する審査員一覧データを作成します。
      */
     private dgShinsainIchiran_Row createRowShinsainIchiran(
-            String shinsainNo,
-            String shinsainShimei,
-            String shozokukikan,
-            String seibetsu,
-            String shinsainKbn,
-            String shinsainJokyo,
-            String shinsainKaishibi,
-            String shinsainShuryobi,
-            String gogitaichoKbn,
-            String shukketsuKbn
+            RString shinsainNo,
+            RString shinsainShimei,
+            RString shozokukikan,
+            RString seibetsu,
+            RString shinsainKbn,
+            RString shinsainJokyo,
+            RString shinsainKaishibi,
+            RString shinsainShuryobi,
+            RString gogitaichoKbn,
+            RString shukketsuKbn
     ) {
         dgShinsainIchiran_Row rowShinsainIchiran = new dgShinsainIchiran_Row(
-                new RString(shinsainNo),
-                new RString(shinsainShimei),
-                new RString(shozokukikan),
-                new RString(seibetsu),
-                new RString(shinsainKbn),
-                new RString(shinsainJokyo),
-                new RString(shinsainKaishibi),
-                new RString(shinsainShuryobi),
-                new RString(gogitaichoKbn),
-                new RString(shukketsuKbn)
-        );
+                shinsainNo, shinsainShimei, shozokukikan, seibetsu, shinsainKbn, shinsainJokyo, shinsainKaishibi,
+                shinsainShuryobi, gogitaichoKbn, shukketsuKbn);
         return rowShinsainIchiran;
     }
 
@@ -697,21 +655,21 @@ public class NinteiShinsakaiTaishoshaWariate {
         for (int i = 0; i < selectedMiwariateData.size(); i++) {
 
             wariatezumiTaishoshaIchiranData.add(createRowWariatezumiTaishoshaIchiran(
-                    new String(),
-                    selectedMiwariateData.get(i).getHokensha().toString(),
-                    selectedMiwariateData.get(i).getHihokenNo().toString(),
-                    selectedMiwariateData.get(i).getShimei().toString(),
-                    selectedMiwariateData.get(i).getShimeiKana().toString(),
-                    selectedMiwariateData.get(i).getShinseibi().toString(),
-                    selectedMiwariateData.get(i).getShinseiKbn().toString(),
-                    selectedMiwariateData.get(i).getSeibetsu().toString(),
-                    selectedMiwariateData.get(i).getIchijiHantei().toString(),
-                    selectedMiwariateData.get(i).getKijunJikan().toString(),
-                    selectedMiwariateData.get(i).getFuriwakeKbn().toString(),
-                    selectedMiwariateData.get(i).getIryokikan().toString(),
-                    selectedMiwariateData.get(i).getShujii().toString(),
-                    selectedMiwariateData.get(i).getChosakikan().toString(),
-                    selectedMiwariateData.get(i).getChosain().toString()
+                    RString.EMPTY,
+                    selectedMiwariateData.get(i).getHokensha(),
+                    selectedMiwariateData.get(i).getHihokenNo(),
+                    selectedMiwariateData.get(i).getShimei(),
+                    selectedMiwariateData.get(i).getShimeiKana(),
+                    selectedMiwariateData.get(i).getShinseibi(),
+                    selectedMiwariateData.get(i).getShinseiKbn(),
+                    selectedMiwariateData.get(i).getSeibetsu(),
+                    selectedMiwariateData.get(i).getIchijiHantei(),
+                    selectedMiwariateData.get(i).getKijunJikan(),
+                    selectedMiwariateData.get(i).getFuriwakeKbn(),
+                    selectedMiwariateData.get(i).getIryokikan(),
+                    selectedMiwariateData.get(i).getShujii(),
+                    selectedMiwariateData.get(i).getChosakikan(),
+                    selectedMiwariateData.get(i).getChosain()
             ));
         }
 
@@ -728,20 +686,20 @@ public class NinteiShinsakaiTaishoshaWariate {
         for (int i = 0; i < selectedWariatezumiData.size(); i++) {
 
             miwariateTaishoshaIchiranData.add(createRowMiwariateTaishoshaIchiran(
-                    selectedWariatezumiData.get(i).getHokensha().toString(),
-                    selectedWariatezumiData.get(i).getHihokenNo().toString(),
-                    selectedWariatezumiData.get(i).getShimei().toString(),
-                    selectedWariatezumiData.get(i).getShimeiKana().toString(),
-                    selectedWariatezumiData.get(i).getShinseibi().toString(),
-                    selectedWariatezumiData.get(i).getShinseiKbn().toString(),
-                    selectedWariatezumiData.get(i).getSeibetsu().toString(),
-                    selectedWariatezumiData.get(i).getIchijiHantei().toString(),
-                    selectedWariatezumiData.get(i).getKijunJikan().toString(),
-                    selectedWariatezumiData.get(i).getFuriwakeKbn().toString(),
-                    selectedWariatezumiData.get(i).getIryokikan().toString(),
-                    selectedWariatezumiData.get(i).getShujii().toString(),
-                    selectedWariatezumiData.get(i).getChosakikan().toString(),
-                    selectedWariatezumiData.get(i).getChosain().toString()
+                    selectedWariatezumiData.get(i).getHokensha(),
+                    selectedWariatezumiData.get(i).getHihokenNo(),
+                    selectedWariatezumiData.get(i).getShimei(),
+                    selectedWariatezumiData.get(i).getShimeiKana(),
+                    selectedWariatezumiData.get(i).getShinseibi(),
+                    selectedWariatezumiData.get(i).getShinseiKbn(),
+                    selectedWariatezumiData.get(i).getSeibetsu(),
+                    selectedWariatezumiData.get(i).getIchijiHantei(),
+                    selectedWariatezumiData.get(i).getKijunJikan(),
+                    selectedWariatezumiData.get(i).getFuriwakeKbn(),
+                    selectedWariatezumiData.get(i).getIryokikan(),
+                    selectedWariatezumiData.get(i).getShujii(),
+                    selectedWariatezumiData.get(i).getChosakikan(),
+                    selectedWariatezumiData.get(i).getChosain()
             ));
         }
 
@@ -758,16 +716,16 @@ public class NinteiShinsakaiTaishoshaWariate {
         for (int i = 0; i < selectedShinsainData.size(); i++) {
 
             shinsainKoseiIchiranData.add(createRowShinsainKoseiIchiran(
-                    selectedShinsainData.get(i).getShinsainNo().toString(),
-                    selectedShinsainData.get(i).getShinsainShimei().toString(),
-                    selectedShinsainData.get(i).getShozokukikan().toString(),
-                    selectedShinsainData.get(i).getSeibetsu().toString(),
-                    selectedShinsainData.get(i).getShinsainKbn().toString(),
-                    selectedShinsainData.get(i).getGogitaichoKbn().toString(),
-                    selectedShinsainData.get(i).getShukketsuKbn().toString(),
-                    selectedShinsainData.get(i).getShinsainJokyo().toString(),
-                    selectedShinsainData.get(i).getShinsainKaishibi().toString(),
-                    selectedShinsainData.get(i).getShinsainShuryobi().toString()
+                    selectedShinsainData.get(i).getShinsainNo(),
+                    selectedShinsainData.get(i).getShinsainShimei(),
+                    selectedShinsainData.get(i).getShozokukikan(),
+                    selectedShinsainData.get(i).getSeibetsu(),
+                    selectedShinsainData.get(i).getShinsainKbn(),
+                    selectedShinsainData.get(i).getGogitaichoKbn(),
+                    selectedShinsainData.get(i).getShukketsuKbn(),
+                    selectedShinsainData.get(i).getShinsainJokyo(),
+                    selectedShinsainData.get(i).getShinsainKaishibi(),
+                    selectedShinsainData.get(i).getShinsainShuryobi()
             ));
         }
         return shinsainKoseiIchiranData;
@@ -783,16 +741,16 @@ public class NinteiShinsakaiTaishoshaWariate {
         for (int i = 0; i < selectedShinsainKoseiData.size(); i++) {
 
             shinsainIchiranData.add(createRowShinsainIchiran(
-                    selectedShinsainKoseiData.get(i).getShinsainNo().toString(),
-                    selectedShinsainKoseiData.get(i).getShinsainShimei().toString(),
-                    selectedShinsainKoseiData.get(i).getShozokukikan().toString(),
-                    selectedShinsainKoseiData.get(i).getSeibetsu().toString(),
-                    selectedShinsainKoseiData.get(i).getShinsainKbn().toString(),
-                    selectedShinsainKoseiData.get(i).getShinsainJokyo().toString(),
-                    selectedShinsainKoseiData.get(i).getShinsainKaishibi().toString(),
-                    selectedShinsainKoseiData.get(i).getShinsainShuryobi().toString(),
-                    selectedShinsainKoseiData.get(i).getGogitaichoKbn().toString(),
-                    selectedShinsainKoseiData.get(i).getShukketsuKbn().toString()
+                    selectedShinsainKoseiData.get(i).getShinsainNo(),
+                    selectedShinsainKoseiData.get(i).getShinsainShimei(),
+                    selectedShinsainKoseiData.get(i).getShozokukikan(),
+                    selectedShinsainKoseiData.get(i).getSeibetsu(),
+                    selectedShinsainKoseiData.get(i).getShinsainKbn(),
+                    selectedShinsainKoseiData.get(i).getShinsainJokyo(),
+                    selectedShinsainKoseiData.get(i).getShinsainKaishibi(),
+                    selectedShinsainKoseiData.get(i).getShinsainShuryobi(),
+                    selectedShinsainKoseiData.get(i).getGogitaichoKbn(),
+                    selectedShinsainKoseiData.get(i).getShukketsuKbn()
             ));
         }
         return shinsainIchiranData;
