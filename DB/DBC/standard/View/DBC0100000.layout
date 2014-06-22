@@ -2363,7 +2363,7 @@
       "tplKyotakuKeikakuTodokedeDetailShorui"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "tplKyotakuKeikakuTodokedeDetailRireki",
+     "selectedItemFieldName": "tplKyotakuKeikakuTodokedeDetailShorui",
      "initialTab": 0
     },
     {
@@ -2691,16 +2691,6 @@
      "fixedDiv": "No"
     },
     {
-     "visibleDiv": "KyotakuKeikakuTodokedeShoruiList",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
-     "visibleDiv": "KyotakuKeikakuTodokedeShoruiMeisai",
-     "panelState": "visible",
-     "fixedDiv": "No"
-    },
-    {
      "visibleDiv": "KyotakuKeikakuTodokedesha",
      "panelState": "visible",
      "fixedDiv": "No"
@@ -2727,6 +2717,11 @@
     },
     {
      "visibleDiv": "KyotakuKeikakuTodokedeKaigoKihon",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KyotakuKeikakuTodokedeShoruiJyokyo",
      "panelState": "visible",
      "fixedDiv": "No"
     }
@@ -2837,6 +2832,11 @@
     },
     {
      "visibleDiv": "KyotakuKeikakuTodokedeKaigoKihon",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KyotakuKeikakuTodokedeShoruiJyokyo",
      "panelState": "visible",
      "fixedDiv": "No"
     }
