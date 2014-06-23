@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller;
 
 import java.util.ArrayList;
@@ -23,21 +22,31 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
  */
 public class HeijunkaAugustKeisan {
 
-   private static final RString HEIJUNKA_8SHORI_KAKUNIN1 = new RString("dgHeijunka8ShoriKakunin1.yml");    
-    
+    private static final RString HEIJUNKA_8SHORI_KAKUNIN1 = new RString("DBB0130001/dgHeijunka8ShoriKakunin1.yml");
+    private static final RString HEIJUNKA_8SHORI_KAKUNIN2 = new RString("DBB0130001/dgHeijunka8ShoriKakunin2.yml");
+
     public ResponseData<HeijunkaAugustKeisanDiv> onLoad_HeijunkaAugustKeisan(HeijunkaAugustKeisanDiv panel) {
         ResponseData<HeijunkaAugustKeisanDiv> response = new ResponseData<>();
-        panel.getHeijunka8ShoriNaiyo().getTxtChoteiNendo().setValue(new RString("平26"));
-        panel.getHeijunka8ShoriNaiyo().getTxtFukaNendo().setValue(new RString("平26"));
-        
+
+        List<HashMap> demoData = YamlLoader.DBB.loadAsList(HEIJUNKA_8SHORI_KAKUNIN2);
+        ControlGenerator cg = new ControlGenerator(demoData.get(0));
+
+        // 今回処理内容
+        panel.getHeijunka8ShoriNaiyo().getTxtChoteiNendo().setValue(cg.getAsRString("調定年度"));
+        panel.getHeijunka8ShoriNaiyo().getTxtFukaNendo().setValue(cg.getAsRString("賦課年度"));
+
+        // 平準化計算方法
+        panel.getHeijunka8KeisanHoho().getTxtKeisanHohoZougaku().setValue(cg.getAsRString("増額"));
+        panel.getHeijunka8KeisanHoho().getTxtKeisanHohoGengaku().setValue(cg.getAsRString("減額"));
+
         List<dgHeijunka8ShoriKakunin1_Row> arrayData = createKakunin1Data();
         DataGrid<dgHeijunka8ShoriKakunin1_Row> grid = panel.getHeijunka8ShoriKakunin().getDgHeijunka8ShoriKakunin1();
-        grid.setDataSource(arrayData);   
+        grid.setDataSource(arrayData);
         response.data = panel;
-        return response;    
+        return response;
     }
-    
-  private List<dgHeijunka8ShoriKakunin1_Row> createKakunin1Data() {
+
+    private List<dgHeijunka8ShoriKakunin1_Row> createKakunin1Data() {
         List<dgHeijunka8ShoriKakunin1_Row> arrayData = new ArrayList<>();
 
         List<HashMap> demoDataList = YamlLoader.DBB.loadAsList(HEIJUNKA_8SHORI_KAKUNIN1);
@@ -53,6 +62,6 @@ public class HeijunkaAugustKeisan {
             arrayData.add(row);
         }
         return arrayData;
-  }
-    
+    }
+
 }
