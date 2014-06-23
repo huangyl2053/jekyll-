@@ -32,7 +32,9 @@
      "controlName": "JukyushaIdoRenrakuhyo",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
-     "dialogCancelEventNameForDialog": ""
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M"
     }
    ],
    "controlType": "Panel",
@@ -73,10 +75,7 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -111,12 +110,13 @@
      "marginTop": 0,
      "marginBottom": 0,
      "businessId": "DBZ",
-     "controlName": "CompleteProcess",
+     "controlName": "KaigoKanryoMessage",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
-     "lblCompleteMessage_text": "変更処理が完了しました。",
-     "CompleteProcess_width": "1100"
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "KanryoMessage_width": "G12"
     }
    ],
    "controlType": "Panel",
@@ -145,17 +145,19 @@
      "postParameterPanelNames": "JukyushaIdoRenrakuhyoComplete"
     }
    ],
-   "requestSettings": [],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": "dbc/db/dbc/JukyushaIdoRenrakuhyoComplete/onLoad"
+    }
+   ],
    "hiddenInput": [],
    "onOpen": "",
    "onClose": "",
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -263,6 +265,7 @@
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
    "commonButtonAreaId": "1",
