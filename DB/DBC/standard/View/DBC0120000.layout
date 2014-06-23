@@ -1137,7 +1137,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "btnService"
+        "sortKey": ""
        },
        {
         "columnName": "サービス内容",
@@ -1174,7 +1174,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "btnJigyosha"
+        "sortKey": ""
        },
        {
         "columnName": "サービス事業者",
@@ -1204,7 +1204,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtYoJitsu"
+        "sortKey": ""
        },
        {
         "columnName": "日",
@@ -1227,7 +1227,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay1"
+        "sortKey": ""
        },
        {
         "columnName": "月",
@@ -1250,7 +1250,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay2"
+        "sortKey": ""
        },
        {
         "columnName": "火",
@@ -1273,7 +1273,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay3"
+        "sortKey": ""
        },
        {
         "columnName": "水",
@@ -1296,7 +1296,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay4"
+        "sortKey": ""
        },
        {
         "columnName": "木",
@@ -1319,7 +1319,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay5"
+        "sortKey": ""
        },
        {
         "columnName": "金",
@@ -1342,7 +1342,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay6"
+        "sortKey": ""
        },
        {
         "columnName": "土",
@@ -1365,7 +1365,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay7"
+        "sortKey": ""
        },
        {
         "columnName": "日",
@@ -1388,7 +1388,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay8"
+        "sortKey": ""
        },
        {
         "columnName": "月",
@@ -1411,7 +1411,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay9"
+        "sortKey": ""
        },
        {
         "columnName": "火",
@@ -1434,7 +1434,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay10"
+        "sortKey": ""
        },
        {
         "columnName": "水",
@@ -1457,7 +1457,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay11"
+        "sortKey": ""
        },
        {
         "columnName": "木",
@@ -1480,7 +1480,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay12"
+        "sortKey": ""
        },
        {
         "columnName": "金",
@@ -1503,7 +1503,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay13"
+        "sortKey": ""
        },
        {
         "columnName": "土",
@@ -1526,7 +1526,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay14"
+        "sortKey": ""
        },
        {
         "columnName": "日",
@@ -1549,7 +1549,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay15"
+        "sortKey": ""
        },
        {
         "columnName": "月",
@@ -1572,7 +1572,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay16"
+        "sortKey": ""
        },
        {
         "columnName": "火",
@@ -1595,7 +1595,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay17"
+        "sortKey": ""
        },
        {
         "columnName": "水",
@@ -1618,7 +1618,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay18"
+        "sortKey": ""
        },
        {
         "columnName": "木",
@@ -1641,7 +1641,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay19"
+        "sortKey": ""
        },
        {
         "columnName": "金",
@@ -1664,7 +1664,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay20"
+        "sortKey": ""
        },
        {
         "columnName": "土",
@@ -1687,7 +1687,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay21"
+        "sortKey": ""
        },
        {
         "columnName": "日",
@@ -1710,7 +1710,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay22"
+        "sortKey": ""
        },
        {
         "columnName": "月",
@@ -1733,7 +1733,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay23"
+        "sortKey": ""
        },
        {
         "columnName": "火",
@@ -1756,7 +1756,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay24"
+        "sortKey": ""
        },
        {
         "columnName": "水",
@@ -1779,7 +1779,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay25"
+        "sortKey": ""
        },
        {
         "columnName": "木",
@@ -1802,7 +1802,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay26"
+        "sortKey": ""
        },
        {
         "columnName": "金",
@@ -1825,7 +1825,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay27"
+        "sortKey": ""
        },
        {
         "columnName": "土",
@@ -1848,7 +1848,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay28"
+        "sortKey": ""
        },
        {
         "columnName": "日",
@@ -1871,7 +1871,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay29"
+        "sortKey": ""
        },
        {
         "columnName": "月",
@@ -1894,7 +1894,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay30"
+        "sortKey": ""
        },
        {
         "columnName": "火",
@@ -1917,7 +1917,7 @@
         "align": 1,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtDay31"
+        "sortKey": ""
        },
        {
         "columnName": "",
@@ -1931,7 +1931,7 @@
         "align": 2,
         "resize": true,
         "isPrivateInfo": false,
-        "sortKey": "txtGokei"
+        "sortKey": ""
        }
       ]
      },

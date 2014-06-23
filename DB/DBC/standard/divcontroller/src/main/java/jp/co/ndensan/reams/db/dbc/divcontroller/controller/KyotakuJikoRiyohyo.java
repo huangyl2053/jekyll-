@@ -58,7 +58,7 @@ public class KyotakuJikoRiyohyo {
         ResponseData<KyotakuJikoRiyohyoDiv> response = new ResponseData<>();
         setRiyohyoData(panel);
         setRiyohyoBeppyoVisible(panel, 別票画面表示.初期表示);
-// TBD N8187 久保田英男 共通パネルの「サービス利用票を保存する」ボタンをDisableにする。共通パネルの仕様が固まってから対応する。
+// TODO N8187 久保田英男 共通パネルの「サービス利用票を保存する」ボタンをDisableにする。共通パネルの仕様が固まってから対応する。
 //        kyotsu.getBtnRiyohyoSave().setDisabled(true);
         response.data = panel;
         return response;
@@ -76,7 +76,7 @@ public class KyotakuJikoRiyohyo {
         setServiceRiyohyoYobi(panel);
         setServiceRiyohyoZengetsuData(panel);
         setServiceRiyohyoBeppyoZengetsuData(panel);
-// TBD N8187 久保田英男 共通パネルの「サービス利用票を保存する」ボタンを有効/無効にする。共通パネルの仕様が固まってから対応する。
+// TODO N8187 久保田英男 共通パネルの「サービス利用票を保存する」ボタンを有効/無効にする。共通パネルの仕様が固まってから対応する。
 //        validateRiyohyoSave(panel, kyotsu);
         response.data = panel;
         return response;
@@ -144,6 +144,7 @@ public class KyotakuJikoRiyohyo {
             dgRiyohyoList.add(rowItem);
         }
         dgRiyohyo.setDataSource(dgRiyohyoList);
+// TODO N8187 久保田英男 共通パネルの「サービス利用票を保存する」ボタンを有効/無効にする。共通パネルの仕様が固まってから対応する。
 //        validateRiyohyoSave(panel, kyotsu);
 
         response.data = panel;
@@ -244,7 +245,7 @@ public class KyotakuJikoRiyohyo {
         setBeppyoListMeisaiKakutei(panel);
         initRiyohyoBeppyoMeisaiData(panel);
         setRiyohyoBeppyoVisible(panel, 別票画面表示.初期表示);
-// TBD N8187 久保田英男 共通パネルの「サービス利用票を保存する」ボタンを有効/無効にする。共通パネルの仕様が固まってから対応する。
+// TODO N8187 久保田英男 共通パネルの「サービス利用票を保存する」ボタンを有効/無効にする。共通パネルの仕様が固まってから対応する。
 //        validateRiyohyoSave(panel, kyotsu);
         response.data = panel;
         return response;
@@ -261,12 +262,13 @@ public class KyotakuJikoRiyohyo {
         setBeppyoListGokeiKakutei(panel);
         initRiyohyoBeppyoGokeiData(panel);
         setRiyohyoBeppyoVisible(panel, 別票画面表示.初期表示);
-// TBD N8187 久保田英男 共通パネルの「サービス利用票を保存する」ボタンを有効/無効にする。共通パネルの仕様が固まってから対応する。
+// TODO N8187 久保田英男 共通パネルの「サービス利用票を保存する」ボタンを有効/無効にする。共通パネルの仕様が固まってから対応する。
 //        validateRiyohyoSave(panel, kyotsu);
         response.data = panel;
         return response;
     }
 
+// TODO N8187 久保田英男 共通パネルの「サービス利用票を保存する」ボタンを有効/無効にする。共通パネルの仕様が固まってから対応する。
 //    /**
 //     * サービス利用票及び別票が入力されているか判定する。 双方入力されている場合、共通パネルの「サービス利用票を保存する」ボタンをEnableにする。
 //     *
@@ -663,19 +665,6 @@ public class KyotakuJikoRiyohyo {
         Button btnService = new Button();
         Button btnJigyosha = new Button();
 
-//        dgServiceRiyohyoList_Row rowItem = createサービス利用票(btnDelete,
-//                "10:00",
-//                "15:00",
-//                btnService,
-//                "111111:通所介護",
-//                btnJigyosha,
-//                "1111111111:電算介護サービス",
-//                "予",
-//                "1", "1", "1", "1", "1", "1", "1", "1", "1", "1",
-//                "2", "2", "2", "2", "2", "2", "2", "2", "2", "2",
-//                "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3",
-//                "63");
-//        dgRowList.add(rowItem);
         for (int index = 7; index < 9; index++) {
             ControlGenerator cg = new ControlGenerator(getYaml().get(index));
             dgServiceRiyohyoList_Row rowItem = createサービス利用票(
@@ -721,19 +710,6 @@ public class KyotakuJikoRiyohyo {
                     cg.getAsRString("合計"));
             dgRowList.add(rowItem);
         }
-//        rowItem = createサービス利用票(btnDelete,
-//                "",
-//                "",
-//                btnService,
-//                "",
-//                btnJigyosha,
-//                "",
-//                "実",
-//                "1", "1", "1", "1", "1", "1", "1", "1", "1", "1",
-//                "2", "2", "2", "2", "2", "2", "2", "2", "2", "2",
-//                "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3",
-//                "63");
-//        dgRowList.add(rowItem);
         riyohyo.getDgServiceRiyohyoList().setDataSource(dgRowList);
     }
 
@@ -769,9 +745,6 @@ public class KyotakuJikoRiyohyo {
         nissu.getTxtZengetsuRiyoNissu().setValue(cg.getAsDecimal("前月利用日数"));
         nissu.getTxtTogetsuRiyoNissu().setValue(cg.getAsDecimal("当月利用日数"));
         nissu.getTxtRuikeiRiyoNissu().setValue(cg.getAsDecimal("累計利用日数"));
-//        nissu.getTxtZengetsuRiyoNissu().setValue(new Decimal("0"));
-//        nissu.getTxtTogetsuRiyoNissu().setValue(new Decimal("30"));
-//        nissu.getTxtRuikeiRiyoNissu().setValue(new Decimal("30"));
     }
 
     private void setBeppyoListZengetsuData(ServiceRiyohyoBeppyoListDiv list) {
@@ -781,9 +754,6 @@ public class KyotakuJikoRiyohyo {
         Button btnDelete = new Button();
 
         dgServiceRiyohyoBeppyoList_Row rowItem;
-//        rowItem = create別票一覧リスト(btnSelect, btnDelete,
-//                "1111111111:電算サービスセンター", "111111:通所介護１１１", "10.00", "90", "9", "1", "588", "", "", "", "", "", "", "", "", "", "");
-//        listRow.add(rowItem);
         for (int index = 11; index < 14; index++) {
             ControlGenerator cg = new ControlGenerator(getYaml().get(index));
             rowItem = create別票一覧リスト(
@@ -807,30 +777,7 @@ public class KyotakuJikoRiyohyo {
                     cg.getAsRString("利用者負担額保険"),
                     cg.getAsRString("利用者負担額全額"));
             listRow.add(rowItem);
-//  事業者: !!str "1111111111:電算サービスセンター"
-//  サービス: !!str "111111:通所介護合計"
-//  単位: !!str ""
-//  割引後率: !!str ""
-//  割引後単位: !!str ""
-//  回数: !!str ""
-//  サービス単位: !!str "(638)"
-//  種類限度超過単位: !!str "0"
-//  種類限度内単位: !!str "0"
-//  単位数単価: !!str "0"
-//  区分限度超過単位: !!str "638"
-//  区分限度内単位: !!str "10"
-//  給付率: !!str "6380"
-//  費用総額: !!str "90"
-//  保険給付額: !!str "5742"
-//  利用者負担額保険: !!str "638"
-//  利用者負担額全額: !!str "0"
         }
-//        rowItem = create別票一覧リスト(btnSelect, btnDelete,
-//                "1111111111:電算サービスセンター", "111112:通所介護１１２", "10.00", "90", "9", "1", "50", "", "", "", "", "", "", "", "", "", "");
-//        listRow.add(rowItem);
-//        rowItem = create別票一覧リスト(btnSelect, btnDelete,
-//                "1111111111:電算サービスセンター", "111111:通所介護合計", "", "", "", "", "(638)", "0", "0", "0", "638", "10", "6380", "90", "5742", "638", "0");
-//        listRow.add(rowItem);
         list.getDgServiceRiyohyoBeppyoList().setDataSource(listRow);
     }
 
