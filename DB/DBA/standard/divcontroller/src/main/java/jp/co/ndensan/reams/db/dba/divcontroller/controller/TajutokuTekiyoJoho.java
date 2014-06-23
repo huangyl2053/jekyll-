@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
+ * 他市町村住所地特例の適用情報を入力するDivのControllerです。
  *
  * @author n8178 城間篤人
  */
@@ -46,6 +47,8 @@ public class TajutokuTekiyoJoho {
         RString hihokenshaNo = searchDiv.getSearchResult().getDgSearchResult().getClickedItem().getHihokenshaNo();
         setTajutokuJoho(tajutokuDiv.getDgJushochiTokureiRireki(), hihokenshaNo);
         ShisetsuJoho.setJutokuMode(tajutokuDiv.getJutokuJohoInput().getShisetsuJohoInput().getShisetsuJoho());
+        tajutokuDiv.getJutokuJohoInput().getShisetsuJohoInput().getShisetsuJoho().getLblOtherShisetsuShurui().setText(new RString("keyKannai"));
+
         response.data = tajutokuDiv;
         return response;
     }
@@ -224,16 +227,16 @@ public class TajutokuTekiyoJoho {
      * @param searchDiv 対象者検索Div
      * @return レスポンス
      */
-    public ResponseData onBlur_txtTekiyoTodokedeDate(TajutokuTekiyoJohoDiv tajutokuDiv, TajutokuTaishoshaSearchDiv searchDiv) {
+    public ResponseData onBlur_txtShisetsuNyushoDate(TajutokuTekiyoJohoDiv tajutokuDiv, TajutokuTaishoshaSearchDiv searchDiv) {
         ResponseData<TajutokuTekiyoJohoDiv> response = new ResponseData<>();
 
         TekiyoJiyuInputDiv tekiyoJiyuInputDiv = tajutokuDiv.getJutokuJohoInput().getTekiyoJiyuInput();
 
         if (tekiyoJiyuInputDiv.getTxtTekiyoDate().getText().isEmpty()) {
-            tekiyoJiyuInputDiv.getTxtTekiyoDate().setValue(tekiyoJiyuInputDiv.getTxtTekiyoTodokedeDate().getValue());
+            tekiyoJiyuInputDiv.getTxtTekiyoDate().setValue(tekiyoJiyuInputDiv.getTxtShisetsuNyushoDate().getValue());
         }
-        if (tekiyoJiyuInputDiv.getTxtShisetsuNyushoDate().getText().isEmpty()) {
-            tekiyoJiyuInputDiv.getTxtShisetsuNyushoDate().setValue(tekiyoJiyuInputDiv.getTxtTekiyoTodokedeDate().getValue());
+        if (tekiyoJiyuInputDiv.getTxtTekiyoTodokedeDate().getText().isEmpty()) {
+            tekiyoJiyuInputDiv.getTxtTekiyoTodokedeDate().setValue(tekiyoJiyuInputDiv.getTxtShisetsuNyushoDate().getValue());
         }
 
         response.data = tajutokuDiv;

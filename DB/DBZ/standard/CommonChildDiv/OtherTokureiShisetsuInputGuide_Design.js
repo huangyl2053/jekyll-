@@ -27,10 +27,10 @@ var DBZ;
                     "fieldName": "OtherTokureiShisetsuInputGuide",
                     "items": [
                         {
-                            "fieldName": "radkannaiKubun",
+                            "fieldName": "radKannaiKubun",
                             "items": [],
                             "controlType": "RadioButton",
-                            "width": "340",
+                            "width": "230",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -43,9 +43,10 @@ var DBZ;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
-                            "selectControlID": "radkannaiKubun_core",
+                            "selectControlID": "radKannaiKubun_core",
                             "helpMessageID": "",
                             "jpControlName": "",
+                            "readOnly": false,
                             "onChange": "",
                             "selectedItem": "keyAll",
                             "dataSource": [
@@ -66,8 +67,8 @@ var DBZ;
                             "onClick": "",
                             "newLineItemNumber": 3,
                             "spaceSize": "M",
-                            "labelLText": "管内・管外区分:",
-                            "labelLWidth": "120",
+                            "labelLText": "施設種類",
+                            "labelLWidth": "70",
                             "labelLAlign": 2,
                             "disabledItem": [],
                             "icon": []
@@ -98,7 +99,34 @@ var DBZ;
                             "appearance": 0,
                             "imageFileUrl": "",
                             "imageWidth": "",
-                            "imageHeight": ""
+                            "imageHeight": "",
+                            "heightTextBoxMatches": false
+                        },
+                        {
+                            "fieldName": "lblOtherShisetsuShurui",
+                            "items": [],
+                            "controlType": "Label",
+                            "width": "100",
+                            "visible": true,
+                            "displayNone": true,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "lblOtherShisetsuShurui",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "required": false,
+                            "text": "keyKannai",
+                            "align": 2,
+                            "isPrivateInfo": false,
+                            "decorationClass": ""
                         },
                         {
                             "fieldName": "SearchResultOtherShisetsu",
@@ -123,6 +151,7 @@ var DBZ;
                                     "selectControlID": "dgSearchResultOtherTokureiShisetsu",
                                     "helpMessageID": "",
                                     "jpControlName": "",
+                                    "readOnly": false,
                                     "height": "S",
                                     "dataSource": [],
                                     "gridSetting": {
@@ -252,10 +281,7 @@ var DBZ;
                             "onOpen": "",
                             "onClose": "",
                             "session": {},
-                            "eraseBorderTop": false,
-                            "eraseBorderBottom": false,
-                            "eraseBorderRight": false,
-                            "eraseBorderLeft": false,
+                            "eraseBorder": false,
                             "backgroundColor": 0,
                             "widthAuto": true,
                             "panelDisplay": 0,
@@ -289,7 +315,8 @@ var DBZ;
                             "appearance": 0,
                             "imageFileUrl": "",
                             "imageWidth": "",
-                            "imageHeight": ""
+                            "imageHeight": "",
+                            "heightTextBoxMatches": false
                         }
                     ],
                     "controlType": "Panel",
@@ -323,7 +350,7 @@ var DBZ;
                     "requestSettings": [
                         {
                             "eventName": "onLoad",
-                            "requestUrl": ""
+                            "requestUrl": "dbz/db/dbz/OtherTokureiShisetsuInputGuide/onLoad"
                         },
                         {
                             "eventName": "onClick_btnSearchOtherShisetsu",
@@ -347,10 +374,7 @@ var DBZ;
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorderTop": false,
-                    "eraseBorderBottom": false,
-                    "eraseBorderRight": false,
-                    "eraseBorderLeft": false,
+                    "eraseBorder": false,
                     "backgroundColor": 0,
                     "widthAuto": true,
                     "panelDisplay": 0,
@@ -390,10 +414,16 @@ var DBZ;
                 {
                     "key": "otherShisetsuMeisho",
                     "controlName": "OtherTokureiShisetsuInputGuide.shisetsuMeisho"
+                },
+                {
+                    "key": "selectRadioButtonKey",
+                    "controlName": "lblOtherShisetsuShurui"
                 }
             ],
             "dialogOkEventNameForDialog": "onSelectBySelectButton_dgSearchResultOtherTokureiShisetsu",
-            "dialogCancelEventNameForDialog": "onClick_btnOtherShisetsuReturn"
+            "dialogCancelEventNameForDialog": "onClick_btnOtherShisetsuReturn",
+            "canTransferEvent": true,
+            "heightForDialog": "M"
         };
         return OtherTokureiShisetsuInputGuide_Design;
     })(Uz.CommonChildDiv);

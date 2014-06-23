@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.divcontroller;
+package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,10 +12,12 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hokenshainputguide.HokenshaInputGuideDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hokenshainputguide.dgSearchResultHokensha_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  * 保険者番号、保険者名称の入力を補助する共通子Divのコントローラです。
@@ -24,7 +26,31 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
  */
 public class HokenshaInputGuide {
 
-    private static final RString DATA_SOURCE = new RString("HokenshaData.yml");
+    private static final RString DATA_SOURCE = new RString("hokenshaData/hokenshaData.yml");
+
+    /**
+     * ダイアログを読み込んだ際に実行される処理です。<br/>
+     * 検索条件となる県コードを表示するドロップダウンリストを作成します。
+     *
+     * @param div 被保険者入力ガイド
+     * @return レスポンス
+     */
+    public ResponseData onLoad(HokenshaInputGuideDiv div) {
+        ResponseData<HokenshaInputGuideDiv> response = new ResponseData<>();
+
+        List<KeyValueDataSource> ddlSourceList = new ArrayList<>();
+        List<HashMap> kenList = YamlLoader.DBZ.loadAsList(DATA_SOURCE);
+        for (HashMap ken : kenList) {
+            ControlGenerator generator = new ControlGenerator(ken);
+            KeyValueDataSource source = new KeyValueDataSource(generator.getAsRString("県コード"),
+                    generator.getAsRString("県コード").concat(" ").concat(generator.getAsRString("県名")));
+            ddlSourceList.add(source);
+        }
+        div.getDdlHokenshaKenCode().setDataSource(ddlSourceList);
+
+        response.data = div;
+        return response;
+    }
 
     /**
      * ドロップダウンリストから県コードを選択し、検索を行う際に動作するメソッドです。<br/>
@@ -44,7 +70,7 @@ public class HokenshaInputGuide {
     }
 
     private void setHokenshaList(DataGrid<dgSearchResultHokensha_Row> grid, RString selectKey) {
-        List<HashMap> kenList = YamlLoader.FOR_DBZ.loadAsList(DATA_SOURCE);
+        List<HashMap> kenList = YamlLoader.DBZ.loadAsList(DATA_SOURCE);
         List<HashMap> hokenshaList = getKenList(kenList, selectKey);
 
         grid.setDataSource(createHokenshaGrid(hokenshaList));

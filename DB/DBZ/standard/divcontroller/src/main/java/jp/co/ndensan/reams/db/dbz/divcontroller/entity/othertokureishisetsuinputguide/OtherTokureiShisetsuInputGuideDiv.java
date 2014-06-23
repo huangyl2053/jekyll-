@@ -23,10 +23,12 @@ public class OtherTokureiShisetsuInputGuideDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("radkannaiKubun")
-    private RadioButton radkannaiKubun;
+    @JsonProperty("radKannaiKubun")
+    private RadioButton radKannaiKubun;
     @JsonProperty("btnSearchOtherShisetsu")
     private Button btnSearchOtherShisetsu;
+    @JsonProperty("lblOtherShisetsuShurui")
+    private Label lblOtherShisetsuShurui;
     @JsonProperty("SearchResultOtherShisetsu")
     private SearchResultOtherShisetsuDiv SearchResultOtherShisetsu;
     @JsonProperty("btnOtherShisetsuReturn")
@@ -42,14 +44,14 @@ public class OtherTokureiShisetsuInputGuideDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("radkannaiKubun")
-    public RadioButton getRadkannaiKubun() {
-        return radkannaiKubun;
+    @JsonProperty("radKannaiKubun")
+    public RadioButton getRadKannaiKubun() {
+        return radKannaiKubun;
     }
 
-    @JsonProperty("radkannaiKubun")
-    public void setRadkannaiKubun(RadioButton radkannaiKubun) {
-        this.radkannaiKubun=radkannaiKubun;
+    @JsonProperty("radKannaiKubun")
+    public void setRadKannaiKubun(RadioButton radKannaiKubun) {
+        this.radKannaiKubun=radKannaiKubun;
     }
 
     @JsonProperty("btnSearchOtherShisetsu")
@@ -60,6 +62,16 @@ public class OtherTokureiShisetsuInputGuideDiv extends Panel {
     @JsonProperty("btnSearchOtherShisetsu")
     public void setBtnSearchOtherShisetsu(Button btnSearchOtherShisetsu) {
         this.btnSearchOtherShisetsu=btnSearchOtherShisetsu;
+    }
+
+    @JsonProperty("lblOtherShisetsuShurui")
+    public Label getLblOtherShisetsuShurui() {
+        return lblOtherShisetsuShurui;
+    }
+
+    @JsonProperty("lblOtherShisetsuShurui")
+    public void setLblOtherShisetsuShurui(Label lblOtherShisetsuShurui) {
+        this.lblOtherShisetsuShurui=lblOtherShisetsuShurui;
     }
 
     @JsonProperty("SearchResultOtherShisetsu")

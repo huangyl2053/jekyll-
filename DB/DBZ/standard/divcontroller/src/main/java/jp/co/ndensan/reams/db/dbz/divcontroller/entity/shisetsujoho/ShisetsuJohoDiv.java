@@ -24,6 +24,8 @@ public class ShisetsuJohoDiv extends Panel {
      */
     @JsonProperty("radShisetsuShurui")
     private RadioButton radShisetsuShurui;
+    @JsonProperty("lblOtherShisetsuShurui")
+    private Label lblOtherShisetsuShurui;
     @JsonProperty("txtShisetsuCode")
     private TextBoxCode txtShisetsuCode;
     @JsonProperty("btnJigyoshaInputGuide")
@@ -53,6 +55,16 @@ public class ShisetsuJohoDiv extends Panel {
     @JsonProperty("radShisetsuShurui")
     public void setRadShisetsuShurui(RadioButton radShisetsuShurui) {
         this.radShisetsuShurui=radShisetsuShurui;
+    }
+
+    @JsonProperty("lblOtherShisetsuShurui")
+    public Label getLblOtherShisetsuShurui() {
+        return lblOtherShisetsuShurui;
+    }
+
+    @JsonProperty("lblOtherShisetsuShurui")
+    public void setLblOtherShisetsuShurui(Label lblOtherShisetsuShurui) {
+        this.lblOtherShisetsuShurui=lblOtherShisetsuShurui;
     }
 
     @JsonProperty("txtShisetsuCode")

@@ -25,6 +25,20 @@ public class OtherTokureiShisetsuInputGuide {
     private static final RString OTHER_SHISETSU_DATA_SOURCE = new RString("shisetsuJoho/otherShisetsuData.yml");
 
     /**
+     * その他特例施設入力ガイドを読み込んだ際に実行されます<br/>
+     * ラジオボタンの初期位置を設定します。
+     *
+     * @param div OtherTokureiShisetsuInputGuideDiv
+     * @return レスポンス
+     */
+    public ResponseData onLoad(OtherTokureiShisetsuInputGuideDiv div) {
+        ResponseData<OtherTokureiShisetsuInputGuideDiv> response = new ResponseData<>();
+        div.getRadKannaiKubun().setSelectedItem(div.getLblOtherShisetsuShurui().getText());
+        response.data = div;
+        return response;
+    }
+
+    /**
      * その他特例施設を検索し、その情報をグリッドに設定します。
      *
      * @param div OtherTokureiShisetsuInputGuideDiv
@@ -34,9 +48,9 @@ public class OtherTokureiShisetsuInputGuide {
         ResponseData<OtherTokureiShisetsuInputGuideDiv> response = new ResponseData<>();
 
         List<dgSearchResultOtherTokureiShisetsu_Row> otherShisetsuGridRowList = new ArrayList<>();
-        if (div.getRadkannaiKubun().getSelectedValue().equals(new RString("管内"))) {
+        if (div.getRadKannaiKubun().getSelectedValue().equals(new RString("管内"))) {
             otherShisetsuGridRowList.addAll(createOtherShisetsuGridRowList("管内"));
-        } else if (div.getRadkannaiKubun().getSelectedValue().equals(new RString("管外"))) {
+        } else if (div.getRadKannaiKubun().getSelectedValue().equals(new RString("管外"))) {
             otherShisetsuGridRowList.addAll(createOtherShisetsuGridRowList("管外"));
         } else {
             otherShisetsuGridRowList.addAll(createOtherShisetsuGridRowList("管内"));

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hokenshainputguide;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jun 06 19:00:13 JST 2014 
+ * Mon Jun 23 14:51:24 JST 2014 
  */
 
 
@@ -26,6 +26,9 @@ public class dgSearchResultHokensha_Row extends DataRow {
 
     public dgSearchResultHokensha_Row() {
         super();
+        this.hokenshaNo = RString.EMPTY;
+        this.hokenshaMeisho = RString.EMPTY;
+        this.hokensha = RString.EMPTY;
     }
 
     public dgSearchResultHokensha_Row(RString hokenshaNo, RString hokenshaMeisho, RString hokensha) {

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.othertokureishisetsuinpu
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jun 20 14:16:28 JST 2014 
+ * Mon Jun 23 16:45:26 JST 2014 
  */
 
 

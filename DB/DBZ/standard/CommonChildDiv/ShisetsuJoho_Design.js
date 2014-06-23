@@ -13,23 +13,6 @@ var DBZ;
         }
         Object.defineProperty(ShisetsuJoho_Design.prototype, "btnJigyoshaInputGuide_displayNone", {
             get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"])["displayNone"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"])["displayNone"] = value;
-                } else {
-                    this.layout.items[0].items[2]["displayNone"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(ShisetsuJoho_Design.prototype, "btnOtherTokureiShisetsuInputGuide_displayNone", {
-            get: function () {
                 return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["displayNone"];
             },
             set: function (value) {
@@ -45,7 +28,7 @@ var DBZ;
         });
 
 
-        Object.defineProperty(ShisetsuJoho_Design.prototype, "btnJogaiShisetsuInputGuide_displayNone", {
+        Object.defineProperty(ShisetsuJoho_Design.prototype, "btnOtherTokureiShisetsuInputGuide_displayNone", {
             get: function () {
                 return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"])["displayNone"];
             },
@@ -54,6 +37,23 @@ var DBZ;
                     Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"])["displayNone"] = value;
                 } else {
                     this.layout.items[0].items[4]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShisetsuJoho_Design.prototype, "btnJogaiShisetsuInputGuide_displayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[5]["displayNone"] = value;
                     this.raisePropertyChanged(this.layout);
                 }
             },
@@ -107,9 +107,9 @@ var DBZ;
 
         ShisetsuJoho_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
-            editablePropertyInfo["btnJigyoshaInputGuide_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).getEditablePropertyInfo()["displayNone"];
-            editablePropertyInfo["btnOtherTokureiShisetsuInputGuide_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["displayNone"];
-            editablePropertyInfo["btnJogaiShisetsuInputGuide_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["btnJigyoshaInputGuide_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["btnOtherTokureiShisetsuInputGuide_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["btnJogaiShisetsuInputGuide_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["radShisetsuShurui_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["displayNone"];
             editablePropertyInfo["ShisetsuJoho_width"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["width"];
 
@@ -141,6 +141,7 @@ var DBZ;
                             "selectControlID": "radShisetsuShurui_core",
                             "helpMessageID": "",
                             "jpControlName": "",
+                            "readOnly": false,
                             "onChange": "onChange_radShisetsuShurui",
                             "selectedItem": null,
                             "dataSource": [
@@ -151,10 +152,6 @@ var DBZ;
                                 {
                                     "key": "other",
                                     "value": "その他特例施設"
-                                },
-                                {
-                                    "key": "tekiyoJogaiShisetsu",
-                                    "value": "適用除外施設"
                                 }
                             ],
                             "required": false,
@@ -166,6 +163,32 @@ var DBZ;
                             "labelLAlign": 2,
                             "disabledItem": [],
                             "icon": []
+                        },
+                        {
+                            "fieldName": "lblOtherShisetsuShurui",
+                            "items": [],
+                            "controlType": "Label",
+                            "width": "60",
+                            "visible": true,
+                            "displayNone": true,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "lblOtherShisetsuShurui",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "required": false,
+                            "align": 1,
+                            "text": "kannai",
+                            "isPrivateInfo": false,
+                            "decorationClass": ""
                         },
                         {
                             "fieldName": "txtShisetsuCode",
@@ -193,24 +216,24 @@ var DBZ;
                             "labelLText": "入所施設",
                             "labelLWidth": "70",
                             "labelLAlign": 2,
+                            "text": "",
+                            "isPrivateInfo": false,
+                            "decorationClass": "",
                             "maxLength": 100000000,
                             "minLength": 0,
                             "textAlign": 0,
                             "placeHolder": "",
                             "textKind": 2,
-                            "isPrivateInfo": false,
                             "isPassword": false,
                             "isComboBox": false,
                             "onFocus": "",
                             "onBlur": "onBlur_txtShisetsuCode",
                             "onKeyPress": "",
-                            "text": "",
                             "suggest": [],
                             "value": "",
                             "labelRText": "",
                             "labelRWidth": "S",
                             "labelRAlign": 0,
-                            "decorationClass": "",
                             "permitCharactor": "",
                             "formatLength": "10"
                         },
@@ -241,6 +264,7 @@ var DBZ;
                             "imageFileUrl": "/uz/uza/css/Link.jpg",
                             "imageWidth": "20",
                             "imageHeight": "15",
+                            "heightTextBoxMatches": false,
                             "displayChildDivName": "DBZ.JigyoshaInputGuide",
                             "dataPassing": [
                                 {
@@ -283,6 +307,7 @@ var DBZ;
                             "imageFileUrl": "/uz/uza/css/Link.jpg",
                             "imageWidth": "20",
                             "imageHeight": "15",
+                            "heightTextBoxMatches": false,
                             "displayChildDivName": "DBZ.OtherTokureiShisetsuInputGuide",
                             "dataPassing": [
                                 {
@@ -292,6 +317,10 @@ var DBZ;
                                 {
                                     "key": "otherShisetsuMeisho",
                                     "controlName": "txtShisetsuMeisho"
+                                },
+                                {
+                                    "key": "selectRadioButtonKey",
+                                    "controlName": "lblOtherShisetsuShurui"
                                 }
                             ],
                             "visibleCloseButton": true,
@@ -325,6 +354,7 @@ var DBZ;
                             "imageFileUrl": "/uz/uza/css/Link.jpg",
                             "imageWidth": "20",
                             "imageHeight": "15",
+                            "heightTextBoxMatches": false,
                             "displayChildDivName": "DBZ.TekiyoJogaiShisetsuInputGuide",
                             "dataPassing": [
                                 {
@@ -366,24 +396,24 @@ var DBZ;
                             "labelLText": "",
                             "labelLWidth": "S",
                             "labelLAlign": 2,
+                            "text": "",
+                            "isPrivateInfo": false,
+                            "decorationClass": "",
                             "maxLength": 100000000,
                             "minLength": 0,
                             "textAlign": 0,
                             "placeHolder": "",
                             "textKind": 0,
-                            "isPrivateInfo": false,
                             "isPassword": false,
                             "isComboBox": false,
                             "onFocus": "",
                             "onBlur": "",
                             "onKeyPress": "",
-                            "text": "",
                             "suggest": [],
                             "value": "",
                             "labelRText": "",
                             "labelRWidth": "S",
                             "labelRAlign": 0,
-                            "decorationClass": "",
                             "permitCharactor": ""
                         }
                     ],
@@ -442,10 +472,7 @@ var DBZ;
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
-                    "eraseBorderTop": true,
-                    "eraseBorderBottom": true,
-                    "eraseBorderRight": true,
-                    "eraseBorderLeft": true,
+                    "eraseBorder": true,
                     "backgroundColor": 0,
                     "widthAuto": false,
                     "panelDisplay": 0,
@@ -505,7 +532,9 @@ var DBZ;
             ],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
-            "dialogCancelEventNameForDialog": ""
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M"
         };
         return ShisetsuJoho_Design;
     })(Uz.CommonChildDiv);

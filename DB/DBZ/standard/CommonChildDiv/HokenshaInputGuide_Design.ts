@@ -56,6 +56,7 @@ module DBZ {
      "selectControlID": "ddlHokenshaKenCode_core",
      "helpMessageID": "",
      "jpControlName": "",
+     "readOnly": false,
      "onChange": "",
      "selectedItem": "20",
      "dataSource": [
@@ -105,7 +106,8 @@ module DBZ {
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0
+     "icon": 0,
+     "heightTextBoxMatches": false
     },
     {
      "fieldName": "SearchResultHokensha",
@@ -130,6 +132,7 @@ module DBZ {
        "selectControlID": "dgSearchResultHokensha",
        "helpMessageID": "",
        "jpControlName": "",
+       "readOnly": false,
        "height": "S",
        "dataSource": [],
        "gridSetting": {
@@ -243,10 +246,7 @@ module DBZ {
      "onOpen": "",
      "onClose": "",
      "session": {},
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": true,
      "panelDisplay": 0,
@@ -280,7 +280,8 @@ module DBZ {
      "imageFileUrl": "",
      "imageWidth": "",
      "imageHeight": "",
-     "icon": 0
+     "icon": 0,
+     "heightTextBoxMatches": false
     }
    ],
    "controlType": "Panel",
@@ -314,7 +315,7 @@ module DBZ {
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": ""
+     "requestUrl": "dbz/db/dbz/HokenshaInputGuide/onLoad"
     },
     {
      "eventName": "onClick_btnSearchGaitoHokensha",
@@ -338,10 +339,7 @@ module DBZ {
    "onOpen": "",
    "onClose": "",
    "session": {},
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
@@ -384,7 +382,9 @@ module DBZ {
   }
  ],
  "dialogOkEventNameForDialog": "onSelectBySelectButton_dgSearchResultHokensha",
- "dialogCancelEventNameForDialog": "onClick_btnHokenshaReturn"
+ "dialogCancelEventNameForDialog": "onClick_btnHokenshaReturn",
+ "canTransferEvent": true,
+ "heightForDialog": "Auto"
 }        
     }
 }
