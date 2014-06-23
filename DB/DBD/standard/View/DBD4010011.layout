@@ -22,6 +22,8 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "txtKijunYMD_core",
+     "helpMessageID": "",
+     "jpControlName": "",
      "readOnly": false,
      "required": false,
      "placeHolder": "",
@@ -33,15 +35,14 @@
      "onKeyPress": "",
      "text": "",
      "labelLText": "基準日",
-     "labelRText": "において満６５歳以上、かつ要介護認定者を対象とします。",
+     "labelRText": "において要介護認定されている者を対象とします。",
      "labelLWidth": "70",
-     "labelRWidth": "L",
+     "labelRWidth": "380",
      "labelLAlign": 2,
-     "labelRAlign": 1,
+     "labelRAlign": 0,
      "ymdKubun": 2,
      "displayFormat": 0,
-     "value": "",
-     "permitCharactor": "./_-"
+     "value": ""
     },
     {
      "fieldName": "chkJogaiJoken",
@@ -61,10 +62,14 @@
      "marginLeft": "XS",
      "marginRight": "XS",
      "selectControlID": "chkJogaiJoken_core",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "readOnly": false,
      "onChange": "",
      "labelLText": "除外条件",
      "labelLWidth": "70",
      "labelLAlign": 2,
+     "selectedItem": null,
      "dataSource": [
       {
        "key": "removeSoshitsusha",
@@ -76,8 +81,6 @@
       }
      ],
      "onClick": "",
-     "icon": [],
-     "selectedItem": null,
      "selectedItems": [
       {
        "key": "includeHigaishosha"
@@ -87,7 +90,10 @@
      "minCheckedItem": 0,
      "maxCheckedItem": 2,
      "spaceSize": "M",
-     "isAllSelectable": false
+     "isAllSelectable": false,
+     "isAllSelectableBreakLine": false,
+     "disabledItem": [],
+     "icon": []
     }
    ],
    "controlType": "Panel",
@@ -105,6 +111,8 @@
    "marginLeft": "0",
    "marginRight": "0",
    "selectControlID": "ShogaishaKojoTaishoshaHaakuJoken",
+   "helpMessageID": "",
+   "jpControlName": "",
    "onLoad": "",
    "title": "対象者条件",
    "isOpen": true,
@@ -126,86 +134,13 @@
    "session": {},
    "marginTop": "0",
    "marginBottom": "0",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
-   "readOnly": false
-  },
-  {
-   "fieldName": "ShogaishaKojoTaishoshaHaakuKyotsu",
-   "items": [
-    {
-     "fieldName": "btnExecute",
-     "items": [],
-     "controlType": "Button",
-     "width": "100",
-     "visible": true,
-     "displayNone": false,
-     "disabled": false,
-     "accessKey": "",
-     "nextFocusFieldName": "",
-     "wrap": false,
-     "dependencies": [],
-     "float": 2,
-     "toolTip": "",
-     "authorityMode": 0,
-     "marginLeft": "XS",
-     "marginRight": "XS",
-     "selectControlID": "btnExecute",
-     "text": "実行する",
-     "onClick": "",
-     "appearance": 0,
-     "imageFileUrl": "",
-     "imageWidth": "",
-     "imageHeight": "",
-     "icon": 0
-    }
-   ],
-   "controlType": "Panel",
-   "width": "G6",
-   "visible": true,
-   "displayNone": false,
-   "disabled": false,
-   "accessKey": "",
-   "nextFocusFieldName": "",
-   "wrap": true,
-   "dependencies": [],
-   "float": 0,
-   "toolTip": "",
-   "authorityMode": 0,
-   "marginLeft": "0",
-   "marginRight": "0",
-   "selectControlID": "ShogaishaKojoTaishoshaHaakuKyotsu",
-   "onLoad": "",
-   "title": "",
-   "isOpen": true,
-   "canOpenAndClose": true,
-   "postParameterPanelNames": [
-    {
-     "postParameterPanelNames": "ShogaishaKojoTaishoshaHaakuKyotsu"
-    }
-   ],
-   "requestSettings": [],
-   "hiddenInput": [],
-   "onOpen": "",
-   "onClose": "",
-   "session": {},
-   "marginTop": "0",
-   "marginBottom": "0",
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
-   "backgroundColor": 0,
-   "widthAuto": false,
-   "panelDisplay": 0,
-   "isGroupBox": false,
-   "readOnly": false
+   "readOnly": false,
+   "height": "Auto"
   }
  ],
  "controlType": null,
@@ -223,6 +158,8 @@
  "marginLeft": "XS",
  "marginRight": "XS",
  "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
  "onLoad": "",
  "title": "障害者控除対象者把握",
  "jsPathCollection": [],
@@ -255,13 +192,56 @@
  "loadSequencePanelNames": [
   [
    "ShogaishaKojoTaishoshaHaakuJoken"
-  ],
-  [
-   "ShogaishaKojoTaishoshaHaakuKyotsu"
   ]
  ],
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
- "commonButtonAreaData": []
+ "supplementInfoAllPostParam": [],
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "1",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonExecute",
+     "buttonProperty": {
+      "fieldName": "btnExecute",
+      "items": [],
+      "controlType": "CommonButtonExecute",
+      "width": "S",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnExecute",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "text": "実行",
+      "onClick": "",
+      "icon": 0,
+      "imageWidth": "",
+      "imageHeight": "",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "heightTextBoxMatches": false,
+      "additionalText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "対象者条件"
+    }
+   ],
+   "isFinishButtonOnTheRight": false
+  }
+ ]
 }

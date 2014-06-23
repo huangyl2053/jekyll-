@@ -32,7 +32,12 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
-     "onClick_BtnToSearch": "onClick_btnSearch"
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "onClick_BtnToSearch": "onClick_btnSearch",
+     "displayNone_txtTsuchishoNo": false,
+     "displayNone_ddlFukaNendo": false,
+     "displayNone_SearchCriteriaDetail": false
     },
     {
      "fieldName": "ShogaishaKojoTaishoshaList",
@@ -62,6 +67,8 @@
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "onClickBtnToResearch": "",
      "gridSetting": {
       "rowHeight": 50,
@@ -341,16 +348,17 @@
    "session": {},
    "marginTop": "Default",
    "marginBottom": "Default",
-   "eraseBorderTop": false,
-   "eraseBorderBottom": false,
-   "eraseBorderRight": false,
-   "eraseBorderLeft": false,
+   "eraseBorder": false,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": false,
+   "eraseBorderBottom": false,
+   "eraseBorderRight": false,
+   "eraseBorderLeft": false
   },
   {
    "fieldName": "ShogaishaKojoTaishoshaNinteishoHakkoPanel",
@@ -380,10 +388,6 @@
      "canOpenAndClose": true,
      "marginTop": 0,
      "marginBottom": 0,
-     "eraseBorderTop": true,
-     "eraseBorderBottom": true,
-     "eraseBorderRight": true,
-     "eraseBorderLeft": true,
      "backgroundColor": 0,
      "businessId": "URA",
      "controlName": "AtenaShokaiSimple",
@@ -395,6 +399,8 @@
      ],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
      "AtenaKanaMeisho_visible": true,
      "AtenaMeisho_visible": true,
      "SeinengappiYMD_visible": true,
@@ -429,7 +435,12 @@
      "AgeArrivalDay": "1",
      "SubGyomuUmu": "0",
      "SubGyomuSearchUmu": "0",
-     "DainoninHyojiUmu": "1"
+     "DainoninHyojiUmu": "1",
+     "AtenaShokaiSimple_eraseBorder": false,
+     "eraseBorderTop": true,
+     "eraseBorderBottom": true,
+     "eraseBorderRight": true,
+     "eraseBorderLeft": true
     },
     {
      "fieldName": "TaishoshaKaigoShikaku",
@@ -456,15 +467,17 @@
      "canOpenAndClose": false,
      "marginTop": 0,
      "marginBottom": 0,
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
      "businessId": "DBZ",
      "controlName": "KaigoShikakuKihon",
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false,
      "backGroundColor": 0,
      "btnHihoRireki_visible": true,
      "btnNinteiRireki_visible": true
@@ -720,6 +733,7 @@
          "selectControlID": "chkTechoAri_core",
          "helpMessageID": "",
          "jpControlName": "",
+         "readOnly": false,
          "onChange": "",
          "selectedItem": null,
          "dataSource": [
@@ -776,16 +790,17 @@
        "session": {},
        "marginTop": "Default",
        "marginBottom": "Default",
-       "eraseBorderTop": true,
-       "eraseBorderBottom": true,
-       "eraseBorderRight": true,
-       "eraseBorderLeft": true,
+       "eraseBorder": true,
        "backgroundColor": 0,
        "widthAuto": true,
        "panelDisplay": 0,
        "isGroupBox": false,
        "readOnly": true,
-       "height": "Auto"
+       "height": "Auto",
+       "eraseBorderTop": true,
+       "eraseBorderBottom": true,
+       "eraseBorderRight": true,
+       "eraseBorderLeft": true
       },
       {
        "fieldName": "ShogaishaKojoNinteisho",
@@ -823,6 +838,8 @@
          ],
          "dialogOkEventNameForDialog": "",
          "dialogCancelEventNameForDialog": "",
+         "canTransferEvent": true,
+         "heightForDialog": "M",
          "txtSendData_displayNone": true,
          "PrintContentsSetting_title": "",
          "PrintContentsSetting_eraseBorderTop": true,
@@ -951,7 +968,8 @@
            "appearance": 0,
            "imageFileUrl": "",
            "imageWidth": "",
-           "imageHeight": ""
+           "imageHeight": "",
+           "heightTextBoxMatches": false
           }
          ],
          "controlType": "Panel",
@@ -987,16 +1005,17 @@
          "session": {},
          "marginTop": "Default",
          "marginBottom": "Default",
-         "eraseBorderTop": false,
-         "eraseBorderBottom": false,
-         "eraseBorderRight": false,
-         "eraseBorderLeft": false,
+         "eraseBorder": false,
          "backgroundColor": 0,
          "widthAuto": true,
          "panelDisplay": 1,
          "isGroupBox": false,
          "readOnly": false,
-         "height": "Auto"
+         "height": "Auto",
+         "eraseBorderTop": false,
+         "eraseBorderBottom": false,
+         "eraseBorderRight": false,
+         "eraseBorderLeft": false
         }
        ],
        "controlType": "Panel",
@@ -1032,16 +1051,17 @@
        "session": {},
        "marginTop": "Default",
        "marginBottom": "Default",
-       "eraseBorderTop": false,
-       "eraseBorderBottom": false,
-       "eraseBorderRight": false,
-       "eraseBorderLeft": false,
+       "eraseBorder": false,
        "backgroundColor": 0,
        "widthAuto": true,
        "panelDisplay": 0,
        "isGroupBox": false,
        "readOnly": false,
-       "height": "Auto"
+       "height": "Auto",
+       "eraseBorderTop": false,
+       "eraseBorderBottom": false,
+       "eraseBorderRight": false,
+       "eraseBorderLeft": false
       }
      ],
      "controlType": "Panel",
@@ -1082,16 +1102,17 @@
      "session": {},
      "marginTop": "Default",
      "marginBottom": "Default",
-     "eraseBorderTop": false,
-     "eraseBorderBottom": false,
-     "eraseBorderRight": false,
-     "eraseBorderLeft": false,
+     "eraseBorder": false,
      "backgroundColor": 0,
      "widthAuto": false,
      "panelDisplay": 0,
      "isGroupBox": false,
      "readOnly": false,
-     "height": "Auto"
+     "height": "Auto",
+     "eraseBorderTop": false,
+     "eraseBorderBottom": false,
+     "eraseBorderRight": false,
+     "eraseBorderLeft": false
     }
    ],
    "controlType": "Panel",
@@ -1139,16 +1160,17 @@
    "session": {},
    "marginTop": "0",
    "marginBottom": "Default",
-   "eraseBorderTop": true,
-   "eraseBorderBottom": true,
-   "eraseBorderRight": true,
-   "eraseBorderLeft": true,
+   "eraseBorder": true,
    "backgroundColor": 0,
    "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "eraseBorderTop": true,
+   "eraseBorderBottom": true,
+   "eraseBorderRight": true,
+   "eraseBorderLeft": true
   }
  ],
  "controlType": null,
@@ -1175,7 +1197,7 @@
  "stateTransition": [
   {
    "order": "1",
-   "stateName": "個人検索",
+   "stateName": "検索条件",
    "showWizard": true,
    "visibleDivs": [
     {
@@ -1197,14 +1219,14 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "ReturnToSearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "ShogaishaKojoTaishoshaSearch_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
      "event": "onClick",
-     "transition": "該当者一覧"
+     "transition": "検索結果"
+    },
+    {
+     "fieldName": "ShogaishaKojoTaishoshaList_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
+     "event": "onClick",
+     "transition": "検索条件"
     },
     {
      "fieldName": "ShogaishaKojoTaishoshaList_SearchResultOfHihokensha_dgSearchResult",
@@ -1212,16 +1234,21 @@
      "transition": ""
     },
     {
-     "fieldName": "ShogaishaKojoTaishoshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectBySelectButton",
+     "fieldName": "ShogaishaKojoTaishoshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReturnToSearch",
+     "event": "onClick",
      "transition": ""
     }
    ]
   },
   {
    "order": "2",
-   "stateName": "該当者一覧",
-   "showWizard": false,
+   "stateName": "検索結果",
+   "showWizard": true,
    "visibleDivs": [
     {
      "visibleDiv": "ShogaishaKojoTaishoshaNinteishoHakkoSearchPanel",
@@ -1242,14 +1269,14 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "ReturnToSearch",
-     "event": "onClick",
-     "transition": ""
-    },
-    {
      "fieldName": "ShogaishaKojoTaishoshaSearch_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
      "event": "onClick",
-     "transition": ""
+     "transition": "検索結果"
+    },
+    {
+     "fieldName": "ShogaishaKojoTaishoshaList_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
+     "event": "onClick",
+     "transition": "検索条件"
     },
     {
      "fieldName": "ShogaishaKojoTaishoshaList_SearchResultOfHihokensha_dgSearchResult",
@@ -1257,9 +1284,14 @@
      "transition": "障害者控除情報"
     },
     {
-     "fieldName": "ShogaishaKojoTaishoshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectBySelectButton",
+     "fieldName": "ShogaishaKojoTaishoshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
+     "event": "onClick",
      "transition": "障害者控除情報"
+    },
+    {
+     "fieldName": "btnReturnToSearch",
+     "event": "onClick",
+     "transition": ""
     }
    ]
   },
@@ -1327,12 +1359,12 @@
    "validation": {},
    "events": [
     {
-     "fieldName": "ReturnToSearch",
+     "fieldName": "ShogaishaKojoTaishoshaSearch_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
      "event": "onClick",
-     "transition": "個人検索"
+     "transition": ""
     },
     {
-     "fieldName": "ShogaishaKojoTaishoshaSearch_HihokenshaFinder_ButtonsForHihokenshaFinder_btnToSearch",
+     "fieldName": "ShogaishaKojoTaishoshaList_SearchResultOfHihokensha_ButtonsForSearchResultOfHihokensha_btnToResearch",
      "event": "onClick",
      "transition": ""
     },
@@ -1342,9 +1374,14 @@
      "transition": ""
     },
     {
-     "fieldName": "ShogaishaKojoTaishoshaList_SearchResultOfHihokensha_dgSearchResult",
-     "event": "onSelectBySelectButton",
+     "fieldName": "ShogaishaKojoTaishoshaList_SearchResultOfHihokensha_dgSearchResult[btnToDecide]",
+     "event": "onClick",
      "transition": ""
+    },
+    {
+     "fieldName": "btnReturnToSearch",
+     "event": "onClick",
+     "transition": "検索条件"
     }
    ]
   }
@@ -1389,17 +1426,18 @@
  "panelMargin": 1,
  "controlMargin": 1,
  "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
  "commonButtonAreaData": [
   {
    "commonButtonAreaId": "ShogaishaKojoTaishoshaNinteishoHakko",
    "buttonSetting": [
     {
-     "buttonKind": "CommonButtonReportPublish",
+     "buttonKind": "CommonButtonBack",
      "buttonProperty": {
-      "fieldName": "NinteishoPublish",
+      "fieldName": "btnReturnToSearch",
       "items": [],
       "controlType": "ButtonReportPublish",
-      "width": "XS",
+      "width": 1,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -1412,10 +1450,19 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "NinteishoPublish",
+      "selectControlID": "btnReturnToSearch",
       "helpMessageID": "",
       "jpControlName": "",
       "postParameterPanelNames": [],
+      "text": "戻る",
+      "onClick": "",
+      "icon": 0,
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "heightTextBoxMatches": false,
+      "additionalText": "該当者検索へ",
       "validateUrl": "",
       "sourceCreateUrl": "",
       "afterPrintUrl": "",
@@ -1424,17 +1471,16 @@
       "isPreview": false,
       "printable": false,
       "copiesChangeable": false,
-      "progressVisible": false,
-      "additionalText": "認定書を"
+      "progressVisible": false
      }
     },
     {
-     "buttonKind": "CommonButtonBack",
+     "buttonKind": "CommonButtonReportPublish",
      "buttonProperty": {
-      "fieldName": "ReturnToSearch",
+      "fieldName": "btnNinteishoHakko",
       "items": [],
       "controlType": "CommonButtonNext",
-      "width": "S",
+      "width": 1,
       "visible": true,
       "displayNone": false,
       "disabled": false,
@@ -1447,9 +1493,10 @@
       "authorityMode": 0,
       "marginLeft": "XS",
       "marginRight": "XS",
-      "selectControlID": "ReturnToSearch",
+      "selectControlID": "btnNinteishoHakko",
       "helpMessageID": "",
       "jpControlName": "",
+      "postParameterPanelNames": [],
       "text": "戻る",
       "onClick": "onClick_btnReturn",
       "icon": 0,
@@ -1457,7 +1504,16 @@
       "imageFileUrl": "",
       "imageWidth": "",
       "imageHeight": "",
-      "additionalText": "個人検索へ"
+      "additionalText": "認定書を",
+      "validateUrl": "",
+      "sourceCreateUrl": "",
+      "afterPrintUrl": "",
+      "isModal": true,
+      "isInstruction": true,
+      "isPreview": false,
+      "printable": false,
+      "copiesChangeable": false,
+      "progressVisible": false
      }
     }
    ],
